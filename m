@@ -4,67 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B647E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 19:58:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3039E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:22:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD4EF80317;
-	Thu, 19 Dec 2024 20:58:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A8008021A;
+	Thu, 19 Dec 2024 22:22:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OvYn8C0L";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="sl53PEkc";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QJNzlsVf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2114380312; Thu, 19 Dec 2024 20:58:21 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCFC58021D
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:58:18 +0100 (CET)
+ id 4E14C8021D; Thu, 19 Dec 2024 22:22:20 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 96BE580196
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 22:22:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BJJwGhA356739
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 19 Dec 2024 13:58:16 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734638296;
- bh=BKxNHbMasdOI/vZ0TqGOCWCrZb/E9jH48YcWNtPj0Xw=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=OvYn8C0LOFhAXCTvVV+3a25STBNufluzRHeqWBDkmT+clFuUinE16edINHKzHUV+4
- nHmcPkUou3icYPpTPM+dBJUuXrrAPWazZXkTYhfhu5Hom+ml1O0wzIh/EP/86/LndV
- 8RLddzmemr/4lk4uTdGBMVhANO6oD3xy+MsnGjRM=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BJJwGfO121129;
- Thu, 19 Dec 2024 13:58:16 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 19
- Dec 2024 13:58:16 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 19 Dec 2024 13:58:16 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BJJwGO6073342;
- Thu, 19 Dec 2024 13:58:16 -0600
-Date: Thu, 19 Dec 2024 13:58:16 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Aparna Patra <a-patra@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <d-gole@ti.com>,
- <vigneshr@ti.com>, <n-francis@ti.com>, <nm@ti.com>
-Subject: Re: [PATCH 3/3] arm: mach-k3: am62p: Fixup a53 max cpu frequency by
- speed-grade
-Message-ID: <20241219195816.7vhwv4v6evvnsgdo@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20241218093025.45701-1-a-patra@ti.com>
- <20241218093025.45701-4-a-patra@ti.com>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YDk5j1sC7z9t8l;
+ Thu, 19 Dec 2024 22:22:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734643337;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=1Y8P6i0NA17tOa3dbiT1QnS90vxJ7q9UB+m8/gB4C8I=;
+ b=sl53PEkc9Of2prIqOwwEHZ+FGyDBOhjw7mLzBwdfGdLy5tfBBVXBAYL7XK04gZpdE2nJFi
+ /ioH3iJupMErZ+t/rLxfihl9oztX634fL+CXBp0FpnBRfuGAjTlUcY7MLfRFADhPGluKmu
+ 2BaVXWn0MoXk7fWEK3zIzCExQIdL3aScLUXmi9i1Z8YcV41N6tYncQL5owB5BSdnXFC2z1
+ 4mM5jp+vXAZ1ycgkElb9lEUhvqVEdphKocgYt/vJOuDg4Q1g+Uy2XReQB+zsjORVSIK+sF
+ Uq55DLmfTi5EtsadZE2wN21jko1W/wpb24hVA299oAYiLb/KrIBB5LJz9hz9dg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734643335;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=1Y8P6i0NA17tOa3dbiT1QnS90vxJ7q9UB+m8/gB4C8I=;
+ b=QJNzlsVfpse6VuF5qo8UtIZYJXbKV6GrZpq3WjPAYdJhUeUcWDiF6IKw0E1CsxJgLZAv8Z
+ kGITdTOte6soDZ5YRtE402h2LwiPj3fHxvZiZVL+3dKBtb2+BxvN9jjLKzEza7P1vHvfsE
+ +HQySDvtuFcWWbAKOao/E23NTOKRDuQBxADKOFRx7Pkg4aCFZ4bclIM42ZT4V0QYuM0zhk
+ RzOY9Tmt39g14tLYZGzR1fYNYgNgcXjAELaAENJYD7vXj4R5EBNXtSF9kpjK3Y6hxKwIUA
+ XluZ0pKak5phQvSzzRLb+onZKRRMY3rUR13E6ZB+vp9wceF+Fs0setAUawZ1pg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] net: rswitch: Simplify code using clrsetbits_le32()
+Date: Thu, 19 Dec 2024 22:21:42 +0100
+Message-ID: <20241219212201.94695-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20241218093025.45701-4-a-patra@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 3161e1643dd41d237f6
+X-MBO-RS-META: nyxzu18kmdsinhar6a8u7fneft694of5
+X-Rspamd-Queue-Id: 4YDk5j1sC7z9t8l
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,95 +85,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aparna!
+Use clrsetbits_le32() to make this complicated construct simpler.
+No functional change.
 
-On December 18, 2024 thus sayeth Aparna Patra:
-> AM62P SoC has multiple speed grades. Add function to delete
-> non-relevant CPU frequency nodes, based on the information
-> retrieved from hardware registers. Fastest grade's maximum
-> frequency also depends on PMIC voltage, hence to simplify
-> implementation use the smaller value.
-> 
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: Drop the now unused 'reg' variable
+---
+ drivers/net/rswitch.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
 
-The R5 SPL will start the A53 at whatever frequency we have specified in 
-the R5 DTB. We'll need to also update that before we start that core.
+diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
+index 259d584ac98..247eb139ff9 100644
+--- a/drivers/net/rswitch.c
++++ b/drivers/net/rswitch.c
+@@ -417,7 +417,6 @@ static int rswitch_mii_read_c45(struct mii_dev *miidev, int phyad, int devad, in
+ 	struct rswitch_port_priv *priv = miidev->priv;
+ 	struct rswitch_etha *etha = &priv->etha;
+ 	int val;
+-	int reg;
+ 
+ 	/* Change to disable mode */
+ 	rswitch_etha_change_mode(priv, EAMC_OPC_DISABLE);
+@@ -426,9 +425,9 @@ static int rswitch_mii_read_c45(struct mii_dev *miidev, int phyad, int devad, in
+ 	rswitch_etha_change_mode(priv, EAMC_OPC_CONFIG);
+ 
+ 	/* Enable Station Management clock */
+-	reg = readl(etha->addr + MPIC);
+-	reg &= ~MPIC_PSMCS_MASK & ~MPIC_PSMHT_MASK;
+-	writel(reg | MPIC_MDC_CLK_SET, etha->addr + MPIC);
++	clrsetbits_le32(etha->addr + MPIC,
++			MPIC_PSMCS_MASK | MPIC_PSMHT_MASK,
++			MPIC_MDC_CLK_SET);
+ 
+ 	/* Set Station Management Mode : Clause 45 */
+ 	setbits_le32(etha->addr + MPSM, MPSM_MFF_C45);
+@@ -449,7 +448,6 @@ int rswitch_mii_write_c45(struct mii_dev *miidev, int phyad, int devad, int rega
+ {
+ 	struct rswitch_port_priv *priv = miidev->priv;
+ 	struct rswitch_etha *etha = &priv->etha;
+-	int reg;
+ 
+ 	/* Change to disable mode */
+ 	rswitch_etha_change_mode(priv, EAMC_OPC_DISABLE);
+@@ -458,9 +456,9 @@ int rswitch_mii_write_c45(struct mii_dev *miidev, int phyad, int devad, int rega
+ 	rswitch_etha_change_mode(priv, EAMC_OPC_CONFIG);
+ 
+ 	/* Enable Station Management clock */
+-	reg = readl(etha->addr + MPIC);
+-	reg &= ~MPIC_PSMCS_MASK & ~MPIC_PSMHT_MASK;
+-	writel(reg | MPIC_MDC_CLK_SET, etha->addr + MPIC);
++	clrsetbits_le32(etha->addr + MPIC,
++			MPIC_PSMCS_MASK | MPIC_PSMHT_MASK,
++			MPIC_MDC_CLK_SET);
+ 
+ 	/* Set Station Management Mode : Clause 45 */
+ 	setbits_le32(etha->addr + MPSM, MPSM_MFF_C45);
+-- 
+2.45.2
 
-> Signed-off-by: Aparna Patra <a-patra@ti.com>
-> ---
->  arch/arm/mach-k3/am62px/am62p5_fdt.c          | 12 ++++++++++++
->  .../arm/mach-k3/include/mach/am62p_hardware.h | 19 +++++++++++++++++++
->  2 files changed, 31 insertions(+)
-> 
-> diff --git a/arch/arm/mach-k3/am62px/am62p5_fdt.c b/arch/arm/mach-k3/am62px/am62p5_fdt.c
-> index 96194cebcd..2c40fa5a59 100644
-> --- a/arch/arm/mach-k3/am62px/am62p5_fdt.c
-> +++ b/arch/arm/mach-k3/am62px/am62p5_fdt.c
-> @@ -74,12 +74,24 @@ static void fdt_fixup_thermal_zone_nodes_am62p(void *blob, int maxc)
->  	}
->  }
->  
-> +static void fdt_fixup_cpu_freq_nodes_am62p(void *blob, int max_freq)
-> +{
-> +	if (max_freq >= 1250000000)
-> +		return;
-> +
-
-With parts that only support 1.25GHz (18 or R) we'll need to disable the 
-1.4GHz OPP.
-
-> +	if (max_freq <= 1000000000) {
-> +		fdt_del_node_path(blob, "/opp-table/opp-1250000000");
-> +		fdt_del_node_path(blob, "/opp-table/opp-1400000000");
-> +	}
-> +}
-> +
->  int ft_system_setup(void *blob, struct bd_info *bd)
->  {
->  	fdt_fixup_cores_wdt_nodes_am62p(blob, k3_get_core_nr());
->  	fdt_fixup_video_codec_nodes_am62p(blob, k3_has_video_codec());
->  	fdt_fixup_canfd_nodes_am62p(blob, k3_has_canfd());
->  	fdt_fixup_thermal_zone_nodes_am62p(blob, k3_get_max_temp());
-> +	fdt_fixup_cpu_freq_nodes_am62p(blob, k3_get_a53_max_frequency());
->  	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
->  	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
->  
-> diff --git a/arch/arm/mach-k3/include/mach/am62p_hardware.h b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-> index 2f1c8517e6..95af5c5c54 100644
-> --- a/arch/arm/mach-k3/include/mach/am62p_hardware.h
-> +++ b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-> @@ -26,6 +26,8 @@
->  #define JTAG_DEV_CANFD_SHIFT			15
->  #define JTAG_DEV_VIDEO_CODEC_MASK			BIT(14)
->  #define JTAG_DEV_VIDEO_CODEC_SHIFT			14
-> +#define JTAG_DEV_SPEED_MASK			GENMASK(10, 6)
-> +#define JTAG_DEV_SPEED_SHIFT			6
->  #define JTAG_DEV_TEMP_MASK			GENMASK(5, 3)
->  #define JTAG_DEV_TEMP_SHIFT			3
->  
-> @@ -118,6 +120,23 @@ static inline int k3_get_max_temp(void)
->  		return JTAG_DEV_TEMP_EXTENDED_VALUE;
->  }
->  
-> +static inline char k3_get_speed_grade(void)
-> +{
-> +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-> +	u32 speed_grade = (dev_id & JTAG_DEV_SPEED_MASK) >>
-> +			   JTAG_DEV_SPEED_SHIFT;
-> +
-> +	return 'A' - 1 + speed_grade;
-> +}
-> +
-> +static inline int k3_get_a53_max_frequency(void)
-> +{
-> +	if (k3_get_speed_grade() == 'O')
-> +		return 1000000000;
-> +	else
-> +		return 1250000000;
-> +}
-> +
->  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
->  
->  static const u32 put_device_ids[] = {};
-> -- 
-> 2.34.1
-> 
