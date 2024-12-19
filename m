@@ -4,119 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A838E77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 23:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5342E77188
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 00:51:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A211680295;
-	Thu, 19 Dec 2024 00:26:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id DEB078022B;
+	Thu, 19 Dec 2024 01:51:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="JiwpjrRw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PZYJe2iY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8919080295; Thu, 19 Dec 2024 00:26:31 +0100 (CET)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C501B80241; Thu, 19 Dec 2024 01:51:27 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90D738021D
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 00:26:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34EBA8021D
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 01:51:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20241218232618epoutp03656fb97fff05b6e23ce7ea2577a97513~SaRzEepqz2648826488epoutp032
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 23:26:18 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20241218232618epoutp03656fb97fff05b6e23ce7ea2577a97513~SaRzEepqz2648826488epoutp032
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1734564378;
- bh=wDHhPZZEGRvymw17A6hMIrT+lpV5yD09l61xwFr/oo0=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=JiwpjrRwUsXBDMeddjHpU/OM5CFrHESy9ZyMtYcKgv9YVrK0Rsp48WOho6W9pbdo5
- /UzJnrwJ+r6ANaSYpx3/Qvkg+T2v79YtNjutrmi1vK1yuvAxcIK8xMK2nsXAeGJ55n
- WAKAhr+AEBuwh934J32xXCvbN6sCki9wkKYZvVAQ=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20241218232618epcas1p36cb7fd7325d911556f3d1be306734bcb~SaRy1UJgT2301123011epcas1p3z;
- Wed, 18 Dec 2024 23:26:18 +0000 (GMT)
-Received: from epsmges1p5.samsung.com (unknown [182.195.38.233]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4YD8vF3zvgz4x9Q4; Wed, 18 Dec
- 2024 23:26:17 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
- 26.81.23425.91A53676; Thu, 19 Dec 2024 08:26:17 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20241218232617epcas1p446f580bee6bcec5d149383f140f16721~SaRxtLpUG2715327153epcas1p4z;
- Wed, 18 Dec 2024 23:26:17 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20241218232617epsmtrp11dac6ae27cfe6ad08386a0f723ee1db3~SaRxsepzd2851128511epsmtrp1a;
- Wed, 18 Dec 2024 23:26:17 +0000 (GMT)
-X-AuditID: b6c32a39-564a824000005b81-23-67635a191e19
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 30.0A.33707.91A53676; Thu, 19 Dec 2024 08:26:17 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241218232617epsmtip2a8237d1d35ab0eba2de019eeb285d551~SaRxh2ldw1475014750epsmtip2O;
- Wed, 18 Dec 2024 23:26:17 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Shree Ramamoorthy'" <s-ramamoorthy@ti.com>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>
-Cc: <m-leonard@ti.com>, <praneeth@ti.com>
-In-Reply-To: <0ec29812-b2e7-40de-a55e-c381c62795c2@ti.com>
-Subject: RE: [PATCH v1 2/2] power: replace magic numbers with macros
-Date: Thu, 19 Dec 2024 08:26:16 +0900
-Message-ID: <01e601db51a4$3c8f43f0$b5adcbd0$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: ko
-Thread-Index: AQDJjZr8Ya4lM0w/UNXlTz8OpdnKCAFA/cSAAi20pJYCf7MVSwKE0otwtMySunA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrAKsWRmVeSWpSXmKPExsWy7bCmnq5kVHK6wbd98hYPt89jsfjz6CWb
- xa9D65ktpk7azG7xdm8nuwOrx6sDq9g9zt7Zwehx/MZ2pgDmqGybjNTElNQihdS85PyUzLx0
- WyXv4HjneFMzA0NdQ0sLcyWFvMTcVFslF58AXbfMHKCdSgpliTmlQKGAxOJiJX07m6L80pJU
- hYz84hJbpdSClJwC0wK94sTc4tK8dL281BIrQwMDI1OgwoTsjC37PrMUfFetWHLjEWsD41PZ
- LkYODgkBE4lNbSZdjJwcQgI7GCW27Q/uYuQCsj8xStxsn8QM5xz4dJYFpAqk4ey3R4wQiZ2M
- Euuvv2KBcF4ySuyf/40JpIpNQE/i/6KFzCC2iECCxJ9Nt8HizAKaEnu2b2QBWc0pYCWxdYMF
- iCks4CLxaFMASAWLgKrEhD/XGUFsXgFLieOLX7BB7FWQ+Pl0GSvEFBGJ2Z1tUNP9JGbcPwV2
- j4TAMXaJ6Xd6oQ51kfh1exEjhC0s8er4FnYIW0riZX8bO0RDM6PE0iUHWSGcHkaJfw3XodYZ
- S+xfOpkJ5DqQo9fv0ofYzCfx7msPKyToeCU62oQgqlUkLr1+yQQz/+6T/6wQtofE2c7V0PBZ
- yCTxYdkm1gmM8rOQPDELYcMCRqZVjGKpBcW56anFhgWm8IhMzs/dxAhOalqWOxinv/2gd4iR
- iYPxEKMEB7OSCK+bZmK6EG9KYmVValF+fFFpTmrxIUZTYFBOZJYSTc4HptW8knhDE0sDEzMj
- YxMLQzNDJXHeM1fKUoUE0hNLUrNTUwtSi2D6mDg4pRqYNr7pSE1h63zKw8HvyH0z0ufkVK3p
- wtIZDgZz3LZu/JmU0JF44UWq5KI/K24oxGvcX8U1d/bF7dJ/5KbXME6+fiXy+vyHngIXDi3i
- W1+3qSlzCdfVYtcdIrfOtDlJvzkxVeluMNtJmZQQSxaFTvn5/605pp49EFpw6P/hTx/La5+x
- mTsoJDpKBlRM6V6ZNl13SsGu2bIl137kTs0Lnhtx9JyBwcemn5btAfPmOXEtW8dnso97wqPZ
- fML3/N7KHqvibhDuSp/Eys3e8uK0/a3pp8Mf3JSsCzRfeePhj7NCZXc2iJubzYl2fX7whUbG
- 3GCd1ZPOWVss+//3hZKgGH/PetbHJ2LX+Vf/uxorOLvbXYmlOCPRUIu5qDgRACcxAIvzAwAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrILMWRmVeSWpSXmKPExsWy7bCSvK5kVHK6wYztvBYPt89jsfjz6CWb
- xa9D65ktpk7azG7xdm8nuwOrx6sDq9g9zt7Zwehx/MZ2pgDmKC6blNSczLLUIn27BK6MLfs+
- sxR8V61YcuMRawPjU9kuRk4OCQETibPfHjF2MXJxCAlsZ5SYvek2C0RCSuLz06lsXYwcQLaw
- xOHDxRA1zxkl/u+awQ5SwyagJ/F/0UJmkBoRgSSJE5trQcLMAtoS3Ys6oGbOZJKY3b+HFaSG
- U8BKYusGCxBTWMBF4tGmAJByFgFViQl/rjOC2LwClhLHF79gg7hAQeLn02WsECNFJGZ3tjGD
- 2CICfhIz7p9inMAoMAtJagEj4ypG0dSC4tz03OQCQ73ixNzi0rx0veT83E2M4FDUCtrBuGz9
- X71DjEwcjIcYJTiYlUR43TQT04V4UxIrq1KL8uOLSnNSiw8xSnOwKInzKud0pggJpCeWpGan
- phakFsFkmTg4pRqYmEOefyu622vpvdwvVEY2/ZKA3o6Tt2fsm7L7oO8eCf9te+/33va8EHRY
- Lvtkz9Ev246khfMsLr7yyDxZI75bz0embEOFYVEab+qKbSfKueXC11pcTDd7cXzS54p8jdm2
- C+f03btherHiafefzwskrz1znbY57KzMTrfPx8yWX5YPmCTwfMHrWdIf9/UnPzxvPfPgbK8/
- vAHcyjoBCZETM2N7D3OZcZpO5MrY/oX12gzVZxuuTVi0Jf1h8lX9Nuc509iXH961yNZfVObs
- tp0J/savpRfvm9J8PFKh5tmJBvGymQ+fsKhKVinwxbfHTVm+srIj9DJ7u0Loloq+f2vFvX4x
- m185Ms/Z45X+0tVNV5VYijMSDbWYi4oTAdm/3i+0AgAA
-X-CMS-MailID: 20241218232617epcas1p446f580bee6bcec5d149383f140f16721
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241218171243epcas1p1071f30015793a4317dfb47c70b99dacf
-References: <20241218171236.1022565-1-s-ramamoorthy@ti.com>
- <CGME20241218171243epcas1p1071f30015793a4317dfb47c70b99dacf@epcas1p1.samsung.com>
- <20241218171236.1022565-3-s-ramamoorthy@ti.com>
- <01e401db519e$6d116220$47342660$@samsung.com>
- <0ec29812-b2e7-40de-a55e-c381c62795c2@ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4678cce3d60so1855031cf.2
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 16:51:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734569484; x=1735174284; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=kbHat80x3P6YNRy+cLcWhuTctvJAOkfiHBEv79+Rgys=;
+ b=PZYJe2iYzVJMHQm8pC6RTVTCTTsK20kkdvKMzeW4ApUUMm1ql0Jc3OHMl76LxR2caE
+ dDgOUMAqzqKsh+2bOHdl9PNyYXSf5WdixKJaZI7tI2DqJII4tMlv5CkS74ejmq51p6NJ
+ Dw6KIlXpp3yzLXWUEUj0UPYLn0ifDrLznKE8I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734569484; x=1735174284;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kbHat80x3P6YNRy+cLcWhuTctvJAOkfiHBEv79+Rgys=;
+ b=dvI8M9UCmMp2YpeYsNBhbGUuGbv/tE5g9p/RLb6e/6/t3DjQp+nVMrR8TfZ4wjZZti
+ xMc4gDgWf/prWu9TmbEbowmAyo+VlUd2jMrN9yVdjHun9/jXl+gLP7PisZ7rBM3JA5QL
+ jQMawL1k/kBgNwgsccg6YvaAKHI4h61cJn+GrGBvR0UR7WJLqu2Zi1fSIN1ij/GZoSZk
+ OXfjUBt+iUpyzHC183OqdQ1Qbq9geBTijQmHdYW7LmewooHA31OA/tgMmFaftr4Gd9wc
+ /0cpzcSarYUnwCSZ4u4JJk/hLLrGyZbTPzdGfJA+KpaCvQdKNoLshQsH6SDJtgPsnm7I
+ fXJA==
+X-Gm-Message-State: AOJu0YyzD7AX9kAAbJvIV/hMVojgAc3W3MTqrVycQQOhCkCjgM3CG11i
+ F01UR13WbiAJIPT6nnfELRSTKvKld4m8g+LzfPPE8Xgao+co+cE9wB4CxDR1cJw=
+X-Gm-Gg: ASbGncs4IVUPQg6z72MA3nmMZ6WEy5RejkRM04nRJLm6espuIYwxEsOU2y+VD3C5N9P
+ 2Po/CVXZcpGlNwReoJsz7VpbFKhJo27ZJS/xb4nXg6OiPAD7P8sGoC/lTgcfjzyBeVuzD3THSvs
+ aoF2QRuPTAfxb61YmgcTxPJ01/MQAnmfQ2Z9Sge83Y4CcxmMbGjKjU4TFni29W8CpinNI8mIPrL
+ ebERV9dq1noAFsph/2U/OIjEQmJxN6XNcPtFCljJlj6f0LhrqnfvsLe
+X-Google-Smtp-Source: AGHT+IFftJY5lDOUAssO2BOui0S9JH9CkAAw2vWNgFp/MqqdNX/XWu7x9gse+7ecil5swoEJNTPizw==
+X-Received: by 2002:ac8:5d93:0:b0:467:6b20:e0b1 with SMTP id
+ d75a77b69052e-46908db2398mr76189281cf.6.1734569484048; 
+ Wed, 18 Dec 2024 16:51:24 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46a3e6a6d1dsm819391cf.45.2024.12.18.16.51.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Dec 2024 16:51:22 -0800 (PST)
+Date: Wed, 18 Dec 2024 18:51:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Paul HENRYS <paul.henrys_ext@softathome.com>
+Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com,
+ sjg@chromium.org, al.kochet@gmail.com
+Subject: Re: [PATCH v4 3/3] tools: binman: Add tests for FIT with data
+ encrypted by mkimage
+Message-ID: <20241219005119.GA3555833@bill-the-cat>
+References: <20241125174717.1181452-1-paul.henrys_ext@softathome.com>
+ <20241125174717.1181452-3-paul.henrys_ext@softathome.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="G/ut75ZOHJzNj1tX"
+Content-Disposition: inline
+In-Reply-To: <20241125174717.1181452-3-paul.henrys_ext@softathome.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,147 +97,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--G/ut75ZOHJzNj1tX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: Shree Ramamoorthy <s-ramamoorthy@ti.com>
-> Sent: Thursday, December 19, 2024 7:55 AM
->
-> Hi.
->
->
-> On 12/18/24 4:44 PM, Jaehoon Chung wrote:
-> > Hi,
-> >
-> >> -----Original Message-----
-> >> From: Shree Ramamoorthy <s-ramamoorthy@ti.com>
-> >> Sent: Thursday, December 19, 2024 2:13 AM
-> >>
-> >> Replace magic numbers in buckval2votl() & buckvolt2val() with macros to
-> >> help with clarity and correlate what the numbers correspond to in the
-> >> TPS65219 datasheet.
-> >>
-> >> Signed-off-by: Shree Ramamoorthy <s-ramamoorthy@ti.com>
-> >> ---
-> >>   drivers/power/regulator/tps65219_regulator.c | 26 ++++++++++----------
-> >>   include/power/tps65219.h                     | 14 +++++++++--
-> >>   2 files changed, 25 insertions(+), 15 deletions(-)
-> >>
-> >> diff --git a/drivers/power/regulator/tps65219_regulator.c
-> >> b/drivers/power/regulator/tps65219_regulator.c
-> >> index 4b0fb205909a..88abc896b3a2 100644
-> >> --- a/drivers/power/regulator/tps65219_regulator.c
-> >> +++ b/drivers/power/regulator/tps65219_regulator.c
-> >> @@ -72,12 +72,12 @@ static int tps65219_buck_enable(struct udevice *dev, int op, bool *enable)
-> >>
-> >>   static int tps65219_buck_volt2val(int uV)
-> >>   {
-> >> -	if (uV > TPS65219_BUCK_VOLT_MAX)
-> >> +	if (uV > TPS65219_BUCK_3V4)
-> >>   		return -EINVAL;
-> >> -	else if (uV >= 1400000)
-> >> -		return (uV - 1400000) / 100000 + 0x20;
-> >> -	else if (uV >= 600000)
-> >> -		return (uV - 600000) / 25000 + 0x00;
-> >> +	else if (uV >= TPS65219_BUCK_1V4)
-> >> +		return (uV - TPS65219_BUCK_1V4) / TPS65219_VOLT_STEP_100MV + TPS65219_BUCK_REG_1V4;
-> > Even though Not relevant to this subject. If uV is 340000, the return value is correct?
-> >
-> > Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-> >
-> > Best Regards,
-> > Jaehoon Chung
->
-> Thank you for reviewing!
-> The allowed max uV is 3.4V inclusive.
-> If 340000 uV is detected, the first 'else if' statement should be taken.
+On Mon, Nov 25, 2024 at 06:47:17PM +0100, Paul HENRYS wrote:
 
-Ah, I missed wrong read. Thanks for checking. If you can do, other tpsXXX can also be changed to readable macro.
+> Test the property 'fit,encrypt' to encrypt FIT data.
+>=20
+> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+> Changes for v4:
+> - Update the tests to use 'fit,encrypt'
+>=20
+>  tools/binman/ftest.py                         |  45 +++++++++++++++
+>  tools/binman/test/343_fit_encrypt_data.dts    |  53 ++++++++++++++++++
+>  .../test/344_fit_encrypt_data_no_key.dts      |  53 ++++++++++++++++++
+>  tools/binman/test/aes256.bin                  | Bin 0 -> 32 bytes
+>  4 files changed, 151 insertions(+)
+>  create mode 100644 tools/binman/test/343_fit_encrypt_data.dts
+>  create mode 100644 tools/binman/test/344_fit_encrypt_data_no_key.dts
+>  create mode 100644 tools/binman/test/aes256.bin
 
-Best Regards,
-Jaehoon Chung
+This fails in CI:
+https://source.denx.de/u-boot/u-boot/-/jobs/980030
+or
+https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10169&view=3Dl=
+ogs&j=3Dc59aff74-743b-5f08-f408-4a608a489153&t=3Df2ea3536-b291-5a39-ad92-02=
+20c9b8101a&l=3D300
+Please see https://docs.u-boot.org/en/latest/develop/ci_testing.html for
+how to trigger Azure yourself to resolve these, thanks!
 
->
-> Best,
-> Shree
->
-> >> +	else if (uV >= TPS65219_BUCK_0V6)
-> >> +		return (uV - TPS65219_BUCK_0V6) / TPS65219_VOLT_STEP_25MV + TPS65219_BUCK_REG_0V6;
-> >>   	else
-> >>   		return -EINVAL;
-> >>   }
-> >> @@ -86,12 +86,12 @@ static int tps65219_buck_val2volt(int val)
-> >>   {
-> >>   	if (val > TPS65219_VOLT_MASK)
-> >>   		return -EINVAL;
-> >> -	else if (val > 0x34)
-> >> -		return TPS65219_BUCK_VOLT_MAX;
-> >> -	else if (val > 0x20)
-> >> -		return 1400000 + (val - 0x20) * 100000;
-> >> -	else if (val >= 0)
-> >> -		return 600000 + val * 25000;
-> >> +	else if (val > TPS65219_BUCK_REG_3V4)
-> >> +		return TPS65219_BUCK_3V4;
-> >> +	else if (val > TPS65219_BUCK_REG_1V4)
-> >> +		return TPS65219_BUCK_1V4 + (val - TPS65219_BUCK_REG_1V4) * TPS65219_VOLT_STEP_100MV;
-> >> +	else if (val >= TPS65219_BUCK_REG_0V6)
-> >> +		return TPS65219_BUCK_0V6 + val * TPS65219_VOLT_STEP_25MV;
-> >>   	else
-> >>   		return -EINVAL;
-> >>   }
-> >> @@ -161,7 +161,7 @@ static int tps65219_ldo_volt2val(int idx, int uV)
-> >>   	if (uV > max)
-> >>   		return -EINVAL;
-> >>   	else if (uV >= base)
-> >> -		return (uV - TPS65219_LDO12_VOLT_MIN) / 50000;
-> >> +		return (uV - TPS65219_LDO12_VOLT_MIN) / TPS65219_VOLT_STEP_50MV;
-> >>   	else
-> >>   		return -EINVAL;
-> >>   }
-> >> @@ -187,7 +187,7 @@ static int tps65219_ldo_val2volt(int idx, int val)
-> >>   	else if (val <= reg_base)
-> >>   		return base;
-> >>   	else if (val >= 0)
-> >> -		return TPS65219_LDO12_VOLT_MIN + (50000 * val);
-> >> +		return TPS65219_LDO12_VOLT_MIN + (TPS65219_VOLT_STEP_50MV * val);
-> >>   	else
-> >>   		return -EINVAL;
-> >>   }
-> >> diff --git a/include/power/tps65219.h b/include/power/tps65219.h
-> >> index aa81b92266fd..e8780af2d811 100644
-> >> --- a/include/power/tps65219.h
-> >> +++ b/include/power/tps65219.h
-> >> @@ -17,10 +17,20 @@
-> >>   #define TPS65219_BUCK_DRIVER		"tps65219_buck"
-> >>
-> >>   #define TPS65219_VOLT_MASK		0x3F
-> >> -#define TPS65219_BUCK_VOLT_MAX		3400000
-> >> -
-> >>   #define TPS65219_ENABLE_CTRL_REG	0x2
-> >>
-> >> +#define TPS65219_VOLT_STEP_25MV		25000
-> >> +#define TPS65219_VOLT_STEP_50MV		50000
-> >> +#define TPS65219_VOLT_STEP_100MV	100000
-> >> +
-> >> +#define TPS65219_BUCK_0V6		600000
-> >> +#define TPS65219_BUCK_1V4		1400000
-> >> +#define TPS65219_BUCK_3V4		3400000
-> >> +
-> >> +#define TPS65219_BUCK_REG_0V6		0x00
-> >> +#define TPS65219_BUCK_REG_1V4		0x20
-> >> +#define TPS65219_BUCK_REG_3V4		0x34
-> >> +
-> >>   #define TPS65219_BUCK1_VOUT_REG		0xa
-> >>   #define TPS65219_BUCK2_VOUT_REG		0x9
-> >>   #define TPS65219_BUCK3_VOUT_REG		0x8
-> >> --
-> >> 2.34.1
-> >
-> >
->
-> --
-> Best,
-> Shree Ramamoorthy
-> PMIC Software Engineer
+--=20
+Tom
 
+--G/ut75ZOHJzNj1tX
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdjbfUACgkQFHw5/5Y0
+tyxAtQwAh8boB9AW2ts0TO0ahvGbu8rilP+CUovWiLdRNSFKlCUvPpVwOiUQM3Gt
+C2Kq+UZdigmXgkx0mFHY4lZCUgrzqIGT50acqpbp5HKBOiD/pbcF+HXitZ2srQWB
+JetTmiqfpp7A/a4AwYlBiSyX5coT1CjiUDZcC1GUlrpJ684/9y+AXHZLeW5fipvg
+ForQW7f/oTHq6UXCdqe9kJ0RkuUIE/p/hZw42mG1xsp+n7xELNgQad6aij2AIWCD
+Qv5HBHsfQmZ92klSYNdgErehkSek4cFLAK/Thps/t9IXlZp9Q1/D+ZVA7BVWMaZc
+GtK3l4/QtTub6toZxfN+JkNyKSinM0U+VKKA+CvnC4zYw2Z0WmngtpxtPHJ/U6uk
+CVeKGFq6sXA0AQsTqg4O5pCbE2QPegmaa3/QiqGUFDS3VQtA2s8zOqb6lSTGdtzM
+M0JUganHDNKSkBxJBzbBbPmvLtoGJGdXcYRmllegdgue9cyZDfX0B3bBkbSRFam9
+ohV1ZCHg
+=GBul
+-----END PGP SIGNATURE-----
+
+--G/ut75ZOHJzNj1tX--
