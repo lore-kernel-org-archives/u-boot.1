@@ -4,97 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A26ACE7718A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972D1E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:43:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE8D280383;
-	Thu, 19 Dec 2024 22:42:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E96C80291;
+	Thu, 19 Dec 2024 22:43:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="qE5SM1/g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fDblEeXn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35BBA8032B; Thu, 19 Dec 2024 22:42:17 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 159AA8021D; Thu, 19 Dec 2024 22:43:23 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BD1F80196
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 22:42:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id DA5D880196
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 22:43:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 42941120013;
- Fri, 20 Dec 2024 00:42:09 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 42941120013
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1734644529;
- bh=kQ3KL2Tuk1TzC/Qb94nK3XAeHPJ3kfuyGu5qKys7Fy4=;
- h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:From;
- b=qE5SM1/g3u0IunaVLm44nbQ/ov1/LrIj3GeE9GNWHh5/Ci33DeXAs0MfjQSoJk4Xh
- bURQlsRdRcPQ8QKHnsDY7iBJUTlDjMQgQlcOaAHWsL68Nqvy9jMs/grQ08pY6p7kmQ
- dIGFq8RvyXreGKY11TMnQfXAQuTBlxcpIFW/l37nWS9w3Efj68CfrhNbPE3f4qgVxw
- pR0CaRHKRpAPtkkkRLxw3AWtH/BzZjFVzmN8fOIuN6hpRpR9yoT2TfnKBpxWueea5v
- NqG8qRqFkqs4KPmWpJzTGGT5ergbdBCzcXHK+6YDB8Uu4yJskXgLffE/T1t2H7CCet
- PtNuQzAskr4og==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 20 Dec 2024 00:42:09 +0300 (MSK)
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Subject: [PATCH 0/3] fdt_support: improve board_fdt_chosen_bootargs() for
- flexibility
-Date: Fri, 20 Dec 2024 00:42:07 +0300
-Message-ID: <20241220-board_fdt_chosen_bootargs_improvements-v1-0-f6a7181787c5@salutedevices.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6d8f65ef5abso10121966d6.3
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 13:43:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734644600; x=1735249400; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R5V2rDd7yD7mj/crK0u4H3jiXG6pFx4AHEeyIiIeDvw=;
+ b=fDblEeXn/W0dcfxhI3KXB56VxHhCEXl223Alt16YDUBB41tjuih1iZQeC6fDhKbHw+
+ i9xNU58Yq/6oYrT/bu6L+4Pcs2wpFBRhmCdiODNjnWUoz0XHZ4HthXH08M50G33nux+/
+ TnwqAWsOr/CuDGfwp3aGGXcfctlSF9byXbnV4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734644600; x=1735249400;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=R5V2rDd7yD7mj/crK0u4H3jiXG6pFx4AHEeyIiIeDvw=;
+ b=ANKIE/3k68L1QHJDZ+N9AgNj5UfbGU89jAz4TkOSqR01YId1+mAZcZC/2xWJ3QsBPG
+ aCVgXjxWg3li460wvtiylYPYTGidOSieGVHlpThpB1hLrj0PpIQAOll5TZTLpE+kP94e
+ OphxmKSDJRuQCLXBpTa916I/KDSCbJlk9NlqpusxAroMb7+y0jyrkLIjpcGU2xwcPEP7
+ iXmzpNebONDWVuMPPx4FPBZ9OLxVkLvpwRbaKwt22ouzDI1dEiZJQ5MkYkaVJGwVq4CS
+ ju1f785P5CLOLnQECR6Bkfb9/W2KIYrbeIjxbL4pHBSZULunlcwCXF75usbweW9RGsGw
+ v6lQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW0+NgznttbW8tkvSJwF5mwUYi/N8T8GMZKe6paCDmAJkdZ17Qz8EJVD9+zxGqIdu5wr+FmNss=@lists.denx.de
+X-Gm-Message-State: AOJu0YwxJKyRY7YaBiz4tzTLAcv9PqHNY6cYFflrkYUyzWUeD4hkqJQm
+ 1h3ri3FDjkGWAeyw8gGan+PYzIAqrP/3iuvMgf/d9DoCpGX/opXXjGmslHo9aW0=
+X-Gm-Gg: ASbGncsTRqOleHXFfNcx5HVxp3Wh3F6YcDPj5mjMVt1hjLhQRM8K5CWdnhAWvLgKaT7
+ cRSD293xlEAEioBaiYH7/885O1YBAVUJGRipAUs3BQGjgfhVrMLu+SHyLjrQeYCQ03K4UcWG0CR
+ fEEtfGUn1+L/RNOHRSOJK8UQl1YVrrplNcqR94shSs61Vq6wq3HCCAcfiW1a8aid37m5he+1i0K
+ T9C0PPqoEPd2vYgZE/hCNH/AQ3WQv6ttUopeeyf6OD5ADcVvO/MOig=
+X-Google-Smtp-Source: AGHT+IHPXwBWcqXbQ3EC86URbcY7LuiZcE1JsiY88sYIPoaSn6SipV3I0ncX/6sK+9kYnG40sz6Jag==
+X-Received: by 2002:a05:6214:4302:b0:6d4:215d:91b9 with SMTP id
+ 6a1803df08f44-6dd23338c83mr9880336d6.11.1734644599765; 
+ Thu, 19 Dec 2024 13:43:19 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd180ea824sm10410196d6.4.2024.12.19.13.43.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Dec 2024 13:43:17 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20241205193254.25807-1-heinrich.schuchardt@canonical.com>
+References: <20241205193254.25807-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] net: lwip: do not return CMD_RET_USAGE if no interface
+Message-Id: <173464459670.3661439.13658406548179011499.b4-ty@konsulko.com>
+Date: Thu, 19 Dec 2024 15:43:16 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAC+TZGcC/x2NQQqEMAwAvyI5W9gWUdyvLFJaGzUHG0mKCOLfL
- Xucw8zcoCiECt/mBsGTlDhXsG0D8xbyioZSZXAf11lnRxM5SPJLKn7eWDH7yFyCrOppP4RP3DE
- XNUPf9bFKYwwD1NghuND1H/2m53kBkFrpB3gAAAA=
-X-Change-ID: 20241219-board_fdt_chosen_bootargs_improvements-7646b2029ba7
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Tim Harvey
- <tharvey@gateworks.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- "Heinrich Schuchardt" <xypron.glpk@gmx.de>, Sam Protsenko
- <semen.protsenko@linaro.org>, Devarsh Thakkar <devarsht@ti.com>
-CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, <rockosov@gmail.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1734644528; l=2087;
- i=ddrokosov@salutedevices.com; s=20241008; h=from:subject:message-id;
- bh=emBG4z/BJodznm7vA58VX9+IG0jG5PXBvwVS9hJ3R8c=;
- b=a5NeGxuL1qB80sgbWAu2RwZjGY0QBKGu3mVoviV8zaOt8zJ4a9c4B5ffnjkAkmm3WdKCT9ww7
- +LbiDuqn2dYDQACnTkAmwU/uSyVGdvkQXnCuyurpNHIsbp0gl3VqmFe
-X-Developer-Key: i=ddrokosov@salutedevices.com; a=ed25519;
- pk=J6t8z4aofCVwzR1Xs7royc+IGyQcL0cTby92cz3i8B4=
-X-Originating-IP: [172.28.162.51]
-X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 189961 [Dec 19 2024]
-X-KSMG-AntiSpam-Version: 6.1.1.7
-X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 49 0.3.49
- 28b3b64a43732373258a371bd1554adb2caa23cb, {Tracking_uf_ne_domains},
- {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; github.com:7.1.1;
- smtp.sberdevices.ru:7.1.1,5.0.1; 127.0.0.199:7.1.2, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/12/19 20:37:00
-X-KSMG-LinksScanning: Clean, bases: 2024/12/19 20:37:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/12/19 19:16:00 #26891781
-X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,47 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series consists of three patches.
+On Thu, 05 Dec 2024 20:32:53 +0100, Heinrich Schuchardt wrote:
 
-The first patch modifies the function documentation style in the
-include/fdt_support.h file to comply with kernel-doc requirements.
+> If the dns command cannot find a network interface, we should return
+> CMD_RETFAIURE and not -1 (CMD_RET_USAGE).
+> 
+> 
 
-The second patch modifies the board_fdt_chosen_bootargs() function to
-return a const char* type. This change clarifies to the caller that the
-returned string should neither be freed nor modified. It aligns with the
-existing fdt_setprop() function, which already utilizes a const char*
-parameter. This promotes consistency within the codebase and enhances
-code safety by preventing unintended modifications to the returned
-string.
+Applied to u-boot/master, thanks!
 
-The third patch addresses the need for flexibility in providing kernel
-command line arguments (bootargs) for different kernel images within the
-same U-Boot environment. It introduces a read-only (RO) fdt_property
-argument to the board_fdt_chosen_bootargs() function, allowing access to
-the original chosen/bootargs data. This is crucial for scenarios where
-different kernel versions require distinct console setups (e.g., ttyS0
-for vendor kernels and ttyAML0 for upstream kernels). By enabling board
-developers to either merge or replace the original bootargs, this
-patch enhances the configurability of U-Boot for various kernel
-images without relying on outdated configurations like CMDLINE_EXTEND.
-
-CI/CD results: https://github.com/u-boot/u-boot/pull/716/checks
-
-Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
----
-Dmitry Rokosov (3):
-      include/fdt_support: fix docstyle to comply with kernel-doc requirements
-      fdt_support: board_fdt_chosen_bootargs() should return const char*
-      common: fdt: hand over original fdt bootargs into board chosen handler
-
- boot/fdt_support.c    |   7 +-
- include/fdt_support.h | 173 ++++++++++++++++++++++++++++++--------------------
- 2 files changed, 107 insertions(+), 73 deletions(-)
----
-base-commit: 69bd83568c57813cd23bc2d100c066a17e7e349d
-change-id: 20241219-board_fdt_chosen_bootargs_improvements-7646b2029ba7
-
-Best regards,
 -- 
-Dmitry Rokosov <ddrokosov@salutedevices.com>
+Tom
+
 
