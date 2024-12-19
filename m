@@ -4,89 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A734DE77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 17:21:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23AA8E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 17:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B860380196;
-	Thu, 19 Dec 2024 18:21:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E410802B4;
+	Thu, 19 Dec 2024 18:51:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HfZpiClA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jXjw4NMc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 486948021A; Thu, 19 Dec 2024 18:21:11 +0100 (CET)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6AFDE8034E; Thu, 19 Dec 2024 18:51:12 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC4638007D
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 18:21:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33C098021A
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 18:51:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=redhat.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eballetb@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1734628867;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6FJpcGweYRMYizJfEg8lUXGsVGoOy6sYsUs9urD/OBw=;
- b=HfZpiClAJNF1GamxLlr/n6GVMKdkRHuBqsQM91eZ6Rkoix2Sy/4oazsQSQfupLjfSkmiF/
- OZECILNVKMV8QF3o7HOQLQHKb26xV7FD1doJUN/7Ftn7LhcnRBC1Ni86A6jUtBwDXgKsGl
- Dt9uiUPgVlvGOCvtF+lGs9j3U9UAF8s=
-Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com
- [209.85.161.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-652-8q0V7eeUNN-V0sEzG0BXFg-1; Thu, 19 Dec 2024 12:21:06 -0500
-X-MC-Unique: 8q0V7eeUNN-V0sEzG0BXFg-1
-X-Mimecast-MFC-AGG-ID: 8q0V7eeUNN-V0sEzG0BXFg
-Received: by mail-oo1-f72.google.com with SMTP id
- 006d021491bc7-5f31e3b6dacso64228eaf.3
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 09:21:06 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b6e24aa0dbso79893685a.1
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 09:51:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734630669; x=1735235469; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eD2OtH3MjfRwz0jGPh5V1nxWt6Tr3k+0GxQloB1LrAg=;
+ b=jXjw4NMcMi1YWxyP4BYsXS9uSwW/pXjRUH1GGk4iAC+lwiipGQMmPWN/o8sjc2bSG/
+ 1RcO4eA7cI5W2YCALC/ATD2swjIyzxlJGH7VwW49SeaQz9C+JA8gW7Cada5TQmP9WRA+
+ KYQL/hYpaFIwxFfa3cUWyhFTPxxnwxJi2IC08=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734628866; x=1735233666;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1734630669; x=1735235469;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6FJpcGweYRMYizJfEg8lUXGsVGoOy6sYsUs9urD/OBw=;
- b=RIqTVLlKnsiBIfPzoUPbIu3B6eoS2EuG84Yk+YbaclSTZ6twPVY8sqScEUdIzersRE
- nmBzfP4ln9JBUwFbTeS6rkK6+hrTlzuBEB3Hd3dLcMjwwwIj2bL+ztWq6YSnghKq/PEv
- AwFaPotb5gY5fFjAP6Q0SnwuvLUEcAiNN6q4+W9g0YFdVFVpZ/74u9zDsLcHqKhJud9n
- VyIY2D07JmuQubIxdRlPLRPN80xSWXTFf353L9dTqFzp/z5CxkWL4ZUygYasQ5ZEwKj6
- o1lDzxrCfKey4cyqaxOn3oN/zg1OzpPA2UtW9kQDOkyMjfwkeTQI6LejhG21uZrAVVlz
- rsMQ==
-X-Gm-Message-State: AOJu0Ywpdmqdl5DUX9UBr/k1/+tYp6rfCmqKblrW3v+NH1IwXdqw3gwa
- cX44pSaNL/ysDGX1H7dMefp7D9xnboDRyVcpsWFjie3GkgQv/ZuxS5tk07xAvU9pM79fNXyAaLo
- hvQLNyz+WUfT1n801E+FmC+B87ZssT/P53QO7FriSOch3OTbRxnn75ON9UrPVbnEUHfCV2keLI2
- /QMZvjK0zx38IEeVoJMGGtaBIeQA==
-X-Gm-Gg: ASbGnctF0B1BGgZd6C/foLe0u5RdlgtDyf8Tr1mBKpPW8W0IYxQWTSYuOYMF8M3fI1s
- mN2ZB8fOgP2VTwc1Tjo1HGSsx3mB1D6dJOzMA
-X-Received: by 2002:a05:6871:33a5:b0:296:9146:f455 with SMTP id
- 586e51a60fabf-2a7b31361abmr1324761fac.7.1734628865766; 
- Thu, 19 Dec 2024 09:21:05 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGKCI7JIWNDR8Kl9n54YWxI6xthEoTjMYCNZeoRWMcHPCD0uYx6nn/BlkaIP8ktxvRJb+t5w8GtSPYm2R2+Mtc=
-X-Received: by 2002:a05:6871:33a5:b0:296:9146:f455 with SMTP id
- 586e51a60fabf-2a7b31361abmr1324754fac.7.1734628865427; Thu, 19 Dec 2024
- 09:21:05 -0800 (PST)
+ bh=eD2OtH3MjfRwz0jGPh5V1nxWt6Tr3k+0GxQloB1LrAg=;
+ b=eE13e4gZO1AJWLj/opgAS7pUJ65aRUhtQomim+f9etawtkrhSdgSXzYYN4DRTN8Pt+
+ jN2NYPiDTkJz10in8gClM5ktFWgN6Cpjt35xeYGD4R6KgnvL0/95ObTaPqSVL40ccmDB
+ le2kU18aAn0Vm49PcszI8JIjjrujmsVluHJ65VL2qMVURyx1fLcqpcthhQJPFlmm2kj+
+ FON2Mk/EVEjewCfLzqu8kVbz+Erd1Fk21iy/YaGQrSsiC/zAxYGZj1jBNnb5lm9eRQ1l
+ G16nr6As9mXjFruVGWq2Mvy5fIvsEBY2gZpBvXghZh2PLSQ83Orz+bAW3MjbnNxvibEA
+ fz3A==
+X-Gm-Message-State: AOJu0Yye3aOaV33Syolz7dap08n+DgtghqwvQO/yCASCvs+EpqJsxSk2
+ lIUdhBReX3buTjqj+N1vG0JwrOzVB3gJ4qLhRJg74P4eRS0VsqYBbbm1rkDf+aAXtIpR7oYZL1S
+ R
+X-Gm-Gg: ASbGncsSdsf9W11QfkNxPmP4jm+TNkPyjoDNJOOCgssnouzmZrI6ZBpsUAeoyuZa7ot
+ IhHAfhrwEFithaXtQSB5U5TgabR7GXfzWXHmNFAWxSNNjbkGDNUR5JzGPOfDzJyfDc6hPo+m+bC
+ ClNn1662FMQIAW8kbW8oNOCBLARo1h05d78X2rKng1sKFognzm7xFDKy+hqhPnz/vf2fU41FsLt
+ 6ldMLCfUpeys8zG1o4qkiGTQRGvsfLJTwycV7CucdS3XZihYwIoqFg=
+X-Google-Smtp-Source: AGHT+IHQ5AgWkhObuPVv9Qskpu3Hqc1C9C5nF34wKo45P3y6TApeg4lEUqZBF9zQ0vAp+wFO2sQpTQ==
+X-Received: by 2002:a05:620a:7188:b0:7b9:a387:3cd8 with SMTP id
+ af79cd13be357-7b9a387400cmr873131185a.42.1734630669126; 
+ Thu, 19 Dec 2024 09:51:09 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b9ac478e33sm67004685a.76.2024.12.19.09.51.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Dec 2024 09:51:08 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Paul HENRYS <paul.henrys_ext@softathome.com>
+Cc: paul.henrysd+nodisclaimer@gmail.com, sjg@chromium.org
+In-Reply-To: <20241125175111.1181749-1-paul.henrys_ext@softathome.com>
+References: <20241125175111.1181749-1-paul.henrys_ext@softathome.com>
+Subject: Re: [PATCH v2 1/2] tools: dtoc: Allow passing optional input
+ directories
+Message-Id: <173463066773.3644953.5626806001933635519.b4-ty@konsulko.com>
+Date: Thu, 19 Dec 2024 11:51:07 -0600
 MIME-Version: 1.0
-References: <20241219105303.6938-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241219105303.6938-1-marek.vasut+renesas@mailbox.org>
-From: Enric Balletbo i Serra <eballetb@redhat.com>
-Date: Thu, 19 Dec 2024 18:20:54 +0100
-Message-ID: <CALE0LRumNO8vOUA+bjpn6NA-S6vnQVWmqsp-ppD4U+Z_KrgSRw@mail.gmail.com>
-Subject: Re: [PATCH] net: rswitch: Add missing cache invalidate of TX
- descriptor
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>, 
- Tom Rini <trini@konsulko.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Cs66sy8Pr1GY7ZuRM5kAEa4zJTpyKTNQqE7kLwhzYW4_1734628866
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,62 +94,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Mon, 25 Nov 2024 18:51:10 +0100, Paul HENRYS wrote:
 
-Thanks Marek for fixing this.
+> An optional list of input directories can be passed to EnsureCompiled() which
+> allows to pass a list of directories where input files can be searched.
+> 
+> 
 
-On Thu, Dec 19, 2024 at 12:02=E2=80=AFPM Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
->
-> TFTP transfers of large files, for example 128 MiB, can sporadically
-> get stuck and the transfer slows down considerably.
->
-> This happens because the TX DMA descriptor in DRAM becomes out of sync
-> with the view of the TX DMA descriptor content from the CPU side, which
-> is viewed through the CPU caches. In order to guarantee these two views
-> are consistent, the cache over TX DMA descriptor that has possibly been
-> written by the rswitch hardware must first be invalidated, only then can
-> the descriptor be cleared and updated by the CPU, and finally the cache
-> over that area must be flushed back into DRAM to make sure the rswitch
-> hardware has consistent view of the updated descriptor content.
->
-> The very first invalidation operation was missing, which led to sporadic
-> corruption of the TX DMA descriptor. Fix it, add the missing invalidation
-> operation.
->
-> Reported-by: Enric Balletbo i Serra <eballetb@redhat.com>
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Applied to u-boot/next, thanks!
 
-I did a stress test with one S4 Spider board tftp'ing a big image for
-more than 1 hour without getting stuck, before this patch this test
-didn't succeed, so
+-- 
+Tom
 
-Tested-by: Enric Balletbo i Serra <eballetb@redhat.com>
-
-> ---
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/net/rswitch.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
-> index 91e2c7b7845..259d584ac98 100644
-> --- a/drivers/net/rswitch.c
-> +++ b/drivers/net/rswitch.c
-> @@ -836,6 +836,7 @@ static int rswitch_send(struct udevice *dev, void *pa=
-cket, int len)
->
->         /* Update TX descriptor */
->         rswitch_flush_dcache((uintptr_t)packet, len);
-> +       rswitch_invalidate_dcache((uintptr_t)desc, sizeof(*desc));
->         memset(desc, 0x0, sizeof(*desc));
->         desc->die_dt =3D DT_FSINGLE;
->         desc->info_ds =3D len;
-> --
-> 2.45.2
->
 
