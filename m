@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48962E7718A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 02:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DABEBE7718A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 02:44:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A3A78030F;
-	Thu, 19 Dec 2024 03:43:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8E76280352;
+	Thu, 19 Dec 2024 03:43:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f/GXYJ6d";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Db0cetCw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C1C680241; Thu, 19 Dec 2024 03:43:51 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 72A6880352; Thu, 19 Dec 2024 03:43:54 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A2EB8030F
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 03:43:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E1718036E
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 03:43:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9e8522445dso57387966b.1
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:43:49 -0800 (PST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5d7e527becaso442762a12.3
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:43:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734576228; x=1735181028; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734576232; x=1735181032; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RK/uYkdZsAwdBIV2ZWU9Wp7hQkMVgdsfAyeLPm9fXHo=;
- b=f/GXYJ6dMGA/aQ+QcQ5xi4zepTnJTKSn4j/0HbZPl1Nc7kC9DZcMgECPg2NTKdSInv
- BPCro/QYzauPAv7Gy8Gv/Z2pPAjyKO5QXYGna3gExtmt1xaXf7z4rxaQysKrQkSHlQ8F
- 8hlSPyScspXXMiP+Whva5tWaXbGX2vUIDaWtU=
+ bh=AbkG815MZnPqgZdcSiwAjox304/VZeGqoGNAPgdupUI=;
+ b=Db0cetCwtl6T/Zt6ikxsAcR7AKqaXeheUlC4K924jcWwr6HqnObIAoRlpmZXDJIkBh
+ Ffhvh6KoIglnSY8KMgY8gN/BwTzkEbNU/7PK7J/utz1fc6Yh+6Xf6cYtj3XwC1Whlfa4
+ RC3/FdupDPJyUy7n2f1hgxEu3kc0tAIt/9Kwo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734576228; x=1735181028;
+ d=1e100.net; s=20230601; t=1734576232; x=1735181032;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RK/uYkdZsAwdBIV2ZWU9Wp7hQkMVgdsfAyeLPm9fXHo=;
- b=dDde+9RHsU81pB6i5C3ZfGzreZgpCeNgiV5x4do6c1OcCqry+JkbWg71Nb4m5RaOpB
- G9vX5CvzIF1fqByTl2xprbHEkwdbekS5R0QlbvCyNqhpXygkrs3/WQmkg2tGL0UWETA1
- 0/xPCqrTGqbNMLfwCGaCkiPw3cyBlLXTzSMxtr2SmyFy2YfLPfdjBdDlBbFweD2sAFfC
- DiVjie8YJ86b4fnQiPJsGkHXtCWld80Btfzoa5ep53aB4PZUS1G+eiDzIyyIxgGTVgzi
- PXuJbhnlcjHZDx0nmk0WrjjRUSPD6lb0UFbHKzW3lIH8QvzkizBFtZGKqjpuGwSotGpT
- 6RQA==
-X-Gm-Message-State: AOJu0Yw0sj8vWkh00vLAiQ+FnLD6xiMj44qhqG9FcdapHwVUjcf2gHqr
- 12DsowPM32agEptYdD4aq1bDgZxCCYObx17nOmU64onfLew/mBXUKE5i1rnCyVCcER+offMfVI/
- IbOwheO6FVo2p+6Iyk6fFDrU1SA17It7xWAn9
-X-Gm-Gg: ASbGncuPeTzAN3cxkx9NSXwd3Xdj/B4RfOB1sW8O0iL7hcgN0MR0tytjhlhlOEtZE3K
- ajRxs2eimii0SZdyYNNyeiacD6DX25U6yQ7Fr92A=
-X-Google-Smtp-Source: AGHT+IG+8U1c4ecD78i8vuch8N5b6AWffq5NGTXHNXg2cc3rOD4HlRzg2JBYbhyTlj3JAI10g1njOyQ45PribQHrlRw=
-X-Received: by 2002:a17:907:2d9e:b0:aa6:4a5b:b729 with SMTP id
- a640c23a62f3a-aac079611fdmr125152566b.33.1734576228628; Wed, 18 Dec 2024
- 18:43:48 -0800 (PST)
+ bh=AbkG815MZnPqgZdcSiwAjox304/VZeGqoGNAPgdupUI=;
+ b=d2OI2I4pad5RU0JAXesljwlbWr4W5OsI2HTu41P6334bbtsmEFDcU5hQhmyvJ61k26
+ 0QIZqAj6O87yAsYr4Fd5yu5tuhRg1+p6kd5yfbXmpRD4dJM71anluFWv5xRLukyftGYO
+ c7FIFnEGjRuNRrorxqQa+PifkyUs7DrjuaNPG4sl2P4oYM+Sbg+R+XQqCtdsp5LMsfDG
+ I11NsHo9AD9WjOI0gRfxKzdS1JHzluFt23qERmJITmVFt7D9KsgORDOBtyXdo/1m+5ZC
+ TB60amuw9ACeqXiypcFKK4Kt4xIUWMC2ItQo6HnJ/C2XTCs2MgzYO55Xf8nTQNCL6LHl
+ lk7Q==
+X-Gm-Message-State: AOJu0YwH1ommEtHkL7yDJ0YS05f2heJVDLdGwyk7eFKfV+EdCHCT237j
+ XZ4UxraPLgmLwVwOLMl7kFjBqfaCKqXRsmZ8DzXXFncNoUH6aH7u8F1fcc2+vRA79fZ7NteefHz
+ 4ALVb3mjUFFpy8Lc80D6r+XJWs6Dn9kpwe+Zs
+X-Gm-Gg: ASbGnctepx6hyJSiBb/CjH5YGLc0SLpTM/gXQhHgMotehoSvbGXFocPXfd94Qpy41SW
+ WDOInw9OW2SKfYwKgs+07gcr6v3iVElSPDU3bzjY=
+X-Google-Smtp-Source: AGHT+IF7q4KTyFcrMxVBi82C4fU3HEGnFiwJ/zixEgHJxoSD0r51+Z0I4LDf9jUs9G9ykX2NvQ7UHcXKxLL6IVa0WkE=
+X-Received: by 2002:a05:6402:50d2:b0:5d0:d818:559d with SMTP id
+ 4fb4d7f45d1cf-5d8025b3875mr3195813a12.11.1734576231845; Wed, 18 Dec 2024
+ 18:43:51 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 18 Dec 2024 18:43:47 -0800
+ HTTPREST; Wed, 18 Dec 2024 18:43:50 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTgQr-czmdwzHbNvZOxMzUzM0zb8EDUhVLq6ArM+DUe0Bg@mail.gmail.com>
-References: <CAFLszTgQr-czmdwzHbNvZOxMzUzM0zb8EDUhVLq6ArM+DUe0Bg@mail.gmail.com>
+In-Reply-To: <CAFLszTh2611n1qZRWsodHEeQ7_JwcK75=+qDpcO+fB7zOo-eYQ@mail.gmail.com>
+References: <CAFLszTh2611n1qZRWsodHEeQ7_JwcK75=+qDpcO+fB7zOo-eYQ@mail.gmail.com>
  <20241211223822.2446254-1-sjg@chromium.org>
- <20241211223822.2446254-5-sjg@chromium.org>
- <CAC_iWjKaywBv3qyk=fHNqH_anC3xT63Ua2=DMG2w1=LEt2vDLg@mail.gmail.com>
- <CAFLszTj8z+CL4FU_6yGjvN82ARYr3ZiWsGd7h9A=p6ObhEKcug@mail.gmail.com>
- <CAC_iWjJtG2qoHEWW8h7hVVU1c6+dPFJ3X7jYSe5H0UzXkSHxcQ@mail.gmail.com>
- <CAFLszTinZrL8VLiMSk-PxWP7oWdY=35kNNUYXXx3EfEz7Z72cQ@mail.gmail.com>
- <CAC_iWjL94RJCD4cM+SPS6FRAEM8VoK4kLSovOJFc6sJQ3FaSDA@mail.gmail.com>
-Date: Wed, 18 Dec 2024 18:43:47 -0800
-X-Google-Sender-Auth: Vd0R_bFhP7J1-pna2XHxgRFlPII
-Message-ID: <CAFLszTi3CY2bt5CSCgOAPbv-KQBCJeFbquymfu-StMTohUH6cw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] efi_loader: Add a version of efi_binary_run() with
- more parameters
+ <20241211223822.2446254-4-sjg@chromium.org>
+ <CAC_iWj+5-uoXq9BanaOSxedVgbBYNFQ2AZVqka+J7iwMv=eC5w@mail.gmail.com>
+Date: Wed, 18 Dec 2024 18:43:50 -0800
+X-Google-Sender-Auth: bYGJYjvgzggoJXfvTdpSU3mCA7U
+Message-ID: <CAFLszTiOSqx2H-T04Qqa89rH0FZvCzyCfxh+cYgxNh2Mg4+W3A@mail.gmail.com>
+Subject: Re: [PATCH v2 3/7] efi_loader: Update efi_run_image() to accept image
+ and device path
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>, 
+ Moritz Fischer <moritzf@google.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -100,37 +96,21 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Fri, 13 Dec 2024 at 05:13, Ilias Apalodimas
+On Thu, 12 Dec 2024 at 00:44, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
-> Hi Simon,
->
-> On Fri, 13 Dec 2024 at 05:53, Simon Glass <sjg@chromium.org> wrote:
+> On Thu, 12 Dec 2024 at 00:38, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Hi Ilias,
+> > Provide these globals as parameters to this function, on the way to
+> > making it possible to start an image without relying on the globals.
 > >
-> > On Thu, 12 Dec 2024 at 08:45, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > On Thu, 12 Dec 2024 at 15:45, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Ilias,
-> > > >
-> > > > On Thu, 12 Dec 2024 at 00:49, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > On Thu, 12 Dec 2024 at 00:38, Simon Glass <sjg@chromium.org> wrote:
-> > > > > >
-> > > > > > This uses a few global variables at present. With the bootflow we have
-> > > > > > the required parameters, so add a function which accepts these. Update
-> > > > > > the existing function to call the new one with the globals.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > ---
-> > > > > >
-> > > > > > (no changes since v1)
-> > > > > >
-> > > > > >  lib/efi_loader/efi_bootbin.c | 29 +++++++++++++++++++++++++----
-> > > > > >  1 file changed, 25 insertions(+), 4 deletions(-)
-> > > > > >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v2:
+> > - Adjust argument ordering for efi_run_image()
+> >
+> >  lib/efi_loader/efi_bootbin.c | 20 ++++++++++++--------
+> >  1 file changed, 12 insertions(+), 8 deletions(-)
+> >
 Applied to sjg/master, thanks!
