@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A177DE77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 18:29:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D69FE7718A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 18:30:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40F898021D;
-	Thu, 19 Dec 2024 19:29:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95098802EF;
+	Thu, 19 Dec 2024 19:29:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EXhjAnr+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FFl2OtOs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D65348021A; Thu, 19 Dec 2024 19:29:29 +0100 (CET)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 5BF2880326; Thu, 19 Dec 2024 19:29:31 +0100 (CET)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A24C580379
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 19:29:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3792280381
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 19:29:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3ad272538e8so8253545ab.1
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 10:29:27 -0800 (PST)
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-3a7deec316aso3582875ab.1
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 10:29:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734632965; x=1735237765; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734632967; x=1735237767; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WWKtId27HRHoTA4nPIebo6hh5rfBC3NImMIXMw+LeI8=;
- b=EXhjAnr+T/rnp3vxawfDvKUjzUab8J4qFIe23yThc2wOsAOnJI+ctVhAESYOf/w+lx
- R3Yo6gS1ccpUuI3pNqrpDpjdETUSZXbIWqFolq6ARC0RbRdD0uGq6tSd/VF3lPRGBND+
- fX2//dDFa8y34EKy687JwhE9dO5/29QGBrvho=
+ bh=eeeo3LTMEVCfjxPdDZS28oi5ekOzg9BHJWxs4WVPUYg=;
+ b=FFl2OtOsjd4fGvYR5ox+04uvudMwyRfnSnMQhCIQ2sOCzeeBa/ga26k+rFt6K0NvC/
+ qGGUTR2ZDuHcqpTUmLKFCBK062AAljEQzVdWgH6EqRqa8NmeFJzTeGMp6klKxIhMbSJ9
+ DyCdZCfx6tQnxtUKUSTrqqbEtB1FVsMRl2RSA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734632965; x=1735237765;
+ d=1e100.net; s=20230601; t=1734632967; x=1735237767;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WWKtId27HRHoTA4nPIebo6hh5rfBC3NImMIXMw+LeI8=;
- b=NgEN8Urs7NYF005YCi2sEMVPNajySTA+dNAyO5D8Kwy5ugDWkmagT1nzWaYNi9wdNl
- NK4FdGJVanJWUJP/0T2WxmjsBAnKy738eZc0gKF+GU8Op5sK5BT6OH1tyxCZfbSmY8I9
- EiEYsOl57+XU77y7kIISdoWq5kLczfZvxdQV0T5vLdrmV8QPtNjQ6E9t40i0ek3JVNpf
- fSIl/2VyOrfd6CQivdu1wZiagTss1tF1AUj6zHMIbQQpdLVjtMoDe+dgDWvnlB25S/XN
- ZB9HODIS2H9JkwSG3YieAG3o+v3HT/dA+z/tBxliMKb5bexowXOLxtHLGtAgfZliHF8e
- FpAQ==
-X-Gm-Message-State: AOJu0YyiT4HSMzxVa8+tySNlf/WvMh9CWK4hIqrvpz2RuZVroqdCyl8I
- Vyj3/wpAIsPWeBnNL89S8/GuSAY+BiwlLecEKJT5LQ31StqEctJwn9TtdNv9go11XYv9dvNoWEc
+ bh=eeeo3LTMEVCfjxPdDZS28oi5ekOzg9BHJWxs4WVPUYg=;
+ b=sJZXGusS+h/NCCTAx8F3HxJkLtbY8vSBlv8btV7ju/3jXX9liV+ii6Hc8Uwsj20SQJ
+ e3J1Lbp4CVET1l4WLFwFlXy/vmDuw2px9CbdTMuTwXjSo/qXdthRJVHrzkf03vKfjE9g
+ bfSXlIE/GtQdPCdwHnUD060XJCuJ/HOzyI4sY9zRrSfL6RCeKGOT6fwl6zWiLXT79Lto
+ bEG6bX/UtiHqkrMokih3nv9UjfKzzRv1gl4gQaJ1UmYuNO3Z/u7ktTe480N3JQIdJsig
+ 277uAgl9YvnXyaUhmPY5NIR88NynK4eoncvvYoR4DMauv4gCNI7Bftrppz571vpBvBNm
+ 8p+Q==
+X-Gm-Message-State: AOJu0Yw6QuldakGUSqyaQtfDPHB6BJh1nxp1pSTmCQDI0D6yT8uh6RAN
+ y6U34X6jlEidTUrvlDknQBg4EWHupW1kN4JaGooKLDH1Eww7XDTVOWWBckKplm3lo8odgPnypIw
  =
-X-Gm-Gg: ASbGnctN4IgJap1Dv0vSEftlhYmmlkiWi56rEQ0UPx1Q14/nbdlvujKM5zglIygqMzS
- NWE7IIyL/J/V2+7faMZc9dngayoAoVCeY9BgfgI53zsUonNQC8ZKKqculMdusuPeHaSkK5v/m57
- nF4UYEtnUZasf3IvmirNNGLB99BDkmrAjUECgA/F6joqKng3BNXB9V6lr+C2HPPW/3bSYzKKOTE
- aPnaslP4NsHNDQQMjyzbHraEcsQYcK0d8U1Yt/oavh8KX9sKsEf0sjZpTCWq32pOIdV+QHN1qQD
- KRQTb2sH0cvMLgj7Gg==
-X-Google-Smtp-Source: AGHT+IEIA8g6Bv+aNuw0LRey/Q0VHCcTGIKYh6KOCglaY+u9kY5SxY+YbHKv+ckn7cDEA3UVaqvpoQ==
-X-Received: by 2002:a05:6e02:b4f:b0:3a9:cb4a:842a with SMTP id
- e9e14a558f8ab-3c02ceb248amr43410285ab.5.1734632965634; 
- Thu, 19 Dec 2024 10:29:25 -0800 (PST)
+X-Gm-Gg: ASbGnctzAF81B/GrR3n9BcH4mDv2uQlUNnkIL8NilVlgl3UnAcMvwfGZclxyGG0XQbP
+ qUMWHR4OnAqn/7lwJtyRE66QoM2q41VOqqFTGW7cICRTbS5/Nenbafpby7FtgteyA3UnmSeE/4A
+ a669dNfDU50tv2QbesAgicUQ0255IHxYB9Oh9Nr7RkLb1XgUWafrmazK6XM0RqmqSzep1bILWY3
+ LsxJPh42xuT/ViPAUx7TWZX1um6L5k1JLzHNllyJZ0F3HFEqt6X++Q21Wm6aGusAC4eUcP0EoV4
+ BbcNQM8CbIUh5FRphw==
+X-Google-Smtp-Source: AGHT+IGBCKvn6JLzY5adgBIt6n0UqYk8Rhm71cy54zPwbp4l5ABkBl3j7EaUpSAbg6amEYtupPPfag==
+X-Received: by 2002:a05:6e02:1fc7:b0:3a7:e4c7:ad18 with SMTP id
+ e9e14a558f8ab-3c2d4e6bce9mr984845ab.18.1734632967443; 
+ Thu, 19 Dec 2024 10:29:27 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e68bf676c6sm393655173.50.2024.12.19.10.29.23
+ 8926c6da1cb9f-4e68bf676c6sm393655173.50.2024.12.19.10.29.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 10:29:24 -0800 (PST)
+ Thu, 19 Dec 2024 10:29:26 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 05/19] boot: Respect the load_op in fit_image_load()
-Date: Thu, 19 Dec 2024 11:28:53 -0700
-Message-Id: <20241219182907.2609704-6-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 06/19] malloc: Show amount of used space when memory runs
+ out
+Date: Thu, 19 Dec 2024 11:28:54 -0700
+Message-Id: <20241219182907.2609704-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241219182907.2609704-1-sjg@chromium.org>
 References: <20241219182907.2609704-1-sjg@chromium.org>
@@ -96,61 +95,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some code has crept in which ignores this parameter. Fix this and add a
-little debugging.
+Show a bit more information when malloc() space is exhausted and
+debugging is enabled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- boot/image-fit.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+Changes in v2:
+- Add field names into the message
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 439ff51edf6..db7fb61bca9 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2226,6 +2226,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	data = map_to_sysmem(buf);
- 	load = data;
- 	if (load_op == FIT_LOAD_IGNORED) {
-+		log_debug("load_op: not loading\n");
- 		/* Don't load */
- 	} else if (fit_image_get_load(fit, noffset, &load)) {
- 		if (load_op == FIT_LOAD_REQUIRED) {
-@@ -2262,10 +2263,13 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	/* Kernel images get decompressed later in bootm_load_os(). */
- 	if (!fit_image_get_comp(fit, noffset, &comp) &&
- 	    comp != IH_COMP_NONE &&
-+	    load_op != FIT_LOAD_IGNORED &&
- 	    !(image_type == IH_TYPE_KERNEL ||
- 	      image_type == IH_TYPE_KERNEL_NOLOAD ||
- 	      image_type == IH_TYPE_RAMDISK)) {
- 		ulong max_decomp_len = len * 20;
-+
-+		log_debug("decompressing image\n");
- 		if (load == data) {
- 			loadbuf = malloc(max_decomp_len);
- 			load = map_to_sysmem(loadbuf);
-@@ -2280,6 +2284,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 		}
- 		len = load_end - load;
- 	} else if (load != data) {
-+		log_debug("copying\n");
- 		loadbuf = map_sysmem(load, len);
- 		memcpy(loadbuf, buf, len);
- 	}
-@@ -2289,8 +2294,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 		     " please fix your .its file!\n");
- 
- 	/* verify that image data is a proper FDT blob */
--	if (image_type == IH_TYPE_FLATDT && fdt_check_header(loadbuf)) {
--		puts("Subimage data is not a FDT");
-+	if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
-+	    fdt_check_header(loadbuf)) {
-+		puts("Subimage data is not a FDT\n");
- 		return -ENOEXEC;
+ common/malloc_simple.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/common/malloc_simple.c b/common/malloc_simple.c
+index 5a8ec538f8f..f0f90a095bd 100644
+--- a/common/malloc_simple.c
++++ b/common/malloc_simple.c
+@@ -26,7 +26,8 @@ static void *alloc_simple(size_t bytes, int align)
+ 	log_debug("size=%lx, ptr=%lx, limit=%x: ", (ulong)bytes, new_ptr,
+ 		  gd->malloc_limit);
+ 	if (new_ptr > gd->malloc_limit) {
+-		log_err("alloc space exhausted\n");
++		log_err("alloc space exhausted ptr %lx limit %x\n", new_ptr,
++			gd->malloc_limit);
+ 		return NULL;
  	}
  
 -- 
