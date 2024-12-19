@@ -4,71 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C0AEE77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 09:16:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38756E7718B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 09:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 718418021D;
-	Thu, 19 Dec 2024 10:16:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C4FD8021D;
+	Thu, 19 Dec 2024 10:38:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eTDMYVyw";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pKcUEnjm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3D758022B; Thu, 19 Dec 2024 10:16:20 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 824A28021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 10:16:17 +0100 (CET)
+ id E0F378022B; Thu, 19 Dec 2024 10:38:33 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BA7E58021A
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 10:38:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BJ9GC4q288617
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 19 Dec 2024 03:16:12 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734599772;
- bh=CyeyT8tleLOJpproCrvvUTzw5BHMkJcqnyfd5jstATc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=eTDMYVywF69utDdv/mAHANUZnaTxEQrtFimw/B/j7lJjTqVl2M68rDHt0DX+YH4lU
- P+d/CEhsXK1vYrE3+yVxfmay87gihDWUZslBNA2u7aF9U+zoRT+vZyeRB/4HtdOI/v
- KZ6cCIX73wEwghNNcWL/vUhRx1UVUt9AijVCvIog=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BJ9GCLv125617;
- Thu, 19 Dec 2024 03:16:12 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 19
- Dec 2024 03:16:12 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 19 Dec 2024 03:16:12 -0600
-Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BJ9GBAS019112;
- Thu, 19 Dec 2024 03:16:12 -0600
-Date: Thu, 19 Dec 2024 14:46:11 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Simon Glass <sjg@chromium.org>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>
-Subject: Re: [PATCH 09/10] fdtgrep: Allow propagating properties up to
- supernodes
-Message-ID: <20241219091611.piznhvwqdoiax3yl@uda0497581>
-References: <20231217163627.2339802-1-sjg@chromium.org>
- <20231217163627.2339802-10-sjg@chromium.org>
- <20240710061528.4afx6lcsdsbookug@uda0497581>
- <CAFLszTjr7bJFPnyVx7rTdFB3AFBM_2DVAZU8FZnLBE7ep5ejXw@mail.gmail.com>
- <20240716044215.axz24dmwv4v5m5wo@uda0497581>
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6E2615C67D7;
+ Thu, 19 Dec 2024 09:37:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6AA4EC4CECE;
+ Thu, 19 Dec 2024 09:38:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1734601110;
+ bh=p1U5Y72CaZCn9tQQixo18wkmsaDG1MFKLuDsNnWHdhk=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=pKcUEnjm2Rkn3uHDcBFuOR+Y/8hzGlqJmQwDLScfS30eqXMxFzDamy0pmbp9Cws/g
+ lOQ2PhNzgSeMRL6x/fyIOakHODyEEG7LxPhFUTD1+Uvimv646Vinsb5EvNe0LnAjgo
+ qmzvl0AOZU9GxZPqwEXGhJpp6GfaIz0jzzQisxwHPhO44J6KJuRF6CoQOUIeJa0uKt
+ Mul3SceK7htwz63y/qQzJexxMP4e+cQYFQI+HFKkT/ufDN+pc6E2bmprxSYh8fdblN
+ c+RiTYxjCTNPMvOzWameCGzwXN4XA4nzbHdax+wBFwiiaHwSv+SiYVSw1Tk0rLyMVA
+ SKRgLUp6fuFOg==
+Message-ID: <8d3bc864-3181-424c-9941-cf44ec0ec475@kernel.org>
+Date: Thu, 19 Dec 2024 11:38:23 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240716044215.axz24dmwv4v5m5wo@uda0497581>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/5] configs: am62px_evm_a53_defconfig: enable USB DFU
+ support
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: vigneshr@ti.com, bb@ti.com, trini@konsulko.com, lukma@denx.de,
+ n-francis@ti.com, mkorpershoek@baylibre.com, afd@ti.com,
+ glaroque@baylibre.com, sjoerd@collabora.com, martyn.welch@collabora.com,
+ rasmus.villemoes@prevas.dk, caleb.connolly@linaro.org, j-humphreys@ti.com,
+ nm@ti.com, u-boot@lists.denx.de, srk@ti.com
+References: <20241218124542.3519447-1-s-vadapalli@ti.com>
+ <20241218124542.3519447-4-s-vadapalli@ti.com>
+ <7ac41391-b295-4601-94e5-5c18090d65cd@kernel.org>
+ <ymjr6iwzuo3dbh7iyhb42u7p3gwbpu2of47eunkax5zbjtarku@dfzyblcdhnp7>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <ymjr6iwzuo3dbh7iyhb42u7p3gwbpu2of47eunkax5zbjtarku@dfzyblcdhnp7>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,95 +77,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Siddharth,
 
-On 10:12-20240716, Manorit Chawdhry wrote:
-> Hi Simon,
+On 19/12/2024 07:43, Siddharth Vadapalli wrote:
+> On Wed, Dec 18, 2024 at 03:47:20PM +0200, Roger Quadros wrote:
 > 
-> On 10:39-20240711, Simon Glass wrote:
-> > Hi Manorit,
-> > 
-> > On Wed, 10 Jul 2024 at 07:15, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On 09:36-20231217, Simon Glass wrote:
-> > > > The existing bootph binding is defined such that properties in a
-> > > > subnode are also implied in the supernode also, as in this example:
-> > > >
-> > > >    buttons {
-> > > >       /* bootph,pre-ram is implied by btn1 */
-> > > >       compatible = "gpio-keys";
-> > > >
-> > > >       btn1 {
-> > > >          bootph,pre-ram;
-> > > >          gpios = <&gpio_a 3 0>;
-> > > >          label = "button1";
-> > > >          linux,code = <BTN_1>;
-> > > >       };
-> > > >
-> > > > Provide an option to implement this in fdtgrep.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > Coming back to this patch as am facing some issues with the bootph-all
-> > > propagation to the parent nodes [0]. We have a dmsc/sms node in our
-> > > devices and it is a parent node of k3_pds, k3_clks, k3_reset.
-> > >
-> > > During U-boot proper we are initializing the serial console and during
-> > > that time we have to make some calls to our Device manager for clocks
-> > > and power domains. With the DT modelling, the clocks and power domains
-> > > come under the device manager node ( dmsc/sms ) but interestingly that
-> > > driver is not getting probed while putting bootph-all in the child
-> > > nodes. Do you know anything about this? I thought putting it in child
-> > > node will propagate it to the parent nodes as well so it'll be probed as
-> > > well. We are having to put bootph-all explicitely in the dmsc/sms node
-> > > for it to work.
-> > 
-> > Yes, that is because fdtgrep is only used with the SPL DT. The U-Boot
-> > one is used unmodified by U-Boot and it does not check parents for
-> > such properties (neither does SPL, but fdtgrep has logic to imply
-> > these properties internally).
-> > 
-> > The easiest way to fix this would probably be to process the DT in
-> > Binman for insertion into the final image, since Binman already does
-> > lots of other DT processing.
-> > 
-> > If you like, you could create an issue for it [1]. If you want to have
-> > a crack at fixing it, I could provide some pointers.
+> Hello Roger,
 > 
-> I am not sure if I'll be able to focus on this now but feel free to give
-> your pointers, might help anyone else as well if they want to take a
-> look at it.
-
-Would you be able to give some pointers? Also I was wondering why do we
-even need to process the DT in binman, why isn't the parent node probed
-by default in this flow, is there some use case like that where the
-child needs to be probed but not the parent before it or is it some
-other bug?
-
+>> Hi Siddharth,
+>>
+>> On 18/12/2024 14:45, Siddharth Vadapalli wrote:
+>>> The config fragment "am62x_a53_usbdfu.config" which adds USB DFU support
+>>> for AM62x SoC is applicable to the AM62Px SoC as well. Hence, include it
+>>
+>> Apparently "am62x_a53_usbdfu.config" adds USB Host and Gadget and DFU support.
 > 
-> Meanwhile I will open a issue as you mentioned for tracking this, trying
-> to register on the URL that you provided. Thanks!
+> Do you propose that the Host configs should be moved into the respective
+> defconfigs of SoCs which include am62x_a53_usbdfu.config, while dropping
+> them from am62x_a53_usbdfu.config? Please let me know. This can be
+> implemented by a separate series if that is what you are suggesting.
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/21
+No. The commit that introduced am62x_a53_usbdfu.config mentions that it is
+for USB Host and Gadget and DFU.
 
-Regards,
-Manorit
+Your commit message seems to indicate that it is for DFU.
+I leave it to you if you want to update the commit message or not.
 
 > 
 > Regards,
-> Manorit
-> 
-> > 
-> > Regards,
-> > Simon
-> > 
-> > [1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues
-> > 
-> > 
-> > >
-> > > [0]: https://lore.kernel.org/linux-arm-kernel/20240705-b4-upstream-bootph-all-v2-0-9007681ed7d8@ti.com/T/#t
-> > >
-> > > Regards,
-> > > Manorit
+> Siddharth.
+
+-- 
+cheers,
+-roger
+
