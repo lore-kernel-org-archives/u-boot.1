@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15059E77188
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 02:43:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC8BEE77188
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 02:44:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EA8580361;
-	Thu, 19 Dec 2024 03:43:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D13D480378;
+	Thu, 19 Dec 2024 03:43:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Awl97UfW";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JRkCFihO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17F0F80326; Thu, 19 Dec 2024 03:43:45 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id DDECB80391; Thu, 19 Dec 2024 03:43:47 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B2728021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 03:43:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D76CB8042A
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 03:43:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-aab925654d9so56343366b.2
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:43:43 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-aa6997f33e4so44050966b.3
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:43:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734576222; x=1735181022; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734576225; x=1735181025; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Pw7Fucr+hXDDAK96Dnm0ABVguB1sDW27cfdTW9TML1M=;
- b=Awl97UfWt1gMxuhuRV0ZP7hzPnH+94+ofQuNpyhVnJfW5HCegnwA0fSkcSyfPCDiqb
- 7Bg9BTmcYaYXQLrXDJ8X6LPvAqgNNUJpIBCKVJZ8eT4WWV7pPyavWYudmrF1zh3DAfPD
- xPQfGQENCshrn8uXWxRH9UfNflVWORS1kwL/g=
+ bh=YlF+1II487yu8djTrTq0gufxpsDfsEThsGF2f2ha6BA=;
+ b=JRkCFihOre9vJ2RtykXL/Bp61A3BBAtJnnTQacYqBmihNkmB8z3mDKjsqdLBRL4BOI
+ gJD/mgIW8V+UrCdChYg1XEVdxE7MqNq9z3uM7aT7fDtVv7Ikg54iQYc0ZJspBCY8eZYX
+ 5ykf+7/gAZzVgUfGmFAafkIrJYRm6+cIkFfHE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734576222; x=1735181022;
+ d=1e100.net; s=20230601; t=1734576225; x=1735181025;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Pw7Fucr+hXDDAK96Dnm0ABVguB1sDW27cfdTW9TML1M=;
- b=sr3u0/X6piNbk2FDcL/4j6zTWm0IxWa/W2BKX/hsAALCN3J/gzLQ4LhCmn89+TXmG3
- 8pVHNJfYKao7PGP13Ai7ABObT59h9QR5YrHgsF4OmSnlzQ8+mjPMzLr74VB4AD5dJpE5
- Mi10Otzo+eXPl9/nl0AVm+tlxWNxyux7nSbuf7x6a5pp8bsI5qvjCPkr3UGsPRJB12t9
- guNiK5Q+fWXorAxkWYVa3fy1OAk+vFlK0xJ6mrP+Eudmzl0HvLZKSqYb9Rh+mN4gvwxM
- qXuaWjnjiSM5zbXtZFPf7yxiQezD0KNyMDBJFHA6ThsJnI0I9s2e2UDwVKi+AYBo/pCd
- 5Y+w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU1bYGcejHA8XjGTBKZcHrz6lfqRmrUON4CH2aTMA1N5jH2+ibDa4OYxn3LR245gf++SLz7ptU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxNnZ4mwrfl3Gx7mxa0QW4HETfIsZTpSvVkimoUNk8O6Paustgm
- bsCMjyFu7GS/OqTUJCW8+ulfbIMER1cEPGFzJSksI4L3P3ZS5cD5eIacJ5bGnJ3AMBDn7BYnCOl
- asN+1V+EOAAtlMcZ44wsYkYLJQuHEDp8k2aqq
-X-Gm-Gg: ASbGnctTMQQGqJ5Q+XYL/qlJ2Ji4szBXF+X6UvY+DSecSZW97lnLmzIn/z10Gn1ykkU
- M4nCkFaxkwNCyQo+Xj9P71O7dmNYAqiFK5lC3Ua4=
-X-Google-Smtp-Source: AGHT+IEh5pGsJswDds8c9UpY1f7UcxubE2a0uEvrhQrKoyjhj3pq+Qq2uiu494d+yfL9t+w7GuVHoXpsAv/8fdpvpY0=
-X-Received: by 2002:a17:907:c10:b0:aa6:79fa:b487 with SMTP id
- a640c23a62f3a-aabf4716e7emr507000666b.10.1734576222556; Wed, 18 Dec 2024
- 18:43:42 -0800 (PST)
+ bh=YlF+1II487yu8djTrTq0gufxpsDfsEThsGF2f2ha6BA=;
+ b=XcdeOcHQg84rqNkPv3rdhNCQA3DYpSnjQsbYQNIS+f9x8BrfoxWCRHeyosmwGxFo3w
+ c7KULKlDkvk1fVHWDGqLtouTT3WWWSemauxw0x8u1VspGvIoS4c8fwj2ZC5XcypWmMup
+ 3OX8NbyW0GBcdomnJIPsGJdbaq4JghXwov74mebpKLCwaBYPDTjlw1jwlpK/PiZ6cWeN
+ fIs0F38m7FF+yDYJ1LyPZgsTgt7pPIfCsqCQjYVPby/I4miQlLh/USRhp+XOVtvcTE8v
+ Hj/TR/Y/D5gak34B1G7SonkfJgQ2dXbOPRbQwBHeokuXG/VsPwxw8Ga5N0wtACpK/Ywb
+ 9eeA==
+X-Gm-Message-State: AOJu0YxN0oDDCdUOu/7pUxJArHRSHL+Sr/ABXSb/vVxUl8eVpZf6OHFX
+ R4Y57KHekvRi2pompmr/d8Gwovugwea40L1L9mbUO4bV3Eqgm9pjBsMcnRCPHY2OlDiEI7qGl7x
+ H9+20NBYUWJkI8WUgM7RPcz1gv1/U4nbcneuf
+X-Gm-Gg: ASbGncsAqHDP90doXCPgMcwPt2mP1XQjyK9ZWLaPkbp2acYUZGalAys6jDOkGeGviPB
+ XViH87/fsivfvdC2v8eN8XAF2MM3F2OghAdXY3LI=
+X-Google-Smtp-Source: AGHT+IEpB0aDEcPHlllHqvDTr30CO7PPuiArUYPBW5hZS4JYqmQGmAH188FRqXuZAeobgnJTYKqIorpAwEvibj7pyOU=
+X-Received: by 2002:a17:907:25c5:b0:aa6:aa8e:c89c with SMTP id
+ a640c23a62f3a-aabf48d51c3mr382209366b.39.1734576225240; Wed, 18 Dec 2024
+ 18:43:45 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 18 Dec 2024 18:43:41 -0800
+ HTTPREST; Wed, 18 Dec 2024 18:43:43 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241211223822.2446254-7-sjg@chromium.org>
-References: <20241211223822.2446254-7-sjg@chromium.org>
+In-Reply-To: <CAC_iWjJrXndvOAN3dL=vJUP7e5zYXGeGRVZofs0G-HH0t_0XLw@mail.gmail.com>
+References: <CAC_iWjJrXndvOAN3dL=vJUP7e5zYXGeGRVZofs0G-HH0t_0XLw@mail.gmail.com>
  <20241211223822.2446254-1-sjg@chromium.org>
-Date: Wed, 18 Dec 2024 18:43:41 -0800
-X-Google-Sender-Auth: eMUEmC3eRoRiP6oYlWRgMIkhL2o
-Message-ID: <CAFLszTjXM8JF6ui1jvqG+APnkY8ZhKab2kFOesH5nEdqa5KAOQ@mail.gmail.com>
-Subject: Re: [PATCH v2 6/7] efi_loader: Pass in the required parameters from
- EFI bootmeth
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ <20241211223822.2446254-6-sjg@chromium.org>
+ <CAC_iWjLk_moWeTpo-dR_FV7E4+40U0S+DjD5dd3nWhf2KSGDrg@mail.gmail.com>
+ <CAFLszTh1wPrjXu7oJrdUGqyGEFLC-mZ4JzuwXuiUjegpqhPA9g@mail.gmail.com>
+Date: Wed, 18 Dec 2024 18:43:43 -0800
+X-Google-Sender-Auth: D-JNNPl-RkW8FWJR3DaMZLkn1jk
+Message-ID: <CAFLszTjQ02tTa6TVj5bX9FAgUNXg_vXT2=MUq0S7qzp4Z91Opg@mail.gmail.com>
+Subject: Re: [PATCH v2 5/7] efi_loader: Move the fallback code from
+ efi_run_image()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Moritz Fischer <moritzf@google.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Moritz Fischer <moritzf@google.com>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,22 +94,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than setting up the global variables and then making the call,
-pass them into function directly. This cleans up the code and makes it
-all a bit easier to understand.
+On Thu, 12 Dec 2024 at 15:45, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Thu, 12 Dec 2024 at 00:53, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Checkpatch has errors on this. Please have a look
+>
+> It's the brackets not matching up because of
+> efi_uninstall_multiple_protocol_interfaces() being so long. It also
+> complains about possible blank lines at the end of the file, but that
+> isn't correct.
+>
+> >
+> > Also for some reason is fails to apply after patch 4.
+>
+> It is based on top of the other series (confusion between pointers and
+> addresses). I can send it independently if you'd like to apply this
+> one first.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Yes please, if it's not too much work. I think the other one still
+needs bigger adjustments
 
-Changes in v2:
-- Use efi_loader tag instead of efi
-- Drop unnecessary path removal
-- Fix 'require' typo
-- Move calculation of dev-name into a separate function
-
- boot/bootmeth_efi.c          | 49 +------------------------
- include/efi_loader.h         | 10 +++++
- lib/efi_loader/efi_bootbin.c | 71 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 83 insertions(+), 47 deletions(-)
-
+Thanks
+/Ilias
+>
+> >
+> > Thanks
+> > /Ilias
+> >
+> >
+> > On Thu, 12 Dec 2024 at 00:38, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > This code is only needed if an invalid image/device path is passed in.
+> > > Move the code out to a caller where this can be dealt with. The normal
+> > > flow will provide these parameters.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > (no changes since v1)
+> > >
+> > >  lib/efi_loader/efi_bootbin.c | 103 ++++++++++++++++-------------------
+> > >  1 file changed, 48 insertions(+), 55 deletions(-)
+> > >
 Applied to sjg/master, thanks!
