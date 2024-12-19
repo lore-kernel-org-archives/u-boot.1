@@ -4,93 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D56E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E2AE7718A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4705E8022B;
-	Thu, 19 Dec 2024 16:55:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 61D2C8021A;
+	Thu, 19 Dec 2024 16:59:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Un7uM8Jn";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="KmfKVa/f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16442802B4; Thu, 19 Dec 2024 16:55:14 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 6D0DA8022B; Thu, 19 Dec 2024 16:59:33 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDC938021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:55:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0470B80077
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:59:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1734623697; x=1735228497; i=xypron.glpk@gmx.de;
- bh=/tAOiXJlRT/SyuKpI886dAyqmz65tuzSlGFbfcHKh9E=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=Un7uM8JnaZOhcDmiDBTcFRPXTprVsHBvPK8V+wkAJH245AQKWZd0ZciQrRuvR8Xv
- TNTJSGcH8KjOIJ+FS8qw3SzEJ2zsi/2eJNaVVMiziCL65MS3Vm4/LB+uCbHf+hI0x
- hwJcg71rP2ykoM9xSdzqOAXV8dUKGvnCYSYKV8xQcyyQZze2lwHmCwb3nwP8Sr3PJ
- AJjonDVRWprQyUHgBwRSsLauOlxtGj4p8duRVFSTpjqFKo6lbuHpsxNe7JtTc171u
- W21q32F5HNhJDynNfrqNwi0NMa+wKWHv+BXHozWqeldq9dIruwIJ3rQUWudOwxmpC
- Ozz5Dk8ElZ18tX6HRA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.104] ([46.114.111.103]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MPXhA-1tBbWs3nyU-00QdEb; Thu, 19
- Dec 2024 16:54:57 +0100
-Message-ID: <468bd401-f85d-4b76-b513-f775a51ee5ab@gmx.de>
-Date: Thu, 19 Dec 2024 16:54:53 +0100
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 0604D1F95E;
+ Thu, 19 Dec 2024 16:59:30 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1734623970;
+ bh=YrY3ver7q6pnNum8h/eExcqEufACMk/gpAPuP8kzAjk=; h=From:To:Subject;
+ b=KmfKVa/fYrKUwyDTta3YUXKIrT/buFlH4ySOWLX6uF0CLx6muK/3/YUEQ74H10MlH
+ CI+cdkufPdEjpxIczBqut4C3poZbzHo/+emNF8UgyZznWUB8q1vQTOThX63F1tFXl8
+ Xtse2WTw+Sq1uhRk/B8vxHQmImP+yJf8FoBWPksvu51RWzc7LrjvGDA5um4tJ5/2+/
+ dSvk4aHGQw/jDF8hVje328ztDjEG0suETKg+4Vgt6WeJqRQJJ4AQ8mYRs5Rc8W5yLZ
+ eImfunW0iHNBCu7I+E4DnmEgtKq471IWu7O96ulqSiE0ywKmxHeZ3/ed1SwbTooaYi
+ 2zadOU/MpMNGg==
+Date: Thu, 19 Dec 2024 16:59:26 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: trini@konsulko.com, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Vitor Soares <vitor.soares@toradex.com>,
+ Paul Geurts <paul.geurts@prodrive-technologies.com>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Subject: Re: [PATCH] imx: Fix usable memory ranges for imx8m SOCs
+Message-ID: <20241219155926.GA32906@francesco-nb>
+References: <20241218090007.692815-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 10/10] configs: Enable sysinfo for QEMU Arm64
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, Stefan Roese <sr@denx.de>,
- Alexander Gendin <agendin@matrox.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Wan Yee Lau <wan.yee.lau@intel.com>, Jonas Karlman <jonas@kwiboo.se>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Michal Simek <michal.simek@amd.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Peter Robinson
- <pbrobinson@gmail.com>, u-boot@lists.denx.de
-References: <20241206225438.13866-1-raymond.mao@linaro.org>
- <20241206225438.13866-11-raymond.mao@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241206225438.13866-11-raymond.mao@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Vp/TsKbFdOnnmnHH4YYzZbHSiwBGa2mVxTyHNe1I74OBoQNzzIM
- ApTLy7Prs7GVOI0+6hvC8tNRuSe/fDjD9NOgy0uj4Gmr4qiJVr5J3xEol3T5dirpE4cSo/L
- xTeOVO0lqsJuilenlmMFvU2Ihi/6RyvZMe8bnYlZI+/Q0p2Td0ZXxfShQCMybS5fVZ2ZtM5
- 75WtE/5evnS7sXmYvPI/Q==
-UI-OutboundReport: notjunk:1;M01:P0:7MfkrXUhj1Y=;2g/aJGquGuK7AT0Bp3TRGWZQ9YC
- a3RG28eyeM9Df5rFdGJBevSF9XDlTtF3e+2hfIxnWk0PxBQBKLibt+L5EPHACxM6DVu1qyP4u
- /UToQ10BpwqcjYcr6dFR7LsaNO8a/h4wfZ5g2Q5Z3XCW83/UarEZqj/vV9rg/MBLaaCQiSQ10
- dwNfQL4xq4hIrSG4bBvliUyQSn57J6cv9kKweOZvzggqmdC8I5/Z3egii0rr7LWW06MczjimX
- IWErCwUdwLXQWgGoEvxPThPMtXxFiZomZH5PPCBoMJ8mD7lz7ZTABR7Dw9LsADhrNz+9ANYlQ
- t9VROmAglzbKh+Mz8+JsXcs/f9itv5ZUEFLW7KRsH7vfMU3I3i6wJrZHh9HLuvnsdCDyNNpsu
- JhAC5Fm7PPSi8WWgaDKnZvJFlGozsiP+saNyAi40VAno6CWxoe/GiLLaNqEZZmNm4HG/E8v3s
- Vakpr1MLTJ0HXqpQTaYjJwovYN+ErWudkJk9dVG+TS886CBWBcVutfkwt2ZQdkl807+WZmye6
- UD71jlnA4EkRxr4NmPGD/8RLIkUN68zxBCFOHX4/u2/A+A2DGSjE+kJhPqczD6NGrVlrmgt4k
- GZTNwXqWvofDR1CeBxh7KSJPbjibu4MdRYDQQMDrZ/IhLiTw2gWK9QVJjr/ow8PdaaP3hJMDg
- GJOqw1AY1nUtb/Gx79xto6UYUkjq54XmH7MITCSDd2qYejbPkXVApKUijzKthyvvKb27PhgJH
- 8egAf4AvKhGLVXUrC18Tbq82QCNevPPZOA8Sg7PxCZIz5dmyN2m4HpLWu1V9rHzFKy8dIKm3L
- H9Aw9WjNk33HxBkgkEOV0vGM7xm3de/N9conDCZV69nT78CDvyN8l9knmohdUFR3WsXtQORMB
- SPuIRmbgBMaGGORVwRfKiq2WfLFWcMTUL8LkAm2UYiziLW/op5zELqIGk1mbvbil0wzukNBZV
- ei+ZlT3oC4kRzOo/rpjGOAPGk34piBd5nsHjcIHM64sYzRrKQsbJUtRSHC/Yzo+1NX81Cg3cb
- YQ1Eml44Lku5msrcY7HE6BA5zxerWwxblrGWe80Awdj4eo+4E3IKL0TB7iYEmV/scO7zHGXFj
- /5aCBuEoiEAE5wkjZcRkOKChnWiZC6
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20241218090007.692815-1-ilias.apalodimas@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,59 +71,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 06.12.24 23:54, Raymond Mao wrote:
-> Enable sysinfo smbios by default for arm64.
-> When SYSINFO_SMBIOS is enabled, disable QFW_SMBIOS.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
-> Changes in v2
-> - None.
-> Changes in v3
-> - add CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE
->
->   configs/qemu_arm64_defconfig | 3 +++
->   drivers/misc/Kconfig         | 2 +-
->   2 files changed, 4 insertions(+), 1 deletion(-)
->
-> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-> index 8dffb91e93b..31656699d82 100644
-> --- a/configs/qemu_arm64_defconfig
-> +++ b/configs/qemu_arm64_defconfig
+On Wed, Dec 18, 2024 at 11:00:06AM +0200, Ilias Apalodimas wrote:
+> commit e27bddff4b97 ("imx8m: Restrict usable memory to space below 4G boundary")
+> tried to adjust the usable memory limits on a 4GB boundary.
+> 
+> ram_top is described as 'top address of RAM used by U-Boot' and we want
+> to preserve that. This is defined as a phys_addr_t and unfortunately
+> its size differs across architectures. This has lead us to a weird
+> state where 32bit boards define it 'SZ_4GB - 1' and 64bit boards as
+> 'SZ_4GB' unless it was otherwise defined.
+> 
+> With some recent LMB changes and specifically
+> commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank")
+> the board fails to boot properly although the commit above is correct
+> since it's making sure that no memory above ram_top is usable -- but
+> added to our memory map so EFI can hand it over to the booted OS.
+> 
+> The reason for that is that during the LMB init we add all usable memory
+> in lmb_add_memory(). In that function any memory above ram_top gets added
+> as 'reserved' for LMB. With the current values tha's set to 0xFFFF_FFFF
+> for this board. Later LMB is trying to protect the memory area U-Boot lives
+> in with lmb_reserve_common(). The latter fails though since it tries to
+> add U-Boot top (which is 0xFFFF_FFFF as well) to U-Boot 'bottom'. This call
+> will fail since 1 byte of that memory range is already marked as 'reserved'.
+> 
+> Since we are close to the release, LMB seems to assume that the address
+> is rounded up and is the 'next address' and so does parsing and adding
+> memory ranges from DT files, bump the ram_top of the board by 1byte.
+> 
+> In the long run we should change all of the above and have 32b and 64b
+> platforms define ram_top identically.
+> 
+> Add a Fixes tag although the commit is correct, so people can figure out
+> the broken scenarios in the future.
+> 
+> Suggested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Fixes: commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank")
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Doesn't this work on qemu_arm_defconfig?
-We should test on 32bit too.
+Reported-by: João Paulo Gonçalves <jpaulo.silvagoncalves@gmail.com>
+Closes: https://lore.kernel.org/all/20241216114231.qpfwug3zfqkxn3d5@joaog-nb.corp.toradex.com/
 
-Best regards
-
-Heinrich
-
-> @@ -62,6 +62,8 @@ CONFIG_PCIE_ECAM_GENERIC=3Dy
->   CONFIG_SCSI=3Dy
->   CONFIG_DEBUG_UART_PL011=3Dy
->   CONFIG_DEBUG_UART_SHIFT=3D2
-> +CONFIG_SYSINFO=3Dy
-> +CONFIG_SYSINFO_SMBIOS=3Dy
->   CONFIG_SYSRESET=3Dy
->   CONFIG_SYSRESET_CMD_POWEROFF=3Dy
->   CONFIG_SYSRESET_PSCI=3Dy
-> @@ -71,3 +73,4 @@ CONFIG_USB_EHCI_PCI=3Dy
->   CONFIG_SEMIHOSTING=3Dy
->   CONFIG_MBEDTLS_LIB=3Dy
->   CONFIG_TPM=3Dy
-> +CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=3Dy
-> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-> index 6009d55f400..da84b35e804 100644
-> --- a/drivers/misc/Kconfig
-> +++ b/drivers/misc/Kconfig
-> @@ -568,7 +568,7 @@ config QFW_MMIO
->   config QFW_SMBIOS
->   	bool
->   	default y
-> -	depends on QFW && SMBIOS && !SANDBOX
-> +	depends on QFW && SMBIOS && !SANDBOX && !SYSINFO_SMBIOS
->   	help
->   	  Hidden option to read SMBIOS tables from QEMU.
->
+Thanks,
+Francesco
 
