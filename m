@@ -4,161 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18A22E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 06:41:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E4BE7718A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 06:49:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 307708007D;
-	Fri, 20 Dec 2024 07:41:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 31F6D8007D;
+	Fri, 20 Dec 2024 07:49:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ogFHCH6j";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="sRzydg53";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 986288021A; Fri, 20 Dec 2024 07:41:17 +0100 (CET)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on20708.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::708])
+ id AC1EC8021D; Fri, 20 Dec 2024 07:49:06 +0100 (CET)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20725.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2607::725])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1895F8006D
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 07:41:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF4868006D
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 07:49:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sCvMSS5Ss0WUf9cjCebZa15NXZ6jDYGAJWHenzGxax0O6gxXobikVv4iTBsqUU4K4sSIdrJh6DY3S18/81BpEq55bb0Avtgm7efEyG+vCJE2NLn7lzdzPBEfpBKPtqpKew/oU43VxkBdvvDtAH5dw1T9+NTvaNpJ5Vyx+H0mAfFxx2NQhuBy2+kUF/xBGbC7F8Ba/xHZLjTGMm8iOl74XCdwD6n3ojmHf3det8C4isXQ7417jcssJ8J2ej3ZHqyMc71WGZ6IG5kx+EH+wE1YWSkrd/8/TzFkBmwnJC1iRxnL5oLUmjq3lN139ASaOAfOfKRahB47o21j+LtRsk832Q==
+ b=xsETqOlh7xUxQIk97zu6pLE3tRUpIpD0sgtYO6CuT0K7NH8GaZH7larGBRxwnxzdikz8VgyLTaK9Y2d9MVoRCrW/oyxP+hvpNR182vOyhnokb9GVUFzK33X6nTcsPlezyEtTxoKuW/sFR8mX1AbabQbZXxmOJ+UF1GwKIClXEBSxRjjNDoOYenWtutQQAJfE6aivvgNAXqBD6NPVvNMLbEO6mld6vvrD9bNO+9bU4tBcf7SyJwOCOJeB6u+01Gf4TYGHI6qN+oBgmNNa3ZItRDUN0A50va6aTQPnRs30k1UKwHYO+boyI54C/Mm/Ce1MHNa3+PAFSGgciZqRg2rRmQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G7UxW6KgW1d8iHFRkEdYfo7OWwy08Tn4TQgKBvx6VqQ=;
- b=VUIktpikpVNM8m7IdqDbw24EuAz+NS2XShrsnNKzF9oGRuiEz7eIEV/eK/snmsSmplUA8D5dJcGWk+gz0M9GQTZtxfZPgy7h+FjusuhpESynkvoCdQ8lKGIPnu0Ct2CGfDpaxSlwDne6hzt1A/thhiqbxknj8fEnmZP3GgkyOXxdUAOE8WbweM4jfTVBk6tnY73x+6e3Znndpji1NxM19NviXTsTlMognL0dbNSFATwPGB4iQHqBSF+ZnJxsYzTd9W2sjEwBfsVr6DirCmRpNPlfsU/pvqOtXQbUEnav+UdDADFMtKh8F7h+dR2IVC1/9Ck3mbMjoUGtj0DbVH/QpQ==
+ bh=Pl2IGO0jkxZ9dTQ60GmClc8dgC86v9eZNIi8fxg8ktE=;
+ b=rRluf+kvjaEHmnRDQghu2q0yJ7NpmlNCaDYtSdgwY85aD8p0HJaMFgBbhkZRXUVxYN/6OOdjqwZam8kbufNOzIxeknc9ukUtgjI4e42XEQzUWtjQVH3xO6gfrTxuGk3R2CNm8zdPOKEcoeFVdfc8aiZ2LHQwj0Vd7+z6//27DZhM72wqOP2/vGKx6y4qDy4yoYJXFWpju2JUZTnb3taxVVnMZ+wkDY++eO6hd8OZOLLIZ+7d1ppOInO04UiYH7PNn4c111qUaPwENH0KS+1ujS8N0dn01zy1Wk8BsujNChy7SWuQzP6a4GOnoNmCWtl6yj56Ap1uNmxeZGK9RYRqyQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
  dkim=pass header.d=phytec.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G7UxW6KgW1d8iHFRkEdYfo7OWwy08Tn4TQgKBvx6VqQ=;
- b=ogFHCH6jAhNHPMxwxcx921lIqC6PhAv3ZxqbThx+iyuCalghfDGwdeGUW5Iw7+EFJzH39Ujp5dB64OTee8qXmekGZUBtIIswEEKsTig0qCoXJWa+6pbYcHGS8xYBP2JEbUcviLcPSnMg3VGP8nkuZrU42EvOqkR1/1wIPx0Kq6Rk+j6Z5sVm+e80OazztF6Ohn8bjw2NonE3tTtZzkwCmChdkWbVX8Sdmy8/2g/OFyulA5ueJA/8OjDj7s6OylGW/BRArcdWY93PmB46wBSiJsKF9ps7N7/1kz4AFYBOWVYCE+WJBjYgMB4B5EiOg+D/onU8kxt8RlzvXwgvc6MRYg==
+ bh=Pl2IGO0jkxZ9dTQ60GmClc8dgC86v9eZNIi8fxg8ktE=;
+ b=sRzydg53a2fBAcfhc+I/E0LOxgvYkFKO45X8G+f1SIyv9Xhf5Ie93vr3UcSQImjCS9zAH42AcqGeVA+dfsZ5bqfhMnLZnN42zLDq5AiIhmol0GtLDrfo8wg3yWVkNGIRndsOWLOK2l5IMDpf6k0d39BITj4Re4twvvN151A4zrDtdaDlFWaq7iBlmLb45WP58idi1sJkrUdTeXGvj35uCVBLcf7YtDzxUpCisEcAkROxuz/O5rxZFKVuOIhlKpDgTtY1Bg7WIms3E2wujbwF1e24nvJRpDQFmzEVS6EoTqpQNHeHhqRVse5c2ua0Dz+wZNZrTUBXUcIuUo3uHv6znw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=phytec.de;
 Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
- by DBAP195MB0825.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:1cc::22) with
+ by GV1P195MB1926.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:9d::5) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.13; Fri, 20 Dec
- 2024 06:41:12 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.14; Fri, 20 Dec
+ 2024 06:48:59 +0000
 Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  ([fe80::369c:a760:5bf9:8d4a%6]) with mapi id 15.20.8272.005; Fri, 20 Dec 2024
- 06:41:12 +0000
-Message-ID: <90228225-eac6-4376-baaa-f57eee3ff3ef@phytec.de>
-Date: Fri, 20 Dec 2024 13:41:06 +0700
+ 06:48:59 +0000
+Message-ID: <4d059cda-778d-44af-9fb3-a539a2ec06ca@phytec.de>
+Date: Fri, 20 Dec 2024 13:48:52 +0700
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/9] Inline ECC Series
+Subject: Re: [PATCH v5 9/9] board: ti: Pull redundant DDR functions to a
+ common location and Fixup DDR size when ECC is enabled
 To: Santhosh Kumar K <s-k6@ti.com>, trini@konsulko.com, nm@ti.com,
  vigneshr@ti.com, u-kumar1@ti.com, bb@ti.com, m-chawdhry@ti.com,
  vaishnav.a@ti.com, j-choudhary@ti.com
 Cc: u-boot@lists.denx.de, n-francis@ti.com
 References: <20241213103129.332246-1-s-k6@ti.com>
+ <20241213103129.332246-10-s-k6@ti.com>
 Content-Language: en-US
 From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20241213103129.332246-1-s-k6@ti.com>
+In-Reply-To: <20241213103129.332246-10-s-k6@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: KL1PR01CA0071.apcprd01.prod.exchangelabs.com
- (2603:1096:820:5::35) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-ClientProxiedBy: KL1PR01CA0128.apcprd01.prod.exchangelabs.com
+ (2603:1096:820:4::20) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|DBAP195MB0825:EE_
-X-MS-Office365-Filtering-Correlation-Id: bdaf2572-d6ea-4b5a-6e82-08dd20c14b5b
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|GV1P195MB1926:EE_
+X-MS-Office365-Filtering-Correlation-Id: 28828d50-db7b-4a0e-5c1b-08dd20c261de
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|7416014|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WklHUVNlSVBpUjZKb2xVU3RPWnY3OCtRVmkxU0NTU2YwVjFIUWd4MDdZVDla?=
- =?utf-8?B?QWM5MUlMbzNqTksrZzBsU0F4eWtxemw4UE1WdnpqRVNwSUwwYUdrV3o3MTI2?=
- =?utf-8?B?cnFQSU5aOHZZSXFKWWUrK0RNNmdpek5uRTRtZk9xVWxEamlCaW04L1NkUkR1?=
- =?utf-8?B?WkhMenViNEJMM3FralQzUTZDMFlROElTVzU3dS9yUTcvR3huRTg4Zkhpem96?=
- =?utf-8?B?K2lSeTM2QWEySkE5SmExRHlIRitXNm5NUno5TTliUElQR2dadEJWeEl6QjhE?=
- =?utf-8?B?bmR3eTVYSXBGQ2ltQzFIc3JTYUwvbUNvWVJCOS83aEZJdjJkSi9ka0gydVlj?=
- =?utf-8?B?b1VqbnU5cTYvbVlLQjJ0VXBaRGZ3aUVTUk0vV29xZFFubFBTL21OMHkwSTNq?=
- =?utf-8?B?SXRnaGZ1MENRQk40aDg2MWlKeEo4b0ZPc2pYOWh0dGR4bzhwOUZSckxYRVI3?=
- =?utf-8?B?a3BVQTQ3QWVIT2dSYlRJVlh4MFZOZlZhUlpISENHWHF4ZlBTTXNnY291bnV3?=
- =?utf-8?B?QUMwVVYyOVN5VG9rWEpqZHhBcU9EM3FuclY4Qmp0V2Z6bkd0aW9RY3g0dk9l?=
- =?utf-8?B?U3NtVHhFSVBzdTVLeVh5dWJDTjF1YmVVek45cDNSVmdTZGR2UjRmVnlxQ3JR?=
- =?utf-8?B?cDR4ZUJWa0ZieHcvYmJGQ0VNOFNlcFRaSzJ1RDErR1VlVEFxUGo3c1NONm13?=
- =?utf-8?B?MGJ5UnQzNFNBK05UQng2eVFkVzZTaklwdXhNNjlFRW1nSTQxZVFvSG1RTWZu?=
- =?utf-8?B?dkg0M05PaUkxVzlJVjF4cy93WXRISWx6OW5NSnoybm9RMVZqRFd1SElSVmFj?=
- =?utf-8?B?cWtiOWxnUVZoYUo2ejl4Si9HcEtCSG41Z2tDNElVZGhlRmRvWFd5MjQzMVAx?=
- =?utf-8?B?MXJvSnBDdWVvNElGWUVyZTc0Q2lXMFRSNDA2OXdCa0hCVlBleXRCdlZ6NmR5?=
- =?utf-8?B?cWYyUU1Wbzg2NnNlVm5zbkpTK1dBL0IyS1djdzhQUWRlUXFGTXdYSTQvbHB5?=
- =?utf-8?B?RzV2aDZZSXZ6c1ZsTkFCYno5VCt6VC9XekZWS3VrczFJcTVrMFJwb0FJTkZx?=
- =?utf-8?B?Z1l1MWUzTUxpM0R0eDRVSUN6UGhYci9WN1V4VW1QaUk4K2krbURqbGxTWXd3?=
- =?utf-8?B?QSt5bEdlZXdzSzVFTWM2OVNHc3U3VjBrblZYcnZXMzRSREdlQTBQT1p4WHhu?=
- =?utf-8?B?elhmcXkwb09EMUxzdE1hSW1KL0xvbDJMRnlyMk02NnVyY3RobEJ0aXhOWHo2?=
- =?utf-8?B?bGN3aVN6d2VUbDVNUGM4VE1EelJON2FYT2JxOHVMRmJiNEN5YWhYbGlKODJ1?=
- =?utf-8?B?NHlIRkc5L0svbWpMR2NiNTkwcmxhdEk1UjBjV2RnYmQ0WTloMko1VFFPK2Zr?=
- =?utf-8?B?TGJGMnBZekdNbklqSDZWbFhSaXdhUWhyVEJYUlFnSmtVRm40VGxzbjVtQ2NY?=
- =?utf-8?B?OWNIdzRaeWZuaTc2Q3pYd1pxTnJYcHZpMEw5MWUxUkxEaFQzeklwZG9PN3VG?=
- =?utf-8?B?SzdEdjRuT0I5V2MwNnIzcVozN3BHOTBhWnBSVEw0Z3dneUk5NWNZaFBrY3J3?=
- =?utf-8?B?dXkyUmkxQzR2aTJmV2h4VVRyUDNVY0hlUms2TERYMlYvZHJQeTQzT1lOZDZn?=
- =?utf-8?B?ZHBlUzVGcGZ5aG1mQjZuMDB6enFIYklrMFl2SW02VnZXaERoZWc3cmc5dzR6?=
- =?utf-8?B?WW9ISzRwbWJIYjFxYzBkWVR6aTRJbGhjWWNuUkwyUkQwQUNtaGV1SG1iK3VB?=
- =?utf-8?B?d3BZdXZDazlUL3FveURObDdnSHdDVnl2ZFE5VVRDR2t2aGxsZFg3Wng3ZU55?=
- =?utf-8?B?aFB4RUpoeUU5d0ZOQVo2QT09?=
+ ARA:13230040|1800799024|366016|376014|7416014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?c1o0YWhQNTM2cERuRkVScnZ3QW1jb1pWQlRjWXBPTEFRM2huN01YRzdzRDBj?=
+ =?utf-8?B?aXNwSy8wRFp0QVl0U1hPN0NnRmgzbmo1WnBhdndkc0RXRVNLTTlEN244NUNl?=
+ =?utf-8?B?Z1h4OStCTXhoSHVzWklvczRSR0c0RzJLWU1SdkZpTllIa0dXaFk3RkpmUGx4?=
+ =?utf-8?B?K3FUNlo5VHRoTHRjekpTMXp3elk2aldLNDFMSTN5ZjZlVzFSMm4vSWpaSXVn?=
+ =?utf-8?B?M1NHMHc4OVpORm9adVpvZlFFcnBKcjF1VHdac2dPZXdkSWQ3WWJzMW9lT3lD?=
+ =?utf-8?B?YWVTbUlKMlVCVEtnTzM0ckpzUGFqZEY1NTNCcU1TYzhzcE8vREk2cU1BUFo2?=
+ =?utf-8?B?VXBVNnNtSDl4dGJTTkY0REh6STIxWFVHSXBNdTRRMjBiNStENHBMN3pzUFBP?=
+ =?utf-8?B?cUJaUlg1MUxPTDVpN1hjZmJ5d3VOczkvWlNRZktwdnNOWmZqNDROeUFOeE5M?=
+ =?utf-8?B?UEJoWjU4QW1oZXVscXc4RzQ3Z1BEVndmekxueFoxS0I2bmt5TEJ2VzJjZUZV?=
+ =?utf-8?B?VitYcmF4UzNqUEp3d0lzZkg3UEs3aHNYU29IbTVFY0ZoVjhzZTFOQklRdnR5?=
+ =?utf-8?B?WitLR3RhenNUcGRyOU12M29VTEZLVnczR096WVREcEtua29WRFhnNWJ5NHFS?=
+ =?utf-8?B?ZUJrenVqT0RENDB4WjNQcWJ6dmJ5dVVvdTlFOVBMU2poTFZsTzJyQ1JMWUhX?=
+ =?utf-8?B?NUhUWmFVK29ZTE1DVTlFc1RDT25Da0hQcUZVVk05S2ZiUlJzeUU0QW56YzJG?=
+ =?utf-8?B?YXFaWlZpZFFLYURjMmdCb0ZyejdweGpSQ3NBZk8wSVluL1RtQ2d3V0ZPRzI2?=
+ =?utf-8?B?K0J0Y0o4N1o3c3Nka0ptaUJBOU5jUFpkYkdpQlpqVWJiQnJxSkpBalVoY0dw?=
+ =?utf-8?B?Skp0djJhZjhNTi9ydVJqMXBtRTRVcFZkSUlKOG5pK25TWjk5NVVkSjZ1V0hN?=
+ =?utf-8?B?TWdTKy8xOFh4R1NROXl4ZEI3TzE4cFppREk4MEZEWjVYcFladGx6aVZVODRT?=
+ =?utf-8?B?bWlEU1hQb2lCblpmWUhuaS96Z2wwVGljQmxqTDd6WEljVDQzS3FQODBkWGhL?=
+ =?utf-8?B?NVFCNWJvQzk0VFNSbThjcDNReHlTUVF5OWwwQzVERG5mckt3SENuWks0YXZ6?=
+ =?utf-8?B?NVlSMFY4ZWl5ckZXeUt6Q0dVL2dGdjVvOFZKeWdvUndydGVZM3RsenVnZkV4?=
+ =?utf-8?B?aVFvNXFPaTN0WTJaWFRzQ0d0UE5INEN1OU54OERTb3FjanluY1ZNbGhodzFw?=
+ =?utf-8?B?czlZajhDdSt2VFNTTEF2NnZDcXhSRFNaWmp4Nld6Zmsyb1VMdjltYjFaTmk2?=
+ =?utf-8?B?Ym9jaUZhMi9yMWkrdzB4Y05wMlgySXB6b1ZIV0I5Z3RRMnhnUnZWeWYrMmlO?=
+ =?utf-8?B?TkNWeUZRc1lyck1pMmpxelVkMkN5TzZ3bEN4YlgrYzdUSDJTZE8wcllTKzdh?=
+ =?utf-8?B?L21hQW41WldRbHJqUEEwbFlKVFNRbHB5TjV2UUQ1Ulk5U3dYbzVqUjJlWEEv?=
+ =?utf-8?B?MTV3ck8vT3pLbGFtMTU4aW04cmxTOWZEeVJVczJnRUZJOUdBb3BPaWZDcVBa?=
+ =?utf-8?B?TUhHSnRCWnlkL25jUUNEK3poS3lQd0tNSWluM3Q0dG9CTGpZejhuVHh2ck54?=
+ =?utf-8?B?VE00QmM4NDdBdlY1K1N4SEVuNzMxb091UzFnS3l4Um02TDMyVXhBNUdCWFAx?=
+ =?utf-8?B?WEJHUldpYmRSVG5YcENXYnZuZ3dKaGZwMXU5SFVSa0c5R0hqQjZxaDFoNDls?=
+ =?utf-8?B?VEtuY0FFQzlPSlRUclV2b05mVTgxb3RxR1JxWlQvUS9QN1FlQmw2czdibHYx?=
+ =?utf-8?B?MHg0U1hxT0xnNHI5Y1F5Zz09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(7416014)(376014)(7053199007); DIR:OUT;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014)(7053199007); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QVJrejFTUFYrQ24rbWFFM0QzaCtVRkRtbHZpRDhmRlovbUxuUXE4K0RCc0VO?=
- =?utf-8?B?TE5ZWkZhMTJFYU45b1dvVnM2cnE3bVAzM0ZSRTRqRG1waVAwd2FrUlJ1TmY1?=
- =?utf-8?B?cE5mQitxSzhsTjNPSk1DR3ZERjdhTjhpTVBvVW0wVWFzUERUaEppeTdKdGVw?=
- =?utf-8?B?QkxieTl6Ri9TNURPZEd1YnVxTWJLSDlScGQvamttelBqU1g4bi9veXVjWWZY?=
- =?utf-8?B?eVN4RHQ2V1h4QVBlSGhVeTBDaXppM0VQRXYxVVdNdWNxM1B4VVVSVkdGN2ky?=
- =?utf-8?B?bEpsY210TVpFeUkyNGo2WXpXNHY2alVLTjFaU2t1REdmcXFuUHpDY3o2VUNi?=
- =?utf-8?B?UTNqV1A5VlljeTVQUlF6YnpRNEtSYXJqSXJBeWNDdy9uZlJxODd5V1hUeFpk?=
- =?utf-8?B?RHZhMms1L3ZnUzdZL29HMm5McXRYeVM3aTR0RTRiRVJZUFFFeEUyd2hsSlY4?=
- =?utf-8?B?TFp4VUVrS2k4WjZtdVVPMXRXNGhSdHlBMEpZalBpejZEelV6anFacFV1aGtL?=
- =?utf-8?B?RnBzaGZXMHo2YmExNDRUcUN3RVVtT3c3a05qYXVzb09iYkJRTVVwWS9TWWI0?=
- =?utf-8?B?dHdHaVlTK3E4UWcxWERSa1N5c3c0QzNIdk04enIxYXFlN2FtYitSeTRUUGRZ?=
- =?utf-8?B?dktOWXRWTzFMWE0rTmhyNFZNZ0RJUlBIT1NvYVgveU9ncHdWRGlybFhjTXFy?=
- =?utf-8?B?SmY2ZVdOVCt0dHBiZXNSVThtWERBL3hSQlFVa1lRU1lJK2JraUNsaVdqUjJn?=
- =?utf-8?B?OE0rMzhDVTdVU1pkSEpqVW5zMkV3ckdVNW5PS1h1VkhTSkMxMS8wUTkwYXps?=
- =?utf-8?B?d3l3UGlSR2FSMnJWK0FEQnJYeVNtTGtLWUMzMDNST0xGMUFjQnBndWlPWmh1?=
- =?utf-8?B?NkU4U0FmOTV4MmlDUDZnMkZiZDVyQldiVllQOU9sZVlLSTA5VS9YTlExWktQ?=
- =?utf-8?B?Ym1nQ2xvM0RDMnJKd2JpQlI2RVJGZ25hRUNIUnVyREoyZmpNck5ubzN5RlMw?=
- =?utf-8?B?eGs2bFMzdy90a3JES3h1c1hBeGhFZ3g3QTU0M2FQcUw1Qlo2UDA4OWFBZUVu?=
- =?utf-8?B?eDc3blJ6QUJ3Q0tuV0hTclAwZDNLQXJ0NEJBMmx0RU5hUSt2aHUxcENQYU9Y?=
- =?utf-8?B?Rm9PSDhrSnpLajh1emQ4VkVhdVN2V3ZpZU41NWgrdGJDalEyVzZZTnk4TWNZ?=
- =?utf-8?B?bkxwLzhGbWc5WExTdUcyZWJreWp3ejRqRk9xdXBMYWNvbWNzZTJQNEpwRElY?=
- =?utf-8?B?a3ZOaUFVVjhmNXpIL3JtZWdIdVkyc0dVRFdHQWljOHA4ekVnaUQxWkFqdHFn?=
- =?utf-8?B?MzMrOFFVTnRHbVRZMVFUbDV6QWVxaWNidFVFcVFyaXJBcmliamRHV3Z3eGE1?=
- =?utf-8?B?b2IyZnI5d0o2QzZha0VMYnlyUUZLdmNvclRuZkxkVi80MUw5VVNUUWFxaGtI?=
- =?utf-8?B?WnZQUVV0U2hiVFhMUXlkRTUxOGlXVUQ5aTl4UjB4aUt1b1h6V2hGVDdEZ1lY?=
- =?utf-8?B?RU9uMG03WTRjanhIdGIxU3hBTm1SbEJpRUYvNmQza01tY1N3bjRIaElEa2tZ?=
- =?utf-8?B?Q2F6TVFseFpPbkhsb3kwVXhMbFNMUUNVSFpUR0VwWFR1aUpnSGpoZ3BjVUhJ?=
- =?utf-8?B?YnpGR3pwR1BsSlh2SGdGaFdKQ1BoVEJkNmtKem9FdFNCYjd2VWJkb0pINWtJ?=
- =?utf-8?B?Z3RJQjU4SDhpQWlUbWdMYmpkbWFKcUs4T0hNOWtFTDVjTVlrNjFCTTNocXhX?=
- =?utf-8?B?Y0hPU1R5MXFDRTFWY3gvUmtzV2ZYOUR6WnU5ZVVVY0hkd2lUVTIrYjE3RGpZ?=
- =?utf-8?B?KysybEtUc0R2eWJCbkQ4MjNQVzZvZEJ5TXVndVRqWWhnN2YvbnhiSHpJTTFk?=
- =?utf-8?B?amVXUWx2VDFOekhKOFFTZ1MrajRRQTZSQjNWV3BzaDEva3pKN0N6bktsa0RX?=
- =?utf-8?B?dmEvbXJ6RmtZT2RrRkg3c0s2a3N5UUJOeGdvalByRXlxTUQ4SjlqUWRoRDR4?=
- =?utf-8?B?bUNxL1h6WGU2bXJwOHZuazRsMXJ5aGNjcHJUYnczbmVUUEd0M2ZnbUF0SUZE?=
- =?utf-8?B?K3ZzOExtT01nVVY5a1RiOVRGOGFuQmtpbWdrQjZ0bDVJOGRzbTBBWHBDQkx5?=
- =?utf-8?Q?Vsx1zbjtkvNwdxuY/1xWfZrNX?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bXBvdWJqckE0V0R4ejk0Q2hyU2d6RXB1Zk1qMXhyZEJkZXpLKzhIVTE2aCtr?=
+ =?utf-8?B?UURxOVBOa2pVZjlSVzU5WWpSaWxmQkk5V1oyYTg4YzNqMmJvZW9NRmV0cVRO?=
+ =?utf-8?B?MmZ1RUNnTjFxQjlhTnNtcjVqdVc4RDVmakxYejVlbTFHZlExeVNOb3l0SWZG?=
+ =?utf-8?B?Y1E2ci84ZGNIWjhSQmV1QmE5QjA2Tk5OWGtQVlBDdmxIalVwK2MrMWVXTS95?=
+ =?utf-8?B?MHg4SU4yV0h3U1luUmpLOFc4WnpjSW11WWNSOWZyR0Rja2RRZ1k0N2JjTGg4?=
+ =?utf-8?B?akZ5dmMxTlJNVXMvQlZIU1dVQWdZeDBlOXpVRDVERTBZbFIrR2N5MWJXTDRF?=
+ =?utf-8?B?UmtZVnFxS05vQ3NpRnY2ZktTL2hVL0NPN0xOSWk5MU9LUHY2TjNXL0lPMFZ4?=
+ =?utf-8?B?NlNUckZ6UDN3dXJWNnpHNU4zc1BhSmxvRnBxcWJ6MkVqRk5sWXJuMm1iZjQv?=
+ =?utf-8?B?RTdFcEdSNERIK1ZvejRraVoybU85c2grU0NBNkZWRmZsZG55cVE2TTlZMmh3?=
+ =?utf-8?B?VENQaUVNN3A5cEhWZFA3WnRNSUdPYnljODJyVHkycGZtRjNLZW44WUR0Smwr?=
+ =?utf-8?B?UWx4RjVoNWZUeXhCQkVJNWE3YzVDdGo5Z3ZDeTAwdUZTY241SUNPMm5DSWdu?=
+ =?utf-8?B?bXZEVFFINms3SXhickM1TUkxOHJCRkR6VnpLaDhzMVczaG1VNDUvc0dQT3Nk?=
+ =?utf-8?B?UzdNUFA0WVJPcTBhQkw4dU9xUFJTUzg5N2V4MDhpU29jZkxvSHVKS2RKOVY3?=
+ =?utf-8?B?eFl6Nkoydi95LzVObFB5TDBnL2E0NWZLQXBTWXBDdThoOStxNFM1QnVoV0tQ?=
+ =?utf-8?B?UnJ2bko1dXRWbXI0SWtHaDQ3REtTMWFFeU5BWTBJSDlnUmxwZXlhZHB2N3dB?=
+ =?utf-8?B?QzNMQmhsTkk2QVBmYVVFTkh0dXd1V1NIdUlUQmVJWDZISkFnVlZyRFlHVGRw?=
+ =?utf-8?B?cVRQK0FLTjk1YUxYdTRobWZ2c3IrMkhGSXNUQjdYNERrTXpld3dtYVVOV0dQ?=
+ =?utf-8?B?NWVUYkZIdTFGYXB2Z0JkcUx3Zzd3dDBmR1ZJWmEzRjZSanhQYUVFNmRneGdT?=
+ =?utf-8?B?ZGlweko0c2dEaGhZNVlWcDBqNkw1NjhUbFQvVlBGTXoraEFLeUZ0Z0R4WEt3?=
+ =?utf-8?B?dUQrdERqY0xrbStRNmtPWU9uS28vZ3Q1c2FKMUwzSmZJeEp3bFBGc1AzTnN5?=
+ =?utf-8?B?dkgyeDcydmhqVWgzTUhsbkdLblFKeHgyOVJsWjhKclNWbWxidEg0ZDZOQ3ds?=
+ =?utf-8?B?d3JzditFOVQvbEs0azBrSWZzNUVNT2FQT0p4ZkFDUXA1S0hLWVJlakphZ1ky?=
+ =?utf-8?B?ZXVLUDJiTnNIbmEzcXdad0Z2YzcvRThMTFQ5aDBudmhIU0tMcEorU1kvMlY1?=
+ =?utf-8?B?S0sxYTJkRjd3ZlNIU255QWxHSTFMOEhwVit0Tko1dGg3UTdxTzFLNjhlV2Va?=
+ =?utf-8?B?VXRhYW8rci9Kc05UbTVhYnZpbjFmVndWMEh4WlpuWVFZQUcvOURaUFp5YVBF?=
+ =?utf-8?B?VXhhcVk3YzFrZUJOQVVnSjNmRzlhcHB4bHhFeGNnQm5UUlR2aENwT2tKZ0R0?=
+ =?utf-8?B?bHgrdU5MR3BtVnFPNjVVY0lETENKSGNMWTducTRsVVhBZ1E4TE1WMkNOck8z?=
+ =?utf-8?B?ZTNaall5VGFPbDlZM2txTDAzNHJRM0FwSUZnaEF3UUNGeStCRzlyN2tIRk1J?=
+ =?utf-8?B?dU1YeE9UMzU0Vjc2VE9zSnQwNzJkL1NmTXBhTy9UNkthd0MrVGhwdUdNc05F?=
+ =?utf-8?B?NEYrWFBKT3BiYTBTU3BQbjJyd2I0WWYzMXM5NG5iSy93cGFWM0pHdEdtcXdN?=
+ =?utf-8?B?WEtvZVZxZUF4U0N4c2VqQmVadVBCRmJuSmtIR0p5QTFCY05ZNmxSUkc1dkhz?=
+ =?utf-8?B?enBQTVFJQXJocVVRcUVDVHRtYjZMbk1US2Fxank4TWtFdlIyWm9iY2FxRWd2?=
+ =?utf-8?B?aHZQQytkdmROeTJmWXp6ZnliRTd0eTNaWnU0bEp4dWJVUGpOMy9nYUJacml5?=
+ =?utf-8?B?L0F4WFBaODBoT0ZXWS9zbFpGeDM1R1Jxb0FzUDlzSURZTDA1aDhWMFJ0bFA1?=
+ =?utf-8?B?K0gxZ1BwN2k1TDYvS0VrQ2FxS21YUmp1Smk3dEFPejdmbEFQT09MMWpCQi9n?=
+ =?utf-8?Q?IHXg6aC4fm7e27YimC3x2Q43o?=
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: bdaf2572-d6ea-4b5a-6e82-08dd20c14b5b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 28828d50-db7b-4a0e-5c1b-08dd20c261de
 X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2024 06:41:12.4554 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2024 06:48:59.5361 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0nyXVSWg1QGIvSS9Il8erK7XP1QOtJd8tKVCqW+HTYZrmkvsOm09OeblGDnuUcHqFqrClwAHoaHs0HfskZTZlA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAP195MB0825
+X-MS-Exchange-CrossTenant-UserPrincipalName: b0eVoYXed1mDekqHAteJkuboW+KLGokoQE2UdnzknVJ0xDns8HdujhLLryLk34QNHKCd2Dfpeoyu9wY7lYhFJw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB1926
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,121 +177,704 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Santhosh,
-
 Am 13.12.24 um 17:31 schrieb Santhosh Kumar K:
-> Hello,
+> As there are few redundant functions in board/ti/*/evm.c files, pull
+> them to a common location of access to reuse and include the common file
+> to access the functions.
 > 
-> This series is to:
+> Call k3-ddrss driver through fixup_ddr_driver_for_ecc() to fixup the
+> device tree and resize the available amount of DDR, if ECC is enabled.
+> Otherwise, fixup the device tree using the regular
+> fdt_fixup_memory_banks().
 > 
-> Add support for Inline ECC in DDR for AM64X, AM62X, AM62AX, AM62PX,
-> J721S2 and J784S4 devices.
+> Also call dram_init_banksize() after every call to
+> fixup_ddr_driver_for_ecc() is made so that gd->bd is populated
+> correctly.
 > 
-> (1/9) Add ss_cfg reg entry
-> (2/9) Enable ECC priming with BIST engine
-> (3/9) Add a function to store base address and size of RAM's banks
->        in a 64-bit device private data
-> (4/9) Setup the ECC region start and range
-> (5/9) Enable ECC 1-bit error, 2-bit error and multiple-bit
->        error interrupts
-> (6/9) Add CONFIG_K3_INLINE_ECC
-> (7/9) Remove 'ti,ecc-enable' flag
-> (8/9) Set default NR_DRAM_BANKS to 2
-> (9/9) Pull Redundant DDR functions to a common location and Fixup
->        DDR size when ECC is enabled
->        
-> Changes since v4:
-> 1. Make dram_init and dram_init_banksize weak at mach-k3/ and define at
->     board/ti/
-> 2. Remove 'ti,ecc-enable' flag
-> 3. Minor changes like patch order change (8/8 in v4 to 1/9 in v5),
->     use 'u64'
+> Ensure that fixup_ddr_driver_for_ecc() is agnostic to the number of DDR
+> controllers present.
+> 
+> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 
-Tested on a phycore-am62x with a 1 and 2 GB variant, so you can have my
+Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
 
-Tested-by: Wadim Egorov <w.egorov@phytec.de>
-
-for this series.
-
-> 
-> v4: https://lore.kernel.org/u-boot/20241021044024.835846-1-s-k6@ti.com/
-> 
-> Changes since v3:
-> Pull redundant DDR functions to arch/arm/mach-k3/*
-> 
-> v3: https://lore.kernel.org/all/20240523050430.455201-1-s-k6@ti.com/
-> 
-> Changes since v2:
-> Removed 'default n' in Kconfig as that is default setting
-> 
-> v2: https://lore.kernel.org/u-boot/20240510084707.1903133-1-s-k6@ti.com/
-> 
-> Changes since v1:
-> Add support for J7* devices.
-> 
-> v1: https://lore.kernel.org/u-boot/20240131060213.1128024-1-s-k6@ti.com/
-> 
-> Test Results: https://gist.github.com/santhosh21/88de920771ed2efa0463a5a367cb8d7b
-> 
-> Thanks and Regards,
-> Santhosh.
-> 
-> Georgi Vlaev (1):
->    ram: k3-ddrss: Use the DDR controller BIST engine for ECC priming
-> 
-> Neha Malcom Francis (2):
->    drivers: ram: Kconfig: Add CONFIG_K3_INLINE_ECC
->    arm: mach-k3: Set NR_DRAM_BANKS to 2
-> 
-> Santhosh Kumar K (6):
->    arm: dts: k3-*-ddr: Add ss_cfg reg entry
->    ram: k3-ddrss: Add k3_ddrss_ddr_bank_base_size_calc() to solve
->      'calculations restricted to 32 bits' issue
->    ram: k3-ddrss: Setup ECC region start and range
->    ram: k3-ddrss: Enable ECC interrupts
->    ram: k3-ddrss: Remove 'ti,ecc-enable' support
->    board: ti: Pull redundant DDR functions to a common location and Fixup
->      DDR size when ECC is enabled
-> 
->   arch/arm/dts/k3-am62a-ddr.dtsi         |   7 +-
->   arch/arm/dts/k3-j721s2-ddr.dtsi        |  12 +-
->   arch/arm/dts/k3-j784s4-ddr.dtsi        |  24 ++-
->   arch/arm/mach-k3/Kconfig               |   3 +
->   arch/arm/mach-k3/Makefile              |   2 +-
->   arch/arm/mach-k3/include/mach/k3-ddr.h |  15 ++
->   arch/arm/mach-k3/k3-ddr.c              |  72 ++++++++
->   board/ti/am62ax/evm.c                  |  17 +-
->   board/ti/am62px/evm.c                  |  17 +-
->   board/ti/am62x/evm.c                   |  63 +------
->   board/ti/am64x/evm.c                   |  73 +--------
->   board/ti/am65x/evm.c                   |  29 +---
->   board/ti/common/Makefile               |   1 +
->   board/ti/common/k3-ddr.c               |  33 ++++
->   board/ti/common/k3-ddr.h               |  12 ++
->   board/ti/j721e/evm.c                   |  29 +---
->   board/ti/j721s2/evm.c                  |  35 ++--
->   board/ti/j784s4/evm.c                  |  17 +-
->   configs/am62ax_evm_a53_defconfig       |   1 -
->   configs/am62px_evm_a53_defconfig       |   1 -
->   configs/am62x_evm_a53_defconfig        |   1 -
->   configs/am62x_evm_r5_defconfig         |   1 -
->   configs/am64x_evm_a53_defconfig        |   1 -
->   configs/am64x_evm_r5_defconfig         |   1 -
->   configs/am65x_evm_a53_defconfig        |   1 -
->   configs/am65x_evm_r5_defconfig         |   1 -
->   configs/am65x_evm_r5_usbdfu_defconfig  |   1 -
->   configs/am65x_evm_r5_usbmsc_defconfig  |   1 -
->   configs/j7200_evm_a72_defconfig        |   1 -
->   configs/j721e_evm_a72_defconfig        |   1 -
->   configs/j721s2_evm_a72_defconfig       |   1 -
->   configs/j722s_evm_a53_defconfig        |   1 -
->   configs/j784s4_evm_a72_defconfig       |   1 -
->   drivers/ram/Kconfig                    |  10 ++
->   drivers/ram/k3-ddrss/k3-ddrss.c        | 219 +++++++++++++++++++++----
->   35 files changed, 417 insertions(+), 288 deletions(-)
+> ---
+>   arch/arm/mach-k3/Makefile              |  2 +-
+>   arch/arm/mach-k3/include/mach/k3-ddr.h | 15 ++++++
+>   arch/arm/mach-k3/k3-ddr.c              | 72 +++++++++++++++++++++++++
+>   board/ti/am62ax/evm.c                  | 17 +++---
+>   board/ti/am62px/evm.c                  | 17 +++---
+>   board/ti/am62x/evm.c                   | 63 +++-------------------
+>   board/ti/am64x/evm.c                   | 73 +++-----------------------
+>   board/ti/am65x/evm.c                   | 29 +---------
+>   board/ti/common/Makefile               |  1 +
+>   board/ti/common/k3-ddr.c               | 33 ++++++++++++
+>   board/ti/common/k3-ddr.h               | 12 +++++
+>   board/ti/j721e/evm.c                   | 29 +---------
+>   board/ti/j721s2/evm.c                  | 35 ++++--------
+>   board/ti/j784s4/evm.c                  | 17 +++---
+>   14 files changed, 190 insertions(+), 225 deletions(-)
 >   create mode 100644 arch/arm/mach-k3/include/mach/k3-ddr.h
 >   create mode 100644 arch/arm/mach-k3/k3-ddr.c
 >   create mode 100644 board/ti/common/k3-ddr.c
 >   create mode 100644 board/ti/common/k3-ddr.h
 > 
+> diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+> index 8c4f6786a5b5..5ce7fc62d80c 100644
+> --- a/arch/arm/mach-k3/Makefile
+> +++ b/arch/arm/mach-k3/Makefile
+> @@ -6,7 +6,7 @@
+>   obj-$(CONFIG_ARM64) += arm64/
+>   obj-$(CONFIG_CPU_V7R) += r5/
+>   obj-$(CONFIG_OF_LIBFDT) += common_fdt.o
+> -obj-y += common.o security.o
+> +obj-y += common.o security.o k3-ddr.o
+>   obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
+>   obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
+>   obj-$(CONFIG_SOC_K3_AM625) += am62x/
+> diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
+> new file mode 100644
+> index 000000000000..95496e1c59dc
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
+> @@ -0,0 +1,15 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2024, Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#ifndef _K3_DDR_H_
+> +#define _K3_DDR_H_
+> +
+> +int dram_init(void);
+> +int dram_init_banksize(void);
+> +
+> +void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
+> +void fixup_memory_node(struct spl_image_info *spl_image);
+> +
+> +#endif /* _K3_DDR_H_ */
+> diff --git a/arch/arm/mach-k3/k3-ddr.c b/arch/arm/mach-k3/k3-ddr.c
+> new file mode 100644
+> index 000000000000..6e3e60cdc865
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/k3-ddr.c
+> @@ -0,0 +1,72 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2024, Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#include <fdt_support.h>
+> +#include <dm/uclass.h>
+> +#include <k3-ddrss.h>
+> +#include <spl.h>
+> +
+> +#include <asm/arch/k3-ddr.h>
+> +
+> +__weak int dram_init(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +__weak int dram_init_banksize(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +#if defined(CONFIG_SPL_BUILD)
+> +void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
+> +{
+> +	struct udevice *dev;
+> +	int ret, ctr = 1;
+> +
+> +	dram_init_banksize();
+> +
+> +	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+> +	if (ret)
+> +		panic("Cannnot get RAM device for ddr size fixup: %d\n", ret);
+> +
+> +	ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
+> +	if (ret)
+> +		printf("Error fixing up ddr node for ECC use! %d\n", ret);
+> +
+> +	ret = uclass_next_device_err(&dev);
+> +
+> +	while (ret && ret != -ENODEV) {
+> +		ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
+> +		if (ret)
+> +			printf("Error fixing up ddr node %d for ECC use! %d\n", ctr, ret);
+> +
+> +		ret = uclass_next_device_err(&dev);
+> +		ctr++;
+> +	}
+> +}
+> +
+> +void fixup_memory_node(struct spl_image_info *spl_image)
+> +{
+> +	u64 start[CONFIG_NR_DRAM_BANKS];
+> +	u64 size[CONFIG_NR_DRAM_BANKS];
+> +	int bank;
+> +	int ret;
+> +
+> +	dram_init();
+> +	dram_init_banksize();
+> +
+> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> +		start[bank] = gd->bd->bi_dram[bank].start;
+> +		size[bank] = gd->bd->bi_dram[bank].size;
+> +	}
+> +
+> +	ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size,
+> +				     CONFIG_NR_DRAM_BANKS);
+> +
+> +	if (ret)
+> +		printf("Error fixing up memory node! %d\n", ret);
+> +}
+> +#endif
+> diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
+> index 62d3664936e7..3351544c5b37 100644
+> --- a/board/ti/am62ax/evm.c
+> +++ b/board/ti/am62ax/evm.c
+> @@ -12,6 +12,7 @@
+>   #include <env.h>
+>   #include <fdt_support.h>
+>   #include <spl.h>
+> +#include <asm/arch/k3-ddr.h>
+>   
+>   #include "../common/fdt_ops.h"
+>   
+> @@ -20,15 +21,17 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> +#if defined(CONFIG_XPL_BUILD)
+> +void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+> -	return fdtdec_setup_mem_size_base();
+> -}
+> -
+> -int dram_init_banksize(void)
+> -{
+> -	return fdtdec_setup_memory_banksize();
+> +	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+> +		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+> +			fixup_ddr_driver_for_ecc(spl_image);
+> +	} else {
+> +		fixup_memory_node(spl_image);
+> +	}
+>   }
+> +#endif
+>   
+>   #ifdef CONFIG_BOARD_LATE_INIT
+>   int board_late_init(void)
+> diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
+> index 7362fa4520a3..75359fa1614c 100644
+> --- a/board/ti/am62px/evm.c
+> +++ b/board/ti/am62px/evm.c
+> @@ -13,6 +13,7 @@
+>   #include <env.h>
+>   #include <fdt_support.h>
+>   #include <spl.h>
+> +#include <asm/arch/k3-ddr.h>
+>   #include "../common/fdt_ops.h"
+>   
+>   struct efi_fw_image fw_images[] = {
+> @@ -53,15 +54,17 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> +#if defined(CONFIG_XPL_BUILD)
+> +void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+> -	return fdtdec_setup_mem_size_base();
+> -}
+> -
+> -int dram_init_banksize(void)
+> -{
+> -	return fdtdec_setup_memory_banksize();
+> +	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+> +		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+> +			fixup_ddr_driver_for_ecc(spl_image);
+> +	} else {
+> +		fixup_memory_node(spl_image);
+> +	}
+>   }
+> +#endif
+>   
+>   #if IS_ENABLED(CONFIG_BOARD_LATE_INIT)
+>   int board_late_init(void)
+> diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+> index 9075df01cac6..279ceba95547 100644
+> --- a/board/ti/am62x/evm.c
+> +++ b/board/ti/am62x/evm.c
+> @@ -20,6 +20,7 @@
+>   #include <asm/io.h>
+>   #include <asm/arch/hardware.h>
+>   #include <dm/uclass.h>
+> +#include <asm/arch/k3-ddr.h>
+>   
+>   #include "../common/fdt_ops.h"
+>   
+> @@ -86,11 +87,6 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> -{
+> -	return fdtdec_setup_mem_size_base();
+> -}
+> -
+>   #ifdef CONFIG_BOARD_LATE_INIT
+>   int board_late_init(void)
+>   {
+> @@ -99,13 +95,7 @@ int board_late_init(void)
+>   }
+>   #endif
+>   
+> -int dram_init_banksize(void)
+> -{
+> -	return fdtdec_setup_memory_banksize();
+> -}
+> -
+>   #if defined(CONFIG_XPL_BUILD)
+> -
+>   void spl_board_init(void)
+>   {
+>   	enable_caches();
+> @@ -114,53 +104,14 @@ void spl_board_init(void)
+>   
+>   }
+>   
+> -#if defined(CONFIG_K3_AM64_DDRSS)
+> -static void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
+> -{
+> -	struct udevice *dev;
+> -	int ret;
+> -
+> -	dram_init_banksize();
+> -
+> -	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+> -	if (ret)
+> -		panic("Cannot get RAM device for ddr size fixup: %d\n", ret);
+> -
+> -	ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
+> -	if (ret)
+> -		printf("Error fixing up ddr node for ECC use! %d\n", ret);
+> -}
+> -#else
+> -static void fixup_memory_node(struct spl_image_info *spl_image)
+> -{
+> -	u64 start[CONFIG_NR_DRAM_BANKS];
+> -	u64 size[CONFIG_NR_DRAM_BANKS];
+> -	int bank;
+> -	int ret;
+> -
+> -	dram_init();
+> -	dram_init_banksize();
+> -
+> -	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> -		start[bank] =  gd->bd->bi_dram[bank].start;
+> -		size[bank] = gd->bd->bi_dram[bank].size;
+> -	}
+> -
+> -	/* dram_init functions use SPL fdt, and we must fixup u-boot fdt */
+> -	ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size,
+> -				     CONFIG_NR_DRAM_BANKS);
+> -	if (ret)
+> -		printf("Error fixing up memory node! %d\n", ret);
+> -}
+> -#endif
+> -
+>   void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+> -#if defined(CONFIG_K3_AM64_DDRSS)
+> -	fixup_ddr_driver_for_ecc(spl_image);
+> -#else
+> -	fixup_memory_node(spl_image);
+> -#endif
+> +	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+> +		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+> +			fixup_ddr_driver_for_ecc(spl_image);
+> +	} else {
+> +		fixup_memory_node(spl_image);
+> +	}
+>   }
+>   #endif
+>   
+> diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
+> index 00b8317d6bf9..6f7e1f828668 100644
+> --- a/board/ti/am64x/evm.c
+> +++ b/board/ti/am64x/evm.c
+> @@ -15,6 +15,7 @@
+>   #include <fdt_support.h>
+>   #include <asm/arch/hardware.h>
+>   #include <env.h>
+> +#include <asm/arch/k3-ddr.h>
+>   
+>   #include "../common/board_detect.h"
+>   #include "../common/fdt_ops.h"
+> @@ -66,28 +67,6 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> -{
+> -	s32 ret;
+> -
+> -	ret = fdtdec_setup_mem_size_base();
+> -	if (ret)
+> -		printf("Error setting up mem size and base. %d\n", ret);
+> -
+> -	return ret;
+> -}
+> -
+> -int dram_init_banksize(void)
+> -{
+> -	s32 ret;
+> -
+> -	ret = fdtdec_setup_memory_banksize();
+> -	if (ret)
+> -		printf("Error setting up memory banksize. %d\n", ret);
+> -
+> -	return ret;
+> -}
+> -
+>   #if defined(CONFIG_SPL_LOAD_FIT)
+>   int board_fit_config_name_match(const char *name)
+>   {
+> @@ -132,52 +111,14 @@ static int fixup_usb_boot(const void *fdt_blob)
+>   }
+>   #endif
+>   
+> -#if defined(CONFIG_K3_AM64_DDRSS)
+> -static void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
+> -{
+> -	struct udevice *dev;
+> -	int ret;
+> -
+> -	dram_init_banksize();
+> -
+> -	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+> -	if (ret)
+> -		panic("Cannot get RAM device for ddr size fixup: %d\n", ret);
+> -
+> -	ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
+> -	if (ret)
+> -		printf("Error fixing up ddr node for ECC use! %d\n", ret);
+> -}
+> -#else
+> -static void fixup_memory_node(struct spl_image_info *spl_image)
+> -{
+> -	u64 start[CONFIG_NR_DRAM_BANKS];
+> -	u64 size[CONFIG_NR_DRAM_BANKS];
+> -	int bank;
+> -	int ret;
+> -
+> -	dram_init();
+> -	dram_init_banksize();
+> -
+> -	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> -		start[bank] =  gd->bd->bi_dram[bank].start;
+> -		size[bank] = gd->bd->bi_dram[bank].size;
+> -	}
+> -
+> -	/* dram_init functions use SPL fdt, and we must fixup u-boot fdt */
+> -	ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size, CONFIG_NR_DRAM_BANKS);
+> -	if (ret)
+> -		printf("Error fixing up memory node! %d\n", ret);
+> -}
+> -#endif
+> -
+>   void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+> -#if defined(CONFIG_K3_AM64_DDRSS)
+> -	fixup_ddr_driver_for_ecc(spl_image);
+> -#else
+> -	fixup_memory_node(spl_image);
+> -#endif
+> +	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+> +		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+> +			fixup_ddr_driver_for_ecc(spl_image);
+> +	} else {
+> +		fixup_memory_node(spl_image);
+> +	}
+>   
+>   #if CONFIG_IS_ENABLED(USB_STORAGE)
+>   	fixup_usb_boot(spl_image->fdt_addr);
+> diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
+> index 07073a5940b1..6658794a1375 100644
+> --- a/board/ti/am65x/evm.c
+> +++ b/board/ti/am65x/evm.c
+> @@ -20,6 +20,7 @@
+>   #include <env.h>
+>   #include <spl.h>
+>   #include <linux/printk.h>
+> +#include <asm/arch/k3-ddr.h>
+>   
+>   #include "../common/board_detect.h"
+>   #include "../common/fdt_ops.h"
+> @@ -49,17 +50,6 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> -{
+> -#ifdef CONFIG_PHYS_64BIT
+> -	gd->ram_size = 0x100000000;
+> -#else
+> -	gd->ram_size = 0x80000000;
+> -#endif
+> -
+> -	return 0;
+> -}
+> -
+>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   {
+>   #ifdef CONFIG_PHYS_64BIT
+> @@ -71,23 +61,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   	return gd->ram_top;
+>   }
+>   
+> -int dram_init_banksize(void)
+> -{
+> -	/* Bank 0 declares the memory available in the DDR low region */
+> -	gd->bd->bi_dram[0].start = 0x80000000;
+> -	gd->bd->bi_dram[0].size = 0x80000000;
+> -	gd->ram_size = 0x80000000;
+> -
+> -#ifdef CONFIG_PHYS_64BIT
+> -	/* Bank 1 declares the memory available in the DDR high region */
+> -	gd->bd->bi_dram[1].start = 0x880000000;
+> -	gd->bd->bi_dram[1].size = 0x80000000;
+> -	gd->ram_size = 0x100000000;
+> -#endif
+> -
+> -	return 0;
+> -}
+> -
+>   #ifdef CONFIG_SPL_LOAD_FIT
+>   int board_fit_config_name_match(const char *name)
+>   {
+> diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
+> index 5ac361ba7fcf..caf6b9fa8c14 100644
+> --- a/board/ti/common/Makefile
+> +++ b/board/ti/common/Makefile
+> @@ -4,3 +4,4 @@
+>   obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
+>   obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
+>   obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
+> +obj-${CONFIG_ARCH_K3} += k3-ddr.o
+> diff --git a/board/ti/common/k3-ddr.c b/board/ti/common/k3-ddr.c
+> new file mode 100644
+> index 000000000000..a8425da8de5c
+> --- /dev/null
+> +++ b/board/ti/common/k3-ddr.c
+> @@ -0,0 +1,33 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2024, Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#include <fdt_support.h>
+> +#include <dm/uclass.h>
+> +#include <k3-ddrss.h>
+> +#include <spl.h>
+> +
+> +#include "k3-ddr.h"
+> +
+> +int dram_init(void)
+> +{
+> +	s32 ret;
+> +
+> +	ret = fdtdec_setup_mem_size_base_lowest();
+> +	if (ret)
+> +		printf("Error setting up mem size and base. %d\n", ret);
+> +
+> +	return ret;
+> +}
+> +
+> +int dram_init_banksize(void)
+> +{
+> +	s32 ret;
+> +
+> +	ret = fdtdec_setup_memory_banksize();
+> +	if (ret)
+> +		printf("Error setting up memory banksize. %d\n", ret);
+> +
+> +	return ret;
+> +}
+> diff --git a/board/ti/common/k3-ddr.h b/board/ti/common/k3-ddr.h
+> new file mode 100644
+> index 000000000000..737d45e2e509
+> --- /dev/null
+> +++ b/board/ti/common/k3-ddr.h
+> @@ -0,0 +1,12 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2024, Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#ifndef __K3_DDR_INIT_H
+> +#define __K3_DDR_INIT_H
+> +
+> +int dram_init(void);
+> +int dram_init_banksize(void);
+> +
+> +#endif /* __K3_DDR_INIT_H */
+> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+> index 6221be9dcff8..4b5b9dded7b0 100644
+> --- a/board/ti/j721e/evm.c
+> +++ b/board/ti/j721e/evm.c
+> @@ -15,6 +15,7 @@
+>   #include <asm/gpio.h>
+>   #include <spl.h>
+>   #include <dm.h>
+> +#include <asm/arch/k3-ddr.h>
+>   
+>   #include "../common/board_detect.h"
+>   #include "../common/fdt_ops.h"
+> @@ -77,17 +78,6 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> -{
+> -#ifdef CONFIG_PHYS_64BIT
+> -	gd->ram_size = 0x100000000;
+> -#else
+> -	gd->ram_size = 0x80000000;
+> -#endif
+> -
+> -	return 0;
+> -}
+> -
+>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   {
+>   #ifdef CONFIG_PHYS_64BIT
+> @@ -99,23 +89,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   	return gd->ram_top;
+>   }
+>   
+> -int dram_init_banksize(void)
+> -{
+> -	/* Bank 0 declares the memory available in the DDR low region */
+> -	gd->bd->bi_dram[0].start = 0x80000000;
+> -	gd->bd->bi_dram[0].size = 0x80000000;
+> -	gd->ram_size = 0x80000000;
+> -
+> -#ifdef CONFIG_PHYS_64BIT
+> -	/* Bank 1 declares the memory available in the DDR high region */
+> -	gd->bd->bi_dram[1].start = 0x880000000;
+> -	gd->bd->bi_dram[1].size = 0x80000000;
+> -	gd->ram_size = 0x100000000;
+> -#endif
+> -
+> -	return 0;
+> -}
+> -
+>   #ifdef CONFIG_SPL_LOAD_FIT
+>   int board_fit_config_name_match(const char *name)
+>   {
+> diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
+> index 2cfeb3bec6c2..1b5ad19df7f4 100644
+> --- a/board/ti/j721s2/evm.c
+> +++ b/board/ti/j721s2/evm.c
+> @@ -21,6 +21,7 @@
+>   #include <dm.h>
+>   #include <dm/uclass-internal.h>
+>   #include <dm/root.h>
+> +#include <asm/arch/k3-ddr.h>
+>   
+>   #include "../common/board_detect.h"
+>   #include "../common/fdt_ops.h"
+> @@ -32,17 +33,6 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> -{
+> -#ifdef CONFIG_PHYS_64BIT
+> -	gd->ram_size = 0x100000000;
+> -#else
+> -	gd->ram_size = 0x80000000;
+> -#endif
+> -
+> -	return 0;
+> -}
+> -
+>   phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   {
+>   #ifdef CONFIG_PHYS_64BIT
+> @@ -54,22 +44,17 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>   	return gd->ram_top;
+>   }
+>   
+> -int dram_init_banksize(void)
+> +#if defined(CONFIG_XPL_BUILD)
+> +void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+> -	/* Bank 0 declares the memory available in the DDR low region */
+> -	gd->bd->bi_dram[0].start = 0x80000000;
+> -	gd->bd->bi_dram[0].size = 0x7fffffff;
+> -	gd->ram_size = 0x80000000;
+> -
+> -#ifdef CONFIG_PHYS_64BIT
+> -	/* Bank 1 declares the memory available in the DDR high region */
+> -	gd->bd->bi_dram[1].start = 0x880000000;
+> -	gd->bd->bi_dram[1].size = 0x37fffffff;
+> -	gd->ram_size = 0x400000000;
+> -#endif
+> -
+> -	return 0;
+> +	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+> +		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+> +			fixup_ddr_driver_for_ecc(spl_image);
+> +	} else {
+> +		fixup_memory_node(spl_image);
+> +	}
+>   }
+> +#endif
+>   
+>   #ifdef CONFIG_TI_I2C_BOARD_DETECT
+>   /*
+> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+> index 548dbd5925df..d317f3eccbba 100644
+> --- a/board/ti/j784s4/evm.c
+> +++ b/board/ti/j784s4/evm.c
+> @@ -10,6 +10,7 @@
+>   #include <efi_loader.h>
+>   #include <init.h>
+>   #include <spl.h>
+> +#include <asm/arch/k3-ddr.h>
+>   #include "../common/fdt_ops.h"
+>   
+>   DECLARE_GLOBAL_DATA_PTR;
+> @@ -52,15 +53,17 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> -int dram_init(void)
+> +#if defined(CONFIG_XPL_BUILD)
+> +void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+> -	return fdtdec_setup_mem_size_base();
+> -}
+> -
+> -int dram_init_banksize(void)
+> -{
+> -	return fdtdec_setup_memory_banksize();
+> +	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+> +		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+> +			fixup_ddr_driver_for_ecc(spl_image);
+> +	} else {
+> +		fixup_memory_node(spl_image);
+> +	}
+>   }
+> +#endif
+>   
+>   #ifdef CONFIG_BOARD_LATE_INIT
+>   int board_late_init(void)
 
