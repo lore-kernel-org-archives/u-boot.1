@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E43B1E7718B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 17:37:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D75E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 17:37:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7558803CB;
-	Fri, 20 Dec 2024 18:37:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6BE1580435;
+	Fri, 20 Dec 2024 18:37:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YN9M1+Bd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bubXFpsN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4309180381; Fri, 20 Dec 2024 18:37:33 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 5E9148042A; Fri, 20 Dec 2024 18:37:42 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3278780381
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 18:37:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F0FB280381
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 18:37:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5d7e527becaso3318689a12.3
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 09:37:31 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a9a68480164so359155066b.3
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 09:37:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734716251; x=1735321051; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734716259; x=1735321059; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wr35m766ncsTmurHjnWWXnBXyq6LksMETRrVp20JWCM=;
- b=YN9M1+BdO0yttAsWaJqprpBf66kEoh+ZYYoVLpOzi4DVq6ycXd6xEPMueE9MDzIICT
- hTWHGgrLNcIFkpA3QlHY7NwxUCWSYutCiSCkTfR2IXdYyx0bgMI4eAVw6H7ui7Sb2V2+
- ntkYlPujyIR5D60bwS57mMfy3auI6/hDAVGR8=
+ bh=sSZjbEjvYXOJsT3hx1AYD3y8aDBcm2AEamspxeiuyAY=;
+ b=bubXFpsNO6b0BK5IEA2vLooqG2loai2nw1BICNNtSNM7QRh+Iuy3YPybqyJfuTw0vB
+ Kvjf5yq1uftHmdaYJwAq9EuT6FGjzygFg4/7gceCRcwypCeHkGY7QJdCoF5d+UXJqNqe
+ s9TmGnmtvwgwd7gNzfeG8xlHGnpIGB66gXDhg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734716251; x=1735321051;
+ d=1e100.net; s=20230601; t=1734716259; x=1735321059;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wr35m766ncsTmurHjnWWXnBXyq6LksMETRrVp20JWCM=;
- b=nOacAPVgRPFZgOFKJsYP+gsuhyOo/NYSc90Fk8GqBuFZYmGdrKGoqt28/Ia1X8PamT
- ekY7goyC7x88rLT6/m52slZjXZIc3K41Oc1M1O38guppRkRRrUKmYuI19/btNWKkmqqo
- Sww/nuTt0EvKWSbpveGqL6uTOIqYXAneF46eYSsufFLRLd6lPpXfSqrb9T+BQtoZLUWb
- Hgt9MeSSVJ1o8Aybge6pYRP+ZPgPZWMVDTk+W2LzJNesqd0Iu/U6C5AgK12EhKEy+V3L
- qquHAI7C1L/FoUXfnzdw1ZiyxXP7v3hiSlB4kRR2q2q5NcNu6dbbEvcLx7pYZKZuGXVX
- jV8w==
+ bh=sSZjbEjvYXOJsT3hx1AYD3y8aDBcm2AEamspxeiuyAY=;
+ b=e55H7NAuiALtLNDtUH8M9omF8Av0fxCHZ+qFE9fRXabTHKnMvry9DFqgM/XGwHW/14
+ NsVwh/dvRMC8gZERfocM3mz04Kkbwvj9v01zcEbRtDlPu7O3K//OE496U2Z8tdjaJYTu
+ KaUX575uBNh6JbNm6Jes41Id7dPG0EzZzj0raAIEk+/6Cbcj1C2YiYsUCOINSWao0CXt
+ lQAuRi/o76ihmlZe7c/a1nv82SsocTGV8CE2ziz2YmJEiqbgvoVuR6Oiir4WkiH1rAbg
+ B8i1o3mwPJ7EIJ+Zm/AVyqKbn3K1THuSXkKH58/Pu8VxHqwUDLxZnUP4ZaN3ahPCW0nB
+ BQoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWQ1IHFBxqSSbu+Ga2GUgQRODNTS9UaLhyehWQpo/oxArutChjn4zqUQpYhDOwH4B/Pbga2E0Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyzi8377SfzvH4opqBm9sdlFWMX6kA5/3fP/7IvLK9SHSacajxd
- U6WZgycPFg0bSR6ZCoA/TPsLnWy2RWFGovF4512yz1TdMOjYrnNNvbl2jjbHItrFg8fml8w7WCI
- ENnk9aovcTHdeoyH5fH/WDnOhTIzx2oqD7FOe
-X-Gm-Gg: ASbGncsBAd5wYNmKVqfBRdMVytQBDRFOe7XYX6orKQRShgbh1Fq4VmATtNtT9HN2g54
- OqPfPfl8ghLJ6tPKxCgqlcmFAXJoyDK27Op3U1CQ=
-X-Google-Smtp-Source: AGHT+IFJvShhw0vIwbYSBt8Lq4ri0k1XHHjr+fxopjl0bK354GN+64nQBfHZH7jDMPkO7+26dDc0v0ebo3yPmciLjKY=
-X-Received: by 2002:a05:6402:3884:b0:5d3:ff93:f5f9 with SMTP id
- 4fb4d7f45d1cf-5d81ddd625dmr7572607a12.20.1734716250671; Fri, 20 Dec 2024
- 09:37:30 -0800 (PST)
+ AJvYcCUk+1ssfcg3O/YX+fxUvqvbVSbvJHEkus8WYsp/ZG8GG/u8OTTOeRkRJcz9BmB3SVlZHpyqM0k=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8WOh+NBVROBWLV8ppxH90yQ36DkiH6nQTbsFuuuNO2vkPyCLe
+ 6m/qgW0FdHPP3qtMj1WYvxV4MLT8nLIFE5Hwn3YP0sN4Qr2W83RHY6R+Do07CCIlElU8rkC2GmI
+ CC2zHDVYpWhl3dy1aSqXnaoQ13Zc5eFQCjg8c
+X-Gm-Gg: ASbGncuShAjwu8rDsRf0GxVB8FbStYwS1ZVHRgrDMNSCyboPliWLy9lxKgHf2AR4Nkj
+ vzAkgVp6bf7Sx4M/mIZai0vjqDMHqqw4emjZ9vjQ=
+X-Google-Smtp-Source: AGHT+IGZN0fkStaTkxK2XpdrKGsEhnZNhw+xUqP9XI3ay3NU7knTm1yXc8RVV87FO8U8scgPXBJOJ1CmUJyaBCUZ0eE=
+X-Received: by 2002:a17:906:c115:b0:aa6:6d2b:cbeb with SMTP id
+ a640c23a62f3a-aac2d446f89mr314100466b.28.1734716259438; Fri, 20 Dec 2024
+ 09:37:39 -0800 (PST)
 MIME-Version: 1.0
 References: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
- <20241202-sandbox_repair_of_embed-v1-4-05aff4b0ccf7@salutedevices.com>
- <CAFLszTisVG9Jn-Zi9F6VUERmecn=g=x6EwaNQORS+yiaCRBJRQ@mail.gmail.com>
- <gzsr5konsq4iyxakbmcengqglrgoawu7kxf6mvtfmidpvz5xan@akuwzh3fe4pj>
-In-Reply-To: <gzsr5konsq4iyxakbmcengqglrgoawu7kxf6mvtfmidpvz5xan@akuwzh3fe4pj>
+ <20241202-sandbox_repair_of_embed-v1-5-05aff4b0ccf7@salutedevices.com>
+ <CAFLszTj7psRzUuKfq+bMKeAsZS2xbox263sk=EAvOGKH+Z781A@mail.gmail.com>
+ <fz4k34cnnoabukznehqthg4fk3tjavc54zveiepnecaz7nrmlg@xl4y44up2zrh>
+In-Reply-To: <fz4k34cnnoabukznehqthg4fk3tjavc54zveiepnecaz7nrmlg@xl4y44up2zrh>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Dec 2024 10:37:12 -0700
-Message-ID: <CAFLszTi6KbuyJWPegwc3PFH15fVf80O-5xjCJnfXKp8s7QQMug@mail.gmail.com>
-Subject: Re: [PATCH 4/5] test: sandbox: fix link error with do_ut_bootm if
- BLOBLIST=n
+Date: Fri, 20 Dec 2024 10:37:26 -0700
+Message-ID: <CAFLszThR7A8u49kJ49Xw8vyA=gBgqcZQdqFX1xEgb2J9E4hVAA@mail.gmail.com>
+Subject: Re: [PATCH 5/5] sandbox: set retval early in board_fdt_blob_setup()
 To: Evgeny Bachinin <eabachinin@salutedevices.com>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Raymond Mao <raymond.mao@linaro.org>,
@@ -96,117 +95,82 @@ X-Virus-Status: Clean
 
 Hi Evgeny,
 
-On Tue, 17 Dec 2024 at 02:11, Evgeny Bachinin
+On Tue, 17 Dec 2024 at 01:59, Evgeny Bachinin
 <eabachinin@salutedevices.com> wrote:
 >
+> Hi, Simon, see below
 >
-> Hi, Simon. See below, please
->
-> On Fri, Dec 06, 2024 at 08:31:22AM -0700, Simon Glass wrote:
+> On Fri, Dec 06, 2024 at 08:31:36AM -0700, Simon Glass wrote:
 > > Hi Evgeny,
 > >
 > > On Mon, 2 Dec 2024 at 06:46, Evgeny Bachinin
 > > <EABachinin@salutedevices.com> wrote:
 > > >
-> > > Having CONFIG_OF_EMBED=y && CONFIG_BLOBLIST=n leads to the link
-> > > error:
-> > > ```
-> > > ld: /tmp/ccwtRVty.ltrans28.ltrans.o:(.data.rel+0x4e8): undefined \
-> > >                                             reference to `do_ut_bootm'
-> >
-> > Are you sure? I don't see that one. The bootm test should not relate
-> > to bloblist.
->
->
-> I've double checked - reproduced on v2024.10. There we had in
-> test/Makefile:
->   ```
->   ifneq ($(CONFIG_$(SPL_)BLOBLIST),)
->   obj-$(CONFIG_$(SPL_)CMDLINE) += bootm.o
->   endif
->   ```
-> So do_ut_bootm()  was not built if BLOBLIST=n
->
-> We do not see "undefined reference to `do_ut_bootm'" on v2025.01-rc3
-> due to this patch:
->   7f8b8c5abc2 ("bootm: test: Move test into boot")
->   It made bootm.o dependant on CONFIG_SANDBOX and independent from
->   BLOBLIST.
->
-> And because aforementioned patch fixes the issue, I'm going to get rid
-> of this current patch.
->
->
-> > This is what I see:
-> >
-> > buildman  -a OF_EMBED -a ~BLOBLIST --bo sandbox
-> > Building current source for 1 boards (1 thread, 32 jobs per thread)
-> >    sandbox:  +   sandbox
-> > +===================== WARNING ======================
-> > +CONFIG_OF_EMBED is enabled. This option should only
-> > +be used for debugging purposes. Please use
-> > +CONFIG_OF_SEPARATE for boards in mainline.
-> > +See doc/develop/devicetree/control.rst for more info.
-> > +====================================================
-> > +
-> > +Some CONFIG adjustments did not take effect. This may be because
-> > +the request CONFIGs do not exist or conflict with others.
-> > +Failed adjustments:
-> > +~BLOBLIST             CONFIG_BLOBLIST=y
->
-> Just a side note:
-> I am not familiar with buildman yet, but it seems, it can not set up
-> CONFIG_BLOBLIST=n because BLOBLIST is selected by 'select'.
-
-That's right.
-
->
-> JFYI, I'm going to extend the patch series by new patch to make BLOBLIST
-> selectable from menuconfig for sandbox via 'imply'.
-
-OK good.
-
->
->
-> >     0    0    1 /1              sandbox
-> > Completed: 1 total built, 1 newly), duration 0:00:11, rate 0.09
-> >
-> >
-> > > ```
+> > > Bug:
+> > > nobody sets 'ret' to non-error value inside board_fdt_blob_setup()
+> > > in case, when gd->fdt_blob has been initialized before calling the
+> > > board_fdt_blob_setup() (say, due to CONFIG_OF_EMBED=y)
 > > >
-> > > Fixes: fe158657a5b ("test: inconsistent bootm tests")
+> > > Reproduced with CONFIG_OF_EMBED=y && BLOBLIST=n.
+> > >   ```
+> > >     $ ./u-boot
+> > >     initcall: 0000000000078e05 (relocated to 000061138d2c7e05)
+> > >     initcall: 0000000000117b12 (relocated to 000061138d366b12)
+> > >       fdtdec_setup():
+> > >             gd->fdt_blob = dtb_dt_embedded()
+> > >       fdtdec_setup():
+> > >             gd->fdt_blob = board_fdt_blob_setup(&ret);
+> > >
+> > >         board_fdt_blob_setup():380 ret:-2 gd->fdt_blob:0x61138d4db310
+> > >                 if (gd->fdt_blob)
+> > >                         return (void *)gd->fdt_blob;
+> > >
+> > >     initcall failed at call 0000000000117b12 (err=-2: No such file \
+> > >        or directory)
+> > >     ### ERROR ### Please RESET the board ###
+> > >   ```
+> > >
+> > > Patch moves code, zeroizing the 'ret', before checking the fdt_blob.
+> > >
+> > > Fixes: d8289e7dfe5 ("sandbox: fdt: Avoid overwriting an existing fdt")
 > > > Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
 > > > ---
-> > >  test/cmd_ut.c | 2 +-
+> > >  arch/sandbox/cpu/cpu.c | 2 +-
 > > >  1 file changed, 1 insertion(+), 1 deletion(-)
 > > >
-> > > diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-> > > index 842c2c3e7f65eb9fe017fa1949eb2390be171487..a14dbf4ca5e571a872585ff11bfe7adae3f4edf3 100644
-> > > --- a/test/cmd_ut.c
-> > > +++ b/test/cmd_ut.c
-> > > @@ -107,9 +107,9 @@ static struct cmd_tbl cmd_ut_sub[] = {
-> > >  #if CONFIG_IS_ENABLED(BLOBLIST)
-> > >         U_BOOT_CMD_MKENT(bloblist, CONFIG_SYS_MAXARGS, 1, do_ut_bloblist,
-> > >                          "", ""),
-> > > -#endif
-> > >         U_BOOT_CMD_MKENT(bootm, CONFIG_SYS_MAXARGS, 1, do_ut_bootm, "", ""),
-> > >  #endif
-> > > +#endif
-> > >  #ifdef CONFIG_CMD_ADDRMAP
-> > >         U_BOOT_CMD_MKENT(addrmap, CONFIG_SYS_MAXARGS, 1, do_ut_addrmap, "", ""),
-> > >  #endif
+> > > diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
+> > > index d1c4dcf0764fb37ec99585a3db16fa34c3a54dac..7e93377e87e75b0fb92a8cf139b4a731a88a6a7b 100644
+> > > --- a/arch/sandbox/cpu/cpu.c
+> > > +++ b/arch/sandbox/cpu/cpu.c
+> > > @@ -377,10 +377,10 @@ void *board_fdt_blob_setup(int *ret)
+> > >         int err;
+> > >         int fd;
+> > >
+> > > +       *ret = 0;
+> > >         if (gd->fdt_blob)
+> > >                 return (void *)gd->fdt_blob;
+> > >         blob = map_sysmem(CONFIG_SYS_FDT_LOAD_ADDR, 0);
+> > > -       *ret = 0;
+> > >         if (!state->fdt_fname) {
+> > >                 err = setup_auto_tree(blob);
+> > >                 if (!err)
 > > >
 > > > --
 > > > 2.34.1
 > > >
 > >
-> > Regards,
-> > SImon
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
 > >
+> > But note for the future we have:
+> >
+> > https://patchwork.ozlabs.org/project/uboot/patch/20241102174944.412088-2-sjg@chromium.org/
 >
-> --
-> Best Regards,
-> Evgeny Bachinin
+> Thanks for pointing me!
+>
+> Could you advise me?
+> Should I abandon this patch from v2 patch-set?
+
+I believe it should be fixed, but see what you think.
 
 Regards,
 Simon
