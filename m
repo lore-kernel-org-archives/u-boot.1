@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 624A4E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 03:59:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A77AE77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:01:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7DC88021A;
-	Fri, 20 Dec 2024 04:59:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B3AC18021D;
+	Fri, 20 Dec 2024 05:01:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F/FVMBSy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="igqsBBAb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D36D8021D; Fri, 20 Dec 2024 04:59:39 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 9054F8021D; Fri, 20 Dec 2024 05:01:34 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 230E580087
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 04:59:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60DDF80087
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:01:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-844e6d1283aso90159739f.1
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 19:59:37 -0800 (PST)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-844e394395aso52780039f.3
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:01:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734667175; x=1735271975; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734667290; x=1735272090; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kVGQ9dC3xqU02RrpfYsGBNTwBdSzJJ95FF1TESSFKcs=;
- b=F/FVMBSyujWd7+Q8fgakJ+VcZSkaoNJJaLnKXvvEUjliAinyYMxRsI5wGI/VXGBphG
- v/Q3Rc9Df5TxT7SK+IajPkjjJtJDn0f4RPU8DGO9v2WKCFBxN1e1eVhMjBagImvcdpjC
- 92V+41ZXkLAEwOeHaCMfz7mh3a5kV2CYyn0m4=
+ bh=kg74sU7Ok5mjuxVjTBjadd2vX7MeeWHVEWc459avXWM=;
+ b=igqsBBAb4BaQVEud5T714VEvQccVA3v1GcU1n6sM95DfaSJqRyr1gE3jMHple/uW8V
+ z9PN7CJHF5Qwc96TGorjpecB6dRCuX3jI1p4yhDynvYsqoO+e9l51LHijeGoTz81zcXL
+ DM/51AhDuey3OmHu+qUMzktJ/Ghbuv7Qy9ZNw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734667175; x=1735271975;
+ d=1e100.net; s=20230601; t=1734667290; x=1735272090;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kVGQ9dC3xqU02RrpfYsGBNTwBdSzJJ95FF1TESSFKcs=;
- b=NkTQIJzUj35e+ysQb7eRM8LcUpg7TKZl00f4xi9HYJnDhvsBWfckq8xjKbkleOsW47
- Yc1hpQG+hDuLo5MwIkUt5uZ1oFuY0vCrYGSmsmpzXUk7n5AwbUxIPTqgJV2klrP23GAU
- 8FtGXT+ahtfB4QevpuCK8LbkBX4TawFLBCAE6+RqWBAzY0QZiPpg+Ek33KoZDUDD1g4m
- mgXH5A+o3dG7Pgg8eogfPbd825U8aubUyNfjA7QgL3/hd5M8f0tO4zShvvm3c58ONbrD
- mnwGX2EI9r1SPyPjSpZZvwyH8o0YxIGtwGnilhmNLYBxJAOzVZeyEhSQXkNMcjyHc9mZ
- qTOA==
-X-Gm-Message-State: AOJu0Yyjg1lYthzSdDodejWmhD0wcsQ5rGYh8/bhKEBCqAuF62M+AclV
- iLQBYsosanQYpDTb8Mzf4y/5FKib8IJwT+UDaC4OvuV324qpKlwOT5WCuXX4FMMie4zyHQZTXeg
+ bh=kg74sU7Ok5mjuxVjTBjadd2vX7MeeWHVEWc459avXWM=;
+ b=VXNo9tB9bNjIqVleeXClZDhahyLhwqf+K8lUeIveqDnLCVASwvSGIfOaY/Kzicc43+
+ TPcOX3n69/1yqy9E+2jPfHPeb9AnM/vN6lTp7rpUmzyahRnm6/eHNumksS/F2n1PdAuH
+ rH2OqOwfCTvhvaR626OcICP0aZZuId0vMCrUGCzmtfAnIFjShi/91FAi7xOnpP40XL/4
+ RjNkbkPAEjDwC55l41/COXRd4xXp9zJ9WDF6mAdnD2KKtXzHw3kfEwdoZBGtF7wixBMe
+ g0tDYgRpipoLO3jEizBJ4XG0N6TB3zM5WjBSpKJygkj8X5kbsB3ie00HA8TWBbJkkGbK
+ rSzg==
+X-Gm-Message-State: AOJu0Yy/VkA50FQihVIKMtQ2pmdeF8QTLHX5AYcVvgCx6k4xZyUuGEur
+ nf9EIXrQ3dKNLIpQ7Isjh+VUuy9uZi8a5Tx7B6/HxNXGPW/1aDZkEgZ5PwPC3NVt9jtCrpVdcCw
  =
-X-Gm-Gg: ASbGncsEYoDRIg4fmAwCrWY7ybEcWu6TZKwiv3d1nbAdQEBXrNw88uxuGdL5bZQZUeX
- PKWMA6Xvs/3CMxkL2UVaZtPSUBCzgoeK/WVfvaxWZ48EHCB2OssJcWcpnCKMByMJfr+AHFE3TJ/
- SgWGsosm92jyoolyAn7kMtBlViISUi2FbR/SHaWLHOQn+8NUSiwJWn3oJnDo5760IExDaG2u4+a
- PQjOce49wLiVrn7CgGc+H4buvFS6CuSR8V6I9AsVStx56sO/TK77f8DfqeTprxfuja/kplnHJ+S
- JNN39SloDhIdAOfDjw==
-X-Google-Smtp-Source: AGHT+IHIzWwxpCNunNcxcxLHAi5ikJaMFfGE0cmIdS233snrD8PJwMyISCCAOup/4ccDRH+OSBmVkg==
-X-Received: by 2002:a05:6e02:198c:b0:3a7:a58b:557e with SMTP id
- e9e14a558f8ab-3c302627786mr11276585ab.12.1734667174865; 
- Thu, 19 Dec 2024 19:59:34 -0800 (PST)
+X-Gm-Gg: ASbGnctga5OPtVhtC+RQXFgoVvBMbGNsb4d6Octfw/yB3uwLtGQYs6aJzrIEbwORs/B
+ cHSx2aYjaMXbpNnC6ZZCGGxoVj8y6xAgPTnhpbARcDh5w0S53M4/9Fa/angJSEdLf+9hr08chFI
+ kp3DaMB5/LerwYe1vT/faWJrkrZX499pUX2EZZ+H7xtefoT0CvC2jeY8p9uSJc0oUN4TqsvkhDO
+ DaL2wlqG+MqPupPpsjjZNJG4kgOJXwJ8LlEwECe+1xU5qys/vo1l9uWTxrRd9wdU8jsa0JZj5Ko
+ T1zK9lsIGfdamNaAQA==
+X-Google-Smtp-Source: AGHT+IGEV4e4HQ0BHVQPqs85Fta/ssUQwhptslSqLUtKYRVXgjY9764RGZbOAKQ91ZlFmjQBHMX9Mw==
+X-Received: by 2002:a05:6e02:b29:b0:3a7:9736:501e with SMTP id
+ e9e14a558f8ab-3c2d2881756mr13651745ab.14.1734667290157; 
+ Thu, 19 Dec 2024 20:01:30 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3c0deae6a06sm6706935ab.18.2024.12.19.19.59.32
+ 8926c6da1cb9f-4e68c22213asm594723173.155.2024.12.19.20.01.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 19:59:33 -0800 (PST)
+ Thu, 19 Dec 2024 20:01:28 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
+Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
  Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] sandbox: Adjust configuration to hang on panic()
-Date: Thu, 19 Dec 2024 20:59:27 -0700
-Message-Id: <20241220035927.3243648-1-sjg@chromium.org>
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/5] pxe: Support an automatic localboot
+Date: Thu, 19 Dec 2024 21:01:15 -0700
+Message-Id: <20241220040120.3245610-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -97,28 +105,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is annoying to have sandbox enter a boot loop when an assertion
-fails. Hang instead, since then the error message is only printed once
-and Ctrl-C can be used to quit, as per normal.
+It seems that extlinux expects that boards know how to boot a local OS
+from attached media. U-Boot currently assumes that boards define a
+"localcmd" environment variable to support this. None does.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Provide an automatic means to find a kernel and ramdisk, using common
+filenames. This addresses booting on MAAS, at least.
 
- configs/sandbox_defconfig | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 3de4aa79c6d..636130a360d 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -354,6 +354,7 @@ CONFIG_WDT_FTWDT010=y
- CONFIG_FS_CBFS=y
- CONFIG_FS_CRAMFS=y
- CONFIG_ADDR_MAP=y
-+CONFIG_PANIC_HANG=y
- CONFIG_CMD_DHRYSTONE=y
- CONFIG_MBEDTLS_LIB=y
- CONFIG_ECDSA=y
+Simon Glass (5):
+  test/py: Refactor extlinux-image creation into a function
+  test: bootflow: Avoid a confusing error condition
+  pxe_utils: Allow the FDT to be missing
+  pxe_utils: Support a backup for localboot
+  pxe_utils: Support the SAY command
+
+ arch/sandbox/dts/test.dts |  8 ++++
+ boot/Kconfig              |  9 +++++
+ boot/pxe_utils.c          | 50 ++++++++++++++++++++---
+ test/boot/bootflow.c      | 56 +++++++++++++++++++++++++-
+ test/py/tests/test_ut.py  | 85 ++++++++++++++++++++++++++-------------
+ 5 files changed, 173 insertions(+), 35 deletions(-)
+
 -- 
 2.34.1
 
