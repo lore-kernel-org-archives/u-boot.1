@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68744E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88B6FE77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:11:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B3AC80615;
-	Fri, 20 Dec 2024 05:06:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5ADA805EB;
+	Fri, 20 Dec 2024 05:07:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nu2MeaMX";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HHTUxETr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C70DE803CB; Fri, 20 Dec 2024 05:06:54 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 3F10C80608; Fri, 20 Dec 2024 05:06:57 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C08B38036F
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:06:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34B338036F
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:06:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aa670ffe302so284431766b.2
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:06:52 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-aa1e6ecd353so212555866b.1
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:06:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734667612; x=1735272412; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734667614; x=1735272414; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G8mcgQa/dCKyqh1py7a8KOV+da0Squ2hMp0aCoSJe0Y=;
- b=Nu2MeaMXGVVK3Flb0YuYj2A/T/pLpSvGSelh8dgwfDvxcJ4PGAmf0Zww8mfUJv/iaR
- euIYvp3DRAdMEeEnwOGtMhv1LpmSpvsvJHxEP2feTpzPqDtObctlDtQ7LuurN+f7T72p
- Pw4TGlWlR/kKEDI+2G8kILKiqpGrlaWIzSesQ=
+ bh=GBNkhL0cIGkRjZgnT8FAgzV7Yz7jGw+roiVfNAJdDvs=;
+ b=HHTUxETrcJxB97rCF6vfQ2/Lfxs9Leu1alX3Mn82GVYcDod0OPThhsUSCCToaHhR+V
+ 2LY1bIYe8V4ivyypmvS6LpiJY94o0/w0lTayCxRe2wC+MlN5TVvzJXHiCq4NaWZf+DZL
+ Y26A1k8XVcmpAhigIv4pVdCoF5NktyW56z5tM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734667612; x=1735272412;
+ d=1e100.net; s=20230601; t=1734667614; x=1735272414;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=G8mcgQa/dCKyqh1py7a8KOV+da0Squ2hMp0aCoSJe0Y=;
- b=wKITy8jS9/Jg23OISMzzHlgLba75LVsUg2Qd92Y09w/x5f4B/UZS41tEEOyMDxc3k0
- 5tNiF5D4yzWkIdz3zEd7NvZHmPR3fadHrqpVwzR6dxoJ6xTHv+ss6Oa5Ee2b2dm7yCow
- R+lg7L9CKslXmPyhmzPqmntnnUp7LmVHywAxgeBXOVbC3K72yUFU/JdR9QEioMx+gCyY
- lbiTQFD2z8ZAQfNkHPYNsE/SxRar0+vh5sppfY6g+m6fMcz8gqjnkbEzKHamu7bImI7B
- H2q8JcfWti3qWzItBqOYaaO8Rr5TOSVYJ/wQlcrJEEj1hFu/If6Tng4Yycjm1cTRpOvJ
- PDrw==
+ bh=GBNkhL0cIGkRjZgnT8FAgzV7Yz7jGw+roiVfNAJdDvs=;
+ b=ARa+6i40yMenfDxFytjlEdXJd6K8eeKjOFaZ/empmjV/uiHQqT43lgWlcO/wKJX+5c
+ 8kJYgJhPu2bQnjJcn72lmXZZMt0EDfIgCn4rTWAGvjNNHYvoGAmbaHYRvIn1LOvLpFyi
+ w2/89xpPNk77US/eqOZ2boXjqW7GfOSxSMdNYvh4H+Enrh9k6PfFobI/Jgbsm8qXzouy
+ Nvs9KfABSmvSFPxn+QOkei2dJAdo8mb9k0qCM6ujPmfa+sQv+apPp/nAN0XnJy9SyCX8
+ q1q9xv0ydwyMHG1eyJs9+sRW3Vl1o+IsNNp82aYHMu2V6uG/xyWFmSrpxs6dBB9Dvu2A
+ uSnQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3sTfx990mk1JCZWA1tDbGCgpavezSkZUb1XHgESX+1gAVVFSdQMe725Ra0oBs3Vsp6bMDL94=@lists.denx.de
-X-Gm-Message-State: AOJu0YwAmwgkFQaXbKkn4pcS8pPoAzds9ToVY4foxeNAashUHY8y7anJ
- +jp5ZKH4PRneBk1dEX8LcXuayq4lLWj0SL8RVb1mV2Cg4wQXX6Y/y84OxoUtmf5/6IwXgJahgeo
- i6Nsqrn2J3eBmmSDvyM8p+IsWBdJhRcwvZxnq
-X-Gm-Gg: ASbGncvPFPJYtZiPDwY+F/4d7iDcwbU8VJ78o1WadmlNMSWttwT5bJ8W8dP8mdsTUt4
- 6i2okl8Z0+YWxT0iY1iz9vjDzZJWvlvQwuZP6oVQ=
-X-Google-Smtp-Source: AGHT+IEvBnBfXFeWHMHOLOMaU9KlF9YJWrMf37HY/cevQiEXI/gPi5RjqanjBC3W/kP249cuo7ZsU+HiEo5UiEL9PQY=
-X-Received: by 2002:a17:907:3e14:b0:aa5:2a57:1779 with SMTP id
- a640c23a62f3a-aac33691a90mr99947266b.59.1734667612246; Thu, 19 Dec 2024
- 20:06:52 -0800 (PST)
+ AJvYcCU5V1RpuI1nOStbD2eWF0dkmORzA+yQyID4PoHvq0TB8Ml3EvJG18YWm8Wvjoj0jpku1srj3y4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzck4j2tPzkiOMCGKKK7C2Ti7sJfgkYEHoG12P5YKCepFIq9Ixw
+ HhgdAqx1nAH4Kh1IaDAxDhlK4jqh1ZcKSDbjcmqsMwsgdQRjbiOBVEyERSnBKUSefNhOtXBX9ZN
+ ppPUm3hc0frNP7Y4LAimEI2sRE4CZBUf76qMw
+X-Gm-Gg: ASbGnctOlfI97RfDsFdWqfsiip1ix1MJyUMUppLJxJU2fizbaZd8rKy6vTIe6kSXKZ0
+ Uezr95oDtQl3oHVANzJpmQxYNCLJt3ZIzTUTIJU0=
+X-Google-Smtp-Source: AGHT+IHhGjVj3sRKredGcM73Y31yFcj232/00X7rTsRA2b2rft1H11onK5zkYaSzeyaRqnCoDsxZ7HCfAeu/ar8+dsg=
+X-Received: by 2002:a05:6402:4405:b0:5d2:7199:ac2 with SMTP id
+ 4fb4d7f45d1cf-5d81dd83e12mr2478542a12.2.1734667614643; Thu, 19 Dec 2024
+ 20:06:54 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 19 Dec 2024 20:06:51 -0800
+ HTTPREST; Thu, 19 Dec 2024 20:06:52 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241206023626.2456858-6-sjg@chromium.org>
-References: <20241206023626.2456858-6-sjg@chromium.org>
+In-Reply-To: <20241206023626.2456858-5-sjg@chromium.org>
+References: <20241206023626.2456858-5-sjg@chromium.org>
  <20241206023626.2456858-1-sjg@chromium.org>
-Date: Thu, 19 Dec 2024 20:06:51 -0800
-X-Google-Sender-Auth: oZZNAEpULRSO2netkILkKsrQoPI
-Message-ID: <CAFLszTg2582sXiVK1nHoR-yrjjTum=EULMZF92OLUo0c_TaObA@mail.gmail.com>
-Subject: Re: [PATCH v3 05/46] x86: Rename state to bmi
+Date: Thu, 19 Dec 2024 20:06:52 -0800
+X-Google-Sender-Auth: aQOackPuBltAg8u8iC2o14ylkPw
+Message-ID: <CAFLszTh6O7Psq98PYh3TaAy_QR=JNbJFN5r3fSEnxA5X0bR+Kw@mail.gmail.com>
+Subject: Re: [PATCH v3 04/46] x86: Move x86 zboot state into struct bootm_info
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
@@ -90,17 +90,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the common name for the struct, in preparation for passing it around
-between functions.
+This structure is supposed to handle any type of booting
+programmatically, i.e. without needing a command to be executed. Move
+the x86-specific members into it and use it instead of
+struct zboot_state. Provide a macro so access is possible without adding
+lots of #ifdefs to the code.
+
+This will allow the struct to be used for all four types of booting
+(bootm, bootz, booti and zboot).
+
+Call bootm_init() to init the state, to match other boot methods.
+
+Note that some rationalisation could be performed on this. But this
+is tricky since addresses are stored as strings in several places. Also
+some strings combine multiple arguments into one. So to keep this task
+somewhat manageable, we content ourselves with just getting everything
+into the same struct
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/include/asm/zimage.h |  2 +-
- arch/x86/lib/zimage.c         | 48 +++++++++++++++++------------------
- cmd/x86/zboot.c               |  4 +--
- 3 files changed, 27 insertions(+), 27 deletions(-)
+ arch/x86/include/asm/zimage.h | 29 +----------------------------
+ arch/x86/lib/zimage.c         |  4 ++--
+ include/bootm.h               | 33 +++++++++++++++++++++++++++++++++
+ 3 files changed, 36 insertions(+), 30 deletions(-)
 
 Applied to sjg/master, thanks!
