@@ -4,71 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6C42E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 17:38:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A8D9E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 17:38:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53883803D2;
-	Fri, 20 Dec 2024 18:38:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A9F47803F0;
+	Fri, 20 Dec 2024 18:38:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lZhsB/sq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gji7rB3D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E5BE80381; Fri, 20 Dec 2024 18:37:59 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 5266280462; Fri, 20 Dec 2024 18:38:02 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90B18803D2
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 18:37:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E557680381
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 18:37:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-aa662795ca3so626892066b.1
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 09:37:56 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-aa67ac42819so312761366b.0
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 09:37:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734716276; x=1735321076; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734716279; x=1735321079; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6dG0S+bRenC+7ucMqXg0HugVpjWRlYzE8RJfnOvkowM=;
- b=lZhsB/sqZ4qbwWUieU16cGvqoB2qu1wUt7bSWGGPCDQhNFeMES8Pw9BRqQk6BGcrTa
- +HIHlSrZxB/i0ngdqlkzWrBCm0w+7LfkOwfPmGX96wve2yjy+egzKNXI8NQf5FrORD9l
- 3Iwosj7OxUdB9HNHU1YQ217qeT8baef+JMhyQ=
+ bh=e+qJ+qgsAZ3bk2RRoftmXtOqmwFivHjjBNVUIjB35Rw=;
+ b=gji7rB3D6LPKCBkr5lHXKpAiPQL4sSR9RTXYm2hfzSUQ55kEeNrTFId9pTrX0c5hxC
+ tPMHmEtj3IIrvSXeukwjd4vg2VJuagNbbgFBD9VRF1wtLvuVCi5pSI7nnzkm62sWXpAD
+ SkNJGxvMbxTg+fZQdA9hyF+LO5jGqGYNY7544=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734716276; x=1735321076;
+ d=1e100.net; s=20230601; t=1734716279; x=1735321079;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6dG0S+bRenC+7ucMqXg0HugVpjWRlYzE8RJfnOvkowM=;
- b=sSsDT2KDloVds0C1S86f6Mv0vbP9rqdAPJaq1AQ3vJXg1H8juLviagDJhuL9JVnyqI
- vuBP6NowXehequ9wfrmqV9GC+GRImLBigcNSjwUXuWpcFFbKnqwtBQUNKkiKrfFd9muM
- +Ih0nq52o1sroT/88BWQNIjxgBljKVf2ynEvvm1yBIrMxz4hTAwosVTIPbYQME57ee1I
- /8vfUDm94fk83m4uq3JRWSSA+4QstnbpnEU30fPpKDglvNgBLESQ8829+YDGHEjjdAlv
- 5K6WXJva7MD6TBTYi3DQsKd0fZ+pCHeOaJaZf73aiRROT37z0kfUEDXmZ61yzLrnkIwm
- hcjQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6yrr+NrdHfgYQ9EIG502yeQmpR2Ny31oGKkn7LAcjlbv1Hh4q8of5UM+FiY9Q654Z3Qas1xg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQqSfmtdUtybUtVpiBsZIFPpwgEB6+nms6X+CCS6xGuL9xfiql
- 5/4qGSdCrQUdGYWj1Kbl9QxR4+ZzVHaHGmHVxpHV53q4/Wjy/wsuG1RcRSd3Rh0vh1Hu37sp9ey
- U3pFMNgdYod/Bwh5+SpQSi9WlBhLMOw0NQDBh
-X-Gm-Gg: ASbGncs3HXLV76h/OQE5Dy9tymX2xsKj5Pw+QJrHQgOef23uHjHf/CdJFX2PQ8yr5pk
- Xap4JGYrCU4HhMp1Hu4s7zwOJEpWieiFIdqLzjTs=
-X-Google-Smtp-Source: AGHT+IE3nlmBn94T/MPfFkCRJpJS/0WvDaE2Qa/rTtntdDBjO+ikaoEkj+Uv5YYzaMkLMCOEYZZhxvRj+p7baaqGuI0=
-X-Received: by 2002:a17:907:3da4:b0:aa6:89b9:e9bd with SMTP id
- a640c23a62f3a-aac346970e7mr300635466b.24.1734716276026; Fri, 20 Dec 2024
- 09:37:56 -0800 (PST)
+ bh=e+qJ+qgsAZ3bk2RRoftmXtOqmwFivHjjBNVUIjB35Rw=;
+ b=dDhRVGM4LmAswSiWcOFvbCSwCRqnGyF7+loSjO2wd7TCqvn+cALsPyP3NTwCnBUypN
+ lu9Flhi4oH6hX4FSLX8RvB1gt3uBXILnSgCRDbqrr4IL4ZLZW9OqYpqMZi3uS6yRbxTI
+ mS9Wfuk1nlMfY9GzhTQfCt0JArpmT21ms80B/79Yl0VbUAcDcVl0iqB8cQ0pCinlEkGX
+ CUX4OD6fXPMLNGAYt3e/CdxV6dfiLu89Vxi5zvrg1XBIs/TJoH5NYCUEjeBAnezgq/Xf
+ OApxvlv2Zk6NvGw7H45iyEWjuuRQ5rIU8ib5/stqWlCiCnYlJAeLpcBg+AHawuxLNOyT
+ 8Htg==
+X-Gm-Message-State: AOJu0YwIl4fS9VXDrUOyvrimbRLfBfAbYDTaGdrLSNQWFKsi7D4cmE2F
+ 4rHKp7hogGafi6wuH1iUwPfOUavBgiWNcCE1DObleHDLlnwBUOkQJGIHPkAOeE33KDXlezEDtQS
+ kwuakD5MzArCOBWAd7yvdFl5r8gBN2P3C/j+9
+X-Gm-Gg: ASbGncudNJ9EMDwO7IGw5pcfdwdffHrb8Bi/R2ScFGXqL1piFUa0pwRcA88SIsbbejZ
+ Q29Gb1/dL/XB9mmYKlLUtu4Dq9QQlS9i90RELqWs=
+X-Google-Smtp-Source: AGHT+IFCvPK4e6h1bWe/tzRJKBLWEu3V+1UimXMqv1bPHrwpB4aAKsGOl6zMa+ASf0zJKc3ZWdeEmjf0FDwKapBqP+c=
+X-Received: by 2002:a17:907:c2a:b0:aa6:79fa:b480 with SMTP id
+ a640c23a62f3a-aac2713135bmr339914766b.10.1734716266970; Fri, 20 Dec 2024
+ 09:37:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20241220002156.87780-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241220002156.87780-1-heinrich.schuchardt@canonical.com>
+References: <20241220040120.3245610-1-sjg@chromium.org>
+ <20241220040120.3245610-5-sjg@chromium.org>
+ <20241220145609.GD1505244@bill-the-cat>
+ <CAFLszTjzP+vm1YoUX_avNq4_4qnUtNzzjLyFocEhJYrCA7cGOA@mail.gmail.com>
+ <20241220172348.GJ1505244@bill-the-cat>
+In-Reply-To: <20241220172348.GJ1505244@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Dec 2024 10:37:43 -0700
-Message-ID: <CAFLszThVGVL05j-WQVjZ2RjJ9DsX+GJqoHpBxU1gSy-c+Q7knw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] buildman: allow specifying configuration fragments
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, u-boot@lists.denx.de
+Date: Fri, 20 Dec 2024 10:37:34 -0700
+Message-ID: <CAFLszTjMWU7f_Db+qp6hFecx=mv+54ojX+zSZcrV-2CxT5dcxw@mail.gmail.com>
+Subject: Re: [PATCH 4/5] pxe_utils: Support a backup for localboot
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Richard Weinberger <richard@nod.at>, Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,31 +101,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Thu, 19 Dec 2024 at 17:22, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Fri, 20 Dec 2024 at 10:23, Tom Rini <trini@konsulko.com> wrote:
 >
-> Currently we are no able to build with configuration fragments in our CI.
-> With this patch buildman gets a new argument --fragments for passing a
-> comma separated list of configuration fragments to add to the board
-> defconfigs.
+> On Fri, Dec 20, 2024 at 10:18:17AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 20 Dec 2024 at 07:56, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Dec 19, 2024 at 09:01:19PM -0700, Simon Glass wrote:
+> > >
+> > > > The current localboot implementation assumes that a 'localcmd'
+> > > > environment variable is provided, with the instructions to follow. This
+> > > > may not be included, so provide a fallback in that case.
+> > > >
+> > > > Add a test image and test as well.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > This is a pretty niche feature, I had to dig around a bit to see how
+> > > it's specified elsewhere (not really) and how it's used. And I think
+> > > that based on how it's used, making up a bootcmd when localcmd is
+> > > undefined is the wrong approach. It's the hook for "run what I defined
+> > > in the environment", so if not set erroring back out seems appropriate.
+> >
+> > Yes, but unfortunately it seems to be used and we should support it.
+> > The problem with scripts is that we don't know the boot device, etc,
+> > so it needs to be integrated into PXE. I did consider putting
+> > something in bootstd, but we only find out that it is requesting a
+> > localboot when actually running the extlinux bootmeth, so this is what
+> > I came up with.
+> >
+> > It will be interesting to see if any other cases come up.
 >
->     tools/buildman/buildman \
->     -o build \
->     -k qemu-riscv64_smode \
->     --fragments acpi.config
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  tools/buildman/builder.py       |  3 ++-
->  tools/buildman/builderthread.py | 18 +++++++++++-------
->  tools/buildman/cmdline.py       |  2 ++
->  tools/buildman/control.py       |  2 +-
->  4 files changed, 16 insertions(+), 9 deletions(-)
+> It would be helpful at this point I think if you can point to how the
+> code for handling this case (the LOCALBOOT keyword followed by an
+> integer) in other projects so that we can be compliant with what's
+> expected, even if it's poorly documented.
 
-As per irc, please add docs and a test (you should be able to follow
-the tests that do similar things).
+Yes, it seems very hard to find anything at all.
+
+The implementation in syslinux uses the BIOS to jump to a boot sector:
+
+https://repo.or.cz/syslinux.git/blob/HEAD:/core/bios/localboot.c
+
+I'm really not sure how it is supposed to work with a filesystem.
+
+[1] is a usage of it for rpi
+
+But other than that, even Gemini doesn't seems to have much idea.
 
 Regards,
 Simon
+
+[1] https://github.com/ppisa/rpi-utils/blob/master/u-boot-setup/boot/extlinux/extlinux.conf
