@@ -4,60 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A64E2E7718B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:06:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62B97E7718B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:06:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E9CE804B3;
+	by phobos.denx.de (Postfix) with ESMTP id 84E3E804CC;
 	Fri, 20 Dec 2024 21:05:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Egfm8+qb";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cw/xn2PW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ADA9803D2; Fri, 20 Dec 2024 20:22:29 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C28B4803B9
+ id 973BB803A9; Fri, 20 Dec 2024 20:22:29 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C9282803CE
  for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 20:22:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJMKIj504602
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKGT018635;
  Fri, 20 Dec 2024 13:22:20 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1734722540;
- bh=DADEXpHxWKGrpAw6x/21F6VFWZ3qHfqZr8wfVJFMNTA=;
+ bh=oDLgXIhOw52aGG8yRbTeleusZjIfj7sSI4XbvA/0DVU=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Egfm8+qbEwsSn+OgzmzceDvRhbGx6LkOWQgZ7Lm02ls7lSTRKmnRr+l2pni3oI5hL
- FPduYhM8ZPmkTEqHXdRSWJBROOrEoyZfUPEtBjQI6VOEQbJOEamJpClgVSWWpU918Q
- su6HsPkRdq9IAszaxG/Fam8n0B8T63x4Vq/BLPTI=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJMKWV025969
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ b=cw/xn2PWzlTsuYYvW/wJj9C4CXhzBGTTB0Db8ee8NRNQn38Vkbw8OIIT90xPvV68i
+ jSWXpWOz2GVNBzoeZnBjifyJ9HcKj+YEWsd5hhI2yLnkAQkZ1KaMBEVy5s0fWHIABF
+ DWbJuzSZJeQCQ2uG9FA3j5gSS+3l6ECCwY2JzSqo=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKkD015526;
  Fri, 20 Dec 2024 13:22:20 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
  Dec 2024 13:22:20 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 20 Dec 2024 13:22:20 -0600
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKJR029134;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKJL029134;
  Fri, 20 Dec 2024 13:22:20 -0600
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 7/7] configs: am62ax_evm_a53_defconfig: Enable
- SUPPORT_EMMC_BOOT
-Date: Fri, 20 Dec 2024 13:22:20 -0600
-Message-ID: <20241220192220.2029543-8-jm@ti.com>
+Subject: [PATCH 1/7] mach-k3: am62a7_init: Add FS and raw mode for eMMC
+Date: Fri, 20 Dec 2024 13:22:14 -0600
+Message-ID: <20241220192220.2029543-2-jm@ti.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241220192220.2029543-1-jm@ti.com>
 References: <20241220192220.2029543-1-jm@ti.com>
@@ -82,26 +79,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable SUPPORT_EMMC_BOOT to help support eMMC boot on am62ax
-device.
+From: Vignesh Raghavendra <vigneshr@ti.com>
 
-Signed-off-by: Judith Mendez <jm@ti.com>
+This adds FS and raw boot mode support for eMMC similar to other K3
+platforms
+
+Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
 ---
- configs/am62ax_evm_a53_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-k3/am62ax/am62a7_init.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
-index 5e80c68605c..ad448feafeb 100644
---- a/configs/am62ax_evm_a53_defconfig
-+++ b/configs/am62ax_evm_a53_defconfig
-@@ -69,6 +69,7 @@ CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_OMAP24XX=y
- CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_MMC_IO_VOLTAGE=y
- CONFIG_SPL_MMC_IO_VOLTAGE=y
- CONFIG_MMC_UHS_SUPPORT=y
+diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+index 0f62f39075b..abf04970a2b 100644
+--- a/arch/arm/mach-k3/am62ax/am62a7_init.c
++++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+@@ -171,6 +171,25 @@ void board_init_f(ulong dummy)
+ 	debug("am62a_init: %s done\n", __func__);
+ }
+ 
++u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
++{
++	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
++	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
++				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
++	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
++			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
++
++	switch (bootmode) {
++	case BOOT_DEVICE_EMMC:
++		return MMCSD_MODE_EMMCBOOT;
++	case BOOT_DEVICE_MMC:
++		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
++			return MMCSD_MODE_RAW;
++	default:
++		return MMCSD_MODE_FS;
++	}
++}
++
+ static u32 __get_backup_bootmedia(u32 devstat)
+ {
+ 	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
 -- 
 2.47.1
 
