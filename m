@@ -4,84 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE57E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 19:35:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D365AE77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 19:45:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0609480384;
-	Fri, 20 Dec 2024 20:35:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 31F6680384;
+	Fri, 20 Dec 2024 20:45:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UGN2M0EQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UnsCIvC3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F7C4803A9; Fri, 20 Dec 2024 20:35:09 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45C0780381
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 20:35:06 +0100 (CET)
+ id 9C068803A9; Fri, 20 Dec 2024 20:45:29 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 34CB980381
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 20:45:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aa679ad4265so578776466b.0
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 11:35:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734723305; x=1735328105; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xVwSM45BdKzC5yy8NteBxjDE6uW8oh0yQ6seYYEZdM4=;
- b=UGN2M0EQa0gBTJAktFDrHU+iF/GTBcMF2TvmY5OlSlEM5oUVWMg8nUEPP/WT+xYy+p
- EQjvuMu8b1y0twO1UuAt83f/WuevFGfv9vFwGzONEx/jMcF+1PK30WJoWlzOmUkv5JmE
- 3p6iTODXrGlY96mnUPl4qtdhypqifR5ocNZdw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734723306; x=1735328106;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xVwSM45BdKzC5yy8NteBxjDE6uW8oh0yQ6seYYEZdM4=;
- b=qjHpdwCLSqmdpKJiIqsHnaGN2OG16H/w3vpRIokoU95gfIGwKGiTmEe585hZewg2NP
- 2XPaHkaM+Mqj8bN0AEX1LKDLS1JSkHmFsOYNao1jj+BTYseiK/+azfMSpBvkoU8EQ9ET
- 25JWAXowdecOmC4CXKFq+ZEXsrHoj7X6lon4OOFRrSB9fnkghlzhTwBRf32GtdcdoiRV
- XHCvHrnPITHdcalSnpN7GuIxMHJhxlXomtZ5cDqGlxf168sKMRgE19bkx17IxojzgnXl
- pD6BNPBt+zt5m9OP/rjqumNAomLFauioqURSc0W26ztb3N5rJ3dRVcWyVcDmx4C3/43i
- NF9A==
-X-Gm-Message-State: AOJu0Yw7KO5E1HJU3JyqIavU3ZSTrLPS9DPfoG3gjmnhpZMmQzIuMTAQ
- aIbbxlRT8AzxLL3LZJ7LZHVI6z0I9ijfU4kd+sWYnPgT/zmaawFko8VhKzOvBxJWqK439wAnj4E
- SXxKtyWSiv9qswjUDxtbGFEFjIoIix6QtTLgNyV0biqWAZeQ=
-X-Gm-Gg: ASbGncv8c+0YNKSa7kPw42Furow+xQPDcPgMnfywQqsDdSeFvOq9jH9RJtu/MlOLzEI
- t1T8fnXVV+RY8YUXWdL70n/khPHclY+WWE0oMGtc=
-X-Google-Smtp-Source: AGHT+IE72mZBrXYO+BkVqIDg/X9TF3uyi4ggef14O5KiF79UbQgmbee3D+lVF4FdrPdAN2EoOOusuk4O+lpNsnCqPQQ=
-X-Received: by 2002:a17:907:3f0b:b0:aab:daed:9ee9 with SMTP id
- a640c23a62f3a-aac080fe50bmr823564466b.6.1734723305651; Fri, 20 Dec 2024
- 11:35:05 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJjPaO209482
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 20 Dec 2024 13:45:25 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734723925;
+ bh=5mtsKnNQG3rr6/HfWR+8ugsplbaSF7ZaDJWUmS/fa0Y=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=UnsCIvC3bAGVBT6Meog3kR6v1bibFqzr3qWydhvblsTURuMjeUjhbZIYelevHCFdD
+ UkUadK3YBkOIRbIEzoRoiGSKHbbM2XJcQSesFT9dputI+469KHZsVw0as/CdMDz86t
+ 7Mtyxtmm5jFmTxzViZDLvQhc8Z7+1WqA+70LCzzs=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJjPsB006890
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 20 Dec 2024 13:45:25 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
+ Dec 2024 13:45:24 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 20 Dec 2024 13:45:24 -0600
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJjOHB052868;
+ Fri, 20 Dec 2024 13:45:24 -0600
+Date: Fri, 20 Dec 2024 13:45:24 -0600
+From: Bryan Brattlof <bb@ti.com>
+To: Judith Mendez <jm@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/7] mach-k3: am62a7_init: Add FS and raw mode for eMMC
+Message-ID: <20241220194524.2tv7xm4sdanpmp4h@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20241220192220.2029543-1-jm@ti.com>
+ <20241220192220.2029543-2-jm@ti.com>
 MIME-Version: 1.0
-References: <20241220040120.3245610-1-sjg@chromium.org>
- <20241220040120.3245610-6-sjg@chromium.org>
- <20241220144453.GB1505244@bill-the-cat>
- <CAFLszThceeEktXy0zQLny5Hh4wAq0jXks4qijVyzgN0uHtG95Q@mail.gmail.com>
- <20241220183059.GK1505244@bill-the-cat>
-In-Reply-To: <20241220183059.GK1505244@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Dec 2024 12:34:54 -0700
-Message-ID: <CAFLszTj=s7o7G9QU4yoL_0YoT3O+Zb==j40kJy=LhrrZNNJDtQ@mail.gmail.com>
-Subject: Re: [PATCH 5/5] pxe_utils: Support the SAY command
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Richard Weinberger <richard@nod.at>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20241220192220.2029543-2-jm@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,37 +81,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Judith!
 
-On Fri, 20 Dec 2024 at 11:31, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Dec 20, 2024 at 10:36:56AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 20 Dec 2024 at 07:44, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Dec 19, 2024 at 09:01:20PM -0700, Simon Glass wrote:
-> > >
-> > > > This shows a message for the user. Implement it to keep the user
-> > > > informed.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > Where does the SAY command come from? This is in neither
-> > > https://systemd.io/BOOT_LOADER_SPECIFICATION/ (which redirects and is
-> > > limited) nor https://wiki.syslinux.org/wiki/index.php?title=PXELINUX
-> > > (which is where http://syslinux.zytor.com/wiki/index.php/Doc/pxelinux
-> > > redirects to now).
-> >
-> > https://wiki.syslinux.org/wiki/index.php?title=SYSLINUX
->
-> Ah, thanks. Should link to that too in the docs then, I'll v2 my patch
-> there.
->
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+On December 20, 2024 thus sayeth Judith Mendez:
+> From: Vignesh Raghavendra <vigneshr@ti.com>
+> 
+> This adds FS and raw boot mode support for eMMC similar to other K3
+> platforms
+> 
+> Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+> ---
+>  arch/arm/mach-k3/am62ax/am62a7_init.c | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
+> 
 
-Thanks. The confusing thing is that there are a few slightly different
-formats at the same URL...
+Hmmm Are you on -next? this doesn't seem to apply :/
 
-Regards,
-Simon
+~Bryan
+
+> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/am62ax/am62a7_init.c
+> index 0f62f39075b..abf04970a2b 100644
+> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
+> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+> @@ -171,6 +171,25 @@ void board_init_f(ulong dummy)
+>  	debug("am62a_init: %s done\n", __func__);
+>  }
+>  
+> +u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+> +{
+> +	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
+> +	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
+> +				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
+> +	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
+> +			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+> +
+> +	switch (bootmode) {
+> +	case BOOT_DEVICE_EMMC:
+> +		return MMCSD_MODE_EMMCBOOT;
+> +	case BOOT_DEVICE_MMC:
+> +		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
+> +			return MMCSD_MODE_RAW;
+> +	default:
+> +		return MMCSD_MODE_FS;
+> +	}
+> +}
+> +
+>  static u32 __get_backup_bootmedia(u32 devstat)
+>  {
+>  	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
+> -- 
+> 2.47.1
+> 
