@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 307A9E77184
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 00:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B26E7718A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 00:35:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E36F380394;
-	Fri, 20 Dec 2024 01:35:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3F4C180328;
+	Fri, 20 Dec 2024 01:35:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dQdnvke0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BgblUD3P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A99EA80384; Fri, 20 Dec 2024 01:35:07 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 2CCC8803CF; Fri, 20 Dec 2024 01:35:11 +0100 (CET)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BBA08033E
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 01:35:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DD62180384
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 01:35:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-844ee15d6f4so109217839f.1
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:35:05 -0800 (PST)
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-3a7d690479eso10181635ab.0
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:35:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734654903; x=1735259703; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734654907; x=1735259707; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+4ZNKxK+y8xYEBp6A8U421TiDVRRWRSAkYKzXoPDRjY=;
- b=dQdnvke0Vy4CT0RcMR3nslDUHOTZr0IIAiEqGw/C/g97yd1shehBkMxf1uLN+42goX
- jmr9W0I0uw4D1Enufv+N/qkBdAmxV5lQ6l+KBJamqssdIAKNn6r3KIBBhX3qjgswlV9Z
- YGBNmFexJnBJoxS828CVRmubdksRdAZqfMp8Y=
+ bh=WwHG8t4ktbzjPp+D1/FfhuiLUyVYcujRFJq9lLfQDPw=;
+ b=BgblUD3PWScTwQLAJzE/Oot/XBeb8q8NOInFlcpULQU0R2rYP9YhgLTn8QoFs+x2Gc
+ u0QI1tsKksMGkyiz3NDhp9Vho8Mp0K01ki1G3PfDxpyJMCNhwFg8RzJVVIpBYVnfpCa6
+ oBNXWPNPr6b3grUTGvxF7CzZGBHMImtGAQ3HY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734654903; x=1735259703;
+ d=1e100.net; s=20230601; t=1734654907; x=1735259707;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+4ZNKxK+y8xYEBp6A8U421TiDVRRWRSAkYKzXoPDRjY=;
- b=ugBguAdxuy2t87PznxVmTSmO8aCnD9/YnOwJK6sBMN/qULkUWW6iSdQlTustlPzSl+
- qybLmxDVrwKti47xX0MegOqMnHbCr0MgU7NIL89YcCMwhQOf63kPFn9yfp/urHyLO39/
- /xYK77tukS/Z7I/x28VSRJJ3sE3IlMfi2CfnHGCYbPo8iWWUfCSHGCk6hSBEUSibF3VI
- iIFLWJINk2AcTCNnUlrAuHKQTrz5f9BXEU3i4TPCtEkkX6/mERKqKR9GDQNED2NINWpQ
- 9SpWkc+s7Rj2qqAX8HacPUq2RmOyy2bRphPMuDfWrb8dHK8OLGAz7mQ6rqNyIcXTkbxm
- km5Q==
-X-Gm-Message-State: AOJu0YxOEs18sJVRia3uEyHFcYi8ugdAK1CRfYSSSEb2rR9drTh/AytP
- l8/Kw9pcy18xqLfMaIIn4OojxCPawfVDf1f7MJERmcD7UjIR5x355gRYd/reqmWHlTk7gmA3RKs
+ bh=WwHG8t4ktbzjPp+D1/FfhuiLUyVYcujRFJq9lLfQDPw=;
+ b=MJpJPs+7ma/A87QiOOhJ+Ve+Iq2PEs6T+lw3uEUCZFLg4vJTqt4CYtRNcjK3wOVLTE
+ 4C9jpDrOyDevAqqiAT+SHIQ0HX36b58DtkTseyBt6gd5s+FXBKOhSlSUo7S1b7YC/WKa
+ oPDfrMR25lZySgzdrWcVNhmCqZk4LrUkgpu5SjJs7N6oIjTJAdXCKt85eWjnkUdYtzci
+ 1oUJ37WnPVPsoXZH6KotX/bqClDboVUB8Xg6lUFyMcZq84aJs1GB1mHD5/pg4vgNI5E/
+ GNdKX2q2bIoEJAoZZ/jkgRbl1KouV8O3/gnLAH26wKIOLEOFy5HN1PjNyIdEqLq3OINv
+ afLg==
+X-Gm-Message-State: AOJu0YxD6ClCxPfcGgPhYmZiLgFhJgkQlj7jHZvSDMe6TKa2cfxVd5Lw
+ 4OiQb9clU/nIXid/kxCgMGPQrE7erHyP+oGg7uIpV305VVsibJQKfxuFNAQp/3cWjWfqYsyJPhc
  =
-X-Gm-Gg: ASbGnct8Yoi61ad48Lq2z7jq27xcPLOzX6l1Y3KInl2pQt/c37kU+wBHQ4/ufOuClWy
- Z0VeqjqV5pvfgTWRZpAmd2lURW+yzoQqBNQVHm4qsHCzTYfPikzcwgnNRSdBJnY2acNOEQgK/uA
- v3IampGiVnSAvjnfNEtNuJEUcYlyPTb2lKBPgUiy5EJUnlxgZ/PH9B1cv9HRYwdCwWmEZ1dxMS4
- FNNP+aLwYVW0SL2SxJA2pmKlD1kkgc6mukSGJpQRWdMRk7TeYRF4u6Aeb1P03jl8xjAlR0nA686
- TE99z2J2Ns8wWAcIYA==
-X-Google-Smtp-Source: AGHT+IEurSwrHGFp+2HFNgK1B/b7Sk/HzO0irMY0jM7/LqljOX5Lt6UU2NMBXiMJ4tgRUXDkSOGfug==
-X-Received: by 2002:a05:6602:2dc2:b0:841:984b:47d2 with SMTP id
- ca18e2360f4ac-8499e689c59mr85927639f.14.1734654903243; 
- Thu, 19 Dec 2024 16:35:03 -0800 (PST)
+X-Gm-Gg: ASbGncsdBwWEJN47JaEsMZ/dr4dX6PhBebL6WArWvZe+NtbDTdsKm0RLWbohfd28HY+
+ 6dXlBaEKHlZpDWOrAAu51OPQlpl0jWwy54luTjKD6jpwYxYD/IaTw2k7z3wvtexi5j9mYoYDWNL
+ NpxD9fTzXh8FkC2Ky/4wqDvZW2/t4EJUDuPnrc4iX2wdEJHMFQ3f3Xofx8UA849l8P/wRfgeqgC
+ cqrkPhu9nsneX1WByzLHeGGUsdMtg2xKeqnf8J3neBJLsWteErYBqGZN45FZ/ICTSpC7A1NjA02
+ c2/5Iss/KYaptaRbaQ==
+X-Google-Smtp-Source: AGHT+IEuKEt5fhAhpe2R6+Vo5WxeY2tuQxDf44zg9kZanTl2+QTYXGJODBdQk5piCOw4lhXJtRqYgQ==
+X-Received: by 2002:a92:c24c:0:b0:3a7:c5cb:8bf3 with SMTP id
+ e9e14a558f8ab-3c2d277f5aamr10548715ab.9.1734654907098; 
+ Thu, 19 Dec 2024 16:35:07 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e68c20bc69sm548273173.141.2024.12.19.16.35.00
+ 8926c6da1cb9f-4e68c20bc69sm548273173.141.2024.12.19.16.35.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 16:35:01 -0800 (PST)
+ Thu, 19 Dec 2024 16:35:05 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Stephen Warren <swarren@wwwdotorg.org>,
  Stephen Warren <swarren@nvidia.com>, Matthias Brugger <mbrugger@suse.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v4 4/5] rpi: Update environment to support booti and large
- initrd
-Date: Thu, 19 Dec 2024 17:34:46 -0700
-Message-Id: <20241220003447.2913443-5-sjg@chromium.org>
+ Francois Berder <fberder@outlook.fr>, "Ivan T. Ivanov" <iivanov@suse.de>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: [PATCH v4 5/5] rpi: Use the U-Boot control FDT for fdt_addr
+Date: Thu, 19 Dec 2024 17:34:47 -0700
+Message-Id: <20241220003447.2913443-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241220003447.2913443-1-sjg@chromium.org>
 References: <20241220003447.2913443-1-sjg@chromium.org>
@@ -97,70 +99,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The existing values don't provide for decompressing an arm64 boot-image.
-Add those values and move things apart a bit so that a 50MB kernel can be
-accommodated.
+The fdt_addr variable is used in extlinux as a fallback devicetree if
+none is provided by the boot command. Otherwise the only use in U-Boot
+seems to me efi_install_fdt() when the internal FDT is required.
+
+The existing mechanism uses the devicetree provided to U-Boot, but in
+its original, unrelocated position. In my testing on an rpi_4, this ends
+up at 2b35ef00 which is not a convenient place in memory, if the ramdisk
+is large.
+
+U-Boot already deals with this sort of problem by relocating the FDT
+to a safe address.
+
+So use the control-FDT address instead.
+
+Remove the existing comment, which is confusing, since the FDT is not
+actually passed unmodified to the kernel: U-Boot adds various things
+using its FDT-fixup mechanism.
+
+Note that board_get_usable_ram_top() reduces the RAM top for boards with
+less RAM. This behaviour is left unchanged as there is no other
+mechanism for U-Boot to handle this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
+Changes in v4:
+- Expand the comment on set_fdt_addr()
+- Update the commit message to talk in terms of my testing
 
-Changes in v3:
-- Update the comment block with the new values, including compression
+Changes in v2:
+- Drop patch to allow expanding the devicetree during relocation
 
- board/raspberrypi/rpi/rpi.env | 27 ++++++++++++++++-----------
- 1 file changed, 16 insertions(+), 11 deletions(-)
+ board/raspberrypi/rpi/rpi.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
-index 9b9fad82828..9ac9d6768ca 100644
---- a/board/raspberrypi/rpi/rpi.env
-+++ b/board/raspberrypi/rpi/rpi.env
-@@ -48,28 +48,33 @@ dfu_alt_info+=zImage fat 0 1
-  *
-  * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
-  * conflict with something else. Reserving 1M for each of them at
-- * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
-+ * 0x05400000-0x05500000 and 0x05500000-0x05600000 should be plenty.
-  *
-  * On ARM, both the DTB and any possible initrd must be loaded such that they
-  * fit inside the lowmem mapping in Linux. In practice, this usually means not
-  * more than ~700M away from the start of the kernel image but this number can
-  * be larger OR smaller depending on e.g. the 'vmalloc=xxxM' command line
-  * parameter given to the kernel. So reserving memory from low to high
-- * satisfies this constraint again. Reserving 1M at 0x02600000-0x02700000 for
-- * the DTB leaves rest of the free RAM to the initrd starting at 0x02700000.
-- * Even with the smallest possible CPU-GPU memory split of the CPU getting
-- * only 64M, the remaining 25M starting at 0x02700000 should allow quite
-- * large initrds before they start colliding with U-Boot.
-+ * satisfies this constraint again. Reserving 1M at 0x05600000-0x05700000 for
-+ * the DTB leaves rest of the free RAM to the initrd starting at 0x05700000.
-+ * This means that the board must have at least 128MB of RAM available to
-+ * U-Boot, more if the initrd is large.
-  *
-- * Limit bootm_size to 512MB so that all boot images stay within the bottom
-+ * For compressed kernels, the maximum size is just under 32MB, with an area for
-+ * decompression at 0x02000000 with space for 52MB, which is plenty for current
-+ * kernels.
-+ *
-+ * limit bootm_size to 512MB so that all boot images stay within the bottom
-  * 512MB of memory
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index c46fe4b2350..f74006e0968 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -3,6 +3,8 @@
+  * (C) Copyright 2012-2016 Stephen Warren
   */
- bootm_size=0x20000000
  
- kernel_addr_r=0x00080000
--scriptaddr=0x02400000
--pxefile_addr_r=0x02500000
--fdt_addr_r=0x02600000
--ramdisk_addr_r=0x02700000
-+kernel_comp_addr_r=0x02000000
-+kernel_comp_size=0x03400000
-+scriptaddr=0x05400000
-+pxefile_addr_r=0x05500000
-+fdt_addr_r=0x05600000
-+ramdisk_addr_r=0x05700000
++#define LOG_CATEGORY	LOGC_BOARD
++
+ #include <config.h>
+ #include <dm.h>
+ #include <env.h>
+@@ -326,18 +328,13 @@ static void set_fdtfile(void)
+ }
  
- boot_targets=mmc usb pxe dhcp
+ /*
+- * If the firmware provided a valid FDT at boot time, let's expose it in
+- * ${fdt_addr} so it may be passed unmodified to the kernel.
++ * Allow U-Boot to use its control FDT with extlinux if one is not provided.
++ * This will then go through the usual fixups that U-Boot does, before being
++ * handed off to Linux
+  */
+ static void set_fdt_addr(void)
+ {
+-	if (env_get("fdt_addr"))
+-		return;
+-
+-	if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC)
+-		return;
+-
+-	env_set_hex("fdt_addr", fw_dtb_pointer);
++	env_set_hex("fdt_addr", (ulong)gd->fdt_blob);
+ }
+ 
+ /*
+@@ -571,7 +568,10 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
+ 	int node;
+ 
+-	update_fdt_from_fw(blob, (void *)fw_dtb_pointer);
++	if (blob == gd->fdt_blob)
++		log_debug("Same FDT: nothing to do\n");
++	else
++		update_fdt_from_fw(blob, (void *)gd->fdt_blob);
+ 
+ 	node = fdt_node_offset_by_compatible(blob, -1, "simple-framebuffer");
+ 	if (node < 0)
 -- 
 2.34.1
 
