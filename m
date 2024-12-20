@@ -4,92 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84987E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 13:05:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC8C9E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 13:05:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A4818001F;
-	Fri, 20 Dec 2024 14:05:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=broadcom.com
+	by phobos.denx.de (Postfix) with ESMTP id 0586C80243;
+	Fri, 20 Dec 2024 14:05:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="gpm+0Vb+";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="J6ltTGgs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B3D280291; Fri, 20 Dec 2024 06:40:46 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C342280326; Fri, 20 Dec 2024 14:05:56 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::631])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D772780079
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 06:40:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=broadcom.com
+ by phobos.denx.de (Postfix) with ESMTPS id 572B38021D
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 14:05:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=david.regan@broadcom.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2ee9b1a2116so160717a91.3
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 21:40:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1734673242; x=1735278042; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4JinOrfSUywBtoNmp92TMLyX2NNJ8+dMtcq2JQbZlj4=;
- b=gpm+0Vb+7iAd3xbtxs7EWJW6+NKxKnTVEk93gqeb2M3bwpRRNhIxuenRGmVzipcA6D
- UMhlF4SafHXWnSGRZ2GvN24MeKQXy1OepWldEdlWzHrUlbeWAhDC4lz1N2D7rNI0j+7U
- x1YhUJY9Ao/rCNXT7/e5yC1DB3clYR/hw3+U0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734673242; x=1735278042;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4JinOrfSUywBtoNmp92TMLyX2NNJ8+dMtcq2JQbZlj4=;
- b=KEPVFBqT83KCKaGso0J5ft2p5zYsTts5kPxv0F05lcEdsHrHajW9divPqcF47H+02S
- V29teS18MSHZiUpD99qm8Za15PfZThOCEzIZ67Hwp9gQDPKZM84PjqM6jlXS4X7oLI0L
- IDvtU9CNNeMYSxiKyE/MDI2tAp9WE2l+fKCDpt35kMLz2BHGbMfPm2Ih5vjwCXoDWL/0
- P8M2ONdLfeCkKcMN0yxKUcJhdf5Wuqjg/G8lo947itJFI6j9gSBrG6b24StdZ6X3ByW2
- kBlrg7DZho0G3JHso7TtTgNzGyqj/zffoYE5m2F07PavnEwqjWk/9I8BCwB7CAy8RNqI
- qvvg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXbacFIFEW6K/iqsDY0V8K8N5x8d4rET4CXQfMvR5qXc8isXUOA2R8ZMJxQFsMud7525v5+y2U=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVTw84e4dxf0tnornP+GOvOlCXAI8MWbaJwSjaeAVgr+keFprX
- MQbEZ+B2b3x4kHEzSjp7wimPbJnpTfpXsRTZAjtkhcw/2a4LHlphR/I4MJPn5w7/g+DYt99Qkkr
- OdAm1VelAbfW53xeXjO34wC5ybzrZa/8De5jM
-X-Gm-Gg: ASbGncv54OGNcV83Z3Bli9MACmadgFWnz/to5e2sUt9WxzmmQMMnnBcDQ6Ojb5X7ba4
- fHxxJp+wpXb1Z5lE93mkUwC31qRJVG9UpEZNUdVc=
-X-Google-Smtp-Source: AGHT+IHd2NuxiVszMafiS5chOn4eyCDhdXAzdi9AJE3UtngVudord98k17al8oVOEMp2Q6cJmwKgwwBLmDDWWlczvZw=
-X-Received: by 2002:a17:902:f64b:b0:216:30f9:93c5 with SMTP id
- d9443c01a7336-219e6e9e81fmr8225565ad.6.1734673242374; Thu, 19 Dec 2024
- 21:40:42 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HxJCpJj8Oy7tYGQfdDsTkI7in7/QIIcV266UOkkqmM9tdL9dgjkfU2EZH2PgNpBfaW8TJIENsaMsM60uZ/gZFjuLZl48a/Krdn9EXjbygH574e/DwI3I/c5xB6dCqI0AymMtJXJCE43MumMyh5XqmZYrIgwAP3/RsgpLW4NdhXWdbCgHlKfKwllVZzgyf+1/K2iAuqbtGZdw80MOeC4pUtF2jaHWhxJ33relh0if8v9f7BXYHHZgLb8jLoRptThCQ1WWu2I3Vdxlo22E8nh0vxM+37zlSh31uof/sW4uZzozIp9uVXgE7qMOXrqpq8mX6M9ZMiGch8/zQ6hLW6tBSw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jjUer/OlD47ZZ0iLc9t9EzmDBkJWNHauEfUXCiQzTfM=;
+ b=u1CR+o83ycDHwcpOeZka0c+t7vJD3UT6VvWPjRnZ61hnFJ3B9KNQ40br91nMmD3CCXYO9Hb2R7z9tSPIXYrKn4xQwHLXhIJEM95Fl7eF3TYSQUQXcDA745EaDqpe+K7lA2Tp2ES14Tl37UWUjlBIlBn9LpS8KwXIB/3wRYU6T+XRRaUeHI2vhzcSQg9ketPJ+OF5/Gq/9MjSVZyGLH+Xo83oVTnpAPExM4U67BDJ9YbJmuxTmyn0gnCkvSNV7ExaXstlU4gVpQCt8Yvf6siipfFkmerfDk4b2h6nTpDmmQl1V7WKvYEK0R57uQghK2dLGhezwsehuKZQDR3tkwlk/Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jjUer/OlD47ZZ0iLc9t9EzmDBkJWNHauEfUXCiQzTfM=;
+ b=J6ltTGgsf9cGOjxJEvJAylblkQ3zg3ugmdS00D/gWRhrzBKhm4TTEo8GLoiWwcURZM23s4jBS9xjkoLRs8x0Yr3RqGetK/wrQMWAhS+77MlU5W+Id3fWJqkyrX69j3s0A5ZUQWp2bDRPGp7Vfv+jY/LdVKs6wuigL9mfr2PlpKU=
+Received: from SA1PR04CA0005.namprd04.prod.outlook.com (2603:10b6:806:2ce::14)
+ by BL3PR12MB6619.namprd12.prod.outlook.com (2603:10b6:208:38e::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.14; Fri, 20 Dec
+ 2024 13:05:50 +0000
+Received: from SA2PEPF00001506.namprd04.prod.outlook.com
+ (2603:10b6:806:2ce:cafe::13) by SA1PR04CA0005.outlook.office365.com
+ (2603:10b6:806:2ce::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.25 via Frontend Transport; Fri,
+ 20 Dec 2024 13:05:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SA2PEPF00001506.mail.protection.outlook.com (10.167.242.38) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8251.15 via Frontend Transport; Fri, 20 Dec 2024 13:05:49 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 20 Dec
+ 2024 07:05:49 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 20 Dec
+ 2024 07:05:48 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Fri, 20 Dec 2024 07:05:46 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@amd.com>
+Subject: [PATCH] config: xilinx: Enable the SPI_STACKED_PARALLEL config option
+Date: Fri, 20 Dec 2024 18:35:40 +0530
+Message-ID: <20241220130540.1917013-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241219184953.226978-1-dregan@broadcom.com>
- <20241219184953.226978-2-dregan@broadcom.com>
- <a9390faf-f4de-4c52-8149-5d3e7959a477@mailbox.org>
-In-Reply-To: <a9390faf-f4de-4c52-8149-5d3e7959a477@mailbox.org>
-From: David Regan <dregan@broadcom.com>
-Date: Thu, 19 Dec 2024 21:40:30 -0800
-Message-ID: <CAA_RMS54yCf0kyMgu-6-v=a1Y6xRn=JRtJA83TqWJKRKwsfNig@mail.gmail.com>
-Subject: Re: [PATCH 1/2] arm: dts: Use upstream dts for additional bcmbca
- devices
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: david regan <dregan@broadcom.com>, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Anand Gore <anand.gore@broadcom.com>, 
- William Zhang <william.zhang@broadcom.com>,
- Kursad Oney <kursad.oney@broadcom.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Linus Walleij <linus.walleij@linaro.org>, 
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, Tom Rini <trini@konsulko.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sumit Garg <sumit.garg@linaro.org>, dregan@mail.com
-X-Mailman-Approved-At: Fri, 20 Dec 2024 14:05:25 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001506:EE_|BL3PR12MB6619:EE_
+X-MS-Office365-Filtering-Correlation-Id: 123c668d-2033-41cc-e19b-08dd20f706e0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ZOn9xbLHHF9MIbfGUyALHmqcPI8HVnjVHw9/j3ATWJM3FtX269WjPnVUcxmZ?=
+ =?us-ascii?Q?PGiX0wX4gYgQnKaxt1x2HXdYLBNJ0K5JsFzENsl3A34Rqo4WW+0UYB/8+iMn?=
+ =?us-ascii?Q?TGTvRTJBfc0oRZGjZU83yoUoEceUP4TdyGRyAHUigYF+HHyzQrEubb6aTyWU?=
+ =?us-ascii?Q?Lsc1UU1e5HlzTCaeO2MazOeBzKsDyYsGTznIgQTJLy/V5z3zTPc7FYroyHvc?=
+ =?us-ascii?Q?a+EO3ZCECBhsc2iGNL45GSEG/qYhwTJQyhHUT/2xRDhQhygav0knJEbippZg?=
+ =?us-ascii?Q?CKruSkPnYfQXpO0BhqOkMRilqlvO2x1VVNFMlhSnKO2Ct4hRTbRXz/kktv0S?=
+ =?us-ascii?Q?2xG+EJcdS8RqInGqr/PpKjTqkMU/+2a8S6gzsO4Fd+50dhXHUsf7pejSVMDt?=
+ =?us-ascii?Q?JB29E+YsXF7VpZHAtNptw5lQ0yyNmSA1uIdnSoiZN9b4PdIBuvt8BCDwBM6K?=
+ =?us-ascii?Q?R0jIUGDYi3pwERpdorB89C2kG4rI07MKJuq1fdW0OloEh/YUv4dfZPAVFLcB?=
+ =?us-ascii?Q?tRqWUvhOKpCsWiAtHEygeJ/GDnTY16UM1YPs1JHo+gIAHJtUW52WLpPuuR5L?=
+ =?us-ascii?Q?yLQ/Qtj+yp8n5OuckhmnNywUPibVdqD+MO+TI6aozBD3DSiRk4N/LKizUJdG?=
+ =?us-ascii?Q?XUWAwzET+7wRzDvvCbf0KCqvrDKGyfehHgKMvHSHYH2ELBPYl992pW7a6Sl/?=
+ =?us-ascii?Q?9OwIDtxZRlSPzTQyxFjcQZvII6pzPlPVxvpR+m0Ka3N5jhUbT1St1HUw6U3G?=
+ =?us-ascii?Q?3CgdgyZGVjMv5VRJyt//wu/EhdTSOejUP/e1OuvmZ9WSOndcMnu0FgKFypqE?=
+ =?us-ascii?Q?9ffa4pbs4iPhmzjYIRLaStMxp5qn8RSkInPOhGAV1dGQqDjQGdzgP57kKvCu?=
+ =?us-ascii?Q?yVDurVffol39Ps4Oer2mNYEsV+pjeGlpd2Qo6Tit4GEaxR9AdhO9TRirdsR1?=
+ =?us-ascii?Q?cJV+n3QMVA4HdKDA3PmJon0Eo+3kPzHCcQ4Nvn+G9rcxtdoEliqpqCNKRbex?=
+ =?us-ascii?Q?c4lD9U+HcCB8QMjmQLp1Kq8Rz0oZ4PaMcZ6H+4CAyDNg8/LBNLGlr1xfLDLm?=
+ =?us-ascii?Q?5vbg+RlZ7+bcMlB3yilfQe8z3ZTSsTzmgSqnEWeogci0h9JkymoK5yRjE+Kw?=
+ =?us-ascii?Q?mMJkZRxO2u5JqQMx+jaL0HgWLfRYrwgV1oUVr5Tm418C91PUnSxcsBoHibcn?=
+ =?us-ascii?Q?KPmDuNHypVqquGDFxSrnA/bJ3KygMZfonk+E73LN786jlzPa8uyO7sDd1ePl?=
+ =?us-ascii?Q?HYqzhA87GMRzj1Em+s+fOWC2lOUS7hBW91HZej+pKvTtF/WAuvAiRMvO3pGi?=
+ =?us-ascii?Q?teaMvNwxRxQSeZI3hBwHTvUXSnBQYlTeFQjl7Yzzzn39aC7UiVYK+lVp0evd?=
+ =?us-ascii?Q?iouOJt5CNHBO//Cc1PnvCa6NZkcVDruz+OOUna+N2O9MyD0GwPtloZh57Gcu?=
+ =?us-ascii?Q?4Xo8OyAXM8I9l+KO83IvuP9UNk2BhCk9welAle7NE3LpXYqANjDT6p1ftqoK?=
+ =?us-ascii?Q?nM6t6lyZUXh/l0w=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2024 13:05:49.9952 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 123c668d-2033-41cc-e19b-08dd20f706e0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001506.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6619
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,34 +150,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you, I'll update the patch set.
+Enable the SPI_STACKED_PARALLEL config option for
+all AMD/xilinx platforms, as this is required for parallel and
+stacked memories.
 
--Dave
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ configs/amd_versal2_mini_qspi_defconfig       | 1 +
+ configs/xilinx_versal_mini_qspi_defconfig     | 1 +
+ configs/xilinx_versal_net_mini_qspi_defconfig | 1 +
+ configs/xilinx_zynqmp_kria_defconfig          | 1 +
+ configs/xilinx_zynqmp_mini_qspi_defconfig     | 1 +
+ 5 files changed, 5 insertions(+)
 
-On Thu, Dec 19, 2024 at 11:56=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.o=
-rg>
-wrote:
+diff --git a/configs/amd_versal2_mini_qspi_defconfig b/configs/amd_versal2_mini_qspi_defconfig
+index eb63f060c1b..2750fa2cc27 100644
+--- a/configs/amd_versal2_mini_qspi_defconfig
++++ b/configs/amd_versal2_mini_qspi_defconfig
+@@ -74,5 +74,6 @@ CONFIG_PL01X_SERIAL=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ # CONFIG_GZIP is not set
+ # CONFIG_LMB is not set
+diff --git a/configs/xilinx_versal_mini_qspi_defconfig b/configs/xilinx_versal_mini_qspi_defconfig
+index 4d23b353409..529815afe16 100644
+--- a/configs/xilinx_versal_mini_qspi_defconfig
++++ b/configs/xilinx_versal_mini_qspi_defconfig
+@@ -78,4 +78,5 @@ CONFIG_ARM_DCC=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ # CONFIG_LMB is not set
+diff --git a/configs/xilinx_versal_net_mini_qspi_defconfig b/configs/xilinx_versal_net_mini_qspi_defconfig
+index 8453be5a590..818c62c6959 100644
+--- a/configs/xilinx_versal_net_mini_qspi_defconfig
++++ b/configs/xilinx_versal_net_mini_qspi_defconfig
+@@ -76,4 +76,5 @@ CONFIG_ARM_DCC=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ # CONFIG_LMB is not set
+diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+index e5ffc7076fb..5d91338c12e 100644
+--- a/configs/xilinx_zynqmp_kria_defconfig
++++ b/configs/xilinx_zynqmp_kria_defconfig
+@@ -196,6 +196,7 @@ CONFIG_SOC_XILINX_ZYNQMP=y
+ CONFIG_SPI=y
+ CONFIG_ZYNQ_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ CONFIG_SYSRESET=y
+ CONFIG_SYSRESET_CMD_POWEROFF=y
+ CONFIG_SYSRESET_PSCI=y
+diff --git a/configs/xilinx_zynqmp_mini_qspi_defconfig b/configs/xilinx_zynqmp_mini_qspi_defconfig
+index a60403d82c2..1204c1583d4 100644
+--- a/configs/xilinx_zynqmp_mini_qspi_defconfig
++++ b/configs/xilinx_zynqmp_mini_qspi_defconfig
+@@ -92,6 +92,7 @@ CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_ARM_DCC=y
+ CONFIG_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ CONFIG_PANIC_HANG=y
+ # CONFIG_GZIP is not set
+ # CONFIG_LMB is not set
+-- 
+2.34.1
 
-> On 12/19/24 7:49 PM, david regan wrote:
-> > Make use of OF_UPSTREAM which uses Linux dts.
->
-> ...
->
-> > --- a/configs/bcm963148_defconfig
-> > +++ b/configs/bcm963148_defconfig
-> > @@ -9,7 +9,7 @@ CONFIG_TARGET_BCM963148=3Dy
-> >   CONFIG_NR_DRAM_BANKS=3D1
-> >   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
-> >   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x2000000
-> > -CONFIG_DEFAULT_DEVICE_TREE=3D"bcm963148"
-> > +CONFIG_DEFAULT_DEVICE_TREE=3D"broadcom/bcm963148"
-> >   CONFIG_SYS_BOOTM_LEN=3D0x4000000
-> >   CONFIG_SYS_LOAD_ADDR=3D0x01000000
-> >   CONFIG_IDENT_STRING=3D" Broadcom BCM63148"
-> > @@ -17,6 +17,15 @@ CONFIG_ENV_VARS_UBOOT_CONFIG=3Dy
-> >   CONFIG_OF_STDOUT_VIA_ALIAS=3Dy
-> >   CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> >   CONFIG_HUSH_PARSER=3Dy
-> > +CONFIG_CMD_NAND=3Dy
-> This patch seems to be doing more than the commit message claims it does?
->
