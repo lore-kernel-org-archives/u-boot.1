@@ -4,93 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB4DE7718C
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 14:25:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D231E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 14:30:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05B218007D;
-	Fri, 20 Dec 2024 15:25:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CD1D80326;
+	Fri, 20 Dec 2024 15:30:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zr2enmr9";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="A2WRJb+R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13EA280087; Fri, 20 Dec 2024 15:25:37 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A7A3480326; Fri, 20 Dec 2024 15:30:34 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2061e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::61e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFD0E80077
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 15:25:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE37D80243
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 15:30:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6d89a727a19so26973576d6.0
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 06:25:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734704734; x=1735309534; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=y9l610mLAvKJVpgQYmjBEinZ2Km8fTmZZnhR1+I2meg=;
- b=Zr2enmr9Sx4q7HPz85VeQn/rghcfNG3huxveBTThAvYUTrzAvWqNxbcnfrFznqrIyS
- CmyVibKghX+LsHCSdktieiH+v5Ad30k4tHDg6g+WUY6W1tkKHw7ApSRkoWEASHQVI3d9
- ea0ox25xhAJw8DC5nXmIvkiw815TNYAEOqHSw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734704734; x=1735309534;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y9l610mLAvKJVpgQYmjBEinZ2Km8fTmZZnhR1+I2meg=;
- b=qXSqueFGEqMSJGNrfJ5onKH5Ubn1tlinKZvBw/C/+3VucZYxDOcCQkXWETPjo2f8tO
- C7AKLAH0Or2VbTO4PkeqFAnejEj0j+hrAgU9ssg8NhM2KWqeVAhYlMVNw3LI+0gFo/+s
- H9VxMPryYvtwOzMxZKhrSCMovrjsCoIEdDKNK8LzPuuSVnUUieLU31udgcWs/ruvV/H7
- OCrK1GnwCAkhyBvU+AL6A+G4S6sqJCewplkdvuO+0/+/XWTu5uAFFBwLzUWY1FjavChQ
- vRErNAme7WYAMmCJ0oeCNxWaEHo7ADpPRh6viDz5bylAX05gSGzi0trwc6sWl8q/PiWe
- 92Zw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUHWaz4Y6hgN79riHBdKZTYPagNU4IyoVDOsW9zgYhagDpYjSzTaVcPwqaVgRUKikq0mjkvkNA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3iQpbkM3uBas/EjTN6om7ZWbNvgZTvToIfYBRFWcXXush34m1
- aN9Fkn/oH0iIE6x5AibGXo6/03YddaIwSS/bKQTixOcnyI+i85igzdqaFXlwSHw=
-X-Gm-Gg: ASbGncs46CeXIaeX4LQEXiAmJXAK3lA6e7gS+a0ZpcbwRGcVwSNIQzG2Se7e9m3b/px
- uXoLhV6bu94sHBFnt8fLUGEypPh6H0OIH5y+1hYSB8T2O5f0CIZSaHA0N4bTd/k5hF76Ry/UrVK
- k3QgPi27QMTXgAJ06F2Pem4G4XPTg6EVngWbInKTkT6ZBhrJoNPfaC7BSYXCbdUpH6iK6zTqCo2
- 40fpkTJL1g8OD4tAArd0DKYe4p0e2aDHj24drxCDMkZa7qjjpJ0ukAu
-X-Google-Smtp-Source: AGHT+IFzi4uoSkdSFu9nTvzY+pYXp52mkazmeHgpwykhOKd2ZjVJ+/hrC5Rm+TpeOyGdDKlxMqULzA==
-X-Received: by 2002:a05:6214:29ef:b0:6d4:1c27:e9b1 with SMTP id
- 6a1803df08f44-6dd23631f97mr42621856d6.23.1734704733724; 
- Fri, 20 Dec 2024 06:25:33 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd182082f0sm17263086d6.129.2024.12.20.06.25.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2024 06:25:32 -0800 (PST)
-Date: Fri, 20 Dec 2024 08:25:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: Roger Quadros <rogerq@kernel.org>, vigneshr@ti.com, bb@ti.com,
- lukma@denx.de, n-francis@ti.com, mkorpershoek@baylibre.com,
- afd@ti.com, glaroque@baylibre.com, sjoerd@collabora.com,
- martyn.welch@collabora.com, rasmus.villemoes@prevas.dk,
- caleb.connolly@linaro.org, j-humphreys@ti.com, nm@ti.com,
- u-boot@lists.denx.de, srk@ti.com
-Subject: Re: [PATCH v2 4/5] arm: dts: k3-am62p5-sk-u-boot: enable USB0 for
- USB DFU boot
-Message-ID: <20241220142528.GA1505244@bill-the-cat>
-References: <20241218124542.3519447-1-s-vadapalli@ti.com>
- <20241218124542.3519447-5-s-vadapalli@ti.com>
- <e4b23017-375e-4430-aef2-001c1b6402ca@kernel.org>
- <noztdv7z4cwzjwc5sgqvzli36ppm2tlgrpqjgxbkbtojs34jnp@3lhnfx6ol4in>
- <a0dd6878-5f26-47a0-8025-ba9d9d320a31@kernel.org>
- <20241219170044.GX1505244@bill-the-cat>
- <lq5jqpiifhnmdvfqy2wguqklikcpo3hl37p3ojbm6pfsl6supl@opm7xkmql4y7>
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cGyAjjXJLs0bPwh8IKNfCggNMsQVZaNwv17uFkb+UJxJZmrCF0t5hr18EdmaImb5W7YLo2NuasibWeXEMyk+oaGMau/xyN4gqxJXsjcy1DeO1VErNU/5wGdTpbaAiXQewqQb36h+AMLuzuOk+S3rPvYbL2fsDjMC2x6zLcbek9vq7FJudbOBuaJ6M27l2LJt0MOrJp0aV4VT7dUYLLU6ok/s7ARi8qLvmheviOYe1m3yA9mkjdaBCBkFv/sKHGGuy8TVtfHygZar/l11C8CGAO8FVsCvYVgwuBuBBgGKvOmR9sECadYAZ2Wwcqb1SdaQExzIlKOb817ZC8nmQGErgg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rgK+p66uDONnwIFsc9g5yskJGrugZEmy42VruyH2Ixg=;
+ b=qwJLI/CKllmkr4PStfghITSjHAhuXH1BMSNTtcKDPyFO7Z/GzKTVBttmDhZfhcKwn1xtqUjtCqgV58LHsMnIWNfDoHjz0RhvgmbS5CION7lK4PImcONuPHYT8Gh5E8JpjLvrjwXL2c3yi5PGksFS2BJcPV2st/3DZ//5ILeZsvl0yMscYI/tkhSqIJ+dFkUVe4TVecHzR0FZUQtlYv3X0cmIHUIaE0u9UwG6RVJGm0iQREILe5bCHXs3OUbCv32352XqX1SGmLor46Xa+ABzgQ32TQCxoH6mEGv9VhcUvxzsmUlHE4vGxko7mTZA0yvo8T6pg+8TiMOblFkUaW29dA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rgK+p66uDONnwIFsc9g5yskJGrugZEmy42VruyH2Ixg=;
+ b=A2WRJb+RY1kD6ZTB6IlKb20tpby2jJMSXuragg5L955Xlf+QWTJ54QkLaw080Z7cszej4NERuV7V8zYUUimc8KQpk3PUnsLYrdX5M4jvMZXcEk5de8qfbsPq6HFWkJRjzH+UTJk2jo0gWwvxTy1mhjGljk5KkiPu+oA7brBBWEg=
+Received: from SA0PR13CA0025.namprd13.prod.outlook.com (2603:10b6:806:130::30)
+ by DM4PR12MB7741.namprd12.prod.outlook.com (2603:10b6:8:103::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.15; Fri, 20 Dec
+ 2024 14:30:25 +0000
+Received: from SN1PEPF00026368.namprd02.prod.outlook.com
+ (2603:10b6:806:130:cafe::b8) by SA0PR13CA0025.outlook.office365.com
+ (2603:10b6:806:130::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8293.9 via Frontend Transport; Fri,
+ 20 Dec 2024 14:30:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF00026368.mail.protection.outlook.com (10.167.241.133) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8251.15 via Frontend Transport; Fri, 20 Dec 2024 14:30:24 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 20 Dec
+ 2024 08:30:23 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 20 Dec
+ 2024 08:30:22 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Fri, 20 Dec 2024 08:30:18 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>, <tudor.ambarus@linaro.org>, <j-humphreys@ti.com>, 
+ <marex@denx.de>
+CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
+ <caleb.connolly@linaro.org>, <sjg@chromium.org>,
+ <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
+ <quentin.schulz@cherry.de>, <Takahiro.Kuwano@infineon.com>,
+ <p-mantena@ti.com>, <git@amd.com>
+Subject: [PATCH v3] mtd: spi-nor: Fix the spi_nor_read() when config
+ SPI_STACKED_PARALLEL is enabled
+Date: Fri, 20 Dec 2024 20:00:06 +0530
+Message-ID: <20241220143006.1921705-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a9Zu68kd+RCbgQ0y"
-Content-Disposition: inline
-In-Reply-To: <lq5jqpiifhnmdvfqy2wguqklikcpo3hl37p3ojbm6pfsl6supl@opm7xkmql4y7>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF00026368:EE_|DM4PR12MB7741:EE_
+X-MS-Office365-Filtering-Correlation-Id: fce34cfa-3139-4604-b718-08dd2102d76b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|7416014|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?41ClYrVjZyWEs6OlhBGGLc79NhIae8PSbEXPleePmnWD3UONEpYlmacYT8oM?=
+ =?us-ascii?Q?IJvEJy0j+hgBL9Gro4zgAHYhQ4gtTYYOgHj41Xn1YJb2d4L9LGNb9Je+lunp?=
+ =?us-ascii?Q?sPmh1RG3M5Dp4VwBAYxGVp8skhV3/vH49BY4URv5sDB7GOKB+nV+cYz4FDSu?=
+ =?us-ascii?Q?SN3mjmOjeQRpcMdT+dbkaioVzqJzyY02qIITttibv19H65L+02ERpvAuWzfr?=
+ =?us-ascii?Q?L+XJpAAcyC+8ffZhq0sPdyyH+dAtSjB8am13ZwBerJcHk47c726oOU93tMnD?=
+ =?us-ascii?Q?2AN0+7bD743JRJCY1ya4S4q54q/0fYLlL9D+cA+/X/pBsvyF674uyjTmR5gI?=
+ =?us-ascii?Q?VRgHUaQcjU6le2X/AxWmrJIBIHm1TeOfblzfHLB9fmf36+OdKn5qkN2gwlb+?=
+ =?us-ascii?Q?WUcaBwiITf68Y6B+DP7IHC2q3qFTyPUD2WNd67mBRqaxw2/qhyPbgJcBiMdx?=
+ =?us-ascii?Q?ftfDdGujyKTdgwf79ZPBXYApTCk3qSYuSZQhsWPwl0WHQ+TbbwlpeBsE7HzN?=
+ =?us-ascii?Q?hysq3tYt27j2+KBEti4f00LUmx58ujNEiJEjwsINc1jZbzrSuEAv+AwJQPk8?=
+ =?us-ascii?Q?00p4MJjnJqPOa6AOnotxfkpjxs7yvFvT5leWjKHTRKVbcA37U3ysswFa9pAe?=
+ =?us-ascii?Q?CuFugKvpaVgyV8V95NC8ljLbdElinX+y8nhh2NYzalKkAMSZoT1tph4Sj8jL?=
+ =?us-ascii?Q?2ZJH3gZwJ2J4GZR6O6ft/01k+pvUkirvFuOSEF/uCyMf+EG/p4z0UkLn1v2c?=
+ =?us-ascii?Q?ta2GMw9vDjLtBHlk4V4/yO5t6LafJ31tAcSWCmRbvnueoVYXxu7CV9XoC0Io?=
+ =?us-ascii?Q?NNb3QRFm5LKgOSuceOzYHDk3O/o3c7JGsiDW2mFqUyrAEsRU0lZL72rjOHtq?=
+ =?us-ascii?Q?NXBAZYhFm3JhSEZN36drngZVNMnoZ+DLLgCcu4prHSV3UHrWmHZ6ak/PCLY/?=
+ =?us-ascii?Q?fv1rA4JAT2G30+nqjQSG62LsuQ3KnzlKLvgXWrGZzPgl/ksEIoSP1PBzcHX0?=
+ =?us-ascii?Q?CBQx3bb2HzXcZzwi5bA4+8Xk2RrwMMfrIgxvlqcs51L0jQ+eQVA0FS4p6KPu?=
+ =?us-ascii?Q?FdtBz+zhnS1lLYvhf3yDhm7zvMSRmN6tkfFR79gtqnTLmqvInSM3lNBe65ZK?=
+ =?us-ascii?Q?ILZ2VvSKgaxPvAiuzm/ypKj2BzAUuJwRAnFGr1r8kCM1oXBCM2QT8Y4pldJX?=
+ =?us-ascii?Q?n/atHSS6Lqc1ajBWLg+2xh+3qrpXuhMgTVVfRqoD/fObqXSq6OASyWLHc+u5?=
+ =?us-ascii?Q?ZM792n5tcDP0DuqMGWvMH+XkIFlxjqgNDX0p/h4CJkCWh7uCs5mCLOnDbNzx?=
+ =?us-ascii?Q?Ea1wmKeVihJCDgtPdq5AUm2q/A/WTYii+lmEu+fuvlcL/0WfwTYthWQAuKn0?=
+ =?us-ascii?Q?/sMWcvycD4n6rwJavjIkTdyzb7iGxnjFkbX2ILfS/kHizs5aA8poi6KeMCNI?=
+ =?us-ascii?Q?JeLjy0JehEnagQwPcUNfZ8tJzn/p6vt67202ZGiFyLLyjJMkaIsls0wwog3K?=
+ =?us-ascii?Q?rAosRdGazsN6H2s=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(7416014)(1800799024)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2024 14:30:24.3509 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fce34cfa-3139-4604-b718-08dd2102d76b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00026368.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7741
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,64 +155,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Update the spi_nor_read() function only for parallel configuration
+when config SPI_STACKED_PARALLEL is enabled and keep the default
+code as is. For parallel configurations fix the read issue for
+4byte address width by passing the entire length to the read
+function, split the memory of 16MB size banks only when the
+address width is 3byte. Also update the size when the
+configuration is stacked.
 
---a9Zu68kd+RCbgQ0y
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 5d40b3d384 ("mtd: spi-nor: Add parallel and stacked memories support")
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Tested-by: Jonathan Humphreys <j-humphreys@ti.com>
+---
+Changes in v2:
+- Update the nor read for parallel configuration and for other case
+  keep the code as is.
+- Fixed the commit description.
+ - Tested the changes with s25fl128s flash
+ Zynq> sf probe 0 0 0
+ SF: Detected s25fl128s with page size 256 Bytes, erase size 64 KiB, 
+ total 16 MiB
+ Zynq> time sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000000;time 
+ Zynq> sf write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;time 
+ Zynq> sf read 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x1000000
+ SF: 16777216 bytes @ 0x0 Erased: OK
+ 
+ time: 32.464 seconds
+ device 0 whole chip
+ SF: 16777216 bytes @ 0x0 Written: OK
+ 
+ time: 15.515 seconds
+ device 0 whole chip
+ SF: 16777216 bytes @ 0x0 Read: OK
+ 
+ time: 1.557 seconds
+ Total of 16777216 byte(s) were the same
 
-On Fri, Dec 20, 2024 at 10:19:31AM +0530, Siddharth Vadapalli wrote:
-> On Thu, Dec 19, 2024 at 11:00:44AM -0600, Tom Rini wrote:
->=20
-> Hello Tom,
->=20
-> > On Thu, Dec 19, 2024 at 11:41:10AM +0200, Roger Quadros wrote:
-> > >=20
-> > >=20
-> > > On 19/12/2024 07:50, Siddharth Vadapalli wrote:
->=20
-> [...]
->=20
-> > > >=20
-> > > > Please let me know if this patch can be merged on the condition tha=
-t I
-> > > > post the patch for making the same set of changes in the Linux
-> > > > device-tree as well.
-> > >=20
-> > > Tom, what do you suggest?
-> >=20
-> > I feel like Nishanth will say it if I don't, so, it's blocked until it
-> > comes in via OF_UPSTREAM being re-synced. That's the rule to avoid the
-> > problems we've had in the past.
->=20
-> Thank you for the clarification. If you merge this series partially
-> (i.e. this patch is dropped), please drop the next patch for
-> documentation as well since the feature will not be functional without
-> this patch and hence shouldn't be documented as being functional.
+Changes in v3:
+- Compile out the parallel code in spi_nor_erase() if the SPI_STACKED_PARALLEL 
+  is enabled. 
+---
 
-Please post a v3 of this patch with that can be taken now, off-hand I
-don't know how well the kernel cycle will sync up with taking the dts
-change such that we'll also get it.
+ drivers/mtd/spi/spi-nor-core.c | 68 +++++++++++++++++++++-------------
+ 1 file changed, 43 insertions(+), 25 deletions(-)
 
---=20
-Tom
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index ec841fb13b..691962ef27 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -1130,17 +1130,19 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ 			goto erase_err;
+ 		}
+ 		offset = addr;
+-		if (nor->flags & SNOR_F_HAS_PARALLEL)
+-			offset /= 2;
+-
+-		if (nor->flags & SNOR_F_HAS_STACKED) {
+-			if (offset >= (mtd->size / 2))
+-				nor->spi->flags |= SPI_XFER_U_PAGE;
+-			else
+-				nor->spi->flags &= ~SPI_XFER_U_PAGE;
++		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
++			if (nor->flags & SNOR_F_HAS_PARALLEL)
++				offset /= 2;
++
++			if (nor->flags & SNOR_F_HAS_STACKED) {
++				if (offset >= (mtd->size / 2))
++					nor->spi->flags |= SPI_XFER_U_PAGE;
++				else
++					nor->spi->flags &= ~SPI_XFER_U_PAGE;
++			}
+ 		}
+ #ifdef CONFIG_SPI_FLASH_BAR
+-		ret = write_bar(nor, addr);
++		ret = write_bar(nor, offset);
+ 		if (ret < 0)
+ 			goto erase_err;
+ #endif
+@@ -1152,7 +1154,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ 		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE)) {
+ 			ret = spi_nor_erase_chip(nor);
+ 		} else {
+-			ret = spi_nor_erase_sector(nor, addr);
++			ret = spi_nor_erase_sector(nor, offset);
+ 		}
+ 		if (ret < 0)
+ 			goto erase_err;
+@@ -1578,8 +1580,8 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+ 	int ret;
+ 	loff_t offset = from;
+-	u32 read_len = 0;
+ 	u32 rem_bank_len = 0;
++	u32 stack_shift = 0;
+ 	u8 bank;
+ 	bool is_ofst_odd = false;
+ 
+@@ -1593,18 +1595,23 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 	}
+ 
+ 	while (len) {
+-		bank = (u32)from / SZ_16M;
+-		if (nor->flags & SNOR_F_HAS_PARALLEL)
+-			bank /= 2;
+-
+-		rem_bank_len = SZ_16M * (bank + 1);
+-		if (nor->flags & SNOR_F_HAS_PARALLEL)
+-			rem_bank_len *= 2;
+-		rem_bank_len -= from;
+-
++		size_t read_len = len;
+ 		offset = from;
+ 
++	if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
++		if (nor->addr_width == 3) {
++			bank = (u32)from / SZ_16M;
++			if (nor->flags & SNOR_F_HAS_PARALLEL)
++				bank /= 2;
++
++			rem_bank_len = SZ_16M * (bank + 1);
++			if (nor->flags & SNOR_F_HAS_PARALLEL)
++				rem_bank_len *= 2;
++			rem_bank_len -= from;
++		}
++
+ 		if (nor->flags & SNOR_F_HAS_STACKED) {
++			stack_shift = 1;
+ 			if (offset >= (mtd->size / 2)) {
+ 				offset = offset - (mtd->size / 2);
+ 				nor->spi->flags |= SPI_XFER_U_PAGE;
+@@ -1613,20 +1620,31 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 			}
+ 		}
+ 
++		if (nor->addr_width == 4)
++			rem_bank_len = (mtd->size >> stack_shift) - offset;
++
+ 		if (nor->flags & SNOR_F_HAS_PARALLEL)
+ 			offset /= 2;
++	}
+ 
+ #ifdef CONFIG_SPI_FLASH_BAR
++		u32 remain_len;
++
+ 		ret = write_bar(nor, offset);
+ 		if (ret < 0)
+ 			return log_ret(ret);
+-#endif
+-
+-		if (len < rem_bank_len)
++		remain_len = (SZ_16M * (nor->bank_curr + 1)) - offset;
++		if (len < remain_len)
+ 			read_len = len;
+ 		else
+-			read_len = rem_bank_len;
+-
++			read_len = remain_len;
++#endif
++		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
++			if (len < rem_bank_len)
++				read_len = len;
++			else
++				read_len = rem_bank_len;
++		}
+ 		if (read_len == 0)
+ 			return -EIO;
+ 
+-- 
+2.34.1
 
---a9Zu68kd+RCbgQ0y
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdlflUACgkQFHw5/5Y0
-tyxSSwv+MVg1rV9GcRWmUmSfiGE5uuAjo5c7hj6un3A9M3v2nhCigZn66dnLpRV/
-CtHKLeVb70yWletQChY//USYHNTbfh9G6yX89UghIXRWD68ZDUfentmSPO54Y4BK
-pDRVXNz1PSnGYgsyVAgWZxsvgL/ALzv7HsHhQfVtnt/ZC472W7qIxPEwkrCrWB5P
-8RnfQ6d8JYNWoCZUZmXpDFmC/AnY6WHlpKu91TATCVs/GAouMS9utZvJra3dwkP+
-9JZyoOWenuYeOXjIgDoZ7e797/J0vz2f8v+yfDo2hXMtVJww5fbMSlmaw+tUAJYP
-hWD2dfElXNEsU3HcHs1vGToCyj1r7k8LQivgEM5Ui7y4cHvV9hecRrXq2gwQ4oRL
-88QidS1OrEIulkOwNYn/Eng0uL746MxF97+fxhP+9TZMMhUEEYvjEifdOUA21QYu
-z/ygLLdtDUUrK6HV0OzMucX2MGg8ZmxXi7Cgqvsi7nHiPDMqZtiG9b8UJkmI7W/a
-7iUd9e02
-=vE6J
------END PGP SIGNATURE-----
-
---a9Zu68kd+RCbgQ0y--
