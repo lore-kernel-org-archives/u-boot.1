@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9182CE7718B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF309E7718B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:06:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2881D80423;
+	by phobos.denx.de (Postfix) with ESMTP id 808E180433;
 	Fri, 20 Dec 2024 21:05:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vhBo/oj6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MNZ5nwY6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EC4180429; Fri, 20 Dec 2024 20:22:27 +0100 (CET)
+ id 930EA803A9; Fri, 20 Dec 2024 20:22:27 +0100 (CET)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0DC8803A9
+ by phobos.denx.de (Postfix) with ESMTPS id B69C3803CC
  for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 20:22:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJMKD4201859
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJMKp0201854
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
  Fri, 20 Dec 2024 13:22:20 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1734722540;
- bh=alxBlYTGxoC7EMbWuwWlVrt3SSatliG5hl2CX/wktk8=;
+ bh=hFGmo8GMPF8Gl/T8TzDmN6JEemPEb6/hheg+DnG5yxs=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=vhBo/oj6tXRO4JxzTH85Xzz/eGlo0hO1DdKPt2vnTKOM9YM9AOS2a8gV8i2jRffAw
- n2JjryojK8aQx8OZrlIyiDxPaOOsE06THFYuuLxK3+Bzg96b31W8tM3yU4q+Agx5L7
- blSwFJOaC5xz9BSr1S9YbcbtfLgvdfgACVZEZ74c=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKWo015537;
+ b=MNZ5nwY6Rw3xfQ+WOe8dswI8wU7/+TGabjLsd5zAiZrZgdnYMQ73VTU+QSv2Am0mm
+ dOvu1c+YA1JHRegidFYW8wmQUutgjsOIpi0hM255fN9dV7zAd3th97/1Gc6uDvkYyb
+ iFWii8nj4mSMsWjA7TP8GACVPd8CI1Lqf43zi/JE=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKkE015526;
  Fri, 20 Dec 2024 13:22:20 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
  Dec 2024 13:22:20 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 20 Dec 2024 13:22:20 -0600
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKJO029134;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKJN029134;
  Fri, 20 Dec 2024 13:22:20 -0600
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 4/7] configs: am62ax_evm_a53_defconfig: Enable MMC UHS modes
-Date: Fri, 20 Dec 2024 13:22:17 -0600
-Message-ID: <20241220192220.2029543-5-jm@ti.com>
+Subject: [PATCH 3/7] configs: am62x_evm_a53_defconfig: Enable MMC UHS modes
+Date: Fri, 20 Dec 2024 13:22:16 -0600
+Message-ID: <20241220192220.2029543-4-jm@ti.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241220192220.2029543-1-jm@ti.com>
 References: <20241220192220.2029543-1-jm@ti.com>
@@ -85,13 +85,13 @@ and U-Boot proper.
 
 Signed-off-by: Judith Mendez <jm@ti.com>
 ---
- configs/am62ax_evm_a53_defconfig | 23 +++++++++++++++++++++--
- 1 file changed, 21 insertions(+), 2 deletions(-)
+ configs/am62x_evm_a53_defconfig | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
-index 23da7b3bf61..a070182cd14 100644
---- a/configs/am62ax_evm_a53_defconfig
-+++ b/configs/am62ax_evm_a53_defconfig
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index 87dc1e73505..54f4ddedcd7 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
 @@ -1,6 +1,7 @@
  CONFIG_ARM=y
  CONFIG_ARCH_K3=y
@@ -100,28 +100,26 @@ index 23da7b3bf61..a070182cd14 100644
  CONFIG_SPL_LIBCOMMON_SUPPORT=y
  CONFIG_SPL_LIBGENERIC_SUPPORT=y
  CONFIG_NR_DRAM_BANKS=2
-@@ -8,6 +9,7 @@ CONFIG_SOC_K3_AM62A7=y
- CONFIG_TARGET_AM62A7_A53_EVM=y
+@@ -9,6 +10,7 @@ CONFIG_TARGET_AM625_A53_EVM=y
  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
+ CONFIG_SF_DEFAULT_SPEED=25000000
 +CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62a7-sk"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
-@@ -34,6 +36,7 @@ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-sk"
+ CONFIG_SPL_TEXT_BASE=0x80080000
+@@ -43,6 +45,7 @@ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
  CONFIG_SPL_ENV_SUPPORT=y
  CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
 +CONFIG_SPL_I2C=y
  CONFIG_SPL_DM_MAILBOX=y
+ CONFIG_SPL_DM_SPI_FLASH=y
  CONFIG_SPL_POWER_DOMAIN=y
- CONFIG_SPL_YMODEM_SUPPORT=y
-@@ -57,10 +60,20 @@ CONFIG_CLK_TI_SCI=y
+@@ -76,9 +79,21 @@ CONFIG_DFU_SF=y
  CONFIG_DMA_CHANNELS=y
  CONFIG_TI_K3_NAVSS_UDMA=y
  CONFIG_TI_SCI_PROTOCOL=y
--# CONFIG_GPIO is not set
--# CONFIG_I2C is not set
 +CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
 +CONFIG_DA8XX_GPIO=y
 +CONFIG_DM_PCA953X=y
@@ -130,6 +128,7 @@ index 23da7b3bf61..a070182cd14 100644
 +CONFIG_SYS_I2C_OMAP24XX=y
  CONFIG_DM_MAILBOX=y
  CONFIG_K3_SEC_PROXY=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
 +CONFIG_MMC_IO_VOLTAGE=y
 +CONFIG_SPL_MMC_IO_VOLTAGE=y
 +CONFIG_MMC_UHS_SUPPORT=y
@@ -139,7 +138,7 @@ index 23da7b3bf61..a070182cd14 100644
  CONFIG_MMC_SDHCI=y
  CONFIG_MMC_SDHCI_ADMA=y
  CONFIG_SPL_MMC_SDHCI_ADMA=y
-@@ -74,6 +87,12 @@ CONFIG_SPL_PINCTRL=y
+@@ -99,6 +114,12 @@ CONFIG_SPL_PINCTRL=y
  CONFIG_PINCTRL_SINGLE=y
  CONFIG_POWER_DOMAIN=y
  CONFIG_TI_SCI_POWER_DOMAIN=y
@@ -151,7 +150,7 @@ index 23da7b3bf61..a070182cd14 100644
 +CONFIG_SPL_DM_REGULATOR_GPIO=y
  CONFIG_K3_SYSTEM_CONTROLLER=y
  CONFIG_REMOTEPROC_TI_K3_ARM64=y
- CONFIG_REMOTEPROC_TI_K3_DSP=y
+ CONFIG_RESET_TI_SCI=y
 -- 
 2.47.1
 
