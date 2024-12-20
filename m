@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEC9E7718A
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 10:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CD47E7718A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 10:38:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04DBC803AB;
+	by phobos.denx.de (Postfix) with ESMTP id 543E8803C6;
 	Fri, 20 Dec 2024 11:38:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="k+z2zroj";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="B1zrurWy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C05380328; Fri, 20 Dec 2024 11:38:10 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 870988036E; Fri, 20 Dec 2024 11:38:11 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C0088032B
+ by phobos.denx.de (Postfix) with ESMTPS id 224968021A
  for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 11:38:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id DA23BA418E5;
+ by nyc.source.kernel.org (Postfix) with ESMTP id B3961A418B1;
  Fri, 20 Dec 2024 10:36:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 05B21C4CEDD;
- Fri, 20 Dec 2024 10:38:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D26DDC4CED4;
+ Fri, 20 Dec 2024 10:38:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734691085;
- bh=Nu66tKx2WikTlhwGdbgkVMZQMObgXei+Xtt2FLVxCS4=;
+ s=k20201202; t=1734691084;
+ bh=8iwWRzHBmbxiyuEudCd+zXdnWm/6uX4bONJ0TBYx+1Q=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=k+z2zrojonAuKgkKdJ1PWGazFWCq3JvJ66zBZYVlXiAdwaHFPnJN5H61GGxJNX7vV
- Q6QlQTzJ8Vmq5J76HXhqgTMdkff2biiS7QN/bl9vElR9wGXjLQhtLZ6JiFcllumbgM
- lTzWMohmP3mbJY1Cb8cl0DxZebbSUUjXMHm/VnLjRHv8HlmV7UjO3738clOAVxeXFI
- AXgY/qYqFyMUsUjQD3YpBHiGq3zZmS2v8I9LpYMYjBX+v0AlKUF0zfQelIWdJYPwUC
- haEBcVi0P8jiltmRPNy3STs1NRsfvCIXDX2m2oM0PncHUMp6UafS/wTsEVsaJHrOEV
- fSgp+KThRYLBw==
+ b=B1zrurWyUnVpZbiRPJHQ2PgyLUZE/w3n3IZkkXg75DVDm8eZ3uIM9OZlDLRTWQYfv
+ 8N2CDNzgQxwzIN2kimC7k/DJE+mvNAAr5TUte0M7VH3FmcnRL6DJ0YHfq/gejcQ1d3
+ v0229DHl868X4oiEfojvR6COuSmZWp9J7ODktOf2KI1rSZQItJK3ybrLuawvYIzE4j
+ iPgsfaXp1QEu5Kqnyp1nc8WFetE7AaNdN8aQnA9D5DORApg7CpG6XRCYjlRKH8L/aI
+ /UQevShFeflxF7y/Ed6PjxeJ2OHxU4bcZ56uEbdbasrd684jX4DaAsOdZz648MDSXf
+ UXYsiCw+EPOVg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id EF101E7718A;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id C7261E7718C;
  Fri, 20 Dec 2024 10:38:04 +0000 (UTC)
 From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
  <devnull+j.ne.posteo.net@kernel.org>
-Date: Fri, 20 Dec 2024 11:37:54 +0100
-Subject: [PATCH v2 4/4] gpio: mpc8xxx: Preserve pre-init state of outputs
+Date: Fri, 20 Dec 2024 11:37:52 +0100
+Subject: [PATCH v2 2/4] powerpc: mpc83xx: Allow including initreg.h into
+ multiple files
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20241220-mpc83xx-misc-v2-4-ff4c17ee5fa4@posteo.net>
+Message-Id: <20241220-mpc83xx-misc-v2-2-ff4c17ee5fa4@posteo.net>
 References: <20241220-mpc83xx-misc-v2-0-ff4c17ee5fa4@posteo.net>
 In-Reply-To: <20241220-mpc83xx-misc-v2-0-ff4c17ee5fa4@posteo.net>
 To: Mario Six <mario.six@gdsys.cc>, Tom Rini <trini@konsulko.com>
 Cc: Sinan Akman <sinan@writeme.com>, u-boot@lists.denx.de, 
  =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1734691081; l=2017;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1734691081; l=1760;
  i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=3OOJ1gFlOUtLdlbIMEpQp2gBYtM4bC2L3oBPBpICZwE=;
- b=CUY4EeyCZnhTAJVh8ZGfJXjBCo4QrmZ9Rk5v4rmy7uFZHR+4L25bpnFsOsYsvyPtXoGXWhsh8
- sVMNiQvUZBaDnRnqEUZ/WJMCGNpUrkZodMS5HEoF+XAOuE16mYkwZQk
+ bh=q1aGlwVySHapcSK9VkUtvogioI7EimJ3UdYBFYbqTVw=;
+ b=1UyAoOOe3iik9JLSooPLHOgljL7NDG4YSHeMXytOB004rA1hRqqMjEnhEnF3qWlqHhLmdjlEi
+ gagVHVbFGVgDdrOZUg2dc+aEeWwJO7h5Xg6oZ/nymqO/cJHCcz7slSv
 X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
  pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
 X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
@@ -86,57 +88,63 @@ X-Virus-Status: Clean
 
 From: "J. Neuschäfer" <j.ne@posteo.net>
 
-The mpc8xxx_gpio driver contains a workaround for certain chips
-where the previously written state of outputs cannot be read back
-from the GPIO data (GPDAT) register (MPC8572/MPC8536). This workaround
-consists of tracking the state of GPDAT in a "shadow register" (i.e. a
-software variable). The shadow register is initialized to zero.
+Globals defined in headers can result in multiple-definition errors
+while linking, if they are visible beyond the current translation unit.
 
-This results in a problem w.r.t. outputs that are configured to a
-high (1) state before U-Boot runs, but not touched by U-Boot itself:
-Due to the zero-initialization, these GPIOs end up being set to zero,
-the first time that any other output is set.
-
-To avoid such issues initialize the GPDAT shadow register to the value
-previously held by any outputs, if possible. On MPC8572/MPC8536 this
-should make no difference, i.e. the shadow register should be
-initialized to zero on these chips.
-
-This patch has been tested on a MPC8314E-based board.
+This hasn't been a problem for initreg.h so far, but would become a
+problem in the next patch, where I use a constant from initreg.h in a
+second C file.
 
 Reviewed-by: Sinan Akman <sinan@writeme.com>
 Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
 ---
 
-V2:
-- Clarify how the patch has been tested
+v2:
+- Clarify when the visibility issue becomes a problem
 ---
- drivers/gpio/mpc8xxx_gpio.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ arch/powerpc/cpu/mpc83xx/initreg/initreg.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpio/mpc8xxx_gpio.c b/drivers/gpio/mpc8xxx_gpio.c
-index e9bd38f162c10c76460bc63f93c03a711cb4d38e..709d04017d154ecae1e8d16d7c35ced521157c4d 100644
---- a/drivers/gpio/mpc8xxx_gpio.c
-+++ b/drivers/gpio/mpc8xxx_gpio.c
-@@ -204,7 +204,17 @@ static int mpc8xxx_gpio_plat_to_priv(struct udevice *dev)
- 		return -ENOMEM;
+diff --git a/arch/powerpc/cpu/mpc83xx/initreg/initreg.h b/arch/powerpc/cpu/mpc83xx/initreg/initreg.h
+index 63aa5c946696ee0368bb3453b40ff0110f0fbcfd..ea1176e7fe10dbb549125ab6b2706fee05a92734 100644
+--- a/arch/powerpc/cpu/mpc83xx/initreg/initreg.h
++++ b/arch/powerpc/cpu/mpc83xx/initreg/initreg.h
+@@ -13,7 +13,7 @@
+ #define SPCR_TSECBDP_MASK	0x00000C00
+ #define SPCR_TSECEP_MASK	0x00000300
  
- 	priv->gpio_count = plat->ngpios;
--	priv->dat_shadow = 0;
-+
-+	/*
-+	 * On platforms that do support reading back output values, we want to
-+	 * try preserving them, so that we don't accidentally set unrelated
-+	 * GPIOs to zero in mpc8xxx_gpio_set_value.
-+	 */
-+	if (priv->little_endian)
-+		priv->dat_shadow = in_le32(&priv->base->gpdat) & in_le32(&priv->base->gpdir);
-+	else
-+		priv->dat_shadow = in_be32(&priv->base->gpdat) & in_be32(&priv->base->gpdir);
-+
+-	const __be32 spcr_mask =
++	static const __be32 spcr_mask =
+ #if defined(CONFIG_SPCR_OPT) && !defined(CONFIG_SPCR_OPT_UNSET)
+ 		SPCR_OPT_MASK |
+ #endif
+@@ -27,7 +27,7 @@
+ 		SPCR_TSEC2EP_MASK |
+ #endif
+ 		0;
+-	const __be32 spcr_val =
++	static const __be32 spcr_val =
+ #if defined(CONFIG_SPCR_OPT) && !defined(CONFIG_SPCR_OPT_UNSET)
+ 		CONFIG_SPCR_OPT |
+ #endif
+@@ -42,7 +42,7 @@
+ #endif
+ 		0;
  
- 	priv->type = driver_data;
+-	const __be32 lcrr_mask =
++	static const __be32 lcrr_mask =
+ #if defined(CONFIG_LCRR_DBYP) && !defined(CONFIG_LCRR_DBYP_UNSET)
+ 		LCRR_DBYP |
+ #endif
+@@ -60,7 +60,7 @@
+ #endif
+ 		0;
  
+-	const __be32 lcrr_val =
++	static const __be32 lcrr_val =
+ #if defined(CONFIG_LCRR_DBYP) && !defined(CONFIG_LCRR_DBYP_UNSET)
+ 		CONFIG_LCRR_DBYP |
+ #endif
 
 -- 
 2.45.2
