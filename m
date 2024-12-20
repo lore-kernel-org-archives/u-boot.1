@@ -4,86 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5749DE77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 16:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A6F0E7718B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 16:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5977E80352;
-	Fri, 20 Dec 2024 17:29:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E84EC80352;
+	Fri, 20 Dec 2024 17:37:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eiSHfcNb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BoosVjx8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C92980381; Fri, 20 Dec 2024 17:29:41 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 7392A8036F; Fri, 20 Dec 2024 17:37:57 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9521A80326
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 17:29:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 390EF80326
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 17:37:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7b6e9317a2aso261223885a.0
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 08:29:38 -0800 (PST)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-46772a0f8fbso18877951cf.3
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 08:37:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734712177; x=1735316977; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734712674; x=1735317474; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pUGT5Iexhr5PHBjF2XRDZkiZi33ak5t4uOI/q8JSXac=;
- b=eiSHfcNbGxaNuoql669yV0/IxetRZt1jTt7XGKrKC3keuwjzC+au61DbeVplDQzDBG
- xycdWf2wB+mRxpSb1RVNEGs3nnAjaj/fOSKblSW+KMxUJbml1C4vauRfs2Zr2+r8Figo
- +r05HzydAbuy4hdrWYKEpayVx9jDuZjIvfEf4=
+ bh=wcNh7Y2xTlhq28S4I937AxojvqduMS8R7vf9hl8YDnM=;
+ b=BoosVjx8mFfZlv7t9zXJKN7BhClpK88wxCUkdi8K4fE0YBGvl/RVbUE3c3q+YKU0mm
+ NYqjMFgmkJu7iq7El1UTKTzDXhx3CgMRXSvIsTpjHuYPYVnUHp+Ay2h+bKps37OSoQ/X
+ ns8+FSb9IKhzAPzDFl/BKbBEqacCUWm6PGBqA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734712177; x=1735316977;
+ d=1e100.net; s=20230601; t=1734712674; x=1735317474;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pUGT5Iexhr5PHBjF2XRDZkiZi33ak5t4uOI/q8JSXac=;
- b=VzUOZv5dt4zCxoOU3gkZymFr88S29C4fCGqohw4iFmMgcAVNjrGte2ClwWElic+ps4
- 8F0nraCUGebytmckyrn6Ih8JGS+68FEe5qWy3Vx6ui5GJUp2B2B4vkyP5lfTtvt+AcXX
- f2IaLvo9jau2f6iPBHhr8o4M4ddOcLoZLgpK0SSJKE01QC4z9ZYuKEbAfqQmZLYvhGYx
- QqxJEwrddtH2kBQt68e5DvOhbUrZunF+32TfbAe2SvCehcZ8JKJPMnIFqj8gNvZ0Ugvx
- +mZk7J9tVz2Tk6RM9TQX2Fn53qxTB6HGLRkBjYfyQsGVgZ412stJKHurfTRj98GYvnIk
- NYdA==
+ bh=wcNh7Y2xTlhq28S4I937AxojvqduMS8R7vf9hl8YDnM=;
+ b=res7y7ACCFcd/FmYmukE10owf86CKN45hHgwgz4GdY5ZQrbvQ220fCHLppMQ2sbOod
+ JABydv6SmpHDutHTytaptnsUgqdrvAawbFIcgjxWu/JSD7B3xx8TrxO6L5bhN9BfWx60
+ axxSZbZ7WOfYr0CjgMu4O3C5dz8knWCHLIKGpVcTfyCOSdyRKZl7YL0o2b/tUhRqV+Bt
+ oVC76K1Tf/+GGmhLdu19g1GnoQ5emcPEvX9M28zUbl4W5bHA+iqXBrMk+9GqL8yUcpGt
+ SdfxY33p/3gDDVnVRx1W46u4IbtPILzpq9yuJTT4L0CWS1beiKQKK9/IZLaOIKR/ksvm
+ yOFQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqYnFvB4mFxQ1r7CTE+iWE2xArpmf3Y/qmBAm/M8ucQ6+K8nkp4sAgrhIl+MoTrYx6mHytSQM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzfFz/NFFhj2/R4lO5+cenJBcXL5wLSu3WXqowog1Zs5WuCWiaR
- BeE0IMnxG/2KwEp4W6cHviEn7tXkAvtUSNOpXyt7OBKLcVVdt1ILoaIoHPdWv1g=
-X-Gm-Gg: ASbGncuKmkzgpwWsKHxEeSbm95sKwOITYNlYWU3eVjZ2+50GRFWJJ8y1t5pf2uLg6R3
- fRz4EZjiNY4YoZ2qrGRHuNSA0yhkYvOwb11q4di4GEEutHFy4jFM5RPTKykGSM0fA6xJXFrpkfv
- EQHSSmNxUg4zXJDfswoEffh1Yw3BQzBpiIWQLgIrXbWJfUhZPIAxFWUPDhFKvQsZGn4t91l/nro
- Ogi8mL2i/6wqFu8XhnWSuUqwusssmKpUAtfx7Tm5uW6yCPmSqG/7uTg
-X-Google-Smtp-Source: AGHT+IFDccjUpTqZfsAaNCqz7Gl4bqOQ8AfnvYQqhLDD8jCH8HeSBIxuLy4T6Q+wWi1mNaiE7E/bDw==
-X-Received: by 2002:a05:6214:482:b0:6d8:e7c9:ffa0 with SMTP id
- 6a1803df08f44-6dd155cde22mr150748346d6.19.1734712177352; 
- Fri, 20 Dec 2024 08:29:37 -0800 (PST)
+ AJvYcCW2Spf/vpKBydJzqNPwqqNOETrB0YrMborknX2A4j6n47EVWVqQSFiGRG+ag63jGPiHfxnJRtg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzsRwZAtdciE9IBx1CIQqJ3UeYkMlMb68Kpj7lU4BfaG2KJW92c
+ 5fHNLdvOTVj6ZkjoJqjgfAgOfiHvUeNoSJ5hHTsN4zw4/LR99JsO/QGpd+E9W90=
+X-Gm-Gg: ASbGncskI3zjPQFqQEz7w2st2MhY3K4bDr/9j6lP798bWy0pWpw5H1OPcdvvEStNcdv
+ WBsrbE2G89yiqLi3S/pgoo40XS+zhM5wTN8j0nVlTOXJ0pBBlzyki1Kt93d3f7AHVr7C7IqM/HE
+ aOBjVuIULtdju/9GIy3qaAwWOL/wCbT/lF4T+UIdk1bMVqVpPuntRa0+AXxWkSMErzLgFhCayHJ
+ 7Ifno+b95qlcQWwkJXkM/g3Wvk8LH7xJlzCMSFgotOjdqyV0ZDRe9Jr
+X-Google-Smtp-Source: AGHT+IFwty2AcxzxXVXZcwbbFWaEzqzdC2+8oV03dAYFhRh0NrTuJAPE1yKGO45NCdE56i6+V/LXkQ==
+X-Received: by 2002:ac8:7e96:0:b0:467:59f6:3e56 with SMTP id
+ d75a77b69052e-46a4a98a6e7mr62976521cf.36.1734712673925; 
+ Fri, 20 Dec 2024 08:37:53 -0800 (PST)
 Received: from bill-the-cat ([187.144.29.192])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb4bcsm18344586d6.86.2024.12.20.08.29.35
+ d75a77b69052e-46a3eb1760fsm18263491cf.71.2024.12.20.08.37.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2024 08:29:36 -0800 (PST)
-Date: Fri, 20 Dec 2024 10:29:33 -0600
+ Fri, 20 Dec 2024 08:37:53 -0800 (PST)
+Date: Fri, 20 Dec 2024 10:37:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH 00/12] rockchip: rk3399: Migrate to use TPL on bob and
- kevin
-Message-ID: <20241220162933.GG1505244@bill-the-cat>
-References: <20241212235735.164272-1-jonas@kwiboo.se>
- <CAFLszTg=UkyZc7qUmgNSv06Sm8vXgS62mHMczH9wudFX1jqHdA@mail.gmail.com>
- <2631e34e-2fd0-45f4-aa4b-0e7405808301@kwiboo.se>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: Roger Quadros <rogerq@kernel.org>, vigneshr@ti.com, bb@ti.com,
+ lukma@denx.de, n-francis@ti.com, mkorpershoek@baylibre.com,
+ afd@ti.com, glaroque@baylibre.com, sjoerd@collabora.com,
+ martyn.welch@collabora.com, rasmus.villemoes@prevas.dk,
+ caleb.connolly@linaro.org, j-humphreys@ti.com, nm@ti.com,
+ u-boot@lists.denx.de, srk@ti.com
+Subject: Re: [PATCH v2 4/5] arm: dts: k3-am62p5-sk-u-boot: enable USB0 for
+ USB DFU boot
+Message-ID: <20241220163749.GH1505244@bill-the-cat>
+References: <20241218124542.3519447-1-s-vadapalli@ti.com>
+ <20241218124542.3519447-5-s-vadapalli@ti.com>
+ <e4b23017-375e-4430-aef2-001c1b6402ca@kernel.org>
+ <noztdv7z4cwzjwc5sgqvzli36ppm2tlgrpqjgxbkbtojs34jnp@3lhnfx6ol4in>
+ <a0dd6878-5f26-47a0-8025-ba9d9d320a31@kernel.org>
+ <20241219170044.GX1505244@bill-the-cat>
+ <lq5jqpiifhnmdvfqy2wguqklikcpo3hl37p3ojbm6pfsl6supl@opm7xkmql4y7>
+ <20241220142528.GA1505244@bill-the-cat>
+ <5qksc7opj374tssk365jfo5orxmymwn3pzcvchtodf2nenvtsa@4v2dldntch7z>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RxDfZAczOA6vApJz"
+ protocol="application/pgp-signature"; boundary="taX5zTqK969PkW0c"
 Content-Disposition: inline
-In-Reply-To: <2631e34e-2fd0-45f4-aa4b-0e7405808301@kwiboo.se>
+In-Reply-To: <5qksc7opj374tssk365jfo5orxmymwn3pzcvchtodf2nenvtsa@4v2dldntch7z>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,124 +110,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RxDfZAczOA6vApJz
+--taX5zTqK969PkW0c
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 20, 2024 at 05:22:28PM +0100, Jonas Karlman wrote:
-> Hi Simon,
->=20
-> On 2024-12-13 04:09, Simon Glass wrote:
-> > Hi Jonas,
+On Fri, Dec 20, 2024 at 09:49:46PM +0530, Siddharth Vadapalli wrote:
+> On Fri, Dec 20, 2024 at 08:25:28AM -0600, Tom Rini wrote:
+> > On Fri, Dec 20, 2024 at 10:19:31AM +0530, Siddharth Vadapalli wrote:
+> > > On Thu, Dec 19, 2024 at 11:00:44AM -0600, Tom Rini wrote:
+> > >=20
+> > > Hello Tom,
+> > >=20
+> > > > On Thu, Dec 19, 2024 at 11:41:10AM +0200, Roger Quadros wrote:
+> > > > >=20
+> > > > >=20
+> > > > > On 19/12/2024 07:50, Siddharth Vadapalli wrote:
+> > >=20
+> > > [...]
+> > >=20
+> > > > > >=20
+> > > > > > Please let me know if this patch can be merged on the condition=
+ that I
+> > > > > > post the patch for making the same set of changes in the Linux
+> > > > > > device-tree as well.
+> > > > >=20
+> > > > > Tom, what do you suggest?
+> > > >=20
+> > > > I feel like Nishanth will say it if I don't, so, it's blocked until=
+ it
+> > > > comes in via OF_UPSTREAM being re-synced. That's the rule to avoid =
+the
+> > > > problems we've had in the past.
+> > >=20
+> > > Thank you for the clarification. If you merge this series partially
+> > > (i.e. this patch is dropped), please drop the next patch for
+> > > documentation as well since the feature will not be functional without
+> > > this patch and hence shouldn't be documented as being functional.
 > >=20
-> > On Thu, 12 Dec 2024 at 16:57, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >>
-> >> This is a continuation of an RFC [1] sent back in August.
-> >>
-> >> All Rockchip aarch64 boards, beside bob and kevin, use TPL to initiali=
-ze
-> >> DRAM and SPL to load FIT with U-Boot proper and TF-A.
-> >>
-> >> Bob and kevin currently does not use TPL and instead initialize DRAM
-> >> in SPL and directly after tries to load a FIT with only U-Boot proper.
-> >>
-> >> This series migrate bob and kevin to also use TPL to uniform TPL/SPL u=
-se
-> >> for all Rockchip aarch64 boards.
-> >>
-> >> Features and changes in this series:
-> >> - Use of Rockchip aarch64 common bss and stack addresses
-> >> - SHA256 checksum/signature check of FIT images in SPL
-> >> - Use of dcache to speed up checksum check in SPL
-> >> - SDMA use for eMMC access to speed up read/write in U-Boot proper
-> >> - FIT location moved from 0x40000 to 0xE0000 in SPI flash
-> >>
-> >> Changes sinc RFC:
-> >> - Include pinctrl props and enable regulators based on DT in SPL
-> >> - Drop bob and kevin board specific code from common rk3399.c
-> >>
-> >> Please note that I do not have any bob or kevin so this has only been
-> >> compile tested and the original RFC [1] was runtime tested by Simon.
-> >>
-> >> [1] https://patchwork.ozlabs.org/patch/1967517/
-> >>
-> >> Jonas Karlman (12):
-> >>   rockchip: rk3399: Fix TPL build of bob and kevin
-> >>   rockchip: rk3399-gru: Use SYS_SPI_U_BOOT_OFFS value in offset prop
-> >>   rockchip: rk3399-gru: Move SPI flash payload offset for bob and kevin
-> >>   rockchip: rk3399-gru: Fix include of TPL in u-boot.rom image
-> >>   rockchip: rk3399-gru: Use TPL with common bss and stack addresses
-> >>   rockchip: rk3399-gru: Include binman generated FIT in u-boot.rom ima=
-ge
-> >>   rockchip: rk3399: Drop common Kconfig options already implied
-> >>   rockchip: rk3399-gru: Remove unused nodes from xPL control FDT
-> >>   rockchip: rk3399-gru: Enable dcache and signature validation in SPL
-> >>   rockchip: rk3399-gru: Use SDMA mode to read from eMMC
-> >>   rockchip: rk3399-gru: Include pinctrl and regulators in SPL
-> >>   rockchip: rk3399: Drop unneeded bob and kevin board specific code
-> >>
-> >>  arch/arm/dts/rk3399-gru-u-boot.dtsi    | 29 ++++++++++++++++++++++++--
-> >>  arch/arm/dts/rk3399-u-boot.dtsi        | 14 +++++++++++--
-> >>  arch/arm/mach-rockchip/rk3399/Kconfig  | 12 -----------
-> >>  arch/arm/mach-rockchip/rk3399/rk3399.c | 23 +-------------------
-> >>  configs/chromebook_bob_defconfig       | 23 ++++++--------------
-> >>  configs/chromebook_kevin_defconfig     | 23 ++++++--------------
-> >>  6 files changed, 52 insertions(+), 72 deletions(-)
-> >=20
-> > Thank you for doing this!
-> >=20
-> > I'm not sure if you have access to your own denx tree. If so, kevin
-> > and bob are in the sjg lab. If not, you can sign up at sjg.u-boot.org
-> > to get access to my tree.
+> > Please post a v3 of this patch with that can be taken now, off-hand I
 >=20
-> I do not have access to my own tree.
->=20
-> >=20
-> > This series eems to work for me, except for the final commit, which
-> > hangs with no output.
->=20
-> Strange, guess we can just skip the last patch, should I send a v2
-> without the last patch?
->=20
-> I wonder if it is not setting io_vsel or the regulators that is causing
-> an issue. Setting io_vsel is probably delayed until U-Boot proper
-> instead of being set very early in SPL (due to no IO-domain driver in
-> SPL), and enable of regulators may happen later in SPL with the last
-> patch applied.
->=20
-> There is also some code in board/google/gru/gru.c that mention a delay
-> related to the regulators may be needed, however board_early_init_f() is
-> never called as following can be found in .config:
->=20
->   # CONFIG_BOARD_EARLY_INIT_F is not set
->=20
-> Will you be able to test with just the rk_setreg(&grf->io_vsel, 1 << 0);
-> and remove the spl_gpio_output/set_pull parts of the last patch before I
-> send a v2?
+> Did you mean "v3 of this *series*, with this DT patch and the
+> Documentation patch dropped in the v3 series?
 
-If you send a v2, please include disabling TPL_BLOBLIST and then the
-boards should boot in mainline as well as Simon's tree. Thanks!
+Yes, sorry for being confusing.
 
 --=20
 Tom
 
---RxDfZAczOA6vApJz
+--taX5zTqK969PkW0c
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdlm2YACgkQFHw5/5Y0
-tyzp/wv/VjtAxfUUL1WyHAfwOOuI7GBlZ4rgDZSSiYeULG4HfPHDQw/Rl609qKTd
-/DSlpqK748AiquFmXd3oaA9D7c0lfKCAPsXW0XLgd+kig6ru5PCoYrqLUTItxGTw
-plN/xXW+xhp/I6Leh8ggfSnMQn0MRL3n5SYyEpRP/+EIKo9bnxtRb4Rv5jrqOZ9q
-LuxC/nts4tUD2jyUm9lmHSkIyJOytBfkht/PKW5Dy3EuF61ND3E9K3ajtgA74HhW
-9k2z+XohSNokVpO87lRb/0VNiQbRkIP1MuInHqaDxS/GOttN+fK9I0yvJH3ZDNsu
-rlNdlbBHhqwJ8aRvZ0soTozKvZbHYtRqucjyjLcAcpvIyWmu6n2t4Rcw4y4jluQ1
-5ltRSzoDOl5rkPn02/2kw7bGthRDgvxYgSdJMPNx46uYxO95EUmA6BLlkxWDBynF
-qTnh9RxrI9ao9el/VyqNACwj/zFrK2pG/XDOywqmT+MvizdNN/jOpJbzL3tLEfjL
-ywZyElVr
-=xdxh
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdlnV0ACgkQFHw5/5Y0
+tyyzIQv/UgH3zTmroFX+wXrhlsP4nAuWvx7+t5LmL/b+yTGTHS4yQpQ0raqU+zQU
+WaHZt3OWBV6Mnnqa6oIlQeZ+x02CtzyT3Hwdzzz8yeoMaRJiEFBxnf9xogDA5nSv
+eN3MbQ0bOky1OiIla+6DV1y1Ksv9v26LXW0in4f/Y3UvqHaHIqBj314+gqOQMmVF
+z2guox/gFXQliV/xzKcTZ3dds7mw15ahjorQpnwGsKGnoW0zzKbw4TkU4wicSrII
+jZNCo8PSjjmPQcvVy5hJ91aiWXAFKuReL6gkpAjCpTHnr6+MLHdYFCAGWP3Z3Vi1
+M1cP+ngQmsOOXjfbjse7vl69UgS8D9ETXzqpMDbTIxLGcqFbvWfCiPN3UtqLgGNf
+wOF4r1/mCugfgJLvs+jLUDOELq23X1ALlH121mDfS6H+TKYAQ7omUt0pyEAYXw62
+ugkhzUyk5M+riyt7MuSRbPLZh3F0g2LhLJFApgX7af77GqTuocQEpsK7i0Fvr0T/
+wDIwuB7A
+=BAy0
 -----END PGP SIGNATURE-----
 
---RxDfZAczOA6vApJz--
+--taX5zTqK969PkW0c--
