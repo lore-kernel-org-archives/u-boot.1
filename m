@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CB8CE7718A
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54CF1E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0B64805CD;
-	Fri, 20 Dec 2024 05:06:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2AE72804FA;
+	Fri, 20 Dec 2024 05:06:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eoTZ9qsN";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Od/KBcdx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10C74805D7; Fri, 20 Dec 2024 05:06:35 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id BE986803F5; Fri, 20 Dec 2024 05:06:37 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ACEE8037B
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:06:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87A858037B
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:06:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-aa6a92f863cso299947666b.1
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:06:33 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aa5f1909d6fso238848366b.3
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:06:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734667592; x=1735272392; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734667595; x=1735272395; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bKWM0Jdm9LsxH1+gt3VWkkVCXX063vvnljwZc/Hu1ow=;
- b=eoTZ9qsN5IO6/m8lszD8eKBUlbTUgqLi/RJEvF3Tf0LYveL6MlHbQT+98C3R4A6SB7
- l+zjgEt3ZBAjLQUZ14nA9HPGClbHSX3JCshqYz6pgl9p1cy6nKeMrQjCMw1taZN5V8nw
- ORK6lUqY9myw9GezhByKWOCeDj1W2buF/BvKo=
+ bh=NYkRLmjpdcq4Zk/7IY0VrTNAo2POpidhqmit2VyPVho=;
+ b=Od/KBcdxO/2Apwy+u5r9bh3nvJpxyk3tfRTSN4n83PSB9yVSOsY60NF3fFotJMLRz8
+ /BIec+QYil7o+Y8abeizSSn1GHwx7toK20yLhEx24xbNLUW2z5oC1m1y0M4R+Dmjs2yR
+ z+xWdI5Aq1kv478G6t3rYRv3bNnFHCd/oaSIM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734667592; x=1735272392;
+ d=1e100.net; s=20230601; t=1734667595; x=1735272395;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bKWM0Jdm9LsxH1+gt3VWkkVCXX063vvnljwZc/Hu1ow=;
- b=scJMX2Ydu/me8lOmY0Vg1QfQlM1VXEzsmAmSw/SB/0fS+4rMcb2FmImNW1qA4U1Tkr
- anibAELwufUZz3s6ukggzrJMRcTnyE7c/PRRf6PzezbuCErBjWNooBz/X73HIB/RB6km
- x+P3vZbpG0DPGV6grRzXAB+GJy+XTdbDidSV0LPtIzRbmWrW9MvskpKw1KkWqybeVm41
- UH189AAyYR93dBdtmjk7raWYi8OpIogGsu5SuJkdUXG1et4Wi4CAPilHFvH/A5a8t0ek
- /aHte1b25oyrv59aUISlsCBTQp4DjEf8rUuYsfrpxlRwZJl9HiV5lFLw0WUQKQUZgwMH
- 5NAQ==
+ bh=NYkRLmjpdcq4Zk/7IY0VrTNAo2POpidhqmit2VyPVho=;
+ b=ZzFq7zv1+/k63pQ7AkTfr4fPqv8yBmweSr3YbgPxVp39Nb26hoKOiAjmk+NnkLoYx8
+ 2f07t2DXPVOj4X8965oNSrnQx0CJNZV7fZ/wWIR8QkWppYVtscdElhf6nUVhL6ZWxx7p
+ 7pRBVPKYVsePpDW0EqCGAPXrjMDGrvQ4G0e48RcoHPvcAGTWY0BolYRrdre2pEGS4ozz
+ gpJGisTX30USx7obDWGcKdt73M0p7dfpDGCrnuD95iZz2zs/17nJ6susU4tiFLZdFfWO
+ oiuJCXZ35Whq4CeFq4Vs4AiMArKY2ZZln0W1+93LvRnbbcksz35I+FHCfgv+2EbPi6vZ
+ UcLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXm44B1coCybKCz4Tm4wSyXPNrlnCjevaSytb8VmLjqHfnuAGyij9nUN+u/9wV086FkMDCnuRE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzz15Ub/qIrDguuKfUz5oUe1cgFNoO+dp27/CG5OtDFwTKXVzSG
- 7qvzftpl9938AATm0km78y1oAlFO7LqAqVGZIS9w0u3xXKx5tLzm414/b9LvQOUQ54YYujDmuqt
- oYYgRFBW09rwvdxDBIr1WJ1TGe2qiizFirvnISmCX3tdEqiQ=
-X-Gm-Gg: ASbGncsQ/n801G/hggOI34McUyK+8s6DILGkATk0tC/KDQO3uXOvjaUT9iEG0iNSBrg
- tEOkeNa/OC6533HmFPYxrCjD150Tq9Qq6H8ExuTU=
-X-Google-Smtp-Source: AGHT+IFkx2sxpRc5P5VuQL7hkDHMzmzyKufjnET2M3cPJNGnc348r0N4Gvsd3aA/L1iKwNPQ2Z9JGC/dVFuZ305GC2I=
-X-Received: by 2002:a17:907:9621:b0:aa6:6f92:74b1 with SMTP id
- a640c23a62f3a-aac2ad7fa01mr93888466b.13.1734667592584; Thu, 19 Dec 2024
- 20:06:32 -0800 (PST)
+ AJvYcCX8ZBeTNdCtHni9Ek9YeYxQ5sjR9X03yXWNxF1H84R5IShmTO8WruqqsFYLuCWAu8RJNw+2KN4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzxRFL6YPHFKb2iXZlnxw4a/WrsHtyUCtKs3+LiWFk2xqd1ZARQ
+ d9dOtHYjHQgprZwU7cpSHvN7S78nHFpUWA+iNsxT3xWiJGAZSrttj8hVuvgdl2o6Fz6Q2oW4qn5
+ DpaJhEcUdw26uzFXtdkzdqrPtGXk5TnKIKa9K7sFsab8L7EU=
+X-Gm-Gg: ASbGncu51T6V/0YMht2kULN4UBfBRP3BYtxjG1oX1VeVtuBYAlrKtKuk+jUDbEWylMs
+ LkvI4Uhu5kDsAevdgoMT8VOSgmDGBOiC9KjRyhnQ=
+X-Google-Smtp-Source: AGHT+IFRNvwqgn6Mz6XjhKqgRpwESs+RKEl2x74cNBUuY0ndyO36iSQsOZ3lGciIXYM12L2AAWefr+o3/UHGSOLcvBo=
+X-Received: by 2002:a17:907:1ca2:b0:aab:a0d4:ec8e with SMTP id
+ a640c23a62f3a-aac3368f9a6mr96133666b.59.1734667594994; Thu, 19 Dec 2024
+ 20:06:34 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 19 Dec 2024 20:06:30 -0800
+ HTTPREST; Thu, 19 Dec 2024 22:06:33 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241206023626.2456858-13-sjg@chromium.org>
-References: <20241206023626.2456858-13-sjg@chromium.org>
+In-Reply-To: <20241206023626.2456858-12-sjg@chromium.org>
+References: <20241206023626.2456858-12-sjg@chromium.org>
  <20241206023626.2456858-1-sjg@chromium.org>
-Date: Thu, 19 Dec 2024 20:06:30 -0800
-X-Google-Sender-Auth: 4ze1y68Sk_41JnYSi0WfGaAk3HM
-Message-ID: <CAFLszTg-0s_D4zqvzgD_ihAoXjvFVijsYqtt+XBOzKeD9P78Xg@mail.gmail.com>
-Subject: Re: [PATCH v3 12/46] boot: Pass just the FDT argument to
- label_process_fdt()
+Date: Thu, 19 Dec 2024 22:06:33 -0600
+X-Google-Sender-Auth: G8C63rLPxFF_S67d4O1sBROtPkQ
+Message-ID: <CAFLszTiCGLpnkuyoz8qxmOH5W3S5ETwiEqwv4D5i7giTzcicOQ@mail.gmail.com>
+Subject: Re: [PATCH v3 11/46] boot: Split pxe label_run_boot() into two parts
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -94,17 +93,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since this function only adjusts one element of the bootm command, pass
-just that. This will make it easier to refactor things to remove the
-bootm command.
+This function is quite long. Split out the FDT processing into its own
+function.
+
+Add a function comment for the new label_process_fdt() function.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- boot/pxe_utils.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+Changes in v2:
+- Rebase on earlier change
+
+ boot/pxe_utils.c | 100 ++++++++++++++++++++++++++++-------------------
+ 1 file changed, 60 insertions(+), 40 deletions(-)
 
 Applied to sjg/master, thanks!
