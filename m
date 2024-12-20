@@ -4,63 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E992E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 09:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F966E7718B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 10:16:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9023F8007D;
-	Fri, 20 Dec 2024 10:16:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 74E468007D;
+	Fri, 20 Dec 2024 11:16:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="jr70ZsJQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gZ2rjA6j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D794780087; Fri, 20 Dec 2024 10:16:08 +0100 (CET)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::222])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B40880079
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 10:16:06 +0100 (CET)
+ id 3CD8C80087; Fri, 20 Dec 2024 11:16:26 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 56CA580079
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 11:16:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id CC5FA40007;
- Fri, 20 Dec 2024 09:16:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1734686165;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=KWquvTzzR5/gjtBQ05SK8BLWq052VStefVbpmDVYRiI=;
- b=jr70ZsJQtJuJIaYl3heugucQbD65+W5d2Y4JVu8xhB4d/jj8aEzML5nZW1XfWyimP34lLi
- bgP0N319gE/JaXPjwkj81ux/GVVyoA3aYDONzYdesf8n0ZaI8EBHQ2DXcQzmKrdIKkfuFS
- vfTnyeC1WMl2+Xm5cVXWcf1NuIUQlPpe5d1P02Lymu8EJL0WUytLdGaK/9d0IJtSbFAFmM
- oSGRe6cXVgBwsRnp5PRsWTxDOVQyP4Kc520f8h0MB++4pjOCKtmnNIhWIHSRqvrdV/Fg8O
- sqAvljsYcysDtc1oO0E4IkCPTWryj6pddNO87X2i+5hyfMrNsvSf6ib3DcXmmg==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,  Lukasz Majewski <lukma@denx.de>,  Sean
- Anderson <seanga2@gmail.com>,  Simon Glass <sjg@chromium.org>,  Jaehoon
- Chung <jh80.chung@samsung.com>,  Anatolij Gustschin <agust@denx.de>,
- u-boot@lists.denx.de,  Ian Ray <ian.ray@gehealthcare.com>,  Michael
- Nazzareno Trimarchi <michael@amarulasolutions.com>,  Dario Binacchi
- <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
- Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v2 00/13] Add imx8mp video support
-In-Reply-To: <CAOMZO5B=4eoMxxFKieUgXVWMpJOad-V-o+NmG3JhAMFptP4DgQ@mail.gmail.com>
- (Fabio Estevam's message of "Mon, 9 Dec 2024 09:12:17 -0300")
-References: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
- <CAOMZO5B=4eoMxxFKieUgXVWMpJOad-V-o+NmG3JhAMFptP4DgQ@mail.gmail.com>
-User-Agent: mu4e 1.12.7; emacs 29.4
-Date: Fri, 20 Dec 2024 10:16:03 +0100
-Message-ID: <877c7uww8c.fsf@bootlin.com>
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKAGIcE447481
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 20 Dec 2024 04:16:18 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734689778;
+ bh=bCx/MhE5W4GgdCXWaz5Tt3kMJIyygSwH+wnrIjGFEIk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=gZ2rjA6jAOvj4veFBuuz8hxvWdtvAMUp79yHRVRO4e/aKFgEOgilww/rKnQV5xTfh
+ rMJMyUBFtG5iX1YV7nSO8JC372box6DIN34o5OO4rlsLR12uQNalOnAEsEv56yvIeA
+ Z0RwDHBDhYA0+QlAN893iicvDcuzM8Cq9ab2AOdY=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKAGIlM100859;
+ Fri, 20 Dec 2024 04:16:18 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
+ Dec 2024 04:16:18 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 20 Dec 2024 04:16:18 -0600
+Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKAGHpa051060;
+ Fri, 20 Dec 2024 04:16:18 -0600
+Date: Fri, 20 Dec 2024 15:46:17 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Simon Glass <sjg@chromium.org>
+CC: Tom Rini <trini@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Aniket Limaye <a-limaye@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH] drivers: firmware: ti_sci: Add DM_FLAG_PRE_RELOC to driver
+Message-ID: <20241220101617.7kwwtfjtebomtx2p@uda0497581>
+References: <20241217-b4-upstream-dm-pre-reloc-v1-1-ccd29165bbb6@ti.com>
+ <20241217145300.GN1505244@bill-the-cat>
+ <20241218050837.5fppn7j7s5vv5f5m@uda0497581>
+ <20241218173837.GJ1505244@bill-the-cat>
+ <CAFLszTjCez6yRW1F9HayLPk3deqPEAx-4uwYfpLcaQft=az-+A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjCez6yRW1F9HayLPk3deqPEAx-4uwYfpLcaQft=az-+A@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,22 +85,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
+Hi Simon,
 
-> There are errors in CI when this series is applied.
->
-> Please take a look at the sandbox test failures:
+On 08:08-20241219, Simon Glass wrote:
+> Hi Tom,
+> 
+> On Wed, 18 Dec 2024 at 10:38, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Dec 18, 2024 at 10:38:37AM +0530, Manorit Chawdhry wrote:
+> > > Hi Tom,
+> > >
+> > > On 08:53-20241217, Tom Rini wrote:
+> > > > On Tue, Dec 17, 2024 at 02:24:37PM +0530, Manorit Chawdhry wrote:
+> > > >
+> > > > > Currently the driver relies on bootph flag to probe it during PRE_RELOC
+> > > > > stage but with the upcoming cleanup of v6.13, we don't have the bootph
+> > > > > property in the parent nodes anymore and ti_sci driver being one of the
+> > > > > parent nodes required during SPL stage would end up hampering the probe
+> > > > > model [0].
+> > > > >
+> > > > > Add DM_FLAG_PRE_RELOC to ti_sci driver for mitigating this issue.
+> > > >
+> > > >
+> > > > Can you please expand on why with v6.13 we don't have the flag anymore?
+> > > > Thanks.
+> > >
+> > > So the idea was that following series [0] would help us cleanup all the
+> > > parent node bootph-* tags as putting a bootph-* in child node implies
+> > > that it applies to parent nodes as well, though even if the parent node
+> > > gets packed after the following series, the parent node still don't get
+> > > probed as from my understanding, we need bootph-* tag to probe the
+> > > driver as well but the phase tag doesn't get propagated as such.
+> > >
+> > > So while working in Linux, some comments related to this was raised [1]
+> > > and after confirming the behaviour with Simon [2], the cleanup was done
+> > > in Linux and meanwhile this way was found to probe the driver so that
+> > > even after cleaning up the parent bootph-* tags we can continue.
+> > >
+> > > I don't think it's a hack also as this driver is required pre-relocation
+> > > and this is another way to probe it pre-relocation but the only thing is
+> > > that since the cleanup is done right now, we would kind of need it to be
+> > > booting in some platforms ( that were fully reliant on Linux DT and
+> > > don't have -u-boot override for this particular node with bootph-* )
+> > > before 6.13 DT gets synced up.
+> > >
+> > > [0]: https://lore.kernel.org/u-boot/20231217163627.2339802-1-sjg@chromium.org/
+> > > [1]: https://lore.kernel.org/all/20240709084857.nf7c57mi6miajeau@uda0497581/#t
+> > > [2]: https://lore.kernel.org/u-boot/CAFLszTjr7bJFPnyVx7rTdFB3AFBM_2DVAZU8FZnLBE7ep5ejXw@mail.gmail.com/
+> >
+> > Thanks. Did you end up filing an issue about this? And can you now
+> > perhaps push to make doing the fdtgrep work a priority? There's going to
+> > be a lot of other cases like this to resolve I suspect.
+> 
+> fdtgrep is done, the confusion is that there are two [0] references in
+> this chain. 
+> 
 
-I observed errors while locally testing which looked unrelated. I'll do
-another test round and see what I can fix.
+Ah yeah, sorry for the confusion. 
 
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/23735
->
-> Also, please make sure that v3 passes Azure CI tests.
+> The one you want is:
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/21
+> 
+> For SPL and U-Boot proper, all is well. But for pre-relocation, U-Boot
+> doesn't actually bind parents even if their children have a bootph
+> property, as I understand it. I believe that is what needs to be
+> fixed?
 
-Am I allowed to push a branch to this repository to validate the CI
-passes? Or is there a command that spawns a container of some kind and
-runs the test which I'd missed? Any pointers will be appreciated.
+So I see that when we jump from our SPL stage to U-boot proper and end
+up in board_init_f with the common sequence, we end up in
+dm_probe_devices.
 
-Thanks a lot,
-Miqu=C3=A8l
+#0  dm_probe_devices (dev=0x80478030, pre_reloc_only=pre_reloc_only@entry=true) drivers/core/root.c:294
+#1  0x0000000080834f9c in dm_scan (pre_reloc_only=true) drivers/core/root.c:348
+#2  dm_init_and_scan (pre_reloc_only=<optimized out>) drivers/core/root.c:361
+#3  0x000000008089393c in initcall_run_list (init_sequence=init_sequence@entry=0x808b9dc0 <init_sequence_f>) lib/initcall.c:75
+#4  0x0000000080828908 in board_init_f (boot_flags=<optimized out>) common/board_f.c:1026
+#5  0x000000008080252c in _main () arch/arm/lib/crt0_64.S:100
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+
+dm_probe_devices act differently with and without this patch even though
+there is no DT change and child node has the bootph. During traversal,
+in working case we go to "system-controller@44083000" ( parent node of
+power-controller ) from "bus@28380000" [5] but in failing case we don't
+[6] ( DT model can be found at [7] )
+
+Since the dm_probe_devices act differently, while going to serial_init
+we end up not finding the driver for probing the clock and power domains
+( children of system-controller ) and fail.
+
+Though am not sure as to why it's not going to that node during
+dm_probe_devices in the failing case, suspecting something around [8]
+but not sure. Let me know if it helps Simon.
+
+[5]: https://gist.github.com/manorit2001/a9b82b40b6c32643fb10d523cab9da70#file-with-the-dm_flag_pre_reloc-patch-L26-L48
+[6]: https://gist.github.com/manorit2001/a9b82b40b6c32643fb10d523cab9da70#file-without-the-patch-L25-L39
+[7]: https://github.com/torvalds/linux/blob/v6.13-rc3/arch/arm64/boot/dts/ti/k3-j784s4-j742s2-mcu-wakeup-common.dtsi#L9
+[8]: https://github.com/u-boot/u-boot/blob/078542c346347406cfacdec8adeac66ae6758880/drivers/core/root.c#L297-L301
+
+Regards,
+Manorit
+
+> 
+> Regards,
+> SImon
