@@ -4,83 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D53EE77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:39:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10771E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:41:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15A8D803F6;
-	Fri, 20 Dec 2024 21:39:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 951A980429;
+	Fri, 20 Dec 2024 21:41:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iPKcl/M4";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pHdQoXsl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19F72803F0; Fri, 20 Dec 2024 21:39:04 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id E47AB80435; Fri, 20 Dec 2024 21:41:54 +0100 (CET)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 496A2803F0
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 21:39:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 444FD803F0
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 21:41:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6d88cb85987so19538236d6.1
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 12:39:01 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7ea9739647bso1569900a12.0
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 12:41:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734727140; x=1735331940; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZtONAtqXd8hv+yW1hg2pJ64fvvkDqtOyJ6uqI8/5J9o=;
- b=iPKcl/M4IQtlX5/7/3Ma0l9f5jkfJAEaSYMsH89i5edhGpNYpGkNI06mGM9EOrU0xf
- E+YkVem8DhPiRERp3oxwXROs3/siNBkkuZsIEGko558IGGrA6Lz0RNFKUZgAANU2WROi
- 4k0iUM334JqfbfoXcFGpqL6/og6QNtjOLeDO0=
+ d=linaro.org; s=google; t=1734727311; x=1735332111; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tLIFCAEbGLCVv11ySUyO/7xC/xsXs0/M4eUzTuLqC7I=;
+ b=pHdQoXslg5oheYSGukPz1BLqJznjKAk9zfQF0sD8cRvIVLen7FdyKRMj185vOlSyna
+ WV5m/hdjvutXTS9UU1GBoXkDFEytXLSRMGFf+dlOHEYbKCwK0H01ydPUpApiXUFWoaJb
+ LiPHqqmZt9BXvKEg0EXgyFwR4IQjlOFYSCacJlJvcMb6zbGYOScVe6Tkd6bzoUz6fHMH
+ HTj3s3qm+uVhp+dFz2OR+HTVx20Ev7PX/rmy19GUCCn2I9Ef9SeqCH8ISgDs6BvZjBD9
+ EORp1J3AOdBgkCmMNLbYfAAICDgeMlLjXIoIB8HlMpw9h0OOtG5ZBkAyUJL1sL0pOCDp
+ EvVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734727140; x=1735331940;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZtONAtqXd8hv+yW1hg2pJ64fvvkDqtOyJ6uqI8/5J9o=;
- b=JzTc2CzP2Vt0KE33uSaE2zZXU3xQj4BvNH7aMNHGC7ChrR7H/ioQNuBQVKy/C+rZV6
- zHp+ErMDmX+sKlIzB1UnkZA4CqlEXUjsbF/LAL+Qz7DEi/JHKPWwnekoxkrIdMjDLn6Y
- kGc1PulQPnVi0Maq3bl1bIZuORNx9Lr2lGcock6CS9mcqMmEQS7Hh+64fS4XttU7/n+I
- 390zZGa5NGWbwsngdk+nT5oqYUdb4wE4b88cIP+jH8IY3vk3oBtHAK5ZF8RUByAlukOP
- OQkcCJJkk2jDdB9rGo1wUhYy/AD16jUz2ggOb6kGn0TeJ0jp0Eu4vB/0hHYPiSrxJPvo
- bLzA==
+ d=1e100.net; s=20230601; t=1734727311; x=1735332111;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tLIFCAEbGLCVv11ySUyO/7xC/xsXs0/M4eUzTuLqC7I=;
+ b=mTlvVTMtlB2tWgv6ZOPzOFdMdUOnAx4IZ8M6qtHDIo8e+C9HHHNf6hUm1oSclrqKiR
+ 2ST+4fm2J1ap83D6CHjqmytUgQ+0XO9vBsvtiM+KDDbYKoT4v0hxlUsO6YQOYgfv0gw4
+ Uq4IgIB5wCg7Oq9AeifuMGvET6+U+wE1iHf00VEdWunB8Jri11nj5w0edKSWXypY3L82
+ sqe/iASKa+LLdMm10kUOYIVcoOjNB92K0VYaLPOGcttAc0qTtXKZ8CrPbst1e51aQ8QR
+ g/f4G2KSrvOd+GgYaTealqUzS1ZPxIByUSJtDIyjz11PHNmJlYtZrkYfskBnaTUM+Kcx
+ G9Bw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXfAKuoTRUjVlTt56t+CJvplJHQXY+Q2LUhhlleW0Oa+esPsFGlBebNj/rnKzn7ZVYJGgPG16I=@lists.denx.de
-X-Gm-Message-State: AOJu0YygRUxU8D6+Tk5Q7v3aItoXnZmTg7b34sVJYjGximbe7v2y6pIX
- IK3atmlMDj1nnZc+/y7LTjyc77rtYNGGtPRy8Q/UBu5pCpw6MUqFLaWWbSWQjKqEcRUsUI6jIQc
- X
-X-Gm-Gg: ASbGncvF2jeLy5HhhUNcwTHvsL2rFpHi+baCr4Wr91rM0o/o+guInIIXyGW24jan488
- dv4op5R4ZImsMfRg7v5aMqmAi0HPpNBG/9WeBPH23LosLOBMWl9YWypDH8TKx0hxsbKkawwLjHk
- saQdyNwmgiFM4DylTOb5Qoi/8rbvQOk+RXBJ5Qkg4MhkKrolcOWGHnKGCUw2PFbUrzx9hbnLEsR
- OP0dW6CzPai0DMy2E5cQ6++zNYSwYeztn71CxSGVGGezEIvZUtv1VQb
-X-Google-Smtp-Source: AGHT+IHfm+Uze5Qciy4az9+GPIOcWihSgfYcw6i/YD6ZFgEwtp/pSDmOFs016DfWW5hY2TIgAFF0cA==
-X-Received: by 2002:a05:6214:3c9f:b0:6d8:a9a6:83ef with SMTP id
- 6a1803df08f44-6dd23618bb2mr74661196d6.20.1734727139967; 
- Fri, 20 Dec 2024 12:38:59 -0800 (PST)
-Received: from bill-the-cat ([187.144.98.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd18136b00sm20143546d6.55.2024.12.20.12.38.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2024 12:38:58 -0800 (PST)
-Date: Fri, 20 Dec 2024 14:38:55 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Judith Mendez <jm@ti.com>
-Cc: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH RESEND 0/7] Enable MMC UHS modes
-Message-ID: <20241220203855.GL1505244@bill-the-cat>
-References: <20241220203704.2076499-1-jm@ti.com>
+ AJvYcCU46NTpXfHrVQnv1vB41BL3MfmP6VdU8DpZ9UHoCO5Px7mlqp7MuxqNDeGDmCxlCTTgjaVPOlU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6hkOMzvOpo0MoMtvKqlCd7h7sapbnRUN467c71bmTj2NRSrDw
+ i3SmKsNQbm3YwiYFhFwlxDvV5nmk7ilYjZNMd+pY4wd9fQ2HiZxPIncCqFSb3FGvsPPFflMpbuM
+ vrfCcu/CBkKTUD6sc1bzp/Cn5DK6E1iti/7QuUg==
+X-Gm-Gg: ASbGnct3n9UVX793JKNKrN9XRAlQWRoA8VTzBWG0Qq2FxMpcvuJryVhyrRlZCJ26ZyL
+ 7KJYZnxl9ZjI/X1u026ykKD7vaUS//+EReEaeCYN6krC1h+T2ejoRi8TkmS9vuO245Sz70Nk=
+X-Google-Smtp-Source: AGHT+IHH0CPeMp+8DT5rU5Cn7XvlqGd4Uu0kt3V4VS+ZnK8FStZAXBVq+ewuu6XgdF5gNCTldDAR5rErYpQTic6Zsf4=
+X-Received: by 2002:a17:90b:3a43:b0:2ee:45fe:63b5 with SMTP id
+ 98e67ed59e1d1-2f452debbd9mr5873682a91.3.1734727310782; Fri, 20 Dec 2024
+ 12:41:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="v2fDlvNms8K+2yTN"
-Content-Disposition: inline
-In-Reply-To: <20241220203704.2076499-1-jm@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241206225438.13866-1-raymond.mao@linaro.org>
+ <20241206225438.13866-11-raymond.mao@linaro.org>
+ <468bd401-f85d-4b76-b513-f775a51ee5ab@gmx.de>
+In-Reply-To: <468bd401-f85d-4b76-b513-f775a51ee5ab@gmx.de>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 20 Dec 2024 15:41:39 -0500
+Message-ID: <CAEfUkUKD_m1n3v9m+zcDOhdBx6=AnjF9Tm9L=i-Of4z2qwHbQQ@mail.gmail.com>
+Subject: Re: [PATCH v3 10/10] configs: Enable sysinfo for QEMU Arm64
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Stefan Roese <sr@denx.de>, Alexander Gendin <agendin@matrox.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Wan Yee Lau <wan.yee.lau@intel.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,55 +105,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---v2fDlvNms8K+2yTN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 19 Dec 2024 at 11:00, Heinrich Schuchardt <xypron.glpk@gmx.de>
+wrote:
 
-On Fri, Dec 20, 2024 at 02:36:57PM -0600, Judith Mendez wrote:
+> On 06.12.24 23:54, Raymond Mao wrote:
+> > Enable sysinfo smbios by default for arm64.
+> > When SYSINFO_SMBIOS is enabled, disable QFW_SMBIOS.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> > Changes in v2
+> > - None.
+> > Changes in v3
+> > - add CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE
+> >
+> >   configs/qemu_arm64_defconfig | 3 +++
+> >   drivers/misc/Kconfig         | 2 +-
+> >   2 files changed, 4 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+> > index 8dffb91e93b..31656699d82 100644
+> > --- a/configs/qemu_arm64_defconfig
+> > +++ b/configs/qemu_arm64_defconfig
+>
+> Doesn't this work on qemu_arm_defconfig?
+> We should test on 32bit too.
+>
+> It has been tested on qemu_arm_defconfig manually, I can add the kconfig
+for it if you want.
 
-> This patch series adds config options for Sitara K3 boards
-> to support MMC UHS modes.
->=20
-> While testing with SD card boot and eMMC boot,
-> found missing eMMC boot support for am62ax in am62a7_init,
-> patch 1/7, and missing config option to support eMMC boot.
->=20
-> While we are here, for am62ax, enable config option to
-> change MMC bus modes and enable r5 SDHCI ADMA for faster boot
-> time.
->=20
-> Also for all k3 Sitara boards, cleanup MMC ENV configs that
-> are no longer needed since we no longer load env from MMC
-> device.
->=20
-> Changes since v1:
-> - rebase against next
+[snip]
 
-Normally this would be "v2" and not "RESEND", but I really don't think
-we need v3 just to correct that :) I'll pick this up in due time,
-assuming no changes requested by others.
-
---=20
-Tom
-
---v2fDlvNms8K+2yTN
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdl1dwACgkQFHw5/5Y0
-tywTdwv/cd5QyQVQ4eq+yQtnSudDwAzkmVxcJf1pBDSxd+o7yAnguzVZ55J4G/Ux
-eAan7ibGQJyDyUAOqeiohYLWKhbZB7fyW8l86Ao8fO4p/0eJmN1iVmi7oMt10cH4
-T56iWFh9n1gwrlzgyunAmUYTIyo1cCJLCraCxpuL71DpDLC/Vj/BWoSb1vNkhz5S
-1ydUP6KAk6pYyz4Sqq53ZP9auJLCNElK0qNu51FIXEUB817ZkjviggsEK2ju94tz
-GuFM9lftVdi3RJsCfFCAa0hcWVdca5dhCmemQrZ6hb0b9dhlpDDaL6/ToHokX5fB
-VHBiUViTyTC4gLQnOYubWhzN1c/f2cWSaeLiiuzrCkeeruDKyxiZAglWbyvoYhb9
-iJd8aXMN4dFNb56j438Q3zJMrjgAb5r/rk7FIiwHSE2AqRROKr3pm2O9J4UA71nx
-yYxSH0tXy2Aiczzl4pfkD2zpwflYd2zl45WU34N43aeRLCgG0A09t3D0YQPdxpsA
-EiYtqCsQ
-=umBW
------END PGP SIGNATURE-----
-
---v2fDlvNms8K+2yTN--
+Regards,
+Raymond
