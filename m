@@ -4,136 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C1A5E77184
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 03:08:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 624A4E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 03:59:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2DC58021D;
-	Fri, 20 Dec 2024 04:08:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id A7DC88021A;
+	Fri, 20 Dec 2024 04:59:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="U8JsZKOX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F/FVMBSy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F31D80291; Fri, 20 Dec 2024 04:08:48 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20608.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::608])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4D36D8021D; Fri, 20 Dec 2024 04:59:39 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE7288021A
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 04:08:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 230E580087
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 04:59:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iw+8gMjzHo9meoQ2QC9UG20KZr+dWXIsGIYUbOKQR3eE6ADv9AiyVPyHmH2sHl7cc8NwtKk3o+HoWcLxgIV7JPeOhfSuxUSPo1MzTtbF1Qc/FtwatM843CJECiRi5Kubt+c5ZFnHh0mJfbTbI9Ymi4VSHG4qV0YS4Vo9FTINdtlMrKjQI0ZJ3/6BBTnax5LU/u8T2yypoJgoIQNcwooWKz1N9Ny/cjk8rxM12FSXmA6OqYMoV8E7sM0MeuMuYhWTG4LbPfElfWtVFOqLh8DOPQOFwvssZDjCo10jC2LYRwPBkmBIT0+pk3mAL7WoUqJyIAEfk7mCPgu596TzoODBAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/n3Zv3DSe0xYNjjYhcfxuWHIhZ3luUH0w40VuWs19tA=;
- b=xJy6mv2ZH3D3cqNGMJuv6NO0qR6fa/6+KmrQ0l93kEMQcvJ2M1lp+/x58X8kpW3BMkointHDzEtxQLHeiSW0R2TSJftbS8JOuVGwOLUlXl5rWaspjKi5p9J6Q5GF0laiKpEHz1CGmeJXuq0tXI2/BROJWFzzFQbyx9NMdWehQqo5eyss44PGt6JPqj587l/E+Afe611vQKr5TgdwVPXkopE5pkHH9TWMI/kOnQ4MJSEN4clkNT1rCIoAYh7XjwqxsL408OOSzPkbfDbSB5Wr0WYPKRnr2cxQzssaumylBkU4zR4t2OQlyNx1UHYeMF85/L09mm1oimnbNxmelGfOeQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/n3Zv3DSe0xYNjjYhcfxuWHIhZ3luUH0w40VuWs19tA=;
- b=U8JsZKOX52pWNPPvNejfAB8WgvmwDwZ4EpIiT5qIaLvyfMcw6ge2MwQhnbCGwOBHbiZVZAT0jJ4gHkO7Jsmy/C7cgpmD0AVmw6R1lFbNCfCJGSRcf84VZSosRsLXpLOgR8Zh4yGgyul5NYNOAp+QbHbyvNOz01PE3dnLTmx29vY=
-Received: from SJ0PR03CA0364.namprd03.prod.outlook.com (2603:10b6:a03:3a1::9)
- by CH3PR12MB9169.namprd12.prod.outlook.com (2603:10b6:610:1a0::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.16; Fri, 20 Dec
- 2024 03:08:42 +0000
-Received: from SJ5PEPF00000205.namprd05.prod.outlook.com
- (2603:10b6:a03:3a1:cafe::36) by SJ0PR03CA0364.outlook.office365.com
- (2603:10b6:a03:3a1::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.23 via Frontend Transport; Fri,
- 20 Dec 2024 03:08:41 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF00000205.mail.protection.outlook.com (10.167.244.38) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8251.15 via Frontend Transport; Fri, 20 Dec 2024 03:08:41 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 19 Dec
- 2024 21:07:53 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 19 Dec
- 2024 21:07:50 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 19 Dec 2024 21:07:49 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <sughosh.ganu@linaro.org>, <git@amd.com>
-Subject: [PATCH v2] common: memtop: Fix the return type for find_ram_top
-Date: Fri, 20 Dec 2024 08:37:42 +0530
-Message-ID: <20241220030742.1745984-1-venkatesh.abbarapu@amd.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-844e6d1283aso90159739f.1
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 19:59:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1734667175; x=1735271975; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kVGQ9dC3xqU02RrpfYsGBNTwBdSzJJ95FF1TESSFKcs=;
+ b=F/FVMBSyujWd7+Q8fgakJ+VcZSkaoNJJaLnKXvvEUjliAinyYMxRsI5wGI/VXGBphG
+ v/Q3Rc9Df5TxT7SK+IajPkjjJtJDn0f4RPU8DGO9v2WKCFBxN1e1eVhMjBagImvcdpjC
+ 92V+41ZXkLAEwOeHaCMfz7mh3a5kV2CYyn0m4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734667175; x=1735271975;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kVGQ9dC3xqU02RrpfYsGBNTwBdSzJJ95FF1TESSFKcs=;
+ b=NkTQIJzUj35e+ysQb7eRM8LcUpg7TKZl00f4xi9HYJnDhvsBWfckq8xjKbkleOsW47
+ Yc1hpQG+hDuLo5MwIkUt5uZ1oFuY0vCrYGSmsmpzXUk7n5AwbUxIPTqgJV2klrP23GAU
+ 8FtGXT+ahtfB4QevpuCK8LbkBX4TawFLBCAE6+RqWBAzY0QZiPpg+Ek33KoZDUDD1g4m
+ mgXH5A+o3dG7Pgg8eogfPbd825U8aubUyNfjA7QgL3/hd5M8f0tO4zShvvm3c58ONbrD
+ mnwGX2EI9r1SPyPjSpZZvwyH8o0YxIGtwGnilhmNLYBxJAOzVZeyEhSQXkNMcjyHc9mZ
+ qTOA==
+X-Gm-Message-State: AOJu0Yyjg1lYthzSdDodejWmhD0wcsQ5rGYh8/bhKEBCqAuF62M+AclV
+ iLQBYsosanQYpDTb8Mzf4y/5FKib8IJwT+UDaC4OvuV324qpKlwOT5WCuXX4FMMie4zyHQZTXeg
+ =
+X-Gm-Gg: ASbGncsEYoDRIg4fmAwCrWY7ybEcWu6TZKwiv3d1nbAdQEBXrNw88uxuGdL5bZQZUeX
+ PKWMA6Xvs/3CMxkL2UVaZtPSUBCzgoeK/WVfvaxWZ48EHCB2OssJcWcpnCKMByMJfr+AHFE3TJ/
+ SgWGsosm92jyoolyAn7kMtBlViISUi2FbR/SHaWLHOQn+8NUSiwJWn3oJnDo5760IExDaG2u4+a
+ PQjOce49wLiVrn7CgGc+H4buvFS6CuSR8V6I9AsVStx56sO/TK77f8DfqeTprxfuja/kplnHJ+S
+ JNN39SloDhIdAOfDjw==
+X-Google-Smtp-Source: AGHT+IHIzWwxpCNunNcxcxLHAi5ikJaMFfGE0cmIdS233snrD8PJwMyISCCAOup/4ccDRH+OSBmVkg==
+X-Received: by 2002:a05:6e02:198c:b0:3a7:a58b:557e with SMTP id
+ e9e14a558f8ab-3c302627786mr11276585ab.12.1734667174865; 
+ Thu, 19 Dec 2024 19:59:34 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3c0deae6a06sm6706935ab.18.2024.12.19.19.59.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Dec 2024 19:59:33 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] sandbox: Adjust configuration to hang on panic()
+Date: Thu, 19 Dec 2024 20:59:27 -0700
+Message-Id: <20241220035927.3243648-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000205:EE_|CH3PR12MB9169:EE_
-X-MS-Office365-Filtering-Correlation-Id: d1f87a37-f2a4-4635-e94b-08dd20a39b4b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?thViI8KcU6brKMuo1abHBaDla1qcN2I/u0ZggFCzLR0pdrNlpVI7ZLLEdiwD?=
- =?us-ascii?Q?0QBfWRYRD53iyXhliL40KvdjZnuT4885TCAnv+Zr4Td2Iavb/QeiUd8itqEg?=
- =?us-ascii?Q?6hL0x7a9+LLrGPduSUMa5mQSxzZ7TNp0C+twk/0GBP5XZ7h+PvaGFhvTAp1h?=
- =?us-ascii?Q?VIVkvnhJny4F4h6V3XAeEt2yts+sr6+xOWRhRaJEUSsiRNRhnIpN+uI4iKyg?=
- =?us-ascii?Q?XjlY+i6jtLnV1dh1xin5PbXnRW3cJEZGfnUMuaqrABzct9+M/w9E62dt9j5A?=
- =?us-ascii?Q?vQ8LIFlVPm0K+O+mT4yVcVdkf2qkrSjbNmMq3dfy5mdS1BYbkcmMTVf3yn2f?=
- =?us-ascii?Q?yWNvXQFStMgTm1ZFpcqETbB1RkwGN3fIFVK/2x7MMJL6BHlwHkw+FutH2dJC?=
- =?us-ascii?Q?wO081HM1JPN992T4S+wE5soGu6ho7tvSdaaaiaTaJ2FM/b8cYoyefsw4sQjc?=
- =?us-ascii?Q?/Os6EhtJHr3SOdXa+GQ46K3IxsqN5pxMF6hEPjUxeSmF/tYykl7SwE+M3093?=
- =?us-ascii?Q?rGPekr3YfJDZW7cw9xzhQPLsgMhBlhxYXrWkclAiyHjabcDtL1RGubrGwrkM?=
- =?us-ascii?Q?vTtIxR8r+iIqgm+O9PVxftDMQUs3AldhZG5mPjhLv1WFQj0I8R615BVAJ9o4?=
- =?us-ascii?Q?MuKaAus3x2zBNVmqYyUMSCryNGQ5+ebSMjHK7zP8BUA6q6ILyOt7cBKZhV9V?=
- =?us-ascii?Q?LGYvz4y3pQXx71qi/OHbVfcjyuFN/9xPoOLYwczPdNhQD+djNrIMq5bj94AZ?=
- =?us-ascii?Q?JjkL9SgWbw56XEQesdHRhnuDaZXEnV65q+50RIcxaLZXkfrAufr4WEWR2NWY?=
- =?us-ascii?Q?mJbntjp8cZnOlO8ppUpm3Y5qImUKxjrs5qY79xNEGpA41ZrgQebhMRtZhMMl?=
- =?us-ascii?Q?fcc4qhgS3b2LgZcACtuTXEre5hPGLubfA1uJ/HUUCzEbBX2mLvA09HnYzHjC?=
- =?us-ascii?Q?gBmhmPIwbCXJ69PKqZC4MDkHCTzYzQKfm2iwKSXu0NN1sdcro7osvtjChPzD?=
- =?us-ascii?Q?to2LPBe6LjTRDN2ZK2LM8PwiewyydNyGrX4WQdPEC7lOAENfZJXN+r0HnvN/?=
- =?us-ascii?Q?oR2iKDIaerzg2QbWui3yicoGdplGp01t96GEa4fRvaz7ZvksHmm39GizsVG/?=
- =?us-ascii?Q?DbKXqyv/5H9oHeSACub+c1xmqdKD/5ZqXZ0A3BC5neM+n94pVO38b2SVwMAB?=
- =?us-ascii?Q?8jio8hHbKD7v1vTyNJh9IOZsf6yVPs0SXcoixuVfawxjwyeQIXLd6LKHKptd?=
- =?us-ascii?Q?5c3krqRp31utLkB/LKoWzViZEGWncz0ADnYdwjTw2LFlUs3ZuU9Pzz9JasJk?=
- =?us-ascii?Q?gzjndoSZxOktGgJKoViodtLt4Xaqhs4ASdy417nc782TqQvgNdlhYX4U63b2?=
- =?us-ascii?Q?9NvhMCtF4KvxZUCOzJNnpge4DDmC9G8cMAT1jt/WDHIB7POLezN/R+5qaVjD?=
- =?us-ascii?Q?AkNw+DCUaAPK4IlI2llJZcCwFSaX3SQuC++xH/bSAOHLyyEBSajA4K8Y6I20?=
- =?us-ascii?Q?XRch3+wgGmWLNaM=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2024 03:08:41.2742 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1f87a37-f2a4-4635-e94b-08dd20a39b4b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF00000205.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9169
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,35 +97,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As the return type is "int" for find_ram_top() function and
-returning the "base" which is of phys_addr_t is breaking when the
-"base" address is 64-bit. So fix this by updating the return type as
-phys_addr_t.
+It is annoying to have sandbox enter a boot loop when an assertion
+fails. Hang instead, since then the error message is only printed once
+and Ctrl-C can be used to quit, as per normal.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Reviewed-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-Changes in v2:
-- Fixed the check patch warning.
----
- common/memtop.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/common/memtop.c b/common/memtop.c
-index 841d89e0799..bff27d8211e 100644
---- a/common/memtop.c
-+++ b/common/memtop.c
-@@ -121,8 +121,8 @@ static long region_overlap_check(struct mem_region *mem_rgn, phys_addr_t base,
- 	return (i < mem_rgn->count) ? i : -1;
- }
- 
--static int find_ram_top(struct mem_region *free_mem,
--			struct mem_region *reserved_mem, phys_size_t size)
-+static phys_addr_t find_ram_top(struct mem_region *free_mem,
-+				struct mem_region *reserved_mem, phys_size_t size)
- {
- 	long i, rgn;
- 	phys_addr_t base = 0;
+ configs/sandbox_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 3de4aa79c6d..636130a360d 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -354,6 +354,7 @@ CONFIG_WDT_FTWDT010=y
+ CONFIG_FS_CBFS=y
+ CONFIG_FS_CRAMFS=y
+ CONFIG_ADDR_MAP=y
++CONFIG_PANIC_HANG=y
+ CONFIG_CMD_DHRYSTONE=y
+ CONFIG_MBEDTLS_LIB=y
+ CONFIG_ECDSA=y
 -- 
 2.34.1
 
