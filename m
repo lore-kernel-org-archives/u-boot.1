@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F5B0E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:04:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00616E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:05:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC8368021A;
-	Fri, 20 Dec 2024 05:04:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9AC9C8032B;
+	Fri, 20 Dec 2024 05:04:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gTbyMvgC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WTKmE/CT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 259C68021D; Fri, 20 Dec 2024 05:04:55 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 3EBAF80087; Fri, 20 Dec 2024 05:04:58 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16A4A80087
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:04:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 460618032B
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:04:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aa67f31a858so259158466b.2
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:04:53 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-aa6c0d1833eso308989966b.1
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:04:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734667492; x=1735272292; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734667496; x=1735272296; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=k/zrzY9BdY9K4xdSffzLQTj/9t6mGiR/RHs4Gcd0xLM=;
- b=gTbyMvgCw/jZdF3jj1gMedyrMyCdYFaLpIuPMHqnHfCFbnvPVLFYdOfsj8se8NU+qj
- j7MLGQRU9feo4MzYyT2S2JHR1h4LA9+46V07ZZKdgb3GGoNbnzKGgRXs+O8C+yCF84wY
- hKjUt3/oNAR3aK9F1vQTknSEPj9PVy6yR7Ksg=
+ bh=pOvzdD54MbqZpHu89LsTTFgG9Q476oOcHcWW5V35F3Y=;
+ b=WTKmE/CT2wMxiG8l8OOp2LqM4cH0FLGSXeFHdOmzH3emdPQatt7Rn7X5KMoW3pkpot
+ OADdCk1MS7gozQCHYB4kTMVHWvq3Td0+Y6xKy/8D6NEvjSNrJiSejIJlRuLQNnS+Ij91
+ ALJiAHmI86zcIQi1LKHiFqO/f/DCgFNdFM3xQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734667492; x=1735272292;
+ d=1e100.net; s=20230601; t=1734667496; x=1735272296;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=k/zrzY9BdY9K4xdSffzLQTj/9t6mGiR/RHs4Gcd0xLM=;
- b=Ifl/b4s9tHfwcIe0T33pK9Io7Fu/NXrjr4mVYQUfrDEOmgg8JWgc+GaaDLyVmxgiZ3
- +OrD+d6NKFb2VLQPQZeHwgDQHdr4xsWLiDHkETADewTpz/CRjE/roFvYPphOa/exPwBP
- mhPUFmkYGG7U+uuAT3+z8gQyRI8Eu/wSo/gr5kqbAcvR2xrws8kLx/WEAIu54Zuzp4qN
- O9T+lWja9c7r+4vjBn+N3CwkNnKLRnsb1M6RFEadNLWTmUQ6bq+oMeU5GvqpcdCu92Vl
- XHCfKuGSyYjQ0L2cNtGmZC6ppWCK9mpfOot46JA6K31y/wTJpA/2L2eUSSaerhnV8CZR
- bkmA==
+ bh=pOvzdD54MbqZpHu89LsTTFgG9Q476oOcHcWW5V35F3Y=;
+ b=lCpn3tlJWmED/iWa2XmYR2KF1Nn7RTwclYWg0acE0DOR1eSBb0ljyCdjT1BfcoN43i
+ u3uNMODyO5VYdOkki2htHfVjDH4xIpNkGmIni7u49cak7XhiX8GzWU8aDIJpfBKbbVD7
+ eHXaEntRC4XKDiyuqA5cYMcUA8RCc/FHx7ZCRNEF32qiozbcMxIz9FR7BBlJVbhibTKl
+ gBAm6nDVcENfErbuCJcsvwy1w1Jws4ANg+NzP54Q/zehpyTbpf/qkEIaSGWsNASyqp3l
+ G9JLV0lUZvN0RjosQ2vU7us76H8Tba172gAoONVGqfT8xNFBX/nU4uX1padUGpCzZGhl
+ IMvw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWW+VZ3r+9a3lAZSpPTuKj+2JflCTqxcPIKgn156MfILjKaqdmBMxdc4en7RTHsUM+fLNFlL0U=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzOFkJ6RQozo1bqlEj3hvnvLskwdSwnBuchuiPUxkRj0jIC2IF
- vbXAuyoMQhRChlHR3CpdVQxme+a08wCDHUZtBB4pd/HshjGuO1zBSKCxAw27l/ap4wqj6eYx3xm
- s2QBTWkDY3Npc1pl9vLIgh1N3NNMXuQuCdDr475OrxQpQQHk=
-X-Gm-Gg: ASbGncsKZEgXVuuYU2dn+0uuQnJ6MBp9RuDFUxDhhXSaQG/OfGnVNxjxwKz0S89krJ8
- EyxM0lgLlo/1cPrehqfpX36YQtLvHPkF6qkzBc40=
-X-Google-Smtp-Source: AGHT+IFWW16o7ih/Apw+dFma6WHQ6n+8xtspWGkUHjclcBpGpCPhx7HoXotDkiYEH/Z5UBs9He3havrVVLnmwDES7AI=
-X-Received: by 2002:a17:907:2d27:b0:aa6:6ea7:e5a7 with SMTP id
- a640c23a62f3a-aac2ba3f453mr89753266b.28.1734667492530; Thu, 19 Dec 2024
- 20:04:52 -0800 (PST)
+ AJvYcCUs1zN/50cMd8KJlM2ESGwYPTOObAZiocluW9wLGC8L7ERJ+C7mI/T7VVZ2fcfxJdO2Ti+sywE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8s5BvaewZhkuin2TPSSnLe5p+doUubV6erqUwO1z/EM+nyomf
+ 5W6ELaceqOPOLjKekaKiuxGZTjgMlcLA4hOe2wiQA+7+Rxg7SWjAophJsVhmYxeLByhMset29FE
+ XxIvAf5BRlk15IVGVIWLq7esaWx1cHrQzCa53
+X-Gm-Gg: ASbGncsmMYqOqyVfZM/sdOsrGKCK/ssJQFET6L+8J1zQk1cd4SmXTHN8kXE09QbYL01
+ +ErX+yNtTpUweTNBoUkjBZQGxU9qQmNoDGkNCUlg=
+X-Google-Smtp-Source: AGHT+IEgm3mR/5ZsXUjVtI1wt/YMpELqOho8U/TM9yFDk4LQmlDykSLNSpIqPprGI7w7/Mw+Pbc6D3aIkaZASSfAPVQ=
+X-Received: by 2002:a17:907:80c:b0:aac:832:9bf7 with SMTP id
+ a640c23a62f3a-aac2b84b7aamr82980166b.24.1734667495733; Thu, 19 Dec 2024
+ 20:04:55 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 19 Dec 2024 20:04:51 -0800
+ HTTPREST; Thu, 19 Dec 2024 22:04:54 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241206023626.2456858-47-sjg@chromium.org>
-References: <20241206023626.2456858-47-sjg@chromium.org>
+In-Reply-To: <20241206023626.2456858-46-sjg@chromium.org>
+References: <20241206023626.2456858-46-sjg@chromium.org>
  <20241206023626.2456858-1-sjg@chromium.org>
-Date: Thu, 19 Dec 2024 20:04:51 -0800
-X-Google-Sender-Auth: MAXRvB3vd36gWgLdotjryzGGy30
-Message-ID: <CAFLszTiP=Etgg7E-Khpsnz+sUNaeEwhnKC6QF+vjNg_a4Ngpjw@mail.gmail.com>
-Subject: Re: [PATCH v3 46/46] bootmeth_extlinux: Refactor extlinux to split
- boot
+Date: Thu, 19 Dec 2024 22:04:54 -0600
+X-Google-Sender-Auth: WlUdjL-6_LQXjbGz12QUqvIbpy0
+Message-ID: <CAFLszTi4bDYwWb0Canr+-GA=Rja00hy8Wcjzs_PawY=OYr7b0g@mail.gmail.com>
+Subject: Re: [PATCH v3 45/46] pxe_utils: Refactor to separate reading from
+ booting
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -94,24 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new extlinux_setup() function which sets things up so that the
-bootflow can either be booted, or just probed.
+It is useful to be able to select a bootflow and read its images,
+without actually doing the boot. This allows adjusting the bootargs, for
+example.
 
-Provide a readall() method so that images can be read into memory,
-without booting the OS. Adjust the boot() method so that it can boot,
-after any changes have been made by the user.
-
-Update the test to change the bootargs and check that they are booted
-with the changes intact.
+Provide support for this in the pxe_utils module, by adding a 'probe'
+method which selects a label and saves its settings, so it can be booted
+later, if desired.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Pass through the bootfile since extlinux and PXE are different
+(no changes since v1)
 
- boot/ext_pxe_common.c | 53 +++++++++++++++++++++++++++----------------
- test/boot/bootflow.c  | 24 ++++++++++++++++++++
- 2 files changed, 58 insertions(+), 19 deletions(-)
+ boot/pxe_utils.c    | 72 +++++++++++++++++++++++++++++++++++++++++----
+ include/pxe_utils.h | 41 ++++++++++++++++++++++++++
+ 2 files changed, 108 insertions(+), 5 deletions(-)
 
 Applied to sjg/master, thanks!
