@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F092E7718A
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 00:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE3FE77184
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 00:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDCF780317;
-	Fri, 20 Dec 2024 01:03:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2DE2B8036F;
+	Fri, 20 Dec 2024 01:03:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="r1ZlMcgm";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="uEWFqLOP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="k/yCPk+3";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Wi0l2t1t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD8538033A; Fri, 20 Dec 2024 01:03:51 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id B968080352; Fri, 20 Dec 2024 01:03:53 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB26780326
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 01:03:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B50F280312
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 01:03:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YDnh52gd1z9tVG;
- Fri, 20 Dec 2024 01:03:49 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YDnh70YZKz9sqs;
+ Fri, 20 Dec 2024 01:03:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734653031;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/9glFthYpuDsoTVnECQv5+BRxwdjqArkVQ0gtQtsT0U=;
+ b=k/yCPk+3+o7m7pYp1ej2hqPEpjvYyWBHAGeVnIfmGeNrFOo1itkA2ASALi995GleiBbQNT
+ 9ENdOr0EBqzsDVKBHh9Gzv62xbpNUpD9FrCaHtPLpvZUEiAuYE6rusv2najOHQKtsewRwU
+ fPhaEofBuEkmRxCWJkx/aqN9GX6pQqlN9wMg8I/tc6CEl1PqWHcZek27UEiivpMcec2Oe3
+ w6r6leCI2j8FyPHiei8KG8Rz9f9HfRxp32hynQAWW+vKDRLue11fUX54dTx5Za6AaxUJ19
+ emK+KbtD/adulMGjUwrbtigzpoDIfzhZ2cN+w+UgsW+lEn91Sid8HdU/ErHzEg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1734653029;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=b30pQ9/5wj3x1Se/sY8lDK3Up8vvu+HyJQSDsN5uba8=;
- b=r1ZlMcgm8KrcSLxorm1Rzw9mLa01B0l6m0UiwpcODKHWfSn5/pv/wZBoDJKYTCwyFGd5Eh
- CwdDQhxumo23uB452VdUJLE/lrF7vMoVY2EVLXlxF9RJ2yQAXUYoKQ+7o92nHQ5sYYkx9N
- ovw0h681tASqLbqke0ch92fvOBgUkd2uqDPpUnQLTT6nCeNtRKMn4fWHTfDrpO2irOo9b5
- SVuGergmmejW8uhR65EunWJqx6ScmV99dMFktJEv3gm5sABb6f/NidpqUWaO/sJbUj4Vwb
- bMaoii9ZuLEW7wXRa0puYx2NFIE+ZERsBCU1CBQu7EC7lvsEdO/YFrQMxAnO/g==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734653027;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b30pQ9/5wj3x1Se/sY8lDK3Up8vvu+HyJQSDsN5uba8=;
- b=uEWFqLOPDG2TwFaSU689Jwzf5BJ9c652OSLgi+s4bVQfOE1XKXzdsFv+ihEmszAcQXdFAI
- BdmQAK3THgF4O/2owEcF5HFcbbRLDxhSDhKEIaAGjMQ94syCth+80+8QW/KzABOnv1FJSx
- b0aXOtNfUcCUxtbIGH75//2drS0wa7nih3RVR5dnmjXlc4+9DXZbrwa1DwDuG/u7dceOeQ
- PPYH4XLjkp7bXFFDsgKCl6eJ/hieuNhiwxFZy3mWN60ovtm9fQcCVkdP4w1UNglNo08oMS
- T88NMjGavc0hO6PiXsINyMKFuSpQsn5y6ft2OvUqHwnedEKMxH4TNFmFZGcsCQ==
+ bh=/9glFthYpuDsoTVnECQv5+BRxwdjqArkVQ0gtQtsT0U=;
+ b=Wi0l2t1toYLDbt1SN3+2ABC2v6KLMDUbaqQUor4J4e5zLYP6Gcccr8Kn21guxqRhWIkXFt
+ WrSVdoJAu+TVLucjmEF1wJarXf+tSmOYVhTCZ/vXj8PPadO0F3hHcDQ1XG5v1QlE0lSzLf
+ ZFRdU3V15Dh2xx3RxyTR1W12Zs0qyzv+PnQn3H7lfoNL8Lg+npW2EZ+zQ+wtl/XZU42ZeA
+ F4dwebW15Dhxk+E3XHLGiuvxTEcfOgn6LJmqFSIqpO7qDqPh87DXJ+6SPAnfZM9MAM2mQK
+ 0eyIfWR5smXNm9SaxYjUyrh7qG+b462XiHBofI3OrqjO78rZg949LJGZUXhgOA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Adam Ford <aford173@gmail.com>, MD Danish Anwar <danishanwar@ti.com>,
@@ -65,15 +67,17 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ravi Gunasekaran <r-gunasekaran@ti.com>, Roger Quadros <rogerq@kernel.org>,
  Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] arm64: dts: renesas: Add R8A779G0 V4H remoteproc DT node
-Date: Fri, 20 Dec 2024 01:02:15 +0100
-Message-ID: <20241220000320.167110-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/3] arm64: renesas: Enable CR52 remoteproc on R-Car R8A779G0
+ V4H
+Date: Fri, 20 Dec 2024 01:02:16 +0100
+Message-ID: <20241220000320.167110-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20241220000320.167110-1-marek.vasut+renesas@mailbox.org>
 References: <20241220000320.167110-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: d1c5ac74a617fe666e3
-X-MBO-RS-META: 5h4719srwckdxo9nhnwyyzgzre7ai3u1
+X-MBO-RS-ID: aff7f6f78a25bf55064
+X-MBO-RS-META: u5iokessa6gzao1nymory9j9z6ncp7eu
+X-Rspamd-Queue-Id: 4YDnh70YZKz9sqs
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,10 +94,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Describe APMU controller as a remoteproc device capable of starting
-the Cortex-R52 cores in Renesas R8A779G0 V4H SoC DT. The APMU IP is
-in fact a power management unit capable of additional operations, but
-those are not used by U-Boot so far.
+Enable remoteproc command and APMU remoteproc driver to start Cortex-R52
+cores from U-Boot command line. Code on the Cortex-R52 #0 can be started
+as follows, code on other cores can be started by passing the correct ID
+to 'rproc load' and 'rproc start' to select the core:
+
+"
+=> rproc init
+=> rproc list
+0 - Name:'rcar-apmu-cr52.0-apmu@e6170000' type:'internal memory mapped' supports: load start stop reset is_running
+1 - Name:'rcar-apmu-cr52.1-apmu@e6170000' type:'internal memory mapped' supports: load start stop reset is_running
+2 - Name:'rcar-apmu-cr52.2-apmu@e6170000' type:'internal memory mapped' supports: load start stop reset is_running
+=> rproc load 0 0xeb200000 0x10000
+Load Remote Processor 0 with data@addr=0xeb200000 65536 bytes: Success!
+=> rproc start 0
+"
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -108,27 +123,22 @@ Cc: Sumit Garg <sumit.garg@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/arm/dts/r8a779g0-u-boot.dtsi | 7 +++++++
- 1 file changed, 7 insertions(+)
+ configs/r8a779g0_whitehawk_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/dts/r8a779g0-u-boot.dtsi b/arch/arm/dts/r8a779g0-u-boot.dtsi
-index 90f021299c5..2e731b628b3 100644
---- a/arch/arm/dts/r8a779g0-u-boot.dtsi
-+++ b/arch/arm/dts/r8a779g0-u-boot.dtsi
-@@ -165,6 +165,13 @@
- };
- 
- &soc {
-+	apmu@e6170000 {	/* Remoteproc */
-+		compatible = "renesas,r8a779g0-cr52";
-+		reg = <0 0xe6170000 0 0x80000>;
-+		power-domains = <&sysc R8A779G0_PD_ALWAYS_ON>;
-+		status = "okay";
-+	};
-+
- 	ram@e6780000 {	/* DBSC5 */
- 		compatible = "renesas,r8a779g0-dbsc";
- 		reg = <0 0xe6780000 0 0x80000>;
+diff --git a/configs/r8a779g0_whitehawk_defconfig b/configs/r8a779g0_whitehawk_defconfig
+index dc6fd6333f7..c74051d1af9 100644
+--- a/configs/r8a779g0_whitehawk_defconfig
++++ b/configs/r8a779g0_whitehawk_defconfig
+@@ -13,6 +13,8 @@ CONFIG_SYS_BARGSIZE=2048
+ CONFIG_BINMAN=y
+ CONFIG_BOOTCOMMAND="tftp 0x48080000 Image && tftp 0x48000000 Image-r8a779g0-white-hawk.dtb && booti 0x48080000 - 0x48000000"
+ CONFIG_DEFAULT_FDT_FILE="r8a779g0-white-hawk.dtb"
++CONFIG_CMD_REMOTEPROC=y
++CONFIG_REMOTEPROC_RENESAS_APMU=y
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_MMC_ENV_PART=2
 -- 
 2.45.2
 
