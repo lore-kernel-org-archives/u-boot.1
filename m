@@ -4,110 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AEDEE77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 14:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6795E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 14:45:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AD3F8021A;
-	Fri, 20 Dec 2024 15:44:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 34EAF8021A;
+	Fri, 20 Dec 2024 15:45:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="cQgsvrrP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mSK+H6iG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E94680077; Fri, 20 Dec 2024 15:44:07 +0100 (CET)
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
+ id 8A23D80077; Fri, 20 Dec 2024 15:45:01 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A7468007D
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 15:44:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id EA75B80243
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 15:44:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ldevulder@suse.com
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-4361b0ec57aso19357045e9.0
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 06:44:03 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6d92e457230so19676486d6.1
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 06:44:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1734705843; x=1735310643; darn=lists.denx.de;
- h=mime-version:user-agent:content-transfer-encoding:autocrypt
- :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=rHec8HmnP2t76I/XgCFbjZkJ762ywHZYJMOan/X/Xcw=;
- b=cQgsvrrPjRNJNVqMnXsjFQkRnaTGO2Chtg0cQlNLF+EJcJ6fnA2S1L9GjMOTRNcPS3
- OOoT4TYYzVVXxPu490ew65D6mr8iT4XONr8lbwy06FzgkZbUgmz6R58pk50kbX9Fy+Em
- WSiYFNsQ7xu37iUhuZkvMD/n+194LPqjxo6cvdDf7Qw0rw0sW8Nljtl2Zor7SOqGCe++
- ht75lf78vZ2IOjGtmnERrh3XIpIA4BWxTqo1yl9cKwy6JT9CWHSpjskD7HThLTd/WwHu
- 5tzROiXPJeHa5peXC0jDn9j48B17xRJNLipUv4iuJBU8xuTrxxU3+MMByhQkP18FL2Ug
- OgCg==
+ d=konsulko.com; s=google; t=1734705898; x=1735310698; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=m9psogdddcBrDyqAdqArY3lDLBVGvJ4g14+DpVnRRmA=;
+ b=mSK+H6iGFQX4lK/YVo7zkWKohFY+ElZ+g3YHz5yB99UsOlaIE2veuSxMfx3Dpz14TC
+ pD/xc5FOm71MM0rzeYXrEIihBdMzEsOgM5rBTMUKNMAc+gvAuwYYTDdZCnlXN1FFOqyg
+ nU8dl6+EaRfRLqwCPg0mHaKMJQQg3P75iGhVA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734705843; x=1735310643;
- h=mime-version:user-agent:content-transfer-encoding:autocrypt
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rHec8HmnP2t76I/XgCFbjZkJ762ywHZYJMOan/X/Xcw=;
- b=BGYfZoCjkdrfZBwNUTVewU6rOnSIKOpFPz6/MSigEex606vo9ilw3jmz3AzuX8K3n1
- 8naDQXp43ohCst6HEG91pj2wRLqDhl59NIib8gQQmAYEMXtjOBXGSTzHFj1zvb56dttG
- 4F2fTcze2dwRYvYMYBCezAdk9PNZ/EmDDTF+/jf6dnM+xZpELJ7XwQcH5Hbfm4IIwEvU
- HXptFOuDwVjnBuyglE+Mg00nMEOCcuRiUj5UZxDlH8S8OWrA9a9MkGNJN9VdH5KivdL8
- 634pdJsCEphMAFAEtoWZzxP7yMjZXoTzgYxwck0Zp97XmwWgJFp7vpR4+xfLdWqELOXw
- +k0Q==
-X-Gm-Message-State: AOJu0YzRt6qUVfv3OoHaAk+BpjEReXAfDH1/HSGIG2fLnOME3jDYmKEB
- ncmsniWG0bn43X2rUwgjDEL/oYA46lr/MYXmEs3JFi8WR1n2dLXLcp6RdOb6Jps=
-X-Gm-Gg: ASbGncuXiIiqiaVuNrJvLfbbd94DnCMlXGH88gm6GLMlyqiANWtVGHMr5EMZniJLrNo
- 8LPn5XXgX7nxCV9SeT5cve8YL7DDg+eJQILUxcMHixKUaw1/LGQwwfPS+JzcLgz1D6kphj0+w9m
- 1O87ALD+JQPuIJbTcqHbKBkcTr4QjooKKM9Va0gFPPjPfJ5SjRi4O5Yd6icAidHpdzCmNYIJ6cK
- CilDPLd6CsnjNy2/B46azGpa0ejeviHMW4s8nuuD9OR2hmtJ/wozm8=
-X-Google-Smtp-Source: AGHT+IGfktk5x7Y0OCOfkyvMb4SUIxhVR7wREm3poShla/tlTUSjJKVUrLfij4ZTzxn4D123LC/KxA==
-X-Received: by 2002:a05:6000:1f8c:b0:385:f89a:402e with SMTP id
- ffacd0b85a97d-38a221f65c9mr3594158f8f.14.1734705842985; 
- Fri, 20 Dec 2024 06:44:02 -0800 (PST)
-Received: from [192.168.4.7] ([82.66.145.28]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c89e219sm4252351f8f.84.2024.12.20.06.44.02
+ d=1e100.net; s=20230601; t=1734705898; x=1735310698;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m9psogdddcBrDyqAdqArY3lDLBVGvJ4g14+DpVnRRmA=;
+ b=VMbILVUu9rSNKU2PMEswldsMQ0UEgUbkKUJQcepMvFKj2f44HR7Me9NrRKLg4eSI7j
+ 7uorMy3tGnwaYrE2ljlDemBp8OtKLiHUd9PY3LQ49xrInQ6OAz4na3ngYXqI1klsp/Pe
+ +3RHtMmX0H/p3a/b6zqR3NsQoXXsOU/3DKegE4/PSdrB/CiB56mNk2ICqrtt8jDf5r6x
+ 4gnQu6RLU3CrIXze8+dCuT6sskE/pjufQmWZ1xwgeVoBOVC6RkrPXebmnabR+6/VHp2O
+ j6JAwmntJIefPZ9CJfLUAuf3uH+mYHMzbj0L+oa23V9BuxBpo+7RYdu+QD9a7pWhq7Uj
+ pFdw==
+X-Gm-Message-State: AOJu0Yz00xSN9UZU4xL3k2v7hyf47ICRlUFeQb9/p/gzaOoEVQhy6B+J
+ fiEdyhkHbs+MtO6gW8aaFmwGdoGf0A3VvWDu7Etpz9yesmUANMXIik/GfHCkkrBW1hYdjSKitJq
+ OEWI=
+X-Gm-Gg: ASbGnctLRN+NMZbpUAcuapPbvtpGFWJXPHs7XTge/9WVvCj477ua4HOjLSVkoA+Pd9x
+ 1mcrTwQ4AE5pXfkekuxgSjp6v/zGh/Lyr/P4MrQEocQRIEOIASjPxGrxbFWE2IoDUS3A3spXTL2
+ 30xLoc8mGu/hQxbKlbhdw1idH4wqveChPQYsmJNdFEFj3OjW1Vp0blFgy5+UM8I8NMqa2fPbmsz
+ dkj9nLABGSwGoYLFjyas6scIiY26ef/8jziIVLZvXnX2UvOd22Q5MIi
+X-Google-Smtp-Source: AGHT+IHNv432Nfr2WGf0s/AJGBvDB3QsgsjoGRrAxwPu4EiX4Wm5FZxrPgTCHxzfVW/FxbngQR3JxQ==
+X-Received: by 2002:a05:6214:1d21:b0:6d1:9e72:596a with SMTP id
+ 6a1803df08f44-6dd2339dcc5mr41870046d6.37.1734705897861; 
+ Fri, 20 Dec 2024 06:44:57 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd18e3c3ffsm16687666d6.13.2024.12.20.06.44.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2024 06:44:02 -0800 (PST)
-Message-ID: <da88bc449866a7d78c935e40c9a77fe1eca2919a.camel@suse.com>
-Subject: Re: [PATCH 1/1] configs: visionfive2: enable CONFIG_DISTRO_DEFAULTS
-From: Loic Devulder <ldevulder@suse.com>
-To: E Shattow <lucent@gmail.com>
-Cc: u-boot@lists.denx.de
-Date: Fri, 20 Dec 2024 15:44:02 +0100
-In-Reply-To: <CANV2PTPnutTi6nZ2Nq3UvuZbPr4pedB1vo6ZWtQj4+Cif3diYw@mail.gmail.com>
-References: <20241125093908.50903-1-ldevulder@suse.com>
- <20241125093908.50903-2-ldevulder@suse.com>
- <CANV2PTPnutTi6nZ2Nq3UvuZbPr4pedB1vo6ZWtQj4+Cif3diYw@mail.gmail.com>
-Autocrypt: addr=ldevulder@suse.com; prefer-encrypt=mutual;
- keydata=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
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.54.2 
+ Fri, 20 Dec 2024 06:44:57 -0800 (PST)
+Date: Fri, 20 Dec 2024 08:44:53 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Weinberger <richard@nod.at>
+Subject: Re: [PATCH 5/5] pxe_utils: Support the SAY command
+Message-ID: <20241220144453.GB1505244@bill-the-cat>
+References: <20241220040120.3245610-1-sjg@chromium.org>
+ <20241220040120.3245610-6-sjg@chromium.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="E+dOCW2Cfb/uvqeQ"
+Content-Disposition: inline
+In-Reply-To: <20241220040120.3245610-6-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,37 +106,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-Sorry for the late reply but I didn't had enough spare time to test before.
+--E+dOCW2Cfb/uvqeQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2024-11-25 at 02:40 -0800, E Shattow wrote:
-> Hi Loic,
->=20
->=20
-> NAK.
->=20
-> This was removed March 2024 already. See "board: starfive vf2: switch
-> to standard boot and fix DTS"
->=20
-> https://lore.kernel.org/u-boot/20240221120014.149193-1-namcao@linutronix.=
-de/
->=20
-> Please divert your attention to review and test Hal's patch series:
-> "Support OF_UPSTREAM for StarFive JH7110"
->=20
-> https://lore.kernel.org/u-boot/20241125003205.75327-1-hal.feng@starfivete=
-ch.com/
+On Thu, Dec 19, 2024 at 09:01:20PM -0700, Simon Glass wrote:
 
-I finally was able to test the v8 version of the patches and I can confirm =
-that it works as I
-expected with latest version of openSUSE Tumbleweed. I will add a tested-by=
- flag on the series.
+> This shows a message for the user. Implement it to keep the user
+> informed.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
->=20
-> Thanks,
->=20
-> -E
+Where does the SAY command come from? This is in neither
+https://systemd.io/BOOT_LOADER_SPECIFICATION/ (which redirects and is
+limited) nor https://wiki.syslinux.org/wiki/index.php?title=3DPXELINUX
+(which is where http://syslinux.zytor.com/wiki/index.php/Doc/pxelinux
+redirects to now).
 
 --=20
-Loic
+Tom
+
+--E+dOCW2Cfb/uvqeQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdlgt0ACgkQFHw5/5Y0
+tyyOywv8CrmiX7muMi1GJwj9lj1sECMScx0nLyaZLeh2EqZFuwC22FJBTdmq4+Hq
+e9ImaBg8nCgHEsvpE5Oh3G8QqXuQVDOEq9KUFJ3koG1lmnV4sdyCsOSaj6OmvM+z
+8YMHGOgIihMO2TMrJ++puPwoFCBKGC4G+RZycIwtYIGDMJt3IQmwncnixoCDpH/J
+Stmgb133NxwCw24slP36vNMcBCFWgBuh7X4vwWn+nmikLFvA8lukP5U5r/ojo8QY
+sQAzD1UeDHTpEC9J+Teoi9oi7ceYxG3w+8e7x2nGfPs9rVitJtMkTiKsmScw3CuF
++39j+uXEqq1CcqkkPVY0T+kroz26+fVfGpd+L+0gWOrAuUWWM0ihXRKIx2qYI6KP
+/5ee/2O0nmPWMGGcqiEZnv6NtUjNYpKa0PuJddf8e3eOp9rcwZIYeRCyKBUV6ZSg
+9XtXWEb0qiAvD5bbzCkkK9stOawpWFcuONJ61P8kFgVSKoAnMj/i7ndiyLeGeWd0
+YVflIZhJ
+=g5r2
+-----END PGP SIGNATURE-----
+
+--E+dOCW2Cfb/uvqeQ--
