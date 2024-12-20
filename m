@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB46E7718B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 22:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D27FEE77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 22:50:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B24B880423;
-	Fri, 20 Dec 2024 23:26:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D92E28036E;
+	Fri, 20 Dec 2024 23:50:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aRs4Ykmc";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="AZSVizwK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 376FC804CE; Fri, 20 Dec 2024 23:26:30 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CEB73803CB; Fri, 20 Dec 2024 23:50:26 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E36A80423
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 23:26:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A31738035E
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 23:50:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6d8e8cb8605so12950636d6.0
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 14:26:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734733586; x=1735338386; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=YxmaAd8g/NCQNqlpIkF5qrMTe5/K1fkvbRp1sV+iCp0=;
- b=aRs4YkmcuoDkh9k7a8tq4nHyFttc395UmJyKr3V8GxZBB/dktguDQCtagmj4IykapQ
- wJZ8t2m/xKyzBASQLB7Lp+2GPhMsBn7imKOzDrUwyyWRXwuu43+2ky215aEXVoz412ov
- XOjcypyGcCJ4RlFa5M1r1vTR3/wWXqy8ldi14=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734733586; x=1735338386;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YxmaAd8g/NCQNqlpIkF5qrMTe5/K1fkvbRp1sV+iCp0=;
- b=Er2BJtAAot7sQfbCYPIQoxYCtBqjyHgmF49lIfob9EaXp79zFTJt+b9kUckdfrZ3js
- xFfvbDSx92853bcHuiNncsPw3TgNclFkQM41abKSi4KVxpuS5h/GiCL9wn9EmqNytOqo
- odbFQI3wf1xSQE9iWgxJlf21kLtlt/x70+Hemc+JuKOwVgS/AVZW740VnlP+dnFwkX1S
- zVTnMFqvuw0TkPVRoNVZe2jZT252201M8fFr4Dewkgl6kCVo/NKJ+JZF6gaBnjZf/BSV
- OmvRcxrThB2fmarRAZJMOmRO+w5JZ70brg+Q2BlP1lb3xFXg16CknPS2YnESyO0yfuPu
- u0cA==
-X-Gm-Message-State: AOJu0YzpDmQ7f1vhLRiXY5ALOXRS7xwml5mf2Spzp6YYfa6lLY7XnuR7
- RzEbVzHij5KK+s/D6043yQrbSZ4dGtBWnSGB+c95RLlVjipsg9gB8EENdXttlVKCQV6OJjYw6Dn
- 99UY=
-X-Gm-Gg: ASbGncucGSFhtTswPLg8VPxykO68OCd39Ww/5uKCp7Mtm9CVXC1xbzrxUiaH4F7lFwo
- 6QFihZW9pVnCTNs3Qx2xN4tommwxj3unWTBnZ7C7w3/brnUvNLgaoeqeBBfLZBjBrAuVzWREPgF
- XpvQc0oT1ei9eBp1cLeg7SLsCWFoBKzUr02sWUs3p3y33pQsHJYr/mY0/8mUWxY1OXWahjN9QF4
- 3wpatMAgMzRw14pNmNzANwYqD4QO9MiDKrUb1S/UhPM1hn5hzP2l97ldlyOOY+DGeq/MBXGx+4Z
- 5UU=
-X-Google-Smtp-Source: AGHT+IFzoleoxMFZr5Gd8stR6OFzM/qE5fizMJbk9005L6QczAaqlE7/Ckvsb9jVvb+1NHYxS7Nstw==
-X-Received: by 2002:a05:6214:5004:b0:6d8:96a6:ec27 with SMTP id
- 6a1803df08f44-6dd2339daf7mr76681016d6.35.1734733586066; 
- Fri, 20 Dec 2024 14:26:26 -0800 (PST)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb4desm21055606d6.87.2024.12.20.14.26.25
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2024 14:26:25 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH 6/6] block: Remove "select BLK" from non-block drivers
-Date: Fri, 20 Dec 2024 16:22:22 -0600
-Message-ID: <20241220222612.1757884-7-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241220222612.1757884-1-trini@konsulko.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1734735024; x=1735339824; i=xypron.glpk@gmx.de;
+ bh=VVCkdZ/DMPOIdFJfgJEEvKLBJqwal++sMtOiavR7olQ=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=AZSVizwKoGoe5jl22oPGROn2z5hvzB5Wz4/k1MfNm9AGAdgOGP57P0BpSYEzYn5I
+ Pp91XjOXeNiWDN9dQDBX8ekJa8Fv5kK1jG1nw/R0RK1pR5AlfDwWDDw6k1xZvIiWf
+ O0KX4L1hiLVrpKXL92S6L5jEYRJcLrg/M6TeGcI2IepY2BNBvAcOH59N2Ie7IX+nF
+ goY3e+wlVsteG6c3cfAtDJgmvLGnqu6h6Ya+oJS2umK8224vc+rhgEp/4BfrW9BIv
+ 39D5+NlExys9cPO8z4btT7DbTQzPRSCTHtrrMLHYF4/Zn7IciZxl5RPM1A45IO4Vd
+ FupMOlK4NcNvx7XUvA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1McYCb-1tyf0E2tW1-00a0K3; Fri, 20
+ Dec 2024 23:50:24 +0100
+Date: Fri, 20 Dec 2024 23:50:20 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 3/6] efi_loader: Depend on BLK
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241220222612.1757884-4-trini@konsulko.com>
 References: <20241220222612.1757884-1-trini@konsulko.com>
+ <20241220222612.1757884-4-trini@konsulko.com>
+Message-ID: <FA4AB722-29A4-4B4F-930E-EA22C2420900@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:0Ivz4UTa59u1Jb6ZI0dXCI7Qh7vWwk0Ku+w107JLbNNEyKv4X5D
+ HrwtjNksUA+7D21sMngZulX2mFIBa7mH2Yopj2AISasR93cGoUqwXnEgAbBgsDtV50fKtkE
+ TTtxCfxQPrvuwlFBoxhyIsa0JpRbpiv3Rr5BP9eqlzQJcBEBQZRSEaQ36HIsl+lq9lG2vK5
+ QvDKFZ1tHgU6rgc42NdeA==
+UI-OutboundReport: notjunk:1;M01:P0:51UuHcDDxTE=;cGJvdUCHg6Y3b+ROxeRi7FUkKSy
+ pFMcjhB0DOBDveGnO9Wcf673P1COXKMLphPMbscEoOattQmXpe8Tqc1jsPm6T6Ku+gNIaNcXv
+ FQyMci79Jw5rwGqsguufT2CsNJ5a9ijRnXPOnHpDZp1AJQpJc0F2OPAijZynIigP+m/E65XGy
+ CxestqhpgFU1CI8AxVjramziCeLCxUapVjx1WXeiujjquWaysyZUXF03g1kKVpR4Y2Aj/AU+S
+ 70TaHonvU/vY2u/hEv1HOq5hLNRCvEt3O3bm5vno4aysJvuOq98vpvpcdh6/kDsfAwz2DFRSa
+ hCTggBxZbnmNmMXbkGIVd1Xl3PuPz9SZHLDPNgpIfIn9BDMVBDSblrSI3E3PDCZO+NimKd40n
+ /aijlsyVWYmDS3ek3P5GsExLDgHDD+m1iLvTEcDGuAioAPQvui3QjbvjVuBBlMtGT2OVhn8XP
+ 2K8zKjilmDYR/sr5KkVeq0luJc/EHF6roYrCO50uDMI2B0/MpIlqUZBsd1VJItGjtK2i7uGyb
+ pURNGz/jks1rut5dHsSaga8YXBiF9pb11zTtDoczZXElYDGXCkUaE3KlmkJdOejyRNKLPoJXx
+ uWk37mhLULS/aJx+TwCq/JyXeuHj3ARNeLw5Im20bMRpLjwZ4hrUbrOeUd/MaL+9S2VKKEOzc
+ fWapnlHQIeP6bqeqmuesSVuZCRnpjeAKohcEpDBWSwH+zKKh/nMK7TYHkwXn3WgI7wavlex+c
+ ALMTNJHuR0+KyoYvOim8s/aKwbav2ycyr0zTjuTPNihzYkWtQYT/VkIgvWA2RqYueoc3w3lr6
+ NyGulT9O0FPsF+3X6GyVnxpT29IfrglMKOuOmeX4e/Rb1n60yQyiEr4Of5fFfzC4biM983JN5
+ uHCzcjsdBrlgw5FR4a/yDqgixOmKQwGfdSU3+Av4TWdIoFa1q8s9a+rI6VdkvDEiapPrKCAkS
+ Ps6+zgbq6Na1uUHJlgVnCec0q6avWCBwyuSXHDWZEECstTJTj3ugHD9Z+WZFp81kquCYuk3BX
+ aP1WTG77+wdBhMbb7ceosXsKCY79jTQrQg+gDx2LhntDT/4v7MpdLMR4WW8rZvjcgqiKeRlpn
+ gi1Gwjz3YjisYPHv7TY1LhyAUbuiA3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,115 +93,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that block drivers are all selecting the BLK symbol, there's no need
-for other options to be select'ing BLK so that other required
-functionality can be enabled. Remove these places.
+Am 20=2E Dezember 2024 23:22:19 MEZ schrieb Tom Rini <trini@konsulko=2Ecom>=
+:
+>In reworking the BLK usage in Kconfig, I found there's a few issues with
+>EFI_LOADER=3Dy and BLK=3Dn=2E In general, we can easily say that
+>lib/efi_loader/efi_file=2Ec also should only be built with CONFIG_BLK=2E
+>That however leaves the bootmgr code, eficonfig code and then parts of
+>efi_device_path=2Ec, efi_boottime=2Ec and efi_setup=2Ec which functionall=
+y
+>depend on BLK=2E While these calls can be if'd out, I'm unsure if the
+>result is usable=2E So rather than leave that buildable and imply that it
+>is, I'm leaving that combination non-buildable and commenting that
+>EFI_LOADER depends on BLK in the Kconfig currently=2E
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- arch/arm/Kconfig              | 4 ----
- arch/arm/mach-exynos/Kconfig  | 4 ----
- arch/arm/mach-imx/mx5/Kconfig | 2 +-
- arch/arm/mach-s5pc1xx/Kconfig | 1 -
- 4 files changed, 1 insertion(+), 10 deletions(-)
+EFI booting using only PXE or HTTP should be possible=2E But I admit we di=
+d not work on support for diskless devices, yet=2E
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index ea256f687867..86b37e8d5f8d 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1371,7 +1371,6 @@ config ARCH_VEXPRESS64
- 	select PL01X_SERIAL
- 	select OF_CONTROL
- 	select CLK
--	select BLK
- 	select MTD_NOR_FLASH if MTD
- 	select FLASH_CFI_DRIVER if MTD
- 	select ENV_IS_IN_FLASH if MTD
-@@ -1981,7 +1980,6 @@ config ARCH_STM32
- 
- config ARCH_STI
- 	bool "Support STMicroelectronics SoCs"
--	select BLK
- 	select CPU_V7A
- 	select DM
- 	select DM_RESET
-@@ -2028,7 +2026,6 @@ config ARCH_STM32MP
- 
- config ARCH_ROCKCHIP
- 	bool "Support Rockchip SoCs"
--	select BLK
- 	select BINMAN if SPL_OPTEE || SPL
- 	select DM
- 	select DM_GPIO
-@@ -2116,7 +2113,6 @@ config TARGET_POMELO
- 	select AHCI
- 	select SCSI_AHCI
- 	select AHCI_PCI
--	select BLK
- 	select PCI
- 	select DM_PCI
- 	select SCSI
-diff --git a/arch/arm/mach-exynos/Kconfig b/arch/arm/mach-exynos/Kconfig
-index 7e6959510087..28193039cb84 100644
---- a/arch/arm/mach-exynos/Kconfig
-+++ b/arch/arm/mach-exynos/Kconfig
-@@ -18,7 +18,6 @@ config ARCH_EXYNOS4
- 	bool "Exynos4 SoC family"
- 	select BOARD_EARLY_INIT_F
- 	select CPU_V7A
--	select BLK
- 	select MMC
- 	help
- 	  Samsung Exynos4 SoC family are based on ARM Cortex-A9 CPU. There
-@@ -39,7 +38,6 @@ config ARCH_EXYNOS5
- 	imply USB_ETHER_ASIX
- 	imply USB_ETHER_RTL8152
- 	imply USB_ETHER_SMSC95XX
--	select BLK
- 	select MMC
- 
- 	help
-@@ -51,7 +49,6 @@ config ARCH_EXYNOS7
- 	bool "Exynos7 SoC family"
- 	select ARM64
- 	select BOARD_EARLY_INIT_F
--	select BLK
- 	select MMC
- 	help
- 	  Samsung Exynos7 SoC family are based on ARM Cortex-A57 CPU or
-@@ -61,7 +58,6 @@ config ARCH_EXYNOS7
- config ARCH_EXYNOS9
- 	bool "Exynos9 SoC family"
- 	select ARM64
--	select BLK
- 	select MMC
- 	help
- 	  Samsung Exynos9 SoC family are based on ARMv8 Cortex CPU. There are
-diff --git a/arch/arm/mach-imx/mx5/Kconfig b/arch/arm/mach-imx/mx5/Kconfig
-index 4d1e07b14d32..0dfd68496875 100644
---- a/arch/arm/mach-imx/mx5/Kconfig
-+++ b/arch/arm/mach-imx/mx5/Kconfig
-@@ -26,7 +26,7 @@ config TARGET_KP_IMX53
- 	select DM_I2C
- 	select DM_PMIC
- 	select DM_SERIAL
--	select BLK
-+	select DM_MMC
- 	select DM_REGULATOR
- 	select MMC
- 	select MX53
-diff --git a/arch/arm/mach-s5pc1xx/Kconfig b/arch/arm/mach-s5pc1xx/Kconfig
-index b15b2e7b6a01..d8b85f80e631 100644
---- a/arch/arm/mach-s5pc1xx/Kconfig
-+++ b/arch/arm/mach-s5pc1xx/Kconfig
-@@ -7,7 +7,6 @@ choice
- config TARGET_S5P_GONI
- 	bool "S5P Goni board"
- 	select OF_CONTROL
--	select BLK
- 	select MISC_COMMON
- 	select MMC
- 
--- 
-2.43.0
+
+>
+>Signed-off-by: Tom Rini <trini@konsulko=2Ecom>
+
+Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+
+
+>---
+>Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+>Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
+>---
+> lib/efi_loader/Kconfig | 3 ++-
+> 1 file changed, 2 insertions(+), 1 deletion(-)
+>
+>diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+>index c46ffe3a9d89=2E=2E798dced475e0 100644
+>--- a/lib/efi_loader/Kconfig
+>+++ b/lib/efi_loader/Kconfig
+>@@ -8,13 +8,14 @@ config EFI_LOADER
+> 			SYS_CPU =3D armv7   || \
+> 			SYS_CPU =3D armv8)  || \
+> 		X86 || RISCV || SANDBOX)
+>+	# We have not fully removed the requirement for some block device
+>+	depends on BLK
+> 	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
+> 	depends on !EFI_STUB || !X86_64 || EFI_STUB_64BIT
+> 	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
+> 	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
+> 	depends on !EFI_APP
+> 	default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
+>-	select BLK
+> 	select CHARSET
+> 	# We need to send DM events, dynamically, in the EFI block driver
+> 	select DM_EVENT
 
