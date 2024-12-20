@@ -4,161 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3AD2E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 06:51:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551B2E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 06:57:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 340C78007D;
-	Fri, 20 Dec 2024 07:51:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BD7F48007D;
+	Fri, 20 Dec 2024 07:57:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="FK4S9hCZ";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="MT+UGG6v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74EA280326; Fri, 20 Dec 2024 07:51:00 +0100 (CET)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20724.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::724])
+ id AF0828021A; Fri, 20 Dec 2024 07:57:12 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on2070b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::70b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C76C8006D
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 07:50:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 882898006D
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 07:57:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u+wbQDRGMSJy8VwEHdCPTZiw/EVUEgIMGrQImXWLAK0+hVFPPSUnCoBSfmROO1e3wt84kPIhDUeC8JVUNLPF9IYe+ajAJ+WF98GIw+gmN5ZGHCjGW8Ic+C1Fybh1VI475dwvMFLh6ixbv3vGcai6dGcaVBfU4vp8PehKSDgHGRP9BkYkxBYtQEwkt4qk3/UvWnyB1nvE/OTAVlTcYtqdntsfftCtuTQg2ntYOLPKrWL/7mWRmNcAVU+COLihkFTj6oobXJaY1X4EekYphhk0GNH54q1Ypko2PafxImgHUPK8uHN+v4ZFzVUvhUUZqmm3mmu+x6tQE4q0sst+6Mkiqg==
+ b=RCPW2+J4xgawTh6/Kx1IXwYI418O+xC+bjXhtyOUSTcUNllRMwP+lnw2vnPSPqIwB+8ANiutJVl544Y/5ekGreZIKW+1MkdiMLyUgdVhYoiAEA5pm9dXChoOfClAXhdvgNoGklWaMASzAPGVkcZWoCoxPKilbfdLaDLaix4LIArj17d2A7+g06hga3HvyIYY8IeqCZf9Y0OYNTVkG59hIeuCCdN6dP2sPicqNGS6LbVVS2mD8RejDXmDtSnZbxwbwpLu3gK1wHO65SnSUACTEDjXp0Bq9yThL+AUoHPMQywDoFE072euJe073dKoi1hg24qRJ/dGgzvPfNZSMt5sjA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W7Q58+tyJIwlEPXMZYrpDzfzGEdtpaYoS7hsp9wxL4Q=;
- b=x90yOpTUP0xf0L5sxwTZgzOCHJOlPOMQwqSVkizuAPAsEMKRtT1SQlIgQxLRmQXftvJAoco92Tu0Kxo4SFqU54dRsl2uDQ6EQRo7MtGf4sAQBkJYhMY1OkNdQIPHQxN3N/IR6LUJVQX5wkwvsT20lp4VFs9MWe61Wd50WDaQEhahdqsoS2CVZTCOTH+lpmcrSYf+cLsoLsd2XkUYHNTJIS6HxyG+LVLsa9cc7S4cr6p/iZBIVnUubQRrUjSSGXBA+PCi2l1wzQ2OUqGM+gROhyBVj5f26xzdiWYQUqu2fwIn32XFCMLzRG2ObvsTdHqHNfdymyAddA3P2yH4oGObQg==
+ bh=vzgF+4keesFtmFZu4dbSSPCv9qe/ccjf7yTtcnd+O5g=;
+ b=sH3z4hvwUkjZrwkPSo7V6keGEPRQeMik8hyocLtvOzktyVaBdc469hKMDTFZ0owf2vSc7OHr61FG/ncCS/wTwh/8fTDPdQhcd6YEgIe0wWAOB3ti9FTnkpM5+ZuTaZsYc8FsZexM5e7GbjyU69PzV9HWLtymWQMpXwtBt4iJcUeVGYRKD43dVXdtQR+3wAcYOzVgYNGTZFsbl/GRqYCmbaGBfCBJHOPuw5IKv/Dm5D+Zv9/FuC/gp4ZuZV//UudlxAYk4AyXRO3JNKnISVQcG6aRbDklFcCyMzJ1HckBgvyc3juDuZ3fLUtOHbP7W2shdWaQXgMRe6YNwZGNt131mg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
  dkim=pass header.d=phytec.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W7Q58+tyJIwlEPXMZYrpDzfzGEdtpaYoS7hsp9wxL4Q=;
- b=FK4S9hCZYx6CSoUmyRFKCxz2iXxZPQsaSejM3aA5WCklB6j2Cxrq/GyjTMXAbSiRrIrc0EFyANDMgsk0HW6tUvJN0/cSoMdqM2crTx1U5IjyX64V6eKtmA86rqSw3yAEm7Bz92am+LrNeUwPblXhiiQ4utCUPz93HEVWrU1mp0FVn4X+TNKXeKxB3ICvjrTRHGQWPqwGVf3frzbyiDzI7DpM5AxOITlFd9f+2LuBrvj57qp8n15+gmZh5Ga4q6FCP3QtEZ8X1HcoX7CrPrSCF7uKXr6DGwLTQG2WPH6OhxpfbJATxtEhpS/XCM27Lj66eE2BSirYmVaLpJlnN7YomQ==
+ bh=vzgF+4keesFtmFZu4dbSSPCv9qe/ccjf7yTtcnd+O5g=;
+ b=MT+UGG6vfmgakwufTeDgQDzGQrDSv8bVkpwKvwPrFxyEgGuXj93+jxgnY7YdEXL24yjnVjLPaECHPAuJ4+lnFjyNnkW7E+se1B8mx+k+3m2Q0fHS7LjE84tgC21AAjv3dG37JwuGUtpP1FCgl9PVwUDWZMbJzx7a4lgyNrRM2zxgtpGNNke8jVAaW76g0Z/5gq+z6zBTNvdco1NN/XHHdRs2RLCJsmlJDfbERTY2YxW6rfyV0uqBcujuXpoKzhctUDy99Mm+USHMbEArswI5c48lLBiENo25d30Ra0oUgTslKz2n+Mi4LKfzch/qUdaXPX6VjxhTDjzbghZsptUzdg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=phytec.de;
 Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
- by GV1P195MB1926.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:9d::5) with
+ by PAXP195MB1184.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:1a8::7) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.14; Fri, 20 Dec
- 2024 06:50:57 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.13; Fri, 20 Dec
+ 2024 06:57:08 +0000
 Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  ([fe80::369c:a760:5bf9:8d4a%6]) with mapi id 15.20.8272.005; Fri, 20 Dec 2024
- 06:50:56 +0000
-Message-ID: <a44b9cfd-811f-41f7-acec-9cad96529abe@phytec.de>
-Date: Fri, 20 Dec 2024 13:50:50 +0700
+ 06:57:08 +0000
+Message-ID: <07382382-3e9a-427e-b33e-6510060c51fd@phytec.de>
+Date: Fri, 20 Dec 2024 13:57:02 +0700
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 6/9] drivers: ram: Kconfig: Add CONFIG_K3_INLINE_ECC
+Subject: Re: [PATCH v5 3/9] ram: k3-ddrss: Add
+ k3_ddrss_ddr_bank_base_size_calc() to solve 'calculations restricted to 32
+ bits' issue
 To: Santhosh Kumar K <s-k6@ti.com>, trini@konsulko.com, nm@ti.com,
  vigneshr@ti.com, u-kumar1@ti.com, bb@ti.com, m-chawdhry@ti.com,
  vaishnav.a@ti.com, j-choudhary@ti.com
 Cc: u-boot@lists.denx.de, n-francis@ti.com
 References: <20241213103129.332246-1-s-k6@ti.com>
- <20241213103129.332246-7-s-k6@ti.com>
+ <20241213103129.332246-4-s-k6@ti.com>
 Content-Language: en-US
 From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20241213103129.332246-7-s-k6@ti.com>
+In-Reply-To: <20241213103129.332246-4-s-k6@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2PR02CA0031.apcprd02.prod.outlook.com
- (2603:1096:4:195::16) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-ClientProxiedBy: SI1PR02CA0002.apcprd02.prod.outlook.com
+ (2603:1096:4:1f7::16) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|GV1P195MB1926:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1594da85-78f6-4142-00da-08dd20c2a77d
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|PAXP195MB1184:EE_
+X-MS-Office365-Filtering-Correlation-Id: c1c82bc5-f578-43aa-df70-08dd20c3855a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q0MrN2tUM1hUcHlacGlEL0EwVG55UGZ3Q3A3SDg2bEFNU0RNQmVZM2hBK3Vx?=
- =?utf-8?B?TzdaS0Mycld6QWlyS0FOK21uT1ZMa01JVm5Ydm9QbklMRVZaaUtCZVBraDNx?=
- =?utf-8?B?NUNIMUNEZTdYb2hxU20zaCtlc1hLbEQ0U0ZZUGVTWmJvOFV4SFJEemtiOWNq?=
- =?utf-8?B?TEs0OXJRUUpkVi9wcm1TWnM1ZTVJeEVYcDF5ekFhR2MzSDYvbkZPeUtsOE9D?=
- =?utf-8?B?WjRRTHVYd0V0ekV5VUVCT0ZXanFWdEw0bUU2VHlocWQ3ZDMzYkNHZTRrVUdx?=
- =?utf-8?B?MlV4V1BETHRZWHRaek95RkpZNXU4TEJtalVhMllFZEtkNHJHS1RiUTBaa3ZF?=
- =?utf-8?B?M05nQVprNTlHbTlCRENTTCs1OXdvR0F3VVlqZS8zdWcwS25YYnQvTEdhQWtV?=
- =?utf-8?B?VmpjdTBHekd4NlN1VkNET3kwY3ZjUHp6WC9Wb2hmbTllbkpBWkd6Q1htUTk1?=
- =?utf-8?B?cTM1RXBnK0F6WXlCMzZSUWs2QkRaWXdLL204OElFdFBacjlrQzdrQWhna3JZ?=
- =?utf-8?B?SGg4MlVZckZaVXRZTWlITkdTbjl3SCtBQlB2dnU0NG1uQTZKaUJvYzF6Q1VH?=
- =?utf-8?B?MW5LcFpoRC9qRUVBT0d0Q3BtcHVvcUNCQi80bWZabFRBanE5WWlGR3pER3Qv?=
- =?utf-8?B?TVhKa3pBQW83cTRwelJqVGdwWVhOdTF5ejlsMmlmMlZSNFE2bUNPL1BSN0ps?=
- =?utf-8?B?ekpnZUc4UjFCcEVxRElSOW16ekV2SEs3cEs2UmxEZEc1dmZFUE1jYm9NNWxG?=
- =?utf-8?B?WmdOUytmbXlMZVV5Vk9vZnNOTFlSK05GUC9lVWd1QTBaOUJ1dWZDY0g0QjZK?=
- =?utf-8?B?L21FMFQzN24vbDQ5eFpaZ25XRUp3UHpBNmx4WWR5M0NHRzRMQ2g5R09HeUV0?=
- =?utf-8?B?ekFIaERoNXlhWnpRZ2tVbWhoV1hWcloxRWlsbmRDKzlYdWhMNU51Q2RMRmVl?=
- =?utf-8?B?L0UzdXd6SksrTS90aGRxR3hjZmUrbEVmNjByNGo3cnducmdHZXRzMmRiQ1Vr?=
- =?utf-8?B?TC9GTitSZ2lENlhrTlQ0UzNsMU5Xb20vVytCRGoraVNQRGF2SFpMU2RFWGVi?=
- =?utf-8?B?UHF1dWtSVFNLamdYMnVrVW8rUkFjMUdlcG5UMXFGTEMxRHpPbEdJOW52Q0Yx?=
- =?utf-8?B?VGNxR2M3RjJVZ2VnRkFwZTVCQktMSmZKbTRia0wyQW9tVml5bktXd3BmUWtZ?=
- =?utf-8?B?ZHpDM2M3NXAzbnpkWnh3OGhUb04wR21zOUFzUzNxRy9WRm1FUjhTaFl1dFl4?=
- =?utf-8?B?SWFSZ3d2WUI0cFdFUkZsYjROSGcrMUtydW1YR04vc3hQaDJMb0F0d3UzakNB?=
- =?utf-8?B?UkZpdmtwSTdCcVZQOE5EcENDNnlJQ09kWFU3OEZOZDZaNER2VE9uUjBsYVpB?=
- =?utf-8?B?NDNVR3NBTitNUERjcDdKRnZ5eGFEVGRTT296NzAxdXJRTjY5S0tqRHpXaVpG?=
- =?utf-8?B?cWJIUkFGa1ZmVk5Ndjc4MDBZa29uRWwrQTZRVFg1czFkai91eXc1QUFGdmZx?=
- =?utf-8?B?eHVOU3BudFM2TDljSFBUMVpWQlZrMUNBTnlaOVZQOVFweTBEYytNMWRxU2xj?=
- =?utf-8?B?TzA2TGtWK3ZINm5GNmgzVlFzMHlPWUZGNTdJT3gyVnVpVGFLT3duTS9LY0xR?=
- =?utf-8?B?UnRwL1lTcyt4MmxWWWxsN2s4Z1JZcWdUSklDbk5qYit2M0VhSnE4aXBVdjQv?=
- =?utf-8?B?MnlJOXdCYWFQZDgrV1FqazhRRTkzSk95cHhyWkdnMGhMTXpJVUJEbWtwa1Qv?=
- =?utf-8?B?T0NUcjJJdGFGUkV0YnlzVVNNUTFEZEt0L2FwZWxCa05WYkhrb2Ixbk0wZ3V6?=
- =?utf-8?B?NSsrT1BtbjlBcGdpSjhWZEdvaDYvY3FhWkhaTVc3UUZUVWY0NlNCU2Q5Tmkr?=
- =?utf-8?Q?tGjGDNwtwIS8D?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|366016|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cTI5QSs4SXRUYm0zMEJrVmRNUFVFL1pCdjFpRENtVTlNbW9mWmJEQlRXUjZR?=
+ =?utf-8?B?YUtBaXU0SUdNQVh0Snc0U0FrUGF3TlJmZUhMVGhRRVN4ZU1uY0hHTTQwbU9L?=
+ =?utf-8?B?eWRRc3grdVBJdlBnL3ZJQ2lKR242K2IwZUdGMzRrT2FVYnh5Q0d0UUZYV0hI?=
+ =?utf-8?B?S2ZYbGdaQ3p5TFRRZm5PaWh6V2h1NzBQMW04a21NVnU3MHFMYVF1STc3c2cy?=
+ =?utf-8?B?N2xaMUJVbFo2R2tpWjZiVklGQ3V6VjJ1VlBNd0JGUEhiVEhudDB4WVJWc2ho?=
+ =?utf-8?B?MXBnOWJlTmNTNlQrKytYaG5sMnNlbUk5ck1IUFRtNW15alo0VnhBUGlVS0hR?=
+ =?utf-8?B?cXR4blVGMHZyUzA4S3gzd1VYNjlBa1VCRElFWExWN2NPYTc3aGlhTTMwT0hQ?=
+ =?utf-8?B?ZUVvRmJ0aVFXbVVxdDJNMmlpNW0xWnZxWnM2OTl1MFJZSDQ2L3lXWjFrbmRQ?=
+ =?utf-8?B?TDdpOVMxVFhxZWFPQVRhSGV0WHJ3WTZCWTc2eExhVVBTYmhUMWdGS2twWC9S?=
+ =?utf-8?B?VE93NVcyY1VPNm9ZYjhoT2pxQjhFMndzcTdWSTJpMHhCZUFZN2JoUFFFQkdZ?=
+ =?utf-8?B?QlFmN1NpaitGaUFMR1FLenc1N3MzRnY3U0l1UmpteE9DcUc2V0txK1M1UDIz?=
+ =?utf-8?B?V2pJV2dFZDA1RW1ndkJVL2czeHAwcUNUU0QyTkdVNllJMitGTUZuNDI2OEZZ?=
+ =?utf-8?B?dlV1MFlWMEFsVW1hcFlmMlZzLzAwTVpUcDBvVCt3MEFUSTYrYUlMb3dtZzg3?=
+ =?utf-8?B?US9ML0JNWnorbk9vQWdvSjVrR1F2WUNGTGxDT0RRV2poU0YvWHFJYW0wQXZL?=
+ =?utf-8?B?aUY5SFZQVExTRHBOYmpDdTJtTFRkSWNTZ1hvdy9QQldWK3NRTEYwd0gxYzhM?=
+ =?utf-8?B?QndhbjBSNHZYVU0rdVlMeFZXbUNmUHA1V2k5Tm5CL1QwM1pEV2MvYWdLZHZB?=
+ =?utf-8?B?TWFxZ04zUWxOQ1Y1d2lSc0Q1QTNZR2wrN0JPY2Y2R29neVNOZHlCSkdqYlAx?=
+ =?utf-8?B?UWhxcHgwa2R2N2ZXVkhDaW5sQWwrQUxVRTVJc3UrMG9UWHFQeXk2S1MzSWRM?=
+ =?utf-8?B?dXluT1A4VEYvQ2pvbHFXRGtLa0tOT01HNnN2UnBzbi9NTEh0ZmtFSzhINkJE?=
+ =?utf-8?B?ekl1b3pYRkhyQXZrb3JzbW1SN2N2cUpnZ1FVbHZPTk9xQUIyQ044TDlubldv?=
+ =?utf-8?B?MlU3c3FSd20ydUkrTDNMV2NGUXhDOGdxUGRvUEFuV0ZDeXRvaEY5L2dFSUcz?=
+ =?utf-8?B?WUZtalFiNjFFb0VLaVRycHZlWEdsU1NCM04xY25vZk83RnlPVXo1akhWWHF5?=
+ =?utf-8?B?aW9YNXZ1VFlLUzNxOHM3c1Y3aVQ4RkkyWmwxS0ZrYnZTUU43azVaR3pXWFhH?=
+ =?utf-8?B?VXpvTWI1QXQ1UnFsUmsreWZuVk1uTVhWbDl2V2d2VEtKSE5uc3FOVW5rR1pK?=
+ =?utf-8?B?RkRDeUFTcDhvM00xQlgvOEZWeGdhZWxGTkM4RnRGZlFKRE5FNk82dWlRcEc4?=
+ =?utf-8?B?cGZEYmVnejFwUDdlOG4rSHdLU2JBQ2xPQXpuOHhoRWRHazVMMlJZZ3B2QWRV?=
+ =?utf-8?B?TG9xb01LaCswVVBJMEJOQ3hUL0xzcitOOGIvd1BmbWpJUzBEYjBwdVAxWkU4?=
+ =?utf-8?B?WURBbnFtUFhCamtiendDblBsTnNqUTF4cGRCa2dzUkpFblVNbmc4c203MTRz?=
+ =?utf-8?B?dGVteEtBZFE1KzdhWWFQZzJaQWQrT2tKZG10ODlic1VKZWt0T3NoTC9qY0ND?=
+ =?utf-8?B?ZFlPK1lJWXluNzB6MlNxRmF1S3dFaUtvd2E3WE9IRXZvTjd1dFhDMFJqYmk0?=
+ =?utf-8?B?Zmg2ZnJ3QUZzS3E1NGJuSW93QXJ0VC9RNVh5WjY0NVBvbW0rcEVrdEZ4YlFY?=
+ =?utf-8?Q?E8cuffFDwPXqt?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(7416014)(376014)(366016)(1800799024)(7053199007); DIR:OUT;
+ SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OHoxOWlvdFptaHFSeGRXSmd4bGNqbjNvUC81SWwxaW9ZVDFDUGZQUUFlRTl3?=
- =?utf-8?B?Ujg4QTRrajdwblpSOW1keU10QUdQbTAxMWs3Q255MUZWWDRwNms4bmJmWUZ4?=
- =?utf-8?B?OCtHczBNaUExQWxWN0cwajNockszSjIwWTBpcmF5QzZ6clR4WnhYRmtnQ251?=
- =?utf-8?B?RmtXbXpWTVpTUHJZdHdMWnYzem1ib29XaHRXUHAwRkJKc0pKMTd2NFVKMkI0?=
- =?utf-8?B?WnN6dG5CMUlsdzd0Um55T2J0NExjUHQ4S3I0U0hNb2IxUS8wby8rMmNBZmZm?=
- =?utf-8?B?UGdQZGlpVGF4WGwyT0Z1VjBOOWUya1dzNjJsMUh4cTFCa3E5dytYVy9CcGJY?=
- =?utf-8?B?Q0I2ZTZYWmQxSEFhMFJGOTJDVzl6T1hFZmZUVGhibDBIS2lQRWgrcktqVUVH?=
- =?utf-8?B?dzkwTG5icVdMN0twUHdMUFhTSEJKdXNmZHQ5NkhaSjAyOTZ3QkZ0akQ1QlJR?=
- =?utf-8?B?WGlCSHpUcmNwOVN0NSsrcVE1YzhvY2EvZG9XaklUSUFtSjZMbkhpVlhXcTNq?=
- =?utf-8?B?MVBkVU4vZy9rZEkya0xHUVdXd3BLSTBFQzhZbVYzaFFWQ3JzU2hGUXJmRi95?=
- =?utf-8?B?c0ZVK25WRlpTUUg0ZXlFTXBUN3h5aFF2SVl6Rlp5c01CWWlFa1AwMzhoa2k3?=
- =?utf-8?B?bXRLMzFycE4xNE9qamdrRFl4aFVwWFhBYUxnbzhFMmtnUEdXL0ZNTkxRVTRZ?=
- =?utf-8?B?eDZldG85RU9nQ2h6bkpxdFFHbUxOUFByZkMyS3NVSi84bnBoTU1ud2JUTUx4?=
- =?utf-8?B?UjVoK3BMb0VmOFRsTXRHUGluYjEveGx3VnR5M2Z5bkZMOTZ5aUtDZDNYc1Ni?=
- =?utf-8?B?TnhQU1dsYi9tUWZVc3diQ29GSUVvcVdaMGhxRlBOS1NyUEVEV0tlcTgzNDJY?=
- =?utf-8?B?VUhzSWhEaVZhanVka05KMVZRaEVBdWk1RmViWU1kQ3VTS3BNc0RTaGpHSXJw?=
- =?utf-8?B?VmNEdmRQVVRwc01qZWhsb1YzakIzZm0vbG1QWWliU05leTFFWkFwOWZxQ2Ev?=
- =?utf-8?B?MHZITHE3NW5LRXljeEU2ZGJOSXlqWDV2RTJNY0IvWTdFWFBmNmU2RzJRNm11?=
- =?utf-8?B?ZjU2Mk41aDNMRk9LUnhEdm9CYnVVaUZJZDRGRzFMT203TkNWbjBQVUhqTmRt?=
- =?utf-8?B?SnVlTm04eXhSSGF3Zk8wY2g1QUx2bWdVUjJaNEZwZHI3S1hqeUxMUzIzeC9v?=
- =?utf-8?B?UXNEUDVEcFdFUGU2TWNSN2s2QW9TQlF5TmtHazJocW1kUEtUcGI1eVNzaExh?=
- =?utf-8?B?OGIwNGQzcUp1eW15aHdXMzNZUDcyN1dUa3ZlSWFDZzQzZWN4VkJyeUlMaUlG?=
- =?utf-8?B?a1VFVWtmcS9NVGFOQzRlMVBod1grU2U5bjB1ZFBLNlMzS0xRam90VlJmTEZp?=
- =?utf-8?B?Wit6cUZTSjJpRGpIcnNqVXNaNzBvaWtoVUx4MzZnNURTd1drWWxZYmdSdWhP?=
- =?utf-8?B?QmU3Vk1VUjhrM1hRMTI1YVQ5MU1qdzlYbDJnY1UxbE9yRnkvM2E3OFkzS05s?=
- =?utf-8?B?WUFYRTRUSzN2YjZjQmhpd1R5VUdISW1mWHo2RnpFL0NFLyt4T2tCOFVXZlFV?=
- =?utf-8?B?ZTVVVkhIT1JOYjdTbXJHRzB4NGIybGJaS3BWS2JhN3VIUDkvL3NQNmNZY0Jt?=
- =?utf-8?B?OWtxN3RQWFl5ejh3a29rdVUwNmhQZFRjdm9ieHZqOTF5YVNSaDRzcWdhVWVz?=
- =?utf-8?B?ZGMvQmh2SDBUc0U4TXZ2aGNUbFYwT1hVNzViRW1oajcvWGs0YkZMekxRWElr?=
- =?utf-8?B?SDhsK09aK1VKV3lwank5M2pqcGRJa3NsNHU1bmszVnVTMkQxZ1lDOVFaY29H?=
- =?utf-8?B?WEpjcUVnUWZMdWR0ZDNOcWtFSkgrdzBtZjRmVUg5Y3huT2YvTnp2MCtQYzBa?=
- =?utf-8?B?RkEzQllpTGFaRkhtdVZEOEthUEJvYmprb3E5WklrNmxBbmFsODJnRlJCK2VN?=
- =?utf-8?B?OFE4R09hODdKcDA1c0hrcFgvMG0rQ1kyU3dMbTVlZ2Y1djVqK04yalhvZktY?=
- =?utf-8?B?TVQ5bVMxYnk0Y0JUd0hDUThDdGswbitQMVVMcWZobHpmTUxhTHV5Z0Zia1BD?=
- =?utf-8?B?dGZVSlNMY2gxcjVYbVZ1RnJ1TFd2TTJqSDMxTTh4bUgxRWNpQ0F0TG5BenV5?=
- =?utf-8?Q?NPOoOUkPI90NCo6GOyKbdXIZF?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V0h2U1k3UW9vMlNRLzNSK3hJandUQ2loU2Q2VXVPa2d1Q3ZkQ0pQU3VTcEh1?=
+ =?utf-8?B?T21nVzU2U0RLRmZWa1dPSUJmQTNqZ3ArSFhROExueVo4aFlJTHREWklySG9B?=
+ =?utf-8?B?RjYxR0V0VHFMM1gybHRSWjdHendQTVFhNzdaMG5RamxLTzlOTlNqTkNFRW1h?=
+ =?utf-8?B?U1VUNkVqUnYzSXZ1SEZ3SllSUGZnaGxQclVEaE55WHlJc3ZwckxraWQwU1J5?=
+ =?utf-8?B?aTJiSDE2Yy8zcVVZSU8ycDdGOEVyZU9QVFlXMEdvOStxZTBTWXVrN1RyczRS?=
+ =?utf-8?B?K2VmWDFMdjVqNDBqM1ZGdXprQTU1amdlVGJMeHRnWVB3a3dnTTBzOUxTVWpJ?=
+ =?utf-8?B?blB5MndUVmJJSnYrbVM0dmZSRCtseEg4cEJ2QVJ2Y1UvaFloeTRrWmY3L0ts?=
+ =?utf-8?B?cDMxeE5KdFc2R2taMzM2NXVFTExFeG5LWEs2UEM4YncvRUdiNzlpR09GdGZZ?=
+ =?utf-8?B?V255Qkt2UFd6TnUyRFZnSUtxYUplVGlvbU1vU1dUNUk5b1FDRFMzQlE0a3B0?=
+ =?utf-8?B?UDh2aGxtR2dSYWtoRnRCODZyQVNuOGxhRktLRGVoeWNjZG5VUFNYRXZrek9I?=
+ =?utf-8?B?S3Z4MXdWM0RoUjQ2VWNtRDB3V0ZjTVUrZUF0amZ0R2hMcktIZnZLVi96Tk45?=
+ =?utf-8?B?M1BpeTVzV2tkZDZoTjlJNTd2U2hOS1p0cTBTR2hxdStFeitNcFAvMG5XWlM5?=
+ =?utf-8?B?UXFrNy8wb3JHeG1kM29uRlFhZHV0eE5SaC9XNS8vVExVdzhROVVEZHJneWpT?=
+ =?utf-8?B?RXlnTUR5d0V5Nm1xTVFkNmJYRFhMQlliTytxTFZkU2RnY2FydVY5d2pvcHh3?=
+ =?utf-8?B?QkZyam9OTmhsSUpxalpuZkFOMysxaVV0K3IzaXI2YlhKMllVSWphRmt0Q2Yv?=
+ =?utf-8?B?MElMMjA1MEl2YkxIN3RjdlFJdlVkcjMvak5ldGhITmEzUnBFNXowQW9WL3lB?=
+ =?utf-8?B?UUlQaTk3UHlOQ2liWDltNTB4bVZScSsrL3RLUktsay9QUW81QnJSSGNrWDlQ?=
+ =?utf-8?B?bDEyNGYyRDRlakNyaE1LRGRzenh3Q05aSFgyQkxSZ3ppM3hFQU1mWkdYQmlu?=
+ =?utf-8?B?VGtGU1h1ZEJFcnF2UGJjOWJEbWZBSUwwK1dZQURWQk9iN3labE1XSkh6dWxH?=
+ =?utf-8?B?dU9FdkNQYzVqaFdDcjBKN3h0YXhNOXF3c2phVDFoRWNUeXRiOFB6YjdqMENk?=
+ =?utf-8?B?eHNyb21COUVUYjNOLzZaWGVuZm9XOGFqd0tuZnkxQWE3LzVPOWsxWHp4OGV0?=
+ =?utf-8?B?eFRkajJFQzBBbElaT29FUHpaWkFRaVZ5WGNUWTNYR0NQTkNRVllnQUJQckdI?=
+ =?utf-8?B?dTRlbTYwMytiRlFiTngzUVdLQ3hhaDl4VlVncFcrWkczNzlsYXkyS3NadDIr?=
+ =?utf-8?B?c3FYRk8xNmFlTVN5RDh4T000dmdUNUJMTklwZ2FuT1Erc1ZaTjY4WVh4dGw3?=
+ =?utf-8?B?YXQxZjB3R1B3czBzSEdqMUMwM2FKaXRYU0JQN2d1NzdJYkc3Q3d6MnptZ2I0?=
+ =?utf-8?B?Z3c1Zk5sUTJNOEFtcmZjOFpqcXlKenlFUWFadU1KWDIxYzRSMUpNOVN6NnVu?=
+ =?utf-8?B?RW9WWDA1TW1kcE12YnB0RGhudFo2T29Kb0cxSitNWWZTcUFzZjJoNmFtbGpU?=
+ =?utf-8?B?MUxkcmpSVFZvb2o0MjFvMEtkd2F3VE1MRzlDUHFDSm5oZG5idzJYbHA2WC9j?=
+ =?utf-8?B?NUZyN3d3Rm1QUGZmWkZIU1AzQVBBVW5tTXJFZ0lBRFd5aTQvZWdkTm1EN0t2?=
+ =?utf-8?B?Kzh5UmNBNmpTYlJjelRKcnIzRkN1NkxpcDRGT1lzVXhUcmVUZFU3b1o2Mllx?=
+ =?utf-8?B?VXRIOWhBa0k1dmdHalRhTHlZdG1TWWR1L0JiQVRVSTNhUEhCTUljU3M4VEZH?=
+ =?utf-8?B?K2JsZmVkTkN0eGxCV2VGYzdFd2l4YUJkZmF2YTRENE0vZXdNT0RneFVSK3dU?=
+ =?utf-8?B?Y0sxQ2VMM2dSSExoUHNVaGZza0gyTCtFWkJFVHZpVmVMU2hOeExHNTY2QnVv?=
+ =?utf-8?B?a2pHUWRWOHRLc1k4aG4wbS9SSFhnSEU5N2g5U3FkU1JIUkc3R3dPUXVJZyta?=
+ =?utf-8?B?cWtGYTNRcHdBMEVadjBHZGhnTlJIWXFiQ2dzR3hnWGkzRXBnQ3o2NXdiQk5O?=
+ =?utf-8?Q?7FiY1gRbvQ0tldvoq8NnID0H/?=
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1594da85-78f6-4142-00da-08dd20c2a77d
+X-MS-Exchange-CrossTenant-Network-Message-Id: c1c82bc5-f578-43aa-df70-08dd20c3855a
 X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2024 06:50:56.4828 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2024 06:57:08.5541 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fm7cfBMCqHW6+M+mLF8MumS6uSSDNUSgA+tY0BRnyWS8vyn68JgJjfTeyjmfJ75wURJ4Ht0wAgEaeRpmWHfHmA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB1926
+X-MS-Exchange-CrossTenant-UserPrincipalName: gLZ1TgVMx3r6HUfcA+Rfqnpbg+1FQ5P6pRr8s9+UVmTE5aT1P6htSwr8tEZlm/qfAeQBmk3voTYOPE6cs/re/w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXP195MB1184
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,38 +180,148 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Am 13.12.24 um 17:31 schrieb Santhosh Kumar K:
-> From: Neha Malcom Francis <n-francis@ti.com>
+> As R5 is a 32 bit processor, the RAM banks' base and size calculation
+> is restricted to 32 bits, which results in wrong values if bank's base
+> is greater than 32 bits or bank's size is greater than or equal to 4GB.
 > 
-> Add CONFIG_K3_INLINE_ECC so that ECC functions can be compiled into R5 SPL
-> only when the config has been enabled.
+> So, add k3_ddrss_ddr_bank_base_size_calc() to get the base address and
+> size of RAM's banks from the device tree memory node, and store in a
+> 64 bit device private data which can be used for ECC reserved memory
+> calculation, Setting ECC range and Fixing up bank size in device tree
+> when ECC is enabled.
 > 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
 
 Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
 
 > ---
->   drivers/ram/Kconfig | 10 ++++++++++
->   1 file changed, 10 insertions(+)
+>   drivers/ram/k3-ddrss/k3-ddrss.c | 72 ++++++++++++++++++++++++++-------
+>   1 file changed, 57 insertions(+), 15 deletions(-)
 > 
-> diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
-> index f7e357f24da7..533d0c629a64 100644
-> --- a/drivers/ram/Kconfig
-> +++ b/drivers/ram/Kconfig
-> @@ -116,6 +116,16 @@ config IMXRT_SDRAM
->   	  to support external memories like sdram, psram & nand.
->   	  This driver is for the sdram memory interface with the SEMC.
+> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
+> index c29eec62bd8f..29ce53453c1f 100644
+> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
+> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+> @@ -147,6 +147,9 @@ struct k3_ddrss_desc {
+>   	struct k3_ddrss_ecc_region ecc_regions[K3_DDRSS_MAX_ECC_REGIONS];
+>   	u64 ecc_reserved_space;
+>   	bool ti_ecc_enabled;
+> +	u64 ddr_bank_base[CONFIG_NR_DRAM_BANKS];
+> +	u64 ddr_bank_size[CONFIG_NR_DRAM_BANKS];
+> +	u64 ddr_ram_size;
+>   };
 >   
-> +config K3_INLINE_ECC
-> +	bool "Enable TI Inline ECC support"
-> +	depends on K3_DDRSS
-> +	help
-> +	  Enable Inline ECC support on K3 platforms. 1/9th of the SDRAM space
-> +	  is used for ECC storage and the rest 8/9th is available for system
-> +	  use. Enabling ECC increases boot time as the ECC protected regions
-> +	  need to be primed with a predefined value prior to enabling ECC
-> +	  check.
+>   struct reginitdata {
+> @@ -663,11 +666,54 @@ static void k3_ddrss_lpddr4_preload_full_mem(struct k3_ddrss_desc *ddrss,
+>   	printf("ECC: priming DDR completed in %lu msec\n", get_timer(done));
+>   }
+>   
+> +static void k3_ddrss_ddr_bank_base_size_calc(struct k3_ddrss_desc *ddrss)
+> +{
+> +	int bank, na, ns, len, parent;
+> +	const fdt32_t *ptr, *end;
 > +
->   source "drivers/ram/aspeed/Kconfig"
->   source "drivers/ram/cadence/Kconfig"
->   source "drivers/ram/octeon/Kconfig"
+> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> +		ddrss->ddr_bank_base[bank] = 0;
+> +		ddrss->ddr_bank_size[bank] = 0;
+> +	}
+> +
+> +	ofnode mem = ofnode_null();
+> +
+> +	do {
+> +		mem = ofnode_by_prop_value(mem, "device_type", "memory", 7);
+> +	} while (!ofnode_is_enabled(mem));
+> +
+> +	const void *fdt = ofnode_to_fdt(mem);
+> +	int node = ofnode_to_offset(mem);
+> +	const char *property = "reg";
+> +
+> +	parent = fdt_parent_offset(fdt, node);
+> +	na = fdt_address_cells(fdt, parent);
+> +	ns = fdt_size_cells(fdt, parent);
+> +	ptr = fdt_getprop(fdt, node, property, &len);
+> +	end = ptr + len / sizeof(*ptr);
+> +
+> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> +		if (ptr + na + ns <= end) {
+> +			if (CONFIG_IS_ENABLED(OF_TRANSLATE))
+> +				ddrss->ddr_bank_base[bank] = fdt_translate_address(fdt, node, ptr);
+> +			else
+> +				ddrss->ddr_bank_base[bank] = fdtdec_get_number(ptr, na);
+> +
+> +			ddrss->ddr_bank_size[bank] = fdtdec_get_number(&ptr[na], ns);
+> +		}
+> +
+> +		ptr += na + ns;
+> +	}
+> +
+> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++)
+> +		ddrss->ddr_ram_size += ddrss->ddr_bank_size[bank];
+> +}
+> +
+>   static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct k3_ddrss_desc *ddrss)
+>   {
+>   	fdtdec_setup_mem_size_base_lowest();
+>   
+> -	ddrss->ecc_reserved_space = gd->ram_size;
+> +	ddrss->ecc_reserved_space = ddrss->ddr_ram_size;
+>   	do_div(ddrss->ecc_reserved_space, 9);
+>   
+>   	/* Round to clean number */
+> @@ -691,7 +737,7 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
+>   	/* Preload the full memory with 0's using the BIST engine of
+>   	 * the LPDDR4 controller.
+>   	 */
+> -	k3_ddrss_lpddr4_preload_full_mem(ddrss, gd->ram_size, 0);
+> +	k3_ddrss_lpddr4_preload_full_mem(ddrss, ddrss->ddr_ram_size, 0);
+>   
+>   	/* Clear Error Count Register */
+>   	writel(0x1, base + DDRSS_ECC_1B_ERR_CNT_REG);
+> @@ -736,6 +782,8 @@ static int k3_ddrss_probe(struct udevice *dev)
+>   
+>   	k3_lpddr4_start(ddrss);
+>   
+> +	k3_ddrss_ddr_bank_base_size_calc(ddrss);
+> +
+>   	if (ddrss->ti_ecc_enabled) {
+>   		if (!ddrss->ddrss_ss_cfg) {
+>   			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
+> @@ -756,30 +804,24 @@ static int k3_ddrss_probe(struct udevice *dev)
+>   
+>   int k3_ddrss_ddr_fdt_fixup(struct udevice *dev, void *blob, struct bd_info *bd)
+>   {
+> -	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
+> -	u64 start[CONFIG_NR_DRAM_BANKS];
+> -	u64 size[CONFIG_NR_DRAM_BANKS];
+>   	int bank;
+> +	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
+>   
+>   	if (ddrss->ecc_reserved_space == 0)
+>   		return 0;
+>   
+>   	for (bank = CONFIG_NR_DRAM_BANKS - 1; bank >= 0; bank--) {
+> -		if (ddrss->ecc_reserved_space > bd->bi_dram[bank].size) {
+> -			ddrss->ecc_reserved_space -= bd->bi_dram[bank].size;
+> -			bd->bi_dram[bank].size = 0;
+> +		if (ddrss->ecc_reserved_space > ddrss->ddr_bank_size[bank]) {
+> +			ddrss->ecc_reserved_space -= ddrss->ddr_bank_size[bank];
+> +			ddrss->ddr_bank_size[bank] = 0;
+>   		} else {
+> -			bd->bi_dram[bank].size -= ddrss->ecc_reserved_space;
+> +			ddrss->ddr_bank_size[bank] -= ddrss->ecc_reserved_space;
+>   			break;
+>   		}
+>   	}
+>   
+> -	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> -		start[bank] =  bd->bi_dram[bank].start;
+> -		size[bank] = bd->bi_dram[bank].size;
+> -	}
+> -
+> -	return fdt_fixup_memory_banks(blob, start, size, CONFIG_NR_DRAM_BANKS);
+> +	return fdt_fixup_memory_banks(blob, ddrss->ddr_bank_base,
+> +				      ddrss->ddr_bank_size, CONFIG_NR_DRAM_BANKS);
+>   }
+>   
+>   static int k3_ddrss_get_info(struct udevice *dev, struct ram_info *info)
 
