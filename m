@@ -4,87 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A8D9E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 17:38:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F407E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 18:31:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9F47803F0;
-	Fri, 20 Dec 2024 18:38:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2B282803A9;
+	Fri, 20 Dec 2024 19:31:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gji7rB3D";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VufXoZQt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5266280462; Fri, 20 Dec 2024 18:38:02 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id DB83380384; Fri, 20 Dec 2024 19:31:08 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E557680381
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 18:37:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC1CC803C8
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 19:31:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aa67ac42819so312761366b.0
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 09:37:59 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6d932b5081eso19001046d6.1
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 10:31:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734716279; x=1735321079; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=e+qJ+qgsAZ3bk2RRoftmXtOqmwFivHjjBNVUIjB35Rw=;
- b=gji7rB3D6LPKCBkr5lHXKpAiPQL4sSR9RTXYm2hfzSUQ55kEeNrTFId9pTrX0c5hxC
- tPMHmEtj3IIrvSXeukwjd4vg2VJuagNbbgFBD9VRF1wtLvuVCi5pSI7nnzkm62sWXpAD
- SkNJGxvMbxTg+fZQdA9hyF+LO5jGqGYNY7544=
+ d=konsulko.com; s=google; t=1734719464; x=1735324264; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TaVhG286ZBdWRHNMWrjnOzEBvInWutxZ41A/U60WPMA=;
+ b=VufXoZQt6hJqWboSchR+uQcUOI3HEElnAI64Vvts+aCBfoi7lUKBbUegsxcXyzlPqu
+ eum93mwSrB4iayViw5K0hzYmjhlSxcxOI3zXWZ80InRwSBT/u/RtkJkIXwRrj6Khh0Ka
+ JIqhymDaEi6xzOhVjUa6lWTp7ySl/SuThzFm0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734716279; x=1735321079;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=e+qJ+qgsAZ3bk2RRoftmXtOqmwFivHjjBNVUIjB35Rw=;
- b=dDhRVGM4LmAswSiWcOFvbCSwCRqnGyF7+loSjO2wd7TCqvn+cALsPyP3NTwCnBUypN
- lu9Flhi4oH6hX4FSLX8RvB1gt3uBXILnSgCRDbqrr4IL4ZLZW9OqYpqMZi3uS6yRbxTI
- mS9Wfuk1nlMfY9GzhTQfCt0JArpmT21ms80B/79Yl0VbUAcDcVl0iqB8cQ0pCinlEkGX
- CUX4OD6fXPMLNGAYt3e/CdxV6dfiLu89Vxi5zvrg1XBIs/TJoH5NYCUEjeBAnezgq/Xf
- OApxvlv2Zk6NvGw7H45iyEWjuuRQ5rIU8ib5/stqWlCiCnYlJAeLpcBg+AHawuxLNOyT
- 8Htg==
-X-Gm-Message-State: AOJu0YwIl4fS9VXDrUOyvrimbRLfBfAbYDTaGdrLSNQWFKsi7D4cmE2F
- 4rHKp7hogGafi6wuH1iUwPfOUavBgiWNcCE1DObleHDLlnwBUOkQJGIHPkAOeE33KDXlezEDtQS
- kwuakD5MzArCOBWAd7yvdFl5r8gBN2P3C/j+9
-X-Gm-Gg: ASbGncudNJ9EMDwO7IGw5pcfdwdffHrb8Bi/R2ScFGXqL1piFUa0pwRcA88SIsbbejZ
- Q29Gb1/dL/XB9mmYKlLUtu4Dq9QQlS9i90RELqWs=
-X-Google-Smtp-Source: AGHT+IFCvPK4e6h1bWe/tzRJKBLWEu3V+1UimXMqv1bPHrwpB4aAKsGOl6zMa+ASf0zJKc3ZWdeEmjf0FDwKapBqP+c=
-X-Received: by 2002:a17:907:c2a:b0:aa6:79fa:b480 with SMTP id
- a640c23a62f3a-aac2713135bmr339914766b.10.1734716266970; Fri, 20 Dec 2024
- 09:37:46 -0800 (PST)
-MIME-Version: 1.0
-References: <20241220040120.3245610-1-sjg@chromium.org>
- <20241220040120.3245610-5-sjg@chromium.org>
- <20241220145609.GD1505244@bill-the-cat>
- <CAFLszTjzP+vm1YoUX_avNq4_4qnUtNzzjLyFocEhJYrCA7cGOA@mail.gmail.com>
- <20241220172348.GJ1505244@bill-the-cat>
-In-Reply-To: <20241220172348.GJ1505244@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Dec 2024 10:37:34 -0700
-Message-ID: <CAFLszTjMWU7f_Db+qp6hFecx=mv+54ojX+zSZcrV-2CxT5dcxw@mail.gmail.com>
-Subject: Re: [PATCH 4/5] pxe_utils: Support a backup for localboot
-To: Tom Rini <trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1734719464; x=1735324264;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TaVhG286ZBdWRHNMWrjnOzEBvInWutxZ41A/U60WPMA=;
+ b=YS7KD3fXD/1F7JUTDqYg6H9AatL28NXUA+tPEcFLgaaMjvZQcrbJeQAji7ynIP06oF
+ JDHN2DihsGKyeR/KrN0f86H+FT86wnlPNcjDtv8bJj0tCbxgYuy7ZpcdctH6nKut1RKt
+ AIN0599LTZjE4KgUuHyxqKJZG7laeQQbVc+z9yUfO14EMqgeElrctEFXeFmER33Ve6rv
+ 5wNZO3NHMjcPzwKAWsdG1mxjBwZhDRqzYXd7khXafds8GuAwmF3FvfTkZbMuCjZ0cI5I
+ +A2x4YmqELw+eDWsbJCL2pDFWzh56cjzS/KwBpXP/OFTJvR1n0bMz2jzOPji3T5nYBr0
+ RBAQ==
+X-Gm-Message-State: AOJu0Yyln/8Be09lmmoRfIhB4MRe6sQje5HTrbUvyLWjiiNo8LDL7aK1
+ dEuYaYuhnM/EM5L4noOG3HyR5UdBuz49V6WewXM47E6hqWdXai6ymQWDK18UhFM=
+X-Gm-Gg: ASbGncvN2s91sJpxqDJT5k9ZYLq1d11Qmy40bbNS6oyS1x9w4LNIB0tzBwO/j122o9c
+ ARYMVaoFwfJTesfKCDwFw45JGgQWLDbx+vsG9D7zU+q1sD26R7Oel+8X3yoLjep55mhd1vCz/Ce
+ rVeSYeI+UKMU5sK9k9xjwAB6I89QTWmxEZRBj56MNOYaOSPHrpWH8COA5UzFLe/S7QuI2yH4EHt
+ MDB2IYsBqHG1TuFmesvZqD41AEo+b2TBJ2mvhXCr1VWIERyQaJZQIkU
+X-Google-Smtp-Source: AGHT+IEmU2yNxKZMa0YjMOXjCm6GYTlTKXpH8/+OKiFYUHZRHYGEKWUFvtWSznR2gOpc22H/urRD+Q==
+X-Received: by 2002:a05:6214:2628:b0:6d8:e679:547c with SMTP id
+ 6a1803df08f44-6dd233527bcmr62557026d6.29.1734719463816; 
+ Fri, 20 Dec 2024 10:31:03 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd181bb4f5sm19297056d6.81.2024.12.20.10.31.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Dec 2024 10:31:02 -0800 (PST)
+Date: Fri, 20 Dec 2024 12:30:59 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
  Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
+ Julien Masson <jmasson@baylibre.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Richard Weinberger <richard@nod.at>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Weinberger <richard@nod.at>
+Subject: Re: [PATCH 5/5] pxe_utils: Support the SAY command
+Message-ID: <20241220183059.GK1505244@bill-the-cat>
+References: <20241220040120.3245610-1-sjg@chromium.org>
+ <20241220040120.3245610-6-sjg@chromium.org>
+ <20241220144453.GB1505244@bill-the-cat>
+ <CAFLszThceeEktXy0zQLny5Hh4wAq0jXks4qijVyzgN0uHtG95Q@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6toEliv13CFpcI4+"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThceeEktXy0zQLny5Hh4wAq0jXks4qijVyzgN0uHtG95Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,58 +107,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Fri, 20 Dec 2024 at 10:23, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Dec 20, 2024 at 10:18:17AM -0700, Simon Glass wrote:
-> > Hi Tom,
+--6toEliv13CFpcI4+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Dec 20, 2024 at 10:36:56AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 20 Dec 2024 at 07:44, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Fri, 20 Dec 2024 at 07:56, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Dec 19, 2024 at 09:01:19PM -0700, Simon Glass wrote:
-> > >
-> > > > The current localboot implementation assumes that a 'localcmd'
-> > > > environment variable is provided, with the instructions to follow. This
-> > > > may not be included, so provide a fallback in that case.
-> > > >
-> > > > Add a test image and test as well.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > This is a pretty niche feature, I had to dig around a bit to see how
-> > > it's specified elsewhere (not really) and how it's used. And I think
-> > > that based on how it's used, making up a bootcmd when localcmd is
-> > > undefined is the wrong approach. It's the hook for "run what I defined
-> > > in the environment", so if not set erroring back out seems appropriate.
+> > On Thu, Dec 19, 2024 at 09:01:20PM -0700, Simon Glass wrote:
 > >
-> > Yes, but unfortunately it seems to be used and we should support it.
-> > The problem with scripts is that we don't know the boot device, etc,
-> > so it needs to be integrated into PXE. I did consider putting
-> > something in bootstd, but we only find out that it is requesting a
-> > localboot when actually running the extlinux bootmeth, so this is what
-> > I came up with.
+> > > This shows a message for the user. Implement it to keep the user
+> > > informed.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > >
-> > It will be interesting to see if any other cases come up.
->
-> It would be helpful at this point I think if you can point to how the
-> code for handling this case (the LOCALBOOT keyword followed by an
-> integer) in other projects so that we can be compliant with what's
-> expected, even if it's poorly documented.
+> > Where does the SAY command come from? This is in neither
+> > https://systemd.io/BOOT_LOADER_SPECIFICATION/ (which redirects and is
+> > limited) nor https://wiki.syslinux.org/wiki/index.php?title=3DPXELINUX
+> > (which is where http://syslinux.zytor.com/wiki/index.php/Doc/pxelinux
+> > redirects to now).
+>=20
+> https://wiki.syslinux.org/wiki/index.php?title=3DSYSLINUX
 
-Yes, it seems very hard to find anything at all.
+Ah, thanks. Should link to that too in the docs then, I'll v2 my patch
+there.
 
-The implementation in syslinux uses the BIOS to jump to a boot sector:
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-https://repo.or.cz/syslinux.git/blob/HEAD:/core/bios/localboot.c
+--=20
+Tom
 
-I'm really not sure how it is supposed to work with a filesystem.
+--6toEliv13CFpcI4+
+Content-Type: application/pgp-signature; name="signature.asc"
 
-[1] is a usage of it for rpi
+-----BEGIN PGP SIGNATURE-----
 
-But other than that, even Gemini doesn't seems to have much idea.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdlt9QACgkQFHw5/5Y0
+tyypFAv9EN9DgT+7ZJvt/UqgV/uOgGArh5C4VBU6ZdO1yg/u11gi3uZelt01k2Ti
+7vHGzY6EP3uYIGt4XZ/ib5NHvuRaZPKIL8yaOUpxAZcQwOyHsLPKM0cZ4WghMEpW
+e5ROueP/+8SxU0bp2kMrivzu3OaORkbgf/YBeUkiYoq/4Z2Um9s9gmfmXYbhesn7
+ZF4WFHYeMCeoGwqZ9vOqpKFFAv3GXP2P5XneUo2wj4V6fmG045f5mneE7Q3bifq0
+ywE+5tPdYgsa3xAfd4kz6yA2yr9tsJeLUeWLxkg6Ebu1cWBAvi4qR48I/s6Sop7p
++vbmXmfXGLXiBKFYe9DKgxLtgdjRFxCw59DY8BqAXDe0Hx8qdbNi2jIRI0qA9HQW
+wRgybexndCQvXcSJkjjbtIpiojNjPpAaFadiCS5xGJJAEPUXLDIiWmqe4mWT/Hob
+2xQ/NS4uc2/pHH90yjJEn1/LH38WIBHvtm9jKoXVzCARcYkjtHFZIshHOTOvz0Sg
+YaD6LUjS
+=w4G8
+-----END PGP SIGNATURE-----
 
-Regards,
-Simon
-
-[1] https://github.com/ppisa/rpi-utils/blob/master/u-boot-setup/boot/extlinux/extlinux.conf
+--6toEliv13CFpcI4+--
