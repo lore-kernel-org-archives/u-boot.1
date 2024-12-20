@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3089AE7718A
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:09:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 968B2E7718A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:09:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0876F80548;
-	Fri, 20 Dec 2024 05:06:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 589EE80542;
+	Fri, 20 Dec 2024 05:06:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hyu3CaTz";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D06me3Td";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F78580511; Fri, 20 Dec 2024 05:06:12 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id E937880569; Fri, 20 Dec 2024 05:06:14 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1856804FA
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:06:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F40DE8036F
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:06:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aa6a618981eso258618466b.3
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:06:09 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a9a0ec0a94fso232079966b.1
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:06:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734667569; x=1735272369; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734667572; x=1735272372; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aovee4T8nzN2eN8m/3TOc2uTz0rmq/zH3cI2i5+jB90=;
- b=Hyu3CaTzQk3BAqbcH27DRPzadXqE1EHVZzk/Z27PUgTW30dA8IBlk+hsmx4btg9DFP
- vEcXNix1a9Fq+I+mSvQt/Z3ROASs0v/U5UG+3kpiio/BZ4d7vq7b3h5dICIkOqylb8pn
- oxhljQcX4mnIcv9pVX2AQ7Z64+vLTCJdP3ywI=
+ bh=pdrFkDCH4rdouzk6Qo15OTlZAoYTGUQCBa97P+NGSKM=;
+ b=D06me3TdHVAHmW6VZfo/Y7JFGmAYo7BRxqsusNBLSCO7//+V5Z+cLFV4dxR4Ndwyhg
+ sH5++BgQDK7KW6wZAmlDAzBK1NhomXw7g/xfq8kdOfTnRJp4PgOmXZEaNFr6tBDgy5ql
+ xE7Vqz/5E0o8lbXW2LRW8pEf8nZzuNiTp6Rfk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734667569; x=1735272369;
+ d=1e100.net; s=20230601; t=1734667572; x=1735272372;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aovee4T8nzN2eN8m/3TOc2uTz0rmq/zH3cI2i5+jB90=;
- b=KvOJ7swk7dF30f8n2FPITHHEUG+qNBqJRetCkv6Ij/j+/ynmYUtDWfIT+7QoFzph6I
- /iRWwC/cpdX9bGWzrDB5z/bVdbb47IhsO2wnpBiPVfPPt/WBwg4ga6QCuvXAoD5K55n4
- i8dwhG2QUOvcOb2Is1HlHsNNeLOjWy23urslKyiiZp7SMHbI16ZGn5j3u/HFI+LqkHYS
- W+M0zteb3cnYDBpuZzDslvli3G0MxofhS3fpsKc/SNzMsXCyfH0PjXo9gdRBqiLqeRVQ
- 2IYnugfc98N+3r2ECU1mEvWSESBJVwJq3LD4Xw5wFyhKAVQG20S/7L0JV6U41nzZrVy0
- c+1Q==
+ bh=pdrFkDCH4rdouzk6Qo15OTlZAoYTGUQCBa97P+NGSKM=;
+ b=wFCN6StG7eVaEjIxlfXAWUdV7I9m7TaIM+ihHoX7JLxTVU6cUFwq7Gre9BgiizinrD
+ Nsale1VaA9VKJ4uhXmC6i1tCvB8rAzcGP2xg8S14DOTTvrXMTL8i1kDzeG5pWJms9FZ0
+ McDhxWH0A8+mxP+VEhiDQDal0CXg5anRiD3MTM5Ll+0n3Jayo9FGfOD7Mt2/GvVTThAK
+ GGamnHCbM+VyX1Z2JityHWQ9hAa44Uzi7yNS3A27cCheSmhHsTGVBY/r00b54BdzP48z
+ tautw8QQHYsDBXQFy9JbkLmQVqLWEEeuLWJ8jXkOBWNaK13u4TvcaIkoaY5SP4AScyus
+ xeaQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXXxbfs6urnuBglI6J47Q7W0yM2DH069IS5gCBcbE1O8M20wbtZppOMUBekL3mUfDhGsSnYFyg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzeEvQ4aepFZLoPPVRQHxVQnJQD4fx1vRIoij8MUgTJrqoE3/no
- otlaCs3iu5WtxoAh2EC1VQf/YRPhl7ZHkLYBXKMd4XeNWiQq9GTcahwA1d0a6feDTYzR3iTrL7m
- h2dbdkOFm9tdo0Uazck5LYkueleg4AiK/6gkd
-X-Gm-Gg: ASbGncv/9AoMKVWAYHWYpeFjiZQ6ex4pNYrzOrxT1PiEB5UYUbWIpd2oGna9ggn3tsr
- JMO3X3T0QoqR6UQShkdGWyCzkQtXl2yh3g4ZhWoE=
-X-Google-Smtp-Source: AGHT+IFVDpynjC8Ctz9uGaB0zS98DWaD9coJnmCZIBogBtyRo309OkEYNtFZt0QRkld8QOLqFx8Wwa3NQAQ/5jti4Po=
-X-Received: by 2002:a17:906:7956:b0:aa6:5e35:d730 with SMTP id
- a640c23a62f3a-aac2adb4d77mr80004766b.24.1734667569354; Thu, 19 Dec 2024
- 20:06:09 -0800 (PST)
+ AJvYcCWv1PeDaqQ8gbhVaI4Ff/4kH3CJvBsrEjQBvtobghY+m42216Hqd64dBUPeWotF0v4SSPaQQB0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyNqKIu/uCwxT0Aagb+QzFrblryWOGxFRqNJEDwRh1Bz+lZ+KJe
+ Gu7D27roZy2U9LGv929zMJu5agY0ILx59Fs7JoR2Jgnj/5kxyxgza5faw3nQQobRLqA7z/5cxUS
+ Q4JpTAMH8+ywRGyfrDndoy6ppmPcnKR34WhI8ZIcN6UGE1wE=
+X-Gm-Gg: ASbGncuamddo6lPb+XQ5+cgqRsrpPnCeRAP+d3etT2ALCM5LIo5x3rgLLIVkQRb6hqz
+ wCz5OmelAGnBNEw2q0RS7a29mjCGTf3n5yuxIgXk=
+X-Google-Smtp-Source: AGHT+IHCoK1Fn6eytgch39kq/YwYFwwhhdfRaLJnA8bGIfsmc7BsHXNgs8m1UP72cJglZRKEmyXa450Kdlrs5slYgBo=
+X-Received: by 2002:a17:907:da6:b0:aa6:824c:4ae5 with SMTP id
+ a640c23a62f3a-aac345f5cfbmr98210066b.56.1734667572439; Thu, 19 Dec 2024
+ 20:06:12 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 20 Dec 2024 04:06:08 +0000
+ HTTPREST; Fri, 20 Dec 2024 04:06:11 +0000
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241206023626.2456858-21-sjg@chromium.org>
-References: <20241206023626.2456858-21-sjg@chromium.org>
+In-Reply-To: <20241206023626.2456858-20-sjg@chromium.org>
+References: <20241206023626.2456858-20-sjg@chromium.org>
  <20241206023626.2456858-1-sjg@chromium.org>
-Date: Fri, 20 Dec 2024 04:06:08 +0000
-X-Google-Sender-Auth: 1P2Avcqpb_lVjrl6_Dzfh0Spr7c
-Message-ID: <CAFLszTicsmBDh-w9j9SX1C9oMEzdefPMpMZcBfPRohH1b3CcTA@mail.gmail.com>
-Subject: Re: [PATCH v3 20/46] boot: pxe: Refactor label_run_boot() to avoid
- cmdline
+Date: Fri, 20 Dec 2024 04:06:11 +0000
+X-Google-Sender-Auth: t73Kts6du1Nj_muuBg7uekOxodo
+Message-ID: <CAFLszTh+A961YLTmvZt8gvKV5wNhZD=cq4-2ncA1nhySzAZqMw@mail.gmail.com>
+Subject: Re: [PATCH v3 19/46] pxe_utils: Simplify default fdt in
+ label_run_boot()
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Martyn Welch <martyn.welch@collabora.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -95,17 +94,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust the remaining call in this function to use the bootm API. This
-will allow PXE to work without the command line.
+Tidy up this code a little to avoid two calls to env_get() for both
+fdt_addr and fdtcontroladdr
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- arch/x86/lib/zimage.c | 27 +++++++++++++++++++--------
- boot/pxe_utils.c      | 13 +++++--------
- include/bootm.h       |  9 +++++++++
- 3 files changed, 33 insertions(+), 16 deletions(-)
+Changes in v2:
+- Add new patch to simplify the code reading fdtcontroladdr and fdt_addr
+
+ boot/pxe_utils.c | 14 ++++----------
+ 1 file changed, 4 insertions(+), 10 deletions(-)
 
 Applied to sjg/master, thanks!
