@@ -4,81 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8C9E77188
-	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 02:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89ECFE77184
+	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 07:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD74B80435;
-	Sat, 21 Dec 2024 03:55:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4DB04803E0;
+	Sat, 21 Dec 2024 08:14:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EcU/RPX1";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="c1SF7Rbt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A76938044A; Sat, 21 Dec 2024 03:55:14 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 134B280423
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 03:55:11 +0100 (CET)
+ id EC126803B5; Fri, 20 Dec 2024 23:18:46 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C11E8034E
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 23:18:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BL2svkL243123
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 20 Dec 2024 20:54:57 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734749697;
- bh=C48PlyLUPE5KF++EwFpTQOJBU+US5WFJdtjtTVTnbrA=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=EcU/RPX1u2vbdMkxTl+x/9/f1hQOCMDoOUQGIHumKoJDgDYgk428dJpGuWGTSBp36
- l0uLVLYbklNjukaHuaS/3TMmSf+pjSANvopnDofpyuXGn+v0/PSJK8GbPZL2d1eQa0
- HbXu/+RLbP1KAeUUKPuFeqeYtNZaa2K9i1tf5t3Q=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BL2sude083340
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 20 Dec 2024 20:54:57 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
- Dec 2024 20:54:56 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 20 Dec 2024 20:54:56 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BL2stN5045352;
- Fri, 20 Dec 2024 20:54:56 -0600
-Date: Sat, 21 Dec 2024 08:24:55 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros
- <rogerq@kernel.org>, <vigneshr@ti.com>, <bb@ti.com>,
- <lukma@denx.de>, <n-francis@ti.com>, <mkorpershoek@baylibre.com>,
- <afd@ti.com>, <glaroque@baylibre.com>, <sjoerd@collabora.com>,
- <martyn.welch@collabora.com>, <rasmus.villemoes@prevas.dk>,
- <caleb.connolly@linaro.org>, <j-humphreys@ti.com>, <nm@ti.com>,
- <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH v2 4/5] arm: dts: k3-am62p5-sk-u-boot: enable USB0 for
- USB DFU boot
-Message-ID: <u4ye7wj4qa3zccoidh6g7tjdh7hbvomjz6exf54makr4t3du2m@uxmk6przu4bh>
-References: <20241218124542.3519447-1-s-vadapalli@ti.com>
- <20241218124542.3519447-5-s-vadapalli@ti.com>
- <e4b23017-375e-4430-aef2-001c1b6402ca@kernel.org>
- <noztdv7z4cwzjwc5sgqvzli36ppm2tlgrpqjgxbkbtojs34jnp@3lhnfx6ol4in>
- <a0dd6878-5f26-47a0-8025-ba9d9d320a31@kernel.org>
- <20241219170044.GX1505244@bill-the-cat>
- <lq5jqpiifhnmdvfqy2wguqklikcpo3hl37p3ojbm6pfsl6supl@opm7xkmql4y7>
- <20241220142528.GA1505244@bill-the-cat>
- <5qksc7opj374tssk365jfo5orxmymwn3pzcvchtodf2nenvtsa@4v2dldntch7z>
- <20241220163749.GH1505244@bill-the-cat>
+ spf=fail smtp.mailfrom=david.regan@broadcom.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2162f968cd7so2718475ad.1
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 14:18:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=broadcom.com; s=google; t=1734733122; x=1735337922; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cGF/vxPzSCi3oluHi3hNOUxtnzOmSkP3Fc+rlGPo3FY=;
+ b=c1SF7RbtmIlNaLk0T12GQI3OSfnfjbbZlVE2oIhqStXmd2UsRx/kiRRrO93nuuKrF5
+ xM1EgglaFCduPV5Nyxov7WnGI6fW0C10DQxJmTzjUTUTyqrj+wVNIkPvXYkz+pCr8/Xu
+ x6BUQJ50Gc7055d5W28eXINRKLyEi/picDPRw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734733122; x=1735337922;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cGF/vxPzSCi3oluHi3hNOUxtnzOmSkP3Fc+rlGPo3FY=;
+ b=aqnKMgyxWkfRAnWs0T68/4PqpA0P1IeakAThP/8G85sp815j32Xs5AcWSQ9QmVmT7I
+ 35NN7LxOp7Kwz19nmakmGyKYJHQoXebvKm6creGDUIXDO6ifJvl3rAODMsvSi6DRNVTD
+ 1/sgGXK4Bki9W46OqXuaD3lH4X6GnOS1iyx2uvH7d3DHsDGjO6eWJyf3dN+I4MSQJAjR
+ pxGyDANUc3N9YJx01kQqFu8SCfpcc1Zv/0Q8QY+4HLvIrybVghAt9s4rb7LaSfccHOUV
+ i7l8W7SIkxlhsIzEEqEtE+W0TEp1Ir3++nZxRm3rpStOWKm19X/lv/6+Ovffw2oQkoxw
+ cSEw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUB1vBgLstOEcPzwNnZlRsrskPz2UxxNsDXIVNEiCkvJW6ZeARE0YcPZ87/ZFtl7caEMr2yQco=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsofKPykAEsDZJb6usgKJ97rmxhkp6vwdnZz4w9QSijlfhFTEJ
+ mQB6LhGZ4S6QzlpvHBCFxu01N1vrH3z9oxLj3R6QPeH0ney0iCmPSL6lSxxZy7ScW1vrMYRHZAk
+ 6DHQOuFLcvXkSCMomuOUmWRoHolWtqy9d/mSy
+X-Gm-Gg: ASbGncvDuaMGxwBzSvU4YnAmcwmGd4nyimkESoRnI7TsumcI5HYBvXGxW965/YjNI6i
+ TPlAWBYYMMtus+grQbd0hAW3vuxO7R06G5i8OQbg=
+X-Google-Smtp-Source: AGHT+IHTmdelEFOGXyg40yVVCi5iibUDOhA/DncQ52y77i244zxzGx5Vp/SZk/wqcTH/j4bvrkAeWw+IOXnAfEY4xVU=
+X-Received: by 2002:a17:90b:520a:b0:2ee:f1e3:fd0c with SMTP id
+ 98e67ed59e1d1-2f452efa94bmr2638926a91.8.1734733121935; Fri, 20 Dec 2024
+ 14:18:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20241220163749.GH1505244@bill-the-cat>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241219184953.226978-1-dregan@broadcom.com>
+ <20241219184953.226978-3-dregan@broadcom.com>
+ <CACRpkdZKL7-KQ7u=Y1Vm5AY1mzJbzS9BtJ0W_XZW8EFRF1Yjcg@mail.gmail.com>
+In-Reply-To: <CACRpkdZKL7-KQ7u=Y1Vm5AY1mzJbzS9BtJ0W_XZW8EFRF1Yjcg@mail.gmail.com>
+From: David Regan <dregan@broadcom.com>
+Date: Fri, 20 Dec 2024 14:18:30 -0800
+Message-ID: <CAA_RMS450FuLAg0J=arP2mDKDJqZv5Tcd6w1_C6-jhLwKMDzQQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] arm: dts: Update nand node for bcmbca board dts
+To: Linus Walleij <linus.walleij@linaro.org>
+Cc: david regan <dregan@broadcom.com>, u-boot@lists.denx.de, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Anand Gore <anand.gore@broadcom.com>, 
+ William Zhang <william.zhang@broadcom.com>,
+ Kursad Oney <kursad.oney@broadcom.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Kamal Dasu <kamal.dasu@broadcom.com>, Tom Rini <trini@konsulko.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, dregan@mail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 21 Dec 2024 08:14:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,46 +104,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 20, 2024 at 10:37:49AM -0600, Tom Rini wrote:
-> On Fri, Dec 20, 2024 at 09:49:46PM +0530, Siddharth Vadapalli wrote:
-> > On Fri, Dec 20, 2024 at 08:25:28AM -0600, Tom Rini wrote:
-> > > On Fri, Dec 20, 2024 at 10:19:31AM +0530, Siddharth Vadapalli wrote:
-> > > > On Thu, Dec 19, 2024 at 11:00:44AM -0600, Tom Rini wrote:
-> > > > 
-> > > > Hello Tom,
-> > > > 
-> > > > > On Thu, Dec 19, 2024 at 11:41:10AM +0200, Roger Quadros wrote:
-> > > > > > 
-> > > > > > 
-> > > > > > On 19/12/2024 07:50, Siddharth Vadapalli wrote:
-> > > > 
-> > > > [...]
-> > > > 
-> > > > > > > 
-> > > > > > > Please let me know if this patch can be merged on the condition that I
-> > > > > > > post the patch for making the same set of changes in the Linux
-> > > > > > > device-tree as well.
-> > > > > > 
-> > > > > > Tom, what do you suggest?
-> > > > > 
-> > > > > I feel like Nishanth will say it if I don't, so, it's blocked until it
-> > > > > comes in via OF_UPSTREAM being re-synced. That's the rule to avoid the
-> > > > > problems we've had in the past.
-> > > > 
-> > > > Thank you for the clarification. If you merge this series partially
-> > > > (i.e. this patch is dropped), please drop the next patch for
-> > > > documentation as well since the feature will not be functional without
-> > > > this patch and hence shouldn't be documented as being functional.
-> > > 
-> > > Please post a v3 of this patch with that can be taken now, off-hand I
-> > 
-> > Did you mean "v3 of this *series*, with this DT patch and the
-> > Documentation patch dropped in the v3 series?
-> 
-> Yes, sorry for being confusing.
+On Fri, Dec 20, 2024 at 12:04=E2=80=AFAM Linus Walleij <linus.walleij@linar=
+o.org> wrote:
+>
+> On Thu, Dec 19, 2024 at 7:50=E2=80=AFPM david regan <dregan@broadcom.com>=
+ wrote:
+>
+> > Update bcmbca dts to current nand node naming convention.
+> >
+> > Signed-off-by: david regan <dregan@broadcom.com>
+> > Reviewed-by: William Zhang <william.zhang@broadcom.com>
+> > Reviewed-by: Anand Gore <anand.gore@broadcom.com>
+>
+> Looks like a reasonable step
+> Acked-by: Linus Walleij <linus.walleij@linaro.org>
+>
+> But:
+>
+> > -       nandcs@0 {
+> > -               compatible =3D "brcm,nandcs";
+> > -               reg =3D <0>;
+> > -               nand-ecc-strength =3D <4>;
+> > -               nand-ecc-step-size =3D <512>;
+> > -               brcm,nand-oob-sector-size =3D <16>;
+> > -       };
+> > +&nandcs {
+> > +       nand-on-flash-bbt;
+> > +       nand-ecc-strength =3D <4>;
+> > +       nand-ecc-step-size =3D <512>;
+> > +       brcm,nand-oob-sector-size =3D <16>;
+>
+> So you're adding nand-on-flash-bbt, maybe we should notice this?
 
-Thank you for the confirmation. I have posted the v3 series at:
-https://patchwork.ozlabs.org/project/uboot/cover/20241221025229.361625-1-s-vadapalli@ti.com/
+We don't need this option, I'll remove it.
 
-Regards,
-Siddharth.
+>
+> Do you have to use the explicit ECC config, or can you just use
+> Williams new option
+> brcm,nand-ecc-use-strap;
+> ?
+
+Looks like Phillipe Reynes created this file, Phillipe do you have a prefer=
+ence?
+
+>
+> (This can be changed in an additional patch.)
+>
+> Yours,
+> Linus Walleij
+
+Thanks for your input!
+
+-Dave
