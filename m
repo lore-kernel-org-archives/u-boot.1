@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5D3FE77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 10:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEC9E7718A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 10:38:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F8F180379;
-	Fri, 20 Dec 2024 11:38:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 04DBC803AB;
+	Fri, 20 Dec 2024 11:38:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="t9jKEdeQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="k+z2zroj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FA9B80362; Fri, 20 Dec 2024 11:38:10 +0100 (CET)
+ id 3C05380328; Fri, 20 Dec 2024 11:38:10 +0100 (CET)
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 343E880243
+ by phobos.denx.de (Postfix) with ESMTPS id 5C0088032B
  for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 11:38:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id C2F88A418E3;
+ by nyc.source.kernel.org (Postfix) with ESMTP id DA23BA418E5;
  Fri, 20 Dec 2024 10:36:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E4891C4CEDC;
- Fri, 20 Dec 2024 10:38:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 05B21C4CEDD;
+ Fri, 20 Dec 2024 10:38:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734691084;
- bh=M2HPBPEgay09pfjaAnVuymSGTGcu1AzKyUWo35oiP4k=;
+ s=k20201202; t=1734691085;
+ bh=Nu66tKx2WikTlhwGdbgkVMZQMObgXei+Xtt2FLVxCS4=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=t9jKEdeQtghn2cT9adU4pUrqq8JXWBwcxMIgEknXSR4fVRRoU4yx33N84F+3Mu6gZ
- yE0NfpYyItydxjRwkYWVBw8Tw5jl+lOPG01PGDrvslM5UjVpXuTat85nr9eLe4vk1u
- sIeNBXQPIIKcfdi/KKBidzFuP2zi/acRrKWWtYGAhQw7OfDHLhhYFI8qAMihnwCsAt
- n3fXh6AA9kjoSDuLAD4NpVh+R9TYsqm5Q2zjtZyLwl47I4gISDElhlLCKzAbt7mvqy
- AiRZsnqPYsqFoq8LbiULEw7tLjejnN90TELlsqnz3LrbB20MHxhjd2AIqJG45UTW2Z
- 4wGUVJ9P2I0sQ==
+ b=k+z2zrojonAuKgkKdJ1PWGazFWCq3JvJ66zBZYVlXiAdwaHFPnJN5H61GGxJNX7vV
+ Q6QlQTzJ8Vmq5J76HXhqgTMdkff2biiS7QN/bl9vElR9wGXjLQhtLZ6JiFcllumbgM
+ lTzWMohmP3mbJY1Cb8cl0DxZebbSUUjXMHm/VnLjRHv8HlmV7UjO3738clOAVxeXFI
+ AXgY/qYqFyMUsUjQD3YpBHiGq3zZmS2v8I9LpYMYjBX+v0AlKUF0zfQelIWdJYPwUC
+ haEBcVi0P8jiltmRPNy3STs1NRsfvCIXDX2m2oM0PncHUMp6UafS/wTsEVsaJHrOEV
+ fSgp+KThRYLBw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id DC340E7718B;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id EF101E7718A;
  Fri, 20 Dec 2024 10:38:04 +0000 (UTC)
 From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
  <devnull+j.ne.posteo.net@kernel.org>
-Date: Fri, 20 Dec 2024 11:37:53 +0100
-Subject: [PATCH v2 3/4] powerpc: mpc83xx: Use defined constant for SPCR[TBEN]
+Date: Fri, 20 Dec 2024 11:37:54 +0100
+Subject: [PATCH v2 4/4] gpio: mpc8xxx: Preserve pre-init state of outputs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20241220-mpc83xx-misc-v2-3-ff4c17ee5fa4@posteo.net>
+Message-Id: <20241220-mpc83xx-misc-v2-4-ff4c17ee5fa4@posteo.net>
 References: <20241220-mpc83xx-misc-v2-0-ff4c17ee5fa4@posteo.net>
 In-Reply-To: <20241220-mpc83xx-misc-v2-0-ff4c17ee5fa4@posteo.net>
 To: Mario Six <mario.six@gdsys.cc>, Tom Rini <trini@konsulko.com>
 Cc: Sinan Akman <sinan@writeme.com>, u-boot@lists.denx.de, 
  =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1734691081; l=962;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1734691081; l=2017;
  i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=7kGpXJCjypF3RFCuBEXZAHkX1u8EeP42zwcw/fItZn8=;
- b=1Mg2R6++8NebKFkOEgPVZFCLfGohq3fbo7v7DDOi93v8A5XV8WTWKenDTCJm4kEF6xLeZclE1
- mUBUBAJ4mD+BldFeJbcz+o68/T2pxGNDz673tDK37QRWF09Y/LCxNoo
+ bh=3OOJ1gFlOUtLdlbIMEpQp2gBYtM4bC2L3oBPBpICZwE=;
+ b=CUY4EeyCZnhTAJVh8ZGfJXjBCo4QrmZ9Rk5v4rmy7uFZHR+4L25bpnFsOsYsvyPtXoGXWhsh8
+ sVMNiQvUZBaDnRnqEUZ/WJMCGNpUrkZodMS5HEoF+XAOuE16mYkwZQk
 X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
  pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
 X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
@@ -86,36 +86,57 @@ X-Virus-Status: Clean
 
 From: "J. Neuschäfer" <j.ne@posteo.net>
 
-To increase readability, use the defined constant instead of specifying
-SPCR[TBEN] as a number.
+The mpc8xxx_gpio driver contains a workaround for certain chips
+where the previously written state of outputs cannot be read back
+from the GPIO data (GPDAT) register (MPC8572/MPC8536). This workaround
+consists of tracking the state of GPDAT in a "shadow register" (i.e. a
+software variable). The shadow register is initialized to zero.
+
+This results in a problem w.r.t. outputs that are configured to a
+high (1) state before U-Boot runs, but not touched by U-Boot itself:
+Due to the zero-initialization, these GPIOs end up being set to zero,
+the first time that any other output is set.
+
+To avoid such issues initialize the GPDAT shadow register to the value
+previously held by any outputs, if possible. On MPC8572/MPC8536 this
+should make no difference, i.e. the shadow register should be
+initialized to zero on these chips.
+
+This patch has been tested on a MPC8314E-based board.
 
 Reviewed-by: Sinan Akman <sinan@writeme.com>
 Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
 ---
- arch/powerpc/cpu/mpc83xx/interrupts.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/powerpc/cpu/mpc83xx/interrupts.c b/arch/powerpc/cpu/mpc83xx/interrupts.c
-index af517213f176cf59cc82b54dbe5247800a6c40e6..bb37a1332c877951e766a8891687dae3f05b6ef8 100644
---- a/arch/powerpc/cpu/mpc83xx/interrupts.c
-+++ b/arch/powerpc/cpu/mpc83xx/interrupts.c
-@@ -12,6 +12,7 @@
- #include <asm/global_data.h>
- #include <asm/processor.h>
- #include <asm/ptrace.h>
-+#include "initreg/initreg.h"
+V2:
+- Clarify how the patch has been tested
+---
+ drivers/gpio/mpc8xxx_gpio.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpio/mpc8xxx_gpio.c b/drivers/gpio/mpc8xxx_gpio.c
+index e9bd38f162c10c76460bc63f93c03a711cb4d38e..709d04017d154ecae1e8d16d7c35ced521157c4d 100644
+--- a/drivers/gpio/mpc8xxx_gpio.c
++++ b/drivers/gpio/mpc8xxx_gpio.c
+@@ -204,7 +204,17 @@ static int mpc8xxx_gpio_plat_to_priv(struct udevice *dev)
+ 		return -ENOMEM;
  
- DECLARE_GLOBAL_DATA_PTR;
+ 	priv->gpio_count = plat->ngpios;
+-	priv->dat_shadow = 0;
++
++	/*
++	 * On platforms that do support reading back output values, we want to
++	 * try preserving them, so that we don't accidentally set unrelated
++	 * GPIOs to zero in mpc8xxx_gpio_set_value.
++	 */
++	if (priv->little_endian)
++		priv->dat_shadow = in_le32(&priv->base->gpdat) & in_le32(&priv->base->gpdir);
++	else
++		priv->dat_shadow = in_be32(&priv->base->gpdat) & in_be32(&priv->base->gpdir);
++
  
-@@ -29,7 +30,7 @@ void interrupt_init_cpu (unsigned *decrementer_count)
+ 	priv->type = driver_data;
  
- 	/* Enable e300 time base */
- 
--	immr->sysconf.spcr |= 0x00400000;
-+	immr->sysconf.spcr |= SPCR_TBEN_MASK;
- }
- 
- /*
 
 -- 
 2.45.2
