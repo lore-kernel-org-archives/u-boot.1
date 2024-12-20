@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E91E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:05:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9182CE7718B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:05:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7AFA803E0;
-	Fri, 20 Dec 2024 21:05:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2881D80423;
+	Fri, 20 Dec 2024 21:05:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QnJddeLp";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vhBo/oj6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7582280384; Fri, 20 Dec 2024 20:22:25 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 8EC4180429; Fri, 20 Dec 2024 20:22:27 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9811E80381
+ by phobos.denx.de (Postfix) with ESMTPS id B0DC8803A9
  for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 20:22:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJMK0U207310
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJMKD4201859
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
  Fri, 20 Dec 2024 13:22:20 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1734722540;
- bh=tYx+BDEJp6HMunZhllKRKvnD2o/IN4f+m95Qpo03h9Q=;
- h=From:To:CC:Subject:Date;
- b=QnJddeLptptCMCQi/xna4Na39f/ZAZ9bWQ21ZTQoRrXMK4nwHf2DpqVYi9g94iixr
- qSPAqiW2IMpn9+UlH5G4E1TvfzBST7kMno9uYVTvNHxX5opx0zf8qenDBkGfvKk56z
- vTxX6n2bz16MtxgBNsvVh4+s7qFGiq2VKU5Vmvv4=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKJMK3Z102416
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ bh=alxBlYTGxoC7EMbWuwWlVrt3SSatliG5hl2CX/wktk8=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=vhBo/oj6tXRO4JxzTH85Xzz/eGlo0hO1DdKPt2vnTKOM9YM9AOS2a8gV8i2jRffAw
+ n2JjryojK8aQx8OZrlIyiDxPaOOsE06THFYuuLxK3+Bzg96b31W8tM3yU4q+Agx5L7
+ blSwFJOaC5xz9BSr1S9YbcbtfLgvdfgACVZEZ74c=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKWo015537;
  Fri, 20 Dec 2024 13:22:20 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
  Dec 2024 13:22:20 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 20 Dec 2024 13:22:20 -0600
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKJK029134;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKJMKJO029134;
  Fri, 20 Dec 2024 13:22:20 -0600
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 0/7] Enable MMC UHS modes
-Date: Fri, 20 Dec 2024 13:22:13 -0600
-Message-ID: <20241220192220.2029543-1-jm@ti.com>
+Subject: [PATCH 4/7] configs: am62ax_evm_a53_defconfig: Enable MMC UHS modes
+Date: Fri, 20 Dec 2024 13:22:17 -0600
+Message-ID: <20241220192220.2029543-5-jm@ti.com>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20241220192220.2029543-1-jm@ti.com>
+References: <20241220192220.2029543-1-jm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -79,40 +80,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series adds config options for Sitara K3 boards
-to support MMC UHS modes.
+Enable configs required to enable MMC UHS modes in A53 SPL
+and U-Boot proper.
 
-While testing with SD card boot and eMMC boot,
-found missing eMMC boot support for am62ax in am62a7_init,
-patch 1/7, and missing config option to support eMMC boot.
+Signed-off-by: Judith Mendez <jm@ti.com>
+---
+ configs/am62ax_evm_a53_defconfig | 23 +++++++++++++++++++++--
+ 1 file changed, 21 insertions(+), 2 deletions(-)
 
-While we are here, for am62ax, enable config option to
-change MMC bus modes and enable r5 SDHCI ADMA for faster boot
-time.
-
-Also for all k3 sitara boards, cleanup MMC ENV configs that
-are no longer needed since we no longer load env from MMC
-device.
-
-Judith Mendez (6):
-  configs: am6*_evm_r5/a53_defconfig: Cleanup env configs
-  configs: am62x_evm_a53_defconfig: Enable MMC UHS modes
-  configs: am62ax_evm_a53_defconfig: Enable MMC UHS modes
-  configs: am62ax_evm_r5_defconfig: Enable SDHCI ADMA for r5 SPL
-  configs: am62ax_evm_a53_defconfig: Enable MMC_SPEED_MODE_SET
-  configs: am62ax_evm_a53_defconfig: Enable SUPPORT_EMMC_BOOT
-
-Vignesh Raghavendra (1):
-  mach-k3: am62a7_init: Add FS and raw mode for eMMC
-
- arch/arm/mach-k3/am62ax/am62a7_init.c | 19 +++++++++++++++++++
- configs/am62ax_evm_a53_defconfig      | 26 ++++++++++++++++++++++++--
- configs/am62ax_evm_r5_defconfig       |  4 +---
- configs/am62px_evm_r5_defconfig       |  3 ---
- configs/am62x_evm_a53_defconfig       | 22 ++++++++++++++++++++++
- configs/am64x_evm_r5_defconfig        |  3 ---
- 6 files changed, 66 insertions(+), 11 deletions(-)
-
+diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+index 23da7b3bf61..a070182cd14 100644
+--- a/configs/am62ax_evm_a53_defconfig
++++ b/configs/am62ax_evm_a53_defconfig
+@@ -1,6 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_K3=y
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
+ CONFIG_NR_DRAM_BANKS=2
+@@ -8,6 +9,7 @@ CONFIG_SOC_K3_AM62A7=y
+ CONFIG_TARGET_AM62A7_A53_EVM=y
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
++CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62a7-sk"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+@@ -34,6 +36,7 @@ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
+ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
++CONFIG_SPL_I2C=y
+ CONFIG_SPL_DM_MAILBOX=y
+ CONFIG_SPL_POWER_DOMAIN=y
+ CONFIG_SPL_YMODEM_SUPPORT=y
+@@ -57,10 +60,20 @@ CONFIG_CLK_TI_SCI=y
+ CONFIG_DMA_CHANNELS=y
+ CONFIG_TI_K3_NAVSS_UDMA=y
+ CONFIG_TI_SCI_PROTOCOL=y
+-# CONFIG_GPIO is not set
+-# CONFIG_I2C is not set
++CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_SPL_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_OMAP24XX=y
+ CONFIG_DM_MAILBOX=y
+ CONFIG_K3_SEC_PROXY=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_SPL_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS200_SUPPORT=y
++CONFIG_SPL_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_SPL_MMC_SDHCI_ADMA=y
+@@ -74,6 +87,12 @@ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_SINGLE=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_TI_SCI_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SPL_DM_REGULATOR_GPIO=y
+ CONFIG_K3_SYSTEM_CONTROLLER=y
+ CONFIG_REMOTEPROC_TI_K3_ARM64=y
+ CONFIG_REMOTEPROC_TI_K3_DSP=y
 -- 
 2.47.1
 
