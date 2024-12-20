@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E742E7718A
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:07:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 966E1E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:08:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CE1280462;
-	Fri, 20 Dec 2024 05:05:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C61D48043F;
+	Fri, 20 Dec 2024 05:05:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cGdhY+Ek";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XLVRe8vn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75B9180087; Fri, 20 Dec 2024 05:05:44 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 681F380508; Fri, 20 Dec 2024 05:05:49 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EEF18037B
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:05:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F627804CC
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:05:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9a977d6cc7so212196866b.3
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:05:42 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-aa6aad76beeso222426266b.2
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:05:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734667542; x=1735272342; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734667545; x=1735272345; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3R3+8YabWFjl28ISkOUm+EAK0SatnO3yrW7ONv1vNvE=;
- b=cGdhY+EkQ6AyG8U511xlJxrZ0lC2JTnMSQ+fakTO+iPbz4D1o4oblXk4jG++y1HYlX
- 9nSKiWTXNyFxBFQBn/eW9jxYJl4Vx8+yz5rH43yzG1cA6q+48GELg1XuRsqjVdzPbUfd
- mlN1Kt+IDCFnK2er0CRdqhTZXjWel410QAgDM=
+ bh=fKqj5XxMM6ETsljYw6BhOK1wDATCggEN2ywC7hzCDyw=;
+ b=XLVRe8vnuDg2b+0Tf3NAlaLFsODMO+qI3Rf1E399hPl+zUedy5nOpoHS/lq1qqJeOu
+ La/Dr4Or/MrWb5h62q5m0uo1JPC1Oxroxgl7zFpG7VQAP5Mxa3nz9kBUQ6WqELxXCeDQ
+ 59S706/iYVRxhiLxlJ3LYepk37Xi7cuEx8hZQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734667542; x=1735272342;
+ d=1e100.net; s=20230601; t=1734667545; x=1735272345;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3R3+8YabWFjl28ISkOUm+EAK0SatnO3yrW7ONv1vNvE=;
- b=TTgUx2Vcin+aZ9adw8J67hgh9/podYUzQKKj7I2mLk/isDLPd75n55t6YaX1ItI3gH
- ONKylKDpWpqFK2h0Ux+onxDaBdnjZ+kDn3xCbYxkc6vNxtsD2QS3clVxcv8ErKfkvjut
- QNuuh82egQn2iIbfx9MAQGMkdOqTG5ZTk2XFOuK99yLnZntnNyKb2a7GAmxhGj3rQdVd
- IRQwqTManWczRl19nDwadhyJESJhtuefEFdLDCCiAWVJKeYS2BQtTivaLHaucd8nRtBq
- kCQjPGZIr+OvqdUYoz+vSNt6xNPFWdOASWqIbBgYqpRcFhsvwDCRzMKUn5+dXaGksucy
- j8SA==
+ bh=fKqj5XxMM6ETsljYw6BhOK1wDATCggEN2ywC7hzCDyw=;
+ b=PUnYvwvSjj3Fs6Fp4BdMRGDT7Knx9k+pcaDVi8gXmbqry9gC4fGc923PI7E47vGMew
+ RMJ4GeZL/vQ5Syk8xnlGQUNHsJxazvC0a6C//S/Epcd/0BY/+C5qIhsePfXIWITPzJbh
+ /uRuDLnwnf3aXM4wchxBEc5XKcJc0xTY7GTyVx/kQ8BNynJqspYd4PQhwH4/EZyihPOF
+ LhSGcS0i8+hsr1FuH2luBC61ILAC4nsDqYrLzRVRmAYb8mxuKqDEN6cOSRRLYWXkct5A
+ Xi6k1KD009e97A4Z7aKl2eTJI1cbOyQsLPZvbCNZo7xVBawqNOqibvxHhEUY/OuV8KLv
+ 7mrw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjLcn/GsOp4RTve3YsVuvq5SLed31HrYibB0PwW1bFqrwsjQMj76Sn23MF0qebJmlPWWXHIx0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTbvRLfN3/9VEqApe/djAydidu1wDW+XOrWALe0GDsdgHkDY7f
- pwXhdlEnx0jtitxFDZJE9VZI4V1YiacNXDCnehoqAZgoozEvzb6HAfzV0EQkX2730/Ut+XN6e5a
- wKmIzdDOhhB61/EMNUDuTnzHepLlHRSa2tdPk
-X-Gm-Gg: ASbGncswRB7hkloFIVLktSK7yKl61Oq4W06najkTTmP6KARHqC01DiMEobccOUbpzVK
- rBEGER1LgOgqvCrp88ujMdQwMuvoK6d0kTugq4B4=
-X-Google-Smtp-Source: AGHT+IGt3tgjCMZJ2jH7pz9MpELo1LXiltzSIhVEDnY1BS5dyViKYrWPTDLtu+7Yd7XWWFWNE7CH54KPL7Hox8WKjcY=
-X-Received: by 2002:a05:6402:5291:b0:5d2:7396:b0ed with SMTP id
- 4fb4d7f45d1cf-5d81ddb3ae6mr2333619a12.14.1734667541963; Thu, 19 Dec 2024
- 20:05:41 -0800 (PST)
+ AJvYcCWyxdgAsHm6P8/U2XYJtlBHtVWOmHGxhCwNrzkDxLRuP/BX3+vbhiLPxt4P2kxZizqrpKGxWSA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz3z4KD/Of0j0yBWdWCF6bHiqK8GcgeICxo0Egs9Yz4q1giIV0u
+ pOsmixTmi9G5hS91J3Pm9IJAQNdgWB1Qhu8F5o2G4pRQAA0qROd3+/7floemKUNrEFtferDi7da
+ AsdowxrQnx1T0gbyEi74+0cEl+e6AQp5TI9TQskE9xQzC5RQ=
+X-Gm-Gg: ASbGncuaL9mNxi+0WMPh1FtMQNgEvbG9QpYMlWQp5EhA2UhmZiPVLes/xjubxpxzQjh
+ Pnn8IPwibvLfD3dkBJjIKyeYFIUnPunGNtDx0Qno=
+X-Google-Smtp-Source: AGHT+IFDNUNJF+LhyWi9tS+q726nAjg3BEwItGbVtXlqmpL9S0jBu8Rzlo17mdKC3zQmbuGif9EFWAaY2scsej6ejS8=
+X-Received: by 2002:a17:907:9715:b0:aac:619:e914 with SMTP id
+ a640c23a62f3a-aac2ad88fcfmr108580466b.16.1734667545639; Thu, 19 Dec 2024
+ 20:05:45 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 20 Dec 2024 04:05:39 +0000
+ HTTPREST; Thu, 19 Dec 2024 20:05:44 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241206023626.2456858-30-sjg@chromium.org>
-References: <20241206023626.2456858-30-sjg@chromium.org>
+In-Reply-To: <20241206023626.2456858-29-sjg@chromium.org>
+References: <20241206023626.2456858-29-sjg@chromium.org>
  <20241206023626.2456858-1-sjg@chromium.org>
-Date: Fri, 20 Dec 2024 04:05:39 +0000
-X-Google-Sender-Auth: wQyTTIHsYQnd95-a2_NSi6-gA2s
-Message-ID: <CAFLszTjkrLeCbfbUuUDZpqAFB9su3JfPuphJApAfQYgcyVfx3g@mail.gmail.com>
-Subject: Re: [PATCH v3 29/46] net: Provide a function to run network operations
+Date: Thu, 19 Dec 2024 20:05:44 -0800
+X-Google-Sender-Auth: UvTeQuJin_E4CvOIEGTnBaYuexY
+Message-ID: <CAFLszTik_QTVopPWjZqGXOtT-eubPwRDFNwM0e_gkh03hZBMPg@mail.gmail.com>
+Subject: Re: [PATCH v3 28/46] net: Drop #ifdef in parse_args()
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Adriano Cordova <adrianox@gmail.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -97,27 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new netboot_run() function which can be used for simple network
-operations, such as loading a file. Put the implementation in an
-internal function, used by the existing code.
-
-Place this function into the net/ code, so that it does not need the
-command line to be available.
-
-Document which network operations are supported, i.e. a limited subset,
-for now.
-
-For the one board which uses lwip, it is not quite clear how to avoid
-using the cmdline interface. This will need some discussion.
+Use IS_ENABLED() to avoid an extra build path.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
 (no changes since v1)
 
- cmd/net.c            | 40 +---------------------------------------
- include/net-common.h | 30 ++++++++++++++++++++++++++++++
- net/net.c            | 44 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 75 insertions(+), 39 deletions(-)
+ cmd/net.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
 Applied to sjg/master, thanks!
