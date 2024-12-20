@@ -4,95 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A6F0E7718B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 16:37:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B7DE77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 16:50:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E84EC80352;
-	Fri, 20 Dec 2024 17:37:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 215AD8036F;
+	Fri, 20 Dec 2024 17:50:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BoosVjx8";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="vUDy8KDC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7392A8036F; Fri, 20 Dec 2024 17:37:57 +0100 (CET)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8688C80381; Fri, 20 Dec 2024 17:50:44 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 390EF80326
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 17:37:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 182718034E
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 17:50:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-46772a0f8fbso18877951cf.3
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 08:37:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734712674; x=1735317474; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wcNh7Y2xTlhq28S4I937AxojvqduMS8R7vf9hl8YDnM=;
- b=BoosVjx8mFfZlv7t9zXJKN7BhClpK88wxCUkdi8K4fE0YBGvl/RVbUE3c3q+YKU0mm
- NYqjMFgmkJu7iq7El1UTKTzDXhx3CgMRXSvIsTpjHuYPYVnUHp+Ay2h+bKps37OSoQ/X
- ns8+FSb9IKhzAPzDFl/BKbBEqacCUWm6PGBqA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734712674; x=1735317474;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wcNh7Y2xTlhq28S4I937AxojvqduMS8R7vf9hl8YDnM=;
- b=res7y7ACCFcd/FmYmukE10owf86CKN45hHgwgz4GdY5ZQrbvQ220fCHLppMQ2sbOod
- JABydv6SmpHDutHTytaptnsUgqdrvAawbFIcgjxWu/JSD7B3xx8TrxO6L5bhN9BfWx60
- axxSZbZ7WOfYr0CjgMu4O3C5dz8knWCHLIKGpVcTfyCOSdyRKZl7YL0o2b/tUhRqV+Bt
- oVC76K1Tf/+GGmhLdu19g1GnoQ5emcPEvX9M28zUbl4W5bHA+iqXBrMk+9GqL8yUcpGt
- SdfxY33p/3gDDVnVRx1W46u4IbtPILzpq9yuJTT4L0CWS1beiKQKK9/IZLaOIKR/ksvm
- yOFQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW2Spf/vpKBydJzqNPwqqNOETrB0YrMborknX2A4j6n47EVWVqQSFiGRG+ag63jGPiHfxnJRtg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzsRwZAtdciE9IBx1CIQqJ3UeYkMlMb68Kpj7lU4BfaG2KJW92c
- 5fHNLdvOTVj6ZkjoJqjgfAgOfiHvUeNoSJ5hHTsN4zw4/LR99JsO/QGpd+E9W90=
-X-Gm-Gg: ASbGncskI3zjPQFqQEz7w2st2MhY3K4bDr/9j6lP798bWy0pWpw5H1OPcdvvEStNcdv
- WBsrbE2G89yiqLi3S/pgoo40XS+zhM5wTN8j0nVlTOXJ0pBBlzyki1Kt93d3f7AHVr7C7IqM/HE
- aOBjVuIULtdju/9GIy3qaAwWOL/wCbT/lF4T+UIdk1bMVqVpPuntRa0+AXxWkSMErzLgFhCayHJ
- 7Ifno+b95qlcQWwkJXkM/g3Wvk8LH7xJlzCMSFgotOjdqyV0ZDRe9Jr
-X-Google-Smtp-Source: AGHT+IFwty2AcxzxXVXZcwbbFWaEzqzdC2+8oV03dAYFhRh0NrTuJAPE1yKGO45NCdE56i6+V/LXkQ==
-X-Received: by 2002:ac8:7e96:0:b0:467:59f6:3e56 with SMTP id
- d75a77b69052e-46a4a98a6e7mr62976521cf.36.1734712673925; 
- Fri, 20 Dec 2024 08:37:53 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46a3eb1760fsm18263491cf.71.2024.12.20.08.37.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2024 08:37:53 -0800 (PST)
-Date: Fri, 20 Dec 2024 10:37:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: Roger Quadros <rogerq@kernel.org>, vigneshr@ti.com, bb@ti.com,
- lukma@denx.de, n-francis@ti.com, mkorpershoek@baylibre.com,
- afd@ti.com, glaroque@baylibre.com, sjoerd@collabora.com,
- martyn.welch@collabora.com, rasmus.villemoes@prevas.dk,
- caleb.connolly@linaro.org, j-humphreys@ti.com, nm@ti.com,
- u-boot@lists.denx.de, srk@ti.com
-Subject: Re: [PATCH v2 4/5] arm: dts: k3-am62p5-sk-u-boot: enable USB0 for
- USB DFU boot
-Message-ID: <20241220163749.GH1505244@bill-the-cat>
-References: <20241218124542.3519447-1-s-vadapalli@ti.com>
- <20241218124542.3519447-5-s-vadapalli@ti.com>
- <e4b23017-375e-4430-aef2-001c1b6402ca@kernel.org>
- <noztdv7z4cwzjwc5sgqvzli36ppm2tlgrpqjgxbkbtojs34jnp@3lhnfx6ol4in>
- <a0dd6878-5f26-47a0-8025-ba9d9d320a31@kernel.org>
- <20241219170044.GX1505244@bill-the-cat>
- <lq5jqpiifhnmdvfqy2wguqklikcpo3hl37p3ojbm6pfsl6supl@opm7xkmql4y7>
- <20241220142528.GA1505244@bill-the-cat>
- <5qksc7opj374tssk365jfo5orxmymwn3pzcvchtodf2nenvtsa@4v2dldntch7z>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=69d4=TO=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1734713434;
+ bh=NvxEmr5YYLOs5VyG1+cA8Cr+uzwwCxqoFnqdBt+pFIc=;
+ b=vUDy8KDCVzND7dgHNfjIZ9NZ1mYWlfq8e7JOINFUN2RhNGEzsFonv04m5zNd8YCbCpGAAwC1m
+ ps48y0QGB4i4W9yjpsDXAdkP2PyB3JkfieaOoUmYV71glZzfguuyQ20N4u8YgHQzLqpQQ/MV2ol
+ zyMxEFEGEP9HZDRZGR6D5KXYowFlIq8WeZxzs70h3+tTOVrve/3cXU4dD4kPxOCp5fEFA9aFtJ1
+ v0RyggQE9FRKUlct9LprIkcqDWLzvQeuyCE7WAF/JSh8mB4tiW/n0JAACE4m8SqkRrB1Qj76QO8
+ 1MHZK9hvU7Voi/nni5G3PlRLf73oNKG6eNoZogK7WHrQ==
+Message-ID: <c3cd2190-096b-4f5d-a5cc-481cc44fa11c@kwiboo.se>
+Date: Fri, 20 Dec 2024 17:50:24 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="taX5zTqK969PkW0c"
-Content-Disposition: inline
-In-Reply-To: <5qksc7opj374tssk365jfo5orxmymwn3pzcvchtodf2nenvtsa@4v2dldntch7z>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 06/12] rockchip: rk3399-gru: Include binman generated FIT
+ in u-boot.rom image
+To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20241212235735.164272-1-jonas@kwiboo.se>
+ <20241212235735.164272-7-jonas@kwiboo.se>
+ <8a6bb542-aeda-4d74-bdcc-8eace71eaf62@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <8a6bb542-aeda-4d74-bdcc-8eace71eaf62@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 6765a055b8c9120276e3d6f7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,71 +77,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin and Simon,
 
---taX5zTqK969PkW0c
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2024-12-13 15:30, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 12/13/24 12:57 AM, Jonas Karlman wrote:
+>> The u-boot.rom image contain u-boot.img FIT instead of the FIT generated
+>> by binman for the u-boot-rockchip.bin image.
+>>
+>> Change to include the binman generated FIT for the u-boot.rom image.
+>>
+>> This change result in TF-A being included and the use sha256 instead of
+>> crc32 checksum in the u-boot.rom FIT.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> 
+> IIRC Simon was fine with removing u-boot.rom support for RK3399 when I 
+> asked months (probably years?) ago, if that hasn't changed, maybe we 
+> should now.
 
-On Fri, Dec 20, 2024 at 09:49:46PM +0530, Siddharth Vadapalli wrote:
-> On Fri, Dec 20, 2024 at 08:25:28AM -0600, Tom Rini wrote:
-> > On Fri, Dec 20, 2024 at 10:19:31AM +0530, Siddharth Vadapalli wrote:
-> > > On Thu, Dec 19, 2024 at 11:00:44AM -0600, Tom Rini wrote:
-> > >=20
-> > > Hello Tom,
-> > >=20
-> > > > On Thu, Dec 19, 2024 at 11:41:10AM +0200, Roger Quadros wrote:
-> > > > >=20
-> > > > >=20
-> > > > > On 19/12/2024 07:50, Siddharth Vadapalli wrote:
-> > >=20
-> > > [...]
-> > >=20
-> > > > > >=20
-> > > > > > Please let me know if this patch can be merged on the condition=
- that I
-> > > > > > post the patch for making the same set of changes in the Linux
-> > > > > > device-tree as well.
-> > > > >=20
-> > > > > Tom, what do you suggest?
-> > > >=20
-> > > > I feel like Nishanth will say it if I don't, so, it's blocked until=
- it
-> > > > comes in via OF_UPSTREAM being re-synced. That's the rule to avoid =
-the
-> > > > problems we've had in the past.
-> > >=20
-> > > Thank you for the clarification. If you merge this series partially
-> > > (i.e. this patch is dropped), please drop the next patch for
-> > > documentation as well since the feature will not be functional without
-> > > this patch and hence shouldn't be documented as being functional.
-> >=20
-> > Please post a v3 of this patch with that can be taken now, off-hand I
->=20
-> Did you mean "v3 of this *series*, with this DT patch and the
-> Documentation patch dropped in the v3 series?
+Good to know and fully agree, we should try to remove it now.
 
-Yes, sorry for being confusing.
+I did a compare between u-boot-rockchip-spi.bin and u-boot.rom and after
+this series they are now identical for the full size of
+u-boot-rockchip-spi.bin.
 
---=20
-Tom
+However, the u-boot.rom also has a copy of ~u-boot.bin and a fdtmap
+starting at 0x300000. I have no idea if they are used for anything,
+if they are it is probably not for bare metal booting (TPL+SPL).
 
---taX5zTqK969PkW0c
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
+Jonas
 
------BEGIN PGP SIGNATURE-----
+> 
+> Especially since the only RK3399 with CONGIG_HAS_ROM set are Bob and Kevin.
+> 
+> @Simon, you said you tested the patch series on them, with which image 
+> did you do that? Are you still fine with removing the u-boot.rom for RK3399?
+> 
+> Cheers,
+> Quentin
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdlnV0ACgkQFHw5/5Y0
-tyyzIQv/UgH3zTmroFX+wXrhlsP4nAuWvx7+t5LmL/b+yTGTHS4yQpQ0raqU+zQU
-WaHZt3OWBV6Mnnqa6oIlQeZ+x02CtzyT3Hwdzzz8yeoMaRJiEFBxnf9xogDA5nSv
-eN3MbQ0bOky1OiIla+6DV1y1Ksv9v26LXW0in4f/Y3UvqHaHIqBj314+gqOQMmVF
-z2guox/gFXQliV/xzKcTZ3dds7mw15ahjorQpnwGsKGnoW0zzKbw4TkU4wicSrII
-jZNCo8PSjjmPQcvVy5hJ91aiWXAFKuReL6gkpAjCpTHnr6+MLHdYFCAGWP3Z3Vi1
-M1cP+ngQmsOOXjfbjse7vl69UgS8D9ETXzqpMDbTIxLGcqFbvWfCiPN3UtqLgGNf
-wOF4r1/mCugfgJLvs+jLUDOELq23X1ALlH121mDfS6H+TKYAQ7omUt0pyEAYXw62
-ugkhzUyk5M+riyt7MuSRbPLZh3F0g2LhLJFApgX7af77GqTuocQEpsK7i0Fvr0T/
-wDIwuB7A
-=BAy0
------END PGP SIGNATURE-----
-
---taX5zTqK969PkW0c--
