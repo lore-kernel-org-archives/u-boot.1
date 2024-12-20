@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB4DE7718A
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FE1FE7718A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 04:10:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A279805C8;
-	Fri, 20 Dec 2024 05:06:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8660680581;
+	Fri, 20 Dec 2024 05:06:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kU0l1z2K";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MSvMRcJD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D4A38036F; Fri, 20 Dec 2024 05:06:29 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id D91758037B; Fri, 20 Dec 2024 05:06:31 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12BA580516
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:06:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E20648056A
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 05:06:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5d122cf8dd1so2431912a12.2
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:06:27 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aa66e4d1d5aso233794566b.2
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 20:06:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734667586; x=1735272386; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734667589; x=1735272389; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8UZA6bgmd7zRfTNJlqdNZw+yvWExwwouV/S3+VpQG08=;
- b=kU0l1z2KvaCRFS0P02X0YcpMnnBbrIhcTZFTdtW1BZfOuGhSCQIZtJxzkSvLQwM39/
- FaMX8PlhV3isHCXupl4r2iItrXLZNVaYymGeRULMNnlaZA5s4RJX9cRnOs4stGPzWKbd
- k7dl2Wvo51THAe/SsMvXmVXz0EJB+ECkc5SUs=
+ bh=UTLje5eNtTCOVRrma7D/tFsWH4jlgFn5j+X5oGTjUS8=;
+ b=MSvMRcJDUjzVQE2/9YK68bJMhY1Hvg61hzsdaZvR+hywwhoG7ch7GAmHutoCB1Rh+j
+ N4Hdah+wVON/BgpSfTp5bcqqNt1HtrrmW13bNcQRL2QF6WZv+A7SAU0fHLPCpZtRdzz9
+ 1K1Cb7hmounT/t8ShQMqToSKQ9GU9mdE6Gem8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734667586; x=1735272386;
+ d=1e100.net; s=20230601; t=1734667589; x=1735272389;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8UZA6bgmd7zRfTNJlqdNZw+yvWExwwouV/S3+VpQG08=;
- b=AvmVotJFEDT1bu4+QTcvv+GylA07bMbdo2EeoIJpiLKZBdAFxstqSqABmzmmnG6Y/8
- A8o2ebmDroIRyXLTR/dd0dVMIBnmfyRGMFNJzZG7/qCgZM5CRm32urgjC0t9jo3+R8Z7
- rr/y9vcj/OyZiRIp3PheOFfAtma5GARe9BnOqcqfdkPVLkTGCEW5zo8T9Pi83z/3u+y6
- PxwK5vvzSr4l99YybBmGMeoKHZbfEKK2LgVdXsnWzvfFoYRTKFitqEWaT7F1PqfVJBUE
- +HccmaPkkof9qirgimzuXYZYGx8P4eJUcsKLDf51GzLh9WXB5dmkPGdQmDYHK3X04fTQ
- PAeQ==
+ bh=UTLje5eNtTCOVRrma7D/tFsWH4jlgFn5j+X5oGTjUS8=;
+ b=dYtGkXmh84dWVoi5TJXr4EN4iuCNwXDed5e55mXmgB5WJR4dpDtHOFQML622uYelgm
+ 20kaGogpr/9Ong1kR3wafwJ7a+MLzXuL5fNnQm/8qDwvuTlXp2w8XM183oSej514Cy91
+ SQmgGzD4phENE6VHHniLUZ0BEueheXeurz1igJX5pULwOLmxULW1DGfuLWmANaRYpH2B
+ d88dzc48R4n4+xUgbTnZC93Z5PviyDCz6cKiMKyD/na+jZZYy6D/Co+ccVfJM0XPZkez
+ o60LE8bFxSMU0ovQMegp1Oi3NLhk/Qj/HCcSr8uiSb867oXuvuTEVdi9Jd3swfejvQF9
+ evwg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXNk9lFvmAClZ5NvMEHREt0yicL+I/aCqAWWATzy/R+7hgY6IjUi1oNoVIiKAOOKU50OAhBnuo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzV/aNfbVC7W9Tb3LnJXaUkmIRMxOM+TJ3aD64Ht5xvcbFtXs9x
- 3PXa5RmQBhmaLjdnYQjVbSvvsCPuccUhWDj802tPhgNfFyoQ/mkr1lsITcqOKCnttxd+pVRz/Je
- pi74378nF+shlwGQLw57gXvZDq/PHIeBCoUUs
-X-Gm-Gg: ASbGncvi8pC9hbXvePrloKFYtTIo28KiOvxjhoiX+adMdZRozgwjDB7gG4moqSJjdvP
- 6WZOltUnq0vTNsBMpNeJfJkUWbVtGafHqKcRP4PU=
-X-Google-Smtp-Source: AGHT+IGJiFQH3yrEWfyNC7u+9dKSyPqeZ5GcVbG5Cid11VQtqEXOuL0yGfgRo8OWmQPy2wa7dkUcxwAIzs8ixdsBHOg=
-X-Received: by 2002:a17:907:80c:b0:aac:832:9bf7 with SMTP id
- a640c23a62f3a-aac2b84b7aamr83190966b.24.1734667586511; Thu, 19 Dec 2024
- 20:06:26 -0800 (PST)
+ AJvYcCVfxlbs4VEUc4OhYMt3/f1kIZw0DV7vcWushb5f8q0hMGlF5RisYibkoS6actX8v6uJUCvtvRM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyCCMN80pvnRrUnkBY8FHA0jyCRWDKdeMKPu8gns+31MMa2u66Z
+ ne4rafls1cqQfoyQJYiG/uZplP073Wl9qliFhimUwEhIx/lvYWMrGUB4fhO5MaRSH0zXSJfk5Yj
+ 93LYuHwE/FXcKze+Bq7J55Gj0MmFf4iJZthRC
+X-Gm-Gg: ASbGncuGV6MHOQoiqsRKApFxOGXpZEn//dkKXO21PIalivHLIj+KpAaKeLsf47DjeP7
+ Madw5X6CHDvY2ZzsxeuiEjDYjk8sqQJKtsZ0LsdI=
+X-Google-Smtp-Source: AGHT+IFYObSVGrOtMaEg5E0+ojVcZvj7mldDIhdz0ML5cmV01XzAnOfYns2Kk8wGkbIG+ym8SyP1urBx+BpcCpzf6b0=
+X-Received: by 2002:a17:906:c14c:b0:aa6:80fa:f692 with SMTP id
+ a640c23a62f3a-aac33691020mr92990566b.49.1734667589353; Thu, 19 Dec 2024
+ 20:06:29 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 19 Dec 2024 20:06:25 -0800
+ HTTPREST; Thu, 19 Dec 2024 22:06:27 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241206023626.2456858-15-sjg@chromium.org>
-References: <20241206023626.2456858-15-sjg@chromium.org>
+In-Reply-To: <20241206023626.2456858-14-sjg@chromium.org>
+References: <20241206023626.2456858-14-sjg@chromium.org>
  <20241206023626.2456858-1-sjg@chromium.org>
-Date: Thu, 19 Dec 2024 20:06:25 -0800
-X-Google-Sender-Auth: F9WnbFfORpXq1QRQclMWnYtfE6Q
-Message-ID: <CAFLszThgXSe=+WHGsYFgH+2yYp0tO2KUsaW_L1+RqqRAHvwP5w@mail.gmail.com>
-Subject: Re: [PATCH v3 14/46] boot: Convert IMAGE_FORMAT into an enum
+Date: Thu, 19 Dec 2024 22:06:27 -0600
+X-Google-Sender-Auth: omhyx2W6kjI7VU8LoJ-HZGOiugA
+Message-ID: <CAFLszTib-kraz666Dx4wHK2OW0CCKV-Ravq6sv73pbKWj5rTJA@mail.gmail.com>
+Subject: Re: [PATCH v3 13/46] bootm: Allow building bootm.c without
+ CONFIG_SYS_BOOTM_LEN
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Julien Masson <jmasson@baylibre.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>, 
- Peter Korsgaard <peter@korsgaard.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -96,18 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use an enum so it is clearer that these options are related. Update
-genimg_get_format(), tidy up the function comment and move it to the
-header file, since it is exported.
+This code cannot be compiled by boards which don't have this option. Add
+an accessor in the header file to avoid another #ifdef
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-Changes in v3:
-- Add new patch to convert IMAGE_FORMAT into an enum
+(no changes since v1)
 
- boot/image-board.c | 18 +++---------------
- include/image.h    | 26 +++++++++++++++++++++-----
- 2 files changed, 24 insertions(+), 20 deletions(-)
+ boot/bootm.c    | 8 ++++----
+ include/bootm.h | 8 ++++++++
+ 2 files changed, 12 insertions(+), 4 deletions(-)
 
 Applied to sjg/master, thanks!
