@@ -4,77 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0961E77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 05:50:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 942E8E77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 06:12:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28B1B8021D;
-	Fri, 20 Dec 2024 06:50:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B44AD8021D;
+	Fri, 20 Dec 2024 07:12:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xMvYspnu";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F80780291; Fri, 20 Dec 2024 06:50:04 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2344E80079
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 06:50:00 +0100 (CET)
+ id 2293F80243; Fri, 20 Dec 2024 07:12:36 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C357E80087
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 07:12:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BK5nnED117656
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 19 Dec 2024 23:49:49 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734673790;
- bh=x2ARPsnzthF6i0uzBc3sFCbYuA2Fq/TIUK+/gPGPtX4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=xMvYspnu94vOK92xU8y/eZF6DgenAa37E2S+JVBIsEODHxv0C59u5/ipxQXOoSb9U
- QMLvDW7cvb3bBObAf1pZGAcKQKgWxuix4yg1nXC0Mwk/7Z6GYHQAVOZe2k1Pl+z2Z/
- 0IS1MneMpfAJChOpGhKAnMtVddOzDqCHFZ+Dt6O4=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BK5nnnf063696;
- Thu, 19 Dec 2024 23:49:49 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 19
- Dec 2024 23:49:49 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 19 Dec 2024 23:49:49 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BK5nmLe045785;
- Thu, 19 Dec 2024 23:49:49 -0600
-Date: Fri, 20 Dec 2024 11:19:47 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Roger Quadros <rogerq@kernel.org>, Siddharth Vadapalli
- <s-vadapalli@ti.com>, <vigneshr@ti.com>,
- <bb@ti.com>, <lukma@denx.de>, <n-francis@ti.com>,
- <mkorpershoek@baylibre.com>, <afd@ti.com>, <glaroque@baylibre.com>,
- <sjoerd@collabora.com>, <martyn.welch@collabora.com>,
- <rasmus.villemoes@prevas.dk>, <caleb.connolly@linaro.org>,
- <j-humphreys@ti.com>, <nm@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH v2 4/5] arm: dts: k3-am62p5-sk-u-boot: enable USB0 for
- USB DFU boot
-Message-ID: <pnedyv4gzyen2qyagucohtkcw4zgysuviuextxfg6m4ffk5gkb@emgx6hjkulwp>
-References: <20241218124542.3519447-1-s-vadapalli@ti.com>
- <20241218124542.3519447-5-s-vadapalli@ti.com>
- <e4b23017-375e-4430-aef2-001c1b6402ca@kernel.org>
- <noztdv7z4cwzjwc5sgqvzli36ppm2tlgrpqjgxbkbtojs34jnp@3lhnfx6ol4in>
- <a0dd6878-5f26-47a0-8025-ba9d9d320a31@kernel.org>
- <20241219170044.GX1505244@bill-the-cat>
- <lq5jqpiifhnmdvfqy2wguqklikcpo3hl37p3ojbm6pfsl6supl@opm7xkmql4y7>
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1tOWFT-0000WU-TS; Fri, 20 Dec 2024 07:12:31 +0100
+Message-ID: <30375711-d4a8-4e53-a804-a721d45e0ac1@pengutronix.de>
+Date: Fri, 20 Dec 2024 07:12:31 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <lq5jqpiifhnmdvfqy2wguqklikcpo3hl37p3ojbm6pfsl6supl@opm7xkmql4y7>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: i.MX8/9: question about unused DDR PHY trained CSR board array
+To: Ye Li <ye.li@oss.nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ "barebox@lists.infradead.org" <barebox@lists.infradead.org>,
+ dl-uboot-imx <uboot-imx@nxp.com>, Steffen Trumtrar <str@pengutronix.de>
+References: <8074530f-720b-4aea-934b-c0643c356617@pengutronix.de>
+ <PAXPR04MB8459A8BB89FAB50D6871EA9388762@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <2200ece8-593b-4ac3-be3e-b05570165e5e@pengutronix.de>
+ <d4acb710-7c80-4b71-862e-cee0a16d8cba@oss.nxp.com>
+Content-Language: en-US
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <d4acb710-7c80-4b71-862e-cee0a16d8cba@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,36 +68,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 20, 2024 at 10:19:31AM +0530, Siddharth Vadapalli wrote:
-> On Thu, Dec 19, 2024 at 11:00:44AM -0600, Tom Rini wrote:
-> 
-> Hello Tom,
-> 
-> > On Thu, Dec 19, 2024 at 11:41:10AM +0200, Roger Quadros wrote:
-> > > 
-> > > 
-> > > On 19/12/2024 07:50, Siddharth Vadapalli wrote:
-> 
-> [...]
-> 
-> > > > 
-> > > > Please let me know if this patch can be merged on the condition that I
-> > > > post the patch for making the same set of changes in the Linux
-> > > > device-tree as well.
-> > > 
-> > > Tom, what do you suggest?
-> > 
-> > I feel like Nishanth will say it if I don't, so, it's blocked until it
-> > comes in via OF_UPSTREAM being re-synced. That's the rule to avoid the
-> > problems we've had in the past.
-> 
-> Thank you for the clarification. If you merge this series partially
-> (i.e. this patch is dropped), please drop the next patch for
-> documentation as well since the feature will not be functional without
-> this patch and hence shouldn't be documented as being functional.
+Hello Ye Li,
 
-I have posted the equivalent of this patch for Linux at:
-https://lore.kernel.org/r/20241220054550.153360-1-s-vadapalli@ti.com/
+On 20.12.24 02:58, Ye Li wrote:
+> On 12/19/2024 6:27 PM, Ahmad Fatoum wrote:
+>> On 30.09.24 08:38, Peng Fan wrote:
+>>>> I now have the DDR settings for an i.MX9 LPDDR4 board in front of me
+>>>> that has different contents for struct
+>>>> dram_cfg_param::ddrphy_trained_csr than the default.
+>>>>
+>>>> I will inquire how that came about, but in parallel I wanted to ask you if
+>>>> this is supposed to happen and to alert you to this issue.
+>>> Thanks for raising this issue. I think board specific csr should be used.
+>>>
+>>> I will check with DDR TOOL owners on this.
+>> Did you hear back in the meantime?
+> 
+> We have discussed this internally. The DDR tool may generate different board specific csr. Currently in DDR retention, because we load csr + ddr_phy_pie, so it is safe to use this global csr.
 
-Regards,
-Siddharth.
+So ddr_phy_pie contains the firmware to the DDR PHY µC and it will
+train the PHY and thus will iron over any missing entries in the
+stored CSR? Is my understanding correct?
+
+> But we agree this global csr is confused and waste some memory. It is better to switch to the board csr.
+
+Thanks for the confirmation.
+
+Cheers,
+Ahmad
+
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
