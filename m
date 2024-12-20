@@ -4,57 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD05EE77184
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 00:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CC43E77184
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 00:50:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F99080326;
-	Fri, 20 Dec 2024 01:38:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 865A980291;
+	Fri, 20 Dec 2024 01:50:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KOsymdOh";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Wzmr0IRx";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VMf5zKp3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E32918033A; Fri, 20 Dec 2024 01:38:03 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id 969038032B; Fri, 20 Dec 2024 01:50:30 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E93F780312
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 01:38:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C6EB8021A
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 01:50:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-111-157.46.114.pool.telefonica.de
- [46.114.111.157])
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 4F89E3F788; 
- Fri, 20 Dec 2024 00:38:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1734655081;
- bh=ps2rsCg5PKmvyaYVpUyvo35QehLtGw/Zc+bYPSP1zEI=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=KOsymdOhIoQ4a6bhxqUXcRyyNcYnSGeCAi8ex4MNFalTrGDYobXDaaK/kXvuZg3fU
- 2bGnN6swKBnC9FZQeOHwsEX+zxS4sYbF4AFkN+WgAZerS6ehCrFBcI8P4QL07LO1aj
- L9tlN9cLhGBxySP5+kgnEnfnncoYNeNzw/6q5R/L1Wn3eTkSjJ46MsNAHx0wZZ92jk
- 5ehrmxYx7HirymhSn0si9eLX1PQX4qOQ3m78V4F6tdIHqCnQjIpLkuEP//eQ7+czek
- wi3mF2zn2SnoMf9JFEW28OE0ZLVqoMXhrIBb8r9/9900DPQe+XI06eJS5kVL3/sgT3
- wnITlduzlNdHg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] acpi: don't fill FADT, MADT if CONFIG_QFW_ACPI=y
-Date: Fri, 20 Dec 2024 01:37:59 +0100
-Message-ID: <20241220003759.89252-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YDpjw0F0Zz9sm6;
+ Fri, 20 Dec 2024 01:50:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734655828;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+xgOOqijnRxuswVcp6hNrWmXpZ1Jvjg1SP8nDmIpBMs=;
+ b=Wzmr0IRxViCT7Lkt1brdcEmRIY0hLOdoOMuYp14WI+IGhn8HvVqzLeEnSMimPAKcCxdb3U
+ zl/Qqc+UfBlnNosLhU+pXHDF76KU/N2BeWJy6qkZtBAMvX9ebr0iRoo0N0IEDUk4M81KF6
+ jGkykxo7NSdOmZXvZNkygS89OfGzNXzRi15xGjdPyXqMF61i0okYYybPYS2sMq21JJzzQh
+ XPrxm7G7vit1X2JCTY9hMb4TMibNBqcibXNVSag3cwZnZXjdrrcz3X9TZSyAYqfM6/7Hla
+ BTZb+0EvJYYpYpybKmQIcocjjL1qsk8DIWiLj3/r4OuzsLX2hJUnK3oflJ6jSQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734655826;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+xgOOqijnRxuswVcp6hNrWmXpZ1Jvjg1SP8nDmIpBMs=;
+ b=VMf5zKp3SRhWf7pK9Xk6GTU3yxvQwX3ebku2yjHCP+yVEB6l6XBbwzkF0Vr789IicitBAi
+ dUX4a8C8WIkCBVc9b+g+t5Qqi+PijbdVTUbSMlrcIY82xMuY0oPxFCqQaxzv0G0kzLde5p
+ Zjo1kK8+bE3YEW2qsgHwJn9B0bs4YRHGxDHVKh67WArjDgkHJ79zazpnuqVCm6+C1dXXMi
+ xML/Ps0s5jr9+GIw09URb2X1uN6QnfEly61hWYpbSsOMyU0I/0Q0QwcuQg8mKzNKa3bxlh
+ S2nT2lhFXVmjmJ8d2atr3R9G81X9Tq+1YZoY810PR2kVv5IQ0PVgd2GIB+jO8Q==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/3] net: rswitch: Fold MPSM C45 setting into
+ rswitch_mii_access_c45()
+Date: Fri, 20 Dec 2024 01:48:40 +0100
+Message-ID: <20241220005007.169383-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: cb39845f3d45e65f6b3
+X-MBO-RS-META: iayuboiytmpna7r8npptdyj1zdi5i6up
+X-Rspamd-Queue-Id: 4YDpjw0F0Zz9sm6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,54 +86,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When using the ACPI tables supplied by QEMU, we don't need to build the
-FADT and MADT tables in U-Boot.
+The Set Station Management Mode : Clause 45 setting of MFF bit in MPSM
+register can be done in rswitch_mii_access_c45() once, instead of this
+being done before each rswitch_mii_access_c45() call. Deduplicate the
+bit setting into rswitch_mii_access_c45(). No functional change.
 
-This patch avoids a build failure
-
-    make qemu-riscv64_smode_defconfig acpi.config
-
-    riscv64-linux-gnu-ld.bfd: lib/acpi/acpi_table.o:
-    in function `acpi_write_fadt':
-    lib/acpi/acpi_table.c:265:(.text.acpi_write_fadt+0x15c):
-    undefined reference to `acpi_fill_fadt'
-
-    riscv64-linux-gnu-ld.bfd: lib/acpi/acpi_table.o:
-    in function `acpi_write_madt':
-    lib/acpi/acpi_table.c:294:(.text.acpi_write_madt+0x52):
-    undefined reference to `acpi_fill_madt'
-
-Fixes: f5f7962091e4 ("acpi: x86: Write FADT in common code")
-Fixes: 4a3fc0f525da ("acpi: x86: Move MADT to common code")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- lib/acpi/acpi_table.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/net/rswitch.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 150f75027a5..c0ed24984af 100644
---- a/lib/acpi/acpi_table.c
-+++ b/lib/acpi/acpi_table.c
-@@ -273,7 +273,9 @@ int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	return acpi_add_fadt(ctx, fadt);
- }
+diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
+index 247eb139ff9..5dc5de15f6f 100644
+--- a/drivers/net/rswitch.c
++++ b/drivers/net/rswitch.c
+@@ -365,6 +365,9 @@ static int rswitch_mii_access_c45(struct rswitch_etha *etha, bool read,
+ 	if (devad == 0xffffffff)
+ 		return 0;
  
-+#ifndef CONFIG_QFW_ACPI
- ACPI_WRITER(5fadt, "FADT", acpi_write_fadt, 0);
-+#endif
++	/* Set Station Management Mode : Clause 45 */
++	setbits_le32(etha->addr + MPSM, MPSM_MFF_C45);
++
+ 	/* Clear completion flags */
+ 	writel(MMIS1_CLEAR_FLAGS, etha->addr + MMIS1);
  
- int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- {
-@@ -308,7 +310,9 @@ int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	return 0;
- }
+@@ -429,9 +432,6 @@ static int rswitch_mii_read_c45(struct mii_dev *miidev, int phyad, int devad, in
+ 			MPIC_PSMCS_MASK | MPIC_PSMHT_MASK,
+ 			MPIC_MDC_CLK_SET);
  
-+#ifndef CONFIG_QFW_ACPI
- ACPI_WRITER(5madt, "MADT", acpi_write_madt, 0);
-+#endif
+-	/* Set Station Management Mode : Clause 45 */
+-	setbits_le32(etha->addr + MPSM, MPSM_MFF_C45);
+-
+ 	/* Access PHY register */
+ 	val = rswitch_mii_access_c45(etha, true, phyad, devad, regad, 0);
  
- void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
- 		      int port_type, int port_subtype,
+@@ -460,9 +460,6 @@ int rswitch_mii_write_c45(struct mii_dev *miidev, int phyad, int devad, int rega
+ 			MPIC_PSMCS_MASK | MPIC_PSMHT_MASK,
+ 			MPIC_MDC_CLK_SET);
+ 
+-	/* Set Station Management Mode : Clause 45 */
+-	setbits_le32(etha->addr + MPSM, MPSM_MFF_C45);
+-
+ 	/* Access PHY register */
+ 	rswitch_mii_access_c45(etha, false, phyad, devad, regad, data);
+ 
 -- 
-2.47.1
+2.45.2
 
