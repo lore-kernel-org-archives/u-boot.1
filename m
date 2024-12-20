@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C69E7718B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E64EE77188
+	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 20:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CB12804E7;
+	by phobos.denx.de (Postfix) with ESMTP id 7691A80584;
 	Fri, 20 Dec 2024 21:37:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rCA3kAnI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="flb7p6Sk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC47780582; Fri, 20 Dec 2024 21:37:16 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 4AA6580544; Fri, 20 Dec 2024 21:37:19 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB5C28056E
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 21:37:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DE7C80469
+ for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 21:37:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKKb4na511500
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 20 Dec 2024 14:37:04 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKKb41A209128
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 20 Dec 2024 14:37:05 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734727024;
- bh=d3TD9jK9MYgWeNxtuaNLH3ou3fmX1PKwDfpqwsyVIxU=;
+ s=ti-com-17Q1; t=1734727025;
+ bh=DADEXpHxWKGrpAw6x/21F6VFWZ3qHfqZr8wfVJFMNTA=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=rCA3kAnIdCVfekQP83a2LBriL58WnH+IZtCkkaqzZSamt1tIqDu2Gk3y4FY57Xrgd
- B4JTpHGj6AVh9x1DQ3c/MD7piCAxe4bgcdXx5gt1cFxRiEU0YYzQj3wLmHIqoFLDxY
- JcYGTWGj3DAxSFiQDy1zFXX+GIhL3aCEZs5u9pQI=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKKb4kv054168;
+ b=flb7p6SkTHV16vK96ka9/QFK+58ynNZ2U4YbdbXZik3OwRAPKXw0x3BXldCQHkQ/1
+ 5swSAR47yq+F8+GA/LKbyRPpJ0cN160tCElP5jBVOEC4Poi9Ws7xR69P98WIwnjbcn
+ Wsn9ck316aH32pGFCS2bohT/rslIvLQZYzQ8wrVM=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BKKb41E002584
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 20 Dec 2024 14:37:04 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
  Dec 2024 14:37:04 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Fri, 20 Dec 2024 14:37:04 -0600
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKKb4SS106394;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BKKb4SU106394;
  Fri, 20 Dec 2024 14:37:04 -0600
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH RESEND 5/7] configs: am62ax_evm_r5_defconfig: Enable SDHCI
- ADMA for r5 SPL
-Date: Fri, 20 Dec 2024 14:37:02 -0600
-Message-ID: <20241220203704.2076499-6-jm@ti.com>
+Subject: [PATCH RESEND 7/7] configs: am62ax_evm_a53_defconfig: Enable
+ SUPPORT_EMMC_BOOT
+Date: Fri, 20 Dec 2024 14:37:04 -0600
+Message-ID: <20241220203704.2076499-8-jm@ti.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241220203704.2076499-1-jm@ti.com>
 References: <20241220203704.2076499-1-jm@ti.com>
@@ -80,26 +81,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable SPL_MMC_SDHCI_ADMA config option for r5 SPL
-to improve boot time during r5 SPL stage.
+Enable SUPPORT_EMMC_BOOT to help support eMMC boot on am62ax
+device.
 
 Signed-off-by: Judith Mendez <jm@ti.com>
 ---
- configs/am62ax_evm_r5_defconfig | 1 +
+ configs/am62ax_evm_a53_defconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
-index 99b8f47860d..274cd20e1c1 100644
---- a/configs/am62ax_evm_r5_defconfig
-+++ b/configs/am62ax_evm_r5_defconfig
-@@ -85,6 +85,7 @@ CONFIG_DM_MAILBOX=y
+diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+index 5e80c68605c..ad448feafeb 100644
+--- a/configs/am62ax_evm_a53_defconfig
++++ b/configs/am62ax_evm_a53_defconfig
+@@ -69,6 +69,7 @@ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_OMAP24XX=y
+ CONFIG_DM_MAILBOX=y
  CONFIG_K3_SEC_PROXY=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_SPL_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_AM654=y
- CONFIG_MTD=y
- CONFIG_PINCTRL=y
++CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_MMC_IO_VOLTAGE=y
+ CONFIG_SPL_MMC_IO_VOLTAGE=y
+ CONFIG_MMC_UHS_SUPPORT=y
 -- 
 2.47.1
 
