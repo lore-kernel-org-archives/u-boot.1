@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89ECFE77184
-	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 07:14:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B79E5E77184
+	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 08:11:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DB04803E0;
-	Sat, 21 Dec 2024 08:14:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
+	by phobos.denx.de (Postfix) with ESMTP id E808A80423;
+	Sat, 21 Dec 2024 09:11:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="c1SF7Rbt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x6z34Qrd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC126803B5; Fri, 20 Dec 2024 23:18:46 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 9232980433; Sat, 21 Dec 2024 09:11:15 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C11E8034E
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 23:18:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=broadcom.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2A4FD803E0
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 09:11:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=david.regan@broadcom.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2162f968cd7so2718475ad.1
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 14:18:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e39f43344c5so2239824276.1
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 00:11:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1734733122; x=1735337922; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cGF/vxPzSCi3oluHi3hNOUxtnzOmSkP3Fc+rlGPo3FY=;
- b=c1SF7RbtmIlNaLk0T12GQI3OSfnfjbbZlVE2oIhqStXmd2UsRx/kiRRrO93nuuKrF5
- xM1EgglaFCduPV5Nyxov7WnGI6fW0C10DQxJmTzjUTUTyqrj+wVNIkPvXYkz+pCr8/Xu
- x6BUQJ50Gc7055d5W28eXINRKLyEi/picDPRw=
+ d=linaro.org; s=google; t=1734768672; x=1735373472; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wyms+KNfrW4AUdt7PTVTXUX0yUlyqKoW5x2VhCZmBlw=;
+ b=x6z34Qrdd6AQCBwOKt4orEKF0IYplLbwZgCqHxjKmK8fbFYz+XK8C0Ljdx9NW33S+1
+ rAzZj2AHpDXRFfPHZIeptiDY1B1tavKk9dT4N1tsbjcWN1UyMdGAypxXZa+HYhs5HXHz
+ eAr5EzMOGvuGCg+LbifdWYtTgpCjBNVhftMChUs3OPvXAwZrQ9mFTGJzkL72IzbKCHIw
+ IiPS8N5lW+QVrlfba5gQ9mJSwPc61IRJD4QiOQPS1MUFr31Vn2nZ2YeWqb1qW8DNjfFc
+ UKs9KqzAAftmoC+rDgKQdiwc02rITc30zBI66gfIcIHGS/wOKejeE8WswNJTmUmnadYp
+ S42w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734733122; x=1735337922;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cGF/vxPzSCi3oluHi3hNOUxtnzOmSkP3Fc+rlGPo3FY=;
- b=aqnKMgyxWkfRAnWs0T68/4PqpA0P1IeakAThP/8G85sp815j32Xs5AcWSQ9QmVmT7I
- 35NN7LxOp7Kwz19nmakmGyKYJHQoXebvKm6creGDUIXDO6ifJvl3rAODMsvSi6DRNVTD
- 1/sgGXK4Bki9W46OqXuaD3lH4X6GnOS1iyx2uvH7d3DHsDGjO6eWJyf3dN+I4MSQJAjR
- pxGyDANUc3N9YJx01kQqFu8SCfpcc1Zv/0Q8QY+4HLvIrybVghAt9s4rb7LaSfccHOUV
- i7l8W7SIkxlhsIzEEqEtE+W0TEp1Ir3++nZxRm3rpStOWKm19X/lv/6+Ovffw2oQkoxw
- cSEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUB1vBgLstOEcPzwNnZlRsrskPz2UxxNsDXIVNEiCkvJW6ZeARE0YcPZ87/ZFtl7caEMr2yQco=@lists.denx.de
-X-Gm-Message-State: AOJu0YwsofKPykAEsDZJb6usgKJ97rmxhkp6vwdnZz4w9QSijlfhFTEJ
- mQB6LhGZ4S6QzlpvHBCFxu01N1vrH3z9oxLj3R6QPeH0ney0iCmPSL6lSxxZy7ScW1vrMYRHZAk
- 6DHQOuFLcvXkSCMomuOUmWRoHolWtqy9d/mSy
-X-Gm-Gg: ASbGncvDuaMGxwBzSvU4YnAmcwmGd4nyimkESoRnI7TsumcI5HYBvXGxW965/YjNI6i
- TPlAWBYYMMtus+grQbd0hAW3vuxO7R06G5i8OQbg=
-X-Google-Smtp-Source: AGHT+IHTmdelEFOGXyg40yVVCi5iibUDOhA/DncQ52y77i244zxzGx5Vp/SZk/wqcTH/j4bvrkAeWw+IOXnAfEY4xVU=
-X-Received: by 2002:a17:90b:520a:b0:2ee:f1e3:fd0c with SMTP id
- 98e67ed59e1d1-2f452efa94bmr2638926a91.8.1734733121935; Fri, 20 Dec 2024
- 14:18:41 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734768672; x=1735373472;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wyms+KNfrW4AUdt7PTVTXUX0yUlyqKoW5x2VhCZmBlw=;
+ b=lhlXONVAGjGNdDu/zermixyp7JIXYU04I4sWNVSTd65mMktx7N1zkJIt+bSz/rhYez
+ npRsulNjlEH5EZW2+tQsveLx/I6q9cwQ0H/1Q2QbRBOCy4xq5qkXLQG2QwyHAQKbyCFk
+ fF4k7QmIfODxQryyGoNmxZsYJBlMQ1E9riLibT/dZcYF0bqwcBHYHKIBJyOvdpxVjtCm
+ u2BBA6c3nt5qhHNPHS6137vat3ox54Erw7ZTdzebgvARx7XybdWQZOQi8D1+J1/vSwA0
+ xQwx6Z/BGYYOnN35oPKN+lzPkky8qD3GruqFaS6lUmb9yO23zAkHkc08y6Tp3PjlNw1B
+ FnmA==
+X-Gm-Message-State: AOJu0YwpFbTjEjvCVC4TK0CpPYtFwcibyGaL/zVmlgVCLPO4LdxdMaRS
+ OBUhL3hGb/94kDnH9IjD1QgAl8/QsVoFd2woiIkvwEs9COA66ga4thSEucFgho471RtoTalZhwU
+ fPKAySaqJEs1PEyPDfLnp2fZ1pBIwKHWBSdLKkQ==
+X-Gm-Gg: ASbGncvEF2FhIELA6YtPxwelmlEvrdQ/eOfWSKt92y0U/8FHDz6hITDIVTuOawZWCUG
+ N++sl3xLAYVpqyO/3yy7pGNqUx8HjQqPF0Sz4FQ==
+X-Google-Smtp-Source: AGHT+IHK51HKxwk5zmg9jq01BWTeU525hljzhmq5HE8p4MjJ+u6m8NaRCvOV1PZp7pD3Vuz7sQhvuEomzcntywyciAI=
+X-Received: by 2002:a25:58c2:0:b0:e44:afe1:1e4f with SMTP id
+ 3f1490d57ef6-e538c257a60mr3449226276.19.1734768671986; Sat, 21 Dec 2024
+ 00:11:11 -0800 (PST)
 MIME-Version: 1.0
-References: <20241219184953.226978-1-dregan@broadcom.com>
- <20241219184953.226978-3-dregan@broadcom.com>
- <CACRpkdZKL7-KQ7u=Y1Vm5AY1mzJbzS9BtJ0W_XZW8EFRF1Yjcg@mail.gmail.com>
-In-Reply-To: <CACRpkdZKL7-KQ7u=Y1Vm5AY1mzJbzS9BtJ0W_XZW8EFRF1Yjcg@mail.gmail.com>
-From: David Regan <dregan@broadcom.com>
-Date: Fri, 20 Dec 2024 14:18:30 -0800
-Message-ID: <CAA_RMS450FuLAg0J=arP2mDKDJqZv5Tcd6w1_C6-jhLwKMDzQQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] arm: dts: Update nand node for bcmbca board dts
-To: Linus Walleij <linus.walleij@linaro.org>
-Cc: david regan <dregan@broadcom.com>, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Anand Gore <anand.gore@broadcom.com>, 
- William Zhang <william.zhang@broadcom.com>,
- Kursad Oney <kursad.oney@broadcom.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, Tom Rini <trini@konsulko.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sumit Garg <sumit.garg@linaro.org>, dregan@mail.com
+References: <cover.1734537135.git.jerome.forissier@linaro.org>
+ <252364e53d56fab1c77bda74563b24ad8a17d635.1734537135.git.jerome.forissier@linaro.org>
+In-Reply-To: <252364e53d56fab1c77bda74563b24ad8a17d635.1734537135.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 21 Dec 2024 10:10:35 +0200
+Message-ID: <CAC_iWjJ=0fDmKVz2shO1e3EjeLY_e9rWk4zD_Uxgt-Y7nExwpg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] board_init_f(): use static calls
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Devarsh Thakkar <devarsht@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 21 Dec 2024 08:14:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,55 +90,214 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 20, 2024 at 12:04=E2=80=AFAM Linus Walleij <linus.walleij@linar=
-o.org> wrote:
->
-> On Thu, Dec 19, 2024 at 7:50=E2=80=AFPM david regan <dregan@broadcom.com>=
- wrote:
->
-> > Update bcmbca dts to current nand node naming convention.
-> >
-> > Signed-off-by: david regan <dregan@broadcom.com>
-> > Reviewed-by: William Zhang <william.zhang@broadcom.com>
-> > Reviewed-by: Anand Gore <anand.gore@broadcom.com>
->
-> Looks like a reasonable step
-> Acked-by: Linus Walleij <linus.walleij@linaro.org>
->
-> But:
->
-> > -       nandcs@0 {
-> > -               compatible =3D "brcm,nandcs";
-> > -               reg =3D <0>;
-> > -               nand-ecc-strength =3D <4>;
-> > -               nand-ecc-step-size =3D <512>;
-> > -               brcm,nand-oob-sector-size =3D <16>;
-> > -       };
-> > +&nandcs {
-> > +       nand-on-flash-bbt;
-> > +       nand-ecc-strength =3D <4>;
-> > +       nand-ecc-step-size =3D <512>;
-> > +       brcm,nand-oob-sector-size =3D <16>;
->
-> So you're adding nand-on-flash-bbt, maybe we should notice this?
+Hi Jerome
 
-We don't need this option, I'll remove it.
+[...]
 
+> +                         (INITCALL(board_postclk_init);))
+> +       INITCALL(env_init);             /* initialize environment */
+> +       INITCALL(init_baud_rate);       /* initialze baudrate settings */
+> +       INITCALL(serial_init);          /* serial communications setup */
+> +       INITCALL(console_init_f);       /* stage 1 init of console */
+> +       INITCALL(display_options);      /* say that we are here */
+> +       INITCALL(display_text_info);    /* show debugging info if required */
+> +       INITCALL(checkcpu);
+> +       CONFIG_IS_ENABLED(SYSRESET, (INITCALL(print_resetinfo);))
+>         /* display cpu info (and speed) */
+> -       CONFIG_IS_ENABLED(DISPLAY_CPUINFO, (print_cpuinfo,))
+> -       CONFIG_IS_ENABLED(DTB_RESELECT, (embedded_dtb_select,))
+> -       CONFIG_IS_ENABLED(DISPLAY_BOARDINFO, (show_board_info,))
+> -       INIT_FUNC_WATCHDOG_INIT
+> -       INITCALL_EVENT(EVT_MISC_INIT_F),
+> -       INIT_FUNC_WATCHDOG_RESET
+> -       CONFIG_IS_ENABLED(SYS_I2C_LEGACY, (init_func_i2c,))
+> -       announce_dram_init,
+> -       dram_init,              /* configure available RAM banks */
+> -       CONFIG_IS_ENABLED(POST, (post_init_f,))
+> -       INIT_FUNC_WATCHDOG_RESET
+> +       CONFIG_IS_ENABLED(DISPLAY_CPUINFO, (INITCALL(print_cpuinfo);))
+> +       CONFIG_IS_ENABLED(DTB_RESELECT, (INITCALL(embedded_dtb_select);))
+> +       CONFIG_IS_ENABLED(DISPLAY_BOARDINFO, (INITCALL(show_board_info);))
+> +       WATCHDOG_INIT();
+> +       INITCALL_EVT(EVT_MISC_INIT_F);
+> +       WATCHDOG_RESET();
+> +       CONFIG_IS_ENABLED(SYS_I2C_LEGACY, (INITCALL(init_func_i2c);))
+> +       INITCALL(announce_dram_init);
+> +       INITCALL(dram_init);            /* configure available RAM banks */
+> +       CONFIG_IS_ENABLED(POST, (INITCALL(post_init_f);))
+> +       WATCHDOG_INIT();
+
+The previous function was calling
+init, reset, reset for the watchdog.
+The new code does init, reset, init, reset etc. Is this intentional?
+Was that a bug of the existing code?
+
+Thanks
+/Ilias
+>  #if defined(CFG_SYS_DRAM_TEST)
+> -       testdram,
+> +       INITCALL(testdram);
+>  #endif /* CFG_SYS_DRAM_TEST */
+> -       INIT_FUNC_WATCHDOG_RESET
+> -
+> -       CONFIG_IS_ENABLED(POST, (init_post,))
+> -       INIT_FUNC_WATCHDOG_RESET
+> +       WATCHDOG_RESET();
+> +       CONFIG_IS_ENABLED(POST, (INITCALL(init_post);))
+> +       WATCHDOG_RESET();
+>         /*
+>          * Now that we have DRAM mapped and working, we can
+>          * relocate the code and continue running from DRAM.
+> @@ -934,48 +937,48 @@ static const init_fnc_t init_sequence_f[] = {
+>          *  - monitor code
+>          *  - board info struct
+>          */
+> -       setup_dest_addr,
+> +       INITCALL(setup_dest_addr);
+>  #if defined(CONFIG_OF_BOARD_FIXUP) && !defined(CONFIG_OF_INITIAL_DTB_READONLY)
+> -       fix_fdt,
+> +       INITCALL(fix_fdt);
+>  #endif
+>  #ifdef CFG_PRAM
+> -       reserve_pram,
+> +       INITCALL(reserve_pram);
+>  #endif
+> -       reserve_round_4k,
+> -       setup_relocaddr_from_bloblist,
+> -       arch_reserve_mmu,
+> -       reserve_video,
+> -       reserve_trace,
+> -       reserve_uboot,
+> -       reserve_malloc,
+> -       reserve_board,
+> -       reserve_global_data,
+> -       reserve_fdt,
+> +       INITCALL(reserve_round_4k);
+> +       INITCALL(setup_relocaddr_from_bloblist);
+> +       INITCALL(arch_reserve_mmu);
+> +       INITCALL(reserve_video);
+> +       INITCALL(reserve_trace);
+> +       INITCALL(reserve_uboot);
+> +       INITCALL(reserve_malloc);
+> +       INITCALL(reserve_board);
+> +       INITCALL(reserve_global_data);
+> +       INITCALL(reserve_fdt);
+>  #if defined(CONFIG_OF_BOARD_FIXUP) && defined(CONFIG_OF_INITIAL_DTB_READONLY)
+> -       reloc_fdt,
+> -       fix_fdt,
+> +       INITCALL(reloc_fdt);
+> +       INITCALL(fix_fdt);
+>  #endif
+> -       reserve_bootstage,
+> -       reserve_bloblist,
+> -       reserve_arch,
+> -       reserve_stacks,
+> -       dram_init_banksize,
+> -       show_dram_config,
+> -       INIT_FUNC_WATCHDOG_RESET
+> -       setup_bdinfo,
+> -       display_new_sp,
+> -       INIT_FUNC_WATCHDOG_RESET
+> +       INITCALL(reserve_bootstage);
+> +       INITCALL(reserve_bloblist);
+> +       INITCALL(reserve_arch);
+> +       INITCALL(reserve_stacks);
+> +       INITCALL(dram_init_banksize);
+> +       INITCALL(show_dram_config);
+> +       WATCHDOG_RESET();
+> +       INITCALL(setup_bdinfo);
+> +       INITCALL(display_new_sp);
+> +       WATCHDOG_RESET();
+>  #if !defined(CONFIG_OF_BOARD_FIXUP) || !defined(CONFIG_OF_INITIAL_DTB_READONLY)
+> -       reloc_fdt,
+> +       INITCALL(reloc_fdt);
+>  #endif
+> -       reloc_bootstage,
+> -       reloc_bloblist,
+> -       setup_reloc,
+> +       INITCALL(reloc_bootstage);
+> +       INITCALL(reloc_bloblist);
+> +       INITCALL(setup_reloc);
+>  #if defined(CONFIG_X86) || defined(CONFIG_ARC)
+> -       copy_uboot_to_ram,
+> -       do_elf_reloc_fixups,
+> +       INITCALL(copy_uboot_to_ram);
+> +       INITCALL(do_elf_reloc_fixups);
+>  #endif
+> -       clear_bss,
+> +       INITCALL(clear_bss);
+>         /*
+>          * Deregister all cyclic functions before relocation, so that
+>          * gd->cyclic_list does not contain any references to pre-relocation
+> @@ -985,12 +988,11 @@ static const init_fnc_t init_sequence_f[] = {
+>          * This should happen as late as possible so that the window where a
+>          * watchdog device is not serviced is as small as possible.
+>          */
+> -       cyclic_unregister_all,
+> +       INITCALL(cyclic_unregister_all);
+>  #if !defined(CONFIG_ARM) && !defined(CONFIG_SANDBOX)
+> -       jump_to_copy,
+> +       INITCALL(jump_to_copy);
+>  #endif
+> -       NULL,
+> -};
+> +}
 >
-> Do you have to use the explicit ECC config, or can you just use
-> Williams new option
-> brcm,nand-ecc-use-strap;
-> ?
-
-Looks like Phillipe Reynes created this file, Phillipe do you have a prefer=
-ence?
-
+>  void board_init_f(ulong boot_flags)
+>  {
+> @@ -1000,8 +1002,7 @@ void board_init_f(ulong boot_flags)
+>         gd->flags &= ~GD_FLG_HAVE_CONSOLE;
+>         gd->boardf = &boardf;
 >
-> (This can be changed in an additional patch.)
+> -       if (initcall_run_list(init_sequence_f))
+> -               hang();
+> +       initcall_run_f();
 >
-> Yours,
-> Linus Walleij
-
-Thanks for your input!
-
--Dave
+>  #if !defined(CONFIG_ARM) && !defined(CONFIG_SANDBOX) && \
+>                 !defined(CONFIG_EFI_APP) && !CONFIG_IS_ENABLED(X86_64) && \
+> diff --git a/include/initcall.h b/include/initcall.h
+> index 62d3bb67f08..9398a3ec7d5 100644
+> --- a/include/initcall.h
+> +++ b/include/initcall.h
+> @@ -8,6 +8,7 @@
+>
+>  #include <asm/types.h>
+>  #include <event.h>
+> +#include <hang.h>
+>
+>  _Static_assert(EVT_COUNT < 256, "Can only support 256 event types with 8 bits");
+>
+> @@ -35,4 +36,30 @@ typedef int (*init_fnc_t)(void);
+>   */
+>  int initcall_run_list(const init_fnc_t init_sequence[]);
+>
+> +#define INITCALL(_call) \
+> +       do { \
+> +               if (_call()) { \
+> +                       debug("%s(): calling %s() failed\n", __func__, \
+> +                             #_call); \
+> +                       hang(); \
+> +               } \
+> +       } while (0)
+> +
+> +#define INITCALL_EVT(_evt) \
+> +       do { \
+> +               if (event_notify_null(_evt)) { \
+> +                       debug("%s(): event %d/%s failed\n", __func__, _evt, \
+> +                             event_type_name(_evt)) ; \
+> +                       hang(); \
+> +               } \
+> +       } while (0)
+> +
+> +#if defined(CONFIG_WATCHDOG) || defined(CONFIG_HW_WATCHDOG)
+> +#define WATCHDOG_INIT() INITCALL(init_func_watchdog_init)
+> +#define WATCHDOG_RESET() INITCALL(init_func_watchdog_reset)
+> +#else
+> +#define WATCHDOG_INIT()
+> +#define WATCHDOG_RESET()
+> +#endif
+> +
+>  #endif
+> --
+> 2.43.0
+>
