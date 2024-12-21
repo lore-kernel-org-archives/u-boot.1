@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D27FEE77188
-	for <u-boot@archiver.kernel.org>; Fri, 20 Dec 2024 22:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A4F5E77188
+	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 02:52:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D92E28036E;
-	Fri, 20 Dec 2024 23:50:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 831BD803E0;
+	Sat, 21 Dec 2024 03:52:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="AZSVizwK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="plN1pSpY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEB73803CB; Fri, 20 Dec 2024 23:50:26 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0937A80433; Sat, 21 Dec 2024 03:52:52 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A31738035E
- for <u-boot@lists.denx.de>; Fri, 20 Dec 2024 23:50:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B955803CB
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 03:52:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1734735024; x=1735339824; i=xypron.glpk@gmx.de;
- bh=VVCkdZ/DMPOIdFJfgJEEvKLBJqwal++sMtOiavR7olQ=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=AZSVizwKoGoe5jl22oPGROn2z5hvzB5Wz4/k1MfNm9AGAdgOGP57P0BpSYEzYn5I
- Pp91XjOXeNiWDN9dQDBX8ekJa8Fv5kK1jG1nw/R0RK1pR5AlfDwWDDw6k1xZvIiWf
- O0KX4L1hiLVrpKXL92S6L5jEYRJcLrg/M6TeGcI2IepY2BNBvAcOH59N2Ie7IX+nF
- goY3e+wlVsteG6c3cfAtDJgmvLGnqu6h6Ya+oJS2umK8224vc+rhgEp/4BfrW9BIv
- 39D5+NlExys9cPO8z4btT7DbTQzPRSCTHtrrMLHYF4/Zn7IciZxl5RPM1A45IO4Vd
- FupMOlK4NcNvx7XUvA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1McYCb-1tyf0E2tW1-00a0K3; Fri, 20
- Dec 2024 23:50:24 +0100
-Date: Fri, 20 Dec 2024 23:50:20 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 3/6] efi_loader: Depend on BLK
-User-Agent: Thunderbird for Android
-In-Reply-To: <20241220222612.1757884-4-trini@konsulko.com>
-References: <20241220222612.1757884-1-trini@konsulko.com>
- <20241220222612.1757884-4-trini@konsulko.com>
-Message-ID: <FA4AB722-29A4-4B4F-930E-EA22C2420900@gmx.de>
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4BL2qZtX083363;
+ Fri, 20 Dec 2024 20:52:35 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734749555;
+ bh=bt1RB0SfriEgltYPcf57EQk/XpJvNaRa5MM8Pb4wE+o=;
+ h=From:To:CC:Subject:Date;
+ b=plN1pSpYFheJVuyNl0N8fkrRxmOy3ZBzAHuc0R2v9T3bhLXpvjSXu6qEEiX6aiF1E
+ BiDX6+4/1w0KNGIDBX+JF4i8/yXooj4PfaNzlf9oQxMEtOlzUxOJqabJMzIgSvDx7T
+ LFIuU8MF+8Rxjpf6v7J6oDp5ZjRpkEKWhMap7cI4=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BL2qZrp128517;
+ Fri, 20 Dec 2024 20:52:35 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
+ Dec 2024 20:52:34 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 20 Dec 2024 20:52:35 -0600
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BL2qTBs084516;
+ Fri, 20 Dec 2024 20:52:30 -0600
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <lukma@denx.de>,
+ <n-francis@ti.com>, <mkorpershoek@baylibre.com>, <afd@ti.com>,
+ <glaroque@baylibre.com>, <sjoerd@collabora.com>,
+ <martyn.welch@collabora.com>, <rasmus.villemoes@prevas.dk>,
+ <caleb.connolly@linaro.org>, <j-humphreys@ti.com>, <rogerq@kernel.org>,
+ <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH v3 0/3] Add support for USB DFU boot on AM62Px
+Date: Sat, 21 Dec 2024 08:22:20 +0530
+Message-ID: <20241221025229.361625-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:0Ivz4UTa59u1Jb6ZI0dXCI7Qh7vWwk0Ku+w107JLbNNEyKv4X5D
- HrwtjNksUA+7D21sMngZulX2mFIBa7mH2Yopj2AISasR93cGoUqwXnEgAbBgsDtV50fKtkE
- TTtxCfxQPrvuwlFBoxhyIsa0JpRbpiv3Rr5BP9eqlzQJcBEBQZRSEaQ36HIsl+lq9lG2vK5
- QvDKFZ1tHgU6rgc42NdeA==
-UI-OutboundReport: notjunk:1;M01:P0:51UuHcDDxTE=;cGJvdUCHg6Y3b+ROxeRi7FUkKSy
- pFMcjhB0DOBDveGnO9Wcf673P1COXKMLphPMbscEoOattQmXpe8Tqc1jsPm6T6Ku+gNIaNcXv
- FQyMci79Jw5rwGqsguufT2CsNJ5a9ijRnXPOnHpDZp1AJQpJc0F2OPAijZynIigP+m/E65XGy
- CxestqhpgFU1CI8AxVjramziCeLCxUapVjx1WXeiujjquWaysyZUXF03g1kKVpR4Y2Aj/AU+S
- 70TaHonvU/vY2u/hEv1HOq5hLNRCvEt3O3bm5vno4aysJvuOq98vpvpcdh6/kDsfAwz2DFRSa
- hCTggBxZbnmNmMXbkGIVd1Xl3PuPz9SZHLDPNgpIfIn9BDMVBDSblrSI3E3PDCZO+NimKd40n
- /aijlsyVWYmDS3ek3P5GsExLDgHDD+m1iLvTEcDGuAioAPQvui3QjbvjVuBBlMtGT2OVhn8XP
- 2K8zKjilmDYR/sr5KkVeq0luJc/EHF6roYrCO50uDMI2B0/MpIlqUZBsd1VJItGjtK2i7uGyb
- pURNGz/jks1rut5dHsSaga8YXBiF9pb11zTtDoczZXElYDGXCkUaE3KlmkJdOejyRNKLPoJXx
- uWk37mhLULS/aJx+TwCq/JyXeuHj3ARNeLw5Im20bMRpLjwZ4hrUbrOeUd/MaL+9S2VKKEOzc
- fWapnlHQIeP6bqeqmuesSVuZCRnpjeAKohcEpDBWSwH+zKKh/nMK7TYHkwXn3WgI7wavlex+c
- ALMTNJHuR0+KyoYvOim8s/aKwbav2ycyr0zTjuTPNihzYkWtQYT/VkIgvWA2RqYueoc3w3lr6
- NyGulT9O0FPsF+3X6GyVnxpT29IfrglMKOuOmeX4e/Rb1n60yQyiEr4Of5fFfzC4biM983JN5
- uHCzcjsdBrlgw5FR4a/yDqgixOmKQwGfdSU3+Av4TWdIoFa1q8s9a+rI6VdkvDEiapPrKCAkS
- Ps6+zgbq6Na1uUHJlgVnCec0q6avWCBwyuSXHDWZEECstTJTj3ugHD9Z+WZFp81kquCYuk3BX
- aP1WTG77+wdBhMbb7ceosXsKCY79jTQrQg+gDx2LhntDT/4v7MpdLMR4WW8rZvjcgqiKeRlpn
- gi1Gwjz3YjisYPHv7TY1LhyAUbuiA3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,54 +81,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 20=2E Dezember 2024 23:22:19 MEZ schrieb Tom Rini <trini@konsulko=2Ecom>=
-:
->In reworking the BLK usage in Kconfig, I found there's a few issues with
->EFI_LOADER=3Dy and BLK=3Dn=2E In general, we can easily say that
->lib/efi_loader/efi_file=2Ec also should only be built with CONFIG_BLK=2E
->That however leaves the bootmgr code, eficonfig code and then parts of
->efi_device_path=2Ec, efi_boottime=2Ec and efi_setup=2Ec which functionall=
-y
->depend on BLK=2E While these calls can be if'd out, I'm unsure if the
->result is usable=2E So rather than leave that buildable and imply that it
->is, I'm leaving that combination non-buildable and commenting that
->EFI_LOADER depends on BLK in the Kconfig currently=2E
+Hello,
 
-EFI booting using only PXE or HTTP should be possible=2E But I admit we di=
-d not work on support for diskless devices, yet=2E
+This series add support for USB DFU boot on TI's AM62Px SoC which has
+two instances of USB Controllers, of which the USB0 instance of USB
+which is a DWC3 USB Controller is used for USB DFU Boot:
+ROM => tiboot3.bin => tispl.bin => u-boot.img
 
+v2 of this series is at:
+https://patchwork.ozlabs.org/project/uboot/cover/20241218124542.3519447-1-s-vadapalli@ti.com/
+Changes since v2:
+- Collected Reviewed-by tags.
+- Dropped patches 4/5 and 5/5 of the v2 series.
 
->
->Signed-off-by: Tom Rini <trini@konsulko=2Ecom>
+v1 of this series is at:
+https://patchwork.ozlabs.org/project/uboot/cover/20241217131658.2920799-1-s-vadapalli@ti.com/
+Changes since v1:
+- Dropped the first patch of the v1 series since its equivalent has been
+  posted by Jonathan Humphreys <j-humphreys@ti.com> at:
+  https://patchwork.ozlabs.org/project/uboot/patch/20241217204835.3312765-1-j-humphreys@ti.com/
+- Based on the feedback from Mattijs Korpershoek on the second patch of
+  the v1 series, the patches in this series have been updated. More
+  details regarding the changes have been described below the tearline
+  of the respective patches.
+- Collected Reviewed-by tags.
 
-Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+Series is based on commit
+e7d7d3307c6 tools: binman: etype: fit: Append DTB directory to the list of input directories
+of the next branch of U-Boot.
 
+NOTE: Series *depends* on:
+  https://patchwork.ozlabs.org/project/uboot/patch/20241217204835.3312765-1-j-humphreys@ti.com/
+  for functionality in addition to patches 4/5 and 5/5 of the v2 series at:
+  https://patchwork.ozlabs.org/project/uboot/cover/20241218124542.3519447-1-s-vadapalli@ti.com/
 
->---
->Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
->Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
->---
-> lib/efi_loader/Kconfig | 3 ++-
-> 1 file changed, 2 insertions(+), 1 deletion(-)
->
->diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
->index c46ffe3a9d89=2E=2E798dced475e0 100644
->--- a/lib/efi_loader/Kconfig
->+++ b/lib/efi_loader/Kconfig
->@@ -8,13 +8,14 @@ config EFI_LOADER
-> 			SYS_CPU =3D armv7   || \
-> 			SYS_CPU =3D armv8)  || \
-> 		X86 || RISCV || SANDBOX)
->+	# We have not fully removed the requirement for some block device
->+	depends on BLK
-> 	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
-> 	depends on !EFI_STUB || !X86_64 || EFI_STUB_64BIT
-> 	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
-> 	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
-> 	depends on !EFI_APP
-> 	default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
->-	select BLK
-> 	select CHARSET
-> 	# We need to send DM events, dynamically, in the EFI block driver
-> 	select DM_EVENT
+The USB DFU config fragments for AM62x are to be re-used for enabling
+USB DFU boot on AM62Px as follows:
+R5  => am62px_evm_r5_defconfig + am62x_r5_usbdfu.config
+A53 => am62px_evm_a53_defconfig + am62x_a53_usbdfu.config
+
+Regards,
+Siddharth.
+
+Siddharth Vadapalli (3):
+  board: ti: am62px: env: include environment for DFU Boot
+  configs: am62x_r5_usbdfu: extend for AM62Px
+  configs: am62px_evm_a53_defconfig: enable USB DFU support
+
+ board/ti/am62px/am62px.env       |  5 +++--
+ configs/am62px_evm_a53_defconfig | 24 +-----------------------
+ configs/am62x_r5_usbdfu.config   |  3 +++
+ 3 files changed, 7 insertions(+), 25 deletions(-)
+
+-- 
+2.43.0
 
