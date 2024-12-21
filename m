@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F3AE7718B
-	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 17:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26AE1E7718B
+	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 17:45:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90A8F80562;
-	Sat, 21 Dec 2024 18:30:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8221880562;
+	Sat, 21 Dec 2024 18:45:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BIoeDOce";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VWqiZ7xp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 526128056A; Sat, 21 Dec 2024 18:30:31 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id E92028056A; Sat, 21 Dec 2024 18:45:36 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43956803CB
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 18:30:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47525803CB
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 18:45:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-54025432becso3083282e87.1
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 09:30:29 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7b6f19a6c04so251122685a.0
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 09:45:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734802228; x=1735407028; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HjFvzUr/vfNrC/Mr9fyrd8CCMOeDma7eQ25Q0CNpCaE=;
- b=BIoeDOceIwPhPTPqyXu46rp3frtJFnwaRndc6wwRqmpuzwAXf/jwyMJu4W5Vt23Q9G
- PU8DlCMg/aFtHboi/N4DSRv5cmVU84aye+DjgpU3oYQuXJr5JveUjg7jBUXmqOfETN5H
- pwil8m8dVf0KycFIaWeRLrGNgxVc1d74CnsSvQzbJLtc+PqRARy8GhHFYGWHkMSG/PBU
- d2VWv4cq08WCrLvrySYgva77Smf7rofZxpaHKplF6NCQAAP89sNfHfapWgCZLu8QbxiE
- DoqCwDbVZp0bpJ+raGuX6ELAmh/zvjQ2p5Za5sd0O9ZSLPzmFkO4duuCP9toGbIaQ3fm
- RfVA==
+ d=konsulko.com; s=google; t=1734803133; x=1735407933; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=ajjHue8u0/PKcNGxr0SoXKRzOUHirzMZvIVHXLG6QDE=;
+ b=VWqiZ7xp6h+Wl9sGPSClt1Cf1H8AexCztGBUW0DrJTL5jpFOEmHuRRRUVEjVTvDW5P
+ 1TIM8lzwFFe75/VwdIdnz97wD2z6JNEe1dPTjFqxAa7X4WqQDOUxHWUONFxNzAzkMroJ
+ pBbbDgMLBI5GlHknUXcH1kutoxHZ9VtSA51y0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734802228; x=1735407028;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1734803133; x=1735407933;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HjFvzUr/vfNrC/Mr9fyrd8CCMOeDma7eQ25Q0CNpCaE=;
- b=eC/eIYN4CV85ZdPHdv/L8Z3VNkwVWw7v49P0shCkZko+c01l7adcNx3OMkr08+Q5lM
- A9rN8J0qKwq0f62GA6TkJvXZw1QsFTiqZ2cZlbmveDY8mKkzNzR76j2vdQyExSj6CqFz
- Wgue7z+oO25nfG7fmtfGiu2LWdzC3eEeccl+pX//5IydBmxY1X3hTkG1cFxoGv3d2kj0
- gRSe6ZXsnB0AmSk7u39fMQw3gH14601zQjFRLEZO+3MgdQJQnqkILvlj/bm8dMaEiOVN
- 8eEK+zCt8JTUJ35PjCd6V8/FFhdV/V0bg3qBaR4t8d/MbOizzeX4c41bFV0z/tiRGZ6w
- EjPA==
-X-Gm-Message-State: AOJu0Yx1CeyTqWqXqw2Hw6lCAN+8OcRJ56KRxb/2oWFvB5MNsbHcLEo2
- cfhdWo9IXSbGaC/moXuPMB9UhzQDQpL9oEX/+Uvno4VJq+5zrpPPvhFYAcTXZcSBDn0eta7OyzW
- nOjggRZhyd08EwwU+n8XTM229Rmk=
-X-Gm-Gg: ASbGnctrJXoOg7hiA0HMPH3qANrIpIfbTwcQfrHUE3JsLOh+7kgtG0x8jEahg13we1E
- aPvQ1OZr8tARckQLsFVruP1UNVaPwlsdDB6PYHke4Izsih4JRnKy5nUFCww+d8iJjBhUc
-X-Google-Smtp-Source: AGHT+IEqgjUp3vB/PJjOaBbNtyvodMXVKhqpYPg1T1fdGxp1+yuI6pToRH3HHK6FeM/Va0NdP+a194WZfKq28W7xWEc=
-X-Received: by 2002:a05:6512:282a:b0:540:22e0:1f63 with SMTP id
- 2adb3069b0e04-54229533ae2mr2019857e87.19.1734802228201; Sat, 21 Dec 2024
- 09:30:28 -0800 (PST)
+ bh=ajjHue8u0/PKcNGxr0SoXKRzOUHirzMZvIVHXLG6QDE=;
+ b=kGuY/F+a/yU11ewgJJdv/pygBPQlbBMzCq721Rh+ime9+amT2LQV6qBw0knJPxxD2Y
+ vQs2ydeRSYgiglMIkAC4/g7VYQXm5wk+V3DsXugKbptsMj/6i3GpJI5LsgWd+61TWb0E
+ fFuc7OR/dn1yiTJ1CvnE94xuDzbjwqhY9LCD5aHZU1YDRjZdQ/r0L5ehSuXXwYDjrk2n
+ FO9IvH7Q8NNAQ+knhsjRJ3JwgaemP25vBjSHnfHIDIWdS6Ga2BI3ZBwyiaAd3fQkFjJt
+ 9mI4OlTBaTrAsYxD4EhSQTSbSC6I8COz0mj2Z2FIk27VKIvzkAwf06FBJOeFdkCJBwHN
+ A7zg==
+X-Gm-Message-State: AOJu0YyCa7FYw4O7THme7HjwGaxnSY9xn7r8RzSV+JVwZhA2SzgAZMzz
+ W2o2fkDXoA3y7dcvNvjdE2iUe+7FBBwWrkqLLziMxTDc9Qi7I4ecp6QbScNwI8TQe/I9RDFtnXB
+ H3ds=
+X-Gm-Gg: ASbGncuXpoQ2lmDO3wnxsJ1jD/fVBzf2JWVpwN3AgjW68Cxx7jZIFHaCUxkCrrv0M44
+ Z0DBw4f27WZsY3opnGPC4i0ij7CwxJlbOifU1OviSwjUBz+CYrq34TpwWPmBu+jwnBtUsv5WQwH
+ hGvq+aLyNegoB8001JN52FWlgt8dtGDVrtJwnkRMycshJNxf7HbFMV14vJwh2GlpTz33u2dHrmA
+ XQ4Njf0occNql4FDm2FcXRY7Qy2LKkrEwHSk+WWcaXqt7dpP1TTa58P8mXCERK9r6ZVbbNJ8980
+ cqUY
+X-Google-Smtp-Source: AGHT+IG4TXd1HNdmd/w9Rz3ICewDyxV5T0z/DrWYe5x37GVqE9/D4jXi/+aFFOlVzELLq7cmgCgZPw==
+X-Received: by 2002:a05:620a:244c:b0:7b6:d8aa:7ef8 with SMTP id
+ af79cd13be357-7b9ba7b18c6mr1453500585a.37.1734803133029; 
+ Sat, 21 Dec 2024 09:45:33 -0800 (PST)
+Received: from bill-the-cat.tail58a08.ts.net ([189.178.122.190])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b9ac4cd53fsm238231185a.112.2024.12.21.09.45.31
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 21 Dec 2024 09:45:32 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCHv2] doc/develop/distro.rst: Better document upstream definition
+ of extlinux.conf
+Date: Sat, 21 Dec 2024 11:45:29 -0600
+Message-ID: <20241221174529.1839959-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241220144754.3734519-1-trini@konsulko.com>
+References: <20241220144754.3734519-1-trini@konsulko.com>
 MIME-Version: 1.0
-References: <20241220090919.2186070-1-Meng.Li@windriver.com>
-In-Reply-To: <20241220090919.2186070-1-Meng.Li@windriver.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 21 Dec 2024 14:30:17 -0300
-Message-ID: <CAOMZO5CAubaRBmGEFP7RWiZ_RUSFfROxo4VCv4imTzr3M6B_Zg@mail.gmail.com>
-Subject: Re: [PATCH] net: fec_mxc: add DM_FLAG_ACTIVE_DMA flag for FEC network
- driver
-To: Meng Li <Meng.Li@windriver.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- trini@konsulko.com, ye.li@nxp.com, peng.fan@nxp.com, 
- ilias.apalodimas@linaro.org, jerome.forissier@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,14 +94,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 20, 2024 at 6:09=E2=80=AFAM Meng Li <Meng.Li@windriver.com> wro=
-te:
->
-> From: Meng Li <meng.li@windriver.com>
->
-> When FEC network card works as the prime one in u-boot, and is in
-> active status, kernel might crash during booting up stage, especially
-> working with grub. Because the DMA of FEC is still in active status, and
-> copy data into momey if there is network data received. In this case, if
+First, the "Boot Loader Specification" link has moved to a new location,
+so link to that directly. Second, that link does not document as much of
+the extlinux.conf format as I recall the old version doing at least.
+However, the Syslinux Project wiki is the current location of the documentation
+linked to in doc/README.pxe and also has a reference for SYSLINUX. Link
+to both of these.
 
-There is a typo here at "momey".
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+- As Simon noted there is a SYSLINUX page on the Syslinux project wiki
+  as well that documents other options, reword the introductory
+  paragraph more and link to both SYSLINUX and PXELINUX and then our
+  deviances from that.
+---
+ doc/develop/distro.rst | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
+
+diff --git a/doc/develop/distro.rst b/doc/develop/distro.rst
+index 637bc27fc2d7..1d2f9c4c32bc 100644
+--- a/doc/develop/distro.rst
++++ b/doc/develop/distro.rst
+@@ -67,11 +67,16 @@ Boot Configuration Files
+ ------------------------
+ 
+ The standard format for boot configuration files is that of extlinux.conf, as
+-handled by U-Boot's "syslinux" (disk) or "pxe boot" (network). This is roughly
+-as specified at `Boot Loader Specification`_:
++handled by U-Boot's "syslinux" (disk) or "pxe boot" (network). This format is
++not formally standardized and documented in a single location. However, other
++implementations do document it and we attempt to be as compatible as possible.
+ 
++* The UAPI Group Specifications `Boot Loader Specification`_
+ 
+-... with the exceptions that the Boot Loader Specification document:
++* The Syslinux Project documents both `PXELINUX`_ and `SYSLINUX`_ files and is
++  the originator of the format.
++
++That said, we have some differences to these documents, namely:
+ 
+ * Prescribes a separate configuration per boot menu option, whereas U-Boot
+   lumps all options into a single extlinux.conf file. Hence, U-Boot searches
+@@ -440,7 +445,9 @@ way in future u-boot versions.  In particular the <device type>_boot
+ variables (e.g. mmc_boot, usb_boot) are a strictly internal implementation
+ detail and must not be used as a public interface.
+ 
+-.. _`Boot Loader Specification`: https://systemd.io/BOOT_LOADER_SPECIFICATION/
++.. _`Boot Loader Specification`: https://uapi-group.org/specifications/specs/boot_loader_specification/
++.. _`PXELINUX`: https://wiki.syslinux.org/wiki/index.php?title=PXELINUX
++.. _`SYSLINUX`: https://wiki.syslinux.org/wiki/index.php?title=SYSLINUX
+ 
+ .. sectionauthor:: (C) Copyright 2014 Red Hat Inc.
+ .. sectionauthor:: Copyright (c) 2014-2015, NVIDIA CORPORATION.  All rights reserved.
+-- 
+2.43.0
+
