@@ -4,76 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F71E7718B
-	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 20:08:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E541BE7718B
+	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 21:35:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5318480562;
-	Sat, 21 Dec 2024 21:08:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 16D648056A;
+	Sat, 21 Dec 2024 22:35:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DESTR4uk";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="uUJoYEjW";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QwZghCgF";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="UAdGXatu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A48DB8056A; Sat, 21 Dec 2024 21:08:01 +0100 (CET)
+ id 2D3D680586; Sat, 21 Dec 2024 22:35:14 +0100 (CET)
 Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DF6480516
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 21:07:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C4A52803A9
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 22:35:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
 Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YFwM32c54z9sr1;
- Sat, 21 Dec 2024 21:07:59 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YFyHf40Jzz9st5;
+ Sat, 21 Dec 2024 22:35:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734811679;
+ s=mail20150812; t=1734816910;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/MSDskxqaqlQJ8ssajDr37d7EvgzomOF5YsjKx3CpFk=;
- b=DESTR4ukQ5mFuUm/kp9WRLXqm8tZhOAGk4Zp3mn9T+Ihv1US3NET2v7XfUTofiLNpY+0lb
- mc6E1XY6FD2pMdsF3mbl3JP3wKR9cBJ50Mjv3zyQZHYYeueGHznAsmUt+8TXExevNP3HI2
- /65F660h89fL6F+ZVkpS1iCxIX2ftvo731qEcxvNj/4X8n/IXhM9Ibs68uBTSs//3V89fi
- 1ugiRd1u+7sTVKgZACwrJfjmlquKR/MwpsNjasclawK+sEIhp3LwjbfDcWxBj1FQLBAUHS
- iMKZXyczZX0F95KeNpKnqb/7V+h5OgGQNlJuLXeMDURv6Ghqh5XKQrLxCJ5xYQ==
-Message-ID: <2d52a656-2188-4a0e-bd9f-e4154631ae71@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=DzuxHe4OH1uV5YLgWD2chjHtpY+Smrz/uIMBhmUd3wo=;
+ b=QwZghCgFdy+FO2fDZBM3LkeZ4jePzgRQrvqZyD6EchsjBW5DpcUeH9nhjV/MxxH5SN3Pu0
+ l3s3Cv378QqAyAbFPhUmvBTJLaSRrhG5SG3yYqcCIXNjHA4Rsz76jvoWmLwrREVD31PI58
+ HXnsu2zhuJPi/NEN/ZOopJGzO0zVYMu7Q/IfosUWZZbGxEwBkFr+YiylG5wDtyUqAihPWV
+ zonGX1uU/7kSpd52ZTwwQo3G4jPAsgUIaqEk3q9auOsAWWlFkhmD7yTLr1iTrm3jjCOdH0
+ BN+e3jN18ANaemcgrHwPmbVYsqplTH7kYLyEzdskNXrRAD/EqUwR6Fs2UGmYvg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734811677;
+ s=mail20150812; t=1734816908;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/MSDskxqaqlQJ8ssajDr37d7EvgzomOF5YsjKx3CpFk=;
- b=uUJoYEjW4CpmDTS9ksOiNItA3yZnhWNjIY92uSSxE+HM+5gjFgASKKgZy1H+6F3sZNJ3m2
- B8ri7kerDF3YGgfmYxfEaNlY+alre0dDOWsV02SqIGq1tnk3EYNmYPf48fkK5iuL9DzHXh
- DUdg9tRtxEXVXJjsUrrlBwAx9hAm04wkQptAqAodyl1JOxjVZSmE/PgDfIL5EkLsiEnYSx
- pFice80lb1igQqtZ1hvFNKn8SGOEPP9ZUbtojNnTbowA8JaqoRlZdzKyWrF1EKZPmtcRRn
- 7G5l4L7sZqVlSpWq5xyrosLKoPwxPcQtxKxXskvyaHH13xqY5apAai2udQYu7Q==
-Date: Sat, 21 Dec 2024 21:07:55 +0100
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=DzuxHe4OH1uV5YLgWD2chjHtpY+Smrz/uIMBhmUd3wo=;
+ b=UAdGXatuIDxiCQn8r5hxtkMH1YDv6NLLcYXuY1R8uZ+tNiA9zR6lNEAdu9ql943HchqZnh
+ WL2dspcDMV6JcYreuTkszTbu3vAE0/69ftLKQr4cowATVFEMSLjteF/cfbRnbovIVUttsa
+ +wA4hmoogkb4R7GofWhniMk1Nh0Bqz3dnkpvpNsfpiO9k7p7gN7wZiUksWA4XdDH5y26JJ
+ b+LuP8BgLIqffwwx7Sbp8uwb1T7LtaIgqdrktm5ITfF40BaAAz41MQQRkb4cDc0v6RQrkN
+ cf4OvoG/dEl5/I9fsOl6sJJVMTuzTs70B2fhB3mPaBfQeWbQIJVg2i3aO83r5A==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Hai Pham <hai.pham.ud@renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/16] pinctrl: renesas: Add Kconfig symbol for conditional
+ build of full PFC tables
+Date: Sat, 21 Dec 2024 22:34:00 +0100
+Message-ID: <20241221213443.115024-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/1] cmd/setexpr: support concatenation of direct strings
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Massimiliano Minella <massimiliano.minella@se.com>,
- Simon Glass <sjg@chromium.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-References: <20241221151435.43825-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20241221151435.43825-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 09c1c5f05c00a1a486d
-X-MBO-RS-META: dn9iz5aeqyportm96i41k9kqzds5beqw
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: sfni5gceyajzat7fo7wt9bxhhwoogf63
+X-MBO-RS-ID: 619ababc6069160ec87
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,21 +84,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/21/24 4:14 PM, Heinrich Schuchardt wrote:
-> Up to now the setexpr command only supported concatenating string provided
-> by reference. Allow directly passing stings.
-> 
-> With this patch
-> 
->      setexpr.s foo '1' + '3'
-> 
-> sets variable $foo to the value '13'.
-How is this any different from
+By default the pin multiplexing tables used by U-Boot are reduced
+to keep the size of the bootloader low. This option allows build of
+full pin multiplexing tables the same way they are included in the
+Linux kernel. This includes pin multiplexing options for Audio, CAN,
+CANFD, DU, INTC, INTC-EX, MSIOF, PWM, SSI, for which there is no
+U-Boot driver. This option is disabled by default.
 
-setenv foo 13
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Hai Pham <hai.pham.ud@renesas.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/pinctrl/renesas/Kconfig | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-or
+diff --git a/drivers/pinctrl/renesas/Kconfig b/drivers/pinctrl/renesas/Kconfig
+index 57e88604aa2..49845b6d8d4 100644
+--- a/drivers/pinctrl/renesas/Kconfig
++++ b/drivers/pinctrl/renesas/Kconfig
+@@ -11,6 +11,18 @@ config PINCTRL_PFC
+ 	  both the GPIO definitions and pin control functions for each
+ 	  available multiplex function.
+ 
++config PINCTRL_PFC_FULL
++	bool "Renesas pin control drivers (full size)"
++	depends on PINCTRL_PFC
++	default n
++	help
++	  By default the pin multiplexing tables used by U-Boot are reduced
++	  to keep the size of the bootloader low. Enable this option to use
++	  full pin multiplexing tables the same way they are included in the
++	  Linux kernel. This includes pin multiplexing options for Audio, CAN,
++	  CANFD, DU, INTC, INTC-EX, MSIOF, PWM, SSI, for which there is no
++	  U-Boot driver.
++
+ config PINCTRL_PFC_R8A7790
+ 	bool "Renesas RCar Gen2 R8A7790 pin control driver"
+ 	depends on PINCTRL_PFC
+-- 
+2.45.2
 
-setenv foo ${var1}${var2}
-
-?
