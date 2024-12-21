@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0805E7718B
-	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 23:47:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27AC7E7718B
+	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 23:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D28E8056A;
-	Sun, 22 Dec 2024 00:47:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7B714805FC;
+	Sun, 22 Dec 2024 00:47:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fA4wwu6d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="scZ3p4Uy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55593805FC; Sun, 22 Dec 2024 00:47:09 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 818A980606; Sun, 22 Dec 2024 00:47:21 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F13E80516
- for <u-boot@lists.denx.de>; Sun, 22 Dec 2024 00:47:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6529D80516
+ for <u-boot@lists.denx.de>; Sun, 22 Dec 2024 00:47:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7b6fc5bf609so218484585a.1
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 15:47:07 -0800 (PST)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6dd01781b56so35473286d6.0
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 15:47:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734824826; x=1735429626; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734824838; x=1735429638; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/kOAlspqQa7FQBeusooLIcSgkOSska9DeTP2q/81aZo=;
- b=fA4wwu6dEG1eu+4ZT2VQAAVotSTsuOmhm19XbBfYYjihGVp68Kyh9je/Wfvilt+Xx6
- mMYQv7UTlpI58+GWw+m5NvBJbFKMhpQkZ1ys25m7wJ5AYXIMlD9AVGZ8HunkLYr5rZwf
- fiXQz04XpaA325XDm6bu46uSEFxd3pOuQ1sIg=
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wdDkk/qaMquAkqt1YdDsufCfPlo/Q1O5cy3SBmJXxmA=;
+ b=scZ3p4UyZVitsczsHsndhgUeQy8pu5rBmXa+5FqZC81KxTUitSpPtTnd/zOwYiPfp7
+ kbV7JRKiz2+glVCYk50gqX6kkqauypxQXK0A8ziUTERg9sAvm6Gtvqc8pyv10eUKRdJt
+ qVJ8r4YL5lEew3F+PvRtcSLAiJ+SRlaD2CrTM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734824826; x=1735429626;
+ d=1e100.net; s=20230601; t=1734824838; x=1735429638;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/kOAlspqQa7FQBeusooLIcSgkOSska9DeTP2q/81aZo=;
- b=rEpTWJdCA0HJgfi0oxweuuDLpk1+3NaBiOE8qbxAN9IkNr4/LsmVTAFJVTkwh5h7fK
- ENp5pHAUXacp9DUp5horoD9ufXccKwjfgs5xW7jPChF/IU5iTrQkl9F2epieqWCRXMMV
- 1FVuWzehL0fms45sM0ZvjrZuM76a+HrFbW/KM58L+ciq4Jpq1az8HFjWDQQI10Kt/zfj
- BXpiScoA/M9pnSKtrP+4IrSVFsgBKMFZdiXhmRjpEaKPqyeSYaetSBZNpmfVFta0/D+8
- XveLFkjI3YYARFvILiCg39g8btdcy8jVcZNaGMOqBS5doLHiGPK6GRXmjdVJ8MnEU7tC
- Ty3Q==
-X-Gm-Message-State: AOJu0YwBU0ffZ1wSlbFuHizg9nfvqnR1oFH6/hWHp/JoxQzynksto87D
- YODJ944tlgChIYbULtTAHprxcOreor3OF23OkBSsjY9m4thipYHHSV0CyMjed68=
-X-Gm-Gg: ASbGncsPZ9r0pgQDUxlSvul03IVUmCqIr6rJOfCEEEgNl2PxmU7oXEURQuBWOjIbYz6
- BRH2lOKjTDYRF9lhkdO6dN1zZAG8FWGNo6874BA88yi2iJAGcJmNSuc9r6/J9dF7UKlnTdcnvA5
- IjtraDBwWplXJVTR57G6CRUNMvOAX4S5kI7ZjXOR2McP4joEh0YM+UmASSob8mFwBHbnSnEk67/
- jOm4u0pwsF+J7wRVcREZM8ryKPUDAoCFro9MnBBXSyfqcd4347yURD08w==
-X-Google-Smtp-Source: AGHT+IEGkgmDp9hdI0Yf9AhrL32H0+QjYPs962qxc1FYrWxpr3hCJttbkc/bDdtpEFNNpVsxB66ysg==
-X-Received: by 2002:a05:620a:6008:b0:7b6:c2bf:3eeb with SMTP id
- af79cd13be357-7b9ba5efa2fmr1413504885a.0.1734824825929; 
- Sat, 21 Dec 2024 15:47:05 -0800 (PST)
+ bh=wdDkk/qaMquAkqt1YdDsufCfPlo/Q1O5cy3SBmJXxmA=;
+ b=Hu+oq6cp7ZsGs4Wko7vzsjyk3S5MIYpYRFCIQUfzXaGoyteQmXkcoafosvs5006n+z
+ y7dlDnLgoYIiEji8mgTSocmCaNez3N3vv5B0QZ8eYUWSWhWU/h+LIU951Hf3RezlXC3s
+ DcAUz/bIk++RCwFG0r9pmIQC+oF/b1eKqr03HjB6Yr8/xZy5PHxV2Tbd6darVwup5tTW
+ N0kWpaXrtauODCqcsErCEKbJWWViNfzVv1zA1bnCH8BKrUswgdKMhdHiJbnnIGQkQBhd
+ OUVfnG+JIfmyzZhs3T6VF4w1adXdDEZh6V2J+CsAaYhgieBU2H0X5XV9/XXZ34JEOQg9
+ YSVQ==
+X-Gm-Message-State: AOJu0YxkeoU0vvjdVNW4tnHheRhYdLsm0QD2r6MHHwjOAOjcwN6+2QbK
+ +BK5o2MqvTTB6Dr7orubIgHbsEmr1C+g/nGKYyLUR3ZT36G2re7AXApvEmsAKz25qppVSU/FzCj
+ +9kU=
+X-Gm-Gg: ASbGncsI+aTSimAkIs3CjlEUeDuQT6iS95lTXIItlLcZ2Hd3UB+UULr8gcijiMAVqDO
+ o8COE2RiCJM1wopUEnODbLG+/RaW4FWrNQdPyccY06OMBZYwL7SEyMjfP4k3te4FT92346WPoyb
+ 5pNGI8Tuz1J6w5uorMmVwmMGWgvcEvQ9jUy8768tyUeI2A7bp9U0rdwU7R636PsMjBTOh3xApTk
+ +dooXq6ip/rE09tFAC/9JSuXs1DBuQ17lzeX5Q3umoTObD92n69bCgSVg==
+X-Google-Smtp-Source: AGHT+IFBDFEFSJFyNLujosFowni5ycC51bRIZUtAuaa4ZYBYEokxiDnJbaSuhtj1lXzklXBFADauVA==
+X-Received: by 2002:a05:6214:212a:b0:6d8:846b:cd8d with SMTP id
+ 6a1803df08f44-6dd2339abb4mr126070156d6.30.1734824838273; 
+ Sat, 21 Dec 2024 15:47:18 -0800 (PST)
 Received: from bill-the-cat ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac480943sm258137285a.89.2024.12.21.15.47.03
+ 6a1803df08f44-6dd181d528csm30109246d6.112.2024.12.21.15.47.16
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Dec 2024 15:47:04 -0800 (PST)
-Date: Sat, 21 Dec 2024 17:47:01 -0600
+ Sat, 21 Dec 2024 15:47:17 -0800 (PST)
+Date: Sat, 21 Dec 2024 17:47:14 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Hai Pham <hai.pham.ud@renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: Re: [PATCH 01/16] pinctrl: renesas: Add Kconfig symbol for
- conditional build of full PFC tables
-Message-ID: <20241221234701.GP1505244@bill-the-cat>
-References: <20241221213443.115024-1-marek.vasut+renesas@mailbox.org>
+To: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/9] Docker/CI: Only test Xtensa on amd64 hosts
+Message-ID: <20241221234714.GQ1505244@bill-the-cat>
+References: <20241208190741.4192601-1-trini@konsulko.com>
+ <20241208190741.4192601-2-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cneT2/dXnDTYvr8d"
+ protocol="application/pgp-signature"; boundary="gurZP6SKDnbYJ8eN"
 Content-Disposition: inline
-In-Reply-To: <20241221213443.115024-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241208190741.4192601-2-trini@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,49 +96,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---cneT2/dXnDTYvr8d
+--gurZP6SKDnbYJ8eN
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 21, 2024 at 10:34:00PM +0100, Marek Vasut wrote:
+On Sun, Dec 08, 2024 at 11:07:24AM -0600, Tom Rini wrote:
 
-> By default the pin multiplexing tables used by U-Boot are reduced
-> to keep the size of the bootloader low. This option allows build of
-> full pin multiplexing tables the same way they are included in the
-> Linux kernel. This includes pin multiplexing options for Audio, CAN,
-> CANFD, DU, INTC, INTC-EX, MSIOF, PWM, SSI, for which there is no
-> U-Boot driver. This option is disabled by default.
+> The xtensa architecture is interesting in that the platforms we support
+> are only valid on the binary-only toolchains as the DC233C instruction
+> set requires those toolchains (and not the FSF instruction set). Only
+> install the binary toolchain on amd64 hosts and only run the tests on
+> them as well.
 >=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-[snip]
-> +config PINCTRL_PFC_FULL
-> +	bool "Renesas pin control drivers (full size)"
-> +	depends on PINCTRL_PFC
-> +	default n
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-The "default n" is the default when there's no default keyword. Please
-drop when applying, assuming no other changes are requested, thanks!
+For the series, applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---cneT2/dXnDTYvr8d
+--gurZP6SKDnbYJ8eN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdnU3EACgkQFHw5/5Y0
-tywOlAv+ONHKvuBxMeon4CokdiDEoeFemGaLrq9xnCkonkxa2pkwxRERlMxcprhm
-Rhvx+4xllgImjByWaighrBrTKxmF03/QbpjFF3bf8C+1QS7U/nBjALeGjEnGUpFN
-EwzKs6bIF7wzXk58Cc2OH5NbZykc5KNXQq9LW5iatC0ZvII8yRqwtaIWysa4ma+i
-9cOCdm3nCRl4b3jW44fvBJ89SPIcDxxcv0Zd9rxZ7s56V/klPasmRxQsSZhyiyNb
-K/+p6CbhXQyeoYYqCzLjQ+eZUvLxsUCdMF+hyM6zmIaD5faSWRvhpSLhd0C3Y+a6
-HHK3QPE7IAsmS/EFvtbFjPLM3WV8wq9/1cFun0WREGD0Wh48VmnyBZGBmg0WtarC
-Qackx/44l25qTRXTNZ2IMjKqdSRSln7LOZMg8J5mmJKs2HIQW8muWWC+EfhIDK6s
-7sHiwLD44xtDhb0vzRF8c21+28ovE1EFgZwVR+Iu9Cw86h+F4juHq8xEMlwbsntt
-k6qvrLXf
-=3hBF
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdnU4IACgkQFHw5/5Y0
+tyy86AwAj/8CXkqG45myf06Bvv+8R0XGZDlccLwf1YY3jtprK8Co0jiR67YYXNGB
+kO7i6PbNS6uyyjkVSbwG4nm2d3/HVEDyMVpAEOTLc8BsDq1jn2dCu4MYBpYzYaRK
+R/2RYDMGb6IOQVDzH8bnfSkDVf8Vcpsrei7b981vpDtTkAppnLeUN7/09G0QK8Aq
+fA6SFkuHMC2kdtnXGSIxLbHla1eDOnzHXzDpvd5nuoXs0qYyyF6a1SfU6MESoBXK
+ZTCb+tuRK0O0RU16jfw0ZsYPZJJ5/83i7JOCeH/2wfQi/gTVqksLDWRVvWTXYVhP
+XkOW5zuECfiqu7cT05lHyRy/5TnbRNlaFHdUWypA9tEp7RPbBUQtwsgJoNKHEmbN
+wtb+z445njRYDMQ2yh27A2i4bdzgJwzvbd/04a5NVwz8ELcFY4dsGLg0Ae4mcntH
+sdVAEz387gBJk3UHeXJwi3FZSboqQwMjDi2nyRHqyRoUA0MMAT4mCLWE1z3c/A/u
+cH1KDc6C
+=x/Ad
 -----END PGP SIGNATURE-----
 
---cneT2/dXnDTYvr8d--
+--gurZP6SKDnbYJ8eN--
