@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8401E7718B
-	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 17:29:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F3AE7718B
+	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 17:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2001180562;
-	Sat, 21 Dec 2024 18:29:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 90A8F80562;
+	Sat, 21 Dec 2024 18:30:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eEwTtNNC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BIoeDOce";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EA9B80562; Sat, 21 Dec 2024 18:29:20 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 526128056A; Sat, 21 Dec 2024 18:30:31 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEE1C803CB
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 18:29:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43956803CB
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 18:30:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7b9ad0e84e6so289657285a.0
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 09:29:17 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-54025432becso3083282e87.1
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 09:30:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734802157; x=1735406957; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3/ga7vHKJJcEyl2H4vZIzIygAh74PYvvpS8J0yhPysQ=;
- b=eEwTtNNCSe21bj3JwskozhvrE57qIjmHndYDl2L+xxdFolUcSZR8xJg/DZ0i03DYlD
- 6tqr0RikoQ2FtXIOrKZM/qYl7EJnnZ9DKoFeu8MdPvpXXAnjMUyegUuYotgEDekcyDLC
- dEkBPqk8TR2UjyphKjFHEpIvgbSImwBClcqIk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734802157; x=1735406957;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1734802228; x=1735407028; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3/ga7vHKJJcEyl2H4vZIzIygAh74PYvvpS8J0yhPysQ=;
- b=pTBGKPWZ1DFNEAbZCsi+nHSqjCOS+0hEX8iCteBmJugypnkscLZhKfBlcvhj9u7cFi
- g1ZYeIcI0YoVb2w0XF4bgJ8jbM0pL+/sUAmLr+sB65THB/0R8/yXfZ91bTa5xeYVB3dS
- I6WV52C1B7py2Edq1UCwRKnZZhAaRDX8e61t8xJcG0tzaEV3L0RdKu1B/OM5XoDBp9+B
- dZw+LDstWAxElnpwJ3fSIIKUq0GOkBsWH1TOgog1gyq84LfYJFObuIKdqLJunwahwc8S
- F5EchblhVpA6PpOLadCui7Ho000GEeai1QT/FAB+Dfu7er/5ViyuPVS4d0tMJXCbasnH
- upQA==
-X-Gm-Message-State: AOJu0YwyqM63l/ExdyEA79tQf0vMkKfbvDEzXHFDkMqPIcH8ZYt50Cu2
- NGVL9xHwwhoddlIzLe+fxScAlWbI6ULqo/TYsvbF1LfT4DyVpaKE0tJlBumF2bo=
-X-Gm-Gg: ASbGncu+vPiVJAorBxT2ZxL/T3xfu3UJiwZ8KBmV5Vok3ie8Wl3Wr5/KMVhJUTx3pin
- 2KbbmUn0bQ62iKBLNmJ9fY7lV2UlUml2MudETg7QseLVWJ48pbeS/t2Uk2s7OV1wmqM6WfK4hsY
- eLti9BVaGv6Re7A/5b0I4WUKBj00b7FDcvzOXp3fCcb1RI5CtO1OcZeC0Xo1pVd9Vs/JgXUZKGn
- LlkxBYk9Kyph++w5NGYpGDygqcnECzfpH48zgoemLNZZjl3NZv4y3zGHA==
-X-Google-Smtp-Source: AGHT+IF4N5RV8tL6vTrF3O8AhbRj4Nyc1FHioumfOQIA4NjaDLKDUaBwhxKhRjo+2SnqAt3YNalFPw==
-X-Received: by 2002:a05:620a:4708:b0:7b6:c3e2:45f9 with SMTP id
- af79cd13be357-7b9ba836bb8mr1244387685a.48.1734802156817; 
- Sat, 21 Dec 2024 09:29:16 -0800 (PST)
-Received: from bill-the-cat ([189.178.122.190])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac30e816sm237317385a.64.2024.12.21.09.29.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Dec 2024 09:29:15 -0800 (PST)
-Date: Sat, 21 Dec 2024 11:29:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: Re: [PULL] u-boot-sh/master
-Message-ID: <20241221172912.GO1505244@bill-the-cat>
-References: <20241221132849.9569-1-marek.vasut+renesas@mailbox.org>
+ bh=HjFvzUr/vfNrC/Mr9fyrd8CCMOeDma7eQ25Q0CNpCaE=;
+ b=BIoeDOceIwPhPTPqyXu46rp3frtJFnwaRndc6wwRqmpuzwAXf/jwyMJu4W5Vt23Q9G
+ PU8DlCMg/aFtHboi/N4DSRv5cmVU84aye+DjgpU3oYQuXJr5JveUjg7jBUXmqOfETN5H
+ pwil8m8dVf0KycFIaWeRLrGNgxVc1d74CnsSvQzbJLtc+PqRARy8GhHFYGWHkMSG/PBU
+ d2VWv4cq08WCrLvrySYgva77Smf7rofZxpaHKplF6NCQAAP89sNfHfapWgCZLu8QbxiE
+ DoqCwDbVZp0bpJ+raGuX6ELAmh/zvjQ2p5Za5sd0O9ZSLPzmFkO4duuCP9toGbIaQ3fm
+ RfVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734802228; x=1735407028;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HjFvzUr/vfNrC/Mr9fyrd8CCMOeDma7eQ25Q0CNpCaE=;
+ b=eC/eIYN4CV85ZdPHdv/L8Z3VNkwVWw7v49P0shCkZko+c01l7adcNx3OMkr08+Q5lM
+ A9rN8J0qKwq0f62GA6TkJvXZw1QsFTiqZ2cZlbmveDY8mKkzNzR76j2vdQyExSj6CqFz
+ Wgue7z+oO25nfG7fmtfGiu2LWdzC3eEeccl+pX//5IydBmxY1X3hTkG1cFxoGv3d2kj0
+ gRSe6ZXsnB0AmSk7u39fMQw3gH14601zQjFRLEZO+3MgdQJQnqkILvlj/bm8dMaEiOVN
+ 8eEK+zCt8JTUJ35PjCd6V8/FFhdV/V0bg3qBaR4t8d/MbOizzeX4c41bFV0z/tiRGZ6w
+ EjPA==
+X-Gm-Message-State: AOJu0Yx1CeyTqWqXqw2Hw6lCAN+8OcRJ56KRxb/2oWFvB5MNsbHcLEo2
+ cfhdWo9IXSbGaC/moXuPMB9UhzQDQpL9oEX/+Uvno4VJq+5zrpPPvhFYAcTXZcSBDn0eta7OyzW
+ nOjggRZhyd08EwwU+n8XTM229Rmk=
+X-Gm-Gg: ASbGnctrJXoOg7hiA0HMPH3qANrIpIfbTwcQfrHUE3JsLOh+7kgtG0x8jEahg13we1E
+ aPvQ1OZr8tARckQLsFVruP1UNVaPwlsdDB6PYHke4Izsih4JRnKy5nUFCww+d8iJjBhUc
+X-Google-Smtp-Source: AGHT+IEqgjUp3vB/PJjOaBbNtyvodMXVKhqpYPg1T1fdGxp1+yuI6pToRH3HHK6FeM/Va0NdP+a194WZfKq28W7xWEc=
+X-Received: by 2002:a05:6512:282a:b0:540:22e0:1f63 with SMTP id
+ 2adb3069b0e04-54229533ae2mr2019857e87.19.1734802228201; Sat, 21 Dec 2024
+ 09:30:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5jLC8S0DTqLLcdeg"
-Content-Disposition: inline
-In-Reply-To: <20241221132849.9569-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241220090919.2186070-1-Meng.Li@windriver.com>
+In-Reply-To: <20241220090919.2186070-1-Meng.Li@windriver.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 21 Dec 2024 14:30:17 -0300
+Message-ID: <CAOMZO5CAubaRBmGEFP7RWiZ_RUSFfROxo4VCv4imTzr3M6B_Zg@mail.gmail.com>
+Subject: Re: [PATCH] net: fec_mxc: add DM_FLAG_ACTIVE_DMA flag for FEC network
+ driver
+To: Meng Li <Meng.Li@windriver.com>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ trini@konsulko.com, ye.li@nxp.com, peng.fan@nxp.com, 
+ ilias.apalodimas@linaro.org, jerome.forissier@linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,51 +92,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Dec 20, 2024 at 6:09=E2=80=AFAM Meng Li <Meng.Li@windriver.com> wro=
+te:
+>
+> From: Meng Li <meng.li@windriver.com>
+>
+> When FEC network card works as the prime one in u-boot, and is in
+> active status, kernel might crash during booting up stage, especially
+> working with grub. Because the DMA of FEC is still in active status, and
+> copy data into momey if there is network data received. In this case, if
 
---5jLC8S0DTqLLcdeg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, Dec 21, 2024 at 02:28:32PM +0100, Marek Vasut wrote:
-
-> The following changes since commit 5c8ef70f0872399b3764b2addf1ed27e22dc61=
-b0:
->=20
->   Merge tag 'xilinx-for-v2025.01-rc5-v2' of https://source.denx.de/u-boot=
-/custodians/u-boot-microblaze (2024-12-20 08:26:16 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
->=20
-> for you to fetch changes up to fa0f9e83a0654360506321e38c6d92888cb6f7ff:
->=20
->   net: rswitch: Add missing cache invalidate of TX descriptor (2024-12-20=
- 22:20:37 +0100)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---5jLC8S0DTqLLcdeg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdm+uUACgkQFHw5/5Y0
-tyxtggwAoy9TM9BBsWirIcN+p6hxYuTWt1UZsT49HFCKxQ8HvmQ7ktBZCwnjm7Ia
-vtAn8IT/mvPh9bo0rQNj/4TaRxGgPb55fafECjpl4QzYwx6bNvV537E8wfbrhLyt
-ybnqIALc1/pRrpb5PRQhKK3A0BX3C8IonQ0T2BcZRD0nKb39LJlRE0Ax8qeBn8F0
-PMPlenKdUX6I9hwgdVnG52RkcGMmax+mh4huaYc/fWPB+AnW0nQnveRhHnCTJmRA
-6rN0OoODKMXCHO0tzTJ75Xhk3G/f4+KLnlUH+5o8wQ58N7Tkjp0BPVOopHZXQr6B
-dlDQoaJ8uF6s3gl6L1pLhC0KX9lqTUtKhbMs5M1M4wLUp8eK9XUVBuvrZEI+B0nA
-wBk6swlwUSY1Ic92ppSDf6AaOH1Yyfit0N3Lo8uX/ngD9csxi4JUAEsl9Km9v0AD
-2TNMScN8bLKTxmmN3bMT/ChL+LRN1xUr6QaqymnoVbw9Ho/+/Wh4EwJjLjWsPgYl
-PHPq07l0
-=+iMI
------END PGP SIGNATURE-----
-
---5jLC8S0DTqLLcdeg--
+There is a typo here at "momey".
