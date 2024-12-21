@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA097E77184
-	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 08:15:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C013FE77184
+	for <u-boot@archiver.kernel.org>; Sat, 21 Dec 2024 08:22:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F30A380423;
-	Sat, 21 Dec 2024 09:15:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A47B80423;
+	Sat, 21 Dec 2024 09:22:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hhb/so/E";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pV8ff9fp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 439F3803E0; Sat, 21 Dec 2024 09:15:26 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 14E1C80433; Sat, 21 Dec 2024 09:22:09 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05A1180423
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 09:15:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AECD803E0
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 09:22:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e5372a2fbddso2381509276.3
- for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 00:15:23 -0800 (PST)
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e460717039fso2104768276.0
+ for <u-boot@lists.denx.de>; Sat, 21 Dec 2024 00:22:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734768923; x=1735373723; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734769325; x=1735374125; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=j5sJRA2LIK5jOaQLpcw6iVs1Q0vrvURLXFmpwj2fc8s=;
- b=hhb/so/E9a3ICcJWxDNqjgS7H+7t95rgG3DzuKtve5V6mpemgQji4fUmx+9WAHHKel
- cm8btIrw+HHA+WSpoGQot34L6wlGwASRVNSelwYP5PCZ3iAV3tGD6iUYs8FYoIqtN+na
- 4y3X9zA3fEmO0XsRe0Xo2kMnaMeUJX/AqhAqDhmZT6sPElIOOw3xjr5p0bHm4EDoimiV
- 2Z4E8ERt18eE5sc3YDssPzjGvytcqzeKt/r8v9odod0Iykh0OTmR8S0wNTTX2izV/HMv
- YO+7iItSM3uZKj7aFhQICyphw7t/FFxZ5VPNFoiNGuGPTfGXOXfDjOLPUnTiTijd5/a7
- yhoQ==
+ bh=57U/dKIhPTtkgyhCvrJ0IoUhDpJ6eiVI7efOeaXCuqU=;
+ b=pV8ff9fpcnZqbLh5fHt+lAc+Gjc0pOuRQC9Pgn5K6ZNEpV7kruGUoqsuC2O3i4J6Z8
+ FcD4jEgniGiJ2PDK98sCXLnghqbKi4Ihneft/rnTGmnBJVLLooRyNMoErBKRJa0NNtcZ
+ JTFZdxW1/KGYUaRVaE9bzlPI8jK+6hHY4TpHOT/ylHaSB8WUOJYPw3sJPS+/Z6l+Xe/E
+ bG+jgUeYlNnSUcrY6KbjJM3cAYZWrwCvxrvj0uovQ6ATif0/OnJWu2an1LBFojtGo1KR
+ yGBRZy0KDTwg7j/nl0zGArTKDAJ/JMoLaMzBkpqrb7W0IbUIbBUXMOXDKq/cP+oXrs+e
+ PUAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734768923; x=1735373723;
+ d=1e100.net; s=20230601; t=1734769325; x=1735374125;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=j5sJRA2LIK5jOaQLpcw6iVs1Q0vrvURLXFmpwj2fc8s=;
- b=B1prK/dfROOqy1V5CF576SGsn4ltqlUMqLxsUovQ1mGhI6hzjUamgVqWcadnlNx9X7
- njkjV7AGgsB5ZgE0AFz4Z+XqK8F/YqRyof9hRFdJYeNXM/IPTNGK/GrndtXythsgFfki
- A/GDcCmsIyYbcg7mt4Rp8863m6zg3w1oGs5EGHw0xMf09R8XKUrx6Hln8g+1ZQRnEtyW
- eWTnlrgyeSBVGtodk3zx6BvV10TYx6ByTKQWDFeWfU6F7iP+qBXsPnLD6clr9fYRHbeh
- ZlRu+ijAkKiUgliW+FcyZ+mjrVAHIylvLwJSHBztRhtZLiHFfCHq6Yji8Rmz/mISbzCi
- egqw==
-X-Gm-Message-State: AOJu0Yw43oLMSqwBC0mzGb8myEm95w6+FQgQ3IaCmEwJeNm+f7yGTexF
- NJjc+OGb9bfdSywcMvqCaOYV5RYml5zlHWi6l78rDKOWSAAkqmTFFEBbYJ/2a/84Mv67LaEay+P
- gENI3N7Yu3j0Xf9QvVOm0Z9Gn3A0RseLhRbN9Jg==
-X-Gm-Gg: ASbGncvSc5vt7B5/EpEQ/jE55RKeFMCXsPbFwU0Lp68MxzwcEfSxab8jXkH6hJHUFkg
- w4LweRCv1qt8Pj9e/q54KEYG6+ZGAYtaM1JlE5A==
-X-Google-Smtp-Source: AGHT+IFEpU/vQpsdjFuwcf9K1y32R6nQAbVXGDrnEyo6gqTLsbsjDkWCk2wM1rNsmxJzS3vSxubXqVbdB9xAZWwu10Q=
-X-Received: by 2002:a05:6902:2386:b0:e4c:bd70:854c with SMTP id
- 3f1490d57ef6-e538c403f2fmr5004764276.43.1734768922788; Sat, 21 Dec 2024
- 00:15:22 -0800 (PST)
+ bh=57U/dKIhPTtkgyhCvrJ0IoUhDpJ6eiVI7efOeaXCuqU=;
+ b=kYOMQ5AFdBASE4wthbH8qkfeYX+Yoyiew23xTHji9JmDAmkl0F9E9Cmb3OITH+XskO
+ CSFpj+AkuDEFVFEz+WK6aFT/RpGeY/OY0kVtzJxCHfGt1CFdqpxAO4Jg1F+ptGSg9zHz
+ ZiWA7ht2Kf6q7R61aEQzIyu1EvsDqMFuGQTi3dAxqgC/li9bg773fiyzRqVkyZeV2tOD
+ m/u/+tJ34ZfyNlIS4reVwM9RbE7Is12vKN+yVS+lpAoQzQwkKC07I2s1aJKiKEfVS+9W
+ hVoz5PCNfc6yl62uHZbWPgx/d7ZWFs+mQVnFtBlYmPyf9gCr5MuANXm5BCkTNrhsFhyq
+ zJTQ==
+X-Gm-Message-State: AOJu0YxtmZpqyz958XImTiyOcI24a575/W7udw5VamQr5HQyuQXMVUoi
+ m47oii5GGtfeKn6hmjPPVvid0NMNZg66n1rkGEMP/vZwtgOB6QKsKywfUy5W4etHfBwuYLjm0da
+ p8isYs3HaVFT/w5pLxwClfjhSuLJwk+0hnoKI5i+xXMGGAium
+X-Gm-Gg: ASbGncvfK44IjWqOS5cTZIl7fo2nUtqLv7PogGu53UnP1DSDCPs4hinwv0b/1qVfvqK
+ VXbRQ682ZNxq63w0m4dXJgJWS38QUzzTwOssKVQ==
+X-Google-Smtp-Source: AGHT+IGLrtqzlAw0d278HB6XQRQRbBWqEYiws+TNCldtopw101Jx2FzUyP3dw/wwvEUKCeuULYdThBhxRBbNhCqt6g4=
+X-Received: by 2002:a05:6902:138f:b0:e4a:ea18:b449 with SMTP id
+ 3f1490d57ef6-e538c3d10c3mr4685851276.41.1734769325103; Sat, 21 Dec 2024
+ 00:22:05 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1734537135.git.jerome.forissier@linaro.org>
- <217af7ee46d45348bb825caafa20bd91f18ff957.1734537135.git.jerome.forissier@linaro.org>
-In-Reply-To: <217af7ee46d45348bb825caafa20bd91f18ff957.1734537135.git.jerome.forissier@linaro.org>
+References: <20241219023832.1098689-1-sjg@chromium.org>
+ <20241219023832.1098689-2-sjg@chromium.org>
+In-Reply-To: <20241219023832.1098689-2-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 21 Dec 2024 10:14:46 +0200
-Message-ID: <CAC_iWjL+-R1YK5GOYDmBTZVa_+WqzzDhJG+qPubi2LYGLAsx6g@mail.gmail.com>
-Subject: Re: [PATCH v2 3/5] board_init_f_r(): use static calls
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>
+Date: Sat, 21 Dec 2024 10:21:29 +0200
+Message-ID: <CAC_iWjJebots6=UpyrcJbRj9OM2duLhv7Akn6W1mJxCqEqDSCA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/7] efi_loader: Refactor device and image paths into a
+ function
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Moritz Fischer <moritzf@google.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,57 +92,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Dec 2024 at 17:54, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+Hi Simon,
+I don't see any of the requested changes from v2 on this one.
+
+Cheers
+/Ilias
+
+On Thu, 19 Dec 2024 at 04:39, Simon Glass <sjg@chromium.org> wrote:
 >
-> Replace the init_sequence_f_r function array by direct calls.
+> Move this code into a function so it can be called from elsewhere.
 >
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->  common/board_f.c | 18 +++++++-----------
->  1 file changed, 7 insertions(+), 11 deletions(-)
 >
-> diff --git a/common/board_f.c b/common/board_f.c
-> index cebed85ed4d..f47275a2230 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -1016,8 +1016,8 @@ void board_init_f(ulong boot_flags)
->  /*
->   * For now this code is only used on x86.
+> Changes in v3:
+> - Make calculate_paths() static and add a comment
+>
+>  lib/efi_loader/efi_bootbin.c | 85 ++++++++++++++++++++++++------------
+>  1 file changed, 57 insertions(+), 28 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> index b677bbc3124..5016ba7e225 100644
+> --- a/lib/efi_loader/efi_bootbin.c
+> +++ b/lib/efi_loader/efi_bootbin.c
+> @@ -44,12 +44,64 @@ void efi_clear_bootdev(void)
+>         image_size = 0;
+>  }
+>
+> +/**
+> + * calculate_paths() - Calculate the device and image patch given a device
+> + *
+> + * @dev:               device, e.g. "MMC"
+> + * @devnr:             number of the device, e.g. "1:2"
+> + * @path:              path to file loaded
+> + * @device_pathp:      returns EFI device path
+> + * @image_pathp:       returns EFI image path
+> + * Return EFI_SUCCESS on success, else error code
+> + */
+> +static efi_status_t calculate_paths(const char *dev, const char *devnr,
+> +                                   const char *path,
+> +                                   struct efi_device_path **device_pathp,
+> +                                   struct efi_device_path **image_pathp)
+> +{
+> +       struct efi_device_path *image, *device;
+> +       efi_status_t ret;
+> +
+> +#if IS_ENABLED(CONFIG_NETDEVICES)
+> +       if (!strcmp(dev, "Net") || !strcmp(dev, "Http")) {
+> +               ret = efi_net_set_dp(dev, devnr);
+> +               if (ret != EFI_SUCCESS)
+> +                       return ret;
+> +       }
+> +#endif
+> +
+> +       ret = efi_dp_from_name(dev, devnr, path, &device, &image);
+> +       if (ret != EFI_SUCCESS)
+> +               return ret;
+> +
+> +       *device_pathp = device;
+> +       if (image) {
+> +               /* FIXME: image should not contain device */
+> +               struct efi_device_path *image_tmp = image;
+> +
+> +               efi_dp_split_file_path(image, &device, &image);
+> +               efi_free_pool(image_tmp);
+> +       }
+> +       *image_pathp = image;
+> +       log_debug("- boot device %pD\n", device);
+> +       if (image)
+> +               log_debug("- image %pD\n", image);
+> +
+> +       return EFI_SUCCESS;
+> +}
+> +
+>  /**
+>   * efi_set_bootdev() - set boot device
 >   *
-> - * init_sequence_f_r is the list of init functions which are run when
-> - * U-Boot is executing from Flash with a semi-limited 'C' environment.
-> + * Run init functions which are run when U-Boot is executing from Flash with a
-> + * semi-limited 'C' environment.
->   * The following limitations must be considered when implementing an
->   * '_f_r' function:
->   *  - 'static' variables are read-only
-> @@ -1030,18 +1030,14 @@ void board_init_f(ulong boot_flags)
->   * NOTE: At present only x86 uses this route, but it is intended that
->   * all archs will move to this when generic relocation is implemented.
->   */
-> -static const init_fnc_t init_sequence_f_r[] = {
-> -#if !CONFIG_IS_ENABLED(X86_64)
-> -       init_cache_f_r,
+>   * This function is called when a file is loaded, e.g. via the 'load' command.
+>   * We use the path to this file to inform the UEFI binary about the boot device.
+>   *
+> + * For a valid image, it sets:
+> + *    - image_addr to the provided buffer
+> + *    - image_size to the provided buffer_size
+> + *    - bootefi_device_path to the EFI device-path
+> + *    - bootefi_image_path to the EFI image-path
+> + *
+>   * @dev:               device, e.g. "MMC"
+>   * @devnr:             number of the device, e.g. "1:2"
+>   * @path:              path to file loaded
+> @@ -59,7 +111,6 @@ void efi_clear_bootdev(void)
+>  void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
+>                      void *buffer, size_t buffer_size)
+>  {
+> -       struct efi_device_path *device, *image;
+>         efi_status_t ret;
+>
+>         log_debug("dev=%s, devnr=%s, path=%s, buffer=%p, size=%zx\n", dev,
+> @@ -93,34 +144,12 @@ void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
+>         image_addr = buffer;
+>         image_size = buffer_size;
+>
+> -#if IS_ENABLED(CONFIG_NETDEVICES)
+> -       if (!strcmp(dev, "Net") || !strcmp(dev, "Http")) {
+> -               ret = efi_net_set_dp(dev, devnr);
+> -               if (ret != EFI_SUCCESS)
+> -                       goto error;
+> -       }
 > -#endif
 > -
-> -       NULL,
-> -};
-> +static void initcall_run_f_r(void)
-> +{
-> +       CONFIG_IS_ENABLED(X86_64, (INITCALL(init_cache_f_r);))
-> +}
+> -       ret = efi_dp_from_name(dev, devnr, path, &device, &image);
+> -       if (ret != EFI_SUCCESS)
+> -               goto error;
+> -
+> -       bootefi_device_path = device;
+> -       if (image) {
+> -               /* FIXME: image should not contain device */
+> -               struct efi_device_path *image_tmp = image;
+> -
+> -               efi_dp_split_file_path(image, &device, &image);
+> -               efi_free_pool(image_tmp);
+> +       ret = calculate_paths(dev, devnr, path, &bootefi_device_path,
+> +                             &bootefi_image_path);
+> +       if (ret) {
+> +               log_debug("- efi_dp_from_name() failed, err=%lx\n", ret);
+> +               efi_clear_bootdev();
+>         }
+> -       bootefi_image_path = image;
+> -       log_debug("- boot device %pD\n", device);
+> -       if (image)
+> -               log_debug("- image %pD\n", image);
+> -       return;
+> -error:
+> -       log_debug("- efi_dp_from_name() failed, err=%lx\n", ret);
+> -       efi_clear_bootdev();
+>  }
 >
->  void board_init_f_r(void)
->  {
-> -       if (initcall_run_list(init_sequence_f_r))
-> -               hang();
-> +       initcall_run_f_r();
->
->         /*
->          * The pre-relocation drivers may be using memory that has now gone
+>  /**
 > --
-> 2.43.0
+> 2.34.1
 >
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
