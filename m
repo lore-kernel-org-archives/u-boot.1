@@ -4,86 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AC4AE77188
-	for <u-boot@archiver.kernel.org>; Sun, 22 Dec 2024 21:23:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE85E77188
+	for <u-boot@archiver.kernel.org>; Sun, 22 Dec 2024 22:45:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 653B680654;
-	Sun, 22 Dec 2024 22:23:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E60680642;
+	Sun, 22 Dec 2024 23:45:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Zowsr5gu";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mA2PaByd";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="unxVl1pP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16DA680655; Sun, 22 Dec 2024 22:23:41 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E5E0B80654; Sun, 22 Dec 2024 23:45:22 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7E6880642
- for <u-boot@lists.denx.de>; Sun, 22 Dec 2024 22:23:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7CA78805FE
+ for <u-boot@lists.denx.de>; Sun, 22 Dec 2024 23:45:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id F160C100008;
- Mon, 23 Dec 2024 00:23:35 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru F160C100008
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1734902615;
- bh=e9+uvJm7UT4z4jjk8nLu5x/yPbFjOF/P2OuYIcdSPVE=;
- h=Message-ID:Date:MIME-Version:To:From:Subject:Content-Type:From;
- b=Zowsr5guHCsoyYqp0KxZBsMgVWWfyMKuU8loTaTzFGB0qHyXgfEqNstgvyPZh2dy2
- qOjSWOvZnQWT6TP8UgNqBhyjREYjginiv5BeCthTh2mC3mznP/BJMjExKdKUlJXBpK
- DGYtZ+qhzy+ANj1pMczjrbNxxzrfCWhyoOtdXv2fsv6HLDb9SWp5hbbCgbyUWVIuK8
- 6afjkrb9J6ZcxdKwaAYS7OhaDEh4HB71jUD2jCn4PtBtgGSDS39QytyhHF27PM1uPe
- 6Fl4i3iO3Q3wLQLz3j9I/8ahavetc9Y92phP5iAvzlKCIQaHE95rx9JvOEdDaSAqpc
- T30ZT671SfKgg==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 23 Dec 2024 00:23:35 +0300 (MSK)
-Message-ID: <d087411f-c2fd-75a8-6041-31623aba53ae@salutedevices.com>
-Date: Mon, 23 Dec 2024 00:23:29 +0300
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YGbp81Sjwz9scM;
+ Sun, 22 Dec 2024 23:45:20 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734907520;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=2cg6cGj+CAULmhqGdN6ZElqcQupy2GFDgLhwQz+xmOY=;
+ b=mA2PaBydoD5ZW3NCKjgSGTQA4UAZMYIfB79sYUoFggyPT+EQ+0vgb3WVzSYLiymXrg2Iwn
+ yuIVMHUVKiGTjhBDuKB9B/hlGOoyGA6eXwre+XODDbI9cVcReiObnadw92Z0j2kpv46osn
+ iiaqqbfXblQrXIk6jChg1LypKuqDsZVSe4JyYo66E/pHL4vkh7FiD7RqZe0XrdZasSfcZ1
+ BxUd/0ZbWiMwvcAssQc+2RxAd+dJM5HdN02le134xVaXnkYxRnJyxGkmupwrHSK9+LAAvP
+ GxCfjdj1gIGgw69lRuN8jhsxF/GaeVelvJzJYWGoamPrt0QnXd9qoWZsA0wLGQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734907518;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=2cg6cGj+CAULmhqGdN6ZElqcQupy2GFDgLhwQz+xmOY=;
+ b=unxVl1pPm7xqviMN9k9h3cK5v/ZLlqLxnqXFSJOl3BUNKtt9TLxxK+dOAWPZep0+NdT3Co
+ 2qytpB0KgHmTr4yIyh4n4XWz1CjDd8WZZ564yqFhRmneNp8xGECTMTZIWI1TsbjXm217Vs
+ xeHTLv+IgrXb1m6qVUahXzNEjezzy3xp7M49XVdd1IO+q0oEeptAIchK1zspzG4jTk9n7T
+ jW6UD7XkIZsHD12v0PjoGmw/MD/BK9XLaIkALwsMMFLjlRMKysdxR7ZfXGdniRJd8Ws2Jx
+ 95j7wHbdGH18u+s3JV/FwcovdNB7h6PdoH+nDphhfWczgiE20HfXLDoOlwrzxQ==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Sun, 22 Dec 2024 23:44:52 +0100
+Message-ID: <20241222224506.237322-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
- <kernel@salutedevices.com>, <oxffffaa@gmail.com>
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Subject: [PATCH v1] mtd: rawnand: meson: always use OOB bytes during write
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [77.220.140.242]
-X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 189992 [Dec 22 2024]
-X-KSMG-AntiSpam-Version: 6.1.1.7
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 49 0.3.49
- 28b3b64a43732373258a371bd1554adb2caa23cb,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/12/22 19:44:00 #26898733
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: wzpzo9yz741opsirwusm1hwkojngx43u
+X-MBO-RS-ID: 730785553ba2a7d5308
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,36 +81,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If 'oob_required' is not set by the caller (for example 'oobbuf' is NULL),
-then driver doesn't copy OOB data from 'oob_poi' to special controller
-structures, so zeroes will be written as OOB. But, generic raw NAND logic
-in 'nand_base.c' already handles case when OOB is not required to write by
-filling 'oob_poi' with 0xFF's. So let's remove 'oob_required' check to
-always read 'oob_poi' data for OOB.
+The following changes since commit cfe57427c28763fd94e5bdcf89de9dabca4b1684:
 
-Kernel driver (drivers/mtd/nand/raw/meson_nand.c) works in the same way,
-so need to keep same behaviour here.
+  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2024-12-21 09:45:30 -0600)
 
-Fixes: c2e8c4d09a7a ("mtd: rawnand: Meson NAND controller support")
-Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
----
- drivers/mtd/nand/raw/meson_nand.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+are available in the Git repository at:
 
-diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
-index 81122315f4..82a12ac061 100644
---- a/drivers/mtd/nand/raw/meson_nand.c
-+++ b/drivers/mtd/nand/raw/meson_nand.c
-@@ -607,9 +607,7 @@ static int meson_nfc_write_page_hwecc(struct mtd_info *mtd, struct nand_chip *ch
- 		memcpy(meson_chip->data_buf, buf, mtd->writesize);
- 
- 	memset(meson_chip->info_buf, 0, chip->ecc.steps * PER_INFO_BYTE);
--
--	if (oob_required)
--		meson_nfc_set_user_byte(chip, chip->oob_poi);
-+	meson_nfc_set_user_byte(chip, chip->oob_poi);
- 
- 	return meson_nfc_write_page_sub(chip, page, false);
- }
--- 
-2.30.1
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+
+for you to fetch changes up to 70da4f28592d0a2296b27a9126da97cc3b30891e:
+
+  net: rswitch: Do not register disabled ports as ethernet devices (2024-12-22 22:34:32 +0100)
+
+----------------------------------------------------------------
+Marek Vasut (2):
+      ARM: renesas: Consistently enable ENV_OVERWRITE on Renesas R-Car
+      net: rswitch: Do not register disabled ports as ethernet devices
+
+ configs/renesas_rcar.config  | 1 +
+ configs/renesas_rcar2.config | 1 -
+ configs/renesas_rcar3.config | 1 -
+ drivers/net/rswitch.c        | 3 +++
+ 4 files changed, 4 insertions(+), 2 deletions(-)
