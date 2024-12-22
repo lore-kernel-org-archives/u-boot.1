@@ -4,122 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22AB4E77188
-	for <u-boot@archiver.kernel.org>; Sun, 22 Dec 2024 23:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 668A7E77188
+	for <u-boot@archiver.kernel.org>; Sun, 22 Dec 2024 23:49:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A24180655;
-	Mon, 23 Dec 2024 00:47:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DED8A80655;
+	Mon, 23 Dec 2024 00:49:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="V1DOI7PI";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="n6G3bZxV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA208069A; Mon, 23 Dec 2024 00:47:40 +0100 (CET)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ id 7A3EF8069A; Mon, 23 Dec 2024 00:49:24 +0100 (CET)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91FA980654
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 00:47:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5AA080654
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 00:49:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20241222234731epoutp03d412a1cf3707c7c7761adc6cd663a4b9~TpJdBVsuT2804128041epoutp03t
- for <u-boot@lists.denx.de>; Sun, 22 Dec 2024 23:47:31 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20241222234731epoutp03d412a1cf3707c7c7761adc6cd663a4b9~TpJdBVsuT2804128041epoutp03t
+Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20241222234918epoutp02b7a12e6fb161495d5c0d1ace21e0eb8f~TpLA82hwW2689926899epoutp02T
+ for <u-boot@lists.denx.de>; Sun, 22 Dec 2024 23:49:18 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20241222234918epoutp02b7a12e6fb161495d5c0d1ace21e0eb8f~TpLA82hwW2689926899epoutp02T
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1734911251;
- bh=OE670r61Hm+HNt0TVe0ijTXPAC88ga429OzlxbOC6ww=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=V1DOI7PIBG8S4Xf2M1oLatTbbjorj2u7965rcvfUomVjFJdWrJqik89Gs1W48SCrC
- jMUvl9+Jn2guyf9pu7EdNn83nfdkxkcXnHJ+DmVCjSMFT3c38cnU34tneU07gpyspr
- m50sbxMHyhwpFakORmicQ1EJFz781p3IMbnGbWcI=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ s=mail20170921; t=1734911358;
+ bh=bywPkIJ9QM89JLbae1vEFiDldUk9DUpOmbkDpn1Q/Fg=;
+ h=From:To:In-Reply-To:Subject:Date:References:From;
+ b=n6G3bZxVWgyxz20h3admakofMj3cBPCCJKEXz7sPYeAm+sznjzzK8j66yI7iGpvyh
+ sdMsMizKs/s/FBwvc5xNquVNYZtfgVZJYHCONawAkpy8SW+O0rnmmWvhmY8hgHHcCe
+ /fNSETIMEnrslALV+hTC0LOH07RjL1Ti3qXHciEg=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
  epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20241222234730epcas1p2759565ca2a7cee8b3a8c8ba4e595d596~TpJcqLwZo2140221402epcas1p2L;
- Sun, 22 Dec 2024 23:47:30 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.38.233]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4YGd9s1zbRz4x9Q3; Sun, 22 Dec
- 2024 23:47:29 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ 20241222234918epcas1p222b47b2ee525d5d978db1329ce2c0669~TpLAykhJc2608526085epcas1p22;
+ Sun, 22 Dec 2024 23:49:18 +0000 (GMT)
+Received: from epsmgec1p1.samsung.com (unknown [182.195.38.231]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4YGdCx3Syxz4x9Q5; Sun, 22 Dec
+ 2024 23:49:17 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
  epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- A0.E8.23869.C05A8676; Mon, 23 Dec 2024 08:47:24 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20241222234724epcas1p1d611673332203f4dc9dadd6f2597bb24~TpJW5ukOz0179601796epcas1p1c;
- Sun, 22 Dec 2024 23:47:24 +0000 (GMT)
+ 3C.E8.23253.D75A8676; Mon, 23 Dec 2024 08:49:17 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20241222234917epcas1p22d24cbdffbec3b423c9f05eacc771aa7~TpK-zPidv2608526085epcas1p2z;
+ Sun, 22 Dec 2024 23:49:17 +0000 (GMT)
 Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241222234724epsmtrp217951de7ad1752bd492a1a8fb56e281c~TpJW4_oli0286402864epsmtrp2L;
- Sun, 22 Dec 2024 23:47:24 +0000 (GMT)
-X-AuditID: b6c32a36-6f5e970000005d3d-e4-6768a50ca92b
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20241222234917epsmtrp1c6feb8f1cabd21ae6d9576c5820030f8~TpK-ypk7T2890828908epsmtrp1O;
+ Sun, 22 Dec 2024 23:49:17 +0000 (GMT)
+X-AuditID: b6c32a33-5b18370000005ad5-52-6768a57dde5f
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
  epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- CB.10.33707.C05A8676; Mon, 23 Dec 2024 08:47:24 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ 79.30.33707.C75A8676; Mon, 23 Dec 2024 08:49:17 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20241222234724epsmtip2f6a9994024f224564b973260b04f96ac~TpJWp3C602795027950epsmtip2R;
- Sun, 22 Dec 2024 23:47:24 +0000 (GMT)
+ 20241222234916epsmtip1a32ee2d0b88fba4e9d94b48c51cf0c7f~TpK-q6BoS0900709007epsmtip1s;
+ Sun, 22 Dec 2024 23:49:16 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Simon Glass'" <sjg@chromium.org>, "'U-Boot Mailing List'"
- <u-boot@lists.denx.de>
-Cc: "'Peng Fan'" <peng.fan@nxp.com>, "'Quentin Schulz'"
- <quentin.schulz@cherry.de>, "'Sean	Anderson'" <seanga2@gmail.com>, "'Tim
- Harvey'" <tharvey@gateworks.com>, "'Tom Rini'" <trini@konsulko.com>
-In-Reply-To: <20241219182907.2609704-2-sjg@chromium.org>
-Subject: RE: [PATCH v4 01/19] spl: mmc: Avoid size growth in
- spl_mmc_find_device() debug
-Date: Mon, 23 Dec 2024 08:47:23 +0900
-Message-ID: <058d01db54cb$d9824890$8c86d9b0$@samsung.com>
+To: "'Tom Rini'" <trini@konsulko.com>, <u-boot@lists.denx.de>
+In-Reply-To: <20241220222612.1757884-2-trini@konsulko.com>
+Subject: RE: [PATCH 1/6] drivers/mmc/Kconfig: Remove extraneous BLK
+ dependencies
+Date: Mon, 23 Dec 2024 08:49:16 +0900
+Message-ID: <058e01db54cc$1cacf480$5606dd80$@samsung.com>
 X-Mailer: Microsoft Outlook 16.0
 Content-Language: ko
-Thread-Index: AQM/3Of0v9OXnTin/mV3TZmQOcoK8QLuKse/AsBEZKOv/GpAEA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrPKsWRmVeSWpSXmKPExsWy7bCmvi7P0ox0gz9TNSx+rPrCarH+8jZ2
- i633JjBZfNuyjdHi4olPzBZTJ21mt3i7t5Pdgd3j7dMpjB6zGy6yeJzrucvmsXPWXXaPVwdW
- sXucvbOD0WPjux1MAexR2TYZqYkpqUUKqXnJ+SmZeem2St7B8c7xpmYGhrqGlhbmSgp5ibmp
- tkouPgG6bpk5QBcpKZQl5pQChQISi4uV9O1sivJLS1IVMvKLS2yVUgtScgpMC/SKE3OLS/PS
- 9fJSS6wMDQyMTIEKE7Iz/lyfwljwlrNiactMxgbGn+xdjJwcEgImEut29TF3MXJxCAnsYJTo
- +nODBSQhJPCJUaJ3WhVEAsjubN3IDNMxue0eO0RiJ6PErid7oJyXjBITn11mBaliE9CT+L9o
- IVAHB4eIQITE2Rt+IDXMAicYJd4f3wxWwylgIXFk8ykWkBphgSiJTa9yQMIsAqoS7Tc2MYGE
- eQUsJTo/m0LsVZD4+XQZWCezgIjE7M42sHtEBJwkPk5ZzwoyXkLgLbtE4/1tbBANLhIblm9i
- hbCFJV4d3wL1spTE53d72SAamhklli45CNXdwyjxr+E6VLexxP6lk8GuYBbQlFi/Sx9iM5/E
- u689rCBhCQFeiY42IYhqFYlLr18ywcy/++Q/1F4Piea7DUzwwJq06iT7BEb5WUiemIWwYQEj
- 0ypGsdSC4tz01GLDAiN4TCbn525iBKdELbMdjJPeftA7xMjEwXiIUYKDWUmEl0cuNV2INyWx
- siq1KD++qDQntfgQoykwJCcyS4km5wOTcl5JvKGJpYGJmZGxiYWhmaGSOO+ZK2WpQgLpiSWp
- 2ampBalFMH1MHJxSDUwM/n2sW1YIGrRa3OSP258mHXHYbuKm+5y/N7ec8fmtdvCEn/VW9pK1
- u6bsEX6cHPipQvB1BlfCNsb3/AJ2Oh2TguXWcvxNnqb3vf5zQW5u0vbSoI6mV2Gmd7LuuHje
- 3Wu6IX63h1XQpf/zI6M2lhjfmuzU2HL6kpnJle0z5H1/sOU6d2o83NimbdpT2T31psQcvl37
- t3/aafbkJ9ekoIpgR6P7b4U31wX/Wdr92COBLbKuiCX5jEfpJs8bAmcN7/jNaNtxI1/V9bWD
- lzyv4uavngt/qD/zrtq/+lm+5Z3w895KvVFd1dJNv19O/KL9w3myLa9M0pz57u5H+T9ZTLwY
- vUPDWlj1QM4buxUXpZRYijMSDbWYi4oTAVjr15ISBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrILMWRmVeSWpSXmKPExsWy7bCSvC7P0ox0g/0vRSx+rPrCarH+8jZ2
- i633JjBZfNuyjdHi4olPzBZTJ21mt3i7t5Pdgd3j7dMpjB6zGy6yeJzrucvmsXPWXXaPVwdW
- sXucvbOD0WPjux1MAexRXDYpqTmZZalF+nYJXBl/rk9hLHjLWbG0ZSZjA+NP9i5GTg4JAROJ
- yW33gGwuDiGB7YwS1+avZ4NISEl8fjoVyOYAsoUlDh8uhqh5zihx4ukBFpAaNgE9if+LFjKD
- 2CICERJzfy1iArGZBc4wSsw8KQPRsJVRYtehQ4wgCU4BC4kjm0+BNQsDNXxbOR/MZhFQlWi/
- sYkJZBmvgKVE52dTiBsUJH4+XcYKMVNEYnZnG9QuJ4mPU9azTmAUmIUktYCRcRWjaGpBcW56
- bnKBoV5xYm5xaV66XnJ+7iZGcChrBe1gXLb+r94hRiYOxkOMEhzMSiK8PHKp6UK8KYmVValF
- +fFFpTmpxYcYpTlYlMR5lXM6U4QE0hNLUrNTUwtSi2CyTBycUg1MAvGdvzQvh6lt+P7PfNvJ
- BjHH2Ue2nHu3aJn2UQ932Xj3WgO1CL91fAk7dl947Mrwqfz08ynH9xjtPj3z4Trx4NDeH1/c
- VeuqjkpLha6yPjejZIrm7pBrd3gYfu0zFszzubwm6vpiN1/V1KvuJxd+496wn/Xmhvz4xd9e
- Hvq79F7OxSXMFslTPaaoyMR9SlEpEt0WrrhGfcLTzAv1Qu8tJ1/N3Lntyj++xMUnLV+47XP4
- uq+8qzrd2HSlXOZBi8oPAtE3dvopzM/ZuKuG1TuKdQv/ka+lLz9y5+fHT3u0aNLT+Q1nL+c+
- lPENj3eeUtPfaht5YWb78rxrGvtyJt5JYfcvev9Y6l74cw+LzOAv2UosxRmJhlrMRcWJAJbl
- 6GXUAgAA
-X-CMS-MailID: 20241222234724epcas1p1d611673332203f4dc9dadd6f2597bb24
+Thread-Index: AQIkVCVML01cVW0HS3SbK+GrVTCx/QHn25HaAjgBKaGyP/DLsA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrEKsWRmVeSWpSXmKPExsWy7bCmgW7t0ox0g2evJS2mTtrMbvF2bye7
+ A5PHqwOr2D3O3tnBGMAUlW2TkZqYklqkkJqXnJ+SmZduq+QdHO8cb2pmYKhraGlhrqSQl5ib
+ aqvk4hOg65aZAzRfSaEsMacUKBSQWFyspG9nU5RfWpKqkJFfXGKrlFqQklNgWqBXnJhbXJqX
+ rpeXWmJlaGBgZApUmJCdMWH2XsaCPpGKH7f+MDcw3uLvYuTkkBAwkei5sYOxi5GLQ0hgB6PE
+ /VPT2CCcT4wS0+Z+ZIRz3jYuY4ZpefltEzNEYiejxKTHq1ggnJeMEhO2trGDVLEJ6En8X7QQ
+ rENEwFZi39y/YHFOASuJhx/+sYLYwgJBEg+al4PFWQRUJVY9Owhm8wpYSnQsXcQCsU1B4ufT
+ ZWD1zAIiErM726BmOknsPTEVbLGEwDx2iUVnvzB1MXIAOS4Sl54aQ/QKS7w6voUdwpaSeNkP
+ chtIfTOjxNIlB1khnB5GiX8N19kgqowl9i+dDDaIWUBTYv0ufYjFfBLvvvawQsznlehoE4Ko
+ VpG49PolE8z8u0/+Q5V4SDz5EgIJk72MEicnnmGcwCg3C8kLsxAWLGBkWsUollpQnJuemmxY
+ YAiPvuT83E2M4MSkZbyD8fL8f3qHGJk4GA8xSnAwK4nw8silpgvxpiRWVqUW5ccXleakFh9i
+ NAUG5ERmKdHkfGBqzCuJNzSxNDAxMzI2sTA0M1QS5z1zpSxVSCA9sSQ1OzW1ILUIpo+Jg1Oq
+ gamixGHD5RUWVZsbux5qc+15smDPYqZwxaAiLienh1fcZ/6fLRq3T/O6Igf7yq8fIp7Ntbh0
+ RMzrz9GqlSenZti+S2S6lrhYYfvTmv8Lw4pmMoiK7rFcez5pemJxckrLwUssF3b43kxNXiyy
+ pLZ375xnh2e7rhRfVP/hzKP7++aEX1fvqpqx7VP8Cse7gtyX2lYeumkppxIwR+vHhxsBju0K
+ G5qvN5xptal/KnrVuvOaW1LaTcPHXhfVuqbIFX5o2PKkuSQtdvXRifvteSc5Mz+53ukyz80q
+ TkIo9eXGyf55os4lrE9czutmfPTpahUOPcw6P+jH/qTVp7mvu2m6O17cHOzSfL+XQ2l3+/eC
+ iiolluKMREMt5qLiRABFcSAk1QMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpmluLIzCtJLcpLzFFi42LZdlhJTrd2aUa6wdKNjBZTJ21mt3i7t5Pd
+ gcnj1YFV7B5n7+xgDGCK4rJJSc3JLEst0rdL4MqYMHsvY0GfSMWPW3+YGxhv8XcxcnJICJhI
+ vPy2ibmLkYtDSGA7o8TBMx2sEAkpic9Pp7J1MXIA2cIShw8XQ9Q8Z5TYeesXC0gNm4CexP9F
+ C5lBbBEBe4nDXZ1sEEU7GSX2L3nCBJLgFLCSePjhHyvIIGGBAIkjv/JBwiwCqhKrnh1kB7F5
+ BSwlOpYuYoHYqyDx8+kysBuYBUQkZne2Qc13kth7YirLBEb+WUhSCxgZVzGKphYU56bnJhcY
+ 6hUn5haX5qXrJefnbmIEh5NW0A7GZev/6h1iZOJgPMQowcGsJMLLI5eaLsSbklhZlVqUH19U
+ mpNafIhRmoNFSZxXOaczRUggPbEkNTs1tSC1CCbLxMEp1cAU8fHigoyyZY9VU6YKRPTNE7dQ
+ vlcxw5CnfavF1dZVpyYxmSlr/g4UM36sEOFzca5rtYni4fMrvnIu/2kpdFZn2iab78En/7Od
+ Cf7wsiLI7SITY3TgDIWi3TI2+ZvZjfR3OHlG+saKHL+9x/hqQnzaluyyBZKFaqZije77JbPP
+ H5m8uqjTwzXj37Ok3WanPsnE9WcvOjqlSFPKY4bwW6aQXIbv1xevqo69Lvd5X3lElmHg0j9J
+ Zn4hCdc03+qbb3nH8PTQf4aaHvNnFzdfU6i48WvPw0+pt66mlzkcWVfWb2nz1V+R3fjlQnZJ
+ vd+nbuZOvGn0d9796hlW1oeZVysZ9bbwq5SascS7P4o/2q7EUpyRaKjFXFScCAAks/kDlgIA
+ AA==
+X-CMS-MailID: 20241222234917epcas1p22d24cbdffbec3b423c9f05eacc771aa7
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241219182919epcas1p3f6a0504418752f06b26251b352d62910
-References: <20241219182907.2609704-1-sjg@chromium.org>
- <CGME20241219182919epcas1p3f6a0504418752f06b26251b352d62910@epcas1p3.samsung.com>
- <20241219182907.2609704-2-sjg@chromium.org>
+X-CMS-RootMailID: 20241220222641epcas1p464e8f25f80aa301ae7df288d250bba9f
+References: <20241220222612.1757884-1-trini@konsulko.com>
+ <CGME20241220222641epcas1p464e8f25f80aa301ae7df288d250bba9f@epcas1p4.samsung.com>
+ <20241220222612.1757884-2-trini@konsulko.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,13 +133,13 @@ X-Virus-Status: Clean
 
 
 > -----Original Message-----
-> From: Simon Glass <sjg@chromium.org>
-> Sent: Friday, December 20, 2024 3:29 AM
+> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Tom Rini
+> Sent: Saturday, December 21, 2024 7:22 AM
 >
-> The for() loop ends up being in the code even if the log_debug() does
-> nothing. Add a condition to fix this.
+> At this point in time, MMC will always have BLK enabled, so we do not
+> need to list that as a dependency for MMC drivers.
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
@@ -153,34 +147,69 @@ Best Regards,
 Jaehoon Chung
 
 > ---
+>  drivers/mmc/Kconfig | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
 >
-> (no changes since v3)
+> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+> index f4fdf15242ce..9f2fecce3826 100644
+> --- a/drivers/mmc/Kconfig
+> +++ b/drivers/mmc/Kconfig
+> @@ -338,7 +338,7 @@ config MMC_MXC
 >
-> Changes in v3:
-> - Add new patch to avoid size growth in spl_mmc_find_device() debug
+>  config MMC_OWL
+>  	bool "Actions OWL Multimedia Card Interface support"
+> -	depends on ARCH_OWL && DM_MMC && BLK
+> +	depends on ARCH_OWL && DM_MMC
+>  	help
+>  	  This selects the OWL SD/MMC host controller found on board
+>  	  based on Actions S700/S900 SoC.
+> @@ -633,7 +633,7 @@ config MMC_SDHCI_AM654
+>  	bool "SDHCI Controller on TI's Am654 devices"
+>  	depends on ARCH_K3
+>  	depends on MMC_SDHCI
+> -	depends on DM_MMC && OF_CONTROL && BLK
+> +	depends on DM_MMC && OF_CONTROL
+>  	depends on REGMAP
+>  	select MMC_SDHCI_IO_ACCESSORS
+>  	help
+> @@ -716,7 +716,7 @@ config MMC_SDHCI_PIC32
+>  config MMC_SDHCI_ROCKCHIP
+>  	bool "Arasan SDHCI controller for Rockchip support"
+>  	depends on ARCH_ROCKCHIP
+> -	depends on DM_MMC && BLK
+> +	depends on DM_MMC
+>  	depends on MMC_SDHCI
+>  	help
+>  	  Support for Arasan SDHCI host controller on Rockchip ARM SoCs platform
+> @@ -764,7 +764,7 @@ config MMC_SDHCI_XENON
 >
->  common/spl/spl_mmc.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+>  config MMC_SDHCI_TANGIER
+>  	bool "Tangier SDHCI controller support"
+> -	depends on DM_MMC && BLK
+> +	depends on DM_MMC
+>  	depends on MMC_SDHCI
+>  	help
+>  	  This selects support for SDHCI controller on Tanginer
+> @@ -800,7 +800,7 @@ config TEGRA124_MMC_DISABLE_EXT_LOOPBACK
 >
-> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-> index 1f696593216..fe4230170a0 100644
-> --- a/common/spl/spl_mmc.c
-> +++ b/common/spl/spl_mmc.c
-> @@ -81,8 +81,10 @@ static int spl_mmc_find_device(struct mmc **mmcp, int mmc_dev)
->  	struct uclass *uc;
+>  config MMC_SDHCI_ZYNQ
+>  	bool "Arasan SDHCI controller support"
+> -	depends on DM_MMC && OF_CONTROL && BLK
+> +	depends on DM_MMC && OF_CONTROL
+>  	depends on MMC_SDHCI
+>  	help
+>  	  Support for Arasan SDHCI host controller on Zynq/ZynqMP ARM SoCs platform
+> @@ -842,7 +842,7 @@ config MMC_SUNXI_HAS_MODE_SWITCH
 >
->  	log_debug("Selecting MMC dev %d; seqs:\n", mmc_dev);
-> -	uclass_id_foreach_dev(UCLASS_MMC, dev, uc)
-> -		log_debug("%d: %s\n", dev_seq(dev), dev->name);
-> +	if (_LOG_DEBUG) {
-> +		uclass_id_foreach_dev(UCLASS_MMC, dev, uc)
-> +			log_debug("%d: %s\n", dev_seq(dev), dev->name);
-> +	}
->  	ret = mmc_init_device(mmc_dev);
->  #else
->  	ret = mmc_initialize(NULL);
+>  config MMC_PITON
+>  	bool "MMC support for OpenPiton SoC"
+> -	depends on DM_MMC && BLK
+> +	depends on DM_MMC
+>  	help
+>  	  This selects support for the SD host controller on OpenPiton SoC.
+>  	  Note that this SD controller directly exposes the contents of the
 > --
-> 2.34.1
+> 2.43.0
 
 
 
