@@ -4,75 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BAC4E7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 18:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 247CAE7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 18:53:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FFCF80730;
-	Mon, 23 Dec 2024 19:32:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8869780730;
+	Mon, 23 Dec 2024 19:53:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QSh/vLir";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q2D1TyCh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E37C8074B; Mon, 23 Dec 2024 19:32:13 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 9FF8A8074B; Mon, 23 Dec 2024 19:53:46 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 369AE8056A
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 19:32:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 739D2806FC
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 19:53:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aa6b4cc7270so657756566b.0
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 10:32:11 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4679eacf25cso23320821cf.3
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 10:53:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734978730; x=1735583530; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/i719OrjvVCbgGGEO51OCnMkxR62ZspwRjURROHQOiI=;
- b=QSh/vLirTq2T7/DfcJE+TmwoONnMVc3BOhkYgSYIRUaGCrSuYcwLMGx/8qoXslAJ8a
- dcBJXkTsUfp9RJAYV8w3oonXYRG+VVy187I0ocNZxQ4YTvLKMJnUAaeZQUjzhj8QLmsM
- ULFxGpfz3UxWCz2XGkowla177jaHdWlI8q7+evUafq/vWDrWryd0hwnDbndY9vG90yn4
- CAWf2WuA2S5y/86C7kvCyo6TBdd/q7OpMEjPZOXHAeGCowwJ551wPgLsmmgtAyVFZ1dF
- HG6/NT/w/ZaO3NseM6mHA0NC7pHZu38MkWnF4nb4OtmmJN86XR8TxasMd6bNW6M0d5R2
- FFkw==
+ d=konsulko.com; s=google; t=1734980023; x=1735584823; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pWK2cCukamieOEyhtJv5xgIttFGtRrFk9SRYaG1XlGk=;
+ b=Q2D1TyChrr8yeLWUqyq7SCBrYApWXM67c2pvQl9FGNiuLrOJ4XqRJmUoj5BnBiJ1oY
+ AqxyiBQDqTt8LDwnN7oEoaavUNQ0PnzSECaV7id9BBZv5MzCheMhJLjdpT+/EH+TI8ZX
+ W9TYIXL2XViIjM5PBi+4JrAcdB8V7oRL5GGyA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734978730; x=1735583530;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/i719OrjvVCbgGGEO51OCnMkxR62ZspwRjURROHQOiI=;
- b=dWkhvF9sX8PRIxaok+N3RgQmPSdYR32O1WkJkaQmMgOlNEwnLxj8BOgsLiSS92eoH2
- OHQR4EKIS0rxuABrtTpS7xXMcvCIdKxG4a1cM3esnIgjSpPN1j54uatkbMXLnIOF2C/W
- hF7VbwDUAMliJweOqgsQ9mxRKB+/e8RzDHIYXLQd3NhmuYnMMG99TQlFxvJ042TPHfoS
- 0mN3puc3Y865WRlAFBDZkIqXuuHpmBm9jE4JrteenAwA4cmtFfZJm5nF8Vaa1F9nZ5FT
- QyDV6OTVs2ovzOKPnAj1mzUBeHWSVUGSXeFPukEN1HyYY1Zys6sHjfN1dXjifpI7YGfn
- Q0Ng==
-X-Gm-Message-State: AOJu0Yxlus37i0sVwx1UCxbVmSCBdLGwRtKElzPO1pAW3cQQ1RBsfDK9
- FuOorqkeFFoEiVkpStDWBwPvck8okPcpIAGjpKNcpEgTpMbuyIG9RLVS9yT2mvTlgfKeqj019f+
- Y+GHelqAWk2TQH++AGBWhjj4mZSM=
-X-Gm-Gg: ASbGncu7CnLavEtNFra+6W3dRI3oyRXjxKEHUoLwIgKI5pBtgCfopRisuGf+t7letFE
- k3U1EDSUjtmhTv7Spm1dMjZS6a+66HPacY9HoJuLJMb37ttckXs0=
-X-Google-Smtp-Source: AGHT+IGUAuNlaJcB8DkYxDZlljpJKyqGvEHRzH/rDcAmtlBTXu+JQSqZpg3RnTTWD0IZays6+7bnz5NiY0lxvpb4h6U=
-X-Received: by 2002:a05:6402:348d:b0:5d4:55e:f99e with SMTP id
- 4fb4d7f45d1cf-5d81ddc09abmr30765761a12.18.1734978730330; Mon, 23 Dec 2024
- 10:32:10 -0800 (PST)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1734980023; x=1735584823;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pWK2cCukamieOEyhtJv5xgIttFGtRrFk9SRYaG1XlGk=;
+ b=gybIDnNfuG3q2cTef+rW0qg4ukLNxS21CGGtBvHHgDuRD94BGvYdciSxmW9CIbbs6J
+ 7Y0B2cNNRwqFr3FkYy8RtVgbPLyhgVd5l7nQdVaiuCLkGMDxuhwUAMbKgICd64/dR5ik
+ Tj2Yhp34DwZjb+gjl7j3h9cJrNzdlme3kYNRD8Q/h7jkk8rcZza1tftQWru1NafEkJTs
+ l0fFzbuUrk/nBlQMNoyapMJuZyPlI4J9URspVM7/gIw/r1BoqBf5Pa1aR9A9dNp9++rr
+ mrfTn9/1hTelaA4SA8oorzaCbCbleLgozDMmHf9n0MlyGHRbo8vLsGvC4Yz79chlv6bi
+ GfHQ==
+X-Gm-Message-State: AOJu0YxmeodtQdZClFKy9Oqs5nvy73oFfOiHtsz2Woov0zExV6xwbCRq
+ xV/mxA88Ct2CQ6icwky8kHeNbJ7EV71BiGh7YSuDod6zr9s4VY2Ssr+4otIKyTG7XUIbkK+0gfK
+ u
+X-Gm-Gg: ASbGnct52JFut+05BWbMjgrmdAPT9G1FyQkCI2JqgCkaob14BB2DkJDy2+eRUWdpyT8
+ pnF35lrgKJsOKOP64oAiDDgUAGpXXDvLVt/IstOR+ZH0kafkjuHqepHXl+Hku3fxwrN+UbwYgRu
+ k8jGevRLYIkxQ77Q2rDBFxFT5mWdsJFZqSoDUvcKmKxdeFJDUaALAS0AOJDGlOkOkpSQdSRaKbl
+ ZuuKt5aBqhDqfMkwqOU2jkTIF8oRkJ+ecBv8W1u1D7jBwsvx9ENMteYew==
+X-Google-Smtp-Source: AGHT+IEDACEuduO6tDsy7FPCUxU8HyT/rGN5l7tnbEM+9of/MyA2P2pPua5ymLWE/sgmO2W71nPUGw==
+X-Received: by 2002:ac8:7f41:0:b0:466:77d0:592c with SMTP id
+ d75a77b69052e-46a4a8b643bmr226019181cf.8.1734980023245; 
+ Mon, 23 Dec 2024 10:53:43 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46a3eb1760fsm46304071cf.71.2024.12.23.10.53.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Dec 2024 10:53:41 -0800 (PST)
+Date: Mon, 23 Dec 2024 12:53:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Peter Robinson <pbrobinson@gmail.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 4/6] blk: Make block subsystems select BLK
+Message-ID: <20241223185338.GT1505244@bill-the-cat>
 References: <20241220222612.1757884-1-trini@konsulko.com>
  <20241220222612.1757884-5-trini@konsulko.com>
-In-Reply-To: <20241220222612.1757884-5-trini@konsulko.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 23 Dec 2024 18:31:58 +0000
-Message-ID: <CALeDE9M8X7ZK=JSxgADA75XLaJo40g0fKVB3PYHttouj1M1AfQ@mail.gmail.com>
-Subject: Re: [PATCH 4/6] blk: Make block subsystems select BLK
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ <CALeDE9M8X7ZK=JSxgADA75XLaJo40g0fKVB3PYHttouj1M1AfQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="RR/SdhNUkaIrFjyQ"
+Content-Disposition: inline
+In-Reply-To: <CALeDE9M8X7ZK=JSxgADA75XLaJo40g0fKVB3PYHttouj1M1AfQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,151 +97,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Dec 2024 at 22:36, Tom Rini <trini@konsulko.com> wrote:
 
-> The BLK symbol has a few meanings, one of which is that it controls the
-> driver model portion of a "block device". Rather than having this hidden
-> symbol be "default y if ..." it should be select'd by the various block
-> subsystems.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
->
+--RR/SdhNUkaIrFjyQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Just a minor query against the USB change, other than that the rest looks
-fine.
+On Mon, Dec 23, 2024 at 06:31:58PM +0000, Peter Robinson wrote:
+> On Fri, 20 Dec 2024 at 22:36, Tom Rini <trini@konsulko.com> wrote:
+>=20
+> > The BLK symbol has a few meanings, one of which is that it controls the
+> > driver model portion of a "block device". Rather than having this hidden
+> > symbol be "default y if ..." it should be select'd by the various block
+> > subsystems.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> >
+>=20
+> Just a minor query against the USB change, other than that the rest looks
+> fine.
+[snip]
+> > diff --git a/drivers/usb/Kconfig b/drivers/usb/Kconfig
+> > index 960b6a906ac4..99c6649e4178 100644
+> > --- a/drivers/usb/Kconfig
+> > +++ b/drivers/usb/Kconfig
+> > @@ -1,5 +1,6 @@
+> >  menuconfig USB
+> >         bool "USB support"
+> > +       select BLK
+> >
+>=20
+> Shouldn't this be against USB_STORAGE further down the file?
 
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+So, this is a 1:1 translation of what we have today. That said, it
+likely could be done at the USB_STORAGE level for USB host, and
+USB_FUNCTION_MASS_STORAGE for gadget (the entry for CMD_USB_MASS_STORAGE
+is depends on BLK) ? I was slightly worried about opening up a number of
+problems if I poked too hard on this area and didn't want the series to
+get too big.
 
+--=20
+Tom
 
-> ---
->  drivers/ata/Kconfig    | 2 ++
->  drivers/block/Kconfig  | 7 +++----
->  drivers/mmc/Kconfig    | 1 +
->  drivers/nvme/Kconfig   | 1 +
->  drivers/scsi/Kconfig   | 1 +
->  drivers/usb/Kconfig    | 1 +
->  drivers/virtio/Kconfig | 1 +
->  7 files changed, 10 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/ata/Kconfig b/drivers/ata/Kconfig
-> index 4fbb63a148ac..29ceab849c02 100644
-> --- a/drivers/ata/Kconfig
-> +++ b/drivers/ata/Kconfig
-> @@ -1,6 +1,7 @@
->  config AHCI
->         bool "Support SATA controllers with driver model"
->         depends on DM
-> +       select BLK
->         help
->           This enables a uclass for disk controllers in U-Boot. Various
-> driver
->           types can use this, such as AHCI/SATA. It does not provide any
-> standard
-> @@ -9,6 +10,7 @@ config AHCI
->
->  config SATA
->         bool "Support SATA controllers"
-> +       select BLK
->         help
->           This enables support for SATA (Serial Advanced Technology
->           Attachment), a serial bus standard for connecting to hard drives
-> and
-> diff --git a/drivers/block/Kconfig b/drivers/block/Kconfig
-> index 5283d8981e09..cc75bad02b8c 100644
-> --- a/drivers/block/Kconfig
-> +++ b/drivers/block/Kconfig
-> @@ -1,8 +1,5 @@
->  config BLK
-> -       bool # "Support block devices"
-> -       depends on DM
-> -       def_bool y if MMC || USB || SCSI || NVME || IDE || AHCI || SATA
-> -       def_bool y if EFI_MEDIA || VIRTIO_BLK || PVBLOCK
-> +       bool
->         help
->           Enable support for block devices, such as SCSI, MMC and USB
->           flash sticks. These provide a block-level interface which permits
-> @@ -100,6 +97,7 @@ config TPL_BLOCK_CACHE
->  config EFI_MEDIA
->         bool "Support EFI media drivers"
->         default y if EFI || SANDBOX
-> +       select BLK
->         help
->           Enable this to support media devices on top of UEFI. This enables
->           just the uclass so you also need a specific driver to make this
-> do
-> @@ -139,6 +137,7 @@ endif  # EFI_MEDIA
->
->  config IDE
->         bool "Support IDE controllers"
-> +       select BLK
->         help
->           Enables support for IDE (Integrated Drive Electronics) hard
-> drives.
->           This allows access to raw blocks and filesystems on an IDE drive
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> index 46513db0d6e3..4827834b4aab 100644
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -3,6 +3,7 @@ menu "MMC Host controller Support"
->  config MMC
->         bool "MMC/SD/SDIO card support"
->         default ARM || PPC || SANDBOX
-> +       select BLK
->         select DM_MMC
->         help
->           This selects MultiMediaCard, Secure Digital and Secure
-> diff --git a/drivers/nvme/Kconfig b/drivers/nvme/Kconfig
-> index 73edb3551606..d138867666bd 100644
-> --- a/drivers/nvme/Kconfig
-> +++ b/drivers/nvme/Kconfig
-> @@ -4,6 +4,7 @@
->
->  config NVME
->         bool "NVM Express device support"
-> +       select BLK
->         help
->           This option enables support for NVM Express devices.
->           It supports basic functions of NVMe (read/write).
-> diff --git a/drivers/scsi/Kconfig b/drivers/scsi/Kconfig
-> index 7e21c4ae2bb8..fc87d34cca39 100644
-> --- a/drivers/scsi/Kconfig
-> +++ b/drivers/scsi/Kconfig
-> @@ -1,5 +1,6 @@
->  config SCSI
->         bool "Support SCSI controllers with driver model"
-> +       select BLK
->         help
->           This enables support for SCSI (Small Computer System Interface),
->           a parallel interface widely used with storage peripherals such as
-> diff --git a/drivers/usb/Kconfig b/drivers/usb/Kconfig
-> index 960b6a906ac4..99c6649e4178 100644
-> --- a/drivers/usb/Kconfig
-> +++ b/drivers/usb/Kconfig
-> @@ -1,5 +1,6 @@
->  menuconfig USB
->         bool "USB support"
-> +       select BLK
->
+--RR/SdhNUkaIrFjyQ
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Shouldn't this be against USB_STORAGE further down the file?
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdpsasACgkQFHw5/5Y0
+tyxt8wwAjtMdxXM2kRRH/8saU0u+4KbCk6DQ7wnrVfaUiPt9NJsd+6eyNqmfGF71
+x/c5QFCyfN8Sg5iXvoUn+ID3GYWa9xm9NYMyH2Z3jFKmG8eN12tQzdiGyz3QP1gz
+r+z2o7tTSR0ZVSoPqP1A5Rx79MNzS8apIcG/pXCmjWkBAT00jE5Etgo0xj72YWcT
+GYBvaWNiIdP9hMjuN9hI/iCYUBcWYEho13E1zsbR5Xn2qlQkkX3YEjWAC1J7ifg4
+GzPKsXRrOjfXusu1vM+t5mqnftXEP0w7FbHI2vEzHZ35hK3l553O0Jf7+/FRfFso
+/5/P/WEIEOjLlWFtUXC+XKBDfDiqsRnbCRBBe48NYkdV6gMe/ohBFwWHm/rOFv5n
+pMxEBB43kzLGI+HVF0IhRj7MpwNopLy+VSL1P4tGclq47me7FV6XsQD7iwJgDuyk
+b2F9jbAex1cx2KNvUmW5iKtGUeaBGO3HWeXbS1t5m78kylEHmUKmNB6yK3qKyFTO
+n+2ersTh
+=SK+1
+-----END PGP SIGNATURE-----
 
->         ---help---
->           Universal Serial Bus (USB) is a specification for a serial bus
->           subsystem which offers higher speeds and more features than the
-> diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
-> index 1de68867d52e..512ac376f185 100644
-> --- a/drivers/virtio/Kconfig
-> +++ b/drivers/virtio/Kconfig
-> @@ -64,6 +64,7 @@ config VIRTIO_NET
->  config VIRTIO_BLK
->         bool "virtio block driver"
->         depends on VIRTIO
-> +       select BLK
->         help
->           This is the virtual block driver for virtio. It can be used with
->           QEMU based targets.
-> --
-> 2.43.0
->
->
+--RR/SdhNUkaIrFjyQ--
