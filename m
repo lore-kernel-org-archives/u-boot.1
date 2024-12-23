@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FF46E7718D
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03256E7718D
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:36:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C70D480755;
-	Mon, 23 Dec 2024 14:35:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2CD7C80780;
+	Mon, 23 Dec 2024 14:35:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="v3fhcoCI";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="AGHCJfeu";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="N3Y+wLAE";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Yoo0aaPA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4C6B80748; Mon, 23 Dec 2024 14:35:35 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id F41D08073D; Mon, 23 Dec 2024 14:35:37 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA2E380713
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:35:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B8CC280758
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:35:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -32,49 +32,48 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YGzYK3cl3z9syY;
- Mon, 23 Dec 2024 14:35:33 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YGzYL4Cpqz9spX;
+ Mon, 23 Dec 2024 14:35:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734960933;
+ s=mail20150812; t=1734960934;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=s/ONZ3dmI2cwrlt6S2ayJKq/v73uq9bvnshbEzjnjg4=;
- b=v3fhcoCIeQTYxkNyrOhGXQFi9k8UdTYNxqTCPPofQjrJVQ3wis2ny6bIYZRrUPKWEEdUjL
- LbIxepj+7FzUBbIH/pQemvF44NCHaFBK6bSx55D7L4kE77gXnSWQcMx+KkHataxMLsK/+O
- bqR0pY2fMzJCtU+6LxOcou+U/YgaQXXy3F67OXN6tu+I+0nXvdk/T80OoJzC1vNlRR4Ury
- t1eNvWw0xmzJsjXJUUSieFuA0+RcxQKfcjKMtvuQ8v5kTldfcXtEsSTvZVFcymY4Bh0K3n
- 7gddOY7KavSE7vCWreCFjg6XOt9CKCdZIW2K2qc3Y4njFwaEazjxarPYWUkHAA==
+ bh=9hhHUT0/kRUnxJgaBifuiUmtJMZPQeLFBdQ979bHEM8=;
+ b=N3Y+wLAEB4Ny12xjlwRlqNDDHDPS/I0mmj8mRmI3S/o7x29Vhlp8mz1T8i1S5kw6jeb0lY
+ fJXT48bM97eX6yFUzlVgovVnPuw7QVupz14FoStaCKVDYYxGstTEaKlP8wPBjsp9YyyME0
+ BDPySABbmKhmPA651wK4bId3ZlwNTYDaTtQtnhqDFBMUp1ri60LuVpgNYVYu0nnNaGQQNx
+ NQbUV9KtMM/ZAcZLGXu57isXjKCpyKm+/zJFSF0e5vRh0cDPXKNs8hpsWpxn7NhJv9lnpS
+ /7L9GdzYtzpbs32T2tEcxgFMGnmYazvuaEU54phmrazGXZ/o86lzf2g6Xl2wQw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734960931;
+ s=mail20150812; t=1734960932;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=s/ONZ3dmI2cwrlt6S2ayJKq/v73uq9bvnshbEzjnjg4=;
- b=AGHCJfeu8jpk/9/0KynOzzFNQCZkamAHxbN5Y8h2EpMrjWWF+wtwdXV25jVQQ5ghjmT0/o
- WbhN9OdBY5ehi6UzttGh/QTxOzpdP30vFYEq27XiO+AOQqPSQ4OkP5Fq8RkB7WOyhuH1sG
- 5sqQp6Slgpa5uU/pi4gPVwLz7B6qJoQWRBmNAI4v+F1Uko8zd3G/VD7cJDRL5hv9MtvK0+
- 0UJoX2fFUGFXd1O5powBwYjqrccCUliHVvK9CZ8hpIh9Z8FBT5CbA/LKfk0aVf2c4v+Sgm
- OEZ9cUsoSjLxCtdMy4u0I+zIzw94mA1lUmoyFtk4K4jB8/C0QvPIGtjDyRq0sQ==
+ bh=9hhHUT0/kRUnxJgaBifuiUmtJMZPQeLFBdQ979bHEM8=;
+ b=Yoo0aaPAQGClYeKWvNtxDStRg0H0mYnVDCrXrpXD66b+GhFgozC4fND58TgTL5Po8R+PT5
+ CPwT/IzOiILp9pddE5X6lS/GohdGp2BmFIY6UGJT1bcOuM53o6EFmx+fHrvB7dvSyaZRYH
+ Ugpu0omsE24vKCV2z88PfNu177pzNwT2s8Ijztso5G51mdiK/V0xR4BmpfdWezYi1TApT2
+ xPGq1xXKJXyv0GpguJj1J+HnD/pZNRcGSBVs5BT8KrJCpMnioywRR501KUaSSBcqy1oofW
+ 07RgCWXcEri9PqDtybRpmUp9Lqy+I+XKi+cewMWZ6/FK1w3XLqqbU1sPE0wD/w==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Hai Pham <hai.pham.ud@renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 07/16] pinctrl: renesas: Minimize R8A77960 M3-W and
- R8A77961 M3-W+ PFC tables
-Date: Mon, 23 Dec 2024 14:34:11 +0100
-Message-ID: <20241223133459.15748-7-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 08/16] pinctrl: renesas: Minimize R8A77965 M3-N PFC tables
+Date: Mon, 23 Dec 2024 14:34:12 +0100
+Message-ID: <20241223133459.15748-8-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20241223133459.15748-1-marek.vasut+renesas@mailbox.org>
 References: <20241223133459.15748-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 3mf569ggfdsda735cik6euopipd677eb
-X-MBO-RS-ID: 4bc5b08e41fa87ffbcf
-X-Rspamd-Queue-Id: 4YGzYK3cl3z9syY
+X-MBO-RS-ID: 1a60d73ef2908729dc5
+X-MBO-RS-META: y5hiobun3psfd1bp8pkn96q7e59u1p6d
+X-Rspamd-Queue-Id: 4YGzYL4Cpqz9spX
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,14 +114,14 @@ Cc: u-boot@lists.denx.de
 ---
 V2: No change
 ---
- drivers/pinctrl/renesas/pfc-r8a7796.c | 48 +++++++++++++++++++++++++++
+ drivers/pinctrl/renesas/pfc-r8a77965.c | 48 ++++++++++++++++++++++++++
  1 file changed, 48 insertions(+)
 
-diff --git a/drivers/pinctrl/renesas/pfc-r8a7796.c b/drivers/pinctrl/renesas/pfc-r8a7796.c
-index a289397fb8f..7bc9fb709ea 100644
---- a/drivers/pinctrl/renesas/pfc-r8a7796.c
-+++ b/drivers/pinctrl/renesas/pfc-r8a7796.c
-@@ -1568,6 +1568,7 @@ static const struct sh_pfc_pin pinmux_pins[] = {
+diff --git a/drivers/pinctrl/renesas/pfc-r8a77965.c b/drivers/pinctrl/renesas/pfc-r8a77965.c
+index 2852ae64ec0..97fde005de6 100644
+--- a/drivers/pinctrl/renesas/pfc-r8a77965.c
++++ b/drivers/pinctrl/renesas/pfc-r8a77965.c
+@@ -1572,6 +1572,7 @@ static const struct sh_pfc_pin pinmux_pins[] = {
  	PINMUX_NOGP_ALL(),
  };
  
@@ -130,7 +129,7 @@ index a289397fb8f..7bc9fb709ea 100644
  /* - AUDIO CLOCK ------------------------------------------------------------ */
  static const unsigned int audio_clk_a_a_pins[] = {
  	/* CLK A */
-@@ -1689,6 +1690,7 @@ static const unsigned int audio_clkout3_b_pins[] = {
+@@ -1693,6 +1694,7 @@ static const unsigned int audio_clkout3_b_pins[] = {
  static const unsigned int audio_clkout3_b_mux[] = {
  	AUDIO_CLKOUT3_B_MARK,
  };
@@ -138,7 +137,7 @@ index a289397fb8f..7bc9fb709ea 100644
  
  /* - EtherAVB --------------------------------------------------------------- */
  static const unsigned int avb_link_pins[] = {
-@@ -1776,6 +1778,7 @@ static const unsigned int avb_avtp_capture_b_mux[] = {
+@@ -1780,6 +1782,7 @@ static const unsigned int avb_avtp_capture_b_mux[] = {
  	AVB_AVTP_CAPTURE_B_MARK,
  };
  
@@ -146,23 +145,23 @@ index a289397fb8f..7bc9fb709ea 100644
  /* - CAN ------------------------------------------------------------------ */
  static const unsigned int can0_data_a_pins[] = {
  	/* TX, RX */
-@@ -1830,6 +1833,7 @@ static const unsigned int canfd1_data_pins[] = {
+@@ -1845,6 +1848,7 @@ static const unsigned int canfd1_data_pins[] = {
  static const unsigned int canfd1_data_mux[] = {
  	CANFD1_TX_MARK,         CANFD1_RX_MARK,
  };
 +#endif
  
- #if defined(CONFIG_PINCTRL_PFC_R8A77960) || defined(CONFIG_PINCTRL_PFC_R8A77961)
+ #ifdef CONFIG_PINCTRL_PFC_R8A77965
  /* - DRIF0 --------------------------------------------------------------- */
-@@ -2048,6 +2052,7 @@ static const unsigned int drif3_data1_b_mux[] = {
+@@ -2122,6 +2126,7 @@ static const unsigned int drif3_data1_b_mux[] = {
  };
- #endif /* CONFIG_PINCTRL_PFC_R8A77960 || CONFIG_PINCTRL_PFC_R8A77961 */
+ #endif /* CONFIG_PINCTRL_PFC_R8A77965 */
  
 +#ifdef CONFIG_PINCTRL_PFC_FULL
  /* - DU --------------------------------------------------------------------- */
  static const unsigned int du_rgb666_pins[] = {
  	/* R[7:2], G[7:2], B[7:2] */
-@@ -2128,6 +2133,7 @@ static const unsigned int du_disp_pins[] = {
+@@ -2217,6 +2222,7 @@ static const unsigned int du_disp_pins[] = {
  static const unsigned int du_disp_mux[] = {
  	DU_DISP_MARK,
  };
@@ -170,7 +169,7 @@ index a289397fb8f..7bc9fb709ea 100644
  
  /* - HSCIF0 ----------------------------------------------------------------- */
  static const unsigned int hscif0_data_pins[] = {
-@@ -2415,6 +2421,7 @@ static const unsigned int i2c6_c_mux[] = {
+@@ -2566,6 +2572,7 @@ static const unsigned int i2c6_c_mux[] = {
  	SDA6_C_MARK, SCL6_C_MARK,
  };
  
@@ -178,23 +177,23 @@ index a289397fb8f..7bc9fb709ea 100644
  /* - INTC-EX ---------------------------------------------------------------- */
  static const unsigned int intc_ex_irq0_pins[] = {
  	/* IRQ0 */
-@@ -2458,6 +2465,7 @@ static const unsigned int intc_ex_irq5_pins[] = {
+@@ -2609,6 +2616,7 @@ static const unsigned int intc_ex_irq5_pins[] = {
  static const unsigned int intc_ex_irq5_mux[] = {
  	IRQ5_MARK,
  };
 +#endif
  
- #if defined(CONFIG_PINCTRL_PFC_R8A77960) || defined(CONFIG_PINCTRL_PFC_R8A77961)
+ #ifdef CONFIG_PINCTRL_PFC_R8A77965
  /* - MLB+ ------------------------------------------------------------------- */
-@@ -2469,6 +2477,7 @@ static const unsigned int mlb_3pin_mux[] = {
+@@ -2620,6 +2628,7 @@ static const unsigned int mlb_3pin_mux[] = {
  };
- #endif /* CONFIG_PINCTRL_PFC_R8A77960 || CONFIG_PINCTRL_PFC_R8A77961 */
+ #endif /* CONFIG_PINCTRL_PFC_R8A77965 */
  
 +#ifdef CONFIG_PINCTRL_PFC_FULL
  /* - MSIOF0 ----------------------------------------------------------------- */
  static const unsigned int msiof0_clk_pins[] = {
  	/* SCK */
-@@ -3266,6 +3275,7 @@ static const unsigned int pwm6_b_pins[] = {
+@@ -3416,6 +3425,7 @@ static const unsigned int pwm6_b_pins[] = {
  static const unsigned int pwm6_b_mux[] = {
  	PWM6_B_MARK,
  };
@@ -202,7 +201,7 @@ index a289397fb8f..7bc9fb709ea 100644
  
  /* - QSPI0 ------------------------------------------------------------------ */
  static const unsigned int qspi0_ctrl_pins[] = {
-@@ -3679,6 +3689,7 @@ static const unsigned int sdhi3_ds_mux[] = {
+@@ -3884,6 +3894,7 @@ static const unsigned int sdhi3_ds_mux[] = {
  	SD3_DS_MARK,
  };
  
@@ -210,7 +209,7 @@ index a289397fb8f..7bc9fb709ea 100644
  /* - SSI -------------------------------------------------------------------- */
  static const unsigned int ssi0_data_pins[] = {
  	/* SDATA */
-@@ -3855,6 +3866,7 @@ static const unsigned int ssi9_ctrl_b_pins[] = {
+@@ -4060,6 +4071,7 @@ static const unsigned int ssi9_ctrl_b_pins[] = {
  static const unsigned int ssi9_ctrl_b_mux[] = {
  	SSI_SCK9_B_MARK, SSI_WS9_B_MARK,
  };
@@ -218,7 +217,7 @@ index a289397fb8f..7bc9fb709ea 100644
  
  /* - TMU -------------------------------------------------------------------- */
  static const unsigned int tmu_tclk1_a_pins[] = {
-@@ -3942,6 +3954,7 @@ static const unsigned int usb30_mux[] = {
+@@ -4158,6 +4170,7 @@ static const unsigned int usb30_mux[] = {
  	USB30_PWEN_MARK, USB30_OVC_MARK,
  };
  
@@ -226,15 +225,15 @@ index a289397fb8f..7bc9fb709ea 100644
  /* - VIN4 ------------------------------------------------------------------- */
  static const unsigned int vin4_data18_a_pins[] = {
  	RCAR_GP_PIN(0, 10), RCAR_GP_PIN(0, 11),
-@@ -4121,6 +4134,7 @@ static const unsigned int vin5_clk_mux[] = {
- 	/* CLK */
+@@ -4355,6 +4368,7 @@ static const unsigned int vin5_clk_pins[] = {
+ static const unsigned int vin5_clk_mux[] = {
  	VI5_CLK_MARK,
  };
 +#endif
  
  static const struct {
- 	struct sh_pfc_pin_group common[324];
-@@ -4129,6 +4143,7 @@ static const struct {
+ 	struct sh_pfc_pin_group common[326];
+@@ -4363,6 +4377,7 @@ static const struct {
  #endif
  } pinmux_groups = {
  	.common = {
@@ -242,7 +241,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_PIN_GROUP(audio_clk_a_a),
  		SH_PFC_PIN_GROUP(audio_clk_a_b),
  		SH_PFC_PIN_GROUP(audio_clk_a_c),
-@@ -4146,6 +4161,7 @@ static const struct {
+@@ -4380,6 +4395,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(audio_clkout2_b),
  		SH_PFC_PIN_GROUP(audio_clkout3_a),
  		SH_PFC_PIN_GROUP(audio_clkout3_b),
@@ -250,7 +249,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_PIN_GROUP(avb_link),
  		SH_PFC_PIN_GROUP(avb_magic),
  		SH_PFC_PIN_GROUP(avb_phy_int),
-@@ -4157,6 +4173,7 @@ static const struct {
+@@ -4391,6 +4407,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(avb_avtp_capture_a),
  		SH_PFC_PIN_GROUP(avb_avtp_match_b),
  		SH_PFC_PIN_GROUP(avb_avtp_capture_b),
@@ -258,7 +257,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_PIN_GROUP(can0_data_a),
  		SH_PFC_PIN_GROUP(can0_data_b),
  		SH_PFC_PIN_GROUP(can1_data),
-@@ -4172,6 +4189,7 @@ static const struct {
+@@ -4406,6 +4423,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(du_oddf),
  		SH_PFC_PIN_GROUP(du_cde),
  		SH_PFC_PIN_GROUP(du_disp),
@@ -266,7 +265,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_PIN_GROUP(hscif0_data),
  		SH_PFC_PIN_GROUP(hscif0_clk),
  		SH_PFC_PIN_GROUP(hscif0_ctrl),
-@@ -4210,6 +4228,7 @@ static const struct {
+@@ -4444,6 +4462,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(i2c6_a),
  		SH_PFC_PIN_GROUP(i2c6_b),
  		SH_PFC_PIN_GROUP(i2c6_c),
@@ -274,7 +273,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_PIN_GROUP(intc_ex_irq0),
  		SH_PFC_PIN_GROUP(intc_ex_irq1),
  		SH_PFC_PIN_GROUP(intc_ex_irq2),
-@@ -4328,6 +4347,7 @@ static const struct {
+@@ -4562,6 +4581,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(pwm5_b),
  		SH_PFC_PIN_GROUP(pwm6_a),
  		SH_PFC_PIN_GROUP(pwm6_b),
@@ -282,7 +281,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_PIN_GROUP(qspi0_ctrl),
  		BUS_DATA_PIN_GROUP(qspi0_data, 2),
  		BUS_DATA_PIN_GROUP(qspi0_data, 4),
-@@ -4389,6 +4409,7 @@ static const struct {
+@@ -4625,6 +4645,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(sdhi3_cd),
  		SH_PFC_PIN_GROUP(sdhi3_wp),
  		SH_PFC_PIN_GROUP(sdhi3_ds),
@@ -290,7 +289,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_PIN_GROUP(ssi0_data),
  		SH_PFC_PIN_GROUP(ssi01239_ctrl),
  		SH_PFC_PIN_GROUP(ssi1_data_a),
-@@ -4414,6 +4435,7 @@ static const struct {
+@@ -4650,6 +4671,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(ssi9_data_b),
  		SH_PFC_PIN_GROUP(ssi9_ctrl_a),
  		SH_PFC_PIN_GROUP(ssi9_ctrl_b),
@@ -298,7 +297,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_PIN_GROUP(tmu_tclk1_a),
  		SH_PFC_PIN_GROUP(tmu_tclk1_b),
  		SH_PFC_PIN_GROUP(tmu_tclk2_a),
-@@ -4425,6 +4447,7 @@ static const struct {
+@@ -4661,6 +4683,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(usb0),
  		SH_PFC_PIN_GROUP(usb1),
  		SH_PFC_PIN_GROUP(usb30),
@@ -306,23 +305,23 @@ index a289397fb8f..7bc9fb709ea 100644
  		BUS_DATA_PIN_GROUP(vin4_data, 8, _a),
  		BUS_DATA_PIN_GROUP(vin4_data, 10, _a),
  		BUS_DATA_PIN_GROUP(vin4_data, 12, _a),
-@@ -4453,6 +4476,7 @@ static const struct {
+@@ -4689,6 +4712,7 @@ static const struct {
  		SH_PFC_PIN_GROUP(vin5_field),
  		SH_PFC_PIN_GROUP(vin5_clkenb),
  		SH_PFC_PIN_GROUP(vin5_clk),
 +#endif
  	},
- #if defined(CONFIG_PINCTRL_PFC_R8A77960) || defined(CONFIG_PINCTRL_PFC_R8A77961)
+ #ifdef CONFIG_PINCTRL_PFC_R8A77965
  	.automotive = {
-@@ -4491,6 +4515,7 @@ static const struct {
- #endif /* CONFIG_PINCTRL_PFC_R8A77960 || CONFIG_PINCTRL_PFC_R8A77961 */
+@@ -4727,6 +4751,7 @@ static const struct {
+ #endif /* CONFIG_PINCTRL_PFC_R8A77965 */
  };
  
 +#ifdef CONFIG_PINCTRL_PFC_FULL
  static const char * const audio_clk_groups[] = {
  	"audio_clk_a_a",
  	"audio_clk_a_b",
-@@ -4510,6 +4535,7 @@ static const char * const audio_clk_groups[] = {
+@@ -4746,6 +4771,7 @@ static const char * const audio_clk_groups[] = {
  	"audio_clkout3_a",
  	"audio_clkout3_b",
  };
@@ -330,7 +329,7 @@ index a289397fb8f..7bc9fb709ea 100644
  
  static const char * const avb_groups[] = {
  	"avb_link",
-@@ -4525,6 +4551,7 @@ static const char * const avb_groups[] = {
+@@ -4761,6 +4787,7 @@ static const char * const avb_groups[] = {
  	"avb_avtp_capture_b",
  };
  
@@ -338,23 +337,23 @@ index a289397fb8f..7bc9fb709ea 100644
  static const char * const can0_groups[] = {
  	"can0_data_a",
  	"can0_data_b",
-@@ -4546,6 +4573,7 @@ static const char * const canfd0_groups[] = {
+@@ -4782,6 +4809,7 @@ static const char * const canfd0_groups[] = {
  static const char * const canfd1_groups[] = {
  	"canfd1_data",
  };
 +#endif
  
- #if defined(CONFIG_PINCTRL_PFC_R8A77960) || defined(CONFIG_PINCTRL_PFC_R8A77961)
+ #ifdef CONFIG_PINCTRL_PFC_R8A77965
  static const char * const drif0_groups[] = {
-@@ -4591,6 +4619,7 @@ static const char * const drif3_groups[] = {
+@@ -4827,6 +4855,7 @@ static const char * const drif3_groups[] = {
  };
- #endif /* CONFIG_PINCTRL_PFC_R8A77960 || CONFIG_PINCTRL_PFC_R8A77961 */
+ #endif /* CONFIG_PINCTRL_PFC_R8A77965 */
  
 +#ifdef CONFIG_PINCTRL_PFC_FULL
  static const char * const du_groups[] = {
  	"du_rgb666",
  	"du_rgb888",
-@@ -4601,6 +4630,7 @@ static const char * const du_groups[] = {
+@@ -4837,6 +4866,7 @@ static const char * const du_groups[] = {
  	"du_cde",
  	"du_disp",
  };
@@ -362,7 +361,7 @@ index a289397fb8f..7bc9fb709ea 100644
  
  static const char * const hscif0_groups[] = {
  	"hscif0_data",
-@@ -4673,6 +4703,7 @@ static const char * const i2c6_groups[] = {
+@@ -4909,6 +4939,7 @@ static const char * const i2c6_groups[] = {
  	"i2c6_c",
  };
  
@@ -370,23 +369,23 @@ index a289397fb8f..7bc9fb709ea 100644
  static const char * const intc_ex_groups[] = {
  	"intc_ex_irq0",
  	"intc_ex_irq1",
-@@ -4681,6 +4712,7 @@ static const char * const intc_ex_groups[] = {
+@@ -4917,6 +4948,7 @@ static const char * const intc_ex_groups[] = {
  	"intc_ex_irq4",
  	"intc_ex_irq5",
  };
 +#endif
  
- #if defined(CONFIG_PINCTRL_PFC_R8A77960) || defined(CONFIG_PINCTRL_PFC_R8A77961)
+ #ifdef CONFIG_PINCTRL_PFC_R8A77965
  static const char * const mlb_3pin_groups[] = {
-@@ -4688,6 +4720,7 @@ static const char * const mlb_3pin_groups[] = {
+@@ -4924,6 +4956,7 @@ static const char * const mlb_3pin_groups[] = {
  };
- #endif /* CONFIG_PINCTRL_PFC_R8A77960 || CONFIG_PINCTRL_PFC_R8A77961 */
+ #endif /* CONFIG_PINCTRL_PFC_R8A77965 */
  
 +#ifdef CONFIG_PINCTRL_PFC_FULL
  static const char * const msiof0_groups[] = {
  	"msiof0_clk",
  	"msiof0_sync",
-@@ -4832,6 +4865,7 @@ static const char * const pwm6_groups[] = {
+@@ -5068,6 +5101,7 @@ static const char * const pwm6_groups[] = {
  	"pwm6_a",
  	"pwm6_b",
  };
@@ -394,7 +393,7 @@ index a289397fb8f..7bc9fb709ea 100644
  
  static const char * const qspi0_groups[] = {
  	"qspi0_ctrl",
-@@ -4933,6 +4967,7 @@ static const char * const sdhi3_groups[] = {
+@@ -5173,6 +5207,7 @@ static const char * const sdhi3_groups[] = {
  	"sdhi3_ds",
  };
  
@@ -402,7 +401,7 @@ index a289397fb8f..7bc9fb709ea 100644
  static const char * const ssi_groups[] = {
  	"ssi0_data",
  	"ssi01239_ctrl",
-@@ -4960,6 +4995,7 @@ static const char * const ssi_groups[] = {
+@@ -5200,6 +5235,7 @@ static const char * const ssi_groups[] = {
  	"ssi9_ctrl_a",
  	"ssi9_ctrl_b",
  };
@@ -410,7 +409,7 @@ index a289397fb8f..7bc9fb709ea 100644
  
  static const char * const tmu_groups[] = {
  	"tmu_tclk1_a",
-@@ -4987,6 +5023,7 @@ static const char * const usb30_groups[] = {
+@@ -5227,6 +5263,7 @@ static const char * const usb30_groups[] = {
  	"usb30",
  };
  
@@ -418,15 +417,15 @@ index a289397fb8f..7bc9fb709ea 100644
  static const char * const vin4_groups[] = {
  	"vin4_data8_a",
  	"vin4_data10_a",
-@@ -5020,6 +5057,7 @@ static const char * const vin5_groups[] = {
+@@ -5260,6 +5297,7 @@ static const char * const vin5_groups[] = {
  	"vin5_clkenb",
  	"vin5_clk",
  };
 +#endif
  
  static const struct {
- 	struct sh_pfc_function common[52];
-@@ -5028,14 +5066,18 @@ static const struct {
+ 	struct sh_pfc_function common[53];
+@@ -5268,14 +5306,18 @@ static const struct {
  #endif
  } pinmux_functions = {
  	.common = {
@@ -445,7 +444,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_FUNCTION(hscif0),
  		SH_PFC_FUNCTION(hscif1),
  		SH_PFC_FUNCTION(hscif2),
-@@ -5047,6 +5089,7 @@ static const struct {
+@@ -5287,6 +5329,7 @@ static const struct {
  		SH_PFC_FUNCTION(i2c3),
  		SH_PFC_FUNCTION(i2c5),
  		SH_PFC_FUNCTION(i2c6),
@@ -453,15 +452,15 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_FUNCTION(intc_ex),
  		SH_PFC_FUNCTION(msiof0),
  		SH_PFC_FUNCTION(msiof1),
-@@ -5059,6 +5102,7 @@ static const struct {
+@@ -5299,6 +5342,7 @@ static const struct {
  		SH_PFC_FUNCTION(pwm4),
  		SH_PFC_FUNCTION(pwm5),
  		SH_PFC_FUNCTION(pwm6),
 +#endif
  		SH_PFC_FUNCTION(qspi0),
  		SH_PFC_FUNCTION(qspi1),
- 		SH_PFC_FUNCTION(scif0),
-@@ -5072,14 +5116,18 @@ static const struct {
+ 		SH_PFC_FUNCTION(sata0),
+@@ -5313,14 +5357,18 @@ static const struct {
  		SH_PFC_FUNCTION(sdhi1),
  		SH_PFC_FUNCTION(sdhi2),
  		SH_PFC_FUNCTION(sdhi3),
@@ -478,7 +477,7 @@ index a289397fb8f..7bc9fb709ea 100644
  		SH_PFC_FUNCTION(vin5),
 +#endif
  	},
- #if defined(CONFIG_PINCTRL_PFC_R8A77960) || defined(CONFIG_PINCTRL_PFC_R8A77961)
+ #ifdef CONFIG_PINCTRL_PFC_R8A77965
  	.automotive = {
 -- 
 2.45.2
