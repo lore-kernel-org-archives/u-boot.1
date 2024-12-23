@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0656E7718D
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 892A1E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:48:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD67C80711;
-	Mon, 23 Dec 2024 15:48:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36DE980730;
+	Mon, 23 Dec 2024 15:48:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TDDgTL09";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hGGSEkJM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A796F806D4; Mon, 23 Dec 2024 15:48:12 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id C6D9480741; Mon, 23 Dec 2024 15:48:19 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75D958073F
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:48:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 924E0806D4
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:48:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b6e4d38185so345522485a.0
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:48:10 -0800 (PST)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6dd43aa1558so6422926d6.0
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:48:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734965289; x=1735570089; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734965296; x=1735570096; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5sjv0G7m7DKrqwz/Yw3WQTPDxOB+R90hxSTRlMzp80A=;
- b=TDDgTL09IA3pNSu58092CABh+Wie4YOiU6QqVZg6UDQim/zDkc+bMJMhyQf0OzgkJc
- vRQ0q2T+oZKJfyPZrVLUK96MpOneT5Uu3tMdCbykW02I/WNJnkZLeqVIaXWkYzwPxrsU
- U+afuZQH9FYCJ4+qtj5PyQwd843W30tQMULn3GPEAu95lACQXlciLqBOgo2gdBJrDonF
- INURFMKtf7snTXpRTKw6x+sf1bQY/WwmR/wFtNRZTpHJGMq3ABTndpY72CMnQC0lwujP
- AeYnWePmVyqKAPOyWfeA1pbq9SkHeOLT3BIQUij4lTXoZgIbMaB43wJ1XuojmxZ74Ca/
- VP7A==
+ bh=4YRs4LxgJj3HURqtJqLqMHlekfM/VQPnuM7GWtjTynE=;
+ b=hGGSEkJMEiildGE2uzMMQtYFtJgIvTSDDRD4niqj3lO5R4iMd8YQ8olert1pylOyfh
+ YEBa8ARvbZg+ttFqgFIIvFnAkdJ0/NB/rHmr3FyqAev/qNRTFvGG5FOb7Dy/ITut2aYT
+ /orpPlEmgoBXz4kJfaZbkMf51tM6e+HVwf+jCQ8oCGOw6Y25/caxuS1F83Mk4jhtCXEl
+ p8m6md9TapM1feJPbEXE61focS/T1PlxDaYrzZlZoYRQkfRGX9iKfNylw8nZUriW558U
+ fRDvZTVQmpvMxlmVVG1TfdF6wjqz++1PwNQjL8GwWa2c1gV0kZX8kabr+Wfh3NEF4UI/
+ TQ6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734965289; x=1735570089;
+ d=1e100.net; s=20230601; t=1734965296; x=1735570096;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5sjv0G7m7DKrqwz/Yw3WQTPDxOB+R90hxSTRlMzp80A=;
- b=VahJROYB/HF2B/jb9Dmnfe27NghdmvOY1vzU7Nd5/MBp0ZYztvCA5tRcVKdL5TrBs+
- HibXEbtVVAbkStZysNBorlkwqWrQK4XBy8KtH/tlWmTef4OdjoHNCAwEppsP12sDsGip
- G4/m94cD7AmB/rcM09OnPp4PNEHrpK2cM9HL302hdDefPXvazP2MglnljyZF2namKUzN
- h30o3ClP8hNpxs2908t8we4kMfUkOIS8TuBcmhMxFrhKlLwLaGgV+5Nb1nIFGnNTWX08
- tkD94+M052lXLNsYxu+grCnnQKzzwcC3IDmevLMiCbSUwRxyUzWvHqntAAv5oh0MWlO9
- pnMw==
-X-Gm-Message-State: AOJu0Yz4M2ilngZY6FosYKXa5H4syTI+DzP1s2avWbOuiyltiYVdSE1w
- FE/lEFh1VPh4Pp8nvHycQ/AYOcdofwLeT1gv47SSB5P4m5b+vpX+zMfjo2T7hd/Im84KMqtQlPK
- W
-X-Gm-Gg: ASbGnctyVEgPVTmKMaJK/tlswckmBAd6U2Sz7PcnIArICpD3rwAAXwX6Ff6M3Ikpuhl
- +9lvtsFWa5o9zLJ5uypd5oTnSmHUOGw9tr3pdHmMtltgjBymy1Mum+M3fVkq/wV5Pfyv6iVCf2+
- JmazMElHSVcDT9k+ez1FLLZGm6P/jty0Vrc8zvN1CArZyjTD+pMATqHKpEIT4NeUfeda/ybCjLA
- 9gi9gXAhU/FdnUWiRyImm5/qT345iVsUQvUDOBibjbsWjYMoZVeQlMB3QOO19+Z/r7GP8QUeHU2
- JMBplVXnyoRrU2/Ci+fuYCYCqo8lCNWJ+YnEvJEgLcFyQVuqQhnO0/I=
-X-Google-Smtp-Source: AGHT+IFQ7889t+4XVa2ERMDyISvEKXqmHl70FqgG68i+pbvuugsTla/R8P48djb2MfOzyx2fwbfNnQ==
-X-Received: by 2002:a05:6214:dac:b0:6d8:9124:8799 with SMTP id
- 6a1803df08f44-6dd2331f006mr244819506d6.5.1734965289187; 
- Mon, 23 Dec 2024 06:48:09 -0800 (PST)
+ bh=4YRs4LxgJj3HURqtJqLqMHlekfM/VQPnuM7GWtjTynE=;
+ b=s94eNkdy+1RyvARjtY8QtSJYjGtjeJNfrLxzwsp2Qb47GikAadgUc3dkn9xapkdqsD
+ AwycwJiJ/u9rgO9JQ0cjszxfmHGWC1tZa0rCa8V/PDO7NQ+yAuTyhIJdUUxk2yKjXcAS
+ XdLV9QvPmAAKnQjRrzY4Nk9yz5qT/0jn9psrRz1zv5j4ohHUj/VV9TDgCB+c8s9+7MQd
+ luU2aOY3GZYLQv9NbT9QrPA7UoRnUt9X3afVeY12eEPM7Ayv4/arY89R0Ss2TBDZCcH9
+ F3bqDslMCq0aHxtPdgdUqJMRFXjLBpqdCizREq2lGtfvRiyWjPPNnaQbhm66Ay2qmCUJ
+ KYRQ==
+X-Gm-Message-State: AOJu0Yy08MZUYLrD26xgs8ewzoVnzuWv+U9ip3zdpeAKYNteFtOj8mKs
+ VU+RBGuT5zmWuDpBPZYr4uq7IXYaV7RPiAJL7pWFX3KbxjMDntYtqsrxLwZGiuHYyYsTtF6vy1E
+ C
+X-Gm-Gg: ASbGncuxrqQmKmbY7y5fnBsTGSDVhIU6dVCTWWklpys7CJ0bt6nLowkrsiTaRS2/aQn
+ xdVmH9inCddz2uAuBZbYgap9mbjQ9qoxrMYURXU4Qu5KT7MtA0KEZsdXsM31jcbf/dtxZaGywnP
+ 3i5ksLd86f7SJulvQVxWzRnn2uo72uSprLXkCRvVDMfHbxegHBzUxBdcsMculuRSnI4i4BuTG5u
+ NBbWK8LMw9Q3nDtlwCEWBtExcr+ROju2mlNtSxN0bsi8WF6noYKCPUDKQaguILRjySUUIr6/6+b
+ HvjvBdIPoNd0B4ETwTfmEuF5UAJnaxPAWn/zdqwX6dY6ErIAm0jRUkE=
+X-Google-Smtp-Source: AGHT+IEpNq/8yMieXfy5jBC520xhC8c9p+f6hzbvp4FmzBNlnqTakkHmgCrPrMEGPMfE0TnRXdJ8bA==
+X-Received: by 2002:a05:6214:e48:b0:6d8:95c9:af2b with SMTP id
+ 6a1803df08f44-6dd2339ff71mr197380596d6.35.1734965296033; 
+ Mon, 23 Dec 2024 06:48:16 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.48.08
+ 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.48.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Dec 2024 06:48:08 -0800 (PST)
+ Mon, 23 Dec 2024 06:48:15 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tim Harvey <tharvey@gateworks.com>, Eddie James <eajames@linux.ibm.com>,
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>,
+ Eddie James <eajames@linux.ibm.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH 03/11] tpm: Rename tpm2_allow_extend()
-Date: Mon, 23 Dec 2024 06:47:25 -0800
-Message-Id: <20241223144737.554992-4-raymond.mao@linaro.org>
+Subject: [PATCH 04/11] tpm: refactor tcg2_get_pcr_info()
+Date: Mon, 23 Dec 2024 06:47:26 -0800
+Message-Id: <20241223144737.554992-5-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241223144737.554992-1-raymond.mao@linaro.org>
 References: <20241223144737.554992-1-raymond.mao@linaro.org>
@@ -102,63 +103,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Rename the arguments of tcg2_get_pcr_info() to clarify
+they are bank masks, not PCR mask.
+Remove the unused local variable.
 
-When that function was introduced we were only using it to check if
-extending a PCR was allowed, so the name made sense. A few patches ago
-we used that function to reason about the EventLog creation and general
-usage of PCRs , so let's rename it to something more generic that makes
-more sense in all contexts.
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- include/tpm-v2.h | 5 +++--
- lib/tpm-v2.c     | 4 ++--
- 2 files changed, 5 insertions(+), 4 deletions(-)
+ include/tpm_tcg2.h | 12 ++++++------
+ lib/tpm_tcg2.c     | 19 ++++++++-----------
+ 2 files changed, 14 insertions(+), 17 deletions(-)
 
-diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index 8c43f4fd9b..87b2c614ad 100644
---- a/include/tpm-v2.h
-+++ b/include/tpm-v2.h
-@@ -732,12 +732,13 @@ u16 tpm2_algorithm_to_len(enum tpm2_algorithms algo);
-  */
+diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
+index 6519004cc4..eb6afe49e7 100644
+--- a/include/tpm_tcg2.h
++++ b/include/tpm_tcg2.h
+@@ -94,17 +94,17 @@ struct tcg_pcr_event {
+ } __packed;
  
  /**
-- * tpm2_allow_extend() - Check if extending PCRs is allowed and safe
-+ * tpm2_check_active_banks() - Check if the active PCR banks are supported by
-+ *                             our configuration
+- * tcg2_get_pcr_info() - get the supported, active PCRs and number of banks
++ * tcg2_get_pcr_info() - get the supported, active banks and number of banks
   *
-  * @dev: TPM device
-  * Return: true if allowed
+  * @dev:		TPM device
+- * @supported_pcr:	bitmask with the algorithms supported
+- * @active_pcr:		bitmask with the active algorithms
+- * @pcr_banks:		number of PCR banks
++ * @supported_bank:	bitmask with the algorithms supported
++ * @active_bank:	bitmask with the active algorithms
++ * @bank_num:		number of PCR banks
+  *
+  * @return 0 on success, code of operation or negative errno on failure
   */
--bool tpm2_allow_extend(struct udevice *dev);
-+bool tpm2_check_active_banks(struct udevice *dev);
+-int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
+-		      u32 *pcr_banks);
++int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
++		      u32 *bank_num);
  
  /**
-  * tpm2_is_active_bank() - check the pcr_select. If at least one of the PCRs
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index cb636414de..0edb0aa90c 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -197,7 +197,7 @@ u32 tpm2_pcr_extend(struct udevice *dev, u32 index, u32 algorithm,
- 	if (!digest)
- 		return -EINVAL;
+  * Crypto Agile Log Entry Format
+diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+index dc5a0644fd..16f41cbfd1 100644
+--- a/lib/tpm_tcg2.c
++++ b/lib/tpm_tcg2.c
+@@ -21,19 +21,16 @@
+ #include "tpm-utils.h"
+ #include <bloblist.h>
  
--	if (!tpm2_allow_extend(dev)) {
-+	if (!tpm2_check_active_banks(dev)) {
- 		log_err("Cannot extend PCRs if all the TPM enabled algorithms are not supported\n");
- 		return -EINVAL;
- 	}
-@@ -896,7 +896,7 @@ u16 tpm2_algorithm_to_len(enum tpm2_algorithms algo)
- 	return 0;
- }
- 
--bool tpm2_allow_extend(struct udevice *dev)
-+bool tpm2_check_active_banks(struct udevice *dev)
+-int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
+-		      u32 *pcr_banks)
++int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
++		      u32 *bank_num)
  {
+-	u8 response[(sizeof(struct tpms_capability_data) -
+-		offsetof(struct tpms_capability_data, data))];
  	struct tpml_pcr_selection pcrs;
  	size_t i;
+ 	u32 ret;
+ 
+-	*supported_pcr = 0;
+-	*active_pcr = 0;
+-	*pcr_banks = 0;
+-	memset(response, 0, sizeof(response));
++	*supported_bank = 0;
++	*active_bank = 0;
++	*bank_num = 0;
+ 
+ 	ret = tpm2_get_pcr_info(dev, &pcrs);
+ 	if (ret)
+@@ -43,16 +40,16 @@ int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
+ 		u32 hash_mask = tcg2_algorithm_to_mask(pcrs.selection[i].hash);
+ 
+ 		if (hash_mask) {
+-			*supported_pcr |= hash_mask;
++			*supported_bank |= hash_mask;
+ 			if (tpm2_is_active_bank(&pcrs.selection[i]))
+-				*active_pcr |= hash_mask;
++				*active_bank |= hash_mask;
+ 		} else {
+ 			printf("%s: unknown algorithm %x\n", __func__,
+ 			       pcrs.selection[i].hash);
+ 		}
+ 	}
+ 
+-	*pcr_banks = pcrs.count;
++	*bank_num = pcrs.count;
+ 
+ 	return 0;
+ }
 -- 
 2.25.1
 
