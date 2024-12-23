@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B08B0E7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A72E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:48:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5BE1806FC;
-	Mon, 23 Dec 2024 15:47:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33F8280704;
+	Mon, 23 Dec 2024 15:48:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C1+QXOvg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Zffxw8yv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6FD780704; Mon, 23 Dec 2024 15:47:49 +0100 (CET)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id E8BAD80704; Mon, 23 Dec 2024 15:47:58 +0100 (CET)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91582806D4
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:47:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 029DD80740
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:47:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7b98a2e3b3eso184037485a.2
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:47:47 -0800 (PST)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6d88cb85987so35367936d6.1
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:47:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734965266; x=1735570066; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2yWbh1zWnh9x242OqYtnLdY02gWlC1YgLKwnLWJ2ygY=;
- b=C1+QXOvgZPbJaNyK20JVvbjwv94lFlc2QdQyEPgMB033bRxTB550s1Pk20w/MK5ryW
- BPwbSyIgVqDmbcS1KVOQaYH6YuRb04YHtHQnGDzJS+a/LoKEpMHGNTSFBfJN8lZEoHTh
- 8L5LmPE5W3eaQSUhYIvbi0+OSfBT9n/0Sf9FnGNmGibR+XDdp29DhY4m/zowezqdLpZs
- M7fU0GMPzMDIRYNnKu1u4zx1Q7LtfP0ECgI4G5ukbs6E11bFx0anO+q1KWCt5/uN7vI9
- IuaGkS76ZyXeIDzqe4RbiUGAqWDXsZdmSGpWrlbniOAXXp4hvNyKC4OAbFKIXDXvKE6l
- DVHg==
+ d=linaro.org; s=google; t=1734965273; x=1735570073; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vHTdZDoQHi0DGV+vWci9khHooRAXICaEiFLFbPsBXW0=;
+ b=Zffxw8yvojyN4pD211sFUmKkLk7uawq1WtJeHgzUIigE8gOTtr4KoqtPIWSHfvdBPU
+ 7s/COeteWNyLvW3w+xoN5vj4AI1FEqrv07SSqDlVQyItkujz11jU7Bmz8wLF0P6cky/X
+ tMJDg/oZUgTRfalcFz/owQ1A39b3rBndC07uH8S0mGbymbo8RHbOWWcWWhda2G0JCvYo
+ qDHfjfFL2ED3tcM7npH6PMOmfhbn2UYaRr9Cug+h24j8NUnU2geZygnO/svxdnh3fT27
+ fUyhe/jkRe/1ETiXl8yPFkF1nhLXcAybU5os14YhmT+X8PdLboHFeM54QgBQtxyChDA9
+ TAug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734965266; x=1735570066;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2yWbh1zWnh9x242OqYtnLdY02gWlC1YgLKwnLWJ2ygY=;
- b=CBtsJke9uVIpkDe+UsEgazjsGAOKGPbLsZlkFbr836WXORvsbL6hdAkkqSvulYc2Ct
- AKWA5gPLfuPGxEYAQE+4huwNEechbt9oqsVx1sJLWmyTJMM9cSrBilUdnvziSL0vGKS9
- viVNsxdofDXWrvnLPVeTY4g4Kxa2fHQidAbK81qLNT42dAgqR5tqIaLiqK0yWbIlUryt
- 3nfDmEEET/EHgBlMLsGilDQ4PLqOzmNqa/9aLOkYUgE6zhG1onRZ63LYAz7iYLPA+sir
- 3RTqYUzfAFQjJPponvz3ktvjLz8dsMEtmMl+kxAVer+LUiYCWjydxB1N0RhiZYbBFumt
- 8BuA==
-X-Gm-Message-State: AOJu0YxTlcPez5j9dhCFvY99OJZHfMJL/4KtpxjBDjQtn96ROx3sM2JX
- G9otm5y6RuIZ5SYJohojq3wVQTMWTHDMF+4oWmDBhOkkyhgr/ibDGeHPfY5oFFK4fmyWoFpxxf8
- 1
-X-Gm-Gg: ASbGncv+FEuYUWUeNzZEyB1ivcehdjxdk8BGPMz9rYYQdXD759Ga+UotxRf6va3HiF2
- f9+cxlnf872+9NhtErHLBh4VEj5QrfaFUdYckD5ZXt+sNCBfOygR5hOGOHkKeQL7N6q0mfQl2hs
- C4FNfPuSfbfbqeaQvnuh4hhJY2CSW5VqJHzDFPM0C6brXbZnCkSUd9QrLPXLZEr61JT0clfcda2
- N5jjVoZ1FSnjCHSz4FRtlAMeijrt+4lv1chb6p3LIBHqXMYGO+N/buPnrhpBX9ghgMXpqhBkcYv
- taAP4Zx3nRMqH+ZRv8BKeckyLhM5zJuoJXbp6S3Z6nuqXw3z5lMxT50=
-X-Google-Smtp-Source: AGHT+IHdSFGHxbxFfz5RTabOHwNG6KXPmLPDrBlEhJ2kGuTXMfp8P0VA3Fvjsuii6A7tp7fVMrsDIQ==
-X-Received: by 2002:a05:6214:413:b0:6d8:7ed4:335b with SMTP id
- 6a1803df08f44-6dd2334bf3cmr219470106d6.26.1734965265975; 
- Mon, 23 Dec 2024 06:47:45 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734965273; x=1735570073;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vHTdZDoQHi0DGV+vWci9khHooRAXICaEiFLFbPsBXW0=;
+ b=cPeLrRcfBH34CVoIOcCeg3Gc8I+i5mJEuV6GFnfH7mfLfszaorTADurUozxmNX8+J3
+ JVFARTT/WiG+6pI6eja+GSTy3W2EmQueNyk5bzlRN0q8G1xIx8LDIrI2830JYRx5Qrqo
+ JFMRQTTLnm/bYrR6wk7jB6E7WIJRltCpJmw8jdkMBS/baKU85GVhEuMGZtR60fYDld55
+ a7VuVBcojHiVX7/HxIh4ERTATGjhdwQELjQoaYoGXQyCIMAtuGXtZhnQ1dsJn1HfUFCi
+ EFEPTlNKnhPeDQvQ8hXmOc1Ss6g8q/pFBb2D3NxXCuiFNcKd8ZCwTC58k/R6nrndsH2E
+ 2nsQ==
+X-Gm-Message-State: AOJu0YyEGK+NBlUxcasquw/EiuQhQdryWZ+57b2zGXwD4pXSn4OEFXdL
+ yL7ZWlPPePvWsWTLPr4BTBXFMoBZV4zJYGDRZvCrSt6KQboHFtIM9QN7kv5xS5sSOMFiw9T5fzR
+ 8
+X-Gm-Gg: ASbGncsiOw/McP130YmVSY9cZxw15d+orF/x3DpVWQn242vTj5fy25ghqcUcAtwUKo7
+ TNZrvVZxoO77u9WVENPHOrBqRKsHZoSIZ0EEYbIMDkznr7JrAsNBi9Rej2wGkCwT9t2vbY2OM5P
+ G3MlbCu0tsQFUlMzCRbW/kC8tTwdCXLTjk+EdfypiW367UDDk9muxdCu0uG8IUiv9ZnOLcbjU/c
+ fmhzEkxkE8SHtPdE62VCp1fZImQoWBzzwix2dvLttbh35zWZodOXijBLRlu4ECwoR/+Fh7NRMuJ
+ Pb7xwxdEKXG4+KPCPykcVTB2YZzCWwHrylxvTxjqndqWdfN/jVR/vEo=
+X-Google-Smtp-Source: AGHT+IGejfSMtGik8iZvKacLaExohujd5VNS2uAapjk2AZzKqq+wntImEvJc9iQs9Mky+3oJCNcA4w==
+X-Received: by 2002:a05:6214:d6c:b0:6d9:429:ab4b with SMTP id
+ 6a1803df08f44-6dd15499041mr246770786d6.0.1734965273517; 
+ Mon, 23 Dec 2024 06:47:53 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.47.44
+ 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.47.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Dec 2024 06:47:45 -0800 (PST)
+ Mon, 23 Dec 2024 06:47:53 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Eddie James <eajames@linux.ibm.com>
-Subject: [PATCH 00/11] Tpm exit with error when algorithm dismatches
-Date: Mon, 23 Dec 2024 06:47:22 -0800
-Message-Id: <20241223144737.554992-1-raymond.mao@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: [PATCH 01/11] efi_loader: Don't warn if the TCG2 FinalEvents table is
+ not installed
+Date: Mon, 23 Dec 2024 06:47:23 -0800
+Message-Id: <20241223144737.554992-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20241223144737.554992-1-raymond.mao@linaro.org>
+References: <20241223144737.554992-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,42 +103,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series add the logic to report errors when:
-1. An eventlog is handed over from the previous boot stage but TPM device
-   was configurated with an algorithm that does not exist in the eventlog.
-2. TPM device was configurated with an algorithm that is not supported by
-   U-Boot.
-3. Failures observed when parsing the eventlog.
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-In all above cases, tpm_tcg2 should exit with error and prompt logs.
+When the TCG2 protocol installation fails, we are trying to remove
+all the objects we created in tcg2_uninit().
 
-Moveover, this series include miscellaneous fixes and refactoring to
-simplify the logics in tpm and tpm_tcg2.
+However, there are cases when this function runs before the config
+table was installed. So instead of printing an error unconditionally
+check against EFI_NOT_FOUND and don't print anything if the table wasn't
+installed to begin with.
 
-Ilias Apalodimas (8):
-  efi_loader: Don't warn if the TCG2 FinalEvents table is not installed
-  tpm: Rename tpm2_is_active_pcr()
-  tpm: Rename tpm2_allow_extend()
-  tpm: Don't create an EventLog if algorithms are misconfigured
-  tpm: Keep the active PCRs in the chip private data
-  tpm: Simplify tcg2_create_digest()
-  tpm: Simplify tcg2_log_init()
-  tpm: Don't replay an EventLog if tcg2_log_parse() fails
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+ lib/efi_loader/efi_tcg2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Raymond Mao (3):
-  tpm: refactor tcg2_get_pcr_info()
-  tpm: add flag in hash_algo_list and API to check if algorithm is
-    supported
-  tpm: add kconfig control in tcg2_create_digest()
-
- include/tpm-common.h      |  18 +++-
- include/tpm-v2.h          |  65 ++++++++-----
- include/tpm_tcg2.h        |  12 +--
- lib/efi_loader/efi_tcg2.c |   2 +-
- lib/tpm-v2.c              |  72 +++++++++++++--
- lib/tpm_tcg2.c            | 190 ++++++++++++++++++++------------------
- 6 files changed, 230 insertions(+), 129 deletions(-)
-
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index 572c6b5bf6..a15c73162e 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -791,7 +791,7 @@ static void tcg2_uninit(void)
+ 	efi_status_t ret;
+ 
+ 	ret = efi_install_configuration_table(&efi_guid_final_events, NULL);
+-	if (ret != EFI_SUCCESS)
++	if (ret != EFI_SUCCESS && ret != EFI_NOT_FOUND)
+ 		log_err("Failed to delete final events config table\n");
+ 
+ 	efi_free_pool(event_log.buffer);
 -- 
 2.25.1
 
