@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 697A1E7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 12:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F308E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:16:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A76A58056B;
-	Mon, 23 Dec 2024 13:57:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id EF8C480655;
+	Mon, 23 Dec 2024 14:16:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Uip2dLTG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l02LeJL5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C445A806FB; Mon, 23 Dec 2024 13:57:31 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id 77FB9806FB; Mon, 23 Dec 2024 14:16:40 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61F028056A
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 13:57:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id D37108062B
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:16:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2ee51f8c47dso2878771a91.1
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 04:57:29 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-7fbbe0fb0b8so2626956a12.0
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 05:16:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1734958648; x=1735563448;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5ZD13oQAbi+cgeDfVij/3RHq+oj2t2uLrgbryBS1OAk=;
- b=Uip2dLTG/Yev+w0JNVa4VrhLOnyMlg8BHVgWRBkziDxYlJv0zdSBu2VZFJSA/3hSZg
- 6iemg9CdI/D2HC3vJcf2F9XubfY2pfMtB4qI5cEmk0STpOVa4WD9qbFXQEUswbqhCkDO
- 1Y2BndG7KWG8pluDe3ajGgeYXj4vlF2apLyeI=
+ d=gmail.com; s=20230601; t=1734959796; x=1735564596; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=G/xiTL3IX7ThrBxQl0EC3HDji+Vpcki6PvBVhkfHN0I=;
+ b=l02LeJL5ORLSufPFu7Bu5rM+lL1/gbe0eZBBVQVC6R+yxrun+zGRlXCKejU4+oy46V
+ 2nRctOK20Pch8D8wh9Hl/BdvyzEQIgpTthEn8o1Zv9kFQayC6kJhhOlBjozLGCVqv//u
+ 4MEvhi8Y/qe2XJsny6L1RG98ERai3J3wSh3bLcCc3LOBpc0AvCMNpWg+XbreJHiFORpZ
+ XiCgx/4A++rtoeueKmhWgg6RJV/t/C3nHLUPI3nOhF//Vpt+qJgc70uc7pTcP2CwMVz1
+ wXzqHRYC5i/5gxTEMDG3mCTflM0a8FPZAJKnYpJXxM8/dKA73gUrLX6fisHkGSTGyWB8
+ CD+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734958648; x=1735563448;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5ZD13oQAbi+cgeDfVij/3RHq+oj2t2uLrgbryBS1OAk=;
- b=XOKrvKXxJdFom2rEFFKqDEMqB/0A3YsDZJuff5VYScbrJZR3nM55C5O75Lrzdd+bDx
- yb+UzckmZXro9b52XU8VnHOqQdQDzQXA45psNLatpnQc30tKqO+RvF9USeYmsctECAxb
- 5rsQFYOjgAaDUEjsOms0mFqUwoBZnID9GRdfLVcXDShrKMiP/7YTdWccDrJLpOeEe2N1
- jtAPnNo1ajcgZST7KhoBz6yT1+9tUEzZ3zm9Ou6OssLJsk4jmrLWKmF7f7v7ANzthcig
- dhKAa2fSawr2jAK/VvjcL01y1JeDbfG2mWUb5cAMgqcSJNH5NWyUW7d+Yh9/Dud12nsR
- mMfw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXhLWjZz4eMqf1NWBGpF4TRxdG0fq+ULbiIcoCx86eoRfjhnGO+lVy4vPAz04OP/wEnLynOmhw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9oUnLNmoxiWeeRJ+FHkM3oH6AXu6wUom5z68EdiCOIzmS36pg
- gU58SNIN9tP+zP6llrageRMxdnD4IVPV05jRMV3zaoomQK3FKVkNDyCWmmH0Awt875lLIw0Zn9K
- EM9k0mYLT9dueY4UXU3q8/KNDETef8pUmGNn7wQ==
-X-Gm-Gg: ASbGncuk+pynDLkvIRR2M/+KE1xnX3PBRhEttpRoxDxPUr9fzSeB6cy4N0dZ3BuVDAO
- 0+CjAh9vdUkgkuw5uwMR0rrsPLJfaRKqIoYo=
-X-Google-Smtp-Source: AGHT+IEjxvpHJ6eqEWih0OLTElLUoOP6jIxUikvVIMZsWPRRZC2Pz92H/efoHTlaC7l4G2PnySh04O1SJfTvKPLhSrE=
-X-Received: by 2002:a17:90a:c88b:b0:2ee:f687:6ad3 with SMTP id
- 98e67ed59e1d1-2f452eb0eb9mr17968084a91.28.1734958647786; Mon, 23 Dec 2024
- 04:57:27 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734959796; x=1735564596;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=G/xiTL3IX7ThrBxQl0EC3HDji+Vpcki6PvBVhkfHN0I=;
+ b=CDpSvytEfKGNn4gkycr6/H0oNq1rxBNPMyNh/acPdogRbLAf1+OUmayeaMr4G8EGdt
+ 772jtEf0sB1NE9DZs+ekFuF9JTvs42mT+OeVRJNN9p/Az0WZEzkIOizzFwI5IzfSW312
+ ihkS1bWbe87d0m9duydJri/z2qFaqa7JqDM23MNTgpFPD8i6sCXRpLY/6wTgjhSZAtM5
+ TAT2X3Jtpbbw01o4seoQ8xDQALC9n3sCsC82fK7Wob/ppdJMlC+ID+mMUU1fF55+Cy/n
+ olN1BEHBUWILdHohTmZk1qXjmfb35XfnA6Uvphr0yyYJTJmw7uUuDLttT4WxDfb5fmb2
+ +YPQ==
+X-Gm-Message-State: AOJu0Yzd9YrfxTHFqyCwjhjMUYN14LXmOHJ5Uavs5P/ch5Z/0SHAkFJ7
+ pu0mASjhg+9xjpoZ83N2OoebZQ7jSdbCwgOjwPMz5iKOcoYQp71R
+X-Gm-Gg: ASbGnctvYmZAZHdaq+GTvBU26CB6RnWuRBWFcbZsKAsLIwgjzcxH0FUFtiiwIUo5EuU
+ dX/D3yB3YKLuhM2WP+3QogWBYSZ2ZOcQYb8j9GkQ5GRLOsojayhq3cFkpJMLVXYimuRJygTZOJE
+ zA2N1coP6zinbEwxR3knejsiuNh084WYzARX+17yFBpzO4zPi23laBrYHLVoxcXuURM+KwjguIY
+ qKNVdIMeP8rKb3NiTulvmXzbEvVBq2iGYW851TMTsd8iRG90OOCLbgZmLr/KHC9LG2omg==
+X-Google-Smtp-Source: AGHT+IHQDZHmOXb+Ak0pEZbz1WH8l/WAHzVxqB1uJfKF0fQjZr5VSVeJHyECrszeBc6xxykQNGwsog==
+X-Received: by 2002:a17:90a:c2c7:b0:2ef:19d0:2261 with SMTP id
+ 98e67ed59e1d1-2f452e1c111mr20536864a91.16.1734959796124; 
+ Mon, 23 Dec 2024 05:16:36 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:81e:be66:fdf1:bf79])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-219dc9cde5bsm73148585ad.116.2024.12.23.05.16.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Dec 2024 05:16:35 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20241223
+Date: Mon, 23 Dec 2024 10:16:32 -0300
+Message-Id: <20241223131632.1507487-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <d087411f-c2fd-75a8-6041-31623aba53ae@salutedevices.com>
-In-Reply-To: <d087411f-c2fd-75a8-6041-31623aba53ae@salutedevices.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 23 Dec 2024 13:57:16 +0100
-Message-ID: <CAOf5uwmb6W1BjCsc437_aFnO0fjVHrr-mU0r8ZGK_jpwn-75Kg@mail.gmail.com>
-Subject: Re: [PATCH v1] mtd: rawnand: meson: always use OOB bytes during write
-To: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- u-boot@lists.denx.de, u-boot-amlogic@groups.io, kernel@salutedevices.com, 
- oxffffaa@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,63 +92,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Dec 22, 2024 at 10:23=E2=80=AFPM Arseniy Krasnov
-<avkrasnov@salutedevices.com> wrote:
->
-> If 'oob_required' is not set by the caller (for example 'oobbuf' is NULL)=
-,
-> then driver doesn't copy OOB data from 'oob_poi' to special controller
-> structures, so zeroes will be written as OOB. But, generic raw NAND logic
-> in 'nand_base.c' already handles case when OOB is not required to write b=
-y
-> filling 'oob_poi' with 0xFF's. So let's remove 'oob_required' check to
-> always read 'oob_poi' data for OOB.
->
-> Kernel driver (drivers/mtd/nand/raw/meson_nand.c) works in the same way,
-> so need to keep same behaviour here.
->
-> Fixes: c2e8c4d09a7a ("mtd: rawnand: Meson NAND controller support")
-> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
-> ---
->  drivers/mtd/nand/raw/meson_nand.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->
-> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/mes=
-on_nand.c
-> index 81122315f4..82a12ac061 100644
-> --- a/drivers/mtd/nand/raw/meson_nand.c
-> +++ b/drivers/mtd/nand/raw/meson_nand.c
-> @@ -607,9 +607,7 @@ static int meson_nfc_write_page_hwecc(struct mtd_info=
- *mtd, struct nand_chip *ch
->                 memcpy(meson_chip->data_buf, buf, mtd->writesize);
->
->         memset(meson_chip->info_buf, 0, chip->ecc.steps * PER_INFO_BYTE);
-> -
-> -       if (oob_required)
-> -               meson_nfc_set_user_byte(chip, chip->oob_poi);
-> +       meson_nfc_set_user_byte(chip, chip->oob_poi);
->
+Hi Tom,
 
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+Please pull from u-boot-imx/next, thanks.
 
-I will queue it
+The following changes since commit 5947cd76acdd65f48f0748af01241cb6c0756fba:
 
->         return meson_nfc_write_page_sub(chip, page, false);
->  }
-> --
-> 2.30.1
+  Merge branch '2024-12-21-add-arm64-CI-host-support' into next (2024-12-21 12:27:55 -0600)
 
+are available in the Git repository at:
 
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20241223
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+for you to fetch changes up to 6016960ceb9d3fda591cda94df3841748fb65596:
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+  imx: Use per board ddrphy_trained_csr (2024-12-23 08:10:15 -0300)
+
+u-boot-imx-next-20241223
+------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/23987
+
+- imx8m: Remove global ddrphy_trained_csr as it is a per board configuration.
+- Add DM_FLAG_ACTIVE_DMA flag for FEC network driver to avoid potential
+kernel crash.
+- Miscellaneous improvements for i.MX8M Venice Gateworks platforms.
+----------------------------------------------------------------
+Meng Li (1):
+      net: fec_mxc: add DM_FLAG_ACTIVE_DMA flag for FEC network driver
+
+Peng Fan (1):
+      imx: Use per board ddrphy_trained_csr
+
+Tim Harvey (5):
+      spi: mxc_spi: use proper clock for SPI bus
+      drivers: misc: gsc: add support for fan controller
+      drivers: misc: gsc: add support for prescaled
+      imx8m*-venice: define suitable address for SPL_LOAD_FIT_ADDRESS
+      arm: dts: imx8mp-venice-gw7*xx: fix TPM reset
+
+ arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi |  16 +-
+ arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi |  16 +-
+ arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi |  16 +-
+ arch/arm/include/asm/arch-imx8m/ddr.h            |   3 -
+ arch/arm/include/asm/arch-imx9/ddr.h             |   3 -
+ configs/imx8mm_venice_defconfig                  |   1 +
+ configs/imx8mn_venice_defconfig                  |   1 +
+ configs/imx8mp_venice_defconfig                  |   1 +
+ drivers/ddr/imx/phy/Makefile                     |   2 +-
+ drivers/ddr/imx/phy/ddrphy_csr.c                 | 732 -----------------------
+ drivers/ddr/imx/phy/ddrphy_train.c               |   3 +-
+ drivers/ddr/imx/phy/helper.c                     |   8 +-
+ drivers/misc/gsc.c                               |   4 +
+ drivers/net/fec_mxc.c                            |   1 +
+ drivers/spi/mxc_spi.c                            |  14 +-
+ 15 files changed, 46 insertions(+), 775 deletions(-)
+ delete mode 100644 drivers/ddr/imx/phy/ddrphy_csr.c
