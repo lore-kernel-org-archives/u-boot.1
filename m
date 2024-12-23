@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F308E7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DBBDE7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:19:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF8C480655;
-	Mon, 23 Dec 2024 14:16:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 843B880655;
+	Mon, 23 Dec 2024 14:19:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l02LeJL5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nbH+n1ll";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77FB9806FB; Mon, 23 Dec 2024 14:16:40 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 2269E806FB; Mon, 23 Dec 2024 14:19:36 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D37108062B
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:16:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E94AC8062B
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:19:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7fbbe0fb0b8so2626956a12.0
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 05:16:37 -0800 (PST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5401e6efffcso5053994e87.3
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 05:19:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734959796; x=1735564596; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=G/xiTL3IX7ThrBxQl0EC3HDji+Vpcki6PvBVhkfHN0I=;
- b=l02LeJL5ORLSufPFu7Bu5rM+lL1/gbe0eZBBVQVC6R+yxrun+zGRlXCKejU4+oy46V
- 2nRctOK20Pch8D8wh9Hl/BdvyzEQIgpTthEn8o1Zv9kFQayC6kJhhOlBjozLGCVqv//u
- 4MEvhi8Y/qe2XJsny6L1RG98ERai3J3wSh3bLcCc3LOBpc0AvCMNpWg+XbreJHiFORpZ
- XiCgx/4A++rtoeueKmhWgg6RJV/t/C3nHLUPI3nOhF//Vpt+qJgc70uc7pTcP2CwMVz1
- wXzqHRYC5i/5gxTEMDG3mCTflM0a8FPZAJKnYpJXxM8/dKA73gUrLX6fisHkGSTGyWB8
- CD+w==
+ d=gmail.com; s=20230601; t=1734959973; x=1735564773; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uSoNQyEPKaTTIr0BdBZSj6dl5CvduTgonmP8p2L7SEk=;
+ b=nbH+n1llydUNPWMn+GNWxdMHDNd2Na0Qcc35E60kDz2/+CWtJqSxsaOpbbH7Nhtycf
+ 8UCe8VL9BWzLef8sxG5uTtYovH7Q8+WtcWHD44Brap9Dp5inge73YR2FeGroaL8vEPhQ
+ 1Kd6nELHBQ68OjfsoXoAQrTDVvrDYnJZgWWtyaHQd8XUK1vSXLWeEu46u91SEN47c90C
+ RrHzkoAycMboBYEGmsjqwj0lbW4JMQDSf+taHnFPu43v/YH2GC6sBPnFBiHAEuouOk4A
+ xI0JUni+pMx3R8/QTbWBjO8Q0CFdDSx2weoefPweDGiH/5h0UW7NJ7YSVueCKymj0Gd2
+ wr+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734959796; x=1735564596;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=G/xiTL3IX7ThrBxQl0EC3HDji+Vpcki6PvBVhkfHN0I=;
- b=CDpSvytEfKGNn4gkycr6/H0oNq1rxBNPMyNh/acPdogRbLAf1+OUmayeaMr4G8EGdt
- 772jtEf0sB1NE9DZs+ekFuF9JTvs42mT+OeVRJNN9p/Az0WZEzkIOizzFwI5IzfSW312
- ihkS1bWbe87d0m9duydJri/z2qFaqa7JqDM23MNTgpFPD8i6sCXRpLY/6wTgjhSZAtM5
- TAT2X3Jtpbbw01o4seoQ8xDQALC9n3sCsC82fK7Wob/ppdJMlC+ID+mMUU1fF55+Cy/n
- olN1BEHBUWILdHohTmZk1qXjmfb35XfnA6Uvphr0yyYJTJmw7uUuDLttT4WxDfb5fmb2
- +YPQ==
-X-Gm-Message-State: AOJu0Yzd9YrfxTHFqyCwjhjMUYN14LXmOHJ5Uavs5P/ch5Z/0SHAkFJ7
- pu0mASjhg+9xjpoZ83N2OoebZQ7jSdbCwgOjwPMz5iKOcoYQp71R
-X-Gm-Gg: ASbGnctvYmZAZHdaq+GTvBU26CB6RnWuRBWFcbZsKAsLIwgjzcxH0FUFtiiwIUo5EuU
- dX/D3yB3YKLuhM2WP+3QogWBYSZ2ZOcQYb8j9GkQ5GRLOsojayhq3cFkpJMLVXYimuRJygTZOJE
- zA2N1coP6zinbEwxR3knejsiuNh084WYzARX+17yFBpzO4zPi23laBrYHLVoxcXuURM+KwjguIY
- qKNVdIMeP8rKb3NiTulvmXzbEvVBq2iGYW851TMTsd8iRG90OOCLbgZmLr/KHC9LG2omg==
-X-Google-Smtp-Source: AGHT+IHQDZHmOXb+Ak0pEZbz1WH8l/WAHzVxqB1uJfKF0fQjZr5VSVeJHyECrszeBc6xxykQNGwsog==
-X-Received: by 2002:a17:90a:c2c7:b0:2ef:19d0:2261 with SMTP id
- 98e67ed59e1d1-2f452e1c111mr20536864a91.16.1734959796124; 
- Mon, 23 Dec 2024 05:16:36 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:81e:be66:fdf1:bf79])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-219dc9cde5bsm73148585ad.116.2024.12.23.05.16.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Dec 2024 05:16:35 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-next-20241223
-Date: Mon, 23 Dec 2024 10:16:32 -0300
-Message-Id: <20241223131632.1507487-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1734959973; x=1735564773;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uSoNQyEPKaTTIr0BdBZSj6dl5CvduTgonmP8p2L7SEk=;
+ b=FOHdfqIo1/ygERMRj5veAl8bdshdLjGxtUNo/E8vYRtL6QEI1RYLNtq1YmpLIjR5AM
+ cR+lSjUo716f7H2hnnJ8ZTUXeQcE9STwuyV3WXQIUyIRo8WGoYhs6MXuvEBjYdFd1nSM
+ bS78uKHRMQDcgLZMXwZgFrjr/8NvDHk4MTEQQeu1dC/4z0NSU26/rSLBkmPjAcmyOkge
+ ROiQ9eWYImm2BTQ4YDtZvehkknpozVHXn2gxhXsSoHL7zNJ2sG4iOs9Wj8B78jZbW8NC
+ z4o7HVRxnKpv0CkqtSWIiwkprwm0aypACwJhdTaqPm7XPeWgAHnE5XhKg+Eqwut0sHXw
+ iVTA==
+X-Gm-Message-State: AOJu0YzOW9G1U01V6D/XJfsuox6MPEVF5hwkdctzuupuaRb4OpF9n7Lc
+ 3/SFgZCOi7Qk2jzysPWZd+fAX1wBqZyLQYqnJl+z6upazDnXhMuL5r3mycc9rzdr9ERWeuran+0
+ UmozFaW0zlqe6q5WEIjBnMAJ1gBE=
+X-Gm-Gg: ASbGncvL5JRPdo3Ri0EYN09MZqTT3d8nqzd7AhfeiBljxI+e/tlyRr4TpgdGeph/0Pv
+ AKc5ojiwl2qyhcK4CKMLcDDDshWOB1lUfMqm75pGe/4aY9WSyqGsnlpKDWfKss0UIgV9B
+X-Google-Smtp-Source: AGHT+IHF6k3yVVq4OuBMkdYEAkgzzLt3W0/I+R4ol01f2D72QGBNBObAs5BRxNPmrQgJBFG/gshzwMWZWccS/g9r9GY=
+X-Received: by 2002:a05:6512:2398:b0:540:1c16:f2f7 with SMTP id
+ 2adb3069b0e04-54229538abcmr3428714e87.14.1734959972860; Mon, 23 Dec 2024
+ 05:19:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241218194224.1867039-1-tharvey@gateworks.com>
+In-Reply-To: <20241218194224.1867039-1-tharvey@gateworks.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 23 Dec 2024 10:19:21 -0300
+Message-ID: <CAOMZO5BATJ5Uqtv7_RQQg3PRGO3S96vOxDb0r_MJ20pMxdPv1Q@mail.gmail.com>
+Subject: Re: [PATCH] spi: mxc_spi: use proper clock for SPI bus
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,59 +89,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Wed, Dec 18, 2024 at 4:42=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
+>
+> The mxc_get_clock function is around for compatibility with older
+> drivers that are not clock aware. In this case asking for the clk for
+> MXC_CSPI_CLK does not take into account there are multiple SPI busses on
+> modern IMX SoC's and it will return the clock for the first bus which
+> may not be used or configured.
+>
+> In the case you are not using the first bus you will not get the proper
+> clock. Fix this by obtaining the clock rate from the bus clock.
+>
+> This resolves an invalid SPI clock frequency configuration for SPI2 on a
+> board where SPI1 is not used.
+>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 
-Please pull from u-boot-imx/next, thanks.
-
-The following changes since commit 5947cd76acdd65f48f0748af01241cb6c0756fba:
-
-  Merge branch '2024-12-21-add-arm64-CI-host-support' into next (2024-12-21 12:27:55 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20241223
-
-for you to fetch changes up to 6016960ceb9d3fda591cda94df3841748fb65596:
-
-  imx: Use per board ddrphy_trained_csr (2024-12-23 08:10:15 -0300)
-
-u-boot-imx-next-20241223
-------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/23987
-
-- imx8m: Remove global ddrphy_trained_csr as it is a per board configuration.
-- Add DM_FLAG_ACTIVE_DMA flag for FEC network driver to avoid potential
-kernel crash.
-- Miscellaneous improvements for i.MX8M Venice Gateworks platforms.
-----------------------------------------------------------------
-Meng Li (1):
-      net: fec_mxc: add DM_FLAG_ACTIVE_DMA flag for FEC network driver
-
-Peng Fan (1):
-      imx: Use per board ddrphy_trained_csr
-
-Tim Harvey (5):
-      spi: mxc_spi: use proper clock for SPI bus
-      drivers: misc: gsc: add support for fan controller
-      drivers: misc: gsc: add support for prescaled
-      imx8m*-venice: define suitable address for SPL_LOAD_FIT_ADDRESS
-      arm: dts: imx8mp-venice-gw7*xx: fix TPM reset
-
- arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi |  16 +-
- arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi |  16 +-
- arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi |  16 +-
- arch/arm/include/asm/arch-imx8m/ddr.h            |   3 -
- arch/arm/include/asm/arch-imx9/ddr.h             |   3 -
- configs/imx8mm_venice_defconfig                  |   1 +
- configs/imx8mn_venice_defconfig                  |   1 +
- configs/imx8mp_venice_defconfig                  |   1 +
- drivers/ddr/imx/phy/Makefile                     |   2 +-
- drivers/ddr/imx/phy/ddrphy_csr.c                 | 732 -----------------------
- drivers/ddr/imx/phy/ddrphy_train.c               |   3 +-
- drivers/ddr/imx/phy/helper.c                     |   8 +-
- drivers/misc/gsc.c                               |   4 +
- drivers/net/fec_mxc.c                            |   1 +
- drivers/spi/mxc_spi.c                            |  14 +-
- 15 files changed, 46 insertions(+), 775 deletions(-)
- delete mode 100644 drivers/ddr/imx/phy/ddrphy_csr.c
+Applied to u-boot-imx/next, thanks.
