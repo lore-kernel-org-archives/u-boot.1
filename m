@@ -4,89 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E0C3E7718D
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:49:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B3ADE7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 16:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35652807C9;
-	Mon, 23 Dec 2024 15:49:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3CEF280711;
+	Mon, 23 Dec 2024 17:52:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tpSjP0lZ";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1734972734;
+	bh=kOD3aOMMebpv9hCRT734uYfWoa1pExVy9fbtjDWvGis=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jJcY+I6JMf+qI3MidEBFUBzocRuoWSWAlUT+iCvZ42ZX02zpyH9bo1XcfqfEQKxiI
+	 QL6igxK6vhYu9YnEWGczdCnQjX02WPkSI6lkU3tU1U9C9oV8RqmZAY1Gweuolu9RHe
+	 4ondKEU9JRgZmhN9Hl4p01Q3rk3QyKaPxh7kO0k0Weo01Lab25WlB6PqSOE4AZHL3d
+	 ni+Ars78wn8lzmj6hwdwRZmOgQ7T+yf7BjlmxJc9leK/CXZXGOCFDsDhWZqJWN9/Az
+	 vKuA9t+vcBhmKbgRXK4Pcm3lB4+U07ejxLc/C8egliFyt0iiwY/ba3F3HrXNMcbF6H
+	 T5aKZEPqrZBUg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C88FC807BC; Mon, 23 Dec 2024 15:49:06 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 699D080714; Mon, 23 Dec 2024 17:52:13 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A77480780
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:49:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24D31806FC
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 17:52:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6d92e457230so42417166d6.1
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:49:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734965343; x=1735570143; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eclQxymw/S+bCamyttK+McfCBzcGgTXc9jiWnFi/xQM=;
- b=tpSjP0lZPvOt9tWGxfydV50/6OTnMMljIYCvAJGCJf65GxuxBoLdm4//vZ5aNCgwpf
- EjZ8aMFWfscMoOfD+SAGZljga5liIhigovnVIp8pDfZgMrs6eeum7LKzsxzZI0RVRQmk
- aBUSPaZC6oEwj/mC0pk8TaLwzbtAjUEUE4cTkhmpApfF5g/KyFYFDBJHlC8mihMvE0FU
- fdAcw7XoBdLT3UtLD9Ir18LySi3yJe5hGfwgj0I/W0KZcvn+lANIWcZCnGZVhWdwjAqr
- w/suT8RpmIel/IbutgwH8P875i6M0fSUrgDzAkUDQh5TvlicncfIVx7xCjnSPhqO3gKb
- YYAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734965343; x=1735570143;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eclQxymw/S+bCamyttK+McfCBzcGgTXc9jiWnFi/xQM=;
- b=tvNrKou5sD0LSqN5N5vbFX2+0YB9lr5Zd145UPSaAytdIpwuwwi00IE+07u61m+Qm0
- Xo/Qv6+xm06qMOkvs8Hpq3h0Ce+P/qak9Pd+RIJN9LY6G9xA8/kbKZNy7vkDrvtDCvHc
- VV/lXow/FsF50XlflDCnAyPvww11pfUm0gW9FEF7XuZJ9cDhQ6aXMGGPMrgNF8I6u6fg
- 5wjX6sN5TZB8tK/A1V35aPq3xl2uZJUrJACXIXwFfZm6AIM8mDXhegGp3BwWzBYW66xH
- sDb3uFmj3QyUaoYyjPvWHbb9NnXEjMRjjWqaHjGCogCyXIVDoM26g7pEDg/h9C99Q4JG
- Ve3g==
-X-Gm-Message-State: AOJu0YyhIUZJER41SXf8a5hPFh6faUwk59SV84ZStIFldFm33J5Xwo88
- W7jnyaGZpTZHGrN8wPkBilel5vegqlV+g7dSVXSzcYmU7Oj6RtHY+XPmWkMR48VpSSptGoQ09Ed
- i
-X-Gm-Gg: ASbGncvAkZQrwQX2VsoFHF/2154BifFtjb4FcvlpMosvAytlEa0+4Q6VChKFWcnOWNX
- BjfB/1Wpx9Sjsy1k5QK3+Vkqok9BzkwHM5jBW6SscYeoLQq4By57G359Y7XyCTUdaN1xJmfMkwo
- 7qyqkWza5s+8q6bpastn9ykJykWRGxWPckVuG8r+5O09vUxfZGNZtKMbfWjLxAH9Ja+5vXQi5Bq
- sut9ejVfbEsq/NVxsjMsga+6XRDyUJ4ftbsiVhrEOLUrmwOp9J/IkKvkelbSuCikII9ocsMD7qn
- pnzGhJkcUe2wWamzcSNYpy8ylwaZ0+pLZa+zOW2UWeFZCVwautUwBCk=
-X-Google-Smtp-Source: AGHT+IE/dn+ZEOgU9gyoEdHYHFbEHNnVECrK5CD8zgQskCsDVgarvZhqzqJ0vdIYWNLlevDrf74aVg==
-X-Received: by 2002:ad4:5d4e:0:b0:6d8:8b9d:1500 with SMTP id
- 6a1803df08f44-6dd2339dfb3mr204034576d6.36.1734965343154; 
- Mon, 23 Dec 2024 06:49:03 -0800 (PST)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.49.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Dec 2024 06:49:02 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>,
- Eddie James <eajames@linux.ibm.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH 11/11] tpm: add kconfig control in tcg2_create_digest()
-Date: Mon, 23 Dec 2024 06:47:33 -0800
-Message-Id: <20241223144737.554992-12-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241223144737.554992-1-raymond.mao@linaro.org>
-References: <20241223144737.554992-1-raymond.mao@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="PrsVIzMV"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 4AE5E1040DBC5; Mon, 23 Dec 2024 17:52:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1734972729;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kOD3aOMMebpv9hCRT734uYfWoa1pExVy9fbtjDWvGis=;
+ b=PrsVIzMVMk6jJ26C1xci1Vmxg9LlYydaQqYEep0IMW1NWK7Ry4vY5XfD/qWpvW1Nsk6/lN
+ 7FwlDrllXooEkE4kWvUtAIsUqW1hVeL8RaWh2uDqeoOqw2dVhP+8Hwt1D2cY0o+wC/htDz
+ VC3y/7mJUg30sH4sjxAmAJExoVcdjCmluc+tajUTJn8MwmFFiGcG5d0aCdihdQdEJWD/R1
+ fm1UyR75irtzNEHR4R7BYErhjq39ZsS3WKngTwNvsJ2LkEZZU2hHjpnU4ANochQvwIgNFI
+ LSVZngsO74VnMKVnwhWWcdu22fg4iYMuSfw0kfsJYoUmsC+nW4Tvs9VPRJForw==
+Message-ID: <63291d8d-ca66-4e8a-a9aa-efba47a1f505@denx.de>
+Date: Mon, 23 Dec 2024 17:52:02 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] mtd: spi-nor: Fix the spi_nor_read() when config
+ SPI_STACKED_PARALLEL is enabled
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ u-boot@lists.denx.de, tudor.ambarus@linaro.org, j-humphreys@ti.com
+Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
+ u-kumar1@ti.com, trini@konsulko.com, seanga2@gmail.com,
+ caleb.connolly@linaro.org, sjg@chromium.org, william.zhang@broadcom.com,
+ stefan_b@posteo.net, quentin.schulz@cherry.de, Takahiro.Kuwano@infineon.com,
+ p-mantena@ti.com, git@amd.com
+References: <20241220143006.1921705-1-venkatesh.abbarapu@amd.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241220143006.1921705-1-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,75 +87,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To allow disabling algorithms for tcg2, in function
-tcg2_create_digest(), each hash algorithm operations should under
-the hash kconfig control to avoid building errors when the algorithm
-is disabled.
+On 12/20/24 3:30 PM, Venkatesh Yadav Abbarapu wrote:
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
- lib/tpm_tcg2.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+[...]
 
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 64563d7871..85f9d3c9c5 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -96,9 +96,15 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- {
- 	struct tpm_chip_priv *priv = dev_get_uclass_priv(dev);
- 	u8 final[sizeof(union tpmu_ha)];
-+#if IS_ENABLED(CONFIG_SHA256)
- 	sha256_context ctx_256;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA512)
- 	sha512_context ctx_512;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA1)
- 	sha1_context ctx;
-+#endif
- 	size_t i;
- 	u32 len;
- 
-@@ -106,30 +112,38 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- 	for (i = 0; i < priv->active_bank_count; i++) {
- 
- 		switch (priv->active_banks[i]) {
-+#if IS_ENABLED(CONFIG_SHA1)
- 		case TPM2_ALG_SHA1:
- 			sha1_starts(&ctx);
- 			sha1_update(&ctx, input, length);
- 			sha1_finish(&ctx, final);
- 			len = TPM2_SHA1_DIGEST_SIZE;
- 			break;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA256)
- 		case TPM2_ALG_SHA256:
- 			sha256_starts(&ctx_256);
- 			sha256_update(&ctx_256, input, length);
- 			sha256_finish(&ctx_256, final);
- 			len = TPM2_SHA256_DIGEST_SIZE;
- 			break;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA384)
- 		case TPM2_ALG_SHA384:
- 			sha384_starts(&ctx_512);
- 			sha384_update(&ctx_512, input, length);
- 			sha384_finish(&ctx_512, final);
- 			len = TPM2_SHA384_DIGEST_SIZE;
- 			break;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA512)
- 		case TPM2_ALG_SHA512:
- 			sha512_starts(&ctx_512);
- 			sha512_update(&ctx_512, input, length);
- 			sha512_finish(&ctx_512, final);
- 			len = TPM2_SHA512_DIGEST_SIZE;
- 			break;
-+#endif
- 		default:
- 			printf("%s: unsupported algorithm %x\n", __func__,
- 			       priv->active_banks[i]);
--- 
-2.25.1
+> @@ -1578,8 +1580,8 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>   	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+>   	int ret;
+>   	loff_t offset = from;
+> -	u32 read_len = 0;
+>   	u32 rem_bank_len = 0;
+> +	u32 stack_shift = 0;
+>   	u8 bank;
+>   	bool is_ofst_odd = false;
+>   
+> @@ -1593,18 +1595,23 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>   	}
+>   
+>   	while (len) {
+> -		bank = (u32)from / SZ_16M;
+> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
+> -			bank /= 2;
+> -
+> -		rem_bank_len = SZ_16M * (bank + 1);
+> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
+> -			rem_bank_len *= 2;
+> -		rem_bank_len -= from;
+> -
+> +		size_t read_len = len;
 
+size_t read_len should be declared at the beginning of this function.
+
+>   		offset = from;
+>   
+> +	if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+
+The indent here needs to be pushed on tab RIGHT -> .
+
+Do you need this functionality in SPL ? If so, you might need a matching 
+Kconfig SPL_SPI_STACKED_PARALLEL symbol .
+
+> +		if (nor->addr_width == 3) {
+> +			bank = (u32)from / SZ_16M;
+> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
+> +				bank /= 2;
+> +
+> +			rem_bank_len = SZ_16M * (bank + 1);
+> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
+> +				rem_bank_len *= 2;
+> +			rem_bank_len -= from;
+> +		}
+> +
+>   		if (nor->flags & SNOR_F_HAS_STACKED) {
+> +			stack_shift = 1;
+>   			if (offset >= (mtd->size / 2)) {
+>   				offset = offset - (mtd->size / 2);
+>   				nor->spi->flags |= SPI_XFER_U_PAGE;
+> @@ -1613,20 +1620,31 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>   			}
+>   		}
+>   
+> +		if (nor->addr_width == 4)
+> +			rem_bank_len = (mtd->size >> stack_shift) - offset;
+> +
+>   		if (nor->flags & SNOR_F_HAS_PARALLEL)
+>   			offset /= 2;
+> +	}
+>   
+>   #ifdef CONFIG_SPI_FLASH_BAR
+> +		u32 remain_len;
+> +
+>   		ret = write_bar(nor, offset);
+>   		if (ret < 0)
+>   			return log_ret(ret);
+> -#endif
+> -
+> -		if (len < rem_bank_len)
+> +		remain_len = (SZ_16M * (nor->bank_curr + 1)) - offset;
+
+Is this calculation correct?
+
+It used to be calculated as:
+
+bank = (u32)from / SZ_16M;
+rem_bank_len = SZ_16M * (bank + 1);
+rem_bank_len -= from;
+
+Now the bank is calculated as:
+
+bank = nor->bank_curr + 1;
+
+?
+
+Why not keep calculating bank from offset ?
+
+Maybe this will work ?
+
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index 691962ef271..bdfbd44f30c 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -1578,10 +1578,11 @@ static int spi_nor_read(struct mtd_info *mtd, 
+loff_t from, size_t len,
+  			size_t *retlen, u_char *buf)
+  {
+  	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+-	int ret;
+  	loff_t offset = from;
+  	u32 rem_bank_len = 0;
+  	u32 stack_shift = 0;
++	size_t read_len;
++	int ret;
+  	u8 bank;
+  	bool is_ofst_odd = false;
+
+@@ -1595,7 +1596,7 @@ static int spi_nor_read(struct mtd_info *mtd, 
+loff_t from, size_t len,
+  	}
+
+  	while (len) {
+-		size_t read_len = len;
++		read_len = len;
+  		offset = from;
+
+  		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+@@ -1627,24 +1628,24 @@ static int spi_nor_read(struct mtd_info *mtd, 
+loff_t from, size_t len,
+  				offset /= 2;
+  		}
+
+-#ifdef CONFIG_SPI_FLASH_BAR
+-		u32 remain_len;
++		if (CONFIG_IS_ENABLED(SPI_FLASH_BAR)) {
++			bank = (u32)from / SZ_16M;
++			rem_bank_len = SZ_16M * (bank + 1);
++			rem_bank_len -= from;
+
+  			ret = write_bar(nor, offset);
+  			if (ret < 0)
+  				return log_ret(ret);
+-		remain_len = (SZ_16M * (nor->bank_curr + 1)) - offset;
+-		if (len < remain_len)
+-			read_len = len;
+-		else
+-			read_len = remain_len;
+-#endif
+-		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
++		}
++
++		if (CONFIG_IS_ENABLED(SPI_FLASH_BAR) ||
++		    CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+  			if (len < rem_bank_len)
+  				read_len = len;
+  			else
+  				read_len = rem_bank_len;
+  		}
++
+  		if (read_len == 0)
+  			return -EIO;
+
+I am still worried about using stacked parallel and BAR together, is 
+that even possible or are they mutually exclusive ?
