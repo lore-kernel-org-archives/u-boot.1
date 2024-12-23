@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A585E7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 19:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53891E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 20:50:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9A8F80725;
-	Mon, 23 Dec 2024 20:49:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7CE03806D4;
+	Mon, 23 Dec 2024 21:50:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MjC6nR8G";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="iBx6qWEK";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RTSSncqm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 633E880741; Mon, 23 Dec 2024 20:49:47 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 020CA80741; Mon, 23 Dec 2024 21:50:37 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58C5E80708
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 20:49:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CD04806D3
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 21:50:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YH7s46VXMz9snn;
- Mon, 23 Dec 2024 20:49:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734983384;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5ckx2D3FRpX2HbwCXvjg1Hjq4d16pttQj0AQdhZpQQg=;
- b=MjC6nR8G3vgxpfFprO7RIifY4GSzUXq71EXKHIcE7Rmyu57fKJeMoUyqFfrx0qOk5RhEi8
- F/PRyXT6CC3IKKlo0tG/KcW/GfLW6hOaBgNoCruV7cd0dzZMwcNYj3qM3GnC1GNyxM/XkK
- 0zbUgC1hx7ZTwHdRKhDEKLW2S1x82ajap5r04Y1e9t1QY+MnkAzoGHgjhjha/pFlnfYYiS
- yMPFIoGu1boNSyQ8GL85Evgaxmyd03jCkCDIwOea/HzbvlH+cOZDEEawtetkq4e+MSfFb5
- O9ehn4DojovVRLsRInXkGTN+EtYwH+WPbNPtfDO8IyTvcpzdmbEekHNn4mciyQ==
-Message-ID: <4165a5d4-da42-41fe-98c8-39db4b601457@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734983383;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5ckx2D3FRpX2HbwCXvjg1Hjq4d16pttQj0AQdhZpQQg=;
- b=iBx6qWEKPdZS1A6pMStda40+on41S/wOtb2IfNGvKz9YI1bnOyqc4mHhHng/dGL0bEBkEL
- PPR7mFfcpEIYfjH7NiJjgygup6lp2Ohap7vmeGtH9SeE5gA5blsR0pRtk80iE72qQXKRhV
- kK3pkKw5k5QFgmJ9NWJz5lWCNP0QfnLnukuby89EWJFB4uBA/KhLixvZqtFlyCZoSNUKVl
- lb49O4uSRTx/DzqIBzQJFTdrZN+zMgRF+2fNWRGC3DaiFtIoI/viz05hV4paqQl1ZeeBSy
- zGrC0FgpICXui5LhJYeMMS9mKq+lCTbzC646EwFFs9kuDIKnGqtyHD2CYwpwEA==
-Date: Mon, 23 Dec 2024 20:45:16 +0100
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3d0205bd5so6199729a12.3
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 12:50:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734987034; x=1735591834; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zadrwyRlOElnqYsJvM5v5kRYbFesJNmAXI3E8gK6Pj4=;
+ b=RTSSncqm0jy+vAaZbP1gzPDhiNF8dk9EAqkYyfabM60LUcX4ZmmyOUotfEqWb44XrF
+ u28HljxN8oo3hnDFUi/9XxMMj2o9nojG07/cR7hNfrpINmPtwDRAdFMSLUYudIBLmatH
+ U1nPNwC+1dA725OKaEW8+4dKrQKmMqFviUr11HPhRt4q3+8ngdbmkvM3+bkYcT7ipBZA
+ u00PEJL8rmfmF/51GPXouR4D9ufs+KjkvGGE98zvBt9y8MW+S0WY4azEfDM02d6Xk2Ki
+ vWXV32NhQiMM39VZRwZDl2iGZqUpxcr1zTP1QAIRky23mVvzrumBJncqXjFYYN8+TG1e
+ Yoag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734987034; x=1735591834;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zadrwyRlOElnqYsJvM5v5kRYbFesJNmAXI3E8gK6Pj4=;
+ b=Eihxs4mh2pdoHjVIOm+u2tpG0XMgPIRsNGDy9NlI4BzTXttGD3brzPuYiainFApPZk
+ tzoFjZk5qAO6Z+Y908Nb1Vyo9NUIYFYWPQrktCifuH15F0/Urxvw1XAKKrV3urpdLa9m
+ cWLTiU/TZRq0BdOqF4+dXQ/VXYCZicf4Loskzk52/kV73kHdOK5Kd5hc3aoMTc4OupEi
+ gaQceb1iXl8m2rFzb4omb6lT4zrqV3n0x4wbQqTKUVp/bdVJ4oOf60UhsQc8SQnHbnoM
+ C+ej3YlRcN6CF4f5qkXNm5Kha1uRP1ZnV+2jGeJogSGsm6wO/5T5KaNK6M0nnb9jPziV
+ 8ZGw==
+X-Gm-Message-State: AOJu0Ywob73Qqi2GocDsmTItoy+X0AjjPdGcDwwtY5zDGa8Mz6CQmSPL
+ Unbugxf2D6WVd3D1otwcJobdTDb45y1kw1ts3Juw262lFAIKN6RpM8sFlMlHmExqJ9JE5ZtdnlH
+ zuhvim/S9Vxjd29vPYveDphBzacLUjTR/
+X-Gm-Gg: ASbGnctDo0thZ1DhNJTXFTfRCvbUxDjLveCvEdKSOOYWuGX/GH7KsXEI0lfZRtSAC8t
+ XURLltl4HQJzoyNZamYtVMljhCARsubqXe/8i+Zorseggb6+PGto=
+X-Google-Smtp-Source: AGHT+IFwu9ss40dplzRhi1OYvFb1RFgMqO7g7jWCxZqvqCD1C/jB0WIdInSVpvsEaRQwG2S8Y1uAQIggEsBPX1gLTkI=
+X-Received: by 2002:a05:6402:401b:b0:5d2:7456:9812 with SMTP id
+ 4fb4d7f45d1cf-5d81ddfbe2fmr15984967a12.22.1734987033660; Mon, 23 Dec 2024
+ 12:50:33 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/16] pinctrl: renesas: Add Kconfig symbol for
- conditional build of full PFC tables
-To: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Hai Pham <hai.pham.ud@renesas.com>,
+References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 23 Dec 2024 20:50:22 +0000
+Message-ID: <CALeDE9O0CLc-vGG1xB8+GSPKb0SuAiUYuwd1m2avKPeOPtDBsA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] arm64: Convert core type check macros into inline
+ functions
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Biju Das <biju.das.jz@bp.renesas.com>, 
+ Chris Paterson <chris.paterson2@renesas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-References: <20241221213443.115024-1-marek.vasut+renesas@mailbox.org>
- <20241221234701.GP1505244@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20241221234701.GP1505244@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 58d304cf0015c30a91c
-X-MBO-RS-META: ksa5r5n7e8z9xb47sr7itmzhk5u7uwnc
-X-Rspamd-Queue-Id: 4YH7s46VXMz9snn
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,23 +93,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/22/24 12:47 AM, Tom Rini wrote:
-> On Sat, Dec 21, 2024 at 10:34:00PM +0100, Marek Vasut wrote:
-> 
->> By default the pin multiplexing tables used by U-Boot are reduced
->> to keep the size of the bootloader low. This option allows build of
->> full pin multiplexing tables the same way they are included in the
->> Linux kernel. This includes pin multiplexing options for Audio, CAN,
->> CANFD, DU, INTC, INTC-EX, MSIOF, PWM, SSI, for which there is no
->> U-Boot driver. This option is disabled by default.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> [snip]
->> +config PINCTRL_PFC_FULL
->> +	bool "Renesas pin control drivers (full size)"
->> +	depends on PINCTRL_PFC
->> +	default n
-> 
-> The "default n" is the default when there's no default keyword. Please
-> drop when applying, assuming no other changes are requested, thanks!
-Fixed in V2, thanks !
+On Sat, 14 Dec 2024 at 22:44, Marek Vasut <marek.vasut+renesas@mailbox.org>
+wrote:
+
+> Turn the core type check macros into inline functions to perform
+> better type checking on them. The inline functions get optimized
+> out in case they are not used. Indent the MIDR_PARTNUM_CORTEX_An
+> macros in preparation for addition of future three-digit cores
+> and use MIDR_PARTNUM_SHIFT in MIDR_PARTNUM_MASK to be consistent.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+
+
+> ---
+> Cc: Biju Das <biju.das.jz@bp.renesas.com>
+> Cc: Chris Paterson <chris.paterson2@renesas.com>
+> Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  arch/arm/include/asm/armv8/cpu.h | 28 +++++++++++++++++-----------
+>  1 file changed, 17 insertions(+), 11 deletions(-)
+>
+> diff --git a/arch/arm/include/asm/armv8/cpu.h
+> b/arch/arm/include/asm/armv8/cpu.h
+> index 40d54dc85ab..aa1470bb72d 100644
+> --- a/arch/arm/include/asm/armv8/cpu.h
+> +++ b/arch/arm/include/asm/armv8/cpu.h
+> @@ -3,11 +3,11 @@
+>   * Copyright 2018 NXP
+>   */
+>
+> -#define MIDR_PARTNUM_CORTEX_A35        0xD04
+> -#define MIDR_PARTNUM_CORTEX_A53        0xD03
+> -#define MIDR_PARTNUM_CORTEX_A72        0xD08
+> -#define MIDR_PARTNUM_SHIFT     0x4
+> -#define MIDR_PARTNUM_MASK      (0xFFF << 0x4)
+> +#define MIDR_PARTNUM_CORTEX_A35                0xD04
+> +#define MIDR_PARTNUM_CORTEX_A53                0xD03
+> +#define MIDR_PARTNUM_CORTEX_A72                0xD08
+> +#define MIDR_PARTNUM_SHIFT             0x4
+> +#define MIDR_PARTNUM_MASK              (0xFFF << MIDR_PARTNUM_SHIFT)
+>
+>  static inline unsigned int read_midr(void)
+>  {
+> @@ -18,9 +18,15 @@ static inline unsigned int read_midr(void)
+>         return val;
+>  }
+>
+> -#define is_cortex_a35() (((read_midr() & MIDR_PARTNUM_MASK) >> \
+> -                        MIDR_PARTNUM_SHIFT) == MIDR_PARTNUM_CORTEX_A35)
+> -#define is_cortex_a53() (((read_midr() & MIDR_PARTNUM_MASK) >> \
+> -                        MIDR_PARTNUM_SHIFT) == MIDR_PARTNUM_CORTEX_A53)
+> -#define is_cortex_a72() (((read_midr() & MIDR_PARTNUM_MASK) >>\
+> -                        MIDR_PARTNUM_SHIFT) == MIDR_PARTNUM_CORTEX_A72)
+> +#define is_cortex_a(__n)                                       \
+> +       static inline int is_cortex_a##__n(void)                \
+> +       {                                                       \
+> +               unsigned int midr = read_midr();                \
+> +               midr &= MIDR_PARTNUM_MASK;                      \
+> +               midr >>= MIDR_PARTNUM_SHIFT;                    \
+> +               return midr == MIDR_PARTNUM_CORTEX_A##__n;      \
+> +       }
+> +
+> +is_cortex_a(35)
+> +is_cortex_a(53)
+> +is_cortex_a(72)
+> --
+> 2.45.2
+>
+>
