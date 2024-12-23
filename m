@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF4EE7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 916D4E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:49:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA0F7807A7;
-	Mon, 23 Dec 2024 15:48:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 149A38074B;
+	Mon, 23 Dec 2024 15:48:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cz9WydMA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hRJPh57n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6E7E806D4; Mon, 23 Dec 2024 15:48:47 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 597A1806D4; Mon, 23 Dec 2024 15:48:54 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D62B80771
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:48:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2792980772
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:48:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6d8f99cb0d9so33594856d6.0
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:48:45 -0800 (PST)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6dd43b08674so6363006d6.3
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:48:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734965324; x=1735570124; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734965331; x=1735570131; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q+Hdz8dkLhHoH8ZELugDuge1uFhydeRq0MapwYRfScA=;
- b=cz9WydMAC9ync5nTcHPzYMaxYMnmDRkZBzHdGeSlkBqcBqrUL4JviI/T3loc6WvQ74
- cZVF2PEmk5r3i5ds0tGlSP/q4ukKxNwUJf2SffywArW8mjSANptohhZL1DBsnJaPbWW3
- AVz7wIe3YFNbO/5W1IkeMVe1WRSRhuopt1FoH0FzX7f57xRCDo+JM0xOITwd9NU6kVJU
- CELgOfL1aiQsf+oinXgXQYUWZ2xc6wSN/A3sBlvcS2y8/qEGB2FUfJcz0ZPJaXXdbuhj
- 7glSr0QFofMwu/NnbGqkqCW4ESJ7t8hIArPrZV3AaV7Wpm3eD/luXQ8ctyBYZKtArMkV
- fA6w==
+ bh=/pXRDvtvikqOzhgTDXurgJCfUnLKfKJjdJgJ5RV1OWk=;
+ b=hRJPh57nfOXPUfKYZArZiJ/9TmGGG7DliH48Nk5/fYij2FbKexKAp5aQ4jF/260O8T
+ KXjrqvvXl2OjVuClHCj60nnKS1gdA7xXzarguQfPgkVSV3JmNwDd2RrvOQdqw5qA3vv1
+ PdGhYCQBC1lEnOJJA3vl5hd7fLSf/DXMaXRxtRXQOwj78hcQ3GAlRJEUUh7kOXba1fF1
+ GpT4OWG2ZnLu/CBX2rz/cL4HHXZZmkBWtZDVfG3/ffAcmVlVkLOormHNIiJTvVXIyn5Q
+ 33MpBDOyE2a1BpqV579/Mc141EZmlZyc0/EjT77WL+4b75JTQWXjixK11dBI4IlUfUKF
+ 4tmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734965324; x=1735570124;
+ d=1e100.net; s=20230601; t=1734965331; x=1735570131;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q+Hdz8dkLhHoH8ZELugDuge1uFhydeRq0MapwYRfScA=;
- b=ioWBwECviJU6jp1dbcNX+YwmP4nIwt7/gYYY8u4b0lv/580SLiTmiqi8mY6u1ihV2p
- 6C/x24SYODx/l151Y12BYCDcH7jS5iq/IlgAUB3B+/H4s0bm5pnNGFBe1UtTydsoPxMo
- g+CO2QMU+w8u11zKH8mKQEGSPmtbfPvgnZ0YyLXd7gQC+EpNL/CCnXW/F2isVDCyOk4Z
- zeFTGHp9gG7glBcZDgqwt2cgzSzmgAwmzxh6BaipHXpM2dyhQnqrpaFpEJEifNecibKK
- mcoY5XnLBQmv7p2S2TsTgpCOT8e5s8plCLC4VN2at6EU+NlGReZIOh/capQq6kvD0Olw
- U3Lw==
-X-Gm-Message-State: AOJu0YxgZnO98M0IKI6rkP7ZaETWXUO1UeIf1rII5wdZrb+m8NTe1LLB
- QjBBevR0/rk0b7dFXBhWLmybXSMyqCljoeDDTiosk0Tym+0dJiVi9BbNAmx6aytZjvlzTHy/w/s
- b
-X-Gm-Gg: ASbGnctOJNTzds2+ZW+2cEcP6ra+ItXuoTCYWOkt6+NuTl5aV3E1/E4mycItwD0dRe3
- TFMrKF5W78KsrdGt4zEo7DRGCxiqjx2byIrq9gziUpTn+NNklyauBKuWMQ0Emj823D/VBSLOk41
- mNHYreQWTrlAX099ar6uznprC/bzZLd+iDhEVTd/gU7clCFyTtRrbBtai1+JgoVnrvYsVhyzIrE
- v3WZngFwWc85/XzIDhFscwaYKAEKbhuDyWTJ1o30KUEvoLGk5SEHMqO9/rzgFC7pnUAqztvBI8D
- tSnfXCG7WQzl8SPd1uI8jDLlz+dLCjBnsy0nOsNhzDqhCrRvGOaB3z0=
-X-Google-Smtp-Source: AGHT+IEG3t8JCNslAcYh+oR2ju0jWIYn4V7mgT6NHOSNIonlMR2uSjuqVGnjbkKNiQOqyxSzANG9sA==
-X-Received: by 2002:a05:6214:2b0e:b0:6d8:9677:fbe4 with SMTP id
- 6a1803df08f44-6dd2331f2f8mr253750366d6.9.1734965324264; 
- Mon, 23 Dec 2024 06:48:44 -0800 (PST)
+ bh=/pXRDvtvikqOzhgTDXurgJCfUnLKfKJjdJgJ5RV1OWk=;
+ b=dIvNq+bQUowARZBwdzdQZKrvpd8pGiqmJAwD3myYHRPbuVsdHmXg6eV8FpogS6FmG3
+ v8Qu9fxWkY3eVcHG8GWSt2s+bpzH8ldRGZRvybmsIUX37Bj5oCzOY/ciqz1xCghTV44I
+ 4LLTG5wwilmsoKr22KCCb/PxPuYLi+gjXuR3FSRm3UmDgf4pTywCTo3UpMtFeXN5WhVn
+ urLxk0dLHCBWjn83HOI2XOnCyAyZzwlETLbWpqIj8W3vDQ1LqvjmwriVGLrIQYklAhWK
+ V2WgBUHFNGqNCnqTK9yRTpdK6Et8XeSkWpyJ0zxWKPzP6Xtyl5qUSFiUgzGyRQy+txoG
+ jfQg==
+X-Gm-Message-State: AOJu0Yxu1pa2LZBo6xG3tLoXvkRWb4jVNrbHDWDlcUix1oLW4fYBQUq5
+ FC6q9tCv/ftExJ798ZW4l2fwqhH6VVnB9sS7tvZ8kN7EaGQV59E0Acv6whGxYvkZ/E1VeH54Uef
+ M
+X-Gm-Gg: ASbGncusJMhj9uMoAthg7QYXeAPcP94yA+UdpeJOyogwU+DihxT8oBiiCXU2oKy/5RL
+ zZHDpFJrA0vKSnWssuP5ic2Tk5xUmVhIRJylpbZZqufl6oW5CWN+E7OHo5H8XU+wrT3PN5T/uPw
+ rz9Ppbl6Zuqyn66BSPjFM3RuZTQGKy7+1348bViOyAIZA16w1Nj9pm4D+xi01vU2+Rp4AdECxpu
+ dqiLEQcOi1Hf+P3TL6hFPBtGdDaeLyZN3cM50eW+jNSvXgd4bjZYl3T3vNsaPBUhnpyfJgLJQYU
+ pri8xaZy50TzvmyBYrlJZDBepvI/e9XrGbHA3x+PPeuS6yYa523I14w=
+X-Google-Smtp-Source: AGHT+IEa0luSMnr0f0DPPjGowzt4yLwfYW5WHDVBtWjQufPnZcLmyYrCxsr9KrrudFXoucC3zgb6uA==
+X-Received: by 2002:a05:6214:2589:b0:6d8:a76d:b66c with SMTP id
+ 6a1803df08f44-6dd2339e08fmr199577346d6.30.1734965330915; 
+ Mon, 23 Dec 2024 06:48:50 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.48.43
+ 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.48.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Dec 2024 06:48:43 -0800 (PST)
+ Mon, 23 Dec 2024 06:48:50 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tim Harvey <tharvey@gateworks.com>, Eddie James <eajames@linux.ibm.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH 08/11] tpm: Simplify tcg2_create_digest()
-Date: Mon, 23 Dec 2024 06:47:30 -0800
-Message-Id: <20241223144737.554992-9-raymond.mao@linaro.org>
+ Tim Harvey <tharvey@gateworks.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Eddie James <eajames@linux.ibm.com>
+Subject: [PATCH 09/11] tpm: Simplify tcg2_log_init()
+Date: Mon, 23 Dec 2024 06:47:31 -0800
+Message-Id: <20241223144737.554992-10-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241223144737.554992-1-raymond.mao@linaro.org>
 References: <20241223144737.554992-1-raymond.mao@linaro.org>
@@ -112,57 +113,78 @@ parsing.
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- lib/tpm_tcg2.c | 17 +++++------------
- 1 file changed, 5 insertions(+), 12 deletions(-)
+ lib/tpm_tcg2.c | 42 +++++++-----------------------------------
+ 1 file changed, 7 insertions(+), 35 deletions(-)
 
 diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 7ecd53106f..9bdbe411e9 100644
+index 9bdbe411e9..72969923a9 100644
 --- a/lib/tpm_tcg2.c
 +++ b/lib/tpm_tcg2.c
-@@ -94,25 +94,18 @@ u32 tcg2_event_get_size(struct tpml_digest_values *digest_list)
- int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- 		       struct tpml_digest_values *digest_list)
+@@ -208,37 +208,17 @@ static int tcg2_log_append_check(struct tcg2_event_log *elog, u32 pcr_index,
+ 
+ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
  {
 +	struct tpm_chip_priv *priv = dev_get_uclass_priv(dev);
- 	u8 final[sizeof(union tpmu_ha)];
- 	sha256_context ctx_256;
- 	sha512_context ctx_512;
- 	sha1_context ctx;
+ 	struct tcg_efi_spec_id_event *ev;
+ 	struct tcg_pcr_event *log;
+ 	u32 event_size;
+ 	u32 count = 0;
+ 	u32 log_size;
 -	u32 active;
  	size_t i;
- 	u32 len;
+ 	u16 len;
 -	int rc;
 -
 -	rc = tcg2_get_active_pcr_banks(dev, &active);
 -	if (rc)
 -		return rc;
  
- 	digest_list->count = 0;
++	count = priv->active_bank_count;
+ 	event_size = offsetof(struct tcg_efi_spec_id_event, digest_sizes);
 -	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
 -		if (!(active & hash_algo_list[i].hash_mask))
 -			continue;
-+	for (i = 0; i < priv->active_bank_count; i++) {
- 
+-
 -		switch (hash_algo_list[i].hash_alg) {
-+		switch (priv->active_banks[i]) {
- 		case TPM2_ALG_SHA1:
- 			sha1_starts(&ctx);
- 			sha1_update(&ctx, input, length);
-@@ -139,12 +132,12 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- 			break;
- 		default:
- 			printf("%s: unsupported algorithm %x\n", __func__,
--			       hash_algo_list[i].hash_alg);
-+			       priv->active_banks[i]);
- 			continue;
- 		}
+-		case TPM2_ALG_SHA1:
+-		case TPM2_ALG_SHA256:
+-		case TPM2_ALG_SHA384:
+-		case TPM2_ALG_SHA512:
+-			count++;
+-			break;
+-		default:
+-			continue;
+-		}
+-	}
+-
+ 	event_size += 1 +
+ 		(sizeof(struct tcg_efi_spec_id_event_algorithm_size) * count);
+ 	log_size = offsetof(struct tcg_pcr_event, event) + event_size;
+@@ -265,19 +245,11 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
+ 	ev->uintn_size = sizeof(size_t) / sizeof(u32);
+ 	put_unaligned_le32(count, &ev->number_of_algorithms);
  
- 		digest_list->digests[digest_list->count].hash_alg =
--			hash_algo_list[i].hash_alg;
-+			priv->active_banks[i];
- 		memcpy(&digest_list->digests[digest_list->count].digest, final,
- 		       len);
- 		digest_list->count++;
+-	count = 0;
+-	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
+-		if (!(active & hash_algo_list[i].hash_mask))
+-			continue;
+-
+-		len = hash_algo_list[i].hash_len;
+-		if (!len)
+-			continue;
+-
+-		put_unaligned_le16(hash_algo_list[i].hash_alg,
+-				   &ev->digest_sizes[count].algorithm_id);
+-		put_unaligned_le16(len, &ev->digest_sizes[count].digest_size);
+-		count++;
++	for (i = 0; i < count; ++i) {
++		len = tpm2_algorithm_to_len(priv->active_banks[i]);
++		put_unaligned_le16(priv->active_banks[i],
++				   &ev->digest_sizes[i].algorithm_id);
++		put_unaligned_le16(len, &ev->digest_sizes[i].digest_size);
+ 	}
+ 
+ 	*((u8 *)ev + (event_size - 1)) = 0;
 -- 
 2.25.1
 
