@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DBBDE7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63F9AE7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 843B880655;
-	Mon, 23 Dec 2024 14:19:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE34A806FB;
+	Mon, 23 Dec 2024 14:20:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nbH+n1ll";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TOsZifdZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2269E806FB; Mon, 23 Dec 2024 14:19:36 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 1D1F380708; Mon, 23 Dec 2024 14:20:07 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E94AC8062B
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:19:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2374B8062B
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:20:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5401e6efffcso5053994e87.3
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 05:19:33 -0800 (PST)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-53e384e3481so3835480e87.2
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 05:20:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734959973; x=1735564773; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1734960004; x=1735564804; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uSoNQyEPKaTTIr0BdBZSj6dl5CvduTgonmP8p2L7SEk=;
- b=nbH+n1llydUNPWMn+GNWxdMHDNd2Na0Qcc35E60kDz2/+CWtJqSxsaOpbbH7Nhtycf
- 8UCe8VL9BWzLef8sxG5uTtYovH7Q8+WtcWHD44Brap9Dp5inge73YR2FeGroaL8vEPhQ
- 1Kd6nELHBQ68OjfsoXoAQrTDVvrDYnJZgWWtyaHQd8XUK1vSXLWeEu46u91SEN47c90C
- RrHzkoAycMboBYEGmsjqwj0lbW4JMQDSf+taHnFPu43v/YH2GC6sBPnFBiHAEuouOk4A
- xI0JUni+pMx3R8/QTbWBjO8Q0CFdDSx2weoefPweDGiH/5h0UW7NJ7YSVueCKymj0Gd2
- wr+Q==
+ bh=8gMHAGJRtbp/nHJbyFGPqBBbq/RwYIyzfoPMTkvQnH0=;
+ b=TOsZifdZ949GTEj+wbyWocZ9p1FSbIPkp7uuyfodbz0aFQsqcvEu7pwFZhl2GTBaCR
+ bvwsyaFKq77e+H02IvHx/i0+AumbH92e6XDnTN657kALEhzXhfqTri7sW8sP6msxTLcf
+ s+xAj/T9XHTmSm0ix+x47KepDU/g/Rdq4oHteCLtml+Ac99kTOVznhvHvxX7WabWv17e
+ sEsf0et3KbLp6eYmKexUootC2fK4Xpimts6lyjGtpz6a+O1o6xLY5+hfAcNHWRCrrFTG
+ oXgdl/gA1J6KKRw97fMFpYOZRxFZHdYTIvofMetZvydqKGCNxZ39lDVL+px8P6ToSSa0
+ dYOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734959973; x=1735564773;
+ d=1e100.net; s=20230601; t=1734960004; x=1735564804;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uSoNQyEPKaTTIr0BdBZSj6dl5CvduTgonmP8p2L7SEk=;
- b=FOHdfqIo1/ygERMRj5veAl8bdshdLjGxtUNo/E8vYRtL6QEI1RYLNtq1YmpLIjR5AM
- cR+lSjUo716f7H2hnnJ8ZTUXeQcE9STwuyV3WXQIUyIRo8WGoYhs6MXuvEBjYdFd1nSM
- bS78uKHRMQDcgLZMXwZgFrjr/8NvDHk4MTEQQeu1dC/4z0NSU26/rSLBkmPjAcmyOkge
- ROiQ9eWYImm2BTQ4YDtZvehkknpozVHXn2gxhXsSoHL7zNJ2sG4iOs9Wj8B78jZbW8NC
- z4o7HVRxnKpv0CkqtSWIiwkprwm0aypACwJhdTaqPm7XPeWgAHnE5XhKg+Eqwut0sHXw
- iVTA==
-X-Gm-Message-State: AOJu0YzOW9G1U01V6D/XJfsuox6MPEVF5hwkdctzuupuaRb4OpF9n7Lc
- 3/SFgZCOi7Qk2jzysPWZd+fAX1wBqZyLQYqnJl+z6upazDnXhMuL5r3mycc9rzdr9ERWeuran+0
- UmozFaW0zlqe6q5WEIjBnMAJ1gBE=
-X-Gm-Gg: ASbGncvL5JRPdo3Ri0EYN09MZqTT3d8nqzd7AhfeiBljxI+e/tlyRr4TpgdGeph/0Pv
- AKc5ojiwl2qyhcK4CKMLcDDDshWOB1lUfMqm75pGe/4aY9WSyqGsnlpKDWfKss0UIgV9B
-X-Google-Smtp-Source: AGHT+IHF6k3yVVq4OuBMkdYEAkgzzLt3W0/I+R4ol01f2D72QGBNBObAs5BRxNPmrQgJBFG/gshzwMWZWccS/g9r9GY=
-X-Received: by 2002:a05:6512:2398:b0:540:1c16:f2f7 with SMTP id
- 2adb3069b0e04-54229538abcmr3428714e87.14.1734959972860; Mon, 23 Dec 2024
- 05:19:32 -0800 (PST)
+ bh=8gMHAGJRtbp/nHJbyFGPqBBbq/RwYIyzfoPMTkvQnH0=;
+ b=vOtsTvCBjFTsz7b/htplia7WyyGyi5gCStMrP4fzhckwhjA0zfWow0VUZLGGbnRU+Z
+ TY6lNct7YYJYw2X10cbR+Q5pZ5qX4sLx1ojztdez4kUQIu83KxfLXVu75brdYFVUXRU+
+ GK4doiwFzXjxxCtTaFaEqiNGuVcJ7tWT7K9aDUGDMtkjYHQk5Qu0E+yJJRTykU/q0lDi
+ DTEctE59mYCM4ez+CgX2Got/M7Hz56+MZir5cEGWJXF6FFZNrPfRan8njmZkDUJjg80t
+ 75MXCLKqKU4trE7Dc5qG0bo6hr5dLgpp1RsRGt7/qHxNGT+zCnz9Gp4uFeACATAXcwTt
+ I4mw==
+X-Gm-Message-State: AOJu0Yw0K04WX/2kYtdQZw7oLBmgxIs8e6knilqNXwis7Rj/SZzzfVnx
+ sRqWRetB6DxyfgFkWmz0cdJCjK98VX7mHszHLkmzipQ+X9uwfUjbbgQ20XfHKvz+2lsF8NW8iJq
+ K5Eew7PTHtayYJTqDF+Ckv6mkGn0=
+X-Gm-Gg: ASbGncsRVtemd6BYKwex5txVlGo/JSsCd8CevUdeTo5BehtxgrP5klobtVFTlmIt/Jh
+ D6tOIU/0ka7Q7X4JVUPmNan54X1z/A4+iT+XqZVbTFV6jFjj9sObwKdsuoowFGYVFZK1u
+X-Google-Smtp-Source: AGHT+IEKAs5EjDdxETiHWKRg7038xcSr18ATYHJI3DydFzOCiJ7uUrpNNL/S0rzbpN59mLdSVgKRSuxd8POSANKnnPE=
+X-Received: by 2002:a05:6512:628e:b0:542:2972:4e5c with SMTP id
+ 2adb3069b0e04-54229724f84mr3781680e87.19.1734960004317; Mon, 23 Dec 2024
+ 05:20:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20241218194224.1867039-1-tharvey@gateworks.com>
-In-Reply-To: <20241218194224.1867039-1-tharvey@gateworks.com>
+References: <20241218194542.1867618-1-tharvey@gateworks.com>
+In-Reply-To: <20241218194542.1867618-1-tharvey@gateworks.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 23 Dec 2024 10:19:21 -0300
-Message-ID: <CAOMZO5BATJ5Uqtv7_RQQg3PRGO3S96vOxDb0r_MJ20pMxdPv1Q@mail.gmail.com>
-Subject: Re: [PATCH] spi: mxc_spi: use proper clock for SPI bus
+Date: Mon, 23 Dec 2024 10:19:53 -0300
+Message-ID: <CAOMZO5Bh7BkQBArL+evDMK8GbMMLtq7Nbrp=_RhKheheQS4Q4A@mail.gmail.com>
+Subject: Re: [PATCH 1/2] drivers: misc: gsc: add support for fan controller
 To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,21 +89,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 18, 2024 at 4:42=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+On Wed, Dec 18, 2024 at 4:45=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
 wrote:
 >
-> The mxc_get_clock function is around for compatibility with older
-> drivers that are not clock aware. In this case asking for the clk for
-> MXC_CSPI_CLK does not take into account there are multiple SPI busses on
-> modern IMX SoC's and it will return the clock for the first bus which
-> may not be used or configured.
->
-> In the case you are not using the first bus you will not get the proper
-> clock. Fix this by obtaining the clock rate from the bus clock.
->
-> This resolves an invalid SPI clock frequency configuration for SPI2 on a
-> board where SPI1 is not used.
+> Add support for Gateworks System Controller fan tach input.
 >
 > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 
-Applied to u-boot-imx/next, thanks.
+Applied both to u-boot-imx/next, thanks.
