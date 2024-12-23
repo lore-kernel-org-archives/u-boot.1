@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 916D4E7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A3BE7718D
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:49:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 149A38074B;
-	Mon, 23 Dec 2024 15:48:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 18A1480730;
+	Mon, 23 Dec 2024 15:49:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hRJPh57n";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RDLnNOr3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 597A1806D4; Mon, 23 Dec 2024 15:48:54 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 4A53580771; Mon, 23 Dec 2024 15:49:01 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2792980772
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:48:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86CD080730
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:48:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6dd43b08674so6363006d6.3
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:48:52 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6d884e8341bso30471186d6.0
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:48:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734965331; x=1735570131; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734965337; x=1735570137; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/pXRDvtvikqOzhgTDXurgJCfUnLKfKJjdJgJ5RV1OWk=;
- b=hRJPh57nfOXPUfKYZArZiJ/9TmGGG7DliH48Nk5/fYij2FbKexKAp5aQ4jF/260O8T
- KXjrqvvXl2OjVuClHCj60nnKS1gdA7xXzarguQfPgkVSV3JmNwDd2RrvOQdqw5qA3vv1
- PdGhYCQBC1lEnOJJA3vl5hd7fLSf/DXMaXRxtRXQOwj78hcQ3GAlRJEUUh7kOXba1fF1
- GpT4OWG2ZnLu/CBX2rz/cL4HHXZZmkBWtZDVfG3/ffAcmVlVkLOormHNIiJTvVXIyn5Q
- 33MpBDOyE2a1BpqV579/Mc141EZmlZyc0/EjT77WL+4b75JTQWXjixK11dBI4IlUfUKF
- 4tmw==
+ bh=dA4bRXHpTlUiA/sjarTwlVmTFN4dNXhUiDJjvTP4O7M=;
+ b=RDLnNOr3Rx+c2w8r/oM3+PWMskabrcETiEX9p9TgKI4V3hZs3+YHiEQRUHm0v8uUNW
+ Pz1CNz475BD27kIQ45Sm83tCfFcJ8PigZZvgiMYQamyefitRJlNkMaCuTQu5HbbojAvW
+ Q1ZPjEcB9xMF+9dW+4+IwR1lM2QA4W7fSDC09wfGWAs0sa5SW6QE/Ol0TunFOhaQIvMz
+ RBfxb4JY4uC7j1m8BFB+Tnq6hCt49LC4ZN9ikkUChyFL9g4oRofPXc8+9JLIazm88CUH
+ KFgMo946yrSLC+U75ngdE08GzNpq6KTZpckZBsAaFKAB6GLRisS4uvsRJHGen6vOKYXw
+ O90A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734965331; x=1735570131;
+ d=1e100.net; s=20230601; t=1734965337; x=1735570137;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/pXRDvtvikqOzhgTDXurgJCfUnLKfKJjdJgJ5RV1OWk=;
- b=dIvNq+bQUowARZBwdzdQZKrvpd8pGiqmJAwD3myYHRPbuVsdHmXg6eV8FpogS6FmG3
- v8Qu9fxWkY3eVcHG8GWSt2s+bpzH8ldRGZRvybmsIUX37Bj5oCzOY/ciqz1xCghTV44I
- 4LLTG5wwilmsoKr22KCCb/PxPuYLi+gjXuR3FSRm3UmDgf4pTywCTo3UpMtFeXN5WhVn
- urLxk0dLHCBWjn83HOI2XOnCyAyZzwlETLbWpqIj8W3vDQ1LqvjmwriVGLrIQYklAhWK
- V2WgBUHFNGqNCnqTK9yRTpdK6Et8XeSkWpyJ0zxWKPzP6Xtyl5qUSFiUgzGyRQy+txoG
- jfQg==
-X-Gm-Message-State: AOJu0Yxu1pa2LZBo6xG3tLoXvkRWb4jVNrbHDWDlcUix1oLW4fYBQUq5
- FC6q9tCv/ftExJ798ZW4l2fwqhH6VVnB9sS7tvZ8kN7EaGQV59E0Acv6whGxYvkZ/E1VeH54Uef
- M
-X-Gm-Gg: ASbGncusJMhj9uMoAthg7QYXeAPcP94yA+UdpeJOyogwU+DihxT8oBiiCXU2oKy/5RL
- zZHDpFJrA0vKSnWssuP5ic2Tk5xUmVhIRJylpbZZqufl6oW5CWN+E7OHo5H8XU+wrT3PN5T/uPw
- rz9Ppbl6Zuqyn66BSPjFM3RuZTQGKy7+1348bViOyAIZA16w1Nj9pm4D+xi01vU2+Rp4AdECxpu
- dqiLEQcOi1Hf+P3TL6hFPBtGdDaeLyZN3cM50eW+jNSvXgd4bjZYl3T3vNsaPBUhnpyfJgLJQYU
- pri8xaZy50TzvmyBYrlJZDBepvI/e9XrGbHA3x+PPeuS6yYa523I14w=
-X-Google-Smtp-Source: AGHT+IEa0luSMnr0f0DPPjGowzt4yLwfYW5WHDVBtWjQufPnZcLmyYrCxsr9KrrudFXoucC3zgb6uA==
-X-Received: by 2002:a05:6214:2589:b0:6d8:a76d:b66c with SMTP id
- 6a1803df08f44-6dd2339e08fmr199577346d6.30.1734965330915; 
- Mon, 23 Dec 2024 06:48:50 -0800 (PST)
+ bh=dA4bRXHpTlUiA/sjarTwlVmTFN4dNXhUiDJjvTP4O7M=;
+ b=E2PrdGavTM9MFHxmH0X52RRo6a0a3f4pc0hdjtOzQjdQbWfqeTb2Gfzi910ZLCXx+l
+ S/+wmGqX7VazxU8J8/z7wtEQ594BYhacqL1WoCJSc9IKhmrgxReiQTLYBDsVGEHWQxCn
+ bZjzr0Qh8C0hf3xl109yQrmaEezPbG7CIzmJTmjRsN8fp637eM29zp+bVHXgnFBPqn1R
+ wl+MedhOh+nyRi9xqXOuLVFS7OVPXtHpwLNJ91oSXtxgv4uc4iwV3y5qLI+pb3vOkEQN
+ SovLJs9cEutXNFAmnvZt6w0BBQBkvFY6NXM0ARguwaz0LHDKF50qFl8EV+fytymenhhW
+ 8gZw==
+X-Gm-Message-State: AOJu0YwjV1LngFDSV7CDmK4EX7spmT0bv+bVHjKN0pSgOZBxeiTmRpEI
+ UISfuCrwnFVwYJWciL9wwN0JSOcTDmuUAtbMkro2L3mo6tukdNfarVwb1+mj0h1+USzLOFXB4IW
+ D
+X-Gm-Gg: ASbGncvlnIWQlFyrjtRdqPwhytv5Hasa3hvrTgyOrCWtSRuZ/cPh2n6X2wccek0qm9D
+ Q+7v8+ySw7QiaNanPm2OLQp2MwJmpxrzZRosTxsJ7nVMwf9z5aLLd0JhOui1r0OFDe+vTwnmjVA
+ 11q4cpligmaNX2m1iW42lEH1GA724d3OC+I/vfPIHMtoZm8OdgseIEATnPqtrAC04nvFF4mcfG0
+ UbTml5DVy78Jhk3psyrI9dUoqs6V2VJKYwFCjIJ9UUR8EABG8h2wR3cH33tJQNBbEE5GOerEvH4
+ cbIiEom1bjFKDIptbZDlABndCq1rbfU/WZr4mbsWuhb5rqsP2ZgbyQk=
+X-Google-Smtp-Source: AGHT+IG7jUUZvZsWfupWw4iPESWj/AbS2tzASF6KnFkEQIwNXmaVmdkdnfjiUMGD7e7SQMQGRfda4g==
+X-Received: by 2002:a05:6214:5f11:b0:6d8:9ab7:adcc with SMTP id
+ 6a1803df08f44-6dd2334b26cmr210420676d6.22.1734965337242; 
+ Mon, 23 Dec 2024 06:48:57 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.48.49
+ 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.48.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Dec 2024 06:48:50 -0800 (PST)
+ Mon, 23 Dec 2024 06:48:56 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tim Harvey <tharvey@gateworks.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Eddie James <eajames@linux.ibm.com>
-Subject: [PATCH 09/11] tpm: Simplify tcg2_log_init()
-Date: Mon, 23 Dec 2024 06:47:31 -0800
-Message-Id: <20241223144737.554992-10-raymond.mao@linaro.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>,
+ Eddie James <eajames@linux.ibm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: [PATCH 10/11] tpm: Don't replay an EventLog if tcg2_log_parse() fails
+Date: Mon, 23 Dec 2024 06:47:32 -0800
+Message-Id: <20241223144737.554992-11-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241223144737.554992-1-raymond.mao@linaro.org>
 References: <20241223144737.554992-1-raymond.mao@linaro.org>
@@ -105,86 +105,125 @@ X-Virus-Status: Clean
 
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-A previous patch is storing the active PCR banks on the TPM private
-data. Instead of parsing them on the fly use the stored values.
-This allows us to simplify our checks during the log creation and
-parsing.
+We used to stop replaying an EventLog if parsing failed, but that got
+lost in commit 97707f12fdab ("tpm: Support boot measurements").
+
+When an EventLog is passed yo us from a previous bootloader, we want to
+validate it as much as we can and make sure the defined PCR banks of
+the log exist in our TPM and firmware so we can replay it if needed or
+use it as-in, in case the PCRs are already extended.
+
+So let's add the checks back and while at it simplify the logic of
+rejecting an EventLog.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- lib/tpm_tcg2.c | 42 +++++++-----------------------------------
- 1 file changed, 7 insertions(+), 35 deletions(-)
+ lib/tpm_tcg2.c | 56 ++++++++++++++++++++++++++++----------------------
+ 1 file changed, 31 insertions(+), 25 deletions(-)
 
 diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 9bdbe411e9..72969923a9 100644
+index 72969923a9..64563d7871 100644
 --- a/lib/tpm_tcg2.c
 +++ b/lib/tpm_tcg2.c
-@@ -208,37 +208,17 @@ static int tcg2_log_append_check(struct tcg2_event_log *elog, u32 pcr_index,
- 
- static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
- {
-+	struct tpm_chip_priv *priv = dev_get_uclass_priv(dev);
- 	struct tcg_efi_spec_id_event *ev;
- 	struct tcg_pcr_event *log;
- 	u32 event_size;
- 	u32 count = 0;
- 	u32 log_size;
--	u32 active;
- 	size_t i;
+@@ -360,7 +360,6 @@ static int tcg2_log_parse(struct udevice *dev, struct tcg2_event_log *elog)
  	u16 len;
--	int rc;
--
+ 	int rc;
+ 	u32 i;
+-	u16 j;
+ 
+ 	if (elog->log_size <= offsetof(struct tcg_pcr_event, event))
+ 		return 0;
+@@ -399,40 +398,51 @@ static int tcg2_log_parse(struct udevice *dev, struct tcg2_event_log *elog)
+ 	if (evsz != calc_size)
+ 		return 0;
+ 
 -	rc = tcg2_get_active_pcr_banks(dev, &active);
 -	if (rc)
 -		return rc;
+-
++	/*
++	 * Go through the algorithms the EventLog contains.  If the EventLog
++	 * algorithms don't match the active TPM ones exit and report the
++	 * erroneous banks.
++	 * We've already checked that U-Boot supports all the enabled TPM
++	 * algorithms, so just check the EvenLog against the TPM active ones.
++	 */
+ 	digest_list.count = 0;
+ 	log_active = 0;
+-
+ 	for (i = 0; i < count; ++i) {
+ 		algo = get_unaligned_le16(&event->digest_sizes[i].algorithm_id);
+ 		mask = tcg2_algorithm_to_mask(algo);
  
-+	count = priv->active_bank_count;
- 	event_size = offsetof(struct tcg_efi_spec_id_event, digest_sizes);
--	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
--		if (!(active & hash_algo_list[i].hash_mask))
--			continue;
+-		if (!(active & mask))
+-			return 0;
 -
--		switch (hash_algo_list[i].hash_alg) {
--		case TPM2_ALG_SHA1:
--		case TPM2_ALG_SHA256:
--		case TPM2_ALG_SHA384:
--		case TPM2_ALG_SHA512:
--			count++;
--			break;
--		default:
--			continue;
--		}
--	}
+ 		switch (algo) {
+ 		case TPM2_ALG_SHA1:
+ 		case TPM2_ALG_SHA256:
+ 		case TPM2_ALG_SHA384:
+ 		case TPM2_ALG_SHA512:
+ 			len = get_unaligned_le16(&event->digest_sizes[i].digest_size);
+-			if (tpm2_algorithm_to_len(algo) != len)
+-				return 0;
++			if (tpm2_algorithm_to_len(algo) != len) {
++				log_err("EventLog invalid algorithm length\n");
++				return -1;
++			}
+ 			digest_list.digests[digest_list.count++].hash_alg = algo;
+ 			break;
+ 		default:
+-			return 0;
++			/*
++			 * We can ignore this if the TPM PCRs is not extended
++			 * by the previous bootloader. But for now just exit
++			 */
++			log_err("EventLog has unsupported algorithm 0x%x\n",
++				algo);
++			return -1;
+ 		}
 -
- 	event_size += 1 +
- 		(sizeof(struct tcg_efi_spec_id_event_algorithm_size) * count);
- 	log_size = offsetof(struct tcg_pcr_event, event) + event_size;
-@@ -265,19 +245,11 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
- 	ev->uintn_size = sizeof(size_t) / sizeof(u32);
- 	put_unaligned_le32(count, &ev->number_of_algorithms);
- 
--	count = 0;
--	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
--		if (!(active & hash_algo_list[i].hash_mask))
--			continue;
--
--		len = hash_algo_list[i].hash_len;
--		if (!len)
--			continue;
--
--		put_unaligned_le16(hash_algo_list[i].hash_alg,
--				   &ev->digest_sizes[count].algorithm_id);
--		put_unaligned_le16(len, &ev->digest_sizes[count].digest_size);
--		count++;
-+	for (i = 0; i < count; ++i) {
-+		len = tpm2_algorithm_to_len(priv->active_banks[i]);
-+		put_unaligned_le16(priv->active_banks[i],
-+				   &ev->digest_sizes[i].algorithm_id);
-+		put_unaligned_le16(len, &ev->digest_sizes[i].digest_size);
+ 		log_active |= mask;
  	}
  
- 	*((u8 *)ev + (event_size - 1)) = 0;
+-	/* Ensure the previous firmware extended all the PCRs. */
+-	if (log_active != active)
+-		return 0;
++	rc = tcg2_get_active_pcr_banks(dev, &active);
++	if (rc)
++		return rc;
++	/* If the EventLog and active algorithms don't match exit */
++	if (log_active != active) {
++		log_err("EventLog doesn't contain all active PCR banks\n");
++		return -1;
++	}
+ 
+ 	/* Read PCR0 to check if previous firmware extended the PCRs or not. */
+ 	rc = tcg2_pcr_read(dev, 0, &digest_list);
+@@ -440,17 +450,13 @@ static int tcg2_log_parse(struct udevice *dev, struct tcg2_event_log *elog)
+ 		return rc;
+ 
+ 	for (i = 0; i < digest_list.count; ++i) {
+-		len = tpm2_algorithm_to_len(digest_list.digests[i].hash_alg);
+-		for (j = 0; j < len; ++j) {
+-			if (digest_list.digests[i].digest.sha512[j])
+-				break;
+-		}
++		u8 hash_buf[TPM2_SHA512_DIGEST_SIZE] = { 0 };
++		u16 hash_alg = digest_list.digests[i].hash_alg;
+ 
+-		/* PCR is non-zero; it has been extended, so skip extending. */
+-		if (j != len) {
++		if (memcmp((u8 *)&digest_list.digests[i].digest, hash_buf,
++			   tpm2_algorithm_to_len(hash_alg)))
+ 			digest_list.count = 0;
+-			break;
+-		}
++
+ 	}
+ 
+ 	return tcg2_replay_eventlog(elog, dev, &digest_list,
 -- 
 2.25.1
 
