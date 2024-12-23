@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8496CE7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20359E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 14:48:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CDF480741;
-	Mon, 23 Dec 2024 15:48:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0255E806FC;
+	Mon, 23 Dec 2024 15:48:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LZUhZNGR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oYxkn78q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 986C18074B; Mon, 23 Dec 2024 15:48:27 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 35366806FC; Mon, 23 Dec 2024 15:48:36 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F367806D4
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:48:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34FA6806D4
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 15:48:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6d8f75b31bfso38587836d6.3
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:48:25 -0800 (PST)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-4679fc9b5f1so33024481cf.1
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 06:48:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734965303; x=1735570103; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734965311; x=1735570111; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/2jQlqIo1MCHB4o9rmvhucZMe+0BwXjA8f/z7PT+ohA=;
- b=LZUhZNGRIPWpGzTFK6AbwCEvS7orn2noDc1n9ORgUEVlxAejDeAscX/gAQz0aCGj7x
- yeZbr8/Gz0OGY5jatC72lDoCWlgWzmW0gmOtXWkXeeTuRLGL06ivqLJxnpkqUyfb6frM
- pBa5i4Wk21GvFjuIFGrsKBa+0O3qxISh7McaW50Y1Lg08vftORnDPKyswZJ7eY9toWHj
- REdDlgfMnmqNvrU00JD5UHIrSR1Cv+CtCc5DclqR92oQvj3R2+1dlhYNB8rV4yjQgn8g
- TqXhFJ2nAc71pNhRNIUicsy75cZcBonuAWWZ1OcX5WzKELQS4mh6JOj1jjaILlFRm4Sr
- OTmA==
+ bh=KkbLeLofMh2KBTZutmjFrgnp+wAuGYWaa2Tc92zGGX0=;
+ b=oYxkn78q4tfnPDP6q+CKtQ0wPenThVnJcIbdZDNcTCwUDbmQCfQ06Lx1pOWYxMRXxb
+ 6oF1v8ZOVzbBjb0tuc9fGw32adrbxw8tdW0CALTSrwySKclLb0G6qlUr0VQ9bI/4j9si
+ lXvhq8NSluO69NvML2VQMthXTf2GmCnv/QptOvQaQbAJ6LxpalPvSMGYqIjBq4lmh4UH
+ A/+FfLSADVAjy2gK3GaYaEuLH9/1HdjJuLZskfbSrwvAAyuPWWTJm59VxxjiZsAOQwE9
+ hwXBG5/2I4O6+QitRjT0BVY8rGbz6g/6up+4mqjRn+uI7bBwY5602AogPUeeUbxjYYem
+ VULQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734965303; x=1735570103;
+ d=1e100.net; s=20230601; t=1734965311; x=1735570111;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/2jQlqIo1MCHB4o9rmvhucZMe+0BwXjA8f/z7PT+ohA=;
- b=D2Uv6IyUfK2e75RC/gOU2rbAWi6ffVWimIG4OvoO1harvFQl0DexChn12APpox3DiY
- iLXbDyVe2GNPTiZEdbv81SgPsKRMBHFAJAu3CqgHtHXIArUM9n8pAwECgzr8dQiFiC8V
- gWOKSovPiaS32+0kZtEq0vHB47hqgnhsSnWKnEny93Je2K6ahqZAo+7ZeM6SftCqaGZu
- FKCGmLoKaGcBDch0BPPdUWQfAgq5iUENf+kiM23aifk/NKXx8QE4dwcg2SvwfaNKYey4
- 5QTcs/NN3A7llXxwX/hGh+8x/F2v9JJQ2U3I3zm/CuBqRPWo1icOm6IgwChUO21aEXsm
- gGVw==
-X-Gm-Message-State: AOJu0Yx/lPUcSQWPBVinL3Lgg0YDF7sU8S7iYOETImcHrm0yhORevxwU
- cfU8G4mr9qjmFR2k6zXNFUcuHOg1UOd/+xGpV7WvTuan2L53jkiR2LhKi2vLa7AMLXRAQTYGOS/
- s
-X-Gm-Gg: ASbGncvBYKAsoEFwPjJFM6CT8pNFUwhuw1P/Xp7il4lVeVAPlk/hU7ilHG/+ZFmRMqa
- YKUD9rYv0vJpm89TsrgAl+8Y3M+Qzr8j7gs+ZenSmhCA1kwocclItQtiyre8GFvYZCupkCp2WsC
- Drdcd3kgFrXsYs13Y5agkiV3gZU/PIA8PbRWsUfGAIcdx3vr9yFeqSLQxaNR9ZKDlHVsTQ357wE
- fBm/h/2rQOljbu5VnLHCPnYU2ZGgPIFk0AqsksODG/TYgzcIQpRVnKvpi90IxwNTYIu3WBO2Y7l
- bvTyGm5rgQIa+w3vo4h+ldreRAyMHNifyPsaKiN5Vt/+ZNSR65cEUTs=
-X-Google-Smtp-Source: AGHT+IHphCjp4YbQWmm9kQy1qRHrHHkOtWFFbHpt+07NKkidQmR5cQPacCfXxk5nXfNckovfW94jcQ==
-X-Received: by 2002:a05:6214:21e3:b0:6dd:d3b:de27 with SMTP id
- 6a1803df08f44-6dd2333255emr261114136d6.18.1734965303595; 
- Mon, 23 Dec 2024 06:48:23 -0800 (PST)
+ bh=KkbLeLofMh2KBTZutmjFrgnp+wAuGYWaa2Tc92zGGX0=;
+ b=jIYp3Mlb/a+D2FFWBb7AZcNNZpEjvhhC7WZ00IAyVDuEqzQRsra8McAZfpQyKVZ8DO
+ kUlRiMT9RxKshhw4E22Kwj1W+Wj+Pbl6hf2Srv+k6hoN7Iadk7mTtMgccFkxbWPCoT0i
+ 674T13wCIwTgoOqFJGXMJuGkF0qarC6iWAaDPED5sVVo/YZwi4gn9IopCbh/w6692I4d
+ tK/2D/1Ih6hfdo+oyPX9aq+vU221NZqAVw5zHvMhMsLXRSOR6DQ12yZijeN8qgbFdjOn
+ /Cj4ld15yvgG4Wft4oS6v2sveEM9nPgETI2mUsmXiwP3w/77Z1fnmmjqh3zcmOGCUccW
+ FCMw==
+X-Gm-Message-State: AOJu0YxNWiYqXfRezp/slbeq/uf1ImPL0Ydc7rogdjPlUUQh8EK6jcDL
+ 7vWgBAAV6kpHPMpY0L7pbPIIVr0mmwdYtiEGN5OSj7v7zatkANORrwJf3Grq405KhmvwlCouT79
+ p
+X-Gm-Gg: ASbGncvPwfYvA8MQRTAqcGNewo++u7VSymOl3tzwdPIIr7dzl2sZ9lY/cw6VsBQxV6w
+ XoIauKMdo7ldRhPSBvG8NU70TOo0uD2wykDRl2Tw2ytl6W9zNoxdCdjhg5Ltc+3u8rj+uHYAtfo
+ DdR4bYxj1ESs0colu+M6eqLr3VD0mW9TsHbcHTaoHQFhKwTobFJW5tDO7RPyUHWtDZVMZoftvYD
+ JgtG2W+SdelFiOiZxN5Q69+mtEeTQuc4hDwVUoRpqqPtz9y4XSOVZicSeM+47v7yT+E8ls+PSN8
+ SG6VFq3PXEjSvjWdCoJ5DCWt0+z0H5RGH7LxNsFZdMueVtNdZiwmKyA=
+X-Google-Smtp-Source: AGHT+IENppNRUjaf5MjG/h/cly9y+5uqt9I2SHikXtkJSCkIjdG5rveXC+VyrKQqmKD86HJOCnNLjw==
+X-Received: by 2002:a05:622a:14c:b0:466:8616:2553 with SMTP id
+ d75a77b69052e-46a4a9a3503mr222692571cf.48.1734965310861; 
+ Mon, 23 Dec 2024 06:48:30 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.48.22
+ 6a1803df08f44-6dd181bb519sm44243246d6.83.2024.12.23.06.48.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Dec 2024 06:48:23 -0800 (PST)
+ Mon, 23 Dec 2024 06:48:30 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>,
  Eddie James <eajames@linux.ibm.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH 05/11] tpm: add flag in hash_algo_list and API to check if
- algorithm is supported
-Date: Mon, 23 Dec 2024 06:47:27 -0800
-Message-Id: <20241223144737.554992-6-raymond.mao@linaro.org>
+Subject: [PATCH 06/11] tpm: Don't create an EventLog if algorithms are
+ misconfigured
+Date: Mon, 23 Dec 2024 06:47:28 -0800
+Message-Id: <20241223144737.554992-7-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241223144737.554992-1-raymond.mao@linaro.org>
 References: <20241223144737.554992-1-raymond.mao@linaro.org>
@@ -104,174 +104,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a bool var into hash_algo_list to indicate whether the algorithm
-is supported or not and move the IS_ENABLED to only cover this var.
-So that we can have the name, hash, mask and size no matter the
-digest kconfigs are enabled or not.
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-In before, tpm2_algorithm_to_len() and tcg2_algorithm_to_mask() are used to
-identify an unsupported algorithm when they return 0.
-It is not the case now when hash_algo_list always provides algorithm size
-and mask, thus a new API is introduced to check if an algorithm is
-supported by U-Boot.
+We already check the active banks vs what U-Boot was compiled with when
+trying to extend a PCR and we refuse to do so if the TPM active ones
+don't match the ones U-Boot supports.
 
-Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Do the same thing for the EventLog creation since extending will fail
+anyway and print a message so the user can figure out the missing
+algorithms.
+
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- include/tpm-v2.h | 37 +++++++++++++++++++++++++++++--------
- lib/tpm-v2.c     | 14 +++++++++++++-
- lib/tpm_tcg2.c   | 17 +++++++++--------
- 3 files changed, 51 insertions(+), 17 deletions(-)
+ include/tpm-v2.h |  7 +++++++
+ lib/tpm-v2.c     | 23 +++++++++++++++++++++++
+ lib/tpm_tcg2.c   | 27 ++++++++++++++++++++++++++-
+ 3 files changed, 56 insertions(+), 1 deletion(-)
 
 diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-index 87b2c614ad..c49eadda26 100644
+index c49eadda26..6b3f2175b7 100644
 --- a/include/tpm-v2.h
 +++ b/include/tpm-v2.h
-@@ -268,6 +268,7 @@ struct digest_info {
- 	u16 hash_alg;
- 	u32 hash_mask;
- 	u16 hash_len;
-+	bool supported;
- };
- 
- /* Algorithm Registry */
-@@ -278,38 +279,50 @@ struct digest_info {
- #define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
- 
- static const struct digest_info hash_algo_list[] = {
--#if IS_ENABLED(CONFIG_SHA1)
- 	{
- 		"sha1",
- 		TPM2_ALG_SHA1,
- 		TCG2_BOOT_HASH_ALG_SHA1,
- 		TPM2_SHA1_DIGEST_SIZE,
--	},
-+#if IS_ENABLED(CONFIG_SHA1)
-+		true,
-+#else
-+		false,
- #endif
--#if IS_ENABLED(CONFIG_SHA256)
-+	},
- 	{
- 		"sha256",
- 		TPM2_ALG_SHA256,
- 		TCG2_BOOT_HASH_ALG_SHA256,
- 		TPM2_SHA256_DIGEST_SIZE,
--	},
-+#if IS_ENABLED(CONFIG_SHA256)
-+		true,
-+#else
-+		false,
- #endif
--#if IS_ENABLED(CONFIG_SHA384)
-+	},
- 	{
- 		"sha384",
- 		TPM2_ALG_SHA384,
- 		TCG2_BOOT_HASH_ALG_SHA384,
- 		TPM2_SHA384_DIGEST_SIZE,
--	},
-+#if IS_ENABLED(CONFIG_SHA384)
-+		true,
-+#else
-+		false,
- #endif
--#if IS_ENABLED(CONFIG_SHA512)
-+	},
- 	{
- 		"sha512",
- 		TPM2_ALG_SHA512,
- 		TCG2_BOOT_HASH_ALG_SHA512,
- 		TPM2_SHA512_DIGEST_SIZE,
--	},
-+#if IS_ENABLED(CONFIG_SHA512)
-+		true,
-+#else
-+		false,
- #endif
-+	},
- };
- 
- /* NV index attributes */
-@@ -704,6 +717,14 @@ enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
+@@ -770,4 +770,11 @@ bool tpm2_check_active_banks(struct udevice *dev);
   */
- const char *tpm2_algorithm_name(enum tpm2_algorithms);
+ bool tpm2_is_active_bank(struct tpms_pcr_selection *selection);
  
 +/**
-+ * tpm2_algorithm_supported() -  Check if the algorithm supported by U-Boot
++ * tpm2_print_active_banks() - Print the active TPM PCRs
 + *
-+ * @algorithm_id: algorithm defined in enum tpm2_algorithms
-+ * Return: true if supported, otherwise false
++ * @dev: TPM device
 + */
-+bool tpm2_algorithm_supported(enum tpm2_algorithms algo);
++void tpm2_print_active_banks(struct udevice *dev);
 +
- /**
-  * tpm2_algorithm_to_len() - Return an algorithm length for supported algorithm id
-  *
+ #endif /* __TPM_V2_H */
 diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 0edb0aa90c..96c164f2a5 100644
+index 96c164f2a5..bac6fd9101 100644
 --- a/lib/tpm-v2.c
 +++ b/lib/tpm-v2.c
-@@ -884,6 +884,18 @@ const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
- 	return "";
- }
+@@ -926,3 +926,26 @@ bool tpm2_check_active_banks(struct udevice *dev)
  
-+bool tpm2_algorithm_supported(enum tpm2_algorithms algo)
-+{
-+	size_t i;
+ 	return true;
+ }
 +
-+	for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-+		if (hash_algo_list[i].hash_alg == algo)
-+			return hash_algo_list[i].supported;
++void tpm2_print_active_banks(struct udevice *dev)
++{
++	struct tpml_pcr_selection pcrs;
++	size_t i;
++	int rc;
++
++	rc = tpm2_get_pcr_info(dev, &pcrs);
++	if (rc) {
++		log_err("Can't retrieve active PCRs\n");
++		return;
 +	}
 +
-+	return false;
-+}
++	for (i = 0; i < pcrs.count; i++) {
++		if (tpm2_is_active_bank(&pcrs.selection[i])) {
++			const char *str;
 +
- u16 tpm2_algorithm_to_len(enum tpm2_algorithms algo)
- {
- 	size_t i;
-@@ -908,7 +920,7 @@ bool tpm2_check_active_banks(struct udevice *dev)
- 
- 	for (i = 0; i < pcrs.count; i++) {
- 		if (tpm2_is_active_bank(&pcrs.selection[i]) &&
--		    !tpm2_algorithm_to_len(pcrs.selection[i].hash))
-+		    !tpm2_algorithm_supported(pcrs.selection[i].hash))
- 			return false;
- 	}
- 
++			str = tpm2_algorithm_name(pcrs.selection[i].hash);
++			if (str)
++				log_info("%s\n", str);
++		}
++	}
++}
 diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 16f41cbfd1..4682f7664f 100644
+index 4682f7664f..7ecd53106f 100644
 --- a/lib/tpm_tcg2.c
 +++ b/lib/tpm_tcg2.c
-@@ -37,16 +37,17 @@ int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank
- 		return ret;
+@@ -568,11 +568,36 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+ 			    bool ignore_existing_log)
+ {
+ 	struct tcg2_event_log log;
+-	int rc;
++	int rc, i;
  
- 	for (i = 0; i < pcrs.count; i++) {
--		u32 hash_mask = tcg2_algorithm_to_mask(pcrs.selection[i].hash);
-+		struct tpms_pcr_selection *sel = &pcrs.selection[i];
-+		u32 hash_mask = tcg2_algorithm_to_mask(sel->hash);
+ 	elog->log_position = 0;
+ 	elog->found = false;
  
--		if (hash_mask) {
-+		if (tpm2_algorithm_supported(sel->hash))
- 			*supported_bank |= hash_mask;
--			if (tpm2_is_active_bank(&pcrs.selection[i]))
--				*active_bank |= hash_mask;
--		} else {
--			printf("%s: unknown algorithm %x\n", __func__,
--			       pcrs.selection[i].hash);
--		}
-+		else
-+			log_warning("%s: unknown algorithm %x\n", __func__,
-+				    sel->hash);
++	/*
++	 * Make sure U-Boot is compiled with all the active PCRs
++	 * since we are about to create an EventLog and we won't
++	 * measure anything if the PCR banks don't match
++	 */
++	if (!tpm2_check_active_banks(dev)) {
++		log_err("Cannot create EventLog\n");
++		log_err("Mismatch between U-Boot and TPM hash algos\n");
++		log_info("TPM:\n");
++		tpm2_print_active_banks(dev);
++		log_info("U-Boot:\n");
++		for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
++			const struct digest_info *algo = &hash_algo_list[i];
++			const char *str;
 +
-+		if (tpm2_is_active_bank(sel))
-+			*active_bank |= hash_mask;
- 	}
- 
- 	*bank_num = pcrs.count;
++			if (!algo->supported)
++				continue;
++
++			str = tpm2_algorithm_name(algo->hash_alg);
++			if (str)
++				log_info("%s\n", str);
++		}
++		return -EINVAL;
++	}
++
+ 	rc = tcg2_platform_get_log(dev, (void **)&log.log, &log.log_size);
+ 	if (!rc) {
+ 		log.log_position = 0;
 -- 
 2.25.1
 
