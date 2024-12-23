@@ -4,153 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1902FE7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 11:01:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F42E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 11:20:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24ED38069C;
-	Mon, 23 Dec 2024 11:59:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 30EB0806E5;
+	Mon, 23 Dec 2024 12:20:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="ZBLGWyzE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VDztNKxh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8027680714; Mon, 23 Dec 2024 11:59:21 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 97C90806EB; Mon, 23 Dec 2024 12:20:40 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3025D806E5
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 11:59:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70FCE806D4
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 12:20:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=e78D8OK3F6y3XVcKbTz4WnE3LXjrEnyNsnR0BD9lgL51xUAeRt3CpX8vKjXOmr/qKVNlyuAm+HCmGUPQtp2f4f8nP5p401JTulViAngmKHVgyyGn0Cjwh8/C5d1LWs8nwCPazSBPWEp1LyP9SFSEJz+dvnOliSy/7P2EN+4RAWPNA6T0awgwWbqqhf9EERimRwgCBEiGCPSnDng1Gtf2b+/ZCXJFVPYzLtMa9WgHff3DxirY3lYgZI6TE5+Q1tMsBKFIsXMpOd9utiS0z3JEtHEZzgmH5GEECwh63o4pONCVBO67jzIPorikCTRczFXv1dQ1mJaYcmfrJLJCvkcHJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=beJzP8vvmbi45iVc0vByTceriMxX9/zfgVtd5ovaLhA=;
- b=fEcMqYRISeDGBkZAfYwyMvkDadRHNAGL72KhX/SUQRCAQLpdEtE4h1bN8yAWchJ/wJLfFPC+AtGh/e5XNirICDU6ADacUewRkqWHJKyDofzkYB/Ak9npCVMkE0GxOgOE9XH1DFH9y7Dq7DM9yC1uAOS7jjkt/wi/y3SKT3cRPtTowOWh7Sa1rcsqTHRrO57B3UwrXh09T1sWhD19BuNJJfCnZzHRABfl00MX++UBvjSjQFP2Qq/4KSA28S5lHaBkw8+xTYqtwvuBKWfhEDFKycV5QubOoQ+0plJfL9OZoEv5eWKp2p0aMiPK8hplIVgWvvjXD+PmwrtyrLGtCMbpkA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=beJzP8vvmbi45iVc0vByTceriMxX9/zfgVtd5ovaLhA=;
- b=ZBLGWyzEwol5PQ1N6FvkIQamzX0ucc6/UVmo6+YYpNOng2OUINn3PlWlI77oZwGEgNBtEoIToz7tTde6jqKlFx/PXv2vbOggOnMVLjv+9apAQeiRP4bbq1W4JaSQ3D8UqdRHMh+WDYc7VNstixu4XSSUKZ8WyTUV2X0Cx1QLEZXVFUZ+RcuzzaUU/QgXqbPNCW9oi9Cpm/6hUh8nVk7VBa3GmqRF2wUlor6JvgjvrK1LZKVdNDG0NzEFnledu6LNIpiT/nJicLwnqmzMZVRWCJMYKQUU8lns5kMao1eN/LOrGLi1VRn6c6FX5JWJQg1V44FySnhE1lJjpyYT6aGR8Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by AM9PR08MB6676.eurprd08.prod.outlook.com (2603:10a6:20b:2ff::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.20; Mon, 23 Dec
- 2024 10:59:14 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.8272.013; Mon, 23 Dec 2024
- 10:59:14 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v15 11/11] net/net: fix include ordering
-Date: Mon, 23 Dec 2024 13:58:52 +0300
-Message-ID: <20241223105852.1074404-12-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241223105852.1074404-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20241223105852.1074404-1-mikhail.kshevetskiy@iopsys.eu>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: FR4P281CA0240.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e9::19) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5401c52000dso4644652e87.3
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 03:20:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734952838; x=1735557638; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fgtGkwMfTT5TzTEmovfRz7OVHFL2EEgy7QhD6Sfzr5k=;
+ b=VDztNKxh7j64SXdm4w9dDJVBRN3HwvBHqpQ8xRXhyXs8e+0+8xCN8KrtLd15qvj0fc
+ aBTvinrH4pfJQmIpjw/HfrdTtnXh5k9Awoq4AHPABtGhW7GiVyWEHqZDDTWmTtE1agTJ
+ hEcYZDwH9L2ap8XuS4vAW0I3cUhrjKOmOidI3BSxwY1sIzsu3eCGcg7kpnoVRSiJedD/
+ MG/fC8hbfLSyd7izIbrIXOozSg4WvTAuNWX/vthu+9k5XKwNTELccdJXDkx+Ms9kqKqS
+ d23DFdBrTBhLSRfisuK3NQfxFDf62UorTh/XsO+ixdvRToA0ZaEbHkeNbzYLQW4TLRiy
+ 5d0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734952838; x=1735557638;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fgtGkwMfTT5TzTEmovfRz7OVHFL2EEgy7QhD6Sfzr5k=;
+ b=fsQoSjjD4s/4DEmU0CobhW9VPyTbo/jP7VDTgTribyDWqnP+0wYa59EGBFWTIs5TlM
+ fRC2+5eqFZLYDs/ZaejhR0HUvl9YuFiA4vsBI0hclbAs9BBWkveZIBMI7y4xCRiqdT+M
+ +aFrNQw/twWOrna8ayQxdEAR9x+kqLf9a/gn8PhgI74Oly13/hAyV/u+gSOJ6PFfWzWb
+ G1pBvN0pLa6p6f5jdzpyOjGQk/loOBagFafQGaEZajHxrtumMSmiUW982xD4lPyV1FZi
+ 52keeZHPSSOuLtQuXVrk7DAoBD55uWkfzTfadfFRehwSLnfubASzP0ZLztJrilbBMT8N
+ iVbw==
+X-Gm-Message-State: AOJu0Yyho9X27atvl+lrqZgv4VV30ya8+N5QAfzo7KmCA8M1aSKpZptJ
+ vWzzNHHNkU89oboJDBof9amQH84HtwzVg5k1Jrb9rZYvCr2DkK887KtupOqc+r+fD8rEWyhUhbU
+ UVgr1ArpbuCNX59SoBGNVUh3Yonw=
+X-Gm-Gg: ASbGncvZvVvaLpLfrB9w9N02lgTGFyrm/zI3kwni6RvKKBo8XK5Pz77UjMwmz7VEP7e
+ 9p/Ck8UUI/eP8Aurq3mU8DJKgroTuklljfIpEU07pgVlpJmVgKVPYDqsetVyGA82QK3Ns
+X-Google-Smtp-Source: AGHT+IHkLelr/xxLp2GVlZHxInvnoUtuHlpFwZqBVvO0uGyAqxyWBI/0Vmtm8FPB+GyUMhNNP6PIK58Ht6LCAh6uU3M=
+X-Received: by 2002:a05:6512:ea5:b0:542:28a0:a721 with SMTP id
+ 2adb3069b0e04-5422956beaamr3797409e87.54.1734952837354; Mon, 23 Dec 2024
+ 03:20:37 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AM9PR08MB6676:EE_
-X-MS-Office365-Filtering-Correlation-Id: 30394dc9-96fe-40d0-f860-08dd2340d695
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|7416014|1800799024|366016|921020|7053199007|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dJX+VLkc5TClt5CxX12MxtJNEC2uvzb2g3+ECbryi9dB5EAlyOl0ZYuegplW?=
- =?us-ascii?Q?HqEjUzYAlND4RWKESiwOr8i6OmKBVzeIp4NHCb+XF7ZZnPynVMJGy3XzjcTD?=
- =?us-ascii?Q?gY3meDTiLfdEb3B39nIyDvaNPQ6Sq0a4RVZ6YkXrHtOEnrCfHSpiRejp0GBI?=
- =?us-ascii?Q?4dIU4uiPUGaPvKEUgLQX4qBoBJ2yhIieJ3XIPicVD4Rvuhu4DDteFbcrZPu1?=
- =?us-ascii?Q?iiPWFI0Rn6iuMwr3RHI0wE873+7u/DFyv2Ya9sVSgX4mhww6On2u8cKRVV19?=
- =?us-ascii?Q?Idn8YYynoX3OqYO4RlsLdb5O4tTwNXbUuhTtu5bVIMuh4f9GUjLS5ee8nB8F?=
- =?us-ascii?Q?TeI4UhTFXJ0dqcxxwDrsBkm2goMz8gRPj5MXtHyxi9hx1XQvg3zfhZm+BJqa?=
- =?us-ascii?Q?/4RJqvuK7DvA1QYjBrmgKpPAw5Lb/sv2VobXTpiwthAGYwwcWknQ2bU6G18m?=
- =?us-ascii?Q?aVhpYa5l4q9IWJ/cB0b5pbenV90RFKZ8xk//mxpsG0qGyyUqqSd97iQ/besO?=
- =?us-ascii?Q?g22Ah6qxbkOhMk2k3JJ01UV5AB95BxD74OvCpdGYOmRXfnAbTY1Mgw92PUsh?=
- =?us-ascii?Q?LTqr204fF2c6RZD9AONFRt9r/4MSRu30Sgft/BVyuMVyqQ5top33MBEDpX0m?=
- =?us-ascii?Q?MMkjKCCIohwXZUk/e0RBHwmdzTQxC1/NxNm41wXvUL2klaq/oAaytoGbJuVW?=
- =?us-ascii?Q?g1/mD1TF5yJ8Bk3vsKLQKPnLt9m+XJC37uo2QR3VjUITmKd8mYZodTHuguFG?=
- =?us-ascii?Q?TqygOg1tGjC0riW5lEHhJJLSscF7i53ZIzbwVJSln01RmcOfRc69DhvuGQzG?=
- =?us-ascii?Q?Cg2kwUsBOaD4ANm8Bjfdt5R+/n7WMPWBD6rjaQ56TSGlZ/VG9yFaTw9gMDli?=
- =?us-ascii?Q?507MWHrZ8l8/tIxN70+oDOKbm7bfxbHGMNmusBBTd4VIvaXWYS3lOkIY45hv?=
- =?us-ascii?Q?hH6s5mV4FJZyMBDAzMsLmQgzF8SqCZo5kkkdWAZ+qRsGlB+wzdqWSUQpr7q/?=
- =?us-ascii?Q?plAWZegp6NfyLSGaXXRu5Qab9SE/X7oGFfKJPd5CMWFlJt2HNKRIZ+ECJKwK?=
- =?us-ascii?Q?McO3UUQDIuKy/SQH/6KPP2SHToVJJJCesMCihd68Ka8HrgvjTM3t73qxHpY8?=
- =?us-ascii?Q?AWAcaX7uuChBUcqp6Inp3TJut0yQoES2d4fuwkkIr9fTX7DRSfJuB0JkuuNS?=
- =?us-ascii?Q?m5L4bSF1AdVM2v5lALIQ7AMXhDkTUOdrpDHTesoiGwH0JgRG8e9AqCBbw3ny?=
- =?us-ascii?Q?S3anUnc4r7mPhN/lAl/3KYOb9QiMBTPYzoE/EMBoGIIc+Sb3lE8mxTqHvsqh?=
- =?us-ascii?Q?AamSd4/SQaCI7QTLAN6HZdD7NSu9ROFmnkFA54hyEk/aQKloyfJTUKsr0/Db?=
- =?us-ascii?Q?2RgX6QBB6FPt34taYgT63gCSosa/Do5gwYqcKeFKKIuycc69TA=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(7416014)(1800799024)(366016)(921020)(7053199007)(38350700014);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QcerOJnuiiDgWohV2QMus30nCuUE6bzOEArZB0KBitdiY2q/YCulklncLIck?=
- =?us-ascii?Q?uaNeCydee66Q7k+Yfk+edEaBhy2Zd0in0bUnA+9hzBDsCOTLerJLSa8AvWCS?=
- =?us-ascii?Q?QcZEP3SWjd6GGt87s5KDs/An53tN+1NvI71gx4Mu6FS1txSwz9e3zc91NPfa?=
- =?us-ascii?Q?42ejkOtzLfSLapLRiJVyjC132UKCcvz3y2fadQu8rDnqNJvpQe+JoxHCoq/W?=
- =?us-ascii?Q?HGsnHAM1a+IdtQqNATjjysGsfhm3h9Wzo//fpfCNQqjU9VKxEVtIW9rayZG2?=
- =?us-ascii?Q?jgt5FrRXiP6nAnGGxSs7VkUO3y17iyWHtRHhWep+zaku5n76p1qshBHQLDLo?=
- =?us-ascii?Q?gwleV+a1gosNxH3rRUeuuv4xq96EScUXUgAVyWPNwpYBwgoLE/+yjPS/lRPe?=
- =?us-ascii?Q?Ztw898zgJoq6oi/wp1zy8Vhe4wSWib54LbHuhw8Z8VN4xDqf2i5SMPAQLKJT?=
- =?us-ascii?Q?iSrVUo6NB5AA7j01ObiIHQRGw++uw/HN1KeEva6T+Z8SQrTPw8Wn4cekyXJv?=
- =?us-ascii?Q?1M8LeLZziYwG9AiKf4K0BwvvueN1r5H9xYLFgEHtQn9CTSPIGvf8/gk+rLjI?=
- =?us-ascii?Q?9jLZ6ai2BNORv3lhV8Ht0bwT8PNfOR2i0i3UkDFO7AZ6d9TW31sAxt3Pjbdn?=
- =?us-ascii?Q?iJf00t5eIuMGJ9lAxRaRxHLhy2IrmEt9uIAMzxVj01m/7BqXxPOYaESueCbp?=
- =?us-ascii?Q?c7ArHo2QN3UkbagYV6uAX9ZOow4jmkkoWasaiNLsoAwQrdJ4HATtl/WToP2U?=
- =?us-ascii?Q?1CTVlBGGQBWVGwnFyaLXY+DWR0bzPNuQ3ua60+34yiMcNUx0YqGetz5iEC8q?=
- =?us-ascii?Q?nUwpnR8wqc9su/HI/YQ6Tw1/D4opxKtPJKeHImaQ5kX910BqG2ikMdn+odi6?=
- =?us-ascii?Q?jYw85zmITlqOg44vYJzx1o1Tw+9kqAsVqWtJcAC34SQGq+R+ZQzZhE8jk2V8?=
- =?us-ascii?Q?KVeZ/5hCvPQJC+PCYGL/GzV4Io5mFBWsAGF/HzK/G2a2VJycLW+JBEeF0yJ7?=
- =?us-ascii?Q?+Rn5fY/MIrjxmf24kuhF9CcQY+UMQu6kIAjyUilY/as53PnSiX7McQci8CTX?=
- =?us-ascii?Q?Jm+7+GhDeMyhspAD2WFH990Ebyzuci5XrIGazNOo6EbLP1+B5wf33f0vcyfF?=
- =?us-ascii?Q?74QnMHxMiGFniP8jJFHA5c/ygWRVTzrW2S3UawHXT7iA7eF0u+whZBwwaf6m?=
- =?us-ascii?Q?GDGrBaNYrJxykpxtZUfzMR8W1Wxm2SKtDRWxn2bb8daVJuwP/qhBFmnvOhX3?=
- =?us-ascii?Q?piJ29bzt/lQSkVCgKJLmAnBTSqjfGUVjr+F3/QR0mxTB+hRoS2FHmrUeiG2u?=
- =?us-ascii?Q?0McYMcnx+SQDOsWL20caOvw59gqNDpqwuKB+ugLRosshzSBbQu11QqX2cBNZ?=
- =?us-ascii?Q?Z7tuHdbTB1XJnrqbt5KCTVTgm5+r7WvMMbwZ1G+xd8ANKKayBahvtckLP/Xs?=
- =?us-ascii?Q?ZwsGrFAipkUyukOYso3Wz6r+l1dKULudWlnDmRoFPHCvR6/VnWEdgkx/KOGw?=
- =?us-ascii?Q?0LTeW/2nApDng7XvcDaE30IPWLHDhlHOrJurEsZk05NTKDvSVxNo5zrT0WhC?=
- =?us-ascii?Q?HBEoyiAatmtps826U3CTDfmXy/TS7jGMHOxDgy4A/h3cS9U8fMELoH6ZzLZQ?=
- =?us-ascii?Q?S9wLZLNdeqBcawPNQ/JFj04=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 30394dc9-96fe-40d0-f860-08dd2340d695
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Dec 2024 10:59:14.3040 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: d4grHD30m/MB0dC56jmer5cr8PdVIodiTDfONIngdnmkkMpIrKByuIOFozpVzJbU0ImPlNw/A4v3tfffW4iOAGQD5j9GUMs/mNi5Lgl6klU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6676
+References: <1bd862e53b50825f6030bf9f212127c776fff881.camel@googlemail.com>
+In-Reply-To: <1bd862e53b50825f6030bf9f212127c776fff881.camel@googlemail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 23 Dec 2024 08:20:26 -0300
+Message-ID: <CAOMZO5Cu0QXH0yznB9-qmTAj4CxoNrsUsmuxG2=CZJPM-yrUfg@mail.gmail.com>
+Subject: Re: [PATCH] crypto: fsl_hash: fixup alignment if necessary
+To: chf.fritz@googlemail.com, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marex@denx.de>
+Cc: u-boot <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Gaurav Jain <gaurav.jain@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,74 +91,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fix include ordering to follow
-  https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
+Ye Li, Peng, Marek
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- net/net.c | 24 +++++++++++++-----------
- 1 file changed, 13 insertions(+), 11 deletions(-)
+Could you please help review this patch?
 
-diff --git a/net/net.c b/net/net.c
-index fd634405e8a..1828f1cca36 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -89,41 +89,43 @@
- #include <image.h>
- #include <led.h>
- #include <log.h>
-+#if defined(CONFIG_LED_STATUS)
-+#include <miiphy.h>
-+#endif
- #include <net.h>
- #include <net6.h>
- #include <ndisc.h>
-+#if defined(CONFIG_LED_STATUS)
-+#include <status_led.h>
-+#endif
-+#include <watchdog.h>
-+#include <linux/compiler.h>
- #include <net/fastboot_udp.h>
- #include <net/fastboot_tcp.h>
--#include <net/tftp.h>
- #include <net/ncsi.h>
- #if defined(CONFIG_CMD_PCAP)
- #include <net/pcap.h>
- #endif
--#include <net/udp.h>
--#if defined(CONFIG_LED_STATUS)
--#include <miiphy.h>
--#include <status_led.h>
--#endif
--#include <watchdog.h>
--#include <linux/compiler.h>
--#include <test/test.h>
- #include <net/tcp.h>
-+#include <net/tftp.h>
-+#include <net/udp.h>
- #include <net/wget.h>
-+#include <test/test.h>
- #include "arp.h"
- #include "bootp.h"
- #include "cdp.h"
-+#include "dhcpv6.h"
- #if defined(CONFIG_CMD_DNS)
- #include "dns.h"
- #endif
- #include "link_local.h"
-+#include "net_rand.h"
- #include "nfs.h"
- #include "ping.h"
- #include "rarp.h"
- #if defined(CONFIG_CMD_WOL)
- #include "wol.h"
- #endif
--#include "dhcpv6.h"
--#include "net_rand.h"
- 
- /** BOOTP EXTENTIONS **/
- 
--- 
-2.45.2
-
+On Thu, Dec 19, 2024 at 3:33=E2=80=AFPM Christoph Fritz
+<chf.fritz@googlemail.com> wrote:
+>
+> Trying to boot a fitImage on an i.mx7ulp results in alignement issue:
+>
+>    ## Checking hash(es) for FIT Image at 90000000 ...
+>       Hash(es) for Image 0 (kernel-1): sha256
+>    CACHE: Misaligned operation at range [90000108, 906d9b08]
+>    CACHE: Misaligned operation at range [9f6349f0, 9f634a30]
+>    CACHE: Misaligned operation at range [9f6349f0, 9f634a30]
+>    CACHE: Misaligned operation at range [9f6349f0, 9f634a30]
+>    CACHE: Misaligned operation at range [9f6349f0, 9f634a30]
+>     error!
+>    Bad hash value for 'hash-1' hash node in 'kernel-1' image node
+>    Bad hash in FIT image!
+>
+> Commit 41b2182af73e ("crypto: fsl_hash: Remove unnecessary alignment
+> check in caam_hash()") removed a specific check which is not necessary
+> for a Layerscape LX2160A but would have catched this directly in
+> caam_hash().
+>
+> The actual root cause is currently unknown, so fix up input and output
+> buffers if not aligned.
+>
+> Signed-off-by: Christoph Fritz <chf.fritz@googlemail.com>
+> ---
+>  drivers/crypto/fsl/fsl_hash.c | 87 +++++++++++++++++++++++++++++++----
+>  1 file changed, 78 insertions(+), 9 deletions(-)
+>
+> diff --git a/drivers/crypto/fsl/fsl_hash.c b/drivers/crypto/fsl/fsl_hash.=
+c
+> index 79b32e2627c..ad8b5640f6f 100644
+> --- a/drivers/crypto/fsl/fsl_hash.c
+> +++ b/drivers/crypto/fsl/fsl_hash.c
+> @@ -178,17 +178,78 @@ static int caam_hash_finish(void *hash_ctx, void *d=
+est_buf,
+>         return ret;
+>  }
+>
+> +static int fixup_input_buffer(const unsigned char **ppbuf, unsigned int =
+len)
+> +{
+> +       unsigned int aligned_size =3D ALIGN(len, ARCH_DMA_MINALIGN);
+> +       unsigned char *aligned_buf =3D malloc_cache_aligned(aligned_size)=
+;
+> +
+> +       if (!aligned_buf) {
+> +               debug("Not enough memory for aligned input buffer\n");
+> +               return -ENOMEM;
+> +       }
+> +
+> +       memcpy(aligned_buf, *ppbuf, len);
+> +
+> +       if (aligned_size > len)
+> +               memset(aligned_buf + len, 0, aligned_size - len);
+> +
+> +       *ppbuf =3D aligned_buf;
+> +       return 0;
+> +}
+> +
+> +static int fixup_output_buffer(unsigned char **ppbuf, unsigned int len)
+> +{
+> +       unsigned int aligned_size =3D ALIGN(len, ARCH_DMA_MINALIGN);
+> +       unsigned char *aligned_buf =3D malloc_cache_aligned(aligned_size)=
+;
+> +
+> +       if (!aligned_buf) {
+> +               debug("Not enough memory for aligned output buffer\n");
+> +               return -ENOMEM;
+> +       }
+> +
+> +       memset(aligned_buf, 0, aligned_size);
+> +
+> +       *ppbuf =3D aligned_buf;
+> +       return 0;
+> +}
+> +
+>  int caam_hash(const unsigned char *pbuf, unsigned int buf_len,
+>               unsigned char *pout, enum caam_hash_algos algo)
+>  {
+> -       int ret =3D 0;
+> -       uint32_t *desc;
+> +       unsigned int digest_size =3D driver_hash[algo].digestsize;
+> +       bool pbuf_fixed =3D false, pout_fixed =3D false;
+> +       const unsigned char *orig_pbuf =3D pbuf;
+> +       unsigned char *orig_pout =3D pout;
+>         unsigned int size;
+> +       int ret =3D 0;
+> +       u32 *desc;
+> +
+> +       /* fix up input buffer if needed */
+> +       if (!IS_ALIGNED((uintptr_t)pbuf, ARCH_DMA_MINALIGN)) {
+> +               debug("Fix up pbuf Address alignment\n");
+> +               ret =3D fixup_input_buffer(&pbuf, buf_len);
+> +               if (ret)
+> +                       return ret;
+> +               pbuf_fixed =3D true;
+> +       }
+> +
+> +       /* fix up output buffer if needed */
+> +       if (!IS_ALIGNED((uintptr_t)pout, ARCH_DMA_MINALIGN)) {
+> +               debug("Fix up pout Address alignment\n");
+> +               ret =3D fixup_output_buffer(&pout, digest_size);
+> +               if (ret) {
+> +                       if (pbuf_fixed)
+> +                               free((void *)pbuf);
+> +                       return ret;
+> +               }
+> +               pout_fixed =3D true;
+> +       }
+>
+>         desc =3D malloc_cache_aligned(sizeof(int) * MAX_CAAM_DESCSIZE);
+>         if (!desc) {
+>                 debug("Not enough memory for descriptor allocation\n");
+> -               return -ENOMEM;
+> +               ret =3D -ENOMEM;
+> +               goto out;
+>         }
+>
+>         size =3D ALIGN(buf_len, ARCH_DMA_MINALIGN);
+> @@ -196,21 +257,29 @@ int caam_hash(const unsigned char *pbuf, unsigned i=
+nt buf_len,
+>
+>         inline_cnstr_jobdesc_hash(desc, pbuf, buf_len, pout,
+>                                   driver_hash[algo].alg_type,
+> -                                 driver_hash[algo].digestsize,
+> -                                 0);
+> +                                 digest_size, 0);
+>
+>         size =3D ALIGN(sizeof(int) * MAX_CAAM_DESCSIZE, ARCH_DMA_MINALIGN=
+);
+>         flush_dcache_range((unsigned long)desc, (unsigned long)desc + siz=
+e);
+> -       size =3D ALIGN(driver_hash[algo].digestsize, ARCH_DMA_MINALIGN);
+> +
+> +       size =3D ALIGN(digest_size, ARCH_DMA_MINALIGN);
+>         invalidate_dcache_range((unsigned long)pout, (unsigned long)pout =
++ size);
+>
+>         ret =3D run_descriptor_jr(desc);
+>
+> -       size =3D ALIGN(driver_hash[algo].digestsize, ARCH_DMA_MINALIGN);
+> -       invalidate_dcache_range((unsigned long)pout,
+> -                               (unsigned long)pout + size);
+> +       invalidate_dcache_range((unsigned long)pout, (unsigned long)pout =
++ size);
+> +
+> +       if (ret =3D=3D 0 && pout_fixed)
+> +               memcpy(orig_pout, pout, digest_size);
+>
+>         free(desc);
+> +
+> +out:
+> +       if (pbuf_fixed)
+> +               free((void *)pbuf);
+> +       if (pout_fixed)
+> +               free((void *)pout);
+> +
+>         return ret;
+>  }
+>
+> --
+> 2.39.5
+>
+>
