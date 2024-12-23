@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05F25E7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 853F4E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 13:22:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 823B9806D4;
-	Mon, 23 Dec 2024 14:21:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19F48806D4;
+	Mon, 23 Dec 2024 14:22:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JnpKSD1I";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="npuruU8x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56ACC80713; Mon, 23 Dec 2024 14:21:50 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 7F987806FB; Mon, 23 Dec 2024 14:22:21 +0100 (CET)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AE1B80655
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:21:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FD9180655
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 14:22:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-54020b0dcd2so5526021e87.1
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 05:21:48 -0800 (PST)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-54024aa9febso4543361e87.1
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 05:22:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734960107; x=1735564907; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1734960139; x=1735564939; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0C/e5N6W1TLCXJfDjL5kYZGoBd7a3Jc1lvn6vzkGCwU=;
- b=JnpKSD1Ibk/oN5UrcQPygt4VOF29mgJuJQpFfaDtF8AT/5Ga61/pT4GlPLu7Ur9wf4
- l9ru179yjr6g97Y0ybKlq0NNlF7eln7dj9uGhBOU55CghyUPcBwiRq/mxIsZN7yskSMl
- x412bZ6z7b/bI00z+TgsDP1EbaMsEQlvDxhtmWGfb/I5hArNTu17EtvXtvZJuk2NWqM0
- X9DMvEr0CSnrApI6/Z126WwaBCfzm6ndKL5v52jVb2IaGL9hD1zcjkzoKgpWJKMKV7YI
- /+2a5QOVRwtJNWWXSOTYAwenoFOcVP7cuK5ByWpJxgMTB2Euabmf0mh23PuC8g5DsFEF
- /gaw==
+ bh=hVq25BhXWLfhDArOmLH4ZbhWxh1cTTbtkZQM7RKInZQ=;
+ b=npuruU8x96VwmB47r5Es+APKPCek4Z5pwjhR1xYCayl8DPwzFSmUWIhM9VNuZl0WoO
+ P0biaasy0SiRK7W2FiL/PffB25ZeRFbGD5A9BNWN4MiIV3LbC7WUSIKB/ilIy/AVSt0V
+ P5jUbufIgRQRNbhrU9x4sZ6AL3KBCB7k7mLx7xkbzjwI85/vWNaWqr/dA5anWlXX/FXt
+ DjtuVScTuNyF3krgu+TmhsREzt8MIELjpeDleCBPRBoVFw0jGLTvxN12cjXoYutf1ljF
+ pEsMVJEzWdaD/pRuhC/pHcGhyvWrhUu+1fIZfkaqx4NOMAsnqVfueEK0o+gNcsqY0HXd
+ BprA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734960107; x=1735564907;
+ d=1e100.net; s=20230601; t=1734960139; x=1735564939;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0C/e5N6W1TLCXJfDjL5kYZGoBd7a3Jc1lvn6vzkGCwU=;
- b=ras2ghAylOfIdJTw18KpxGpiqk+/1AODcqoeUqM0o6jQDigzv8Ih1Td1mMjeXDLAA+
- B2OfEPZsfZK9t12/iEcCivaCBpkjMnaJszXnyn/SRSwje+7gnOQoi7969gQhNom0ACZ3
- FJfNtQiU906/xMG9u1Ppeju+41B6wFkN1PaHrB7LYcjNncAQxeTM/cRkb/Q3oCx5hhxM
- jdxv7DD6SgsqrWWi4+1oozL5J/ie1lE08Ehd/PaQJDNuK9xPHWqpYaPjM1TZ4juLTgqH
- tmQZgKquEzO0qeUdfeJ6ATbI8fUWkxWqqO7n3RfuqIXRDnSJfOM1eDL/s//95adIYsax
- mU0A==
-X-Gm-Message-State: AOJu0YyLncFnKCbj4b8YFx+YZNva3Z/kUYmGII/5C6h7T519fRasLOgV
- flHtdFXsAlWNXzKS0JnzY6exoM82gITnlAuijQe71wih1nYVfDwmaXEnkUW0UmWzfZAR9WitWe1
- ttAvc4TR5IUUFbNSO8Wyq+w3kbr4=
-X-Gm-Gg: ASbGncu9xKm1GTBL1TUxA//722NrR6xXMAiZ4bzHmnF9MG9TdLkYAA6x9CKMOk0UkUu
- 7WJ5xaN0ZBRfD46Z5+c5PUThp2iIDi3F+KyncL4ta3zsO8asXFMiHdXgpbolDVivS1ZtR
-X-Google-Smtp-Source: AGHT+IHH3CrGE77lKqQ6cZbJrUFLug1uQfmTW0kCUeijsf4DIqB/EVNiZOLpT2yeIaKzR6Gi0ZVSx8Lvvf/+ttdGXb4=
-X-Received: by 2002:a05:6512:4005:b0:541:32e5:654c with SMTP id
- 2adb3069b0e04-5422133b6d6mr5301625e87.17.1734960107122; Mon, 23 Dec 2024
- 05:21:47 -0800 (PST)
+ bh=hVq25BhXWLfhDArOmLH4ZbhWxh1cTTbtkZQM7RKInZQ=;
+ b=VXacBiFtWV3962SVm+nHDbNgUV8OOTYxkFKgstsRjIQAGFmYz/dA6mv05UC36HhkA9
+ 0XKZE85YzNIFpURIOzqTT8RXpWLGknQWldwe0JmKE1LNcwXhDPz2qJPI7vzEzUOAB/oP
+ DCThIswjS+nyIcGp66ibZH5LgQzHPTVJ6lon+5zMEtNcGMJjJrUwK6XFGVyorscWhhQQ
+ gL6C+zk6Qvy/fWBEKYqRURZIL1Y4JShoPapHlN1eLt5wQ/VEcd0CWDa/fJFmpsAtnHKT
+ NBXKqZiMfLL+RWf1lBY5xxnkVA0b6pfeKnrkPKRWB4c9c+dnslSrUWq37t0z0NKE7//J
+ Yzpg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVAK2vTSFxoDle60QSsD3z/wZ03pqpADHUYQ/JjH3QorLOfGD8qJdZIBSOJzdI6UdTIjGm76iY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0pSbzDv2MY+nGpE933azT8GaQ0VafSJt9aVAiHGo6rJs0ebZ0
+ r5wYH63kmjG52I//qHvWlvZ9vCLGPdG4wk+0bOpMGz5IfsvSPe4uaPve0U5ZTBmE6I4S0mdpRTN
+ CKjSJB/N33+IamluAgRXUxAcz+4I=
+X-Gm-Gg: ASbGncu9dk8Ni4JcQSvrwiJbIDI0TIjPEt4rUx0s0ZWIpHxK40/NKc7Cfd4NgJJYApx
+ lrG1sZaGr5pUhnOtO3yZCg2yJNf6bNncE6XtgvJozpfs8KyBus1jqeskJEDwKI/w3hHvh
+X-Google-Smtp-Source: AGHT+IEBJ1VJSgkoNoAoGviSrR/MOAhryD2JKZn18EjceRRu3u9byqvCuWl9k/U/9y9gK4Qwn1Pnn5qAUy9OJJKtS7E=
+X-Received: by 2002:a05:6512:6d3:b0:542:1137:611a with SMTP id
+ 2adb3069b0e04-54229533db1mr4927054e87.17.1734960138645; Mon, 23 Dec 2024
+ 05:22:18 -0800 (PST)
 MIME-Version: 1.0
-References: <20241223024104.1425680-1-Meng.Li@windriver.com>
-In-Reply-To: <20241223024104.1425680-1-Meng.Li@windriver.com>
+References: <20241223025536.18588-1-peng.fan@oss.nxp.com>
+In-Reply-To: <20241223025536.18588-1-peng.fan@oss.nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 23 Dec 2024 10:21:35 -0300
-Message-ID: <CAOMZO5A_jtrpgRcD9sa7ffb635JECA=ftU5RUukQ8s=9XScJ3g@mail.gmail.com>
-Subject: Re: [v2 PATCH] net: fec_mxc: add DM_FLAG_ACTIVE_DMA flag for FEC
- network driver
-To: Meng Li <Meng.Li@windriver.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- trini@konsulko.com, ye.li@nxp.com, peng.fan@nxp.com, 
- ilias.apalodimas@linaro.org, jerome.forissier@linaro.org
+Date: Mon, 23 Dec 2024 10:22:07 -0300
+Message-ID: <CAOMZO5CtjKA9KK4wqODXd6dx+cK3geycqki=o185dq+HnLjKAA@mail.gmail.com>
+Subject: Re: [PATCH] imx: Use per board ddrphy_trained_csr
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: sbabic@denx.de, uboot-imx@nxp.com, u-boot@lists.denx.de, 
+ Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,23 +92,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Dec 22, 2024 at 11:41=E2=80=AFPM Meng Li <Meng.Li@windriver.com> wr=
-ote:
+On Sun, Dec 22, 2024 at 10:50=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.c=
+om> wrote:
 >
-> From: Meng Li <meng.li@windriver.com>
+> From: Peng Fan <peng.fan@nxp.com>
 >
-> When FEC network card works as the prime one in u-boot, and is in
-> active status, kernel might crash during booting up stage, especially
-> working with grub. Because the DMA of FEC is still in active status, and
-> copy data into memory if there is network data received. In this case, if
-> kernel allocated a part of memory that has overlay with the memory
-> used by DMA, kernel memory may be destroyed and cause kernel crashes.
-> Because before kernel boots up really, u-boot dm_remove_devices_flags()
-> can call the remove callback of FEC driver with DM_FLAG_ACTIVE_DMA
-> flag. In fecmxc_remove(), phy power is disabled, so there is no data
-> received. In this way, it makes sure that there is no DMA action, so
-> that avoid kernel crashing occurs.
+> Drop global ddrphy_trained_csr which maybe different with per board
+> ddrphy_trained_csr. DDR TOOL generates ddrphy_trained_csr for each
+> board, using the global ddrphy_trained_csr has risk that values may
+> be not up to date.
 >
-> Signed-off-by: Meng Li <Meng.Li@windriver.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 
 Applied to u-boot-imx/next, thanks.
