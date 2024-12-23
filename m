@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C133E7718B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 19:34:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A585E7718B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Dec 2024 19:49:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6908806D3;
-	Mon, 23 Dec 2024 20:34:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D9A8F80725;
+	Mon, 23 Dec 2024 20:49:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XlnoRils";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MjC6nR8G";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="iBx6qWEK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87B298074B; Mon, 23 Dec 2024 20:34:23 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 633E880741; Mon, 23 Dec 2024 20:49:47 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 325EE8069C
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 20:34:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58C5E80708
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 20:49:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d122cf8e52so7391402a12.1
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 11:34:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734982460; x=1735587260; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AtCLGv1CHoFYS+he9RP+gw/T7M95OlzHD7k19c7IQWk=;
- b=XlnoRils3VO1cT2ZnYJPiaLeiwAMaSE0c0gzo2WNO/cstGowC7dheLLdlC6Zz+MhW9
- qlySQuhIUMEpxDkcQB4ilIbP8XeQSwHhTPxKz86qY/30tNZCltG5+jEHbMwP2A2nVkth
- CgdGWhnDELwLZdnA6Vj9pTIaXfn8JhT/qmIoEVpC+7l8Q0dNcgwL8pxZVkyzw3/ZM0M8
- 98c9ifJhfpfhBrN2tRHmrXnTZ8gL1rNzIXNSXMzeCURiTsv+pG5lwJxmMYx4d1er4RDF
- t9B5y9qhVWwifMX6Mx9UBjc39zJdZMbs0XuCzjZwRLmo94lbTrzBtxAYomLL01xAIWKb
- 8tuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734982460; x=1735587260;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AtCLGv1CHoFYS+he9RP+gw/T7M95OlzHD7k19c7IQWk=;
- b=XYyz6kCZg7FInRmBHlxEjGp1CjMVlIASrgvJVwiO2hOYVtbgacl5zsOMtCGy+bOZpr
- ZNpZKD1yXGZ5fOSaF7914wDgvtstDJIjQAf21SskL0mVNxvuuUHsfB1IqS9sOfZ4dJhV
- dr9fPSkVAE0bjmvCWvSu3q0fkYYtPMEcgQWUBXHw0miI47OK+t4mP9sJu9arV95GKRs2
- nR2l0J+bcH5axnks9c+9VQBHRtJIrvLF4x97JHLo5jATcrMiObv9gIz5Vv6IawSPtzxH
- KkDVMk7IlgZzX+TnUq9J7it4twMpFP3Zi8G0dUXBR9Qu0aisFgETpeswaOraLTV2EwEE
- jIjg==
-X-Gm-Message-State: AOJu0YxziZ6R2Uk5lKlHFWUwMuBpkUAunIdF4w8tRj8cIXQd7gC6LQ1p
- +rj1AmKlKgY/4tUURBLKUPByLSly0icLRoTiJy3/5R61ZxNh9bV37Yi07LK8oWU4LYBc60Hi+SD
- By/J2c3wZcgzkrh37UcLJ8N6P7Uw=
-X-Gm-Gg: ASbGncvnq3Z3TtjyjfDtJ+ZzHtDTKtKszob0egjwrhbZ95An8ltC8NTNK4PflbsKHq6
- IhjOhi0dHoNU3c+xc8KHofd2rhvD48tGdCkIkOrgR6WGlyA65/uY=
-X-Google-Smtp-Source: AGHT+IEIso+JVSl1zmQhQQXSWGk0lrme+87AlaKxg8iO/NYMfGeZqprTD42er5c/EK5hFJFgIh4EI6UHs/fDEpEvyGU=
-X-Received: by 2002:a05:6402:27d2:b0:5d2:723c:a577 with SMTP id
- 4fb4d7f45d1cf-5d81ddc0843mr10928578a12.14.1734982460252; Mon, 23 Dec 2024
- 11:34:20 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YH7s46VXMz9snn;
+ Mon, 23 Dec 2024 20:49:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734983384;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5ckx2D3FRpX2HbwCXvjg1Hjq4d16pttQj0AQdhZpQQg=;
+ b=MjC6nR8G3vgxpfFprO7RIifY4GSzUXq71EXKHIcE7Rmyu57fKJeMoUyqFfrx0qOk5RhEi8
+ F/PRyXT6CC3IKKlo0tG/KcW/GfLW6hOaBgNoCruV7cd0dzZMwcNYj3qM3GnC1GNyxM/XkK
+ 0zbUgC1hx7ZTwHdRKhDEKLW2S1x82ajap5r04Y1e9t1QY+MnkAzoGHgjhjha/pFlnfYYiS
+ yMPFIoGu1boNSyQ8GL85Evgaxmyd03jCkCDIwOea/HzbvlH+cOZDEEawtetkq4e+MSfFb5
+ O9ehn4DojovVRLsRInXkGTN+EtYwH+WPbNPtfDO8IyTvcpzdmbEekHNn4mciyQ==
+Message-ID: <4165a5d4-da42-41fe-98c8-39db4b601457@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734983383;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5ckx2D3FRpX2HbwCXvjg1Hjq4d16pttQj0AQdhZpQQg=;
+ b=iBx6qWEKPdZS1A6pMStda40+on41S/wOtb2IfNGvKz9YI1bnOyqc4mHhHng/dGL0bEBkEL
+ PPR7mFfcpEIYfjH7NiJjgygup6lp2Ohap7vmeGtH9SeE5gA5blsR0pRtk80iE72qQXKRhV
+ kK3pkKw5k5QFgmJ9NWJz5lWCNP0QfnLnukuby89EWJFB4uBA/KhLixvZqtFlyCZoSNUKVl
+ lb49O4uSRTx/DzqIBzQJFTdrZN+zMgRF+2fNWRGC3DaiFtIoI/viz05hV4paqQl1ZeeBSy
+ zGrC0FgpICXui5LhJYeMMS9mKq+lCTbzC646EwFFs9kuDIKnGqtyHD2CYwpwEA==
+Date: Mon, 23 Dec 2024 20:45:16 +0100
 MIME-Version: 1.0
-References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
- <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 23 Dec 2024 19:34:09 +0000
-Message-ID: <CALeDE9NxUnfJMggy+SFRo+m1fY538iCBkhZ4REA+7xKx=Qa2oA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] arm64: Add MIDR entries for Cortex-A57 and Cortex-A76
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Biju Das <biju.das.jz@bp.renesas.com>, 
- Chris Paterson <chris.paterson2@renesas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+Subject: Re: [PATCH 01/16] pinctrl: renesas: Add Kconfig symbol for
+ conditional build of full PFC tables
+To: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Hai Pham <hai.pham.ud@renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+References: <20241221213443.115024-1-marek.vasut+renesas@mailbox.org>
+ <20241221234701.GP1505244@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20241221234701.GP1505244@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 58d304cf0015c30a91c
+X-MBO-RS-META: ksa5r5n7e8z9xb47sr7itmzhk5u7uwnc
+X-Rspamd-Queue-Id: 4YH7s46VXMz9snn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,52 +94,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 14 Dec 2024 at 23:01, Marek Vasut <marek.vasut+renesas@mailbox.org>
-wrote:
-
-> Add MIDR entries for Cortex-A57 and Cortex-A76 cores.
-> Those are used on R-Car Gen3 and Gen4 SoCs respectively.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-
-
-> ---
-> Cc: Biju Das <biju.das.jz@bp.renesas.com>
-> Cc: Chris Paterson <chris.paterson2@renesas.com>
-> Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  arch/arm/include/asm/armv8/cpu.h | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/arch/arm/include/asm/armv8/cpu.h
-> b/arch/arm/include/asm/armv8/cpu.h
-> index aa1470bb72d..4dbb589aab8 100644
-> --- a/arch/arm/include/asm/armv8/cpu.h
-> +++ b/arch/arm/include/asm/armv8/cpu.h
-> @@ -5,7 +5,9 @@
->
->  #define MIDR_PARTNUM_CORTEX_A35                0xD04
->  #define MIDR_PARTNUM_CORTEX_A53                0xD03
-> +#define MIDR_PARTNUM_CORTEX_A57                0xD07
->  #define MIDR_PARTNUM_CORTEX_A72                0xD08
-> +#define MIDR_PARTNUM_CORTEX_A76                0xD0B
->  #define MIDR_PARTNUM_SHIFT             0x4
->  #define MIDR_PARTNUM_MASK              (0xFFF << MIDR_PARTNUM_SHIFT)
->
-> @@ -29,4 +31,6 @@ static inline unsigned int read_midr(void)
->
->  is_cortex_a(35)
->  is_cortex_a(53)
-> +is_cortex_a(57)
->  is_cortex_a(72)
-> +is_cortex_a(76)
-> --
-> 2.45.2
->
->
+On 12/22/24 12:47 AM, Tom Rini wrote:
+> On Sat, Dec 21, 2024 at 10:34:00PM +0100, Marek Vasut wrote:
+> 
+>> By default the pin multiplexing tables used by U-Boot are reduced
+>> to keep the size of the bootloader low. This option allows build of
+>> full pin multiplexing tables the same way they are included in the
+>> Linux kernel. This includes pin multiplexing options for Audio, CAN,
+>> CANFD, DU, INTC, INTC-EX, MSIOF, PWM, SSI, for which there is no
+>> U-Boot driver. This option is disabled by default.
+>>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> [snip]
+>> +config PINCTRL_PFC_FULL
+>> +	bool "Renesas pin control drivers (full size)"
+>> +	depends on PINCTRL_PFC
+>> +	default n
+> 
+> The "default n" is the default when there's no default keyword. Please
+> drop when applying, assuming no other changes are requested, thanks!
+Fixed in V2, thanks !
