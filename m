@@ -4,70 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09308E77188
-	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 07:24:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DFB1E7718D
+	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 07:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 657EA80708;
-	Tue, 24 Dec 2024 08:24:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B683880708;
+	Tue, 24 Dec 2024 08:56:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U9SNSZYI";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="S+hOPyou";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BBA780786; Tue, 24 Dec 2024 08:24:36 +0100 (CET)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DB50180786; Tue, 24 Dec 2024 08:56:02 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A1A980655
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 08:24:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C6D7806E5
+ for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 08:55:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-85bb13573fbso1017873241.1
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 23:24:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735025073; x=1735629873; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=eY6phzSny/tZ1rZJwoSvXla46FqONySk5qeZylcpwu8=;
- b=U9SNSZYIrogY3WsIzC/cuJlIRiELBsh2UdxNIYuoKLOPvS9Kgm2hFUsz5SvTdZyJG7
- 87jatNRkf5L4dbzAAIJ4PbAernVg6ex+L67Gzuouc+I4BEVRlg1i1A5TfpM9YXsgvsBV
- a2otkdeJA+Swx/boV+lVxNjEYvA1nDdotFxvLcuify+vX6gwzz2yTPIVNYp1gYELaVSo
- bF9quBenKlQjRlU4RT8YZN6zzOxcKohYqTuh4h+lC1svu5YR9hx4hTJZcmlFQt9MjAzI
- DM3xEapdGQerlmfx6Ki8Z07YAw2n8P1tj79h9ujQ1zWpPQcRCGDZuzlWP6ZWNOpzVRZa
- 9Y/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735025073; x=1735629873;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eY6phzSny/tZ1rZJwoSvXla46FqONySk5qeZylcpwu8=;
- b=XB91u4JGxjbYfu5pcclTgr33JOMRWAXJNjeaFkCJqiWqUVnBpmX5vwkfx0PQ+8QZ52
- IWPhdARImPnz8L8KnuYhL30WS/UEPhpqBpnToE9KQ4wqN0EhGs+vNdSuQJQ/YlLA/pt/
- huo+dTWUJn1O6jy/41VDmWR79/HcFV5FDJaE16Y9DadqyilmZs1IKbAiIxWKGbLMxezl
- aPtk66OGm1p/djPB0AzEwQIa5GpRAc/k1lf2bgMY4s9tT5j4uaJfkdJ/DgYi99cmWwFp
- C7pX0rA6RBJczH9Oy7Q0woohhLTs1H27GWdnB7VqjdX1OGJXbXJbtWm6JaKqOjBGBGFU
- YH9g==
-X-Gm-Message-State: AOJu0Yyh9fUWk0/h+E/TzLwXeNtsV8SMoJEbjXRfPbPAAkz/CHLG+X5J
- dg+gZT5q2vuelXaxfgtTAOxvXJiXr2eTZSBMyP5T1bHt5LkAhDS/Z+nezMXoYPKkNdeO424eAS/
- +TSPx6JCQOGPCwKFKvUuF24OyRWL/EkS+LHb12A==
-X-Gm-Gg: ASbGncs1BEaQ2/9t12vdaLawp1U9DQYG7mSrwUcm+sb5q5Y9fH3A35FS1JRIb/7P87a
- YW+vSQvS8bRqtctBHrcAXTtpOQ5w1t/nvT3KnDzo=
-X-Google-Smtp-Source: AGHT+IEcwvN0sb4wgbHaPE0l/EiPkWT8UVulFdpOdTaL0z9+5ryj59y01I++ULCUUTKrdhflsvxyQgxqjYDe639EYRk=
-X-Received: by 2002:a05:6102:5f02:b0:4b2:5d10:7164 with SMTP id
- ada2fe7eead31-4b2cc113bd6mr16531825137.0.1735025073075; Mon, 23 Dec 2024
- 23:24:33 -0800 (PST)
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id CD248100015;
+ Tue, 24 Dec 2024 10:55:52 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru CD248100015
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1735026952;
+ bh=GLNXHe3zWhPPSHeSwXSZk78qBAx5u8s6lcWjmkhXeiM=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=S+hOPyouSMKeJUtmpp4TXTuYXEw4ef870GIlpDGam3F1FLGxHaEkzCq3Q/oBzPL+0
+ wRn1muYD/2d+r8cTZ+9wBFA0ePGZo4CcXnnMLNMNWdcv9cCG8Iwh147KIgObCy0IV2
+ XbI633JI3dQGsbCDdbbmO4GAXoA1NrqIw+Ib2oQQFbd4FWr1SihrFYd1EiDckx4nwU
+ sEgUcm8CPAha3bEpZnsPncwVzs2Wg9/D/tgB3/c9qjU++S4kPK1GLyPu8oO9ojxt9t
+ KFluFny3LxzOIZo/V9r/ZwVUZ1stjSJJSo6RquLZPn2pI/rGqpXqboGafPuyqbgAGQ
+ ZK1Hux/bz8kfQ==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 24 Dec 2024 10:55:52 +0300 (MSK)
+Message-ID: <983f63fb-e61c-3aaf-9969-eef1ca3f23c9@salutedevices.com>
+Date: Tue, 24 Dec 2024 10:55:46 +0300
 MIME-Version: 1.0
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 24 Dec 2024 12:54:22 +0530
-Message-ID: <CAFA6WYMvXXi19tjxhi-N4D3-tbVkbJQeUHwzuC5FME6vzPir=Q@mail.gmail.com>
-Subject: DT subtree sync for v6.12
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [PATCH v1] mtd: rawnand: meson: always use OOB bytes during write
+Content-Language: en-US
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
+ <kernel@salutedevices.com>, <oxffffaa@gmail.com>
+References: <d087411f-c2fd-75a8-6041-31623aba53ae@salutedevices.com>
+ <CAOf5uwmb6W1BjCsc437_aFnO0fjVHrr-mU0r8ZGK_jpwn-75Kg@mail.gmail.com>
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+In-Reply-To: <CAOf5uwmb6W1BjCsc437_aFnO0fjVHrr-mU0r8ZGK_jpwn-75Kg@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [172.28.160.35]
+X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 190021 [Dec 24 2024]
+X-KSMG-AntiSpam-Version: 6.1.1.7
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 49 0.3.49
+ 28b3b64a43732373258a371bd1554adb2caa23cb, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:5.0.1,7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
+ source.denx.de:7.1.1; salutedevices.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/12/24 07:14:00
+X-KSMG-LinksScanning: Clean, bases: 2024/12/24 07:14:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/12/24 05:06:00 #26909694
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,9 +103,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Do you plan to perform DT subtree sync for v6.12 which seems to be due
-for some time now?
 
--Sumit
+On 23.12.2024 15:57, Michael Nazzareno Trimarchi wrote:
+> On Sun, Dec 22, 2024 at 10:23 PM Arseniy Krasnov
+> <avkrasnov@salutedevices.com> wrote:
+>>
+>> If 'oob_required' is not set by the caller (for example 'oobbuf' is NULL),
+>> then driver doesn't copy OOB data from 'oob_poi' to special controller
+>> structures, so zeroes will be written as OOB. But, generic raw NAND logic
+>> in 'nand_base.c' already handles case when OOB is not required to write by
+>> filling 'oob_poi' with 0xFF's. So let's remove 'oob_required' check to
+>> always read 'oob_poi' data for OOB.
+>>
+>> Kernel driver (drivers/mtd/nand/raw/meson_nand.c) works in the same way,
+>> so need to keep same behaviour here.
+>>
+>> Fixes: c2e8c4d09a7a ("mtd: rawnand: Meson NAND controller support")
+>> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+>> ---
+>>  drivers/mtd/nand/raw/meson_nand.c | 4 +---
+>>  1 file changed, 1 insertion(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
+>> index 81122315f4..82a12ac061 100644
+>> --- a/drivers/mtd/nand/raw/meson_nand.c
+>> +++ b/drivers/mtd/nand/raw/meson_nand.c
+>> @@ -607,9 +607,7 @@ static int meson_nfc_write_page_hwecc(struct mtd_info *mtd, struct nand_chip *ch
+>>                 memcpy(meson_chip->data_buf, buf, mtd->writesize);
+>>
+>>         memset(meson_chip->info_buf, 0, chip->ecc.steps * PER_INFO_BYTE);
+>> -
+>> -       if (oob_required)
+>> -               meson_nfc_set_user_byte(chip, chip->oob_poi);
+>> +       meson_nfc_set_user_byte(chip, chip->oob_poi);
+>>
+> 
+> Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+> 
+> I will queue it
+
+Thanks. You mean it will be merged to https://source.denx.de/u-boot/custodians/u-boot-nand-flash ?
+
+
+> 
+>>         return meson_nfc_write_page_sub(chip, page, false);
+>>  }
+>> --
+>> 2.30.1
+> 
+> 
+> 
