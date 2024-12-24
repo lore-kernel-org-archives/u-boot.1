@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A11E77188
-	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 13:56:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49886E77188
+	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 13:59:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1147380786;
-	Tue, 24 Dec 2024 14:56:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E31480786;
+	Tue, 24 Dec 2024 14:59:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="SfVOZ8fk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RFbRNDRC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2275D807A7; Tue, 24 Dec 2024 14:56:21 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 3ADF58074B; Tue, 24 Dec 2024 01:49:47 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7696580711
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 14:56:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id DFAF880725
+ for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 01:49:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2eeb4d643a5so5487898a91.3
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 05:56:18 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=nvbolhuis@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3e829ff44so10435202a12.0
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 16:49:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1735048577; x=1735653377;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SfbfivRxVkzrTJotmsXRReXiVYHwDjMnDH2ADEzFvLE=;
- b=SfVOZ8fkROVJXh+B6McKUzbtnBjcKf3jvEYONPwOw7Wq9D/906NJCdJnS8ZnCJdk2Q
- nRGkY3kOrghwxis73yq5AaiZSNi3U2g9uCELZEaR8ORj3AwjXUvxuN1JhSvGbdMnk3y4
- SCj9RaXyXMZpngTcEsymiXX9lpaeQ4ZoP34Ek=
+ d=gmail.com; s=20230601; t=1735001384; x=1735606184; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0QjP64FceWH7Jt5233QOfbNxtRE3NZshgOVTlXI2Fl4=;
+ b=RFbRNDRClumri2OtFzpxBqNCNC79hhLYralGB7VfP3NBIS3osb5vti/ZP6toA3TAY0
+ RX7wP2uXuqL6FilPLCpoS1dpKfdxDUTRInePalPd+2L2CRsyncSNawh3D7D3Q9rtuXqd
+ FD3ZRND0RPHyGlpnRICtKIjovjAXXtxG1cz583Lt50rV13Q0OIpNPHGu6IX9EH39Nxij
+ gybiPqCiWX/pirbQlyQQG1ImAs3Cjjf76RWT1FbZPpZrwA02PqIfLxt0dAstyHRuSAuA
+ W5sINnamGWVLcX5hY+XBHbId+njE4FGbCpCRteVNiiljsB00AHtx+iq4mceLrd3U7tEo
+ AWAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735048577; x=1735653377;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SfbfivRxVkzrTJotmsXRReXiVYHwDjMnDH2ADEzFvLE=;
- b=lAnFgn7RnElOPaFGA0FAe3d99VPH72evcTmBlrUK3rWMJWiTjV0ag18q8hs8HuhAbl
- HSMH95BHnHqmu3XmOpOd3/4JFCfSK96Xf+KCUBA08L3zrvhvPCqzCSC9dGJ44TeVENIQ
- HoaK73whOnX8cVIxC9ND/j82wWeBAJ7MoJn97ByDhNUbqkbkHhbaOd7Mvd5GSsYQw3aa
- iKGePQG7oW4unsgfzoCQWrRdJoyHkei9vPU1ZG0pE8amZC0g+rO7o0/BlCzCTGRYYUej
- rc6AUf/73LDbLwuQY6OGbyS3n7u9gJOBW9KAorLQvXJFWVJHNLbxr8DvrsQM/bXvIxG3
- eXyw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXi+PnmNcIqv2JCQ2/s1NHj+nozNGVpqu58TGJ9UjmwoX+NnAvPYoFtacJKvTIe9oUM+8dAF5k=@lists.denx.de
-X-Gm-Message-State: AOJu0YweJH7s0BxzzGwFNcF+lDupBdzoQ+N/e+Mwnvh3vE9Q8eUoWt+H
- lYi8IgzYt+4s9vE6Xs/ocyJ+9kKobRsPtz2D5pwkLuoUUGNmk1bhojSfiGwaxbPmWzbYsCsLF7p
- t6u4+D3nc0dNjmY8Oj0tVXfZH8nJpYbA3Gh9pIw==
-X-Gm-Gg: ASbGncug+fXSPx7SuyR7LGlz3PFjvBFy7BvUOX0HI79nnoWCr3kS70Iq87uGCOxQgyi
- KyNhEaDLFOGg/jOHzohhg1kWKeoqYDsX6wuY=
-X-Google-Smtp-Source: AGHT+IG24bkZ58YNXR3Odzwd7Uoo4zz5PFP6eQAprmQW59EKFqIFJY0AgFigy2F0BfKZPK7z4of3h2f8JtiiKOEotOU=
-X-Received: by 2002:a17:90a:d448:b0:2f4:4003:f3ea with SMTP id
- 98e67ed59e1d1-2f452edbd0fmr25330025a91.33.1735048576863; Tue, 24 Dec 2024
- 05:56:16 -0800 (PST)
+ d=1e100.net; s=20230601; t=1735001384; x=1735606184;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0QjP64FceWH7Jt5233QOfbNxtRE3NZshgOVTlXI2Fl4=;
+ b=YZieqBTZE55esNfmsxLzQY7Sb2LmFLuJQO93qikjA62G8/AiRMv7woim20jMBByVg3
+ kY8XKa7a4we4x1xDitOjWk2H3wVzLuOXf+kJH66tpSIz+Sj2o+9Ol2lLKvefTTjB/0nf
+ xlBQ3LrkHYlDriPhJzjL5yPrOX2h1Yn9HDLgKe/IdDy4kkXFY/I+vlllrP4KxaBWSnKA
+ fUQcvRQKX9Wz7zaHQW4ZfOdepOPy58Jrqym9C6SrT2hKzNS7kzrmavasD8C3IPdkMDFa
+ X7yN5CI/aLgDc5CCHJyUckqXFX4IOWhrebmmQxeB/UsGJkAWEGwp00Ajd8wIEwsUYj4A
+ R8Vg==
+X-Gm-Message-State: AOJu0YwDkQNvKPq9sMZh5H57A+MidgiZe5XJga/Ub04B8RnFiUpLTw4M
+ A8Cl7gvnYs1lWKTlajDDLq+K8j/vW4naG8uP75UzNKrnE7TUwcOUnISnzg==
+X-Gm-Gg: ASbGncuOQaUKNFxC7ShEhiJw3LbA/wY9jAb/GBhlOwZ5Xd9l80dBzIjZWwoqsDp+Eau
+ ES6VR+/gMhZ8yXEC21B/9640V8oJIFWDs1oeizGfOdOumFrgJfumqvokaISAPJ+KiPRhQDfkvBk
+ Jvjz5GpLUbkbzPBtL6FHltQkrLb+Q50AF0bKY7xt4r9LyXVx6SAdrQkM51qTmi0i76h2qt0JJbR
+ uyqI1pQYYCPQsygoDUYafFtCdfSq3Hdk3JXYqAha+2exPCzvSM/xJ5lH245nJkWzoMTnmg+QNk1
+ QIkbMSsPBgEfGD4pveH1
+X-Google-Smtp-Source: AGHT+IHJD67sE5p+KAl6DDSI/0oiQDZ/8NRaqZaKX7Rw3SLsiT9ZT77g9p456GXHeaIBk7M7YTyQEg==
+X-Received: by 2002:a17:907:2d93:b0:aa6:7c8e:808c with SMTP id
+ a640c23a62f3a-aac3367569dmr1475003466b.17.1735001383716; 
+ Mon, 23 Dec 2024 16:49:43 -0800 (PST)
+Received: from localhost.localdomain (77-165-185-46.fixed.kpn.net.
+ [77.165.185.46]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aac0e89887csm580590166b.80.2024.12.23.16.49.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Dec 2024 16:49:42 -0800 (PST)
+From: nvbolhuis@gmail.com
+To: u-boot@lists.denx.de
+Cc: Norbert van Bolhuis <nvbolhuis@gmail.com>
+Subject: [PATCH] squashfs: Fix sqfs_inode_size() for xattr related
+ SQFS_LSYMLINK_TYPE
+Date: Tue, 24 Dec 2024 01:49:04 +0100
+Message-ID: <20241224004925.468050-1-nvbolhuis@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-References: <d087411f-c2fd-75a8-6041-31623aba53ae@salutedevices.com>
- <CAOf5uwmb6W1BjCsc437_aFnO0fjVHrr-mU0r8ZGK_jpwn-75Kg@mail.gmail.com>
- <983f63fb-e61c-3aaf-9969-eef1ca3f23c9@salutedevices.com>
-In-Reply-To: <983f63fb-e61c-3aaf-9969-eef1ca3f23c9@salutedevices.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 24 Dec 2024 14:56:04 +0100
-Message-ID: <CAOf5uwn7OAhkhxbjcFYkHdmxy4R_VsqSb7ertn09zPcGpPgQrQ@mail.gmail.com>
-Subject: Re: [PATCH v1] mtd: rawnand: meson: always use OOB bytes during write
-To: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- u-boot@lists.denx.de, u-boot-amlogic@groups.io, kernel@salutedevices.com, 
- oxffffaa@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 24 Dec 2024 14:59:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,86 +95,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+From: Norbert van Bolhuis <nvbolhuis@gmail.com>
 
-Yes
+A squashfs filesystem with extended attributes (xattrs) may have
+inodes of type SQFS_LSYMLINK_TYPE. This might cause u-boot to fail to
+handle the filesystem since it assumes a SYMLINK_TYPE and LSYMLINK_TYPE
+inode are the same size. This is wrong, see:
+https://github.com/plougher/squashfs-tools/blob/master/squashfs-tools/read_fs.c#L421
 
-Michael
+Using the mksquashfs '-no-xattrs' argument is probably best, but the
+mksquashfs '-xattrs' argument is the default.
+This patch fixes squashfs image handling by making sure parsing the
+uncompressed inode_table (with sqfs_find_inode) succeeeds. The only change
+needed is correctly determining the size of a SQFS_LSYMLINK_TYPE inode.
 
-On Tue, Dec 24, 2024 at 8:55=E2=80=AFAM Arseniy Krasnov
-<avkrasnov@salutedevices.com> wrote:
->
->
->
-> On 23.12.2024 15:57, Michael Nazzareno Trimarchi wrote:
-> > On Sun, Dec 22, 2024 at 10:23=E2=80=AFPM Arseniy Krasnov
-> > <avkrasnov@salutedevices.com> wrote:
-> >>
-> >> If 'oob_required' is not set by the caller (for example 'oobbuf' is NU=
-LL),
-> >> then driver doesn't copy OOB data from 'oob_poi' to special controller
-> >> structures, so zeroes will be written as OOB. But, generic raw NAND lo=
-gic
-> >> in 'nand_base.c' already handles case when OOB is not required to writ=
-e by
-> >> filling 'oob_poi' with 0xFF's. So let's remove 'oob_required' check to
-> >> always read 'oob_poi' data for OOB.
-> >>
-> >> Kernel driver (drivers/mtd/nand/raw/meson_nand.c) works in the same wa=
-y,
-> >> so need to keep same behaviour here.
-> >>
-> >> Fixes: c2e8c4d09a7a ("mtd: rawnand: Meson NAND controller support")
-> >> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
-> >> ---
-> >>  drivers/mtd/nand/raw/meson_nand.c | 4 +---
-> >>  1 file changed, 1 insertion(+), 3 deletions(-)
-> >>
-> >> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/=
-meson_nand.c
-> >> index 81122315f4..82a12ac061 100644
-> >> --- a/drivers/mtd/nand/raw/meson_nand.c
-> >> +++ b/drivers/mtd/nand/raw/meson_nand.c
-> >> @@ -607,9 +607,7 @@ static int meson_nfc_write_page_hwecc(struct mtd_i=
-nfo *mtd, struct nand_chip *ch
-> >>                 memcpy(meson_chip->data_buf, buf, mtd->writesize);
-> >>
-> >>         memset(meson_chip->info_buf, 0, chip->ecc.steps * PER_INFO_BYT=
-E);
-> >> -
-> >> -       if (oob_required)
-> >> -               meson_nfc_set_user_byte(chip, chip->oob_poi);
-> >> +       meson_nfc_set_user_byte(chip, chip->oob_poi);
-> >>
-> >
-> > Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
-> >
-> > I will queue it
->
-> Thanks. You mean it will be merged to https://source.denx.de/u-boot/custo=
-dians/u-boot-nand-flash ?
->
->
-> >
-> >>         return meson_nfc_write_page_sub(chip, page, false);
-> >>  }
-> >> --
-> >> 2.30.1
-> >
-> >
-> >
+Signed-off-by: Norbert van Bolhuis <nvbolhuis@gmail.com>
+---
+ fs/squashfs/sqfs_inode.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
+diff --git a/fs/squashfs/sqfs_inode.c b/fs/squashfs/sqfs_inode.c
+index bb3ccd37e3..ce9a8ff8e2 100644
+--- a/fs/squashfs/sqfs_inode.c
++++ b/fs/squashfs/sqfs_inode.c
+@@ -19,7 +19,9 @@
+ 
+ int sqfs_inode_size(struct squashfs_base_inode *inode, u32 blk_size)
+ {
+-	switch (get_unaligned_le16(&inode->inode_type)) {
++	u16 inode_type = get_unaligned_le16(&inode->inode_type);
++
++	switch (inode_type) {
+ 	case SQFS_DIR_TYPE:
+ 		return sizeof(struct squashfs_dir_inode);
+ 
+@@ -87,7 +89,7 @@ int sqfs_inode_size(struct squashfs_base_inode *inode, u32 blk_size)
+ 		    get_unaligned_le32(&symlink->symlink_size), &size))
+ 			return -EINVAL;
+ 
+-		return size;
++		return (inode_type == SQFS_SYMLINK_TYPE) ? size : size + sizeof(u32);
+ 	}
+ 
+ 	case SQFS_BLKDEV_TYPE:
+-- 
+2.47.1
 
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
