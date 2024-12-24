@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC97DE7718B
-	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 02:44:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6213E77188
+	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 05:32:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1939B807AC;
-	Tue, 24 Dec 2024 03:44:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 39FB780708;
+	Tue, 24 Dec 2024 06:32:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a0Sj3CFl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KTVC+zW4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34FBB8074B; Tue, 24 Dec 2024 03:44:55 +0100 (CET)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 261F380711; Tue, 24 Dec 2024 06:32:40 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1556D80786
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 03:44:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AC65806FC
+ for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 06:32:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-46772a0f85bso39906981cf.3
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 18:44:49 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aa6b4cc7270so710227166b.0
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 21:32:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735008289; x=1735613089; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=bEujPHroTVQ8OkcA8khixkSseE0XlHf+3cStmoCWiGM=;
- b=a0Sj3CFlPMRtU9JeLbCzb6g7RnCXyE26cTeW14hh6cOGbatxwVFSzrK/gSpbVwDGkh
- XFLAZcJYnd6tzmQeauV1HCVI9SgaPgD/obVLHoiwqRTycRi0V7hE88CdYAOAGThQoC8l
- D0ASQynfrKCcOMsk1MmnwPVrArPTKOjoABxqY=
+ d=chromium.org; s=google; t=1735018357; x=1735623157; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yyMAEQWzQQY3ORHEKW9r43Ipqkaql0Q2y248ck1wYxs=;
+ b=KTVC+zW4rlwcCopLGcUBlqoDONLSm3Tx495TgDB2TW3/Qexnx3ry3bjRenuXLro8XS
+ 1qdQqULxyQQoRktfwdiSIR+QsGdNvZPcMZbWQnl78mNtDIzGPMLsnDgbB48rgUsmzVw2
+ 0rC+ajDCHGF55rXJGSKWewJlKrlANXImD3xq4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735008289; x=1735613089;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bEujPHroTVQ8OkcA8khixkSseE0XlHf+3cStmoCWiGM=;
- b=pkwyabPy2+D/qJTFauj+quBOxEI16CZo3fSHalweyKdsB7aTEldk4fL9rTJKrK+OZF
- gEPBd6kXw7MzErSQfzfHkLZL/k1vndqQu28TxgW1QEwzqeE1iCovkUtc3EPQx2cIW4qI
- dlOBMXM9lSPTx6pxuzjcdv0JZ1fxW3rca4V9oAg/Lw/j66uQswDxlXctq4d6vyl3Ewag
- wPu90m5YLXykZKhF/TUCmpfEShDcELNJkiR2jX2hfXPGpyZBvv7p0tP8rlUfjrctmD3J
- 33BX5usk9PN4fPkT9PT3TJ5qg5NOL2LxgxZOSVojWKQbBGl45CwO/EGnW8dm8xP22LtC
- TN2w==
-X-Gm-Message-State: AOJu0YwMDtr+jXBDjheelTeJkSZVugzAnuRPCrf87a6UqQtCgDpqmJgi
- KE9LS9IsdIPmjd2PbGCVd6vUvzwQMo+aFA5xR+pV0Fk/CsHlg8NbDsv1CLqG0/0p60Bw0sHRXFf
- T
-X-Gm-Gg: ASbGncvsxaHM7nxyHyv/h0i1OO4EAmIr62ouwfw+45SEWDb4uBiCJBys6SqnnwTB3xO
- ZTe/SdeIYDOlDjdjg9khPPXf9Lr8Rh42SRrv0GiIpuPaL3PMEypJVfgkoK1ZYJS3hnej+x4Xx7J
- V66cyN6Gnsi5wlvBPsz+Pq+tfLfFyVNSvZXDOcftdf2pmU8xQcBcSXboRmnxuGfig4/rPydJK5Q
- zAh/Mx/Z25wyN/aIkoIWxoHMhRQCcKZYFpShGkbRKLTPJ/EA2QgcJTPYg==
-X-Google-Smtp-Source: AGHT+IE0dzHOdu4PXWSlR+3qipWCoCX7+Adv+GMoeDfej7oy+IeVfZtHmZN4ynHFRtJqYbuZ0IHS7A==
-X-Received: by 2002:ac8:7fc2:0:b0:467:7557:5fbb with SMTP id
- d75a77b69052e-46a4a8ee06emr222105811cf.27.1735008288814; 
- Mon, 23 Dec 2024 18:44:48 -0800 (PST)
-Received: from bill-the-cat ([189.178.122.190])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46a3e6ada4fsm49344511cf.52.2024.12.23.18.44.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Dec 2024 18:44:47 -0800 (PST)
-Date: Mon, 23 Dec 2024 20:44:43 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de,
- marex@denx.de, monstr@monstr.eu, Tudor Ambarus <tudor.ambarus@linaro.org>
-Subject: [ANN] U-Boot v2025.01-rc5 released
-Message-ID: <20241224024443.GU1505244@bill-the-cat>
+ d=1e100.net; s=20230601; t=1735018357; x=1735623157;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yyMAEQWzQQY3ORHEKW9r43Ipqkaql0Q2y248ck1wYxs=;
+ b=A8nty8ih3kEjsIvdgSfTxhEdP5vT8qQE62inzdNLMkF9YT2lNkLAKwV5imqXL4SC9i
+ O/3zFGSeUE5ppK/r7GSglEVl+m9C4LN1azq6V1cRCb073WJLlC/+pUUpHSTyaDBDRQ4X
+ 3GpkMMLbM7OHNl8R+grU9Lph7s0LmWl18+5D6buQipxnu7sfekL0gKjAlky88jgrRsxu
+ DazrrCsKvp+5x0F15bFyrQL/o4iQkeOjJ53Br+wGlLhee1ZXaqcirhSObo3z+ZyFQg81
+ DYxkEiHx8T0LEFxoPdlNlpz/RvmONs71jlXykpHpCHwl9cAeG1blTvHZxZJPqoux4eZq
+ dbhQ==
+X-Gm-Message-State: AOJu0YwyaAo9h/iRz6r16guTtAyTfbIxRS6UyD+rQp9ibt58LQIggx1B
+ 10mYDwZK0l96+hDcrgVHf3rgpIQm3mgo+1k1NTl4no7WMRYviaNvtl+A/TbRkzY9jigUaC6Cnkm
+ 2n/7YJnYc7kjxJCs05wx/9HoDXg3rO854FSNz
+X-Gm-Gg: ASbGnct8d84Gbx59aPFwniiCblCsOR0+WYmgcVzAsR0x+qullAEInLFN4UgTfuORlg5
+ VgMDmTTvOd4r2QC0HPfOxmOqDWvSV7qI51rAC/hR7
+X-Google-Smtp-Source: AGHT+IF6v/pqnzCC2gQwI3XWvA3P0ocbIbB02VrwxC/J9alFyezyZ7BdMHX+amhj/VybxfzqpYgVcfUYOJ1GocFC8a8=
+X-Received: by 2002:a05:6402:5189:b0:5d0:81f5:a398 with SMTP id
+ 4fb4d7f45d1cf-5d81dd846ecmr33744607a12.1.1735018357010; Mon, 23 Dec 2024
+ 21:32:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VqMUKsNU9FEtiI8u"
-Content-Disposition: inline
+References: <20241219023832.1098689-1-sjg@chromium.org>
+ <20241219023832.1098689-4-sjg@chromium.org>
+ <CAC_iWjJSXWDBjYNaCr-yBAD6NbK2Pph0t+ZmkP_BFJHq3S9Kug@mail.gmail.com>
+In-Reply-To: <CAC_iWjJSXWDBjYNaCr-yBAD6NbK2Pph0t+ZmkP_BFJHq3S9Kug@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 24 Dec 2024 18:32:23 +1300
+Message-ID: <CAFLszThWhF2+g2Z7cZCVRppnO+iG57aMn0BaGOiOJHxER1vAMQ@mail.gmail.com>
+Subject: Re: [PATCH v3 3/7] efi_loader: Update efi_run_image() to accept image
+ and device path
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Moritz Fischer <moritzf@google.com>, 
+ Patrick Wildt <pwildt@google.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,54 +90,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---VqMUKsNU9FEtiI8u
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, Dec 21, 2024, 21:44 Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> On Thu, 19 Dec 2024 at 04:39, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Provide these globals as parameters to this function, on the way to
+> > making it possible to start an image without relying on the globals.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v2)
+> >
+> > Changes in v2:
+> > - Adjust argument ordering for efi_run_image()
+> >
+> >  lib/efi_loader/efi_bootbin.c | 20 ++++++++++++--------
+> >  1 file changed, 12 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> > index 051d86ef993..b42ff3cb4e0 100644
+> > --- a/lib/efi_loader/efi_bootbin.c
+> > +++ b/lib/efi_loader/efi_bootbin.c
+> > @@ -157,9 +157,13 @@ void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
+> >   *
+> >   * @source_buffer:     memory address of the UEFI image
+> >   * @source_size:       size of the UEFI image
+> > + * @device:            EFI device-path
+> > + * @image:             EFI image-path
+> >   * Return:             status code
+> >   */
+> > -static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
+> > +static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
+> > +                                 struct efi_device_path *device,
+> > +                                 struct efi_device_path *image)
+> >  {
+> >         efi_handle_t mem_handle = NULL, handle;
+> >         struct efi_device_path *file_path = NULL;
+> > @@ -167,7 +171,7 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
+> >         efi_status_t ret;
+> >         u16 *load_options;
+> >
+> > -       if (!bootefi_device_path || !bootefi_image_path) {
+> > +       if (!device || !image) {
+> >                 log_debug("Not loaded from disk\n");
+> >                 /*
+> >                  * Special case for efi payload not loaded from disk,
+> > @@ -188,9 +192,8 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
+> >                         goto out;
+> >                 msg_path = file_path;
+> >         } else {
+> > -               file_path = efi_dp_concat(bootefi_device_path,
+> > -                                         bootefi_image_path, 0);
+> > -               msg_path = bootefi_image_path;
+> > +               file_path = efi_dp_concat(device, image, 0);
+> > +               msg_path = image;
+> >                 log_debug("Loaded from disk\n");
+> >         }
+> >
+> > @@ -227,7 +230,7 @@ out:
+> >  /**
+> >   * efi_binary_run() - run loaded UEFI image
+> >   *
+> > - * @image:     memory address of the UEFI image
+> > + * @image_ptr: memory address of the UEFI image
+> >   * @size:      size of the UEFI image
+> >   * @fdt:       device-tree
+> >   *
+> > @@ -236,7 +239,7 @@ out:
+> >   *
+> >   * Return:     status code
+> >   */
+> > -efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
+> > +efi_status_t efi_binary_run(void *image_ptr, size_t size, void *fdt)
+> >  {
+> >         efi_status_t ret;
+> >
+> > @@ -252,5 +255,6 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
+> >         if (ret != EFI_SUCCESS)
+> >                 return ret;
+> >
+> > -       return efi_run_image(image, size);
+> > +       return efi_run_image(image_ptr, size, bootefi_device_path,
+> > +                            bootefi_image_path);
+> >  }
+>
+> https://lore.kernel.org/u-boot/CAC_iWj+5-uoXq9BanaOSxedVgbBYNFQ2AZVqka+J7iwMv=eC5w@mail.gmail.com/
+>
+> I thought you said the _ptr was dropped.
+>
+> Anyway
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> We can drop it later or in v3 if one is needed
 
-Hey all,
+Thanks. Yes I dropped it but then realized that the next patch needs
+it. I replied on version 2 about this.
 
-Once again it's release day and so here's v2025.01-rc5 and I'll update
-the -next branch soon.
-
-At this point, I'm waiting to see if it can be agreed that:
-https://patchwork.ozlabs.org/project/uboot/patch/20241220143006.1921705-1-v=
-enkatesh.abbarapu@amd.com/
-is safe enough, or if it needs to be further re-worked. That's really
-all I'm tracking between now and the release. That's not to say others
-might not be tracking more things, but that's all that's on my radar
-right now.
-
-In terms of a changelog,=20
-git log --merges v2025.01-rc4..v2025.01-rc5
-As always, more details in pull requests (or the tags referenced by
-them) will result in more details here.
-
-At this point we have one more rc releases to go, next Monday on the
-30th, with the final release on the 6th of January, 2025.
-
-Thanks all!
-
---=20
-Tom
-
---VqMUKsNU9FEtiI8u
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdqIBsACgkQFHw5/5Y0
-tyzrmAv6Av80a/+AF4XMt37MHrWyJhqJ3akFSo+quoOzkqxYr/viwF6I+Ke5Vbxu
-4bgP3kDV2GeFgs08gp7wtCsoBnK2jSnPAX5fyhF+EUkSKm5GGB4ceZujHSy+G8Zk
-a74vZB91yzFurqUax3NsFsamR0CRXzMFiQxcHyuJNzjGdwnKdiVrQ9nRHcymD5bW
-rt2TtZ3nVQtWLN9kxR5Vt0NQKt/HWd/7C8CUOinb1tk/W9HaF6hvU8sCeuOIq2c5
-fhi0XWFMZ/iTZMlfCpSiuPTHnSSsR3N4ya0onju9bqYPBHoQwqLpllcTpwCkY3l5
-gPh0Pjp+EDejFrFzQ593MXthqrQsTFyLZrlUDpPxj4kS95Bhu6BJTbeU/56UI5s2
-8jgaRsoaUQM3/np+Tgu304QTuTJ3TmsKaHNV1m7j2drv549a6ZAATj9NIZw/zob4
-wye6ryAA6ink4TMJZOZqa0xrjfVvNtHzjfvSBY2BsWRrOGqokogvBuxpbbaixMUJ
-5M40sjj0
-=azBw
------END PGP SIGNATURE-----
-
---VqMUKsNU9FEtiI8u--
+Regards,
+Simon
