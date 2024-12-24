@@ -4,89 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD5A9E77188
-	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 16:03:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F3CBE77188
+	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 17:21:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DD8A807A7;
-	Tue, 24 Dec 2024 17:03:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7CF09807DA;
+	Tue, 24 Dec 2024 18:15:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rvsl8HkF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RtxHH/pD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80D4D80817; Tue, 24 Dec 2024 17:03:42 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 6C08E807DD; Tue, 24 Dec 2024 18:15:06 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43DDE80352
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 17:03:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38EEA807A7
+ for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 18:15:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6dcd4f1aaccso75600766d6.2
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 08:03:40 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-467b955e288so49828281cf.1
+ for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 09:15:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735056219; x=1735661019; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=slwFkaLgVc5VgH4orJIvGMWHBrrjU/4aFDO9O04a4KU=;
- b=Rvsl8HkFoh19oNsAx5fO/oROe9JwZ5/Zq7ln+La3S3AKbJzaiBq1QRJAnZxRk0rpkc
- B3cB/PFM3TTD7Eh0QlZGrR6XttOHUCJmFQdTSHFZCc5w40+406y9/bm5N8eq8vl2yh++
- jLHOwyIKYQiBu4G2yRftchbtr9gsugW4mCKHddam3zCNYRtMtXNh7Xw8e2K4YUcRBXxh
- 4K19sHDsz9TWFiyJEsgUcvsDhiMemoxoAQvvi7Wup2JToDLnCIn8st63chRsNYu3vM8T
- 72QXLTK2RWwHpNGzUA1pCkib7wGjYNU1ZABg2Z/wvAIfuD8rFD1Zi6vaj0Dpf9Bp9BOn
- r0Ug==
+ d=konsulko.com; s=google; t=1735060499; x=1735665299; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=f0SzqNOgIvc3eqNiJYr9CuEKZlpDGaao42T5/m2b2Eg=;
+ b=RtxHH/pD0IfQdKaPkFWKxlW+cdeCggLfod46gCETOXNyV80s/59uFguZmhgf4rqETh
+ lwU2ZUnDyZXoSjmGUoqlBt63LGkmzDdy/lHXi6PwD2IBQ84Cgg74fOQAtTnVqjcdhCtv
+ 3B8+cE0DJQs2/YF086RirE6wyYxi0hQV9wI8I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735056219; x=1735661019;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=slwFkaLgVc5VgH4orJIvGMWHBrrjU/4aFDO9O04a4KU=;
- b=t/gPlEtZHJstpV9hVnAGCUZxxvLu1R5dk4KfTitz5M2KbF3zLV0K3DWrCOgIElRm2U
- TIqPrqa/IxRSfsCahKOsmFzG44kYSOW0o2PjYRa4sU7f8kijy9avH5AhruQiDLnc/LBq
- nzM8XQoO35vzib5KjPS0hQ0y2yfointV6CX0Ye/XGGg6kxgYrV1aTJlUAR8Fr1hJGGw3
- L6NkVZEzziBqwoL6RTach3GHrDWeta6rN1sX+oezYeDRoaThZKDlEKBqNrccGZN7UkdS
- CrR3U/Lod9yLrN4U3tQTBC72YzaSiR0aThCd/LsgesIwMRm6d2pKPJeafUqFigEfSzRl
- jvXw==
-X-Gm-Message-State: AOJu0YyKgq7SUA4q9m4n8CBMAzrTtJWgY1DXSVojjTHk9hrLrxVH+VDZ
- HlCvMReUNUZM+LlLH8re325WmIMDaqc4ecFZgC33DCKGQBRVVow0teHik+n3hMsGSgpq+FyQzcQ
- p
-X-Gm-Gg: ASbGncvQSdIrZQCRlMxTgfSEb9fguppzHTdEdwMjs2pCZEsa235+k2I49soUHSbdaoT
- //1XgqH+Hjgs56rqD/zu5KGpK+IP+O07/3k54lqzj/93W8T/yCI4aE5iKkJQ32tM/71vwBlRCxZ
- ktVsx9j6wQUqDUbOCWY9BQEmzZ7G2u4UYIOLjPvQZJPiRqzr9beM4HCamcWdRMRzrRHVL5BTapf
- pU19XScqqbCXgTF6rmdzmjInVn2yo4jwTH1nWuFT+B+7n02vj2miX5JIcP8Hktm7sufx0EwPWf6
- 46W38qNipBDK2N+vz0twzEjTAqtfow0ZXBdoRTewukswS+Yr7Q5Dkd0=
-X-Google-Smtp-Source: AGHT+IHr/xhSLwPBU/nbaAEBmbNIcXVte73vt0qQuaqxTUut6+MxuNahdOaMoiivhwhei6r4dMricw==
-X-Received: by 2002:a05:6214:1249:b0:6d8:981d:529 with SMTP id
- 6a1803df08f44-6dd233a320fmr292925986d6.48.1735056215172; 
- Tue, 24 Dec 2024 08:03:35 -0800 (PST)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
+ d=1e100.net; s=20230601; t=1735060499; x=1735665299;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=f0SzqNOgIvc3eqNiJYr9CuEKZlpDGaao42T5/m2b2Eg=;
+ b=X/w6jH3e0gwBW1De+Ww7PKVZocF0Q6vK+YDJaQPeasfHEsNX0DyO/c6J6TT6zyAspM
+ lODuBj1ds7ITcYOjUzGuZPCeusdeNSrwNL7yDMA2oJxWoVxwqmNlQMrzKSUTFlwxuBt5
+ 3dZAL40GujCMoBkZczrnHHgmr8KFhY/sq4oZ+4BwFVn9AlwQMpru+LtWaROJTJVPrRo7
+ Zpi0nZLPJ0xkcPcNhFsRAqLi6WI5BXoADQGXHEsbAc/0KSsl66e1JHjeqHEzbollh89/
+ Yq3/09yEXRUoXbNDkrkJJvx14ntxaM2D65x1tFX7KLADPJ4J669dnS++v+0dpPfwxEs+
+ kFQQ==
+X-Gm-Message-State: AOJu0YxvgNwsHqep40t0ihVf6NHXZ5iSBZTZkRgqXrkNGKneDsS+ZAoo
+ dKV4/EvWRdcz5hW6wf0W2t35KMKA4jUmvrt4FJo8btAVwWFFon6HReTXrUcGRaY//jFbTAoxdAC
+ r
+X-Gm-Gg: ASbGncuQ+CosiOMQ6lC+RfFm7V4MuduQ4nC9dMi9Xov5ZFIdEroX8e9lB/ymOIz3HGM
+ xxH5HiKSGW+VuKUJiaU1ZvIS6YNaXIAQyLw1SKrLkneDaiVti2SsafSFu5y+ibKSPox7juOwuXB
+ nxMCrFAYUtK0cxGTnb19g+dtbLbGGeqZy/tBEhD4EJgf7HiQb6m2k3ueo6fPlPF2HFORBXkuE8j
+ HoDjH45bnLWcGBWb+cmHy70NUGwZBgUGiy1f1RQ9py8S018VoUlMP7saw==
+X-Google-Smtp-Source: AGHT+IEajboLzzRLlps79THjwguy8Yp2u/vvsNF6YF3WN/HqlSy/1HRpJG7EhFDkYYSrAv9HMXxXMw==
+X-Received: by 2002:ac8:7f51:0:b0:467:86f0:8e63 with SMTP id
+ d75a77b69052e-46a4a8b5f7dmr273945911cf.7.1735060499000; 
+ Tue, 24 Dec 2024 09:14:59 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181d432asm53840816d6.110.2024.12.24.08.03.33
+ d75a77b69052e-46a3e64b845sm55248771cf.6.2024.12.24.09.14.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Dec 2024 08:03:34 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>,
- Eddie James <eajames@linux.ibm.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH v2 11/11] tpm: add kconfig control in tcg2_create_digest()
-Date: Tue, 24 Dec 2024 08:01:13 -0800
-Message-Id: <20241224160118.675977-12-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241224160118.675977-1-raymond.mao@linaro.org>
-References: <20241224160118.675977-1-raymond.mao@linaro.org>
+ Tue, 24 Dec 2024 09:14:58 -0800 (PST)
+Date: Tue, 24 Dec 2024 11:14:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Nicolas Belin <nbelin@baylibre.com>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20241224171455.GV1505244@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qDUQ9ZldqCtLiiVb"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,79 +90,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To allow disabling algorithms for tcg2, in function
-tcg2_create_digest(), each hash algorithm operations should under
-the hash kconfig control to avoid building errors when the algorithm
-is disabled.
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes in v2
-- None.
+--qDUQ9ZldqCtLiiVb
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- lib/tpm_tcg2.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+Hey all,
 
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 37818fcc85..4134d93a35 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -95,9 +95,15 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- {
- 	struct tpm_chip_priv *priv = dev_get_uclass_priv(dev);
- 	u8 final[sizeof(union tpmu_ha)];
-+#if IS_ENABLED(CONFIG_SHA256)
- 	sha256_context ctx_256;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA512)
- 	sha512_context ctx_512;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA1)
- 	sha1_context ctx;
-+#endif
- 	size_t i;
- 	u32 len;
- 
-@@ -105,30 +111,38 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
- 	for (i = 0; i < priv->active_bank_count; i++) {
- 
- 		switch (priv->active_banks[i]) {
-+#if IS_ENABLED(CONFIG_SHA1)
- 		case TPM2_ALG_SHA1:
- 			sha1_starts(&ctx);
- 			sha1_update(&ctx, input, length);
- 			sha1_finish(&ctx, final);
- 			len = TPM2_SHA1_DIGEST_SIZE;
- 			break;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA256)
- 		case TPM2_ALG_SHA256:
- 			sha256_starts(&ctx_256);
- 			sha256_update(&ctx_256, input, length);
- 			sha256_finish(&ctx_256, final);
- 			len = TPM2_SHA256_DIGEST_SIZE;
- 			break;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA384)
- 		case TPM2_ALG_SHA384:
- 			sha384_starts(&ctx_512);
- 			sha384_update(&ctx_512, input, length);
- 			sha384_finish(&ctx_512, final);
- 			len = TPM2_SHA384_DIGEST_SIZE;
- 			break;
-+#endif
-+#if IS_ENABLED(CONFIG_SHA512)
- 		case TPM2_ALG_SHA512:
- 			sha512_starts(&ctx_512);
- 			sha512_update(&ctx_512, input, length);
- 			sha512_finish(&ctx_512, final);
- 			len = TPM2_SHA512_DIGEST_SIZE;
- 			break;
-+#endif
- 		default:
- 			printf("%s: unsupported algorithm %x\n", __func__,
- 			       priv->active_banks[i]);
--- 
-2.25.1
+Unfortunately Coverity went a bit weird for a bit and stopped doing
+emails, so there's a few other defects missing from this.
 
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Tue, Dec 24, 2024 at 11:05=E2=80=AFAM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
+
+
+Hi,
+
+Please find the latest report on new defect(s) introduced to Das U-Boot
+found with Coverity Scan.
+
+1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+
+
+New defect(s) Reported-by: Coverity Scan
+Showing 1 of 1 defect(s)
+
+
+** CID 516463:  Null pointer dereferences  (FORWARD_NULL)
+/boot/image-android.c: 300 in android_image_get_kernel()
+
+
+___________________________________________________________________________=
+_____________________________
+*** CID 516463:  Null pointer dereferences  (FORWARD_NULL)
+/boot/image-android.c: 300 in android_image_get_kernel()
+294
+295             if (*img_data.kcmdline) {
+296                     printf("Kernel command line: %s\n",
+img_data.kcmdline);
+297                     len +=3D strlen(img_data.kcmdline) + (len ? 1 : 0);
+/* +1 for extra space */
+298             }
+299
+>>>     CID 516463:  Null pointer dereferences  (FORWARD_NULL)
+>>>     Dereferencing null pointer "img_data.kcmdline_extra".
+300             if (*img_data.kcmdline_extra) {
+301                     printf("Kernel extra command line: %s\n",
+img_data.kcmdline_extra);
+302                     len +=3D strlen(img_data.kcmdline_extra) + (len ? 1=
+ :
+0); /* +1 for extra space */
+303             }
+304
+305             char *newbootargs =3D malloc(len + 1); /* +1 for the '\0' */
+
+
+----- End forwarded message -----
+
+--=20
+Tom
+
+--qDUQ9ZldqCtLiiVb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdq7AcACgkQFHw5/5Y0
+tyw3mwwAo5IUv750eU1NV3GZJ+YnDnhf6mxeaQIXQzOP1qI2wBU9VL9VANiNEWby
+wxMqj/93Dql6VP54yDrGwNziBeF/UWwFsekOrk39Hv11mCXKTA0E99uY8Q/2GEbC
+JRh7VyVbvSyHQfxCasnQAW93vF8J79x3vkVgSV6S8/n73ZqL58+Gk/v+tPsWjBrr
+YWj9Fu9JbLowJY/sBhE1cTcl/Z0cWQu6dj0GVDHcVgeMkYq3R4wXZuU4RaGdwyw1
+G3Ija1pnlcSzrTVOqZYjx3zkYJkPXBO1BNP9tS0TW1uAxGazShGWY+fQYXFAQ+f8
++/vsOwS3mj0y1U8/qYCVCBJoBrFI3sorXUFQxcM9HKAOKjWO/Ne84RipUqm8/AMj
+L993wdBzelIlcJGSTPEtRV3Qs0QIYN9x0/gLNWH1hWX72w7jCTMudqQ3ttzHsZpy
+mZhk0EjQjgwhZv4Uj5XWjVyRHT9knD+RvTryzh6CXHYxJ1+S+FL2M573d/MWCsNx
+x1rEVrOQ
+=7oh6
+-----END PGP SIGNATURE-----
+
+--qDUQ9ZldqCtLiiVb--
