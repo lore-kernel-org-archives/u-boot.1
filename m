@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6213E77188
-	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 05:32:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86EBAE77188
+	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 06:58:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39FB780708;
-	Tue, 24 Dec 2024 06:32:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B37EA80711;
+	Tue, 24 Dec 2024 07:58:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KTVC+zW4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ipXlfwuS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 261F380711; Tue, 24 Dec 2024 06:32:40 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 1AC4A80786; Tue, 24 Dec 2024 07:58:09 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AC65806FC
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 06:32:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9684980708
+ for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 07:58:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aa6b4cc7270so710227166b.0
- for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 21:32:37 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e3a26de697fso4004788276.3
+ for <u-boot@lists.denx.de>; Mon, 23 Dec 2024 22:58:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735018357; x=1735623157; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1735023485; x=1735628285; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yyMAEQWzQQY3ORHEKW9r43Ipqkaql0Q2y248ck1wYxs=;
- b=KTVC+zW4rlwcCopLGcUBlqoDONLSm3Tx495TgDB2TW3/Qexnx3ry3bjRenuXLro8XS
- 1qdQqULxyQQoRktfwdiSIR+QsGdNvZPcMZbWQnl78mNtDIzGPMLsnDgbB48rgUsmzVw2
- 0rC+ajDCHGF55rXJGSKWewJlKrlANXImD3xq4=
+ bh=8LpWH06MiZSQdvpjZfX+fnWeR9tVdyvLk0aJB34NrBc=;
+ b=ipXlfwuSJoT626z13u/ZjIBdQwPA3JSVQKUF8iqDNYR2WfmR2VhYkTDcOa7Wlm9cTV
+ ay0aJ3xG5ZOgQ8/N+/CPC8wEWeaaYlHaZ9lvbfyd6Aou0woAJ+1WnY6C89JuzFcSlDVA
+ Njp6HLF4s2Rr2S3lm+oFXXeKgOTomHlDODVx5aYQCKlB0G1HLZhPR3r/FHDTjpF4zF2R
+ 30/cQ5dpt20QNoubJOqcvWWtNs1VrSZAs+eIqGYWfzR6NDK5bQ7nyhdd+eNG+nJD6wN8
+ eZ7HBQVIjJzqfQENNEPOEII6HwKGhjW/zr/T8ps6jwMBTyl2vQieLfIA9oOte64EVIcf
+ pDfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735018357; x=1735623157;
+ d=1e100.net; s=20230601; t=1735023485; x=1735628285;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yyMAEQWzQQY3ORHEKW9r43Ipqkaql0Q2y248ck1wYxs=;
- b=A8nty8ih3kEjsIvdgSfTxhEdP5vT8qQE62inzdNLMkF9YT2lNkLAKwV5imqXL4SC9i
- O/3zFGSeUE5ppK/r7GSglEVl+m9C4LN1azq6V1cRCb073WJLlC/+pUUpHSTyaDBDRQ4X
- 3GpkMMLbM7OHNl8R+grU9Lph7s0LmWl18+5D6buQipxnu7sfekL0gKjAlky88jgrRsxu
- DazrrCsKvp+5x0F15bFyrQL/o4iQkeOjJ53Br+wGlLhee1ZXaqcirhSObo3z+ZyFQg81
- DYxkEiHx8T0LEFxoPdlNlpz/RvmONs71jlXykpHpCHwl9cAeG1blTvHZxZJPqoux4eZq
- dbhQ==
-X-Gm-Message-State: AOJu0YwyaAo9h/iRz6r16guTtAyTfbIxRS6UyD+rQp9ibt58LQIggx1B
- 10mYDwZK0l96+hDcrgVHf3rgpIQm3mgo+1k1NTl4no7WMRYviaNvtl+A/TbRkzY9jigUaC6Cnkm
- 2n/7YJnYc7kjxJCs05wx/9HoDXg3rO854FSNz
-X-Gm-Gg: ASbGnct8d84Gbx59aPFwniiCblCsOR0+WYmgcVzAsR0x+qullAEInLFN4UgTfuORlg5
- VgMDmTTvOd4r2QC0HPfOxmOqDWvSV7qI51rAC/hR7
-X-Google-Smtp-Source: AGHT+IF6v/pqnzCC2gQwI3XWvA3P0ocbIbB02VrwxC/J9alFyezyZ7BdMHX+amhj/VybxfzqpYgVcfUYOJ1GocFC8a8=
-X-Received: by 2002:a05:6402:5189:b0:5d0:81f5:a398 with SMTP id
- 4fb4d7f45d1cf-5d81dd846ecmr33744607a12.1.1735018357010; Mon, 23 Dec 2024
- 21:32:37 -0800 (PST)
+ bh=8LpWH06MiZSQdvpjZfX+fnWeR9tVdyvLk0aJB34NrBc=;
+ b=G0+olEx83L+ght+AH3ankQvsaOZxz+UixLHZOF+GdKaomJzH3l2UoeabsaLQDzQa4W
+ vNxSvsH7l6XvvYnz0+MXZSpfUBFJ+AeMUaLitenJ+x/7uGI9tqOZYqK3IQC4S/BvIOOu
+ +nSZaO/5OsWACJ1+4tlSJr8xcySKquZ+vHnw/iGit60aNGpIPN7LSP5MBkgxstxpJ6TT
+ Z0YGVuUZwbcnJJzyfvvAdqpwpaYsKyRi6NlRQRVrl+1CX+NeEezo7jqJ4WuWpCsl1ezH
+ 4ZQ3W1u93KaOJkmneyVfVM/z6P8WKnwsDOACyTdbw5z2cJTwfWjUcoC1080+9j2Cafpa
+ QERw==
+X-Gm-Message-State: AOJu0YzooFIRug+jOqfkli4p8KM0JYEPnUBZOC4F3/yCckdTmgwVqjWg
+ YOJAGp9IgssiC/YzWDLHw6coF2+ZsmFMfwC8m9Wg8de2LhukP73BKL8ocvJ+5iCc3NObVRh++RW
+ Vt97nwVzgtz7asFbP9H8rX8Di57I3nsDXwzNYkQ==
+X-Gm-Gg: ASbGncsxPGkNSaeAxv69BoEv94lHbhw2uI+N7KoAIvTwxudgJCf1tL9v00DtsIOHw64
+ pRYVm4Uj0yG2SQzdJTgu0Q/N3CPEUndV0koaWCQ==
+X-Google-Smtp-Source: AGHT+IFabS26Xj8wIdoSW1lCF0tQa+b0+RkfA8aTZpzdspeIS3jdKz9GCNA+a8mFstDhprvqgZCVKUeRLB9lt3WlhkU=
+X-Received: by 2002:a05:6902:2848:b0:e48:d51f:448a with SMTP id
+ 3f1490d57ef6-e538c4274d8mr11738541276.53.1735023485433; Mon, 23 Dec 2024
+ 22:58:05 -0800 (PST)
 MIME-Version: 1.0
-References: <20241219023832.1098689-1-sjg@chromium.org>
- <20241219023832.1098689-4-sjg@chromium.org>
- <CAC_iWjJSXWDBjYNaCr-yBAD6NbK2Pph0t+ZmkP_BFJHq3S9Kug@mail.gmail.com>
-In-Reply-To: <CAC_iWjJSXWDBjYNaCr-yBAD6NbK2Pph0t+ZmkP_BFJHq3S9Kug@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 24 Dec 2024 18:32:23 +1300
-Message-ID: <CAFLszThWhF2+g2Z7cZCVRppnO+iG57aMn0BaGOiOJHxER1vAMQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/7] efi_loader: Update efi_run_image() to accept image
- and device path
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Adriano Cordova <adrianox@gmail.com>, Moritz Fischer <moritzf@google.com>, 
- Patrick Wildt <pwildt@google.com>
+References: <20241223144737.554992-1-raymond.mao@linaro.org>
+ <20241223144737.554992-12-raymond.mao@linaro.org>
+In-Reply-To: <20241223144737.554992-12-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 24 Dec 2024 08:57:29 +0200
+Message-ID: <CAC_iWj+JjZXDO9PywmC-gnK=Gj1Ff_qL2N9GLxWYXbQOHDsAZA@mail.gmail.com>
+Subject: Re: [PATCH 11/11] tpm: add kconfig control in tcg2_create_digest()
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tim Harvey <tharvey@gateworks.com>, 
+ Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,105 +91,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+On Mon, 23 Dec 2024 at 16:49, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> To allow disabling algorithms for tcg2, in function
+> tcg2_create_digest(), each hash algorithm operations should under
+> the hash kconfig control to avoid building errors when the algorithm
+> is disabled.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  lib/tpm_tcg2.c | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>
+> diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+> index 64563d7871..85f9d3c9c5 100644
+> --- a/lib/tpm_tcg2.c
+> +++ b/lib/tpm_tcg2.c
+> @@ -96,9 +96,15 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
+>  {
+>         struct tpm_chip_priv *priv = dev_get_uclass_priv(dev);
+>         u8 final[sizeof(union tpmu_ha)];
+> +#if IS_ENABLED(CONFIG_SHA256)
+>         sha256_context ctx_256;
+> +#endif
+> +#if IS_ENABLED(CONFIG_SHA512)
+>         sha512_context ctx_512;
+> +#endif
+> +#if IS_ENABLED(CONFIG_SHA1)
+>         sha1_context ctx;
+> +#endif
+>         size_t i;
+>         u32 len;
+>
+> @@ -106,30 +112,38 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
+>         for (i = 0; i < priv->active_bank_count; i++) {
+>
+>                 switch (priv->active_banks[i]) {
+> +#if IS_ENABLED(CONFIG_SHA1)
+>                 case TPM2_ALG_SHA1:
+>                         sha1_starts(&ctx);
+>                         sha1_update(&ctx, input, length);
+>                         sha1_finish(&ctx, final);
+>                         len = TPM2_SHA1_DIGEST_SIZE;
+>                         break;
+> +#endif
+> +#if IS_ENABLED(CONFIG_SHA256)
+>                 case TPM2_ALG_SHA256:
+>                         sha256_starts(&ctx_256);
+>                         sha256_update(&ctx_256, input, length);
+>                         sha256_finish(&ctx_256, final);
+>                         len = TPM2_SHA256_DIGEST_SIZE;
+>                         break;
+> +#endif
+> +#if IS_ENABLED(CONFIG_SHA384)
+>                 case TPM2_ALG_SHA384:
+>                         sha384_starts(&ctx_512);
+>                         sha384_update(&ctx_512, input, length);
+>                         sha384_finish(&ctx_512, final);
+>                         len = TPM2_SHA384_DIGEST_SIZE;
+>                         break;
+> +#endif
+> +#if IS_ENABLED(CONFIG_SHA512)
+>                 case TPM2_ALG_SHA512:
+>                         sha512_starts(&ctx_512);
+>                         sha512_update(&ctx_512, input, length);
+>                         sha512_finish(&ctx_512, final);
+>                         len = TPM2_SHA512_DIGEST_SIZE;
+>                         break;
+> +#endif
+>                 default:
+>                         printf("%s: unsupported algorithm %x\n", __func__,
+>                                priv->active_banks[i]);
+> --
+> 2.25.1
+>
 
-On Sat, Dec 21, 2024, 21:44 Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Thu, 19 Dec 2024 at 04:39, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Provide these globals as parameters to this function, on the way to
-> > making it possible to start an image without relying on the globals.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v2)
-> >
-> > Changes in v2:
-> > - Adjust argument ordering for efi_run_image()
-> >
-> >  lib/efi_loader/efi_bootbin.c | 20 ++++++++++++--------
-> >  1 file changed, 12 insertions(+), 8 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> > index 051d86ef993..b42ff3cb4e0 100644
-> > --- a/lib/efi_loader/efi_bootbin.c
-> > +++ b/lib/efi_loader/efi_bootbin.c
-> > @@ -157,9 +157,13 @@ void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
-> >   *
-> >   * @source_buffer:     memory address of the UEFI image
-> >   * @source_size:       size of the UEFI image
-> > + * @device:            EFI device-path
-> > + * @image:             EFI image-path
-> >   * Return:             status code
-> >   */
-> > -static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
-> > +static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
-> > +                                 struct efi_device_path *device,
-> > +                                 struct efi_device_path *image)
-> >  {
-> >         efi_handle_t mem_handle = NULL, handle;
-> >         struct efi_device_path *file_path = NULL;
-> > @@ -167,7 +171,7 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
-> >         efi_status_t ret;
-> >         u16 *load_options;
-> >
-> > -       if (!bootefi_device_path || !bootefi_image_path) {
-> > +       if (!device || !image) {
-> >                 log_debug("Not loaded from disk\n");
-> >                 /*
-> >                  * Special case for efi payload not loaded from disk,
-> > @@ -188,9 +192,8 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
-> >                         goto out;
-> >                 msg_path = file_path;
-> >         } else {
-> > -               file_path = efi_dp_concat(bootefi_device_path,
-> > -                                         bootefi_image_path, 0);
-> > -               msg_path = bootefi_image_path;
-> > +               file_path = efi_dp_concat(device, image, 0);
-> > +               msg_path = image;
-> >                 log_debug("Loaded from disk\n");
-> >         }
-> >
-> > @@ -227,7 +230,7 @@ out:
-> >  /**
-> >   * efi_binary_run() - run loaded UEFI image
-> >   *
-> > - * @image:     memory address of the UEFI image
-> > + * @image_ptr: memory address of the UEFI image
-> >   * @size:      size of the UEFI image
-> >   * @fdt:       device-tree
-> >   *
-> > @@ -236,7 +239,7 @@ out:
-> >   *
-> >   * Return:     status code
-> >   */
-> > -efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> > +efi_status_t efi_binary_run(void *image_ptr, size_t size, void *fdt)
-> >  {
-> >         efi_status_t ret;
-> >
-> > @@ -252,5 +255,6 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> >         if (ret != EFI_SUCCESS)
-> >                 return ret;
-> >
-> > -       return efi_run_image(image, size);
-> > +       return efi_run_image(image_ptr, size, bootefi_device_path,
-> > +                            bootefi_image_path);
-> >  }
->
-> https://lore.kernel.org/u-boot/CAC_iWj+5-uoXq9BanaOSxedVgbBYNFQ2AZVqka+J7iwMv=eC5w@mail.gmail.com/
->
-> I thought you said the _ptr was dropped.
->
-> Anyway
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
-> We can drop it later or in v3 if one is needed
-
-Thanks. Yes I dropped it but then realized that the next patch needs
-it. I replied on version 2 about this.
-
-Regards,
-Simon
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
