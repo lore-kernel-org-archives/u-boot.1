@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AD8CE77188
-	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 18:08:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7453E7718D
+	for <u-boot@archiver.kernel.org>; Tue, 24 Dec 2024 20:09:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7243A807DA;
-	Tue, 24 Dec 2024 19:08:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D0ADE8062B;
+	Tue, 24 Dec 2024 21:09:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XAAr18LT";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="K9SVjCg3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF6F5807DD; Tue, 24 Dec 2024 19:08:08 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 03FF4807A7; Tue, 24 Dec 2024 21:09:36 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4167F807A7
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 19:08:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D8448056A
+ for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 21:09:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-4679eacf2c5so47149361cf.0
- for <u-boot@lists.denx.de>; Tue, 24 Dec 2024 10:08:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735063682; x=1735668482; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fH8Iuqxyl8TnD456K0nAN3YVsd4h9vRApcomqkE/VII=;
- b=XAAr18LTNUOVJVoh3xKClGG6i1s0c0aRTWuAXoyS1mmD/96PZkQMS/mc2MKE1pHRKQ
- dnMlOfSjaOoDmA+pVZ6uMYMxNQ+qE+p7z4lRHgHsBn5Zax8bCzVN3qlshzyhcRQzMcpD
- tk9CtoaI2d5iCJtNrcUaa8o7jbCQA6+z6j0zs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735063682; x=1735668482;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fH8Iuqxyl8TnD456K0nAN3YVsd4h9vRApcomqkE/VII=;
- b=Qc1OmsYY4Uhh/JXbc4v6rMovjRN7IFvOnvJmSw9yRTIDOXFeCvDFKM+uCEsCn5uoJx
- BaJxejhAr6tAvO4RTzhsNUKuFV5Picr+G7rSrIzP0/ZhOlv4N84/calUOZrYfnE5KpeG
- ixCiJb1bTVxxXfXEI6aOhnHB1thy4v5WqOLU/FJwPaBZ7F1TF+CNTTBzWc1YKovFtvNA
- WIrE6V034CJhRFmq5BjmldMSgkQyNlPp6yCEwRn7IsRlOsfLzE8z3Z0M+nTRMKrUCFhE
- kZRGgJRFIUz7/xNOuKWVzklHvzSW9nssYGHOG9JRCfM/yGhnS2Rr3xoRaAZAs3rsvLIL
- 8jXQ==
-X-Gm-Message-State: AOJu0Yy5IRNIZwseiA1aVP0OeeoqoEgZ9w21dZ9uueF4EP+KT0DDhUI+
- FgXVK53awLtRwz8kyBjUK2Gjnhm4Kjj2SeOG6KXWT6zqhbBs7hc7f0Jj8qAIALw=
-X-Gm-Gg: ASbGnctqwxIeJ3Odf7CAQtIWSucv7u9iHvOHJ6OFzgee9r8/xOVpqcO8tT0Iu5R3rfr
- M4+Z+3g2Kc7ClL2t55eK6BaQllzv4WmpYMPeWcqEfiGGpO7lPRZ1Pv2arsldHtVMQTzKRcN/8v7
- WCtYfyA82LW7M8oMbof10cMiiFaMxpcosnnimwldht95euFjilYgVLnSN1gW+7LIDBhVzAuJq+j
- X3ET76au44VQbuBfq6P3otS6JjtZ5K1yg1U9DS2ZMQAT23TC9f0LxCCUA==
-X-Google-Smtp-Source: AGHT+IFLP+8vQWJsO1l6W92K4MgktDYMwmtx8BOMcWOqP49AOijHdiYLxfMnY7+QQ3zN8wvnya+vcA==
-X-Received: by 2002:a05:622a:1802:b0:467:7b65:383 with SMTP id
- d75a77b69052e-46a4a970364mr320940791cf.35.1735063682081; 
- Tue, 24 Dec 2024 10:08:02 -0800 (PST)
-Received: from bill-the-cat ([189.178.122.190])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46a3eb2b550sm55226221cf.81.2024.12.24.10.08.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Dec 2024 10:08:01 -0800 (PST)
-Date: Tue, 24 Dec 2024 12:07:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: DT subtree sync for v6.12
-Message-ID: <20241224180758.GW1505244@bill-the-cat>
-References: <CAFA6WYMvXXi19tjxhi-N4D3-tbVkbJQeUHwzuC5FME6vzPir=Q@mail.gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1735070972; x=1735675772; i=xypron.glpk@gmx.de;
+ bh=1QhkX1PeIREFVvbvhUqcg0NcHQrX3J7OHmVVzNx20VY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=K9SVjCg3pPChZ8K1pwOuVu1n20GoSRm9MxbuW57KVlvIQtSyAd5SEK4AX4nrpGia
+ RZL+Lpg9LJbYAeTZhmFCTGAoSRUEZ4Cqj7XNFgchN9nKavjPN90PVIdfAfwWYEM6R
+ wIth/928TvMqdx98HoGJ3N8CMBzFJ3JH3CKmD/Pe1XQ7B0BDjMpmlBFSndi0cx+gB
+ UwFeuU8ACiS8QNcDZqNlswzdYjSTrdIcyr9L2+HNc+U7GK2pbfYxR0EI6E3BO2+Dc
+ KCY1jdVrb255DaBtAJUvtFsZRyBs9rOaauHAnpfVWUnL3oXCtMyYXwKq/N91i9O7R
+ BaPHbX4G/2RPO0oA+g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MrhQ6-1twEAa1IUm-00oSzL; Tue, 24
+ Dec 2024 21:09:32 +0100
+Message-ID: <92a7b701-acc3-4ac2-a8e7-91c58f554510@gmx.de>
+Date: Tue, 24 Dec 2024 21:09:26 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ziT6ZFk5/fSXVTDl"
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYMvXXi19tjxhi-N4D3-tbVkbJQeUHwzuC5FME6vzPir=Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ =?UTF-8?Q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request doc-2025-01-rc6
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:AUQ8QulPZk7jvBhpa9oSucv8hkkHyerGbHb3NK+DAkEfxhLGTCQ
+ 3cojacXjwT/gyBszhFdhBMp9HmUOo99tsL9gs1/pCTeAzTI8Efm/l9Znp4myU+j+yeESnig
+ SRlmkwRIyG0irLHTpW7EMxOcYaCKVQv6/7rDpMuVu1okfRKaq8UA1ybb1HYUTGwP0PwNU8U
+ 2Kji6KDpxQB6LeVxx7B8A==
+UI-OutboundReport: notjunk:1;M01:P0:I+pgMTTXzhY=;Hr8I7lLAY2/HJu0Jylr4/Sm+R5m
+ wCycIcgl/ftJph6xykgrjGjD8S+hu60LJtih0/BVpMF5dmSB5ikuFO9lnL3KlQd/PIwVGTfS3
+ sM9Hdgvu9bHvqwE/PkKCV4kvaFB4odnqM1yzHHvIiePGNkXdcSZ1E3JpgvIStQVEskNC2STaK
+ GRqFZ0bJvb7TqaPcfb8l3NsRuAG+jb//j83Rt6shI5y+YWk8oegX4wFkPN8J+rpxzNt00xW0E
+ JTTZsF32wsAFCfLg938O3V4k+DE+QhMXc78ZmT2MNMkjt7oNIeDJkKrhUpiHYpH88WTBmm4yP
+ f0PVWLEbXt7+h/k1eiB7vnczJA2D2ji46eKi60QxVIHQuh+CloeFNYWM0zrFEYS0E/9NA4oKH
+ dMfA9LIGeE9ZsLprA0KtllKg1w/jDQQBNkVlxaoB6THQlNikwGU6l527PNds1U6lmSlohqJdt
+ hoi+6gRtKo157Wn0/FoGniCU5mneMEjQcZoVu+WcC+97d4COxEfmlWXhAb1AQtS9zgPEb7SOg
+ a2w4kSJA7w39dPyfWy4dh/KikfX15u9XraRnWMckhoazM+w+oLa02BYK4OCOUMzBNoNlfh4TB
+ qNNywSgfDeqg/m0ApqB5PCAxWWtGGlo4i+92oKgrA5oT21sjQRAL4d7UH8EGYNuzqrclV+Aq6
+ 2U5JOp8LxZK88Hx2VgurZ/rPS+VVEbqAw9Y839mCOjcSPoyXSQ2P3ydXvIO76pnPxh/mxYtlE
+ oHCueqb+UbzfrpFN6Lnzff4w7SV2GbeSBYo/VxyFx7uqNvoQNkogYshEkDs0ma1680Rz+O3oZ
+ nX2R2o+YJCw7eJ+DE551iki5fahsW1TXcrVr8UwJxkVrply04FTe/3iW58BxTlXQimSz11rWS
+ /+KDb7PHnH610T4Og4Thbq6U9PPJB2N9wg+MZc+4bk/mq5QdekMFtVawwZcbl5p6nj5t0xJAB
+ HHKfkE0u5SWUidaKExAmGvEyg7N9bVGICzUd6XE0XpMDmXrtkuLqJCr6+Jp3B1zIioow/gvFd
+ m5srBxGbfA9iGLyIfC8PySzapohXCusRO0tiIYGynwjpj8hDCZnlzFSL3/Km8r6diYngYXYO/
+ ycSi+Fk85+plKdFf/zVdcTYkjq1LxK
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,40 +91,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Dear Tom,
 
---ziT6ZFk5/fSXVTDl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 3391587e3fe22db6c71882f652e13543a450169=
+4:
 
-On Tue, Dec 24, 2024 at 12:54:22PM +0530, Sumit Garg wrote:
+   Prepare v2025.01-rc5 (2024-12-23 20:40:49 -0600)
 
-> Hi Tom,
->=20
-> Do you plan to perform DT subtree sync for v6.12 which seems to be due
-> for some time now?
+are available in the Git repository at:
 
-Yes, thanks, I'll see how that goes shortly.
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/doc-2025-01-rc6
 
---=20
-Tom
+for you to fetch changes up to 0be26928bfc4f2a34df3eb447fee718d3551217c:
 
---ziT6ZFk5/fSXVTDl
-Content-Type: application/pgp-signature; name="signature.asc"
+   scripts: add volatge to spelling.txt (2024-12-24 18:09:46 +0100)
 
------BEGIN PGP SIGNATURE-----
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24005
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdq+HIACgkQFHw5/5Y0
-tywqxQwAkvOz1eZaGCXkOqTToYdS/CfgX0z8SFv3cAq1DaWIO9DKD0CidPKekTjG
-fW65OGtvch1z/KFAHj+1ogjBNQVWzBvHxeNgxXiZr9DQrQkAogUWyLsqx0jyeEU/
-0urfh1tdZQBzqYeLyBlFmLQLYLfVzOvdwj+HHiJ+A7zvcthuJBJbt6NbVVrBWUO6
-H6dV09HCHYjR7BviZqkFBIT35CqsVRT/0+2XLETb7x9CjkxmeTKZH6EClaYQy069
-F5RQ7ab6y665H5eSv2ok3udt8lx8L9tM7gpqyPC5SdVoPXHgc2jSKDuCVXenmVE3
-uaCe0oGrN8gXxgizjqfe0xOBSBSBem/g80Hp3LAhDBL4dlgXpVPOQexi7zSNMZOf
-9Txa8mt2cUdb/EXWJu3NiG/ZeKXeGuOcq4+lLgBmuhOlxI/4aHiK/KhQgcl6RR6d
-SFs9NEHOaETu0V1BrCy7HP1r/VzW/tBvbgXdqcgq5g28u73l7Tx4bU8ydDIxlgLO
-pvao0wNQ
-=b9UW
------END PGP SIGNATURE-----
+=2D---------------------------------------------------------------
+Pull request doc-2025-01-rc6
 
---ziT6ZFk5/fSXVTDl--
+Fix a number of typos
+
+* cmd: bootmenu typo 'read'
+* cmd/rng: fix long help text
+* crypto: typo volatge
+* board: freescale: typo volatge
+* scripts: add volatge to spelling.txt
+* doc: fit: Format image tree source example
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (5):
+       cmd: bootmenu typo 'read'
+       cmd/rng: fix long help text
+       crypto: typo volatge
+       board: freescale: typo volatge
+       scripts: add volatge to spelling.txt
+
+J. Neusch=C3=A4fer (1):
+       doc: fit: Format image tree source example
+
+  board/freescale/ls1088a/ls1088a.c |  8 ++--
+  cmd/bootmenu.c                    |  2 +-
+  cmd/rng.c                         |  4 +-
+  doc/usage/cmd/rng.rst             |  4 +-
+  doc/usage/fit/kernel_fdt.rst      | 88
++++++++++++++++++++--------------------
+  drivers/crypto/fsl/jr.c           |  2 +-
+  scripts/spelling.txt              |  1 +
+  7 files changed, 55 insertions(+), 54 deletions(-)
+
