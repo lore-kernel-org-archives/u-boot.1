@@ -4,67 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A3FBE7718B
-	for <u-boot@archiver.kernel.org>; Wed, 25 Dec 2024 18:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C9AE7718B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Dec 2024 20:50:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9BB280378;
-	Wed, 25 Dec 2024 19:30:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 96B4A8036E;
+	Wed, 25 Dec 2024 21:50:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Qo8GrKbd";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="M9+rpmsm";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1735159804;
+	bh=QjsfKSfReaA21qyoN0K1ZZHec7M/OkxjAEsLLmiTl5Y=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=GihQTYUJ3LC8K6pxh8FakYSOvQFdpsOEGi8c3ETyq/1W3XqD1/vU/97TFs3FxZU9N
+	 82y/kLG/p7a1/ALh3Fd4VHdHRLKWVfS88NrNbLzNUhyHfXz69Q+mfLbXGVZEXv2e1E
+	 Ud5Ib8oN7flpycW00oMg+4Nk/O29E4iFSHFL6ypNTKYaoR5dLaY2sKrdIR3cTc70wr
+	 ukRHFeHpQE0bH8QuPhpYd7Q2tA/HyLdYdKElLDAe4WDlRZWcCn1V5bMPG1P/CzBRNi
+	 pLmJajeyBkQ5d9u9xWR+BHkeaKHJQ4x8mJtDcHb9DQvVpIUNUyQUTXsc0S45Kj9iB1
+	 K4FKE/ThCpg5w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEADC80379; Wed, 25 Dec 2024 19:30:50 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id BDB0480374; Wed, 25 Dec 2024 21:50:02 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3718980374
- for <u-boot@lists.denx.de>; Wed, 25 Dec 2024 19:30:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF1DC8034E
+ for <u-boot@lists.denx.de>; Wed, 25 Dec 2024 21:49:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YJL135CR3z9sQb;
- Wed, 25 Dec 2024 19:30:47 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1735151447;
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="OI7lclM7"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id EF0FE1040DBCA; Wed, 25 Dec 2024 21:49:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1735159797;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=EzCLCDJSLNLVvt9Ch4YkPLsLMRutUv1l/dcyTT4r4/w=;
- b=Qo8GrKbdCg9CmKaqjgVzlKeGKHzDdGzMhs//5TsrEDJawPjAupNvUJION+8igA1uSIBpuA
- VEtPeRcaYALQD+1lYPcI29whoJm+qaOUHmQ6HWYbFIc9avNEg03cpYbvcgaBItlwaTiBkz
- +de6az5SpVWjEEBBIgpO4+eqzaksrwUP7HfEw4AWr1RCLU1/R5HgRFpUpAzUaXvuWpgTxi
- X2y7qJhtiS+8ta5pLGabwocYVuKEVdPJAxHgKz0sgaaosWYVHH9Efq8gQO7lMR8S1e3r8w
- mHpixSPxm0ht5vkWmTmEs9442kzsnZTdSQcShktHvpEKF5F19BB7phmI/nJvlg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1735151445;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=EzCLCDJSLNLVvt9Ch4YkPLsLMRutUv1l/dcyTT4r4/w=;
- b=M9+rpmsm9jSoBpZ5nwD3G0H0hx846Hw8Lzoe4bOw5Uk1YsOJflQCVci2ADn+RuNeof4Wwu
- 3a04nGD9UaLRac8wiYwVDYyXdhTWANLXAC/neTOClSs+UpxcmUaYlgncwEfJ0HUJ84trFf
- BZ9kD0yk4/co5KRIojmyMA6B9i2PHxwRl8bzqe2j06giCWnWR4LEkJJ6cMTAxuxY0Y0Kgv
- i5/tcgJzEd6RFML1MyXYkiHJ0JOe8eg4IbTdwzwdViyumMTKkgq3ZsTvGGLahpEvzd4Py6
- 8LMwXcbzNUdwGsTZrU98Zs4jP1RQ0I6eDefLEOZbg6p1xTJPaIik5F4rMV6WjQ==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/next-pinctrl
-Date: Wed, 25 Dec 2024 19:30:02 +0100
-Message-ID: <20241225183032.5248-1-marek.vasut+renesas@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QjsfKSfReaA21qyoN0K1ZZHec7M/OkxjAEsLLmiTl5Y=;
+ b=OI7lclM7i89ODU59E90tRm0J6fB8fCknRMDXpTtRQ3Kqw6DpOiCsc2tjDffRdT1UEiDcci
+ ZnXdhghrRBxh+hUeyHUNBnJ6EUZC/Rozwl/xvevL8PKd1+5QiKMCdsmMrTlXi5GggdF2pu
+ DQFH5XiD7eaVXUvysSV1R3L/Wn+oaMTm7jhCb9jhoTKtI1eteZTdmgtHWyviPqLEbQx7w8
+ 7D3yhRh+VFSWC97wysLVNLXfzCBS7fPU7GAjlfXvPASCi8rQoIJEzhYL4oEiZopYsJDudQ
+ BU91g+FsBnhV+2GzEnDRz/MF0Yoa/1t/Tl7HsCksLYUEzV3P4kAXLx1T9XiXbQ==
+Message-ID: <148a7bd2-a243-4964-948d-abd3545b9e41@denx.de>
+Date: Wed, 25 Dec 2024 21:20:58 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] mtd: spi-nor: Fix the spi_nor_read() when config
+ SPI_STACKED_PARALLEL is enabled
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "tudor.ambarus@linaro.org" <tudor.ambarus@linaro.org>,
+ "j-humphreys@ti.com" <j-humphreys@ti.com>
+Cc: "Simek, Michal" <michal.simek@amd.com>,
+ "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
+ "vigneshr@ti.com" <vigneshr@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
+ "trini@konsulko.com" <trini@konsulko.com>,
+ "seanga2@gmail.com" <seanga2@gmail.com>,
+ "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>,
+ "sjg@chromium.org" <sjg@chromium.org>,
+ "william.zhang@broadcom.com" <william.zhang@broadcom.com>,
+ "stefan_b@posteo.net" <stefan_b@posteo.net>,
+ "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
+ "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>,
+ "p-mantena@ti.com" <p-mantena@ti.com>, "git (AMD-Xilinx)" <git@amd.com>
+References: <20241220143006.1921705-1-venkatesh.abbarapu@amd.com>
+ <63291d8d-ca66-4e8a-a9aa-efba47a1f505@denx.de>
+ <SA1PR12MB86971D338EE7CCDED324172D98032@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <SA1PR12MB86971D338EE7CCDED324172D98032@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: dc0365b7f5d9f9dad3a
-X-MBO-RS-META: wigc8aedip7iresa51gfx3eb8jy9hzqu
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,51 +98,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 68736cf8e313b74db6a6d32cbd081d1a42dbc021:
+On 12/24/24 4:34 PM, Abbarapu, Venkatesh wrote:
 
-  Merge tag 'u-boot-imx-next-20241223' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx into next (2024-12-23 10:28:15 -0600)
+[...]
 
-are available in the Git repository at:
+>>> @@ -1593,18 +1595,23 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t
+>> from, size_t len,
+>>>    	}
+>>>
+>>>    	while (len) {
+>>> -		bank = (u32)from / SZ_16M;
+>>> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
+>>> -			bank /= 2;
+>>> -
+>>> -		rem_bank_len = SZ_16M * (bank + 1);
+>>> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
+>>> -			rem_bank_len *= 2;
+>>> -		rem_bank_len -= from;
+>>> -
+>>> +		size_t read_len = len;
+>>
+>> size_t read_len should be declared at the beginning of this function.
+>>
+>>>    		offset = from;
+>>>
+>>> +	if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+>>
+>> The indent here needs to be pushed on tab RIGHT -> .
+>>
+>> Do you need this functionality in SPL ? If so, you might need a matching Kconfig
+>> SPL_SPI_STACKED_PARALLEL symbol .
+> 
+> This functionality is not needed for SPL.
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git next-pinctrl
+So SPL does use SPI NOR in non-stacked/parallel mode, and U-Boot does 
+use it in stacked/parallel mode ? Doesn't that pose a problem ?
 
-for you to fetch changes up to 545208247d0778c337b913e6663e369842e52ced:
+[...]
 
-  pinctrl: renesas: Minimize R8A779H0 V4M PFC tables (2024-12-25 19:29:47 +0100)
-
-----------------------------------------------------------------
-Marek Vasut (16):
-      pinctrl: renesas: Add Kconfig symbol for conditional build of full PFC tables
-      pinctrl: renesas: Minimize R8A7790 H2 PFC tables
-      pinctrl: renesas: Minimize R8A7791 M2-W and R8A7793 M2-N PFC tables
-      pinctrl: renesas: Minimize R8A7792 V2H PFC tables
-      pinctrl: renesas: Minimize R8A7794 E2 PFC tables
-      pinctrl: renesas: Minimize R8A77951 H3 PFC tables
-      pinctrl: renesas: Minimize R8A77960 M3-W and R8A77961 M3-W+ PFC tables
-      pinctrl: renesas: Minimize R8A77965 M3-N PFC tables
-      pinctrl: renesas: Minimize R8A77970 V3M PFC tables
-      pinctrl: renesas: Minimize R8A77980 V3H PFC tables
-      pinctrl: renesas: Minimize R8A77990 E3 PFC tables
-      pinctrl: renesas: Minimize R8A77995 D3 PFC tables
-      pinctrl: renesas: Minimize R8A779A0 V3U PFC tables
-      pinctrl: renesas: Minimize R8A779F0 S4 PFC tables
-      pinctrl: renesas: Minimize R8A779G0 V4H PFC tables
-      pinctrl: renesas: Minimize R8A779H0 V4M PFC tables
-
- drivers/pinctrl/renesas/Kconfig        | 11 +++++++
- drivers/pinctrl/renesas/pfc-r8a7790.c  | 57 ++++++++++++++++++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a7791.c  | 53 +++++++++++++++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a7792.c  | 29 +++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a7794.c  | 57 ++++++++++++++++++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a77951.c | 48 ++++++++++++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a7796.c  | 48 ++++++++++++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a77965.c | 48 ++++++++++++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a77970.c | 32 +++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a77980.c | 32 +++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a77990.c | 48 ++++++++++++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a77995.c | 40 ++++++++++++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a779a0.c | 24 ++++++++++++++
- drivers/pinctrl/renesas/pfc-r8a779f0.c | 16 ++++++++++
- drivers/pinctrl/renesas/pfc-r8a779g0.c | 49 ++++++++++++++++++++++++++++-
- drivers/pinctrl/renesas/pfc-r8a779h0.c | 48 ++++++++++++++++++++++++++++
- 16 files changed, 639 insertions(+), 1 deletion(-)
+> FLASH_BAR and stacked parallel configuration doesn’t depend on each other.
+Is the use of BAR register and stacked/parallel mode mutually exclusive 
+or can they be used together ?
