@@ -4,73 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB7BE7718B
-	for <u-boot@archiver.kernel.org>; Wed, 25 Dec 2024 20:50:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC85CE7718B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Dec 2024 01:08:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FD2080374;
-	Wed, 25 Dec 2024 21:50:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1493080378;
+	Thu, 26 Dec 2024 02:08:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1735159815;
-	bh=CaRqwEIxjuVm+apm9WOVtsOVU7y4wwW2T+jmgI+JIZc=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=AjsTlrkp0/fWsqFNqVqmgH6ZTcL+e8fH79ykReJ4XzYJuh/FQqglbnQnKWm8k7dU3
-	 ELT1i/Df89v35GrhbawnuxruXhjlRJPbv86FlrTlJ0WinTmObtPw1MInbaZ1KSLGfN
-	 YutfuaA2Keg0EiBqGwJc1IyGc0Xv8Tw8relhbQ9hKi4u7g1TTOm3fJm4yKACQFU8IW
-	 PH1iCSG4zekkAx5qVnwxGzYfMMz3dkMBz/TCpEK3Ofw4DtR7vn/QWwD6drqnzcTlUE
-	 dhmeNR6PcqAQSKR5MEyxs7U/8iHsGIqWghswijzTbpzXADdwVCBQu6r80l5gXFVFI5
-	 Cq+Rl5Y/rqRYw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CAF60803CA; Wed, 25 Dec 2024 21:50:10 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5E228037B
- for <u-boot@lists.denx.de>; Wed, 25 Dec 2024 21:50:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="goTU1uRq"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 38C7B101ECBAD; Wed, 25 Dec 2024 21:50:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1735159807;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=CaRqwEIxjuVm+apm9WOVtsOVU7y4wwW2T+jmgI+JIZc=;
- b=goTU1uRqYgoaBRFr34FUv1f376e6k2xYR3JN1Qau6MGdoRzf9tejWooA/G2hH1WFKxidzA
- 3okqTE5v9Ykex2JIxy8Z/hD9XCGZDKDxFRtKQ3GI6f5bL8Cg/qW4sMkxb4RDraa7Eb0teP
- JTd786ZpvHrr0j6P2Z+eBx0ifFc3TErSjOgRurvh2U/m89TfzZQ8oGi0uNHlwUeAA5V+d7
- ywQ+AXIkPvB7GKoE8zS0G1S8Uf7hwWXWRekB/1B2+T8+l9eJ2BA1Xt4RDLgOZlcdrunloh
- j0T1aqq/YLAXTkRybnxbMurphBdbw2kUduhz5AYx8oRUpv1qgYhzjUZL3/f5SQ==
-Message-ID: <2d8cc7c5-e389-4e18-8872-ba89783488cf@denx.de>
-Date: Wed, 25 Dec 2024 21:48:36 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IsScf6HL";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6D9FB8037B; Thu, 26 Dec 2024 02:08:47 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E2BD80374
+ for <u-boot@lists.denx.de>; Thu, 26 Dec 2024 02:08:45 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-5401e6efffcso7386143e87.3
+ for <u-boot@lists.denx.de>; Wed, 25 Dec 2024 17:08:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1735175324; x=1735780124; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GhfLdxvhJn80EliNS2LL8n+hCurZ3t2Yo1Q7nkstYhg=;
+ b=IsScf6HLl9oyCMAohnSWd+OZ+v4DC63X3yIJnDFzkgH+jGW7MLuNhzJIjIbHBJafum
+ TCtTUx3CVgrUaSwzcPS7teWv35Ss1Hnxv1uzhtCuq3tMND7iVEN5MDMUAdu5CK7s4rSS
+ FWX8xj7tqMiSXeQwHQP5zYySJGdUZCZWulXKJjHcx03tjk2J6yF9CC0uOnjFDAEJ2d0K
+ Mt+nNzRqhyZVD6y3u5dXfYtmD5zLju5ysk2oRBqxJSDEY8zNPGCNF6ymH5V0MUyHaqrM
+ Z7x/n4pJePNJlpsjoPJDUz3OU+neURbxALbaMDRP6z0AmjfGz3dvUXZcDY/iXfQtR7g/
+ Hs7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735175324; x=1735780124;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GhfLdxvhJn80EliNS2LL8n+hCurZ3t2Yo1Q7nkstYhg=;
+ b=pLYlgHppMcYTe4zIgimp8p8W+0f2Uvo99lSXrBIPt5AsuBfReAaLKJZy2gVYAxczVd
+ pzxtic981KHDeJSaLyHPSbVtTMpVoj65jmi4QhhMl9qUudCtL1++uv72pdHEWQcXE4Xp
+ WS6+dVyaHa479vipmPl3rKu5NOam1Msz/cMf/roUVft40U3Ek11DSctrQbaOfLErMh43
+ uQddZt1KkqVUWans77P7B2uP7xCgdN2UBGmAU8bOtNlmBYe/QSZiSKPOVfElg91tW9qU
+ e7i4JqACiKz+6wKKXFGmLrzs9vm6BkqlZdc55nnp3QkXbJrF+L8yBxUi0ga5NKhY03MT
+ 1aXw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV7zbNUySVq291jpvXSGrMcB4vICkHeRuA68Z7x4342f53YOntZdg/yT4RXV1WewMa9KAUoXek=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpyoLScu+9sokvsLV74g4CPEjqEG4zec6Wcy+5G8zI+9lsny/N
+ mL1zk1W8RikxjQmu0zCzE8lWqWqJbwCUGAIWMoMIkUJOxTdRY32wmtRIgc6TMlzlAhMsSAdGUXh
+ NSnJxVCizOoAH63tz6nAaSH/FwY8=
+X-Gm-Gg: ASbGncvCJblTNCHXlkEyXLGkutI09nFGX72wZMXGfGQchSfe2HKHtlYKq7gOukkgVRC
+ NbKK/3Dy0+lbUc6cd5IpTTNS6P88P4V3lHgXr3+6AVc/PKgNmUcziSvgdMs/NzF9I7/7EwA==
+X-Google-Smtp-Source: AGHT+IEwQDp0q5IeneaK5zv7Es4QkZCcUiqlQUWhFDzjihxIidyJ+VToL3mPDIIBoM7bqg+CACvg436aHIbkMyu5O3I=
+X-Received: by 2002:a05:6512:ba3:b0:540:2542:d89a with SMTP id
+ 2adb3069b0e04-5422959cf51mr6594845e87.52.1735175324296; Wed, 25 Dec 2024
+ 17:08:44 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v4] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- u-boot@lists.denx.de, tudor.ambarus@linaro.org, j-humphreys@ti.com
-Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
- u-kumar1@ti.com, trini@konsulko.com, seanga2@gmail.com,
- caleb.connolly@linaro.org, sjg@chromium.org, william.zhang@broadcom.com,
- stefan_b@posteo.net, quentin.schulz@cherry.de, Takahiro.Kuwano@infineon.com,
- p-mantena@ti.com, git@amd.com
-References: <20241224153707.2054421-1-venkatesh.abbarapu@amd.com>
-Content-Language: en-US
-In-Reply-To: <20241224153707.2054421-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20241220-imx95-v1-0-ba81dfd8e369@oss.nxp.com>
+ <20241220-imx95-v1-16-ba81dfd8e369@oss.nxp.com>
+ <CAFLszThYc3=cT73xbX4oRYRJ5SdcMJntNYwCkB4t+yKEsuaJyw@mail.gmail.com>
+ <PAXPR04MB96443E60A06424B617D6EA66E2032@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB96443E60A06424B617D6EA66E2032@PAXPR04MB9644.eurprd04.prod.outlook.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 25 Dec 2024 22:08:32 -0300
+Message-ID: <CAOMZO5Cxr3=TmdRDb3fD=FMbD4XVxt_A8SMov-GNCC-QHg4asg@mail.gmail.com>
+Subject: Re: [EXT] Re: [PATCH v2 16/17] imx95_evk: add i.MX95 19x19 EVK board
+ basic support
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "marex@denx.de" <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
+ Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,28 +102,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/24/24 4:37 PM, Venkatesh Yadav Abbarapu wrote:
+Hi Alice,
 
-[...]
+[Please trim your replies when replying].
 
-> @@ -1593,18 +1596,22 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->   	}
->   
->   	while (len) {
-> -		bank = (u32)from / SZ_16M;
-> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> -			bank /= 2;
-> +		read_len = len;
-> +		offset = from;
->   
-> -		rem_bank_len = SZ_16M * (bank + 1);
-> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> -			rem_bank_len *= 2;
-> -		rem_bank_len -= from;
-> +		if (CONFIG_IS_ENABLED(SPI_FLASH_BAR)) {
-> +			bank = (u32)from / SZ_16M;
-> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
-> +				bank /= 2;
-Is this code which operates on (nor->flags & SNOR_F_HAS_PARALLEL) really 
-supposed to be enabled if (CONFIG_IS_ENABLED(SPI_FLASH_BAR)) is SET or 
-instead if STACKED_PARALLEL symbol is SET ?
+On Tue, Dec 24, 2024 at 5:23=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
+
+> Hi Simon, Fabio
+>
+> I am new to standard boot and trying to understand the flow, could that b=
+e a follow up patch to switch imx95 to use standard boot? Then we no need t=
+o wait longer for i.MX95 patchset for mainline.
+
+That's OK.
+
+Please send a v3 addressing the other comments.
