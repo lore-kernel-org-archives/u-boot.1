@@ -4,96 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC93DE77188
-	for <u-boot@archiver.kernel.org>; Thu, 26 Dec 2024 15:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0D52E7718E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Dec 2024 15:17:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE0A580384;
-	Thu, 26 Dec 2024 16:17:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30437803B7;
+	Thu, 26 Dec 2024 16:17:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P+cb4F7c";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jNeGQFlv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DFD4803B7; Thu, 26 Dec 2024 16:17:35 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 93204803CA; Thu, 26 Dec 2024 16:17:46 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2FE88036D
- for <u-boot@lists.denx.de>; Thu, 26 Dec 2024 16:17:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 73F4C8036D
+ for <u-boot@lists.denx.de>; Thu, 26 Dec 2024 16:17:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b6e5c74cb7so463920385a.2
- for <u-boot@lists.denx.de>; Thu, 26 Dec 2024 07:17:32 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6dcf63155b0so30274536d6.1
+ for <u-boot@lists.denx.de>; Thu, 26 Dec 2024 07:17:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735226251; x=1735831051; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1735226263; x=1735831063; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Mh2Mq1Mp6R1puzFnRipN+3FnNBohaXWhQUKwmhVirZ4=;
- b=P+cb4F7cFm6hZJz9nVdPDNkoF05/jjZt06uhEXHT9qpy0qabIXbG1VlO6pJ5+dOKFv
- PF1EtE9xKBZpvrsv4uQNoRYBHsDyN+K1yufAf1AJxZbfzHiIrF13WN757pHX5gQ3PMRl
- My8Ex2FXHdcexfhN9UeBx2/g7eXxtma3QkFBA=
+ bh=DU22uhYb9jq6FlA6F++BueIt+vO5HdC59u8tqgCT7ro=;
+ b=jNeGQFlvsZ6RKHXOm5ViwRyHKjeyas5lEbM0wNocP6B8gRTfl0gwpSCWWAjNAxo8Xd
+ Iyo/DV/X1c0iw4rRluZta2vqYPpRRrlFrwpQ/CteIUS0XgevH/aXrdZFXiuMJJkTHRoA
+ rg9V6vH2cR9wmGbvgLWWdbrJN0XmlB3rGDX/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735226251; x=1735831051;
+ d=1e100.net; s=20230601; t=1735226263; x=1735831063;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mh2Mq1Mp6R1puzFnRipN+3FnNBohaXWhQUKwmhVirZ4=;
- b=NYx3kb+exuIKZ4VA2IQwmvvTXiw25+T8F0jKIL4j4pLJOms9RqW2rhwwqCVx7g8k5e
- PMaKqPBM442U10MrIwjK7+ST9egzfBWCbqg+/HGuWn+wzF7ykENwaKbFBcGYv+mRzIUo
- M5bhtjDEb4VCB5o5PKOGJ06I6D0p9fJJsQUDybeMyqKP7tJTMJ3HGZtG+EYa8lolsMcu
- rSkA1ZCgNbjg1CgcFzZZmpStV2pxTJV6EOsG37WFecOBKMoEARKt2Otmsm5gNR80rNoS
- u3KdcHWL4eqaaLKiMbMKsEsGaGavAiWS6SJie+W7sA331NYkOT6xhhwVyIprt2jiCUac
- a/xg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvLT+zitwHGBZKUpWb770j8kn93RjK0STQjLhMC4r/tRMs2zGNHCwd5e46csbQjZMns3Ycia8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvqUyukCr9EeD/r96oEpInWRU/X3DMeOtdufcFtlQ36GrvM2Mk
- TZpDF72jOZwhXzyJDX0CkuHLXfNExbs24mt3ExccgH9X9zqZyYaBoozqlQyFej8=
-X-Gm-Gg: ASbGncsHY+y84OqeK6QwCZ2SQEVp22gKnS+cqX3EinMyB1S39hRSQR9VEFuGc8PuMtP
- 93boVdXp2YsX7T7eYjQaL8/0ZzST0nLh0C8+gNjYIN+X5EQUgRx04JhEm8fxcc87rpidLciFACz
- mR0x9R11ImlIdB4595zy5tVuu42nlNdCjKhP+I60w7HxHEZEfYprBKTnhm9Kd/aoxKgnxFuJbEK
- lhbteD6uFcR9xsneDipu2O8kZNoCkVD9IgAObesernG+jkgz7zCgl/1VQ==
-X-Google-Smtp-Source: AGHT+IG95h0p/5H96bO79jEeys2RXuDRdM4k7kIDStWQIZdQbBEh16B3vntngKhEyX9NdlFuBu6OxQ==
-X-Received: by 2002:a05:620a:4711:b0:7b6:d90f:e4ca with SMTP id
- af79cd13be357-7b9ba79c17cmr3265104785a.26.1735226251404; 
- Thu, 26 Dec 2024 07:17:31 -0800 (PST)
+ bh=DU22uhYb9jq6FlA6F++BueIt+vO5HdC59u8tqgCT7ro=;
+ b=m0HJJKYMIjvsRr5e8NHkZz9eCqc+ThEuhOOLhxLHArbL5eeFLVBLHZ4Zrnvse7VIfx
+ C3yU7fFWGSUARFMZglh2vvbdWDQdnDR/3Lj3neohzata3Se7tGo4z9mkEE98ostCPpNP
+ Njkv8vHYNVqz1tw8H0H5ldbXH/XFlTth8U2gKJVgIpxxQSKYyuv1jxjP6qYXhMlXqjpQ
+ mQUL1t8ZEGpQH8rSAuJ7nc2AMiEGqq6QY6xqVN9BK92FIx/m1y3B+YPrkdanOGm/uRWE
+ jeQ6t6OBBTRgP4DPaeEcYOMrfDJsQk+OoZ3Tvg++G6vDJdATz+dxgeO3MPn31ZahKjN2
+ 37OA==
+X-Gm-Message-State: AOJu0YxQQDDmvQ+2Av3CTr5lGo8qre1IFt1cktDNhy2U/TyFrBvIqg58
+ edEGzYITx3Ghs3ApGK+2OL1m/eJTWdxMtTRLfJ7WIQdlRw8csC+/83i/HI7mlUE=
+X-Gm-Gg: ASbGncuWrcOVUR5zQjmw1UK4kuxYMRel8jaMuqET9Rnl1PFHJJpzMPc4UcoeRw5nHVJ
+ u5UqsOureAnKC7RLu/5llyI7jsHI5yH4r+drVZBdwwDpj4/5l4sL/fw3FcUxdx+YJT9W3LvdmEu
+ KjPIzNSum/jRkNfw7/azs4LTefr24y+9xqcGJuRZGpWeoM8C37QD2c+iaBrtfE6+Nvvzy36/6Jg
+ I+IuE2jjOhINPATBSMPkcJ/Rs2PiMxZdTBzUJ8uUsU7zBmtO+oeqgx3Xg==
+X-Google-Smtp-Source: AGHT+IF2ToWNIKv9P3Ufe9AZ9+CTT+odnXoHV5D92OmaX5BiT+8xJfS3H3f0pDNtrti4mT1OHGTwug==
+X-Received: by 2002:ad4:5c68:0:b0:6d4:586:6285 with SMTP id
+ 6a1803df08f44-6dd23328c2amr319087736d6.11.1735226263231; 
+ Thu, 26 Dec 2024 07:17:43 -0800 (PST)
 Received: from bill-the-cat ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac2bd0b9sm626675785a.23.2024.12.26.07.17.28
+ 6a1803df08f44-6dd18e3c3ffsm69939136d6.13.2024.12.26.07.17.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Dec 2024 07:17:30 -0800 (PST)
-Date: Thu, 26 Dec 2024 09:17:26 -0600
+ Thu, 26 Dec 2024 07:17:42 -0800 (PST)
+Date: Thu, 26 Dec 2024 09:17:39 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
-Cc: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "tudor.ambarus@linaro.org" <tudor.ambarus@linaro.org>,
- "j-humphreys@ti.com" <j-humphreys@ti.com>,
- "Simek, Michal" <michal.simek@amd.com>,
- "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
- "vigneshr@ti.com" <vigneshr@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>,
- "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>,
- "sjg@chromium.org" <sjg@chromium.org>,
- "william.zhang@broadcom.com" <william.zhang@broadcom.com>,
- "stefan_b@posteo.net" <stefan_b@posteo.net>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
- "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>,
- "p-mantena@ti.com" <p-mantena@ti.com>, "git (AMD-Xilinx)" <git@amd.com>
-Subject: Re: [PATCH v4] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-Message-ID: <20241226151726.GY1505244@bill-the-cat>
-References: <20241224153707.2054421-1-venkatesh.abbarapu@amd.com>
- <2d8cc7c5-e389-4e18-8872-ba89783488cf@denx.de>
- <SA1PR12MB86971E0E6A10C482A4F7568D980D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+To: Sumit Garg <sumit.garg@linaro.org>, Tim Harvey <tharvey@gateworks.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: DT subtree sync for v6.12
+Message-ID: <20241226151739.GZ1505244@bill-the-cat>
+References: <CAFA6WYMvXXi19tjxhi-N4D3-tbVkbJQeUHwzuC5FME6vzPir=Q@mail.gmail.com>
+ <20241224180758.GW1505244@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CSnYyJjYg631zN12"
+ protocol="application/pgp-signature"; boundary="wJy9wT/0WC9FAy49"
 Content-Disposition: inline
-In-Reply-To: <SA1PR12MB86971E0E6A10C482A4F7568D980D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+In-Reply-To: <20241224180758.GW1505244@bill-the-cat>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,90 +95,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---CSnYyJjYg631zN12
+--wJy9wT/0WC9FAy49
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 26, 2024 at 03:34:33AM +0000, Abbarapu, Venkatesh wrote:
-> Hi,
+On Tue, Dec 24, 2024 at 12:07:58PM -0600, Tom Rini wrote:
+> On Tue, Dec 24, 2024 at 12:54:22PM +0530, Sumit Garg wrote:
 >=20
-> > -----Original Message-----
-> > From: Marek Vasut <marex@denx.de>
-> > Sent: Thursday, December 26, 2024 2:19 AM
-> > To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx=
-=2Ede;
-> > tudor.ambarus@linaro.org; j-humphreys@ti.com
-> > Cc: Simek, Michal <michal.simek@amd.com>; jagan@amarulasolutions.com;
-> > vigneshr@ti.com; u-kumar1@ti.com; trini@konsulko.com; seanga2@gmail.com;
-> > caleb.connolly@linaro.org; sjg@chromium.org; william.zhang@broadcom.com;
-> > stefan_b@posteo.net; quentin.schulz@cherry.de; Takahiro.Kuwano@infineon=
-=2Ecom;
-> > p-mantena@ti.com; git (AMD-Xilinx) <git@amd.com>
-> > Subject: Re: [PATCH v4] mtd: spi-nor: Fix the spi_nor_read() when config
-> > SPI_STACKED_PARALLEL is enabled
+> > Hi Tom,
 > >=20
-> > On 12/24/24 4:37 PM, Venkatesh Yadav Abbarapu wrote:
-> >=20
-> > [...]
-> >=20
-> > > @@ -1593,18 +1596,22 @@ static int spi_nor_read(struct mtd_info *mtd,=
- loff_t
-> > from, size_t len,
-> > >   	}
-> > >
-> > >   	while (len) {
-> > > -		bank =3D (u32)from / SZ_16M;
-> > > -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> > > -			bank /=3D 2;
-> > > +		read_len =3D len;
-> > > +		offset =3D from;
-> > >
-> > > -		rem_bank_len =3D SZ_16M * (bank + 1);
-> > > -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> > > -			rem_bank_len *=3D 2;
-> > > -		rem_bank_len -=3D from;
-> > > +		if (CONFIG_IS_ENABLED(SPI_FLASH_BAR)) {
-> > > +			bank =3D (u32)from / SZ_16M;
-> > > +			if (nor->flags & SNOR_F_HAS_PARALLEL)
-> > > +				bank /=3D 2;
-> > Is this code which operates on (nor->flags & SNOR_F_HAS_PARALLEL) really
-> > supposed to be enabled if (CONFIG_IS_ENABLED(SPI_FLASH_BAR)) is SET or
-> > instead if STACKED_PARALLEL symbol is SET ?
+> > Do you plan to perform DT subtree sync for v6.12 which seems to be due
+> > for some time now?
 >=20
-> The FLASH_BAR and STACKED_PARALLEL configs are independent. They won't de=
-pend on each other.
+> Yes, thanks, I'll see how that goes shortly.
 
-At this point in the release cycle, I'd really rather see things as:
-if (CONFIG_SPI_STACKED_PARALLEL) {
-  ... anything needed for the new support mode ..
-} else {
-  ... the way it used to be ...
-}
-
-And for v2025.04 we can move the codebase forward. But I'm worried at
-this point I'm going to have to revert all of the stacked stuff, which
-could get messy, in order to avoid regressions elsewhere.
+The only problem with this is that it looks like there were two device
+tree renames that we care about:
+rename from dts/upstream/src/arm64/freescale/imx8mp-venice-gw7905-2x.dts
+rename to dts/upstream/src/arm64/freescale/imx8mp-venice-gw75xx-2x.dts
+and
+rename from dts/upstream/src/arm64/freescale/imx8mm-venice-gw7905-0x.dts
+rename to dts/upstream/src/arm64/freescale/imx8mm-venice-gw75xx-0x.dts
+and I updated the two defconfigs (imx8mm_venice_defconfig and
+imx8mp_venice_defconfig) to use the new names, but I'm also CC'ing Tim
+in case this is wrong now.
 
 --=20
 Tom
 
---CSnYyJjYg631zN12
+--wJy9wT/0WC9FAy49
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdtc4IACgkQFHw5/5Y0
-tyyouAv/br552IfHrHzUi5+xEr2T2PHRypOZcGJU88vgLjGFdS45d0rYayEHDo80
-qfIx58pOoFT8gGRliR61NEtU7Zckh9G2tWaCSpqx+9xrsvGCTEiAiMTuM6OZ8fZj
-41yDtsZPp0hq1BoI5EEJheSAlIsJ4GQGlb26FESzv+cZEsMURVLgyYyAQv6BE7bb
-WeAll5jBSeFqfEmtAh5afn2+ypJuX2KzrIJu9d4Hd95BBGd6zuMEua/yi8XMpRzO
-YoLWRbBm2T2dHGDRrerOlx3wwYPjAngdOCoGl/dyz98ebKNs5nqFXIUR1VtlOoDJ
-esrr4q85KnKL/YSFMl/75Paas9xBewRbgW++uv/+NZ+sohTHqOkdxl5ABLD55UGl
-AaoQxUZlO5W+mxM16+7TvGMrci3oeA7x+Z4NLBssOZC1vDAHzNVx7iyjgIW5Jlng
-20PCvZZEFYd0Ukn3lCu8jRbXBSaMI3vA5GazqZMTbVQIJXy1yZbyOlxd/8ML1/OF
-SIx/59RZ
-=dnYW
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdtc5MACgkQFHw5/5Y0
+tyzv5QwAqsVqip1VN5NUF7pq84jEK2oxx8sB+BLtg0Ip/CMVW/WUtjal3oiqYkFa
+v9cRapxs9omsxAN5QVCCJq3HREY26Aa5CUdGlAiuAy1CQTiaeVYBE1366j0T7cIj
+7hHXHDcSEFGNNYnQp9xbXbaaAO3hY4NSqcyY3a4sHnIBtJiXuuJHtaIgNv3rPHmU
+5CsJspITDDXX6UJE+9M1xqUsoOdebF/r1ALXJ+nXZhsZc3I4hcDAELV4+C+zXap+
+qVw14DAlBqAZMLasZ1wjqvALOSNToVP08eDIJNfasbi63QR8Ku4zSPtwwkYOhxhJ
+AhpdT4OKN5dUCHSyThpWKC4Ptq3K/QtEKaELzK6VLg1FXXXTTQsmscTIVFsD4Vqi
+Rs7+uQqE8msPjYWhT1lGz0af3PfpYJE0rERQBD+/onC9QkZCPbfpIk2vUvgn3JLU
+riN+nvflr7Pp4Ec8xAXETuVPOJf8vhl5c489sjrdP6SlC6wsv4hntQoreSJ9aaEN
+WynrJsoh
+=k7D3
 -----END PGP SIGNATURE-----
 
---CSnYyJjYg631zN12--
+--wJy9wT/0WC9FAy49--
