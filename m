@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87760E7718B
-	for <u-boot@archiver.kernel.org>; Fri, 27 Dec 2024 08:25:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4682E7718F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Dec 2024 11:14:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DFE58036E;
-	Fri, 27 Dec 2024 09:25:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0A3178036E;
+	Fri, 27 Dec 2024 12:14:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tt0U5THG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NC1lnS4F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75C978036E; Fri, 27 Dec 2024 09:25:42 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 3EC1480384; Fri, 27 Dec 2024 12:14:45 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 548598036D
- for <u-boot@lists.denx.de>; Fri, 27 Dec 2024 09:25:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CF388036D
+ for <u-boot@lists.denx.de>; Fri, 27 Dec 2024 12:14:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-53e28cf55cdso6082276e87.3
- for <u-boot@lists.denx.de>; Fri, 27 Dec 2024 00:25:40 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e460717039fso7584623276.0
+ for <u-boot@lists.denx.de>; Fri, 27 Dec 2024 03:14:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735287939; x=1735892739; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TCSsdOcNjnC66JVoscaijN+pIMGOv/QK7x6ArYKcCJA=;
- b=tt0U5THGqvemkKEaq9MU25qpDfIoYDsCkOb48XFD2dfYd9iu7/HEZ6LR1iFaYub9wn
- ulGvrNeRTHg+/3jVyrFaLf0ENmkckRj6Fk0N8Qdwy46J+T2pCPa0iAyS0hyFLTYx2/N8
- /EQ65iTe9YMotVvMXjCF2+QCDz1db2VwYRb5ptBYeTAsuWmW/rn/7W26JAKJPZB9eeMe
- Z1e1bzoHbt50ictee6n7H/ZYoNLeW9x+rBqM0J34S+HXnVlZdvSozy9wIKu3cGHRFsUy
- 1X5HhO+2EykTHxIjBFrZkEGsleYzHe53C1JFdldB/k6azegxTGGe3Ol+nTe6vWFoDKER
- eQJw==
+ d=linaro.org; s=google; t=1735298081; x=1735902881; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jl0PHLNJ2Aezq2wkzzg5+sdSqE+/6JPXRbrrBor7rww=;
+ b=NC1lnS4F33nwRLMLxtxCp/ndPbftjHzHxWzY6wol8ctnAsKdsSGBANcAU7fWuwboiL
+ L3mp6V+Ogf2DyHR2nlUHQu4sFZkuhB3vZ4dGnU3JWwC/FKQutmWjRct6x8oFnWep9X0a
+ W36aZEXBWVpQNaDAXEIziVJTl8nphMx4uzjPtC6cac1uPORVoeirzQ91xExka/1aHBVD
+ f7KgqNe4fns1e6TwfGgD5dFw3M7mhJ3hurazVlHd+4BV2nZW9bvAYn/jBV9mvKnZ3aVo
+ sAW1RiqeO/W2mJuOATCvkmEUkNTzRtCGxrpkr9fSqFldyED5xqDScc8XkR67oXDBr4m/
+ 7Oew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735287939; x=1735892739;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TCSsdOcNjnC66JVoscaijN+pIMGOv/QK7x6ArYKcCJA=;
- b=f4n2EHKdYGUVyPjYOjPQuyoL2cH/r1gf+skGrNOuLGTgkI4Lj/O6VP92p6puOBv+V3
- np7r4URaYPI5li6Bg4LYISh51FIYhNVZ3GKOkyKOXbkj+Uh2sNmS7EH7iwOw7uq6FT4F
- LMRAkF7wM+KcqHgG6kelbK6QKV88WWuw3oe34lOreVZDvWw6vL+QZaAT2e9PIjWxDMCx
- ksYYKWBlL6peJ9P1Lgkd8IIRzdP8bJbZc9mWpEoEhK9BUa61Fm3NMSP/o8UA4JJtP/zd
- Jyo7ukiB9GJmj/9yve3l74aushT/ktcZ91rzts6VqTbyTuzZizPH2kX3pgHvAo6ZoUig
- h03Q==
+ d=1e100.net; s=20230601; t=1735298081; x=1735902881;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jl0PHLNJ2Aezq2wkzzg5+sdSqE+/6JPXRbrrBor7rww=;
+ b=A/jPATOS0UaHwtU4C+z4eukjCDsgfTl83MFN6xseqsd6q3hFA9MoY516+6h9wC9gaO
+ +GOF1v+gvrbqwBcGwul791QuemZ2F9AftZVEFNVG7SqBZswG7V/SoOVM7fdidueGAImJ
+ wFvv9mGG/76gAUYZRKvJJpE5WnjOhUBnVkAUJVCfzqhMTold/nrYLweEQeq7Oa6DUv68
+ Ixrs/EFSO0ZPy3fQJzpqqHoKwXpIwKc/CI2jGWYgSTBRZW7s/LMTW2h9adcLXvKV2ODz
+ +wNfnoZmlJLMPLaAn3Vw0vF8SBXMFIFx/Aje0SfjinLJR2JRStvRUWoyX8HYH4ORWGBu
+ DqKg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWG9qwtY5vDDqDgZXgM7GEtoaVvNK9mqawbaXU/NK0WQDAYm06nSh2eFxvwi4mD4/sSP36imNo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRkmZVTz1+vPL0liDed/Sfyr1axBUOiL+8pGBQQi/NCtVJykEC
- KXb7cygvKypRN9jgclNEghnFZofJWVOKlBi4ztPhXJv6TljYX+0ZICa6g0cCaII6EYfa+6LxJc+
- IJwnGh8VUi9nEM1zQCh5kbBlb5HJnbUKKuvCKVA==
-X-Gm-Gg: ASbGncu3Pz6SuZqC0GX8aEu+e4MKH7oJjaDhXX4O+3ClPJRtgs7mDoNo9xpwoG2Ll/3
- 8l+eM9I0U8adpH7mnb7wo9aPkGgi3wF45c1ac
-X-Google-Smtp-Source: AGHT+IE/o8VC/uFk5rxe8wr5MfODIs0YPZN3vRdiH78fksNfebF/3ytYr6BJjOF+5kUr6QBpSeVKUayVCtRFb9o3CQk=
-X-Received: by 2002:a05:6512:1114:b0:540:2567:469b with SMTP id
- 2adb3069b0e04-54229533e5amr9263219e87.16.1735287939594; Fri, 27 Dec 2024
- 00:25:39 -0800 (PST)
+ AJvYcCU4oINnati8b3jjQeKg1Ot37FdO9Lk6sW6fl8/drez76KD5dcidtWPzdF7heBynMUfWbHnVX2Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz16jO1Fd1UKTIi6EYtvwktiu0Ejcbn0bhqotLN3p0Clou/p9ZI
+ WTy9U0SWDd+u538UOa97jjA7ZVwg1l7LmhfKF9ReYCDmzcHtONSUfsPMPBeaaup9VMg8c9TlOVn
+ gI4oUB8Fg7BpV7T9ji8Be8jpuhxBNuCLjPelbgA==
+X-Gm-Gg: ASbGncv00CTJTpV0QXIPNzY5szjwYyk36Q6Ou+1v17vGdhlEe4JvfSO3LMD8ytdLnTz
+ j1sSaksh0/cO6Vs3exuyJ9o0ku2Iw5efjtqRQwQ==
+X-Google-Smtp-Source: AGHT+IF5UTGwBUP5zMV8Bgafp1xyyGFab6IEX5jLcV30HTz3y0kn83AkFX/IJVzu36MkELpex2ugaVJAXNFOCnOqM4g=
+X-Received: by 2002:a25:1e84:0:b0:e4c:66ab:ed4e with SMTP id
+ 3f1490d57ef6-e538c22dee7mr16043052276.13.1735298081300; Fri, 27 Dec 2024
+ 03:14:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20241218153933.37649-1-harrison.mutai@arm.com>
- <20241218153933.37649-3-harrison.mutai@arm.com>
-In-Reply-To: <20241218153933.37649-3-harrison.mutai@arm.com>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Fri, 27 Dec 2024 09:25:28 +0100
-Message-ID: <CACRpkdaU6M_cqwDLsSGxKXMJNKg8hNaE_kDF6VJq1FOHw8OxZA@mail.gmail.com>
-Subject: Re: [PATCH 2/4] board: vexpress64: default to hardware device tree
-To: Harrison Mutai <harrison.mutai@arm.com>
-Cc: David Feng <fenghua@phytium.com.cn>, Peter Hoyes <Peter.Hoyes@arm.com>, 
- Liviu Dudau <liviu.dudau@foss.arm.com>, Tom Rini <trini@konsulko.com>,
- nd@arm.com, 
- andre.przywara@arm.com, manish.pandey2@arm.com, u-boot@lists.denx.de
+References: <20241224220049.26629-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241224220049.26629-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 27 Dec 2024 13:14:05 +0200
+Message-ID: <CAC_iWjL3Nxu=jtrS9vPa1hs71+pdDsZSA=W+uobMbaK0xpSKwg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tpm: update descriptions in tpm-v2.h header
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
+ Tim Harvey <tharvey@gateworks.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,17 +91,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 18, 2024 at 4:40=E2=80=AFPM Harrison Mutai <harrison.mutai@arm.=
-com> wrote:
+Thanks Heinrich,
 
-> When booting into the Linux kernel with semi-hosting, use the device
-> tree provided by hardware unless one is provided in the current
-> directory.
+On Wed, 25 Dec 2024 at 00:00, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
+> * Provide a link to 'TPM 2.0 Library Specification'
+> * Remove outdated comment for TPM2_NUM_PCR_BANKS.
+>   The value 16 can be found in the current standard
+>   TCG TSS 2.0 Overview and Common Structures Specification 1.0, rev 10
+> * Describe some of the structures in Sphinx style.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  include/tpm-v2.h | 42 +++++++++++++++++++++++++++++++++---------
+>  1 file changed, 33 insertions(+), 9 deletions(-)
+>
+> diff --git a/include/tpm-v2.h b/include/tpm-v2.h
+> index 4fd19c52fd7..0f388b26496 100644
+> --- a/include/tpm-v2.h
+> +++ b/include/tpm-v2.h
+> @@ -6,6 +6,11 @@
+>   * Copyright (c) 2020 Linaro
+>   * Copyright (c) 2018 Bootlin
+>   *
+> + * The structures are described in
+> + * Trusted Platform Module Library Part 2: Structures
+> + * http://tcg.tjn.chef.causewaynow.com/resource/tpm-library-specification/
+> + *
+> + * C header files are listed in
+>   * https://trustedcomputinggroup.org/resource/tss-overview-common-structures-specification/
 
-This looks helpful to me!
-Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+We already define that a few lines above
+>   *
+>   * Author: Miquel Raynal <miquel.raynal@bootlin.com>
+> @@ -34,12 +39,8 @@ struct udevice;
+>
+>  #define TPM2_HDR_LEN           10
+>
+> -/*
+> - *  We deviate from this draft of the specification by increasing the value of
+> - *  TPM2_NUM_PCR_BANKS from 3 to 16 to ensure compatibility with TPM2
+> - *  implementations that have enabled a larger than typical number of PCR
+> - *  banks. This larger value for TPM2_NUM_PCR_BANKS is expected to be included
+> - *  in a future revision of the specification.
+> +/**
+> + * define TPM2_NUM_PCR_BANKS - number of PCR banks
+>   */
+>  #define TPM2_NUM_PCR_BANKS 16
+>
+> @@ -55,20 +56,43 @@ struct udevice;
+>  #define TPM2_PT_MAX_COMMAND_SIZE       (u32)(TPM2_PT_FIXED + 30)
+>  #define TPM2_PT_MAX_RESPONSE_SIZE      (u32)(TPM2_PT_FIXED + 31)
+>
+> -/* TPMS_TAGGED_PROPERTY Structure */
+> +/**
+> + * struct tpms_tagged_property - TPMS_TAGGED_PROPERTY structure
+> + *
+> + * This structure is returned by TPM2_GetCapability() to report
+> + * a u32 property value.
+> + *
+> + * @property:  property identifier
+> + * @value:     value of the property
+> + */
+>  struct tpms_tagged_property {
+>         u32 property;
+>         u32 value;
+>  } __packed;
+>
+> -/* TPMS_PCR_SELECTION Structure */
+> +/**
+> + * struct tpms_pcr_selection - TPMS_PCR_SELECTION structure
+> + *
+> + * This structure allows to specify a hash algorithm and a list of
+> + * selected PCRs. A PCR is selected by setting the related bit in
+> + * @pcr_select to 1.
+> + *
+> + * @hash:              hash algorithm associated with the selection
+> + * @size_of_select:    size in bytes of the @pcr_select array
+> + * @pcr_select:                bit map of selected PCRs
+> + */
+>  struct tpms_pcr_selection {
+>         u16 hash;
+>         u8 size_of_select;
+>         u8 pcr_select[TPM2_PCR_SELECT_MAX];
+>  } __packed;
+>
+> -/* TPML_PCR_SELECTION Structure */
+> +/**
+> + * struct tpml_pcr_selection - TPML_PCR_SELECTION structure
+> + *
+> + * @count:     number of selection structures, may be zero
+> + * @selection: list of selections
+> + */
+>  struct tpml_pcr_selection {
+>         u32 count;
+>         struct tpms_pcr_selection selection[TPM2_NUM_PCR_BANKS];
+> --
+> 2.47.1
+>
 
-Yours,
-Linus Walleij
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
