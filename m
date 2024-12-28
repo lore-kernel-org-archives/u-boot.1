@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A1B9E77188
-	for <u-boot@archiver.kernel.org>; Sat, 28 Dec 2024 13:46:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CA0FE7718F
+	for <u-boot@archiver.kernel.org>; Sat, 28 Dec 2024 14:38:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDBD280352;
-	Sat, 28 Dec 2024 14:46:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 519DF80362;
+	Sat, 28 Dec 2024 15:38:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C1F380362; Sat, 28 Dec 2024 14:46:27 +0100 (CET)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ id 1C957804BA; Sat, 28 Dec 2024 12:11:24 +0100 (CET)
+Received: from mx.skole.hr (mx1.hosting.skole.hr [161.53.165.185])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11CEA80107
- for <u-boot@lists.denx.de>; Sat, 28 Dec 2024 14:46:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
+ by phobos.denx.de (Postfix) with ESMTPS id A188C80431
+ for <u-boot@lists.denx.de>; Sat, 28 Dec 2024 12:11:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
- helo=[127.0.0.1])
- by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1tRX90-0004d0-75; Sat, 28 Dec 2024 14:46:18 +0100
-Message-ID: <0c9b672a-df0f-4341-a11d-ad3ea6eedad7@pengutronix.de>
-Date: Sat, 28 Dec 2024 14:46:15 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/3] usb: dwc3: invalidate dcache on buffer used in
- interrupt handling
-To: Neil Armstrong <neil.armstrong@linaro.org>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
+ dmarc=none (p=none dis=none) header.from=skole.hr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
+Received: from mx1.hosting.skole.hr (localhost.localdomain [127.0.0.1])
+ by mx.skole.hr (mx.skole.hr) with ESMTP id 1CC6B81706;
+ Sat, 28 Dec 2024 12:11:21 +0100 (CET)
+From: Duje =?UTF-8?B?TWloYW5vdmnEhw==?= <duje.mihanovic@skole.hr>
+To: Tom Rini <trini@konsulko.com>
+Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
  u-boot@lists.denx.de
-References: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-0-5f3498d8035b@linaro.org>
- <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-3-5f3498d8035b@linaro.org>
-Content-Language: en-US
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-In-Reply-To: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-3-5f3498d8035b@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+Subject: Re: [PATCH 0/2] Initial support for PXA1908 and samsung-coreprimevelte
+Date: Sat, 28 Dec 2024 12:10:49 +0100
+Message-ID: <4950238.GXAFRqVoOG@radijator>
+In-Reply-To: <20241227215327.GH1505244@bill-the-cat>
+References: <20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr>
+ <20241227215327.GH1505244@bill-the-cat>
+MIME-Version: 1.0
+Autocrypt: addr=duje.mihanovic@skole.hr; keydata=
+ mDMEZokhzhYJKwYBBAHaRw8BAQdAWJZ0hsI/ytTqHGFV8x6tzd5sB596cTeeDB4CQsTf+wC0KER
+ 1amUgTWloYW5vdmnEhyA8ZHVqZUBkdWplbWloYW5vdmljLnh5ej6ImQQTFgoAQRYhBG3/QdYN8x
+ S1t2umMK0xk1JFj60DBQJmiSHOAhsDBQkJZgGABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAA
+ AoJEK0xk1JFj60D1GABAJVSorZdMOlrp/oQtCSH/G53NE56x/JHA8VX+ZQBd/H3AP4/EcUf6eef
+ DUxVMh2bdkmuQKsVZGgOGiXpMksrVntWBrQpRHVqZSBNaWhhbm92acSHIDxkdWplLm1paGFub3Z
+ pY0Bza29sZS5ocj6ImQQTFgoAQRYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSH/AhsDBQkJZg
+ GABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEK0xk1JFj60Dlw8A/i4lPOL7NaYoYePDq
+ l8MaJaR9qoUi+D+HtD3t0Koi7ztAQCdizXbuqP3AVNxy5Gpb1ozgp9Xqh2MRcNmJCHA1YhWAbg4
+ BGaJIc4SCisGAQQBl1UBBQEBB0DEc9JeA55OlZfWKgvmRgw6a/EpBQ8mDl6nQTBmnd1XHAMBCAe
+ IfgQYFgoAJhYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSHOAhsMBQkJZgGAAAoJEK0xk1JFj6
+ 0DG5MA/iuo4l2GDEZ1Zf+XaS//8FwdXDO9nHkfbV2MHjF4NZXwAQDroMzBdMcqVvc8GABFlTTgG
+ j7KrRDz2HwWNyF8ZeprAQ==
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+X-Mailman-Approved-At: Sat, 28 Dec 2024 15:38:33 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,96 +68,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Friday 27 December 2024 22:53:27 Central European Standard Time Tom Rini=
+=20
+wrote:
+> On Fri, Dec 27, 2024 at 10:22:14PM +0100, Duje Mihanovi=C4=87 wrote:
+> > Hello,
+> >=20
+> > This series adds initial support for Marvell's PXA1908 ARM64 SoC and
+> > Samsung's Galaxy Core Prime VE LTE, a smartphone based on said SoC.
+> >=20
+> > On this board, U-Boot is used as a secondary bootloader to work around
+> > certain quirks of the factory S-Boot.
+> >=20
+> > Signed-off-by: Duje Mihanovi=C4=87 <duje.mihanovic@skole.hr>
+>=20
+> What is the status of getting these dtsi files upstream? Thanks.
 
-On 11.10.24 16:38, Neil Armstrong wrote:
-> On Qualcomm systems, the setup buffer and even buffers are in
-> a bad state at interrupt handling, so invalidate the dcache lines
-> for the setup_buf and event buffer to make sure we read correct
-> data written by the hardware.
-> 
-> This fixes the following error:
-> dwc3-generic-peripheral usb@a600000: UNKNOWN IRQ type -1
-> dwc3-generic-peripheral usb@a600000: UNKNOWN IRQ type 4673109
-> 
-> and invalid situation in dwc3_gadget_giveback() because setup_buf content
-> is read at 0s and leads to fatal crash fixed by [1].
-> 
-> [1] https://lore.kernel.org/all/20240528-topic-sm8x50-dwc3-gadget-crash-fix-v1-1-58434ab4b3d3@linaro.org/
-> 
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> ---
->  drivers/usb/dwc3/ep0.c    | 2 ++
->  drivers/usb/dwc3/gadget.c | 2 ++
->  drivers/usb/dwc3/io.h     | 8 ++++++++
->  3 files changed, 12 insertions(+)
-> 
-> diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-> index 8ba5fcd5312..531f0b522af 100644
-> --- a/drivers/usb/dwc3/ep0.c
-> +++ b/drivers/usb/dwc3/ep0.c
-> @@ -742,6 +742,8 @@ static void dwc3_ep0_inspect_setup(struct dwc3 *dwc,
->  	if (!dwc->gadget_driver)
->  		goto out;
->  
-> +	dwc3_invalidate_cache((uintptr_t)ctrl, sizeof(*ctrl));
+They are the last component of PXA1908 support waiting to be merged, see=20
+https://lore.kernel.org/all/20241104-pxa1908-lkml-v13-0-e050609b8d6c@skole.=
+hr/=20
+=2E
 
-I believe this to be incorrect. ctrl here is dwc->ctrl_req, which AFAICS
-is allocated in dwc3_gadget_init() using dma_alloc_coherent.
+In case you're asking this to see whether the board could use OF_UPSTREAM, =
+I=20
+should note that the dtsi files in this set differ from the ones waiting to=
+ be=20
+merged into Linux differ by being slimmed down, having different compatible=
+s=20
+in a few places (CPU and serial ports specifically) and the coreprimevelte =
+dts=20
+also has an extra property `pxa,rev-id` which the stock bootloader requires=
+=20
+for booting. Could all this be handled in a `pxa1908-samsung-coreprimevelte=
+=2Du-
+boot.dtsi` and `pxa1908-u-boot.dtsi` once they are upstreamed?
 
-Doing cache maintenance on DMA-coherent memory doesn't make sense.
-If this makes things better for you, it's probable that something else
-is broken.
-
-Additionally, this will break platforms that have DMA-coherent DWC3
-and allocate normal memory instead of uncached memory. I am not sure
-if there are such U-Boot platforms yet, as searching for dma-coherent DT
-property yields no relevant results, but e.g. LS1046A in barebox would've
-been broken by such a change.
-
-Cheers,
-Ahmad
-
-> +
->  	len = le16_to_cpu(ctrl->wLength);
->  	if (!len) {
->  		dwc->three_stage_setup = false;
-> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-> index 19c3a5f5e58..e5a383407a2 100644
-> --- a/drivers/usb/dwc3/gadget.c
-> +++ b/drivers/usb/dwc3/gadget.c
-> @@ -2534,6 +2534,8 @@ static irqreturn_t dwc3_process_event_buf(struct dwc3 *dwc, u32 buf)
->  	while (left > 0) {
->  		union dwc3_event event;
->  
-> +		dwc3_invalidate_cache((uintptr_t)evt->buf, evt->length);
-> +
->  		event.raw = *(u32 *) (evt->buf + evt->lpos);
->  
->  		dwc3_process_event_entry(dwc, &event);
-> diff --git a/drivers/usb/dwc3/io.h b/drivers/usb/dwc3/io.h
-> index 0ede323671b..c1ab0288142 100644
-> --- a/drivers/usb/dwc3/io.h
-> +++ b/drivers/usb/dwc3/io.h
-> @@ -55,4 +55,12 @@ static inline void dwc3_flush_cache(uintptr_t addr, int length)
->  
->  	flush_dcache_range((unsigned long)start_addr, (unsigned long)end_addr);
->  }
-> +
-> +static inline void dwc3_invalidate_cache(uintptr_t addr, int length)
-> +{
-> +	uintptr_t start_addr = (uintptr_t)addr & ~(CACHELINE_SIZE - 1);
-> +	uintptr_t end_addr = ALIGN((uintptr_t)addr + length, CACHELINE_SIZE);
-> +
-> +	invalidate_dcache_range((unsigned long)start_addr, (unsigned long)end_addr);
-> +}
->  #endif /* __DRIVERS_USB_DWC3_IO_H */
-> 
+Regards,
+=2D-=20
+Duje
 
 
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+
