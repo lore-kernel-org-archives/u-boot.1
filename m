@@ -4,158 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8404CE7718F
-	for <u-boot@archiver.kernel.org>; Sat, 28 Dec 2024 04:29:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2736E77188
+	for <u-boot@archiver.kernel.org>; Sat, 28 Dec 2024 09:49:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BE67803B5;
-	Sat, 28 Dec 2024 05:29:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id C72298034E;
+	Sat, 28 Dec 2024 10:49:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Y3xkvUVf";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="N+LCBb08";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A84F80422; Sat, 28 Dec 2024 05:29:51 +0100 (CET)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20607.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::607])
+ id 51C5980362; Sat, 28 Dec 2024 10:49:30 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42D0C80381
- for <u-boot@lists.denx.de>; Sat, 28 Dec 2024 05:29:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EC0480317
+ for <u-boot@lists.denx.de>; Sat, 28 Dec 2024 10:49:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DkoM41EIoMKPRV5qAZsdxjV5CqYMGNe3zG/Pa0vZ/GKQ8xasmY+K9w9WzU49cAMtp9khRl+qU3fFFr5/o1JEUpv0iMN0io4nXyjOFrteI/sswVKjpk8Abw7cx4ozdBmw6Y2EGRbsUbF2STvaT8+LHC+u0GcBPEUtbKRvL5qli2t6/kPp53yvK4ON5uq8nNmy8lZWkHbG47c5WxldUzRG8vkON980UZi0A0Bi67bQu2utSGxgGzioTPfuKFmu8HMWEEHbqd41F0/aX+Y/xOliTcX70PH77gSeMIHdfACnnuof/GeMFGkoFf237U36geiH/eH5JCGdv8jbrPf2QFMGOw==
+ b=v/8gb4UhRX9xrfqIb2TWmvSjx1EQ/182nhRuOHKLmI/KsH7fzxVQFqKFx45UJwAyhxsnzhxn8kP2k3VylamgIK2/44EY2YOLcuIqDCZwe+IVTBdysrWop7v8bGAc7RtF2qRXmt7IhdL2EOeKS0mB90OvLy93LmhoEMOy9Oi9J9taH3zNMRR6B9K7UC5wGrnNGAItF1E14b2OzJDPDTyZiX4dp7nb4KQAvNC+XsSHDOD9dZCqOggJHlFOPguBZsdpAeQ8Y1eXyiLbIKuvllnMYG8Y9a5dTQoTsxhdF8+/+MfUlKAUoHnS36zQyyCCXWOXBmX0iJbKQ5ZaSEPfQ0fUTw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=q7iD/px0xpQR+ucOquxsnh2f4CrNF4UxCUFgqKbj1+Q=;
- b=DymyLn5dkdqDit+jxDRLQj5z0htQbQxaDcwWkNZX8D2CpCwXbpWqt9DYZTEJ3daKDR948xpC8HCFmep6Gp9kJKraqTjXuBUDOKiQOrvmhi+hUz7Xg3cFtwg4EK7mk5tTRiVFuMYO+Knw32BHPsPGtKTXU78ZakdlBP4JTgCwZhY2KxBepMmwgLa63N0OiXpHQHbOJXDjUju8nDf/59ZU/F5fR76kCAYtfGlOkfas1aBRkVwvw34x+fe0g/Wq6fALjBV1SV1RMh+503JbN2216k8H9OiPvGY4/EYhrfWkv52O7j9EtXfryTL8vIG0UmsqW68g4usQmnBRDxDxbGSLKw==
+ bh=TPE1Ak5Pirf1rK6BxAiEx7CmeMK/bnWO/qp6yU1S0f0=;
+ b=BChYXnIx20wPqjc1oK9ZcecWHQwlbXPPTc1+scfa18VOYyQcjy8yQ8st8axfgdKZqHyVhzJ5tKulUuS9oCbQA9TDtIT+eXEJSZZRp12f3jQaYp2s2+rk+Jdrg5JmgfKVQwgB4YZSWe8HIdWCs5g6p144ssuIi7q/g06DjXwMU9I/+p7ye+ZCuHdtxDBE8qogREEgVGpW1oi4lf8VuYT63ZNV6OuAlUCLzZ4TFXSwq67pBBn2Ves/YIX63UOtQiP4+ik1CCAn3aNaQyGnV9aYgE+TnuWcplRgOOmOuPyHCIHX5sokfNekl0wMVKhV/8I8REJx7i7i6u3imqKRCdbtKQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=q7iD/px0xpQR+ucOquxsnh2f4CrNF4UxCUFgqKbj1+Q=;
- b=Y3xkvUVfKs/9LTGmlwuv6du/HyTFyZvBEEu286gBMvX5gr/IODPKaeIxXoJaPaVEP0pXvheAnHtatAOHC2KzI17PnPAILxqtEBUt4CybnmeymRk1GKRhHL/WCQArh915H52lUb/OCaKh1xCep3MegX+eJ1s88ZvquL8b3AprV1Q=
-Received: from SA1PR12MB8697.namprd12.prod.outlook.com (2603:10b6:806:385::10)
- by DS0PR12MB9324.namprd12.prod.outlook.com (2603:10b6:8:1b6::14) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=TPE1Ak5Pirf1rK6BxAiEx7CmeMK/bnWO/qp6yU1S0f0=;
+ b=N+LCBb08bSFgYMoCtUZ7L2tR2bW0UJXGY83SRXCO64wc+x/6Id/VMQlVMcy/WmhJyJOVs+3fNyq+9oZDR1H/W/LEfyXeiCOu805dgaZC3c+Vj+QE00X+wNp1M68ImO4+xi9AuFPeXrme6GHdV/BiYSLjwomkvHoe7LWwvPqqWoTkq8E7mrjZiWcWuqh7T9n8DB1Vq/ft8RZC6qq5armC1k+YRadf8XhchcXRqaEKgHtgBaeUtttd7mjZU0tyvLzL/OaWonwDMHfW97bkgYUtb8+cm+QKP2LvKZuZB8S+d14jrC6zAt4TPqWHGL0CLaRH4/Sb9tnVQgE8aFcjQuPjtQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by AS2PR08MB8669.eurprd08.prod.outlook.com (2603:10a6:20b:55c::13)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8293.16; Sat, 28 Dec
- 2024 04:29:39 +0000
-Received: from SA1PR12MB8697.namprd12.prod.outlook.com
- ([fe80::dbf9:f1d1:7c67:f88c]) by SA1PR12MB8697.namprd12.prod.outlook.com
- ([fe80::dbf9:f1d1:7c67:f88c%5]) with mapi id 15.20.8293.000; Sat, 28 Dec 2024
- 04:29:39 +0000
-From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+ 2024 09:49:21 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.8293.000; Sat, 28 Dec 2024
+ 09:49:21 +0000
+Message-ID: <ed0351b2-4a7f-4c86-969a-3253b74e921f@iopsys.eu>
+Date: Sat, 28 Dec 2024 12:49:18 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v15 00/11] net: tcp: improve tcp support in legacy stack
 To: Tom Rini <trini@konsulko.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "tudor.ambarus@linaro.org"
- <tudor.ambarus@linaro.org>, "j-humphreys@ti.com" <j-humphreys@ti.com>,
- "marex@denx.de" <marex@denx.de>, "Simek, Michal" <michal.simek@amd.com>,
- "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>, "vigneshr@ti.com"
- <vigneshr@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>, "seanga2@gmail.com"
- <seanga2@gmail.com>, "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>, 
- "sjg@chromium.org" <sjg@chromium.org>, "william.zhang@broadcom.com"
- <william.zhang@broadcom.com>, "stefan_b@posteo.net" <stefan_b@posteo.net>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
- "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>,
- "p-mantena@ti.com" <p-mantena@ti.com>, "git (AMD-Xilinx)" <git@amd.com>
-Subject: RE: [PATCH v5] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-Thread-Topic: [PATCH v5] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-Thread-Index: AQHbWBrUi10JtBBhZE6rXbOanbpUqbL6aIkAgACo9OA=
-Date: Sat, 28 Dec 2024 04:29:39 +0000
-Message-ID: <SA1PR12MB869745E73B63621C18E0E4D6980F2@SA1PR12MB8697.namprd12.prod.outlook.com>
-References: <20241227044934.2109997-1-venkatesh.abbarapu@amd.com>
- <20241227182306.GE1505244@bill-the-cat>
-In-Reply-To: <20241227182306.GE1505244@bill-the-cat>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA1PR12MB8697:EE_|DS0PR12MB9324:EE_
-x-ms-office365-filtering-correlation-id: 378e7b2b-0ee6-4a30-69e7-08dd26f83e5e
-x-ld-processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|7416014|1800799024|376014|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?TKRqOmD359zzahriRjbgzx4SXxzzQhJrHPEU8Q2JgN9DvYQY/LHjbEC+6b7P?=
- =?us-ascii?Q?pwvGiHZmphm9rB7pTACAjtFaiQHkfVPS4kP1eJPcRPymHCCKcZFKOFDErD8N?=
- =?us-ascii?Q?xU3kEXYDhOWha+XzX5HYF8YQMigcHDB52ENJ0FhJdudbvp26qj/gpjzk+Jxn?=
- =?us-ascii?Q?bupaHjhpdbY8rYHsewpwftUCyO8bFUkEwdGd/elhAiD/RR8hMFYeucLiLawX?=
- =?us-ascii?Q?1g4MiBeKKl/CRQLmVCjV4jtzdJomDsCsiQkmHe8hJ+XybCmbxcOalLPREA4f?=
- =?us-ascii?Q?WPe2R/wAq8/85qH3g1W79bU7RKa/C+Pp8Ly3L34alQb8J1OioDo52q3oOcWD?=
- =?us-ascii?Q?ad2Bx1Fmq+NtJWeChS/F4cBv/eUPVqbFqMGhBbsXTn+L2pXW1+hXG1ZTbAA1?=
- =?us-ascii?Q?njvf/0DAIRGjoJ2aLE7QGvDwRogASuQiq+V+JNSPxmry2EMJpqCCH7p4vnH3?=
- =?us-ascii?Q?s1Uxls231XKpa3Rd9Sbm3vgo8oc3nZ0L7iEske42G8Ai2lHsKH6lzSeBDoHF?=
- =?us-ascii?Q?bKCFSmJOmlGfCPsLKBpoyGyltccPMGRdJOLYZOWcgz+hMQng2xmAD7TbcLFq?=
- =?us-ascii?Q?33nncEwjtiinZzPmDoX34fUnK9kURGh9GRzZR2mjrOBi2CqVAiKE06VWC56y?=
- =?us-ascii?Q?3NIl8NiUptbIeHwkmPovaJcbbBkX7hxVmsfej41JBTEaKN4XzO4wXqRl5iL8?=
- =?us-ascii?Q?l+UXLsaVY6LstaML/q8ciqHSQcJAyESYW4cRGDGw4JXYAWfjX7izHKLygiON?=
- =?us-ascii?Q?hr8/8bihLxC3TeAyspGMmoUNlVeHmhP/0PxSaPEhb3+lQ8pzEE7VW/MSKPBN?=
- =?us-ascii?Q?IC/E9nP6NcvWXCyqBwdsA5bHw9aZTSoaWkfWgXuoXsUgkG213ASseotjuPtE?=
- =?us-ascii?Q?d/5xifuYO+VyA78033XrRehm3N6MLDmPVjMColWzXQaIXVIC8q8iOnqKPExw?=
- =?us-ascii?Q?6C5hGTgHFy8NxVmHy/Yn4x84CtB/lNpJjAX+pL+y3bHiXjZHpvLfC95BwXEB?=
- =?us-ascii?Q?ay99pvv/yKrA4/p3s4fZON+RKezngAhVvNxurxGJyhpC/8Uo+u93VzZ2Hmnp?=
- =?us-ascii?Q?tjimBBNGhvjqtaZEe0rBHtmnh5roet0tek7AyCmq7HSJufYBc/fJvptJsR75?=
- =?us-ascii?Q?VP5bC/P0HXLXyWMwYyPsWqEe1wXwD2yC+Zc6IZ0M5yP8UGlIgRIgdhtYUOTl?=
- =?us-ascii?Q?tqMuh4aVKWa0H1gOmgswCKh+e+abJJTaE8CbklNxID0ljVd+dtrexya8Me75?=
- =?us-ascii?Q?22IumYwlGTYjvSs2FRmyocbXcaClihwPuXLod6LkG9WXHlcdwqJmcbz9wQMI?=
- =?us-ascii?Q?/NNpBBVrxgIgbiqXF/mnGXwFCi1JIKNVtrot/OXu7GtogR7bDxXTEuwmhTxC?=
- =?us-ascii?Q?kWthdp3SThFI3ted6w7H4dh2yJ+LPBNzVHLSHsHzpnekc02m7Q=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA1PR12MB8697.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(1800799024)(376014)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?JboiD4qwsQdWupTZexFQwVgt0l/SOLVyl65Uoru6Iza+WS3ymnW3QySXjb+m?=
- =?us-ascii?Q?sFZ7C9xwCGQfWjkvLWq/XeJsaUb07A3bzUGuQ9CnAFDU52BrZs2c5g6zZRSN?=
- =?us-ascii?Q?9DYQgGZFoYoAtILFzfPRjslfGYtYz8xLRgyKRgcmVWAsPLi1ZZ/CQ1Om2Aa6?=
- =?us-ascii?Q?IqvcYDcroVjxLs3DhTci2Dk4E+tKP2UiCzu8JcK1Aove9bQqAcX4AlnGWKmy?=
- =?us-ascii?Q?bXKcdrFfQE4j/+JhGYRQyONs1gTHRQPBEv1oK8Id/nqgY0E2OzH8W4z8ndun?=
- =?us-ascii?Q?EISiJiLA6jnxDulMs0dTgzVZqxrkstdFvTmwEbTJPGgzWU+IdDkAQqGTSOti?=
- =?us-ascii?Q?9xnlPsesCwT4aGfh8cF6bBSBI6iA4jlYdaQImuHJOVhAKjr2zWlnIhZSKfHS?=
- =?us-ascii?Q?eiXGuwUpP6zTf/w6D0X+pIEbwSZ6xUjmmP+U7o5bXEeG1P4XavO8Xo35YQ+g?=
- =?us-ascii?Q?V0EbATCdsXFBmwaNfV+KBYg7ac/E8gYqcjaKi+dIpZkmvJzL0eXX/z5KJ9eN?=
- =?us-ascii?Q?iJIfufbPoWHi7O2i4yZ7wxoi9IYk/1VoSGMcvte/+d/cb3K4OL2k6qQmLm99?=
- =?us-ascii?Q?k804kHgbfdIhe2L5kQCA1aaR/oqgUmdM6RXG9QdJqXt9yIkWR0RumuhcWDlh?=
- =?us-ascii?Q?QCy+C0pNc47wrjDx7GwQh1Yf7l1ecbElULz2RgKgYaQ3gGchuntPgEDD+YZq?=
- =?us-ascii?Q?yM4Y/BSGADQtYLcfV/oWcCRzlbJ31T4FXwwcPrJJ8/aZpsZYLjPHhnGdZkJN?=
- =?us-ascii?Q?nAOnSr0GTr71HFhlTeYT4JwqgX8hWK5dJ3r/EWdXaF7wQkokuapmOyxh8fUM?=
- =?us-ascii?Q?9qOP+sdigoqvIgOT+JtDzqrLBs4ZlGQeqUCgA59zBQ09WWidDGdGBYS0dgQo?=
- =?us-ascii?Q?sQe9Y+IGma5vAlsWhq0h5oxr42EIhcADfbsai+0IorIkiPl+1mbVf4Ticw/p?=
- =?us-ascii?Q?WFNTwyxeZcDwLjz3Aqfoyvv90Z3HoN6L1wxvDxfQhnHnFLix0HF26dgM2tXa?=
- =?us-ascii?Q?09AuP24NDV+92Oj507zdVopdPgMYVnhzMa2mz6cFWVBLz0dYe8H0UWB7u61b?=
- =?us-ascii?Q?sFCDI4oJGDfoz0kBBi06iZZqGUEzXzTGJ5e02wc22H4llHv9k0wO2GJ+auiK?=
- =?us-ascii?Q?/9MEx4I96o1+fFjMbp7HVY0HI+fCw2EFzI9pC43ba/yaGNsSKwd1t1bAj/Oe?=
- =?us-ascii?Q?GV1wUyffkFC0+MOAjfKefL/cWsHE3xmFVHDJkNs1iX99UVs5L07rszxQYj1V?=
- =?us-ascii?Q?Qbeg/EV4JKtYjnWKzycZj3/bgPF8HEarWDzTu7lhDF0gmVk+CxufDyP70qv5?=
- =?us-ascii?Q?hu/vke+Oz5FEL+p1fmy1t5zw+JTiCLn0ELMI9FjEORaww5c2Ljqux4Lf99Z4?=
- =?us-ascii?Q?NzVuZnVqdNylEnZSF5B4Sl1q8YSwERHVbQOGqeN0nnLaIMPXZ4+Z+kn0cy9F?=
- =?us-ascii?Q?MH4T9HSt0KqKec+nvGNykK4lvuwkmki4Z22fT73Xqcikpr0nYlhBut8MmAym?=
- =?us-ascii?Q?v8bvkNHpxlCFLr3ZLEZgnfy0yzrRWFJwQtXbujPJUSgR1FkpGExPoC+Acpgc?=
- =?us-ascii?Q?8NRxNKb3XbMRKsqhtfA=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Cc: Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Adriano Cordova <adrianox@gmail.com>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ u-boot@lists.denx.de
+References: <20241223105852.1074404-1-mikhail.kshevetskiy@iopsys.eu>
+ <20241227210012.GG1505244@bill-the-cat>
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Content-Language: en-US, ru-RU
+In-Reply-To: <20241227210012.GG1505244@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR2P281CA0097.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9c::12) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS2PR08MB8669:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2c9d72c5-6a86-44c1-b106-08dd2724e723
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|7416014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dGJWMnhPTlJRc1JPQzhQdm42OUxwdUF0b2pTc2kwVUhsV1pxbGFaSWRINndp?=
+ =?utf-8?B?YzdpUDllcDdTQzV3bXY4SklpOG9qK2pKTStlNmRBN1JhdmszbnFmeFlyamhm?=
+ =?utf-8?B?U1ZqaExRYzBMQlZRTjloTUk2MnR4cGJINDBWOThDd0R6Q2prODdlSVJpN2dw?=
+ =?utf-8?B?TWlpMUlzV0N4OWJ5SVgrNjFZZE12WkJUVzBDSVFkYlBnakoyOTE0eGRrUlNU?=
+ =?utf-8?B?Vi83UVlrVlVqanpKNGJaMTdPdlZ2UVdYMWswYVlKdHFJaFIvd2d6SmxEUVBm?=
+ =?utf-8?B?cUxta2ZoNkVmVHliNzZabEhxcnNtM29jSzdyYmNmYTA1TW81T3Z6Mmx2cTk1?=
+ =?utf-8?B?cmw0SzRpWTJrY2krQkJEZHlIRXN1dnJuT1lpRnV2bkdCNUpGU3VqVkZUQUpP?=
+ =?utf-8?B?M3NRL1BQc0puWVFPWjFJYmhncUlxNkIwbElmSmgzR0xnZ29Db1p1Uys4THFV?=
+ =?utf-8?B?NG1kUWVzNmgxZ1B0NmNuQVFUT0RKQ3QxWCsvZUlEZU12UGM2L1FKc2UybVNN?=
+ =?utf-8?B?RW9ZMDJ3Y3Q2UWpUV3dqdGVadGwvd0FiRHZpK1QxZ1lBWm5rVkRvS3VBVVhC?=
+ =?utf-8?B?K3dTc0FtV3hlTk11UksvbmgzK3paTWtzVUdvUGp4UHg1TlUxaDNZOUpKZ0dD?=
+ =?utf-8?B?WUFCQVo3UjVwTEZiKzFPTlNLQi9aM0tCaVNkTDAvVnJZTUpPTGlyREpESm1I?=
+ =?utf-8?B?RThCRWlQMkp5aGh2eUVycVpNNnlxYkQwUDkrV0JGY3paWG9ybWdJMFoyRm5m?=
+ =?utf-8?B?anBaeVlEOER4VjRtMm5sbjUvMEttUjFZd3R0SHhkN1k5c3ZiL2lwQi9wazU3?=
+ =?utf-8?B?dGpFWjVVa25yOE8xdkh0SzBnQkt2cmpTK2xpZ1I1Vll3ejJycUwycDRYLzdv?=
+ =?utf-8?B?cEdkTFVYV1FWZCtWcHJKL2tFOSsyTDBzNGN0ZnFGNEliY0V3a0lpM2Q1bC9Y?=
+ =?utf-8?B?K0JuV2JPWDc5UklTZE1Id0QwWXBWNGYvMWtuY3Z2ckxzMEVCWG5PWUxkUDBt?=
+ =?utf-8?B?VnlwdTh2QWV2alJDQm9haVNTOWpKMmxobW1FUHc5TG9IOUdNd3Y3Y2JsQWpE?=
+ =?utf-8?B?ZUR5ZWI0Zms1TCtiSmpqV2RoaW00TTJwOE4vTnZxZW9sTU5rMmhpby9UcmtY?=
+ =?utf-8?B?MzRaaEpEVC9iY1k4YURnWm5UN2w2WTQrQXZIbFFaTmhwYm1KVUszT0kvVDVS?=
+ =?utf-8?B?K3lYaXVET3VteThRWmsrU09aMnZRSStlODNtR3A5azNlbEVIc1p6VWYwbFJl?=
+ =?utf-8?B?UDJ1RFh6OXNmWDJDY0hyVzZqZmE1UFpJSklLMjZncm5Nc0xZcHdJWit5WlRY?=
+ =?utf-8?B?MjRlQmtkc0gvd2tyeWJYVXhQVXR0T0F0Um1UUDFQaHhEb3NSdjJjVjlpR1ZH?=
+ =?utf-8?B?TTMwc2ZkM0ZDZ2l6ZjVtZUlqVHBVTVQ1WE5WODlvcUJoeXdzaEplS3lXdC9h?=
+ =?utf-8?B?RzJQUGZMZzAvWEtIU0txQU9GUHl1V3dYY0VubkY3WUdoK3VFVHY4djZXSDd1?=
+ =?utf-8?B?WXk0ZExHMFZrNDNKN1VqTEV2T29RSVUyUEZYV2pJTXQrN1hNRk1qUjdzM3Rr?=
+ =?utf-8?B?OUNOdTMxeTI0SkpWb3cweFRsVW5XTU9QN3RlNVJaVWxJWW1PbWtFZ2Z6eSsx?=
+ =?utf-8?B?WkV6a21pNFhWdDFlekl0MHFPRFpOOURSRENhRkJndTZ5Q1M4TlkvYUpOT0NT?=
+ =?utf-8?B?emZmZ1YrVU1ySklPemxqbXF4cUY2bzVWcVdGNFVHQ05EWldoTkEvdEVSQWpo?=
+ =?utf-8?B?aU5CeXRicDU4empQcm1HVlZRZnFVRFp6NXhOaFVKVThsdTA1aE5vRUlmMCtB?=
+ =?utf-8?B?LzExRkh4WGFKWWFOVzdtUT09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(7416014)(366016); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RW9EKzFTRXB1ak1xMXlGMzR1eWJiN05wUkIvdVMrZ3hBNDJGeU5COWxwNkxk?=
+ =?utf-8?B?WnpXY3VHT3dNWjdzZTNMbTY1K1FTdlVqOGZhUGZ2ZnF1bUhESXdhODNZQ1dW?=
+ =?utf-8?B?S1NFWTFQS2pKZDYwRGRsbzhQUlgxc09mOXZkRkVqSk0xWmkwWnBBbUdqWHlB?=
+ =?utf-8?B?MVpBZVArL3pRSE0zdzAxb0prNlBnaXY3UzdrSHI0eHEyMDRyc0ZxemlCM3Ro?=
+ =?utf-8?B?Qm8rNjVDdEdjWmhQTU56SVpjd1cwUFB0aU56OW1KVGorN0lhbTFwbTR6Vll5?=
+ =?utf-8?B?Yk0zTzYyQjZ4SjBYR2Z4ZEZEMmFkYytFWmhyUUcxTVVrNWUrZTVkME9Eekhs?=
+ =?utf-8?B?VTFsaGhjOUZGMHFBWEtMR2lyZDhUUk1tNzJCVzZsQlZkOW5YYTU4OXdWc0ZF?=
+ =?utf-8?B?V1hFZjVpMnlWQ1dqNEg5a1RtWllmOTBCN3NTK3FiWk5IUzMrV2lWOVZaazZh?=
+ =?utf-8?B?SWtHODZ2ZEpVQ3l2UVdzRkUzVk93eU96N3c1elIvaFFsN1BoSXVQakFLKzBN?=
+ =?utf-8?B?bVZjM2hsL29OaGoyeHdYVHNKZ3RuSDAxOGt4LzY0MCtBK2RtT0plZFV3Q1Ex?=
+ =?utf-8?B?Umx1c3REQWdLa2d6RVZaa3MrdFFBaXkrWU9jWVpMKzRzSnhRWWt1aW5GSFdt?=
+ =?utf-8?B?SnJQYUlWYmhEYXRESlZHTWZLbkpmWmd4RlRmeTFTc0tUeDJnWHhZVW1kVzlk?=
+ =?utf-8?B?RjFaS3FRUkFNa1gyZlFMOWhLQTZ3ZThkZ0NVUDI0QmVCOVVrcG9pODkyWTFu?=
+ =?utf-8?B?QlBuWW9MRDBpUzcvakxDU0x2MCtrc3pWMHpNS3BIcGE3T3VRSlROMUVlOU5W?=
+ =?utf-8?B?djJHMXJtazA0OUZxcWN6WUl5bkNlYnJFWXNKODFudmVvdGwyOEpraEdJbkZB?=
+ =?utf-8?B?NWFhL0h6d3Yzd3phTURlOU9IbjdnTS9uY3p2amRCZHpMcmErYTQ1UzM3OTlr?=
+ =?utf-8?B?NytrZDExTmxMdTZnT21wWkRBc1lTNFN1RWR0alJXRlVROUVGZnU3Y0o5czRr?=
+ =?utf-8?B?NWxOb2xyR1k4MUpZdkVIM242ZFJjV051UkNrU0xiZGo4b3RMTjgvc1ZadkhL?=
+ =?utf-8?B?VVphNU8vYk1OYkhVdUlRdEw3eWczNWNkdTAxTmIyemRoRGN4blNRcXF2VVpv?=
+ =?utf-8?B?M1NxRThJVzcrTWw0M3dvcUdkTzBkU0FXNVNBRzFySkYvK1NMNDlteUppdDB4?=
+ =?utf-8?B?aC9YdDlRb1VISGhjWWJnaWpyN0wxWmlGazlmVUJPdVNpYlFtWEZFSXBvRkpn?=
+ =?utf-8?B?TkZQRFl6VkdiWXJiaVhhQkovR0dGV0JGaUZzMFMrN3dCdzR2V2JtRGd1UTQ2?=
+ =?utf-8?B?SUNUdWFtbWQreVFQeDVDUDdQSWV6MHdwMWlQRmRqcEs2bEhsM0pPd0laWlB1?=
+ =?utf-8?B?Mko5OEUxYXBvampjUmRQNmZzamZ6OEtGaWZIVjRMRG4yekZOZUh1MHhpa2dy?=
+ =?utf-8?B?UUR2WURmelFiUWxocG55VFFQeXhIWU5RMXhpZlNxTHo2cDBYR2E0a0xXVHd3?=
+ =?utf-8?B?OEhyZmxqSHJ0STUyaXlrd3B2ZUJuV3ZHaDcxakFiS2NLOWNQWHFDYWI1NW0z?=
+ =?utf-8?B?QXJDbFVtZlRPbnFDdzJwYjE1LytzdnVOWjJ5Mi93QVVNWTFRWmRqL3BhZUp5?=
+ =?utf-8?B?VlZENzExdW56MmVmSzUxT01FUGF1YmczdmNvaDFEM21jT1JLcTFiM296Rk4r?=
+ =?utf-8?B?VzJiODJuRkRoNGM3WTdpeWlFNkZ2WTBBamlJM1ZGZTMzSVVob1NtRGJpTUFt?=
+ =?utf-8?B?L3hMMlY4bVdhemdob21XQmc1Yi9mUDJ4MStRRU93T2w1dlNLbUdKRVVzWVZK?=
+ =?utf-8?B?SnNheEZIUDhEV0dqVmRxTzRoVXZEQUNYaTl5WEY0c05vU1lzRjJIdWpvTHN0?=
+ =?utf-8?B?R29ueDErdFZIOG4rUlJXSGJRRjExcDZsQXNBbkt0TFJ3RTFidTFqSEczdW1w?=
+ =?utf-8?B?aVZ1OVBFMTFxc2ZiQVo2blNmNjd1UkZaNmF6bXE4b1NRQlR2U0JuR2RBSW1y?=
+ =?utf-8?B?Q1lZUW1JbVZSNWtFeFZCVll4Sk1BZDVmKzY4RFpmN21MOWh5Szcyc0duNThR?=
+ =?utf-8?B?STl0QTdtTzV0cVZEdFNCdFpnMWx6V29DZlJKeVdBM3Q3aXRjTFptdVJMWXFC?=
+ =?utf-8?B?RXRzWTlJV0xpT29jTFAvM3lzelNjNWRyTUUzVmNqODdKcGhGY1l6NTNyTk11?=
+ =?utf-8?Q?i882gNSOZNH/v5tu8oeioHE=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2c9d72c5-6a86-44c1-b106-08dd2724e723
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB8697.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 378e7b2b-0ee6-4a30-69e7-08dd26f83e5e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Dec 2024 04:29:39.6472 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: +ToJyUQVp6ZurgjBYN2tlmfKqD7x/wTOMcsWfbI/k8XcDpQy2PVWCmDw2gBqxVVNsVSGttL2xdpr5WPYIPNAng==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9324
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Dec 2024 09:49:20.8584 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bwIjgZiSswvmmZyOlzRkok5v1eqzbLk/cr9+5GOEAttII5xkJT2E76TWQe0MHHrM5QmzoReZhIXC0zZXbxr63Ea7z29Df3770LATCcSrM/M=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB8669
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,49 +182,229 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+more notes about lib/efi_selftest/efi_selftest_http
+1) test does not send HEAD request as stated in the
+lib/efi_selftest/efi_selftest_http.c file header. It send GET request in
+the  line 168 and read the response twice (line 203 and line 244). It
+looks a bit wrong to read the response twice from the same request.
 
-> -----Original Message-----
-> From: Tom Rini <trini@konsulko.com>
-> Sent: Friday, December 27, 2024 11:53 PM
-> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>
-> Cc: u-boot@lists.denx.de; tudor.ambarus@linaro.org; j-humphreys@ti.com;
-> marex@denx.de; Simek, Michal <michal.simek@amd.com>;
-> jagan@amarulasolutions.com; vigneshr@ti.com; u-kumar1@ti.com;
-> seanga2@gmail.com; caleb.connolly@linaro.org; sjg@chromium.org;
-> william.zhang@broadcom.com; stefan_b@posteo.net; quentin.schulz@cherry.de=
-;
-> Takahiro.Kuwano@infineon.com; p-mantena@ti.com; git (AMD-Xilinx)
-> <git@amd.com>
-> Subject: Re: [PATCH v5] mtd: spi-nor: Fix the spi_nor_read() when config
-> SPI_STACKED_PARALLEL is enabled
->=20
-> On Fri, Dec 27, 2024 at 10:19:34AM +0530, Venkatesh Yadav Abbarapu wrote:
->=20
-> > Update the spi_nor_read() function based on the config SPI_FLASH_BAR
-> > and update the length and bank calculation by spliting the memory of
-> > 16MB size banks only when the address width is 3byte.
-> > Fix the read issue for 4byte address width by passing the entire
-> > length to the read function. Also update the size when the
-> > configuration is stacked.
-> >
-> > Fixes: 5d40b3d384 ("mtd: spi-nor: Add parallel and stacked memories
-> > support")
-> > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->=20
-> I don't think you've run this through CI?
-> https://source.denx.de/u-boot/u-boot/-/jobs/984698#L289 and similar on al=
-l sandbox
-> targets, and Azure shows it too.
->=20
+2) I replace "http://example.com/" with my router page
+"http://10.0.14.10/index.html" to avoid DNS issue (discussed in the
+previous mail), but  sandbox/sandbox64 produce  SIGABRT during a test run.
 
-Ok...Could you please run the CI on the "v3 patch" once, as this patch is e=
-ntirely separated the parallel code with the default one.
 
-[PATCH v3] mtd: spi-nor: Fix the spi_nor_read() when config SPI_STACKED_PAR=
-ALLEL is enabled
+kl@laska:~/econet/bootloader/u-boot-current$ sudo gdb ./u-boot
+GNU gdb (Debian 15.2-1) 15.2
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later
+<http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
 
-Thanks
-Venkatesh
-> --
-> Tom
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./u-boot...
+(gdb) run -D
+Starting program: /home/kl/econet/bootloader/u-boot-current/u-boot -D
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Bloblist at b000 not found (err=-2)
+
+
+U-Boot 2025.01-rc5-00387-gc390d0882c37-dirty (Dec 28 2024 - 12:19:19 +0300)
+
+Reset Status: COLD
+Model: sandbox
+DRAM:  256 MiB
+
+Warning: host_lo MAC addresses don't match:
+Address in ROM is        12:f0:b0:f5:1b:36
+Address in environment is    02:00:11:22:33:44
+Core:  114 devices, 60 uclasses, devicetree: board, universal payload active
+WDT:   Started alarm-wdt with servicing every 1000ms (5s timeout)
+NAND:  0 MiB
+MMC:   
+Loading Environment from nowhere... OK
+Warning: device tree node '/config/environment' not found
+In:    serial
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Model: sandbox
+Net:   eth0: host_lo, eth1: host_enp1s0, eth2: host_wlp2s0, eth3:
+host_enx00e04c6801f6
+Error: eth@10002000 No valid MAC address found.
+
+
+Hit any key to stop autoboot:  0
+=> setenv autoload no;setenv ethrotate no;setenv ethact host_enp1s0; dhcp
+BOOTP broadcast 1
+BOOTP broadcast 2
+BOOTP broadcast 3
+BOOTP broadcast 4
+DHCP client bound to address 10.0.0.146 (3407 ms)
+=> setenv efi_selftest "http protocol"
+=> bootefi selftest
+     efi_var_to_file() Cannot persist EFI variables without system partition
+
+Testing EFI API implementation
+
+Selected test: 'http protocol'
+
+Setting up 'http protocol'
+HTTP Service Binding: child created successfully
+Setting up 'http protocol' succeeded
+
+Executing 'http protocol'
+phys_to_virt: Cannot map sandbox address 18bc1010 (SDRAM from 0 to 10000000)
+
+Program received signal SIGABRT, Aborted.
+__pthread_kill_implementation (threadid=<optimized out>,
+signo=signo@entry=6, no_tid=no_tid@entry=0)
+    at ./nptl/pthread_kill.c:44
+warning: 44    ./nptl/pthread_kill.c: No such file or directory
+(gdb) bt
+#0  __pthread_kill_implementation (threadid=<optimized out>,
+signo=signo@entry=6, no_tid=no_tid@entry=0)
+    at ./nptl/pthread_kill.c:44
+#1  0x00007ffff7e2acef in __pthread_kill_internal (threadid=<optimized
+out>, signo=6)
+    at ./nptl/pthread_kill.c:78
+#2  0x00007ffff7dd6c42 in __GI_raise (sig=sig@entry=6) at
+../sysdeps/posix/raise.c:26
+#3  0x00007ffff7dbf4f0 in __GI_abort () at ./stdlib/abort.c:79
+#4  0x000055555559d450 in os_abort () at arch/sandbox/cpu/os.c:1054
+#5  phys_to_virt (paddr=<optimized out>) at arch/sandbox/cpu/cpu.c:121
+#6  phys_to_virt (paddr=<optimized out>) at arch/sandbox/cpu/cpu.c:96
+#7  0x0000555555791444 in map_physmem.constprop.0
+(paddr=paddr@entry=414978064, len=<optimized out>,
+    len@entry=36, flags=0) at arch/sandbox/cpu/cpu.c:184
+#8  0x00005555556d1587 in map_sysmem (paddr=414978064, len=36) at
+./arch/sandbox/include/asm/io.h:225
+#9  store_block (src=0x555555964462 <net_pkt_buf+1858> "HTTP/1.0 200
+OK\r\nConnection: close\r\n",
+    offset=<optimized out>, len=36) at net/wget.c:65
+#10 tcp_stream_rx (tcp=<optimized out>, rx_offs=<optimized out>,
+buf=0x555555964462 <net_pkt_buf+1858>,
+    len=36) at net/wget.c:230
+#11 0x00005555556d4e3c in tcp_rx_user_data (tcp=tcp@entry=0x55555595e700
+<tcp_stream.lto_priv>,
+    tcp_seq_num=tcp_seq_num@entry=3457615271,
+    buf=buf@entry=0x555555964462 <net_pkt_buf+1858> "HTTP/1.0 200
+OK\r\nConnection: close\r\n",
+    len=len@entry=36) at net/tcp.c:943
+#12 0x00005555556d630d in tcp_rx_state_machine (tcp=0x55555595e700
+<tcp_stream.lto_priv>,
+    b=0x55555596442e <net_pkt_buf+1806>, pkt_len=88) at net/tcp.c:1104
+#13 rxhand_tcp_f (b=0x55555596442e <net_pkt_buf+1806>, pkt_len=88) at
+net/tcp.c:1207
+#14 net_process_received_packet (in_packet=<optimized out>,
+len=<optimized out>) at net/net.c:1411
+#15 eth_rx () at net/eth-uclass.c:459
+#16 0x00005555556d7121 in net_loop (protocol=protocol@entry=WGET) at
+net/net.c:656
+#17 0x00005555556d7b87 in wget_do_request (dst_addr=414978064,
+uri=<optimized out>) at net/wget.c:413
+#18 0x00005555556875cb in wget_request (info=0x555555940e20
+<efi_wget_info>, dst_addr=4166818,
+    uri=0x7fffffffd618 "http://10.0.14.10/index.html") at
+net/net-common.c:26
+#19 efi_net_do_request (url=0x7fffffffd618
+"http://10.0.14.10/index.html", method=HTTP_METHOD_GET,
+    buffer=0x19c6b980, status_code=0x19c6b998, file_size=0x19c6b988,
+headers_buffer=0x19c7b3a8 "")
+    at lib/efi_loader/efi_net.c:1320
+#20 efi_http_request (this=0x19c6b940, token=0x7fffffffdb70) at
+lib/efi_loader/efi_http.c:242
+#21 0x000055555568f3ec in execute () at
+lib/efi_selftest/efi_selftest_http.c:168
+#22 0x0000555555681687 in execute (test=0x5555559225f0
+<_u_boot_list_2_efi_unit_test_2_http>,
+    failures=0x7fffffffdd08) at lib/efi_selftest/efi_selftest.c:112
+#23 efi_st_do_tests (testname=0x19c47df0, phase=1, steps=7,
+failures=0x7fffffffdd08)
+    at lib/efi_selftest/efi_selftest.c:229
+#24 0x00005555555bdce6 in efi_selftest (systab=0x55555592ec20 <systab>,
+image_handle=0x19c6b7a0,
+    systab=0x55555592ec20 <systab>) at lib/efi_selftest/efi_selftest.c:313
+#25 do_efi_selftest () at cmd/bootefi.c:109
+#26 do_bootefi (cmdtp=<optimized out>, flag=<optimized out>,
+argc=<optimized out>, argv=<optimized out>)
+    at cmd/bootefi.c:176
+#27 0x00005555555f2bb6 in cmd_call (cmdtp=0x5555559168b8
+<_u_boot_list_2_cmd_2_bootefi>, flag=0, argc=2,
+    argv=0x19c58a20, repeatable=0x7fffffffdd84) at common/command.c:582
+#28 cmd_process (flag=<optimized out>, argc=2, argv=0x19c58a20,
+repeatable=0x555555948c68 <flag_repeat>,
+    ticks=0x0) at common/command.c:637
+#29 0x00005555555ebdf6 in run_pipe_real (pi=0x19c586a0) at
+common/cli_hush.c:1672
+#30 run_list_real (pi=pi@entry=0x19c586a0) at common/cli_hush.c:1868
+#31 0x00005555555ec100 in run_list (pi=0x19c586a0) at common/cli_hush.c:2017
+#32 parse_stream_outer (inp=inp@entry=0x7fffffffdf28, flag=flag@entry=2)
+at common/cli_hush.c:3207
+#33 0x00005555555ed848 in parse_file_outer () at common/cli_hush.c:3299
+#34 cli_loop () at common/cli.c:302
+#35 main_loop () at common/main.c:82
+--Type <RET> for more, q to quit, c to continue without paging--Quit
+
+The incorrect image loading address comes to wget from the test or efi
+subsystem, thus we get SIGABRT on map_sysmem() function call.
+
+Mikhail Kshevetskiy
+
+
+
+On 28.12.2024 00:00, Tom Rini wrote:
+> On Mon, Dec 23, 2024 at 01:58:41PM +0300, Mikhail Kshevetskiy wrote:
+>
+>> Legacy TCP stack is bad. Here are some of the known issues:
+>>  * tcp packet from other connection can break a current one
+>>  * tcp send sequence always starts from zero
+>>  * bad tcp options processing
+>>  * strange assumptions on packet size for selective acknowledge
+>>  * tcp interface assumes one of the two scenarios:
+>>      - data downloading from remote host to a board
+>>      - request-response exchange with a small packets
+>>    so it's not possible to upload large amount of data from the
+>>    board to remote host.
+>>  * wget test generate bad tcp stream, test should fail but it passes instead
+>>
+>> This series of patches fixes all of the above issues.
+>>
+>> The benefits:
+>>  * A lot of bug was fixed
+>>  * Better and more reliable TCP state machine
+>>  * Tcp clients becomes smaller/simpler
+>>  * Data uploading was fixed (now it's possible to transmit a huge amount of
+>>    data from the board to remote host)
+>>
+>> Modification was verified with
+>>  * firmware downloading via u-boot wget command
+>>  * fastboot over tcp
+>>  * netcat linux client using test netcat implementation (not included
+>>    to this patch series)
+>>  * Firefox/Chrome/Edge using test web-server implementation (not included
+>>    to this patch series)
+> This fails on the EFI self test on qemu-arm64. You can see this with
+> "bootefi selftest" on the platform, and the excerpt from the full
+> failure log at:
+> https://source.denx.de/u-boot/u-boot/-/jobs/984858
+> https://dev.azure.com/u-boot/u-boot/_build/results?buildId=10224&view=logs&s=664d8594-b731-54d7-afc5-7167226e08f3&j=52970d71-9fb7-5005-2ae1-66817be903ba
+> is:
+> Setting up 'http protocol' succeeded
+> Executing 'http protocol'
+> 93.184.215.14
+> Packets received 5, Transfer Successful
+> lib/efi_selftest/efi_selftest_http.c(216):
+> ERROR: File not found
+> lib/efi_selftest/efi_selftest.c(114):
+> ERROR: Executing 'http protocol' failed
+> Tearing down 'http protocol'
+>
