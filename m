@@ -4,54 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CA0FE7718F
-	for <u-boot@archiver.kernel.org>; Sat, 28 Dec 2024 14:38:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C075E7718B
+	for <u-boot@archiver.kernel.org>; Sun, 29 Dec 2024 14:46:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 519DF80362;
-	Sat, 28 Dec 2024 15:38:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
+	by phobos.denx.de (Postfix) with ESMTP id 88B31804E7;
+	Sun, 29 Dec 2024 15:46:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XVXqGLTf";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C957804BA; Sat, 28 Dec 2024 12:11:24 +0100 (CET)
-Received: from mx.skole.hr (mx1.hosting.skole.hr [161.53.165.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0FE82804FA; Sun, 29 Dec 2024 15:46:13 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A188C80431
- for <u-boot@lists.denx.de>; Sat, 28 Dec 2024 12:11:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1137C804CE
+ for <u-boot@lists.denx.de>; Sun, 29 Dec 2024 15:46:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=skole.hr
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
-Received: from mx1.hosting.skole.hr (localhost.localdomain [127.0.0.1])
- by mx.skole.hr (mx.skole.hr) with ESMTP id 1CC6B81706;
- Sat, 28 Dec 2024 12:11:21 +0100 (CET)
-From: Duje =?UTF-8?B?TWloYW5vdmnEhw==?= <duje.mihanovic@skole.hr>
-To: Tom Rini <trini@konsulko.com>
-Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] Initial support for PXA1908 and samsung-coreprimevelte
-Date: Sat, 28 Dec 2024 12:10:49 +0100
-Message-ID: <4950238.GXAFRqVoOG@radijator>
-In-Reply-To: <20241227215327.GH1505244@bill-the-cat>
-References: <20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr>
- <20241227215327.GH1505244@bill-the-cat>
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3862b40a6e0so4686661f8f.0
+ for <u-boot@lists.denx.de>; Sun, 29 Dec 2024 06:46:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1735483570; x=1736088370; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JF8+fQW1RCYXPxdPB6NJ4FigNGgMPXECfdwHuShGfGY=;
+ b=XVXqGLTfRDpaVi5q6DBffAHKK9yQWrjI8D6JWTW91XVs8atsJkoKnjpWt0ejtYePGY
+ iWM5IvMlnC60GUbFSV8Z3yt8ewgdEXrqZeyYELW0XETYIEkdHFqAASRlCiJu30hrrYin
+ NqW2z6x9h67UppEf3lmSKDeXMekfspMW0ofIGB+bI7iTRqLOk7QWtIf830mIKFzWv3eL
+ JLCV6gS9w7yGkl67MhG4NmLhOcIBDXGyMq9tcbDMAIgNVULmFykUZluBG7l4XpqBL7Ej
+ 1O7OVL5loOF6qAlYOMIvyTN/cEHg+T8UTVgwbF/xQdftnxMMxxOsmmLvGYL6xAQQ+VRb
+ gu0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735483570; x=1736088370;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JF8+fQW1RCYXPxdPB6NJ4FigNGgMPXECfdwHuShGfGY=;
+ b=Jt4TKqFsbJboc30ezl4DDGfxrYeV+qrq8NkL1+utTYrBsBTSvl7JlT2Sw1wgM/5Wga
+ gOjsrpKlNSuH2JmOCdqfKhtfwriuvQarO93sqeDqvZwv/h3iGosetCAPbmhd9Q/gXO/7
+ kqXoH1WfDEzjYxNmGL8RInRVIoaJ0bvfR/K79UgNCT2FA7a8bbeuy0mDtVAt9K9z8PYz
+ pU5L/OsaNWwyfKTe61rpkLeP1Z7PkLtlzIRxGzaJs0LIK1x6Fv/8OEJETBYLMQqBdaLt
+ 4+JQsbIy37tTM038DEUSwWAMrL+MKPmSzkzLsURhKYwOKR3Pq0eRl8RbCPV9oIyLNOBq
+ qHWA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVcStNR/t5SacTlXPHm4cy23Yn06Ya9TRJfrh0Vv5/kpLTbkRkmAg13JH1TtT9jVMHGaWjI6G4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxlwGQsZTgy0B8Okb/5T+j8kSZg2txtcU1bbPlgV6riBk5dBCqm
+ BNUKKp419XY+31dVnaH26IgOwMyZxp4bVSlj0tmkUeEGyxiWXw+Y
+X-Gm-Gg: ASbGnctpVbr3XEh8XBMggd+/L89OdTxBB/1kLUDOC8L1Kj6mUMk5Ab1j+klkkqauXeg
+ nWXlLdMhGPhRNXrR7GnlheGewHpeNyf+ivCbW4DY30ywnV5t6mcIN5YMeFMLL6y0yLMe6KTSUWU
+ +gjiUxC4R6orj/l+Jn8TIOW3zD1vot6I9VK8COytwM3UoN+fCjHnq6rQzKKdztfLk3+2pesK9Q+
+ Z3FV+Qz03dWmzI3UP5U48+7k3ocUN5D+QWxJ/RgxDPdKRoiFAtaR4qYuBopObndKc5e5s3N9SVj
+ aSBKi966MofrGMrzXOvtdlJGC2w+iJMnQvKbNqJp95yVWwiG9/xfHBWk2lbpoCsLcoh9RB4G9lO
+ k
+X-Google-Smtp-Source: AGHT+IGv8vYQe8rUmwo/HkPBDteRS9r28sZfeHxo6MhDdkkeZuPpVDncHYh75rQ+UNYwiS4C1Mzv5Q==
+X-Received: by 2002:a05:6000:4810:b0:385:e961:6589 with SMTP id
+ ffacd0b85a97d-38a221f13ffmr33793547f8f.20.1735483570200; 
+ Sun, 29 Dec 2024 06:46:10 -0800 (PST)
+Received: from cypher.localdomain
+ (7.9.7.f.b.1.3.0.b.8.f.0.9.e.0.0.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
+ [2001:8b0:fb11:2681:e9:f8b:31b:f797])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-43656af6c66sm369195505e9.5.2024.12.29.06.46.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 29 Dec 2024 06:46:09 -0800 (PST)
+From: Peter Robinson <pbrobinson@gmail.com>
+To: Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH] rpi: Add identifiers for the new RPi 5 series
+Date: Sun, 29 Dec 2024 14:46:05 +0000
+Message-ID: <20241229144607.1051889-1-pbrobinson@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-Autocrypt: addr=duje.mihanovic@skole.hr; keydata=
- mDMEZokhzhYJKwYBBAHaRw8BAQdAWJZ0hsI/ytTqHGFV8x6tzd5sB596cTeeDB4CQsTf+wC0KER
- 1amUgTWloYW5vdmnEhyA8ZHVqZUBkdWplbWloYW5vdmljLnh5ej6ImQQTFgoAQRYhBG3/QdYN8x
- S1t2umMK0xk1JFj60DBQJmiSHOAhsDBQkJZgGABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAA
- AoJEK0xk1JFj60D1GABAJVSorZdMOlrp/oQtCSH/G53NE56x/JHA8VX+ZQBd/H3AP4/EcUf6eef
- DUxVMh2bdkmuQKsVZGgOGiXpMksrVntWBrQpRHVqZSBNaWhhbm92acSHIDxkdWplLm1paGFub3Z
- pY0Bza29sZS5ocj6ImQQTFgoAQRYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSH/AhsDBQkJZg
- GABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEK0xk1JFj60Dlw8A/i4lPOL7NaYoYePDq
- l8MaJaR9qoUi+D+HtD3t0Koi7ztAQCdizXbuqP3AVNxy5Gpb1ozgp9Xqh2MRcNmJCHA1YhWAbg4
- BGaJIc4SCisGAQQBl1UBBQEBB0DEc9JeA55OlZfWKgvmRgw6a/EpBQ8mDl6nQTBmnd1XHAMBCAe
- IfgQYFgoAJhYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSHOAhsMBQkJZgGAAAoJEK0xk1JFj6
- 0DG5MA/iuo4l2GDEZ1Zf+XaS//8FwdXDO9nHkfbV2MHjF4NZXwAQDroMzBdMcqVvc8GABFlTTgG
- j7KrRDz2HwWNyF8ZeprAQ==
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
-X-Mailman-Approved-At: Sat, 28 Dec 2024 15:38:33 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,44 +97,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Friday 27 December 2024 22:53:27 Central European Standard Time Tom Rini=
-=20
-wrote:
-> On Fri, Dec 27, 2024 at 10:22:14PM +0100, Duje Mihanovi=C4=87 wrote:
-> > Hello,
-> >=20
-> > This series adds initial support for Marvell's PXA1908 ARM64 SoC and
-> > Samsung's Galaxy Core Prime VE LTE, a smartphone based on said SoC.
-> >=20
-> > On this board, U-Boot is used as a secondary bootloader to work around
-> > certain quirks of the factory S-Boot.
-> >=20
-> > Signed-off-by: Duje Mihanovi=C4=87 <duje.mihanovic@skole.hr>
->=20
-> What is the status of getting these dtsi files upstream? Thanks.
+The Raspberry Pi foundation have released the Raspberry
+Pi 500, CM5 an CM5 lite devices so add the assoicated
+revision identifers so we can detect them.
 
-They are the last component of PXA1908 support waiting to be merged, see=20
-https://lore.kernel.org/all/20241104-pxa1908-lkml-v13-0-e050609b8d6c@skole.=
-hr/=20
-=2E
+Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+---
+ board/raspberrypi/rpi/rpi.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-In case you're asking this to see whether the board could use OF_UPSTREAM, =
-I=20
-should note that the dtsi files in this set differ from the ones waiting to=
- be=20
-merged into Linux differ by being slimmed down, having different compatible=
-s=20
-in a few places (CPU and serial ports specifically) and the coreprimevelte =
-dts=20
-also has an extra property `pxa,rev-id` which the stock bootloader requires=
-=20
-for booting. Could all this be handled in a `pxa1908-samsung-coreprimevelte=
-=2Du-
-boot.dtsi` and `pxa1908-u-boot.dtsi` once they are upstreamed?
-
-Regards,
-=2D-=20
-Duje
-
-
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index 18be244aa79..1e43c631898 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -193,6 +193,21 @@ static const struct rpi_model rpi_models_new_scheme[] = {
+ 		DTB_DIR "bcm2712-rpi-5-b.dtb",
+ 		true,
+ 	},
++	[0x18] = {
++		"Compute Module 5",
++		DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb",
++		true,
++	},
++	[0x19] = {
++		"500",
++		DTB_DIR "bcm2712-rpi-500.dtb",
++		true,
++	},
++	[0x1A] = {
++		"Compute Module 5 Lite",
++		DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb",
++		true,
++	},
+ };
+ 
+ static const struct rpi_model rpi_models_old_scheme[] = {
+-- 
+2.47.1
 
