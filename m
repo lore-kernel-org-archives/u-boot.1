@@ -4,83 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C075E7718B
-	for <u-boot@archiver.kernel.org>; Sun, 29 Dec 2024 14:46:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD2FDE7718B
+	for <u-boot@archiver.kernel.org>; Sun, 29 Dec 2024 16:36:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88B31804E7;
-	Sun, 29 Dec 2024 15:46:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E6F2180243;
+	Sun, 29 Dec 2024 17:36:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XVXqGLTf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iimn/Yq5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FE82804FA; Sun, 29 Dec 2024 15:46:13 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 3C401804E7; Sun, 29 Dec 2024 17:36:02 +0100 (CET)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1137C804CE
- for <u-boot@lists.denx.de>; Sun, 29 Dec 2024 15:46:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89A80801F5
+ for <u-boot@lists.denx.de>; Sun, 29 Dec 2024 17:35:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3862b40a6e0so4686661f8f.0
- for <u-boot@lists.denx.de>; Sun, 29 Dec 2024 06:46:11 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-46792996074so83878541cf.0
+ for <u-boot@lists.denx.de>; Sun, 29 Dec 2024 08:35:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1735483570; x=1736088370; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=JF8+fQW1RCYXPxdPB6NJ4FigNGgMPXECfdwHuShGfGY=;
- b=XVXqGLTfRDpaVi5q6DBffAHKK9yQWrjI8D6JWTW91XVs8atsJkoKnjpWt0ejtYePGY
- iWM5IvMlnC60GUbFSV8Z3yt8ewgdEXrqZeyYELW0XETYIEkdHFqAASRlCiJu30hrrYin
- NqW2z6x9h67UppEf3lmSKDeXMekfspMW0ofIGB+bI7iTRqLOk7QWtIf830mIKFzWv3eL
- JLCV6gS9w7yGkl67MhG4NmLhOcIBDXGyMq9tcbDMAIgNVULmFykUZluBG7l4XpqBL7Ej
- 1O7OVL5loOF6qAlYOMIvyTN/cEHg+T8UTVgwbF/xQdftnxMMxxOsmmLvGYL6xAQQ+VRb
- gu0g==
+ d=konsulko.com; s=google; t=1735490158; x=1736094958; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EHoxtqUVT5Pd80HY+MZpSjZca2Xxx8HVb0VO2E3pkw4=;
+ b=iimn/Yq5nsi51otCG69vpl/JfP1AduHqGvpZbgZLjJQSm56S5HF1nTOgKlekCMY+EC
+ hX55oonVvOkTjSbe8pGx0cDRRUQAyFTojqypirjri+4kyeVyIusBUfdu5lc7Nq/ttB2Y
+ eT8sPupINM7MGo50t4p4ThYpeFB9BLGFz2ZAA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735483570; x=1736088370;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JF8+fQW1RCYXPxdPB6NJ4FigNGgMPXECfdwHuShGfGY=;
- b=Jt4TKqFsbJboc30ezl4DDGfxrYeV+qrq8NkL1+utTYrBsBTSvl7JlT2Sw1wgM/5Wga
- gOjsrpKlNSuH2JmOCdqfKhtfwriuvQarO93sqeDqvZwv/h3iGosetCAPbmhd9Q/gXO/7
- kqXoH1WfDEzjYxNmGL8RInRVIoaJ0bvfR/K79UgNCT2FA7a8bbeuy0mDtVAt9K9z8PYz
- pU5L/OsaNWwyfKTe61rpkLeP1Z7PkLtlzIRxGzaJs0LIK1x6Fv/8OEJETBYLMQqBdaLt
- 4+JQsbIy37tTM038DEUSwWAMrL+MKPmSzkzLsURhKYwOKR3Pq0eRl8RbCPV9oIyLNOBq
- qHWA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcStNR/t5SacTlXPHm4cy23Yn06Ya9TRJfrh0Vv5/kpLTbkRkmAg13JH1TtT9jVMHGaWjI6G4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxlwGQsZTgy0B8Okb/5T+j8kSZg2txtcU1bbPlgV6riBk5dBCqm
- BNUKKp419XY+31dVnaH26IgOwMyZxp4bVSlj0tmkUeEGyxiWXw+Y
-X-Gm-Gg: ASbGnctpVbr3XEh8XBMggd+/L89OdTxBB/1kLUDOC8L1Kj6mUMk5Ab1j+klkkqauXeg
- nWXlLdMhGPhRNXrR7GnlheGewHpeNyf+ivCbW4DY30ywnV5t6mcIN5YMeFMLL6y0yLMe6KTSUWU
- +gjiUxC4R6orj/l+Jn8TIOW3zD1vot6I9VK8COytwM3UoN+fCjHnq6rQzKKdztfLk3+2pesK9Q+
- Z3FV+Qz03dWmzI3UP5U48+7k3ocUN5D+QWxJ/RgxDPdKRoiFAtaR4qYuBopObndKc5e5s3N9SVj
- aSBKi966MofrGMrzXOvtdlJGC2w+iJMnQvKbNqJp95yVWwiG9/xfHBWk2lbpoCsLcoh9RB4G9lO
- k
-X-Google-Smtp-Source: AGHT+IGv8vYQe8rUmwo/HkPBDteRS9r28sZfeHxo6MhDdkkeZuPpVDncHYh75rQ+UNYwiS4C1Mzv5Q==
-X-Received: by 2002:a05:6000:4810:b0:385:e961:6589 with SMTP id
- ffacd0b85a97d-38a221f13ffmr33793547f8f.20.1735483570200; 
- Sun, 29 Dec 2024 06:46:10 -0800 (PST)
-Received: from cypher.localdomain
- (7.9.7.f.b.1.3.0.b.8.f.0.9.e.0.0.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
- [2001:8b0:fb11:2681:e9:f8b:31b:f797])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-43656af6c66sm369195505e9.5.2024.12.29.06.46.09
+ d=1e100.net; s=20230601; t=1735490158; x=1736094958;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EHoxtqUVT5Pd80HY+MZpSjZca2Xxx8HVb0VO2E3pkw4=;
+ b=rF74wpO+03p6+YXIwUwUJ8hiw/gmjS6RlN2A5umba1Dn/IxCzDSHGk7XUkTASijzWk
+ hjYMgfbkhedHQ/zrpid4oCOrfqNxsWwEDtMHiny9fmrd7BneY/H9AaoUwClmtFddjqmh
+ xW8py6jDPHHBl4x4WIM4kfWQ8VLBtZTp2L0JKf69Dvz9mEhVHAUbXwl84FYtakLx6oWE
+ qBHZVVkI3quMTQ2hVwGVvvOhBgmb+dlTWM6AquFoZvDZKbX5Ik1vAUPXHEp0VC1VL4C1
+ 8BlF1njTa+25UBi7X6p3QWPpNo14QvVd+hBeVttuOvsLLVxRYOMJhDvhqW5JatyzLQO4
+ mTbQ==
+X-Gm-Message-State: AOJu0Yz3t8AcoLzQn6oaSfjcxB05s9o1sRWVmH6NoYt2QMvYRHmT8Y02
+ 6KZhtigMZltPA8hm1cACHz4FY7oK3o7EBhdlV4D9alnmLMNrxSaG9zSQ/LMzW24=
+X-Gm-Gg: ASbGncsBkMLdPZL3l3iDvc45GTAMZN/C6kJ100LphtEx3ELQVYl67E3tHkErFprVMWz
+ sYUIyxJSJG7AT9fx1Ylu5n33+97g/fSziifeR4z7JaKzvR8JxBtCyTX5dzoI5R62q1EdzuulBUz
+ dmwjr7t5Ap93Rjja8GdXW2Ev+E5iW+/8bbQO9xv8dCFDXitp4DRzJJYvdvVZ6RfxZ3JtpKE/M7n
+ C9FFCDxxRhHXZbz34XQxn2fjFnG+Q9CraPHF1Bt2mA21bLIODvsbpa9Nw==
+X-Google-Smtp-Source: AGHT+IGQisA+z4BIhJRsESo/raoOGFgq5RnEDzePYyBpUbHmxWjHgBPGi1FHAIPq1nyDrCfqzEMJEg==
+X-Received: by 2002:a05:622a:1a8d:b0:467:8378:9e8 with SMTP id
+ d75a77b69052e-46a4a8cdddemr591078911cf.17.1735490158339; 
+ Sun, 29 Dec 2024 08:35:58 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46a3eb30b97sm98210171cf.86.2024.12.29.08.35.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Dec 2024 06:46:09 -0800 (PST)
-From: Peter Robinson <pbrobinson@gmail.com>
-To: Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH] rpi: Add identifiers for the new RPi 5 series
-Date: Sun, 29 Dec 2024 14:46:05 +0000
-Message-ID: <20241229144607.1051889-1-pbrobinson@gmail.com>
-X-Mailer: git-send-email 2.47.1
+ Sun, 29 Dec 2024 08:35:56 -0800 (PST)
+Date: Sun, 29 Dec 2024 10:35:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "tudor.ambarus@linaro.org" <tudor.ambarus@linaro.org>,
+ "j-humphreys@ti.com" <j-humphreys@ti.com>, "marex@denx.de" <marex@denx.de>,
+ "Simek, Michal" <michal.simek@amd.com>,
+ "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
+ "vigneshr@ti.com" <vigneshr@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
+ "seanga2@gmail.com" <seanga2@gmail.com>,
+ "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>,
+ "sjg@chromium.org" <sjg@chromium.org>,
+ "william.zhang@broadcom.com" <william.zhang@broadcom.com>,
+ "stefan_b@posteo.net" <stefan_b@posteo.net>,
+ "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
+ "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>,
+ "p-mantena@ti.com" <p-mantena@ti.com>, "git (AMD-Xilinx)" <git@amd.com>
+Subject: Re: [PATCH v5] mtd: spi-nor: Fix the spi_nor_read() when config
+ SPI_STACKED_PARALLEL is enabled
+Message-ID: <20241229163552.GA3476@bill-the-cat>
+References: <20241227044934.2109997-1-venkatesh.abbarapu@amd.com>
+ <20241227182306.GE1505244@bill-the-cat>
+ <SA1PR12MB869745E73B63621C18E0E4D6980F2@SA1PR12MB8697.namprd12.prod.outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+5SMAfZw67wzVuSp"
+Content-Disposition: inline
+In-Reply-To: <SA1PR12MB869745E73B63621C18E0E4D6980F2@SA1PR12MB8697.namprd12.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,41 +109,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Raspberry Pi foundation have released the Raspberry
-Pi 500, CM5 an CM5 lite devices so add the assoicated
-revision identifers so we can detect them.
 
-Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
----
- board/raspberrypi/rpi/rpi.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+--+5SMAfZw67wzVuSp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-index 18be244aa79..1e43c631898 100644
---- a/board/raspberrypi/rpi/rpi.c
-+++ b/board/raspberrypi/rpi/rpi.c
-@@ -193,6 +193,21 @@ static const struct rpi_model rpi_models_new_scheme[] = {
- 		DTB_DIR "bcm2712-rpi-5-b.dtb",
- 		true,
- 	},
-+	[0x18] = {
-+		"Compute Module 5",
-+		DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb",
-+		true,
-+	},
-+	[0x19] = {
-+		"500",
-+		DTB_DIR "bcm2712-rpi-500.dtb",
-+		true,
-+	},
-+	[0x1A] = {
-+		"Compute Module 5 Lite",
-+		DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb",
-+		true,
-+	},
- };
- 
- static const struct rpi_model rpi_models_old_scheme[] = {
--- 
-2.47.1
+On Sat, Dec 28, 2024 at 04:29:39AM +0000, Abbarapu, Venkatesh wrote:
+> Hi Tom,
+>=20
+> > -----Original Message-----
+> > From: Tom Rini <trini@konsulko.com>
+> > Sent: Friday, December 27, 2024 11:53 PM
+> > To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>
+> > Cc: u-boot@lists.denx.de; tudor.ambarus@linaro.org; j-humphreys@ti.com;
+> > marex@denx.de; Simek, Michal <michal.simek@amd.com>;
+> > jagan@amarulasolutions.com; vigneshr@ti.com; u-kumar1@ti.com;
+> > seanga2@gmail.com; caleb.connolly@linaro.org; sjg@chromium.org;
+> > william.zhang@broadcom.com; stefan_b@posteo.net; quentin.schulz@cherry.=
+de;
+> > Takahiro.Kuwano@infineon.com; p-mantena@ti.com; git (AMD-Xilinx)
+> > <git@amd.com>
+> > Subject: Re: [PATCH v5] mtd: spi-nor: Fix the spi_nor_read() when config
+> > SPI_STACKED_PARALLEL is enabled
+> >=20
+> > On Fri, Dec 27, 2024 at 10:19:34AM +0530, Venkatesh Yadav Abbarapu wrot=
+e:
+> >=20
+> > > Update the spi_nor_read() function based on the config SPI_FLASH_BAR
+> > > and update the length and bank calculation by spliting the memory of
+> > > 16MB size banks only when the address width is 3byte.
+> > > Fix the read issue for 4byte address width by passing the entire
+> > > length to the read function. Also update the size when the
+> > > configuration is stacked.
+> > >
+> > > Fixes: 5d40b3d384 ("mtd: spi-nor: Add parallel and stacked memories
+> > > support")
+> > > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> >=20
+> > I don't think you've run this through CI?
+> > https://source.denx.de/u-boot/u-boot/-/jobs/984698#L289 and similar on =
+all sandbox
+> > targets, and Azure shows it too.
+> >=20
+>=20
+> Ok...Could you please run the CI on the "v3 patch" once, as this patch is=
+ entirely separated the parallel code with the default one.
+>=20
+> [PATCH v3] mtd: spi-nor: Fix the spi_nor_read() when config SPI_STACKED_P=
+ARALLEL is enabled
 
+Yes, v3 passes CI. Does the help with what you need to do for v6 then?
+
+--=20
+Tom
+
+--+5SMAfZw67wzVuSp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdxemQACgkQFHw5/5Y0
+tywHlwv6AwgypCPGTKtkejCleeDxMsYOXGrwu0D2cYgCNmTdY9bAS8VDSMq+W8F7
+jgoyHgJpxZ28tHrw4EilCqKBIORs8L2SSELevCkjeEcqxgeoR+TrNO6TfttQFc2A
+qNksoiXFC/FahXAqEYzKGsZZVofE7sJVx1GSkk1t58zxajp2QTqiXifzj0bxa3NT
+DddEtgdC0IcTf9wea3nHP+aYtkGzUDS/YoLAMTxJ9gNxhWjA1qOnNtFboUUa6nci
+5lCb+oTcWBGXoAAIlL5PkUt0fscCBaJg/aLgOifYnhOZzWBbmBsmt+H6hzE2X6+T
+OHmqpn732JHMz4YSF5wjnna2s2FCBqdXtaulArmS+TwK+VJf0EOu943ck9WSWxf4
+8c57JfGXFoOtVqEsRhPFiWoCi/d3eJiD0kKws9BFP4UoJnCCBtbBGWeYVLFkg/0V
+2rec8sMJHuUeZBOhDRUTHO5BQ5Q/LAYkp0z5FPisfpRFrhWWnJdM5/7k2wFHnA/x
+p3vGOnnr
+=dD3K
+-----END PGP SIGNATURE-----
+
+--+5SMAfZw67wzVuSp--
