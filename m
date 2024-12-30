@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F12ECE77188
-	for <u-boot@archiver.kernel.org>; Mon, 30 Dec 2024 14:36:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FFFE77188
+	for <u-boot@archiver.kernel.org>; Mon, 30 Dec 2024 14:36:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33A198069D;
+	by phobos.denx.de (Postfix) with ESMTP id AC226806CB;
 	Mon, 30 Dec 2024 15:35:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ISnaLk9J";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="O89zoLiR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27705805CD; Mon, 30 Dec 2024 04:30:57 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 2D39380583; Mon, 30 Dec 2024 04:30:57 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B3CA80583
+ by phobos.denx.de (Postfix) with ESMTPS id 97B88805CB
  for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 04:30:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+liujh2818.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id A953DA40762;
- Mon, 30 Dec 2024 03:29:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DE838C4CEDD;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8359F5C4CC7;
+ Mon, 30 Dec 2024 03:30:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B6D7EC4CED2;
  Mon, 30 Dec 2024 03:30:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1735529449;
- bh=cO2seHIyWZZhTuuaQpZaaxfABxBIYMDnrZq/1qrL+A8=;
+ bh=86C83G/Oehr21X+fNpTd3nomjei5jHJ+QACaoVRsR/4=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=ISnaLk9JshYnjfo0ebzkYr6i6VsiugSgqH+kOkYRNkzj08/7J51Sx2PmsBSAV25fm
- TW7jobGmzztJwtatn7MH8WvgspTSSMp30ayyHDblWgYp4mCpbgWDpz/4PHfRhijbJl
- 99rHuc7m1/lyLklcU31jhBNuskaAOvnEF762p81NCsq167sSi+l5rSpEQME17KRijx
- EHuEJRtkjRF5RigtPr23yJIA55M7WA81GspeJi3CP3P5j9YJjoCkoy5379LRh/E87s
- K1QojJrvaNN6ejrynzjaQ17d8l9ivNo3bSoo/UaPRpdtkpH4OVieaY2G3dNzhY7/Du
- g+zL9EwExcQZQ==
+ b=O89zoLiRiIMpGZ99NgEm+IdiHtski/ROEdAyE/+EHjliE8nRv/MYWzUMGtK5uKue4
+ 02DIJJeWC82fYBftMDBWOyelV5ISXpmaTofhkJ57cebDP/yjeLFxoWMoPqL7H/uymq
+ 2pgzIaxzehuodMzTCf3UCBRWcTLUxi4oAzgrJZ4kfcsFLdrwoxeTPMoxiy46Z+RjVV
+ i8Y0ayvM2aW8/U9d4GNLJbL3zu0XhJAASYuCVT/IbRdbdnCc47Mm2F8oxQbJS0wywd
+ nMnr6RW3h5oANmgHxigLIWoGRrD/3jUt/zAeGlhPeJeocqfq9PvnglGDL50SAhI7ZX
+ NrzFLxXt4G4ZQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id D378CE77188;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id A4BC7E77191;
  Mon, 30 Dec 2024 03:30:49 +0000 (UTC)
 From: Junhui Liu via B4 Relay <devnull+liujh2818.outlook.com@kernel.org>
-Date: Mon, 30 Dec 2024 11:30:19 +0800
-Subject: [PATCH v2 4/8] usb: dwc2: Clean up with bitfield macros
+Date: Mon, 30 Dec 2024 11:30:16 +0800
+Subject: [PATCH v2 1/8] usb: dwc2: Extract register definitions to common
+ header file
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241230-dwc2-dev-v2-4-12cd9b8a2358@outlook.com>
+Message-Id: <20241230-dwc2-dev-v2-1-12cd9b8a2358@outlook.com>
 References: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
 In-Reply-To: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
 To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
@@ -59,11 +60,11 @@ To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
 Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>, 
  Junhui Liu <liujh2818@outlook.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1735529447; l=71884;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735529447; l=52696;
  i=liujh2818@outlook.com; s=20241030; h=from:subject:message-id;
- bh=Yy/UoE/c6555cTAblCmwQneO9K3cNkjUkjP/cJ1ggUA=;
- b=grqYFzSYDBvRiUYLZQEtnN7zctUTnLCGcn5NpiqEQ8+O+taezW8ADJvtFnQkdt7VXAxhoKYGX
- v5VA3PoW/Y2Bhmx9wvad7Ab5AmrrS9vKbYVtT7cLmBA9X7Gl3Z2pK68
+ bh=uWc0jPBeTrTtaCQRoTCw704WYS1XbsBOZinDLn+WbCI=;
+ b=22p18m8hGiwzXePo0sCxh2kjCS2eujwjYF//RbOozPEMTes/jOJghtUVqTeGo66OAFQEyTDd6
+ e+UtPOaZ2HNDFXccIzL47mnbwEUcGwGtYDfDowwIyXl/vwJ1Qt3oJah
 X-Developer-Key: i=liujh2818@outlook.com; a=ed25519;
  pk=ApYwI6KD3EjynMw61RqGa6c5BGbStQnKSrbNN+aQqT4=
 X-Endpoint-Received: by B4 Relay for liujh2818@outlook.com/20241030 with
@@ -89,1659 +90,1441 @@ X-Virus-Status: Clean
 
 From: Kongyang Liu <seashell11234455@gmail.com>
 
-Use FIELD_PREP, FIELD_GET, BIT, and GENMASK macros to standardize bit
-manipulation across the DWC2 code, improving readability and
-maintainability without altering functionality.
+The same registers are accessed in both the otg and gatet drivers of
+dwc2, and these registers are repeatedly defined in these two parts.
+Extract register definitions into a common header file to reduce
+redundancy and make the code more maintainable.
 
 Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 Signed-off-by: Junhui Liu <liujh2818@outlook.com>
 ---
- drivers/usb/gadget/dwc2_udc_otg.c          |   5 +-
- drivers/usb/gadget/dwc2_udc_otg_regs.h     | 180 +++---
- drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c |  21 +-
- drivers/usb/host/dwc2.c                    | 101 ++-
- drivers/usb/host/dwc2.h                    | 993 ++++++++++-------------------
- 5 files changed, 482 insertions(+), 818 deletions(-)
+ drivers/usb/common/dwc2_core.h             | 126 ++++++++++++++++++
+ drivers/usb/gadget/dwc2_udc_otg.c          |  94 +++++++-------
+ drivers/usb/gadget/dwc2_udc_otg_regs.h     |  68 +---------
+ drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 201 +++++++++++++++--------------
+ drivers/usb/host/dwc2.c                    | 102 ++++++++-------
+ drivers/usb/host/dwc2.h                    |  58 ---------
+ 6 files changed, 332 insertions(+), 317 deletions(-)
 
+diff --git a/drivers/usb/common/dwc2_core.h b/drivers/usb/common/dwc2_core.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..26483a57e7df58e2b9fe820367e1680b9251af8d
+--- /dev/null
++++ b/drivers/usb/common/dwc2_core.h
+@@ -0,0 +1,126 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
++ *
++ */
++
++#ifndef __DWC2_CORE_H_
++#define __DWC2_CORE_H_
++
++struct dwc2_global_regs {
++	u32 gotgctl;	/* 0x000 */
++	u32 gotgint;
++	u32 gahbcfg;
++	u32 gusbcfg;
++	u32 grstctl;	/* 0x010 */
++	u32 gintsts;
++	u32 gintmsk;
++	u32 grxstsr;
++	u32 grxstsp;	/* 0x020 */
++	u32 grxfsiz;
++	u32 gnptxfsiz;
++	u32 gnptxsts;
++	u32 gi2cctl;	/* 0x030 */
++	u32 gpvndctl;
++	u32 ggpio;
++	u32 guid;
++	u32 gsnpsid;	/* 0x040 */
++	u32 ghwcfg1;
++	u32 ghwcfg2;
++	u32 ghwcfg3;
++	u32 ghwcfg4;	/* 0x050 */
++	u32 glpmcfg;
++	u32 gpwrdn;
++	u32 gdfifocfg;
++	u32 gadpctl;	/* 0x060 */
++	u32 grefclk;
++	u32 gintmsk2;
++	u32 gintsts2;
++	u8  _pad_from_0x70_to_0x100[0x100 - 0x70];
++	u32 hptxfsiz;	/* 0x100 */
++	u32 dptxfsizn[15];
++	u8  _pad_from_0x140_to_0x400[0x400 - 0x140];
++};
++
++struct dwc2_hc_regs {
++	u32 hcchar;	/* 0x500 + 0x20 * ch */
++	u32 hcsplt;
++	u32 hcint;
++	u32 hcintmsk;
++	u32 hctsiz;
++	u32 hcdma;
++	u32 reserved;
++	u32 hcdmab;
++};
++
++struct dwc2_host_regs {
++	u32 hcfg;	/* 0x400 */
++	u32 hfir;
++	u32 hfnum;
++	u32 _pad_0x40c;
++	u32 hptxsts;	/* 0x410 */
++	u32 haint;
++	u32 haintmsk;
++	u32 hflbaddr;
++	u8  _pad_from_0x420_to_0x440[0x440 - 0x420];
++	u32 hprt0;	/* 0x440 */
++	u8  _pad_from_0x444_to_0x500[0x500 - 0x444];
++	struct dwc2_hc_regs hc[16];	/* 0x500 */
++	u8  _pad_from_0x700_to_0x800[0x800 - 0x700];
++};
++
++/* Device Logical IN Endpoint-Specific Registers */
++struct dwc2_dev_in_endp {
++	u32 diepctl;	/* 0x900 + 0x20 * ep */
++	u32 reserved0;
++	u32 diepint;
++	u32 reserved1;
++	u32 dieptsiz;
++	u32 diepdma;
++	u32 reserved2;
++	u32 diepdmab;
++};
++
++/* Device Logical OUT Endpoint-Specific Registers */
++struct dwc2_dev_out_endp {
++	u32 doepctl;	/* 0xB00 + 0x20 * ep */
++	u32 reserved0;
++	u32 doepint;
++	u32 reserved1;
++	u32 doeptsiz;
++	u32 doepdma;
++	u32 reserved2;
++	u32 doepdmab;
++};
++
++struct dwc2_device_regs {
++	u32 dcfg;	/* 0x800 */
++	u32 dctl;
++	u32 dsts;
++	u32 _pad_0x80c;
++	u32 diepmsk;	/* 0x810 */
++	u32 doepmsk;
++	u32 daint;
++	u32 daintmsk;
++	u32 dtknqr1;	/* 0x820 */
++	u32 dtknqr2;
++	u32 dvbusdis;
++	u32 dvbuspulse;
++	u32 dtknqr3;	/* 0x830 */
++	u32 dtknqr4;
++	u8  _pad_from_0x838_to_0x900[0x900 - 0x838];
++	struct dwc2_dev_in_endp  in_endp[16];	/* 0x900 */
++	struct dwc2_dev_out_endp out_endp[16];	/* 0xB00 */
++};
++
++struct dwc2_core_regs {
++	struct dwc2_global_regs  global_regs;	/* 0x000 */
++	struct dwc2_host_regs    host_regs;	/* 0x400 */
++	struct dwc2_device_regs  device_regs;	/* 0x800 */
++	u8  _pad_from_0xd00_to_0xe00[0xe00 - 0xd00];
++	u32 pcgcctl;				/* 0xe00 */
++	u8  _pad_from_0xe04_to_0x1000[0x1000 - 0xe04];
++	u8  ep_fifo[16][0x1000];		/* 0x1000 */
++};
++
++#endif /* __DWC2_CORE_H_ */
 diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-index c3dee8771e6c98692dd2ed6b50ca3c6ea21782af..2289dcc9c325a793ff86940625794066463b4083 100644
+index 7e9dd6f4268d3d80bf0572d71e267fbd26ce1516..c3dee8771e6c98692dd2ed6b50ca3c6ea21782af 100644
 --- a/drivers/usb/gadget/dwc2_udc_otg.c
 +++ b/drivers/usb/gadget/dwc2_udc_otg.c
-@@ -29,6 +29,7 @@
- #include <linux/delay.h>
- #include <linux/printk.h>
+@@ -45,6 +45,7 @@
  
-+#include <linux/bitfield.h>
- #include <linux/errno.h>
- #include <linux/list.h>
+ #include <power/regulator.h>
  
-@@ -526,8 +527,8 @@ static void reconfig_usbd(struct dwc2_udc *dev)
++#include "../common/dwc2_core.h"
+ #include "dwc2_udc_otg_regs.h"
+ #include "dwc2_udc_otg_priv.h"
+ 
+@@ -154,11 +155,11 @@ static struct usb_ep_ops dwc2_ep_ops = {
+ 
+ /***********************************************************/
+ 
+-struct dwc2_usbotg_reg *reg;
++struct dwc2_core_regs *reg;
+ 
+ bool dfu_usb_get_reset(void)
+ {
+-	return !!(readl(&reg->gintsts) & INT_RESET);
++	return !!(readl(&reg->global_regs.gintsts) & INT_RESET);
+ }
+ 
+ __weak void otg_phy_init(struct dwc2_udc *dev) {}
+@@ -229,7 +230,7 @@ static int udc_enable(struct dwc2_udc *dev)
+ 
+ 	debug_cond(DEBUG_SETUP != 0,
+ 		   "DWC2 USB 2.0 OTG Controller Core Initialized : 0x%x\n",
+-		    readl(&reg->gintmsk));
++		    readl(&reg->global_regs.gintmsk));
+ 
+ 	dev->gadget.speed = USB_SPEED_UNKNOWN;
+ 
+@@ -238,7 +239,7 @@ static int udc_enable(struct dwc2_udc *dev)
+ 
+ static int dwc2_gadget_pullup(struct usb_gadget *g, int is_on)
+ {
+-	clrsetbits_le32(&reg->dctl, SOFT_DISCONNECT,
++	clrsetbits_le32(&reg->device_regs.dctl, SOFT_DISCONNECT,
+ 			is_on ? 0 : SOFT_DISCONNECT);
+ 
+ 	return 0;
+@@ -463,12 +464,14 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ {
+ 	/* 2. Soft-reset OTG Core and then unreset again. */
+ 	int i;
+-	unsigned int uTemp = writel(CORE_SOFT_RESET, &reg->grstctl);
++	unsigned int uTemp;
+ 	uint32_t dflt_gusbcfg;
+ 	uint32_t rx_fifo_sz, tx_fifo_sz, np_tx_fifo_sz;
+ 	u32 max_hw_ep;
+ 	int pdata_hw_ep;
+ 
++	writel(CORE_SOFT_RESET, &reg->global_regs.grstctl);
++
+ 	debug("Resetting OTG controller\n");
+ 
+ 	dflt_gusbcfg =
+@@ -490,47 +493,47 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ 	if (dev->pdata->usb_gusbcfg)
+ 		dflt_gusbcfg = dev->pdata->usb_gusbcfg;
+ 
+-	writel(dflt_gusbcfg, &reg->gusbcfg);
++	writel(dflt_gusbcfg, &reg->global_regs.gusbcfg);
+ 
+ 	/* 3. Put the OTG device core in the disconnected state.*/
+-	uTemp = readl(&reg->dctl);
++	uTemp = readl(&reg->device_regs.dctl);
+ 	uTemp |= SOFT_DISCONNECT;
+-	writel(uTemp, &reg->dctl);
++	writel(uTemp, &reg->device_regs.dctl);
+ 
+ 	udelay(20);
+ 
+ 	/* 4. Make the OTG device core exit from the disconnected state.*/
+-	uTemp = readl(&reg->dctl);
++	uTemp = readl(&reg->device_regs.dctl);
+ 	uTemp = uTemp & ~SOFT_DISCONNECT;
+-	writel(uTemp, &reg->dctl);
++	writel(uTemp, &reg->device_regs.dctl);
+ 
+ 	/* 5. Configure OTG Core to initial settings of device mode.*/
+ 	/* [][1: full speed(30Mhz) 0:high speed]*/
+-	writel(EP_MISS_CNT(1) | DEV_SPEED_HIGH_SPEED_20, &reg->dcfg);
++	writel(EP_MISS_CNT(1) | DEV_SPEED_HIGH_SPEED_20, &reg->device_regs.dcfg);
+ 
+ 	mdelay(1);
+ 
+ 	/* 6. Unmask the core interrupts*/
+-	writel(GINTMSK_INIT, &reg->gintmsk);
++	writel(GINTMSK_INIT, &reg->global_regs.gintmsk);
+ 
+ 	/* 7. Set NAK bit of EP0, EP1, EP2*/
+-	writel(DEPCTL_EPDIS|DEPCTL_SNAK, &reg->out_endp[EP0_CON].doepctl);
+-	writel(DEPCTL_EPDIS|DEPCTL_SNAK, &reg->in_endp[EP0_CON].diepctl);
++	writel(DEPCTL_EPDIS | DEPCTL_SNAK, &reg->device_regs.out_endp[EP0_CON].doepctl);
++	writel(DEPCTL_EPDIS | DEPCTL_SNAK, &reg->device_regs.in_endp[EP0_CON].diepctl);
+ 
+ 	for (i = 1; i < DWC2_MAX_ENDPOINTS; i++) {
+-		writel(DEPCTL_EPDIS|DEPCTL_SNAK, &reg->out_endp[i].doepctl);
+-		writel(DEPCTL_EPDIS|DEPCTL_SNAK, &reg->in_endp[i].diepctl);
++		writel(DEPCTL_EPDIS | DEPCTL_SNAK, &reg->device_regs.out_endp[i].doepctl);
++		writel(DEPCTL_EPDIS | DEPCTL_SNAK, &reg->device_regs.in_endp[i].diepctl);
  	}
  
  	/* 8. Unmask EPO interrupts*/
--	writel(((1 << EP0_CON) << DAINT_OUT_BIT)
--	       | (1 << EP0_CON), &reg->device_regs.daintmsk);
-+	writel(FIELD_PREP(DAINT_OUTEP_MASK, BIT(EP0_CON)) |
-+	       FIELD_PREP(DAINT_INEP_MASK, BIT(EP0_CON)), &reg->device_regs.daintmsk);
+ 	writel(((1 << EP0_CON) << DAINT_OUT_BIT)
+-	       | (1 << EP0_CON), &reg->daintmsk);
++	       | (1 << EP0_CON), &reg->device_regs.daintmsk);
  
  	/* 9. Unmask device OUT EP common interrupts*/
- 	writel(DOEPMSK_INIT, &reg->device_regs.doepmsk);
+-	writel(DOEPMSK_INIT, &reg->doepmsk);
++	writel(DOEPMSK_INIT, &reg->device_regs.doepmsk);
+ 
+ 	/* 10. Unmask device IN EP common interrupts*/
+-	writel(DIEPMSK_INIT, &reg->diepmsk);
++	writel(DIEPMSK_INIT, &reg->device_regs.diepmsk);
+ 
+ 	rx_fifo_sz = RX_FIFO_SIZE;
+ 	np_tx_fifo_sz = NPTX_FIFO_SIZE;
+@@ -544,14 +547,14 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ 		tx_fifo_sz = dev->pdata->tx_fifo_sz;
+ 
+ 	/* 11. Set Rx FIFO Size (in 32-bit words) */
+-	writel(rx_fifo_sz, &reg->grxfsiz);
++	writel(rx_fifo_sz, &reg->global_regs.grxfsiz);
+ 
+ 	/* 12. Set Non Periodic Tx FIFO Size */
+ 	writel((np_tx_fifo_sz << 16) | rx_fifo_sz,
+-	       &reg->gnptxfsiz);
++	       &reg->global_regs.gnptxfsiz);
+ 
+ 	/* retrieve the number of IN Endpoints (excluding ep0) */
+-	max_hw_ep = (readl(&reg->ghwcfg4) & GHWCFG4_NUM_IN_EPS_MASK) >>
++	max_hw_ep = (readl(&reg->global_regs.ghwcfg4) & GHWCFG4_NUM_IN_EPS_MASK) >>
+ 		    GHWCFG4_NUM_IN_EPS_SHIFT;
+ 	pdata_hw_ep = dev->pdata->tx_fifo_sz_nb;
+ 
+@@ -565,27 +568,27 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ 			tx_fifo_sz = dev->pdata->tx_fifo_sz_array[i];
+ 
+ 		writel((rx_fifo_sz + np_tx_fifo_sz + (tx_fifo_sz * i)) |
+-			tx_fifo_sz << 16, &reg->dieptxf[i]);
++			tx_fifo_sz << 16, &reg->global_regs.dptxfsizn[i]);
+ 	}
+ 	/* Flush the RX FIFO */
+-	writel(RX_FIFO_FLUSH, &reg->grstctl);
+-	while (readl(&reg->grstctl) & RX_FIFO_FLUSH)
++	writel(RX_FIFO_FLUSH, &reg->global_regs.grstctl);
++	while (readl(&reg->global_regs.grstctl) & RX_FIFO_FLUSH)
+ 		debug("%s: waiting for DWC2_UDC_OTG_GRSTCTL\n", __func__);
+ 
+ 	/* Flush all the Tx FIFO's */
+-	writel(TX_FIFO_FLUSH_ALL, &reg->grstctl);
+-	writel(TX_FIFO_FLUSH_ALL | TX_FIFO_FLUSH, &reg->grstctl);
+-	while (readl(&reg->grstctl) & TX_FIFO_FLUSH)
++	writel(TX_FIFO_FLUSH_ALL, &reg->global_regs.grstctl);
++	writel(TX_FIFO_FLUSH_ALL | TX_FIFO_FLUSH, &reg->global_regs.grstctl);
++	while (readl(&reg->global_regs.grstctl) & TX_FIFO_FLUSH)
+ 		debug("%s: waiting for DWC2_UDC_OTG_GRSTCTL\n", __func__);
+ 
+ 	/* 13. Clear NAK bit of EP0, EP1, EP2*/
+ 	/* For Slave mode*/
+ 	/* EP0: Control OUT */
+ 	writel(DEPCTL_EPDIS | DEPCTL_CNAK,
+-	       &reg->out_endp[EP0_CON].doepctl);
++	       &reg->device_regs.out_endp[EP0_CON].doepctl);
+ 
+ 	/* 14. Initialize OTG Link Core.*/
+-	writel(GAHBCFG_INIT, &reg->gahbcfg);
++	writel(GAHBCFG_INIT, &reg->global_regs.gahbcfg);
+ }
+ 
+ static void set_max_pktsize(struct dwc2_udc *dev, enum usb_device_speed speed)
+@@ -610,12 +613,12 @@ static void set_max_pktsize(struct dwc2_udc *dev, enum usb_device_speed speed)
+ 		dev->ep[i].ep.maxpacket = ep_fifo_size;
+ 
+ 	/* EP0 - Control IN (64 bytes)*/
+-	ep_ctrl = readl(&reg->in_endp[EP0_CON].diepctl);
+-	writel(ep_ctrl|(0<<0), &reg->in_endp[EP0_CON].diepctl);
++	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
++	writel(ep_ctrl | (0 << 0), &reg->device_regs.in_endp[EP0_CON].diepctl);
+ 
+ 	/* EP0 - Control OUT (64 bytes)*/
+-	ep_ctrl = readl(&reg->out_endp[EP0_CON].doepctl);
+-	writel(ep_ctrl|(0<<0), &reg->out_endp[EP0_CON].doepctl);
++	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
++	writel(ep_ctrl | (0 << 0), &reg->device_regs.out_endp[EP0_CON].doepctl);
+ }
+ 
+ static int dwc2_ep_enable(struct usb_ep *_ep,
+@@ -904,7 +907,7 @@ int dwc2_udc_probe(struct dwc2_plat_otg_data *pdata)
+ 
+ 	dev->pdata = pdata;
+ 
+-	reg = (struct dwc2_usbotg_reg *)pdata->regs_otg;
++	reg = (struct dwc2_core_regs *)pdata->regs_otg;
+ 
+ 	dev->gadget.is_dualspeed = 1;	/* Hack only*/
+ 	dev->gadget.is_otg = 0;
+@@ -932,8 +935,8 @@ int dwc2_udc_probe(struct dwc2_plat_otg_data *pdata)
+ 
+ int dwc2_udc_handle_interrupt(void)
+ {
+-	u32 intr_status = readl(&reg->gintsts);
+-	u32 gintmsk = readl(&reg->gintmsk);
++	u32 intr_status = readl(&reg->global_regs.gintsts);
++	u32 gintmsk = readl(&reg->global_regs.gintmsk);
+ 
+ 	if (intr_status & gintmsk)
+ 		return dwc2_udc_irq(1, (void *)the_controller);
+@@ -1087,8 +1090,8 @@ static int dwc2_udc_otg_probe(struct udevice *dev)
+ {
+ 	struct dwc2_plat_otg_data *plat = dev_get_plat(dev);
+ 	struct dwc2_priv_data *priv = dev_get_priv(dev);
+-	struct dwc2_usbotg_reg *usbotg_reg =
+-		(struct dwc2_usbotg_reg *)plat->regs_otg;
++	struct dwc2_core_reg *usbotg_reg =
++		(struct dwc2_core_reg *)plat->regs_otg;
+ 	int ret;
+ 
+ 	ret = dwc2_udc_otg_clk_init(dev, &priv->clks);
+@@ -1123,21 +1126,22 @@ static int dwc2_udc_otg_probe(struct udevice *dev)
+ 		if (plat->force_b_session_valid &&
+ 		    !plat->force_vbus_detection) {
+ 			/* Override VBUS detection: enable then value*/
+-			setbits_le32(&usbotg_reg->gotgctl, VB_VALOEN);
+-			setbits_le32(&usbotg_reg->gotgctl, VB_VALOVAL);
++			setbits_le32(&usbotg_reg->global_regs.gotgctl, VB_VALOEN);
++			setbits_le32(&usbotg_reg->global_regs.gotgctl, VB_VALOVAL);
+ 		} else {
+ 			/* Enable VBUS sensing */
+-			setbits_le32(&usbotg_reg->ggpio,
++			setbits_le32(&usbotg_reg->global_regs.ggpio,
+ 				     GGPIO_STM32_OTG_GCCFG_VBDEN);
+ 		}
+ 		if (plat->force_b_session_valid) {
+ 			/* Override B session bits: enable then value */
+-			setbits_le32(&usbotg_reg->gotgctl, A_VALOEN | B_VALOEN);
+-			setbits_le32(&usbotg_reg->gotgctl,
++			setbits_le32(&usbotg_reg->global_regs.gotgctl,
++				     A_VALOEN | B_VALOEN);
++			setbits_le32(&usbotg_reg->global_regs.gotgctl,
+ 				     A_VALOVAL | B_VALOVAL);
+ 		} else {
+ 			/* Enable ID detection */
+-			setbits_le32(&usbotg_reg->ggpio,
++			setbits_le32(&usbotg_reg->global_regs.ggpio,
+ 				     GGPIO_STM32_OTG_GCCFG_IDEN);
+ 		}
+ 	}
 diff --git a/drivers/usb/gadget/dwc2_udc_otg_regs.h b/drivers/usb/gadget/dwc2_udc_otg_regs.h
-index 198ba7a7c37d05dca084ef017534265f5fb5fd70..33359ba56f7864525fb435ab52f2b21538e4647f 100644
+index 01056fab1c21a136fcf75d9b89f397df1aa869f3..198ba7a7c37d05dca084ef017534265f5fb5fd70 100644
 --- a/drivers/usb/gadget/dwc2_udc_otg_regs.h
 +++ b/drivers/usb/gadget/dwc2_udc_otg_regs.h
-@@ -50,27 +50,26 @@ struct dwc2_usbotg_phy {
- #define GBL_INT_MASK			(0<<0)
+@@ -10,80 +10,14 @@
+ #ifndef __ASM_ARCH_REGS_USB_OTG_HS_H
+ #define __ASM_ARCH_REGS_USB_OTG_HS_H
  
- /* DWC2_UDC_OTG_GRSTCTL */
--#define AHB_MASTER_IDLE		(1u<<31)
--#define CORE_SOFT_RESET		(0x1<<0)
-+#define AHB_MASTER_IDLE			(1u<<31)
-+#define CORE_SOFT_RESET			(0x1<<0)
+-/* USB2.0 OTG Controller register */
+ #include <linux/bitops.h>
++
+ struct dwc2_usbotg_phy {
+ 	u32 phypwr;
+ 	u32 phyclk;
+ 	u32 rstcon;
+ };
  
- /* DWC2_UDC_OTG_GINTSTS/DWC2_UDC_OTG_GINTMSK core interrupt register */
--#define INT_RESUME			(1u<<31)
--#define INT_DISCONN			(0x1<<29)
--#define INT_CONN_ID_STS_CNG		(0x1<<28)
--#define INT_OUT_EP			(0x1<<19)
--#define INT_IN_EP			(0x1<<18)
--#define INT_ENUMDONE			(0x1<<13)
--#define INT_RESET			(0x1<<12)
--#define INT_SUSPEND			(0x1<<11)
--#define INT_EARLY_SUSPEND		(0x1<<10)
--#define INT_NP_TX_FIFO_EMPTY		(0x1<<5)
--#define INT_RX_FIFO_NOT_EMPTY		(0x1<<4)
--#define INT_SOF			(0x1<<3)
--#define INT_OTG			(0x1<<2)
--#define INT_DEV_MODE			(0x0<<0)
--#define INT_HOST_MODE			(0x1<<1)
--#define INT_GOUTNakEff			(0x01<<7)
--#define INT_GINNakEff			(0x01<<6)
-+#define INT_RESUME			BIT(31)
-+#define INT_DISCONN			BIT(29)
-+#define INT_CONN_ID_STS_CNG		BIT(28)
-+#define INT_OUT_EP			BIT(19)
-+#define INT_IN_EP			BIT(18)
-+#define INT_ENUMDONE			BIT(13)
-+#define INT_RESET			BIT(12)
-+#define INT_SUSPEND			BIT(11)
-+#define INT_EARLY_SUSPEND		BIT(10)
-+#define INT_GOUTNakEff			BIT(7)
-+#define INT_GINNakEff			BIT(6)
-+#define INT_NP_TX_FIFO_EMPTY		BIT(5)
-+#define INT_RX_FIFO_NOT_EMPTY		BIT(4)
-+#define INT_SOF				BIT(3)
-+#define INT_OTG				BIT(2)
-+#define INT_HOST_MODE			BIT(1)
+-/* Device Logical IN Endpoint-Specific Registers */
+-struct dwc2_dev_in_endp {
+-	u32 diepctl;
+-	u8  res1[4];
+-	u32 diepint;
+-	u8  res2[4];
+-	u32 dieptsiz;
+-	u32 diepdma;
+-	u8  res3[4];
+-	u32 diepdmab;
+-};
+-
+-/* Device Logical OUT Endpoint-Specific Registers */
+-struct dwc2_dev_out_endp {
+-	u32 doepctl;
+-	u8  res1[4];
+-	u32 doepint;
+-	u8  res2[4];
+-	u32 doeptsiz;
+-	u32 doepdma;
+-	u8  res3[4];
+-	u32 doepdmab;
+-};
+-
+-struct ep_fifo {
+-	u32 fifo;
+-	u8  res[4092];
+-};
+-
+-/* USB2.0 OTG Controller register */
+-struct dwc2_usbotg_reg {
+-	/* Core Global Registers */
+-	u32 gotgctl; /* OTG Control & Status */
+-	u32 gotgint; /* OTG Interrupt */
+-	u32 gahbcfg; /* Core AHB Configuration */
+-	u32 gusbcfg; /* Core USB Configuration */
+-	u32 grstctl; /* Core Reset */
+-	u32 gintsts; /* Core Interrupt */
+-	u32 gintmsk; /* Core Interrupt Mask */
+-	u32 grxstsr; /* Receive Status Debug Read/Status Read */
+-	u32 grxstsp; /* Receive Status Debug Pop/Status Pop */
+-	u32 grxfsiz; /* Receive FIFO Size */
+-	u32 gnptxfsiz; /* Non-Periodic Transmit FIFO Size */
+-	u8  res0[12];
+-	u32 ggpio;     /* 0x038 */
+-	u8  res1[20];
+-	u32 ghwcfg4; /* User HW Config4 */
+-	u8  res2[176];
+-	u32 dieptxf[15]; /* Device Periodic Transmit FIFO size register */
+-	u8  res3[1728];
+-	/* Device Configuration */
+-	u32 dcfg; /* Device Configuration Register */
+-	u32 dctl; /* Device Control */
+-	u32 dsts; /* Device Status */
+-	u8  res4[4];
+-	u32 diepmsk; /* Device IN Endpoint Common Interrupt Mask */
+-	u32 doepmsk; /* Device OUT Endpoint Common Interrupt Mask */
+-	u32 daint; /* Device All Endpoints Interrupt */
+-	u32 daintmsk; /* Device All Endpoints Interrupt Mask */
+-	u8  res5[224];
+-	struct dwc2_dev_in_endp in_endp[16];
+-	struct dwc2_dev_out_endp out_endp[16];
+-	u8  res6[768];
+-	struct ep_fifo ep[16];
+-};
+-
+ /*===================================================================== */
+ /*definitions related to CSR setting */
  
- #define FULL_SPEED_CONTROL_PKT_SIZE	8
- #define FULL_SPEED_BULK_PKT_SIZE	64
-@@ -78,15 +77,15 @@ struct dwc2_usbotg_phy {
- #define HIGH_SPEED_CONTROL_PKT_SIZE	64
- #define HIGH_SPEED_BULK_PKT_SIZE	512
- 
--#define RX_FIFO_SIZE			(1024)
--#define NPTX_FIFO_SIZE			(1024)
--#define PTX_FIFO_SIZE			(384)
-+#define RX_FIFO_SIZE			1024
-+#define NPTX_FIFO_SIZE			1024
-+#define PTX_FIFO_SIZE			384
- 
--#define DEPCTL_TXFNUM_0		(0x0<<22)
--#define DEPCTL_TXFNUM_1		(0x1<<22)
--#define DEPCTL_TXFNUM_2		(0x2<<22)
--#define DEPCTL_TXFNUM_3		(0x3<<22)
--#define DEPCTL_TXFNUM_4		(0x4<<22)
-+#define DEPCTL_TXFNUM_0			(0x0<<22)
-+#define DEPCTL_TXFNUM_1			(0x1<<22)
-+#define DEPCTL_TXFNUM_2			(0x2<<22)
-+#define DEPCTL_TXFNUM_3			(0x3<<22)
-+#define DEPCTL_TXFNUM_4			(0x4<<22)
- 
- /* Enumeration speed */
- #define USB_HIGH_30_60MHZ		(0x0<<1)
-@@ -96,38 +95,36 @@ struct dwc2_usbotg_phy {
- 
- /* DWC2_UDC_OTG_GRXSTSP STATUS */
- #define OUT_PKT_RECEIVED		(0x2<<17)
--#define OUT_TRANSFER_COMPLELTED	(0x3<<17)
-+#define OUT_TRANSFER_COMPLELTED		(0x3<<17)
- #define SETUP_TRANSACTION_COMPLETED	(0x4<<17)
- #define SETUP_PKT_RECEIVED		(0x6<<17)
- #define GLOBAL_OUT_NAK			(0x1<<17)
- 
- /* DWC2_UDC_OTG_DCTL device control register */
- #define NORMAL_OPERATION		(0x1<<0)
--#define SOFT_DISCONNECT		(0x1<<1)
-+#define SOFT_DISCONNECT			(0x1<<1)
- 
- /* DWC2_UDC_OTG_DAINT device all endpoint interrupt register */
--#define DAINT_OUT_BIT			(16)
--#define DAINT_MASK			(0xFFFF)
-+#define DAINT_OUTEP_MASK		GENMASK(31, 16)
-+#define DAINT_INEP_MASK			GENMASK(15, 0)
- 
- /* DWC2_UDC_OTG_DIEPCTL0/DOEPCTL0 device
-    control IN/OUT endpoint 0 control register */
--#define DEPCTL_EPENA			(0x1<<31)
--#define DEPCTL_EPDIS			(0x1<<30)
--#define DEPCTL_SETD1PID		(0x1<<29)
--#define DEPCTL_SETD0PID		(0x1<<28)
--#define DEPCTL_SNAK			(0x1<<27)
--#define DEPCTL_CNAK			(0x1<<26)
--#define DEPCTL_STALL			(0x1<<21)
--#define DEPCTL_TYPE_BIT		(18)
--#define DEPCTL_TYPE_MASK		(0x3<<18)
-+#define DEPCTL_EPENA			BIT(31)
-+#define DEPCTL_EPDIS			BIT(30)
-+#define DEPCTL_SETD1PID			BIT(29)
-+#define DEPCTL_SETD0PID			BIT(28)
-+#define DEPCTL_SNAK			BIT(27)
-+#define DEPCTL_CNAK			BIT(26)
-+#define DEPCTL_STALL			BIT(21)
-+#define DEPCTL_TYPE_MASK		GENMASK(19, 18)
- #define DEPCTL_CTRL_TYPE		(0x0<<18)
--#define DEPCTL_ISO_TYPE		(0x1<<18)
-+#define DEPCTL_ISO_TYPE			(0x1<<18)
- #define DEPCTL_BULK_TYPE		(0x2<<18)
- #define DEPCTL_INTR_TYPE		(0x3<<18)
--#define DEPCTL_USBACTEP		(0x1<<15)
--#define DEPCTL_NEXT_EP_BIT		(11)
--#define DEPCTL_MPS_BIT			(0)
--#define DEPCTL_MPS_MASK		(0x7FF)
-+#define DEPCTL_USBACTEP			BIT(15)
-+#define DEPCTL_NEXT_EP_MASK		GENMASK(14, 11)
-+#define DEPCTL_MPS_MASK			GENMASK(10, 0)
- 
- #define DEPCTL0_MPS_64			(0x0<<0)
- #define DEPCTL0_MPS_32			(0x1<<0)
-@@ -141,56 +138,56 @@ struct dwc2_usbotg_phy {
- /* DWC2_UDC_OTG_DIEPMSK/DOEPMSK device IN/OUT endpoint
-    common interrupt mask register */
- /* DWC2_UDC_OTG_DIEPINTn/DOEPINTn device IN/OUT endpoint interrupt register */
--#define BACK2BACK_SETUP_RECEIVED	(0x1<<6)
--#define INTKNEPMIS			(0x1<<5)
--#define INTKN_TXFEMP			(0x1<<4)
--#define NON_ISO_IN_EP_TIMEOUT		(0x1<<3)
--#define CTRL_OUT_EP_SETUP_PHASE_DONE	(0x1<<3)
--#define AHB_ERROR			(0x1<<2)
--#define EPDISBLD			(0x1<<1)
--#define TRANSFER_DONE			(0x1<<0)
-+#define BACK2BACK_SETUP_RECEIVED	BIT(6)
-+#define INTKNEPMIS			BIT(5)
-+#define INTKN_TXFEMP			BIT(4)
-+#define NON_ISO_IN_EP_TIMEOUT		BIT(3)
-+#define CTRL_OUT_EP_SETUP_PHASE_DONE	BIT(3)
-+#define AHB_ERROR			BIT(2)
-+#define EPDISBLD			BIT(1)
-+#define TRANSFER_DONE			BIT(0)
- 
--#define USB_PHY_CTRL_EN0                (0x1 << 0)
-+#define USB_PHY_CTRL_EN0		(0x1 << 0)
- 
- /* OPHYPWR */
--#define PHY_0_SLEEP                     (0x1 << 5)
--#define OTG_DISABLE_0                   (0x1 << 4)
--#define ANALOG_PWRDOWN                  (0x1 << 3)
--#define FORCE_SUSPEND_0                 (0x1 << 0)
-+#define PHY_0_SLEEP			(0x1 << 5)
-+#define OTG_DISABLE_0			(0x1 << 4)
-+#define ANALOG_PWRDOWN			(0x1 << 3)
-+#define FORCE_SUSPEND_0			(0x1 << 0)
- 
- /* URSTCON */
--#define HOST_SW_RST                     (0x1 << 4)
--#define PHY_SW_RST1                     (0x1 << 3)
--#define PHYLNK_SW_RST                   (0x1 << 2)
--#define LINK_SW_RST                     (0x1 << 1)
--#define PHY_SW_RST0                     (0x1 << 0)
-+#define HOST_SW_RST			(0x1 << 4)
-+#define PHY_SW_RST1			(0x1 << 3)
-+#define PHYLNK_SW_RST			(0x1 << 2)
-+#define LINK_SW_RST			(0x1 << 1)
-+#define PHY_SW_RST0			(0x1 << 0)
- 
- /* OPHYCLK */
--#define COMMON_ON_N1                    (0x1 << 7)
--#define COMMON_ON_N0                    (0x1 << 4)
--#define ID_PULLUP0                      (0x1 << 2)
--#define CLK_SEL_24MHZ                   (0x3 << 0)
--#define CLK_SEL_12MHZ                   (0x2 << 0)
--#define CLK_SEL_48MHZ                   (0x0 << 0)
-+#define COMMON_ON_N1			(0x1 << 7)
-+#define COMMON_ON_N0			(0x1 << 4)
-+#define ID_PULLUP0			(0x1 << 2)
-+#define CLK_SEL_24MHZ			(0x3 << 0)
-+#define CLK_SEL_12MHZ			(0x2 << 0)
-+#define CLK_SEL_48MHZ			(0x0 << 0)
- 
- #define EXYNOS4X12_ID_PULLUP0		(0x01 << 3)
--#define EXYNOS4X12_COMMON_ON_N0	(0x01 << 4)
-+#define EXYNOS4X12_COMMON_ON_N0		(0x01 << 4)
- #define EXYNOS4X12_CLK_SEL_12MHZ	(0x02 << 0)
- #define EXYNOS4X12_CLK_SEL_24MHZ	(0x05 << 0)
- 
- /* Device Configuration Register DCFG */
--#define DEV_SPEED_HIGH_SPEED_20         (0x0 << 0)
--#define DEV_SPEED_FULL_SPEED_20         (0x1 << 0)
--#define DEV_SPEED_LOW_SPEED_11          (0x2 << 0)
--#define DEV_SPEED_FULL_SPEED_11         (0x3 << 0)
--#define EP_MISS_CNT(x)                  (x << 18)
--#define DEVICE_ADDRESS(x)               (x << 4)
-+#define DEV_SPEED_HIGH_SPEED_20		(0x0 << 0)
-+#define DEV_SPEED_FULL_SPEED_20		(0x1 << 0)
-+#define DEV_SPEED_LOW_SPEED_11		(0x2 << 0)
-+#define DEV_SPEED_FULL_SPEED_11		(0x3 << 0)
-+#define EP_MISS_CNT(x)			(x << 18)
-+#define DEVICE_ADDRESS(x)		(x << 4)
- 
- /* Core Reset Register (GRSTCTL) */
--#define TX_FIFO_FLUSH                   (0x1 << 5)
--#define RX_FIFO_FLUSH                   (0x1 << 4)
--#define TX_FIFO_NUMBER(x)               (x << 6)
--#define TX_FIFO_FLUSH_ALL               TX_FIFO_NUMBER(0x10)
-+#define TX_FIFO_FLUSH			(0x1 << 5)
-+#define RX_FIFO_FLUSH			(0x1 << 4)
-+#define TX_FIFO_NUMBER(x)		(x << 6)
-+#define TX_FIFO_FLUSH_ALL		TX_FIFO_NUMBER(0x10)
- 
- /* Masks definitions */
- #define GINTMSK_INIT	(INT_OUT_EP | INT_IN_EP | INT_RESUME | INT_ENUMDONE\
-@@ -201,29 +198,28 @@ struct dwc2_usbotg_phy {
- 			| GBL_INT_UNMASK)
- 
- /* Device Endpoint X Transfer Size Register (DIEPTSIZX) */
--#define DIEPT_SIZ_PKT_CNT(x)                      (x << 19)
--#define DIEPT_SIZ_XFER_SIZE(x)                    (x << 0)
-+#define DIEPT_SIZ_PKT_CNT(x)		(x << 19)
-+#define DIEPT_SIZ_XFER_SIZE(x)		(x << 0)
- 
- /* Device OUT Endpoint X Transfer Size Register (DOEPTSIZX) */
--#define DOEPT_SIZ_PKT_CNT(x)                      (x << 19)
--#define DOEPT_SIZ_XFER_SIZE(x)                    (x << 0)
--#define DOEPT_SIZ_XFER_SIZE_MAX_EP0               (0x7F << 0)
--#define DOEPT_SIZ_XFER_SIZE_MAX_EP                (0x7FFF << 0)
-+#define DOEPT_SIZ_PKT_CNT(x)		(x << 19)
-+#define DOEPT_SIZ_XFER_SIZE(x)		(x << 0)
-+#define DOEPT_SIZ_XFER_SIZE_MAX_EP0	(0x7F << 0)
-+#define DOEPT_SIZ_XFER_SIZE_MAX_EP	(0x7FFF << 0)
- 
- /* Device Endpoint-N Control Register (DIEPCTLn/DOEPCTLn) */
--#define DIEPCTL_TX_FIFO_NUM(x)                    (x << 22)
--#define DIEPCTL_TX_FIFO_NUM_MASK                  (~DIEPCTL_TX_FIFO_NUM(0xF))
-+#define DIEPCTL_TX_FIFO_NUM_MASK	GENMASK(25, 22)
- 
- /* Device ALL Endpoints Interrupt Register (DAINT) */
--#define DAINT_IN_EP_INT(x)                        (x << 0)
--#define DAINT_OUT_EP_INT(x)                       (x << 16)
-+#define DAINT_IN_EP_INT(x)		(x << 0)
-+#define DAINT_OUT_EP_INT(x)		(x << 16)
- 
- /* User HW Config4 */
- #define GHWCFG4_NUM_IN_EPS_MASK		(0xf << 26)
- #define GHWCFG4_NUM_IN_EPS_SHIFT	26
- 
- /* OTG general core configuration register (OTG_GCCFG:0x38) for STM32MP1 */
--#define GGPIO_STM32_OTG_GCCFG_VBDEN               BIT(21)
--#define GGPIO_STM32_OTG_GCCFG_IDEN                BIT(22)
-+#define GGPIO_STM32_OTG_GCCFG_VBDEN	BIT(21)
-+#define GGPIO_STM32_OTG_GCCFG_IDEN	BIT(22)
- 
- #endif
 diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-index e2a24c53b4c8d632163484d52b4338820dcb1731..76c0b03c355b47e9523a071bd76ab8d6a17cd3ac 100644
+index c0408bae0768cd81fa50de946dee4aa08c1059f8..e2a24c53b4c8d632163484d52b4338820dcb1731 100644
 --- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
 +++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-@@ -19,6 +19,7 @@
+@@ -32,15 +32,16 @@ static inline void dwc2_udc_ep0_zlp(struct dwc2_udc *dev)
+ {
+ 	u32 ep_ctrl;
  
- #include <cpu_func.h>
- #include <log.h>
-+#include <linux/bitfield.h>
- #include <linux/bug.h>
+-	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr), &reg->in_endp[EP0_CON].diepdma);
+-	writel(DIEPT_SIZ_PKT_CNT(1), &reg->in_endp[EP0_CON].dieptsiz);
++	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
++	       &reg->device_regs.in_endp[EP0_CON].diepdma);
++	writel(DIEPT_SIZ_PKT_CNT(1), &reg->device_regs.in_endp[EP0_CON].dieptsiz);
  
- static u8 clear_feature_num;
-@@ -174,11 +175,11 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
- 	ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+-	ep_ctrl = readl(&reg->in_endp[EP0_CON].diepctl);
+-	writel(ep_ctrl|DEPCTL_EPENA|DEPCTL_CNAK,
+-	       &reg->in_endp[EP0_CON].diepctl);
++	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
++	writel(ep_ctrl | DEPCTL_EPENA | DEPCTL_CNAK,
++	       &reg->device_regs.in_endp[EP0_CON].diepctl);
+ 
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+-		__func__, readl(&reg->in_endp[EP0_CON].diepctl));
++		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+ 	dev->ep0state = WAIT_FOR_IN_COMPLETE;
+ }
+ 
+@@ -52,16 +53,17 @@ static void dwc2_udc_pre_setup(void)
+ 		   "%s : Prepare Setup packets.\n", __func__);
+ 
+ 	writel(DOEPT_SIZ_PKT_CNT(1) | sizeof(struct usb_ctrlrequest),
+-	       &reg->out_endp[EP0_CON].doeptsiz);
+-	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr), &reg->out_endp[EP0_CON].doepdma);
++	       &reg->device_regs.out_endp[EP0_CON].doeptsiz);
++	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
++	       &reg->device_regs.out_endp[EP0_CON].doepdma);
+ 
+-	ep_ctrl = readl(&reg->out_endp[EP0_CON].doepctl);
+-	writel(ep_ctrl|DEPCTL_EPENA, &reg->out_endp[EP0_CON].doepctl);
++	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
++	writel(ep_ctrl | DEPCTL_EPENA, &reg->device_regs.out_endp[EP0_CON].doepctl);
+ 
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+-		__func__, readl(&reg->in_endp[EP0_CON].diepctl));
++		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+-		__func__, readl(&reg->out_endp[EP0_CON].doepctl));
++		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
+ 
+ }
+ 
+@@ -70,25 +72,26 @@ static inline void dwc2_ep0_complete_out(void)
+ 	u32 ep_ctrl;
+ 
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+-		__func__, readl(&reg->in_endp[EP0_CON].diepctl));
++		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+-		__func__, readl(&reg->out_endp[EP0_CON].doepctl));
++		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
+ 
+ 	debug_cond(DEBUG_IN_EP,
+ 		"%s : Prepare Complete Out packet.\n", __func__);
+ 
+ 	writel(DOEPT_SIZ_PKT_CNT(1) | sizeof(struct usb_ctrlrequest),
+-	       &reg->out_endp[EP0_CON].doeptsiz);
+-	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr), &reg->out_endp[EP0_CON].doepdma);
++	       &reg->device_regs.out_endp[EP0_CON].doeptsiz);
++	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
++	       &reg->device_regs.out_endp[EP0_CON].doepdma);
+ 
+-	ep_ctrl = readl(&reg->out_endp[EP0_CON].doepctl);
+-	writel(ep_ctrl|DEPCTL_EPENA|DEPCTL_CNAK,
+-	       &reg->out_endp[EP0_CON].doepctl);
++	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
++	writel(ep_ctrl | DEPCTL_EPENA | DEPCTL_CNAK,
++	       &reg->device_regs.out_endp[EP0_CON].doepctl);
+ 
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+-		__func__, readl(&reg->in_endp[EP0_CON].diepctl));
++		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+-		__func__, readl(&reg->out_endp[EP0_CON].doepctl));
++		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
+ 
+ }
+ 
+@@ -110,25 +113,25 @@ static int setdma_rx(struct dwc2_ep *ep, struct dwc2_request *req)
+ 	else
+ 		pktcnt = (length - 1)/(ep->ep.maxpacket) + 1;
+ 
+-	ctrl =  readl(&reg->out_endp[ep_num].doepctl);
++	ctrl =  readl(&reg->device_regs.out_endp[ep_num].doepctl);
+ 
+ 	invalidate_dcache_range((unsigned long) ep->dma_buf,
+ 				(unsigned long) ep->dma_buf +
+ 				ROUND(ep->len, CONFIG_SYS_CACHELINE_SIZE));
+ 
+-	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->out_endp[ep_num].doepdma);
++	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->device_regs.out_endp[ep_num].doepdma);
+ 	writel(DOEPT_SIZ_PKT_CNT(pktcnt) | DOEPT_SIZ_XFER_SIZE(length),
+-	       &reg->out_endp[ep_num].doeptsiz);
+-	writel(DEPCTL_EPENA|DEPCTL_CNAK|ctrl, &reg->out_endp[ep_num].doepctl);
++	       &reg->device_regs.out_endp[ep_num].doeptsiz);
++	writel(DEPCTL_EPENA | DEPCTL_CNAK | ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+ 
+ 	debug_cond(DEBUG_OUT_EP != 0,
+ 		   "%s: EP%d RX DMA start : DOEPDMA = 0x%x,"
+ 		   "DOEPTSIZ = 0x%x, DOEPCTL = 0x%x\n"
+ 		   "\tbuf = 0x%p, pktcnt = %d, xfersize = %d\n",
+ 		   __func__, ep_num,
+-		   readl(&reg->out_endp[ep_num].doepdma),
+-		   readl(&reg->out_endp[ep_num].doeptsiz),
+-		   readl(&reg->out_endp[ep_num].doepctl),
++		   readl(&reg->device_regs.out_endp[ep_num].doepdma),
++		   readl(&reg->device_regs.out_endp[ep_num].doeptsiz),
++		   readl(&reg->device_regs.out_endp[ep_num].doepctl),
+ 		   buf, pktcnt, length);
+ 	return 0;
+ 
+@@ -159,16 +162,16 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
+ 		pktcnt = (length - 1)/(ep->ep.maxpacket) + 1;
+ 
+ 	/* Flush the endpoint's Tx FIFO */
+-	writel(TX_FIFO_NUMBER(ep->fifo_num), &reg->grstctl);
+-	writel(TX_FIFO_NUMBER(ep->fifo_num) | TX_FIFO_FLUSH, &reg->grstctl);
+-	while (readl(&reg->grstctl) & TX_FIFO_FLUSH)
++	writel(TX_FIFO_NUMBER(ep->fifo_num), &reg->global_regs.grstctl);
++	writel(TX_FIFO_NUMBER(ep->fifo_num) | TX_FIFO_FLUSH, &reg->global_regs.grstctl);
++	while (readl(&reg->global_regs.grstctl) & TX_FIFO_FLUSH)
+ 		;
+ 
+-	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->in_endp[ep_num].diepdma);
++	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->device_regs.in_endp[ep_num].diepdma);
+ 	writel(DIEPT_SIZ_PKT_CNT(pktcnt) | DIEPT_SIZ_XFER_SIZE(length),
+-	       &reg->in_endp[ep_num].dieptsiz);
++	       &reg->device_regs.in_endp[ep_num].dieptsiz);
+ 
+-	ctrl = readl(&reg->in_endp[ep_num].diepctl);
++	ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
  
  	/* Write the FIFO number to be used for this endpoint */
--	ctrl &= DIEPCTL_TX_FIFO_NUM_MASK;
--	ctrl |= DIEPCTL_TX_FIFO_NUM(ep->fifo_num);
-+	ctrl &= ~DIEPCTL_TX_FIFO_NUM_MASK;
-+	ctrl |= FIELD_PREP(DIEPCTL_TX_FIFO_NUM_MASK, ep->fifo_num);
- 
+ 	ctrl &= DIEPCTL_TX_FIFO_NUM_MASK;
+@@ -177,16 +180,16 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
  	/* Clear reserved (Next EP) bits */
--	ctrl = (ctrl&~(EP_MASK<<DEPCTL_NEXT_EP_BIT));
-+	ctrl &= ~DEPCTL_NEXT_EP_MASK;
+ 	ctrl = (ctrl&~(EP_MASK<<DEPCTL_NEXT_EP_BIT));
  
- 	writel(DEPCTL_EPENA|DEPCTL_CNAK|ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+-	writel(DEPCTL_EPENA|DEPCTL_CNAK|ctrl, &reg->in_endp[ep_num].diepctl);
++	writel(DEPCTL_EPENA|DEPCTL_CNAK|ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
  
-@@ -380,7 +381,7 @@ static void process_ep_in_intr(struct dwc2_udc *dev)
+ 	debug_cond(DEBUG_IN_EP,
+ 		"%s:EP%d TX DMA start : DIEPDMA0 = 0x%x,"
+ 		"DIEPTSIZ0 = 0x%x, DIEPCTL0 = 0x%x\n"
+ 		"\tbuf = 0x%p, pktcnt = %d, xfersize = %d\n",
+ 		__func__, ep_num,
+-		readl(&reg->in_endp[ep_num].diepdma),
+-		readl(&reg->in_endp[ep_num].dieptsiz),
+-		readl(&reg->in_endp[ep_num].diepctl),
++		readl(&reg->device_regs.in_endp[ep_num].diepdma),
++		readl(&reg->device_regs.in_endp[ep_num].dieptsiz),
++		readl(&reg->device_regs.in_endp[ep_num].diepctl),
+ 		buf, pktcnt, length);
+ 
+ 	return length;
+@@ -207,7 +210,7 @@ static void complete_rx(struct dwc2_udc *dev, u8 ep_num)
+ 	}
+ 
+ 	req = list_entry(ep->queue.next, struct dwc2_request, queue);
+-	ep_tsr = readl(&reg->out_endp[ep_num].doeptsiz);
++	ep_tsr = readl(&reg->device_regs.out_endp[ep_num].doeptsiz);
+ 
+ 	if (ep_num == EP0_CON)
+ 		xfer_size = (ep_tsr & DOEPT_SIZ_XFER_SIZE_MAX_EP0);
+@@ -288,7 +291,7 @@ static void complete_tx(struct dwc2_udc *dev, u8 ep_num)
+ 
+ 	req = list_entry(ep->queue.next, struct dwc2_request, queue);
+ 
+-	ep_tsr = readl(&reg->in_endp[ep_num].dieptsiz);
++	ep_tsr = readl(&reg->device_regs.in_endp[ep_num].dieptsiz);
+ 
+ 	xfer_size = ep->len;
+ 	is_short = (xfer_size < ep->ep.maxpacket);
+@@ -373,7 +376,7 @@ static void process_ep_in_intr(struct dwc2_udc *dev)
+ 	u32 ep_intr, ep_intr_status;
+ 	u8 ep_num = 0;
+ 
+-	ep_intr = readl(&reg->daint);
++	ep_intr = readl(&reg->device_regs.daint);
  	debug_cond(DEBUG_IN_EP,
  		"*** %s: EP In interrupt : DAINT = 0x%x\n", __func__, ep_intr);
  
--	ep_intr &= DAINT_MASK;
-+	ep_intr = FIELD_GET(DAINT_INEP_MASK, ep_intr);
+@@ -381,13 +384,13 @@ static void process_ep_in_intr(struct dwc2_udc *dev)
  
  	while (ep_intr) {
  		if (ep_intr & DAINT_IN_EP_INT(1)) {
-@@ -431,10 +432,10 @@ static void process_ep_out_intr(struct dwc2_udc *dev)
+-			ep_intr_status = readl(&reg->in_endp[ep_num].diepint);
++			ep_intr_status = readl(&reg->device_regs.in_endp[ep_num].diepint);
+ 			debug_cond(DEBUG_IN_EP,
+ 				   "\tEP%d-IN : DIEPINT = 0x%x\n",
+ 				   ep_num, ep_intr_status);
+ 
+ 			/* Interrupt Clear */
+-			writel(ep_intr_status, &reg->in_endp[ep_num].diepint);
++			writel(ep_intr_status, &reg->device_regs.in_endp[ep_num].diepint);
+ 
+ 			if (ep_intr_status & TRANSFER_DONE) {
+ 				complete_tx(dev, ep_num);
+@@ -420,10 +423,10 @@ static void process_ep_out_intr(struct dwc2_udc *dev)
+ 	u32 ep_intr, ep_intr_status;
+ 	u8 ep_num = 0;
+ 	u32 ep_tsr = 0, xfer_size = 0;
+-	u32 epsiz_reg = reg->out_endp[ep_num].doeptsiz;
++	u32 epsiz_reg = reg->device_regs.out_endp[ep_num].doeptsiz;
+ 	u32 req_size = sizeof(struct usb_ctrlrequest);
+ 
+-	ep_intr = readl(&reg->daint);
++	ep_intr = readl(&reg->device_regs.daint);
+ 	debug_cond(DEBUG_OUT_EP != 0,
  		   "*** %s: EP OUT interrupt : DAINT = 0x%x\n",
  		   __func__, ep_intr);
- 
--	ep_intr = (ep_intr >> DAINT_OUT_BIT) & DAINT_MASK;
-+	ep_intr = FIELD_GET(DAINT_OUTEP_MASK, ep_intr);
+@@ -432,13 +435,13 @@ static void process_ep_out_intr(struct dwc2_udc *dev)
  
  	while (ep_intr) {
--		if (ep_intr & 0x1) {
-+		if (ep_intr & BIT(EP0_CON)) {
- 			ep_intr_status = readl(&reg->device_regs.out_endp[ep_num].doepint);
+ 		if (ep_intr & 0x1) {
+-			ep_intr_status = readl(&reg->out_endp[ep_num].doepint);
++			ep_intr_status = readl(&reg->device_regs.out_endp[ep_num].doepint);
  			debug_cond(DEBUG_OUT_EP != 0,
  				   "\tEP%d-OUT : DOEPINT = 0x%x\n",
-@@ -1114,10 +1115,10 @@ static void dwc2_udc_ep_activate(struct dwc2_ep *ep)
- 	/* Read DEPCTLn register */
- 	if (ep_is_in(ep)) {
- 		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
--		daintmsk = 1 << ep_num;
-+		daintmsk = FIELD_PREP(DAINT_INEP_MASK, BIT(ep_num));
- 	} else {
- 		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
--		daintmsk = (1 << ep_num) << DAINT_OUT_BIT;
-+		daintmsk = FIELD_PREP(DAINT_OUTEP_MASK, BIT(ep_num));
+ 				   ep_num, ep_intr_status);
+ 
+ 			/* Interrupt Clear */
+-			writel(ep_intr_status, &reg->out_endp[ep_num].doepint);
++			writel(ep_intr_status, &reg->device_regs.out_endp[ep_num].doepint);
+ 
+ 			if (ep_num == 0) {
+ 				if (ep_intr_status & TRANSFER_DONE) {
+@@ -486,14 +489,14 @@ static int dwc2_udc_irq(int irq, void *_dev)
+ 
+ 	spin_lock_irqsave(&dev->lock, flags);
+ 
+-	intr_status = readl(&reg->gintsts);
+-	gintmsk = readl(&reg->gintmsk);
++	intr_status = readl(&reg->global_regs.gintsts);
++	gintmsk = readl(&reg->global_regs.gintmsk);
+ 
+ 	debug_cond(DEBUG_ISR,
+ 		  "\n*** %s : GINTSTS=0x%x(on state %s), GINTMSK : 0x%x,"
+ 		  "DAINT : 0x%x, DAINTMSK : 0x%x\n",
+ 		  __func__, intr_status, state_names[dev->ep0state], gintmsk,
+-		  readl(&reg->daint), readl(&reg->daintmsk));
++		  readl(&reg->device_regs.daint), readl(&reg->device_regs.daintmsk));
+ 
+ 	if (!intr_status) {
+ 		spin_unlock_irqrestore(&dev->lock, flags);
+@@ -503,8 +506,8 @@ static int dwc2_udc_irq(int irq, void *_dev)
+ 	if (intr_status & INT_ENUMDONE) {
+ 		debug_cond(DEBUG_ISR, "\tSpeed Detection interrupt\n");
+ 
+-		writel(INT_ENUMDONE, &reg->gintsts);
+-		usb_status = (readl(&reg->dsts) & 0x6);
++		writel(INT_ENUMDONE, &reg->global_regs.gintsts);
++		usb_status = (readl(&reg->device_regs.dsts) & 0x6);
+ 
+ 		if (usb_status & (USB_FULL_30_60MHZ | USB_FULL_48MHZ)) {
+ 			debug_cond(DEBUG_ISR,
+@@ -521,14 +524,14 @@ static int dwc2_udc_irq(int irq, void *_dev)
+ 
+ 	if (intr_status & INT_EARLY_SUSPEND) {
+ 		debug_cond(DEBUG_ISR, "\tEarly suspend interrupt\n");
+-		writel(INT_EARLY_SUSPEND, &reg->gintsts);
++		writel(INT_EARLY_SUSPEND, &reg->global_regs.gintsts);
  	}
  
- 	debug("%s: EPCTRL%d = 0x%x, ep_is_in = %d\n",
-@@ -1127,9 +1128,9 @@ static void dwc2_udc_ep_activate(struct dwc2_ep *ep)
- 	 * register. */
- 	if (!(ep_ctrl & DEPCTL_USBACTEP)) {
- 		ep_ctrl = (ep_ctrl & ~DEPCTL_TYPE_MASK) |
--			(ep->bmAttributes << DEPCTL_TYPE_BIT);
-+			FIELD_PREP(DEPCTL_TYPE_MASK, ep->bmAttributes);
- 		ep_ctrl = (ep_ctrl & ~DEPCTL_MPS_MASK) |
--			(ep->ep.maxpacket << DEPCTL_MPS_BIT);
-+			FIELD_PREP(DEPCTL_MPS_MASK, ep->ep.maxpacket);
+ 	if (intr_status & INT_SUSPEND) {
+-		usb_status = readl(&reg->dsts);
++		usb_status = readl(&reg->device_regs.dsts);
+ 		debug_cond(DEBUG_ISR,
+ 			"\tSuspend interrupt :(DSTS):0x%x\n", usb_status);
+-		writel(INT_SUSPEND, &reg->gintsts);
++		writel(INT_SUSPEND, &reg->global_regs.gintsts);
+ 
+ 		if (dev->gadget.speed != USB_SPEED_UNKNOWN
+ 		    && dev->driver) {
+@@ -538,7 +541,7 @@ static int dwc2_udc_irq(int irq, void *_dev)
+ 	}
+ 
+ 	if (intr_status & INT_OTG) {
+-		gotgint = readl(&reg->gotgint);
++		gotgint = readl(&reg->global_regs.gotgint);
+ 		debug_cond(DEBUG_ISR,
+ 			   "\tOTG interrupt: (GOTGINT):0x%x\n", gotgint);
+ 
+@@ -551,12 +554,12 @@ static int dwc2_udc_irq(int irq, void *_dev)
+ 				spin_lock_irqsave(&dev->lock, flags);
+ 			}
+ 		}
+-		writel(gotgint, &reg->gotgint);
++		writel(gotgint, &reg->global_regs.gotgint);
+ 	}
+ 
+ 	if (intr_status & INT_RESUME) {
+ 		debug_cond(DEBUG_ISR, "\tResume interrupt\n");
+-		writel(INT_RESUME, &reg->gintsts);
++		writel(INT_RESUME, &reg->global_regs.gintsts);
+ 
+ 		if (dev->gadget.speed != USB_SPEED_UNKNOWN
+ 		    && dev->driver
+@@ -567,10 +570,10 @@ static int dwc2_udc_irq(int irq, void *_dev)
+ 	}
+ 
+ 	if (intr_status & INT_RESET) {
+-		usb_status = readl(&reg->gotgctl);
++		usb_status = readl(&reg->global_regs.gotgctl);
+ 		debug_cond(DEBUG_ISR,
+ 			"\tReset interrupt - (GOTGCTL):0x%x\n", usb_status);
+-		writel(INT_RESET, &reg->gintsts);
++		writel(INT_RESET, &reg->global_regs.gintsts);
+ 
+ 		if ((usb_status & 0xc0000) == (0x3 << 18)) {
+ 			if (reset_available) {
+@@ -676,14 +679,14 @@ static int dwc2_queue(struct usb_ep *_ep, struct usb_request *_req,
+ 			req = 0;
+ 
+ 		} else if (ep_is_in(ep)) {
+-			gintsts = readl(&reg->gintsts);
++			gintsts = readl(&reg->global_regs.gintsts);
+ 			debug_cond(DEBUG_IN_EP,
+ 				   "%s: ep_is_in, DWC2_UDC_OTG_GINTSTS=0x%x\n",
+ 				   __func__, gintsts);
+ 
+ 			setdma_tx(ep, req);
+ 		} else {
+-			gintsts = readl(&reg->gintsts);
++			gintsts = readl(&reg->global_regs.gintsts);
+ 			debug_cond(DEBUG_OUT_EP != 0,
+ 				   "%s:ep_is_out, DWC2_UDC_OTG_GINTSTS=0x%x\n",
+ 				   __func__, gintsts);
+@@ -765,14 +768,14 @@ static int dwc2_fifo_read(struct dwc2_ep *ep, void *cp, int max)
+  */
+ static void udc_set_address(struct dwc2_udc *dev, unsigned char address)
+ {
+-	u32 ctrl = readl(&reg->dcfg);
+-	writel(DEVICE_ADDRESS(address) | ctrl, &reg->dcfg);
++	u32 ctrl = readl(&reg->device_regs.dcfg);
++	writel(DEVICE_ADDRESS(address) | ctrl, &reg->device_regs.dcfg);
+ 
+ 	dwc2_udc_ep0_zlp(dev);
+ 
+ 	debug_cond(DEBUG_EP0 != 0,
+ 		   "%s: USB OTG 2.0 Device address=%d, DCFG=0x%x\n",
+-		   __func__, address, readl(&reg->dcfg));
++		   __func__, address, readl(&reg->device_regs.dcfg));
+ 
+ 	dev->usb_address = address;
+ }
+@@ -783,7 +786,7 @@ static inline void dwc2_udc_ep0_set_stall(struct dwc2_ep *ep)
+ 	u32		ep_ctrl = 0;
+ 
+ 	dev = ep->dev;
+-	ep_ctrl = readl(&reg->in_endp[EP0_CON].diepctl);
++	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
+ 
+ 	/* set the disable and stall bits */
+ 	if (ep_ctrl & DEPCTL_EPENA)
+@@ -791,11 +794,11 @@ static inline void dwc2_udc_ep0_set_stall(struct dwc2_ep *ep)
+ 
+ 	ep_ctrl |= DEPCTL_STALL;
+ 
+-	writel(ep_ctrl, &reg->in_endp[EP0_CON].diepctl);
++	writel(ep_ctrl, &reg->device_regs.in_endp[EP0_CON].diepctl);
+ 
+ 	debug_cond(DEBUG_EP0 != 0,
+ 		   "%s: set ep%d stall, DIEPCTL0 = 0x%p\n",
+-		   __func__, ep_index(ep), &reg->in_endp[EP0_CON].diepctl);
++		   __func__, ep_index(ep), &reg->device_regs.in_endp[EP0_CON].diepctl);
+ 	/*
+ 	 * The application can only set this bit, and the core clears it,
+ 	 * when a SETUP token is received for this endpoint
+@@ -934,13 +937,13 @@ static int dwc2_udc_get_status(struct dwc2_udc *dev,
+ 			   (unsigned long) usb_ctrl +
+ 			   ROUND(sizeof(g_status), CONFIG_SYS_CACHELINE_SIZE));
+ 
+-	writel(phys_to_bus(usb_ctrl_dma_addr), &reg->in_endp[EP0_CON].diepdma);
++	writel(phys_to_bus(usb_ctrl_dma_addr), &reg->device_regs.in_endp[EP0_CON].diepdma);
+ 	writel(DIEPT_SIZ_PKT_CNT(1) | DIEPT_SIZ_XFER_SIZE(2),
+-	       &reg->in_endp[EP0_CON].dieptsiz);
++	       &reg->device_regs.in_endp[EP0_CON].dieptsiz);
+ 
+-	ep_ctrl = readl(&reg->in_endp[EP0_CON].diepctl);
+-	writel(ep_ctrl|DEPCTL_EPENA|DEPCTL_CNAK,
+-	       &reg->in_endp[EP0_CON].diepctl);
++	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
++	writel(ep_ctrl | DEPCTL_EPENA | DEPCTL_CNAK,
++	       &reg->device_regs.in_endp[EP0_CON].diepctl);
+ 	dev->ep0state = WAIT_FOR_NULL_COMPLETE;
+ 
+ 	return 0;
+@@ -955,17 +958,17 @@ static void dwc2_udc_set_nak(struct dwc2_ep *ep)
+ 	debug("%s: ep_num = %d, ep_type = %d\n", __func__, ep_num, ep->ep_type);
+ 
+ 	if (ep_is_in(ep)) {
+-		ep_ctrl = readl(&reg->in_endp[ep_num].diepctl);
++		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+ 		ep_ctrl |= DEPCTL_SNAK;
+-		writel(ep_ctrl, &reg->in_endp[ep_num].diepctl);
++		writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+ 		debug("%s: set NAK, DIEPCTL%d = 0x%x\n",
+-			__func__, ep_num, readl(&reg->in_endp[ep_num].diepctl));
++			__func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
+ 	} else {
+-		ep_ctrl = readl(&reg->out_endp[ep_num].doepctl);
++		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+ 		ep_ctrl |= DEPCTL_SNAK;
+-		writel(ep_ctrl, &reg->out_endp[ep_num].doepctl);
++		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+ 		debug("%s: set NAK, DOEPCTL%d = 0x%x\n",
+-		      __func__, ep_num, readl(&reg->out_endp[ep_num].doepctl));
++		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
+ 	}
+ 
+ 	return;
+@@ -980,7 +983,7 @@ static void dwc2_udc_ep_set_stall(struct dwc2_ep *ep)
+ 	debug("%s: ep_num = %d, ep_type = %d\n", __func__, ep_num, ep->ep_type);
+ 
+ 	if (ep_is_in(ep)) {
+-		ep_ctrl = readl(&reg->in_endp[ep_num].diepctl);
++		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+ 
+ 		/* set the disable and stall bits */
+ 		if (ep_ctrl & DEPCTL_EPENA)
+@@ -988,19 +991,19 @@ static void dwc2_udc_ep_set_stall(struct dwc2_ep *ep)
+ 
+ 		ep_ctrl |= DEPCTL_STALL;
+ 
+-		writel(ep_ctrl, &reg->in_endp[ep_num].diepctl);
++		writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+ 		debug("%s: set stall, DIEPCTL%d = 0x%x\n",
+-		      __func__, ep_num, readl(&reg->in_endp[ep_num].diepctl));
++		      __func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
+ 
+ 	} else {
+-		ep_ctrl = readl(&reg->out_endp[ep_num].doepctl);
++		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+ 
+ 		/* set the stall bit */
+ 		ep_ctrl |= DEPCTL_STALL;
+ 
+-		writel(ep_ctrl, &reg->out_endp[ep_num].doepctl);
++		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+ 		debug("%s: set stall, DOEPCTL%d = 0x%x\n",
+-		      __func__, ep_num, readl(&reg->out_endp[ep_num].doepctl));
++		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
+ 	}
+ 
+ 	return;
+@@ -1015,7 +1018,7 @@ static void dwc2_udc_ep_clear_stall(struct dwc2_ep *ep)
+ 	debug("%s: ep_num = %d, ep_type = %d\n", __func__, ep_num, ep->ep_type);
+ 
+ 	if (ep_is_in(ep)) {
+-		ep_ctrl = readl(&reg->in_endp[ep_num].diepctl);
++		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+ 
+ 		/* clear stall bit */
+ 		ep_ctrl &= ~DEPCTL_STALL;
+@@ -1031,12 +1034,12 @@ static void dwc2_udc_ep_clear_stall(struct dwc2_ep *ep)
+ 			ep_ctrl |= DEPCTL_SETD0PID; /* DATA0 */
+ 		}
+ 
+-		writel(ep_ctrl, &reg->in_endp[ep_num].diepctl);
++		writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+ 		debug("%s: cleared stall, DIEPCTL%d = 0x%x\n",
+-			__func__, ep_num, readl(&reg->in_endp[ep_num].diepctl));
++			__func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
+ 
+ 	} else {
+-		ep_ctrl = readl(&reg->out_endp[ep_num].doepctl);
++		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+ 
+ 		/* clear stall bit */
+ 		ep_ctrl &= ~DEPCTL_STALL;
+@@ -1046,9 +1049,9 @@ static void dwc2_udc_ep_clear_stall(struct dwc2_ep *ep)
+ 			ep_ctrl |= DEPCTL_SETD0PID; /* DATA0 */
+ 		}
+ 
+-		writel(ep_ctrl, &reg->out_endp[ep_num].doepctl);
++		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+ 		debug("%s: cleared stall, DOEPCTL%d = 0x%x\n",
+-		      __func__, ep_num, readl(&reg->out_endp[ep_num].doepctl));
++		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
+ 	}
+ 
+ 	return;
+@@ -1110,10 +1113,10 @@ static void dwc2_udc_ep_activate(struct dwc2_ep *ep)
+ 
+ 	/* Read DEPCTLn register */
+ 	if (ep_is_in(ep)) {
+-		ep_ctrl = readl(&reg->in_endp[ep_num].diepctl);
++		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+ 		daintmsk = 1 << ep_num;
+ 	} else {
+-		ep_ctrl = readl(&reg->out_endp[ep_num].doepctl);
++		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+ 		daintmsk = (1 << ep_num) << DAINT_OUT_BIT;
+ 	}
+ 
+@@ -1130,21 +1133,21 @@ static void dwc2_udc_ep_activate(struct dwc2_ep *ep)
  		ep_ctrl |= (DEPCTL_SETD0PID | DEPCTL_USBACTEP | DEPCTL_SNAK);
  
  		if (ep_is_in(ep)) {
-diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-index 954650d856a4f2e95d74e1b5716c0ebe83fa9ba8..d4245b9cb71c91adc658668dcf897bcb10366b73 100644
---- a/drivers/usb/host/dwc2.c
-+++ b/drivers/usb/host/dwc2.c
-@@ -19,6 +19,7 @@
- #include <asm/cache.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
-+#include <linux/bitfield.h>
- #include <linux/delay.h>
- #include <linux/usb/otg.h>
- #include <power/regulator.h>
-@@ -95,10 +96,8 @@ static void init_fslspclksel(struct dwc2_core_regs *regs)
+-			writel(ep_ctrl, &reg->in_endp[ep_num].diepctl);
++			writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+ 			debug("%s: USB Ative EP%d, DIEPCTRL%d = 0x%x\n",
+ 			      __func__, ep_num, ep_num,
+-			      readl(&reg->in_endp[ep_num].diepctl));
++			      readl(&reg->device_regs.in_endp[ep_num].diepctl));
+ 		} else {
+-			writel(ep_ctrl, &reg->out_endp[ep_num].doepctl);
++			writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+ 			debug("%s: USB Ative EP%d, DOEPCTRL%d = 0x%x\n",
+ 			      __func__, ep_num, ep_num,
+-			      readl(&reg->out_endp[ep_num].doepctl));
++			      readl(&reg->device_regs.out_endp[ep_num].doepctl));
+ 		}
+ 	}
  
- #ifdef DWC2_ULPI_FS_LS
- 	uint32_t hwcfg2 = readl(&regs->global_regs.ghwcfg2);
--	uint32_t hval = (ghwcfg2 & DWC2_HWCFG2_HS_PHY_TYPE_MASK) >>
--			DWC2_HWCFG2_HS_PHY_TYPE_OFFSET;
--	uint32_t fval = (ghwcfg2 & DWC2_HWCFG2_FS_PHY_TYPE_MASK) >>
--			DWC2_HWCFG2_FS_PHY_TYPE_OFFSET;
-+	uint32_t hval = FIELD_GET(GHWCFG2_HS_PHY_TYPE_MASK, ghwcfg2);
-+	uint32_t fval = FIELD_GET(GHWCFG2_FS_PHY_TYPE_MASK, ghwcfg2);
+ 	/* Unmask EP Interrtupt */
+-	writel(readl(&reg->daintmsk)|daintmsk, &reg->daintmsk);
+-	debug("%s: DAINTMSK = 0x%x\n", __func__, readl(&reg->daintmsk));
++	writel(readl(&reg->device_regs.daintmsk) | daintmsk, &reg->device_regs.daintmsk);
++	debug("%s: DAINTMSK = 0x%x\n", __func__, readl(&reg->device_regs.daintmsk));
  
- 	if (hval == 2 && fval == 1)
- 		phyclk = DWC2_HCFG_FSLSPCLKSEL_48_MHZ;	/* Full speed PHY */
-@@ -106,7 +105,7 @@ static void init_fslspclksel(struct dwc2_core_regs *regs)
- 
- 	clrsetbits_le32(&regs->host_regs.hcfg,
- 			DWC2_HCFG_FSLSPCLKSEL_MASK,
--			phyclk << DWC2_HCFG_FSLSPCLKSEL_OFFSET);
-+			FIELD_PREP(DWC2_HCFG_FSLSPCLKSEL_MASK, phyclk));
  }
  
- /*
-@@ -120,7 +119,7 @@ static void dwc_otg_flush_tx_fifo(struct udevice *dev,
+diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+index a9dbb85f4e6c5a9122108eb64f77e99758b840e8..b6c8b3d5a6bdf375f1adeb106d4832d92307f0db 100644
+--- a/drivers/usb/host/dwc2.c
++++ b/drivers/usb/host/dwc2.c
+@@ -24,6 +24,7 @@
+ #include <power/regulator.h>
+ #include <reset.h>
+ 
++#include "../common/dwc2_core.h"
+ #include "dwc2.h"
+ 
+ /* Use only HC channel 0. */
+@@ -93,7 +94,7 @@ static void init_fslspclksel(struct dwc2_core_regs *regs)
+ #endif
+ 
+ #ifdef DWC2_ULPI_FS_LS
+-	uint32_t hwcfg2 = readl(&regs->ghwcfg2);
++	uint32_t hwcfg2 = readl(&regs->global_regs.ghwcfg2);
+ 	uint32_t hval = (ghwcfg2 & DWC2_HWCFG2_HS_PHY_TYPE_MASK) >>
+ 			DWC2_HWCFG2_HS_PHY_TYPE_OFFSET;
+ 	uint32_t fval = (ghwcfg2 & DWC2_HWCFG2_FS_PHY_TYPE_MASK) >>
+@@ -120,8 +121,8 @@ static void dwc_otg_flush_tx_fifo(struct udevice *dev,
+ 	int ret;
+ 
+ 	writel(DWC2_GRSTCTL_TXFFLSH | (num << DWC2_GRSTCTL_TXFNUM_OFFSET),
+-	       &regs->grstctl);
+-	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_TXFFLSH,
++	       &regs->global_regs.grstctl);
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_TXFFLSH,
+ 				false, 1000, false);
+ 	if (ret)
+ 		dev_info(dev, "%s: Timeout!\n", __func__);
+@@ -140,8 +141,8 @@ static void dwc_otg_flush_rx_fifo(struct udevice *dev,
  {
  	int ret;
  
--	writel(DWC2_GRSTCTL_TXFFLSH | (num << DWC2_GRSTCTL_TXFNUM_OFFSET),
-+	writel(DWC2_GRSTCTL_TXFFLSH | FIELD_PREP(DWC2_GRSTCTL_TXFNUM_MASK, num),
- 	       &regs->global_regs.grstctl);
- 	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_TXFFLSH,
+-	writel(DWC2_GRSTCTL_RXFFLSH, &regs->grstctl);
+-	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_RXFFLSH,
++	writel(DWC2_GRSTCTL_RXFFLSH, &regs->global_regs.grstctl);
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_RXFFLSH,
  				false, 1000, false);
-@@ -266,18 +265,14 @@ static void dwc_otg_core_host_init(struct udevice *dev,
- 		writel(DWC2_HOST_RX_FIFO_SIZE, &regs->global_regs.grxfsiz);
+ 	if (ret)
+ 		dev_info(dev, "%s: Timeout!\n", __func__);
+@@ -160,14 +161,14 @@ static void dwc_otg_core_reset(struct udevice *dev,
+ 	int ret;
+ 
+ 	/* Wait for AHB master IDLE state. */
+-	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_AHBIDLE,
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_AHBIDLE,
+ 				true, 1000, false);
+ 	if (ret)
+ 		dev_info(dev, "%s: Timeout!\n", __func__);
+ 
+ 	/* Core Soft Reset */
+-	writel(DWC2_GRSTCTL_CSFTRST, &regs->grstctl);
+-	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_CSFTRST,
++	writel(DWC2_GRSTCTL_CSFTRST, &regs->global_regs.grstctl);
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_CSFTRST,
+ 				false, 1000, false);
+ 	if (ret)
+ 		dev_info(dev, "%s: Timeout!\n", __func__);
+@@ -260,16 +261,16 @@ static void dwc_otg_core_host_init(struct udevice *dev,
+ 
+ 	/* Configure data FIFO sizes */
+ #ifdef DWC2_ENABLE_DYNAMIC_FIFO
+-	if (readl(&regs->ghwcfg2) & DWC2_HWCFG2_DYNAMIC_FIFO) {
++	if (readl(&regs->global_regs.ghwcfg2) & DWC2_HWCFG2_DYNAMIC_FIFO) {
+ 		/* Rx FIFO */
+-		writel(DWC2_HOST_RX_FIFO_SIZE, &regs->grxfsiz);
++		writel(DWC2_HOST_RX_FIFO_SIZE, &regs->global_regs.grxfsiz);
  
  		/* Non-periodic Tx FIFO */
--		nptxfifosize |= DWC2_HOST_NPERIO_TX_FIFO_SIZE <<
--				DWC2_FIFOSIZE_DEPTH_OFFSET;
--		nptxfifosize |= DWC2_HOST_RX_FIFO_SIZE <<
--				DWC2_FIFOSIZE_STARTADDR_OFFSET;
-+		nptxfifosize |= FIELD_PREP(DWC2_FIFOSIZE_DEPTH_MASK, DWC2_HOST_NPERIO_TX_FIFO_SIZE);
-+		nptxfifosize |= FIELD_PREP(DWC2_FIFOSIZE_STARTADDR_MASK, DWC2_HOST_RX_FIFO_SIZE);
- 		writel(nptxfifosize, &regs->global_regs.gnptxfsiz);
+ 		nptxfifosize |= DWC2_HOST_NPERIO_TX_FIFO_SIZE <<
+ 				DWC2_FIFOSIZE_DEPTH_OFFSET;
+ 		nptxfifosize |= DWC2_HOST_RX_FIFO_SIZE <<
+ 				DWC2_FIFOSIZE_STARTADDR_OFFSET;
+-		writel(nptxfifosize, &regs->gnptxfsiz);
++		writel(nptxfifosize, &regs->global_regs.gnptxfsiz);
  
  		/* Periodic Tx FIFO */
--		ptxfifosize |= DWC2_HOST_PERIO_TX_FIFO_SIZE <<
--				DWC2_FIFOSIZE_DEPTH_OFFSET;
--		ptxfifosize |= (DWC2_HOST_RX_FIFO_SIZE +
--				DWC2_HOST_NPERIO_TX_FIFO_SIZE) <<
--				DWC2_FIFOSIZE_STARTADDR_OFFSET;
-+		ptxfifosize |= FIELD_PREP(DWC2_FIFOSIZE_DEPTH_MASK, DWC2_HOST_PERIO_TX_FIFO_SIZE);
-+		ptxfifosize |= FIELD_PREP(DWC2_FIFOSIZE_STARTADDR_MASK, DWC2_HOST_RX_FIFO_SIZE +
-+					  DWC2_HOST_NPERIO_TX_FIFO_SIZE);
- 		writel(ptxfifosize, &regs->global_regs.hptxfsiz);
+ 		ptxfifosize |= DWC2_HOST_PERIO_TX_FIFO_SIZE <<
+@@ -277,45 +278,45 @@ static void dwc_otg_core_host_init(struct udevice *dev,
+ 		ptxfifosize |= (DWC2_HOST_RX_FIFO_SIZE +
+ 				DWC2_HOST_NPERIO_TX_FIFO_SIZE) <<
+ 				DWC2_FIFOSIZE_STARTADDR_OFFSET;
+-		writel(ptxfifosize, &regs->hptxfsiz);
++		writel(ptxfifosize, &regs->global_regs.hptxfsiz);
  	}
  #endif
-@@ -290,10 +285,8 @@ static void dwc_otg_core_host_init(struct udevice *dev,
+ 
+ 	/* Clear Host Set HNP Enable in the OTG Control Register */
+-	clrbits_le32(&regs->gotgctl, DWC2_GOTGCTL_HSTSETHNPEN);
++	clrbits_le32(&regs->global_regs.gotgctl, DWC2_GOTGCTL_HSTSETHNPEN);
+ 
+ 	/* Make sure the FIFOs are flushed. */
+ 	dwc_otg_flush_tx_fifo(dev, regs, 0x10);	/* All Tx FIFOs */
  	dwc_otg_flush_rx_fifo(dev, regs);
  
  	/* Flush out any leftover queued requests. */
--	num_channels = readl(&regs->global_regs.ghwcfg2);
--	num_channels &= DWC2_HWCFG2_NUM_HOST_CHAN_MASK;
--	num_channels >>= DWC2_HWCFG2_NUM_HOST_CHAN_OFFSET;
--	num_channels += 1;
-+	num_channels = FIELD_GET(DWC2_HWCFG2_NUM_HOST_CHAN_MASK,
-+				 readl(&regs->global_regs.ghwcfg2)) + 1;
+-	num_channels = readl(&regs->ghwcfg2);
++	num_channels = readl(&regs->global_regs.ghwcfg2);
+ 	num_channels &= DWC2_HWCFG2_NUM_HOST_CHAN_MASK;
+ 	num_channels >>= DWC2_HWCFG2_NUM_HOST_CHAN_OFFSET;
+ 	num_channels += 1;
  
  	for (i = 0; i < num_channels; i++)
- 		clrsetbits_le32(&regs->host_regs.hc[i].hcchar,
-@@ -390,7 +383,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+-		clrsetbits_le32(&regs->hc_regs[i].hcchar,
++		clrsetbits_le32(&regs->host_regs.hc[i].hcchar,
+ 				DWC2_HCCHAR_CHEN | DWC2_HCCHAR_EPDIR,
+ 				DWC2_HCCHAR_CHDIS);
+ 
+ 	/* Halt all channels to put them into a known state. */
+ 	for (i = 0; i < num_channels; i++) {
+-		clrsetbits_le32(&regs->hc_regs[i].hcchar,
++		clrsetbits_le32(&regs->host_regs.hc[i].hcchar,
+ 				DWC2_HCCHAR_EPDIR,
+ 				DWC2_HCCHAR_CHEN | DWC2_HCCHAR_CHDIS);
+-		ret = wait_for_bit_le32(&regs->hc_regs[i].hcchar,
++		ret = wait_for_bit_le32(&regs->host_regs.hc[i].hcchar,
+ 					DWC2_HCCHAR_CHEN, false, 1000, false);
+ 		if (ret)
+ 			dev_info(dev, "%s: Timeout!\n", __func__);
+ 	}
+ 
+ 	/* Turn on the vbus power. */
+-	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST) {
+-		hprt0 = readl(&regs->hprt0) & ~DWC2_HPRT0_W1C_MASK;
++	if (readl(&regs->global_regs.gintsts) & DWC2_GINTSTS_CURMODE_HOST) {
++		hprt0 = readl(&regs->host_regs.hprt0) & ~DWC2_HPRT0_W1C_MASK;
+ 		if (!(hprt0 & DWC2_HPRT0_PRTPWR)) {
+ 			hprt0 |= DWC2_HPRT0_PRTPWR;
+-			writel(hprt0, &regs->hprt0);
++			writel(hprt0, &regs->host_regs.hprt0);
+ 		}
+ 	}
+ 
+@@ -338,7 +339,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+ 	uint8_t brst_sz = DWC2_DMA_BURST_SIZE;
+ 
+ 	/* Common Initialization */
+-	usbcfg = readl(&regs->gusbcfg);
++	usbcfg = readl(&regs->global_regs.gusbcfg);
+ 
+ 	/* Program the ULPI External VBUS bit if needed */
+ 	if (priv->ext_vbus) {
+@@ -357,7 +358,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+ #else
+ 	usbcfg &= ~DWC2_GUSBCFG_TERM_SEL_DL_PULSE;
+ #endif
+-	writel(usbcfg, &regs->gusbcfg);
++	writel(usbcfg, &regs->global_regs.gusbcfg);
+ 
+ 	/* Reset the Controller */
+ 	dwc_otg_core_reset(dev, regs);
+@@ -369,28 +370,28 @@ static void dwc_otg_core_init(struct udevice *dev)
+ #if defined(DWC2_DFLT_SPEED_FULL) && \
+ 	(DWC2_PHY_TYPE == DWC2_PHY_TYPE_FS)
+ 	/* If FS mode with FS PHY */
+-	setbits_le32(&regs->gusbcfg, DWC2_GUSBCFG_PHYSEL);
++	setbits_le32(&regs->global_regs.gusbcfg, DWC2_GUSBCFG_PHYSEL);
+ 
+ 	/* Reset after a PHY select */
+-	dwc_otg_core_reset(dev, regs);
++	dwc2_core_reset(regs);
+ 
+ 	/*
+ 	 * Program DCFG.DevSpd or HCFG.FSLSPclkSel to 48Mhz in FS.
+ 	 * Also do this on HNP Dev/Host mode switches (done in dev_init
+ 	 * and host_init).
+ 	 */
+-	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST)
++	if (readl(&regs->global_regs.gintsts) & DWC2_GINTSTS_CURMODE_HOST)
+ 		init_fslspclksel(regs);
+ 
+ #ifdef DWC2_I2C_ENABLE
+ 	/* Program GUSBCFG.OtgUtmifsSel to I2C */
+-	setbits_le32(&regs->gusbcfg, DWC2_GUSBCFG_OTGUTMIFSSEL);
++	setbits_le32(&regs->global_regs.gusbcfg, DWC2_GUSBCFG_OTGUTMIFSSEL);
+ 
  	/* Program GI2CCTL.I2CEn */
- 	clrsetbits_le32(&regs->global_regs.gi2cctl, DWC2_GI2CCTL_I2CEN |
+-	clrsetbits_le32(&regs->gi2cctl, DWC2_GI2CCTL_I2CEN |
++	clrsetbits_le32(&regs->global_regs.gi2cctl, DWC2_GI2CCTL_I2CEN |
  			DWC2_GI2CCTL_I2CDEVADDR_MASK,
--			1 << DWC2_GI2CCTL_I2CDEVADDR_OFFSET);
-+			FIELD_PREP(DWC2_GI2CCTL_I2CDEVADDR_MASK, 1));
- 	setbits_le32(&regs->global_regs.gi2cctl, DWC2_GI2CCTL_I2CEN);
+ 			1 << DWC2_GI2CCTL_I2CDEVADDR_OFFSET);
+-	setbits_le32(&regs->gi2cctl, DWC2_GI2CCTL_I2CEN);
++	setbits_le32(&regs->global_regs.gi2cctl, DWC2_GI2CCTL_I2CEN);
  #endif
  
-@@ -429,10 +422,8 @@ static void dwc_otg_core_init(struct udevice *dev)
+ #else
+@@ -416,16 +417,16 @@ static void dwc_otg_core_init(struct udevice *dev)
+ #endif
+ 	}
+ 
+-	writel(usbcfg, &regs->gusbcfg);
++	writel(usbcfg, &regs->global_regs.gusbcfg);
+ 
+ 	/* Reset after setting the PHY parameters */
+ 	dwc_otg_core_reset(dev, regs);
+ #endif
+ 
+-	usbcfg = readl(&regs->gusbcfg);
++	usbcfg = readl(&regs->global_regs.gusbcfg);
  	usbcfg &= ~(DWC2_GUSBCFG_ULPI_FSLS | DWC2_GUSBCFG_ULPI_CLK_SUS_M);
  #ifdef DWC2_ULPI_FS_LS
- 	uint32_t hwcfg2 = readl(&regs->global_regs.ghwcfg2);
--	uint32_t hval = (ghwcfg2 & DWC2_HWCFG2_HS_PHY_TYPE_MASK) >>
--			DWC2_HWCFG2_HS_PHY_TYPE_OFFSET;
--	uint32_t fval = (ghwcfg2 & DWC2_HWCFG2_FS_PHY_TYPE_MASK) >>
--			DWC2_HWCFG2_FS_PHY_TYPE_OFFSET;
-+	uint32_t hval = FIELD_GET(DWC2_HWCFG2_HS_PHY_TYPE_MASK, ghwcfg2);
-+	uint32_t fval = FIELD_GET(DWC2_HWCFG2_FS_PHY_TYPE_MASK, ghwcfg2);
- 	if (hval == 2 && fval == 1) {
- 		usbcfg |= DWC2_GUSBCFG_ULPI_FSLS;
- 		usbcfg |= DWC2_GUSBCFG_ULPI_CLK_SUS_M;
-@@ -444,12 +435,11 @@ static void dwc_otg_core_init(struct udevice *dev)
- 	writel(usbcfg, &regs->global_regs.gusbcfg);
+-	uint32_t hwcfg2 = readl(&regs->ghwcfg2);
++	uint32_t hwcfg2 = readl(&regs->global_regs.ghwcfg2);
+ 	uint32_t hval = (ghwcfg2 & DWC2_HWCFG2_HS_PHY_TYPE_MASK) >>
+ 			DWC2_HWCFG2_HS_PHY_TYPE_OFFSET;
+ 	uint32_t fval = (ghwcfg2 & DWC2_HWCFG2_FS_PHY_TYPE_MASK) >>
+@@ -438,10 +439,10 @@ static void dwc_otg_core_init(struct udevice *dev)
+ 	if (priv->hnp_srp_disable)
+ 		usbcfg |= DWC2_GUSBCFG_FORCEHOSTMODE;
+ 
+-	writel(usbcfg, &regs->gusbcfg);
++	writel(usbcfg, &regs->global_regs.gusbcfg);
  
  	/* Program the GAHBCFG Register. */
--	switch (readl(&regs->global_regs.ghwcfg2) & DWC2_HWCFG2_ARCHITECTURE_MASK) {
-+	switch (FIELD_GET(DWC2_HWCFG2_ARCHITECTURE_MASK, readl(&regs->global_regs.ghwcfg2))) {
+-	switch (readl(&regs->ghwcfg2) & DWC2_HWCFG2_ARCHITECTURE_MASK) {
++	switch (readl(&regs->global_regs.ghwcfg2) & DWC2_HWCFG2_ARCHITECTURE_MASK) {
  	case DWC2_HWCFG2_ARCHITECTURE_SLAVE_ONLY:
  		break;
  	case DWC2_HWCFG2_ARCHITECTURE_EXT_DMA:
--		ahbcfg |= (LOG2(brst_sz >> 1) << DWC2_GAHBCFG_HBURSTLEN_OFFSET) &
--			  DWC2_GAHBCFG_HBURSTLEN_MASK;
-+		ahbcfg |= FIELD_PREP(DWC2_GAHBCFG_HBURSTLEN_MASK, LOG2(brst_sz >> 1));
+@@ -464,7 +465,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+ 		break;
+ 	}
  
- #ifdef DWC2_DMA_ENABLE
- 		ahbcfg |= DWC2_GAHBCFG_DMAENABLE;
-@@ -492,11 +482,11 @@ static void dwc_otg_hc_init(struct dwc2_core_regs *regs, uint8_t hc_num,
+-	writel(ahbcfg, &regs->gahbcfg);
++	writel(ahbcfg, &regs->global_regs.gahbcfg);
+ 
+ 	/* Program the capabilities in GUSBCFG Register */
+ 	usbcfg = 0;
+@@ -475,7 +476,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+ 	usbcfg |= DWC2_GUSBCFG_IC_USB_CAP;
+ #endif
+ 
+-	setbits_le32(&regs->gusbcfg, usbcfg);
++	setbits_le32(&regs->global_regs.gusbcfg, usbcfg);
+ }
+ 
+ /*
+@@ -491,7 +492,7 @@ static void dwc_otg_hc_init(struct dwc2_core_regs *regs, uint8_t hc_num,
+ 		struct usb_device *dev, uint8_t dev_addr, uint8_t ep_num,
  		uint8_t ep_is_in, uint8_t ep_type, uint16_t max_packet)
  {
- 	struct dwc2_hc_regs *hc_regs = &regs->host_regs.hc[hc_num];
--	uint32_t hcchar = (dev_addr << DWC2_HCCHAR_DEVADDR_OFFSET) |
--			  (ep_num << DWC2_HCCHAR_EPNUM_OFFSET) |
--			  (ep_is_in << DWC2_HCCHAR_EPDIR_OFFSET) |
--			  (ep_type << DWC2_HCCHAR_EPTYPE_OFFSET) |
--			  (max_packet << DWC2_HCCHAR_MPS_OFFSET);
-+	u32 hcchar = FIELD_PREP(DWC2_HCCHAR_DEVADDR_MASK, dev_addr) |
-+			  FIELD_PREP(DWC2_HCCHAR_EPNUM_MASK, ep_num) |
-+			  FIELD_PREP(DWC2_HCCHAR_EPDIR, ep_is_in) |
-+			  FIELD_PREP(DWC2_HCCHAR_EPTYPE_MASK, ep_type) |
-+			  FIELD_PREP(DWC2_HCCHAR_MPS_MASK, max_packet);
+-	struct dwc2_hc_regs *hc_regs = &regs->hc_regs[hc_num];
++	struct dwc2_hc_regs *hc_regs = &regs->host_regs.hc[hc_num];
+ 	uint32_t hcchar = (dev_addr << DWC2_HCCHAR_DEVADDR_OFFSET) |
+ 			  (ep_num << DWC2_HCCHAR_EPNUM_OFFSET) |
+ 			  (ep_is_in << DWC2_HCCHAR_EPDIR_OFFSET) |
+@@ -553,7 +554,7 @@ static int dwc_otg_submit_rh_msg_in_status(struct dwc2_core_regs *regs,
+ 		len = 4;
+ 		break;
+ 	case USB_RECIP_OTHER | USB_TYPE_CLASS:
+-		hprt0 = readl(&regs->hprt0);
++		hprt0 = readl(&regs->host_regs.hprt0);
+ 		if (hprt0 & DWC2_HPRT0_PRTCONNSTS)
+ 			port_status |= USB_PORT_STAT_CONNECTION;
+ 		if (hprt0 & DWC2_HPRT0_PRTENA)
+@@ -743,7 +744,8 @@ static int dwc_otg_submit_rh_msg_out(struct dwc2_priv *priv,
+ 	case (USB_REQ_CLEAR_FEATURE << 8) | USB_RECIP_OTHER | USB_TYPE_CLASS:
+ 		switch (wValue) {
+ 		case USB_PORT_FEAT_C_CONNECTION:
+-			clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTCONNDET);
++			clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK,
++					DWC2_HPRT0_PRTCONNDET);
+ 			break;
+ 		}
+ 		break;
+@@ -754,13 +756,16 @@ static int dwc_otg_submit_rh_msg_out(struct dwc2_priv *priv,
+ 			break;
  
- 	if (dev->speed == USB_SPEED_LOW)
- 		hcchar |= DWC2_HCCHAR_LSPDDEV;
-@@ -517,8 +507,8 @@ static void dwc_otg_hc_init_split(struct dwc2_hc_regs *hc_regs,
- 	uint32_t hcsplt = 0;
+ 		case USB_PORT_FEAT_RESET:
+-			clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
++			clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK,
++					DWC2_HPRT0_PRTRST);
+ 			mdelay(50);
+-			clrbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK | DWC2_HPRT0_PRTRST);
++			clrbits_le32(&regs->host_regs.hprt0,
++				     DWC2_HPRT0_W1C_MASK | DWC2_HPRT0_PRTRST);
+ 			break;
  
- 	hcsplt = DWC2_HCSPLT_SPLTENA;
--	hcsplt |= hub_devnum << DWC2_HCSPLT_HUBADDR_OFFSET;
--	hcsplt |= hub_port << DWC2_HCSPLT_PRTADDR_OFFSET;
-+	hcsplt |= FIELD_PREP(DWC2_HCSPLT_HUBADDR_MASK, hub_devnum);
-+	hcsplt |= FIELD_PREP(DWC2_HCSPLT_PRTADDR_MASK, hub_port);
+ 		case USB_PORT_FEAT_POWER:
+-			clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
++			clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK,
++					DWC2_HPRT0_PRTRST);
+ 			break;
  
- 	/* Program the HCSPLIT register for SPLITs */
- 	writel(hcsplt, &hc_regs->hcsplt);
-@@ -567,11 +557,14 @@ static int dwc_otg_submit_rh_msg_in_status(struct dwc2_core_regs *regs,
- 		if (hprt0 & DWC2_HPRT0_PRTPWR)
- 			port_status |= USB_PORT_STAT_POWER;
- 
--		if ((hprt0 & DWC2_HPRT0_PRTSPD_MASK) == DWC2_HPRT0_PRTSPD_LOW)
-+		switch (FIELD_GET(DWC2_HPRT0_PRTSPD_MASK, hprt0)) {
-+		case DWC2_HPRT0_PRTSPD_LOW:
- 			port_status |= USB_PORT_STAT_LOW_SPEED;
--		else if ((hprt0 & DWC2_HPRT0_PRTSPD_MASK) ==
--			 DWC2_HPRT0_PRTSPD_HIGH)
-+			break;
-+		case DWC2_HPRT0_PRTSPD_HIGH:
- 			port_status |= USB_PORT_STAT_HIGH_SPEED;
-+			break;
-+		}
- 
- 		if (hprt0 & DWC2_HPRT0_PRTENCHNG)
- 			port_change |= USB_PORT_STAT_C_ENABLE;
-@@ -822,9 +815,8 @@ int wait_for_chhltd(struct dwc2_hc_regs *hc_regs, uint32_t *sub, u8 *toggle)
- 
- 	hcint = readl(&hc_regs->hcint);
- 	hctsiz = readl(&hc_regs->hctsiz);
--	*sub = (hctsiz & DWC2_HCTSIZ_XFERSIZE_MASK) >>
--		DWC2_HCTSIZ_XFERSIZE_OFFSET;
--	*toggle = (hctsiz & DWC2_HCTSIZ_PID_MASK) >> DWC2_HCTSIZ_PID_OFFSET;
-+	*sub = FIELD_GET(DWC2_HCTSIZ_XFERSIZE_MASK, hctsiz);
-+	*toggle = FIELD_GET(DWC2_HCTSIZ_PID_MASK, hctsiz);
- 
- 	debug("%s: HCINT=%08x sub=%u toggle=%d\n", __func__, hcint, *sub,
- 	      *toggle);
-@@ -856,9 +848,9 @@ static int transfer_chunk(struct dwc2_hc_regs *hc_regs, void *aligned_buffer,
- 	debug("%s: chunk: pid %d xfer_len %u pkts %u\n", __func__,
- 	      *pid, xfer_len, num_packets);
- 
--	writel((xfer_len << DWC2_HCTSIZ_XFERSIZE_OFFSET) |
--	       (num_packets << DWC2_HCTSIZ_PKTCNT_OFFSET) |
--	       (*pid << DWC2_HCTSIZ_PID_OFFSET),
-+	writel(FIELD_PREP(DWC2_HCTSIZ_XFERSIZE_MASK, xfer_len) |
-+	       FIELD_PREP(DWC2_HCTSIZ_PKTCNT_MASK, num_packets) |
-+	       FIELD_PREP(DWC2_HCTSIZ_PID_MASK, *pid),
- 	       &hc_regs->hctsiz);
- 
- 	if (xfer_len) {
-@@ -885,8 +877,8 @@ static int transfer_chunk(struct dwc2_hc_regs *hc_regs, void *aligned_buffer,
- 	clrsetbits_le32(&hc_regs->hcchar, DWC2_HCCHAR_MULTICNT_MASK |
- 			DWC2_HCCHAR_CHEN | DWC2_HCCHAR_CHDIS |
- 			DWC2_HCCHAR_ODDFRM,
--			(1 << DWC2_HCCHAR_MULTICNT_OFFSET) |
--			(odd_frame << DWC2_HCCHAR_ODDFRM_OFFSET) |
-+			FIELD_PREP(DWC2_HCCHAR_MULTICNT_MASK, 1) |
-+			FIELD_PREP(DWC2_HCCHAR_ODDFRM, odd_frame) |
- 			DWC2_HCCHAR_CHEN);
- 
- 	ret = wait_for_chhltd(hc_regs, &sub, pid);
-@@ -950,8 +942,7 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
+ 		case USB_PORT_FEAT_ENABLE:
+@@ -907,7 +912,7 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
+ 	      unsigned long pipe, u8 *pid, int in, void *buffer, int len)
+ {
+ 	struct dwc2_core_regs *regs = priv->regs;
+-	struct dwc2_hc_regs *hc_regs = &regs->hc_regs[DWC2_HC_CHANNEL];
++	struct dwc2_hc_regs *hc_regs = &regs->host_regs.hc[DWC2_HC_CHANNEL];
+ 	struct dwc2_host_regs *host_regs = &regs->host_regs;
+ 	int devnum = usb_pipedevice(pipe);
+ 	int ep = usb_pipeendpoint(pipe);
+@@ -944,7 +949,8 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
+ 	if (dev->speed != USB_SPEED_HIGH) {
+ 		uint8_t hub_addr;
  		uint8_t hub_port;
- 		uint32_t hprt0 = readl(&regs->host_regs.hprt0);
- 
--		if ((hprt0 & DWC2_HPRT0_PRTSPD_MASK) ==
--		     DWC2_HPRT0_PRTSPD_HIGH) {
-+		if (FIELD_GET(DWC2_HPRT0_PRTSPD_MASK, hprt0) == DWC2_HPRT0_PRTSPD_HIGH) {
- 			usb_find_usb2_hub_address_port(dev, &hub_addr,
- 						       &hub_port);
- 			dwc_otg_hc_init_split(hc_regs, hub_addr, hub_port);
-@@ -995,17 +986,17 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
- 			stop_transfer = 0;
- 			if (hcint & DWC2_HCINT_NYET) {
- 				ret = 0;
--				int frame_num = DWC2_HFNUM_MAX_FRNUM &
--						readl(&host_regs->hfnum);
--				if (((frame_num - ssplit_frame_num) &
--				    DWC2_HFNUM_MAX_FRNUM) > 4)
-+				int frame_num = FIELD_GET(DWC2_HFNUM_FRNUM_MASK,
-+							  readl(&host_regs->hfnum));
+-		uint32_t hprt0 = readl(&regs->hprt0);
++		uint32_t hprt0 = readl(&regs->host_regs.hprt0);
 +
-+				if (((frame_num - ssplit_frame_num) & DWC2_HFNUM_FRNUM_MASK) > 4)
- 					ret = -EAGAIN;
- 			} else
- 				complete_split = 0;
- 		} else if (do_split) {
- 			if (hcint & DWC2_HCINT_ACK) {
--				ssplit_frame_num = DWC2_HFNUM_MAX_FRNUM &
--						   readl(&host_regs->hfnum);
-+				ssplit_frame_num = FIELD_GET(DWC2_HFNUM_FRNUM_MASK,
-+							     readl(&host_regs->hfnum));
- 				ret = 0;
- 				complete_split = 1;
- 			}
-@@ -1183,8 +1174,8 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+ 		if ((hprt0 & DWC2_HPRT0_PRTSPD_MASK) ==
+ 		     DWC2_HPRT0_PRTSPD_HIGH) {
+ 			usb_find_usb2_hub_address_port(dev, &hub_addr,
+@@ -1174,7 +1180,7 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+ 	if (ret)
+ 		return ret;
+ 
+-	snpsid = readl(&regs->gsnpsid);
++	snpsid = readl(&regs->global_regs.gsnpsid);
  	dev_info(dev, "Core Release: %x.%03x\n",
  		 snpsid >> 12 & 0xf, snpsid & 0xfff);
  
--	if ((snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_2xx &&
--	    (snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_3xx) {
-+	if (FIELD_GET(DWC2_SNPSID_DEVID_MASK, snpsid) != DWC2_SNPSID_DEVID_VER_2xx &&
-+	    FIELD_GET(DWC2_SNPSID_DEVID_MASK, snpsid) != DWC2_SNPSID_DEVID_VER_3xx) {
- 		dev_info(dev, "SNPSID invalid (not DWC2 OTG device): %08x\n",
- 			 snpsid);
- 		return -ENODEV;
+@@ -1200,9 +1206,9 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+ 		dwc_otg_core_host_init(dev, regs);
+ 	}
+ 
+-	clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
++	clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
+ 	mdelay(50);
+-	clrbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK | DWC2_HPRT0_PRTRST);
++	clrbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK | DWC2_HPRT0_PRTRST);
+ 
+ 	for (i = 0; i < MAX_DEVICE; i++) {
+ 		for (j = 0; j < MAX_ENDPOINT; j++) {
+@@ -1217,7 +1223,7 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+ 	 * is started (the bus is scanned) and  fixes the USB detection
+ 	 * problems with some problematic USB keys.
+ 	 */
+-	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST)
++	if (readl(&regs->global_regs.gintsts) & DWC2_GINTSTS_CURMODE_HOST)
+ 		mdelay(1000);
+ 
+ 	printf("USB DWC2\n");
+@@ -1228,7 +1234,7 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+ static void dwc2_uninit_common(struct dwc2_core_regs *regs)
+ {
+ 	/* Put everything in reset. */
+-	clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
++	clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
+ }
+ 
+ #if !CONFIG_IS_ENABLED(DM_USB)
 diff --git a/drivers/usb/host/dwc2.h b/drivers/usb/host/dwc2.h
-index 61b544462edfd6778ddf2ddf2dcf6db3f02a3754..6bd98b481f2449e32f5ccf3dc5baca814a2f4a16 100644
+index 6f022e33a19244d65a6b82e210948506c7bc1096..61b544462edfd6778ddf2ddf2dcf6db3f02a3754 100644
 --- a/drivers/usb/host/dwc2.h
 +++ b/drivers/usb/host/dwc2.h
-@@ -6,683 +6,358 @@
+@@ -6,64 +6,6 @@
  #ifndef __DWC2_H__
  #define __DWC2_H__
  
--#define DWC2_GOTGCTL_SESREQSCS				(1 << 0)
--#define DWC2_GOTGCTL_SESREQSCS_OFFSET			0
--#define DWC2_GOTGCTL_SESREQ				(1 << 1)
--#define DWC2_GOTGCTL_SESREQ_OFFSET			1
--#define DWC2_GOTGCTL_HSTNEGSCS				(1 << 8)
--#define DWC2_GOTGCTL_HSTNEGSCS_OFFSET			8
--#define DWC2_GOTGCTL_HNPREQ				(1 << 9)
--#define DWC2_GOTGCTL_HNPREQ_OFFSET			9
--#define DWC2_GOTGCTL_HSTSETHNPEN			(1 << 10)
--#define DWC2_GOTGCTL_HSTSETHNPEN_OFFSET			10
--#define DWC2_GOTGCTL_DEVHNPEN				(1 << 11)
--#define DWC2_GOTGCTL_DEVHNPEN_OFFSET			11
--#define DWC2_GOTGCTL_CONIDSTS				(1 << 16)
--#define DWC2_GOTGCTL_CONIDSTS_OFFSET			16
--#define DWC2_GOTGCTL_DBNCTIME				(1 << 17)
--#define DWC2_GOTGCTL_DBNCTIME_OFFSET			17
--#define DWC2_GOTGCTL_ASESVLD				(1 << 18)
--#define DWC2_GOTGCTL_ASESVLD_OFFSET			18
--#define DWC2_GOTGCTL_BSESVLD				(1 << 19)
--#define DWC2_GOTGCTL_BSESVLD_OFFSET			19
--#define DWC2_GOTGCTL_OTGVER				(1 << 20)
--#define DWC2_GOTGCTL_OTGVER_OFFSET			20
--#define DWC2_GOTGINT_SESENDDET				(1 << 2)
--#define DWC2_GOTGINT_SESENDDET_OFFSET			2
--#define DWC2_GOTGINT_SESREQSUCSTSCHNG			(1 << 8)
--#define DWC2_GOTGINT_SESREQSUCSTSCHNG_OFFSET		8
--#define DWC2_GOTGINT_HSTNEGSUCSTSCHNG			(1 << 9)
--#define DWC2_GOTGINT_HSTNEGSUCSTSCHNG_OFFSET		9
--#define DWC2_GOTGINT_RESERVER10_16_MASK			(0x7F << 10)
--#define DWC2_GOTGINT_RESERVER10_16_OFFSET		10
--#define DWC2_GOTGINT_HSTNEGDET				(1 << 17)
--#define DWC2_GOTGINT_HSTNEGDET_OFFSET			17
--#define DWC2_GOTGINT_ADEVTOUTCHNG			(1 << 18)
--#define DWC2_GOTGINT_ADEVTOUTCHNG_OFFSET		18
--#define DWC2_GOTGINT_DEBDONE				(1 << 19)
--#define DWC2_GOTGINT_DEBDONE_OFFSET			19
--#define DWC2_GAHBCFG_GLBLINTRMSK			(1 << 0)
--#define DWC2_GAHBCFG_GLBLINTRMSK_OFFSET			0
-+#include <linux/bitops.h>
-+
-+#define DWC2_GOTGCTL_SESREQSCS				BIT(0)
-+#define DWC2_GOTGCTL_SESREQ				BIT(1)
-+#define DWC2_GOTGCTL_HSTNEGSCS				BIT(8)
-+#define DWC2_GOTGCTL_HNPREQ				BIT(9)
-+#define DWC2_GOTGCTL_HSTSETHNPEN			BIT(10)
-+#define DWC2_GOTGCTL_DEVHNPEN				BIT(11)
-+#define DWC2_GOTGCTL_CONIDSTS				BIT(16)
-+#define DWC2_GOTGCTL_DBNCTIME				BIT(17)
-+#define DWC2_GOTGCTL_ASESVLD				BIT(18)
-+#define DWC2_GOTGCTL_BSESVLD				BIT(19)
-+#define DWC2_GOTGCTL_OTGVER				BIT(20)
-+#define DWC2_GOTGINT_SESENDDET				BIT(2)
-+#define DWC2_GOTGINT_SESREQSUCSTSCHNG			BIT(8)
-+#define DWC2_GOTGINT_HSTNEGSUCSTSCHNG			BIT(9)
-+#define DWC2_GOTGINT_RESERVER10_16_MASK			GENMASK(16, 10)
-+#define DWC2_GOTGINT_HSTNEGDET				BIT(17)
-+#define DWC2_GOTGINT_ADEVTOUTCHNG			BIT(18)
-+#define DWC2_GOTGINT_DEBDONE				BIT(19)
-+#define DWC2_GAHBCFG_GLBLINTRMSK			BIT(0)
- #define DWC2_GAHBCFG_HBURSTLEN_SINGLE			(0 << 1)
- #define DWC2_GAHBCFG_HBURSTLEN_INCR			(1 << 1)
- #define DWC2_GAHBCFG_HBURSTLEN_INCR4			(3 << 1)
- #define DWC2_GAHBCFG_HBURSTLEN_INCR8			(5 << 1)
- #define DWC2_GAHBCFG_HBURSTLEN_INCR16			(7 << 1)
--#define DWC2_GAHBCFG_HBURSTLEN_MASK			(0xF << 1)
--#define DWC2_GAHBCFG_HBURSTLEN_OFFSET			1
--#define DWC2_GAHBCFG_DMAENABLE				(1 << 5)
--#define DWC2_GAHBCFG_DMAENABLE_OFFSET			5
--#define DWC2_GAHBCFG_NPTXFEMPLVL_TXFEMPLVL		(1 << 7)
--#define DWC2_GAHBCFG_NPTXFEMPLVL_TXFEMPLVL_OFFSET	7
--#define DWC2_GAHBCFG_PTXFEMPLVL				(1 << 8)
--#define DWC2_GAHBCFG_PTXFEMPLVL_OFFSET			8
--#define DWC2_GUSBCFG_TOUTCAL_MASK			(0x7 << 0)
--#define DWC2_GUSBCFG_TOUTCAL_OFFSET			0
--#define DWC2_GUSBCFG_PHYIF				(1 << 3)
--#define DWC2_GUSBCFG_PHYIF_OFFSET			3
--#define DWC2_GUSBCFG_ULPI_UTMI_SEL			(1 << 4)
--#define DWC2_GUSBCFG_ULPI_UTMI_SEL_OFFSET		4
--#define DWC2_GUSBCFG_FSINTF				(1 << 5)
--#define DWC2_GUSBCFG_FSINTF_OFFSET			5
--#define DWC2_GUSBCFG_PHYSEL				(1 << 6)
--#define DWC2_GUSBCFG_PHYSEL_OFFSET			6
--#define DWC2_GUSBCFG_DDRSEL				(1 << 7)
--#define DWC2_GUSBCFG_DDRSEL_OFFSET			7
--#define DWC2_GUSBCFG_SRPCAP				(1 << 8)
--#define DWC2_GUSBCFG_SRPCAP_OFFSET			8
--#define DWC2_GUSBCFG_HNPCAP				(1 << 9)
--#define DWC2_GUSBCFG_HNPCAP_OFFSET			9
--#define DWC2_GUSBCFG_USBTRDTIM_MASK			(0xF << 10)
--#define DWC2_GUSBCFG_USBTRDTIM_OFFSET			10
--#define DWC2_GUSBCFG_NPTXFRWNDEN			(1 << 14)
--#define DWC2_GUSBCFG_NPTXFRWNDEN_OFFSET			14
--#define DWC2_GUSBCFG_PHYLPWRCLKSEL			(1 << 15)
--#define DWC2_GUSBCFG_PHYLPWRCLKSEL_OFFSET		15
--#define DWC2_GUSBCFG_OTGUTMIFSSEL			(1 << 16)
--#define DWC2_GUSBCFG_OTGUTMIFSSEL_OFFSET		16
--#define DWC2_GUSBCFG_ULPI_FSLS				(1 << 17)
--#define DWC2_GUSBCFG_ULPI_FSLS_OFFSET			17
--#define DWC2_GUSBCFG_ULPI_AUTO_RES			(1 << 18)
--#define DWC2_GUSBCFG_ULPI_AUTO_RES_OFFSET		18
--#define DWC2_GUSBCFG_ULPI_CLK_SUS_M			(1 << 19)
--#define DWC2_GUSBCFG_ULPI_CLK_SUS_M_OFFSET		19
--#define DWC2_GUSBCFG_ULPI_EXT_VBUS_DRV			(1 << 20)
--#define DWC2_GUSBCFG_ULPI_EXT_VBUS_DRV_OFFSET		20
--#define DWC2_GUSBCFG_ULPI_INT_VBUS_INDICATOR		(1 << 21)
--#define DWC2_GUSBCFG_ULPI_INT_VBUS_INDICATOR_OFFSET	21
--#define DWC2_GUSBCFG_TERM_SEL_DL_PULSE			(1 << 22)
--#define DWC2_GUSBCFG_TERM_SEL_DL_PULSE_OFFSET		22
--#define DWC2_GUSBCFG_INDICATOR_PASSTHROUGH		(1 << 24)
--#define DWC2_GUSBCFG_INDICATOR_PASSTHROUGH_OFFSET	24
--#define DWC2_GUSBCFG_IC_USB_CAP				(1 << 26)
--#define DWC2_GUSBCFG_IC_USB_CAP_OFFSET			26
--#define DWC2_GUSBCFG_IC_TRAFFIC_PULL_REMOVE		(1 << 27)
--#define DWC2_GUSBCFG_IC_TRAFFIC_PULL_REMOVE_OFFSET	27
--#define DWC2_GUSBCFG_TX_END_DELAY			(1 << 28)
--#define DWC2_GUSBCFG_TX_END_DELAY_OFFSET		28
--#define DWC2_GUSBCFG_FORCEHOSTMODE			(1 << 29)
--#define DWC2_GUSBCFG_FORCEHOSTMODE_OFFSET		29
--#define DWC2_GUSBCFG_FORCEDEVMODE			(1 << 30)
--#define DWC2_GUSBCFG_FORCEDEVMODE_OFFSET		30
--#define DWC2_GLPMCTL_LPM_CAP_EN				(1 << 0)
--#define DWC2_GLPMCTL_LPM_CAP_EN_OFFSET			0
--#define DWC2_GLPMCTL_APPL_RESP				(1 << 1)
--#define DWC2_GLPMCTL_APPL_RESP_OFFSET			1
--#define DWC2_GLPMCTL_HIRD_MASK				(0xF << 2)
--#define DWC2_GLPMCTL_HIRD_OFFSET			2
--#define DWC2_GLPMCTL_REM_WKUP_EN			(1 << 6)
--#define DWC2_GLPMCTL_REM_WKUP_EN_OFFSET			6
--#define DWC2_GLPMCTL_EN_UTMI_SLEEP			(1 << 7)
--#define DWC2_GLPMCTL_EN_UTMI_SLEEP_OFFSET		7
--#define DWC2_GLPMCTL_HIRD_THRES_MASK			(0x1F << 8)
--#define DWC2_GLPMCTL_HIRD_THRES_OFFSET			8
--#define DWC2_GLPMCTL_LPM_RESP_MASK			(0x3 << 13)
--#define DWC2_GLPMCTL_LPM_RESP_OFFSET			13
--#define DWC2_GLPMCTL_PRT_SLEEP_STS			(1 << 15)
--#define DWC2_GLPMCTL_PRT_SLEEP_STS_OFFSET		15
--#define DWC2_GLPMCTL_SLEEP_STATE_RESUMEOK		(1 << 16)
--#define DWC2_GLPMCTL_SLEEP_STATE_RESUMEOK_OFFSET	16
--#define DWC2_GLPMCTL_LPM_CHAN_INDEX_MASK		(0xF << 17)
--#define DWC2_GLPMCTL_LPM_CHAN_INDEX_OFFSET		17
--#define DWC2_GLPMCTL_RETRY_COUNT_MASK			(0x7 << 21)
--#define DWC2_GLPMCTL_RETRY_COUNT_OFFSET			21
--#define DWC2_GLPMCTL_SEND_LPM				(1 << 24)
--#define DWC2_GLPMCTL_SEND_LPM_OFFSET			24
--#define DWC2_GLPMCTL_RETRY_COUNT_STS_MASK		(0x7 << 25)
--#define DWC2_GLPMCTL_RETRY_COUNT_STS_OFFSET		25
--#define DWC2_GLPMCTL_HSIC_CONNECT			(1 << 30)
--#define DWC2_GLPMCTL_HSIC_CONNECT_OFFSET		30
--#define DWC2_GLPMCTL_INV_SEL_HSIC			(1 << 31)
--#define DWC2_GLPMCTL_INV_SEL_HSIC_OFFSET		31
--#define DWC2_GRSTCTL_CSFTRST				(1 << 0)
--#define DWC2_GRSTCTL_CSFTRST_OFFSET			0
--#define DWC2_GRSTCTL_HSFTRST				(1 << 1)
--#define DWC2_GRSTCTL_HSFTRST_OFFSET			1
--#define DWC2_GRSTCTL_HSTFRM				(1 << 2)
--#define DWC2_GRSTCTL_HSTFRM_OFFSET			2
--#define DWC2_GRSTCTL_INTKNQFLSH				(1 << 3)
--#define DWC2_GRSTCTL_INTKNQFLSH_OFFSET			3
--#define DWC2_GRSTCTL_RXFFLSH				(1 << 4)
--#define DWC2_GRSTCTL_RXFFLSH_OFFSET			4
--#define DWC2_GRSTCTL_TXFFLSH				(1 << 5)
--#define DWC2_GRSTCTL_TXFFLSH_OFFSET			5
--#define DWC2_GRSTCTL_TXFNUM_MASK			(0x1F << 6)
--#define DWC2_GRSTCTL_TXFNUM_OFFSET			6
--#define DWC2_GRSTCTL_DMAREQ				(1 << 30)
--#define DWC2_GRSTCTL_DMAREQ_OFFSET			30
--#define DWC2_GRSTCTL_AHBIDLE				(1 << 31)
--#define DWC2_GRSTCTL_AHBIDLE_OFFSET			31
--#define DWC2_GINTMSK_MODEMISMATCH			(1 << 1)
--#define DWC2_GINTMSK_MODEMISMATCH_OFFSET		1
--#define DWC2_GINTMSK_OTGINTR				(1 << 2)
--#define DWC2_GINTMSK_OTGINTR_OFFSET			2
--#define DWC2_GINTMSK_SOFINTR				(1 << 3)
--#define DWC2_GINTMSK_SOFINTR_OFFSET			3
--#define DWC2_GINTMSK_RXSTSQLVL				(1 << 4)
--#define DWC2_GINTMSK_RXSTSQLVL_OFFSET			4
--#define DWC2_GINTMSK_NPTXFEMPTY				(1 << 5)
--#define DWC2_GINTMSK_NPTXFEMPTY_OFFSET			5
--#define DWC2_GINTMSK_GINNAKEFF				(1 << 6)
--#define DWC2_GINTMSK_GINNAKEFF_OFFSET			6
--#define DWC2_GINTMSK_GOUTNAKEFF				(1 << 7)
--#define DWC2_GINTMSK_GOUTNAKEFF_OFFSET			7
--#define DWC2_GINTMSK_I2CINTR				(1 << 9)
--#define DWC2_GINTMSK_I2CINTR_OFFSET			9
--#define DWC2_GINTMSK_ERLYSUSPEND			(1 << 10)
--#define DWC2_GINTMSK_ERLYSUSPEND_OFFSET			10
--#define DWC2_GINTMSK_USBSUSPEND				(1 << 11)
--#define DWC2_GINTMSK_USBSUSPEND_OFFSET			11
--#define DWC2_GINTMSK_USBRESET				(1 << 12)
--#define DWC2_GINTMSK_USBRESET_OFFSET			12
--#define DWC2_GINTMSK_ENUMDONE				(1 << 13)
--#define DWC2_GINTMSK_ENUMDONE_OFFSET			13
--#define DWC2_GINTMSK_ISOOUTDROP				(1 << 14)
--#define DWC2_GINTMSK_ISOOUTDROP_OFFSET			14
--#define DWC2_GINTMSK_EOPFRAME				(1 << 15)
--#define DWC2_GINTMSK_EOPFRAME_OFFSET			15
--#define DWC2_GINTMSK_EPMISMATCH				(1 << 17)
--#define DWC2_GINTMSK_EPMISMATCH_OFFSET			17
--#define DWC2_GINTMSK_INEPINTR				(1 << 18)
--#define DWC2_GINTMSK_INEPINTR_OFFSET			18
--#define DWC2_GINTMSK_OUTEPINTR				(1 << 19)
--#define DWC2_GINTMSK_OUTEPINTR_OFFSET			19
--#define DWC2_GINTMSK_INCOMPLISOIN			(1 << 20)
--#define DWC2_GINTMSK_INCOMPLISOIN_OFFSET		20
--#define DWC2_GINTMSK_INCOMPLISOOUT			(1 << 21)
--#define DWC2_GINTMSK_INCOMPLISOOUT_OFFSET		21
--#define DWC2_GINTMSK_PORTINTR				(1 << 24)
--#define DWC2_GINTMSK_PORTINTR_OFFSET			24
--#define DWC2_GINTMSK_HCINTR				(1 << 25)
--#define DWC2_GINTMSK_HCINTR_OFFSET			25
--#define DWC2_GINTMSK_PTXFEMPTY				(1 << 26)
--#define DWC2_GINTMSK_PTXFEMPTY_OFFSET			26
--#define DWC2_GINTMSK_LPMTRANRCVD			(1 << 27)
--#define DWC2_GINTMSK_LPMTRANRCVD_OFFSET			27
--#define DWC2_GINTMSK_CONIDSTSCHNG			(1 << 28)
--#define DWC2_GINTMSK_CONIDSTSCHNG_OFFSET		28
--#define DWC2_GINTMSK_DISCONNECT				(1 << 29)
--#define DWC2_GINTMSK_DISCONNECT_OFFSET			29
--#define DWC2_GINTMSK_SESSREQINTR			(1 << 30)
--#define DWC2_GINTMSK_SESSREQINTR_OFFSET			30
--#define DWC2_GINTMSK_WKUPINTR				(1 << 31)
--#define DWC2_GINTMSK_WKUPINTR_OFFSET			31
--#define DWC2_GINTSTS_CURMODE_DEVICE			(0 << 0)
--#define DWC2_GINTSTS_CURMODE_HOST			(1 << 0)
--#define DWC2_GINTSTS_CURMODE				(1 << 0)
--#define DWC2_GINTSTS_CURMODE_OFFSET			0
--#define DWC2_GINTSTS_MODEMISMATCH			(1 << 1)
--#define DWC2_GINTSTS_MODEMISMATCH_OFFSET		1
--#define DWC2_GINTSTS_OTGINTR				(1 << 2)
--#define DWC2_GINTSTS_OTGINTR_OFFSET			2
--#define DWC2_GINTSTS_SOFINTR				(1 << 3)
--#define DWC2_GINTSTS_SOFINTR_OFFSET			3
--#define DWC2_GINTSTS_RXSTSQLVL				(1 << 4)
--#define DWC2_GINTSTS_RXSTSQLVL_OFFSET			4
--#define DWC2_GINTSTS_NPTXFEMPTY				(1 << 5)
--#define DWC2_GINTSTS_NPTXFEMPTY_OFFSET			5
--#define DWC2_GINTSTS_GINNAKEFF				(1 << 6)
--#define DWC2_GINTSTS_GINNAKEFF_OFFSET			6
--#define DWC2_GINTSTS_GOUTNAKEFF				(1 << 7)
--#define DWC2_GINTSTS_GOUTNAKEFF_OFFSET			7
--#define DWC2_GINTSTS_I2CINTR				(1 << 9)
--#define DWC2_GINTSTS_I2CINTR_OFFSET			9
--#define DWC2_GINTSTS_ERLYSUSPEND			(1 << 10)
--#define DWC2_GINTSTS_ERLYSUSPEND_OFFSET			10
--#define DWC2_GINTSTS_USBSUSPEND				(1 << 11)
--#define DWC2_GINTSTS_USBSUSPEND_OFFSET			11
--#define DWC2_GINTSTS_USBRESET				(1 << 12)
--#define DWC2_GINTSTS_USBRESET_OFFSET			12
--#define DWC2_GINTSTS_ENUMDONE				(1 << 13)
--#define DWC2_GINTSTS_ENUMDONE_OFFSET			13
--#define DWC2_GINTSTS_ISOOUTDROP				(1 << 14)
--#define DWC2_GINTSTS_ISOOUTDROP_OFFSET			14
--#define DWC2_GINTSTS_EOPFRAME				(1 << 15)
--#define DWC2_GINTSTS_EOPFRAME_OFFSET			15
--#define DWC2_GINTSTS_INTOKENRX				(1 << 16)
--#define DWC2_GINTSTS_INTOKENRX_OFFSET			16
--#define DWC2_GINTSTS_EPMISMATCH				(1 << 17)
--#define DWC2_GINTSTS_EPMISMATCH_OFFSET			17
--#define DWC2_GINTSTS_INEPINT				(1 << 18)
--#define DWC2_GINTSTS_INEPINT_OFFSET			18
--#define DWC2_GINTSTS_OUTEPINTR				(1 << 19)
--#define DWC2_GINTSTS_OUTEPINTR_OFFSET			19
--#define DWC2_GINTSTS_INCOMPLISOIN			(1 << 20)
--#define DWC2_GINTSTS_INCOMPLISOIN_OFFSET		20
--#define DWC2_GINTSTS_INCOMPLISOOUT			(1 << 21)
--#define DWC2_GINTSTS_INCOMPLISOOUT_OFFSET		21
--#define DWC2_GINTSTS_PORTINTR				(1 << 24)
--#define DWC2_GINTSTS_PORTINTR_OFFSET			24
--#define DWC2_GINTSTS_HCINTR				(1 << 25)
--#define DWC2_GINTSTS_HCINTR_OFFSET			25
--#define DWC2_GINTSTS_PTXFEMPTY				(1 << 26)
--#define DWC2_GINTSTS_PTXFEMPTY_OFFSET			26
--#define DWC2_GINTSTS_LPMTRANRCVD			(1 << 27)
--#define DWC2_GINTSTS_LPMTRANRCVD_OFFSET			27
--#define DWC2_GINTSTS_CONIDSTSCHNG			(1 << 28)
--#define DWC2_GINTSTS_CONIDSTSCHNG_OFFSET		28
--#define DWC2_GINTSTS_DISCONNECT				(1 << 29)
--#define DWC2_GINTSTS_DISCONNECT_OFFSET			29
--#define DWC2_GINTSTS_SESSREQINTR			(1 << 30)
--#define DWC2_GINTSTS_SESSREQINTR_OFFSET			30
--#define DWC2_GINTSTS_WKUPINTR				(1 << 31)
--#define DWC2_GINTSTS_WKUPINTR_OFFSET			31
--#define DWC2_GRXSTS_EPNUM_MASK				(0xF << 0)
--#define DWC2_GRXSTS_EPNUM_OFFSET			0
--#define DWC2_GRXSTS_BCNT_MASK				(0x7FF << 4)
--#define DWC2_GRXSTS_BCNT_OFFSET				4
--#define DWC2_GRXSTS_DPID_MASK				(0x3 << 15)
--#define DWC2_GRXSTS_DPID_OFFSET				15
--#define DWC2_GRXSTS_PKTSTS_MASK				(0xF << 17)
--#define DWC2_GRXSTS_PKTSTS_OFFSET			17
--#define DWC2_GRXSTS_FN_MASK				(0xF << 21)
--#define DWC2_GRXSTS_FN_OFFSET				21
--#define DWC2_FIFOSIZE_STARTADDR_MASK			(0xFFFF << 0)
--#define DWC2_FIFOSIZE_STARTADDR_OFFSET			0
--#define DWC2_FIFOSIZE_DEPTH_MASK			(0xFFFF << 16)
--#define DWC2_FIFOSIZE_DEPTH_OFFSET			16
--#define DWC2_GNPTXSTS_NPTXFSPCAVAIL_MASK		(0xFFFF << 0)
--#define DWC2_GNPTXSTS_NPTXFSPCAVAIL_OFFSET		0
--#define DWC2_GNPTXSTS_NPTXQSPCAVAIL_MASK		(0xFF << 16)
--#define DWC2_GNPTXSTS_NPTXQSPCAVAIL_OFFSET		16
--#define DWC2_GNPTXSTS_NPTXQTOP_TERMINATE		(1 << 24)
--#define DWC2_GNPTXSTS_NPTXQTOP_TERMINATE_OFFSET		24
--#define DWC2_GNPTXSTS_NPTXQTOP_TOKEN_MASK		(0x3 << 25)
--#define DWC2_GNPTXSTS_NPTXQTOP_TOKEN_OFFSET		25
--#define DWC2_GNPTXSTS_NPTXQTOP_CHNEP_MASK		(0xF << 27)
--#define DWC2_GNPTXSTS_NPTXQTOP_CHNEP_OFFSET		27
--#define DWC2_DTXFSTS_TXFSPCAVAIL_MASK			(0xFFFF << 0)
--#define DWC2_DTXFSTS_TXFSPCAVAIL_OFFSET			0
--#define DWC2_GI2CCTL_RWDATA_MASK			(0xFF << 0)
--#define DWC2_GI2CCTL_RWDATA_OFFSET			0
--#define DWC2_GI2CCTL_REGADDR_MASK			(0xFF << 8)
--#define DWC2_GI2CCTL_REGADDR_OFFSET			8
--#define DWC2_GI2CCTL_ADDR_MASK				(0x7F << 16)
--#define DWC2_GI2CCTL_ADDR_OFFSET			16
--#define DWC2_GI2CCTL_I2CEN				(1 << 23)
--#define DWC2_GI2CCTL_I2CEN_OFFSET			23
--#define DWC2_GI2CCTL_ACK				(1 << 24)
--#define DWC2_GI2CCTL_ACK_OFFSET				24
--#define DWC2_GI2CCTL_I2CSUSPCTL				(1 << 25)
--#define DWC2_GI2CCTL_I2CSUSPCTL_OFFSET			25
--#define DWC2_GI2CCTL_I2CDEVADDR_MASK			(0x3 << 26)
--#define DWC2_GI2CCTL_I2CDEVADDR_OFFSET			26
--#define DWC2_GI2CCTL_RW					(1 << 30)
--#define DWC2_GI2CCTL_RW_OFFSET				30
--#define DWC2_GI2CCTL_BSYDNE				(1 << 31)
--#define DWC2_GI2CCTL_BSYDNE_OFFSET			31
--#define DWC2_HWCFG1_EP_DIR0_MASK			(0x3 << 0)
--#define DWC2_HWCFG1_EP_DIR0_OFFSET			0
--#define DWC2_HWCFG1_EP_DIR1_MASK			(0x3 << 2)
--#define DWC2_HWCFG1_EP_DIR1_OFFSET			2
--#define DWC2_HWCFG1_EP_DIR2_MASK			(0x3 << 4)
--#define DWC2_HWCFG1_EP_DIR2_OFFSET			4
--#define DWC2_HWCFG1_EP_DIR3_MASK			(0x3 << 6)
--#define DWC2_HWCFG1_EP_DIR3_OFFSET			6
--#define DWC2_HWCFG1_EP_DIR4_MASK			(0x3 << 8)
--#define DWC2_HWCFG1_EP_DIR4_OFFSET			8
--#define DWC2_HWCFG1_EP_DIR5_MASK			(0x3 << 10)
--#define DWC2_HWCFG1_EP_DIR5_OFFSET			10
--#define DWC2_HWCFG1_EP_DIR6_MASK			(0x3 << 12)
--#define DWC2_HWCFG1_EP_DIR6_OFFSET			12
--#define DWC2_HWCFG1_EP_DIR7_MASK			(0x3 << 14)
--#define DWC2_HWCFG1_EP_DIR7_OFFSET			14
--#define DWC2_HWCFG1_EP_DIR8_MASK			(0x3 << 16)
--#define DWC2_HWCFG1_EP_DIR8_OFFSET			16
--#define DWC2_HWCFG1_EP_DIR9_MASK			(0x3 << 18)
--#define DWC2_HWCFG1_EP_DIR9_OFFSET			18
--#define DWC2_HWCFG1_EP_DIR10_MASK			(0x3 << 20)
--#define DWC2_HWCFG1_EP_DIR10_OFFSET			20
--#define DWC2_HWCFG1_EP_DIR11_MASK			(0x3 << 22)
--#define DWC2_HWCFG1_EP_DIR11_OFFSET			22
--#define DWC2_HWCFG1_EP_DIR12_MASK			(0x3 << 24)
--#define DWC2_HWCFG1_EP_DIR12_OFFSET			24
--#define DWC2_HWCFG1_EP_DIR13_MASK			(0x3 << 26)
--#define DWC2_HWCFG1_EP_DIR13_OFFSET			26
--#define DWC2_HWCFG1_EP_DIR14_MASK			(0x3 << 28)
--#define DWC2_HWCFG1_EP_DIR14_OFFSET			28
--#define DWC2_HWCFG1_EP_DIR15_MASK			(0x3 << 30)
--#define DWC2_HWCFG1_EP_DIR15_OFFSET			30
--#define DWC2_HWCFG2_OP_MODE_MASK			(0x7 << 0)
--#define DWC2_HWCFG2_OP_MODE_OFFSET			0
-+#define DWC2_GAHBCFG_HBURSTLEN_MASK			GENMASK(4, 1)
-+#define DWC2_GAHBCFG_DMAENABLE				BIT(5)
-+#define DWC2_GAHBCFG_NPTXFEMPLVL_TXFEMPLVL		BIT(7)
-+#define DWC2_GAHBCFG_PTXFEMPLVL				BIT(8)
-+#define DWC2_GUSBCFG_TOUTCAL_MASK			GENMASK(2, 0)
-+#define DWC2_GUSBCFG_PHYIF				BIT(3)
-+#define DWC2_GUSBCFG_ULPI_UTMI_SEL			BIT(4)
-+#define DWC2_GUSBCFG_FSINTF				BIT(5)
-+#define DWC2_GUSBCFG_PHYSEL				BIT(6)
-+#define DWC2_GUSBCFG_DDRSEL				BIT(7)
-+#define DWC2_GUSBCFG_SRPCAP				BIT(8)
-+#define DWC2_GUSBCFG_HNPCAP				BIT(9)
-+#define DWC2_GUSBCFG_USBTRDTIM_MASK			GENMASK(13, 10)
-+#define DWC2_GUSBCFG_NPTXFRWNDEN			BIT(14)
-+#define DWC2_GUSBCFG_PHYLPWRCLKSEL			BIT(15)
-+#define DWC2_GUSBCFG_OTGUTMIFSSEL			BIT(16)
-+#define DWC2_GUSBCFG_ULPI_FSLS				BIT(17)
-+#define DWC2_GUSBCFG_ULPI_AUTO_RES			BIT(18)
-+#define DWC2_GUSBCFG_ULPI_CLK_SUS_M			BIT(19)
-+#define DWC2_GUSBCFG_ULPI_EXT_VBUS_DRV			BIT(20)
-+#define DWC2_GUSBCFG_ULPI_INT_VBUS_INDICATOR		BIT(21)
-+#define DWC2_GUSBCFG_TERM_SEL_DL_PULSE			BIT(22)
-+#define DWC2_GUSBCFG_INDICATOR_PASSTHROUGH		BIT(24)
-+#define DWC2_GUSBCFG_IC_USB_CAP				BIT(26)
-+#define DWC2_GUSBCFG_IC_TRAFFIC_PULL_REMOVE		BIT(27)
-+#define DWC2_GUSBCFG_TX_END_DELAY			BIT(28)
-+#define DWC2_GUSBCFG_FORCEHOSTMODE			BIT(29)
-+#define DWC2_GUSBCFG_FORCEDEVMODE			BIT(30)
-+#define DWC2_GLPMCTL_LPM_CAP_EN				BIT(0)
-+#define DWC2_GLPMCTL_APPL_RESP				BIT(1)
-+#define DWC2_GLPMCTL_HIRD_MASK				GENMASK(5, 2)
-+#define DWC2_GLPMCTL_REM_WKUP_EN			BIT(6)
-+#define DWC2_GLPMCTL_EN_UTMI_SLEEP			BIT(7)
-+#define DWC2_GLPMCTL_HIRD_THRES_MASK			GENMASK(12, 8)
-+#define DWC2_GLPMCTL_LPM_RESP_MASK			GENMASK(14, 13)
-+#define DWC2_GLPMCTL_PRT_SLEEP_STS			BIT(15)
-+#define DWC2_GLPMCTL_SLEEP_STATE_RESUMEOK		BIT(16)
-+#define DWC2_GLPMCTL_LPM_CHAN_INDEX_MASK		GENMASK(20, 17)
-+#define DWC2_GLPMCTL_RETRY_COUNT_MASK			GENMASK(23, 21)
-+#define DWC2_GLPMCTL_SEND_LPM				BIT(24)
-+#define DWC2_GLPMCTL_RETRY_COUNT_STS_MASK		GENMASK(27, 25)
-+#define DWC2_GLPMCTL_HSIC_CONNECT			BIT(30)
-+#define DWC2_GLPMCTL_INV_SEL_HSIC			BIT(31)
-+#define DWC2_GRSTCTL_CSFTRST				BIT(0)
-+#define DWC2_GRSTCTL_HSFTRST				BIT(1)
-+#define DWC2_GRSTCTL_HSTFRM				BIT(2)
-+#define DWC2_GRSTCTL_INTKNQFLSH				BIT(3)
-+#define DWC2_GRSTCTL_RXFFLSH				BIT(4)
-+#define DWC2_GRSTCTL_TXFFLSH				BIT(5)
-+#define DWC2_GRSTCTL_TXFNUM_MASK			GENMASK(10, 6)
-+#define DWC2_GRSTCTL_DMAREQ				BIT(30)
-+#define DWC2_GRSTCTL_AHBIDLE				BIT(31)
-+#define DWC2_GINTMSK_MODEMISMATCH			BIT(1)
-+#define DWC2_GINTMSK_OTGINTR				BIT(2)
-+#define DWC2_GINTMSK_SOFINTR				BIT(3)
-+#define DWC2_GINTMSK_RXSTSQLVL				BIT(4)
-+#define DWC2_GINTMSK_NPTXFEMPTY				BIT(5)
-+#define DWC2_GINTMSK_GINNAKEFF				BIT(6)
-+#define DWC2_GINTMSK_GOUTNAKEFF				BIT(7)
-+#define DWC2_GINTMSK_I2CINTR				BIT(9)
-+#define DWC2_GINTMSK_ERLYSUSPEND			BIT(10)
-+#define DWC2_GINTMSK_USBSUSPEND				BIT(11)
-+#define DWC2_GINTMSK_USBRESET				BIT(12)
-+#define DWC2_GINTMSK_ENUMDONE				BIT(13)
-+#define DWC2_GINTMSK_ISOOUTDROP				BIT(14)
-+#define DWC2_GINTMSK_EOPFRAME				BIT(15)
-+#define DWC2_GINTMSK_EPMISMATCH				BIT(17)
-+#define DWC2_GINTMSK_INEPINTR				BIT(18)
-+#define DWC2_GINTMSK_OUTEPINTR				BIT(19)
-+#define DWC2_GINTMSK_INCOMPLISOIN			BIT(20)
-+#define DWC2_GINTMSK_INCOMPLISOOUT			BIT(21)
-+#define DWC2_GINTMSK_PORTINTR				BIT(24)
-+#define DWC2_GINTMSK_HCINTR				BIT(25)
-+#define DWC2_GINTMSK_PTXFEMPTY				BIT(26)
-+#define DWC2_GINTMSK_LPMTRANRCVD			BIT(27)
-+#define DWC2_GINTMSK_CONIDSTSCHNG			BIT(28)
-+#define DWC2_GINTMSK_DISCONNECT				BIT(29)
-+#define DWC2_GINTMSK_SESSREQINTR			BIT(30)
-+#define DWC2_GINTMSK_WKUPINTR				BIT(31)
-+#define DWC2_GINTSTS_CURMODE_HOST			BIT(0)
-+#define DWC2_GINTSTS_MODEMISMATCH			BIT(1)
-+#define DWC2_GINTSTS_OTGINTR				BIT(2)
-+#define DWC2_GINTSTS_SOFINTR				BIT(3)
-+#define DWC2_GINTSTS_RXSTSQLVL				BIT(4)
-+#define DWC2_GINTSTS_NPTXFEMPTY				BIT(5)
-+#define DWC2_GINTSTS_GINNAKEFF				BIT(6)
-+#define DWC2_GINTSTS_GOUTNAKEFF				BIT(7)
-+#define DWC2_GINTSTS_I2CINTR				BIT(9)
-+#define DWC2_GINTSTS_ERLYSUSPEND			BIT(10)
-+#define DWC2_GINTSTS_USBSUSPEND				BIT(11)
-+#define DWC2_GINTSTS_USBRESET				BIT(12)
-+#define DWC2_GINTSTS_ENUMDONE				BIT(13)
-+#define DWC2_GINTSTS_ISOOUTDROP				BIT(14)
-+#define DWC2_GINTSTS_EOPFRAME				BIT(15)
-+#define DWC2_GINTSTS_INTOKENRX				BIT(16)
-+#define DWC2_GINTSTS_EPMISMATCH				BIT(17)
-+#define DWC2_GINTSTS_INEPINT				BIT(18)
-+#define DWC2_GINTSTS_OUTEPINTR				BIT(19)
-+#define DWC2_GINTSTS_INCOMPLISOIN			BIT(20)
-+#define DWC2_GINTSTS_INCOMPLISOOUT			BIT(21)
-+#define DWC2_GINTSTS_PORTINTR				BIT(24)
-+#define DWC2_GINTSTS_HCINTR				BIT(25)
-+#define DWC2_GINTSTS_PTXFEMPTY				BIT(26)
-+#define DWC2_GINTSTS_LPMTRANRCVD			BIT(27)
-+#define DWC2_GINTSTS_CONIDSTSCHNG			BIT(28)
-+#define DWC2_GINTSTS_DISCONNECT				BIT(29)
-+#define DWC2_GINTSTS_SESSREQINTR			BIT(30)
-+#define DWC2_GINTSTS_WKUPINTR				BIT(31)
-+#define DWC2_GRXSTS_EPNUM_MASK				GENMASK(3, 0)
-+#define DWC2_GRXSTS_BCNT_MASK				GENMASK(14, 4)
-+#define DWC2_GRXSTS_DPID_MASK				GENMASK(16, 15)
-+#define DWC2_GRXSTS_PKTSTS_MASK				GENMASK(20, 17)
-+#define DWC2_GRXSTS_FN_MASK				GENMASK(24, 21)
-+#define DWC2_FIFOSIZE_STARTADDR_MASK			GENMASK(15, 0)
-+#define DWC2_FIFOSIZE_DEPTH_MASK			GENMASK(31, 16)
-+#define DWC2_GNPTXSTS_NPTXFSPCAVAIL_MASK		GENMASK(15, 0)
-+#define DWC2_GNPTXSTS_NPTXQSPCAVAIL_MASK		GENMASK(23, 16)
-+#define DWC2_GNPTXSTS_NPTXQTOP_TERMINATE		BIT(24)
-+#define DWC2_GNPTXSTS_NPTXQTOP_TOKEN_MASK		GENMASK(26, 25)
-+#define DWC2_GNPTXSTS_NPTXQTOP_CHNEP_MASK		GENMASK(30, 27)
-+#define DWC2_DTXFSTS_TXFSPCAVAIL_MASK			GENMASK(15, 0)
-+#define DWC2_GI2CCTL_RWDATA_MASK			GENMASK(7, 0)
-+#define DWC2_GI2CCTL_REGADDR_MASK			GENMASK(15, 8)
-+#define DWC2_GI2CCTL_ADDR_MASK				GENMASK(22, 16)
-+#define DWC2_GI2CCTL_I2CEN				BIT(23)
-+#define DWC2_GI2CCTL_ACK				BIT(24)
-+#define DWC2_GI2CCTL_I2CSUSPCTL				BIT(25)
-+#define DWC2_GI2CCTL_I2CDEVADDR_MASK			GENMASK(27, 26)
-+#define DWC2_GI2CCTL_RW					BIT(30)
-+#define DWC2_GI2CCTL_BSYDNE				BIT(31)
-+#define DWC2_HWCFG1_EP_DIR0_MASK			GENMASK(1, 0)
-+#define DWC2_HWCFG1_EP_DIR1_MASK			GENMASK(3, 2)
-+#define DWC2_HWCFG1_EP_DIR2_MASK			GENMASK(5, 4)
-+#define DWC2_HWCFG1_EP_DIR3_MASK			GENMASK(7, 6)
-+#define DWC2_HWCFG1_EP_DIR4_MASK			GENMASK(9, 8)
-+#define DWC2_HWCFG1_EP_DIR5_MASK			GENMASK(11, 10)
-+#define DWC2_HWCFG1_EP_DIR6_MASK			GENMASK(13, 12)
-+#define DWC2_HWCFG1_EP_DIR7_MASK			GENMASK(15, 14)
-+#define DWC2_HWCFG1_EP_DIR8_MASK			GENMASK(17, 16)
-+#define DWC2_HWCFG1_EP_DIR9_MASK			GENMASK(19, 18)
-+#define DWC2_HWCFG1_EP_DIR10_MASK			GENMASK(21, 20)
-+#define DWC2_HWCFG1_EP_DIR11_MASK			GENMASK(23, 22)
-+#define DWC2_HWCFG1_EP_DIR12_MASK			GENMASK(25, 24)
-+#define DWC2_HWCFG1_EP_DIR13_MASK			GENMASK(27, 26)
-+#define DWC2_HWCFG1_EP_DIR14_MASK			GENMASK(29, 28)
-+#define DWC2_HWCFG1_EP_DIR15_MASK			GENMASK(31, 30)
-+#define DWC2_HWCFG2_OP_MODE_MASK			GENMASK(2, 0)
- #define DWC2_HWCFG2_ARCHITECTURE_SLAVE_ONLY		(0x0 << 3)
- #define DWC2_HWCFG2_ARCHITECTURE_EXT_DMA		(0x1 << 3)
- #define DWC2_HWCFG2_ARCHITECTURE_INT_DMA		(0x2 << 3)
--#define DWC2_HWCFG2_ARCHITECTURE_MASK			(0x3 << 3)
--#define DWC2_HWCFG2_ARCHITECTURE_OFFSET			3
--#define DWC2_HWCFG2_POINT2POINT				(1 << 5)
--#define DWC2_HWCFG2_POINT2POINT_OFFSET			5
--#define DWC2_HWCFG2_HS_PHY_TYPE_MASK			(0x3 << 6)
--#define DWC2_HWCFG2_HS_PHY_TYPE_OFFSET			6
--#define DWC2_HWCFG2_FS_PHY_TYPE_MASK			(0x3 << 8)
--#define DWC2_HWCFG2_FS_PHY_TYPE_OFFSET			8
--#define DWC2_HWCFG2_NUM_DEV_EP_MASK			(0xF << 10)
--#define DWC2_HWCFG2_NUM_DEV_EP_OFFSET			10
--#define DWC2_HWCFG2_NUM_HOST_CHAN_MASK			(0xF << 14)
--#define DWC2_HWCFG2_NUM_HOST_CHAN_OFFSET		14
--#define DWC2_HWCFG2_PERIO_EP_SUPPORTED			(1 << 18)
--#define DWC2_HWCFG2_PERIO_EP_SUPPORTED_OFFSET		18
--#define DWC2_HWCFG2_DYNAMIC_FIFO			(1 << 19)
--#define DWC2_HWCFG2_DYNAMIC_FIFO_OFFSET			19
--#define DWC2_HWCFG2_MULTI_PROC_INT			(1 << 20)
--#define DWC2_HWCFG2_MULTI_PROC_INT_OFFSET		20
--#define DWC2_HWCFG2_NONPERIO_TX_Q_DEPTH_MASK		(0x3 << 22)
--#define DWC2_HWCFG2_NONPERIO_TX_Q_DEPTH_OFFSET		22
--#define DWC2_HWCFG2_HOST_PERIO_TX_Q_DEPTH_MASK		(0x3 << 24)
--#define DWC2_HWCFG2_HOST_PERIO_TX_Q_DEPTH_OFFSET	24
--#define DWC2_HWCFG2_DEV_TOKEN_Q_DEPTH_MASK		(0x1F << 26)
--#define DWC2_HWCFG2_DEV_TOKEN_Q_DEPTH_OFFSET		26
--#define DWC2_HWCFG3_XFER_SIZE_CNTR_WIDTH_MASK		(0xF << 0)
--#define DWC2_HWCFG3_XFER_SIZE_CNTR_WIDTH_OFFSET		0
--#define DWC2_HWCFG3_PACKET_SIZE_CNTR_WIDTH_MASK		(0x7 << 4)
--#define DWC2_HWCFG3_PACKET_SIZE_CNTR_WIDTH_OFFSET	4
--#define DWC2_HWCFG3_OTG_FUNC				(1 << 7)
--#define DWC2_HWCFG3_OTG_FUNC_OFFSET			7
--#define DWC2_HWCFG3_I2C					(1 << 8)
--#define DWC2_HWCFG3_I2C_OFFSET				8
--#define DWC2_HWCFG3_VENDOR_CTRL_IF			(1 << 9)
--#define DWC2_HWCFG3_VENDOR_CTRL_IF_OFFSET		9
--#define DWC2_HWCFG3_OPTIONAL_FEATURES			(1 << 10)
--#define DWC2_HWCFG3_OPTIONAL_FEATURES_OFFSET		10
--#define DWC2_HWCFG3_SYNCH_RESET_TYPE			(1 << 11)
--#define DWC2_HWCFG3_SYNCH_RESET_TYPE_OFFSET		11
--#define DWC2_HWCFG3_OTG_ENABLE_IC_USB			(1 << 12)
--#define DWC2_HWCFG3_OTG_ENABLE_IC_USB_OFFSET		12
--#define DWC2_HWCFG3_OTG_ENABLE_HSIC			(1 << 13)
--#define DWC2_HWCFG3_OTG_ENABLE_HSIC_OFFSET		13
--#define DWC2_HWCFG3_OTG_LPM_EN				(1 << 15)
--#define DWC2_HWCFG3_OTG_LPM_EN_OFFSET			15
--#define DWC2_HWCFG3_DFIFO_DEPTH_MASK			(0xFFFF << 16)
--#define DWC2_HWCFG3_DFIFO_DEPTH_OFFSET			16
--#define DWC2_HWCFG4_NUM_DEV_PERIO_IN_EP_MASK		(0xF << 0)
--#define DWC2_HWCFG4_NUM_DEV_PERIO_IN_EP_OFFSET		0
--#define DWC2_HWCFG4_POWER_OPTIMIZ			(1 << 4)
--#define DWC2_HWCFG4_POWER_OPTIMIZ_OFFSET		4
--#define DWC2_HWCFG4_MIN_AHB_FREQ_MASK			(0x1FF << 5)
--#define DWC2_HWCFG4_MIN_AHB_FREQ_OFFSET			5
--#define DWC2_HWCFG4_UTMI_PHY_DATA_WIDTH_MASK		(0x3 << 14)
--#define DWC2_HWCFG4_UTMI_PHY_DATA_WIDTH_OFFSET		14
--#define DWC2_HWCFG4_NUM_DEV_MODE_CTRL_EP_MASK		(0xF << 16)
--#define DWC2_HWCFG4_NUM_DEV_MODE_CTRL_EP_OFFSET		16
--#define DWC2_HWCFG4_IDDIG_FILT_EN			(1 << 20)
--#define DWC2_HWCFG4_IDDIG_FILT_EN_OFFSET		20
--#define DWC2_HWCFG4_VBUS_VALID_FILT_EN			(1 << 21)
--#define DWC2_HWCFG4_VBUS_VALID_FILT_EN_OFFSET		21
--#define DWC2_HWCFG4_A_VALID_FILT_EN			(1 << 22)
--#define DWC2_HWCFG4_A_VALID_FILT_EN_OFFSET		22
--#define DWC2_HWCFG4_B_VALID_FILT_EN			(1 << 23)
--#define DWC2_HWCFG4_B_VALID_FILT_EN_OFFSET		23
--#define DWC2_HWCFG4_SESSION_END_FILT_EN			(1 << 24)
--#define DWC2_HWCFG4_SESSION_END_FILT_EN_OFFSET		24
--#define DWC2_HWCFG4_DED_FIFO_EN				(1 << 25)
--#define DWC2_HWCFG4_DED_FIFO_EN_OFFSET			25
--#define DWC2_HWCFG4_NUM_IN_EPS_MASK			(0xF << 26)
--#define DWC2_HWCFG4_NUM_IN_EPS_OFFSET			26
--#define DWC2_HWCFG4_DESC_DMA				(1 << 30)
--#define DWC2_HWCFG4_DESC_DMA_OFFSET			30
--#define DWC2_HWCFG4_DESC_DMA_DYN			(1 << 31)
--#define DWC2_HWCFG4_DESC_DMA_DYN_OFFSET			31
-+#define DWC2_HWCFG2_ARCHITECTURE_MASK			GENMASK(4, 3)
-+#define DWC2_HWCFG2_POINT2POINT				BIT(5)
-+#define DWC2_HWCFG2_HS_PHY_TYPE_MASK			GENMASK(7, 6)
-+#define DWC2_HWCFG2_FS_PHY_TYPE_MASK			GENMASK(9, 8)
-+#define DWC2_HWCFG2_NUM_DEV_EP_MASK			GENMASK(13, 10)
-+#define DWC2_HWCFG2_NUM_HOST_CHAN_MASK			GENMASK(17, 14)
-+#define DWC2_HWCFG2_PERIO_EP_SUPPORTED			BIT(18)
-+#define DWC2_HWCFG2_DYNAMIC_FIFO			BIT(19)
-+#define DWC2_HWCFG2_MULTI_PROC_INT			BIT(20)
-+#define DWC2_HWCFG2_NONPERIO_TX_Q_DEPTH_MASK		GENMASK(23, 22)
-+#define DWC2_HWCFG2_HOST_PERIO_TX_Q_DEPTH_MASK		GENMASK(25, 24)
-+#define DWC2_HWCFG2_DEV_TOKEN_Q_DEPTH_MASK		GENMASK(30, 26)
-+#define DWC2_HWCFG3_XFER_SIZE_CNTR_WIDTH_MASK		GENMASK(3, 0)
-+#define DWC2_HWCFG3_PACKET_SIZE_CNTR_WIDTH_MASK		GENMASK(6, 4)
-+#define DWC2_HWCFG3_OTG_FUNC				BIT(7)
-+#define DWC2_HWCFG3_I2C					BIT(8)
-+#define DWC2_HWCFG3_VENDOR_CTRL_IF			BIT(9)
-+#define DWC2_HWCFG3_OPTIONAL_FEATURES			BIT(10)
-+#define DWC2_HWCFG3_SYNCH_RESET_TYPE			BIT(11)
-+#define DWC2_HWCFG3_OTG_ENABLE_IC_USB			BIT(12)
-+#define DWC2_HWCFG3_OTG_ENABLE_HSIC			BIT(13)
-+#define DWC2_HWCFG3_OTG_LPM_EN				BIT(15)
-+#define DWC2_HWCFG3_DFIFO_DEPTH_MASK			GENMASK(31, 16)
-+#define DWC2_HWCFG4_NUM_DEV_PERIO_IN_EP_MASK		GENMASK(3, 0)
-+#define DWC2_HWCFG4_POWER_OPTIMIZ			BIT(4)
-+#define DWC2_HWCFG4_MIN_AHB_FREQ_MASK			GENMASK(13, 5)
-+#define DWC2_HWCFG4_UTMI_PHY_DATA_WIDTH_MASK		GENMASK(15, 14)
-+#define DWC2_HWCFG4_NUM_DEV_MODE_CTRL_EP_MASK		GENMASK(19, 16)
-+#define DWC2_HWCFG4_IDDIG_FILT_EN			BIT(20)
-+#define DWC2_HWCFG4_VBUS_VALID_FILT_EN			BIT(21)
-+#define DWC2_HWCFG4_A_VALID_FILT_EN			BIT(22)
-+#define DWC2_HWCFG4_B_VALID_FILT_EN			BIT(23)
-+#define DWC2_HWCFG4_SESSION_END_FILT_EN			BIT(24)
-+#define DWC2_HWCFG4_DED_FIFO_EN				BIT(25)
-+#define DWC2_HWCFG4_NUM_IN_EPS_MASK			GENMASK(29, 26)
-+#define DWC2_HWCFG4_DESC_DMA				BIT(30)
-+#define DWC2_HWCFG4_DESC_DMA_DYN			BIT(31)
- #define DWC2_HCFG_FSLSPCLKSEL_30_60_MHZ			0
- #define DWC2_HCFG_FSLSPCLKSEL_48_MHZ			1
- #define DWC2_HCFG_FSLSPCLKSEL_6_MHZ			2
--#define DWC2_HCFG_FSLSPCLKSEL_MASK			(0x3 << 0)
--#define DWC2_HCFG_FSLSPCLKSEL_OFFSET			0
--#define DWC2_HCFG_FSLSSUPP				(1 << 2)
--#define DWC2_HCFG_FSLSSUPP_OFFSET			2
--#define DWC2_HCFG_DESCDMA				(1 << 23)
--#define DWC2_HCFG_DESCDMA_OFFSET			23
--#define DWC2_HCFG_FRLISTEN_MASK				(0x3 << 24)
--#define DWC2_HCFG_FRLISTEN_OFFSET			24
--#define DWC2_HCFG_PERSCHEDENA				(1 << 26)
--#define DWC2_HCFG_PERSCHEDENA_OFFSET			26
--#define DWC2_HCFG_PERSCHEDSTAT				(1 << 27)
--#define DWC2_HCFG_PERSCHEDSTAT_OFFSET			27
--#define DWC2_HFIR_FRINT_MASK				(0xFFFF << 0)
--#define DWC2_HFIR_FRINT_OFFSET				0
--#define DWC2_HFNUM_FRNUM_MASK				(0xFFFF << 0)
--#define DWC2_HFNUM_FRNUM_OFFSET				0
--#define DWC2_HFNUM_FRREM_MASK				(0xFFFF << 16)
--#define DWC2_HFNUM_FRREM_OFFSET				16
-+#define DWC2_HCFG_FSLSPCLKSEL_MASK			GENMASK(1, 0)
-+#define DWC2_HCFG_FSLSSUPP				BIT(2)
-+#define DWC2_HCFG_DESCDMA				BIT(23)
-+#define DWC2_HCFG_FRLISTEN_MASK				GENMASK(25, 24)
-+#define DWC2_HCFG_PERSCHEDENA				BIT(26)
-+#define DWC2_HCFG_PERSCHEDSTAT				BIT(27)
-+#define DWC2_HFIR_FRINT_MASK				GENMASK(15, 0)
-+#define DWC2_HFNUM_FRNUM_MASK				GENMASK(15, 0)
-+#define DWC2_HFNUM_FRREM_MASK				GENMASK(31, 16)
- #define DWC2_HFNUM_MAX_FRNUM				0x3FFF
--#define DWC2_HPTXSTS_PTXFSPCAVAIL_MASK			(0xFFFF << 0)
--#define DWC2_HPTXSTS_PTXFSPCAVAIL_OFFSET		0
--#define DWC2_HPTXSTS_PTXQSPCAVAIL_MASK			(0xFF << 16)
--#define DWC2_HPTXSTS_PTXQSPCAVAIL_OFFSET		16
--#define DWC2_HPTXSTS_PTXQTOP_TERMINATE			(1 << 24)
--#define DWC2_HPTXSTS_PTXQTOP_TERMINATE_OFFSET		24
--#define DWC2_HPTXSTS_PTXQTOP_TOKEN_MASK			(0x3 << 25)
--#define DWC2_HPTXSTS_PTXQTOP_TOKEN_OFFSET		25
--#define DWC2_HPTXSTS_PTXQTOP_CHNUM_MASK			(0xF << 27)
--#define DWC2_HPTXSTS_PTXQTOP_CHNUM_OFFSET		27
--#define DWC2_HPTXSTS_PTXQTOP_ODD			(1 << 31)
--#define DWC2_HPTXSTS_PTXQTOP_ODD_OFFSET			31
--#define DWC2_HPRT0_PRTCONNSTS				(1 << 0)
--#define DWC2_HPRT0_PRTCONNSTS_OFFSET			0
--#define DWC2_HPRT0_PRTCONNDET				(1 << 1)
--#define DWC2_HPRT0_PRTCONNDET_OFFSET			1
--#define DWC2_HPRT0_PRTENA				(1 << 2)
--#define DWC2_HPRT0_PRTENA_OFFSET			2
--#define DWC2_HPRT0_PRTENCHNG				(1 << 3)
--#define DWC2_HPRT0_PRTENCHNG_OFFSET			3
--#define DWC2_HPRT0_PRTOVRCURRACT			(1 << 4)
--#define DWC2_HPRT0_PRTOVRCURRACT_OFFSET			4
--#define DWC2_HPRT0_PRTOVRCURRCHNG			(1 << 5)
--#define DWC2_HPRT0_PRTOVRCURRCHNG_OFFSET		5
--#define DWC2_HPRT0_PRTRES				(1 << 6)
--#define DWC2_HPRT0_PRTRES_OFFSET			6
--#define DWC2_HPRT0_PRTSUSP				(1 << 7)
--#define DWC2_HPRT0_PRTSUSP_OFFSET			7
--#define DWC2_HPRT0_PRTRST				(1 << 8)
--#define DWC2_HPRT0_PRTRST_OFFSET			8
--#define DWC2_HPRT0_PRTLNSTS_MASK			(0x3 << 10)
--#define DWC2_HPRT0_PRTLNSTS_OFFSET			10
--#define DWC2_HPRT0_PRTPWR				(1 << 12)
--#define DWC2_HPRT0_PRTPWR_OFFSET			12
--#define DWC2_HPRT0_PRTTSTCTL_MASK			(0xF << 13)
--#define DWC2_HPRT0_PRTTSTCTL_OFFSET			13
-+#define DWC2_HPTXSTS_PTXFSPCAVAIL_MASK			GENMASK(15, 0)
-+#define DWC2_HPTXSTS_PTXQSPCAVAIL_MASK			GENMASK(23, 16)
-+#define DWC2_HPTXSTS_PTXQTOP_TERMINATE			BIT(24)
-+#define DWC2_HPTXSTS_PTXQTOP_TOKEN_MASK			GENMASK(26, 25)
-+#define DWC2_HPTXSTS_PTXQTOP_CHNUM_MASK			GENMASK(30, 27)
-+#define DWC2_HPTXSTS_PTXQTOP_ODD			BIT(31)
-+#define DWC2_HPRT0_PRTCONNSTS				BIT(0)
-+#define DWC2_HPRT0_PRTCONNDET				BIT(1)
-+#define DWC2_HPRT0_PRTENA				BIT(2)
-+#define DWC2_HPRT0_PRTENCHNG				BIT(3)
-+#define DWC2_HPRT0_PRTOVRCURRACT			BIT(4)
-+#define DWC2_HPRT0_PRTOVRCURRCHNG			BIT(5)
-+#define DWC2_HPRT0_PRTRES				BIT(6)
-+#define DWC2_HPRT0_PRTSUSP				BIT(7)
-+#define DWC2_HPRT0_PRTRST				BIT(8)
-+#define DWC2_HPRT0_PRTLNSTS_MASK			GENMASK(11, 10)
-+#define DWC2_HPRT0_PRTPWR				BIT(12)
-+#define DWC2_HPRT0_PRTTSTCTL_MASK			GENMASK(16, 13)
- #define DWC2_HPRT0_PRTSPD_HIGH				(0 << 17)
- #define DWC2_HPRT0_PRTSPD_FULL				(1 << 17)
- #define DWC2_HPRT0_PRTSPD_LOW				(2 << 17)
--#define DWC2_HPRT0_PRTSPD_MASK				(0x3 << 17)
--#define DWC2_HPRT0_PRTSPD_OFFSET			17
-+#define DWC2_HPRT0_PRTSPD_MASK				GENMASK(18, 17)
- #define DWC2_HPRT0_W1C_MASK				(DWC2_HPRT0_PRTCONNDET | \
- 							DWC2_HPRT0_PRTENA | \
- 							DWC2_HPRT0_PRTENCHNG | \
- 							DWC2_HPRT0_PRTOVRCURRCHNG)
--#define DWC2_HAINT_CH0					(1 << 0)
--#define DWC2_HAINT_CH0_OFFSET				0
--#define DWC2_HAINT_CH1					(1 << 1)
--#define DWC2_HAINT_CH1_OFFSET				1
--#define DWC2_HAINT_CH2					(1 << 2)
--#define DWC2_HAINT_CH2_OFFSET				2
--#define DWC2_HAINT_CH3					(1 << 3)
--#define DWC2_HAINT_CH3_OFFSET				3
--#define DWC2_HAINT_CH4					(1 << 4)
--#define DWC2_HAINT_CH4_OFFSET				4
--#define DWC2_HAINT_CH5					(1 << 5)
--#define DWC2_HAINT_CH5_OFFSET				5
--#define DWC2_HAINT_CH6					(1 << 6)
--#define DWC2_HAINT_CH6_OFFSET				6
--#define DWC2_HAINT_CH7					(1 << 7)
--#define DWC2_HAINT_CH7_OFFSET				7
--#define DWC2_HAINT_CH8					(1 << 8)
--#define DWC2_HAINT_CH8_OFFSET				8
--#define DWC2_HAINT_CH9					(1 << 9)
--#define DWC2_HAINT_CH9_OFFSET				9
--#define DWC2_HAINT_CH10					(1 << 10)
--#define DWC2_HAINT_CH10_OFFSET				10
--#define DWC2_HAINT_CH11					(1 << 11)
--#define DWC2_HAINT_CH11_OFFSET				11
--#define DWC2_HAINT_CH12					(1 << 12)
--#define DWC2_HAINT_CH12_OFFSET				12
--#define DWC2_HAINT_CH13					(1 << 13)
--#define DWC2_HAINT_CH13_OFFSET				13
--#define DWC2_HAINT_CH14					(1 << 14)
--#define DWC2_HAINT_CH14_OFFSET				14
--#define DWC2_HAINT_CH15					(1 << 15)
--#define DWC2_HAINT_CH15_OFFSET				15
--#define DWC2_HAINT_CHINT_MASK				0xffff
--#define DWC2_HAINT_CHINT_OFFSET				0
--#define DWC2_HAINTMSK_CH0				(1 << 0)
--#define DWC2_HAINTMSK_CH0_OFFSET			0
--#define DWC2_HAINTMSK_CH1				(1 << 1)
--#define DWC2_HAINTMSK_CH1_OFFSET			1
--#define DWC2_HAINTMSK_CH2				(1 << 2)
--#define DWC2_HAINTMSK_CH2_OFFSET			2
--#define DWC2_HAINTMSK_CH3				(1 << 3)
--#define DWC2_HAINTMSK_CH3_OFFSET			3
--#define DWC2_HAINTMSK_CH4				(1 << 4)
--#define DWC2_HAINTMSK_CH4_OFFSET			4
--#define DWC2_HAINTMSK_CH5				(1 << 5)
--#define DWC2_HAINTMSK_CH5_OFFSET			5
--#define DWC2_HAINTMSK_CH6				(1 << 6)
--#define DWC2_HAINTMSK_CH6_OFFSET			6
--#define DWC2_HAINTMSK_CH7				(1 << 7)
--#define DWC2_HAINTMSK_CH7_OFFSET			7
--#define DWC2_HAINTMSK_CH8				(1 << 8)
--#define DWC2_HAINTMSK_CH8_OFFSET			8
--#define DWC2_HAINTMSK_CH9				(1 << 9)
--#define DWC2_HAINTMSK_CH9_OFFSET			9
--#define DWC2_HAINTMSK_CH10				(1 << 10)
--#define DWC2_HAINTMSK_CH10_OFFSET			10
--#define DWC2_HAINTMSK_CH11				(1 << 11)
--#define DWC2_HAINTMSK_CH11_OFFSET			11
--#define DWC2_HAINTMSK_CH12				(1 << 12)
--#define DWC2_HAINTMSK_CH12_OFFSET			12
--#define DWC2_HAINTMSK_CH13				(1 << 13)
--#define DWC2_HAINTMSK_CH13_OFFSET			13
--#define DWC2_HAINTMSK_CH14				(1 << 14)
--#define DWC2_HAINTMSK_CH14_OFFSET			14
--#define DWC2_HAINTMSK_CH15				(1 << 15)
--#define DWC2_HAINTMSK_CH15_OFFSET			15
--#define DWC2_HAINTMSK_CHINT_MASK			0xffff
--#define DWC2_HAINTMSK_CHINT_OFFSET			0
--#define DWC2_HCCHAR_MPS_MASK				(0x7FF << 0)
--#define DWC2_HCCHAR_MPS_OFFSET				0
--#define DWC2_HCCHAR_EPNUM_MASK				(0xF << 11)
--#define DWC2_HCCHAR_EPNUM_OFFSET			11
--#define DWC2_HCCHAR_EPDIR				(1 << 15)
--#define DWC2_HCCHAR_EPDIR_OFFSET			15
--#define DWC2_HCCHAR_LSPDDEV				(1 << 17)
--#define DWC2_HCCHAR_LSPDDEV_OFFSET			17
-+#define DWC2_HAINT_CH0					BIT(0)
-+#define DWC2_HAINT_CH1					BIT(1)
-+#define DWC2_HAINT_CH2					BIT(2)
-+#define DWC2_HAINT_CH3					BIT(3)
-+#define DWC2_HAINT_CH4					BIT(4)
-+#define DWC2_HAINT_CH5					BIT(5)
-+#define DWC2_HAINT_CH6					BIT(6)
-+#define DWC2_HAINT_CH7					BIT(7)
-+#define DWC2_HAINT_CH8					BIT(8)
-+#define DWC2_HAINT_CH9					BIT(9)
-+#define DWC2_HAINT_CH10					BIT(10)
-+#define DWC2_HAINT_CH11					BIT(11)
-+#define DWC2_HAINT_CH12					BIT(12)
-+#define DWC2_HAINT_CH13					BIT(13)
-+#define DWC2_HAINT_CH14					BIT(14)
-+#define DWC2_HAINT_CH15					BIT(15)
-+#define DWC2_HAINT_CHINT_MASK				GENMASK(15, 0)
-+#define DWC2_HAINTMSK_CH0				BIT(0)
-+#define DWC2_HAINTMSK_CH1				BIT(1)
-+#define DWC2_HAINTMSK_CH2				BIT(2)
-+#define DWC2_HAINTMSK_CH3				BIT(3)
-+#define DWC2_HAINTMSK_CH4				BIT(4)
-+#define DWC2_HAINTMSK_CH5				BIT(5)
-+#define DWC2_HAINTMSK_CH6				BIT(6)
-+#define DWC2_HAINTMSK_CH7				BIT(7)
-+#define DWC2_HAINTMSK_CH8				BIT(8)
-+#define DWC2_HAINTMSK_CH9				BIT(9)
-+#define DWC2_HAINTMSK_CH10				BIT(10)
-+#define DWC2_HAINTMSK_CH11				BIT(11)
-+#define DWC2_HAINTMSK_CH12				BIT(12)
-+#define DWC2_HAINTMSK_CH13				BIT(13)
-+#define DWC2_HAINTMSK_CH14				BIT(14)
-+#define DWC2_HAINTMSK_CH15				BIT(15)
-+#define DWC2_HAINTMSK_CHINT_MASK			GENMASK(15, 0)
-+#define DWC2_HCCHAR_MPS_MASK				GENMASK(10, 0)
-+#define DWC2_HCCHAR_EPNUM_MASK				GENMASK(14, 11)
-+#define DWC2_HCCHAR_EPDIR				BIT(15)
-+#define DWC2_HCCHAR_LSPDDEV				BIT(17)
- #define DWC2_HCCHAR_EPTYPE_CONTROL			0
- #define DWC2_HCCHAR_EPTYPE_ISOC				1
- #define DWC2_HCCHAR_EPTYPE_BULK				2
- #define DWC2_HCCHAR_EPTYPE_INTR				3
--#define DWC2_HCCHAR_EPTYPE_MASK				(0x3 << 18)
--#define DWC2_HCCHAR_EPTYPE_OFFSET			18
--#define DWC2_HCCHAR_MULTICNT_MASK			(0x3 << 20)
--#define DWC2_HCCHAR_MULTICNT_OFFSET			20
--#define DWC2_HCCHAR_DEVADDR_MASK			(0x7F << 22)
--#define DWC2_HCCHAR_DEVADDR_OFFSET			22
--#define DWC2_HCCHAR_ODDFRM				(1 << 29)
--#define DWC2_HCCHAR_ODDFRM_OFFSET			29
--#define DWC2_HCCHAR_CHDIS				(1 << 30)
--#define DWC2_HCCHAR_CHDIS_OFFSET			30
--#define DWC2_HCCHAR_CHEN				(1 << 31)
--#define DWC2_HCCHAR_CHEN_OFFSET				31
--#define DWC2_HCSPLT_PRTADDR_MASK			(0x7F << 0)
--#define DWC2_HCSPLT_PRTADDR_OFFSET			0
--#define DWC2_HCSPLT_HUBADDR_MASK			(0x7F << 7)
--#define DWC2_HCSPLT_HUBADDR_OFFSET			7
--#define DWC2_HCSPLT_XACTPOS_MASK			(0x3 << 14)
--#define DWC2_HCSPLT_XACTPOS_OFFSET			14
--#define DWC2_HCSPLT_COMPSPLT				(1 << 16)
--#define DWC2_HCSPLT_COMPSPLT_OFFSET			16
--#define DWC2_HCSPLT_SPLTENA				(1 << 31)
--#define DWC2_HCSPLT_SPLTENA_OFFSET			31
--#define DWC2_HCINT_XFERCOMP				(1 << 0)
--#define DWC2_HCINT_XFERCOMP_OFFSET			0
--#define DWC2_HCINT_CHHLTD				(1 << 1)
--#define DWC2_HCINT_CHHLTD_OFFSET			1
--#define DWC2_HCINT_AHBERR				(1 << 2)
--#define DWC2_HCINT_AHBERR_OFFSET			2
--#define DWC2_HCINT_STALL				(1 << 3)
--#define DWC2_HCINT_STALL_OFFSET				3
--#define DWC2_HCINT_NAK					(1 << 4)
--#define DWC2_HCINT_NAK_OFFSET				4
--#define DWC2_HCINT_ACK					(1 << 5)
--#define DWC2_HCINT_ACK_OFFSET				5
--#define DWC2_HCINT_NYET					(1 << 6)
--#define DWC2_HCINT_NYET_OFFSET				6
--#define DWC2_HCINT_XACTERR				(1 << 7)
--#define DWC2_HCINT_XACTERR_OFFSET			7
--#define DWC2_HCINT_BBLERR				(1 << 8)
--#define DWC2_HCINT_BBLERR_OFFSET			8
--#define DWC2_HCINT_FRMOVRUN				(1 << 9)
--#define DWC2_HCINT_FRMOVRUN_OFFSET			9
--#define DWC2_HCINT_DATATGLERR				(1 << 10)
--#define DWC2_HCINT_DATATGLERR_OFFSET			10
--#define DWC2_HCINT_BNA					(1 << 11)
--#define DWC2_HCINT_BNA_OFFSET				11
--#define DWC2_HCINT_XCS_XACT				(1 << 12)
--#define DWC2_HCINT_XCS_XACT_OFFSET			12
--#define DWC2_HCINT_FRM_LIST_ROLL			(1 << 13)
--#define DWC2_HCINT_FRM_LIST_ROLL_OFFSET			13
--#define DWC2_HCINTMSK_XFERCOMPL				(1 << 0)
--#define DWC2_HCINTMSK_XFERCOMPL_OFFSET			0
--#define DWC2_HCINTMSK_CHHLTD				(1 << 1)
--#define DWC2_HCINTMSK_CHHLTD_OFFSET			1
--#define DWC2_HCINTMSK_AHBERR				(1 << 2)
--#define DWC2_HCINTMSK_AHBERR_OFFSET			2
--#define DWC2_HCINTMSK_STALL				(1 << 3)
--#define DWC2_HCINTMSK_STALL_OFFSET			3
--#define DWC2_HCINTMSK_NAK				(1 << 4)
--#define DWC2_HCINTMSK_NAK_OFFSET			4
--#define DWC2_HCINTMSK_ACK				(1 << 5)
--#define DWC2_HCINTMSK_ACK_OFFSET			5
--#define DWC2_HCINTMSK_NYET				(1 << 6)
--#define DWC2_HCINTMSK_NYET_OFFSET			6
--#define DWC2_HCINTMSK_XACTERR				(1 << 7)
--#define DWC2_HCINTMSK_XACTERR_OFFSET			7
--#define DWC2_HCINTMSK_BBLERR				(1 << 8)
--#define DWC2_HCINTMSK_BBLERR_OFFSET			8
--#define DWC2_HCINTMSK_FRMOVRUN				(1 << 9)
--#define DWC2_HCINTMSK_FRMOVRUN_OFFSET			9
--#define DWC2_HCINTMSK_DATATGLERR			(1 << 10)
--#define DWC2_HCINTMSK_DATATGLERR_OFFSET			10
--#define DWC2_HCINTMSK_BNA				(1 << 11)
--#define DWC2_HCINTMSK_BNA_OFFSET			11
--#define DWC2_HCINTMSK_XCS_XACT				(1 << 12)
--#define DWC2_HCINTMSK_XCS_XACT_OFFSET			12
--#define DWC2_HCINTMSK_FRM_LIST_ROLL			(1 << 13)
--#define DWC2_HCINTMSK_FRM_LIST_ROLL_OFFSET		13
--#define DWC2_HCTSIZ_XFERSIZE_MASK			0x7ffff
--#define DWC2_HCTSIZ_XFERSIZE_OFFSET			0
--#define DWC2_HCTSIZ_SCHINFO_MASK			0xff
--#define DWC2_HCTSIZ_SCHINFO_OFFSET			0
--#define DWC2_HCTSIZ_NTD_MASK				(0xff << 8)
--#define DWC2_HCTSIZ_NTD_OFFSET				8
--#define DWC2_HCTSIZ_PKTCNT_MASK				(0x3ff << 19)
--#define DWC2_HCTSIZ_PKTCNT_OFFSET			19
--#define DWC2_HCTSIZ_PID_MASK				(0x3 << 29)
--#define DWC2_HCTSIZ_PID_OFFSET				29
--#define DWC2_HCTSIZ_DOPNG				(1 << 31)
--#define DWC2_HCTSIZ_DOPNG_OFFSET			31
--#define DWC2_HCDMA_CTD_MASK				(0xFF << 3)
--#define DWC2_HCDMA_CTD_OFFSET				3
--#define DWC2_HCDMA_DMA_ADDR_MASK			(0x1FFFFF << 11)
--#define DWC2_HCDMA_DMA_ADDR_OFFSET			11
--#define DWC2_PCGCCTL_STOPPCLK				(1 << 0)
--#define DWC2_PCGCCTL_STOPPCLK_OFFSET			0
--#define DWC2_PCGCCTL_GATEHCLK				(1 << 1)
--#define DWC2_PCGCCTL_GATEHCLK_OFFSET			1
--#define DWC2_PCGCCTL_PWRCLMP				(1 << 2)
--#define DWC2_PCGCCTL_PWRCLMP_OFFSET			2
--#define DWC2_PCGCCTL_RSTPDWNMODULE			(1 << 3)
--#define DWC2_PCGCCTL_RSTPDWNMODULE_OFFSET		3
--#define DWC2_PCGCCTL_PHYSUSPENDED			(1 << 4)
--#define DWC2_PCGCCTL_PHYSUSPENDED_OFFSET		4
--#define DWC2_PCGCCTL_ENBL_SLEEP_GATING			(1 << 5)
--#define DWC2_PCGCCTL_ENBL_SLEEP_GATING_OFFSET		5
--#define DWC2_PCGCCTL_PHY_IN_SLEEP			(1 << 6)
--#define DWC2_PCGCCTL_PHY_IN_SLEEP_OFFSET		6
--#define DWC2_PCGCCTL_DEEP_SLEEP				(1 << 7)
--#define DWC2_PCGCCTL_DEEP_SLEEP_OFFSET			7
-+#define DWC2_HCCHAR_EPTYPE_MASK				GENMASK(19, 18)
-+#define DWC2_HCCHAR_MULTICNT_MASK			GENMASK(21, 20)
-+#define DWC2_HCCHAR_DEVADDR_MASK			GENMASK(28, 22)
-+#define DWC2_HCCHAR_ODDFRM				BIT(29)
-+#define DWC2_HCCHAR_CHDIS				BIT(30)
-+#define DWC2_HCCHAR_CHEN				BIT(31)
-+#define DWC2_HCSPLT_PRTADDR_MASK			GENMASK(6, 0)
-+#define DWC2_HCSPLT_HUBADDR_MASK			GENMASK(13, 7)
-+#define DWC2_HCSPLT_XACTPOS_MASK			GENMASK(15, 14)
-+#define DWC2_HCSPLT_COMPSPLT				BIT(16)
-+#define DWC2_HCSPLT_SPLTENA				BIT(31)
-+#define DWC2_HCINT_XFERCOMP				BIT(0)
-+#define DWC2_HCINT_CHHLTD				BIT(1)
-+#define DWC2_HCINT_AHBERR				BIT(2)
-+#define DWC2_HCINT_STALL				BIT(3)
-+#define DWC2_HCINT_NAK					BIT(4)
-+#define DWC2_HCINT_ACK					BIT(5)
-+#define DWC2_HCINT_NYET					BIT(6)
-+#define DWC2_HCINT_XACTERR				BIT(7)
-+#define DWC2_HCINT_BBLERR				BIT(8)
-+#define DWC2_HCINT_FRMOVRUN				BIT(9)
-+#define DWC2_HCINT_DATATGLERR				BIT(10)
-+#define DWC2_HCINT_BNA					BIT(11)
-+#define DWC2_HCINT_XCS_XACT				BIT(12)
-+#define DWC2_HCINT_FRM_LIST_ROLL			BIT(13)
-+#define DWC2_HCINTMSK_XFERCOMPL				BIT(0)
-+#define DWC2_HCINTMSK_CHHLTD				BIT(1)
-+#define DWC2_HCINTMSK_AHBERR				BIT(2)
-+#define DWC2_HCINTMSK_STALL				BIT(3)
-+#define DWC2_HCINTMSK_NAK				BIT(4)
-+#define DWC2_HCINTMSK_ACK				BIT(5)
-+#define DWC2_HCINTMSK_NYET				BIT(6)
-+#define DWC2_HCINTMSK_XACTERR				BIT(7)
-+#define DWC2_HCINTMSK_BBLERR				BIT(8)
-+#define DWC2_HCINTMSK_FRMOVRUN				BIT(9)
-+#define DWC2_HCINTMSK_DATATGLERR			BIT(10)
-+#define DWC2_HCINTMSK_BNA				BIT(11)
-+#define DWC2_HCINTMSK_XCS_XACT				BIT(12)
-+#define DWC2_HCINTMSK_FRM_LIST_ROLL			BIT(13)
-+#define DWC2_HCTSIZ_XFERSIZE_MASK			GENMASK(18, 0)
-+#define DWC2_HCTSIZ_SCHINFO_MASK			GENMASK(7, 0)
-+#define DWC2_HCTSIZ_NTD_MASK				GENMASK(15, 8)
-+#define DWC2_HCTSIZ_PKTCNT_MASK				GENMASK(28, 19)
-+#define DWC2_HCTSIZ_PID_MASK				GENMASK(30, 29)
-+#define DWC2_HCTSIZ_DOPNG				BIT(31)
-+#define DWC2_HCDMA_CTD_MASK				GENMASK(10, 3)
-+#define DWC2_HCDMA_DMA_ADDR_MASK			GENMASK(31, 11)
-+#define DWC2_PCGCCTL_STOPPCLK				BIT(0)
-+#define DWC2_PCGCCTL_GATEHCLK				BIT(1)
-+#define DWC2_PCGCCTL_PWRCLMP				BIT(2)
-+#define DWC2_PCGCCTL_RSTPDWNMODULE			BIT(3)
-+#define DWC2_PCGCCTL_PHYSUSPENDED			BIT(4)
-+#define DWC2_PCGCCTL_ENBL_SLEEP_GATING			BIT(5)
-+#define DWC2_PCGCCTL_PHY_IN_SLEEP			BIT(6)
-+#define DWC2_PCGCCTL_DEEP_SLEEP				BIT(7)
- #define DWC2_SNPSID_DEVID_VER_2xx			(0x4f542 << 12)
- #define DWC2_SNPSID_DEVID_VER_3xx			(0x4f543 << 12)
--#define DWC2_SNPSID_DEVID_MASK				(0xfffff << 12)
--#define DWC2_SNPSID_DEVID_OFFSET			12
-+#define DWC2_SNPSID_DEVID_MASK				GENMASK(31, 12)
- 
- /* Host controller specific */
- #define DWC2_HC_PID_DATA0		0
-@@ -692,13 +367,13 @@
- #define DWC2_HC_PID_SETUP		3
- 
- /* roothub.a masks */
--#define RH_A_NDP	(0xff << 0)	/* number of downstream ports */
--#define RH_A_PSM	(1 << 8)	/* power switching mode */
--#define RH_A_NPS	(1 << 9)	/* no power switching */
--#define RH_A_DT		(1 << 10)	/* device type (mbz) */
--#define RH_A_OCPM	(1 << 11)	/* over current protection mode */
--#define RH_A_NOCP	(1 << 12)	/* no over current protection */
--#define RH_A_POTPGT	(0xff << 24)	/* power on to power good time */
-+#define RH_A_NDP	GENMASK(7, 0)	/* number of downstream ports */
-+#define RH_A_PSM	BIT(8)		/* power switching mode */
-+#define RH_A_NPS	BIT(9)		/* no power switching */
-+#define RH_A_DT		BIT(10)		/* device type (mbz) */
-+#define RH_A_OCPM	BIT(11)		/* over current protection mode */
-+#define RH_A_NOCP	BIT(12)		/* no over current protection */
-+#define RH_A_POTPGT	GENMASK(31, 24)	/* power on to power good time */
- 
- /* roothub.b masks */
- #define RH_B_DR		0x0000ffff	/* device removable flags */
+-struct dwc2_hc_regs {
+-	u32			hcchar;		/* 0x00 */
+-	u32			hcsplt;
+-	u32			hcint;
+-	u32			hcintmsk;
+-	u32			hctsiz;		/* 0x10 */
+-	u32			hcdma;
+-	u32			reserved;
+-	u32			hcdmab;
+-};
+-
+-struct dwc2_host_regs {
+-	u32			hcfg;		/* 0x00 */
+-	u32			hfir;
+-	u32			hfnum;
+-	u32			_pad_0x40c;
+-	u32			hptxsts;	/* 0x10 */
+-	u32			haint;
+-	u32			haintmsk;
+-	u32			hflbaddr;
+-};
+-
+-struct dwc2_core_regs {
+-	u32			gotgctl;	/* 0x000 */
+-	u32			gotgint;
+-	u32			gahbcfg;
+-	u32			gusbcfg;
+-	u32			grstctl;	/* 0x010 */
+-	u32			gintsts;
+-	u32			gintmsk;
+-	u32			grxstsr;
+-	u32			grxstsp;	/* 0x020 */
+-	u32			grxfsiz;
+-	u32			gnptxfsiz;
+-	u32			gnptxsts;
+-	u32			gi2cctl;	/* 0x030 */
+-	u32			gpvndctl;
+-	u32			ggpio;
+-	u32			guid;
+-	u32			gsnpsid;	/* 0x040 */
+-	u32			ghwcfg1;
+-	u32			ghwcfg2;
+-	u32			ghwcfg3;
+-	u32			ghwcfg4;	/* 0x050 */
+-	u32			glpmcfg;
+-	u32			_pad_0x58_0x9c[42];
+-	u32			hptxfsiz;	/* 0x100 */
+-	u32			dptxfsiz_dieptxf[15];
+-	u32			_pad_0x140_0x3fc[176];
+-	struct dwc2_host_regs	host_regs;	/* 0x400 */
+-	u32			_pad_0x420_0x43c[8];
+-	u32			hprt0;		/* 0x440 */
+-	u32			_pad_0x444_0x4fc[47];
+-	struct dwc2_hc_regs	hc_regs[16];	/* 0x500 */
+-	u32			_pad_0x700_0xe00[448];
+-	u32			pcgcctl;	/* 0xe00 */
+-};
+-
+ #define DWC2_GOTGCTL_SESREQSCS				(1 << 0)
+ #define DWC2_GOTGCTL_SESREQSCS_OFFSET			0
+ #define DWC2_GOTGCTL_SESREQ				(1 << 1)
 
 -- 
 2.39.2
