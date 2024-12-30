@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8632DE7718F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Dec 2024 10:31:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C7C2E7718F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Dec 2024 10:31:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7347A80607;
-	Mon, 30 Dec 2024 11:31:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5750805EA;
+	Mon, 30 Dec 2024 11:31:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FFiK+Q2y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fc8FG/1u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2443B80570; Mon, 30 Dec 2024 11:31:07 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id C3B3880615; Mon, 30 Dec 2024 11:31:08 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0FC680584
- for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 11:31:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76524805EA
+ for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 11:31:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-38634c35129so6911368f8f.3
- for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 02:31:03 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4364a37a1d7so95857355e9.3
+ for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 02:31:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735554663; x=1736159463; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1735554664; x=1736159464; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=BHtk41PGmmkmjRHwkyCjhxhd66vRvgl1XZKtZTeeTbQ=;
- b=FFiK+Q2ycZSIBG01eUSSpZ8H9AVx85NCqxELLus5JlUwj4/bTZm48XEUOqKGFD/seW
- Sq0DRX/7JcKO8DBAi81HyKtxaQwJXsaIriltVoiWX8aw5S4okKRvmFQuz6CwLpYC+NBO
- +mnnNcbg2HL1Pak5uB7P3g5GPZdQqMIuw4tO/Vr8z/uXL4cLcydIBHTucExzPKfPStrD
- jYIzwDRLbeISvM2TH25p0zIYS52HrO8BkRczeRjzvWwFaPx+5nqWXtkMLsnyzSOTo5by
- 5Q0lM/+R59t/khxgNvSnIuGy3thOnVe8e3g8EC5l7O9ex7hecjMB9AEeUV282OepMGd7
- xgxg==
+ :reply-to; bh=5KWtDfUrleNXQMS1nijml6OAU847GUFzOHAdGU0C2/g=;
+ b=fc8FG/1u73bwoFH5ot96gWgf0cTXWovbsssnWM5ocr13H7E9K7HZWRTJtHy858AZng
+ mJcpdQ1CXwxatktgzhKdcZcxQX4TVBIYjCAFuyWOmo6ZPD9P8Eb9JosrWz8XXP8UX3mY
+ VHg0YppCJlMMczc2yi37zT8wVw7Xx9hKTDKR6yzkvaA7swH9GyMG6B4f5XSKlqir3vGZ
+ TpuGFWAK8sdphzv0Ayx2FdXbsIqMrs1N6ZvlJDP69Xfi9audfmHLzy0lQ14FgggXJoA4
+ IOcdiw1syopb6P/vsa2vmqGZLU/j9Vyw6xKBaKzx52sczmZ8pNNl1mat7K/99KYVEDy+
+ i0sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735554663; x=1736159463;
+ d=1e100.net; s=20230601; t=1735554664; x=1736159464;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BHtk41PGmmkmjRHwkyCjhxhd66vRvgl1XZKtZTeeTbQ=;
- b=u9EJgVGRb7AUiM9C5aFxxCUM5ACv5w8PLgO3no3hZg51/8v+LkiVL4GxLfDrngkTVi
- gvQgyCNntLoJoMxZnw8OobeaZTo9Udks6Woz5sKblDIi0fsVbv+PoKH1WSHqdhcVcns0
- jRkoMbf0vUg+LxmxNwTGkQTsLm7AtlLO/8kibjCeENdiXN3Ny8W0ld9RTJFlQNtEXC7A
- BsO0gZ4fM/SiMYMt3+17ipMlmDijCLTmp4RjZTGupoI+gQCURr0fFFajhIKorhBYT3RH
- YwSUv+rRt8ZHDWgnTsdu2OJsw3Mo60Y5aAklM2OYFB7/DrZxOmLldURt+8lyMnpkczMs
- SmKA==
+ bh=5KWtDfUrleNXQMS1nijml6OAU847GUFzOHAdGU0C2/g=;
+ b=UTxIty3VVGklBEIuyI4SXcMduHXtvRE4VRsZH6dcMybd3gQT0u4Jr3JgkCMzYrl5Ii
+ qQP3aPYT/LwdC8r+G473rDkDHKatqB5XCFQjJu/BF8GsvtKh3r2bThsV2Of2w/4auvsK
+ 2mU/DiyXkoHCSINVWUiGCiJg98QyhijQusRBs6ZZh1ZhFbdD6XS95TgcHQvCkiG8aBRC
+ nyOOEfFiczZwOTooShJD0NRpxXBe8ABQESNa4gEWiOcXh0k2MtxisQCM5U0Ra5qml47+
+ E4ZaRW2zoBMOWuaqXeQ3ogZdr0fO2qw/3CQE7qzRpxkX3L37KMS3+PrqvNujDFpWQsCw
+ +i3Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXpvq/thz6HzerG0mIGTZH0Vy2y3nfVQgnYFg3oUHsdqo4vFlU7FPVm3+DyuD8xUTql0uAkDAs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzl9DKY5Q8JySJgeOmsftigh/ouCQPHaIx4f2DP41m2wDqiOjXL
- L3624Wyexc/c34O06E27aHJpRNrqnvcnpFQ/zgITRhwlBbrLXMZZr1E3sUUGDiM=
-X-Gm-Gg: ASbGncsO90gMKXiif6My0nIZ1f4Psb3xDqukta7Z5pEXibdt7Cifrs1b5grUQSH26YS
- j3xzUfWuKHIU1+mEv/Y6gZXC/wap2SK1Z2ooMKJNHIqRyVNa2LDLklN16D7HCOrUIziNtMiLH+S
- s3E/NwNNi4eC//1OBj1U9mEYhOnrcGKhcqVfH4apXuVQXk+EOB16PpOVedCgdIqC2/8EyQE9/X+
- bqVarTmoZC0i0NbNI6SBeYSeQTPrNmF0cChYBpx0sMuCumFlcJjtssec1ZslbOudYSYD2FAPKRy
- Gg==
-X-Google-Smtp-Source: AGHT+IHoHNs2dmAtcZbSdRgMO97A/2NAwImuvAJId/CLyK7oUVDty3KGNI6+njVmkDJOADxOkT9MNg==
-X-Received: by 2002:a05:6000:470a:b0:385:f092:df2 with SMTP id
- ffacd0b85a97d-38a221faae4mr25452287f8f.34.1735554663114; 
+ AJvYcCVrxQDqvwypK0zcG1NLYMNLsw24RKWnVqBiJPjSN0WGi9Cavy7z48jPqC3xYThYL8s2lo97sQk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMkLHEVZj/zDjro+iSRmOF0G2HoBSV0pdSxPCttkR+b/uQ4u1l
+ NR5yw635uvVI2T/ZXXC0OpDkezLlUwbIscIickxMea3FERoOAOgck33rRChEWRg=
+X-Gm-Gg: ASbGncvTZ2Ex7yF053ceAbdR0PCDoH3bwVYUHgewG1UlAMlktPlV0jXUTahu4VGHXXt
+ CqHLxXZdR41ypWX9cbEZfaZVEg0VmAQNl0+aOk+GL44e5bPt1N9B9IWag7qc8k/kGrVWUtZW82k
+ mafy3GiWeQNlbmenkEHESb7GBeOnYociErvZzLeVvlF95WMfHGf7qXpjg4/sV1uHyTyKJH1lv6h
+ PGcpgEoKdE+pBNmYBcZxbglX32z+B4IcmyATT3yYU3321bA5sYwX9VvGhyXV7UwSjyyCsrkYfqu
+ LA==
+X-Google-Smtp-Source: AGHT+IFeF7ry2C2DzwcAlgnwswAybnaTC+t9ZVAjjEAtfjMXTzlwP6i7OfB4o/qPJOJiL71JaXQMdw==
+X-Received: by 2002:a05:6000:470c:b0:385:f5c4:b318 with SMTP id
+ ffacd0b85a97d-38a221f9186mr26104915f8f.31.1735554663972; 
  Mon, 30 Dec 2024 02:31:03 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c89e1c0sm30201550f8f.77.2024.12.30.02.31.02
+ ffacd0b85a97d-38a1c89e1c0sm30201550f8f.77.2024.12.30.02.31.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Dec 2024 02:31:02 -0800 (PST)
+ Mon, 30 Dec 2024 02:31:03 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 30 Dec 2024 11:30:55 +0100
-Subject: [PATCH v2 1/6] ufs: core: include missing include/ufs.h
+Date: Mon, 30 Dec 2024 11:30:56 +0100
+Subject: [PATCH v2 2/6] ufs: core: mark unexported functions as static
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241230-topic-ufs-cleanup-v2-1-4c6d7994a45d@linaro.org>
+Message-Id: <20241230-topic-ufs-cleanup-v2-2-4c6d7994a45d@linaro.org>
 References: <20241230-topic-ufs-cleanup-v2-0-4c6d7994a45d@linaro.org>
 In-Reply-To: <20241230-topic-ufs-cleanup-v2-0-4c6d7994a45d@linaro.org>
 To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
@@ -85,20 +85,20 @@ Cc: michal.simek@amd.com, marek.vasut+renesas@mailbox.org,
  bmeng.cn@gmail.com, venkatesh.abbarapu@amd.com, u-boot@lists.denx.de, 
  Neil Armstrong <neil.armstrong@linaro.org>, Love Kumar <love.kumar@amd.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=680;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3279;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=RHVI7HSvOhLHRjblsuJdLs1Erdv8Ou1xxclndVeJ0Hw=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBncnZiUry+hUqKSZb8liEDnOe3MUpB3i74UqYeBTCL
- PLOYHjeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ3J2YgAKCRB33NvayMhJ0RLrD/
- 921xRnkUnVYmRM/cqpgYkPucVap96EyV2wiliIiMSrzR+ecwA+BPIeBVOA/A54yAL2778OWwUqg8Ep
- m8b+9iVhZv6eQY/r3r7o3WNSvec3xW1A6je8GagrE6pvpsvjEkxXUsoEmHQUbVVdVii63JYAUC/Ycz
- rPZf/exdOqcuCvvYOv7IXDoXUio2zQQTr2md2HBUQeknzkXQM4PCg6U0Bkg0QS3BKsTJQoROY7jxEy
- bieO5UQa/4zlmbRkr3lUjKsWJthKbQfVxsUIVFi09aMIRG6wd/eEVIqSEvAbAkBZZLy9HYMWEVkasc
- sfW7H/RgVu4I6IZO1JVSs9BfMLWCdcFHvoeIo3TKWPcnfewRNEKw3XGaoKJP+QyIko8fdG3RzUh2XG
- tminNa6z+ZgCcqlYnOZ7Na9Ra/KLqEQ7CmEjQanswPhnDc7mumBf/QUNfRJ/lOHFaLvCj/mhAS0rQg
- F8YIJyaOsNt8sEGMi5uDzdU/Ze8rdWV9pHQeDiR/jrLCc2CgeHPvSkISSo0N6THQIYLKV5vZRL8UWQ
- FDo33h7ZRD1SOjZp1a45J0iT8HlMdIAUU79WXsgFr36/pml8kjCvcPAyJiDP5YjAxI2nfOEfHK4mT1
- L7e9v3gZ9etpAiUUNF8gzwrGv+knYSbZZi6Yx38nZSK/W2kRdOGTAFRCwGww==
+ bh=7Ntx+ovL4LMYDY80gnDbfbqsbq1KGnnMMPEC3UEq0H0=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBncnZjjFpN/LKB82U3aQuF1zW1YoG2xY7YVz9yKJyQ
+ T1xO8OeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ3J2YwAKCRB33NvayMhJ0XsLD/
+ wNHngWLIdWyWFdnZofJJFu2zP/6KFxviIuHEB3dMS8ET+izeFDBXQiofcPBn+KKT1OPSSZwhPg/DOG
+ exRP+/FuE6NN8ILESpcfzZ9jz7jLjOvzW+fWV7En7/15An3/iK9n8KvA+KZgstOhLUv5NpXvMlbHH5
+ thmUrKDSBzZsqJPPdC2nx0ebV5JfubDhdzqh/EeWIW9ViHmb5SdeBBfohIeIJazWJPgwJgiOSw+GYo
+ 9UJPKooWXv2cTJx7n0eKRM/xCnbmPHO5+K+6L52MANMrtS+IytJkSSLzzSQm5ECojPc9sNV0Wgv93w
+ 4+oAM7ApMZa9AqFjUDkSnexIxwc8cADEfXFQLl90lz2pNPXXz6+Wm7nRt3qmunB/jnGsPSf+tbCJ4K
+ w1xD5ATdtIX+ljIDlN8/rM/+AdkvEPJ3FmjygmObJ175e1BDpc34Kns4v+QmdX7drFqlAveKi7VxP+
+ fd5Bd6oOeSHNaNhfUFTQLZMc7PhoA7y9Estw56TQ85GMUWeZxZJCuk+LABJh1ha3fXabJHyX1mngui
+ 6wduEOmN6VOkQq4X6eQ5Kb3Amlcj1KhxRovKn4tCO93Gry5jO+E3KfZlh6V8aLzKcWtkFfjQig234z
+ CKeBzOgDLx34k4DqtpUwef+bI6YLlLgTMHdpjmBRuYdKoAFXr3HdXV09gw1w==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -117,27 +117,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing ufs.h causing build warning on some symbols.
+Mark the remaining local functions as static to avoid build
+warnings.
+
+Also drop the EXPORT_SYMBOL of ufshcd_map_desc_id_to_length.
 
 Tested-by: Love Kumar <love.kumar@amd.com>
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/ufs/ufs.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/ufs/ufs.c | 27 +++++++++++++--------------
+ 1 file changed, 13 insertions(+), 14 deletions(-)
 
 diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index f7d8c40c448c6865b7c04e03bab6f3f93a44a591..31c2959aeb12931b2bbdf26b3c676ae1a7b0fd1a 100644
+index 31c2959aeb12931b2bbdf26b3c676ae1a7b0fd1a..654f8b6799ec6735f2db4f6e1c81ee94ec14a74e 100644
 --- a/drivers/ufs/ufs.c
 +++ b/drivers/ufs/ufs.c
-@@ -19,6 +19,7 @@
- #include <malloc.h>
- #include <hexdump.h>
- #include <scsi.h>
-+#include <ufs.h>
- #include <asm/io.h>
- #include <asm/dma-mapping.h>
- #include <linux/bitops.h>
+@@ -1035,8 +1035,8 @@ static inline void ufshcd_init_query(struct ufs_hba *hba,
+ /**
+  * ufshcd_query_flag() - API function for sending flag query requests
+  */
+-int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
+-		      enum flag_idn idn, bool *flag_res)
++static int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
++			     enum flag_idn idn, bool *flag_res)
+ {
+ 	struct ufs_query_req *request = NULL;
+ 	struct ufs_query_res *response = NULL;
+@@ -1171,9 +1171,9 @@ out:
+ /**
+  * ufshcd_query_descriptor_retry - API function for sending descriptor requests
+  */
+-int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
+-				  enum desc_idn idn, u8 index, u8 selector,
+-				  u8 *desc_buf, int *buf_len)
++static int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
++					 enum desc_idn idn, u8 index, u8 selector,
++					 u8 *desc_buf, int *buf_len)
+ {
+ 	int err;
+ 	int retries;
+@@ -1265,8 +1265,8 @@ static void ufshcd_init_desc_sizes(struct ufs_hba *hba)
+  * ufshcd_map_desc_id_to_length - map descriptor IDN to its length
+  *
+  */
+-int ufshcd_map_desc_id_to_length(struct ufs_hba *hba, enum desc_idn desc_id,
+-				 int *desc_len)
++static int ufshcd_map_desc_id_to_length(struct ufs_hba *hba, enum desc_idn desc_id,
++					int *desc_len)
+ {
+ 	switch (desc_id) {
+ 	case QUERY_DESC_IDN_DEVICE:
+@@ -1303,15 +1303,14 @@ int ufshcd_map_desc_id_to_length(struct ufs_hba *hba, enum desc_idn desc_id,
+ 	}
+ 	return 0;
+ }
+-EXPORT_SYMBOL(ufshcd_map_desc_id_to_length);
+ 
+ /**
+  * ufshcd_read_desc_param - read the specified descriptor parameter
+  *
+  */
+-int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
+-			   int desc_index, u8 param_offset, u8 *param_read_buf,
+-			   u8 param_size)
++static int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
++				  int desc_index, u8 param_offset,
++				  u8 *param_read_buf, u8 param_size)
+ {
+ 	int ret;
+ 	u8 *desc_buf;
+@@ -1570,8 +1569,8 @@ static int ufshcd_read_device_desc(struct ufs_hba *hba, u8 *buf, u32 size)
+  * ufshcd_read_string_desc - read string descriptor
+  *
+  */
+-int ufshcd_read_string_desc(struct ufs_hba *hba, int desc_index,
+-			    u8 *buf, u32 size, bool ascii)
++static int ufshcd_read_string_desc(struct ufs_hba *hba, int desc_index,
++				   u8 *buf, u32 size, bool ascii)
+ {
+ 	int err = 0;
+ 
+@@ -1882,7 +1881,7 @@ static void ufshcd_def_desc_sizes(struct ufs_hba *hba)
+ 	hba->desc_size.hlth_desc = QUERY_DESC_HEALTH_DEF_SIZE;
+ }
+ 
+-int ufs_start(struct ufs_hba *hba)
++static int ufs_start(struct ufs_hba *hba)
+ {
+ 	struct ufs_dev_desc card = {0};
+ 	int ret;
 
 -- 
 2.34.1
