@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0412E77188
-	for <u-boot@archiver.kernel.org>; Mon, 30 Dec 2024 14:35:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 365D3E77188
+	for <u-boot@archiver.kernel.org>; Mon, 30 Dec 2024 14:35:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCE908060C;
-	Mon, 30 Dec 2024 15:35:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C31D80634;
+	Mon, 30 Dec 2024 15:35:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hI8qQF/d";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BQyM5L0p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA4D7805EB; Mon, 30 Dec 2024 04:30:53 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
+ id 31424805C1; Mon, 30 Dec 2024 04:30:56 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CB0A804CE
+ by phobos.denx.de (Postfix) with ESMTPS id 6EB1C805C2
  for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 04:30:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+liujh2818.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 7212AA4093D;
+ by nyc.source.kernel.org (Postfix) with ESMTP id EB8F9A409B5;
  Mon, 30 Dec 2024 03:29:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A7F54C4CED1;
- Mon, 30 Dec 2024 03:30:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2DB2DC4CED1;
+ Mon, 30 Dec 2024 03:30:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1735529449;
- bh=CCYatxKTxRYELBIp9U83giTybP8U3Jv6Trfrr3zmKHY=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=hI8qQF/d2k2meQ6mfu6g9PRtmlwgAkK+KrXhWge32chMRsJhvjJLXHvOteJj7btIw
- phGsgRi7Zd4ex7Y34tIadQPbwxhlM2yfVANpa5cuVT1VDSil+z/zGaBDbHv8p/lt/h
- mW9QUAlN4MLW+A2RC2d1/1ghUM9wyHpEoqQ+nk6avaYZxmxEuyBv5mp9b/LX0o8BdK
- YQra8NEBpYS2yx0FcdbAoKhqpUEUpQqTz6Grd5/eMdjnc1P76iNmHU2fsdwc/xCIJo
- uiJd9/2/5sxbG1jUwpqRUlQv728qjqHmC0KVMO6ZGQWse7WS5sLuctV16gz2EkV0wC
- 9zTqqMApN+RZA==
+ s=k20201202; t=1735529450;
+ bh=melMpXNILDwle32w9Q3nfK2f+SjP+yqJjulk0qfeQ5g=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=BQyM5L0p7Bwx3ann9FmN+dG5tQ7Fj8QwFVJ1SzIkidcixtGCNArWzOMiWQ+P56/ck
+ YxWBXvxVdDOdmmH+Hk/lI3uaQZJ2K8ZCoKkwBMvHI7UU9s9emBQxzajxRkkYXdjnJz
+ h3srxDcWj4L/n+oty1cdrAxiHfs9YSyXXne4+yKL1RaDZ/a1s93p7QA2cxlt8zl3WH
+ cNBsIiNFwpS2Qk9mEBw+djos839cQW04IpP8lUDzAovszGpUljr2/pknuewth07kQy
+ c3000cxIOlPaC9NdccJOC1kkuxeEQIyhfScFCjZKk7flUg8jKIu0Lj/SDIJvA2srQM
+ Z9kWpS33Uq2cw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 91233E77188;
- Mon, 30 Dec 2024 03:30:49 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 23352E7718F;
+ Mon, 30 Dec 2024 03:30:50 +0000 (UTC)
 From: Junhui Liu via B4 Relay <devnull+liujh2818.outlook.com@kernel.org>
-Subject: [PATCH v2 0/8] usb: dwc2: Refactor and update USB DWC2 driver
-Date: Mon, 30 Dec 2024 11:30:15 +0800
-Message-Id: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
+Date: Mon, 30 Dec 2024 11:30:22 +0800
+Subject: [PATCH v2 7/8] usb: dwc2: Unify flush and reset logic with v4.20a
+ support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMcTcmcC/x3Myw6CMBCF4Vchs7aEM7QRXfkehkVTRpiEi2kNa
- gjvbmX5n5x8GyWJKomuxUZRVk26zDn4VFAY/NyL0S43ccUWjMZ078Cmk9VcnAsM3wBoKN+fUR7
- 6Oah7m3vQ9Fri95BX/NcDqRwzLNdAiXPtYGCS+DTIOAJcW+vcrZ+8jmVYJmr3ff8BwBhExKQAA
- AA=
-X-Change-ID: 20241218-dwc2-dev-955c21a81118
+Message-Id: <20241230-dwc2-dev-v2-7-12cd9b8a2358@outlook.com>
+References: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
+In-Reply-To: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
 To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
  Lukasz Majewski <lukma@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>, 
  Junhui Liu <liujh2818@outlook.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1735529447; l=2593;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735529447; l=11327;
  i=liujh2818@outlook.com; s=20241030; h=from:subject:message-id;
- bh=CCYatxKTxRYELBIp9U83giTybP8U3Jv6Trfrr3zmKHY=;
- b=mUT1hHIZFohvjc5ywRf5CN56tysibFrFzU2yw4ChpKZDx1+A/exnDSw6/V6MsqnqOEmaxiBGF
- ddVSVk0iLwgD3fdi+34Z9rWxcX+6WNHUi0x6ataFsGLWFv/P8xubh4c
+ bh=Y9b9Q7CExfA/Qu9buVu1pwfMx7ZExfHA/FX1MhGfKIE=;
+ b=PKBFxwihQ0SR0nxJ9gsw4YitCHEyL7uBO/etkn0lsQP+StrmbdxnYVSxi3p3TdyNz1wo+rBX3
+ SnSAYxbBd8kA8QgHOCUo9SMpo2Y4YSS++hBLgfqGSgsP6ATSoLNoiTQ
 X-Developer-Key: i=liujh2818@outlook.com; a=ed25519;
  pk=ApYwI6KD3EjynMw61RqGa6c5BGbStQnKSrbNN+aQqT4=
 X-Endpoint-Received: by B4 Relay for liujh2818@outlook.com/20241030 with
@@ -91,58 +88,326 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series improves the USB DWC2 driver by extracting register
-definitions into a common file for better readability and updating the
-reset method to reflect changes in version 4.20a, including the new
-GRSTCTL_CSFTRST_DONE bit for reset completion indication.
+From: Kongyang Liu <seashell11234455@gmail.com>
 
-This series has been tested on two platforms:
-- MK808 with RK3066 SoC and dwc2 v2.91a, tested with USB flash drive and
-  connected the board to the PC through the rockusb command. Test log [1].
-- K230-CanMV with K230 SoC [2] and dwc2 v4.30a, tested with the onboard
-  rtl8152 USB to net chip and an external rtl8152 adapter connected to 
-  the onboard USB-C interface via USB hub. Test log [3].
+This patch merges flush and reset logic for both host and gadget code
+into a common set of functions, reducing duplication. It also adds support
+for the updated reset logic to compatible with core version since v4.20a.
 
-[1] https://gist.github.com/Judehahh/878ace2607d201dc49211f2c655f0fe0#file-mk808-md
-[2] https://developer.canaan-creative.com/k230/en/dev/CanMV_K230_Tutorial.html
-[3] https://gist.github.com/Judehahh/878ace2607d201dc49211f2c655f0fe0#file-k230-canmv-md
+This patch mainly refers to the patch in the kernel.
+link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=65dc2e725286106f99c6f6b78e3d9c52c15f3a9c
 
+Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+Signed-off-by: Junhui Liu <liujh2818@outlook.com>
 ---
-Changes in v2:
-- Reorganized structures, renamed macros, and moved code for better
-  clarity and maintainability.
-- Added a fix for the incorrect ULPI_UTMI_SEL bit setting.
-- Added a fix for incorrectly calculating HBstLen for external DMA mode.
-- Extend the changes that replace uint32 with u32 to also include u8 and
-  u16.
-- Link to v1: https://lore.kernel.org/r/20240522142311.17351-1-seashell11234455@gmail.com
-
----
-Junhui Liu (8):
-      usb: dwc2: Extract register definitions to common header file
-      usb: dwc2: Fix incorrect ULPI_UTMI_SEL bit setting
-      USB: dwc2: Fix HBstLen setting for external DMA mode
-      usb: dwc2: Clean up with bitfield macros
-      usb: dwc2: Align macros with Linux kernel definitions
-      usb: dwc2: Extract macro definitions to common header
-      usb: dwc2: Unify flush and reset logic with v4.20a support
-      usb: dwc2: Replace uint<x>_t types with u<x>
-
  drivers/usb/common/Makefile                |   2 +
- drivers/usb/common/dwc2_core.c             | 103 ++++
- drivers/usb/common/dwc2_core.h             | 560 +++++++++++++++++++++
- drivers/usb/gadget/dwc2_udc_otg.c          | 125 ++---
- drivers/usb/gadget/dwc2_udc_otg_regs.h     | 289 ++---------
- drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 306 ++++++------
- drivers/usb/host/dwc2.c                    | 494 ++++++++-----------
- drivers/usb/host/dwc2.h                    | 750 +----------------------------
- 8 files changed, 1123 insertions(+), 1506 deletions(-)
----
-base-commit: cb7410257ac930a6fb05f1c63b291b7d399f19f2
-change-id: 20241218-dwc2-dev-955c21a81118
+ drivers/usb/common/dwc2_core.c             | 103 +++++++++++++++++++++++++++++
+ drivers/usb/common/dwc2_core.h             |   4 ++
+ drivers/usb/gadget/dwc2_udc_otg.c          |  12 +---
+ drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c |   6 +-
+ drivers/usb/host/dwc2.c                    |  80 ++--------------------
+ 6 files changed, 117 insertions(+), 90 deletions(-)
 
-Best regards,
+diff --git a/drivers/usb/common/Makefile b/drivers/usb/common/Makefile
+index 11cc4657a0f403b84b1b8336781e1893d9c7a8f1..73e5bc6d7fdca692276e119911b47db4bf03586a 100644
+--- a/drivers/usb/common/Makefile
++++ b/drivers/usb/common/Makefile
+@@ -4,6 +4,8 @@
+ #
+ 
+ obj-$(CONFIG_$(XPL_)DM_USB) += common.o
++obj-$(CONFIG_USB_DWC2) += dwc2_core.o
++obj-$(CONFIG_USB_GADGET_DWC2_OTG) += dwc2_core.o
+ obj-$(CONFIG_USB_ISP1760) += usb_urb.o
+ obj-$(CONFIG_USB_MUSB_HOST) += usb_urb.o
+ obj-$(CONFIG_USB_MUSB_GADGET) += usb_urb.o
+diff --git a/drivers/usb/common/dwc2_core.c b/drivers/usb/common/dwc2_core.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..323326e05d7b0318d883d4a3b8186b812c42f9ca
+--- /dev/null
++++ b/drivers/usb/common/dwc2_core.c
+@@ -0,0 +1,103 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
++ */
++
++#include <linux/bitfield.h>
++#include <linux/errno.h>
++#include <linux/io.h>
++#include <wait_bit.h>
++
++#include "dwc2_core.h"
++
++int dwc2_core_reset(struct dwc2_core_regs *regs)
++{
++	u32 snpsid;
++	int ret;
++	bool host_mode = false;
++
++	if (!(readl(&regs->global_regs.gotgctl) & GOTGCTL_CONID_B) ||
++	    (readl(&regs->global_regs.gusbcfg) & GUSBCFG_FORCEDEVMODE))
++		host_mode = true;
++
++	/* Core Soft Reset */
++	snpsid = readl(&regs->global_regs.gsnpsid);
++	writel(GRSTCTL_CSFTRST, &regs->global_regs.grstctl);
++	if (FIELD_GET(GSNPSID_VER_MASK, snpsid) < 0x420a) {
++		ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_CSFTRST,
++					false, 1000, false);
++		if (ret) {
++			log_warning("%s: Waiting for GRSTCTL_CSFTRST timeout\n", __func__);
++			return -EBUSY;
++		}
++	} else {
++		ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_CSFTRST_DONE,
++					true, 1000, false);
++		if (ret) {
++			log_warning("%s: Waiting for GRSTCTL_CSFTRST_DONE timeout\n", __func__);
++			return -EBUSY;
++		}
++		clrsetbits_le32(&regs->global_regs.grstctl, GRSTCTL_CSFTRST, GRSTCTL_CSFTRST_DONE);
++	}
++
++	/* Wait for AHB master IDLE state. */
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE,
++				true, 1000, false);
++	if (ret) {
++		log_warning("%s: Waiting for GRSTCTL_AHBIDLE timeout\n", __func__);
++		return -EBUSY;
++	}
++
++	if (host_mode) {
++		ret = wait_for_bit_le32(&regs->global_regs.gintsts, GINTSTS_CURMODE_HOST,
++					host_mode, 1000, false);
++		if (ret) {
++			log_warning("%s: Waiting for GINTSTS_CURMODE_HOST timeout\n", __func__);
++			return -EBUSY;
++		}
++	}
++
++	return 0;
++}
++
++void dwc2_flush_tx_fifo(struct dwc2_core_regs *regs, const int num)
++{
++	int ret;
++
++	log_debug("Flush Tx FIFO %d\n", num);
++
++	/* Wait for AHB master IDLE state */
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE, true, 1000, false);
++	if (ret)
++		log_warning("%s: Waiting for GRSTCTL_AHBIDLE timeout\n", __func__);
++
++	writel(GRSTCTL_TXFFLSH | FIELD_PREP(GRSTCTL_TXFNUM_MASK, num), &regs->global_regs.grstctl);
++
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_TXFFLSH, false, 1000, false);
++	if (ret)
++		log_warning("%s: Waiting for GRSTCTL_TXFFLSH timeout\n", __func__);
++
++	/* Wait for 3 PHY Clocks */
++	udelay(1);
++}
++
++void dwc2_flush_rx_fifo(struct dwc2_core_regs *regs)
++{
++	int ret;
++
++	log_debug("Flush Rx FIFO\n");
++
++	/* Wait for AHB master IDLE state */
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE, true, 1000, false);
++	if (ret)
++		log_warning("%s: Waiting for GRSTCTL_AHBIDLE timeout\n", __func__);
++
++	writel(GRSTCTL_RXFFLSH, &regs->global_regs.grstctl);
++
++	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_RXFFLSH, false, 1000, false);
++	if (ret)
++		log_warning("%s: Waiting for GRSTCTL_RXFFLSH timeout\n", __func__);
++
++	/* Wait for 3 PHY Clocks */
++	udelay(1);
++}
+diff --git a/drivers/usb/common/dwc2_core.h b/drivers/usb/common/dwc2_core.h
+index 862d3b3691c9caf84590d34960df21117848df0a..b50748b9f6b5c7a43524bb1b48972f1394bb63d8 100644
+--- a/drivers/usb/common/dwc2_core.h
++++ b/drivers/usb/common/dwc2_core.h
+@@ -125,6 +125,10 @@ struct dwc2_core_regs {
+ 	u8  ep_fifo[16][0x1000];		/* 0x1000 */
+ };
+ 
++int dwc2_core_reset(struct dwc2_core_regs *regs);
++void dwc2_flush_tx_fifo(struct dwc2_core_regs *regs, const int num);
++void dwc2_flush_rx_fifo(struct dwc2_core_regs *regs);
++
+ /* Core Global Register */
+ #define GOTGCTL_CHIRPEN				BIT(27)
+ #define GOTGCTL_MULT_VALID_BC_MASK		GENMASK(26, 22)
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index 0fc9ee1b90fa71135083a1a6dae2e74992e51181..83d63d7f2162d49c387e0042bd33cc7a5856d407 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -471,7 +471,7 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ 	u32 max_hw_ep;
+ 	int pdata_hw_ep;
+ 
+-	writel(GRSTCTL_CSFTRST, &reg->global_regs.grstctl);
++	dwc2_core_reset(reg);
+ 
+ 	debug("Resetting OTG controller\n");
+ 
+@@ -575,16 +575,10 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ 		       &reg->global_regs.dptxfsizn[i]);
+ 	}
+ 	/* Flush the RX FIFO */
+-	writel(GRSTCTL_RXFFLSH, &reg->global_regs.grstctl);
+-	while (readl(&reg->global_regs.grstctl) & GRSTCTL_RXFFLSH)
+-		debug("%s: waiting for DWC2_UDC_OTG_GRSTCTL\n", __func__);
++	dwc2_flush_rx_fifo(reg);
+ 
+ 	/* Flush all the Tx FIFO's */
+-	writel(FIELD_PREP(GRSTCTL_TXFNUM_MASK, GRSTCTL_TXFNUM_ALL), &reg->global_regs.grstctl);
+-	writel(FIELD_PREP(GRSTCTL_TXFNUM_MASK, GRSTCTL_TXFNUM_ALL) | GRSTCTL_TXFFLSH,
+-	       &reg->global_regs.grstctl);
+-	while (readl(&reg->global_regs.grstctl) & GRSTCTL_TXFFLSH)
+-		debug("%s: waiting for DWC2_UDC_OTG_GRSTCTL\n", __func__);
++	dwc2_flush_tx_fifo(reg, GRSTCTL_TXFNUM_ALL);
+ 
+ 	/* 13. Clear NAK bit of EP0, EP1, EP2*/
+ 	/* For Slave mode*/
+diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+index 64d2fe7bbde4494b4cbcdf57032b720901fdd4eb..2be93592c423df7a9acea473b0e84e1f948999be 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
++++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+@@ -164,11 +164,7 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
+ 		pktcnt = (length - 1)/(ep->ep.maxpacket) + 1;
+ 
+ 	/* Flush the endpoint's Tx FIFO */
+-	writel(FIELD_PREP(GRSTCTL_TXFNUM_MASK, ep->fifo_num), &reg->global_regs.grstctl);
+-	writel(FIELD_PREP(GRSTCTL_TXFNUM_MASK, ep->fifo_num) | GRSTCTL_TXFFLSH,
+-	       &reg->global_regs.grstctl);
+-	while (readl(&reg->global_regs.grstctl) & GRSTCTL_TXFFLSH)
+-		;
++	dwc2_flush_tx_fifo(reg, ep->fifo_num);
+ 
+ 	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->device_regs.in_endp[ep_num].diepdma);
+ 	writel(FIELD_PREP(DXEPTSIZ_PKTCNT_MASK, pktcnt) |
+diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+index ff7885f8195c0bc08669dd99ef6c94992c991945..b27429235798ce223bb8a11999e3d520c26ef377 100644
+--- a/drivers/usb/host/dwc2.c
++++ b/drivers/usb/host/dwc2.c
+@@ -108,78 +108,6 @@ static void init_fslspclksel(struct dwc2_core_regs *regs)
+ 			FIELD_PREP(HCFG_FSLSPCLKSEL_MASK, phyclk));
+ }
+ 
+-/*
+- * Flush a Tx FIFO.
+- *
+- * @param regs Programming view of DWC_otg controller.
+- * @param num Tx FIFO to flush.
+- */
+-static void dwc_otg_flush_tx_fifo(struct udevice *dev,
+-				  struct dwc2_core_regs *regs, const int num)
+-{
+-	int ret;
+-
+-	writel(GRSTCTL_TXFFLSH | FIELD_PREP(GRSTCTL_TXFNUM_MASK, num),
+-	       &regs->global_regs.grstctl);
+-	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_TXFFLSH,
+-				false, 1000, false);
+-	if (ret)
+-		dev_info(dev, "%s: Timeout!\n", __func__);
+-
+-	/* Wait for 3 PHY Clocks */
+-	udelay(1);
+-}
+-
+-/*
+- * Flush Rx FIFO.
+- *
+- * @param regs Programming view of DWC_otg controller.
+- */
+-static void dwc_otg_flush_rx_fifo(struct udevice *dev,
+-				  struct dwc2_core_regs *regs)
+-{
+-	int ret;
+-
+-	writel(GRSTCTL_RXFFLSH, &regs->global_regs.grstctl);
+-	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_RXFFLSH,
+-				false, 1000, false);
+-	if (ret)
+-		dev_info(dev, "%s: Timeout!\n", __func__);
+-
+-	/* Wait for 3 PHY Clocks */
+-	udelay(1);
+-}
+-
+-/*
+- * Do core a soft reset of the core.  Be careful with this because it
+- * resets all the internal state machines of the core.
+- */
+-static void dwc_otg_core_reset(struct udevice *dev,
+-			       struct dwc2_core_regs *regs)
+-{
+-	int ret;
+-
+-	/* Wait for AHB master IDLE state. */
+-	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE,
+-				true, 1000, false);
+-	if (ret)
+-		dev_info(dev, "%s: Timeout!\n", __func__);
+-
+-	/* Core Soft Reset */
+-	writel(GRSTCTL_CSFTRST, &regs->global_regs.grstctl);
+-	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_CSFTRST,
+-				false, 1000, false);
+-	if (ret)
+-		dev_info(dev, "%s: Timeout!\n", __func__);
+-
+-	/*
+-	 * Wait for core to come out of reset.
+-	 * NOTE: This long sleep is _very_ important, otherwise the core will
+-	 *       not stay in host mode after a connector ID change!
+-	 */
+-	mdelay(100);
+-}
+-
+ #if CONFIG_IS_ENABLED(DM_USB) && defined(CONFIG_DM_REGULATOR)
+ static int dwc_vbus_supply_init(struct udevice *dev)
+ {
+@@ -281,8 +209,8 @@ static void dwc_otg_core_host_init(struct udevice *dev,
+ 	clrbits_le32(&regs->global_regs.gotgctl, GOTGCTL_HSTSETHNPEN);
+ 
+ 	/* Make sure the FIFOs are flushed. */
+-	dwc_otg_flush_tx_fifo(dev, regs, GRSTCTL_TXFNUM_ALL);	/* All Tx FIFOs */
+-	dwc_otg_flush_rx_fifo(dev, regs);
++	dwc2_flush_tx_fifo(regs, GRSTCTL_TXFNUM_ALL);	/* All Tx FIFOs */
++	dwc2_flush_rx_fifo(regs);
+ 
+ 	/* Flush out any leftover queued requests. */
+ 	num_channels = FIELD_GET(GHWCFG2_NUM_HOST_CHAN_MASK, readl(&regs->global_regs.ghwcfg2)) + 1;
+@@ -352,7 +280,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+ 	writel(usbcfg, &regs->global_regs.gusbcfg);
+ 
+ 	/* Reset the Controller */
+-	dwc_otg_core_reset(dev, regs);
++	dwc2_core_reset(regs);
+ 
+ 	/*
+ 	 * This programming sequence needs to happen in FS mode before
+@@ -413,7 +341,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+ 	writel(usbcfg, &regs->global_regs.gusbcfg);
+ 
+ 	/* Reset after setting the PHY parameters */
+-	dwc_otg_core_reset(dev, regs);
++	dwc2_core_reset(regs);
+ #endif
+ 
+ 	usbcfg = readl(&regs->global_regs.gusbcfg);
+
 -- 
-Junhui Liu <liujh2818@outlook.com>
+2.39.2
 
 
