@@ -4,89 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6772EE77188
-	for <u-boot@archiver.kernel.org>; Mon, 30 Dec 2024 14:22:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB5DE77188
+	for <u-boot@archiver.kernel.org>; Mon, 30 Dec 2024 14:35:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 707AA805EA;
-	Mon, 30 Dec 2024 15:22:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 838B0805EB;
+	Mon, 30 Dec 2024 15:35:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HKFQk/oq";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KdLF5uEs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72A2D805EB; Mon, 30 Dec 2024 15:22:14 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 91FAC805EB; Mon, 30 Dec 2024 04:30:53 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D496805C1
- for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 15:22:12 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7b6f95d2eafso909566185a.3
- for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 06:22:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735568531; x=1736173331; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eRRUck8fbLg+v60yusDfNefFfsU1TTmVagEyGLqxUeU=;
- b=HKFQk/oq0fuo19xj3HF5jRRAVZkr0vXlnG3EhbMJqnnzB/prOh+KusdFUD4H+sKpil
- Vfa7SNlfYpPhgaWA6jn6S0i2F9XjPlQXUFqpFnCUtIoFZDlcNYkW901TbGev4W+UnCLy
- +qwbNUJRon/TrzPaRATUcnWwDdk9DLjeAXl74=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735568531; x=1736173331;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eRRUck8fbLg+v60yusDfNefFfsU1TTmVagEyGLqxUeU=;
- b=WibgLh2UjSLmpq6cIpzhLaezxR3icfQSii+Ap5mc68JJb79ae2tJX9IZ5OK7mXLKsq
- wdR/UkFlFYU/ZpH4goBoga0J3ztR52GpvbbxYEFch2QDu3Eb1Jji6xtbuKLE+udE0suR
- SwnShgVR5DhOJBDUXde7epp0C3UHnH0C9taG+S8vGWJoz27+HvPu2nrWy8g7yQoCQyH6
- irlhnNON5ubPZ0V/Oil8Qjfa+SeAY0y6aUdkUy6cwE2+lUApflndXy+ssvqfeIxaNgLJ
- uL0StQuE2RW1ce5dUmxnRDgUlkubrmnyMOwl3rOmgXseJL/ed3dAXRI3Q57If6zxVFd4
- zbqQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV947h+ndTKmdUkCnATFZFoE/4y02a0s4+U41Y6qXZD9OGj6am7Ll85aT3JJoWoI4jag6zM3/w=@lists.denx.de
-X-Gm-Message-State: AOJu0YzBRx8nc3YZqJS5BzepYAIoc8Eg8Vq8LM0uqAKgSKtUEKdPoS3w
- LHy0K4ACK2yQ6vfaAAEHEqL4wWb2C5mEFJyQn3/LRjPWiqKzmkwWWCVWSu9KM2w=
-X-Gm-Gg: ASbGncsnnos1AFs6vsFaPyWTQwB5CAMmaz6m4epZS8OHRt6Qu6JnRtbMm53V3vUdSdy
- cQDtgU3b4UVYRWV2qMrZbW8qGwChdr6b3nv9Be7g6NOkghU0N9UBLHUYUcCVe64LETgcFPgSFlE
- v2/mN0DBGwWzF+as6ilXNiAh50YPh3PBcieFnbpxVfnVwOiv/K6EvEz+ut1PFIttGj2zzPlZIRn
- trNWMtfAn+bkne2F3SquPHguoY+KVQDzvQ6JxZVMv44nJuDbG8lRGSX0Q==
-X-Google-Smtp-Source: AGHT+IFOAAwhG+AKIqxH05cnyvkRCllVpEUMmLxwUmb79/6e0PqvTqUKTC94f0+N0BVvAoedrQFXIQ==
-X-Received: by 2002:a05:620a:40d2:b0:7b6:eed4:695c with SMTP id
- af79cd13be357-7b9ba79d2cdmr5109293085a.32.1735568530816; 
- Mon, 30 Dec 2024 06:22:10 -0800 (PST)
-Received: from bill-the-cat ([189.178.122.190])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac2dfeaesm920884385a.40.2024.12.30.06.22.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Dec 2024 06:22:09 -0800 (PST)
-Date: Mon, 30 Dec 2024 08:22:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- u-boot@lists.denx.de, tudor.ambarus@linaro.org, j-humphreys@ti.com,
- marex@denx.de, michal.simek@amd.com, jagan@amarulasolutions.com,
- vigneshr@ti.com, seanga2@gmail.com, caleb.connolly@linaro.org,
- sjg@chromium.org, william.zhang@broadcom.com, stefan_b@posteo.net,
- quentin.schulz@cherry.de, Takahiro.Kuwano@infineon.com,
- p-mantena@ti.com, git@amd.com
-Subject: Re: [PATCH v6] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-Message-ID: <20241230142205.GB3476@bill-the-cat>
-References: <20241230070206.2178551-1-venkatesh.abbarapu@amd.com>
- <54dc7b9a-32f7-4a37-af51-69095d28956f@ti.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 2529980570
+ for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 04:30:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+liujh2818.outlook.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 94DB0A409B4;
+ Mon, 30 Dec 2024 03:29:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CCF28C4CED7;
+ Mon, 30 Dec 2024 03:30:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1735529449;
+ bh=diwlpw/qVJ32TZ3EWzkeY+vVzvBBT97n0QOQYIlluvA=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=KdLF5uEs0+EfuP60eJNujNS1I42j+DWKZKsHXi/1NEhipgNoR+7OsZhYd6rzggGda
+ 4liIlvJ5Zf+FHHPxJ0/ardjiaphHypd6Jxkt3zGocKVok/tkrT2iWwqzoBUge9mWcs
+ /LGfuIYfGmAzeporOWurIPNJ1uHzB319X8R59j4n7BAt4r4aS1L55gsg8t2kU7UXw6
+ SBVlLwfXGecpX1s8asTl5aOLfquoKkG64aNtMUQmPFLzX4rD8Ngo06s//zGEK4v+m/
+ ODtSmgf46+D/ywMdzX5piHRW85MrVNu1MPKQbVDDurlfpFL1KHLiNpmcxbXV4OZ0Q6
+ rJt5tZKjTsOOw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id C1621E7718F;
+ Mon, 30 Dec 2024 03:30:49 +0000 (UTC)
+From: Junhui Liu via B4 Relay <devnull+liujh2818.outlook.com@kernel.org>
+Date: Mon, 30 Dec 2024 11:30:18 +0800
+Subject: [PATCH v2 3/8] USB: dwc2: Fix HBstLen setting for external DMA
+ mode
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eaAbLsiGDq6wxOGS"
-Content-Disposition: inline
-In-Reply-To: <54dc7b9a-32f7-4a37-af51-69095d28956f@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20241230-dwc2-dev-v2-3-12cd9b8a2358@outlook.com>
+References: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
+In-Reply-To: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
+To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>, 
+ Junhui Liu <liujh2818@outlook.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735529447; l=1579;
+ i=liujh2818@outlook.com; s=20241030; h=from:subject:message-id;
+ bh=X2wPlAec1lTbhEc4kHMvFzI7dPaWHtgbyCFMMHoPHXM=;
+ b=i59f4eY4FVgdY6MTwEtkEpQjYSIIdbLb8NUPjevDckfmhGN/NWErizUqKyw9uX0UOSeeIdkCu
+ jlcu+bicvc+C7YOp7FBIMNz5K46UqWwRgiSBgh5UMPvnsGmXykeXF5q
+X-Developer-Key: i=liujh2818@outlook.com; a=ed25519;
+ pk=ApYwI6KD3EjynMw61RqGa6c5BGbStQnKSrbNN+aQqT4=
+X-Endpoint-Received: by B4 Relay for liujh2818@outlook.com/20241030 with
+ auth_id=259
+X-Original-From: Junhui Liu <liujh2818@outlook.com>
+X-Mailman-Approved-At: Mon, 30 Dec 2024 15:35:32 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,134 +82,54 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: liujh2818@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Kongyang Liu <seashell11234455@gmail.com>
 
---eaAbLsiGDq6wxOGS
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The loop used to calculate HBstLen for extern DMA mode does not produce
+the correct result according to the datasheet [1]. Replacing that loop
+with a direct calculation using LOG2 to correctly assign the burst length
+in the GAHBCFG register for external DMA mode.
 
-On Mon, Dec 30, 2024 at 03:03:39PM +0530, Kumar, Udit wrote:
-> Hello Venkatesh,
->=20
-> On 12/30/2024 12:32 PM, Venkatesh Yadav Abbarapu wrote:
-> > Update the spi_nor_read() function based on the config SPI_FLASH_BAR
-> > and update the length and bank calculation by spliting the memory of
-> > 16MB size banks only when the address width is 3byte.
-> > Fix the read issue for 4byte address width by passing the entire
-> > length to the read function.
-> >=20
-> > Fixes: 5d40b3d384 ("mtd: spi-nor: Add parallel and stacked memories sup=
-port")
-> > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> > ---
-> > Changes in v2:
-> > - Update the nor read for parallel configuration and for other case
-> >    keep the code as is.
-> > - Fixed the commit description.
-> >   - Tested the changes with s25fl128s flash  Zynq> sf probe 0 0 0
-> >   SF: Detected s25fl128s with page size 256 Bytes, erase size 64 KiB,  =
-total 16 MiB  Zynq> time sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000=
-000;time  Zynq> sf write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;=
-time  Zynq> sf read 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x1000000
-> >   SF: 16777216 bytes @ 0x0 Erased: OK
-> >=20
-> >   time: 32.464 seconds
-> >   device 0 whole chip
-> >   SF: 16777216 bytes @ 0x0 Written: OK
-> >=20
-> >   time: 15.515 seconds
-> >   device 0 whole chip
-> >   SF: 16777216 bytes @ 0x0 Read: OK
-> >=20
-> >   time: 1.557 seconds
-> >   Total of 16777216 byte(s) were the same
-> >=20
-> > Changes in v3:
-> > - Compile out the parallel code in spi_nor_erase() if the SPI_STACKED_P=
-ARALLEL
-> >    is enabled.
-> >=20
-> > Changes in v4:
-> > - Update the bank calculation only when SPL_FLASH_BAR is enabled.
-> >=20
-> > Changes in v5:
-> > - Update the parallel code in the spi_nor_read() only if the SPI_STACKE=
-D_PARALLEL
-> >    config is enabled.
-> >=20
-> > Changes in v6:
-> > - Remove the hardcoded address width for 4byte.
-> > - Move the length condition with rem_bank_len under SPI_FLASH_BAR flag.
-> > ---
-> >   drivers/mtd/spi/spi-nor-core.c | 75 ++++++++++++++++++++--------------
-> >   1 file changed, 44 insertions(+), 31 deletions(-)
-> >=20
-> > diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-c=
-ore.c
-> > index ec841fb13bd..6f352c5c0e2 100644
-> > --- a/drivers/mtd/spi/spi-nor-core.c
-> > +++ b/drivers/mtd/spi/spi-nor-core.c
-> > @@ -1130,17 +1130,19 @@ static int spi_nor_erase(struct mtd_info *mtd, =
-struct erase_info *instr)
-> >   			goto erase_err;
-> >   		}
-> >   		offset =3D addr;
-> > -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> > -			offset /=3D 2;
-> > -
-> > -		if (nor->flags & SNOR_F_HAS_STACKED) {
-> > -			if (offset >=3D (mtd->size / 2))
-> > -				nor->spi->flags |=3D SPI_XFER_U_PAGE;
-> > -			else
-> > -				nor->spi->flags &=3D ~SPI_XFER_U_PAGE;
-> > +		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-> > +			if (nor->flags & SNOR_F_HAS_PARALLEL)
-> > +				offset /=3D 2;
-> > +
-> > +			if (nor->flags & SNOR_F_HAS_STACKED) {
-> > +				if (offset >=3D (mtd->size / 2))
-> > +					nor->spi->flags |=3D SPI_XFER_U_PAGE;
-> > +				else
-> > +					nor->spi->flags &=3D ~SPI_XFER_U_PAGE;
-> > +			}
->=20
-> I believe SNOR_F_HAS_PARALLEL and SNOR_F_HAS_STACKED flags are specific to
-> your use case.
->=20
-> which should be set if flash is parallel and/or stacked, then why you want
-> to protect with another
->=20
-> =A0if=A0 (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL).
+[1] https://rockchip.fr/RK312X%20TRM/chapter-26-usb-otg-2-0.pdf#page=24
 
-Because at this point in the release cycle I really really want these
-isolated from the rest of the code paths, given the problems we've seen.
-I expect some cleanups for v2025.04 that will get wider testing than
-happened for what will be in v2025.01.
+Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+Signed-off-by: Junhui Liu <liujh2818@outlook.com>
 
---=20
-Tom
+---
+Additionally, the boards I have only use internal DMA mode, and it’s
+unclear which chips employ external DMA. The testing was performed by
+comparing against the datasheet, and the results are shown in [2].
 
---eaAbLsiGDq6wxOGS
-Content-Type: application/pgp-signature; name="signature.asc"
+[2] https://gist.github.com/Judehahh/34530da390b58728102778406e602cb1
+---
+ drivers/usb/host/dwc2.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+index 609de18faa3abc5f4ecb0c23cf3590966bad7992..954650d856a4f2e95d74e1b5716c0ebe83fa9ba8 100644
+--- a/drivers/usb/host/dwc2.c
++++ b/drivers/usb/host/dwc2.c
+@@ -448,11 +448,8 @@ static void dwc_otg_core_init(struct udevice *dev)
+ 	case DWC2_HWCFG2_ARCHITECTURE_SLAVE_ONLY:
+ 		break;
+ 	case DWC2_HWCFG2_ARCHITECTURE_EXT_DMA:
+-		while (brst_sz > 1) {
+-			ahbcfg |= ahbcfg + (1 << DWC2_GAHBCFG_HBURSTLEN_OFFSET);
+-			ahbcfg &= DWC2_GAHBCFG_HBURSTLEN_MASK;
+-			brst_sz >>= 1;
+-		}
++		ahbcfg |= (LOG2(brst_sz >> 1) << DWC2_GAHBCFG_HBURSTLEN_OFFSET) &
++			  DWC2_GAHBCFG_HBURSTLEN_MASK;
+ 
+ #ifdef DWC2_DMA_ENABLE
+ 		ahbcfg |= DWC2_GAHBCFG_DMAENABLE;
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdyrIYACgkQFHw5/5Y0
-tywRCwv/e41lZjXHzUskfT8LlRmIrpHrKxySrB8brd9aEnDadYwZAIRzF9+uKtEP
-xqC9mW3ER2Q8sjTWL+JrZ/MSuvXsPF65oeQUeGcJjdnRTIcSCGIyszpF3xWp1xer
-C+1yizsincryInCczBcG0xeWxP8uOaJIRXSwiFUmxmWXLGJadWyw/e9JsmZ7CFTS
-1P34KSiH8X1z/ivKq/gCJK++VDUph5bd7TZ9btBT5nvkyEI7IPR8Ct5fQQujGrA5
-iX97yRmFNm0VDSWMJ/GkIalOnMWTNO+u/7GMmkPZIe52zAmtcod5lQZCWc/O0bPo
-U7RMLAndXB1EwlZQsjkLqL40EO3BRyYJPOzQyXdD7KoFQHqgvOXT0xUFjTLDcITZ
-8fmv/QftE3p9/HJ34d2FONOKvJ8OgIEGkYhb7ePYi+Sa5uCKbAQu0o/JXCTqmHMp
-J3QFZmZbR1JRlv1MCLteb1YQmiHp0JXsfqja3YJvdBrDXn+8yj81mO551dDupsts
-LZCpbbt/
-=ef0j
------END PGP SIGNATURE-----
+-- 
+2.39.2
 
---eaAbLsiGDq6wxOGS--
+
