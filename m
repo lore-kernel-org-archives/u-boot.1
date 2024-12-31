@@ -4,54 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D6FFE77188
-	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 13:27:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC10E7718B
+	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 13:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 565E88021A;
-	Tue, 31 Dec 2024 14:27:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
+	by phobos.denx.de (Postfix) with ESMTP id 139F78039A;
+	Tue, 31 Dec 2024 14:27:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kevin.km6g.us
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=km6g.us header.i=@km6g.us header.b="NR5Iz+EW";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="kzaf76a6";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F47480383; Tue, 31 Dec 2024 12:17:02 +0100 (CET)
-Received: from mx.skole.hr (mx1.hosting.skole.hr [161.53.165.185])
+ id 35B5580383; Tue, 31 Dec 2024 13:05:08 +0100 (CET)
+Received: from flow-a1-smtp.messagingengine.com
+ (flow-a1-smtp.messagingengine.com [103.168.172.136])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52F7280379
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 12:17:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FD1380379
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 13:05:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=skole.hr
+ dmarc=none (p=none dis=none) header.from=kevin.km6g.us
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
-Received: from mx1.hosting.skole.hr (localhost.localdomain [127.0.0.1])
- by mx.skole.hr (mx.skole.hr) with ESMTP id C908E81B08;
- Tue, 31 Dec 2024 12:16:59 +0100 (CET)
-From: Duje =?UTF-8?B?TWloYW5vdmnEhw==?= <duje.mihanovic@skole.hr>
-To: Tom Rini <trini@konsulko.com>
-Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] Initial support for PXA1908 and samsung-coreprimevelte
-Date: Tue, 31 Dec 2024 12:16:28 +0100
-Message-ID: <2974027.e9J7NaK4W3@radijator>
-In-Reply-To: <20241230152533.GC3476@bill-the-cat>
-References: <20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr>
- <4950238.GXAFRqVoOG@radijator> <20241230152533.GC3476@bill-the-cat>
+ spf=pass smtp.mailfrom=lists.u-boot@kevin.km6g.us
+Received: from phl-compute-05.internal (phl-compute-05.phl.internal
+ [10.202.2.45])
+ by mailflow.phl.internal (Postfix) with ESMTP id ED6602005D1
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 07:05:04 -0500 (EST)
+Received: from phl-imap-08 ([10.202.2.84])
+ by phl-compute-05.internal (MEProxy); Tue, 31 Dec 2024 07:05:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=km6g.us; h=cc
+ :content-type:content-type:date:date:from:from:in-reply-to
+ :message-id:mime-version:reply-to:subject:subject:to:to; s=fm2;
+ t=1735646704; x=1735653904; bh=9bgqUVZBj5JZ1MLMWdqN7ZWHJEXkSf2E
+ AB79ghSlar4=; b=NR5Iz+EWJ7ILT+AkTwyrXjPIxwBzZieR+w6jiC+W1cIMnZ9I
+ ZRpZkeXWD1jIqdkp6UUgc+/KbGiCR1YE68eHLHPX44Fo3BM8bOaCKALRCoM7DjnL
+ BJIT3DHJuEbHnVtmCjxiOzAXfitDFRKMbpjFEl9pakbaMPLdvCGQn1Z7W3nr4X6k
+ w6hYdlCVsYg/I2i1RdtH+1yQiRnqWiL5mQ2tK2rSeXfKmHI0zw50wQYeiOWQ/E/K
+ WByuuBwQg7j8ZBX6NYrrJnlSlcObJy0Q5oMunHA0YjrQZgso4FEzFdzgaaqRbixT
+ B34obxJACHexUL5rY9R6jsqb8UZQHm2O87/hfw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:message-id
+ :mime-version:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1735646704; x=
+ 1735653904; bh=9bgqUVZBj5JZ1MLMWdqN7ZWHJEXkSf2EAB79ghSlar4=; b=k
+ zaf76a6Ml014A9DznkUFldrih6hhFRnwbqTu2/eraaSyuA1JW7AJn6k8cZzlSh6h
+ b86TJl+KEAgJhAvvxcLQiCXIXH1ThinyL177JMwAeD2y4cOfsbMzHVwbadc3pqrp
+ gZj26azYK7djb0wHYr/yRWMn5H8YOqLGxK7iKYCT1reKUQc/uUpi3WhT/Lmau9oM
+ U9uh4e9a5Ke9Q5Nk8xaH0rQCF6MLDBiBRS5ecvfSMBhuVP+rH1QgMcyGiPETbFVs
+ 6w2poBQntkHU4TawA+prJoitCNGoKWl71s1nt7G178Lp7KqbjxWRzjTNY0KtPOzN
+ 3aejBy5HrfL3J29ojoBnA==
+X-ME-Sender: <xms:8N1zZ1ZNZBCzCXv70S80gvfTTH7ckfUyY95ART4K1Gc01wIQNf3jCA>
+ <xme:8N1zZ8ZNbj-gXrN63xM-NuJFiRHnwEWZCBxZx5Elg6rzgWgZ6hnRxMQV_JdYwCN1Q
+ 1MVmWRXncjqJCHt-dU>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefuddruddvkedgfeeiucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+ rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucenucfjughrpefoggffhf
+ fvkffutgesrgdtreerredttdenucfhrhhomhepfdfmvghvihhnucfrrdcuhfhlvghmihhn
+ ghdfuceolhhishhtshdruhdqsghoohhtsehkvghvihhnrdhkmheighdruhhsqeenucggtf
+ frrghtthgvrhhnpefhhfdvleffkeejvdelgfeuveekuedtvdduueekkedvffelheffkeeu
+ veefvefgueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhroh
+ hmpehlihhsthhsrdhuqdgsohhotheskhgvvhhinhdrkhhmiehgrdhushdpnhgspghrtghp
+ thhtohepuddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepuhdqsghoohhtsehlih
+ hsthhsrdguvghngidruggv
+X-ME-Proxy: <xmx:8N1zZ39Zv3n1LlJEa9wF0ylvP8uLFn9VtHUIAQlIJNh1aHF9kIGAIA>
+ <xmx:8N1zZzqh2KgEzi8Qmy0KSUb_r2n06zPoa1oBhGkus5lJu66sIoukWw>
+ <xmx:8N1zZwqG0q4he8LHxxAhrjsO0-uTHXBzHgJqeQfn7j0ZRIwobSQgFw>
+ <xmx:8N1zZ5SqLlKd9H4spxLyfJMI92psQoYjUl8fNvcw9eHwy140uZAiOg>
+ <xmx:8N1zZ2Ez6FbR4FZ5AXF3UUjzJhv9ldOG-k_cWmU75EunANf934MGXgZ->
+Feedback-ID: i1309466e:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+ id AA13B18A0068; Tue, 31 Dec 2024 07:05:04 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
 MIME-Version: 1.0
-Autocrypt: addr=duje.mihanovic@skole.hr; keydata=
- mDMEZokhzhYJKwYBBAHaRw8BAQdAWJZ0hsI/ytTqHGFV8x6tzd5sB596cTeeDB4CQsTf+wC0KER
- 1amUgTWloYW5vdmnEhyA8ZHVqZUBkdWplbWloYW5vdmljLnh5ej6ImQQTFgoAQRYhBG3/QdYN8x
- S1t2umMK0xk1JFj60DBQJmiSHOAhsDBQkJZgGABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAA
- AoJEK0xk1JFj60D1GABAJVSorZdMOlrp/oQtCSH/G53NE56x/JHA8VX+ZQBd/H3AP4/EcUf6eef
- DUxVMh2bdkmuQKsVZGgOGiXpMksrVntWBrQpRHVqZSBNaWhhbm92acSHIDxkdWplLm1paGFub3Z
- pY0Bza29sZS5ocj6ImQQTFgoAQRYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSH/AhsDBQkJZg
- GABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEK0xk1JFj60Dlw8A/i4lPOL7NaYoYePDq
- l8MaJaR9qoUi+D+HtD3t0Koi7ztAQCdizXbuqP3AVNxy5Gpb1ozgp9Xqh2MRcNmJCHA1YhWAbg4
- BGaJIc4SCisGAQQBl1UBBQEBB0DEc9JeA55OlZfWKgvmRgw6a/EpBQ8mDl6nQTBmnd1XHAMBCAe
- IfgQYFgoAJhYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSHOAhsMBQkJZgGAAAoJEK0xk1JFj6
- 0DG5MA/iuo4l2GDEZ1Zf+XaS//8FwdXDO9nHkfbV2MHjF4NZXwAQDroMzBdMcqVvc8GABFlTTgG
- j7KrRDz2HwWNyF8ZeprAQ==
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
+Date: Tue, 31 Dec 2024 07:04:44 -0500
+From: "Kevin P. Fleming" <lists.u-boot@kevin.km6g.us>
+To: u-boot@lists.denx.de
+Message-Id: <b47e98b5-f273-430e-b882-d99e0e306334@app.fastmail.com>
+Subject: UEFI ConOut with systemd-boot: attributes aren't working
 X-Mailman-Approved-At: Tue, 31 Dec 2024 14:27:06 +0100
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,19 +103,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Monday 30 December 2024 16:25:33 Central European Standard Time Tom Rini 
-wrote:
-> Yes, this is about moving to OF_UPSTREAM. Strictly and only with respect
-> to things that we have to deal with due to other bootloaders can we deal
-> with problems like that in the -u-boot.dtsi file. Otherwise we need to
-> match compatibles, etc, with upstream. Thanks!
+I've got a couple of Traverse ten64 machines, which have serial consoles and are using U-Boot 2023.07-rc2 (a bit old, granted). I connect to their consoles using Minicom on a Debian machine.
 
-Fair enough. For v2 I can add "intel,xscale-uart" to NS16550's compatible 
-array and the U-Boot dts if that's the right way to do it.
+If I stop the U-Boot autoboot process, the U-Boot menu itself is displayed as expected, with 'reverse' highlighting on the currently-selected item in the menu. If I continue the boot process, then systemd-boot displays its menu (using the UEFI ConOut interface), but there is no highlighting on the menu items. I've tried both VT102 and ANSI emulation modes in Minicom.
 
-Regards,
--- 
-Duje
-
-
-
+Can anyone suggest steps for troubleshooting this?
