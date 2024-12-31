@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DD00E77188
-	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 04:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0864DE77188
+	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 04:09:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 923378039A;
-	Tue, 31 Dec 2024 05:08:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 84B1B805EA;
+	Tue, 31 Dec 2024 05:09:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JrsVyalG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Dc6LHDLm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF1B7804B6; Tue, 31 Dec 2024 05:08:42 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 27849804B6; Tue, 31 Dec 2024 05:09:09 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E57780352
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 05:08:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56A17805EA
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 05:09:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6d92cd1e811so91775166d6.1
- for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 20:08:40 -0800 (PST)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b6f7d7e128so917998285a.1
+ for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 20:09:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735618119; x=1736222919; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KpsftNy1xZ0zPUhOkEwzQAm9cx9OZVPQzGuX0ZeRZ3A=;
- b=JrsVyalGrSqx+dq2doyZseEcRoZ2UwC9qFtrAFLumUv+MKovN3uSFzUcFgvLnQq2pr
- +0GTy29JMYbX0lpEOwWhuP5/F+JCC0fMrufcZUWzcH9WbJAmUNnxaPbT50qR9no9+5/W
- St1fmrt5Wdr0iT6ibQsZm1kux+lVYtekJLMT0=
+ d=konsulko.com; s=google; t=1735618143; x=1736222943; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7HZ/QkRDxsep94HjegvKiWfFJ0y3qt9j237Ri+QwVoI=;
+ b=Dc6LHDLm5/m1QFYEydZuyauW6W/hduLVeoC9L8m/j7uVdSHdiqinuAdY6hQ3NxV8k6
+ CId+Yilno+LrXiOAOQTO/C9tnSF8cbMfxw4Z53t4vWQYUwY1CZiR3rYlPJCTIOWEK7go
+ O/ehk3Exs1JA65JWSmUbJOglr1SK41aeA1C7A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735618119; x=1736222919;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KpsftNy1xZ0zPUhOkEwzQAm9cx9OZVPQzGuX0ZeRZ3A=;
- b=eD9LUlzPQSO8bWVVomfyzF58dUEEOFBm6Kab0vewycDt8R3iZ7koLE+ecgN5ac1H8c
- Y5Uz0Fax+0duB+XE5jCrnlNXJDVFHAdMDuzddVSDN/GW1E2oWF/7H7hJOtW35ReSvTAy
- 6ITVD8c8HpESgLBDxi0YbZfnqjLF3B80AXnkQ/MpVhA0ukPl6FHjVX4O0OlZQuWODx7j
- LSfithnggl8U+QLHc+AkWw483E82Tr5k6mhphpUu5/ITsuCZcbl1GeUiaBO214A/owt1
- EspEYwc0xy7KMiyqYugPU33ipGUofY6pmLDmFzaPY+DrdSjPfq46EHq+QkfkFJY4B1ua
- NGrA==
-X-Gm-Message-State: AOJu0YwBOaYKYmqAANhWoxSj1P2Os5n29LdWiy8fJwyXxU4WQUVIpdIr
- BgpDIN5MmBscy/gNqgdJdeZprE1lLaYPPkcHjaCOxh5L3vfy7V50YQWhdJw/JWc5F9OcnBNDhVS
- y
-X-Gm-Gg: ASbGncu8IlZZJ8IewEHchcWuSmDuQxnHiVOI5hz7cIHsINPeC/wZ86NDHjqA6JiVHE8
- 7p4k1oWWLURmCj7OOXpGRKGXIWIcJHZlaC3SCG8s+L6ZYXjA0kprQ39oM4Scl+5tV1efF8Nylck
- XZWRYLdy+WLgFBESBnYdCVM+aRZjartiGtQEHJ9a8g26lRN46x8U2dOzRbqOn9j8Y5eVU91zWjZ
- +pnBzhdgv1WGTctnB7b7botG0rX9Nb6lAxhwKHmdii6UUqOwL5QmIBbrg==
-X-Google-Smtp-Source: AGHT+IHbs/lB5LUM1EZPKYFyQSvq3EtrVuYJSTzdwN/qCdzio11loTch9WQU9IccwSy0Ic23ReCH9A==
-X-Received: by 2002:a05:6214:4002:b0:6d8:f0d2:f472 with SMTP id
- 6a1803df08f44-6dd1555433fmr721665076d6.10.1735618119386; 
- Mon, 30 Dec 2024 20:08:39 -0800 (PST)
+ d=1e100.net; s=20230601; t=1735618143; x=1736222943;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7HZ/QkRDxsep94HjegvKiWfFJ0y3qt9j237Ri+QwVoI=;
+ b=n39vcrDBTQ6xJ+vSLfRgbxNgbMsprW6rO/qgPUT0vLgQxA3bn7uUUBurNGE+fBBHci
+ Ig4eO5RCSO8F2zxjq4amk3Xh7/tdyLsKCVNU/xOA7szYpuPETpmWohwj6oLzwCD8sW7l
+ 62W3Z/+Cv3GrozWFns++GU2lbaOd2H47QogjgrF/7FDwi4v5wKKDxSYRuVvnh1VhDdnu
+ N0iA8Hpnma/dWX5CpfTruOlDY6LNXJ3J8pK2EUtgLVIpdwzcKwHQV7s7lWRbiHX1zQh3
+ 7lnIFzQ6XVWgFStpCCe2gKoJwDoF8nd9I2nJAl5K/CvCU79n+3pB5JGSImOdIlY0iMqB
+ 2SlQ==
+X-Gm-Message-State: AOJu0Yw4SyvGTcZuFBnZ2EMQDI6BuU4XY0YbJxZyFj4nmaWlUkfzfJMF
+ HO6+xVdeaER9LjlO0SQGDPiP4gxBs1SUgfU802ppBonXW++GFu4Qqm7y67Uw6gbGqnWEBVz/PYO
+ g
+X-Gm-Gg: ASbGnct6VWNcbZycTEdw+M6EXOsGfk+rkQQIi34n6M6ubV9CUIa8Ez3Ende1MQODUjP
+ H4u3c91PBngVeEGCR+AsgvJgL2IbiLlyd70XpHIbivvM1rzQChCD8MUe3KH3i/M22GEUY+V8htD
+ +g7iK183rXuav42E86C1pC175rfnhgUUosi9YG4Sj7wue85HBz3ZDf+d0R/uLSczryVM9TQHh86
+ 9xTjHVAB0x+VStVgG3SBgIhBmQqJOAbVDuDkCVuRs+VIR5b9WWgRUq+0A==
+X-Google-Smtp-Source: AGHT+IFNX0IB07/hjfRBfAX86Xz+w2O/oD4KeC99eFj7Gnn9hMa+Yhtd7qoWSUPSEswa4Baeb/vxsQ==
+X-Received: by 2002:a05:620a:6843:b0:7b6:e616:4e67 with SMTP id
+ af79cd13be357-7b9bac05a1emr5860935685a.2.1735618143267; 
+ Mon, 30 Dec 2024 20:09:03 -0800 (PST)
 Received: from bill-the-cat ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd1810cfd7sm110177576d6.30.2024.12.30.20.08.37
+ af79cd13be357-7b9ac30d7e2sm976129185a.59.2024.12.30.20.09.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Dec 2024 20:08:38 -0800 (PST)
-Date: Mon, 30 Dec 2024 22:08:35 -0600
+ Mon, 30 Dec 2024 20:09:02 -0800 (PST)
+Date: Mon, 30 Dec 2024 22:08:59 -0600
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: Re: [PATCH] Gitlab: Remove some "rules:when: always" lines
-Message-ID: <20241231040835.GF3476@bill-the-cat>
-References: <20241212223336.1623762-1-trini@konsulko.com>
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de,
+ marex@denx.de, monstr@monstr.eu, Tudor Ambarus <tudor.ambarus@linaro.org>
+Subject: [ANN] U-Boot v2025.01-rc6 released
+Message-ID: <20241231040859.GG3476@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wHKl9bGqrCeGkbmL"
+ protocol="application/pgp-signature"; boundary="/VoN2OuG/B4dBcs7"
 Content-Disposition: inline
-In-Reply-To: <20241212223336.1623762-1-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,47 +92,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---wHKl9bGqrCeGkbmL
+--/VoN2OuG/B4dBcs7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 12, 2024 at 04:33:36PM -0600, Tom Rini wrote:
+Hey all,
 
-> In commit 399f739be6b2 ("CI: allow jobs to be run in merge requests") we
-> added "rules:when: always" to many stages of the pipeline to allow for me=
-rge
-> requests to trigger a run. However based on current Gitlab
-> documentation, we should still be triggered on merge requests without
-> this. Furthermore the way we have things written today we always run all
-> stages of the CI rather than failing out early on problems, which is not
-> always useful. Remove these as we should still be fine with merge
-> requests triggering a run.
->=20
-> Link: https://docs.gitlab.com/ee/ci/yaml/#rules
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+It's release day and so here's v2025.01-rc6, and I'll update the -next
+branch shortly as well.
 
-Applied to u-boot/next, thanks!
+At this point, I've merged what I hope is the last SPI-NOR related patch
+for this release. We aren't 100% back to how the codebase was for
+v2024.10 for the non-stacked case, but I think we're OK.
+
+In terms of a changelog,=20
+git log --merges v2025.01-rc5..v2025.01-rc6
+As always, more details in pull requests (or the tags referenced by
+them) will result in more details here.
+
+Unless something else happens, I plan to release v2025.01 on the 6th of
+January, 2025.
+
+Thanks all!
 
 --=20
 Tom
 
---wHKl9bGqrCeGkbmL
+--/VoN2OuG/B4dBcs7
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdzbkMACgkQFHw5/5Y0
-tyw60Av7BCqDTBZyPo3E0MOmtz/ysPCps0YRNzH2jN7OrLkA4oMuRddn7WdRoNs8
-7FUCI9+t+w/g1PBpevrsmCPwqBLANIBMrHYY8FMsDDsox9vRMcjUHre89Mnt4FGd
-e+5rsQP4xzUtVGAbFq0OzXkx6Rc/gTBVGqzn9O6Xdzh7PwwYsNFB+5TlA3hos4jD
-rHkvN1nLOBP7IIpNO0Qs/zxNsZ9nx9wny7Lyqak7kvZZXoll3ouqd/blODgxnTzF
-WkylohirS1KBcbJfUxgkGzfAp2wcFX63d36FAcfYknJebnINR+M8oZN+sskKi3RW
-wBNvJdwz8FSa+F1uG5/Jdg6e6OuUArdEtlN8PMSyM+B29VPuCBtll9pNm/CTqeyl
-bNYGmtDkU9UqgTLTYZUcWE4+lysAmibfry2I36cDKGg7chHWqAlGlWoFp4qShAal
-GG4XtNCXdcpzYezPlnrQSHVwS2G2YwTOzFyDDQiX0jYHJeBmmZkg9Z+v/6NlJ4QF
-BSMJR0eA
-=kZ+p
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdzblsACgkQFHw5/5Y0
+tyyAlQwAoIauX2WNynkQ+rk8gw980ZsmsH+xb0rFj81mbh7IgnMY8SM89LYLAeJ0
+VkpSXLX7TJADsT6l2EgO3uk2yCprzxwzgUKVQtjTSINOw4NH5KB+83FfuQPHUrXw
+zzqH++AEB7yY6N+AA7ObO138y8tfI3uw+/f+lRLoPRmHEUCWecuykcuF76TAHiSD
+tC2PFO4OY4mZxy4L6b8XBeD/aAvQpcOY3+Ktn6h8aCxnLebvKVpaSj+wgSFljyIt
+ev0pVM6u4jiIs/uNgvdYKQVzobvpCXMI5WpZsrZHJ58/zRCZlsaPZbgUJhL7vR6Y
+64yyE+IMbDswOoRSO03hA20lA3dzMKXRo1WoBkbgs925AyCQu/z7XV2fJ2O+VQRs
+RVSxcsctaSPoPIKG7FGj5l8D5RAc9TIgp5an2RtG38vfzvsOFvi+2ELGjxTmBHIN
+4WAdlW08ce54zZ4goctSmDrPN/8LugFCrrlBiS8ABjFYRYNLD4lLm6XNnQ3dHGYh
+kiJTWCcS
+=guCp
 -----END PGP SIGNATURE-----
 
---wHKl9bGqrCeGkbmL--
+--/VoN2OuG/B4dBcs7--
