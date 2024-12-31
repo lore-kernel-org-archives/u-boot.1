@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68CF4E7718B
-	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 04:06:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2479E77188
+	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 04:08:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 896A68069D;
-	Tue, 31 Dec 2024 05:05:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33F1C80383;
+	Tue, 31 Dec 2024 05:08:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uSbo5NOe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m8rxeowz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC07080584; Tue, 31 Dec 2024 05:05:43 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 363498039A; Tue, 31 Dec 2024 05:08:32 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE673804BA
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 05:05:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F7C080352
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 05:08:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b6ff72ba5aso796948985a.1
- for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 20:05:41 -0800 (PST)
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-467a37a2a53so115866311cf.2
+ for <u-boot@lists.denx.de>; Mon, 30 Dec 2024 20:08:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735617940; x=1736222740; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1735618109; x=1736222909; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JZjSFaMBCwogLKPnWr0FQoYKTLxo4S9b/EsvSzQWyTY=;
- b=uSbo5NOeJeB+e+jQlU1IgILftvVJk2kacnIhgt9JglKJ+Z+s74tQkShjyDQlNU9tdB
- ZLKvBa1QjE/L3LKJvz8DJ6StyBjubZo/j/e2WOO2Emv0XCfyGqmt7E77q4rcKtncdBX5
- kHZtxSdAmfHIAmu2si4Eu6RZ5uK5j+J+keatM=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o4tBHvsMiNL+YFCk3VrrRv2pYV4/oyrWtthgJ6ISXbA=;
+ b=m8rxeowzzKYAEQD9iwZB6M0hLL/EEdS1xtOGjuQ8MtCmjr3ox/sv38mwIpJ2jE+1N/
+ Pkf4e9ogI0uY/BQwPewJHL6uag4g6rHiVkG0YzK+h89qxJYlFqgSR4DgpviYAc4wVtdw
+ aXJ+lFPJvcNAPBrfLDWsjIfWWmNzMluh1lXJQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735617940; x=1736222740;
+ d=1e100.net; s=20230601; t=1735618109; x=1736222909;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JZjSFaMBCwogLKPnWr0FQoYKTLxo4S9b/EsvSzQWyTY=;
- b=H5gweuFnTXZN5sQVrLoXQDWVoOaddqjLo7EEczaJMKD3sI23L71me/QAL1rRlylQGO
- yXhmiEEXx9LeqGFZYSuVbSouwZH/3TU7nWIOIfNsPbjd7VnsqeogDBic5w520/Nz1czE
- y/nLLTBA/qFbFnUNLyxHZiQQ0J62+6hmEOJucc6LWZ+3alJzamuc0V/3g26cW8ArKM0z
- m2DRTOcIW+zVyZ5sibtNL2otAmN3UVxNEn8+qF6g6wtoqy1pyZEW2WNT8lmCyEtCIGPQ
- Yjo34F9CS0Ei2w2wJDOiNEoG1c338B7u3+Vwe/Glp8c2jOXcFAYqRbtzh9fqZZv5Rpeg
- tK+w==
-X-Gm-Message-State: AOJu0YxsRsimphuU9ONmWkVqC/mm1A8eX8aulqK8oDzaNGMPOYAqoxyv
- DHgG/alSI3iFgOGGmUKP/HQB8mPA8guN7hoS5155OB0TN+bUOebVxiGbOfrElf2rRNAapemOFyJ
- O
-X-Gm-Gg: ASbGncsY7KH6OpdUBt1AinKdBJGgtTIEY/uFEWDoau9NDclUmSeMOLur9x0h81nnc/0
- 68GkrTP+gZHkrZ/TXjictWuC9hyHOrMzWhGjVqEDdcU9pxLJ+pPxfz7a2ISGSlOqMKZtvfdyWOv
- NIlo2+E4eFDoKY4gPkS2HpIq7kR68EF7ENbR+k1B9sT0LsVXk57CstawZv5r18P93G92uGnKb68
- 9CQ11KoQELm3foSwtdUA3zmc0zzOI5TRN4gWHKaT465BhueRJkBFKpa
-X-Google-Smtp-Source: AGHT+IGnblkPiTd/McB/HjKJH0xsROqVKdGucZO+3DBnVwFsgBBB69F5CF/NJhe9OWMfo61zVKyGbg==
-X-Received: by 2002:a05:620a:244c:b0:7b6:72bc:df67 with SMTP id
- af79cd13be357-7b9ba71692bmr7535525285a.1.1735617940704; 
- Mon, 30 Dec 2024 20:05:40 -0800 (PST)
+ bh=o4tBHvsMiNL+YFCk3VrrRv2pYV4/oyrWtthgJ6ISXbA=;
+ b=mLn8cbjIUAqWt0lqZOkn60S+Dw4saA+lGu0o6wSFp5BLNNbuPqGy3TDDiAJkmWYM3H
+ 2OWlwvbNi9RgxjlemBcip2WLtcgas6tni9KPWXp7AZkOasGtakC8eUHCSnN7NuEUsoLu
+ ctKUvGlWTrESixvqDvjOw8Wse/EVipbo4pDWQ+1ixONdcicAXmD80wf0cV8MsP5t2BzR
+ ObzilHPj19vGOkSpDtqm9oWlNjm7SpEpn5mUbwfwz+DX591rYtDetmklawpsGZsemx6K
+ XnnJqackY8Pq9jv9lxaAXWklUYStYhv0nP9MADVQMKp1TwWKy/bkBEsLwWtzGDFtOVhI
+ t7YA==
+X-Gm-Message-State: AOJu0Yyn7yv5NKblMIOLgTqwMR+Qje7IsTJo8v9IXwv1hNAYrxZzsOSI
+ +2ytIdXPV7rsk2ogvUFnilILu3FbXRmz++R+KsK3TGAcdPvROasmJWu9p7Fzug8zpPC5lhVsIJX
+ 0
+X-Gm-Gg: ASbGnctFlOshzoBgOlJ5SNbgHZ5FQL4F/NLszLObECiBlho8wrQU1ZOu9byT24m/2+m
+ /Dh83cnT8O1ElyHw35GSmN2i9OI3iYXcpssxcyArldz30kfAmGKbq5TkNOA705DZnTr0gpM9NZp
+ DH6/hWGua4cKcEVKnfZVMBnlxh7pxHDPga23xoX0QgVNREuiWuLE6m+AiAl7V67y0spXdfd4ZA6
+ xvnqUwIdq8jYSX82qYzTPp9ovJNBoQO0E594ChMRCrS/UsQmKD/R9cH
+X-Google-Smtp-Source: AGHT+IHRT6i+So+qz8Ee3xxo3WiASzcBwqdVxkmqM0Q8L4wuE5qA6tKRHb9yiv6YKRX/7ceWeA7W2A==
+X-Received: by 2002:a05:622a:164e:b0:467:67ad:e2a6 with SMTP id
+ d75a77b69052e-46a4a8efcabmr540242531cf.26.1735618108948; 
+ Mon, 30 Dec 2024 20:08:28 -0800 (PST)
 Received: from [127.0.1.1] ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac480886sm976081485a.83.2024.12.30.20.05.38
+ d75a77b69052e-46a3eb30b46sm111735231cf.87.2024.12.30.20.08.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Dec 2024 20:05:39 -0800 (PST)
+ Mon, 30 Dec 2024 20:08:28 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20241212201459.1613044-1-trini@konsulko.com>
-References: <20241212201459.1613044-1-trini@konsulko.com>
-Subject: Re: [PATCH] Gitlab: Make test.py stage only depend on binman et al
- testsuite
-Message-Id: <173561793871.257558.7078356733174992891.b4-ty@konsulko.com>
-Date: Mon, 30 Dec 2024 22:05:38 -0600
+To: u-boot@lists.denx.de, tudor.ambarus@linaro.org, j-humphreys@ti.com, 
+ marex@denx.de, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com, 
+ u-kumar1@ti.com, seanga2@gmail.com, caleb.connolly@linaro.org, 
+ sjg@chromium.org, william.zhang@broadcom.com, stefan_b@posteo.net, 
+ quentin.schulz@cherry.de, Takahiro.Kuwano@infineon.com, p-mantena@ti.com, 
+ git@amd.com
+In-Reply-To: <20241230070206.2178551-1-venkatesh.abbarapu@amd.com>
+References: <20241230070206.2178551-1-venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH v6] mtd: spi-nor: Fix the spi_nor_read() when config
+ SPI_STACKED_PARALLEL is enabled
+Message-Id: <173561810664.258174.10529164601941469973.b4-ty@konsulko.com>
+Date: Mon, 30 Dec 2024 22:08:26 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,22 +100,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Dec 2024 14:14:59 -0600, Tom Rini wrote:
+On Mon, 30 Dec 2024 12:32:06 +0530, Venkatesh Yadav Abbarapu wrote:
 
-> Our Gitlab pipeline is currently broken up in to several stages. This
-> was done with the thought process of "we should test tools and if
-> they're good test emulated targets and if they're good test real
-> hardware and if they're good test the world". However, in terms of that
-> first stage it only really matters that binman, et al are still
-> functional. And for a few years now Gitlab has had a "needs" keyword
-> that lets you refine pipeline dependencies. Use this to perform the
-> minor optimization of having test.py only require that tool testing job.
-> This will become more useful later when we add long running testsuites
-> that we do not want to block later jobs.
+> Update the spi_nor_read() function based on the config SPI_FLASH_BAR
+> and update the length and bank calculation by spliting the memory of
+> 16MB size banks only when the address width is 3byte.
+> Fix the read issue for 4byte address width by passing the entire
+> length to the read function.
+> 
 > 
 > [...]
 
-Applied to u-boot/next, thanks!
+Applied to u-boot/master, thanks!
 
 -- 
 Tom
