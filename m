@@ -4,52 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D0F8E77188
-	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 16:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7716DE77188
+	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 18:13:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BBF78042A;
-	Tue, 31 Dec 2024 17:52:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
+	by phobos.denx.de (Postfix) with ESMTP id B2A3C80379;
+	Tue, 31 Dec 2024 19:13:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1735668795;
+	bh=C/bh7TMQu4dvJ6BHFSlhl75vAeDEsHLrgQGlJmlFMMs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DznmKU5k4eJNKaJdifThvvmUSVqryE5B3UpheGS41feglxZR7ewXjTzaJzB8vb2V2
+	 5HRgUiPknMz7neGHZW67Ikm1LfQqpy8ZID9GJwWgHxGo1WAPYdHtfXMC1/wsWtF3H+
+	 PWAjqRJvbWBcbXGWuc2iUmqNPU9qMeEpZ4KS4OgAw+D5MH2m/cIs9AASqUUv2KpWoH
+	 7MfDigTh0y+BIxx5kizeObaz/tmKV5FGyYMk65U17rqxZupB2oUUcVAKb+CMCbg1Uu
+	 sqn0U4Hx9O36YtOt14vD8GDcLkL/DbnrYWbe5mfgd/aCzW5kv3QhLLUid8s047C9x7
+	 VRuo/BXw7+x3g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 010FF8036B; Tue, 31 Dec 2024 17:51:55 +0100 (CET)
-Received: from mx.skole.hr (mx1.hosting.skole.hr [161.53.165.185])
+ id A00AF80374; Tue, 31 Dec 2024 19:13:14 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42926803E4
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 17:51:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55DC4801CE
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 19:13:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=skole.hr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
-Received: from mx1.hosting.skole.hr (localhost.localdomain [127.0.0.1])
- by mx.skole.hr (mx.skole.hr) with ESMTP id DF71C8151A;
- Tue, 31 Dec 2024 17:51:51 +0100 (CET)
-From: =?utf-8?q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
-Date: Tue, 31 Dec 2024 17:49:14 +0100
-Subject: [PATCH v2 3/3] board: samsung: add initial support for
- coreprimevelte board
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="GBGj0vTY"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 58CEB10486D85; Tue, 31 Dec 2024 19:13:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1735668790;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=C/bh7TMQu4dvJ6BHFSlhl75vAeDEsHLrgQGlJmlFMMs=;
+ b=GBGj0vTYAhVx2gWTVBQIKiloWTV7I+13eSBF93Rnk0Le2/2iypmtPKD3Q8vqkyhugH61ni
+ Yi/Xo9NCqQm48X0rha05ipuV6kyCYenSCRwmsxCdiVpokJeJZQyoxl4eslAEj0LhFp60mb
+ Dz5ux7akHlem6tlyepIPwKCBRiIBrHG2UjWBawYmsFzEWJzDvBkDL/wYnn9eL7rLyEnt8J
+ hrB7ec9vU58TWcDHrdCvdqSnn5NGyQf1yn41yFKL/IydwmIQJff7lPY0BVWKDg4fjZy7bu
+ 80N2t7yJ924nkGk6ZGt45ahf81nZnqjbzi6LAvi2isph1q12sPK1py/VaSGxYw==
+Message-ID: <18ea1084-69be-4370-b8b2-95a6c06e3e0f@denx.de>
+Date: Tue, 31 Dec 2024 19:02:06 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20241231-coreprimevelte-v2-3-6a5445d92d11@skole.hr>
-References: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
-In-Reply-To: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
-To: Tom Rini <trini@konsulko.com>
-Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht, 
- u-boot@lists.denx.de, 
- =?utf-8?q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5212;
- i=duje.mihanovic@skole.hr; s=20240706; h=from:subject:message-id;
- bh=oxznrKCsjLvfOTYZZFAWVW5p/kFQAsTayYamZQAa1xc=;
- b=owGbwMvMwCW21nBykGv/WmbG02pJDOklCv2Myf/4GD++aJWZf+a7RWZvw0HL+7WtK7cJ7fD4/
- COn/ZpuRykLgxgXg6yYIkvuf8drvJ9Ftm7PXmYAM4eVCWQIAxenAExEiI+RoX+HxM8UoZzKCVxX
- nj9M3pi8sDGIRWrhB3dRp7prXy5VaDIyXItkuRa1y/6hbpLcQi5f7X/2i01+8Hns3fFX3r3/eys
- /LwA=
-X-Developer-Key: i=duje.mihanovic@skole.hr; a=openpgp;
- fpr=6DFF41D60DF314B5B76BA630AD319352458FAD03
-X-Mailman-Approved-At: Tue, 31 Dec 2024 17:52:00 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/8] usb: dwc2: Clean up with bitfield macros
+To: liujh2818@outlook.com, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>
+References: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
+ <20241230-dwc2-dev-v2-4-12cd9b8a2358@outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241230-dwc2-dev-v2-4-12cd9b8a2358@outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,185 +83,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Samsung Galaxy Core Prime VE LTE is an entry-level PXA1908-based
-smartphone. It has 1GB of DRAM, 8GB eMMC and USB connectivity.
+On 12/30/24 4:30 AM, Junhui Liu via B4 Relay wrote:
 
-Signed-off-by: Duje Mihanović <duje.mihanovic@skole.hr>
----
- arch/arm/dts/Makefile                           |  2 +
- arch/arm/dts/pxa1908-samsung-coreprimevelte.dts | 74 +++++++++++++++++++++++++
- arch/arm/mach-mmp/Kconfig                       |  6 ++
- board/samsung/coreprimevelte/Kconfig            | 12 ++++
- board/samsung/coreprimevelte/MAINTAINERS        |  6 ++
- configs/coreprimevelte_defconfig                | 18 ++++++
- 6 files changed, 118 insertions(+)
+[...]
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 6ad59aeed5f684959845833d708bf1b37937f135..ea2c3e80962d08802d364efd25a1b8626225aa4d 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1283,6 +1283,8 @@ dtb-$(CONFIG_ARCH_QEMU) += qemu-arm.dtb qemu-arm64.dtb
- dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
- 				corstone1000-fvp.dtb
- 
-+dtb-$(CONFIG_TARGET_COREPRIMEVELTE) += pxa1908-samsung-coreprimevelte.dtb
-+
- include $(srctree)/scripts/Makefile.dts
- 
- # Add any required device tree compiler flags here
-diff --git a/arch/arm/dts/pxa1908-samsung-coreprimevelte.dts b/arch/arm/dts/pxa1908-samsung-coreprimevelte.dts
-new file mode 100644
-index 0000000000000000000000000000000000000000..588e39e92650f9217e02bb332dcdcd5f74cc7fce
---- /dev/null
-+++ b/arch/arm/dts/pxa1908-samsung-coreprimevelte.dts
-@@ -0,0 +1,74 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+#include "pxa1908.dtsi"
-+
-+/ {
-+	pxa,rev-id = <3928 2>;
-+	model = "Samsung Galaxy Core Prime VE LTE";
-+	compatible = "samsung,coreprimevelte", "marvell,pxa1908";
-+
-+	aliases {
-+		serial0 = &uart0;
-+	};
-+
-+	chosen {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		stdout-path = "serial0:115200n8";
-+
-+		/* S-Boot places the initramfs here */
-+		linux,initrd-start = <0x4d70000>;
-+		linux,initrd-end = <0x5000000>;
-+
-+		fb0: framebuffer@17177000 {
-+			compatible = "simple-framebuffer";
-+			reg = <0 0x17177000 0 (480 * 800 * 4)>;
-+			width = <480>;
-+			height = <800>;
-+			stride = <(480 * 4)>;
-+			format = "a8r8g8b8";
-+		};
-+	};
-+
-+	memory {
-+		device_type = "memory";
-+		reg = <0 0x1000000 0 0x3f000000>;
-+	};
-+
-+	reserved-memory {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		framebuffer@17000000 {
-+			reg = <0 0x17000000 0 0x1800000>;
-+			no-map;
-+		};
-+
-+		gpu@9000000 {
-+			reg = <0 0x9000000 0 0x1000000>;
-+		};
-+
-+		/* Communications processor, aka modem */
-+		cp@5000000 {
-+			reg = <0 0x5000000 0 0x3000000>;
-+		};
-+
-+		cm3@a000000 {
-+			reg = <0 0xa000000 0 0x80000>;
-+		};
-+
-+		seclog@8000000 {
-+			reg = <0 0x8000000 0 0x100000>;
-+		};
-+
-+		ramoops@8100000 {
-+			compatible = "ramoops";
-+			reg = <0 0x8100000 0 0x40000>;
-+			record-size = <0x8000>;
-+			console-size = <0x20000>;
-+			max-reason = <5>;
-+		};
-+	};
-+};
-diff --git a/arch/arm/mach-mmp/Kconfig b/arch/arm/mach-mmp/Kconfig
-index b9438c6facb2e7f29f608bc72e97657d97a0d7dc..889f127fe82b8110e16c8fdef2908842e1635ebb 100644
---- a/arch/arm/mach-mmp/Kconfig
-+++ b/arch/arm/mach-mmp/Kconfig
-@@ -1,6 +1,12 @@
- if ARCH_MMP
- 
-+config TARGET_COREPRIMEVELTE
-+	bool "Support coreprimevelte"
-+	select LINUX_KERNEL_IMAGE_HEADER
-+
- config LNX_KRNL_IMG_TEXT_OFFSET_BASE
- 	default TEXT_BASE
- 
-+source "board/samsung/coreprimevelte/Kconfig"
-+
- endif
-diff --git a/board/samsung/coreprimevelte/Kconfig b/board/samsung/coreprimevelte/Kconfig
-new file mode 100644
-index 0000000000000000000000000000000000000000..78a803796054ae9c43374eabebc14361d8561211
---- /dev/null
-+++ b/board/samsung/coreprimevelte/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_COREPRIMEVELTE
-+
-+config SYS_BOARD
-+	default "coreprimevelte"
-+
-+config SYS_VENDOR
-+	default "samsung"
-+
-+config SYS_CONFIG_NAME
-+	default "pxa1908"
-+
-+endif
-diff --git a/board/samsung/coreprimevelte/MAINTAINERS b/board/samsung/coreprimevelte/MAINTAINERS
-new file mode 100644
-index 0000000000000000000000000000000000000000..0902117e8b3dc9da782e61728ad9b10ee077229c
---- /dev/null
-+++ b/board/samsung/coreprimevelte/MAINTAINERS
-@@ -0,0 +1,6 @@
-+Samsung Galaxy Core Prime VE LTE support
-+M:	Duje Mihanović <duje.mihanovic@skole.hr>
-+S:	Maintained
-+T:	git git://git.dujemihanovic.xyz/u-boot.git
-+F:	board/samsung/coreprimevelte/
-+F:	configs/coreprimevelte_defconfig
-diff --git a/configs/coreprimevelte_defconfig b/configs/coreprimevelte_defconfig
-new file mode 100644
-index 0000000000000000000000000000000000000000..05116669200b3f1393518c8f9d1d0d5b9f90db6f
---- /dev/null
-+++ b/configs/coreprimevelte_defconfig
-@@ -0,0 +1,18 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=26000000
-+CONFIG_ARCH_CPU_INIT=y
-+CONFIG_ARCH_MMP=y
-+CONFIG_TEXT_BASE=0x1000000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_DEFAULT_DEVICE_TREE="pxa1908-samsung-coreprimevelte"
-+CONFIG_TARGET_COREPRIMEVELTE=y
-+CONFIG_SYS_LOAD_ADDR=0x1000000
-+CONFIG_ARMV8_PSCI=y
-+CONFIG_FIT=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_DM=y
-+CONFIG_OF_BOARD=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_SYS_NS16550_MEM32=y
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg_regs.h b/drivers/usb/gadget/dwc2_udc_otg_regs.h
+> index 198ba7a7c37d05dca084ef017534265f5fb5fd70..33359ba56f7864525fb435ab52f2b21538e4647f 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg_regs.h
+> +++ b/drivers/usb/gadget/dwc2_udc_otg_regs.h
 
--- 
-2.47.1
+[...]
 
+> @@ -78,15 +77,15 @@ struct dwc2_usbotg_phy {
+>   #define HIGH_SPEED_CONTROL_PKT_SIZE	64
+>   #define HIGH_SPEED_BULK_PKT_SIZE	512
+>   
+> -#define RX_FIFO_SIZE			(1024)
+> -#define NPTX_FIFO_SIZE			(1024)
+> -#define PTX_FIFO_SIZE			(384)
+> +#define RX_FIFO_SIZE			1024
+> +#define NPTX_FIFO_SIZE			1024
+> +#define PTX_FIFO_SIZE			384
+>   
+> -#define DEPCTL_TXFNUM_0		(0x0<<22)
+> -#define DEPCTL_TXFNUM_1		(0x1<<22)
+> -#define DEPCTL_TXFNUM_2		(0x2<<22)
+> -#define DEPCTL_TXFNUM_3		(0x3<<22)
+> -#define DEPCTL_TXFNUM_4		(0x4<<22)
+> +#define DEPCTL_TXFNUM_0			(0x0<<22)
+> +#define DEPCTL_TXFNUM_1			(0x1<<22)
+> +#define DEPCTL_TXFNUM_2			(0x2<<22)
+> +#define DEPCTL_TXFNUM_3			(0x3<<22)
+> +#define DEPCTL_TXFNUM_4			(0x4<<22)
 
+Nitpick -- please add spaces around << , I think checkpatch would warn 
+about this.
+
+[...]
+
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+> index e2a24c53b4c8d632163484d52b4338820dcb1731..76c0b03c355b47e9523a071bd76ab8d6a17cd3ac 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+> @@ -19,6 +19,7 @@
+>   
+>   #include <cpu_func.h>
+>   #include <log.h>
+> +#include <linux/bitfield.h>
+>   #include <linux/bug.h>
+>   
+>   static u8 clear_feature_num;
+> @@ -174,11 +175,11 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
+>   	ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+>   
+>   	/* Write the FIFO number to be used for this endpoint */
+> -	ctrl &= DIEPCTL_TX_FIFO_NUM_MASK;
+> -	ctrl |= DIEPCTL_TX_FIFO_NUM(ep->fifo_num);
+> +	ctrl &= ~DIEPCTL_TX_FIFO_NUM_MASK;
+> +	ctrl |= FIELD_PREP(DIEPCTL_TX_FIFO_NUM_MASK, ep->fifo_num);
+>   
+>   	/* Clear reserved (Next EP) bits */
+> -	ctrl = (ctrl&~(EP_MASK<<DEPCTL_NEXT_EP_BIT));
+> +	ctrl &= ~DEPCTL_NEXT_EP_MASK;
+>   
+>   	writel(DEPCTL_EPENA|DEPCTL_CNAK|ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+Nitpick -- in some follow up separate series, this could also be 
+replaced by clrsetbits_le32() , but that's really for separate patch/series.
