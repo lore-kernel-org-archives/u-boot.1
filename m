@@ -4,84 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5E3E77188
-	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 16:05:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA41BE7718B
+	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 16:51:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 401228021A;
-	Tue, 31 Dec 2024 17:05:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DABA6801CE;
+	Tue, 31 Dec 2024 17:51:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ofB9qmrW";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 915F08021D; Tue, 31 Dec 2024 17:05:34 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 951878021D; Tue, 31 Dec 2024 17:50:01 +0100 (CET)
+Received: from mx.skole.hr (mx2.hosting.skole.hr [161.53.165.186])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B885801CE
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 17:05:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 093B6801CE
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 17:49:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7b6f19a6c04so866921485a.0
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 08:05:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735661131; x=1736265931; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6BPEEiRJDTErWWY8g950yGNsksUAz4gMeZyxlgR3pvA=;
- b=ofB9qmrWpWRDm1K/HXrXoVrMbhdoWhjg3e9X65OXFSYfdUkVxAMt3kphVc8qWIcRNT
- IBQ3BSaT8aCMQNH7TKSQ6SEcpt8KTKr3bn/FMtPwMD3idmZ5T7nKENTZuU6RARP+phUd
- zE3UPYFLsyXPSiD70JSkhMC0V4lztvDBWRa94=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735661131; x=1736265931;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6BPEEiRJDTErWWY8g950yGNsksUAz4gMeZyxlgR3pvA=;
- b=gbduYN/Zx+HonCYqIgP3oBndPZL451/LoiF/wcopu0HeMxuQMs3jc4najIUNuKJCfk
- JJ5wOhWVzrUzradhqTA/fSIBt0m6sQcujxZYV47KFqBbr76QZkthLLIP37MU3+nGpNI7
- XCY3knfDFcRpw8B+GvnfpUBLLgRQBzTPLx2s1xh7F7QMNCFwRsjb1Fxt6gtfidIvAnQq
- 05JCX/9aWedfoMxfZo5XzIFeHZbEdologl4FMZNMMsvgb9XvSlKDypICKRY2qhlBm38U
- 5YBqtmfkhjTcDCCtPC6hGMc9TQ9c/31KUeT1z5lO3O8XqIcjtW5XkjOf29MPhJ0BNELb
- 5WHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVT8wHkYhNNFCxf8XIEfkRq00VN1VFMELPd7vH8dymhKOizsGUaGMUDXipELoG/PEVQRf0gNDk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz16dS5u1KjSFuZaPw6Ye2xOoQSKo2267Bgdo9ygTssuZzsQHz+
- pbRsLcyzy92XAt2M6+htzUSvBccYFxT3p6Mkc9ImDo+fI3E/H+qxd1jDxsAuGis=
-X-Gm-Gg: ASbGncu+Jjugy+Pa7oJLmA/CZzuxS0lzGV8P0JtgnFd6Aehpk8iTsL8rrm5gt3IO8NC
- aCQjiF1FaZ0G2P86GxBGX8++EJrJf95mMS1WPiU21JyaGPOc3njw7anKS9xokV89ouCi2TwLeex
- /9jWRtCKLrts4Rc9uSEmQ1vpomAeVfeS7MhUAbZbVxDZ/jzHN1KzJRcd09x/XIVKPH8GzDpuCDg
- lwfViEMvE8lOjFBFrhEFib/c3TFxdvwJXGPimg6nuifxlKNHnxdfCj7og==
-X-Google-Smtp-Source: AGHT+IE7M7RXpZWf0GVEwo5qezaHRQwDrbHueHupszZzN1x0JKth2im6807e9MVIk/mIzshvRataBQ==
-X-Received: by 2002:ad4:4eaf:0:b0:6d8:9e16:d08e with SMTP id
- 6a1803df08f44-6dd23358001mr563683826d6.26.1735661131184; 
- Tue, 31 Dec 2024 08:05:31 -0800 (PST)
-Received: from bill-the-cat ([189.178.122.190])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd180ea757sm112962956d6.22.2024.12.31.08.05.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Dec 2024 08:05:30 -0800 (PST)
-Date: Tue, 31 Dec 2024 10:05:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Duje =?utf-8?Q?Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
-Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] Initial support for PXA1908 and samsung-coreprimevelte
-Message-ID: <20241231160527.GJ3476@bill-the-cat>
-References: <20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr>
- <4950238.GXAFRqVoOG@radijator> <20241230152533.GC3476@bill-the-cat>
- <2974027.e9J7NaK4W3@radijator>
+ spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
+Received: from mx2.hosting.skole.hr (localhost.localdomain [127.0.0.1])
+ by mx.skole.hr (mx.skole.hr) with ESMTP id 4C67282EC7;
+ Tue, 31 Dec 2024 17:49:58 +0100 (CET)
+From: =?utf-8?q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
+Subject: [PATCH v2 0/3] Initial support for PXA1908 and samsung-coreprimevelte
+Date: Tue, 31 Dec 2024 17:49:11 +0100
+Message-Id: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XH+jflJFRoCq1Kjd"
-Content-Disposition: inline
-In-Reply-To: <2974027.e9J7NaK4W3@radijator>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAIcgdGcC/13MwQ6CMBCE4Vche7aGrojEk+9hOEAZZCNSsiWNh
+ vDuVhMvHv9J5lspQAWBztlKiihB/JSCdxm5oZluMNKlJs65sMylcV4xqzwQMS4w1nHZuL49Vl1
+ L6TQrenl+wWudepCweH19/Wg/6486/VPRmtw0ruLiAKBAeQl3P2I/KNXbtr0BtvsL1qsAAAA=
+X-Change-ID: 20241226-coreprimevelte-1c26acfb58db
+To: Tom Rini <trini@konsulko.com>
+Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht, 
+ u-boot@lists.denx.de, 
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2074;
+ i=duje.mihanovic@skole.hr; s=20240706; h=from:subject:message-id;
+ bh=MDxE1xk/r294E+Rxr/FeRHJx+EMIhwNbR2zy+TetsEQ=;
+ b=owGbwMvMwCW21nBykGv/WmbG02pJDOklCv0seY9KxLw/XWO+feaR7MeHN95NecezLvnA8zNF3
+ jdWrXHf0lHKwiDGxSArpsiS+9/xGu9nka3bs5cZwMxhZQIZwsDFKQATMZ/E8Ffuwf/YrmTeDFf5
+ DWw6FVG/NYKC7ir/2SEcHbuJe/nCYFtGhsZPnZc3FO97//Z6xJkVf4PT6n/eezvhGvupvwIKnSt
+ udvMCAA==
+X-Developer-Key: i=duje.mihanovic@skole.hr; a=openpgp;
+ fpr=6DFF41D60DF314B5B76BA630AD319352458FAD03
+X-Mailman-Approved-At: Tue, 31 Dec 2024 17:51:37 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,46 +67,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
---XH+jflJFRoCq1Kjd
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series adds initial support for Marvell's PXA1908 ARM64 SoC and
+Samsung's Galaxy Core Prime VE LTE, a smartphone based on said SoC.
 
-On Tue, Dec 31, 2024 at 12:16:28PM +0100, Duje Mihanovi=C4=87 wrote:
-> On Monday 30 December 2024 16:25:33 Central European Standard Time Tom Ri=
-ni=20
-> wrote:
-> > Yes, this is about moving to OF_UPSTREAM. Strictly and only with respect
-> > to things that we have to deal with due to other bootloaders can we deal
-> > with problems like that in the -u-boot.dtsi file. Otherwise we need to
-> > match compatibles, etc, with upstream. Thanks!
->=20
-> Fair enough. For v2 I can add "intel,xscale-uart" to NS16550's compatible=
-=20
-> array and the U-Boot dts if that's the right way to do it.
+On this board, U-Boot is used as a secondary bootloader to work around
+certain quirks of the factory S-Boot.
 
-Sounds like the right track yes, thanks!
+Signed-off-by: Duje Mihanović <duje.mihanovic@skole.hr>
+---
+Changes in v2:
+- Drop arm,armv8 compatible from CPU nodes to match upstream
+- Add intel,xscale-uart compatible to NS16550 and use it in serial nodes to match upstream
+- Add include guards to include/configs/pxa1908.h
+- Disable CONFIG_DISPLAY_CPUINFO and CONFIG_CPU
+- Rebase on v2025.01-rc5
+- Link to v1: https://lore.kernel.org/r/20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr
 
---=20
-Tom
+---
+Duje Mihanović (3):
+      serial: ns16550: Add Intel XScale support
+      arm: mmp: add initial support for PXA1908 SoC
+      board: samsung: add initial support for coreprimevelte board
 
---XH+jflJFRoCq1Kjd
-Content-Type: application/pgp-signature; name="signature.asc"
+ MAINTAINERS                                     |   8 ++
+ arch/arm/Kconfig                                |  11 +++
+ arch/arm/Makefile                               |   1 +
+ arch/arm/dts/Makefile                           |   2 +
+ arch/arm/dts/pxa1908-samsung-coreprimevelte.dts |  74 +++++++++++++++++
+ arch/arm/dts/pxa1908.dtsi                       | 106 ++++++++++++++++++++++++
+ arch/arm/mach-mmp/Kconfig                       |  12 +++
+ arch/arm/mach-mmp/Makefile                      |   1 +
+ arch/arm/mach-mmp/board.c                       |  82 ++++++++++++++++++
+ arch/arm/mach-mmp/mmu.c                         |  30 +++++++
+ board/samsung/coreprimevelte/Kconfig            |  12 +++
+ board/samsung/coreprimevelte/MAINTAINERS        |   6 ++
+ configs/coreprimevelte_defconfig                |  18 ++++
+ drivers/serial/ns16550.c                        |   1 +
+ include/configs/pxa1908.h                       |  18 ++++
+ 15 files changed, 382 insertions(+)
+---
+base-commit: 4be40460758057b9a85b0303dc072c108813cdf6
+change-id: 20241226-coreprimevelte-1c26acfb58db
 
------BEGIN PGP SIGNATURE-----
+Best regards,
+-- 
+Duje Mihanović <duje.mihanovic@skole.hr>
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd0FkQACgkQFHw5/5Y0
-tywN7Qv+J2R2+RmWa9lq3hObCOMONoB9J808ohot7/21OGpeQENsqK5DC4medHQy
-oBexvh+vDZVGEXYIjBCLxJzPfQjf77QNEP+ExjItyaU/ihSdvfChODoW266i/OUX
-TC/SVIq8inaHcepiWCRbJJ9wtmCsaJZqCSoay9tNmE2CgEuriJBsbBBtDMMkxpMS
-on0N+WbrFpIGXC2ZOyXdziEypiHtTrv1oqEL9RZqtI4k6ItvVl6BD4xlbErVDGxZ
-kGQuj3HaEEr1PmD2msQDTsZUFeMIV1vKNOC9/A8ily/Mv70wKwja3uDW4YZ9BQl4
-uuuv53QCCJhHdmhuVy6agv9Pa4i3I4EhU+IZbAf/wcYI7Jyj3g+OuiZZ6yykUEgW
-4THkHpIrExBSUaoGSUHRM8ZvM+ez5V9dkgjUuc5HaBr314GiKXA8IXqY3PoCw9V6
-8fDGNCzOmYTnWcpVccXHDYpxQz6o9Dg6wg5pWulwreZ9wnqXWKQkjDMQM5oOrxDP
-GQIZrwrs
-=0deF
------END PGP SIGNATURE-----
 
---XH+jflJFRoCq1Kjd--
