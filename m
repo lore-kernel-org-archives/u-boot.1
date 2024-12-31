@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED4CCE77188
-	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 18:14:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF005E7718B
+	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 18:14:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C18D4803C6;
-	Tue, 31 Dec 2024 19:13:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19411803DF;
+	Tue, 31 Dec 2024 19:13:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1735668804;
-	bh=1yenvxh4fm6RwU9aKZm08vW0mTkArzjK7/qhgUwu3h0=;
+	s=phobos-20191101; t=1735668805;
+	bh=Be0+ZGwDVFUtq4NokCWC+5L0G2/7kiLP2BTq2tm/Av8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=c2/UXvXk/Vs6dABUql772ttPoPEKw2WiZZK7g8UZzeYeAvNTFlQ4nKHj6wDYgr0kt
-	 cPHqEGHXiWZZMeKQzG9+6/ybZmudO3MN4tkNGvgars7T9u0bcN81Gu5Q7JcB+FP9lR
-	 /UHdzsD8GgES55725YLm3WqYDI9GDGYn9OpwS2NOD/iHKsXw4HGb+B4tMuf/U93jr8
-	 A4CPWtCyyJoiZmvBnavps7CajUxQZwxA+6UqduVyiH+KD3Gg9Qo90FuqxP31CzCuGJ
-	 jJQ8nue94C9jD77/GpBd8Ht46nS26s2MJ3mEDA+gHJ2QMMax2hUgJ93HnCY23d+jBa
-	 TTbI+2qXQXUHQ==
+	b=XQl3LJzD0EyEcg5jOH6aqFmdzqRxhZsRX+mjdn+Q7SZe081uYsDB4MoRLYV9HybAS
+	 ltpPuUW9uv2rQ+KVYrQtgygJFe2bDS1Z4uV5WICAeWMKAz6RepBxEyhBHywMBlk3nu
+	 XjoMZOmcPTNJPzfMbe5yU24c3Xr0yiw34ODOg0MyqH25zjw6xu+dVnYJIC+Vbr4QxM
+	 8pmJPdAFN7BFdSrTOqfDAE/MBHmnJwhAH3rfL2Q7Cgbv9YZkRsqDiyO72qmrtAZ5y5
+	 mo/D+ZBEPw52gnHp30zMhvWkws7ZihLmrO36WeM0vvqd0P5pV9/ZBHe7jW7uzRppFo
+	 ZITk77JSwM6IQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38F8E801CE; Tue, 31 Dec 2024 19:13:23 +0100 (CET)
+ id 933F4801CE; Tue, 31 Dec 2024 19:13:23 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EE3C8021D
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 19:13:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BC7280374
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 19:13:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="QsvZywEy"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="HBPhyQHv"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E60DB10486D86; Tue, 31 Dec 2024 19:13:18 +0100 (CET)
+ with ESMTPSA id 228F810486D91; Tue, 31 Dec 2024 19:13:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1735668799;
+ t=1735668801;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1yenvxh4fm6RwU9aKZm08vW0mTkArzjK7/qhgUwu3h0=;
- b=QsvZywEybWexNz0QWpM/SLGMRfeZzsBLMpgfNKcnsIi3WxXXtWDtI4ovK1ZFKSYoKri5Li
- S6i06IHz1G33lLLWJ4uNXxk6UQeNdo6EpNRlqA6lhSYZ//7Y8xAQ5x8NwWdT4NupSqJ8Tw
- nMSPNwrBreUwgYdM9HBEVktQUeAiCUjpzNetbcC2AQKuCJJ2DJiY1a37A1zVoDzQPO6JmK
- b3feKQM3s5xCs8adKl5+okG6ZhwPXqH4yztdtMIkvF5hI+jJCouydFW0HedeGy3rxYNLSO
- qhyHxjXaRmOhwxWOs2gFJD5YEEqEp9WETvIUmkHN5yzHAwFXd2jTqHFT1BZ7Mw==
-Message-ID: <54b43988-c43b-43dd-9b69-1d354765bf35@denx.de>
-Date: Tue, 31 Dec 2024 19:10:28 +0100
+ bh=Be0+ZGwDVFUtq4NokCWC+5L0G2/7kiLP2BTq2tm/Av8=;
+ b=HBPhyQHv1IC8+r1KFm/D9IPyJS/S/mAbe6pqV1Z10gbDLCUznT2mVurznqbnfPvxb+m0UI
+ MD9p7QZI75NfVUfvVO54Ayeyf5z8jftVaKbUYCG0fG4Dx9/dTLIY5eCGIE2tiWkVo3xs3m
+ u3CFEVVfJEGpkFNBF1f2ajkxnpH0Rjg/9RiKS8G6k2imH++O9tG5TA+RSgXOyWduBr61vn
+ bYyOBeMnaJYTdg21h2v4Ni1KXyyADTKPFWeNvAc2ywgnvelxsEWlsXx9Ak+7A+U7CVlX4y
+ 4ZmAS4KFdZKEmmLZf3IE9mrNc/SJ6UnI1PfzBf4oFqVMpInNEWIJ5WIRc1EaAg==
+Message-ID: <66766bd5-1397-402a-9605-187eec1ee905@denx.de>
+Date: Tue, 31 Dec 2024 19:10:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] usb: dwc2: Align macros with Linux kernel
- definitions
+Subject: Re: [PATCH v2 8/8] usb: dwc2: Replace uint<x>_t types with u<x>
 To: liujh2818@outlook.com, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>
 References: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
- <20241230-dwc2-dev-v2-5-12cd9b8a2358@outlook.com>
+ <20241230-dwc2-dev-v2-8-12cd9b8a2358@outlook.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241230-dwc2-dev-v2-5-12cd9b8a2358@outlook.com>
+In-Reply-To: <20241230-dwc2-dev-v2-8-12cd9b8a2358@outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -87,9 +86,9 @@ X-Virus-Status: Clean
 On 12/30/24 4:30 AM, Junhui Liu via B4 Relay wrote:
 > From: Kongyang Liu <seashell11234455@gmail.com>
 > 
-> Update the DWC2 macros to match those used in the Linux kernel, making
-> it easier to synchronize updates with kernel. Also removed some unused
-> macros to cleanup the code.
+> Updates all instances of uint8_t, uint16_t, and uint32_t to u8, u16, and
+> u32 respectively, ensuring consistent use of kernel-preferred types and
+> resolving checkpatch.pl warnings.
 > 
 > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 > Signed-off-by: Junhui Liu <liujh2818@outlook.com>
