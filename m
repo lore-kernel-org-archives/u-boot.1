@@ -4,74 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5D16E77188
-	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 14:53:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5966E77188
+	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 15:20:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED79680379;
-	Tue, 31 Dec 2024 15:53:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EDB908037B;
+	Tue, 31 Dec 2024 16:20:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fUehU/H6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t4HspsiY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CD2980383; Tue, 31 Dec 2024 15:53:27 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 4809080383; Tue, 31 Dec 2024 16:20:20 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA912801CE
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 15:53:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BFE8801CE
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 16:20:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d3d143376dso14576184a12.3
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 06:53:24 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7b6e4d38185so822578085a.0
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 07:20:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1735656804; x=1736261604; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=If/g5vT5rLyyN6bWH43lj/MSmUnmwIdAXmSXBV1yq2w=;
- b=fUehU/H6hBUpRWMJcX6VjZpRzdhEpk9/kGJB0VT2962nYbmnj6ZIKonvxgf4J3IykT
- dXjfLnptbgF2Pmpbn1mfN8BIJS5riRRgjtYE/h74ye32iFeR5P9wNpHa2ndIUNGhS4o+
- 1khPYhq9h4rABgPntuAFk5XXLLDNCbTBrq4QlNdKOdyeMmeQO/AX9ev7kUFAI10fBuiF
- TLTLTZQ0FO6maO6mJTdHD/ECMBmGJxMvBi5vdL/wmlnI8sIA55WaDN4xxtAfszJfnkbd
- VE3amOdyeWbIkH8TrN+xjV/xFRnOBBIQKb10Gh9cnWeC96ITVsBSXUHvl552juNYPdWh
- 8rvA==
+ d=konsulko.com; s=google; t=1735658417; x=1736263217; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NLVkM3C2dce0TXsMK59rwBcrDcdpvAJWbd9Z/1TSiYA=;
+ b=t4HspsiYmOrP5K+UWMbVA2O3LUj2sjabD+OMTdutFH2Bfp0oMc/qy9MgbiICFEgv3E
+ xBG9YpTpl8jrbDnFkQJU7tN64GeQ2rkpF5VO92TB6Ehm9BD0t3jk5vdhqvjqxVkHnLLO
+ UWjGKmgEgPTtwBn1LhD9tLI6fWkClaxnRJ4N0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735656804; x=1736261604;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=If/g5vT5rLyyN6bWH43lj/MSmUnmwIdAXmSXBV1yq2w=;
- b=KEr9UqhjVxb8IWixi8insSosYZR+Xl2bClQ6Eo4uwS+0QGUFBFTEZaFvzcofUTb+RB
- bwoOPjHUtnwcqMvwVGLKdoS4E/MoGozrQsl6GSvRU44DcvDiFvLU7AMF5t2UNjdjXOSO
- N9/HBQEKWOkagfaLl1Om6hzgviOKcLUxl/mm5eHR6giAvaQDmXmQ+VY3MM64ECqg9Kzo
- STIcqfVu2lly73hA3Pp//T8ESr1xxBi0eusHYjmiz0sJgz5r1cxgbZbWt1jZeWNWXt9o
- HvRCdoJaI1ljMxBC4aJze+ZqOhNmRz8hx9WPsSrVHnZb/eojcAYhRJWMaMxNNA/f2+pC
- G9WA==
-X-Gm-Message-State: AOJu0Yw7Dwm/WVvcClZFBdMXEJMKUdC6mGfG15AafKIs46DZRnJLcqMd
- HegcJxZsdRVAdsYYDZRNL1xrfyvhQ28U7v8lT4NPhWBJQd1qIYO53F3sk7pE0bTXgXuO4aKkv7A
- 0QBX7KB9CBJlHMLQG3BKLwL0RBf1vDA==
-X-Gm-Gg: ASbGnctGNSCKeAoH9CF4huDaMaUp4jdZ2MEgUwxwcEL2jxm7KLu4IXcSHEijvGW+Y21
- 2UO0+jcFKJWj4f0w8uB8ewtHKtgS+kWkHI/jI6amr1JiiSw+n/BRee03pWpNNR8vSWJNclgQ=
-X-Google-Smtp-Source: AGHT+IGL1UatI7xTz5pIfq67gNzZAdvMKI/9+QW2X3LENaZ4JDWW0DnWw3ZRUK6kb3sXYf1Sjt8Ayn0WwTDNdX2I23M=
-X-Received: by 2002:a05:6402:4011:b0:5d0:b040:4616 with SMTP id
- 4fb4d7f45d1cf-5d81de17fa4mr41789877a12.28.1735656803640; Tue, 31 Dec 2024
- 06:53:23 -0800 (PST)
+ d=1e100.net; s=20230601; t=1735658417; x=1736263217;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NLVkM3C2dce0TXsMK59rwBcrDcdpvAJWbd9Z/1TSiYA=;
+ b=F1jnTXlc83iXq/WQIdjx2jwMAhpYVnMiBW/YMJogMg5zFK9BmrACkRFwAq5NFsSTPz
+ PMISN9KIuljVINQxsKb66gSY5JkTk7F7CZ85c2AeIVKKUGAvpCEAZtSb2z7IRjYL0YEO
+ y7RSINGRM+5vu5w6f+sV9PJFEdsAMG9I6YnI3xUJeqBzihgEY2iEJ7rSc50OgKo8zMmj
+ /Lg24j9VZJibhNXaUIiejv0YJgtYRV098x2OSDf5Flpx4l/U1ih1jUFsCN9lTcN/vEXC
+ xo1f1s483YbgwwlKODKRPdz+9BY+NS8o4PLccz6NxDDVLP11PziF5LB2YSgT3xlZ0eEN
+ XmOQ==
+X-Gm-Message-State: AOJu0YxuAIxXKJfuCU+MvYi41jZwmTHJx2HRDLn2+NBeD7nBO4QNynO8
+ jq2Y2dgXwQWsVQvY0ogO/QohqzFc55jTBIe/4QXXl0rUjRZfPVrNWWMl2SHem+o=
+X-Gm-Gg: ASbGncvGB9uypFUK+1xc2jV6gkjqnEOWBQdwMKrKVGgT3XsGSuL2N6DJth99VtPfofJ
+ oqTUvQqGr2MuO/m/OjS1O/ndMzGDK0nseGXrnOSem8GtASf/p1QOze84Ca+6I7GfqbFnNGUHjm4
+ u7uqMIR4Ioijq+tybUsbsBO8EbG9LHYAk+5Xb0fbWEPelyITF43jfKc415sY0/c3SatAWaC2Slf
+ xBk+EVhkij4M9w9FKjb2YnbNSStiBv88+htXZUwgjX0oR/X2IIxOm7M
+X-Google-Smtp-Source: AGHT+IFvdiEkXSoxJFXiypD2ir/NVHIDqy8XJ3L4EwgbHtzEnsqrHkfsYQnaXPsPXBjcNgH+v/dLAA==
+X-Received: by 2002:a05:6214:ccf:b0:6d8:99cf:d2db with SMTP id
+ 6a1803df08f44-6dd2339e044mr757357486d6.38.1735658416987; 
+ Tue, 31 Dec 2024 07:20:16 -0800 (PST)
+Received: from [127.0.1.1] ([189.178.122.190])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd181d528csm112175506d6.112.2024.12.31.07.20.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Dec 2024 07:20:16 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: sjg@chromium.org, alpernebiyasak@gmail.com, 
+ Prasanth Babu Mantena <p-mantena@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, u-kumar1@ti.com, 
+ n-francis@ti.com, vaishnav.a@ti.com, s-k6@ti.com
+In-Reply-To: <20241218130045.2070314-1-p-mantena@ti.com>
+References: <20241218130045.2070314-1-p-mantena@ti.com>
+Subject: Re: [PATCH v2] dma: ti: k3-udma: Fix BCDMA probe by adding check
+ for MMR_RFLOW
+Message-Id: <173565841529.348552.15135055091605518631.b4-ty@konsulko.com>
+Date: Tue, 31 Dec 2024 09:20:15 -0600
 MIME-Version: 1.0
-References: <cd71682e-33c9-4e38-829a-a540a53bacad@munisense.com>
-In-Reply-To: <cd71682e-33c9-4e38-829a-a540a53bacad@munisense.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 31 Dec 2024 14:53:12 +0000
-Message-ID: <CALeDE9P45GvLagdkkC-8FuT5Ee3ZWpMPa4+F_eizoPHFtJFSjA@mail.gmail.com>
-Subject: Re: rpi: Compute Module 5 doesn't autoboot without debug UART
-To: Gijs Peskens <gijs.peskens@munisense.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,37 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 24 Dec 2024 at 14:00, Gijs Peskens <gijs.peskens@munisense.com>
-wrote:
+On Wed, 18 Dec 2024 18:30:45 +0530, Prasanth Babu Mantena wrote:
 
-> I'm working on getting a compute module working with Yocto using U-Boot
-> as bootloader, which mostly works thanks to previous work to get RPi 5
-> working.
-> However I'm running into a strange issue: if I turn on the CM5 without
-> the debug UART (which requires soldering a header onto the CM5)
-> attached, the Pi doesn't boot beyond showing the submarine splash
-> screen, if I boot it with the console attached it autoboots correctly.
-> If I attach the UART after the boot halted and press enter I get a
-> U-Boot console, and giving the boot command boots it normally.
-> And setting bootdelay=-2 in the env allows it to correctly boot.
->
-> Which leads me to believe there is perhaps a spurious input registered
-> by U-Boot which interrupts autobooting.
->
-> Is there a command that allows me to extract why U-Boot didn't continue
-> autobooting?
->
-> And anyone have a hint how this could perhaps be fixed in a more elegant
-> way (allowing interruptable autoboot).
->
-> The hardware I'm testing on is the CM5 devkit, I needed to make small
-> changes to yocto to get it working:
-> https://github.com/agherzan/meta-raspberrypi/pull/1397
->
+> RFLOW config related MMR does not exist incase of BCDMA.
+> Add check to bypass the RFLOW MMR extraction.
+> Without this, the probe sequence fails checking for
+> the MMR_RFLOW region, which is valid only for packet based
+> DMA and obselete for BCDMA.
+> 
+> 
+> [...]
 
-I don't think this is unique to the CM5, I've seen it on other RPi models,
-I have a RPi4 8Gb model that exhibits the same behavior, yet other RPi4s I
-have don't exhibit the behavious. In the case of the 8Gb I have a USB
-serial TTL on it, it boots if the USB is plugged in, doesn't if not. I have
-other v4s, both with and without the TTL and they boot fine, I've never
-been able to get to the bottom of why.
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
+
