@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5966E77188
-	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 15:20:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5E3E77188
+	for <u-boot@archiver.kernel.org>; Tue, 31 Dec 2024 16:05:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDB908037B;
-	Tue, 31 Dec 2024 16:20:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 401228021A;
+	Tue, 31 Dec 2024 17:05:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t4HspsiY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ofB9qmrW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4809080383; Tue, 31 Dec 2024 16:20:20 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 915F08021D; Tue, 31 Dec 2024 17:05:34 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BFE8801CE
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 16:20:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B885801CE
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 17:05:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b6e4d38185so822578085a.0
- for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 07:20:18 -0800 (PST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b6f19a6c04so866921485a.0
+ for <u-boot@lists.denx.de>; Tue, 31 Dec 2024 08:05:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735658417; x=1736263217; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NLVkM3C2dce0TXsMK59rwBcrDcdpvAJWbd9Z/1TSiYA=;
- b=t4HspsiYmOrP5K+UWMbVA2O3LUj2sjabD+OMTdutFH2Bfp0oMc/qy9MgbiICFEgv3E
- xBG9YpTpl8jrbDnFkQJU7tN64GeQ2rkpF5VO92TB6Ehm9BD0t3jk5vdhqvjqxVkHnLLO
- UWjGKmgEgPTtwBn1LhD9tLI6fWkClaxnRJ4N0=
+ d=konsulko.com; s=google; t=1735661131; x=1736265931; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6BPEEiRJDTErWWY8g950yGNsksUAz4gMeZyxlgR3pvA=;
+ b=ofB9qmrWpWRDm1K/HXrXoVrMbhdoWhjg3e9X65OXFSYfdUkVxAMt3kphVc8qWIcRNT
+ IBQ3BSaT8aCMQNH7TKSQ6SEcpt8KTKr3bn/FMtPwMD3idmZ5T7nKENTZuU6RARP+phUd
+ zE3UPYFLsyXPSiD70JSkhMC0V4lztvDBWRa94=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735658417; x=1736263217;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NLVkM3C2dce0TXsMK59rwBcrDcdpvAJWbd9Z/1TSiYA=;
- b=F1jnTXlc83iXq/WQIdjx2jwMAhpYVnMiBW/YMJogMg5zFK9BmrACkRFwAq5NFsSTPz
- PMISN9KIuljVINQxsKb66gSY5JkTk7F7CZ85c2AeIVKKUGAvpCEAZtSb2z7IRjYL0YEO
- y7RSINGRM+5vu5w6f+sV9PJFEdsAMG9I6YnI3xUJeqBzihgEY2iEJ7rSc50OgKo8zMmj
- /Lg24j9VZJibhNXaUIiejv0YJgtYRV098x2OSDf5Flpx4l/U1ih1jUFsCN9lTcN/vEXC
- xo1f1s483YbgwwlKODKRPdz+9BY+NS8o4PLccz6NxDDVLP11PziF5LB2YSgT3xlZ0eEN
- XmOQ==
-X-Gm-Message-State: AOJu0YxuAIxXKJfuCU+MvYi41jZwmTHJx2HRDLn2+NBeD7nBO4QNynO8
- jq2Y2dgXwQWsVQvY0ogO/QohqzFc55jTBIe/4QXXl0rUjRZfPVrNWWMl2SHem+o=
-X-Gm-Gg: ASbGncvGB9uypFUK+1xc2jV6gkjqnEOWBQdwMKrKVGgT3XsGSuL2N6DJth99VtPfofJ
- oqTUvQqGr2MuO/m/OjS1O/ndMzGDK0nseGXrnOSem8GtASf/p1QOze84Ca+6I7GfqbFnNGUHjm4
- u7uqMIR4Ioijq+tybUsbsBO8EbG9LHYAk+5Xb0fbWEPelyITF43jfKc415sY0/c3SatAWaC2Slf
- xBk+EVhkij4M9w9FKjb2YnbNSStiBv88+htXZUwgjX0oR/X2IIxOm7M
-X-Google-Smtp-Source: AGHT+IFvdiEkXSoxJFXiypD2ir/NVHIDqy8XJ3L4EwgbHtzEnsqrHkfsYQnaXPsPXBjcNgH+v/dLAA==
-X-Received: by 2002:a05:6214:ccf:b0:6d8:99cf:d2db with SMTP id
- 6a1803df08f44-6dd2339e044mr757357486d6.38.1735658416987; 
- Tue, 31 Dec 2024 07:20:16 -0800 (PST)
-Received: from [127.0.1.1] ([189.178.122.190])
+ d=1e100.net; s=20230601; t=1735661131; x=1736265931;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6BPEEiRJDTErWWY8g950yGNsksUAz4gMeZyxlgR3pvA=;
+ b=gbduYN/Zx+HonCYqIgP3oBndPZL451/LoiF/wcopu0HeMxuQMs3jc4najIUNuKJCfk
+ JJ5wOhWVzrUzradhqTA/fSIBt0m6sQcujxZYV47KFqBbr76QZkthLLIP37MU3+nGpNI7
+ XCY3knfDFcRpw8B+GvnfpUBLLgRQBzTPLx2s1xh7F7QMNCFwRsjb1Fxt6gtfidIvAnQq
+ 05JCX/9aWedfoMxfZo5XzIFeHZbEdologl4FMZNMMsvgb9XvSlKDypICKRY2qhlBm38U
+ 5YBqtmfkhjTcDCCtPC6hGMc9TQ9c/31KUeT1z5lO3O8XqIcjtW5XkjOf29MPhJ0BNELb
+ 5WHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVT8wHkYhNNFCxf8XIEfkRq00VN1VFMELPd7vH8dymhKOizsGUaGMUDXipELoG/PEVQRf0gNDk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz16dS5u1KjSFuZaPw6Ye2xOoQSKo2267Bgdo9ygTssuZzsQHz+
+ pbRsLcyzy92XAt2M6+htzUSvBccYFxT3p6Mkc9ImDo+fI3E/H+qxd1jDxsAuGis=
+X-Gm-Gg: ASbGncu+Jjugy+Pa7oJLmA/CZzuxS0lzGV8P0JtgnFd6Aehpk8iTsL8rrm5gt3IO8NC
+ aCQjiF1FaZ0G2P86GxBGX8++EJrJf95mMS1WPiU21JyaGPOc3njw7anKS9xokV89ouCi2TwLeex
+ /9jWRtCKLrts4Rc9uSEmQ1vpomAeVfeS7MhUAbZbVxDZ/jzHN1KzJRcd09x/XIVKPH8GzDpuCDg
+ lwfViEMvE8lOjFBFrhEFib/c3TFxdvwJXGPimg6nuifxlKNHnxdfCj7og==
+X-Google-Smtp-Source: AGHT+IE7M7RXpZWf0GVEwo5qezaHRQwDrbHueHupszZzN1x0JKth2im6807e9MVIk/mIzshvRataBQ==
+X-Received: by 2002:ad4:4eaf:0:b0:6d8:9e16:d08e with SMTP id
+ 6a1803df08f44-6dd23358001mr563683826d6.26.1735661131184; 
+ Tue, 31 Dec 2024 08:05:31 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181d528csm112175506d6.112.2024.12.31.07.20.15
+ 6a1803df08f44-6dd180ea757sm112962956d6.22.2024.12.31.08.05.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Dec 2024 07:20:16 -0800 (PST)
+ Tue, 31 Dec 2024 08:05:30 -0800 (PST)
+Date: Tue, 31 Dec 2024 10:05:27 -0600
 From: Tom Rini <trini@konsulko.com>
-To: sjg@chromium.org, alpernebiyasak@gmail.com, 
- Prasanth Babu Mantena <p-mantena@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, u-kumar1@ti.com, 
- n-francis@ti.com, vaishnav.a@ti.com, s-k6@ti.com
-In-Reply-To: <20241218130045.2070314-1-p-mantena@ti.com>
-References: <20241218130045.2070314-1-p-mantena@ti.com>
-Subject: Re: [PATCH v2] dma: ti: k3-udma: Fix BCDMA probe by adding check
- for MMR_RFLOW
-Message-Id: <173565841529.348552.15135055091605518631.b4-ty@konsulko.com>
-Date: Tue, 31 Dec 2024 09:20:15 -0600
+To: Duje =?utf-8?Q?Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
+Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 0/2] Initial support for PXA1908 and samsung-coreprimevelte
+Message-ID: <20241231160527.GJ3476@bill-the-cat>
+References: <20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr>
+ <4950238.GXAFRqVoOG@radijator> <20241230152533.GC3476@bill-the-cat>
+ <2974027.e9J7NaK4W3@radijator>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XH+jflJFRoCq1Kjd"
+Content-Disposition: inline
+In-Reply-To: <2974027.e9J7NaK4W3@radijator>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,20 +98,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Dec 2024 18:30:45 +0530, Prasanth Babu Mantena wrote:
 
-> RFLOW config related MMR does not exist incase of BCDMA.
-> Add check to bypass the RFLOW MMR extraction.
-> Without this, the probe sequence fails checking for
-> the MMR_RFLOW region, which is valid only for packet based
-> DMA and obselete for BCDMA.
-> 
-> 
-> [...]
+--XH+jflJFRoCq1Kjd
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Tue, Dec 31, 2024 at 12:16:28PM +0100, Duje Mihanovi=C4=87 wrote:
+> On Monday 30 December 2024 16:25:33 Central European Standard Time Tom Ri=
+ni=20
+> wrote:
+> > Yes, this is about moving to OF_UPSTREAM. Strictly and only with respect
+> > to things that we have to deal with due to other bootloaders can we deal
+> > with problems like that in the -u-boot.dtsi file. Otherwise we need to
+> > match compatibles, etc, with upstream. Thanks!
+>=20
+> Fair enough. For v2 I can add "intel,xscale-uart" to NS16550's compatible=
+=20
+> array and the U-Boot dts if that's the right way to do it.
 
--- 
+Sounds like the right track yes, thanks!
+
+--=20
 Tom
 
+--XH+jflJFRoCq1Kjd
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd0FkQACgkQFHw5/5Y0
+tywN7Qv+J2R2+RmWa9lq3hObCOMONoB9J808ohot7/21OGpeQENsqK5DC4medHQy
+oBexvh+vDZVGEXYIjBCLxJzPfQjf77QNEP+ExjItyaU/ihSdvfChODoW266i/OUX
+TC/SVIq8inaHcepiWCRbJJ9wtmCsaJZqCSoay9tNmE2CgEuriJBsbBBtDMMkxpMS
+on0N+WbrFpIGXC2ZOyXdziEypiHtTrv1oqEL9RZqtI4k6ItvVl6BD4xlbErVDGxZ
+kGQuj3HaEEr1PmD2msQDTsZUFeMIV1vKNOC9/A8ily/Mv70wKwja3uDW4YZ9BQl4
+uuuv53QCCJhHdmhuVy6agv9Pa4i3I4EhU+IZbAf/wcYI7Jyj3g+OuiZZ6yykUEgW
+4THkHpIrExBSUaoGSUHRM8ZvM+ez5V9dkgjUuc5HaBr314GiKXA8IXqY3PoCw9V6
+8fDGNCzOmYTnWcpVccXHDYpxQz6o9Dg6wg5pWulwreZ9wnqXWKQkjDMQM5oOrxDP
+GQIZrwrs
+=0deF
+-----END PGP SIGNATURE-----
+
+--XH+jflJFRoCq1Kjd--
