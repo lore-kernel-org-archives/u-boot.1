@@ -4,54 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F71E7718B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 14:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19CBFE7718B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 17:54:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B66758031D;
-	Wed,  1 Jan 2025 15:15:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
+	by phobos.denx.de (Postfix) with ESMTP id 3B73280379;
+	Wed,  1 Jan 2025 18:54:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TBdUH7/u";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1096980379; Wed,  1 Jan 2025 13:46:13 +0100 (CET)
-Received: from mx.skole.hr (mx2.hosting.skole.hr [161.53.165.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6D50280391; Wed,  1 Jan 2025 18:54:25 +0100 (CET)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E469C8021A
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 13:46:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F0C58031D
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 18:54:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=skole.hr
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
-Received: from mx2.hosting.skole.hr (localhost.localdomain [127.0.0.1])
- by mx.skole.hr (mx.skole.hr) with ESMTP id 3F617814D2;
- Wed,  1 Jan 2025 13:46:10 +0100 (CET)
-From: Duje =?UTF-8?B?TWloYW5vdmnEhw==?= <duje.mihanovic@skole.hr>
-To: Tom Rini <trini@konsulko.com>
-Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/3] Initial support for PXA1908 and
- samsung-coreprimevelte
-Date: Wed, 01 Jan 2025 13:45:39 +0100
-Message-ID: <2771915.mvXUDI8C0e@radijator>
-In-Reply-To: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
-References: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6dd1962a75bso79646036d6.3
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 09:54:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1735754062; x=1736358862; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Lb98DcXIv64qrq7thkAdYm6TTm7gpESqvBToa6T3WQc=;
+ b=TBdUH7/uTVXzdYUp52cvuhv1ewy+nT376rIh302Dj9cfAAQOLqsHZoAhhavUUDkMjI
+ 5Na/JdyoGzG3s9i4+g3JyEYX9D//aU4bMqMgqfkuWwlyqmbkTp0FjIiDNEWGJLkVpQSK
+ UxAbe3ZFfcdjDK4hWFsA1VscBpb89Xm3myuAA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735754062; x=1736358862;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Lb98DcXIv64qrq7thkAdYm6TTm7gpESqvBToa6T3WQc=;
+ b=Rkbvd2kB0lENyqhtLigM+FKI2xB5l4tcSqn3jvu5j2cHz0pHnGpl0EaRUJPLaDLDyN
+ 490C1ZVx4NR82meoq0DnifZ6jHnKgpIDA2IsIdHT5XrfxohZ8QV3nb6KenhZJ9JaUhV5
+ g4c+IZGH5K1QjqSiqKTPdfNPh7ePE+wv9wHBkX44CWBUciegsCe3hiV9omfPjrgaVE8G
+ teDewe6jBudVxfQH55YdU7SXid99vbVCoTMMztfqjsFqRqYKEDaN2DyZ4kuEVBIQP0G3
+ VSU/dr5kSJtB5Uc1qcINLgUtZmNE2S7LO9RdDJNtBJD1xWSsxVw+deccks01ymZVEEd3
+ P36w==
+X-Gm-Message-State: AOJu0YyeUaEL09UQLU4pxyafp006crWTYRhM6lXUVmRGCEPBZ3x3iPRV
+ P906IatczT9RNuv6Asc44IeXH4lLKy3bMWQNEPgYjxPLzVUXVQo6Zrq1KiCL3qY=
+X-Gm-Gg: ASbGnctxwdVXPjs50EWkm7MRHsXiocNYWWsRRm2X4ASkS999JlxSNsXtlGqX3YB73lm
+ QFbXw3WLf+Pl51EwJDXeEpnhK8Bt6jlDD46O4wYGXl21nlHEq9hyrq/L+pxDuEuh5/1huNR1CnX
+ QDSrVTA1g0XUUSK7rHBMdd1KTVvrmyyObX0bE0YSYY30xn+ym5Mil8zivk02Y18BXXEV/HJt8YM
+ C/8D6jsE7h+5zHiDGuejZf1o8qU6+kdCIIkKEtka3BruxG1VpLu15xt
+X-Google-Smtp-Source: AGHT+IEl1qbvRNgwZzeL0o56XHiwqGrEVN2QqIfKPGgJqb2Jk4UwVqdx8j+H526zwGhaOKAjLzAc8w==
+X-Received: by 2002:a05:6214:5186:b0:6d8:7ccf:b692 with SMTP id
+ 6a1803df08f44-6dd2333a8camr623955016d6.11.1735754061979; 
+ Wed, 01 Jan 2025 09:54:21 -0800 (PST)
+Received: from [127.0.1.1] ([189.178.122.190])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd181bb525sm123411896d6.97.2025.01.01.09.54.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Jan 2025 09:54:20 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+In-Reply-To: <20241206101132.1094545-1-jerome.forissier@linaro.org>
+References: <20241206101132.1094545-1-jerome.forissier@linaro.org>
+Subject: Re: [PATCH] trace: proftool: dump-ftrace should write funcgraph
+ times in ns not us
+Message-Id: <173575405977.1681845.16936003240407202441.b4-ty@konsulko.com>
+Date: Wed, 01 Jan 2025 11:54:19 -0600
 MIME-Version: 1.0
-Autocrypt: addr=duje.mihanovic@skole.hr; keydata=
- mDMEZokhzhYJKwYBBAHaRw8BAQdAWJZ0hsI/ytTqHGFV8x6tzd5sB596cTeeDB4CQsTf+wC0KER
- 1amUgTWloYW5vdmnEhyA8ZHVqZUBkdWplbWloYW5vdmljLnh5ej6ImQQTFgoAQRYhBG3/QdYN8x
- S1t2umMK0xk1JFj60DBQJmiSHOAhsDBQkJZgGABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAA
- AoJEK0xk1JFj60D1GABAJVSorZdMOlrp/oQtCSH/G53NE56x/JHA8VX+ZQBd/H3AP4/EcUf6eef
- DUxVMh2bdkmuQKsVZGgOGiXpMksrVntWBrQpRHVqZSBNaWhhbm92acSHIDxkdWplLm1paGFub3Z
- pY0Bza29sZS5ocj6ImQQTFgoAQRYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSH/AhsDBQkJZg
- GABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEK0xk1JFj60Dlw8A/i4lPOL7NaYoYePDq
- l8MaJaR9qoUi+D+HtD3t0Koi7ztAQCdizXbuqP3AVNxy5Gpb1ozgp9Xqh2MRcNmJCHA1YhWAbg4
- BGaJIc4SCisGAQQBl1UBBQEBB0DEc9JeA55OlZfWKgvmRgw6a/EpBQ8mDl6nQTBmnd1XHAMBCAe
- IfgQYFgoAJhYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSHOAhsMBQkJZgGAAAoJEK0xk1JFj6
- 0DG5MA/iuo4l2GDEZ1Zf+XaS//8FwdXDO9nHkfbV2MHjF4NZXwAQDroMzBdMcqVvc8GABFlTTgG
- j7KrRDz2HwWNyF8ZeprAQ==
-Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
-X-Mailman-Approved-At: Wed, 01 Jan 2025 15:15:24 +0100
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,31 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tuesday 31 December 2024 17:49:11 Central European Standard Time Duje=20
-Mihanovi=C4=87 wrote:
-> Hello,
->=20
-> This series adds initial support for Marvell's PXA1908 ARM64 SoC and
-> Samsung's Galaxy Core Prime VE LTE, a smartphone based on said SoC.
->=20
-> On this board, U-Boot is used as a secondary bootloader to work around
-> certain quirks of the factory S-Boot.
->=20
-> Signed-off-by: Duje Mihanovi=C4=87 <duje.mihanovic@skole.hr>
-> ---
-> Changes in v2:
-> - Drop arm,armv8 compatible from CPU nodes to match upstream
-> - Add intel,xscale-uart compatible to NS16550 and use it in serial nodes =
-to
-> match upstream - Add include guards to include/configs/pxa1908.h
-> - Disable CONFIG_DISPLAY_CPUINFO and CONFIG_CPU
-> - Rebase on v2025.01-rc5
+On Fri, 06 Dec 2024 11:11:31 +0100, Jerome Forissier wrote:
 
-I made a small mistake here, should be v2025.01-rc6.
+> When converting a U-Boot trace records file to ftrace function graph
+> format for use by trace-cmd ('proftool -f funcgraph dump-ftrace'), the
+> time associated to each function is incorrectly saved in microseconds
+> instead of nanoseconds. Multuply the value by 1000 to fix the issue.
+> 
+> With this change, the trace-cmd output looks consistent. Here is an
+> example with udelay(25) added to mem_malloc_init() as a test case:
+> 
+> [...]
 
-Regards,
-=2D-=20
-Duje
+Applied to u-boot/next, thanks!
 
+-- 
+Tom
 
 
