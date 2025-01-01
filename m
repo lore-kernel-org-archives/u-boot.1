@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C6BE7718F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:17:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB6DE7718B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:22:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66314806FE;
-	Wed,  1 Jan 2025 23:17:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2DE1B80352;
+	Wed,  1 Jan 2025 23:22:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YHbByFSE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NKOpQ0hB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3F8C806EE; Wed,  1 Jan 2025 23:17:12 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id CDE1280379; Wed,  1 Jan 2025 23:22:08 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B18D80040
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:17:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EDE88031D
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:22:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-216728b1836so129070505ad.0
- for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:17:10 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-21628b3fe7dso142306415ad.3
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:22:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735769828; x=1736374628; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1735770124; x=1736374924; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O899JSdGYmDQY01OaNAV+A+mOeBgcXagOejON0M8PdA=;
- b=YHbByFSEARbXdxbJIYI19mSiPwpmGvDLoWjnMsEkxULob0jb1vJYfAm6CHi6iyXJUo
- P8w+0y/9daP7dGHQqtvDonfTO4aM54+Tkvdq0pGiIC8w2AiZkBmv1fziIlRLRGV4zEya
- db8GhKXLJGx4ZVG3LkMa6ppt9Sm0JSX0beevg=
+ bh=6j/igWgf/WmW6qsOC6khjUe+FbenpNaMkuXDGTDypaM=;
+ b=NKOpQ0hBlmIiKsX1jtIwWj7ytqO5RC6Mq9vvXwUGOvVpMhG1Qm9Fn2CMue7ULYZZqL
+ rFD/TJEzOh1damOMYh1QIcLoXyox9vTZlB7oMZmZ6TNXGF7hWcW8nLpmY8WftkSCOk8E
+ JjUHDSJNi8fl9F48RNQ9DofrXQq2AOc27fN+8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735769828; x=1736374628;
+ d=1e100.net; s=20230601; t=1735770124; x=1736374924;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=O899JSdGYmDQY01OaNAV+A+mOeBgcXagOejON0M8PdA=;
- b=Y2Yw00vXVrcHkdk1DvuJrQlFtUvTCufgadBdwZZuE2KQFk6VV0BmNICpZtdDR7qNql
- RliLHdvYBNqveDn5k0DKv427IVy6RzxpHM4O1naHt2YfvJ5pBGvc0rY3f0sNHB8+1zac
- FxxZcQa+4LNTGtTYRO/ZqNDdD5ZseoLOY0kSR0Pa8fBkxGKhzB3Y8WkH/dEVVTp3N72N
- btzqFMFF1J2X/5hvS9E3LsB5Zgt05C8gcRjMzOEvuuKyslaJDIJ70/q/Be0a4DikQ9rg
- 81boazGSrC6YJjePdDaSgNroN3p+igPdk9VRYNjyuW/5bsuhkcvPGgyYWot9uSeLO4iO
- 3Mtw==
-X-Gm-Message-State: AOJu0Yy6DGPKrXmNn8RPsTZ55bJyaIUs04nf5Giu40RFRc1wCSL1INMx
- 0RrtgBszuK5KCIxrVIOK2965NfiF1/4XJC/ANwp+lwMrnA8K3RtY9SV3/CfhzBoXHaDk1QleBIc
+ bh=6j/igWgf/WmW6qsOC6khjUe+FbenpNaMkuXDGTDypaM=;
+ b=LZ5IccogBXIitY0kHKO2UsuAZdonamynYS0h6a369Yl2zqboBdGBmndqKEDHE0tuDv
+ 4Z5nUkH4LtSDsOWkhfZ0sL56BoXpb08XqdKw6viKIvHnj5KhQPOOUK4ubucdERJRnrZb
+ 1IihDwsISaaSsfBGCjGeexN3lXJKmlCkUjgDPqbr+UCDUP4lDCtsiHNGNq84VlURwaD4
+ CM14/HrSLIqywWQwSL1iWqzFVshFa8tEIqRn+6KHb+4vnXJ6XDOH6cUmzP95ABeo9pV+
+ briVHTeiiVEcvvnZgI9CoO7Vi/7BPOWtD2ACY4SRw0yN6hfSB9dxeX/aWoOd5JYPb5QV
+ M8bw==
+X-Gm-Message-State: AOJu0Yxk6k3GecneNmI4z3f35U1LWrpcOdkqBPBwbHUfcwwXL5H+pM9M
+ SEPNr0LJGXExcJD4PJd07wNq2N9GDYm78JWHnKfYYQ1Vs4eDXtJQLaJKBjF6yEQo7FZvzzSv8pI
  =
-X-Gm-Gg: ASbGncsdvL2F2/P/EO7crA1mbb81/XlxTH6sMdGkuhYHJeZzhGnenLFBhG99MeVtw15
- rD9kMF/ZbVYmE6seH6Omvolo5uv8GdpFQyjZudgboy+Zn5qUkHVEESUoefF8WtCgZljZAr2oX1D
- absR5NvqjvSxvZfpxcoQOucS2/VG0bqRWqR9yK/zN8A/ClM03bI7uzquA2blTeClK7BdjDllZCS
- yTzldaJ7khvfoE5wZowtOQl5opIG4b0F0/R6Y0eN2JNdnmdbUzi1ro=
-X-Google-Smtp-Source: AGHT+IE63Ao5pVKpx4ARm3ixqxOqUUwq/MP5ONPl2ponW62kP0npJ1Dsl3ds9OGagjaSwphZGOOfMg==
-X-Received: by 2002:a05:6a00:1702:b0:728:9d19:d2ea with SMTP id
- d2e1a72fcca58-72abddb2115mr64518400b3a.13.1735769828227; 
- Wed, 01 Jan 2025 14:17:08 -0800 (PST)
+X-Gm-Gg: ASbGncsL4KhqsQ+s7ZltIffHyIQn2uRjb5ZjprP02eb1vuAEpeFbSxr9mWwcWX664cF
+ zpmEVIwZgoAWnF7zcWHsICRAdLw+h2MugAHqYwgmtIaWVSDfXn1uVipD6jEMceLDbNGmb1EQmVZ
+ 5FdkYnyZOYyzkqp1Ym8pskJyZniduIJFpaUbCrYqx7sC/n5+7ZXBgg/cMZcJOBz5uTn14xB3UNV
+ FVG0fbe+PWJjnbkv6Xc3oNaDQOJo/1osxR+cNoFpA8Skox+7rU0XMw=
+X-Google-Smtp-Source: AGHT+IE+w9yV4tTa/MtlxKK9Og0R9yDRp/cn6XQR53r3dRQYYgzZ3JHGgHTMXtdQx8PJDL3Mpx3dow==
+X-Received: by 2002:a05:6a20:d43:b0:1e0:dcc5:164d with SMTP id
+ adf61e73a8af0-1e5e045824emr79021378637.8.1735770124360; 
+ Wed, 01 Jan 2025 14:22:04 -0800 (PST)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.17.05
+ d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.22.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2025 14:17:07 -0800 (PST)
+ Wed, 01 Jan 2025 14:22:03 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 41/67] upl: Use a 64-bit value for a memregion base-address
-Date: Thu,  2 Jan 2025 11:09:27 +1300
-Message-ID: <20250101221003.1944600-42-sjg@chromium.org>
+Subject: [PATCH 42/67] upl: Set bit 32 of the address when using ISA
+Date: Thu,  2 Jan 2025 11:09:28 +1300
+Message-ID: <20250101221003.1944600-43-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250101221003.1944600-1-sjg@chromium.org>
 References: <20250101221003.1944600-1-sjg@chromium.org>
@@ -93,85 +93,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With 32-bit machines sometimes a 64-bit address needs to be provided.
-For example, ISA I/O access is indicated by setting bit 32 of the base
-address.
-
-Update the existing type to use 64 bits and drop the 0x prefix on unit
-addresses.
-
-Fix a 'nennap' typo while here.
+The convention is to set bit 32 to indicate an I/O access. Do this when
+using an ISA serial port.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/upl_write.c | 6 +++---
- include/upl.h    | 7 ++++---
- 2 files changed, 7 insertions(+), 6 deletions(-)
+ boot/upl_common.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/boot/upl_write.c b/boot/upl_write.c
-index c53fa5396e8..c2bb3187803 100644
---- a/boot/upl_write.c
-+++ b/boot/upl_write.c
-@@ -315,7 +315,7 @@ static int write_mem_node(const struct upl *upl, ofnode parent,
- 		return log_msg_ret("reg", -EINVAL);
- 	}
- 	first = alist_get(mem, 0, struct memregion);
--	sprintf(name, "%s@0x%lx", leaf, first->base);
-+	sprintf(name, "%s@%llx", leaf, first->base);
- 	ret = ofnode_add_subnode(parent, name, &node);
- 	if (ret)
- 		return log_msg_ret("wmn", ret);
-@@ -466,7 +466,7 @@ static int add_upl_serial(const struct upl *upl, ofnode root,
- 	if (!ser->reg.count)
- 		return log_msg_ret("ser", -EINVAL);
- 	first = alist_get(&ser->reg, 0, struct memregion);
--	sprintf(name, UPLN_SERIAL "@0x%lx", first->base);
-+	sprintf(name, UPLN_SERIAL "@%llx", first->base);
- 	ret = ofnode_add_subnode(root, name, &node);
- 	if (ret)
- 		return log_msg_ret("img", ret);
-@@ -526,7 +526,7 @@ static int add_upl_graphics(const struct upl *upl, ofnode root)
- 	if (!gra->reg.count)
- 		return log_msg_ret("gra", -ENOENT);
- 	first = alist_get(&gra->reg, 0, struct memregion);
--	sprintf(name, UPLN_GRAPHICS "@0x%lx", first->base);
-+	sprintf(name, UPLN_GRAPHICS "@%llx", first->base);
- 	ret = ofnode_add_subnode(root, name, &node);
- 	if (ret)
- 		return log_msg_ret("gra", ret);
-diff --git a/include/upl.h b/include/upl.h
-index ce357d16ebe..aef23ad8e8e 100644
---- a/include/upl.h
-+++ b/include/upl.h
-@@ -14,6 +14,7 @@
- #include <alist.h>
- #include <image.h>
- #include <dm/ofnode_decl.h>
-+#include <asm/types.h>
+diff --git a/boot/upl_common.c b/boot/upl_common.c
+index b0246f72597..a5a1da9cb57 100644
+--- a/boot/upl_common.c
++++ b/boot/upl_common.c
+@@ -62,7 +62,7 @@ int upl_add_serial(struct upl_serial *ser)
+ {
+ 	struct udevice *dev = gd->cur_serial_dev;
+ 	struct serial_device_info info;
+-	struct memregion region;
++	u64 addr;
+ 	int ret;
  
- struct unit_test_state;
- 
-@@ -111,7 +112,7 @@ struct upl_image {
-  * @size: Size in bytes
-  */
- struct memregion {
--	ulong base;
-+	u64 base;
- 	ulong size;
- };
- 
-@@ -254,8 +255,8 @@ struct upl_graphics {
-  * @acpi_nvs_size: Size of the ACPI non-volatile-storage area in bytes
-  * @image: Information about each image (struct upl_image)
-  * @mem: Information about physical-memory regions (struct upl_mem)
-- * @nennap: Information about logical-memory regions (struct upl_memmap)
-- * @nennap: Information about reserved-memory regions (struct upl_memres)
-+ * @menmap: Information about logical-memory regions (struct upl_memmap)
-+ * @memres: Information about reserved-memory regions (struct upl_memres)
-  */
- struct upl {
- 	int addr_cells;
+ 	if (!dev)
+@@ -74,10 +74,13 @@ int upl_add_serial(struct upl_serial *ser)
+ 	ser->compatible = ofnode_read_string(dev_ofnode(dev), "compatible");
+ 	ser->clock_frequency = info.clock;
+ 	ser->current_speed = info.baudrate;
+-	region.base = info.addr;
+-	region.size = info.size;
+-	if (!alist_add(&ser->reg, region))
+-		return -ENOMEM;
++
++	/* Set bit 32 of the address if using I/O */
++	addr = info.addr;
++	if (info.addr_space == SERIAL_ADDRESS_SPACE_IO)
++		addr |= BIT_ULL(32);
++	ret = upl_add_region(&ser->reg, addr, info.size);
++
+ 	ser->reg_io_shift = info.reg_shift;
+ 	ser->reg_offset = info.reg_offset;
+ 	ser->reg_io_width = info.reg_width;
 -- 
 2.43.0
 
