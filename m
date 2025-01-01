@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63966E7718B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B2D8E7718B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:23:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64118804FA;
-	Wed,  1 Jan 2025 23:22:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C636080352;
+	Wed,  1 Jan 2025 23:22:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b3/8gOKw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NIeaZahI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26483803B7; Wed,  1 Jan 2025 23:22:29 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 79C2E8031D; Wed,  1 Jan 2025 23:22:32 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE3B08031D
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:22:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3023F803B7
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:22:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2163dc5155fso143763905ad.0
- for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:22:26 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-216401de828so138191435ad.3
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:22:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735770144; x=1736374944; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1735770148; x=1736374948; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5VcGS7HthbOqr3TNGHx6NwwH6CTCuYpdpzn14ImFH28=;
- b=b3/8gOKw28l2OC4uEBxE4ErUTP0TwLT6sJTdZ4VwbA7NtWQoR4ZcGcGDeaAKRbjAfc
- PGy5pVOyQV7zUIZdY36XG5RF2PSbowuhTx2+KSPkGCWwlB9hst0CF4EyZYZpLL1EOtaW
- kcH3YGW+3zIel4bweruqvWGj8I5czmT2HNBQg=
+ bh=p4FemGjWws/Y9/qg9q+aaakcrVRt3hoEWJpfwSw6WXQ=;
+ b=NIeaZahIgRl8Sq0TiM0dsbWHbc07K36mpGDyb2PDLQGvZh2o5nxEgMA0e8cK0JdMXE
+ CPlJTWEsSrxcl5ouNUoYTIXGg67TaEfsCvvIhOrw5Ho395KlKh5/TQI6jx31YlCbm3iw
+ LBzJtIOz5rwp6/wdPIkA6HMKQJGbxh2e888Dg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735770144; x=1736374944;
+ d=1e100.net; s=20230601; t=1735770148; x=1736374948;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5VcGS7HthbOqr3TNGHx6NwwH6CTCuYpdpzn14ImFH28=;
- b=JG3hNtIiRUwDxWDg8ICJb3RRHPL1VLHnm7JP53vr7iakO8HI6ZjKdKnqUGeNsymwYk
- qWRLe9/3JIJry/FtWWC7qeDwecTkdXy9LODLJUqdKSyiE81zPFLVaoPAoN9rZJxWLsGb
- YpEYD4gKYMW3iEozqCgGtSpahfn2CsEuqPvOCnO6nG9WLradfDHap0FJuEqwjaS2wRdA
- i0DaVJ63GaaOuZPfI4iijmvyslQaChZjJlr32GjctwIhSpyhf7FJM61YLeIEoXYIn60j
- mPbbtMf9NbA7HcQdNJ0owhtCDHhoeTtDScfqNz2mJfd/mmwFuINNMC965JWxoZp65M0f
- Gi5g==
-X-Gm-Message-State: AOJu0Yy3mQtGCAiT2uQoitooI2Zjfg1BPBZIvDd/ZagA+w5zN0157zi1
- IUgG0e+6NTJgL9932wHlT+XAZUM/1RSh1ERuNqHNtAX8oPTLHzf6EfLuxVuffmDH6baahgUfjPA
+ bh=p4FemGjWws/Y9/qg9q+aaakcrVRt3hoEWJpfwSw6WXQ=;
+ b=hWXpOu04f1ADEXWo9T8SpXLyJ6HXNhzLegAtUBcJ5YR42atAju/pm8wjaKx3vjwm+z
+ DsAHDvUEv+nfvUe2do3bS8LhSlNwJwo9TU7sUos544bRqRbwSo71XBjGnRK0SCbn/mrL
+ R2klIIBgG9JThqUmHTT+oTS718RncNwgC8mFKJNNJnJ4Ek2BlLWYd6t5XOhtl//TD5M2
+ SmUTynzcUY8tucacB8Wtij6vCHLzvdXXbdsQhKoRSeH0RcSy9fMqtXesjKoQPnT7hATz
+ MCxKi3xM1dkP5ZPs6lDxD/MCKccNCkPQJ9mqUBLFtslFLW0K9GY/3ZrbzOsYKl4ul0hS
+ GTvA==
+X-Gm-Message-State: AOJu0YwNMUNOVrlA0G0OsUabWbAqBY2KnN8ErbB91f7clWF8AaW3X8+J
+ MXnRp7WXh0bN0hogzu/UDh7ozTB8isuC9VxyEld+XGkLjd7Wg/1XE0MJ2yhpGxHgZsGQhIdNpr8
  =
-X-Gm-Gg: ASbGncuG6uqoEyzSG8YT4yHEDMMMB2seC9sajjbe8CEV5yllfmgwF6v+/3ipJijzqW2
- MIlGenR+cEqPorNvS80ckSH/d/95AlyFejbLsNv+013m29/3Icqc/Q0XV1VirV+udd3Is1iXWWp
- r+yek0rBxbIG/m3XDx1CjZc9YoSPN2P3n9ODItN/Bt5YtGKJPoodMeS4asGaJqOX/djpPhzks8D
- mWjW/AdDvcaN0BcUxs9+BhTRYKxDmPOh+PMh0tCJWctwLeH/XrwI30=
-X-Google-Smtp-Source: AGHT+IF/rt1udX27b4RrUSBrfSOwc65lRunMXMr5VekyUUSvv4rrr9lesvovwFwx5DPihNZS0BD8EQ==
-X-Received: by 2002:a05:6a21:3947:b0:1e1:b60c:5bcf with SMTP id
- adf61e73a8af0-1e5e0802911mr72619214637.32.1735770144527; 
- Wed, 01 Jan 2025 14:22:24 -0800 (PST)
+X-Gm-Gg: ASbGncttu3wdNkZWa7oBOuYB5WYOnjyCD2DFMlE4vv9z/hR39OVmqANlrMpAp5SIl6k
+ J028i7cUbwq26tdU4NuDCRzPI4VLhzCQS9wggyPJOysyGX5MZo4OWvkHkK740jE7ObUcMfajR2N
+ eW7ap84qi4EqXDxfX3+A11sd8GsvZ+YQSkQB4y7wHikHVJDB6bjb4S3J+GMeQQOaeR+k/uNvzPS
+ Zld/qNGKIj16+tQbk4wHGOhLqWDRhIBMY9d5XEFX+Y7Opn4AwQ1hhU=
+X-Google-Smtp-Source: AGHT+IG4zFYZGIFcCsuAiw/6sx/uw3v0mYKSEBRFqvhsZ+dquy1BYm6GFreYMeRCxa0bbWoIl2IB3g==
+X-Received: by 2002:a05:6a21:6f87:b0:1db:c20f:2c4d with SMTP id
+ adf61e73a8af0-1e5e044b1c1mr63797485637.2.1735770147738; 
+ Wed, 01 Jan 2025 14:22:27 -0800 (PST)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.22.21
+ d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.22.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2025 14:22:23 -0800 (PST)
+ Wed, 01 Jan 2025 14:22:27 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 48/67] upl: Factor out part of decode_reg() to new function
-Date: Thu,  2 Jan 2025 11:09:34 +1300
-Message-ID: <20250101221003.1944600-49-sjg@chromium.org>
+Subject: [PATCH 49/67] upl: Correct name of upl-images
+Date: Thu,  2 Jan 2025 11:09:35 +1300
+Message-ID: <20250101221003.1944600-50-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250101221003.1944600-1-sjg@chromium.org>
 References: <20250101221003.1944600-1-sjg@chromium.org>
@@ -93,93 +93,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function performs the same operation on each reg element. Move
-this processing into a separate function so that it can be called
-without an alist
+The spec originally had both singular and plural versions of this node,
+but has settled on plural. Update U-Boot to match.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/upl_read.c | 55 +++++++++++++++++++++++++++++++++++++------------
- 1 file changed, 42 insertions(+), 13 deletions(-)
+ boot/upl_read.c  | 4 ++--
+ boot/upl_write.c | 8 ++++----
+ include/upl.h    | 4 ++--
+ 3 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/boot/upl_read.c b/boot/upl_read.c
-index bf5aa8f785c..fe48ae31ffb 100644
+index fe48ae31ffb..1b6290ffb1c 100644
 --- a/boot/upl_read.c
 +++ b/boot/upl_read.c
-@@ -172,6 +172,42 @@ static int read_uint(ofnode node, const char *prop, uint *valp)
- 	return 0;
+@@ -302,7 +302,7 @@ static int decode_upl_params(struct upl *upl, ofnode options)
  }
  
-+/**
-+ * decode_addr_size() - Read an address/size pair
-+ *
-+ * Reads an address and size from a buffer containing a devicetree 'reg'
-+ * property. This uses upl->addr/size_cells to determine the number of cells for
-+ * each value
-+ *
-+ * @upl: UPL state
-+ * @buf: Buffer to read from
-+ * @size: Buffer size in bytes
-+ * @reg: Region to process
-+ * Returns: Number of bytes written, or -ENOSPC if the buffer is too small
-+ */
-+static int decode_addr_size(const struct upl *upl, const char *buf, uint size,
-+			    struct memregion *reg)
-+{
-+	const char *ptr = buf;
-+
-+	if (sizeof(fdt32_t) * (upl->addr_cells + upl->size_cells) > size)
-+		return log_msg_ret("was", -ENOSPC);
-+
-+	if (upl->addr_cells == 1)
-+		reg->base = fdt32_to_cpu(*(u32 *)ptr);
-+	else
-+		reg->base = fdt64_to_cpu(*(u64 *)ptr);
-+	ptr += upl->addr_cells * sizeof(u32);
-+
-+	if (upl->size_cells == 1)
-+		reg->size = fdt32_to_cpu(*(u32 *)ptr);
-+	else
-+		reg->size = fdt64_to_cpu(*(u64 *)ptr);
-+	ptr += upl->size_cells * sizeof(u32);
-+
-+	return ptr - buf;
-+}
-+
  /**
-  * decode_reg() - Decide a set of addr/size pairs
+- * decode_upl_images() - Decode /options/upl-image nodes
++ * decode_upl_images() - Decode /options/upl-images nodes
   *
-@@ -193,23 +229,16 @@ static int decode_reg(const struct upl *upl, const char *buf, int size,
- 	ptr = buf;
- 	for (i = 0; ptr < end; i++) {
- 		struct memregion reg;
-+		int ret;
+  * @node: /options node in which to look for the node
+  * Return 0 if OK, -ve on error
+@@ -312,7 +312,7 @@ static int decode_upl_images(struct upl *upl, ofnode options)
+ 	ofnode node, images;
+ 	int ret;
  
--		if (upl->addr_cells == 1)
--			reg.base = fdt32_to_cpu(*(u32 *)ptr);
--		else
--			reg.base = fdt64_to_cpu(*(u64 *)ptr);
--		ptr += upl->addr_cells * sizeof(u32);
-+		ret = decode_addr_size(upl, ptr, end - ptr, &reg);
-+		if (ret < 0)
-+			return log_msg_ret("udr", ret);
+-	images = ofnode_find_subnode(options, UPLN_UPL_IMAGE);
++	images = ofnode_find_subnode(options, UPLN_UPL_IMAGES);
+ 	if (!ofnode_valid(images))
+ 		return log_msg_ret("img", -EINVAL);
+ 	log_debug("decoding '%s'\n", ofnode_get_name(images));
+diff --git a/boot/upl_write.c b/boot/upl_write.c
+index a1ecb809cbc..9702ef91930 100644
+--- a/boot/upl_write.c
++++ b/boot/upl_write.c
+@@ -268,18 +268,18 @@ static int add_upl_params(const struct upl *upl, ofnode options)
+ }
  
--		if (upl->size_cells == 1)
--			reg.size = fdt32_to_cpu(*(u32 *)ptr);
--		else
--			reg.size = fdt64_to_cpu(*(u64 *)ptr);
--		ptr += upl->size_cells * sizeof(u32);
--		if (ptr > end)
--			return -ENOSPC;
-+		ptr += ret;
+ /**
+- * add_upl_image() - Add /options/upl-image nodes and properties to the tree
++ * add_upl_images() - Add /options/upl-images nodes and properties to the tree
+  *
+  * @upl: UPL state
+  * @node: /options node to add to
+  * Return 0 if OK, -ve on error
+  */
+-static int add_upl_image(const struct upl *upl, ofnode options)
++static int add_upl_images(const struct upl *upl, ofnode options)
+ {
+ 	ofnode node;
+ 	int ret, i;
  
- 		if (!alist_add(regions, reg))
--			return log_msg_ret("reg", -ENOMEM);
-+			return log_msg_ret("udm", -ENOMEM);
- 	}
+-	ret = ofnode_add_subnode(options, UPLN_UPL_IMAGE, &node);
++	ret = ofnode_add_subnode(options, UPLN_UPL_IMAGES, &node);
+ 	if (ret)
+ 		return log_msg_ret("img", ret);
  
- 	return i;
+@@ -606,7 +606,7 @@ int upl_write_handoff(const struct upl *upl, ofnode root, bool skip_existing)
+ 	if (ret)
+ 		return log_msg_ret("ad1", ret);
+ 
+-	ret = add_upl_image(upl, options);
++	ret = add_upl_images(upl, options);
+ 	if (ret)
+ 		return log_msg_ret("ad2", ret);
+ 
+diff --git a/include/upl.h b/include/upl.h
+index a4ed24edbb8..dd43e8e8529 100644
+--- a/include/upl.h
++++ b/include/upl.h
+@@ -30,8 +30,8 @@ struct unit_test_state;
+ #define UPLP_ADDR_WIDTH		"addr-width"
+ #define UPLP_ACPI_NVS_SIZE	"acpi-nvs-size"
+ 
+-#define UPLPATH_UPL_IMAGE	"/options/upl-image"
+-#define UPLN_UPL_IMAGE		"upl-image"
++#define UPLPATH_UPL_IMAGES	"/options/upl-images"
++#define UPLN_UPL_IMAGES		"upl-images"
+ #define UPLN_IMAGE		"image"
+ #define UPLP_FIT		"fit"
+ #define UPLP_CONF_OFFSET	"conf-offset"
 -- 
 2.43.0
 
