@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2567BE7718F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:24:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 158B2E7718F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:24:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9486280601;
-	Wed,  1 Jan 2025 23:23:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F0DF680727;
+	Wed,  1 Jan 2025 23:23:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i8Ky82Un";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ju49DL0v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41AE88042F; Wed,  1 Jan 2025 23:23:10 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 2063080717; Wed,  1 Jan 2025 23:23:13 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA49880379
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:23:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C6B0980379
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:23:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2162c0f6a39so154478075ad.0
- for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:23:07 -0800 (PST)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-219f8263ae0so105000055ad.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:23:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735770186; x=1736374986; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1735770189; x=1736374989; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j8z94d4iYTP+u4bAD2NRY4Y8mUiDm8jmfakroKKrAWc=;
- b=i8Ky82Un0+nT2nO5dYPL66V/SSSQwUIqBfW0CJhdVf90P2YTls6CMPfRF2xMggODpt
- fK0u0XAk9kL3VrpKcotlm9f1u7iRb9lj8bUHTOqdq1Dl+kwiBrxMQ+1Tf5QAdzqYmktD
- IAWSz7boUF3IDGOCucHkIPzN3Nj9P8JB0HjyU=
+ bh=3rwOFWouKF9Vs6amOeBve4fNh55dlh4Nvx76Lc5ZNnU=;
+ b=ju49DL0vzn0OgfSSbq/KJunOYbJVLxiGWQ+EGAcqSdOzd8mVZLwUSYVlIk1OGzY+gQ
+ YearRFzM9H6QGk2C1/4R20BtjIIhp9JaaPN7e1K3j2Z9gykjkXDUtod1CGW/7y3Icq87
+ DMS5pY30BTI5fcFBL2jiVjy2x+YseGDOvOdrY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735770186; x=1736374986;
+ d=1e100.net; s=20230601; t=1735770189; x=1736374989;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j8z94d4iYTP+u4bAD2NRY4Y8mUiDm8jmfakroKKrAWc=;
- b=OQSfM5wSkw95KyYqHMYb1TsOvFkL0NjbggndUARTPkZ5ebBMa3IfdyGRHhXn76hp/J
- H59fzjJ1YfYLcS4BHPKhfHvCsbJoTNwC0WG1p51H787V1x0IS8qVmt691ZfElGoyJV8i
- 4jKnIWLN/QZrqC+UKo+KSUSuhpTFBm+KI2+sAwt9DNnu8CJSW6HoIexS/pNyzygs2pf9
- J2J+3nlUF94yM1M0gR3O6i0Y0lBh4q/OVPxo6w8M+1tZ8FK7TyjlhoWwNuECe0G0i7W9
- F079BF3lp6FiPa+5JXScNFtNzw98lkHOiaQhepSHsYrJ5kiSYDxFqWWeP1oIOwiJAK/C
- gekQ==
-X-Gm-Message-State: AOJu0YytmnjErO/Zz3nBKoZFCTv/dy5kBW7y2/PHSjKmLsKCKy4uKl+P
- ehyyyWEupdCZGkwsOxMmCw2iYrmC/KalG6HThiCb3RVjy5dGFghDdVEHPT2PHxX5EiWc7Stzae4
+ bh=3rwOFWouKF9Vs6amOeBve4fNh55dlh4Nvx76Lc5ZNnU=;
+ b=iw+lqMxkwdZ+P8S2VCHnV94b0vNfzt562qcLV3d6mSgFZW5KH6cou2Zyq8+RH8GAQ4
+ ds4t6N/2zQdzHaYhI7FPZ0cTOmpqbqs8NrHPSrxDoi3b58N0GibdqPksyHKwg/7+xAg/
+ jYr2spKNaxjqKlwZK2o2Dv0GFH6Y1HzK72TzQQ4dIqKpxEN3fMhj65Evf4MbgzLti7A6
+ KGxrYIVlLTNnbndRBxzmf+As48gvZNc+CqEwlYyhOXQ772q40Xs6NTys7nI11b+yKO7G
+ LSFzPq8KTRUcF04aeI9F484GQb+dmFjm3a/q7S/OyYpiT+BQUSL8+7I1RXHwFOf5GUnh
+ xbrQ==
+X-Gm-Message-State: AOJu0Yz/Py/toHmuki17vZbt+hO57xBXGUxT3IviLiM2cCxxkVAQyo45
+ 1hXCD4U41a+mWsNDq0tvP3DIyhxdTgulepMSKWo6+2IOEbjjLMCWNdsX8+WhQhOsh9himiW2B1s
  =
-X-Gm-Gg: ASbGncv/QM4Kl74ZtK4F3nSJDBSp9oVJ+Bu7xQGfiFjwPpEVvoaN4lINjfwCSYW7m/q
- sPjVOqDOIpaCKe/mFvWPIBsnLujbntNIZm3s5lx0R8cgi4NhPKZxXhZXa+JlSM+/2MiUmvLXSzO
- 3znnsl2+uNwDizcY6S36Nhku1YRAK9q0FQzniUbSTet1vJY1jZ35M6ZXPIriytK6zmZVFtNGlBS
- ZYYZMLIv9XNn0jl9Sdep05+/4qsw5liLeK8O8EN6s59IKdtEQR551k=
-X-Google-Smtp-Source: AGHT+IFABQ5/okTAUjhGXtqGNjZ6HD5mia0cpwSVDXw5fB55ks9WDT71R2b6Wiyr/4Ju2/ebprS1jw==
-X-Received: by 2002:a05:6a21:e92:b0:1db:822f:36d8 with SMTP id
- adf61e73a8af0-1e5e1e0424cmr60077316637.3.1735770185848; 
- Wed, 01 Jan 2025 14:23:05 -0800 (PST)
+X-Gm-Gg: ASbGncuEFVEhHeibNm78PP+MGWh87BAPID9s9rMad1lKN5lkxbpR4ihRB5gP+V5sLBa
+ C9VxV+6Qa/FcZWTK5NqbmQ81mAtVh1xePA3FB9y7FVwuFgJlZ4SLcoo8lEq6kuVOuBZKquX7JZN
+ Z3ajucu1L9kJMb5Xlmiwg2+U+ynBr3NlTl6vDgVdFk6Osxi+KEdvPE1fYHQ2tO3CvT5AByhWhkc
+ OSiufJA/8utGgtD8ZT2QkDOMsYS7QUN8Hisc3MsxnZyur4vFfA8el0=
+X-Google-Smtp-Source: AGHT+IGg5saziplKVkih/0sdV8cg1G13TEerHLo3ovvdp/CsGDYNmsFHnLfDSpqr5EzrKlh4srXJig==
+X-Received: by 2002:a05:6a21:3181:b0:1e1:b062:f409 with SMTP id
+ adf61e73a8af0-1e5e081db95mr67698968637.43.1735770188829; 
+ Wed, 01 Jan 2025 14:23:08 -0800 (PST)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.23.02
+ d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.23.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2025 14:23:05 -0800 (PST)
+ Wed, 01 Jan 2025 14:23:08 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 58/67] upl: Drop acpi_nvs_size
-Date: Thu,  2 Jan 2025 11:09:44 +1300
-Message-ID: <20250101221003.1944600-59-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 59/67] upl: Improve uniqueness of log_msg_ret() strings
+Date: Thu,  2 Jan 2025 11:09:45 +1300
+Message-ID: <20250101221003.1944600-60-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250101221003.1944600-1-sjg@chromium.org>
 References: <20250101221003.1944600-1-sjg@chromium.org>
@@ -94,96 +93,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This was removed from the spec in favour of reserved-memory nodes. Drop
-the field and its uses.
+Adjust some of these to make them more likely to be unique. Fix up the
+comment for buffer_addr_size() while we are here.
 
-Future work will address the new implementation of ACPI NVS.
+Fix an incorrect error-return in upl_write_handoff() while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/upl_read.c  | 3 ---
- boot/upl_write.c | 3 ---
- include/upl.h    | 3 ---
- test/boot/upl.c  | 2 --
- 4 files changed, 11 deletions(-)
+ boot/upl_write.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/boot/upl_read.c b/boot/upl_read.c
-index 99f7a83ff0a..4f07204546e 100644
---- a/boot/upl_read.c
-+++ b/boot/upl_read.c
-@@ -261,9 +261,6 @@ static int decode_upl_params(struct upl *upl, ofnode options)
- 	ret = read_uint(node, UPLP_ADDR_WIDTH, &upl->addr_width);
+diff --git a/boot/upl_write.c b/boot/upl_write.c
+index 79613a0f463..eecb56214df 100644
+--- a/boot/upl_write.c
++++ b/boot/upl_write.c
+@@ -244,7 +244,7 @@ static int add_upl_params(const struct upl *upl, ofnode options)
+ }
+ 
+ /**
+- * add_upl_images() - Add /options/upl-images nodes and properties to the tree
++ * add_upl_images() - Add /options/upl-images/upl-image nodes / props to tree
+  *
+  * @upl: UPL state
+  * @node: /options node to add to
+@@ -508,7 +508,7 @@ static int add_upl_serial(const struct upl *upl, ofnode root,
+ 
+ 		len = encode_reg(upl, buf, sizeof(buf), 1, &ser->reg);
+ 		if (len < 0)
+-			return log_msg_ret("buf", len);
++			return log_msg_ret("aus", len);
+ 
+ 		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
+ 	}
+@@ -549,7 +549,7 @@ static int add_upl_graphics(const struct upl *upl, ofnode root)
+ 	int ret;
+ 
+ 	if (!gra->reg.count)
+-		return log_msg_ret("gra", -ENOENT);
++		return log_msg_ret("ugr", -ENOENT);
+ 	first = alist_get(&gra->reg, 0, struct memregion);
+ 	sprintf(name, UPLN_GRAPHICS "@%llx", first->base);
+ 	ret = ofnode_add_subnode(root, name, &node);
+@@ -563,7 +563,7 @@ static int add_upl_graphics(const struct upl *upl, ofnode root)
+ 
+ 		len = encode_reg(upl, buf, sizeof(buf), 1, &gra->reg);
+ 		if (len < 0)
+-			return log_msg_ret("buf", len);
++			return log_msg_ret("aug", len);
+ 
+ 		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
+ 	}
+@@ -595,7 +595,7 @@ int upl_write_handoff(const struct upl *upl, ofnode root, bool skip_existing)
+ 		return log_msg_ret("ad1", ret);
+ 	ret = ofnode_add_subnode(root, UPLN_OPTIONS, &options);
+ 	if (ret && ret != -EEXIST)
+-		return log_msg_ret("opt", -EINVAL);
++		return log_msg_ret("opt", ret);
+ 
+ 	ret = add_upl_params(upl, options);
  	if (ret)
- 		return log_msg_ret("add", ret);
--	ret = read_uint(node, UPLP_ACPI_NVS_SIZE, &upl->acpi_nvs_size);
--	if (ret)
--		return log_msg_ret("nvs", ret);
+@@ -623,7 +623,7 @@ int upl_write_handoff(const struct upl *upl, ofnode root, bool skip_existing)
+ 
+ 	ret = add_upl_graphics(upl, root);
+ 	if (ret && ret != -ENOENT)
+-		return log_msg_ret("ad6", ret);
++		return log_msg_ret("ad7", ret);
  
  	return 0;
  }
-diff --git a/boot/upl_write.c b/boot/upl_write.c
-index 773c03ad1c6..79613a0f463 100644
---- a/boot/upl_write.c
-+++ b/boot/upl_write.c
-@@ -237,9 +237,6 @@ static int add_upl_params(const struct upl *upl, ofnode options)
- 					   UPLBM_COUNT, upl->bootmode);
- 	if (!ret)
- 		ret = ofnode_write_u32(node, UPLP_ADDR_WIDTH, upl->addr_width);
--	if (!ret)
--		ret = ofnode_write_u32(node, UPLP_ACPI_NVS_SIZE,
--				       upl->acpi_nvs_size);
+@@ -636,7 +636,7 @@ int upl_create_handoff_tree(const struct upl *upl, oftree *treep)
+ 
+ 	ret = oftree_new(&tree);
  	if (ret)
- 		return log_msg_ret("cnf", ret);
+-		return log_msg_ret("new", ret);
++		return log_msg_ret("cht", -EINVAL);
  
-diff --git a/include/upl.h b/include/upl.h
-index 19fa78b108e..0d76595cc48 100644
---- a/include/upl.h
-+++ b/include/upl.h
-@@ -28,7 +28,6 @@ struct unit_test_state;
- #define UPLP_ACPI		"acpi"
- #define UPLP_BOOTMODE		"bootmode"
- #define UPLP_ADDR_WIDTH		"addr-width"
--#define UPLP_ACPI_NVS_SIZE	"acpi-nvs-size"
- 
- #define UPLPATH_UPL_IMAGES	"/options/upl-images"
- #define UPLN_UPL_IMAGES		"upl-images"
-@@ -253,7 +252,6 @@ struct upl_graphics {
-  * @fit: Address and size of FIT image that was loaded
-  * @conf_offset: Offset in FIT of the configuration that was selected
-  * @addr_width: Adress-bus width of machine, e.g. 46 for 46 bits
-- * @acpi_nvs_size: Size of the ACPI non-volatile-storage area in bytes
-  * @image: Information about each image (struct upl_image)
-  * @mem: Information about physical-memory regions (struct upl_mem)
-  * @menmap: Information about logical-memory regions (struct upl_memmap)
-@@ -269,7 +267,6 @@ struct upl {
- 	struct memregion fit;
- 	uint conf_offset;
- 	uint addr_width;
--	uint acpi_nvs_size;
- 
- 	struct alist image;
- 	struct alist mem;
-diff --git a/test/boot/upl.c b/test/boot/upl.c
-index 264aab3038c..7171f16e42e 100644
---- a/test/boot/upl.c
-+++ b/test/boot/upl.c
-@@ -50,7 +50,6 @@ int upl_get_test_data(struct unit_test_state *uts, struct upl *upl)
- 	upl->fit.size = 0xabc;
- 	upl->conf_offset = 0x234;
- 	upl->addr_width = 46;
--	upl->acpi_nvs_size = 0x100;
- 
- 	/* image[0] */
- 	img.reg.base = 0x1;
-@@ -301,7 +300,6 @@ static int compare_upl(struct unit_test_state *uts, struct upl *base,
- 	ut_asserteq(base->fit.size, cmp->fit.size);
- 	ut_asserteq(base->conf_offset, cmp->conf_offset);
- 	ut_asserteq(base->addr_width, cmp->addr_width);
--	ut_asserteq(base->acpi_nvs_size, cmp->acpi_nvs_size);
- 
- 	ut_asserteq(base->image.count, cmp->image.count);
- 	for (i = 0; i < base->image.count; i++)
+ 	root = oftree_root(tree);
+ 	if (!ofnode_valid(root))
 -- 
 2.43.0
 
