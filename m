@@ -4,143 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5369E7718B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 10:50:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71800E7718B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 11:19:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 055A88031D;
-	Wed,  1 Jan 2025 11:50:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id CB1C38031D;
+	Wed,  1 Jan 2025 12:19:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="gCFW7ne7";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="c7RWyEzo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 133EC80379; Wed,  1 Jan 2025 11:50:14 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2060a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::60a])
+ id 2C13980379; Wed,  1 Jan 2025 12:19:32 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 585E88021A
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 11:50:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E20D8021A
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 12:19:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SU/S3KvZMLDAspt+gkPPNUZWbSfRyIPfIRcV38asCKQ6seThJ6XVmuWnHOHT6kkfMY7sA6I2Mzd4woAQA/ERs1LkIHvM5O/afgC2eY0fIhCw40lg8vd32/t0eHCMafMAsnegBqjAfjZ9ZxZMnnNgkc7D9ZUND/vCdes0wJ5fT9n1wBUePe06jhaOMDrxxrrm4cftuTlIwnYgOIydoE5AdwcdUCM05509h6tUdyT0jBQbFP9ClITzXG1WyPMQgl3tad1wsECL1HwXfGvL1Dq8dTy8w4bxfBp06FdktLmT5ENCKNQsKGACeuABuZmlXsZTD3GioSsTKwVMe9rrnehQBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gZ8YkBzmkJ/GEsNlLxJz1eeAQA2xMjUIvFGC2pMXoS0=;
- b=M0eL555WXfQi1Eu1KzeKpxMsTwHAjJsI/WpBOgwaTIxBLDPV63xVS6lz3EvqyJQAU8wzVlh3tlPADEoOkVLvE/MHYVxMEmET5PKk315VTsMEv3lg0ij8+rAyGNY5rEqi8CEv5gwk2qlEc1XFfDzl1b82A1sNI1Kna7SBBaEn4zaVqYwbb7G1OZ7lYh4oeUw2SIRYTktX5TZS4xIlcFqsUrzOEi+8lgfY1BMUY6qp5tV7UG0KWEY4pNn5Nw8zfKUdfrsqfbVr8DGBmYNQLXWKP2C3ck2QRsnW2bO/d9Sd1dcAqk3SJVxX6B6ioQDTSg7mDfkYrKiDUWn7AEle/xkDbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gZ8YkBzmkJ/GEsNlLxJz1eeAQA2xMjUIvFGC2pMXoS0=;
- b=gCFW7ne7fEl2O+vDOxsigHlpihGUQXjRTnT+ImUJvWd9SCIDCeGJXAvrySeytZPU9WNVoDIxkE1uYAiIqywTmcFrfpo5xfZs7ecuRqVs/UW3nCKCNbN/UY6Yc+xArtC9CfPC+qj+dNHAOC/f9pKgoY2mEG2pJEom7u15/BBZZ4g=
-Received: from SA1PR12MB8697.namprd12.prod.outlook.com (2603:10b6:806:385::10)
- by CYYPR12MB8750.namprd12.prod.outlook.com (2603:10b6:930:be::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8293.19; Wed, 1 Jan
- 2025 10:50:02 +0000
-Received: from SA1PR12MB8697.namprd12.prod.outlook.com
- ([fe80::dbf9:f1d1:7c67:f88c]) by SA1PR12MB8697.namprd12.prod.outlook.com
- ([fe80::dbf9:f1d1:7c67:f88c%5]) with mapi id 15.20.8293.000; Wed, 1 Jan 2025
- 10:50:02 +0000
-From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: RE: New Defects reported by Coverity Scan for Das U-Boot
-Thread-Topic: New Defects reported by Coverity Scan for Das U-Boot
-Thread-Index: AQHbW4ugkEFTGXLE0ES1G0QUDOfqNbMBvSPg
-Date: Wed, 1 Jan 2025 10:50:02 +0000
-Message-ID: <SA1PR12MB8697ABC7BD292E5C69D0491E980B2@SA1PR12MB8697.namprd12.prod.outlook.com>
-References: <20241231135509.GI3476@bill-the-cat>
-In-Reply-To: <20241231135509.GI3476@bill-the-cat>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA1PR12MB8697:EE_|CYYPR12MB8750:EE_
-x-ms-office365-filtering-correlation-id: 91d346e8-357f-41c3-9e5b-08dd2a520b9a
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?wOltvRbd7gZRFXX5kt5UkB4PPlgvTJmXvfg7xEKVh3M2S0GsAGRLmjdqCfWv?=
- =?us-ascii?Q?2rRihsgl7+09BsZBJWjKowp1+HJAHP73XcTj4+yM0a7sN9lT2vdmTtC5kOfW?=
- =?us-ascii?Q?H0O20XHAdyj/KWmddy/4oBwEqlulhSTydYWbR0sdUs2fugSZrDn187RtyhZg?=
- =?us-ascii?Q?Ptwq8wNxDqJGrAd4pGROTHaMQ8DL+fgLmZAV4ybLfxxGTOeugyggjrBXE2Fm?=
- =?us-ascii?Q?oT6wqLlILOBaeYAvrmoeVZJl+KzVjJnw77W3/5ZACxyloikKBRpqZAmMcgFr?=
- =?us-ascii?Q?y4tvNjUprcPp20NtsQ8kYLgcqtaxUO9v9KHzCMZyc+qAMHd2oWDn5+fazA2O?=
- =?us-ascii?Q?b3kWFNJqEWz7NRQibYl7JWH2Jqd34DVazWuKrABvS35PDRpQhULMamvuHCtk?=
- =?us-ascii?Q?8NIb6rjb8MZr7twqu8TOXYTwzE28mbIquWnOC2ptSrgbtUf+f9XZtYANRx/n?=
- =?us-ascii?Q?45HMMWyxyAt6hs15dnc7zXII4Ju6Q6qa8m8h7E/KdEqYS0RCrD3fVZzKQeqr?=
- =?us-ascii?Q?5D0jBMzIji7aOKkPKZYJDKB/R8sHG9kVNDwaKzTftacH5sPHYNDo2r0H+U/v?=
- =?us-ascii?Q?nA7z6lP61Px0T0MJs87YSvw3Wf3t7m7gHq9X1jC9LX48YfOFdmUH9V891u7+?=
- =?us-ascii?Q?NFvj+yE/GsurwCjxvrW5MDU0j40FwhXkjL4WxLiXVw+dJi5M3g3CFHKiIl4j?=
- =?us-ascii?Q?WWQbi+k3AOIa6R85T33JCpSrzK8m0u8wx5WtNLzfJ3Gi1td0SSb3eR0oaVMn?=
- =?us-ascii?Q?e5WSQ3XF8wmkFeNbEMf4t48VKFLWJw+yXPOMFSCz+ecpvmlJlFnDAOP93BDi?=
- =?us-ascii?Q?ToZ9EzoCFThZuF+5GEEiOggJmnCiRgKqfSN+slmizXyXQBg5+CE7yqj8xhox?=
- =?us-ascii?Q?m3n9Jk7+XiHgPHDGKBuM0lb2mnNclpsZREZqZSeG4FEoSJ2m+rmZPrKWo1Gr?=
- =?us-ascii?Q?lYlc0R4tqGwR9ydI6eZlKqAAYZseOR/HD89LpFMJtbofgtaot3hGG9lVZnSr?=
- =?us-ascii?Q?1L1Qa9NQ6IbV4Muf/0ExjNP3uUiUVQY//K9XRREFOgbmeWETwCBd03sXHzZ0?=
- =?us-ascii?Q?7xEgM9bjogSEg85kDXbKl8D/zpmJCBdFlfusil/6/3GL78wXdMabQ1x7S1s2?=
- =?us-ascii?Q?QTfzf6zTOsyTyC+ryXhWL9rx1dV5Dpbm2aDZ0uiY466krbNpAFcS0LS9gkMB?=
- =?us-ascii?Q?dd4muFx6had3Bv/mzhZY51kfyczLwfQ1JVjE7lJCMvKi+sT06wMUcqV2auKc?=
- =?us-ascii?Q?GXYFcTcYejies44FbN8D1vuuyqUaCzUrwsm1A+lyysL5fbcDkoGZxOgjHTLG?=
- =?us-ascii?Q?wjjuTyABKkzsvj/+Zmwmzrh2YSAfSNkCsei3gwSFkBBIALkQltRXzvszn/3j?=
- =?us-ascii?Q?5So7l3h/IVoQ15BSdHzR8OqoIw6MlhQiucm3Onegh3RSiwcA0qRuU+gXPx9/?=
- =?us-ascii?Q?uVhmWq5bSd+zfwa3EAEy1sns9MUDzCAV?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA1PR12MB8697.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?KAvM3O4e5cATA/Ghk7HDVIIRPg1YN3qucbYkl8F4ryk+CuF3iPgBf2yg7aPf?=
- =?us-ascii?Q?3UhncAEF9WPtgLGjrfpPQHKANtFOZ6wDuWaGG8PsiExSXRzEVii4qPwSpDOv?=
- =?us-ascii?Q?1AjaHBMv+Iq54r2VqKEuN/c9WpksXNyF4QBYG+ADUik0tAtjddyW/PvDeUlV?=
- =?us-ascii?Q?tvIs3aeSpN6HSAbv2INr6iwQvha/MYbEeDkDRmgWsiAIeex44jlNHOeKIouf?=
- =?us-ascii?Q?3Vur06rVULTK81NmOADY0xv/5r3TlAPGBmJtqKisT9RqwCiPvyDTAplnesUX?=
- =?us-ascii?Q?6PLVcFELLQvqkwDCxIQzR7QeJ8Vf/Thg7nS/uClVrMpFueMztdiGVRsE/sLz?=
- =?us-ascii?Q?BtEeWzGJHXHYcaayByH9uIIgdcI69/c5VLPJ+brpw3lLUfwL30vM4nxdfyv0?=
- =?us-ascii?Q?AVAyfsYbk8WSOHlRiFHPlG5Hj8FfEjmxdlJULlmIk5n/NT7sbRIPgWbSt3Ez?=
- =?us-ascii?Q?c9R0MJ+8/d6ZO8eJ6QTS/pGleSvgok/S62/wFSYoq+issLD0XovaQM84JHO5?=
- =?us-ascii?Q?uNWtaEGKiY6bgK6pumPyagl3c2IoHERaoB1oT32ICTo4rTTmizaeyrWlIjzP?=
- =?us-ascii?Q?0nVxq9LC35+WYj+nstM/wbewvgC5KcM/NVBIOzlPJgqGdt5RekQ7SvSKf8kR?=
- =?us-ascii?Q?Bdgh+kEAQmNTylGeisNCBI3zxzqlEANgR3aBeb+ddB9sfNqUgto2TLNckPDv?=
- =?us-ascii?Q?DAap07DGsKSj7SJzdLQv+2TvDX+hZtfePBJP+N7szR60E68lBhJ/a4lzqR6e?=
- =?us-ascii?Q?KZ2h194ifyxG3G8g7XAG0F61B66kPSQ/oXnk+t1B60cMvyKanXbVn7KEpaB2?=
- =?us-ascii?Q?BSWZAHhSBkbbaWDmUWseVBZjTQP7eWpMqd2l2DUh9K8URZI1wNrR2ec/51MR?=
- =?us-ascii?Q?jBxpcMKy9424tzxIPqTwOqY+BUVTztQUmespMiFEvIfL0IxecZ4tXDzWJAVj?=
- =?us-ascii?Q?GQUTMKMAzN+e/fttoAVX4KVmhA//9otevr4l+yf2ZCt2XaBe1/dkGFigWrUc?=
- =?us-ascii?Q?IJEYdNeDNuuEubdTErISj3hAXmWfUJ1P/Lhp1yqPyQ0gvdgiUXMD0GQSqFfc?=
- =?us-ascii?Q?NOBzRCeOi1MOQfy7iTYIzM8Msr2olpC5aXZ61a9LbyF/xQpGEd2AKQ/Bw6XW?=
- =?us-ascii?Q?88/BgZQweg8oPHc5rz9MY1rg8IqC3KNJ7pGghnDfHNAFJ9WMfdl7NRuezPOx?=
- =?us-ascii?Q?Y7jGefwlFolVe41VpTR9Ye8/Sdm0YGT+D43HN5kVWyYMbl9R3pkIvXghmfKm?=
- =?us-ascii?Q?ZHGE53pHRp03mscL/0+IqgswLxYQgfZAcr7/DDaSK0yfp1yieeC/dYGfdns2?=
- =?us-ascii?Q?WW4syjHDivcaZK+WV7lK37OHbFcuaUpxNfg+68OQnvAuXpJMpuu4h8LTVzMU?=
- =?us-ascii?Q?w8Jv/kKrJDszHERRFjaFxxA7GG4ZRO9mrnwVK2Wqs/ZhFUz7AGGdbCnwBSJn?=
- =?us-ascii?Q?QMXWe+f23GCk7RH26/WfkyZjwTIcqU7ZHf5sbEU9uiNFXCekYe/A5tHgi5Kc?=
- =?us-ascii?Q?EEQD6kF77gPTfiBV35WxhtQO4F3UIvo+SjxUQx7gLfOUi7CGmVwqcXbdUMr2?=
- =?us-ascii?Q?XqnQ4EKBSCN2vC9NaIg=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6C92D3F942; 
+ Wed,  1 Jan 2025 11:19:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1735730368;
+ bh=ZWvKZ7ypdVX+iMzvkksPPW0ZxvrkkB+duF8594/V9Mk=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=c7RWyEzoiqDxG73AFOTxnxJQg2hsqCbI+NIQTqMnelCNU1JYpWe25r1UPuQKVhei0
+ EHtOXSLgi+wS/1/adV3xqyq21Ws2UHHlqRWKPXq0SByRgramBXsJV688BIgUum5ZNr
+ W3T1hknqtaeQ6Uw6dCs5DSiAu5t2Ye4v2iZosIZfVReRPXyohmwaSHaY8ghe5D24th
+ BPlvrC1g/00Tyxgn/UkzVC9nwEyVsvWBX1c3/xxdBcUdMLcXlFkX2LVTq9L8fafzG2
+ sri2zRqFUpDqabD6WIOrJw25C3r2OOamFJNf8vS4mEoPhSBsAnKF3OfahS5Cmx1Gdj
+ MsHvBBeoP2tbw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] doc: move licenses to doc/
+Date: Wed,  1 Jan 2025 12:19:20 +0100
+Message-ID: <20250101111920.18535-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB8697.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91d346e8-357f-41c3-9e5b-08dd2a520b9a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jan 2025 10:50:02.6273 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xOz8LzgptKmR83tZIR90h2HC1E5lXxcxr4rcNyxh0p3tZKv0b7tYjn5hv+4p9IyHxG1EyR8WJiNatefMB32jpA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR12MB8750
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,94 +69,412 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-These defects won't appear when SPI_STACKED_PARALLEL config is enabled. We =
-can mark these as false positives.
+* Move all license texts to doc/
+* Convert README to restructured text and rename to index.rst
+* Replace '+' suffix by '-or-later' suffix
+* The eCos-2.0 license is OSI approved.
 
-Thanks
-Venkatesh
-> -----Original Message-----
-> From: Tom Rini <trini@konsulko.com>
-> Sent: Tuesday, December 31, 2024 7:25 PM
-> To: u-boot@lists.denx.de; Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com=
->
-> Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
->=20
-> Hey all, here's the latest report.
->=20
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Mon, Dec 30, 2024, 10:44 PM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
->=20
->=20
-> Hi,
->=20
-> Please find the latest report on new defect(s) introduced to Das U-Boot f=
-ound with
-> Coverity Scan.
->=20
-> 2 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-> 1 defect(s), reported by Coverity Scan earlier, were marked fixed in the =
-recent build
-> analyzed by Coverity Scan.
->=20
-> New defect(s) Reported-by: Coverity Scan Showing 2 of 2 defect(s)
->=20
->=20
-> ** CID 528528:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1644 in spi_nor_read()
->=20
->=20
-> ___________________________________________________________________
-> _____________________________________
-> *** CID 528528:  Control flow issues  (DEADCODE)
-> /drivers/mtd/spi/spi-nor-core.c: 1644 in spi_nor_read()
-> 1638                            read_len =3D len;
-> 1639                    else
-> 1640                            read_len =3D rem_bank_len;
-> 1641     #endif
-> 1642
-> 1643                    if (read_len =3D=3D 0)
-> >>>     CID 528528:  Control flow issues  (DEADCODE)
-> >>>     Execution cannot reach this statement: "return -5;".
-> 1644                            return -EIO;
-> 1645
-> 1646                    ret =3D nor->read(nor, offset, read_len, buf);
-> 1647                    if (ret =3D=3D 0) {
-> 1648                            /* We shouldn't see 0-length reads */
-> 1649                            ret =3D -EIO;
->=20
-> ** CID 528527:  Code maintainability issues  (UNUSED_VALUE)
-> /drivers/mtd/spi/spi-nor-core.c: 1613 in spi_nor_read()
->=20
->=20
-> ___________________________________________________________________
-> _____________________________________
-> *** CID 528527:  Code maintainability issues  (UNUSED_VALUE)
-> /drivers/mtd/spi/spi-nor-core.c: 1613 in spi_nor_read()
-> 1607                            }
-> 1608                            rem_bank_len =3D SZ_16M * (bank + 1);
-> 1609                            if
-> (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-> 1610                                    if (nor->flags &
-> SNOR_F_HAS_PARALLEL)
-> 1611                                            rem_bank_len *=3D 2;
-> 1612                            }
-> >>>     CID 528527:  Code maintainability issues  (UNUSED_VALUE)
-> >>>     Assigning value from "rem_bank_len - from" to "rem_bank_len"
-> >>> here,
-> but that stored value is overwritten before it can be used.
-> 1613                            rem_bank_len -=3D from;
-> 1614                    }
-> 1615
-> 1616                    if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-> 1617                            if (nor->flags & SNOR_F_HAS_STACKED) {
-> 1618                                    stack_shift =3D 1;
->=20
->=20
-> ----- End forwarded message -----
->=20
-> --
-> Tom
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ doc/develop/sending_patches.rst             |   6 +-
+ doc/index.rst                               |   1 +
+ {Licenses => doc/licenses}/Exceptions       |   0
+ {Licenses => doc/licenses}/OFL.txt          |   0
+ {Licenses => doc/licenses}/bsd-2-clause.txt |   0
+ {Licenses => doc/licenses}/bsd-3-clause.txt |   0
+ {Licenses => doc/licenses}/bzip2-1.0.6.txt  |   0
+ {Licenses => doc/licenses}/eCos-2.0.txt     |   0
+ {Licenses => doc/licenses}/gpl-2.0.txt      |   0
+ {Licenses => doc/licenses}/ibm-pibs.txt     |   0
+ Licenses/README => doc/licenses/index.rst   | 198 ++++++++++++++------
+ {Licenses => doc/licenses}/isc.txt          |   0
+ {Licenses => doc/licenses}/lgpl-2.0.txt     |   0
+ {Licenses => doc/licenses}/lgpl-2.1.txt     |   0
+ {Licenses => doc/licenses}/mit.txt          |   0
+ {Licenses => doc/licenses}/r8a779x_usb3.txt |   0
+ {Licenses => doc/licenses}/x11.txt          |   0
+ 17 files changed, 142 insertions(+), 63 deletions(-)
+ rename {Licenses => doc/licenses}/Exceptions (100%)
+ rename {Licenses => doc/licenses}/OFL.txt (100%)
+ rename {Licenses => doc/licenses}/bsd-2-clause.txt (100%)
+ rename {Licenses => doc/licenses}/bsd-3-clause.txt (100%)
+ rename {Licenses => doc/licenses}/bzip2-1.0.6.txt (100%)
+ rename {Licenses => doc/licenses}/eCos-2.0.txt (100%)
+ rename {Licenses => doc/licenses}/gpl-2.0.txt (100%)
+ rename {Licenses => doc/licenses}/ibm-pibs.txt (100%)
+ rename Licenses/README => doc/licenses/index.rst (45%)
+ rename {Licenses => doc/licenses}/isc.txt (100%)
+ rename {Licenses => doc/licenses}/lgpl-2.0.txt (100%)
+ rename {Licenses => doc/licenses}/lgpl-2.1.txt (100%)
+ rename {Licenses => doc/licenses}/mit.txt (100%)
+ rename {Licenses => doc/licenses}/r8a779x_usb3.txt (100%)
+ rename {Licenses => doc/licenses}/x11.txt (100%)
+
+diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
+index ee6e34089b5..390d466dadc 100644
+--- a/doc/develop/sending_patches.rst
++++ b/doc/develop/sending_patches.rst
+@@ -305,10 +305,10 @@ Notes
+ 1. U-Boot is Free Software that can redistributed and/or modified under the
+    terms of the `GNU General Public License
+    <http://www.fsf.org/licensing/licenses/gpl.html>`_ (GPL). Currently (August
+-   2022) version 2 of the GPL applies. Please see :download:`Licensing
+-   <../../Licenses/README>` for details. To allow that later versions of U-Boot
++   2022) version 2 of the GPL applies. Please see :doc:`Licensing
++   <../licenses/index>` for details. To allow that later versions of U-Boot
+    may be released under a later version of the GPL, all new code that gets
+-   added to U-Boot shall use a "GPL-2.0+" SPDX-License-Identifier.
++   added to U-Boot shall use a "GPL-2.0-or-later" SPDX-License-Identifier.
+ 
+ 2. All code must follow the :doc:`codingstyle` requirements.
+ 
+diff --git a/doc/index.rst b/doc/index.rst
+index 43398627d89..ffb1d1c97ff 100644
+--- a/doc/index.rst
++++ b/doc/index.rst
+@@ -38,6 +38,7 @@ want to contribute to U-Boot.
+    :maxdepth: 2
+ 
+    develop/index
++   licenses/index
+ 
+ 
+ U-Boot API documentation
+diff --git a/Licenses/Exceptions b/doc/licenses/Exceptions
+similarity index 100%
+rename from Licenses/Exceptions
+rename to doc/licenses/Exceptions
+diff --git a/Licenses/OFL.txt b/doc/licenses/OFL.txt
+similarity index 100%
+rename from Licenses/OFL.txt
+rename to doc/licenses/OFL.txt
+diff --git a/Licenses/bsd-2-clause.txt b/doc/licenses/bsd-2-clause.txt
+similarity index 100%
+rename from Licenses/bsd-2-clause.txt
+rename to doc/licenses/bsd-2-clause.txt
+diff --git a/Licenses/bsd-3-clause.txt b/doc/licenses/bsd-3-clause.txt
+similarity index 100%
+rename from Licenses/bsd-3-clause.txt
+rename to doc/licenses/bsd-3-clause.txt
+diff --git a/Licenses/bzip2-1.0.6.txt b/doc/licenses/bzip2-1.0.6.txt
+similarity index 100%
+rename from Licenses/bzip2-1.0.6.txt
+rename to doc/licenses/bzip2-1.0.6.txt
+diff --git a/Licenses/eCos-2.0.txt b/doc/licenses/eCos-2.0.txt
+similarity index 100%
+rename from Licenses/eCos-2.0.txt
+rename to doc/licenses/eCos-2.0.txt
+diff --git a/Licenses/gpl-2.0.txt b/doc/licenses/gpl-2.0.txt
+similarity index 100%
+rename from Licenses/gpl-2.0.txt
+rename to doc/licenses/gpl-2.0.txt
+diff --git a/Licenses/ibm-pibs.txt b/doc/licenses/ibm-pibs.txt
+similarity index 100%
+rename from Licenses/ibm-pibs.txt
+rename to doc/licenses/ibm-pibs.txt
+diff --git a/Licenses/README b/doc/licenses/index.rst
+similarity index 45%
+rename from Licenses/README
+rename to doc/licenses/index.rst
+index d09f0fe2cb8..fabf4a82bdb 100644
+--- a/Licenses/README
++++ b/doc/licenses/index.rst
+@@ -1,6 +1,9 @@
+-SPDX-License-Identifier: GPL-2.0
++.. SPDX-License-Identifier: GPL-2.0
+ 
+-  U-Boot is Free Software.  It is copyrighted by Wolfgang Denk and
++Licenses
++========
++
++U-Boot is Free Software.  It is copyrighted by Wolfgang Denk and
+ many others who contributed code (see the actual source code and the
+ git commit messages for details).  You can redistribute U-Boot and/or
+ modify it under the terms of version 2 of the GNU General Public
+@@ -8,21 +11,21 @@ License as published by the Free Software Foundation.  Most of it can
+ also be distributed, at your option, under any later version of the
+ GNU General Public License -- see individual files for exceptions.
+ 
+-  NOTE! This license does *not* cover the so-called "standalone"
+-applications that use U-Boot services by means of the jump table
+-provided by U-Boot exactly for this purpose - this is merely
+-considered normal use of U-Boot, and does *not* fall under the
+-heading of "derived work" -- see file  Licenses/Exceptions  for
+-details.
++.. note::
+ 
+-  Also note that the GPL and the other licenses are copyrighted by
+-the Free Software Foundation and other organizations, but the
+-instance of code that they refer to (the U-Boot source code) is
+-copyrighted by me and others who actually wrote it.
+--- Wolfgang Denk
++  This license does **not** cover the so-called "standalone"
++  applications that use U-Boot services by means of the jump table
++  provided by U-Boot exactly for this purpose - this is merely
++  considered normal use of U-Boot, and does **not** fall under the
++  heading of "derived work" -- see file  Licenses/Exceptions  for
++  details.
+ 
++  Also note that the GPL and the other licenses are copyrighted by
++  the Free Software Foundation and other organizations, but the
++  instance of code that they refer to (the U-Boot source code) is
++  copyrighted by the authors who actually wrote it.
+ 
+-Like many other projects, U-Boot has a tradition of including big
++Like many other projects, U-Boot had a tradition of including big
+ blocks of License headers in all files.  This not only blows up the
+ source code with mostly redundant information, but also makes it very
+ difficult to generate License Clearing Reports.  An additional problem
+@@ -31,20 +34,22 @@ slightly varying text blocks (full, abbreviated, different
+ indentation, line wrapping and/or white space, with obsolete address
+ information, ...) which makes automatic processing a nightmare.
+ 
+-To make this easier, such license headers in the source files will be
++To make this easier, such license headers in the source files are
+ replaced with a single line reference to Unique License Identifiers
+-as defined by the Linux Foundation's SPDX project [1].
++as defined by the Linux Foundation's `SPDX project <http://spdx.org/>`_.
+ 
+ If a "SPDX-License-Identifier:" line references more than one Unique
+ License Identifier, then this means that the respective file can be
+ used under the terms of either of these licenses, i. e. with
+ 
+-	SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
++.. code-block:: text
++
++	SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+ 
+-you can choose between GPL-2.0+ and BSD-3-Clause licensing.
++you can choose between GPL-2.0-or-later and BSD-3-Clause licensing.
+ 
+-We use the SPDX Unique License Identifiers here; these are available
+-at [2].
++We use the SPDX Unique License Identifiers here. These are available
++at `<http://spdx.org/licenses/>`_.
+ 
+ License identifier syntax
+ -------------------------
+@@ -57,19 +62,40 @@ License identifier syntax
+    '#!PATH_TO_INTERPRETER' in the first line.  For those scripts the SPDX
+    identifier goes into the second line.
+ 
+-|
+-
+ 2. Style:
+ 
+    The SPDX license identifier is added in form of a comment.  The comment
+-   style depends on the file type::
++   style depends on the file type:
++
++   .. list-table::
++      :header-rows: 1
++
++      * - File type
++        - Comment line
++      * - C source (\*.c)
++        - ::
+ 
+-      C source:	// SPDX-License-Identifier: <SPDX License Expression>
+-      C header:	/* SPDX-License-Identifier: <SPDX License Expression> */
+-      ASM:	/* SPDX-License-Identifier: <SPDX License Expression> */
+-      scripts:	# SPDX-License-Identifier: <SPDX License Expression>
+-      .rst:	.. SPDX-License-Identifier: <SPDX License Expression>
+-      .dts{i}:	// SPDX-License-Identifier: <SPDX License Expression>
++              // SPDX-License-Identifier: <SPDX License Expression>
++      * - C header (\*.h)
++        - ::
++
++              /* SPDX-License-Identifier: <SPDX License Expression> */
++      * - Assembler (\*.S)
++        - ::
++
++              /* SPDX-License-Identifier: <SPDX License Expression> */
++      * - Scripts (\*.py, \*.sh)
++        - ::
++
++              # SPDX-License-Identifier: <SPDX License Expression>
++      * - Restructured text (\*.rst)
++        - ::
++
++              .. SPDX-License-Identifier: <SPDX License Expression>
++      * - Device-tree source (\*.dts, \*.dtsi)
++        - ::
++
++              // SPDX-License-Identifier: <SPDX License Expression>
+ 
+    If a specific tool cannot handle the standard comment style, then the
+    appropriate comment mechanism which the tool accepts shall be used. This
+@@ -79,8 +105,6 @@ License identifier syntax
+    there are still older assembler tools which cannot handle C++ style
+    comments.
+ 
+-|
+-
+ 3. Syntax:
+ 
+    A <SPDX License Expression> is either an SPDX short form license
+@@ -91,21 +115,21 @@ License identifier syntax
+    "(", ")" .
+ 
+    License identifiers for licenses like [L]GPL with the 'or later' option
+-   are constructed by using a "+" for indicating the 'or later' option.::
++   are constructed by appending "-or-later"::
+ 
+-      // SPDX-License-Identifier: GPL-2.0+
+-      // SPDX-License-Identifier: LGPL-2.1+
++      // SPDX-License-Identifier: GPL-2.0-or-later
++      // SPDX-License-Identifier: LGPL-2.1-or-later
+ 
+    WITH should be used when there is a modifier to a license needed.
+-   For example, the linux kernel UAPI files use the expression::
++   For example, the Linux kernel UAPI files use the expression::
+ 
+       // SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note
+-      // SPDX-License-Identifier: GPL-2.0+ WITH Linux-syscall-note
++      // SPDX-License-Identifier: GPL-2.0-or-later WITH Linux-syscall-note
+ 
+-   Other examples using WITH exceptions found in the linux kernel are::
++   Other examples using WITH exceptions found in the Linux kernel are::
+ 
+       // SPDX-License-Identifier: GPL-2.0 WITH mif-exception
+-      // SPDX-License-Identifier: GPL-2.0+ WITH GCC-exception-2.0
++      // SPDX-License-Identifier: GPL-2.0-or-later WITH GCC-exception-2.0
+ 
+    Exceptions can only be used with particular License identifiers. The
+    valid License identifiers are listed in the tags of the exception text
+@@ -120,7 +144,7 @@ License identifier syntax
+    Examples from U-Boot for license expressions in dual licensed files::
+ 
+       // SPDX-License-Identifier: GPL-2.0 OR MIT
+-      // SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
++      // SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+ 
+    AND should be used if the file has multiple licenses whose terms all
+    apply to use the file. For example, if code is inherited from another
+@@ -132,24 +156,78 @@ License identifier syntax
+    Another other example where both sets of license terms need to be
+    adhered to is::
+ 
+-      // SPDX-License-Identifier: GPL-1.0+ AND LGPL-2.1+
+-
+-[1] http://spdx.org/
+-[2] http://spdx.org/licenses/
+-
+-Full name					SPDX Identifier	OSI Approved	File name		URI
+-=======================================================================================================================================
+-bzip2 and libbzip2 License v1.0.6		bzip2-1.0.6			bzip2-1.0.6.txt		https://spdx.org/licenses/bzip2-1.0.6.html
+-GNU General Public License v2.0 only		GPL-2.0		Y		gpl-2.0.txt		http://www.gnu.org/licenses/gpl-2.0.txt
+-GNU General Public License v2.0 or later	GPL-2.0+	Y		gpl-2.0.txt		http://www.gnu.org/licenses/gpl-2.0.txt
+-GNU Library General Public License v2 or later	LGPL-2.0+	Y		lgpl-2.0.txt		http://www.gnu.org/licenses/old-licenses/lgpl-2.0.txt
+-GNU Lesser General Public License v2.1 or later	LGPL-2.1+	Y		lgpl-2.1.txt		http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
+-eCos license version 2.0			eCos-2.0			eCos-2.0.txt		http://www.gnu.org/licenses/ecos-license.html
+-BSD 2-Clause License				BSD-2-Clause	Y		bsd-2-clause.txt	http://spdx.org/licenses/BSD-2-Clause
+-BSD 3-clause "New" or "Revised" License		BSD-3-Clause	Y		bsd-3-clause.txt	http://spdx.org/licenses/BSD-3-Clause#licenseText
+-IBM PIBS (PowerPC Initialization and		IBM-pibs			ibm-pibs.txt
+-	Boot Software) license
+-ISC License					ISC		Y		isc.txt			https://spdx.org/licenses/ISC
+-MIT License					MIT		Y		mit.txt			https://spdx.org/licenses/MIT.html
+-SIL OPEN FONT LICENSE (OFL-1.1)			OFL-1.1		Y		OFL.txt			https://spdx.org/licenses/OFL-1.1.html
+-X11 License					X11				x11.txt			https://spdx.org/licenses/X11.html
++      // SPDX-License-Identifier: GPL-1.0-or-later AND LGPL-2.1-or-later
++
++.. list-table::
++   :header-rows: 1
++
++   * - Full name
++     - SPDX Identifier
++     - OSI Approved
++     - File name
++     - URI
++   * - bzip2 and libbzip2 License v1.0.6
++     - bzip2-1.0.6
++     -
++     - :download:`bzip2-1.0.6.txt`
++     - https://spdx.org/licenses/bzip2-1.0.6.html
++   * - GNU General Public License v2.0 only
++     - GPL-2.0-only
++     - yes
++     - :download:`gpl-2.0.txt`
++     - http://www.gnu.org/licenses/gpl-2.0.txt
++   * - GNU General Public License v2.0 or later
++     - GPL-2.0-or-later
++     - yes
++     - :download:`gpl-2.0.txt`
++     - http://www.gnu.org/licenses/gpl-2.0.txt
++   * - GNU Library General Public License v2 or later
++     - LGPL-2.0-or-later
++     - yes
++     - :download:`lgpl-2.0.txt`
++     - http://www.gnu.org/licenses/old-licenses/lgpl-2.0.txt
++   * - GNU Lesser General Public License v2.1 or later
++     - LGPL-2.1-or-later
++     - yes
++     - :download:`lgpl-2.1.txt`
++     - http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
++   * - eCos license version 2.0
++     - eCos-2.0
++     - yes (non-reusable)
++     - eCos-2.0.txt`
++     - http://www.gnu.org/licenses/ecos-license.html
++   * - BSD 2-Clause License
++     - BSD-2-Clause
++     - yes
++     - :download:`bsd-2-clause.txt`
++     - http://spdx.org/licenses/BSD-2-Clause
++   * - BSD 3-clause "New" or "Revised" License
++     - BSD-3-Clause
++     - yes
++     - :download:`bsd-3-clause.txt`
++     - http://spdx.org/licenses/BSD-3-Clause#licenseText
++   * - IBM PIBS (PowerPC Initialization and Boot Software) license
++     - IBM-pibs
++     -
++     - :download:`ibm-pibs.txt`
++     -
++   * - ISC License
++     - ISC
++     - yes
++     - :download:`isc.txt`
++     - https://spdx.org/licenses/ISC
++   * - MIT License
++     - MIT
++     - yes
++     - :download:`mit.txt`
++     - https://spdx.org/licenses/MIT.html
++   * - SIL Open Font License (OFL) version 1.1
++     - OFL-1.1
++     - yes
++     - :download:`OFL.txt`
++     - https://spdx.org/licenses/OFL-1.1.html
++   * - X11 License
++     - X11
++     -
++     - :download:`x11.txt`
++     - https://spdx.org/licenses/X11.html
+diff --git a/Licenses/isc.txt b/doc/licenses/isc.txt
+similarity index 100%
+rename from Licenses/isc.txt
+rename to doc/licenses/isc.txt
+diff --git a/Licenses/lgpl-2.0.txt b/doc/licenses/lgpl-2.0.txt
+similarity index 100%
+rename from Licenses/lgpl-2.0.txt
+rename to doc/licenses/lgpl-2.0.txt
+diff --git a/Licenses/lgpl-2.1.txt b/doc/licenses/lgpl-2.1.txt
+similarity index 100%
+rename from Licenses/lgpl-2.1.txt
+rename to doc/licenses/lgpl-2.1.txt
+diff --git a/Licenses/mit.txt b/doc/licenses/mit.txt
+similarity index 100%
+rename from Licenses/mit.txt
+rename to doc/licenses/mit.txt
+diff --git a/Licenses/r8a779x_usb3.txt b/doc/licenses/r8a779x_usb3.txt
+similarity index 100%
+rename from Licenses/r8a779x_usb3.txt
+rename to doc/licenses/r8a779x_usb3.txt
+diff --git a/Licenses/x11.txt b/doc/licenses/x11.txt
+similarity index 100%
+rename from Licenses/x11.txt
+rename to doc/licenses/x11.txt
+-- 
+2.47.1
+
