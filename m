@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60996E7718B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:11:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB871E7718F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:11:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8CF2803F6;
-	Wed,  1 Jan 2025 23:10:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 18BEB803C6;
+	Wed,  1 Jan 2025 23:11:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j7AbaYzz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PRChkvRU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C4C2803E4; Wed,  1 Jan 2025 23:10:54 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 1F6CF800D7; Wed,  1 Jan 2025 23:10:58 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25109800D7
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:10:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0D8480107
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:10:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2163bd70069so47500335ad.0
- for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:10:52 -0800 (PST)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2166360285dso147174685ad.1
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:10:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735769450; x=1736374250; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1735769453; x=1736374253; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MhqduXdLf9D5KofvKzMvgCOAzQd/Rxt++tQTBhk0SQg=;
- b=j7AbaYzzVZ66/vb13D6YDx/4ZIEZxDjJmmsz8b3hFWF/OOYNTCj/czaeyEjFmac0kF
- CdA5TiE4TkQ5KKfC4Uww6BISXYJiEX99+isNhValanbDMRSOHUpDllbCq4j+Hybxbt3q
- XlAKN1g1Fr7s/eXaSwGcMIJ3xHIbiFXOC1QKs=
+ bh=FhxGM/1f9N0D4YMJwOKfQUhBc5m7ZkKdk1BuK4zxzvU=;
+ b=PRChkvRUfa4DkDnOIpeRy2rvkVUJ+PRauFy3R85MYy+S4/V99AXdrEPnw7TSn7vjR/
+ 3G8g7cK3wNChaC5HP4Ve0CMFj7seJn5qYmvPnrJDQ6euH/qfmiQS9cAQFfE7+pVNAYFx
+ IWMtYKIl4ojYVXvXihls44pPcukHTqgxw1EXY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735769450; x=1736374250;
+ d=1e100.net; s=20230601; t=1735769453; x=1736374253;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MhqduXdLf9D5KofvKzMvgCOAzQd/Rxt++tQTBhk0SQg=;
- b=gmx3Xbs4Ypk6WSUY7xpi1fi2z3KL/TZLzfrnDl8ffWpkNOOre6Al/F2T4tgEk2aHN1
- HF4nETY+dxDAv2eb4z6LC/3tieXJOq5gIIxHwILQ032JPr5ZS5DG5cPx1cys1uJH5lzT
- +PgkBhgMVof0GAgnTiGf3MSrduEx9Xy2pJ/x6j/4xSh4oGcxF66XMVGMn9IV9NztOs6I
- waDOVE1PxJG7jMgZT0a4QoILUugxjwvO5Pz+1dyLBk4Oq2boqxMlZ2temcI5zhenPbYJ
- 01Et403Pjuo9EqaPom2/ZE9hdLQmNxaqceQyycoLm4F5sEKW4xP+QELDYIfwwrYBdIbw
- uFjw==
-X-Gm-Message-State: AOJu0YyjL7PkC68G79f3puTXBzNzzvyOY3WjypKsLGEuYYrJQPu7nour
- FCiwmS3EpJF9om7KxO5fNtEqCIgrwbe9x/usFh70fLiH6kj4w6LoNvik10zs85RI9P6ZJ1PwRx4
+ bh=FhxGM/1f9N0D4YMJwOKfQUhBc5m7ZkKdk1BuK4zxzvU=;
+ b=tXBlWDQQolkAixYqTUHkLc5ZG2/SOAiPnzVNauqexmeEhVOV+RFLcXjgmeul2QNFMN
+ SiNxLzYKwksJ0aAx/BrUf5fF4saxUg16ZKODpVJvTtR7s5mjWIWOBWKAZltc6Su4bwPS
+ 1Pui0TdxBh1GZZgAQQGFNiE2Abf08Hjd6Uw//K8LRmpz3sHK0A3CbSoJDdA88aD2f/im
+ 6P27s9Q84RWWkdmT13ZPITNhtEe2sv1R3a/1FxtIJ1etrD7SMWkDZGqN4paNI9W4ZuHn
+ P/bLKBGExsjk7kRlwAHn13LmC/W+A8ztakou7i5fKWd2gCu6ygcen9eBnyyy5LYYM7Po
+ HCtQ==
+X-Gm-Message-State: AOJu0YwaGmWnkceCkSh19YujrQ7nmu36wBM2tf2qVrE5BQBJFseNxxc0
+ +GdR24ei2g/bqXUE6o9inPJAZWChQzaVDH/x6KuVhmxyBEK2I+/4cF+be6IpOGkf54kLwfBruqA
  =
-X-Gm-Gg: ASbGncuqliK/KTDycaVc3GNJl/I+FxeyRAPsZbTaEFS8xOzzrs4yOxMlgXGWk9ORcpI
- 7HxB5hkSYQV66e4EXuPSvf6GaeCWBEOspvxyCNNafAyvhVAYZvCyXIhjYJyaP3UDhwJ1TdPJDvi
- /CBa5CuAMscxpheuwGXLH8yRXQgzqWQwkwUGJQPohaOp6r3L8khkYPLj3QqvPk787+EBNhZuiYK
- SQcGIdhV4ee+nUE8x6R9Y6R0eWODa/V+43F8eiNGWRvOAWWITsPSqc=
-X-Google-Smtp-Source: AGHT+IEEHxfGF+lsLxJHB7kAAxSSMbYDYZMDrJqVGakJp4yV5rt6bs71bLp0Xydvxpu8XayL9zTu1g==
-X-Received: by 2002:a05:6a21:9985:b0:1e1:b183:2243 with SMTP id
- adf61e73a8af0-1e5e08432ecmr68487155637.39.1735769449763; 
- Wed, 01 Jan 2025 14:10:49 -0800 (PST)
+X-Gm-Gg: ASbGncsnmuXk9E2CHR/1vDrIgMxeUFGjlp+tA/E9wCGdMlPhBm2sniDpd28kGLbiwUE
+ +GoXkV7W5yNYUGuBpQ+XOGL51IP4EwdaxzYILtT99vD2h3FFxBfp2jc4epwYAf4KxNK2y5xCTnq
+ aK5pa/s+A/rCRpmfBeQl1haYNfthaYFSWG3LG3jpgj1OrCmzu8M7kAqwMpGIX4RZ/2CJTuq9gmJ
+ U6bgvyBKpK77y1Vdv66MAwJMMdjZPnqot+P372e9kugxsDzXr0Bxjg=
+X-Google-Smtp-Source: AGHT+IF8Bxk0uiitZQsH3fCIZM3b4R0qS5YTDuatnopvj2YTMV/pnCG1lZCiI8D3fX7tEI9rqwAMng==
+X-Received: by 2002:aa7:888c:0:b0:725:f212:12e5 with SMTP id
+ d2e1a72fcca58-72abded14e5mr68251815b3a.24.1735769452770; 
+ Wed, 01 Jan 2025 14:10:52 -0800 (PST)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.10.47
+ d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.10.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2025 14:10:49 -0800 (PST)
+ Wed, 01 Jan 2025 14:10:52 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 03/67] abuf: Allow use in host tools
-Date: Thu,  2 Jan 2025 11:08:49 +1300
-Message-ID: <20250101221003.1944600-4-sjg@chromium.org>
+Subject: [PATCH 04/67] abuf: Provide a constant buffer
+Date: Thu,  2 Jan 2025 11:08:50 +1300
+Message-ID: <20250101221003.1944600-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250101221003.1944600-1-sjg@chromium.org>
 References: <20250101221003.1944600-1-sjg@chromium.org>
@@ -93,31 +93,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some header files included on the host are moving to use abuf, so adjust
-the header-inclusion to bring in size_t correctly.
+Add a new initialiser which can accept a constant pointer.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/abuf.h | 4 ++++
- 1 file changed, 4 insertions(+)
+ include/abuf.h  | 13 +++++++++++++
+ lib/abuf.c      |  6 ++++++
+ test/lib/abuf.c | 23 +++++++++++++++++++++++
+ 3 files changed, 42 insertions(+)
 
 diff --git a/include/abuf.h b/include/abuf.h
-index 76e314b9a47..de21cefade4 100644
+index de21cefade4..62ff6499a0c 100644
 --- a/include/abuf.h
 +++ b/include/abuf.h
-@@ -9,7 +9,11 @@
- #ifndef __ABUF_H
- #define __ABUF_H
+@@ -157,6 +157,19 @@ void abuf_init_move(struct abuf *abuf, void *data, size_t size);
+  */
+ void abuf_init_set(struct abuf *abuf, void *data, size_t size);
  
-+#ifdef USE_HOSTCC
-+#include <sys/types.h>
-+#else
- #include <linux/types.h>
-+#endif
- 
++/**
++ * abuf_init_const() - Set up a new const abuf
++ *
++ * Inits a new abuf and sets up its (unallocated) data. The only current
++ * difference between this and abuf_init_set() is the 'data' parameter is a
++ * const pointer. At some point a flag could be used to indicate const-ness.
++ *
++ * @abuf: abuf to set up
++ * @data: New contents of abuf
++ * @size: New size of abuf
++ */
++void abuf_init_const(struct abuf *abuf, const void *data, size_t size);
++
  /**
-  * struct abuf - buffer that can be allocated and freed
+  * abuf_uninit() - Free any memory used by an abuf
+  *
+diff --git a/lib/abuf.c b/lib/abuf.c
+index 8156177c773..61adf7fc6b1 100644
+--- a/lib/abuf.c
++++ b/lib/abuf.c
+@@ -119,6 +119,12 @@ void abuf_init_set(struct abuf *abuf, void *data, size_t size)
+ 	abuf_set(abuf, data, size);
+ }
+ 
++void abuf_init_const(struct abuf *abuf, const void *data, size_t size)
++{
++	/* for now there is no flag indicating that the abuf data is constant */
++	abuf_init_set(abuf, (void *)data, size);
++}
++
+ void abuf_init_move(struct abuf *abuf, void *data, size_t size)
+ {
+ 	abuf_init_set(abuf, data, size);
+diff --git a/test/lib/abuf.c b/test/lib/abuf.c
+index 5d61f9261c6..f954ae16da1 100644
+--- a/test/lib/abuf.c
++++ b/test/lib/abuf.c
+@@ -46,6 +46,29 @@ static int lib_test_abuf_set(struct unit_test_state *uts)
+ }
+ LIB_TEST(lib_test_abuf_set, 0);
+ 
++/* Test abuf_init_const() */
++static int lib_test_abuf_init_const(struct unit_test_state *uts)
++{
++	struct abuf buf;
++	ulong start;
++	void *ptr;
++
++	start = ut_check_free();
++
++	ptr = map_sysmem(0x100, 0);
++
++	abuf_init_const(&buf, ptr, 10);
++	ut_asserteq_ptr(ptr, buf.data);
++	ut_asserteq(10, buf.size);
++
++	/* No memory should have been allocated */
++	ut_assertok(ut_check_delta(start));
++
++	return 0;
++}
++LIB_TEST(lib_test_abuf_init_const, 0);
++
++
+ /* Test abuf_map_sysmem() and abuf_addr() */
+ static int lib_test_abuf_map_sysmem(struct unit_test_state *uts)
+ {
 -- 
 2.43.0
 
