@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF375E7718B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67AEEE7718B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:11:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B4A4800D7;
-	Wed,  1 Jan 2025 23:11:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8334680516;
+	Wed,  1 Jan 2025 23:11:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eDPtRxi5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KNbdmBRF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C869803F1; Wed,  1 Jan 2025 23:11:10 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 0C5FB804BA; Wed,  1 Jan 2025 23:11:14 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C897280317
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:11:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDC9D80317
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:11:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-21669fd5c7cso148344845ad.3
- for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:11:07 -0800 (PST)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2162c0f6a39so154406145ad.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:11:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735769465; x=1736374265; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1735769470; x=1736374270; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OJplwq3gSjoeHS2oWsw6Pls+LGZ9OxvKceSX4WLBU44=;
- b=eDPtRxi5PkUmSuDSvfEXXc9ClokOus72waPRLtRl1eZmOIK4lN8S7FrPv8hIeSQkEE
- yETyijItsni2LlFXh7e9Jv0gGSupZMVeCxR/PbNZUpSwf0nai7eZHXg5OrfSssCJEHV3
- s4XLthVENL+MGtq8cjW4K1HgEGcvYIrd8mDBQ=
+ bh=xD8uXxnEqWGQaEJ7Eb6irL28wQ0t2D5rlK6bvqWzA6g=;
+ b=KNbdmBRFsPmknXH6kpkJJjtGaRDhpEhb9m52on1bZzciIm5mxGlDma67ZmPqbUjc4E
+ 6djLdvF0mEi3iL7XJ/FbYkZQcEzv76KSVSWHDG7WZfxM/HJ/pkC1UzqtT/lMXYqoEdxJ
+ SeHpcyj07b7X+A7qDujZ6oi6wPxzeiF64b2QU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735769465; x=1736374265;
+ d=1e100.net; s=20230601; t=1735769470; x=1736374270;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OJplwq3gSjoeHS2oWsw6Pls+LGZ9OxvKceSX4WLBU44=;
- b=aISp++mwlxFEqPj2KEZIYDpQ06XAnS41Wlka8Y+1+jN4dV7ehcxx1/aHIhPD0Sq9PT
- Qu8KR5IKbREY5di7HE5WWHOH7G7YEDlKDo+p0EVny7hSdiBDus3jaiaJOhHzDMDXxA9Z
- m/y1QNxZMy2/E8H8s9sI7R8IiXSOgoCU1E3Gtx2fjECt5bjNrozQoKHTk+48jURnzp0D
- kMk1r3QEyyZ0jU4S++fvELvYDoySFky2yFYmhtUiY1RBYgAxR3SETUsRPuosoNJizThu
- WS0xtimu4TrKQnanr+44fv1djBXXFMnf49fOjNZru7ppUZYNrm+5qyJBZDMjqK/5DWcg
- yMdg==
-X-Gm-Message-State: AOJu0YxE3nyWq+eJRI2Hw5R92WTIZAT6LqlccSG7dURFSPhFpqELjF6Y
- qNAMcHZSMsJcL9IKxRglhQTMMvW3pFrkro5DaatLig4LYt7YN2otFdO5ldCOHVRFOozP5Tdil1I
+ bh=xD8uXxnEqWGQaEJ7Eb6irL28wQ0t2D5rlK6bvqWzA6g=;
+ b=gst1fDejP5Lgj4FkCx3TLkiOrclCpQETcQGy6vjbUyCWXLiInXVzqmY7ZKcU4SRdqs
+ hhk3rQ44CWAeOo/fuA+LFnppwlQNgs1t9xvvno25C9XgYTjJ9galTp/iwFPXcHiSkdn4
+ qK8LR13JXDUx4dBwqGiJ5vuJ0X4N9sw7vMqmbJkY9250efiw6sSfi8csGWSTIT7w9qkc
+ ZLNUtPR8JU5c/T6toqSqYxJgum1hyB6rHx4bvzUa1PyWogtgDlIvIj2acHSsQh8lEJe7
+ XAOkz0E1XEh6uPrd8fiWCDs8Q0Bdtt34I8aDJYYOFhtmiaJG6L2QbEVOit10nOTkWQJA
+ GTOw==
+X-Gm-Message-State: AOJu0YxZRu31YB2IfZ2TN7HC1heOtye0gabAsI6zloRfYFFh7N/BytdN
+ 93+Rc7SuFgffcVY2DqnpJ31IEkEkn9f8oyfM4mRlBASP7WYpWUU0vC43ptCZSHfwkp6iw3f61w0
  =
-X-Gm-Gg: ASbGncuj4YY8YshHWkANy+94unrk5wVxMLalQtd0z3h+qjM6NwlpC4cgVmtctM4WHmf
- gaTS3vs2Gq0Ml1u+Xb/4leFASFh8em0Z5g+NAgL2akAZI5vLRjdhyV0d6zqXYGa9VFOPj6yOF5D
- 7CQmRRjDDHynvPJF01EuW+CLBa2W3mh5lbNAKUj2YoRmmTD0Bu+dca1rbNiHbS1ObIGR89xqesg
- zoallYujq/pgt3D/tUSK/QILEXpqI101JJhLXceUygA4GSnry2BQmg=
-X-Google-Smtp-Source: AGHT+IHsJBIU/zWSoAiWqZoKrekiyWKVcKRFnsc+FAdL9bvIuTEWsDeEYKrPLgTVs1x/zmJA0F9dbg==
-X-Received: by 2002:a05:6a00:430d:b0:728:e906:e466 with SMTP id
- d2e1a72fcca58-72abdeb4793mr61306880b3a.21.1735769465406; 
- Wed, 01 Jan 2025 14:11:05 -0800 (PST)
+X-Gm-Gg: ASbGncufFQemYLI4BHWmyg88Ny7QCds1QD2oLw4UQQoln4sO54LrtubVHa46eCRVkHn
+ 6Kho9/wnHCY8hkkPlxvNVcqm2kpkgDk3EzGx/Z5ZuWtAjNPmeedQgFGAiOnPuTSqtl7M3c7370n
+ TbujSmXT201UZfbQFu9LGRpXVZ5vEoy6y2/HzU5j0WrVTMg3Te76Bs0LtqA1bjIM6AdRvA1DZRu
+ VYgn+g+JgUIeADtWqAFfSIf22Fnx+i9uxC8MM0Ho/wwCLojbmxpQB0=
+X-Google-Smtp-Source: AGHT+IGhPxMHAl7RiJbdJNB5adppUTvsdyXpNaRmF1gCZQ+d+tn7StuLEXpBSQ3XEXlYVGRZmTVt7w==
+X-Received: by 2002:a05:6a20:6a0d:b0:1e1:a920:225d with SMTP id
+ adf61e73a8af0-1e5e1fa207dmr67779817637.19.1735769469863; 
+ Wed, 01 Jan 2025 14:11:09 -0800 (PST)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.11.02
+ d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.11.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2025 14:11:04 -0800 (PST)
+ Wed, 01 Jan 2025 14:11:09 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marex@denx.de>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 07/67] mkimage: Update map_to_sysmem() to match its prototype
-Date: Thu,  2 Jan 2025 11:08:53 +1300
-Message-ID: <20250101221003.1944600-8-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 08/67] x86: Emable meminfo command
+Date: Thu,  2 Jan 2025 11:08:54 +1300
+Message-ID: <20250101221003.1944600-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250101221003.1944600-1-sjg@chromium.org>
 References: <20250101221003.1944600-1-sjg@chromium.org>
@@ -94,28 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the version of this function in mkimage so that it uses a const
-pointer, as is done in the mapmem.h header file.
+Enable this command for x86 boards as it is quite useful for seeing
+where memory is.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/mkimage.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/tools/mkimage.h b/tools/mkimage.h
-index d92a3ff8117..15741f250fd 100644
---- a/tools/mkimage.h
-+++ b/tools/mkimage.h
-@@ -37,7 +37,7 @@ static inline void *map_sysmem(ulong paddr, unsigned long len)
- 	return (void *)(uintptr_t)paddr;
- }
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 6258788f53f..2fb247d04b3 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -310,6 +310,8 @@ config X86
+ 	imply SYSINFO if GENERATE_SMBIOS_TABLE
+ 	imply SYSINFO_SMBIOS if GENERATE_SMBIOS_TABLE
+ 	imply TIMESTAMP
++	imply CMD_MEMINFO
++	imply CMD_MEMINFO_MAP
  
--static inline ulong map_to_sysmem(void *ptr)
-+static inline ulong map_to_sysmem(const void *ptr)
- {
- 	return (ulong)(uintptr_t)ptr;
- }
+ 	# Thing to enable for when SPL/TPL are enabled: SPL
+ 	imply SPL_DM
 -- 
 2.43.0
 
