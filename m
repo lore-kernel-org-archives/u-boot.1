@@ -4,88 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B04D5E7718B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 09:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5369E7718B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 10:50:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C94858031D;
-	Wed,  1 Jan 2025 10:44:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 055A88031D;
+	Wed,  1 Jan 2025 11:50:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="g9fOYVt9";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="gCFW7ne7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1FDA80379; Wed,  1 Jan 2025 10:44:42 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 133EC80379; Wed,  1 Jan 2025 11:50:14 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2060a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::60a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 328FD8021A
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 10:44:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 585E88021A
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 11:50:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1735724663; x=1736329463; i=xypron.glpk@gmx.de;
- bh=zyxi0jOvRxctj5Wk0IsUHXRUbtBbMTFnIza72cExDaY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:Cc:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=g9fOYVt9MXFEGuNlgmFQnNv3MTVQtvRIKZ4qxQeA1jVnC2b+I+X1kB4dzRCkFXel
- aj1iAOv8MLfcPbIW8jsnCin3j/TCVWkpI7LDwpb5/+01w7xYsdOqGGHLrIstbs0c6
- PI0KyHZAQQMtLlF6TlV7QddTL/qXx96uCMkabpKZ4N01/8cdVgj/yoxsOqHSTs350
- CuNC4u7Ik12uL6GclheTXAHFWOOyaDm5orrPzcQoLLegedhyVdVI/x2lNR2zSZKAx
- vLy/q5yhv5VRnaH1DJCdeTd6SxBa/98DZZVxVpViyk/nvWFUexghQo/j61PN0wnpR
- K3XIUS7BFCBQc20wWw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MWASe-1t0z3E3o7O-00K3VP; Wed, 01
- Jan 2025 10:44:23 +0100
-Message-ID: <58c0049d-9caf-428b-9166-4cc6e660559d@gmx.de>
-Date: Wed, 1 Jan 2025 10:44:15 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net/netcat: add netcat over tcp support
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-References: <20250101033326.439585-1-mikhail.kshevetskiy@iopsys.eu>
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SU/S3KvZMLDAspt+gkPPNUZWbSfRyIPfIRcV38asCKQ6seThJ6XVmuWnHOHT6kkfMY7sA6I2Mzd4woAQA/ERs1LkIHvM5O/afgC2eY0fIhCw40lg8vd32/t0eHCMafMAsnegBqjAfjZ9ZxZMnnNgkc7D9ZUND/vCdes0wJ5fT9n1wBUePe06jhaOMDrxxrrm4cftuTlIwnYgOIydoE5AdwcdUCM05509h6tUdyT0jBQbFP9ClITzXG1WyPMQgl3tad1wsECL1HwXfGvL1Dq8dTy8w4bxfBp06FdktLmT5ENCKNQsKGACeuABuZmlXsZTD3GioSsTKwVMe9rrnehQBw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gZ8YkBzmkJ/GEsNlLxJz1eeAQA2xMjUIvFGC2pMXoS0=;
+ b=M0eL555WXfQi1Eu1KzeKpxMsTwHAjJsI/WpBOgwaTIxBLDPV63xVS6lz3EvqyJQAU8wzVlh3tlPADEoOkVLvE/MHYVxMEmET5PKk315VTsMEv3lg0ij8+rAyGNY5rEqi8CEv5gwk2qlEc1XFfDzl1b82A1sNI1Kna7SBBaEn4zaVqYwbb7G1OZ7lYh4oeUw2SIRYTktX5TZS4xIlcFqsUrzOEi+8lgfY1BMUY6qp5tV7UG0KWEY4pNn5Nw8zfKUdfrsqfbVr8DGBmYNQLXWKP2C3ck2QRsnW2bO/d9Sd1dcAqk3SJVxX6B6ioQDTSg7mDfkYrKiDUWn7AEle/xkDbg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gZ8YkBzmkJ/GEsNlLxJz1eeAQA2xMjUIvFGC2pMXoS0=;
+ b=gCFW7ne7fEl2O+vDOxsigHlpihGUQXjRTnT+ImUJvWd9SCIDCeGJXAvrySeytZPU9WNVoDIxkE1uYAiIqywTmcFrfpo5xfZs7ecuRqVs/UW3nCKCNbN/UY6Yc+xArtC9CfPC+qj+dNHAOC/f9pKgoY2mEG2pJEom7u15/BBZZ4g=
+Received: from SA1PR12MB8697.namprd12.prod.outlook.com (2603:10b6:806:385::10)
+ by CYYPR12MB8750.namprd12.prod.outlook.com (2603:10b6:930:be::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8293.19; Wed, 1 Jan
+ 2025 10:50:02 +0000
+Received: from SA1PR12MB8697.namprd12.prod.outlook.com
+ ([fe80::dbf9:f1d1:7c67:f88c]) by SA1PR12MB8697.namprd12.prod.outlook.com
+ ([fe80::dbf9:f1d1:7c67:f88c%5]) with mapi id 15.20.8293.000; Wed, 1 Jan 2025
+ 10:50:02 +0000
+From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: RE: New Defects reported by Coverity Scan for Das U-Boot
+Thread-Topic: New Defects reported by Coverity Scan for Das U-Boot
+Thread-Index: AQHbW4ugkEFTGXLE0ES1G0QUDOfqNbMBvSPg
+Date: Wed, 1 Jan 2025 10:50:02 +0000
+Message-ID: <SA1PR12MB8697ABC7BD292E5C69D0491E980B2@SA1PR12MB8697.namprd12.prod.outlook.com>
+References: <20241231135509.GI3476@bill-the-cat>
+In-Reply-To: <20241231135509.GI3476@bill-the-cat>
+Accept-Language: en-US
 Content-Language: en-US
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250101033326.439585-1-mikhail.kshevetskiy@iopsys.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA1PR12MB8697:EE_|CYYPR12MB8750:EE_
+x-ms-office365-filtering-correlation-id: 91d346e8-357f-41c3-9e5b-08dd2a520b9a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?wOltvRbd7gZRFXX5kt5UkB4PPlgvTJmXvfg7xEKVh3M2S0GsAGRLmjdqCfWv?=
+ =?us-ascii?Q?2rRihsgl7+09BsZBJWjKowp1+HJAHP73XcTj4+yM0a7sN9lT2vdmTtC5kOfW?=
+ =?us-ascii?Q?H0O20XHAdyj/KWmddy/4oBwEqlulhSTydYWbR0sdUs2fugSZrDn187RtyhZg?=
+ =?us-ascii?Q?Ptwq8wNxDqJGrAd4pGROTHaMQ8DL+fgLmZAV4ybLfxxGTOeugyggjrBXE2Fm?=
+ =?us-ascii?Q?oT6wqLlILOBaeYAvrmoeVZJl+KzVjJnw77W3/5ZACxyloikKBRpqZAmMcgFr?=
+ =?us-ascii?Q?y4tvNjUprcPp20NtsQ8kYLgcqtaxUO9v9KHzCMZyc+qAMHd2oWDn5+fazA2O?=
+ =?us-ascii?Q?b3kWFNJqEWz7NRQibYl7JWH2Jqd34DVazWuKrABvS35PDRpQhULMamvuHCtk?=
+ =?us-ascii?Q?8NIb6rjb8MZr7twqu8TOXYTwzE28mbIquWnOC2ptSrgbtUf+f9XZtYANRx/n?=
+ =?us-ascii?Q?45HMMWyxyAt6hs15dnc7zXII4Ju6Q6qa8m8h7E/KdEqYS0RCrD3fVZzKQeqr?=
+ =?us-ascii?Q?5D0jBMzIji7aOKkPKZYJDKB/R8sHG9kVNDwaKzTftacH5sPHYNDo2r0H+U/v?=
+ =?us-ascii?Q?nA7z6lP61Px0T0MJs87YSvw3Wf3t7m7gHq9X1jC9LX48YfOFdmUH9V891u7+?=
+ =?us-ascii?Q?NFvj+yE/GsurwCjxvrW5MDU0j40FwhXkjL4WxLiXVw+dJi5M3g3CFHKiIl4j?=
+ =?us-ascii?Q?WWQbi+k3AOIa6R85T33JCpSrzK8m0u8wx5WtNLzfJ3Gi1td0SSb3eR0oaVMn?=
+ =?us-ascii?Q?e5WSQ3XF8wmkFeNbEMf4t48VKFLWJw+yXPOMFSCz+ecpvmlJlFnDAOP93BDi?=
+ =?us-ascii?Q?ToZ9EzoCFThZuF+5GEEiOggJmnCiRgKqfSN+slmizXyXQBg5+CE7yqj8xhox?=
+ =?us-ascii?Q?m3n9Jk7+XiHgPHDGKBuM0lb2mnNclpsZREZqZSeG4FEoSJ2m+rmZPrKWo1Gr?=
+ =?us-ascii?Q?lYlc0R4tqGwR9ydI6eZlKqAAYZseOR/HD89LpFMJtbofgtaot3hGG9lVZnSr?=
+ =?us-ascii?Q?1L1Qa9NQ6IbV4Muf/0ExjNP3uUiUVQY//K9XRREFOgbmeWETwCBd03sXHzZ0?=
+ =?us-ascii?Q?7xEgM9bjogSEg85kDXbKl8D/zpmJCBdFlfusil/6/3GL78wXdMabQ1x7S1s2?=
+ =?us-ascii?Q?QTfzf6zTOsyTyC+ryXhWL9rx1dV5Dpbm2aDZ0uiY466krbNpAFcS0LS9gkMB?=
+ =?us-ascii?Q?dd4muFx6had3Bv/mzhZY51kfyczLwfQ1JVjE7lJCMvKi+sT06wMUcqV2auKc?=
+ =?us-ascii?Q?GXYFcTcYejies44FbN8D1vuuyqUaCzUrwsm1A+lyysL5fbcDkoGZxOgjHTLG?=
+ =?us-ascii?Q?wjjuTyABKkzsvj/+Zmwmzrh2YSAfSNkCsei3gwSFkBBIALkQltRXzvszn/3j?=
+ =?us-ascii?Q?5So7l3h/IVoQ15BSdHzR8OqoIw6MlhQiucm3Onegh3RSiwcA0qRuU+gXPx9/?=
+ =?us-ascii?Q?uVhmWq5bSd+zfwa3EAEy1sns9MUDzCAV?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA1PR12MB8697.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?KAvM3O4e5cATA/Ghk7HDVIIRPg1YN3qucbYkl8F4ryk+CuF3iPgBf2yg7aPf?=
+ =?us-ascii?Q?3UhncAEF9WPtgLGjrfpPQHKANtFOZ6wDuWaGG8PsiExSXRzEVii4qPwSpDOv?=
+ =?us-ascii?Q?1AjaHBMv+Iq54r2VqKEuN/c9WpksXNyF4QBYG+ADUik0tAtjddyW/PvDeUlV?=
+ =?us-ascii?Q?tvIs3aeSpN6HSAbv2INr6iwQvha/MYbEeDkDRmgWsiAIeex44jlNHOeKIouf?=
+ =?us-ascii?Q?3Vur06rVULTK81NmOADY0xv/5r3TlAPGBmJtqKisT9RqwCiPvyDTAplnesUX?=
+ =?us-ascii?Q?6PLVcFELLQvqkwDCxIQzR7QeJ8Vf/Thg7nS/uClVrMpFueMztdiGVRsE/sLz?=
+ =?us-ascii?Q?BtEeWzGJHXHYcaayByH9uIIgdcI69/c5VLPJ+brpw3lLUfwL30vM4nxdfyv0?=
+ =?us-ascii?Q?AVAyfsYbk8WSOHlRiFHPlG5Hj8FfEjmxdlJULlmIk5n/NT7sbRIPgWbSt3Ez?=
+ =?us-ascii?Q?c9R0MJ+8/d6ZO8eJ6QTS/pGleSvgok/S62/wFSYoq+issLD0XovaQM84JHO5?=
+ =?us-ascii?Q?uNWtaEGKiY6bgK6pumPyagl3c2IoHERaoB1oT32ICTo4rTTmizaeyrWlIjzP?=
+ =?us-ascii?Q?0nVxq9LC35+WYj+nstM/wbewvgC5KcM/NVBIOzlPJgqGdt5RekQ7SvSKf8kR?=
+ =?us-ascii?Q?Bdgh+kEAQmNTylGeisNCBI3zxzqlEANgR3aBeb+ddB9sfNqUgto2TLNckPDv?=
+ =?us-ascii?Q?DAap07DGsKSj7SJzdLQv+2TvDX+hZtfePBJP+N7szR60E68lBhJ/a4lzqR6e?=
+ =?us-ascii?Q?KZ2h194ifyxG3G8g7XAG0F61B66kPSQ/oXnk+t1B60cMvyKanXbVn7KEpaB2?=
+ =?us-ascii?Q?BSWZAHhSBkbbaWDmUWseVBZjTQP7eWpMqd2l2DUh9K8URZI1wNrR2ec/51MR?=
+ =?us-ascii?Q?jBxpcMKy9424tzxIPqTwOqY+BUVTztQUmespMiFEvIfL0IxecZ4tXDzWJAVj?=
+ =?us-ascii?Q?GQUTMKMAzN+e/fttoAVX4KVmhA//9otevr4l+yf2ZCt2XaBe1/dkGFigWrUc?=
+ =?us-ascii?Q?IJEYdNeDNuuEubdTErISj3hAXmWfUJ1P/Lhp1yqPyQ0gvdgiUXMD0GQSqFfc?=
+ =?us-ascii?Q?NOBzRCeOi1MOQfy7iTYIzM8Msr2olpC5aXZ61a9LbyF/xQpGEd2AKQ/Bw6XW?=
+ =?us-ascii?Q?88/BgZQweg8oPHc5rz9MY1rg8IqC3KNJ7pGghnDfHNAFJ9WMfdl7NRuezPOx?=
+ =?us-ascii?Q?Y7jGefwlFolVe41VpTR9Ye8/Sdm0YGT+D43HN5kVWyYMbl9R3pkIvXghmfKm?=
+ =?us-ascii?Q?ZHGE53pHRp03mscL/0+IqgswLxYQgfZAcr7/DDaSK0yfp1yieeC/dYGfdns2?=
+ =?us-ascii?Q?WW4syjHDivcaZK+WV7lK37OHbFcuaUpxNfg+68OQnvAuXpJMpuu4h8LTVzMU?=
+ =?us-ascii?Q?w8Jv/kKrJDszHERRFjaFxxA7GG4ZRO9mrnwVK2Wqs/ZhFUz7AGGdbCnwBSJn?=
+ =?us-ascii?Q?QMXWe+f23GCk7RH26/WfkyZjwTIcqU7ZHf5sbEU9uiNFXCekYe/A5tHgi5Kc?=
+ =?us-ascii?Q?EEQD6kF77gPTfiBV35WxhtQO4F3UIvo+SjxUQx7gLfOUi7CGmVwqcXbdUMr2?=
+ =?us-ascii?Q?XqnQ4EKBSCN2vC9NaIg=3D?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:HrJ6l/h1tTqbDyKg4onXfrnJJwchzHo0GwLyYaOuPcN+95UEPvx
- H//TjXl93J5dgQPKfXEOuIrq6lQYEFS9WDdfD7KOJe05ZMVdJitEoXe6FEH3uq9+ZPah/qR
- c8PM9bTVj1c0esHUE5l59oEalGpSNDZD/wtn0b2tVpZ+Yb0hJmKb1PSEMnTNHiUIIZrojh/
- 6eg/6uDFUezbpgOzEKJog==
-UI-OutboundReport: notjunk:1;M01:P0:eiuv45zEvC4=;leaZBeMfiSHbzq463c235qqEfxY
- iVWOH3P64xcg4ZD75FXAjxHo83g0i7g889ScWKCDZG8UqpMc+qZhj/J1v8O6zbDdW9t1Hrxzb
- OnuaMKJbSmPbJAQL2h9QHEzjoQVkGR2f1/kQD+HD9pkW4iA1SGUGuUh8oJeRWrWBNDA7zLofj
- 2aVb5JAqii3IMvFIZ7Br3eCbTgXWmdyycOtRZMvdw9AFcGjlfEL50a9hjAjCXUe/spDytI5s6
- UpZl/x7S7HGIL+UK4RdyeRKmJ4fpljQ+j1gbEme7Lry7kRFw8mI3M5rO194nte79FnJn0P6v9
- /IgirrcrRnIsiMgekGmgeQLqvaDyZZTkPceXQzLhdy6a80PrguIVMDXn1mS3GCKFpVqT139ZY
- 7/7ms01uS3hfBvXvmVk8oZqCrWG01prc3Qsef9s7Qb1i+FRhHTTGW7pJqd7lbvK1QCnLwmPqp
- lokNYY1y0aSXdYPD5TFl4lMilRCKSZB9LgnL7E+beS2BCg2TIFdW/UEn7P476bKilhtD6ZRei
- SMjzs+haBxXX3jj8kNFH4oAkJXcBDhwTIDU2sfw+XMANz9VJTr8xW5d5pB/bmP2Ag6Uj8GcEc
- FVszBU8oC/BkmX2y4WVG6Fpq88M2Wl5KqsP0F9uCFF3Kw/S7IeOWvJOXW4/T8TafxEvWNEGBl
- HuhZzoNximnYslXuI3WpkilUMlG9IN5eG+SCl9K+ghBauLl2T2crSEvTHxKUvBEcU0hg12IkA
- HMEQZXZfMmO1y4/tPHM0ELtFpgd0tlVMSPEvh+b8/hl2oVJSnb7AZTFzzPigA0MEwUPd8U6Hk
- J3Tzthh1NqqgrGRd/AMR8s4oCkf+QkSx8Ay7IIeU4U2Ip1ii/nMzweQ/X3obsnJ32oiZfBL7J
- GiAMRFCilyAWG/1OT01RKPGBKpti9e5mLc6FK6ak1Y70/VZ2vfdHEuSW45svSKBmYNmCrHBuH
- e3FdKdgGu88vmI5IqDzxfbH7bSMNNzXolMxGa101w/SVVmFePm62w48D3IR0z8zAeJ5oMcsAd
- Ne/s+fLzCMTisthl2h9WnDy3xiC8ULta2BVmO+QzfFVEO8TZ0aY1RObZmjr7VB/oazuZoE8Xu
- EAfFDoMx1viSri5ikDIHcomoxoK+4a
+MIME-Version: 1.0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB8697.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91d346e8-357f-41c3-9e5b-08dd2a520b9a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jan 2025 10:50:02.6273 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: xOz8LzgptKmR83tZIR90h2HC1E5lXxcxr4rcNyxh0p3tZKv0b7tYjn5hv+4p9IyHxG1EyR8WJiNatefMB32jpA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR12MB8750
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,466 +157,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/1/25 04:33, Mikhail Kshevetskiy wrote:
-> This patch adds downloading/uploading of data with netcat utility.
-> Client/server modes are supported both.
->
-> This patch is also an example of using new tcp api for legacy stack.
->
-> How to test:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->    netcat-openbsd=3D1.219-1 from debian were used for a tests
->
->    a) Load data from remote host.
->         * U-Boot listen on tcp port 3456
->         * PC connects
->
->       u-boot: netcat load ${loadaddr} 3456
->       PC:     netcat -q1 ${UBOOT_IP} 3456 < image.itb
->
->    b) Load data from remote host.
->         * PC listen on tcp port 3456
->         * U-Boot connects
->
->       PC:     netcat -q1 -l -p 3456 < image.itb
->       u-boot: netcat load ${loadaddr} ${PC_IP}:3456
->
->    c) Save data to remote host
->         * U-Boot listen on tcp port 3456
->         * PC connects
->
->       u-boot: netcat save ${loadaddr} ${data_size_in_hex} 3456
->       PC:     netcat -w1 ${UBOOT_IP} 3456 >image.itb
->
->    d) Save data to remote host
->         * PC listen on tcp port 3456
->         * U-Boot connects
->
->       PC:     netcat -w1 -l -p 3456 >image.itb
->       u-boot: netcat save ${loadaddr} ${data_size_in_hex} ${PC_IP}:3456
->
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->   cmd/Kconfig          |  10 +++
->   cmd/net.c            |  35 ++++++--
->   include/net-legacy.h |   2 +-
->   include/net/netcat.h |  20 +++++
->   net/Makefile         |   1 +
->   net/net.c            |   9 ++
->   net/netcat.c         | 194 +++++++++++++++++++++++++++++++++++++++++++
->   7 files changed, 265 insertions(+), 6 deletions(-)
->   create mode 100644 include/net/netcat.h
->   create mode 100644 net/netcat.c
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 93efeaec6f4..e37e50a18b5 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2091,6 +2091,16 @@ config CMD_DNS
->   	help
->   	  Lookup the IP of a hostname
->
-> +config CMD_NETCAT
-> +	bool "netcat"
-> +	select PROT_TCP
+Hi Tom,
+These defects won't appear when SPI_STACKED_PARALLEL config is enabled. We =
+can mark these as false positives.
 
-Thank you for your patch which looks like a useful addition to U-Boot.
-
-Here you make the netcat command depend on CMD_NET. This dependency
-seems unnecessary at least for the lwIP case.
-
-> +	help
-> +	  netcat is a simple command to load/store kernel, or other files,
-> +	  using well-known netcat (nc) utility. Unlike classic netcat utility
-> +	  this command supports TCP-based data transfer only, thus no data
-> +	  will be lost or reordered. Any netcat implementation should work,
-> +	  but openbsd one was tested only.
-> +
->   config CMD_MII
->   	bool "mii"
->   	imply CMD_MDIO
-> diff --git a/cmd/net.c b/cmd/net.c
-> index 79525f73a51..d7a5025f940 100644
-> --- a/cmd/net.c
-> +++ b/cmd/net.c
-> @@ -208,6 +208,29 @@ U_BOOT_CMD(
->   );
->   #endif
+Thanks
+Venkatesh
+> -----Original Message-----
+> From: Tom Rini <trini@konsulko.com>
+> Sent: Tuesday, December 31, 2024 7:25 PM
+> To: u-boot@lists.denx.de; Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com=
 >
-> +#if defined(CONFIG_CMD_NETCAT)
-> +static int do_netcat_load(struct cmd_tbl *cmdtp, int flag, int argc,
-> +			  char *const argv[])
-> +{
-> +	return netboot_common(NETCAT_LOAD, cmdtp, argc, argv);
-> +}
-> +
-> +static int do_netcat_save(struct cmd_tbl *cmdtp, int flag, int argc,
-> +			  char *const argv[])
-> +{
-> +	return netboot_common(NETCAT_SAVE, cmdtp, argc, argv);
-> +}
-> +
-> +U_BOOT_LONGHELP(netcat,
-> +	"load [loadAddress] [[hostIPaddr:]port]\n"
-> +	"save Address Size [[hostIPaddr:]port]");
-> +
-> +U_BOOT_CMD_WITH_SUBCMDS(netcat,
-> +	"load/store data over plain TCP via netcat utility", netcat_help_text,
-> +	U_BOOT_SUBCMD_MKENT(load, 3, 0, do_netcat_load),
-> +	U_BOOT_SUBCMD_MKENT(save, 4, 0, do_netcat_save));
-> +#endif
-> +
->   static void netboot_update_env(void)
->   {
->   	char tmp[46];
-> @@ -325,16 +348,17 @@ static int parse_args(enum proto_t proto, int argc=
-, char *const argv[])
->
->   	switch (argc) {
->   	case 1:
-> -		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto =3D=3D TFTPPUT)
-> +		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto =3D=3D TFTPPUT) ||
-> +		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto =3D=3D NETCAT_SAVE))
->   			return 1;
-> -
->   		/* refresh bootfile name from env */
->   		copy_filename(net_boot_file_name, env_get("bootfile"),
->   			      sizeof(net_boot_file_name));
->   		break;
->
->   	case 2:
-> -		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto =3D=3D TFTPPUT)
-> +		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto =3D=3D TFTPPUT) ||
-> +		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto =3D=3D NETCAT_SAVE))
->   			return 1;
->   		/*
->   		 * Only one arg - accept two forms:
-> @@ -356,7 +380,8 @@ static int parse_args(enum proto_t proto, int argc, =
-char *const argv[])
->   		break;
->
->   	case 3:
-> -		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto =3D=3D TFTPPUT) {
-> +		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto =3D=3D TFTPPUT) ||
-> +		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto =3D=3D NETCAT_SAVE)) {
->   			if (parse_addr_size(argv))
->   				return 1;
->   		} else {
-> @@ -367,7 +392,7 @@ static int parse_args(enum proto_t proto, int argc, =
-char *const argv[])
->   		}
->   		break;
->
-> -#ifdef CONFIG_CMD_TFTPPUT
-> +#if defined(CONFIG_CMD_TFTPPUT) || defined(CONFIG_CMD_NETCAT)
->   	case 4:
->   		if (parse_addr_size(argv))
->   			return 1;
-> diff --git a/include/net-legacy.h b/include/net-legacy.h
-> index bc0f0cde9fe..84a4beb9ec1 100644
-> --- a/include/net-legacy.h
-> +++ b/include/net-legacy.h
-> @@ -305,7 +305,7 @@ extern int		net_restart_wrap;	/* Tried all network d=
-evices */
->   enum proto_t {
->   	BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
->   	NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TC=
-P,
-> -	WOL, UDP, NCSI, WGET, RS
-> +	WOL, UDP, NCSI, WGET, NETCAT_LOAD, NETCAT_SAVE, RS
->   };
->
->   /* Indicates whether the file name was specified on the command line *=
-/
-> diff --git a/include/net/netcat.h b/include/net/netcat.h
-> new file mode 100644
-> index 00000000000..d8e09aaaa55
-> --- /dev/null
-> +++ b/include/net/netcat.h
-> @@ -0,0 +1,20 @@
-> +/* SPDX-License-Identifier: BSD-2-Clause
-
-According to doc/develop/sending_patches.rst all new code should use the
-GPL-2.0-or-later license.
-
-> + *
-> + * netcat include file
-> + * Copyright (C) 2024 IOPSYS Software Solutions AB
-> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> + */
-> +#ifndef __NET_NETCAT_TCP_H__
-> +#define __NET_NETCAT_TCP_H__
-> +
-> +/**
-> + * netcat_load_start() - begin netcat in loading mode
-> + */
-> +void netcat_load_start(void);
-> +
-> +/**
-> + * netcat_save_start() - begin netcat in data saving mode
-> + */
-> +void netcat_save_start(void);
-> +
-> +#endif /* __NET_NETCAT_TCP_H__ */
-> diff --git a/net/Makefile b/net/Makefile
-> index 7c917b318c0..bc5f2f123be 100644
-> --- a/net/Makefile
-> +++ b/net/Makefile
-> @@ -30,6 +30,7 @@ obj-$(CONFIG_CMD_WOL)  +=3D wol.o
->   obj-$(CONFIG_PROT_UDP) +=3D udp.o
->   obj-$(CONFIG_PROT_TCP) +=3D tcp.o
->   obj-$(CONFIG_WGET) +=3D wget.o
-> +obj-$(CONFIG_CMD_NETCAT) +=3D netcat.o
->
->   # Disable this warning as it is triggered by:
->   # sprintf(buf, index ? "foo%d" : "foo", index)
-> diff --git a/net/net.c b/net/net.c
-> index 1828f1cca36..595bffdc532 100644
-> --- a/net/net.c
-> +++ b/net/net.c
-> @@ -103,6 +103,7 @@
->   #include <net/fastboot_udp.h>
->   #include <net/fastboot_tcp.h>
->   #include <net/ncsi.h>
-> +#include <net/netcat.h>
->   #if defined(CONFIG_CMD_PCAP)
->   #include <net/pcap.h>
->   #endif
-> @@ -572,6 +573,14 @@ restart:
->   			wget_start();
->   			break;
->   #endif
-> +#if defined(CONFIG_CMD_NETCAT)
-> +		case NETCAT_LOAD:
-> +			netcat_load_start();
-> +			break;
-> +		case NETCAT_SAVE:
-> +			netcat_save_start();
-> +			break;
-> +#endif
->   #if defined(CONFIG_CMD_CDP)
->   		case CDP:
->   			cdp_start();
-> diff --git a/net/netcat.c b/net/netcat.c
-> new file mode 100644
-> index 00000000000..47dbebe5ae2
-> --- /dev/null
-> +++ b/net/netcat.c
-> @@ -0,0 +1,194 @@
-> +// SPDX-License-Identifier: GPL-2.0
-
-According to doc/develop/sending_patches.rst all new code should use the
-GPL-2.0-or-later license.
-
-> +/*
-> + * netcat support driver
-> + * Copyright (C) 2024 IOPSYS Software Solutions AB
-> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> + */
-> +
-> +#include <command.h>
-> +#include <display_options.h>
-> +#include <env.h>
-> +#include <image.h>
-> +#include <mapmem.h>
-> +#include <net.h>
-> +#include <net/tcp.h>
-> +#include <net/netcat.h>
-> +
-> +#define HASHES_PER_LINE		65
-> +#define MARKER_STEP		10
-> +
-> +static struct in_addr		server_ip;
-> +static u16			server_port;
-> +static u16			local_port;
-> +static int			listen;
-> +static int			reading;
-> +static int			marker, marks_in_line;
-> +static enum net_loop_state	netcat_loop_state;
-> +
-
-Please, describe all functions in Sphinx style.  Cf.
-https://docs.kernel.org/doc-guide/kernel-doc.html#function-documentation
-
-> +static void show_block_marker(int packets)
-> +{
-> +	for (; marker + MARKER_STEP <=3D packets; marker +=3D MARKER_STEP) {
-> +		marks_in_line++;
-> +		putc('#');
-> +		if (marks_in_line =3D=3D HASHES_PER_LINE) {
-> +			marks_in_line =3D 0;
-> +			puts("\n");
-> +		}
-> +	}
-> +}
-> +
-> +static void tcp_stream_on_closed(struct tcp_stream *tcp)
-> +{
-> +	if (tcp->status !=3D TCP_ERR_OK)
-> +		netcat_loop_state =3D NETLOOP_FAIL;
-> +
-> +	/*
-> +	 * The status line will be shown after the download/upload
-> +	 * progress (see show_block_marker() function). This progress
-> +	 * generally have no final "\n", so jump to new line before
-> +	 * output the status
-> +	 */
-> +	if (netcat_loop_state !=3D NETLOOP_SUCCESS) {
-> +		net_boot_file_size =3D 0;
-> +		printf("\nnetcat: Transfer Fail, TCP status - %d\n", tcp->status);
-> +	} else {
-> +		env_set_hex("filesize", net_boot_file_size);
-> +		printf("\nPackets %s %d, Transfer Successful\n",
-> +		       reading ? "received" : "transmitted",
-> +		       reading ? tcp->rx_packets : tcp->tx_packets);
-> +	}
-> +	net_set_state(netcat_loop_state);
-> +}
-> +
-> +static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx=
-_bytes)
-> +{
-> +	net_boot_file_size =3D rx_bytes;
-> +	show_block_marker(tcp->rx_packets);
-> +}
-> +
-> +static void tcp_stream_on_snd_una_update(struct tcp_stream *tcp, u32 tx=
-_bytes)
-> +{
-> +	show_block_marker(tcp->tx_packets);
-> +	if (tx_bytes =3D=3D image_save_size)
-> +		tcp_stream_close(tcp);
-> +}
-> +
-> +static void tcp_stream_on_established(struct tcp_stream *tcp)
-> +{
-> +	netcat_loop_state =3D NETLOOP_SUCCESS;
-> +}
-> +
-> +static int tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void *buf=
-, int len)
-> +{
-> +	void *ptr;
-> +
-> +	ptr =3D map_sysmem(image_load_addr + rx_offs, len);
-> +	memcpy(ptr, buf, len);
-> +	unmap_sysmem(ptr);
-> +
-> +	return len;
-> +}
-> +
-> +static int tcp_stream_tx(struct tcp_stream *tcp, u32 tx_offs, void *buf=
-, int maxlen)
-> +{
-> +	void *ptr;
-> +
-> +	if (tx_offs + maxlen > image_save_size)
-> +		maxlen =3D image_save_size - tx_offs;
-> +	if (!maxlen)
-> +		return 0;
-> +
-> +	ptr =3D map_sysmem(image_save_addr + tx_offs, maxlen);
-> +	memcpy(buf, ptr, maxlen);
-> +	unmap_sysmem(ptr);
-> +
-> +	return maxlen;
-> +}
-> +
-> +/*
-> + * This function will be called on new connections (incoming or outgoin=
-g)
-> + * It MUST:
-> + *   -- setup required tcp_stream callbacks (if connection will be acce=
-pted)
-> + *   -- return a connection verdict:
-> + *        0: discard connection
-> + *        1: accept connection
-
-Please, use a Sphinx style function description.
-
-Best regards
-
-Heinrich
-
-> + */
-> +static int tcp_stream_on_create(struct tcp_stream *tcp)
-> +{
-> +	if (listen) {
-> +		/*
-> +		 * We are listening for incoming connections.
-> +		 * Accept connections to netcat listen port only.
-> +		 */
-> +		if (tcp->lport !=3D local_port)
-> +			return 0;
-> +	} else {
-> +		/*
-> +		 * We are connecting to remote host.
-> +		 * Check remote IP:port to make sure that this is our connection
-> +		 */
-> +		if (tcp->rhost.s_addr !=3D server_ip.s_addr ||
-> +		    tcp->rport !=3D server_port)
-> +			return 0;
-> +	}
-> +
-> +	netcat_loop_state =3D NETLOOP_FAIL;
-> +	net_boot_file_size =3D 0;
-> +	marker =3D 0;
-> +	marks_in_line =3D 0;
-> +
-> +	tcp->on_closed =3D tcp_stream_on_closed;
-> +	tcp->on_established =3D tcp_stream_on_established;
-> +	if (reading) {
-> +		tcp->on_rcv_nxt_update =3D tcp_stream_on_rcv_nxt_update;
-> +		tcp->rx =3D tcp_stream_rx;
-> +	} else {
-> +		tcp->on_snd_una_update =3D tcp_stream_on_snd_una_update;
-> +		tcp->tx =3D tcp_stream_tx;
-> +	}
-> +
-> +	return 1;
-> +}
-> +
-> +static void netcat_start(void)
-> +{
-> +	struct tcp_stream *tcp;
-> +
-> +	memset(net_server_ethaddr, 0, 6);
-> +	tcp_stream_set_on_create_handler(tcp_stream_on_create);
-> +
-> +	if (!strchr(net_boot_file_name, ':')) {
-> +		listen =3D 1;
-> +		printf("Listening on port %s...\n", net_boot_file_name);
-> +
-> +		local_port =3D dectoul(net_boot_file_name, NULL);
-> +	} else {
-> +		listen =3D 0;
-> +		printf("Connecting to %s...\n", net_boot_file_name);
-> +
-> +		server_ip =3D string_to_ip(net_boot_file_name);
-> +		server_port =3D dectoul(strchr(net_boot_file_name, ':') + 1, NULL);
-> +
-> +		tcp =3D tcp_stream_connect(server_ip, server_port);
-> +		if (!tcp) {
-> +			printf("No free tcp streams\n");
-> +			net_set_state(NETLOOP_FAIL);
-> +			return;
-> +		}
-> +		tcp_stream_put(tcp);
-> +	}
-> +}
-> +
-> +void netcat_load_start(void)
-> +{
-> +	reading =3D 1;
-> +
-> +	return netcat_start();
-> +}
-> +
-> +void netcat_save_start(void)
-> +{
-> +	reading =3D 0;
-> +
-> +	return netcat_start();
-> +}
-
+> Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+>=20
+> Hey all, here's the latest report.
+>=20
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Mon, Dec 30, 2024, 10:44 PM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
+>=20
+>=20
+> Hi,
+>=20
+> Please find the latest report on new defect(s) introduced to Das U-Boot f=
+ound with
+> Coverity Scan.
+>=20
+> 2 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+> 1 defect(s), reported by Coverity Scan earlier, were marked fixed in the =
+recent build
+> analyzed by Coverity Scan.
+>=20
+> New defect(s) Reported-by: Coverity Scan Showing 2 of 2 defect(s)
+>=20
+>=20
+> ** CID 528528:  Control flow issues  (DEADCODE)
+> /drivers/mtd/spi/spi-nor-core.c: 1644 in spi_nor_read()
+>=20
+>=20
+> ___________________________________________________________________
+> _____________________________________
+> *** CID 528528:  Control flow issues  (DEADCODE)
+> /drivers/mtd/spi/spi-nor-core.c: 1644 in spi_nor_read()
+> 1638                            read_len =3D len;
+> 1639                    else
+> 1640                            read_len =3D rem_bank_len;
+> 1641     #endif
+> 1642
+> 1643                    if (read_len =3D=3D 0)
+> >>>     CID 528528:  Control flow issues  (DEADCODE)
+> >>>     Execution cannot reach this statement: "return -5;".
+> 1644                            return -EIO;
+> 1645
+> 1646                    ret =3D nor->read(nor, offset, read_len, buf);
+> 1647                    if (ret =3D=3D 0) {
+> 1648                            /* We shouldn't see 0-length reads */
+> 1649                            ret =3D -EIO;
+>=20
+> ** CID 528527:  Code maintainability issues  (UNUSED_VALUE)
+> /drivers/mtd/spi/spi-nor-core.c: 1613 in spi_nor_read()
+>=20
+>=20
+> ___________________________________________________________________
+> _____________________________________
+> *** CID 528527:  Code maintainability issues  (UNUSED_VALUE)
+> /drivers/mtd/spi/spi-nor-core.c: 1613 in spi_nor_read()
+> 1607                            }
+> 1608                            rem_bank_len =3D SZ_16M * (bank + 1);
+> 1609                            if
+> (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+> 1610                                    if (nor->flags &
+> SNOR_F_HAS_PARALLEL)
+> 1611                                            rem_bank_len *=3D 2;
+> 1612                            }
+> >>>     CID 528527:  Code maintainability issues  (UNUSED_VALUE)
+> >>>     Assigning value from "rem_bank_len - from" to "rem_bank_len"
+> >>> here,
+> but that stored value is overwritten before it can be used.
+> 1613                            rem_bank_len -=3D from;
+> 1614                    }
+> 1615
+> 1616                    if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+> 1617                            if (nor->flags & SNOR_F_HAS_STACKED) {
+> 1618                                    stack_shift =3D 1;
+>=20
+>=20
+> ----- End forwarded message -----
+>=20
+> --
+> Tom
