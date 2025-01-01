@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD1CFE7718F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:14:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DD6AE7718F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 22:14:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01F6E80488;
-	Wed,  1 Jan 2025 23:13:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6665580431;
+	Wed,  1 Jan 2025 23:13:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WGkbN3/8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ITQR3cyX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D660180317; Wed,  1 Jan 2025 23:13:08 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 69FDB80600; Wed,  1 Jan 2025 23:13:11 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE45980606
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:13:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E13B803F6
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 23:13:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2162c0f6a39so154416135ad.0
- for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:13:04 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2162c0f6a39so154416555ad.0
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 14:13:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735769583; x=1736374383; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1735769586; x=1736374386; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LEYX+eAc1f1ic6XHOW0lqC2+yCfKmuif6T7etbgdE48=;
- b=WGkbN3/8jdLM6HI2HXQdvYzX+5V6J7cM3VaLdKNaRVFrwWEulBd0ZsICBXx7B59NK1
- Pe+lxnSN4eY0mqXBzoeP8HhZEfH0q2yfilwxDFtZvMn/1ciHGRcFqGAz4CM2heE3J4Hl
- h/pPRth/rx+/2PPIUEj4ARtgBLLix9tdqhZMU=
+ bh=AS81SLHzgXToSdhsJG0npUuvatc5Zm5nr85nFCNKw4g=;
+ b=ITQR3cyXKDhGTlFE3jMDPkQfPjATS/HQ64D+tesFTJ4OdM8zKHjqwNSskTnOpnCCia
+ e5bgHgEB3NIZSTHO1rvXw9P2QcYYUEN1aahnQKjNwBGR2EO+55Vr9lwEsLMicZB8cRjC
+ TI2I6PEPWOVrVaDyxOnqS/8YfmfMfV3fFRwaQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735769583; x=1736374383;
+ d=1e100.net; s=20230601; t=1735769586; x=1736374386;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LEYX+eAc1f1ic6XHOW0lqC2+yCfKmuif6T7etbgdE48=;
- b=TUPAA2FeBOm3kHtZSXiAB1WU3wC7ggILVAyvGFtbGKE7LMf8mpoObuLYt+6LVoA16I
- k7HWM1Apo/hqA8VL8pdb9q5jb/yPuEBWv6h5W/85kOnXAw8eEdoOtbg2jb8fdhItTOYg
- g0+/Y9oS/hsRY0iTAgYtA4DoFboeojeyqk/DcPRu0+cfZb8yUfHLUDY6GjLyG6DxErGx
- i4NOlvyWAQhF0HKAMFIxCTTrHsv3V0wXITeFPY5YY99cMzqnWfGkuPCxtas0ZlF0J3Sq
- kkjEMaH71wCWZgtQUgZPqkBksh4E8ZhTmaAv2G8R4HCbfxV8t13hgs0+CPdiM6NKY0qV
- ZgRw==
-X-Gm-Message-State: AOJu0YxpbRvcDQ2Sx7AaFkhmo/v3/Ap7XhedxAnWwQ2asmttBx+L2ySy
- ympr7u9hYcEAH/Zgnv6kO2s2+WkpWz33CxcdUGpzq8SHYHCnA0lJ0fRkXOTRdMad9RsydkSsr3g
+ bh=AS81SLHzgXToSdhsJG0npUuvatc5Zm5nr85nFCNKw4g=;
+ b=ivz/Hc5I1+F7xtqtmyBYKphCy1jlX5aKW0cI9F1bV9cw1pvEroDMWyD3hWaaGglX0G
+ /xMB0YoG1QIgNtBS/8bkc+Pa8HCfm+NsjnWhUnLvqYB/X84D7KrY9gVFdlAb2w6fIdzy
+ 0o827oNANlTTyYyisqztNeoBZraV06zrhbXb+56gxPMEYChjHBYm9ZO9lzdKIqfMj3nY
+ rsHE8DY2WOW+ZX3wAdH4STb5vz/28/i/+3Rxm04iySnMePpbGxi9bLtCNjrFNNb3IkSP
+ +kHJnw5BRm5m9lcOmhOahmr/dA2EjdalcE3yYZKaagZD5pRhxarb9mjtHwZ0ZMU3KRbJ
+ OKIg==
+X-Gm-Message-State: AOJu0YxEg/0xZBhNJj3PjcPMxfJDfddvhMNlOjXokdvaGwNcZID5pqMu
+ zxlKVjWGpbEUGEEGFwrfoAJJW86QKSz7DeBoau3yG61V1oxhKDygnGRaJn+qrk1dd7chA82ZvPE
  =
-X-Gm-Gg: ASbGncu2ukMnU3M4cr4iRoQUVpdt+LRaunu0tUb3Q+4p1PO7s38mHwYaJW+fv0W92MT
- xPEEPOC9klaky3eQBPwU1rqYz1a84gqXrskjeIo3Uzj1DED7uRFmZY8kUas0gTLqs+IJaX1tijB
- IluAuuYE0XcL6RprB4MRibkX8UFTlpzc6ZvDwPmf+NB7kKV3HMeoH0uOfxmsY237xSNWNNqzJB4
- cuIIyfvcU3cAA2r8uUqtZ8EmZc/gGKGMU3NV9SVJmPwNCkxwubdULw=
-X-Google-Smtp-Source: AGHT+IFHEGXkcZT1qswFrA54YbGY2OGqX1WQA1pzeV5mnrcIHhLDQyb6Y0XJV4JBVOaQe/UPYkC8og==
-X-Received: by 2002:a05:6a00:6103:b0:72a:b292:1e96 with SMTP id
- d2e1a72fcca58-72ab2921ec7mr72647522b3a.12.1735769582966; 
- Wed, 01 Jan 2025 14:13:02 -0800 (PST)
+X-Gm-Gg: ASbGncvhiVyl3WdhQ2nQmDmjUOXoOOzZfeabYazpldbwO6U8ArSZwBuEb9lLQNy7F3d
+ /VK/NZge5OOwwVxpuVWk57H/3HlKolyJiBD3CA94Qo41dM+qupSuAqFAk/ShldDqASrk35yuo83
+ 7T5YC/67+gccWwNZhrJf+ZXMVmwJ2F5HmU4azKpBB82J+voJj2xxMBjy0ieksEoikW4zF6K2dN2
+ FohojQk5cQQqrwX+yPMXyv0d737CAZVUUIZtAPfoA6NoOLJ3zuWP5s=
+X-Google-Smtp-Source: AGHT+IGd9xV4g4yQoP37Yw8Bu0B35WJwWjJaxRz5O3U8NAy7dt1t14pMNZnkncfQRQZYo79u7orexw==
+X-Received: by 2002:a05:6a20:1593:b0:1e1:ad90:dda6 with SMTP id
+ adf61e73a8af0-1e5e1fa249amr66917959637.20.1735769586661; 
+ Wed, 01 Jan 2025 14:13:06 -0800 (PST)
 Received: from chromium.org ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.13.00
+ d2e1a72fcca58-72ad3393d5fsm18873947b3a.154.2025.01.01.14.13.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2025 14:13:02 -0800 (PST)
+ Wed, 01 Jan 2025 14:13:05 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 24/67] upl: Update add_upl_memres() to use write_mem_node()
-Date: Thu,  2 Jan 2025 11:09:10 +1300
-Message-ID: <20250101221003.1944600-25-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 25/67] upl: Support writing a UPL only for testing
+Date: Thu,  2 Jan 2025 11:09:11 +1300
+Message-ID: <20250101221003.1944600-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250101221003.1944600-1-sjg@chromium.org>
 References: <20250101221003.1944600-1-sjg@chromium.org>
@@ -93,49 +93,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use this new helper function to simplify add_upl_memmap()
+The existing code works only on sandbox, generating test data rather
+than a real payload. Add a check for this.
+
+Eventually a real writer will be in place.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/upl_write.c | 20 ++++----------------
- 1 file changed, 4 insertions(+), 16 deletions(-)
+ cmd/upl.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/boot/upl_write.c b/boot/upl_write.c
-index 3f38d533c4a..25ec6992573 100644
---- a/boot/upl_write.c
-+++ b/boot/upl_write.c
-@@ -425,26 +425,14 @@ static int add_upl_memres(const struct upl *upl, ofnode root,
- 	for (i = 0; i < upl->memres.count; i++) {
- 		const struct upl_memres *memres = alist_get(&upl->memres, i,
- 							struct upl_memres);
--		char buf[memres->region.count * sizeof(64) * 2];
--		const struct memregion *first;
--		char name[26];
--		int ret, len;
- 		ofnode node;
+diff --git a/cmd/upl.c b/cmd/upl.c
+index c9a823bbc06..d8d46cdf34f 100644
+--- a/cmd/upl.c
++++ b/cmd/upl.c
+@@ -56,6 +56,11 @@ static int do_upl_write(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	ulong addr;
+ 	int ret;
  
--		if (!memres->region.count) {
--			log_debug("Memory %d has no regions\n", i);
--			return log_msg_ret("reg", -EINVAL);
--		}
--		first = alist_get(&memres->region, 0, struct memregion);
--		sprintf(name, "%s@0x%lx", memres->name, first->base);
--		ret = ofnode_add_subnode(mem_node, name, &node);
-+		ret = write_mem_node(upl, mem_node, &memres->region,
-+				     memres->name, &node);
- 		if (ret)
--			return log_msg_ret("memres", ret);
-+			return log_msg_ret("umr", ret);
++	if (!IS_ENABLED(CONFIG_UNIT_TEST)) {
++		printf("Not yet implemented\n");
++		return CMD_RET_FAILURE;
++	}
++
+ 	upl_get_test_data(&uts, upl);
  
--		len = buffer_addr_size(upl, buf, sizeof(buf),
--				       memres->region.count, &memres->region);
--		ret = ofnode_write_prop(node, UPLP_REG, buf, len, true);
--		if (!ret && memres->no_map)
-+		if (memres->no_map)
- 			ret = ofnode_write_bool(node, UPLP_NO_MAP,
- 						memres->no_map);
- 		if (ret)
+ 	log_debug("Writing UPL\n");
 -- 
 2.43.0
 
