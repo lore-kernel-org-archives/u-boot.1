@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01639E7718B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 20:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33CF0E7718B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 20:42:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5D8A803AC;
-	Wed,  1 Jan 2025 21:41:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1DA4480384;
+	Wed,  1 Jan 2025 21:41:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z99AsNno";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pii+zioa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81A4A800D7; Wed,  1 Jan 2025 21:41:40 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 10888803CE; Wed,  1 Jan 2025 21:41:42 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A8458031D
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 21:41:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF33380379
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 21:41:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6dcc42b5e30so33084496d6.1
- for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 12:41:38 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6d8fa32d3d6so37918346d6.2
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 12:41:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735764097; x=1736368897; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1735764098; x=1736368898; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JtslV1tm24DfcEbxZD33qc8EoYDD5pEDtDiKD455a80=;
- b=Z99AsNnoIfon7mV8gTj+YbTr1F14mBC9+f7lqxY9+sGJWFMy9zGg5QT1xEUDEyCOZ5
- HiC1Jp2qR94iVwikqRmnECFD7ovCdAi9cHXoIsivJ1tzdRunz4C27DXKw+053JQz6TOz
- AyODwnhUK7errXhNji848RN0quoH65tpGvW4I=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P1fBvhtlu2aTFKXSVD17zm7OUqN09CQrz8hxNyilIRU=;
+ b=pii+zioaHtPwEp5srlbzNn73J4/+Oj+u24WqGAJswUK4sgth9gYZno5ovjwAzwEr5q
+ k4UgRKtrRk+abABxxhDZ7wropihKncwodrbfurNIceVsIC8M5WeYz7MgMcsXfQfSdzrY
+ MERu5YlX+qLloBjHA+YhNMsjg4gr9pcEeBwQ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735764097; x=1736368897;
+ d=1e100.net; s=20230601; t=1735764098; x=1736368898;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JtslV1tm24DfcEbxZD33qc8EoYDD5pEDtDiKD455a80=;
- b=rMjKJRAJgZahz+3RfIJxX1qOxOYr123SCId2WT3dqQ2KvozCPLBpqVc5ARDBXAh22e
- 8kz+p70T4gt2QxuAUGGWpLNNt6FajnMAfYEZQKmUtQ0PecX4mwyNMvHaZ4VLqe0bGbYL
- s6TDw3p0vrNdZfSVOybbyhXQt+cySxYm7B3v5uf1/rwRoCzARtVzTqbVcAQbrLP+0lM+
- QlnPWmKwE38RRhTSP26q+/65qRcqvW+BJ+vPp+LMqKTT7Cx5dUcmrGSXLZGbJYgtd0/j
- 0lOdEOqlMtyKvDYOLAm1LVJNb3dzTHANwRc6q/9zahInI8PcZhKgE2QAvDFvM0/Y6iii
- X0VA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgXmtgkCL3dUHB4LmZafv1wXf0YlzecNfcBMxcKilMLLq6UKMnAw8STDlyIn/YGGgCA4qgi6o=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPwdvP2TXm/SGccQw3ElqjbVbPfKNh490schDczOJqkpW+6HOk
- slxl1o3p+CXKdCgH5uLMjqkMdHd68euvNQklrS+zwXUOLrQkelHQkmQZeXm3674=
-X-Gm-Gg: ASbGnctXhhadTWus82DaqYBrpNXGqNeiJLl50fS+k+F7pg9e3inN6KEqwKhJD8tw/pg
- Wz7HZUtUG25jnKXTJGVrGHQxbTSA0og07y1EtURqsjV3VD/ql+7guJMCnNp/A4yIh+GRzFnpj3d
- +r2oSyIW1OTue0rl4kPtA2nGkPVKrOEkSSIk4n4rDOnR6LveMLi3WEmeVpSD9C7F35WvknRa+uP
- BpuD2aS4+q8Ekmh6kN0f0xK5v8hBnscemXIM9w5z8vmTxy7hfk5pqhx
-X-Google-Smtp-Source: AGHT+IHN59OcFFvc28ijQFbd3fuUZis6ppW9Gw/IKa8gZF89tdudvnDU4f7T4b8vogruYUnVBg4XRw==
-X-Received: by 2002:a05:6214:3001:b0:6d8:8e16:7c29 with SMTP id
- 6a1803df08f44-6dd2334ae65mr766859576d6.14.1735764097283; 
- Wed, 01 Jan 2025 12:41:37 -0800 (PST)
+ bh=P1fBvhtlu2aTFKXSVD17zm7OUqN09CQrz8hxNyilIRU=;
+ b=FRJGYrUkpTGtd2Z5k1sYuKf0vjOXEREjvj0jJ4rUW29sKCUIQPDPctwwljvBCkKmgq
+ L8U9aV9yppbHYfztbrMe3f47sA9smFY7Q/x771thNpLjZRfW82chZXSnkW3JNNIpNKM3
+ lGiclVzmaarnHm6NgemKWpnhN4Z+tqrJoQE/YczTlIIknHf+3eec6j1LDXYfJ69p4xYP
+ bmDtaQe0q7dryKaLWwZMys/8PIEFhiytN7KFpe5LFflgLbYaQFIDmrNE7A7g5Ym6W+V3
+ ieeGb9ToCCT7NAdaREZL2NxkuuMkaCEdps/YcVbSx/QHv31QJ9jP9kgB6c5O+oaQidww
+ F1CQ==
+X-Gm-Message-State: AOJu0YxMwSq2zSTIQhBPVvLMz5gWm8UGDEDvyrAGYqyVE6wKira9komZ
+ S2Nr0ae5dN9xBrmqOAgckpHBL5aj4yHkguISvYPp7BLlxVT+A2Ka7lmxZtW+pydR3x52X4PymaD
+ AqKg=
+X-Gm-Gg: ASbGncu5rwPZb7ttLurw64gjlimIKZ82Bxw7aVMEApQfaAYlsA/qFWaA4equOWmk4NI
+ lG3s2XG873ivmT/lXcDKE9B3Oqll2QUR/ukGFEZEZibviaRC53061DN9hjwrOpY/U/1jpnZEGOa
+ HTefS/BRAbKF5PPBGIW9a5tAAlhu2/HgC9gnaYLaLuAoAfIOLAAw+WFoq6ggYFn12lIJb+Qofxw
+ VLrE87z4YUMc+Bz9JSbjIxKpakpamdhp72L4plaVINO88npePy9VZUQ
+X-Google-Smtp-Source: AGHT+IGpgxtYG3EPNdQZkQRhINobS22gCQtKBuaD20NVhEusnNgL4nmn3Fcn9UxP4fhQ13h7+y3vaw==
+X-Received: by 2002:a05:6214:76f:b0:6d8:a486:e87e with SMTP id
+ 6a1803df08f44-6dd233aac5emr748796456d6.49.1735764098680; 
+ Wed, 01 Jan 2025 12:41:38 -0800 (PST)
 Received: from [127.0.1.1] ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd182070ecsm124054636d6.124.2025.01.01.12.41.35
+ 6a1803df08f44-6dd182070ecsm124054636d6.124.2025.01.01.12.41.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2025 12:41:36 -0800 (PST)
+ Wed, 01 Jan 2025 12:41:38 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20250101032016.438176-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20250101032016.438176-1-mikhail.kshevetskiy@iopsys.eu>
-Subject: Re: [PATCH v2] net: tftpboot: clear timeout_count on every
- successful block
-Message-Id: <173576409528.1694690.15525392888832057779.b4-ty@konsulko.com>
-Date: Wed, 01 Jan 2025 14:41:35 -0600
+To: u-boot@lists.denx.de, Rufus Segar <rhs@riseup.net>
+Cc: mario.six@gdsys.cc, PHIL.EDWORTHY@renesas.com, rufus.segar@carallon.com
+In-Reply-To: <20241204133430.3152261-1-rhs@riseup.net>
+References: <20241203220105.GB2457179@bill-the-cat>
+ <20241204133430.3152261-1-rhs@riseup.net>
+Subject: Re: [PATCHv2] Revert "net: phy: marvell 88e151x: Fix handling of
+ bare RGMII interface type"
+Message-Id: <173576409741.1694690.7040675451964570805.b4-ty@konsulko.com>
+Date: Wed, 01 Jan 2025 14:41:37 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,17 +96,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 01 Jan 2025 06:20:16 +0300, Mikhail Kshevetskiy wrote:
+On Wed, 04 Dec 2024 13:34:30 +0000, Rufus Segar wrote:
 
-> We have a some boards that rarely starts networking abnormally, so there are
-> many timeouts during file transfer. In the same time there is a normal transfer
-> between timeouts. In this case we can continue transfer (instead of connection
-> aborting) by just clearing timeout counter on every successfull block.
+> This reverts commit 431be621c6cbc72efd1d45fa36686a682cbb470a.
 > 
-> This patch does not affect the case when several timeouts happen one after
-> another. The transfer will be aborted. Thus the transfer will be
-> continued in the case of unstable link, but will be aborted in the case
-> of inaccessible server.
+> Section 3.3 of Reduced Gigabit Media Independent Interface (RGMII)
+> Version 2.0 (4/1/2002) details that a PHYs using a ~2ns internal delay
+> are referred to as RGMII-ID. This internal delay is optional.
+> 
+> Page 147-148 of the Marvell Doc. No. MV-S107146-U0 Rev. F details
+> timings of the RX/TX delays. We see that with the TX/RX_CLK delay
+> enabled, our RX/TX_CTL signal is shifted w.r.t CLK to reflect the delay
+> added.
 > 
 > [...]
 
