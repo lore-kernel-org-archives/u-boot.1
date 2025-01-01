@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 570F2E7718B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 17:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D3FE7718B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Jan 2025 17:55:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83BED803A9;
-	Wed,  1 Jan 2025 18:54:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D839A8031D;
+	Wed,  1 Jan 2025 18:55:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZZDA1Nmc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="As8pRTtO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FDD38031D; Wed,  1 Jan 2025 18:54:27 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 844E380352; Wed,  1 Jan 2025 18:55:26 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01AF48037B
- for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 18:54:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 09A9180317
+ for <u-boot@lists.denx.de>; Wed,  1 Jan 2025 18:55:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6d8f65ef5abso89283156d6.3
- for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 09:54:24 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b98a2e3b3eso523564985a.2
+ for <u-boot@lists.denx.de>; Wed, 01 Jan 2025 09:55:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735754064; x=1736358864; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UwAQmhc7/20iinCvJzfQRMp1z8tmRm8yghTp6P+8umc=;
- b=ZZDA1NmcMwJqM+UOiva3/rKKya5rf0F161Z0yJk0xOPKuyv3uG1g990kJN1fpvKDex
- ocTtEKu6j7X+ZOO0zlCFCmgrtv2K4GsMzibJHEWbMYE+tSPqfzsU/SNXZ/7WspZibp3M
- or2Tdv4PgyUSIua/UrYypZUKklXKkBv3AR00I=
+ d=konsulko.com; s=google; t=1735754123; x=1736358923; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LqkeiEs4kUIa9AksArmS8ttZnna/lJ9Qb1x9kRQ0RLI=;
+ b=As8pRTtOWUoln+C1vuJSvyTg/oz9ktyOfQqtngdfVTF8qRsBBeDdyOZstUvGj7+8WN
+ db/fimdwDi+dkYqtP3OQPcuDH+yMCB8nB3/fEfcjexhvshkRTjrOZeC5dMGfwh3ErQ2k
+ RbtyO9D+pcSKxEPr9nfc8hbjL9ihyLtVe9+u0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735754064; x=1736358864;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UwAQmhc7/20iinCvJzfQRMp1z8tmRm8yghTp6P+8umc=;
- b=r33ewZ9G2dSpcKrUs9j/7aJbW1eYc1v0r80MhLsMHis2+oPnP6gGAr2Dkcntsflymz
- WebkRU9hZieaBjY6y/ppLGB2qkxcB3LGUnkxo789hnATFeDtHW9L4kz60tJClyzD3srP
- e+Prjf8Zi4v0V+IwuKkKDr+Co4gnEFyBABRoezd/ChnplFXToEiq69aF4CIF+Yl3380x
- 4/RkXcoHvCxZ3qeJUFw5t4oqUlKu41yy5SrqkMAU3TFhow6L+g264N8rxSTmWoX7SX3j
- VUdax4HViF0kmVeVxbd/spSbeItuDeJfD4+ohxHXp/vrV090wVid0bP6forDJqeIQV97
- NJsg==
-X-Gm-Message-State: AOJu0YzxBaiIhXlssQOEddvT+1iuc970MOuY+LbyCTmVV52ONIPCU7pg
- +adkb8nuuIGNyjx2H3V+p9rkPfH5pHYnZ/S03KWibfOumbq8jZYskAdnuDw2Bx4=
-X-Gm-Gg: ASbGncsF4stF0aAFxIN6Ah7pJ5eo9patMq8vE8Z19ODCcP/yRfbCqZ94u0KaaEwSUAQ
- jMm+vykUYhvyhqS8ngDe6H0WAduIQVrUgP9Pbu9msfskxpUzmf965As57Unnv6Mc/5ykujGbjxC
- Pw5dVoY424lOaUuBo2cjA4MU5fBs3yVIWuPODTSGupP654Hmz07UTzTzYnaiX7Qf/M+Il8ekK2U
- L8kvVLKSR8z7rnvs1hR8OIGVi2kQC8RIVJwnV0M6icAC0rIoHBWM+6W
-X-Google-Smtp-Source: AGHT+IGb18X1dOq38xj0cHJUk4YglvOkkZuuXtYAGaYGeZSzRFkF7N7b+nxpQjh1rN9UuECx5YXDBA==
-X-Received: by 2002:a05:6214:19e4:b0:6d8:7efe:f791 with SMTP id
- 6a1803df08f44-6dd23345594mr787813516d6.18.1735754063996; 
- Wed, 01 Jan 2025 09:54:23 -0800 (PST)
-Received: from [127.0.1.1] ([189.178.122.190])
+ d=1e100.net; s=20230601; t=1735754123; x=1736358923;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LqkeiEs4kUIa9AksArmS8ttZnna/lJ9Qb1x9kRQ0RLI=;
+ b=c7GkGscHp30HKgTuzlpPISKPl5gFLNk7b4m6AwOvSxfjpWNlOYy+PzJfOC0IyOlc2A
+ kC7yKDcxcbgcmVc2YYpXmPzGoTAZ4/qlXnCkmxiTcovYCEdQSIEBctbsR+xybV9cQ7YQ
+ fSENVUQmCbb2cramXv3Uc+WupBGr0hN0W/NNKZwQZ5TFHfiYrgOJzc3xmNQzxcRGlH+K
+ uwz0x5sljpF+3/uAZ22C29yWlrGR9YBzsjAdTt5WOXdrFBPGlaJc1iktUrBVCwo+b/SX
+ fGvFLfCk/jSylYrx4LA2gYCcqacbUVpmRG0G9SpbHdgRxR7cbfsBliLG49wpkPB6hDzQ
+ 5DZA==
+X-Gm-Message-State: AOJu0Yzva4AWTQnpk1ckxSzwy5f7oBY9kOQvrgroflecVu+gzIjbCB+p
+ WaOOa8mhAHTSGHlgfhzEkk3qyG8HWX6is85OtY7rX5P4j/QTtR9TWwD9PjNQBHQ=
+X-Gm-Gg: ASbGncukEfqfee9Z19XjSZ3HdN/RjPVb6mWLJOXmeIG1E/aeaAkdQv8oj+VyZXHjhr9
+ zstmrHSYenEN2tY2bE+/Y629n+HtT0wXzzS/WDPlHXf/BlrsidbB5w8yz8mRFbpdiMYb1Fcea0j
+ RZe6tm+NGHOFnxqPgngkFXTPWRYLBdaFjq2eFWZvJLfgR4N6JkL21jwuXT4l8Tb+9bJVqtsCOz6
+ 0xq16qZC3JnNyQYJIBYI4ts1tgc+Ko6aIlZ6GygnJpkDsCEsvLLNkLdwg==
+X-Google-Smtp-Source: AGHT+IEtRZ5cTaqy//U+8uUuDsp9NGuH0xkWVech5Y1dgla1Xu/ZFpm5o/pokXDkrOyoWkfrYKam0g==
+X-Received: by 2002:a05:620a:244b:b0:7b6:d8da:9095 with SMTP id
+ af79cd13be357-7b9ba6efa03mr7390113885a.13.1735754122925; 
+ Wed, 01 Jan 2025 09:55:22 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181bb525sm123411896d6.97.2025.01.01.09.54.22
+ af79cd13be357-7b9ac2bc076sm1107078685a.10.2025.01.01.09.55.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2025 09:54:23 -0800 (PST)
+ Wed, 01 Jan 2025 09:55:21 -0800 (PST)
+Date: Wed, 1 Jan 2025 11:55:18 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <cover.1734093566.git.jerome.forissier@linaro.org>
-References: <cover.1734093566.git.jerome.forissier@linaro.org>
-Subject: Re: [PATCH v2 0/3] Add 'trace wipe'
-Message-Id: <173575406212.1681845.9114152812004598204.b4-ty@konsulko.com>
-Date: Wed, 01 Jan 2025 11:54:22 -0600
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH v2 0/5] Static initcalls
+Message-ID: <20250101175518.GA1682161@bill-the-cat>
+References: <cover.1734537135.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="AXDAEsSD81EfKn//"
+Content-Disposition: inline
+In-Reply-To: <cover.1734537135.git.jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,21 +94,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Dec 2024 13:45:35 +0100, Jerome Forissier wrote:
 
-> This short series adds the 'trace wipe' command which clears the trace
-> buffer, allowing to re-start a capture from scratch.
-> 
-> Jerome Forissier (3):
->   trace: add support for 'trace wipe'
->   test: test_trace.py: test 'trace wipe'
->   trace: document 'trace wipe'
-> 
-> [...]
+--AXDAEsSD81EfKn//
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Wed, Dec 18, 2024 at 04:53:53PM +0100, Jerome Forissier wrote:
 
--- 
+> This series replaces the dynamic initcalls (with function pointers) with
+> static calls, and gets rid of initcall_run_list(), init_sequence_f,
+> init_sequence_f_r and init_sequence_r. This makes the code simpler and the
+> binary slighlty smaller: -2507 bytes/-0.23 % with LTO enabled and -1232
+> bytes/-0.11 % with LTO disabled (xilinx_zynqmp_kria_defconfig).
+>=20
+> Execution time doesn't seem to change noticeably. There is no impact on
+> the SPL.
+
+This leads to run-time failures on SH:
+https://source.denx.de/u-boot/u-boot/-/jobs/986701
+
+--=20
 Tom
 
+--AXDAEsSD81EfKn//
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd1gXsACgkQFHw5/5Y0
+tyw6fAv9FJgD4JNyrxvV/4h36Y7DcfytAEeak52DxoSwqxtq344vvXvgsDeLMx41
+TvF9U5slOwfXeEZx/arZQrjrHifhkx/asXb6NT1c/FApqEuczFHQqN9HVdhVFkNQ
+weG+RXFKZZIIniMkv3bGB9dMkK4yMa5fJGsXGc6uZcxl3BUXJ4TO4op6orN/9dcX
+pOFdIfIgl4/ev1etDcIbh/mQHDQCN+P/auMxB77WrQA6XjA2IHTpGnlM7KnkStaK
+IbJ8nbshBKm/KLsgYHul63A9xbheL8wW6cAx4+FTm0TgJLNQ7bWd+a6iGteC2qzd
+dYF5W8ZV41Op1Se5xr23ax1wm3am80712guAOEolPTsbb58gH+IERoCnezCkP9FL
+xv22bEI4hMd4rj6j1pRX8LAAkYBVM6ogJXGx9CXDaioZrfMR687qOrO+b9A4VR8Z
+52bKc9m3JJeE/fnQ/cX0kTIHm8Fry7X2CDW7vV8WLiaHRF0OdmEL2gobpUoUOHdZ
+EPbUuSxa
+=mk6H
+-----END PGP SIGNATURE-----
+
+--AXDAEsSD81EfKn//--
