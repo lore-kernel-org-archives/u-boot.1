@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5943E77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 14:07:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA68CE77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 14:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C604380196;
-	Thu,  2 Jan 2025 15:07:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=munisense.com
+	by phobos.denx.de (Postfix) with ESMTP id C540A8007D;
+	Thu,  2 Jan 2025 15:45:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=munisense.com header.i=@munisense.com header.b="A16ynL2+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F3l6mK0l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93F008034E; Thu,  2 Jan 2025 15:07:50 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 961E880196; Thu,  2 Jan 2025 15:45:09 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2C0C8007D
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 15:07:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=munisense.com
+ by phobos.denx.de (Postfix) with ESMTPS id 196128001F
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 15:45:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gijs.peskens@munisense.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aaf57c2e0beso508988066b.3
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 06:07:47 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7b6eeff1fdfso882242185a.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 06:45:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=munisense.com; s=c12e0d22-ac12-44f1-aa93-b49ab5265a0e; t=1735826867;
- x=1736431667; darn=lists.denx.de; 
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dthfmb+h5Ocfkd7TK3dcyolC8MtjTlMgg3LkbG+gktg=;
- b=A16ynL2+GyMUR6VnItVl7CZSQ6Ji3GxsNF5rObT90kqWpTU5WJ/V+mRv/2yO1OnxzH
- JybN3aDJVQjhPkL6UjsBT3tWOw1vFcruqUcFVbi+quwiF5A6OXbBix2krPHSRJrmMRP7
- ZxzaEyFH5HFBdih7kwmQs3GW3cQ233TWg+Wk7MMRbEG2eSIlyTCJJVi3mgiQ0ZIOJw7Y
- OSHauVQtr2EOMrHjcV3UZDz9pQcQr6VhQR9RY2h7xx+Mgv+JgZ+YXJTbOgMnS3oWHGCG
- w3qW5aBTYTMj0ORfCjN6cjVN5WKC+93kXSzujr0m882AFF4XZQg2Ovio9/bKDQy/RVcK
- BiCw==
+ d=konsulko.com; s=google; t=1735829106; x=1736433906; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=thQcQfPIbf6mR9azBin5PFWvRMhYUlxJZhVPc+Hn8wI=;
+ b=F3l6mK0l70Wf6EeCoLXNdfI1zmfRQPLwjfoqU7hEdeCgzk2rUEiqNiPyN1oVatpveQ
+ El3WW1uXE1FqU3w2PELXDN3FiBRs0cmq3M7X8wRjbyTJmxiqzgZfmtyuV9x9IKWp6ibl
+ T91OjbpF7FAfio4EvTWQxkasijzo5iJWCjvLs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735826867; x=1736431667;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=dthfmb+h5Ocfkd7TK3dcyolC8MtjTlMgg3LkbG+gktg=;
- b=XEMsfYcPPgDKuksZfCGkBNKhu8SmVCxhuVFgUJJRCRfepWQbZ4wEvCI2iul0BCQaWb
- 4Yf15BptsUrT+2mNljkeN9TUvYnXjSNfmgniN2F7Lwbczj72O7eWiZ4k6CKsOskH8+M4
- gSzZtYzQABr+AiVXPxOGWpmEAAC+3tljpBdz96kT7hZz1Rvmcc7P30PiJSQQN4977ZPm
- BvSQKC1VLI4VXNOYmatu3zCvw/PLsr5zSVGk0rkUsmk19k2je5LJuy5mLLYeugHwgJ07
- JGt0kXbKV2LW8ksv1mWKqyvb3W59G15PDPcBVoRHuWTn8ktQhT6LZ3mpNteLUzmo+75v
- CLAw==
-X-Gm-Message-State: AOJu0YyrvTzKvaYJyVozJCe0OV+FNj00T6XEN0U8dCOgNEHAoNP7ERKE
- yXwCNysYw3g2CHnQD+Cuvu9Y3YXxgSnpJmbSEMLMVNJyB9KbzI6I/Z0koI7m7Tc=
-X-Gm-Gg: ASbGnctngapyZapT55fPVAGc4NJsFjcPNIhRylEtY+7EithzRBTT/vSSIgYDIwhwMEa
- xuTOaCcT2W+WDnho4Wp1N9wWgOb56Ht6WLJD9A+qocKLdlc7AtuLZZ0uWuGGhgYa0LXvxR/mDfh
- rjttvCTSAJxzxUwuaFxlH7ZA+a/yY7sVLkK8z/JpPbloO+ocSAja89Fnlx0XI7WqaLymqvDJYtE
- wW6s6SqN8k44Okrx8kT3ykWkbgco3DH9a003gaMWyhEgfaAdUJ3hl3a7l5FVCTby0nE9IF+R9Wv
- yBl1iNpaQZSblJWHCZOUmsjz/GkVeqqPuJ0jIg==
-X-Google-Smtp-Source: AGHT+IFFjDw0drA79uhBvUXUCnkaOdhMvWp1WPfGVuLx8GMEhmLjP5Lb1GimlRJlOdgP/DCZAf/mWg==
-X-Received: by 2002:a17:906:dc89:b0:aa6:af4b:7c89 with SMTP id
- a640c23a62f3a-aac3446dd7cmr3634755966b.61.1735826866958; 
- Thu, 02 Jan 2025 06:07:46 -0800 (PST)
-Received: from ?IPV6:2a00:1708:3ba6:500:3a2e:f088:8edc:f165?
- ([2a00:1708:3ba6:500:3a2e:f088:8edc:f165])
+ d=1e100.net; s=20230601; t=1735829106; x=1736433906;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=thQcQfPIbf6mR9azBin5PFWvRMhYUlxJZhVPc+Hn8wI=;
+ b=s51l0vgbjYtB9gUAcysW63FhrpH1YhrvmiqbDlhV0CGHYUZTjJw/e4RM9XikZzy2ds
+ QFU3GcjX99qBrgWAmiYK4T2MC+ekpnQokpCJyshQzvnGXOkyyccn93jdVSYV7/14mDsW
+ Uw288rOBGifBhuUhBgotty9llnWdhte779iCw/XTEvZmSeaydPNS/6y2nY58Md9YjW73
+ yj9WAYs8WIijggIXyaILBoe4B/D/yYjxSs88BuraNRA+WstIQbvRyzUGoXKT9dUl59Fk
+ +4BnWuabn8GKZ4m10EBAPD0MmT2aVsbvGt5SarS63gc6JRQi380G0Kz4FbmJZvTwP467
+ gABQ==
+X-Gm-Message-State: AOJu0YyY6iZY1Ed27eOAfPPV7Nb70h944siL/Uv7EoVSzAai2drhN++e
+ +dI0Uwm32ZilKxaXeOfJMs7u0kRdTriju8Kk4Z7n3XHKT2dvLXsQAO6EplTnfr4=
+X-Gm-Gg: ASbGncvKTNELme+KnKwRG9Ek5CHKKlkJ/QZ1Jotnacukay5sCy8ISXjkdFPWdAaI22D
+ gs6lsgGlbIWZVYTKfNgD0fWVewAVYK/j7hDRyJeKmRrs3t81jXEfzSM7go1DfPrnysw9zzskKeH
+ K9E/Eq1AheUf8TT3dLTnedErwmHccjyeewBfGHwaQepjOjA29/RC0cAZBmGEZCttzjGSphGjsio
+ PG9Ebz8Ch9RnXDueV8PlNagkvfghN/FbAJV4evkDFxVszlmoqfoVROxKw==
+X-Google-Smtp-Source: AGHT+IF3ZjYepx/vE5T2jMTX4jAnfVl5v32yyu5g3pn3sRmVHXZbbm/TVx+g6tKCstjCsPur0TWc7g==
+X-Received: by 2002:a05:620a:2804:b0:7b3:577b:6d9c with SMTP id
+ af79cd13be357-7b9ba7eab3bmr7681346785a.38.1735829105902; 
+ Thu, 02 Jan 2025 06:45:05 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d80701c822sm18374241a12.77.2025.01.02.06.07.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 Jan 2025 06:07:46 -0800 (PST)
-Message-ID: <42465da7-7616-4e31-a610-3d127ff1141c@munisense.com>
-Date: Thu, 2 Jan 2025 15:07:45 +0100
+ d75a77b69052e-46a3eb1788fsm137140351cf.54.2025.01.02.06.45.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jan 2025 06:45:05 -0800 (PST)
+Date: Thu, 2 Jan 2025 08:45:02 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH] bloblist: Drop BSD license
+Message-ID: <20250102144502.GM3476@bill-the-cat>
+References: <20250101195817.995321-1-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: rpi: Compute Module 5 doesn't autoboot without debug UART
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <cd71682e-33c9-4e38-829a-a540a53bacad@munisense.com>
- <CALeDE9P45GvLagdkkC-8FuT5Ee3ZWpMPa4+F_eizoPHFtJFSjA@mail.gmail.com>
-Content-Language: en-US
-From: Gijs Peskens <gijs.peskens@munisense.com>
-In-Reply-To: <CALeDE9P45GvLagdkkC-8FuT5Ee3ZWpMPa4+F_eizoPHFtJFSjA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XFdXx4vuM0b4y31I"
+Content-Disposition: inline
+In-Reply-To: <20250101195817.995321-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,56 +98,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 12/31/24 15:53, Peter Robinson wrote:
->
->
-> On Tue, 24 Dec 2024 at 14:00, Gijs Peskens 
-> <gijs.peskens@munisense.com> wrote:
->
->     I'm working on getting a compute module working with Yocto using
->     U-Boot
->     as bootloader, which mostly works thanks to previous work to get
->     RPi 5
->     working.
->     However I'm running into a strange issue: if I turn on the CM5
->     without
->     the debug UART (which requires soldering a header onto the CM5)
->     attached, the Pi doesn't boot beyond showing the submarine splash
->     screen, if I boot it with the console attached it autoboots correctly.
->     If I attach the UART after the boot halted and press enter I get a
->     U-Boot console, and giving the boot command boots it normally.
->     And setting bootdelay=-2 in the env allows it to correctly boot.
->
->     Which leads me to believe there is perhaps a spurious input
->     registered
->     by U-Boot which interrupts autobooting.
->
->     Is there a command that allows me to extract why U-Boot didn't
->     continue
->     autobooting?
->
->     And anyone have a hint how this could perhaps be fixed in a more
->     elegant
->     way (allowing interruptable autoboot).
->
->     The hardware I'm testing on is the CM5 devkit, I needed to make small
->     changes to yocto to get it working:
->     https://github.com/agherzan/meta-raspberrypi/pull/1397
->
->
-> I don't think this is unique to the CM5, I've seen it on other RPi 
-> models, I have a RPi4 8Gb model that exhibits the same behavior, yet 
-> other RPi4s I have don't exhibit the behavious. In the case of the 8Gb 
-> I have a USB serial TTL on it, it boots if the USB is plugged in, 
-> doesn't if not. I have other v4s, both with and without the TTL and 
-> they boot fine, I've never been able to get to the bottom of why.
-Can you try by setting the bootdelay to -2? That did fix it for me, 
-though autoboot is no longer interruptable.
+--XFdXx4vuM0b4y31I
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-As stated, I suspect my CM5 is generating spurious signals on the debug 
-uart when it's not connected. Is there a config option that changes 
-autoboot interruption to only happen on a specific key combination? i.e. 
-control+c ?
-That might fix it sufficiently for me.
+On Thu, Jan 02, 2025 at 08:58:15AM +1300, Simon Glass wrote:
 
-Gijs
+> Linaro has decided to write their own version of bloblist from scratch,
+> so there is no point in having a non-GPL license on this file. Change
+> it, to better fit with the U-Boot project.
+
+Nit: I'd prefer to word this more neutrally, "TF-A has created a BSD-3
+licensed version of bloblist support, so there is no point...".
+
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Link: https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/22215
+
+But, once we get everyone else that touched it since commit 6c9e3d1fc085
+("bloblist: Relicense to allow BSD-3-Clause") I'm fine with it.
+
+Acked-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--XFdXx4vuM0b4y31I
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd2pm4ACgkQFHw5/5Y0
+tyze8AwAtjYRllGESBKO9LEZtgY9nsRRe0lRiphTpOnWvx/wgmN144kndzvGlJq5
+bbLmjp+xbvqnIRxju6cYOZgbZ7ZUF5rwT9LyYVwFjdnxaY79hPEcKj6vpd5glm+p
+aN47/DQXA4y8nHNOYwX69uXIbE1Xle9PgL475tl76kXXOJoDjXXP/oYDpNu2AczR
+h05ktUmrP97lPi7ktbhzxOg2Y9+4TJPc4zDf+DdZrs690hWNDsIyYVz5Suo8TuRM
+/oTgEEBu/WIb+d2UxqYCUYdC9KQrVZ8jm1dBPLa7G+b5HiX7L63r+6Zs0MpzV6NW
+GwLYItdRmRVtMd2osLAvPPSsfUFBio4lchxfvTl5AJxC98/I9MMf/n6U0sWWRujl
+7yDfxXeG9AA3qXX9UP5H6Ige2CKw4gkgwWNpAangCOhk0QyUxpMc8IbWUa7uNJV0
+3IIgibJXttSfbhB/657EDZAt6s1R0hCS+CrxAdBD41snrtQMoMWAadZhtWgbIoMd
+fMe+yuTi
+=aMO+
+-----END PGP SIGNATURE-----
+
+--XFdXx4vuM0b4y31I--
