@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BF3EE77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 16:00:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F9B0E77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 16:13:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 655408007D;
-	Thu,  2 Jan 2025 17:00:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 21F2B8007D;
+	Thu,  2 Jan 2025 17:13:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f585DIKj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KPKJlOpy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A4D480196; Thu,  2 Jan 2025 17:00:17 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 64AC280196; Thu,  2 Jan 2025 17:13:20 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83CE08001F
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 17:00:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD0228001F
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 17:13:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2f44353649aso12807973a91.0
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 08:00:14 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6d92e457230so111374816d6.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 08:13:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735833613; x=1736438413; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fnKQldvjb3oaBEhtZSf2f5L2sr6kHexZ4w+lK+p3JC8=;
- b=f585DIKjWiIxiT9PjMlILroJQBn7d2nocRXpl88//YF7hAptr/34vd/S5ZAyp9hFC+
- QIXcP7AQRwbB89oPnVYfUm+gC4dDXhqv/ilF4A3jdjCLNaLA/PN5aJtUDtd0gO5wKwtx
- do6cRGBUffV80fDtD7ejeiPfza6dDg7C6fERbl/Jk2grIyXSefT5BAzGfIkjkeREqVF2
- PEGoa0I+APrba0u5F9rLyv/fLQ2C2hsC0DN/MpHbeSbWjiJkoUCl3GOzWeHS1NL5s36m
- Wm2qa6mBdYzvdPvPix0XpRyZKjXP53SUtudmvhyqHfnob3Ffxy4InNzcuJ9iXMri3zRU
- PE2w==
+ d=konsulko.com; s=google; t=1735834396; x=1736439196; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/zjH7fUlDpv0DmAm0vf7+hG1yFc41QyIIVj7vdqyNL4=;
+ b=KPKJlOpyj9Z3po37FaZHwF3rG4p5RQBfR2Mgp296a5IdEVvDzf53qCEliQ53DFZRFt
+ lmxXK3p+JEO+CJMVGPEyRgbrXIOR+6FceWyzhcwm52hC0B14yDFyKr6SBymBBkRs3BUp
+ SZk8NSFgJZ7FKx7IfSJg6xYCtIN/JewtAcpJM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735833613; x=1736438413;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fnKQldvjb3oaBEhtZSf2f5L2sr6kHexZ4w+lK+p3JC8=;
- b=Pg0/jLIIwxPKnvv5MPQ8lmrH06neyiZRTEPeL3iTWzG2vK+b4Xrtts8aG30MzGTPkl
- qAiOEDh4FdHPLAxxP+lhV1kBbvwmGZWG+WoRuNDD603qbfdFDYEXT8M2wNbmmT+GYOoq
- ZWsQhzBMBsKNaM34KaK8JfU+gafNz3zWh7PzizPz+FjZ9zeLo9/d0HTF8zfY9G4oFNyH
- KwVSaROfUhLsOu7d3CAzasGMUMB5sH4TOADx/XlrDqxChB73SJvUk+6qGqowGYjm9Bu6
- 4dqi8ygaf/KQjjjVZkzz6QBX4aIEU6Zu9G9F6y3GddeEBf+mprGMK/mQ6aLrnv92H0fx
- 1UWQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVPMS2z2QUbGsavrjr3VUbXia0nV0UzCG0QOZeodMIEcH7LbFCADpul8UAd1pdxpzhHJHO2JFw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yycv79yMtHxVWFj/ebfE8sqKO4mTIc7Al+Po1+smEa5UBQNslei
- thRKE5/VeraTwA2eL6Eh1HZ3gh/0mXKzr79GfwuzhPRhtYTrAQgY2muIOxxksYTeXzSZ6Igm0KB
- oX5BoOeyDLo3ksw7J8y4I76SeuBvypG5fNOB+UQ==
-X-Gm-Gg: ASbGncuQTXWS41/c4jMzLFwZsDbeAZlIg8rGDJ426HnUJ7VpkDXQ5RO9mKV8eIlTyPx
- lLLKJABlCQpo6rHaAqMpK1kU0NYQGcPFXImHiko9VhrYKFSKD88krKDt5pVteAHDzDY8yyZ4=
-X-Google-Smtp-Source: AGHT+IF7PMlL10cmSMha7h7u95sD5VoueSYMGukOOThc8bntJpEk2edJL525WyRcpYsXko4j6yqkiUbSfkImS8khKRg=
-X-Received: by 2002:a17:90a:fc4f:b0:2ea:5054:6c44 with SMTP id
- 98e67ed59e1d1-2f452eeb641mr57951429a91.31.1735833612772; Thu, 02 Jan 2025
- 08:00:12 -0800 (PST)
+ d=1e100.net; s=20230601; t=1735834396; x=1736439196;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/zjH7fUlDpv0DmAm0vf7+hG1yFc41QyIIVj7vdqyNL4=;
+ b=JXi3DtwE6TBTvPRog32LGn/718Ga7fc5ROcF+7pNTgaWT2PjM62HUGHsbpAwbO3GYo
+ 9Of/2R5d8D8+Hw8qX20rdEwFx+XnChceBFwZzCEH2JWHwlt9lHQEObs+C7vC0fSGM9X3
+ uc3UjScaE7ZSOkL2Wf65abM75gpr9hSktFO7KIwE4aiqYEoUU5FxUho4T3PjYI1KFhQT
+ bxh2sv3DbPpVGUxdbnG7RPDsZJpNVMZUP3cMhin2zPs/0WIo+PvH2FYhzN0BxAGKe+Fk
+ lJAd+BlnBLtaqUqpq+TcIwFp0lDnxuMCwSOKwdsRsMLVRDBwLbFpJMTPheJqGJC4xH12
+ JnmA==
+X-Gm-Message-State: AOJu0Yw7ooVfo131sjsez4r1rFtLITux/YtBeKDAYlxlJjyqlv2Bbd08
+ mikC+ivJLfxjpxn16wjJdyjYO2ZtzwcArT6Q06Ga30Sq10CED6sA/zO5LFNhwCFMJUgf/b04jwe
+ xMoo=
+X-Gm-Gg: ASbGnctgPUxBRZZP+2VIC1SnhUT85rpkHBFGqXrdZ0wsGRXuznY8OeT9dI+6rCT22HY
+ LFf+qt6tq09qmH2CEIakScftAFPi0mZcVw6Hd1O8K/f6vIWyHoZq0UlTY2h8RSjBx3XdhVhbSqE
+ jZZ87q8pOk3Ey2rbotXkOHeA7Z9Nj+Ry3MhdPPa2h4rJ2EA2yCT36orF3O43WI74gleWe8mpXOr
+ JSXJX2XHGo9m8A1m/vnddSnwzV8/cI9rYBeKhDywdg5ifidecKpzha0Ew==
+X-Google-Smtp-Source: AGHT+IFDtRttw4wi5OzHXEWtvXyn9450CblMyu1XoQKKB3CN2JEwUw3/Ky9zMC7zSUPir20wlsysqg==
+X-Received: by 2002:a05:6214:d8e:b0:6d4:36ff:435b with SMTP id
+ 6a1803df08f44-6dd23345b2fmr781026596d6.20.1735834396661; 
+ Thu, 02 Jan 2025 08:13:16 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd182082f0sm132930866d6.129.2025.01.02.08.13.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jan 2025 08:13:15 -0800 (PST)
+Date: Thu, 2 Jan 2025 10:13:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Simon Glass's future with Das U-Boot project?
+Message-ID: <20250102161313.GP3476@bill-the-cat>
 MIME-Version: 1.0
-References: <CAEfUkUKA9raUu0dANWf25aw6kBzu-DKshctQxVre57bEiN94kA@mail.gmail.com>
- <CAFLszTh4hjCHAoqkr+zdeBeq5rCoaO3aSjBVvFyCYVLoccPSUw@mail.gmail.com>
- <CAEfUkUJ8MrFoS3k9svxNoiYsZq51SS_=+TpKKeH=x2jPXRjPtQ@mail.gmail.com>
- <CAFLszTgaSGEhRbdwhn=SjPkH1-tEW63D8+H2_1ZUtsfxWfZBRg@mail.gmail.com>
- <20241216183014.GH1505244@bill-the-cat>
- <CAFLszTg3YgBABRqFOmzaz5KT1ipqmuFxTd1NX1x2yQz2rNgjZw@mail.gmail.com>
- <CAEfUkUJsdH=YjcN4V8Fe8Vfa2Sdb4PQJZxKe6y9RaRXcJgX_=Q@mail.gmail.com>
- <20241219163604.GV1505244@bill-the-cat>
- <CAFLszThG6SY-BvZQ_FzZ+AT+w0NSVmS_iS+nvCWaqoxVRvv6dg@mail.gmail.com>
- <CAEfUkUJhuCB-5dXt1+FKMAk1t_N_sO6qAZHMK5NJrV7coGH6MA@mail.gmail.com>
- <20250102154844.GO3476@bill-the-cat>
-In-Reply-To: <20250102154844.GO3476@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 2 Jan 2025 11:00:02 -0500
-Message-ID: <CAEfUkUJvm-Co4sZLbJEXTey3HPjTdEs33HBZzSY0BrVcMi=rYA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] tpm: get tpm event log from bloblist
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vEnyDvTZ9ek507Pp"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,66 +90,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Thu, 2 Jan 2025 at 10:48, Tom Rini <trini@konsulko.com> wrote:
+--vEnyDvTZ9ek507Pp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On Thu, Jan 02, 2025 at 10:25:15AM -0500, Raymond Mao wrote:
->
-> [snip]
-> > As I said, we need an kconfig here to decide whether a user should look
-> for
-> > TPM log (and all other handoff information defined by the Firmware
-> Handoff
-> > specification) from the bloblist or not.
-> > We don't have such kconfig now.
->
-> We do we need this knob? I don't think that we do. The case of bloblist
-> not existing where we looked for it needs to work. And the case of the
-> bloblist not having an entry needs to work (or if it *must* exist,
-> that's a separate option to add, ie CONFIG_TPM_BLOBLIST_LOG_REQUIRED).
->
-> I think this kconfig should not be only for TPM log, but for all general
-blob tags which are required to be handed over.
-User should have a choice to hand over *all* required handoff data from a
-blobllist (if exists) or to stay in each data's own legacy way (from DT or
-whatever)
-Aka, the switch should be general and "one for all", otherwise, we have to
-add multiple CONFIG_XXX_BLOBLIST_REQUIRED in the future.
+Hey all,
 
+While I had hoped that the quiet of the last week or so had meant that
+things would perhaps return to how they had been before, Simon's large
+patch series and then comments on the TPM+bloblist patch have shown
+otherwise.
 
-> > > > There's at least two sets of challenges here. One, being solved by
-> > > > vexpress64 right now, is that we didn't have CONFIG_BLOBLIST_PASSAGE
-> as
-> > > > an actual option. And in that case, there's no U-Boot before full
-> U-Boot
-> > > > and the bloblist exists for us. Two, U-Boot is what is creating the
-> > > > bloblist. The contentious parts are *when* it's created and *where*
-> it
-> > > > resides prior to full U-Boot seeing it.
-> > >
-> > > There isn't contention, so far as I am aware. The normal case is that
-> > > U-Boot creates and uses the bloblist itself. Pre-U-Boot blobs (like
-> > > TF-A, sadly) are not the normal case and should be discouraged in an
-> > > open-source project. That doesn't mean we shouldn't support them, but
-> > > it is the tail wagging the dog.
-> > >
-> > TBH, I am confused with this statement which means we should not use the
-> > bloblist library from the beginning to hand over data from the previous
-> > stage.
-> > If U-Boot bloblist only intends to consume the data created by itself, we
-> > have to introduce another library to do the handoff, like what was done
-> in
-> > TF-A and OP-TEE -
-> > then finally we can have a standard handoff library that can be used in
-> all
-> > projects and keep bloblist as it was.
->
-> Simon doesn't speak for the U-Boot project, he speaks for himself. I
-> don't see why U-Boot shouldn't look for an use a bloblist for things
-> that need to be passed from one stage of the boot process to another.
->
-> Thanks for clarifying this.
+At this point, I do not know how best to handle Simon's behavior,
+without soliciting feedback in public first. At best he's created a
+soft-fork of the project with his "sjg/master" branch. I've asked him
+repeatedly to explain how he thinks this is all going to work out, in
+public. I've had private conversations with him, but I want him to
+explain in public. Or, he can post the messages if he likes.
 
-Thanks and regards,
-Raymond
+And I am in the process of getting outside help that would in turn be
+able to help the project move beyond the BDFL model we've always used.
+Because at the end of the day, if most of the active developers would
+prefer the direction Simon wants to take everything in, that's something
+I can accept. But what's going on now is towards the worst end of
+possible outcomes I think for the project itself. And by that I mean,
+one prominent contributor steam-rolling over others and doing as the
+please and implicitly acting as an authoritative voice for the project.
+
+--=20
+Tom
+
+--vEnyDvTZ9ek507Pp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd2uxUACgkQFHw5/5Y0
+tyzUcgv+JJ9+joFar7gtuRdRbvoibXFv4eQbuakCeS6RgB0rjFpb97dP7/tm3HM4
+E/wkRlYsohXmaNmbaDnBJsAzsQDl2j2Mdo7AFOfRAvHsIjKwciSJO1PIQgaug78I
+DybOfhcibpoGahOJXAdXStnvTGR8ecsFsdDk37fVpwWrrOxuqtfeD2OWms5VsqG+
+QhSxjp7hnPY7jqK6cnTc1IyRmIwwq1YWJf6VXzngMGncFI8oKxp2zzUbH3aeLzTd
+iqR/7yK3BmdkS1KRw+9VgUL0V0kVLYVXGw0SAmhbmxij/wULrNDpQgfOyvqsxUCt
+DwbpbjHAZHtl2BXpBQiBVPpe632Rxmf+gvi1Td5ntDtQnIHNb+N0sw1fNjT34JhX
+Zyu5H/wXNAAMXd0KkKdjOL/X2blZ329wBRgn1fs4GbH0sVQd4VMHxhuJDnBA8fE+
+tpt2zpIGUFMj2oPhrDaUCRsVHdQA0qN67G+SsJyRzO6F3elIg2AiB24bPoDGFg0W
+ZMO3Vmar
+=4qjR
+-----END PGP SIGNATURE-----
+
+--vEnyDvTZ9ek507Pp--
