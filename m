@@ -4,109 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6AA2E77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 16:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A28E77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 16:53:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0F77803D2;
-	Thu,  2 Jan 2025 17:27:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E6AB8007D;
+	Thu,  2 Jan 2025 17:53:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HcErrpnl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qsmgvZtR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E60380196; Thu,  2 Jan 2025 15:45:01 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 9780580196; Thu,  2 Jan 2025 17:53:10 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 557C88001F
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 15:44:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CDA28001F
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 17:53:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6d900c27af7so89210366d6.2
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 06:44:59 -0800 (PST)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6dd0d09215aso93107846d6.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 08:53:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735829098; x=1736433898; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1735836787; x=1736441587; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dhTjW2VRGlH7YF4nFyiQnYZN+GDe//vWmEVEPFZS4R4=;
- b=HcErrpnl9fpQBvMEKfwGpYE0m/7OKjLqMB2ri4Z5DafV2bzx7+ALYRVMrO3O9q7cdb
- 9Gjnt/VRuOCW/W2Ug9No4UcUGQA+QlpuxE60HrROVAqxjc0cRwbtMpAJa92GuYS51nby
- ppbbg0/N0UUS0vFyxnYL8FphmEenlpU8h8cUo=
+ bh=zoI8pG3/C82nnxD/U9ZOrCP4koBzio5qgHYh8DQSQxY=;
+ b=qsmgvZtRUCIakwtalYZX9jiXibAwJh6yZ0m7cVlc2s1q/zXbKp8Es7roxBXQHzU3S5
+ kx5fRusbp2i/ZcCKnBKCbki3Lcv6npzzAURpBnDS9kr8bhK6IQUqkgmuyHqPOmV2X5Jr
+ EAilREF3CAw0DDN3yM0yB3mGS/TS/td+e1wm0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735829098; x=1736433898;
+ d=1e100.net; s=20230601; t=1735836787; x=1736441587;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dhTjW2VRGlH7YF4nFyiQnYZN+GDe//vWmEVEPFZS4R4=;
- b=bNoE5KeVVTgHXs4G+mWLOIthTaXE4gdcMeCUqNntrSZ3FeanIHcs6OwWaRen4kh5ip
- bb2SNkZrQ8Obo/yHlJ77pQLvc9GmTnHIHiNK6sfhR78KnwpRjiWqVocyvdpXeyVaGiO0
- rFq/u+rKXHVVPuJGJ52S2RL21gHH67lxYXNYoWsikrXcHE0kf+8lemUQwFDaoQZtog5b
- DEMmVr3Gm8aK3GIawrpu0FtCfRNPfVt1VHzXdTOuv9Im+GC6xA7pyK7bMVfNVN1PMJ4q
- 7RlMP399svYlvx1qEA30HmYal3rBIGOzOqaauf/TBcPC//r70JtrIFJEu74Y0LLyOOyJ
- kvHA==
-X-Gm-Message-State: AOJu0YzBJigL+Ju+VLOok9WixQ8Gls9JNR+xPau8pCiIml+/89U8lxbl
- 5uq3O81JnFpYHLM3do9cIcR2VPpQRt5ItqBWpYTMKLGduq7mRqo9XKoBadJ3h/k=
-X-Gm-Gg: ASbGncvO8usywZq2ssyGUe4ZzctaJ69oL0+aR6q+sVY6taNs+FLmGpAXJPRMQHrL9zG
- Wx01DdGMFmd7nrpVDhASSQSSlFx4l5/xQ+pDN0ZCfFpllZCMEmXAmFYbdiS20nB/yaWbUuELMg/
- 4oZsYbgPIh6ulwFnF4BdU/tsEoXavTAX9IU0jyJDLUKOS7fHitpvgBVEfzwU99x8CtoNVsAoWDL
- 7WIz02ZKjJblU4x8ipYEbw4wpc4fcGT9wWNR5Y03CI8DjLMfzKmJeO6Kw==
-X-Google-Smtp-Source: AGHT+IGezGnvBzu8ekegu5WubDmmLBIs2WhW0dqmzo1NMW0kkCAZ921SfLYBdAG6hTlO5aotiU9YPg==
-X-Received: by 2002:a05:6214:e67:b0:6d8:7f8a:73f5 with SMTP id
- 6a1803df08f44-6dd2334daf5mr639798496d6.24.1735829098123; 
- Thu, 02 Jan 2025 06:44:58 -0800 (PST)
+ bh=zoI8pG3/C82nnxD/U9ZOrCP4koBzio5qgHYh8DQSQxY=;
+ b=rYJgT13PGwdo9sFPudnJcYlOttbwHo7jNfOsdVAqwIL6vfyoEu3V9gTMeIfnLO5bEr
+ 8Pe/pVfGAPZK0NT3c/UM6LeFS6hIP/BGL0ofIfLRcy5WwznyDfoAIyJU6B7QU7RuXqyT
+ Og1SAKFY3UkMzGRo2lwc1xB5CiHrfWz4/gYYgm9qsk2EnWRatb62mOOShz3Al/a1Gr5a
+ nycTs+kuXQhh9oGAy5Fwsb48X+mSjGcJ7eTw+S+IpGaChjGMLeXREbWhj24Bpmo/c9Im
+ S4Xx7YyS58o6SqEK0LvYb3aQkU8FjIDx5SHJEa/MIJqQtgGy7gEW22IYvxAdBcgFlh77
+ FE3g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVd97d3oy1B/cl0BP9FGlI/SKYZj3mpqdhuqf+xE3kbz/qwZXP8n9/oI+LCLdubSXoc6H6iaRg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzpWoJAhV+wdvA28yVcMoSEPdGiKhQ7w3ICybNZGbFmf3AiZy41
+ E5m3Ri8IPlbeWuo8jqA2rKayRcQ4unxpx0DQfzDMbxDn+Feg7ibZEcgT/sg7SXE=
+X-Gm-Gg: ASbGncvs4Eeb/tZ0qvqgC7GMjHBwB7Gbw2qMVaQuTQhlt1gzjey5W81S1msJSpCqSzC
+ rtfNplMeMU8ajVhKrtmtR2xCIPu9Sscn6EE5v8lsOjJE6Y7/rPNhyPYg/xZoVjZHgKv7M1OEOmC
+ TJOzuGRTD4y4RrRTLbcwtNjjJe1617oH2j9tONeXekg6X9Q4i5VOKTzW6wTmJLZ/6/S7v+HY/LZ
+ VXo40ANOX6s50FrCjuwNikqI3+SbDKAPSqSsOkXXaFG0O+NBaaH0o9tdQ==
+X-Google-Smtp-Source: AGHT+IGl/P23B4RiHTk82SkO73NppeLkS/9rlAaOYaWr5tJZNM/XY5OFnTVkwmsyfclCbshcJrtSOQ==
+X-Received: by 2002:a05:6214:5018:b0:6d8:8a8f:75b0 with SMTP id
+ 6a1803df08f44-6dd23344ca6mr766349286d6.14.1735836786670; 
+ Thu, 02 Jan 2025 08:53:06 -0800 (PST)
 Received: from bill-the-cat ([189.178.122.190])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd1810ceebsm132736726d6.32.2025.01.02.06.44.53
+ 6a1803df08f44-6dd598e8f26sm79489086d6.119.2025.01.02.08.53.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jan 2025 06:44:57 -0800 (PST)
-Date: Thu, 2 Jan 2025 08:44:51 -0600
+ Thu, 02 Jan 2025 08:53:05 -0800 (PST)
+Date: Thu, 2 Jan 2025 10:53:02 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ahelenia =?utf-8?Q?Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>,
- Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, Chen-Yu Tsai <wens@csie.org>,
- Dmitry Gerasimov <di.gerasimov@gmail.com>, Heiko Schocher <hs@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Hugo Cornelis <hugo.cornelis@essensium.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Janne Grunau <j@jannau.net>, Jerry Van Baren <vanbaren@cideas.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Marek =?iso-8859-1?Q?Moj=EDk?= <marek.mojik@nic.cz>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Michal Simek <michal.simek@amd.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Pavel Herrmann <morpheus.ibis@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>, Philip Oberfichtner <pro@denx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>
-Subject: Re: [PATCH 00/67] upl: Align with the updated spec
-Message-ID: <20250102144451.GL3476@bill-the-cat>
-References: <20250101221003.1944600-1-sjg@chromium.org>
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Levi Yun <yeoreum.yun@arm.com>
+Subject: Re: [PATCH 2/2] tpm: get tpm event log from bloblist
+Message-ID: <20250102165302.GQ3476@bill-the-cat>
+References: <CAEfUkUJ8MrFoS3k9svxNoiYsZq51SS_=+TpKKeH=x2jPXRjPtQ@mail.gmail.com>
+ <CAFLszTgaSGEhRbdwhn=SjPkH1-tEW63D8+H2_1ZUtsfxWfZBRg@mail.gmail.com>
+ <20241216183014.GH1505244@bill-the-cat>
+ <CAFLszTg3YgBABRqFOmzaz5KT1ipqmuFxTd1NX1x2yQz2rNgjZw@mail.gmail.com>
+ <CAEfUkUJsdH=YjcN4V8Fe8Vfa2Sdb4PQJZxKe6y9RaRXcJgX_=Q@mail.gmail.com>
+ <20241219163604.GV1505244@bill-the-cat>
+ <CAFLszThG6SY-BvZQ_FzZ+AT+w0NSVmS_iS+nvCWaqoxVRvv6dg@mail.gmail.com>
+ <CAEfUkUJhuCB-5dXt1+FKMAk1t_N_sO6qAZHMK5NJrV7coGH6MA@mail.gmail.com>
+ <20250102154844.GO3476@bill-the-cat>
+ <CAEfUkUJvm-Co4sZLbJEXTey3HPjTdEs33HBZzSY0BrVcMi=rYA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0moMSGmGXsffpxVf"
+ protocol="application/pgp-signature"; boundary="YTW5g8mQUvMxQUpl"
 Content-Disposition: inline
-In-Reply-To: <20250101221003.1944600-1-sjg@chromium.org>
+In-Reply-To: <CAEfUkUJvm-Co4sZLbJEXTey3HPjTdEs33HBZzSY0BrVcMi=rYA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Thu, 02 Jan 2025 17:27:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,48 +108,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0moMSGmGXsffpxVf
+--YTW5g8mQUvMxQUpl
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 02, 2025 at 11:08:46AM +1300, Simon Glass wrote:
+On Thu, Jan 02, 2025 at 11:00:02AM -0500, Raymond Mao wrote:
+> Hi Tom,
+>=20
+> On Thu, 2 Jan 2025 at 10:48, Tom Rini <trini@konsulko.com> wrote:
+>=20
+> > On Thu, Jan 02, 2025 at 10:25:15AM -0500, Raymond Mao wrote:
+> >
+> > [snip]
+> > > As I said, we need an kconfig here to decide whether a user should lo=
+ok
+> > for
+> > > TPM log (and all other handoff information defined by the Firmware
+> > Handoff
+> > > specification) from the bloblist or not.
+> > > We don't have such kconfig now.
+> >
+> > We do we need this knob? I don't think that we do. The case of bloblist
+> > not existing where we looked for it needs to work. And the case of the
+> > bloblist not having an entry needs to work (or if it *must* exist,
+> > that's a separate option to add, ie CONFIG_TPM_BLOBLIST_LOG_REQUIRED).
+> >
+> I think this kconfig should not be only for TPM log, but for all general
+> blob tags which are required to be handed over.
+> User should have a choice to hand over *all* required handoff data from a
+> blobllist (if exists) or to stay in each data's own legacy way (from DT or
+> whatever)
+> Aka, the switch should be general and "one for all", otherwise, we have to
+> add multiple CONFIG_XXX_BLOBLIST_REQUIRED in the future.
 
-> The current UPL spec[1] has been tidied up and improved over the last
-> year, since U-Boot's original UPL support was written.
->=20
-> This series addresses various issues, with a goal of having U-Boot boot
-> EDK2.
->=20
-> There is still more work to do, but this series gets to the point (on
-> QEMU) where the ACPI tables are required. Further work will be needed to
-> relocate the tables out of the QEMU firmware-filesystem.
->=20
-> [1] git@github.com:UniversalPayload/spec.git commit 3f1450d
-
-Since this is on top of your fork, and not mainline, and you aren't even
-noting that in your cover letter it's probably not worth the time of
-everyone you sent this to, to look at.
+Since we're just getting this effort really moving forward now, I'd
+like to go with the assumption that bloblists will be complete if
+passed. So if the TPM code wants to do:
+if (IS_ENABLED(CONFIG_BLOBLIST))
+  ... no event log found ... hang("No eventlog in bloblist!") ...
+That's fine and how we can enforce requirements. But we don't know for
+certain what a previous to U-Boot stage will or will not have done. It
+could be TF-A, it could be U-Boot, it could be something else. We also
+don't have a list of strictly required tags, so that too is perhaps part
+of the problem.
 
 --=20
 Tom
 
---0moMSGmGXsffpxVf
+--YTW5g8mQUvMxQUpl
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd2plsACgkQFHw5/5Y0
-tyyiFwv+L4VEcIJpv7WzHqClL3kIyYyvaa3sucYaq1A3cREG2YnTBY7UtM7rm1h+
-yLJ+hn8Q/+924Al4MyCQ/dY2Uf194fxZjnPRr0v1nj1SX1gVq3bSydSWId1jIAih
-vTqc84QyF7gJzcuqMMCT+tA8zg1Xno9+QYI0efLBKB+FEzosqAfM5s/1rjIuHT4b
-RGHjLafB/SMVyb60/vGy+PkNoZRhzpSbdgSG4ILL1xQ9lR2WOARwv4ykYdtUmkJB
-3pyd7uxiARLLfrKutqsJOEGIfxelb6fSTbcWPcvwW79k5KCNJqDJlVYe4PZuFgWt
-SGws6c1JUZu5adi+7j7mRoQDfgLZSdieYDdH/n3jd1JiubC+sRnjps0SZZoGLfaL
-nkrrubJerMgqhxvC4+/6RxfGsV+Trtu18kGrfKxiMz2gsb4wl+SvxGpe086dAZQz
-twGKzKEa57tSqifkeWfX40KUU0FBBfptfzsmlylE88jIlcb0CkteZfA+4isekUA4
-4adwHVtL
-=m+d6
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd2xGsACgkQFHw5/5Y0
+tyxB3wwAn+Hor/yxyWzJ0TuIV0tMTkZv3He1RRVn5q+wLJpHmXOyk4pnI8RgpBhm
+gKun5k46S1cwnYHgkaIh5FArgzwBqgUHAGEZVjoJxHf4wYLkUo84HjvhIO21X7Eu
+wpI0ABeXiqkiHxqgTx3lowy5TOJ7S3/2baQWR+oMt4GgjYw28MikpvZ7nxt5FNfY
+zpG19jWrLToAPEA3jCk3mqFmBoD6H6ayAt2Rhv0kOObkxSey6I5De1kyASZPgREm
+ogynEr5RHgEycPKNm1sDH3ZXQSgp/0lv9MPAE1YsRmKzCXP2mlsC17SYaUrWQ7TX
+XD/T2DUy5xQIYZSinbY7NXIlSUELg2tGTkTY09ktlGKKphZ5nUjoMEdqXL8czREU
+1NJXq+ZhXXjvXUdtgREAAQhoRJnKp4rRYYAEVAIAbl33cZ8Frzkls7Tz6fu+/pmm
+yXg3tvYKGIszPVb8ph7OsGQEaw0QKKuMpeUUrsGqINlOu2cUE4Ozg58/h4uA6A2C
+dDx6G5qf
+=PYNk
 -----END PGP SIGNATURE-----
 
---0moMSGmGXsffpxVf--
+--YTW5g8mQUvMxQUpl--
