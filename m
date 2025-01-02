@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 757A6E77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 22:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8843E77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 23:13:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C652C8007D;
-	Thu,  2 Jan 2025 23:47:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BE54E8031D;
+	Fri,  3 Jan 2025 00:13:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MWfvJWMy";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="PXh2Jsxk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BED6980196; Thu,  2 Jan 2025 23:47:31 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 7A32A8034E; Fri,  3 Jan 2025 00:13:11 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 889568001F
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 23:47:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A233802EF
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 00:13:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b6f75f61f9so1580950085a.0
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 14:47:29 -0800 (PST)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e545c1e8a15so3658685276.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 15:13:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735858048; x=1736462848; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=k/aE4HKCvJ5LvjpN8DnF7QSy9ToRIY+0kCUq70khUmM=;
- b=MWfvJWMyfkVpdlBLqdBZavCExeV2j+FPEayCSzMqD+SEWMOSKL8ig+Erh+aMA3F/SZ
- 7YvqcIaswpI93QJfW0EFxoB9D9Rn4ylVC4Mmd2kNGshzD5Inir9L+fSL1JOkSbGAPPYm
- RAMWIRofH+GkIO9w7WcIJQbJy49N4AZQPmAdg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735858048; x=1736462848;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1735859587; x=1736464387; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k/aE4HKCvJ5LvjpN8DnF7QSy9ToRIY+0kCUq70khUmM=;
- b=Ai09wU+RHVcxySzzKxuPXgSJYQf98vXGdGmGvGm0OkgyU1TMJsuEJa8uFlXvocM6dZ
- ehkbiPEm3rcgARaJ5Qw4FEEOCfx+yMELowsKXt4XN/tdKPNTDtSUdT25YpxjIV1DNEfo
- Qr+AQG+wL83THc5hw+bo/BKApurifYRZYirwsWWhlCh0OWu+fM0KwDdVXZxMes247RUI
- GItapOq1mztmvxPr9xA+WIARvT4oyWFk0Y0ufzOYHaKLNdJBxRX4UX/3Y5Kj16j5wnUV
- dXvmR/3LfVNatV8xygM+nWNeGKKy97qxE86/AQqyx6k1G9tjMzLoXj+LTRHhYXrcwmW4
- Ud8g==
-X-Gm-Message-State: AOJu0YzzPUJyHPO1qWoXlXjeHmC3ToW0K+7kV5NDAg8yqhAq7B9WfWaT
- O1oBHt/AVbeuqdZUwQ4Qb004nuN5SIszrEwYHP17a23bpEMigvGyCNyCUMsEFodaY7q9xMOUacL
- HWb0=
-X-Gm-Gg: ASbGncv1umBxzS7j1vX5MwM/X1eFYjck/pTXBPA+L25y9Sgd3vfnnhpWycp9O72ziUH
- DUb07L0NzL7leh72OkREdl36JeRSV5WmQ5sV3eNtbkeF9pFJQL+fpuwr6R4ISJIPNbkYEd3YE5j
- Buhd4a7N8kMMY3MfYszOZyhQcoOFSYSQURciUeoTKiUmXV9fUNOxkWYKytM30rhVVmZOBdHiUF8
- 1AgaR7zJB81wqSPqpCz2G2jtInkR+L7VMERmQLTkduckVF3Xi72kXHF4A==
-X-Google-Smtp-Source: AGHT+IGgJWjUziaKR85y9Ypwqe2CC5FzTFx2+LPjZ1WpdUYsTtZJhbxNVWWbQ0mKPHncIIKj9Ybuxg==
-X-Received: by 2002:a05:620a:6088:b0:7b6:d420:7883 with SMTP id
- af79cd13be357-7b9ba7ac16cmr7356873585a.33.1735858048349; 
- Thu, 02 Jan 2025 14:47:28 -0800 (PST)
-Received: from bill-the-cat ([189.178.122.190])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac478df8sm1222323485a.81.2025.01.02.14.47.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jan 2025 14:47:27 -0800 (PST)
-Date: Thu, 2 Jan 2025 16:47:24 -0600
-From: Tom Rini <trini@konsulko.com>
-To: E Shattow <e@freeshell.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Re: LwIP and multiple network interfaces
-Message-ID: <20250102224724.GS3476@bill-the-cat>
-References: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
+ bh=AjqZ14zlrHhwfL+qEM3HEbmvT5pSZ9uipuIOIXKbLys=;
+ b=PXh2Jsxk/Zppi64cQzvadION0tyhE6HhyXoc+FbBRqs/ktagdlBKlaaqg9rRznxSDi
+ dhb5NpOj6vUomaq/WHh0YLzBzvEK0CPNio+/KN5AEC1pb+fZ8l9FiJtGEG0etBPoa3CA
+ jmmHsF0xOwGMDEFn3FkYByf5V3HTe/4P3Amn0rPVzOKvCyEgTxD125CY4LAcus2aVrba
+ 5ma4bCIAvbOvyPNMFsNP8Q9ke2CR/qRdvNfF8QkzbXR/CibpxT3bIPb1uL2c0Ccnahnf
+ yOwHoR65OMOl9/Hpx9KBc13QzFiCufYqKBCNxhvpl1vX1XxGqAXUR/fGpfzCusquww45
+ wrWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735859587; x=1736464387;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AjqZ14zlrHhwfL+qEM3HEbmvT5pSZ9uipuIOIXKbLys=;
+ b=FHYnNQRgMbBoLq2Zjdidac5I9V+6rLZIXa3q+7dWIlU98/p5m2glhEFJXi1tQjr81e
+ 3MHBooTZaFkWP03k/TNzomoLvDdsbVapKsx84EJiP9NUg5T7SmDj8qxGy8UBb4bJmxzu
+ zIW8kenmzDShKAxtPENJJ6A61UO75f7JhFKn0UBGvZ7WUkKTumJwxMsQD7+ds8btwIrA
+ efHXVdhPrRMw15TWgANML4kFVHGeOTaa69arsM1qO5qxAPPKcMS6+th346oz4g/R4Foh
+ 38+Ww/kn8p1oVKJztddb0g0pU8yW38BZjQ1IjB6QmG4dR+FMDRCBsi71O7zn8qjH/47D
+ 8bwQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVm8UNR98L/7OXJJPjwf3tfCiqg88XLdAa3pSX00JYYPApglLy2X/kFfNeAPizVEHOBYphcxSE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw+3utc2cf7x+ffs/XDnM4L3I8QX7CAHlKb94cPjwnfTg5siGsf
+ nwat3FV6QjUIETTy2qbbZK+ok7RUo4rnqS57tmAsvp4txBpw2bH/LpWTre6SMk9N+prq0FF7sKL
+ 7NGN/VJTWMqIcOywdbJFFPNl/Azz8D8XP7sqjrg==
+X-Gm-Gg: ASbGnctsYqYdD+8xPxv7RhZ/jLo3lE/9N2W8qrjxfo8mLtGkFZ8nJnEHpaDM5nBY6U1
+ SKZu8m+nz510W10dsLUqhwJpkuhgiK19+b+vZTw==
+X-Google-Smtp-Source: AGHT+IHn6ibhha9rZCi4EiidCnYX3qb9NL43gq6qO3/jKK8BP441FI5kYbwYhj40Ujca4kscEkRRw54hkpbavhnbG9g=
+X-Received: by 2002:a05:690c:883:b0:6ee:988b:16d4 with SMTP id
+ 00721157ae682-6f3f82199fbmr384856267b3.29.1735859587233; Thu, 02 Jan 2025
+ 15:13:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fztljLJ6fnepVtZC"
-Content-Disposition: inline
-In-Reply-To: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241220-imx95-v1-0-ba81dfd8e369@oss.nxp.com>
+ <20241220-imx95-v1-16-ba81dfd8e369@oss.nxp.com>
+In-Reply-To: <20241220-imx95-v1-16-ba81dfd8e369@oss.nxp.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 2 Jan 2025 15:12:56 -0800
+Message-ID: <CAJ+vNU3p8T5VDoRcxuxvM_dzLK0dRzixUsb1nQp-WoN89VMhkg@mail.gmail.com>
+Subject: Re: [PATCH v2 16/17] imx95_evk: add i.MX95 19x19 EVK board basic
+ support
+To: Alice Guo <alice.guo@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
+ marex@denx.de, Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,61 +99,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Dec 19, 2024 at 6:57=E2=80=AFPM Alice Guo <alice.guo@oss.nxp.com> w=
+rote:
+>
+> From: Ye Li <ye.li@nxp.com>
+>
+> This patch adds i.MX95 19x19 EVK board basic support.
+>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>  arch/arm/dts/imx95-19x19-evk-u-boot.dtsi      | 224 ++++++++++++++++++++=
+++++++
+>  arch/arm/mach-imx/imx9/Kconfig                |   6 +
+>  arch/arm/mach-imx/imx9/scmi/container.cfg     |  10 ++
+>  arch/arm/mach-imx/imx9/scmi/imximage.cfg      |  15 ++
+>  arch/arm/mach-imx/imx9/scmi/soc.c             |   1 +
+>  board/freescale/imx95_evk/Kconfig             |  12 ++
+>  board/freescale/imx95_evk/MAINTAINERS         |   6 +
+>  board/freescale/imx95_evk/Makefile            |  11 ++
+>  board/freescale/imx95_evk/imx95_19x19_evk.env |  95 +++++++++++
+>  board/freescale/imx95_evk/imx95_evk.c         |  54 +++++++
+>  board/freescale/imx95_evk/spl.c               | 117 ++++++++++++++
+>  configs/imx95_19x19_evk_defconfig             | 178 ++++++++++++++++++++
+>  doc/board/nxp/imx95_evk.rst                   | 109 +++++++++++++
+>  doc/board/nxp/index.rst                       |   1 +
+>  include/configs/imx95_evk.h                   |  36 +++++
+>  15 files changed, 875 insertions(+)
+>
 
---fztljLJ6fnepVtZC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Alice,
 
-On Thu, Jan 02, 2025 at 02:26:06PM -0800, E Shattow wrote:
-> Problem: 'dhcp' must be ran twice when the network cable is plugged into a
-> port other than the first network port.
->=20
-> Network cable plugged into bottom (first) Ethernet port:
-> 1. Power on
-> 2. StarFive # dhcp
->=20
-> ethernet@16030000 Waiting for PHY auto negotiation to complete....... done
-> DHCP client bound to address 192.168.2.51 (3678 ms)
->=20
->=20
-> Network cable plugged into top (second) Ethernet port:
-> 1. Power on
-> 2. StarFive # dhcp
-> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
-> TIMEOUT !
-> phy_startup() failed: -110
-> FAILED: -110
-> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
-> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
-> TIMEOUT !
-> phy_startup() failed: -110
-> FAILED: -110
-> Could not start ethernet@16030000
-> 3. StarFive # dhcp
-> DHCP client bound to address 192.168.2.77 (31 ms)
+I found some issues with imx95_19x19_evk.env (see below)
 
-What happens when you set ethact to 1 first?
+<snip>
+> diff --git a/board/freescale/imx95_evk/imx95_19x19_evk.env b/board/freesc=
+ale/imx95_evk/imx95_19x19_evk.env
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..27e09d3d70a068efb97d69b27=
+089d1f213f39ee9
+> --- /dev/null
+> +++ b/board/freescale/imx95_evk/imx95_19x19_evk.env
+> @@ -0,0 +1,95 @@
+> +sec_boot=3Dno
+> +initrd_addr=3D0x93800000
+> +emmc_dev=3D0
+> +sd_dev=3D1
+> +prepare_mcore=3Dsetenv mcore_clk clk-imx95.mcore_booted
 
---=20
-Tom
+I see where mcore_clk is used but nothing uses prepare_mcore. Also
+there is no upstream Linux clk-imx95 driver yet so this really doesn't
+do anything useful. Has a clk-imx95 driver been submitted?
 
---fztljLJ6fnepVtZC
-Content-Type: application/pgp-signature; name="signature.asc"
+> +scriptaddr=3D0x93500000
+> +kernel_addr_r=3D" __stringify(CONFIG_SYS_LOAD_ADDR) "
 
------BEGIN PGP SIGNATURE-----
+for a .env file you can't use stringify. Just use the config without quotes=
+:
+kernel_addr_r=3DCONFIG_SYS_LOAD_ADDR
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd3F3gACgkQFHw5/5Y0
-tywKZwv/SMmCrUH0fa4YwYAzANkaxdbfp43sm7Uw6GN2sOas539yi0/+5sm97RfC
-5kRInYHbyvLCU+AW2FUTh/V5a9VpK4IySKq2GsFLxr/m2tlbYJFlXRaOn9bf8sAi
-L/2jOItKVCj+r9mnBt1Ei0js6RF3FczcNsPqE3MKXdtL6LLgU4ktwEwJafJ9cou7
-hrOOJDJ9hwl2xhtZcgEQevWRdHDGiITFS/Y2DJalFahqemaG4odM9lZnOWTd34SY
-vxebjjMhgCvp187+5S0hqMClcWifzkaU8vAETD9tJW65KZwPARwj3B33saMjHxpy
-BYtutGNZRx43NADhGYNW5v+mehEFNb4kJwDzXFLMKk32ZlcBUBTcbtEmzeq8sh2K
-BtlOXzROGojX5dxDldqzfohxSeTaWb2bYEnpQxgORxlZ+MqLHIsvUFwzOZhOnROW
-9ndWYg5FTZPOKxhD23bfOz5xIOJpqKp4X+rs9NMY1cdxttbOxh0DkOkIycdMs66b
-nbv/AlQR
-=Z2Tb
------END PGP SIGNATURE-----
+> +image=3DImage
+> +splashimage=3D0xA0000000
+> +console=3DttyLP0,115200 earlycon
+> +fdt_addr_r=3D0x93000000
+> +fdt_addr=3D0x93000000
+> +cntr_addr=3D0xA8000000
+> +cntr_file=3Dos_cntr_signed.bin
+> +boot_fit=3Dno
+> +fdtfile=3D" CONFIG_DEFAULT_FDT_FILE "
 
---fztljLJ6fnepVtZC--
+fdtfile=3DCONFIG_DEFAULT_FDT_FILE
+
+> +bootm_size=3D0x10000000
+> +mmcdev=3D" __stringify(CONFIG_SYS_MMC_ENV_DEV)"
+
+mmcdev=3DCONFIG_SYS_MMC_ENV_DEV
+
+but you should probably just eliminate this one as its set at runtime
+in board_late_mmc_env_init()
+
+> +mmcpart=3D1
+> +mmcroot=3D/dev/mmcblk1p2 rootwait rw
+
+This is also redundant as its set at runtime in board_late_mmc_env_init()
+
+Best Regards,
+
+Tim
