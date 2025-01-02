@@ -4,76 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F9B0E77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 16:13:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC8D0E77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 16:27:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21F2B8007D;
-	Thu,  2 Jan 2025 17:13:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EE3138007D;
+	Thu,  2 Jan 2025 17:27:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KPKJlOpy";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="DSQeLBmR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64AC280196; Thu,  2 Jan 2025 17:13:20 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 57AF080107; Thu,  2 Jan 2025 09:44:03 +0100 (CET)
+Received: from AUS01-SY4-obe.outbound.protection.outlook.com
+ (mail-sy4aus01olkn2082c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2819::82c])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD0228001F
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 17:13:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6650780087
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 09:43:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6d92e457230so111374816d6.1
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 08:13:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1735834396; x=1736439196; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/zjH7fUlDpv0DmAm0vf7+hG1yFc41QyIIVj7vdqyNL4=;
- b=KPKJlOpyj9Z3po37FaZHwF3rG4p5RQBfR2Mgp296a5IdEVvDzf53qCEliQ53DFZRFt
- lmxXK3p+JEO+CJMVGPEyRgbrXIOR+6FceWyzhcwm52hC0B14yDFyKr6SBymBBkRs3BUp
- SZk8NSFgJZ7FKx7IfSJg6xYCtIN/JewtAcpJM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735834396; x=1736439196;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/zjH7fUlDpv0DmAm0vf7+hG1yFc41QyIIVj7vdqyNL4=;
- b=JXi3DtwE6TBTvPRog32LGn/718Ga7fc5ROcF+7pNTgaWT2PjM62HUGHsbpAwbO3GYo
- 9Of/2R5d8D8+Hw8qX20rdEwFx+XnChceBFwZzCEH2JWHwlt9lHQEObs+C7vC0fSGM9X3
- uc3UjScaE7ZSOkL2Wf65abM75gpr9hSktFO7KIwE4aiqYEoUU5FxUho4T3PjYI1KFhQT
- bxh2sv3DbPpVGUxdbnG7RPDsZJpNVMZUP3cMhin2zPs/0WIo+PvH2FYhzN0BxAGKe+Fk
- lJAd+BlnBLtaqUqpq+TcIwFp0lDnxuMCwSOKwdsRsMLVRDBwLbFpJMTPheJqGJC4xH12
- JnmA==
-X-Gm-Message-State: AOJu0Yw7ooVfo131sjsez4r1rFtLITux/YtBeKDAYlxlJjyqlv2Bbd08
- mikC+ivJLfxjpxn16wjJdyjYO2ZtzwcArT6Q06Ga30Sq10CED6sA/zO5LFNhwCFMJUgf/b04jwe
- xMoo=
-X-Gm-Gg: ASbGnctgPUxBRZZP+2VIC1SnhUT85rpkHBFGqXrdZ0wsGRXuznY8OeT9dI+6rCT22HY
- LFf+qt6tq09qmH2CEIakScftAFPi0mZcVw6Hd1O8K/f6vIWyHoZq0UlTY2h8RSjBx3XdhVhbSqE
- jZZ87q8pOk3Ey2rbotXkOHeA7Z9Nj+Ry3MhdPPa2h4rJ2EA2yCT36orF3O43WI74gleWe8mpXOr
- JSXJX2XHGo9m8A1m/vnddSnwzV8/cI9rYBeKhDywdg5ifidecKpzha0Ew==
-X-Google-Smtp-Source: AGHT+IFDtRttw4wi5OzHXEWtvXyn9450CblMyu1XoQKKB3CN2JEwUw3/Ky9zMC7zSUPir20wlsysqg==
-X-Received: by 2002:a05:6214:d8e:b0:6d4:36ff:435b with SMTP id
- 6a1803df08f44-6dd23345b2fmr781026596d6.20.1735834396661; 
- Thu, 02 Jan 2025 08:13:16 -0800 (PST)
-Received: from bill-the-cat ([189.178.122.190])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd182082f0sm132930866d6.129.2025.01.02.08.13.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jan 2025 08:13:15 -0800 (PST)
-Date: Thu, 2 Jan 2025 10:13:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Simon Glass's future with Das U-Boot project?
-Message-ID: <20250102161313.GP3476@bill-the-cat>
+ spf=pass smtp.mailfrom=liujh2818@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RAMcv4TaW/K4DJYP+h6NolhkjBg6Db1Y6TOEsmg45N5Z3sWGrIJCG17oU9v1KAFUDWE+Srcl20utDLN9jRmoisNkfyD1a4+hpMJlT+i/xFb2whFiDw/Ns7PDDmyOCzc5RWbE8IWsbsnDSabyOAzuVXzIBtPcC+zTNOZ2FkRk3/MXq3C/vAlLoH4ipeTTaHNbwbmrWpuQwb0xlBpzDeeD2f1RNPgEtDIN/j+s8lv7fZh0vLsaMYMpmZS9wKPpTBof17J/R7B5tmtJ2xM+O5/5blM+uPmbUBLo7+xvjgzpLIbL7P5KUDYnAGwmNUiHJ3vFpP206YDSoM5Va3trTgvLyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QQ8DdRP+HuOVBjWtClM53nZQc2POZhsTPeTQsV7mozw=;
+ b=OolwyJdRXy1BRs/5PgZDAL54VphZsRJ7CU5adXCkOwOL0VeC45kuq0RaiY+0ChCXMQXtGC1wtzs6MPe4WaHRr6JFxMcGJVFdl0nhnqjTbtSC9xlegPp3Gt1R/rQ/2cn0TpVnWOLcGlLTe9VeBTaxI/VjcFOmhbU3MJGtpGQzA3QzOVi63EL0XKYDe8GydwVVFFuvgth98oTyofu0D1XwcxXWac2aN6/7x4wKPbFWfrG2/X0WDlvT2iC0rT/zN6oDuhyySd5Kj9jTqjklvWkf0JSk5paaomzuyimiMs+Z9HAtZVRGKzL0jqwEl2mzPd8ZTx3owqtpRRb5Zy8WMMhBnw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QQ8DdRP+HuOVBjWtClM53nZQc2POZhsTPeTQsV7mozw=;
+ b=DSQeLBmRMXZpk3Zd5N337oASdIk4/1oqAyBKgjbzzKKhggLNkblyLKODWO9SVIZSFFNK4Zz/PfhhXnMTwyFYiNpilGs7FmkdkVzw77l8hdKB4lEow+AyKuI+Wz6iVmY+hspRnzaNWTPonXYmZI3OFc9EHTY9w/zSQrC+gDaQ7BxVclW2DAqm/G+p4fCH2LrEnzy4kiMyUXgiIABwdpZpTIrnNVQAertcRbSvOgfM+/uzigreI1z3zz+fbnVmFnF9mfsb0Ke8pbL+lgbiAXFhY7NQwObxj+cLfb0HyDODn7nG9biiUue+fTAKGJAyODs5XQddXV+YKxXXDdSPNmd0Fg==
+Received: from SY8P300MB0922.AUSP300.PROD.OUTLOOK.COM (2603:10c6:10:296::5) by
+ SY8P300MB0571.AUSP300.PROD.OUTLOOK.COM (2603:10c6:10:299::14) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8314.12; Thu, 2 Jan 2025 08:43:51 +0000
+Received: from SY8P300MB0922.AUSP300.PROD.OUTLOOK.COM
+ ([fe80::fc57:50c4:6ee6:c8c1]) by SY8P300MB0922.AUSP300.PROD.OUTLOOK.COM
+ ([fe80::fc57:50c4:6ee6:c8c1%7]) with mapi id 15.20.8314.013; Thu, 2 Jan 2025
+ 08:43:50 +0000
+From: Liu Jude <liujh2818@outlook.com>
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Lukasz
+ Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Kongyang Liu
+ <seashell11234455@gmail.com>
+Subject: Re: [PATCH v2 4/8] usb: dwc2: Clean up with bitfield macros
+Thread-Topic: [PATCH v2 4/8] usb: dwc2: Clean up with bitfield macros
+Thread-Index: AQHbWms9zyq5/dGV9kS22gPKNPWuwLMAp10AgAKIoQA=
+Date: Thu, 2 Jan 2025 08:43:50 +0000
+Message-ID: <52DE23A6-5DEF-4C02-9892-043EBA522534@outlook.com>
+References: <20241230-dwc2-dev-v2-0-12cd9b8a2358@outlook.com>
+ <20241230-dwc2-dev-v2-4-12cd9b8a2358@outlook.com>
+ <18ea1084-69be-4370-b8b2-95a6c06e3e0f@denx.de>
+In-Reply-To: <18ea1084-69be-4370-b8b2-95a6c06e3e0f@denx.de>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SY8P300MB0922:EE_|SY8P300MB0571:EE_
+x-ms-office365-filtering-correlation-id: dcfe07a3-84ae-45c9-febc-08dd2b0994a6
+x-microsoft-antispam: BCL:0;
+ ARA:14566002|15080799006|7092599003|19110799003|461199028|8060799006|8062599003|102099032|440099028|3412199025|56899033;
+x-microsoft-antispam-message-info: =?us-ascii?Q?MwSPuzBCaZyICQpk1fL5Pl99CYL1CK13v7ex9ZbyN0Lf62aEz1ZQp8nua2QQ?=
+ =?us-ascii?Q?k4qlUAhNhi+dxsXfuWFQ2DUaU+jpXwwygCgfVPSe16IRF1x/tU+fUakk6ZFC?=
+ =?us-ascii?Q?b3SWmBWZyKn2smmjFuskvg3r5WLuN/OhZQ4mbH3KXHXSzd8YzAntjGdohK+h?=
+ =?us-ascii?Q?v/OV7yZfxnKvVkSDHlkvBE9d20n6L1lol1Z+RjFMnXLaWizghniqKZEJL0AC?=
+ =?us-ascii?Q?3OdwVnv7YXsWHIX7xxW6K2rK00iz8yiCuqw4dwBwm/1b6OdqBzQv3wxDiULx?=
+ =?us-ascii?Q?9zrmEVutpE1nGbsThmKiJCDAETT9NGvI5Nt1MGqgTSxEJ0XE9ANS2WKQmS9j?=
+ =?us-ascii?Q?qcJDr5oicX6dV10xgFLDR+xuZCZjMylJXqv80bJgzo9KmViOaMHButpkPsI9?=
+ =?us-ascii?Q?KHAX7MHwyiGfPJBVQyEppZ2960fHZpeWx6aJgC99lf7cFAy2KYGh5hvMczt6?=
+ =?us-ascii?Q?bjIAfsnhefl5KzCzUKmrpzkG5jDy7nIiyjqi2jE2TT68DEDQ33/nXlnG4FKE?=
+ =?us-ascii?Q?xP2343Tq9XUXUkK+Zfs41kfE/No8Sow0ZB8ZEpyhu4l2QthklJF4gP6uezQH?=
+ =?us-ascii?Q?aOFY/3cL6xkLJgod4tjMByLq+Ito8PVQnu3wTVuJxgnp7nFOeyfITmMG1w32?=
+ =?us-ascii?Q?WDlz31PgLCWA+xcD7xMtG9oMr7ZgrmvTLbaHuId1TXYday9sUjaHZDqA+yap?=
+ =?us-ascii?Q?NuCJB3GfJe86OK+eXDXE5UGQH1tjklh0yzaJOnmeHd/BGRsVdMuUAZtfOg0l?=
+ =?us-ascii?Q?ZV6kHtJZ/ZawRcddCunukH6ipxY6jpD5pHR6Na2bnW4/Fpgge5FRGg5//veQ?=
+ =?us-ascii?Q?cqmpUMerYCgJG7CBHMFOhyk+2LJTwQiJIHPixulP2qPQCaDAQWeJbtFFgqpo?=
+ =?us-ascii?Q?m/qZayTpNUJo2oMjvlxhQh3rUIOya/O+wBf1VaQV+op7hi7GaFnqcCrp7DeR?=
+ =?us-ascii?Q?czMxs9FAwxSoQL4JrLUXmFVuTJ/7U9V9PN6Ki/+DQCIEMi73s5wZVioTm8tn?=
+ =?us-ascii?Q?Pwm+XlUrk+D8GfF09Lq3xHAVN9hGXg+D2lfCniL+QFTK0UzOudhZh0Mq+fsN?=
+ =?us-ascii?Q?TpMHPA6Qd86wfLLfpcJS/32pSd0MWg=3D=3D?=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?bouPhiS7OtLh+u6Emt9YfMJgn/0ZPO5mCZSS96uXtaZYtjlmA6sFdS+M3zX5?=
+ =?us-ascii?Q?Ky0IYjNqwHSAaGJWoIBzea/V8kb0awbVHvodfCL35lR+GD2qUsJvIgouXBEf?=
+ =?us-ascii?Q?Z2vat8u1GE8WTpWIYJsRp9jS6xD3BWUMtJmkSQ3dPIJXg58EgFk3JWx5TeNG?=
+ =?us-ascii?Q?LVCAALFfN/YC4z0df+iXxTDobvzn8zeR6dQvbrINEpg6LLmCiZzrGJgTSjIN?=
+ =?us-ascii?Q?elKSFzhQwHasootz4FqVHs/zL59AysgA3I6Zn+1Kzjnvbm49Mt98oTkBMS5Y?=
+ =?us-ascii?Q?WBhBxLM97aa7o8Ekw5JvxFrcYjgsZ7TmXzxKGy/Lhqa6of7u4/FdlbqjTHrb?=
+ =?us-ascii?Q?sLK1d87l8iot7SVaWC/bhPSXa/VOUpqfaJI00GCqRhatI4gFUMLm1t97xvMd?=
+ =?us-ascii?Q?Fv4ulumRy06mpAEfZvnCjZSRZXbSGaDMjZYxl0EWtqwCTDRgxrpvtD1sXJte?=
+ =?us-ascii?Q?6/eTv7XFiCOTRkrvhJFnHAQwgn/k/5j07l0cut+DMeEGX9XGanIZ4+qHaAXG?=
+ =?us-ascii?Q?e7ZKm2zmiGtwZGAtzWaD9ENJJFScNYpECEWyRf9HrN6OSQ2QmwNuMiUrRvCO?=
+ =?us-ascii?Q?w2/3qf61ImOExgPhTirDUX/KfZtYEG4OD7qB2bDxfJGStVkOJNEdcN4/t/uR?=
+ =?us-ascii?Q?lqYv2RYFdRjjvWUv7H0XuCGVXJmr4g3zQRsRU66EihpsKSt9ouM2p2Fs3Baw?=
+ =?us-ascii?Q?kq39+MMkuDTdb9UcfAJSX8YaRLNdfBX5nAn3lDlRIAE3AvIyYrXKMVS62L8h?=
+ =?us-ascii?Q?YzPeWlaKclOTc+WRUZaNa768hIG8SqFadsHhu254KyXc86AIjcu8gs0ktdt2?=
+ =?us-ascii?Q?j7nOuUnDJ2ch5394N7u2sfSBoLSr8Jp9xK8u+aGTaGvrQXhdFTkLpE76/DF9?=
+ =?us-ascii?Q?2SmTTZun5po2hm40iqtY3s7s7t1qHNZYDIIMHam5YiTnQYEv50JSnldF22FS?=
+ =?us-ascii?Q?k565iulnPS1s4RerSFAab9MOWyjyeT38USJyQD/luDVWs73MFOWaDngo+KO8?=
+ =?us-ascii?Q?B9lqO56xC08QqmUAhreIoow+mmIXpfGE8Y8XkKwTwsaXlf/VNFEexCCWU+em?=
+ =?us-ascii?Q?FuCe8+AAoVGLr0Wmi2zrGHA1YkZRNRtScg67EkoUrYURbyLeYc9boN3TJwhB?=
+ =?us-ascii?Q?hBDSOkqmPUhssk28keLur3yYwA7de4J9o8M2R1Eg4s0sk/OwIqLG8i/ZIyM7?=
+ =?us-ascii?Q?MUB5j8r9sUqJ9wy3xxVzboQd+3Jbu/IlPMnxGgYpsW4wzu5IbvQcAnz9lje4?=
+ =?us-ascii?Q?vSiWvbeQDf26e/ZsVaounvFzYwtSEtegtXWPzjUMYvNlx1TB0ABeAZueY7Oz?=
+ =?us-ascii?Q?tJ210gVSDv7/9PcYFH+r64xK?=
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vEnyDvTZ9ek507Pp"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SY8P300MB0922.AUSP300.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: dcfe07a3-84ae-45c9-febc-08dd2b0994a6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Jan 2025 08:43:50.4803 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY8P300MB0571
+X-Mailman-Approved-At: Thu, 02 Jan 2025 17:27:20 +0100
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,54 +148,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
 
---vEnyDvTZ9ek507Pp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks for your review.
 
-Hey all,
+On 2025/1/1 02:02, Marek Vasut wrote:
+On 12/30/24 4:30 AM, Junhui Liu via B4 Relay wrote:
 
-While I had hoped that the quiet of the last week or so had meant that
-things would perhaps return to how they had been before, Simon's large
-patch series and then comments on the TPM+bloblist patch have shown
-otherwise.
+[...]
 
-At this point, I do not know how best to handle Simon's behavior,
-without soliciting feedback in public first. At best he's created a
-soft-fork of the project with his "sjg/master" branch. I've asked him
-repeatedly to explain how he thinks this is all going to work out, in
-public. I've had private conversations with him, but I want him to
-explain in public. Or, he can post the messages if he likes.
+diff --git a/drivers/usb/gadget/dwc2_udc_otg_regs.h b/drivers/usb/gadget/dw=
+c2_udc_otg_regs.h
+index 198ba7a7c37d05dca084ef017534265f5fb5fd70..33359ba56f7864525fb435ab52f=
+2b21538e4647f 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg_regs.h
++++ b/drivers/usb/gadget/dwc2_udc_otg_regs.h
 
-And I am in the process of getting outside help that would in turn be
-able to help the project move beyond the BDFL model we've always used.
-Because at the end of the day, if most of the active developers would
-prefer the direction Simon wants to take everything in, that's something
-I can accept. But what's going on now is towards the worst end of
-possible outcomes I think for the project itself. And by that I mean,
-one prominent contributor steam-rolling over others and doing as the
-please and implicitly acting as an authoritative voice for the project.
+[...]
 
---=20
-Tom
+@@ -78,15 +77,15 @@ struct dwc2_usbotg_phy {
+  #define HIGH_SPEED_CONTROL_PKT_SIZE    64
+  #define HIGH_SPEED_BULK_PKT_SIZE    512
+  -#define RX_FIFO_SIZE            (1024)
+-#define NPTX_FIFO_SIZE            (1024)
+-#define PTX_FIFO_SIZE            (384)
++#define RX_FIFO_SIZE            1024
++#define NPTX_FIFO_SIZE            1024
++#define PTX_FIFO_SIZE            384
+  -#define DEPCTL_TXFNUM_0        (0x0<<22)
+-#define DEPCTL_TXFNUM_1        (0x1<<22)
+-#define DEPCTL_TXFNUM_2        (0x2<<22)
+-#define DEPCTL_TXFNUM_3        (0x3<<22)
+-#define DEPCTL_TXFNUM_4        (0x4<<22)
++#define DEPCTL_TXFNUM_0            (0x0<<22)
++#define DEPCTL_TXFNUM_1            (0x1<<22)
++#define DEPCTL_TXFNUM_2            (0x2<<22)
++#define DEPCTL_TXFNUM_3            (0x3<<22)
++#define DEPCTL_TXFNUM_4            (0x4<<22)
 
---vEnyDvTZ9ek507Pp
-Content-Type: application/pgp-signature; name="signature.asc"
+Nitpick -- please add spaces around << , I think checkpatch would warn abou=
+t this.
 
------BEGIN PGP SIGNATURE-----
+Okay, I will fix it.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd2uxUACgkQFHw5/5Y0
-tyzUcgv+JJ9+joFar7gtuRdRbvoibXFv4eQbuakCeS6RgB0rjFpb97dP7/tm3HM4
-E/wkRlYsohXmaNmbaDnBJsAzsQDl2j2Mdo7AFOfRAvHsIjKwciSJO1PIQgaug78I
-DybOfhcibpoGahOJXAdXStnvTGR8ecsFsdDk37fVpwWrrOxuqtfeD2OWms5VsqG+
-QhSxjp7hnPY7jqK6cnTc1IyRmIwwq1YWJf6VXzngMGncFI8oKxp2zzUbH3aeLzTd
-iqR/7yK3BmdkS1KRw+9VgUL0V0kVLYVXGw0SAmhbmxij/wULrNDpQgfOyvqsxUCt
-DwbpbjHAZHtl2BXpBQiBVPpe632Rxmf+gvi1Td5ntDtQnIHNb+N0sw1fNjT34JhX
-Zyu5H/wXNAAMXd0KkKdjOL/X2blZ329wBRgn1fs4GbH0sVQd4VMHxhuJDnBA8fE+
-tpt2zpIGUFMj2oPhrDaUCRsVHdQA0qN67G+SsJyRzO6F3elIg2AiB24bPoDGFg0W
-ZMO3Vmar
-=4qjR
------END PGP SIGNATURE-----
+[...]
 
---vEnyDvTZ9ek507Pp--
+diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gadge=
+t/dwc2_udc_otg_xfer_dma.c
+index e2a24c53b4c8d632163484d52b4338820dcb1731..76c0b03c355b47e9523a071bd76=
+ab8d6a17cd3ac 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
++++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+@@ -19,6 +19,7 @@
+    #include <cpu_func.h>
+  #include <log.h>
++#include <linux/bitfield.h>
+  #include <linux/bug.h>
+    static u8 clear_feature_num;
+@@ -174,11 +175,11 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_=
+request *req)
+      ctrl =3D readl(&reg->device_regs.in_endp[ep_num].diepctl);
+        /* Write the FIFO number to be used for this endpoint */
+-    ctrl &=3D DIEPCTL_TX_FIFO_NUM_MASK;
+-    ctrl |=3D DIEPCTL_TX_FIFO_NUM(ep->fifo_num);
++    ctrl &=3D ~DIEPCTL_TX_FIFO_NUM_MASK;
++    ctrl |=3D FIELD_PREP(DIEPCTL_TX_FIFO_NUM_MASK, ep->fifo_num);
+        /* Clear reserved (Next EP) bits */
+-    ctrl =3D (ctrl&~(EP_MASK<<DEPCTL_NEXT_EP_BIT));
++    ctrl &=3D ~DEPCTL_NEXT_EP_MASK;
+        writel(DEPCTL_EPENA|DEPCTL_CNAK|ctrl, &reg->device_regs.in_endp[ep_=
+num].diepctl);
+Nitpick -- in some follow up separate series, this could also be replaced b=
+y clrsetbits_le32() , but that's really for separate patch/series.
+
+Sure, I will start a separate series to deal with this later.
+
+Best regards,
+Junhui Liu
+
