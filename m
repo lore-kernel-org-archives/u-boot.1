@@ -4,52 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0775E7718B
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 16:27:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6AA2E77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 16:27:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F792803C6;
+	by phobos.denx.de (Postfix) with ESMTP id A0F77803D2;
 	Thu,  2 Jan 2025 17:27:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=protonmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="TuRYvJhw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HcErrpnl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E060380196; Thu,  2 Jan 2025 14:28:29 +0100 (CET)
-Received: from mail-43166.protonmail.ch (mail-43166.protonmail.ch
- [185.70.43.166])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9E60380196; Thu,  2 Jan 2025 15:45:01 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F1C880040
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 14:28:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=protonmail.com
+ by phobos.denx.de (Postfix) with ESMTPS id 557C88001F
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 15:44:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=waldoalvarez@protonmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1735824506; x=1736083706;
- bh=0cUIoakJ7YvjxaoXrq2YFFVWA7VeA34n0X5o7On0Nsk=;
- h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
- List-Unsubscribe:List-Unsubscribe-Post;
- b=TuRYvJhwmjGOqw0obQPAkOEw6JNLmMoo+evfYZ53YZ11PXbm8Y+D6WjbJlcSK39ac
- bB/F8d+Ua0eQ0GkOjZdIchHLqx0eaYQDKJ1tpE9iVeTUHxw/ESLPadM6+2HQy0oglh
- mRKnMBUmZbGodv6QWMqhC7QYvfJ7i7O7B4kZ8s4sdOZL1pJJ3PdeRWpwnB3zbboofc
- y8a5M9QGP3j0B8MreEVkSDzWBGY9DQ9eJqFcT1AN5CCjmzZDuTERpjWEEsgWlpXxxl
- x9SNHsiXpq+MGZdrYaNBz6BNgE6HxPSHpUVqjx+8mdsQlbR3hOElFRCfSS5MhXqnj6
- C3g4Duo+UKZuA==
-Date: Thu, 02 Jan 2025 13:28:22 +0000
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-From: Waldo Alvarez <waldoalvarez@protonmail.com>
-Subject: Secure boot on Milk V duo 256
-Message-ID: <9gGp0Bj5BodfZFh9cs_TfmuEpCjka0pg9zw_0jHrGSgVaMRQWbjoI7rDHQ4tYsa3IIzqC3gYozVRk5s_wdiCTp5IuAb7A1wccavJbQxuLAI=@protonmail.com>
-Feedback-ID: 1984973:user:proton
-X-Pm-Message-ID: daa8d179a4a3495f63ce2aee0645d1c8ae31a167
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6d900c27af7so89210366d6.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 06:44:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1735829098; x=1736433898; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dhTjW2VRGlH7YF4nFyiQnYZN+GDe//vWmEVEPFZS4R4=;
+ b=HcErrpnl9fpQBvMEKfwGpYE0m/7OKjLqMB2ri4Z5DafV2bzx7+ALYRVMrO3O9q7cdb
+ 9Gjnt/VRuOCW/W2Ug9No4UcUGQA+QlpuxE60HrROVAqxjc0cRwbtMpAJa92GuYS51nby
+ ppbbg0/N0UUS0vFyxnYL8FphmEenlpU8h8cUo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735829098; x=1736433898;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dhTjW2VRGlH7YF4nFyiQnYZN+GDe//vWmEVEPFZS4R4=;
+ b=bNoE5KeVVTgHXs4G+mWLOIthTaXE4gdcMeCUqNntrSZ3FeanIHcs6OwWaRen4kh5ip
+ bb2SNkZrQ8Obo/yHlJ77pQLvc9GmTnHIHiNK6sfhR78KnwpRjiWqVocyvdpXeyVaGiO0
+ rFq/u+rKXHVVPuJGJ52S2RL21gHH67lxYXNYoWsikrXcHE0kf+8lemUQwFDaoQZtog5b
+ DEMmVr3Gm8aK3GIawrpu0FtCfRNPfVt1VHzXdTOuv9Im+GC6xA7pyK7bMVfNVN1PMJ4q
+ 7RlMP399svYlvx1qEA30HmYal3rBIGOzOqaauf/TBcPC//r70JtrIFJEu74Y0LLyOOyJ
+ kvHA==
+X-Gm-Message-State: AOJu0YzBJigL+Ju+VLOok9WixQ8Gls9JNR+xPau8pCiIml+/89U8lxbl
+ 5uq3O81JnFpYHLM3do9cIcR2VPpQRt5ItqBWpYTMKLGduq7mRqo9XKoBadJ3h/k=
+X-Gm-Gg: ASbGncvO8usywZq2ssyGUe4ZzctaJ69oL0+aR6q+sVY6taNs+FLmGpAXJPRMQHrL9zG
+ Wx01DdGMFmd7nrpVDhASSQSSlFx4l5/xQ+pDN0ZCfFpllZCMEmXAmFYbdiS20nB/yaWbUuELMg/
+ 4oZsYbgPIh6ulwFnF4BdU/tsEoXavTAX9IU0jyJDLUKOS7fHitpvgBVEfzwU99x8CtoNVsAoWDL
+ 7WIz02ZKjJblU4x8ipYEbw4wpc4fcGT9wWNR5Y03CI8DjLMfzKmJeO6Kw==
+X-Google-Smtp-Source: AGHT+IGezGnvBzu8ekegu5WubDmmLBIs2WhW0dqmzo1NMW0kkCAZ921SfLYBdAG6hTlO5aotiU9YPg==
+X-Received: by 2002:a05:6214:e67:b0:6d8:7f8a:73f5 with SMTP id
+ 6a1803df08f44-6dd2334daf5mr639798496d6.24.1735829098123; 
+ Thu, 02 Jan 2025 06:44:58 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd1810ceebsm132736726d6.32.2025.01.02.06.44.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jan 2025 06:44:57 -0800 (PST)
+Date: Thu, 2 Jan 2025 08:44:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ahelenia =?utf-8?Q?Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>,
+ Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Chen-Yu Tsai <wens@csie.org>,
+ Dmitry Gerasimov <di.gerasimov@gmail.com>, Heiko Schocher <hs@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Janne Grunau <j@jannau.net>, Jerry Van Baren <vanbaren@cideas.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Marek =?iso-8859-1?Q?Moj=EDk?= <marek.mojik@nic.cz>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Philip Oberfichtner <pro@denx.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>
+Subject: Re: [PATCH 00/67] upl: Align with the updated spec
+Message-ID: <20250102144451.GL3476@bill-the-cat>
+References: <20250101221003.1944600-1-sjg@chromium.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0moMSGmGXsffpxVf"
+Content-Disposition: inline
+In-Reply-To: <20250101221003.1944600-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Thu, 02 Jan 2025 17:27:20 +0100
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,15 +123,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG86CgpJIGFtIGZpZ3VyaW5nIG91dCBob3cgdG8gcHJvY2VlZCBvbiBzZWN1cmUgYm9vdGlu
-ZyB0aGUgTWlsayBWIERVTyAyNTYuIExpa2VseSBpbiB0aGlzIGxpc3QgSSBjYW4gZ2V0IHNvbWUg
-aGVscC4gSXQgaXMgQVJNL1Jpc2MtViBib2FyZCB3aXRoIGFuIFNHMjAwMiBTT0MuIFRoZSBTT0Mg
-aGFzIE9UUCBtZW1vcnkgYW5kIHNvbWUgYm9vdHJvbS4KClRoZSBjdXJyZW50IGRpc3RyaWJ1dGlv
-biB1c2VzIHUtYm9vdCBhbmQgbGludXggYnVpbGRyb290IGJ1dCBkb2Vzbid0IGRvIHNlY3VyZSBi
-b290LgoKVGhlcmVmb3JlIEkgYW0gdHJ5aW5nIHRvIHN0YXJ0IGF0IHRoZSBmaXJzdCBwYXJ0LiBW
-ZXJpZnkgZGlnaXRhbCBkaWduYXR1cmUgb2YgdS1ib290IGFuZCBoYXZlIHUtYm9vdCB2ZXJpZnkg
-ZGlnaXRhbCBzaWduYXR1cmUgb2YgdGhlIGtlcm5lbC4KCkNhbiBzb21lb25lIHBvaW50IG1lIGhl
-cmUgaW4gdGhlIHJpZ2h0IGRpcmVjdGlvbiBubyBob3cgdG8gcHJvY2VlZC4KClJlZ2FyZHMKCldh
-bGRvIEFsdmFyZXoKRGVzYXJyb2xsbyBkZSBTb2Z0d2FyZSAvIFNvZnR3YXJlIERldmVsb3BtZW50
-Cmh0dHBzOi8vcGlwZmxvdy5jb20KaHR0cHM6Ly90cmFkaW5nZnV0dXJvLmNvbQoKU2VudCB3aXRo
-IFtQcm90b24gTWFpbF0oaHR0cHM6Ly9wcm90b24ubWUvbWFpbC9ob21lKSBzZWN1cmUgZW1haWwu
+
+--0moMSGmGXsffpxVf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jan 02, 2025 at 11:08:46AM +1300, Simon Glass wrote:
+
+> The current UPL spec[1] has been tidied up and improved over the last
+> year, since U-Boot's original UPL support was written.
+>=20
+> This series addresses various issues, with a goal of having U-Boot boot
+> EDK2.
+>=20
+> There is still more work to do, but this series gets to the point (on
+> QEMU) where the ACPI tables are required. Further work will be needed to
+> relocate the tables out of the QEMU firmware-filesystem.
+>=20
+> [1] git@github.com:UniversalPayload/spec.git commit 3f1450d
+
+Since this is on top of your fork, and not mainline, and you aren't even
+noting that in your cover letter it's probably not worth the time of
+everyone you sent this to, to look at.
+
+--=20
+Tom
+
+--0moMSGmGXsffpxVf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd2plsACgkQFHw5/5Y0
+tyyiFwv+L4VEcIJpv7WzHqClL3kIyYyvaa3sucYaq1A3cREG2YnTBY7UtM7rm1h+
+yLJ+hn8Q/+924Al4MyCQ/dY2Uf194fxZjnPRr0v1nj1SX1gVq3bSydSWId1jIAih
+vTqc84QyF7gJzcuqMMCT+tA8zg1Xno9+QYI0efLBKB+FEzosqAfM5s/1rjIuHT4b
+RGHjLafB/SMVyb60/vGy+PkNoZRhzpSbdgSG4ILL1xQ9lR2WOARwv4ykYdtUmkJB
+3pyd7uxiARLLfrKutqsJOEGIfxelb6fSTbcWPcvwW79k5KCNJqDJlVYe4PZuFgWt
+SGws6c1JUZu5adi+7j7mRoQDfgLZSdieYDdH/n3jd1JiubC+sRnjps0SZZoGLfaL
+nkrrubJerMgqhxvC4+/6RxfGsV+Trtu18kGrfKxiMz2gsb4wl+SvxGpe086dAZQz
+twGKzKEa57tSqifkeWfX40KUU0FBBfptfzsmlylE88jIlcb0CkteZfA+4isekUA4
+4adwHVtL
+=m+d6
+-----END PGP SIGNATURE-----
+
+--0moMSGmGXsffpxVf--
