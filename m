@@ -4,136 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CA4FE77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 04:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC1DAE77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 08:44:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3791A800D7;
-	Thu,  2 Jan 2025 05:51:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id C8FE9800D7;
+	Thu,  2 Jan 2025 09:44:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="mwQAQ4KF";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gJy/DxOl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5598800D7; Thu,  2 Jan 2025 05:51:01 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::612])
+ id E72CB80107; Thu,  2 Jan 2025 09:44:54 +0100 (CET)
+Received: from mail-m127168.xmail.ntesmail.com
+ (mail-m127168.xmail.ntesmail.com [115.236.127.168])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6221480087
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 05:50:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B86F80087
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 09:44:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SRmtOrNO7Q9IV6TdKeLUtTre0JhwPwdJ7UBmFm4Wn1LJIUhBdPhMCvNcAvyh3ERqnmMdl2ByOYEJ7Xc6c6bg8qt5Pfrt8dA9kaIBjzFea3vmxePH4bY2xSHRvaBT93MG9Uu/1YkiShPcDLAx71JwXtPFE1iSy/Us1F9wqVCntdVbt0ZwuQc8pQC/T0CDrhbzt1rjBGGpC15JJ/dAjvLu7N8oyMojBI39G63ft6KqHfi0Fi/BjrGHzktP5VqhvJCwv5LHCVrg0l76KfxjqnhcpJJb6hYaivmfGkFmSditTrvaGE32qFyITYk166YsvOT3p5gQEJU5SmWtn5pCkOEaYg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wCPAaCtoaYGUju0QloSYJI4HKky+G8Qy380smTrDJPw=;
- b=vSSB05xzFOxkDdmaGJHHS6xZAVWJyF/Dpb4WxI9UtrE2kqhCbDUtXe5cVXGXLat2cfz0lCKGe1Fyhyj9WpazXRyKT5JmI4bSNu3CtrQgVDs/0hSFIQC2aVgGDkqMQ4aSmFJ6ik54DEu1e+xKybM1hVGD67DPsxmnZcEWFz20Gb/SUTSnMMf0jXfBzZjNUEwh5zsxQCGYv9BEr9TUBaRgHGGGuMjtl7dMA0+6SA4EqVhHpPOPoNKtftGgkX1vFmx1l2v3XogdkIvShbI0/9D+yxDN3yT4eewrhS4YaZWGqtsafr8o2+loCpJsQDpiprfA8ilW7tLgvb/x83tv85zrow==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=temperror (sender ip
- is 165.204.84.17) smtp.rcpttodomain=lists.denx.de
- smtp.mailfrom=amd.com; 
- dmarc=temperror action=none header.from=amd.com; dkim=none (message not
- signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wCPAaCtoaYGUju0QloSYJI4HKky+G8Qy380smTrDJPw=;
- b=mwQAQ4KFr5zd69sKyY88mgDYJ7z46vro7zC0Z79rlJDLsaoCekKJZxXWnAIUd67T6833mwrLtQup9rCu8UT+jYyrEe0B2Ao43Zb4h4VhfbJcs2UBtXiPd/LIzCbZS1XE0ZE9unU1kZtHqaYbX94FmGNItrETFs0ne84b3S/NDN4=
-Received: from SJ0PR13CA0181.namprd13.prod.outlook.com (2603:10b6:a03:2c3::6)
- by DM6PR12MB4268.namprd12.prod.outlook.com (2603:10b6:5:223::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.12; Thu, 2 Jan
- 2025 04:50:51 +0000
-Received: from SJ1PEPF00002326.namprd03.prod.outlook.com
- (2603:10b6:a03:2c3:cafe::5c) by SJ0PR13CA0181.outlook.office365.com
- (2603:10b6:a03:2c3::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8314.7 via Frontend Transport; Thu, 2
- Jan 2025 04:50:50 +0000
-X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
- 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=temperror action=none header.from=amd.com;
-Received-SPF: TempError (protection.outlook.com: error in processing during
- lookup of amd.com: DNS Timeout)
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF00002326.mail.protection.outlook.com (10.167.242.89) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8314.11 via Frontend Transport; Thu, 2 Jan 2025 04:50:49 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 1 Jan
- 2025 22:50:44 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 1 Jan
- 2025 22:50:38 -0600
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 1 Jan 2025 22:50:37 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@amd.com>
-Subject: [PATCH] board: xilinx: Add missing prototype for set_dfu_alt_info
-Date: Thu, 2 Jan 2025 10:20:26 +0530
-Message-ID: <20250102045026.3427121-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 77d8bf5b;
+ Thu, 2 Jan 2025 16:44:43 +0800 (GMT+08:00)
+Message-ID: <56ce1da5-dbb3-464c-8c35-14059e43d95b@rock-chips.com>
+Date: Thu, 2 Jan 2025 16:44:43 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002326:EE_|DM6PR12MB4268:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d63dcc1-8671-4bdf-44d6-08dd2ae90770
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0+3Gaf7dRk7uTAw6rW0xCI3sY8FHejAZD9oujhNmWVrwp03WvDdgzLkSpeRA?=
- =?us-ascii?Q?eq3MBf80bT9bj0w7mOr5cEqVyBpn7LZ5+kMiE7bFP8dXuqnvoN5UPdM2fvHE?=
- =?us-ascii?Q?RXp/UhURTpAR1B/2QUeTSLJ07jx62Jp4zFnCGKGALtou2qkB+Sa8tstS29lR?=
- =?us-ascii?Q?XFUCzV0WGJIuPavASA5iA2zGV92VeFOjkDfNKp4ociGtJ2pXZms6S063SlYw?=
- =?us-ascii?Q?COAl57uDw3SF2RA8hBq1Pan7eGn9/7TuveN5y7uESNutZT5tv/AySqHerlqT?=
- =?us-ascii?Q?YyfS9J50MkOFKH9+lUi6M2UkmvKYdZV8ueap2F3v3LKET8seKDviDYNiLI0u?=
- =?us-ascii?Q?OeFHOuvYRqFqErmmguoV8TZkIL3ZERRNQdcZsnpFE+lMvd/8+Hkv5fPsTczo?=
- =?us-ascii?Q?ZgxOOK1V1VrsvXdXGCw0/BRM98UTEbo0H0GSq/8sB5P6OIjZvLbOYvxhsDIa?=
- =?us-ascii?Q?sZbwHTGC3CCnPnvTlxm6L9rc8qGi41Jn4AkZSvjoUOWhRWJ/7HRFY2BYwV8X?=
- =?us-ascii?Q?yQRQZlRB0WmMS0Ax/+ag+lZKoTNjHyzcZIHijXGHAMQGHAk2bd7y29/WZwjW?=
- =?us-ascii?Q?WhCq9UMA9R1KSpwCkNxHgDQ8erZ72JMLIoaynW6zJzBdXtdInumShIJ6GqzN?=
- =?us-ascii?Q?tNR5MyvcltwENlJV8J3OnctbFE2nxD9kTGy2wOStL6wcrMQaxP9cWdZy1t0M?=
- =?us-ascii?Q?+wTblcEdmdnY5wjF1kkKDOwUipTXZvbPQLRs/snHIrnshPsMr23ptLOEbYpq?=
- =?us-ascii?Q?//MbYr2d5S6xnUYMBAgmt09Bc4MLLsoPrnk6EfpH6l1GONoTcnGuHfv4DH+r?=
- =?us-ascii?Q?oBHrgK4XvlQ/dgMRxI+5+rtTT7wcKmi9InA+hwnJcFg3Wb8y60GET2pAvW0c?=
- =?us-ascii?Q?el3Ki0z3MU0FBPq078h/c1nOF/SeqNikFmvBk+C8Pb96n/zuAPmgDFhYMPea?=
- =?us-ascii?Q?lk1i1Hln4OVavtMoUKuzbwD9ZUiCQcjjVtkmxax8zRf03ohMDibnbNgDNAlV?=
- =?us-ascii?Q?rAqJ8nBbCa+5CNG46ESdVFyOJMQVV4xjihIMilGBSlmTyy1QyR7lrVCu3z4l?=
- =?us-ascii?Q?4SZS10tVR0xkwTDF7TnQYWmTUzwpPYy8Ejm4xUVbFAdsNgsoOtcR9VdRIyab?=
- =?us-ascii?Q?NBetQfBbFnt+hHGDTlS0odpyPdlXmlqSKSAxhralDSYDp4FS8d4sDwjceQkk?=
- =?us-ascii?Q?zANw3V/lrqF6niCB2+lcOMZqMZ5GsxOR7xrFY0FtddC8ex60dyG82LirZOTx?=
- =?us-ascii?Q?TNYD1C56tqskD02ioc5sIlTIkQZyQTOKo1FDkYOggF4Px9F2zV8aT9LDNPXt?=
- =?us-ascii?Q?lXY9XfjFRgUgmpr1bRPPdoNA/JmR/LHtkV2bn+UXcQU/g6nPWojHliuK2/Bh?=
- =?us-ascii?Q?rQiBhPm7pLkFrbS0AvwLSZEQZKumFuL4bp1/xmXD9YrW6S3cS2PUMruEIhjb?=
- =?us-ascii?Q?RD2R+R/OlIPiUCfNjCZBZdkQQ/n7y8vzdDytvoWplXnQJ8e7wpPR8GpsLdXV?=
- =?us-ascii?Q?DheScFT14+lMW24=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2025 04:50:49.5773 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d63dcc1-8671-4bdf-44d6-08dd2ae90770
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002326.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4268
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] arm64: dts: rockchip: Add FriendlyARM NanoPi R3S board
+To: Tianling Shen <cnsztl@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
+References: <20241226092043.419511-1-cnsztl@gmail.com>
+ <20241226092043.419511-2-cnsztl@gmail.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20241226092043.419511-2-cnsztl@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUgaS1ZOTU8aTE9IGUxKSExWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a9426303e9003afkunm77d8bf5b
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ME06PCo*HDIRHygwGlYtDTBK
+ FkoKCR1VSlVKTEhOQ0tMT0NPTUpDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTkpKQzcG
+DKIM-Signature: a=rsa-sha256;
+ b=gJy/DxOlFk/2S/JJkPdyRJzWdyXJSUVQh6eBgRTm+X/QrtyrgG3uSNP1PcpN//6GaFOubfl0QqjMboTlffvHDovllsqBg8ODyvi5wRQ+jYSY7U7leATeuap2BMFE3O8JZawvHaBbEHF+VMve/6MEFFGg+BGkzY02UIk9+MorOyI=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=tGBYdWts7HW7mgANX89H7AAMwrXtE8emMi7V4JnYjhg=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,26 +74,596 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing prototype to fix the sparse warning,
-warning: no previous prototype for 'set_dfu_alt_info'
-[-Wmissing-prototypes].
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- board/xilinx/common/board.h | 2 ++
- 1 file changed, 2 insertions(+)
+On 2024/12/26 17:20, Tianling Shen wrote:
+> The NanoPi R3S(as "R3S") is an open source platform with dual-Gbps
+> Ethernet ports designed and developed by FriendlyElec for IoT
+> applications.
+>
+> Specification:
+> - Rockchip RK3566
+> - 2GB LPDDR4X RAM
+> - optional 32GB eMMC module
+> - SD card slot
+> - 2x 1000 Base-T
+> - 3x LEDs (POWER, LAN, WAN)
+> - 2x Buttons (Reset, MaskROM)
+> - 1x USB 3.0 Port
+> - Type-C 5V 2A Power
+>
+> Signed-off-by: Tianling Shen <cnsztl@gmail.com>
+> Link: https://lore.kernel.org/r/20241020173946.225960-2-cnsztl@gmail.com
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>
+> [ upstream commit: 50decd493c8394c52d04561fe4ede34df27a46ba ]
+>
+> Signed-off-by: Tianling Shen <cnsztl@gmail.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-diff --git a/board/xilinx/common/board.h b/board/xilinx/common/board.h
-index 64d657673e..ff8f9b9596 100644
---- a/board/xilinx/common/board.h
-+++ b/board/xilinx/common/board.h
-@@ -18,4 +18,6 @@ bool board_detection(void);
- char *soc_name_decode(void);
- 
- bool soc_detection(void);
-+
-+void set_dfu_alt_info(char *interface, char *devstr);
- #endif /* BOARD_XILINX_COMMON_BOARD_H */
--- 
-2.25.1
-
+Thanks,
+- Kever
+> ---
+>   .../src/arm64/rockchip/rk3566-nanopi-r3s.dts  | 554 ++++++++++++++++++
+>   1 file changed, 554 insertions(+)
+>   create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
+>
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts b/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
+> new file mode 100644
+> index 0000000000..a7a55d68db
+> --- /dev/null
+> +++ b/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
+> @@ -0,0 +1,554 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/*
+> + * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
+> + *
+> + * Copyright (c) 2024 FriendlyElec Computer Tech. Co., Ltd.
+> + * (http://www.friendlyarm.com)
+> + *
+> + * Copyright (c) 2024 Tianling Shen <cnsztl@gmail.com>
+> + */
+> +
+> +/dts-v1/;
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/input/input.h>
+> +#include <dt-bindings/leds/common.h>
+> +#include <dt-bindings/pinctrl/rockchip.h>
+> +#include <dt-bindings/soc/rockchip,vop2.h>
+> +#include "rk3566.dtsi"
+> +
+> +/ {
+> +	model = "FriendlyARM NanoPi R3S";
+> +	compatible = "friendlyarm,nanopi-r3s", "rockchip,rk3566";
+> +
+> +	aliases {
+> +		ethernet0 = &gmac1;
+> +		mmc0 = &sdmmc0;
+> +		mmc1 = &sdhci;
+> +	};
+> +
+> +	chosen: chosen {
+> +		stdout-path = "serial2:1500000n8";
+> +	};
+> +
+> +	gpio-keys {
+> +		compatible = "gpio-keys";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&reset_button_pin>;
+> +
+> +		button-reset {
+> +			label = "reset";
+> +			gpios = <&gpio0 RK_PC2 GPIO_ACTIVE_LOW>;
+> +			linux,code = <KEY_RESTART>;
+> +			debounce-interval = <50>;
+> +		};
+> +	};
+> +
+> +	gpio-leds {
+> +		compatible = "gpio-leds";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&power_led_pin>, <&lan_led_pin>, <&wan_led_pin>;
+> +
+> +		power_led: led-0 {
+> +			color = <LED_COLOR_ID_RED>;
+> +			function = LED_FUNCTION_POWER;
+> +			gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
+> +			default-state = "on";
+> +		};
+> +
+> +		lan_led: led-1 {
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			function = LED_FUNCTION_LAN;
+> +			gpios = <&gpio3 RK_PC2 GPIO_ACTIVE_HIGH>;
+> +		};
+> +
+> +		wan_led: led-2 {
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			function = LED_FUNCTION_WAN;
+> +			gpios = <&gpio3 RK_PC3 GPIO_ACTIVE_HIGH>;
+> +		};
+> +	};
+> +
+> +	vcc3v3_sys: regulator-vcc3v3-sys {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc5v0_sys: regulator-vcc5v0-sys {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		vin-supply = <&vdd_usbc>;
+> +	};
+> +
+> +	vcc5v0_usb: regulator-vcc5v0_usb {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpio = <&gpio0 RK_PA6 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&vcc5v0_usb_host_en>;
+> +		regulator-name = "vcc5v0_usb";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vdd_usbc: regulator-vdd-usbc {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vdd_usbc";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +	};
+> +};
+> +
+> +&combphy1 {
+> +	status = "okay";
+> +};
+> +
+> +&combphy2 {
+> +	status = "okay";
+> +};
+> +
+> +&cpu0 {
+> +	cpu-supply = <&vdd_cpu>;
+> +};
+> +
+> +&cpu1 {
+> +	cpu-supply = <&vdd_cpu>;
+> +};
+> +
+> +&cpu2 {
+> +	cpu-supply = <&vdd_cpu>;
+> +};
+> +
+> +&cpu3 {
+> +	cpu-supply = <&vdd_cpu>;
+> +};
+> +
+> +&gmac1 {
+> +	assigned-clocks = <&cru SCLK_GMAC1_RX_TX>, <&cru SCLK_GMAC1>;
+> +	assigned-clock-parents = <&cru SCLK_GMAC1_RGMII_SPEED>, <&cru CLK_MAC1_2TOP>;
+> +	assigned-clock-rates = <0>, <125000000>;
+> +	clock_in_out = "output";
+> +	phy-mode = "rgmii-id";
+> +	phy-handle = <&rgmii_phy1>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&gmac1m0_miim
+> +		     &gmac1m0_tx_bus2_level3
+> +		     &gmac1m0_rx_bus2
+> +		     &gmac1m0_rgmii_clk_level2
+> +		     &gmac1m0_rgmii_bus_level3>;
+> +	snps,reset-gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
+> +	snps,reset-active-low;
+> +	/* Reset time is 20ms, 100ms for rtl8211f */
+> +	snps,reset-delays-us = <0 20000 100000>;
+> +	status = "okay";
+> +};
+> +
+> +&gpu {
+> +	mali-supply = <&vdd_gpu>;
+> +	status = "okay";
+> +};
+> +
+> +&i2c0 {
+> +	status = "okay";
+> +
+> +	vdd_cpu: regulator@1c {
+> +		compatible = "tcs,tcs4525";
+> +		reg = <0x1c>;
+> +		fcs,suspend-voltage-selector = <1>;
+> +		regulator-name = "vdd_cpu";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <800000>;
+> +		regulator-max-microvolt = <1150000>;
+> +		regulator-ramp-delay = <2300>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +
+> +		regulator-state-mem {
+> +			regulator-off-in-suspend;
+> +		};
+> +	};
+> +
+> +	rk809: pmic@20 {
+> +		compatible = "rockchip,rk809";
+> +		reg = <0x20>;
+> +		interrupt-parent = <&gpio0>;
+> +		interrupts = <RK_PA3 IRQ_TYPE_LEVEL_LOW>;
+> +		#clock-cells = <1>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pmic_int>;
+> +		system-power-controller;
+> +		vcc1-supply = <&vcc3v3_sys>;
+> +		vcc2-supply = <&vcc3v3_sys>;
+> +		vcc3-supply = <&vcc3v3_sys>;
+> +		vcc4-supply = <&vcc3v3_sys>;
+> +		vcc5-supply = <&vcc3v3_sys>;
+> +		vcc6-supply = <&vcc3v3_sys>;
+> +		vcc7-supply = <&vcc3v3_sys>;
+> +		vcc8-supply = <&vcc3v3_sys>;
+> +		vcc9-supply = <&vcc3v3_sys>;
+> +		wakeup-source;
+> +
+> +		regulators {
+> +			vdd_logic: DCDC_REG1 {
+> +				regulator-name = "vdd_logic";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-initial-mode = <0x2>;
+> +				regulator-min-microvolt = <500000>;
+> +				regulator-max-microvolt = <1350000>;
+> +				regulator-ramp-delay = <6001>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdd_gpu: DCDC_REG2 {
+> +				regulator-name = "vdd_gpu";
+> +				regulator-always-on;
+> +				regulator-initial-mode = <0x2>;
+> +				regulator-min-microvolt = <500000>;
+> +				regulator-max-microvolt = <1350000>;
+> +				regulator-ramp-delay = <6001>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc_ddr: DCDC_REG3 {
+> +				regulator-name = "vcc_ddr";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-initial-mode = <0x2>;
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdd_npu: DCDC_REG4 {
+> +				regulator-name = "vdd_npu";
+> +				regulator-initial-mode = <0x2>;
+> +				regulator-min-microvolt = <500000>;
+> +				regulator-max-microvolt = <1350000>;
+> +				regulator-ramp-delay = <6001>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc_1v8: DCDC_REG5 {
+> +				regulator-name = "vcc_1v8";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdda0v9_image: LDO_REG1 {
+> +				regulator-name = "vdda0v9_image";
+> +				regulator-min-microvolt = <950000>;
+> +				regulator-max-microvolt = <950000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdda_0v9: LDO_REG2 {
+> +				regulator-name = "vdda_0v9";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <900000>;
+> +				regulator-max-microvolt = <900000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vdda0v9_pmu: LDO_REG3 {
+> +				regulator-name = "vdda0v9_pmu";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <900000>;
+> +				regulator-max-microvolt = <900000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +					regulator-suspend-microvolt = <900000>;
+> +				};
+> +			};
+> +
+> +			vccio_acodec: LDO_REG4 {
+> +				regulator-name = "vccio_acodec";
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vccio_sd: LDO_REG5 {
+> +				regulator-name = "vccio_sd";
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <3300000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc3v3_pmu: LDO_REG6 {
+> +				regulator-name = "vcc3v3_pmu";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +					regulator-suspend-microvolt = <3300000>;
+> +				};
+> +			};
+> +
+> +			vcca_1v8: LDO_REG7 {
+> +				regulator-name = "vcca_1v8";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcca1v8_pmu: LDO_REG8 {
+> +				regulator-name = "vcca1v8_pmu";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-on-in-suspend;
+> +					regulator-suspend-microvolt = <1800000>;
+> +				};
+> +			};
+> +
+> +			vcca1v8_image: LDO_REG9 {
+> +				regulator-name = "vcca1v8_image";
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc_3v3: SWITCH_REG1 {
+> +				regulator-name = "vcc_3v3";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +
+> +			vcc3v3_sd: SWITCH_REG2 {
+> +				regulator-name = "vcc3v3_sd";
+> +				regulator-always-on;
+> +				regulator-boot-on;
+> +
+> +				regulator-state-mem {
+> +					regulator-off-in-suspend;
+> +				};
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&i2c1 {
+> +	status = "okay";
+> +
+> +	hym8563: rtc@51 {
+> +		compatible = "haoyu,hym8563";
+> +		reg = <0x51>;
+> +		#clock-cells = <0>;
+> +		clock-output-names = "hym8563";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&hym8563_int>;
+> +		interrupt-parent = <&gpio0>;
+> +		interrupts = <RK_PD3 IRQ_TYPE_LEVEL_LOW>;
+> +		wakeup-source;
+> +	};
+> +};
+> +
+> +&mdio1 {
+> +	rgmii_phy1: ethernet-phy@1 {
+> +		compatible = "ethernet-phy-ieee802.3-c22";
+> +		reg = <1>;
+> +		interrupt-parent = <&gpio4>;
+> +		interrupts = <RK_PC3 IRQ_TYPE_LEVEL_LOW>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&eth_phy_reset_pin>;
+> +	};
+> +};
+> +
+> +&pcie2x1 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie_reset_h>;
+> +	reset-gpios = <&gpio4 RK_PC6 GPIO_ACTIVE_HIGH>;
+> +	status = "okay";
+> +};
+> +
+> +&pinctrl {
+> +	gpio-leds {
+> +		lan_led_pin: lan-led-pin {
+> +			rockchip,pins = <3 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		power_led_pin: power-led-pin {
+> +			rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		wan_led_pin: wan-led-pin {
+> +			rockchip,pins = <3 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	gmac {
+> +		eth_phy_reset_pin: eth-phy-reset-pin {
+> +			rockchip,pins = <4 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+> +	pcie {
+> +		pcie_reset_h: pcie-reset-h {
+> +			rockchip,pins = <4 RK_PC6 RK_FUNC_GPIO &pcfg_pull_down>;
+> +		};
+> +	};
+> +
+> +	pmic {
+> +		pmic_int: pmic-int {
+> +			rockchip,pins = <0 RK_PA3 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+> +	rockchip-key {
+> +		reset_button_pin: reset-button-pin {
+> +			rockchip,pins = <0 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+> +	rtc {
+> +		hym8563_int: hym8563-int {
+> +			rockchip,pins = <0 RK_PD3 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+> +	usb {
+> +		vcc5v0_usb_host_en: vcc5v0-usb-host-en {
+> +			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +};
+> +
+> +&pmu_io_domains {
+> +	status = "okay";
+> +	pmuio1-supply = <&vcc3v3_pmu>;
+> +	pmuio2-supply = <&vcc3v3_pmu>;
+> +	vccio1-supply = <&vccio_acodec>;
+> +	vccio2-supply = <&vcc_1v8>;
+> +	vccio3-supply = <&vccio_sd>;
+> +	vccio4-supply = <&vcc_3v3>;
+> +	vccio5-supply = <&vcc_1v8>;
+> +	vccio6-supply = <&vcc_3v3>;
+> +	vccio7-supply = <&vcc_3v3>;
+> +};
+> +
+> +&sdhci {
+> +	bus-width = <8>;
+> +	max-frequency = <200000000>;
+> +	non-removable;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+> +	status = "okay";
+> +};
+> +
+> +&sdmmc0 {
+> +	bus-width = <4>;
+> +	cap-mmc-highspeed;
+> +	cap-sd-highspeed;
+> +	disable-wp;
+> +	no-sdio;
+> +	no-mmc;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&sdmmc0_bus4 &sdmmc0_clk &sdmmc0_cmd &sdmmc0_det>;
+> +	sd-uhs-sdr50;
+> +	vmmc-supply = <&vcc3v3_sd>;
+> +	vqmmc-supply = <&vccio_sd>;
+> +	status = "okay";
+> +};
+> +
+> +&tsadc {
+> +	status = "okay";
+> +};
+> +
+> +&uart2 {
+> +	status = "okay";
+> +};
+> +
+> +&usb2phy0 {
+> +	status = "okay";
+> +};
+> +
+> +&usb2phy0_host {
+> +	phy-supply = <&vcc5v0_usb>;
+> +	status = "okay";
+> +};
+> +
+> +&usb2phy0_otg {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host0_xhci {
+> +	extcon = <&usb2phy0>;
+> +	status = "okay";
+> +};
+> +
+> +&usb_host1_xhci {
+> +	status = "okay";
+> +};
+> +
+> +&vop {
+> +	assigned-clocks = <&cru DCLK_VOP0>, <&cru DCLK_VOP1>;
+> +	assigned-clock-parents = <&pmucru PLL_HPLL>, <&cru PLL_VPLL>;
+> +	status = "okay";
+> +};
+> +
+> +&vop_mmu {
+> +	status = "okay";
+> +};
