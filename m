@@ -4,69 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03798E77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 15:25:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A1C3E77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 15:38:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 297288007D;
-	Thu,  2 Jan 2025 16:25:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E07668007D;
+	Thu,  2 Jan 2025 16:38:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B30yico3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sdZ/PYb4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF17880196; Thu,  2 Jan 2025 16:25:31 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id E6E1480196; Thu,  2 Jan 2025 16:38:30 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 107E18001F
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 16:25:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D6FE8001F
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 16:38:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2eed82ca5b4so15585186a91.2
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 07:25:27 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6d896be3992so64828036d6.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 07:38:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735831526; x=1736436326; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gaIelP9iOUO2JBYa2tsAYY0sxQNpinfWE4SQvanPBR8=;
- b=B30yico3fZbwo3c7HAmAr2D5IB7nsYbfpG3fgOUOppLYOwve9L44/Sid74N/qilPXd
- lbKHx2lBoXfwfnOFLOKfU+nNOZj3uckdEhgDoq0XUjkd9TgLcfIuWiCgX3J9mZC2QrRi
- qhNGlTMMDLbX3X5Nnx46oUkihPZLcISOIfjg2gmrjEjW5IyTMrxALxx9yeC6Hf5zEu0+
- Qi3ZuqGQ9jvtPHVrku050l9mApBKCQ6WglFg3J+nFYwP3oxovZy39sBKnykvIVn6yn6h
- RjqP8jOyaz539ShCTJF0EtxLMxkTFu7tZqkmGRuhHGZD4woIMzZGzCjX9OX3LFY/Xtpo
- 619Q==
+ d=konsulko.com; s=google; t=1735832307; x=1736437107; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ftweg2g33MXOikbRxjAlLomBYSv1UkuyirQ5PxFIhvM=;
+ b=sdZ/PYb4eoMoV0JtpM7vmTUszqwLldK38Coyo2UGlNURZA+OwFPaazHv8FRLMUOCEY
+ HWfpQet7j3BdkDofZL8eRCxN2soYP4IfPKmsThNfoOudzbRmEDtMg7LaB6yGR9qVSyYs
+ /hDTP1dj9rhlZ/4jTODpXWrFwgCWQNUjOoKSw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735831526; x=1736436326;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gaIelP9iOUO2JBYa2tsAYY0sxQNpinfWE4SQvanPBR8=;
- b=AIW7DzCVDBVzvv9VIsoopO6fvUyi6DbTcafm5PMqz1HYLZWbldFpn6gZJKzf4pCCKC
- lJoHIh9Nlx9h8ygpYr9Zc8uc7xCbw+A7Yb4RGO/5ioGR11HixNIV+fY82Xc6xtqdgPfp
- 83mTe71kWAC8tb7OctaRGIvoMIm4zlFvFD9lf0s/XAex4K7ixqoj//rV5algwMS3O1qy
- lMcfsxyEZetMiFLvogpsX1yd7cAQb4N+uFxfUz2ggAZj2xzI5rOrrfKPv3MsHsvO4Bmz
- HsEE3t5PSfrsGfGXj1pK/AuXLjqQmOPBQoWEcDSCF0sWi9iPwbOnuIjZ7R+VIYO4iOJ3
- Tnyg==
+ d=1e100.net; s=20230601; t=1735832307; x=1736437107;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ftweg2g33MXOikbRxjAlLomBYSv1UkuyirQ5PxFIhvM=;
+ b=oWrms65IcCIvEcLBD6m6O4ELvHkfQn/TOhyESr1jrm65jjUFHygHFktQXu//scwDT0
+ SbsPJ/nUDluNKWi3/iTh3WMNzORt0V5Hk79PbxtRhOyLB9TWPf7PBUg2pzlDUeP5gSWh
+ 6dp/SGqPxZ7IXEotQECZpUiM+HKRwHQVKNPHalUfpe7hmoNKmU14VxEswKISAIMREudf
+ n83y3GYPefCdSW9AFkl8BVXc2r8zYx7FSLRyc8HILRVuO45dcP1dbo0BkXUh2RYpNWBC
+ Ir2Pn7dvnITHFv86iZCGHTyOEdbgkWaaIAaAOPQF0aKBDr1WIK9uERk78+Ye+4skB8z7
+ NgxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWP6v3f8NzcvLZ3d12/X/RKfh3AibYqHg61Q07Lre0SW7/0reGoC7R5suTtqQlc6m1ZOOUcEmk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyp8rZHF5LnDjhX6+5EsWIgiYaZzyb/n/sEq/D8QNJgL7QnldKi
- 4V+al7ZCjFtbpi6ycSPGuCI2yZcTXTeqWYK4RVZseT36Q1Jbl8ccvDDjub+4Hzm3HBW2F+G83RC
- eOEij2Fk8yBsK4eJrQp90R3Dm/ykUjn1IJyeZKw==
-X-Gm-Gg: ASbGncv43ZS5ZUYiBKFMdsSw7tM6zoSxI3ZDtEsppbQgqVlz5hNsSIWSCciHOk9Uiup
- xF2BFCPH82Myg9iMlUZxslibkAZFS2o3Z1Esedjmaj+aaxQcOzWJvxqdVeurwlLQeau0E1lE=
-X-Google-Smtp-Source: AGHT+IFCRoMkBOz4D5zxkPGqPXrSebmI4Z9n7VPytG/yKYdV9RSc8YKxTYpIncfyvxefWtF6cvmUvwb1YCd8LYS/16s=
-X-Received: by 2002:a17:90b:2dc3:b0:2ee:b2be:f398 with SMTP id
- 98e67ed59e1d1-2f452dfd095mr64460750a91.2.1735831526418; Thu, 02 Jan 2025
- 07:25:26 -0800 (PST)
-MIME-Version: 1.0
-References: <CAFLszTiVmZGxETFkngDbsv0PCLN_bVv7ox6MFiAoGGN2v7tbKQ@mail.gmail.com>
- <CAEfUkUL1EyJ6si_N6k6Ku1ZM9dWF6uHYXrQ14dueUeTEYzSRNQ@mail.gmail.com>
- <CAFLszThWQ2pOQux_Hsa2M=ArBR7f+R2GHeB2d4CB6k4MxShR4w@mail.gmail.com>
+ AJvYcCX40IVQ8ADsWgh7o4KdVDSlI6CUvRjCjJA5fJFdAPXiBtVIVVQTxnpuB56nuC3Avb0HdwmDfME=@lists.denx.de
+X-Gm-Message-State: AOJu0YziXtuubTZTuWAiqBsYj5qd0BXmtaLKLB5h5rQ7GyAXrK4MbGB6
+ QtgoS6NWGm9f0HW2gcpXd67gdIVYu3bEF1nE96WEGqwF3qZaKuSC1pS1Ut5pL0V7DIkag3B76Ws
+ tY5U=
+X-Gm-Gg: ASbGncv9L5Fqy6NP6VFksMfwMmpYQNNnwP+q8Ihkba2pOzp3/a+8lPrMH2SLEI8Opxu
+ OHhoBOuaJgM6twZO/5F7kZ0wVr+SrW4Mb7WabZxElayw73yNt5XtXPH3sCn36L0UizyNThb8kp6
+ yAIsTvipWrFwFoRJok3rB3a3ik+vioseuq88W6tGKVlVa+DlRBJa5RTfvfEpT2PPbbFiYTmlK4b
+ BfauIpZ9l7HrXMgrr9NWgZHQCnV/nmnPuvlKOxuho5WMatzooHjKQc87A==
+X-Google-Smtp-Source: AGHT+IGTC3ABZdtFrP7C5gFhnk7mdo5I/3kutCxet8+gDs1ZfGs3SMw0qTWMv8y8LgVFcKkRSZ6NeA==
+X-Received: by 2002:a05:6214:4199:b0:6d8:8aa6:ef27 with SMTP id
+ 6a1803df08f44-6dd233978bfmr889461766d6.38.1735832306698; 
+ Thu, 02 Jan 2025 07:38:26 -0800 (PST)
+Received: from bill-the-cat ([189.178.122.190])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd180eacb8sm133202246d6.20.2025.01.02.07.38.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jan 2025 07:38:25 -0800 (PST)
+Date: Thu, 2 Jan 2025 09:38:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Levi Yun <yeoreum.yun@arm.com>
+Subject: Re: [PATCH 2/2] tpm: get tpm event log from bloblist
+Message-ID: <20250102153823.GN3476@bill-the-cat>
+References: <CAFLszThWQ2pOQux_Hsa2M=ArBR7f+R2GHeB2d4CB6k4MxShR4w@mail.gmail.com>
  <CAEfUkUKA9raUu0dANWf25aw6kBzu-DKshctQxVre57bEiN94kA@mail.gmail.com>
  <CAFLszTh4hjCHAoqkr+zdeBeq5rCoaO3aSjBVvFyCYVLoccPSUw@mail.gmail.com>
  <CAEfUkUJ8MrFoS3k9svxNoiYsZq51SS_=+TpKKeH=x2jPXRjPtQ@mail.gmail.com>
@@ -76,17 +86,12 @@ References: <CAFLszTiVmZGxETFkngDbsv0PCLN_bVv7ox6MFiAoGGN2v7tbKQ@mail.gmail.com>
  <CAEfUkUJsdH=YjcN4V8Fe8Vfa2Sdb4PQJZxKe6y9RaRXcJgX_=Q@mail.gmail.com>
  <20241219163604.GV1505244@bill-the-cat>
  <CAFLszThG6SY-BvZQ_FzZ+AT+w0NSVmS_iS+nvCWaqoxVRvv6dg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KAdq2DGq9JPz3OpN"
+Content-Disposition: inline
 In-Reply-To: <CAFLszThG6SY-BvZQ_FzZ+AT+w0NSVmS_iS+nvCWaqoxVRvv6dg@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 2 Jan 2025 10:25:15 -0500
-Message-ID: <CAEfUkUJhuCB-5dXt1+FKMAk1t_N_sO6qAZHMK5NJrV7coGH6MA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] tpm: get tpm event log from bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,12 +108,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On Wed, 1 Jan 2025 at 17:15, Simon Glass <sjg@chromium.org> wrote:
+--KAdq2DGq9JPz3OpN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Jan 02, 2025 at 11:14:51AM +1300, Simon Glass wrote:
 > Hi Tom,
->
+>=20
 > On Fri, 20 Dec 2024 at 05:36, Tom Rini <trini@konsulko.com> wrote:
 > >
 > > On Thu, Dec 19, 2024 at 10:37:37AM -0500, Raymond Mao wrote:
@@ -123,25 +131,25 @@ On Wed, 1 Jan 2025 at 17:15, Simon Glass <sjg@chromium.org> wrote:
 > > > > > On Mon, Dec 16, 2024 at 10:37:30AM -0700, Simon Glass wrote:
 > > > > > > Hi Raymond,
 > > > > > >
-> > > > > > On Mon, 16 Dec 2024 at 10:24, Raymond Mao <
-> raymond.mao@linaro.org>
+> > > > > > On Mon, 16 Dec 2024 at 10:24, Raymond Mao <raymond.mao@linaro.o=
+rg>
 > > > > wrote:
 > > > > > > >
 > > > > > > > Hi Simon,
 > > > > > > >
-> > > > > > > On Mon, 16 Dec 2024 at 10:43, Simon Glass <sjg@chromium.org>
-> wrote:
+> > > > > > > On Mon, 16 Dec 2024 at 10:43, Simon Glass <sjg@chromium.org> =
+wrote:
 > > > > > > >>
 > > > > > > >> Hi Raymond,
 > > > > > > >>
-> > > > > > >> On Mon, 16 Dec 2024 at 08:29, Raymond Mao <
-> raymond.mao@linaro.org>
+> > > > > > >> On Mon, 16 Dec 2024 at 08:29, Raymond Mao <raymond.mao@linar=
+o.org>
 > > > > wrote:
 > > > > > > >> >
 > > > > > > >> > Hi Simon,
 > > > > > > >> >
-> > > > > > >> > On Mon, 16 Dec 2024 at 10:20, Simon Glass <sjg@chromium.org
-> >
+> > > > > > >> > On Mon, 16 Dec 2024 at 10:20, Simon Glass <sjg@chromium.or=
+g>
 > > > > wrote:
 > > > > > > >> >>
 > > > > > > >> >> Hi Raymond,
@@ -151,8 +159,8 @@ On Wed, 1 Jan 2025 at 17:15, Simon Glass <sjg@chromium.org> wrote:
 > > > > > > >> >> >
 > > > > > > >> >> > Hi Simon,
 > > > > > > >> >> >
-> > > > > > >> >> > On Sun, 15 Dec 2024 at 19:25, Simon Glass <
-> sjg@chromium.org>
+> > > > > > >> >> > On Sun, 15 Dec 2024 at 19:25, Simon Glass <sjg@chromium=
+=2Eorg>
 > > > > wrote:
 > > > > > > >> >> >>
 > > > > > > >> >> >> Hi Raymond,
@@ -166,11 +174,11 @@ On Wed, 1 Jan 2025 at 17:15, Simon Glass <sjg@chromium.org> wrote:
 > > > > > > >> >> >> >
 > > > > > > >> >> >> > Note:
 > > > > > > >> >> >> > This patch depends on:
-> > > > > > >> >> >> > [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE
-> options
+> > > > > > >> >> >> > [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE=
+ options
 > > > > > > >> >> >> >
-> > > >
-> https://lore.kernel.org/u-boot/20241212151142.1562825-1-trini@konsulko.com/
+> > > > https://lore.kernel.org/u-boot/20241212151142.1562825-1-trini@konsu=
+lko.com/
 > > > > > > >> >> >> >
 > > > > > > >> >> >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > > > > > > >> >> >> > ---
@@ -192,10 +200,11 @@ On Wed, 1 Jan 2025 at 17:15, Simon Glass <sjg@chromium.org> wrote:
 > > > > > > >> >> >> >                       u32 *pcr_banks)
 > > > > > > >> >> >> > @@ -672,6 +673,12 @@ __weak int
 > > > > tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
-> > > > > > >> >> >> >         *addr = NULL;
-> > > > > > >> >> >> >         *size = 0;
+> > > > > > >> >> >> >         *addr =3D NULL;
+> > > > > > >> >> >> >         *size =3D 0;
 > > > > > > >> >> >> >
-> > > > > > >> >> >> > +       if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE) &&
+> > > > > > >> >> >> > +       if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE) =
+&&
 > > > > !bloblist_maybe_init()) {
 > > > > > > >> >> >>
 > > > > > > >> >> >> Please drop the second term...the bloblist is inited by
@@ -206,12 +215,12 @@ On Wed, 1 Jan 2025 at 17:15, Simon Glass <sjg@chromium.org> wrote:
 > > > > whether the bloblist init was already called or not is agnostic.
 > > > > > > >> >> > I think this is the purpose of the "maybe" function.
 > > > > > > >> >>
-> > > > > > >> >> No. U-Boot does init at the start. We don't want each
-> subsystem
-> > > > > > >> >> 'maybe' initing each other subsystem that it uses. If you
-> want to
-> > > > > > >> >> check whether bloblist is available, you can use the GD
-> flag.
+> > > > > > >> >> No. U-Boot does init at the start. We don't want each sub=
+system
+> > > > > > >> >> 'maybe' initing each other subsystem that it uses. If you=
+ want to
+> > > > > > >> >> check whether bloblist is available, you can use the GD f=
+lag.
 > > > > > > >> >>
 > > > > > > >> >
 > > > > > > >> > OK. I can use the gd instead.
@@ -223,81 +232,82 @@ On Wed, 1 Jan 2025 at 17:15, Simon Glass <sjg@chromium.org> wrote:
 > > > > bloblist, just use it.
 > > > > > > >> >> >>
 > > > > > > >> >> >
-> > > > > > >> >> > I think here we should have the same logic as the
-> existing one
+> > > > > > >> >> > I think here we should have the same logic as the exist=
+ing one
 > > > > in fdtdec:
-> > > > > > >> >> > If bloblist is not enabled or errors observed, do a
-> fallback
+> > > > > > >> >> > If bloblist is not enabled or errors observed, do a fal=
+lback
 > > > > to the original process.
-> > > > > > >> >> > At least I want to keep the same logic in different
-> places
+> > > > > > >> >> > At least I want to keep the same logic in different pla=
+ces
 > > > > before everything is ready from TF-A to U-boot.
 > > > > > > >> >>
-> > > > > > >> >> Yes, your second line is right. But PRIOR_STAGE doesn't
-> exist,
+> > > > > > >> >> Yes, your second line is right. But PRIOR_STAGE doesn't e=
+xist,
 > > > > nor
-> > > > > > >> >> should it. Nor do you need it, since you can just check the
+> > > > > > >> >> should it. Nor do you need it, since you can just check t=
+he
 > > > > bloblist
 > > > > > > >> >> for what you want. If you don't find it, fall back.
 > > > > > > >> >>
 > > > > > > >> >
-> > > > > > >> > Since Firmware Handoff is still an experimental feature and
-> not
+> > > > > > >> > Since Firmware Handoff is still an experimental feature an=
+d not
 > > > > mandatory yet (at least now),
-> > > > > > >> > I put everything under PRIOR_STAGE to allow users to
-> disable it
+> > > > > > >> > I put everything under PRIOR_STAGE to allow users to disab=
+le it
 > > > > by their own decisions.
-> > > > > > >> > I saw PRIOR_STAGE in one of Tom's recent patches so I have
-> added
+> > > > > > >> > I saw PRIOR_STAGE in one of Tom's recent patches so I have=
+ added
 > > > > a dependency claim in my commit message.
 > > > > > > >>
-> > > > > > >> Yes, but even if Tom does pick his patch, which I object to,
-> by the
+> > > > > > >> Yes, but even if Tom does pick his patch, which I object to,=
+ by the
 > > > > > > >> time your code is called, there will be a bloblist.
 > > > > > > >>
-> > > > > > >> So the end result of your test is to allow the user to ignore
-> any
+> > > > > > >> So the end result of your test is to allow the user to ignor=
+e any
 > > > > TPM
-> > > > > > >> log in the bloblist. If that's what you want (which seems
-> fine to
+> > > > > > >> log in the bloblist. If that's what you want (which seems fi=
+ne to
 > > > > me),
 > > > > > > >> add a Kconfig for it.
 > > > > > > >>
 > > > > > > >
-> > > > > > > Per my understanding of PRIOR_STAGE, it means we have a
-> bloblist
+> > > > > > > Per my understanding of PRIOR_STAGE, it means we have a blobl=
+ist
 > > > > from the previous stage and we want to use it (as a Transfer List).
-> > > > > > > If this is the case, it is not for DT only but can be applied
-> for
+> > > > > > > If this is the case, it is not for DT only but can be applied=
+ for
 > > > > eventlog or anything for Firmware Handoff in the future.
-> > > > > > > That is the reason I use PRIOR_STAGE here, I don't think we
-> need to
+> > > > > > > That is the reason I use PRIOR_STAGE here, I don't think we n=
+eed to
 > > > > add another kconfig.
 > > > > > >
-> > > > > > Who knows what it is supposed to mean...anyway, it should not be
-> used
-> > > > > > like that. The devicetree is special in that we want to get it
-> from
-> > > > > > the bloblist very early, if available. Nothing else (so far) in
-> the
+> > > > > > Who knows what it is supposed to mean...anyway, it should not b=
+e used
+> > > > > > like that. The devicetree is special in that we want to get it =
+=66rom
+> > > > > > the bloblist very early, if available. Nothing else (so far) in=
+ the
 > > > > > > bloblist has this constraint, certainly not the TPM log.
 > > > > >
 > > > > > Raymond is exactly right, and the device tree is not special.
 > > > >
 > > > > That is quite wrong IMO. Devicetree is special because we need it
-> > > > early and it might come from bloblist before the bloblist has been
-> set
-> > > > up by U-Boot. It also controls the whole operation of U-Boot. There
-> is
+> > > > early and it might come from bloblist before the bloblist has been =
+set
+> > > > up by U-Boot. It also controls the whole operation of U-Boot. There=
+ is
 > > > > nothing else in U-Boot quite like the devicetree.
 > > > >
 > > > > > The
-> > > > > specialness is "do we have a valid bloblist upon entry or not".
-> Which
-> > > > > means that also no, this series (since it happens late enough)
-> shouldn't
-> > > > > care about if the previous stage had created it or not, merely as
-> you
+> > > > > specialness is "do we have a valid bloblist upon entry or not". W=
+hich
+> > > > > means that also no, this series (since it happens late enough) sh=
+ouldn't
+> > > > > care about if the previous stage had created it or not, merely as=
+ you
 > > > > > said if the tag for the TPM (or other blob) is found.
 > > > >
 > > > > I would feel more comfortable having the discussions about what
@@ -307,46 +317,68 @@ On Wed, 1 Jan 2025 at 17:15, Simon Glass <sjg@chromium.org> wrote:
 > > > >
 > > > I think we still need a condition here indicating that the kconfig of
 > > > "handoff via bloblist" is enabled.
-> > > And this "handoff via bloblist" kconfig should mean to handoff
-> everything
+> > > And this "handoff via bloblist" kconfig should mean to handoff everyt=
+hing
 > > > via bloblist, including DT.
->
+>=20
 > No, I don't agree with that at all.
->
+>=20
 > What actually breaks if you look for the TPM log in the bloblist?
 > Please answer this question.
->
->
-As I said, we need an kconfig here to decide whether a user should look for
-TPM log (and all other handoff information defined by the Firmware Handoff
-specification) from the bloblist or not.
-We don't have such kconfig now.
 
+Yes, the case of bloblist found, TPM log isn't found needs to work.
 
-> >
 > > There's at least two sets of challenges here. One, being solved by
 > > vexpress64 right now, is that we didn't have CONFIG_BLOBLIST_PASSAGE as
 > > an actual option. And in that case, there's no U-Boot before full U-Boot
 > > and the bloblist exists for us. Two, U-Boot is what is creating the
 > > bloblist. The contentious parts are *when* it's created and *where* it
 > > resides prior to full U-Boot seeing it.
->
+>=20
 > There isn't contention, so far as I am aware. The normal case is that
 > U-Boot creates and uses the bloblist itself. Pre-U-Boot blobs (like
 > TF-A, sadly) are not the normal case and should be discouraged in an
 > open-source project. That doesn't mean we shouldn't support them, but
 > it is the tail wagging the dog.
->
-> TBH, I am confused with this statement which means we should not use the
-bloblist library from the beginning to hand over data from the previous
-stage.
-If U-Boot bloblist only intends to consume the data created by itself, we
-have to introduce another library to do the handoff, like what was done in
-TF-A and OP-TEE -
-then finally we can have a standard handoff library that can be used in all
-projects and keep bloblist as it was.
 
-[snip]
+No. The normal case is that no one is using a bloblist. The rare case is
+the platforms you developed bloblist on. The new and growing case is
+other platforms using the standard mechanism you designed to communicate
+across projects in a not ad-hoc manner.
 
-Regards,
-Raymond
+> > In both cases, full U-Boot will copy the bloblist to where it likes.
+> >
+> > And this is separate from "bloblist has device tree or we hang()".
+>=20
+> Yes, well that has been the case in mainline for over a year with
+> several of my boards, so it is a bit late to start worrying about it
+> now. I have OF_BLOBLIST and it works fine.
+
+You mean your boards that are broken in mainline, because no one quite
+understood how you were trying to use the bloblist? And that are AFAIK
+end of life platforms? No, they aren't the important use cases for a
+bloblist. They're apparently not ideal references for demonstrating how
+to use a bloblist.
+
+--=20
+Tom
+
+--KAdq2DGq9JPz3OpN
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd2sucACgkQFHw5/5Y0
+tywYeAv/cVT8IH7BEIl53LQa5RQjss2gXA9pIgsJXuz/mKiAiJcxvW9OBLlnt/PF
+OPqKGKwnfZ3gA93ku0zMR0NWJq+XFvQFN/uxWsw9EH0DwztnetzzxWqZe0U17RaP
+sEGjvmGdV7GS437mE2KEzwd5tG+TPfTikFk2OyQVuTOjsQN5Fx6xUzbpsV7jyMJf
+9gaBZ1ziuG2PL8T73zfRi9Y/Nl6OdAUfEBOsaTxMOYdqqVWENy/XNJtDrE9y5J8l
+T0TOJqHK5lXhy16W0TH6F2zcTnNJlBsGY94uV/4CwEmh1GhKCgSm5J6ooh0W8lUC
+KrX8zwNMFDYoKI+fAPU/62hTs5jM4wIHYrx39fUFQt8TJ3k0IuQfeiAI6YhcGbBN
+GderEIieozeFr6ARU9NHHxSr2J5Z3MCsvPDchqpNjyxZXOteCMyJCAT2+Iw4AZKR
+ZaeSs3KY0lVrAMsXI6GGtQUt4ZsI5PejL9AmOp4AR23CqQgWr6TwjikdWlxK/tZp
+WgNdsULv
+=l88Q
+-----END PGP SIGNATURE-----
+
+--KAdq2DGq9JPz3OpN--
