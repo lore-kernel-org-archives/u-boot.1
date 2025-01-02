@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC1DAE77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 08:44:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7983E77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 08:45:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8FE9800D7;
-	Thu,  2 Jan 2025 09:44:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2359280107;
+	Thu,  2 Jan 2025 09:45:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gJy/DxOl";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="LUb5okqF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E72CB80107; Thu,  2 Jan 2025 09:44:54 +0100 (CET)
-Received: from mail-m127168.xmail.ntesmail.com
- (mail-m127168.xmail.ntesmail.com [115.236.127.168])
+ id 84BA080352; Thu,  2 Jan 2025 09:45:21 +0100 (CET)
+Received: from mail-m127210.xmail.ntesmail.com
+ (mail-m127210.xmail.ntesmail.com [115.236.127.210])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B86F80087
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 09:44:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BA8E80087
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 09:45:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 77d8bf5b;
- Thu, 2 Jan 2025 16:44:43 +0800 (GMT+08:00)
-Message-ID: <56ce1da5-dbb3-464c-8c35-14059e43d95b@rock-chips.com>
-Date: Thu, 2 Jan 2025 16:44:43 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 77d8c036;
+ Thu, 2 Jan 2025 16:45:14 +0800 (GMT+08:00)
+Message-ID: <058318a7-fdb3-4fef-b8de-96b9a54e4646@rock-chips.com>
+Date: Thu, 2 Jan 2025 16:45:14 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] arm64: dts: rockchip: Add FriendlyARM NanoPi R3S board
+Subject: Re: [PATCH 2/7] arm64: dts: rockchip: fix model name for FriendlyElec
+ NanoPi R3S
 To: Tianling Shen <cnsztl@gmail.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
 References: <20241226092043.419511-1-cnsztl@gmail.com>
- <20241226092043.419511-2-cnsztl@gmail.com>
+ <20241226092043.419511-3-cnsztl@gmail.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241226092043.419511-2-cnsztl@gmail.com>
+In-Reply-To: <20241226092043.419511-3-cnsztl@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUgaS1ZOTU8aTE9IGUxKSExWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkNCSlZCT0JOGh1OHhkYShhWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9426303e9003afkunm77d8bf5b
+X-HM-Tid: 0a942630b7ce03afkunm77d8c036
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ME06PCo*HDIRHygwGlYtDTBK
- FkoKCR1VSlVKTEhOQ0tMT0NPTUpDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTkpKQzcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NRA6Oio4VjISPSgZT1YQDQIq
+ HzMKCQNVSlVKTEhOQ0tMTkpOTUNJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTUlLNwY+
 DKIM-Signature: a=rsa-sha256;
- b=gJy/DxOlFk/2S/JJkPdyRJzWdyXJSUVQh6eBgRTm+X/QrtyrgG3uSNP1PcpN//6GaFOubfl0QqjMboTlffvHDovllsqBg8ODyvi5wRQ+jYSY7U7leATeuap2BMFE3O8JZawvHaBbEHF+VMve/6MEFFGg+BGkzY02UIk9+MorOyI=;
+ b=LUb5okqFa/IHQW8hhNYl0z29m2nTXb4rMwahZPvA76EWPN70lpiMyaMhltsphgSx53mn0F/z1JkdO58uwtxkJKMIM+phHXku2aZPtS1EwB+V3s1jvgDfIq0JSkIiwHfv+f26Vn8GoJuQ8EZtrtBU6MAutEHLdSEG84+kIjE2Rs8=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=tGBYdWts7HW7mgANX89H7AAMwrXtE8emMi7V4JnYjhg=;
+ bh=C0p1ygkmCZDtMjeJEkxcvxpgbGnPNlri9Df68o4kFTY=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,26 +77,16 @@ X-Virus-Status: Clean
 
 
 On 2024/12/26 17:20, Tianling Shen wrote:
-> The NanoPi R3S(as "R3S") is an open source platform with dual-Gbps
-> Ethernet ports designed and developed by FriendlyElec for IoT
-> applications.
+> Use the marketing name for model name, this matches the dt-binding.
+> Also update the website url in copyright.
 >
-> Specification:
-> - Rockchip RK3566
-> - 2GB LPDDR4X RAM
-> - optional 32GB eMMC module
-> - SD card slot
-> - 2x 1000 Base-T
-> - 3x LEDs (POWER, LAN, WAN)
-> - 2x Buttons (Reset, MaskROM)
-> - 1x USB 3.0 Port
-> - Type-C 5V 2A Power
->
+> Fixes: 50decd493c83 ("arm64: dts: rockchip: Add FriendlyARM NanoPi R3S board")
+> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
 > Signed-off-by: Tianling Shen <cnsztl@gmail.com>
-> Link: https://lore.kernel.org/r/20241020173946.225960-2-cnsztl@gmail.com
+> Link: https://lore.kernel.org/r/20241022193537.1117919-2-cnsztl@gmail.com
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 >
-> [ upstream commit: 50decd493c8394c52d04561fe4ede34df27a46ba ]
+> [ upstream commit: b5bf84206a5c77528f9dd4cbca4e72caa063c102 ]
 >
 > Signed-off-by: Tianling Shen <cnsztl@gmail.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -103,567 +94,28 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   .../src/arm64/rockchip/rk3566-nanopi-r3s.dts  | 554 ++++++++++++++++++
->   1 file changed, 554 insertions(+)
->   create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
+>   dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 >
 > diff --git a/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts b/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
-> new file mode 100644
-> index 0000000000..a7a55d68db
-> --- /dev/null
+> index a7a55d68db..6bc17f755b 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
 > +++ b/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
-> @@ -0,0 +1,554 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-> +/*
-> + * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
-> + *
-> + * Copyright (c) 2024 FriendlyElec Computer Tech. Co., Ltd.
-> + * (http://www.friendlyarm.com)
-> + *
-> + * Copyright (c) 2024 Tianling Shen <cnsztl@gmail.com>
-> + */
-> +
-> +/dts-v1/;
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/input/input.h>
-> +#include <dt-bindings/leds/common.h>
-> +#include <dt-bindings/pinctrl/rockchip.h>
-> +#include <dt-bindings/soc/rockchip,vop2.h>
-> +#include "rk3566.dtsi"
-> +
-> +/ {
-> +	model = "FriendlyARM NanoPi R3S";
-> +	compatible = "friendlyarm,nanopi-r3s", "rockchip,rk3566";
-> +
-> +	aliases {
-> +		ethernet0 = &gmac1;
-> +		mmc0 = &sdmmc0;
-> +		mmc1 = &sdhci;
-> +	};
-> +
-> +	chosen: chosen {
-> +		stdout-path = "serial2:1500000n8";
-> +	};
-> +
-> +	gpio-keys {
-> +		compatible = "gpio-keys";
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&reset_button_pin>;
-> +
-> +		button-reset {
-> +			label = "reset";
-> +			gpios = <&gpio0 RK_PC2 GPIO_ACTIVE_LOW>;
-> +			linux,code = <KEY_RESTART>;
-> +			debounce-interval = <50>;
-> +		};
-> +	};
-> +
-> +	gpio-leds {
-> +		compatible = "gpio-leds";
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&power_led_pin>, <&lan_led_pin>, <&wan_led_pin>;
-> +
-> +		power_led: led-0 {
-> +			color = <LED_COLOR_ID_RED>;
-> +			function = LED_FUNCTION_POWER;
-> +			gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
-> +			default-state = "on";
-> +		};
-> +
-> +		lan_led: led-1 {
-> +			color = <LED_COLOR_ID_GREEN>;
-> +			function = LED_FUNCTION_LAN;
-> +			gpios = <&gpio3 RK_PC2 GPIO_ACTIVE_HIGH>;
-> +		};
-> +
-> +		wan_led: led-2 {
-> +			color = <LED_COLOR_ID_GREEN>;
-> +			function = LED_FUNCTION_WAN;
-> +			gpios = <&gpio3 RK_PC3 GPIO_ACTIVE_HIGH>;
-> +		};
-> +	};
-> +
-> +	vcc3v3_sys: regulator-vcc3v3-sys {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc3v3_sys";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +	};
-> +
-> +	vcc5v0_sys: regulator-vcc5v0-sys {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc5v0_sys";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		vin-supply = <&vdd_usbc>;
-> +	};
-> +
-> +	vcc5v0_usb: regulator-vcc5v0_usb {
-> +		compatible = "regulator-fixed";
-> +		enable-active-high;
-> +		gpio = <&gpio0 RK_PA6 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&vcc5v0_usb_host_en>;
-> +		regulator-name = "vcc5v0_usb";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +	};
-> +
-> +	vdd_usbc: regulator-vdd-usbc {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vdd_usbc";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +	};
-> +};
-> +
-> +&combphy1 {
-> +	status = "okay";
-> +};
-> +
-> +&combphy2 {
-> +	status = "okay";
-> +};
-> +
-> +&cpu0 {
-> +	cpu-supply = <&vdd_cpu>;
-> +};
-> +
-> +&cpu1 {
-> +	cpu-supply = <&vdd_cpu>;
-> +};
-> +
-> +&cpu2 {
-> +	cpu-supply = <&vdd_cpu>;
-> +};
-> +
-> +&cpu3 {
-> +	cpu-supply = <&vdd_cpu>;
-> +};
-> +
-> +&gmac1 {
-> +	assigned-clocks = <&cru SCLK_GMAC1_RX_TX>, <&cru SCLK_GMAC1>;
-> +	assigned-clock-parents = <&cru SCLK_GMAC1_RGMII_SPEED>, <&cru CLK_MAC1_2TOP>;
-> +	assigned-clock-rates = <0>, <125000000>;
-> +	clock_in_out = "output";
-> +	phy-mode = "rgmii-id";
-> +	phy-handle = <&rgmii_phy1>;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&gmac1m0_miim
-> +		     &gmac1m0_tx_bus2_level3
-> +		     &gmac1m0_rx_bus2
-> +		     &gmac1m0_rgmii_clk_level2
-> +		     &gmac1m0_rgmii_bus_level3>;
-> +	snps,reset-gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
-> +	snps,reset-active-low;
-> +	/* Reset time is 20ms, 100ms for rtl8211f */
-> +	snps,reset-delays-us = <0 20000 100000>;
-> +	status = "okay";
-> +};
-> +
-> +&gpu {
-> +	mali-supply = <&vdd_gpu>;
-> +	status = "okay";
-> +};
-> +
-> +&i2c0 {
-> +	status = "okay";
-> +
-> +	vdd_cpu: regulator@1c {
-> +		compatible = "tcs,tcs4525";
-> +		reg = <0x1c>;
-> +		fcs,suspend-voltage-selector = <1>;
-> +		regulator-name = "vdd_cpu";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <800000>;
-> +		regulator-max-microvolt = <1150000>;
-> +		regulator-ramp-delay = <2300>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +
-> +		regulator-state-mem {
-> +			regulator-off-in-suspend;
-> +		};
-> +	};
-> +
-> +	rk809: pmic@20 {
-> +		compatible = "rockchip,rk809";
-> +		reg = <0x20>;
-> +		interrupt-parent = <&gpio0>;
-> +		interrupts = <RK_PA3 IRQ_TYPE_LEVEL_LOW>;
-> +		#clock-cells = <1>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&pmic_int>;
-> +		system-power-controller;
-> +		vcc1-supply = <&vcc3v3_sys>;
-> +		vcc2-supply = <&vcc3v3_sys>;
-> +		vcc3-supply = <&vcc3v3_sys>;
-> +		vcc4-supply = <&vcc3v3_sys>;
-> +		vcc5-supply = <&vcc3v3_sys>;
-> +		vcc6-supply = <&vcc3v3_sys>;
-> +		vcc7-supply = <&vcc3v3_sys>;
-> +		vcc8-supply = <&vcc3v3_sys>;
-> +		vcc9-supply = <&vcc3v3_sys>;
-> +		wakeup-source;
-> +
-> +		regulators {
-> +			vdd_logic: DCDC_REG1 {
-> +				regulator-name = "vdd_logic";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-initial-mode = <0x2>;
-> +				regulator-min-microvolt = <500000>;
-> +				regulator-max-microvolt = <1350000>;
-> +				regulator-ramp-delay = <6001>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_gpu: DCDC_REG2 {
-> +				regulator-name = "vdd_gpu";
-> +				regulator-always-on;
-> +				regulator-initial-mode = <0x2>;
-> +				regulator-min-microvolt = <500000>;
-> +				regulator-max-microvolt = <1350000>;
-> +				regulator-ramp-delay = <6001>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc_ddr: DCDC_REG3 {
-> +				regulator-name = "vcc_ddr";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-initial-mode = <0x2>;
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_npu: DCDC_REG4 {
-> +				regulator-name = "vdd_npu";
-> +				regulator-initial-mode = <0x2>;
-> +				regulator-min-microvolt = <500000>;
-> +				regulator-max-microvolt = <1350000>;
-> +				regulator-ramp-delay = <6001>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc_1v8: DCDC_REG5 {
-> +				regulator-name = "vcc_1v8";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdda0v9_image: LDO_REG1 {
-> +				regulator-name = "vdda0v9_image";
-> +				regulator-min-microvolt = <950000>;
-> +				regulator-max-microvolt = <950000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdda_0v9: LDO_REG2 {
-> +				regulator-name = "vdda_0v9";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <900000>;
-> +				regulator-max-microvolt = <900000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdda0v9_pmu: LDO_REG3 {
-> +				regulator-name = "vdda0v9_pmu";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <900000>;
-> +				regulator-max-microvolt = <900000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <900000>;
-> +				};
-> +			};
-> +
-> +			vccio_acodec: LDO_REG4 {
-> +				regulator-name = "vccio_acodec";
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vccio_sd: LDO_REG5 {
-> +				regulator-name = "vccio_sd";
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <3300000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc3v3_pmu: LDO_REG6 {
-> +				regulator-name = "vcc3v3_pmu";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <3300000>;
-> +				};
-> +			};
-> +
-> +			vcca_1v8: LDO_REG7 {
-> +				regulator-name = "vcca_1v8";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcca1v8_pmu: LDO_REG8 {
-> +				regulator-name = "vcca1v8_pmu";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <1800000>;
-> +				};
-> +			};
-> +
-> +			vcca1v8_image: LDO_REG9 {
-> +				regulator-name = "vcca1v8_image";
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc_3v3: SWITCH_REG1 {
-> +				regulator-name = "vcc_3v3";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc3v3_sd: SWITCH_REG2 {
-> +				regulator-name = "vcc3v3_sd";
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&i2c1 {
-> +	status = "okay";
-> +
-> +	hym8563: rtc@51 {
-> +		compatible = "haoyu,hym8563";
-> +		reg = <0x51>;
-> +		#clock-cells = <0>;
-> +		clock-output-names = "hym8563";
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&hym8563_int>;
-> +		interrupt-parent = <&gpio0>;
-> +		interrupts = <RK_PD3 IRQ_TYPE_LEVEL_LOW>;
-> +		wakeup-source;
-> +	};
-> +};
-> +
-> +&mdio1 {
-> +	rgmii_phy1: ethernet-phy@1 {
-> +		compatible = "ethernet-phy-ieee802.3-c22";
-> +		reg = <1>;
-> +		interrupt-parent = <&gpio4>;
-> +		interrupts = <RK_PC3 IRQ_TYPE_LEVEL_LOW>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&eth_phy_reset_pin>;
-> +	};
-> +};
-> +
-> +&pcie2x1 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&pcie_reset_h>;
-> +	reset-gpios = <&gpio4 RK_PC6 GPIO_ACTIVE_HIGH>;
-> +	status = "okay";
-> +};
-> +
-> +&pinctrl {
-> +	gpio-leds {
-> +		lan_led_pin: lan-led-pin {
-> +			rockchip,pins = <3 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +
-> +		power_led_pin: power-led-pin {
-> +			rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +
-> +		wan_led_pin: wan-led-pin {
-> +			rockchip,pins = <3 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> +	gmac {
-> +		eth_phy_reset_pin: eth-phy-reset-pin {
-> +			rockchip,pins = <4 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
-> +
-> +	pcie {
-> +		pcie_reset_h: pcie-reset-h {
-> +			rockchip,pins = <4 RK_PC6 RK_FUNC_GPIO &pcfg_pull_down>;
-> +		};
-> +	};
-> +
-> +	pmic {
-> +		pmic_int: pmic-int {
-> +			rockchip,pins = <0 RK_PA3 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
-> +
-> +	rockchip-key {
-> +		reset_button_pin: reset-button-pin {
-> +			rockchip,pins = <0 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
-> +
-> +	rtc {
-> +		hym8563_int: hym8563-int {
-> +			rockchip,pins = <0 RK_PD3 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
-> +
-> +	usb {
-> +		vcc5v0_usb_host_en: vcc5v0-usb-host-en {
-> +			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +};
-> +
-> +&pmu_io_domains {
-> +	status = "okay";
-> +	pmuio1-supply = <&vcc3v3_pmu>;
-> +	pmuio2-supply = <&vcc3v3_pmu>;
-> +	vccio1-supply = <&vccio_acodec>;
-> +	vccio2-supply = <&vcc_1v8>;
-> +	vccio3-supply = <&vccio_sd>;
-> +	vccio4-supply = <&vcc_3v3>;
-> +	vccio5-supply = <&vcc_1v8>;
-> +	vccio6-supply = <&vcc_3v3>;
-> +	vccio7-supply = <&vcc_3v3>;
-> +};
-> +
-> +&sdhci {
-> +	bus-width = <8>;
-> +	max-frequency = <200000000>;
-> +	non-removable;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
-> +	status = "okay";
-> +};
-> +
-> +&sdmmc0 {
-> +	bus-width = <4>;
-> +	cap-mmc-highspeed;
-> +	cap-sd-highspeed;
-> +	disable-wp;
-> +	no-sdio;
-> +	no-mmc;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&sdmmc0_bus4 &sdmmc0_clk &sdmmc0_cmd &sdmmc0_det>;
-> +	sd-uhs-sdr50;
-> +	vmmc-supply = <&vcc3v3_sd>;
-> +	vqmmc-supply = <&vccio_sd>;
-> +	status = "okay";
-> +};
-> +
-> +&tsadc {
-> +	status = "okay";
-> +};
-> +
-> +&uart2 {
-> +	status = "okay";
-> +};
-> +
-> +&usb2phy0 {
-> +	status = "okay";
-> +};
-> +
-> +&usb2phy0_host {
-> +	phy-supply = <&vcc5v0_usb>;
-> +	status = "okay";
-> +};
-> +
-> +&usb2phy0_otg {
-> +	status = "okay";
-> +};
-> +
-> +&usb_host0_xhci {
-> +	extcon = <&usb2phy0>;
-> +	status = "okay";
-> +};
-> +
-> +&usb_host1_xhci {
-> +	status = "okay";
-> +};
-> +
-> +&vop {
-> +	assigned-clocks = <&cru DCLK_VOP0>, <&cru DCLK_VOP1>;
-> +	assigned-clock-parents = <&pmucru PLL_HPLL>, <&cru PLL_VPLL>;
-> +	status = "okay";
-> +};
-> +
-> +&vop_mmu {
-> +	status = "okay";
-> +};
+> @@ -3,7 +3,7 @@
+>    * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
+>    *
+>    * Copyright (c) 2024 FriendlyElec Computer Tech. Co., Ltd.
+> - * (http://www.friendlyarm.com)
+> + * (http://www.friendlyelec.com)
+>    *
+>    * Copyright (c) 2024 Tianling Shen <cnsztl@gmail.com>
+>    */
+> @@ -17,7 +17,7 @@
+>   #include "rk3566.dtsi"
+>   
+>   / {
+> -	model = "FriendlyARM NanoPi R3S";
+> +	model = "FriendlyElec NanoPi R3S";
+>   	compatible = "friendlyarm,nanopi-r3s", "rockchip,rk3566";
+>   
+>   	aliases {
