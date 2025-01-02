@@ -4,96 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AAFE77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 18:12:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCECCE77197
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 19:15:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B2F480422;
-	Thu,  2 Jan 2025 19:11:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CD358007D;
+	Thu,  2 Jan 2025 20:15:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="B/oCFyjD";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E7Yf9/II";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A995680196; Thu,  2 Jan 2025 19:11:53 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 323BD80196; Thu,  2 Jan 2025 20:15:56 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0D53803C6
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 19:11:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38C568001F
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 20:15:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 43E363FA64
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 18:11:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1735841511;
- bh=Zb0TlDD+4OHyxip71NaNMKlTtwoIxXJoj0Ts2Qfp0vM=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=B/oCFyjD49QaNK2pSa3esHNMfdfYKAJfk4nc+5yUai6UrJsj9p8LDHc+yQpqcwYZf
- MFuZvpFpgN0Wn8YXRDmF/chTiQVuPVPIUJVUyFbJq5dt4zFo8C9g/UTipX/cnYL541
- kO2qgiueTHp7b0ie6aa2xNkft5gkam/AXw6BI7rOnMYer/CzBtJy/6pIzViUM1jyWf
- xFKQe9sEytoP4Uf9wFSq3kcPmDoqLD6ditOYpMXUmx4KbA9kArWYw2/0VPeli9p3p0
- A3ogNkwdauQtTkZHRHrMzArWwSPFmKMik2n6fkHDn9yfDt/3ei4ux7/FCm0dq2WsXo
- F19zJimI6yzpA==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-385d6ee042eso6553640f8f.0
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 10:11:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e387ad7abdaso17724324276.0
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 11:15:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1735845352; x=1736450152; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9xaCr1m59kzUgFKMzs4eXKM05PVWOI8ehnQs0dAfiw8=;
+ b=E7Yf9/II6jsB7yayDlxp06VUUEROXBcYdP7fHm7ppSpXTMbM1bEGqUdNhAe2aDIQ+i
+ f02fWvTnbmEqk+mXvsr2yoLVF4NGsKmgab6vpOvsibQQjS8Joq+N9d6cjhTHKy2suGGQ
+ w9/XbDWuDdH5tqfLurokxFsqmg9E285HBfZw0gAFR38h52xwwjR14aizjbkjFw2QgMP2
+ LBO1h0PwlqZTfDf8Bq9/eWObsY0kDbZ27+pwS6cDzzbiCR9yjw05yiVCGZBTut8qnuUD
+ pVWwai/hltV7RiTOnqY8Kg/TWJ1l5uGTY2lhwVap08kw13Q46njIqNWpBby9WHMc8EV9
+ WgmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735841511; x=1736446311;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Zb0TlDD+4OHyxip71NaNMKlTtwoIxXJoj0Ts2Qfp0vM=;
- b=J65v+rb07TSCxBh/hKrpE+GaDU4LiDepCfBEbz+xLVr4mBeZ8jmpweKneYvEMbeNVA
- ccH9uVIcV924YWtsG+HC+luSUOxMQtN6NyubNwLwHDEkyghwtHLRMcOUYAiPYDrSh0ep
- JLHo54sA8wNrFLlmZsFGASzOx6hAxqP42NbplR0W3Buo7z3K8cOQ4DGKlH7AlwOfLXKc
- QgoBcAMI5kpLR0v3058wGfpF+USN2aMI72MdyGRzogTa8Ny2rI3Upk4/+BFzOAPhIbVR
- h6oFjOXhpUTQlKs2PGXX70gbC0OVuA/ehraCKxa63b347UFOiZqsEuQK+zTSYt4uEx7i
- ahXQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXGGn/rdUg/U3rH6tqx2NAZmxAQsQ6EP6nR3J4kKq5KdKsiHoEvS+u3yofTOhbJ99UxWnBkmK4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwR7krcEkcVwALjhC7D9V0kIx7cEctwNlpXahxyedTCjlt0NnAn
- SgzPZ7Ynab5qIRgO4M3xWhXq9vj8LqeCw9l0zpQwuNG3qMxh2nYi6tWkc7M3tHb3gG955xpNRaQ
- T2TvjvLxMNgpRhwS8DijTUf7wfPTwFBs+6HLvOQDKRmiEU5F6++/YnuXbkmMg6Ce/FXA=
-X-Gm-Gg: ASbGncv6Gf6MJGbQa8EufFSZAmYvp1xexMKoqcjN+mKblYQCx3hFveclB++Ugbcb/r4
- XfFFzQelgKmF5gDf1YK2KscK9LJPgJ6xp8fhUXcVktj7TZE5RhkigQt8W+dCE54ApUOqoxkXm69
- PN/h7h2GxMYpo/D7acNwEzLAFSLhLn0rqRHl2rpd+SmYLpk/yaLYqLf7MBzFcwn8jMONvYYFrev
- lYn9ngCIHkmj2Du/+cX7xECSrqsjrp0jl5Bidotbmx3JmBSxb3ua6He5WDPb5bDAd9G3kJXLchd
- DEVW5HLVGyGEsg==
-X-Received: by 2002:a05:6000:18a4:b0:38a:5122:5a10 with SMTP id
- ffacd0b85a97d-38a54452f1amr14077515f8f.15.1735841510861; 
- Thu, 02 Jan 2025 10:11:50 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFhMWn7/NT+02+c1WayRq5fDY6L1Z2U5Tn9vwu3WPAOAMVbOu+MOKAu5htblPrfiQ2CMYJqRw==
-X-Received: by 2002:a05:6000:18a4:b0:38a:5122:5a10 with SMTP id
- ffacd0b85a97d-38a54452f1amr14077500f8f.15.1735841510447; 
- Thu, 02 Jan 2025 10:11:50 -0800 (PST)
-Received: from localhost.localdomain ([2a02:3035:6e0:2b1b:688c:df4:9c06:702e])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43656af6aeesm496278155e9.6.2025.01.02.10.11.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jan 2025 10:11:49 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 4/4] efi_loader: print image load address in StartImage
-Date: Thu,  2 Jan 2025 19:11:33 +0100
-Message-ID: <20250102181133.378867-5-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
-References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
+ d=1e100.net; s=20230601; t=1735845352; x=1736450152;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9xaCr1m59kzUgFKMzs4eXKM05PVWOI8ehnQs0dAfiw8=;
+ b=Ox3N/KCVQdmKSwru2eDlRVngotl1odoUrAWLaRZK/NTQdZ4ChGvSjmd/G5zidmfuDw
+ myZM32i4Zb0NNv/jy9jV6spqC+ajXidKFXsMz5eht6xluA4uPxbbjMEWCLXcIBfK125I
+ nUZxYqyN5rEb5t2xoIHDLFQQp/WdZD1SARgi/HzJBVf2OnOHe2TdSJFtinSWe/ClROM/
+ s0gu2DW2e0kx8dwd9rIpZl/pyy/qIDOojk2eO+SvJkQa9aLXDETFHDAUsDdCmpKsaYhq
+ xKkk9/Sy7DFf3/JN34A90UkVKz+Z3kzk2Lfzz5dLuYUphB5gWfJDKM+NaYDtIkAcm2ii
+ orcg==
+X-Gm-Message-State: AOJu0YzvWZCMUI3B4LKfI3yQ/YfuxDlp9jtKbf50CN0v5F39+SBrV1dC
+ e5EFn4zaYkc7JJ77XP3vi0fKuoPQTue1VhOtI5KKkRhJRJH136mQBlxenMd0kvqvH7oU0apHkpS
+ QqoXtsxX/lVTDhgEEu0KF375w18k2Gtzq4mTYEQ==
+X-Gm-Gg: ASbGncvYYhD6CQWP9pSCwQF3b2WvWhBXojMZuEnqjOzqcbaHbqcqz/xUZK2KSjNWK9W
+ c544FmyWDr9zYbOD9IT2voHboLcc6COEqYpC/
+X-Google-Smtp-Source: AGHT+IELT2S6FAhlY6PDkbNp+Pv5TF6MRZ4f2YdGd2jscap/pG/yH+V5DRSmcwoSOoA36/Z3opZpzWcRdJ0UmUdBugc=
+X-Received: by 2002:a05:6902:2b09:b0:e3a:1b9d:83e9 with SMTP id
+ 3f1490d57ef6-e538c26b197mr32780157276.22.1735845351998; Thu, 02 Jan 2025
+ 11:15:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250101195817.995321-1-sjg@chromium.org>
+In-Reply-To: <20250101195817.995321-1-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 2 Jan 2025 21:15:40 +0200
+Message-ID: <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
+Subject: Re: [PATCH] bloblist: Drop BSD license
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,45 +90,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When starting image add the image load address to the debug output.
+Apologies for the formatting, replying on mobile.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_loader/efi_boottime.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
 
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index 080e7f78ae3..bc0cbd96e74 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -3194,7 +3194,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
- 	struct efi_loaded_image_obj *image_obj =
- 		(struct efi_loaded_image_obj *)image_handle;
- 	efi_status_t ret;
--	void *info;
-+	struct efi_loaded_image *info;
- 	efi_handle_t parent_image = current_image;
- 	efi_status_t exit_status;
- 	struct jmp_buf_data exit_jmp;
-@@ -3212,7 +3212,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
- 		return EFI_EXIT(EFI_SECURITY_VIOLATION);
- 
- 	ret = EFI_CALL(efi_open_protocol(image_handle, &efi_guid_loaded_image,
--					 &info, NULL, NULL,
-+					 (void **)&info, NULL, NULL,
- 					 EFI_OPEN_PROTOCOL_GET_PROTOCOL));
- 	if (ret != EFI_SUCCESS)
- 		return EFI_EXIT(EFI_INVALID_PARAMETER);
-@@ -3266,7 +3266,8 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
- 
- 	current_image = image_handle;
- 	image_obj->header.type = EFI_OBJECT_TYPE_STARTED_IMAGE;
--	EFI_PRINT("Jumping into 0x%p\n", image_obj->entry);
-+	EFI_PRINT("Starting image loaded at 0x%p, entry point 0x%p\n",
-+		  info->image_base, image_obj->entry);
- 	ret = EFI_CALL(image_obj->entry(image_handle, &systab));
- 
- 	/*
--- 
-2.47.1
+> Linaro has decided to write their own version of bloblist from scratch,
+> so there is no point in having a non-GPL license on this file. Change
+> it, to better fit with the U-Boot project.
+>
 
+Apart from the commit message being wrong, it's also intentionally
+provoking. There was no bloblist in TF-A.
+
+The TF-A code is implementing the firmware hand-off spec [0], which Linaro
+participated in the creation. The U-Boot implementation was adjusted to
+adhere to the same spec after the TF-A code was merged.
+
+[0] https://github.com/FirmwareHandoff/firmware_handoff
+
+Ilias
+
+>
+>
+Signed-off-by: Simon Glass <sjg@chromium.org>
+> Link: https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/22215
+>
+> ---
+>
+>  common/bloblist.c  | 2 +-
+>  include/bloblist.h | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index ecce3da9331..c441498ec56 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -1,4 +1,4 @@
+> -// SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause
+> +// SPDX-License-Identifier: GPL-2.0+
+>  /*
+>   * Copyright 2018 Google, Inc
+>   * Written by Simon Glass <sjg@chromium.org>
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index 7d462e71914..be7303e1504 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -1,4 +1,4 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause */
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+>   * This provides a standard way of passing information between boot phases
+>   * (TPL -> SPL -> U-Boot proper.)
+> --
+> 2.43.0
+>
+>
