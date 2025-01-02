@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7983E77188
-	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 08:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FBECE77188
+	for <u-boot@archiver.kernel.org>; Thu,  2 Jan 2025 08:54:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2359280107;
-	Thu,  2 Jan 2025 09:45:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A25548031D;
+	Thu,  2 Jan 2025 09:53:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="LUb5okqF";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="g1DygVRm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84BA080352; Thu,  2 Jan 2025 09:45:21 +0100 (CET)
-Received: from mail-m127210.xmail.ntesmail.com
- (mail-m127210.xmail.ntesmail.com [115.236.127.210])
+ id B7C6080352; Thu,  2 Jan 2025 09:53:58 +0100 (CET)
+Received: from mail-m49213.qiye.163.com (mail-m49213.qiye.163.com
+ [45.254.49.213])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BA8E80087
- for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 09:45:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3552280196
+ for <u-boot@lists.denx.de>; Thu,  2 Jan 2025 09:53:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 77d8c036;
- Thu, 2 Jan 2025 16:45:14 +0800 (GMT+08:00)
-Message-ID: <058318a7-fdb3-4fef-b8de-96b9a54e4646@rock-chips.com>
-Date: Thu, 2 Jan 2025 16:45:14 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 77de8b1f;
+ Thu, 2 Jan 2025 16:53:51 +0800 (GMT+08:00)
+Message-ID: <ae0044f4-0f64-4456-8db1-211d22dcce64@rock-chips.com>
+Date: Thu, 2 Jan 2025 16:53:49 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] arm64: dts: rockchip: fix model name for FriendlyElec
- NanoPi R3S
+Subject: Re: [PATCH 3/7] arm64: dts: rockchip: replace deprecated snps,reset
+ props for NanoPi R3S
 To: Tianling Shen <cnsztl@gmail.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
 References: <20241226092043.419511-1-cnsztl@gmail.com>
- <20241226092043.419511-3-cnsztl@gmail.com>
+ <20241226092043.419511-4-cnsztl@gmail.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241226092043.419511-3-cnsztl@gmail.com>
+In-Reply-To: <20241226092043.419511-4-cnsztl@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkNCSlZCT0JOGh1OHhkYShhWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUMfGFYZSB5MHkhDSU0YT0hWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a942630b7ce03afkunm77d8c036
+X-HM-Tid: 0a94263899b803afkunm77de8b1f
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NRA6Oio4VjISPSgZT1YQDQIq
- HzMKCQNVSlVKTEhOQ0tMTkpOTUNJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTUlLNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBQ6Vjo*KjILPSgTCU80NVYQ
+ ViwKChJVSlVKTEhOQ0tDS0hJS0tLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTUNDNwY+
 DKIM-Signature: a=rsa-sha256;
- b=LUb5okqFa/IHQW8hhNYl0z29m2nTXb4rMwahZPvA76EWPN70lpiMyaMhltsphgSx53mn0F/z1JkdO58uwtxkJKMIM+phHXku2aZPtS1EwB+V3s1jvgDfIq0JSkIiwHfv+f26Vn8GoJuQ8EZtrtBU6MAutEHLdSEG84+kIjE2Rs8=;
+ b=g1DygVRmkylxRGZwDDzb8qDZ2YMJRUTWon/tdBLJbsh/8fDiIA9l1InyNUQWxczuf8YZ62iu4O6TgxtndhpYKNJbPhGTNRPQgjSHE+dWqhAdL7n0zKu9qTgsh0IfblZ0NvA20ZRGumf3QQpsb4+249t60Tbv5HpJ/cFHTx6+988=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=C0p1ygkmCZDtMjeJEkxcvxpgbGnPNlri9Df68o4kFTY=;
+ bh=foX1WZcqeWpklJ3VVmjOqEFN1+VZ/2OB1RyixbPjSv4=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,16 +77,15 @@ X-Virus-Status: Clean
 
 
 On 2024/12/26 17:20, Tianling Shen wrote:
-> Use the marketing name for model name, this matches the dt-binding.
-> Also update the website url in copyright.
+> Replace deprecated snps,reset props and move them to the PHY node.
 >
 > Fixes: 50decd493c83 ("arm64: dts: rockchip: Add FriendlyARM NanoPi R3S board")
 > Suggested-by: Jonas Karlman <jonas@kwiboo.se>
 > Signed-off-by: Tianling Shen <cnsztl@gmail.com>
-> Link: https://lore.kernel.org/r/20241022193537.1117919-2-cnsztl@gmail.com
+> Link: https://lore.kernel.org/r/20241022193537.1117919-3-cnsztl@gmail.com
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 >
-> [ upstream commit: b5bf84206a5c77528f9dd4cbca4e72caa063c102 ]
+> [ upstream commit: 82b2868937883b65732da498b26366d34db61510 ]
 >
 > Signed-off-by: Tianling Shen <cnsztl@gmail.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -94,28 +93,31 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>   dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts | 7 +++----
+>   1 file changed, 3 insertions(+), 4 deletions(-)
 >
 > diff --git a/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts b/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
-> index a7a55d68db..6bc17f755b 100644
+> index 6bc17f755b..66a00cddda 100644
 > --- a/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
 > +++ b/dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
-> @@ -3,7 +3,7 @@
->    * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
->    *
->    * Copyright (c) 2024 FriendlyElec Computer Tech. Co., Ltd.
-> - * (http://www.friendlyarm.com)
-> + * (http://www.friendlyelec.com)
->    *
->    * Copyright (c) 2024 Tianling Shen <cnsztl@gmail.com>
->    */
-> @@ -17,7 +17,7 @@
->   #include "rk3566.dtsi"
+> @@ -149,10 +149,6 @@
+>   		     &gmac1m0_rx_bus2
+>   		     &gmac1m0_rgmii_clk_level2
+>   		     &gmac1m0_rgmii_bus_level3>;
+> -	snps,reset-gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
+> -	snps,reset-active-low;
+> -	/* Reset time is 20ms, 100ms for rtl8211f */
+> -	snps,reset-delays-us = <0 20000 100000>;
+>   	status = "okay";
+>   };
 >   
->   / {
-> -	model = "FriendlyARM NanoPi R3S";
-> +	model = "FriendlyElec NanoPi R3S";
->   	compatible = "friendlyarm,nanopi-r3s", "rockchip,rk3566";
+> @@ -414,6 +410,9 @@
+>   		interrupts = <RK_PC3 IRQ_TYPE_LEVEL_LOW>;
+>   		pinctrl-names = "default";
+>   		pinctrl-0 = <&eth_phy_reset_pin>;
+> +		reset-assert-us = <20000>;
+> +		reset-deassert-us = <100000>;
+> +		reset-gpios = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
+>   	};
+>   };
 >   
->   	aliases {
