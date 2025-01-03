@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE20E77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 03:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9566E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 03:27:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D6BB800D7;
-	Fri,  3 Jan 2025 04:24:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F30D5800D7;
+	Fri,  3 Jan 2025 04:27:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DMbU3zTz";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="S83yayLp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FCD98007D; Fri,  3 Jan 2025 04:24:26 +0100 (CET)
-Received: from mail-m32115.qiye.163.com (mail-m32115.qiye.163.com
- [220.197.32.115])
+ id 9DE1F80107; Fri,  3 Jan 2025 04:27:05 +0100 (CET)
+Received: from mail-m3291.qiye.163.com (mail-m3291.qiye.163.com
+ [220.197.32.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A5D08007D
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 04:24:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABF5C8007D
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 04:27:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 791db170;
- Fri, 3 Jan 2025 11:24:16 +0800 (GMT+08:00)
-Message-ID: <7c6bdb6f-e093-4572-973d-63c17059da41@rock-chips.com>
-Date: Fri, 3 Jan 2025 11:24:15 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 791f33eb;
+ Fri, 3 Jan 2025 11:26:59 +0800 (GMT+08:00)
+Message-ID: <48dc2482-a531-4f75-9c19-5e325f10d12d@rock-chips.com>
+Date: Fri, 3 Jan 2025 11:26:58 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] board: rockchip: add Khadas Edge2 RK3588 board
-To: Jacobe Zang <jacobe.zang@wesion.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, nick@khadas.com
-References: <20241204-edge2-v2-1-1dc26b9209df@wesion.com>
+Subject: Re: [PATCH v1] rockchip: rk3066a/rk3188: use includes from
+ dts/upstream
+To: Johan Jonker <jbx6244@gmail.com>
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
+References: <74ac3e9a-f688-4e49-b54c-6756b6d40a65@gmail.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241204-edge2-v2-1-1dc26b9209df@wesion.com>
+In-Reply-To: <74ac3e9a-f688-4e49-b54c-6756b6d40a65@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR1MGVZLGUgeGR8YTB1JSR1WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQk1JT1ZDS0geSx5OTEkeTR9WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a942a3137b303afkunm791db170
+X-HM-Tid: 0a942a33b45803afkunm791f33eb
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODI6MAw5QjIUHy1MEREOGjo1
- PglPCxRVSlVKTEhOQ0xPTU5MSE9LVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0tITjcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBQ6Chw5AzIUOS0LAQwXNCsj
+ PSgaCyhVSlVKTEhOQ0xPQ0pCQkJKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSUlPTzcG
 DKIM-Signature: a=rsa-sha256;
- b=DMbU3zTzp4WW0mS4Iq+ZEsijVsWOPKDcnV2U+IWOD1gasbxLbzs+dGWsQDkL+CQ/wywSNsYJX/GU1bRdjviI2RfMtqBlEc8NaCmWfrvtbE2KzC9enxWkLsIUNAOgebHrb6at2mcPXv44tQCD7uELKaG6CtQRFR4Ye9TYwT2BIig=;
+ b=S83yayLpvxytyld4MkVdBpADNPB0pSM6MPYdlAnhk86mCgFoHA0WY/gmnDvuI4p2RCA9qHoFy9gj5ya95ZfjVcVdHe7QS9KWiZuzFWfwseVGRMHeWbykciTOCaPLYZOg1fjF/1H+MOTgsxVWZoJZCShl950xUQbvIbqLSZJn8UM=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=oyIBxJaJl0kIyq4q+xdKxolLMKLnrCKHlYQxvq1Mv9c=;
+ bh=siFfkPRH9h0sSeyhPryhbuM5SzRE6i3roNnHHtQ2BPE=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -74,315 +73,446 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jacobe,
 
-On 2024/12/4 17:45, Jacobe Zang wrote:
-> Khadas Edge2 is a Rockchip RK3588S based SBC (Single Board Computer)
-> by Khadas.
+On 2024/12/9 01:46, Johan Jonker wrote:
+> The clock and power DT includes for rk3066a and rk3188 are now
+> available in the dts/upstream directory, so remove the ones that
+> are now redundant.
 >
-> There are tree variants depending on the DRAM size : 8G and 16G.
-
-So this is two instead of typo three, right?
-
-I can correct it when apply if not other update is needed.
-
->
-> Specification:
->
->      Rockchip RK3588S SoC
->      4x ARM Cortex-A76, 4x ARM Cortex-A55
->      8/16GB memory LPDDR4x
->      Mali G610MP4 GPU
->      3x MIPI CSI 4x lanes
->      2x MIPI-DSI DPHY 4x lanes
->      32/64GB eMMC
->      1x USB 2.0, 1x USB 3.0, 2x USB-Type-C
->      1x HDMI 2.1 output, 1x DP 1.4 output
->      USB PD over USB Type-C
->
-> Kernel commit:
-> 04d552993522 ("arm64: dts: rockchip: Add Khadas edge2 board")
->
-> Signed-off-by: Jacobe Zang <jacobe.zang@wesion.com>
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> Add support for Khadas Edge2
-> ---
-> Changes in v2:
-> - defconfig: Update defconfig made from upstream
-> - Link to v1: https://lore.kernel.org/r/20241119-edge2-v1-1-b10c5d7626ca@wesion.com
-> ---
->   arch/arm/mach-rockchip/rk3588/Kconfig         |  23 ++++
->   board/khadas/khadas-edge2-rk3588s/Kconfig     |  12 +++
->   board/khadas/khadas-edge2-rk3588s/MAINTAINERS |   6 ++
->   configs/khadas-edge2-rk3588s_defconfig        | 146 ++++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst               |   1 +
->   include/configs/khadas-edge2-rk3588s.h        |  15 +++
->   6 files changed, 203 insertions(+)
+>   include/dt-bindings/clock/rk3066a-cru.h       |  31 ---
+>   include/dt-bindings/clock/rk3188-cru-common.h | 261 ------------------
+>   include/dt-bindings/clock/rk3188-cru.h        |  47 ----
+>   include/dt-bindings/power/rk3066-power.h      |  22 --
+>   include/dt-bindings/power/rk3188-power.h      |  24 --
+>   5 files changed, 385 deletions(-)
+>   delete mode 100644 include/dt-bindings/clock/rk3066a-cru.h
+>   delete mode 100644 include/dt-bindings/clock/rk3188-cru-common.h
+>   delete mode 100644 include/dt-bindings/clock/rk3188-cru.h
+>   delete mode 100644 include/dt-bindings/power/rk3066-power.h
+>   delete mode 100644 include/dt-bindings/power/rk3188-power.h
 >
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-> index b5a0e624a53..7d817e7f1bd 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -74,6 +74,28 @@ config TARGET_JAGUAR_RK3588
->   	      - fan controller (AMC6821 emulation)
->   	    * 80-pin Mezzanine connector
->   
-> +config TARGET_KHADAS_EDGE2_RK3588
-> +	bool "Khadas Edge2 RK3588 board"
-> +	select BOARD_LATE_INIT
-> +	help
-> +	  Khadas Edge2 is a Rockchip RK3588S based SBC (Single Board Computer)
-> +	  by Khadas.
-> +
-> +	  There are tree variants depending on the DRAM size : 8G and 16G.
-> +
-> +	  Specification:
-> +
-> +	  Rockchip RK3588S SoC
-> +	  4x ARM Cortex-A76, 4x ARM Cortex-A55
-> +	  8/16GB memory LPDDR4x
-> +	  Mali G610MP4 GPU
-> +	  3x MIPI CSI 4x lanes
-> +	  2x MIPI-DSI DPHY 4x lanes
-> +	  32/64GB eMMC
-> +	  1x USB 2.0, 1x USB 3.0, 2x USB-Type-C
-> +	  1x HDMI 2.1 output, 1x DP 1.4 output
-> +	  USB PD over USB Type-C
-> +
->   config TARGET_NANOPCT6_RK3588
->   	bool "FriendlyElec NanoPC-T6 RK3588 board"
->   	select BOARD_LATE_INIT
-> @@ -393,6 +415,7 @@ source "board/friendlyelec/nanopi-r6c-rk3588s/Kconfig"
->   source "board/friendlyelec/nanopi-r6s-rk3588s/Kconfig"
->   source "board/hardkernel/odroid_m2/Kconfig"
->   source "board/indiedroid/nova/Kconfig"
-> +source "board/khadas/khadas-edge2-rk3588s/Kconfig"
->   source "board/pine64/quartzpro64-rk3588/Kconfig"
->   source "board/turing/turing-rk1-rk3588/Kconfig"
->   source "board/radxa/rock5a-rk3588s/Kconfig"
-> diff --git a/board/khadas/khadas-edge2-rk3588s/Kconfig b/board/khadas/khadas-edge2-rk3588s/Kconfig
-> new file mode 100644
-> index 00000000000..dd7b6cd8054
-> --- /dev/null
-> +++ b/board/khadas/khadas-edge2-rk3588s/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_KHADAS_EDGE2_RK3588
-> +
-> +config SYS_BOARD
-> +	default "khadas-edge2-rk3588s"
-> +
-> +config SYS_VENDOR
-> +	default "khadas"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "khadas-edge2-rk3588s"
-> +
-> +endif
-> diff --git a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
-> new file mode 100644
-> index 00000000000..3f16923b0f2
-> --- /dev/null
-> +++ b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
-> @@ -0,0 +1,6 @@
-> +KHADAS-EDGE2-RK3588S
-> +M:	Jacobe Zang <jacobe.zang@wesion.com>
-> +S:	Maintained
-> +F:	configs/khadas-edge2-rk3588s_defconfig
-> +F:	include/configs/khadas-edge2-rk3588s.h
-> +F:	dts/upstream/src/arm64/rockchip/rk3588s-khadas-edge2.dts
-> \ No newline at end of file
-> diff --git a/configs/khadas-edge2-rk3588s_defconfig b/configs/khadas-edge2-rk3588s_defconfig
-> new file mode 100644
-> index 00000000000..bc9e8f39ec5
-> --- /dev/null
-> +++ b/configs/khadas-edge2-rk3588s_defconfig
-> @@ -0,0 +1,146 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-khadas-edge2"
-> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_SYS_MALLOC_F_LEN=0x80000
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_KHADAS_EDGE2_RK3588=y
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-khadas-edge2.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SEPARATE_BSS=y
-> +CONFIG_SPL_MMC_WRITE=y
-> +CONFIG_SPL_MTD_SUPPORT=y
-> +CONFIG_SPL_ATF=y
-> +CONFIG_SYS_PROMPT="kedge2# "
-> +CONFIG_AUTOBOOT_KEYED=y
-> +CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot\n"
-> +CONFIG_AUTOBOOT_STOP_STR=" "
-> +CONFIG_CMD_BOOTZ=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_SPI=y
-> +CONFIG_SPL_SPI_SUPPORT=y
-> +CONFIG_DM_SPI=y
-> +# CONFIG_DM_SPI_FLASH=y
-> +CONFIG_MMC=y
-> +# CONFIG_MMC_SPI=y
-> +CONFIG_CMD_SF_TEST=y
-> +CONFIG_CMD_SPI=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +CONFIG_CMD_TFTPPUT=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_REGMAP=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SYSCON=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_CLK=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x1
-> +CONFIG_FASTBOOT_BUF_ADDR=0xc00800
-> +CONFIG_FASTBOOT_BUF_SIZE=0x07000000
-> +CONFIG_FASTBOOT_FLASH=y
-> +CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_I2C_MUX=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_ROCKCHIP_OTP=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_HS200_SUPPORT=y
-> +CONFIG_MMC_HS400_SUPPORT=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_MTD=y
-> +# CONFIG_NAND=y
-> +# CONFIG_MTD_SPI_NAND=y
-> +CONFIG_SF_DEFAULT_SPEED=80000000
-> +CONFIG_SPI_FLASH_EON=y
-> +CONFIG_SPI_FLASH_GIGADEVICE=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_SST=y
-> +CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_SPI_FLASH_XMC=y
-> +CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_SPI_FLASH_MTD=y
-> +CONFIG_DM_ETH_PHY=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_GMAC_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_PINCTRL=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_TYPEC_TCPM=y
-> +CONFIG_TYPEC_FUSB302=y
-> +CONFIG_REGULATOR_PWM=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> +CONFIG_DM_REGULATOR_GPIO=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_RAM=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_TPL_RAM=y
-> +CONFIG_DM_RESET=y
-> +CONFIG_SPL_DM_RESET=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SPI=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_STORAGE=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_MANUFACTURER="Rockchip"
-> +CONFIG_USB_GADGET_VENDOR_NUM=0x2207
-> +CONFIG_USB_GADGET_PRODUCT_NUM=0x350a
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_DISPLAY=y
-> +CONFIG_USE_TINY_PRINTF=y
-> +CONFIG_SPL_TINY_MEMSET=y
-> +CONFIG_RSA=y
-> +CONFIG_SPL_RSA=y
-> +CONFIG_LZ4=y
-> +CONFIG_LZMA=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 9bab86d2347..ea98b73d33c 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -137,6 +137,7 @@ List of mainline supported Rockchip boards:
->        - Generic RK3588S/RK3588 (generic-rk3588)
->        - Hardkernel ODROID-M2 (odroid-m2-rk3588s)
->        - Indiedroid Nova (nova-rk3588s)
-> +     - Khadas Edge2 (khadas-edge2-rk3588s)
->        - Pine64 QuartzPro64 (quartzpro64-rk3588)
->        - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
->        - Radxa ROCK 5A (rock5a-rk3588s)
-> diff --git a/include/configs/khadas-edge2-rk3588s.h b/include/configs/khadas-edge2-rk3588s.h
-> new file mode 100644
-> index 00000000000..d279cf3826a
-> --- /dev/null
-> +++ b/include/configs/khadas-edge2-rk3588s.h
-> @@ -0,0 +1,15 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2024 Khadas Technology Co., Ltd.
-> + */
-> +
-> +#ifndef __KHADAS_EDGE2_RK3588_H
-> +#define __KHADAS_EDGE2_RK3588_H
-> +
-> +#include <configs/rk3588_common.h>
-> +
-> +#define ROCKCHIP_DEVICE_SETTINGS \
-> +		"stdout=serial,vidconsole\0" \
-> +		"stderr=serial,vidconsole\0"
-> +
-> +#endif /* __KHADAS_EDGE2_RK3588_H */
+> diff --git a/include/dt-bindings/clock/rk3066a-cru.h b/include/dt-bindings/clock/rk3066a-cru.h
+> deleted file mode 100644
+> index 014eec586689..000000000000
+> --- a/include/dt-bindings/clock/rk3066a-cru.h
+> +++ /dev/null
+> @@ -1,31 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
+> -/*
+> - * Copyright (c) 2014 MundoReader S.L.
+> - * Author: Heiko Stuebner <heiko@sntech.de>
+> - */
+> -
+> -#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3066A_H
+> -#define _DT_BINDINGS_CLK_ROCKCHIP_RK3066A_H
+> -
+> -#include <dt-bindings/clock/rk3188-cru-common.h>
+> -
+> -/* soft-reset indices */
+> -#define SRST_SRST1		0
+> -#define SRST_SRST2		1
+> -
+> -#define SRST_L2MEM		18
+> -#define SRST_I2S0		23
+> -#define SRST_I2S1		24
+> -#define SRST_I2S2		25
+> -#define SRST_TIMER2		29
+> -
+> -#define SRST_GPIO4		36
+> -#define SRST_GPIO6		38
+> -
+> -#define SRST_TSADC		92
+> -
+> -#define SRST_HDMI		96
+> -#define SRST_HDMI_APB		97
+> -#define SRST_CIF1		111
+> -
+> -#endif
+> diff --git a/include/dt-bindings/clock/rk3188-cru-common.h b/include/dt-bindings/clock/rk3188-cru-common.h
+> deleted file mode 100644
+> index afad90680fce..000000000000
+> --- a/include/dt-bindings/clock/rk3188-cru-common.h
+> +++ /dev/null
+> @@ -1,261 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0-or-later */
+> -/*
+> - * Copyright (c) 2014 MundoReader S.L.
+> - * Author: Heiko Stuebner <heiko@sntech.de>
+> - */
+> -
+> -#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3188_COMMON_H
+> -#define _DT_BINDINGS_CLK_ROCKCHIP_RK3188_COMMON_H
+> -
+> -/* core clocks from */
+> -#define PLL_APLL		1
+> -#define PLL_DPLL		2
+> -#define PLL_CPLL		3
+> -#define PLL_GPLL		4
+> -#define CORE_PERI		5
+> -#define CORE_L2C		6
+> -#define ARMCLK			7
+> -
+> -/* sclk gates (special clocks) */
+> -#define SCLK_UART0		64
+> -#define SCLK_UART1		65
+> -#define SCLK_UART2		66
+> -#define SCLK_UART3		67
+> -#define SCLK_MAC		68
+> -#define SCLK_SPI0		69
+> -#define SCLK_SPI1		70
+> -#define SCLK_SARADC		71
+> -#define SCLK_SDMMC		72
+> -#define SCLK_SDIO		73
+> -#define SCLK_EMMC		74
+> -#define SCLK_I2S0		75
+> -#define SCLK_I2S1		76
+> -#define SCLK_I2S2		77
+> -#define SCLK_SPDIF		78
+> -#define SCLK_CIF0		79
+> -#define SCLK_CIF1		80
+> -#define SCLK_OTGPHY0		81
+> -#define SCLK_OTGPHY1		82
+> -#define SCLK_HSADC		83
+> -#define SCLK_TIMER0		84
+> -#define SCLK_TIMER1		85
+> -#define SCLK_TIMER2		86
+> -#define SCLK_TIMER3		87
+> -#define SCLK_TIMER4		88
+> -#define SCLK_TIMER5		89
+> -#define SCLK_TIMER6		90
+> -#define SCLK_JTAG		91
+> -#define SCLK_SMC		92
+> -#define SCLK_TSADC		93
+> -
+> -#define DCLK_LCDC0		190
+> -#define DCLK_LCDC1		191
+> -
+> -/* aclk gates */
+> -#define ACLK_DMA1		192
+> -#define ACLK_DMA2		193
+> -#define ACLK_GPS		194
+> -#define ACLK_LCDC0		195
+> -#define ACLK_LCDC1		196
+> -#define ACLK_GPU		197
+> -#define ACLK_SMC		198
+> -#define ACLK_CIF1		199
+> -#define ACLK_IPP		200
+> -#define ACLK_RGA		201
+> -#define ACLK_CIF0		202
+> -#define ACLK_CPU		203
+> -#define ACLK_PERI		204
+> -#define ACLK_VEPU		205
+> -#define ACLK_VDPU		206
+> -
+> -/* pclk gates */
+> -#define PCLK_GRF		320
+> -#define PCLK_PMU		321
+> -#define PCLK_TIMER0		322
+> -#define PCLK_TIMER1		323
+> -#define PCLK_TIMER2		324
+> -#define PCLK_TIMER3		325
+> -#define PCLK_PWM01		326
+> -#define PCLK_PWM23		327
+> -#define PCLK_SPI0		328
+> -#define PCLK_SPI1		329
+> -#define PCLK_SARADC		330
+> -#define PCLK_WDT		331
+> -#define PCLK_UART0		332
+> -#define PCLK_UART1		333
+> -#define PCLK_UART2		334
+> -#define PCLK_UART3		335
+> -#define PCLK_I2C0		336
+> -#define PCLK_I2C1		337
+> -#define PCLK_I2C2		338
+> -#define PCLK_I2C3		339
+> -#define PCLK_I2C4		340
+> -#define PCLK_GPIO0		341
+> -#define PCLK_GPIO1		342
+> -#define PCLK_GPIO2		343
+> -#define PCLK_GPIO3		344
+> -#define PCLK_GPIO4		345
+> -#define PCLK_GPIO6		346
+> -#define PCLK_EFUSE		347
+> -#define PCLK_TZPC		348
+> -#define PCLK_TSADC		349
+> -#define PCLK_CPU		350
+> -#define PCLK_PERI		351
+> -#define PCLK_DDRUPCTL		352
+> -#define PCLK_PUBL		353
+> -
+> -/* hclk gates */
+> -#define HCLK_SDMMC		448
+> -#define HCLK_SDIO		449
+> -#define HCLK_EMMC		450
+> -#define HCLK_OTG0		451
+> -#define HCLK_EMAC		452
+> -#define HCLK_SPDIF		453
+> -#define HCLK_I2S0		454
+> -#define HCLK_I2S1		455
+> -#define HCLK_I2S2		456
+> -#define HCLK_OTG1		457
+> -#define HCLK_HSIC		458
+> -#define HCLK_HSADC		459
+> -#define HCLK_PIDF		460
+> -#define HCLK_LCDC0		461
+> -#define HCLK_LCDC1		462
+> -#define HCLK_ROM		463
+> -#define HCLK_CIF0		464
+> -#define HCLK_IPP		465
+> -#define HCLK_RGA		466
+> -#define HCLK_NANDC0		467
+> -#define HCLK_CPU		468
+> -#define HCLK_PERI		469
+> -#define HCLK_CIF1		470
+> -#define HCLK_VEPU		471
+> -#define HCLK_VDPU		472
+> -#define HCLK_HDMI		473
+> -
+> -#define CLK_NR_CLKS		(HCLK_HDMI + 1)
+> -
+> -/* soft-reset indices */
+> -#define SRST_MCORE		2
+> -#define SRST_CORE0		3
+> -#define SRST_CORE1		4
+> -#define SRST_MCORE_DBG		7
+> -#define SRST_CORE0_DBG		8
+> -#define SRST_CORE1_DBG		9
+> -#define SRST_CORE0_WDT		12
+> -#define SRST_CORE1_WDT		13
+> -#define SRST_STRC_SYS		14
+> -#define SRST_L2C		15
+> -
+> -#define SRST_CPU_AHB		17
+> -#define SRST_AHB2APB		19
+> -#define SRST_DMA1		20
+> -#define SRST_INTMEM		21
+> -#define SRST_ROM		22
+> -#define SRST_SPDIF		26
+> -#define SRST_TIMER0		27
+> -#define SRST_TIMER1		28
+> -#define SRST_EFUSE		30
+> -
+> -#define SRST_GPIO0		32
+> -#define SRST_GPIO1		33
+> -#define SRST_GPIO2		34
+> -#define SRST_GPIO3		35
+> -
+> -#define SRST_UART0		39
+> -#define SRST_UART1		40
+> -#define SRST_UART2		41
+> -#define SRST_UART3		42
+> -#define SRST_I2C0		43
+> -#define SRST_I2C1		44
+> -#define SRST_I2C2		45
+> -#define SRST_I2C3		46
+> -#define SRST_I2C4		47
+> -
+> -#define SRST_PWM0		48
+> -#define SRST_PWM1		49
+> -#define SRST_DAP_PO		50
+> -#define SRST_DAP		51
+> -#define SRST_DAP_SYS		52
+> -#define SRST_TPIU_ATB		53
+> -#define SRST_PMU_APB		54
+> -#define SRST_GRF		55
+> -#define SRST_PMU		56
+> -#define SRST_PERI_AXI		57
+> -#define SRST_PERI_AHB		58
+> -#define SRST_PERI_APB		59
+> -#define SRST_PERI_NIU		60
+> -#define SRST_CPU_PERI		61
+> -#define SRST_EMEM_PERI		62
+> -#define SRST_USB_PERI		63
+> -
+> -#define SRST_DMA2		64
+> -#define SRST_SMC		65
+> -#define SRST_MAC		66
+> -#define SRST_NANC0		68
+> -#define SRST_USBOTG0		69
+> -#define SRST_USBPHY0		70
+> -#define SRST_OTGC0		71
+> -#define SRST_USBOTG1		72
+> -#define SRST_USBPHY1		73
+> -#define SRST_OTGC1		74
+> -#define SRST_HSADC		76
+> -#define SRST_PIDFILTER		77
+> -#define SRST_DDR_MSCH		79
+> -
+> -#define SRST_TZPC		80
+> -#define SRST_SDMMC		81
+> -#define SRST_SDIO		82
+> -#define SRST_EMMC		83
+> -#define SRST_SPI0		84
+> -#define SRST_SPI1		85
+> -#define SRST_WDT		86
+> -#define SRST_SARADC		87
+> -#define SRST_DDRPHY		88
+> -#define SRST_DDRPHY_APB		89
+> -#define SRST_DDRCTL		90
+> -#define SRST_DDRCTL_APB		91
+> -#define SRST_DDRPUB		93
+> -
+> -#define SRST_VIO0_AXI		98
+> -#define SRST_VIO0_AHB		99
+> -#define SRST_LCDC0_AXI		100
+> -#define SRST_LCDC0_AHB		101
+> -#define SRST_LCDC0_DCLK		102
+> -#define SRST_LCDC1_AXI		103
+> -#define SRST_LCDC1_AHB		104
+> -#define SRST_LCDC1_DCLK		105
+> -#define SRST_IPP_AXI		106
+> -#define SRST_IPP_AHB		107
+> -#define SRST_RGA_AXI		108
+> -#define SRST_RGA_AHB		109
+> -#define SRST_CIF0		110
+> -
+> -#define SRST_VCODEC_AXI		112
+> -#define SRST_VCODEC_AHB		113
+> -#define SRST_VIO1_AXI		114
+> -#define SRST_VCODEC_CPU		115
+> -#define SRST_VCODEC_NIU		116
+> -#define SRST_GPU		120
+> -#define SRST_GPU_NIU		122
+> -#define SRST_TFUN_ATB		125
+> -#define SRST_TFUN_APB		126
+> -#define SRST_CTI4_APB		127
+> -
+> -#define SRST_TPIU_APB		128
+> -#define SRST_TRACE		129
+> -#define SRST_CORE_DBG		130
+> -#define SRST_DBG_APB		131
+> -#define SRST_CTI0		132
+> -#define SRST_CTI0_APB		133
+> -#define SRST_CTI1		134
+> -#define SRST_CTI1_APB		135
+> -#define SRST_PTM_CORE0		136
+> -#define SRST_PTM_CORE1		137
+> -#define SRST_PTM0		138
+> -#define SRST_PTM0_ATB		139
+> -#define SRST_PTM1		140
+> -#define SRST_PTM1_ATB		141
+> -#define SRST_CTM		142
+> -#define SRST_TS			143
+> -
+> -#endif
+> diff --git a/include/dt-bindings/clock/rk3188-cru.h b/include/dt-bindings/clock/rk3188-cru.h
+> deleted file mode 100644
+> index 1da306e1788c..000000000000
+> --- a/include/dt-bindings/clock/rk3188-cru.h
+> +++ /dev/null
+> @@ -1,47 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
+> -/*
+> - * Copyright (c) 2014 MundoReader S.L.
+> - * Author: Heiko Stuebner <heiko@sntech.de>
+> - */
+> -
+> -#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3188_H
+> -#define _DT_BINDINGS_CLK_ROCKCHIP_RK3188_H
+> -
+> -#include <dt-bindings/clock/rk3188-cru-common.h>
+> -
+> -/* soft-reset indices */
+> -#define SRST_PTM_CORE2		0
+> -#define SRST_PTM_CORE3		1
+> -#define SRST_CORE2		5
+> -#define SRST_CORE3		6
+> -#define SRST_CORE2_DBG		10
+> -#define SRST_CORE3_DBG		11
+> -
+> -#define SRST_TIMER2		16
+> -#define SRST_TIMER4		23
+> -#define SRST_I2S0		24
+> -#define SRST_TIMER5		25
+> -#define SRST_TIMER3		29
+> -#define SRST_TIMER6		31
+> -
+> -#define SRST_PTM3		36
+> -#define SRST_PTM3_ATB		37
+> -
+> -#define SRST_GPS		67
+> -#define SRST_HSICPHY		75
+> -#define SRST_TIMER		78
+> -
+> -#define SRST_PTM2		92
+> -#define SRST_CORE2_WDT		94
+> -#define SRST_CORE3_WDT		95
+> -
+> -#define SRST_PTM2_ATB		111
+> -
+> -#define SRST_HSIC		117
+> -#define SRST_CTI2		118
+> -#define SRST_CTI2_APB		119
+> -#define SRST_GPU_BRIDGE		121
+> -#define SRST_CTI3		123
+> -#define SRST_CTI3_APB		124
+> -
+> -#endif
+> diff --git a/include/dt-bindings/power/rk3066-power.h b/include/dt-bindings/power/rk3066-power.h
+> deleted file mode 100644
+> index acf9f310ac53..000000000000
+> --- a/include/dt-bindings/power/rk3066-power.h
+> +++ /dev/null
+> @@ -1,22 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0 */
+> -#ifndef __DT_BINDINGS_POWER_RK3066_POWER_H__
+> -#define __DT_BINDINGS_POWER_RK3066_POWER_H__
+> -
+> -/* VD_CORE */
+> -#define RK3066_PD_A9_0		0
+> -#define RK3066_PD_A9_1		1
+> -#define RK3066_PD_DBG		4
+> -#define RK3066_PD_SCU		5
+> -
+> -/* VD_LOGIC */
+> -#define RK3066_PD_VIDEO		6
+> -#define RK3066_PD_VIO		7
+> -#define RK3066_PD_GPU		8
+> -#define RK3066_PD_PERI		9
+> -#define RK3066_PD_CPU		10
+> -#define RK3066_PD_ALIVE		11
+> -
+> -/* VD_PMU */
+> -#define RK3066_PD_RTC		12
+> -
+> -#endif
+> diff --git a/include/dt-bindings/power/rk3188-power.h b/include/dt-bindings/power/rk3188-power.h
+> deleted file mode 100644
+> index 93d23dfba33f..000000000000
+> --- a/include/dt-bindings/power/rk3188-power.h
+> +++ /dev/null
+> @@ -1,24 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0 */
+> -#ifndef __DT_BINDINGS_POWER_RK3188_POWER_H__
+> -#define __DT_BINDINGS_POWER_RK3188_POWER_H__
+> -
+> -/* VD_CORE */
+> -#define RK3188_PD_A9_0		0
+> -#define RK3188_PD_A9_1		1
+> -#define RK3188_PD_A9_2		2
+> -#define RK3188_PD_A9_3		3
+> -#define RK3188_PD_DBG		4
+> -#define RK3188_PD_SCU		5
+> -
+> -/* VD_LOGIC */
+> -#define RK3188_PD_VIDEO		6
+> -#define RK3188_PD_VIO		7
+> -#define RK3188_PD_GPU		8
+> -#define RK3188_PD_PERI		9
+> -#define RK3188_PD_CPU		10
+> -#define RK3188_PD_ALIVE		11
+> -
+> -/* VD_PMU */
+> -#define RK3188_PD_RTC		12
+> -
+> -#endif
+> --
+> 2.39.5
 >
-> ---
-> base-commit: 3073246d1be682071d8b3d07d06c2484907aed60
-> change-id: 20241119-edge2-18ac09a490ab
 >
-> Best regards,
