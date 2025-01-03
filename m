@@ -4,84 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 109C8E77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 23:05:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9901FE77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 23:21:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DA1280295;
-	Sat,  4 Jan 2025 00:05:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0A8438036D;
+	Sat,  4 Jan 2025 00:21:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DW7jM6m+";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sXQBM/lP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38700802EF; Sat,  4 Jan 2025 00:05:34 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 31AD780079; Sat,  4 Jan 2025 00:21:32 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94829801F5
- for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 00:05:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0993680295
+ for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 00:21:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1735945526; x=1736550326; i=xypron.glpk@gmx.de;
- bh=Id/Yfy4D/3bQdupCSEc3B3OZo5RrmIomO0CGSuzOGQc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=DW7jM6m+jy3S4yMheHe9HV7b6cpDNDyNWyRWoGuW+bZoTSXGAhInw6k2wyRlXOQk
- ipTsjnJpRMf/IFU2wHdMiwr+7lltNew9ART6tcZ8jPU8c9mXGA+liIHBkqAheHcEh
- EuwxemoD8cEa+SIz2tgm8ldT3Os+O6srghQ3a/fBOb2xj/Rslfoua580MAZi6yd+A
- w0frBd1rdxPmMWmkG/3wTPBBUL+Si6oFOL4zRHf8IEETdwAT7pM30dI7ZjFsF1KnV
- KDBMpkdSMUDttSSSvYjKPhUPP4FPc5CFHaVG6YTZim2H47aX+c/M8/3XB8XGdgTo+
- bUvmk3vp5FEOvRD90Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.106] ([46.114.109.94]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N7iCW-1tYqyi2msk-00qvbN; Sat, 04
- Jan 2025 00:05:26 +0100
-Message-ID: <1839b1f7-b78c-450a-aa05-78858a4f2d45@gmx.de>
-Date: Sat, 4 Jan 2025 00:05:24 +0100
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 763CD3F1CC
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 23:21:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1735946489;
+ bh=gQI25kcFvNCTE7vEAT3vHZmHh3IkjR8epRagzTCtf9Q=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=sXQBM/lPsouwq88pv60mL3OkDgfhmIDYQNqcofRwXfrynMJNM4gLnA5Zj/QFCW5xo
+ qLfPJ5qMSHK1MqtNWZNnZCbmM5sPf+nNEp3f7ar4tzUaQ5bS7pJRrLaIED38pmiL6z
+ yQZgNe3ndo7QDNw1i5CrmpgOLJj5izdzBB96DkwsSnnZXTV5BxtT5HVaPTvm/YnvH8
+ GNjqNxUstfrQwhhr1UG7wuUX/+ef7QVf1/JyyZk3iUr7JT4H5iKvJI3mxMyS01smm+
+ LyfH7+XJ7jEeiBw+QxUsC9GyqKssGUdQ7rFdrRlfHWnax3RYWQpkeWRdAzOXr83v2S
+ U4kmvVN+6Pkbg==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4359206e1e4so98389765e9.2
+ for <u-boot@lists.denx.de>; Fri, 03 Jan 2025 15:21:29 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735946489; x=1736551289;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gQI25kcFvNCTE7vEAT3vHZmHh3IkjR8epRagzTCtf9Q=;
+ b=e+z4MQGkTnJdApznXgWPR08m0VkvFO404ur5fLCtsefmjJAii1A/a9pjcwMAyHroGn
+ utD2tF0qpuqfM/QRttrU4gdGwMOxJuxr+PnzSFqqNvnPb1GOAfoyFBxhmMvMPdvo8GWK
+ 3XOHPX0LctLRgi3XCGKClQTLnmssSZSoF+ufCUsBd9nJyuSgeBMSNGjMlWg5kQJ2wNio
+ ZFFYw1/GkVOyWwmvTRPz4dsGA/Lcm9f0nMgagOhyFIKcJZLd6sdHIKeFWXGN6D8eVJSC
+ 0mpnVwZlU4atCVGrlcPzNTQAwE6Rq6Ug8ua78SRryXAxG+v3msP9WH/UsRK5tc/vpP+T
+ 5ksA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJHpClYqE0l2ZclAXUpmg3hfkMM+RkJfh72bHG4CFY9ye+xKvG5vTLHjkEzT5mu1fiYhAWj4E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+BvZBaJyswl6TWF1m3IIY//g6CdF2eZQqOcOCHD/3kaEgC2WC
+ ng6yY2vFNXVctTXFbVHUNfi4FDt0R3VeEMtGYbiYLBLw089v5SjVuL+lzy3J0W7CJiXxI/4sEm7
+ UXJ+U8tPE8zgZk2G/URU3++28BTfCcKccM+6dggLQmgfCQ4U72MriFIF6WAyn3/NbcvU=
+X-Gm-Gg: ASbGncvnhg3BnCayHxskOKUbqlh70brhU18BLi/jE5VMVAYxZqYjcHlfHCJsJ1NMcJh
+ bJfGdozprdmS78plpZjU9YxYHIUrhyStxGPgpmYeo54loIoN+GtP4esUeVWW+FXburz0iQfQV9S
+ DzRftK3NMgHHo860zRXhRGzqt9EwQbCxvvdmN4tl1inynPq/2cCtgJXLZBjw6hQa8hS1K8/oxdR
+ cX+PySdLLGrAMc6l1EWKgTSshbeRjuukaJqXXckuCqipYgl/XUrf6l93MIj9uygpFJDWcW/G7lO
+ 5bt4JA==
+X-Received: by 2002:a05:600c:1c95:b0:434:a1d3:a321 with SMTP id
+ 5b1f17b1804b1-4366835c1b0mr470858115e9.3.1735946489055; 
+ Fri, 03 Jan 2025 15:21:29 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHkyZ/PyPNV7vG0zLdg/CCZe3HPgYKFL1epXPj1g0AE/chb7tF/XoLKncQtC5OfERtdFcSi0A==
+X-Received: by 2002:a05:600c:1c95:b0:434:a1d3:a321 with SMTP id
+ 5b1f17b1804b1-4366835c1b0mr470858015e9.3.1735946488688; 
+ Fri, 03 Jan 2025 15:21:28 -0800 (PST)
+Received: from workstation5.. ([2a02:3035:6e0:45ea:405b:a98b:b831:787a])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43656b3b214sm536283125e9.28.2025.01.03.15.21.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Jan 2025 15:21:27 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/3] net: use strnstr() for lwip_strnstr()
+Date: Sat,  4 Jan 2025 00:21:15 +0100
+Message-ID: <20250103232118.711135-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] efi_loader: efi_net: let efi_net_set_dp properly
- update the device path
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
- u-boot@lists.denx.de
-References: <20241206171835.2403418-1-adriano.cordova@canonical.com>
- <20241206171835.2403418-3-adriano.cordova@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241206171835.2403418-3-adriano.cordova@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1fzENfRBXYE5Aw8omiK+hrZUE+eVy8hCqDc/0xy9gIqcAXkWuYz
- rLechRNhHss5ASwetjVJHh0zzO10awpGmy6tduDaKMZ3PrDeViLOrlP8f861dU+pczYOWbc
- u1nDeJKYC9F9T837eS3yp9QA2pIlOYuxluFIrAoPJziPuxLzlLe5YHCexUC/3WHJpfZdUBE
- 7SFrbnC4XvOxx0r32D5QA==
-UI-OutboundReport: notjunk:1;M01:P0:pbvYKrh29Xw=;AUZMtze5m6lGTEsLxhZXMZyL/Dp
- OdVj9y9IYKdI8ALIZFhHPEaI0piKBSHlLOrh/2bYII5ndHLDWq4Q7TdDOKoCKgNNP2l+lxBKj
- FSWaIRZFYdZIAewCtCx16r+mSN0nJOuve0BUGqUD9unU9njTjNYzpLhZiXvJoqCGD8dmCahvo
- 34u9/zNAgoxoBrrw91W2KEBE0z4tXJ6TXsUjUFgo/7EreNU6NLbAqhgxasd2VPNoEL+vblJqa
- sRDXKoizkTPy8PmLx3l5afNx7TXyI8dQ0p2DFiVYQbJFJ2e/LF1muDD2VB9j9pCblermlpE+N
- FZ7DT6AfRat2zbZL0wNpsVzi28yYlEnB+r6wG1cYBqLXp85EqcjN9oiap8o2HBfPxbgnTSEyY
- WanLeZGcRTPtDJkXo10be25b7N7Vq5ETNBcar/lt+o7MINpansnOCxgZWo1DIdF2hvvRRbc8+
- wGkWLE+d1ADuTDWhdw6Ql23fJMZjsx3rdjQql9b8rtj6NhHKnQc+9V9ke4QQphioNvh3Zczq5
- DoOVoXH6BPcQEg5YOfO8hGQu+Z44V6wH+EVs2BIwGwPEZkZbbo0vqCSzF5xSAbdYoSEXiREdo
- jaHDtiHouAxYOij1B4JsSJLWpdUq+FZNCKsK/QbOLviCJjOm7zTltAosIh2jtARiAPWPZUMVt
- m6IvWPgZr+VTk+99XpuSKJ66/iM5mjgFjMkCgp83UIshmK/YlN5Mdc42O2a5IEDDjg18gR1zx
- 03k62Ad/8y37vN8wP38gFeNVq4k3/5CBAI/C69Nd4MiiTP57bQ8qEp+xy0UE8YklHuNgWYVF6
- uL3XS5suIhDgQtnKCkFQQW+H3nmwHWMiLnMHEp5PLcDfqlsAKCVZCMJGmKEu4v1WVCe2wuil1
- KHHcX5u0xBCZ59+4wabh/QodkGVazJkWOuKiXOps4pX0fEeEykanXzKOpF6fH6+jiZQOM1cWP
- AOc3skXjk9OFTEiiUVwxm5w6F5sgSSu8N6A3Hy1OvCo1rC9xcJfTaWgvZtMT+75cDbC+npHPG
- 4EZHJ7YvWw5KeCvUozD/dZfR7NPjdxFsMLL+W5T6m0d3sXoch4Kw5NSvulOakW9IifXGGwBL0
- PJl8UhLXdPWTPsg96FRe8NUz21XzP6
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,131 +106,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 06.12.24 18:18, Adriano Cordova wrote:
-> This commit fixes an use after free introduced in Commit e55a4acb54
-> (" efi_loader: net: set EFI bootdevice device path to HTTP when loaded
-> from wget"). The logic in efi_net_set_dp is reworked so that when the
-> function is invoked it not only changes the value of the static variable
-> net_dp (this is how the function was implemented in e55a4acb54) but also
-> updates the protocol interface of the device path protocol in case efi
-> has started.
->
-> Fixes: e55a4acb54e8 ("efi_loader: net: set EFI bootdevice device path to=
- HTTP when loaded from wget")
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> ---
-> Changes in v2: use reinstall_protocol_interface() and new_net_dp in the =
-body of efi_net_set_dp()
->
->   lib/efi_loader/efi_net.c | 61 ++++++++++++++++++++++++++++++++++------
->   1 file changed, 52 insertions(+), 9 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index 67593ef50c..ac8e54639b 100644
-> --- a/lib/efi_loader/efi_net.c
-> +++ b/lib/efi_loader/efi_net.c
-> @@ -925,12 +925,15 @@ efi_status_t efi_net_register(void)
->   			     &netobj->net);
->   	if (r !=3D EFI_SUCCESS)
->   		goto failure_to_add_protocol;
-> -	if (!net_dp)
-> -		efi_net_set_dp("Net", NULL);
-> -	r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> -			     net_dp);
-> +
-> +	if (net_dp)
-> +		r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> +			       net_dp);
-> +	else
-> +		r =3D efi_net_set_dp("Net", NULL);
->   	if (r !=3D EFI_SUCCESS)
->   		goto failure_to_add_protocol;
-> +
->   	r =3D efi_add_protocol(&netobj->header, &efi_pxe_base_code_protocol_g=
-uid,
->   			     &netobj->pxe);
->   	if (r !=3D EFI_SUCCESS)
-> @@ -1055,18 +1058,58 @@ out_of_resources:
->    */
->   efi_status_t efi_net_set_dp(const char *dev, const char *server)
->   {
-> -	efi_free_pool(net_dp);
-> +	efi_status_t ret;
-> +	struct efi_handler *phandler;
-> +	struct efi_device_path *old_net_dp, *new_net_dp;
->
-> -	net_dp =3D NULL;
-> +	old_net_dp =3D net_dp;
-> +	new_net_dp =3D NULL;
->   	if (!strcmp(dev, "Net"))
-> -		net_dp =3D efi_dp_from_eth();
-> +		new_net_dp =3D efi_dp_from_eth();
->   	else if (!strcmp(dev, "Http"))
-> -		net_dp =3D efi_dp_from_http(server);
-> +		new_net_dp =3D efi_dp_from_http(server);
->
-> -	if (!net_dp)
-> +	if (!new_net_dp) {
->   		return EFI_OUT_OF_RESOURCES;
-> +	}
-> +
-> +	// If netobj is not started yet, end here.
-> +	if (!netobj) {
-> +		goto exit;
+Using strstr() instead of strnstr() creates a security concern.
 
-This leads to a build failure with clang as you have not initialized
-variable ret.
+* Implement missing library function strnstr() and add unit tests.
+* Use it for lwIP.
 
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/jobs/987832
+Heinrich Schuchardt (3):
+  lib: implement strnstr()
+  test: unit tests for strstr() and strnstr()
+  net: use strnstr() for lwip_strnstr()
 
-> +	}
-> +
-> +	phandler =3D NULL;
-> +	efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler)=
-;
-> +
-> +	// If the device path protocol is not yet installed, install it
-> +	if (!phandler)
-> +		goto add;
-> +
-> +	// If it is already installed, try to update it
-> +	ret =3D efi_reinstall_protocol_interface(&netobj->header, &efi_guid_de=
-vice_path,
-> +					       old_net_dp, new_net_dp);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		goto error;
-> +
-> +	net_dp =3D new_net_dp;
-> +	efi_free_pool(old_net_dp);
->
->   	return EFI_SUCCESS;
-> +add:
-> +	ret =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> +			       new_net_dp);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		goto error;
-> +exit:
-> +	net_dp =3D new_net_dp;
+ include/linux/string.h    |  3 +++
+ lib/lwip/u-boot/arch/cc.h |  2 +-
+ lib/string.c              | 49 +++++++++++++++++++++++++++------------
+ test/lib/string.c         | 40 ++++++++++++++++++++++++++++++++
+ 4 files changed, 78 insertions(+), 16 deletions(-)
 
-Why should we set net_dp if there is no net_obj?
-
-Instead of jumping to exit, we can jump to error: with
-
-ret =3D EFI_DEVICE_ERROR.
-
-Best regards
-
-Heinrich
-
-> +	efi_free_pool(old_net_dp);
-> +
-> +	return ret;
-> +error:
-> +	// Failed, restore
-> +	efi_free_pool(new_net_dp);
-> +
-> +	return ret;
->   }
->
->   /**
+-- 
+2.47.1
 
