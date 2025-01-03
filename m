@@ -4,60 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B638FE77198
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 03:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FE6E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 04:48:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41DE8803B7;
-	Fri,  3 Jan 2025 04:40:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 265E280107;
+	Fri,  3 Jan 2025 05:48:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="IYjUjpX4";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="u2liv6ls";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B576C800D7; Fri,  3 Jan 2025 04:40:38 +0100 (CET)
-Received: from mail-m49242.qiye.163.com (mail-m49242.qiye.163.com
- [45.254.49.242])
+ id 8333F80196; Fri,  3 Jan 2025 05:48:33 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::631])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B4C4800D7
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 04:40:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id A5F16800D7
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 05:48:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 79258f5c;
- Fri, 3 Jan 2025 11:40:30 +0800 (GMT+08:00)
-Message-ID: <7ae24c28-cb41-4325-a0f4-4bd5edc7a5bf@rock-chips.com>
-Date: Fri, 3 Jan 2025 11:40:29 +0800
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GIf+yJ2I6jTjOCYrM1qQzXaNulPqbWYeHVacXTBibzdgTR/TjnELrAqQMg7tm0S0k8L+mzXxKdAYBoSRpVOJPfJxdkCmuHp8so0aYkzgLRaql6450d5/Ddadeus7OH1wevNuW76OMNzosoPrmXzMD80G5UohIzNu8aJhPGfYD1py3qNQt8HUK1yhhbXsArtjSZa52W0pDM+Xe2TwE9ipDyL5OEZPHFhhwNQL15j5lhIWKgKcfXV+kRub3djsZ/zd95a58MR519+QNfmUtKYh1tBlvFRHiSYfRngSP2Uqt6zceXhrZoX6XbV/P0ib2qqOsiDPgHPFbgoa+H5ughDPVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=E7mqF71fa8NaCCjVYi+IaXjtc9xpi0CM7TriAYuhCjU=;
+ b=fCuy5+PSvcFlV6GFeCg27vGlN8MKiPpE7O5sstUC3zN1AZoZ91MYA50xBDJ8SeupGdqukJrxc1PU5P7fBas4tUFL8UISGge9Cval95JUvxKnuFp7XbgAo/NQqOYtuAEBgHHQvraeuNEK1W3UOEqmHxcsnI/e9MK3UbRyHypEJ7Cr4MOkdDSVKaW8jFIZHUScDUkkD7ZVW6G8rzqaU8R2CeDVygT8XOkMY/nPrG21a9+zaSHK/Pg/Mm8904O/IgESVj73fdvt2H0Qotj7oLEPXG/QZ1oE86Um+r8aat+1N0rzl3E/TBSoOYFPIxZfsq1QlvogjX8VUxuO5wvDxhXLaw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=E7mqF71fa8NaCCjVYi+IaXjtc9xpi0CM7TriAYuhCjU=;
+ b=u2liv6lsNYMD/npiEsoVOOvaBA1x7Obl0j6zjJBFk//+AeyPXbRn5Ny5d0CA2O4FkXpKWeVovMYvOgEkR09z24F35/C719ed3jimMJ6i1rHAMBCkTtJeffxHoADKD7bADnym2077lg+b7EhqEEF8YgylJCfSrtyrNs4OBZ9BM40=
+Received: from DS7PR03CA0097.namprd03.prod.outlook.com (2603:10b6:5:3b7::12)
+ by DS7PR12MB6264.namprd12.prod.outlook.com (2603:10b6:8:94::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.14; Fri, 3 Jan
+ 2025 04:48:22 +0000
+Received: from DS1PEPF00017092.namprd03.prod.outlook.com
+ (2603:10b6:5:3b7:cafe::27) by DS7PR03CA0097.outlook.office365.com
+ (2603:10b6:5:3b7::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8314.14 via Frontend Transport; Fri,
+ 3 Jan 2025 04:48:22 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS1PEPF00017092.mail.protection.outlook.com (10.167.17.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8314.11 via Frontend Transport; Fri, 3 Jan 2025 04:48:22 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 2 Jan
+ 2025 22:48:21 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 2 Jan
+ 2025 22:48:20 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 2 Jan 2025 22:48:19 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@amd.com>
+Subject: [PATCH v2] config: xilinx: Enable the SPI_STACKED_PARALLEL config
+ option
+Date: Fri, 3 Jan 2025 10:18:12 +0530
+Message-ID: <20250103044812.18828-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] rockchip: Add support for Radxa ROCK 5C
-To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, sumit.garg@linaro.org,
- jonas@kwiboo.se
-References: <20241210033614.2292-1-naoki@radxa.com>
- <20241210033614.2292-6-naoki@radxa.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241210033614.2292-6-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkIaQlZKShofQhoeGkgdTklWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSEtNT0
- 1VSktLVUpCWQY+
-X-HM-Tid: 0a942a40192703afkunm79258f5c
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OiI6ERw4VjIJPS01UUkNEzFD
- KAIKCUNVSlVKTEhOQ0xOTUhJTU1IVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSkpKQjcG
-DKIM-Signature: a=rsa-sha256;
- b=IYjUjpX43fuhpZRKxr3tb018vuwErFQ+FXeWgH1rTs+fr5nX4jHFeiV/6VrYn6V09FMS5FNNnTmepgjhzyVdQ1LAd2p9G+s87P9pcyO9xrvHAgdsaSoONi0XKOJYQyLJ4YlZukDJostiTymhwAWLLv8KpLeKer/g55lw4hPPeGI=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=7ePIsiA/n/nLwx2cnmBAicK+ParYURp4DCZ+Vw0daRw=;
- h=date:mime-version:subject:message-id:from;
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017092:EE_|DS7PR12MB6264:EE_
+X-MS-Office365-Filtering-Correlation-Id: 03173b47-a8df-4f61-9bce-08dd2bb1d9f2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4BUf9MzJPETAsxY6YbNyuFSjnE1G4ytthN5D3INh0fpyBH8yEGbytjyFD1Kn?=
+ =?us-ascii?Q?Kco9PBg8d6ACtQmgyqRO6kLJMmpafhnaeNKBxfDPTezQrnlbl5tLgPb3sMbz?=
+ =?us-ascii?Q?ty6YYVMhoRdcV1AEEb9SIEnw/1R/f4omTBBT9vfkc7IHgZpcnpuwbsmkJVCk?=
+ =?us-ascii?Q?pL93Y2yWOBxWTXC01FE3V+jbH9RccieLROLWzr0gM67gHQHCP3Wodg1v9TBS?=
+ =?us-ascii?Q?yoNHctXG7O1xm2+9IYOmmkjnchdHMBgxqKpVwGsjscomuHB2bQR3YiQZfCey?=
+ =?us-ascii?Q?RtuVHVkhlZvAAaOg00fPPKm8ZX6g+IlFCdlEqhGDaVknpTE8ltDGUo5bpELA?=
+ =?us-ascii?Q?2Kmjyp42O78SWtqEUUasVOIecPUIXNDBGKUq2rCKM8s12ymHOFH3n/m+DhqU?=
+ =?us-ascii?Q?GXDTmXCLih0SxazL46tgQUaahDaYISaMZ8ShqWmRKiffWcjH7GUVMFqgvB+0?=
+ =?us-ascii?Q?PZmP9recrf4l0NPLihdIG2gzzpvWWodvd+GmIN0rSszLer76NIu/9jr3gdvR?=
+ =?us-ascii?Q?Pv51qgV/k3rgcHP++Shlm/uAKhXfZ9TjCurOhLMyT38jWnagTK/lPweBMygN?=
+ =?us-ascii?Q?4FhtpAawr6CQWbN4RUTfs6+ASHiKR628A3QmNFLF2iKKL62afnTCAHb7u+F2?=
+ =?us-ascii?Q?A4X6Z9rqqykn05476kgR7OGh81rZ6fQued8tlWLlpcMNsvczVQAC1Vrlduq4?=
+ =?us-ascii?Q?+dekIC6vlPQmIZQn5s33SVx5uF03LkV8IfRE02/xQm5ZQz5KejPorrVpThRZ?=
+ =?us-ascii?Q?Dym/lRbAqdu+rOVVWatx6JQHoFiSWnvZK7G3MBG58mUTZjpFL8p6x1Dn4hdz?=
+ =?us-ascii?Q?pYP0hZ2S0GtJ4ndGMrAx5Y+JaIgSEBuKnkEmWQ4oT+R2eN/r6F6i5audgTeV?=
+ =?us-ascii?Q?f97vbU0/8aAb45YtDJk9PKg4XhATs472WMd3PB3PK7t/ddmTtQQc+xnwsBDm?=
+ =?us-ascii?Q?z4Gi+KKa8Mm6xO74D9TVJhwh/9rwWL8PgqjFq8TSDsDYrk+vEQQyMx1bDo0n?=
+ =?us-ascii?Q?hbCJ2HaStruVNS3QmZU/hRAPE2jXl5DHmCVBb+06noph8u1vyIidxWW3YtKY?=
+ =?us-ascii?Q?dqGqEyXP8wsKUuZydrrxlww+FzqE+WW/2yRAOcADHlTipI5nBGW9tVU++qT3?=
+ =?us-ascii?Q?sPzK7VuD9SVIbbck65orjvQKDAh26+yt/Pb2Si8Ccgt0T7bIJzunOoIJH64o?=
+ =?us-ascii?Q?WWuPzQhswWAbnI/9kFjO/IRcLo/hh5LrOXZEP2R3AR/4Zp/KxHS25TfcwV4m?=
+ =?us-ascii?Q?GnVFxcHd1AwPRUA3rPcYl2caEeXg2L/6g2Fy+/gUasIkAq6NK8Oec6IxHE81?=
+ =?us-ascii?Q?tO99oYBRHQBMliYyF8lSaJ7+bfSpZMCWfI/4naudHbfdWMGBSrCJOnBQDeZl?=
+ =?us-ascii?Q?92iaS6OM6kAubz4182h76FydEK9/LuQNF3XDqr/tR2dDt220/o1zEVd+QKkq?=
+ =?us-ascii?Q?ItTCNu6FGm+xyF8PUbpVVUDPP2ssHAL6bGqEx1vL2LTlSVd0KTeyBxqPX3SH?=
+ =?us-ascii?Q?ChmjVHyfqJ9PxqA=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2025 04:48:22.1145 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 03173b47-a8df-4f61-9bce-08dd2bb1d9f2
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017092.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6264
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,360 +151,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable the SPI_STACKED_PARALLEL config option for
+all AMD/xilinx platforms, as this is required for parallel and
+stacked memories.
 
-On 2024/12/10 11:36, FUKAUMI Naoki wrote:
-> Radxa ROCK 5C[1] is a Rockchip RK3588S2 based single board computer.
->
-> [1] https://radxa.com/products/rock5/5c
->
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+Changes in v2:
+- Updated the SPI_STACKED_PARALLEL config for zynq.
+---
+ configs/amd_versal2_mini_qspi_defconfig       | 1 +
+ configs/xilinx_versal_mini_qspi_defconfig     | 1 +
+ configs/xilinx_versal_net_mini_qspi_defconfig | 1 +
+ configs/xilinx_zynqmp_kria_defconfig          | 1 +
+ configs/xilinx_zynqmp_mini_qspi_defconfig     | 1 +
+ configs/zynq_cse_qspi_defconfig               | 1 +
+ 6 files changed, 6 insertions(+)
 
-Thanks,
-- Kever
-> ---
->   arch/arm/dts/rk3588s-rock-5-u-boot.dtsi     | 24 ++++++
->   arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi    |  6 ++
->   arch/arm/mach-rockchip/rk3588/Kconfig       |  7 ++
->   board/radxa/rock-5-rk3588s/Kconfig          | 12 +++
->   board/radxa/rock-5-rk3588s/MAINTAINERS      |  8 ++
->   board/radxa/rock-5-rk3588s/Makefile         |  3 +
->   board/radxa/rock-5-rk3588s/rock-5-rk3588s.c | 77 +++++++++++++++++
->   configs/rock-5-rk3588s_defconfig            | 95 +++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst             |  1 +
->   include/configs/rock-5-rk3588s.h            | 15 ++++
->   10 files changed, 248 insertions(+)
->   create mode 100644 arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
->   create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
->   create mode 100644 board/radxa/rock-5-rk3588s/Kconfig
->   create mode 100644 board/radxa/rock-5-rk3588s/MAINTAINERS
->   create mode 100644 board/radxa/rock-5-rk3588s/Makefile
->   create mode 100644 board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
->   create mode 100644 configs/rock-5-rk3588s_defconfig
->   create mode 100644 include/configs/rock-5-rk3588s.h
->
-> diff --git a/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..833a0aa4ea15
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
-> @@ -0,0 +1,24 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
-> + */
-> +
-> +#include "rk3588s-u-boot.dtsi"
-> +
-> +/ {
-> +	pwm-leds {
-> +		led-1 {
-> +			u-boot,default-brightness = <255>;
-> +		};
-> +	};
-> +};
-> +
-> +&saradc {
-> +	bootph-pre-ram;
-> +	vdd-microvolts = <1800000>;
-> +};
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..bb1cc9e4a279
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-> @@ -0,0 +1,6 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
-> + */
-> +
-> +#include "rk3588s-rock-5-u-boot.dtsi"
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-> index b5a0e624a532..e1487ecb0464 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -260,6 +260,12 @@ config TARGET_ROCK_5_ITX_RK3588
->   	  Front-panel connectors for audio and case-power, -leds
->   	  Powered by either 12V, ATX power-supply or PoE
->   
-> +config TARGET_ROCK_5_RK3588S
-> +	bool "Radxa ROCK 5C RK3588S2 board"
-> +	select BOARD_LATE_INIT
-> +	help
-> +	  Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
-> +
->   config TARGET_SIGE7_RK3588
->   	bool "ArmSoM Sige7 RK3588 board"
->   	select BOARD_LATE_INIT
-> @@ -398,6 +404,7 @@ source "board/turing/turing-rk1-rk3588/Kconfig"
->   source "board/radxa/rock5a-rk3588s/Kconfig"
->   source "board/radxa/rock5b-rk3588/Kconfig"
->   source "board/radxa/rock-5-itx-rk3588/Kconfig"
-> +source "board/radxa/rock-5-rk3588s/Kconfig"
->   source "board/rockchip/evb_rk3588/Kconfig"
->   source "board/rockchip/toybrick_rk3588/Kconfig"
->   source "board/theobroma-systems/jaguar_rk3588/Kconfig"
-> diff --git a/board/radxa/rock-5-rk3588s/Kconfig b/board/radxa/rock-5-rk3588s/Kconfig
-> new file mode 100644
-> index 000000000000..86830be1eeca
-> --- /dev/null
-> +++ b/board/radxa/rock-5-rk3588s/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_ROCK_5_RK3588S
-> +
-> +config SYS_BOARD
-> +	default "rock-5-rk3588s"
-> +
-> +config SYS_VENDOR
-> +	default "radxa"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "rock-5-rk3588s"
-> +
-> +endif
-> diff --git a/board/radxa/rock-5-rk3588s/MAINTAINERS b/board/radxa/rock-5-rk3588s/MAINTAINERS
-> new file mode 100644
-> index 000000000000..ead6356131c1
-> --- /dev/null
-> +++ b/board/radxa/rock-5-rk3588s/MAINTAINERS
-> @@ -0,0 +1,8 @@
-> +ROCK-5-RK3588S
-> +M:	FUKAUMI Naoki <naoki@radxa.com>
-> +S:	Maintained
-> +F:	arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
-> +F:	arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-> +F:	board/radxa/rock-5-rk3588s/
-> +F:	configs/rock-5-rk3588s_defconfig
-> +F:	include/configs/rock-5-rk3588s.h
-> diff --git a/board/radxa/rock-5-rk3588s/Makefile b/board/radxa/rock-5-rk3588s/Makefile
-> new file mode 100644
-> index 000000000000..d9be0f42e6b9
-> --- /dev/null
-> +++ b/board/radxa/rock-5-rk3588s/Makefile
-> @@ -0,0 +1,3 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +obj-y += rock-5-rk3588s.o
-> diff --git a/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c b/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
-> new file mode 100644
-> index 000000000000..a840ca7698d4
-> --- /dev/null
-> +++ b/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
-> @@ -0,0 +1,77 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +#include <linux/errno.h>
-> +#include <linux/kernel.h>
-> +#include <adc.h>
-> +#include <env.h>
-> +
-> +#define BOARD_ID	5
-> +
-> +struct board_model {
-> +	unsigned int low;
-> +	unsigned int high;
-> +	const char *board;
-> +	const char *board_name;
-> +	const char *fdtfile;
-> +};
-> +
-> +static const struct board_model board_models[] = {
-> +	{
-> +		0,
-> +		50,
-> +		"rock-5a-rk3588s",
-> +		"Radxa ROCK 5A",
-> +		"rockchip/rk3588s-rock-5a.dtb",
-> +	},
-> +	{
-> +		2375,
-> +		2425,
-> +		"rock-5c-rk3588s",
-> +		"Radxa ROCK 5C",
-> +		"rockchip/rk3588s-rock-5c.dtb"
-> +	},
-> +};
-> +
-> +static const struct board_model *get_board_model(void)
-> +{
-> +	unsigned int val;
-> +	int i, ret;
-> +
-> +	ret = adc_channel_single_shot("adc@fec10000", BOARD_ID, &val);
-> +	debug("adc_channel_single_shot ret %d val %u\n", ret, val);
-> +	if (ret)
-> +		return NULL;
-> +
-> +	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
-> +		unsigned int min = board_models[i].low;
-> +		unsigned int max = board_models[i].high;
-> +
-> +		if (min <= val && val <= max)
-> +			return &board_models[i];
-> +	}
-> +
-> +	return NULL;
-> +}
-> +
-> +int rk_board_late_init(void)
-> +{
-> +	const struct board_model *model = get_board_model();
-> +
-> +	if (model) {
-> +		env_set("board", model->board);
-> +		env_set("board_name", model->board_name);
-> +		env_set("fdtfile", model->fdtfile);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +int board_fit_config_name_match(const char *name)
-> +{
-> +	const struct board_model *model = get_board_model();
-> +
-> +	if (model && !strcmp(name, model->fdtfile))
-> +		return 0;
-> +
-> +	return -ENOENT;
-> +}
-> diff --git a/configs/rock-5-rk3588s_defconfig b/configs/rock-5-rk3588s_defconfig
-> new file mode 100644
-> index 000000000000..a0137520803f
-> --- /dev/null
-> +++ b/configs/rock-5-rk3588s_defconfig
-> @@ -0,0 +1,95 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5a"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_ROCK_5_RK3588S=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_OF_SYSTEM_SETUP=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_ADC=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_PWM=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_LIST="rockchip/rk3588s-rock-5a rockchip/rk3588s-rock-5c"
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SPL_ADC=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_PWM=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_RTL8169=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SPI=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_SYSRESET_PSCI=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 9bab86d23479..6b952654cb3d 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -141,6 +141,7 @@ List of mainline supported Rockchip boards:
->        - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
->        - Radxa ROCK 5A (rock5a-rk3588s)
->        - Radxa ROCK 5B (rock5b-rk3588)
-> +     - Radxa ROCK 5C (rock-5-rk3588s)
->        - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
->        - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
->        - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
-> diff --git a/include/configs/rock-5-rk3588s.h b/include/configs/rock-5-rk3588s.h
-> new file mode 100644
-> index 000000000000..a27fe0d82c18
-> --- /dev/null
-> +++ b/include/configs/rock-5-rk3588s.h
-> @@ -0,0 +1,15 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
-> + */
-> +
-> +#ifndef __ROCK_5_RK3588S_H
-> +#define __ROCK_5_RK3588S_H
-> +
-> +#include <configs/rk3588_common.h>
-> +
-> +#define ROCKCHIP_DEVICE_SETTINGS \
-> +		"stdout=serial,vidconsole\0" \
-> +		"stderr=serial,vidconsole\0"
-> +
-> +#endif /* __ROCK_5_RK3588S_H */
+diff --git a/configs/amd_versal2_mini_qspi_defconfig b/configs/amd_versal2_mini_qspi_defconfig
+index eb63f060c1b..2750fa2cc27 100644
+--- a/configs/amd_versal2_mini_qspi_defconfig
++++ b/configs/amd_versal2_mini_qspi_defconfig
+@@ -74,5 +74,6 @@ CONFIG_PL01X_SERIAL=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ # CONFIG_GZIP is not set
+ # CONFIG_LMB is not set
+diff --git a/configs/xilinx_versal_mini_qspi_defconfig b/configs/xilinx_versal_mini_qspi_defconfig
+index 4d23b353409..529815afe16 100644
+--- a/configs/xilinx_versal_mini_qspi_defconfig
++++ b/configs/xilinx_versal_mini_qspi_defconfig
+@@ -78,4 +78,5 @@ CONFIG_ARM_DCC=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ # CONFIG_LMB is not set
+diff --git a/configs/xilinx_versal_net_mini_qspi_defconfig b/configs/xilinx_versal_net_mini_qspi_defconfig
+index 8453be5a590..818c62c6959 100644
+--- a/configs/xilinx_versal_net_mini_qspi_defconfig
++++ b/configs/xilinx_versal_net_mini_qspi_defconfig
+@@ -76,4 +76,5 @@ CONFIG_ARM_DCC=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ # CONFIG_LMB is not set
+diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+index e5ffc7076fb..5d91338c12e 100644
+--- a/configs/xilinx_zynqmp_kria_defconfig
++++ b/configs/xilinx_zynqmp_kria_defconfig
+@@ -196,6 +196,7 @@ CONFIG_SOC_XILINX_ZYNQMP=y
+ CONFIG_SPI=y
+ CONFIG_ZYNQ_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ CONFIG_SYSRESET=y
+ CONFIG_SYSRESET_CMD_POWEROFF=y
+ CONFIG_SYSRESET_PSCI=y
+diff --git a/configs/xilinx_zynqmp_mini_qspi_defconfig b/configs/xilinx_zynqmp_mini_qspi_defconfig
+index a60403d82c2..1204c1583d4 100644
+--- a/configs/xilinx_zynqmp_mini_qspi_defconfig
++++ b/configs/xilinx_zynqmp_mini_qspi_defconfig
+@@ -92,6 +92,7 @@ CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_ARM_DCC=y
+ CONFIG_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ CONFIG_PANIC_HANG=y
+ # CONFIG_GZIP is not set
+ # CONFIG_LMB is not set
+diff --git a/configs/zynq_cse_qspi_defconfig b/configs/zynq_cse_qspi_defconfig
+index cd84df1e290..6a5e1dd5d95 100644
+--- a/configs/zynq_cse_qspi_defconfig
++++ b/configs/zynq_cse_qspi_defconfig
+@@ -92,6 +92,7 @@ CONFIG_SPI_FLASH_WINBOND=y
+ # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+ CONFIG_ARM_DCC=y
+ CONFIG_ZYNQ_QSPI=y
++CONFIG_SPI_STACKED_PARALLEL=y
+ CONFIG_SYS_TIMER_COUNTS_DOWN=y
+ # CONFIG_GZIP is not set
+ # CONFIG_LMB is not set
+-- 
+2.34.1
+
