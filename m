@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B52EAE7718F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 11:14:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B927E7718F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 11:14:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96B35803F5;
-	Fri,  3 Jan 2025 12:13:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CFF458036E;
+	Fri,  3 Jan 2025 12:13:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mRUNm1Zt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UFskeRMA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02182803D2; Fri,  3 Jan 2025 12:13:41 +0100 (CET)
+ id A5A60803E4; Fri,  3 Jan 2025 12:13:42 +0100 (CET)
 Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
  [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A5478034E
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 12:13:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3509280384
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 12:13:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
 Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4368a293339so84499715e9.3
- for <u-boot@lists.denx.de>; Fri, 03 Jan 2025 03:13:38 -0800 (PST)
+ 5b1f17b1804b1-43624b2d453so125792385e9.2
+ for <u-boot@lists.denx.de>; Fri, 03 Jan 2025 03:13:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735902817; x=1736507617; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1735902819; x=1736507619; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sfDOaSAv1fBQA8QtVc5IoWAJsxQS+z+L7wwQ2Zls04s=;
- b=mRUNm1ZtMy/+rJ+s5VWIvJVHi6ETFWk9RMrARtN055G5B2zDbcmvvl8afIin9s8C5Z
- CWRRs/Mfxoo/JQg29UbynwIvtS5WFe+E6MuPviyG16i3NHO/+eOTwINALKxsEY5GSinX
- efp5DojXz7gRNiEhqKlrj3Q5Z/GeIaLYWnIRPnXLZSP5d7ZnhHPDCRb/eTsGr2wLjEF7
- SFg9bZiMKFcyMiBlSLr69T6H/50KXNWG7434bGwlj3L8oZKRdY6IpU5+dBjIQ/QUJ5qJ
- F3+gj+5dQ05gc5Igy6P0rxOf0/V4b3Fll4OBkHCENWqoTkZXGUaGFFxDz0CLu7qrzo95
- 69/w==
+ bh=zMd+sinb3q6PanhAEgJJk6fMv9pR722mvZp/v9GXDrs=;
+ b=UFskeRMAq92ZVsV0PTmQ+cif/XESXtaLpd8B/nzZblOEU+FF/QT31e0SvYKNSX9B35
+ rEAPUoF+OJcu90BjXRVCgUCCBKRjZu3zggyJXu95w1liD9PqsDZbij6jnSD/YrBZ4zkt
+ xIdM2M2Fc2YnBErz5zBHsVi/e3cmZ1bgVkP27SEDQpT1mH/Uw3pViJDezrELrRxq7G+K
+ m6h4Zooey0NOo/Ay71LAUONUumhyPtQ1m14jzPEcwDsC4wc4GcyGLJ/5EakAUwNVGgNZ
+ OmMikLJLf8LNYGPc9eFT0P6gxLadW3e6q5v6PPfDBFT21zUpNk2QusiCiUNTGt0a2kM8
+ UUEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735902817; x=1736507617;
+ d=1e100.net; s=20230601; t=1735902819; x=1736507619;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sfDOaSAv1fBQA8QtVc5IoWAJsxQS+z+L7wwQ2Zls04s=;
- b=fMPwUB0y2U8Vi35alNISFr1a4wMLbZ9HK9G6KFEp3IRjm/WIgtuVWii8NJ5owcsaZX
- v06CSTQZjR7jtoQkh8hXdh76W/sqTbFa4JzBx2REGLR7Blbt7ps9vIcSoQqtyJKzQYDy
- 1UUyJO99R27vBvHwVkHVa8D0ygeTHbcs3Y167PcePKyIBBeU9bFnz5UPka5vJxQwCNl7
- iOZaMFg145uBcELUxIitOgKzAT0ZGqYftLFuKCs1d9QkxDLz7MfkBMZgpJ3r43r6mCt2
- x8LS/faejPKAu/e0wgTcOd3vJ1dDNGcLoS03/6LuCI0FzO/4PGqzb98TyXbw4VH023Rv
- jFGQ==
-X-Gm-Message-State: AOJu0YwVYqy8wylhcMfDyESwfdYUcYdnul4sw8Pz9TC5TxEjKXPFRol6
- x+ugPEeIKPSH12ob6t0RZGh2c7w5l2wvI29C1thmTSqsLcIjB6qHSPwG3Md3TL0H57ELIj0/4DO
- zHhU=
-X-Gm-Gg: ASbGncvLvQtBzqh1AmebjdNBgAJY//HQ8x2gt4wLDSxwhInC2Io/sTVNXL83gmX0sq/
- UlqcG+Q/XASdWyRXWO8ViR+OI0MB36O1ljLg/F8d8n/M0R5UIhXU8pHtyy8oiSHx3VoW1x4U7Bb
- W/Tt/MgRMd2YSE6fARHJwXXvUz9st7Zx585Ylx3GLIRIQ244OmJ1M4qcE5mUD9X4FwWUGMSMisc
- S5MImSjPICBeAytiR2JpTa81Cr2tvYEW59g4CAgHQ5rZYWfdhLRvwCuTbdh0zCtiw==
-X-Google-Smtp-Source: AGHT+IHf3yG169T8rFo1p1AfGWsWPRJwFTuOQXO/hnWCpLYAxDuM0urON/+z4hiUE2vZZEbmykn4EQ==
-X-Received: by 2002:a05:600c:4f0d:b0:432:cbe5:4f09 with SMTP id
- 5b1f17b1804b1-43671247b46mr395385645e9.4.1735902817490; 
- Fri, 03 Jan 2025 03:13:37 -0800 (PST)
+ bh=zMd+sinb3q6PanhAEgJJk6fMv9pR722mvZp/v9GXDrs=;
+ b=pn8UzdEuc5RVYinSr3Pq8dnJjP9moCtijFAqi7Jail0xiar523y+hHLVLH63xtEWc/
+ CfxFwQrG5G/EhdCIXuHK7Tj/gXkplI4zVi3ag/9Pv6EBY0GgGcPKPtfOEvYcT8odkCbT
+ aPgo/xqZ+rBFCNUVqOmCojBsAyszilSw36/gdV04NVxrX08duhLC6nKnHTlRLxulo2iy
+ tPa8vNX81P13aJB8YsfyGP22kpNn8y+te4dzrd/ic8ZFnaVuMNGHR05tT6l/WFx3IMJ0
+ X/x9INnB1SXthnRIRD16dKT5wQH8xQpVGY47xEKwPQgXc6jujechj6E909czbjVj7gUi
+ FnHg==
+X-Gm-Message-State: AOJu0Yx+uA1HoRuMeXzwqTu8nEcKC6b+gZxmLdxZZkBbqGXSw0AVglXG
+ uKlbAneoWXY86vBDQGoUCgbCdWYRUk07oaVuYSUzCiNh6vYs0rbQxoRNftYwIfiPUNqUjURk3Ch
+ NxeM=
+X-Gm-Gg: ASbGnctbBIHRZTJhtgd3Gv5eXckirhnDPy3KC0KA2QTbXukT/CQ660h8ZWbSyacYe1O
+ FkBQepRX09lPmc6Cx1UjCbgWzk9QSuvUVUqRz7En7udd6Qu7qf/S2v1T0oftS2xkJB1sbrHgkRR
+ caoHJam3Ktyqe2Ga0gGWwvJ46Ti8Hp5bqd45dgatibA5wlG527vnDVf5q5ASZ8tXu4fpwwGeOwE
+ +NsOGTBzptFqH3PyOsedMLmz9DgSLNuDrijrp+YtoyY6kriZSjOlO12sd3E0h+9qw==
+X-Google-Smtp-Source: AGHT+IEQPtl3e0+bB8xof9LrNU8TiTTHiG/a5PBVl5iklrSpDL1TGIneUoxPzN2QF9Z858rEnFC7lQ==
+X-Received: by 2002:a05:600c:474d:b0:436:18d0:aa6e with SMTP id
+ 5b1f17b1804b1-4366835c14fmr418470625e9.5.1735902819392; 
+ Fri, 03 Jan 2025 03:13:39 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43656a0b361sm513138075e9.0.2025.01.03.03.13.36
+ 5b1f17b1804b1-43656a0b361sm513138075e9.0.2025.01.03.03.13.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Jan 2025 03:13:37 -0800 (PST)
+ Fri, 03 Jan 2025 03:13:39 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michal Simek <michal.simek@amd.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Devarsh Thakkar <devarsht@ti.com>
-Subject: [PATCH v3 2/5] board_init_f(): use static calls
-Date: Fri,  3 Jan 2025 12:13:14 +0100
-Message-ID: <270cd303e577c51467abc3a8520311a6facb7f68.1735896540.git.jerome.forissier@linaro.org>
+ Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v3 4/5] board_init_r(): use static calls
+Date: Fri,  3 Jan 2025 12:13:16 +0100
+Message-ID: <c86ca0914ab1496a7f63371e47f36f2109d7d97a.1735896540.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1735896540.git.jerome.forissier@linaro.org>
 References: <cover.1735896540.git.jerome.forissier@linaro.org>
@@ -100,291 +104,319 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make static calls instead of iterating over the init_sequence_f arrays.
-Tested on a KV260 board (xilinx_zynqmp_kria_defconfig).
+Replace the init_sequence_r function array by direct calls.
+bloat-o-meter stats before/after on u-boot.bin for configuration
+xilinx_zynqmp_kria_defconfig are the following:
 
-- With LTO enabled, the code size reported by bloat-o-meter is 1037
-  bytes less (-0.10%)
-- With LTO disabled, the code is 193 bytes smaller (-0.02%)
-- Execution time does not change in a noticeable way
+- With LTO:
+add/remove: 87/128 grow/shrink: 8/23 up/down: 19743/-20923 (-1180)
+Total: Before=1067882, After=1066702, chg -0.11%
+
+- Without LTO:
+add/remove: 0/23 grow/shrink: 2/0 up/down: 795/-1112 (-317)
+Total: Before=1119494, After=1119177, chg -0.03%
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- common/board_f.c   | 169 +++++++++++++++++++++++----------------------
- include/initcall.h |  27 ++++++++
- 2 files changed, 114 insertions(+), 82 deletions(-)
+ arch/sh/lib/board.c         |   9 +-
+ common/board_r.c            | 175 ++++++++++++++++++------------------
+ test/py/tests/test_trace.py |   8 +-
+ 3 files changed, 96 insertions(+), 96 deletions(-)
 
-diff --git a/common/board_f.c b/common/board_f.c
-index a4d8850cb7d..c2446ba344d 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -38,6 +38,7 @@
- #include <spl.h>
- #include <status_led.h>
- #include <sysreset.h>
-+#include <time.h>
- #include <timer.h>
- #include <trace.h>
- #include <upl.h>
-@@ -870,58 +871,64 @@ static int initf_upl(void)
- 	return 0;
+diff --git a/arch/sh/lib/board.c b/arch/sh/lib/board.c
+index 53b1c147c2e..2daf54e7c33 100644
+--- a/arch/sh/lib/board.c
++++ b/arch/sh/lib/board.c
+@@ -19,18 +19,13 @@ int dram_init(void)
+ 
+ void relocate_code(ulong start_addr_sp, gd_t *new_gd, ulong relocaddr)
+ {
+-	void (*reloc_board_init_r)(gd_t *gd, ulong dest) = board_init_r;
+-
+-	if (new_gd->reloc_off) {
++	if (new_gd->reloc_off)
+ 		memcpy((void *)new_gd->relocaddr,
+ 		       (void *)(new_gd->relocaddr - new_gd->reloc_off),
+ 		       new_gd->mon_len);
+ 
+-		reloc_board_init_r += new_gd->reloc_off;
+-	}
+-
+ 	__asm__ __volatile__("mov.l %0, r15\n" : : "m" (new_gd->start_addr_sp));
+ 
+ 	while (1)
+-		reloc_board_init_r(new_gd, 0x0);
++		board_init_r(new_gd, 0x0);
+ }
+diff --git a/common/board_r.c b/common/board_r.c
+index c65c0b2ed1e..56016994b11 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -582,21 +582,24 @@ static int run_main_loop(void)
  }
  
--static const init_fnc_t init_sequence_f[] = {
--	setup_mon_len,
--	CONFIG_IS_ENABLED(OF_CONTROL, (fdtdec_setup,))
--	CONFIG_IS_ENABLED(TRACE_EARLY, (trace_early_init,))
--	initf_malloc,
--	initf_upl,
--	log_init,
--	initf_bootstage,	/* uses its own timer, so does not need DM */
+ /*
+- * Over time we hope to remove these functions with code fragments and
+- * stub functions, and instead call the relevant function directly.
+- *
+- * We also hope to remove most of the driver-related init and do it if/when
+- * the driver is later used.
++ * Over time we hope to remove most of the driver-related init and do it
++ * if/when the driver is later used.
+  *
+  * TODO: perhaps reset the watchdog in the initcall function after each call?
+  */
+-static init_fnc_t init_sequence_r[] = {
+-	initr_trace,
+-	initr_reloc,
 -	event_init,
--	bloblist_maybe_init,
--	setup_spl_handoff,
--	CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F, (console_record_init,))
--	INITCALL_EVENT(EVT_FSP_INIT_F),
--	arch_cpu_init,		/* basic arch cpu dependent setup */
--	mach_cpu_init,		/* SoC/machine dependent CPU setup */
--	initf_dm,
--	CONFIG_IS_ENABLED(BOARD_EARLY_INIT_F, (board_early_init_f,))
-+static void initcall_run_f(void)
++
++static void initcall_run_r(void)
 +{
 +	/*
 +	 * Please do not add logic to this function (variables, if (), etc.).
 +	 * For simplicity it should remain an ordered list of function calls.
 +	 */
-+	INITCALL(setup_mon_len);
-+	CONFIG_IS_ENABLED(OF_CONTROL, (INITCALL(fdtdec_setup)));
-+	CONFIG_IS_ENABLED(TRACE_EARLY, (INITCALL(trace_early_init)));
-+	INITCALL(initf_malloc);
-+	INITCALL(initf_upl);
-+	INITCALL(log_init);
-+	INITCALL(initf_bootstage); /* uses its own timer, so does not need DM */
++	INITCALL(initr_trace);
++	INITCALL(initr_reloc);
 +	INITCALL(event_init);
-+	INITCALL(bloblist_maybe_init);
-+	INITCALL(setup_spl_handoff);
-+	CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F,
-+			  (INITCALL(console_record_init);))
-+	INITCALL_EVT(EVT_FSP_INIT_F);
-+	INITCALL(arch_cpu_init);	/* basic arch cpu dependent setup */
-+	INITCALL(mach_cpu_init);	/* SoC/machine dependent CPU setup */
-+	INITCALL(initf_dm);
-+	CONFIG_IS_ENABLED(BOARD_EARLY_INIT_F, (INITCALL(board_early_init_f);))
- #if defined(CONFIG_PPC) || defined(CONFIG_SYS_FSL_CLK) || defined(CONFIG_M68K)
- 	/* get CPU and bus clocks according to the environment variable */
--	get_clocks,		/* get CPU and bus clocks (etc.) */
-+	INITCALL(get_clocks);		/* get CPU and bus clocks (etc.) */
+ 	/* TODO: could x86/PPC have this also perhaps? */
+ #if defined(CONFIG_ARM) || defined(CONFIG_RISCV)
+-	initr_caches,
++	INITCALL(initr_caches);
+ 	/* Note: For Freescale LS2 SoCs, new MMU table is created in DDR.
+ 	 *	 A temporary mapping of IFC high region is since removed,
+ 	 *	 so environmental variables in NOR flash is not available
+@@ -604,21 +607,21 @@ static init_fnc_t init_sequence_r[] = {
+ 	 *	 region.
+ 	 */
  #endif
- #if !defined(CONFIG_M68K) || (defined(CONFIG_M68K) && !defined(CONFIG_MCFTMR))
+-	initr_reloc_global_data,
++	INITCALL(initr_reloc_global_data);
+ #if defined(CONFIG_SYS_INIT_RAM_LOCK) && defined(CONFIG_E500)
+-	initr_unlock_ram_in_cache,
++	INITCALL(initr_unlock_ram_in_cache);
+ #endif
+-	initr_barrier,
+-	initr_malloc,
+-	log_init,
+-	initr_bootstage,	/* Needs malloc() but has its own timer */
+-	CONFIG_IS_ENABLED(CONSOLE_RECORD, (console_record_init,))
+-	CONFIG_IS_ENABLED(SYS_NONCACHED_MEMORY, (noncached_init,))
+-	initr_of_live,
+-	CONFIG_IS_ENABLED(DM, (initr_dm,))
+-	CONFIG_IS_ENABLED(ADDR_MAP, (init_addr_map,))
++	INITCALL(initr_barrier);
++	INITCALL(initr_malloc);
++	INITCALL(log_init);
++	INITCALL(initr_bootstage); /* Needs malloc() but has its own timer */
++	CONFIG_IS_ENABLED(CONSOLE_RECORD, (INITCALL(console_record_init);))
++	CONFIG_IS_ENABLED(SYS_NONCACHED_MEMORY, (INITCALL(noncached_init);))
++	INITCALL(initr_of_live);
++	CONFIG_IS_ENABLED(DM, (INITCALL(initr_dm);))
++	CONFIG_IS_ENABLED(ADDR_MAP, (INITCALL(init_addr_map);))
+ #if defined(CONFIG_ARM) || defined(CONFIG_RISCV) || defined(CONFIG_SANDBOX)
+-	board_init,	/* Setup chipselects */
++	INITCALL(board_init);	/* Setup chipselects */
+ #endif
+ 	/*
+ 	 * TODO: printing of the clock inforamtion of the board is now
+@@ -626,88 +629,91 @@ static init_fnc_t init_sequence_r[] = {
+ 	 * davinci SOC's is added. Remove this check once all the board
+ 	 * implement this.
+ 	 */
+-	CONFIG_IS_ENABLED(CLOCKS, (set_cpu_clk_info,)) /* Setup clock information */
+-	initr_lmb,
+-	CONFIG_IS_ENABLED(EFI_LOADER, (efi_memory_init,))
+-	CONFIG_IS_ENABLED(BINMAN_FDT, (initr_binman,))
+-	CONFIG_IS_ENABLED(FSP_VERSION2, (arch_fsp_init_r,))
+-	initr_dm_devices,
+-	stdio_init_tables,
+-	serial_initialize,
+-	initr_announce,
+-	dm_announce,
+-	CONFIG_IS_ENABLED(WDT, (initr_watchdog,))
+-	INIT_FUNC_WATCHDOG_RESET
+-	arch_initr_trap,
+-	CONFIG_IS_ENABLED(BOARD_EARLY_INIT_R, (board_early_init_r,))
+-	INIT_FUNC_WATCHDOG_RESET
+-	CONFIG_IS_ENABLED(POST, (post_output_backlog,))
+-	INIT_FUNC_WATCHDOG_RESET
++	CONFIG_IS_ENABLED(CLOCKS, (INITCALL(set_cpu_clk_info);))
++	INITCALL(initr_lmb);
++	CONFIG_IS_ENABLED(EFI_LOADER, (INITCALL(efi_memory_init);))
++	CONFIG_IS_ENABLED(BINMAN_FDT, (INITCALL(initr_binman);))
++	CONFIG_IS_ENABLED(FSP_VERSION2, (INITCALL(arch_fsp_init_r);))
++	INITCALL(initr_dm_devices);
++	INITCALL(stdio_init_tables);
++	INITCALL(serial_initialize);
++	INITCALL(initr_announce);
++	INITCALL(dm_announce);
++	CONFIG_IS_ENABLED(WDT, (INITCALL(initr_watchdog);))
++	WATCHDOG_RESET();
++	INITCALL(arch_initr_trap);
++	CONFIG_IS_ENABLED(BOARD_EARLY_INIT_R, (INITCALL(board_early_init_r);))
++	WATCHDOG_RESET();
++	CONFIG_IS_ENABLED(POST, (INITCALL(post_output_backlog);))
++	WATCHDOG_RESET();
+ #if defined(CONFIG_PCI_INIT_R) && defined(CONFIG_SYS_EARLY_PCI_INIT)
+ 	/*
+ 	 * Do early PCI configuration _before_ the flash gets initialised,
+ 	 * because PCU resources are crucial for flash access on some boards.
+ 	 */
+-	pci_init,
++	INITCALL(pci_init);
+ #endif
+-	CONFIG_IS_ENABLED(ARCH_EARLY_INIT_R, (arch_early_init_r,))
+-	power_init_board,
+-	CONFIG_IS_ENABLED(MTD_NOR_FLASH, (initr_flash,))
+-	INIT_FUNC_WATCHDOG_RESET
++	CONFIG_IS_ENABLED(ARCH_EARLY_INIT_R, (INITCALL(arch_early_init_r);))
++	INITCALL(power_init_board);
++	CONFIG_IS_ENABLED(MTD_NOR_FLASH, (INITCALL(initr_flash);))
++	WATCHDOG_RESET();
+ #if defined(CONFIG_PPC) || defined(CONFIG_M68K) || defined(CONFIG_X86)
+ 	/* initialize higher level parts of CPU like time base and timers */
+-	cpu_init_r,
++	INITCALL(cpu_init_r);
+ #endif
+-	CONFIG_IS_ENABLED(EFI_LOADER, (efi_init_early,))
+-	CONFIG_IS_ENABLED(CMD_NAND, (initr_nand,))
+-	CONFIG_IS_ENABLED(CMD_ONENAND, (initr_onenand,))
+-	CONFIG_IS_ENABLED(MMC, (initr_mmc,))
+-	CONFIG_IS_ENABLED(XEN, (xen_init,))
+-	CONFIG_IS_ENABLED(PVBLOCK, (initr_pvblock,))
+-	initr_env,
+-	CONFIG_IS_ENABLED(SYS_MALLOC_BOOTPARAMS, (initr_malloc_bootparams,))
+-	INIT_FUNC_WATCHDOG_RESET
+-	cpu_secondary_init_r,
+-	CONFIG_IS_ENABLED(ID_EEPROM, (mac_read_from_eeprom,))
+-	INITCALL_EVENT(EVT_SETTINGS_R),
+-	INIT_FUNC_WATCHDOG_RESET
++	CONFIG_IS_ENABLED(EFI_LOADER, (INITCALL(efi_init_early);))
++	CONFIG_IS_ENABLED(CMD_NAND, (INITCALL(initr_nand);))
++	CONFIG_IS_ENABLED(CMD_ONENAND, (INITCALL(initr_onenand);))
++	CONFIG_IS_ENABLED(MMC, (INITCALL(initr_mmc);))
++	CONFIG_IS_ENABLED(XEN, (INITCALL(xen_init);))
++	CONFIG_IS_ENABLED(PVBLOCK, (INITCALL(initr_pvblock);))
++	INITCALL(initr_env);
++	CONFIG_IS_ENABLED(SYS_MALLOC_BOOTPARAMS,
++			  (INITCALL(initr_malloc_bootparams);))
++	WATCHDOG_RESET();
++	INITCALL(cpu_secondary_init_r);
++	CONFIG_IS_ENABLED(ID_EEPROM, (INITCALL(mac_read_from_eeprom);))
++	INITCALL_EVT(EVT_SETTINGS_R);
++	WATCHDOG_RESET();
+ #if defined(CONFIG_PCI_INIT_R) && !defined(CONFIG_SYS_EARLY_PCI_INIT)
+ 	/*
+ 	 * Do pci configuration
+ 	 */
+-	pci_init,
++	INITCALL(pci_init);
+ #endif
+-	stdio_add_devices,
+-	jumptable_init,
+-	CONFIG_IS_ENABLED(API, (api_init,))
+-	console_init_r,		/* fully init console as a device */
+-	CONFIG_IS_ENABLED(DISPLAY_BOARDINFO_LATE, (console_announce_r, show_board_info,))
++	INITCALL(stdio_add_devices);
++	INITCALL(jumptable_init);
++	CONFIG_IS_ENABLED(API, (INITCALL(api_init);))
++	INITCALL(console_init_r);	/* fully init console as a device */
++	CONFIG_IS_ENABLED(DISPLAY_BOARDINFO_LATE,
++			  (INITCALL(console_announce_r);
++			   INITCALL(show_board_info);))
+ 	/* miscellaneous arch-dependent init */
+-	CONFIG_IS_ENABLED(ARCH_MISC_INIT, (arch_misc_init,))
++	CONFIG_IS_ENABLED(ARCH_MISC_INIT, (INITCALL(arch_misc_init);))
+ 	/* miscellaneous platform-dependent init */
+-	CONFIG_IS_ENABLED(MISC_INIT_R, (misc_init_r,))
+-	INIT_FUNC_WATCHDOG_RESET
+-	CONFIG_IS_ENABLED(CMD_KGDB, (kgdb_init,))
+-	interrupt_init,
++	CONFIG_IS_ENABLED(MISC_INIT_R, (INITCALL(misc_init_r);))
++	WATCHDOG_RESET();
++	CONFIG_IS_ENABLED(CMD_KGDB, (INITCALL(kgdb_init);))
++	INITCALL(interrupt_init);
+ #if defined(CONFIG_MICROBLAZE) || defined(CONFIG_M68K)
 -	timer_init,		/* initialize timer */
 +	INITCALL(timer_init);		/* initialize timer */
  #endif
--	CONFIG_IS_ENABLED(BOARD_POSTCLK_INIT, (board_postclk_init,))
--	env_init,		/* initialize environment */
--	init_baud_rate,		/* initialze baudrate settings */
--	serial_init,		/* serial communications setup */
--	console_init_f,		/* stage 1 init of console */
--	display_options,	/* say that we are here */
--	display_text_info,	/* show debugging info if required */
--	checkcpu,
--	CONFIG_IS_ENABLED(SYSRESET, (print_resetinfo,))
-+	CONFIG_IS_ENABLED(BOARD_POSTCLK_INIT,
-+			  (INITCALL(board_postclk_init);))
-+	INITCALL(env_init);		/* initialize environment */
-+	INITCALL(init_baud_rate);	/* initialze baudrate settings */
-+	INITCALL(serial_init);		/* serial communications setup */
-+	INITCALL(console_init_f);	/* stage 1 init of console */
-+	INITCALL(display_options);	/* say that we are here */
-+	INITCALL(display_text_info);	/* show debugging info if required */
-+	INITCALL(checkcpu);
-+	CONFIG_IS_ENABLED(SYSRESET, (INITCALL(print_resetinfo);))
- 	/* display cpu info (and speed) */
--	CONFIG_IS_ENABLED(DISPLAY_CPUINFO, (print_cpuinfo,))
--	CONFIG_IS_ENABLED(DTB_RESELECT, (embedded_dtb_select,))
--	CONFIG_IS_ENABLED(DISPLAY_BOARDINFO, (show_board_info,))
--	INIT_FUNC_WATCHDOG_INIT
--	INITCALL_EVENT(EVT_MISC_INIT_F),
+-	initr_status_led,
+-	initr_boot_led_blink,
++	INITCALL(initr_status_led);
++	INITCALL(initr_boot_led_blink);
+ 	/* PPC has a udelay(20) here dating from 2002. Why? */
+-	CONFIG_IS_ENABLED(BOARD_LATE_INIT, (board_late_init,))
+-	CONFIG_IS_ENABLED(BITBANGMII, (bb_miiphy_init,))
+-	CONFIG_IS_ENABLED(PCI_ENDPOINT, (pci_ep_init,))
+-	CONFIG_IS_ENABLED(CMD_NET, (INIT_FUNC_WATCHDOG_RESET initr_net,))
+-	CONFIG_IS_ENABLED(POST, (initr_post,))
 -	INIT_FUNC_WATCHDOG_RESET
--	CONFIG_IS_ENABLED(SYS_I2C_LEGACY, (init_func_i2c,))
--	announce_dram_init,
--	dram_init,		/* configure available RAM banks */
--	CONFIG_IS_ENABLED(POST, (post_init_f,))
--	INIT_FUNC_WATCHDOG_RESET
-+	CONFIG_IS_ENABLED(DISPLAY_CPUINFO, (INITCALL(print_cpuinfo);))
-+	CONFIG_IS_ENABLED(DTB_RESELECT, (INITCALL(embedded_dtb_select);))
-+	CONFIG_IS_ENABLED(DISPLAY_BOARDINFO, (INITCALL(show_board_info);))
-+	WATCHDOG_INIT();
-+	INITCALL_EVT(EVT_MISC_INIT_F);
+-	INITCALL_EVENT(EVT_LAST_STAGE_INIT),
++	CONFIG_IS_ENABLED(BOARD_LATE_INIT, (INITCALL(board_late_init);))
++	CONFIG_IS_ENABLED(BITBANGMII, (INITCALL(bb_miiphy_init);))
++	CONFIG_IS_ENABLED(PCI_ENDPOINT, (INITCALL(pci_ep_init);))
++	CONFIG_IS_ENABLED(CMD_NET, (WATCHDOG_RESET(); INITCALL(initr_net);))
++	CONFIG_IS_ENABLED(POST, (INITCALL(initr_post);))
 +	WATCHDOG_RESET();
-+	CONFIG_IS_ENABLED(SYS_I2C_LEGACY, (INITCALL(init_func_i2c);))
-+	INITCALL(announce_dram_init);
-+	INITCALL(dram_init);		/* configure available RAM banks */
-+	CONFIG_IS_ENABLED(POST, (INITCALL(post_init_f);))
-+	WATCHDOG_RESET();
- #if defined(CFG_SYS_DRAM_TEST)
--	testdram,
-+	INITCALL(testdram);
- #endif /* CFG_SYS_DRAM_TEST */
--	INIT_FUNC_WATCHDOG_RESET
--
--	CONFIG_IS_ENABLED(POST, (init_post,))
--	INIT_FUNC_WATCHDOG_RESET
-+	WATCHDOG_RESET();
-+	CONFIG_IS_ENABLED(POST, (INITCALL(init_post);))
-+	WATCHDOG_RESET();
- 	/*
- 	 * Now that we have DRAM mapped and working, we can
- 	 * relocate the code and continue running from DRAM.
-@@ -934,48 +941,48 @@ static const init_fnc_t init_sequence_f[] = {
- 	 *  - monitor code
- 	 *  - board info struct
- 	 */
--	setup_dest_addr,
-+	INITCALL(setup_dest_addr);
- #if defined(CONFIG_OF_BOARD_FIXUP) && !defined(CONFIG_OF_INITIAL_DTB_READONLY)
--	fix_fdt,
-+	INITCALL(fix_fdt);
++	INITCALL_EVT(EVT_LAST_STAGE_INIT);
+ #if defined(CFG_PRAM)
+-	initr_mem,
++	INITCALL(initr_mem);
  #endif
- #ifdef CFG_PRAM
--	reserve_pram,
-+	INITCALL(reserve_pram);
- #endif
--	reserve_round_4k,
--	setup_relocaddr_from_bloblist,
--	arch_reserve_mmu,
--	reserve_video,
--	reserve_trace,
--	reserve_uboot,
--	reserve_malloc,
--	reserve_board,
--	reserve_global_data,
--	reserve_fdt,
-+	INITCALL(reserve_round_4k);
-+	INITCALL(setup_relocaddr_from_bloblist);
-+	INITCALL(arch_reserve_mmu);
-+	INITCALL(reserve_video);
-+	INITCALL(reserve_trace);
-+	INITCALL(reserve_uboot);
-+	INITCALL(reserve_malloc);
-+	INITCALL(reserve_board);
-+	INITCALL(reserve_global_data);
-+	INITCALL(reserve_fdt);
- #if defined(CONFIG_OF_BOARD_FIXUP) && defined(CONFIG_OF_INITIAL_DTB_READONLY)
--	reloc_fdt,
--	fix_fdt,
-+	INITCALL(reloc_fdt);
-+	INITCALL(fix_fdt);
- #endif
--	reserve_bootstage,
--	reserve_bloblist,
--	reserve_arch,
--	reserve_stacks,
--	dram_init_banksize,
--	show_dram_config,
--	INIT_FUNC_WATCHDOG_RESET
--	setup_bdinfo,
--	display_new_sp,
--	INIT_FUNC_WATCHDOG_RESET
-+	INITCALL(reserve_bootstage);
-+	INITCALL(reserve_bloblist);
-+	INITCALL(reserve_arch);
-+	INITCALL(reserve_stacks);
-+	INITCALL(dram_init_banksize);
-+	INITCALL(show_dram_config);
-+	WATCHDOG_RESET();
-+	INITCALL(setup_bdinfo);
-+	INITCALL(display_new_sp);
-+	WATCHDOG_RESET();
- #if !defined(CONFIG_OF_BOARD_FIXUP) || !defined(CONFIG_OF_INITIAL_DTB_READONLY)
--	reloc_fdt,
-+	INITCALL(reloc_fdt);
- #endif
--	reloc_bootstage,
--	reloc_bloblist,
--	setup_reloc,
-+	INITCALL(reloc_bootstage);
-+	INITCALL(reloc_bloblist);
-+	INITCALL(setup_reloc);
- #if defined(CONFIG_X86) || defined(CONFIG_ARC)
--	copy_uboot_to_ram,
--	do_elf_reloc_fixups,
-+	INITCALL(copy_uboot_to_ram);
-+	INITCALL(do_elf_reloc_fixups);
- #endif
--	clear_bss,
-+	INITCALL(clear_bss);
- 	/*
- 	 * Deregister all cyclic functions before relocation, so that
- 	 * gd->cyclic_list does not contain any references to pre-relocation
-@@ -985,12 +992,11 @@ static const init_fnc_t init_sequence_f[] = {
- 	 * This should happen as late as possible so that the window where a
- 	 * watchdog device is not serviced is as small as possible.
- 	 */
--	cyclic_unregister_all,
-+	INITCALL(cyclic_unregister_all);
- #if !defined(CONFIG_ARM) && !defined(CONFIG_SANDBOX)
--	jump_to_copy,
-+	INITCALL(jump_to_copy);
- #endif
--	NULL,
+-	initr_boot_led_on,
+-	run_main_loop,
 -};
++	INITCALL(initr_boot_led_on);
++	INITCALL(run_main_loop);
 +}
  
- void board_init_f(ulong boot_flags)
+ void board_init_r(gd_t *new_gd, ulong dest_addr)
  {
-@@ -1000,8 +1006,7 @@ void board_init_f(ulong boot_flags)
- 	gd->flags &= ~GD_FLG_HAVE_CONSOLE;
- 	gd->boardf = &boardf;
- 
--	if (initcall_run_list(init_sequence_f))
--		hang();
-+	initcall_run_f();
- 
- #if !defined(CONFIG_ARM) && !defined(CONFIG_SANDBOX) && \
- 		!defined(CONFIG_EFI_APP) && !CONFIG_IS_ENABLED(X86_64) && \
-diff --git a/include/initcall.h b/include/initcall.h
-index 62d3bb67f08..8e22526dd9e 100644
---- a/include/initcall.h
-+++ b/include/initcall.h
-@@ -8,6 +8,7 @@
- 
- #include <asm/types.h>
- #include <event.h>
-+#include <hang.h>
- 
- _Static_assert(EVT_COUNT < 256, "Can only support 256 event types with 8 bits");
- 
-@@ -35,4 +36,30 @@ typedef int (*init_fnc_t)(void);
-  */
- int initcall_run_list(const init_fnc_t init_sequence[]);
- 
-+#define INITCALL(_call) \
-+	do { \
-+		if (_call()) { \
-+			printf("%s(): initcall %s() failed\n", __func__, \
-+			       #_call); \
-+			hang(); \
-+		} \
-+	} while (0)
-+
-+#define INITCALL_EVT(_evt) \
-+	do { \
-+		if (event_notify_null(_evt)) { \
-+			printf("%s(): event %d/%s failed\n", __func__, _evt, \
-+			       event_type_name(_evt)) ; \
-+			hang(); \
-+		} \
-+	} while (0)
-+
-+#if defined(CONFIG_WATCHDOG) || defined(CONFIG_HW_WATCHDOG)
-+#define WATCHDOG_INIT() INITCALL(init_func_watchdog_init)
-+#define WATCHDOG_RESET() INITCALL(init_func_watchdog_reset)
-+#else
-+#define WATCHDOG_INIT()
-+#define WATCHDOG_RESET()
-+#endif
-+
+@@ -734,8 +740,7 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
  #endif
+ 	gd->flags &= ~GD_FLG_LOG_READY;
+ 
+-	if (initcall_run_list(init_sequence_r))
+-		hang();
++	initcall_run_r();
+ 
+ 	/* NOTREACHED - run_main_loop() does not return */
+ 	hang();
+diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+index 44239da5280..1b072df73b6 100644
+--- a/test/py/tests/test_trace.py
++++ b/test/py/tests/test_trace.py
+@@ -201,7 +201,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+     # Then look for this:
+     #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.006 us   |      }
+     # Then check for this:
+-    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    calc_reloc_ofs();
++    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    event_init();
+ 
+     expected_indent = None
+     found_start = False
+@@ -224,8 +224,8 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+                 found_end = True
+ 
+     # The next function after initf_bootstage() exits should be
+-    # initcall_is_event()
+-    assert upto == 'calc_reloc_ofs()'
++    # event_init()
++    assert upto == 'event_init()'
+ 
+     # Now look for initf_dm() and dm_timer_init() so we can check the bootstage
+     # time
+@@ -274,7 +274,7 @@ def check_flamegraph(cons, fname, proftool, map_fname, trace_fg):
+     # We expect dm_timer_init() to be called twice: once before relocation and
+     # once after
+     look1 = 'initf_dm;dm_timer_init 1'
+-    look2 = 'board_init_r;initcall_run_list;initr_dm_devices;dm_timer_init 1'
++    look2 = 'board_init_r;initcall_run_r;initr_dm_devices;dm_timer_init 1'
+     found = 0
+     with open(trace_fg, 'r') as fd:
+         for line in fd:
 -- 
 2.43.0
 
