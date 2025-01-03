@@ -4,47 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE283E77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 17:58:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38489E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 19:50:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE00B80295;
-	Fri,  3 Jan 2025 18:58:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 630B0802EF;
+	Fri,  3 Jan 2025 20:50:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QoVtYTOd";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8924802EF; Fri,  3 Jan 2025 18:58:51 +0100 (CET)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 336D28035E; Fri,  3 Jan 2025 20:50:10 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 879C180275
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 18:58:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0984380295
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 20:50:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [IPV6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46] (unknown
- [IPv6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 6FCFBB4B39D2;
- Fri,  3 Jan 2025 18:58:48 +0100 (CET)
-Message-ID: <69678189-22b5-4372-83a4-0e4637975355@freeshell.de>
-Date: Fri, 3 Jan 2025 09:58:46 -0800
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1735933803; x=1736538603; i=xypron.glpk@gmx.de;
+ bh=H5NCcFhW4jgwYHjwHCgb5vtlQPUugXJwNCs6JSVcwso=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=QoVtYTOdbMG2IrcgKC3QfhULS29EhsfpXeH4S26SWBgqB4W0Wj5UYVLQ/6hH3Dzq
+ 8ZPzIr8i769YnMGfGoVm88ds/U4qkanscMhTllKYIXLMILzG//7gzN5SI8a5C9l7z
+ f8tTt2MYMl14pjtP03gqvUeKPreCFo5gDBhBbuBrjZahIR6vdFPYJQKiLsnHjrsVQ
+ 5CfFL1pgY9lCv2No9EJjuxbbYZzlsIPCrzff36FMrpZ1LLfl2xqNC7D8Tb+AOL2rb
+ d8JQY8AgIYtegORhaVrd+bY/aW+eF3h+OAn4E1qcCkss2BamDDfwPuWnXokQ+yfNt
+ hPI6w3iN7is/FgkbFQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.106] ([46.114.109.94]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MpUUw-1tolxH0mfE-00qgBY; Fri, 03
+ Jan 2025 20:50:03 +0100
+Message-ID: <9cc4a4e0-1a80-4bdc-9fd7-a04260ff7cb7@gmx.de>
+Date: Fri, 3 Jan 2025 20:50:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: LwIP and multiple network interfaces
-To: Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
- <20250102224724.GS3476@bill-the-cat>
- <aa6d5dce-473c-447f-91b9-fe802f0f520d@freeshell.de>
- <20250103014049.GT3476@bill-the-cat>
- <14a9901e-00fd-4a5e-aeb1-ffbe715f8965@freeshell.de>
- <7c20233b-d61a-4114-bbb3-6866bdd5bbf5@linaro.org>
+Subject: Re: [PATCH 1/2] efi_loader: efi_setup: Add efi_start_obj_list() to
+ efi_setup.c
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
+ trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20241206173033.2403998-1-adriano.cordova@canonical.com>
+ <20241206173033.2403998-2-adriano.cordova@canonical.com>
 Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <7c20233b-d61a-4114-bbb3-6866bdd5bbf5@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241206173033.2403998-2-adriano.cordova@canonical.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:jAwoEmyjCdfRovos4VOSo4px8tFZPIrorQt4sy//6VuVFB4wvAY
+ WeXm0HRJvM3jkFHdbeO+if0I9q50Lrz/smXbXDPBymcnhUNVYuHkKaCzOOQKukt6EHGWd0k
+ 9me82NwQD62yUMjwfTunNzZE8FKhM+YGrmcxmMFsLKnwrksuIwF9TwYq3/+Mi7QneUMrbbf
+ u7nJFHyX9vcsQgGBx/T1g==
+UI-OutboundReport: notjunk:1;M01:P0:buNGwliR3vk=;yI241DJcee5QxMIWjKTBjw0Wv1O
+ /DMYNE48WmDhIem2ze6mrm3Gbf2fyu/qGLwi+io+ffTxh333jX7mXYniJoThwJwHQjBGR1vc8
+ 2LwSPlx26cY6P2g+0pEFqQF174Ilxya0Qtx14gP0qh0mLioRMQq7BJMpgOUXj0w9LxZMgBqpq
+ RjDX1SV3AfRZUwuerVUkn7HbpNRyO0UNSnuNfegcpr3dmB+dhrAGhQ65IVAVXcCDqeTpwM4c3
+ E9lMQqshjp1pQkOihnJXu+yBauAyao6HfdS1EtLj2t3WBeKFrXeaaSJppldM7VnmTUAdkCZK0
+ Ce0b2gACzjn7XnITu7Kzfiw20mbf639O0bN5u5ZAGIgUtEUvS0PlWBA4gy6SXhUmZOvjlypVu
+ f4f4u7IQlfQqEf4faJhx5GhKxCbdcUGIhViyQ+V38A2feycU6y0hVful9zGp+MszuLPBkRdtB
+ q1tgMLTRC43vj8Eyc9ZAxIvbz3r9ehM21RG5ls1yy9nZKsSf3ZdrMDU7qADhRFf0/RxKFTviY
+ 6cXqBeWGccK/LjhkAlNp+IkjOfJ2pmGpqn9sNH+27Lk0yaZfMQyB9TpMy6SDAahllbW36Us8w
+ Lf2fXVgErPeMAABnetN/YE75ithWT3VDxGuNaHxMFVqk+EV/3AatQcfch40L8R9zcjwIAcE8K
+ dL8sR6MTS4CGVZe9B0u5W9Hss0p0OLxSHjc6MK9yPKpOK2oE/ns7p0UwlRKPwLpbwGvIr8eaU
+ n/AWI0g2xj2YP3Nc9v5kA3WCl3XjtjyzwAn7YUteDfINfNhxfbQXupHTWf0+yyOS9Wh9mlbL8
+ ttXkSW0wpf95d6z0JObx8LLwq4OTDyzl0KW0CQDSNAotTSFHRPf5Zkv/ygnk+wJq4NyS8D6Xw
+ j6UYLYKMOSG6vsxc5BSTte1K0av2FwKJIoscK81VNx4Ggjdk4tiDZYqlfFAcnvrnCEFK+bDit
+ 2AhBWcDwd+/hSmw6aOU+O6kgAevGlMjrjv9kZ72d0u6TOv08J2Q12MRaigQz8pGy0/IC9lUvR
+ fUA3jyv/+eYeJi4INK9SGUilwICo+IffxlEfckusTIxoQq33sA0jcKlnBjutaaVVRZSPRuLIa
+ ww6ZYX79p/FLK2fpfQ7mfUIkzTw55x
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,233 +98,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 06.12.24 18:30, Adriano Cordova wrote:
+> The command bootefi calls efi_init_obj_list to do the efi set up
+> before launching an .efi payload, but efi_init_obj_list is called
+> only once. There are some initializations which depend on the
+> environment and should be done each time a payload gets launched and
+> not only once and can now be done in efi_start_obj_list(). A motivation
+> for this change is the following order of events:
+>
+> 1. Launch an EFI application (e.g. bootefi hello)
+> 2. Change the ip address
+> 3. Launch another application which uses the pxe protocol
 
+Hello Adriano,
 
-On 1/3/25 02:03, Jerome Forissier wrote:
-> 
-> 
-> On 1/3/25 02:52, E Shattow wrote:
->>
->>
->> On 1/2/25 17:40, Tom Rini wrote:
->>> On Thu, Jan 02, 2025 at 05:34:57PM -0800, E Shattow wrote:
->>>
->>>> Tom sorry about sending this reply twice, struggle here is with Thunderbird
->>>> mail UI sometimes hiding "Reply All" and it missed the mail list first time
->>>> around.
->>>
->>> No problem.
->>>
->>>> On 1/2/25 14:47, Tom Rini wrote:
->>>>> On Thu, Jan 02, 2025 at 02:26:06PM -0800, E Shattow wrote:
->>>>>> Problem: 'dhcp' must be ran twice when the network cable is plugged into a
->>>>>> port other than the first network port.
->>>>>>
->>>>>> Network cable plugged into bottom (first) Ethernet port:
->>>>>> 1. Power on
->>>>>> 2. StarFive # dhcp
->>>>>>
->>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete....... done
->>>>>> DHCP client bound to address 192.168.2.51 (3678 ms)
->>>>>>
->>>>>>
->>>>>> Network cable plugged into top (second) Ethernet port:
->>>>>> 1. Power on
->>>>>> 2. StarFive # dhcp
->>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
->>>>>> TIMEOUT !
->>>>>> phy_startup() failed: -110
->>>>>> FAILED: -110
->>>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
->>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
->>>>>> TIMEOUT !
->>>>>> phy_startup() failed: -110
->>>>>> FAILED: -110
->>>>>> Could not start ethernet@16030000
->>>>>> 3. StarFive # dhcp
->>>>>> DHCP client bound to address 192.168.2.77 (31 ms)
->>>>>
->>>>> What happens when you set ethact to 1 first?
->>>>>
->>>>
->>>>
->>>> '1' literal does not seem to do something so I guess it is meant the id of
->>>> the first ethernet interface:
->>>
->>> Yes, I misspoke sorry.
->>>
->>>>   From power-on:
->>>>
->>>> ...
->>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
->>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
->>>> In:    serial@10000000
->>>> Out:   serial@10000000
->>>> Err:   serial@10000000
->>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
->>>> starting USB...
->>>> No USB controllers found
->>>> Working FDT set to ff700a10
->>>> StarFive # env print ethact
->>>> ## Error: "ethact" not defined
->>>> StarFive # env set ethact 1
->>>> StarFive # dhcp
->>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
->>>> TIMEOUT !
->>>> phy_startup() failed: -110
->>>> FAILED: -110
->>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
->>>> EQOS_DMA_MODE_SWR stuck
->>>> FAILED: -110
->>>> Could not start ethernet@16030000
->>>>
->>>> Again, from power-on:
->>>>
->>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
->>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
->>>> In:    serial@10000000
->>>> Out:   serial@10000000
->>>> Err:   serial@10000000
->>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
->>>> starting USB...
->>>> No USB controllers found
->>>> Working FDT set to ff700a10
->>>> StarFive # env print ethact
->>>> ## Error: "ethact" not defined
->>>> StarFive # env set ethact ethernet@16040000
->>>> StarFive # dhcp
->>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
->>>> DHCP client bound to address 192.168.2.77 (149 ms)
->>>
->>> So then yes, the second interface works when ethact is set to use that
->>> directly. This is the same behavior as the legacy stack I believe.
->>>
->>
->> Legacy stack does actually rotate and complete successfully when ethact environment variable does not exist and (eventually) configure the second interface though. Here with LwIP the procedure fails.
->>
->> Notice that here it starts with ethernet@16030000, then rotates to ethernet@16040000 unsuccessfully, and back again to ethernet@16030000 before (again) failing and giving up. There is a network cable plugged into 'ethernet@16040000' port and if we try the command again the environment variable ethact retained 'ethact=ethernet@16040000' from the failed procedure so you're right it works as it should... except that it totally failed to do what was expected the first time.
-> 
-> That's unexpected indeed.
-> 
->> Is this exposing a problem with this board network driver and behavior or is it something with LwIP ?
-> Hard to tell at this point. One thing I know for sure is that lwIP expects
-> eth_set_current() (called from do_dhcp()) to actually pick a valid
-> interface if there is one. So it should definitely select ethernet@16040000
-> in your scenario. Adding debug prints to eth_set_current(),
-> eth_current_changed() etc. should help.
-> 
-> Thanks,
+Thanks for addressing this issue.
 
-StarFive # dhcp
-!!! eth_set_current(): entered function
-!!! eth_set_current(): conditional 1
-!!! eth_set_current(): conditional 2
-!!! eth_set_current(): conditional 5
-!!! eth_current_changed(): entered function
-!!! eth_current_changed(): conditional 2
-!!! eth_current_changed(): conditional 3
-!!! eth_current_changed(): leaving function
-!!! eth_set_current(): leaving function
-ethernet@16030000 Waiting for PHY auto negotiation to complete......... 
-TIMEOUT !
-phy_startup() failed: -110
-FAILED: -110
-!!! eth_current_changed(): entered function
-!!! eth_current_changed(): conditional 2
-!!! eth_current_changed(): conditional 3
-!!! eth_current_changed(): leaving function
-ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
-ethernet@16030000 Waiting for PHY auto negotiation to complete......... 
-TIMEOUT !
-phy_startup() failed: -110
-FAILED: -110
-Could not start ethernet@16030000
-StarFive #
+There are a number of events that can lead to updating the IP address:
 
-For reference the modified functions:
+* EFI_PXE_BASE_CODE_PROTOCOL.Dhcp()
+* EFI_PXE_BASE_CODE_PROTOCOL.SetStationIp()
+* EFI_HTTP_PROTOCOL.Configure()
+* command set env ethaddr#
+* command dhcp
 
-void eth_current_changed(void)
-{
-         char *act = env_get("ethact");
-         char *ethrotate;
+All of these events require:
 
-printf("!!! eth_current_changed(): entered function\n");
-         /*
-          * The call to eth_get_dev() below has a side effect of rotating
-          * ethernet device if uc_priv->current == NULL. This is not what
-          * we want when 'ethrotate' variable is 'no'.
-          */
-         ethrotate = env_get("ethrotate");
-         if ((ethrotate != NULL) && (strcmp(ethrotate, "no") == 0))
-         {
-printf("!!! eth_current_changed(): conditional 1\n");
-                 return;
-         }
+* Updating the relevant ethaddr* variable.
+* Updating any other references to the IP address.
 
-         /* update current ethernet name */
-         if (eth_get_dev()) {
-printf("!!! eth_current_changed(): conditional 2\n");
-                 if (act == NULL || strcmp(act, eth_get_name()) != 0)
-                 {
-printf("!!! eth_current_changed(): conditional 3\n");
-                         env_set("ethact", eth_get_name());
-                 }
-         }
-         /*
-          * remove the variable completely if there is no active
-          * interface
-          */
-         else if (act != NULL)
-         {
-printf("!!! eth_current_changed(): conditional 4\n");
-                 env_set("ethact", NULL);
-         }
-printf("!!! eth_current_changed(): leaving function\n");
-}
+When not only considering EFI applications but also EFI drivers
+installed via the bootefi command all of these events can occur during
+the runtime of EFI binaries.
 
-void eth_set_current(void)
-{
-         static char *act;
-         static int  env_changed_id;
-         int     env_id;
+Function efi_init_obj_list() is used for setups that are needed only
+once before accessing the UEFI sub-system. It is not able to handle events=
+.
 
-printf("!!! eth_set_current(): entered function\n");
-         env_id = env_get_id();
-         if ((act == NULL) || (env_changed_id != env_id)) {
-printf("!!! eth_set_current(): conditional 1\n");
-                 act = env_get("ethact");
-                 env_changed_id = env_id;
-         }
+If we need to update any internal UEFI data structures, we should do
+this instantaneously when the event occurs and not when executing a UEFI
+related shell command.
 
-         if (act == NULL) {
-printf("!!! eth_set_current(): conditional 2\n");
-                 char *ethprime = env_get("ethprime");
-                 void *dev = NULL;
+U-Boot already has callbacks invoked when variables are changed. These
+are set up with U_BOOT_ENV_CALLBACK(). There is even a command 'env
+callbacks' to list these callbacks.
 
-                 if (ethprime)
-                 {
-printf("!!! eth_set_current(): conditional 3\n");
-                         dev = eth_get_dev_by_name(ethprime);
-                 }
-                 if (dev)
-                 {
-printf("!!! eth_set_current(): conditional 4\n");
-                         eth_set_dev(dev);
-                 }
-                 else
-                 {
-printf("!!! eth_set_current(): conditional 5\n");
-                         eth_set_dev(NULL);
-                 }
-         } else {
-printf("!!! eth_set_current(): conditional 6\n");
-                 eth_set_dev(eth_get_dev_by_name(act));
-         }
+You could define a new function to handle changes of the IP address and
+invoke it via U_BOOT_ENV_CALLBACK(ipaddr, <function name>) or
+U_BOOT_ENV_CALLBACK(netmask, <function name>).
 
-         eth_current_changed();
-printf("!!! eth_set_current(): leaving function\n");
-}
+With lwIP we can have multiple network interfaces. Each has a different
+variable ipaddr# assigned to it. We will have to extend the concept of
+U_BOOT_ENV_CALLBACK() to allow for wildcard matches by adjusting
+find_env_callback(). With CONFIG_REGEX=3Dy regular expressions could be
+used for this purpose (cf. include/slre.h) but we should better avoid
+the code size increase.
 
-Hopefully this is enough to make sense of it? Let me know, thanks!
+Best regards
 
--E
+Heinrich
+
+>
+> As the EFI pxe protocol was initialized when the handles
+> for efi net were created in 1., the ip was hardcoded there.
+>
+> In this example, another possibility would be to make a callback for ip
+> address changes to go all the way up to efi_net.
+>
+> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> ---
+>   lib/efi_loader/efi_setup.c | 21 ++++++++++++++++++++-
+>   1 file changed, 20 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index aa59bc7779..164586742a 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -12,6 +12,7 @@
+>   #include <log.h>
+>   #include <asm-generic/unaligned.h>
+>
+> +#define OBJ_LIST_INITIALIZED 0
+>   #define OBJ_LIST_NOT_INITIALIZED 1
+>
+>   efi_status_t efi_obj_list_initialized =3D OBJ_LIST_NOT_INITIALIZED;
+> @@ -208,6 +209,18 @@ out:
+>   	return -1;
+>   }
+>
+> +/**
+> + * efi_start_obj_list() - Start EFI object list
+> + *
+> + * Return:	status code
+> + */
+> +static efi_status_t efi_start_obj_list(void)
+> +{
+> +	efi_status_t ret =3D EFI_SUCCESS;
+> +
+> +	return ret;
+> +}
+> +
+>   /**
+>    * efi_init_obj_list() - Initialize and populate EFI object list
+>    *
+> @@ -217,7 +230,9 @@ efi_status_t efi_init_obj_list(void)
+>   {
+>   	efi_status_t ret =3D EFI_SUCCESS;
+>
+> -	/* Initialize once only */
+> +	/* Initialize only once, but start every time if correctly initialized=
+*/
+> +	if (efi_obj_list_initialized =3D=3D OBJ_LIST_INITIALIZED)
+> +		return efi_start_obj_list();
+>   	if (efi_obj_list_initialized !=3D OBJ_LIST_NOT_INITIALIZED)
+>   		return efi_obj_list_initialized;
+>
+> @@ -349,6 +364,10 @@ efi_status_t efi_init_obj_list(void)
+>   	if (IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK) &&
+>   	    !IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK_EARLY))
+>   		ret =3D efi_launch_capsules();
+> +	if (ret !=3D EFI_SUCCESS)
+> +		goto out;
+> +
+> +	ret =3D efi_start_obj_list();
+>   out:
+>   	efi_obj_list_initialized =3D ret;
+>   	return ret;
+
