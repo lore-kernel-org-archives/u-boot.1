@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCA19E77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 01:41:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A975EE77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 01:42:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B835D80384;
-	Fri,  3 Jan 2025 02:41:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3962F802EF;
+	Fri,  3 Jan 2025 02:41:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JdpLVw51";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c9vVy8A9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A387D8036D; Fri,  3 Jan 2025 02:41:36 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id A0BB88034E; Fri,  3 Jan 2025 02:41:58 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 288A98034E
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 02:41:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5588180196
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 02:41:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-aaf8f0ea963so250023466b.3
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 17:41:34 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5d4e2aa7ea9so21719814a12.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 17:41:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735868493; x=1736473293; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1735868516; x=1736473316; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/BITMFlTJwEjo8D67afFTWqrimz35/w7wdZ5bFgC2oc=;
- b=JdpLVw51dxI5rKt9FATih+VMMy6tB4V9/FESTZF+qFvAQCTo0mRKJm9cEJKEHG3rLY
- rGasGEC2nIm36mZT++GnJuWhX0mknwOAEYUGyQw3Wj9qWXh4Vim05/+8JXTnV7Rj5inC
- n5FiCgCHlllZ+ItY9vQc5u1gXqEeY81utmuRk=
+ bh=CAB/zDubYK/PULdDc5624YA3knPxGHoOU0YmFnSk0U8=;
+ b=c9vVy8A9KEsRzsySZrn5OMfmkxS/TY4dJT924N2GuiadXq2NtK4YrTZB267l5ox6di
+ uQLCPx3jrI0l6w8ZwLnYSXKikz2LljqsB1yp8fq+wBNhFrsiED/qgRCsXp+z74ZJBHpX
+ r/bKgY+tnRcRBYOHuYT5WXhPYJ/CEcccZWbOA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735868493; x=1736473293;
+ d=1e100.net; s=20230601; t=1735868516; x=1736473316;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/BITMFlTJwEjo8D67afFTWqrimz35/w7wdZ5bFgC2oc=;
- b=YuyXnfyP6Mw7qUNpnS7+xZUrW3ZWTw1PPRlL/N79PCX8Z72K/R8YVKFhj66dL/TZA1
- 9jvFP2MmQSgCnit7jvTrAbKFd1tkrAViLiOriC6851cBSD1+vk9+ywtcxWFhTn1d40DD
- l7tzkG1ebcIupZmDuJv0HzcjUZXPHSNigl/vu/KrFfwG8zYea2Gtlr6w9Sw1HG8wFp5J
- 1iJDU00QWSbvp60PRyXzAO9PmRZe8xEccA8CUgLCxr7HkXPKXbSiclRtdklEAgaqPCIe
- J7SNtqWEOyl3KZhiCW8YHY82D9VWMlGX/pX9H54NfhD8bcMd34LSoYZjvGMDQeqQAOvV
- j2ZQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWl6ksTJKV2yb1A4JhGIJz/iEerGlCr+5mVFRc9NLCKU5BTL3NiU89AX8F6gB3O8bHfr0T5k6U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy7vXS+0uTKc/7osONctIjzqmxqQOGMqzoqdTsVFgJSkyTJ8Gc9
- YetvTRuD3pE7eP+PkHIXvA6CaLVWKlWlfsoeZe9xQHSnbLmxn88ffFQXt0IiwTz5mZy5qGxeK9I
- Y1e0rq0AV6eunrFoXakyJ8H6gWt74aFaCOJAk
-X-Gm-Gg: ASbGnctILcmfdTyZuNFDckOTpEmMV6eU/X2Na5BqRj9dNPXVtYwO2urJFky8JoFScsa
- xJpl3Ee0ltXz879RAsBB+l+MFUksOy0rvNF9hYQNQ
-X-Google-Smtp-Source: AGHT+IETFIhLVW7oYammPThgpDVjZ8jeKSShiXtLQOByd5StEdDZKbPlI0M9AgmhNT8WpLHuiedIoL+c+n9XfMk/0Iw=
-X-Received: by 2002:a17:907:7f8e:b0:aa6:9198:75a2 with SMTP id
- a640c23a62f3a-aac334e51afmr4218685866b.44.1735868493667; Thu, 02 Jan 2025
- 17:41:33 -0800 (PST)
+ bh=CAB/zDubYK/PULdDc5624YA3knPxGHoOU0YmFnSk0U8=;
+ b=YwPS7fkupZncsiW9A1dVdkXMtHoX00H6hsBw9b/A5kwoULujJIR77iJy0zqfDsJars
+ DSdfAIjWufxCxXIea3aAktLZir99rSN4yRnEY0lK6DIYMttHCkJ9GnRAXien5e9nFHLz
+ BUeblD0D9doZLnP9p/8w8J7qb8fDa2P+U7uNLBjM0hsPveHH9dRfWSWoqhPuKYpoEuHx
+ 3Nl7/DMTIdGKLkIlrT0w3lwMnqsJtu2tF5r4FKKeLWjGTy6+2POOGxq5Sgrknc8lpSkA
+ u8QLKPBITDwLW93b9QY4lhJ01hoqk/t/ikXI4GfRwaDXTvNmm0D5gnStQ2MRV/2qORSv
+ O0lg==
+X-Gm-Message-State: AOJu0YxvJ4DdXPQLez4WbdkNICuGxNeJTWGtMthGyH2qJppQbfuAx6yg
+ f3Yu/mX7MmlOU4afwoGjCGmfj6a1MrrHgZrjovdJyh4Vj5GfN2I+GFCyMNV9guB0D24WkWx1sRH
+ QVHtm9ASfQA+GnOxJKV/eiORBOWfNALXHWFb6
+X-Gm-Gg: ASbGncsqVKTmji6P48G9uN8eVoKlT5D5vIRQXncjtkLM4CYoONRdaau0ebb+9jbQWJ7
+ Lmmvyf8VG6PAt3df1SRZBfP7SyWHjbAt8hXWT31Kj
+X-Google-Smtp-Source: AGHT+IGoT2CbY6z2GeSc/eVp/0u5jgA0gxREQ2kqjG20Uo8Ptmy533nVJ8fy1dpElVvhK6SpL+YAWkWsrKc5pd35WhA=
+X-Received: by 2002:a17:907:1b81:b0:aae:bac6:6659 with SMTP id
+ a640c23a62f3a-aaebac6712bmr2770105366b.7.1735868515758; Thu, 02 Jan 2025
+ 17:41:55 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1734537135.git.jerome.forissier@linaro.org>
- <20250101175518.GA1682161@bill-the-cat>
-In-Reply-To: <20250101175518.GA1682161@bill-the-cat>
+References: <20250101195817.995321-1-sjg@chromium.org>
+ <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
+In-Reply-To: <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 3 Jan 2025 14:41:23 +1300
-Message-ID: <CAFLszTjryDVBwn-RxfgTOneUBBUsE-3sS+Y1ykk5BOKzeFc9Gg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/5] Static initcalls
-To: Tom Rini <trini@konsulko.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>
+Date: Fri, 3 Jan 2025 14:41:46 +1300
+Message-ID: <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
+Subject: Re: [PATCH] bloblist: Drop BSD license
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,31 +86,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Hi Ilias,
 
-On Thu, 2 Jan 2025 at 06:55, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 3 Jan 2025 at 08:15, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Wed, Dec 18, 2024 at 04:53:53PM +0100, Jerome Forissier wrote:
 >
-> > This series replaces the dynamic initcalls (with function pointers) with
-> > static calls, and gets rid of initcall_run_list(), init_sequence_f,
-> > init_sequence_f_r and init_sequence_r. This makes the code simpler and the
-> > binary slighlty smaller: -2507 bytes/-0.23 % with LTO enabled and -1232
-> > bytes/-0.11 % with LTO disabled (xilinx_zynqmp_kria_defconfig).
-> >
-> > Execution time doesn't seem to change noticeably. There is no impact on
-> > the SPL.
+> Apologies for the formatting, replying on mobile.
 >
-> This leads to run-time failures on SH:
-> https://source.denx.de/u-boot/u-boot/-/jobs/986701
+> On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Linaro has decided to write their own version of bloblist from scratch,
+>> so there is no point in having a non-GPL license on this file. Change
+>> it, to better fit with the U-Boot project.
+>
+>
+> Apart from the commit message being wrong, it's also intentionally provoking. There was no bloblist in TF-A.
+>
+> The TF-A code is implementing the firmware hand-off spec [0], which Linaro participated in the creation. The U-Boot implementation was adjusted to adhere to the same spec after the TF-A code was merged.
 
-I'm not a huge fan of this series in terms of the style, but this is a
-significant code-size reduction!
+The U-Boot series was [1], for reference. This was mostly about using
+different tags and shrinking the headers. My clear understanding was
+that we were going to try to have a single codebase, which is why I
+changed the license.
 
-For the board_init_f() etc. functions, can you do a follow-up with a
-comment indicating that logic must not be added?...i.e. that we don't
-end up with variables, if(), etc. in these functions. I think that
-would be a good rule to have.
+So, since you have a different view of events, why did Linaro write it
+from scratch? Was it to avoid having U-Boot code in TF-A? Or was the
+author just unaware of the original intention? It isn't relevant for
+the commit message, but if you can find out I would be interested.
+
+[..]
 
 Regards,
 Simon
+
+> [0] https://github.com/FirmwareHandoff/firmware_handoff
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=387200&state=*
