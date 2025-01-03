@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D2DE7718F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 07:47:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6AC8E77198
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 07:47:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE3CC802EF;
-	Fri,  3 Jan 2025 08:46:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4BA1E803F6;
+	Fri,  3 Jan 2025 08:47:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S/JaHxdL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QbwDWS2A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E772C802EF; Fri,  3 Jan 2025 08:46:55 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 3C06E803CA; Fri,  3 Jan 2025 08:46:57 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5717D8036D
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 08:46:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB8488036E
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 08:46:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-21649a7bcdcso161787185ad.1
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 23:46:51 -0800 (PST)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2161eb94cceso117077415ad.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 23:46:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735890409; x=1736495209; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1735890412; x=1736495212; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kXdXdoM59IuIinzb8vLNJAfjFs+jofzGYnkHRIu31io=;
- b=S/JaHxdL2Q0ukCFv/bdoYMB/ZOqEAShlMd3+q7okb8oPvwzIuzbbnKo5Ul8DxN2T3S
- F3asExUhYErLvfgGXkYgJKIm20POgbDgQFJiJuVeIoJ267ZiO+2AEUfSuajMwr/w/gkI
- BmQJRrBkluUVGk6NSXWfd5Z57PleHgz4xISTM=
+ bh=LB2la2vYpWOfeuj3rt4IFwZbV/qFffpJduUkAFtVXNA=;
+ b=QbwDWS2AP7kUCyynfNIwj4mT8A2OahnBBHbmXAlhyc6Ol1IHB/c4Rn8NMggAfZrcuK
+ Vc4TZ/j3isWOIf57JAkGIMP1AWh3oo9lXeWgXBpw82vdePRGd4aJfptZawwGM0SLsRLk
+ hriF1hs2LaANEyae1bL7TFt8KfZZxkFKmcGy8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735890409; x=1736495209;
+ d=1e100.net; s=20230601; t=1735890412; x=1736495212;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kXdXdoM59IuIinzb8vLNJAfjFs+jofzGYnkHRIu31io=;
- b=VrjIme6e7BQAk+gG3eH7kERz7iKsb8PEdVFdUTkRs3MflvCgZFors9b+SoySR/8LIb
- X35GEw8ZKLtXxwnz0t1rdLGgCZ/A8Wq8aZoQ5ntEUtFN58OzKU3VLd1Bd/pq7EB3IK0/
- 69TZU+V4GmLiClbIVh3hvVGqZqBbsq7qX3++KUntXbAjGliAp9SGV9Ta+mVB6KePHTZN
- upWfSLEGX8BV91Yq1ZYWdjDiBinmUSUiAdqqJhsSkEiR+eu0T584pJ6b5Gs53sryNPsH
- dQsKGuIeMB10dvZxaNiEtNiII+COEBj22itsopIcjNi4OuePd8a7+gTxt+zzdY6DKkB8
- 7ClQ==
-X-Gm-Message-State: AOJu0YzNaev3dqkeIgaNmxliw+0Eurl8f0jFF6ve6tmiqUWoJPWFuuKK
- XZE1BCKwlOZnpHoKyveOU87lU+wclxkIeRl6/4eQ8e6UpM/IWQfZJuaWtNsSOCckEvRvQMGBElA
+ bh=LB2la2vYpWOfeuj3rt4IFwZbV/qFffpJduUkAFtVXNA=;
+ b=Wzn3tbahabup4DZdr0yow+Jt4ulj/FpqPFYAuH7FT++w/wQZjB2GhWQZD0B5F/6PNk
+ zQT6iNrXX8Ia9TVIvID2BSDg2LXZjBxXjp5sicovrWY6a5Kabuzp7wusaMB3K+WcvXSj
+ UfO29Lwb4N04tcbIeFKRlKSUP8bpSSGz92bbUiEva/Z0X9coEo6GyUX6sf7PxLMGKapI
+ a5UaSgReOicja0tyAmnfwWC1B3U9979OavHSDcK305gG4RPQZrKLZyBP+wPuupic2YaB
+ DfZu8dU8hduSittmHxJEkLXnG/C2rSQj2O941tZitnZQWG1CqhuIsce/NiGN4YxT0yN9
+ C0EA==
+X-Gm-Message-State: AOJu0YymzPhGr4+YcTtOqvEKif4r/vxv1m6WwWVBMTyj9v24IpU/kPsy
+ k5sxrnELbsEL7z81A2koXogFKi4v1Enfx4Mw0mT7cjeFtblSdR+4j3kQgvLR/74pe4T4fTAcJTo
  =
-X-Gm-Gg: ASbGnctMVq3nGG3Bh1avOZW5oHGOmMSccHOGArdGq1L4/QfXjASLOVZyBZHrZrFM470
- xCEnH288J3fX/0Ja4O0epgvE0OUjvqp3/8ISpulDXNqzEgKnIjYk6juyLZf/UBslDQOzcah2mWF
- nD1XloC89EKzxYlE8XROMRJnGM1m0gyswm7+cdRX3uqeRrRs9VFjKQFjHbMB5oKoYevzJ8IO7zq
- w6HXBGWW8/Va4URNIrRboLjOjL3+W9GBkA4Fd2/uOumUkxzqyoR3hbVBQhfUbWgddbw1gVbtgr0
- r5Ugccg=
-X-Google-Smtp-Source: AGHT+IHGywJNWO4Yzx94BadaSIp9V6nLmJr0NpmLgu00yDX5bbU1NtpB9dbdpWVKqv56M+veEOzxCg==
-X-Received: by 2002:a17:902:c406:b0:215:854c:a71a with SMTP id
- d9443c01a7336-219e6ebb68dmr575039755ad.34.1735890409250; 
- Thu, 02 Jan 2025 23:46:49 -0800 (PST)
+X-Gm-Gg: ASbGncvvV8nyxOasuwfE4kVL2wpaaoMJVhByA3U/oLOdSC0w4m7hWlrRD1ZWV+TN2dy
+ VE0/9rBHZzdntiv88ZTeJjO9EKKQ9zRXvxEEPFEeaQn/RAowJwhYNEOPWq7Cj89658i5klK+Xqz
+ HjgD+hDEzD52HUWr9++sh+eJis16IaceTBR4Ko3I4KJqt+LSvraAi8selQjjmW4lmOzHHQMwnzI
+ agcmM7bvAlPLgOk8vXucSJ5STkjbkZyjXTpQovgoxcNTDpekmYbgJ2325ncwgKRsK/JEHSceD2O
+ rCSfOQ0=
+X-Google-Smtp-Source: AGHT+IH9oCFXqmycGIyRDl/vL4HVv/WeJCOW/cZZqX5W6LtdadELjyP5dlePwFkhO43o3Q5KKuHmGA==
+X-Received: by 2002:a05:6a20:8403:b0:1e5:ddac:1ed7 with SMTP id
+ adf61e73a8af0-1e5e046f87fmr74693396637.12.1735890412521; 
+ Thu, 02 Jan 2025 23:46:52 -0800 (PST)
 Received: from chromium.org (219-89-85-241.adsl.xtra.co.nz. [219.89.85.241])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-842e36c9e3fsm19869376a12.73.2025.01.02.23.46.46
+ 41be03b00d2f7-842e36c9e3fsm19869376a12.73.2025.01.02.23.46.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jan 2025 23:46:48 -0800 (PST)
+ Thu, 02 Jan 2025 23:46:51 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/4] upl: Correct handling of ISA serial
-Date: Fri,  3 Jan 2025 20:46:08 +1300
-Message-ID: <20250103074638.2348387-3-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 3/4] x86: emulation: Enable bloblist
+Date: Fri,  3 Jan 2025 20:46:09 +1300
+Message-ID: <20250103074638.2348387-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250103074638.2348387-1-sjg@chromium.org>
 References: <20250103074638.2348387-1-sjg@chromium.org>
@@ -94,49 +94,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current implementation sets stdout-path to /isa/serial even if the
-serial port actually has a unit address. It also uses the wrong name for
-the compatible string.
-
-Fix these two problems.
-
-Also, the hard-coded serial port turns out not to be needed, so drop
-that.
+Add bloblist support so that tables can be generated and placed in a
+bloblist, then passed to a payload using UPL
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/upl_write.c | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ configs/qemu-x86_64_defconfig | 2 ++
+ configs/qemu-x86_defconfig    | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/boot/upl_write.c b/boot/upl_write.c
-index d8211b2cf77..85d4004cd4a 100644
---- a/boot/upl_write.c
-+++ b/boot/upl_write.c
-@@ -537,14 +537,10 @@ static int add_upl_serial(const struct upl *upl, ofnode root,
- 
- 	parent = root;
- 	if (ser->access_type == UPLAT_IO) {
--		ret = ofnode_write_string(node, UPLP_STDOUT_PATH, "/isa/serial");
--		if (ret)
--			return log_msg_ret("uc0", ret);
--
- 		ret = ofnode_add_subnode(root, "isa", &node);
- 		if (ret)
- 			return log_msg_ret("uc1", ret);
--		if (ofnode_write_string(node, UPLP_UPL_PARAMS_COMPAT, "isa") ||
-+		if (ofnode_write_string(node, UPLP_COMPATIBLE, "isa") ||
- 		    add_addr_size_cells(node, 2, 1))
- 			return log_msg_ret("uc2", -EINVAL);
- 		parent = node;
-@@ -563,7 +559,6 @@ static int add_upl_serial(const struct upl *upl, ofnode root,
- 		}
- 	}
- 
--	// ret = ofnode_write_string(node, UPLP_COMPATIBLE, "ns8250");
- 	ret = ofnode_write_string(node, UPLP_COMPATIBLE, ser->compatible);
- 	if (!ret)
- 		ret = ofnode_write_u32(node, UPLP_CLOCK_FREQUENCY,
+diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
+index 003af54498b..495072eceb0 100644
+--- a/configs/qemu-x86_64_defconfig
++++ b/configs/qemu-x86_64_defconfig
+@@ -1,6 +1,7 @@
+ CONFIG_X86=y
+ CONFIG_TEXT_BASE=0x1110000
+ CONFIG_SYS_MALLOC_F_LEN=0x1000
++CONFIG_BLOBLIST_SIZE_RELOC=0x20000
+ CONFIG_NR_DRAM_BANKS=8
+ CONFIG_ENV_SIZE=0x40000
+ CONFIG_MAX_CPUS=2
+@@ -36,6 +37,7 @@ CONFIG_LOGF_FUNC=y
+ CONFIG_SPL_LOG=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_PCI_INIT_R=y
++CONFIG_BLOBLIST=y
+ CONFIG_BLOBLIST_FIXED=y
+ CONFIG_BLOBLIST_ADDR=0x10000
+ CONFIG_SPL_NO_BSS_LIMIT=y
+diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
+index 5183117854c..e3b96e873ab 100644
+--- a/configs/qemu-x86_defconfig
++++ b/configs/qemu-x86_defconfig
+@@ -1,6 +1,7 @@
+ CONFIG_X86=y
+ CONFIG_TEXT_BASE=0xFFF00000
+ CONFIG_SYS_MALLOC_F_LEN=0x1000
++CONFIG_BLOBLIST_SIZE_RELOC=0x20000
+ CONFIG_NR_DRAM_BANKS=8
+ CONFIG_ENV_SIZE=0x40000
+ CONFIG_MAX_CPUS=2
+@@ -25,6 +26,7 @@ CONFIG_LOG=y
+ CONFIG_LOGF_FUNC=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_PCI_INIT_R=y
++CONFIG_BLOBLIST=y
+ CONFIG_CMD_CPU=y
+ CONFIG_CMD_BOOTEFI_SELFTEST=y
+ CONFIG_CMD_NVEDIT_EFI=y
 -- 
 2.43.0
 
