@@ -4,84 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E57AE77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 17:01:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE283E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 17:58:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82D3F80295;
-	Fri,  3 Jan 2025 18:01:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id BE00B80295;
+	Fri,  3 Jan 2025 18:58:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="njHxG8Jw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 127AB802EF; Fri,  3 Jan 2025 18:01:16 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id A8924802EF; Fri,  3 Jan 2025 18:58:51 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCB2A801A0
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 18:01:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 879C180275
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 18:58:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1735923667; x=1736528467; i=xypron.glpk@gmx.de;
- bh=jxLb5kLpPC8T2dPe4Hj1VhFeRybx2D8oj0LM0Shs1So=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=njHxG8Jwv6QJ6/RUOk6Ibddqi/ZHe78UqgSgC34fP9uC4EuWDc3OV6YoddEA6gPn
- yuwTC0+i6vfd+H7jycJS33q+vJZMnZvIDqljZegsJlw5q9BdWgWwE+Tox+0AMTCLX
- 1oyAgbrfpmG9dT5iZQUEMeWgakYFErB2CS6m4OibvqdN5uzCp+EGyzvyltIjk6OEq
- POpvDlxl+8GVlU8NsQQVjvfwBE9nIi2h/h4b2mT27wZmC7I3Ubyjh0CSqyq2T6Ugr
- JH19e9cYrcrBZzsACpDUy4cN3sHpVb5awKP4T4MF6w0qlXg63mhtqwdoh6/BqrD9M
- eggrjocTf1oGgpdamg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.106] ([46.114.109.94]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgNcz-1tyOxo2k3z-00lazT; Fri, 03
- Jan 2025 18:01:07 +0100
-Message-ID: <a6c7b22a-290c-44ee-acab-58409e675bc7@gmx.de>
-Date: Fri, 3 Jan 2025 18:01:06 +0100
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [IPV6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46] (unknown
+ [IPv6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 6FCFBB4B39D2;
+ Fri,  3 Jan 2025 18:58:48 +0100 (CET)
+Message-ID: <69678189-22b5-4372-83a4-0e4637975355@freeshell.de>
+Date: Fri, 3 Jan 2025 09:58:46 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] efi: add helper functions to insert pmem node for
- DT fixup
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-References: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
- <20241203163605.1482152-5-sughosh.ganu@linaro.org>
+Subject: Re: LwIP and multiple network interfaces
+To: Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
+ <20250102224724.GS3476@bill-the-cat>
+ <aa6d5dce-473c-447f-91b9-fe802f0f520d@freeshell.de>
+ <20250103014049.GT3476@bill-the-cat>
+ <14a9901e-00fd-4a5e-aeb1-ffbe715f8965@freeshell.de>
+ <7c20233b-d61a-4114-bbb3-6866bdd5bbf5@linaro.org>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241203163605.1482152-5-sughosh.ganu@linaro.org>
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <7c20233b-d61a-4114-bbb3-6866bdd5bbf5@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:YeIVXmhxB8KiQD9QtN4T7WTgtEJklgqo47C7dHnoX543QO6QDl3
- MOl84zdt3mqrN+tnegGnLyu7T6kwS/8H76rw2upZKz5saLuzu66rN/BBoCtFY/CSJrw0kDz
- J4IT9i+ZIkZ5JfwTlL9QUnuiZawc7MQ/FFn31lEM/3VprecBWMAkTaRtZ0VKkZjqBJ4OWGq
- bOCrXlmfuTn+50HQKlKaQ==
-UI-OutboundReport: notjunk:1;M01:P0:mMdQiHo4LDo=;0lOTn0ZDzL3qyRL6bgPe3nWOZZT
- VOu+gg903UqDpCiA/wkZQ7j4H9L1Gn8DbAvAT1JUAgjqYyMjGX3SxagfhR93DeO+fb9ifJF/0
- /BqbhJpQ6T+825AZmv/q9ZwkR913PqYZv8eF3BK9lySJC5FOKmZoFVdC40C7kR8Kgua6Coo9H
- VD50i6nsulA9TxLmKYgqMUYD+Pa9DoXu3uzrjtvXyCuPX55NbyOSa9JY4Htz0q6rIYoE7aJ87
- pjQar8X8NuHkO/M7sEA78fMIt1iLTldRpjAixLjMABne6WW7Y4ZBuTsoef5wCTIittGmrNNWi
- HXR4ROS3miN473Sh21EevEt1+isN+mjG0G3G3EMfsedOKKpgqZBuHAcCQG4OC2YxpPIhxIz88
- L7ac3ThCjTRh51XhVpU6vZXuvtzm7uTg4O8vdifKbLkolLPOMO3kAUkaIisGZ4Rl4jVN2WY6x
- HwdksquMRnRYdsrUO34liUy6NMxuNv+X7eSbwGEU5tBbBQ8h4E2dn/DH85IcS5G6O3OjJgOGH
- BJiCRSkgIJFk0sPSvqiPWA6IRO5Ch512lAjD/EC+mVktR+i63/ybcwzks5INcub+fH9M1f5c2
- RWUMH61Hs5VhIq4m+Wbb+oFIq8KAVaNlkd5Bo44AYwcbiIwWqIefHkdN+jJuAdbqgy96nrYB0
- DjEGMwPKm8tMX9KE3ndkjivmGLEVkKl+8lOynqyE7j3kh2viOBkb2Jb7PSrD80a//oeSmIqla
- DTO79wB52ttSb2X7OyBmw8RmMo611f7wfhWgyR1VzThCqGImjwVPHGuK7VW1CuHrkVptfZmyv
- 1iuDwc7FxCJ6xaMDeXX2TwJBdT/lnA3bmDZ8p8CL/xajcRu17kWDC4BK4uk6a4uU2xHwSXj7p
- jCdjBDZ+5uiyLYnnjEK4yz62MGeN1f8J20QYMiJBRpaFKRI40A9rpiz/V71vYasoLeOg5SEpK
- +OYERHKiBJoP2eyYgAqtcvu9YTsMdfXeVkQsFYQmjkMQu1YqarjEvXHTGuyiP6jNVoDWvma9w
- a02365j0eTTVGVd9XBxBOJQgE1DEBIt6PjL5JKte1MdmtbpACBpR1dXFHlVq1iW2tMhXVe9Y4
- 9Hmk//GZ2AR+bkAy0m8S5VMcB4P0x9
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,185 +61,233 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 03.12.24 17:36, Sughosh Ganu wrote:
-> The EFI HTTP boot puts the iso installer image at some location in
-> memory which needs to be reserved in the devicetree as persistent
-> memory (pmem). Add helper functions which add this pmem node when the
-> EFI_DT_FIXUP protocol's fixup callback is invoked.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
-> Changes since V1:
-> * Use log_err() to print the error message in image_setup_libfdt()
-> * Remove "ERROR:" from the error print in image_setup_libfdt()
->
->   boot/image-fdt.c             |  9 +++++++++
->   include/efi_loader.h         | 17 +++++++++++++++++
->   lib/efi_loader/efi_bootmgr.c | 21 +++++++++++++++++++++
->   lib/efi_loader/efi_helper.c  | 12 ++++++++++++
->   4 files changed, 59 insertions(+)
->
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 3d5b6f9e2dc..de479d3ffa0 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -11,6 +11,7 @@
->   #include <command.h>
->   #include <fdt_support.h>
->   #include <fdtdec.h>
-> +#include <efi_loader.h>
->   #include <env.h>
->   #include <errno.h>
->   #include <image.h>
-> @@ -648,6 +649,14 @@ int image_setup_libfdt(struct bootm_headers *images=
-, void *blob, bool lmb)
->   	if (!ft_verify_fdt(blob))
->   		goto err;
->
-> +	if (CONFIG_IS_ENABLED(EFI_HTTP_BOOT)) {
-> +		fdt_ret =3D fdt_efi_pmem_setup(blob);
-> +		if (fdt_ret) {
-> +			log_err("HTTP boot pmem fixup failed\n");
-> +			goto err;
-> +		}
-> +	}
-> +
->   	/* after here we are using a livetree */
->   	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
->   		struct event_ft_fixup fixup;
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 24e40799eee..87b9a6e4da0 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -748,6 +748,15 @@ bool efi_varname_is_load_option(u16 *var_name16, in=
-t *index);
->   efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
->   				    efi_guid_t *guid);
->
-> +/**
-> + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-> + *
-> + * @fdt:	Pointer to the devicetree
-> + *
-> + * Return:	0 on success, negative on failure
-> + */
-> +int fdt_efi_pmem_setup(void *fdt);
-> +
->   /**
->    * efi_size_in_pages() - convert size in bytes to size in pages
->    *
-> @@ -964,6 +973,14 @@ efi_status_t efi_set_load_options(efi_handle_t hand=
-le,
->   				  void *load_options);
->   efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_option=
-s);
->
-> +/**
-> + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-> + *
-> + * @fdt:	Pointer to the DT blob
-> + * Return:	status code
-> + */
-> +efi_status_t efi_bootmgr_pmem_setup(void *fdt);
-> +
->   /**
->    * struct efi_image_regions - A list of memory regions
->    *
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index b906e53e26e..db4eb6a7376 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -41,6 +41,8 @@ struct uridp_context {
->   	efi_handle_t mem_handle;
->   };
->
-> +static struct uridp_context *uctx;
-> +
->   const efi_guid_t efi_guid_bootmenu_auto_generated =3D
->   		EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
->
-> @@ -427,6 +429,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct=
- uridp_context *ctx)
->
->   	efi_free_pool(ctx->loaded_dp);
->   	free(ctx);
-> +	uctx =3D NULL;
->
->   	return ret =3D=3D EFI_SUCCESS ? ret2 : ret;
->   }
-> @@ -447,6 +450,23 @@ static void EFIAPI efi_bootmgr_http_return(struct e=
-fi_event *event,
->   	EFI_EXIT(ret);
->   }
->
-> +/**
-> + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-> + *
-> + * @fdt:	Pointer to the DT blob
-> + * Return:	status code
-> + */
-> +efi_status_t efi_bootmgr_pmem_setup(void *fdt)
-> +{
-> +	if (!uctx) {
-> +		log_warning("No EFI HTTP boot context found\n");
 
-This function is called if CONFIG_EFI_HTTP_BOOT=3Dy. This configuration
-setting allows booting via HTTP but does not require it. The warning
-makes no sense when booting from a block device.
 
-The image type is orthogonal to the way you load it. Pmem support in
-Linux is not related to UEFI. Please, remove the dependency of pmem
-support on UEFI HTTP boot.
+On 1/3/25 02:03, Jerome Forissier wrote:
+> 
+> 
+> On 1/3/25 02:52, E Shattow wrote:
+>>
+>>
+>> On 1/2/25 17:40, Tom Rini wrote:
+>>> On Thu, Jan 02, 2025 at 05:34:57PM -0800, E Shattow wrote:
+>>>
+>>>> Tom sorry about sending this reply twice, struggle here is with Thunderbird
+>>>> mail UI sometimes hiding "Reply All" and it missed the mail list first time
+>>>> around.
+>>>
+>>> No problem.
+>>>
+>>>> On 1/2/25 14:47, Tom Rini wrote:
+>>>>> On Thu, Jan 02, 2025 at 02:26:06PM -0800, E Shattow wrote:
+>>>>>> Problem: 'dhcp' must be ran twice when the network cable is plugged into a
+>>>>>> port other than the first network port.
+>>>>>>
+>>>>>> Network cable plugged into bottom (first) Ethernet port:
+>>>>>> 1. Power on
+>>>>>> 2. StarFive # dhcp
+>>>>>>
+>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete....... done
+>>>>>> DHCP client bound to address 192.168.2.51 (3678 ms)
+>>>>>>
+>>>>>>
+>>>>>> Network cable plugged into top (second) Ethernet port:
+>>>>>> 1. Power on
+>>>>>> 2. StarFive # dhcp
+>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>>>>>> TIMEOUT !
+>>>>>> phy_startup() failed: -110
+>>>>>> FAILED: -110
+>>>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>>>>>> TIMEOUT !
+>>>>>> phy_startup() failed: -110
+>>>>>> FAILED: -110
+>>>>>> Could not start ethernet@16030000
+>>>>>> 3. StarFive # dhcp
+>>>>>> DHCP client bound to address 192.168.2.77 (31 ms)
+>>>>>
+>>>>> What happens when you set ethact to 1 first?
+>>>>>
+>>>>
+>>>>
+>>>> '1' literal does not seem to do something so I guess it is meant the id of
+>>>> the first ethernet interface:
+>>>
+>>> Yes, I misspoke sorry.
+>>>
+>>>>   From power-on:
+>>>>
+>>>> ...
+>>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+>>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+>>>> In:    serial@10000000
+>>>> Out:   serial@10000000
+>>>> Err:   serial@10000000
+>>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+>>>> starting USB...
+>>>> No USB controllers found
+>>>> Working FDT set to ff700a10
+>>>> StarFive # env print ethact
+>>>> ## Error: "ethact" not defined
+>>>> StarFive # env set ethact 1
+>>>> StarFive # dhcp
+>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>>>> TIMEOUT !
+>>>> phy_startup() failed: -110
+>>>> FAILED: -110
+>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>>>> EQOS_DMA_MODE_SWR stuck
+>>>> FAILED: -110
+>>>> Could not start ethernet@16030000
+>>>>
+>>>> Again, from power-on:
+>>>>
+>>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+>>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+>>>> In:    serial@10000000
+>>>> Out:   serial@10000000
+>>>> Err:   serial@10000000
+>>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+>>>> starting USB...
+>>>> No USB controllers found
+>>>> Working FDT set to ff700a10
+>>>> StarFive # env print ethact
+>>>> ## Error: "ethact" not defined
+>>>> StarFive # env set ethact ethernet@16040000
+>>>> StarFive # dhcp
+>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>>>> DHCP client bound to address 192.168.2.77 (149 ms)
+>>>
+>>> So then yes, the second interface works when ethact is set to use that
+>>> directly. This is the same behavior as the legacy stack I believe.
+>>>
+>>
+>> Legacy stack does actually rotate and complete successfully when ethact environment variable does not exist and (eventually) configure the second interface though. Here with LwIP the procedure fails.
+>>
+>> Notice that here it starts with ethernet@16030000, then rotates to ethernet@16040000 unsuccessfully, and back again to ethernet@16030000 before (again) failing and giving up. There is a network cable plugged into 'ethernet@16040000' port and if we try the command again the environment variable ethact retained 'ethact=ethernet@16040000' from the failed procedure so you're right it works as it should... except that it totally failed to do what was expected the first time.
+> 
+> That's unexpected indeed.
+> 
+>> Is this exposing a problem with this board network driver and behavior or is it something with LwIP ?
+> Hard to tell at this point. One thing I know for sure is that lwIP expects
+> eth_set_current() (called from do_dhcp()) to actually pick a valid
+> interface if there is one. So it should definitely select ethernet@16040000
+> in your scenario. Adding debug prints to eth_set_current(),
+> eth_current_changed() etc. should help.
+> 
+> Thanks,
 
-If the object to be booted is a disk image, we can create a block device
-in memory for it and then should be able to apply all standard boot
-methods on it.
+StarFive # dhcp
+!!! eth_set_current(): entered function
+!!! eth_set_current(): conditional 1
+!!! eth_set_current(): conditional 2
+!!! eth_set_current(): conditional 5
+!!! eth_current_changed(): entered function
+!!! eth_current_changed(): conditional 2
+!!! eth_current_changed(): conditional 3
+!!! eth_current_changed(): leaving function
+!!! eth_set_current(): leaving function
+ethernet@16030000 Waiting for PHY auto negotiation to complete......... 
+TIMEOUT !
+phy_startup() failed: -110
+FAILED: -110
+!!! eth_current_changed(): entered function
+!!! eth_current_changed(): conditional 2
+!!! eth_current_changed(): conditional 3
+!!! eth_current_changed(): leaving function
+ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+ethernet@16030000 Waiting for PHY auto negotiation to complete......... 
+TIMEOUT !
+phy_startup() failed: -110
+FAILED: -110
+Could not start ethernet@16030000
+StarFive #
 
-Best regards
+For reference the modified functions:
 
-Heinrich
+void eth_current_changed(void)
+{
+         char *act = env_get("ethact");
+         char *ethrotate;
 
-> +		return EFI_SUCCESS;
-> +	}
-> +
-> +	return !fdt_fixup_pmem_region(fdt, uctx->image_addr, uctx->image_size)=
- ?
-> +		EFI_SUCCESS : EFI_INVALID_PARAMETER;
-> +}
-> +
->   /**
->    * try_load_from_uri_path() - Handle the URI device path
->    *
-> @@ -476,6 +496,7 @@ static efi_status_t try_load_from_uri_path(struct ef=
-i_device_path_uri *uridp,
->   	if (!ctx)
->   		return EFI_OUT_OF_RESOURCES;
->
-> +	uctx =3D ctx;
->   	s =3D env_get("loadaddr");
->   	if (!s) {
->   		log_err("Error: loadaddr is not set\n");
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index bf96f61d3d0..6fae37ad617 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -313,6 +313,18 @@ int efi_unlink_dev(efi_handle_t handle)
->   	return 0;
->   }
->
-> +/**
-> + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-> + *
-> + * @fdt:	Pointer to the devicetree
-> + *
-> + * Return:	0 on success, negative on failure
-> + */
-> +int fdt_efi_pmem_setup(void *fdt)
-> +{
-> +	return efi_bootmgr_pmem_setup(fdt) =3D=3D EFI_SUCCESS ? 0 : -1;
-> +}
-> +
->   static int u16_tohex(u16 c)
->   {
->   	if (c >=3D '0' && c <=3D '9')
+printf("!!! eth_current_changed(): entered function\n");
+         /*
+          * The call to eth_get_dev() below has a side effect of rotating
+          * ethernet device if uc_priv->current == NULL. This is not what
+          * we want when 'ethrotate' variable is 'no'.
+          */
+         ethrotate = env_get("ethrotate");
+         if ((ethrotate != NULL) && (strcmp(ethrotate, "no") == 0))
+         {
+printf("!!! eth_current_changed(): conditional 1\n");
+                 return;
+         }
 
+         /* update current ethernet name */
+         if (eth_get_dev()) {
+printf("!!! eth_current_changed(): conditional 2\n");
+                 if (act == NULL || strcmp(act, eth_get_name()) != 0)
+                 {
+printf("!!! eth_current_changed(): conditional 3\n");
+                         env_set("ethact", eth_get_name());
+                 }
+         }
+         /*
+          * remove the variable completely if there is no active
+          * interface
+          */
+         else if (act != NULL)
+         {
+printf("!!! eth_current_changed(): conditional 4\n");
+                 env_set("ethact", NULL);
+         }
+printf("!!! eth_current_changed(): leaving function\n");
+}
+
+void eth_set_current(void)
+{
+         static char *act;
+         static int  env_changed_id;
+         int     env_id;
+
+printf("!!! eth_set_current(): entered function\n");
+         env_id = env_get_id();
+         if ((act == NULL) || (env_changed_id != env_id)) {
+printf("!!! eth_set_current(): conditional 1\n");
+                 act = env_get("ethact");
+                 env_changed_id = env_id;
+         }
+
+         if (act == NULL) {
+printf("!!! eth_set_current(): conditional 2\n");
+                 char *ethprime = env_get("ethprime");
+                 void *dev = NULL;
+
+                 if (ethprime)
+                 {
+printf("!!! eth_set_current(): conditional 3\n");
+                         dev = eth_get_dev_by_name(ethprime);
+                 }
+                 if (dev)
+                 {
+printf("!!! eth_set_current(): conditional 4\n");
+                         eth_set_dev(dev);
+                 }
+                 else
+                 {
+printf("!!! eth_set_current(): conditional 5\n");
+                         eth_set_dev(NULL);
+                 }
+         } else {
+printf("!!! eth_set_current(): conditional 6\n");
+                 eth_set_dev(eth_get_dev_by_name(act));
+         }
+
+         eth_current_changed();
+printf("!!! eth_set_current(): leaving function\n");
+}
+
+Hopefully this is enough to make sense of it? Let me know, thanks!
+
+-E
