@@ -4,67 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F14E77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 10:11:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5392E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 10:27:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78B69801A0;
-	Fri,  3 Jan 2025 11:11:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 20047801A0;
+	Fri,  3 Jan 2025 11:27:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 396FE802EF; Fri,  3 Jan 2025 11:11:06 +0100 (CET)
-Received: from smtpbgjp3.qq.com (smtpbgjp3.qq.com [54.92.39.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60DEA80196
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 11:11:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtpip2t1735899030tsd7ml0
-X-QQ-Originating-IP: +DQ/pJPw7NWIH3c4Ss9XKVemamSLWseuLgN/aW1FI1s=
-Received: from [IPV6:240f:10b:7440:1:8992:1149 ( [localhost])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Fri, 03 Jan 2025 18:10:27 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 14826888395027429627
-Message-ID: <F17AF2E524164B1F+5f16aab0-35d8-4915-b092-31f4b8a8facc@radxa.com>
-Date: Fri, 3 Jan 2025 19:10:27 +0900
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="bJRd6Qm4";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 03A47802EF; Fri,  3 Jan 2025 11:27:57 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C100780196
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 11:27:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43634b570c1so86940545e9.0
+ for <u-boot@lists.denx.de>; Fri, 03 Jan 2025 02:27:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=suse.com; s=google; t=1735900073; x=1736504873; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=iRq+87k9ZRtRbyY+8i62hQgQ7JwAyYtAaXnZKF8dNX0=;
+ b=bJRd6Qm42WzqGYlzrx8qvT/kBgtBY71BQnO5wHrjVE5t+/lWwZy7pnJY8xvazRvLtf
+ cAh7BIKOn7rS+fNrXhYfu/QSybAcCh4cGxtzyul2aeazRW9DEdeA9x+WES8aDv1a90iG
+ D80+U0GvAyY0+P0SRrsytO2uCaMpD8Vn3duM20iV7nEB+YaRPTUl48rE4O+n/eLRt3fS
+ hGXNZR+sHzhkw+tvWkvgQ97Q3ihWskSKS5dKMdqUHCrOK04m6lcYRvTqef+Smx9tgKfq
+ qcqvbwKTTMihN+vFzmeHNFRBMrfbWWeUh7ghMUb3VVAP6auqYR5f+RD7ixMlx/YzB5gc
+ Np/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735900073; x=1736504873;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iRq+87k9ZRtRbyY+8i62hQgQ7JwAyYtAaXnZKF8dNX0=;
+ b=v9NBSFq2L25LoC1qSiMtFONYopZ3g0DK4RDE2W11bk+GRqqZipcuBQPUnec8lkIaVm
+ SEkA+TvAh8KaBjG16yNcyGTBXYCgLlDrgLG1zmZI8pK3UuFm17VnAgPKVRsAvCxKSCq8
+ h1vbfntXTreyP65CIli6/nd2az6VGoVDAYDOS/ySqA9aUONiIWfKfN6TpvSniQ6p+vEz
+ GcBqPomWDH9UQMIwbO3XFfvBiKY7aXoAZ+cBz5k5SjQywJ/TiJ4PSvj15FXW8A0Zg9EM
+ iRu5HFPxAi+MI8K/IQEmAbyaBTSn/+cb2vrpXVyF0mwmiCC0zzC5EabG6SPt9Ypxiw05
+ LH0Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQqShV18cPJu6Xg6Kt2ZUrUcFtM/JIBi4ho8VDkkEH4j9V1VnxtbM6q9lDSuuNWnVtxMtNfvM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwhIWYAagbTTvM1t86TUyoEekc4EktgVE6AXxpcaoyBwV13Wm5L
+ UHpvkAne6zkc2wF7frUa5q1nAOOEw3SWvzstXM/BgvHvdFH2Qiewl72UQhXJkiWXXF/LVs+qFEX
+ 5
+X-Gm-Gg: ASbGncsUe3Qj7dJQLOT61963Oq4i6Hz2Gd9d6gDhRcCdQZh0kdsRazUmC+lwa5CZcpO
+ aZgBpjd5ie2E3LdJg+Ncy1ue4ueie+fDMFMQZFs2xQHsSdTYy8WbbPlKNGjigFSkEU2+Iqun2dR
+ uIn6gzLJ0K0ICNQhuZst9vAgwMg42Hl3oV7HeG28DMyb+dq3AtFc+IEw2DU2Z+iQtCrol/byqHb
+ OOsYllKTmfRhm3oArdv5s8rAf6Bq9NrJ28XbMekx4ob9UkHZg58UEhmWXBj
+X-Google-Smtp-Source: AGHT+IEYv4CMqEItLWWFMgsg9W9oWYBnUc3IhUWVjQWn/FQjFaOnny5zdRFjaIkRbHKzlYMR+O7EMA==
+X-Received: by 2002:a05:600c:4f84:b0:434:fec5:4ef5 with SMTP id
+ 5b1f17b1804b1-43668643743mr407179655e9.14.1735900073050; 
+ Fri, 03 Jan 2025 02:27:53 -0800 (PST)
+Received: from [192.168.2.177] ([207.188.163.222])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4366127c4b0sm479409045e9.35.2025.01.03.02.27.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 03 Jan 2025 02:27:52 -0800 (PST)
+Message-ID: <63d9fb2c-1533-4023-9b89-09a9077bb940@suse.com>
+Date: Fri, 3 Jan 2025 11:27:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/5] rockchip: Add support for Radxa ROCK 5C
-To: Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, sumit.garg@linaro.org,
- jonas@kwiboo.se
-References: <20241211033934.23044-1-naoki@radxa.com>
- <20241211033934.23044-6-naoki@radxa.com>
- <a9e287f1-5be3-48df-9fd7-a169553af9c5@rock-chips.com>
-Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-Organization: Radxa Computer (Shenzhen) Co., Ltd.
-In-Reply-To: <a9e287f1-5be3-48df-9fd7-a169553af9c5@rock-chips.com>
+Subject: Re: [PATCH] rpi: Add identifiers for the new RPi 5 series
+To: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+References: <20241229144607.1051889-1-pbrobinson@gmail.com>
+Content-Language: en-US, ca-ES, es-ES
+From: Matthias Brugger <mbrugger@suse.com>
+Autocrypt: addr=mbrugger@suse.com; keydata=
+ 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
+ PVrr2NoUqi/bxI8fFQJD1jVj8K0=
+In-Reply-To: <20241229144607.1051889-1-pbrobinson@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: NMGzQWUSIfvTzIaYHGvQYGAohtLNWqPqGKPZeq2O/l1I9DCW6nGBVPZ3
- CUZbaVaCxfPlrOVLdptuy+5EmN/L6uRm5kG1hx/g55i3AaPCbLU++o0PJriMnvss3hLeO7v
- Qo/pwkkRsEQBLQimxP3QFIazSEVCFz1HrF1An0o2QjowO8hWFViU9jYjMGYDwo/FRHRzbUu
- IZ5NlZEIoHGDTKL7lV2n3xzkOWjIoGMoT5CmZaPBeJEjzz4MiavgYPytRqY5A53nioehbp6
- VGghlS3DjYz3Nt2Tou4Q9x2VU/D+g1Qe+WH+D330AosvN9HOO03jSlII+iNwEMIdeB/M0i5
- QsPP/Rz3UbKmfMTL0aD7YGJrB/jsixwaVh2zf6IllY4PKhgGBWT6L0iaI17UG8ea2/mzCwv
- ODtt1bNORhoBW2sKqmc94FghLSYhkCEA7npChTmDqYiRC5zI1aEhxY5h0lkH+ernAQTu6Ih
- BKGHTP3IvqXO+e1T1J1RIz82ILDmCfnwTpgE0YF+hBh1Kg3NSSwIJPRALSlhKt+oDSiaIkx
- ReT7m8NzTy+XpiPyjv6riAqJivgoeDjW3a/QOR6A7LuUXMeWViCtrOc9j3BfGIffPbnFGKf
- dsCMEuiu9zKdSrlh2sxH/rnv8dIhEWpfvORBnRJbuQhxBw9grznrpRc+1aZ+r0O8VqcCWnB
- iRSc8lkmmX2SNVlmZdjbyZHVZAdKRZX3gEZz1gZ3+upVKjiODI+naXPiQ0pXLrZdi1maLW5
- MFe/m74AILU9VSMlrZb1ki0Atit+t1TT8Oa4N5ctQTHMTmZDAzXj3E+5kjzPXHwxD4r7xcY
- XjKMHg3HMo0BwrJonL5YtvObcRzCDOD3HQA2kwa+hWT66JgZ9OI23P5uRjs3eMR2ooBF/Js
- tIxQgSfhOiy1sjZoi/pEchw7iuaVWUaazKfqZrLCGHJHw+A0InhMJySR4epN2oq2WLitmhq
- 5J/js/zuWagJEuwmQjlikcjML93QXAC93zsk=
-X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
-X-QQ-RECHKSPAM: 0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,397 +143,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
 
-On 1/3/25 18:57, Kever Yang wrote:
-> Hi Naoki,
+
+On 29/12/2024 15:46, Peter Robinson wrote:
+> The Raspberry Pi foundation have released the Raspberry
+> Pi 500, CM5 an CM5 lite devices so add the assoicated
+> revision identifers so we can detect them.
 > 
-> On 2024/12/11 11:39, FUKAUMI Naoki wrote:
->> Radxa ROCK 5C[1] is a Rockchip RK3588S2 based single board computer.
->>
->> [1] https://radxa.com/products/rock5/5c
->>
->> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
->> ---
->> Changes in v3:
->> - fix compile error
->> Changes in v2:
->> - arch/arm/dts/rk3588s-rock-5-u-boot.dtsi: remove unused node
->> - include/configs/rock-5-rk3588s.h: fix include order
->> ---
->>   arch/arm/dts/rk3588s-rock-5-u-boot.dtsi     | 16 ++++
->>   arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi    |  6 ++
->>   arch/arm/mach-rockchip/rk3588/Kconfig       |  7 ++
->>   board/radxa/rock-5-rk3588s/Kconfig          | 12 +++
->>   board/radxa/rock-5-rk3588s/MAINTAINERS      |  8 ++
->>   board/radxa/rock-5-rk3588s/Makefile         |  3 +
->>   board/radxa/rock-5-rk3588s/rock-5-rk3588s.c | 77 +++++++++++++++++
->>   configs/rock-5-rk3588s_defconfig            | 94 +++++++++++++++++++++
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+
+Acked-by: Matthias Brugger <mbrugger@suse.com>
+
+> ---
+>   board/raspberrypi/rpi/rpi.c | 15 +++++++++++++++
+>   1 file changed, 15 insertions(+)
 > 
-> I have go through the discuss between you and Quentin.
-
-Thanks.
-
-> First, please make it clear which boards do you want to support in this 
-> config;
-
-Radxa ROCK 5C only. Currently updating patch.
-
-> Second, I would like you to use rock5/rock5c-rk3588 like all other 
-> boards instead of rock-5-rk3588.
-
-All other Radxa ROCK boards (except ROCK 5A and ROCK 5B) use the rock- 
-prefix (e.g. ROCK 5 ITX uses rock-5-itx), so I would like to use rock-5c.
-
-There is a space(" ") between ROCK and 5.
-
-Best regards,
-
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
-
-> Thanks,
-> 
-> - Kever
-> 
->>   doc/board/rockchip/rockchip.rst             |  1 +
->>   include/configs/rock-5-rk3588s.h            | 15 ++++
->>   10 files changed, 239 insertions(+)
->>   create mode 100644 arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
->>   create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
->>   create mode 100644 board/radxa/rock-5-rk3588s/Kconfig
->>   create mode 100644 board/radxa/rock-5-rk3588s/MAINTAINERS
->>   create mode 100644 board/radxa/rock-5-rk3588s/Makefile
->>   create mode 100644 board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
->>   create mode 100644 configs/rock-5-rk3588s_defconfig
->>   create mode 100644 include/configs/rock-5-rk3588s.h
->>
->> diff --git a/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi b/arch/arm/dts/ 
->> rk3588s-rock-5-u-boot.dtsi
->> new file mode 100644
->> index 000000000000..be1a2f9ae7bb
->> --- /dev/null
->> +++ b/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
->> @@ -0,0 +1,16 @@
->> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
->> +/*
->> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
->> + */
->> +
->> +#include "rk3588s-u-boot.dtsi"
->> +
->> +&saradc {
->> +    bootph-pre-ram;
->> +    vdd-microvolts = <1800000>;
->> +};
->> +
->> +&sdhci {
->> +    cap-mmc-highspeed;
->> +    mmc-hs200-1_8v;
->> +};
->> diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/dts/ 
->> rk3588s-rock-5c-u-boot.dtsi
->> new file mode 100644
->> index 000000000000..bb1cc9e4a279
->> --- /dev/null
->> +++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
->> @@ -0,0 +1,6 @@
->> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
->> +/*
->> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
->> + */
->> +
->> +#include "rk3588s-rock-5-u-boot.dtsi"
->> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach- 
->> rockchip/rk3588/Kconfig
->> index b5a0e624a532..e1487ecb0464 100644
->> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
->> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
->> @@ -260,6 +260,12 @@ config TARGET_ROCK_5_ITX_RK3588
->>         Front-panel connectors for audio and case-power, -leds
->>         Powered by either 12V, ATX power-supply or PoE
->> +config TARGET_ROCK_5_RK3588S
->> +    bool "Radxa ROCK 5C RK3588S2 board"
->> +    select BOARD_LATE_INIT
->> +    help
->> +      Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
->> +
->>   config TARGET_SIGE7_RK3588
->>       bool "ArmSoM Sige7 RK3588 board"
->>       select BOARD_LATE_INIT
->> @@ -398,6 +404,7 @@ source "board/turing/turing-rk1-rk3588/Kconfig"
->>   source "board/radxa/rock5a-rk3588s/Kconfig"
->>   source "board/radxa/rock5b-rk3588/Kconfig"
->>   source "board/radxa/rock-5-itx-rk3588/Kconfig"
->> +source "board/radxa/rock-5-rk3588s/Kconfig"
->>   source "board/rockchip/evb_rk3588/Kconfig"
->>   source "board/rockchip/toybrick_rk3588/Kconfig"
->>   source "board/theobroma-systems/jaguar_rk3588/Kconfig"
->> diff --git a/board/radxa/rock-5-rk3588s/Kconfig b/board/radxa/rock-5- 
->> rk3588s/Kconfig
->> new file mode 100644
->> index 000000000000..86830be1eeca
->> --- /dev/null
->> +++ b/board/radxa/rock-5-rk3588s/Kconfig
->> @@ -0,0 +1,12 @@
->> +if TARGET_ROCK_5_RK3588S
->> +
->> +config SYS_BOARD
->> +    default "rock-5-rk3588s"
->> +
->> +config SYS_VENDOR
->> +    default "radxa"
->> +
->> +config SYS_CONFIG_NAME
->> +    default "rock-5-rk3588s"
->> +
->> +endif
->> diff --git a/board/radxa/rock-5-rk3588s/MAINTAINERS b/board/radxa/ 
->> rock-5-rk3588s/MAINTAINERS
->> new file mode 100644
->> index 000000000000..ead6356131c1
->> --- /dev/null
->> +++ b/board/radxa/rock-5-rk3588s/MAINTAINERS
->> @@ -0,0 +1,8 @@
->> +ROCK-5-RK3588S
->> +M:    FUKAUMI Naoki <naoki@radxa.com>
->> +S:    Maintained
->> +F:    arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
->> +F:    arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
->> +F:    board/radxa/rock-5-rk3588s/
->> +F:    configs/rock-5-rk3588s_defconfig
->> +F:    include/configs/rock-5-rk3588s.h
->> diff --git a/board/radxa/rock-5-rk3588s/Makefile b/board/radxa/rock-5- 
->> rk3588s/Makefile
->> new file mode 100644
->> index 000000000000..d9be0f42e6b9
->> --- /dev/null
->> +++ b/board/radxa/rock-5-rk3588s/Makefile
->> @@ -0,0 +1,3 @@
->> +# SPDX-License-Identifier: GPL-2.0+
->> +
->> +obj-y += rock-5-rk3588s.o
->> diff --git a/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c b/board/ 
->> radxa/rock-5-rk3588s/rock-5-rk3588s.c
->> new file mode 100644
->> index 000000000000..a840ca7698d4
->> --- /dev/null
->> +++ b/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
->> @@ -0,0 +1,77 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +
->> +#include <linux/errno.h>
->> +#include <linux/kernel.h>
->> +#include <adc.h>
->> +#include <env.h>
->> +
->> +#define BOARD_ID    5
->> +
->> +struct board_model {
->> +    unsigned int low;
->> +    unsigned int high;
->> +    const char *board;
->> +    const char *board_name;
->> +    const char *fdtfile;
->> +};
->> +
->> +static const struct board_model board_models[] = {
->> +    {
->> +        0,
->> +        50,
->> +        "rock-5a-rk3588s",
->> +        "Radxa ROCK 5A",
->> +        "rockchip/rk3588s-rock-5a.dtb",
->> +    },
->> +    {
->> +        2375,
->> +        2425,
->> +        "rock-5c-rk3588s",
->> +        "Radxa ROCK 5C",
->> +        "rockchip/rk3588s-rock-5c.dtb"
->> +    },
->> +};
->> +
->> +static const struct board_model *get_board_model(void)
->> +{
->> +    unsigned int val;
->> +    int i, ret;
->> +
->> +    ret = adc_channel_single_shot("adc@fec10000", BOARD_ID, &val);
->> +    debug("adc_channel_single_shot ret %d val %u\n", ret, val);
->> +    if (ret)
->> +        return NULL;
->> +
->> +    for (i = 0; i < ARRAY_SIZE(board_models); i++) {
->> +        unsigned int min = board_models[i].low;
->> +        unsigned int max = board_models[i].high;
->> +
->> +        if (min <= val && val <= max)
->> +            return &board_models[i];
->> +    }
->> +
->> +    return NULL;
->> +}
->> +
->> +int rk_board_late_init(void)
->> +{
->> +    const struct board_model *model = get_board_model();
->> +
->> +    if (model) {
->> +        env_set("board", model->board);
->> +        env_set("board_name", model->board_name);
->> +        env_set("fdtfile", model->fdtfile);
->> +    }
->> +
->> +    return 0;
->> +}
->> +
->> +int board_fit_config_name_match(const char *name)
->> +{
->> +    const struct board_model *model = get_board_model();
->> +
->> +    if (model && !strcmp(name, model->fdtfile))
->> +        return 0;
->> +
->> +    return -ENOENT;
->> +}
->> diff --git a/configs/rock-5-rk3588s_defconfig b/configs/rock-5- 
->> rk3588s_defconfig
->> new file mode 100644
->> index 000000000000..54043264de48
->> --- /dev/null
->> +++ b/configs/rock-5-rk3588s_defconfig
->> @@ -0,0 +1,94 @@
->> +CONFIG_ARM=y
->> +CONFIG_SKIP_LOWLEVEL_INIT=y
->> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->> +CONFIG_COUNTER_FREQUENCY=24000000
->> +CONFIG_ARCH_ROCKCHIP=y
->> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5a"
->> +CONFIG_ROCKCHIP_RK3588=y
->> +CONFIG_SPL_SERIAL=y
->> +CONFIG_TARGET_ROCK_5_RK3588S=y
->> +CONFIG_SYS_LOAD_ADDR=0xc00800
->> +CONFIG_DEBUG_UART_BASE=0xFEB50000
->> +CONFIG_DEBUG_UART_CLOCK=24000000
->> +CONFIG_PCI=y
->> +CONFIG_DEBUG_UART=y
->> +CONFIG_AHCI=y
->> +CONFIG_FIT=y
->> +CONFIG_FIT_VERBOSE=y
->> +CONFIG_SPL_FIT_SIGNATURE=y
->> +CONFIG_SPL_LOAD_FIT=y
->> +CONFIG_LEGACY_IMAGE_FORMAT=y
->> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
->> +# CONFIG_DISPLAY_CPUINFO is not set
->> +CONFIG_DISPLAY_BOARDINFO_LATE=y
->> +CONFIG_SPL_MAX_SIZE=0x40000
->> +CONFIG_SPL_PAD_TO=0x7f8000
->> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
->> +CONFIG_SPL_ATF=y
->> +CONFIG_CMD_ADC=y
->> +CONFIG_CMD_GPIO=y
->> +CONFIG_CMD_PWM=y
->> +CONFIG_CMD_GPT=y
->> +CONFIG_CMD_I2C=y
->> +CONFIG_CMD_MMC=y
->> +CONFIG_CMD_PCI=y
->> +CONFIG_CMD_USB=y
->> +# CONFIG_CMD_SETEXPR is not set
->> +CONFIG_CMD_PMIC=y
->> +CONFIG_CMD_REGULATOR=y
->> +# CONFIG_SPL_DOS_PARTITION is not set
->> +CONFIG_SPL_OF_CONTROL=y
->> +CONFIG_OF_LIVE=y
->> +CONFIG_OF_LIST="rockchip/rk3588s-rock-5a rockchip/rk3588s-rock-5c"
->> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned- 
->> clocks assigned-clock-rates assigned-clock-parents"
->> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->> +CONFIG_SPL_DM_SEQ_ALIAS=y
->> +CONFIG_SPL_REGMAP=y
->> +CONFIG_SPL_SYSCON=y
->> +CONFIG_SPL_ADC=y
->> +CONFIG_SCSI_AHCI=y
->> +CONFIG_AHCI_PCI=y
->> +CONFIG_SPL_CLK=y
->> +CONFIG_ROCKCHIP_GPIO=y
->> +CONFIG_SYS_I2C_ROCKCHIP=y
->> +CONFIG_LED=y
->> +CONFIG_LED_PWM=y
->> +CONFIG_LED_GPIO=y
->> +CONFIG_MISC=y
->> +CONFIG_SUPPORT_EMMC_RPMB=y
->> +CONFIG_MMC_DW=y
->> +CONFIG_MMC_DW_ROCKCHIP=y
->> +CONFIG_MMC_SDHCI=y
->> +CONFIG_MMC_SDHCI_SDMA=y
->> +CONFIG_MMC_SDHCI_ROCKCHIP=y
->> +CONFIG_PHY_REALTEK=y
->> +CONFIG_DWC_ETH_QOS=y
->> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->> +CONFIG_RTL8169=y
->> +CONFIG_NVME_PCI=y
->> +CONFIG_PCIE_DW_ROCKCHIP=y
->> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
->> +CONFIG_PHY_ROCKCHIP_USBDP=y
->> +CONFIG_SPL_PINCTRL=y
->> +CONFIG_DM_PMIC=y
->> +CONFIG_PMIC_RK8XX=y
->> +CONFIG_REGULATOR_RK8XX=y
->> +CONFIG_PWM_ROCKCHIP=y
->> +CONFIG_SPL_RAM=y
->> +CONFIG_SCSI=y
->> +CONFIG_BAUDRATE=1500000
->> +CONFIG_DEBUG_UART_SHIFT=2
->> +CONFIG_SYS_NS16550_MEM32=y
->> +CONFIG_ROCKCHIP_SPI=y
->> +CONFIG_SYSRESET=y
->> +CONFIG_SYSRESET_PSCI=y
->> +CONFIG_USB=y
->> +CONFIG_USB_XHCI_HCD=y
->> +CONFIG_USB_EHCI_HCD=y
->> +CONFIG_USB_EHCI_GENERIC=y
->> +CONFIG_USB_OHCI_HCD=y
->> +CONFIG_USB_OHCI_GENERIC=y
->> +CONFIG_USB_DWC3=y
->> +CONFIG_USB_DWC3_GENERIC=y
->> +CONFIG_ERRNO_STR=y
->> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/ 
->> rockchip.rst
->> index 9bab86d23479..6b952654cb3d 100644
->> --- a/doc/board/rockchip/rockchip.rst
->> +++ b/doc/board/rockchip/rockchip.rst
->> @@ -141,6 +141,7 @@ List of mainline supported Rockchip boards:
->>        - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
->>        - Radxa ROCK 5A (rock5a-rk3588s)
->>        - Radxa ROCK 5B (rock5b-rk3588)
->> +     - Radxa ROCK 5C (rock-5-rk3588s)
->>        - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
->>        - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
->>        - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
->> diff --git a/include/configs/rock-5-rk3588s.h b/include/configs/ 
->> rock-5-rk3588s.h
->> new file mode 100644
->> index 000000000000..8020177d7585
->> --- /dev/null
->> +++ b/include/configs/rock-5-rk3588s.h
->> @@ -0,0 +1,15 @@
->> +/* SPDX-License-Identifier: GPL-2.0+ */
->> +/*
->> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
->> + */
->> +
->> +#ifndef __ROCK_5_RK3588S_H
->> +#define __ROCK_5_RK3588S_H
->> +
->> +#define ROCKCHIP_DEVICE_SETTINGS \
->> +        "stdout=serial,vidconsole\0" \
->> +        "stderr=serial,vidconsole\0"
->> +
->> +#include <configs/rk3588_common.h>
->> +
->> +#endif /* __ROCK_5_RK3588S_H */
-> 
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index 18be244aa79..1e43c631898 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -193,6 +193,21 @@ static const struct rpi_model rpi_models_new_scheme[] = {
+>   		DTB_DIR "bcm2712-rpi-5-b.dtb",
+>   		true,
+>   	},
+> +	[0x18] = {
+> +		"Compute Module 5",
+> +		DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb",
+> +		true,
+> +	},
+> +	[0x19] = {
+> +		"500",
+> +		DTB_DIR "bcm2712-rpi-500.dtb",
+> +		true,
+> +	},
+> +	[0x1A] = {
+> +		"Compute Module 5 Lite",
+> +		DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb",
+> +		true,
+> +	},
+>   };
+>   
+>   static const struct rpi_model rpi_models_old_scheme[] = {
 
