@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22F0CE77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 03:12:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54F71E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 03:13:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5965780079;
-	Fri,  3 Jan 2025 04:12:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D3CE88007D;
+	Fri,  3 Jan 2025 04:13:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="jjCQi0bz";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="elz+aTe3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D41378007D; Fri,  3 Jan 2025 04:12:29 +0100 (CET)
-Received: from mail-m127206.xmail.ntesmail.com
- (mail-m127206.xmail.ntesmail.com [115.236.127.206])
+ id 99CF680079; Fri,  3 Jan 2025 04:13:35 +0100 (CET)
+Received: from mail-m121142.qiye.163.com (mail-m121142.qiye.163.com
+ [115.236.121.142])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 717CB80017
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 04:12:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CC4C680384
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 04:13:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 79178f7a;
- Fri, 3 Jan 2025 11:12:22 +0800 (GMT+08:00)
-Message-ID: <7cb2b4b6-d7a8-411d-9493-f12481b3aa20@rock-chips.com>
-Date: Fri, 3 Jan 2025 11:12:22 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 791790a6;
+ Fri, 3 Jan 2025 11:13:27 +0800 (GMT+08:00)
+Message-ID: <1662e9a1-6963-48aa-bd02-f5bc49d81bc1@rock-chips.com>
+Date: Fri, 3 Jan 2025 11:13:27 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3399: expand space for decompressed kernel
-To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: chris.obbard@collabora.com, pbrobinson@gmail.com, jonas@kwiboo.se,
- sjg@chromium.org
-References: <20241202234018.92120-1-naoki@radxa.com>
+Subject: Re: [PATCH] rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw
+ revision
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20241203214711.1011176-1-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241202234018.92120-1-naoki@radxa.com>
+In-Reply-To: <20241203214711.1011176-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0xNSlZOTk9OT0NCH0NJT0hWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0MdTFZOHhoYT0JLTB1JH01WFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a942a2654a303afkunm79178f7a
+X-HM-Tid: 0a942a2753e403afkunm791790a6
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODo6Sxw*QjIWIS0qKBM2LDVO
- FBUaCRdVSlVKTEhOQ0xIQk9ITkpPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUtNNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NSI6Iww4TzIVSC0yOAlROA4D
+ ATEwCT5VSlVKTEhOQ0xPS0tCT05DVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISExKNwY+
 DKIM-Signature: a=rsa-sha256;
- b=jjCQi0bzVbNnNYkbmRiy0+d8xC6n9NzwrAnbvKlkBFN7MiT1ZB0TxVJ8HlYnj7MkVssMUX5XK4acaIuSn1oTd1OCXGcsOmQEwXwN1DTQrtgDw1T3g9XvtxZDVIwJj6p2wU0TGjDJ1Ll+i5FPc1bV8BgDG5DtO2T6AFBuo7nqEtY=;
+ b=elz+aTe3wh7IsbfvX9MRs8HzATp6meGfWsG+mZ/Qocs1fwScBTLpJuRnv50ikjrIFXznR8SyYJ4qod2TFKWp+LTgk3V5ZLqBafdhr2wilGtGzUc3uyvWym07hPGbrSFJHghEzptuGWU3Ngv4JI1kZyD7beQ6mem9QwR4d5VjY7M=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=HQrQ6f2SP4vY64vRQvjrXMMR79POMW9kZYlEsV6A4pM=;
+ bh=m4njqu5PzVzmBkDxfZijNUaoUWgXAY2Pxwi0XSchRAU=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -74,64 +75,118 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/12/3 07:40, FUKAUMI Naoki wrote:
-> fix following error by using same ENV_MEM_LAYOUT_SETTINGS with rk35xx:
+On 2024/12/4 05:47, Jonas Karlman wrote:
+> BootROM leave GPIO4_D6 configured as SDMMC_PWREN function and DW MMC
+> driver set PWREN high in dwmci_init().
 >
-> U-Boot 2025.01-rc3-00001-g1527c7dcdb01 (Dec 02 2024 - 22:57:18 +0000)
->    :
-> Retrieving file: /boot/extlinux/../nixos/dhqjsnprmzjxncil3m0g9l09a479crn3-linux-6.12.1-Image
-> Retrieving file: /boot/extlinux/../nixos/6fq8fmmab31yxdwcs7zw44p78fq9fy1s-initrd-linux-6.12.1-initrd
-> append: init=/nix/store/yjbxgzf1vkwbw6ab738bf4kxazhyypa1-nixos-system-rock-5b-25.05.20241201.ac35b10/init console=ttyS2,1500000n8 console=ttyAMA0,115200n8 console=tty0 loglevel=7
-> Retrieving file: /boot/extlinux/../nixos/dhqjsnprmzjxncil3m0g9l09a479crn3-linux-6.12.1-dtbs/rockchip/rk3399-rock-4se.dtb
-> Moving Image from 0x2080000 to 0x2200000, end=0x60d0000
-> ERROR: RD image overlaps OS image (OS=2200000..60d0000)
-> Boot failed (err=-14)
+> However, HW revision prior to v1.2 must pull GPIO4_D6 low to access
+> sdmmc. For HW revision v1.2 the state of GPIO4_D6 has no impact.
 >
-> $ ls -lh boot/nixos/
-> total 84M
-> -r--r--r--  1 root root  24M Jan  1  1970 6fq8fmmab31yxdwcs7zw44p78fq9fy1s-initrd-linux-6.12.1-initrd
-> -r--r--r--  1 root root  62M Jan  1  1970 dhqjsnprmzjxncil3m0g9l09a479crn3-linux-6.12.1-Image
-> dr-xr-xr-x 36 root root 4.0K Jan  1  1970 dhqjsnprmzjxncil3m0g9l09a479crn3-linux-6.12.1-dtbs
+> Upstream linux-rockchip maintainer tree has merged a patch "arm64: dts:
+> rockchip: Fix sdmmc access on rk3308-rock-s0 v1.1 boards" for v6.14 to
+> fix this issue.
 >
-> similar problem was fixed for rk35xx by:
+> Add the upstream vmmc-supply regulator in board u-boot.dtsi and enable
+> required Kconfig options to set GPIO4_D6 low to fix reading sdmmc on
+> v1.1 hw revision.
 >
-> commit 69b73877f02c ("rockchip: rk35xx: expand space for decompressed kernel")
+> The regulator-3v3-vcc-sd and sdmmc-2030 nodes along with the vmmc-supply
+> prop can be dropped once dts/upstream sync v6.14 DTs.
 >
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> Fixes: 25438c40a007 ("board: rockchip: Add Radxa ROCK S0")
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   include/configs/rk3399_common.h | 16 ++++++++--------
->   1 file changed, 8 insertions(+), 8 deletions(-)
+>   arch/arm/dts/rk3308-rock-s0-u-boot.dtsi | 43 +++++++++++++++++++++++++
+>   configs/rock-s0-rk3308_defconfig        |  2 ++
+>   2 files changed, 45 insertions(+)
 >
-> diff --git a/include/configs/rk3399_common.h b/include/configs/rk3399_common.h
-> index c5bcd7dc5e8a..76f40e7cd5f8 100644
-> --- a/include/configs/rk3399_common.h
-> +++ b/include/configs/rk3399_common.h
-> @@ -20,16 +20,16 @@
->   #endif
+> diff --git a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+> index dd4cb8660b8d..3b849280c4ad 100644
+> --- a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+> @@ -2,11 +2,50 @@
 >   
->   #define ENV_MEM_LAYOUT_SETTINGS		\
-> -	"scriptaddr=0x00500000\0"	\
-> +	"scriptaddr=0x00c00000\0"	\
->   	"script_offset_f=0xffe000\0"	\
->   	"script_size_f=0x2000\0"	\
-> -	"pxefile_addr_r=0x00600000\0"	\
-> -	"fdt_addr_r=0x01e00000\0"	\
-> -	"fdtoverlay_addr_r=0x01f00000\0"	\
-> -	"kernel_addr_r=0x02080000\0"	\
-> -	"ramdisk_addr_r=0x06000000\0"	\
-> -	"kernel_comp_addr_r=0x08000000\0"	\
-> -	"kernel_comp_size=0x2000000\0"
-> +	"pxefile_addr_r=0x00e00000\0"	\
-> +	"kernel_addr_r=0x02000000\0"	\
-> +	"kernel_comp_addr_r=0x0a000000\0"	\
-> +	"fdt_addr_r=0x12000000\0"	\
-> +	"fdtoverlay_addr_r=0x12100000\0"	\
-> +	"ramdisk_addr_r=0x12180000\0"	\
-> +	"kernel_comp_size=0x8000000\0"
+>   #include "rk3308-u-boot.dtsi"
 >   
->   #define CFG_EXTRA_ENV_SETTINGS		\
->   	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+> +/ {
+> +	/*
+> +	 * HW revision prior to v1.2 must pull GPIO4_D6 low to access sdmmc.
+> +	 * This is modeled as an always-on active low fixed regulator.
+> +	 */
+> +	vcc_sd: regulator-3v3-vcc-sd {
+> +		compatible = "regulator-fixed";
+> +		gpios = <&gpio4 RK_PD6 GPIO_ACTIVE_LOW>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&sdmmc_2030>;
+> +		regulator-name = "vcc_sd";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc_io>;
+> +	};
+> +};
+> +
+>   &emmc_pwren {
+>   	bootph-pre-ram;
+>   	bootph-some-ram;
+>   };
+>   
+> +&gpio4 {
+> +	bootph-pre-ram;
+> +};
+> +
+> +&pinctrl {
+> +	sdmmc {
+> +		sdmmc_2030: sdmmc-2030 {
+> +			rockchip,pins = <4 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +};
+> +
+> +&sdmmc {
+> +	vmmc-supply = <&vcc_sd>;
+> +};
+> +
+> +&sdmmc_2030 {
+> +	bootph-pre-ram;
+> +};
+> +
+>   &uart0 {
+>   	bootph-all;
+>   	clock-frequency = <24000000>;
+> @@ -17,6 +56,10 @@
+>   	bootph-pre-ram;
+>   };
+>   
+> +&vcc_sd {
+> +	bootph-pre-ram;
+> +};
+> +
+>   &vdd_core {
+>   	regulator-init-microvolt = <1015000>;
+>   };
+> diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
+> index 0a46e7bb1871..063e0b921d73 100644
+> --- a/configs/rock-s0-rk3308_defconfig
+> +++ b/configs/rock-s0-rk3308_defconfig
+> @@ -2,6 +2,7 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SPL_GPIO=y
+>   CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
+>   CONFIG_DM_RESET=y
+>   CONFIG_ROCKCHIP_RK3308=y
+> @@ -53,6 +54,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>   CONFIG_PINCTRL=y
+>   CONFIG_REGULATOR_PWM=y
+>   CONFIG_DM_REGULATOR_FIXED=y
+> +CONFIG_SPL_DM_REGULATOR_FIXED=y
+>   CONFIG_PWM_ROCKCHIP=y
+>   CONFIG_RAM=y
+>   CONFIG_BAUDRATE=1500000
