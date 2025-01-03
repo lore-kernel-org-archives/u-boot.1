@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8007CE77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 06:39:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4A5CE7718F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 06:39:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D863D8035E;
-	Fri,  3 Jan 2025 07:39:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 722548036E;
+	Fri,  3 Jan 2025 07:39:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="adbPckrU";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DureEEso";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F68C801A0; Fri,  3 Jan 2025 07:39:35 +0100 (CET)
-Received: from mail-m4921.qiye.163.com (mail-m4921.qiye.163.com [45.254.49.21])
+ id 1F3DE801A0; Fri,  3 Jan 2025 07:39:44 +0100 (CET)
+Received: from mail-m32118.qiye.163.com (mail-m32118.qiye.163.com
+ [220.197.32.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14A6A803C6
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 07:39:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85E04803CF
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 07:39:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 797586be;
- Fri, 3 Jan 2025 14:39:28 +0800 (GMT+08:00)
-Message-ID: <df1d7a5d-9859-4988-95a6-81955aabad2a@rock-chips.com>
-Date: Fri, 3 Jan 2025 14:39:27 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 797586e3;
+ Fri, 3 Jan 2025 14:39:35 +0800 (GMT+08:00)
+Message-ID: <282f315b-af35-4fae-86d6-c73f8c3c1631@rock-chips.com>
+Date: Fri, 3 Jan 2025 14:39:35 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/11] rockchip: rk3288-firefly: Sort u-boot.dtsi nodes
- alphabetically
+Subject: Re: [PATCH 03/11] rockchip: rk3288-firefly: Set ethaddr env based on
+ cpuid
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20241212221000.94501-1-jonas@kwiboo.se>
- <20241212221000.94501-3-jonas@kwiboo.se>
+ <20241212221000.94501-4-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241212221000.94501-3-jonas@kwiboo.se>
+In-Reply-To: <20241212221000.94501-4-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0JJTlZJTB9KQklPTEtPSBlWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh9LHlZJQ0MYGh1DHUweGUhWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a942ae3ee7f03afkunm797586be
+X-HM-Tid: 0a942ae40ad603afkunm797586e3
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NVE6Mjo4NDINPSwNOis1SDAv
- DRwKCyhVSlVKTEhOQ0NNSE1CSUJNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSENINwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pz46Vhw4ODITDywuKjYTSCEO
+ GDoaCQNVSlVKTEhOQ0NNSExMSUlLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTkpDNwY+
 DKIM-Signature: a=rsa-sha256;
- b=adbPckrUNR2LOLadNSXOM720W82o1uDIR1g4MMyir10KPS7xUQI85NF/olpyHJEv79MkCHyRQkuTYrAEWDbEojU0S/KVZFqp+t2tOuFci92CvjoVPx0RQLOgThaSuqcp90BJZmjhH29Y+0AeQNrkEZws0ro0D2IowCS2h7zMo0k=;
+ b=DureEEso0YdnrM2bUhnYZFulrVXULE5fdx467UEO7OlFb0AggHJ4NZkEKLvcyzkV8YiUGCcaJVpu8JD/Kpiti3HIp0zzFuCE4faHdI1Ec4iwLbzXe36iVCsForjehkwzddZyLEJFOFP7rIFyLHu/xGxZIitdZIywoa4iJo9dk8o=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=0wBktUTlgdVqRo9ESFi+0hQYp0MauNqrOeo7IakhSzA=;
+ bh=YfOcOd1/h3/tJvoZ5tju9hPfKtFUputXvpyBw8hw2p0=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,10 +77,8 @@ X-Virus-Status: Clean
 
 
 On 2024/12/13 06:09, Jonas Karlman wrote:
-> Sort the nodes in rk3288-firefly-u-boot.dtsi in alphabetical order.
->
-> This has no intended change to board DT, this only rearrange nodes in
-> preparation for future changes.
+> Enable Kconfig options to read cpuid from efuse and set cpuid#, serial#
+> and ethaddr env vars based on the value read from efuse.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -87,55 +86,35 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3288-firefly-u-boot.dtsi | 20 ++++++++++----------
->   1 file changed, 10 insertions(+), 10 deletions(-)
+>   configs/firefly-rk3288_defconfig | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 >
-> diff --git a/arch/arm/dts/rk3288-firefly-u-boot.dtsi b/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-> index 30b471900b30..8870188e6129 100644
-> --- a/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-> @@ -25,30 +25,26 @@
->   	rockchip,sdram-params = <0x30B25564 0x627 3 666000000 3 9 1>;
->   };
->   
-> -&pinctrl {
-> +&emmc {
->   	bootph-all;
->   };
->   
-> -&uart2 {
-> +&gpio3 {
->   	bootph-all;
->   };
->   
-> -&sdmmc {
-> -	bootph-all;
-> +&pcfg_pull_up_drv_12ma {
-> +	bootph-pre-ram;
->   };
->   
-> -&emmc {
-> +&pinctrl {
->   	bootph-all;
->   };
->   
-> -&gpio3 {
-> +&sdmmc {
->   	bootph-all;
->   };
->   
-> -&pcfg_pull_up_drv_12ma {
-> -	bootph-pre-ram;
-> -};
-> -
->   &sdmmc_bus4 {
->   	bootph-pre-ram;
->   };
-> @@ -64,3 +60,7 @@
->   &sdmmc_pwr {
->   	bootph-pre-ram;
->   };
-> +
-> +&uart2 {
-> +	bootph-all;
-> +};
+> diff --git a/configs/firefly-rk3288_defconfig b/configs/firefly-rk3288_defconfig
+> index 00f23174210f..eed0806b2321 100644
+> --- a/configs/firefly-rk3288_defconfig
+> +++ b/configs/firefly-rk3288_defconfig
+> @@ -29,6 +29,7 @@ CONFIG_USE_PREBOOT=y
+>   CONFIG_DEFAULT_FDT_FILE="rk3288-firefly.dtb"
+>   CONFIG_SILENT_CONSOLE=y
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_NO_BSS_LIMIT=y
+>   # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> @@ -50,7 +51,6 @@ CONFIG_SPL_OF_CONTROL=y
+>   CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>   CONFIG_ENV_IS_IN_MMC=y
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_REGMAP=y
+>   CONFIG_SPL_REGMAP=y
+>   CONFIG_SYSCON=y
+> @@ -63,6 +63,8 @@ CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+>   CONFIG_LED=y
+>   CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_ETH_DESIGNWARE=y
