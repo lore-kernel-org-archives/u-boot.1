@@ -4,117 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35C5AE77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 15:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3DF6E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 15:43:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E47680295;
-	Fri,  3 Jan 2025 16:17:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 207EC80295;
+	Fri,  3 Jan 2025 16:43:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U7A6QwK0";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="AC8GBsQX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C217F802EF; Fri,  3 Jan 2025 16:17:18 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 73D13802EF; Fri,  3 Jan 2025 16:43:50 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A43CF801A0
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 16:17:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60939801A0
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 16:43:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-38634c35129so9391356f8f.3
- for <u-boot@lists.denx.de>; Fri, 03 Jan 2025 07:17:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735917436; x=1736522236; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Z4J4rBC6PvDpLRBX4QhlC5NsIBAp9vUh3jPJk26/Ni4=;
- b=U7A6QwK033bxilhGq2xTIBx61h32fO3AX8UqxdBFDH0y5GXKbl/8UKfr/Z0MTu/OUF
- pB6Ioev+qMTUFjV1xfnFMTTd/RLWDTltobomb3ci5lny3wBllcLSYferVUWD7I2t887d
- KOl5PHgE+5k/EmXcIlvnPCF+NA1cLY3No4murxUNxz0XgIxDAQphbMFQoIHaM/lNPptA
- zAv/aKRmTKDMv8GPkiAs97nXvAYKQ+AAgtjGo8Qv2SUJpgDJS0D5tygi7Slj7L9EkRnl
- iS31AbKWWI3eIbqQx4kY5ypN5jrbJ9dbY2Q0rncXf792KWQ0RRgQhqzRdSdXQloMZgkk
- qCSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735917436; x=1736522236;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Z4J4rBC6PvDpLRBX4QhlC5NsIBAp9vUh3jPJk26/Ni4=;
- b=AfEYx0s1tibyUO75ZLUHMk/q3klx/0tVBzjrRWDrZvyZ3hSaaLDEtyAXpO1EfJlrGD
- zn4i2gy7943aSTtvc3VgeTGblQ4A4MVz3FCh7QVj9qkZePvV2yXSKCKjzOe7lNEYu3s7
- tAWrKGt2jEdFx3RoMsMzbNYSdksLvSCoX2BreZTjBhGws7YqmsWKBXoqf479QkJw16tf
- rn37Y1kywUXhSEhU+Aqwqa5kLByWv7yEBGyn9nyboNXhV/gw/r+hSKeBi5e6i6v/AsFj
- MPiHEOd32K47Je8WT7QTCbcnV7MHl376k/nkYZKWucWvGqcpTlpmwNNg/TQQlgFaa26A
- XLoQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVuYlgfJES+75qJN1H4uhF5/3y2iV7zBCqKVn6e2aWJDTMKwW/9bk0GUJF2Au5BbvzYKgxz4sI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+4sDuJ0AkrljKn6Q77Pj6ewT9TWHQg9KMQJJXyGYPAhLl/g5r
- BIacC1PvVmTS1TE3E8fIpzBkdB8HVq0gm/I77jIjEiTbW/UICpUFqNraljhLjD8=
-X-Gm-Gg: ASbGnctJILAjvHGrQvs1aCGM8an19qcV/nM5hF0ft4SaHdCXcfeHKJAmuFDZqudtyPw
- Vc6xqxoYdYIBl3WS5siM6bAFXR0WqIIWL8DiYL2G3zK/bp9gnDwirnaLXReXXTNO1pdjcqRt7q+
- rKw2wyNM2VQGXiu9e+yAXpMdL1tyaOuPlrq7tPMMWWkfBaJJreN8S31Vg8rlvjCTZ8PmG2KokgA
- jFPs8QfRxnegIkquK0shlW+9ofyNdeUe+ypW0NPa7iUsolxPSMhapfmN1JJbEIdcKky2YHUgf/s
- 0uDrmqjxBfsCItQbGgqoSgEdICOlOnCSlA==
-X-Google-Smtp-Source: AGHT+IHZNqNdqB6oZ+vtD+TpbziocosreCUpNN4gvjOTf82mQLAk+KtuRD27irOWHtDWsac86RYQlQ==
-X-Received: by 2002:a5d:588b:0:b0:385:de8d:c0f5 with SMTP id
- ffacd0b85a97d-38a221eabecmr48175003f8f.16.1735917436099; 
- Fri, 03 Jan 2025 07:17:16 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:3084:b2a4:688f:2d3a?
- ([2a01:e0a:982:cbb0:3084:b2a4:688f:2d3a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c848a47sm40426775f8f.62.2025.01.03.07.17.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Jan 2025 07:17:15 -0800 (PST)
-Message-ID: <1ae282b0-8e68-4360-b3d2-73a10b7b8f37@linaro.org>
-Date: Fri, 3 Jan 2025 16:17:14 +0100
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1735919022; x=1736523822; i=xypron.glpk@gmx.de;
+ bh=36kFWMDMNpKDt5i8Z3iWl10Tb0coQHkgjKgJ6H7xiWk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=AC8GBsQXESyhYBchNrpKzN0wnsc2irHiNPBTpC+6BrhabJKy0axKsfzTrDt7PCsV
+ VJarDxfNEPY7qNE0CKSLU42el3Y7Z+7Ln/r88uXOm3SXP6OKi2WtduxNeGpL/0GGc
+ 5VwxI9EngqttPUwEKmVWHTIYPl7N3kuAVxQPRaCEa+RsaGib9MzBwu/A4Ag/Y214T
+ j7CkSZ583PUe3/JI/83UnX4NQK4TNbwWwmfruEINKNsCawdPg3cKbQA/U7DSlkppY
+ c6ezsOdnbcqoJmACR0Dh6+l2ryH5ePzZcCtT7hZus0FaHpS68m50xcNiFn1fu1rQm
+ xw7UkXO7BDp/HaaUGA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.106] ([46.114.109.94]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MfHEP-1txKE910yR-00fzTD; Fri, 03
+ Jan 2025 16:43:42 +0100
+Message-ID: <bd3b49c9-55b0-4707-baf9-ae6bb97e2d01@gmx.de>
+Date: Fri, 3 Jan 2025 16:43:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v1 1/5] dts: sa8775p-ride-r3-u-boot: add override dtsi
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- caleb.connolly@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
- seanga2@gmail.com, ilias.apalodimas@linaro.org, sjg@chromium.org,
- Volodymyr_Babchuk@epam.com, lehmanju@devpi.de, bhupesh.linux@gmail.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250103051404.1965469-1-quic_varada@quicinc.com>
- <20250103051404.1965469-2-quic_varada@quicinc.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250103051404.1965469-2-quic_varada@quicinc.com>
+Subject: Re: [PATCH 1/2] efi_stub: Sync the debug UART definition like other
+ platform
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:GhGlaTHaMOqCOoOuvGqK17Pq1+wuu9dR6L0LjJbrYyTW2Qu3q2r
+ uwAxKIdy01c/85+caVCS/nNMzav6qmqxegGneXpITsNYD7l9q3W1Jlgv5UdA6TeAPFCj9ho
+ HUmwJPv739jelnIKJw0R4g97jroPj/fIcSPEH1b/CFTEh7kyC1s7FTIGbu8kRmBqzAh3sJu
+ uf/QcMvqFKjKAPX8nLJ8Q==
+UI-OutboundReport: notjunk:1;M01:P0:1GkJc+UkOAQ=;EPIud5pgcCqS/tMSEOtgOyzTtem
+ A9OZ3Hlv0HQ5Hz6roydrb+S1WEAqgWiB23ryj3HUSpjvYIk7y1h2I57/AwH6AmO8NWJCHoz2Y
+ YaKbRgqvvoYO/5NBnxKtM3TSnojkua7AiFlbUBVaQpQlfgIIPSxh5qjnLzzgC1FZNhdwAgW9e
+ WhJIRfEmyyv4P+Nsee7jtgw7it7a/mNFlqYXWhoDzmD38QeW+h8psI+aWOZg0eVqUYTepIzhk
+ eNKz+QpuZPgsIkYu++kAXLx8gTvurq8gPYMYU0Z8z2YgCrOhWR1eQUZRBreyIvsYjHtxvNVep
+ 9Uk2UQpbUUlD0ENMv03QG8NGsbaV5sJmdZ4wJPLnJ2D9coSaYfFrB6BjOxs9hGGwIWYVPqe67
+ 9uMJg9fXH++HJNH1FN+zC7q+mkJ7PdwpbSPFwFQjQbuhuR4/re3q4CbwsKzPBr4cOCy+w2YTi
+ yBgIE4APAYXydNGeqFO8i/5JtE2Noif47SuJ4a1rkWxN5y5pLL9g2QGhgDJsbPD01ut5YR+6b
+ OONmOH2sZrxpJFF2J0oa4OoNP9GJLAjfO7sXEVPYh4Q3D9k7iPf0Um0M9/EXkLqwo8bNIeEXs
+ FbB7EferT+vmY3T3hwnx6U4UZcgZfNp/b4k4pw4AsrRUZCRnnv3gdW4FRVoVm/Ai6ohMdnW/Q
+ LfEr30lK/EsxpaqnUs/CHfxTdC9Sz4plfCBqWsBICAVZ3Ewh+hh+QEIQELAh3NG27PXTRUIex
+ i/DQZ7f0cHIOh8zbWhM0gq0Z66wuHJkhOlw3NvWPPRFW257jLHIhJlNN+zuy+vcDR3uommbC9
+ z6Jedv8Cu0uA65eEY4hqdf1HC0hNvgsnvHbF+g0g4YKwO4cqbqRczyB/Iwidk+5sfGSyhRDbF
+ o91uSrAOLsY8Tf1CKKKzC+YltNimunupJfrPlnOEeBHmZU3t3qiSFF7mUmnB1nsha0ZhZDHyX
+ U3NZpsS5XqU4A7qbu48EioHrSPLxAR7MvWTV2FdLFR5ASbl1qVfZvNWVyZbxqfpkGyxV0bFw9
+ FxCMjSYOOynP20MhaQIRXwtQosedS/969NOsMhLui3Eq+eBjMcjOMfQI5xGwWUmyqt4WM/xlC
+ 2Jb98O+WhNVqZZgZ3YZt/jvt4woh8A
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,83 +91,83 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 03/01/2025 06:14, Varadarajan Narayanan wrote:
-> Add initial support for the QCS9100 (derived from SA8775p) Ride platforms.
-> Define memory layout statically.
-> 
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+On 28.11.24 04:47, Kever Yang wrote:
+> The debug UART interface is available when CONFIG_DEBUG_UART is defined,
+> sync with the other platforms to use the same definition.
+>
+> Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
 > ---
->   arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi | 22 ++++++++++++++++++++++
->   arch/arm/dts/sa8775p-ride-u-boot.dtsi    | 11 +++++++++++
->   2 files changed, 33 insertions(+)
->   create mode 100644 arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi
->   create mode 100644 arch/arm/dts/sa8775p-ride-u-boot.dtsi
-> 
-> diff --git a/arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi b/arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..7d01d5f6a1
-> --- /dev/null
-> +++ b/arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi
-> @@ -0,0 +1,22 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/*
-> + * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
-> + */
+>
+>   lib/efi/efi_stub.c | 16 ++++++++++------
+>   1 file changed, 10 insertions(+), 6 deletions(-)
+>
+> diff --git a/lib/efi/efi_stub.c b/lib/efi/efi_stub.c
+> index 40fc29d9adf..5179c5b2c09 100644
+> --- a/lib/efi/efi_stub.c
+> +++ b/lib/efi/efi_stub.c
+> @@ -9,7 +9,6 @@
+>    * EFI application. It can be built either in 32-bit or 64-bit mode.
+>    */
+>
+> -#include <debug_uart.h>
+>   #include <efi.h>
+>   #include <efi_api.h>
+>   #include <errno.h>
+> @@ -55,10 +54,6 @@ struct __packed desctab_info {
+>    * considering if we start needing more U-Boot functionality. Note tha=
+t we
+>    * could then move get_codeseg32() to arch/x86/cpu/cpu.c.
+>    */
+> -void _debug_uart_init(void)
+> -{
+> -}
+> -
+>   void putc(const char ch)
+>   {
+>   	struct efi_priv *priv =3D efi_get_priv();
+> @@ -83,12 +78,21 @@ void puts(const char *str)
+>   		putc(*str++);
+>   }
+>
+> -static void _debug_uart_putc(int ch)
+> +#ifdef CONFIG_DEBUG_UART
+
+Why do we need this #ifdef? In other places we leave it to the linker to
+remove unused functions.
+
 > +
-> +/ {
-> +	model = "Qualcomm QCS9100 Ride Rev3";
-> +	compatible = "qcom,qcs9100-ride-r3", "qcom,qcs9100", "qcom,sa8775p";
+> +#include <debug_uart.h>
 
-Why do you redefine those ? they are already defined in the upstream sa8775p-ride-r3.dts
+You cannot consume function _debug_uart_putc() before defining it.
+
+So either the #include statement must follow the implementations or you
+have to define the function prototypes in the include.
+
+I would prefer adding the missing definitions to the include and leaving
+it at the top of the code.
+
+Best regards
+
+Heinrich
 
 > +
-> +	/* Will be removed when bootloader updates later */
-> +	memory@80000000 {
-> +		device_type = "memory";
-> +		reg = <0x0 0x80000000 0x0 0x3ee00000>,
-> +		      <0x0 0xc0000000 0x0 0x04d00000>,
-> +		      <0xD 0x00000000 0x2 0x54100000>,
-> +		      <0xA 0x80000000 0x1 0x52d00000>,
-> +		      <0x9 0x00000000 0x1 0x80000000>,
-> +		      <0x1 0x00000000 0x2 0xf7500000>,
-> +		      <0x0 0xd0000000 0x0 0x00100000>,
-> +		      <0x0 0xd3500000 0x0 0x07c00000>;
-> +	};
-
-Ack, this should be removed once the SMEM code is merged.
-
-> +};
-> diff --git a/arch/arm/dts/sa8775p-ride-u-boot.dtsi b/arch/arm/dts/sa8775p-ride-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..979462dfec
-> --- /dev/null
-> +++ b/arch/arm/dts/sa8775p-ride-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/*
-> + * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
-> + */
-> +/dts-v1/;
+> +void _debug_uart_init(void)
+> +{
+> +}
 > +
-> +#include "sa8775p-ride.dts"
-
-Why ? this file will be automatically appended to sa8775p-ride.dts, no need to import is before.
-
-> +/ {
-> +	model = "Qualcomm QCS9100 Ride";
-> +	compatible = "qcom,qcs9100-ride", "qcom,qcs9100", "qcom,sa8775p";
-
-Same, unneeded.
-
-In fact, this file is completely unneeded.
-
-> +};
-
-Neil
+> +static inline void _debug_uart_putc(int ch)
+>   {
+>   	putc(ch);
+>   }
+>
+>   DEBUG_UART_FUNCS
+> +#endif
+>
+>   void *memcpy(void *dest, const void *src, size_t size)
+>   {
 
