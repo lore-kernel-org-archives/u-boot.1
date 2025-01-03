@@ -4,88 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5515DE77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 05:15:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15EF7E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 05:41:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 583318036E;
-	Fri,  3 Jan 2025 06:14:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A14580107;
+	Fri,  3 Jan 2025 06:41:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="olUxYMMU";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A981800D7; Fri,  3 Jan 2025 06:14:57 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 57C9A80196; Fri,  3 Jan 2025 06:41:05 +0100 (CET)
+Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54EF180435
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 06:14:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1119800D7
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 06:41:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 502KjaUV021502;
- Fri, 3 Jan 2025 05:14:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- q545POxhXryQxarJkXt1P9ZekjyW5NJJ67D+o5xlNHE=; b=olUxYMMUtAThiVYJ
- L8YVrzo7ZIugwtLTgHQg8JCQSuVaWgbygrIVanAjV2Vz+ShyzGmuFNRMFQYgZeGL
- nC59No/Qk03DFV8dz5NqtthWcvHH3VSGoEhZuo9GnYNX8DcsYv3nZU7DiO1X7VgX
- ZmBTkQxSl0W6hhx0kGOXCFkPEYfkEIx+HwtVZkRpSgZM/1mWu1HTKOk5Wlxg3y/q
- Ljv7367Oh4XKoDNFBBDnTTCHV8IDkF5K/QeOmBN8SSfm2H1mrqLEqSX0IbRAY9dk
- lkc6ZO1nOMcHrDDzS66deBX7xi6c1dIDSMpU5H15qFLYvn4m64ihpVCzZdub4uq0
- 8hG+mQ==
-Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 43x24artr3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 03 Jan 2025 05:14:44 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 5035Ehav015924
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 3 Jan 2025 05:14:43 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Thu, 2 Jan 2025 21:14:39 -0800
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
- <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
- <seanga2@gmail.com>, <quic_varada@quicinc.com>,
- <ilias.apalodimas@linaro.org>, <sjg@chromium.org>,
- <Volodymyr_Babchuk@epam.com>, <lehmanju@devpi.de>,
- <bhupesh.linux@gmail.com>, <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
-Subject: [PATCH v1 5/5] configs: add qcs9100_defconfig
-Date: Fri, 3 Jan 2025 10:44:04 +0530
-Message-ID: <20250103051404.1965469-6-quic_varada@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250103051404.1965469-1-quic_varada@quicinc.com>
-References: <20250103051404.1965469-1-quic_varada@quicinc.com>
+ dmarc=fail (p=none dis=none) header.from=gentoo.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
+Date: Fri, 3 Jan 2025 13:40:49 +0800
+From: Yixun Lan <dlan@gentoo.org>
+To: Waldo Alvarez <waldoalvarez@protonmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: Secure boot on Milk V duo 256
+Message-ID: <20250103054049-GYA2264892@gentoo>
+References: <9gGp0Bj5BodfZFh9cs_TfmuEpCjka0pg9zw_0jHrGSgVaMRQWbjoI7rDHQ4tYsa3IIzqC3gYozVRk5s_wdiCTp5IuAb7A1wccavJbQxuLAI=@protonmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: YPUlA4GMB8gTtISiPjAqMvlpkQedTrvh
-X-Proofpoint-ORIG-GUID: YPUlA4GMB8gTtISiPjAqMvlpkQedTrvh
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0
- mlxlogscore=932 spamscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
- mlxscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0 phishscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2501030042
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9gGp0Bj5BodfZFh9cs_TfmuEpCjka0pg9zw_0jHrGSgVaMRQWbjoI7rDHQ4tYsa3IIzqC3gYozVRk5s_wdiCTp5IuAb7A1wccavJbQxuLAI=@protonmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,45 +48,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a defconfig for the Ride R3 and other QCS9100 boards with a
-dedicated uefi partition. These can replace EDK2 entirely with U-Boot.
+Hi Waldo
 
-Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
----
- configs/qcs9100_defconfig | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 configs/qcs9100_defconfig
+On 13:28 Thu 02 Jan     , Waldo Alvarez wrote:
+> Hello:
+> 
+> I am figuring out how to proceed on secure booting the Milk V DUO 256. Likely in this list I can get some help. It is ARM/Risc-V board with an SG2002 SOC. The SOC has OTP memory and some bootrom.
+> 
+> The current distribution uses u-boot and linux buildroot but doesn't do secure boot.
+> 
+> Therefore I am trying to start at the first part. Verify digital dignature of u-boot and have u-boot verify digital signature of the kernel.
+> 
+> Can someone point me here in the right direction no how to proceed.
+> 
+I'm no expert of secure boot area.. but you can search first,
+there are quite a lot docs/articles about secure boot of uboot/linux
 
-diff --git a/configs/qcs9100_defconfig b/configs/qcs9100_defconfig
-new file mode 100644
-index 0000000000..0ba831c379
---- /dev/null
-+++ b/configs/qcs9100_defconfig
-@@ -0,0 +1,24 @@
-+# Configuration for building U-Boot to be flashed
-+# to the uefi partition of QCS9100 based dev boards with
-+# the "Linux Embedded" partition layout (which have
-+# a dedicated "uefi" partition for edk2/U-Boot)
-+
-+#include "qcom_defconfig"
-+
-+# Otherwise buildman thinks this isn't an ARM platform
-+CONFIG_ARM=y
-+
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0xA8C000
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_CLOCK=14745600
-+
-+# Address where U-Boot will be loaded
-+CONFIG_TEXT_BASE=0xaf000000
-+CONFIG_REMAKE_ELF=y
-+
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/sa8775p-ride-r3"
-+
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_QCOM_UFS=y
+for the initial bootchain: from bootrom to bootloader, there is indeed
+secure boot feature which documented in vendor datasheet, see chapter 14
+
+https://github.com/milkv-duo/duo-files/blob/main/duo/datasheet/CV1800B-CV1801B-Preliminary-Datasheet-full-en.pdf
+
+> Regards
+> 
+> Waldo Alvarez
+> Desarrollo de Software / Software Development
+> https://pipflow.com
+> https://tradingfuturo.com
+> 
+> Sent with [Proton Mail](https://proton.me/mail/home) secure email.
+
 -- 
-2.34.1
-
+Yixun Lan (dlan)
+Gentoo Linux Developer
+GPG Key ID AABEFD55
