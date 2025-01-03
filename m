@@ -4,43 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D38DE77198
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 01:35:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E420CE77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 01:40:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63333802EF;
-	Fri,  3 Jan 2025 02:35:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 4EC25802EF;
+	Fri,  3 Jan 2025 02:40:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 07BF48031D; Fri,  3 Jan 2025 02:35:02 +0100 (CET)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B52FD80196
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 02:34:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [IPV6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46] (unknown
- [IPv6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 8C4A8B4B3C87;
- Fri,  3 Jan 2025 02:34:58 +0100 (CET)
-Message-ID: <aa6d5dce-473c-447f-91b9-fe802f0f520d@freeshell.de>
-Date: Thu, 2 Jan 2025 17:34:57 -0800
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SdKFi25g";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6478D8031D; Fri,  3 Jan 2025 02:40:24 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A12F80196
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 02:40:22 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aaeef97ff02so1300216766b.1
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 17:40:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1735868421; x=1736473221; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uyar4fbe1IwkVTKdXiO6nJo5kGokgatIAr/o5WoycxM=;
+ b=SdKFi25gP7L/cbQ5qjoEQrRuIsPCvBMI+/WKxHl/c9p9kc04L3P3FoIEbL0nsyGFN+
+ IQk0w9qPUnbcnoPx4I9Y3aWZkS7A0ivULSUI4RdqjOw+gW49KinH7zbF71y6J1dtzdeO
+ g4QcA9sspcI/2hHivClH7byuWzMGpRa9VS9sI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735868421; x=1736473221;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uyar4fbe1IwkVTKdXiO6nJo5kGokgatIAr/o5WoycxM=;
+ b=LDHykzPr0ImD2AUdTtq1omfjnlUfUL8HkWuBljmrLRoSBnpUaTXNxNIgkvvfwwb58+
+ 8B7SFkbfSfK2hNU1R+zHNpguEUHz6MD8yCeXVucY/HLuM5rhrpRkxSFMYMr8wIbhVBV8
+ JbPoorzXqHOa/wSmjbA0ELlVQAihR8O4wZd3Pi2UcjDUA3VhaJCLPPMUR/B5BzQA6cvc
+ wGR64NfKG0j3z0MDdD9+/haj9DvD7PNrPa58ngxVy0fbYKiHDBxl9GxSh46laZvIfUWs
+ JMNVu60ejU1tVwlV3tJrXSw88ogqDl+BP5P8bAs+mSr0PrjSDrHGORajZfb8t8zyzE7d
+ cSeg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUR+LcIXObrVShTJxmXyHPrPNYXoT7RFt2s5kijgIxP7FPfRsJ0t0SVYsqx2MU92gcD5YtF4GQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYjhIL1aZcGjG5OQ+asfaxe8lRtAkM0J0I1nvdws8gKjYe8wJw
+ 4NYNPlHG39P+WD5S/QLBpzzUGGsOMNKLs++nZuvzhAL+e9VQAID2rnJ5hqqy656QxZZgtp9E8Wa
+ WxxatKiIsBg9yPpSyZaCdqZtELhQktstugepA
+X-Gm-Gg: ASbGnctHLle4C2pSlVJ2fHbQW83baTrAAd+e1V23GD4KHzXhrYDFJGJg9o9JIHcGMth
+ ysILWjRFa1D4BdTzWR6GH0nn9nRt3lhhAim06OsTf
+X-Google-Smtp-Source: AGHT+IEi3RQpQ2/Lt8d15BoSAluGI6H5Xpk5Ds/GkQlrUMMRJfVE3PyvJF8G3BVerU9iAhDvhXoAdV1vfHnnL9wG+p0=
+X-Received: by 2002:a17:907:a708:b0:aae:8495:e064 with SMTP id
+ a640c23a62f3a-aae8495e124mr3789794966b.40.1735868421584; Thu, 02 Jan 2025
+ 17:40:21 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: LwIP and multiple network interfaces
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>
-References: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
- <20250102224724.GS3476@bill-the-cat>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <20250102224724.GS3476@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 3 Jan 2025 14:40:12 +1300
+Message-ID: <CAFLszTggvw3ioB=r3yNcjFCZxU612AOtS2B+tBNE1Lf+TABQQw@mail.gmail.com>
+Subject: Re: [PATCH 0/4] efi_loader: enable running the debug UEFI shell
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,88 +86,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom sorry about sending this reply twice, struggle here is with 
-Thunderbird mail UI sometimes hiding "Reply All" and it missed the mail 
-list first time around.
+Hi Heinrich,
 
-On 1/2/25 14:47, Tom Rini wrote:
-> On Thu, Jan 02, 2025 at 02:26:06PM -0800, E Shattow wrote:
->> Problem: 'dhcp' must be ran twice when the network cable is plugged into a
->> port other than the first network port.
->>
->> Network cable plugged into bottom (first) Ethernet port:
->> 1. Power on
->> 2. StarFive # dhcp
->>
->> ethernet@16030000 Waiting for PHY auto negotiation to complete....... done
->> DHCP client bound to address 192.168.2.51 (3678 ms)
->>
->>
->> Network cable plugged into top (second) Ethernet port:
->> 1. Power on
->> 2. StarFive # dhcp
->> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
->> TIMEOUT !
->> phy_startup() failed: -110
->> FAILED: -110
->> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
->> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
->> TIMEOUT !
->> phy_startup() failed: -110
->> FAILED: -110
->> Could not start ethernet@16030000
->> 3. StarFive # dhcp
->> DHCP client bound to address 192.168.2.77 (31 ms)
-> 
-> What happens when you set ethact to 1 first?
-> 
+On Fri, 3 Jan 2025 at 07:11, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Currently running the SCT fails on x86. The EFI shell overrides U-Boot's
+> Simple Text Output Protocol. When ConsoleLoggerPrintWithPageBreak() is
+> invoked with ConsoleInfo == NULL a crash occurs.
+>
+> Debugging requires running the debug version of the UEFI shell.
+> We can use `add-symbol-file` in gdb to point to
+> Build/Shell/DEBUG_GCC/X64/ShellPkg/Application/Shell/Shell/DEBUG/Shell.dll
+> and the load address of Shell.efi.
+>
+> The debug version of the UEFI shell checks several requirements and
+> fails to run without them:
+>
+> * HOB list (only on x86)
+> * HII configuration protocol
+> * DXE services table
+>
+> Implement the missing requirements.
+>
+> When starting image add the image load address to the debug output.
+>
+> Heinrich Schuchardt (4):
+>   efi_loader: implement a HOB list
+>   efi_loader: build with HII configuration protocol
+>   efi_loader: install DXE services table
+>   efi_loader: print image load address in StartImage
+>
+>  include/efi_dxe.h               |  54 ++++++++++
+>  include/efi_hob.h               |  32 ++++++
+>  include/efi_loader.h            |  16 +++
+>  lib/efi_loader/Kconfig          |  15 +++
+>  lib/efi_loader/Makefile         |   4 +-
+>  lib/efi_loader/efi_boottime.c   |   7 +-
+>  lib/efi_loader/efi_dxe.c        | 176 ++++++++++++++++++++++++++++++++
+>  lib/efi_loader/efi_hii_config.c |   4 -
+>  lib/efi_loader/efi_hob.c        |  33 ++++++
+>  lib/efi_loader/efi_root_node.c  |   3 +
+>  lib/efi_loader/efi_setup.c      |  13 +++
+>  11 files changed, 349 insertions(+), 8 deletions(-)
+>  create mode 100644 include/efi_dxe.h
+>  create mode 100644 include/efi_hob.h
+>  create mode 100644 lib/efi_loader/efi_dxe.c
+>  create mode 100644 lib/efi_loader/efi_hob.c
 
+Please can you document how to actually run UEFI like this? Also, is
+it possible to add a test for this new code?
 
-'1' literal does not seem to do something so I guess it is meant the id 
-of the first ethernet interface:
-
- From power-on:
-
-...
-starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
-starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
-In:    serial@10000000
-Out:   serial@10000000
-Err:   serial@10000000
-Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
-starting USB...
-No USB controllers found
-Working FDT set to ff700a10
-StarFive # env print ethact
-## Error: "ethact" not defined
-StarFive # env set ethact 1
-StarFive # dhcp
-ethernet@16030000 Waiting for PHY auto negotiation to complete......... 
-TIMEOUT !
-phy_startup() failed: -110
-FAILED: -110
-ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
-EQOS_DMA_MODE_SWR stuck
-FAILED: -110
-Could not start ethernet@16030000
-
-Again, from power-on:
-
-starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
-starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
-In:    serial@10000000
-Out:   serial@10000000
-Err:   serial@10000000
-Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
-starting USB...
-No USB controllers found
-Working FDT set to ff700a10
-StarFive # env print ethact
-## Error: "ethact" not defined
-StarFive # env set ethact ethernet@16040000
-StarFive # dhcp
-ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
-DHCP client bound to address 192.168.2.77 (149 ms)
-
-
--E
+Regards,
+Simon
