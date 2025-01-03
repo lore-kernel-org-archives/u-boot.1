@@ -4,99 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C9DE77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 11:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C03E3E77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 12:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8663080295;
-	Fri,  3 Jan 2025 12:22:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C3CC8035E;
+	Fri,  3 Jan 2025 13:32:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oV6KL3wf";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A9F1802EF; Fri,  3 Jan 2025 12:22:58 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BEB2C803B7; Fri,  3 Jan 2025 13:32:08 +0100 (CET)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFA9180196
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 12:22:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3DCF80196
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 13:32:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 13DC53F1CC
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 11:22:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1735903375;
- bh=/tD4A083u92Fp5hULCrU4rCeg/tmndM2/lL4Ng5oJEY=;
- h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
- In-Reply-To:Content-Type;
- b=oV6KL3wfUOPbGOdbjuOf5EF//VcuKhP7PUDsj/n/z9rAZm8D3rnVrHggfZkzczNoS
- qdad05x+E0V69zCIiJeT5FKGZWxCNrRzfEZIemis6t4MexA/7X5tJcR5cQw2VjuvHl
- E6nHyezDC1hwHbO8NzP5prxbyRwxcRgayoTqIoJV9jNLaY9WEMx0kCNq/IwbZbIfTY
- L9dKgUkkuitWEiWGp+WAwJSCp7fo8Xu3ExHd9K9XpeBBdmXS47Wu9fjuoOWavJY8Xi
- jDinUUXr4hh4cNx6NNNgcvIuueehY0lwrTDoCdWmRjTMwzzq4Dh0aSkoSRbApwuhK3
- xJLTfDxlvuVLA==
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-aa665246a3cso184097366b.0
- for <u-boot@lists.denx.de>; Fri, 03 Jan 2025 03:22:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735903374; x=1736508174;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/tD4A083u92Fp5hULCrU4rCeg/tmndM2/lL4Ng5oJEY=;
- b=SjRSX3Rf/tNQCc+T2v+dznsh0yEuOePTAcJw0qPNn5i+IwibX83R4f1qqnJQ9pvc00
- vxzG62KUdH/Fc9qHVpPwVumisoSwF5i2AavwWHHCC3jrNCAYHJmKW4DOjTDnb7PP5JOJ
- jW1MuU9XISnQvn2MoBLw64ZkqdrVZLm/Yh5uBXfKpXDvj8hlYxJzSMfrZJ3YdQ3++Udx
- N7JB4f7vKwpevVD+KL3CxqLB9BKlSYTv80rtIc/DOpEHh1jrdIgnImEKMRPXOVGHBz4X
- SQxydUxqHOSa0mV9Z2mmKGzJToIyzE6Ugz7KCP1E+2f7wMhcb4MZdvtytnsGl9KCj87S
- Glrg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU0xozvPqg75KwRU6n+hI0LpPwnaibSUjcl/LBXWfPVvOuOc+/zCGd5KMhCKAhAW9ZdTeqhyLs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFs6fms1QepUcbaMKQIiDEe54DEvAv+zXMjc6xTt3uhSiGnHUD
- 0pwb7tjqfAPVYcAkz73WzrTkk5caHVBaEgqj7y/FNB87CuzRIte7cSn7sR/y1MozFC3cfT5FdYs
- FPZ7xpkNKHiD1Ib3GBfWMFB00HK5beMipU5viMcKnhl962zpFNH8bbCblF906gQEF30ozR68CQ0
- A=
-X-Gm-Gg: ASbGncsYOewbfYSb9HqpNgw0gOCt4A3fd1gx7cx+gpX8caD4h7Obvc8qLF6yQb5bzkq
- BkQImgIKiSAJfY/TVjBxQauD3NOLpMIAPARQ3h0TJJslQH4T81ad5SBRyxl8VUnCKJY0U6wcb51
- vl79wI6fCiBchZbNP7C0sgCY9xN9VIuc/NhNun3oFKwaAG7NLfYqLxK6vXvVtE9EhOKIlcvxPyq
- wpIuOhYvojg/fgHv3DZsDN9/a44BiIRk1sPy/0bhzoLbUgAmnq2OIXXfzI9LHNzNU65cTDVxcm9
- +7GszW9UqaoaIqlCQfkeEKwgpxP9JEVVxUaWvekPag6d+QeK
-X-Received: by 2002:a17:907:3e90:b0:aa6:abb2:be12 with SMTP id
- a640c23a62f3a-aac3354ff4dmr3405993966b.37.1735903374659; 
- Fri, 03 Jan 2025 03:22:54 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEil53wG7EOaUYwV7o3kV9sIijF6KlxHREWl3my/sXFrbFIfZVLU2VqZjCIsJi0WClbjfvQ+A==
-X-Received: by 2002:a17:907:3e90:b0:aa6:abb2:be12 with SMTP id
- a640c23a62f3a-aac3354ff4dmr3405992866b.37.1735903374277; 
- Fri, 03 Jan 2025 03:22:54 -0800 (PST)
-Received: from ?IPV6:2a02:3035:6e0:45ea:1404:1d92:3f16:4f2b?
- ([2a02:3035:6e0:45ea:1404:1d92:3f16:4f2b])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aaf5c6bdb1dsm550585766b.112.2025.01.03.03.22.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Jan 2025 03:22:53 -0800 (PST)
-Message-ID: <944c5d1e-828d-4d7a-919c-bcc56e557675@canonical.com>
-Date: Fri, 3 Jan 2025 12:22:52 +0100
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 503CV0eN006547; Fri, 3 Jan 2025 21:31:04 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ sumit.garg@linaro.org, jonas@kwiboo.se, eugen.hristev@linaro.org,
+ quentin.schulz@cherry.de, michal.simek@amd.com, seb-dev@mail.de,
+ liujianfeng1994@gmail.com, heiko@sntech.de, zhangzj@rock-chips.com,
+ dsimic@manjaro.org, pbrobinson@gmail.com, macromorgan@hotmail.com,
+ cfsworks@gmail.com, sebastian.reichel@collabora.com, cassel@kernel.org,
+ didi.debian@cknow.org, boris.brezillon@collabora.com, jing@jing.rocks,
+ Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+Subject: [PATCH v4 3/5] arm64: dts: rockchip: Add HDMI0 node to rk3588
+Date: Fri,  3 Jan 2025 12:30:50 +0000
+Message-ID: <20250103123052.110350-4-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250103123052.110350-1-naoki@radxa.com>
+References: <20250103123052.110350-1-naoki@radxa.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi: Correct ECPT table GUID
-To: Yang Gang <yanggang@byosoft.com.cn>
-References: <20250103081843.29-1-yanggang@byosoft.com.cn>
-Content-Language: en-US
-Cc: Jose Marinho <jose.marinho@arm.com>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250103081843.29-1-yanggang@byosoft.com.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,40 +58,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/3/25 09:18, Yang Gang wrote:
-> Refer to UEFI specification 2.10:
->    #define EFI_CONFORMANCE_PROFILES_TABLE_GUID \
->    { 0x36122546, 0xf7e7, 0x4c8f, \
->    { 0xbd, 0x9b, 0xeb, 0x85, 0x25, 0xb5, 0x0c, 0x0b }}
-> 
+From: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
 
-Dear Gang,
+Add support for the HDMI0 output port found on RK3588 SoC.
 
-Thanks for pointing to this problem.
+Signed-off-by: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+Link: https://lore.kernel.org/r/20241019-rk3588-hdmi0-dt-v2-1-466cd80e8ff9@collabora.com
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+(cherry picked from commit d7bb71e69f58c1b3665a9f926bf8d3855111bf8e)
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+---
+ .../src/arm64/rockchip/rk3588-base.dtsi       | 41 +++++++++++++++++++
+ 1 file changed, 41 insertions(+)
 
-U-Boot provides script scripts/get_maintainer.pl to find all addressees 
-for a patch.
-
-Fixes: 6b92c1735205 ("efi: Create ECPT table")
-> Signed-off-by: Yang Gang <yanggang@byosoft.com.cn>
-
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-> ---
->   include/efi_api.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/include/efi_api.h b/include/efi_api.h
-> index f07d074f93..d3cf012693 100644
-> --- a/include/efi_api.h
-> +++ b/include/efi_api.h
-> @@ -227,7 +227,7 @@ enum efi_reset_type {
->   		 0x71, 0x94, 0x19, 0x9a, 0xd9, 0x2a)
->   
->   #define EFI_CONFORMANCE_PROFILES_TABLE_GUID \
-> -	EFI_GUID(0x36122546, 0xf7ef, 0x4c8f, 0xbd, 0x9b, \
-> +	EFI_GUID(0x36122546, 0xf7e7, 0x4c8f, 0xbd, 0x9b, \
->   		 0xeb, 0x85, 0x25, 0xb5, 0x0c, 0x0b)
->   
->   #define EFI_CONFORMANCE_PROFILES_TABLE_VERSION 1
+diff --git a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
+index ee99166ebd46..3064ecf1e22a 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
++++ b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
+@@ -1254,6 +1254,47 @@
+ 		status = "disabled";
+ 	};
+ 
++	hdmi0: hdmi@fde80000 {
++		compatible = "rockchip,rk3588-dw-hdmi-qp";
++		reg = <0x0 0xfde80000 0x0 0x20000>;
++		clocks = <&cru PCLK_HDMITX0>,
++			 <&cru CLK_HDMITX0_EARC>,
++			 <&cru CLK_HDMITX0_REF>,
++			 <&cru MCLK_I2S5_8CH_TX>,
++			 <&cru CLK_HDMIHDP0>,
++			 <&cru HCLK_VO1>;
++		clock-names = "pclk", "earc", "ref", "aud", "hdp", "hclk_vo1";
++		interrupts = <GIC_SPI 169 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 170 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 171 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 172 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 360 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "avp", "cec", "earc", "main", "hpd";
++		phys = <&hdptxphy_hdmi0>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&hdmim0_tx0_cec &hdmim0_tx0_hpd
++			     &hdmim0_tx0_scl &hdmim0_tx0_sda>;
++		power-domains = <&power RK3588_PD_VO1>;
++		resets = <&cru SRST_HDMITX0_REF>, <&cru SRST_HDMIHDP0>;
++		reset-names = "ref", "hdp";
++		rockchip,grf = <&sys_grf>;
++		rockchip,vo-grf = <&vo1_grf>;
++		status = "disabled";
++
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			hdmi0_in: port@0 {
++				reg = <0>;
++			};
++
++			hdmi0_out: port@1 {
++				reg = <1>;
++			};
++		};
++	};
++
+ 	qos_gpu_m0: qos@fdf35000 {
+ 		compatible = "rockchip,rk3588-qos", "syscon";
+ 		reg = <0x0 0xfdf35000 0x0 0x20>;
+-- 
+2.43.0
 
