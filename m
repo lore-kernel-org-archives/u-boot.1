@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6E06E7718F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 21:59:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D36E7718F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 21:59:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF6FA8039B;
-	Fri,  3 Jan 2025 22:59:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 348C7803C6;
+	Fri,  3 Jan 2025 22:59:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="0nPrfOC1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hbVcVn1n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6440B8039B; Fri,  3 Jan 2025 22:59:20 +0100 (CET)
+ id CF42680295; Fri,  3 Jan 2025 22:59:21 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65A2480295
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 22:59:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FD948035E
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 22:59:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=4402=T4=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1735941556;
- bh=RXY4Yg+Qe2W7aq785JNMAfQWygPoVSoEBRzGIQTm/90=;
- b=0nPrfOC1kZuW3Dn2BDi7cc0Mc/UGP0015Oizln6hBG0B6xDb0MXTRqDXQRQ5hnvfzvP1S2ljH
- xTWMfblZdpQ8zIck4tnCZpkF605wu45eObwrBsIS1Q+DVmJj87srkI+l3k6lxdsZkDEYnBTX7eI
- XEWlj4nzaR8IJ97YA2hlBctfkzUxzYCRHGR9xGkqzh07mCNcBDz29F7r4B2/iDVEUDWoUYwX4QX
- DUlSVW3rN/P8+9/+F50YI4B2I+q653EvTGdpWQoFzbvNsDeVNw7Rc9LWx9zy8akSJ7KorZ3ErPN
- 9GmDunQ3t+YpHiyTbHP+qz7NWtSkJFyqeQWxSD+pHkTQ==
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1735941557; bh=JVrEO2ruGJmIJTTMe6T7ZoChM1biPPXfUeFUoMULAQE=;
+ b=hbVcVn1n10vrPfTWNHu3a2bJf+CraNWJd8gJpWXEicTXHbzCK3uCTLix29d4M94U0EGV6uunc
+ SdT9DYuyq5PpbOqCwYEM0O0HXClWxC465aTXJVc4th+UjuP0Ui+Ueg3fPBUYIVoir7FuDuNcups
+ QBEyIYDJ1ldunnpHy3qJZ/GepMvbjrdSeYXPHBjc9/DQqkyIkADJQPBJKieRWdGRJxT7nod9x4j
+ PERf262vIE6rKVFyGbgWc9iBnjzrVIg6ifpEuwa2dPv9VF8CpiQEZMCNhE/SuOz6zgNvcnD4Ac8
+ k4ndlMu2V6hAapa4JhprKbhyfexW10FqxolKIRvKGx4g==
 X-ForwardEmail-Version: 0.4.40
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
@@ -47,15 +47,17 @@ To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  u-boot-amlogic@groups.io, u-boot@lists.denx.de,
  Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 0/2] tools: mkimage: Add Amlogic Boot Image type
-Date: Fri,  3 Jan 2025 21:58:57 +0000
-Message-ID: <20250103215904.2590769-1-jonas@kwiboo.se>
+Subject: [PATCH 1/2] tools: mkimage: Add Amlogic Boot Image type
+Date: Fri,  3 Jan 2025 21:58:58 +0000
+Message-ID: <20250103215904.2590769-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250103215904.2590769-1-jonas@kwiboo.se>
+References: <20250103215904.2590769-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 67785dad053722097e3f0ff2
+X-ForwardEmail-ID: 67785db1053722097e3f1003
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,33 +77,345 @@ X-Virus-Status: Clean
 Add support for creating an Amlogic Boot Image that pass CHK in BL1 on
 Amlogic AArch64 SoCs.
 
-The first patch add the new amlimage type. The second patch add a eMMC
-relocation workaround that can be used to generate a boot image that can
-be booted from both eMMC and SD-card on GXBB.
+Images can optionally be signed for secure boot scenario, however
+creation of signed images has not been implemented.
 
-The amlimage type and the eMMC relocation workaround is loosely based on
-my prior work, aml_chksum, a small tool that can write boot image
-headers with updated offsets and checksums, see [1].
+Example of how to use it:
+  # Create an amlogic boot image
+  tools/mkimage -T amlimage -n gxbb -d u-boot-spl.bin u-boot-amlogic.bin
 
-This has been tested booting a very limited U-Boot SPL on boards with
-e.g. S905, S922X, S905X3 and A311D SoCs.
+  # List boot image header information
+  tools/mkimage -l u-boot-amlogic.bin
 
-[1] https://github.com/Kwiboo/u-boot/commit/6d0a17632922077a2e64b13ae1a6bdf0024b718f
+  # Extract amlogic boot image payload
+  tools/dumpimage -T amlimage -o bl2-payload.bin u-boot-amlogic.bin
 
-Jonas Karlman (2):
-  tools: mkimage: Add Amlogic Boot Image type
-  tools: amlimage: Add support for GXBB eMMC header
+Or with binman using something like:
+  binman {
+	u-boot-amlogic {
+		filename = "u-boot-amlogic.bin";
+		pad-byte = <0xff>;
 
- MAINTAINERS                    |   1 +
- boot/image.c                   |   1 +
- include/image.h                |   1 +
- tools/Makefile                 |   1 +
- tools/amlimage-gxbb-relocate.c |  79 +++++++++
- tools/amlimage.c               | 283 +++++++++++++++++++++++++++++++++
- 6 files changed, 366 insertions(+)
- create mode 100644 tools/amlimage-gxbb-relocate.c
+		mkimage {
+			filename = "bl2.bin";
+			args = "-n", "gxbb", "-T", "amlimage";
+
+			u-boot-spl {
+			};
+		};
+	};
+  };
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ MAINTAINERS      |   1 +
+ boot/image.c     |   1 +
+ include/image.h  |   1 +
+ tools/Makefile   |   1 +
+ tools/amlimage.c | 246 +++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 250 insertions(+)
  create mode 100644 tools/amlimage.c
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index ba31f86feb6d..6a92daa489da 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -181,6 +181,7 @@ F:	drivers/video/meson/
+ F:	drivers/watchdog/meson_gxbb_wdt.c
+ F:	include/configs/meson64.h
+ F:	include/configs/meson64_android.h
++F:	tools/amlimage*
+ F:	doc/board/amlogic/
+ N:	meson
+ 
+diff --git a/boot/image.c b/boot/image.c
+index abac254e0264..814ad182a525 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -183,6 +183,7 @@ static const table_entry_t uimage_type[] = {
+ 	{	IH_TYPE_FDT_LEGACY, "fdt_legacy", "legacy Image with Flat Device Tree ", },
+ 	{	IH_TYPE_RENESAS_SPKG, "spkgimage", "Renesas SPKG Image" },
+ 	{	IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
++	{	IH_TYPE_AMLIMAGE,   "amlimage",   "Amlogic Boot Image" },
+ 	{	-1,		    "",		  "",			},
+ };
+ 
+diff --git a/include/image.h b/include/image.h
+index 0a61dfd556c5..acad8997d190 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -232,6 +232,7 @@ enum image_type_t {
+ 	IH_TYPE_FDT_LEGACY,		/* Binary Flat Device Tree Blob	in a Legacy Image */
+ 	IH_TYPE_RENESAS_SPKG,		/* Renesas SPKG image */
+ 	IH_TYPE_STARFIVE_SPL,		/* StarFive SPL image */
++	IH_TYPE_AMLIMAGE,		/* Amlogic Boot Image */
+ 
+ 	IH_TYPE_COUNT,			/* Number of image types */
+ };
+diff --git a/tools/Makefile b/tools/Makefile
+index ee08a9675df8..0dbc429d6419 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -100,6 +100,7 @@ ROCKCHIP_OBS = generated/lib/rc4.o rkcommon.o rkimage.o rksd.o rkspi.o
+ 
+ # common objs for dumpimage and mkimage
+ dumpimage-mkimage-objs := aisimage.o \
++			amlimage.o \
+ 			atmelimage.o \
+ 			$(FIT_OBJS-y) \
+ 			$(FIT_SIG_OBJS-y) \
+diff --git a/tools/amlimage.c b/tools/amlimage.c
+new file mode 100644
+index 000000000000..9af795602e69
+--- /dev/null
++++ b/tools/amlimage.c
+@@ -0,0 +1,246 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++// Copyright Contributors to the U-Boot project.
++
++#include "imagetool.h"
++#include <u-boot/sha256.h>
++
++/*
++ * Image contain data in the following order:
++ *  Nonce	16 byte
++ *  Header	64 byte
++ *  Digest	32 byte
++ *  Padding	align up to 4K
++ *  Payload
++ */
++
++#define HEADER_MAGIC		0x4c4d4140	/* @AML */
++#define HEADER_OFFSET		0x10		/* 16 */
++#define HEADER_SIZE		0x40		/* 64 */
++#define PAYLOAD_OFFSET		0x1000		/* 4096 */
++
++struct amlimage_header {
++	uint32_t magic;
++	uint32_t total_size;
++	uint8_t header_size;
++	uint8_t root_key_index;
++	uint8_t version_major;
++	uint8_t version_minor;
++	uint32_t padding1;
++	uint32_t digest_type;
++	uint32_t digest_offset;
++	uint32_t digest_size;
++	uint32_t data_offset;
++	uint32_t key_type;
++	uint32_t key_offset;
++	uint32_t key_size;
++	uint32_t data_size;
++	uint32_t payload_type;
++	uint32_t payload_offset;
++	uint32_t payload_size;
++	uint32_t padding2;
++} __packed;
++
++struct amlimage_variant {
++	const char *name;
++	const struct amlimage_header hdr;
++};
++
++#define VARIANT(name, major, minor, size)	\
++	{ name, { .magic = HEADER_MAGIC, .header_size = HEADER_SIZE, \
++		  .version_major = major, .version_minor = minor, \
++		  .payload_size = size, } }
++
++static const struct amlimage_variant variants[] = {
++	VARIANT("gxbb", 1, 0, 0xb000),
++	VARIANT("gxl",  1, 1, 0xb000),
++	VARIANT("gxm",  1, 1, 0xb000),
++	VARIANT("axg",  1, 1, 0xb000),
++	VARIANT("g12a", 1, 1, 0xf000),
++	VARIANT("g12b", 1, 1, 0xf000),
++	VARIANT("sm1",  1, 1, 0xf000),
++};
++
++static const struct amlimage_variant *amlimage_get_variant(const char *name)
++{
++	if (!name)
++		return NULL;
++
++	for (int i = 0; i < ARRAY_SIZE(variants); i++)
++		if (!strcmp(name, variants[i].name))
++			return &variants[i];
++
++	return NULL;
++}
++
++static int amlimage_check_params(struct image_tool_params *params)
++{
++	const struct amlimage_variant *variant =
++		amlimage_get_variant(params->imagename);
++	int datafile_size;
++
++	if (params->lflag || params->iflag)
++		return EXIT_SUCCESS;
++
++	if (!variant) {
++		fprintf(stderr, "%s: unsupported image name: %s\n",
++			params->cmdname, params->imagename);
++		exit(EXIT_FAILURE);
++	}
++
++	datafile_size = imagetool_get_filesize(params, params->datafile);
++	if (datafile_size < 0) {
++		exit(EXIT_FAILURE);
++	} else if (datafile_size > variant->hdr.payload_size) {
++		fprintf(stderr, "%s: datafile is too large (%#x > %#x)\n",
++			params->cmdname, datafile_size,
++			variant->hdr.payload_size);
++		exit(EXIT_FAILURE);
++	}
++
++	return EXIT_SUCCESS;
++}
++
++static int amlimage_verify_header(unsigned char *buf, int size,
++				  struct image_tool_params *params)
++{
++	const struct amlimage_header *hdr = (void *)buf + HEADER_OFFSET;
++
++	if (size >= HEADER_OFFSET + HEADER_SIZE + SHA256_SUM_LEN &&
++	    hdr->magic == HEADER_MAGIC && hdr->header_size == HEADER_SIZE)
++		return 0;
++
++	return -1;
++}
++
++static void amlimage_print_header(const void *buf,
++				  struct image_tool_params *params)
++{
++	const struct amlimage_header *hdr = buf + HEADER_OFFSET;
++	uint8_t digest[SHA256_SUM_LEN];
++	sha256_context ctx;
++	bool valid;
++
++	printf("Amlogic Boot Image %" PRIu8 ".%" PRIu8 "\n",
++	       hdr->version_major, hdr->version_minor);
++	printf("Total size: %" PRIu32 "\n", hdr->total_size);
++	printf("Digest %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
++	       hdr->digest_type, hdr->digest_size, hdr->digest_offset);
++	printf("Key %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
++	       hdr->key_type, hdr->key_size, hdr->key_offset);
++	printf("Payload %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
++	       hdr->payload_type, hdr->payload_size, hdr->payload_offset);
++
++	sha256_starts(&ctx);
++	/* Header and data is used as input for sha256 digest */
++	sha256_update(&ctx, (void *)hdr, hdr->header_size);
++	sha256_update(&ctx, (void *)hdr + hdr->data_offset, hdr->data_size);
++	sha256_finish(&ctx, digest);
++
++	valid = !memcmp((void *)hdr + hdr->digest_offset,
++			digest, SHA256_SUM_LEN);
++
++	printf("Data: %" PRIu32 " @ 0x%" PRIx32 " - %s\n",
++	       hdr->data_size, hdr->data_offset, valid ? "OK" : "BAD");
++}
++
++static void amlimage_set_header(void *buf, struct stat *sbuf, int ifd,
++				struct image_tool_params *params)
++{
++	struct amlimage_header *hdr = buf + HEADER_OFFSET;
++	sha256_context ctx;
++
++	/* Use header size as initial size */
++	hdr->total_size = hdr->header_size;
++
++	/* Use sha256 digest (normal boot) */
++	hdr->digest_type = 0;
++	/* The sha256 digest is stored directly following the header */
++	hdr->digest_offset = hdr->total_size;
++	/* Unknown if this is used as block size instead of digest size */
++	hdr->digest_size = 512;
++	hdr->total_size += hdr->digest_size;
++
++	/* Use key as padding so that payload ends up 4K aligned in TZRAM */
++	hdr->key_type = 0;
++	hdr->key_offset = hdr->total_size;
++	hdr->key_size = PAYLOAD_OFFSET - HEADER_OFFSET - hdr->key_offset;
++	hdr->total_size += hdr->key_size;
++
++	/* With padding above payload will have a 0x1000 offset in TZRAM */
++	hdr->payload_type = 0;
++	hdr->payload_offset = hdr->total_size;
++	/* Payload size has already been copied from the variant header */
++	hdr->total_size += hdr->payload_size;
++
++	/* Set the data range to be used as input for sha256 digest */
++	hdr->data_offset = hdr->digest_offset + SHA256_SUM_LEN;
++	hdr->data_size = hdr->total_size - hdr->data_offset;
++
++	sha256_starts(&ctx);
++	/* Header and data is used as input for sha256 digest */
++	sha256_update(&ctx, (void *)hdr, hdr->header_size);
++	sha256_update(&ctx, (void *)hdr + hdr->data_offset, hdr->data_size);
++	/* Write sha256 digest to the 32 bytes directly following the header */
++	sha256_finish(&ctx, (void *)hdr + hdr->digest_offset);
++}
++
++static int amlimage_extract_subimage(void *buf,
++				     struct image_tool_params *params)
++{
++	const struct amlimage_header *hdr = buf + HEADER_OFFSET;
++
++	/* Save payload as the subimage */
++	return imagetool_save_subimage(params->outfile,
++				       (ulong)hdr + hdr->payload_offset,
++				       hdr->payload_size);
++}
++
++static int amlimage_check_image_type(uint8_t type)
++{
++	if (type == IH_TYPE_AMLIMAGE)
++		return EXIT_SUCCESS;
++
++	return EXIT_FAILURE;
++}
++
++static int amlimage_vrec_header(struct image_tool_params *params,
++				struct image_type_params *tparams)
++{
++	const struct amlimage_variant *variant =
++		amlimage_get_variant(params->imagename);
++	const struct amlimage_header *hdr = &variant->hdr;
++
++	/* Use payload offset as header size, datafile will be appended */
++	tparams->header_size = PAYLOAD_OFFSET;
++
++	tparams->hdr = calloc(1, tparams->header_size);
++	if (!tparams->hdr) {
++		fprintf(stderr, "%s: Can't alloc header: %s\n",
++			params->cmdname, strerror(errno));
++		exit(EXIT_FAILURE);
++	}
++
++	/* Start with a copy of the variant header */
++	memcpy(tparams->hdr + HEADER_OFFSET, hdr, hdr->header_size);
++
++	/* Pad up to payload size of the variant header */
++	return hdr->payload_size - params->file_size;
++}
++
++/*
++ * amlimage parameters
++ */
++U_BOOT_IMAGE_TYPE(
++	amlimage,
++	"Amlogic Boot Image",
++	0,
++	NULL,
++	amlimage_check_params,
++	amlimage_verify_header,
++	amlimage_print_header,
++	amlimage_set_header,
++	amlimage_extract_subimage,
++	amlimage_check_image_type,
++	NULL,
++	amlimage_vrec_header
++);
 -- 
 2.47.1
 
