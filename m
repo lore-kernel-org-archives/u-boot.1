@@ -4,26 +4,26 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ECBCE7718F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 12:32:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C79E7718F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 12:32:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CADB803D2;
+	by phobos.denx.de (Postfix) with ESMTP id ADD01803F5;
 	Fri,  3 Jan 2025 13:32:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E68E803CF; Fri,  3 Jan 2025 13:32:11 +0100 (CET)
+ id 318518034E; Fri,  3 Jan 2025 13:32:11 +0100 (CET)
 Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 166688034E
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 13:32:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B460803AB
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 13:32:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
 Received: from secure.fukaumi.org ([10.0.0.2])
  by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 503CV0eL006547; Fri, 3 Jan 2025 21:31:03 +0900
+ 503CV0eP006547; Fri, 3 Jan 2025 21:31:04 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
@@ -34,10 +34,9 @@ Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
  cfsworks@gmail.com, sebastian.reichel@collabora.com, cassel@kernel.org,
  didi.debian@cknow.org, boris.brezillon@collabora.com, jing@jing.rocks,
  FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH v4 1/5] arm64: dts: rockchip: enable PCIe on M.2 E key for
- Radxa ROCK 5A
-Date: Fri,  3 Jan 2025 12:30:48 +0000
-Message-ID: <20250103123052.110350-2-naoki@radxa.com>
+Subject: [PATCH v4 5/5] rockchip: Add support for Radxa ROCK 5C
+Date: Fri,  3 Jan 2025 12:30:52 +0000
+Message-ID: <20250103123052.110350-6-naoki@radxa.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250103123052.110350-1-naoki@radxa.com>
 References: <20250103123052.110350-1-naoki@radxa.com>
@@ -59,114 +58,245 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable pcie2x1l2 and related combphy/regulator routed to M.2 E key
-connector on Radxa ROCK 5A.
+Radxa ROCK 5C[1] is a Rockchip RK3588S2 based single board computer.
 
-Tested with Radxa Wireless Module A8:
-
-$ lspci
-0004:40:00.0 PCI bridge: Rockchip Electronics Co., Ltd RK3588 (rev 01)
-0004:41:00.0 Network controller: Realtek Semiconductor Co., Ltd. RTL8852BE PCIe 802.11ax Wireless Network Controller
-
-$ ip l
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-2: end0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
-    link/ether c2:58:fc:70:55:86 brd ff:ff:ff:ff:ff:ff
-3: wlP4p65s0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
-    link/ether 2c:05:47:65:5b:ed brd ff:ff:ff:ff:ff:ff
-
-$ lsusb
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 001 Device 002: ID 1a40:0101 Terminus Technology Inc. Hub
-Bus 001 Device 003: ID 0bda:b85b Realtek Semiconductor Corp. Bluetooth Radio
-Bus 002 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
-Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
-Bus 004 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 005 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 006 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-Bus 006 Device 002: ID 0789:0336 Logitec Corp. LMD USB Device
-Bus 007 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 008 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-
-$ hciconfig
-hci0:	Type: Primary  Bus: USB
-	BD Address: 2C:05:47:65:5B:EE  ACL MTU: 1021:6  SCO MTU: 255:12
-	UP RUNNING
-	RX bytes:2698 acl:0 sco:0 events:329 errors:0
-	TX bytes:69393 acl:0 sco:0 commands:329 errors:0
+[1] https://radxa.com/products/rock5/5c
 
 Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Link: https://lore.kernel.org/r/20240826080456.525-1-naoki@radxa.com
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-(cherry picked from commit b728d4c51f0ce9207daf502f3a85073785c46319)
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
- .../src/arm64/rockchip/rk3588s-rock-5a.dts    | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
+Changes in v4:
+- ROCK 5A section was removed and most of it rewritten for ROCK 5C
+- Trivial changes
+Changes in v3:
+- Fix compile error
+Changes in v2:
+- arch/arm/dts/rk3588s-rock-5-u-boot.dtsi: remove unused node
+- include/configs/rock-5-rk3588s.h: fix include order
+---
+ arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi | 11 ++++
+ arch/arm/mach-rockchip/rk3588/Kconfig    | 21 ++++++
+ board/radxa/rock-5c-rk3588s/Kconfig      | 12 ++++
+ board/radxa/rock-5c-rk3588s/MAINTAINERS  |  7 ++
+ configs/rock-5c-rk3588s_defconfig        | 84 ++++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst          |  1 +
+ include/configs/rock-5c-rk3588s.h        | 15 +++++
+ 7 files changed, 151 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+ create mode 100644 board/radxa/rock-5c-rk3588s/Kconfig
+ create mode 100644 board/radxa/rock-5c-rk3588s/MAINTAINERS
+ create mode 100644 configs/rock-5c-rk3588s_defconfig
+ create mode 100644 include/configs/rock-5c-rk3588s.h
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
-index 03ed48246d36..a385e0991990 100644
---- a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
-@@ -65,6 +65,18 @@
- 		regulator-max-microvolt = <12000000>;
- 	};
- 
-+	vcc3v3_wf: vcc3v3-wf-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc3v3_wf";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		enable-active-high;
-+		gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
-+		pinctrl-0 = <&pow_en>;
-+		pinctrl-names = "default";
-+		vin-supply = <&vcc5v0_sys>;
-+	};
+diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+new file mode 100644
+index 000000000000..1dc574c2f219
+--- /dev/null
++++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2024-2025 Radxa Computer (Shenzhen) Co., Ltd.
++ */
 +
- 	vcc5v0_host: vcc5v0-host-regulator {
- 		compatible = "regulator-fixed";
- 		regulator-name = "vcc5v0_host";
-@@ -114,6 +126,10 @@
- 	};
- };
- 
-+&combphy0_ps {
-+	status = "okay";
++#include "rk3588s-u-boot.dtsi"
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
 +};
-+
- &combphy2_psu {
- 	status = "okay";
- };
-@@ -293,6 +309,14 @@
- 	};
- };
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index b5a0e624a532..448cfaf0d60d 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -260,6 +260,26 @@ config TARGET_ROCK_5_ITX_RK3588
+ 	  Front-panel connectors for audio and case-power, -leds
+ 	  Powered by either 12V, ATX power-supply or PoE
  
-+&pcie2x1l2 {
-+	pinctrl-0 = <&pcie20x1m0_pins>;
-+	pinctrl-names = "default";
-+	reset-gpios = <&gpio3 RK_PD1 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&vcc3v3_wf>;
-+	status = "okay";
-+};
++config TARGET_ROCK_5C_RK3588S
++	bool "Radxa ROCK 5C RK3588S2 board"
++	select BOARD_LATE_INIT
++	help
++	  Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
 +
- &pinctrl {
- 	leds {
- 		io_led: io-led {
-@@ -300,6 +324,12 @@
- 		};
- 	};
- 
-+	pcie {
-+		pow_en: pow-en {
-+			rockchip,pins = <0 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
++	  Specification:
 +
- 	power {
- 		vcc_5v0_en: vcc-5v0-en {
- 			rockchip,pins = <4 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
++	  Quad A76 and Quad A55 CPU
++	  6 TOPS NPU
++	  up to 32GB LPDDR4x RAM
++	  eMMC / SPI flash connector
++	  Micro SD Card slot
++	  Gigabit ethernet port (supports PoE with add-on PoE HAT)
++	  WiFi6 / BT5.4
++	  1x USB 3.0 Type-A HOST port
++	  1x USB 3.0 Type-A OTG port
++	  2x USB 2.0 Type-A HOST port
++	  1x USB Type-C 5V power port
++
+ config TARGET_SIGE7_RK3588
+ 	bool "ArmSoM Sige7 RK3588 board"
+ 	select BOARD_LATE_INIT
+@@ -398,6 +418,7 @@ source "board/turing/turing-rk1-rk3588/Kconfig"
+ source "board/radxa/rock5a-rk3588s/Kconfig"
+ source "board/radxa/rock5b-rk3588/Kconfig"
+ source "board/radxa/rock-5-itx-rk3588/Kconfig"
++source "board/radxa/rock-5c-rk3588s/Kconfig"
+ source "board/rockchip/evb_rk3588/Kconfig"
+ source "board/rockchip/toybrick_rk3588/Kconfig"
+ source "board/theobroma-systems/jaguar_rk3588/Kconfig"
+diff --git a/board/radxa/rock-5c-rk3588s/Kconfig b/board/radxa/rock-5c-rk3588s/Kconfig
+new file mode 100644
+index 000000000000..ec964bdcb934
+--- /dev/null
++++ b/board/radxa/rock-5c-rk3588s/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_ROCK_5C_RK3588S
++
++config SYS_BOARD
++	default "rock-5c-rk3588s"
++
++config SYS_VENDOR
++	default "radxa"
++
++config SYS_CONFIG_NAME
++	default "rock-5c-rk3588s"
++
++endif
+diff --git a/board/radxa/rock-5c-rk3588s/MAINTAINERS b/board/radxa/rock-5c-rk3588s/MAINTAINERS
+new file mode 100644
+index 000000000000..17183c739d67
+--- /dev/null
++++ b/board/radxa/rock-5c-rk3588s/MAINTAINERS
+@@ -0,0 +1,7 @@
++ROCK-5C-RK3588S
++M:	FUKAUMI Naoki <naoki@radxa.com>
++S:	Maintained
++F:	arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
++F:	board/radxa/rock-5c-rk3588s/
++F:	configs/rock-5c-rk3588s_defconfig
++F:	include/configs/rock-5c-rk3588s.h
+diff --git a/configs/rock-5c-rk3588s_defconfig b/configs/rock-5c-rk3588s_defconfig
+new file mode 100644
+index 000000000000..59f9f25edcb8
+--- /dev/null
++++ b/configs/rock-5c-rk3588s_defconfig
+@@ -0,0 +1,84 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5c"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_ROCK_5C_RK3588S=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5c.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ATF=y
++CONFIG_CMD_ADC=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SCSI_AHCI=y
++CONFIG_AHCI_PCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_RTL8169=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 9bab86d23479..dbe199a13c46 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -141,6 +141,7 @@ List of mainline supported Rockchip boards:
+      - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
+      - Radxa ROCK 5A (rock5a-rk3588s)
+      - Radxa ROCK 5B (rock5b-rk3588)
++     - Radxa ROCK 5C (rock-5c-rk3588s)
+      - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
+      - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
+      - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
+diff --git a/include/configs/rock-5c-rk3588s.h b/include/configs/rock-5c-rk3588s.h
+new file mode 100644
+index 000000000000..0fd76c96f0ca
+--- /dev/null
++++ b/include/configs/rock-5c-rk3588s.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024-2025 Radxa Computer (Shenzhen) Co., Ltd.
++ */
++
++#ifndef __ROCK_5C_RK3588S_H
++#define __ROCK_5C_RK3588S_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++#include <configs/rk3588_common.h>
++
++#endif /* __ROCK_5C_RK3588S_H */
 -- 
 2.43.0
 
