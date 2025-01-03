@@ -4,58 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D0D9E77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 03:28:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 397ABE77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 03:35:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A25598031D;
-	Fri,  3 Jan 2025 04:28:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F68880107;
+	Fri,  3 Jan 2025 04:35:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="CR3w/NNN";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ENURLuA2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7408580374; Fri,  3 Jan 2025 04:28:54 +0100 (CET)
-Received: from mail-m49212.qiye.163.com (mail-m49212.qiye.163.com
- [45.254.49.212])
+ id D331780107; Fri,  3 Jan 2025 04:35:23 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8153B800D7
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 04:28:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 636C9800D7
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 04:35:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 791f362c;
- Fri, 3 Jan 2025 11:28:45 +0800 (GMT+08:00)
-Message-ID: <885024ba-cbb7-43d9-ac0c-8cb6ea9c33b9@rock-chips.com>
-Date: Fri, 3 Jan 2025 11:28:44 +0800
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 87A8F40FAA
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 03:35:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1735875320;
+ bh=ZHkLKNRArVSPuMJeozWfXFCRIWwuRCV6+3y00hWfvEc=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=ENURLuA2RijmW+4dZXAmQS0gOa7ciBgzUnFTZa7SZO34Yudn3P+BI6M6hT4FsVRJy
+ 3i/dVyMjZRqswhUbw3l4QFYesYdIbp+HDUnw2Bgc/hQWeJwJAfhC//856b9ixGYBfn
+ 6ycJ8kfCW7hP3/hPqGEwXwiqa6mQpezV2PUx2eJ/sXbMJbyJItRGAoNw8O5N7d/R1x
+ 46GhS58JarMF8Y+Mx7DJ3IGLl0Q93K2B7KvXPS9Fa3f+iUxNltg35NeIcB74DJQJC2
+ w+fw3RnfdeO16iwbb3rT7y8sHSKfeBZzC9tdPLSDCaIjdkapwcMNWNrOos+5CI97Ho
+ Th2bIWNpNBobg==
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-2f2a9f056a8so16598050a91.2
+ for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 19:35:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735875319; x=1736480119;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZHkLKNRArVSPuMJeozWfXFCRIWwuRCV6+3y00hWfvEc=;
+ b=tNO8HPX3IX1N3b8X1MXSviHZgjIUk/8ZeTWNEupW+oFIFclayE2pyqX+UnyyRFjfw4
+ v4rIGNVSAW8z8CnX1Z2bJ2zIfFimlDXICRYo3yc85zWcPjLq+kT3Y6JtX/FKzhkL4JTy
+ W+FOiWH6c2KAHxP+hjLlj+UfH9cb4Glb9/ijyDz9+jzh7FPLPL2VI1axkz8G/HnKN/VH
+ Mnbyb2whxQPbIFuNTNbHx+LQudDT7Ts5vCZFtQIYuWoFtFgWH/zQJRWDW/IoLyfGhgp7
+ 8n1e/JrHVOt+Hwfb9j7NwSsrwYPf3tx9YuvvhBr5ljz6iLnvSteq4z7LpEmmbwNKtpZJ
+ 5J7Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXMpwdqyn2OsrhcJpUxQyHZ58E6zWfmcUJjljqe3fqol8gNFOZn2ktIYIQFjKiEVPtZH+hJiGM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwANmU6Vt3RxOyFR+5mXeYIThrj9lukEM95uagFSjRhVyUONj7K
+ NOU4RS1hdLEqYR3pS2o2LXKiSAwuv3Y8nbX0Mhr0q0Bc/3WluICRDXPWiuhx+xvnJScX+l9nSQO
+ W/cXW4xNNGV6o2iI1IiwRwrwUOt24bZg3GuwrzpOrmFsQCbTdzwdPLQ3okuQ6lGFJDqZnZ8qXW7
+ GQv5EhE4eJ/YxWO9s+xsix0n0M3YOtL4EFUd9qJB24gQ==
+X-Gm-Gg: ASbGncsDtfzMAz8IgHxNI9wASCxVE4Ju7dQA1oELxyv2YCdVD5EmxWLrzTfYGAHZ3XZ
+ 1/PTzU8bWXiv22WpsR1o8ujJ2Oj9XlD21w2rfLTQ=
+X-Received: by 2002:a17:90b:53c7:b0:2ee:b2e6:4275 with SMTP id
+ 98e67ed59e1d1-2f452ee7147mr60016227a91.26.1735875319167; 
+ Thu, 02 Jan 2025 19:35:19 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHaG3ilZUZTuTj0hqfkqLto60wvsJ/k+FzkoELgK2i6vtg2w9DZnI89H55oNLDr7xhNZlXnK//oxkapzngHwKs=
+X-Received: by 2002:a17:90b:53c7:b0:2ee:b2e6:4275 with SMTP id
+ 98e67ed59e1d1-2f452ee7147mr60016212a91.26.1735875318795; Thu, 02 Jan 2025
+ 19:35:18 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] arm: dts: rockchip: add rk3318 A95X Z2 board
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
-References: <d0bcf1f6-3698-4e5f-8f2c-fcb99bde7602@gmail.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <d0bcf1f6-3698-4e5f-8f2c-fcb99bde7602@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU1OSFYdSUJNTkwYTEpJTE5WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a942a3552fc03afkunm791f362c
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MzY6Fgw4AzIXPS08EUkfPxwo
- LSJPFApVSlVKTEhOQ0xPQklMTk9DVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNSk1INwY+
-DKIM-Signature: a=rsa-sha256;
- b=CR3w/NNNP4f98/HNSIHytO4vJkWAfWXDVEx4EX3UQEHThLvWjOMdJGtaLXUrB3OwOCuFdGIsy7/5aHNe7cOt+Zta3RZv78VEo6e8E/OJlmZmb6AedmLAEiWi7/EIjAvnWjecBnskpXUCSajHZSMMl89rAiRs4HcY7pGIowMirTY=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=SXF5xC5YcyPsvC2SeQCtTz2o1ckQtEZ4ziDU0f8OkA4=;
- h=date:mime-version:subject:message-id:from;
+References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTggvw3ioB=r3yNcjFCZxU612AOtS2B+tBNE1Lf+TABQQw@mail.gmail.com>
+In-Reply-To: <CAFLszTggvw3ioB=r3yNcjFCZxU612AOtS2B+tBNE1Lf+TABQQw@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Fri, 3 Jan 2025 04:35:07 +0100
+Message-ID: <CAM=mAOm9pXOuhZTyDVWUjTToghRdxRh60ainuaHfZJQNjy6pYg@mail.gmail.com>
+Subject: Re: [PATCH 0/4] efi_loader: enable running the debug UEFI shell
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,198 +104,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Simon Glass <sjg@chromium.org> schrieb am Fr., 3. Jan. 2025, 02:40:
 
-On 2024/12/8 23:36, Johan Jonker wrote:
-> The rk3318 A95X Z2 boards are sold as TV box.
-> No further documentation is given, but from the dts files
-> extracted it seems that the rk3318 processor is simulair
-> to the rk3328. Included is an extra dtsi file for U-Boot
-> specific properties. The DT is already located in
-> the /dts/upstream directory.
+> Hi Heinrich,
 >
-> Features:
+> On Fri, 3 Jan 2025 at 07:11, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > Currently running the SCT fails on x86. The EFI shell overrides U-Boot's
+> > Simple Text Output Protocol. When ConsoleLoggerPrintWithPageBreak() is
+> > invoked with ConsoleInfo == NULL a crash occurs.
+> >
+> > Debugging requires running the debug version of the UEFI shell.
+> > We can use `add-symbol-file` in gdb to point to
+> >
+> Build/Shell/DEBUG_GCC/X64/ShellPkg/Application/Shell/Shell/DEBUG/Shell.dll
+> > and the load address of Shell.efi.
+> >
+> > The debug version of the UEFI shell checks several requirements and
+> > fails to run without them:
+> >
+> > * HOB list (only on x86)
+> > * HII configuration protocol
+> > * DXE services table
+> >
+> > Implement the missing requirements.
+> >
+> > When starting image add the image load address to the debug output.
+> >
+> > Heinrich Schuchardt (4):
+> >   efi_loader: implement a HOB list
+> >   efi_loader: build with HII configuration protocol
+> >   efi_loader: install DXE services table
+> >   efi_loader: print image load address in StartImage
+> >
+> >  include/efi_dxe.h               |  54 ++++++++++
+> >  include/efi_hob.h               |  32 ++++++
+> >  include/efi_loader.h            |  16 +++
+> >  lib/efi_loader/Kconfig          |  15 +++
+> >  lib/efi_loader/Makefile         |   4 +-
+> >  lib/efi_loader/efi_boottime.c   |   7 +-
+> >  lib/efi_loader/efi_dxe.c        | 176 ++++++++++++++++++++++++++++++++
+> >  lib/efi_loader/efi_hii_config.c |   4 -
+> >  lib/efi_loader/efi_hob.c        |  33 ++++++
+> >  lib/efi_loader/efi_root_node.c  |   3 +
+> >  lib/efi_loader/efi_setup.c      |  13 +++
+> >  11 files changed, 349 insertions(+), 8 deletions(-)
+> >  create mode 100644 include/efi_dxe.h
+> >  create mode 100644 include/efi_hob.h
+> >  create mode 100644 lib/efi_loader/efi_dxe.c
+> >  create mode 100644 lib/efi_loader/efi_hob.c
 >
-> CPU: RK3318 Quad-Core Cortex-A53
-> GPU: Mali-450
-> RAM: 2/4GB DDR3
-> ROM: EMMC 16/32/64GB
-> HDMI: HDMI 2.0a for 4k@60Hz
-> Ethernet: 10/100M standard RJ-45
-> WiFi: 2.4G+5G WIFI, 802.11 b/g/n
-> Bluetooth: 4.0
-> 1 x USB 3.0
-> 1 x USB 2.0
-> 1 x Micro SD card slot
-> 1 x SPDIF
-> 1 x AV
-> 1 x DC IN
+> Please can you document how to actually run UEFI like this? Also, is
+> it possible to add a test for this new code?
 >
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Thanks,
-- Kever
-> ---
->   arch/arm/dts/rk3318-a95x-z2-u-boot.dtsi |  9 +++
->   board/rockchip/evb_rk3328/MAINTAINERS   |  6 ++
->   configs/a95x-z2-rk3318_defconfig        | 94 +++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst         |  4 +-
->   4 files changed, 112 insertions(+), 1 deletion(-)
->   create mode 100644 arch/arm/dts/rk3318-a95x-z2-u-boot.dtsi
->   create mode 100644 configs/a95x-z2-rk3318_defconfig
->
-> diff --git a/arch/arm/dts/rk3318-a95x-z2-u-boot.dtsi b/arch/arm/dts/rk3318-a95x-z2-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..e21fd6e07df7
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3318-a95x-z2-u-boot.dtsi
-> @@ -0,0 +1,9 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +#include "rk3328-u-boot.dtsi"
-> +#include "rk3328-sdram-ddr3-666.dtsi"
-> +
-> +&usb20_otg {
-> +	dr_mode = "otg";
-> +};
-> +
-> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
-> index 5f81be55b8e0..fe642a56a690 100644
-> --- a/board/rockchip/evb_rk3328/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
-> @@ -1,3 +1,9 @@
-> +A95X-Z2-RK3318
-> +M:      Johan Jonker <jbx6244@gmail.com>
-> +S:      Maintained
-> +F:      configs/a95x-z2-rk3318_defconfig
-> +F:      arch/arm/dts/rk3318-a95x-z2-u-boot.dtsi
-> +
->   EVB-RK3328
->   M:      Kever Yang <kever.yang@rock-chips.com>
->   S:      Maintained
-> diff --git a/configs/a95x-z2-rk3318_defconfig b/configs/a95x-z2-rk3318_defconfig
-> new file mode 100644
-> index 000000000000..9cb6a67ad5ae
-> --- /dev/null
-> +++ b/configs/a95x-z2-rk3318_defconfig
-> @@ -0,0 +1,94 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_NR_DRAM_BANKS=1
-> +CONFIG_SF_DEFAULT_SPEED=20000000
-> +CONFIG_ENV_OFFSET=0x3F8000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3318-a95x-z2"
-> +CONFIG_DM_RESET=y
-> +CONFIG_ROCKCHIP_RK3328=y
-> +CONFIG_SYS_LOAD_ADDR=0x800800
-> +CONFIG_DEBUG_UART_BASE=0xFF130000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_DEBUG_UART=y
-> +# CONFIG_ANDROID_BOOT_IMAGE is not set
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3318-a95x-z2.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-> +CONFIG_CMD_BOOTZ=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +# CONFIG_CMD_NET is not set
-> +CONFIG_CMD_TIME=y
-> +CONFIG_CMD_REGULATOR=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_TPL_OF_CONTROL=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_TPL_OF_PLATDATA=y
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SYS_MMC_ENV_DEV=1
-> +CONFIG_TPL_DM=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_REGMAP=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_TPL_REGMAP=y
-> +CONFIG_SYSCON=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_TPL_SYSCON=y
-> +CONFIG_CLK=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_FASTBOOT_BUF_ADDR=0x800800
-> +CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +# CONFIG_NETDEVICES is not set
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PINCTRL=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> +CONFIG_SPL_DM_REGULATOR_FIXED=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_RAM=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_TPL_RAM=y
-> +CONFIG_DM_RNG=y
-> +CONFIG_RNG_ROCKCHIP=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSINFO=y
-> +CONFIG_SYSRESET=y
-> +# CONFIG_TPL_SYSRESET is not set
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DWC2_OTG=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
-> +CONFIG_SPL_TINY_MEMSET=y
-> +CONFIG_TPL_TINY_MEMSET=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 9bab86d23479..ec325c4fe558 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -57,6 +57,8 @@ List of mainline supported Rockchip boards:
->        - Radxa ROCK S0 (rock-s0-rk3308)
->        - Rockchip Evb-RK3308 (evb-rk3308)
->        - Roc-cc-RK3308 (roc-cc-rk3308)
-> +* rk3318
-> +     - A95X Z2 (a95x-z2-rk3318)
->   * rk3326
->        - ODROID-GO Advance (odroid-go2)
->   * rk3328
-> @@ -190,7 +192,7 @@ TPL
->
->   For some SoCs U-Boot sources lack of support to inizialize DRAM.
->   In these cases, to get a fully functional image following :ref:`PackageWithTPLandSPL`, use DDR binary provided by Rockchip rkbin repository as ROCKCHIP_TPL when building U-Boot.
-> -Otherwise, follow :ref:`PackageWithRockchipMiniloader`.
-> +Otherwise, follow :ref:`PackageWithRockchipMiniloader`.
->
->   U-Boot
->   ^^^^^^
-> --
-> 2.39.5
->
+Building the EFI Shell is documented in the EDK II project. U-Boot's
+bootefi command is already documented. What documentation are you missing?
+
+The HII config protocol just returns EFI_OUT_OF_RESOURCES in each function.
+So there is not much functionality to be tested. We could verify that the
+protocol as well as the HOB and DXE tables are available.
+
+Best regards
+
+Heinrich
+
+
 >
