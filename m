@@ -4,72 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A975EE77188
-	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 01:42:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C2DE77188
+	for <u-boot@archiver.kernel.org>; Fri,  3 Jan 2025 01:53:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3962F802EF;
-	Fri,  3 Jan 2025 02:41:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id BE61D801A0;
+	Fri,  3 Jan 2025 02:53:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c9vVy8A9";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0BB88034E; Fri,  3 Jan 2025 02:41:58 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CCEB802EF; Fri,  3 Jan 2025 02:52:59 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5588180196
- for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 02:41:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C0C580196
+ for <u-boot@lists.denx.de>; Fri,  3 Jan 2025 02:52:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5d4e2aa7ea9so21719814a12.2
- for <u-boot@lists.denx.de>; Thu, 02 Jan 2025 17:41:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1735868516; x=1736473316; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CAB/zDubYK/PULdDc5624YA3knPxGHoOU0YmFnSk0U8=;
- b=c9vVy8A9KEsRzsySZrn5OMfmkxS/TY4dJT924N2GuiadXq2NtK4YrTZB267l5ox6di
- uQLCPx3jrI0l6w8ZwLnYSXKikz2LljqsB1yp8fq+wBNhFrsiED/qgRCsXp+z74ZJBHpX
- r/bKgY+tnRcRBYOHuYT5WXhPYJ/CEcccZWbOA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735868516; x=1736473316;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CAB/zDubYK/PULdDc5624YA3knPxGHoOU0YmFnSk0U8=;
- b=YwPS7fkupZncsiW9A1dVdkXMtHoX00H6hsBw9b/A5kwoULujJIR77iJy0zqfDsJars
- DSdfAIjWufxCxXIea3aAktLZir99rSN4yRnEY0lK6DIYMttHCkJ9GnRAXien5e9nFHLz
- BUeblD0D9doZLnP9p/8w8J7qb8fDa2P+U7uNLBjM0hsPveHH9dRfWSWoqhPuKYpoEuHx
- 3Nl7/DMTIdGKLkIlrT0w3lwMnqsJtu2tF5r4FKKeLWjGTy6+2POOGxq5Sgrknc8lpSkA
- u8QLKPBITDwLW93b9QY4lhJ01hoqk/t/ikXI4GfRwaDXTvNmm0D5gnStQ2MRV/2qORSv
- O0lg==
-X-Gm-Message-State: AOJu0YxvJ4DdXPQLez4WbdkNICuGxNeJTWGtMthGyH2qJppQbfuAx6yg
- f3Yu/mX7MmlOU4afwoGjCGmfj6a1MrrHgZrjovdJyh4Vj5GfN2I+GFCyMNV9guB0D24WkWx1sRH
- QVHtm9ASfQA+GnOxJKV/eiORBOWfNALXHWFb6
-X-Gm-Gg: ASbGncsqVKTmji6P48G9uN8eVoKlT5D5vIRQXncjtkLM4CYoONRdaau0ebb+9jbQWJ7
- Lmmvyf8VG6PAt3df1SRZBfP7SyWHjbAt8hXWT31Kj
-X-Google-Smtp-Source: AGHT+IGoT2CbY6z2GeSc/eVp/0u5jgA0gxREQ2kqjG20Uo8Ptmy533nVJ8fy1dpElVvhK6SpL+YAWkWsrKc5pd35WhA=
-X-Received: by 2002:a17:907:1b81:b0:aae:bac6:6659 with SMTP id
- a640c23a62f3a-aaebac6712bmr2770105366b.7.1735868515758; Thu, 02 Jan 2025
- 17:41:55 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [IPV6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46] (unknown
+ [IPv6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 06728B4B3B45;
+ Fri,  3 Jan 2025 02:52:55 +0100 (CET)
+Message-ID: <14a9901e-00fd-4a5e-aeb1-ffbe715f8965@freeshell.de>
+Date: Thu, 2 Jan 2025 17:52:54 -0800
 MIME-Version: 1.0
-References: <20250101195817.995321-1-sjg@chromium.org>
- <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
-In-Reply-To: <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 3 Jan 2025 14:41:46 +1300
-Message-ID: <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
-Subject: Re: [PATCH] bloblist: Drop BSD license
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: LwIP and multiple network interfaces
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+References: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
+ <20250102224724.GS3476@bill-the-cat>
+ <aa6d5dce-473c-447f-91b9-fe802f0f520d@freeshell.de>
+ <20250103014049.GT3476@bill-the-cat>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20250103014049.GT3476@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,39 +59,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
 
-On Fri, 3 Jan 2025 at 08:15, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
->
-> Apologies for the formatting, replying on mobile.
->
-> On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
+
+On 1/2/25 17:40, Tom Rini wrote:
+> On Thu, Jan 02, 2025 at 05:34:57PM -0800, E Shattow wrote:
+> 
+>> Tom sorry about sending this reply twice, struggle here is with Thunderbird
+>> mail UI sometimes hiding "Reply All" and it missed the mail list first time
+>> around.
+> 
+> No problem.
+> 
+>> On 1/2/25 14:47, Tom Rini wrote:
+>>> On Thu, Jan 02, 2025 at 02:26:06PM -0800, E Shattow wrote:
+>>>> Problem: 'dhcp' must be ran twice when the network cable is plugged into a
+>>>> port other than the first network port.
+>>>>
+>>>> Network cable plugged into bottom (first) Ethernet port:
+>>>> 1. Power on
+>>>> 2. StarFive # dhcp
+>>>>
+>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete....... done
+>>>> DHCP client bound to address 192.168.2.51 (3678 ms)
+>>>>
+>>>>
+>>>> Network cable plugged into top (second) Ethernet port:
+>>>> 1. Power on
+>>>> 2. StarFive # dhcp
+>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>>>> TIMEOUT !
+>>>> phy_startup() failed: -110
+>>>> FAILED: -110
+>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>>>> TIMEOUT !
+>>>> phy_startup() failed: -110
+>>>> FAILED: -110
+>>>> Could not start ethernet@16030000
+>>>> 3. StarFive # dhcp
+>>>> DHCP client bound to address 192.168.2.77 (31 ms)
+>>>
+>>> What happens when you set ethact to 1 first?
+>>>
 >>
->> Linaro has decided to write their own version of bloblist from scratch,
->> so there is no point in having a non-GPL license on this file. Change
->> it, to better fit with the U-Boot project.
->
->
-> Apart from the commit message being wrong, it's also intentionally provoking. There was no bloblist in TF-A.
->
-> The TF-A code is implementing the firmware hand-off spec [0], which Linaro participated in the creation. The U-Boot implementation was adjusted to adhere to the same spec after the TF-A code was merged.
+>>
+>> '1' literal does not seem to do something so I guess it is meant the id of
+>> the first ethernet interface:
+> 
+> Yes, I misspoke sorry.
+> 
+>>  From power-on:
+>>
+>> ...
+>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+>> In:    serial@10000000
+>> Out:   serial@10000000
+>> Err:   serial@10000000
+>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+>> starting USB...
+>> No USB controllers found
+>> Working FDT set to ff700a10
+>> StarFive # env print ethact
+>> ## Error: "ethact" not defined
+>> StarFive # env set ethact 1
+>> StarFive # dhcp
+>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>> TIMEOUT !
+>> phy_startup() failed: -110
+>> FAILED: -110
+>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>> EQOS_DMA_MODE_SWR stuck
+>> FAILED: -110
+>> Could not start ethernet@16030000
+>>
+>> Again, from power-on:
+>>
+>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+>> In:    serial@10000000
+>> Out:   serial@10000000
+>> Err:   serial@10000000
+>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+>> starting USB...
+>> No USB controllers found
+>> Working FDT set to ff700a10
+>> StarFive # env print ethact
+>> ## Error: "ethact" not defined
+>> StarFive # env set ethact ethernet@16040000
+>> StarFive # dhcp
+>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>> DHCP client bound to address 192.168.2.77 (149 ms)
+> 
+> So then yes, the second interface works when ethact is set to use that
+> directly. This is the same behavior as the legacy stack I believe.
+> 
 
-The U-Boot series was [1], for reference. This was mostly about using
-different tags and shrinking the headers. My clear understanding was
-that we were going to try to have a single codebase, which is why I
-changed the license.
+Legacy stack does actually rotate and complete successfully when ethact 
+environment variable does not exist and (eventually) configure the 
+second interface though. Here with LwIP the procedure fails.
 
-So, since you have a different view of events, why did Linaro write it
-from scratch? Was it to avoid having U-Boot code in TF-A? Or was the
-author just unaware of the original intention? It isn't relevant for
-the commit message, but if you can find out I would be interested.
+Notice that here it starts with ethernet@16030000, then rotates to 
+ethernet@16040000 unsuccessfully, and back again to ethernet@16030000 
+before (again) failing and giving up. There is a network cable plugged 
+into 'ethernet@16040000' port and if we try the command again the 
+environment variable ethact retained 'ethact=ethernet@16040000' from the 
+failed procedure so you're right it works as it should... except that it 
+totally failed to do what was expected the first time.
 
-[..]
+Is this exposing a problem with this board network driver and behavior 
+or is it something with LwIP ?
 
-Regards,
-Simon
-
-> [0] https://github.com/FirmwareHandoff/firmware_handoff
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=387200&state=*
+-E
