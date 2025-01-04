@@ -4,165 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0107FE77188
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 03:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D686AE77198
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 03:21:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27E818035E;
+	by phobos.denx.de (Postfix) with ESMTP id 8636980584;
 	Sat,  4 Jan 2025 04:20:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="eE7UeFMw";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mREDL7Pe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40D00804CB; Sat,  4 Jan 2025 04:19:59 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20619.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::619])
+ id 9E4668034E; Sat,  4 Jan 2025 04:19:59 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45FC9803C6
+ by phobos.denx.de (Postfix) with ESMTPS id 137928035E
  for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 04:19:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SGDsFYBHwxYRFUsepZH7fRWSUfycIebtX7UlH1A4nhIrF8/AmSfkF9jrs7uJunjIR8vOdD8K1+lFjB66kj1OAO+Gt2+d79QuWCA6g9G1nPvHf3bhiWTjeCJXgvI/OP4SAC1f4MciyE1OHEroD768VrZAiZqflh+6gYfBsClkTFwgRCooDeU7hbzznx050YBPPvT0WOveGQ3iytKjQvBmfoqjeTbX4unMoE7Vf3djUcS3iVpT7Yq9t6Y2fJM4LGvkpJ9cYx6O6vUsAQmwLSxwnFPExXp3aOo5L2E1boCk0//5+TBPX0DFNTuYKipl0Vv62YLDpbPAgtjjcDYEL+m3nQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cjKHbdltrW81DtDjKaV3gkga4jwnM1Qvg75tC97abCg=;
- b=aXJBVNHVWc5/IqJLge4M9t0Lf/mOk8fWbsXFAv3PBK2OM6zs+sio5mNSrL2oyxx0xMhpzmUQ5zj1vLT1u0uxJQZOG5ghooJg1SpMV37S5kyc3N21pPYcuipIes6Vcbi5wSHIZKEo99pHmGD7izNTrE9HUYNR3DEaRMOc2+Yw+lj+tIBEIsz+MNAn9iJzqw6+BV0n6DCfQpZsOUFzxtqMhXLENkcVNYq6k0cvClaG78tD6PezN9LwIeqt+RKT0DUxAcIkrFUoX2oKlwuriAe/R4d4yPwwegPrnOH8/gQ/mTxfgZNwDdB9GZPyHegGauu3tKMeUwwjh3yPCRjtZzjSug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cjKHbdltrW81DtDjKaV3gkga4jwnM1Qvg75tC97abCg=;
- b=eE7UeFMwRMzELCNlKwXI5lGsO/0Nj+rnpIf41lgXQHUaxGYjmFevnaF1kt0D+Jikfwli/3bN0MBGfqeTR0C2eNjRYKgnwWQ1+ZtZeVqL10aSXPpaCv5Daa/5q20iIN4mU4s2HOP6xH58lBuAJfVbI/XUyDmsaV3UHPyj+Emf7YoDcaUl07S0pEOPhHpVw30imB2ez8ON6ykxk4Qk/6ZziFCzmg6IdGGH+dtIrjVxwQBn6zCf4iPOkPtJCq+7i7gGCWhRIvUXm0EkmPi0zr/4GpkO89YuDH7RWgg7yAvhib/aKhOBEG5UvS7R415DIPKe0+IDB8OkpvlUap1HCN1x/g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PA4PR04MB9566.eurprd04.prod.outlook.com (2603:10a6:102:26c::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8293.19; Sat, 4 Jan
- 2025 03:19:52 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8314.015; Sat, 4 Jan 2025
- 03:19:51 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Sat, 04 Jan 2025 12:25:42 +0800
-Subject: [PATCH 08/12] imx: imx8mm_evk: Enable dynamic settings to mmcdev
- and mmcroot
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250104-imx-bootstd-v1-8-e09618cc1d65@nxp.com>
-References: <20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com>
-In-Reply-To: <20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.14.2
-X-ClientProxiedBy: SG2PR01CA0151.apcprd01.prod.exchangelabs.com
- (2603:1096:4:8f::31) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1735960782; x=1736565582; i=xypron.glpk@gmx.de;
+ bh=yQeT9vx1CjN5tmm0z6vvcgpWNwdVqyNNsMQWScna1a8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=mREDL7PeJ79Xjhc+Uat1B8oue7ls28q7UM7V2WVVrmElaeLwY1kQf2Ud7HUN1/bP
+ k0sx7mr2jQjT+A8hP9RCrDWQ0nh/WSK++j0TCLlP4wC9RVa0jVi+92PJ/Gm59TZwv
+ R5LH3a2nnN16kUy3aqT1CyLi5Cem4xkemHihG9Kp3y3pxPqiDhmWBBYluIscPj4Qz
+ /IAxjpC3SFWLIqsdKMoC8aIJx9xWRTx6P/LU55KNSemMF7VQTGTZe7tJ1iOU63Kn9
+ a2Jthv8YfduWZOYi29q0e/TUjahfqZCSXejkWSnkfLnis7fZyHOwyS1wavcRQL8BZ
+ 9d1Kc+p8Axf/oDp+ng==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.109.94]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mqs0X-1tq27L2WTx-00neDE; Sat, 04
+ Jan 2025 04:19:42 +0100
+Message-ID: <5222dd9e-83f6-40ad-adc1-dc3fe1651991@gmx.de>
+Date: Sat, 4 Jan 2025 04:19:40 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PA4PR04MB9566:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f0cd0df-37a2-4efe-5901-08dd2c6ea722
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aEdKeU9hb0NTVyt3cElmZE0zL25kVFl3TVFRRE5DMlhiTythdjFwWjJOcll5?=
- =?utf-8?B?cnZsQmtIYm5ucE1saURvUVBqc1pxNzdySVJEZy96ak4zdjk1QTRxYTQxdlFl?=
- =?utf-8?B?Y1IxeWVDMmttaWFpQnRiZG1HRWN1QmxWN3ArbzdCQVZvV3BhUkk1dnMzTy9k?=
- =?utf-8?B?Qks5di9MTGY1dldneXBiRjFEbDVXemlIbFVhSmFFQ0t2dFVUaGdGbDRHZVFN?=
- =?utf-8?B?VU9GeWk4RE4wR3Y5Q0UyUlRPUUFBbWpHTVlzNjJBTW1HSUpMYUppdzc0akF3?=
- =?utf-8?B?bUM5TENWUDl4ZHMwa1dILytDZlR4MVVYY01zWHFmQ1hCTkZDTDhVQjVFU0Fi?=
- =?utf-8?B?RTZTeTN5QWYzWVdzdXBMY0ZTUEhsT2RKOTF4REpXYmN0a0JJM0Nsb1kvTlBK?=
- =?utf-8?B?YkZNSk1KaE1kb3E5K0JlYXFwRFh3UHIyOVh5c2Y4eHN3RVBsc2lkUnF5Yi9B?=
- =?utf-8?B?WU1zU2t0VTVXWFBMSzhUVjlKajVOSHVONTcvRzhLUUZaQnNSbHlmc3N6bjJO?=
- =?utf-8?B?SHVETHQ4cVNybGdtOVVhSkt3YXYyMnIxNkdNSHdzQWhSeU5NUjloMUQ4Wmly?=
- =?utf-8?B?OEYydExqTHJ2aGFkbnFZOHZMZjl3NGsyL2FDUjJtejQ3VjJaaU80L0syZkwz?=
- =?utf-8?B?MU5rRkh3bHJqU3NVOGxUalRleXBOWjdZTHUzTkc1enFkNzZkWmlqOFRFbFYv?=
- =?utf-8?B?Mkw3aUwvZkpXbmZubVZucllHZWc3dmhITU51T01BVU1QSmlmMWN0eWJhNS9U?=
- =?utf-8?B?MGdCd294WG9DaGZRWEFHOVNnOExXcFg3SjIyQmdVY251Sk5sN25YNDgwWEFF?=
- =?utf-8?B?RGdhenhHYXI2YisyN0NyOTFvdUg1enVJUHU2aXVZUU1KR2NkRzB6MTJBT2No?=
- =?utf-8?B?OUZZVit6dWJiVEN2aDYranA3ZjEwQURpTmZMZGdGYkFGWG5xaTJkR2Fjdlky?=
- =?utf-8?B?M2hFZnZiVUthVWx2ZFRzbFMrZzZ3N04rUkpMRnZkazVqdzVCWWFlVUd5aWti?=
- =?utf-8?B?aHdkZ3ZNL0t6ZW1Fc1hLb0dOQWc2SnVkaVhCMG9kTHJrR003SE5nenhXSWJK?=
- =?utf-8?B?bGhEL0J3dW1Pa1RKc0FGdHJHMkx6dW85T1RDNmJtV2V4cmkyZTdVTHZITlQz?=
- =?utf-8?B?Mm1EMWFiYjFhdDR5Y0Q5c1lvbWcvaHVaREJlMlQxZTlLV3Y1SGwxcmdFMy94?=
- =?utf-8?B?TEtrTHdQTjczOXovUzRNN2NubWkrM2RZYnFSRWxYUllkS3dKRHJDY2h4ZVVE?=
- =?utf-8?B?bXJOT0szRVlZd3J3UEZ5aWNYU3ZuMks3M2JqVlZFWHQwbmpEY3ZDbFF3SHQw?=
- =?utf-8?B?UG54UTMrckhLYXYrbTQ2aVcwVUJyWXl4azgyQ2RuWUFsMTQveWRmQUlSYkdu?=
- =?utf-8?B?NnYvQWV3VDJWeG1ES1lBVkZQZmg2RkY1SGh2WVBLdm1CVlh6T3ZLRllKeXNq?=
- =?utf-8?B?L1hlU0g5SUFBMmlKcnBNTGZXNUY4NWlLTHNTS01MQ2JSLzFGOE8zY3h3YTRH?=
- =?utf-8?B?U0JqZE1QZ0xCVHV5RnZObmNaY0pROXNVdTlZY01SY25RR2t3WVE3RlFLM29r?=
- =?utf-8?B?cXZTNTJiTnZzOEJiaS9YcTVmb0dsN250THp3aTZLcCtEdXE4WUxibDBxbGEw?=
- =?utf-8?B?a0pQalJQRFlHR0s2djQ3V2FRNURzWFdhUEhaa0FneXlSa0QrQXZpK0lvaVZ5?=
- =?utf-8?B?T2t5Tk9LeWhaazY0SFo0OWhQSjhPMjZ6a0JPZExuS0RvZVluK2tRMjQyNEM1?=
- =?utf-8?B?OWxVdFBSUXlCemVLME9RajNuRG5BSTg0UVhjQ0dVRGRWR3ByU2dUdW8rS3Yv?=
- =?utf-8?B?M3RMSWNybCt1aHNGZ1F6T3A4VmIzb3ZDMldtbi9OM0hrWW1OQ0xjdTJNTTRM?=
- =?utf-8?B?aTRyUnBhWWtOOFZvRDJTS3MwRzBVMlRNL0VOeEthbDR6Q2JLVGJpbjcvbmty?=
- =?utf-8?Q?P1cM1MEjjME5eosfy0PiWltP2TXPMTGj?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Ly9wWmM5Wm1VdmRJdlBMWmJQcXhjcVE4bkFlRjdMNTlzTXNla3dMZURBVis0?=
- =?utf-8?B?eTUrSkMyVUFEcDUxZWxlbkZiaStmTXJKTVFlWERkRUdmVTJKSlNmZGVYSi9D?=
- =?utf-8?B?NzV6SUt2K3RzejdJUW56QW1qY0ZnVnU3b1N5NzdmNER0K3U1WEY2MzcvWi9E?=
- =?utf-8?B?Z0dkcEFxa1VKQ1A1T1ErcmhRYkltNG56K1pjL3BQRnhWRUNWT3R3QmgwSUpp?=
- =?utf-8?B?dGtBaGorQ2NjZ3ZxR3NzWm1LR1hROVQ5SlVlOHZTSDBsZjg3YUlNdkg1YS9v?=
- =?utf-8?B?MzNIY2ZSMWZwMmpuM3c1d0ZtbGVlVnBmUGp4dWdtTEZKZ3duUnpXNWt1aXVo?=
- =?utf-8?B?Wkp0a2ZNR08yM241Y0VkK3lneXpvbHVFdDdYL0hnelFxKzRlZXc1Zi9OT2Nm?=
- =?utf-8?B?UndreU9tSjJqYkhMMGFHVjRVNStIa01WZHBRYm9WOGNtNERpRXRVUlFPQnRB?=
- =?utf-8?B?dmVNb1I0bnJ3VWtJRFV1R29wOHc0dmtMY0dTc1EwbEF3VDBMbGhuNXJqYm9k?=
- =?utf-8?B?RjE2Qjg3NHVTVHNkR0o1N3g2VmVlZEhqZVRqbnJmT3A4dEVpUmZCaHY4Z0hU?=
- =?utf-8?B?N2drVXM3RVZ3b0lDYjN2YTVOZXphL0VpVGpwM0IvcWtHS1hESVd4RUZkTnBw?=
- =?utf-8?B?TDdGa0FHaUQ2b3l5VmRoZzA4b1hkaFhvUmx4aVRyQ1QrM3F3OFZmQ1FtOTRm?=
- =?utf-8?B?MTNTVU5tdVpkNjE2dC9WbnkzTTVwT0gvZlVpajRSKzh0ZGFvRmdEamNwdStZ?=
- =?utf-8?B?bnppT0pWVkJSSlpFK2kvMmJ4TkNraHBRL2E4aVJEZ3JGZDBYK2lVSUVYYVBQ?=
- =?utf-8?B?WTZJRUphb0RUSGs0ZXZITGNTMTQxeFlGOUpSckU3cGtVdVJjTEJpV0VCWm43?=
- =?utf-8?B?UVRuY0FuOTBicVY0YklBS0lvSG51eUJKWFlnd3Ewd2w2enFrQ0R3L0Q5OUV6?=
- =?utf-8?B?d3gwZytsZ3VMUTZ5QUx5dllGdS96TmNxcE1GVHAwYVRXR1J2bHA2SGFhaGZh?=
- =?utf-8?B?aWpqVllUMkhaaVN3T3NMUHNSbVYvekVsQUhGSnU2bEFZZFFEWW1TeGNTQTVN?=
- =?utf-8?B?ejdtblBwcFBNL0pDR0R4TzBFNnN5MnJnaFpKK1ZGK0lEdVV3REN4SHFCTmhU?=
- =?utf-8?B?V0tCMm5DWEc0U3h1Uno2TW53ak1sa3JXN0h0dWV4MUVxUU8yZXU1Y05ZMTFu?=
- =?utf-8?B?SGVmYW5TWmhKemtIT2ZTeFdkeGpqSHFDZElmTHBaZ2htVDZSZndMem1pajlY?=
- =?utf-8?B?cFFoRmcyQVA1RUNwYXNmZlJrVXhWc2FjcGVJOWNkMVdxL0c5WURVNkVVQmFx?=
- =?utf-8?B?UHFWRHhzU3JPazFJQ1NhUFZKSlZpMGlBUDF0aVhYamVXdktSLzM0Zll6WTBn?=
- =?utf-8?B?N2FkZk94UkY5TnIrS3o1TlY3RjNXdE5zcDNUMjBtUmsxVmppZjJmWG51RFh4?=
- =?utf-8?B?aG5sZkdrU0hkUkF1K3lyUGlVUnRmOW9JLzhxTkJ2eUw4UE1xemRuekJZcnlp?=
- =?utf-8?B?TCtIQXlETWs1ZlJQeGJmWUxHZGJ0ZklERzB3dU9vSTBkNXVUTEZ5dSs3QlN0?=
- =?utf-8?B?ZXpya1pTWGgzRCtTY0J3aU9xKzVUT2lJYU1aTWtORHR5ZlZNRmd4VWxJb1k5?=
- =?utf-8?B?ckh5endBdEVvRDR1K1I3UkVIMjVOSGZTVUtYTGtjRkF5QjZ3bzFUaHMwNWtB?=
- =?utf-8?B?aHZkaEJWOTMxRm9aYzNXU1k3SHZCb0huaTdZMVBOeWo0NG83M044aTNQQmc4?=
- =?utf-8?B?bkR6UlFtS0pSRWlZNzF5TncyZHhiSElseFhxRzJlV1pjTlp2TVpjYnZxa3Ro?=
- =?utf-8?B?ZGhtWmJyQTNLaUszUzVLbnRaMFdaanRoc0JpRVA4OTRVWnZUN0NHWFNxQUpM?=
- =?utf-8?B?OFRscng0a3Z6djAwR1dST3lNZjVQV29rRW5VZlRsK3dYakxHWENwY2ppc1c0?=
- =?utf-8?B?L1UyUzMwbDFla01vVS84cG9ZRExnTDJBdGpka2ttMUtRMXBBNTRJYVRlTnAy?=
- =?utf-8?B?bS9XYVpybjI2Ri8zMHM1MENvWWZCcEZabGxmR3l3cWg0azcrQnpxK1dueGRy?=
- =?utf-8?B?b1l6WE9lSHFIVkl4VjVLTzNRbXRuUk5nMFZ5MUVNS1ZlSjhMU0RyZzhXNmU0?=
- =?utf-8?Q?qBl/F8X21SXZyUx9tU6vzsBLx?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f0cd0df-37a2-4efe-5901-08dd2c6ea722
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jan 2025 03:19:51.9409 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: M1Gc6hskYlhnIe/FGa0Eo4H5ppUmQlSm1C1VQKTtTLIITjDNzL1gtO+X2bDpAPxQGOaENgHfxPaSh66O0CpBYg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9566
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lothar Rubusch <l.rubusch@gmail.com>,
+ Olivier L'Heureux <olivier.lheureux@mind.be>,
+ Yang Gang <yanggang@byosoft.com.cn>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-next-20250104
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:2ChUIEFOxEEutDd6rX5vvazI/qsQ0PCpF5+kgiSSXKdLbTDLCLk
+ tEEBSJOoMmrcjgMWgUGGe3+ngIeNt8EFSVexOPbQ4sKa1BqYetZFAwiCg8kQmF+1z7xj7Me
+ CfLLI62LdMIXNFO1S01QnlyTMTLEdu9kuroPX+84eVQ36ARuof4wuQ/MzsEoRH31L1g1u4f
+ onmvNEfXe/b0ZkP09BtRw==
+UI-OutboundReport: notjunk:1;M01:P0:+mdcpWAfNHQ=;ysrkG7iHv499L81frCJAV+iZrw1
+ 9PlcnznQ2Kl45rrkfEiiB8oo6Xkf1w2GgCWCLMWlpwVKNG/7OnQip0fv6gULlNf2YUdTy6nAD
+ sdEJJ7LGqW5O/Li8dRpihs1DcF8Mek77iqUjrHVfaJ/mcnEEEsFd437JRx3DdozT9UfNDZASZ
+ 97MS23D398QYo423wlv22keGrQb8bwjPOoFdc9x0uX39/lMIlDt9zcsrnXORj1uKwZ4acK3LR
+ rUDcFfn2TJR/hGfIRvkmotoTqU8CAOjQpQysC9WdYYIzlQW500bRwV/YBxGVbGOu1P2YzKpu7
+ LFuMGPeEuOZ+jHH22lJ5M6fYx2DjiRUn2n9wWFoLwwLjQlYsTRMwjbUROmq+KFGQfzPs0HVWG
+ +crjYP4q9O1fc3m6hHY5YNF50Z7C3U++soCRwMh3yL4MVTXTXwn6qnHxXyPTR5Sp8Nr3SZVny
+ 7KqDXTzLCZsmcy51qw+pMB9yV5gST+1G+/4515LUtoAC/vLuEHdiKc8pzEHSRp/BJ29Xj0adE
+ AnV6cdCYF0/5B4eO6Li1TIofmvDoA6HY2uW9J4IYJ9eXLdIVchMzIpj+v7eJ/XDw5mE7ItVWI
+ 8s6LTd2I3e9bOBRzlrrbFvXUgsL+QNmNNJsGWZaPM5MxF7u7V2v4GX2rd1OQBxOmcTL9V4hII
+ bFVl0KwFXazmtBFkfSm0WpoF1tnM02PuS8eBrQK8Gm+P+r25QYOmNhkEgCdBnP4qWajnKmv4D
+ 9qtvXzuye+lKt1kY/mADfRUlSeQCfZXMUQS4Tze1DZ2aSxYFZKu25IscHoqUhGBOlUmLpzGCt
+ TxtFt/RqUhiqcJDbb1nuFB5UNwCRAqCvaOFmxml4DeD7+Cth4jpkucwb8pDFK+1majFUNf8e+
+ TPgJZT3bmYPxUmB64MlRi+2jiL2MX6AWMXjZdypbfssHfPcsJVd6vswsUexajS120xLaOMj4B
+ 8daI8Ha9jkF4LAr2ml6KiSY5PTZvGaj4APllE6YSpjSYJISFiGlrmrYtEKDUgJBsUw3AVop5s
+ 3YJEH9cX3FDESM6kU0BDu/QOhBju8e8dMN2YybM6bHEV63lvoT3AAb/N1PjK65oJWusavauYc
+ V+8eycxeL6EfCFW2qhn7urwtdz/VAg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,30 +94,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Dear Tom,
 
-Enable dynamic settings to mmcdev and mmcroot for i.MX8MM-EVK
+The following changes since commit ec9263b4f15c4cf82eb6a211c67baa6385065b8=
+e:
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- board/freescale/imx8mm_evk/imx8mm_evk.c | 3 +++
- 1 file changed, 3 insertions(+)
+   Fix neighbor discovery ethernet address saving (2025-01-01 14:40:04
+-0600)
 
-diff --git a/board/freescale/imx8mm_evk/imx8mm_evk.c b/board/freescale/imx8mm_evk/imx8mm_evk.c
-index 4c4436af3b1dd7e796e48458488d2df4e60c182a..d41db8d31d81b44b86a7aab5fa57d97d99e41a05 100644
---- a/board/freescale/imx8mm_evk/imx8mm_evk.c
-+++ b/board/freescale/imx8mm_evk/imx8mm_evk.c
-@@ -59,6 +59,9 @@ int board_mmc_get_env_dev(int devno)
- 
- int board_late_init(void)
- {
-+	if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
-+		board_late_mmc_env_init();
-+
- 	if (IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG)) {
- 		env_set("board_name", "EVK");
- 		env_set("board_rev", "iMX8MM");
+are available in the Git repository at:
 
--- 
-2.35.3
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-next-20250104
+
+for you to fetch changes up to ce190e1b33b8c0e1228f4123759dfa1981c202de:
+
+   efi: Correct ECPT table GUID (2025-01-04 02:17:06 +0100)
+
+Gitlab CI reported no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24075
+
+=2D---------------------------------------------------------------
+Pull request efi-next-20250104
+
+Documentation:
+
+* doc: develop: Fix typos and wording in binman/binman.rst
+* doc: develop: Fix typos and wording in gdb.rst
+* doc: sandbox: Fix the "sb" command name
+* doc/develop/distro.rst: Better document upstream definition of
+extlinux.conf
+
+UEFI:
+
+With this pull request the UEFI sub-system detects all boot devices even
+if they have not been probed before. If this adds to much boot delay
+individual bootmeths and bootdevs can be disabled via the customizing.
+
+* efi_loader: avoid writing message in Exit() boot service
+* efi_loader: run bootdev_hunt() to find ESP
+* efi_loader: update EFI specification version
+* cmd: efidebug: update output of memory attributes
+* efi_loader: Don't warn if the TCG2 FinalEvents table is not installed
+* cmd: bootmenu: add parameter -e for UEFI boot options
+* efi_loader: Update startimage_exit self-test to check error
+* efi: Correct ECPT table GUID
+
+Others:
+
+Building the API demo application for riscv64 is supported.
+
+* API: unify platform_sys_info() implementations
+* examples: implement _start and syscall for RISC-V
+* examples: use architecture specific memset() on RISC-V
+* examples: use QEMU compatible LOAD_ADDR on RISC-V
+* test: fix test_extension.py
+* configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
+* CI: xilinx_versal_virt: disable USB_DWC3
+* net: eth_bootdev_hunt() should not run DHCP
+
+=2D---------------------------------------------------------------
+Adriano Cordova (1):
+       efi_loader: Expose efi_reinstall_protocol_interface in efi_loader.h
+
+Aleksandar Gerasimovski (1):
+       efi_loader: fix pe reloc pointer overrun
+
+Heinrich Schuchardt (13):
+       API: unify platform_sys_info() implementations
+       examples: implement _start and syscall for RISC-V
+       examples: use architecture specific memset() on RISC-V
+       examples: use QEMU compatible LOAD_ADDR on RISC-V
+       efi_loader: avoid writing message in Exit() boot service
+       test: fix test_extension.py
+       configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
+       CI: xilinx_versal_virt: disable USB_DWC3
+       net: eth_bootdev_hunt() should not run DHCP
+       cmd: bootmenu: add parameter -e for UEFI boot options
+       efi_loader: run bootdev_hunt() to find ESP
+       efi_loader: update EFI specification version
+       cmd: efidebug: update output of memory attributes
+
+Ilias Apalodimas (1):
+       efi_loader: Don't warn if the TCG2 FinalEvents table is not install=
+ed
+
+Lothar Rubusch (2):
+       doc: develop: Fix typos and wording in binman/binman.rst
+       doc: develop: Fix typos and wording in gdb.rst
+
+Olivier L'Heureux (1):
+       doc: sandbox: Fix the "sb" command name
+
+Simon Glass (1):
+       efi_loader: Update startimage_exit self-test to check error
+
+Tom Rini (1):
+       doc/develop/distro.rst: Better document upstream definition of
+extlinux.conf
+
+Yang Gang (1):
+       efi: Correct ECPT table GUID
+
+  .azure-pipelines.yml                            |   1 +
+  .gitlab-ci.yml                                  |   1 +
+  api/Makefile                                    |   9 +-
+  api/api_platform-arm.c                          |  35 ----
+  api/api_platform-mips.c                         |  29 ---
+  api/api_platform.c                              |  25 +++
+  cmd/bootmenu.c                                  |  39 +++-
+  cmd/efidebug.c                                  |   5 +-
+  configs/sandbox_defconfig                       |   1 -
+  doc/develop/distro.rst                          |  15 +-
+  doc/develop/gdb.rst                             |  10 +-
+  doc/usage/cmd/bootmenu.rst                      |  13 +-
+  doc/usage/cmd/sb.rst                            |   6 +-
+  examples/api/Makefile                           |   7 +-
+  examples/api/crt0.S                             |  32 ++++
+  include/efi.h                                   |   2 +
+  include/efi_api.h                               |   8 +-
+  include/efi_loader.h                            |   5 +
+  lib/efi_loader/efi_boottime.c                   |   9 +-
+  lib/efi_loader/efi_image_loader.c               |   2 +-
+  lib/efi_loader/efi_setup.c                      |   8 +
+  lib/efi_loader/efi_tcg2.c                       |   2 +-
+  lib/efi_selftest/efi_selftest_startimage_exit.c |   6 +-
+  net/eth_bootdev.c                               |  30 +--
+  test/py/tests/test_extension.py                 |   4 +-
+  tools/binman/binman.rst                         | 234
+++++++++++++------------
+  26 files changed, 300 insertions(+), 238 deletions(-)
+  delete mode 100644 api/api_platform-arm.c
+  delete mode 100644 api/api_platform-mips.c
+  create mode 100644 api/api_platform.c
 
