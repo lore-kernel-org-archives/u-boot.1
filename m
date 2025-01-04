@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E196E77188
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 19:35:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F7BDE77188
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 19:40:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC5D58056E;
-	Sat,  4 Jan 2025 20:35:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 941238056E;
+	Sat,  4 Jan 2025 20:40:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R9WuJ6fH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DVg7yQON";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 758A68056E; Sat,  4 Jan 2025 20:35:14 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 520C480578; Sat,  4 Jan 2025 20:40:44 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B15C8043F
- for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 20:35:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 425FF8043F
+ for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 20:40:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-aaef00ab172so1376955866b.3
- for <u-boot@lists.denx.de>; Sat, 04 Jan 2025 11:35:12 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f28881d6so19381116a12.1
+ for <u-boot@lists.denx.de>; Sat, 04 Jan 2025 11:40:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736019312; x=1736624112; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736019642; x=1736624442; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JRLephFVnR9YV5wYrXmMvG0KFQghBiZpR0ZEINN2U3s=;
- b=R9WuJ6fHod65QSvVHsYxl2I5PaCAsHB828GGMAlaQbbnqCbVIsN3Ftp9ORFSbApbvd
- uDEIMp7ZuY8YY92RBhbeW/vgTT1V9ovfImn/SxlA7D3pP0uSGTehnzdvDmVNAcHvwEmD
- tarBlqx1vFygxL9dRIhFJ6kKooE9Ix43xzpIs=
+ bh=xsqomLTMhwT8V65JvIa6vr+7vmk9/5F3C615RRX9YE8=;
+ b=DVg7yQON/u2R/eqFCVh9hWaVTycVZFhgufRD8xqXCqvBbx562W2rnGWNrmTKfb+tbN
+ 1dbNzzKMCRXLEayUiO37047sg6bGxrc5pfj/zXVNzoNjzPFeBHizNCteAOsGfZq+Fl3t
+ 9Oh+j8JKnx+PP3IZnoq0Dx6Y60Sqf5DZ1mcNo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736019312; x=1736624112;
+ d=1e100.net; s=20230601; t=1736019642; x=1736624442;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JRLephFVnR9YV5wYrXmMvG0KFQghBiZpR0ZEINN2U3s=;
- b=E8H+S4kMOXxycVui0sNkUBM5WPtr2QS/YzU+J1qZ69nc7Z2PbEYCbYkBBIC/PO5eMw
- pOR23NVxnpFZBHEPwURUwOQGqNegGVVD4WqjXb6x6jJ5gojp/wtsZJ6QF/UVfi5wTY2j
- RYtyQxasPE/FYjVs4LfiRq4Tn8nW/XCi7mAJxmU3r3GAxytlwvq0ZcaM1SyAvkUFvXno
- mC3S//vEidoFGL+zV38Z/ycbKBZf/sccBSHN0eAC9xXCPAu8Yso+OzdirpDS+3M/pAXO
- NJ1I2OMbM742ocq0mfZrpxQD6iMSCsj+kiQaiTCyd6bmtS2AkWlnUj2XKCsw/4kn5m5r
- P/oA==
+ bh=xsqomLTMhwT8V65JvIa6vr+7vmk9/5F3C615RRX9YE8=;
+ b=w3UU4bz9Nxsqc5T64tLq/fpw9EWT5VexB4LfDP0wNAcCP3mdr75dbgJ6R2/A/eSDEp
+ 7cGhYlsuQI+ySNfXKNFixNgIasjoSRq6MCjdyr/XPQmUjbAObN3RgFziTB+Aibontcpa
+ /XpSqPzO/x8ZnNjn1H4KnmNxTbX5iieJgcgElhxX/VfX04GcIjfnlZ+LM7B/GCMzaMsv
+ OtMt0p7wI+gJciKfIQF2D4/0yYCMTfbK6eOdQ3Sj37CD+YcBoDUC3kakdarOKJSM5q5u
+ MKRIs8ZYkcrl5GNyLMzaQu2PeJs5YGVlLhwhIPqwcXcYN4qbPwq1BbiznlpBdYh+Zq6+
+ Kmcg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXSaQvIKDiYU9L4IjU0w5wbdrYk69yifDHiaiP8KWVv62q8QhiUv6N+TXu9QT0iBwSi+A3AAAI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4ycUKA7AKnlkQx5Av+7QlkHlE5rYbRV/2Nwmy9nGmRohc0DRN
- 6HXZLvvMAzsxJvCCTaYSPTBjFZI4jSVLZ3ALHx5o+w8Rbe9Fk4pH/vkxqvPXevDIiITJvQqi6SN
- vIvaW5/2SkM0FI9ALan4ewSdRuyhsr4/AQHDue7WJ0rLnAhc=
-X-Gm-Gg: ASbGncvujj3IQipz/E/cKa0D0xHRdLNmXDXiQrojC6dhuGhwDzoeKx+wkOufACwoT98
- CdwDYKV67EnD2rw9x5k65alWyRkUN9hS4zwbxnEVB
-X-Google-Smtp-Source: AGHT+IHdkC/pkSWzU3+14r/kUZSDPaj6Ol06YibP9NszbSOqYUs+MR4tfojqtTEzhmj0thrc8k/lSUeeI9zcysReXFo=
-X-Received: by 2002:a05:6402:2790:b0:5d0:e73c:b7f0 with SMTP id
- 4fb4d7f45d1cf-5d81de1c241mr132943000a12.28.1736019311830; Sat, 04 Jan 2025
- 11:35:11 -0800 (PST)
+ AJvYcCU2tJIHhHchdcRIUgnnDlHZOXjHJJxadrlVFgWkBBZSIkkO+jKkmhJK5ghnmDjDYRQO4uD+ykw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwDIhsUJ0QRdSr2X7TYLQ1B/C+fQbrr92jfnhacUtjmlza3L77j
+ MKcWAwEUrV4Zps6v1gHlYZedc8JF57nGK8e2UYbNeAEL4bJ9ljHrKJxe2/95CMTfM6SAXJ+IWrp
+ mHDiiK/NEv2V4cBy3om9g+BKsBmL8j3tyVCaL
+X-Gm-Gg: ASbGncsrXliid0CLb+kyhfxgH5zpWZsxMh1AvOrMOrbryWU7Bxe7RpaNnRLB7pvIqpr
+ L/RY5u3nWuq63xnfN8p19SYcFQHeHkvww0Q2F2r99
+X-Google-Smtp-Source: AGHT+IF+oxlvxygRSJhpqsOcwdhtMV/sCStBO15PARqvnSiP+H8yK4sI69MLEFr6BiCn0S2436MmFH9Hk7t4LDnGSvw=
+X-Received: by 2002:a05:6402:2150:b0:5d9:ae5:8318 with SMTP id
+ 4fb4d7f45d1cf-5d90ae58333mr15723937a12.20.1736019641596; Sat, 04 Jan 2025
+ 11:40:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20241229144607.1051889-1-pbrobinson@gmail.com>
-In-Reply-To: <20241229144607.1051889-1-pbrobinson@gmail.com>
+References: <cover.1735896540.git.jerome.forissier@linaro.org>
+ <c86ca0914ab1496a7f63371e47f36f2109d7d97a.1735896540.git.jerome.forissier@linaro.org>
+ <b77c543c-56e1-42e7-a0ab-874921049873@linaro.org>
+In-Reply-To: <b77c543c-56e1-42e7-a0ab-874921049873@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Jan 2025 08:35:04 +1300
-Message-ID: <CAFLszTiFbULEJSKvFZ8Vdjsj3QSv-Q-TPA3SRnTxtZz+y1y_=Q@mail.gmail.com>
-Subject: Re: [PATCH] rpi: Add identifiers for the new RPi 5 series
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de
+Date: Sun, 5 Jan 2025 08:40:34 +1300
+Message-ID: <CAFLszTh8shuz2B3s5sQPRpz5_an_EuQL3+OD3OuZHQOAuju-LQ@mail.gmail.com>
+Subject: Re: [PATCH v3 4/5] board_init_r(): use static calls
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>, Marek Vasut <marex@denx.de>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,55 +93,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+Hi Caleb,
 
-On Mon, 30 Dec 2024 at 03:46, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Sat, 4 Jan 2025 at 14:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> The Raspberry Pi foundation have released the Raspberry
-> Pi 500, CM5 an CM5 lite devices so add the assoicated
-> revision identifers so we can detect them.
+> Hi Jerome,
 >
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> ---
->  board/raspberrypi/rpi/rpi.c | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
+> On 03/01/2025 12:13, Jerome Forissier wrote:
+> > Replace the init_sequence_r function array by direct calls.
+> > bloat-o-meter stats before/after on u-boot.bin for configuration
+> > xilinx_zynqmp_kria_defconfig are the following:
+> >
+> > - With LTO:
+> > add/remove: 87/128 grow/shrink: 8/23 up/down: 19743/-20923 (-1180)
+> > Total: Before=1067882, After=1066702, chg -0.11%
+> >
+> > - Without LTO:
+> > add/remove: 0/23 grow/shrink: 2/0 up/down: 795/-1112 (-317)
+> > Total: Before=1119494, After=1119177, chg -0.03%
+> >
+> > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> > ---
 >
+> [...]
+>
+> > +     INITCALL(stdio_add_devices);
+> > +     INITCALL(jumptable_init);
+> > +     CONFIG_IS_ENABLED(API, (INITCALL(api_init);))
+> > +     INITCALL(console_init_r);       /* fully init console as a device */
+> > +     CONFIG_IS_ENABLED(DISPLAY_BOARDINFO_LATE,
+> > +                       (INITCALL(console_announce_r);
+> > +                        INITCALL(show_board_info);))
+>
+> Not that the array was extremely readable, but I think this is
+> significantly worse. Particularly as my IDE will no longer grey-out
+> sections for config options which are disabled.
+>
+> I would honestly rather still see pre-processor #if's here, or at least
+> something better than this semicolon-in-macro stuff.
 
-Would it be possible to get the information below from the devicetree
-on the FAT partition? This is passed to U-Boot at runtime.
+Hmmm I think you have a point.
 
-Since we already have the DT internally, do we need fdtfile? There are
-mechanisms for using U-Boot's devicetree when booting.
+I was actually thinking about having something like
 
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index 18be244aa79..1e43c631898 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -193,6 +193,21 @@ static const struct rpi_model rpi_models_new_scheme[] = {
->                 DTB_DIR "bcm2712-rpi-5-b.dtb",
->                 true,
->         },
-> +       [0x18] = {
-> +               "Compute Module 5",
-> +               DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb",
-> +               true,
-> +       },
-> +       [0x19] = {
-> +               "500",
-> +               DTB_DIR "bcm2712-rpi-500.dtb",
-> +               true,
-> +       },
-> +       [0x1A] = {
-> +               "Compute Module 5 Lite",
-> +               DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb",
-> +               true,
-> +       },
->  };
->
->  static const struct rpi_model rpi_models_old_scheme[] = {
-> --
-> 2.47.1
->
+   INIT_CALL_CONFIG(DISPLAY_BOARD_INFO_LATE, console_announce_r)
+
+i.e. a macro to combine the two things and the semicolon.  But I
+decided it is really no better than this patch so didn't mention it.
+
+So another option would be to keep the #ifs as you say, with
+everything else about this patch left alone. I have the same issue
+with the IDE (I suspect some clever integration could be written to
+fix it). But I have changed my mind and think #ifs are better, in this
+case.
 
 Regards,
 Simon
