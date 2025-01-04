@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BAD5E77188
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 19:31:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E196E77188
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 19:35:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B15880584;
-	Sat,  4 Jan 2025 20:31:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CC5D58056E;
+	Sat,  4 Jan 2025 20:35:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gN6oJiFg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R9WuJ6fH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06B6C8059C; Sat,  4 Jan 2025 20:31:29 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 758A68056E; Sat,  4 Jan 2025 20:35:14 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03B518059C
- for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 20:31:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B15C8043F
+ for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 20:35:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aaecf50578eso69421266b.2
- for <u-boot@lists.denx.de>; Sat, 04 Jan 2025 11:31:24 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-aaef00ab172so1376955866b.3
+ for <u-boot@lists.denx.de>; Sat, 04 Jan 2025 11:35:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736019084; x=1736623884; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736019312; x=1736624112; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vyEqcxvEbGQr70b1wCPO/zABvUUtUC4T1WHSoiVGpWw=;
- b=gN6oJiFgd5NwCUMr5grD0Zt72TZPskrdD6wpYUsnxp05v0Xh+iqdjKUeZdMdT6IQSk
- SjTTx3Wi2EJjlxKiuh9XS3rI/uYT8LaCXdqkU12jzFjIWpR9bGeQno9MYXRqyD85WoyP
- 7M/e6Ilvz8LcRIokHz3zjgOC3XPpDMOtVqRdA=
+ bh=JRLephFVnR9YV5wYrXmMvG0KFQghBiZpR0ZEINN2U3s=;
+ b=R9WuJ6fHod65QSvVHsYxl2I5PaCAsHB828GGMAlaQbbnqCbVIsN3Ftp9ORFSbApbvd
+ uDEIMp7ZuY8YY92RBhbeW/vgTT1V9ovfImn/SxlA7D3pP0uSGTehnzdvDmVNAcHvwEmD
+ tarBlqx1vFygxL9dRIhFJ6kKooE9Ix43xzpIs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736019084; x=1736623884;
+ d=1e100.net; s=20230601; t=1736019312; x=1736624112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vyEqcxvEbGQr70b1wCPO/zABvUUtUC4T1WHSoiVGpWw=;
- b=dJOpjDVujjbRLFpL186+RCm7GWl4Xk6J8tV6H5wnq/K/OH6ciITxPrprt2lKGcxcUw
- Ca0iXXeX3umzzWPV/ZX8FZinYcTDdemQMAgesqa8vQCdyy9ztEuF/wmNmj2CsApTvuoo
- cJXv8nIu7eLryKqwM4OfG7G9IOAz75u6//xsQ51WHPa8jSsq+tUquebc8H3L1EjmeLyj
- EQrFslzau4E8nn32mUxTkt+owKJni5RRCyQqPv98sBRL0hlyYWaA4M01PhDawss36Riw
- kdQ9YWmT+0KdPcppuF30rBp7OarGIwahknqt9/gG5ukrwUZbk6ucP6eJwmoB+wVkKjfk
- DuBA==
+ bh=JRLephFVnR9YV5wYrXmMvG0KFQghBiZpR0ZEINN2U3s=;
+ b=E8H+S4kMOXxycVui0sNkUBM5WPtr2QS/YzU+J1qZ69nc7Z2PbEYCbYkBBIC/PO5eMw
+ pOR23NVxnpFZBHEPwURUwOQGqNegGVVD4WqjXb6x6jJ5gojp/wtsZJ6QF/UVfi5wTY2j
+ RYtyQxasPE/FYjVs4LfiRq4Tn8nW/XCi7mAJxmU3r3GAxytlwvq0ZcaM1SyAvkUFvXno
+ mC3S//vEidoFGL+zV38Z/ycbKBZf/sccBSHN0eAC9xXCPAu8Yso+OzdirpDS+3M/pAXO
+ NJ1I2OMbM742ocq0mfZrpxQD6iMSCsj+kiQaiTCyd6bmtS2AkWlnUj2XKCsw/4kn5m5r
+ P/oA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVusHPcN2xCuJhziqdFs9M3bh3yfjQeCk5T41jo2uNsRXLRqf3jErkVBbgF6JR415C8vIUjkhc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHzUvu3DZXswyc0zlNbHyqLywuEOqLvACL3J5TAojLDLF6gDH6
- 1SbjuhfKJV9BttbvVebcluWLOzGS2gWiPGvIVmTBaG+HQO0HWJB/JWN1MJ0/U3a8Zw2ZIapFAJa
- RGvr8BWqjrDwLk9mFr7ASGoGflEnHCrFfQp34
-X-Gm-Gg: ASbGncv5HhJ01Q1nZgeT+OcB767SJfoTHhn+jGByrmFL1i+8Q9i4dw3bXhdAdYr0gT0
- 9NCnV9iF9FzjBXEB64n6kBd9g42rhFXC4tAzvjscs
-X-Google-Smtp-Source: AGHT+IFy0wBxb2lL9mRQByHiahl5wN1CWt1TGjqVjYzpRISSJ0VtagfohI/4wfeUj1wHFGbPvfz7p0Lt6ys1GknqJLw=
-X-Received: by 2002:a17:907:60d0:b0:aab:933c:4125 with SMTP id
- a640c23a62f3a-aac2702afb5mr5185301666b.10.1736019083586; Sat, 04 Jan 2025
- 11:31:23 -0800 (PST)
+ AJvYcCXSaQvIKDiYU9L4IjU0w5wbdrYk69yifDHiaiP8KWVv62q8QhiUv6N+TXu9QT0iBwSi+A3AAAI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4ycUKA7AKnlkQx5Av+7QlkHlE5rYbRV/2Nwmy9nGmRohc0DRN
+ 6HXZLvvMAzsxJvCCTaYSPTBjFZI4jSVLZ3ALHx5o+w8Rbe9Fk4pH/vkxqvPXevDIiITJvQqi6SN
+ vIvaW5/2SkM0FI9ALan4ewSdRuyhsr4/AQHDue7WJ0rLnAhc=
+X-Gm-Gg: ASbGncvujj3IQipz/E/cKa0D0xHRdLNmXDXiQrojC6dhuGhwDzoeKx+wkOufACwoT98
+ CdwDYKV67EnD2rw9x5k65alWyRkUN9hS4zwbxnEVB
+X-Google-Smtp-Source: AGHT+IHdkC/pkSWzU3+14r/kUZSDPaj6Ol06YibP9NszbSOqYUs+MR4tfojqtTEzhmj0thrc8k/lSUeeI9zcysReXFo=
+X-Received: by 2002:a05:6402:2790:b0:5d0:e73c:b7f0 with SMTP id
+ 4fb4d7f45d1cf-5d81de1c241mr132943000a12.28.1736019311830; Sat, 04 Jan 2025
+ 11:35:11 -0800 (PST)
 MIME-Version: 1.0
-References: <20250103215904.2590769-1-jonas@kwiboo.se>
- <20250103215904.2590769-3-jonas@kwiboo.se>
-In-Reply-To: <20250103215904.2590769-3-jonas@kwiboo.se>
+References: <20241229144607.1051889-1-pbrobinson@gmail.com>
+In-Reply-To: <20241229144607.1051889-1-pbrobinson@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Jan 2025 08:31:16 +1300
-Message-ID: <CAFLszTgehJLKF+ty4jig=JGpb9Z2rBu50+8_KcrX4ZzM4bD-Cw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] tools: amlimage: Add support for GXBB eMMC header
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Ferass El Hafidi <vitali64pmemail@protonmail.com>, u-boot-amlogic@groups.io,
- u-boot@lists.denx.de
+Date: Sun, 5 Jan 2025 08:35:04 +1300
+Message-ID: <CAFLszTiFbULEJSKvFZ8Vdjsj3QSv-Q-TPA3SRnTxtZz+y1y_=Q@mail.gmail.com>
+Subject: Re: [PATCH] rpi: Add identifiers for the new RPi 5 series
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,93 +85,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Peter,
 
-On Sat, 4 Jan 2025 at 10:59, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Mon, 30 Dec 2024 at 03:46, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> GXBB BL1 only tries to read boot image from sector 0 on eMMC and sector
-> 1 on SD-card. GXL and newer read boot image from sector 1 on both eMMC
-> and SD-card.
+> The Raspberry Pi foundation have released the Raspberry
+> Pi 500, CM5 an CM5 lite devices so add the assoicated
+> revision identifers so we can detect them.
 >
-> Vendor BL2 have solved the issue with different offsets by considering
-> where BL2 was loaded from to adjust the offset where BL3 is read from.
->
-> This provide a different solution to create a boot image that can be
-> booted from both eMMC and SD-card and where the offset for reading next
-> stage loader can be shared for both boot options.
->
-> Inject code, that relocate the payload located at 0x1200 offset in TZRAM
-> to the expected offset of 0x1000, into the padding area at offset 0x200
-> when a normal GXBB boot image is created. A special GXBB eMMC header can
-> then be created that have the payload offset point to this relocate
-> code, BL1 will jump to this relocate code when booted from eMMC instead
-> of the normal payload start. One effect of this is that the payload size
-> limit must be reduced by 512 bytes on GXBB.
->
-> Example of how to use it:
->   # Create a normal boot image
->   tools/mkimage -T amlimage -n gxbb -d u-boot-spl.bin bl2.bin
->
->   # Create a boot image with a special eMMC header
->   tools/mkimage -T amlimage -n emmc -d bl2.bin bl2-emmc.bin
->
->   # Write normal boot image to sector 1 of eMMC/SD-card
->   dd if=bl2.bin of=/path/to/dev bs=512 seek=1
->
->   # Write eMMC header, 112 bytes, to start of eMMC
->   dd if=bl2-emmc.bin of=/path/to/dev bs=1 count=112
->
-> Or with binman using something like:
->   binman {
->         multiple-images;
->
->         u-boot-gxbb-sd {
->                 filename = "u-boot-gxbb-sd.bin";
->                 pad-byte = <0xff>;
->
->                 mkimage {
->                         filename = "bl2.bin";
->                         args = "-n", "gxbb", "-T", "amlimage";
->
->                         u-boot-spl {
->                         };
->                 };
->         };
->
->         u-boot-gxbb-emmc {
->                 filename = "u-boot-gxbb-emmc.bin";
->                 pad-byte = <0xff>;
->
->                 mkimage {
->                         filename = "bl2-emmc.bin";
->                         args = "-n", "emmc", "-T", "amlimage";
->
->                         blob-ext {
->                                 filename = "bl2.bin";
->                         }
->                 };
->         };
->   };
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 > ---
->  tools/amlimage-gxbb-relocate.c | 79 ++++++++++++++++++++++++++++++++++
->  tools/amlimage.c               | 37 ++++++++++++++++
->  2 files changed, 116 insertions(+)
->  create mode 100644 tools/amlimage-gxbb-relocate.c
+>  board/raspberrypi/rpi/rpi.c | 15 +++++++++++++++
+>  1 file changed, 15 insertions(+)
 >
 
-I sent [1] some years ago and would quite like to enable the odroid-c2
-in my lab. Is that an older version of what you are supporting here?
+Would it be possible to get the information below from the devicetree
+on the FAT partition? This is passed to U-Boot at runtime.
 
-I heard that there are people working on open source tools, but it has
-been a few years and I'd be quite OK to just use vendor tools.
+Since we already have the DT internally, do we need fdtfile? There are
+mechanisms for using U-Boot's devicetree when booting.
 
-For your docs, could you put them in doc/ instead?
-
-[..]
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index 18be244aa79..1e43c631898 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -193,6 +193,21 @@ static const struct rpi_model rpi_models_new_scheme[] = {
+>                 DTB_DIR "bcm2712-rpi-5-b.dtb",
+>                 true,
+>         },
+> +       [0x18] = {
+> +               "Compute Module 5",
+> +               DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb",
+> +               true,
+> +       },
+> +       [0x19] = {
+> +               "500",
+> +               DTB_DIR "bcm2712-rpi-500.dtb",
+> +               true,
+> +       },
+> +       [0x1A] = {
+> +               "Compute Module 5 Lite",
+> +               DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb",
+> +               true,
+> +       },
+>  };
+>
+>  static const struct rpi_model rpi_models_old_scheme[] = {
+> --
+> 2.47.1
+>
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20211124040954.699821-8-sjg@chromium.org/
