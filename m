@@ -4,45 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0589E7719A
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 01:58:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03D72E77198
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 03:05:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEDCF802EF;
-	Sat,  4 Jan 2025 02:58:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E03F8034E;
+	Sat,  4 Jan 2025 04:05:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 081558034E; Sat,  4 Jan 2025 02:58:12 +0100 (CET)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4B9058035E; Sat,  4 Jan 2025 04:05:23 +0100 (CET)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B67EC803D2
- for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 02:58:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC00480207
+ for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 04:05:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 5041vMjA008722; Sat, 4 Jan 2025 10:57:25 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- trini@konsulko.com, sumit.garg@linaro.org, jonas@kwiboo.se,
- eugen.hristev@linaro.org, quentin.schulz@cherry.de,
- michal.simek@amd.com, seb-dev@mail.de, liujianfeng1994@gmail.com,
- heiko@sntech.de, zhangzj@rock-chips.com, macromorgan@hotmail.com,
- dsimic@manjaro.org, pbrobinson@gmail.com, cfsworks@gmail.com,
- sebastian.reichel@collabora.com, alchark@gmail.com,
- didi.debian@cknow.org, cassel@kernel.org,
- boris.brezillon@collabora.com, cristian.ciocaltea@collabora.com,
- jing@jing.rocks, FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH v5 3/4] arm64: dts: rockchip: add Radxa ROCK 5C
-Date: Sat,  4 Jan 2025 01:57:03 +0000
-Message-ID: <20250104015704.1238-4-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250104015704.1238-1-naoki@radxa.com>
-References: <20250104015704.1238-1-naoki@radxa.com>
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [IPV6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46] (unknown
+ [IPv6:2605:59c8:31de:bf00:37c2:fe62:c21b:ab46])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id DC3E2B22FA28;
+ Sat,  4 Jan 2025 04:05:19 +0100 (CET)
+Message-ID: <e3b4fe98-fce5-45e0-970d-d0398e23838d@freeshell.de>
+Date: Fri, 3 Jan 2025 19:05:18 -0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: LwIP and multiple network interfaces
+From: E Shattow <e@freeshell.de>
+To: Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
+ <20250102224724.GS3476@bill-the-cat>
+ <aa6d5dce-473c-447f-91b9-fe802f0f520d@freeshell.de>
+ <20250103014049.GT3476@bill-the-cat>
+ <14a9901e-00fd-4a5e-aeb1-ffbe715f8965@freeshell.de>
+ <7c20233b-d61a-4114-bbb3-6866bdd5bbf5@linaro.org>
+ <69678189-22b5-4372-83a4-0e4637975355@freeshell.de>
+Content-Language: en-US
+In-Reply-To: <69678189-22b5-4372-83a4-0e4637975355@freeshell.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -60,962 +62,269 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Radxa ROCK 5C is a 8K computer for everything[1] using the Rockchip
-RK3588S2 chip:
+On 1/3/25 09:58, E Shattow wrote:
+> 
+> 
+> On 1/3/25 02:03, Jerome Forissier wrote:
+>>
+>>
+>> On 1/3/25 02:52, E Shattow wrote:
+>>>
+>>>
+>>> On 1/2/25 17:40, Tom Rini wrote:
+>>>> On Thu, Jan 02, 2025 at 05:34:57PM -0800, E Shattow wrote:
+>>>>
+>>>>> Tom sorry about sending this reply twice, struggle here is with 
+>>>>> Thunderbird
+>>>>> mail UI sometimes hiding "Reply All" and it missed the mail list 
+>>>>> first time
+>>>>> around.
+>>>>
+>>>> No problem.
+>>>>
+>>>>> On 1/2/25 14:47, Tom Rini wrote:
+>>>>>> On Thu, Jan 02, 2025 at 02:26:06PM -0800, E Shattow wrote:
+>>>>>>> Problem: 'dhcp' must be ran twice when the network cable is 
+>>>>>>> plugged into a
+>>>>>>> port other than the first network port.
+>>>>>>>
+>>>>>>> Network cable plugged into bottom (first) Ethernet port:
+>>>>>>> 1. Power on
+>>>>>>> 2. StarFive # dhcp
+>>>>>>>
+>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to 
+>>>>>>> complete....... done
+>>>>>>> DHCP client bound to address 192.168.2.51 (3678 ms)
+>>>>>>>
+>>>>>>>
+>>>>>>> Network cable plugged into top (second) Ethernet port:
+>>>>>>> 1. Power on
+>>>>>>> 2. StarFive # dhcp
+>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to 
+>>>>>>> complete.........
+>>>>>>> TIMEOUT !
+>>>>>>> phy_startup() failed: -110
+>>>>>>> FAILED: -110
+>>>>>>> ethernet@16040000 Waiting for PHY auto negotiation to 
+>>>>>>> complete...... done
+>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to 
+>>>>>>> complete.........
+>>>>>>> TIMEOUT !
+>>>>>>> phy_startup() failed: -110
+>>>>>>> FAILED: -110
+>>>>>>> Could not start ethernet@16030000
+>>>>>>> 3. StarFive # dhcp
+>>>>>>> DHCP client bound to address 192.168.2.77 (31 ms)
+>>>>>>
+>>>>>> What happens when you set ethact to 1 first?
+>>>>>>
+>>>>>
+>>>>>
+>>>>> '1' literal does not seem to do something so I guess it is meant 
+>>>>> the id of
+>>>>> the first ethernet interface:
+>>>>
+>>>> Yes, I misspoke sorry.
+>>>>
+>>>>>   From power-on:
+>>>>>
+>>>>> ...
+>>>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+>>>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+>>>>> In:    serial@10000000
+>>>>> Out:   serial@10000000
+>>>>> Err:   serial@10000000
+>>>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+>>>>> starting USB...
+>>>>> No USB controllers found
+>>>>> Working FDT set to ff700a10
+>>>>> StarFive # env print ethact
+>>>>> ## Error: "ethact" not defined
+>>>>> StarFive # env set ethact 1
+>>>>> StarFive # dhcp
+>>>>> ethernet@16030000 Waiting for PHY auto negotiation to 
+>>>>> complete.........
+>>>>> TIMEOUT !
+>>>>> phy_startup() failed: -110
+>>>>> FAILED: -110
+>>>>> ethernet@16040000 Waiting for PHY auto negotiation to 
+>>>>> complete...... done
+>>>>> EQOS_DMA_MODE_SWR stuck
+>>>>> FAILED: -110
+>>>>> Could not start ethernet@16030000
+>>>>>
+>>>>> Again, from power-on:
+>>>>>
+>>>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+>>>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+>>>>> In:    serial@10000000
+>>>>> Out:   serial@10000000
+>>>>> Err:   serial@10000000
+>>>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+>>>>> starting USB...
+>>>>> No USB controllers found
+>>>>> Working FDT set to ff700a10
+>>>>> StarFive # env print ethact
+>>>>> ## Error: "ethact" not defined
+>>>>> StarFive # env set ethact ethernet@16040000
+>>>>> StarFive # dhcp
+>>>>> ethernet@16040000 Waiting for PHY auto negotiation to 
+>>>>> complete...... done
+>>>>> DHCP client bound to address 192.168.2.77 (149 ms)
+>>>>
+>>>> So then yes, the second interface works when ethact is set to use that
+>>>> directly. This is the same behavior as the legacy stack I believe.
+>>>>
+>>>
+>>> Legacy stack does actually rotate and complete successfully when 
+>>> ethact environment variable does not exist and (eventually) configure 
+>>> the second interface though. Here with LwIP the procedure fails.
+>>>
+>>> Notice that here it starts with ethernet@16030000, then rotates to 
+>>> ethernet@16040000 unsuccessfully, and back again to ethernet@16030000 
+>>> before (again) failing and giving up. There is a network cable 
+>>> plugged into 'ethernet@16040000' port and if we try the command again 
+>>> the environment variable ethact retained 'ethact=ethernet@16040000' 
+>>> from the failed procedure so you're right it works as it should... 
+>>> except that it totally failed to do what was expected the first time.
+>>
+>> That's unexpected indeed.
+>>
+>>> Is this exposing a problem with this board network driver and 
+>>> behavior or is it something with LwIP ?
+>> Hard to tell at this point. One thing I know for sure is that lwIP 
+>> expects
+>> eth_set_current() (called from do_dhcp()) to actually pick a valid
+>> interface if there is one. So it should definitely select 
+>> ethernet@16040000
+>> in your scenario. Adding debug prints to eth_set_current(),
+>> eth_current_changed() etc. should help.
+>>
+>> Thanks,
+> 
+> StarFive # dhcp
+> !!! eth_set_current(): entered function
+> !!! eth_set_current(): conditional 1
+> !!! eth_set_current(): conditional 2
+> !!! eth_set_current(): conditional 5
+> !!! eth_current_changed(): entered function
+> !!! eth_current_changed(): conditional 2
+> !!! eth_current_changed(): conditional 3
+> !!! eth_current_changed(): leaving function
+> !!! eth_set_current(): leaving function
+> ethernet@16030000 Waiting for PHY auto negotiation to complete......... 
+> TIMEOUT !
+> phy_startup() failed: -110
+> FAILED: -110
+> !!! eth_current_changed(): entered function
+> !!! eth_current_changed(): conditional 2
+> !!! eth_current_changed(): conditional 3
+> !!! eth_current_changed(): leaving function
+> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+> ethernet@16030000 Waiting for PHY auto negotiation to complete......... 
+> TIMEOUT !
+> phy_startup() failed: -110
+> FAILED: -110
+> Could not start ethernet@16030000
+> StarFive #
+> 
+> For reference the modified functions:
+> 
+> void eth_current_changed(void)
+> {
+>          char *act = env_get("ethact");
+>          char *ethrotate;
+> 
+> printf("!!! eth_current_changed(): entered function\n");
+>          /*
+>           * The call to eth_get_dev() below has a side effect of rotating
+>           * ethernet device if uc_priv->current == NULL. This is not what
+>           * we want when 'ethrotate' variable is 'no'.
+>           */
+>          ethrotate = env_get("ethrotate");
+>          if ((ethrotate != NULL) && (strcmp(ethrotate, "no") == 0))
+>          {
+> printf("!!! eth_current_changed(): conditional 1\n");
+>                  return;
+>          }
+> 
+>          /* update current ethernet name */
+>          if (eth_get_dev()) {
+> printf("!!! eth_current_changed(): conditional 2\n");
+>                  if (act == NULL || strcmp(act, eth_get_name()) != 0)
+>                  {
+> printf("!!! eth_current_changed(): conditional 3\n");
+>                          env_set("ethact", eth_get_name());
+>                  }
+>          }
+>          /*
+>           * remove the variable completely if there is no active
+>           * interface
+>           */
+>          else if (act != NULL)
+>          {
+> printf("!!! eth_current_changed(): conditional 4\n");
+>                  env_set("ethact", NULL);
+>          }
+> printf("!!! eth_current_changed(): leaving function\n");
+> }
+> 
+> void eth_set_current(void)
+> {
+>          static char *act;
+>          static int  env_changed_id;
+>          int     env_id;
+> 
+> printf("!!! eth_set_current(): entered function\n");
+>          env_id = env_get_id();
+>          if ((act == NULL) || (env_changed_id != env_id)) {
+> printf("!!! eth_set_current(): conditional 1\n");
+>                  act = env_get("ethact");
+>                  env_changed_id = env_id;
+>          }
+> 
+>          if (act == NULL) {
+> printf("!!! eth_set_current(): conditional 2\n");
+>                  char *ethprime = env_get("ethprime");
+>                  void *dev = NULL;
+> 
+>                  if (ethprime)
+>                  {
+> printf("!!! eth_set_current(): conditional 3\n");
+>                          dev = eth_get_dev_by_name(ethprime);
+>                  }
+>                  if (dev)
+>                  {
+> printf("!!! eth_set_current(): conditional 4\n");
+>                          eth_set_dev(dev);
+>                  }
+>                  else
+>                  {
+> printf("!!! eth_set_current(): conditional 5\n");
+>                          eth_set_dev(NULL);
+>                  }
+>          } else {
+> printf("!!! eth_set_current(): conditional 6\n");
+>                  eth_set_dev(eth_get_dev_by_name(act));
+>          }
+> 
+>          eth_current_changed();
+> printf("!!! eth_set_current(): leaving function\n");
+> }
+> 
+> Hopefully this is enough to make sense of it? Let me know, thanks!
+> 
+> -E
 
-- Rockchip RK3588S2
-- Quad A76 and Quad A55 CPU
-- 6 TOPS NPU
-- up to 32GB LPDDR4x RAM
-- eMMC / SPI flash connector
-- Micro SD Card slot
-- Gigabit ethernet port (supports PoE with add-on PoE HAT)
-- WiFi6 / BT5.4
-- 1x USB 3.0 Type-A HOST port
-- 1x USB 3.0 Type-A OTG port
-- 2x USB 2.0 Type-A HOST port
-- 1x USB Type-C 5V power port
+Postscript I've narrowed it down a bit to 
+net/lwip/net-lwip.c:new_netif() where returning from eth_init() the 
+eth_get_dev() is the second interface (with network cable plugged in) 
+but variable reference udev is still the first interface (with no 
+network cable) when the call to lwip_init() is made. So lwip_init() 
+tries and fails on the first interface even though we already know from 
+eth_init() which interface is valid and ready.
 
-[1] https://radxa.com/products/rock5/5c
+So that is what is happening but I don't know what you would want to do 
+to fix this?
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Link: https://lore.kernel.org/r/20241021090548.1052-2-naoki@radxa.com
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: 3ddf5cdb77e6efd6fe9b70f36dec935e324a3cd2 ]
-
-(cherry picked from commit f80689fcef4b9b07a97b629b4075cc1a4c21a68e)
----
- .../src/arm64/rockchip/rk3588s-rock-5c.dts    | 920 ++++++++++++++++++
- 1 file changed, 920 insertions(+)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588s-rock-5c.dts
-
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5c.dts b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5c.dts
-new file mode 100644
-index 000000000000..9b14d5383cdc
---- /dev/null
-+++ b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5c.dts
-@@ -0,0 +1,920 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/pinctrl/rockchip.h>
-+#include <dt-bindings/soc/rockchip,vop2.h>
-+#include "rk3588s.dtsi"
-+
-+/ {
-+	model = "Radxa ROCK 5C";
-+	compatible = "radxa,rock-5c", "rockchip,rk3588s";
-+
-+	aliases {
-+		ethernet0 = &gmac1;
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial2:1500000n8";
-+	};
-+
-+	analog-sound {
-+		compatible = "audio-graph-card";
-+		label = "rk3588-es8316";
-+		dais = <&i2s0_8ch_p0>;
-+		routing = "MIC2", "Mic Jack",
-+			  "Headphones", "HPOL",
-+			  "Headphones", "HPOR";
-+		widgets = "Microphone", "Mic Jack",
-+			  "Headphone", "Headphones";
-+	};
-+
-+	hdmi0-con {
-+		compatible = "hdmi-connector";
-+		type = "a";
-+
-+		port {
-+			hdmi0_con_in: endpoint {
-+				remote-endpoint = <&hdmi0_out_con>;
-+			};
-+		};
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&led_pins>;
-+
-+		led-0 {
-+			color = <LED_COLOR_ID_GREEN>;
-+			default-state = "on";
-+			function = LED_FUNCTION_POWER;
-+			gpios = <&gpio3 RK_PC4 GPIO_ACTIVE_HIGH>;
-+		};
-+
-+		led-1 {
-+			color = <LED_COLOR_ID_BLUE>;
-+			default-state = "on";
-+			function = LED_FUNCTION_HEARTBEAT;
-+			gpios = <&gpio3 RK_PD5 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "heartbeat";
-+		};
-+	};
-+
-+	fan {
-+		compatible = "pwm-fan";
-+		#cooling-cells = <2>;
-+		cooling-levels = <0 64 128 192 255>;
-+		fan-supply = <&vcc_5v0>;
-+		pwms = <&pwm3 0 10000 0>;
-+	};
-+
-+	pcie2x1l2_3v3: regulator-pcie2x1l2-3v3 {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pow_en>;
-+		regulator-name = "pcie2x1l2_3v3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc_sysin>;
-+	};
-+
-+	vcc5v_dcin: regulator-vcc5v-dcin {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc5v_dcin";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+	};
-+
-+	vcc5v0_usb_host: regulator-vcc5v0-usb-host {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio4 RK_PB5 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&usb_host_pwren_h>;
-+		regulator-name = "vcc5v0_usb_host";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		vin-supply = <&vcc_sysin>;
-+	};
-+
-+	vcc5v0_usb_otg0: regulator-vcc5v0-usb-otg0 {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio0 RK_PD4 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&usb_otg_pwren_h>;
-+		regulator-name = "vcc5v0_usb_otg0";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		vin-supply = <&vcc_sysin>;
-+	};
-+
-+	vcc_1v1_nldo_s3: regulator-vcc-1v1-nldo-s3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_1v1_nldo_s3";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1100000>;
-+		regulator-max-microvolt = <1100000>;
-+		vin-supply = <&vcc_sysin>;
-+	};
-+
-+	vcc_3v3_pmu: regulator-vcc-3v3-pmu {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_3v3_pmu";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc_3v3_s3>;
-+	};
-+
-+	vcc_3v3_s0: regulator-vcc-3v3-s0 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_3v3_s0";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc_1v8_s0>;
-+	};
-+
-+	vcc_5v0: regulator-vcc-5v0 {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&vcc_5v0_pwren_h>;
-+		regulator-name = "vcc_5v0";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		vin-supply = <&vcc_sysin>;
-+	};
-+
-+	vcc_sysin: regulator-vcc-sysin {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_sysin";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		vin-supply = <&vcc5v_dcin>;
-+	};
-+
-+	vcca: regulator-vcca {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcca";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <4000000>;
-+		regulator-max-microvolt = <4000000>;
-+		vin-supply = <&vcc_sysin>;
-+	};
-+
-+	vdd_3v3: regulator-vdd-3v3 {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio0 RK_PA0 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&usb_wifi_pwr>;
-+		regulator-name = "vdd_3v3";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc_3v3_s3>;
-+	};
-+};
-+
-+&combphy0_ps {
-+	status = "okay";
-+};
-+
-+&combphy2_psu {
-+	status = "okay";
-+};
-+
-+&cpu_b0 {
-+	cpu-supply = <&vdd_cpu_big0_s0>;
-+};
-+
-+&cpu_b1 {
-+	cpu-supply = <&vdd_cpu_big0_s0>;
-+};
-+
-+&cpu_b2 {
-+	cpu-supply = <&vdd_cpu_big1_s0>;
-+};
-+
-+&cpu_b3 {
-+	cpu-supply = <&vdd_cpu_big1_s0>;
-+};
-+
-+&cpu_l0 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l1 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l2 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l3 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&gmac1 {
-+	phy-handle = <&rgmii_phy1>;
-+	phy-mode = "rgmii-id";
-+	phy-supply = <&vcc_3v3_s0>;
-+	pinctrl-0 = <&gmac1_miim
-+		     &gmac1_tx_bus2
-+		     &gmac1_rx_bus2
-+		     &gmac1_rgmii_clk
-+		     &gmac1_rgmii_bus
-+		     &gmac1_clkinout>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&gpu {
-+	mali-supply = <&vdd_gpu_s0>;
-+	status = "okay";
-+};
-+
-+&hdmi0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&hdmim0_tx0_cec
-+		     &hdmim1_tx0_hpd
-+		     &hdmim0_tx0_scl
-+		     &hdmim0_tx0_sda>;
-+	status = "okay";
-+};
-+
-+&hdmi0_in {
-+	hdmi0_in_vp0: endpoint {
-+		remote-endpoint = <&vp0_out_hdmi0>;
-+	};
-+};
-+
-+&hdmi0_out {
-+	hdmi0_out_con: endpoint {
-+		remote-endpoint = <&hdmi0_con_in>;
-+	};
-+};
-+
-+&hdptxphy_hdmi0 {
-+	status = "okay";
-+};
-+
-+&i2c0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2c0m2_xfer>;
-+	status = "okay";
-+
-+	vdd_cpu_big0_s0: regulator@42 {
-+		compatible = "rockchip,rk8602";
-+		reg = <0x42>;
-+		fcs,suspend-voltage-selector = <1>;
-+		regulator-name = "vdd_cpu_big0_s0";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <550000>;
-+		regulator-max-microvolt = <1050000>;
-+		regulator-ramp-delay = <2300>;
-+		vin-supply = <&vcc_sysin>;
-+
-+		regulator-state-mem {
-+			regulator-off-in-suspend;
-+		};
-+	};
-+
-+	vdd_cpu_big1_s0: regulator@43 {
-+		compatible = "rockchip,rk8603", "rockchip,rk8602";
-+		reg = <0x43>;
-+		fcs,suspend-voltage-selector = <1>;
-+		regulator-name = "vdd_cpu_big1_s0";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <550000>;
-+		regulator-max-microvolt = <1050000>;
-+		regulator-ramp-delay = <2300>;
-+		vin-supply = <&vcc_sysin>;
-+
-+		regulator-state-mem {
-+			regulator-off-in-suspend;
-+		};
-+	};
-+
-+	eeprom@50 {
-+		compatible = "belling,bl24c16a", "atmel,24c16";
-+		reg = <0x50>;
-+		pagesize = <16>;
-+		vcc-supply = <&vcc_3v3_pmu>;
-+	};
-+};
-+
-+&i2c2 {
-+	status = "okay";
-+
-+	vdd_npu_s0: regulator@42 {
-+		compatible = "rockchip,rk8602";
-+		reg = <0x42>;
-+		fcs,suspend-voltage-selector = <1>;
-+		regulator-name = "vdd_npu_s0";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <550000>;
-+		regulator-max-microvolt = <950000>;
-+		regulator-ramp-delay = <2300>;
-+		vin-supply = <&vcc_sysin>;
-+
-+		regulator-state-mem {
-+			regulator-off-in-suspend;
-+		};
-+	};
-+};
-+
-+&i2c5 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2c5m2_xfer>;
-+	status = "okay";
-+
-+	rtc@51 {
-+		compatible = "haoyu,hym8563";
-+		reg = <0x51>;
-+		#clock-cells = <0>;
-+		clock-output-names = "rtcic_32kout";
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <RK_PB0 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&rtc_int_l>;
-+	};
-+};
-+
-+&i2c7 {
-+	status = "okay";
-+
-+	audio-codec@11 {
-+		compatible = "everest,es8316";
-+		reg = <0x11>;
-+		assigned-clocks = <&cru I2S0_8CH_MCLKOUT>;
-+		assigned-clock-rates = <12288000>;
-+		clocks = <&cru I2S0_8CH_MCLKOUT>;
-+		clock-names = "mclk";
-+		#sound-dai-cells = <0>;
-+
-+		port {
-+			es8316_p0_0: endpoint {
-+				remote-endpoint = <&i2s0_8ch_p0_0>;
-+			};
-+		};
-+	};
-+};
-+
-+&i2s0_8ch {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2s0_lrck
-+		     &i2s0_mclk
-+		     &i2s0_sclk
-+		     &i2s0_sdi0
-+		     &i2s0_sdo0>;
-+	status = "okay";
-+
-+	i2s0_8ch_p0: port {
-+		i2s0_8ch_p0_0: endpoint {
-+			dai-format = "i2s";
-+			mclk-fs = <256>;
-+			remote-endpoint = <&es8316_p0_0>;
-+		};
-+	};
-+};
-+
-+&mdio1 {
-+	rgmii_phy1: ethernet-phy@1 {
-+		compatible = "ethernet-phy-id001c.c916";
-+		reg = <1>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&gmac1_rstn>;
-+		reset-assert-us = <20000>;
-+		reset-deassert-us = <100000>;
-+		reset-gpios = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
-+	};
-+};
-+
-+&pcie2x1l2 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie20x1_2_perstn_m0>;
-+	reset-gpios = <&gpio3 RK_PD1 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&pcie2x1l2_3v3>;
-+	status = "okay";
-+};
-+
-+&pinctrl {
-+	leds {
-+		led_pins: led-pins {
-+			rockchip,pins = <3 RK_PC4 RK_FUNC_GPIO &pcfg_pull_none>,
-+					<3 RK_PD5 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	mdio {
-+		gmac1_rstn: gmac1-rstn {
-+			rockchip,pins = <3 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pcie {
-+		pcie20x1_2_perstn_m0: pcie20x1-2-perstn-m0 {
-+			rockchip,pins = <3 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		pow_en: pow-en {
-+			rockchip,pins = <0 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	rtc {
-+		rtc_int_l: rtc-int-l {
-+			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	usb {
-+		usb_host_pwren_h: usb-host-pwren-h {
-+			rockchip,pins = <4 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		usb_otg_pwren_h: usb-otg-pwren-h {
-+			rockchip,pins = <0 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		usb_wifi_pwr: usb-wifi-pwr {
-+			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		vcc_5v0_pwren_h: vcc-5v0-pwren-h {
-+			rockchip,pins = <4 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
-+
-+&pwm3 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pwm3m1_pins>;
-+	status = "okay";
-+};
-+
-+&saradc {
-+	vref-supply = <&vcca_1v8_s0>;
-+	status = "okay";
-+};
-+
-+&sdhci {
-+	bus-width = <8>;
-+	mmc-hs400-1_8v;
-+	mmc-hs400-enhanced-strobe;
-+	no-sdio;
-+	no-sd;
-+	non-removable;
-+	status = "okay";
-+};
-+
-+&sdmmc {
-+	bus-width = <4>;
-+	cap-mmc-highspeed;
-+	cap-sd-highspeed;
-+	disable-wp;
-+	no-sdio;
-+	no-mmc;
-+	sd-uhs-sdr104;
-+	vmmc-supply = <&vcc_3v3_s3>;
-+	vqmmc-supply = <&vccio_sd_s0>;
-+	status = "okay";
-+};
-+
-+&sfc {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&fspim0_pins>;
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		spi-max-frequency = <104000000>;
-+		spi-rx-bus-width = <4>;
-+		spi-tx-bus-width = <1>;
-+	};
-+};
-+
-+&spi2 {
-+	status = "okay";
-+	assigned-clocks = <&cru CLK_SPI2>;
-+	assigned-clock-rates = <200000000>;
-+	num-cs = <1>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
-+
-+	pmic@0 {
-+		compatible = "rockchip,rk806";
-+		reg = <0>;
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
-+			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
-+		spi-max-frequency = <1000000>;
-+		system-power-controller;
-+
-+		vcc1-supply = <&vcc_sysin>;
-+		vcc2-supply = <&vcc_sysin>;
-+		vcc3-supply = <&vcc_sysin>;
-+		vcc4-supply = <&vcc_sysin>;
-+		vcc5-supply = <&vcc_sysin>;
-+		vcc6-supply = <&vcc_sysin>;
-+		vcc7-supply = <&vcc_sysin>;
-+		vcc8-supply = <&vcc_sysin>;
-+		vcc9-supply = <&vcc_sysin>;
-+		vcc10-supply = <&vcc_sysin>;
-+		vcc11-supply = <&vcc_2v0_pldo_s3>;
-+		vcc12-supply = <&vcc_sysin>;
-+		vcc13-supply = <&vcc_1v1_nldo_s3>;
-+		vcc14-supply = <&vcc_1v1_nldo_s3>;
-+		vcca-supply = <&vcca>;
-+
-+		rk806_dvs1_null: dvs1-null-pins {
-+			pins = "gpio_pwrctrl1";
-+			function = "pin_fun0";
-+		};
-+
-+		rk806_dvs2_null: dvs2-null-pins {
-+			pins = "gpio_pwrctrl2";
-+			function = "pin_fun0";
-+		};
-+
-+		rk806_dvs3_null: dvs3-null-pins {
-+			pins = "gpio_pwrctrl3";
-+			function = "pin_fun0";
-+		};
-+
-+		regulators {
-+			vdd_gpu_s0: dcdc-reg1 {
-+				regulator-name = "vdd_gpu_s0";
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-ramp-delay = <12500>;
-+				regulator-enable-ramp-delay = <400>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_cpu_lit_s0: dcdc-reg2 {
-+				regulator-name = "vdd_cpu_lit_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_logic_s0: dcdc-reg3 {
-+				regulator-name = "vdd_logic_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <675000>;
-+				regulator-max-microvolt = <750000>;
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <750000>;
-+				};
-+			};
-+
-+			vdd_vdenc_s0: dcdc-reg4 {
-+				regulator-name = "vdd_vdenc_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_ddr_s0: dcdc-reg5 {
-+				regulator-name = "vdd_ddr_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <675000>;
-+				regulator-max-microvolt = <900000>;
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+					regulator-suspend-microvolt = <850000>;
-+				};
-+			};
-+
-+			vdd2_ddr_s3: dcdc-reg6 {
-+				regulator-name = "vdd2_ddr_s3";
-+				regulator-always-on;
-+				regulator-boot-on;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+				};
-+			};
-+
-+			vcc_2v0_pldo_s3: dcdc-reg7 {
-+				regulator-name = "vdd_2v0_pldo_s3";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <2000000>;
-+				regulator-max-microvolt = <2000000>;
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <2000000>;
-+				};
-+			};
-+
-+			vcc_3v3_s3: dcdc-reg8 {
-+				regulator-name = "vcc_3v3_s3";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <3300000>;
-+				};
-+			};
-+
-+			vddq_ddr_s0: dcdc-reg9 {
-+				regulator-name = "vddq_ddr_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc1v8_pmu_ddr_s3: dcdc-reg10 {
-+				regulator-name = "vcc1v8_pmu_ddr_s3";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			vcc_1v8_s0: pldo-reg1 {
-+				regulator-name = "vcc_1v8_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			vcca_1v8_s0: pldo-reg2 {
-+				regulator-name = "vcca_1v8_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			vdda_1v2_s0: pldo-reg3 {
-+				regulator-name = "vdda_1v2_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1200000>;
-+				regulator-max-microvolt = <1200000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcca_3v3_s0: pldo-reg4 {
-+				regulator-name = "vcca_3v3_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <3300000>;
-+				};
-+			};
-+
-+			vccio_sd_s0: pldo-reg5 {
-+				regulator-name = "vccio_sd_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <3300000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			pldo6_s3: pldo-reg6 {
-+				regulator-name = "pldo6_s3";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			vdd_0v75_s3: nldo-reg1 {
-+				regulator-name = "vdd_0v75_s3";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <750000>;
-+				regulator-max-microvolt = <750000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <750000>;
-+				};
-+			};
-+
-+			vdda_ddr_pll_s0: nldo-reg2 {
-+				regulator-name = "vdda_ddr_pll_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <850000>;
-+				regulator-max-microvolt = <850000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <850000>;
-+				};
-+			};
-+
-+			vdda_0v75_s0: nldo-reg3 {
-+				regulator-name = "vdda_0v75_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <750000>;
-+				regulator-max-microvolt = <750000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdda_0v85_s0: nldo-reg4 {
-+				regulator-name = "vdda_0v85_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <850000>;
-+				regulator-max-microvolt = <850000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_0v75_s0: nldo-reg5 {
-+				regulator-name = "vdd_0v75_s0";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <750000>;
-+				regulator-max-microvolt = <750000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&tsadc {
-+	status = "okay";
-+};
-+
-+&u2phy0 {
-+	status = "okay";
-+};
-+
-+&u2phy0_otg {
-+	phy-supply = <&vcc5v0_usb_otg0>;
-+	status = "okay";
-+};
-+
-+&u2phy2 {
-+	status = "okay";
-+};
-+
-+&u2phy2_host {
-+	/* connected to USB hub, which is powered by vcc_5v0 */
-+	phy-supply = <&vcc_5v0>;
-+	status = "okay";
-+};
-+
-+&u2phy3 {
-+	status = "okay";
-+};
-+
-+&u2phy3_host {
-+	phy-supply = <&vcc5v0_usb_host>;
-+	status = "okay";
-+};
-+
-+&uart2 {
-+	pinctrl-0 = <&uart2m0_xfer>;
-+	status = "okay";
-+};
-+
-+&usbdp_phy0 {
-+	status = "okay";
-+};
-+
-+&usb_host0_ehci {
-+	status = "okay";
-+};
-+
-+&usb_host0_xhci {
-+	dr_mode = "host";
-+	status = "okay";
-+};
-+
-+&usb_host1_ehci {
-+	status = "okay";
-+};
-+
-+&usb_host1_ohci {
-+	status = "okay";
-+};
-+
-+&usb_host2_xhci {
-+	status = "okay";
-+};
-+
-+&vop_mmu {
-+	status = "okay";
-+};
-+
-+&vop {
-+	status = "okay";
-+};
-+
-+&vp0 {
-+	vp0_out_hdmi0: endpoint@ROCKCHIP_VOP2_EP_HDMI0 {
-+		reg = <ROCKCHIP_VOP2_EP_HDMI0>;
-+		remote-endpoint = <&hdmi0_in_vp0>;
-+	};
-+};
--- 
-2.43.0
-
+-E
