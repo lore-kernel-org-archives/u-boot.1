@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEA29E77188
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 19:29:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DDCEE77188
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 19:31:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 433538043F;
-	Sat,  4 Jan 2025 20:29:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9BD878043F;
+	Sat,  4 Jan 2025 20:31:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S4zx+Bkk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gcfng7sE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DE608056E; Sat,  4 Jan 2025 20:29:54 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 7C2C58056E; Sat,  4 Jan 2025 20:31:02 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFF42803DC
- for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 20:29:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F919803DC
+ for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 20:31:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aa6c0d1833eso2735566166b.1
- for <u-boot@lists.denx.de>; Sat, 04 Jan 2025 11:29:51 -0800 (PST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3bdccba49so24185096a12.1
+ for <u-boot@lists.denx.de>; Sat, 04 Jan 2025 11:31:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736018991; x=1736623791; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736019059; x=1736623859; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0f3JAy0uDkJ6BBGhP25vEBQqW8flHYlUjqO4lvYQDrU=;
- b=S4zx+BkkMxIZNG2FJ+u7trV5PFsSmX+uADGyGF+/PZlDJeZbxyYX6ojsx4Q6lZ5xvG
- c4NvdfDyjKu35OqQKkQQD8ZxQElhRXUJS1nc2AqbTqXI/K1W82scOKNVsAiRYhiPGOyl
- PRFGgTGUvaxxP1HA5/DJbOWriUT1rK2G27NPI=
+ bh=otIfT4YW5jNThsKFq1bQR4qWKJLmRkrk4IRwvXcfey4=;
+ b=gcfng7sEfUjMwNFfbU+0hCbwONnBnVIa1cmaemDyyXZDVRPXwKxJt53wWnmYK1deP9
+ noWDI4HpHDRd+IWd8sXY7rcAMMR12YWhripL3X5CTDsqguK/KZkxcSJAIDGwZuQONOZr
+ a6mbPBoWvzYZnH3+M+lwlCtoO0nJjQHQ8dAAs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736018991; x=1736623791;
+ d=1e100.net; s=20230601; t=1736019059; x=1736623859;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0f3JAy0uDkJ6BBGhP25vEBQqW8flHYlUjqO4lvYQDrU=;
- b=XRrII+uRb7FLoW19PMOtreVKc6tfTfGtOPQ6YNy3Jv1lUbIt4JqryQ+jj1CUyNRDYF
- N7SO+soTkDLdjRg2WuvuddRnLXALF8mEv/FSWBiBpzjqQuCqq/LwSPSWp12v9BTMF4UT
- B6Tc+ni+Iixc/m+271a0qZD1got8+wfmTMcZZs9p66tKvNJr2tmt7M8mJqjTFTt2J57D
- EIs1nZGiZGMrnDuzogXPRXJxWrs/eZUubZUm3W+X4z826wmTGR2BIVGS493dwbV0uBBv
- bVykEAzhpXVXxJ4MXrIcPSd+0BXW6Vc/Hdrcij9oiq0o9h0DtTZyV9viDk4I61A9kOcp
- qpDw==
+ bh=otIfT4YW5jNThsKFq1bQR4qWKJLmRkrk4IRwvXcfey4=;
+ b=wh8Hm2pXHJH6L0y5HP6c8iWe60fwDqE/O1FJJndOfmnd2HXHgzi7OeD0xfJ7JEK3XD
+ AEkoPwlbnxK/Z6mATbyIiXz20283gvYReDtkmjM9KoKIhabxVnxOHFdli3jY1FFHq+is
+ RRNpCH+J/JmMF0QouWJIRTf8BQ+G4MBWmWL1VNnlsPaQOWkCZ19pFp0z8Zq38le7wBvh
+ 09HIRI1LfA5GaLaXXXKI+T4/+7QwjOpY+qsK6T0nGt94eGUbFDWDznrECcriYNHNg7nT
+ oc8LGIh499zDB+VhBjDzrs1hQ6WHZUg84MopFcoT2z9LqYycFD2MM9xPPbQr/u1HcC5t
+ w1tQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8aCrE1KVZqTVy752yIMWTRSlUF2cs0povXIQGoFz7EelX/FCyaHPoAwooumkcK2jC9JUmNzo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyqpNrVH/NgsETd44YbXtd1Yn3MfTrO4KJPDIwGt8CDaW1UCfGI
- C+t9rjwvX7QeCZsjAAxZZWH6dIuNcVRZ9cAATINklCH4qlMp42oNg6VC0kYo23VfTeQObfGDBo1
- aDFItiLkx361KuhnVjIf7ZXzwjrPBTeqfDQ2lAhCQkM0sVnA=
-X-Gm-Gg: ASbGncuPVO/DhAxLSrh10a8SDd8tpngRRvgoIg0A4yaODDhgycJyvO3TF5VqpvvQb6U
- 7Jk1loK3gu34zO1il5yfw85h/Yx5LcTqnYMTZ9TPO
-X-Google-Smtp-Source: AGHT+IFdKTZ327+uUzGQtTjxTCqIiSdos7VmzKVjP/66klUvbkug1ipF9N79FvEfUmWEk9MJg7zCpVQo+Gh5MyZVLt4=
-X-Received: by 2002:a17:907:9804:b0:aaf:123a:f303 with SMTP id
- a640c23a62f3a-aaf123af418mr3376126766b.55.1736018991263; Sat, 04 Jan 2025
- 11:29:51 -0800 (PST)
+ AJvYcCVQ3JC87Vx5zwiVZ//kDVNp7ljx4nTy4H23BMOJEPnyY7/8NqVebTkW4ViB+BqDLU6IxN1qgCI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXDgz2AnQaVSXpJWcLkKEWuhm1mawPZOy7PuIp8EeT4h2MNL/M
+ 6zWXQ4Y0vBntIEl94FTNKvq1Ho0E5gX3wY0yeNf9xzOW7eVgXqvfMAOspzGaL2JfXP2qBup+s+X
+ zfMyyxGjv81kYpBEtiXc6LpAzQGamiRw0gse8qZR7/R0/2to=
+X-Gm-Gg: ASbGncsSCehybKk+JV9bygZNjE6gQkAr5UKoNn4RyahTJaRuVPvG7TMqEeXlsqfkquR
+ VUYYhtfsnQUMsZsCfWXk1PHpL1hTM2dD2RJUIS6QV
+X-Google-Smtp-Source: AGHT+IE1dBxFDcw1dKrvuf3br6jFt3HQCowNiKFjJeQ42RRaY83ryUnl1veFPFQpUwb6lfXw8e6PNGNzGPndKgP2Mis=
+X-Received: by 2002:a17:907:980e:b0:aaf:3013:7f8f with SMTP id
+ a640c23a62f3a-aaf301382aamr2235381066b.20.1736019059270; Sat, 04 Jan 2025
+ 11:30:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
- <20241128114737.2.I03b59e1d26d2a79a666adc8ef313077da8dce145@changeid>
- <c31b3d7a-c840-4b3d-a6fe-90f9a576ffb4@gmx.de>
-In-Reply-To: <c31b3d7a-c840-4b3d-a6fe-90f9a576ffb4@gmx.de>
+References: <20250101221003.1944600-1-sjg@chromium.org>
+ <20250101221003.1944600-9-sjg@chromium.org>
+ <923dbaf9-47e0-4e48-a0ce-f0afbe32d1b7@gmx.de>
+In-Reply-To: <923dbaf9-47e0-4e48-a0ce-f0afbe32d1b7@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Jan 2025 08:29:43 +1300
-Message-ID: <CAFLszTikmQfBsQTJ5FLfvOv2GgPWPj0GyDCoCxYnXVtbruvf-A@mail.gmail.com>
-Subject: Re: [PATCH 2/2] config: efi-x86_payload: Enable DEBUG_UART
+Date: Sun, 5 Jan 2025 08:30:49 +1300
+Message-ID: <CAFLszTjRfB8dL3G0AcEx0=PknLFozDaU9c2EqiVfP3U2e+2xjA@mail.gmail.com>
+Subject: Re: [PATCH 08/67] x86: Emable meminfo command
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Bin Meng <bmeng.cn@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,77 +91,42 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Sat, 4 Jan 2025 at 05:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sat, 4 Jan 2025 at 03:51, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On 28.11.24 04:47, Kever Yang wrote:
-> > The efi_stub is useing DEBUG_UART interface by default, Enable it.
+> Nits:
+> %s/Emable/Enable/
 >
-> As Simon already wrote in a code comment the implementation of the EFI
-> stub is broken as it is not hardware agnostic.
-
-If I said that I was wrong, sorry. Actually that is the stub's intent,
-to take over the machine, exit boot-services and carry on. It is the
-EFI app which is designed to use boot services.
-
-So the stub cannot be hardware-agnostic, unfortunately. It only runs
-on x86 hardware, unless, for example, EFI has something like
-serial_getinfo() or we disable the UART / keyboard input.
-
->
-> In the EFI stub we should never directly access hardware. Please, use
-> SimpleTextOutputProtocol.OutputString() for printing.
-
-Once the stub starts, boot services are gone. See efi_main() for how
-this works. There is a definite point at which we stop using that and
-start using U-Boot's own thing.
-
-At this point I think I may be misunderstanding what you said...
-
->
+> On 01.01.25 23:08, Simon Glass wrote:
+> > Enable this command for x86 boards as it is quite useful for seeing
+> > where memory is.
 > >
-> > Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
-> > ---
-> >
-> >   configs/efi-x86_payload32_defconfig | 1 +
-> >   configs/efi-x86_payload64_defconfig | 1 +
-> >   2 files changed, 2 insertions(+)
-> >
-> > diff --git a/configs/efi-x86_payload32_defconfig b/configs/efi-x86_payload32_defconfig
-> > index 071ddb8e36d..f0b9acc358d 100644
-> > --- a/configs/efi-x86_payload32_defconfig
-> > +++ b/configs/efi-x86_payload32_defconfig
-> > @@ -5,6 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
-> >   CONFIG_PRE_CON_BUF_ADDR=0x100000
-> >   CONFIG_VENDOR_EFI=y
-> >   CONFIG_TARGET_EFI_PAYLOAD=y
-> > +CONFIG_DEBUG_UART=y
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
 >
-> On x86 this uses the NS16550 UART driver. This is fine as long as we
-> don't use the debug UART in the EFI stub. But correcting this is for a
-> separate patch.
+> Enabling the option by default for the sandbox in cmd/Kconfig and for
+> x86 in arch/Kconfig is confusing. Please, use the same approach for all
+> concerned architectures.
+
+OK.
+
 >
-> Having a debug UART available after the EFI stub makes sense.
+> Why do we need symbol CMD_MEMINFO_MAP? The meminfo command is worthless
+> without it. Both the greeting header and bdinfo already show the memory
+> size. Can we remove that over-engineering?
+
+I have no objection to that, but please check with Tom and Ilias[1] [2]
+
 >
-> I will update the commit message when merging.
->
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
->
-> >   CONFIG_EFI=y
-> >   CONFIG_EFI_STUB=y
-> >   CONFIG_FIT=y
-> > diff --git a/configs/efi-x86_payload64_defconfig b/configs/efi-x86_payload64_defconfig
-> > index 71612d7fb19..b02a861e59c 100644
-> > --- a/configs/efi-x86_payload64_defconfig
-> > +++ b/configs/efi-x86_payload64_defconfig
-> > @@ -5,6 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
-> >   CONFIG_PRE_CON_BUF_ADDR=0x100000
-> >   CONFIG_VENDOR_EFI=y
-> >   CONFIG_TARGET_EFI_PAYLOAD=y
-> > +CONFIG_DEBUG_UART=y
-> >   CONFIG_EFI=y
-> >   CONFIG_EFI_STUB=y
-> >   CONFIG_EFI_STUB_64BIT=y
->
+> Sending standalone patches separately from a bulky patch series would
+> avoid hesitation to review and merge (see Tom's mail).
+
+Well, thank you for reviewing. I'm going to figure out some tooling to
+help, when I get a chance. Then I hope to be able to keep track of
+lots of independent patches. Tom has suggested that I just send less,
+as well. Another solution might be for me to adopt several aliases so
+I am three different people?
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20241011214032.760072-7-sjg@chromium.org/
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20241009015020.25817-7-sjg@chromium.org/
