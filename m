@@ -4,164 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED83DE77188
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 03:21:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25086E77188
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 11:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 482E180570;
-	Sat,  4 Jan 2025 04:20:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E2D88036D;
+	Sat,  4 Jan 2025 12:49:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="CAD3OHm5";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zPC2Q72x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE366803C6; Sat,  4 Jan 2025 04:20:07 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::61d])
+ id 29D06803DC; Sat,  4 Jan 2025 12:49:52 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CAF680544
- for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 04:20:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D16680107
+ for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 12:49:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T1mmt8xQbgEyQLXMvDhi+NIDATucASONwQWrvKl8vrSvBJsdaN/njYej3VNangWKwxbUMtyvq5zharNVma8k0BNeNZzkuoWHKoE5n+50ZDsaJKzJ2K83VtcYr3A7nInWL44cmM82iOj1Wane4ROPwDW0HwtEpqJwueIJkhOjx3ejchKO3lxfaQDMVDsCbCCLu7uu6ZmyXxkehI/XYmDcHaL2rrXhozPPuYDe77LbRTVh9tDFHGUlkifBTDyemwhJWdzx+o/fDJbwoThMKEeusi5uJUkDVc5F9B5oop1eGozZCJa3DE9sYaB4MswkYksC+4rfbji/xMAGRfWYB++LsQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Mn+3GelrPMPA9WMHblcMHZq/cNdLuJqmHrQUTPQsals=;
- b=mPvk46Xz6aPacHbf+ZVRMMSsi44E55umarFqOiRBSWiAJZ15wW8F5iDXa+0FjX0SWC4mnkERb5dBmdVbF1R1rcu/XeZ8DrEQU7Ob1r3a6RMWBiItFUeeciKDms0hU6AbCxrXveuSXh587NoaxFFEvzG9UY/BR5LFlKgwqM/PwLoTJtp7GZUEjzJPKFviZ5x2nKZktqAeAGBdxj1TLgTDqUhJp9BTUaASf1DW3fvHwwpJEVSk9O2B9kj+SUCapqYNmQSgWKYhCQShkFB95zPdoGkOXyMNyjax6Cfag8oF+5GtKQlNEiLjd71DLGFQ5wuGgjbwVsS7ckazngRuLRABcg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Mn+3GelrPMPA9WMHblcMHZq/cNdLuJqmHrQUTPQsals=;
- b=CAD3OHm5HVUa6JEHUDbXQ8n3BHRZpAA/LW5TOR6+z04ly7yY+nn2lRro+qUEusmvcQlKOZrdBq76GoORNLlkxzUV5I8jo0OvWO0AiR8brTuMhDJmJ9i5SRD7jOa/I2gWjpiDjsaI9O3YcFSzdTKKRIIFWi9MDqzII+Bk6v7P2q6QuhQXWpcFHknw4z979o1leu4mfYUzPrSNTG8zAMd0iqIOwyEbDEaR3NR9D0ZNEAiO2syAMvkNsaXrH3s9EWck9uYDvqP6awEfaYOE3uS+/Eqfa+1r9T4hJP8ZjPlFbbT+0O8D0jQIqQUsZg8GRBj+9OcoVT6IAb2g8e5RA/9FvA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PA4PR04MB9566.eurprd04.prod.outlook.com (2603:10a6:102:26c::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8293.19; Sat, 4 Jan
- 2025 03:20:00 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8314.015; Sat, 4 Jan 2025
- 03:20:00 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Sat, 04 Jan 2025 12:25:46 +0800
-Subject: [PATCH 12/12] imx: imx93-11x11-evk: drop duplicated nodes
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250104-imx-bootstd-v1-12-e09618cc1d65@nxp.com>
-References: <20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com>
-In-Reply-To: <20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.14.2
-X-ClientProxiedBy: SG2PR01CA0151.apcprd01.prod.exchangelabs.com
- (2603:1096:4:8f::31) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4402=T4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1735991388;
+ bh=l9lZ1aoBPBHwuDuLSBfFArxTJORMM4v/GxcXskBFnZ8=;
+ b=zPC2Q72xbtQ8+oSJ6mRWW+5JtWBdcuGq3zJ4eQy8OWnzcu3j1IYa3xvZVj/dk1TdCzBHomGP2
+ L1KXupxvRpQDfdGWnqyfWLBqCrM82Vgk7zMI2IubtkP8xw015UgDl+EZPcgHnaO3MKCdVEpNCdN
+ 6sz5QBtdUnu5HY9LZsBdvfPCgmUDsjNsy73NJz316q8QP+OSH92ROu3enTBD682W1bvzzo6OG9W
+ B7oA2MKlK0w2DXuA1Xlgk+RaMCyzvLxemct5SoO1leZ8JOGIHC8742P8t3g+5F5vPiJIhRazbNY
+ QZEU2lOOYvTbjQISJJrriu2xZzc5CSfA1f5BRMu5d7DQ==
+X-ForwardEmail-Version: 0.4.40
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Received: from [192.168.2.234] ([78.69.151.207]
+ 78-69-151-207-no600.tbcn.telia.com) by smtp.forwardemail.net (Forward
+ Email) with ESMTPSA (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384); Sat,
+ 04 Jan 2025 11:49:38 +0000
+Message-ID: <a84b7af4-0e78-4a07-ba5c-590891bc50ca@kwiboo.se>
+Date: Sat, 4 Jan 2025 12:49:37 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PA4PR04MB9566:EE_
-X-MS-Office365-Filtering-Correlation-Id: 14a85aa1-208e-4068-3fb0-08dd2c6eabff
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VXNjZjZjbi9XTFk2R3pFSE1jNEY5S0xlejJXeG1FaGxDRVlWeXRnUDVRbmZq?=
- =?utf-8?B?eTRrRHhuWUpXUjV4THhPZTMzMjVlMmIzZVZ1OWRRRWdRWE9iMUwrU0FheXVW?=
- =?utf-8?B?aTBsZ09HQ1RSeWN0aFdzWW5QZzdaSXlsMDhxSGhWVTFOa3AzVklkOHN1bG9N?=
- =?utf-8?B?cjRLS2JwSGNyTUt1d1Nja3EwR0ppaTlsMncyOEhqWkF4aWN0SlcvekhqVmpy?=
- =?utf-8?B?ejR6NTVrTzcrL3lneEVPYmtVdmZVLzNHQTg0cWlSdUZlQ2tBZ3lnOW9RNys4?=
- =?utf-8?B?aHQ4WDJ6R2dGS3ZQMWhBLzVEWWRTdU51V0tQekhmS2Y3N1RReXVXbjBQc0hi?=
- =?utf-8?B?cGRNeDhSVDAxNDhYa05uamJ2c1BJdkFJd2pqSXdBS090dXRVNVVPRmI0YWF4?=
- =?utf-8?B?MHp0T3NwRnFTZ3lNOUo5bXdVM29Ba3FnMjczUGZjQjUrUCtRcmt6VHV3RTFv?=
- =?utf-8?B?U21PMGlqN3dPRnkxS2pHcnBsY1E1bzgrd1ZPV0w0QkdLUEdMbkEwZ2wvempx?=
- =?utf-8?B?SkJqSGFxTmd3WW5OVE52a3hadkdjbDhkQit0bFhMWTUxSzRtQkxSc1c2OUd3?=
- =?utf-8?B?akxhRjc5N0JWQzZaWkplVFZrY2ZXVGthQnVJWmFTL3BidFM1dUZLL2toamxL?=
- =?utf-8?B?MTFqVU92bE5JMlhSOUwzMG8rRHlEbGlNU2Q2dzF5V2E5UVZ0czl2clZEKytr?=
- =?utf-8?B?UXVTM0FvbnVyMTF3S2NNTTN6TWxZUlNRQWZRZnlXTXNzSjhucUtBSlUvYmJ0?=
- =?utf-8?B?OEhrOWczbEZJQkN3V0pOWisvaUFWOEdoS1NENFN0Mjh5blBWQnNFM3JqaFFp?=
- =?utf-8?B?MGxpMjF3d25MNzl1NC8wT1B0aTVkeTdMRnh5cEtFalBLdHV2d242MGVYMXhy?=
- =?utf-8?B?eXNub09La3ZJN2lMdGxFdFBCazVjZHZ2L0h6bVdGazd2bmVwQkl2c1VwTWpM?=
- =?utf-8?B?Z2dxdm1IdWtHcXEveUlzMk9NU1V5Z0ZsdHA5V1FINUl4cVcxeFVrTmpwNGZx?=
- =?utf-8?B?T3dXdEVMMENGVk5XR2dhZlZHVjRqSmYzUXV0R0tOZms2ZC9rYkJqS3UvTE14?=
- =?utf-8?B?djhmMURzcWtBVTJLUnp4TEZHc3NDTWRuN3dxcjFhRDNBdHc3ZnhxYlJBZ1Vt?=
- =?utf-8?B?L0RrUzRreHQ1cmcxM0tUcEdVMU1PbGRoN2lDcmYzK3FTVkFQSHlQUkxRMkJm?=
- =?utf-8?B?LzFuSWNuU01sOXBCVTIyTDExazh0L2lMMEZJcDZ3ZVBKZXFYNHRiQmgvN0Z5?=
- =?utf-8?B?WDkxOG9JdWdBNWtxNTRUTWdlTU5HTWJYaTBYaTdNSUtjdmVieGRYdGlmU0w2?=
- =?utf-8?B?MGdiSFBzY2J1MTEzK3ZmaitvQUVaN1E2Q0ZzR1dtelZiUk1SQlAweVN3ZHVO?=
- =?utf-8?B?ZjY0cVQxZDczN2tPa1BKSlVIbkRLK0VGdWJiT3BGVFJUcGhvaDg3T3pXcmxX?=
- =?utf-8?B?MnVzTXIxbnRZRkV5RytvbUpUWTBBcUpGL1htaVRkMXoyMW5EWktwRXo5UXlx?=
- =?utf-8?B?WXE0N3FpNUM5QjhNMStqK1ArRVAyRzVsdUI1VzgrYlBmMStXb3JOWks5S2kr?=
- =?utf-8?B?OEMwb2pyRkVCR3FydC85RlBRMWRhbUJYd01QanlSQUVFTzhjSFFWZWhrU2VC?=
- =?utf-8?B?bVBWWDhRZXFPZW1ocFc2V0o2NGNpazIzOEkxSERVSXdGWFV5MTc3NGNrZlpQ?=
- =?utf-8?B?Q2xMakxvbUhnVHF4Vk16cmJ6WWlmRmJnK0FmUlUzaHZIakx2T0lRa0huTzli?=
- =?utf-8?B?ZUl0TFUzb2kwY2dLZVJqYVgvaWI4ZWp0S2pyajNCY2tKN1g4VlpscCt6dk9E?=
- =?utf-8?B?aGRTanRqVU9UTzJlU2NIVlNDMUZhNVZ2SS9URXAvUWNNTFZZcmR4K0F6b1VO?=
- =?utf-8?B?OGZXdDNQU2lCWFB5R3ZaOW84dTVSaXZPREduUi9wZHJNMEoyVk9BOTJSWmZN?=
- =?utf-8?Q?cTBfsskRUBgzW/bJdL2FzLkJCMHgx9ns?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RW52ZDVZL1p4YVMzNU9rc3hTSXd2VUFJSExNTDhDZjJST29qd1U5STc3RVl3?=
- =?utf-8?B?Vll0aDd5NzZDS2lzQ0t1SkZPb0hzekRTdGlRbmttcFhFWVluU1NWN3VFZldk?=
- =?utf-8?B?dGgrRzZmTWxMcG5PLy9Mb3pFclIrTXBLbjU1VkhPbFdWTk5yUDhvNVRjcHBB?=
- =?utf-8?B?M0xyUm9WS0FzWnVIdkNsL0RMalB0QWRCYWl4MmF1WGQ2OEttQm9kUjhzaWd4?=
- =?utf-8?B?aUFnM2txcE9JemQ0UklCZUR1d0NHaHh3MERxZ2JyL0FtWFB5M1FFZ1lxRVBT?=
- =?utf-8?B?dm1kU3BsSkxyNFBtMlhXcTUyT0V5QlFiTWY4OEF3NFQ1cHNYcmNONWd3RkIv?=
- =?utf-8?B?eFFaMmc1ZnpOSVEvQU12clFVSHlDOTVLdFpPVG9SUndic1BLVUJMOXAwcVMw?=
- =?utf-8?B?cFFpWEx6TFRuSFFicm9HNEpKNHgyaDR1Tk5PQndnMnNjZlM2MzRXZmZZRGYz?=
- =?utf-8?B?NytqWURHUllqZGU1MVlXVFB1akEwa000S1NzYlEzNEhJMVR0citQcjFlR1Rx?=
- =?utf-8?B?VjZ4Ny9DY2pLMmx0cDJrVW5HUEhFazNhbzNxZEtZckhrZWVkb3NNSldJYm80?=
- =?utf-8?B?MzBxVnhUYnF2d0t1NFJmSkhXUTIrZGtLNDVNejE3YW1sTW0zd2ZsbXMrbjB4?=
- =?utf-8?B?cTNsSTlwV3M1cTc4bEtVdVBRSFhXb0lZMVhFUHM1N2tzWDZjc3FnVXNDUlhS?=
- =?utf-8?B?TGl3SzBHR3dOeTduby9MZ1FlU2F2Rk4zYnFyeGJyeHUwVUovR0FqM3Y4SkdG?=
- =?utf-8?B?Sm0vK0RYNXZMOE9qaFZlMm5sdHVmVzQrNGdTODUzai9rNjBmcFBWWlpycUZW?=
- =?utf-8?B?UjF2enAwLzE3OWdUdy8rSWJIQVkvaS9jVWpLZ3pDbDJ1a280VWtMaS85d1pp?=
- =?utf-8?B?N2R0MWEvbWtwU3ZlcjFBeTJvQmg2ZjdQaWZjcXNsMTgwcytJK05VSGk0M01E?=
- =?utf-8?B?YkF3bjcyYXI4OWdEWDV6TC9JU1J5S0wrK0lXelFjRUoyWlJQUnlHMDAxKzcy?=
- =?utf-8?B?emVrQU1vajJML2EwcXg1THNtUXFtQmg5YWpsTHRlT0ZWbndNNlp3Nkp3ZWhw?=
- =?utf-8?B?YTBpWE5UUmpBQWJLazd3TlVjcTJsVCtTbDJsRjBqNytoa0VVRmg0N0ZIZ3BM?=
- =?utf-8?B?SktEMTJDN0pyYWFxRzJpNW1zUmcwOHB5ZkcxVEw4cGtrYVllQ0tjOG1Wd1JW?=
- =?utf-8?B?Vm9oNHEwU0k3MzI5bjJOTGI4TzY2VmpkeFk5c1Z6aWUrMld6R3J6cWx2QStH?=
- =?utf-8?B?bW5XN0lNcHdLWUNwTDYxQ25ZK0ZUbjVad1grM25URm1oNkxaaHpjeVpzeEkr?=
- =?utf-8?B?UzVTRnlkN2orK1UwWlpyMys0QjBVNEdsdzhsWGlXL0NDUStxc1FReVJ2TFJl?=
- =?utf-8?B?VTVic0dsWm5tVlZHSFpOVWxxUXFIN2QyNHZaYmNaT0U0UW85MmdTSklyejhM?=
- =?utf-8?B?Tmgxa1ozRFhOODRGbXZWekFLOXdhYkdTMVZCVStVaG5OTXdzUDVYczl3b2ZE?=
- =?utf-8?B?dU1FSExDdHovSnUweTF0YVBkUCtoNDVyK0pmcktKbFJNdjNEb2VucUhUMkhj?=
- =?utf-8?B?SDRMKzl1NGwzT2U0bkVFY3N4ODFqbXZqSzNjVEQvNUloWG5rLzk4WlJ1aXBU?=
- =?utf-8?B?aUpsRWlURm5FcnpQbnlKdGtQMFJLaVV6eStaZmN1blliUTNtU3hsOG9TNG9u?=
- =?utf-8?B?NWVQbFZvMEFwNEUzdTlnemg1Snh3VXZKWkRIVHc1SEExaWZGNGhkVDZXZklk?=
- =?utf-8?B?c00xMlRJWXhGa3prWmlvaFp5c1lLTTQyY050YlhaYTdVL1F5WEV2MEdmTHFu?=
- =?utf-8?B?M1I1N3B0bnV4MVQwbnZmdyszVmtXUlpuSENLTzBLeXJXWURIeXR2Q0RyS29y?=
- =?utf-8?B?bW5CZG9kZDlsZjRmc2ZqL1hjN3NhR1A1enUybjdmbXJxYXV5U0NVZ2pabksr?=
- =?utf-8?B?aDZNNWcyZXFEeVFxUkMyd2lLQUwvc2hyWlczUTBZWkVnUk1kenNVNmhsaXB5?=
- =?utf-8?B?TGZrNndQYml0RDdRbnFVMHl2MU1uaGZINFdNWHFTMFJkUnQybGFqM0FYeHVG?=
- =?utf-8?B?dnE1VE8zNFpFME9wY3JnR2J4dytmVjhYbUxFdTJiYmlTQWJrZkNCUDNzSW0v?=
- =?utf-8?Q?9brHCvj8a6lhmNM7EMvA5ff6W?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 14a85aa1-208e-4068-3fb0-08dd2c6eabff
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jan 2025 03:20:00.1264 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: c89KDpfWBr8+2AmdoYNJYD7Yh8bHrTaeUTChZqpkAV0ag2as9vNft5YazSB07Mz/mxg85zEVuMFA0iJv+Vu/Pw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9566
+User-Agent: Mozilla Thunderbird
+Subject: Re: Pull request efi-next-20250104
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lothar Rubusch <l.rubusch@gmail.com>,
+ Olivier L'Heureux <olivier.lheureux@mind.be>,
+ Yang Gang <yanggang@byosoft.com.cn>
+References: <5222dd9e-83f6-40ad-adc1-dc3fe1651991@gmx.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <5222dd9e-83f6-40ad-adc1-dc3fe1651991@gmx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 677920561e1e19a204b7dc06
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,171 +79,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Hi Heinrich,
 
-The upstream dts already has the lpi2c2 subnodes, so drop the duplicated
-ones in u-boot dtsi.
+On 2025-01-04 04:19, Heinrich Schuchardt wrote:
+> Dear Tom,
+> 
+> The following changes since commit ec9263b4f15c4cf82eb6a211c67baa6385065b8e:
+> 
+>    Fix neighbor discovery ethernet address saving (2025-01-01 14:40:04
+> -0600)
+> 
+> are available in the Git repository at:
+> 
+>    https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-next-20250104
+> 
+> for you to fetch changes up to ce190e1b33b8c0e1228f4123759dfa1981c202de:
+> 
+>    efi: Correct ECPT table GUID (2025-01-04 02:17:06 +0100)
+> 
+> Gitlab CI reported no issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24075
+> 
+> ----------------------------------------------------------------
+> Pull request efi-next-20250104
+> 
+> Documentation:
+> 
+> * doc: develop: Fix typos and wording in binman/binman.rst
+> * doc: develop: Fix typos and wording in gdb.rst
+> * doc: sandbox: Fix the "sb" command name
+> * doc/develop/distro.rst: Better document upstream definition of
+> extlinux.conf
+> 
+> UEFI:
+> 
+> With this pull request the UEFI sub-system detects all boot devices even
+> if they have not been probed before. If this adds to much boot delay
+> individual bootmeths and bootdevs can be disabled via the customizing.
+> 
+> * efi_loader: avoid writing message in Exit() boot service
+> * efi_loader: run bootdev_hunt() to find ESP
 
-Since the adp5585 compatible string changes, update the driver
-compatible string. i.MX93 11x11 EVK is the only user of the driver as
-of now, so it is safe to drop legacy compatible string.
+This patch still completely changes how standard boot operates, from
+lazy probing boot devices from fastest to slowest (probe time) as
+described in the standard boot documentation [1], to probing all boot
+devices all at once before checking for a bootmeth/bootflow.
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- arch/arm/dts/imx93-11x11-evk-u-boot.dtsi | 118 -------------------------------
- drivers/gpio/adp5585_gpio.c              |   2 +-
- 2 files changed, 1 insertion(+), 119 deletions(-)
+This slows down script and extlinux booing on my Rockchip board by
+several seconds because now pcie and usb is probed before current fast
+bootflow from mmc devices is tested.
 
-diff --git a/arch/arm/dts/imx93-11x11-evk-u-boot.dtsi b/arch/arm/dts/imx93-11x11-evk-u-boot.dtsi
-index 408e601bc90eb69744ce1198498e01b12f814ca9..a99ba99bfb4f2c08752472536f2450c8e79fb87e 100644
---- a/arch/arm/dts/imx93-11x11-evk-u-boot.dtsi
-+++ b/arch/arm/dts/imx93-11x11-evk-u-boot.dtsi
-@@ -26,111 +26,6 @@
- 	bootph-pre-ram;
- };
- 
--&lpi2c2 {
--	#address-cells = <1>;
--	#size-cells = <0>;
--	clock-frequency = <400000>;
--	pinctrl-names = "default", "sleep";
--	pinctrl-0 = <&pinctrl_lpi2c2>;
--	pinctrl-1 = <&pinctrl_lpi2c2>;
--	status = "okay";
--
--	pmic@25 {
--		compatible = "nxp,pca9451a";
--		reg = <0x25>;
--		interrupt-parent = <&pcal6524>;
--		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
--
--		regulators {
--			buck1: BUCK1 {
--				regulator-name = "BUCK1";
--				regulator-min-microvolt = <650000>;
--				regulator-max-microvolt = <2237500>;
--				regulator-boot-on;
--				regulator-always-on;
--				regulator-ramp-delay = <3125>;
--			};
--
--			buck2: BUCK2 {
--				regulator-name = "BUCK2";
--				regulator-min-microvolt = <600000>;
--				regulator-max-microvolt = <2187500>;
--				regulator-boot-on;
--				regulator-always-on;
--				regulator-ramp-delay = <3125>;
--			};
--
--			buck4: BUCK4{
--				regulator-name = "BUCK4";
--				regulator-min-microvolt = <600000>;
--				regulator-max-microvolt = <3400000>;
--				regulator-boot-on;
--				regulator-always-on;
--			};
--
--			buck5: BUCK5{
--				regulator-name = "BUCK5";
--				regulator-min-microvolt = <600000>;
--				regulator-max-microvolt = <3400000>;
--				regulator-boot-on;
--				regulator-always-on;
--			};
--
--			buck6: BUCK6 {
--				regulator-name = "BUCK6";
--				regulator-min-microvolt = <600000>;
--				regulator-max-microvolt = <3400000>;
--				regulator-boot-on;
--				regulator-always-on;
--			};
--
--			ldo1: LDO1 {
--				regulator-name = "LDO1";
--				regulator-min-microvolt = <1600000>;
--				regulator-max-microvolt = <3300000>;
--				regulator-boot-on;
--				regulator-always-on;
--			};
--
--			ldo4: LDO4 {
--				regulator-name = "LDO4";
--				regulator-min-microvolt = <800000>;
--				regulator-max-microvolt = <3300000>;
--				regulator-boot-on;
--				regulator-always-on;
--			};
--
--			ldo5: LDO5 {
--				regulator-name = "LDO5";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <3300000>;
--				regulator-boot-on;
--				regulator-always-on;
--			};
--		};
--	};
--
--	pcal6524: gpio@22 {
--		compatible = "nxp,pcal6524";
--		pinctrl-names = "default";
--		pinctrl-0 = <&pinctrl_pcal6524>;
--		reg = <0x22>;
--		gpio-controller;
--		#gpio-cells = <2>;
--		interrupt-controller;
--		#interrupt-cells = <2>;
--		interrupt-parent = <&gpio3>;
--		interrupts = <27 IRQ_TYPE_LEVEL_LOW>;
--	};
--
--	adp5585gpio: gpio@34 {
--		compatible = "adp5585";
--		reg = <0x34>;
--		gpio-controller;
--		#gpio-cells = <2>;
--	};
--};
--
- &aips1 {
- 	bootph-pre-ram;
- 	bootph-all;
-@@ -149,19 +44,6 @@
- &iomuxc {
- 	bootph-pre-ram;
- 	bootph-some-ram;
--
--	pinctrl_lpi2c2: lpi2c2grp {
--		fsl,pins = <
--			MX93_PAD_I2C2_SCL__LPI2C2_SCL			0x40000b9e
--			MX93_PAD_I2C2_SDA__LPI2C2_SDA			0x40000b9e
--		>;
--	};
--
--	pinctrl_pcal6524: pcal6524grp {
--		fsl,pins = <
--			MX93_PAD_CCM_CLKO2__GPIO3_IO27			0x31e
--		>;
--	};
- };
- 
- &reg_usdhc2_vmmc {
-diff --git a/drivers/gpio/adp5585_gpio.c b/drivers/gpio/adp5585_gpio.c
-index ea0cb75459b741c0157aa9077c44163b3c0cab01..114583b3c3bd9a51fbe1960b7532150d0d7cabdd 100644
---- a/drivers/gpio/adp5585_gpio.c
-+++ b/drivers/gpio/adp5585_gpio.c
-@@ -224,7 +224,7 @@ static int adp5585_probe(struct udevice *dev)
- }
- 
- static const struct udevice_id adp5585_ids[] = {
--	{ .compatible = "adp5585" },
-+	{ .compatible = "adi,adp5585" },
- 	{ }
- };
- 
+Will you work on a fix for this or do you recommend disabling the
+efi_mgr bootmeth or similar? E.g. something like the diff below.
 
--- 
-2.35.3
+Similarly if I understand correctly the priority of efi_mgr bootmeth,
+first regardless of configured bootmeth order, is the main blocker for
+sunxi to fully move to standard boot.
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 20935a269c60..81e10be4eef8 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -617,7 +617,7 @@ config BOOTMETH_EFI_BOOTMGR
+ 	bool "Bootdev support for EFI boot manager"
+ 	depends on EFI_BOOTMGR
+ 	select BOOTMETH_GLOBAL
+-	default y
++	default y if !ARCH_ROCKCHIP
+ 	help
+ 	  Enable booting via the UEFI boot manager. Based on the EFI variables
+ 	  the EFI binary to be launched is determined. To set the EFI variables
+
+[1] https://docs.u-boot.org/en/latest/develop/bootstd/overview.html#boot-process
+
+Regards,
+Jonas
+
+> * efi_loader: update EFI specification version
+> * cmd: efidebug: update output of memory attributes
+> * efi_loader: Don't warn if the TCG2 FinalEvents table is not installed
+> * cmd: bootmenu: add parameter -e for UEFI boot options
+> * efi_loader: Update startimage_exit self-test to check error
+> * efi: Correct ECPT table GUID
+> 
+> Others:
+> 
+> Building the API demo application for riscv64 is supported.
+> 
+> * API: unify platform_sys_info() implementations
+> * examples: implement _start and syscall for RISC-V
+> * examples: use architecture specific memset() on RISC-V
+> * examples: use QEMU compatible LOAD_ADDR on RISC-V
+> * test: fix test_extension.py
+> * configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
+> * CI: xilinx_versal_virt: disable USB_DWC3
+> * net: eth_bootdev_hunt() should not run DHCP
+> 
+> ----------------------------------------------------------------
+> Adriano Cordova (1):
+>        efi_loader: Expose efi_reinstall_protocol_interface in efi_loader.h
+> 
+> Aleksandar Gerasimovski (1):
+>        efi_loader: fix pe reloc pointer overrun
+> 
+> Heinrich Schuchardt (13):
+>        API: unify platform_sys_info() implementations
+>        examples: implement _start and syscall for RISC-V
+>        examples: use architecture specific memset() on RISC-V
+>        examples: use QEMU compatible LOAD_ADDR on RISC-V
+>        efi_loader: avoid writing message in Exit() boot service
+>        test: fix test_extension.py
+>        configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
+>        CI: xilinx_versal_virt: disable USB_DWC3
+>        net: eth_bootdev_hunt() should not run DHCP
+>        cmd: bootmenu: add parameter -e for UEFI boot options
+>        efi_loader: run bootdev_hunt() to find ESP
+>        efi_loader: update EFI specification version
+>        cmd: efidebug: update output of memory attributes
+> 
+> Ilias Apalodimas (1):
+>        efi_loader: Don't warn if the TCG2 FinalEvents table is not installed
+> 
+> Lothar Rubusch (2):
+>        doc: develop: Fix typos and wording in binman/binman.rst
+>        doc: develop: Fix typos and wording in gdb.rst
+> 
+> Olivier L'Heureux (1):
+>        doc: sandbox: Fix the "sb" command name
+> 
+> Simon Glass (1):
+>        efi_loader: Update startimage_exit self-test to check error
+> 
+> Tom Rini (1):
+>        doc/develop/distro.rst: Better document upstream definition of
+> extlinux.conf
+> 
+> Yang Gang (1):
+>        efi: Correct ECPT table GUID
+> 
+>   .azure-pipelines.yml                            |   1 +
+>   .gitlab-ci.yml                                  |   1 +
+>   api/Makefile                                    |   9 +-
+>   api/api_platform-arm.c                          |  35 ----
+>   api/api_platform-mips.c                         |  29 ---
+>   api/api_platform.c                              |  25 +++
+>   cmd/bootmenu.c                                  |  39 +++-
+>   cmd/efidebug.c                                  |   5 +-
+>   configs/sandbox_defconfig                       |   1 -
+>   doc/develop/distro.rst                          |  15 +-
+>   doc/develop/gdb.rst                             |  10 +-
+>   doc/usage/cmd/bootmenu.rst                      |  13 +-
+>   doc/usage/cmd/sb.rst                            |   6 +-
+>   examples/api/Makefile                           |   7 +-
+>   examples/api/crt0.S                             |  32 ++++
+>   include/efi.h                                   |   2 +
+>   include/efi_api.h                               |   8 +-
+>   include/efi_loader.h                            |   5 +
+>   lib/efi_loader/efi_boottime.c                   |   9 +-
+>   lib/efi_loader/efi_image_loader.c               |   2 +-
+>   lib/efi_loader/efi_setup.c                      |   8 +
+>   lib/efi_loader/efi_tcg2.c                       |   2 +-
+>   lib/efi_selftest/efi_selftest_startimage_exit.c |   6 +-
+>   net/eth_bootdev.c                               |  30 +--
+>   test/py/tests/test_extension.py                 |   4 +-
+>   tools/binman/binman.rst                         | 234
+> ++++++++++++------------
+>   26 files changed, 300 insertions(+), 238 deletions(-)
+>   delete mode 100644 api/api_platform-arm.c
+>   delete mode 100644 api/api_platform-mips.c
+>   create mode 100644 api/api_platform.c
+> 
 
