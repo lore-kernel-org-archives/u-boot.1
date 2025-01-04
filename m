@@ -4,56 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF1DE77188
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 13:18:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214B5E77197
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 13:18:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7391C8059C;
-	Sat,  4 Jan 2025 14:18:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 14317805CB;
+	Sat,  4 Jan 2025 14:18:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="jFuct0S6";
+	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="HRspeOhu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A07358034E; Sat,  4 Jan 2025 04:38:27 +0100 (CET)
+ id 03FF58036D; Sat,  4 Jan 2025 04:38:36 +0100 (CET)
 Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
  [136.143.188.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC1A280079
- for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 04:38:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 37CEB8034E
+ for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 04:38:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
-ARC-Seal: i=1; a=rsa-sha256; t=1735961901; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1735961909; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=Kj9WjRjc0rVreEPnOj1rFmkSwUk8+v5nLkI3ZiVQws5QFmiKwCdN0r0wHKacr1R4FIu2VNJ8H10UimkCFfqLjmJ8jKuAxvqWYLE41JvsAl+Th9EBJN7jn/C80qPN/K2eMW3hw9DRUjy0EQoIKrK82kSQUmj+ZdaEKyOP/ApQLfw=
+ b=BothmaJ5fMTLFX4RqtszSxAPnBc9nEVOQwTgvF31Tvojbsoy+JgH0dxT97bDJOFbIc/K0FhzcmDuN7TMwFS5lfligxvWEtPDkw1ziEhzRl3sEPncaYh2JtD6eO8xOiVUnvOia7Txn/QW/AtOF4N0BOKWMpQGqISBpdxP0O65K68=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1735961901;
+ s=zohoarc; t=1735961909;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=zn65bY774IN8yz3rSWRUgdYKfQRl17QCH7JqbntqVtw=; 
- b=BVPMI8j9xcMzzCYiXbPx4EfE+kQMhp5b5hRUAOgsps+qTlFZudAVl13s5Izst2Oo9HDMw1hJy0KgcFfqjhxp6p+cISLadD9Fpon6kEcIAhlMCnuYDJqGwSaK/D5E0asjC0rcBF37+44BDV0dvRh4+NC3dappU3sp0EW4cn9dxHg=
+ bh=M2qUjkNGdiQ7Jb4ePwgogq5TiGq0FmIR0s1w5WH1qIk=; 
+ b=d+huaBBZ5BhEjmwqiEFaV2UIY1tl3iQSJ5H+7KdvF3HhxSE+S/PnY+9p7PNfHZWCFXyj0Cyq27rO6WvUc4mDZoO0GPxfX20IVCdIDUlWALZ5uW9i6tdLWLymOKSBgtB3G2YzVNS7KJZOrkJtTNGjxNbIks0Ap/+9zvqufGgeQFo=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=pigmoral.tech;
  spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
  dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1735961901; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1735961909; 
  s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=zn65bY774IN8yz3rSWRUgdYKfQRl17QCH7JqbntqVtw=;
- b=jFuct0S6+UoIIClI1k7bXJXtXkspooUk4JUZBzHzlnYRNGdJY8HhIqagDazn+QN0
- fsZz8DhParkhW2NoOoWvcHJdqOAeNqhhjcbVnJD1Ei3+L0WG/7A9pL//t99TeAFjNUi
- 9w6oiek4pTBLZ2khheD5LONzFeMIFyA/qjbTN/0g=
-Received: by mx.zohomail.com with SMTPS id 1735961899480143.21309730943074;
- Fri, 3 Jan 2025 19:38:19 -0800 (PST)
+ bh=M2qUjkNGdiQ7Jb4ePwgogq5TiGq0FmIR0s1w5WH1qIk=;
+ b=HRspeOhuQHT5Xkpx8j5MzD8Rlc2geJx4UrF9CF9kkepeQsOC8zsMtYC0HyLolvvd
+ oueS7OqBsdJ57oO4T7DfLzov6Lbi8orUtoH8XcCmEp8LDEJhhbVyBJhrldTTSbWdkJi
+ dFUFCKSWpy+WAONu3ICZJFCcBXkRyFb6NQ2wwM7Q=
+Received: by mx.zohomail.com with SMTPS id 1735961907426423.31442272804077;
+ Fri, 3 Jan 2025 19:38:27 -0800 (PST)
 From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Sat, 04 Jan 2025 11:37:16 +0800
-Subject: [PATCH v3 2/8] usb: dwc2: Fix incorrect ULPI_UTMI_SEL bit setting
+Date: Sat, 04 Jan 2025 11:37:17 +0800
+Subject: [PATCH v3 3/8] USB: dwc2: Fix HBstLen setting for external DMA
+ mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250104-dwc2-dev-v3-2-d4b2bc1996e4@pigmoral.tech>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20250104-dwc2-dev-v3-3-d4b2bc1996e4@pigmoral.tech>
 References: <20250104-dwc2-dev-v3-0-d4b2bc1996e4@pigmoral.tech>
 In-Reply-To: <20250104-dwc2-dev-v3-0-d4b2bc1996e4@pigmoral.tech>
 To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
@@ -62,11 +63,11 @@ To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
 Cc: u-boot@lists.denx.de, seashell11234455@gmail.com, pbrobinson@gmail.com, 
  junhui.liu@pigmoral.tech
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1735961880; l=2184;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1735961880; l=1674;
  i=junhui.liu@pigmoral.tech; s=20250103; h=from:subject:message-id;
- bh=ygkZw4WdoytZvn3WcXQVJsp0wqb0zX0Yx2atdkXrN2c=;
- b=dGynFz7WLM9XosgkMYzHAqrBH2vpzcX67NVzrhw8D85FXW1F/qHjVofB6q+9n3v4JJugb1l8J
- HWPdSfFXeycDqeYXtxfWTLt082ozVk0FfAsGRdVUlQZopMU5jeBSRYg
+ bh=SGlPTaXHUA51si9g2IW1G+Vt5XMeXRJqIM3omvcoRK4=;
+ b=sv6C+3HbT6qfARRdxuhqyHxP24m1BhLTtrpNZmN3gJ6z9zig7at8kidcIxpiTSKo7fSklSsuj
+ wbhSDBWq1u3A7wT2dATQmH/HuVJnpfRTeUcRtCdiwfjqanp+SdkKO40
 X-Developer-Key: i=junhui.liu@pigmoral.tech; a=ed25519;
  pk=wBBo5nYsVNm/3oBEpRGTEbyW0tknGZANOEVccmcXtOw=
 X-ZohoMailClient: External
@@ -87,63 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ULPI_UTMI_SEL bit in the DWC2 driver was set incorrectly. According
-to the datasheet [1], this bit should be set to 0 for UTMI interface and 1
-for ULPI interface. The existing code had this logic reversed,
-causing the interface selection to be incorrect.
+From: Kongyang Liu <seashell11234455@gmail.com>
 
-This commit corrects the ULPI_UTMI_SEL bit setting to match the
-datasheet's description. Referencing the kernel's code [2] also confirms
-this fix.
+The loop used to calculate HBstLen for extern DMA mode does not produce
+the correct result according to the datasheet [1]. Replacing that loop
+with a direct calculation using LOG2 to correctly assign the burst length
+in the GAHBCFG register for external DMA mode.
 
-[1] https://rockchip.fr/RK312X%20TRM/chapter-26-usb-otg-2-0.pdf#page=30
-[2] https://github.com/torvalds/linux/blob/v6.13-rc3/drivers/usb/dwc2/core.c#L1106
+[1] https://rockchip.fr/RK312X%20TRM/chapter-26-usb-otg-2-0.pdf#page=24
 
+Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 Reviewed-by: Marek Vasut <marex@denx.de>
 Tested-by: Peter Robinson <pbrobinson@gmail.com>
 Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
+
 ---
- drivers/usb/host/dwc2.c | 24 +++++++++++++-----------
- 1 file changed, 13 insertions(+), 11 deletions(-)
+Additionally, the boards I have only use internal DMA mode, and it’s
+unclear which chips employ external DMA. The testing was performed by
+comparing against the datasheet, and the results are shown in [2].
+
+[2] https://gist.github.com/Judehahh/34530da390b58728102778406e602cb1
+---
+ drivers/usb/host/dwc2.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-index b6c8b3d5a6bdf375f1adeb106d4832d92307f0db..609de18faa3abc5f4ecb0c23cf3590966bad7992 100644
+index 609de18faa3abc5f4ecb0c23cf3590966bad7992..954650d856a4f2e95d74e1b5716c0ebe83fa9ba8 100644
 --- a/drivers/usb/host/dwc2.c
 +++ b/drivers/usb/host/dwc2.c
-@@ -402,20 +402,22 @@ static void dwc_otg_core_init(struct udevice *dev)
- 	 * soft reset so only program the first time. Do a soft reset
- 	 * immediately after setting phyif.
- 	 */
--	usbcfg &= ~(DWC2_GUSBCFG_ULPI_UTMI_SEL | DWC2_GUSBCFG_PHYIF);
--	usbcfg |= DWC2_PHY_TYPE << DWC2_GUSBCFG_ULPI_UTMI_SEL_OFFSET;
--
--	if (usbcfg & DWC2_GUSBCFG_ULPI_UTMI_SEL) {	/* ULPI interface */
-+#if (DWC2_PHY_TYPE == DWC2_PHY_TYPE_ULPI)
-+	usbcfg |= DWC2_GUSBCFG_ULPI_UTMI_SEL;
-+	usbcfg &= ~DWC2_GUSBCFG_PHYIF;
- #ifdef DWC2_PHY_ULPI_DDR
--		usbcfg |= DWC2_GUSBCFG_DDRSEL;
-+	usbcfg |= DWC2_GUSBCFG_DDRSEL;
- #else
--		usbcfg &= ~DWC2_GUSBCFG_DDRSEL;
--#endif
--	} else {	/* UTMI+ interface */
-+	usbcfg &= ~DWC2_GUSBCFG_DDRSEL;
-+#endif /* DWC2_PHY_ULPI_DDR */
-+#elif (DWC2_PHY_TYPE == DWC2_PHY_TYPE_UTMI)
-+	usbcfg &= ~DWC2_GUSBCFG_ULPI_UTMI_SEL;
- #if (DWC2_UTMI_WIDTH == 16)
--		usbcfg |= DWC2_GUSBCFG_PHYIF;
--#endif
--	}
-+	usbcfg |= DWC2_GUSBCFG_PHYIF;
-+#else
-+	usbcfg &= ~DWC2_GUSBCFG_PHYIF;
-+#endif /* DWC2_UTMI_WIDTH */
-+#endif /* DWC2_PHY_TYPE */
+@@ -448,11 +448,8 @@ static void dwc_otg_core_init(struct udevice *dev)
+ 	case DWC2_HWCFG2_ARCHITECTURE_SLAVE_ONLY:
+ 		break;
+ 	case DWC2_HWCFG2_ARCHITECTURE_EXT_DMA:
+-		while (brst_sz > 1) {
+-			ahbcfg |= ahbcfg + (1 << DWC2_GAHBCFG_HBURSTLEN_OFFSET);
+-			ahbcfg &= DWC2_GAHBCFG_HBURSTLEN_MASK;
+-			brst_sz >>= 1;
+-		}
++		ahbcfg |= (LOG2(brst_sz >> 1) << DWC2_GAHBCFG_HBURSTLEN_OFFSET) &
++			  DWC2_GAHBCFG_HBURSTLEN_MASK;
  
- 	writel(usbcfg, &regs->global_regs.gusbcfg);
- 
+ #ifdef DWC2_DMA_ENABLE
+ 		ahbcfg |= DWC2_GAHBCFG_DMAENABLE;
 
 -- 
 2.47.1
