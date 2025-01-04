@@ -4,79 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F7BDE77188
-	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 19:40:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11C6BE77188
+	for <u-boot@archiver.kernel.org>; Sat,  4 Jan 2025 20:04:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 941238056E;
-	Sat,  4 Jan 2025 20:40:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 31D9D8043F;
+	Sat,  4 Jan 2025 21:04:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DVg7yQON";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Uv7h5oPx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 520C480578; Sat,  4 Jan 2025 20:40:44 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 0020A80584; Sat,  4 Jan 2025 20:32:27 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 425FF8043F
- for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 20:40:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8931B8043F
+ for <u-boot@lists.denx.de>; Sat,  4 Jan 2025 20:32:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d3f28881d6so19381116a12.1
- for <u-boot@lists.denx.de>; Sat, 04 Jan 2025 11:40:42 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aabfb33aff8so2342693466b.0
+ for <u-boot@lists.denx.de>; Sat, 04 Jan 2025 11:32:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736019642; x=1736624442; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736019145; x=1736623945; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xsqomLTMhwT8V65JvIa6vr+7vmk9/5F3C615RRX9YE8=;
- b=DVg7yQON/u2R/eqFCVh9hWaVTycVZFhgufRD8xqXCqvBbx562W2rnGWNrmTKfb+tbN
- 1dbNzzKMCRXLEayUiO37047sg6bGxrc5pfj/zXVNzoNjzPFeBHizNCteAOsGfZq+Fl3t
- 9Oh+j8JKnx+PP3IZnoq0Dx6Y60Sqf5DZ1mcNo=
+ bh=a8iOiAAxZzkS6uympeHkoUatgECT2x1JPTLjbcU7xjs=;
+ b=Uv7h5oPxft5yIIf6fWLqXTdKiEtFCWilXjVTVykFT8LvOo+FMstasO8iWuDlHFieyy
+ +v6lO/UDcDb+aAc9kzdci/1tv4vy2QtNX71OhshHRZSY/Uv6S/3YzCcbh4vW2DwX/JM6
+ xXD8KGRoZH19TVrG29R0W+XsaBtOGY6CARPJU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736019642; x=1736624442;
+ d=1e100.net; s=20230601; t=1736019145; x=1736623945;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xsqomLTMhwT8V65JvIa6vr+7vmk9/5F3C615RRX9YE8=;
- b=w3UU4bz9Nxsqc5T64tLq/fpw9EWT5VexB4LfDP0wNAcCP3mdr75dbgJ6R2/A/eSDEp
- 7cGhYlsuQI+ySNfXKNFixNgIasjoSRq6MCjdyr/XPQmUjbAObN3RgFziTB+Aibontcpa
- /XpSqPzO/x8ZnNjn1H4KnmNxTbX5iieJgcgElhxX/VfX04GcIjfnlZ+LM7B/GCMzaMsv
- OtMt0p7wI+gJciKfIQF2D4/0yYCMTfbK6eOdQ3Sj37CD+YcBoDUC3kakdarOKJSM5q5u
- MKRIs8ZYkcrl5GNyLMzaQu2PeJs5YGVlLhwhIPqwcXcYN4qbPwq1BbiznlpBdYh+Zq6+
- Kmcg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU2tJIHhHchdcRIUgnnDlHZOXjHJJxadrlVFgWkBBZSIkkO+jKkmhJK5ghnmDjDYRQO4uD+ykw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwDIhsUJ0QRdSr2X7TYLQ1B/C+fQbrr92jfnhacUtjmlza3L77j
- MKcWAwEUrV4Zps6v1gHlYZedc8JF57nGK8e2UYbNeAEL4bJ9ljHrKJxe2/95CMTfM6SAXJ+IWrp
- mHDiiK/NEv2V4cBy3om9g+BKsBmL8j3tyVCaL
-X-Gm-Gg: ASbGncsrXliid0CLb+kyhfxgH5zpWZsxMh1AvOrMOrbryWU7Bxe7RpaNnRLB7pvIqpr
- L/RY5u3nWuq63xnfN8p19SYcFQHeHkvww0Q2F2r99
-X-Google-Smtp-Source: AGHT+IF+oxlvxygRSJhpqsOcwdhtMV/sCStBO15PARqvnSiP+H8yK4sI69MLEFr6BiCn0S2436MmFH9Hk7t4LDnGSvw=
-X-Received: by 2002:a05:6402:2150:b0:5d9:ae5:8318 with SMTP id
- 4fb4d7f45d1cf-5d90ae58333mr15723937a12.20.1736019641596; Sat, 04 Jan 2025
- 11:40:41 -0800 (PST)
+ bh=a8iOiAAxZzkS6uympeHkoUatgECT2x1JPTLjbcU7xjs=;
+ b=lJW7K8OB1CVhUV8yC86qzKumosIdxnUHC+OToz6nRVZpBgY2fFwLfc5Fjmv7Jb82IF
+ Ds/LY2BENkwEaEXlIhS8NxmrqGLN9RHM6X4N0cyjLBe0DNvYyHjzbdebdF5q5rxToiP9
+ 8XnoQdrlQhl9z5Oy30e61ZTnUrqw3FyymtYia8JtmrGU+u4ZuhL518cs1qvUt0yMZKj7
+ eaC/2xJyNbq+isJrgfneqT4W1y13DQydk4mRY3LSwBt9qItKxBb6C+2LKoVRDpjPN8TS
+ 1e+hH8dMiN4xG6vWxNyB5TX15cd6dwovzBqUkYlWdNVwiSrWXdXrW9tLSCCYUF0tQygY
+ OUoQ==
+X-Gm-Message-State: AOJu0Ywv1vxw78QTa534u6+35lQP7B+ZBJw2Aw5G9RdrdDhdCm3Jo0x1
+ 6Brj0XLfAje0zti2+3xDVW7JS8KIq+t21AE11sJ5+FpUwW18pHGcRthYvJyJQkcveRpU6Maqmvy
+ R7/C4EeYRoUpOKCLM7ufHrDCwLgMBs51BP1RLhOM1BayrtrQ=
+X-Gm-Gg: ASbGncvoJE+seyQoH74YPjXBbMCIX+J5KwYDYxhQtjyP/HwMPhWRsHqwknQanGNRqzY
+ j3dpdI/QqaVxknM7hNcCvA5HngfYIBzw8xq4OMrJ8
+X-Google-Smtp-Source: AGHT+IGgIJG6Iz0Fwc31xjkQpI5KfPXXhLOg1Z4zJQUx9ySh7DJaN6EtCBtXJ8Alrr/L11maDVlPkJl26BhpWCOCg7c=
+X-Received: by 2002:a17:907:3da4:b0:aa6:89b9:e9bd with SMTP id
+ a640c23a62f3a-aac346970e7mr4351741766b.24.1736019144916; Sat, 04 Jan 2025
+ 11:32:24 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1735896540.git.jerome.forissier@linaro.org>
- <c86ca0914ab1496a7f63371e47f36f2109d7d97a.1735896540.git.jerome.forissier@linaro.org>
- <b77c543c-56e1-42e7-a0ab-874921049873@linaro.org>
-In-Reply-To: <b77c543c-56e1-42e7-a0ab-874921049873@linaro.org>
+References: <20250101221003.1944600-1-sjg@chromium.org>
+ <20250102144451.GL3476@bill-the-cat>
+ <CAFLszTiSeBykLOSPGEFG6MV74KmC_e1F0PTkAfkR1DKxYstmeg@mail.gmail.com>
+ <20250103142651.GU3476@bill-the-cat>
+In-Reply-To: <20250103142651.GU3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Jan 2025 08:40:34 +1300
-Message-ID: <CAFLszTh8shuz2B3s5sQPRpz5_an_EuQL3+OD3OuZHQOAuju-LQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] board_init_r(): use static calls
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Michal Simek <michal.simek@amd.com>, Marek Vasut <marex@denx.de>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Sun, 5 Jan 2025 08:32:17 +1300
+Message-ID: <CAFLszThoCAfm1TizsQFCcpoJEu7Gqxt5E9MfQm7EXDDbZ1VW3A@mail.gmail.com>
+Subject: Re: [PATCH 00/67] upl: Align with the updated spec
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ =?UTF-8?Q?Ahelenia_Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>, 
+ Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Chen-Yu Tsai <wens@csie.org>, 
+ Dmitry Gerasimov <di.gerasimov@gmail.com>, Heiko Schocher <hs@denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Janne Grunau <j@jannau.net>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>, 
+ =?UTF-8?B?TWFyZWsgTW9qw61r?= <marek.mojik@nic.cz>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Philip Oberfichtner <pro@denx.de>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Sat, 04 Jan 2025 21:04:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,59 +114,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Tom,
 
-On Sat, 4 Jan 2025 at 14:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Sat, 4 Jan 2025 at 03:26, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Jerome,
->
-> On 03/01/2025 12:13, Jerome Forissier wrote:
-> > Replace the init_sequence_r function array by direct calls.
-> > bloat-o-meter stats before/after on u-boot.bin for configuration
-> > xilinx_zynqmp_kria_defconfig are the following:
+> On Fri, Jan 03, 2025 at 12:45:36PM +1300, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > - With LTO:
-> > add/remove: 87/128 grow/shrink: 8/23 up/down: 19743/-20923 (-1180)
-> > Total: Before=1067882, After=1066702, chg -0.11%
+> > On Fri, 3 Jan 2025 at 03:44, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jan 02, 2025 at 11:08:46AM +1300, Simon Glass wrote:
+> > >
+> > > > The current UPL spec[1] has been tidied up and improved over the last
+> > > > year, since U-Boot's original UPL support was written.
+> > > >
+> > > > This series addresses various issues, with a goal of having U-Boot boot
+> > > > EDK2.
+> > > >
+> > > > There is still more work to do, but this series gets to the point (on
+> > > > QEMU) where the ACPI tables are required. Further work will be needed to
+> > > > relocate the tables out of the QEMU firmware-filesystem.
+> > > >
+> > > > [1] git@github.com:UniversalPayload/spec.git commit 3f1450d
+> > >
+> > > Since this is on top of your fork, and not mainline, and you aren't even
+> > > noting that in your cover letter it's probably not worth the time of
+> > > everyone you sent this to, to look at.
 > >
-> > - Without LTO:
-> > add/remove: 0/23 grow/shrink: 2/0 up/down: 795/-1112 (-317)
-> > Total: Before=1119494, After=1119177, chg -0.03%
+> > It applies to -next except for the QEMU script which you rejected. I
+> > can't do anything about that. So I think you may have the
+> > wrong end of the stick here.
 > >
-> > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > ---
+> > The only thing I can think of is that the UPL series depends on
+> > Raymond's bloblist patch [1]. But I was assuming that would be applied
+> > at some point and I didn't want to resend someone else's patch. I
+> > don't have it in the sjg tree either yet, as I was hoping he would
+> > write a test. In fact I would very-much like people to write tests
+> > (and docs if needed) without needing to be asked.
+> >
+> > Regards,
+> > Simon
+> >
+> > [1] https://lore.kernel.org/u-boot/CAFLszTjSGqmk8yYYbXFEaFZWFhF8uhj_rNxZz7ship1-Fb8p3Q@mail.gmail.com/
 >
-> [...]
->
-> > +     INITCALL(stdio_add_devices);
-> > +     INITCALL(jumptable_init);
-> > +     CONFIG_IS_ENABLED(API, (INITCALL(api_init);))
-> > +     INITCALL(console_init_r);       /* fully init console as a device */
-> > +     CONFIG_IS_ENABLED(DISPLAY_BOARDINFO_LATE,
-> > +                       (INITCALL(console_announce_r);
-> > +                        INITCALL(show_board_info);))
->
-> Not that the array was extremely readable, but I think this is
-> significantly worse. Particularly as my IDE will no longer grey-out
-> sections for config options which are disabled.
->
-> I would honestly rather still see pre-processor #if's here, or at least
-> something better than this semicolon-in-macro stuff.
+> A 60 part series that includes changes to something that was rejected,
+> and depends on a series from someone else that was changes requested,
+> and is again, 60+ patches, is not at all helpful. Please stop doing
+> this.
 
-Hmmm I think you have a point.
+As I see it, my only alternatives were to:
 
-I was actually thinking about having something like
+a) resend Raymond's patch unchanged (with a note that it is merely for
+convenience), or
+b) not send it, knowing that his patch will likely be applied before this series
 
-   INIT_CALL_CONFIG(DISPLAY_BOARD_INFO_LATE, console_announce_r)
+I chose b. The single, dependent patch is really not an issue, IMO.
 
-i.e. a macro to combine the two things and the semicolon.  But I
-decided it is really no better than this patch so didn't mention it.
+I often send large series, e.g. [2]. Sometimes, as with UPL, there is
+just an enormous amount of work to get through. I really don't like
+combining patches just to reduce the patch count. But I can split of
+the pre-req patches (about 30) so I'll do that for v2. Honestly, I was
+just desperate to get some of the work sent out so it didn't die on
+the vine.
 
-So another option would be to keep the #ifs as you say, with
-everything else about this patch left alone. I have the same issue
-with the IDE (I suspect some clever integration could be written to
-fix it). But I have changed my mind and think #ifs are better, in this
-case.
+BTW, please reconsider your objections to the qemu script. I think it
+might make sense to convert it to Python at some point, but the
+complexity of building images and running QEMU for different use cases
+is such that a script makes a lot of sense.
 
 Regards,
 Simon
+
+[2] https://patchwork.ozlabs.org/project/uboot/list/?series=364775&state=*
