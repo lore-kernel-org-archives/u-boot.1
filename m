@@ -4,63 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94251E77197
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jan 2025 20:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17AB0E77197
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jan 2025 20:38:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C007A801DE;
-	Sun,  5 Jan 2025 21:37:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9BFF3801DE;
+	Sun,  5 Jan 2025 21:38:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736109453;
-	bh=+qVvaW5ZiRq8FxLw7iwVJzf8YGkL+l+WnV6kJQEI4FQ=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ur8smzDkpIQWE5HsUY1wTPt81267tYZDnpN62mgmyK2eo5EbymAIXgFgSW706wx8H
-	 adOJ+QtLc3LlhC3YXyOuvI2b6oum0PNFbfa2s1Y+2k4sRVFyA5aBAc2/86stSBZnXW
-	 UHjXxmOzdn+U2RJg9R6g+EY1/iDLuQrDaSqnRDzyb57Yf6m25eUwydFThcvfFaP0yN
-	 RJbkvwt87+SL/on0atfFE+shtkBrfefNZspIOoRQPXjCUTVnbMb2zVjNTjVk91c2I7
-	 1MO6WHq2wYIeyi6gJYy+MBb1zweM+C5g6nQBLVxQkmAitEJm/HWIgHdR1A0sVpL+eT
-	 wO4uKkVnCB80Q==
+	s=phobos-20191101; t=1736109527;
+	bh=cmdrgPOHH6Pz3FQC+woI0JVcNnQ0GBuaEsBKRAg3gt4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=BqT+dnswJurirYxz59nM9xDO4OWn55BEfl6f5AMH76G5Ri9kHLuUAl4JJVsGNadeQ
+	 upbrGDIaABybroSijCrxCFMZIlcVyI7vyExZ1Tn4kozF519WffV8ZKIutgwAovih9S
+	 cEbPXo2UX59oPfMsXLP+Z7a83JIhJJPVrTwPmtwTnp6M05CtCBQUTu74mBf2C4MS8s
+	 xGwQ242/eBXFHQ7azIaORgSHdfeNg1g7a0pwJteleWl4gna5fyikpIu7Yv3IiL4s5v
+	 dFwDUBRE01oeMv3IsFP5dpzxL07zDNs5MUITuWMDl3IvtvM/KrlPLrLZ4xOi4/IJOz
+	 brVJGgKk/ukaA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A41C0801E8; Sun,  5 Jan 2025 21:37:32 +0100 (CET)
+ id E1F35801CE; Sun,  5 Jan 2025 21:38:45 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de
  [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6053F801CE
- for <u-boot@lists.denx.de>; Sun,  5 Jan 2025 21:37:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95BEF801CE
+ for <u-boot@lists.denx.de>; Sun,  5 Jan 2025 21:38:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="IlzyXDpl"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="JzBhRYKi"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3D2FE10408FB9; Sun,  5 Jan 2025 21:37:27 +0100 (CET)
+ with ESMTPSA id 1906E10408FB9; Sun,  5 Jan 2025 21:38:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736109448;
+ t=1736109522;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=+qVvaW5ZiRq8FxLw7iwVJzf8YGkL+l+WnV6kJQEI4FQ=;
- b=IlzyXDplx8Jov70G/4T8HuyW6Hu6erevSnJFZZi+iHU3b/P88LoCkK5Se1S2fQ358X6B7W
- 8saaEA1UknCSl6dL8GCI9eURwhPUSfoMPdN3SvxqkbbZNNzdIfDXkCC+PLAWWYpfgIbj7s
- TGPaMtdMPUTeokp1zN2nTUuba+ckieHnTn989a4eK6+DI8lok6Xujd5k/gswohMkDFSfL0
- klm/PkSXMCc9I+JcsZRNRgK4V2COO9/o2zZC1doyzwKic01B//z9n8kpjNMhIqOU9PQoV7
- Igdfs/+8pGov1D/w2iuRvzE8VPtQOvOak78WnxhZwI/woCN6xrkwMp9Qa5OnOA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Brian Ruley <brian.ruley@gehealthcare.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
-Date: Sun,  5 Jan 2025 21:36:42 +0100
-Message-ID: <20250105203714.158480-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cmdrgPOHH6Pz3FQC+woI0JVcNnQ0GBuaEsBKRAg3gt4=;
+ b=JzBhRYKiQg73X/m4ix46YVAXcR2hdlY3jx9wneK2y3T/T44PxpNYZhCNjA4mGbZQKtNO94
+ o/W/LGVNsNZv5+RSI7TFaYp32cXFqbpOvvhkhaDoMbVpN8LATRWoSrwr2MLjzBrD42XImF
+ cYlm/IR/YHliah8fSRVTR/a+K51J21IlQRwjIdRxxYYqGOiGu8s03mUhjf0WXx0Q9sJ9tQ
+ +fGmb2DIQZQ4pdj3d8sBtLV45pp7CpjrhA7DMCDzZdyuDvO1ZwkPLKPqx/tPb5tatW10v1
+ TbSqvV2Wo/0/Oa0om+t2WHV7ncMl3qgCEW1rZBrqRmQz+9FE0HhzDrAJJ8rzbg==
+Message-ID: <5b5cba1e-b057-4d64-a836-603534d48620@denx.de>
+Date: Sun, 5 Jan 2025 20:29:11 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET
+ is disabled
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240225152715.1821613-1-jonas@kwiboo.se>
+ <d9d049c8-d498-48ec-87f6-4127dd7a4ae6@denx.de>
+ <5bafad42-2c61-43eb-8fbb-cec7159132a6@kwiboo.se>
+ <20240226014708.GH3040305@bill-the-cat>
+ <81bdee81-2f8f-4fbf-a729-8fd543492adb@kwiboo.se>
+ <a809eb32-ae70-4f69-b5f0-81488759e838@denx.de>
+ <e14e9c06-ca37-4572-b410-c40a8c52898c@kwiboo.se>
+ <1544e744-bbf7-4460-b2b4-12a971e70d49@denx.de>
+ <7805b8d0-fb7c-41d5-8d74-f85dfd40233a@kwiboo.se>
+ <87y1b2nfpn.fsf@baylibre.com>
+ <6bf2af4a-740e-4cfc-9009-0892139738c3@kwiboo.se>
+ <87a5jik9gk.fsf@baylibre.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <87a5jik9gk.fsf@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,230 +94,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename the test .dts and tests and include the M suffix to indicate
-those tests are for i.MX8M, not for i.MX8, which is a different SoC.
+On 6/18/24 9:15 AM, Mattijs Korpershoek wrote:
+> Hi Jonas,
 
-Update 339_nxp_imx8m.dts, add testNxpImx8MImageMkimageMissing and
-update nxp_imx8mimage.py test to bring nxp_imx8mimage test to 100% .
+Hello all,
 
-Add 343..345_nxp_imx8m.dts, add matching tests and update nxp_imx8mcst.py
-to bring CST tests to 97% . It is not clear how to test the CST output
-file to reach 100%.
-
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Brian Ruley <brian.ruley@gehealthcare.com>
-Cc: Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: Rasmus Villemoes <ravi@prevas.dk>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tim Harvey <tharvey@gateworks.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- tools/binman/etype/nxp_imx8mcst.py            |  4 --
- tools/binman/etype/nxp_imx8mimage.py          |  4 --
- tools/binman/ftest.py                         | 42 +++++++++++++++++--
- .../{339_nxp_imx8.dts => 339_nxp_imx8m.dts}   |  3 ++
- tools/binman/test/343_nxp_imx8m.dts           | 26 ++++++++++++
- tools/binman/test/344_nxp_imx8m.dts           | 28 +++++++++++++
- tools/binman/test/345_nxp_imx8m.dts           | 19 +++++++++
- 7 files changed, 115 insertions(+), 11 deletions(-)
- rename tools/binman/test/{339_nxp_imx8.dts => 339_nxp_imx8m.dts} (93%)
- create mode 100644 tools/binman/test/343_nxp_imx8m.dts
- create mode 100644 tools/binman/test/344_nxp_imx8m.dts
- create mode 100644 tools/binman/test/345_nxp_imx8m.dts
-
-diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-index dd9f226b751..c36a8f68971 100644
---- a/tools/binman/etype/nxp_imx8mcst.py
-+++ b/tools/binman/etype/nxp_imx8mcst.py
-@@ -181,10 +181,6 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
-         upto = 0x00
-         for entry in super().GetEntries().values():
-             entry.SetOffsetSize(upto, None)
--
--            # Give up if any entries lack a size
--            if entry.size is None:
--                return
-             upto += entry.size
- 
-         Entry_section.SetImagePos(self, image_pos)
-diff --git a/tools/binman/etype/nxp_imx8mimage.py b/tools/binman/etype/nxp_imx8mimage.py
-index 8ad177b3b65..8d14e16154a 100644
---- a/tools/binman/etype/nxp_imx8mimage.py
-+++ b/tools/binman/etype/nxp_imx8mimage.py
-@@ -66,10 +66,6 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
-         upto = 0x00
-         for entry in super().GetEntries().values():
-             entry.SetOffsetSize(upto, None)
--
--            # Give up if any entries lack a size
--            if entry.size is None:
--                return
-             upto += entry.size
- 
-         Entry_section.SetImagePos(self, image_pos)
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index a553ca9e564..467f24a85d5 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7822,9 +7822,45 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         self.assertIn('Symbol-writing: no value for /binman/section/u-boot',
-                       out)
- 
--    def testNxpImx8Image(self):
--        """Test that binman can produce an iMX8 image"""
--        self._DoTestFile('339_nxp_imx8.dts')
-+    def testNxpImx8MImage(self):
-+        """Test that binman can produce an iMX8M image"""
-+        self._DoTestFile('339_nxp_imx8m.dts')
-+
-+    def testNxpImx8MImageMkimageMissing(self):
-+        """Test that binman can produce an iMX8M image"""
-+        with test_util.capture_sys_output() as (_, stderr):
-+            self._DoTestFile('339_nxp_imx8m.dts',
-+                             force_missing_bintools='mkimage')
-+        err = stderr.getvalue()
-+        self.assertRegex(err, "Image 'image'.*missing bintools.*: mkimage")
-+
-+    def testNxpImx8MCSTSPL(self):
-+        """Test that binman can sign an iMX8M SPL image"""
-+        self._DoTestFile('343_nxp_imx8m.dts')
-+
-+    def testNxpImx8MCSTFIT(self):
-+        """Test that binman can sign an iMX8M FIT image"""
-+        self._DoTestFile('344_nxp_imx8m.dts')
-+
-+    def testNxpImx8MCSTUnknown(self):
-+        """Test that binman can sign an iMX8M Unknown image"""
-+        self._DoTestFile('345_nxp_imx8m.dts')
-+
-+    def testNxpImx8MCSTMkimageMissing(self):
-+        """Test that binman can sign an iMX8M image"""
-+        with test_util.capture_sys_output() as (_, stderr):
-+            self._DoTestFile('343_nxp_imx8m.dts',
-+                             force_missing_bintools='mkimage')
-+        err = stderr.getvalue()
-+        self.assertRegex(err, "Image 'image'.*missing bintools.*: mkimage")
-+
-+    def testNxpImx8MCSTtoolMissing(self):
-+        """Test that binman can sign an iMX8M image"""
-+        with test_util.capture_sys_output() as (_, stderr):
-+            self._DoTestFile('343_nxp_imx8m.dts',
-+                             force_missing_bintools='cst')
-+        err = stderr.getvalue()
-+        self.assertRegex(err, "Image 'image'.*missing bintools.*: cst")
- 
-     def testFitSignSimple(self):
-         """Test that image with FIT and signature nodes can be signed"""
-diff --git a/tools/binman/test/339_nxp_imx8.dts b/tools/binman/test/339_nxp_imx8m.dts
-similarity index 93%
-rename from tools/binman/test/339_nxp_imx8.dts
-rename to tools/binman/test/339_nxp_imx8m.dts
-index cb512ae9aa2..2c8f4bee5b7 100644
---- a/tools/binman/test/339_nxp_imx8.dts
-+++ b/tools/binman/test/339_nxp_imx8m.dts
-@@ -12,6 +12,9 @@
- 			nxp,boot-from = "sd";
- 			nxp,rom-version = <1>;
- 			nxp,loader-address = <0x10>;
-+
-+			section {
-+			};
- 		};
- 	};
- };
-diff --git a/tools/binman/test/343_nxp_imx8m.dts b/tools/binman/test/343_nxp_imx8m.dts
-new file mode 100644
-index 00000000000..5e76a97641b
---- /dev/null
-+++ b/tools/binman/test/343_nxp_imx8m.dts
-@@ -0,0 +1,26 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mcst {
-+			args;	/* TODO: Needed by mkimage etype superclass */
-+			nxp,loader-address = <0x12340000>;
-+			nxp,unlock;
-+
-+			nxp-imx8mimage {
-+				args;	/* TODO: Needed by mkimage etype superclass */
-+				nxp,boot-from = "sd";
-+				nxp,rom-version = <1>;
-+				nxp,loader-address = <0x10>;
-+
-+				section {
-+				};
-+			};
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/344_nxp_imx8m.dts b/tools/binman/test/344_nxp_imx8m.dts
-new file mode 100644
-index 00000000000..c38267bb815
---- /dev/null
-+++ b/tools/binman/test/344_nxp_imx8m.dts
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mcst {
-+			nxp,loader-address = <0x12340000>;
-+			nxp,fast-auth;
-+			offset = <0x58000>;
-+			args;	/* Needed by mkimage etype superclass */
-+
-+			fit {
-+				description = "test desc";
-+				#address-cells = <1>;
-+
-+				images {
-+				};
-+
-+				configurations {
-+				};
-+			};
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/345_nxp_imx8m.dts b/tools/binman/test/345_nxp_imx8m.dts
-new file mode 100644
-index 00000000000..0ed6e3ca9d0
---- /dev/null
-+++ b/tools/binman/test/345_nxp_imx8m.dts
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mcst {
-+			nxp,loader-address = <0x12340000>;
-+			offset = <0x58000>;
-+			args;	/* Needed by mkimage etype superclass */
-+
-+			u-boot {
-+			};
-+		};
-+	};
-+};
--- 
-2.45.2
-
+> On sam., mars 02, 2024 at 14:00, Jonas Karlman <jonas@kwiboo.se> wrote:
+> 
+> [...]
+> 
+>>>
+>>> I will keep you posted.
+>>
+>> Thanks, much appreciated!
+>>
+>> Please also keep in mind that changing the interrupt handling probably
+>> only fixes the second of the two build errors reported and fixed by this
+>> patch.
+>>
+>> Trying to build with following will trigger the first build error, and
+>> should not change because use of dm_usb_gadget_handle_interrupts() is
+>> reworked.
+>>
+>> CONFIG_DM_USB_GADGET=y
+>> CONFIG_USB_DWC3=y
+>> # CONFIG_USB_DWC3_GADGET is not set
+>> CONFIG_USB_DWC3_GENERIC=y
+>> CONFIG_USB_GADGET=y
+>>
+>> E.g to only include host part of dwc3 and gadget from another driver,
+>> to i.e. save on binary size, produce following build error:
+>>
+>> aarch64-linux-gnu-ld.bfd: drivers/usb/dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
+>> drivers/usb/dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
+>>    undefined reference to `dwc3_gadget_uboot_handle_interrupt'
+>>
+>> I guess force select USB_DWC3_GADGET for USB_DWC3_GENERIC would make
+>> that build error disappear, and increase binary size as a result.
+>>
+>> For my RK3328 series [1] I will just revert to use USB_XHCI_DWC3 instead
+>> of using USB_DWC3_GENERIC on boards that enable peripheral use of otg
+>> port.
+>>
+>> [1] https://patchwork.ozlabs.org/patch/1904779/
+> 
+> Marek ended up doing this rework.
+> It's available for review here, if you want to have a look:
+> https://lore.kernel.org/all/20240614005309.34433-1-marek.vasut+renesas@mailbox.org/
+This should be upstream in some form now, is this thread still an open 
+topic or is this solved now ?
