@@ -4,58 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A599DE77197
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jan 2025 10:46:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA5DE77197
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jan 2025 19:20:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3C878036D;
-	Sun,  5 Jan 2025 11:46:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F8CE8039E;
+	Sun,  5 Jan 2025 20:20:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FNfcxoK9";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1736104851;
+	bh=nN88bHogpcawC8JzvnW1SceX75sqW7XZzUO/RxB1/tA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=gf5z9VST2ZMGWvyDIA2zosfqHWXI4T99OA3Ly+l9uH09vcNhGb7HJfcnA8UlQI7hV
+	 BknS0GXH941f9lZff29cHpQZoUI6lsbSXkGF9r7KMbMMg9+yAhXB+bJktHq6nmiLgx
+	 AgTDDE7u5yYGarZ3xk8Jv7KHrV4x/zmAnhcDRXkZs/BrHzyTkcVf8PmHueOf0yYQCE
+	 0S0UElz/uJF+yZLMJ3CyJ7olgYZuqTiN2XUnKO/HPNBMI9GUiz+RBWbjlpftSNZVC/
+	 fBs/8cMwVrYzm2sOfoBgjgBEbFoZUpVjzxY4onbuXroRRjqTnh654xGgVmmFHgvXQV
+	 +AcuKXTmCUhbQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CD63803DC; Sun,  5 Jan 2025 11:46:46 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id A868C801E8; Sun,  5 Jan 2025 20:20:49 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 136D3800B2
- for <u-boot@lists.denx.de>; Sun,  5 Jan 2025 11:46:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FD5E801CE
+ for <u-boot@lists.denx.de>; Sun,  5 Jan 2025 20:20:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C9F763F2C6; 
- Sun,  5 Jan 2025 10:46:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1736074003;
- bh=AplhalHblOMuxxzXEZRS9wzLh8vtPgGcGTA191XX0YA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=FNfcxoK9gY5OGy5lcXYp8oPHMRcpf+U2EMd+l/De5TF3Rd2+IpuKCR/dxrxlh+by9
- 6mwvn/k2WoXbpil3J3T5/T24CXqGgy8wochMAmCc58MCHXtZ9ulI16KEQLf+HaeOI2
- PvBbHmuDDazeIrSqac+6JlTcxYdlMEqP8jZJWRRqOqzrzvyp+gBC2wLFQ7tO7zwshB
- N2gSUTUAqdEpYJBACN9Hhi7l7GhkG367+rRV+ZDbdE8MilK3+n55uXLupT6DD+Bsg0
- rD58Ei9/Q2qhTsTjeprllzGytQodfXA4P8Pqyq90mkb/eBY0ebpaaWMACZvpDtaYuh
- Iex3TJgiZvUXg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Massimiliano Minella <massimiliano.minella@se.com>,
- Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] cmd/setexpr: support concatenation of direct strings
-Date: Sun,  5 Jan 2025 11:46:14 +0100
-Message-ID: <20250105104614.7916-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="LiaJYh9L"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id C56D2104811FC; Sun,  5 Jan 2025 20:20:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1736104846;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nN88bHogpcawC8JzvnW1SceX75sqW7XZzUO/RxB1/tA=;
+ b=LiaJYh9L271Uyu9Z24aOfAC+rkbXtnOU30/Q4Sx3Syp8tDE8NuCeUXX3WjEcPqzDwB4zgp
+ FSr0maEygCRy0jh9rKuF/xO/6uwLAaNqgVZZlsTYtX2M647lftbNHg/7ecQLLuivDIHkUG
+ xXdiGwM+gb3Od05oE4O/bRopJ0HZS2ZVsSoNZQSCLUuD8YH63RmoC65w6FFu63pteWXJiq
+ GM89XHZ+mGTzQUZTzzGEeZj6E02ExXCsXSYjzfhAEAnNQDBaF7E1bdBA/ZXXbbAmfEo2by
+ jywwOKN4WefPBIURVzUe2aWLDoh9zNWA3axa+Ty613RPKqc51XtRB0xe6flM3A==
+Message-ID: <9a264f5c-48f6-44a6-bdfd-d3f65be2a65d@denx.de>
+Date: Sun, 5 Jan 2025 20:14:09 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/8] usb: dwc2: Clean up with bitfield macros
+To: Junhui Liu <junhui.liu@pigmoral.tech>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, seashell11234455@gmail.com, pbrobinson@gmail.com
+References: <20250104-dwc2-dev-v3-0-d4b2bc1996e4@pigmoral.tech>
+ <20250104-dwc2-dev-v3-4-d4b2bc1996e4@pigmoral.tech>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250104-dwc2-dev-v3-4-d4b2bc1996e4@pigmoral.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,143 +84,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The setexpr.s command allows to concatenate two strings.
+On 1/4/25 4:37 AM, Junhui Liu wrote:
+> From: Kongyang Liu <seashell11234455@gmail.com>
+> 
+> Use FIELD_PREP, FIELD_GET, BIT, and GENMASK macros to standardize bit
+> manipulation across the DWC2 code, improving readability and
+> maintainability without altering functionality.
+> 
+> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
 
-According to the description in doc/usage/cmd/setexpr.rst the parameters
-value1 and value2 can be either direct values or pointers to a
-memory location holding the values.
-
-Unfortunately `setexpr.s <value1> + <value2>` fails if any of the values
-is a direct value. $? is set to false.
-
-* Add support for direct values in setexpr.s.
-* Correct the unit test for "setexpr.s fred 0".
-* Add a new unit test for "setexpr.s fred '1' + '3'" giving '13'.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	Update the commit message to indicate that a bug is corrected.
----
- cmd/setexpr.c      | 54 ++++++++++++++++++++++++++++++++--------------
- test/cmd/setexpr.c |  7 +++++-
- 2 files changed, 44 insertions(+), 17 deletions(-)
-
-diff --git a/cmd/setexpr.c b/cmd/setexpr.c
-index e111b8ba98a..c45fa85c887 100644
---- a/cmd/setexpr.c
-+++ b/cmd/setexpr.c
-@@ -35,9 +35,37 @@ struct expr_arg {
- 	};
- };
- 
-+/**
-+ * arg_set_str() - copy string to expression argument
-+ *
-+ * The string is truncated to 64 KiB plus NUL terminator.
-+ *
-+ * @p:		pointer to string
-+ * @argp:	pointer to expression argument
-+ * Return:	0 on success, -ENOMEM if out of memory
-+ */
-+static int arg_set_str(void *p, struct expr_arg *argp)
-+{
-+	int len;
-+	char *str;
-+
-+	/* Maximum string length of 64 KiB plus NUL terminator */
-+	len = strnlen((char *)p, SZ_64K) + 1;
-+	str = malloc(len);
-+	if (!str) {
-+		printf("Out of memory\n");
-+		return -ENOMEM;
-+	}
-+	memcpy(str, p, len);
-+	str[len - 1] = '\0';
-+	argp->sval = str;
-+	return 0;
-+}
-+
- static int get_arg(char *s, int w, struct expr_arg *argp)
- {
- 	struct expr_arg arg;
-+	int ret;
- 
- 	/*
- 	 * If the parameter starts with a '*' then assume it is a pointer to
-@@ -47,8 +75,6 @@ static int get_arg(char *s, int w, struct expr_arg *argp)
- 		ulong *p;
- 		ulong addr;
- 		ulong val;
--		int len;
--		char *str;
- 
- 		addr = hextoul(&s[1], NULL);
- 		switch (w) {
-@@ -66,18 +92,10 @@ static int get_arg(char *s, int w, struct expr_arg *argp)
- 			break;
- 		case CMD_DATA_SIZE_STR:
- 			p = map_sysmem(addr, SZ_64K);
--
--			/* Maximum string length of 64KB plus terminator */
--			len = strnlen((char *)p, SZ_64K) + 1;
--			str = malloc(len);
--			if (!str) {
--				printf("Out of memory\n");
--				return -ENOMEM;
--			}
--			memcpy(str, p, len);
--			str[len - 1] = '\0';
-+			ret = arg_set_str(p, &arg);
- 			unmap_sysmem(p);
--			arg.sval = str;
-+			if (ret)
-+				return ret;
- 			break;
- 		case 4:
- 			p = map_sysmem(addr, sizeof(u32));
-@@ -93,9 +111,13 @@ static int get_arg(char *s, int w, struct expr_arg *argp)
- 			break;
- 		}
- 	} else {
--		if (w == CMD_DATA_SIZE_STR)
--			return -EINVAL;
--		arg.ival = hextoul(s, NULL);
-+		if (w == CMD_DATA_SIZE_STR) {
-+			ret = arg_set_str(s, &arg);
-+			if (ret)
-+				return ret;
-+		} else {
-+			arg.ival = hextoul(s, NULL);
-+		}
- 	}
- 	*argp = arg;
- 
-diff --git a/test/cmd/setexpr.c b/test/cmd/setexpr.c
-index 21a3268bd81..00d373f35ae 100644
---- a/test/cmd/setexpr.c
-+++ b/test/cmd/setexpr.c
-@@ -310,7 +310,8 @@ static int setexpr_test_str(struct unit_test_state *uts)
- 	ut_assertok(env_set("fred", "x"));
- 	start_mem = ut_check_free();
- 	strcpy(buf, "hello");
--	ut_asserteq(1, run_command("setexpr.s fred 0", 0));
-+	ut_asserteq(0, run_command("setexpr.s fred 0", 0));
-+	ut_asserteq_str("0", env_get("fred"));
- 	ut_assertok(ut_check_delta(start_mem));
- 
- 	ut_assertok(env_set("fred", "12345"));
-@@ -335,6 +336,10 @@ static int setexpr_test_str_oper(struct unit_test_state *uts)
- 	ulong start_mem;
- 	char *buf;
- 
-+	/* Test concatenation of strings */
-+	ut_assertok(run_command("setexpr.s fred '1' + '3'", 0));
-+	ut_asserteq_str("13", env_get("fred"));
-+
- 	buf = map_sysmem(0, BUF_SIZE);
- 	memset(buf, '\xff', BUF_SIZE);
- 	strcpy(buf, "hello");
--- 
-2.47.1
-
+Reviewed-by: Marek Vasut <marex@denx.de>
