@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 711A2E77198
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jan 2025 22:12:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C73F8E77197
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jan 2025 22:12:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EE72805CB;
+	by phobos.denx.de (Postfix) with ESMTP id D9FA0805EA;
 	Sun,  5 Jan 2025 23:12:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1736115134;
-	bh=1AX6sRNmjJ1vRSvu2W+LvtSzNLKIRVKRJevkPmAjhJs=;
+	bh=uUrZ+oETGW55yzjOz/lFo91FnFcWSjuUQeYSLmqXKaM=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bye6IYqW4i/Pkm6mj6P+PqxrEHmNBYx3IPXEmnnDHY6+BfaHikpaHZIjMryRH/O3S
-	 YI7/RfhovgMc8Wt4mPoHYjyan1EQjxfKb4LyEyX4IDjt34B92USVrLDEHXCv2dyATU
-	 1DSKOObp0YhJOacBg0xBkEg3YnkuwTjtgZWHuM7M/vmkdoiFRApNohPdOfY7cSkzkh
-	 H3X5SJqV/BgTPdtdvjhR/meH3/7epVYn9x2crfLZl7fUKQADk+M71+ZYWZ960LxadP
-	 hzN7QyFgJ68tHCDfLHyimHWltwt4EEDF17rFOPdKNUnqgC9njaV0ER5vhow74EOy71
-	 MIJCDQzdbfWkA==
+	b=zk3DS+HiO+h2J7EoDBSdD26XRVv5ooYCMzKVduo7/mgKwKDodP/5ce+zTFK+h8uXd
+	 RLaWr5Eqya0GVQKYmslC7t1O8uGtUWeIiePOsMgHwqGeEmmHAZ+8CWUJdiEdz300xf
+	 yaixTpt01AQhBSm3zNlJXwspyVWJZnxL84ApnLeZFrd7fPq/NO2VLvbGxqPS+FYzm2
+	 FR24iLnqo42zUyDcY0+Qf/aj1VKqFrdr8XnYzxZduhJSXqgqLrKqpSkqXFJ9KxBpjQ
+	 Qs13tKvjQn0cKaOJ6AeuhFqVI4jPY2xauqV4ZCRM46Jk44KXj+gSX2CABzN26RuCyz
+	 /QP0DWzhrezwA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 367B1805D6; Sun,  5 Jan 2025 23:12:13 +0100 (CET)
+ id 316ED8036D; Sun,  5 Jan 2025 23:12:14 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 929BF805EA
- for <u-boot@lists.denx.de>; Sun,  5 Jan 2025 23:12:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7146805FC
+ for <u-boot@lists.denx.de>; Sun,  5 Jan 2025 23:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="G0QkqOaD"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="iDUCKO+2"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3BF67101D74AA; Sun,  5 Jan 2025 23:12:05 +0100 (CET)
+ with ESMTPSA id C6826101ECBAD; Sun,  5 Jan 2025 23:12:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736115127;
+ t=1736115129;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1AX6sRNmjJ1vRSvu2W+LvtSzNLKIRVKRJevkPmAjhJs=;
- b=G0QkqOaD7r6DxBJZRHIqQGKpwkBYijmw1iVqCsZm/4tZYxTdV8jb/25odftCGYGTvXimPY
- wrV9RqufajTKrc57TZnaQiFtresweiJpeGIHjPeEIwD7UEMZgXXZUtkHqHMaswXknUMR+w
- Blq3Pj9v+qjB9iSvCQsIWb9i+lTNxBZa7fF+VqBbjQRnK4LMEooOHxtC3W3QTEQTn+9vBx
- 7tVn1u4g/6FAAJF+DXkeaceIRzZ/lNzHd134kNCvB9+4AeCdUuPBICAVQh6PIqPCNQ/ph8
- EcZGSPD87HErTDKd1mYIROob+9DTAG6bIel27uAOS9A/Ru5FJ6OfC+IyABea0Q==
-Message-ID: <0898a19f-e6f1-4fa0-ae0b-6f696ffbc837@denx.de>
-Date: Sun, 5 Jan 2025 22:07:43 +0100
+ bh=uUrZ+oETGW55yzjOz/lFo91FnFcWSjuUQeYSLmqXKaM=;
+ b=iDUCKO+2W4FR1bG2oI8CSR+R5s1ur6pDYb5UU1yMPu/GEvHpwBZqX/psANTnX3BW1JnQ2+
+ VgEc9cROZRq7FuQvcl28m6xuQTNgNt64MgqAQuvzBtttlupglsuGrROTTVFjfPSyD4hEAS
+ 6hLaW85oSV+RHRxNtSpGsC+RZTOAXf8KpCZDHXp970KMKWYhSF79LkZNQ+Scieu2hebNXT
+ V9uqoRHt9xTEWXXyAYpmcHsyXIxEPA3dLo6GIxWhZ0BMvd3eKo4iuYnRfM70ogdlvaSHsM
+ acws9ifW7pZfLvNXajvZaHXE4AWNkVvl+Zv6QkGc0ydgYKnm5bTBu8BUdLO8jw==
+Message-ID: <a563cb62-7922-4a68-a24c-534e583b7dcb@denx.de>
+Date: Sun, 5 Jan 2025 22:08:53 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/17] clk: scmi: check the clock state/parent/rate
- control permissions
+Subject: Re: [PATCH v3 08/17] scmi_protocols: update struct
+ scmi_base_discover_list_protocols_out
 To: Alice Guo <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>,
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>
-Cc: u-boot@lists.denx.de, tharvey@gateworks.com, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.denx.de, tharvey@gateworks.com, Ye Li <ye.li@nxp.com>
 References: <20250103-imx95-v1-0-6744df5dc020@oss.nxp.com>
- <20250103-imx95-v1-7-6744df5dc020@oss.nxp.com>
+ <20250103-imx95-v1-8-6744df5dc020@oss.nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250103-imx95-v1-7-6744df5dc020@oss.nxp.com>
+In-Reply-To: <20250103-imx95-v1-8-6744df5dc020@oss.nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -90,20 +89,33 @@ X-Virus-Status: Clean
 On 1/3/25 7:45 AM, Alice Guo wrote:
 > From: Ye Li <ye.li@nxp.com>
 > 
-> SCMI clock management protocol driver in Linux checks clock state,
-> parent and rate control permissions. To be consistent with the kernel
-> driver, add this check here.
+> @protocols is an array of protocol identifiers that are implemented,
+> excluding the Base protocol. The number of elements of @protocols is
+> specified by callee-side. Currently, set it to 4 is enough for i.MX95.
 > 
-> When using common clock framework (CCF), use the clock signal ID to get
-> the clock registered by clk_register() in scmi_clk_probe(), and then
-> obatin the struct clk_scmi variable with container_of().
-> 
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
 > Signed-off-by: Ye Li <ye.li@nxp.com>
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
 > ---
->   arch/sandbox/include/asm/scmi_test.h       |   2 +
->   drivers/clk/clk_scmi.c                     | 173 +++++++++++++++++++++++++++--
->   drivers/firmware/scmi/sandbox-scmi_agent.c |  56 +++++++++-
->   include/scmi_protocols.h                   |  26 ++++-
-Please split common/imx/sandbox changes into separate patches .
+>   include/scmi_protocols.h | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+> index 9607433c3276f9aa18044c414a5bde3143726cf4..3c55d228cb641bc6c0e5ca7ac885efe84b41c66d 100644
+> --- a/include/scmi_protocols.h
+> +++ b/include/scmi_protocols.h
+> @@ -141,11 +141,14 @@ struct scmi_base_discover_impl_version_out {
+>    * @status:		SCMI command status
+>    * @num_protocols:	Number of SCMI protocols in @protocol
+>    * @protocols:		Array of packed SCMI protocol ID's
+> + *
+> + * The number of elements of @protocols is specified by callee-side. Currently,
+> + * set it to 4 is enough for i.MX95.
+>    */
+>   struct scmi_base_discover_list_protocols_out {
+>   	s32 status;
+>   	u32 num_protocols;
+> -	u32 protocols[3];
+> +	u32 protocols[4];
+Can this be made somehow future-proof? For example, figure out how many 
+protocols are supported, and then malloc this structure with the right 
+size and query again ?
