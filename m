@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA5DE77197
-	for <u-boot@archiver.kernel.org>; Sun,  5 Jan 2025 19:20:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3C82E77197
+	for <u-boot@archiver.kernel.org>; Sun,  5 Jan 2025 19:21:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F8CE8039E;
-	Sun,  5 Jan 2025 20:20:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E57D0801DE;
+	Sun,  5 Jan 2025 20:20:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736104851;
-	bh=nN88bHogpcawC8JzvnW1SceX75sqW7XZzUO/RxB1/tA=;
+	s=phobos-20191101; t=1736104853;
+	bh=HI5i98jLZd9MPyg4uonDF/yiQ6f7vbhQE+VH7LR5ZWY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gf5z9VST2ZMGWvyDIA2zosfqHWXI4T99OA3Ly+l9uH09vcNhGb7HJfcnA8UlQI7hV
-	 BknS0GXH941f9lZff29cHpQZoUI6lsbSXkGF9r7KMbMMg9+yAhXB+bJktHq6nmiLgx
-	 AgTDDE7u5yYGarZ3xk8Jv7KHrV4x/zmAnhcDRXkZs/BrHzyTkcVf8PmHueOf0yYQCE
-	 0S0UElz/uJF+yZLMJ3CyJ7olgYZuqTiN2XUnKO/HPNBMI9GUiz+RBWbjlpftSNZVC/
-	 fBs/8cMwVrYzm2sOfoBgjgBEbFoZUpVjzxY4onbuXroRRjqTnh654xGgVmmFHgvXQV
-	 +AcuKXTmCUhbQ==
+	b=rTwrjrfg8U19jQp4TFAY4qN9/Z0R+FbH02VAQqe+pHKgrh2z/LrHSdyVzUHHAoqZv
+	 g68ZA5nQOlSFJ+I+0Eenjg8yERJ9a2ZeD3iG3UdPvLKtttfmSxC0XzMRgV5ZLBWZhV
+	 bkySAeS3Y5BAQjCZrGg7LEE3NFn7qtMmCtth2LotkylvkyHPnuSLkG5x1QLcBTAE2q
+	 DyMiftrLQXwaM9UK4hqQbomPi+KipTNUDSFmJPK4F3SvA2wjCD+P2tA9q9MbfNfID2
+	 In7fbrXoAmCfZPxL1RG2Zch5JS8LZAAXiOUUUWyIxUOy00Esp1dYItxd3RyyXq0vou
+	 gFsSjiQWVOJQg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A868C801E8; Sun,  5 Jan 2025 20:20:49 +0100 (CET)
+ id CB9A7805C5; Sun,  5 Jan 2025 20:20:52 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de
  [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FD5E801CE
- for <u-boot@lists.denx.de>; Sun,  5 Jan 2025 20:20:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 91316801CE
+ for <u-boot@lists.denx.de>; Sun,  5 Jan 2025 20:20:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="LiaJYh9L"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="UYKWCcWx"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C56D2104811FC; Sun,  5 Jan 2025 20:20:43 +0100 (CET)
+ with ESMTPSA id B2BD7104839EE; Sun,  5 Jan 2025 20:20:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736104846;
+ t=1736104849;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=nN88bHogpcawC8JzvnW1SceX75sqW7XZzUO/RxB1/tA=;
- b=LiaJYh9L271Uyu9Z24aOfAC+rkbXtnOU30/Q4Sx3Syp8tDE8NuCeUXX3WjEcPqzDwB4zgp
- FSr0maEygCRy0jh9rKuF/xO/6uwLAaNqgVZZlsTYtX2M647lftbNHg/7ecQLLuivDIHkUG
- xXdiGwM+gb3Od05oE4O/bRopJ0HZS2ZVsSoNZQSCLUuD8YH63RmoC65w6FFu63pteWXJiq
- GM89XHZ+mGTzQUZTzzGEeZj6E02ExXCsXSYjzfhAEAnNQDBaF7E1bdBA/ZXXbbAmfEo2by
- jywwOKN4WefPBIURVzUe2aWLDoh9zNWA3axa+Ty613RPKqc51XtRB0xe6flM3A==
-Message-ID: <9a264f5c-48f6-44a6-bdfd-d3f65be2a65d@denx.de>
-Date: Sun, 5 Jan 2025 20:14:09 +0100
+ bh=HI5i98jLZd9MPyg4uonDF/yiQ6f7vbhQE+VH7LR5ZWY=;
+ b=UYKWCcWxIrtOnuHXkeyDSKZdKxP6TMG5Mqdiz09tLCdke+OntVormXyHFlX9hLmVCGdtyC
+ tSsTmsUqlA12QFpcT2kn7A8udfoY5fjtcEM8SXz/Mh21XEIJjjIf4XORvXD3Asn+nC6g7w
+ bZQ8hWWpQPMuJATz/g2BHiVrlykW6VHmnV95OgzqH2+3O0QG6CvJIi0UHa809x3/QNPObE
+ 8/ANQxSN1TSDvQFjFOJCK8hEdKR5RqvaMDJBWqJiARJOzRNi+qnzJ5l9xiZ+rxxlv96DRl
+ Cr4UerYCGD/zPrxC6Fi9kXlk7CWBxr+VFGrSfP0dNAIsmcO7WBADAaytYvkyKA==
+Message-ID: <88c88307-ab59-4d7a-acfd-f1a52c41a382@denx.de>
+Date: Sun, 5 Jan 2025 20:19:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/8] usb: dwc2: Clean up with bitfield macros
+Subject: Re: [PATCH v3 7/8] usb: dwc2: Unify flush and reset logic with v4.20a
+ support
 To: Junhui Liu <junhui.liu@pigmoral.tech>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: u-boot@lists.denx.de, seashell11234455@gmail.com, pbrobinson@gmail.com
 References: <20250104-dwc2-dev-v3-0-d4b2bc1996e4@pigmoral.tech>
- <20250104-dwc2-dev-v3-4-d4b2bc1996e4@pigmoral.tech>
+ <20250104-dwc2-dev-v3-7-d4b2bc1996e4@pigmoral.tech>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250104-dwc2-dev-v3-4-d4b2bc1996e4@pigmoral.tech>
+In-Reply-To: <20250104-dwc2-dev-v3-7-d4b2bc1996e4@pigmoral.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -87,11 +88,47 @@ X-Virus-Status: Clean
 On 1/4/25 4:37 AM, Junhui Liu wrote:
 > From: Kongyang Liu <seashell11234455@gmail.com>
 > 
-> Use FIELD_PREP, FIELD_GET, BIT, and GENMASK macros to standardize bit
-> manipulation across the DWC2 code, improving readability and
-> maintainability without altering functionality.
+> This patch merges flush and reset logic for both host and gadget code
+> into a common set of functions, reducing duplication. It also adds support
+> for the updated reset logic to compatible with core version since v4.20a.
 > 
-> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
+> This patch mainly refers to the patch in the kernel.
+> link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=65dc2e725286106f99c6f6b78e3d9c52c15f3a9c
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+[...]
+
+> +++ b/drivers/usb/common/dwc2_core.c
+> @@ -0,0 +1,115 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+
+2025 now .
+
+[...]
+
+> +int dwc2_flush_rx_fifo(struct dwc2_core_regs *regs)
+> +{
+> +	int ret;
+> +
+> +	log_debug("Flush Rx FIFO\n");
+> +
+> +	/* Wait for AHB master IDLE state */
+> +	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE, true, 1000, false);
+> +	if (ret) {
+> +		log_warning("%s: Waiting for GRSTCTL_AHBIDLE timeout\n", __func__);
+> +		return ret;
+> +	}
+> +
+> +	writel(GRSTCTL_RXFFLSH, &regs->global_regs.grstctl);
+> +
+> +	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_RXFFLSH, false, 1000, false);
+> +	if (ret) {
+> +		log_warning("%s: Waiting for GRSTCTL_RXFFLSH timeout\n", __func__);
+> +		return ret;
+> +	}
+> +
+> +	/* Wait for at least 3 PHY Clocks */
+> +	udelay(1);
+Shouldn't this delay be derived from the PHY clock frequency somehow ?
+Are we sure 1us is always sufficient ?
