@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3D64E77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:07:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F54BE77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:07:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35F0680570;
-	Mon,  6 Jan 2025 10:07:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C05C8058A;
+	Mon,  6 Jan 2025 10:07:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A6oLr2La";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l8QtJNle";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68D01805D5; Mon,  6 Jan 2025 10:07:29 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 7548D805DF; Mon,  6 Jan 2025 10:07:31 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05FCC8007D
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:07:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 058718058A
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:07:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50697Nni2768661
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50697Rog2464502
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 6 Jan 2025 03:07:23 -0600
+ Mon, 6 Jan 2025 03:07:27 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736154443;
- bh=w/2hB0Koy+yQbJtTaT+vCVEz5ExUxliLMQFfJHQTIUI=;
- h=From:To:CC:Subject:Date;
- b=A6oLr2La5QpwnC6e5GLBElN/EOK+8DeZ3HxbvZlKyMzJYZBlJ+aJiZ5IPiwXagWTY
- QbxmppeY4aK+PK867meOTV7QF0/mSzTaDmKc6LCV2HvtEymEh/zegLhMG5GipUZBbF
- WVH79S5oXomHs5n7C5Bp48/S4n/38JkXipIVg9/Y=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50697Nas029600
+ s=ti-com-17Q1; t=1736154447;
+ bh=g1bijHJ1LZ4jS5KdM49rCPcqQmqeBsfAJJUyHI+qI84=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=l8QtJNleW+J+GoBxdB6o/woKvSpSuNGctmo9q3knQC+GGMDqQe2CGYEY0xexX3bF/
+ GWG4pOHSlk4cktkToD+ZDxHRCRp7x6zhjtyQDWZcbwFDpFTxt8xpPMKQ4VFtbOItwH
+ +4FyH2XJY3T0siCqGbhp5J8msYFYzhRu9FK+TFOM=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50697RgY114167
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 6 Jan 2025 03:07:23 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 6 Jan 2025 03:07:27 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
- Jan 2025 03:07:23 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2025 03:07:26 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 6 Jan 2025 03:07:23 -0600
+ Frontend Transport; Mon, 6 Jan 2025 03:07:26 -0600
 Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
  [172.24.227.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50697JuV103050;
- Mon, 6 Jan 2025 03:07:20 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50697JuW103050;
+ Mon, 6 Jan 2025 03:07:23 -0600
 From: Santhosh Kumar K <s-k6@ti.com>
 To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <bb@ti.com>, <m-chawdhry@ti.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>
 CC: <u-boot@lists.denx.de>, <w.egorov@phytec.de>, <n-francis@ti.com>,
  <s-k6@ti.com>
-Subject: [PATCH v6 0/9] Inline ECC Series
-Date: Mon, 6 Jan 2025 14:36:59 +0530
-Message-ID: <20250106090708.1541212-1-s-k6@ti.com>
+Subject: [PATCH v6 1/9] arm: dts: k3-*-ddr: Add ss_cfg reg entry
+Date: Mon, 6 Jan 2025 14:37:00 +0530
+Message-ID: <20250106090708.1541212-2-s-k6@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250106090708.1541212-1-s-k6@ti.com>
+References: <20250106090708.1541212-1-s-k6@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,118 +82,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-This series adds support for Inline ECC in DDR for AM64X, AM62X,
-AM62AX, AM62PX, J721E, J721S2, J722S and J784S4 devices.
-
-(1/9) Add ss_cfg reg entry
-(2/9) Enable ECC priming with BIST engine
-(3/9) Add a function to store base address and size of RAM's banks
-      in a 64-bit device private data
-(4/9) Setup the ECC region start and range
-(5/9) Enable ECC 1-bit error, 2-bit error and multiple-bit
-      error interrupts
-(6/9) Add CONFIG_K3_INLINE_ECC
-(7/9) Remove 'ti,ecc-enable' flag
-(8/9) Set default NR_DRAM_BANKS to 2
-(9/9) Pull Redundant DDR functions to a common location and Fixup
-      DDR size when ECC is enabled
-
-Test Results: https://gist.github.com/santhosh21/88de920771ed2efa0463a5a367cb8d7b
-
-Changes since v5:
-
-Add support for J722S EVM
-
-v5: https://lore.kernel.org/u-boot/20241213103129.332246-1-s-k6@ti.com/
-
-Changes since v4:
-1. Make dram_init and dram_init_banksize weak at mach-k3/ and define at
-   board/ti/
-2. Remove 'ti,ecc-enable' flag
-3. Minor changes like patch order change (8/8 in v4 to 1/9 in v5),
-   use 'u64'
-
-v4: https://lore.kernel.org/u-boot/20241021044024.835846-1-s-k6@ti.com/
-
-Changes since v3:
-Pull redundant DDR functions to arch/arm/mach-k3/*
-
-v3: https://lore.kernel.org/all/20240523050430.455201-1-s-k6@ti.com/
-
-Changes since v2:
-Removed 'default n' in Kconfig as that is default setting
-
-v2: https://lore.kernel.org/u-boot/20240510084707.1903133-1-s-k6@ti.com/
-
-Changes since v1:
-Add support for J7* devices.
-
-v1: https://lore.kernel.org/u-boot/20240131060213.1128024-1-s-k6@ti.com/
+Add ss_cfg memory region which maps the DDRSS configuration region
+for the memory controller node.
 
 Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Tested-by: Wadim Egorov <w.egorov@phytec.de>
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+ arch/arm/dts/k3-am62a-ddr.dtsi  |  7 ++++---
+ arch/arm/dts/k3-j721s2-ddr.dtsi | 12 ++++++++----
+ arch/arm/dts/k3-j784s4-ddr.dtsi | 24 ++++++++++++++++--------
+ 3 files changed, 28 insertions(+), 15 deletions(-)
 
-Georgi Vlaev (1):
-  ram: k3-ddrss: Use the DDR controller BIST engine for ECC priming
-
-Neha Malcom Francis (2):
-  drivers: ram: Kconfig: Add CONFIG_K3_INLINE_ECC
-  arm: mach-k3: Set NR_DRAM_BANKS to 2
-
-Santhosh Kumar K (6):
-  arm: dts: k3-*-ddr: Add ss_cfg reg entry
-  ram: k3-ddrss: Add k3_ddrss_ddr_bank_base_size_calc() to solve
-    'calculations restricted to 32 bits' issue
-  ram: k3-ddrss: Setup ECC region start and range
-  ram: k3-ddrss: Enable ECC interrupts
-  ram: k3-ddrss: Remove 'ti,ecc-enable' support
-  board: ti: Pull redundant DDR functions to a common location and Fixup
-    DDR size when ECC is enabled
-
- arch/arm/dts/k3-am62a-ddr.dtsi         |   7 +-
- arch/arm/dts/k3-j721s2-ddr.dtsi        |  12 +-
- arch/arm/dts/k3-j784s4-ddr.dtsi        |  24 ++-
- arch/arm/mach-k3/Kconfig               |   3 +
- arch/arm/mach-k3/Makefile              |   2 +-
- arch/arm/mach-k3/include/mach/k3-ddr.h |  15 ++
- arch/arm/mach-k3/k3-ddr.c              |  72 ++++++++
- board/ti/am62ax/evm.c                  |  17 +-
- board/ti/am62px/evm.c                  |  17 +-
- board/ti/am62x/evm.c                   |  63 +------
- board/ti/am64x/evm.c                   |  73 +--------
- board/ti/am65x/evm.c                   |  29 +---
- board/ti/common/Makefile               |   1 +
- board/ti/common/k3-ddr.c               |  33 ++++
- board/ti/common/k3-ddr.h               |  12 ++
- board/ti/j721e/evm.c                   |  29 +---
- board/ti/j721s2/evm.c                  |  35 ++--
- board/ti/j722s/evm.c                   |  17 +-
- board/ti/j784s4/evm.c                  |  17 +-
- configs/am62ax_evm_a53_defconfig       |   1 -
- configs/am62px_evm_a53_defconfig       |   1 -
- configs/am62x_evm_a53_defconfig        |   1 -
- configs/am62x_evm_r5_defconfig         |   1 -
- configs/am64x_evm_a53_defconfig        |   1 -
- configs/am64x_evm_r5_defconfig         |   1 -
- configs/am65x_evm_a53_defconfig        |   1 -
- configs/am65x_evm_r5_defconfig         |   1 -
- configs/am65x_evm_r5_usbdfu_defconfig  |   1 -
- configs/am65x_evm_r5_usbmsc_defconfig  |   1 -
- configs/j7200_evm_a72_defconfig        |   1 -
- configs/j721e_evm_a72_defconfig        |   1 -
- configs/j721s2_evm_a72_defconfig       |   1 -
- configs/j722s_evm_a53_defconfig        |   1 -
- configs/j784s4_evm_a72_defconfig       |   1 -
- drivers/ram/Kconfig                    |  10 ++
- drivers/ram/k3-ddrss/k3-ddrss.c        | 219 +++++++++++++++++++++----
- 36 files changed, 427 insertions(+), 295 deletions(-)
- create mode 100644 arch/arm/mach-k3/include/mach/k3-ddr.h
- create mode 100644 arch/arm/mach-k3/k3-ddr.c
- create mode 100644 board/ti/common/k3-ddr.c
- create mode 100644 board/ti/common/k3-ddr.h
-
+diff --git a/arch/arm/dts/k3-am62a-ddr.dtsi b/arch/arm/dts/k3-am62a-ddr.dtsi
+index 8629ea45b847..42e41f78505a 100644
+--- a/arch/arm/dts/k3-am62a-ddr.dtsi
++++ b/arch/arm/dts/k3-am62a-ddr.dtsi
+@@ -4,11 +4,12 @@
+  */
+ 
+ / {
+-	memorycontroller: memory-controller@f308000 {
++	memorycontroller: memory-controller@f300000 {
+ 		compatible = "ti,am62a-ddrss";
+ 		reg = <0x00 0x0f308000 0x00 0x4000>,
+-		      <0x00 0x43014000 0x00 0x100>;
+-		reg-names = "cfg", "ctrl_mmr_lp4";
++		      <0x00 0x43014000 0x00 0x100>,
++		      <0x00 0x0f300000 0x00 0x200>;
++		reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
+ 		ti,ddr-freq1 = <DDRSS_PLL_FREQUENCY_1>;
+ 		ti,ddr-freq2 = <DDRSS_PLL_FREQUENCY_2>;
+ 		ti,ddr-fhs-cnt = <DDRSS_PLL_FHS_CNT>;
+diff --git a/arch/arm/dts/k3-j721s2-ddr.dtsi b/arch/arm/dts/k3-j721s2-ddr.dtsi
+index 345e2b84f9e8..9764085163c4 100644
+--- a/arch/arm/dts/k3-j721s2-ddr.dtsi
++++ b/arch/arm/dts/k3-j721s2-ddr.dtsi
+@@ -5,6 +5,8 @@
+ 
+ &main_navss {
+ 	ranges = <0x00 0x00114000 0x00 0x00114000 0x00 0x00000100>, // ctrl_mmr_lpr
++		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
++		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
+ 		 <0x00 0x02990000 0x00 0x02990000 0x00 0x00004000>, // ddr0 cfg
+ 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
+ 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
+@@ -24,8 +26,9 @@
+ 		memorycontroller0: memorycontroller@2990000 {
+ 			compatible = "ti,j721s2-ddrss";
+ 			reg = <0x0 0x02990000 0x0 0x4000>,
+-			      <0x0 0x0114000 0x0 0x100>;
+-			reg-names = "cfg", "ctrl_mmr_lp4";
++			      <0x0 0x0114000 0x0 0x100>,
++			      <0x0 0x02980000 0x0 0x200>;
++			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
+ 			power-domains = <&k3_pds 138 TI_SCI_PD_SHARED>,
+ 				<&k3_pds 96 TI_SCI_PD_SHARED>;
+ 			clocks = <&k3_clks 138 0>, <&k3_clks 43 2>;
+@@ -2232,8 +2235,9 @@
+ 		memorycontroller1: memorycontroller@29b0000 {
+ 			compatible = "ti,j721s2-ddrss";
+ 			reg = <0x0 0x029b0000 0x0 0x4000>,
+-			      <0x0 0x0114000 0x0 0x100>;
+-			reg-names = "cfg", "ctrl_mmr_lp4";
++			      <0x0 0x0114000 0x0 0x100>,
++			      <0x0 0x029a0000 0x0 0x200>;
++			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
+ 			power-domains = <&k3_pds 139 TI_SCI_PD_SHARED>,
+ 				<&k3_pds 97 TI_SCI_PD_SHARED>;
+ 			clocks = <&k3_clks 139 0>, <&k3_clks 43 2>;
+diff --git a/arch/arm/dts/k3-j784s4-ddr.dtsi b/arch/arm/dts/k3-j784s4-ddr.dtsi
+index 1c3242b0870c..fc74c539331e 100644
+--- a/arch/arm/dts/k3-j784s4-ddr.dtsi
++++ b/arch/arm/dts/k3-j784s4-ddr.dtsi
+@@ -9,6 +9,10 @@
+ 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
+ 		 <0x00 0x029d0000 0x00 0x029d0000 0x00 0x00004000>, // ddr2 cfg
+ 		 <0x00 0x029f0000 0x00 0x029f0000 0x00 0x00004000>, // ddr3 cfg
++		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
++		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
++		 <0x00 0x029c0000 0x00 0x029c0000 0x00 0x00000200>, // ss cfg 2
++		 <0x00 0x029e0000 0x00 0x029e0000 0x00 0x00000200>, // ss cfg 3
+ 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
+ 
+ 	msmc0: msmc {
+@@ -26,8 +30,9 @@
+ 		memorycontroller0: memorycontroller@2990000 {
+ 			compatible = "ti,j721s2-ddrss";
+ 			reg = <0x0 0x02990000 0x0 0x4000>,
+-			      <0x0 0x0114000 0x0 0x100>;
+-			reg-names = "cfg", "ctrl_mmr_lp4";
++			      <0x0 0x0114000 0x0 0x100>,
++			      <0x0 0x02980000 0x0 0x200>;
++			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
+ 			power-domains = <&k3_pds 191 TI_SCI_PD_SHARED>,
+ 				<&k3_pds 131 TI_SCI_PD_SHARED>;
+ 			clocks = <&k3_clks 191 1>, <&k3_clks 78 2>;
+@@ -2234,8 +2239,9 @@
+ 		memorycontroller1: memorycontroller@29b0000 {
+ 			compatible = "ti,j721s2-ddrss";
+ 			reg = <0x0 0x029b0000 0x0 0x4000>,
+-			      <0x0 0x0114000 0x0 0x100>;
+-			reg-names = "cfg", "ctrl_mmr_lp4";
++			      <0x0 0x0114000 0x0 0x100>,
++			      <0x0 0x029a0000 0x0 0x200>;
++			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
+ 			power-domains = <&k3_pds 192 TI_SCI_PD_SHARED>,
+ 				<&k3_pds 132 TI_SCI_PD_SHARED>;
+ 			clocks = <&k3_clks 192 1>, <&k3_clks 78 2>;
+@@ -4442,8 +4448,9 @@
+ 		memorycontroller2: memorycontroller@29d0000 {
+ 			compatible = "ti,j721s2-ddrss";
+ 			reg = <0x0 0x029d0000 0x0 0x4000>,
+-			      <0x0 0x0114000 0x0 0x100>;
+-			reg-names = "cfg", "ctrl_mmr_lp4";
++			      <0x0 0x0114000 0x0 0x100>,
++			      <0x0 0x029c0000 0x0 0x200>;
++			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
+ 			power-domains = <&k3_pds 193 TI_SCI_PD_SHARED>,
+ 				<&k3_pds 133 TI_SCI_PD_SHARED>;
+ 			clocks = <&k3_clks 193 1>, <&k3_clks 78 2>;
+@@ -6650,8 +6657,9 @@
+ 		memorycontroller3: memorycontroller@29f0000 {
+ 			compatible = "ti,j721s2-ddrss";
+ 			reg = <0x0 0x029f0000 0x0 0x4000>,
+-			      <0x0 0x0114000 0x0 0x100>;
+-			reg-names = "cfg", "ctrl_mmr_lp4";
++			      <0x0 0x0114000 0x0 0x100>,
++			      <0x0 0x29e0000 0x0 0x200>;
++			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
+ 			power-domains = <&k3_pds 194 TI_SCI_PD_SHARED>,
+ 				<&k3_pds 139 TI_SCI_PD_SHARED>;
+ 			clocks = <&k3_clks 194 1>, <&k3_clks 78 2>;
 -- 
 2.34.1
 
