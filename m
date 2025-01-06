@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B03DE77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:33:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A8EEE77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:34:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A62080602;
-	Mon,  6 Jan 2025 15:33:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B2B9A80613;
+	Mon,  6 Jan 2025 15:33:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VYLmdxMM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YRuz+X6t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB46E805FE; Mon,  6 Jan 2025 15:33:03 +0100 (CET)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 6157E8060C; Mon,  6 Jan 2025 15:33:06 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E28880601
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42757805FE
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-3a9cb667783so112658985ab.1
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:01 -0800 (PST)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-844e9b8b0b9so1149342539f.0
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736173979; x=1736778779; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736173982; x=1736778782; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3hSyd1PULWCTmgR6E9Rcx+Khr2hPT1z85vFUYlsF6Bg=;
- b=VYLmdxMMbjaE7zVUnm4JpcaecMrhUIgKDxgcQtEVj2e7WNVjH1JzZe4JkoVXbOmTg4
- 8PQ2/cNbSOl0hDZTauvNtXREywTVIj9EXhQcdd3dm236hN2YVTKaTMiQ0uH3McsE/sGx
- z/lZw14qLkyoVhQNMpmSPP5tHU6X6/I+/eTjQ=
+ bh=avW9jpHTYAW9DV1eINQViBYfSM2C/e1G/P0jUkojUtE=;
+ b=YRuz+X6tArAtpPkSaP/8gginrMVqVcAek30qN6je5RNH++WagIa/NbuBaKaAtFdxkm
+ PMsgjnL9j6jzuGwBTSzHIkPll0wQ3Btk3xyObvqTYHev8JzRe/PkemuMJSNjMbUSuCwP
+ cjCvUEtdoAe90vrIZfGQ1GOcIu46y57lkgHNg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736173979; x=1736778779;
+ d=1e100.net; s=20230601; t=1736173982; x=1736778782;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3hSyd1PULWCTmgR6E9Rcx+Khr2hPT1z85vFUYlsF6Bg=;
- b=QcT6N90jz4kJwS3gRn11HHK67YRXZZ21O+DVgWKkpw4sE8XIc+Xy5wdIBl50WXQFhT
- W2sldZDuKTkQ5SczIpOdCZTs8wx9UGkX0Og1/pjq35HfS2gnLB82Zg/9x9Md6imn0tUW
- NyBHRgj2qFOJ5EExu+JN/ccKcIeGlyb/VFWQiCTUMuqzWj4IUVrdZ0OhNCKY2/4nFnQ4
- YrUW/lEDuyxA+A3IuwLnaKHLGXybBkHQHZ+WuJ8jp89yL64OcIXEYDSaMJ+uZbZNB6b/
- sgIMH/qUqbzTVy7Lw8HAyBcsC73UW9N4N+GyiEplxA1Qyt4+BD4JAtwK/9yYW3ckyhXz
- 6SAw==
-X-Gm-Message-State: AOJu0YyY4SKR2IoQci8SnXplryZd2cFeWzWlHbkJfUGPI7UbvEu4GhAD
- wRUp8CGCi0Hvg27mspbOpNvuSoptv8mwRWrcdXDu2C9MzRg/+Gys/HREihGtHTJ5okdMZFZxqus
+ bh=avW9jpHTYAW9DV1eINQViBYfSM2C/e1G/P0jUkojUtE=;
+ b=SIGHeHG4dn0iI/N+poYiIULQe9jqoLDhoUptyRLFsvAfQQiYcvKQCDLcDpR/dsECK7
+ mbPot7CEBkraSI9y4JlaHSOA6w37qKZiUQb8t1eFWWxM7pP3JHl4DqZlZ7QwEN+jQ0bl
+ qQOHiaFCBxVp6wbYFLjoPvDkD8BJ1Ek4rCCVZSNBFBjFaDpv9u9ltTjl3TG8qYlnDrNR
+ k1P5FlE814yUobYnyx4pTdTQVeUQMuWjOaq/d/s2DNV13S6Xd32T0iwa/slmgkKFzDf8
+ 9GZtsPJgjKDjvi9JJshW1HNXL8JQ2iK2ogFVPbVOBmxwX9zeq5eEHboKXTf0N8sEvKLY
+ VzmQ==
+X-Gm-Message-State: AOJu0YwLi4JdCoRMRxEXDdrqd66OcqbXid9gi+fMPQZSI1XawsV1XOMH
+ OQHx+j+BOZVSmFg4GeH+KI69ZE51hhj8VEpeiOATSCMIVBY9mcw5lQ3Vj0qpi781jEVxUzeuu7s
  =
-X-Gm-Gg: ASbGnctMxky8X1CTa0+GnapHz1kx8/kudOpzMxTT3N/0BjhUK7PHYW7bXbuIMQq2lKD
- QsAO0oqkgjqcRTbGtJpazBZGLuF308KZNNyg2I+IXJztdRHa94toWvbzcxXvwbGkI3XRjgjfLPB
- bys3zWM3NfSBwJ6c52g2QBnnrhT7iiuKiCEvUI65CByp84t2c80EYoZW8EPYsgvoogCEOX/u5fO
- gpwuHcBcUhIYAfQIJ6FfjXIrSWespRpDM5cmo6ae+GWqMSe3c9KVQhZdwo1pt5N3CyfXMNLOoQC
- badjIdKCE520mKZvmA==
-X-Google-Smtp-Source: AGHT+IHLnNI6QY273uzecqf97rOJNDWDvQt2ovTUgGpzni8qi/RONQS4pyQ6Lk2al1XgvY6wrF+OoQ==
-X-Received: by 2002:a05:6e02:1686:b0:3a7:bc2a:2522 with SMTP id
- e9e14a558f8ab-3c2d277f709mr464392405ab.7.1736173979689; 
- Mon, 06 Jan 2025 06:32:59 -0800 (PST)
+X-Gm-Gg: ASbGncv+IDfDbXldZv83uXuHLEGBbKyYkHrr65kGmDcG1QMxTLZ3SCag1too588G0KH
+ w6XZpobRg9Cd0CBPfYdmAN05EWqSTG+8tJfCS9kfFojjwnkSblQ4cZSfTUmUrN0lLegnGh+Osvi
+ +aDaRKm2CCCB8GpRgBB1lFY7typLA9C0qj7x/q2rRXbv5agxeEX7g5R/f1ymixFtlItxORYvjDE
+ 0+Z+mXj1UzHEngrAQGVbXZSB/6goh5XQs4fbJv2edgq3U0lPtwPKv/Hi/1/SQhLRuNbk8GeBzgj
+ KRgsHwRcjROnukl4mw==
+X-Google-Smtp-Source: AGHT+IE3alU1SmdnQxqDOeQHfA/JT4iijzwmFQQhkxitBpiQ/FFBwXH0MUbzJNg2nqhIWxkZEAfvcA==
+X-Received: by 2002:a05:6e02:34a0:b0:3a7:21ad:72a9 with SMTP id
+ e9e14a558f8ab-3c2d5152acfmr440697515ab.17.1736173982498; 
+ Mon, 06 Jan 2025 06:33:02 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.32.57
+ e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.32.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 06:32:58 -0800 (PST)
+ Mon, 06 Jan 2025 06:33:01 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>,
+Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marex@denx.de>, Stefano Babic <sbabic@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 08/33] serial: Support info() method in ns16550 xPL with UPL
-Date: Mon,  6 Jan 2025 07:32:04 -0700
-Message-Id: <20250106143229.3023771-9-sjg@chromium.org>
+Subject: [PATCH v2 09/33] mkimage: Update map_to_sysmem() to match its
+ prototype
+Date: Mon,  6 Jan 2025 07:32:05 -0700
+Message-Id: <20250106143229.3023771-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250106143229.3023771-1-sjg@chromium.org>
 References: <20250106143229.3023771-1-sjg@chromium.org>
@@ -96,30 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UPL needs to pass the serial details onto the next stage, so adjust the
-condition to support this.
+Update the version of this function in mkimage so that it uses a const
+pointer, as is done in the mapmem.h header file.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/serial/ns16550.c | 2 +-
+ tools/mkimage.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
-index 3f6860f3916..5126cf8bc1a 100644
---- a/drivers/serial/ns16550.c
-+++ b/drivers/serial/ns16550.c
-@@ -473,7 +473,7 @@ static int ns16550_serial_getinfo(struct udevice *dev,
- 	struct ns16550_plat *plat = com_port->plat;
+diff --git a/tools/mkimage.h b/tools/mkimage.h
+index d92a3ff8117..15741f250fd 100644
+--- a/tools/mkimage.h
++++ b/tools/mkimage.h
+@@ -37,7 +37,7 @@ static inline void *map_sysmem(ulong paddr, unsigned long len)
+ 	return (void *)(uintptr_t)paddr;
+ }
  
- 	/* save code size */
--	if (!not_xpl())
-+	if (!not_xpl() && !CONFIG_IS_ENABLED(UPL_OUT))
- 		return -ENOSYS;
- 
- 	info->type = SERIAL_CHIP_16550_COMPATIBLE;
+-static inline ulong map_to_sysmem(void *ptr)
++static inline ulong map_to_sysmem(const void *ptr)
+ {
+ 	return (ulong)(uintptr_t)ptr;
+ }
 -- 
 2.34.1
 
