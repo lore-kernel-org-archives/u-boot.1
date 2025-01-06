@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98500E77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:32:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE605E77198
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29029805D7;
-	Mon,  6 Jan 2025 15:32:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 77F85805F7;
+	Mon,  6 Jan 2025 15:32:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ky/n4VyT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KG90DKKv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9772E801E8; Mon,  6 Jan 2025 15:32:45 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 5F957801E8; Mon,  6 Jan 2025 15:32:48 +0100 (CET)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AF1E801C3
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:32:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB9278058A
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:32:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3a7d7c1b190so50712235ab.3
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:32:42 -0800 (PST)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-844dfe4b136so451821039f.3
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:32:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736173961; x=1736778761; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736173964; x=1736778764; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xE7wWiLZY1xg04zLRVXffoNKiFUDBSohytep95TEius=;
- b=Ky/n4VyTDrnPF9I17V9em48zUlhpWHydOKeWIhpiFiTR1Iy6KcxyElJCzcbgIa25g7
- Z25/Rf7TMvpMStOC1khbgUcnoQowNw7Xl05eoB1omiuY+qzQRGlYhFrALiu9jbqJX56W
- e1NtnJ2HlNrBsMeEzpDE+lEY6m5o/aOLFeIMc=
+ bh=iXA0GDusC3w4WNhhcWizp+PIXaTq12ZMMU5iFmbKlU0=;
+ b=KG90DKKvGkPBd3nDnu+3wbuV4A9fUg6EwvcOGblbxRbncmdncZxaaJvll3zKyhjgko
+ ZNtQE9PA9dSb0N7m9nf0i7k2jLFgohkDMdHaHyRdzYD6MG2xmjPsDkf5sWKwtHiYAut0
+ xvp1ZZJcl1gb1+tuD5FxfJT2UzvIya8CRBsiU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736173961; x=1736778761;
+ d=1e100.net; s=20230601; t=1736173964; x=1736778764;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xE7wWiLZY1xg04zLRVXffoNKiFUDBSohytep95TEius=;
- b=Y9/di0ejee2gXvRqVr5aUzr7pE12GAx0kACSMZJhftJBc9x4MKd4Pv22q8SMDaXoUB
- N+9FmpJKl+EcGXLBsQzQQqbeVkBE9gvvRj/wjM3PbKROm0IqrCzeDVYhPgCzEO94nP2R
- MNUc4vPjYXoRaWMSCNp0srjagbRKTFlj8Djfy3yXHCnk5+xk8RXDwN2/rCqY/rA0U6Ff
- VJ5KpToYcgQrmGDMiN79ZWsx8huacX0DS5lhEHNSe56RHssln4fysCSkvmCEIhik2wJn
- YP2dQ7nRmlG1XMktKlIZVl/X7GsQ/QWhHCUKVuUfDyDFQ+C3+lQ3Ar451RwoQHJtPDRK
- KRiQ==
-X-Gm-Message-State: AOJu0Yxv1hr0aispsSUdu9KVHpfNNjMILBZ43O49We7di0thYrQ52f3b
- czKgg57r8rX1sCQ3neMfF1VuuYPwovhT8rwdsB37eDPRs49+NL4LBRBr91GzEbw/TwWj+QmXAuU
+ bh=iXA0GDusC3w4WNhhcWizp+PIXaTq12ZMMU5iFmbKlU0=;
+ b=Rye/CsMHckgb5KjUF+7uS8qaIqByM+i7/azvCjZIRCf2UcvqhYqlIXrQWzXX3Q9C7I
+ x6qIrJnJMFAZ+LeNML0H9J/b4pVeLou3Y8XjC9EVPWpJbYqkY0VWR5w1x+ItMs6EYsQr
+ mO2mlTF2Wb5LJJrGgPRKVVVHLQxrvxICffoAV3q69uVrpepUm5bHYCXIgGOp3rC+i/aT
+ mE1f0uqhSpkIiAw2ASwhliYRDO1FDr3IDdZlG5CEDH/Aq8tx2I0m2yGehFm9M2AxgnMA
+ MmPwktXtbS5KBzANXjGI9vsd0EfFt3BCyxW/M9an2cGY180byJ5nUkALgBcXkiWOL0eh
+ QDqA==
+X-Gm-Message-State: AOJu0YyI2ThtdkU87Ibj7tyV/jA//RhDhNw/X6R8yDUAUwmcEog/HAiM
+ Dl/aH7J7r5rSq/abRzj/GORPsA5U0lCeQaQu8nJ5NEpagnwjOwLaPCI1sokhQiwWT5F7oCKYeXo
  =
-X-Gm-Gg: ASbGnctKa0s0WRk7Gp91kLhTUEQZmRypSPYY/r0hxcTzwTHm255qSqns6WyTP6xej/9
- CKIvOJxRB7Z4Oc9Nr8z5S7J6YMX+QqmiTfTsL85p8v5r7qOW+UZKlFxzlU2tMMRmpwAkepIBPhz
- toLsPWCwl2ChrjKcGZ0Rxuzao9yGgdpaFsgDQ9oqN1P8EaHskXBG8B5CkwMLOXpO5jAEilOzg6Y
- 53zsRWoYCcsiKjgmJR1WEYqE6qVqzhiVuUIoLm9f1x17iROYupxg6LVHoIkFXnlVTEUpTuQKAAr
- wwn/XKQtdYFTLqxqtQ==
-X-Google-Smtp-Source: AGHT+IFpXkg6ZTSN7FcJf/3g4Zdx64RjKIY2CF4dTfS4e3OFj1HstDuuEZ7GGJ8qfK6zVJEmMck7AA==
-X-Received: by 2002:a05:6e02:1705:b0:3a7:e800:7d36 with SMTP id
- e9e14a558f8ab-3c2d2279c01mr476303265ab.10.1736173961156; 
- Mon, 06 Jan 2025 06:32:41 -0800 (PST)
+X-Gm-Gg: ASbGnct7r3TsjqbSoaBiI6HMm8feZkXlkMkdXYqGymOXMWUhFICNwkQOHD3rowQZQEV
+ BxgI/Ywi7cm92YB4WiCBub6MTGnYsWeZ0rZPvL+u9msK9pPfOteKgfffROSgn/YvS3Uu27fzRii
+ 1T9fVHGG1hPLHYUVgy+MnETnPQ9CT1abhU3XRi+sSeTL82xbmbLlYC7cZeUdgP+N3wSKXUeOR0F
+ WR8e2varpDGM1poIIS8f6i4JW9f6tDmH5Dq0raphkZ2vRAFdNQzTsm7voEORtXtLBdFjbrEM4Tg
+ 8fUVzs1AwbqWABz0MA==
+X-Google-Smtp-Source: AGHT+IHHSjIQYLeixJdlbPW9/O8EC9By9XgwJ4ZBvSlPwddrxpDRz0Nn9l0a7KkcQMkNz/NlcLS8+g==
+X-Received: by 2002:a05:6e02:219c:b0:3a7:98c4:86a9 with SMTP id
+ e9e14a558f8ab-3c2d5915ea4mr507019565ab.20.1736173964094; 
+ Mon, 06 Jan 2025 06:32:44 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.32.38
+ e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.32.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 06:32:39 -0800 (PST)
+ Mon, 06 Jan 2025 06:32:42 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
+Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Levi Yun <yeoreum.yun@arm.com>,
+ Levi Yun <yeoreum.yun@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 01/33] bloblist: add api to get blob with size
-Date: Mon,  6 Jan 2025 07:31:57 -0700
-Message-Id: <20250106143229.3023771-2-sjg@chromium.org>
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 02/33] bloblist: Drop BSD license
+Date: Mon,  6 Jan 2025 07:31:58 -0700
+Message-Id: <20250106143229.3023771-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250106143229.3023771-1-sjg@chromium.org>
 References: <20250106143229.3023771-1-sjg@chromium.org>
@@ -97,87 +97,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Raymond Mao <raymond.mao@linaro.org>
+Linaro has decided to write their own version of bloblist from scratch,
+so there is no point in having a non-GPL license on this file. Change
+it, to better fit with the U-Boot project.
 
-bloblist_find function only returns the pointer of blob data,
-which is fine for those self-describing data like FDT.
-But as a common scenario, an interface is needed to retrieve both
-the pointer and the size of the blob data.
-
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Link: https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/22215
+
 ---
 
 (no changes since v1)
 
- common/bloblist.c  | 17 +++++++++++++++--
- include/bloblist.h | 18 ++++++++++++++++++
- 2 files changed, 33 insertions(+), 2 deletions(-)
+ common/bloblist.c  | 2 +-
+ include/bloblist.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/common/bloblist.c b/common/bloblist.c
-index e8acfc74331..ecce3da9331 100644
+index ecce3da9331..c441498ec56 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -223,14 +223,27 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
- }
- 
- void *bloblist_find(uint tag, int size)
-+{
-+	void *blob = NULL;
-+	int blob_size;
-+
-+	blob = bloblist_get_blob(tag, &blob_size);
-+
-+	if (size && size != blob_size)
-+		return NULL;
-+
-+	return blob;
-+}
-+
-+void *bloblist_get_blob(uint tag, int *size)
- {
- 	struct bloblist_rec *rec;
- 
- 	rec = bloblist_findrec(tag);
- 	if (!rec)
- 		return NULL;
--	if (size && size != rec->size)
--		return NULL;
-+
-+	*size = rec->size;
- 
- 	return (void *)rec + rec_hdr_size(rec);
- }
+@@ -1,4 +1,4 @@
+-// SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause
++// SPDX-License-Identifier: GPL-2.0+
+ /*
+  * Copyright 2018 Google, Inc
+  * Written by Simon Glass <sjg@chromium.org>
 diff --git a/include/bloblist.h b/include/bloblist.h
-index 1e1ca34aa92..7d462e71914 100644
+index 7d462e71914..be7303e1504 100644
 --- a/include/bloblist.h
 +++ b/include/bloblist.h
-@@ -251,6 +251,24 @@ static inline void *bloblist_check_magic(ulong addr)
- 	return ptr;
- }
- 
-+#if CONFIG_IS_ENABLED(BLOBLIST)
-+/**
-+ * bloblist_get_blob() - Find a blob and get the size of it
-+ *
-+ * Searches the bloblist and returns the blob with the matching tag
-+ *
-+ * @tag:	Tag to search for (enum bloblist_tag_t)
-+ * @size:	Size of the blob found
-+ * Return: pointer to bloblist if found, or NULL if not found
-+ */
-+void *bloblist_get_blob(uint tag, int *size);
-+#else
-+static inline void *bloblist_get_blob(uint tag, int *size)
-+{
-+	return NULL;
-+}
-+#endif
-+
- /**
-  * bloblist_find() - Find a blob
-  *
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause */
++/* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+  * This provides a standard way of passing information between boot phases
+  * (TPL -> SPL -> U-Boot proper.)
 -- 
 2.34.1
 
