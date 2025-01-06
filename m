@@ -4,116 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7092FE77198
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:28:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FFB7E77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:35:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0041180137;
-	Mon,  6 Jan 2025 10:28:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 84305801E8;
+	Mon,  6 Jan 2025 10:35:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dBd18q0F";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OFC0Bbbv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8385C80570; Mon,  6 Jan 2025 10:28:01 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EEBF8007D
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:27:59 +0100 (CET)
+ id 53900801E8; Mon,  6 Jan 2025 10:35:37 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BC5C8007D
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:35:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4361f796586so146197195e9.3
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 01:27:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736155678; x=1736760478; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=tpyDlfdtJP4s/bmYmSnaWEzvafGgynmksLkJCofkDps=;
- b=dBd18q0FbsSz2tGCa5xpnkwKN/4/+MUhHTR1Ganj8mnLjY1Ueb75pQZzO9KjhJy2AM
- 3n2TOcJ72iHqx1/gmdw9veiDBaFOqLbxY3Y7S8BrrCJGWsGw35itnGQcBYmRMdRxr5YL
- 5ZZzpyaeU3D2olJYONjnTdvMkRMX1jQkdqtvnYqt3Q9O6Yh5PrJ2NDUX8G5Hp+r+OcZN
- 83OlluxGyANc5q2nN0eBF6HnExBdmNRS8E/hvAFetUirFLixp2TMtgodw8IN0RgSW3J1
- kHPk6udvB9WlC8AiXPuejkwiJEZrMt6egq+OnDDHRhrHon2Gp1GopTI0VIyJUDNZS0u8
- U2dg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736155678; x=1736760478;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=tpyDlfdtJP4s/bmYmSnaWEzvafGgynmksLkJCofkDps=;
- b=Pb5IJDc8sim7QSKHSXhumMalrjtzdZJaVvcu2hdWCLUpF0GYXiTWPafPuk4nf8nzVz
- 80LiEVi3e2VXWrqsRb4R5fC880CHEsy5p4xRQB0G8nqqWULfblc1rEXnO9H9d9nKQ9DJ
- e0yxOKE5juaAL9LKXwTRJIj1Df/aWJlXeqR0raWutr+mFic61sAnx2QDbbRHzabL4k1F
- 2ncoWCt7GuA6Z5TGoGINycxpiTCwzoPCnk1adBCr2IxxvMxlUSBycQMMK2qvPi8glwrs
- PPaM83CgVuRdphT9f5kCsJbx0sftOK7DdcAj7FJBhsdHaIcTbx6nUOOY5Dui8sBlDLtb
- 7G/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYrqC58ySEHX5VqW4zlkH0j4ooxXxvOBE3b0C6NGAiV91HulklauTwvgkkdCTVSwBvtkXfae0=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywip5FZGSU5DuID1ECSm51RQI+VJxQImDMh9QloOR78opuilw3H
- R5Py2Insp9USytVCmWDw4wZMFv6anE7YINiqjd0SU+gDnth5W4kibvzpU3mPVANySQB/lDUvn5y
- a
-X-Gm-Gg: ASbGncvcla6a/hJxmmH5e2KK0AL7Tv6WqbV3wFtWofD85ja57MhhDiYuLcgn9LaWvMK
- ort38iEnDCLchgMWGJvlUUUxIeNQcGEv+43jkWYBN75at/tAXMqHDwC6LuPFUyW0GoPJyIBXiCr
- +0j/9mxaGD25bvGu+w2lw+My3bp9GXlFVV8rwL14yYAK3Fkfwg24dz2X3vbWBc5bvArPHc6Zi83
- SxFzURXTtyR0lrJckXaGwSLVvEk/eOaceFlji3HM7LRrqWqk7rYRxuqzvHH/8bHMCZq2X1wKtiq
- jqay14Wj8+ewkKo531rgobAncS9u
-X-Google-Smtp-Source: AGHT+IEec6bGgniB4rumdApDAzMNyarW2AiXf7p952d9bwslwv14XqCy4zRnNcRbCOYCO/GP2j8k7w==
-X-Received: by 2002:a05:600c:3146:b0:434:f817:4492 with SMTP id
- 5b1f17b1804b1-43668b5f887mr532411665e9.31.1736155678515; 
- Mon, 06 Jan 2025 01:27:58 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:95:e905:1421:811c?
- ([2a01:e0a:982:cbb0:95:e905:1421:811c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436611ea42esm571135945e9.9.2025.01.06.01.27.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Jan 2025 01:27:58 -0800 (PST)
-Message-ID: <766f201c-df5d-4d94-88e9-e1d9b454a39b@linaro.org>
-Date: Mon, 6 Jan 2025 10:27:59 +0100
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5069ZOM82772022
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 6 Jan 2025 03:35:25 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1736156125;
+ bh=qxnJqye8236xFjuqHbDDcZ6kn9VNwBHfhKAfAN8gTY4=;
+ h=From:Subject:Date:To:CC;
+ b=OFC0BbbvhVdQ5qiZlCderFzsHYbR3CA3+szLu6Uo5If+oMy+JuIWgL6O9MtzuUf7N
+ CMjBAigtsI0ThB5yX+LCEM2MtlgurAK4yJsYbaHaBN+t3CWG8Guy/7cBqPgic9rKqT
+ /1RQZu4HqzzdEveB9Hc6CMsU4SHnqHkEEqpAzz2c=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5069ZOag019702
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 6 Jan 2025 03:35:24 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
+ Jan 2025 03:35:24 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 6 Jan 2025 03:35:24 -0600
+Received: from [127.0.1.1] (uda0497581-hp.dhcp.ti.com [172.24.227.160])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5069ZJEw028930;
+ Mon, 6 Jan 2025 03:35:20 -0600
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH RFC v2 0/8] Introduce J742S2 SoC and EVM
+Date: Mon, 6 Jan 2025 15:04:56 +0530
+Message-ID: <20250106-b4-upstream-j742s2-v2-0-42d6129ce333@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 2/2] tools: amlimage: Add support for GXBB eMMC header
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
-Cc: Ferass El Hafidi <vitali64pmemail@protonmail.com>,
- u-boot-amlogic@groups.io, u-boot@lists.denx.de
-References: <20250103215904.2590769-1-jonas@kwiboo.se>
- <20250103215904.2590769-3-jonas@kwiboo.se>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250103215904.2590769-3-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAMCje2cC/22OzQrCMBCEX6Xs2Ug3jS3pSRB8AK/SQxK3NkJ/T
+ NKilL67IXr0ODs7M98KnpwlD3W2gqPFejsOUfBdBqZTw52YvUUNPOcCESXTgs2TD45Uzx6V4J6
+ z0kgthdBVLhFicHLU2lcqvcLlfILme3T0nONA+DlaeWJm7Hsb6oyM5GWhRYsHk/4768Po3glsw
+ RRIDByrfwwLspxhoUqFvNKFEMdg97Ecmm3bPgAropLmAAAA
+X-Change-ID: 20241119-b4-upstream-j742s2-6c9b944b7091
+To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Aniket
+ Limaye <a-limaye@ti.com>, Beleswar Padhi <b-padhi@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Keerthy
+ <j-keerthy@ti.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1736156119; l=3650;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=YGyhI3ibxONQXkrTkbZWzt/1Y114BL7USqH/I4T8Su0=;
+ b=MPhH9JDuX3z6wJgtJpHELNcyYU9xGU1sejeP14eU+ULr66pp3pyLpVAdMkZu/HfKiw35RyqeK
+ exSJkZJu8VxB+vDMrryeoU0SP3+VuAj3fragtmW19uuGaNjL1ZE3dX9
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,246 +92,90 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 03/01/2025 22:58, Jonas Karlman wrote:
-> GXBB BL1 only tries to read boot image from sector 0 on eMMC and sector
-> 1 on SD-card. GXL and newer read boot image from sector 1 on both eMMC
-> and SD-card.
-> 
-> Vendor BL2 have solved the issue with different offsets by considering
-> where BL2 was loaded from to adjust the offset where BL3 is read from.
-> 
-> This provide a different solution to create a boot image that can be
-> booted from both eMMC and SD-card and where the offset for reading next
-> stage loader can be shared for both boot options.
-> 
-> Inject code, that relocate the payload located at 0x1200 offset in TZRAM
-> to the expected offset of 0x1000, into the padding area at offset 0x200
-> when a normal GXBB boot image is created. A special GXBB eMMC header can
-> then be created that have the payload offset point to this relocate
-> code, BL1 will jump to this relocate code when booted from eMMC instead
-> of the normal payload start. One effect of this is that the payload size
-> limit must be reduced by 512 bytes on GXBB.
-> 
-> Example of how to use it:
->    # Create a normal boot image
->    tools/mkimage -T amlimage -n gxbb -d u-boot-spl.bin bl2.bin
-> 
->    # Create a boot image with a special eMMC header
->    tools/mkimage -T amlimage -n emmc -d bl2.bin bl2-emmc.bin
-> 
->    # Write normal boot image to sector 1 of eMMC/SD-card
->    dd if=bl2.bin of=/path/to/dev bs=512 seek=1
-> 
->    # Write eMMC header, 112 bytes, to start of eMMC
->    dd if=bl2-emmc.bin of=/path/to/dev bs=1 count=112
-> 
-> Or with binman using something like:
->    binman {
-> 	multiple-images;
-> 
-> 	u-boot-gxbb-sd {
-> 		filename = "u-boot-gxbb-sd.bin";
-> 		pad-byte = <0xff>;
-> 
-> 		mkimage {
-> 			filename = "bl2.bin";
-> 			args = "-n", "gxbb", "-T", "amlimage";
-> 
-> 			u-boot-spl {
-> 			};
-> 		};
-> 	};
-> 
-> 	u-boot-gxbb-emmc {
-> 		filename = "u-boot-gxbb-emmc.bin";
-> 		pad-byte = <0xff>;
-> 
-> 		mkimage {
-> 			filename = "bl2-emmc.bin";
-> 			args = "-n", "emmc", "-T", "amlimage";
-> 
-> 			blob-ext {
-> 				filename = "bl2.bin";
-> 			}
-> 		};
-> 	};
->    };
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
->   tools/amlimage-gxbb-relocate.c | 79 ++++++++++++++++++++++++++++++++++
->   tools/amlimage.c               | 37 ++++++++++++++++
->   2 files changed, 116 insertions(+)
->   create mode 100644 tools/amlimage-gxbb-relocate.c
-> 
-> diff --git a/tools/amlimage-gxbb-relocate.c b/tools/amlimage-gxbb-relocate.c
-> new file mode 100644
-> index 000000000000..3503805c460e
-> --- /dev/null
-> +++ b/tools/amlimage-gxbb-relocate.c
-> @@ -0,0 +1,79 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +// Copyright Contributors to the U-Boot project.
-> +
-> +/*
-> + * The following commands can be used to reproduce the gxbb_relocate
-> + * byte array in amlimage.c
-> + *
-> + * Start U-Boot CI docker container from U-Boot source code root folder:
-> + *  docker run --rm -v $(pwd):/build -u uboot -it docker.io/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
-> + *
-> + * Run the following commands inside the docker container:
-> + *  export PATH=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin:$PATH
-> + *  cd /build/tools
-> + *
-> + * Generate assembly code for the c code in this file:
-> + *  aarch64-linux-gcc -nostdlib -ffreestanding -Os -S -o amlimage-gxbb-relocate.S amlimage-gxbb-relocate.c
-> + *
-> + * Manually remove 'mov x16, x2' and replace 'x16' with 'x2' on the last line.
-> + *
-> + * Compile assembly code and extract the AArch64 binary code:
-> + *  aarch64-linux-as -o amlimage-gxbb-relocate.o amlimage-gxbb-relocate.S
-> + *  aarch64-linux-objcopy -O binary -j .text amlimage-gxbb-relocate.o amlimage-gxbb-relocate.bin
-> + *
-> + * Print binary code as a byte array that can be copied into amlimage.c
-> + *  hexdump -ve '1/1 "0x%.2x, "' amlimage-gxbb-relocate.bin | fold -w 72 && echo
-> + *
-> + * Remember to update assembly code below when byte array is updated.
-> + */
-> +
-> +#include <stdint.h>
-> +
-> +#define TZRAM_BASE		0xd9000000
-> +#define PAYLOAD_OFFSET		0x200
-> +#define BL2_OFFSET		0x1000
-> +#define BL2_BASE		(void *)(TZRAM_BASE + BL2_OFFSET)
-> +#define BL2_SIZE		0xb000
-> +
-> +void _start(uint64_t x0, uint64_t x1)
-> +{
-> +	void (*bl2)(uint64_t, uint64_t) = BL2_BASE;
-> +	uint64_t i, *dst = BL2_BASE, *src = BL2_BASE + PAYLOAD_OFFSET;
-> +
-> +	/* memmove payload from 0x1200 to 0x1000 offset in TZRAM */
-> +	for (i = 0; i < BL2_SIZE / sizeof(*src); i++)
-> +		*(dst + i) = *(src + i);
-> +
-> +	/* goto entry point with x0 and x1 reg intact */
-> +	bl2(x0, x1);
-> +}
-> +
-> +/*
-> +	.arch armv8-a
-> +	.file	"amlimage-gxbb-relocate.c"
-> +	.text
-> +	.align	2
-> +	.global	_start
-> +	.type	_start, %function
-> +_start:
-> +.LFB0:
-> +	.cfi_startproc
-> +	mov	x2, 4608
-> +	movk	x2, 0xd900, lsl 16
-> +	add	x3, x2, 45056
-> +.L2:
-> +	sub	x4, x2, #32768
-> +	add	x2, x2, 8
-> +	ldr	x5, [x2, -8]
-> +	str	x5, [x4, 32256]
-> +	cmp	x2, x3
-> +	bne	.L2
-> +	mov	x2, 4096
-> +	movk	x2, 0xd900, lsl 16
-> +	br	x2
-> +	.cfi_endproc
-> +.LFE0:
-> +	.size	_start, .-_start
-> +	.ident	"GCC: (GNU) 13.2.0"
-> +	.section	.note.GNU-stack,"",@progbits
-> +*/
-> diff --git a/tools/amlimage.c b/tools/amlimage.c
-> index 9af795602e69..43be1636ed11 100644
-> --- a/tools/amlimage.c
-> +++ b/tools/amlimage.c
-> @@ -51,6 +51,7 @@ struct amlimage_variant {
->   		  .payload_size = size, } }
->   
->   static const struct amlimage_variant variants[] = {
-> +	VARIANT("emmc", 1, 0, 0xb000 + PAYLOAD_OFFSET),
->   	VARIANT("gxbb", 1, 0, 0xb000),
->   	VARIANT("gxl",  1, 1, 0xb000),
->   	VARIANT("gxm",  1, 1, 0xb000),
-> @@ -176,6 +177,17 @@ static void amlimage_set_header(void *buf, struct stat *sbuf, int ifd,
->   	hdr->data_offset = hdr->digest_offset + SHA256_SUM_LEN;
->   	hdr->data_size = hdr->total_size - hdr->data_offset;
->   
-> +	/* Adjust offset and size in GXBB eMMC header */
-> +	if (!strcmp("emmc", params->imagename)) {
-> +		hdr->total_size -= PAYLOAD_OFFSET;
-> +		/* Use offset to relocate code relative to eMMC header */
-> +		hdr->payload_offset = 0x400 - HEADER_OFFSET;
-> +		hdr->payload_size = hdr->total_size - hdr->payload_offset;
-> +		/* Use 0x200 offset to exclude MBR from the data range */
-> +		hdr->data_offset = 0x200 - HEADER_OFFSET;
-> +		hdr->data_size = hdr->total_size - hdr->data_offset;
-> +	}
-> +
->   	sha256_starts(&ctx);
->   	/* Header and data is used as input for sha256 digest */
->   	sha256_update(&ctx, (void *)hdr, hdr->header_size);
-> @@ -203,6 +215,22 @@ static int amlimage_check_image_type(uint8_t type)
->   	return EXIT_FAILURE;
->   }
->   
-> +/*
-> + * AArch64 binary code to relocate payload when booting from eMMC on GXBB.
-> + *
-> + * Payload is relocated from offset 0x1200 to 0x1000 in TZRAM, similar to:
-> + * memmove(0xd9001000, 0xd9001200, 0xb000)
-> + * goto 0xd9001000
-> + *
-> + * See amlimage-gxbb-relocate.c on how to reproduce the following byte array.
-> + */
-> +static const uint8_t gxbb_relocate[] = {
-> +	0x02, 0x40, 0x82, 0xd2, 0x02, 0x20, 0xbb, 0xf2, 0x43, 0x2c, 0x40, 0x91,
-> +	0x44, 0x20, 0x40, 0xd1, 0x42, 0x20, 0x00, 0x91, 0x45, 0x80, 0x5f, 0xf8,
-> +	0x85, 0x00, 0x3f, 0xf9, 0x5f, 0x00, 0x03, 0xeb, 0x61, 0xff, 0xff, 0x54,
-> +	0x02, 0x00, 0x82, 0xd2, 0x02, 0x20, 0xbb, 0xf2, 0x40, 0x00, 0x1f, 0xd6,
-> +};
-> +
->   static int amlimage_vrec_header(struct image_tool_params *params,
->   				struct image_type_params *tparams)
->   {
-> @@ -213,6 +241,10 @@ static int amlimage_vrec_header(struct image_tool_params *params,
->   	/* Use payload offset as header size, datafile will be appended */
->   	tparams->header_size = PAYLOAD_OFFSET;
->   
-> +	/* Only prepend 512 bytes for GXBB eMMC header */
-> +	if (!strcmp("emmc", variant->name))
-> +		tparams->header_size = 0x200;
-> +
->   	tparams->hdr = calloc(1, tparams->header_size);
->   	if (!tparams->hdr) {
->   		fprintf(stderr, "%s: Can't alloc header: %s\n",
-> @@ -223,6 +255,11 @@ static int amlimage_vrec_header(struct image_tool_params *params,
->   	/* Start with a copy of the variant header */
->   	memcpy(tparams->hdr + HEADER_OFFSET, hdr, hdr->header_size);
->   
-> +	/* Insert relocate code to move payload from 0x1200 to 0x1000 on GXBB */
-> +	if (!strcmp("gxbb", variant->name))
-> +		memcpy(tparams->hdr + 0x200,
-> +		       gxbb_relocate, sizeof(gxbb_relocate));
-> +
->   	/* Pad up to payload size of the variant header */
->   	return hdr->payload_size - params->file_size;
->   }
+The series adds support for J742S2 family of SoCs. Also adds J742S2 EVM
+Support and re-uses most of the stuff from the superset device J784s4.
 
-Awesome work !
+This device is a subset of J784S4 and shares the same memory map and
+thus the code is being reused from J784S4 to avoid duplication.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+It initially cleans up the J784s4 and AM69 files so that they can be
+re-usable for j742s2 and then it introduces J742S2. 
+
+The DT for the following SoC will be coming to U-boot during 6.13 Sync
+so the series is kept as RFC till then.
+
+Here are some of the salient features of the J742S2 automotive grade
+application processor:
+
+The J742S2 SoC belongs to the K3 Multicore SoC architecture platform,
+providing advanced system integration in automotive, ADAS and industrial
+applications requiring AI at the network edge. This SoC extends the K3
+Jacinto 7 family of SoCs with focus on raising performance and
+integration while providing interfaces, memory architecture and compute
+performance for multi-sensor, high concurrency applications.
+
+Some changes that this devices has from J784S4 are:
+* 4x Cortex-A72 vs 8x Cortex-A72
+* 3x C7x DSP vs 4x C7x DSP
+* 4 port ethernet switch vs 8 port ethernet switch
+* 2 DDR controller vs 4 DDR controller
+
+Test logs with manual sync of 6.13-rc5 DTS from Linux: 
+https://gist.github.com/manorit2001/a9ab219307499efb3704185f336cc658
+
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Changes in v2:
+* Udit
+- Change the copyright year
+- Change !defined(CONFIG_ARM64) to defined(CONFIG_CPU_V7R)
+- Fix the JTAG detection code to not break other SoCs
+
+- Link to v1: https://lore.kernel.org/r/20241217-b4-upstream-j742s2-v1-0-13a6a127b344@ti.com
+
+---
+Manorit Chawdhry (6):
+      arm: dts: k3-j784s4-ddr: Refactor J784s4 ddr file to a common file
+      soc: Add information to identify the J742S2 SoC family
+      arm: mach-k3: j742s2: Introduce clock and device files for J742S2 SoC
+      board: ti: Introduce basic board files for the J742S2 family
+      arm: dts: Introduce J742S2 U-boot DTS files
+      configs: Introduce configs for J742S2
+
+Neha Malcom Francis (2):
+      tools: binman: control.py: Delete template nodes after parsing
+      arm: dts: k3-j784s4-binman.dtsi: Clean up and templatize boot binaries
+
+ arch/arm/dts/k3-am69-sk-u-boot.dtsi          |   123 +-
+ arch/arm/dts/k3-j742s2-ddr-evm-lp4-4266.dtsi |  8756 ++++++++++++++++
+ arch/arm/dts/k3-j742s2-evm-u-boot.dtsi       |    59 +
+ arch/arm/dts/k3-j742s2-r5-evm.dts            |    18 +
+ arch/arm/dts/k3-j784s4-binman.dtsi           |   116 +-
+ arch/arm/dts/k3-j784s4-ddr.dtsi              | 13246 ++++++++-----------------
+ arch/arm/dts/k3-j784s4-evm-u-boot.dtsi       |    75 +
+ arch/arm/dts/k3-j784s4-j742s2-ddr.dtsi       |  4446 +++++++++
+ arch/arm/mach-k3/include/mach/hardware.h     |     6 +
+ arch/arm/mach-k3/j784s4/Kconfig              |    18 +
+ board/ti/j784s4/Kconfig                      |    33 +
+ board/ti/j784s4/MAINTAINERS                  |    10 +
+ board/ti/j784s4/j784s4.env                   |     4 +
+ configs/j742s2_evm_a72_defconfig             |     9 +
+ configs/j742s2_evm_r5_defconfig              |     9 +
+ drivers/clk/ti/clk-k3.c                      |     4 +
+ drivers/power/domain/ti-power-domain.c       |     4 +
+ drivers/soc/soc_ti_k3.c                      |    16 +-
+ tools/binman/control.py                      |     6 +-
+ 19 files changed, 18007 insertions(+), 8951 deletions(-)
+---
+base-commit: ec9263b4f15c4cf82eb6a211c67baa6385065b8e
+change-id: 20241119-b4-upstream-j742s2-6c9b944b7091
+
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
