@@ -4,85 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B164CE77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB02E77199
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 15:12:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCB1180654;
-	Mon,  6 Jan 2025 15:55:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 66EC8801E8;
+	Mon,  6 Jan 2025 16:12:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HY/KiD2H";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VkHOm1z4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9399E805EA; Mon,  6 Jan 2025 15:55:32 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BC72805E9
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:55:30 +0100 (CET)
+ id 994768036B; Mon,  6 Jan 2025 16:12:44 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 05FF5801C3
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 16:12:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7b6e9db19c8so1091224485a.3
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:55:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736175329; x=1736780129; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5Cif8x3R7y5WlHJfH41699o7uCzdcT+aVwxsIWHOzN8=;
- b=HY/KiD2HwzTlUtEnTiLySEHTMNEh+ilYCMeBddDa/QsQHkvp1O2nwRmfUPdu9b2Yu2
- 7vlhxTfZF8nprYy9CX36Yq3r/RgmuH2eOsz207qnResHUTyTOGRRMOTAktQUOxLiLxJP
- XbGNiKVEWPXZ7wKOWcvhwx/540VEEfQKwtWR8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736175329; x=1736780129;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5Cif8x3R7y5WlHJfH41699o7uCzdcT+aVwxsIWHOzN8=;
- b=G9ChWyodNoDqluNGuBTesuNPfCvEYZSmuUp/wfemD/KseXl2kCc8GdwkfeiJgHy4jK
- J4QnP8P0Y/Mz+cse6B4+68oM35vbKxaDFT8ktdpfYerHdXYDmxzlqkqFodsk9/9TNvRl
- E/s2D9dvQgJkPUWUk7vlQn1v/eS2qxzMaCMh73g/hKaLy+j0IfyAI43fkE6ycK5mGhd+
- hqJYspTT/lqt7U2V9Zrp6HJhP+VucbU83/rvLWYSCIsfH6v/jqPWeWeK0LHjpdwqKEfU
- pH7ZfOKcDJ4ikpr5nJBZv+3J/+LXNOs6TyWUPQ/K5SZ4lcmEfuDeDjUAa78WsSmKW5Ge
- KJlA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUJ50EvscBixGn1ve6R9u8RJ7gnEbNq4CwuN7a+DlBzemad2S2kK6ffEz0Lx28WCsLILBfXXCc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRt9MsTAIac/qsie8XskKWDIE1nwmAJ7Tn/IA1tZa6nCMuHkzq
- 1j40hW3tSZyhSOMcy4QNzQrzLCV2pWzthgrlV7C4oO+qUzF+zY7HF2yaDFF2xUs=
-X-Gm-Gg: ASbGncv+1/aMWIii3qfBXbwdB34DQE7FvAGjmQ8ZVVVWHlOcrP0/eWPFJckgwhOYOH0
- YC8fJA+KipJr31ye+onQY7HjQC2FY9Nnw6H0ulZMwvnuI26h8XxbEBMayLVtqAnz4J3DN6QWQTa
- iphVmrlO0pl5WLaLakwrhaVxll8aROgyj90WoPKaNcg21JooqVp+8n3Iw1MfHC48PoMVdsfDgTl
- 62XCr4csrLq8bVHuWqTYOOdUit9GGR4PS/lkFgUOYIpcUl0+bh/ONMjMA==
-X-Google-Smtp-Source: AGHT+IGJvoNIglhLC0i3wY6ht+uZHAWjt/0i1zT/fScjHhD+yNh5F7CYSVk3W1R1s69qC+vWBsL3gw==
-X-Received: by 2002:a05:6214:250e:b0:6d8:a84b:b508 with SMTP id
- 6a1803df08f44-6dd2333ae04mr922259936d6.12.1736175329041; 
- Mon, 06 Jan 2025 06:55:29 -0800 (PST)
-Received: from bill-the-cat ([189.178.122.190])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd180eaad2sm171176496d6.6.2025.01.06.06.55.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 06:55:28 -0800 (PST)
-Date: Mon, 6 Jan 2025 08:55:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
- Ferass El Hafidi <vitali64pmemail@protonmail.com>,
- u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] tools: mkimage: Add Amlogic Boot Image type
-Message-ID: <20250106145525.GZ3476@bill-the-cat>
-References: <20250103215904.2590769-1-jonas@kwiboo.se>
- <20250103215904.2590769-2-jonas@kwiboo.se>
- <f06f4ee6-6b47-44e6-992b-a06617f3d237@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 506FCd3S2717864
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Mon, 6 Jan 2025 09:12:39 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1736176359;
+ bh=FxGaUE5IV/f8CuRot6Em/dW9cx9Q5HNoQEefsfUYpjg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=VkHOm1z45yMd8KaK6jnhEUvuSwEbp51lBjzsEb94D7JzGSm4I7bXohwTavq20SkK1
+ zv67MdVvIEX4QE1DDoh1NB6xnVPwEPczhUyayZ/fV5vt5evsYOHrn+uKTnT7f5Tdsk
+ 5Jfg2MceX5f3XMmh903Kag0gs2GDOs71mvdiVozE=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 506FCdul068770;
+ Mon, 6 Jan 2025 09:12:39 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
+ Jan 2025 09:12:39 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 6 Jan 2025 09:12:39 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 506FCclk127297;
+ Mon, 6 Jan 2025 09:12:38 -0600
+Message-ID: <19b20f10-9718-4c37-bea9-bd36bfff0125@ti.com>
+Date: Mon, 6 Jan 2025 09:12:38 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="R6ocfbi008welsJz"
-Content-Disposition: inline
-In-Reply-To: <f06f4ee6-6b47-44e6-992b-a06617f3d237@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arch: arm: mach-k3: j784s4_init: Set CTRL_MMR for
+ AUDIO_REFCLK1 clk_sel
+To: Jayesh Choudhary <j-choudhary@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>
+CC: <n-francis@ti.com>, <m-chawdhry@ti.com>, <sabiya.d@ti.com>
+References: <20250106100400.93799-1-j-choudhary@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250106100400.93799-1-j-choudhary@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,40 +81,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/6/25 4:04 AM, Jayesh Choudhary wrote:
+> The default value for the mux to select the parent clock,
+> AUDIO_REFCLK1_CTRL_CLK_SEL is '11111' (31) but the mux input for 31
+> is marked as 'Reserved' so the ti-sci-clk call for get-parent fails.
+> Mark it to a valid value, '11100' (28) for MAIN_PLL4_HSDIV2_CLKOUT
+> to get rid of the linux failures during boot-time like:
 
---R6ocfbi008welsJz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+So the default value of the mux isn't known by firmware? Sounds like
+a firmware issue..
 
-On Mon, Jan 06, 2025 at 10:27:39AM +0100, Neil Armstrong wrote:
-[snip]
->=20
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
->=20
-> Via which tree this should be merged ?
+No issue with using the bootloader to making the hardware's default state
+more sane. Maybe just add a comment above the writel() line as right now
+this is just writing a magic value to a magic address.
 
-Your amlogic tree when ready, thanks!
+Andrew
 
---=20
-Tom
-
---R6ocfbi008welsJz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd77t0ACgkQFHw5/5Y0
-tyzqsAv/W264moiVUmw0aaHFLBYIgpbOwtxoKtwCI2Gkx7qcPKCi4Y+ZJjnhLoob
-pnJrTNMr5Af69NsYHBGmWgd5zMv5XiZ4Y6Z4kDrW7agWVwP1VBw7liEC9+gPGYKB
-DiN/z9Fmrt7ozcC5Stw9DDKSq3yCd6jS9hQZ8nzVkqmrJ+nFeAIJ8vZYdianSOPX
-e5XsSiDb9iIaFGI5lQXASokVOZpYfwejpyR1OqgE5XwZ8LJw2mKNMhB2/7PCSlMU
-rPDlwiJL2NGYUREitofUAickan4I93wuylEvaQxh+n8KEhiEcWWQ9mkUCapW8K3y
-wdAc+SLiuT4UwKtjD9KFniEYMRCnFoMCkA+wp4wc8qH6Ybyu5AcQrCOoBBoolaOD
-ewULHqjgdrUj3ifzK3T1ds3mWwowWX/d8ULi82k9IhtDNKy+zL72/UWCpyuX9h1p
-3Hk8NJAmQvgYeOyaBSt3HS6nuI8wNmRl8HX1X5ugvrVM9iFvQsecyTwuf2+KCdDZ
-fyHRvD0l
-=LJeK
------END PGP SIGNATURE-----
-
---R6ocfbi008welsJz--
+> "[    1.573193] ti-sci-clk 44083000.system-controller:clock-controller:
+>   get-parent failed for dev=157, clk=34, ret=-19"
+> 
+> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+> ---
+>   arch/arm/mach-k3/j784s4/j784s4_init.c | 5 +++++
+>   1 file changed, 5 insertions(+)
+> 
+> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
+> index 8a41cd3bb5..787cf6261e 100644
+> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
+> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
+> @@ -23,6 +23,9 @@
+>   
+>   #define J784S4_MAX_DDR_CONTROLLERS	4
+>   
+> +#define CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL	0x001082e4
+> +#define AUDIO_REFCLK1_DEFAULT			0x1c
+> +
+>   /* NAVSS North Bridge (NB) */
+>   #define NAVSS0_NBSS_NB0_CFG_MMRS		0x03702000
+>   #define NAVSS0_NBSS_NB1_CFG_MMRS		0x03703000
+> @@ -201,6 +204,8 @@ void k3_spl_init(void)
+>   		remove_fwl_configs(navss_cbass0_fwls, ARRAY_SIZE(navss_cbass0_fwls));
+>   	}
+>   
+> +	writel(AUDIO_REFCLK1_DEFAULT, (uintptr_t)CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL);
+> +
+>   	/* Output System Firmware version info */
+>   	k3_sysfw_print_ver();
+>   }
