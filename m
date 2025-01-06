@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D6D2E77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 20:51:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 896C7E77198
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 20:51:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ECDF805E2;
-	Mon,  6 Jan 2025 21:51:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D68E8060F;
+	Mon,  6 Jan 2025 21:51:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736196685;
-	bh=ZpcTbYoGf+PzdmELiE3CcPD6LtQCgd+P5BIXsxo7Uq0=;
+	s=phobos-20191101; t=1736196686;
+	bh=lz1GtFUUdG0saXhdzPd8b0/EfSTGRjCoxypmjBARxyo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zaRTNiZtTEmSaJRBlAjeXydfDLdl/u7ufThfoeiSZ430vQKqcD8Ocwvtmc29W7POw
-	 ROTycuZS9AOZ6QcDeFxyIuaOXJq8HC5DrToxPB4SxvfA8n1wBWzMp4oYbyMTS4tLUj
-	 WDvJz+AS1vJoUA+CTmbz2l4a9z7fu6Od9zqdrRAb/Vv2wafrb9zwKVObPon1DD8sHI
-	 QCcbogQVG5akVPlFhp8DfBNeI9SRZawOokKnyQXjznEUxenTsLA+0ivuKPFYffVN+E
-	 0exCDD/vHz2+fjnTKXP19N3gvyR/opC0FX2FGPKvbtSoOxHE5RI9mkryOrTQePDtbs
-	 TFO73Xbc5sdZQ==
+	b=wHaQXIgthgVCLtwWIVadol6/CYHBLYqCzUFXRCHbDahGSGMZc3fDDZ8uZ/H103pKG
+	 pYBz8N2Kq6MFolDlUyKvEnXmzKCIdlM4XOXzsPi4Ina0R4sb62NiuMOLQiKUApkGgt
+	 5aCcs1jRvfR2XE16cEGHAAffB2gkY9nFmthYZO8gZ6A1X97rP8N4lcderTVhwGfny2
+	 tBihhB0w41cxIQ9fWA2LepHtHncUZRQIPie0AbLjULltNUJ5yNsrNBCKYb3K3pSUlT
+	 Md5GUyXptZDzOQv6FvydgXTy89FX8vY6O8OdsHo3nrAaXEWaf+AL13n5ZX96PuSxMk
+	 Hk7kNYYj0tDSA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2447C805FA; Mon,  6 Jan 2025 21:51:24 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 0CF6880609; Mon,  6 Jan 2025 21:51:26 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD514805E1
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 21:51:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F5EA805F7
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 21:51:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="TpH6WGK9"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="gfu1SWxr"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 57936101ECB2C; Mon,  6 Jan 2025 21:51:19 +0100 (CET)
+ with ESMTPSA id BAC7710A4C6DC; Mon,  6 Jan 2025 21:51:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736196681;
+ t=1736196683;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ZpcTbYoGf+PzdmELiE3CcPD6LtQCgd+P5BIXsxo7Uq0=;
- b=TpH6WGK9OmnJgLXnk5IAVULpS2KInfNiRw8iCGKN4Ak8mCtj6aEBQ68zVOvfpclLzq843e
- MunHrQ0lucIjMoZg1zhCA4d56u1y8ClabUzc3TZoZFhfQLeULFdN7XlgHA9y/2FvcABLyy
- fhxLtANJVJOw4y2wwo38G5eWJZGzxhed81q/8lwlFPadsY5i1vzthqU9ShXjpLnaj3UJUG
- wYZt34J2z7IuuUlQeN0RhtR5sNq/fQ+CoMuFok1nKPjjR/c7nOFovGe+AozEc2r9kD+rH7
- IBO/NoXlN6Pm3E1gQS1qKabcpLMxnt9atVpmZMRq248Jntc35pO7wEMD8cbqzA==
-Message-ID: <016aa4e5-c33d-4f77-9a12-c218c4123403@denx.de>
-Date: Mon, 6 Jan 2025 21:46:06 +0100
+ bh=lz1GtFUUdG0saXhdzPd8b0/EfSTGRjCoxypmjBARxyo=;
+ b=gfu1SWxrYvf04wKCELJkThLuCI/s2HwZsFJiP6xy+5XX7Muc4rnxAIDm6dX0boMRXe7eb+
+ 3ub2W7V/BHE1CIiT0sjwy0NtgchHoAA5sVKPxtq6GwiXb8nXgvK7nW3UFBvU/vy5O/T2NT
+ GLgVHP6zqqKuLBHI5mZBRcnfJ7/bgI50G5+cVbLur5J/aAS0hfcApY9hhVS9ycmd+qiPs+
+ h5/fs51JSblaNfl+MOI8A7i76TKU2kQxqP/j0m7KGIZnkcM4aCfYRf/SwdqlwKIgRBBqRq
+ Q18t8nS23dpqHBzTPxZ7MLvIfnKSot5DFPYEQOgLvqS9ufhViH3qNJJ4qA6Isw==
+Message-ID: <2f0d260e-d6ee-4b16-9b88-194643ae3d28@denx.de>
+Date: Mon, 6 Jan 2025 21:46:49 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gUmU6IFtQQVRDSCB2MyAwMy8xN10gcGlu?=
- =?UTF-8?Q?ctrl=3A_nxp=3A_add_SCMI_pin_control_protocol_driver?=
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gUmU6IFtQQVRDSCB2MyAwOC8xN10gc2Nt?=
+ =?UTF-8?Q?i=5Fprotocols=3A_update_struct_scmi=5Fbase=5Fdiscover=5Flist=5Fpr?=
+ =?UTF-8?Q?otocols=5Fout?=
 To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>
 Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>, Peng Fan
- <peng.fan@nxp.com>, Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>,
- Ye Li <ye.li@nxp.com>
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, Ye Li <ye.li@nxp.com>
 References: <20250103-imx95-v1-0-6744df5dc020@oss.nxp.com>
- <20250103-imx95-v1-3-6744df5dc020@oss.nxp.com>
- <61075a72-7a89-4bcf-8d96-f9fc24dfd5a5@denx.de>
- <PAXPR04MB96440F6976C336998424F176E2102@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <20250103-imx95-v1-8-6744df5dc020@oss.nxp.com>
+ <a563cb62-7922-4a68-a24c-534e583b7dcb@denx.de>
+ <PAXPR04MB96444924697478EB9C2CE46CE2102@PAXPR04MB9644.eurprd04.prod.outlook.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB96440F6976C336998424F176E2102@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB96444924697478EB9C2CE46CE2102@PAXPR04MB9644.eurprd04.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,28 +91,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/6/25 10:56 AM, Alice Guo (OSS) wrote:
->>> This patch provides a driver for the SCMI pin control protocol which
->>> is based on ARM's System Control and Management Interface (SCMI) 3.2.
->>> Currently, only the PINCTRL_CONFIG_SET command is implemented.
->>
->> What is the SCMI provider for this platform ?
+On 1/6/25 11:41 AM, Alice Guo (OSS) wrote:
+>>> @@ -141,11 +141,14 @@ struct scmi_base_discover_impl_version_out {
+>>>     * @status:         SCMI command status
+>>>     * @num_protocols:  Number of SCMI protocols in @protocol
+>>>     * @protocols:              Array of packed SCMI protocol ID's
+>>> + *
+>>> + * The number of elements of @protocols is specified by callee-side.
+>>> + Currently,
+>>> + * set it to 4 is enough for i.MX95.
+>>>     */
+>>>    struct scmi_base_discover_list_protocols_out {
+>>>        s32 status;
+>>>        u32 num_protocols;
+>>> -     u32 protocols[3];
+>>> +     u32 protocols[4];
+>> Can this be made somehow future-proof? For example, figure out how many
+>> protocols are supported, and then malloc this structure with the right size and
+>> query again ?
 > 
 > Hi Marek,
 > 
-> System Manager which runs on M core sets pin or group configurations. U-Boot sends a SCMI message to System Manager to perform hardware operations. You can refer to the source code for details: https://github.com/nxp-imx/imx-sm.
-
-Can I use optee-os as a SCMI provider instead ?
-
->>> +#include "pinctrl-imx.h"
->>> +
->>> +#if defined(CONFIG_IMX93)
->>
->> Use IS_ENABLED() or CONFIG_IS_ENABLED()
->>
->>> +#define DAISY_OFFSET 0x360
->>
->> Why can this offset information not be queried from the firmware interface ?
-> 
-> This offset information is not provided by System Manager. DAISY_OFFSET is used to convert the daisy register address in imx95-pinfunc.h for System Manager to use.
-OK
+> Currently, 4 is enough. 10 protocols are defined in Arm® System Control and Management Interface Platform Design Document Version 3.2. I can make a new patch as you said in the future.
+Or we can future-proof it to 10 right now. Are there any downsides of that ?
