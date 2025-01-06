@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28178E77197
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 03:06:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 699E5E77197
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 03:33:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4863E801E8;
-	Mon,  6 Jan 2025 04:06:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9E0FA801E8;
+	Mon,  6 Jan 2025 04:33:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="j01iEKCy";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="GpbrlLu8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F04AF803DC; Mon,  6 Jan 2025 04:06:21 +0100 (CET)
-Received: from mail-m32106.qiye.163.com (mail-m32106.qiye.163.com
- [220.197.32.106])
+ id C08C6803DC; Mon,  6 Jan 2025 04:33:46 +0100 (CET)
+Received: from mail-m19731118.qiye.163.com (mail-m19731118.qiye.163.com
+ [220.197.31.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAC63801DE
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 04:06:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD7AD801DE
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 04:33:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 7c8a4675;
- Mon, 6 Jan 2025 11:06:09 +0800 (GMT+08:00)
-Message-ID: <64da8b26-b624-4451-b187-9b530dc10cd1@rock-chips.com>
-Date: Mon, 6 Jan 2025 11:06:09 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 7c9a9f56;
+ Mon, 6 Jan 2025 11:33:38 +0800 (GMT+08:00)
+Message-ID: <ffd2be2e-02d1-4b79-97fe-2097bb7464b0@rock-chips.com>
+Date: Mon, 6 Jan 2025 11:33:37 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] board: rockchip: add FriendlyElec NanoPi R3S
-To: Tianling Shen <cnsztl@gmail.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-References: <20241226092043.419511-1-cnsztl@gmail.com>
- <20241226092043.419511-8-cnsztl@gmail.com>
+Subject: Re: [PATCH 1/2] efi_stub: Sync the debug UART definition like other
+ platform
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
+ <bd3b49c9-55b0-4707-baf9-ae6bb97e2d01@gmx.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241226092043.419511-8-cnsztl@gmail.com>
+In-Reply-To: <bd3b49c9-55b0-4707-baf9-ae6bb97e2d01@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQhgfSlZITxofTUNIHUhLTklWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a943993b84103afkunm7c8a4675
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh1LGlZKThpCSUNDQk5DGRlWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
+ JVSktLVUpCS0tZBg++
+X-HM-Tid: 0a9439acdf4603afkunm7c9a9f56
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kxw6PBw6LTIKDxkjKxQJMxQv
- SSEaCVFVSlVKTEhNSkhJTExLQ01DVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTE5DNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NCo6Pzo5MDIVVhgxKD0wLjMa
+ EjYwFEtVSlVKTEhNSkhPT0pCSUNLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTExLNwY+
 DKIM-Signature: a=rsa-sha256;
- b=j01iEKCy1FkBWT4k5kZLGj1jS/XSJS+Dys+8XVmAobc6xX+jr33ST7oMZDgNLULQ3wnHVXP1zjBobmlk1+JQy83v9kcYt/ZhUrCkW9BwgVRT86NSxXUuQiDm1GPlNJ+VejiBAM+2kzc1uRdqIXkNgiV9+IiXsItq0QuWSz03iBo=;
+ b=GpbrlLu8iJunTZTL22xvhZrY1BHCKg4oUmE8qQfWzRXi0pQ2+2zJn6sCOkX/UpdiyxV2j3OuBhtg3MK2S8YIGENux74dLXhg5OYCaBizJD9HKvua+B4TwwIsnoc6SEmnkkTNsaaZiMIpHPc0CRAatV6Nf/ozQgrAmfaaf+jdU7s=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=0qAHZt00WgZ9bcA9b8umig7B5OD2NbTk00U5H7jwoRo=;
+ bh=ZH6h1POA8vwhMY+INgV3uXcOkMtG5TUIh1fKvu4XO/w=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -74,180 +76,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tianling.
+Hi Heinrich,
 
-You will need add below config for CONFIG_RTL8169:
+On 2025/1/3 23:43, Heinrich Schuchardt wrote:
+> On 28.11.24 04:47, Kever Yang wrote:
+>> The debug UART interface is available when CONFIG_DEBUG_UART is defined,
+>> sync with the other platforms to use the same definition.
+>>
+>> Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
+>> ---
+>>
+>>   lib/efi/efi_stub.c | 16 ++++++++++------
+>>   1 file changed, 10 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/lib/efi/efi_stub.c b/lib/efi/efi_stub.c
+>> index 40fc29d9adf..5179c5b2c09 100644
+>> --- a/lib/efi/efi_stub.c
+>> +++ b/lib/efi/efi_stub.c
+>> @@ -9,7 +9,6 @@
+>>    * EFI application. It can be built either in 32-bit or 64-bit mode.
+>>    */
+>>
+>> -#include <debug_uart.h>
+>>   #include <efi.h>
+>>   #include <efi_api.h>
+>>   #include <errno.h>
+>> @@ -55,10 +54,6 @@ struct __packed desctab_info {
+>>    * considering if we start needing more U-Boot functionality. Note 
+>> that we
+>>    * could then move get_codeseg32() to arch/x86/cpu/cpu.c.
+>>    */
+>> -void _debug_uart_init(void)
+>> -{
+>> -}
+>> -
+>>   void putc(const char ch)
+>>   {
+>>       struct efi_priv *priv = efi_get_priv();
+>> @@ -83,12 +78,21 @@ void puts(const char *str)
+>>           putc(*str++);
+>>   }
+>>
+>> -static void _debug_uart_putc(int ch)
+>> +#ifdef CONFIG_DEBUG_UART
+>
+> Why do we need this #ifdef? In other places we leave it to the linker to
+> remove unused functions.
 
-CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+I think you are right for most of modules, but for this DEBUG_UART, it's 
+a little different
 
+because it's for early debug, and not so stand alone to disable.
 
-Or else we will get below error in CI:
+And now we are try to make it clean and able to disable, see patch[1].
 
-    aarch64:  +   nanopi-r3s-rk3566
-+drivers/net/rtl8169.c:320:2: error: #warning cache-line size is larger 
-than descriptor size [-Werror=cpp]
-+  320 | #warning cache-line size is larger than descriptor size
-+      |  ^~~~~~~
-+cc1: all warnings being treated as errors
-+make[3]: *** [scripts/Makefile.build:257: drivers/net/rtl8169.o] Error 1
-+make[2]: *** [scripts/Makefile.build:398: drivers/net] Error 2
-+make[1]: *** [Makefile:1906: drivers] Error 2
-+make: *** [Makefile:177: sub-make] Error 2
+>
+>> +
+>> +#include <debug_uart.h>
+>
+> You cannot consume function _debug_uart_putc() before defining it.
+>
+This is following what all other serial driver have done.
 
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/988639
+And I think put all the code support for DEBUG_UART together is reasonable.
+
+This efi_stub is a little bit different and cause the DEBUG_UART not 
+able to disable, that's
+
+why I'm doing this "sync" commit.
 
 
 Thanks,
 
 - Kever
 
-On 2024/12/26 17:20, Tianling Shen wrote:
-> The NanoPi R3S(as "R3S") is an open source platform with dual-Gbps
-> Ethernet ports designed and developed by FriendlyElec for IoT
-> applications.
+[1] 
+https://patchwork.ozlabs.org/project/uboot/patch/20240918130155.299353-2-lukasz.czechowski@thaumatec.com/
+
+> So either the #include statement must follow the implementations or you
+> have to define the function prototypes in the include.
 >
-> Specification:
-> - Rockchip RK3566
-> - 2GB LPDDR4X RAM
-> - optional 32GB eMMC module
-> - SD card slot
-> - 2x 1000 Base-T
-> - 3x LEDs (POWER, LAN, WAN)
-> - 2x Buttons (Reset, MaskROM)
-> - 1x USB 3.0 Port
-> - Type-C 5V 2A Power
+> I would prefer adding the missing definitions to the include and leaving
+> it at the top of the code.
 >
-> Signed-off-by: Tianling Shen <cnsztl@gmail.com>
-> ---
->   arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi |  8 +++
->   board/rockchip/evb_rk3568/MAINTAINERS      |  7 ++
->   configs/nanopi-r3s-rk3566_defconfig        | 74 ++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst            |  1 +
->   4 files changed, 90 insertions(+)
->   create mode 100644 arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
->   create mode 100644 configs/nanopi-r3s-rk3566_defconfig
+> Best regards
 >
-> diff --git a/arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi b/arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..b66e5015d6
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
-> @@ -0,0 +1,8 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +#include "rk356x-u-boot.dtsi"
-> +
-> +&vcc5v0_usb {
-> +	/delete-property/ regulator-always-on;
-> +	/delete-property/ regulator-boot-on;
-> +};
-> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
-> index 588134ecb2..b2780401a3 100644
-> --- a/board/rockchip/evb_rk3568/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
-> @@ -28,6 +28,13 @@ F:	configs/lubancat-2-rk3568_defconfig
->   F:	arch/arm/dts/rk3568-lubancat-2.dts
->   F:	arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
->   
-> +NANOPI-R3S
-> +M:	Tianling Shen <cnsztl@gmail.com>
-> +R:	Jonas Karlman <jonas@kwiboo.se>
-> +S:	Maintained
-> +F:	configs/nanopi-r3s-rk3566_defconfig
-> +F:	arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
-> +
->   NANOPI-R5C
->   M:	Tianling Shen <cnsztl@gmail.com>
->   R:	Jonas Karlman <jonas@kwiboo.se>
-> diff --git a/configs/nanopi-r3s-rk3566_defconfig b/configs/nanopi-r3s-rk3566_defconfig
-> new file mode 100644
-> index 0000000000..f21c703ca7
-> --- /dev/null
-> +++ b/configs/nanopi-r3s-rk3566_defconfig
-> @@ -0,0 +1,74 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-nanopi-r3s"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-nanopi-r3s.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_RTL8169=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 9bab86d234..02d7a4b124 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -99,6 +99,7 @@ List of mainline supported Rockchip boards:
->   
->   * rk3566
->        - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
-> +     - FriendlyElec NanoPi R3S (nanopi-r3s-rk3566)
->        - Hardkernel ODROID-M1S (odroid-m1s-rk3566)
->        - Pine64 PineTab2 (pinetab2-rk3566)
->        - Pine64 Quartz64-A Board (quartz64-a-rk3566)
+> Heinrich
+>
+>> +
+>> +void _debug_uart_init(void)
+>> +{
+>> +}
+>> +
+>> +static inline void _debug_uart_putc(int ch)
+>>   {
+>>       putc(ch);
+>>   }
+>>
+>>   DEBUG_UART_FUNCS
+>> +#endif
+>>
+>>   void *memcpy(void *dest, const void *src, size_t size)
+>>   {
+>
+>
