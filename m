@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D35BE77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:33:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B03DE77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:33:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 242F98036B;
-	Mon,  6 Jan 2025 15:33:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6A62080602;
+	Mon,  6 Jan 2025 15:33:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CmzYJ6R0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VYLmdxMM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0911680646; Mon,  6 Jan 2025 15:33:02 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id EB46E805FE; Mon,  6 Jan 2025 15:33:03 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDF0880612
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:32:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E28880601
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3a817ee9936so56069955ab.2
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:32:59 -0800 (PST)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3a9cb667783so112658985ab.1
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736173977; x=1736778777; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736173979; x=1736778779; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e6Jf2uxmLAAnIrqW/Nh4f4ufpINkWMmbikRe/+tmdK4=;
- b=CmzYJ6R0b4bk4NR7BdNpU9OBLJbQmYa9htvk9KbfF802JMMH0AKCKftc1fyee1b2ga
- g2+Scvpu4jGDNomtwW1lD4GJX49vgTsJwoLZ1OcWtfZ2rtASli6Mlr9QYMH6bZ8/sHuM
- DGPZMF7O9dGqxVMrhOey75ikCBUaCEP54C1EY=
+ bh=3hSyd1PULWCTmgR6E9Rcx+Khr2hPT1z85vFUYlsF6Bg=;
+ b=VYLmdxMMbjaE7zVUnm4JpcaecMrhUIgKDxgcQtEVj2e7WNVjH1JzZe4JkoVXbOmTg4
+ 8PQ2/cNbSOl0hDZTauvNtXREywTVIj9EXhQcdd3dm236hN2YVTKaTMiQ0uH3McsE/sGx
+ z/lZw14qLkyoVhQNMpmSPP5tHU6X6/I+/eTjQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736173977; x=1736778777;
+ d=1e100.net; s=20230601; t=1736173979; x=1736778779;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e6Jf2uxmLAAnIrqW/Nh4f4ufpINkWMmbikRe/+tmdK4=;
- b=C0iaPEGK6GYYzC78J9Qpzpn/RNpxyVcpIPEiY779sRi+EdAdi18fB2YpRFKPpILw9/
- bREgouQzRYkcRUfHDOiEKc25h+gNrfA4JLyc1sYWR1I5LA0Dk5dvPNvEg+g7zxrNZPi4
- 2IQE0t3eQ6rZgBDRoIuxz3sT4Na05a+azha+ufRUDVkihihk6xiEUVwG73Yq6JGSymCC
- 5VEmP0QnOvtKHQfBTytTL1qbEXJdw+XQhcIIt9Kks9MEq6ZxBM+1q1OtR89B/ycNXr8X
- MVb5NbqRyrkYhVCnM9Cbu1ednnuMw+8AdiAT97MGXByoz24UemwGWvsiEiGUmj2FJoh1
- 8/Qw==
-X-Gm-Message-State: AOJu0Ywwu4ojvFX18nZBSqHPy8B8dzfa8jpaGiSKVaqkBanHPW98H2zy
- fUdcgq6evZWfdyNWHMa1wvfdrhVR+3LuOJA6xNGy2FB+0FdRM1m//sNu/57IMlWdv0pFhxdZ9pA
+ bh=3hSyd1PULWCTmgR6E9Rcx+Khr2hPT1z85vFUYlsF6Bg=;
+ b=QcT6N90jz4kJwS3gRn11HHK67YRXZZ21O+DVgWKkpw4sE8XIc+Xy5wdIBl50WXQFhT
+ W2sldZDuKTkQ5SczIpOdCZTs8wx9UGkX0Og1/pjq35HfS2gnLB82Zg/9x9Md6imn0tUW
+ NyBHRgj2qFOJ5EExu+JN/ccKcIeGlyb/VFWQiCTUMuqzWj4IUVrdZ0OhNCKY2/4nFnQ4
+ YrUW/lEDuyxA+A3IuwLnaKHLGXybBkHQHZ+WuJ8jp89yL64OcIXEYDSaMJ+uZbZNB6b/
+ sgIMH/qUqbzTVy7Lw8HAyBcsC73UW9N4N+GyiEplxA1Qyt4+BD4JAtwK/9yYW3ckyhXz
+ 6SAw==
+X-Gm-Message-State: AOJu0YyY4SKR2IoQci8SnXplryZd2cFeWzWlHbkJfUGPI7UbvEu4GhAD
+ wRUp8CGCi0Hvg27mspbOpNvuSoptv8mwRWrcdXDu2C9MzRg/+Gys/HREihGtHTJ5okdMZFZxqus
  =
-X-Gm-Gg: ASbGncvjST8oZBn9nbWowHdGxhYK+P3UhLZa/ENK+1yKdJagwiNHZHAREx85DDwjOyS
- 23ih8EwBjgnabGWB7PR1AGwC/o7V2ZfDENW+AYAPRIkvaugiTbP2dZRrcKU3hngIQs+uV1NLM6j
- t6XMgKbquXcz3zp94TJzFxxj9f9z2PYSsxUpn6AI5ryp/JjouSxpHu5n7NRXPPMJJtFjPwXBayh
- updFNr9CUkfCLv3NBkaEp64jzS1n/V2NBCBLjuuawn6VcP+oTe0h1btLzd5r97pgvAAV9CNqiAs
- zyUE6whGbao+oe5ttQ==
-X-Google-Smtp-Source: AGHT+IEniG3lL7GEN+w8H7i+Z2sTCNytBkqccD5YBy+Tmj9E2Yu4mchTaixlxaKyPZZ4RnwCGqvAhA==
-X-Received: by 2002:a92:3651:0:b0:3cd:b013:5c12 with SMTP id
- e9e14a558f8ab-3cdb0135de7mr75283105ab.20.1736173977570; 
- Mon, 06 Jan 2025 06:32:57 -0800 (PST)
+X-Gm-Gg: ASbGnctMxky8X1CTa0+GnapHz1kx8/kudOpzMxTT3N/0BjhUK7PHYW7bXbuIMQq2lKD
+ QsAO0oqkgjqcRTbGtJpazBZGLuF308KZNNyg2I+IXJztdRHa94toWvbzcxXvwbGkI3XRjgjfLPB
+ bys3zWM3NfSBwJ6c52g2QBnnrhT7iiuKiCEvUI65CByp84t2c80EYoZW8EPYsgvoogCEOX/u5fO
+ gpwuHcBcUhIYAfQIJ6FfjXIrSWespRpDM5cmo6ae+GWqMSe3c9KVQhZdwo1pt5N3CyfXMNLOoQC
+ badjIdKCE520mKZvmA==
+X-Google-Smtp-Source: AGHT+IHLnNI6QY273uzecqf97rOJNDWDvQt2ovTUgGpzni8qi/RONQS4pyQ6Lk2al1XgvY6wrF+OoQ==
+X-Received: by 2002:a05:6e02:1686:b0:3a7:bc2a:2522 with SMTP id
+ e9e14a558f8ab-3c2d277f709mr464392405ab.7.1736173979689; 
+ Mon, 06 Jan 2025 06:32:59 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.32.55
+ e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.32.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 06:32:55 -0800 (PST)
+ Mon, 06 Jan 2025 06:32:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bin Meng <bmeng.cn@gmail.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Philip Oberfichtner <pro@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 07/33] cpu: Provide a way to get the physical-address size
-Date: Mon,  6 Jan 2025 07:32:03 -0700
-Message-Id: <20250106143229.3023771-8-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 08/33] serial: Support info() method in ns16550 xPL with UPL
+Date: Mon,  6 Jan 2025 07:32:04 -0700
+Message-Id: <20250106143229.3023771-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250106143229.3023771-1-sjg@chromium.org>
 References: <20250106143229.3023771-1-sjg@chromium.org>
@@ -96,74 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This concept exists on x86. Declare it as a generic function so that the
-value can be accessed by UPL.
+UPL needs to pass the serial details onto the next stage, so adjust the
+condition to support this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/include/asm/cpu.h |  9 ---------
- arch/x86/lib/bdinfo.c      |  1 +
- include/cpu.h              | 14 ++++++++++++++
- 3 files changed, 15 insertions(+), 9 deletions(-)
+ drivers/serial/ns16550.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/x86/include/asm/cpu.h b/arch/x86/include/asm/cpu.h
-index 8c1ef4c8cc1..fd389d4024c 100644
---- a/arch/x86/include/asm/cpu.h
-+++ b/arch/x86/include/asm/cpu.h
-@@ -284,15 +284,6 @@ u32 cpu_get_family_model(void);
-  */
- u32 cpu_get_stepping(void);
+diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
+index 3f6860f3916..5126cf8bc1a 100644
+--- a/drivers/serial/ns16550.c
++++ b/drivers/serial/ns16550.c
+@@ -473,7 +473,7 @@ static int ns16550_serial_getinfo(struct udevice *dev,
+ 	struct ns16550_plat *plat = com_port->plat;
  
--/**
-- * cpu_phys_address_size() - Get the physical address size in bits
-- *
-- * This is 32 for older CPUs but newer ones may support 36.
-- *
-- * Return: address size (typically 32 or 36)
-- */
--int cpu_phys_address_size(void);
--
- void board_final_init(void);
- void board_final_cleanup(void);
+ 	/* save code size */
+-	if (!not_xpl())
++	if (!not_xpl() && !CONFIG_IS_ENABLED(UPL_OUT))
+ 		return -ENOSYS;
  
-diff --git a/arch/x86/lib/bdinfo.c b/arch/x86/lib/bdinfo.c
-index 2a78f578dee..bd2cf0b9fcb 100644
---- a/arch/x86/lib/bdinfo.c
-+++ b/arch/x86/lib/bdinfo.c
-@@ -5,6 +5,7 @@
-  * Copyright 2021 Google LLC
-  */
- 
-+#include <cpu.h>
- #include <efi.h>
- #include <init.h>
- #include <asm/cpu.h>
-diff --git a/include/cpu.h b/include/cpu.h
-index 0018910d61f..d0cd104c05a 100644
---- a/include/cpu.h
-+++ b/include/cpu.h
-@@ -179,4 +179,18 @@ struct udevice *cpu_get_current_dev(void);
-  * @return 0 if OK, -ve on error
-  */
- int cpu_release_core(const struct udevice *dev, phys_addr_t addr);
-+
-+/**
-+ * cpu_phys_address_size() - Get the physical-address size for the CPU
-+ *
-+ * x86 CPUs have a setting which indicates how many bits of address space are
-+ * available on the CPU. This is 32 for older CPUs but newer ones may support 36
-+ * or more.
-+ *
-+ * For non-x86 CPUs the result may simply be 32 for 32-bit CPUS or 64 for 64-bit
-+ *
-+ * Return: address size (typically 32 or 36)
-+ */
-+int cpu_phys_address_size(void);
-+
- #endif
+ 	info->type = SERIAL_CHIP_16550_COMPATIBLE;
 -- 
 2.34.1
 
