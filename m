@@ -4,63 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57982E77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 06:47:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CEB2E77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 07:44:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3E02801E8;
-	Mon,  6 Jan 2025 07:47:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 4EF29801DE;
+	Mon,  6 Jan 2025 08:44:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Carxm86k";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rrpczfOP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE383801E8; Mon,  6 Jan 2025 07:47:03 +0100 (CET)
-Received: from mail-m11867.qiye.163.com (mail-m11867.qiye.163.com
- [115.236.118.67])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 79044801E8; Mon,  6 Jan 2025 08:44:28 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CFD9801DE
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 07:46:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id ED7A880137
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 08:44:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 7cf293eb;
- Mon, 6 Jan 2025 14:46:54 +0800 (GMT+08:00)
-Message-ID: <3a7f8b43-288c-4951-a781-c9d7139bab2a@rock-chips.com>
-Date: Mon, 6 Jan 2025 14:46:53 +0800
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4363dc916ceso87283335e9.0
+ for <u-boot@lists.denx.de>; Sun, 05 Jan 2025 23:44:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1736149465; x=1736754265; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=//K68L43PQOhXrvLk0oWIlR0yV0ovwnZsVi5UPYFrTg=;
+ b=rrpczfOPN/f14vpS2fR0SYGek1K+SZQHvQ5dkMGadgLqPdB7HzjvxRWOPZ0hBO74EF
+ 2/pAdG2hW7le76GJqrQUdMLF0JPNn/lzuutOpA8JoR/Ub/TPGqy7RbKXJBUCdmE42J6J
+ WBteOdfYRz0nFG4q489V3qnLJX86mdNDQixhhj6Y43xuwg8gNV/CI6wspAnD7VVjdxvz
+ ehyp+3lv+gzwNhYxxs+kaU8vH7YFEiV/uzM0Z2/AOtE9Oun+vCH5AneOrarBQigmCvkl
+ NOW2UPrk6pp0JzVmF6xA6FONCQPYdpRxJFi9/8r3kSElRdFP07pRr3w0SuiDGH6fjd28
+ mqzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736149465; x=1736754265;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=//K68L43PQOhXrvLk0oWIlR0yV0ovwnZsVi5UPYFrTg=;
+ b=BhVPqJLOaPPPSROUicNcZIVZZQItzqknqGUGHvIcDaoJjdUfA/coAOlWZjLV0/lkrh
+ 4pu8Vng61tFzN5jw45h9K4N4rmmQsae+DZBw5cG0+ETPW1BpGvtt1LcobqXJiqrXZ9yD
+ RbkKbQ78W0BRCW6SuspLJtyMcUfzMVOy0j79R16ZY024V8adh92d6CzuJWtWBsPxpCdX
+ bNgL4JxkvkqxxMdVc7eIJXrgp9zkpf4q1Tq+FM3SJN5sOwiUfPa5t/UoIuVQdQ7UUvsf
+ Mqk0BPKrBcV6XtEM1LKLUKWnKrh/If3vBhM1N0v6AMy86SDc0Y5+PcQXIalGO47Zh/p3
+ fFdA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUr65QVFYX3Kr4SeU/bupAwDkZ7zp9hQypMQaTsxtuh4ClA0RHlamyUAnYXROv9CgDmq0GnzpU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwN1+mJUAf35RhILlz63wEvX1JGap89NVfE07e+UYFBx4cTYgNu
+ GF1qEdnmWdgjh92SYzEJrMHKM0OBGf3T6zoHZaFd+n0SjY5S2931YYazwkwC/Ls=
+X-Gm-Gg: ASbGncuHVhIpkMt/buwwkxDmFtXBjyvxc6e/n8jz75PFiefUbp8XtCiVeG/aupyeaJ8
+ B5aFYS3DCzEfC/3LwqtJgZAQIULYhjTnEsgszXYRHk8hoT8F1w6hrGKY8lOrtlspx+vhN82p8JK
+ SKFXxMUnHPK9S47uF27wbsaOLgfO2Tl6lP/Fjs0CiGZS+ozm2jUCHWzxk0fi+1j4rcLuWTHdv55
+ MNjA+HYs4GmNuDJWxGQsbueHziCdWrPUBTKfhFz90QwS36bfJrVTDToqxqaGfZTPgMxUnZIsoi7
+ AadnQTrw9kgdgGPI7La564Q+RiidX18GVG97
+X-Google-Smtp-Source: AGHT+IHJRqgEt9Q1z3dmZo23K49xrmDiwBSKyf52WxJhmAgDJU9aVGT+XRA47TuvdFbjTG5Q2SisOw==
+X-Received: by 2002:a05:600c:474f:b0:434:ff08:202e with SMTP id
+ 5b1f17b1804b1-43682a402ecmr354116925e9.8.1736149465330; 
+ Sun, 05 Jan 2025 23:44:25 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:1e93:37a4:3ea2:6dcc?
+ ([2a01:e0a:3cb:7bb0:1e93:37a4:3ea2:6dcc])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43656b013a1sm597636145e9.11.2025.01.05.23.44.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 05 Jan 2025 23:44:25 -0800 (PST)
+Message-ID: <196cc091-5031-426e-b5ea-923065b2b026@linaro.org>
+Date: Mon, 6 Jan 2025 08:44:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] config: efi-x86_payload: Enable DEBUG_UART
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
- <20241128114737.2.I03b59e1d26d2a79a666adc8ef313077da8dce145@changeid>
- <c31b3d7a-c840-4b3d-a6fe-90f9a576ffb4@gmx.de>
- <CAFLszTikmQfBsQTJ5FLfvOv2GgPWPj0GyDCoCxYnXVtbruvf-A@mail.gmail.com>
- <3EE77A40-CD92-4330-B66D-7F00CCEA7BE4@gmx.de>
+Subject: Re: [PATCH 1/3] lib: implement strnstr()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20250103232118.711135-1-heinrich.schuchardt@canonical.com>
+ <20250103232118.711135-2-heinrich.schuchardt@canonical.com>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <3EE77A40-CD92-4330-B66D-7F00CCEA7BE4@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkNDSlYYT0xOH0JCGkNCHh5WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSEpOTE
- pVSktLVUpCS0tZBg++
-X-HM-Tid: 0a943a5dd00203afkunm7cf293eb
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OlE6TDo6KTIOPRgRDSM1KC4M
- HxUKCzVVSlVKTEhNSk9NS0pOSk9KVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOS05KNwY+
-DKIM-Signature: a=rsa-sha256;
- b=Carxm86kbc/YEvhTBh3bpwFDyHS0sUbBmmrIyxwamALN9XN48xOl/c6CjCQ0DIW9kB0UrnhQJwQF7sXwnaEx1O7qcgeJ3Pf/j6UfP8hfrb1/i1B/7T6rdcFYkemvgk1BDmpafl8w1IK08er6FcP69kKxfcGy1BvC74ZqFAdbxKM=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=f0z829gV2BPzYXmiENt3veZEY6O32ry5O7tjtQNcJng=;
- h=date:mime-version:subject:message-id:from;
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250103232118.711135-2-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,116 +102,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich and Simon,
 
-     I send these two change because I want to fix the build error 
-below(from[1]) which is for disable the DEBUG_UART[2].
-Do you have clear suggestion on how to do this in efi_stub, since I have 
-no idea about this module, so I just follow how
-it works in other serial driver.
-+/binman/rom/intel-mrc (mrc.bin):
-+Image 'rom' has faked external blobs and is non-functional: 
-descriptor.bin me.bin refcode.bin vga.bin mrc.bin
-+In file included from lib/efi/efi_stub.c:12:
-+include/debug_uart.h:205:9: error: stray '#' in program
-+  205 |         #warning "DEBUG_UART not defined!"
-+      |         ^
-+lib/efi/efi_stub.c:91:1: note: in expansion of macro 'DEBUG_UART_FUNCS'
-+   91 | DEBUG_UART_FUNCS
-+      | ^~~~~~~~~~~~~~~~
-+include/debug_uart.h:205:18: error: expected '=', ',', ';', 'asm' or 
-'__attribute__' before string constant
-+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~
-+lib/efi/efi_stub.c:86:13: error: '_debug_uart_putc' defined but not 
-used [-Werror=unused-function]
-+   86 | static void _debug_uart_putc(int ch)
-+      |             ^~~~~~~~~~~~~~~~
-+make[3]: *** [scripts/Makefile.build:257: lib/efi/efi_stub.o] Error 1
-+make[2]: *** [scripts/Makefile.build:398: lib/efi] Error 2
+
+On 1/4/25 00:21, Heinrich Schuchardt wrote:
+> Implement library function strnstr().
+> Implement strstr() using strnstr().
+> Sort the includes.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  include/linux/string.h |  3 +++
+>  lib/string.c           | 49 +++++++++++++++++++++++++++++-------------
+>  2 files changed, 37 insertions(+), 15 deletions(-)
+> 
+> diff --git a/include/linux/string.h b/include/linux/string.h
+> index 27b2beb9ddb..8a377a8176a 100644
+> --- a/include/linux/string.h
+> +++ b/include/linux/string.h
+> @@ -72,6 +72,9 @@ extern char * strrchr(const char *,int);
+>  #ifndef __HAVE_ARCH_STRSTR
+>  extern char * strstr(const char *,const char *);
+>  #endif
+> +#ifndef __HAVE_ARCH_STRNSTR
+> +extern char *strnstr(const char *, const char *, size_t);
+> +#endif
+>  #ifndef __HAVE_ARCH_STRLEN
+>  extern __kernel_size_t strlen(const char *);
+>  #endif
+> diff --git a/lib/string.c b/lib/string.c
+> index feae9519f2f..d5a486fb89d 100644
+> --- a/lib/string.c
+> +++ b/lib/string.c
+> @@ -16,11 +16,12 @@
+>   */
+>  
+>  #include <config.h>
+> +#include <malloc.h>
+> +#include <stdint.h>
+>  #include <linux/compiler.h>
+> +#include <linux/ctype.h>
+>  #include <linux/types.h>
+>  #include <linux/string.h>
+> -#include <linux/ctype.h>
+> -#include <malloc.h>
+>  
+>  /**
+>   * strncasecmp - Case insensitive, length-limited string comparison
+> @@ -678,30 +679,48 @@ char *memdup(const void *src, size_t len)
+>  	return p;
+>  }
+>  
+> -#ifndef __HAVE_ARCH_STRSTR
+> +#ifndef __HAVE_ARCH_STRNSTR
+>  /**
+> - * strstr - Find the first substring in a %NUL terminated string
+> - * @s1: The string to be searched
+> - * @s2: The string to search for
+> + * strnstr() - find the first substring occurrence in a NUL terminated string
+> + *
+> + * @s1:		string to be searched
+> + * @s2:		string to search for
+> + * @len:	maximum number of characters in s2 to consider
+
+You mean s1?
+
+> + *
+> + * Return:	pointer to the first occurrence or NULL
+>   */
+> -char * strstr(const char * s1,const char * s2)
+> +char *strnstr(const char *s1, const char *s2, size_t len)
+>  {
+> -	int l1, l2;
+> +	size_t l1, l2;
+>  
+> +	l1 = strnlen(s1, len);
+>  	l2 = strlen(s2);
+> -	if (!l2)
+> -		return (char *) s1;
+> -	l1 = strlen(s1);
+> -	while (l1 >= l2) {
+> -		l1--;
+> -		if (!memcmp(s1,s2,l2))
+> +
+> +	for (; l1 >= l2; --l1, ++s1) {
+> +		if (!memcmp(s1, s2, l2))
+>  			return (char *) s1;
+> -		s1++;
+>  	}
+> +
+>  	return NULL;
+>  }
+>  #endif
+
+This won't return s1 when s2 == NULL, will it?
+Why not use a known good implementation such as [1]?
+
+[1] https://github.com/freebsd/freebsd-src/blob/main/lib/libc/string/strnstr.c
+
+>  
+> +#ifndef __HAVE_ARCH_STRSTR
+> +/**
+> + * strstr() - find the first substring occurrence in a NUL terminated string
+> + *
+> + * @s1:		string to be searched
+> + * @s2:		string to search for
+> + * @len:	maximum number of characters in s2 to consider
+
+There is no len parameter
+
+> + *
+> + * Return:	pointer to the first occurrence or NULL
+> + */
+> +char *strstr(const char *s1, const char *s2)
+> +{
+> +	return strnstr(s1, s2, SIZE_MAX);
+> +}
+> +#endif
+> +
+>  #ifndef __HAVE_ARCH_MEMCHR
+>  /**
+>   * memchr - Find a character in an area of memory.
 
 Thanks,
-- Kever
-[1] https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/987462
-[2] 
-https://patchwork.ozlabs.org/project/uboot/patch/20240918130155.299353-2-lukasz.czechowski@thaumatec.com/ 
-
-On 2025/1/5 07:02, Heinrich Schuchardt wrote:
-> Am 4. Januar 2025 20:29:43 MEZ schrieb Simon Glass <sjg@chromium.org>:
->> Hi Heinrich,
->>
->> On Sat, 4 Jan 2025 at 05:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->>> On 28.11.24 04:47, Kever Yang wrote:
->>>> The efi_stub is useing DEBUG_UART interface by default, Enable it.
->>> As Simon already wrote in a code comment the implementation of the EFI
->>> stub is broken as it is not hardware agnostic.
->> If I said that I was wrong, sorry. Actually that is the stub's intent,
->> to take over the machine, exit boot-services and carry on. It is the
->> EFI app which is designed to use boot services.
->>
->> So the stub cannot be hardware-agnostic, unfortunately. It only runs
->> on x86 hardware, unless, for example, EFI has something like
->> serial_getinfo() or we disable the UART / keyboard input.
-> I would assume that there is no serial console that the user has access to on many x86 systems (like on my laptop).
->
-> In the stub itself we can use the Simple Text Output Protocol and the Simple Text Input Protocol offered by the UEFI implementation that started the stub.
->
-> The UEFI specification defines a Serial Io Protocol which may be implemented but I would not know why we should restrict the usability in this way.
->
-> Once we start U-Boot of course we will use hardware specific IO, e.g. on a RISC-V system use the debug console offered by the SBI
->
-> Best regards
->
-> Heinrich
->
->>> In the EFI stub we should never directly access hardware. Please, use
->>> SimpleTextOutputProtocol.OutputString() for printing.
->> Once the stub starts, boot services are gone. See efi_main() for how
->> this works. There is a definite point at which we stop using that and
->> start using U-Boot's own thing.
->>
->> At this point I think I may be misunderstanding what you said...
->>
->>>> Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
->>>> ---
->>>>
->>>>    configs/efi-x86_payload32_defconfig | 1 +
->>>>    configs/efi-x86_payload64_defconfig | 1 +
->>>>    2 files changed, 2 insertions(+)
->>>>
->>>> diff --git a/configs/efi-x86_payload32_defconfig b/configs/efi-x86_payload32_defconfig
->>>> index 071ddb8e36d..f0b9acc358d 100644
->>>> --- a/configs/efi-x86_payload32_defconfig
->>>> +++ b/configs/efi-x86_payload32_defconfig
->>>> @@ -5,6 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
->>>>    CONFIG_PRE_CON_BUF_ADDR=0x100000
->>>>    CONFIG_VENDOR_EFI=y
->>>>    CONFIG_TARGET_EFI_PAYLOAD=y
->>>> +CONFIG_DEBUG_UART=y
->>> On x86 this uses the NS16550 UART driver. This is fine as long as we
->>> don't use the debug UART in the EFI stub. But correcting this is for a
->>> separate patch.
->>>
->>> Having a debug UART available after the EFI stub makes sense.
->>>
->>> I will update the commit message when merging.
->>>
->>> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
->>>
->>>>    CONFIG_EFI=y
->>>>    CONFIG_EFI_STUB=y
->>>>    CONFIG_FIT=y
->>>> diff --git a/configs/efi-x86_payload64_defconfig b/configs/efi-x86_payload64_defconfig
->>>> index 71612d7fb19..b02a861e59c 100644
->>>> --- a/configs/efi-x86_payload64_defconfig
->>>> +++ b/configs/efi-x86_payload64_defconfig
->>>> @@ -5,6 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
->>>>    CONFIG_PRE_CON_BUF_ADDR=0x100000
->>>>    CONFIG_VENDOR_EFI=y
->>>>    CONFIG_TARGET_EFI_PAYLOAD=y
->>>> +CONFIG_DEBUG_UART=y
->>>>    CONFIG_EFI=y
->>>>    CONFIG_EFI_STUB=y
->>>>    CONFIG_EFI_STUB_64BIT=y
->> Regards,
->> Simon
->
+-- 
+Jerome
