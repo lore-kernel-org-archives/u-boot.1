@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 367FAE77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F7E7E77198
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:37:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAB0780713;
-	Mon,  6 Jan 2025 15:33:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E35B80726;
+	Mon,  6 Jan 2025 15:34:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JkruYcnL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DA0lFGVA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C04A80703; Mon,  6 Jan 2025 15:33:57 +0100 (CET)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id 5769B80717; Mon,  6 Jan 2025 15:33:59 +0100 (CET)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F2D5806EB
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 321EB806FF
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3a8180205f3so55586775ab.0
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:55 -0800 (PST)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3cdd57060acso8497825ab.0
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736174033; x=1736778833; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736174035; x=1736778835; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yq+HElnNK/Nwk9TrltcDY0YsLdmP8y/PfB4CXq8cRT0=;
- b=JkruYcnLoUxBoaN3Cjdl+BiLDPfXHJVzFtRezXe26x2UamVAOZ5r18PSA0j82Iknic
- +eQlsDIVAu+zplNboBt10/8Id+cwIAskWmP8v7etRth8/x34zROZCpztqT+iyVmcmNra
- d9ylmbmJTtSOQpNBjCPvDq6Xx4BN/7tsw4vuI=
+ bh=sg5nkE0DN6pohCK8Ky5lihLFK1ntldKMmd7xrkTjZ3Y=;
+ b=DA0lFGVAvrUGz1FYZ1Pk9i3k211tOx7YwW8jCkmDTbvf/EKHpnuQEVf+olUbuIJa2h
+ a8wDzKrXnc+FavVvgo2yZlnsSEwDtynjTay1GmPHLp0Sem7vtPDwpty4QeCSwEDXOwNh
+ 65LJl9Upf68d4HcsS210Rr4rnhw8PUOvDvJFw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736174033; x=1736778833;
+ d=1e100.net; s=20230601; t=1736174035; x=1736778835;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Yq+HElnNK/Nwk9TrltcDY0YsLdmP8y/PfB4CXq8cRT0=;
- b=pmxFgslnX3pFocS4jjSB6jk64OH4Vyfjno8VL3ZNkY9syyCDp83ENzB2bHS/pd1Shv
- +KeaLfRZdXPLH+YAGEzSxBfJ1LcbMnrOT7JFiKAxdI0BA4p5UvAZLtyRDS1MY3P/KWtV
- N4iCIYBwHjlV7I4+y0B8CTNzLxfoDyL8y2konEE0iqwE6Z3Q3F17I8B3iaptXGq0DhtM
- f259172zNS3VgUYbF01Ov4qFaf7G4lRIxOW7AO9mqQQltP7j1QIWm+Y8SqEtmVvEDjhk
- Xy0cTtWUzMnWoj4qsht7SaVoHpMzbgHdXALbJShh0CAu7NCW6CjVx7Dsr1CRR+SOiUvL
- 3ZLg==
-X-Gm-Message-State: AOJu0YzdpTU+H4GcPRBWwioND7mmYA52AdKuW6cvgXF9ryw3FW8qUYQ5
- 9Nn3xFjfJVRkZp1wmL61qXxNUdgNgu0CYL8dIowc4otsSNBlk5X+ybCZrnc28UqM5MxTH7+u/iM
+ bh=sg5nkE0DN6pohCK8Ky5lihLFK1ntldKMmd7xrkTjZ3Y=;
+ b=AwaYlX7SH+/dYApycZeQ3jU8SkXqCN8TGkFe7Vlv6b/sGOOOTF1VpwRJN58VmAijMC
+ QLkJ8r6lehJUTxI/WFTv8bvGrbaIc0moo9FiczAkF9uiSxw/s+fiVGlXKgRSq5NPYrgC
+ fqtfARzjgcMt3tpLqBfc2ZvfAg4Oq1DsIKuqzixhzUTMJTlGFbeBJHXeys/6NV9S7aT8
+ CphX4bv/94qd4P5Cf51yqznHD4ZK++wGnmePEAgJezDKLI6vJ1nwnlwf/SkB8kc060n3
+ fQdP0FvbxHGua5U8tR9Jigk0WaI3vhEDg0gV220pD7ac0yixajLLtj62vFVzn3dcYhyl
+ qDKw==
+X-Gm-Message-State: AOJu0Yz864yqWBub7vy1UPor/x7sptSz4+kbx+8lz28UvZiz0N33fcKp
+ GLzzDUkBmkgq89EnhFsgBw45wHUO3z1eN9g0jeCXaaHasKV8/3b33hJEmf5RRLryoveV0+CLtgU
  =
-X-Gm-Gg: ASbGnctkHVpOGtAN6c/VhKCyaV9TacybZUUvc9fZdtTH+nXm7Qu4TAF0Sz+3gNqV6yX
- Icrp+EhwtoReqqgJ9vJQMERQAN+wmxQtiarqPrwirRNrG73vaZOGUE96OMeddejbHUi8ce4rsRW
- zKNf5ZZ4FQ7gttDNgFAEADCFdYuXqciuhe7V7TC0b36nf5//GBRrwc77DEJ1O+dymvNI3c73LlR
- /NvgEWu0cjNrnnrmhAeS5AI3Ok5tygOnU908DpS7aGIah6qrpzwtmy/6TAwSil9sZeNUWT3863b
- UQ1ajqXB/fqefulY4A==
-X-Google-Smtp-Source: AGHT+IFxs6bQ7trCCZ3fSmVRzvetF/sLl6fCOPQQfJ0AO6GmN+KpIzExLVxoOOSL0BPOd8qF4vx3Ow==
-X-Received: by 2002:a05:6e02:b4f:b0:3a9:cb4a:842a with SMTP id
- e9e14a558f8ab-3c02ceb248amr524949705ab.5.1736174032815; 
- Mon, 06 Jan 2025 06:33:52 -0800 (PST)
+X-Gm-Gg: ASbGnctaOQYhJj6u7G8uP7gJ+wgLRFknK5GujYkQTHBctGqFscaXZ4p0botSdemKcRI
+ FdKYoaSLgkGlCrTtF+5az2SfWG/YYHb6Js7IkAFBqZoYgp0ziOG/DmiO32ouYujMzSQUUJkgl4j
+ 3fyCR6WFc7ibHcLB+NhvzVyvFVwhwZD+8AF7rNUlLZ+bW4PcOx31cMPKOo6Eq0JkbnW7t/FPZVc
+ CuaRn30rDkawoCpT6C0EKik0BMgv7ry74UNKIzbZLactTmdjcJd2pGbysiZw0W7Vz8JN9BA4qRj
+ gCIS/mQRLn8dv2U0ig==
+X-Google-Smtp-Source: AGHT+IGthqFP/VIlFdIeJMntzAiDCEmviivcKs1mY7OwWvNVyuWc2TeDklES6Je3qnIZATCZxFkaGA==
+X-Received: by 2002:a05:6e02:3891:b0:3a8:1195:f216 with SMTP id
+ e9e14a558f8ab-3c2d25770a4mr480275095ab.10.1736174034787; 
+ Mon, 06 Jan 2025 06:33:54 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.33.50
+ e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.33.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 06:33:51 -0800 (PST)
+ Mon, 06 Jan 2025 06:33:53 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Janne Grunau <j@jannau.net>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 26/33] x86: Support jumping to a UPL image
-Date: Mon,  6 Jan 2025 07:32:22 -0700
-Message-Id: <20250106143229.3023771-27-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 27/33] x86: Enable UPL handoff for SPL
+Date: Mon,  6 Jan 2025 07:32:23 -0700
+Message-Id: <20250106143229.3023771-28-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250106143229.3023771-1-sjg@chromium.org>
 References: <20250106143229.3023771-1-sjg@chromium.org>
@@ -96,36 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a function to allow x86 boards to jump to a UPL images. Currently
-only 32-bit entry is supported.
+Add the GD_FLG_UPL so that a UPL-handoff is created.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/lib/bootm.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ arch/x86/lib/spl.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
-index bbd8ee7870f..e7a98bf1590 100644
---- a/arch/x86/lib/bootm.c
-+++ b/arch/x86/lib/bootm.c
-@@ -283,3 +283,14 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+diff --git a/arch/x86/lib/spl.c b/arch/x86/lib/spl.c
+index aad748532d0..7a033505101 100644
+--- a/arch/x86/lib/spl.c
++++ b/arch/x86/lib/spl.c
+@@ -298,6 +298,9 @@ void spl_board_init(void)
+ 	if (IS_ENABLED(CONFIG_QEMU))
+ 		qemu_chipset_init();
  
- 	return boot_jump_linux(images);
- }
++	if (CONFIG_IS_ENABLED(UPL_OUT))
++		gd->flags |= GD_FLG_UPL;
 +
-+int arch_upl_jump(ulong entry, const struct abuf *buf)
-+{
-+	typedef EFIAPI void (*h_func)(void *hoff);
-+	h_func func;
-+
-+	func = (h_func)(ulong)entry;
-+	func(buf->data);
-+
-+	return -EFAULT;
-+}
+ 	if (CONFIG_IS_ENABLED(VIDEO)) {
+ 		struct udevice *dev;
+ 		int ret;
 -- 
 2.34.1
 
