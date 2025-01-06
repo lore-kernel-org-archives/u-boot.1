@@ -4,71 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3FA5E77198
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 20:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D64D8E77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 21:40:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0968E805E1;
-	Mon,  6 Jan 2025 21:51:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C3B5F8036B;
+	Mon,  6 Jan 2025 22:39:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736196690;
-	bh=b8Zc6hwibEB9a8gf+/U3+ShlVXI0MQTTsPrejiy6F2g=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=sr88O9cH4J/QNURrq5yI+/I6qz9ZpxkrZIWP5Lk83ueqXSpNizmPlzqWsQSj92K4L
-	 Tdn3J2wXKneGaWMfqEywbsNhSADMomKQE/dLzMsgYxiP4crwpGft6YzXsS2XeU1CfQ
-	 Fg2Vy9gOuKN6EJZWbThSOuyMXcU0vnnJDbGb7llsGggMyi/gSsI3M8ij87kN4uncLM
-	 WHFU5ZpZjzAO8w+tDZc6A3/QqYOGylMAhywopR2UKGYhaFky3tp/RQdMIYlJ9hN7sh
-	 0KG3EBRfdjBIKD7N1Q5srTvszPvZ6PUfYV8A4005MuST1izneObMERu1i5/FIbEWTB
-	 jGoGcU+ZGvYCA==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jrMjcpCc";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16D2C8036B; Mon,  6 Jan 2025 21:51:28 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 3E76D801DB; Mon,  6 Jan 2025 22:39:58 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12C09805E1
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 21:51:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC325801DB
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 22:39:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Uaz5VcP6"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id F023210A4C6C4; Mon,  6 Jan 2025 21:51:23 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736196685;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b8Zc6hwibEB9a8gf+/U3+ShlVXI0MQTTsPrejiy6F2g=;
- b=Uaz5VcP6chf9b9QGbWtdw0xLz3fRmoBaL5OLk5t+eVB5Jf9Hw8SuvgM/Db5BdkabVuje91
- xmfm2wkj2ZbhIieUryZDstKO8QrWnlB8iorEBsfld0eh2gOQhHnM97zBMQ+bbIGaN1Y5wy
- PB2lguTu8d+JS4UlZ7r6qjJQWOwgNHI9rJeVnyC1wPsz61eanUSfDT+qnOYXHiIaV6LfoX
- lCJk/LlzCSpuTKmhvv7c2kPEeKV0a0Nf+s+Bs9q5FAijqHTd5+daigcrJN9GM6l+GxoxsQ
- +f1A4R34VNHzQX7YNLw/eltKl/AzDIKtBfAIvHnZisUy5B1CoDDvtP0ezO9COA==
-Message-ID: <1b77dd3f-e0f3-492b-981f-1dc9962f1732@denx.de>
-Date: Mon, 6 Jan 2025 21:50:17 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=48da=T7=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1736199594;
+ bh=6BH8caVWXhZ9mTySDSjeY7WEIvRBGIt7QOzgakJvJl8=;
+ b=jrMjcpCcB1Lqz6zODFsx1NmESAONB7G7YvFz3MHfgVQ6RHhyI+FaJIRNwISCa0RitTpnoyQyx
+ 0L7wtSAjG3iSpTn0lSpJ6lyMoNVqCF9xNHxbjqHEMsQBfC68pc2ZfGLVKkauB8CPeyOb884EFPh
+ OHgUWLxMXvscjFfA4kLa7bTPMtu4fZAIkBcqZRNFJTfj0iLp/d8uSWdMUM4aq+aSW9gUnf+4FIt
+ gzvHPgI+nboPI6AKBX3lPdFg6ANq6xo7+H4bTmsQxI+zcGEU/ibkVnx4tkjeFO+4El6tjlMOi1s
+ RvZM3hCwD2r8iM/cTyWkIFbQ0+TVD7vd3TEpdoNJrNow==
+X-ForwardEmail-Version: 0.4.40
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Received: from bionic.. ([78.69.151.207]
+ 78-69-151-207-no600.tbcn.telia.com) by smtp.forwardemail.net (Forward
+ Email) with ESMTPSA (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384); Mon,
+ 06 Jan 2025 21:39:45 +0000
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH] pinctrl: rockchip: rk3328: Fix pinmux for GPIO2-B and GPIO3-B
+ pins
+Date: Mon,  6 Jan 2025 21:39:42 +0000
+Message-ID: <20250106213944.3796172-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Brian Ruley <brian.ruley@gehealthcare.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>
-References: <20250105203714.158480-1-marex@denx.de>
- <CAFLszThQvKZfwsQudbOfDvnCMe=aeY=ppUhHKj6nV8=PtadDaA@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszThQvKZfwsQudbOfDvnCMe=aeY=ppUhHKj6nV8=PtadDaA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 677c4da53a8d812ac5ca648f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,24 +73,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/6/25 3:38 PM, Simon Glass wrote:
+The pinmux bits for GPIO2-B0 to GPIO2-B6 actually have 2 bits width,
+correct the bank flag for GPIO2-B. The pinmux bits for GPIO2-B7 is
+recalculated so it remain unchanged. Add missing GPIO3-B1 to GPIO3-B7
+pinmux data to rk3328_mux_recalced_data as mux register offset for these
+pins does not follow rockchip convention.
 
-[...]
+This matches changes in following Linux commits:
+- e8448a6c817c ("pinctrl: rockchip: fix pinmux bits for RK3328 GPIO2-B pins")
+- 5ef6914e0bf5 ("pinctrl: rockchip: fix pinmux bits for RK3328 GPIO3-B pins")
+- 128f71fe014f ("pinctrl: rockchip: correct RK3328 iomux width flag for GPIO2-B pins")
 
-> I wonder if the cst needs to be updated (binman tool -f cst)? At
-> present it is using apt-get and has:
-> 
-> $ dpkg -l imx-code-signing-tool
-> Desired=Unknown/Install/Remove/Purge/Hold
-> | Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
-> |/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
-> ||/ Name                  Version             Architecture Description
-> +++-=====================-===================-============-===================================
-> ii  imx-code-signing-tool 3.3.1+dfsg-2ubuntu1 amd64        code
-> signing tool for i.MX platform
-Perhaps. Can you suggest a fix ?
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ drivers/pinctrl/rockchip/pinctrl-rk3328.c | 59 ++++++++++++++++++++---
+ 1 file changed, 52 insertions(+), 7 deletions(-)
 
-I am also unsure how to get the CST test to 100%.
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3328.c b/drivers/pinctrl/rockchip/pinctrl-rk3328.c
+index 47c2e923a1bb..dd0dc2eff270 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rk3328.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rk3328.c
+@@ -14,23 +14,68 @@
+ 
+ static struct rockchip_mux_recalced_data rk3328_mux_recalced_data[] = {
+ 	{
+-		.num = 2,
+-		.pin = 12,
+-		.reg = 0x24,
+-		.bit = 8,
+-		.mask = 0x3
+-	}, {
++		/* gpio2_b7_sel */
+ 		.num = 2,
+ 		.pin = 15,
+ 		.reg = 0x28,
+ 		.bit = 0,
+ 		.mask = 0x7
+ 	}, {
++		/* gpio2_c7_sel */
+ 		.num = 2,
+ 		.pin = 23,
+ 		.reg = 0x30,
+ 		.bit = 14,
+ 		.mask = 0x3
++	}, {
++		/* gpio3_b1_sel */
++		.num = 3,
++		.pin = 9,
++		.reg = 0x44,
++		.bit = 2,
++		.mask = 0x3
++	}, {
++		/* gpio3_b2_sel */
++		.num = 3,
++		.pin = 10,
++		.reg = 0x44,
++		.bit = 4,
++		.mask = 0x3
++	}, {
++		/* gpio3_b3_sel */
++		.num = 3,
++		.pin = 11,
++		.reg = 0x44,
++		.bit = 6,
++		.mask = 0x3
++	}, {
++		/* gpio3_b4_sel */
++		.num = 3,
++		.pin = 12,
++		.reg = 0x44,
++		.bit = 8,
++		.mask = 0x3
++	}, {
++		/* gpio3_b5_sel */
++		.num = 3,
++		.pin = 13,
++		.reg = 0x44,
++		.bit = 10,
++		.mask = 0x3
++	}, {
++		/* gpio3_b6_sel */
++		.num = 3,
++		.pin = 14,
++		.reg = 0x44,
++		.bit = 12,
++		.mask = 0x3
++	}, {
++		/* gpio3_b7_sel */
++		.num = 3,
++		.pin = 15,
++		.reg = 0x44,
++		.bit = 14,
++		.mask = 0x3
+ 	},
+ };
+ 
+@@ -275,7 +320,7 @@ static struct rockchip_pin_bank rk3328_pin_banks[] = {
+ 	PIN_BANK_IOMUX_FLAGS(0, 32, "gpio0", 0, 0, 0, 0),
+ 	PIN_BANK_IOMUX_FLAGS(1, 32, "gpio1", 0, 0, 0, 0),
+ 	PIN_BANK_IOMUX_FLAGS(2, 32, "gpio2", 0,
+-			     IOMUX_WIDTH_3BIT,
++			     IOMUX_8WIDTH_2BIT,
+ 			     IOMUX_WIDTH_3BIT,
+ 			     0),
+ 	PIN_BANK_IOMUX_FLAGS(3, 32, "gpio3",
+-- 
+2.47.1
 
-I still don't fully understand what exactly are these tests testing or 
-whether they are even valid.
