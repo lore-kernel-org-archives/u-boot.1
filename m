@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28694E77198
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:34:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3D48E77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:34:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09C8280601;
-	Mon,  6 Jan 2025 15:33:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5B541805EA;
+	Mon,  6 Jan 2025 15:33:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nG1nbCHf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WyGTLnDj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C4A98060C; Mon,  6 Jan 2025 15:33:11 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 9028480600; Mon,  6 Jan 2025 15:33:12 +0100 (CET)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86591805FE
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27AC080601
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-844e1eb50e2so490887339f.0
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:07 -0800 (PST)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-3a8146a8ddaso53451045ab.1
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736173986; x=1736778786; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736173988; x=1736778788; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p0hergGCEE5V6dzTIbnTYSxZdoGl8Nt+tzXPRT8ckhw=;
- b=nG1nbCHfFVdEA3mL0jOml03Nw+B4252rdSLa3eZo/vPXB273KqvsUX2YidICONHk7m
- W5f+cKUzd8N3kkRD05Ic4hNJjVse7TgFHwVcm50cOhnpqJwaph9boRahmPIMLp7rEeyY
- cImT43eEB4Wt4naRpIsCSuY6HjhxIUTNpzrhk=
+ bh=po2aAfbffbEV82CCrdgF7VQpKG0lRJ9swXG8eu3xnYo=;
+ b=WyGTLnDjU5ql+X3jeVqnR7g925+p9YZXxs+Z6kD1AC4Ma1LYhCIJyxI5OI3W9OHhaj
+ gW1TJ/RjWsXysqhuhjXWkzqHBnEgTheI97LKztexx8cVUoYrOyYC5aniJdcXYC4sc14A
+ lZj88zdsxvhtaZ/3i8wBWpoWvh+ntL29w3npY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736173986; x=1736778786;
+ d=1e100.net; s=20230601; t=1736173988; x=1736778788;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p0hergGCEE5V6dzTIbnTYSxZdoGl8Nt+tzXPRT8ckhw=;
- b=v/ksLNSlMDTCLt640XdfQQJr2viGISNYKJwMvWFs6CCIuv6hxoqiGYW4zZipW78eOI
- o0Ft3koQEYc9l7Xgp4MIW+wy8Tr+668m+XNOsLCoaSqdpPC9VmTkHgrNHS2BxV0ljZDP
- XN9csfNsPjyAN8wKmEWnA+TyHwdygXsmUdWlReFZ/VyG3shk4pNnUKfKhN7lkjNXkyn7
- vIhEZbsdUyG5jTXXq0p55DcPNfShiP30KCx+cemr+a06mSdxI571Jhm/k+cobPFvIx6x
- 4wozQJ+NfcRB9y/LzxswFfxBLs174lX3ZIyPfxrARY1lhU4iRK1g4bzudKSvj57BicCT
- Gwlw==
-X-Gm-Message-State: AOJu0YxcNlcVoFvATFXVXau29b33w9Yu9rIXkOBkDT4kyTpFjkpzMtKz
- e0W2KxjgFvlR+WrOsLqg+Q3gcbUaZOgMxq3f7wLgHrDsXjsdk8fKZpXyUHuM3rRHtdoLFMHi9AM
+ bh=po2aAfbffbEV82CCrdgF7VQpKG0lRJ9swXG8eu3xnYo=;
+ b=Soe1r0xPzRK1R1kvFKf1/JkT0u3N/M30XuZel/LyMjtciOMc6O2+hT0722vDIbAJbv
+ tRo2hiIcDa+rui3Id5YYRkbWOFzCHlgjCmlc1MXQbVE4vABH+V0bR9ju7VLjUjRsGlY1
+ WrCuZztoZCudsMEHQUG8QbdlSbyQXWmXymuQwtfakyB2W+fNzBJf46Un+aedl3I66bZz
+ JoneAgRDophvA7SOSBK2SOS8yFcTsXGXV78hEMZviKD+SGANj6h2TI7jtMYU+XxMaqGR
+ QdqZh/5c4mVzA+9ho9tnAKPhy/t4OxjksQp5px/rNUjYDtIwlBnzt3xamIHtVYHN4aeq
+ dBVA==
+X-Gm-Message-State: AOJu0Yw7XmH9owcA4qM00y/ybM4e4V9GNg4XOa45bHcK9FrzTrPZ+LGH
+ Bs/bFHNR24y03gXcfZBaSKjH4AWVOkmfF+EalzDEEbCM9563BYvF1GK7aRRV63HUc1coEW0tMo0
  =
-X-Gm-Gg: ASbGncs4K5Ds5Od/ojOij3rtBLyNc6HXvp1G+S0N8RmNREqgqrh2Mzf/DsEJsDnFlUx
- FI0qLXoFT1coWHwk3oNAoJ+foacmHOaHjXYepR2DkbXP9wrCoWy8DNWDu2j3HqQgIKD/gJmzJys
- TCqvuFeWpNy0aQcyi1dkI2DoBHSDv1VdANP6eNYdgqgvfsM2YS6+V/iF3Zdb0W8+1eu7BkJRIaR
- vMY2IGHEUcgEibNKZNj2Q5WjwBsinKUgqnpHJtBEuVG3Mg8498y2zTa0Y/JT1BSfAKmDruxm07G
- sFrUS7x+IG+8iehbjQ==
-X-Google-Smtp-Source: AGHT+IG7LoAsoaAxEtjwrycA/8gThC1HHB5BQGUDST1NFL3KVxqLB3oFM+DrnuBcGtjAx3OI4g67Sg==
-X-Received: by 2002:a05:6e02:3b87:b0:3a7:e86a:e812 with SMTP id
- e9e14a558f8ab-3c2d48a2f66mr420667625ab.17.1736173985393; 
- Mon, 06 Jan 2025 06:33:05 -0800 (PST)
+X-Gm-Gg: ASbGncsSaEHJola+4rQZg28LQmjFRzvsoxQjfnqflYw7cpciv1qoZQTK3CyOqbIXx2f
+ 9+OUsqLskHfkvgQobcsEoYY1swQJZdWilnFYc1TSnyMZnPoF7XrGfPNCLeJ/tue0JHUED0EA6+S
+ tkj8G3/2c+r108v3oQuRza3P6ow4psSEIhgUhRHvC1T0Wg85s779Icpz/1FVa4SmhD3a4xE8kkg
+ /gkrplgp4cgFe1pI+7AqiwCEfDmHkbKJbZ45WESGI6NJH4Ht2EJuu9Gwks2TyilwIsWtAxTN1px
+ PcW+2VLQUzRHzVfobg==
+X-Google-Smtp-Source: AGHT+IHeBfWNa8YWlns5g1VRdyK7z1pD5JWlSDslr8MCfJ+/6nKvcPKP7B6C/TjCDAG+v9gdaYpskw==
+X-Received: by 2002:a05:6e02:3042:b0:3a7:fd5a:8b8a with SMTP id
+ e9e14a558f8ab-3c2d2d4f1abmr551124175ab.12.1736173988359; 
+ Mon, 06 Jan 2025 06:33:08 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.33.02
+ e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.33.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 06:33:03 -0800 (PST)
+ Mon, 06 Jan 2025 06:33:06 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 10/33] x86: Enable meminfo command
-Date: Mon,  6 Jan 2025 07:32:06 -0700
-Message-Id: <20250106143229.3023771-11-sjg@chromium.org>
+Subject: [PATCH v2 11/33] x86: Show the timestamp counter with bdinfo
+Date: Mon,  6 Jan 2025 07:32:07 -0700
+Message-Id: <20250106143229.3023771-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250106143229.3023771-1-sjg@chromium.org>
 References: <20250106143229.3023771-1-sjg@chromium.org>
@@ -100,40 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable this command for x86 boards as it is quite useful for seeing
-where memory is.
+Add a line to the 'bdinfo' command which shows the current value of the
+TSC.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Fix 'Emable' typo
-- Enable the command in cmd/Kconfig instead
+(no changes since v1)
 
- cmd/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/x86/lib/bdinfo.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 8fc76778d87..64c6e980a09 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -905,14 +905,14 @@ config MD5SUM_VERIFY
+diff --git a/arch/x86/lib/bdinfo.c b/arch/x86/lib/bdinfo.c
+index bd2cf0b9fcb..4b016d4a0fc 100644
+--- a/arch/x86/lib/bdinfo.c
++++ b/arch/x86/lib/bdinfo.c
+@@ -33,6 +33,8 @@ void arch_print_bdinfo(void)
+ 	bdinfo_print_num_l(" high start", gd->arch.table_start_high);
+ 	bdinfo_print_num_l(" high end", gd->arch.table_end_high);
  
- config CMD_MEMINFO
- 	bool "meminfo"
--	default y if SANDBOX
-+	default y if SANDBOX || X86
- 	help
- 	  Display memory information.
- 
- config CMD_MEMINFO_MAP
- 	bool "- with memory map"
- 	depends on CMD_MEMINFO
--	default y if SANDBOX
-+	default y if SANDBOX || X86
- 	help
- 	  Shows a memory map, in addition to just the DRAM size. This allows
- 	  seeing where U-Boot's memory area is, at the top of DRAM, as well as
++	bdinfo_print_num_ll("tsc", rdtsc());
++
+ 	if (IS_ENABLED(CONFIG_EFI_STUB))
+ 		efi_show_bdinfo();
+ }
 -- 
 2.34.1
 
