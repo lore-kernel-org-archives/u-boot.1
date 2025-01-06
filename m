@@ -4,67 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB02E77199
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 15:12:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C4FEE77198
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 15:39:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66EC8801E8;
-	Mon,  6 Jan 2025 16:12:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 11C77801E8;
+	Mon,  6 Jan 2025 16:39:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VkHOm1z4";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1736177951;
+	bh=pcMgjTutLJHcvJJhcrdFSmyhPtJZrXSNWds/I7UqR3c=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=zGPj0y6RNIc3IOHRhvIa1Pgi2VPNYHWCHy+K/HD61DUsWZ1eRR1+HMCz6+EVQnhXu
+	 N7YP/LgcLbqHu3RGgbSAzXSMbNp/2qsYC/UiMJH2s+3e78MWDqmfcRjUQ7aqZ5GSqC
+	 7N7/4YldgPpi249UYgIvcMD0DMUqQkJ8jGtuwtFRzwvM+cFuACEoncUStKaaIBIwbh
+	 y64m9geFu8UXBwRthOZPjinINnUU6nP3CNORczsBq8laElaGOtyBTqCfgm5zLZOGcH
+	 bLwYRKHvJwtqoiufCVYis4RMqQDlHxna16tKfS921W2w0K1OTDZj5T6qBwAlWy6/o6
+	 SE9Uw7f6HBDMw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 994768036B; Mon,  6 Jan 2025 16:12:44 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05FF5801C3
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 16:12:41 +0100 (CET)
+ id 3D0CB8021A; Mon,  6 Jan 2025 16:39:09 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C07DA801C3
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 16:39:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 506FCd3S2717864
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 6 Jan 2025 09:12:39 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736176359;
- bh=FxGaUE5IV/f8CuRot6Em/dW9cx9Q5HNoQEefsfUYpjg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=VkHOm1z45yMd8KaK6jnhEUvuSwEbp51lBjzsEb94D7JzGSm4I7bXohwTavq20SkK1
- zv67MdVvIEX4QE1DDoh1NB6xnVPwEPczhUyayZ/fV5vt5evsYOHrn+uKTnT7f5Tdsk
- 5Jfg2MceX5f3XMmh903Kag0gs2GDOs71mvdiVozE=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 506FCdul068770;
- Mon, 6 Jan 2025 09:12:39 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
- Jan 2025 09:12:39 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 6 Jan 2025 09:12:39 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 506FCclk127297;
- Mon, 6 Jan 2025 09:12:38 -0600
-Message-ID: <19b20f10-9718-4c37-bea9-bd36bfff0125@ti.com>
-Date: Mon, 6 Jan 2025 09:12:38 -0600
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="XnE+iASx"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id C69FC104811D1; Mon,  6 Jan 2025 16:39:02 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1736177945;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pcMgjTutLJHcvJJhcrdFSmyhPtJZrXSNWds/I7UqR3c=;
+ b=XnE+iASx5tJSo2njpFWnf0xwcyYcqoXQi/298uHL/mzGiADPwoVZwU2p109Hov52r6QizL
+ aFs81HxT+Ohgr4Nfo5B3Jutn7v+QUjcgBZfBEypwxuIGk/zBZ3aSbgaDAVwyB7RnTrKReo
+ t9KuaQEbKD2kPR2J0b8pRWze1UjRVz32XxQTiuc22JZ8+hv+sAuNFfj2p+MjU88a98NsH8
+ 0QbYGyETYbtn0OulCHWJm7u9OHzSl1QIUnsEsd6febvGtO8lkIoOSsx/0aFI/F8OLaLJp8
+ DrIANYkDKXN57sJ4t6KxOnC4pM970Jck+7SUROd8aOp9OPLNLZMQm7HNGIhXZQ==
+Message-ID: <64b317fe-d5a2-4bc7-8c8a-fa608bccfa0b@denx.de>
+Date: Mon, 6 Jan 2025 16:37:36 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arch: arm: mach-k3: j784s4_init: Set CTRL_MMR for
- AUDIO_REFCLK1 clk_sel
-To: Jayesh Choudhary <j-choudhary@ti.com>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>
-CC: <n-francis@ti.com>, <m-chawdhry@ti.com>, <sabiya.d@ti.com>
-References: <20250106100400.93799-1-j-choudhary@ti.com>
+Subject: Re: [PATCH v3 7/8] usb: dwc2: Unify flush and reset logic with v4.20a
+ support
+To: Junhui Liu <junhui.liu@pigmoral.tech>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, seashell11234455@gmail.com, pbrobinson@gmail.com
+References: <18180fa5d7b286a0.3a5aa491c048ad05.6820f85a01d7931@Jude-Air.local>
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250106100400.93799-1-j-choudhary@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <18180fa5d7b286a0.3a5aa491c048ad05.6820f85a01d7931@Jude-Air.local>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,50 +84,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/6/25 4:04 AM, Jayesh Choudhary wrote:
-> The default value for the mux to select the parent clock,
-> AUDIO_REFCLK1_CTRL_CLK_SEL is '11111' (31) but the mux input for 31
-> is marked as 'Reserved' so the ti-sci-clk call for get-parent fails.
-> Mark it to a valid value, '11100' (28) for MAIN_PLL4_HSDIV2_CLKOUT
-> to get rid of the linux failures during boot-time like:
-
-So the default value of the mux isn't known by firmware? Sounds like
-a firmware issue..
-
-No issue with using the bootloader to making the hardware's default state
-more sane. Maybe just add a comment above the writel() line as right now
-this is just writing a magic value to a magic address.
-
-Andrew
-
-> "[    1.573193] ti-sci-clk 44083000.system-controller:clock-controller:
->   get-parent failed for dev=157, clk=34, ret=-19"
+On 1/6/25 10:14 AM, Junhui Liu wrote:
+> Hi Marek,
 > 
-> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
-> ---
->   arch/arm/mach-k3/j784s4/j784s4_init.c | 5 +++++
->   1 file changed, 5 insertions(+)
+> On 05/01/2025 20:19, Marek Vasut wrote:
+>> On 1/4/25 4:37 AM, Junhui Liu wrote:
+>>> From: Kongyang Liu <seashell11234455@gmail.com>
+>>>
+>>> This patch merges flush and reset logic for both host and gadget code
+>>> into a common set of functions, reducing duplication. It also adds support
+>>> for the updated reset logic to compatible with core version since v4.20a.
+>>>
+>>> This patch mainly refers to the patch in the kernel.
+>>> link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=65dc2e725286106f99c6f6b78e3d9c52c15f3a9c
+>>
+>> [...]
+>>
+>>> +++ b/drivers/usb/common/dwc2_core.c
+>>> @@ -0,0 +1,115 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/*
+>>> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+>>
+>> 2025 now .
 > 
-> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-> index 8a41cd3bb5..787cf6261e 100644
-> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-> @@ -23,6 +23,9 @@
->   
->   #define J784S4_MAX_DDR_CONTROLLERS	4
->   
-> +#define CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL	0x001082e4
-> +#define AUDIO_REFCLK1_DEFAULT			0x1c
-> +
->   /* NAVSS North Bridge (NB) */
->   #define NAVSS0_NBSS_NB0_CFG_MMRS		0x03702000
->   #define NAVSS0_NBSS_NB1_CFG_MMRS		0x03703000
-> @@ -201,6 +204,8 @@ void k3_spl_init(void)
->   		remove_fwl_configs(navss_cbass0_fwls, ARRAY_SIZE(navss_cbass0_fwls));
->   	}
->   
-> +	writel(AUDIO_REFCLK1_DEFAULT, (uintptr_t)CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL);
-> +
->   	/* Output System Firmware version info */
->   	k3_sysfw_print_ver();
->   }
+> You're right. It should be 2024-2025.
+> 
+>>
+>> [...]
+>>
+>>> +int dwc2_flush_rx_fifo(struct dwc2_core_regs *regs)
+>>> +{
+>>> +	int ret;
+>>> +
+>>> +	log_debug("Flush Rx FIFO\n");
+>>> +
+>>> +	/* Wait for AHB master IDLE state */
+>>> +	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE, true, 1000, false);
+>>> +	if (ret) {
+>>> +		log_warning("%s: Waiting for GRSTCTL_AHBIDLE timeout\n", __func__);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	writel(GRSTCTL_RXFFLSH, &regs->global_regs.grstctl);
+>>> +
+>>> +	ret = wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_RXFFLSH, false, 1000, false);
+>>> +	if (ret) {
+>>> +		log_warning("%s: Waiting for GRSTCTL_RXFFLSH timeout\n", __func__);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	/* Wait for at least 3 PHY Clocks */
+>>> +	udelay(1);
+>> Shouldn't this delay be derived from the PHY clock frequency somehow ?
+>> Are we sure 1us is always sufficient ?
+> 
+> According to the datasheet, the PHY clock can be selected to 6/30/48/60
+> MHz depending on the speed mode. And 1us is sufficient even for 6MHz
+> (twice the 3 PHY clock at 6MHz), so I think 1us is acceptable here.
+
+Please add a code comment like that ^ .
+
+> If we want to derive the delay dynamically from the PHY clock frequency,
+> we would need to read the PHY clock and speed mode cfg from the register
+> and calculate the appropriate delay. This would add complexity to the
+> code. In the current situation, a fixed delay of 1 us is sufficient for
+> all supported clock frequencies and keeps the implementation simpler.
+Thanks for the clarification, add a code comment and that is all fine.
