@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 366A8E77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:36:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BD4E77198
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 14:36:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E22CA8070C;
-	Mon,  6 Jan 2025 15:33:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9238A805E1;
+	Mon,  6 Jan 2025 15:33:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BVQHCKVf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F3eeXkd+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29729806EB; Mon,  6 Jan 2025 15:33:48 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id C67F0805F0; Mon,  6 Jan 2025 15:33:52 +0100 (CET)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB3A78056D
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 13A9B80702
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 15:33:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3a7e108b491so127789295ab.3
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:45 -0800 (PST)
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-3a817ee9936so56072405ab.2
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 06:33:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736174024; x=1736778824; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736174027; x=1736778827; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=05oDa3rd73Sd61y5ErCw2hDVIcuFxQvmkw6lTP0K32k=;
- b=BVQHCKVf4TFKIJT8zcZpK8nwmBJMAAsJPVJan4QOT3uFjc6APaLL9zEM/KS2HCIQbS
- 8Twz+cbxMbLv+WKlZrimmfe0BMhKaG9oE2tctCS9CdngA+lcIUS6Q0T5ZMeefTuPL+hz
- T9ItZ4z1V4KCH/JGtlAa3VB5+4Dt28+7D5koo=
+ bh=99uYeI9uf1pRbVP7B5riPESim7hLJ3AZvaxNGre8ezM=;
+ b=F3eeXkd+bO2C+YJ50ZorjIxsY7vl4p2pNkgUhZb3+91lOwrFKlH3CNpMkO4P9huX/A
+ GdOSkY9RNH5rUF9DK5PbkRXdo4b6wdUUTrDRME9FXtsAx2mFX7gusjiJfCZnlqtQiF4C
+ B02v7Peyeny3DOAwbh2UPKvYMltqpqKWqZOTs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736174024; x=1736778824;
+ d=1e100.net; s=20230601; t=1736174027; x=1736778827;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=05oDa3rd73Sd61y5ErCw2hDVIcuFxQvmkw6lTP0K32k=;
- b=NK+LineqCoBZkssy/ORA6iCibnZC8cjZQmO6EpNJIFhxe5Moxd6ahXuJnB/LDPlgVR
- Kk0fqXJwxjzqyQCkBdA+2IAHRzzeR2IkeGv++V0/2+vg876IXpBfOMvmgHYfiQA3xSz+
- nAXKF64waam0avLHvBjQpMoM+FMsK6O3duDzYxRU3X8gwJwsSLei3RDJmZXtSXBZRbdv
- co1wUcp660KXkEeZg0FL1W7x0QzDFO1zezTMnsOu1FSoXTPtjvj5r9kvhZ4BFuBP2tVU
- DPEJbU19PjR05MeIJlzAWThF3WIJ0ZLhfmYX8CoOBTC9oMjfNZbkVXUmwt358ZQ2IO8N
- z6Aw==
-X-Gm-Message-State: AOJu0Yy9Nm//GPeMVMkNRnccXFuNRqpyecsfD27s6w9Lqe++2mwbZIm2
- 899vX89G624s0y4NricuYch2aNgaeB3KrjwA/6coIfdtygbrSd4z104UaG5sjrc23O5GH8HYs+c
+ bh=99uYeI9uf1pRbVP7B5riPESim7hLJ3AZvaxNGre8ezM=;
+ b=GVQe2ciEF6+gK836IigWRrxHaGBHzUrEkPNT80hy1FfcxG3myehHgQMMi9QWqDiESy
+ BjWIJaFwpn+TTmdliodGHmsItxO1D3HlI2GKfCQoRbnJstSZaYhZPASW2iyUkdzq6aJX
+ dnuaURLs+zKbp1zMazNNu1fe6cGI7+4T2Yi7DH0Yhwys9Z7f2yGRTDnGR7qTHVf7CqiL
+ Yi6WzRh+KM4A1dyKP/aWGOJ1kmbctsPFrWDN4W+NIl73ubPQ1xRVP4HQ5hWUTPoQXlx7
+ HmWAoaQ4Nx3vufejRcPaLJbRP1H51dxpjYfbdQiXUsdUD5H9k0JbjyUSkleVpFcxp5F7
+ R8mg==
+X-Gm-Message-State: AOJu0YwO/3RgCUtcTj+fAlT8S+gFQHxkOCZC5Bb/m3IlZh8tvEBJ2qQX
+ moTWCjYKCgRdkHzEVTOj3+RkQ8+AqeTD/yquAosPl7ZmTqUxGAF7C3i1zvo3KXXiC2S+qi2wo8w
  =
-X-Gm-Gg: ASbGncv63Ll+tcb+CQFg6qBVzyixEw4sxlr77vvTID8UYy1I+RuwtS3VPo2uUw653Ot
- 3gr1zr+DrmvQUBd20UBwm9CKB72gi08dQpPDipr6X6LDHYWRjMa9NbqCMSuInm/hLDkS2UMOLSN
- gPZwHfQ/isFai2+JWz1C8Wn2ZW2rtsxHQitBEQUCmv3WVsMxNggKQQNsKhgcir4hXy6xTik/u5J
- FzhjqlQv+pAv/YA59saKqfZs5kg1pTfQACueNmBPwN2FpGy97f2/xkk8HnQ2cIKcWizMR3cDoqL
- KxNCU7mJ641+Owqe9g==
-X-Google-Smtp-Source: AGHT+IHeKznBJZoaeEmkhKoaLl+0aRuR8tr9LAbcrv9ek0tTeDAi6EcV3pZ6vTPZ0bj8pkQ9swOoyw==
-X-Received: by 2002:a05:6e02:174d:b0:3a7:dd45:bca1 with SMTP id
- e9e14a558f8ab-3c2d514f31bmr430113545ab.17.1736174024087; 
- Mon, 06 Jan 2025 06:33:44 -0800 (PST)
+X-Gm-Gg: ASbGncsiOvfoKAiA+zjOcG5wrSseqyn0xvtYnxSrMV2J3j7+n4n4Bo5/IsAEnFvhBFY
+ C1vQ0B4FJd2od+6mEOnXF3MU1OkKAu0vx9P28yIO6KbjYppslq7pNxTNAYHrnAzQ/FjUmA6g3p8
+ QNLmGJcnG0pZuroiMqqDFBojUPt3ty5uFuWhYTmRI3uAaKw+7krkQ+ZtPVX91OXZe//f2ZQql3v
+ Yfs2lp5AtnCUtIkxMQ3XHAp+4evwGiQMLfKFMM09YumSffp6yiPPZCv+ZD7rtNtEfdJex87Ztxy
+ 7q5zBQOX7OxeZyBU1A==
+X-Google-Smtp-Source: AGHT+IEWOS0rHvnyeO45uXjjiNVr84pss2SBdKprtFYgbCUDVxt63Lz2SQTm7y0WpEx0pSCy8jF5Kg==
+X-Received: by 2002:a05:6e02:219c:b0:3ab:4bea:df97 with SMTP id
+ e9e14a558f8ab-3c2d591a3b4mr556369805ab.23.1736174027004; 
+ Mon, 06 Jan 2025 06:33:47 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.33.41
+ e9e14a558f8ab-3c0e47d6ef2sm97200805ab.78.2025.01.06.06.33.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 06:33:42 -0800 (PST)
+ Mon, 06 Jan 2025 06:33:45 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Devarsh Thakkar <devarsht@ti.com>,
+ Heiko Schocher <hs@denx.de>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Peter Robinson <pbrobinson@gmail.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 23/33] x86: Create more space for SPL with qemu-x86_64
-Date: Mon,  6 Jan 2025 07:32:19 -0700
-Message-Id: <20250106143229.3023771-24-sjg@chromium.org>
+Subject: [PATCH v2 24/33] pci: video: Set up the pixel-format field
+Date: Mon,  6 Jan 2025 07:32:20 -0700
+Message-Id: <20250106143229.3023771-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250106143229.3023771-1-sjg@chromium.org>
 References: <20250106143229.3023771-1-sjg@chromium.org>
@@ -94,30 +98,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The space here is quite tight and there is plenty of room in the ROM.
-Move SPL earlier to allow for expansion.
+Add this information to the handoff structure so that it is available to
+U-Boot proper. Update bochs and the video handoff.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- configs/qemu-x86_64_defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/pci/pci_rom.c        | 3 +++
+ drivers/video/bochs.c        | 1 +
+ drivers/video/video-uclass.c | 1 +
+ include/video.h              | 2 ++
+ 4 files changed, 7 insertions(+)
 
-diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-index 3c0fc7a34fe..39375c76227 100644
---- a/configs/qemu-x86_64_defconfig
-+++ b/configs/qemu-x86_64_defconfig
-@@ -7,7 +7,7 @@ CONFIG_MAX_CPUS=2
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="qemu-x86_i440fx"
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
--CONFIG_SPL_TEXT_BASE=0xfffd4000
-+CONFIG_SPL_TEXT_BASE=0xfffd0000
- CONFIG_DEBUG_UART_BASE=0x3f8
- CONFIG_DEBUG_UART_CLOCK=1843200
- CONFIG_X86_RUN_64BIT=y
+diff --git a/drivers/pci/pci_rom.c b/drivers/pci/pci_rom.c
+index 2753df275ca..3697ad00be2 100644
+--- a/drivers/pci/pci_rom.c
++++ b/drivers/pci/pci_rom.c
+@@ -347,6 +347,7 @@ int vesa_setup_video_priv(struct vesa_mode_info *vesa, u64 fb,
+ 	case 32:
+ 	case 24:
+ 		uc_priv->bpix = VIDEO_BPP32;
++		uc_priv->format = VIDEO_X8B8G8R8;
+ 		break;
+ 	case 16:
+ 		uc_priv->bpix = VIDEO_BPP16;
+@@ -392,6 +393,7 @@ int vesa_setup_video(struct udevice *dev, int (*int15_handler)(void))
+ 		uc_priv->ysize = ho->ysize;
+ 		uc_priv->line_length = ho->line_length;
+ 		uc_priv->bpix = ho->bpix;
++		uc_priv->format = ho->format;
+ 	} else {
+ 		bootstage_start(BOOTSTAGE_ID_ACCUM_LCD, "vesa display");
+ 		ret = dm_pci_run_vga_bios(dev, int15_handler,
+@@ -438,6 +440,7 @@ int vesa_setup_video(struct udevice *dev, int (*int15_handler)(void))
+ 		ho->ysize = uc_priv->ysize;
+ 		ho->line_length = uc_priv->line_length;
+ 		ho->bpix = uc_priv->bpix;
++		ho->format = uc_priv->format;
+ 	}
+ 
+ 	return 0;
+diff --git a/drivers/video/bochs.c b/drivers/video/bochs.c
+index 00e673a4db0..c34bc23f274 100644
+--- a/drivers/video/bochs.c
++++ b/drivers/video/bochs.c
+@@ -64,6 +64,7 @@ static int bochs_init_fb(struct udevice *dev)
+ 	uc_priv->xsize = xsize;
+ 	uc_priv->ysize = ysize;
+ 	uc_priv->bpix = VIDEO_BPP32;
++	uc_priv->format = VIDEO_X8B8G8R8;
+ 
+ 	/* setup video mode */
+ 	bochs_write(mmio, INDEX_ENABLE,  0);
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index 407fb9fbe20..1e385f12f8e 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -616,6 +616,7 @@ static int video_post_probe(struct udevice *dev)
+ 		ho->ysize = priv->ysize;
+ 		ho->line_length = priv->line_length;
+ 		ho->bpix = priv->bpix;
++		ho->format = priv->format;
+ 	}
+ 
+ 	if (IS_ENABLED(CONFIG_VIDEO_COPY) && plat->copy_base)
+diff --git a/include/video.h b/include/video.h
+index 0d7b0d27e25..2fe2f73a865 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -161,6 +161,7 @@ struct video_ops {
+  *		set by the driver, but if not, the uclass will set it after
+  *		probing
+  * @bpix:	Encoded bits per pixel (enum video_log2_bpp)
++ * @format:	Video format (enum video_format)
+  */
+ struct video_handoff {
+ 	u64 fb;
+@@ -169,6 +170,7 @@ struct video_handoff {
+ 	u16 ysize;
+ 	u32 line_length;
+ 	u8 bpix;
++	u8 format;
+ };
+ 
+ /** enum colour_idx - the 16 colors supported by consoles */
 -- 
 2.34.1
 
