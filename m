@@ -4,82 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66848E77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:14:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5196CE77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:21:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DA038036B;
-	Mon,  6 Jan 2025 10:14:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BCBFC80137;
+	Mon,  6 Jan 2025 10:21:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sKwmR79I";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vSqkwzJa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19D088036B; Mon,  6 Jan 2025 10:14:42 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5D739801DE; Mon,  6 Jan 2025 10:21:01 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::612])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82E088007D
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:14:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E3E968007D
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:20:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d90a5581fcso6259142a12.1
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 01:14:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736154879; x=1736759679; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fekvTXT6KxcuhA9wVe4hy47NROcJbszbpXrSKT56tXg=;
- b=sKwmR79Iaqfr+gSuMLro3507JpBvi7JoGx7OVDo1gbrQblStsKwg9z1EVItkMRsnLL
- 65XgSauMqlwx+s5WZhlO1mW4oOdlXbpK9xAQkvZGLqAdYHD2ktGCVaCVHvj3CAz8oJtA
- tJBxLHHVlP6e8ICowsUPHxCaoZspNTnXmS5F/VWS+kBrg7EeerNMOaDHONU63TNC1JM3
- n0LZUOdzBp+0FNQJPDqW1J5S5kuP3/GN+ldLpw5CrUBYTW40Rn9iPkkgFrdhJ8vxJ0cM
- AnWYcbk4SQR1UiVf6s06G1uTch/fN1K3PZGYiqo3q0jp3rYcwJ5R/Hz42yd1gZahPOtT
- SmRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736154879; x=1736759679;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fekvTXT6KxcuhA9wVe4hy47NROcJbszbpXrSKT56tXg=;
- b=l7sHVc84jL9cRiU3xNgBPyvNNo79pXNybYvIOR+FYxLhAVDQ15+BF+FSWG5gnGZZJw
- PKKny6zU7s6y9sR5DjU62VtIaNdu/ivaa1ZBK/UG1HTpI6rxb/VQ13bXcF9ls3hccjuK
- tm9mCbMln9xbxwnZOuB4jWKZ4UEmtBKnriLkhv4i3H7c96mpt7vw+x66ycnOsj/XDCjr
- zEfMQLc+T9kaqdE/+daKCSX7vlUsGLoT8Q/CwMksqo6voMiOBsXI3vsNLU2I4ZduMPr8
- x9UUwaMsM/BoAaWswacG5EzzjmWBByOG4swtENFEhofQ10chf5sC+DKlzDUXLLkoQ+Iu
- VEBw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUTR19kJY2SXFfmCmHPdc64XS+N15ZPprZC0MJjDy5+hXmYpARPYuVHj1jGN77iAnhH3bDAlkg=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywp19VUBjNG2RqTjiXPB1DL7azSncnzsZryzfwhknYtBCcBHmvA
- fujlvjOzMSPNEeIGKu6qjO/04bBWxYHF6nZ8h0gg7ttyCTLj9RmSeraBpfxqXsyS8yxzFQNKrqF
- 15j0CxMirltz1Il2SP/pxYFIy+d4ZkYFdipdeMA==
-X-Gm-Gg: ASbGncuPzLax3zhJEikq/vY3H4+A9W4n+r+t+Y05yi0d3EKtPqgadF3V3Q2h0uObQO0
- fb00p+mUFjGB2k+LYjIiCjcrcx7qUv04Rimp5Obc=
-X-Google-Smtp-Source: AGHT+IFB4N6wgROQ2PeW9EmJ1Goisk4DkJHVY/EnexRwE0uHEIqxEK5ZBfL1aXCNY/+cPd6QZPTC+XLCtb7kWA+nKqE=
-X-Received: by 2002:a05:6402:34cc:b0:5d0:cfad:f6b with SMTP id
- 4fb4d7f45d1cf-5d81dd8b175mr56518277a12.11.1736154878888; Mon, 06 Jan 2025
- 01:14:38 -0800 (PST)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xFdTHAMqTTZ3TKYavt/HtT+yo9U+iL2UNHLgcG/TlQRmOq192GXkMy34YIyfWI004b9aVRZkTpUzsGtOECR7uNi+CnFLyDpZbt5633R3kGxlMIbwQrm5iC+kPK/E7VZaSeYQ9RyUBC7Z0MsbFPFwxuISsz6eTR/F0+IAu8c0oDdsWNXF61/RWSJ4E15bYdcyZcgM7OqpCsHfXg4P2+Hd39eIvQBaYmaGoJX4xQFTyibDUf9NX/b7D6fYUaYDk6u74c/YznSJgj6Gc5Z6BDBHd5O3MWh8wrS9GUnWt7lCLzQrpGiWMBfye1Qnjg7m2E2jc++7aLb33DB2fMviA5bNRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AF/ataaH5zYp3RurHHm7vrLgX2TW00yy1TjC47Pfwvg=;
+ b=nwfp7ZzBNcq+ZpvROKis5Uh3+tErrk9ShtmB8/rlWR8FXrMs4lT+4L8bn6F0AKgKYsSwUhCGTx3AIep7XUJ8n3rlbBjf4CxwaAy8HKZbGSgz5wK2vp6cyu0sZgQfmCgMLv6gYyOoFFABU9mqHTajK9/m2jH+qRw+QVIf+fJWzloMdSmXVTqVk3/oTqIOC5wjXCbWGZCDg+wzPZhIXx1A5tVLPOAub4dR/VOcoSPr40FXNKPAEAQJh7tUCsZixGGl+nVum5Ej79zNZw1LUT3Hi/FTyuecbAKVvgeCFKMNZ/vFO4qZHO8hKravG+abwQcL+H9ktzs3AUSAQn0zTERmyA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AF/ataaH5zYp3RurHHm7vrLgX2TW00yy1TjC47Pfwvg=;
+ b=vSqkwzJaythK2hxohNeyCaZNMC+nKFgvUcmTvp0dnxxI4D5/e812C2jiI7wuLhzKyce4Xd564Rgw5OFHkkukbN1usMMnXM7vrQSlLJ66L0g+KzavGJLnI5UkxfBiyNGUZX64siQr2ZcJLhBgnfcPfggOla6aPVfILC9WfjKs4h4=
+Received: from BY3PR05CA0022.namprd05.prod.outlook.com (2603:10b6:a03:254::27)
+ by PH7PR12MB7257.namprd12.prod.outlook.com (2603:10b6:510:205::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.17; Mon, 6 Jan
+ 2025 09:20:47 +0000
+Received: from SJ1PEPF00001CE3.namprd05.prod.outlook.com
+ (2603:10b6:a03:254:cafe::e7) by BY3PR05CA0022.outlook.office365.com
+ (2603:10b6:a03:254::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8335.9 via Frontend Transport; Mon, 6
+ Jan 2025 09:20:47 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF00001CE3.mail.protection.outlook.com (10.167.242.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8335.7 via Frontend Transport; Mon, 6 Jan 2025 09:20:47 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 6 Jan
+ 2025 03:20:43 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] arm64: versal: RO multi_boot register in non JTAG bootmode
+Date: Mon, 6 Jan 2025 10:20:40 +0100
+Message-ID: <484b9cafc45e72308a1a29a3ab772020f96784cc.1736155238.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
- <20241203163605.1482152-5-sughosh.ganu@linaro.org>
- <a6c7b22a-290c-44ee-acab-58409e675bc7@gmx.de>
-In-Reply-To: <a6c7b22a-290c-44ee-acab-58409e675bc7@gmx.de>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 6 Jan 2025 14:44:27 +0530
-Message-ID: <CADg8p94iog+=eNceZxYAH4CXcAC0vev5Eg568Jvf5FFXReHALA@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] efi: add helper functions to insert pmem node for
- DT fixup
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Anton Antonov <Anton.Antonov@arm.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1799; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=ygT1HTFzpt4zwboKulylHyqJfwWzWTcNZzPb7R6ZGoA=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvTqBRk6LIL95hs0Q27f4AjYN+9z89OpAkvjxf59qb//5
+ lqCwJH8jlgWBkEmBlkxRRZpmytn9lbOmCJ88bAczBxWJpAhDFycAjARseMM8xMLTrgKBfLxZZWl
+ s05l1+LMy7TwYJjvevx/7GGFK4GzHSp5F63YUrRwlushAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE3:EE_|PH7PR12MB7257:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9fa5957f-3a70-425e-9e78-08dd2e3367bb
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ehk3ljQBBC2DMdONyiTdkmzIOAF2d/YYGwEmrBWkh/BudwG/KeKOqqgwx+c2?=
+ =?us-ascii?Q?0WKS5ch3tNAlmS7CkXYTFe6RtJ2y3g3Vx5hxIP85WWnjd/zX/7shXtJokaGY?=
+ =?us-ascii?Q?5KqrmHErk9iWMdpyfxByyJT9PmepZU77aDE5mXRjvDW6HVFdGd7JtfAiyl5j?=
+ =?us-ascii?Q?nctBCQFabKFUdQ6Jodfou9cx0LSzoJ7kfnfqQApTcSdJ1sdsgvjs1fXJS+1w?=
+ =?us-ascii?Q?//4W64wy4YP00Js8uywuDE2RXSrC3v/7bEoqvB69LcznTQLge72DQxIfmSvW?=
+ =?us-ascii?Q?UF1+PwpFg8dbPO0m9jxuJfu5CPUnZchjhquwcrx+OdQxT7gKrzaT6lC+4puH?=
+ =?us-ascii?Q?diyPv9jO/CBPffHwjeP5SmRiG1PsBjEsrfiZIEtrVb2b5gL8GBlIHc6lO0YQ?=
+ =?us-ascii?Q?av7ih/z5LqFlNf5T7eAoih7fmUrSSPR/O+7ojBezOOgHqDrtSNQ1t43MQy9/?=
+ =?us-ascii?Q?h4DvxB3Be4IbhPOBIvNIbmrm+pO42VOwc2JRWl8AUML9GB2S0yMi/VvCLWXv?=
+ =?us-ascii?Q?A3J3Y6ekuxGCSi+P/ie8s9z1Yhj4SurtvarSD9Cj03WRHWZHeGE18RKrAAra?=
+ =?us-ascii?Q?lCZ7iXexgR3WomWO5mx0LH/yYv15mzxbdJHdQHmOEFmSumV+MJOILaKWAMCc?=
+ =?us-ascii?Q?zOvIw3wW527yoRicGdCbRjaHPedJ2nzJhkIhvDgLrt8VF7JtL50m2m5gVwdw?=
+ =?us-ascii?Q?8YTAI37niJAfNo/lRlUL2UD6hLXPSYthK8zFIJyEM9j+2XTq0QzvyqnY8+2N?=
+ =?us-ascii?Q?yhurXkNOWZVc3SDwRddvo2TFI7Pcqza0kw1cCWCiy8RZCIcsSvn+toKFvA+L?=
+ =?us-ascii?Q?xW4Kj2fao3qOne5k1DV/c67HAqAAN2KXR4XFEyIL7EDlL2YCQfIz9pV9pidw?=
+ =?us-ascii?Q?8nhFlQhkUdkYDuj6tYRxobsfj5K6YSMoO+NLDwbQKpNG53ky9v29RkBcktF0?=
+ =?us-ascii?Q?bWMLpHzHI3zexgnG9h8YzFyikNrLt+i1lg1zwGxb4uXXTjcrW9tpXfkBbG7Q?=
+ =?us-ascii?Q?I1giMpGzTMqG7VJysABKoz1nZPpmdb1NfAe+gvs1qKxF2ONvYfKN6NDzv2gQ?=
+ =?us-ascii?Q?xiGCh93FDDv4czL3S3BjGEJ0Z0F0mCgci4jJs7ioYMw1mdg/TwuM/3ldAkhI?=
+ =?us-ascii?Q?IkgfP4yEWX42iP/d3ukTos6jED9sQivHethhqH13ljP1+PsJowXKhr0qfdkf?=
+ =?us-ascii?Q?8F7YGJ9XoP2H2UnstdFFYjFdv4kCG8G5cAQWouyMxQ6MGa4ga+Jb7Nha7Tma?=
+ =?us-ascii?Q?4L6wX+tO7hkbM+/MdhsgDo3qkFDY6YsT9ZB84Qj5emp1aoezCOSbxGxBVj4A?=
+ =?us-ascii?Q?Dq8S2mHIYxAjdBaKcDblfvFsUNbGo7vRomHcRz+92OdvKQkJqHLM/z0fZwHc?=
+ =?us-ascii?Q?gWHbq7FcMUnMog89V0DJph93308eHJq/mrzZwxPBGsBCvqBlHph654T+3FM3?=
+ =?us-ascii?Q?4LLwVka66RqyDkgsHh5Xo2zmWM+MrFJxB+BmAu4+NztJ5cmPrZzoqycXvCQY?=
+ =?us-ascii?Q?xY9tk/E/F4Kp0GE=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2025 09:20:47.3474 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9fa5957f-3a70-425e-9e78-08dd2e3367bb
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CE3.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7257
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,191 +151,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 3 Jan 2025 at 22:31, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 03.12.24 17:36, Sughosh Ganu wrote:
-> > The EFI HTTP boot puts the iso installer image at some location in
-> > memory which needs to be reserved in the devicetree as persistent
-> > memory (pmem). Add helper functions which add this pmem node when the
-> > EFI_DT_FIXUP protocol's fixup callback is invoked.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V1:
-> > * Use log_err() to print the error message in image_setup_libfdt()
-> > * Remove "ERROR:" from the error print in image_setup_libfdt()
-> >
-> >   boot/image-fdt.c             |  9 +++++++++
-> >   include/efi_loader.h         | 17 +++++++++++++++++
-> >   lib/efi_loader/efi_bootmgr.c | 21 +++++++++++++++++++++
-> >   lib/efi_loader/efi_helper.c  | 12 ++++++++++++
-> >   4 files changed, 59 insertions(+)
-> >
-> > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> > index 3d5b6f9e2dc..de479d3ffa0 100644
-> > --- a/boot/image-fdt.c
-> > +++ b/boot/image-fdt.c
-> > @@ -11,6 +11,7 @@
-> >   #include <command.h>
-> >   #include <fdt_support.h>
-> >   #include <fdtdec.h>
-> > +#include <efi_loader.h>
-> >   #include <env.h>
-> >   #include <errno.h>
-> >   #include <image.h>
-> > @@ -648,6 +649,14 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
-> >       if (!ft_verify_fdt(blob))
-> >               goto err;
-> >
-> > +     if (CONFIG_IS_ENABLED(EFI_HTTP_BOOT)) {
-> > +             fdt_ret = fdt_efi_pmem_setup(blob);
-> > +             if (fdt_ret) {
-> > +                     log_err("HTTP boot pmem fixup failed\n");
-> > +                     goto err;
-> > +             }
-> > +     }
-> > +
-> >       /* after here we are using a livetree */
-> >       if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
-> >               struct event_ft_fixup fixup;
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index 24e40799eee..87b9a6e4da0 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -748,6 +748,15 @@ bool efi_varname_is_load_option(u16 *var_name16, int *index);
-> >   efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
-> >                                   efi_guid_t *guid);
-> >
-> > +/**
-> > + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-> > + *
-> > + * @fdt:     Pointer to the devicetree
-> > + *
-> > + * Return:   0 on success, negative on failure
-> > + */
-> > +int fdt_efi_pmem_setup(void *fdt);
-> > +
-> >   /**
-> >    * efi_size_in_pages() - convert size in bytes to size in pages
-> >    *
-> > @@ -964,6 +973,14 @@ efi_status_t efi_set_load_options(efi_handle_t handle,
-> >                                 void *load_options);
-> >   efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_options);
-> >
-> > +/**
-> > + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-> > + *
-> > + * @fdt:     Pointer to the DT blob
-> > + * Return:   status code
-> > + */
-> > +efi_status_t efi_bootmgr_pmem_setup(void *fdt);
-> > +
-> >   /**
-> >    * struct efi_image_regions - A list of memory regions
-> >    *
-> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> > index b906e53e26e..db4eb6a7376 100644
-> > --- a/lib/efi_loader/efi_bootmgr.c
-> > +++ b/lib/efi_loader/efi_bootmgr.c
-> > @@ -41,6 +41,8 @@ struct uridp_context {
-> >       efi_handle_t mem_handle;
-> >   };
-> >
-> > +static struct uridp_context *uctx;
-> > +
-> >   const efi_guid_t efi_guid_bootmenu_auto_generated =
-> >               EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
-> >
-> > @@ -427,6 +429,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
-> >
-> >       efi_free_pool(ctx->loaded_dp);
-> >       free(ctx);
-> > +     uctx = NULL;
-> >
-> >       return ret == EFI_SUCCESS ? ret2 : ret;
-> >   }
-> > @@ -447,6 +450,23 @@ static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
-> >       EFI_EXIT(ret);
-> >   }
-> >
-> > +/**
-> > + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-> > + *
-> > + * @fdt:     Pointer to the DT blob
-> > + * Return:   status code
-> > + */
-> > +efi_status_t efi_bootmgr_pmem_setup(void *fdt)
-> > +{
-> > +     if (!uctx) {
-> > +             log_warning("No EFI HTTP boot context found\n");
->
-> This function is called if CONFIG_EFI_HTTP_BOOT=y. This configuration
-> setting allows booting via HTTP but does not require it. The warning
-> makes no sense when booting from a block device.
+The main reason for this change is that upstream QEMU has no multiboot
+register implemented that's why access to it fails which ends up in CI
+failure for our target.
+That's why in JTAG bootmode returns 0 which is correct behaviour because
+multiboot register is not used in this mode and value should be ignored and
+as a side effect it is also fixing CI/Qemu issue.
 
-Okay. I can remove the warning.
+Also move versal_get_bootmode() to avoid function declaration.
 
->
-> The image type is orthogonal to the way you load it. Pmem support in
-> Linux is not related to UEFI. Please, remove the dependency of pmem
-> support on UEFI HTTP boot.
->
-> If the object to be booted is a disk image, we can create a block device
-> in memory for it and then should be able to apply all standard boot
-> methods on it.
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-I think this was discussed earlier [1]. As things stand today, the
-only context in which an installer ISO image is loaded to memory is
-through the EFI HTTP boot path.
+ board/xilinx/versal/board.c | 36 +++++++++++++++++++++---------------
+ 1 file changed, 21 insertions(+), 15 deletions(-)
 
--sughosh
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index d05220f96ffd..cff810e02ad8 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -36,8 +36,29 @@ static xilinx_desc versalpl = {
+ };
+ #endif
+ 
++static u8 versal_get_bootmode(void)
++{
++	u8 bootmode;
++	u32 reg = 0;
++
++	reg = readl(&crp_base->boot_mode_usr);
++
++	if (reg >> BOOT_MODE_ALT_SHIFT)
++		reg >>= BOOT_MODE_ALT_SHIFT;
++
++	bootmode = reg & BOOT_MODES_MASK;
++
++	return bootmode;
++}
++
+ static u32 versal_multi_boot(void)
+ {
++	u8 bootmode = versal_get_bootmode();
++
++	/* Mostly workaround for QEMU CI pipeline */
++	if (bootmode == JTAG_MODE)
++		return 0;
++
+ 	return readl(0xF1110004);
+ }
+ 
+@@ -120,21 +141,6 @@ unsigned long do_go_exec(ulong (*entry)(int, char * const []), int argc,
+ 	return ret;
+ }
+ 
+-static u8 versal_get_bootmode(void)
+-{
+-	u8 bootmode;
+-	u32 reg = 0;
+-
+-	reg = readl(&crp_base->boot_mode_usr);
+-
+-	if (reg >> BOOT_MODE_ALT_SHIFT)
+-		reg >>= BOOT_MODE_ALT_SHIFT;
+-
+-	bootmode = reg & BOOT_MODES_MASK;
+-
+-	return bootmode;
+-}
+-
+ static int boot_targets_setup(void)
+ {
+ 	u8 bootmode;
+-- 
+2.43.0
 
-[1] - https://lists.denx.de/pipermail/u-boot/2024-November/571335.html
-
->
-> Best regards
->
-> Heinrich
->
-> > +             return EFI_SUCCESS;
-> > +     }
-> > +
-> > +     return !fdt_fixup_pmem_region(fdt, uctx->image_addr, uctx->image_size) ?
-> > +             EFI_SUCCESS : EFI_INVALID_PARAMETER;
-> > +}
-> > +
-> >   /**
-> >    * try_load_from_uri_path() - Handle the URI device path
-> >    *
-> > @@ -476,6 +496,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-> >       if (!ctx)
-> >               return EFI_OUT_OF_RESOURCES;
-> >
-> > +     uctx = ctx;
-> >       s = env_get("loadaddr");
-> >       if (!s) {
-> >               log_err("Error: loadaddr is not set\n");
-> > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> > index bf96f61d3d0..6fae37ad617 100644
-> > --- a/lib/efi_loader/efi_helper.c
-> > +++ b/lib/efi_loader/efi_helper.c
-> > @@ -313,6 +313,18 @@ int efi_unlink_dev(efi_handle_t handle)
-> >       return 0;
-> >   }
-> >
-> > +/**
-> > + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-> > + *
-> > + * @fdt:     Pointer to the devicetree
-> > + *
-> > + * Return:   0 on success, negative on failure
-> > + */
-> > +int fdt_efi_pmem_setup(void *fdt)
-> > +{
-> > +     return efi_bootmgr_pmem_setup(fdt) == EFI_SUCCESS ? 0 : -1;
-> > +}
-> > +
-> >   static int u16_tohex(u16 c)
-> >   {
-> >       if (c >= '0' && c <= '9')
->
