@@ -4,68 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 351BDE77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:08:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66848E77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:14:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C409805D7;
-	Mon,  6 Jan 2025 10:08:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DA038036B;
+	Mon,  6 Jan 2025 10:14:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pIrW05RL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sKwmR79I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 244F5805FD; Mon,  6 Jan 2025 10:08:05 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 19D088036B; Mon,  6 Jan 2025 10:14:42 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1E29805D7
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:07:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82E088007D
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:14:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 50697uQk094895;
- Mon, 6 Jan 2025 03:07:56 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736154476;
- bh=FoL3hV56E3BUCVK3fsT3R+urxQzXQdbchzR7o6xxD5k=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=pIrW05RLvZ1cVJ6mh5UyFGPfhSwvwPkEJDSYix6RSOs0e9OTNIgjK7pM+eTd6JI+d
- zShKSDbILXkQB+4NDDg4CCj2FpSNMIe62egH4n1O6C67Oad99X6bIXueb/EALxAsp0
- jGi+WrrWEpslPgin7efJobAUptoLFq+adO9rV5Qg=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50697uvw029756
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 6 Jan 2025 03:07:56 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
- Jan 2025 03:07:55 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 6 Jan 2025 03:07:55 -0600
-Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
- [172.24.227.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50697Jue103050;
- Mon, 6 Jan 2025 03:07:52 -0600
-From: Santhosh Kumar K <s-k6@ti.com>
-To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <bb@ti.com>, <m-chawdhry@ti.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>
-CC: <u-boot@lists.denx.de>, <w.egorov@phytec.de>, <n-francis@ti.com>,
- <s-k6@ti.com>
-Subject: [PATCH v6 9/9] board: ti: Pull redundant DDR functions to a common
- location and Fixup DDR size when ECC is enabled
-Date: Mon, 6 Jan 2025 14:37:08 +0530
-Message-ID: <20250106090708.1541212-10-s-k6@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250106090708.1541212-1-s-k6@ti.com>
-References: <20250106090708.1541212-1-s-k6@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d90a5581fcso6259142a12.1
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 01:14:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1736154879; x=1736759679; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fekvTXT6KxcuhA9wVe4hy47NROcJbszbpXrSKT56tXg=;
+ b=sKwmR79Iaqfr+gSuMLro3507JpBvi7JoGx7OVDo1gbrQblStsKwg9z1EVItkMRsnLL
+ 65XgSauMqlwx+s5WZhlO1mW4oOdlXbpK9xAQkvZGLqAdYHD2ktGCVaCVHvj3CAz8oJtA
+ tJBxLHHVlP6e8ICowsUPHxCaoZspNTnXmS5F/VWS+kBrg7EeerNMOaDHONU63TNC1JM3
+ n0LZUOdzBp+0FNQJPDqW1J5S5kuP3/GN+ldLpw5CrUBYTW40Rn9iPkkgFrdhJ8vxJ0cM
+ AnWYcbk4SQR1UiVf6s06G1uTch/fN1K3PZGYiqo3q0jp3rYcwJ5R/Hz42yd1gZahPOtT
+ SmRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736154879; x=1736759679;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fekvTXT6KxcuhA9wVe4hy47NROcJbszbpXrSKT56tXg=;
+ b=l7sHVc84jL9cRiU3xNgBPyvNNo79pXNybYvIOR+FYxLhAVDQ15+BF+FSWG5gnGZZJw
+ PKKny6zU7s6y9sR5DjU62VtIaNdu/ivaa1ZBK/UG1HTpI6rxb/VQ13bXcF9ls3hccjuK
+ tm9mCbMln9xbxwnZOuB4jWKZ4UEmtBKnriLkhv4i3H7c96mpt7vw+x66ycnOsj/XDCjr
+ zEfMQLc+T9kaqdE/+daKCSX7vlUsGLoT8Q/CwMksqo6voMiOBsXI3vsNLU2I4ZduMPr8
+ x9UUwaMsM/BoAaWswacG5EzzjmWBByOG4swtENFEhofQ10chf5sC+DKlzDUXLLkoQ+Iu
+ VEBw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUTR19kJY2SXFfmCmHPdc64XS+N15ZPprZC0MJjDy5+hXmYpARPYuVHj1jGN77iAnhH3bDAlkg=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywp19VUBjNG2RqTjiXPB1DL7azSncnzsZryzfwhknYtBCcBHmvA
+ fujlvjOzMSPNEeIGKu6qjO/04bBWxYHF6nZ8h0gg7ttyCTLj9RmSeraBpfxqXsyS8yxzFQNKrqF
+ 15j0CxMirltz1Il2SP/pxYFIy+d4ZkYFdipdeMA==
+X-Gm-Gg: ASbGncuPzLax3zhJEikq/vY3H4+A9W4n+r+t+Y05yi0d3EKtPqgadF3V3Q2h0uObQO0
+ fb00p+mUFjGB2k+LYjIiCjcrcx7qUv04Rimp5Obc=
+X-Google-Smtp-Source: AGHT+IFB4N6wgROQ2PeW9EmJ1Goisk4DkJHVY/EnexRwE0uHEIqxEK5ZBfL1aXCNY/+cPd6QZPTC+XLCtb7kWA+nKqE=
+X-Received: by 2002:a05:6402:34cc:b0:5d0:cfad:f6b with SMTP id
+ 4fb4d7f45d1cf-5d81dd8b175mr56518277a12.11.1736154878888; Mon, 06 Jan 2025
+ 01:14:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
+ <20241203163605.1482152-5-sughosh.ganu@linaro.org>
+ <a6c7b22a-290c-44ee-acab-58409e675bc7@gmx.de>
+In-Reply-To: <a6c7b22a-290c-44ee-acab-58409e675bc7@gmx.de>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 6 Jan 2025 14:44:27 +0530
+Message-ID: <CADg8p94iog+=eNceZxYAH4CXcAC0vev5Eg568Jvf5FFXReHALA@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] efi: add helper functions to insert pmem node for
+ DT fixup
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Anton Antonov <Anton.Antonov@arm.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,741 +96,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As there are few redundant functions in board/ti/*/evm.c files, pull
-them to a common location of access to reuse and include the common file
-to access the functions.
+On Fri, 3 Jan 2025 at 22:31, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 03.12.24 17:36, Sughosh Ganu wrote:
+> > The EFI HTTP boot puts the iso installer image at some location in
+> > memory which needs to be reserved in the devicetree as persistent
+> > memory (pmem). Add helper functions which add this pmem node when the
+> > EFI_DT_FIXUP protocol's fixup callback is invoked.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since V1:
+> > * Use log_err() to print the error message in image_setup_libfdt()
+> > * Remove "ERROR:" from the error print in image_setup_libfdt()
+> >
+> >   boot/image-fdt.c             |  9 +++++++++
+> >   include/efi_loader.h         | 17 +++++++++++++++++
+> >   lib/efi_loader/efi_bootmgr.c | 21 +++++++++++++++++++++
+> >   lib/efi_loader/efi_helper.c  | 12 ++++++++++++
+> >   4 files changed, 59 insertions(+)
+> >
+> > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> > index 3d5b6f9e2dc..de479d3ffa0 100644
+> > --- a/boot/image-fdt.c
+> > +++ b/boot/image-fdt.c
+> > @@ -11,6 +11,7 @@
+> >   #include <command.h>
+> >   #include <fdt_support.h>
+> >   #include <fdtdec.h>
+> > +#include <efi_loader.h>
+> >   #include <env.h>
+> >   #include <errno.h>
+> >   #include <image.h>
+> > @@ -648,6 +649,14 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
+> >       if (!ft_verify_fdt(blob))
+> >               goto err;
+> >
+> > +     if (CONFIG_IS_ENABLED(EFI_HTTP_BOOT)) {
+> > +             fdt_ret = fdt_efi_pmem_setup(blob);
+> > +             if (fdt_ret) {
+> > +                     log_err("HTTP boot pmem fixup failed\n");
+> > +                     goto err;
+> > +             }
+> > +     }
+> > +
+> >       /* after here we are using a livetree */
+> >       if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
+> >               struct event_ft_fixup fixup;
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index 24e40799eee..87b9a6e4da0 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -748,6 +748,15 @@ bool efi_varname_is_load_option(u16 *var_name16, int *index);
+> >   efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
+> >                                   efi_guid_t *guid);
+> >
+> > +/**
+> > + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
+> > + *
+> > + * @fdt:     Pointer to the devicetree
+> > + *
+> > + * Return:   0 on success, negative on failure
+> > + */
+> > +int fdt_efi_pmem_setup(void *fdt);
+> > +
+> >   /**
+> >    * efi_size_in_pages() - convert size in bytes to size in pages
+> >    *
+> > @@ -964,6 +973,14 @@ efi_status_t efi_set_load_options(efi_handle_t handle,
+> >                                 void *load_options);
+> >   efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_options);
+> >
+> > +/**
+> > + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
+> > + *
+> > + * @fdt:     Pointer to the DT blob
+> > + * Return:   status code
+> > + */
+> > +efi_status_t efi_bootmgr_pmem_setup(void *fdt);
+> > +
+> >   /**
+> >    * struct efi_image_regions - A list of memory regions
+> >    *
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > index b906e53e26e..db4eb6a7376 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -41,6 +41,8 @@ struct uridp_context {
+> >       efi_handle_t mem_handle;
+> >   };
+> >
+> > +static struct uridp_context *uctx;
+> > +
+> >   const efi_guid_t efi_guid_bootmenu_auto_generated =
+> >               EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
+> >
+> > @@ -427,6 +429,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+> >
+> >       efi_free_pool(ctx->loaded_dp);
+> >       free(ctx);
+> > +     uctx = NULL;
+> >
+> >       return ret == EFI_SUCCESS ? ret2 : ret;
+> >   }
+> > @@ -447,6 +450,23 @@ static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
+> >       EFI_EXIT(ret);
+> >   }
+> >
+> > +/**
+> > + * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
+> > + *
+> > + * @fdt:     Pointer to the DT blob
+> > + * Return:   status code
+> > + */
+> > +efi_status_t efi_bootmgr_pmem_setup(void *fdt)
+> > +{
+> > +     if (!uctx) {
+> > +             log_warning("No EFI HTTP boot context found\n");
+>
+> This function is called if CONFIG_EFI_HTTP_BOOT=y. This configuration
+> setting allows booting via HTTP but does not require it. The warning
+> makes no sense when booting from a block device.
 
-Call k3-ddrss driver through fixup_ddr_driver_for_ecc() to fixup the
-device tree and resize the available amount of DDR, if ECC is enabled.
-Otherwise, fixup the device tree using the regular
-fdt_fixup_memory_banks().
+Okay. I can remove the warning.
 
-Also call dram_init_banksize() after every call to
-fixup_ddr_driver_for_ecc() is made so that gd->bd is populated
-correctly.
+>
+> The image type is orthogonal to the way you load it. Pmem support in
+> Linux is not related to UEFI. Please, remove the dependency of pmem
+> support on UEFI HTTP boot.
+>
+> If the object to be booted is a disk image, we can create a block device
+> in memory for it and then should be able to apply all standard boot
+> methods on it.
 
-Ensure that fixup_ddr_driver_for_ecc() is agnostic to the number of DDR
-controllers present.
+I think this was discussed earlier [1]. As things stand today, the
+only context in which an installer ISO image is loaded to memory is
+through the EFI HTTP boot path.
 
-Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
----
- arch/arm/mach-k3/Makefile              |  2 +-
- arch/arm/mach-k3/include/mach/k3-ddr.h | 15 ++++++
- arch/arm/mach-k3/k3-ddr.c              | 72 +++++++++++++++++++++++++
- board/ti/am62ax/evm.c                  | 17 +++---
- board/ti/am62px/evm.c                  | 17 +++---
- board/ti/am62x/evm.c                   | 63 +++-------------------
- board/ti/am64x/evm.c                   | 73 +++-----------------------
- board/ti/am65x/evm.c                   | 29 +---------
- board/ti/common/Makefile               |  1 +
- board/ti/common/k3-ddr.c               | 33 ++++++++++++
- board/ti/common/k3-ddr.h               | 12 +++++
- board/ti/j721e/evm.c                   | 29 +---------
- board/ti/j721s2/evm.c                  | 35 ++++--------
- board/ti/j722s/evm.c                   | 17 +++---
- board/ti/j784s4/evm.c                  | 17 +++---
- 15 files changed, 200 insertions(+), 232 deletions(-)
- create mode 100644 arch/arm/mach-k3/include/mach/k3-ddr.h
- create mode 100644 arch/arm/mach-k3/k3-ddr.c
- create mode 100644 board/ti/common/k3-ddr.c
- create mode 100644 board/ti/common/k3-ddr.h
+-sughosh
 
-diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
-index 8c4f6786a5b5..5ce7fc62d80c 100644
---- a/arch/arm/mach-k3/Makefile
-+++ b/arch/arm/mach-k3/Makefile
-@@ -6,7 +6,7 @@
- obj-$(CONFIG_ARM64) += arm64/
- obj-$(CONFIG_CPU_V7R) += r5/
- obj-$(CONFIG_OF_LIBFDT) += common_fdt.o
--obj-y += common.o security.o
-+obj-y += common.o security.o k3-ddr.o
- obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
- obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
- obj-$(CONFIG_SOC_K3_AM625) += am62x/
-diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
-new file mode 100644
-index 000000000000..95496e1c59dc
---- /dev/null
-+++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2024, Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#ifndef _K3_DDR_H_
-+#define _K3_DDR_H_
-+
-+int dram_init(void);
-+int dram_init_banksize(void);
-+
-+void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image);
-+void fixup_memory_node(struct spl_image_info *spl_image);
-+
-+#endif /* _K3_DDR_H_ */
-diff --git a/arch/arm/mach-k3/k3-ddr.c b/arch/arm/mach-k3/k3-ddr.c
-new file mode 100644
-index 000000000000..6e3e60cdc865
---- /dev/null
-+++ b/arch/arm/mach-k3/k3-ddr.c
-@@ -0,0 +1,72 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024, Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <fdt_support.h>
-+#include <dm/uclass.h>
-+#include <k3-ddrss.h>
-+#include <spl.h>
-+
-+#include <asm/arch/k3-ddr.h>
-+
-+__weak int dram_init(void)
-+{
-+	return 0;
-+}
-+
-+__weak int dram_init_banksize(void)
-+{
-+	return 0;
-+}
-+
-+#if defined(CONFIG_SPL_BUILD)
-+void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
-+{
-+	struct udevice *dev;
-+	int ret, ctr = 1;
-+
-+	dram_init_banksize();
-+
-+	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-+	if (ret)
-+		panic("Cannnot get RAM device for ddr size fixup: %d\n", ret);
-+
-+	ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
-+	if (ret)
-+		printf("Error fixing up ddr node for ECC use! %d\n", ret);
-+
-+	ret = uclass_next_device_err(&dev);
-+
-+	while (ret && ret != -ENODEV) {
-+		ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
-+		if (ret)
-+			printf("Error fixing up ddr node %d for ECC use! %d\n", ctr, ret);
-+
-+		ret = uclass_next_device_err(&dev);
-+		ctr++;
-+	}
-+}
-+
-+void fixup_memory_node(struct spl_image_info *spl_image)
-+{
-+	u64 start[CONFIG_NR_DRAM_BANKS];
-+	u64 size[CONFIG_NR_DRAM_BANKS];
-+	int bank;
-+	int ret;
-+
-+	dram_init();
-+	dram_init_banksize();
-+
-+	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-+		start[bank] = gd->bd->bi_dram[bank].start;
-+		size[bank] = gd->bd->bi_dram[bank].size;
-+	}
-+
-+	ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size,
-+				     CONFIG_NR_DRAM_BANKS);
-+
-+	if (ret)
-+		printf("Error fixing up memory node! %d\n", ret);
-+}
-+#endif
-diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
-index 62d3664936e7..3351544c5b37 100644
---- a/board/ti/am62ax/evm.c
-+++ b/board/ti/am62ax/evm.c
-@@ -12,6 +12,7 @@
- #include <env.h>
- #include <fdt_support.h>
- #include <spl.h>
-+#include <asm/arch/k3-ddr.h>
- 
- #include "../common/fdt_ops.h"
- 
-@@ -20,15 +21,17 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
-+#if defined(CONFIG_XPL_BUILD)
-+void spl_perform_fixups(struct spl_image_info *spl_image)
- {
--	return fdtdec_setup_mem_size_base();
--}
--
--int dram_init_banksize(void)
--{
--	return fdtdec_setup_memory_banksize();
-+	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
-+		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-+			fixup_ddr_driver_for_ecc(spl_image);
-+	} else {
-+		fixup_memory_node(spl_image);
-+	}
- }
-+#endif
- 
- #ifdef CONFIG_BOARD_LATE_INIT
- int board_late_init(void)
-diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
-index 7362fa4520a3..75359fa1614c 100644
---- a/board/ti/am62px/evm.c
-+++ b/board/ti/am62px/evm.c
-@@ -13,6 +13,7 @@
- #include <env.h>
- #include <fdt_support.h>
- #include <spl.h>
-+#include <asm/arch/k3-ddr.h>
- #include "../common/fdt_ops.h"
- 
- struct efi_fw_image fw_images[] = {
-@@ -53,15 +54,17 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
-+#if defined(CONFIG_XPL_BUILD)
-+void spl_perform_fixups(struct spl_image_info *spl_image)
- {
--	return fdtdec_setup_mem_size_base();
--}
--
--int dram_init_banksize(void)
--{
--	return fdtdec_setup_memory_banksize();
-+	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
-+		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-+			fixup_ddr_driver_for_ecc(spl_image);
-+	} else {
-+		fixup_memory_node(spl_image);
-+	}
- }
-+#endif
- 
- #if IS_ENABLED(CONFIG_BOARD_LATE_INIT)
- int board_late_init(void)
-diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-index 9075df01cac6..279ceba95547 100644
---- a/board/ti/am62x/evm.c
-+++ b/board/ti/am62x/evm.c
-@@ -20,6 +20,7 @@
- #include <asm/io.h>
- #include <asm/arch/hardware.h>
- #include <dm/uclass.h>
-+#include <asm/arch/k3-ddr.h>
- 
- #include "../common/fdt_ops.h"
- 
-@@ -86,11 +87,6 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
--{
--	return fdtdec_setup_mem_size_base();
--}
--
- #ifdef CONFIG_BOARD_LATE_INIT
- int board_late_init(void)
- {
-@@ -99,13 +95,7 @@ int board_late_init(void)
- }
- #endif
- 
--int dram_init_banksize(void)
--{
--	return fdtdec_setup_memory_banksize();
--}
--
- #if defined(CONFIG_XPL_BUILD)
--
- void spl_board_init(void)
- {
- 	enable_caches();
-@@ -114,53 +104,14 @@ void spl_board_init(void)
- 
- }
- 
--#if defined(CONFIG_K3_AM64_DDRSS)
--static void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
--{
--	struct udevice *dev;
--	int ret;
--
--	dram_init_banksize();
--
--	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
--	if (ret)
--		panic("Cannot get RAM device for ddr size fixup: %d\n", ret);
--
--	ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
--	if (ret)
--		printf("Error fixing up ddr node for ECC use! %d\n", ret);
--}
--#else
--static void fixup_memory_node(struct spl_image_info *spl_image)
--{
--	u64 start[CONFIG_NR_DRAM_BANKS];
--	u64 size[CONFIG_NR_DRAM_BANKS];
--	int bank;
--	int ret;
--
--	dram_init();
--	dram_init_banksize();
--
--	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
--		start[bank] =  gd->bd->bi_dram[bank].start;
--		size[bank] = gd->bd->bi_dram[bank].size;
--	}
--
--	/* dram_init functions use SPL fdt, and we must fixup u-boot fdt */
--	ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size,
--				     CONFIG_NR_DRAM_BANKS);
--	if (ret)
--		printf("Error fixing up memory node! %d\n", ret);
--}
--#endif
--
- void spl_perform_fixups(struct spl_image_info *spl_image)
- {
--#if defined(CONFIG_K3_AM64_DDRSS)
--	fixup_ddr_driver_for_ecc(spl_image);
--#else
--	fixup_memory_node(spl_image);
--#endif
-+	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
-+		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-+			fixup_ddr_driver_for_ecc(spl_image);
-+	} else {
-+		fixup_memory_node(spl_image);
-+	}
- }
- #endif
- 
-diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
-index 00b8317d6bf9..6f7e1f828668 100644
---- a/board/ti/am64x/evm.c
-+++ b/board/ti/am64x/evm.c
-@@ -15,6 +15,7 @@
- #include <fdt_support.h>
- #include <asm/arch/hardware.h>
- #include <env.h>
-+#include <asm/arch/k3-ddr.h>
- 
- #include "../common/board_detect.h"
- #include "../common/fdt_ops.h"
-@@ -66,28 +67,6 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
--{
--	s32 ret;
--
--	ret = fdtdec_setup_mem_size_base();
--	if (ret)
--		printf("Error setting up mem size and base. %d\n", ret);
--
--	return ret;
--}
--
--int dram_init_banksize(void)
--{
--	s32 ret;
--
--	ret = fdtdec_setup_memory_banksize();
--	if (ret)
--		printf("Error setting up memory banksize. %d\n", ret);
--
--	return ret;
--}
--
- #if defined(CONFIG_SPL_LOAD_FIT)
- int board_fit_config_name_match(const char *name)
- {
-@@ -132,52 +111,14 @@ static int fixup_usb_boot(const void *fdt_blob)
- }
- #endif
- 
--#if defined(CONFIG_K3_AM64_DDRSS)
--static void fixup_ddr_driver_for_ecc(struct spl_image_info *spl_image)
--{
--	struct udevice *dev;
--	int ret;
--
--	dram_init_banksize();
--
--	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
--	if (ret)
--		panic("Cannot get RAM device for ddr size fixup: %d\n", ret);
--
--	ret = k3_ddrss_ddr_fdt_fixup(dev, spl_image->fdt_addr, gd->bd);
--	if (ret)
--		printf("Error fixing up ddr node for ECC use! %d\n", ret);
--}
--#else
--static void fixup_memory_node(struct spl_image_info *spl_image)
--{
--	u64 start[CONFIG_NR_DRAM_BANKS];
--	u64 size[CONFIG_NR_DRAM_BANKS];
--	int bank;
--	int ret;
--
--	dram_init();
--	dram_init_banksize();
--
--	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
--		start[bank] =  gd->bd->bi_dram[bank].start;
--		size[bank] = gd->bd->bi_dram[bank].size;
--	}
--
--	/* dram_init functions use SPL fdt, and we must fixup u-boot fdt */
--	ret = fdt_fixup_memory_banks(spl_image->fdt_addr, start, size, CONFIG_NR_DRAM_BANKS);
--	if (ret)
--		printf("Error fixing up memory node! %d\n", ret);
--}
--#endif
--
- void spl_perform_fixups(struct spl_image_info *spl_image)
- {
--#if defined(CONFIG_K3_AM64_DDRSS)
--	fixup_ddr_driver_for_ecc(spl_image);
--#else
--	fixup_memory_node(spl_image);
--#endif
-+	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
-+		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-+			fixup_ddr_driver_for_ecc(spl_image);
-+	} else {
-+		fixup_memory_node(spl_image);
-+	}
- 
- #if CONFIG_IS_ENABLED(USB_STORAGE)
- 	fixup_usb_boot(spl_image->fdt_addr);
-diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
-index 07073a5940b1..6658794a1375 100644
---- a/board/ti/am65x/evm.c
-+++ b/board/ti/am65x/evm.c
-@@ -20,6 +20,7 @@
- #include <env.h>
- #include <spl.h>
- #include <linux/printk.h>
-+#include <asm/arch/k3-ddr.h>
- 
- #include "../common/board_detect.h"
- #include "../common/fdt_ops.h"
-@@ -49,17 +50,6 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
--{
--#ifdef CONFIG_PHYS_64BIT
--	gd->ram_size = 0x100000000;
--#else
--	gd->ram_size = 0x80000000;
--#endif
--
--	return 0;
--}
--
- phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- {
- #ifdef CONFIG_PHYS_64BIT
-@@ -71,23 +61,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 	return gd->ram_top;
- }
- 
--int dram_init_banksize(void)
--{
--	/* Bank 0 declares the memory available in the DDR low region */
--	gd->bd->bi_dram[0].start = 0x80000000;
--	gd->bd->bi_dram[0].size = 0x80000000;
--	gd->ram_size = 0x80000000;
--
--#ifdef CONFIG_PHYS_64BIT
--	/* Bank 1 declares the memory available in the DDR high region */
--	gd->bd->bi_dram[1].start = 0x880000000;
--	gd->bd->bi_dram[1].size = 0x80000000;
--	gd->ram_size = 0x100000000;
--#endif
--
--	return 0;
--}
--
- #ifdef CONFIG_SPL_LOAD_FIT
- int board_fit_config_name_match(const char *name)
- {
-diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-index 5ac361ba7fcf..caf6b9fa8c14 100644
---- a/board/ti/common/Makefile
-+++ b/board/ti/common/Makefile
-@@ -4,3 +4,4 @@
- obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
- obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
- obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
-+obj-${CONFIG_ARCH_K3} += k3-ddr.o
-diff --git a/board/ti/common/k3-ddr.c b/board/ti/common/k3-ddr.c
-new file mode 100644
-index 000000000000..a8425da8de5c
---- /dev/null
-+++ b/board/ti/common/k3-ddr.c
-@@ -0,0 +1,33 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024, Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <fdt_support.h>
-+#include <dm/uclass.h>
-+#include <k3-ddrss.h>
-+#include <spl.h>
-+
-+#include "k3-ddr.h"
-+
-+int dram_init(void)
-+{
-+	s32 ret;
-+
-+	ret = fdtdec_setup_mem_size_base_lowest();
-+	if (ret)
-+		printf("Error setting up mem size and base. %d\n", ret);
-+
-+	return ret;
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	s32 ret;
-+
-+	ret = fdtdec_setup_memory_banksize();
-+	if (ret)
-+		printf("Error setting up memory banksize. %d\n", ret);
-+
-+	return ret;
-+}
-diff --git a/board/ti/common/k3-ddr.h b/board/ti/common/k3-ddr.h
-new file mode 100644
-index 000000000000..737d45e2e509
---- /dev/null
-+++ b/board/ti/common/k3-ddr.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2024, Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#ifndef __K3_DDR_INIT_H
-+#define __K3_DDR_INIT_H
-+
-+int dram_init(void);
-+int dram_init_banksize(void);
-+
-+#endif /* __K3_DDR_INIT_H */
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 6221be9dcff8..4b5b9dded7b0 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -15,6 +15,7 @@
- #include <asm/gpio.h>
- #include <spl.h>
- #include <dm.h>
-+#include <asm/arch/k3-ddr.h>
- 
- #include "../common/board_detect.h"
- #include "../common/fdt_ops.h"
-@@ -77,17 +78,6 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
--{
--#ifdef CONFIG_PHYS_64BIT
--	gd->ram_size = 0x100000000;
--#else
--	gd->ram_size = 0x80000000;
--#endif
--
--	return 0;
--}
--
- phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- {
- #ifdef CONFIG_PHYS_64BIT
-@@ -99,23 +89,6 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 	return gd->ram_top;
- }
- 
--int dram_init_banksize(void)
--{
--	/* Bank 0 declares the memory available in the DDR low region */
--	gd->bd->bi_dram[0].start = 0x80000000;
--	gd->bd->bi_dram[0].size = 0x80000000;
--	gd->ram_size = 0x80000000;
--
--#ifdef CONFIG_PHYS_64BIT
--	/* Bank 1 declares the memory available in the DDR high region */
--	gd->bd->bi_dram[1].start = 0x880000000;
--	gd->bd->bi_dram[1].size = 0x80000000;
--	gd->ram_size = 0x100000000;
--#endif
--
--	return 0;
--}
--
- #ifdef CONFIG_SPL_LOAD_FIT
- int board_fit_config_name_match(const char *name)
- {
-diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
-index 9bcf67b7bfb8..b3eea3b73e60 100644
---- a/board/ti/j721s2/evm.c
-+++ b/board/ti/j721s2/evm.c
-@@ -21,6 +21,7 @@
- #include <dm.h>
- #include <dm/uclass-internal.h>
- #include <dm/root.h>
-+#include <asm/arch/k3-ddr.h>
- 
- #include "../common/board_detect.h"
- #include "../common/fdt_ops.h"
-@@ -32,17 +33,6 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
--{
--#ifdef CONFIG_PHYS_64BIT
--	gd->ram_size = 0x100000000;
--#else
--	gd->ram_size = 0x80000000;
--#endif
--
--	return 0;
--}
--
- phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- {
- #ifdef CONFIG_PHYS_64BIT
-@@ -54,22 +44,17 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 	return gd->ram_top;
- }
- 
--int dram_init_banksize(void)
-+#if defined(CONFIG_XPL_BUILD)
-+void spl_perform_fixups(struct spl_image_info *spl_image)
- {
--	/* Bank 0 declares the memory available in the DDR low region */
--	gd->bd->bi_dram[0].start = 0x80000000;
--	gd->bd->bi_dram[0].size = 0x7fffffff;
--	gd->ram_size = 0x80000000;
--
--#ifdef CONFIG_PHYS_64BIT
--	/* Bank 1 declares the memory available in the DDR high region */
--	gd->bd->bi_dram[1].start = 0x880000000;
--	gd->bd->bi_dram[1].size = 0x37fffffff;
--	gd->ram_size = 0x400000000;
--#endif
--
--	return 0;
-+	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
-+		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-+			fixup_ddr_driver_for_ecc(spl_image);
-+	} else {
-+		fixup_memory_node(spl_image);
-+	}
- }
-+#endif
- 
- #ifdef CONFIG_TI_I2C_BOARD_DETECT
- /*
-diff --git a/board/ti/j722s/evm.c b/board/ti/j722s/evm.c
-index 29e06a5442fe..f085ecfd37e9 100644
---- a/board/ti/j722s/evm.c
-+++ b/board/ti/j722s/evm.c
-@@ -12,6 +12,7 @@
- #include <env.h>
- #include <fdt_support.h>
- #include <spl.h>
-+#include <asm/arch/k3-ddr.h>
- #include "../common/fdt_ops.h"
- 
- int board_init(void)
-@@ -19,15 +20,17 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
-+#if defined(CONFIG_XPL_BUILD)
-+void spl_perform_fixups(struct spl_image_info *spl_image)
- {
--	return fdtdec_setup_mem_size_base();
--}
--
--int dram_init_banksize(void)
--{
--	return fdtdec_setup_memory_banksize();
-+	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
-+		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-+			fixup_ddr_driver_for_ecc(spl_image);
-+	} else {
-+		fixup_memory_node(spl_image);
-+	}
- }
-+#endif
- 
- #if IS_ENABLED(CONFIG_BOARD_LATE_INIT)
- int board_late_init(void)
-diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-index 548dbd5925df..d317f3eccbba 100644
---- a/board/ti/j784s4/evm.c
-+++ b/board/ti/j784s4/evm.c
-@@ -10,6 +10,7 @@
- #include <efi_loader.h>
- #include <init.h>
- #include <spl.h>
-+#include <asm/arch/k3-ddr.h>
- #include "../common/fdt_ops.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
-@@ -52,15 +53,17 @@ int board_init(void)
- 	return 0;
- }
- 
--int dram_init(void)
-+#if defined(CONFIG_XPL_BUILD)
-+void spl_perform_fixups(struct spl_image_info *spl_image)
- {
--	return fdtdec_setup_mem_size_base();
--}
--
--int dram_init_banksize(void)
--{
--	return fdtdec_setup_memory_banksize();
-+	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
-+		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-+			fixup_ddr_driver_for_ecc(spl_image);
-+	} else {
-+		fixup_memory_node(spl_image);
-+	}
- }
-+#endif
- 
- #ifdef CONFIG_BOARD_LATE_INIT
- int board_late_init(void)
--- 
-2.34.1
+[1] - https://lists.denx.de/pipermail/u-boot/2024-November/571335.html
 
+>
+> Best regards
+>
+> Heinrich
+>
+> > +             return EFI_SUCCESS;
+> > +     }
+> > +
+> > +     return !fdt_fixup_pmem_region(fdt, uctx->image_addr, uctx->image_size) ?
+> > +             EFI_SUCCESS : EFI_INVALID_PARAMETER;
+> > +}
+> > +
+> >   /**
+> >    * try_load_from_uri_path() - Handle the URI device path
+> >    *
+> > @@ -476,6 +496,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+> >       if (!ctx)
+> >               return EFI_OUT_OF_RESOURCES;
+> >
+> > +     uctx = ctx;
+> >       s = env_get("loadaddr");
+> >       if (!s) {
+> >               log_err("Error: loadaddr is not set\n");
+> > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> > index bf96f61d3d0..6fae37ad617 100644
+> > --- a/lib/efi_loader/efi_helper.c
+> > +++ b/lib/efi_loader/efi_helper.c
+> > @@ -313,6 +313,18 @@ int efi_unlink_dev(efi_handle_t handle)
+> >       return 0;
+> >   }
+> >
+> > +/**
+> > + * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
+> > + *
+> > + * @fdt:     Pointer to the devicetree
+> > + *
+> > + * Return:   0 on success, negative on failure
+> > + */
+> > +int fdt_efi_pmem_setup(void *fdt)
+> > +{
+> > +     return efi_bootmgr_pmem_setup(fdt) == EFI_SUCCESS ? 0 : -1;
+> > +}
+> > +
+> >   static int u16_tohex(u16 c)
+> >   {
+> >       if (c >= '0' && c <= '9')
+>
