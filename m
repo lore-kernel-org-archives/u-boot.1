@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F54BE77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:07:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6C3CE77198
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:07:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C05C8058A;
-	Mon,  6 Jan 2025 10:07:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E2B3D805F5;
+	Mon,  6 Jan 2025 10:07:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l8QtJNle";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GaDDj2vc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7548D805DF; Mon,  6 Jan 2025 10:07:31 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 058718058A
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:07:28 +0100 (CET)
+ id 9AB4B805EA; Mon,  6 Jan 2025 10:07:35 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E1004805E2
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:07:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50697Rog2464502
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 6 Jan 2025 03:07:27 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 50697UHC106862;
+ Mon, 6 Jan 2025 03:07:30 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736154447;
- bh=g1bijHJ1LZ4jS5KdM49rCPcqQmqeBsfAJJUyHI+qI84=;
+ s=ti-com-17Q1; t=1736154450;
+ bh=GqwlAjIW3AtVGP2x4cjBybgVVyWKld51oq8E4m7KKYU=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=l8QtJNleW+J+GoBxdB6o/woKvSpSuNGctmo9q3knQC+GGMDqQe2CGYEY0xexX3bF/
- GWG4pOHSlk4cktkToD+ZDxHRCRp7x6zhjtyQDWZcbwFDpFTxt8xpPMKQ4VFtbOItwH
- +4FyH2XJY3T0siCqGbhp5J8msYFYzhRu9FK+TFOM=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50697RgY114167
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 6 Jan 2025 03:07:27 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ b=GaDDj2vc6cvofBfslIEkOA1sklo4FtomtBaOAbRF1UstfhoPxIg8iyw5GaLqAY+pL
+ VRAXEYhIbjxU9v1uFcKKIbXrhDhMGnqM3cYXHs5hcfJRCdQwhbGVQazN0qnKmrMLne
+ Ae6Tx3LlBNdGHcXYT0e5IFYP5jH/U52Bdf/GDSN8=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50697UwM105619;
+ Mon, 6 Jan 2025 03:07:30 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
- Jan 2025 03:07:26 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2025 03:07:30 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 6 Jan 2025 03:07:26 -0600
+ Frontend Transport; Mon, 6 Jan 2025 03:07:30 -0600
 Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
  [172.24.227.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50697JuW103050;
- Mon, 6 Jan 2025 03:07:23 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50697JuX103050;
+ Mon, 6 Jan 2025 03:07:27 -0600
 From: Santhosh Kumar K <s-k6@ti.com>
 To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <bb@ti.com>, <m-chawdhry@ti.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>
 CC: <u-boot@lists.denx.de>, <w.egorov@phytec.de>, <n-francis@ti.com>,
  <s-k6@ti.com>
-Subject: [PATCH v6 1/9] arm: dts: k3-*-ddr: Add ss_cfg reg entry
-Date: Mon, 6 Jan 2025 14:37:00 +0530
-Message-ID: <20250106090708.1541212-2-s-k6@ti.com>
+Subject: [PATCH v6 2/9] ram: k3-ddrss: Use the DDR controller BIST engine for
+ ECC priming
+Date: Mon, 6 Jan 2025 14:37:01 +0530
+Message-ID: <20250106090708.1541212-3-s-k6@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250106090708.1541212-1-s-k6@ti.com>
 References: <20250106090708.1541212-1-s-k6@ti.com>
@@ -82,137 +81,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ss_cfg memory region which maps the DDRSS configuration region
-for the memory controller node.
+From: Georgi Vlaev <g-vlaev@ti.com>
 
+The 1-bit inline ECC support in TI's DDRSS bridge requires
+the configured memory regions to be preloaded with a pattern
+before use. This is done by the k3-ddrss driver from the
+R5 SPL in a 'for' loop. It takes around 10 seconds to fill
+2GB of memory, for example. Memset can cut the time in half
+and using DMA currently yields a similar result.
+
+The BIST engine of DDR controller provides support for
+initializing any memory region with a pattern. This
+bypasses the DDRSS bridge, so the required inline ECC
+data is not computed and populated in the memory. For
+some values like zero, the computed ECC syndrome is also
+zero and we can use these values to preload the memory
+from the DDR controller, without the assistance of the
+bridge.
+
+The registers involved in the process are described in the
+'DDR controller registers' topic in [1] AM62 and [2] J721E
+reference manuals.
+
+The patch replaces the 'for' loop memory fill function with
+the BIST memory initialization procedure. This cuts the time
+to preload the 2GB memory from 10 seconds down to 1 second.
+The bist preload function uses the lpddr4 APIs in the k3-ddrss,
+so this is compatible with devices with both 16-bit LPDDR4 and
+32-bit LPDDR4 interfaces (e.g J721E).
+
+[1] AM62x: https://www.ti.com/lit/pdf/spruiv7
+[2] DRA829/TDA4VM: https://www.ti.com/lit/zip/spruil1
+
+Signed-off-by: Georgi Vlaev <g-vlaev@ti.com>
 Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- arch/arm/dts/k3-am62a-ddr.dtsi  |  7 ++++---
- arch/arm/dts/k3-j721s2-ddr.dtsi | 12 ++++++++----
- arch/arm/dts/k3-j784s4-ddr.dtsi | 24 ++++++++++++++++--------
- 3 files changed, 28 insertions(+), 15 deletions(-)
+ drivers/ram/k3-ddrss/k3-ddrss.c | 122 +++++++++++++++++++++++++++++---
+ 1 file changed, 114 insertions(+), 8 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am62a-ddr.dtsi b/arch/arm/dts/k3-am62a-ddr.dtsi
-index 8629ea45b847..42e41f78505a 100644
---- a/arch/arm/dts/k3-am62a-ddr.dtsi
-+++ b/arch/arm/dts/k3-am62a-ddr.dtsi
-@@ -4,11 +4,12 @@
+diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
+index 6e9202b95796..c29eec62bd8f 100644
+--- a/drivers/ram/k3-ddrss/k3-ddrss.c
++++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+@@ -6,6 +6,7 @@
   */
  
- / {
--	memorycontroller: memory-controller@f308000 {
-+	memorycontroller: memory-controller@f300000 {
- 		compatible = "ti,am62a-ddrss";
- 		reg = <0x00 0x0f308000 0x00 0x4000>,
--		      <0x00 0x43014000 0x00 0x100>;
--		reg-names = "cfg", "ctrl_mmr_lp4";
-+		      <0x00 0x43014000 0x00 0x100>,
-+		      <0x00 0x0f300000 0x00 0x200>;
-+		reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 		ti,ddr-freq1 = <DDRSS_PLL_FREQUENCY_1>;
- 		ti,ddr-freq2 = <DDRSS_PLL_FREQUENCY_2>;
- 		ti,ddr-fhs-cnt = <DDRSS_PLL_FHS_CNT>;
-diff --git a/arch/arm/dts/k3-j721s2-ddr.dtsi b/arch/arm/dts/k3-j721s2-ddr.dtsi
-index 345e2b84f9e8..9764085163c4 100644
---- a/arch/arm/dts/k3-j721s2-ddr.dtsi
-+++ b/arch/arm/dts/k3-j721s2-ddr.dtsi
-@@ -5,6 +5,8 @@
+ #include <config.h>
++#include <time.h>
+ #include <clk.h>
+ #include <div64.h>
+ #include <dm.h>
+@@ -548,14 +549,118 @@ static void k3_ddrss_set_ecc_range_r0(u32 base, u32 start_address, u32 size)
+ 	writel((start_address + size - 1) >> 16, base + DDRSS_ECC_R0_END_ADDR_REG);
+ }
  
- &main_navss {
- 	ranges = <0x00 0x00114000 0x00 0x00114000 0x00 0x00000100>, // ctrl_mmr_lpr
-+		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
-+		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
- 		 <0x00 0x02990000 0x00 0x02990000 0x00 0x00004000>, // ddr0 cfg
- 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
- 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
-@@ -24,8 +26,9 @@
- 		memorycontroller0: memorycontroller@2990000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x02990000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x02980000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 138 TI_SCI_PD_SHARED>,
- 				<&k3_pds 96 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 138 0>, <&k3_clks 43 2>;
-@@ -2232,8 +2235,9 @@
- 		memorycontroller1: memorycontroller@29b0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029b0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029a0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 139 TI_SCI_PD_SHARED>,
- 				<&k3_pds 97 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 139 0>, <&k3_clks 43 2>;
-diff --git a/arch/arm/dts/k3-j784s4-ddr.dtsi b/arch/arm/dts/k3-j784s4-ddr.dtsi
-index 1c3242b0870c..fc74c539331e 100644
---- a/arch/arm/dts/k3-j784s4-ddr.dtsi
-+++ b/arch/arm/dts/k3-j784s4-ddr.dtsi
-@@ -9,6 +9,10 @@
- 		 <0x00 0x029b0000 0x00 0x029b0000 0x00 0x00004000>, // ddr1 cfg
- 		 <0x00 0x029d0000 0x00 0x029d0000 0x00 0x00004000>, // ddr2 cfg
- 		 <0x00 0x029f0000 0x00 0x029f0000 0x00 0x00004000>, // ddr3 cfg
-+		 <0x00 0x02980000 0x00 0x02980000 0x00 0x00000200>, // ss cfg 0
-+		 <0x00 0x029a0000 0x00 0x029a0000 0x00 0x00000200>, // ss cfg 1
-+		 <0x00 0x029c0000 0x00 0x029c0000 0x00 0x00000200>, // ss cfg 2
-+		 <0x00 0x029e0000 0x00 0x029e0000 0x00 0x00000200>, // ss cfg 3
- 		 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
+-static void k3_ddrss_preload_ecc_mem_region(u32 *addr, u32 size, u32 word)
++#define BIST_MODE_MEM_INIT		4
++#define BIST_MEM_INIT_TIMEOUT		10000 /* 1msec loops per block = 10s */
++static void k3_lpddr4_bist_init_mem_region(struct k3_ddrss_desc *ddrss,
++					   u64 addr, u64 size,
++					   u32 pattern)
+ {
+-	int i;
++	lpddr4_obj *driverdt = ddrss->driverdt;
++	lpddr4_privatedata *pd = &ddrss->pd;
++	u32 status, offset, regval;
++	bool int_status;
++	int i = 0;
++
++	/* Set BIST_START_ADDR_0 [31:0] */
++	regval = (u32)(addr & TH_FLD_MASK(LPDDR4__BIST_START_ADDRESS_0__FLD));
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_START_ADDRESS_0__REG, CTL_SHIFT, offset);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, regval);
++
++	/* Set BIST_START_ADDR_1 [32 or 34:32] */
++	regval = (u32)(addr >> TH_FLD_WIDTH(LPDDR4__BIST_START_ADDRESS_0__FLD));
++	regval &= TH_FLD_MASK(LPDDR4__BIST_START_ADDRESS_1__FLD);
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_START_ADDRESS_1__REG, CTL_SHIFT, offset);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, regval);
++
++	/* Set ADDR_SPACE = log2(size) */
++	regval = (u32)(ilog2(size) << TH_FLD_SHIFT(LPDDR4__ADDR_SPACE__FLD));
++	TH_OFFSET_FROM_REG(LPDDR4__ADDR_SPACE__REG, CTL_SHIFT, offset);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, regval);
++
++	/* Enable the BIST data check. On 32bit lpddr4 (e.g J7) this shares a
++	 * register with ADDR_SPACE and BIST_GO.
++	 */
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_DATA_CHECK__REG, CTL_SHIFT, offset);
++	driverdt->readreg(pd, LPDDR4_CTL_REGS, offset, &regval);
++	regval |= TH_FLD_MASK(LPDDR4__BIST_DATA_CHECK__FLD);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, regval);
++	/* Clear the address check bit */
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_ADDR_CHECK__REG, CTL_SHIFT, offset);
++	driverdt->readreg(pd, LPDDR4_CTL_REGS, offset, &regval);
++	regval &= ~TH_FLD_MASK(LPDDR4__BIST_ADDR_CHECK__FLD);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, regval);
++
++	/* Set BIST_TEST_MODE[2:0] to memory initialize (4) */
++	regval = BIST_MODE_MEM_INIT;
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_TEST_MODE__REG, CTL_SHIFT, offset);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, regval);
++
++	/* Set BIST_DATA_PATTERN[31:0] */
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_DATA_PATTERN_0__REG, CTL_SHIFT, offset);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, pattern);
++
++	/* Set BIST_DATA_PATTERN[63:32] */
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_DATA_PATTERN_1__REG, CTL_SHIFT, offset);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, pattern);
++
++	udelay(1000);
++
++	/* Enable the programmed BIST operation - BIST_GO = 1 */
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_GO__REG, CTL_SHIFT, offset);
++	driverdt->readreg(pd, LPDDR4_CTL_REGS, offset, &regval);
++	regval |= TH_FLD_MASK(LPDDR4__BIST_GO__FLD);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, regval);
++
++	/* Wait for the BIST_DONE interrupt */
++	while (i < BIST_MEM_INIT_TIMEOUT) {
++		status = driverdt->checkctlinterrupt(pd, LPDDR4_INTR_BIST_DONE,
++						     &int_status);
++		if (!status & int_status) {
++			/* Clear LPDDR4_INTR_BIST_DONE */
++			driverdt->ackctlinterrupt(pd, LPDDR4_INTR_BIST_DONE);
++			break;
++		}
++		udelay(1000);
++		i++;
++	}
  
- 	msmc0: msmc {
-@@ -26,8 +30,9 @@
- 		memorycontroller0: memorycontroller@2990000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x02990000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x02980000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 191 TI_SCI_PD_SHARED>,
- 				<&k3_pds 131 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 191 1>, <&k3_clks 78 2>;
-@@ -2234,8 +2239,9 @@
- 		memorycontroller1: memorycontroller@29b0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029b0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029a0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 192 TI_SCI_PD_SHARED>,
- 				<&k3_pds 132 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 192 1>, <&k3_clks 78 2>;
-@@ -4442,8 +4448,9 @@
- 		memorycontroller2: memorycontroller@29d0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029d0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x029c0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 193 TI_SCI_PD_SHARED>,
- 				<&k3_pds 133 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 193 1>, <&k3_clks 78 2>;
-@@ -6650,8 +6657,9 @@
- 		memorycontroller3: memorycontroller@29f0000 {
- 			compatible = "ti,j721s2-ddrss";
- 			reg = <0x0 0x029f0000 0x0 0x4000>,
--			      <0x0 0x0114000 0x0 0x100>;
--			reg-names = "cfg", "ctrl_mmr_lp4";
-+			      <0x0 0x0114000 0x0 0x100>,
-+			      <0x0 0x29e0000 0x0 0x200>;
-+			reg-names = "cfg", "ctrl_mmr_lp4", "ss_cfg";
- 			power-domains = <&k3_pds 194 TI_SCI_PD_SHARED>,
- 				<&k3_pds 139 TI_SCI_PD_SHARED>;
- 			clocks = <&k3_clks 194 1>, <&k3_clks 78 2>;
+-	printf("ECC is enabled, priming DDR which will take several seconds.\n");
++	/* Before continuing we have to stop BIST - BIST_GO = 0 */
++	TH_OFFSET_FROM_REG(LPDDR4__BIST_GO__REG, CTL_SHIFT, offset);
++	driverdt->writereg(pd, LPDDR4_CTL_REGS, offset, 0);
++
++	/* Timeout hit while priming the memory. We can't continue,
++	 * since the memory is not fully initialized and we most
++	 * likely get an uncorrectable error exception while booting.
++	 */
++	if (i == BIST_MEM_INIT_TIMEOUT) {
++		printf("ERROR: Timeout while priming the memory.\n");
++		hang();
++	}
++}
+ 
+-	for (i = 0; i < (size / 4); i++)
+-		addr[i] = word;
++static void k3_ddrss_lpddr4_preload_full_mem(struct k3_ddrss_desc *ddrss,
++					     u64 total_size, u32 pattern)
++{
++	u32 done, max_size2;
++
++	/* Get the max size (log2) supported in this config (16/32 lpddr4)
++	 * from the start_addess width - 16bit: 8G, 32bit: 32G
++	 */
++	max_size2 = TH_FLD_WIDTH(LPDDR4__BIST_START_ADDRESS_0__FLD) +
++		    TH_FLD_WIDTH(LPDDR4__BIST_START_ADDRESS_1__FLD) + 1;
++
++	/* ECC is enabled in dt but we can't preload the memory if
++	 * the memory configuration is recognized and supported.
++	 */
++	if (!total_size || total_size > (1ull << max_size2) ||
++	    total_size & (total_size - 1)) {
++		printf("ECC: the memory configuration is not supported\n");
++		hang();
++	}
++	printf("ECC is enabled, priming DDR which will take several seconds.\n");
++	done = get_timer(0);
++	k3_lpddr4_bist_init_mem_region(ddrss, 0, total_size, pattern);
++	printf("ECC: priming DDR completed in %lu msec\n", get_timer(done));
+ }
+ 
+ static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct k3_ddrss_desc *ddrss)
+@@ -583,9 +688,10 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
+ 	writel(DDRSS_ECC_CTRL_REG_ECC_EN | DDRSS_ECC_CTRL_REG_RMW_EN |
+ 	       DDRSS_ECC_CTRL_REG_WR_ALLOC, base + DDRSS_ECC_CTRL_REG);
+ 
+-	/* Preload ECC Mem region with 0's */
+-	k3_ddrss_preload_ecc_mem_region((u32 *)ecc_region_start, ecc_range,
+-					0x00000000);
++	/* Preload the full memory with 0's using the BIST engine of
++	 * the LPDDR4 controller.
++	 */
++	k3_ddrss_lpddr4_preload_full_mem(ddrss, gd->ram_size, 0);
+ 
+ 	/* Clear Error Count Register */
+ 	writel(0x1, base + DDRSS_ECC_1B_ERR_CNT_REG);
 -- 
 2.34.1
 
