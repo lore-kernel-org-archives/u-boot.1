@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48761E77199
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 22:23:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E0D2E77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 23:45:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92BCB805D5;
-	Mon,  6 Jan 2025 23:23:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 82B6E8056D;
+	Tue,  7 Jan 2025 00:45:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hwuqyjZx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fKjJ7wRj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F7E3805F7; Mon,  6 Jan 2025 23:23:22 +0100 (CET)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id 5EA768058A; Tue,  7 Jan 2025 00:45:15 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 425748058A
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 23:23:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44ECD8036D
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 00:45:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-46788c32a69so7875451cf.2
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 14:23:20 -0800 (PST)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5d122cf8dd1so26103834a12.2
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 15:45:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736202199; x=1736806999; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uf0twyOZ5hlPpkTD+XG1A3roIkFfHo4EbY4fh3N3D40=;
- b=hwuqyjZxppCAQvRAfHHKXgd+PRKh+Q0726PmgAMGu1+R/tLST+yr09CATMxck1M/kP
- IXUQJDhykMGpQwRE+dWb0cD0hF+dWX+ZlD6w/pJp9pJ07b1kkicIb5N3cqwPRfMXfWSg
- C+viIs4XN3OktoKa+GWd/cJCIGBcSZ+BTcGH8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736202199; x=1736806999;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1736207113; x=1736811913; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uf0twyOZ5hlPpkTD+XG1A3roIkFfHo4EbY4fh3N3D40=;
- b=JPZOe48HgUZ5QO1u07/nbz16rERpg4mfBckfVB/ntmrdmzJDn6LQgJFmpUE/5yEB1o
- RWgDf/Jt52yhy2O41fp6cKMz7YXN/evxPrw0K6gFIiyVcVwoESv2KZx3slP1Vun/DmZS
- Nug/BjSne/9CYXXlzUpaFB+m1Dv8z2WNhOLPb/k38YB2G3qjogfutTE/M1xkgweQT+nq
- FI5CB3nIga1vqZ2teKNY+KW6OmQw6eqpNWmQ1th+5nEinnZTe840tga5eLmbk9YjHP41
- CoQA1XwWhOIR8X0tXgYMUY9mtFREd5viVygKLi0SlMlaA/9CTgJnuY8rwo4OYf0niu3l
- BLMQ==
+ bh=fKPnW6tJrzR1/dvhONlDw0BG/h5A1uSS3YXv8F9IW8g=;
+ b=fKjJ7wRjPC7ZoipRbALf+sjRGEifdRYxkWZHDHK+eScQT7PQFt5EEktzLLKXaId9wO
+ UY6ElgB52j7O5TXAEbQ6oWAVQ8cSP+SJqKn2r0YRaEEOpBmK2DGIGhkJU+uxS9UraDua
+ ARJoRm6GIFE0YL4MRhsOmUR+EZWY1TiyoHiHV6QaUzUXe3T3+d4milH114ARzjkWEmTH
+ U7S+/gW7oNxRuy0pRmI9SDqStDGZIxQm4B4/3U7fSz3JBzEKaw7bnVi+6hdGd7K3XVCU
+ n/UmEKUCRH2jFy1f2Dc42BmWRCoEtaRUOiQ/8xN7WCD/UiwvXPBfs24RFwcwDK7DygNB
+ 4L0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736207113; x=1736811913;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fKPnW6tJrzR1/dvhONlDw0BG/h5A1uSS3YXv8F9IW8g=;
+ b=dFE++xa80xSFsKtxhWhldVnrz48cMKrmTtAr+FUF1lKpsEhgY80Kvu99eZqCNFi20+
+ ksX84B6fAuvmeIW/M6rNKujVoFjPgbMJtLMAHZTuqgKFHGawpvBpE8OkBfKKEeJwzT4Y
+ ZVK4UK7LUFI0f6ifzlUgvYX32CItC3G2XVl3xz1+cUjyatF5xurcz3kZOHNz6YU2z5fo
+ 5HiKtrlH6EBhwZz8mwsg4ZUorWXX+i2Q9Js8CIDXe1CqQfv4O2bNUTNhUbuWDiS/ODzp
+ Uqt93XkZK80r9Ss8x177a2cT2fkHw1o0CqCx+An5LymXpS71byRC4GO4s4YzhyYTA9uR
+ aYGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFonG4JLpWJg+zc3B/wn9LbRQ4DE5PVRUGsYLdTiD7TQ7SnHEhbNO3nXfCDiCo1CttBcMD9mU=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywmh3srGjaj0r5Be07uSPP/t2HJnWojc8lwk5b1ucwolx70c683
- 4c4doPcsRBzLognFzu3B5u1FzEyCvZaPjmiKj49DLVjl9eFumIkYfPv67tC+nPaIfpzyrC2KkjT
- d
-X-Gm-Gg: ASbGncvY3fhSsMDJtCZPaldRRftiuMte6UoHisGE9cNI+Rzi6UN75nOb9VDfBlX1UiO
- AERisTUvxHCt/TLA8BC+qviyhRrDJXrxyZ5SuXhexpkRzoUd3x7z/qSbdLSwMkkcVqebJbmJc3G
- s8ckLAEMec65HaJCyVYd5EPSvjSuMWaVnOkcfeI8vo7TDb/nmDjRvBvLT7GE8dLTAggwi7A1/fz
- BGwcKqrKraQqsvfcKMb+geqz0kmcSr1ru1I9I1QJ9slyVJdb8R1tTM=
-X-Google-Smtp-Source: AGHT+IEgFpYv6knXiehl87z+9Gga6DFVhu4cO1zMFk4Fr2ktrcC/Y/n+fwLkr1B6kjQWUiAtheiYQw==
-X-Received: by 2002:ac8:7e8f:0:b0:467:5836:a9b with SMTP id
- d75a77b69052e-46a4a8cc47bmr901510031cf.15.1736202199081; 
- Mon, 06 Jan 2025 14:23:19 -0800 (PST)
-Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac2bbc62sm1541500385a.4.2025.01.06.14.23.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 14:23:17 -0800 (PST)
-Date: Mon, 6 Jan 2025 16:23:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Harsha Vardhan V M <h-vm@ti.com>
-Cc: sjg@chromium.org, angus@akkea.ca, u-boot@lists.denx.de, vigneshr@ti.com,
- kamlesh@ti.com, d-gole@ti.com, k-malarvizhi@ti.com, a-parmar1@ti.com
-Subject: Re: Proposal for a New Command to U-Boot Fuse Programming
-Message-ID: <20250106222314.GF3476@bill-the-cat>
-References: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
+ AJvYcCWmXNFfJklpVfv7jGV5hydI6Ggs0zM/k+2AumqDARdFJw8aWsk2ix8r3Jfuxg+NCuX5Abi9oB4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwwcABcGATymMtUlg4Vl/LvwMRwlud8udPQ9tACLMXS44ryOJ69
+ xqxwbLtKv+hjrJXFmDUKd0E7BbgIekUOniuINwfcjgehybF0h6WQ5r8CQHvILfZcbYYflz2aGvL
+ vV8ZSsdWK3Btt4NptvVJucsTfNHc=
+X-Gm-Gg: ASbGncvGlMbgJnyp00ZVnf3ylxoLnUwQ+ob/dpCKPMZYywsZK4t9qg1chXQxHzN3VX+
+ KE/5dIPzoq73xvjtP4Tt4XeLvi5XUD608LOUHxf4=
+X-Google-Smtp-Source: AGHT+IEnwPjd2nEclYMhKHnkPrwciqbC8qPvobDoVAOmGymCrr7u6qAf1eq7hsd996BdJ8xeIkGgWFuJXddJIaIkGkU=
+X-Received: by 2002:a05:6402:4402:b0:5d6:501c:daef with SMTP id
+ 4fb4d7f45d1cf-5d81de2e06amr54260238a12.34.1736207112338; Mon, 06 Jan 2025
+ 15:45:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GxOJBSL7K/qk6Fet"
-Content-Disposition: inline
-In-Reply-To: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com>
+ <CAFLszTi_px3qRGvpcC5WKLw+r5BqqQciOP-Vg1LEN+rt9876wQ@mail.gmail.com>
+ <20250106013311.GA8414@localhost.localdomain>
+ <CAFLszTi2ya3V4SDfpZxLzzyAdyM9KN0MGuZPnK2XeO8wRNw69w@mail.gmail.com>
+ <PAXPR04MB8459B6A69CA0713B0B51058988102@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <CAFLszTg8UHbgHnFM-6JjYFK5pd_+HW61_jzMM-eeV9+hQgOspQ@mail.gmail.com>
+In-Reply-To: <CAFLszTg8UHbgHnFM-6JjYFK5pd_+HW61_jzMM-eeV9+hQgOspQ@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Mon, 6 Jan 2025 15:45:00 -0800
+X-Gm-Features: AbW1kvbTOxazFyl-jmetH84YAbbKqfLBCEdfp7af8Y248wVc-ptlaRrGHiHqvWs
+Message-ID: <CAJaLiFy2FTtxgsb4N8GB8wxTsgyi=oPzSnjznsa_DRAbTSTixw@mail.gmail.com>
+Subject: Re: [PATCH 00/12] imx9: switch to bootstd for i.MX93/1 EVK/QSB and
+ i.MX8M EVK
+To: Simon Glass <sjg@chromium.org>
+Cc: Peng Fan <peng.fan@nxp.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, 
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,66 +101,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peng & Simon,
 
---GxOJBSL7K/qk6Fet
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Jan 6, 2025 at 4:15=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
+:
+>
+> Hi Peng,
+>
+> On Sun, 5 Jan 2025 at 18:14, Peng Fan <peng.fan@nxp.com> wrote:
+> >
+> > > Subject: Re: [PATCH 00/12] imx9: switch to bootstd for i.MX93/1
+> > > EVK/QSB and i.MX8M EVK
+> > >
+> > > Hi Peng,
+> > >
+> > > On Sun, 5 Jan 2025 at 17:27, Peng Fan <peng.fan@oss.nxp.com> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Sun, Jan 05, 2025 at 08:30:55AM +1300, Simon Glass wrote:
+> > > > >Hi Peng,
+> > > > >
+> > > > >On Sat, 4 Jan 2025 at 16:19, Peng Fan (OSS)
+> > > <peng.fan@oss.nxp.com> wrote:
+> > > > >>
+> > > > >> Switch to bootstd for NXP i.MX9/8M boards with a bsp_bootcmd
+> > > as fallback.
+> > > > >>
+> > > > [...]
+> > > > >>
+> > > > >
+> > > > >This also switches to a text environment, great!
+> > > > >
+> > > > >For bsp_bootcmd is it possible to create a bootmeth for your use
+> > > case?
+> > > > >If you would like to take a look (separate from this series), I co=
+uld
+> > > > >help with any issues that come up.
+> > > >
+> > > > I just give a quick look of bootmeth, seems needs extlinux or
+> > > > bootscript (boot.scr). But both are used on NXP i.MX release as of
+> > > > now. In NXP releases, we put all script in the U-Boot ENV.
+> > > >
+> > > > Do you have suggestions how to move to support bootmeth.
+> > >
+> > > I'm not entirely sure what you are trying to do with the bootcmd,
+> >
+> > With a single u-boot, we want to support Fedora/SUSE/etc and NXP
+> > Yocto releases.
+> >
+> > So add a bsp_bootcmd as fallback to run NXP Yocto releases.
+> > NXP Yocto releases not have extlinux.cfg, nor boot.scr, we just
+> > have simple uboot hush command in bootcmd, simplied saying:
+> > run loadimage; run loadfdt; run mmcargs; booti ${loadaddr} - ${fdtaddr}
+> >
+> > > you could write your own bootmeth, e.g. using common code from the
+> > > others. For example, bootmeth_script.c shows how to run a script and
+> > > bootmeth_extlinux.c shows how to run an extlinux file. You could then
+> > > create C code to perform your 'bsp' function, e.g. a new
+> > > bootmeth_bsp.c.
+> >
+> > I will give a look, but this seems we need put the "run loadimage and e=
+tc"
+> > in dtb and needs bootmeth_imx.c to support it.
+>
+> Note that my suggestion here is as a follow-on to you current series,
+> which I believe can be applied as is.
+>
+> Anyway, as a starting point, yes you can use run_command() lots of
+> times in the bootmeth to run the things you need. From there you can
+> potentially change some commands to direct calls into the U-Boot
+> functionality. The idea is to be able to locate the bootflow as a
+> separate thing from booting it. I am quite happy to help as well.
+>
 
-On Mon, Jan 06, 2025 at 12:06:25PM +0530, Harsha Vardhan V M wrote:
+Can we call this bootmeth_internal, and have it read the internal
+board/xxx/yyy/bootflow? And then this "default' bootflow can contain
+the envs scripting to boot the board when all other boot methods have
+failed. Of course, it can also be executed manually at command prompt
+like other bootflows.
 
-> I would like to propose a new command for U-Boot's fuse programming
-> functionality to address the challenges posed by the current implementati=
-on.
-> While the existing fuse prog command works well for programming individual
-> fuse values, it becomes cumbersome especially when dealing with large-sca=
-le
-> programming requirements.
->=20
-> Current Command: fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
->=20
-> This command programs one or more fuse words starting from a specific <ba=
-nk>
-> and <word> with the hex values given as input.
->=20
-> While functional, it lacks the efficiency and robustness needed for
-> programming a significant number of fuses or handling structured fuse
-> configuration data. Repeatedly specifying values for each fuse bank and w=
-ord
-> is not only time-consuming but also prone to errors during manual input or
-> scripting. This approach does not leverage the ability to process
-> pre-structured data in memory. For users with complex programming needs, =
-the
-> current method becomes an obstacle rather than a tool.
->=20
-> Proposed Command: fuse writebuff
+I think if we go this far to add another bootmeth, it would be nice to
+make it generic so it can be used in other boards.
 
-It would be good to provide some documentation links to the fuses that
-you're wanting to deal with. What we have now works on a number of
-diverse SoCs, even if for some cases it might be best to write a
-script that's run rather than copy/paste things live. Any sort of new
-mechanism needs to get feedback from users at other semiconductor
-vendors to make sure it's generic enough for everyones needs. Thanks.
+All the best,
+Tony
 
---=20
-Tom
-
---GxOJBSL7K/qk6Fet
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd8V7kACgkQFHw5/5Y0
-tyygbAwAolxbbwWixcypfCD4EA5GyKCc+VHIrUBjKs+HEpSjsfg9C5cb0nTWffId
-RRV4dV8s8q4l4SWMNB5R/mQ/uNEPjRGRODFvx7pzLfm6x+KiE0SA7octzVNy8SIT
-u9yoAnbpekgAVSo/+CYFUdeDFgIasJwM2Z2IMesaaS+cqXQ9PEAm21zdG547DZmu
-R4QSTdfYgW4x955+w6S6zKn2KZ6c6zzg5Y60KU8EsJxg9WQ6qFkzKTef1b/zSQju
-oHuoH5MCP9IUUvKci+dmcLmfY61J+wf5Pn74JEsIs3CYA8Wqhl1yg2/8lObe/mH4
-z0X8PUxHHV2jHq4TFQmSHUm7wg2y6vWceEqf0NlDSFifYK1z5xip74mQXneUdZOB
-4aA05NdoB0OsjqYHXIz3AvGpL/kWz2wf3Da+AQPOqW5YXDz+68bS459mncsX67pX
-PasM/b/1qJsFCRZGSRepR5Nzt1FyqucnM3AbYHM+u6QntdI4G/0lKe7r9LT7x02F
-m1BvMbV5
-=fEXl
------END PGP SIGNATURE-----
-
---GxOJBSL7K/qk6Fet--
+> Regards,
+> SImon
