@@ -4,67 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64935E77198
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 13:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99B9CE77198
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 13:15:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7232801E8;
-	Mon,  6 Jan 2025 14:14:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B62A805D7;
+	Mon,  6 Jan 2025 14:14:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HhVwHCgK";
+	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="Kf5sYWcx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48740803DC; Mon,  6 Jan 2025 07:36:38 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B10801DE
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 07:36:35 +0100 (CET)
+ id 4C801801DE; Mon,  6 Jan 2025 10:14:39 +0100 (CET)
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
+ [136.143.188.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 239138007D
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:14:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-vm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5066aTGv2378168
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 6 Jan 2025 00:36:29 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736145389;
- bh=ePjqH8MlSrKHfeCIgo60Sq826ofP54Rbj+tKiMbdFmU=;
- h=Date:To:CC:From:Subject;
- b=HhVwHCgKjuRgSRWZO+Qq5N6sViCeKRhN5dklRIX2ULADnxaYVPgU8HK7jaBCuy0V4
- WxBCL5wQRjC2OFZ6OLrHVSgt3yYqdBbheWmRI9vnQLxr3wUUSqvAm1j/26bTOhNBHz
- 7D1IKMaCmTrWJVc0db61KK5Xx6ym4I3yyUqM8HxE=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5066aToM112126
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 6 Jan 2025 00:36:29 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
- Jan 2025 00:36:28 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 6 Jan 2025 00:36:28 -0600
-Received: from [10.24.69.179] ([10.24.69.179])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5066aP6K075207;
- Mon, 6 Jan 2025 00:36:26 -0600
-Message-ID: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
-Date: Mon, 6 Jan 2025 12:06:25 +0530
+ dmarc=none (p=none dis=none) header.from=pigmoral.tech
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
+ARC-Seal: i=1; a=rsa-sha256; t=1736154868; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=RBkGJsGtqOV/N444LUT7AT3UiIX3wHMnk6WVZLggVMEjss+nm33m/EqsMgmw8VOn9lF+0g1ak9J+fLiJ2d2CBoBzcCycDVHHwcHqSuvLSviSzHv/pfp8oXMljZC5IAcYk/EOIgvGiLC30yE6a4oKcpERz7+29vAc+7NYmrxQmv8=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1736154868;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=9T2S+6bqDCZazT6grNJ2XGdnVs95b0cHp2uDK/xTnrY=; 
+ b=NbLr68vbvVqwKRotKFalUNqvYwHDvfgYW0jHhzcj6yxtbZkgUsy4RJCmAzuc4jvb5DC6DjICFAU5QMAjvwEh3oTuACmiM4sNkAyL8/5G6yafWb65NUemJi7A91snbhqZi/ywEFtu38AMlYJUEdjNfR4LzHLNduUHaFWW83DMdkE=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=pigmoral.tech;
+ spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
+ dmarc=pass header.from=<junhui.liu@pigmoral.tech>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1736154868; 
+ s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
+ h=MIME-Version:From:From:To:To:In-Reply-To:Cc:Cc:Subject:Subject:Message-ID:Date:Date:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+ bh=9T2S+6bqDCZazT6grNJ2XGdnVs95b0cHp2uDK/xTnrY=;
+ b=Kf5sYWcxZMotwRriZpYd+XOH4O+yhGBQCm5ZvttBUcu2kcchFSKCTkAJLRECjoh5
+ d1l8bzSjjiRAcG106LhbtShUr0sT/va4SUsEhfs8K2NBHAmrQdNtcKxhxstW2FpWVA5
+ xiFH4lo6QCN2FrF0n0h2zm/UBPdl42yx7+8U+NP8=
+Received: by mx.zohomail.com with SMTPS id 1736154866626778.6484607644919;
+ Mon, 6 Jan 2025 01:14:26 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: <trini@konsulko.com>, <sjg@chromium.org>, <angus@akkea.ca>,
- <u-boot@lists.denx.de>
-CC: <vigneshr@ti.com>, <kamlesh@ti.com>, <d-gole@ti.com>,
- <k-malarvizhi@ti.com>, <a-parmar1@ti.com>
-From: Harsha Vardhan V M <h-vm@ti.com>
-Subject: Proposal for a New Command to U-Boot Fuse Programming
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: "Junhui Liu" <junhui.liu@pigmoral.tech>
+To: "Marek Vasut" <marex@denx.de>, "Tom Rini" <trini@konsulko.com>, 
+ "Lukasz Majewski" <lukma@denx.de>, 
+ "Mattijs Korpershoek" <mkorpershoek@baylibre.com>
+In-Reply-To: <88c88307-ab59-4d7a-acfd-f1a52c41a382@denx.de>
+Cc: <u-boot@lists.denx.de>, <seashell11234455@gmail.com>, 
+ <pbrobinson@gmail.com>
+Subject: Re: [PATCH v3 7/8] usb: dwc2: Unify flush and reset logic with v4.20a
+ support
+Message-ID: <18180fa5d7b286a0.3a5aa491c048ad05.6820f85a01d7931@Jude-Air.local>
+Date: Mon, 6 Jan 2025 09:14:21 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-ZohoMailClient: External
 X-Mailman-Approved-At: Mon, 06 Jan 2025 14:14:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,96 +79,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I would like to propose a new command for U-Boot's fuse programming 
-functionality to address the challenges posed by the current 
-implementation. While the existing fuse prog command works well for 
-programming individual fuse values, it becomes cumbersome especially 
-when dealing with large-scale programming requirements.
+Hi Marek,
 
-Current Command: fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
+On 05/01/2025 20:19, Marek Vasut wrote:
+> On 1/4/25 4:37 AM, Junhui Liu wrote:
+>> From: Kongyang Liu <seashell11234455@gmail.com>
+>>=20
+>> This patch merges flush and reset logic for both host and gadget code
+>> into a common set of functions, reducing duplication. It also adds suppor=
+t
+>> for the updated reset logic to compatible with core version since v4.20a.
+>>=20
+>> This patch mainly refers to the patch in the kernel.
+>> link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
+commit/?id=3D65dc2e725286106f99c6f6b78e3d9c52c15f3a9c
+>=20
+> [...]
+>=20
+>> +++ b/drivers/usb/common/dwc2_core.c
+>> @@ -0,0 +1,115 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+>=20
+> 2025 now .
 
-This command programs one or more fuse words starting from a specific 
-<bank> and <word> with the hex values given as input.
+You're right. It should be 2024-2025.
 
-While functional, it lacks the efficiency and robustness needed for 
-programming a significant number of fuses or handling structured fuse 
-configuration data. Repeatedly specifying values for each fuse bank and 
-word is not only time-consuming but also prone to errors during manual 
-input or scripting. This approach does not leverage the ability to 
-process pre-structured data in memory. For users with complex 
-programming needs, the current method becomes an obstacle rather than a 
-tool.
+>=20
+> [...]
+>=20
+>> +int dwc2_flush_rx_fifo(struct dwc2_core_regs *regs)
+>> +{
+>> +	int ret;
+>> +
+>> +	log_debug("Flush Rx FIFO\n");
+>> +
+>> +	/* Wait for AHB master IDLE state */
+>> +	ret =3D wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE, =
+true, 1000, false);
+>> +	if (ret) {
+>> +		log_warning("%s: Waiting for GRSTCTL_AHBIDLE timeout\n", __func__);
+>> +		return ret;
+>> +	}
+>> +
+>> +	writel(GRSTCTL_RXFFLSH, &regs->global_regs.grstctl);
+>> +
+>> +	ret =3D wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_RXFFLSH, =
+false, 1000, false);
+>> +	if (ret) {
+>> +		log_warning("%s: Waiting for GRSTCTL_RXFFLSH timeout\n", __func__);
+>> +		return ret;
+>> +	}
+>> +
+>> +	/* Wait for at least 3 PHY Clocks */
+>> +	udelay(1);
+> Shouldn't this delay be derived from the PHY clock frequency somehow ?
+> Are we sure 1us is always sufficient ?
 
-Proposed Command: fuse writebuff
+According to the datasheet, the PHY clock can be selected to 6/30/48/60
+MHz depending on the speed mode. And 1us is sufficient even for 6MHz
+(twice the 3 PHY clock at 6MHz), so I think 1us is acceptable here.
 
-NAME
-fuse writebuff - Program fuse data using a memory-based structured buffer.
+If we want to derive the delay dynamically from the PHY clock frequency,
+we would need to read the PHY clock and speed mode cfg from the register
+and calculate the appropriate delay. This would add complexity to the
+code. In the current situation, a fixed delay of 1 us is sufficient for
+all supported clock frequencies and keeps the implementation simpler.
 
-SYNOPSIS
-fuse writebuff <command_id> <addr>
-
-DESCRIPTION
-The fuse writebuff command provides a new method for programming fuses 
-by leveraging a structured buffer in memory. Instead of requiring 
-explicit <bank> and <word> parameters for each fuse word, this command 
-operates on a structured buffer in memory at <addr>, that contains all 
-the necessary data and programming details, allowing bulk or structured 
-programming in a single operation. This approach simplifies workflows, 
-reduces manual input, and improves flexibility for complex programming 
-scenarios.
-
-PARAMETERS
-• <command_id>
-Specifies the programming mode or indicates how the buffer data should 
-be interpreted. This parameter is a u32 value that identifies the 
-operational context or configuration for the programming process. 
-Examples of command_id usage might include:
-  • A programming mode
-  • A specific interpretation of the buffer layout.
-  • A mode for validating the buffer before programming.
-
-• <addr>
-The starting memory address of the buffer containing the structured fuse 
-programming data. This parameter is of type ulong and points to a block 
-of memory where the programming data and any associated metadata reside.
-
-USAGE
-The fuse writebuff command reads the buffer at <addr> and interprets it 
-according to the specified <command_id>. The structure of the buffer 
-should contain all necessary details for programming fuses, such as the 
-values to be written to the fuse, optional metadata for validation or 
-programming constraints and any configuration data required for the 
-operation.
-
-EXAMPLES
-1. fuse writebuff 1 0x80000000
-In this example:
-•    command_id is 1, specifying a particular programming mode or a 
-buffer format.
-•    addr is 0x80000000, pointing to the starting memory address where 
-the structured buffer resides.
-
-RETURN VALUES
-• 0: The operation was successful.
-• Non-zero: An error occurred during the operation. Errors may include 
-invalid command_id, inaccessible memory at <addr>, or issues with the 
-buffer contents.
-
-The corresponding function, fuse_writebuff(u32 command_id, ulong addr), 
-would process this data in a single invocation. This approach 
-significantly streamlines and simplifies workflows where fuse 
-programming involves predefined rules or structured data, enabling users 
-to prepare a struct buffer in memory that encapsulates the entire fuse 
-programming configuration. I believe fuse writebuff simplifies 
-workflows, reduces error risks, and provides the extensibility needed 
-for advanced usage scenarios like programming large or complex fuse 
-configurations.
-
-Request for Feedback
-
-Does this proposal look good? If so, I will start to work on an RFC 
-patch to implement the proposed changes.
-
+--=20
 Best regards,
-Harsha Vardhan V M
-h-vm@ti.com
+Junhui Liu
