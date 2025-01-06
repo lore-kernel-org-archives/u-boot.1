@@ -4,137 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5196CE77188
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DD09E77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 09:26:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCBFC80137;
-	Mon,  6 Jan 2025 10:21:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id CF9B480137;
+	Mon,  6 Jan 2025 10:26:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vSqkwzJa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yvopZQPN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D739801DE; Mon,  6 Jan 2025 10:21:01 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::612])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 03F63801DE; Mon,  6 Jan 2025 10:26:53 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3E968007D
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:20:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E1608007D
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 10:26:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xFdTHAMqTTZ3TKYavt/HtT+yo9U+iL2UNHLgcG/TlQRmOq192GXkMy34YIyfWI004b9aVRZkTpUzsGtOECR7uNi+CnFLyDpZbt5633R3kGxlMIbwQrm5iC+kPK/E7VZaSeYQ9RyUBC7Z0MsbFPFwxuISsz6eTR/F0+IAu8c0oDdsWNXF61/RWSJ4E15bYdcyZcgM7OqpCsHfXg4P2+Hd39eIvQBaYmaGoJX4xQFTyibDUf9NX/b7D6fYUaYDk6u74c/YznSJgj6Gc5Z6BDBHd5O3MWh8wrS9GUnWt7lCLzQrpGiWMBfye1Qnjg7m2E2jc++7aLb33DB2fMviA5bNRg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AF/ataaH5zYp3RurHHm7vrLgX2TW00yy1TjC47Pfwvg=;
- b=nwfp7ZzBNcq+ZpvROKis5Uh3+tErrk9ShtmB8/rlWR8FXrMs4lT+4L8bn6F0AKgKYsSwUhCGTx3AIep7XUJ8n3rlbBjf4CxwaAy8HKZbGSgz5wK2vp6cyu0sZgQfmCgMLv6gYyOoFFABU9mqHTajK9/m2jH+qRw+QVIf+fJWzloMdSmXVTqVk3/oTqIOC5wjXCbWGZCDg+wzPZhIXx1A5tVLPOAub4dR/VOcoSPr40FXNKPAEAQJh7tUCsZixGGl+nVum5Ej79zNZw1LUT3Hi/FTyuecbAKVvgeCFKMNZ/vFO4qZHO8hKravG+abwQcL+H9ktzs3AUSAQn0zTERmyA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AF/ataaH5zYp3RurHHm7vrLgX2TW00yy1TjC47Pfwvg=;
- b=vSqkwzJaythK2hxohNeyCaZNMC+nKFgvUcmTvp0dnxxI4D5/e812C2jiI7wuLhzKyce4Xd564Rgw5OFHkkukbN1usMMnXM7vrQSlLJ66L0g+KzavGJLnI5UkxfBiyNGUZX64siQr2ZcJLhBgnfcPfggOla6aPVfILC9WfjKs4h4=
-Received: from BY3PR05CA0022.namprd05.prod.outlook.com (2603:10b6:a03:254::27)
- by PH7PR12MB7257.namprd12.prod.outlook.com (2603:10b6:510:205::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.17; Mon, 6 Jan
- 2025 09:20:47 +0000
-Received: from SJ1PEPF00001CE3.namprd05.prod.outlook.com
- (2603:10b6:a03:254:cafe::e7) by BY3PR05CA0022.outlook.office365.com
- (2603:10b6:a03:254::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8335.9 via Frontend Transport; Mon, 6
- Jan 2025 09:20:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF00001CE3.mail.protection.outlook.com (10.167.242.11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8335.7 via Frontend Transport; Mon, 6 Jan 2025 09:20:47 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 6 Jan
- 2025 03:20:43 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] arm64: versal: RO multi_boot register in non JTAG bootmode
-Date: Mon, 6 Jan 2025 10:20:40 +0100
-Message-ID: <484b9cafc45e72308a1a29a3ab772020f96784cc.1736155238.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4363dc916ceso87807155e9.0
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 01:26:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1736155609; x=1736760409; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=3QRuu1Co28eyMa3d+CJMZXkgtqaxChKpUO9bokc5j1I=;
+ b=yvopZQPNZDJEO35QdLyKLIwOxCLLLVlA8b7Lekc3i1TELzCz5vUTT2B6hW+lHuwr1q
+ uofquVgXKGOrRfhsw07oOfgs7mL8IKfW0toTpeyF+HUQW2n1zizApkyTPBETBkmtTUxs
+ lGCzacFCpnqHHYq/MsKqu/ygkzxHBJ5gUHhgVTpW02thbwmGKwcB2m1dF7VRau6XG+1O
+ 4xH8MPs0UlQW8m3a0ozQYcotVWEOqE3Y6AD3Luo2TUOgZjFjLKbyZ/6L6Z7YlSuLIih9
+ YP18591fNyfOYDPZfQlIxyo1kJafVpOlkAi2V7zbwdzoOCBGmzTXEuDT3DVDboioz85X
+ 7BGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736155609; x=1736760409;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=3QRuu1Co28eyMa3d+CJMZXkgtqaxChKpUO9bokc5j1I=;
+ b=csVBiAgfdVDMPFDBh1xpPja9vCNgCqzK2KMVAiAftdAdpItFLb5PXvpDNWi/BcYbzx
+ uea4rt/FX8HXDGLq8k7hekv7iOZPJ/TRmErlbP7m2b4VbBfMr+bP5EW3OSGamBc+N96i
+ iq5Q28F4FeWSYCQ+geMpfA717/Lpmr7lmtTHg9Ip6QLlHtgIcNKbbDsftP8u67vhZk7d
+ PdKnYc/fZ5+hJ6PL5NB4PjIUarB7kxPvZxhWsBYEhspPBhCbaTPJdEo9uDUSMdSbJWTR
+ GDTAEs6ngrw2cS/vSVZI91cTprEim397+lvFJ4dwUm1102/C2XBbzEdkpfZi6pBCmZR/
+ +Y+g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXmhwgUJtxNGiphLBtuLdCKJEeaR33fmg9FYstcEzJbx3Zz74bF/z9Enhg7so1RryalqT/SASY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzAdt+TSGEGBqupThi0IcaDnKsBh48nzz/RNtbC5cNnSf05KNIM
+ p1quScdToWrQUFRf9FTd61k75TO8soVYcwhPumjPZmSIJ80fR7XFlayVtrZ2WD0=
+X-Gm-Gg: ASbGncv7bqbZEg2VIz0xir45gq+Vj6ybJalLO5b9tI8wQgj48K/wAajxG+PetXmVD8F
+ O9B5pz6xnFJEetsJHueuU1NbSgvD6O93UzLR5W75JF5bQvTtmgg+1Boc7Z5MQAI1O79QFTc7TUe
+ LlVOEh0bdn1Nqe2NKC/2PptEkRMViRZ1Qoq6UEhT2LfPW0DrYgvy4zP5x/WnwIXezu7tEWcz7rT
+ +P9ND6PiBJ2juL+u20wIFOgf77BdIbHHc2X5laIY1V2imymw0J0cKNkWvd0uJTSqInB0doi3PPJ
+ QGikTlOFnsku71LWIfmzJOx3P1yg
+X-Google-Smtp-Source: AGHT+IEZ9azMaRxbxr8BdVCdWyEqnRP8BUMhgcyISSuzXMb2mcYaRlD4MxC9r+XRmr/OzIq8vKSSog==
+X-Received: by 2002:a05:6000:1785:b0:386:3c93:70ff with SMTP id
+ ffacd0b85a97d-38a1a1fdd35mr51711326f8f.8.1736155609360; 
+ Mon, 06 Jan 2025 01:26:49 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:95:e905:1421:811c?
+ ([2a01:e0a:982:cbb0:95:e905:1421:811c])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43656b3b1f6sm602698535e9.31.2025.01.06.01.26.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 06 Jan 2025 01:26:48 -0800 (PST)
+Message-ID: <6491e671-62b9-45ec-ad28-c7c0d55bc427@linaro.org>
+Date: Mon, 6 Jan 2025 10:26:50 +0100
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1799; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=ygT1HTFzpt4zwboKulylHyqJfwWzWTcNZzPb7R6ZGoA=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvTqBRk6LIL95hs0Q27f4AjYN+9z89OpAkvjxf59qb//5
- lqCwJH8jlgWBkEmBlkxRRZpmytn9lbOmCJ88bAczBxWJpAhDFycAjARseMM8xMLTrgKBfLxZZWl
- s05l1+LMy7TwYJjvevx/7GGFK4GzHSp5F63YUrRwlushAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE3:EE_|PH7PR12MB7257:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9fa5957f-3a70-425e-9e78-08dd2e3367bb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ehk3ljQBBC2DMdONyiTdkmzIOAF2d/YYGwEmrBWkh/BudwG/KeKOqqgwx+c2?=
- =?us-ascii?Q?0WKS5ch3tNAlmS7CkXYTFe6RtJ2y3g3Vx5hxIP85WWnjd/zX/7shXtJokaGY?=
- =?us-ascii?Q?5KqrmHErk9iWMdpyfxByyJT9PmepZU77aDE5mXRjvDW6HVFdGd7JtfAiyl5j?=
- =?us-ascii?Q?nctBCQFabKFUdQ6Jodfou9cx0LSzoJ7kfnfqQApTcSdJ1sdsgvjs1fXJS+1w?=
- =?us-ascii?Q?//4W64wy4YP00Js8uywuDE2RXSrC3v/7bEoqvB69LcznTQLge72DQxIfmSvW?=
- =?us-ascii?Q?UF1+PwpFg8dbPO0m9jxuJfu5CPUnZchjhquwcrx+OdQxT7gKrzaT6lC+4puH?=
- =?us-ascii?Q?diyPv9jO/CBPffHwjeP5SmRiG1PsBjEsrfiZIEtrVb2b5gL8GBlIHc6lO0YQ?=
- =?us-ascii?Q?av7ih/z5LqFlNf5T7eAoih7fmUrSSPR/O+7ojBezOOgHqDrtSNQ1t43MQy9/?=
- =?us-ascii?Q?h4DvxB3Be4IbhPOBIvNIbmrm+pO42VOwc2JRWl8AUML9GB2S0yMi/VvCLWXv?=
- =?us-ascii?Q?A3J3Y6ekuxGCSi+P/ie8s9z1Yhj4SurtvarSD9Cj03WRHWZHeGE18RKrAAra?=
- =?us-ascii?Q?lCZ7iXexgR3WomWO5mx0LH/yYv15mzxbdJHdQHmOEFmSumV+MJOILaKWAMCc?=
- =?us-ascii?Q?zOvIw3wW527yoRicGdCbRjaHPedJ2nzJhkIhvDgLrt8VF7JtL50m2m5gVwdw?=
- =?us-ascii?Q?8YTAI37niJAfNo/lRlUL2UD6hLXPSYthK8zFIJyEM9j+2XTq0QzvyqnY8+2N?=
- =?us-ascii?Q?yhurXkNOWZVc3SDwRddvo2TFI7Pcqza0kw1cCWCiy8RZCIcsSvn+toKFvA+L?=
- =?us-ascii?Q?xW4Kj2fao3qOne5k1DV/c67HAqAAN2KXR4XFEyIL7EDlL2YCQfIz9pV9pidw?=
- =?us-ascii?Q?8nhFlQhkUdkYDuj6tYRxobsfj5K6YSMoO+NLDwbQKpNG53ky9v29RkBcktF0?=
- =?us-ascii?Q?bWMLpHzHI3zexgnG9h8YzFyikNrLt+i1lg1zwGxb4uXXTjcrW9tpXfkBbG7Q?=
- =?us-ascii?Q?I1giMpGzTMqG7VJysABKoz1nZPpmdb1NfAe+gvs1qKxF2ONvYfKN6NDzv2gQ?=
- =?us-ascii?Q?xiGCh93FDDv4czL3S3BjGEJ0Z0F0mCgci4jJs7ioYMw1mdg/TwuM/3ldAkhI?=
- =?us-ascii?Q?IkgfP4yEWX42iP/d3ukTos6jED9sQivHethhqH13ljP1+PsJowXKhr0qfdkf?=
- =?us-ascii?Q?8F7YGJ9XoP2H2UnstdFFYjFdv4kCG8G5cAQWouyMxQ6MGa4ga+Jb7Nha7Tma?=
- =?us-ascii?Q?4L6wX+tO7hkbM+/MdhsgDo3qkFDY6YsT9ZB84Qj5emp1aoezCOSbxGxBVj4A?=
- =?us-ascii?Q?Dq8S2mHIYxAjdBaKcDblfvFsUNbGo7vRomHcRz+92OdvKQkJqHLM/z0fZwHc?=
- =?us-ascii?Q?gWHbq7FcMUnMog89V0DJph93308eHJq/mrzZwxPBGsBCvqBlHph654T+3FM3?=
- =?us-ascii?Q?4LLwVka66RqyDkgsHh5Xo2zmWM+MrFJxB+BmAu4+NztJ5cmPrZzoqycXvCQY?=
- =?us-ascii?Q?xY9tk/E/F4Kp0GE=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2025 09:20:47.3474 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9fa5957f-3a70-425e-9e78-08dd2e3367bb
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CE3.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7257
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 2/2] tools: amlimage: Add support for GXBB eMMC header
+To: Ferass El Hafidi <funderscore@postmarketos.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de
+References: <20250103215904.2590769-1-jonas@kwiboo.se>
+ <20250103215904.2590769-3-jonas@kwiboo.se>
+ <CAFLszTgehJLKF+ty4jig=JGpb9Z2rBu50+8_KcrX4ZzM4bD-Cw@mail.gmail.com>
+ <754d7695-f184-4096-980e-90df66fb2b87@kwiboo.se>
+ <D6U2EP1PJ78I.1N5VAOTOWIPZY@postmarketos.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <D6U2EP1PJ78I.1N5VAOTOWIPZY@postmarketos.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,82 +128,185 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The main reason for this change is that upstream QEMU has no multiboot
-register implemented that's why access to it fails which ends up in CI
-failure for our target.
-That's why in JTAG bootmode returns 0 which is correct behaviour because
-multiboot register is not used in this mode and value should be ignored and
-as a side effect it is also fixing CI/Qemu issue.
+On 05/01/2025 11:24, Ferass El Hafidi wrote:
+> Hi Jonas and Simon,
+> 
+> On Sat Jan 4, 2025 at 10:23 PM UTC, Jonas Karlman wrote:
+>> Hi Simon,
+>>
+>> On 2025-01-04 20:31, Simon Glass wrote:
+>>> Hi Jonas,
+>>>
+>>> On Sat, 4 Jan 2025 at 10:59, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>
+>>>> GXBB BL1 only tries to read boot image from sector 0 on eMMC and sector
+>>>> 1 on SD-card. GXL and newer read boot image from sector 1 on both eMMC
+>>>> and SD-card.
+>>>>
+>>>> Vendor BL2 have solved the issue with different offsets by considering
+>>>> where BL2 was loaded from to adjust the offset where BL3 is read from.
+>>>>
+>>>> This provide a different solution to create a boot image that can be
+>>>> booted from both eMMC and SD-card and where the offset for reading next
+>>>> stage loader can be shared for both boot options.
+>>>>
+>>>> Inject code, that relocate the payload located at 0x1200 offset in TZRAM
+>>>> to the expected offset of 0x1000, into the padding area at offset 0x200
+>>>> when a normal GXBB boot image is created. A special GXBB eMMC header can
+>>>> then be created that have the payload offset point to this relocate
+>>>> code, BL1 will jump to this relocate code when booted from eMMC instead
+>>>> of the normal payload start. One effect of this is that the payload size
+>>>> limit must be reduced by 512 bytes on GXBB.
+>>>>
+>>>> Example of how to use it:
+>>>>    # Create a normal boot image
+>>>>    tools/mkimage -T amlimage -n gxbb -d u-boot-spl.bin bl2.bin
+>>>>
+>>>>    # Create a boot image with a special eMMC header
+>>>>    tools/mkimage -T amlimage -n emmc -d bl2.bin bl2-emmc.bin
+>>>>
+>>>>    # Write normal boot image to sector 1 of eMMC/SD-card
+>>>>    dd if=bl2.bin of=/path/to/dev bs=512 seek=1
+>>>>
+>>>>    # Write eMMC header, 112 bytes, to start of eMMC
+>>>>    dd if=bl2-emmc.bin of=/path/to/dev bs=1 count=112
+>>>>
+>>>> Or with binman using something like:
+>>>>    binman {
+>>>>          multiple-images;
+>>>>
+>>>>          u-boot-gxbb-sd {
+>>>>                  filename = "u-boot-gxbb-sd.bin";
+>>>>                  pad-byte = <0xff>;
+>>>>
+>>>>                  mkimage {
+>>>>                          filename = "bl2.bin";
+>>>>                          args = "-n", "gxbb", "-T", "amlimage";
+>>>>
+>>>>                          u-boot-spl {
+>>>>                          };
+>>>>                  };
+>>>>          };
+>>>>
+>>>>          u-boot-gxbb-emmc {
+>>>>                  filename = "u-boot-gxbb-emmc.bin";
+>>>>                  pad-byte = <0xff>;
+>>>>
+>>>>                  mkimage {
+>>>>                          filename = "bl2-emmc.bin";
+>>>>                          args = "-n", "emmc", "-T", "amlimage";
+>>>>
+>>>>                          blob-ext {
+>>>>                                  filename = "bl2.bin";
+>>>>                          }
+>>>>                  };
+>>>>          };
+>>>>    };
+>>>>
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>> ---
+>>>>   tools/amlimage-gxbb-relocate.c | 79 ++++++++++++++++++++++++++++++++++
+>>>>   tools/amlimage.c               | 37 ++++++++++++++++
+>>>>   2 files changed, 116 insertions(+)
+>>>>   create mode 100644 tools/amlimage-gxbb-relocate.c
+>>>>
+>>>
+>>> I sent [1] some years ago and would quite like to enable the odroid-c2
+>>> in my lab. Is that an older version of what you are supporting here?
+>>
+>> The amlimage type in this series is only for creating an image format
+>> that the SoCs BootROM (BL1) can understand. This image type will most
+>> likely only be useful together with Ferass El Hafidi's U-Boot SPL work
+>> or for someone wanting to run bare metal code from SRAM on these SoCs.
+> 
+> I'm happy to announce that U-Boot SPL can now boot on gxbb and gxl SoCs,
+> and I'll be sending some patches to upstream that work later on.
 
-Also move versal_get_bootmode() to avoid function declaration.
+\o/
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+> 
+>>
+>> Vendor bl2.bin blobs is based on TF-A, is already in correct image
+>> format and expect next stage payload to be signed using a Amlogic FIP
+>> format. For this you will still need to use vendor tools or open source
+>> tools like meson-tools, gxlimg or meson64-tools.
+>>
+>> The amlogic-boot-fip repo [2] has blobs, vendor tools and Makefiles to
+>> combine the blobs with a U-Boot proper u-boot.bin to create a firmware
+>> image that should boot for a wide range of boards.
+>>
+>> [2] https://github.com/LibreELEC/amlogic-boot-fip
+>>
+>>>
+>>> I heard that there are people working on open source tools, but it has
+>>> been a few years and I'd be quite OK to just use vendor tools.
+>>
+>> Open-source tools exist to replace the binary-only Amlogic tools:
+>> - https://github.com/afaerber/meson-tools (GXBB, GXL & GXM only)
+>> - https://github.com/repk/gxlimg (GXBB, GXL, GXM & AXG only)
+>> - https://github.com/angerman/meson64-tools (developed for G12B, should work on G12A & SM1)
+> 
+> gxlimg now also supports G12A/G12B, but it does not support GXBB at the
+> time of writing.
 
- board/xilinx/versal/board.c | 36 +++++++++++++++++++++---------------
- 1 file changed, 21 insertions(+), 15 deletions(-)
+Exact :-)
 
-diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
-index d05220f96ffd..cff810e02ad8 100644
---- a/board/xilinx/versal/board.c
-+++ b/board/xilinx/versal/board.c
-@@ -36,8 +36,29 @@ static xilinx_desc versalpl = {
- };
- #endif
- 
-+static u8 versal_get_bootmode(void)
-+{
-+	u8 bootmode;
-+	u32 reg = 0;
-+
-+	reg = readl(&crp_base->boot_mode_usr);
-+
-+	if (reg >> BOOT_MODE_ALT_SHIFT)
-+		reg >>= BOOT_MODE_ALT_SHIFT;
-+
-+	bootmode = reg & BOOT_MODES_MASK;
-+
-+	return bootmode;
-+}
-+
- static u32 versal_multi_boot(void)
- {
-+	u8 bootmode = versal_get_bootmode();
-+
-+	/* Mostly workaround for QEMU CI pipeline */
-+	if (bootmode == JTAG_MODE)
-+		return 0;
-+
- 	return readl(0xF1110004);
- }
- 
-@@ -120,21 +141,6 @@ unsigned long do_go_exec(ulong (*entry)(int, char * const []), int argc,
- 	return ret;
- }
- 
--static u8 versal_get_bootmode(void)
--{
--	u8 bootmode;
--	u32 reg = 0;
--
--	reg = readl(&crp_base->boot_mode_usr);
--
--	if (reg >> BOOT_MODE_ALT_SHIFT)
--		reg >>= BOOT_MODE_ALT_SHIFT;
--
--	bootmode = reg & BOOT_MODES_MASK;
--
--	return bootmode;
--}
--
- static int boot_targets_setup(void)
- {
- 	u8 bootmode;
--- 
-2.43.0
+GXBB is radically different, it was heavily based on the TF-A FIP architecture,
+then Amlogic switched to custom headers for GXL and followings.
+
+I would instead support a full SPL boot with associated tooling in U-Boot
+source an leave the legacy FIP stuff where it should be, out of tree.
+
+Each board has basically a custom BL2 provided by Amlogic, with sometimes
+some custom tools, so supporting this in U-Boot would be an endless pain.
+
+Neil
+
+> 
+>>
+>> Would be nice if someone would combine those into a mkimage amlfip type
+>> or similar (a different format than this amlimage format).
+>>
+>>>
+>>> For your docs, could you put them in doc/ instead?
+>>
+>> Not fully sure what you want me to put in doc/, please be specific. The
+>> code comments and commit message should already document as much as
+>> possible until there is upstream use of the GXBB eMMC header workaround.
+>>
+>> At such time something like following could be documented:
+>>
+>>    Write image to SD-card or eMMC module:
+>>      dd if=u-boot-amlogic.bin of=/path/to/dev bs=512 seek=1 conv=fsync,notrunc
+>>
+>>    Write the eMMC header to eMMC module:
+>>      dd if=u-boot-gxbb-emmc.bin of=/path/to/dev bs=1 count=112 conv=fsync,notrunc
+>>
+>> Until Ferass El Hafidi's U-Boot SPL work has made its way upstream such
+>> commands and information would purely be speculative and will be easier
+>> to document in a future series.
+> 
+> Yes, my tree has documentation on how to make use of images generated by
+> amlimage.  I believe such documentation should be documented when there
+> actually is U-Boot SPL support as well.
+> 
+> Best regards.
+> 
+>>
+>> Regards,
+>> Jonas
+>>
+>>>
+>>> [..]
+>>>
+>>> Regards,
+>>> Simon
+>>>
+>>> [1] https://patchwork.ozlabs.org/project/uboot/patch/20211124040954.699821-8-sjg@chromium.org/
 
