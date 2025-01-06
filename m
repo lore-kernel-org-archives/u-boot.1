@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5038FE77198
-	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 11:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6E8CE77188
+	for <u-boot@archiver.kernel.org>; Mon,  6 Jan 2025 11:09:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C14E801E8;
-	Mon,  6 Jan 2025 12:07:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E743801E8;
+	Mon,  6 Jan 2025 12:09:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CYdnCaZw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mVhdx4Qt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 160498036B; Mon,  6 Jan 2025 12:07:03 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 638E68036B; Mon,  6 Jan 2025 12:09:54 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 049F3801DE
- for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 12:07:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64D18801DE
+ for <u-boot@lists.denx.de>; Mon,  6 Jan 2025 12:09:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ffd6b7d77aso192414231fa.0
- for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 03:07:00 -0800 (PST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-53e3c47434eso14661333e87.3
+ for <u-boot@lists.denx.de>; Mon, 06 Jan 2025 03:09:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736161620; x=1736766420; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1736161792; x=1736766592; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cU6HUoZT66gVFUHmQUTeaYe/I8qs52K8LxRX5IwHNAU=;
- b=CYdnCaZwaiNyLnnwbd60Oj6e9XvW5qu7p4U4NivX5f+rH3sWfCrD4FiY5UrreSxtJ/
- OwOTFmEutGYKRXQWU7mGM6azUlejgJYXV8I0agXbH5pJsLlaGn9rd/FRHNL5iBW5PKOZ
- LcMstUZ52DXu3/kKBiBMEYcaHxACz/uMIngj6CpIpd6TpsjHbcN72PrifdXqzzWpycE+
- fgGAAgHVKoSyDEVUc2O7d16SgY/cZV1qLQ15GcXWbVdL7jLl3Z/nivYGds0/WEKnumEE
- a4xmJ3fwKh7bWtBdOTnEUrLPF9/izVETqHKYjkIwvoPgRtXbmIK4XMw0OTd74jSks24a
- LwNQ==
+ bh=AvAG7j6H+Jmn1eZQEqD8es5jZTuY65ybjNyPnhBuC5I=;
+ b=mVhdx4QtatdbkkfQYVivVN22I2UKS8oaBCOGp0LAkpUIYKZl7V3drFnCCwDpIqROg4
+ bJpLquGpQQ4Y5AB4zgWJ4XrweKmXAXnxCf3M4aseBDMQLi1GGXXiQxG3CNfkqrGSmGGA
+ qYRsYQtzdpThZLQS9kPNGYO0/2qzlfvbGBMqAujILlkdph8GUK5qxh1MWklGHLvk0lz7
+ JgoJx6OZ89vnw1r1V6Uo50wL/mLhalTaAxNu9fxGyt9GXOq4BY/hJFEwoIXxyYnNU8wY
+ BkJN5PV/cIAJoc8fDIb68+vPRkkt11UF2E0l9jzG4x+3E/4lDGd+1Bv9NZH3/XfHthDc
+ Qsjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736161620; x=1736766420;
+ d=1e100.net; s=20230601; t=1736161792; x=1736766592;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cU6HUoZT66gVFUHmQUTeaYe/I8qs52K8LxRX5IwHNAU=;
- b=rYiJQim3wqyonkXc0ZBOGLpeTI5L7Ajj+Xga2lra1sLvA3kVVRR/yPKms0RR1Tniq0
- ieNRuzv9zgM9oB/ldoKXRMHh16nl2Fd2KRXYZOaXX9YA3BbJXRnoxtEdLmrqhntVRS7O
- asP6i1PpHfQPQsKxqE3vL1suBno3qw63opa4kNE6DsGFlI1jeCn01cHVxjZJwlGF6c7K
- KiiNlO6YAK7tqafRf67Vioyjw5gD1PI7Xvl4kVb3VlUZ03LsWZHcv6woVYgpavrZXtF3
- V5IUbG2JBghmNp3wA7HtyvAg4C2+tb/Sp52++jsgKRGw31uRpDxwDKsgZVHbVoQJSDO2
- znlw==
+ bh=AvAG7j6H+Jmn1eZQEqD8es5jZTuY65ybjNyPnhBuC5I=;
+ b=sJUzP++Sv+pri8T5Q96FaCb07pyPld4X2oIZVmSxSgMGUBTjY9vJcjAj0iHP+qYAyP
+ MIWpt/phquvO1yr+wkCzkR6sLnYVEhF/GOAhRAmWz91RR6s+0AwiVTObt34CCAhpsEm7
+ kBQ8YJ4a3L/poWdFlBeqc+x/nNrxCLHaSK1wuUDoXxEP8cauS25hlAHyL3bZWPa/HCW8
+ ZMqPlIIGGzrc4zyLxxfHiULzoWJ9K6dBHW8izBPtlEF2PV3+lZrVtaP3jT2otMo0RzTv
+ Si9DJq9eDS/q6vFfJHirzHUpFQrYc94hL7iQD/u1Yj2bYp3/X6jxpEWykgZ2qO/I0VzI
+ JkeQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOY12UwBoaj8pCNHa2WEiVP8VK0RIvsUvlZSzG17r43x6952Bn5kMgD/vtcX5XHy0Qy6rohCM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwVH9rCFkEKnk9EfXAvV4vaYH4TMoLur2QJFK0/LPe2BTWZhHT2
- Sf+nchXacBseB91tQAPJIMO/VILYogsQ1+wJwcPv/m5pKfWKOk0uyNAEmPElX1nN5QfxHbOmhRr
- gO5+gdtjuS16c7xYW/X8TNQ6iPXQ=
-X-Gm-Gg: ASbGncuVP+6X3qB/gQqX61qttWvm+htXxlt3yjAQo4SHP9o9iQv89papnHBzG8MS+cA
- 3i2TTDITMuWz4oInM50o9jJSXAmAlZ4TsveArtkfypTZv+BRaevEDrPtrGrFf+QDRzUfFsw==
-X-Google-Smtp-Source: AGHT+IGLVmIFuGziwKWncURpdNH35u/PRRMdPTGDNGIDOdIaM66SFa8NjeBXbqLHZMRaEkualTkOxY1oqqzAANHgkM4=
-X-Received: by 2002:a05:6512:1394:b0:540:1ec0:4d86 with SMTP id
- 2adb3069b0e04-54229533e4fmr17100902e87.17.1736161619904; Mon, 06 Jan 2025
- 03:06:59 -0800 (PST)
+ AJvYcCWz3b9IZqi4llA66BRb80de7A9LlRMdfAZ9vj5X/Thh9JrWUpDl3qzat/WbxH0wMVfl7Kzrhw0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwK1SbP3l37eZ/3iecoCBjVV6kRLnMKVq/a4VJqNnbNckiVZ4Xh
+ r5Ejjim+Ns+LkkXE6mHb4aAlDXDWw8MKl6hWbnXZq3fGje2OWhV2zBFrXB+3u7ahy0/h5Brkvr/
+ avnaZSAGTUHlOhzrqaUkjZuJ8w+E=
+X-Gm-Gg: ASbGncuvGqXsui2r/TIhujTxbQadmJrEE27a5xBFfH5vaaoWIBJH80LpGoWC6E/Rmts
+ J2fHbHp1uw4FCOk+89tRGXZEm7fyU3ylfiQo89wbj7gUzErs6VwiqdDWQ6uurtMEVSv3tqw==
+X-Google-Smtp-Source: AGHT+IFnyaCsoMP8xe5B3MS7gMoNz6y31rA2jPe8Vk1LE4J0BTKrPYw/Tt+1cKBMpA12Ttqj8X9hzdfGYPSo9FDSnoU=
+X-Received: by 2002:a05:6512:6d3:b0:540:3561:8897 with SMTP id
+ 2adb3069b0e04-542295619e1mr15497702e87.39.1736161791550; Mon, 06 Jan 2025
+ 03:09:51 -0800 (PST)
 MIME-Version: 1.0
 References: <20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com>
- <20250104-imx-bootstd-v1-1-e09618cc1d65@nxp.com>
-In-Reply-To: <20250104-imx-bootstd-v1-1-e09618cc1d65@nxp.com>
+ <20250104-imx-bootstd-v1-6-e09618cc1d65@nxp.com>
+In-Reply-To: <20250104-imx-bootstd-v1-6-e09618cc1d65@nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 6 Jan 2025 08:06:48 -0300
-Message-ID: <CAOMZO5B1H8pKvnAHcrbNmDM4Ur7jniZDqdtJi+y6JxLYXpJSrA@mail.gmail.com>
-Subject: Re: [PATCH 01/12] imx: imx93_evk: switch to BOOTSTD
+Date: Mon, 6 Jan 2025 08:09:40 -0300
+Message-ID: <CAOMZO5DA8b1X+AFxnTbwjNBURg9xpAe7L4c31e1xFOibgUfe_Q@mail.gmail.com>
+Subject: Re: [PATCH 06/12] imx: imx8mn_evk: Enable dynamic settings to mmcdev
+ and mmcroot
 To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
 Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
@@ -96,12 +97,15 @@ X-Virus-Status: Clean
 On Sat, Jan 4, 2025 at 12:19=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
 m> wrote:
 
-> --- a/configs/imx93_11x11_evk_defconfig
-> +++ b/configs/imx93_11x11_evk_defconfig
-> @@ -6,6 +6,7 @@ CONFIG_SYS_MALLOC_F_LEN=3D0x18000
->  CONFIG_SPL_LIBCOMMON_SUPPORT=3Dy
->  CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
->  CONFIG_NR_DRAM_BANKS=3D2
-> +CONFIG_ENV_SOURCE_FILE=3D"imx93_evk"
+> +#include <asm/arch/sys_proto.h>
+> +#include <asm/global_data.h>
+> +#include <asm/io.h>
+>  #include <env.h>
+>  #include <init.h>
+> -#include <asm/global_data.h>
+>  #include <miiphy.h>
+>  #include <netdev.h>
+> -#include <asm/io.h>
 
-This line can be dropped as it is the default.
+Sorting the includes should be a separate change as it is unrelated to
+adding support for mmcdev/mmcroot dynamic setting.
