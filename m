@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A0B8E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 11:25:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F063E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 11:25:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0DB3803DC;
-	Tue,  7 Jan 2025 12:25:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 407AE80609;
+	Tue,  7 Jan 2025 12:25:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736249104;
-	bh=2Q50Z12La7togQsVFVXHWdLKZepEpuSJDClGFG/Yk8k=;
+	s=phobos-20191101; t=1736249108;
+	bh=j7k75kbmBlZspX0xcgCj/MVWw0a7UgQvRw7oNefqXio=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=A1i9moVo3VKO07JPG9LIfJYcvwiAJv8sMbxnnBfgJuvv1nOQKWOlhDFO+fGkwXdnn
-	 FTSo9hB5Dyka2ZG/MZmoKAvRWN/bFBSZL2SXXxf41noLrZMIlHTywMeRa+sqgqYZD6
-	 WBFKP4rI3PiMGK1SPtS86E+S5zcFjeYqXQl/c6LmTLB3BIMNXvSpabUDS+u2ESvNZs
-	 +zAL9KVRga4sH5uKskf/L9MTjrZYIQ2nDBY4FAfkG3tZTmTj9ioefW6d8BIOjg1q/4
-	 vhnO+35fBd0Z9iEMKnPj1537+56UU8GQdvTUEa9hmkBYzF6KjWu/U5h4bl9ApKlqZJ
-	 0K3JUvgrdi5fw==
+	b=hX6fD+D30jNr1koahdeCcf10KHmOAkr1t+szD6bGKlLnnBoqEOh6LFO2YgXAVZge+
+	 z8Asi0NnwCkavUtsl1mMU19u8pMeJt0uKy4LqTIKLIQd0VGK+Vddc4cVITIQvVS88A
+	 9Zb3vNebU4V9JxfqRdBqHowBLhj75rdO4U5FU0ySNoLFZ9duKTwQafRavmmSq7VVMM
+	 2LW3DeLua3IxmIuTQQTYfVGTPjBAEqRLC5x44UMZsgOKs2AwlogT+7wXVj8Je32IV6
+	 lksdNwLF+J73TbHq+iP88JIKOkRKS8ryuPvuP7NdkJ7mcTyTFHHkeGDJmDarFSrNHm
+	 46cW8i0oqDWGg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F48F80601; Tue,  7 Jan 2025 12:25:04 +0100 (CET)
+ id 52257805E2; Tue,  7 Jan 2025 12:25:07 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de
  [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8891C801FD
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 12:24:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EE48805EA
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 12:25:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="OBfdu0qd"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="LL8x9eCT"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CFEC1104811F3; Tue,  7 Jan 2025 12:24:56 +0100 (CET)
+ with ESMTPSA id 3C5D2104811F3; Tue,  7 Jan 2025 12:25:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736249098;
+ t=1736249102;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=2Q50Z12La7togQsVFVXHWdLKZepEpuSJDClGFG/Yk8k=;
- b=OBfdu0qdnGTd8RM4cvvMfvG45IxptloudsqORkeGxTH6leQwlP+RIOoi7Qh3NOxAQ6iUWt
- j5YojXeZntpF95ow+PinWXpZcfMR5Dadnpst6xI4SK0hT/T4/Lz4utBfEVOI2iVQtAAmmq
- iAIjl1Y5g9RO0tnkhbkZ7503sMQm7wEUO8mYvloGHLBtmWdwW9jy5QIwnQed/dzwMU00+S
- LDQlKJ7ECgx8yGtb92CvcR7Bfd8ZfNCUggn29Zd1O5Nl3UGwICPD/i7ESooAnIms+zNSb4
- yl4Fir8RK+zrmOeq90EvK+DNh52DP8yWxpR31HXAW7tLT83p/V7/uNSX2Ae/+Q==
-Message-ID: <764324cc-f845-4314-b336-8033e5df7444@denx.de>
-Date: Tue, 7 Jan 2025 12:08:54 +0100
+ bh=j7k75kbmBlZspX0xcgCj/MVWw0a7UgQvRw7oNefqXio=;
+ b=LL8x9eCT4gEmD2dRN+TYXeBi7KH3TO4OeUfiFoB/lHX5AF3eYAdiQk8X7SGzjbWg08wmSX
+ hUG0t+4ZO0bJXyP0KJafmqUGPKZ+NgfK2u0Dtdj8YK4gm4o+t9BDWSZSC8orPOllkWe18G
+ 9Vd0TL1QYJW3cEfs+bqMPzq4Vo9Q2Z9dRH4Cr/RYS0OAXy9cBNczR+EyvWRpv916tdPD6w
+ n0yb61W5LGt29i8f9eACpEwdmYSAO/+aL5te+FKtMzR+f++xJdCNrOu5w84HlGY4DhiROq
+ uV4ISLcOBZR2MQad2Ia4lUb1mAENMjB4pbI9/b89MImt9WlnZFV+tFUhPYdYHw==
+Message-ID: <27d250fc-ec48-4850-831f-b4d76b8ed240@denx.de>
+Date: Tue, 7 Jan 2025 12:10:04 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gUmU6IFtQQVRDSCB2MyAwNy8xN10gY2xr?=
- =?UTF-8?Q?=3A_scmi=3A_check_the_clock_state/parent/rate_control_permissions?=
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gUmU6IFtQQVRDSCB2MyAwMS8xN10gbWFp?=
+ =?UTF-8?Q?lbox=3A_add_i=2EMX95_Messaging_Unit_=28MU=29_driver?=
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, Peng Fan
+ <peng.fan@nxp.com>, Viorel Suman <viorel.suman@nxp.com>,
+ Ye Li <ye.li@nxp.com>
 References: <20250103-imx95-v1-0-6744df5dc020@oss.nxp.com>
- <20250103-imx95-v1-7-6744df5dc020@oss.nxp.com>
- <0898a19f-e6f1-4fa0-ae0b-6f696ffbc837@denx.de>
- <PAXPR04MB96440B011EEC2F444897AF44E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <20250103-imx95-v1-1-6744df5dc020@oss.nxp.com>
+ <22f8e29b-1372-4384-a5d4-5316c1f4f160@denx.de>
+ <PAXPR04MB96447B0DA009A2730D207B7FE2102@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <001a00ca-5980-4ffc-8fe7-67267a71615c@denx.de>
+ <20250107044653.GA9383@localhost.localdomain>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB96440B011EEC2F444897AF44E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <20250107044653.GA9383@localhost.localdomain>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,26 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/7/25 9:00 AM, Alice Guo (OSS) wrote:
->>> SCMI clock management protocol driver in Linux checks clock state,
->>> parent and rate control permissions. To be consistent with the kernel
->>> driver, add this check here.
+On 1/7/25 6:01 AM, Peng Fan wrote:
+> On Mon, Jan 06, 2025 at 09:39:57PM +0100, Marek Vasut wrote:
+>> On 1/6/25 6:27 AM, Alice Guo (OSS) wrote:
+>>>> 主题: [EXT] Re: [PATCH v3 01/17] mailbox: add i.MX95 Messaging Unit (MU)
+>>>> driver
+>>>>
+>>>> Caution: This is an external email. Please take care when clicking links or
+>>>> opening attachments. When in doubt, report the message using the 'Report this
+>>>> email' button
+>>>>
+>>>>
+>>>> On 1/3/25 7:45 AM, Alice Guo wrote:
+>>>>> From: Peng Fan <peng.fan@nxp.com>
+>>>>>
+>>>>> i.MX95 Messaging Unit (MU) enables 2 processors on a chip to
+>>>>> communicate and coordinate by passing messages (e.g. frame
+>>>>> information, event notices and requests) through the MU interface.
+>>>>> This patch provides a driver for i.MX95 MU using the common mailbox
+>>>>> framework. Currently, SCMI exchanges on i.MX95 uses a mailbox
+>>>>> transport with SMT format, and the hardware used is this MU.
+>>>> Is this ported from Linux ? If so, as of which mainline Linux kernel commit ?
 >>>
->>> When using common clock framework (CCF), use the clock signal ID to
->>> get the clock registered by clk_register() in scmi_clk_probe(), and
->>> then obatin the struct clk_scmi variable with container_of().
+>>> Yes, u-boot/drivers/mailbox/imx-mailbox.c is ported v6.12.8 Linux.
+>>
+>> Please add that information into the commit message, including the kernel
+>> version and Linux commit ID , in case this driver needs to be updated.
+>>
+>>>> Can you add older iMX SoC support while adding this driver ? It seems
+>>>> imx6..imx95 MU IP look very similar.
 >>>
->>> Signed-off-by: Alice Guo <alice.guo@nxp.com>
->>> Signed-off-by: Ye Li <ye.li@nxp.com>
->>> Reviewed-by: Peng Fan <peng.fan@nxp.com>
->>> ---
->>>    arch/sandbox/include/asm/scmi_test.h       |   2 +
->>>    drivers/clk/clk_scmi.c                     | 173
->> +++++++++++++++++++++++++++--
->>>    drivers/firmware/scmi/sandbox-scmi_agent.c |  56 +++++++++-
->>>    include/scmi_protocols.h                   |  26 ++++-
->> Please split common/imx/sandbox changes into separate patches .
+>>> This patch-set is only for i.MX95. I can add the older iMX SoC support in the future.
+>> Maybe you could split off addition of the MU driver into separate series and
+>> do it for all the SoCs right away instead ?
 > 
-> Spliting common/imx/sandbox changes into separate patches will cause bisect issue.
-
-How so ?
+> Adding other SoCs support needs tests, but to tests other platforms, we
+> need more work. We could not just put code here that not tested for other SoCs.
+If you are already porting the MU driver for Linux, there is a good 
+chance the support for other SoCs was already tested in Linux, so it 
+should be safe to port it over in full to U-Boot that way ?
