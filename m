@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92020E77198
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 11:25:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CD9E77198
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 11:25:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9065B80600;
+	by phobos.denx.de (Postfix) with ESMTP id E170080628;
 	Tue,  7 Jan 2025 12:25:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1736249116;
-	bh=AVm360gcrJ/YhWcQ1bkGEAj9o+OyHUnChGd5Yd/MAn4=;
+	bh=e/kp7WMiraXzqpdjwNaH4WcFRwFnc+0D6I4tiTwexeU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BofRykhfCQ3gP0qCJ35R5ZOGVkxG0ft4uxATJD8leZXWW1x7LdVUHGJCdAHSW7B+K
-	 pyQ4GSHv2CAxDyxztJWA5X6Q3U8Q0Je/e8D7Kc5XiRTFOlx5I1UYnk4kq+q4BhytUK
-	 fAqrRtakq84LUTeF1xj1sZZuvBzJg0uCZNXfCyEktH/KE5H59AhANeTtiAw2ScSkmw
-	 GeYhm8KHJ9378Ws7skl9fianOkyLWsQoK7GoXzPtA96tziZUw0sU8A6e1zJoPtD8jC
-	 h3hISVwjtGy5uNkFl6yTp2b23mlf7Nxf81PShMplghefLpzq0ackVvyqSIBVeAuaCS
-	 mpW8shPdPnnxA==
+	b=TPKnTHYeNFhv0C5Nzg3t0vc3Mw/G52PoFlyRPpI/e4MvZRY5LmHfHLp2P/b0wXm/O
+	 7B169S9tsX4YfBaB+p1odwNmtYWTiDU5VzAOSOh3/H6Cyr2cj6lDE0K0cUMerPNl5D
+	 o6sG3G84CWMfd8olshttIG4R1CfbrQFs/a1fRpAJrR4zv9ZxsDdl2CjjP7YC40lkzM
+	 Fwh/m9yioYVXAgNX3IZeotQSEaYq6N6YAP4DLs9wmeNoP2P418W5EfwHPcjp2RSsfk
+	 f26V4m5tDpCmN/9c5X1QTcL5eg64ybTU6d4xCDd4bfKqjql6r6d7qJTa0izFjwx1of
+	 sAhUV4dXHPMpw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C49B0805E9; Tue,  7 Jan 2025 12:25:15 +0100 (CET)
+ id 1E1528056D; Tue,  7 Jan 2025 12:25:16 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B61D8056D
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 12:25:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A8F180619
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 12:25:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="A/d3qGK2"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="g1+xJCAN"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D3C23104811F3; Tue,  7 Jan 2025 12:25:02 +0100 (CET)
+ with ESMTPSA id EF7461048589C; Tue,  7 Jan 2025 12:25:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736249108;
+ t=1736249110;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=AVm360gcrJ/YhWcQ1bkGEAj9o+OyHUnChGd5Yd/MAn4=;
- b=A/d3qGK2KvJpTUS0NZrtUHr5IcHSCSk6MsvuuVVpYKiYO7STz4Ha7A1A7sfGBTocowBW1v
- TTuZrncsiO362JtfC9gF6bI8Rjw19EY+N3u+OI8yKPaRJUL3RwC9fjIWy6kqphXbRbK7FN
- MrnKHOg9gEWZTDxqVT3JQoTd/woK5U3VeyqYLs+Xajs0vDhRAdnoieDJ1XhoB5237zoq9C
- /u38cS8+Ovn1athlTUYdjkFo0vEeKjV1Rl9VANy09lndxZIaDaXNjsE5891w8xCdSrWiTU
- rdwLXC5PE68RqVy9dNEshZEely/WCaVnNgcCfJIFU7YPJy7JEC3iSdO0wuoNQg==
-Message-ID: <5633e9ab-0841-4f1e-9810-743359ac9107@denx.de>
-Date: Tue, 7 Jan 2025 12:10:32 +0100
+ bh=e/kp7WMiraXzqpdjwNaH4WcFRwFnc+0D6I4tiTwexeU=;
+ b=g1+xJCANdRgQvuoUxDtz/webgyPu87aLGsPQb6wxMwDTOcfCtWweD0iWJN2pKIVNCc+Hhv
+ J80vtImY8ko1hfSE1DJ/St8uc1N1wb6zI4bFah1ReNyo/UdA0so5mBbsHMgqXv1PonMAWu
+ iIRitTnS2DxrdTrTj5gr1HEpCOtGtiH7s1rYcIbe0dZDlo5Z/tvQt/pXiHUdn059ZzQnG0
+ Nit9q5yxDU1Zpme3jBeNLRjsOP9NpYojmnlmU7HJ9K59nErT+eCVfc5doGhjdrSiBF+NkS
+ /5gbR6Tlqx0+J0SmLHZybhouU6rg3qM3qbheczmQxi3amPfQB80rxOgg05Bc6g==
+Message-ID: <7c7ab649-2bda-4693-8e41-c41c8e820c06@denx.de>
+Date: Tue, 7 Jan 2025 12:16:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTog5Zue5aSNOiBbRVhUXSBSZTogW1BBVENIIHYzIDAy?=
- =?UTF-8?Q?/17=5D_firmware=3A_scmi=3A_smt=3A_Interrupt_communication_enable?=
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTog5Zue5aSNOiBbRVhUXSBSZTogW1BBVENIIHYzIDAz?=
+ =?UTF-8?Q?/17=5D_pinctrl=3A_nxp=3A_add_SCMI_pin_control_protocol_driver?=
 To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>,
- Viorel Suman <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, Peng Fan
+ <peng.fan@nxp.com>, Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>,
+ Ye Li <ye.li@nxp.com>
 References: <20250103-imx95-v1-0-6744df5dc020@oss.nxp.com>
- <20250103-imx95-v1-2-6744df5dc020@oss.nxp.com>
- <1bc61bdc-2ecd-4705-9873-8e0e3257a6a8@denx.de>
- <PAXPR04MB964475AEF1CB007B5949088CE2102@PAXPR04MB9644.eurprd04.prod.outlook.com>
- <dbfd7a78-06e3-4e42-961c-5130f1707f26@denx.de>
- <PAXPR04MB96441C57A9F06EB21FF1FF59E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <20250103-imx95-v1-3-6744df5dc020@oss.nxp.com>
+ <61075a72-7a89-4bcf-8d96-f9fc24dfd5a5@denx.de>
+ <PAXPR04MB96440F6976C336998424F176E2102@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <016aa4e5-c33d-4f77-9a12-c218c4123403@denx.de>
+ <PAXPR04MB964470D51ACF7CCD08EE87F0E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB96441C57A9F06EB21FF1FF59E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB964470D51ACF7CCD08EE87F0E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -92,46 +93,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/7/25 4:24 AM, Alice Guo (OSS) wrote:
->> 主题: Re: 回复: [EXT] Re: [PATCH v3 02/17] firmware: scmi: smt: Interrupt
->> communication enable
+On 1/7/25 7:39 AM, Alice Guo (OSS) wrote:
+>> -----邮件原件-----
+>> 发件人: Marek Vasut <marex@denx.de>
+>> 发送时间: 2025年1月7日 4:46
+>> 收件人: Alice Guo (OSS) <alice.guo@oss.nxp.com>; Tom Rini
+>> <trini@konsulko.com>; Stefano Babic <sbabic@denx.de>; Fabio Estevam
+>> <festevam@gmail.com>; dl-uboot-imx <uboot-imx@nxp.com>; Lukasz
+>> Majewski <lukma@denx.de>; Sean Anderson <seanga2@gmail.com>; Simon
+>> Glass <sjg@chromium.org>; Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>> 抄送: u-boot@lists.denx.de; tharvey@gateworks.com; Peng Fan
+>> <peng.fan@nxp.com>; Ranjani Vaidyanathan
+>> <ranjani.vaidyanathan@nxp.com>; Ye Li <ye.li@nxp.com>
+>> 主题: Re: 回复: [EXT] Re: [PATCH v3 03/17] pinctrl: nxp: add SCMI pin control
+>> protocol driver
 >>
->> On 1/6/25 7:17 AM, Alice Guo (OSS) wrote:
->>>> On 1/3/25 7:45 AM, Alice Guo wrote:
->>>>> From: Viorel Suman <viorel.suman@nxp.com>
->>>>>
->>>>> When interrupt driven communication is supported
+>> On 1/6/25 10:56 AM, Alice Guo (OSS) wrote:
+>>>>> This patch provides a driver for the SCMI pin control protocol which
+>>>>> is based on ARM's System Control and Management Interface (SCMI) 3.2.
+>>>>> Currently, only the PINCTRL_CONFIG_SET command is implemented.
 >>>>
->>>> U-Boot does not use interrupts.
->>>>
->>>>> , the transport allows
->>>>> the caller to choose between interrupt and polling driven
->>>>> communications. To make the choice, the channel flags are used.
->>>>> i.MX95 uses interrupt driven communication so that Channel flags
->>>>> should be set to 1.
->>>>
->>>> How does this work in U-Boot, which does not use interrupts ?
+>>>> What is the SCMI provider for this platform ?
 >>>
 >>> Hi Marek,
 >>>
->>> The clearer explanation will be added in the commit log.
->>>
->>> This is based on Arm® System Control and Management Interface Platform
->> Design Document Version 3.2 (Document number: DEN0056E) 5.1.2. When
->> Bit[0] of Channel flags is 1, the System Manager runs on M core will trigger
->> general-purpose interrupts to A core. U-Boot polls General-purpose Status (GSR)
->> until GIPn is set.
->> If U-Boot does polling, why does this bit need to be set, shouldn't the bit be
->> cleared instead ?
+>>> System Manager which runs on M core sets pin or group configurations.
+>> U-Boot sends a SCMI message to System Manager to perform hardware
+>> operations. You can refer to the source code for details:
+>> https://github.com/nxp-imx/imx-sm.
+>>
+>> Can I use optee-os as a SCMI provider instead ?
 > 
-> My commit log may have caused your misunderstanding. If the bit is not set, the System Manager will not request doorbell interrupt. The following is the code from imx-sm:
-> 
->              if (callee)
->              {
->                  /* Generate completion interrupt */
->                  if ((buf->channelFlags & SMT_COMP_INT) != 0U)
->                  {
->                      status = RPC_SMT_DoorbellRing(smtChannel);
->                  }
->              }
-Can the SM be updated instead ?
+> You cannot replace System Manager with optee-os.
+
+I think optee-os is also capable of being SCMI provider, so I have to 
+wonder, why does NXP use custom hand-written SCMI provider instead of 
+something already available, like that optee-os ?
+
+And one more question, would it be possible to make U-Boot NOT depend on 
+SCMI at all and instead have regular clock/pinctrl drivers which can 
+configure the hardware using plain register writes, like it is done on 
+MX8M and older SoCs ? That would surely make hardware bring up easier .
