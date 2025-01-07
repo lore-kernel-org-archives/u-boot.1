@@ -4,80 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87C9DE77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 18:08:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E866FE77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 18:09:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC280803DC;
-	Tue,  7 Jan 2025 19:08:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C1B9B805EA;
+	Tue,  7 Jan 2025 19:09:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BfW0ut7o";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7B9F805E1; Tue,  7 Jan 2025 19:08:54 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2D028805E1; Tue,  7 Jan 2025 19:07:02 +0100 (CET)
+Received: from mx.skole.hr (mx2.hosting.skole.hr [161.53.165.186])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C633A8036B
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 19:08:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16A878036B
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 19:07:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-53e399e3310so18449675e87.1
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 10:08:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736273330; x=1736878130; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H+MHtwT6fpytKWR40maPJtNoTTKFix4N4Wv1b2Pss3U=;
- b=BfW0ut7opteocEDB8r7IiZXgNGdroNSei7VF86PPvmtRhrGvD2D6JYt4vXKJB7OdIN
- nLwC4UXH8ulps7fbWXt6qBItBV60a6fzdukN6RiS98MMSTKo130EimIZKBB9k6QraTmx
- K4RrIHkSmJHS8vYryQG71MpQFVOGYQob+xnVz/JzOcS+rgrwLnxlke71DIvPJw3IY6pE
- oI0zNGSlBjxZTq6BbOopXmfhSc8nXUYPuGd96uZn4t3+MF87biavgBsjBbpapsG7P37w
- RzS8sCYQiRUQckRa8BO31hIRxgKn8in5oU4UWn1YTD+mEqtrX/0hs+EShiHvd0lk/3JF
- OWFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736273330; x=1736878130;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=H+MHtwT6fpytKWR40maPJtNoTTKFix4N4Wv1b2Pss3U=;
- b=rpcNKv9Jy7Uh6tQiZ3ueJjk0w15VCIQJOPbi1B3H1dBVIlgyDKg/4/dFxMl+2I9PG+
- GBZcNFOcmRztRbaTFv6Y/KItUSigM9pWwKhXuxhTRntw8xnYGqBw+UPu07wypqRRLNIu
- F3rAcgdY5t+IsYJUPaItkW4XrYv4TVvuKhb7eUA8+Swuq4Uj6ZIlI2LP6xdalpoPglEB
- ROnyIICFDFYk51oq19pUopmpn2YipRjEEc2kgrlx6w8QP2YmXHMtgteR5ykANX3Bjenj
- jBUfqDtM6rBCAIBtabohTlYVwXQnQPEHO4tnNntpXlhw8E2DD9SIsb+WGraNwDq1hRj8
- 7+ag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/BhK3SupDaMg/h89BDhD92xWLw1KeBkVYFpwLHXvm2IqjIcKO08nbxOGi2NnV0NYrd7xKM+0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxtupirf2iQZAIe6Wkr6R902YSmeHWsOspaWHNNeaWb8uj2O5VV
- XD8GC0pvzIUi4+6cGNe4XKv2d7LyI0QbppBRtfy13UXAbUfL6pfNdakNM0VVRRHRkMISE6ZANow
- 7FJ9uvbwIBKjJOid67hl3ImWRUUy7aw==
-X-Gm-Gg: ASbGncsy5OR0gbeyDiuxxZUnjTiHxVrip+gQQa+Og1/sbfc9G0su0fF+omRh9AlYfdr
- htLAlCtsDnX3NE3MSRDqIM+msFgEmY+y8Pu8Zpw45Gi3oC754yGc1XLm0b1q2b84UMA994Q==
-X-Google-Smtp-Source: AGHT+IE6ejkT/UxSqtHdjjoZhDbisriWQk9hQDwsGu0SQPp0TK1Kii5ZAZZQbP12cVhV08wQm3HcPmUXETqeRjKLsIU=
-X-Received: by 2002:a05:6512:b86:b0:542:1b63:2e52 with SMTP id
- 2adb3069b0e04-542295229f2mr18666507e87.6.1736273329693; Tue, 07 Jan 2025
- 10:08:49 -0800 (PST)
+ spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
+Received: from mx2.hosting.skole.hr (localhost.localdomain [127.0.0.1])
+ by mx.skole.hr (mx.skole.hr) with ESMTP id 8350683444;
+ Tue,  7 Jan 2025 19:06:59 +0100 (CET)
+From: Duje =?UTF-8?B?TWloYW5vdmnEhw==?= <duje.mihanovic@skole.hr>
+To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
+Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/3] serial: ns16550: Add Intel XScale support
+Date: Tue, 07 Jan 2025 19:06:21 +0100
+Message-ID: <4975523.31r3eYUQgx@radijator>
+In-Reply-To: <0f39cd7a-c64c-45b6-9e69-4612b884c15f@denx.de>
+References: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
+ <20241231-coreprimevelte-v2-1-6a5445d92d11@skole.hr>
+ <0f39cd7a-c64c-45b6-9e69-4612b884c15f@denx.de>
 MIME-Version: 1.0
-References: <20250107-imx-bootstd-v2-0-97671b1694cd@nxp.com>
- <20250107-imx-bootstd-v2-16-97671b1694cd@nxp.com>
-In-Reply-To: <20250107-imx-bootstd-v2-16-97671b1694cd@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 7 Jan 2025 15:08:38 -0300
-X-Gm-Features: AbW1kva9PSKUITbv0prDCL78WW1VrLc0QqjskU3Lh3HAGztb4lLwB12TDxJeUJU
-Message-ID: <CAOMZO5CmznxHyaA7+8JDn-ZSbBi1jAX4DYU7w2R=a4j8mY7gEg@mail.gmail.com>
-Subject: Re: [PATCH v2 16/16] imx: imx93-11x11-evk: drop duplicated nodes
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Autocrypt: addr=duje.mihanovic@skole.hr; keydata=
+ mDMEZokhzhYJKwYBBAHaRw8BAQdAWJZ0hsI/ytTqHGFV8x6tzd5sB596cTeeDB4CQsTf+wC0KER
+ 1amUgTWloYW5vdmnEhyA8ZHVqZUBkdWplbWloYW5vdmljLnh5ej6ImQQTFgoAQRYhBG3/QdYN8x
+ S1t2umMK0xk1JFj60DBQJmiSHOAhsDBQkJZgGABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAA
+ AoJEK0xk1JFj60D1GABAJVSorZdMOlrp/oQtCSH/G53NE56x/JHA8VX+ZQBd/H3AP4/EcUf6eef
+ DUxVMh2bdkmuQKsVZGgOGiXpMksrVntWBrQpRHVqZSBNaWhhbm92acSHIDxkdWplLm1paGFub3Z
+ pY0Bza29sZS5ocj6ImQQTFgoAQRYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSH/AhsDBQkJZg
+ GABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEK0xk1JFj60Dlw8A/i4lPOL7NaYoYePDq
+ l8MaJaR9qoUi+D+HtD3t0Koi7ztAQCdizXbuqP3AVNxy5Gpb1ozgp9Xqh2MRcNmJCHA1YhWAbg4
+ BGaJIc4SCisGAQQBl1UBBQEBB0DEc9JeA55OlZfWKgvmRgw6a/EpBQ8mDl6nQTBmnd1XHAMBCAe
+ IfgQYFgoAJhYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSHOAhsMBQkJZgGAAAoJEK0xk1JFj6
+ 0DG5MA/iuo4l2GDEZ1Zf+XaS//8FwdXDO9nHkfbV2MHjF4NZXwAQDroMzBdMcqVvc8GABFlTTgG
+ j7KrRDz2HwWNyF8ZeprAQ==
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+X-Mailman-Approved-At: Tue, 07 Jan 2025 19:09:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,20 +69,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+On Tuesday 7 January 2025 12:30:40 Central European Standard Time Stefan Ro=
+ese=20
+wrote:
+> On 31.12.24 17:49, Duje Mihanovi=C4=87 wrote:
+> >   	{ .compatible =3D "ingenic,jz4780-uart",	.data =3D PORT_JZ4780  },
+> >   	{ .compatible =3D "nvidia,tegra20-uart",	.data =3D PORT_NS16550 },
+> >   	{ .compatible =3D "snps,dw-apb-uart",	.data =3D PORT_NS16550 },
+> >=20
+> > +	{ .compatible =3D "intel,xscale-uart",	.data =3D PORT_NS16550 },
+>=20
+> Looking at the Linux 8250 of_device_id struct I see this entry:
+>=20
+> 	{ .compatible =3D "mrvl,mmp-uart",
+> 		.data =3D (void *)PORT_XSCALE, },
+>=20
+> Wouldn't it make more sense to use this compatible property instead?
 
-On Tue, Jan 7, 2025 at 3:59=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.com=
-> wrote:
+I was going by the logic that intel,xscale-uart is more generic. They use=20
+identical platform data, so it would be no problem at all.
 
-> --- a/drivers/gpio/adp5585_gpio.c
-> +++ b/drivers/gpio/adp5585_gpio.c
-> @@ -224,7 +224,7 @@ static int adp5585_probe(struct udevice *dev)
->  }
->
->  static const struct udevice_id adp5585_ids[] =3D {
-> -       { .compatible =3D "adp5585" },
-> +       { .compatible =3D "adi,adp5585" },
+Regards,
+=2D-=20
+Duje
 
-Please don't mix dts with driver changes.
 
-Make this driver change a separate patch.
+
