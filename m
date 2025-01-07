@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F6FDE77198
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 14:33:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35A6E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 14:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32BB5801E8;
-	Tue,  7 Jan 2025 15:33:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2CAA7801E8;
+	Tue,  7 Jan 2025 15:38:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YM019vJs";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hCj4Q4zD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AB49801FD; Tue,  7 Jan 2025 15:33:57 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id D8B5D801FD; Tue,  7 Jan 2025 15:38:34 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86A3A8007D
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 15:33:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08B3A8007D
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 15:38:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E20035C5D42;
- Tue,  7 Jan 2025 14:33:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F33BC4CEDD;
- Tue,  7 Jan 2025 14:33:44 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 3E498A41621;
+ Tue,  7 Jan 2025 14:36:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04DBDC4CED6;
+ Tue,  7 Jan 2025 14:38:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736260430;
- bh=kLlLoB6Od04arkNSaMU6mCnEK23HuELrWlRwj29+HCY=;
+ s=k20201202; t=1736260709;
+ bh=Cc2xTdV6TNslsr5qBaebFnPqUQMiNd0ojmjToEa3P1I=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=YM019vJshG2fcAqogS3LXNi3mccZ7VUSJCEQmWy1kURvmbPt3W/km2gBzjXsGY6mr
- tN2MZye1GVGopKeP/Pb1P7WQtQxDDz4oSP1Y1uuzBMwiidIUVQ5bayEufK4UcKdWDb
- 82di7lE3iNRzeqyHjP9CLuaU4W56iQUSBFIOA1b9YLU2hmpenBgrQASR5h9miXIBOD
- b/vgWkHr8DHdsnSOzEyu0+4kMkzLu7lAqVDAGea+FWlji2O1EI9aVjcleuNXsLQvoz
- aL2rOrLn5GeWH29sah/EgtGpVTdhS5gcATrHOB2re2/Uts6gxRgG2r4sskKaJ2+5US
- hqO2cH0dngmzg==
-Message-ID: <d2c8cde1-891f-470a-abd9-598847a9078f@kernel.org>
-Date: Tue, 7 Jan 2025 16:33:42 +0200
+ b=hCj4Q4zDm1s9TwAhX7K6dM2a8y2xXmKo4vBuhj7Bx3sjkbPDvCRgyLWL7w0dmoOIQ
+ RGgvnl2cr1RB79z05/QI7XsR5FgsiJglTqe5b6wyTccyCUBY4tMfIfiwWEBfkWjqLq
+ tlyD5hyuA5BCD9ERcf2sm0lK0M6T+gE4Ez7EpE/mkpFOJBmKIaR9qmNTV46eAU8CxE
+ V7dJLZ7gN5EHQoA8zuNoWIbyn3y4pwVwX8drld9mCfIzMVA9/JXxAwyoWB3Q7DVcrl
+ vULrt1ZkCgIZ8lWRdGRJzA7fnU04FbOvAgvV1hFH4Jg0fHS/jST/oCqedsGQ2+Hl2Y
+ 1r1KekbOLxpFw==
+Message-ID: <82c602bb-f823-484d-97a9-1bf6de2b4a9b@kernel.org>
+Date: Tue, 7 Jan 2025 16:38:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/13] arm: mach-k3: j721s2_init: Probe AM65 CPSW NUSS for
- R5/A72 SPL
+Subject: Re: [PATCH 05/13] configs: am68: Add configs for enabling Ethboot in
+ R5SPL
 To: Chintan Vankar <c-vankar@ti.com>, AKASHI Takahiro
  <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
  <mikhail.kshevetskiy@iopsys.eu>,
@@ -64,10 +64,10 @@ To: Chintan Vankar <c-vankar@ti.com>, AKASHI Takahiro
  Tom Rini <trini@konsulko.com>
 Cc: srk@ti.com, s-vadapalli@ti.com, danishanwar@ti.com, u-boot@lists.denx.de
 References: <20250107093840.2211381-1-c-vankar@ti.com>
- <20250107093840.2211381-5-c-vankar@ti.com>
+ <20250107093840.2211381-6-c-vankar@ti.com>
 Content-Language: en-US
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20250107093840.2211381-5-c-vankar@ti.com>
+In-Reply-To: <20250107093840.2211381-6-c-vankar@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,65 +89,111 @@ X-Virus-Status: Clean
 
 
 On 07/01/2025 11:38, Chintan Vankar wrote:
-> To support Ethernet boot on AM68-SK, probe AM65 CPSW NUSS driver in
-> board_init_f().
+> Add configs for enabling Ethernet boot in R5SPL.
 > 
 > Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 > ---
->  arch/arm/mach-k3/j721s2/j721s2_init.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+>  configs/am68_sk_r5_ethboot_defconfig | 80 ++++++++++++++++++++++++++++
+>  1 file changed, 80 insertions(+)
+>  create mode 100644 configs/am68_sk_r5_ethboot_defconfig
 > 
-> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-> index 6ce3eb87efb..7208bee5785 100644
-> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-> @@ -329,6 +329,16 @@ void board_init_f(ulong dummy)
->  
->  	setup_qos();
->  
-> +	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
-> +	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
-> +		struct udevice *cpswdev;
+> diff --git a/configs/am68_sk_r5_ethboot_defconfig b/configs/am68_sk_r5_ethboot_defconfig
+> new file mode 100644
+> index 00000000000..9bfbb5a3bfe
+> --- /dev/null
+> +++ b/configs/am68_sk_r5_ethboot_defconfig
+> @@ -0,0 +1,80 @@
+> +#include <configs/am68_sk_r5_defconfig>
 > +
-> +		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
-> +						  &cpswdev);
-> +		if (ret)
-> +			printf("Failed to probe am65_cpsw_nuss driver..\n");
-> +	}
-> +
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_K3=y
+> +CONFIG_SOC_K3_J721S2=y
+> +CONFIG_TARGET_J721S2_R5_EVM=y
+> +CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
 
-This looks like a hack. Please find out why the Ethernet driver is not being
-probed when SPL tries to load image over net.
+Please don't add duplicates that are already included in configs/am68_sk_r5_defconfig
+or configs/j721s2_evm_r5_defconfig
 
-We have the following defined at the am65-cpsw-nuss driver.
+> +CONFIG_SPL_GPIO=y
+> +CONFIG_SPL_BOARD_INIT=y
+> +CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
+> +CONFIG_SPL_DMA=y
+> +CONFIG_SPL_ENV_SUPPORT=y
+> +CONFIG_SPL_ETH=y
+> +CONFIG_SPL_I2C=y
+> +CONFIG_SPL_NET=y
+> +CONFIG_SPL_NET_VCI_STRING="AM68 U-Boot R5 SPL"
+> +CONFIG_CMD_DHCP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_DMA_CHANNELS=y
+> +CONFIG_TI_K3_NAVSS_UDMA=y
+> +CONFIG_DM_I2C=y
+> +CONFIG_PHY_TI_DP83867=y
+> +CONFIG_TI_AM65_CPSW_NUSS=y
+> +CONFIG_SPI=n
+> +CONFIG_SPL_SPI=n
+> +CONFIG_DM_SPI=n
+> +CONFIG_SPL_DM_SPI=n
+> +CONFIG_SPL_SYS_MALLOC=y
+> +CONFIG_SPI_MEM=n
+> +CONFIG_CMD_FAT=n
+> +CONFIG_FS_FAT=n
+> +CONFIG_SPL_FS_FAT=n
+> +CONFIG_MMC_SDHCI=n
+> +CONFIG_MTD=n
+> +CONFIG_CMD_FAT=n
 
-U_BOOT_DRIVER(am65_cpsw_nuss) = {
-        .name   = "am65_cpsw_nuss",
-        .id     = UCLASS_MISC,
-        .of_match = am65_cpsw_nuss_ids,
-        .probe  = am65_cpsw_probe_nuss,
-        .priv_auto = sizeof(struct am65_cpsw_common),
-};
+Please explain in commit log why you are setting many of the
+options to "n". Is it due to memory limitation?
 
-U_BOOT_DRIVER(am65_cpsw_nuss_port) = {
-        .name   = "am65_cpsw_nuss_port",
-        .id     = UCLASS_ETH,
-        .probe  = am65_cpsw_port_probe,
-        .ops    = &am65_cpsw_ops,
-        .priv_auto      = sizeof(struct am65_cpsw_priv),
-        .plat_auto      = sizeof(struct eth_pdata),
-        .flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_OS_PREPARE,
-};
+> +CONFIG_SYS_RELOC_GD_ENV_ADD=y
+> +CONFIG_SPL_DM_SPI_FLASH=n
+> +CONFIG_SPL_HAS_CUSTOM_MALLOC_START=n
+> +CONFIG_HUSH_PARSER=n
+> +CONFIG_CMD_DFU=n
+> +CONFIG_CMD_GPT=n
+> +CONFIG_SPL_YMODEM_SUPPORT=n
+> +CONFIG_ARCH_FIXUP_FDT_MEMORY=n
+> +CONFIG_SPL_ENV_IS_NOWHERE=y
+> +CONFIG_DM_EVENT=y
+> +CONFIG_INPUT=n
+> +CONFIG_ESM_K3=y
+> +CONFIG_SPL_LOAD_BLOCK=y
+> +CONFIG_DFU=n
+> +CONFIG_SPL_DFU=n
+> +CONFIG_TI_I2C_BOARD_DETECT=y
+> +CONFIG_K3_EARLY_CONS=n
+> +CONFIG_K3_QOS=n
+> +CONFIG_USE_BOOTCOMMAND=n
+> +CONFIG_SPL_MTD=n
+> +CONFIG_SPL_NAND_SPI_SUPPORT=n
+> +CONFIG_BOOTDEV_ETH=y
+> +CONFIG_USB=n
+> +CONFIG_FS_LOADER=n
+> +CONFIG_SPL_FS_LOADER=n
+> +CONFIG_SPL_DM_SPI=y
+> +CONFIG_PINCTRL_GENERIC=n
+> +CONFIG_PINMUX=n
+> +CONFIG_SPL_PINCTRL_GENERIC=n
+> +CONFIG_SPL_PINMUX=n
+> +CONFIG_DM_REGULATOR=n
+> +CONFIG_TI_SCI_POWER_DOMAIN=n
+> +CONFIG_CMD_REMOTEPROC=y
+> +CONFIG_SYSRESET=n
+> +CONFIG_LAST_STAGE_INIT=y
+> +CONFIG_OF_UPSTREAM=n
 
-It looks like am65_cpsw_probe_nuss() is not being invoked for you.
+Why no OF_UPSTREAM?
 
-Can you please check if am65_cpsw_port_probe() was invoked?
-If yes but am65_cpsw_probe_nuss() was not then we need to fix the
-DM hierarchy for AM65_CPSW?
-
->  	if (IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_AVS0)) {
->  		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
->  						  &dev);
+> +CONFIG_K3_DM_FW=y
+> +CONFIG_SPL_SPI_LOAD=n
+> +CONFIG_SPL_DM_SPI=n
+> +CONFIG_NOR_SUPPORT=n
+> +CONFIG_SPL_NOR_SUPPORT=n
+> +CONFIG_SPL_DM_SPI=n
+> +CONFIG_SYS_MALLOC_CLEAR_ON_INIT=n
+> +CONFIG_SPL_SYS_MALLOC_CLEAR_ON_INIT=n
+> +CONFIG_BOOTDEV_ETH=n
 
 -- 
 cheers,
