@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14A30E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 10:58:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 889AEE77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 11:24:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87EFF8036B;
-	Tue,  7 Jan 2025 11:58:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 808A4801E8;
+	Tue,  7 Jan 2025 12:24:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NENj5KDS";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1736249092;
+	bh=fpbgGuiu2bJQVjRNa2c429QBjOW6P3NCNGPj0kbFrzk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=BVDJMsqK8ZjE5cUcnvnJ410Ns6a8ZG1dslR9d122r6T/iIJE0I/Zgh9opqTdqEYiD
+	 Xq7qzJrlYY945DPMhoq+fXXiO7SHmXPf7egjxJWE0uYFGvugHLbhyhc0e8lyTykHiO
+	 fkqy3MHO+EvXqwi4Ct1mLaefpxrbKSo985hJ/AsHMaH/H/aemjOB5VNgAt/ljxM6EF
+	 SwMNRnNJ6sU/4Oee0n7qUh/8Lln1TrQAEIsky7BfyNWgH9wYq2wNHBPdhzLUMHrMJb
+	 L2E1sjli71rotfdmRtg9KnLxrCD+M2HgRlL0IKQodpZ/u3STbFaMWiDTo/kEkE0I1f
+	 ja+wMOWtfEk7g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D80B8036D; Tue,  7 Jan 2025 11:58:31 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6CA7B801FD; Tue,  7 Jan 2025 12:24:51 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C33EA801E8
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 11:58:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2F85801B6
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 12:24:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-e39779a268bso19253242276.1
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 02:58:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736247505; x=1736852305; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GqzItpAgu+Qj75CPqEpnn2GhqUQQgiEFN7EaaP2iXVo=;
- b=NENj5KDSJANrMWcnU0LH/0TmF3ZBeyYUxveoN54usQ8A7hBk3VAh93LJ1N7DhAmtd1
- 9CagE/ECkovxvEpx0sFiCVTd+vQ0p1snrEk4bpIo6B+PMOch6R0gqsgZqyruurYZzc02
- J7OPRrgp5Nyhi8IzjAuLo4jdpT1XeLhzhaCYOpTb1a7WR/CQEW7xk1qHI2UXg2gwWgFU
- C9wuc4EEXaiIPb7Cwuf64MsNylsdfoIVxuZmoPL7Awu4UhxylvyiGeIn64ILWa8ebj/U
- YvHbcICAcrFFW26ivLw6xp0LXPGpwcZKFDkmC49oKiWxOA0IuEPv7RpSwtqqQVU+75op
- cFbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736247505; x=1736852305;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GqzItpAgu+Qj75CPqEpnn2GhqUQQgiEFN7EaaP2iXVo=;
- b=sJQuU0/V6SbyD6BqIAkbqATqvAaszhgB/5d8mv6cry/uUouksLDeCknLrDLLmrA5FV
- 2kZ55iwikM14MEMzh65xZVBfk7BtsMZbIsm/2VDqUEaDBr1n1AYOh64A9ecfXEbSeGAg
- W8lt1kRohWdwTZYTM02Cy56TqklbdnKwSWhVMfqdCJloM2fUWIZWmnGFqO3LJ2pe48iv
- Z7efjrQoihLY7na3k5ufzCRP4CXkSvDzbTm5m9TnehLKHnMbbguM/0I2pt9RnDyEGMNv
- mHvnq+YoMR0HIUDwbrDfDvKz3XHmhBfLZMPzkE20q3+6TJG7zQ7R3aYiIyeWw6jV/rUR
- xcUQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/Aih+fG/qchmRPRv4vNnjgbyzYMIloFU6GwccF7Szu4psd92+ADgMdF1oPRENcqFI3M78yNg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxE/b45CdwXs+/kTQEE70iRmlGUtdxsVb6WgA8VkAYPEQ0/KnMQ
- 0p1qU3Wfp4YMish1z+fo33LTD2TKFo+NGGPhuU6a/gyrhfDCpDsMsFMf7JK2+NXrUecgN6R7U/p
- U8jmASZl8OoIVL1k1dMIZsxHvOVtD6ITuvqZHUA==
-X-Gm-Gg: ASbGncvepW8Z76PrJnWwttkz6PbUNYnrhj6zOxg2mRXpkLlSAoOE99PZOCZ8T/hi1H9
- lRXZG6ZCt27y1zZyCAvF8EQc0/fXjfsso67OBsw==
-X-Google-Smtp-Source: AGHT+IGLVLKI9XbkjvU3mLpp4U8whWboXMhI3HbX2ECz328LlMDBlzERyFcw8zhoMG/83dASBnKXD3uWq6xDwEpcuKE=
-X-Received: by 2002:a05:6902:12c6:b0:e3c:a021:4898 with SMTP id
- 3f1490d57ef6-e54d22542d8mr1963009276.13.1736247505601; Tue, 07 Jan 2025
- 02:58:25 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="hDfffxhS"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 51392104811F3; Tue,  7 Jan 2025 12:24:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1736249085;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fpbgGuiu2bJQVjRNa2c429QBjOW6P3NCNGPj0kbFrzk=;
+ b=hDfffxhSe3yuHy4adKZRxHWNkhFj7pp/GujAGctrAhCpCXAZm2yW8zD/F2+HBJGzi/PgQu
+ h/ZPkiMPax35MAt397vaPv0JGFw/opPMrwMSPNQ5l8CgDg+y8SnP5l1XgRCNdIPwmF3c4K
+ SIx4+3gkuEsNBq11WZ3ldhQ4np42BKYs4elkfUgjPcJehwSWMNaHzVXeb0Bu21XjbcmCbX
+ E/29UWY4Ys/eJFIZB2lx7Cy0CQ1NdlXP1hh73fMqolnmR82fhSto1zJgz6xiYoGmJx/+jU
+ hF/e80hT8njewRPgtZD6IE2k84Yxas3T7EKgBhxxkAzH7zkwnbHNPOjbvhVdnw==
+Message-ID: <d9a39908-b614-438c-bfc8-34027a27db72@denx.de>
+Date: Tue, 7 Jan 2025 11:39:55 +0100
 MIME-Version: 1.0
-References: <20241224220049.26629-1-heinrich.schuchardt@canonical.com>
- <87y0zx8sic.fsf@bootlin.com>
-In-Reply-To: <87y0zx8sic.fsf@bootlin.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 7 Jan 2025 12:57:49 +0200
-X-Gm-Features: AbW1kvYJYX0Pa38GNxBp6R0-3PTy323NyDx5uPZAEsUmxdN3swpIARJahv7WTwE
-Message-ID: <CAC_iWjJNdXsBKYZiTFM8RY2EvcSfYVVfxNCU1Q+cBE0UN089vA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] tpm: update descriptions in tpm-v2.h header
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tim Harvey <tharvey@gateworks.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Brian Ruley <brian.ruley@gehealthcare.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20250105203714.158480-1-marex@denx.de>
+ <CAFLszThQvKZfwsQudbOfDvnCMe=aeY=ppUhHKj6nV8=PtadDaA@mail.gmail.com>
+ <1b77dd3f-e0f3-492b-981f-1dc9962f1732@denx.de>
+ <CAFLszTha01kuuPwz0PnbuwvVqv40UDd8mrEsZBeL=z=6k0=ZDA@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFLszTha01kuuPwz0PnbuwvVqv40UDd8mrEsZBeL=z=6k0=ZDA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,35 +87,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel,
-
-On Mon, 30 Dec 2024 at 10:49, Miquel Raynal <miquel.raynal@bootlin.com> wro=
-te:
->
-> On 24/12/2024 at 23:00:49 +01, Heinrich Schuchardt <heinrich.schuchardt@c=
-anonical.com> wrote:
->
-> > * Provide a link to 'TPM 2.0 Library Specification'
-> > * Remove outdated comment for TPM2_NUM_PCR_BANKS.
-> >   The value 16 can be found in the current standard
-> >   TCG TSS 2.0 Overview and Common Structures Specification 1.0, rev 10
->
-> What about including this in the comment rather than dropping the
-> comment entirely?
-
-Sure I'll amend it on the PR
-
->
-> > * Describe some of the structures in Sphinx style.
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->
-> Fine otherwise,
->
-> Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
-
-Thanks
-/Ilias
->
-> Thanks,
-> Miqu=C3=A8l
+On 1/7/25 4:50 AM, Simon Glass wrote:
+> Hi Marek,
+> 
+> On Mon, 6 Jan 2025 at 13:51, Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 1/6/25 3:38 PM, Simon Glass wrote:
+>>
+>> [...]
+>>
+>>> I wonder if the cst needs to be updated (binman tool -f cst)? At
+>>> present it is using apt-get and has:
+>>>
+>>> $ dpkg -l imx-code-signing-tool
+>>> Desired=Unknown/Install/Remove/Purge/Hold
+>>> | Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+>>> |/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+>>> ||/ Name                  Version             Architecture Description
+>>> +++-=====================-===================-============-===================================
+>>> ii  imx-code-signing-tool 3.3.1+dfsg-2ubuntu1 amd64        code
+>>> signing tool for i.MX platform
+>> Perhaps. Can you suggest a fix ?
+>>
+>> I am also unsure how to get the CST test to 100%.
+>>
+>> I still don't fully understand what exactly are these tests testing or
+>> whether they are even valid.
+> 
+> Well, if I could run the test and have it pass (like presumably you
+> do) then I could suggest something. Could you point me to a cst binary
+> which works for you and makes your tests pass?
+CST 3.4.0 from debian/testing works with real hardware.
