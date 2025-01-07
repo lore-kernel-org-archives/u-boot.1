@@ -4,77 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF421E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 12:15:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E7E8E77198
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 12:43:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 251E1801FD;
-	Tue,  7 Jan 2025 13:15:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DF5B18007D;
+	Tue,  7 Jan 2025 13:43:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hffomTaC";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1736253787;
+	bh=M0Cmt65MNuagIMUXtYERbJ0BagbTXdMU5D1FU2DvA4E=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vXyafo7ySXotcgzmnjzHg2bCBNo+ycHXaCuWkmEeh7JU4L7ZMabrIasrTBsYp4feZ
+	 tLt9QywOElj6GeqgMDWS7ZxtcVUht8+5aIXD3gv+zq8D1rLzmS1SnJV0xjtY76Q0yk
+	 ayMgZODVhVe90qBXXMuiOG6gGhoVTdU0R+bQ4aIDCdbXvS5coG4IvDTNGduemitaQ1
+	 kHZiYLsXdpjct8ZsLGHdarb2FzvsAnOXCTzqmfr0QEdpjjk62i6O39TKvRBKnf+6ve
+	 ch9Kvrxbk2M+ie5KfGa4ZppfEIdQdTPWT4Vd7M2EGhEJOZuTmjsFwvPhjQE2KFR72i
+	 ZYxcCS7a5Uibw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14182801C3; Tue,  7 Jan 2025 13:15:20 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E1E268036D; Tue,  7 Jan 2025 13:43:05 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79F49801C3
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 13:15:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4F3780079
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 13:43:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aaeef97ff02so1946104366b.1
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 04:15:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736252115; x=1736856915; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Xz8ewH5aZV6gU1sZopVWzC+Hg6uWqAvZsAOkD60wNCU=;
- b=hffomTaCQNh2YHY/DynNbJ8HJ7tFxastrk4kgaVzkezix+LDCnOXKPEVLqkCo3ZfIG
- k7klSR2wRkcEBbUSNgz0KmvwzjBZQEGUjaxtgbOOEAPeMoOiQA7aRsgMo1tmSOX5HLMP
- wLS+vgSrV6cNUVRJEESG5Lqipr0+l3V9kxhSU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736252115; x=1736856915;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Xz8ewH5aZV6gU1sZopVWzC+Hg6uWqAvZsAOkD60wNCU=;
- b=pHVRN6ofoTqa3zhf1Ar/ez2IfVGAVoR/wctCmfQWn/GuxneJb9LxONWFer0yd4U3eA
- iMCWQGRnVSajNTKGzSW0ktReYe14kGsyIgWTeY1cANnXVvemJugxF6xn2mPuQfrxzdWt
- ZxbWHb/cU9QDBfkBO6iFmRzegniSunkSfie8B/tTFfJszemaIBceepRdxr1g0YTZ5G9h
- YA0GE75YDYAx3J8gfb6pJb2ckISjmYD5SugwtQuh0+Io1FA3x8o8ZhmQfen7bVRIxdPT
- thzaNygcjbG64Ganf1aK+sf9dvYUxfEeXFcYsFvwRW9x5iCOPBCdNJZbWz9KpnLgQXlg
- h/Zw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW1GI9TVzEvI4wN4urR+CeowNewoaXT+MdK3ISvrXhY7ILkBggBvYcUKbSPuG8iRCzO68nuIiE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyI2tPSyFUMZ4UsVhl5PChReYCR0kv2ExQ4NJpyd8hBOoR5WaoN
- B+VJQ/HmHLclVJxC9HFbcUTXRvMiSLlw1Rd5bJPaLlZud8H58bqkMqN+lmSXeHCg68EXeBRoQQq
- MZga4uRxGYSdmh95TcTNLcmnI7UxCaCwZzQmu
-X-Gm-Gg: ASbGncuAHTBdmsioHLRLWQI+wEZ2ULuMAZ3bjPNN2DriMeb3eYHvpxhbRP0wZ14CT2l
- pLTZFQJWdVwWYOaZLnVaZdbhonQHUCv+Vs4CJqg8=
-X-Google-Smtp-Source: AGHT+IHWaxXVWgyVK4q/50cI8olCpuEoA0ui3oK7ycOnyhbAs86aM8YBD+CW8l+b0pfXq4jAPz0PVGnfC5cN6D6Ehuc=
-X-Received: by 2002:a17:907:60d6:b0:aab:daf9:972 with SMTP id
- a640c23a62f3a-aac334c0ba9mr6102498966b.28.1736252114812; Tue, 07 Jan 2025
- 04:15:14 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4YS9gl650vz9tBr;
+ Tue,  7 Jan 2025 13:42:59 +0100 (CET)
+Message-ID: <3899adc0-c009-4375-bde2-929e4344ede8@denx.de>
+Date: Tue, 7 Jan 2025 13:42:58 +0100
 MIME-Version: 1.0
-References: <20250106144755.3054780-1-sjg@chromium.org>
- <51c61e63-82ae-4660-b2c8-987a63c7d091@gmx.de>
-In-Reply-To: <51c61e63-82ae-4660-b2c8-987a63c7d091@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Jan 2025 05:15:03 -0700
-X-Gm-Features: AbW1kvZziKYIrtdT8fzQl_L1tEgxsV-9Gz0X_g0VgqEPArEYeaLpQLcQXmN_FeU
-Message-ID: <CAFLszTi5dxQyf_wRpGWRz9S7YsETpeRxA3_YJrhm+Lp0uw7bmw@mail.gmail.com>
-Subject: Re: [PATCH 0/8] efi_loader: Complete the bootflow_efi() test
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v2] watchdog: rti: drop hack manipulating WDT clock rate
+To: "A. Sverdlin" <alexander.sverdlin@siemens.com>, u-boot@lists.denx.de
+Cc: Jan Kiszka <jan.kiszka@siemens.com>
+References: <20241121080326.1913067-1-alexander.sverdlin@siemens.com>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20241121080326.1913067-1-alexander.sverdlin@siemens.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4YS9gl650vz9tBr
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,38 +70,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On 21.11.24 09:03, A. Sverdlin wrote:
+> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> 
+> The hack itself seems to be copied from Linux rti_wdt.c, but the WDT reset
+> principle is different in U-Boot. While Linux relies on correct frequencies
+> and timers and doesn't check the actual WDT counter value U-Boot driver
+> seems to be more robust: it does compare RTIDWDCNTR vs RTIDWDPRLD.
+> 
+> Now the root cause of the original motivation to manipulate the clock rate
+> is said to be understood and fixed in Linux commit cae58516534e
+> ("watchdog: rti_wdt: Set min_hw_heartbeat_ms to accommodate a safety margin")
+> which simultaneously removed the hack itself.
+> 
+> While is fix part of the mentioned patch is neither applicable nor requried
+> for the U-Boot driver just drop the hack setting WDT clock rate to 90% of
+> the real rate. This has a nice effect that the WDT timeout is now as
+> requested and not 10% shorter.
+> 
+> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> Reviewed-by: Jan Kiszka <jan.kiszka@siemens.com>
 
-On Mon, 6 Jan 2025 at 10:00, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 06.01.25 15:47, Simon Glass wrote:
-> > This test was hamstrung in code review so this series is an attempt to
-> > complete the intended functionality:
-> >
-> > - Check memory allocations look correct
-> > - Check that exit-boot-services removes active-DMA devices
-> > - Check that the bootflow is still present after testapp finishes
-> >
-> > The EFI functionality duplicates bootm_announce_and_cleanup() and still
-> > uses the defunct board_quiesce_devices() so a nice cleanup would be to
-> > call the bootm function instead, with suitable modifications. That would
-> > allow bootstage to work too.
-> >
-> > This series is based on sjg/master since the EFI logging was rejected so
-> > far.
->
-> Yes, it was rejected because a solution at the lib/log.c level would be
-> more generic.
+Applied to u-boot-watchdog/master
 
-As I mentioned, that idea isn't suitable for programmatic use.
+Thanks,
+Stefan
 
->
-> Tom suggested not to send patches that are for private enjoyment to the
-> mailing list.
+> ---
+> Changelog:
+> v2: 2 typos pointed by Jan corrected
+> 
+>   drivers/watchdog/rti_wdt.c | 8 --------
+>   1 file changed, 8 deletions(-)
+> 
+> diff --git a/drivers/watchdog/rti_wdt.c b/drivers/watchdog/rti_wdt.c
+> index 99168d0cad03..f806e24e53da 100644
+> --- a/drivers/watchdog/rti_wdt.c
+> +++ b/drivers/watchdog/rti_wdt.c
+> @@ -186,14 +186,6 @@ static int rti_wdt_probe(struct udevice *dev)
+>   
+>   	priv->clk_hz = clk_get_rate(&clk);
+>   
+> -	/*
+> -	 * If watchdog is running at 32k clock, it is not accurate.
+> -	 * Adjust frequency down in this case so that it does not expire
+> -	 * earlier than expected.
+> -	 */
+> -	if (priv->clk_hz < 32768)
+> -		priv->clk_hz = priv->clk_hz * 9 / 10;
+> -
+>   	return 0;
+>   }
+>   
 
-My contributions to U-Boot are only ever about private enjoyment :-)
+Viele Grüße,
+Stefan Roese
 
-Do you have any comments on the patches?
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
 
-Regards,
-Simon
