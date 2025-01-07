@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61289E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 14:16:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C16DE77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 14:18:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8854801E8;
-	Tue,  7 Jan 2025 15:16:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 77D24801E8;
+	Tue,  7 Jan 2025 15:18:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yue8quhV";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UWd5ew9z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E57E4801FD; Tue,  7 Jan 2025 15:16:25 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 3227A801FD; Tue,  7 Jan 2025 15:18:24 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D83868007D
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 15:16:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 26F508007D
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 15:18:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=af48=UA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1736259379;
- bh=+nLPNajdUS9Zr7g7ucXpPL28S9euVT18GV7jlb+Fx9A=;
- b=yue8quhVZ3IeHZur5FmxKSD4VyBrgccACKct+YJ/lTCrUZZNz8F6yEV8ZnkyieTGti/nlBRm8
- bIzalqm04v6ov3sriOruCjtN55aZ1cBZaJBRMFFWcZ8AvCGXx4BR+ZI7rNllBdhnfm+cBsIbbuY
- SpKike5e/+H4fiuwsjfiUY+mNMBHVog0R6FLKA1z3JM7n9iLQmgcCH0RmKi1N+xO7dnFCyNtegp
- LQC4R+7px2RMx/tDL94HjBLD9AIe7WHNYpLmPCbFxsC5d0hPfg8RwOwCrtzj3YhZPQtBBumjDHl
- bodaCGSulWnMLUnUwfxwc11MxviNCxLmlTOm5jPSFBvw==
-X-ForwardEmail-Version: 0.4.40
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Received: from [192.168.2.234] ([78.69.151.207]
- 78-69-151-207-no600.tbcn.telia.com) by smtp.forwardemail.net (Forward
- Email) with ESMTPSA (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384); Tue,
- 07 Jan 2025 14:16:09 +0000
-Message-ID: <7893ae9a-3f2f-4377-90ec-f24655e55384@kwiboo.se>
-Date: Tue, 7 Jan 2025 15:16:08 +0100
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 938FD5C54D6;
+ Tue,  7 Jan 2025 14:17:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9C7BC4CED6;
+ Tue,  7 Jan 2025 14:18:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1736259498;
+ bh=heqLxP7GXvkj8lKIRYbZluMmuDGMJzAJ9NWoRmCn+bo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=UWd5ew9zz8x9aKl0kSGu7WCvwp7tjuQw4pUBvGPpIV0KcCwZicFvKAnUgEc6J9R6O
+ i/Ohd+q0LtMVLP7Ao6GUvF+kzzN37uGHEqfffpoRyDxIbArxlMGd86EB6cMGcXzWba
+ aQNHNjXRupUSWKXpFGX4lF7ZoBwUjydqy5Cm30mfSMzsByobhUdPqw53zfb0qkTohw
+ V8Y0qxEL4WfBRecp8L4TeZR+TtAmePxXE6GpjtHPtKvT5OI3QfIt+fzPgwZ1VIX+Vz
+ 7jTvMm1CeLxUaXC98BOrZTLDnDek2B3FtnqLlQku9i6sElqmjY48W513M2X/25R69z
+ L2plL+Qs09muA==
+Message-ID: <c8e651fa-f9e3-4901-8475-15e9bbfee0ab@kernel.org>
+Date: Tue, 7 Jan 2025 16:18:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET
- is disabled
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240225152715.1821613-1-jonas@kwiboo.se>
- <d9d049c8-d498-48ec-87f6-4127dd7a4ae6@denx.de>
- <5bafad42-2c61-43eb-8fbb-cec7159132a6@kwiboo.se>
- <20240226014708.GH3040305@bill-the-cat>
- <81bdee81-2f8f-4fbf-a729-8fd543492adb@kwiboo.se>
- <a809eb32-ae70-4f69-b5f0-81488759e838@denx.de>
- <e14e9c06-ca37-4572-b410-c40a8c52898c@kwiboo.se>
- <1544e744-bbf7-4460-b2b4-12a971e70d49@denx.de>
- <7805b8d0-fb7c-41d5-8d74-f85dfd40233a@kwiboo.se>
- <87y1b2nfpn.fsf@baylibre.com>
- <6bf2af4a-740e-4cfc-9009-0892139738c3@kwiboo.se>
- <87a5jik9gk.fsf@baylibre.com> <5b5cba1e-b057-4d64-a836-603534d48620@denx.de>
- <87ed1edc3h.fsf@baylibre.com>
+Subject: Re: [PATCH 09/13] arm: mach-k3: am62p5_init: Probe AM65 CPSW NUSS for
+ R5/A53 SPL
+To: Chintan Vankar <c-vankar@ti.com>, AKASHI Takahiro
+ <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
+ <mikhail.kshevetskiy@iopsys.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Nishanth Menon <nm@ti.com>,
+ Hari Nagalla <hnagalla@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Simon Glass <sjg@chromium.org>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Aniket Limaye <a-limaye@ti.com>,
+ Aradhya Bhatia <a-bhatia1@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Andrew Davis <afd@ti.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: srk@ti.com, s-vadapalli@ti.com, danishanwar@ti.com, u-boot@lists.denx.de
+References: <20250107093840.2211381-1-c-vankar@ti.com>
+ <20250107093840.2211381-10-c-vankar@ti.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <87ed1edc3h.fsf@baylibre.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20250107093840.2211381-10-c-vankar@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 677d372da21c62606d591497
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,92 +85,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek and Mattijs,
 
-On 2025-01-07 13:48, Mattijs Korpershoek wrote:
-> Hi Marek,
-> 
-> On dim., janv. 05, 2025 at 20:29, Marek Vasut <marex@denx.de> wrote:
-> 
->> On 6/18/24 9:15 AM, Mattijs Korpershoek wrote:
->>> Hi Jonas,
->>
->> Hello all,
->>
->>> On sam., mars 02, 2024 at 14:00, Jonas Karlman <jonas@kwiboo.se> wrote:
->>>
->>> [...]
->>>
->>>>>
->>>>> I will keep you posted.
->>>>
->>>> Thanks, much appreciated!
->>>>
->>>> Please also keep in mind that changing the interrupt handling probably
->>>> only fixes the second of the two build errors reported and fixed by this
->>>> patch.
->>>>
->>>> Trying to build with following will trigger the first build error, and
->>>> should not change because use of dm_usb_gadget_handle_interrupts() is
->>>> reworked.
->>>>
->>>> CONFIG_DM_USB_GADGET=y
->>>> CONFIG_USB_DWC3=y
->>>> # CONFIG_USB_DWC3_GADGET is not set
->>>> CONFIG_USB_DWC3_GENERIC=y
->>>> CONFIG_USB_GADGET=y
->>>>
->>>> E.g to only include host part of dwc3 and gadget from another driver,
->>>> to i.e. save on binary size, produce following build error:
->>>>
->>>> aarch64-linux-gnu-ld.bfd: drivers/usb/dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
->>>> drivers/usb/dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
->>>>    undefined reference to `dwc3_gadget_uboot_handle_interrupt'
->>>>
->>>> I guess force select USB_DWC3_GADGET for USB_DWC3_GENERIC would make
->>>> that build error disappear, and increase binary size as a result.
->>>>
->>>> For my RK3328 series [1] I will just revert to use USB_XHCI_DWC3 instead
->>>> of using USB_DWC3_GENERIC on boards that enable peripheral use of otg
->>>> port.
->>>>
->>>> [1] https://patchwork.ozlabs.org/patch/1904779/
->>>
->>> Marek ended up doing this rework.
->>> It's available for review here, if you want to have a look:
->>> https://lore.kernel.org/all/20240614005309.34433-1-marek.vasut+renesas@mailbox.org/
->> This should be upstream in some form now, is this thread still an open 
->> topic or is this solved now ?
-> 
-> The thread reported 2 problems:
-> 
-> Using khadas-vim3_android_defconfig, I tried:
-> 1. DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled
-> $ grep -e DM_USB_GADGET -e USB_DWC3_GADGET .config
-> CONFIG_DM_USB_GADGET=y
-> # CONFIG_USB_DWC3_GADGET is not set
-> 
-> 2. USB_GADGET_DWC2_OTG + DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled.
-> $ grep -e USB_GADGET_DWC2_OTG -e DM_USB_GADGET -e USB_DWC3_GADGET .config
-> CONFIG_DM_USB_GADGET=y
-> # CONFIG_USB_DWC3_GADGET is not set
-> CONFIG_USB_GADGET_DWC2_OTG=y
-> # CONFIG_USB_GADGET_DWC2_OTG_PHY is not set
-> CONFIG_USB_GADGET_DWC2_OTG_PHY_BUS_WIDTH_8=y
-> 
-> In both case, I could build succesfully on master with commit 6d41f0a39d64 ("Prepare v2025.01")
-> 
-> So I think this is solved now. I'll let Jonas confirm.
 
-Correct, this patch can now be ignored, this issue has been resolved and
-I was able to complete the move to use USB_DWC3_GENERIC with DWC2 GADGET
-for RK3328 in [2].
+On 07/01/2025 11:38, Chintan Vankar wrote:
+> In order to support Ethernet boot on AM62p, probe AM65 CPSW NUSS
+> driver in board_init_f().
+> 
+> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+> ---
+>  arch/arm/mach-k3/am62px/am62p5_init.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
+> 
+> diff --git a/arch/arm/mach-k3/am62px/am62p5_init.c b/arch/arm/mach-k3/am62px/am62p5_init.c
+> index 34ed01cd78c..f8e98b09402 100644
+> --- a/arch/arm/mach-k3/am62px/am62p5_init.c
+> +++ b/arch/arm/mach-k3/am62px/am62p5_init.c
+> @@ -159,6 +159,16 @@ void board_init_f(ulong dummy)
+>  	}
+>  
+>  	spl_enable_cache();
+> +
+> +	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
+> +	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
+> +		struct udevice *cpswdev;
+> +
+> +		if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
+> +						&cpswdev))
+> +			printf("Failed to probe am65_cpsw_nuss driver\n");
+> +	}
+> +
 
-[2] https://patchwork.ozlabs.org/project/uboot/patch/20241008192719.2192430-1-jonas@kwiboo.se/
+Why do you need to do this?
 
-Please also take a look at an old unmerged cleanup patch at [3] :-)
+from drivers/net/ti/am65-cpsw-nuss.c
 
-https://patchwork.ozlabs.org/project/uboot/patch/20240121203818.2075381-1-jonas@kwiboo.se/
+U_BOOT_DRIVER(am65_cpsw_nuss) = {
+        .name   = "am65_cpsw_nuss",
+        .id     = UCLASS_MISC,
+        .of_match = am65_cpsw_nuss_ids,
+        .probe  = am65_cpsw_probe_nuss,
+        .priv_auto = sizeof(struct am65_cpsw_common),
+};
 
-Regards,
-Jonas
+U_BOOT_DRIVER(am65_cpsw_nuss_port) = {
+        .name   = "am65_cpsw_nuss_port",
+        .id     = UCLASS_ETH,
+        .probe  = am65_cpsw_port_probe,
+        .ops    = &am65_cpsw_ops,
+        .priv_auto      = sizeof(struct am65_cpsw_priv),
+        .plat_auto      = sizeof(struct eth_pdata),
+        .flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_OS_PREPARE,
+};
+
+Isn't am65_cpsw_port_probe() and am65_cpsw_probe_nuss() getting called?
+If not, you need to identify why and fix it the proper way. Not by hacking
+it like you do now.
+
+>  	debug("am62px_init: %s done\n", __func__);
+>  }
+>  
+
+-- 
+cheers,
+-roger
+
