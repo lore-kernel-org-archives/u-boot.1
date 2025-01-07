@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5B30E77199
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 10:37:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A0EE77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 10:42:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31B9E80600;
-	Tue,  7 Jan 2025 11:37:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 874648036B;
+	Tue,  7 Jan 2025 11:42:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MSeV/8Ss";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ReJVJoue";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43F89805FD; Tue,  7 Jan 2025 11:37:15 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id 6F2368036D; Tue,  7 Jan 2025 11:42:10 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8E2F805D7
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 11:37:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C00E801E8
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 11:42:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e549dd7201cso5435485276.0
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 02:37:10 -0800 (PST)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e398484b60bso19564572276.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 02:42:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736246229; x=1736851029; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1736246525; x=1736851325; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Dq4zv9Az1Jvh1aq0N28GgehOz7dF+scQWXSh/wvKjd8=;
- b=MSeV/8SsdMNyInArTKW24947NUYCgOabjxIiofgn1BxDwvh0nIS/+KI7ksafjvNLQ9
- J6Jr1lD44KhicjKzMKj0ib3ueWrX1qLif7oY3gtYEC9Xl//oXQcQfZqcGJLrab6jHAa+
- RYaKPCt+9/D92hRbc6g+nBiny/Qa7UotDqtEgt+gSj/Pw6pTkxFFJf8xSuGzPEJrteN1
- OdkcU5kjjtZDtGFY2NCx04u7xfF5ghzWRY+Abylzy/u3mFIvlUS0pbB888cAUz4SLhXA
- iuIMSlFcMeZ1dsquzVjncwwa6bSNlkt/SghoxxUkLI7AQ1Z2Aao1I/ix7h3nubtTJQ75
- VPxw==
+ bh=h5hhLm2mIqZEyiHJjVSnJ+SELmUsaZiN1M2wO2xC1Sk=;
+ b=ReJVJoueVLayMnzPAIhfRYShs1X0WWpKVXmgYhDypQsfUti6WypxWYEzpopM3U/Mow
+ 6IlfpW2h81t2wjcipIVSQN9+6Af/tu4UIXhKqFej6sUwQYv2ZSi+pENEMESVAnPQihuM
+ lTyyCg7gAp/Z7lPKiM9HYcyXpoYQ4YwxYNHdQucECjKCZKZoJC1OT0YSLiC2p7ONdOxo
+ 8JjYISgJEnXfRvPGMLfD7w5j7YwYDr1+8X2BBb0/FWqvL+3i2gPi56a5Nx/rc96ytxKo
+ HgFecTLTJyj6ObwZCXihD9mKa41iIh5+3Ywhy0uuCEpg4kOrwgSsu6ulKTPHUfoUJvpX
+ 64wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736246229; x=1736851029;
+ d=1e100.net; s=20230601; t=1736246525; x=1736851325;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Dq4zv9Az1Jvh1aq0N28GgehOz7dF+scQWXSh/wvKjd8=;
- b=uiI8qgIHcfYsTKnVCoD7JI+3SMHBLovoDNNw5Y1kIIv1fqi/9mENqqJDyT0087KzlM
- L7niuEyTTsCnYN5L7Ip2GhT17gKvz2dboeOl1XKvCAc7Ig7K4P6qv5qJw3BQRCs8axKA
- GKEDOJPUFyIo71qdBYZJqOUA5jgEJkgSIzZ/H/CNSMV8Jk+/Nz9kKj7GqEu9VCdr0PEw
- Ef72UubUv0nNTlB7LvP96K5tKuqLTIAcdilAOQK5vQAIJTPVzpMUs4Ki647XouGYdgV1
- MVkJkt6yJZ6w3JqysMEyfr0KyTcAgyQYbhoilBhE/ziO/K88ZevDmBn+Q4NU/SZokpja
- drUg==
-X-Gm-Message-State: AOJu0YygVhGkHZs8M53ALn6+rXVq1Jp5qc0wXwIZxcgbE5QKSZ4PdaZr
- HQyB4EJkgblcre59p5fT6A84KuWvJiXUAkj7TLLIBGMgVGqfbdbilcv5OKZB21z9DTVojGCSfVk
- Kb+7GYobeewC/cKLIRNsO54vNLD+xchZCFtj88A==
-X-Gm-Gg: ASbGncuOXoltW093yRUrEk06nqXomo9D3RT++ezeiuOpJpYYi+UIhpI1cNqqTQb6hiM
- fuU8Tyxekk8DLIDWfWOJb+aFAkNeaSUDRDSzMcQ==
-X-Google-Smtp-Source: AGHT+IF3g0TjGhWlLqeSvoDeD95dsdctCmV+TL8bN7Xc0PuRC5tn59v5HRmW5QyqBOYxtMlFIwaxIhf6gTVz4tNuT/o=
-X-Received: by 2002:a05:6902:2293:b0:e38:8c9:c026 with SMTP id
- 3f1490d57ef6-e538c41e000mr45996714276.52.1736246229612; Tue, 07 Jan 2025
- 02:37:09 -0800 (PST)
+ bh=h5hhLm2mIqZEyiHJjVSnJ+SELmUsaZiN1M2wO2xC1Sk=;
+ b=qYFmQ5V4lkoS4oXW6kNeOw3/u5eJ2fKYo2LvmmVJ5mAEo1BmWsMNCD24yx+IHFdG4f
+ CFZCksLvViHF3xwq/SZ8Emgc7TCAmHI/Zax9kiN9Wkqdfiy3hnOi5SELUCNSZi1V6IIF
+ OxNXQ2DKcA8d/aZsm/UEOXDPvW8s/r9Ad0UxzMJOo+Eb/ZQVSgzXKb2THccbWK2N2o4W
+ 1JLuRh++Yv/8Neggbn8syBXIHApY0wcFoqF+59VBogqQpT9BngPWCuX4CME+u9gxkJ4B
+ 3MDt4ZgxZEzhOgERTEzC+KcUnPiMd/GWMaTn/02BwZvJtS7ImuzlBAHyjOX2LguuXVME
+ nwhA==
+X-Gm-Message-State: AOJu0Yyya4nDCNHB+Lvkeo29qhi/tqo72u7JoczcQnLYyUtz2L8aDmlH
+ KP+YctqTirxgeA7dfKdxETnazFVYDZyOpl8ueKonzsXrI2FtM32L9H9a7otbSAXXWD+lBsjDMXM
+ ucFphgJZxDfx3Kn1D7bNYdIqAn95W5qNT0gKurA==
+X-Gm-Gg: ASbGnctQZFMmcGV1HXiGXytPGFfEI40Z9zIwnmQFWWRCPifSnk//yaxrpLMuJIUc4rl
+ lmeP8eUvUW/kkS6QeDZ4i9lnXZz4nFKRD3uG3nA==
+X-Google-Smtp-Source: AGHT+IE4KZh9c4id/NOWSG9tGekOp3U50Q1vhP7lhNs6l2PQ4i5a3uXpO11wKFPOr61zleP3ia/J+XsuNJw/2Hc/BOc=
+X-Received: by 2002:a25:1f08:0:b0:e54:9eac:48d2 with SMTP id
+ 3f1490d57ef6-e549eac4b7bmr5461023276.10.1736246524794; Tue, 07 Jan 2025
+ 02:42:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20250106143229.3023771-1-sjg@chromium.org>
- <20250106143229.3023771-3-sjg@chromium.org>
-In-Reply-To: <20250106143229.3023771-3-sjg@chromium.org>
+References: <20241210160150.244773-1-ilias.apalodimas@linaro.org>
+ <5b2795ee-9c6e-4b42-8657-841105c0981f@gmx.de>
+In-Reply-To: <5b2795ee-9c6e-4b42-8657-841105c0981f@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 7 Jan 2025 12:36:33 +0200
-X-Gm-Features: AbW1kvaUiG8VlliXyax0UQluIB2oOyplj6q-Zcw2h0Ukwq9Za6PK1vsY_Y3cVPE
-Message-ID: <CAC_iWj+KzQhhKAJgnF9SdYk0kka8d+epNF8Fzm388zqUidvPOw@mail.gmail.com>
-Subject: Re: [PATCH v2 02/33] bloblist: Drop BSD license
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Date: Tue, 7 Jan 2025 12:41:29 +0200
+X-Gm-Features: AbW1kvYyFw9fqsR6Vea2S1wU_wmkpT-EAxE7KdVsdTpPzPPNRJmmQcoHPkEvfjk
+Message-ID: <CAC_iWjKo1HUkZyq0+pDjo0eZozKo8c8WbJpkWbgQ3Z=dFY+apA@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: Fix section alignment on EFI binaries
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,48 +89,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 6 Jan 2025 at 16:32, Simon Glass <sjg@chromium.org> wrote:
->
-> Linaro has decided to write their own version of bloblist from scratch,
-> so there is no point in having a non-GPL license on this file. Change
-> it, to better fit with the U-Boot project.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Link: https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/22215
+Hi Heinrich
 
-NAK on the commit message. I explained why it was wrong and
-inappropriate in the previous version
+On Fri, 3 Jan 2025 at 22:20, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 10.12.24 17:01, Ilias Apalodimas wrote:
+> > When creating EFI binaries, the alignment of the text section isn't
+> > correctly factored in. As a result trying to load signed EFI binaries
+> > throws an error with:
+> >
+> > efi_image_region_add() efi_image_region_add: new region already part of another
+> > Image not authenticated
+>
+> You are reporting here two different problems here:
+>
+> * We create EFI binaries that sbsign does not want to sign and U-Boot
+> does not accept for secure boot.
+> * efi_image_region_add() creates a message that does not match the
+> situation.
+>
+> Will you prepare a second patch for the latter?
 
+I briefly tried to fix the second problem without success. Since it
+doesn't cause any issues I just mentioned it on the commit message for
+completeness. I'll try to figure out what causes it, but it's not on
+my top prios.
+
+>
+> >
+> > Running the binary through sbverify has a similar warning
+> > sbverify ./lib/efi_loader/helloworld.efi
+> > warning: gap in section table:
+> >      .text   : 0x00001000 - 0x00001c00,
+> >      .data   : 0x00002000 - 0x00002200,
+> > gaps in the section table may result in different checksums
+> > warning: data remaining[7680 vs 12720]: gaps between PE/COFF sections?
+> > .....
+> >
+> > If we include the alignment in the text section, the signed binary boots
+> > fine, and the relevant sbverify warning goes away
+> > sbverify ./lib/efi_loader/helloworld.efi
+> > warning: data remaining[8704 vs 12720]: gaps between PE/COFF sections?
+> > .....
+>
+> Does EDK II complain?
+
+I haven't tried any EDK2 apps, but the linker scripts differ between projects.
+
+>
+> >
+> > We should look into the remaining warning at some point as well
+> > regarding the gaps between PE/COFF sections.
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >   arch/arm/lib/elf_aarch64_efi.lds | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/arch/arm/lib/elf_aarch64_efi.lds b/arch/arm/lib/elf_aarch64_efi.lds
+> > index 5dd98091698c..e382254a6cf5 100644
+> > --- a/arch/arm/lib/elf_aarch64_efi.lds
+> > +++ b/arch/arm/lib/elf_aarch64_efi.lds
+> > @@ -32,9 +32,9 @@ SECTIONS
+> >       .rela.plt : { *(.rela.plt) }
+> >       .rela.got : { *(.rela.got) }
+> >       .rela.data : { *(.rela.data) *(.rela.data*) }
+> > +     . = ALIGN(4096);
+>
+> If we make this change, we should do so for all UEFI architectures!
+>
+> Only OUTPUT_FORMAT and OUTPUT_ARCH need to be architecture specific in
+> the linker scripts. Can't we use an INCLUDE statement (cf.
+> https://sourceware.org/binutils/docs/ld/File-Commands.html)?
+>
+> Of aarch64, arm, riscv32, riscv64 only the arm script differs heavily
+> for no good reason. We should get rid of this exception.
+
+Sure, but this is fixing sandbox for the CI testing on arm64 hosts. We
+don't have any other native hosts apart from x86 and arm64.
+Refactoring all the linker scripts for apps is a bigger task. Mind if
+we take one step at a time?
+
+Thanks
 /Ilias
+> Best regards
 >
-> ---
+> Heinrich
 >
-> (no changes since v1)
->
->  common/bloblist.c  | 2 +-
->  include/bloblist.h | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index ecce3da9331..c441498ec56 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -1,4 +1,4 @@
-> -// SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause
-> +// SPDX-License-Identifier: GPL-2.0+
->  /*
->   * Copyright 2018 Google, Inc
->   * Written by Simon Glass <sjg@chromium.org>
-> diff --git a/include/bloblist.h b/include/bloblist.h
-> index 7d462e71914..be7303e1504 100644
-> --- a/include/bloblist.h
-> +++ b/include/bloblist.h
-> @@ -1,4 +1,4 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause */
-> +/* SPDX-License-Identifier: GPL-2.0+ */
->  /*
->   * This provides a standard way of passing information between boot phases
->   * (TPL -> SPL -> U-Boot proper.)
-> --
-> 2.34.1
+> >       _etext = .;
+> >       _text_size = . - _text;
+> > -     . = ALIGN(4096);
+> >       .data : {
+> >               _data = .;
+> >               *(.sdata)
 >
