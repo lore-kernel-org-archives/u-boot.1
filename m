@@ -4,55 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E866FE77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 18:09:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B25EE77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 19:25:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1B9B805EA;
-	Tue,  7 Jan 2025 19:09:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
+	by phobos.denx.de (Postfix) with ESMTP id 392A7803DC;
+	Tue,  7 Jan 2025 20:25:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A4nkuLyz";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D028805E1; Tue,  7 Jan 2025 19:07:02 +0100 (CET)
-Received: from mx.skole.hr (mx2.hosting.skole.hr [161.53.165.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EF328805C5; Tue,  7 Jan 2025 20:25:08 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16A878036B
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 19:07:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFDD58036B
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 20:25:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=skole.hr
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
-Received: from mx2.hosting.skole.hr (localhost.localdomain [127.0.0.1])
- by mx.skole.hr (mx.skole.hr) with ESMTP id 8350683444;
- Tue,  7 Jan 2025 19:06:59 +0100 (CET)
-From: Duje =?UTF-8?B?TWloYW5vdmnEhw==?= <duje.mihanovic@skole.hr>
-To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
-Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/3] serial: ns16550: Add Intel XScale support
-Date: Tue, 07 Jan 2025 19:06:21 +0100
-Message-ID: <4975523.31r3eYUQgx@radijator>
-In-Reply-To: <0f39cd7a-c64c-45b6-9e69-4612b884c15f@denx.de>
-References: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
- <20241231-coreprimevelte-v2-1-6a5445d92d11@skole.hr>
- <0f39cd7a-c64c-45b6-9e69-4612b884c15f@denx.de>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-540201cfedbso1680419e87.3
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 11:25:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1736277904; x=1736882704; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cYsAfZyVbSIfkjDnbQDb6svLTlKjHHNsO/SH437xUuw=;
+ b=A4nkuLyzx/7rA96a4NeZIUQjb62Q0DfAv1a/WmUJHM4ZN4Z6BifXgrNfyI94GDe05U
+ TL1O5cIWC+EEe9O44ZrenVbwDqbkKqGGS4E2LpPaRi4T3dVVNWNBYVTNw9vBbjTNEWJo
+ wlVVF+U/3aShMPWcK4kfqooL414WRwO7g2cc8J/OBMKjfsf7h78s4fhfQviNrt4TAkz5
+ MMTishJa1h1iybJZ7HmPeIbPdBHT5o3Zs8EfzXae9EFl9TfWSVWh2zi0IXy76tk7gWUj
+ aAHao+vUNdk9fvbQj+9qxQAEGkjQqtzzGP44wMXkHyqpT9QlsPdoCMADIT29L7YvSwFY
+ QekA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736277904; x=1736882704;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cYsAfZyVbSIfkjDnbQDb6svLTlKjHHNsO/SH437xUuw=;
+ b=hnYvpT++FmH3JIUiWMVAxP9na3mpNTZpKcHkYLCKisShkYhRDAK+y/h91Y4H72chBk
+ 53Ev2ttEVv6umBwSIMCMupCcYbDyW96EoBCY1GlykVolmgj2FenQ3hQCN08ToWX0mOJl
+ ePK7wjJAWuxRJ2psV77/y55hhoKvxMe+7cFniB40YutjuBAzkb4GQNBrIVhGi3jQk7qa
+ Fi9/6pUPI3IVwazDF9V6AejFYNRFczytgz9invYLvn6+gXFskFuet/4FB8ZY0AYIB1Uv
+ rhAC3T4+3z6P0e6HGLDCNfThqSif4F/y6vOzUthGYk9TJ2OOYbr45TL4YSsUL+vH62kG
+ f8bA==
+X-Gm-Message-State: AOJu0Yy45jAEVMgiR0Vr61yI9CwpAoX23URs02cB1PppLF1mlzGDFuso
+ W69unnhdSQCi+BQHMeY2UayjJ7Dl0cmN74JB2cYuvm1XX/LnSGblu745mbOua5Ev0AyP1h7D/yu
+ 3Dl3txQeepyDyUJS8NDVk3CpgbsrnJwMA
+X-Gm-Gg: ASbGncu058Py+zzce8fU6sEcMy+I7NDlsFRGCoPK8YMbZneD1snlfLfF+gBnc0T9uWn
+ EZHv3JtscohYS3mp3j1VJjtODu32gyRKFcs24Xzd7oL9F5zKok8cYQ4d8QGYXpOi1rm7vtA==
+X-Google-Smtp-Source: AGHT+IGxNUla1zL7MVjpvGX2dN0pW56S5v90C1SjzGaSu3tth5UvfaWoXvPE80pQHcf7Kkk7nWBDh2TdeLSZsyJHpWo=
+X-Received: by 2002:a05:6512:2354:b0:53e:395c:688d with SMTP id
+ 2adb3069b0e04-542845b9739mr10345e87.43.1736277903836; Tue, 07 Jan 2025
+ 11:25:03 -0800 (PST)
 MIME-Version: 1.0
-Autocrypt: addr=duje.mihanovic@skole.hr; keydata=
- mDMEZokhzhYJKwYBBAHaRw8BAQdAWJZ0hsI/ytTqHGFV8x6tzd5sB596cTeeDB4CQsTf+wC0KER
- 1amUgTWloYW5vdmnEhyA8ZHVqZUBkdWplbWloYW5vdmljLnh5ej6ImQQTFgoAQRYhBG3/QdYN8x
- S1t2umMK0xk1JFj60DBQJmiSHOAhsDBQkJZgGABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAA
- AoJEK0xk1JFj60D1GABAJVSorZdMOlrp/oQtCSH/G53NE56x/JHA8VX+ZQBd/H3AP4/EcUf6eef
- DUxVMh2bdkmuQKsVZGgOGiXpMksrVntWBrQpRHVqZSBNaWhhbm92acSHIDxkdWplLm1paGFub3Z
- pY0Bza29sZS5ocj6ImQQTFgoAQRYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSH/AhsDBQkJZg
- GABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEK0xk1JFj60Dlw8A/i4lPOL7NaYoYePDq
- l8MaJaR9qoUi+D+HtD3t0Koi7ztAQCdizXbuqP3AVNxy5Gpb1ozgp9Xqh2MRcNmJCHA1YhWAbg4
- BGaJIc4SCisGAQQBl1UBBQEBB0DEc9JeA55OlZfWKgvmRgw6a/EpBQ8mDl6nQTBmnd1XHAMBCAe
- IfgQYFgoAJhYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSHOAhsMBQkJZgGAAAoJEK0xk1JFj6
- 0DG5MA/iuo4l2GDEZ1Zf+XaS//8FwdXDO9nHkfbV2MHjF4NZXwAQDroMzBdMcqVvc8GABFlTTgG
- j7KrRDz2HwWNyF8ZeprAQ==
+References: <20250102092305.GA18027@lisa.dawes.za.net>
+ <CAOMZO5AAtOP8RvyrKJuh4qY7xk+7bS5K5mWT9RZn5E5xKaacxQ@mail.gmail.com>
+ <20250107153051.GA21569@lisa.dawes.za.net>
+In-Reply-To: <20250107153051.GA21569@lisa.dawes.za.net>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 7 Jan 2025 16:24:51 -0300
+X-Gm-Features: AbW1kvZJ_aC6t8IqZbzwyXcKIX-hSFzuW9S6G6_owPdhA-qJhwD8kTcsuvpIj7w
+Message-ID: <CAOMZO5AN0Gob+HV1CJS_MrVWYxaWM6188ENeSwfcT14qyoTWYQ@mail.gmail.com>
+Subject: Re: MUSB compile failure for imx28
+To: Rogan Dawes <lists@dawes.za.net>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
-X-Mailman-Approved-At: Tue, 07 Jan 2025 19:09:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,29 +92,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tuesday 7 January 2025 12:30:40 Central European Standard Time Stefan Ro=
-ese=20
-wrote:
-> On 31.12.24 17:49, Duje Mihanovi=C4=87 wrote:
-> >   	{ .compatible =3D "ingenic,jz4780-uart",	.data =3D PORT_JZ4780  },
-> >   	{ .compatible =3D "nvidia,tegra20-uart",	.data =3D PORT_NS16550 },
-> >   	{ .compatible =3D "snps,dw-apb-uart",	.data =3D PORT_NS16550 },
-> >=20
-> > +	{ .compatible =3D "intel,xscale-uart",	.data =3D PORT_NS16550 },
->=20
-> Looking at the Linux 8250 of_device_id struct I see this entry:
->=20
-> 	{ .compatible =3D "mrvl,mmp-uart",
-> 		.data =3D (void *)PORT_XSCALE, },
->=20
-> Wouldn't it make more sense to use this compatible property instead?
+On Tue, Jan 7, 2025 at 12:30=E2=80=AFPM Rogan Dawes <lists@dawes.za.net> wr=
+ote:
 
-I was going by the logic that intel,xscale-uart is more generic. They use=20
-identical platform data, so it would be no problem at all.
+> That would explain it, then! :facepalm:
 
-Regards,
-=2D-=20
-Duje
+I tested to access the console via usbacm and it worked on my imx28evk:
 
+--- a/configs/mx28evk_defconfig
++++ b/configs/mx28evk_defconfig
+@@ -70,3 +70,5 @@ CONFIG_USB_GADGET_VENDOR_NUM=3D0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=3D0xa4a5
+ CONFIG_CI_UDC=3Dy
+ CONFIG_USB_GADGET_DOWNLOAD=3Dy
++CONFIG_USB_FUNCTION_ACM=3Dy
++CONFIG_BOOTDELAY=3D100
 
+First, I booted via normal serial console and run:
 
+=3D> setenv stderr usbacm && setenv stdout usbacm && setenv stdin usbacm
+&& saveenv
+
+Then booted again, and I saw on the console:
+
+U-Boot 2025.01-dirty (Jan 07 2025 - 16:10:42 -0300)
+
+CPU:   Freescale i.MX28 rev1.2 at 454 MHz
+BOOT:  SSP SD/MMC #0, 3V3
+DRAM:  128 MiB
+Core:  91 devices, 13 uclasses, devicetree: separate
+NAND:  2048 MiB
+MMC:   MXS MMC: 0
+Loading Environment from MMC... Reading from MMC(0)... OK
+In:    usbacm
+Out:   usbacm
+Err:   usbacm
+
+Then, on another PC window:
+
+sudo picocom -b 115200 /dev/ttyACM0
+
+And the console can be seen there.
