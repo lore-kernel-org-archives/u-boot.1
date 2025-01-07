@@ -4,69 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D69E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 10:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5B30E77199
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 10:37:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCCB18036D;
-	Tue,  7 Jan 2025 11:37:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 31B9E80600;
+	Tue,  7 Jan 2025 11:37:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iisFub7T";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MSeV/8Ss";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EF1B8036D; Tue,  7 Jan 2025 11:37:05 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 477CF801E8
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 11:37:01 +0100 (CET)
+ id 43F89805FD; Tue,  7 Jan 2025 11:37:15 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B8E2F805D7
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 11:37:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 507AawFJ2842638
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Tue, 7 Jan 2025 04:36:58 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736246218;
- bh=rWqBlnsVlRE/si+vv9ODeA25y/egVnabwVwDF23cPVI=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=iisFub7T1Z/uiSTMrj3uF4hK2qLg7Xr8nvy6lE9fI74q7MBF1T0UZEbf6mjDmL5e1
- jCE2cJ93YToKWnypGoPvSFYDH2u5ybC9uOFQ8G3nw/raQ8ikfvUKTIbDFgdZse8mhY
- 5VZtbS11epRveVKQQFg5KmR526UD+ofwP3WxsLIE=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 507Aawlx102458;
- Tue, 7 Jan 2025 04:36:58 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
- Jan 2025 04:36:58 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 7 Jan 2025 04:36:58 -0600
-Received: from [10.24.72.222] (jayesh-hp-z2-tower-g5-workstation.dhcp.ti.com
- [10.24.72.222])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 507Aau3h102994;
- Tue, 7 Jan 2025 04:36:56 -0600
-Message-ID: <b5854d61-2ba1-42d7-8e53-d3a9ad07f9a3@ti.com>
-Date: Tue, 7 Jan 2025 16:06:55 +0530
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e549dd7201cso5435485276.0
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 02:37:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1736246229; x=1736851029; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Dq4zv9Az1Jvh1aq0N28GgehOz7dF+scQWXSh/wvKjd8=;
+ b=MSeV/8SsdMNyInArTKW24947NUYCgOabjxIiofgn1BxDwvh0nIS/+KI7ksafjvNLQ9
+ J6Jr1lD44KhicjKzMKj0ib3ueWrX1qLif7oY3gtYEC9Xl//oXQcQfZqcGJLrab6jHAa+
+ RYaKPCt+9/D92hRbc6g+nBiny/Qa7UotDqtEgt+gSj/Pw6pTkxFFJf8xSuGzPEJrteN1
+ OdkcU5kjjtZDtGFY2NCx04u7xfF5ghzWRY+Abylzy/u3mFIvlUS0pbB888cAUz4SLhXA
+ iuIMSlFcMeZ1dsquzVjncwwa6bSNlkt/SghoxxUkLI7AQ1Z2Aao1I/ix7h3nubtTJQ75
+ VPxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736246229; x=1736851029;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Dq4zv9Az1Jvh1aq0N28GgehOz7dF+scQWXSh/wvKjd8=;
+ b=uiI8qgIHcfYsTKnVCoD7JI+3SMHBLovoDNNw5Y1kIIv1fqi/9mENqqJDyT0087KzlM
+ L7niuEyTTsCnYN5L7Ip2GhT17gKvz2dboeOl1XKvCAc7Ig7K4P6qv5qJw3BQRCs8axKA
+ GKEDOJPUFyIo71qdBYZJqOUA5jgEJkgSIzZ/H/CNSMV8Jk+/Nz9kKj7GqEu9VCdr0PEw
+ Ef72UubUv0nNTlB7LvP96K5tKuqLTIAcdilAOQK5vQAIJTPVzpMUs4Ki647XouGYdgV1
+ MVkJkt6yJZ6w3JqysMEyfr0KyTcAgyQYbhoilBhE/ziO/K88ZevDmBn+Q4NU/SZokpja
+ drUg==
+X-Gm-Message-State: AOJu0YygVhGkHZs8M53ALn6+rXVq1Jp5qc0wXwIZxcgbE5QKSZ4PdaZr
+ HQyB4EJkgblcre59p5fT6A84KuWvJiXUAkj7TLLIBGMgVGqfbdbilcv5OKZB21z9DTVojGCSfVk
+ Kb+7GYobeewC/cKLIRNsO54vNLD+xchZCFtj88A==
+X-Gm-Gg: ASbGncuOXoltW093yRUrEk06nqXomo9D3RT++ezeiuOpJpYYi+UIhpI1cNqqTQb6hiM
+ fuU8Tyxekk8DLIDWfWOJb+aFAkNeaSUDRDSzMcQ==
+X-Google-Smtp-Source: AGHT+IF3g0TjGhWlLqeSvoDeD95dsdctCmV+TL8bN7Xc0PuRC5tn59v5HRmW5QyqBOYxtMlFIwaxIhf6gTVz4tNuT/o=
+X-Received: by 2002:a05:6902:2293:b0:e38:8c9:c026 with SMTP id
+ 3f1490d57ef6-e538c41e000mr45996714276.52.1736246229612; Tue, 07 Jan 2025
+ 02:37:09 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arch: arm: mach-k3: j784s4_init: Set CTRL_MMR for
- AUDIO_REFCLK1 clk_sel
-To: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, <trini@konsulko.com>
-CC: <n-francis@ti.com>, <m-chawdhry@ti.com>, <sabiya.d@ti.com>
-References: <20250106100400.93799-1-j-choudhary@ti.com>
- <19b20f10-9718-4c37-bea9-bd36bfff0125@ti.com>
-Content-Language: en-US
-From: Jayesh Choudhary <j-choudhary@ti.com>
-In-Reply-To: <19b20f10-9718-4c37-bea9-bd36bfff0125@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-3-sjg@chromium.org>
+In-Reply-To: <20250106143229.3023771-3-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 7 Jan 2025 12:36:33 +0200
+X-Gm-Features: AbW1kvaUiG8VlliXyax0UQluIB2oOyplj6q-Zcw2h0Ukwq9Za6PK1vsY_Y3cVPE
+Message-ID: <CAC_iWj+KzQhhKAJgnF9SdYk0kka8d+epNF8Fzm388zqUidvPOw@mail.gmail.com>
+Subject: Re: [PATCH v2 02/33] bloblist: Drop BSD license
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,59 +91,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Andrew,
+On Mon, 6 Jan 2025 at 16:32, Simon Glass <sjg@chromium.org> wrote:
+>
+> Linaro has decided to write their own version of bloblist from scratch,
+> so there is no point in having a non-GPL license on this file. Change
+> it, to better fit with the U-Boot project.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Link: https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/22215
 
-On 06/01/25 20:42, Andrew Davis wrote:
-> On 1/6/25 4:04 AM, Jayesh Choudhary wrote:
->> The default value for the mux to select the parent clock,
->> AUDIO_REFCLK1_CTRL_CLK_SEL is '11111' (31) but the mux input for 31
->> is marked as 'Reserved' so the ti-sci-clk call for get-parent fails.
->> Mark it to a valid value, '11100' (28) for MAIN_PLL4_HSDIV2_CLKOUT
->> to get rid of the linux failures during boot-time like:
-> 
-> So the default value of the mux isn't known by firmware? Sounds like
-> a firmware issue..
-> 
-> No issue with using the bootloader to making the hardware's default state
-> more sane. Maybe just add a comment above the writel() line as right now
-> this is just writing a magic value to a magic address.
+NAK on the commit message. I explained why it was wrong and
+inappropriate in the previous version
 
-Will add the comments in v2.
-
-Thanks,
-Jayesh
-
-> 
-> Andrew
-> 
->> "[    1.573193] ti-sci-clk 44083000.system-controller:clock-controller:
->>   get-parent failed for dev=157, clk=34, ret=-19"
->>
->> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
->> ---
->>   arch/arm/mach-k3/j784s4/j784s4_init.c | 5 +++++
->>   1 file changed, 5 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c 
->> b/arch/arm/mach-k3/j784s4/j784s4_init.c
->> index 8a41cd3bb5..787cf6261e 100644
->> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
->> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
->> @@ -23,6 +23,9 @@
->>   #define J784S4_MAX_DDR_CONTROLLERS    4
->> +#define CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL    0x001082e4
->> +#define AUDIO_REFCLK1_DEFAULT            0x1c
->> +
->>   /* NAVSS North Bridge (NB) */
->>   #define NAVSS0_NBSS_NB0_CFG_MMRS        0x03702000
->>   #define NAVSS0_NBSS_NB1_CFG_MMRS        0x03703000
->> @@ -201,6 +204,8 @@ void k3_spl_init(void)
->>           remove_fwl_configs(navss_cbass0_fwls, 
->> ARRAY_SIZE(navss_cbass0_fwls));
->>       }
->> +    writel(AUDIO_REFCLK1_DEFAULT, 
->> (uintptr_t)CTRL_MMR_CFG0_AUDIO_REFCLK1_CTRL);
->> +
->>       /* Output System Firmware version info */
->>       k3_sysfw_print_ver();
->>   }
+/Ilias
+>
+> ---
+>
+> (no changes since v1)
+>
+>  common/bloblist.c  | 2 +-
+>  include/bloblist.h | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index ecce3da9331..c441498ec56 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -1,4 +1,4 @@
+> -// SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause
+> +// SPDX-License-Identifier: GPL-2.0+
+>  /*
+>   * Copyright 2018 Google, Inc
+>   * Written by Simon Glass <sjg@chromium.org>
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index 7d462e71914..be7303e1504 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -1,4 +1,4 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause */
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+>   * This provides a standard way of passing information between boot phases
+>   * (TPL -> SPL -> U-Boot proper.)
+> --
+> 2.34.1
+>
