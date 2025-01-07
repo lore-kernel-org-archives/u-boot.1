@@ -4,53 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB49E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 09:28:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A45E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 09:39:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA8BA8036B;
-	Tue,  7 Jan 2025 10:28:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E61518036B;
+	Tue,  7 Jan 2025 10:39:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736242089;
-	bh=SSfwm37fG8Tk8AsShF5GE/lvpXWnj1H1jJ7SrJxrmDM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=OKxAtEtUncKc0CCLjsHwrz7hgFRltsOk75Ah80kNSYxCUDXktGmPCXXpB4UbyuJrx
-	 EZIQQeN+ykC0pRxVKsI+3+9AjG7ThQqfT8xUUMM65R+VTqWDYeNV2wzXoqoSRz6MIQ
-	 9Q21ari7q+8qIHogjedSM8UpWvpyJUPITDQX8gMmVy8M6NsgnUSCawkWc/NeOZoeAo
-	 qvMci/Fth4CTxtPJ0zPEAkheTXHAJDbVD9d4qWGP5+qJuUSU3kTQ33YVs4HTKfoOfp
-	 ySbnXhM3nflaOmu0sggvVRUm54FVlzOWkTQraD+AsR9FiYFU+5gE1wfB19MdF7sAq9
-	 T+JG8osJRxqlA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E0926805E2; Tue,  7 Jan 2025 10:28:07 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBF8A801E8
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 10:28:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4YS5Ln5csBz9sSH;
- Tue,  7 Jan 2025 10:28:01 +0100 (CET)
-Message-ID: <9dcf00a3-c0b6-4124-8f7f-3acfac796654@denx.de>
-Date: Tue, 7 Jan 2025 10:28:01 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xHDWUPMw";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id ECDDA805E9; Tue,  7 Jan 2025 10:38:58 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id ADCDF801E8
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 10:38:54 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5079cixE2625423
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 7 Jan 2025 03:38:44 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1736242724;
+ bh=dJ/4mvwYUQp0a4Dg3yELT/5qALRd24pjEO+50CAsbWk=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=xHDWUPMwftSrZt/LJ8LjobiEbzwpUosRfbc5f9jdyw5TRW1Fnix4wODO4OqwE1L+e
+ lPiEiOkfBneSLkB4AEOr/+cRGRHVLxdhfLocbYscj37BNpxQ7SOWB1GksKRxC9D1Vb
+ KVFuIdFtM4kAFEnEmW1filLcwZxzdwnoPszwXPsI=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5079cihb002137
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 7 Jan 2025 03:38:44 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
+ Jan 2025 03:38:43 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 7 Jan 2025 03:38:43 -0600
+Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5079cgwT057385;
+ Tue, 7 Jan 2025 03:38:43 -0600
+From: Chintan Vankar <c-vankar@ti.com>
+To: AKASHI Takahiro <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
+ <mikhail.kshevetskiy@iopsys.eu>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Nishanth Menon <nm@ti.com>, Roger Quadros
+ <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, Jonathan Humphreys
+ <j-humphreys@ti.com>, Andreas Dannenberg <dannenberg@ti.com>, Simon Glass
+ <sjg@chromium.org>, Jayesh Choudhary <j-choudhary@ti.com>, Aniket Limaye
+ <a-limaye@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>, Chintan Vankar
+ <c-vankar@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Andrew Davis
+ <afd@ti.com>, Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <srk@ti.com>, <s-vadapalli@ti.com>, <danishanwar@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH 01/13] net: tftp: Increase TFTP pkt string length to include
+ null character
+Date: Tue, 7 Jan 2025 15:08:28 +0530
+Message-ID: <20250107093840.2211381-2-c-vankar@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250107093840.2211381-1-c-vankar@ti.com>
+References: <20250107093840.2211381-1-c-vankar@ti.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] watchdog: rti: support SPL (or re-start)
-To: "A. Sverdlin" <alexander.sverdlin@siemens.com>, u-boot@lists.denx.de
-Cc: Jan Kiszka <jan.kiszka@siemens.com>
-References: <20241108211506.1348528-1-alexander.sverdlin@siemens.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241108211506.1348528-1-alexander.sverdlin@siemens.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,67 +96,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08.11.24 22:15, A. Sverdlin wrote:
-> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> 
-> If the RTI watchdog has been enabled in SPL, enabling it in U-Boot proper
-> fails because it can only be enabled once in HW and never stopped. This
-> however leads to a situation that wdt_cyclic() watchdog trigger is not
-> being started any longer and the WDT fires at some point.
-> 
-> Allow for WDT re-start by not bailing out if the [previously] configured
-> period matches the one to be configured.
-> 
-> Enabling in [A53] SPL has been tested on AM62x-based HW (where [A53] SPL is
-> responsible for loading R5 DM firmware and not this driver).
-> 
-> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+'sprintf()' function defined in 'tiny-printf.c' is returning length of the
+string excluding null character. Fix this by increasing TFTP pkt length by
+1 to avoid TFTP error of request being not-null terminated while
+requesting length of packet.
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+---
+ net/tftp.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Thanks,
-Stefan
-
-> ---
->   drivers/watchdog/rti_wdt.c | 13 +++++++------
->   1 file changed, 7 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/watchdog/rti_wdt.c b/drivers/watchdog/rti_wdt.c
-> index 99168d0cad03..320c5ca19e0a 100644
-> --- a/drivers/watchdog/rti_wdt.c
-> +++ b/drivers/watchdog/rti_wdt.c
-> @@ -131,18 +131,19 @@ static int rti_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
->   	u32 timer_margin;
->   	int ret;
->   
-> -	if (readl(priv->regs + RTIDWDCTRL) == WDENABLE_KEY)
-> +	timer_margin = timeout_ms * priv->clk_hz / 1000;
-> +	timer_margin >>= WDT_PRELOAD_SHIFT;
-> +	if (timer_margin > WDT_PRELOAD_MAX)
-> +		timer_margin = WDT_PRELOAD_MAX;
-> +
-> +	if (readl(priv->regs + RTIDWDCTRL) == WDENABLE_KEY &&
-> +	    readl(priv->regs + RTIDWDPRLD) != timer_margin)
->   		return -EBUSY;
->   
->   	ret = rti_wdt_load_fw(dev);
->   	if (ret < 0)
->   		return ret;
->   
-> -	timer_margin = timeout_ms * priv->clk_hz / 1000;
-> -	timer_margin >>= WDT_PRELOAD_SHIFT;
-> -	if (timer_margin > WDT_PRELOAD_MAX)
-> -		timer_margin = WDT_PRELOAD_MAX;
-> -
->   	writel(timer_margin, priv->regs + RTIDWDPRLD);
->   	writel(RTIWWDRX_NMI, priv->regs + RTIWWDRXCTRL);
->   	writel(RTIWWDSIZE_50P, priv->regs + RTIWWDSIZECTRL);
-
-Viele Grüße,
-Stefan Roese
-
+diff --git a/net/tftp.c b/net/tftp.c
+index 704b20b4ff8..db1d4aacb0e 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -347,11 +347,11 @@ static void tftp_send(void)
+ 		pkt += strlen((char *)pkt) + 1;
+ #ifdef CONFIG_TFTP_TSIZE
+ 		pkt += sprintf((char *)pkt, "tsize%c%u%c",
+-				0, net_boot_file_size, 0);
++				0, net_boot_file_size, 0) + 1;
+ #endif
+ 		/* try for more effic. blk size */
+ 		pkt += sprintf((char *)pkt, "blksize%c%d%c",
+-				0, tftp_block_size_option, 0);
++				0, tftp_block_size_option, 0) + 1;
+ 
+ 		/* try for more effic. window size.
+ 		 * Implemented only for tftp get.
+@@ -359,7 +359,7 @@ static void tftp_send(void)
+ 		 */
+ 		if (tftp_state == STATE_SEND_RRQ && tftp_window_size_option > 1)
+ 			pkt += sprintf((char *)pkt, "windowsize%c%d%c",
+-					0, tftp_window_size_option, 0);
++					0, tftp_window_size_option, 0) + 1;
+ 		len = pkt - xp;
+ 		break;
+ 
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+2.34.1
 
