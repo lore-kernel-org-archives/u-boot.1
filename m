@@ -4,91 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF439E77198
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A77FCE77198
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91A528060A;
-	Tue,  7 Jan 2025 14:15:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D759280619;
+	Tue,  7 Jan 2025 14:15:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GY/+PxFc";
+	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="K4NVAMTv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1368801C3; Tue,  7 Jan 2025 10:26:13 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D74EC8036D; Tue,  7 Jan 2025 13:40:03 +0100 (CET)
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
+ [136.143.188.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65595801E8
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 10:26:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A9AB80079
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 13:39:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kikuchan98@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2f43d17b0e3so22718338a91.0
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 01:26:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736241970; x=1736846770; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QIc0EoGDGCchV4vL6lrP8ajdSdbiishZgFFhvI5FnYI=;
- b=GY/+PxFcrYTUWKs+9g3pVmDwMqJ341BxLB1ZEJSUzgwFCp5b2YRWi60W/Wrut5QoYY
- W/BetG19rXK7Q2xoBDgpxTTLsMwJ3Gr5Tf6cXYohz5YILuUwrqA2/Lzcw2Ny8PtEptDI
- 4V1J2Pv6WTom4vRndofRYbM8JJAlKUV3QR7GXxb0WSlwg3r86t4PIw4OadYWfHCj0SFa
- oFs+QEhc0vRvwL+uLqbYfRQtSl+nBrh6LgMfW1U/2HlBrXAqnqbRBov96xDV+eFuQNIW
- YB7FqZ7n9ZWzUoA/4WkkaizYV+czeTcgXrZFKFyGiFUFCq9hBsHn1sEtJ+L4Uu+7CSUw
- OYkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736241970; x=1736846770;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QIc0EoGDGCchV4vL6lrP8ajdSdbiishZgFFhvI5FnYI=;
- b=W6kfc7Rtum1p72chUHOOL4UY2mHT1EpHV++m1eL8Cpe+0K5pjd9jaT0SQnYHzQw5WF
- f9JfecN70FjWqsx5blvN1aHvW31+d4rRjgzHqSdRBG2B8Jt0Wj52Gac/TxaJSTOtEXws
- J4Hnc+7nGLxtUiWgoJcQpLpuvMQbc8Tg3+pS7Oz7TVfgIOFBTUGYW43i+A5eG2Nb6Mby
- W+fzkpMObsTmmy1X1wJhIDKlFx/nBrxlrVwyiuWPcBUivQft7mngnRM4bMG2DaMap4hJ
- 6xIuUvU0N/1qSgmMfJi6v1D3JJG2Fx6phJh5D4bzNyjhYneSTNHJSFMC1XZ8r/FtOehU
- hbqw==
-X-Gm-Message-State: AOJu0Yz01Ub+VS4XcCZN0GX/NyMQHxUTcdo1CRKiYVrwtNBkf0m5fF9X
- 6NQkfkeUYww6f/X4VjzO78WtZ35RWHNl8Q+VIMfnx3mMLvTHagRxTp/WCbJw
-X-Gm-Gg: ASbGncuUJqfiBS1CNChgWwmTlVOYiqCRHLjLGhylS/8K+7/wAADTYhQ+r7dlQ3dlTj6
- tZw6rxQPBVKVMjWQ69ZgqUHpHOk4w3OUTmS85hYiqIZhgH3kLDhzrmWLT+omi+lgx94aJPmH0iv
- tzNSwxICcovNaqQS1VhGVhTn2qXmNCLWjlqDD6p7rhvTsnAW71EJ0JnGo6Azmb2Cev7ErQrD7jm
- 0sdRKa8I0QgRnosKX8YiQODmecDWYFgoobkCJdxMbtrapj3I1dWMc6XHTqKLdC6+A6o0KE=
-X-Google-Smtp-Source: AGHT+IEliEl5UZZTSClFh5f47xIcpZ1kW58Fs6lUz8l8UTS8yy9yxazjXvjXOAf+9nKtiyvOwAnCcA==
-X-Received: by 2002:a05:6a00:1c8c:b0:72a:9ab2:4d90 with SMTP id
- d2e1a72fcca58-72abdf1034fmr79386867b3a.26.1736241969756; 
- Tue, 07 Jan 2025 01:26:09 -0800 (PST)
-Received: from noel.flets-west.jp ([2405:6586:4480:a10:fa8f:7c3e:835f:c642])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72aad8dbb09sm33806352b3a.121.2025.01.07.01.26.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2025 01:26:09 -0800 (PST)
-From: Hironori KIKUCHI <kikuchan98@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Hironori KIKUCHI <kikuchan98@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Dominik Wernberger <dominik.wernberger@gmx.de>,
- Custom IDEAS <vanbaren@cideas.com>, Software Engineering <wd@denx.de>
-Subject: [PATCH 2/2] spi: soft_spi: Add support for SPI_3WIRE
-Date: Tue,  7 Jan 2025 18:25:40 +0900
-Message-ID: <20250107092544.1798497-3-kikuchan98@gmail.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250107092544.1798497-1-kikuchan98@gmail.com>
-References: <20250107092544.1798497-1-kikuchan98@gmail.com>
+ spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
+ARC-Seal: i=1; a=rsa-sha256; t=1736253592; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=WKVLr1nUHg/aIVioeXMF+NQgljC+Cqv2lUEzrt6L8w/UjUDvDKSuOQrCrdS8T3jrXWryKKd8kCmNLX+rlrlEMStIOy71E+DVy6w1t95SOkZxhPOGCkOf2k1TiAck8Nvr5alER8ZHMwmCwKlOf0Y+Is2oSLznIQqdtOdZSOLt3l0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1736253592;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=MHC2vxSzj63yaZTirsF8g4qXgTnBQznKaQ0bCGB5b24=; 
+ b=d+//4fNTxetFh0xoHIgEd+OEDw6HdPD2cwOqtkZRno3YO5eg1MFxPqI4LR8YPCA57wYtplC+6QwZiZs4wr91ziFObcUq1eSvJNIaLtxe49yes0PNCIBDKYCpLjAICy0frHr163rs4+SLtU4tDzQGOwQOHMDZu8I+l9Tj/P9CHeg=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=pigmoral.tech;
+ spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
+ dmarc=pass header.from=<junhui.liu@pigmoral.tech>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1736253592; 
+ s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
+ h=MIME-Version:From:From:To:To:In-Reply-To:Cc:Cc:Subject:Subject:Message-ID:Date:Date:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+ bh=MHC2vxSzj63yaZTirsF8g4qXgTnBQznKaQ0bCGB5b24=;
+ b=K4NVAMTvoXEi1CPJYvwZ+I1Ekez4Xf8yFxihEJTs+gr10V5GHG/ogKMwtVvv6gNC
+ q8FMn+9k5PYA/NTvE9YJs1KWq1dXWhx4iyix9cO7X2czAVFN0scwOjRDxGBQPjsLSpR
+ A8ZXbGt2mWPNmhq1VXSCW0ZPk1MdBnPRTISMC8Zg=
+Received: by mx.zohomail.com with SMTPS id 1736253589684868.8851896976138;
+ Tue, 7 Jan 2025 04:39:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: "Junhui Liu" <junhui.liu@pigmoral.tech>
+To: "Marek Vasut" <marex@denx.de>, "Tom Rini" <trini@konsulko.com>, 
+ "Lukasz Majewski" <lukma@denx.de>, 
+ "Mattijs Korpershoek" <mkorpershoek@baylibre.com>
+In-Reply-To: <64b317fe-d5a2-4bc7-8c8a-fa608bccfa0b@denx.de>
+Cc: <u-boot@lists.denx.de>, <seashell11234455@gmail.com>, 
+ <pbrobinson@gmail.com>
+Subject: Re: [PATCH v3 7/8] usb: dwc2: Unify flush and reset logic with v4.20a
+ support
+Message-ID: <1818696fe57acd78.91ad175705e34eaa.3d66e6a504061c82@Mac>
+Date: Tue, 7 Jan 2025 12:39:45 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+X-ZohoMailClient: External
 X-Mailman-Approved-At: Tue, 07 Jan 2025 14:15:02 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,61 +79,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When 3-wire mode is claimed on the bus, use the MOSI (output) pin to
-receive data. In this mode, since the transfer can only be either TX
-or RX, return -EINVAL if both are required at the same time.
 
-Signed-off-by: Hironori KIKUCHI <kikuchan98@gmail.com>
----
- drivers/spi/soft_spi.c | 19 ++++++++++++++++---
- 1 file changed, 16 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/spi/soft_spi.c b/drivers/spi/soft_spi.c
-index a8ec2f4f7b..ae444dad8a 100644
---- a/drivers/spi/soft_spi.c
-+++ b/drivers/spi/soft_spi.c
-@@ -124,8 +124,19 @@ static int soft_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	u8		*rxd = din;
- 	int		cpha = !!(priv->mode & SPI_CPHA);
- 	int		cidle = !!(priv->mode & SPI_CPOL);
-+	int		txrx = plat->flags;
- 	unsigned int	j;
- 
-+	if (priv->mode & SPI_3WIRE) {
-+		if (txd && rxd)
-+			return -EINVAL;
-+
-+		txrx = txd ? SPI_MASTER_NO_RX : SPI_MASTER_NO_TX;
-+		dm_gpio_set_dir_flags(&plat->mosi,
-+				      txd ? GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE :
-+					    GPIOD_IS_IN);
-+	}
-+
- 	debug("spi_xfer: slave %s:%s dout %08X din %08X bitlen %u\n",
- 	      dev->parent->name, dev->name, *(uint *)txd, *(uint *)rxd,
- 	      bitlen);
-@@ -160,7 +171,7 @@ static int soft_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 		 */
- 		if (cpha)
- 			soft_spi_scl(dev, !cidle);
--		if ((plat->flags & SPI_MASTER_NO_TX) == 0)
-+		if ((txrx & SPI_MASTER_NO_TX) == 0)
- 			soft_spi_sda(dev, !!(tmpdout & 0x80));
- 		udelay(plat->spi_delay_us);
- 
-@@ -174,8 +185,10 @@ static int soft_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 		else
- 			soft_spi_scl(dev, cidle);
- 		tmpdin	<<= 1;
--		if ((plat->flags & SPI_MASTER_NO_RX) == 0)
--			tmpdin	|= dm_gpio_get_value(&plat->miso);
-+		if ((txrx & SPI_MASTER_NO_RX) == 0)
-+			tmpdin |= dm_gpio_get_value((priv->mode & SPI_3WIRE) ?
-+							    &plat->mosi :
-+							    &plat->miso);
- 		tmpdout	<<= 1;
- 		udelay(plat->spi_delay_us);
- 
--- 
-2.47.1
+On 06/01/2025 16:37, Marek Vasut wrote:
+> On 1/6/25 10:14 AM, Junhui Liu wrote:
+>> Hi Marek,
+>>=20
+>> On 05/01/2025 20:19, Marek Vasut wrote:
+>>> On 1/4/25 4:37 AM, Junhui Liu wrote:
+>>>> From: Kongyang Liu <seashell11234455@gmail.com>
+>>>>
+>>>> This patch merges flush and reset logic for both host and gadget code
+>>>> into a common set of functions, reducing duplication. It also adds supp=
+ort
+>>>> for the updated reset logic to compatible with core version since v4.20=
+a.
+>>>>
+>>>> This patch mainly refers to the patch in the kernel.
+>>>> link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.gi=
+t/commit/?id=3D65dc2e725286106f99c6f6b78e3d9c52c15f3a9c
+>>>
+>>> [...]
+>>>
+>>>> +++ b/drivers/usb/common/dwc2_core.c
+>>>> @@ -0,0 +1,115 @@
+>>>> +// SPDX-License-Identifier: GPL-2.0+
+>>>> +/*
+>>>> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+>>>
+>>> 2025 now .
+>>=20
+>> You're right. It should be 2024-2025.
+>>=20
+>>>
+>>> [...]
+>>>
+>>>> +int dwc2_flush_rx_fifo(struct dwc2_core_regs *regs)
+>>>> +{
+>>>> +	int ret;
+>>>> +
+>>>> +	log_debug("Flush Rx FIFO\n");
+>>>> +
+>>>> +	/* Wait for AHB master IDLE state */
+>>>> +	ret =3D wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_AHBIDLE=
+, true, 1000, false);
+>>>> +	if (ret) {
+>>>> +		log_warning("%s: Waiting for GRSTCTL_AHBIDLE timeout\n", __func__);
+>>>> +		return ret;
+>>>> +	}
+>>>> +
+>>>> +	writel(GRSTCTL_RXFFLSH, &regs->global_regs.grstctl);
+>>>> +
+>>>> +	ret =3D wait_for_bit_le32(&regs->global_regs.grstctl, GRSTCTL_RXFFLSH=
+, false, 1000, false);
+>>>> +	if (ret) {
+>>>> +		log_warning("%s: Waiting for GRSTCTL_RXFFLSH timeout\n", __func__);
+>>>> +		return ret;
+>>>> +	}
+>>>> +
+>>>> +	/* Wait for at least 3 PHY Clocks */
+>>>> +	udelay(1);
+>>> Shouldn't this delay be derived from the PHY clock frequency somehow ?
+>>> Are we sure 1us is always sufficient ?
+>>=20
+>> According to the datasheet, the PHY clock can be selected to 6/30/48/60
+>> MHz depending on the speed mode. And 1us is sufficient even for 6MHz
+>> (twice the 3 PHY clock at 6MHz), so I think 1us is acceptable here.
+>=20
+> Please add a code comment like that ^ .
 
+OK, I will add comments in the next version.
+
+>=20
+>> If we want to derive the delay dynamically from the PHY clock frequency,
+>> we would need to read the PHY clock and speed mode cfg from the register
+>> and calculate the appropriate delay. This would add complexity to the
+>> code. In the current situation, a fixed delay of 1 us is sufficient for
+>> all supported clock frequencies and keeps the implementation simpler.
+> Thanks for the clarification, add a code comment and that is all fine.
+
+--=20
+Best regards,
+Junhui Liu
