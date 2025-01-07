@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA274E77198
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 15:33:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F754E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 15:33:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C990805EA;
-	Tue,  7 Jan 2025 16:33:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B7780806D5;
+	Tue,  7 Jan 2025 16:33:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TeBEvII+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z/BLX4zs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6956F8067D; Tue,  7 Jan 2025 16:33:17 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id CBA74806D5; Tue,  7 Jan 2025 16:33:22 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C461C806CB
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 16:33:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC1DE8069A
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 16:33:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2ee397a82f6so23343398a91.2
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 07:33:09 -0800 (PST)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2ee67e9287fso22992065a91.0
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 07:33:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736263988; x=1736868788; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736263997; x=1736868797; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VBq3eI6h+mZaSCf+3EQOm7nb7SBg4DzO2R31hsna+nk=;
- b=TeBEvII+3k6W0xgUNcjH+vn2YpjFKV/vwTCTPxQ/r2t2eGP4OqlpK7Il+3hfLhXWvX
- nZbCJ1NbFvT0/IJVU9+FJSP1emEegSi9jygxOvySZMz0v+qizZzAjZZ84lfQFWUFVB8V
- azQC8cByxJPhNgZPwU5gLxauojcY/+P+NMFuI=
+ bh=C6LzvwbO6iMc46HdHH9Vgqiukz92xQFHZG6pMCVTHU4=;
+ b=Z/BLX4zs0qc2A+LsYYThsGmKIXIDHq3dtKhD9lMMN/ktIDvf+pKGF42B1b+W0xlSK0
+ hf7193qkxtBwATW60hys1Ea8VnH24FKOZIDyoIUkh+1YOTqgz2fpT96uCcJKmE3S+o8T
+ KTVtecWNywuYikjeluQQc1agKCOlGgnXe3V4I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736263988; x=1736868788;
+ d=1e100.net; s=20230601; t=1736263997; x=1736868797;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VBq3eI6h+mZaSCf+3EQOm7nb7SBg4DzO2R31hsna+nk=;
- b=Vm6TpcKcxbnld1qUthbB1aPYBTqOpqSIDTLHRbZYMOO7nfqCbW6V5Osj+inOu+o338
- VsYNUkS4bubexROywBjONEMGHB9oqxESrkDa96JOf0kvhLl4qdp54gqWSDXwjWaMoIr5
- Nm8mPdxuQUZUtEf05I5hpSaB/i1Fq/es6HQvMVceyVzPgc/9Ky2denMNNHt4XGCMk1tq
- uyp3Jy6O1hkyO3M88RLbyUgYDYl1xsZLOCp2pmTxOrmsyp1Q3IvS+hLnIjVVo0EW87A8
- TF0+NhtisYw5W5yyskR1vVqEV+hQ/TzSbOvIDR1V2DN0+CbAJpkRgUTMpsVug1zYvA0a
- eR2A==
+ bh=C6LzvwbO6iMc46HdHH9Vgqiukz92xQFHZG6pMCVTHU4=;
+ b=tnK680yikEURRTri/ZOHxmmE3lttu5TBxMXhYYI/4+JAvMnb6uQgedNT7UoEfz8TLX
+ NyOSYrKKpL5Gh2KI/VjhLtZtONntUOOAYD3rFnJjkjIvTKM7TvJrNYTg6m6LIePGMKCD
+ 5c4CC4hMTw40tM9fswDFjK4ltkwghkPc3xIWxSAjNMingFaCTn0R9w3fJ4hoQ4s/ZDSZ
+ IKM83AznohbDl0ZnltY3mBOD5l6S4cDCZj8J76DsHp7bcV5k4ArA0tm/s+WJotJ+TEiQ
+ xwIewN9EW2fcnhXAp9jobY2NSryktf9wAH0ph6V7UBb5SdTERGrIPg670wTlKm/dPBeg
+ VOsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcrNSzF0zoznABzxMdgyBHOYfzCg36j1uw9b9gp4zIh2vEmDgVRuJFjPkwchvB90ancNTS8CY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpQzUIVDqXCjc0AAG54eYhzDgQvfNnmOaZ2ktwIZjBM8xWo0P7
- hyFtk5Bug6BCKwd9aAY7e6IbMRJSRjMXRF6NPzMhKSe60XMzjZzlpukDYP4GiSQRC1icW+wvxHy
- avaSOwoIPxl9bDuDBEf0tshGKESX1XVO6lVMV
-X-Gm-Gg: ASbGnctgJeFars1CfePvHLjX3rkGSpIdcLgbDBbWNHPc60eTkoNinCZBWSS6R22E8tz
- kxNG5fDLVc3WJsl3xbiRMVRVHZb08gTXP6m9Tvv8=
-X-Google-Smtp-Source: AGHT+IHd7oGn1fUT+3S9hiTYQkomrqH2eUvLOAEE+mmqb7ANNcl3WCFM8PwLuShrvukfrtocxf6zSgDcB+Hk0GsRnbs=
-X-Received: by 2002:a17:90b:5484:b0:2ee:d63f:d77 with SMTP id
- 98e67ed59e1d1-2f452e1c26fmr94074668a91.9.1736263988404; Tue, 07 Jan 2025
- 07:33:08 -0800 (PST)
+ AJvYcCUTsN3GsfubHH8f4gi9pqRBqIKFlXwm+XKlOcZPnemDe/86Kb2daubdfAMWevxVjtmD/NABhTU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyTCd2MfGyAplhR8+d+Lh8mQXkv2SEzqM5YBuSq1hIjavCZorXu
+ BApYgwyZMVVJ230GvkS5VjA3W+5zyURGGZTocyXJwI2Ha0ftFBRa6A00jl4z/CV9U68hqYcVaPl
+ KpO5rczwrTjHcM/mvxQ6wHh5qWTRbZdPmYhcq
+X-Gm-Gg: ASbGnctBxdl4JvmANJJ7upTHpQX+FnnXBwOlTG3IjIgIWSpjza1KfcoACXxRSH8cRRs
+ sFK+dcLJVNOS/rAkR2OrosuvLAzn4hAs4YuhO2fY=
+X-Google-Smtp-Source: AGHT+IFgnDZiLOaeoxaq3C6/dwogk7iVu64m4AyhwhlYxS6DDwLskUuHAamyn1ILLfLUxmvwokvbSrkaoUReB8x6z0o=
+X-Received: by 2002:a17:90b:2b86:b0:2ee:edae:75e with SMTP id
+ 98e67ed59e1d1-2f452e0a44dmr89569663a91.13.1736263997034; Tue, 07 Jan 2025
+ 07:33:17 -0800 (PST)
 MIME-Version: 1.0
 References: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
- <20241124-b4-modernise-smem-v1-13-b7852c11b67c@linaro.org>
-In-Reply-To: <20241124-b4-modernise-smem-v1-13-b7852c11b67c@linaro.org>
+ <20241124-b4-modernise-smem-v1-14-b7852c11b67c@linaro.org>
+In-Reply-To: <20241124-b4-modernise-smem-v1-14-b7852c11b67c@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Jan 2025 08:32:25 -0700
-X-Gm-Features: AbW1kvbrqujPRutb_MNvjPT_nPtc6VurllYzbPRtE5D0gSPF4V6O1fo-JEWOCmk
-Message-ID: <CAFLszTieJPgm45EHsFbk8YhZamJg=YoJBFHUg22tXL_dkkUQmQ@mail.gmail.com>
-Subject: Re: [PATCH 13/15] mach-snapdragon: support parsing memory map from
- SMEM
+Date: Tue, 7 Jan 2025 08:32:35 -0700
+X-Gm-Features: AbW1kvagaV_PMtCUjpFUmmHNIhcjsylqB4pTBCCH3WoKxDFjNVdzmVF9ouFZyt8
+Message-ID: <CAFLszThinPHnJ5BRDMGFMuOyYBmvP93+fBzBzbEPuX2vEoJG3w@mail.gmail.com>
+Subject: Re: [PATCH 14/15] mach-snapdragon: fetch serial# from SMEM
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Tom Rini <trini@konsulko.com>, 
@@ -91,31 +90,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Caleb,
+
 On Sun, 24 Nov 2024 at 12:18, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> It is possible to derive the memory map for a Qualcomm platform from the
-> SMEM shared memory region. The memory map is populated by the preloader.
->
-> Introduce support for parsing this data and using it to populate
-> U-Boot's memory map. Since we aren't yet sure if this will work for
-> every platform, it is not yet used in all cases, if U-Boot is booted
-> with an internal FDT which has the memory map defined, this will
-> be used instead.
->
-> If the FDT comes from ABL, or we're using an internal FDT with no memory
-> map defined, then U-Boot will try to use SMEM. This should remove the
-> need to define the memory map statically in a U-Boot overlay DT for most
-> boards.
+> If available, otherwise fall back to cmdline.
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/mach-snapdragon/board.c     |   2 +-
->  arch/arm/mach-snapdragon/dram.c      | 106 +++++++++++++++++++++++++++++++++--
-
-comment again:
-
->  arch/arm/mach-snapdragon/qcom-priv.h |   4 +-
->  3 files changed, 106 insertions(+), 6 deletions(-)
+>  arch/arm/mach-snapdragon/board.c | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Thoughts below
+
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 269d39e4f6e1..dbac8aa2709a 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -30,8 +30,9 @@
+>  #include <malloc.h>
+>  #include <fdt_support.h>
+>  #include <usb.h>
+>  #include <sort.h>
+> +#include <soc/qcom/smem.h>
+>  #include <time.h>
+>
+>  #include "qcom-priv.h"
+>
+> @@ -198,11 +199,16 @@ static const char *get_cmdline(void)
+>  }
+>
+>  void qcom_set_serialno(void)
+>  {
+> -       const char *cmdline = get_cmdline();
+> +       const char *cmdline;
+>         char serial[32];
+>
+> +       if (!qcom_socinfo_init())
+
+Hmmm that function should return an error code, i.e. 0 on success.
+Does Linux use a boot interface here?
+
+> +               return;
+
+Shouldn't this return an error?
+
+> +
+> +       cmdline = get_cmdline();
+> +
+
+drop blank line
+
+>         if (!cmdline) {
+>                 log_debug("Failed to get bootargs\n");
+
+Shouldn't this be an error? If not, please add a comment.
+
+>                 return;
+>         }
+> @@ -353,8 +359,11 @@ int board_late_init(void)
+>
+>         /* By default copy U-Boots FDT, it will be used as a fallback */
+>         memcpy((void *)addr, (void *)gd->fdt_blob, fdt32_to_cpu(fdt_blob->totalsize));
+>
+> +       /* Initialise SMEM if it wasn't done already */
+> +       qcom_smem_init();
+> +
+>         configure_env();
+>         qcom_late_init();
+>
+>         /* Configure the dfu_string for capsule updates */
+>
+> --
+> 2.47.0
+>
+
+Regards,
+Simon
