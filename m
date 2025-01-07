@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D6F0E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 15:33:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA274E77198
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 15:33:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02B4D8060A;
-	Tue,  7 Jan 2025 16:33:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C990805EA;
+	Tue,  7 Jan 2025 16:33:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZMPPDa8l";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TeBEvII+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 330A38036B; Tue,  7 Jan 2025 16:33:05 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 6956F8067D; Tue,  7 Jan 2025 16:33:17 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 511388060A
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 16:33:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C461C806CB
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 16:33:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2ef28f07dbaso18157384a91.2
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 07:33:01 -0800 (PST)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2ee397a82f6so23343398a91.2
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 07:33:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736263980; x=1736868780; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736263988; x=1736868788; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FRviGNDTsz2HU/b/xxQSITqXS48sKuYKvV669IG1inI=;
- b=ZMPPDa8lxy8ig1GuiIElQKYKirSepOWG292Le4Az6rK61vfJwTd/8RsiXjkrgbYH8Q
- EYbKEtzk73RcD2psPlIHcA2LGQjAFt/WAgTyCU1vUsvoxe7ME/NxYcJkBIq160ywnxej
- zktFrEBPKcHJ+124Jxg/Q5WqpCfu+pi//QKH4=
+ bh=VBq3eI6h+mZaSCf+3EQOm7nb7SBg4DzO2R31hsna+nk=;
+ b=TeBEvII+3k6W0xgUNcjH+vn2YpjFKV/vwTCTPxQ/r2t2eGP4OqlpK7Il+3hfLhXWvX
+ nZbCJ1NbFvT0/IJVU9+FJSP1emEegSi9jygxOvySZMz0v+qizZzAjZZ84lfQFWUFVB8V
+ azQC8cByxJPhNgZPwU5gLxauojcY/+P+NMFuI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736263980; x=1736868780;
+ d=1e100.net; s=20230601; t=1736263988; x=1736868788;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FRviGNDTsz2HU/b/xxQSITqXS48sKuYKvV669IG1inI=;
- b=h8qV5kpPcKFTJJBbEL1RF8cMsFOzYa20FvQ+qG52543f3cKGZUmjWlvhNRnfGtvoP6
- 9/5NihjqV1kIU6sKm6L1iv0EWlH0j4xPOo1S4thRN5oxP4UsMGndzb12rj+77zIJBCro
- FpxixlH6fdHfPi9PAh3r1s/MsnxQlwBviY8WsgQe/qc05SBfMlS0hPMg3+og1ZJb490Z
- cQ2mW2u1Gui9H7AgrVqFgwJ+ROZlK/E5HwrTHwBRsZp2HoXp1Sle6oSRtW/J7994DLi1
- x2WlzPFCNviFiaP6FPi/28DDAzFRNvXX2KA+mXG5EOZMYy57ArRr9mAergm1K2LS9iXo
- VWhw==
+ bh=VBq3eI6h+mZaSCf+3EQOm7nb7SBg4DzO2R31hsna+nk=;
+ b=Vm6TpcKcxbnld1qUthbB1aPYBTqOpqSIDTLHRbZYMOO7nfqCbW6V5Osj+inOu+o338
+ VsYNUkS4bubexROywBjONEMGHB9oqxESrkDa96JOf0kvhLl4qdp54gqWSDXwjWaMoIr5
+ Nm8mPdxuQUZUtEf05I5hpSaB/i1Fq/es6HQvMVceyVzPgc/9Ky2denMNNHt4XGCMk1tq
+ uyp3Jy6O1hkyO3M88RLbyUgYDYl1xsZLOCp2pmTxOrmsyp1Q3IvS+hLnIjVVo0EW87A8
+ TF0+NhtisYw5W5yyskR1vVqEV+hQ/TzSbOvIDR1V2DN0+CbAJpkRgUTMpsVug1zYvA0a
+ eR2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVrhp4uM0apeNVKfBoZJUokKajnBLmUcKmp83MJDg56ZvQPP3RSsqKqsOUXjGiZAW+o2YliTc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCYvMjVykzbKmQYkc5Uq+Iaj1rfrjTn2jUk0ZOAjY48j4HZrKO
- ruoIPzpQmTM0+KNjs4H5kdYC3ZiqgCXLDGEjZ66mUa7/qxeuPy2AtYGQmyX4iSFIImaE1MC/vuh
- xpHg/QZ86KtUw72RZckZAYNPkq5WZ/zCCG30V
-X-Gm-Gg: ASbGncvjNkYF8mOA7HSiY8f6N61wGvEyqdhq7O0twgBZsenFSYHdVbG9g3n2qcTlU37
- IROpa9WVAtulW2Py4YTycSUhMOI7sRvSjb2fxSCw=
-X-Google-Smtp-Source: AGHT+IFAdApno/TFqTmJQaychUvpCcGnmbiMP/gRzEzXFjPDo8ETMpYumC5kJS/50fswQCnu5BtZl/Z4Ospagdk56pk=
-X-Received: by 2002:a17:90b:2dc2:b0:2ee:bbe0:98cd with SMTP id
- 98e67ed59e1d1-2f452def731mr96945869a91.7.1736263979927; Tue, 07 Jan 2025
- 07:32:59 -0800 (PST)
+ AJvYcCWcrNSzF0zoznABzxMdgyBHOYfzCg36j1uw9b9gp4zIh2vEmDgVRuJFjPkwchvB90ancNTS8CY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpQzUIVDqXCjc0AAG54eYhzDgQvfNnmOaZ2ktwIZjBM8xWo0P7
+ hyFtk5Bug6BCKwd9aAY7e6IbMRJSRjMXRF6NPzMhKSe60XMzjZzlpukDYP4GiSQRC1icW+wvxHy
+ avaSOwoIPxl9bDuDBEf0tshGKESX1XVO6lVMV
+X-Gm-Gg: ASbGnctgJeFars1CfePvHLjX3rkGSpIdcLgbDBbWNHPc60eTkoNinCZBWSS6R22E8tz
+ kxNG5fDLVc3WJsl3xbiRMVRVHZb08gTXP6m9Tvv8=
+X-Google-Smtp-Source: AGHT+IHd7oGn1fUT+3S9hiTYQkomrqH2eUvLOAEE+mmqb7ANNcl3WCFM8PwLuShrvukfrtocxf6zSgDcB+Hk0GsRnbs=
+X-Received: by 2002:a17:90b:5484:b0:2ee:d63f:d77 with SMTP id
+ 98e67ed59e1d1-2f452e1c26fmr94074668a91.9.1736263988404; Tue, 07 Jan 2025
+ 07:33:08 -0800 (PST)
 MIME-Version: 1.0
 References: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
- <20241124-b4-modernise-smem-v1-12-b7852c11b67c@linaro.org>
-In-Reply-To: <20241124-b4-modernise-smem-v1-12-b7852c11b67c@linaro.org>
+ <20241124-b4-modernise-smem-v1-13-b7852c11b67c@linaro.org>
+In-Reply-To: <20241124-b4-modernise-smem-v1-13-b7852c11b67c@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Jan 2025 08:32:22 -0700
-X-Gm-Features: AbW1kvao16F_gknSMXBtwCYedZ9SBUQM3-NLoJVivjOtf_AlZ6cak6fSZp5zqT8
-Message-ID: <CAFLszTgZth7aq4OvbLT7s29CSbrT99iyACNpSUkTPBk7CuUSjw@mail.gmail.com>
-Subject: Re: [PATCH 12/15] mach-snapdragon: move memory parsing to its own file
+Date: Tue, 7 Jan 2025 08:32:25 -0700
+X-Gm-Features: AbW1kvbrqujPRutb_MNvjPT_nPtc6VurllYzbPRtE5D0gSPF4V6O1fo-JEWOCmk
+Message-ID: <CAFLszTieJPgm45EHsFbk8YhZamJg=YoJBFHUg22tXL_dkkUQmQ@mail.gmail.com>
+Subject: Re: [PATCH 13/15] mach-snapdragon: support parsing memory map from
+ SMEM
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Tom Rini <trini@konsulko.com>, 
@@ -90,42 +91,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
-
 On Sun, 24 Nov 2024 at 12:18, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> This code is getting a bit complicated, split it out to try and keep
-> things a bit better organised as we're going to be supporting populating
-> the memory layout from various other sources.
+> It is possible to derive the memory map for a Qualcomm platform from the
+> SMEM shared memory region. The memory map is populated by the preloader.
+>
+> Introduce support for parsing this data and using it to populate
+> U-Boot's memory map. Since we aren't yet sure if this will work for
+> every platform, it is not yet used in all cases, if U-Boot is booted
+> with an internal FDT which has the memory map defined, this will
+> be used instead.
+>
+> If the FDT comes from ABL, or we're using an internal FDT with no memory
+> map defined, then U-Boot will try to use SMEM. This should remove the
+> need to define the memory map statically in a U-Boot overlay DT for most
+> boards.
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/mach-snapdragon/Makefile    |   2 +-
->  arch/arm/mach-snapdragon/board.c     |  94 ----------------------------
->  arch/arm/mach-snapdragon/dram.c      | 116 +++++++++++++++++++++++++++++++++++
->  arch/arm/mach-snapdragon/qcom-priv.h |   2 +
->  4 files changed, 119 insertions(+), 95 deletions(-)
+>  arch/arm/mach-snapdragon/board.c     |   2 +-
+>  arch/arm/mach-snapdragon/dram.c      | 106 +++++++++++++++++++++++++++++++++--
+
+comment again:
+
+>  arch/arm/mach-snapdragon/qcom-priv.h |   4 +-
+>  3 files changed, 106 insertions(+), 6 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-But please comment the function in the header file:
-
-> diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-> index 74d39197b89f..b7f3bf798d3c 100644
-> --- a/arch/arm/mach-snapdragon/qcom-priv.h
-> +++ b/arch/arm/mach-snapdragon/qcom-priv.h
-> @@ -22,5 +22,7 @@ static inline void qcom_of_fixup_nodes(void)
->         log_debug("Unable to dynamically fixup USB nodes, please enable CONFIG_OF_LIVE\n");
->  }
->  #endif /* OF_LIVE */
->
-> +void qcom_parse_memory(void);
-> +
->  #endif /* __QCOM_PRIV_H__ */
->
-> --
-> 2.47.0
->
-
-Regards,
-Simon
