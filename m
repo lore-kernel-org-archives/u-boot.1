@@ -4,137 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE0EE77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 15:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA2A5E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 15:11:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41CEC80602;
-	Tue,  7 Jan 2025 16:03:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 419DA801E8;
+	Tue,  7 Jan 2025 16:11:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lmY0YAMU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GIlGzGJo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29FB7801FD; Tue,  7 Jan 2025 15:51:28 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20611.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::611])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4AFCA8036B; Tue,  7 Jan 2025 16:11:41 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B4FD8007D
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 15:51:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D3C40801C3
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 16:11:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=ibai.erkiaga-elorza@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ggsinbwijcQjo62r2MQEr+AvHXRXoy/TRIdhP2gZ59ibsuD7TNYWxIh+mVCXLbcktUniHcywdttFxztaDQJui/cQDDu/sqkzYklx5Lo3EAxOqrgF0nIeYYVcLObCT39lwZ/WSk19cHajuC/gpvtfw8h7XKcrcBni0F7uALfWFPkzajHbHp7lLa7lUgtWMekBPP4792Aa6Mm9ZIzCUnPVFesq5zmloAnEf/2Tbp+MUrqBDjETkfLia0vO6Ja30G/+0foCMhHh+l4+nPTLomGOnTlsRVvDXJVqWDm955ddgyu8dsKihlyc5DefK46l+/2b5KPhbpZ5uwtTugull2W2gg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XJuoDKDASwRIThmgB1rLubt8Axo1CVYzJ7cO/rqFu+0=;
- b=CSzzSnrRGhtRkwbsXugjxxvIx6varhwXxtB4zYT6aLyRE5P/vPTxp1ozSJp0Y4Cgp2NkaZOGyMBdzDYCvwXsPlQhooIkK6X3BIVNKQjOTTJ+5BC/LEPTbHgPg/+x6fkCUj2vxn3W2bPFf1h0g8yQAvJBgqsEoUJU1Yr6lQ1ZMppJFOXYsfA7jtJeMOUSxpeG/JH1o+zeAOi+L3v9yZ5VsTFiipb1xs2kXCnfOdO5kStyb7iMJAzj1GZ+58wRqIpZqJGMp2sMryYxs1udOBYtWNhfR3Mm74UfQ33psFyt+zCXHD16WU29rlM0+LOwzTwAqlEIB8k/UsB8oc6z/PjxvA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XJuoDKDASwRIThmgB1rLubt8Axo1CVYzJ7cO/rqFu+0=;
- b=lmY0YAMU9KzSTIcgjwO9oOyWCSqqjKEGQUD+rnMlaX6szSYb/WW86o1NOrM93WOEeraG/J77G3FUwHK0LeeXbWg6Ri/7zL8/vbZUVe+M5eUXfZTiAPN3BVn/a8lN6zI5pDXRJ5ul90YctEXigqWMu+a17p7YYonRok06gF/2x+E=
-Received: from MN2PR16CA0031.namprd16.prod.outlook.com (2603:10b6:208:134::44)
- by MN2PR12MB4333.namprd12.prod.outlook.com (2603:10b6:208:1d3::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.10; Tue, 7 Jan
- 2025 14:51:19 +0000
-Received: from BN1PEPF00004680.namprd03.prod.outlook.com
- (2603:10b6:208:134:cafe::ff) by MN2PR16CA0031.outlook.office365.com
- (2603:10b6:208:134::44) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8335.10 via Frontend Transport; Tue,
- 7 Jan 2025 14:51:19 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN1PEPF00004680.mail.protection.outlook.com (10.167.243.85) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8335.7 via Frontend Transport; Tue, 7 Jan 2025 14:51:19 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 7 Jan
- 2025 08:51:19 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 7 Jan
- 2025 08:51:18 -0600
-Received: from xirengwts04.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Tue, 7 Jan 2025 08:51:18 -0600
-From: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
-To: Michal Simek <michal.simek@amd.com>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, Ibai Erkiaga
- <ibai.erkiaga-elorza@amd.com>
-Subject: [U-Boot][PATCH] zynqmp_gqspi: update to log_debug
-Date: Tue, 7 Jan 2025 14:51:08 +0000
-Message-ID: <20250107145110.2855213-1-ibai.erkiaga-elorza@amd.com>
-X-Mailer: git-send-email 2.42.0.325.g3a06386e31
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6dce7263beaso137880736d6.3
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 07:11:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1736262695; x=1736867495; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sdE7sw68jVDE84wXeB3tm612mH5vBVdTVaA6lH+oGfI=;
+ b=GIlGzGJoPNolhC1CgLbqNm2RgN6QbuFRnibEqSoLTrKWyTURA3S7z1SK+qUnq7GU2s
+ MbRWIP9lF/O8+3T3rpVbWs1vIWL/d/4rOG+cchRSgsD/znU93qMIY9ikye9dWpj49/zd
+ oqATG3xQdZUE2Z92+Hp+DTXHp2R1/AU3nrGQg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736262695; x=1736867495;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sdE7sw68jVDE84wXeB3tm612mH5vBVdTVaA6lH+oGfI=;
+ b=HQNsW3k+2GTbvVqkaKUEaFUnZwtkL5iuawNIDZHhVcZeIG5QcaSA2o9V3Gq4Dkck1D
+ P2fs5HvBx3bgod5bT4BvgsIbxV/dshWTZ3saXpNY+k4VnzXZGc/+f8A0WU2RENhUHxBU
+ Wzx7N7zfLMHUMXGCyMDN3MVA1pre2DC0rXBaFfTO8VDaPkFCg+GCz6w9t5HDjV672wuu
+ qgMu+KQbQ2es+mSxqv2x6KsrDdXWDmKggGBVgORI2OF8XaUfiRkIkq0XWu3lhKbuP6IX
+ XX/J3E6JXIkUr5IFAjPoWfkVEE7S6O+ep3zAAEDTCh695nENwYA8Pen3btA94YzyJLMo
+ bZlw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVDbRgsrmgpl4mobmO8kCaPDxXDvH65MXp38ChBJu8ws1FoI+UvqUKWRXtrgoUGY4p6c0O78WQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyUgyOrhZhqfmexYRq0n4+wMRStM987kJgS6CoGg9B7XHKrKiWd
+ Uc7YuSm+nLph/A8JzBK3N/B24A/ue9kMpmlfZRIhyirGIS75DzIN2SV8VOBQCRI=
+X-Gm-Gg: ASbGncu4XYG0ckPPHu7CUVPuYBcVLRHdoSF/LjL6ROfFadfARUvgHV1NfN7hCZG/NP2
+ ssrCJUvnNTNE8ecC6SMIxkS4Z2GDwGRrgzt2HInzVbCFYI8JIOJ7f+aqiM7NYUmt21xxU4WpWR3
+ xUTXNZ1dpU7O1mqH9Rog3oVns/RJL89NumbDNcMIOzJKkS35Se5jho0ol1NSvWTB9kv9s1fis2a
+ 6ka4MpwbGbTIxKDQGCDBtgGqZih05+q2w1NTmRPTMggB50MYV8moLE=
+X-Google-Smtp-Source: AGHT+IGu0ooCGlnPsbdUOPEYnsfz5D+DSqeZwBhnJz0Qt8TVXjUuIx87YLuQJ64JLDO5Hsz7JzjytA==
+X-Received: by 2002:a05:6214:19c6:b0:6d4:2910:7f13 with SMTP id
+ 6a1803df08f44-6dd23397b81mr929308226d6.32.1736262691290; 
+ Tue, 07 Jan 2025 07:11:31 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dd22f025ebsm176790916d6.82.2025.01.07.07.11.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jan 2025 07:11:30 -0800 (PST)
+Date: Tue, 7 Jan 2025 09:11:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Guillaume La Roque <glaroque@baylibre.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 0/8] efi_loader: Complete the bootflow_efi() test
+Message-ID: <20250107151127.GI3476@bill-the-cat>
+References: <20250106144755.3054780-1-sjg@chromium.org>
+ <51c61e63-82ae-4660-b2c8-987a63c7d091@gmx.de>
+ <CAFLszTi5dxQyf_wRpGWRz9S7YsETpeRxA3_YJrhm+Lp0uw7bmw@mail.gmail.com>
+ <3b854695-990e-47f3-a9b8-34b1b2790d28@gmx.de>
+ <CAFLszTieNX4-JJqQrdNdm+sBhnBHZrAwawvQ+J-D3s118uob2w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: ibai.erkiaga-elorza@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004680:EE_|MN2PR12MB4333:EE_
-X-MS-Office365-Filtering-Correlation-Id: d587a945-dbbc-45df-8730-08dd2f2abf05
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?a8G8LwTdJ4KMN0SeFjZc7OGpbbjKHhDKy/rxpdm0xnOPiessUGMo7naionNm?=
- =?us-ascii?Q?Vd8KyTDv7oBC1SAxdz1Z6QmYwZp6JoQNwN8VZtm8s4WZXMxrXYAfXqcKv9w9?=
- =?us-ascii?Q?C2mQaql48nPDe00k8pbf3IkN1plEu2jF5a1Ic5s+JBPyJVYZ5aHgyZXa+4K2?=
- =?us-ascii?Q?ctL2j8CJaXMZMSxJLbc6+o0r9txHbAeskgZPAVSvm6T2LvIqJF1TFnnz36YA?=
- =?us-ascii?Q?y5lKo0pZocU50lF+Irox1K2Ry4osqhUOQNHIgqQKmZmvhJiUFdt44N+VxtV9?=
- =?us-ascii?Q?YXO9Hmuo4A7r+Y2o4stY2ttabWLnmnywZpUtmZO3bMETZoMVR0wMa0RZeD0t?=
- =?us-ascii?Q?Fsz/Meg+AEcTL7hOmhbP4fW8OsM+TMW4x0sPc9mRvOsGEP/zrmgrq3tOm89d?=
- =?us-ascii?Q?cnV0Ju4B+jcILVmf0OBITffW5TxKGtIdhZC+9unLmkKw674mEiHR5tViJ+ZH?=
- =?us-ascii?Q?48C+b7/R2KiPuPU0LT9EkQxld3RXMTbEOabZ2q3RBA0BaRYEaRywroJiR18X?=
- =?us-ascii?Q?AFaye36oBN7tCBZfk/4W9J8ZopLxR0Wb+FrEjDYLBOel5nb020mXQu/Oq13R?=
- =?us-ascii?Q?rODBkZypoIG/3fg0cyMKkRD7Sw8FuqBgB0MHwoFSgu6xzvwCVJjgqfXAoT+H?=
- =?us-ascii?Q?t+4EN1JXZxinPoTwJtBqsBPg7m9ejAglGfmOB2wWhj6tnp29iiyE9v+8P70i?=
- =?us-ascii?Q?4GqBQAhDvTRSlsFiJtCEtbha5Dmrp4IMUQYqW15ujkgyly3pPfVdGIKDiO51?=
- =?us-ascii?Q?MAln//iPjdg/P3WKIyxdehoOg6K0flGpsDaz1Z/3RABcft4Rk9SiCDXPqGk9?=
- =?us-ascii?Q?e21HandU5Xk9vEmZMLmdzHYw+/JIMi5wTosDJxxhOZvuhm82M0tlQm/IzvFW?=
- =?us-ascii?Q?WgMvbEx2Q/hq+a1XPN2HO8VLsLzTsToMMxE2j0Q6UHxtK9Gqt98u5Rt88qGB?=
- =?us-ascii?Q?SrWLWWdr87betI3qT2YT/pZrZnfY8mELYAP5Q3YyIEM4dFxGsCVPLWeuh1AG?=
- =?us-ascii?Q?5ENyxsU+lsohFChPmVGGArNUV1jWdK77KPbrWo8ghqlteCXzog85t7M/Y7ey?=
- =?us-ascii?Q?8dwOrb1nB9wipYLlIQjZNp/ewh0cNiilB/YfseaZrPEnYsHAQC5D5UZtMAdS?=
- =?us-ascii?Q?IxCo3MZVmrMM/zvs+6lJezwsbofbjrPhENqMMBg1SkmL75X6WAoluU2fifU1?=
- =?us-ascii?Q?2HPrFChxPkUo2P4PQQLX3i4Uuvv9pPILkdFJrbCWFgIIQbe2TE4VP34ZvM2S?=
- =?us-ascii?Q?H2jGdMGy1BLGXFxaoOYcystvmIPeLrjLRDgCR8E8ealOdT0HJyDeJmkgCCur?=
- =?us-ascii?Q?hLhkSz3Ibn2VabORJFiJaJU6YDr9oPGFHF+61YjlLraVWHZqATTWQGwznbw2?=
- =?us-ascii?Q?AKbFIk4v62N4WVBO4MPu7wtrpG9sWi+0sm4z9zWWaQuUEfNKVBnIjo4ur5uB?=
- =?us-ascii?Q?S2tQL3H3KY4VA+xc7NAtq9p+GQ08BHjArEwcTN6pzcrSz1obGidt4nw5U3dZ?=
- =?us-ascii?Q?EJIH2a1KD8igfUM=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2025 14:51:19.5795 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d587a945-dbbc-45df-8730-08dd2f2abf05
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004680.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4333
-X-Mailman-Approved-At: Tue, 07 Jan 2025 16:03:29 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="FdTur/se4Q3VLylX"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTieNX4-JJqQrdNdm+sBhnBHZrAwawvQ+J-D3s118uob2w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,28 +102,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update recent parallel memory support code to move to log_debug instead
-of debug as per logging in U-Boot documentation
 
-Signed-off-by: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
----
+--FdTur/se4Q3VLylX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- drivers/spi/zynqmp_gqspi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, Jan 07, 2025 at 06:57:50AM -0700, Simon Glass wrote:
+> Hi Heinrich,
+>=20
+> On Tue, 7 Jan 2025 at 06:11, Heinrich Schuchardt <xypron.glpk@gmx.de> wro=
+te:
+> >
+> > On 07.01.25 13:15, Simon Glass wrote:
+> > > Hi Heinrich,
+> > >
+> > > On Mon, 6 Jan 2025 at 10:00, Heinrich Schuchardt <xypron.glpk@gmx.de>=
+ wrote:
+> > >>
+> > >> On 06.01.25 15:47, Simon Glass wrote:
+> > >>> This test was hamstrung in code review so this series is an attempt=
+ to
+> > >>> complete the intended functionality:
+> > >>>
+> > >>> - Check memory allocations look correct
+> > >>> - Check that exit-boot-services removes active-DMA devices
+> > >>> - Check that the bootflow is still present after testapp finishes
+> > >>>
+> > >>> The EFI functionality duplicates bootm_announce_and_cleanup() and s=
+till
+> > >>> uses the defunct board_quiesce_devices() so a nice cleanup would be=
+ to
+> > >>> call the bootm function instead, with suitable modifications. That =
+would
+> > >>> allow bootstage to work too.
+> > >>>
+> > >>> This series is based on sjg/master since the EFI logging was reject=
+ed so
+> > >>> far.
+> > >>
+> > >> Yes, it was rejected because a solution at the lib/log.c level would=
+ be
+> > >> more generic.
+> > >
+> > > As I mentioned, that idea isn't suitable for programmatic use.
+> >
+> > What can be done with show_addr("mem", rec->memory); that log_debug()
+> > does not offer or which you could not do with a new log function in
+> > lib/log.c that takes variadic arguments?
+>=20
+> There are asserts in [1], for example. How do you propose to handle
+> that? See [2] for my previous explanation, quoted here:
+>=20
+> > CONFIG_LOG with a bloblist option would be a great idea, but it's hard
+> > to programmatically scan text...plus only the external call sites are
+> > actually logged.
+>=20
+> Also see the discussion on the original patch [3]. There was also your
+> reply at [4], but I think you missed that this is intended for use in
+> unit tests (i.e. with ut_assert()).
+>=20
+> You also requested that this be generalised, rather than being
+> EFI-loader-specific. I have no objection to that, but don't have a use
+> case for it yet, so have deferred that to later. It's a fairly simple
+> change, if/when needed. If the series was not NAKed, I'd be happy to
+> do it now.
+>=20
+> > >
+> > >>
+> > >> Tom suggested not to send patches that are for private enjoyment to =
+the
+> > >> mailing list.
+> > >
+> > > My contributions to U-Boot are only ever about private enjoyment :-)
+> > >
+> > > Do you have any comments on the patches?
+>=20
+> Regards,
+> Simon
+>=20
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20250106144755.30547=
+80-6-sjg@chromium.org/
+> [2] https://lore.kernel.org/u-boot/CAFLszTjxOE_037+kR0jgdax80sBombYo_k0Yg=
+iuVnP=3DKZCOvuA@mail.gmail.com/
+> [3] https://lore.kernel.org/u-boot/CAC_iWjKtaN54B98OKbkoXkC_GmKJ=3Dx+M4=
+=3DUY_O6roSOpZaDxag@mail.gmail.com/
+> [4] https://lore.kernel.org/u-boot/D513D326-41A6-425E-B11F-85958065BCD2@g=
+mx.de/
 
-diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
-index 4251bf28cd3..2a095d0c58e 100644
---- a/drivers/spi/zynqmp_gqspi.c
-+++ b/drivers/spi/zynqmp_gqspi.c
-@@ -255,7 +255,7 @@ static u32 zynqmp_qspi_bus_select(struct zynqmp_qspi_priv *priv)
- 					 GQSPI_GFIFO_CS_LOWER |
- 					 GQSPI_GFIFO_CS_UPPER;
- 		else
--			debug("Wrong Bus selection:0x%x\n", priv->bus);
-+			log_debug("Wrong Bus selection:0x%x\n", priv->bus);
- 	} else {
- 		if (priv->u_page)
- 			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
--- 
-2.42.0.325.g3a06386e31
+Looking at the logging portions of the original series again, especially
+if this was made generic, we probably don't want to print to actual
+console every time we're making a note of some memory allocation for
+example, that would be unreadable outside of a debug context. The point
+of this really seems to be "log things for verifying in tests later".
+Does that end up being useful? I don't know. Heinrich or Ilias, do the
+tests in [1] look generally useful?
 
+--=20
+Tom
+
+--FdTur/se4Q3VLylX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd9RBsACgkQFHw5/5Y0
+tyxWewwAkfgiBdw/oadyi9QyLU2aIa1k/9mxStdQRTt47+5IdDqFjoF7Uv+kxRUJ
+N6gHbOM0O9WOC/8SY/B/SLNE3A0A82mLqqvu2db2afWM6JM47h3AKe4OT61EtstR
+3mWTxtOoI4uM5VZEfRC56b2NaPv2zVmPWAWLADEzmyjhsWx0vUsGZ8C7dqunPAKF
+7LR2k7j+TvaHsqF6jfbdYX/JsMBsZ1gjzRv8Auyz3nrJtbt14OaeEPxwWgz4esXT
+DmPOXH3qeOX9FmjL7NjsX2VSm2ntF//4KpaTs803hcYL8tE+TFygUv3MjWN3R5vQ
+IPJUlDXfKo7OJVhfQx8kPRKX0USRBVYPMwXozU/VIKKCA50/VLHvmD0HU1MH2+WK
+OjconNyDvLBSBL0AP1VQE1qqc3LwpOh4Lxcpg9GOhffQwS6CroIoJX4MiGb75F5p
+9j2slMp30IeHus30RRp6trxtzRQn7hQxb7LZaJCJPfxJdnmbDr3/9YVW6BQ66dZL
+VC0SQVaK
+=a1gW
+-----END PGP SIGNATURE-----
+
+--FdTur/se4Q3VLylX--
