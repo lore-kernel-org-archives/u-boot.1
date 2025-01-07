@@ -4,179 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13365E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 08:00:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50522E77199
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 09:03:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 992E2805E1;
-	Tue,  7 Jan 2025 09:00:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 4BA1C801E8;
+	Tue,  7 Jan 2025 10:03:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="JnUIdYD+";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mcK/+fPp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B61AE801C3; Tue,  7 Jan 2025 09:00:08 +0100 (CET)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on2061c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::61c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9683A8036B; Tue,  7 Jan 2025 10:03:43 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FC13805F7
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 09:00:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 311FC801C3
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 10:03:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mh9hy2AAS5nJ3BQ3vTKtS0qMgUPTwSDOswzI3gMLJSH5JyC+GtLCUDL0FEIpuApahH0NoDHKJX2FBUrX9ERJNE8RO0a92S3UC9fhqo+Jf1tFukFANY6VCWpW2hxVQ7HpNitzF257FTGnElOLVrcvriDx+JHnYUe9KL6nYhzCzF7kX1TmovKsSjlMIbttFr8J101y9Lt7eNyKoa+IIoimZFS+krq65FiLXLmIz7qVOmC2qffmCO9QtRotw+rarrNjM62hkHHKsXQlOOQrHcN1e7E9HYYeGlkAkdzKktXvZRhm5IP45OQnEdJAtBibfonelqcDIRmKo9UHoRNvPJrDTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=18oq7+M8SzQEgzdF2s+v3xlXsalhzCem/vgy3q0SMzQ=;
- b=t3PQJ50Pwq477d/hFo4CgpGcAArFFuNbdC1FKDyWoE3bKpUkEOmDoY7pLof5W3zXtL/zC9bW2A4hpOQgUgZrNVSPyEM+Xnmn73tsKd94eNT6ZRWAu/hRtvWFb0EKA0pUnywh+657eTkhBKb6xXWSxeD19ZmyERoyNQmBLxOTVA9JbID+4O3HGUdd1GVEHr6u7xhXczlhX6awaWp1Wuc5fpqtF0WCkFjBYYUg4pJSTo0Vo/p6RqiILgy8q5Ju9XsDsYLNR91HubONfCpKPnN5AvAQkPnH6gFl6xj0TDHcOSLyzryi+HLZeZGg/Ykfh48H2P6+goguHeVz65BYsZeMEw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=18oq7+M8SzQEgzdF2s+v3xlXsalhzCem/vgy3q0SMzQ=;
- b=JnUIdYD+coqwioy1CXq0BbwEwFHp1+ukepQ+SFx1W7nMx6zx4Adbux09euRKAIqggJK+ts6AjMX5j1lu4UJp7HucJWI0vMUZP+gg1U3hS8MnR8UCYogVscMnFA0QvvGJ1ZeCt7mRtTDzX+0kvjdSChqZjMyJDKjP9n/MSCxJPpKyfHQDMCTp+WYgsT/FytFjRYNrNz8LVxrMVYe+8f8eHKYkSxCTrN00vOaLbpHD6UpeogoAiPGxnnd0GDy1JyOXMCr+MhV7ih6RFlns1ajwUzSXRa9H9KmZfXBqJZZx0HtxUpfAB9NEvR/kGpNMKuCM1SzGMxuC2pJEqPn6uG2rmg==
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by DB9PR04MB8202.eurprd04.prod.outlook.com (2603:10a6:10:24f::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.10; Tue, 7 Jan
- 2025 08:00:02 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49%5]) with mapi id 15.20.8314.015; Tue, 7 Jan 2025
- 08:00:01 +0000
-From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-To: Marek Vasut <marex@denx.de>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, Fabio Estevam
- <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Simon Glass
- <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo
- <alice.guo@nxp.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "tharvey@gateworks.com"
- <tharvey@gateworks.com>, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
-Subject: =?utf-8?B?5Zue5aSNOiBbRVhUXSBSZTogW1BBVENIIHYzIDA3LzE3XSBjbGs6IHNjbWk6?=
- =?utf-8?B?IGNoZWNrIHRoZSBjbG9jayBzdGF0ZS9wYXJlbnQvcmF0ZSBjb250cm9sIHBl?=
- =?utf-8?Q?rmissions?=
-Thread-Topic: [EXT] Re: [PATCH v3 07/17] clk: scmi: check the clock
- state/parent/rate control permissions
-Thread-Index: AQHbXaswJuEajopxvEqU+wWKdelPi7MIsGKAgAJEHOA=
-Date: Tue, 7 Jan 2025 08:00:01 +0000
-Message-ID: <PAXPR04MB96440B011EEC2F444897AF44E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
-References: <20250103-imx95-v1-0-6744df5dc020@oss.nxp.com>
- <20250103-imx95-v1-7-6744df5dc020@oss.nxp.com>
- <0898a19f-e6f1-4fa0-ae0b-6f696ffbc837@denx.de>
-In-Reply-To: <0898a19f-e6f1-4fa0-ae0b-6f696ffbc837@denx.de>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB9644:EE_|DB9PR04MB8202:EE_
-x-ms-office365-filtering-correlation-id: 9dc9a624-325f-45ef-2b77-08dd2ef149e4
-x-ms-exchange-sharedmailbox-routingagent-processed: True
-x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|7416014|366016|921020|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?Mys3dGVCOUlpczdEaTR2VmhZVzJhM1dDSnNDMzFweTNob1M0OEQ4Z0dDQVFk?=
- =?utf-8?B?TlppdlJlcWRiMFVBblVjaWk1RnF1aXVtNE5HRnI4UlZMak5pZ0liZUg0OXVH?=
- =?utf-8?B?TXVpY0dXcDJCYjdkS2R2MlU2d0VJZ0d5L05kTjFFR1g4VXRMQWRXREFsWWx6?=
- =?utf-8?B?S3hidXNONDRBVnVhWVkwYkJkd0d3V2hmZGhjN3YrUnpBWS9LUlNZR1lRY205?=
- =?utf-8?B?Qncrb2YrSElyWDlodTIycENpU0o1eFZ4UTJtK2RldUVYUWduVlJ2QWh1OXZh?=
- =?utf-8?B?ZWtyMDM0aVBSUTYvL3g0aHM3LzR6ekt0NGdRcWtOeXZ0ajVYUlJ5SFNiaHFo?=
- =?utf-8?B?aVhXVUhrY1A4Y1k0Y1VoanV0SDJiOWxxRFRycUZreVJSNjVsT0tpQUdZMGFx?=
- =?utf-8?B?UVlJMnJiY0pGdEdGNjFXVU15bFFrdmVFdjBtWHlvYXUrUnowbi9zaG5LbEh5?=
- =?utf-8?B?WnRnb3NEWExObFpyTGE1TDlyeDdvVzYwbmNhcmtzTEZTc2t2OEVDdE8wdXZn?=
- =?utf-8?B?VnEzMysxNHdyOWRHNmIxZEh6NzlyVjRTNzJPaklzSjBVN2lFTHB6cGowcldj?=
- =?utf-8?B?Z1B4L2NiTHQ1MkpzVnMxL0NLcmxDaGdCNWUrSGd0cmdXOWNNQ3VxdXBOTnJz?=
- =?utf-8?B?dUp0YjRJL0VHM0Zsd2hXeGp6bHhVZUFaQitaamNnNi9KZC9EelBwZitUUDcw?=
- =?utf-8?B?bDZMaFVBM3gveDlyNHhOeU5kOWU2V1A5MC9KdmgwQjErazFQTkYyWGU4Tzhl?=
- =?utf-8?B?SWtKSmxRZngydXkySnJLVVlXY0RBT09RNDkvSkd2Sm5XQkpBL1ZmNTdibXFU?=
- =?utf-8?B?QnA1T0J3ay9sNkJ2NHM4ejcxZ29BME9EWmsvbSt6NlN0MlNrbG1UN0ZKTWFy?=
- =?utf-8?B?amJ0WTYxYUltWU1DWGY3UXM4QVZzMVJxV1o1eEY3TXZwYWFyemQvOWo3VHNh?=
- =?utf-8?B?ZUtyTUpSaXgxMm1LVVc4MEJaT2p2VDV3aUNmNCtaR1hzQ3JmRUNCU0Z3WXdr?=
- =?utf-8?B?SC9Ma0VOeHdmaGM1T2tCRUlZOVh5T2ZONXYxR2Nyc3ZNZXVOejExTm5OLzZP?=
- =?utf-8?B?VHhxR0FNSUpFRlRwcXJZRnJiVmNtWkt4Y1lBTTJCYUJhLzhRUGE3TVZvaER4?=
- =?utf-8?B?M0xSclc1ZUZObG5abEs0R1VoZ1VPcTN2TG1zMk1aMDR6L2E1eUErNlVDbFh5?=
- =?utf-8?B?bWZoVE9YZ2N2VTBWOTBObTRVNENZNkFncS9veHZyUVZ2Q3RTdVNtV2hIaXdq?=
- =?utf-8?B?TURkUUNiUWNzc1I0bndFcVNLbnZ3WEUwa2dIMlNjMzVPYkhKWGd2S3FVUnhi?=
- =?utf-8?B?Q1BpWEduaGtEZWRtdG1nRTJSOHo1dDRxS1lqYWV1YW04bXRUK2VTYmZkcHN6?=
- =?utf-8?B?VllhdEdVMndEQlRHNmV0eGhmZ2NEK2ZvQkd2c21KOFhsYWgwb2FJNUxTbHVl?=
- =?utf-8?B?ZmZ3emgvUHhMWHZLa0p3V2c4azg1SEZJOEhSQkZHMU52VjR5REJIbVZJREM0?=
- =?utf-8?B?dks0RDF2aEt2emlEdTJrbkMvbWhEK2g0YjVaN1hrVkNwbU5oODAxakV3Rnhw?=
- =?utf-8?B?SG40Tk1oaXcxR2hWaURrQWtmSGNLTHFJeXlLMGZkdmJibUQvR0V5bWZxRjlG?=
- =?utf-8?B?WklGT2dxa3VaM3lIVnJTeFZmem9rQTFMalkzV1EzbHhCelM5dXJ0dDVJak40?=
- =?utf-8?B?ZDAwN2J6NGMyLzRIcllGVDBwSnpvN1haR1lBa09pK3MvZzErTjNCNXUxV0Jj?=
- =?utf-8?B?VmZJUnV2aHlrTTlCQzVtamREcS9KN3YzY05zcWl4a00zU3lKVlg0UHFVYWVW?=
- =?utf-8?B?RDJHYWlxdnBQbU5rUHVKSFRMOFQzUUlPZmlPcGxTZkhUcksyUC9vYUx4VFA5?=
- =?utf-8?B?WGp3V3J2dDRLalByUmpkWThUMTlpc0djd3pkbmxZaVhGOWwxZjkybWpjdUtH?=
- =?utf-8?B?cWlaZkg4d1lFNHhVcU9SMjdYdjA4WWtMSFJEaHVINWJHS0ZzbzJzaEwxSWFK?=
- =?utf-8?B?SXBRTm5EMmpBPT0=?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:;
- CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(7416014)(366016)(921020)(38070700018);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UVp6RzVOV0JLY1YxTGljb2pZcG1zZzlVWFMyblZmbGV2dUxGbGt2MDU2T0Vv?=
- =?utf-8?B?bTdBajgxN3oxQ2x0SXlmL2I3bm83eFp5WDRYT1dLOFQ0dGdTSjMyMHdwWmlD?=
- =?utf-8?B?MU5CM296NXYvTmRKS0R1OHdxdFF0OHM3VUJyUmh3WTFzZHhuUVo2REJrSEcz?=
- =?utf-8?B?RTBHSjRzNk1iZlZjSXZwWXVhd2ZvSllrOVVqZUxST3FBUHhsbDJnOVpMNjBw?=
- =?utf-8?B?elhjeHVIUXNkMEorRjBHdHRlM0FWd2xPek9oM3dzV0NtOGszVW9ndDRWL3Zp?=
- =?utf-8?B?N0dsMnFvOFdGYStkZ2puMHNhS3JlSUo3emMwSmg2OWJ2Um5McU1hUWRrS1dJ?=
- =?utf-8?B?dXo4c0ovTEl4WG9qd0ZGRHdHM1Bvb2o4N2RHZkIwS0pGa2VjQmZKM0U4Y3pN?=
- =?utf-8?B?UjZleEh4VnF3b2VlUVl6cjdBejN3eDM3bThKNlR6V2U2TzYzbVVWWVFWSXVQ?=
- =?utf-8?B?bWttempsMHQ4T0ZndW1STTA1bE5XbUkrSFpCQXN3OWpUMTRhcklZMlY0ekhY?=
- =?utf-8?B?dDVCa3NlaWEySGl0S2tMKytDUEdBNXl0ZUdwbWx4cUFIV3lJMGl5VTVZb2hF?=
- =?utf-8?B?OC9LWkRPVU1Db0N4QXMwSGhZS3pqUUhBOXFpRWpBSVRXSmFwUHFmMzZvK1lr?=
- =?utf-8?B?dGpmZDhNbTJWdk9HUjk1eWtFaHB0bXJ0NFhwVUd6MGRBMEc4aVE5WXFzanR1?=
- =?utf-8?B?clVBLytmaXJ1OUY3aXkxclhlcDNUWlpheEtidkxUN1kxYmZ1VTRmTXFIdEJ5?=
- =?utf-8?B?VllleGovRnNYN05HbU5vRjNQNWJQUzVIQytDUGNwYVZBSmgyOHdnNVZ1QnE0?=
- =?utf-8?B?LytZUjZqRTZHSWR6RUhUcCt0bHhJSWcwWjVFQ2VuYVRCMmM0SVhHVno1b1hy?=
- =?utf-8?B?K1J3NUpFbUFJbS9qUG5FM0orUDZvT2FQN3ZPdlcvMmZHbHRuOEZEMDhadzdR?=
- =?utf-8?B?T0R1dHZJNFc5V05COTJLNHFyTGYwWnVKTVA1ODFLZDJkcEtZMVJqNElPUEgr?=
- =?utf-8?B?bHo2SUkrQ0hUNHorWTNYVzZDdnQ5N1RZakMwa1g2eVZmSmdMZlM1N1ArTjVt?=
- =?utf-8?B?T0xUZGFwR0ZRTHY0MFFTZE9FbWt4dENWRVJ0WFJzVHUxNG9nRHJOZ1pQV3VC?=
- =?utf-8?B?RDRQdlBmK0tqYmtXOFlBZE5taHFLQkRhb3NsVlBUV09XT2liTVJIK3B0MVJ4?=
- =?utf-8?B?bmdWRXNMeCtBTHJUWTMwTjFsWGxHS00ycEhKWmlnSEoyUEpoWUdYMGNucHpt?=
- =?utf-8?B?N0RPKzQ0RDd5UlpuTDAyUlNaRjJPNFFuWEVRQVNoanFDdW8rS00wRFdubXl6?=
- =?utf-8?B?SlBSMitPZVIyS3BxMUpTN3pOMmlpTlhrYkgwYU9PYmg3RDdyY1E0NDFxZ0tm?=
- =?utf-8?B?bFZXbGlZOG1jS0M1cXNOMVZyS3Rva2lnb3RGOFMxbW8yWjAzcnZNK1ZoK1Iv?=
- =?utf-8?B?Zk1vNzhGK1ZmbmpYQ09VSTI0MnRiRzVJZjdTd3BxZU9abUVyS09WV1hXSGZW?=
- =?utf-8?B?VXVzVmlSMjA3WVdJVVV6R0N2Q3dwSFZhdXBJaVFEbGRkRjhwdHB5d2dHMzVB?=
- =?utf-8?B?a01KaDZxOTg0M0pDOEdSdTVEZ1NLZWl0RUVVODRvTVpENnVHOGorQXBVckJX?=
- =?utf-8?B?Q3RkWVBvVzB5OUNaWFU0dDVkMEE4ekRDUDhITUNtenB1Vm1zTkxZSzRrbGdH?=
- =?utf-8?B?YnhzZUdiKzZzTWFFWWNQYVlBRDAvNnQ5c1dpVExzVlgzTlJTOXhabmI5d3A0?=
- =?utf-8?B?V2FMRlZ6VnBBQ00zSmNGSGROb0h5M0twVy85UVc4REFRRXdYU25SUW9iMFBT?=
- =?utf-8?B?bWtEVEhwTHVZbSsydmNrVlgrWG9rcWF5aTFxdE16U0tjUDViNGlLVWNmdVZs?=
- =?utf-8?B?cGZyRHdJUS9PZ2JIRUlQQk56OFBGNUhvK3hEbUZwQ1NmeFVLZWFVaFI4MENE?=
- =?utf-8?B?Ti9DUTJuMUZyOGhBMlNLakxuYW9sNFhzN25OSlJndG95eWh5dzkraUwyeU9F?=
- =?utf-8?B?S0xWeFAzSmNFSE8xSzZhNDJFak9EcVMrd0QxNEZjU2NPK0gwUW1uTVpUZXFq?=
- =?utf-8?B?T0VQQWhsTHM0cjZnSDJrTHViYVpyMHp2YXFBV0FLQTd3MkhiVFI5dXRJejVD?=
- =?utf-8?Q?6Jsowb3pSXE1urECniLbybSG6?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-38632b8ae71so10695196f8f.0
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 01:03:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736240618; x=1736845418;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UkwjcVg2QYpvy7qieG4XE0EBHfeCK6Dsplxn1BjTIyI=;
+ b=mcK/+fPpSuW4OXqVML1RFT79W/fxb/VTltuZmJG+0o5bYnPpANPqqpgaXyDwYDhMz1
+ 1Bry0gdL9LDMXeMUuzkc2ndcD8ZH/qyYuQ2nx/5pmlfZVXiy98gth/g0rNWBWpzb7/6h
+ MSzeSvaQi+uNCkOIxcVbQj4VbVYqyWS//p1jXLLLA8aGHSRn25fisiEqKZChTeyrSgJK
+ uvQtGYDEjD6hzRSDUU1aszS3bQXwQ17bP0gshWcUmRcnsAEkhQ4LYysoamY8RfAU1Fdl
+ 9d6tfkP5R1boxyS4t1rMr21ysoY911b/4ZUDuw4wIb+wbbAYvij7D123bv7KgQ9N4rhl
+ hpwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736240618; x=1736845418;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UkwjcVg2QYpvy7qieG4XE0EBHfeCK6Dsplxn1BjTIyI=;
+ b=vEiqK4XyN/2wp4PMy/JIxH1iShD4qS9Q1DTzTJIThXVZ8YRHCVCV+FUFe5dqVbkWdK
+ TFj2YBfKkZFY8AuJl6eZ0TAgx1uBWciQzVSqeeAOpfaznCcO8VWMCWlaGphjdT+/plcS
+ XkakGg9gLKmXACFq5WPW4dRHXm5OVot5fCC5UeV78bGtFYDjLmSAdwjXnMwov4FAVNHJ
+ +EYrfUyizUbrSZfxoelye2MPgPrUgqVslb4laXeF3nlD+mdVKV1poXrUxSZkcB9SA5IX
+ m0eRdvumygDwlQKmVMcyMlL93TU9w57lZ5Y60+GEjng+bVUgikgViFYGYDFHtSGEP+js
+ g04A==
+X-Gm-Message-State: AOJu0Yzf25BYXfvJzsAE1YfzMsjpSUXoYk7ZCh5gLZjqjVuEn9arMCge
+ zzYjNuZ88j81zIPlADu52fhZpfBFwLK50VzFlS9w4Y3Vhwn6aeQ9xyu7SwrJqO8=
+X-Gm-Gg: ASbGncsCnIZV+xMxpRPl50aGITtfDrPVQuyM079KhwkW8B6FAzn2zcdftfPBTjgRIUo
+ GLDcswYNWiSG05eWQ8LsmL/gyvQFBll5vK2bGrg1PdHCcx7/GOgiiBlkEidftymokXMSHfOwhPk
+ ej4LVz5D+kjde0zleJE82gYl9SYAY0Ds0YfizvenUdRFQwS5y4UCwjy+HNW4qvwhWYsTJFhirGC
+ Hmm8bPdp7LCE77LRboWPVKvONT/esj9/Mf/bhIcLJag551p9+N7WB53PHfLw/nyJw==
+X-Google-Smtp-Source: AGHT+IHm+Y7fl2PGUgNm5rjITKkWhL1gBxqTOXmVtTFiyzXZUaLK6rOe9TfhA7ttU7ZLVGdFlUxRtQ==
+X-Received: by 2002:a5d:6d84:0:b0:385:f1d9:4b90 with SMTP id
+ ffacd0b85a97d-38a221ea720mr51497404f8f.13.1736240618123; 
+ Tue, 07 Jan 2025 01:03:38 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a457584bcsm32651590f8f.89.2025.01.07.01.03.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jan 2025 01:03:37 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Junhui Liu <junhui.liu@pigmoral.tech>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>
+Cc: u-boot@lists.denx.de, seashell11234455@gmail.com, pbrobinson@gmail.com,
+ junhui.liu@pigmoral.tech
+Subject: Re: [PATCH v3 1/8] usb: dwc2: Extract register definitions to
+ common header file
+In-Reply-To: <20250104-dwc2-dev-v3-1-d4b2bc1996e4@pigmoral.tech>
+References: <20250104-dwc2-dev-v3-0-d4b2bc1996e4@pigmoral.tech>
+ <20250104-dwc2-dev-v3-1-d4b2bc1996e4@pigmoral.tech>
+Date: Tue, 07 Jan 2025 10:03:36 +0100
+Message-ID: <87zfk3c7x3.fsf@baylibre.com>
 MIME-Version: 1.0
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9dc9a624-325f-45ef-2b77-08dd2ef149e4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Jan 2025 08:00:01.8095 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: eExtpd7A8gCuNfiQDxFV0qIoe/6sFqjmGJzgsLZSOJ2M0Abe3C+rWVvpoyhdoG9Spf55ZN3ppN+7X6E9zn2uNg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8202
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -193,21 +97,1454 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PiA+IFNDTUkgY2xvY2sgbWFuYWdlbWVudCBwcm90b2NvbCBkcml2ZXIgaW4gTGludXggY2hlY2tz
-IGNsb2NrIHN0YXRlLA0KPiA+IHBhcmVudCBhbmQgcmF0ZSBjb250cm9sIHBlcm1pc3Npb25zLiBU
-byBiZSBjb25zaXN0ZW50IHdpdGggdGhlIGtlcm5lbA0KPiA+IGRyaXZlciwgYWRkIHRoaXMgY2hl
-Y2sgaGVyZS4NCj4gPg0KPiA+IFdoZW4gdXNpbmcgY29tbW9uIGNsb2NrIGZyYW1ld29yayAoQ0NG
-KSwgdXNlIHRoZSBjbG9jayBzaWduYWwgSUQgdG8NCj4gPiBnZXQgdGhlIGNsb2NrIHJlZ2lzdGVy
-ZWQgYnkgY2xrX3JlZ2lzdGVyKCkgaW4gc2NtaV9jbGtfcHJvYmUoKSwgYW5kDQo+ID4gdGhlbiBv
-YmF0aW4gdGhlIHN0cnVjdCBjbGtfc2NtaSB2YXJpYWJsZSB3aXRoIGNvbnRhaW5lcl9vZigpLg0K
-PiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogQWxpY2UgR3VvIDxhbGljZS5ndW9AbnhwLmNvbT4NCj4g
-PiBTaWduZWQtb2ZmLWJ5OiBZZSBMaSA8eWUubGlAbnhwLmNvbT4NCj4gPiBSZXZpZXdlZC1ieTog
-UGVuZyBGYW4gPHBlbmcuZmFuQG54cC5jb20+DQo+ID4gLS0tDQo+ID4gICBhcmNoL3NhbmRib3gv
-aW5jbHVkZS9hc20vc2NtaV90ZXN0LmggICAgICAgfCAgIDIgKw0KPiA+ICAgZHJpdmVycy9jbGsv
-Y2xrX3NjbWkuYyAgICAgICAgICAgICAgICAgICAgIHwgMTczDQo+ICsrKysrKysrKysrKysrKysr
-KysrKysrKysrKy0tDQo+ID4gICBkcml2ZXJzL2Zpcm13YXJlL3NjbWkvc2FuZGJveC1zY21pX2Fn
-ZW50LmMgfCAgNTYgKysrKysrKysrLQ0KPiA+ICAgaW5jbHVkZS9zY21pX3Byb3RvY29scy5oICAg
-ICAgICAgICAgICAgICAgIHwgIDI2ICsrKystDQo+IFBsZWFzZSBzcGxpdCBjb21tb24vaW14L3Nh
-bmRib3ggY2hhbmdlcyBpbnRvIHNlcGFyYXRlIHBhdGNoZXMgLg0KDQpTcGxpdGluZyBjb21tb24v
-aW14L3NhbmRib3ggY2hhbmdlcyBpbnRvIHNlcGFyYXRlIHBhdGNoZXMgd2lsbCBjYXVzZSBiaXNl
-Y3QgaXNzdWUuDQo=
+Hi Junhui,
+
+Thank you for the patch.
+
+On sam., janv. 04, 2025 at 11:37, Junhui Liu <junhui.liu@pigmoral.tech> wrote:
+
+> From: Kongyang Liu <seashell11234455@gmail.com>
+>
+> The same registers are accessed in both the otg and gatet drivers of
+> dwc2, and these registers are repeatedly defined in these two parts.
+> Extract register definitions into a common header file to reduce
+> redundancy and make the code more maintainable.
+>
+> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> Reviewed-by: Marek Vasut <marex@denx.de>
+> Tested-by: Peter Robinson <pbrobinson@gmail.com>
+> Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+>  drivers/usb/common/dwc2_core.h             | 126 ++++++++++++++++++
+>  drivers/usb/gadget/dwc2_udc_otg.c          |  94 +++++++-------
+>  drivers/usb/gadget/dwc2_udc_otg_regs.h     |  68 +---------
+>  drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 201 +++++++++++++++--------------
+>  drivers/usb/host/dwc2.c                    | 102 ++++++++-------
+>  drivers/usb/host/dwc2.h                    |  58 ---------
+>  6 files changed, 332 insertions(+), 317 deletions(-)
+>
+> diff --git a/drivers/usb/common/dwc2_core.h b/drivers/usb/common/dwc2_core.h
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..26483a57e7df58e2b9fe820367e1680b9251af8d
+> --- /dev/null
+> +++ b/drivers/usb/common/dwc2_core.h
+> @@ -0,0 +1,126 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+> + *
+> + */
+> +
+> +#ifndef __DWC2_CORE_H_
+> +#define __DWC2_CORE_H_
+> +
+> +struct dwc2_global_regs {
+> +	u32 gotgctl;	/* 0x000 */
+> +	u32 gotgint;
+> +	u32 gahbcfg;
+> +	u32 gusbcfg;
+> +	u32 grstctl;	/* 0x010 */
+> +	u32 gintsts;
+> +	u32 gintmsk;
+> +	u32 grxstsr;
+> +	u32 grxstsp;	/* 0x020 */
+> +	u32 grxfsiz;
+> +	u32 gnptxfsiz;
+> +	u32 gnptxsts;
+> +	u32 gi2cctl;	/* 0x030 */
+> +	u32 gpvndctl;
+> +	u32 ggpio;
+> +	u32 guid;
+> +	u32 gsnpsid;	/* 0x040 */
+> +	u32 ghwcfg1;
+> +	u32 ghwcfg2;
+> +	u32 ghwcfg3;
+> +	u32 ghwcfg4;	/* 0x050 */
+> +	u32 glpmcfg;
+> +	u32 gpwrdn;
+> +	u32 gdfifocfg;
+> +	u32 gadpctl;	/* 0x060 */
+> +	u32 grefclk;
+> +	u32 gintmsk2;
+> +	u32 gintsts2;
+> +	u8  _pad_from_0x70_to_0x100[0x100 - 0x70];
+> +	u32 hptxfsiz;	/* 0x100 */
+> +	u32 dptxfsizn[15];
+> +	u8  _pad_from_0x140_to_0x400[0x400 - 0x140];
+> +};
+> +
+> +struct dwc2_hc_regs {
+> +	u32 hcchar;	/* 0x500 + 0x20 * ch */
+> +	u32 hcsplt;
+> +	u32 hcint;
+> +	u32 hcintmsk;
+> +	u32 hctsiz;
+> +	u32 hcdma;
+> +	u32 reserved;
+> +	u32 hcdmab;
+> +};
+> +
+> +struct dwc2_host_regs {
+> +	u32 hcfg;	/* 0x400 */
+> +	u32 hfir;
+> +	u32 hfnum;
+> +	u32 _pad_0x40c;
+> +	u32 hptxsts;	/* 0x410 */
+> +	u32 haint;
+> +	u32 haintmsk;
+> +	u32 hflbaddr;
+> +	u8  _pad_from_0x420_to_0x440[0x440 - 0x420];
+> +	u32 hprt0;	/* 0x440 */
+> +	u8  _pad_from_0x444_to_0x500[0x500 - 0x444];
+> +	struct dwc2_hc_regs hc[16];	/* 0x500 */
+> +	u8  _pad_from_0x700_to_0x800[0x800 - 0x700];
+> +};
+> +
+> +/* Device Logical IN Endpoint-Specific Registers */
+> +struct dwc2_dev_in_endp {
+> +	u32 diepctl;	/* 0x900 + 0x20 * ep */
+> +	u32 reserved0;
+> +	u32 diepint;
+> +	u32 reserved1;
+> +	u32 dieptsiz;
+> +	u32 diepdma;
+> +	u32 reserved2;
+> +	u32 diepdmab;
+> +};
+> +
+> +/* Device Logical OUT Endpoint-Specific Registers */
+> +struct dwc2_dev_out_endp {
+> +	u32 doepctl;	/* 0xB00 + 0x20 * ep */
+> +	u32 reserved0;
+> +	u32 doepint;
+> +	u32 reserved1;
+> +	u32 doeptsiz;
+> +	u32 doepdma;
+> +	u32 reserved2;
+> +	u32 doepdmab;
+> +};
+> +
+> +struct dwc2_device_regs {
+> +	u32 dcfg;	/* 0x800 */
+> +	u32 dctl;
+> +	u32 dsts;
+> +	u32 _pad_0x80c;
+> +	u32 diepmsk;	/* 0x810 */
+> +	u32 doepmsk;
+> +	u32 daint;
+> +	u32 daintmsk;
+> +	u32 dtknqr1;	/* 0x820 */
+> +	u32 dtknqr2;
+> +	u32 dvbusdis;
+> +	u32 dvbuspulse;
+> +	u32 dtknqr3;	/* 0x830 */
+> +	u32 dtknqr4;
+> +	u8  _pad_from_0x838_to_0x900[0x900 - 0x838];
+> +	struct dwc2_dev_in_endp  in_endp[16];	/* 0x900 */
+> +	struct dwc2_dev_out_endp out_endp[16];	/* 0xB00 */
+> +};
+> +
+> +struct dwc2_core_regs {
+> +	struct dwc2_global_regs  global_regs;	/* 0x000 */
+> +	struct dwc2_host_regs    host_regs;	/* 0x400 */
+> +	struct dwc2_device_regs  device_regs;	/* 0x800 */
+> +	u8  _pad_from_0xd00_to_0xe00[0xe00 - 0xd00];
+> +	u32 pcgcctl;				/* 0xe00 */
+> +	u8  _pad_from_0xe04_to_0x1000[0x1000 - 0xe04];
+> +	u8  ep_fifo[16][0x1000];		/* 0x1000 */
+> +};
+> +
+> +#endif /* __DWC2_CORE_H_ */
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+> index 7e9dd6f4268d3d80bf0572d71e267fbd26ce1516..c3dee8771e6c98692dd2ed6b50ca3c6ea21782af 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+> @@ -45,6 +45,7 @@
+>  
+>  #include <power/regulator.h>
+>  
+> +#include "../common/dwc2_core.h"
+>  #include "dwc2_udc_otg_regs.h"
+>  #include "dwc2_udc_otg_priv.h"
+>  
+> @@ -154,11 +155,11 @@ static struct usb_ep_ops dwc2_ep_ops = {
+>  
+>  /***********************************************************/
+>  
+> -struct dwc2_usbotg_reg *reg;
+> +struct dwc2_core_regs *reg;
+>  
+>  bool dfu_usb_get_reset(void)
+>  {
+> -	return !!(readl(&reg->gintsts) & INT_RESET);
+> +	return !!(readl(&reg->global_regs.gintsts) & INT_RESET);
+>  }
+>  
+>  __weak void otg_phy_init(struct dwc2_udc *dev) {}
+> @@ -229,7 +230,7 @@ static int udc_enable(struct dwc2_udc *dev)
+>  
+>  	debug_cond(DEBUG_SETUP != 0,
+>  		   "DWC2 USB 2.0 OTG Controller Core Initialized : 0x%x\n",
+> -		    readl(&reg->gintmsk));
+> +		    readl(&reg->global_regs.gintmsk));
+>  
+>  	dev->gadget.speed = USB_SPEED_UNKNOWN;
+>  
+> @@ -238,7 +239,7 @@ static int udc_enable(struct dwc2_udc *dev)
+>  
+>  static int dwc2_gadget_pullup(struct usb_gadget *g, int is_on)
+>  {
+> -	clrsetbits_le32(&reg->dctl, SOFT_DISCONNECT,
+> +	clrsetbits_le32(&reg->device_regs.dctl, SOFT_DISCONNECT,
+>  			is_on ? 0 : SOFT_DISCONNECT);
+>  
+>  	return 0;
+> @@ -463,12 +464,14 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+>  {
+>  	/* 2. Soft-reset OTG Core and then unreset again. */
+>  	int i;
+> -	unsigned int uTemp = writel(CORE_SOFT_RESET, &reg->grstctl);
+> +	unsigned int uTemp;
+>  	uint32_t dflt_gusbcfg;
+>  	uint32_t rx_fifo_sz, tx_fifo_sz, np_tx_fifo_sz;
+>  	u32 max_hw_ep;
+>  	int pdata_hw_ep;
+>  
+> +	writel(CORE_SOFT_RESET, &reg->global_regs.grstctl);
+> +
+>  	debug("Resetting OTG controller\n");
+>  
+>  	dflt_gusbcfg =
+> @@ -490,47 +493,47 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+>  	if (dev->pdata->usb_gusbcfg)
+>  		dflt_gusbcfg = dev->pdata->usb_gusbcfg;
+>  
+> -	writel(dflt_gusbcfg, &reg->gusbcfg);
+> +	writel(dflt_gusbcfg, &reg->global_regs.gusbcfg);
+>  
+>  	/* 3. Put the OTG device core in the disconnected state.*/
+> -	uTemp = readl(&reg->dctl);
+> +	uTemp = readl(&reg->device_regs.dctl);
+>  	uTemp |= SOFT_DISCONNECT;
+> -	writel(uTemp, &reg->dctl);
+> +	writel(uTemp, &reg->device_regs.dctl);
+>  
+>  	udelay(20);
+>  
+>  	/* 4. Make the OTG device core exit from the disconnected state.*/
+> -	uTemp = readl(&reg->dctl);
+> +	uTemp = readl(&reg->device_regs.dctl);
+>  	uTemp = uTemp & ~SOFT_DISCONNECT;
+> -	writel(uTemp, &reg->dctl);
+> +	writel(uTemp, &reg->device_regs.dctl);
+>  
+>  	/* 5. Configure OTG Core to initial settings of device mode.*/
+>  	/* [][1: full speed(30Mhz) 0:high speed]*/
+> -	writel(EP_MISS_CNT(1) | DEV_SPEED_HIGH_SPEED_20, &reg->dcfg);
+> +	writel(EP_MISS_CNT(1) | DEV_SPEED_HIGH_SPEED_20, &reg->device_regs.dcfg);
+>  
+>  	mdelay(1);
+>  
+>  	/* 6. Unmask the core interrupts*/
+> -	writel(GINTMSK_INIT, &reg->gintmsk);
+> +	writel(GINTMSK_INIT, &reg->global_regs.gintmsk);
+>  
+>  	/* 7. Set NAK bit of EP0, EP1, EP2*/
+> -	writel(DEPCTL_EPDIS|DEPCTL_SNAK, &reg->out_endp[EP0_CON].doepctl);
+> -	writel(DEPCTL_EPDIS|DEPCTL_SNAK, &reg->in_endp[EP0_CON].diepctl);
+> +	writel(DEPCTL_EPDIS | DEPCTL_SNAK, &reg->device_regs.out_endp[EP0_CON].doepctl);
+> +	writel(DEPCTL_EPDIS | DEPCTL_SNAK, &reg->device_regs.in_endp[EP0_CON].diepctl);
+>  
+>  	for (i = 1; i < DWC2_MAX_ENDPOINTS; i++) {
+> -		writel(DEPCTL_EPDIS|DEPCTL_SNAK, &reg->out_endp[i].doepctl);
+> -		writel(DEPCTL_EPDIS|DEPCTL_SNAK, &reg->in_endp[i].diepctl);
+> +		writel(DEPCTL_EPDIS | DEPCTL_SNAK, &reg->device_regs.out_endp[i].doepctl);
+> +		writel(DEPCTL_EPDIS | DEPCTL_SNAK, &reg->device_regs.in_endp[i].diepctl);
+>  	}
+>  
+>  	/* 8. Unmask EPO interrupts*/
+>  	writel(((1 << EP0_CON) << DAINT_OUT_BIT)
+> -	       | (1 << EP0_CON), &reg->daintmsk);
+> +	       | (1 << EP0_CON), &reg->device_regs.daintmsk);
+>  
+>  	/* 9. Unmask device OUT EP common interrupts*/
+> -	writel(DOEPMSK_INIT, &reg->doepmsk);
+> +	writel(DOEPMSK_INIT, &reg->device_regs.doepmsk);
+>  
+>  	/* 10. Unmask device IN EP common interrupts*/
+> -	writel(DIEPMSK_INIT, &reg->diepmsk);
+> +	writel(DIEPMSK_INIT, &reg->device_regs.diepmsk);
+>  
+>  	rx_fifo_sz = RX_FIFO_SIZE;
+>  	np_tx_fifo_sz = NPTX_FIFO_SIZE;
+> @@ -544,14 +547,14 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+>  		tx_fifo_sz = dev->pdata->tx_fifo_sz;
+>  
+>  	/* 11. Set Rx FIFO Size (in 32-bit words) */
+> -	writel(rx_fifo_sz, &reg->grxfsiz);
+> +	writel(rx_fifo_sz, &reg->global_regs.grxfsiz);
+>  
+>  	/* 12. Set Non Periodic Tx FIFO Size */
+>  	writel((np_tx_fifo_sz << 16) | rx_fifo_sz,
+> -	       &reg->gnptxfsiz);
+> +	       &reg->global_regs.gnptxfsiz);
+>  
+>  	/* retrieve the number of IN Endpoints (excluding ep0) */
+> -	max_hw_ep = (readl(&reg->ghwcfg4) & GHWCFG4_NUM_IN_EPS_MASK) >>
+> +	max_hw_ep = (readl(&reg->global_regs.ghwcfg4) & GHWCFG4_NUM_IN_EPS_MASK) >>
+>  		    GHWCFG4_NUM_IN_EPS_SHIFT;
+>  	pdata_hw_ep = dev->pdata->tx_fifo_sz_nb;
+>  
+> @@ -565,27 +568,27 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+>  			tx_fifo_sz = dev->pdata->tx_fifo_sz_array[i];
+>  
+>  		writel((rx_fifo_sz + np_tx_fifo_sz + (tx_fifo_sz * i)) |
+> -			tx_fifo_sz << 16, &reg->dieptxf[i]);
+> +			tx_fifo_sz << 16, &reg->global_regs.dptxfsizn[i]);
+>  	}
+>  	/* Flush the RX FIFO */
+> -	writel(RX_FIFO_FLUSH, &reg->grstctl);
+> -	while (readl(&reg->grstctl) & RX_FIFO_FLUSH)
+> +	writel(RX_FIFO_FLUSH, &reg->global_regs.grstctl);
+> +	while (readl(&reg->global_regs.grstctl) & RX_FIFO_FLUSH)
+>  		debug("%s: waiting for DWC2_UDC_OTG_GRSTCTL\n", __func__);
+>  
+>  	/* Flush all the Tx FIFO's */
+> -	writel(TX_FIFO_FLUSH_ALL, &reg->grstctl);
+> -	writel(TX_FIFO_FLUSH_ALL | TX_FIFO_FLUSH, &reg->grstctl);
+> -	while (readl(&reg->grstctl) & TX_FIFO_FLUSH)
+> +	writel(TX_FIFO_FLUSH_ALL, &reg->global_regs.grstctl);
+> +	writel(TX_FIFO_FLUSH_ALL | TX_FIFO_FLUSH, &reg->global_regs.grstctl);
+> +	while (readl(&reg->global_regs.grstctl) & TX_FIFO_FLUSH)
+>  		debug("%s: waiting for DWC2_UDC_OTG_GRSTCTL\n", __func__);
+>  
+>  	/* 13. Clear NAK bit of EP0, EP1, EP2*/
+>  	/* For Slave mode*/
+>  	/* EP0: Control OUT */
+>  	writel(DEPCTL_EPDIS | DEPCTL_CNAK,
+> -	       &reg->out_endp[EP0_CON].doepctl);
+> +	       &reg->device_regs.out_endp[EP0_CON].doepctl);
+>  
+>  	/* 14. Initialize OTG Link Core.*/
+> -	writel(GAHBCFG_INIT, &reg->gahbcfg);
+> +	writel(GAHBCFG_INIT, &reg->global_regs.gahbcfg);
+>  }
+>  
+>  static void set_max_pktsize(struct dwc2_udc *dev, enum usb_device_speed speed)
+> @@ -610,12 +613,12 @@ static void set_max_pktsize(struct dwc2_udc *dev, enum usb_device_speed speed)
+>  		dev->ep[i].ep.maxpacket = ep_fifo_size;
+>  
+>  	/* EP0 - Control IN (64 bytes)*/
+> -	ep_ctrl = readl(&reg->in_endp[EP0_CON].diepctl);
+> -	writel(ep_ctrl|(0<<0), &reg->in_endp[EP0_CON].diepctl);
+> +	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
+> +	writel(ep_ctrl | (0 << 0), &reg->device_regs.in_endp[EP0_CON].diepctl);
+>  
+>  	/* EP0 - Control OUT (64 bytes)*/
+> -	ep_ctrl = readl(&reg->out_endp[EP0_CON].doepctl);
+> -	writel(ep_ctrl|(0<<0), &reg->out_endp[EP0_CON].doepctl);
+> +	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
+> +	writel(ep_ctrl | (0 << 0), &reg->device_regs.out_endp[EP0_CON].doepctl);
+>  }
+>  
+>  static int dwc2_ep_enable(struct usb_ep *_ep,
+> @@ -904,7 +907,7 @@ int dwc2_udc_probe(struct dwc2_plat_otg_data *pdata)
+>  
+>  	dev->pdata = pdata;
+>  
+> -	reg = (struct dwc2_usbotg_reg *)pdata->regs_otg;
+> +	reg = (struct dwc2_core_regs *)pdata->regs_otg;
+>  
+>  	dev->gadget.is_dualspeed = 1;	/* Hack only*/
+>  	dev->gadget.is_otg = 0;
+> @@ -932,8 +935,8 @@ int dwc2_udc_probe(struct dwc2_plat_otg_data *pdata)
+>  
+>  int dwc2_udc_handle_interrupt(void)
+>  {
+> -	u32 intr_status = readl(&reg->gintsts);
+> -	u32 gintmsk = readl(&reg->gintmsk);
+> +	u32 intr_status = readl(&reg->global_regs.gintsts);
+> +	u32 gintmsk = readl(&reg->global_regs.gintmsk);
+>  
+>  	if (intr_status & gintmsk)
+>  		return dwc2_udc_irq(1, (void *)the_controller);
+> @@ -1087,8 +1090,8 @@ static int dwc2_udc_otg_probe(struct udevice *dev)
+>  {
+>  	struct dwc2_plat_otg_data *plat = dev_get_plat(dev);
+>  	struct dwc2_priv_data *priv = dev_get_priv(dev);
+> -	struct dwc2_usbotg_reg *usbotg_reg =
+> -		(struct dwc2_usbotg_reg *)plat->regs_otg;
+> +	struct dwc2_core_reg *usbotg_reg =
+> +		(struct dwc2_core_reg *)plat->regs_otg;
+>  	int ret;
+>  
+>  	ret = dwc2_udc_otg_clk_init(dev, &priv->clks);
+> @@ -1123,21 +1126,22 @@ static int dwc2_udc_otg_probe(struct udevice *dev)
+>  		if (plat->force_b_session_valid &&
+>  		    !plat->force_vbus_detection) {
+>  			/* Override VBUS detection: enable then value*/
+> -			setbits_le32(&usbotg_reg->gotgctl, VB_VALOEN);
+> -			setbits_le32(&usbotg_reg->gotgctl, VB_VALOVAL);
+> +			setbits_le32(&usbotg_reg->global_regs.gotgctl, VB_VALOEN);
+> +			setbits_le32(&usbotg_reg->global_regs.gotgctl, VB_VALOVAL);
+>  		} else {
+>  			/* Enable VBUS sensing */
+> -			setbits_le32(&usbotg_reg->ggpio,
+> +			setbits_le32(&usbotg_reg->global_regs.ggpio,
+>  				     GGPIO_STM32_OTG_GCCFG_VBDEN);
+>  		}
+>  		if (plat->force_b_session_valid) {
+>  			/* Override B session bits: enable then value */
+> -			setbits_le32(&usbotg_reg->gotgctl, A_VALOEN | B_VALOEN);
+> -			setbits_le32(&usbotg_reg->gotgctl,
+> +			setbits_le32(&usbotg_reg->global_regs.gotgctl,
+> +				     A_VALOEN | B_VALOEN);
+> +			setbits_le32(&usbotg_reg->global_regs.gotgctl,
+>  				     A_VALOVAL | B_VALOVAL);
+>  		} else {
+>  			/* Enable ID detection */
+> -			setbits_le32(&usbotg_reg->ggpio,
+> +			setbits_le32(&usbotg_reg->global_regs.ggpio,
+>  				     GGPIO_STM32_OTG_GCCFG_IDEN);
+>  		}
+>  	}
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg_regs.h b/drivers/usb/gadget/dwc2_udc_otg_regs.h
+> index 01056fab1c21a136fcf75d9b89f397df1aa869f3..198ba7a7c37d05dca084ef017534265f5fb5fd70 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg_regs.h
+> +++ b/drivers/usb/gadget/dwc2_udc_otg_regs.h
+> @@ -10,80 +10,14 @@
+>  #ifndef __ASM_ARCH_REGS_USB_OTG_HS_H
+>  #define __ASM_ARCH_REGS_USB_OTG_HS_H
+>  
+> -/* USB2.0 OTG Controller register */
+>  #include <linux/bitops.h>
+> +
+>  struct dwc2_usbotg_phy {
+>  	u32 phypwr;
+>  	u32 phyclk;
+>  	u32 rstcon;
+>  };
+>  
+> -/* Device Logical IN Endpoint-Specific Registers */
+> -struct dwc2_dev_in_endp {
+> -	u32 diepctl;
+> -	u8  res1[4];
+> -	u32 diepint;
+> -	u8  res2[4];
+> -	u32 dieptsiz;
+> -	u32 diepdma;
+> -	u8  res3[4];
+> -	u32 diepdmab;
+> -};
+> -
+> -/* Device Logical OUT Endpoint-Specific Registers */
+> -struct dwc2_dev_out_endp {
+> -	u32 doepctl;
+> -	u8  res1[4];
+> -	u32 doepint;
+> -	u8  res2[4];
+> -	u32 doeptsiz;
+> -	u32 doepdma;
+> -	u8  res3[4];
+> -	u32 doepdmab;
+> -};
+> -
+> -struct ep_fifo {
+> -	u32 fifo;
+> -	u8  res[4092];
+> -};
+> -
+> -/* USB2.0 OTG Controller register */
+> -struct dwc2_usbotg_reg {
+> -	/* Core Global Registers */
+> -	u32 gotgctl; /* OTG Control & Status */
+> -	u32 gotgint; /* OTG Interrupt */
+> -	u32 gahbcfg; /* Core AHB Configuration */
+> -	u32 gusbcfg; /* Core USB Configuration */
+> -	u32 grstctl; /* Core Reset */
+> -	u32 gintsts; /* Core Interrupt */
+> -	u32 gintmsk; /* Core Interrupt Mask */
+> -	u32 grxstsr; /* Receive Status Debug Read/Status Read */
+> -	u32 grxstsp; /* Receive Status Debug Pop/Status Pop */
+> -	u32 grxfsiz; /* Receive FIFO Size */
+> -	u32 gnptxfsiz; /* Non-Periodic Transmit FIFO Size */
+> -	u8  res0[12];
+> -	u32 ggpio;     /* 0x038 */
+> -	u8  res1[20];
+> -	u32 ghwcfg4; /* User HW Config4 */
+> -	u8  res2[176];
+> -	u32 dieptxf[15]; /* Device Periodic Transmit FIFO size register */
+> -	u8  res3[1728];
+> -	/* Device Configuration */
+> -	u32 dcfg; /* Device Configuration Register */
+> -	u32 dctl; /* Device Control */
+> -	u32 dsts; /* Device Status */
+> -	u8  res4[4];
+> -	u32 diepmsk; /* Device IN Endpoint Common Interrupt Mask */
+> -	u32 doepmsk; /* Device OUT Endpoint Common Interrupt Mask */
+> -	u32 daint; /* Device All Endpoints Interrupt */
+> -	u32 daintmsk; /* Device All Endpoints Interrupt Mask */
+> -	u8  res5[224];
+> -	struct dwc2_dev_in_endp in_endp[16];
+> -	struct dwc2_dev_out_endp out_endp[16];
+> -	u8  res6[768];
+> -	struct ep_fifo ep[16];
+> -};
+> -
+>  /*===================================================================== */
+>  /*definitions related to CSR setting */
+>  
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+> index c0408bae0768cd81fa50de946dee4aa08c1059f8..81ced055f02ac1b6775527099a21cd39326d93cc 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+> @@ -32,15 +32,16 @@ static inline void dwc2_udc_ep0_zlp(struct dwc2_udc *dev)
+>  {
+>  	u32 ep_ctrl;
+>  
+> -	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr), &reg->in_endp[EP0_CON].diepdma);
+> -	writel(DIEPT_SIZ_PKT_CNT(1), &reg->in_endp[EP0_CON].dieptsiz);
+> +	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
+> +	       &reg->device_regs.in_endp[EP0_CON].diepdma);
+> +	writel(DIEPT_SIZ_PKT_CNT(1), &reg->device_regs.in_endp[EP0_CON].dieptsiz);
+>  
+> -	ep_ctrl = readl(&reg->in_endp[EP0_CON].diepctl);
+> -	writel(ep_ctrl|DEPCTL_EPENA|DEPCTL_CNAK,
+> -	       &reg->in_endp[EP0_CON].diepctl);
+> +	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
+> +	writel(ep_ctrl | DEPCTL_EPENA | DEPCTL_CNAK,
+> +	       &reg->device_regs.in_endp[EP0_CON].diepctl);
+>  
+>  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+> -		__func__, readl(&reg->in_endp[EP0_CON].diepctl));
+> +		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+>  	dev->ep0state = WAIT_FOR_IN_COMPLETE;
+>  }
+>  
+> @@ -52,16 +53,17 @@ static void dwc2_udc_pre_setup(void)
+>  		   "%s : Prepare Setup packets.\n", __func__);
+>  
+>  	writel(DOEPT_SIZ_PKT_CNT(1) | sizeof(struct usb_ctrlrequest),
+> -	       &reg->out_endp[EP0_CON].doeptsiz);
+> -	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr), &reg->out_endp[EP0_CON].doepdma);
+> +	       &reg->device_regs.out_endp[EP0_CON].doeptsiz);
+> +	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
+> +	       &reg->device_regs.out_endp[EP0_CON].doepdma);
+>  
+> -	ep_ctrl = readl(&reg->out_endp[EP0_CON].doepctl);
+> -	writel(ep_ctrl|DEPCTL_EPENA, &reg->out_endp[EP0_CON].doepctl);
+> +	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
+> +	writel(ep_ctrl | DEPCTL_EPENA, &reg->device_regs.out_endp[EP0_CON].doepctl);
+>  
+>  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+> -		__func__, readl(&reg->in_endp[EP0_CON].diepctl));
+> +		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+>  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+> -		__func__, readl(&reg->out_endp[EP0_CON].doepctl));
+> +		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
+>  
+>  }
+>  
+> @@ -70,25 +72,26 @@ static inline void dwc2_ep0_complete_out(void)
+>  	u32 ep_ctrl;
+>  
+>  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+> -		__func__, readl(&reg->in_endp[EP0_CON].diepctl));
+> +		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+>  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+> -		__func__, readl(&reg->out_endp[EP0_CON].doepctl));
+> +		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
+>  
+>  	debug_cond(DEBUG_IN_EP,
+>  		"%s : Prepare Complete Out packet.\n", __func__);
+>  
+>  	writel(DOEPT_SIZ_PKT_CNT(1) | sizeof(struct usb_ctrlrequest),
+> -	       &reg->out_endp[EP0_CON].doeptsiz);
+> -	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr), &reg->out_endp[EP0_CON].doepdma);
+> +	       &reg->device_regs.out_endp[EP0_CON].doeptsiz);
+> +	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
+> +	       &reg->device_regs.out_endp[EP0_CON].doepdma);
+>  
+> -	ep_ctrl = readl(&reg->out_endp[EP0_CON].doepctl);
+> -	writel(ep_ctrl|DEPCTL_EPENA|DEPCTL_CNAK,
+> -	       &reg->out_endp[EP0_CON].doepctl);
+> +	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
+> +	writel(ep_ctrl | DEPCTL_EPENA | DEPCTL_CNAK,
+> +	       &reg->device_regs.out_endp[EP0_CON].doepctl);
+>  
+>  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+> -		__func__, readl(&reg->in_endp[EP0_CON].diepctl));
+> +		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+>  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+> -		__func__, readl(&reg->out_endp[EP0_CON].doepctl));
+> +		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
+>  
+>  }
+>  
+> @@ -110,25 +113,25 @@ static int setdma_rx(struct dwc2_ep *ep, struct dwc2_request *req)
+>  	else
+>  		pktcnt = (length - 1)/(ep->ep.maxpacket) + 1;
+>  
+> -	ctrl =  readl(&reg->out_endp[ep_num].doepctl);
+> +	ctrl =  readl(&reg->device_regs.out_endp[ep_num].doepctl);
+>  
+>  	invalidate_dcache_range((unsigned long) ep->dma_buf,
+>  				(unsigned long) ep->dma_buf +
+>  				ROUND(ep->len, CONFIG_SYS_CACHELINE_SIZE));
+>  
+> -	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->out_endp[ep_num].doepdma);
+> +	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->device_regs.out_endp[ep_num].doepdma);
+>  	writel(DOEPT_SIZ_PKT_CNT(pktcnt) | DOEPT_SIZ_XFER_SIZE(length),
+> -	       &reg->out_endp[ep_num].doeptsiz);
+> -	writel(DEPCTL_EPENA|DEPCTL_CNAK|ctrl, &reg->out_endp[ep_num].doepctl);
+> +	       &reg->device_regs.out_endp[ep_num].doeptsiz);
+> +	writel(DEPCTL_EPENA | DEPCTL_CNAK | ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+>  
+>  	debug_cond(DEBUG_OUT_EP != 0,
+>  		   "%s: EP%d RX DMA start : DOEPDMA = 0x%x,"
+>  		   "DOEPTSIZ = 0x%x, DOEPCTL = 0x%x\n"
+>  		   "\tbuf = 0x%p, pktcnt = %d, xfersize = %d\n",
+>  		   __func__, ep_num,
+> -		   readl(&reg->out_endp[ep_num].doepdma),
+> -		   readl(&reg->out_endp[ep_num].doeptsiz),
+> -		   readl(&reg->out_endp[ep_num].doepctl),
+> +		   readl(&reg->device_regs.out_endp[ep_num].doepdma),
+> +		   readl(&reg->device_regs.out_endp[ep_num].doeptsiz),
+> +		   readl(&reg->device_regs.out_endp[ep_num].doepctl),
+>  		   buf, pktcnt, length);
+>  	return 0;
+>  
+> @@ -159,16 +162,16 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
+>  		pktcnt = (length - 1)/(ep->ep.maxpacket) + 1;
+>  
+>  	/* Flush the endpoint's Tx FIFO */
+> -	writel(TX_FIFO_NUMBER(ep->fifo_num), &reg->grstctl);
+> -	writel(TX_FIFO_NUMBER(ep->fifo_num) | TX_FIFO_FLUSH, &reg->grstctl);
+> -	while (readl(&reg->grstctl) & TX_FIFO_FLUSH)
+> +	writel(TX_FIFO_NUMBER(ep->fifo_num), &reg->global_regs.grstctl);
+> +	writel(TX_FIFO_NUMBER(ep->fifo_num) | TX_FIFO_FLUSH, &reg->global_regs.grstctl);
+> +	while (readl(&reg->global_regs.grstctl) & TX_FIFO_FLUSH)
+>  		;
+>  
+> -	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->in_endp[ep_num].diepdma);
+> +	writel(phys_to_bus((unsigned long)ep->dma_buf), &reg->device_regs.in_endp[ep_num].diepdma);
+>  	writel(DIEPT_SIZ_PKT_CNT(pktcnt) | DIEPT_SIZ_XFER_SIZE(length),
+> -	       &reg->in_endp[ep_num].dieptsiz);
+> +	       &reg->device_regs.in_endp[ep_num].dieptsiz);
+>  
+> -	ctrl = readl(&reg->in_endp[ep_num].diepctl);
+> +	ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+>  
+>  	/* Write the FIFO number to be used for this endpoint */
+>  	ctrl &= DIEPCTL_TX_FIFO_NUM_MASK;
+> @@ -177,16 +180,16 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
+>  	/* Clear reserved (Next EP) bits */
+>  	ctrl = (ctrl&~(EP_MASK<<DEPCTL_NEXT_EP_BIT));
+>  
+> -	writel(DEPCTL_EPENA|DEPCTL_CNAK|ctrl, &reg->in_endp[ep_num].diepctl);
+> +	writel(DEPCTL_EPENA | DEPCTL_CNAK | ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+>  
+>  	debug_cond(DEBUG_IN_EP,
+>  		"%s:EP%d TX DMA start : DIEPDMA0 = 0x%x,"
+>  		"DIEPTSIZ0 = 0x%x, DIEPCTL0 = 0x%x\n"
+>  		"\tbuf = 0x%p, pktcnt = %d, xfersize = %d\n",
+>  		__func__, ep_num,
+> -		readl(&reg->in_endp[ep_num].diepdma),
+> -		readl(&reg->in_endp[ep_num].dieptsiz),
+> -		readl(&reg->in_endp[ep_num].diepctl),
+> +		readl(&reg->device_regs.in_endp[ep_num].diepdma),
+> +		readl(&reg->device_regs.in_endp[ep_num].dieptsiz),
+> +		readl(&reg->device_regs.in_endp[ep_num].diepctl),
+>  		buf, pktcnt, length);
+>  
+>  	return length;
+> @@ -207,7 +210,7 @@ static void complete_rx(struct dwc2_udc *dev, u8 ep_num)
+>  	}
+>  
+>  	req = list_entry(ep->queue.next, struct dwc2_request, queue);
+> -	ep_tsr = readl(&reg->out_endp[ep_num].doeptsiz);
+> +	ep_tsr = readl(&reg->device_regs.out_endp[ep_num].doeptsiz);
+>  
+>  	if (ep_num == EP0_CON)
+>  		xfer_size = (ep_tsr & DOEPT_SIZ_XFER_SIZE_MAX_EP0);
+> @@ -288,7 +291,7 @@ static void complete_tx(struct dwc2_udc *dev, u8 ep_num)
+>  
+>  	req = list_entry(ep->queue.next, struct dwc2_request, queue);
+>  
+> -	ep_tsr = readl(&reg->in_endp[ep_num].dieptsiz);
+> +	ep_tsr = readl(&reg->device_regs.in_endp[ep_num].dieptsiz);
+>  
+>  	xfer_size = ep->len;
+>  	is_short = (xfer_size < ep->ep.maxpacket);
+> @@ -373,7 +376,7 @@ static void process_ep_in_intr(struct dwc2_udc *dev)
+>  	u32 ep_intr, ep_intr_status;
+>  	u8 ep_num = 0;
+>  
+> -	ep_intr = readl(&reg->daint);
+> +	ep_intr = readl(&reg->device_regs.daint);
+>  	debug_cond(DEBUG_IN_EP,
+>  		"*** %s: EP In interrupt : DAINT = 0x%x\n", __func__, ep_intr);
+>  
+> @@ -381,13 +384,13 @@ static void process_ep_in_intr(struct dwc2_udc *dev)
+>  
+>  	while (ep_intr) {
+>  		if (ep_intr & DAINT_IN_EP_INT(1)) {
+> -			ep_intr_status = readl(&reg->in_endp[ep_num].diepint);
+> +			ep_intr_status = readl(&reg->device_regs.in_endp[ep_num].diepint);
+>  			debug_cond(DEBUG_IN_EP,
+>  				   "\tEP%d-IN : DIEPINT = 0x%x\n",
+>  				   ep_num, ep_intr_status);
+>  
+>  			/* Interrupt Clear */
+> -			writel(ep_intr_status, &reg->in_endp[ep_num].diepint);
+> +			writel(ep_intr_status, &reg->device_regs.in_endp[ep_num].diepint);
+>  
+>  			if (ep_intr_status & TRANSFER_DONE) {
+>  				complete_tx(dev, ep_num);
+> @@ -420,10 +423,10 @@ static void process_ep_out_intr(struct dwc2_udc *dev)
+>  	u32 ep_intr, ep_intr_status;
+>  	u8 ep_num = 0;
+>  	u32 ep_tsr = 0, xfer_size = 0;
+> -	u32 epsiz_reg = reg->out_endp[ep_num].doeptsiz;
+> +	u32 epsiz_reg = reg->device_regs.out_endp[ep_num].doeptsiz;
+>  	u32 req_size = sizeof(struct usb_ctrlrequest);
+>  
+> -	ep_intr = readl(&reg->daint);
+> +	ep_intr = readl(&reg->device_regs.daint);
+>  	debug_cond(DEBUG_OUT_EP != 0,
+>  		   "*** %s: EP OUT interrupt : DAINT = 0x%x\n",
+>  		   __func__, ep_intr);
+> @@ -432,13 +435,13 @@ static void process_ep_out_intr(struct dwc2_udc *dev)
+>  
+>  	while (ep_intr) {
+>  		if (ep_intr & 0x1) {
+> -			ep_intr_status = readl(&reg->out_endp[ep_num].doepint);
+> +			ep_intr_status = readl(&reg->device_regs.out_endp[ep_num].doepint);
+>  			debug_cond(DEBUG_OUT_EP != 0,
+>  				   "\tEP%d-OUT : DOEPINT = 0x%x\n",
+>  				   ep_num, ep_intr_status);
+>  
+>  			/* Interrupt Clear */
+> -			writel(ep_intr_status, &reg->out_endp[ep_num].doepint);
+> +			writel(ep_intr_status, &reg->device_regs.out_endp[ep_num].doepint);
+>  
+>  			if (ep_num == 0) {
+>  				if (ep_intr_status & TRANSFER_DONE) {
+> @@ -486,14 +489,14 @@ static int dwc2_udc_irq(int irq, void *_dev)
+>  
+>  	spin_lock_irqsave(&dev->lock, flags);
+>  
+> -	intr_status = readl(&reg->gintsts);
+> -	gintmsk = readl(&reg->gintmsk);
+> +	intr_status = readl(&reg->global_regs.gintsts);
+> +	gintmsk = readl(&reg->global_regs.gintmsk);
+>  
+>  	debug_cond(DEBUG_ISR,
+>  		  "\n*** %s : GINTSTS=0x%x(on state %s), GINTMSK : 0x%x,"
+>  		  "DAINT : 0x%x, DAINTMSK : 0x%x\n",
+>  		  __func__, intr_status, state_names[dev->ep0state], gintmsk,
+> -		  readl(&reg->daint), readl(&reg->daintmsk));
+> +		  readl(&reg->device_regs.daint), readl(&reg->device_regs.daintmsk));
+>  
+>  	if (!intr_status) {
+>  		spin_unlock_irqrestore(&dev->lock, flags);
+> @@ -503,8 +506,8 @@ static int dwc2_udc_irq(int irq, void *_dev)
+>  	if (intr_status & INT_ENUMDONE) {
+>  		debug_cond(DEBUG_ISR, "\tSpeed Detection interrupt\n");
+>  
+> -		writel(INT_ENUMDONE, &reg->gintsts);
+> -		usb_status = (readl(&reg->dsts) & 0x6);
+> +		writel(INT_ENUMDONE, &reg->global_regs.gintsts);
+> +		usb_status = (readl(&reg->device_regs.dsts) & 0x6);
+>  
+>  		if (usb_status & (USB_FULL_30_60MHZ | USB_FULL_48MHZ)) {
+>  			debug_cond(DEBUG_ISR,
+> @@ -521,14 +524,14 @@ static int dwc2_udc_irq(int irq, void *_dev)
+>  
+>  	if (intr_status & INT_EARLY_SUSPEND) {
+>  		debug_cond(DEBUG_ISR, "\tEarly suspend interrupt\n");
+> -		writel(INT_EARLY_SUSPEND, &reg->gintsts);
+> +		writel(INT_EARLY_SUSPEND, &reg->global_regs.gintsts);
+>  	}
+>  
+>  	if (intr_status & INT_SUSPEND) {
+> -		usb_status = readl(&reg->dsts);
+> +		usb_status = readl(&reg->device_regs.dsts);
+>  		debug_cond(DEBUG_ISR,
+>  			"\tSuspend interrupt :(DSTS):0x%x\n", usb_status);
+> -		writel(INT_SUSPEND, &reg->gintsts);
+> +		writel(INT_SUSPEND, &reg->global_regs.gintsts);
+>  
+>  		if (dev->gadget.speed != USB_SPEED_UNKNOWN
+>  		    && dev->driver) {
+> @@ -538,7 +541,7 @@ static int dwc2_udc_irq(int irq, void *_dev)
+>  	}
+>  
+>  	if (intr_status & INT_OTG) {
+> -		gotgint = readl(&reg->gotgint);
+> +		gotgint = readl(&reg->global_regs.gotgint);
+>  		debug_cond(DEBUG_ISR,
+>  			   "\tOTG interrupt: (GOTGINT):0x%x\n", gotgint);
+>  
+> @@ -551,12 +554,12 @@ static int dwc2_udc_irq(int irq, void *_dev)
+>  				spin_lock_irqsave(&dev->lock, flags);
+>  			}
+>  		}
+> -		writel(gotgint, &reg->gotgint);
+> +		writel(gotgint, &reg->global_regs.gotgint);
+>  	}
+>  
+>  	if (intr_status & INT_RESUME) {
+>  		debug_cond(DEBUG_ISR, "\tResume interrupt\n");
+> -		writel(INT_RESUME, &reg->gintsts);
+> +		writel(INT_RESUME, &reg->global_regs.gintsts);
+>  
+>  		if (dev->gadget.speed != USB_SPEED_UNKNOWN
+>  		    && dev->driver
+> @@ -567,10 +570,10 @@ static int dwc2_udc_irq(int irq, void *_dev)
+>  	}
+>  
+>  	if (intr_status & INT_RESET) {
+> -		usb_status = readl(&reg->gotgctl);
+> +		usb_status = readl(&reg->global_regs.gotgctl);
+>  		debug_cond(DEBUG_ISR,
+>  			"\tReset interrupt - (GOTGCTL):0x%x\n", usb_status);
+> -		writel(INT_RESET, &reg->gintsts);
+> +		writel(INT_RESET, &reg->global_regs.gintsts);
+>  
+>  		if ((usb_status & 0xc0000) == (0x3 << 18)) {
+>  			if (reset_available) {
+> @@ -676,14 +679,14 @@ static int dwc2_queue(struct usb_ep *_ep, struct usb_request *_req,
+>  			req = 0;
+>  
+>  		} else if (ep_is_in(ep)) {
+> -			gintsts = readl(&reg->gintsts);
+> +			gintsts = readl(&reg->global_regs.gintsts);
+>  			debug_cond(DEBUG_IN_EP,
+>  				   "%s: ep_is_in, DWC2_UDC_OTG_GINTSTS=0x%x\n",
+>  				   __func__, gintsts);
+>  
+>  			setdma_tx(ep, req);
+>  		} else {
+> -			gintsts = readl(&reg->gintsts);
+> +			gintsts = readl(&reg->global_regs.gintsts);
+>  			debug_cond(DEBUG_OUT_EP != 0,
+>  				   "%s:ep_is_out, DWC2_UDC_OTG_GINTSTS=0x%x\n",
+>  				   __func__, gintsts);
+> @@ -765,14 +768,14 @@ static int dwc2_fifo_read(struct dwc2_ep *ep, void *cp, int max)
+>   */
+>  static void udc_set_address(struct dwc2_udc *dev, unsigned char address)
+>  {
+> -	u32 ctrl = readl(&reg->dcfg);
+> -	writel(DEVICE_ADDRESS(address) | ctrl, &reg->dcfg);
+> +	u32 ctrl = readl(&reg->device_regs.dcfg);
+> +	writel(DEVICE_ADDRESS(address) | ctrl, &reg->device_regs.dcfg);
+>  
+>  	dwc2_udc_ep0_zlp(dev);
+>  
+>  	debug_cond(DEBUG_EP0 != 0,
+>  		   "%s: USB OTG 2.0 Device address=%d, DCFG=0x%x\n",
+> -		   __func__, address, readl(&reg->dcfg));
+> +		   __func__, address, readl(&reg->device_regs.dcfg));
+>  
+>  	dev->usb_address = address;
+>  }
+> @@ -783,7 +786,7 @@ static inline void dwc2_udc_ep0_set_stall(struct dwc2_ep *ep)
+>  	u32		ep_ctrl = 0;
+>  
+>  	dev = ep->dev;
+> -	ep_ctrl = readl(&reg->in_endp[EP0_CON].diepctl);
+> +	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
+>  
+>  	/* set the disable and stall bits */
+>  	if (ep_ctrl & DEPCTL_EPENA)
+> @@ -791,11 +794,11 @@ static inline void dwc2_udc_ep0_set_stall(struct dwc2_ep *ep)
+>  
+>  	ep_ctrl |= DEPCTL_STALL;
+>  
+> -	writel(ep_ctrl, &reg->in_endp[EP0_CON].diepctl);
+> +	writel(ep_ctrl, &reg->device_regs.in_endp[EP0_CON].diepctl);
+>  
+>  	debug_cond(DEBUG_EP0 != 0,
+>  		   "%s: set ep%d stall, DIEPCTL0 = 0x%p\n",
+> -		   __func__, ep_index(ep), &reg->in_endp[EP0_CON].diepctl);
+> +		   __func__, ep_index(ep), &reg->device_regs.in_endp[EP0_CON].diepctl);
+>  	/*
+>  	 * The application can only set this bit, and the core clears it,
+>  	 * when a SETUP token is received for this endpoint
+> @@ -934,13 +937,13 @@ static int dwc2_udc_get_status(struct dwc2_udc *dev,
+>  			   (unsigned long) usb_ctrl +
+>  			   ROUND(sizeof(g_status), CONFIG_SYS_CACHELINE_SIZE));
+>  
+> -	writel(phys_to_bus(usb_ctrl_dma_addr), &reg->in_endp[EP0_CON].diepdma);
+> +	writel(phys_to_bus(usb_ctrl_dma_addr), &reg->device_regs.in_endp[EP0_CON].diepdma);
+>  	writel(DIEPT_SIZ_PKT_CNT(1) | DIEPT_SIZ_XFER_SIZE(2),
+> -	       &reg->in_endp[EP0_CON].dieptsiz);
+> +	       &reg->device_regs.in_endp[EP0_CON].dieptsiz);
+>  
+> -	ep_ctrl = readl(&reg->in_endp[EP0_CON].diepctl);
+> -	writel(ep_ctrl|DEPCTL_EPENA|DEPCTL_CNAK,
+> -	       &reg->in_endp[EP0_CON].diepctl);
+> +	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
+> +	writel(ep_ctrl | DEPCTL_EPENA | DEPCTL_CNAK,
+> +	       &reg->device_regs.in_endp[EP0_CON].diepctl);
+>  	dev->ep0state = WAIT_FOR_NULL_COMPLETE;
+>  
+>  	return 0;
+> @@ -955,17 +958,17 @@ static void dwc2_udc_set_nak(struct dwc2_ep *ep)
+>  	debug("%s: ep_num = %d, ep_type = %d\n", __func__, ep_num, ep->ep_type);
+>  
+>  	if (ep_is_in(ep)) {
+> -		ep_ctrl = readl(&reg->in_endp[ep_num].diepctl);
+> +		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+>  		ep_ctrl |= DEPCTL_SNAK;
+> -		writel(ep_ctrl, &reg->in_endp[ep_num].diepctl);
+> +		writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+>  		debug("%s: set NAK, DIEPCTL%d = 0x%x\n",
+> -			__func__, ep_num, readl(&reg->in_endp[ep_num].diepctl));
+> +			__func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
+>  	} else {
+> -		ep_ctrl = readl(&reg->out_endp[ep_num].doepctl);
+> +		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+>  		ep_ctrl |= DEPCTL_SNAK;
+> -		writel(ep_ctrl, &reg->out_endp[ep_num].doepctl);
+> +		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+>  		debug("%s: set NAK, DOEPCTL%d = 0x%x\n",
+> -		      __func__, ep_num, readl(&reg->out_endp[ep_num].doepctl));
+> +		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
+>  	}
+>  
+>  	return;
+> @@ -980,7 +983,7 @@ static void dwc2_udc_ep_set_stall(struct dwc2_ep *ep)
+>  	debug("%s: ep_num = %d, ep_type = %d\n", __func__, ep_num, ep->ep_type);
+>  
+>  	if (ep_is_in(ep)) {
+> -		ep_ctrl = readl(&reg->in_endp[ep_num].diepctl);
+> +		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+>  
+>  		/* set the disable and stall bits */
+>  		if (ep_ctrl & DEPCTL_EPENA)
+> @@ -988,19 +991,19 @@ static void dwc2_udc_ep_set_stall(struct dwc2_ep *ep)
+>  
+>  		ep_ctrl |= DEPCTL_STALL;
+>  
+> -		writel(ep_ctrl, &reg->in_endp[ep_num].diepctl);
+> +		writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+>  		debug("%s: set stall, DIEPCTL%d = 0x%x\n",
+> -		      __func__, ep_num, readl(&reg->in_endp[ep_num].diepctl));
+> +		      __func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
+>  
+>  	} else {
+> -		ep_ctrl = readl(&reg->out_endp[ep_num].doepctl);
+> +		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+>  
+>  		/* set the stall bit */
+>  		ep_ctrl |= DEPCTL_STALL;
+>  
+> -		writel(ep_ctrl, &reg->out_endp[ep_num].doepctl);
+> +		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+>  		debug("%s: set stall, DOEPCTL%d = 0x%x\n",
+> -		      __func__, ep_num, readl(&reg->out_endp[ep_num].doepctl));
+> +		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
+>  	}
+>  
+>  	return;
+> @@ -1015,7 +1018,7 @@ static void dwc2_udc_ep_clear_stall(struct dwc2_ep *ep)
+>  	debug("%s: ep_num = %d, ep_type = %d\n", __func__, ep_num, ep->ep_type);
+>  
+>  	if (ep_is_in(ep)) {
+> -		ep_ctrl = readl(&reg->in_endp[ep_num].diepctl);
+> +		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+>  
+>  		/* clear stall bit */
+>  		ep_ctrl &= ~DEPCTL_STALL;
+> @@ -1031,12 +1034,12 @@ static void dwc2_udc_ep_clear_stall(struct dwc2_ep *ep)
+>  			ep_ctrl |= DEPCTL_SETD0PID; /* DATA0 */
+>  		}
+>  
+> -		writel(ep_ctrl, &reg->in_endp[ep_num].diepctl);
+> +		writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+>  		debug("%s: cleared stall, DIEPCTL%d = 0x%x\n",
+> -			__func__, ep_num, readl(&reg->in_endp[ep_num].diepctl));
+> +			__func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
+>  
+>  	} else {
+> -		ep_ctrl = readl(&reg->out_endp[ep_num].doepctl);
+> +		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+>  
+>  		/* clear stall bit */
+>  		ep_ctrl &= ~DEPCTL_STALL;
+> @@ -1046,9 +1049,9 @@ static void dwc2_udc_ep_clear_stall(struct dwc2_ep *ep)
+>  			ep_ctrl |= DEPCTL_SETD0PID; /* DATA0 */
+>  		}
+>  
+> -		writel(ep_ctrl, &reg->out_endp[ep_num].doepctl);
+> +		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+>  		debug("%s: cleared stall, DOEPCTL%d = 0x%x\n",
+> -		      __func__, ep_num, readl(&reg->out_endp[ep_num].doepctl));
+> +		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
+>  	}
+>  
+>  	return;
+> @@ -1110,10 +1113,10 @@ static void dwc2_udc_ep_activate(struct dwc2_ep *ep)
+>  
+>  	/* Read DEPCTLn register */
+>  	if (ep_is_in(ep)) {
+> -		ep_ctrl = readl(&reg->in_endp[ep_num].diepctl);
+> +		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+>  		daintmsk = 1 << ep_num;
+>  	} else {
+> -		ep_ctrl = readl(&reg->out_endp[ep_num].doepctl);
+> +		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+>  		daintmsk = (1 << ep_num) << DAINT_OUT_BIT;
+>  	}
+>  
+> @@ -1130,21 +1133,21 @@ static void dwc2_udc_ep_activate(struct dwc2_ep *ep)
+>  		ep_ctrl |= (DEPCTL_SETD0PID | DEPCTL_USBACTEP | DEPCTL_SNAK);
+>  
+>  		if (ep_is_in(ep)) {
+> -			writel(ep_ctrl, &reg->in_endp[ep_num].diepctl);
+> +			writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
+>  			debug("%s: USB Ative EP%d, DIEPCTRL%d = 0x%x\n",
+>  			      __func__, ep_num, ep_num,
+> -			      readl(&reg->in_endp[ep_num].diepctl));
+> +			      readl(&reg->device_regs.in_endp[ep_num].diepctl));
+>  		} else {
+> -			writel(ep_ctrl, &reg->out_endp[ep_num].doepctl);
+> +			writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
+>  			debug("%s: USB Ative EP%d, DOEPCTRL%d = 0x%x\n",
+>  			      __func__, ep_num, ep_num,
+> -			      readl(&reg->out_endp[ep_num].doepctl));
+> +			      readl(&reg->device_regs.out_endp[ep_num].doepctl));
+>  		}
+>  	}
+>  
+>  	/* Unmask EP Interrtupt */
+> -	writel(readl(&reg->daintmsk)|daintmsk, &reg->daintmsk);
+> -	debug("%s: DAINTMSK = 0x%x\n", __func__, readl(&reg->daintmsk));
+> +	writel(readl(&reg->device_regs.daintmsk) | daintmsk, &reg->device_regs.daintmsk);
+> +	debug("%s: DAINTMSK = 0x%x\n", __func__, readl(&reg->device_regs.daintmsk));
+>  
+>  }
+>  
+> diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+> index a9dbb85f4e6c5a9122108eb64f77e99758b840e8..b6c8b3d5a6bdf375f1adeb106d4832d92307f0db 100644
+> --- a/drivers/usb/host/dwc2.c
+> +++ b/drivers/usb/host/dwc2.c
+> @@ -24,6 +24,7 @@
+>  #include <power/regulator.h>
+>  #include <reset.h>
+>  
+> +#include "../common/dwc2_core.h"
+>  #include "dwc2.h"
+>  
+>  /* Use only HC channel 0. */
+> @@ -93,7 +94,7 @@ static void init_fslspclksel(struct dwc2_core_regs *regs)
+>  #endif
+>  
+>  #ifdef DWC2_ULPI_FS_LS
+> -	uint32_t hwcfg2 = readl(&regs->ghwcfg2);
+> +	uint32_t hwcfg2 = readl(&regs->global_regs.ghwcfg2);
+>  	uint32_t hval = (ghwcfg2 & DWC2_HWCFG2_HS_PHY_TYPE_MASK) >>
+>  			DWC2_HWCFG2_HS_PHY_TYPE_OFFSET;
+>  	uint32_t fval = (ghwcfg2 & DWC2_HWCFG2_FS_PHY_TYPE_MASK) >>
+> @@ -120,8 +121,8 @@ static void dwc_otg_flush_tx_fifo(struct udevice *dev,
+>  	int ret;
+>  
+>  	writel(DWC2_GRSTCTL_TXFFLSH | (num << DWC2_GRSTCTL_TXFNUM_OFFSET),
+> -	       &regs->grstctl);
+> -	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_TXFFLSH,
+> +	       &regs->global_regs.grstctl);
+> +	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_TXFFLSH,
+>  				false, 1000, false);
+>  	if (ret)
+>  		dev_info(dev, "%s: Timeout!\n", __func__);
+> @@ -140,8 +141,8 @@ static void dwc_otg_flush_rx_fifo(struct udevice *dev,
+>  {
+>  	int ret;
+>  
+> -	writel(DWC2_GRSTCTL_RXFFLSH, &regs->grstctl);
+> -	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_RXFFLSH,
+> +	writel(DWC2_GRSTCTL_RXFFLSH, &regs->global_regs.grstctl);
+> +	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_RXFFLSH,
+>  				false, 1000, false);
+>  	if (ret)
+>  		dev_info(dev, "%s: Timeout!\n", __func__);
+> @@ -160,14 +161,14 @@ static void dwc_otg_core_reset(struct udevice *dev,
+>  	int ret;
+>  
+>  	/* Wait for AHB master IDLE state. */
+> -	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_AHBIDLE,
+> +	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_AHBIDLE,
+>  				true, 1000, false);
+>  	if (ret)
+>  		dev_info(dev, "%s: Timeout!\n", __func__);
+>  
+>  	/* Core Soft Reset */
+> -	writel(DWC2_GRSTCTL_CSFTRST, &regs->grstctl);
+> -	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_CSFTRST,
+> +	writel(DWC2_GRSTCTL_CSFTRST, &regs->global_regs.grstctl);
+> +	ret = wait_for_bit_le32(&regs->global_regs.grstctl, DWC2_GRSTCTL_CSFTRST,
+>  				false, 1000, false);
+>  	if (ret)
+>  		dev_info(dev, "%s: Timeout!\n", __func__);
+> @@ -260,16 +261,16 @@ static void dwc_otg_core_host_init(struct udevice *dev,
+>  
+>  	/* Configure data FIFO sizes */
+>  #ifdef DWC2_ENABLE_DYNAMIC_FIFO
+> -	if (readl(&regs->ghwcfg2) & DWC2_HWCFG2_DYNAMIC_FIFO) {
+> +	if (readl(&regs->global_regs.ghwcfg2) & DWC2_HWCFG2_DYNAMIC_FIFO) {
+>  		/* Rx FIFO */
+> -		writel(DWC2_HOST_RX_FIFO_SIZE, &regs->grxfsiz);
+> +		writel(DWC2_HOST_RX_FIFO_SIZE, &regs->global_regs.grxfsiz);
+>  
+>  		/* Non-periodic Tx FIFO */
+>  		nptxfifosize |= DWC2_HOST_NPERIO_TX_FIFO_SIZE <<
+>  				DWC2_FIFOSIZE_DEPTH_OFFSET;
+>  		nptxfifosize |= DWC2_HOST_RX_FIFO_SIZE <<
+>  				DWC2_FIFOSIZE_STARTADDR_OFFSET;
+> -		writel(nptxfifosize, &regs->gnptxfsiz);
+> +		writel(nptxfifosize, &regs->global_regs.gnptxfsiz);
+>  
+>  		/* Periodic Tx FIFO */
+>  		ptxfifosize |= DWC2_HOST_PERIO_TX_FIFO_SIZE <<
+> @@ -277,45 +278,45 @@ static void dwc_otg_core_host_init(struct udevice *dev,
+>  		ptxfifosize |= (DWC2_HOST_RX_FIFO_SIZE +
+>  				DWC2_HOST_NPERIO_TX_FIFO_SIZE) <<
+>  				DWC2_FIFOSIZE_STARTADDR_OFFSET;
+> -		writel(ptxfifosize, &regs->hptxfsiz);
+> +		writel(ptxfifosize, &regs->global_regs.hptxfsiz);
+>  	}
+>  #endif
+>  
+>  	/* Clear Host Set HNP Enable in the OTG Control Register */
+> -	clrbits_le32(&regs->gotgctl, DWC2_GOTGCTL_HSTSETHNPEN);
+> +	clrbits_le32(&regs->global_regs.gotgctl, DWC2_GOTGCTL_HSTSETHNPEN);
+>  
+>  	/* Make sure the FIFOs are flushed. */
+>  	dwc_otg_flush_tx_fifo(dev, regs, 0x10);	/* All Tx FIFOs */
+>  	dwc_otg_flush_rx_fifo(dev, regs);
+>  
+>  	/* Flush out any leftover queued requests. */
+> -	num_channels = readl(&regs->ghwcfg2);
+> +	num_channels = readl(&regs->global_regs.ghwcfg2);
+>  	num_channels &= DWC2_HWCFG2_NUM_HOST_CHAN_MASK;
+>  	num_channels >>= DWC2_HWCFG2_NUM_HOST_CHAN_OFFSET;
+>  	num_channels += 1;
+>  
+>  	for (i = 0; i < num_channels; i++)
+> -		clrsetbits_le32(&regs->hc_regs[i].hcchar,
+> +		clrsetbits_le32(&regs->host_regs.hc[i].hcchar,
+>  				DWC2_HCCHAR_CHEN | DWC2_HCCHAR_EPDIR,
+>  				DWC2_HCCHAR_CHDIS);
+>  
+>  	/* Halt all channels to put them into a known state. */
+>  	for (i = 0; i < num_channels; i++) {
+> -		clrsetbits_le32(&regs->hc_regs[i].hcchar,
+> +		clrsetbits_le32(&regs->host_regs.hc[i].hcchar,
+>  				DWC2_HCCHAR_EPDIR,
+>  				DWC2_HCCHAR_CHEN | DWC2_HCCHAR_CHDIS);
+> -		ret = wait_for_bit_le32(&regs->hc_regs[i].hcchar,
+> +		ret = wait_for_bit_le32(&regs->host_regs.hc[i].hcchar,
+>  					DWC2_HCCHAR_CHEN, false, 1000, false);
+>  		if (ret)
+>  			dev_info(dev, "%s: Timeout!\n", __func__);
+>  	}
+>  
+>  	/* Turn on the vbus power. */
+> -	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST) {
+> -		hprt0 = readl(&regs->hprt0) & ~DWC2_HPRT0_W1C_MASK;
+> +	if (readl(&regs->global_regs.gintsts) & DWC2_GINTSTS_CURMODE_HOST) {
+> +		hprt0 = readl(&regs->host_regs.hprt0) & ~DWC2_HPRT0_W1C_MASK;
+>  		if (!(hprt0 & DWC2_HPRT0_PRTPWR)) {
+>  			hprt0 |= DWC2_HPRT0_PRTPWR;
+> -			writel(hprt0, &regs->hprt0);
+> +			writel(hprt0, &regs->host_regs.hprt0);
+>  		}
+>  	}
+>  
+> @@ -338,7 +339,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+>  	uint8_t brst_sz = DWC2_DMA_BURST_SIZE;
+>  
+>  	/* Common Initialization */
+> -	usbcfg = readl(&regs->gusbcfg);
+> +	usbcfg = readl(&regs->global_regs.gusbcfg);
+>  
+>  	/* Program the ULPI External VBUS bit if needed */
+>  	if (priv->ext_vbus) {
+> @@ -357,7 +358,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+>  #else
+>  	usbcfg &= ~DWC2_GUSBCFG_TERM_SEL_DL_PULSE;
+>  #endif
+> -	writel(usbcfg, &regs->gusbcfg);
+> +	writel(usbcfg, &regs->global_regs.gusbcfg);
+>  
+>  	/* Reset the Controller */
+>  	dwc_otg_core_reset(dev, regs);
+> @@ -369,28 +370,28 @@ static void dwc_otg_core_init(struct udevice *dev)
+>  #if defined(DWC2_DFLT_SPEED_FULL) && \
+>  	(DWC2_PHY_TYPE == DWC2_PHY_TYPE_FS)
+>  	/* If FS mode with FS PHY */
+> -	setbits_le32(&regs->gusbcfg, DWC2_GUSBCFG_PHYSEL);
+> +	setbits_le32(&regs->global_regs.gusbcfg, DWC2_GUSBCFG_PHYSEL);
+>  
+>  	/* Reset after a PHY select */
+> -	dwc_otg_core_reset(dev, regs);
+> +	dwc2_core_reset(regs);
+>  
+>  	/*
+>  	 * Program DCFG.DevSpd or HCFG.FSLSPclkSel to 48Mhz in FS.
+>  	 * Also do this on HNP Dev/Host mode switches (done in dev_init
+>  	 * and host_init).
+>  	 */
+> -	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST)
+> +	if (readl(&regs->global_regs.gintsts) & DWC2_GINTSTS_CURMODE_HOST)
+>  		init_fslspclksel(regs);
+>  
+>  #ifdef DWC2_I2C_ENABLE
+>  	/* Program GUSBCFG.OtgUtmifsSel to I2C */
+> -	setbits_le32(&regs->gusbcfg, DWC2_GUSBCFG_OTGUTMIFSSEL);
+> +	setbits_le32(&regs->global_regs.gusbcfg, DWC2_GUSBCFG_OTGUTMIFSSEL);
+>  
+>  	/* Program GI2CCTL.I2CEn */
+> -	clrsetbits_le32(&regs->gi2cctl, DWC2_GI2CCTL_I2CEN |
+> +	clrsetbits_le32(&regs->global_regs.gi2cctl, DWC2_GI2CCTL_I2CEN |
+>  			DWC2_GI2CCTL_I2CDEVADDR_MASK,
+>  			1 << DWC2_GI2CCTL_I2CDEVADDR_OFFSET);
+> -	setbits_le32(&regs->gi2cctl, DWC2_GI2CCTL_I2CEN);
+> +	setbits_le32(&regs->global_regs.gi2cctl, DWC2_GI2CCTL_I2CEN);
+>  #endif
+>  
+>  #else
+> @@ -416,16 +417,16 @@ static void dwc_otg_core_init(struct udevice *dev)
+>  #endif
+>  	}
+>  
+> -	writel(usbcfg, &regs->gusbcfg);
+> +	writel(usbcfg, &regs->global_regs.gusbcfg);
+>  
+>  	/* Reset after setting the PHY parameters */
+>  	dwc_otg_core_reset(dev, regs);
+>  #endif
+>  
+> -	usbcfg = readl(&regs->gusbcfg);
+> +	usbcfg = readl(&regs->global_regs.gusbcfg);
+>  	usbcfg &= ~(DWC2_GUSBCFG_ULPI_FSLS | DWC2_GUSBCFG_ULPI_CLK_SUS_M);
+>  #ifdef DWC2_ULPI_FS_LS
+> -	uint32_t hwcfg2 = readl(&regs->ghwcfg2);
+> +	uint32_t hwcfg2 = readl(&regs->global_regs.ghwcfg2);
+>  	uint32_t hval = (ghwcfg2 & DWC2_HWCFG2_HS_PHY_TYPE_MASK) >>
+>  			DWC2_HWCFG2_HS_PHY_TYPE_OFFSET;
+>  	uint32_t fval = (ghwcfg2 & DWC2_HWCFG2_FS_PHY_TYPE_MASK) >>
+> @@ -438,10 +439,10 @@ static void dwc_otg_core_init(struct udevice *dev)
+>  	if (priv->hnp_srp_disable)
+>  		usbcfg |= DWC2_GUSBCFG_FORCEHOSTMODE;
+>  
+> -	writel(usbcfg, &regs->gusbcfg);
+> +	writel(usbcfg, &regs->global_regs.gusbcfg);
+>  
+>  	/* Program the GAHBCFG Register. */
+> -	switch (readl(&regs->ghwcfg2) & DWC2_HWCFG2_ARCHITECTURE_MASK) {
+> +	switch (readl(&regs->global_regs.ghwcfg2) & DWC2_HWCFG2_ARCHITECTURE_MASK) {
+>  	case DWC2_HWCFG2_ARCHITECTURE_SLAVE_ONLY:
+>  		break;
+>  	case DWC2_HWCFG2_ARCHITECTURE_EXT_DMA:
+> @@ -464,7 +465,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+>  		break;
+>  	}
+>  
+> -	writel(ahbcfg, &regs->gahbcfg);
+> +	writel(ahbcfg, &regs->global_regs.gahbcfg);
+>  
+>  	/* Program the capabilities in GUSBCFG Register */
+>  	usbcfg = 0;
+> @@ -475,7 +476,7 @@ static void dwc_otg_core_init(struct udevice *dev)
+>  	usbcfg |= DWC2_GUSBCFG_IC_USB_CAP;
+>  #endif
+>  
+> -	setbits_le32(&regs->gusbcfg, usbcfg);
+> +	setbits_le32(&regs->global_regs.gusbcfg, usbcfg);
+>  }
+>  
+>  /*
+> @@ -491,7 +492,7 @@ static void dwc_otg_hc_init(struct dwc2_core_regs *regs, uint8_t hc_num,
+>  		struct usb_device *dev, uint8_t dev_addr, uint8_t ep_num,
+>  		uint8_t ep_is_in, uint8_t ep_type, uint16_t max_packet)
+>  {
+> -	struct dwc2_hc_regs *hc_regs = &regs->hc_regs[hc_num];
+> +	struct dwc2_hc_regs *hc_regs = &regs->host_regs.hc[hc_num];
+>  	uint32_t hcchar = (dev_addr << DWC2_HCCHAR_DEVADDR_OFFSET) |
+>  			  (ep_num << DWC2_HCCHAR_EPNUM_OFFSET) |
+>  			  (ep_is_in << DWC2_HCCHAR_EPDIR_OFFSET) |
+> @@ -553,7 +554,7 @@ static int dwc_otg_submit_rh_msg_in_status(struct dwc2_core_regs *regs,
+>  		len = 4;
+>  		break;
+>  	case USB_RECIP_OTHER | USB_TYPE_CLASS:
+> -		hprt0 = readl(&regs->hprt0);
+> +		hprt0 = readl(&regs->host_regs.hprt0);
+>  		if (hprt0 & DWC2_HPRT0_PRTCONNSTS)
+>  			port_status |= USB_PORT_STAT_CONNECTION;
+>  		if (hprt0 & DWC2_HPRT0_PRTENA)
+> @@ -743,7 +744,8 @@ static int dwc_otg_submit_rh_msg_out(struct dwc2_priv *priv,
+>  	case (USB_REQ_CLEAR_FEATURE << 8) | USB_RECIP_OTHER | USB_TYPE_CLASS:
+>  		switch (wValue) {
+>  		case USB_PORT_FEAT_C_CONNECTION:
+> -			clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTCONNDET);
+> +			clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK,
+> +					DWC2_HPRT0_PRTCONNDET);
+>  			break;
+>  		}
+>  		break;
+> @@ -754,13 +756,16 @@ static int dwc_otg_submit_rh_msg_out(struct dwc2_priv *priv,
+>  			break;
+>  
+>  		case USB_PORT_FEAT_RESET:
+> -			clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
+> +			clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK,
+> +					DWC2_HPRT0_PRTRST);
+>  			mdelay(50);
+> -			clrbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK | DWC2_HPRT0_PRTRST);
+> +			clrbits_le32(&regs->host_regs.hprt0,
+> +				     DWC2_HPRT0_W1C_MASK | DWC2_HPRT0_PRTRST);
+>  			break;
+>  
+>  		case USB_PORT_FEAT_POWER:
+> -			clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
+> +			clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK,
+> +					DWC2_HPRT0_PRTRST);
+>  			break;
+>  
+>  		case USB_PORT_FEAT_ENABLE:
+> @@ -907,7 +912,7 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
+>  	      unsigned long pipe, u8 *pid, int in, void *buffer, int len)
+>  {
+>  	struct dwc2_core_regs *regs = priv->regs;
+> -	struct dwc2_hc_regs *hc_regs = &regs->hc_regs[DWC2_HC_CHANNEL];
+> +	struct dwc2_hc_regs *hc_regs = &regs->host_regs.hc[DWC2_HC_CHANNEL];
+>  	struct dwc2_host_regs *host_regs = &regs->host_regs;
+>  	int devnum = usb_pipedevice(pipe);
+>  	int ep = usb_pipeendpoint(pipe);
+> @@ -944,7 +949,8 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
+>  	if (dev->speed != USB_SPEED_HIGH) {
+>  		uint8_t hub_addr;
+>  		uint8_t hub_port;
+> -		uint32_t hprt0 = readl(&regs->hprt0);
+> +		uint32_t hprt0 = readl(&regs->host_regs.hprt0);
+> +
+>  		if ((hprt0 & DWC2_HPRT0_PRTSPD_MASK) ==
+>  		     DWC2_HPRT0_PRTSPD_HIGH) {
+>  			usb_find_usb2_hub_address_port(dev, &hub_addr,
+> @@ -1174,7 +1180,7 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+>  	if (ret)
+>  		return ret;
+>  
+> -	snpsid = readl(&regs->gsnpsid);
+> +	snpsid = readl(&regs->global_regs.gsnpsid);
+>  	dev_info(dev, "Core Release: %x.%03x\n",
+>  		 snpsid >> 12 & 0xf, snpsid & 0xfff);
+>  
+> @@ -1200,9 +1206,9 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+>  		dwc_otg_core_host_init(dev, regs);
+>  	}
+>  
+> -	clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
+> +	clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
+>  	mdelay(50);
+> -	clrbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK | DWC2_HPRT0_PRTRST);
+> +	clrbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK | DWC2_HPRT0_PRTRST);
+>  
+>  	for (i = 0; i < MAX_DEVICE; i++) {
+>  		for (j = 0; j < MAX_ENDPOINT; j++) {
+> @@ -1217,7 +1223,7 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+>  	 * is started (the bus is scanned) and  fixes the USB detection
+>  	 * problems with some problematic USB keys.
+>  	 */
+> -	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST)
+> +	if (readl(&regs->global_regs.gintsts) & DWC2_GINTSTS_CURMODE_HOST)
+>  		mdelay(1000);
+>  
+>  	printf("USB DWC2\n");
+> @@ -1228,7 +1234,7 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+>  static void dwc2_uninit_common(struct dwc2_core_regs *regs)
+>  {
+>  	/* Put everything in reset. */
+> -	clrsetbits_le32(&regs->hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
+> +	clrsetbits_le32(&regs->host_regs.hprt0, DWC2_HPRT0_W1C_MASK, DWC2_HPRT0_PRTRST);
+>  }
+>  
+>  #if !CONFIG_IS_ENABLED(DM_USB)
+> diff --git a/drivers/usb/host/dwc2.h b/drivers/usb/host/dwc2.h
+> index 6f022e33a19244d65a6b82e210948506c7bc1096..61b544462edfd6778ddf2ddf2dcf6db3f02a3754 100644
+> --- a/drivers/usb/host/dwc2.h
+> +++ b/drivers/usb/host/dwc2.h
+> @@ -6,64 +6,6 @@
+>  #ifndef __DWC2_H__
+>  #define __DWC2_H__
+>  
+> -struct dwc2_hc_regs {
+> -	u32			hcchar;		/* 0x00 */
+> -	u32			hcsplt;
+> -	u32			hcint;
+> -	u32			hcintmsk;
+> -	u32			hctsiz;		/* 0x10 */
+> -	u32			hcdma;
+> -	u32			reserved;
+> -	u32			hcdmab;
+> -};
+> -
+> -struct dwc2_host_regs {
+> -	u32			hcfg;		/* 0x00 */
+> -	u32			hfir;
+> -	u32			hfnum;
+> -	u32			_pad_0x40c;
+> -	u32			hptxsts;	/* 0x10 */
+> -	u32			haint;
+> -	u32			haintmsk;
+> -	u32			hflbaddr;
+> -};
+> -
+> -struct dwc2_core_regs {
+> -	u32			gotgctl;	/* 0x000 */
+> -	u32			gotgint;
+> -	u32			gahbcfg;
+> -	u32			gusbcfg;
+> -	u32			grstctl;	/* 0x010 */
+> -	u32			gintsts;
+> -	u32			gintmsk;
+> -	u32			grxstsr;
+> -	u32			grxstsp;	/* 0x020 */
+> -	u32			grxfsiz;
+> -	u32			gnptxfsiz;
+> -	u32			gnptxsts;
+> -	u32			gi2cctl;	/* 0x030 */
+> -	u32			gpvndctl;
+> -	u32			ggpio;
+> -	u32			guid;
+> -	u32			gsnpsid;	/* 0x040 */
+> -	u32			ghwcfg1;
+> -	u32			ghwcfg2;
+> -	u32			ghwcfg3;
+> -	u32			ghwcfg4;	/* 0x050 */
+> -	u32			glpmcfg;
+> -	u32			_pad_0x58_0x9c[42];
+> -	u32			hptxfsiz;	/* 0x100 */
+> -	u32			dptxfsiz_dieptxf[15];
+> -	u32			_pad_0x140_0x3fc[176];
+> -	struct dwc2_host_regs	host_regs;	/* 0x400 */
+> -	u32			_pad_0x420_0x43c[8];
+> -	u32			hprt0;		/* 0x440 */
+> -	u32			_pad_0x444_0x4fc[47];
+> -	struct dwc2_hc_regs	hc_regs[16];	/* 0x500 */
+> -	u32			_pad_0x700_0xe00[448];
+> -	u32			pcgcctl;	/* 0xe00 */
+> -};
+> -
+>  #define DWC2_GOTGCTL_SESREQSCS				(1 << 0)
+>  #define DWC2_GOTGCTL_SESREQSCS_OFFSET			0
+>  #define DWC2_GOTGCTL_SESREQ				(1 << 1)
+>
+> -- 
+> 2.47.1
