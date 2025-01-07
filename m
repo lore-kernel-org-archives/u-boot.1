@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54A6AC02181
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:31:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFDFE77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:33:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8138801E8;
-	Tue,  7 Jan 2025 14:31:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1323A801E8;
+	Tue,  7 Jan 2025 14:33:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y13ETZJy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dDmy5LBN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2814B8036D; Tue,  7 Jan 2025 14:31:39 +0100 (CET)
+ id 2BF5E8036B; Tue,  7 Jan 2025 14:33:39 +0100 (CET)
 Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
  [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBCDD8007D
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 14:31:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C8C098007D
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 14:33:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e5372a2fbddso23366847276.3
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 05:31:34 -0800 (PST)
+ 3f1490d57ef6-e537d9e3d75so22960163276.3
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 05:33:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736256693; x=1736861493; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1736256813; x=1736861613; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=V/QmBLKngk7+Ji/gtKgMZlaf1tshsaugNh5i0BjDrOw=;
- b=y13ETZJy9JA9HgfO3ajwvaVyIvC6AEiBUEvYniFrhiB/0YdSodlyIcLzVWGZBKb7DP
- QFcQTkYhzQdb7li6GFV1IW3oEUxwIFgZRDd5zKnrgLf1Lgq4K2usXze/uTkhN/ofba87
- d+DYwRVXFh4BqtRQStMt+A4hWHn0fwBpFCj+d9Zsc1bOQ+e5/PYSHLILimPy/FGfTAwY
- nuqtlotM5ANo38Y2dKoGCeZnBFIGtUQp6eGDImjivNocBeUWPAb0ZfCY1Z7Xyv4ZD0rW
- jxKCm2GdnsNTV59MfEYpD8eOsJhxDeoopzw3+QxMo1dfHG/2eHyPbrLwX1Bmd2GXLT6l
- ksdQ==
+ bh=GOoeR9KZN9jl1x7/BoIneIyZVTEfmd4U23MobDGP/C8=;
+ b=dDmy5LBNzqOcImbA5gs545zZHyzecBBNXJEKrWUmPD62GjrMH4wvmW3HBhzRrCqbNf
+ kUJSNb5+U9tsZ3T316EYfE1YFbXyTwF3gxkZkCs45h59fNJaB2vZWeuMRKcktMoeAszr
+ WYlCn+cHbkZZrGnszcP3pomJYWT86yNbqZSN+McskLd7Jk5zh3oQzKctZmrJEGnVwYBg
+ QENr3mHEo/Cr6kuvgbtkvSaLFl4g7VGPlKQA+C8f0upELlDe7GCu49BGkYQW6zzRHimG
+ sVKXyVOX/PfHD6WrFcPlhsl6ujKVhFV21Tf0FUwN/N7FI3aVo9UhohxEIdDZlg0/MLEJ
+ cq4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736256693; x=1736861493;
+ d=1e100.net; s=20230601; t=1736256813; x=1736861613;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=V/QmBLKngk7+Ji/gtKgMZlaf1tshsaugNh5i0BjDrOw=;
- b=L4A1K8wu8CwfavEpNRhPKIjFWOm9JP4BpdG2PJxoGY08NrMNmFJMNCrGXTG5GSErb+
- ScllJ/5urSRjZQqw16hJZUohGt8orOlpj3MlzUqcgpgeYTi21Em7BrZm5WGfcnoAYKyr
- 9d30SVxuyhHt6oM/7QPSxcC6qqi3x/KfTGkOL3MjB0cWDczorNWMnfghq76gCxSzNRfs
- l2TliIU2+es3JP6GKMjoEAcDMrEYCAnbIzsMLOf/WFRiOsUFVrTPXp3wRFI9+k12F6Nd
- Twt0uEbDme0DnK6F8RQcH9kLqJB5SgbGCDlSGpVuoECK0Vodr/oE5MXkCjSORj4i1LKu
- LWGw==
+ bh=GOoeR9KZN9jl1x7/BoIneIyZVTEfmd4U23MobDGP/C8=;
+ b=HJcETnbDgjGSqxwbx4pn9I73ZTMCTF6Wkl/taN0vnsYtlzoZV15pbqJf3UJ32eRD8V
+ 2SxX7NOOdqi1ORZg1etDb+K1DKxS1LsvMKZ3QjNqU/MYOq3UComYgTNjgK1D32VfMLig
+ 2HIcNKHmHIeXWV1cWBfkcHvTAJiC6NCxMIx1XHhumbUZaElvwE21zt5i/3SojdtRJ9to
+ rwtvuYbXd7Ydk2CxmBLQeNoLs449lZvR773k6OvWpNfaFea5PlqNg6GVM4rnse+hXDBA
+ AZy/JYIH80DJJzeeixrLB95WxVnHp3cbVYXyzYP+rTJfADWouwuMgMaJOhiavl2hU83R
+ qb6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWTHThQSv+RYQtP1Y4de8aH/rq38EMnK01i1+nBT9tmLID4bPApqB3freATcnHXEmTvfCbPpV0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yylt415fph6KGbkH/FXiAciVBuErqeNc67J5CCzd/9NhQXn/z4j
- Ud6iy24+U3L6fBL9ZAZ4fhmuVJsCqT6/zVFk0VJOWaBEqXWFNXxy/wc5qSvdDGP3MhbLiGAdkHt
- MSeAgCkPiTnH+NgtS9rpAy1/QiaBa03guadLqog==
-X-Gm-Gg: ASbGncuebjFIEMwfFe00I4A3IA6wJs1pFRqc+72Ni2Hbb9uo20jY8bTb9Yi+FRDu5Cc
- 7Ly50224iBdkXYFvel0AQBAUCV1Q9J3vK0gdFnA==
-X-Google-Smtp-Source: AGHT+IEL6Pmkc7EBgmn6mQ/f6oXNFxEVrDWFZuZKYm+Kz9OL+G/3kgC/xTCGtvLEnGHtTwq7aQTa45bYwrG3ucVeowg=
-X-Received: by 2002:a05:6902:2610:b0:e4a:fc25:30cb with SMTP id
- 3f1490d57ef6-e538c40c90amr43243573276.46.1736256693445; Tue, 07 Jan 2025
- 05:31:33 -0800 (PST)
+ AJvYcCW+QIl1Sa3TJ10Lkn3UTwRuQb+CQxzruW9HVNLYx+mgllAFaSvZaYiZ3zTLQd/ZYzSv9ZG41bA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRhiqj7eCFPJmRDv+yri3/4r3I0ganG6IT8hf/QMdseVw5vP9D
+ DklMEuKGLgzOG5HKwxogi4wBSQx9hIOg8jZp6ISevruX40IV9LtYr/nsAhvrjs80uknPNTR1Dww
+ YAgPyTcHZiHbWpYrnv2UM63HkUG2JP5vW90zA2ok57yPM+C6uiQI=
+X-Gm-Gg: ASbGnctVRlwvkQjVorF5fWiMESpnZe+5kzMFmb2ehTUb/bR2Aj/j2zKsEWRRcPLLGJ2
+ /TUihRgToVqUbFLLonFANGgnlkUiy9Erm+jd2ug==
+X-Google-Smtp-Source: AGHT+IFWkitMYx6/Db00D9DCLviE1DKTgRNr37wFt6guEb1M+kvp44nVAWjtf1nQA93PZ0ek38oDohEPptbDngurnRs=
+X-Received: by 2002:a25:1845:0:b0:e4c:bd70:8550 with SMTP id
+ 3f1490d57ef6-e538c4284c6mr33538024276.45.1736256813651; Tue, 07 Jan 2025
+ 05:33:33 -0800 (PST)
 MIME-Version: 1.0
 References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
- <20250102181133.378867-4-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250102181133.378867-4-heinrich.schuchardt@canonical.com>
+ <20250102181133.378867-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250102181133.378867-5-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 7 Jan 2025 15:30:57 +0200
-X-Gm-Features: AbW1kvYGHIkFnE4nYB9_Hkp6U7TJQuRNB5eF_xQ34Vnb5oHE7l852QRoQIb2oeI
-Message-ID: <CAC_iWjJhQQrNPyFDTAdo14X+x_CWer05+WVWu71xu_vxUb1iTw@mail.gmail.com>
-Subject: Re: [PATCH 3/4] efi_loader: install DXE services table
+Date: Tue, 7 Jan 2025 15:32:57 +0200
+X-Gm-Features: AbW1kvYOTRxN1g19jFmaEwib9VdXSbMPHUgRelPgE9WkpLSsn3tlJ8NQ3cuNUzQ
+Message-ID: <CAC_iWjLykW-kgo65mCGfnwBEmYGbGa6mq52yxfCZHC1Rep1FQg@mail.gmail.com>
+Subject: Re: [PATCH 4/4] efi_loader: print image load address in StartImage
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
  u-boot@lists.denx.de
@@ -95,336 +95,51 @@ X-Virus-Status: Clean
 On Thu, 2 Jan 2025 at 20:11, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> The debug version of the UEFI shell requires a DXE services table to exist.
->
-> Implement the table and let all DXE functions return EFI_UNSUPPORTED.
+> When starting image add the image load address to the debug output.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  include/efi_dxe.h          |  54 ++++++++++++
->  include/efi_loader.h       |   7 ++
->  lib/efi_loader/Kconfig     |   7 ++
->  lib/efi_loader/Makefile    |   1 +
->  lib/efi_loader/efi_dxe.c   | 176 +++++++++++++++++++++++++++++++++++++
->  lib/efi_loader/efi_setup.c |   6 ++
->  6 files changed, 251 insertions(+)
->  create mode 100644 include/efi_dxe.h
->  create mode 100644 lib/efi_loader/efi_dxe.c
+>  lib/efi_loader/efi_boottime.c | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
 >
-> diff --git a/include/efi_dxe.h b/include/efi_dxe.h
-> new file mode 100644
-> index 00000000000..5623189de0c
-> --- /dev/null
-> +++ b/include/efi_dxe.h
-> @@ -0,0 +1,54 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + *  DXE services table
-> + *
-> + *  Copyright (c) 2025 Heinrich Schuchardt
-> + */
-> +
-> +#ifndef _EFI_DXE_H
-> +#define _EFI_DXE_H 1
-> +
-> +#include <efi.h>
-> +
-> +/**
-> + * define DXE_SERVICES_SIGNATURE - DXE services signature ('DXE_SERV')
-> + */
-> +#define DXE_SERVICES_SIGNATURE 0x565245535f455844
-> +/**
-> + * define DXE_SERVICES_REVISION - DXE services revision (1.8)
-> + */
-> +#define DXE_SERVICES_REVISION 0x00010050
-> +
-> +/**
-> + * define EFI_DXE_SERVICES_TABLE_GUID - GUID of the EFI DXE services table
-> + */
-> +#define EFI_DXE_SERVICES_TABLE_GUID \
-> +       EFI_GUID(0x5ad34ba, 0x6f02, 0x4214, \
-> +                0x95, 0x2e, 0x4d, 0xa0, 0x39, 0x8e, 0x2b, 0xb9)
-> +
-> +struct efi_dxe_services {
-> +       struct efi_table_hdr hdr;
-> +
-> +       efi_status_t (EFIAPI *add_memory_space)(void);
-> +       efi_status_t (EFIAPI *allocate_memory_space)(void);
-> +       efi_status_t (EFIAPI *free_memory_space)(void);
-> +       efi_status_t (EFIAPI *remove_memory_space)(void);
-> +       efi_status_t (EFIAPI *get_memory_space_descriptor)(void);
-> +       efi_status_t (EFIAPI *set_memory_space_attributes)(void);
-> +       efi_status_t (EFIAPI *get_memory_space_map)(void);
-> +       efi_status_t (EFIAPI *add_io_space)(void);
-> +       efi_status_t (EFIAPI *allocate_io_space)(void);
-> +       efi_status_t (EFIAPI *free_io_space)(void);
-> +       efi_status_t (EFIAPI *remove_io_space)(void);
-> +       efi_status_t (EFIAPI *get_io_space_descriptor)(void);
-> +       efi_status_t (EFIAPI *get_io_space_map)(void);
-> +       efi_status_t (EFIAPI *dispatch)(void);
-> +       efi_status_t (EFIAPI *schedule)(void);
-> +       efi_status_t (EFIAPI *trust)(void);
-> +       efi_status_t (EFIAPI *process_firmware_volume)(void);
-> +       efi_status_t (EFIAPI *set_memory_space_capabilities)(void);
-> +};
-> +
-> +extern efi_guid_t efi_dxe_services_table_guid;
-> +
-> +#endif /* _EFI_DXE_H */
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index c1258098217..d474866184f 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -663,6 +663,13 @@ efi_status_t efi_smbios_register(void);
->   */
->  efi_status_t efi_hob_list_register(void);
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> index 080e7f78ae3..bc0cbd96e74 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -3194,7 +3194,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
+>         struct efi_loaded_image_obj *image_obj =
+>                 (struct efi_loaded_image_obj *)image_handle;
+>         efi_status_t ret;
+> -       void *info;
+> +       struct efi_loaded_image *info;
+>         efi_handle_t parent_image = current_image;
+>         efi_status_t exit_status;
+>         struct jmp_buf_data exit_jmp;
+> @@ -3212,7 +3212,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
+>                 return EFI_EXIT(EFI_SECURITY_VIOLATION);
 >
-> +/**
-> + * efi_dxe_services_register() - install DXE services table
-> + *
-> + * Return:     status code
-> + */
-> +efi_status_t efi_dxe_services_register(void);
-> +
->  struct efi_simple_file_system_protocol *
->  efi_fs_from_path(struct efi_device_path *fp);
->
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index ec38a0ea352..ed3470508ff 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -384,6 +384,13 @@ config EFI_DT_FIXUP
->           The EFI device-tree fix-up protocol provides a function to let the
->           firmware apply fix-ups. This may be used by boot loaders.
->
-> +config EFI_DXE
-> +       bool 'DXE services table'
-> +       default y
-> +       help
-> +         Install the DXE services table. The debug version of the UEFI shell
-> +         requires it.
-> +
->  config EFI_LOADER_HII
->         bool "HII protocols"
->         default y
-> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> index 195ed8667fe..4f250f21811 100644
-> --- a/lib/efi_loader/Makefile
-> +++ b/lib/efi_loader/Makefile
-> @@ -33,6 +33,7 @@ obj-y += efi_console.o
->  obj-y += efi_device_path.o
->  obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_device_path_to_text.o
->  obj-$(CONFIG_EFI_DEVICE_PATH_UTIL) += efi_device_path_utilities.o
-> +obj-$(CONFIG_EFI_DXE) += efi_dxe.o
->  obj-y += efi_dt_fixup.o
->  obj-y += efi_fdt.o
->  obj-y += efi_file.o
-> diff --git a/lib/efi_loader/efi_dxe.c b/lib/efi_loader/efi_dxe.c
-> new file mode 100644
-> index 00000000000..f8920575b0c
-> --- /dev/null
-> +++ b/lib/efi_loader/efi_dxe.c
-> @@ -0,0 +1,176 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + *  DXE services table
-> + *
-> + *  Copyright (c) 2025 Heinrich Schuchardt
-> + */
-> +
-> +#include <efi_dxe.h>
-> +#include <efi_loader.h>
-> +
-> +efi_guid_t efi_dxe_services_table_guid = EFI_DXE_SERVICES_TABLE_GUID;
-> +
-> +static efi_status_t EFIAPI add_memory_space(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI allocate_memory_space(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI free_memory_space(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI remove_memory_space(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI get_memory_space_descriptor(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI set_memory_space_attributes(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI get_memory_space_map(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI add_io_space(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI allocate_io_space(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI free_io_space(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI remove_io_space(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI get_io_space_descriptor(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI get_io_space_map(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI dispatch(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI schedule(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI trust(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI process_firmware_volume(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static efi_status_t EFIAPI set_memory_space_capabilities(void)
-> +{
-> +       EFI_ENTRY();
-> +
-> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> +}
-> +
-> +static struct efi_dxe_services efi_dxe_services = {
-> +       .hdr = {
-> +               .signature = DXE_SERVICES_SIGNATURE,
-> +               .revision = DXE_SERVICES_REVISION,
-> +               .headersize = sizeof(struct efi_dxe_services),
-> +       },
-> +       .add_memory_space = add_memory_space,
-> +       .allocate_memory_space = allocate_memory_space,
-> +       .free_memory_space = free_memory_space,
-> +       .remove_memory_space = remove_memory_space,
-> +       .get_memory_space_descriptor = get_memory_space_descriptor,
-> +       .set_memory_space_attributes = set_memory_space_attributes,
-> +       .get_memory_space_map = get_memory_space_map,
-> +       .add_io_space = add_io_space,
-> +       .allocate_io_space = allocate_io_space,
-> +       .free_io_space = free_io_space,
-> +       .remove_io_space = remove_io_space,
-> +       .get_io_space_descriptor = get_io_space_descriptor,
-> +       .get_io_space_map = get_io_space_map,
-> +       .dispatch = dispatch,
-> +       .schedule = schedule,
-> +       .trust = trust,
-> +       .process_firmware_volume = process_firmware_volume,
-> +       .set_memory_space_capabilities = set_memory_space_capabilities,
+>         ret = EFI_CALL(efi_open_protocol(image_handle, &efi_guid_loaded_image,
+> -                                        &info, NULL, NULL,
+> +                                        (void **)&info, NULL, NULL,
 
-Do we plan on ever implementing those? If not we could use a single
-function returning EFI_UNSUPPORTED instead of all of them for code
-size reasons
+We don't really need the cast here
 
-Cheers
-/Ilias
-> +};
-> +
-> +efi_status_t efi_dxe_services_register(void)
-> +{
-> +       struct efi_dxe_services *dxe;
-> +
-> +       dxe = efi_alloc(sizeof(struct efi_dxe_services));
-> +       if (!dxe)
-> +               return EFI_OUT_OF_RESOURCES;
-> +
-> +       memcpy(dxe, &efi_dxe_services, sizeof(struct efi_dxe_services));
-> +
-> +       return efi_install_configuration_table(&efi_dxe_services_table_guid, dxe);
-> +}
-> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> index 393b690c3ee..796da5d5678 100644
-> --- a/lib/efi_loader/efi_setup.c
-> +++ b/lib/efi_loader/efi_setup.c
-> @@ -260,6 +260,12 @@ efi_status_t efi_init_obj_list(void)
+>                                          EFI_OPEN_PROTOCOL_GET_PROTOCOL));
 >         if (ret != EFI_SUCCESS)
->                 goto out;
+>                 return EFI_EXIT(EFI_INVALID_PARAMETER);
+> @@ -3266,7 +3266,8 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
 >
-> +       if (IS_ENABLED(CONFIG_EFI_DXE)) {
-> +               ret = efi_dxe_services_register();
-> +               if (ret != EFI_SUCCESS)
-> +                       goto out;
-> +       }
-> +
->         if (IS_ENABLED(CONFIG_EFI_ECPT)) {
->                 ret = efi_ecpt_register();
->                 if (ret != EFI_SUCCESS)
+>         current_image = image_handle;
+>         image_obj->header.type = EFI_OBJECT_TYPE_STARTED_IMAGE;
+> -       EFI_PRINT("Jumping into 0x%p\n", image_obj->entry);
+> +       EFI_PRINT("Starting image loaded at 0x%p, entry point 0x%p\n",
+> +                 info->image_base, image_obj->entry);
+>         ret = EFI_CALL(image_obj->entry(image_handle, &systab));
+>
+>         /*
 > --
 > 2.47.1
 >
+
+With or without the cast removed
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
