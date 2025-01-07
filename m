@@ -4,73 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73F9EE77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:58:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7041E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:59:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC022801E8;
-	Tue,  7 Jan 2025 14:58:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 517A280609;
+	Tue,  7 Jan 2025 14:59:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gbeAeWAc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NpQj2YGC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C18F805D5; Tue,  7 Jan 2025 14:58:21 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7FF78007D
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 14:58:16 +0100 (CET)
+ id 7547680608; Tue,  7 Jan 2025 14:59:07 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 40FDC8007D
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 14:58:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-216281bc30fso8588275ad.0
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 05:58:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736258295; x=1736863095; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jtA/arabJOhxQ0QFhQwHZj1MtZ+fF6hFSCsa/Gv+eQ8=;
- b=gbeAeWAci0QihKPP/EO4EoBQL74LKX43yzthoay9pZbPkYkZKYyUmFgj6rr9n06TeO
- oyBE0quC8RXsGWJucGNv8AoIjixIf7qA03LW3xV+XR9EwQ6e7y7VRXSIpJrdqXIRM00e
- GlMTZ8XocAbwc+VnxGpafRfWsoBZXVEe/w4Ww=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736258295; x=1736863095;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jtA/arabJOhxQ0QFhQwHZj1MtZ+fF6hFSCsa/Gv+eQ8=;
- b=dHmiTIiRdSK8nXtzjevIJXyraxOXU6UmkzuZrNSi3wNjwFUdiuWxzN8rccQlbXRd0h
- Cj+K6hV5SlbwOST6eS/3tVr77CMQX/J4ZB0NhJ+NXMKE8bJ5pxMiohBEH1ZhPTTuVdJe
- pZ0rdmXvCBY23B3AoF2otVogx6iVFF9exxNeNu9u4XZiCT7d9a/093J1Gx9xsU66WAXm
- aDxIfix634Rf/g0VILaI7Y2uv/sXPbxjPc2Q+K2cXD7/ROMi55YM0RebWfrY4ZBspUE0
- Kw6IKGlyjdIJLCpjCp5vn5Jn7/bFlPTXK5TAbbttJRqaStRTK7xeH811cIT8niWsVi0F
- 8HqA==
-X-Gm-Message-State: AOJu0YwXQbAgWVBeLbqEOJZbH2oyEP/Q1WRN3HCvTpu3YX3eu3l6X9G8
- azgaPjlmOY0hjq0JepA8DudNLCdpM5o8O2PSmOH+UBdGmpk2la1FYcFVovl3EaMjGZ8SQRMfbRg
- F70jMwn49ZilN0TvymhRlxk7teJ9WEdsbUdAz
-X-Gm-Gg: ASbGncvKp7lgDskkgE984K2AdOJBxX8dtfsVQXDKTcJOmz7q336bqXmXIt7HS4MvJEC
- z7m/97wFZSaZRao0U4DHDVYGal2dbst3rrSOBt70=
-X-Google-Smtp-Source: AGHT+IEzDEG13/n+4Dq9G8ix0n0Sb9/qQ4L2Qf/vxxFdYvb5/gOvoIdm6qWKOyk7vbc0XpHT8J4CP9I6Q89ioN6EBPM=
-X-Received: by 2002:a05:6a00:8087:b0:725:ef4d:c1bd with SMTP id
- d2e1a72fcca58-72abde84667mr91967346b3a.19.1736258295398; Tue, 07 Jan 2025
- 05:58:15 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 507Dwcqv2579440
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 7 Jan 2025 07:58:38 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1736258319;
+ bh=D3OFKK7+H4dViPO9yqzNJoYwlj4FKpjdbqd7XY91900=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=NpQj2YGCxlJqjdrzP84qfOOVX/W5YVsj3ZoRXyDZFR1Voa/tiDUNjmLUag4TdqFVq
+ DrsimbDBTDL1nvkl8yZM+PW5ED8WlFgejAJNZhsXSHEicSaOr+exlDJoZepozPueku
+ w0ad1cOVI3kLUICMIDsLo633SeKVouM+762RgHsE=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 507Dwc2W051813
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 7 Jan 2025 07:58:38 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
+ Jan 2025 07:58:37 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 7 Jan 2025 07:58:37 -0600
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 507DwbH2053133;
+ Tue, 7 Jan 2025 07:58:37 -0600
+Date: Tue, 7 Jan 2025 07:58:37 -0600
+From: Bryan Brattlof <bb@ti.com>
+To: Chintan Vankar <c-vankar@ti.com>
+CC: AKASHI Takahiro <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
+ <mikhail.kshevetskiy@iopsys.eu>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Nishanth Menon <nm@ti.com>, Roger Quadros
+ <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, Jonathan Humphreys
+ <j-humphreys@ti.com>, Andreas Dannenberg <dannenberg@ti.com>, Simon Glass
+ <sjg@chromium.org>, Jayesh Choudhary <j-choudhary@ti.com>, Aniket Limaye
+ <a-limaye@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, "Vignesh
+ Raghavendra" <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Tom
+ Rini <trini@konsulko.com>,
+ <srk@ti.com>, <s-vadapalli@ti.com>, <danishanwar@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH 08/13] arm: mach-k3: am62p: Update SoC auto-gen data to
+ enable CPSW boot
+Message-ID: <20250107135837.vjjgcagi4yzwodyh@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250107093840.2211381-1-c-vankar@ti.com>
+ <20250107093840.2211381-9-c-vankar@ti.com>
 MIME-Version: 1.0
-References: <20250106144755.3054780-1-sjg@chromium.org>
- <20250106144755.3054780-3-sjg@chromium.org>
- <CAC_iWjLrSEpHgTGK3WhHTGQ-SF5Zg6o_h14x++ot8FD+JAm3RA@mail.gmail.com>
-In-Reply-To: <CAC_iWjLrSEpHgTGK3WhHTGQ-SF5Zg6o_h14x++ot8FD+JAm3RA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Jan 2025 06:57:58 -0700
-X-Gm-Features: AbW1kvav79uG6CSPLZMifvRw9ee66Mm8GEHH-VDyqp2JegtX3vgvFVAsQ87m77k
-Message-ID: <CAFLszTjaeMimD_0HczGXxJUhjDjP+-TjT6RdfW5XOzBFhg+hkQ@mail.gmail.com>
-Subject: Re: [PATCH 2/8] efi_loader: Fix display of addresses in log
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20250107093840.2211381-9-c-vankar@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,56 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+On January  7, 2025 thus sayeth Chintan Vankar:
+> From: Andreas Dannenberg <dannenberg@ti.com>
+> 
+> This data was generated using the ksswtool-autogen project with the
+> followig commit:
+> 
+> cd9dfa5 ("soc: am62px: Add cpsw_3guss_am67_main_0 id to the dev list")
+> 
 
-On Tue, 7 Jan 2025 at 06:37, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Mon, 6 Jan 2025 at 16:48, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > The allocate/free-pages functions return an address, so there is no need
-> > to convert it. Fix this.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Fixes: c824a96d76d ("efi_loader: Use the log with memory-related...")
->
-> I can't find that commit in -master. Is there anything I am missing?
+Unfortunately because these scripts are so closely tied to our HW 
+designs tools they will never be seen by anyone outside of TI. We should 
+probably update this commit message for Andreas.
 
-Sort-of. You, Tom and Heinrich NAKed this series. See [1]
+Or find a way to publish these scripts ;)
 
-> >  lib/efi_loader/efi_log.c | 5 ++---
-> >  1 file changed, 2 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_log.c b/lib/efi_loader/efi_log.c
-> > index 4b9c6727fe7..ad490bb431c 100644
-> > --- a/lib/efi_loader/efi_log.c
-> > +++ b/lib/efi_loader/efi_log.c
-> > @@ -340,8 +340,7 @@ void show_rec(int seq, struct efil_rec_hdr *rec_hdr)
-> >                 show_ulong("pgs", (ulong)rec->pages);
-> >                 show_addr("mem", (ulong)rec->memory);
-> >                 if (rec_hdr->ended) {
-> > -                       show_addr("*mem",
-> > -                                 (ulong)map_to_sysmem((void *)rec->e_memory));
-> > +                       show_addr("*mem", rec->e_memory);
-> >                         show_ret(rec_hdr->e_ret);
-> >                 }
-> >                 break;
-> > @@ -349,7 +348,7 @@ void show_rec(int seq, struct efil_rec_hdr *rec_hdr)
-> >         case EFILT_FREE_PAGES: {
-> >                 struct efil_free_pages *rec = start;
-> >
-> > -               show_addr("mem", map_to_sysmem((void *)rec->memory));
-> > +               show_addr("mem", rec->memory);
-> >                 show_ulong("pag", (ulong)rec->pages);
-> >                 if (rec_hdr->ended)
-> >                         show_ret(rec_hdr->e_ret);
-> > --
-> > 2.34.1
-> >
+~Bryan
 
-Regards,
-Simon
+> Signed-off-by: Andreas Dannenberg <dannenberg@ti.com>
+> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 
-[1] https://lore.kernel.org/u-boot/CAC_iWjKtaN54B98OKbkoXkC_GmKJ=x+M4=UY_O6roSOpZaDxag@mail.gmail.com/
+~Bryan
