@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFDFE77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:33:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE3DE77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:37:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1323A801E8;
-	Tue,  7 Jan 2025 14:33:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF196801E8;
+	Tue,  7 Jan 2025 14:37:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dDmy5LBN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f8zsNXST";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BF5E8036B; Tue,  7 Jan 2025 14:33:39 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 972438036B; Tue,  7 Jan 2025 14:37:47 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8C098007D
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 14:33:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42D248007D
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 14:37:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e537d9e3d75so22960163276.3
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 05:33:34 -0800 (PST)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e46c6547266so19757421276.3
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 05:37:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736256813; x=1736861613; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1736257062; x=1736861862; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GOoeR9KZN9jl1x7/BoIneIyZVTEfmd4U23MobDGP/C8=;
- b=dDmy5LBNzqOcImbA5gs545zZHyzecBBNXJEKrWUmPD62GjrMH4wvmW3HBhzRrCqbNf
- kUJSNb5+U9tsZ3T316EYfE1YFbXyTwF3gxkZkCs45h59fNJaB2vZWeuMRKcktMoeAszr
- WYlCn+cHbkZZrGnszcP3pomJYWT86yNbqZSN+McskLd7Jk5zh3oQzKctZmrJEGnVwYBg
- QENr3mHEo/Cr6kuvgbtkvSaLFl4g7VGPlKQA+C8f0upELlDe7GCu49BGkYQW6zzRHimG
- sVKXyVOX/PfHD6WrFcPlhsl6ujKVhFV21Tf0FUwN/N7FI3aVo9UhohxEIdDZlg0/MLEJ
- cq4Q==
+ bh=4P5dnOBiesAtWPq9HSPJoMSbo5ROEaZpVCkk67BgYaw=;
+ b=f8zsNXST7GbbeX2bQiGhIibdeqxk/p/A9aO9KW5x0uTk4bFrpkVFmLyqJrRTLRy70j
+ hkDTKhyQGmx55zQjh2Jl09okxJQnH6KxUOKUxd+aY+CHi0TIPIE3yQcuo77hgeK9Vy94
+ iZTBOpS6PXNWu46pI6D9aVT3DQJIJ7B7SNwexGqv+8Qm4hDlghPIJ+d/zBzDvyt12FMz
+ UFKOmZpheVaUAsoz/Gcie+qBE54eTKeSDS8b0ocb9Q5lACs2/0mrPREuRVZjOdNPr5N0
+ USZE2TKEH0l92sEBuTbAys4KaVWZODfjLK86TseP3ujCLLsBPoYT6jZEWOd9xJm2ugCt
+ leJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736256813; x=1736861613;
+ d=1e100.net; s=20230601; t=1736257062; x=1736861862;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GOoeR9KZN9jl1x7/BoIneIyZVTEfmd4U23MobDGP/C8=;
- b=HJcETnbDgjGSqxwbx4pn9I73ZTMCTF6Wkl/taN0vnsYtlzoZV15pbqJf3UJ32eRD8V
- 2SxX7NOOdqi1ORZg1etDb+K1DKxS1LsvMKZ3QjNqU/MYOq3UComYgTNjgK1D32VfMLig
- 2HIcNKHmHIeXWV1cWBfkcHvTAJiC6NCxMIx1XHhumbUZaElvwE21zt5i/3SojdtRJ9to
- rwtvuYbXd7Ydk2CxmBLQeNoLs449lZvR773k6OvWpNfaFea5PlqNg6GVM4rnse+hXDBA
- AZy/JYIH80DJJzeeixrLB95WxVnHp3cbVYXyzYP+rTJfADWouwuMgMaJOhiavl2hU83R
- qb6w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW+QIl1Sa3TJ10Lkn3UTwRuQb+CQxzruW9HVNLYx+mgllAFaSvZaYiZ3zTLQd/ZYzSv9ZG41bA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRhiqj7eCFPJmRDv+yri3/4r3I0ganG6IT8hf/QMdseVw5vP9D
- DklMEuKGLgzOG5HKwxogi4wBSQx9hIOg8jZp6ISevruX40IV9LtYr/nsAhvrjs80uknPNTR1Dww
- YAgPyTcHZiHbWpYrnv2UM63HkUG2JP5vW90zA2ok57yPM+C6uiQI=
-X-Gm-Gg: ASbGnctVRlwvkQjVorF5fWiMESpnZe+5kzMFmb2ehTUb/bR2Aj/j2zKsEWRRcPLLGJ2
- /TUihRgToVqUbFLLonFANGgnlkUiy9Erm+jd2ug==
-X-Google-Smtp-Source: AGHT+IFWkitMYx6/Db00D9DCLviE1DKTgRNr37wFt6guEb1M+kvp44nVAWjtf1nQA93PZ0ek38oDohEPptbDngurnRs=
-X-Received: by 2002:a25:1845:0:b0:e4c:bd70:8550 with SMTP id
- 3f1490d57ef6-e538c4284c6mr33538024276.45.1736256813651; Tue, 07 Jan 2025
- 05:33:33 -0800 (PST)
+ bh=4P5dnOBiesAtWPq9HSPJoMSbo5ROEaZpVCkk67BgYaw=;
+ b=BlnMKZXf61N7Sy6Gn5iEdW5v46NYA4Jyz/3XdMVrEyBepWpXlqq2N5ypAVHKp5SbLH
+ 5kkIC1qq8fNY3RAIfUPbe1TcWoqnhPZIoC25Dc+ZY9w61fBC6wF2KfMwp0NtqNE14aWm
+ enbZ5WgQpywafNLOzAWKBaD3swbxarFbTbgHJN+h2dp4HHHDP+ukSBe6aSigBS00pq0i
+ 05PwwrHETrJQ21WBDeRWSn1sUX5QWldUEsCls+yKNxD3m10EPkd/W8l+0IK5WY6vGlhD
+ pdR9Zq79TJnAh1GTTFjBzJ6EM1T9/SWb19imJyowAqxHo4aEVkZ+hxriqAPiDzRyVsEW
+ Zemg==
+X-Gm-Message-State: AOJu0YwPt5EUO8m1EhP6Q0VVtJPQ8oAwKDIov1eddJ8W3Ze6VlfNLJFk
+ PKEvsuWZE15LzfrQVaHDSK8O/2jitK7YCl4POcieKAbNoXeTO3rFUWhbjePbx2zumwSMsflb60A
+ z49fGuCNce9tQ2djMjxVvcmrzmkPBx8L52+jI8Q==
+X-Gm-Gg: ASbGncuBNtPoV1SSz8ADGn7FLqflsHoUGqLnF7w/IZ7IvTRlVSnLQD2q+GFul4y0ix9
+ ifOeJczslEy8THKqxNO2FC0MkRJJxY7wdUUxYMQ==
+X-Google-Smtp-Source: AGHT+IHsO1HE9wJA3mABxbfIKqP0D0iNkjCJN1hyESN83RmVG/bW5aV4oMchyJT8+DH6acHC+4vT1fdhsW2Qt23unUg=
+X-Received: by 2002:a05:6902:703:b0:e4c:ae89:1603 with SMTP id
+ 3f1490d57ef6-e538c3a31f7mr45839854276.41.1736257062067; Tue, 07 Jan 2025
+ 05:37:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
- <20250102181133.378867-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250102181133.378867-5-heinrich.schuchardt@canonical.com>
+References: <20250106144755.3054780-1-sjg@chromium.org>
+ <20250106144755.3054780-3-sjg@chromium.org>
+In-Reply-To: <20250106144755.3054780-3-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 7 Jan 2025 15:32:57 +0200
-X-Gm-Features: AbW1kvYOTRxN1g19jFmaEwib9VdXSbMPHUgRelPgE9WkpLSsn3tlJ8NQ3cuNUzQ
-Message-ID: <CAC_iWjLykW-kgo65mCGfnwBEmYGbGa6mq52yxfCZHC1Rep1FQg@mail.gmail.com>
-Subject: Re: [PATCH 4/4] efi_loader: print image load address in StartImage
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- u-boot@lists.denx.de
+Date: Tue, 7 Jan 2025 15:37:05 +0200
+X-Gm-Features: AbW1kvY2NgSZDkUSbL_tuSMEGdtydn2A9N5SRF7O8SJMQIPpeNUBCC__uSKL88U
+Message-ID: <CAC_iWjLrSEpHgTGK3WhHTGQ-SF5Zg6o_h14x++ot8FD+JAm3RA@mail.gmail.com>
+Subject: Re: [PATCH 2/8] efi_loader: Fix display of addresses in log
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,54 +90,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2 Jan 2025 at 20:11, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+Hi Simon,
+
+On Mon, 6 Jan 2025 at 16:48, Simon Glass <sjg@chromium.org> wrote:
 >
-> When starting image add the image load address to the debug output.
+> The allocate/free-pages functions return an address, so there is no need
+> to convert it. Fix this.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: c824a96d76d ("efi_loader: Use the log with memory-related...")
+
+I can't find that commit in -master. Is there anything I am missing?
+
+Thanks
+/Ilias
 > ---
->  lib/efi_loader/efi_boottime.c | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
 >
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> index 080e7f78ae3..bc0cbd96e74 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -3194,7 +3194,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
->         struct efi_loaded_image_obj *image_obj =
->                 (struct efi_loaded_image_obj *)image_handle;
->         efi_status_t ret;
-> -       void *info;
-> +       struct efi_loaded_image *info;
->         efi_handle_t parent_image = current_image;
->         efi_status_t exit_status;
->         struct jmp_buf_data exit_jmp;
-> @@ -3212,7 +3212,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
->                 return EFI_EXIT(EFI_SECURITY_VIOLATION);
+>  lib/efi_loader/efi_log.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 >
->         ret = EFI_CALL(efi_open_protocol(image_handle, &efi_guid_loaded_image,
-> -                                        &info, NULL, NULL,
-> +                                        (void **)&info, NULL, NULL,
-
-We don't really need the cast here
-
->                                          EFI_OPEN_PROTOCOL_GET_PROTOCOL));
->         if (ret != EFI_SUCCESS)
->                 return EFI_EXIT(EFI_INVALID_PARAMETER);
-> @@ -3266,7 +3266,8 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
+> diff --git a/lib/efi_loader/efi_log.c b/lib/efi_loader/efi_log.c
+> index 4b9c6727fe7..ad490bb431c 100644
+> --- a/lib/efi_loader/efi_log.c
+> +++ b/lib/efi_loader/efi_log.c
+> @@ -340,8 +340,7 @@ void show_rec(int seq, struct efil_rec_hdr *rec_hdr)
+>                 show_ulong("pgs", (ulong)rec->pages);
+>                 show_addr("mem", (ulong)rec->memory);
+>                 if (rec_hdr->ended) {
+> -                       show_addr("*mem",
+> -                                 (ulong)map_to_sysmem((void *)rec->e_memory));
+> +                       show_addr("*mem", rec->e_memory);
+>                         show_ret(rec_hdr->e_ret);
+>                 }
+>                 break;
+> @@ -349,7 +348,7 @@ void show_rec(int seq, struct efil_rec_hdr *rec_hdr)
+>         case EFILT_FREE_PAGES: {
+>                 struct efil_free_pages *rec = start;
 >
->         current_image = image_handle;
->         image_obj->header.type = EFI_OBJECT_TYPE_STARTED_IMAGE;
-> -       EFI_PRINT("Jumping into 0x%p\n", image_obj->entry);
-> +       EFI_PRINT("Starting image loaded at 0x%p, entry point 0x%p\n",
-> +                 info->image_base, image_obj->entry);
->         ret = EFI_CALL(image_obj->entry(image_handle, &systab));
->
->         /*
+> -               show_addr("mem", map_to_sysmem((void *)rec->memory));
+> +               show_addr("mem", rec->memory);
+>                 show_ulong("pag", (ulong)rec->pages);
+>                 if (rec_hdr->ended)
+>                         show_ret(rec_hdr->e_ret);
 > --
-> 2.47.1
+> 2.34.1
 >
-
-With or without the cast removed
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
