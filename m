@@ -4,53 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35D36E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 09:39:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD439E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 09:39:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ED38805E9;
-	Tue,  7 Jan 2025 10:39:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 41AD38061B;
+	Tue,  7 Jan 2025 10:39:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Wks8kBRL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="L7XhHsn9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DDF9805E9; Tue,  7 Jan 2025 10:39:04 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA299805E9
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 10:39:00 +0100 (CET)
+ id A7B37805F5; Tue,  7 Jan 2025 10:39:06 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6283A80607
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 10:39:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5079ckLR2836257
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 7 Jan 2025 03:38:46 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5079cmOx003675;
+ Tue, 7 Jan 2025 03:38:48 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736242727;
- bh=1k0nM4bK53Ctbx6jNZTceCU/xQ7lHRfBnZ56rb63LXE=;
+ s=ti-com-17Q1; t=1736242728;
+ bh=+TBHskjTGFzsFo6b/mXVVrL7eOmO+ajiKHDPYonNH+A=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Wks8kBRLxVW/bnMC6XcmGQGAu0kUhAPdTQiIbfrZedgeaBVyi273DMR8VgxmfkcYc
- KTxa91t8i8UyPBi3NoOaVdexxr/2gqNcVk8FjJe8MgMZDgU/LEHg7fqydK+DGqSRJp
- WlRHK/pcI4B8kD9VWLAMQPbBt1xhegIutOO964SY=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5079ckSD089341
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 7 Jan 2025 03:38:46 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ b=L7XhHsn9NkGu8rT+kAEKVfXK6q+PdT1esceduV7Loq4D/PkJFKgmK1i4HSHKZ76/v
+ GPowdV86k747FNYwuKqmrseAtRolYtHutrU2R/4MnTZaty3kvHwzTE1ie+3PsQb1Uc
+ 0GjuzlEewTYRkLYM1zfrROvyzQsn+uzd8ISwUhIM=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5079cmPO063714;
+ Tue, 7 Jan 2025 03:38:48 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
- Jan 2025 03:38:46 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2025 03:38:47 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 7 Jan 2025 03:38:46 -0600
+ Frontend Transport; Tue, 7 Jan 2025 03:38:47 -0600
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5079cjrx036708;
- Tue, 7 Jan 2025 03:38:46 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5079clEq057423;
+ Tue, 7 Jan 2025 03:38:47 -0600
 From: Chintan Vankar <c-vankar@ti.com>
 To: AKASHI Takahiro <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
  <mikhail.kshevetskiy@iopsys.eu>, Marek Vasut
@@ -69,9 +67,10 @@ To: AKASHI Takahiro <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
  <trini@konsulko.com>
 CC: <srk@ti.com>, <s-vadapalli@ti.com>, <danishanwar@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 03/13] arm: mach-k3: j721s2_spl: Alias Ethernet boot to CPGMAC
-Date: Tue, 7 Jan 2025 15:08:30 +0530
-Message-ID: <20250107093840.2211381-4-c-vankar@ti.com>
+Subject: [PATCH 04/13] arm: mach-k3: j721s2_init: Probe AM65 CPSW NUSS for
+ R5/A72 SPL
+Date: Tue, 7 Jan 2025 15:08:31 +0530
+Message-ID: <20250107093840.2211381-5-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250107093840.2211381-1-c-vankar@ti.com>
 References: <20250107093840.2211381-1-c-vankar@ti.com>
@@ -95,25 +94,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is required to enable spl_net boot on AM68-SK.
+To support Ethernet boot on AM68-SK, probe AM65 CPSW NUSS driver in
+board_init_f().
 
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
- arch/arm/mach-k3/include/mach/j721s2_spl.h | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-k3/j721s2/j721s2_init.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/arch/arm/mach-k3/include/mach/j721s2_spl.h b/arch/arm/mach-k3/include/mach/j721s2_spl.h
-index d8fae2c8b45..47a61281d94 100644
---- a/arch/arm/mach-k3/include/mach/j721s2_spl.h
-+++ b/arch/arm/mach-k3/include/mach/j721s2_spl.h
-@@ -12,6 +12,7 @@
- #define BOOT_DEVICE_OSPI		0x01
- #define BOOT_DEVICE_QSPI		0x02
- #define BOOT_DEVICE_SPI			0x03
-+#define BOOT_DEVICE_CPGMAC		0x04
- #define BOOT_DEVICE_ETHERNET		0x04
- #define BOOT_DEVICE_I2C			0x06
- #define BOOT_DEVICE_UART		0x07
+diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
+index 6ce3eb87efb..7208bee5785 100644
+--- a/arch/arm/mach-k3/j721s2/j721s2_init.c
++++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
+@@ -329,6 +329,16 @@ void board_init_f(ulong dummy)
+ 
+ 	setup_qos();
+ 
++	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
++	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
++		struct udevice *cpswdev;
++
++		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
++						  &cpswdev);
++		if (ret)
++			printf("Failed to probe am65_cpsw_nuss driver..\n");
++	}
++
+ 	if (IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_AVS0)) {
+ 		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
+ 						  &dev);
 -- 
 2.34.1
 
