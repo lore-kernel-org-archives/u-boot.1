@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA63AE77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 12:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3B46E77198
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 12:45:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A1E7805D5;
-	Tue,  7 Jan 2025 13:43:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 12E3C805E2;
+	Tue,  7 Jan 2025 13:45:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736253803;
-	bh=QFfXzr2uJRLmO0k38eb5Kx5WkRkQMxrhqOWYmCAl3FE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=xyI1dEaMN70DSpWhcKRqONgWyWGcdZJtZQyGNYoG6b7CxxVOM1nTlgh2uJ1nSmKvV
-	 w6T9FZeBaGkv4T5GlzXl6NV7prL7AvakYrJddR6eilT6eHqIlEZvOOuvfDK+/T19Qf
-	 XkYm5pZXvHbaPOCVlOa6SOhjKoqQQZUycGhLcRcWIEEV9CCketYZRfmRSHsoy0b7mi
-	 w7V1LxLs+ggsCqFdaxEQ6egrotB3FmWAwlj48zpYcQcjVuYzZke4L44V0sKNFeRxGh
-	 hhfd30Byk8C1plSMsyEsNSAFTu56RLdF3GVZkhEkDBZlaGjcKZDmTwWnylOKhyWf9m
-	 RW1ELbewyBTlA==
+	s=phobos-20191101; t=1736253955;
+	bh=KM9VClwumAgcUPA3hV7efKRM+wE/PA4TSOSy46yjJ14=;
+	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=N4zlndc2leMHf0ktzz9FQ2VdoZ0obkpEwop2zXdcykJgY/fADilbh73c6cG0xQZfq
+	 zkm6XlLtDiJBmSwD6BAZh344TNSYpXff/Po7OFeK5IwJgVDCFNG92ABhr6LJvpMG5H
+	 nfBaWCe4OcIxfX8DXt7pL1AjkmPfwQVALuMTIeDYshmEusli4z3ghaBZgJfltCtSQ9
+	 nce1Q0ngoUPRo/nTjGZ1LZRxCwTZBdizzmjvX+3C+Nk4VzSQgnKhwEgwHDsyUJAWlp
+	 UnaNaYmzbXdrFGwy7W30+8O2Te3zV/vNwfpiCfz+WOAWjJdmORX2W4Zu/50G2L4YqY
+	 7oRahZ3oKAEiw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 680C380079; Tue,  7 Jan 2025 13:43:22 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id 45E58805D5; Tue,  7 Jan 2025 13:45:54 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FBE6805F5
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 13:43:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 704DE80079
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 13:45:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4YS9h41YnBz9swn;
- Tue,  7 Jan 2025 13:43:16 +0100 (CET)
-Message-ID: <6851153d-b8f0-4404-9da2-1a3c288c37da@denx.de>
-Date: Tue, 7 Jan 2025 13:43:15 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4YS9l00wQRz9sSb;
+ Tue,  7 Jan 2025 13:45:48 +0100 (CET)
+Message-ID: <2d78e7a4-1722-41b7-8b29-a722d27075cf@denx.de>
+Date: Tue, 7 Jan 2025 13:45:47 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] watchdog: rti: support SPL (or re-start)
-To: "A. Sverdlin" <alexander.sverdlin@siemens.com>, u-boot@lists.denx.de
-Cc: Jan Kiszka <jan.kiszka@siemens.com>
-References: <20241108211506.1348528-1-alexander.sverdlin@siemens.com>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241108211506.1348528-1-alexander.sverdlin@siemens.com>
+Subject: Please pull u-boot-watchdog/master
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4YS9l00wQRz9sSb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,67 +66,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08.11.24 22:15, A. Sverdlin wrote:
-> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> 
-> If the RTI watchdog has been enabled in SPL, enabling it in U-Boot proper
-> fails because it can only be enabled once in HW and never stopped. This
-> however leads to a situation that wdt_cyclic() watchdog trigger is not
-> being started any longer and the WDT fires at some point.
-> 
-> Allow for WDT re-start by not bailing out if the [previously] configured
-> period matches the one to be configured.
-> 
-> Enabling in [A53] SPL has been tested on AM62x-based HW (where [A53] SPL is
-> responsible for loading R5 DM firmware and not this driver).
-> 
-> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Hi Tom,
 
-Applied to u-boot-watchdog/master
+please pull the following watchdog patches:
+
+----------------------------------------------------------------
+- rti: support SPL (or re-start) (Alexander)
+- rti: drop hack manipulating WDT clock rate (Alexander)
+----------------------------------------------------------------
+
+Here the Azure build, without any issues:
+
+https://dev.azure.com/sr0718/u-boot/_build/results?buildId=380&view=results
 
 Thanks,
 Stefan
 
-> ---
->   drivers/watchdog/rti_wdt.c | 13 +++++++------
->   1 file changed, 7 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/watchdog/rti_wdt.c b/drivers/watchdog/rti_wdt.c
-> index 99168d0cad03..320c5ca19e0a 100644
-> --- a/drivers/watchdog/rti_wdt.c
-> +++ b/drivers/watchdog/rti_wdt.c
-> @@ -131,18 +131,19 @@ static int rti_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
->   	u32 timer_margin;
->   	int ret;
->   
-> -	if (readl(priv->regs + RTIDWDCTRL) == WDENABLE_KEY)
-> +	timer_margin = timeout_ms * priv->clk_hz / 1000;
-> +	timer_margin >>= WDT_PRELOAD_SHIFT;
-> +	if (timer_margin > WDT_PRELOAD_MAX)
-> +		timer_margin = WDT_PRELOAD_MAX;
-> +
-> +	if (readl(priv->regs + RTIDWDCTRL) == WDENABLE_KEY &&
-> +	    readl(priv->regs + RTIDWDPRLD) != timer_margin)
->   		return -EBUSY;
->   
->   	ret = rti_wdt_load_fw(dev);
->   	if (ret < 0)
->   		return ret;
->   
-> -	timer_margin = timeout_ms * priv->clk_hz / 1000;
-> -	timer_margin >>= WDT_PRELOAD_SHIFT;
-> -	if (timer_margin > WDT_PRELOAD_MAX)
-> -		timer_margin = WDT_PRELOAD_MAX;
-> -
->   	writel(timer_margin, priv->regs + RTIDWDPRLD);
->   	writel(RTIWWDRX_NMI, priv->regs + RTIWWDRXCTRL);
->   	writel(RTIWWDSIZE_50P, priv->regs + RTIWWDSIZECTRL);
 
-Viele Grüße,
-Stefan Roese
+The following changes since commit 6d41f0a39d6423c8e57e92ebbe9f8c0333a63f72:
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+   Prepare v2025.01 (2025-01-06 18:54:44 -0600)
+
+are available in the Git repository at:
+
+   git@source.denx.de:u-boot/custodians/u-boot-watchdog.git
+
+for you to fetch changes up to 5964f24f15473709fb9d897230c3f20e998c88ca:
+
+   watchdog: rti: drop hack manipulating WDT clock rate (2025-01-07 
+10:29:58 +0100)
+
+----------------------------------------------------------------
+Alexander Sverdlin (2):
+       watchdog: rti: support SPL (or re-start)
+       watchdog: rti: drop hack manipulating WDT clock rate
+
+  drivers/watchdog/rti_wdt.c | 21 +++++++--------------
+  1 file changed, 7 insertions(+), 14 deletions(-)
 
