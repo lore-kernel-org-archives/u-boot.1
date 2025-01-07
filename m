@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 135B5E77198
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 06:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6442E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 06:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A95480613;
-	Tue,  7 Jan 2025 07:59:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B096B8060C;
+	Tue,  7 Jan 2025 07:59:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="VY1MMK2m";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="kPB1YiRh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD56C80612; Tue,  7 Jan 2025 07:59:08 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
+ id D6EA680634; Tue,  7 Jan 2025 07:59:10 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83025805F5
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 07:59:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 006EB8060A
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 07:59:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jMOPvNrVbda+D1vph1C0pfaFBoqsPrEY+zPmrRGxl4Z/xaYEgDcRwbnGLL4yE6VVFHYbyxhWl6pKTSZXYDW5iVjyI9Fbo7PGRHsdElBIRfWsNxZ5ZMAWVjQRQPdrkKam+mK7U9WaeqEjRdWY555PGwGkgK5zDOtyPmLr/5+QUm7pRpuF6NoYKpvXYUUTqwZs4CiQpyvkud65rPssc5vujz8djejtoi+KhoT1HJDmByjJElSh6tkOuM2pvDPoSnk85gPQYHwCvCiDhPXql6pZBhzqS5QHTRo8KKci1qHyKCznA/2a2FL7hXTk+5m/rXi/4J+At2RVuUuOLQ3PAHDuGA==
+ b=wNG1Qpoum5cCBarxl4ezhglBFPl2FGWsFvo1tOU0to1HZ+6RCOXXYdBlPQOR9ZI6AQgRyJWQwLf7YislffCotgsfG2UA5PszrOKLqmqMQShVr1P/GFKGqydn6GwcS3qL976QJMIQN5Dmfjy2T+5vhoRe1IRbT8gACnVz+esaBbgaW6eRBmkjeQO2OvrgPbdxaGGlRsuh62O5qLe0afL/0DM+Mg5Slq0Ec0pot9g64UwPUaSjhJKT8oBLzlm0X7jnGWkFW1XCt8q4ZQ9uRM/WyhI00z0NERJWZ5iW5M4PCaN1TsMOXWjMswT9a1ePmFZVNjnqam4wqQcqlVkfo061FQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jzSjFFM1DR1TcWx5tJJoCwCcVZ/715ZbU1pMon62uaE=;
- b=cFJ/9ePm4xcdoBZwErHdy3rpD1pTAXvzEWFEy5yyfFdPQHmR+THhov0e62DKtI726tqe2FvDm/b0EO3sphxzA22yWtps1ovdq8Dxh/nArVoxengirAhoR3HIW7Uzk5GYAjrmeQXScRmCsvtKb75pC3OAEbj1DpcIJcDzqk2gGe2tQjK4UXVEorVQ8bgOMgrteQKMEC8kkdVL9C1auuswv0/Ilaza744XUBASRjQS2toiNdDeXwWtIoRTOV9LsCM/xu6oRLtyDlgQ93Lv4U+Adjder25rYlXmtoqogfYFIL20VLhrbgq1OKIhflgv5W/Easl8FQrzyfBsoV0HhkC9Ew==
+ bh=Ffrfmx6MiKX6+wzlQ9UoZMbr89Tt8EK9U1+Ps/iNe3Q=;
+ b=aislSyhI9Pw2qZKYqaXxCwLjyzmeJMEKMy5o61OaKfiVMedW/yC9eSPWBElfCvifrMRO5MmqYsYerV0wn0nyZyL7PVGM6kjtnAJrBfirKFCwAAQfaGsqjbHjUs+scdRZyDSFUcqEgb33qd+vibS0xayQrUOaio6XDDJEpMmdnfJgeLOFUM/j5ZChVg5jE+DnFi2GUTggCiS9lRX8Uof+h+yOGgusG1017gXuG4K+AybZbSDhS6S1xFBtWKZosWQglO2Gx+GsRFaa3Yd+nFrUEJrSylPa0Fj3kM11kfFbtBwcxCzvT2kau2UONhnay0Q1ZCvBvy627yMbpi3igHADxg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jzSjFFM1DR1TcWx5tJJoCwCcVZ/715ZbU1pMon62uaE=;
- b=VY1MMK2mx+QRojR0Wjj+fGcdveJq3ZkWhl6/S4XwBcGaQS2Q/2syFzQPWYPuWU6sXUm/A5C3rmBEPG9yISLNqjIpylsKkE8QpT1ESRbCGS4sGZm9md8xkIvWGTm/yya9LWye7FmWd/gfbaFAcpQ1uNnPNCT/mLIY80WPPuP6ltD3cIgKVtIxdHe1XBA3G2Hawc1QaH0GBj1Xah31fykAUQwzLs0Xccj7bdCHXjaEIuWyMJsPk1xzoRI9fyAwPnhj9hGgcvQMdwJjLJ2PtM2GMjTmEZcUILK0k+IiKFS0BZEm4UheOvKAWxY8h0kbfgilYFxS4CSezqhrpzlqV7ItWw==
+ bh=Ffrfmx6MiKX6+wzlQ9UoZMbr89Tt8EK9U1+Ps/iNe3Q=;
+ b=kPB1YiRhTb5IoC0RlKxzHE1UZ6zJof/HD4ZohQZVALuDerorGSrguksmEs2xfDCbCrcQw31OJ1dwASJMWhI6/coN14Zh45jugVQf/1SpEKoLaPd9ZsRvFVKyDj59kewUZSqgTq0euMTySWALFsBuqP6KtQPPURsR5qjzAlFLsIPHejGYQiWyA8Q3rA4qcht6TGEjhWJ1/WAK8+EQrbMbghfMBn/0pF5eNv+febSkDLEF+uQmkI3I2Uez8/GC5nrvGOtQ+kQylD4Lpa5vVWWS8F7DleHk2r8CMFZrs+YkXUGjUcyZpFJ+ELoD3EqafLHIg87kPXo1x9g4IEjUzLqN8Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by AS1PR04MB9478.eurprd04.prod.outlook.com (2603:10a6:20b:4d8::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8314.16; Tue, 7 Jan
- 2025 06:58:58 +0000
+ 2025 06:59:01 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8314.018; Tue, 7 Jan 2025
- 06:58:58 +0000
+ 06:59:01 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Subject: [PATCH v2 00/16] imx9: switch to bootstd for i.MX93/1 EVK/QSB and
- i.MX8M EVK
-Date: Tue, 07 Jan 2025 16:05:00 +0800
-Message-Id: <20250107-imx-bootstd-v2-0-97671b1694cd@nxp.com>
+Date: Tue, 07 Jan 2025 16:05:01 +0800
+Subject: [PATCH v2 01/16] imx: imx93_evk: switch to BOOTSTD
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACzgfGcC/1XMQQ6DIBCF4auYWZeGoWJrV71H40JgrLMQDBhiY
- 7x70V2X/0vet0GiyJTgWW0QKXPi4EuoSwV27P2HBLvSoKSqUd1Q8LQKE8KSFid6YwZFLUl311A
- ec6SB11N7d6VHTkuI3xPPeKyHoyXK+s/JKKQg2Tb4sBZdo19+na82TNDt+/4DTAH1GqQAAAA=
-X-Change-ID: 20241231-imx-bootstd-abbf2e9e0d75
+Message-Id: <20250107-imx-bootstd-v2-1-97671b1694cd@nxp.com>
+References: <20250107-imx-bootstd-v2-0-97671b1694cd@nxp.com>
+In-Reply-To: <20250107-imx-bootstd-v2-0-97671b1694cd@nxp.com>
 To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
@@ -75,96 +72,95 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS1PR04MB9478:EE_
-X-MS-Office365-Filtering-Correlation-Id: cc60dfcb-5732-441d-a0c0-08dd2ee8c1f7
+X-MS-Office365-Filtering-Correlation-Id: ea638368-e759-41c6-0e97-08dd2ee8c3d6
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|376014|366016|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bXN3MlNFZEU4Z3FoSlNhVi9FMUdoSzYzcVBQSHZocWJTNFV2S2RmdGsyUld1?=
- =?utf-8?B?dWlnL3BlOWpIQ2FYRkhSTUxLcVNNQ25PNkJGcnBJT2ZlcVJvTlVXcjFYM1ph?=
- =?utf-8?B?OUo0clN5Y01vbDBFaU5QWFVmNlZNMVZDOVN2V2lNSHVGeWwrUHRVSXBUUHpZ?=
- =?utf-8?B?bU5KbjNiOXlXZ0hBM1lwRFdmLzBJVEk5UjFnVUJ0amZPam1ndFJGL0lhOEgr?=
- =?utf-8?B?cDlSWE5xUzJEZHFPaHltRDNTSUZpZXFPdXFuUE1KVEticmVrZmJIdkhwRzRw?=
- =?utf-8?B?WHNHaVRCcnlCWFNOVnUvVkRLS0RUWjE0MVYvdTRCN2NWcmlQbDJvQzZCWlZk?=
- =?utf-8?B?bU8wNlJyK2E1bUsyVXN1aG5kSGM3STJOYUhYOEM3eDhEeVBuTzZHQ0NkV3ZN?=
- =?utf-8?B?QTI1S2dIeE94blpmK3Q4Q3hyZHhBVUQxWFJqTkljUGJjbFB1MWN5U0VUOHdU?=
- =?utf-8?B?a2g5RFVFMzE2dEowNzN0TjQ5SXZ3TGRoRUxiVTRMUG4xODZTRVpINC9IT2Q3?=
- =?utf-8?B?KzNvOExrVGQ2ZTFFbUxUaTB2ZkRmTFo0U1ZNbTFNSm5UeTVTcGhvMzNSQlZh?=
- =?utf-8?B?VlZZSys0RTBCSEk5bXB2QmUvaUoyYW5nUEhMK01ob2dqS3JGVjBYUmd0RUo4?=
- =?utf-8?B?akxaRTlNRXlNaVZadkZTeWdDQTRSWno0NmFEb01Lb3huM0greHRrRmxuaFUx?=
- =?utf-8?B?RHFXZlNVaVdZRk1YanV2OGcrbTdUdTZ4KzcxdHN5U3BSNEhjYjZkbldVK2kz?=
- =?utf-8?B?S3orNmtHeUl5ZWo0QVliMzVrcHQzOER5Vm9nQTM3VWlvcHlMakxsWUNOT2V0?=
- =?utf-8?B?WXFnQkt6VFI3akE4REJYNzNVTjZNYUJIYmhKRXh3MDRpUlBvK3d6QkpWTUJQ?=
- =?utf-8?B?K0dsajFXYWtQTkZqWHljSld6NVJFZGcwQzF4dUk4ODM4MG9VclhCU1lZZGRL?=
- =?utf-8?B?RXVWZXhJYXBUbncwRGMwU0tXcStzYWdXcDE0TFVtWFdLa3FocVltYS9rTXBx?=
- =?utf-8?B?dExoUTRSanJFYStIc3hFb2VvdjNYV0NmeGg0c01EV3krVjhWMkt3Wm9QYkdY?=
- =?utf-8?B?Y3N3NXE4czlFUTNqT21MNlZhYkVjd2h2Si8zYjNreDc4VlJ4ZEo5WGVHQnlW?=
- =?utf-8?B?dTBzRE9NcVhSTkg0WnVhS2RLMEdhWktjRTdpQ0tsMS96aXdERit2VTczcmVh?=
- =?utf-8?B?MnBaMFFEeExTZFVNcGlVYTlCdTd0c2NmRS9Mc0FzMUtheklRbWRKSEVCWURJ?=
- =?utf-8?B?SVA4M0VTTjlwL2tFM1dGSXVQOWcrZ1phMkpSS2dDN1ZlOW5jUDhLWE96T0xJ?=
- =?utf-8?B?Y1NoY3ZXanZwUmdqRFlvV2NPYnNrdEU4dVlUOUs3Z2pSbTlDdkU1UWRzemdr?=
- =?utf-8?B?dGVNZ2kwWVgxT0NIZmliZTFYS2tMaEdnZU41elVwRXhzcWhpK1FmSEdLOXda?=
- =?utf-8?B?dENHbVNreE1WbmZUQ0hleUtETzQ4c3d0RVYyTFNtcHBES2R0MzJKNndBazgy?=
- =?utf-8?B?emMwdFRuVlNhUGFpeW9vc0N0Z3NMNG1VT2ZWQVBSRFBWVy9WcHBsdXV6ZE50?=
- =?utf-8?B?RnZ5M1JxN1NkU0lpMEZvRUhjNVA1Nm1jOWxSYjR2M0VJOGxUVFJjWXVhc05t?=
- =?utf-8?B?KzZ0d2M3bzkrbTF5dHRiS1RCbnBvb0ErVFlSeFh4NHlreEUvRjg1QjJMN0F3?=
- =?utf-8?B?TUhjYTZTVE9maW9adEZzZGtOYmNnSVZjQXdSZDE5aExnUVAyNTcxUU1KaWFv?=
- =?utf-8?B?Q2tVUnZWaXg2b2M2QTRUUjl5cm9yZ2ppUWlnd2ltK3dzMkdielZROE5UYXBO?=
- =?utf-8?B?MW1iY25ZVG9DWUw1alNVQVRMUmwxTElaQkVJeEdmZjhLKzFRSE9seFpqUXJM?=
- =?utf-8?B?UnRzSWROMjk3YkQ0OC8rWUlwcXFUck9Rbmx3TWVjdmF6NWpTNGovZXk3UURq?=
- =?utf-8?B?ZnhFN0ZCMjhwUFRkUzlMNEFXV2dSTG4yZDc3bGFkSm5SK2dtSHpCSmg3UDZm?=
- =?utf-8?B?bU1pQjcxUnJBPT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QVRJMzZpK2VNMVRiMXk5bnQzVDl1bzlPa2tucHY3dE5HSTA3N1UwR0R5THJt?=
+ =?utf-8?B?WXZMb1VwanlyMFhWV0c5QU5EcXErdm9nYjdYa2FnT3o3OFFTemRpTVRlYjZw?=
+ =?utf-8?B?bVRoa2dwQnNpRWU4N3NNak1MMkRLQysxeTNucW1nOGlYcjdQb0pwbjFlanQ0?=
+ =?utf-8?B?Q0V4K2p6NlcydWZVTldzMmlMRk5YeHI2Z2lJL01GbXFNRGRXbDh3ZlB0UWhr?=
+ =?utf-8?B?NHIyY1Y5V1JMdXZzcVZoeEpIVW01UDAwRzV0THhWOWNFVVBLdW94aWVodEJK?=
+ =?utf-8?B?aFlEem9jSTd4Y1BxVkdqRWYwSDZoS3pKVU43eFVBNUFPWmV1Q2Z2WmFhN2FG?=
+ =?utf-8?B?eldEM2ZCQ0JPaUlFRjRIUWdxbzA1R2dmNFRndjJ2ZEIwbXNKbFVUMEo3SGVC?=
+ =?utf-8?B?Q0tVZDl4TXJ6ZHpiOC9hc0trV054MW8xTXg0NlhWNEE5NHhwK21Bd2VRZVpJ?=
+ =?utf-8?B?ZW5jU3FrcytEQmR2MU1GYmxjREJNUlZJY29aTnByOFRsME1aTmthRUZKRkZK?=
+ =?utf-8?B?OFhkNzdHT01pbkRaTkFEcFo3T0g5aDErZ0RhRWoyZ2JRYU91VkRKWENCUE9S?=
+ =?utf-8?B?bysrSU9wVmRTUFBhcGhiUldCcXFKOFA4UXZNM1NYZFlQdDhlTnc5MHZxL3BG?=
+ =?utf-8?B?dzUyNWtaS3hUSUJZbjV3TElQKysvcUNhQ00xK2h4WnRneDlEL0drbXYwRytD?=
+ =?utf-8?B?RVFmMmlKRXRFV2NXQmVhQjhYM1p6UC9LVWlUTERlY2dBZ0VDVE5QZnU3cmhz?=
+ =?utf-8?B?OXI5aldGMTBoUXYrYkVSTEpCWGRXR2pOSk9vQnJ0dGV2T3hNSE1DS25xNWQy?=
+ =?utf-8?B?TTQ5bllSU3pHb0txZHExcmExcnd2WDF6dFZGeENvQ3MxdVpjTS81Q3FtU3Bu?=
+ =?utf-8?B?OWhaNDMrSGE3UzUyQ0dFVFhVZGRzVGV1MS9HMlFFQmgwc2lsMnRtYWk4VGxh?=
+ =?utf-8?B?OHRKMjBQMGFhcWlicnhLNDhnUUN6QXB1VHFtOFY4TGpTWGplMXUzZ202ZDlw?=
+ =?utf-8?B?WThKNnNJL1N0bk5QblVyVTE2YmxYSllLL2IwS1lLbXhBdDNiS1duQk1KM24y?=
+ =?utf-8?B?c3hxa1ZseloybDZDMGZZenR2ZWtNTU5zb3lNT1RaYVEzWUVBbUkxVk90VWJt?=
+ =?utf-8?B?S1RnTG0zQmowY3J2dTZBUms4WEVaSTA3WlViVytETnl6cXhuTHczMzRCL3FZ?=
+ =?utf-8?B?bUVQMFBocmh4Y2J3M1RLbTFET2VYZVQrczFkeFhUQ2xsUmVhNkRwS3EzUjN1?=
+ =?utf-8?B?andSODI1NVZLUGw4UGNKdmgzcmhPY0xlKzV0YVArZks4SkU5UXBqS2QwSEJG?=
+ =?utf-8?B?NzNubVNkdHVpdjY0VGZ6am5nZjhwZUhwMjBGR1RJelg1YkdUeDRzaHlWbmo3?=
+ =?utf-8?B?NzBCeWRibGx4dDk2bXRDZHNyVkRpSjMzWjBOT3BPaWpFSStaZDRZNE1CVUdY?=
+ =?utf-8?B?emFpZkd5NXRqM0J4K0V5cU1KYVpFZzFzbk4vN3hjSVFueFFzdmc5VGQ2bTBR?=
+ =?utf-8?B?Yk05cWtNZStsTkVIb0thODF5Y2ZGamNXZVNydlo0VjZrZm9meStWVnZSQW03?=
+ =?utf-8?B?NkI3cmJPTDh0cVFMV3FFem1vNkVudTV3R3VBSGQyUkpOZVlxRFdpSHRBeXZ4?=
+ =?utf-8?B?SGdRM3g0TDVTdklOSW53ZXRDUDVvYVNTNXhvUjN4MUVXWC83aTk3bU9Sb0pV?=
+ =?utf-8?B?ZGFka1AwamtFY3cxMkVOc0FRMHQxRWJkejBGYzdYRnVzSXRBMUdTaFNxcGky?=
+ =?utf-8?B?bkMvLzhaWUhWQWNPRzBDUU5nZGpvZnk1MnpZcGdPZGthOHFFZnBpdVVhcTUv?=
+ =?utf-8?B?aUdLeW5PU093WTdYQisxZlJacVJLeXMrbXhJV3dQN0tBWXNHR1F3aHluNVlZ?=
+ =?utf-8?B?djRKSkRWcGlaVlcwbEdmSGgzZ0R5VmIyQkN3Wjd4Z2RQenJTQW84Qk9UZ3F5?=
+ =?utf-8?Q?4ILlKwCIK5HUU9SiWkGh/2KU16P73rHs?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(376014)(366016)(52116014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bkgvQ1J1REpLbjBTQ1ZpZnM1RlEwN3VWODZFZHdIVGVGc2xLTU02NXpHazZC?=
- =?utf-8?B?Z3RZcmtyMFRxTS9JWWtGelZaaTJ3NWxwQVgwMDB1UU9iTCtwY3JrZlY3VWEw?=
- =?utf-8?B?dVpyQXB6bFp5aERYS3lpbitWYzQvUFIzUEZqcmFCYlFaMDdOUVFhaXVzaHNJ?=
- =?utf-8?B?aE9lalhTUlRuQWk3TWFDL2VrWDhmMjVZRjJQOG92ZERmdldaVlVtUVVGNVUy?=
- =?utf-8?B?aFllK1BkdHZHU212U1g1YnV2cVduYkdOdWtkaXkxRm80Mzlna1FGRVRFakZT?=
- =?utf-8?B?N0cyT0JCOFRpNy8xSndDOXM1T2dhTDhVRHRzYzduNlBNSjk5b3BsQy9icjA2?=
- =?utf-8?B?S3pDYUxDVG1SdlNac1gvbUtHdldjclRlM1JpVDc1bXJHOUwrakh5UUcvdW5T?=
- =?utf-8?B?elFDNUJOcmFwRXdtekRZQTVTdnI2aWFNcDdtcXhTMmxBc01GZzUrc2FpVmxM?=
- =?utf-8?B?VndHSklZOHNSanpyTDdFamZqM2VRYUMxUTNLZk16ZW1nazlkMjZSWmZ4ckdM?=
- =?utf-8?B?NDNxanI2TWx6cFRla1VhZjlUdTdzWVdvYmF0N3l6NnlWVVdNeEtoekZ3UDZk?=
- =?utf-8?B?bzB6SmtDZnByQ2pBYnJPVllDbmZ2bkVIQ29FTktkL3NRZkQ5cUhyMWFCTXdq?=
- =?utf-8?B?YmIzYXpzM2w4NG1lbENjcUZQQ3ZmT0VwQnlrWTAwVlV2VnZMZ1pVSWFYTHUx?=
- =?utf-8?B?eWw1Ym5FTmpJeDdSNWNGNzBlZkpuTkR6WW1NNklEL1JkclRJaHZLVExpMWpX?=
- =?utf-8?B?K0xVMHMwNWR5bFU5bVZHczIwaHlTck84ZndjUW9ocjFiY2JSeFplcm9hVlEy?=
- =?utf-8?B?ZU1PQnZoTHp6WmprQ2s0Y0ppaXZha1JZTE5ITzBQemhQZjZsd3oySEN4NGxv?=
- =?utf-8?B?Y21OUXpwQmtJa1poVlY5ZTBEK0t3N3FlRDQzd0V4MVR0STJmbkhSeGREM2Rx?=
- =?utf-8?B?RkQyOXVHYVJaZkRYWUhPL1pkMHZwTW92L2FNaDJVYlovU2lsMHM3eDdoNVFV?=
- =?utf-8?B?YTdFMHdjdkU5K0dMd05JTDhTZjFMWk1qSFZGWnRsZkd5N0RyOWJyZHE2OVNv?=
- =?utf-8?B?YWJPaUVoZ1l4TndiQ29uYnRyamVzSS9qUGZHOEI0S05lMHVjbVBYUUlUVXhQ?=
- =?utf-8?B?Vlh6SnRnRFBBQWR2bzhCL3BvU1l4VDhrd0JBVnNnM2VuQkpyUnhaTkphVnhS?=
- =?utf-8?B?MU1selZXU0ZvY2VtdWxzaFp6K3pEcnBYRndNdm5rMzJzZFIwNTg4dk5RVTZR?=
- =?utf-8?B?TDZ6WWxsV1ZBaG1MaWVsVHZ5OWZ2bjM3VVgzek00UUVkNXlzK2JmdFdZVDZw?=
- =?utf-8?B?MUZzcUJ5Ym8rZnZrTzNlZzJEM1psYzFQSkVpcVZkdFRzSWtyV080bUs1STFP?=
- =?utf-8?B?Vk1YV0U3L21IL2xSM3RxamQrVEg3ZGJaMEhiTHV1cjRYblpIeFEyMjhKc3JN?=
- =?utf-8?B?K2d5YVZvWlJHdkhmOTM5NnNFV0lVSmRZbVU4QldpcHg3MzV2dlFYMHZBZkJq?=
- =?utf-8?B?a3N0ZHQ2aDlKWVVJN3VQV1dFZVcwSzlEQUo1MGhtcVFsK0xQQ2JHSTFrMmRx?=
- =?utf-8?B?czhDa1hmZEt0VDEyUDI2U3BnNDRtaTRVMHZQb3BjU1BBQW1RZDVIOVpaWTJk?=
- =?utf-8?B?SUVQekpMVm1XbmNHWjZqcTJSaUVaYVVOM1Y1TGppVVo4WTgrRFhwMXRpVjVL?=
- =?utf-8?B?NTNrdlJDcXhUbE9EaTlkZU81bUwybU1pVHhpQXEzTGxrMFV3SDNqVHEyQ3Bk?=
- =?utf-8?B?TWJibWc4dnI0RVFoN2hicEgwYk5ZemVHQndmQ0lIblU5d0dKbzJqVHR5RndW?=
- =?utf-8?B?WHFGUm9CckorcjhjTkgrUEVJTWh3U2lBOTh4WEU2QWtLdFhuQ2VtVVNNR1pE?=
- =?utf-8?B?eFBPY04rUjRENFFoSW8xZWhpSWRtTEE4N1F3a1hwNndCckw4Q1hqaFFTS0Jq?=
- =?utf-8?B?SEJPTjc4OXFDTFNHenlPYmt0NUNGd05DN0VjNjdRakJ1TjlCdG1DcFhRQlRz?=
- =?utf-8?B?MUVjTTh6SmdheHo4a1VFdDUyUWtZMkFaRitGNzBubUJycGh5UEFLL1RVb21R?=
- =?utf-8?B?S1NsVXhpcHNyN3N4aDAySHJPOVgydERiWXlHQ3VFQjFVR1JlNGRIVUhxeUZJ?=
- =?utf-8?Q?ARoRtWUYiDw41ofZ6pc3HAeCR?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R2JnMWFFRDVYOENKelFWVWJTNldGcmdSenpVeGF6S1h6OXMzMEpodHJjNlg1?=
+ =?utf-8?B?Z2dYV28wKzVWczRIYTVZYk5QUGRjcCs1d21qdEc1Ymt5cHNaVzZKRkd3bjZU?=
+ =?utf-8?B?STBGbW15Y2RZMHRCelhOSTcrMEFlL0V4eHc4Ly85K285YzZjb0tVTC8rSDVM?=
+ =?utf-8?B?VFZlNVZtanBJZjVBdGR2cEtiY0p2WXR4dW1XMEhiM29xSlBaV2J2S2dIeFBU?=
+ =?utf-8?B?cWR2djJSMUd5UnVONzV5amRibEpFZzArK0lGL2RjRlV1Q1IzaWZKQ0t6K1g5?=
+ =?utf-8?B?UHBnMXFwQUxNUUlEaVcxMmVyVEpZQnZSU2ROSFV6TjNPK05mZlNJKy9lYXQ4?=
+ =?utf-8?B?V0JFc3JxVXhJMndRTXJkODE0QWdjOHkyUDNuNkFkVXIwVG1DOGxWdmEvQTlZ?=
+ =?utf-8?B?UDhDY21UUjBIMEJrZ3pGdEUrallBUjB0TU5seEV2SDhEbG5FWHByRVZheGNj?=
+ =?utf-8?B?ZU9oR3JjRkNXNWZyTUtuQ3M4Uk16OEVidkRqekw1Qm1BUUFXMHZ0Z3RDU3Ft?=
+ =?utf-8?B?cjdPblBPd1ZCNVIxcGtBOXlrQmNFSUh4VVQ5dHZid0p4b1VQYkQ0cVdtRk1p?=
+ =?utf-8?B?azFmK1c4N0g2Q0xiM1ZVVEJHV29ZZC9IV05OaUF2dFI1Mm80MkkrcCtDYkhm?=
+ =?utf-8?B?S1R5dTg5NTlMMlNZNkRvNnBCam4rT0VjTkpZSUZsVW82dWFQamc2ZHl5RmZl?=
+ =?utf-8?B?OE9RblNqb3pGaEViTW1DSzVFSmdqeVVFdnBPM2hONzFhVUxDN091dmtnZDRJ?=
+ =?utf-8?B?d1gvWXZjWkNSc3dGVzNSZmlrREoxajE4Nk1ZaTNIRUo2ZXV1UUJXVEMyVXhY?=
+ =?utf-8?B?VHZQbGJpQ2NKMHJGSHFyRGRJS05SbjhxckxSV2orOElNNzZhNnd4QUlwd1hX?=
+ =?utf-8?B?Z2hoRm9HRC9RYVJ0WVpES0xpQlZzTDRBTUozUURMNzJFUDR4U3Q0aU01cUtw?=
+ =?utf-8?B?N285ZXFsTkxBUDhzOXlpM3VKWFc2eEhnb1VveTJ1Ymp1ei9JNW5maDBlT0ZE?=
+ =?utf-8?B?NTBOajBCU3o0dzdOeXdpT2FXUTBHTVZMUFJPQytVeStxZEJRUnlrTlN4VUtv?=
+ =?utf-8?B?UXB4eDFkYVNFM3M2cmlKYzg3VW1rTEIxQ01haVlqQkRma2NFRGRYK2RERWNK?=
+ =?utf-8?B?ZW9mRzdiekhkWkpiWWdqVWFzZ3E3SGZpMlcxaHFVSzFMUnU2UytLNXBMNE1C?=
+ =?utf-8?B?MTRtdXZ3ZGdLVjRpbDE3T2Y4K2xhMkNwbWtCZ2o5SVh3eU1JRjBGNXBRazBR?=
+ =?utf-8?B?VFllK3VlUW9FS3Q4bWJvODAwdW9XMmJ5TnhjM1E2Yjl0K0lqRnFYb203eWx4?=
+ =?utf-8?B?OVR3ekgrN25vRVFGbjBZa0FFTVJ3Tmt2UWpBeWV6YkhyVUVuVm5SQml1Lyty?=
+ =?utf-8?B?cGlCMmM3SDlIems4bVZGMjlJdGZ6N2E1RUE0ekJXREFhSkFydEZlblVpSm5P?=
+ =?utf-8?B?VXp5dWRSSWhYSTBzcmxNckdQWUlMaklpMUJINTZTYnVlYlE1ckEzRjYxcWlB?=
+ =?utf-8?B?R2xSbmpZTjZiOUFuVlJXSytCemxaNlZxMkJMeS9Cc1h1NGwwUytreEdGS0Jm?=
+ =?utf-8?B?Ym9oenNPZUlqY2lyZE80ck5yT2hZVDByL2VFdTVMQlI4OVhBWWU0TDlGN2J1?=
+ =?utf-8?B?dG83ZmNqaFAwd3ZndEtqeGtQV1FOWDdQbDVQalU3aWRwZEI3dkFOcXplWGpm?=
+ =?utf-8?B?RUhTMmxPV2YrVWtTbUtSaGE2ZTRXZCt2UTUzTTRaNE03ckJvN245T3dWU1Ev?=
+ =?utf-8?B?Q0E5N1RBc0JNN2JvamVIcDRTWU5lVTFqSkowS1dWVW1MWnlRSDl0dFJDYTVP?=
+ =?utf-8?B?cTd6VlpmLzdYVm9GeWpSNnhyOFBsaEp4d1RCNFN5dU0rWUxKdnRkRWxKMTZY?=
+ =?utf-8?B?RFhKNWNpODRBTzJFeWo0MWsxS3RSazdUUVJodGhSY2dtSStVWDFtWFBFQzBD?=
+ =?utf-8?B?d1NLWWZIVWhmSG4xL2VTSjIvUnZMZXRaTWhCR2ZvYm5UbFE2YUZyWjNLV1hp?=
+ =?utf-8?B?YnhhZldwT2JWa2l0TkpMckd0UE1SQjRZbWZlUzJLWWFqeEhIOGlDTzlSMlMx?=
+ =?utf-8?B?ak15RFNLbEk4QkRjVE1yV1BNU1BESUZkcFZBZzFsamJrS2pJVmhVaFJoL29i?=
+ =?utf-8?Q?9MKIQlvruYCCxXQXSOi+OSnuM?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cc60dfcb-5732-441d-a0c0-08dd2ee8c1f7
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea638368-e759-41c6-0e97-08dd2ee8c3d6
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2025 06:58:57.9645 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jan 2025 06:59:01.0537 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IfNvm5hIR6K3JAOgEq11sk4Uczrqzq/n99BSVWaglrq2Gs5jcvGD/ZS3h+wGrbFCwdL/oyTc3U25MZ6qYRnnlw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: PgweoxetBWLmAcQ/9OJhci3CQ34twv2D4ON0NQI7G9tuwoB4eONK6rgK7ImGhp7mXKMKZzVz9xlH/MwgYa+l4A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9478
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -182,76 +178,262 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch to bootstd for NXP i.MX9/8M boards with a bsp_bootcmd as fallback.
+From: Peng Fan <peng.fan@nxp.com>
 
-Some cleanups are also included together with this patchset
-
-CI: https://dev.azure.com/pengfan/uboot-ci/_build/results?buildId=16&view=results
+Switch to support BOOTSTD with a bsp bootcmd as fallback.
+Move the env to imx93_evk.env
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
-Changes in v2:
-- Separate cleanup headers to separate patch
-- Separate drop global data to separate patch
-- Drop CONFIG_ENV_SOURCE_FILE since same as default
-- Link to v1: https://lore.kernel.org/r/20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com
+ arch/arm/mach-imx/imx9/Kconfig          |   2 +
+ board/freescale/imx93_evk/imx93_evk.env |  88 ++++++++++++++++++++++++++
+ configs/imx93_11x11_evk_defconfig       |   2 +-
+ include/configs/imx93_evk.h             | 105 --------------------------------
+ 4 files changed, 91 insertions(+), 106 deletions(-)
 
----
-Peng Fan (16):
-      imx: imx93_evk: switch to BOOTSTD
-      imx: imx93_qsb: switch to BOOTSTD
-      imx: imx91_evk: switch to BOOTSTD
-      imx: imx8mp_evk: Enable dynamic settings to mmcdev and mmcroot
-      imx: imx8mp_evk: Switch to BOOTSTD
-      imx: imx8mn_evk: Cleanup headers
-      imx: imx8mn_evk: Drop DECLARE_GLOBAL_DATA_PTR
-      imx: imx8mn_evk: Enable dynamic settings to mmcdev and mmcroot
-      imx: imx8mn_evk: Switch to BOOTSTD
-      imx: imx8mm_evk: Enable dynamic settings to mmcdev and mmcroot
-      imx: imx8mm_evk: Switch to BOOTSTD
-      imx: imx8mq_evk: Cleanup headers
-      imx: imx8mq_evk: Drop DECLARE_GLOBAL_DATA_PTR
-      imx: imx8mq_evk: Enable dynamic settings to mmcdev and mmcroot
-      imx: imx8mq_evk: Switch to BOOTSTD
-      imx: imx93-11x11-evk: drop duplicated nodes
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index 54c6b117fcff21be5c3800ebd1dc30f8ea12ac42..c52546084394a7cc26f35c93ac8fb62d9c5fe795 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -47,6 +47,8 @@ config TARGET_IMX93_11X11_EVK
+ 	select OF_BOARD_FIXUP
+ 	select IMX93
+ 	imply OF_UPSTREAM
++	imply BOOTSTD_FULL
++	imply BOOTSTD_BOOTCOMMAND
+ 
+ config TARGET_IMX93_VAR_SOM
+ 	bool "imx93_var_som"
+diff --git a/board/freescale/imx93_evk/imx93_evk.env b/board/freescale/imx93_evk/imx93_evk.env
+new file mode 100644
+index 0000000000000000000000000000000000000000..f692f42f78ab67f004a483d886388218fadcbc15
+--- /dev/null
++++ b/board/freescale/imx93_evk/imx93_evk.env
+@@ -0,0 +1,88 @@
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
++
++boot_targets=mmc0 mmc1
++boot_fit=no
++bootm_size=0x10000000
++cntr_addr=0x98000000
++cntr_file=os_cntr_signed.bin
++console=ttyLP0,115200 earlycon
++fdt_addr_r=0x83000000
++fdt_addr=0x83000000
++fdtfile=CONFIG_DEFAULT_FDT_FILE
++image=Image
++mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcpart=1
++mmcroot=/dev/mmcblk1p2 rootwait rw
++mmcautodetect=yes
++mmcargs=setenv bootargs ${jh_clk} ${mcore_clk} console=${console} root=${mmcroot}
++prepare_mcore=setenv mcore_clk clk-imx93.mcore_booted
++loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
++loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
++loadcntr=fatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_file}
++auth_os=auth_cntr ${cntr_addr}
++sec_boot=no
++boot_os=booti ${loadaddr} - ${fdt_addr_r}
++mmcboot=
++	echo Booting from mmc ...;
++	run mmcargs;
++	if test ${sec_boot} = yes; then
++		if true; then
++			run boot_os;
++		else
++			echo ERR: failed to authenticate;
++		fi;
++	else
++		if run loadfdt; then
++			run boot_os;
++		else
++			echo WARN: Cannot load the DT;
++		fi;
++	fi;
++netargs=setenv bootargs ${jh_clk} ${mcore_clk} console=${console} root=/dev/nfs
++	ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
++netboot=
++	echo Booting from net ...;
++	run netargs;
++	if test ${ip_dyn} = yes; then
++		setenv get_cmd dhcp;
++	else
++		setenv get_cmd tftp;
++	fi;
++	if test ${sec_boot} = yes; then
++		${get_cmd} ${cntr_addr} ${cntr_file};
++		if true; then
++			run boot_os;
++		else
++			echo ERR: failed to authenticate;
++		fi;
++	else
++		${get_cmd} ${loadaddr} ${image};
++		if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
++			run boot_os;
++		else
++			echo WARN: Cannot load the DT;
++		fi;
++	fi;
++bsp_bootcmd=
++	echo Running BSP bootcmd ...;
++	mmc dev ${mmcdev};
++	if mmc rescan; then
++		if run loadbootscript; then
++			run bootscript;
++		else
++			if test ${sec_boot} = yes; then
++				if run loadcntr; then
++					run mmcboot;
++				else
++					run netboot;
++				fi;
++			else
++				if run loadimage; then
++					run mmcboot;
++				else
++					run netboot;
++				fi;
++			fi;
++		fi;
++	fi;
++scriptaddr=0x83500000
+diff --git a/configs/imx93_11x11_evk_defconfig b/configs/imx93_11x11_evk_defconfig
+index df62eecdde455af561a23a54fde5dfc0a66d1835..43a67232d045e6f308b7bf79998d707841d3886e 100644
+--- a/configs/imx93_11x11_evk_defconfig
++++ b/configs/imx93_11x11_evk_defconfig
+@@ -26,7 +26,7 @@ CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x88000000
+ CONFIG_SYS_MEMTEST_START=0x80000000
+ CONFIG_SYS_MEMTEST_END=0x90000000
+ CONFIG_REMAKE_ELF=y
+-CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTCOMMAND="bootflow scan -lb; run bsp_bootcmd"
+ CONFIG_DEFAULT_FDT_FILE="imx93-11x11-evk.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
+diff --git a/include/configs/imx93_evk.h b/include/configs/imx93_evk.h
+index 260a5043d5370478a6245bd4eafcf5f1c24b495a..eb40a69d20cb0aeec973a9c1a32a6fcfd831b967 100644
+--- a/include/configs/imx93_evk.h
++++ b/include/configs/imx93_evk.h
+@@ -17,117 +17,12 @@
+ #define CFG_MALLOC_F_ADDR		0x204D0000
+ #endif
+ 
+-#ifdef CONFIG_DISTRO_DEFAULTS
+-#define BOOT_TARGET_DEVICES(func) \
+-	func(MMC, mmc, 0) \
+-	func(MMC, mmc, 1) \
+-
+-#include <config_distro_bootcmd.h>
+-#else
+-#define BOOTENV
+-#endif
+-
+ #ifdef CONFIG_SYS_MMC_ENV_DEV
+ #define IMX93_EVK_MMC_ENV_DEV CONFIG_SYS_MMC_ENV_DEV
+ #else
+ #define IMX93_EVK_MMC_ENV_DEV 0
+ #endif
+ 
+-/* Initial environment variables */
+-#define CFG_EXTRA_ENV_SETTINGS		\
+-	BOOTENV \
+-	"scriptaddr=0x83500000\0" \
+-	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+-	"image=Image\0" \
+-	"splashimage=0x90000000\0" \
+-	"console=ttyLP0,115200 earlycon\0" \
+-	"fdt_addr_r=0x83000000\0"			\
+-	"fdt_addr=0x83000000\0"			\
+-	"cntr_addr=0x98000000\0"			\
+-	"cntr_file=os_cntr_signed.bin\0" \
+-	"boot_fit=no\0" \
+-	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+-	"bootm_size=0x10000000\0" \
+-	"mmcdev=" __stringify(IMX93_EVK_MMC_ENV_DEV)"\0" \
+-	"mmcpart=1\0" \
+-	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
+-	"mmcautodetect=yes\0" \
+-	"mmcargs=setenv bootargs ${jh_clk} console=${console} root=${mmcroot}\0 " \
+-	"loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
+-	"bootscript=echo Running bootscript from mmc ...; " \
+-		"source\0" \
+-	"loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}\0" \
+-	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}\0" \
+-	"loadcntr=fatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_file}\0" \
+-	"auth_os=auth_cntr ${cntr_addr}\0" \
+-	"boot_os=booti ${loadaddr} - ${fdt_addr_r};\0" \
+-	"mmcboot=echo Booting from mmc ...; " \
+-		"run mmcargs; " \
+-		"if test ${sec_boot} = yes; then " \
+-			"if run auth_os; then " \
+-				"run boot_os; " \
+-			"else " \
+-				"echo ERR: failed to authenticate; " \
+-			"fi; " \
+-		"else " \
+-			"if test ${boot_fit} = yes || test ${boot_fit} = try; then " \
+-				"bootm ${loadaddr}; " \
+-			"else " \
+-				"if run loadfdt; then " \
+-					"run boot_os; " \
+-				"else " \
+-					"echo WARN: Cannot load the DT; " \
+-				"fi; " \
+-			"fi;" \
+-		"fi;\0" \
+-	"netargs=setenv bootargs ${jh_clk} console=${console} " \
+-		"root=/dev/nfs " \
+-		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
+-	"netboot=echo Booting from net ...; " \
+-		"run netargs;  " \
+-		"if test ${ip_dyn} = yes; then " \
+-			"setenv get_cmd dhcp; " \
+-		"else " \
+-			"setenv get_cmd tftp; " \
+-		"fi; " \
+-		"if test ${sec_boot} = yes; then " \
+-			"${get_cmd} ${cntr_addr} ${cntr_file}; " \
+-			"if run auth_os; then " \
+-				"run boot_os; " \
+-			"else " \
+-				"echo ERR: failed to authenticate; " \
+-			"fi; " \
+-		"else " \
+-			"${get_cmd} ${loadaddr} ${image}; " \
+-			"if test ${boot_fit} = yes || test ${boot_fit} = try; then " \
+-				"bootm ${loadaddr}; " \
+-			"else " \
+-				"if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then " \
+-					"run boot_os; " \
+-				"else " \
+-					"echo WARN: Cannot load the DT; " \
+-				"fi; " \
+-			"fi;" \
+-		"fi;\0" \
+-	"bsp_bootcmd=echo Running BSP bootcmd ...; " \
+-		"mmc dev ${mmcdev}; if mmc rescan; then " \
+-		   "if run loadbootscript; then " \
+-			   "run bootscript; " \
+-		   "else " \
+-			   "if test ${sec_boot} = yes; then " \
+-				   "if run loadcntr; then " \
+-					   "run mmcboot; " \
+-				   "else run netboot; " \
+-				   "fi; " \
+-			    "else " \
+-				   "if run loadimage; then " \
+-					   "run mmcboot; " \
+-				   "else run netboot; " \
+-				   "fi; " \
+-				"fi; " \
+-		   "fi; " \
+-	   "fi;"
+-
+ /* Link Definitions */
+ 
+ #define CFG_SYS_INIT_RAM_ADDR        0x80000000
 
- arch/arm/dts/imx93-11x11-evk-u-boot.dtsi     | 118 ---------------------------
- arch/arm/mach-imx/imx8m/Kconfig              |   8 ++
- arch/arm/mach-imx/imx9/Kconfig               |   6 ++
- board/freescale/common/Makefile              |   2 +-
- board/freescale/imx8mm_evk/imx8mm_evk.c      |   3 +
- board/freescale/imx8mm_evk/imx8mm_evk.env    |  67 +++++++++++++++
- board/freescale/imx8mn_evk/imx8mn_evk.c      |  12 +--
- board/freescale/imx8mn_evk/imx8mn_evk.env    |  67 +++++++++++++++
- board/freescale/imx8mp_evk/imx8mp_evk.c      |   5 ++
- board/freescale/imx8mp_evk/imx8mp_evk.env    |  57 +++++++++++++
- board/freescale/imx8mq_evk/imx8mq_evk.c      |  29 ++-----
- board/freescale/imx8mq_evk/imx8mq_evk.env    |  60 ++++++++++++++
- board/freescale/imx91_evk/imx91_evk.env      |  29 ++++++-
- board/freescale/imx93_evk/imx93_evk.env      |  88 ++++++++++++++++++++
- board/freescale/imx93_qsb/imx93_qsb.env      |  29 ++++++-
- configs/imx8mm_evk_defconfig                 |   3 +-
- configs/imx8mm_evk_fspi_defconfig            |   4 +-
- configs/imx8mn_evk_defconfig                 |   2 +-
- configs/imx8mp_evk_defconfig                 |   2 +-
- configs/imx8mq_evk_defconfig                 |   3 +-
- configs/imx91_11x11_evk_defconfig            |   3 +-
- configs/imx91_11x11_evk_inline_ecc_defconfig |   3 +-
- configs/imx93_11x11_evk_defconfig            |   2 +-
- configs/imx93_9x9_qsb_defconfig              |   3 +-
- configs/imx93_9x9_qsb_inline_ecc_defconfig   |   3 +-
- drivers/gpio/adp5585_gpio.c                  |   2 +-
- include/configs/imx8mm_evk.h                 |  22 -----
- include/configs/imx8mn_evk.h                 |  30 -------
- include/configs/imx8mp_evk.h                 |  21 -----
- include/configs/imx8mq_evk.h                 |  22 -----
- include/configs/imx93_evk.h                  | 105 ------------------------
- 31 files changed, 444 insertions(+), 366 deletions(-)
----
-base-commit: ec9263b4f15c4cf82eb6a211c67baa6385065b8e
-change-id: 20241231-imx-bootstd-abbf2e9e0d75
-
-Best regards,
 -- 
-Peng Fan <peng.fan@nxp.com>
+2.35.3
 
