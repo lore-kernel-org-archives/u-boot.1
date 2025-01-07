@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3E00E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:28:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B4D7E77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 13:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42BFE801E8;
-	Tue,  7 Jan 2025 14:28:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C812F801E8;
+	Tue,  7 Jan 2025 14:29:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x4b/Nsbi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PxI9QKbe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C0328036D; Tue,  7 Jan 2025 14:28:56 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id C617E801E8; Tue,  7 Jan 2025 14:29:39 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F268F8007D
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 14:28:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C87A58007D
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 14:29:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e39779a268bso19455537276.1
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 05:28:51 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e54bd61e793so3513995276.2
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 05:29:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736256531; x=1736861331; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1736256573; x=1736861373; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3En8+OldtIPuOjuzBko4ytqRN7kqPHNxgVTNEQ+nbXM=;
- b=x4b/Nsbi4LxhDxV+QagXkcKrkAesdaLAK9qcPtzGblcg95xO8qToL9/2lLUMoFajQn
- wRDMG9HTZTsIwmugfM/8b5JA5tt6MOcgnkcWpkixKGoKPFUmTLcpPd4lSyQjOw+Fw9S/
- 3noX53gnPLOZvsK/KDGMxu2iJc/brVus1y/vXH7ysl/O1azjeMzhph3dJGR8t5QO/WCx
- ts8OQ/RFYqj9F01CtZQIezf7D+qFPE/6OZjPC4HpDUY0ptp+LP/OlQmQ5ZEUsJHH/Spr
- Be+9QItlh1o/C7mkZqfPG97b7LF52fD9qvZbxPoHqTYj4JpCjJeYe/Ro+/t75FRWKIJ9
- UY+w==
+ bh=/hzGnYNuAc8kf9QKa0/Z7QYRVYtqdyU3RWszFK0ff/E=;
+ b=PxI9QKbet5HK5AcrA/RelscgKNO3n6YDu5zsXXC1BtwVznyq31y38WzAJB1CunsHh9
+ WnPSuQ1izg7K1tw3MNdL2AiwUbCrWA0yHLUaOo1re2wyxjnuTwEz2jGlHH5olQ5xWX6a
+ gympSMtCZd8glFTucXQtZXRRypfs/QVzvi7OUBpNxl+49bQGTr4dkIjP+cd8XLvmiMok
+ jvGAzjP+lyKiqIARnf64WvFTk6zTZIhGcyN8fWb+nWxisFa78qXRFntMO5wgEEO1chJT
+ CNt6UNszxu3nvJLMpFvlhLLQc6l/RXyEnxmDIQosKf1Wghah05fmjOwOIp6K8uj2t6sl
+ 0g9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736256531; x=1736861331;
+ d=1e100.net; s=20230601; t=1736256573; x=1736861373;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3En8+OldtIPuOjuzBko4ytqRN7kqPHNxgVTNEQ+nbXM=;
- b=pJWmoJhk0qqIPVgoQydf8k2JxgB1ptOCids0fjoxO7s7cT82IpxScCHUub7uJr6i41
- vrbI7Ytxw7+kAmTcTgY0MNwGJxGHBbh6hWWnEsL+ATa1AdZ8HWaIyR/dtj3+dFWIj/zv
- oJMp7z2QETRvrq0K7wiXe6FItzq71W2TP/F1BP36K1VDdWXU77XX6inOvBhzowY9nnSX
- NeHfuuYclMbKVnGZ8/rpo2xt7KlSq/umsvqcXjmHnuJ0r64VIRISXhaXKFQgZsMGknGp
- pMl0Zuv8GFchOvdyTVml0FYwW86qznxPbCF0K1gL3A0s/QyzHxRVOMR5q7t96VhSJvZk
- M+Sw==
+ bh=/hzGnYNuAc8kf9QKa0/Z7QYRVYtqdyU3RWszFK0ff/E=;
+ b=oNLHcnrh7O3YipmDvKIKUGIWr9YFhyP+UjZIDcyFuTFqntyDjOImBgZRDCQDJLtNEg
+ zhE9onCIVcdyHzqAJFWQ8xqm93gp3b4wkrcKfOFXzEwefkiap7GK9MMFUrgqLDfhBfgr
+ 1wYS5QLf9JoEIBs9RtIk4ykaxTeT5PtvsyL96r17mSfn+NhBSCUzpaya9XmcRguZzYG1
+ q3EywE4qXsyQ96XwFCZ/HF5tzNMy5CUBzAqOfEXF8HWZTaoatWuTmJ6R/p3PiRW7SUfE
+ CKUuaqY765oRbp63nYCkA/NPKhjnQu4Ek6u9L594A+Ac0hWIItuAf5kdsLSXo0TkoZUQ
+ Gfdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJcPJPkQ4vC+3pYmbCqbLaLWWvqcmmRZOJ44ZWhdIUOWHwEH8EPJ6Hrf7JmJX1J2v2oz+WcmQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzcJb5tjH16pQyOIroPcZ+Uk1t8TxflS7Zog9BYKvR+g1EPNVmL
- +E4jrQjXVdPvbxi7812eyzT+7ndWxcAz4PWitF4M5/8JhPsP8IhJ81QdEKYM8B3thyIymoaWikd
- 70l/Qi2I1GXQaBxfYkS16yGMxGGRDyvCUJeEQTQ==
-X-Gm-Gg: ASbGncv2mpPGWYPt546C3nOeup7mOYzZw4fLgr7YkJf9jwGvGcCQAP/DGx7DSRYdJTy
- BsNnt+0pl5BjreK1UHeAe9ia2JfqhpEuT54osLg==
-X-Google-Smtp-Source: AGHT+IHlQYDQZlbnZCX1f/IxnYDTbF5TgJd+Wa7nNSISQXLjM2PECVCrqBWEjjapiC0WdwScGiqKbVCy8qsScqHC+9Q=
-X-Received: by 2002:a25:870e:0:b0:e38:8d3b:66e0 with SMTP id
- 3f1490d57ef6-e54d24adb12mr2155459276.19.1736256530670; Tue, 07 Jan 2025
- 05:28:50 -0800 (PST)
+ AJvYcCVPKoX6+s72Lovb7sf1M99U8wzerwUSJuYjY18afHaBEKsx4C5BecEiFyjb0fhzPf9yfpBq+Ps=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtIrtinBnWNGQJyhBCHaFnWWy8cQrnGCkEVPEK0gJzDqTwW+c7
+ QmTnPcKjKOGCAx8cTVnAipFnXW8uN8NMAY0V1xJm07JCy/zgxbOqT5HmpeW7gOdbEeh2+ktIDyM
+ Y8PVfhnONK2dDOQ+WR9m7EiCHKYjETB8iGOvoUA==
+X-Gm-Gg: ASbGncsYH1hpakZrAQAkqn+c4oASzGBsbxmZkPXLUkjLqAUaPKTpAn9eFQjxe7tMIa7
+ yIMgluCITBrKFnf+VaS6L/29X8QfYV/1OAffuhw==
+X-Google-Smtp-Source: AGHT+IE/6kj7Rd8qC35Muh/0Vf07zi3sBu/Cs0XPGlsGwM2Oe8seZqHPDnH8dBov57Dt1EVK3m3pRsPWhvAnqfgXa80=
+X-Received: by 2002:a05:6902:140c:b0:e30:c614:5c40 with SMTP id
+ 3f1490d57ef6-e538c1f1a2dmr40578401276.2.1736256573414; Tue, 07 Jan 2025
+ 05:29:33 -0800 (PST)
 MIME-Version: 1.0
 References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
- <20250102181133.378867-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250102181133.378867-2-heinrich.schuchardt@canonical.com>
+ <20250102181133.378867-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250102181133.378867-3-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 7 Jan 2025 15:28:14 +0200
-X-Gm-Features: AbW1kvZZ0e_VM1oknKkhwro0j8mN3ere2Ta7GFIffPYZhrFORa69HgMQhletTG4
-Message-ID: <CAC_iWj+qtNVwikJGMfyNgUFMU=N+LP1dmabUAFVDj6P6u_0jug@mail.gmail.com>
-Subject: Re: [PATCH 1/4] efi_loader: implement a HOB list
+Date: Tue, 7 Jan 2025 15:28:57 +0200
+X-Gm-Features: AbW1kvZ4F0PuMsJKgWfj4cx4Aq4ZwWZMFOddkTtV-b5j_DsRz3EywOMoqmLapP4
+Message-ID: <CAC_iWjLB-qgzt9HZn6giamneg5RpCy32xuANE-ojbWSc2UBhNg@mail.gmail.com>
+Subject: Re: [PATCH 2/4] efi_loader: build with HII configuration protocol
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
  u-boot@lists.denx.de
@@ -92,63 +92,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-[...]
-
-> +
-> +/**
-> + * efi_hob_list_register() - install HOB list
-> + *
-> + * The EFI shell on X86 requires a HOB list
-> + *
-> + * Return:     status code
-> + */
-> +efi_status_t efi_hob_list_register(void)
-> +{
-> +       struct efi_hob_header *hob;
-> +
-> +       hob = efi_alloc(sizeof(struct efi_hob_header));
-> +       if (!hob)
-> +               return EFI_OUT_OF_RESOURCES;
-> +
-> +       hob->hob_type = EFI_HOB_TYPE_END_OF_HOB_LIST;
-> +       hob->hob_length = sizeof(struct efi_hob_header);
-> +       hob->reserved = 0;
-> +
-> +       return efi_install_configuration_table(&efi_guid_hob_list, hob);\
-
-If this fails no one frees the  'hob' allocated memory
-
-> +}
-> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> index aa59bc7779d..393b690c3ee 100644
-> --- a/lib/efi_loader/efi_setup.c
-> +++ b/lib/efi_loader/efi_setup.c
-> @@ -7,6 +7,7 @@
+On Thu, 2 Jan 2025 at 20:11, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
->  #define LOG_CATEGORY LOGC_EFI
+> Without the HII configuration protocol the debug version of the UEFI shell
+> cannot be used.
 >
-> +#include <efi_hob.h>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_loader/Makefile         | 2 +-
+>  lib/efi_loader/efi_hii_config.c | 4 ----
+>  lib/efi_loader/efi_root_node.c  | 3 +++
+>  3 files changed, 4 insertions(+), 5 deletions(-)
+>
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index 7d1f04e9fbd..195ed8667fe 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -36,7 +36,7 @@ obj-$(CONFIG_EFI_DEVICE_PATH_UTIL) += efi_device_path_utilities.o
+>  obj-y += efi_dt_fixup.o
+>  obj-y += efi_fdt.o
+>  obj-y += efi_file.o
+> -obj-$(CONFIG_EFI_LOADER_HII) += efi_hii.o
+> +obj-$(CONFIG_EFI_LOADER_HII) += efi_hii.o efi_hii_config.o
+>  obj-$(CONFIG_EFI_HOB) += efi_hob.o
+>  obj-y += efi_image_loader.o
+>  obj-y += efi_load_options.o
+> diff --git a/lib/efi_loader/efi_hii_config.c b/lib/efi_loader/efi_hii_config.c
+> index ae0f3ecd3b1..54a72d573be 100644
+> --- a/lib/efi_loader/efi_hii_config.c
+> +++ b/lib/efi_loader/efi_hii_config.c
+> @@ -4,10 +4,6 @@
+>   *
+>   * Copyright (c) 2017 Leif Lindholm
+>   * Copyright (c) 2018 AKASHI Takahiro, Linaro Limited
+> - *
+> - * As this is still a non-working stub and the protocol is neither required
+> - * by the EFI shell nor by the UEFI SCT this module has been removed from
+> - * the Makefile.
+>   */
+>
 >  #include <efi_loader.h>
->  #include <efi_variable.h>
->  #include <log.h>
-> @@ -271,6 +272,12 @@ efi_status_t efi_init_obj_list(void)
->                         goto out;
->         }
->
-> +       if (IS_ENABLED(CONFIG_EFI_HOB)) {
-> +               ret = efi_hob_list_register();
-> +               if (ret != EFI_SUCCESS)
-> +                       goto out;
-> +       }
-> +
->         if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
->                 ret = efi_tcg2_register();
->                 if (ret != EFI_SUCCESS)
+> diff --git a/lib/efi_loader/efi_root_node.c b/lib/efi_loader/efi_root_node.c
+> index 4d7fb74b5d6..426f77cb2ad 100644
+> --- a/lib/efi_loader/efi_root_node.c
+> +++ b/lib/efi_loader/efi_root_node.c
+> @@ -78,6 +78,9 @@ efi_status_t efi_root_node_register(void)
+>                  /* HII database protocol */
+>                  &efi_guid_hii_database_protocol,
+>                  &efi_hii_database,
+> +                /* EFI HII Configuration Routing Protocol */
+> +                &efi_guid_hii_config_routing_protocol,
+> +                &efi_hii_config_routing,
+>  #endif
+>                  NULL);
+>         efi_root->type = EFI_OBJECT_TYPE_U_BOOT_FIRMWARE;
 > --
 > 2.47.1
 >
 
-Cheers
-/Ilias
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
