@@ -4,78 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF49DE77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 11:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7110FE77198
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 11:27:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DDF780634;
-	Tue,  7 Jan 2025 12:25:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 01B5D801E8;
+	Tue,  7 Jan 2025 12:27:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736249119;
-	bh=lB0fXS+cNMjQl8B32s4HasJNtIKNpZQ3GYZlDDhgag0=;
+	s=phobos-20191101; t=1736249254;
+	bh=dOfYtZGeTAAY8bckgms/zg6JU+LLafmnqs5FAnjRtNM=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Y8rB7DU5npFXCVV50FBQ5xttRKV3r8WDniDbXvc7IicoK2nAGcL29JxdzohVKEc4u
-	 BhRnDkmj+cwZ8XfJK9F7Jcq1oYEvt4A4pXbqTd0Jembez624T21J9OT2CsIImVBsCz
-	 vAjl+NpF4gaUEkzPVS/4dMINXw4iTGwGDBfPrxy+sszpDYn+VXmHEsM7j1pjQfUA30
-	 xG3jXvVz3SUzo7MuT7kYJTJMUJc5nE5B2X9Dl5fa/4lLfqa9tDnnQ9qs1XDPN3+ZRx
-	 vqOrXqLt77LTUgZ+As1y0rQIidLrQuBt6ZoXzZToF3XkREnOCzDJmPskqPd5PZj5tV
-	 fyl3EyRtqaK2A==
+	b=i2Kr0Y+CVloUvvq5o7D+E/dG6m28lkQlgmvKprQQRnEhqzDGHjlhny2mu1naHRxcB
+	 moQz4xblk/p9w1U+54HNRhABt9mxCtXueJ41a5jMt40z5cOP/qwNhRKCl1Ihcv4KjH
+	 N+FHfNNVbk8heyhMb0Q8zAZNBTjjd9tcT6ic0MQctXhpgdrUJX9g4r+XRZs4CLRYzu
+	 AMAVynDM1H/zN/rw/nlcWo5tGisJfGL34p968VE2WSbPh1JLwJyaERqMNtmN07r565
+	 LS9yq5Gu8Uns/e9apaDNp97pfLK/NyYJNDQClNpCRwc8v/J5qkE3qmhcsm7BDanoob
+	 JyZ5NK6iFdspA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DF0680658; Tue,  7 Jan 2025 12:25:18 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 68FCA801FD; Tue,  7 Jan 2025 12:27:33 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6A0F805FB
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 12:25:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A7F5801B6
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 12:27:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="KuBOLdNk"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 428D5104811F3; Tue,  7 Jan 2025 12:25:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736249113;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lB0fXS+cNMjQl8B32s4HasJNtIKNpZQ3GYZlDDhgag0=;
- b=KuBOLdNkkLZY5zES5VvMOBR06+A+XVovk6/JYfnZgkA/grYOxVyDX/MeyiuJQYztb1KlPV
- y1U572JovDdvr70tCU9FehBiku9f5Mg0C65gEtTMtn2I+Vv4CNATi4kpMjVBv4Dc4ndGDB
- hFCYqBB/764LsOdEUfNECJlpFRhcO0Bjx7LRD2KOrZn70wRqe4MgbLXuk0FLQEHS3NqDUM
- AkE1t8kHmAz3Y2C/fxkJ6Eio9a7/8QlcgU90bbjeQSFoAA9DYIQbg9Z0aQt85RjTBBhPia
- WI8Yh0IgldXWJiy8VB38iM68RyT1hSlZ3aVbUU0eTH4Z11iz6XsOCLo68VrQBw==
-Message-ID: <56167f2b-63f1-40aa-bb3d-26eb72cde729@denx.de>
-Date: Tue, 7 Jan 2025 12:21:30 +0100
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4YS80Y6HvLz9sZk;
+ Tue,  7 Jan 2025 12:27:25 +0100 (CET)
+Message-ID: <07befe54-08cc-4e6d-a0be-6afbea47c4d2@denx.de>
+Date: Tue, 7 Jan 2025 12:27:24 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gUmU6IFtQQVRDSCB2MyAxMS8xN10gaW14?=
- =?UTF-8?Q?9=3A_scmi=3A_soc=3A_Override_h=5Fspl=5Fload=5Fread_with_trampolin?=
- =?UTF-8?Q?e_buffer?=
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
-References: <20250103-imx95-v1-0-6744df5dc020@oss.nxp.com>
- <20250103-imx95-v1-11-6744df5dc020@oss.nxp.com>
- <529cf75f-5e89-451d-acd4-942cfc91799b@denx.de>
- <PAXPR04MB9644460F64C5A3F04D4EFD92E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Subject: Re: [PATCH v2 0/3] Initial support for PXA1908 and
+ samsung-coreprimevelte
+To: =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
+ Tom Rini <trini@konsulko.com>
+Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
+ u-boot@lists.denx.de
+References: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB9644460F64C5A3F04D4EFD92E2112@PAXPR04MB9644.eurprd04.prod.outlook.com>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-Rspamd-Queue-Id: 4YS80Y6HvLz9sZk
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,44 +73,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/7/25 11:04 AM, Alice Guo (OSS) wrote:
->> -----邮件原件-----
->> 发件人: Marek Vasut <marex@denx.de>
->> 发送时间: 2025年1月6日 5:44
->> 收件人: Alice Guo (OSS) <alice.guo@oss.nxp.com>; Tom Rini
->> <trini@konsulko.com>; Stefano Babic <sbabic@denx.de>; Fabio Estevam
->> <festevam@gmail.com>; dl-uboot-imx <uboot-imx@nxp.com>; Lukasz
->> Majewski <lukma@denx.de>; Sean Anderson <seanga2@gmail.com>; Simon
->> Glass <sjg@chromium.org>; Alper Nebi Yasak <alpernebiyasak@gmail.com>;
->> Alice Guo <alice.guo@nxp.com>
->> 抄送: u-boot@lists.denx.de; tharvey@gateworks.com; Ye Li <ye.li@nxp.com>;
->> Peng Fan <peng.fan@nxp.com>
->> 主题: [EXT] Re: [PATCH v3 11/17] imx9: scmi: soc: Override h_spl_load_read
->> with trampoline buffer
->>
->> Caution: This is an external email. Please take care when clicking links or
->> opening attachments. When in doubt, report the message using the 'Report this
->> email' button
->>
->>
->> On 1/3/25 7:45 AM, Alice Guo wrote:
->>> From: Ye Li <ye.li@nxp.com>
->>>
->>> When SPL loading image to secure region, for example, ATF and tee to
->>> DDR secure region. Because the USDHC controller is non-secure master,
->>> it can't access this region and will cause loading issue.
->>>
->>> So override h_spl_load_read to use a trampoline buffer in nonsecure
->>> region, then use CPU to copy the image from trampoline buffer to
->>> destination secure region.
->> Can the attacker intercept this and rewrite the soon-to-be-secure-only software
->> with something that would later allow them to take over the system ? For
->> example, could the attacker flip some secure-test bit in the TEE while it is in
->> non-secure DRAM and before it is copied in the secure location, and make TEE
->> accept privileged SMC operations from any unprivileged software ?
-> 
-> User can authenticate OP-TEE. When authentication succeeds, OP-TEE has not been modified.
-Does this also affect U-Boot proper ?
+Hi Duje,
 
-If so, does U-Boot proper have to be signed too to avoid any possibility 
-of tampering ?
+On 31.12.24 17:49, Duje Mihanović wrote:
+> Hello,
+> 
+> This series adds initial support for Marvell's PXA1908 ARM64 SoC and
+> Samsung's Galaxy Core Prime VE LTE, a smartphone based on said SoC.
+> 
+> On this board, U-Boot is used as a secondary bootloader to work around
+> certain quirks of the factory S-Boot.
+
+S-Boot? Never heard of that one.
+
+Interesting to see such an ancient SoC getting supported in U-Boot.
+
+Thanks,
+Stefan
+
+> Signed-off-by: Duje Mihanović <duje.mihanovic@skole.hr>
+> ---
+> Changes in v2:
+> - Drop arm,armv8 compatible from CPU nodes to match upstream
+> - Add intel,xscale-uart compatible to NS16550 and use it in serial nodes to match upstream
+> - Add include guards to include/configs/pxa1908.h
+> - Disable CONFIG_DISPLAY_CPUINFO and CONFIG_CPU
+> - Rebase on v2025.01-rc5
+> - Link to v1: https://lore.kernel.org/r/20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr
+> 
+> ---
+> Duje Mihanović (3):
+>        serial: ns16550: Add Intel XScale support
+>        arm: mmp: add initial support for PXA1908 SoC
+>        board: samsung: add initial support for coreprimevelte board
+> 
+>   MAINTAINERS                                     |   8 ++
+>   arch/arm/Kconfig                                |  11 +++
+>   arch/arm/Makefile                               |   1 +
+>   arch/arm/dts/Makefile                           |   2 +
+>   arch/arm/dts/pxa1908-samsung-coreprimevelte.dts |  74 +++++++++++++++++
+>   arch/arm/dts/pxa1908.dtsi                       | 106 ++++++++++++++++++++++++
+>   arch/arm/mach-mmp/Kconfig                       |  12 +++
+>   arch/arm/mach-mmp/Makefile                      |   1 +
+>   arch/arm/mach-mmp/board.c                       |  82 ++++++++++++++++++
+>   arch/arm/mach-mmp/mmu.c                         |  30 +++++++
+>   board/samsung/coreprimevelte/Kconfig            |  12 +++
+>   board/samsung/coreprimevelte/MAINTAINERS        |   6 ++
+>   configs/coreprimevelte_defconfig                |  18 ++++
+>   drivers/serial/ns16550.c                        |   1 +
+>   include/configs/pxa1908.h                       |  18 ++++
+>   15 files changed, 382 insertions(+)
+> ---
+> base-commit: 4be40460758057b9a85b0303dc072c108813cdf6
+> change-id: 20241226-coreprimevelte-1c26acfb58db
+> 
+> Best regards,
+
+Viele Grüße,
+Stefan Roese
+
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+
