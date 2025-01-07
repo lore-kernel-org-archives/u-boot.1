@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A45E77197
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 09:39:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D48EE77197
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 09:39:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E61518036B;
-	Tue,  7 Jan 2025 10:39:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E1C380601;
+	Tue,  7 Jan 2025 10:39:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xHDWUPMw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nmBUbIbW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECDDA805E9; Tue,  7 Jan 2025 10:38:58 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADCDF801E8
+ id 0753C801E8; Tue,  7 Jan 2025 10:38:59 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BD1178036B
  for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 10:38:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5079cixE2625423
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 7 Jan 2025 03:38:44 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5079cg4d003662;
+ Tue, 7 Jan 2025 03:38:42 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736242724;
- bh=dJ/4mvwYUQp0a4Dg3yELT/5qALRd24pjEO+50CAsbWk=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=xHDWUPMwftSrZt/LJ8LjobiEbzwpUosRfbc5f9jdyw5TRW1Fnix4wODO4OqwE1L+e
- lPiEiOkfBneSLkB4AEOr/+cRGRHVLxdhfLocbYscj37BNpxQ7SOWB1GksKRxC9D1Vb
- KVFuIdFtM4kAFEnEmW1filLcwZxzdwnoPszwXPsI=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5079cihb002137
+ s=ti-com-17Q1; t=1736242722;
+ bh=ALEgWj/MMCgTAr4etfaneOOiWDiZNQ4G1mHcDXpNA3U=;
+ h=From:To:CC:Subject:Date;
+ b=nmBUbIbWA6cuY2uy8GTJHG4CsYCG6S2b6gT5b69sEOWaM+vXxRK5nbLew4MSKdfnc
+ VfRqVeQr1zirJLCoBNWjxrYt+/Ad57VVzzqdxcwq9rxez2txnHaBOY1xzqCro77uTz
+ XaIyVHV/UfVCCYke0TZFdVpjZd8SAG+vyxMh24pg=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5079cg9K089320
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 7 Jan 2025 03:38:44 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 7 Jan 2025 03:38:42 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
- Jan 2025 03:38:43 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2025 03:38:42 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 7 Jan 2025 03:38:43 -0600
+ Frontend Transport; Tue, 7 Jan 2025 03:38:42 -0600
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5079cgwT057385;
- Tue, 7 Jan 2025 03:38:43 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5079cfTm057359;
+ Tue, 7 Jan 2025 03:38:41 -0600
 From: Chintan Vankar <c-vankar@ti.com>
 To: AKASHI Takahiro <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
  <mikhail.kshevetskiy@iopsys.eu>, Marek Vasut
@@ -69,13 +68,10 @@ To: AKASHI Takahiro <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
  <trini@konsulko.com>
 CC: <srk@ti.com>, <s-vadapalli@ti.com>, <danishanwar@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 01/13] net: tftp: Increase TFTP pkt string length to include
- null character
-Date: Tue, 7 Jan 2025 15:08:28 +0530
-Message-ID: <20250107093840.2211381-2-c-vankar@ti.com>
+Subject: [PATCH 00/13] Add support for Ethernet boot on AM62p-SK and AM68-SK
+Date: Tue, 7 Jan 2025 15:08:27 +0530
+Message-ID: <20250107093840.2211381-1-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250107093840.2211381-1-c-vankar@ti.com>
-References: <20250107093840.2211381-1-c-vankar@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -96,43 +92,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-'sprintf()' function defined in 'tiny-printf.c' is returning length of the
-string excluding null character. Fix this by increasing TFTP pkt length by
-1 to avoid TFTP error of request being not-null terminated while
-requesting length of packet.
+This series enables Ethernet boot on AM62p-SK and AM68-SK.
 
-Signed-off-by: Chintan Vankar <c-vankar@ti.com>
----
- net/tftp.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+This series is based on commit
+'6d41f0a39d6423c8e57e92ebbe9f8c0333a63f72' of origin/master branch of
+U-Boot.
 
-diff --git a/net/tftp.c b/net/tftp.c
-index 704b20b4ff8..db1d4aacb0e 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -347,11 +347,11 @@ static void tftp_send(void)
- 		pkt += strlen((char *)pkt) + 1;
- #ifdef CONFIG_TFTP_TSIZE
- 		pkt += sprintf((char *)pkt, "tsize%c%u%c",
--				0, net_boot_file_size, 0);
-+				0, net_boot_file_size, 0) + 1;
- #endif
- 		/* try for more effic. blk size */
- 		pkt += sprintf((char *)pkt, "blksize%c%d%c",
--				0, tftp_block_size_option, 0);
-+				0, tftp_block_size_option, 0) + 1;
- 
- 		/* try for more effic. window size.
- 		 * Implemented only for tftp get.
-@@ -359,7 +359,7 @@ static void tftp_send(void)
- 		 */
- 		if (tftp_state == STATE_SEND_RRQ && tftp_window_size_option > 1)
- 			pkt += sprintf((char *)pkt, "windowsize%c%d%c",
--					0, tftp_window_size_option, 0);
-+					0, tftp_window_size_option, 0) + 1;
- 		len = pkt - xp;
- 		break;
- 
+Logs:
+AM62p-SK Ethernet boot:
+https://gist.github.com/chintan013/cd622d329b0a5b894808daff3191bb9f
+AM68-SK Etherent boot:
+https://gist.github.com/chintan013/39e67a173327bcbdae1724c35341b445
+
+Andreas Dannenberg (3):
+  arm: mach-k3: am62p: Update SoC auto-gen data to enable CPSW boot
+  board: ti: am62px: evm: Enable cache for AM62p
+  configs: am62p: Add configs for enabling ETHBOOT in R5SPL
+
+Chintan Vankar (10):
+  net: tftp: Increase TFTP pkt string length to include null character
+  arm: mach-k3: j721s2: Update SoC auto-gen data to enable Ethernet boot
+  arm: mach-k3: j721s2_spl: Alias Ethernet boot to CPGMAC
+  arm: mach-k3: j721s2_init: Probe AM65 CPSW NUSS for R5/A72 SPL
+  configs: am68: Add configs for enabling Ethboot in R5SPL
+  configs: am68: Enable configs required for Ethernet boot
+  arm: dts: k3-am68-sk-base-board-u-boot: Add bootph-all property to
+    necessary nodes
+  arm: mach-k3: am62p5_init: Probe AM65 CPSW NUSS for R5/A53 SPL
+  configs: am62p: Enable configs required for Ethboot
+  arch: arm: dts: k3-am62p5-sk-u-boot: Add bootph-all property to
+    necessary nodes
+
+ arch/arm/dts/k3-am62p5-sk-u-boot.dtsi         | 32 ++++++++
+ .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi | 28 +++++++
+ arch/arm/mach-k3/am62px/am62p5_init.c         | 10 +++
+ arch/arm/mach-k3/include/mach/j721s2_spl.h    |  1 +
+ arch/arm/mach-k3/j721s2/j721s2_init.c         | 10 +++
+ arch/arm/mach-k3/r5/am62px/clk-data.c         | 44 +++++++++-
+ arch/arm/mach-k3/r5/am62px/dev-data.c         | 24 +++---
+ arch/arm/mach-k3/r5/j721s2/clk-data.c         | 58 +++++++++++++-
+ arch/arm/mach-k3/r5/j721s2/dev-data.c         |  3 +-
+ board/ti/am62px/evm.c                         |  8 ++
+ configs/am62px_evm_a53_ethboot_defconfig      | 17 ++++
+ configs/am62px_evm_r5_ethboot_defconfig       | 35 ++++++++
+ configs/am68_sk_a72_ethboot_defconfig         | 18 +++++
+ configs/am68_sk_r5_ethboot_defconfig          | 80 +++++++++++++++++++
+ net/tftp.c                                    |  6 +-
+ 15 files changed, 353 insertions(+), 21 deletions(-)
+ create mode 100644 configs/am62px_evm_a53_ethboot_defconfig
+ create mode 100644 configs/am62px_evm_r5_ethboot_defconfig
+ create mode 100644 configs/am68_sk_a72_ethboot_defconfig
+ create mode 100644 configs/am68_sk_r5_ethboot_defconfig
+
 -- 
 2.34.1
 
