@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32607E77198
-	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 15:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54943E77198
+	for <u-boot@archiver.kernel.org>; Tue,  7 Jan 2025 15:03:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81E3C801E8;
-	Tue,  7 Jan 2025 16:03:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D27098060C;
+	Tue,  7 Jan 2025 16:03:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HL0RsWYp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oJ1LiLpw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 950CF801FD; Tue,  7 Jan 2025 16:03:09 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 6372D801C3; Tue,  7 Jan 2025 16:03:18 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4C03801C3
- for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 16:03:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61882801C3
+ for <u-boot@lists.denx.de>; Tue,  7 Jan 2025 16:03:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6dd01781b56so88173586d6.0
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 07:03:06 -0800 (PST)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-46677ef6910so166685921cf.2
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 07:03:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736262185; x=1736866985; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hxrz1xRp3g2gnax5XsesdN855Uq5lhnb1HKnOS9w1GY=;
- b=HL0RsWYp6+QfdDZjJwKVfOUV5iBbe4wdHXIq0WKLAthj3qtwDorZLjPga2gZPOAQhf
- I7YEFOl6U6Q6fmOLzsxS/3FnBFENTzw75LkSjhv78W9i3t04uk8QpsZijeOZNpi4CNJ/
- coPnVf42Db/TEUVPjz2nfLsZ0+kglrhUGdAGUDmY2Y+CVStAsQjhOLcM5J2yeUMy6lPG
- k0JEjHQpyXVzHNA2/0Qdd8LkbTf09nQSNm9Yc1dbPQOc9x6zJ+gUp33Wxx8bIgRLH3tV
- I4Ah3D09uwGdT7OLhbk3xqDlGd7kqbUsi+PmwKz9BsNMfKOctNH8LxxqMZeukKPal89L
- Zz1Q==
+ d=linaro.org; s=google; t=1736262193; x=1736866993; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=h/dKGwGNF40ONyt59cWSYhz0z3R8VnMfmBWT9zEMcoo=;
+ b=oJ1LiLpw5rzywL5n0MPynFxczn6MgaTqfrXNQ134EjRR477yjI3/io3I94ep9mXehs
+ suaBdrzJRBW5f3W/IGk+tewoWnKhajdJXpY1yMIb2HXQah+/GPCb3RnH8klAi5ngEyXq
+ 4CUIPFsLCFSUYAV8ekcltFyMhuNIiFI6ZYLH0tHnfNJL8rNBJYuRP/Sr5s96gjI1zNYW
+ cZT5P/ucsURznbEEAOq8s14hNPr0igq6wOal5nURwNAxWlyL1hE2nvNT47KSwVS2s0jh
+ NFpBX75hLMFgpMXwGKLfxElEWTMnNQ7ZMnAD7P2ippG7vAYmYf/+sxTRMw8WUYd8kEI6
+ vGHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736262185; x=1736866985;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hxrz1xRp3g2gnax5XsesdN855Uq5lhnb1HKnOS9w1GY=;
- b=FefgEftXK5d2sIbLxH3JCj+eg/EuwhwQuVcKVX98Be5kg69kBK0uCt9mp8LnFEsZg5
- 4JaQwDKdPry2U0BK+VLE1UULgCpeqpADSRWMviU9LZhi2+ig/M+sfkB5CRHMR2q4mt9H
- HLSA2SdL2c9dithLuhFTK0hChDps48DBW3CK5qNtQ7AT6CYdS+tdodsXAnAAXFY/mcp+
- NwLuGnsNwRM/CXIqH3N8rEG9HPtG7TVf3Z+e2GuzoSH+LKEd3xL32F5MQFYYGxG/JdpN
- b9hpXsimjcxBrfb177iJOCt77aRC+T/StqGpCf3nBxkxAlgs8/0PHBgpEdFj/TL8fZp4
- 8eBg==
-X-Gm-Message-State: AOJu0YxOrh2QV/hR0ggyuHQJ/bByADbgGOD69paZYjdPEwoKV9LOx7TH
- ExrRpe+yWj1T3+vf/fDtRJESu/J2l7ltJZHvMPu6pWoODU1hbMZX89ghuXg5AX/Cd+JzqqSZwXm
- f
-X-Gm-Gg: ASbGncuCerhUJIZuERG02jYei9z4glfoPn31Pl0XJiFJrW5Fngyh9MEKfUkwa6vvNDJ
- NXHDlYmhl0N4BvqvBvCPPDk15m+wp+0ZjMQuT5QklJKMLoZnyzz5SU6U6Imf0c+9YDueZGJYR0T
- oPjM9OE5Gcq4UVzbwcUV4QESCy/0+4k37K9EYYvUeg5TKUu6zkFidKvfF6ptj/li1pyRF7Ttxcu
- iztYabIYlb5pABQpW1C/VFkMyT+JwhCbpZRmq4VDBmfKEC99aRwLvglz1roOHitVyXvRGHTWadA
- VMYAo/Z7x9yDZg9j0+zjhKxSIgouXU2v347OQMSuusmsw2rbnReE9bs=
-X-Google-Smtp-Source: AGHT+IFlybbbu9JkgzEDKtIabbdH8uXDfE0f5ulDu57+u7yYd9diE8v69GFncsIKq9hjZSnvsofdMg==
-X-Received: by 2002:ad4:5b83:0:b0:6d8:850a:4d6a with SMTP id
- 6a1803df08f44-6dd2332ee4dmr812225436d6.1.1736262185242; 
- Tue, 07 Jan 2025 07:03:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736262193; x=1736866993;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=h/dKGwGNF40ONyt59cWSYhz0z3R8VnMfmBWT9zEMcoo=;
+ b=Xuj+FqPAiHUeQGicjP/WBNcpbmqiltc/18yYcIOaCJiO8u0M9xaAfP+wxgVsPz1zS7
+ 503vJLfYiDyMKH6ShuWMWqeyXznMkkpH0Z37LBI0iyWBLBo6/SP2hhT6KQylM2TfGgAW
+ uRfxnHhTQL9NR0H3C54bzZliUJuembMyi98D4WiJgf94NhQVZQU9gN9PJJFyn1C88T2V
+ CJV9eTP3Om+XyqFc5lrDvkdilLBgxSinw9QIYagmkwfVJ8xjJ3+yNC5jOxq3EXS/rKnf
+ pSR8z6U+HNPgwr1qaJEEVN6ZoRXLc0D6pcHSIWkNrDXYfcM7c2PfFI93gMNmsutQfAk1
+ z+AQ==
+X-Gm-Message-State: AOJu0YzO9wJatIa4Z3mpXjYLvD32KJcECxuM+TSY1Wb39B5GQOSrId6L
+ FtZImQKfwVaTjU35pAOI9j3qa66K+xqPKMgNBpEN0gDdx0C1f9CkeV5S7vY84/oSN+ch3w/S5j4
+ Q
+X-Gm-Gg: ASbGncu1GgkTjtKeWS1HTQkJFxyLqXat+CnMxyqaXdg7XSTiGdwKklV8SpMt0ZryOul
+ om2lBzPBP+X1/5hrFI5dzXcqiZb1cJt1++R4sIX0K/hempdNIVweVFrO0SSyqz2mg/0JScLhM/d
+ aALMiGI6YUCRTnjEHcBfoQd7p/VVSnAZt1uOiy7czPQlHORq3CJMFiu7buY/8iJcTwqlRhiPhjd
+ WY4fmyBbHMDn5xTkqPuzcQNB8hDl6UwsWajZeG+bk0oANDpyNw8IHCs+9m59xINg8l0ncGp/nje
+ 1M+hPdHzcdGQ9wCA/RXI4vX8RDlMnP8UlkGpr8jjV02vkkTlwjLtgb4=
+X-Google-Smtp-Source: AGHT+IFcRa/ZLeLEKKwPzfHiG1u0JE4jOtskbjJygJEbzSoNbzuHzMN2vnP1+oyRshR5SdlfAUpDGQ==
+X-Received: by 2002:a05:6214:2388:b0:6d8:80e8:d567 with SMTP id
+ 6a1803df08f44-6dd23346480mr1166139106d6.18.1736262190990; 
+ Tue, 07 Jan 2025 07:03:10 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181d422asm180967096d6.105.2025.01.07.07.03.03
+ 6a1803df08f44-6dd181d422asm180967096d6.105.2025.01.07.07.03.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2025 07:03:04 -0800 (PST)
+ Tue, 07 Jan 2025 07:03:10 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
  Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>
-Subject: [PATCH v2 1/2] bloblist: add api to get blob with size
-Date: Tue,  7 Jan 2025 07:02:54 -0800
-Message-Id: <20250107150258.813289-1-raymond.mao@linaro.org>
+Subject: [PATCH v2 2/2] tpm: get tpm event log from bloblist
+Date: Tue,  7 Jan 2025 07:02:55 -0800
+Message-Id: <20250107150258.813289-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250107150258.813289-1-raymond.mao@linaro.org>
+References: <20250107150258.813289-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,113 +104,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-bloblist_find function only returns the pointer of blob data,
-which is fine for those self-describing data like FDT.
-But as a common scenario, an interface is needed to retrieve both
-the pointer and the size of the blob data.
-
-Add a few ut test cases for the new api.
+Get tpm event log from bloblist instead of FDT when bloblist is
+enabled and valid from previous boot stage.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
-- Rename function argument.
-- Add ut tests.
+- Remove patch dependency.
+- Remove the fallback to FDT when BLOBLIST is selected.
 
- common/bloblist.c      | 17 +++++++++++++++--
- include/bloblist.h     | 18 ++++++++++++++++++
- test/common/bloblist.c |  4 ++++
- 3 files changed, 37 insertions(+), 2 deletions(-)
+ lib/tpm_tcg2.c | 34 +++++++++++++++++++++-------------
+ 1 file changed, 21 insertions(+), 13 deletions(-)
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 110bb9dc44..ab48a3cdb9 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
+diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+index 7f868cc883..84845fc026 100644
+--- a/lib/tpm_tcg2.c
++++ b/lib/tpm_tcg2.c
+@@ -19,6 +19,7 @@
+ #include <linux/unaligned/generic.h>
+ #include <linux/unaligned/le_byteshift.h>
+ #include "tpm-utils.h"
++#include <bloblist.h>
+ 
+ int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
+ 		      u32 *pcr_banks)
+@@ -668,10 +669,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
+ 	const __be32 *size_prop;
+ 	int asize;
+ 	int ssize;
++	struct ofnode_phandle_args args;
++	phys_addr_t a;
++	fdt_size_t s;
+ 
+ 	*addr = NULL;
+ 	*size = 0;
+ 
++	*addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
++	if (*addr && *size)
++		return 0;
++	else if (CONFIG_IS_ENABLED(BLOBLIST))
++		goto map_log_mem;
++
+ 	addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
+ 	if (!addr_prop)
+ 		addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
+@@ -686,22 +696,20 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
+ 
+ 		*addr = map_physmem(a, s, MAP_NOCACHE);
+ 		*size = (u32)s;
+-	} else {
+-		struct ofnode_phandle_args args;
+-		phys_addr_t a;
+-		fdt_size_t s;
+ 
+-		if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
+-					       0, &args))
+-			return -ENODEV;
++		return 0;
++	}
+ 
+-		a = ofnode_get_addr_size(args.node, "reg", &s);
+-		if (a == FDT_ADDR_T_NONE)
+-			return -ENOMEM;
++map_log_mem:
++	if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
++		return -ENODEV;
+ 
+-		*addr = map_physmem(a, s, MAP_NOCACHE);
+-		*size = (u32)s;
+-	}
++	a = ofnode_get_addr_size(args.node, "reg", &s);
++	if (a == FDT_ADDR_T_NONE)
++		return -ENOMEM;
++
++	*addr = map_physmem(a, s, MAP_NOCACHE);
++	*size = (u32)s;
+ 
+ 	return 0;
  }
- 
- void *bloblist_find(uint tag, int size)
-+{
-+	void *blob = NULL;
-+	int blob_size;
-+
-+	blob = bloblist_get_blob(tag, &blob_size);
-+
-+	if (size && size != blob_size)
-+		return NULL;
-+
-+	return blob;
-+}
-+
-+void *bloblist_get_blob(uint tag, int *sizep)
- {
- 	struct bloblist_rec *rec;
- 
- 	rec = bloblist_findrec(tag);
- 	if (!rec)
- 		return NULL;
--	if (size && size != rec->size)
--		return NULL;
-+
-+	*sizep = rec->size;
- 
- 	return (void *)rec + rec_hdr_size(rec);
- }
-diff --git a/include/bloblist.h b/include/bloblist.h
-index f999391f74..52ba0ddcf8 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -250,6 +250,24 @@ static inline void *bloblist_check_magic(ulong addr)
- 	return ptr;
- }
- 
-+#if CONFIG_IS_ENABLED(BLOBLIST)
-+/**
-+ * bloblist_get_blob() - Find a blob and get the size of it
-+ *
-+ * Searches the bloblist and returns the blob with the matching tag
-+ *
-+ * @tag:	Tag to search for (enum bloblist_tag_t)
-+ * @sizep:	Size of the blob found
-+ * Return: pointer to bloblist if found, or NULL if not found
-+ */
-+void *bloblist_get_blob(uint tag, int *sizep);
-+#else
-+static inline void *bloblist_get_blob(uint tag, int *sizep)
-+{
-+	return NULL;
-+}
-+#endif
-+
- /**
-  * bloblist_find() - Find a blob
-  *
-diff --git a/test/common/bloblist.c b/test/common/bloblist.c
-index 4bca62110a..324127596f 100644
---- a/test/common/bloblist.c
-+++ b/test/common/bloblist.c
-@@ -98,10 +98,12 @@ static int bloblist_test_blob(struct unit_test_state *uts)
- 	struct bloblist_hdr *hdr;
- 	struct bloblist_rec *rec, *rec2;
- 	char *data;
-+	int size = 0;
- 
- 	/* At the start there should be no records */
- 	hdr = clear_bloblist();
- 	ut_assertnull(bloblist_find(TEST_TAG, TEST_BLOBLIST_SIZE));
-+	ut_assertnull(bloblist_get_blob(TEST_TAG, &size));
- 	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
- 	ut_asserteq(sizeof(struct bloblist_hdr), bloblist_get_size());
- 	ut_asserteq(TEST_BLOBLIST_SIZE, bloblist_get_total_size());
-@@ -114,6 +116,8 @@ static int bloblist_test_blob(struct unit_test_state *uts)
- 	ut_asserteq_addr(rec + 1, data);
- 	data = bloblist_find(TEST_TAG, TEST_SIZE);
- 	ut_asserteq_addr(rec + 1, data);
-+	ut_asserteq_addr(bloblist_get_blob(TEST_TAG, &size), data);
-+	ut_asserteq(size, TEST_SIZE);
- 
- 	/* Check the data is zeroed */
- 	ut_assertok(check_zero(data, TEST_SIZE));
 -- 
 2.25.1
 
