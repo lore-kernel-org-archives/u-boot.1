@@ -4,88 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F116BE77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC34E77199
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AC73806C6;
+	by phobos.denx.de (Postfix) with ESMTP id A457D806D5;
 	Wed,  8 Jan 2025 16:49:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d5IYr6dL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JfaMG16G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4F56800D7; Wed,  8 Jan 2025 10:41:21 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FA318001F
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 10:41:19 +0100 (CET)
+ id AABE5803DC; Wed,  8 Jan 2025 11:25:27 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E575D8006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 11:25:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5d3d0205bd5so282838a12.3
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 01:41:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736329278; x=1736934078; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jTU/QL/kmVPywzzOaDDuqkw7auXTxVn1mK1/neiCQIM=;
- b=d5IYr6dLKF1KngA3PIroKWc+G8SAxf8pR7zNJ8a2APs+CADBvzD1BUh+9f1WUKRYtC
- AeGVlsdClIrkBnCXEvfiOST1isWQnwoY44+7Hhzu8T+z3z83X7zBOqdQkrX5kCiEIhRn
- cZ9h5ee/mnG+O0seT4Ri64ZoSIchv7MaKPhNloz76eqTq1BiJ3wzoOzUQBPUA3xVEHX1
- 7+7mTErCh5RTrM3VT1QV2vy/fQuoH8Zfa1QOQlnj1HTDUX/32JkET90nUdFiYL/uW0k1
- oWoGO8JXWqXtlacCPY9d94uDH2ccGPrNeMVr0/8kUNLskmSmGbNODnjuasvXc2WrbpMA
- VYaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736329278; x=1736934078;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jTU/QL/kmVPywzzOaDDuqkw7auXTxVn1mK1/neiCQIM=;
- b=bf0pj8YgIpf5q+8IkYHZhPETi5T6tSmbDThWQKdyaK9FD3esww7jtcZ+/7Z4JOg2EN
- +2RlX0fRvbM52cSk/WEeOUd0N6jwI46A34pBTrpXyztBp156u93S5QHq7IdbgOIEVhUJ
- yk9E6xMNQS9XSKv5FrIuDF6WmxsFkfOro8krNbA0hjIcOrQn+koiq00tworl1GlgZkU/
- +SQ/prDtjpBNjm25114Bl/i0L87AZlIXO/jxAwFWJQ9Q5VCR2yBw6xcEoYFOeM4RTIsb
- eZF/8Owe10E1wNJ3hl9Z1uzwsDDHNpaPxeAV5z0xkLK6Z9v7Uc9WV6VG5DzVcLPluPv9
- MEdQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX5VslIgfPV0rPwFwjCiGYyNM4LoGqJaxe+3CL1kI94k/I08hE1mvKaoCKQ3IOMYrPYBLwgf18=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzc8BLOD1Armlt6VOB+vL8uExLgKx2aG9gP2Jp4vumwFiCotpfp
- KcobqsMcZycju2NOLqOBnvx9yf6NOKBCIM0uncaek/kU/6eTzFpSo1/8u+W85b4=
-X-Gm-Gg: ASbGncvDaB+BH05WKBGCUjDlcw9tMrTK1Zh9Iu725BD8ZXopxS8v39xjQo68zZmRbZ4
- aZrY8o19H2VIpfED9HbbDEnqu7ogzhFVwC3d+Jj/Ke1yfL/2tdqtM/0JRrhI/V5M90ddIVQTU7m
- +zXSnTQ+knlhc4XSwlQPXe80hQOvxdDH/LfdAk2hOnGSIDwwjn/ywoTVxOe4D3GvBYukVn2a9ld
- 4BhclKvmc4KifTuQb824Qt3yEPoOdd0XPOuFYkp1jfmex3pqK6V7+9qEwqE99BEull+
-X-Google-Smtp-Source: AGHT+IFsTu9bp/uo3w31kRck3BNHk3BRAnYCC/O5AC7s/PghCqkmnC583l9WG02Kix30MLQKaPn3/A==
-X-Received: by 2002:a05:6402:3208:b0:5d6:66cf:2a3a with SMTP id
- 4fb4d7f45d1cf-5d972e1691dmr1697533a12.17.1736329278357; 
- Wed, 08 Jan 2025 01:41:18 -0800 (PST)
-Received: from linaro.org ([2a02:2454:ff21:ef30:7505:d47e:5219:b65a])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d80676f074sm25900998a12.25.2025.01.08.01.41.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 01:41:17 -0800 (PST)
-Date: Wed, 8 Jan 2025 10:41:15 +0100
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Mario Six <mario.six@gdsys.cc>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH 13/15] mach-snapdragon: support parsing memory map from
- SMEM
-Message-ID: <Z35IO3ZGJ7Y1jRJ6@linaro.org>
-References: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
- <20241124-b4-modernise-smem-v1-13-b7852c11b67c@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 508APKH12788768
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 8 Jan 2025 04:25:20 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1736331920;
+ bh=4rPfae7bVyTF725Pp4/nLE31J6mUY1o/BRXPXwy50Hs=;
+ h=From:To:CC:Subject:Date;
+ b=JfaMG16GsR4Y7mHY6P4KdB+7m4r6mznvuo5lPn/JdJm2oXJMrq/HNYfqMuvSlb9nT
+ J0PdPMe0jp00cvNGuHowpRD7u6N3wd4ZWl7E2OjXhyKzci2jKE/DfS7BExepDX6G+q
+ ArWitZneimsJoM2JGf6ojEJqywabZuFlaeAv3WXs=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 508APKuI017110
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 8 Jan 2025 04:25:20 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 8
+ Jan 2025 04:25:19 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 8 Jan 2025 04:25:20 -0600
+Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 508APGgt127878;
+ Wed, 8 Jan 2025 04:25:17 -0600
+From: Beleswar Padhi <b-padhi@ti.com>
+To: <trini@konsulko.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>
+CC: <rogerq@kernel.org>, <nm@ti.com>, <n-francis@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <afd@ti.com>, <hnagalla@ti.com>, <b-padhi@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH] board: ti: j722s: j722s.env: Set remoteproc firmware names
+Date: Wed, 8 Jan 2025 15:55:16 +0530
+Message-ID: <20250108102516.2103132-1-b-padhi@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241124-b4-modernise-smem-v1-13-b7852c11b67c@linaro.org>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-Mailman-Approved-At: Wed, 08 Jan 2025 16:49:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,98 +80,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Nov 24, 2024 at 08:17:55PM +0100, Caleb Connolly wrote:
-> It is possible to derive the memory map for a Qualcomm platform from the
-> SMEM shared memory region. The memory map is populated by the preloader.
-> 
-> Introduce support for parsing this data and using it to populate
-> U-Boot's memory map. Since we aren't yet sure if this will work for
-> every platform, it is not yet used in all cases, if U-Boot is booted
-> with an internal FDT which has the memory map defined, this will
-> be used instead.
-> 
-> If the FDT comes from ABL, or we're using an internal FDT with no memory
-> map defined, then U-Boot will try to use SMEM. This should remove the
-> need to define the memory map statically in a U-Boot overlay DT for most
-> boards.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  arch/arm/mach-snapdragon/board.c     |   2 +-
->  arch/arm/mach-snapdragon/dram.c      | 106 +++++++++++++++++++++++++++++++++--
->  arch/arm/mach-snapdragon/qcom-priv.h |   4 +-
->  3 files changed, 106 insertions(+), 6 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 8d171957b852..269d39e4f6e1 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -85,9 +85,9 @@ void *board_fdt_blob_setup(int *err)
->  	/*
->  	 * Parse the /memory node while we're here,
->  	 * this makes it easy to do other things early.
->  	 */
-> -	qcom_parse_memory();
-> +	qcom_parse_memory(internal_valid);
->  
->  	return (void *)gd->fdt_blob;
->  }
->  
-> diff --git a/arch/arm/mach-snapdragon/dram.c b/arch/arm/mach-snapdragon/dram.c
-> index c4c60039cb4c..ef226e000858 100644
-> --- a/arch/arm/mach-snapdragon/dram.c
-> +++ b/arch/arm/mach-snapdragon/dram.c
-> @@ -9,14 +9,47 @@
->  #include <asm-generic/unaligned.h>
->  #include <dm.h>
->  #include <log.h>
->  #include <sort.h>
-> +#include <soc/qcom/smem.h>
-> +
-> +#define SMEM_USABLE_RAM_PARTITION_TABLE 402
-> +#define RAM_PART_NAME_LENGTH            16
-> +#define RAM_NUM_PART_ENTRIES            32
-> +#define CATEGORY_SDRAM 0x0E
-> +#define TYPE_SYSMEM 0x01
->  
->  static struct {
->  	phys_addr_t start;
->  	phys_size_t size;
->  } prevbl_ddr_banks[CONFIG_NR_DRAM_BANKS] __section(".data") = { 0 };
->  
-> +struct smem_ram_ptable_hdr {
-> +	u32 magic[2];
-> +	u32 version;
-> +	u32 reserved;
-> +	u32 len;
-> +} __packed;
-> +
-> +struct smem_ram_ptn {
-> +	char name[RAM_PART_NAME_LENGTH];
-> +	u64 start;
-> +	u64 size;
-> +	u32 attr;
-> +	u32 category;
-> +	u32 domain;
-> +	u32 type;
-> +	u32 num_partitions;
-> +	u32 reserved[3];
-> +	u32 reserved2[2]; /* The struct grew by 8 bytes at some point */
-> +} __packed;
+Include k3_rproc.env to access rproc boot commands and specify rproc
+firmware names for adding remoteproc support in J722S SoCs.
 
-This looks like smem_ram_ptn_v2, as defined in LK:
-https://github.com/msm8916-mainline/lk2nd/blob/5e6f1adcb1c070e28a70dc1f3d807ce9538f61c5/platform/msm_shared/smem.h#L620-L660
+Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+---
+This patch is independent and puts the environment in place to boot remote
+processors at U-Boot stage. 
 
-We need to add a check for smem_ram_ptable_hdr->version and handle the
-older structs as well. DB410c has version 1, which is missing the 8
-bytes noted in the comment above. This makes it misbehave quite badly...
+However, for successfully loading the firmwares into remote cores, rproc
+DT node definitions are required. These DT changes have been merged into
+Linux and available with v6.12 tag[0]. Once the DT Sync happens in U-Boot,
+remote processors can be probed and booted with the help of env commands
+enabled with this patch.
 
-If I drop the u32 reserved2[2] above it works well though, and correctly
-handles variants of DB410c with 2 GiB instead of 1 GiB RAM.
+Sample Boot Test logs after manually adding DT nodes in U-Boot:
+https://gist.github.com/3V3RYONE/0b5c7df5b5c88d2a2f273b6a04a3dd46
 
-Perhaps it's enough to handle _v1 and _v2 for now. v0 has 32-bit
-start/size fields on old SoCs, not sure if anyone is trying to run
-U-Boot on these at the moment.
+[0]: https://lore.kernel.org/all/20240830161742.925145-1-b-padhi@ti.com/
 
 Thanks,
-Stephan
+Beleswar
+
+ board/ti/j722s/j722s.env | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/board/ti/j722s/j722s.env b/board/ti/j722s/j722s.env
+index f8b6aff2c2f..10d62034e1a 100644
+--- a/board/ti/j722s/j722s.env
++++ b/board/ti/j722s/j722s.env
+@@ -1,6 +1,10 @@
+ #include <env/ti/ti_common.env>
+ #include <env/ti/mmc.env>
+ 
++#if CONFIG_CMD_REMOTEPROC
++#include <env/ti/k3_rproc.env>
++#endif
++
+ name_kern=Image
+ console=ttyS2,115200n8
+ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+@@ -13,3 +17,5 @@ mmcdev=1
+ bootpart=1:2
+ bootdir=/boot
+ rd_spec=-
++
++rproc_fw_binaries= 0 /lib/firmware/j722s-mcu-r5f0_0-fw 2 /lib/firmware/j722s-main-r5f0_0-fw 3 /lib/firmware/j722s-c71_0-fw 4 /lib/firmware/j722s-c71_1-fw
+-- 
+2.34.1
+
