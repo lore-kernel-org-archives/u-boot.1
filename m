@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A7FE77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 14:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4906E77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 14:45:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E785C805F0;
-	Wed,  8 Jan 2025 15:40:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F4FF8036B;
+	Wed,  8 Jan 2025 15:45:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="upC/xM/4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JmA6L7b/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6332980602; Wed,  8 Jan 2025 15:40:56 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id DC911805E9; Wed,  8 Jan 2025 15:45:15 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E66638001F
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 15:40:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ABC68001F
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 15:45:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5d3e8f64d5dso30355211a12.3
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 06:40:53 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aa684b6d9c7so2756812466b.2
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 06:45:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736347253; x=1736952053; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1736347513; x=1736952313; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=H4k7HpXCO3AFeRdxZHoJUwJ8aJafDjgYKNnGF0x7KH0=;
- b=upC/xM/4nvymw0OmM2sLEfCPgrYziyviVTzjOQlX6gcwX0FJkgEsLDcF36eLbQEY0o
- Xtqtgt0CCco4yG7ZWBRXZLbktG/qKeoTxWN+IRlwz576BrEbFcnR2cxSG4bXZp2jmjpg
- auQnB3YUbgBsPFZYxbqAKtApC2MLrUAhIemq+Xsu4pKiR3m9FUur+NHt7APACEWAZtYb
- Tl0DQaJk+9N1a59ZWXv7W+Lnrj6aFq/TsP/k8EaIuxU/mEAV8JWaxYg7Ie/RR9fnZabd
- gYy2fKiAm4Y1y4Kjw72XbzHbiLc+95M2pqHPc7NMDHeQ7s/lKGdc7jtiYQ2d0//+6n8i
- a2Ug==
+ bh=S4AsTWLdYduO94vveMB61PSKjRdvVa5cckUtBuYQayk=;
+ b=JmA6L7b/mNOFG7gKfy829C7VEIsYXe0kBO86yic0CYluadCBmdXdqb5KxFF8SUiL8s
+ lOuYfSlRSvdepQIszGesg+vWboWj2tmYYWTxyPYHTop6NKw0JWhEWam46rAIXgJF+dfE
+ srz46z6eqTPMdns4Yh09mbu7mcxMwZf09bQ/HjTUZxInn+BUll4tbu8iq/YNTYINyKGk
+ bwpaCxWJdjJfHpdzYBMRKDlkAoNOqta9KgN75wfw7VK7dF3jKgVavFiaqJ/GWA3b09YD
+ wq1GRxQ2b3LhZv7uAtKFEOfIvepNnoF8clx1H7l+fGcJEOgFjh/O94fCRA9S5aBv/zwL
+ dqcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736347253; x=1736952053;
+ d=1e100.net; s=20230601; t=1736347513; x=1736952313;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=H4k7HpXCO3AFeRdxZHoJUwJ8aJafDjgYKNnGF0x7KH0=;
- b=fM9rNgRFlrLjbDr0vXi6bkvE/UtPOW8WU4RWM5nPuCF07yqjo4ejdUEUSFizXf7LqH
- novKS+ykieBGAlLZYayfMwF6fCpSJtL5kgQJasC8QhSUVJsCHj9YFTGYY1bPdNupaIvF
- iFeRuJ3SpOpJd5cTfPVRkDI+Szk/KfkOFMUnJ0yjn1PVThIXU70CJcC2tiqhlbY85s3V
- 2xqc3giDrV3/waP094fBjhq/zL5OX/idBdIAMGYOJT/bZN6gdNgTaNWHsZf06MbQvHyL
- vCnFHc3r6RUm96ilpd5C9Me1Cc+wsyZBV9rtAmex/L9mMGPJb6dhcvPuytRicvI1dk4K
- oIpg==
+ bh=S4AsTWLdYduO94vveMB61PSKjRdvVa5cckUtBuYQayk=;
+ b=nnLonj8KaMFtH+IATVjn4FSDEoO4BQZL0qXxaRMQxiRFlOIF349ZwnG5kocCYvgeDi
+ 209NCZyQGh0sGunl2vvUhMggaSCEhR3w0fG92nZko4LApvkvZMVXKbAxtAcdncPWuO5B
+ e/aLGvUXFpcon0niO6OJvJXbrbOP+htuC1PQeOOeQh7QvCWe2gyyCxjJVY8KanwyC0w7
+ CpRK4lFF0TlPyaVQ72TvHzFf7v7VKeuBnUNpXLYoA3RgOzO+u+Rsz3kii4uSMQFFvTjY
+ Gb3Su3wuEXEXorbE+d7dZqPJBn4GqEpCtnH+t9YO51CeQky3qqJHWfSdoiRI9rn9BgT7
+ yRYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJk3mmRbTrDUCk3emkzvG1AUCR1Rhr/WIRsqW1r6f0JWLMpWFcwuLMhibaqRNUFCT7orzn54U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8oxLD2c6mpeLBoPsqTHSj/kS+dsW8zl6w2CR9NSJ4md8qlZrO
- XIhfF9Tl8TNp/a7LaFdQYqdaqURm6r1ZB3vbnZcobbqKhMar5LLqBy4xvtFii6dmeXVxFbgpuHy
- Z
-X-Gm-Gg: ASbGncv7Q3mwtWbBlb+2QS568tuCif3DwWgdVDcDLXYRHBE+au4KS7o0bHVER74s2bZ
- tJIugRryZOD25d1YGUl9rub95GHfYkri/2EZv8JvB6xEJCQiOPz6+TN2nd6t+JbrmNNk1+7AmTw
- lgGxTJHMgUzFNVQZ2GidFjkb4bS14On90HQkhXokb+Js/Fek5h3iU2HuYqeGpGTjv7xwauDFSB3
- KdTU0AU2dXnqlg9wKd+vKzpUQmTwlISH/069A3lrmzG/HlqYmYPtwR6rPjO30vTwD/6bYOXNx+h
- hUEgwybp+TLSs0Gvg7riZXrJOAhqwtuF2yFodAY=
-X-Google-Smtp-Source: AGHT+IElpsB/qJ4sZfNHYsQYOuD9YT3womfJygpvulT4HLLyaANhkh3RYNdqEdf9u9zfDu14RBTopg==
-X-Received: by 2002:a05:6402:320b:b0:5d0:cfdd:2ac1 with SMTP id
- 4fb4d7f45d1cf-5d972dfcbcfmr2879329a12.6.1736347253363; 
- Wed, 08 Jan 2025 06:40:53 -0800 (PST)
+ AJvYcCXoBTCy3MTOajTZAFTr4iCKTaqzZHWUZOAhF4/aky3rL/Fyafo9sGK0o1uBFFLhqamHCOhLs5A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwkGPrUtFt4WCKxV6fanvCOUPMHtoqUUQQxGKZ3WPQo57w8evVZ
+ 5eThaxgPjnmaf+4Tdv7/FAVGbwymhmu0e7KUAtUnHHOoHmwA8os8fq3cy2D303M=
+X-Gm-Gg: ASbGnctRGsv7lh0XUJG0QSDyoPCdDLTfbHnZwSG0urkDe4KnqjeO/uLikKrFkaobXO8
+ XrIRg9X3k8W/2D7J8/fpow4No2bkSLGBSY5lO29sAPHCGq1Azb44TxWM1Qs5NDkTdTCJ1Wc2yLf
+ qXQfextZAkeKahKyjET6lMlHdGXvsazDfFuIzOxpMZbS4y152IeUrjebdoF/IphQEHfbQ5rb1ff
+ ZyGZP2S2sYzZa9sr7XYTvixaS/3BbleTjq1UXBYpWTGMP1YcXduXbEkk0/WJqI7MPEsvol/6qGJ
+ HnHgr/MT+wHm0SU4bijC2ahNs99h7cDFBIo8AAY=
+X-Google-Smtp-Source: AGHT+IFI4J/LEWg6niwMG0mqu2kNqOBV+vtEfRpWjh7qLYsRy/2xXgdfuzPZ5DUFz6DBSSkqbSlUAw==
+X-Received: by 2002:a17:907:968e:b0:aa6:7662:c56d with SMTP id
+ a640c23a62f3a-ab2ab709415mr229847166b.30.1736347512426; 
+ Wed, 08 Jan 2025 06:45:12 -0800 (PST)
 Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
  ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d806fed723sm26211448a12.64.2025.01.08.06.40.49
+ a640c23a62f3a-aac0e82f56csm2518872766b.24.2025.01.08.06.45.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jan 2025 06:40:51 -0800 (PST)
-Message-ID: <6dcaf2a0-3c08-4bcc-9e7d-8cf7a77cd54c@linaro.org>
-Date: Wed, 8 Jan 2025 15:40:49 +0100
+ Wed, 08 Jan 2025 06:45:11 -0800 (PST)
+Message-ID: <2b1964dd-7fb6-4f0d-a6a3-f98780192441@linaro.org>
+Date: Wed, 8 Jan 2025 15:45:10 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] clk/qcom: Treat different GDSCs didderently
+Subject: Re: [PATCH 4/4] drivers: clk: qcom: Add SDM630/660 GCC driver
 Content-Language: en-US
 To: Alexey Minnekhanov <alexeymin@postmarketos.org>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
@@ -86,9 +85,9 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
  Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>
 References: <20250108115911.4163437-1-alexeymin@postmarketos.org>
- <20250108115911.4163437-2-alexeymin@postmarketos.org>
+ <20250108115911.4163437-4-alexeymin@postmarketos.org>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250108115911.4163437-2-alexeymin@postmarketos.org>
+In-Reply-To: <20250108115911.4163437-4-alexeymin@postmarketos.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,137 +108,243 @@ X-Virus-Status: Clean
 
 Hi Alexey,
 
-Thanks for the patch! Really happy to see support for this new platform.
-
 On 08/01/2025 12:59, Alexey Minnekhanov wrote:
-> Apparently not all GDSCs are the same. In Linux driver, depending on which
-> GDSC flags are set, different status register is checked when powering it
-> on/off. And on top of that, different bit inside that register is tested.
-> 
-> Port missing parts from Linux driver to U-Boot:
->  - add GDSC flags;
->  - adjust logic when checking GDSC status to match one in Linux driver.
-
-Sorry it's a bit of a pain, but could you split this into two patch and
-adjust the ordering so we don't risk breaking someones bisect if they
-land here. I'd propose:
-
-Patch 1: as-is
-Patch 2: add the flags enum and adjust struct qcom_power_map
-Patch 3: would be the "port to new flags" patch
-Patch 4: adjust qcom_power_set() (the bulk of this patch)
-Patch 5: add sdm660 clock driver
-
-does this make sense?
-> 
-> This fixes e.g. SDM660's USB_30_GDSC to be forever stuck during power on,
-> since unlike SDM845 one it doesn't have POLL_CFG_GDSCR flag.
-> 
-> Even though only POLL_CFG_GDSCR is the important one here, add all flags
-> from Linux driver, to make it easier to compare which flags are needed
-> for which GDSC, making porting process easier.
-
-This is great, thanks for taking the time to add all of these.
-
-Kind regards,
+> Add driver for Global Clock Controller used in Qualcomm
+> SDM630/660 SoCs.
 > 
 > Signed-off-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
 > ---
->  drivers/clk/qcom/clock-qcom.c | 45 ++++++++++++++++++++++++-----------
->  drivers/clk/qcom/clock-qcom.h | 16 ++++++++++++-
->  2 files changed, 46 insertions(+), 15 deletions(-)
+>  drivers/clk/qcom/Kconfig        |   8 ++
+>  drivers/clk/qcom/Makefile       |   1 +
+>  drivers/clk/qcom/clock-sdm660.c | 180 ++++++++++++++++++++++++++++++++
+>  3 files changed, 189 insertions(+)
+>  create mode 100644 drivers/clk/qcom/clock-sdm660.c
 > 
-> diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-> index 1cfc430c14a5..bf9249b55af3 100644
-> --- a/drivers/clk/qcom/clock-qcom.c
-> +++ b/drivers/clk/qcom/clock-qcom.c
-> @@ -461,7 +461,7 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
->  	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(pwr->dev);
->  	void __iomem *base = dev_get_priv(pwr->dev);
->  	const struct qcom_power_map *map;
-> -	u32 value;
-> +	u32 value, status_reg;
->  	int ret;
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index d76fca5dba41..29767ab256f3 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -47,6 +47,14 @@ config CLK_QCOM_QCS404
+>  	  on the Snapdragon QCS404 SoC. This driver supports the clocks
+>  	  and resets exposed by the GCC hardware block.
 >  
->  	if (pwr->id >= data->num_power_domains)
-> @@ -481,19 +481,36 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
->  
->  	writel(value, base + map->reg);
->  
-> -	if (on)
-> -		ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
-> -					 value,
-> -					 (value & GDSC_POWER_UP_COMPLETE) ||
-> -					 (value & GDSC_PWR_ON_MASK),
-> -					 GDSC_STATUS_POLL_TIMEOUT_US);
-> -
-> -	else
-> -		ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
-> -					 value,
-> -					 (value & GDSC_POWER_DOWN_COMPLETE) ||
-> -					 !(value & GDSC_PWR_ON_MASK),
-> -					 GDSC_STATUS_POLL_TIMEOUT_US);
-> +	/* depending on the type of gdsc the status register is different */
-> +	/* and we need to check different status bit */
-> +	if (map->flags & POLL_CFG_GDSCR) {
-> +		status_reg = map->reg + CFG_GDSCR_OFFSET;
+> +config CLK_QCOM_SDM660
+> +	bool "Qualcomm SDM630/660 GCC"
+> +	select CLK_QCOM
+> +	help
+> +	  Say Y here to enable support for the Global Clock Controller
+> +	  on the Snapdragon 630/660 SoCs. This driver supports the clocks
+> +	  and resets exposed by the GCC hardware block.
 > +
-> +		if (on)
-> +			ret = readl_poll_timeout(base + status_reg,
-> +						 value,
-> +						 (value & GDSC_POWER_UP_COMPLETE),
-> +						 GDSC_STATUS_POLL_TIMEOUT_US);
-> +		else
-> +			ret = readl_poll_timeout(base + status_reg,
-> +						 value,
-> +						 (value & GDSC_POWER_DOWN_COMPLETE),
-> +						 GDSC_STATUS_POLL_TIMEOUT_US);
-> +	} else {
-> +		status_reg = map->reg;
-> +
-> +		if (on)
-> +			ret = readl_poll_timeout(base + status_reg,
-> +						 value,
-> +						 (value & GDSC_PWR_ON_MASK),
-> +						 GDSC_STATUS_POLL_TIMEOUT_US);
-> +
-> +		else
-> +			ret = readl_poll_timeout(base + status_reg,
-> +						 value,
-> +						 !(value & GDSC_PWR_ON_MASK),
-> +						 GDSC_STATUS_POLL_TIMEOUT_US);
-> +	}
+>  config CLK_QCOM_SDM845
+>  	bool "Qualcomm SDM845 GCC"
+>  	select CLK_QCOM
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index ab33f1c5faf9..3065ba90cb7a 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -3,6 +3,7 @@
+>  # (C) Copyright 2023 Linaro
 >  
->  	if (ret == -ETIMEDOUT)
->  		printf("WARNING: GDSC %lu is stuck during power o%s\n",
-> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-> index 78d9b1d81ece..84965b2555c7 100644
-> --- a/drivers/clk/qcom/clock-qcom.h
-> +++ b/drivers/clk/qcom/clock-qcom.h
-> @@ -63,8 +63,22 @@ struct qcom_reset_map {
->  	u8 bit;
->  };
->  
-> +enum qcom_gdsc_flags {
-> +	VOTABLE = BIT(0),
-> +	CLAMP_IO = BIT(1),
-> +	HW_CTRL = BIT(2),
-> +	SW_RESET = BIT(3),
-> +	AON_RESET = BIT(4),
-> +	POLL_CFG_GDSCR = BIT(5),
-> +	ALWAYS_ON = BIT(6),
-> +	RETAIN_FF_ENABLE = BIT(7),
-> +	NO_RET_PERIPH = BIT(8),
-> +	HW_CTRL_TRIGGER = BIT(9),
+>  obj-y += clock-qcom.o
+> +obj-$(CONFIG_CLK_QCOM_SDM660) += clock-sdm660.o
+>  obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
+>  obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
+>  obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
+> diff --git a/drivers/clk/qcom/clock-sdm660.c b/drivers/clk/qcom/clock-sdm660.c
+> new file mode 100644
+> index 000000000000..c4cd49f39a57
+> --- /dev/null
+> +++ b/drivers/clk/qcom/clock-sdm660.c
+> @@ -0,0 +1,180 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/*
+> + * Clock drivers for Qualcomm sdm630/660
+> + */
+> +
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <linux/delay.h>
+> +#include <asm/io.h>
+> +#include <linux/bitops.h>
+> +#include <linux/bug.h>
+> +#include <dt-bindings/clock/qcom,gcc-sdm660.h>
+> +
+> +#include "clock-qcom.h"
+> +
+> +#define GCC_BLSP1_UART2_APPS_CLK_CMD_RCGR 0x1c00c
+> +#define SDCC1_APPS_CLK_CMD_RCGR 0x1602c
+> +#define SDCC2_APPS_CLK_CMD_RCGR 0x14010
+> +
+> +/* blsp1_uart{1,2}_apps_clk_src share the same frequency table */
+> +static const struct freq_tbl ftbl_blsp1_uart1_apps_clk_src[] = {
+> +	F(3686400, CFG_CLK_SRC_GPLL0, 1, 96, 15625),
+> +	F(7372800, CFG_CLK_SRC_GPLL0, 1, 192, 15625),
+> +	F(14745600, CFG_CLK_SRC_GPLL0, 1, 384, 15625),
+> +	F(16000000, CFG_CLK_SRC_GPLL0, 5, 2, 15),
+> +	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
+> +	F(24000000, CFG_CLK_SRC_GPLL0, 5, 1, 5),
+> +	F(32000000, CFG_CLK_SRC_GPLL0, 1, 4, 75),
+> +	F(40000000, CFG_CLK_SRC_GPLL0, 15, 0, 0),
+> +	F(46400000, CFG_CLK_SRC_GPLL0, 1, 29, 375),
+> +	F(48000000, CFG_CLK_SRC_GPLL0, 12.5, 0, 0),
+> +	F(51200000, CFG_CLK_SRC_GPLL0, 1, 32, 375),
+> +	F(56000000, CFG_CLK_SRC_GPLL0, 1, 7, 75),
+> +	F(58982400, CFG_CLK_SRC_GPLL0, 1, 1536, 15625),
+> +	F(60000000, CFG_CLK_SRC_GPLL0, 10, 0, 0),
+> +	F(63157895, CFG_CLK_SRC_GPLL0, 9.5, 0, 0),
+> +	{ }
 > +};
 > +
->  struct qcom_power_map {
-> -	unsigned int reg;
-> +	unsigned int reg; /* GDSCR */
-> +	unsigned int flags;
->  };
->  
->  struct clk;
+> +/*
+> + * In Linux's parent_map for this clock ( gcc_parent_map_xo_gpll0_gpll0_early_div_gpll4 ):
+> + * { P_GPLL0_EARLY_DIV, 2 }
+> + */
+> +#define CFG_CLK_SRC_GPLL0_EARLY_DIV_SDCC2 (2 << 8)
+
+This can go into clock-qcom.h with the others.
+
+With that, please add
+
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+
+Kind regards,
+> +
+> +static const struct freq_tbl ftbl_sdcc2_apps_clk_src[] = {
+> +	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
+> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
+> +	F(20000000, CFG_CLK_SRC_GPLL0_EARLY_DIV_SDCC2, 5, 1, 3),
+> +	F(25000000, CFG_CLK_SRC_GPLL0_EARLY_DIV_SDCC2, 6, 1, 2),
+> +	F(50000000, CFG_CLK_SRC_GPLL0_EARLY_DIV_SDCC2, 6, 0, 0),
+> +	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
+> +	F(192000000, CFG_CLK_SRC_GPLL4, 8, 0, 0),
+> +	F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
+> +	{ }
+> +};
+> +
+> +static const struct pll_vote_clk gpll0_clk = {
+> +	.status = 0,
+> +	.status_bit = BIT(31),
+> +	.ena_vote = 0x52000,
+> +	.vote_bit = BIT(0),
+> +};
+> +
+> +static const struct gate_clk sdm660_clks[] = {
+> +	GATE_CLK(GCC_BLSP1_AHB_CLK, 0x52004, BIT(17)),
+> +	GATE_CLK(GCC_SDCC1_AHB_CLK, 0x16008, BIT(0)),
+> +	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x16004, BIT(0)),
+> +	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK, 0x1600c, BIT(0)),
+> +	GATE_CLK(GCC_SDCC2_AHB_CLK, 0x14008, BIT(0)),
+> +	GATE_CLK(GCC_SDCC2_APPS_CLK, 0x14004, BIT(0)),
+> +};
+> +
+> +static ulong sdm660_gcc_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +	const struct freq_tbl *ftbl_entry;
+> +
+> +	debug("%s: clk %s rate %lu\n", __func__, sdm660_clks[clk->id].name, rate);
+> +
+> +	switch (clk->id) {
+> +	case GCC_BLSP1_UART2_APPS_CLK:
+> +		ftbl_entry = qcom_find_freq(ftbl_blsp1_uart1_apps_clk_src, rate);
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_BLSP1_UART2_APPS_CLK_CMD_RCGR,
+> +				     ftbl_entry->pre_div, ftbl_entry->m, ftbl_entry->n,
+> +				     ftbl_entry->src, 8);
+> +		return ftbl_entry->freq;
+> +	case GCC_SDCC2_APPS_CLK:
+> +		ftbl_entry = qcom_find_freq(ftbl_sdcc2_apps_clk_src, rate);
+> +		/* we probably should enable source PLL for the selected frequency */
+> +		switch (ftbl_entry->src) {
+> +		case CFG_CLK_SRC_GPLL0:
+> +			/* enable gpll0 */
+> +			clk_enable_gpll0(priv->base, &gpll0_clk);
+> +			break;
+> +		case CFG_CLK_SRC_GPLL4:
+> +			/* enable gpll4 */
+> +			debug("can't use GPLL4 as src for SDCC2_APPS_CLK, req rate: %lu", rate);
+> +			break;
+> +		case CFG_CLK_SRC_GPLL0_EARLY_DIV_SDCC2:
+> +			/* enable gpll0_early */
+> +			debug("can't use GPLL0_EARLY as src for SDCC2_APPS_CLK, req rate: %lu",
+> +			      rate);
+> +			break;
+> +		}
+> +		clk_rcg_set_rate_mnd(priv->base, SDCC2_APPS_CLK_CMD_RCGR,
+> +				     ftbl_entry->pre_div, ftbl_entry->m, ftbl_entry->n,
+> +				     ftbl_entry->src, 8);
+> +		return ftbl_entry->freq;
+> +	case GCC_SDCC1_APPS_CLK:
+> +		/* The firmware turns this on for us and always sets it to this rate */
+> +		return 384000000;
+> +	default:
+> +		debug("clock-sdm660: set_rate for some unknown clock %lu\n", clk->id);
+> +		return rate;
+> +	}
+> +}
+> +
+> +static int sdm660_gcc_enable(struct clk *clk)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	if (priv->data->num_clks < clk->id) {
+> +		debug("unknown clk id %lu\n", clk->id);
+> +		return 0;
+> +	}
+> +
+> +	debug("enable clk %s\n", sdm660_clks[clk->id].name);
+> +	qcom_gate_clk_en(priv, clk->id);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct qcom_reset_map sdm660_gcc_resets[] = {
+> +	[GCC_QUSB2PHY_PRIM_BCR] = { 0x12000 },
+> +	[GCC_QUSB2PHY_SEC_BCR] = { 0x12004 },
+> +	/*
+> +	 * Linux dt-bindings (and sdm630 dtsi) don't have the defines for
+> +	 * (or uses of) GCC_SDCCn_BCR resets, so this won't compile,
+> +	 * but the hardware exists and their offsets are:
+> +	 */
+> +	/* [GCC_SDCC1_BCR] = { 0x16000 }, */
+> +	/* [GCC_SDCC2_BCR] = { 0x14000 }, */
+> +	[GCC_USB_20_BCR] = { 0x2f000 },
+> +	[GCC_USB_30_BCR] = { 0xf000 },
+> +	[GCC_USB3_PHY_BCR] = { 0x50020 },
+> +	[GCC_USB3PHY_PHY_BCR] = { 0x50024 },
+> +};
+> +
+> +static const struct qcom_power_map sdm660_gdscs[] = {
+> +	[USB_30_GDSC] = { .reg = 0xf004, .flags = VOTABLE },
+> +};
+> +
+> +static struct msm_clk_data sdm660_gcc_data = {
+> +	.resets = sdm660_gcc_resets,
+> +	.num_resets = ARRAY_SIZE(sdm660_gcc_resets),
+> +	.clks = sdm660_clks,
+> +	.num_clks = ARRAY_SIZE(sdm660_clks),
+> +	.power_domains = sdm660_gdscs,
+> +	.num_power_domains = ARRAY_SIZE(sdm660_gdscs),
+> +
+> +	.enable = sdm660_gcc_enable,
+> +	.set_rate = sdm660_gcc_set_rate,
+> +};
+> +
+> +static const struct udevice_id gcc_sdm660_of_match[] = {
+> +	{
+> +		.compatible = "qcom,gcc-sdm660",
+> +		.data = (ulong)&sdm660_gcc_data,
+> +	},
+> +	{}
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_sdm660) = {
+> +	.name = "gcc_sdm660",
+> +	.id = UCLASS_NOP,
+> +	.of_match = gcc_sdm660_of_match,
+> +	.bind = qcom_cc_bind,
+> +	.flags = DM_FLAG_PRE_RELOC,
+> +};
 
 -- 
 // Caleb (they/them)
