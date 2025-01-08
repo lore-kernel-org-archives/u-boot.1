@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D74CE77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 07:50:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F17CEE77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 08:20:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DEE48006D;
-	Wed,  8 Jan 2025 08:50:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 677D58006D;
+	Wed,  8 Jan 2025 09:20:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ijAgnmsM";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CjnNOQyN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC7D801E8; Wed,  8 Jan 2025 08:50:41 +0100 (CET)
-Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
- [IPv6:2607:f8b0:4864:20::e29])
+ id 5D015801E8; Wed,  8 Jan 2025 09:20:12 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0CB38005B
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 08:50:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 293268005B
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 09:20:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-4afde39e360so4502639137.0
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 23:50:39 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4361dc6322fso109588715e9.3
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 00:20:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736322638; x=1736927438; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MLPwG0OjBcsbwAgIGeHo2KVhONf3DSPRq4/QFiLBET0=;
- b=ijAgnmsMyjbXyPbGzXFx8f61iOWXQrllkW201fznqiEAE5WLG4shoByzcpkUYGNLBi
- TrlQnz1Jl8LDG+1vXPz9vL31g4cc9KNYP33iOeLyjlwLUPWVFKrDlXgpED7SE2RioG0x
- nDeqyIUFPALuPBd1oHiaH/BcoyjChp2uy6fx2Ia8ytqlW08C2EnKn5JS7VppNg9PtkDq
- vkMeJnBXUGi4/ZuRqtmgNMh+xFwyjBdLDkcibOzrxODUNsKDXP4rhKIB4sei9GIHasWw
- tgubrLZf7eIljj1VPmwuo4WZYas7tf1F5P56c9sJuEIuI5jd4p0Da0p7T9PserdnnL3O
- 1nOQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736324409; x=1736929209;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YCUS7ZrSZkcVb1/+bj4iL7RACc0D1V368bDzv6iw4KM=;
+ b=CjnNOQyNrND6sFcN2c/5i1hRyyQwuTykEj4w+Qrm3SfbHFUQv9FzAWSS7iSZmHEtBE
+ sYLWGzICn3GPdaU0oWf3RZKUkRUd+WWXPpOgak76/34Mwj2CaFo5M3PsnLEhfTaHc1JP
+ 1swyqNXISA5Xc/+SrBPgG2Yf08gVs4VFvBXjDLO3QYgG7qFDpNh42+mx4LPhunS5azmK
+ X151xrUUTlDGbmeTmHPz9XpbvG+yb1pS9vLgjfYzN3fPunYJl69rdzk2gJ+v6KJHlRef
+ InAlPLnlw3Y0IyF8RzJuUSNwp8rh5NITV02T0mZvTcj6QU33C+a5Q2wvffUzak/ctvMp
+ sOZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736322638; x=1736927438;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MLPwG0OjBcsbwAgIGeHo2KVhONf3DSPRq4/QFiLBET0=;
- b=LpOqN+7s1Dz72PSHIbf/OHLe6mYjVJY2G5+Mf05/jb2s4iggBCxVHbrzXwW4lkP7rS
- DX66vx7cUqBllPrsKmBz7hLwMopAWWXUHkCJp36SHvzmEPYL1Eq49bwrpLcGSENTpn1p
- vzT7aszTaKQjP9OSdvYjUFoln/KwXtedc5YkZ6gBEut4EQmvB94CmYw06dXjCKZ+q5b9
- 61agq6yAPAgU7PMMoyYY4rgWBSiv6eC0UzARbWo29F2PRj6abuO0NLkHLfm3I+S9DRkP
- ctOMZxawFu4znHPDwewVAVGxQMvIKL9wFaxCSft0B6AtNWRe7+nl1I8vf1voqhkFMvzc
- SEBQ==
-X-Gm-Message-State: AOJu0YwaZM/lIkxM4Yq72PPIV/+wiOVCeFp3SisS3YYal6qmXT3oY1zI
- qFX3FEuK+dCSERrD5qeTfp8w2aOprygRMMRPZH/Qaf79qjgdcK4vTT0pveSK16DsKbRTAft8Rt/
- pGFZtBF1wA2+SDbO+9K+R5Ybz0rDfeRr3WcJeaw==
-X-Gm-Gg: ASbGncvUJPYECqKUR+VfUfCDGIvOFOfK8erKbHLxNfVVsJ9hsDh9sIekOAP4u2/Dbiz
- 8Q0RFupY1hn6GK80UuGoudQsMwyE3LrIrh6roVO6N
-X-Google-Smtp-Source: AGHT+IEsvyA6Gynmx/v/gHGsQN2NW5eZMSHFEwRKdzIRPoue9vMgD4dH9uIla7SsLd0ZfBFojvo6WU20oV6j6bxn5xs=
-X-Received: by 2002:a05:6102:4bc9:b0:4b1:3b91:a697 with SMTP id
- ada2fe7eead31-4b3d0dbf856mr1533821137.15.1736322638356; Tue, 07 Jan 2025
- 23:50:38 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736324409; x=1736929209;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YCUS7ZrSZkcVb1/+bj4iL7RACc0D1V368bDzv6iw4KM=;
+ b=Hgdp1f8FO7aNb4SU1M2OSaCev/J1tOjxQ/P/YTkouy35fokMX88OVxDLIfRoLue3W+
+ gvAmKAq7hWHwkzEKcTRKZ4OAXPJMNfHiqihT8nRSzuLD82KicdBzH9B5gmmtGyvYyLAc
+ MnSbuTOJqoX+f2ORG0R1qhDKs1D7446PLD/AwFdFNxtcbIG83ZMOQGVbTGJm+OwSE2We
+ plccrYmYQAIBLUwu5SaO0OKsVpE/X3gjNTtdIrCM3XiUWzMurycez7MlCNbum8rU6PcS
+ dyP/AMtKf7wrn3DuK0yNnZUHgi5/HM0SuAQhcprzGjm+yEto4guJcvuLV7iZ/LbRt7Rh
+ fGPw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmtpXdUzF+3o0qI2QgPz8YnARjPGp2K98Y1xAqIMbO5FTx74kPu8ghzUVDedegjuCa5vYUKIk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxnpOlyrM86f7Nqo4cfh++Rh27IejZloai+DEAwMRke2ARFeY+U
+ usS7lUmMdcWkLKjzRKzWvhHQ8DtbgDgQpsfmobIiaJTUh7kigjM76KiP4vODcPI=
+X-Gm-Gg: ASbGnctHfYMoLPANVn+oFW/K4xUDwnpFMklrLl/93slSKktUPGq6YwfijeEU72NMq/Q
+ GN7R2wGc046WXoe/gdZ2aiSCPZJezVC/RY1L/Rf7I/+y0heClAWXSFZ42BXBVEz7i07h7BjU4Q/
+ KvJ+dR4RV5Dw3Tjs4c5o4vY78j2xwCK1fMNaXniOCtsKPswdFEB6VFKXhv3/Mh7YZvAmT7yKL1e
+ BQdSuQl/3TOQKfQXNM6Gn5JyF/JcFXxCXzI8XQBdJTbJxOGzUMjlrvNxiM24PZ+DQ==
+X-Google-Smtp-Source: AGHT+IFFkzAB2jlJPZDehb+B4krJzWIHSScesUzLq7AfyKQzQIeykp+lne3iYnkhRmP313HyJ7Ld3g==
+X-Received: by 2002:a05:600c:500f:b0:436:51bb:7a52 with SMTP id
+ 5b1f17b1804b1-436e2697170mr11886355e9.7.1736324409547; 
+ Wed, 08 Jan 2025 00:20:09 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-436e2dc0bb7sm12371645e9.16.2025.01.08.00.20.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jan 2025 00:20:09 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>, Fabio
+ Estevam <festevam@gmail.com>, Mathieu Othacehe <othacehe@gnu.org>, Peng
+ Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 1/2] usb: ehci-mx5: Use regulator_set_enable_if_allowed
+In-Reply-To: <20250107225616.195878-1-marex@denx.de>
+References: <20250107225616.195878-1-marex@denx.de>
+Date: Wed, 08 Jan 2025 09:20:07 +0100
+Message-ID: <875xmpd8eg.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20250104015704.1238-1-naoki@radxa.com>
-In-Reply-To: <20250104015704.1238-1-naoki@radxa.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 8 Jan 2025 13:20:27 +0530
-X-Gm-Features: AbW1kvaxTyOG0a3f0QFmf7-FV5xw2CW5mEDTHFw5Kq7xVt1IrPzz7Z_WA6F-Jws
-Message-ID: <CAFA6WYP17suAvm8RHgLzkqePTXbxgAAMQ7cNTvz16-artxYSuQ@mail.gmail.com>
-Subject: Re: [PATCH v5 0/4] rockchip: Add support for Radxa ROCK 5C
-To: FUKAUMI Naoki <naoki@radxa.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu, 
- kever.yang@rock-chips.com, trini@konsulko.com, jonas@kwiboo.se, 
- eugen.hristev@linaro.org, quentin.schulz@cherry.de, michal.simek@amd.com, 
- seb-dev@mail.de, liujianfeng1994@gmail.com, heiko@sntech.de, 
- zhangzj@rock-chips.com, macromorgan@hotmail.com, dsimic@manjaro.org, 
- pbrobinson@gmail.com, cfsworks@gmail.com, sebastian.reichel@collabora.com, 
- alchark@gmail.com, didi.debian@cknow.org, cassel@kernel.org, 
- boris.brezillon@collabora.com, cristian.ciocaltea@collabora.com, 
- jing@jing.rocks
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,50 +97,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 4 Jan 2025 at 07:28, FUKAUMI Naoki <naoki@radxa.com> wrote:
->
-> Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
->
-> Changes in v5:
-> - Rebase on top of latest next branch
-> - Drop PATCH 1/5
->
+Hi Marek,
 
-For the series:
+Thank you for the patch.
 
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
+On mar., janv. 07, 2025 at 23:56, Marek Vasut <marex@denx.de> wrote:
 
--Sumit
+> With the commit 4fcba5d556b4 ("regulator: implement basic reference
+> counter") the return value of regulator_set_enable may be EALREADY or
+> EBUSY for fixed/gpio regulators.
+>
+> Change to use the more relaxed regulator_set_enable_if_allowed to
+> continue if regulator already was enabled or disabled.
+>
+> Based on 335799b7252a ("usb: dwc2: Use regulator_set_enable_if_allowed")
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-> Cristian Ciocaltea (1):
->   arm64: dts: rockchip: Add HDMI0 node to rk3588
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+> Cc: Alice Guo <alice.guo@nxp.com>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Mathieu Othacehe <othacehe@gnu.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  drivers/usb/host/ehci-mx5.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> FUKAUMI Naoki (2):
->   arm64: dts: rockchip: add Radxa ROCK 5C
->   rockchip: Add support for Radxa ROCK 5C
->
-> Sam Edwards (1):
->   arm64: dts: rockchip: Split up RK3588's PCIe pinctrls
->
->  arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi      |  11 +
->  arch/arm/mach-rockchip/rk3588/Kconfig         |  21 +
->  board/radxa/rock-5c-rk3588s/Kconfig           |  12 +
->  board/radxa/rock-5c-rk3588s/MAINTAINERS       |   7 +
->  configs/rock-5c-rk3588s_defconfig             |  84 ++
->  doc/board/rockchip/rockchip.rst               |   1 +
->  .../arm64/rockchip/rk3588-base-pinctrl.dtsi   | 271 +++++-
->  .../src/arm64/rockchip/rk3588-base.dtsi       |  41 +
->  .../src/arm64/rockchip/rk3588s-rock-5a.dts    |   6 +-
->  .../src/arm64/rockchip/rk3588s-rock-5c.dts    | 920 ++++++++++++++++++
->  include/configs/rock-5c-rk3588s.h             |  15 +
->  11 files changed, 1340 insertions(+), 49 deletions(-)
->  create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
->  create mode 100644 board/radxa/rock-5c-rk3588s/Kconfig
->  create mode 100644 board/radxa/rock-5c-rk3588s/MAINTAINERS
->  create mode 100644 configs/rock-5c-rk3588s_defconfig
->  create mode 100644 dts/upstream/src/arm64/rockchip/rk3588s-rock-5c.dts
->  create mode 100644 include/configs/rock-5c-rk3588s.h
->
-> --
-> 2.43.0
->
+> diff --git a/drivers/usb/host/ehci-mx5.c b/drivers/usb/host/ehci-mx5.c
+> index d8f521befe1..1392d29bc13 100644
+> --- a/drivers/usb/host/ehci-mx5.c
+> +++ b/drivers/usb/host/ehci-mx5.c
+> @@ -287,9 +287,9 @@ static int ehci_usb_probe(struct udevice *dev)
+>  		debug("%s: No vbus supply\n", dev->name);
+>  
+>  	if (!ret && priv->vbus_supply) {
+> -		ret = regulator_set_enable(priv->vbus_supply,
+> -					   (type == USB_INIT_DEVICE) ?
+> -					   false : true);
+> +		ret = regulator_set_enable_if_allowed(priv->vbus_supply,
+> +						      (type == USB_INIT_DEVICE) ?
+> +						      false : true);
+>  		if (ret) {
+>  			puts("Error enabling VBUS supply\n");
+>  			return ret;
+> -- 
+> 2.45.2
