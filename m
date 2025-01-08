@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 157CDE77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 18:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B534E77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 18:51:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A490E8056E;
-	Wed,  8 Jan 2025 19:51:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 27815800D0;
+	Wed,  8 Jan 2025 19:51:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="3kL9HW4n";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="6Th9cjQc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 741CA80600; Wed,  8 Jan 2025 19:51:17 +0100 (CET)
+ id 0C824800DF; Wed,  8 Jan 2025 19:51:44 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72532800D0
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 19:51:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06768800D0
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 19:51:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=3103f025b2=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508DgAWn000874;
- Wed, 8 Jan 2025 19:51:12 +0100
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508ED9X3027516;
+ Wed, 8 Jan 2025 19:51:39 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- 50ThdCl0lk6QTzXbHQ5TmO+VW+DjMraH8RWID+kkbZ4=; b=3kL9HW4nCnmbmy3Y
- +D0SJpdOD6jnruoPuI7/fmuhrIgbq/5dybweNmixTtCXzzN9y0JofIdcuAGIYcUj
- xY4QJoNBt8VV3IpWyAPoE25hUtZ5JJVx7bH+qWp2hsLugbcwBNzFZV7eSp1ex9cX
- fNnOUCij1ew2WoYcqPe5CIl/qYJo8b1vtOrdKghdAx3YTTuEH+gyOGtKj6oYY//6
- REEQ5lNnv8iU2VrMvdpULU5WN7Qqci2AFyZWrLmOqb/CdaeLXiTYC4asS4UN2lwK
- 1XGKRIG037VwbOkBicL9vuWBBAj/yhL1IvhVf1GFehyWBpuHe4I3SZZus4QC9ukJ
- xooRGw==
+ ZHmoxKxJWCzzkVZxtjEX4e/MFofsq8tnqYedpCQmBK8=; b=6Th9cjQcZhYG2I1g
+ vqwIJZ7McTdssc9bpo2ibrpGmyL3T/tKq9/ldKdccxDxaFsF58WkgpNexBeF5ydZ
+ m5x6uxAgp2yJN/De7hsZYwUPE3F+BOCP/baRBkRHDKr+DmJ/dx9rdC30p4dxV6lu
+ q87JZUsP9EZobtaE0Ik91BwrdBqIg9wS8Xqlitjz5Z0S924YZqZbTMA8liZAjhaY
+ 2CE84Svs5k++JQ+cllFQWsy1AintDCUL5KoSEdVfvfhxHHkjeVsM0MkUv7cFVA9V
+ 05ihYfMkkl0xlhuZgngtnZEwxhxm3lvWEQFLhGGQMszCoDwU+ILaEgzIxtVSpByW
+ ODh24w==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 441tfu98dd-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 441txbs2w8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 08 Jan 2025 19:51:12 +0100 (CET)
+ Wed, 08 Jan 2025 19:51:38 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EA35440048;
- Wed,  8 Jan 2025 19:50:12 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 302894004F;
+ Wed,  8 Jan 2025 19:50:39 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4D20A29FAF2;
- Wed,  8 Jan 2025 19:49:48 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 198782A0B29;
+ Wed,  8 Jan 2025 19:50:10 +0100 (CET)
 Received: from [10.48.87.126] (10.48.87.126) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 8 Jan
- 2025 19:49:47 +0100
-Message-ID: <4660eb40-18c9-46e4-9305-420b486f01de@foss.st.com>
-Date: Wed, 8 Jan 2025 19:49:46 +0100
+ 2025 19:50:09 +0100
+Message-ID: <f4b3ff28-5c7a-4ca2-9dfe-ab3c7d64f50c@foss.st.com>
+Date: Wed, 8 Jan 2025 19:50:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 5/6] configs: stm32mp15: enable CONFIG_SYS_64BIT_LBA
+Subject: Re: [PATCH v1 6/6] configs: stm32mp25: enable CONFIG_SYS_64BIT_LBA
 To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, Tom
+ Rini <trini@konsulko.com>
 References: <20241129122711.411917-1-patrice.chotard@foss.st.com>
- <20241129122711.411917-6-patrice.chotard@foss.st.com>
+ <20241129122711.411917-7-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20241129122711.411917-6-patrice.chotard@foss.st.com>
+In-Reply-To: <20241129122711.411917-7-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.126]
@@ -111,51 +113,28 @@ On 11/29/24 13:27, Patrice Chotard wrote:
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 >
->   configs/stm32mp15_basic_defconfig   | 1 +
->   configs/stm32mp15_defconfig         | 1 +
->   configs/stm32mp15_trusted_defconfig | 1 +
->   3 files changed, 3 insertions(+)
+>   configs/stm32mp25_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
 >
-> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-> index 1c0d0d0a073..a8861faab0e 100644
-> --- a/configs/stm32mp15_basic_defconfig
-> +++ b/configs/stm32mp15_basic_defconfig
-> @@ -95,6 +95,7 @@ CONFIG_TFTP_TSIZE=y
->   CONFIG_USE_SERVERIP=y
->   CONFIG_SERVERIP="192.168.1.1"
->   CONFIG_STM32_ADC=y
+> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+> index d3f0c088157..073172c3804 100644
+> --- a/configs/stm32mp25_defconfig
+> +++ b/configs/stm32mp25_defconfig
+> @@ -33,6 +33,7 @@ CONFIG_CMD_REGULATOR=y
+>   CONFIG_CMD_LOG=y
+>   CONFIG_OF_LIVE=y
+>   CONFIG_NO_NET=y
 > +CONFIG_SYS_64BIT_LBA=y
->   CONFIG_BUTTON=y
->   CONFIG_BUTTON_GPIO=y
->   CONFIG_SET_DFU_ALT_INFO=y
-> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-> index f58a514308b..d31349e3f2b 100644
-> --- a/configs/stm32mp15_defconfig
-> +++ b/configs/stm32mp15_defconfig
-> @@ -69,6 +69,7 @@ CONFIG_TFTP_TSIZE=y
->   CONFIG_USE_SERVERIP=y
->   CONFIG_SERVERIP="192.168.1.1"
->   CONFIG_STM32_ADC=y
-> +CONFIG_SYS_64BIT_LBA=y
->   CONFIG_BUTTON=y
->   CONFIG_BUTTON_GPIO=y
->   CONFIG_CLK_SCMI=y
-> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-> index 2e99b8e6a85..1f807f37c69 100644
-> --- a/configs/stm32mp15_trusted_defconfig
-> +++ b/configs/stm32mp15_trusted_defconfig
-> @@ -70,6 +70,7 @@ CONFIG_TFTP_TSIZE=y
->   CONFIG_USE_SERVERIP=y
->   CONFIG_SERVERIP="192.168.1.1"
->   CONFIG_STM32_ADC=y
-> +CONFIG_SYS_64BIT_LBA=y
->   CONFIG_BUTTON=y
->   CONFIG_BUTTON_GPIO=y
->   CONFIG_CLK_SCMI=y
+>   CONFIG_GPIO_HOG=y
+>   CONFIG_DM_I2C=y
+>   CONFIG_SYS_I2C_STM32F7=y
+
 
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
 Thanks
 Patrick
+
+
 
