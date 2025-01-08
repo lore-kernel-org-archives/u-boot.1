@@ -4,82 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138E8E77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 13:58:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D318AE77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 14:06:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D4D7800DF;
-	Wed,  8 Jan 2025 14:58:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 24FD4800DF;
+	Wed,  8 Jan 2025 15:06:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PTu9zL5l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J5PR3GnS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED34E803DC; Wed,  8 Jan 2025 14:58:29 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 444C9803DC; Wed,  8 Jan 2025 15:06:53 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C4978006D
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 14:58:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D8618006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 15:06:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4361815b96cso112510455e9.1
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 05:58:27 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa692211331so182448666b.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 06:06:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736344706; x=1736949506;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=ndUmhqUkIp2BPQqLEK8kzxoRrr17IIg8eOs8hS6EvZY=;
- b=PTu9zL5lXFKjlz+w7xeU5ze/MxGIUbNVk99J5Qu5PK39GO0GfhY8KWyaX/NOQ0eyrb
- I1eqJiu8Ua0WMT1/2QNk+hS6m0h0oCTVqbb8EhX8knTKI0geTibrI8jh1XeWD0fyCuiZ
- Y8k6a5y0q277Rwcxgi+UmslDpqHsIj628pFQGMLhiCAt/9tNiqL8dM6xfhRrd6lYg37z
- JQ2RkGxdw8ae2JVYCHloyz1kKMkt2DVCDAmrKputjA9BFjAw0RSg40bU1DAGmF+bIhEy
- uDDw+n7nbm9LDFqJHb9SaMpfso/kRGl1SlktUAPm0IahizCqTJY1xSJMvv8QrQ8h58VI
- rymg==
+ d=linaro.org; s=google; t=1736345208; x=1736950008; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dAr+i9rX58KK6hiFiBW6cWV2bOSP0pFvSh8MisH2XlQ=;
+ b=J5PR3GnSX3CBqJyFfcs86JfHY/S7qCBwfX75phHX4lsCpNj0FAbZdfk2hY85EqcEhN
+ JuVLqQILj6085Lk+aZqRYldW/1kAeTclWWeTsNCU0u5tHfXopAZRqNMZyENmjdOEHtoC
+ BFRl2h5ghNw2wgQicYR+8I6Kz/0qqxCowDhuapnuxqsdOczT+YuYGMpSmwoJayFvTClO
+ DxlwuMf5MQX3LuDaqw5nZh8IvzP0Q7u0Qlx8VK0p4/L2XrO66TZj4+bck5T+eshArAQQ
+ 4JsAM0IzNUIb7fzSkIAjgKq4BLTLTdMLG7SEnYtMzH7MtG6sA+sixWJEwHFCRNks2ImC
+ 2xvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736344706; x=1736949506;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ndUmhqUkIp2BPQqLEK8kzxoRrr17IIg8eOs8hS6EvZY=;
- b=o5eCdXipv89pUu2z3q7Wvjq8ycFEP+s81vPqNHeZ5nRasFisck19nrMKmik+o5Nzt4
- 5JWB1oqhYNjXU+q/H00q8MUrNBM7rZ8dwR48llULq5zNgqG52X1LSNwoV1llMZDqGhZt
- 1Ola66NAuuaTvmOe5yPpU2DGPO4Eqo7n1yPXN8PsC+tg9kVZYYa7A7z+5Kh0M4DdY2u+
- QFNuXW6Gnu2renYfymNV1CW3KsZKXugvmbVnj0IcNn6MN2x6vzCrXWV4a8jmqghwkHE5
- I0+l+kZyMbNALmclYgJcOWveNFwIt3rqzqLrhm9eoplWI3gE2GqlKxp0FZUovVftVUeA
- JkiQ==
-X-Gm-Message-State: AOJu0YzvTeUMmWIkzz0zRqbbAJFHvmhcVbLdDIcL7XmDJJWqHUpWhC1j
- 3b6kECdj+3w45k6/1r0BQN1wQj7blb8y0+4lqZGQHW9HrebmPpa3XfrgZdYTXPA=
-X-Gm-Gg: ASbGncu6vFuBU3unDhyqvFpbwr2htCr6kLNU0GaMv6LdklNItkLnSE9mmnzDp78XLa7
- HZ8SuHk46YgHX1bmcIqk9W1sKwEboa2htjSdTCWZbOKtAoV/TFV7kn6owcmGWQ9INo+RWX9FUUi
- 4q6VtOpPCeIdIumUc1XSo9MgD+MyEH/pCCyP/Fr2iyt+c/TsK0tCn8Pg1gX3BMfpUMw3FLNC/Mh
- wYjnlTM9bIiKWcNj+tfdD3cYC0jjFhgjV9byldjsN0nQHWOjkC6G4xFasNx7VBc4Q==
-X-Google-Smtp-Source: AGHT+IHNTMfrWbzeMu4eu7cE/+laBy4r23Hkp90InnUKL+o7zdSC7mEDIDAWJek4bL9SgKVvB6NRDA==
-X-Received: by 2002:a05:600c:4f06:b0:436:6160:5b81 with SMTP id
- 5b1f17b1804b1-436e26b98d1mr26010405e9.14.1736344706311; 
- Wed, 08 Jan 2025 05:58:26 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ d=1e100.net; s=20230601; t=1736345208; x=1736950008;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=dAr+i9rX58KK6hiFiBW6cWV2bOSP0pFvSh8MisH2XlQ=;
+ b=n1nwczUhcxxFfcrko+dprrAUrpI8wPzU3uk1kT0I9Ty1PTTX0mJfNGHp+sao+Istam
+ erKRH/AEKwdF7YC38QR9UrjW0dfeOIF//fzXSZQmacd9tpM6d6mc4bTMpesM0yHYz5xH
+ b7DYgF4apcWGvAhjbYa/Y2ug5Uo4hLUdumQsMzW/3l/36R73pGEk6r3vRGgeqe5J6G1A
+ NUMGyxiMy/p19fD72WCx3AzJtS1FoHD9JvI9vEjvrYKqoFjkxrpEZ6v6a+ied6JvrFAW
+ MI4jWE9jJwRby2Pp7XLOsVFfkl7OR7iVuSSCwK4uuwhktjfepiP1p37lvTDUXQD09aiS
+ KZig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVHZ9SQGwKYVvNW2izQyvOu7hXW/I0o50JomQN4YpekU+UTrZs/tcoHl7R1jxto/zYAjhsTjbA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMN6vNq67VbfLuBUkgq/Hl/gTHJrY3hQF2XNlD9ORZUDod/Biq
+ JwefWfiIu6pILpw/cCkiQSoprFoxlJKCH4alPZEshJsqiPYycALBNDbGUxPK5zE=
+X-Gm-Gg: ASbGncu3Us6w1+xg6TaZPcFr20QUnThZML77O91OdZrqzW5hAIwfOQyW2ygq0f1v1Fb
+ 88+epu5C7yQgDZdwrj1uhmxPM0liNtG0k6280n82ib/Wx1vbkz/TuhJ5Xo6ers1ouYtc7oylyJi
+ 965KWeEEcGzkJhjWl1kYmSARwsQdgkkq3Nmt+uzSNHkgtFq41PSY9u8+/Fj0hdgw1kUv36uu75c
+ QX1B71C0dewZio0GNlpP6T6GbgJPP6XRT0nbLbSeNQF/YrUEaPShVH6QpV6DYO2kvsAwzm8hzmN
+ Eek/yivQkUUk1o9VIF2NTOpylt2aAKZLhkpbdVs=
+X-Google-Smtp-Source: AGHT+IG1/l3fgm/05SMj2uR0GdzWQxFC/BN8/0AnWumQcf6LKsELFWj9xKQTlSNNgQ4x4/SQ11zZjQ==
+X-Received: by 2002:a17:906:794d:b0:aae:83c7:fd50 with SMTP id
+ a640c23a62f3a-ab2a79f1e11mr265961966b.9.1736345208494; 
+ Wed, 08 Jan 2025 06:06:48 -0800 (PST)
+Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e2da6336sm21786955e9.8.2025.01.08.05.58.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 05:58:25 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Julien
- Masson <jmasson@baylibre.com>, Guillaume La Roque <glaroque@baylibre.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] bootstd: android: Allow boot with AVB failures when
- unlocked
-In-Reply-To: <20250108-avb-disable-verif-v1-2-009c35710ef4@baylibre.com>
-References: <20250108-avb-disable-verif-v1-0-009c35710ef4@baylibre.com>
- <20250108-avb-disable-verif-v1-2-009c35710ef4@baylibre.com>
-Date: Wed, 08 Jan 2025 14:58:25 +0100
-Message-ID: <87tta9be66.fsf@baylibre.com>
+ a640c23a62f3a-aac0f014decsm2512153566b.149.2025.01.08.06.06.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Jan 2025 06:06:47 -0800 (PST)
+Message-ID: <a56b87c0-0e70-4e0b-aeb7-9f10b2c7c6d0@linaro.org>
+Date: Wed, 8 Jan 2025 15:06:46 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/5] dts: sa8775p-ride-r3-u-boot: add override dtsi
+Content-Language: en-US
+To: Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: neil.armstrong@linaro.org, trini@konsulko.com, sumit.garg@linaro.org,
+ lukma@denx.de, seanga2@gmail.com, ilias.apalodimas@linaro.org,
+ sjg@chromium.org, Volodymyr_Babchuk@epam.com, lehmanju@devpi.de,
+ bhupesh.linux@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250103051404.1965469-1-quic_varada@quicinc.com>
+ <20250103051404.1965469-2-quic_varada@quicinc.com>
+ <1ae282b0-8e68-4360-b3d2-73a10b7b8f37@linaro.org>
+ <Z3zyuZZ0TA47KXpZ@hu-varada-blr.qualcomm.com>
+ <909dc9b6-fb70-45c7-83f2-74c89b5049a5@linaro.org>
+ <Z34RRETdZn8rDhYe@hu-varada-blr.qualcomm.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <Z34RRETdZn8rDhYe@hu-varada-blr.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,75 +109,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-Please ignore this patch, I've send this a bit too fast and did not test
-all the cases.
 
-Sorry for the noise.
+On 08/01/2025 06:46, Varadarajan Narayanan wrote:
+> On Tue, Jan 07, 2025 at 12:36:23PM +0100, Caleb Connolly wrote:
+>>
+>>
+>> On 07/01/2025 10:24, Varadarajan Narayanan wrote:
+>>> On Fri, Jan 03, 2025 at 04:17:14PM +0100, neil.armstrong@linaro.org wrote:
+>>>> On 03/01/2025 06:14, Varadarajan Narayanan wrote:
+>>>>> Add initial support for the QCS9100 (derived from SA8775p) Ride platforms.
+>>>>> Define memory layout statically.
+>>>>>
+>>>>> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+>>>>> ---
+>>>>>   arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi | 22 ++++++++++++++++++++++
+>>>>>   arch/arm/dts/sa8775p-ride-u-boot.dtsi    | 11 +++++++++++
+>>>>>   2 files changed, 33 insertions(+)
+>>>>>   create mode 100644 arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi
+>>>>>   create mode 100644 arch/arm/dts/sa8775p-ride-u-boot.dtsi
+>>>>>
+>>>>> diff --git a/arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi b/arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi
+>>>>> new file mode 100644
+>>>>> index 0000000000..7d01d5f6a1
+>>>>> --- /dev/null
+>>>>> +++ b/arch/arm/dts/sa8775p-ride-r3-u-boot.dtsi
+>>>>> @@ -0,0 +1,22 @@
+>>>>> +// SPDX-License-Identifier: BSD-3-Clause
+>>>>> +/*
+>>>>> + * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>> + */
+>>>>> +
+>>>>> +/ {
+>>>>> +	model = "Qualcomm QCS9100 Ride Rev3";
+>>>>> +	compatible = "qcom,qcs9100-ride-r3", "qcom,qcs9100", "qcom,sa8775p";
+>>>>
+>>>> Why do you redefine those ? they are already defined in the upstream sa8775p-ride-r3.dts
+>>>
+>>> To include QCS9100 info to the model and compatible strings,
+>>> so that users might not get confused if a wrong U-Boot has
+>>> booted on the platform.
+>>
+>> They are already defined in dts/upstream/src/arm64/qcom/sa8775p-ride-r3.dts
+>>
+>> That file is patched at build time to include this dtsi file at the end.
+> 
+> [1] defines it as "Qualcomm SA8775P Ride Rev3". We want to define
+> as "Qualcomm QCS9100 Ride Rev3", i.e. s/SA8775P/QCS9100/. That is
+> why having it here. This would not be needed once [2] gets into
+> U-Boot.
 
-Mattijs
+hmm I see, well that's a pickle. I don't think we have a process yet for
+handling these cases where we're blocked on a DTS sync.
 
-On mer., janv. 08, 2025 at 14:43, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+I would rather avoid creating this weird situation where we use the
+sa8775p dts and pretend it's a different board especially if it's only
+temporary until the proper dts lands.
 
-> When the bootloader is UNLOCKED, it should be possible to boot Android
-> even if AVB reports verification errors [1].
->
-> This allows developers to flash modified partitions on
-> userdebug/engineering builds.
->
-> Developers can do so on unlocked devices with:
-> $ fastboot flash --disable-verity --disable-verification vbmeta vbmeta.img
->
-> In such case, bootmeth_android refuses to boot.
->
-> Allow the boot to continue when the device is UNLOCKED and AVB reports
-> verification errors.
->
-> [1] https://source.android.com/docs/security/features/verifiedboot/boot-flow#unlocked-devices
-> Fixes: 125d9f3306ea ("bootstd: Add a bootmeth for Android")
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
->  boot/bootmeth_android.c | 15 +++++++++++----
->  1 file changed, 11 insertions(+), 4 deletions(-)
->
-> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-> index 2cd167f80280801618a317a65e93a10e70a0d9ee..564d21784feb0667bf9bed2a59be0a232601a7dd 100644
-> --- a/boot/bootmeth_android.c
-> +++ b/boot/bootmeth_android.c
-> @@ -407,11 +407,16 @@ static int run_avb_verification(struct bootflow *bflow)
->  				 AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
->  				 &out_data);
->  
-> -	if (result != AVB_SLOT_VERIFY_RESULT_OK) {
-> +	if (result != AVB_SLOT_VERIFY_RESULT_OK && !unlocked) {
->  		printf("Verification failed, reason: %s\n",
->  		       str_avb_slot_error(result));
->  		avb_slot_verify_data_free(out_data);
->  		return log_msg_ret("avb verify", -EIO);
-> +	} else if (result != AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION && unlocked) {
-> +		printf("Unlocked verification failed, reason: %s\n",
-> +		       str_avb_slot_error(result));
-> +		avb_slot_verify_data_free(out_data);
-> +		return log_msg_ret("avb verify unlocked", -EIO);
->  	}
->  
->  	if (unlocked)
-> @@ -427,9 +432,11 @@ static int run_avb_verification(struct bootflow *bflow)
->  			goto free_out_data;
->  	}
->  
-> -	ret = avb_append_commandline(bflow, out_data->cmdline);
-> -	if (ret < 0)
-> -		goto free_out_data;
-> +	if (result == AVB_SLOT_VERIFY_RESULT_OK) {
-> +		ret = avb_append_commandline(bflow, out_data->cmdline);
-> +		if (ret < 0)
-> +			goto free_out_data;
-> +	}
->  
->  	return 0;
->  
->
-> -- 
-> 2.47.1
+Some proposals:
+
+1. remove the model/compatible properties assuming the sa8775p-ride-r3
+board using the same memory map, add another u-boot dtsi for
+qcs9100-ride-r3 once it's merged in
+2. import qcs9100-ride-r3.dts into arch/arm/dts in u-boot as part of
+this series (but need to remember to remove it later!)
+3. somehow cherry-pick the relevant patch into the subtree early or ask
+Tom to sync the DT subtree
+4. wait for the next sync which hopefully won't be too long(?)
+
+I'd be ok with 1 or maybe 2 for this specific case, I'll see if 3/4 are
+viable for the future.
+
+Feel free to pick one of those approaches and respin if that works for you.
+
+Kind regards,
+> 
+> 1. https://source.denx.de/u-boot/u-boot/-/blob/master/dts/upstream/src/arm64/qcom/sa8775p-ride-r3.dts
+> 2. https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/qcom/qcs9100-ride-r3.dts
+> 
+> Thanks
+> Varada
+> 
+>>> Please let me know if this should still be removed.
+>>>
+>>> Thanks
+>>> Varada
+>>>
+>>>>> +
+>>>>> +	/* Will be removed when bootloader updates later */
+>>>>> +	memory@80000000 {
+>>>>> +		device_type = "memory";
+>>>>> +		reg = <0x0 0x80000000 0x0 0x3ee00000>,
+>>>>> +		      <0x0 0xc0000000 0x0 0x04d00000>,
+>>>>> +		      <0xD 0x00000000 0x2 0x54100000>,
+>>>>> +		      <0xA 0x80000000 0x1 0x52d00000>,
+>>>>> +		      <0x9 0x00000000 0x1 0x80000000>,
+>>>>> +		      <0x1 0x00000000 0x2 0xf7500000>,
+>>>>> +		      <0x0 0xd0000000 0x0 0x00100000>,
+>>>>> +		      <0x0 0xd3500000 0x0 0x07c00000>;
+>>>>> +	};
+>>>>
+>>>> Ack, this should be removed once the SMEM code is merged.
+>>>>
+>>>>> +};
+>>>>> diff --git a/arch/arm/dts/sa8775p-ride-u-boot.dtsi b/arch/arm/dts/sa8775p-ride-u-boot.dtsi
+>>>>> new file mode 100644
+>>>>> index 0000000000..979462dfec
+>>>>> --- /dev/null
+>>>>> +++ b/arch/arm/dts/sa8775p-ride-u-boot.dtsi
+>>>>> @@ -0,0 +1,11 @@
+>>>>> +// SPDX-License-Identifier: BSD-3-Clause
+>>>>> +/*
+>>>>> + * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>> + */
+>>>>> +/dts-v1/;
+>>>>> +
+>>>>> +#include "sa8775p-ride.dts"
+>>>>
+>>>> Why ? this file will be automatically appended to sa8775p-ride.dts, no need to import is before.
+>>>>
+>>>>> +/ {
+>>>>> +	model = "Qualcomm QCS9100 Ride";
+>>>>> +	compatible = "qcom,qcs9100-ride", "qcom,qcs9100", "qcom,sa8775p";
+>>>>
+>>>> Same, unneeded.
+>>>>
+>>>> In fact, this file is completely unneeded.
+>>>>
+>>>>> +};
+>>>>
+>>>> Neil
+>>>>
+>>
+>> --
+>> // Caleb (they/them)
+>>
+
+-- 
+// Caleb (they/them)
+
