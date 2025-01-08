@@ -4,79 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D75E77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:51:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 213CBE77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:52:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6A0A80756;
-	Wed,  8 Jan 2025 16:49:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 84478805FB;
+	Wed,  8 Jan 2025 16:52:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="4e2FZ238";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="dGDn6cZb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EF3A805E2; Wed,  8 Jan 2025 16:11:20 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C948D80607; Wed,  8 Jan 2025 16:52:33 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E5C18001F
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 16:11:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 591488036B
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 16:52:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=3103c48948=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508DL6jr031319;
- Wed, 8 Jan 2025 16:11:16 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- y3ugovgx3/crfOpHOM7gSffG9ugsV6EMYICkymUoR4E=; b=4e2FZ238rfxZNYN8
- nGuPkDvKK92zyP61kHU4jGM9CEYZe4JzkprnSyAYZqRZ0bnaD65Zaq2TeojTvcWd
- tojMfOaOQMm8TWrPb180vj90pAROjvww03WjbHi2Bo0adv3VoC44fiAkEvgDVU2z
- MzZU3uXniuc38eXOAQfzh6hgcM4BX/kpUOYMXCQevOICRk+REqNY/+UC2TrbZTpb
- Pjee2mt2SjbnuLwDOrSvAi3MM8Q8uVs3uMuM55A0fk+MOV0yoX/cYs29OLE7zQhi
- Hf7TZSL5gbeEn//7wE8ll67D8pEIXQCosRO8ZcGNR8hUawkTDlYWJXYU9heT4oJB
- hGBPNA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 441pu4seuc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 08 Jan 2025 16:11:16 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id BC9F54004C;
- Wed,  8 Jan 2025 16:10:13 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9259128163B;
- Wed,  8 Jan 2025 16:09:43 +0100 (CET)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 8 Jan
- 2025 16:09:43 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Devarsh Thakkar
- <devarsht@ti.com>, Rasmus Villemoes <ravi@prevas.dk>, Simon Glass
- <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] cyclic: Fix typo in struct cyclic_info description
-Date: Wed, 8 Jan 2025 16:09:40 +0100
-Message-ID: <20250108150940.558671-2-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250108150940.558671-1-patrice.chotard@foss.st.com>
-References: <20250108150940.558671-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ptosi@google.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aa692211331so204560666b.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 07:52:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1736351551; x=1736956351; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0AdCbfcO/af6f+IHi687QXt57/hG+C6kg0Qyua1qPLI=;
+ b=dGDn6cZbQbm6233C1DxcQfvQOweQhDxAO3mvFmJxiDxLqpWE/VMohfreteCbNxoYfi
+ t859t9cqFaD1GMHADWsFhlQFTVPeFcClxPrpU0iq65WxO8AxEYNWz9g9sfyJT0tXo9r+
+ Z0BCTQTlh/ynMFGUR7k89jQf+bgXu3KyN9OhlZmSEr+jNbdM4yGvKjNWGKfeDY5XTnHA
+ jl9xykS376qBKQN4d49i68BVn8DJXgqfBD1LS3P8wFvuqE5B1c4cg4ShAufVmKQoUJ5A
+ nSEYvGgcJs3lD330/X3nNvCi1dmPbIV0OiemGlO6Kw4+fe3eWYUtVh+p6Evr8a8NbZZM
+ GSXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736351551; x=1736956351;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0AdCbfcO/af6f+IHi687QXt57/hG+C6kg0Qyua1qPLI=;
+ b=mKOpZmmPvK6W2DYWtBTYDJcSuJ7Ak3U1GZc0rZbw8L5EaoKSeL0tidZep2kt4NEnIl
+ OmXzn4qgLcgsbNNDswsA2EYt8Cve/RIJ09DC4OW1wHIOQobKvKFynd+h4WizIxsU2bBY
+ jNryRqCuQx6ktZ8gEoNvQDcCjBdf6YfeHtsOOJxyitUDEZSc2vCzJBs2LW0O5p2JzdYX
+ 3LFHaSbI6bguasPVhEClN00pHhDECjrepkRTndgDM2oKRiU4jMHwWrTQXuBPnOgMxtLr
+ 6CZNMblRFkiwT3OS6L5uVo/Pop09oPoKadiDAX9BJF4B7x/PsrHV/Wg1FYLX3kkZk25K
+ rcfQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUkRKCWfGIst//FZamu1seECUeScrDI7rclfdsZnz2LG+13X9++GbDUiCcEAW3DhpDAEtp1Xik=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJeOFgQ3+bKRZM4T5RVJSnRQOwROg7L4qe7LcJypeDYgSIyeg1
+ U8QZpsGuY/qqxfBOW61A0Z/1sLHZfT012wR+1Su7+AQp7xSLpAKJdWw5Dlwo8w==
+X-Gm-Gg: ASbGncuMMNH9UAdlJk9TDM/uaDDliX7D+GdvbVQFdFnQRnQCasJ3YgR/5tk01Jau/q5
+ DQ+wCiYBinsdurItFQjQTL+VbxZ+1oncIqr5McK03y7cFITYWOHebwm4sHeLNdNn2LBhUQBHWXt
+ lrAsTeZH7RV2xxHG0lVTuStMblU61moPHkSckfqRhMPcbvamj+pAe2G6vuIxdKATqJYOWAhSEjD
+ v6cDgfhqLvm4fR7mJxNTPaJSL8tEP1vZIkoMtgX7i/jxQNKpFzYWTr8Bth9sKt7C1BHpS6xSmZ6
+ oOBjd8siOg==
+X-Google-Smtp-Source: AGHT+IHG2UOFxTcRQUVOQprKZupsvHG7B7T1qQDzo+qxYaQdQZSSU933OOognsIHMzvW5tQC7n+uUw==
+X-Received: by 2002:a17:907:7ea3:b0:aae:bb48:211e with SMTP id
+ a640c23a62f3a-ab291928ea1mr601343166b.27.1736351550399; 
+ Wed, 08 Jan 2025 07:52:30 -0800 (PST)
+Received: from google.com (194.0.34.34.bc.googleusercontent.com. [34.34.0.194])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aac0e82f5c4sm2501652866b.30.2025.01.08.07.52.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jan 2025 07:52:29 -0800 (PST)
+Date: Wed, 8 Jan 2025 15:52:25 +0000
+From: =?utf-8?Q?Pierre-Cl=C3=A9ment?= Tosi <ptosi@google.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Marc Zyngier <maz@kernel.org>, Andre Przywara <andre.przywara@arm.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Peter Hoyes <Peter.Hoyes@arm.com>, Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] armv8: mmu: don't switch to emergency tlb when adding a
+ dynamic mapping
+Message-ID: <wyoagqda5bxjx3xbj5spdsp3n65woxf5u3mkz3a2fdrinn4bo2@pqmc5tidoeys>
+References: <20250108142235.1194640-1-caleb.connolly@linaro.org>
+ <86septwdlr.wl-maz@kernel.org>
+ <37c914cd-8f66-4474-8b88-7464b256cd49@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Mailman-Approved-At: Wed, 08 Jan 2025 16:49:18 +0100
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <37c914cd-8f66-4474-8b88-7464b256cd49@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,28 +105,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace delay_ns by delay_us which is the field name used into
-struct cyclic_info.
+Hi Caleb,
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+On Wed, Jan 08, 2025 at 04:19:07PM +0100, Caleb Connolly wrote:
+> Hi Marc,
+> 
+> Thanks for your comments.
+> 
+> On 08/01/2025 16:05, Marc Zyngier wrote:
+> > On Wed, 08 Jan 2025 14:22:24 +0000,
+> > Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>
+> >> This seems to cause crashes on a bunch of Qualcomm platforms. It's safer
+> >> to just update the live table and flush it.
+> > 
+> > You may want to provide a bit more information, because that's not
+> > much to go on, really.
+> 
+> Best I have is "the board hangs and then resets when trying to switch
+> pagetables", I didn't manage to narrow it down exactly, but since it
+> seems to work to update the tables without switching that feels like a
+> better approach at least for now.
+> 
+> In hindsight, this mmu_map_region() function is not great in a lot of
+> ways, I'm still getting my head around the MMU and I expect this will
+> keep being improved.
 
- include/cyclic.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Yes, [1] should not have used map_range() on live PTs as it assumes that
 
-diff --git a/include/cyclic.h b/include/cyclic.h
-index c6c463d68e9..56190db0599 100644
---- a/include/cyclic.h
-+++ b/include/cyclic.h
-@@ -20,7 +20,7 @@
-  *
-  * @func: Function to call periodically
-  * @name: Name of the cyclic function, e.g. shown in the commands
-- * @delay_ns: Delay is ns after which this function shall get executed
-+ * @delay_us: Delay is ns after which this function shall get executed
-  * @start_time_us: Start time in us, when this function started its execution
-  * @cpu_time_us: Total CPU time of this function
-  * @run_cnt: Counter of executions occurances
--- 
-2.25.1
+1. the PTs it modifies aren't live so doesn't perform Break Before Make;
+2. the MMU is off so doesn't perform cache maintenance (on AArch64, CPU caches
+   can't be enabled without also enabling the MMU)
 
+This patch attempts to (somehow) address 2. but 1. is still an issue anyway.
+
+FYI, see the discussion around [2] which is somewhat related. I suppose at least
+adding documentation to clearly state the assumptions map_range() makes would be
+helpful, in the short term.
+
+> > 
+> >>
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >> ---
+> >>  arch/arm/cpu/armv8/cache_v8.c | 11 ++---------
+> >>  arch/arm/include/asm/system.h |  3 +--
+> >>  drivers/soc/qcom/cmd-db.c     |  2 +-
+> >>  3 files changed, 4 insertions(+), 12 deletions(-)
+> >>
+> >> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> >> index e6be6359c5d9..43051d156122 100644
+> >> --- a/arch/arm/cpu/armv8/cache_v8.c
+> >> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> >> @@ -338,9 +338,9 @@ static void map_range(u64 virt, u64 phys, u64 size, int level,
+> >>  		size -= next_size;
+> >>  	}
+> >>  }
+> >>  
+> >> -void mmu_map_region(phys_addr_t addr, u64 size, bool emergency)
+> >> +void mmu_map_region(phys_addr_t addr, u64 size)
+> >>  {
+> >>  	u64 va_bits;
+> >>  	int level = 0;
+> >>  	u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE;
+> >> @@ -350,19 +350,12 @@ void mmu_map_region(phys_addr_t addr, u64 size, bool emergency)
+> >>  	get_tcr(NULL, &va_bits);
+> >>  	if (va_bits < 39)
+> >>  		level = 1;
+> >>  
+> >> -	if (emergency)
+> >> -		map_range(addr, addr, size, level,
+> >> -			  (u64 *)gd->arch.tlb_emerg, attrs);
+> >> -
+> >> -	/* Switch pagetables while we update the primary one */
+> >> -	__asm_switch_ttbr(gd->arch.tlb_emerg);
+> >> -
+> >>  	map_range(addr, addr, size, level,
+> >>  		  (u64 *)gd->arch.tlb_addr, attrs);
+> >>  
+> >> -	__asm_switch_ttbr(gd->arch.tlb_addr);
+> >> +	flush_dcache_range(gd->arch.tlb_addr, gd->arch.tlb_size);
+> > 
+> > Why would you invalidate anything when *mapping* something? By
+> > definition, if there was nothing mapped before, there is nothing to
+> > invalidate (hint: the architecture forbids negative caching).
+> 
+> This isn't flushing the region or TLB, it's flushing the translation
+> table we just modified.
+> 
+> I'm wondering if this tlb_addr variable is misnamed, I'm reading ARM
+> docs which suggest the TLB is some cache inside(?) the MMU, but this
+> tlb_addr in U-Boot actually points to the translation table in memory if
+> my understanding is correct?
+
+You're correct that tlb_addr has nothing to do with TLBs. IIRC, it's the
+contiguous region (with a size fixed at boot time, distinct from the malloc
+region) from which memory holding page tables is allocated.
+
+> 
+> Kind regards,
+> > 
+> > 	M.
+> > 
+> 
+> -- 
+> // Caleb (they/them)
+> 
+
+[1]: https://lore.kernel.org/u-boot/20240809-b4-snapdragon-improvements-v1-8-7c353f3e8f74@linaro.org/
+[2]: https://lore.kernel.org/u-boot/43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5/
+
+HTH,
+
+Pierre
