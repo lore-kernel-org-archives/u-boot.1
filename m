@@ -4,85 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F139EE77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 14:39:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A7FE77199
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 14:40:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6542805E9;
-	Wed,  8 Jan 2025 15:38:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E785C805F0;
+	Wed,  8 Jan 2025 15:40:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="O6Qt1zMH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="upC/xM/4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8765980609; Wed,  8 Jan 2025 15:38:58 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 6332980602; Wed,  8 Jan 2025 15:40:56 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 485FD805E9
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 15:38:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E66638001F
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 15:40:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-385ef8b64b3so13073224f8f.0
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 06:38:55 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3e8f64d5dso30355211a12.3
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 06:40:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736347135; x=1736951935;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=GGk8ypRn2HdqKx5bZecE9fyICT54N9mxXtLckpEfxks=;
- b=O6Qt1zMHKPTJiHau/2gjkVslijLG3vQnTSHivxq8yM5L7VguoPXLb24OWLXIvWOwSg
- IFgtfWIsyN7PS67EugA9FQkU/GA3TLN9EbKhsNdOKilbbk3PYlThQyOrkPH4NUl8//qL
- aAiFSCeuk2/H6zw8aovqRVVH1xeXbmjZ4B88F2dNmRtTRx5Fp7s/XeCHLtRxscRQjSso
- 6H2uwJC8MdIEzes9vgoIAykdTzQNohvhHAEXqXktCOXWgtZU2xX06TOkcIPM7zTUcGgW
- mTHQa+PAuY5SmaGtfFcP961WIE22UcCOJ4qqj/W8pKrjkiTtM2GMG6TZyH95tUlgXex7
- rLWw==
+ d=linaro.org; s=google; t=1736347253; x=1736952053; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=H4k7HpXCO3AFeRdxZHoJUwJ8aJafDjgYKNnGF0x7KH0=;
+ b=upC/xM/4nvymw0OmM2sLEfCPgrYziyviVTzjOQlX6gcwX0FJkgEsLDcF36eLbQEY0o
+ Xtqtgt0CCco4yG7ZWBRXZLbktG/qKeoTxWN+IRlwz576BrEbFcnR2cxSG4bXZp2jmjpg
+ auQnB3YUbgBsPFZYxbqAKtApC2MLrUAhIemq+Xsu4pKiR3m9FUur+NHt7APACEWAZtYb
+ Tl0DQaJk+9N1a59ZWXv7W+Lnrj6aFq/TsP/k8EaIuxU/mEAV8JWaxYg7Ie/RR9fnZabd
+ gYy2fKiAm4Y1y4Kjw72XbzHbiLc+95M2pqHPc7NMDHeQ7s/lKGdc7jtiYQ2d0//+6n8i
+ a2Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736347135; x=1736951935;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GGk8ypRn2HdqKx5bZecE9fyICT54N9mxXtLckpEfxks=;
- b=ssBJfn3Hg1uVr1r4ryGUj2v0o1flSh88uBID1+yvqlOnRNhlYCGR9Eklrp0r6z8HHY
- JF6/lVDrJRQJVhIaRDS7FKWOdgfWj1PQTx8b5fvMhTgs5hRqXGo4a/GLue9RtGATzCip
- E4D9cXu6OXhYlV3PGBNZkS4uZXZjXkEoigp+1uoRNoCUhAwho/+6G7rDS6M/5rFlqssk
- RTiVkxF3TZ9UncFGOkfrjA5blor9EuQY62Cw6qNhQWx2WExhKSIxNWmeYJcxhLWhrMLt
- 78rmg3EwO8rd32N0qSI2kRm7YDfnnrwQ2fNS1QtG+dp1z18W0dNZwdaRYcpwT0v1FKA4
- uRzw==
-X-Gm-Message-State: AOJu0Yyzs73KS0JsYGClnOVGezTqqBdUiLIvoAyP/9ILVVpp46Z3z/Mk
- Px28kjcbq2azZebXj0VokV4xtkiOPeFGAmXrrKBy1v2RgQLS/7hwtVUxVstnJsQ=
-X-Gm-Gg: ASbGncuMEOp9SDi/bEnc99MZNIatCzSifnictdr4OZjuccZU/6+rmgMrJ0MbDl8hdLY
- gcv4LbY1Cp0hVL57ZtG6QGNoKomIQcUjK0G0a26Rd3jaqP9kJCPEhJgFbJqx7weyUkfgAp9Tp8B
- 9DS6EjfRVRFUy8Q8olBl3ufL9/1ktTXcJ/AbhFU7+ixgr/qoWEsI3S/WaNb/8Sk/2qqlbMfflIL
- 8iYptFAUPcVgv2NMXrJGfTkzoK2LlIBFnULyn2H1iHWN4wXHEJMLRv2blOUU0UOCqciGMRM
-X-Google-Smtp-Source: AGHT+IH7wcYE1JHaFvrD9gEZ0ltXZTnq3TC0gQo2fyiJmWIBxZsnZ3F2UcV43437Yh7HiY3b7Uzpug==
-X-Received: by 2002:a5d:598d:0:b0:38a:624b:e7fe with SMTP id
- ffacd0b85a97d-38a872d121bmr2624625f8f.7.1736347134742; 
- Wed, 08 Jan 2025 06:38:54 -0800 (PST)
-Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ d=1e100.net; s=20230601; t=1736347253; x=1736952053;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=H4k7HpXCO3AFeRdxZHoJUwJ8aJafDjgYKNnGF0x7KH0=;
+ b=fM9rNgRFlrLjbDr0vXi6bkvE/UtPOW8WU4RWM5nPuCF07yqjo4ejdUEUSFizXf7LqH
+ novKS+ykieBGAlLZYayfMwF6fCpSJtL5kgQJasC8QhSUVJsCHj9YFTGYY1bPdNupaIvF
+ iFeRuJ3SpOpJd5cTfPVRkDI+Szk/KfkOFMUnJ0yjn1PVThIXU70CJcC2tiqhlbY85s3V
+ 2xqc3giDrV3/waP094fBjhq/zL5OX/idBdIAMGYOJT/bZN6gdNgTaNWHsZf06MbQvHyL
+ vCnFHc3r6RUm96ilpd5C9Me1Cc+wsyZBV9rtAmex/L9mMGPJb6dhcvPuytRicvI1dk4K
+ oIpg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWJk3mmRbTrDUCk3emkzvG1AUCR1Rhr/WIRsqW1r6f0JWLMpWFcwuLMhibaqRNUFCT7orzn54U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8oxLD2c6mpeLBoPsqTHSj/kS+dsW8zl6w2CR9NSJ4md8qlZrO
+ XIhfF9Tl8TNp/a7LaFdQYqdaqURm6r1ZB3vbnZcobbqKhMar5LLqBy4xvtFii6dmeXVxFbgpuHy
+ Z
+X-Gm-Gg: ASbGncv7Q3mwtWbBlb+2QS568tuCif3DwWgdVDcDLXYRHBE+au4KS7o0bHVER74s2bZ
+ tJIugRryZOD25d1YGUl9rub95GHfYkri/2EZv8JvB6xEJCQiOPz6+TN2nd6t+JbrmNNk1+7AmTw
+ lgGxTJHMgUzFNVQZ2GidFjkb4bS14On90HQkhXokb+Js/Fek5h3iU2HuYqeGpGTjv7xwauDFSB3
+ KdTU0AU2dXnqlg9wKd+vKzpUQmTwlISH/069A3lrmzG/HlqYmYPtwR6rPjO30vTwD/6bYOXNx+h
+ hUEgwybp+TLSs0Gvg7riZXrJOAhqwtuF2yFodAY=
+X-Google-Smtp-Source: AGHT+IElpsB/qJ4sZfNHYsQYOuD9YT3womfJygpvulT4HLLyaANhkh3RYNdqEdf9u9zfDu14RBTopg==
+X-Received: by 2002:a05:6402:320b:b0:5d0:cfdd:2ac1 with SMTP id
+ 4fb4d7f45d1cf-5d972dfcbcfmr2879329a12.6.1736347253363; 
+ Wed, 08 Jan 2025 06:40:53 -0800 (PST)
+Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e2e3e779sm22796565e9.43.2025.01.08.06.38.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 06:38:54 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Wed, 08 Jan 2025 15:38:42 +0100
-Subject: [PATCH v2 2/2] bootstd: android: Allow boot with AVB failures when
- unlocked
+ 4fb4d7f45d1cf-5d806fed723sm26211448a12.64.2025.01.08.06.40.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Jan 2025 06:40:51 -0800 (PST)
+Message-ID: <6dcaf2a0-3c08-4bcc-9e7d-8cf7a77cd54c@linaro.org>
+Date: Wed, 8 Jan 2025 15:40:49 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] clk/qcom: Treat different GDSCs didderently
+Content-Language: en-US
+To: Alexey Minnekhanov <alexeymin@postmarketos.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+References: <20250108115911.4163437-1-alexeymin@postmarketos.org>
+ <20250108115911.4163437-2-alexeymin@postmarketos.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250108115911.4163437-2-alexeymin@postmarketos.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250108-avb-disable-verif-v2-2-ba7d3b0d5b6a@baylibre.com>
-References: <20250108-avb-disable-verif-v2-0-ba7d3b0d5b6a@baylibre.com>
-In-Reply-To: <20250108-avb-disable-verif-v2-0-ba7d3b0d5b6a@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Julien Masson <jmasson@baylibre.com>, 
- Guillaume La Roque <glaroque@baylibre.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14.3-dev-86319
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,84 +107,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the bootloader is UNLOCKED, it should be possible to boot Android
-even if AVB reports verification errors [1].
+Hi Alexey,
 
-This allows developers to flash modified partitions on
-userdebug/engineering builds.
+Thanks for the patch! Really happy to see support for this new platform.
 
-Developers can do so on unlocked devices with:
-$ fastboot flash --disable-verity --disable-verification vbmeta vbmeta.img
+On 08/01/2025 12:59, Alexey Minnekhanov wrote:
+> Apparently not all GDSCs are the same. In Linux driver, depending on which
+> GDSC flags are set, different status register is checked when powering it
+> on/off. And on top of that, different bit inside that register is tested.
+> 
+> Port missing parts from Linux driver to U-Boot:
+>  - add GDSC flags;
+>  - adjust logic when checking GDSC status to match one in Linux driver.
 
-In such case, bootmeth_android refuses to boot.
+Sorry it's a bit of a pain, but could you split this into two patch and
+adjust the ordering so we don't risk breaking someones bisect if they
+land here. I'd propose:
 
-Allow the boot to continue when the device is UNLOCKED and AVB reports
-verification errors.
+Patch 1: as-is
+Patch 2: add the flags enum and adjust struct qcom_power_map
+Patch 3: would be the "port to new flags" patch
+Patch 4: adjust qcom_power_set() (the bulk of this patch)
+Patch 5: add sdm660 clock driver
 
-[1] https://source.android.com/docs/security/features/verifiedboot/boot-flow#unlocked-devices
-Fixes: 125d9f3306ea ("bootstd: Add a bootmeth for Android")
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- boot/bootmeth_android.c | 37 ++++++++++++++++++++++++-------------
- 1 file changed, 24 insertions(+), 13 deletions(-)
+does this make sense?
+> 
+> This fixes e.g. SDM660's USB_30_GDSC to be forever stuck during power on,
+> since unlike SDM845 one it doesn't have POLL_CFG_GDSCR flag.
+> 
+> Even though only POLL_CFG_GDSCR is the important one here, add all flags
+> from Linux driver, to make it easier to compare which flags are needed
+> for which GDSC, making porting process easier.
 
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 2cd167f80280801618a317a65e93a10e70a0d9ee..dc9aad1633bb7a6d577013bfa0f939343f2e066b 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -407,17 +407,26 @@ static int run_avb_verification(struct bootflow *bflow)
- 				 AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
- 				 &out_data);
- 
--	if (result != AVB_SLOT_VERIFY_RESULT_OK) {
--		printf("Verification failed, reason: %s\n",
--		       str_avb_slot_error(result));
--		avb_slot_verify_data_free(out_data);
--		return log_msg_ret("avb verify", -EIO);
--	}
--
--	if (unlocked)
--		boot_state = AVB_ORANGE;
--	else
-+	if (!unlocked) {
-+		/* When device is locked, we only accept AVB_SLOT_VERIFY_RESULT_OK */
-+		if (result != AVB_SLOT_VERIFY_RESULT_OK) {
-+			printf("Verification failed, reason: %s\n",
-+			       str_avb_slot_error(result));
-+			avb_slot_verify_data_free(out_data);
-+			return log_msg_ret("avb verify", -EIO);
-+		}
- 		boot_state = AVB_GREEN;
-+	} else {
-+		/* When device is unlocked, we also accept verification errors */
-+		if (result != AVB_SLOT_VERIFY_RESULT_OK &&
-+		    result != AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION) {
-+			printf("Unlocked verification failed, reason: %s\n",
-+			       str_avb_slot_error(result));
-+			avb_slot_verify_data_free(out_data);
-+			return log_msg_ret("avb verify unlocked", -EIO);
-+		}
-+		boot_state = AVB_ORANGE;
-+	}
- 
- 	extra_args = avb_set_state(avb_ops, boot_state);
- 	if (extra_args) {
-@@ -427,9 +436,11 @@ static int run_avb_verification(struct bootflow *bflow)
- 			goto free_out_data;
- 	}
- 
--	ret = avb_append_commandline(bflow, out_data->cmdline);
--	if (ret < 0)
--		goto free_out_data;
-+	if (result == AVB_SLOT_VERIFY_RESULT_OK) {
-+		ret = avb_append_commandline(bflow, out_data->cmdline);
-+		if (ret < 0)
-+			goto free_out_data;
-+	}
- 
- 	return 0;
- 
+This is great, thanks for taking the time to add all of these.
+
+Kind regards,
+> 
+> Signed-off-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+> ---
+>  drivers/clk/qcom/clock-qcom.c | 45 ++++++++++++++++++++++++-----------
+>  drivers/clk/qcom/clock-qcom.h | 16 ++++++++++++-
+>  2 files changed, 46 insertions(+), 15 deletions(-)
+> 
+> diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+> index 1cfc430c14a5..bf9249b55af3 100644
+> --- a/drivers/clk/qcom/clock-qcom.c
+> +++ b/drivers/clk/qcom/clock-qcom.c
+> @@ -461,7 +461,7 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
+>  	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(pwr->dev);
+>  	void __iomem *base = dev_get_priv(pwr->dev);
+>  	const struct qcom_power_map *map;
+> -	u32 value;
+> +	u32 value, status_reg;
+>  	int ret;
+>  
+>  	if (pwr->id >= data->num_power_domains)
+> @@ -481,19 +481,36 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
+>  
+>  	writel(value, base + map->reg);
+>  
+> -	if (on)
+> -		ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
+> -					 value,
+> -					 (value & GDSC_POWER_UP_COMPLETE) ||
+> -					 (value & GDSC_PWR_ON_MASK),
+> -					 GDSC_STATUS_POLL_TIMEOUT_US);
+> -
+> -	else
+> -		ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
+> -					 value,
+> -					 (value & GDSC_POWER_DOWN_COMPLETE) ||
+> -					 !(value & GDSC_PWR_ON_MASK),
+> -					 GDSC_STATUS_POLL_TIMEOUT_US);
+> +	/* depending on the type of gdsc the status register is different */
+> +	/* and we need to check different status bit */
+> +	if (map->flags & POLL_CFG_GDSCR) {
+> +		status_reg = map->reg + CFG_GDSCR_OFFSET;
+> +
+> +		if (on)
+> +			ret = readl_poll_timeout(base + status_reg,
+> +						 value,
+> +						 (value & GDSC_POWER_UP_COMPLETE),
+> +						 GDSC_STATUS_POLL_TIMEOUT_US);
+> +		else
+> +			ret = readl_poll_timeout(base + status_reg,
+> +						 value,
+> +						 (value & GDSC_POWER_DOWN_COMPLETE),
+> +						 GDSC_STATUS_POLL_TIMEOUT_US);
+> +	} else {
+> +		status_reg = map->reg;
+> +
+> +		if (on)
+> +			ret = readl_poll_timeout(base + status_reg,
+> +						 value,
+> +						 (value & GDSC_PWR_ON_MASK),
+> +						 GDSC_STATUS_POLL_TIMEOUT_US);
+> +
+> +		else
+> +			ret = readl_poll_timeout(base + status_reg,
+> +						 value,
+> +						 !(value & GDSC_PWR_ON_MASK),
+> +						 GDSC_STATUS_POLL_TIMEOUT_US);
+> +	}
+>  
+>  	if (ret == -ETIMEDOUT)
+>  		printf("WARNING: GDSC %lu is stuck during power o%s\n",
+> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+> index 78d9b1d81ece..84965b2555c7 100644
+> --- a/drivers/clk/qcom/clock-qcom.h
+> +++ b/drivers/clk/qcom/clock-qcom.h
+> @@ -63,8 +63,22 @@ struct qcom_reset_map {
+>  	u8 bit;
+>  };
+>  
+> +enum qcom_gdsc_flags {
+> +	VOTABLE = BIT(0),
+> +	CLAMP_IO = BIT(1),
+> +	HW_CTRL = BIT(2),
+> +	SW_RESET = BIT(3),
+> +	AON_RESET = BIT(4),
+> +	POLL_CFG_GDSCR = BIT(5),
+> +	ALWAYS_ON = BIT(6),
+> +	RETAIN_FF_ENABLE = BIT(7),
+> +	NO_RET_PERIPH = BIT(8),
+> +	HW_CTRL_TRIGGER = BIT(9),
+> +};
+> +
+>  struct qcom_power_map {
+> -	unsigned int reg;
+> +	unsigned int reg; /* GDSCR */
+> +	unsigned int flags;
+>  };
+>  
+>  struct clk;
 
 -- 
-2.47.1
+// Caleb (they/them)
 
