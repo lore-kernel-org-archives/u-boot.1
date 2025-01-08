@@ -4,84 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66957E77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 20:19:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B4EBE77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 20:33:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91343800D0;
-	Wed,  8 Jan 2025 21:19:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D7560800D0;
+	Wed,  8 Jan 2025 21:33:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CUPXur8R";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P91r449L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 469AD805E9; Wed,  8 Jan 2025 21:19:00 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id CB4788036B; Wed,  8 Jan 2025 19:37:36 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29DAA800D0
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 21:18:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62E368006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 19:37:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7b6fc3e9e4aso12405085a.2
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 12:18:58 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6d8a3e99e32so1385056d6.2
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 10:37:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736367537; x=1736972337; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x22p1tjR4t1SVg4/LeW7JwdDnt4SUJX09OoC0ERJ5GE=;
- b=CUPXur8RVWPvoVi2BSO4vzsTeR331Zxblut5HVEk2ntvAwnXym1sCqsIJ5MEo4THWk
- XFdrPoCdONU6sudi/bN67Lhrop2NGlxYAVOp+3N4CftDe3UKNpblYB8wt+niFk8MHd3V
- espkdthdRUBh52qa4kirnwV3koYM0QP1LoxyM=
+ d=konsulko.com; s=google; t=1736361453; x=1736966253; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FKmFE83tqZXxsHoxDaL8x2a+qqWa0gfBtsAuhdFXLm0=;
+ b=P91r449LYunM0uOOvzBVgJNlF+aRtgKYVoxqEcFsTawgM/VGXM9JOI7Q20KBtfVpAw
+ BFr728B7w+Lzg285LB/S6nFqPStXFG1F9sDO9zI5pwdRdLSecG1iG+3+MByFfVXrtlIt
+ B/U2JI59m1zQeaK4CnvCTtB5rapv2F3dqWggQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736367537; x=1736972337;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=x22p1tjR4t1SVg4/LeW7JwdDnt4SUJX09OoC0ERJ5GE=;
- b=l7h0w5RzybCrk+3PGCMRitQEjMyFQSgCn9neSKOhbWtJsElHZJh/UZQH5i49eIjm4p
- xdZLBsvGWOql4l+dP/sbUm7mG/4aNtSxqEw7Bw9aUwFUPx56cunjU1KJFccQUfV1ODPq
- 7rRs2BFUV7xMmlaO38YtbeJvpipFTvsbBrL+wcwf6eRUQaANo/xq7di9/byBJ/wfSmR+
- JDoVfLkJ7d5cVta13sPQZe/BApt6kHiyW9zxU7T+VXaFvZd8Ppd7ZGwUSdzffg+2LK+a
- QS2h0/ah78WV7IIyMTDVOyRdyUxRB4KBdc/Zu6V9nhrp3/X0PywpNR1wHmwb+TUiUV2B
- 6sRg==
-X-Gm-Message-State: AOJu0YwGQeW9K6NzlgHSh00vWq6bPDBCw8HnOXb6iW99yMXQHe5bXFCB
- EUk3xSA89XSJPTTjf6/Jz18X3ZNHLhMYobSufmWTjvpVMR7FkKNXFYkliT2Rd5T16b9pqRHvPSq
- 1
-X-Gm-Gg: ASbGncsdDMn2p6ZpKlMOtzCX5F87clNSmBX3wLL8jPy/9p+E3aoGc21pHp2FZ8U9m1v
- VcjJfdrMXV+Ewbeo9hEn7N+szHrW9DBwu4x0YFOQgP+bDaOxShJ/52zI9Ejblv0IBim+Y9VeqgN
- klpWwcoKJvBmTOSe94TIqvvZmdz4FOL6V3gsuyGh1D0rNSRaeokzziieY86e+cCMcE9pID6lo2q
- R/PkF1fdz52ToZg7dtymH0NqAgCXo3juv7KJrnmEtLc+O7/+nu9NA==
-X-Google-Smtp-Source: AGHT+IFk5G9a34QQvHc6k/Xb+jzL1IIM3CTPeYXsPAZ9YDp1MvC6JsTVgm6N/QS0vPrU4BKTYXNxRQ==
-X-Received: by 2002:a05:620a:24c6:b0:7b6:f34b:cdd2 with SMTP id
- af79cd13be357-7bcd97a4e6cmr727565385a.53.1736367537077; 
- Wed, 08 Jan 2025 12:18:57 -0800 (PST)
-Received: from [127.0.1.1] ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac480ea7sm1706521785a.94.2025.01.08.12.18.55
+ d=1e100.net; s=20230601; t=1736361453; x=1736966253;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FKmFE83tqZXxsHoxDaL8x2a+qqWa0gfBtsAuhdFXLm0=;
+ b=L3Fy7TK0ShUS4wEG0ncAwgR2I4OleAobi1vU8NP20skbz8CM46PqDjaB2QdQdDiSnn
+ ZJDdVsypkbEHVImSiTsA+SS7cypWvv0sb4p2YKpQCZX0IXn6A/7CRjVMkb0ngxgZCIhk
+ Q+Sm0wyjLoN/N1qtJLBxjTLkaezQIKz3MSHsiHrRCbNlM3vL9M1iSmfJgiXT2SZdVew6
+ NUYjmtIsZuyxK873AfmLALF8Lbfl5+j9TfcbmzI4YDKsai+Z3RemTRBH226EcIXAtU65
+ ryzK6eALyC17H7Jg+DxkbzxfBqrgJkoZjsVOLfGYA8e0skaNjh957xWrm6Sbb7Srbifq
+ YOCQ==
+X-Gm-Message-State: AOJu0Yws8ir9glyD+sSeuZ2lXreezlQMfQRUDEFrxJkyzlr7MNIFVQsV
+ mno2EskJu671AQGSK64y13VUMSodVybRPb7lXJy3/0p55j2ZCHxqWZV/2Nj7vZ4=
+X-Gm-Gg: ASbGncvY5qb15e5ffCGXskHj+bqSCOaa5uDZ+BKXrrjKklN2ve0lx8JjUgZkYt33LYe
+ etEho7XNO3VwAN2QovXeOedOpGR9QdckqLuaqsBrysNmO2rBwef+74ffoV+hnXiU1ifX5WxnDJE
+ xhIrg18BBCRfoaeFuD2nhSbs14QXGZnjYD0KUF5PqMhcQ0UTSowpS63ou4b6Rqm0z27wkUlmr2O
+ JYscRlZQXBM0Uf5ZU+HPrTMKfL5yVJlv+QsmLPRimpJwBZXlerPCgk=
+X-Google-Smtp-Source: AGHT+IFD6qgIXb7GhWXQ56vBWHPuXWQ5Ko57SFjOSR3/OKoJ3s7C73xI6143+9N990FA78B6bSw5tA==
+X-Received: by 2002:a05:6214:d6a:b0:6d8:aeda:dd93 with SMTP id
+ 6a1803df08f44-6df9b285c0dmr71969406d6.39.1736361452898; 
+ Wed, 08 Jan 2025 10:37:32 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6df99ff40easm11046456d6.3.2025.01.08.10.37.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 12:18:56 -0800 (PST)
+ Wed, 08 Jan 2025 10:37:32 -0800 (PST)
+Date: Wed, 8 Jan 2025 12:37:24 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Cc: michal.simek@amd.com, sjg@chromium.org, jens.wiklander@linaro.org, 
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, 
- jerome.forissier@linaro.org, mkorpershoek@baylibre.com, 
- akashi.tkhro@gmail.com, francis.laniel@amarulasolutions.com, 
- ddrokosov@salutedevices.com, git@amd.com
-In-Reply-To: <20241219043918.1646095-1-venkatesh.abbarapu@amd.com>
-References: <20241219043918.1646095-1-venkatesh.abbarapu@amd.com>
-Subject: Re: [PATCH v6 0/2] cmd: Add support for optee commands.
-Message-Id: <173636753525.954784.14530620844312563637.b4-ty@konsulko.com>
-Date: Wed, 08 Jan 2025 14:18:55 -0600
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ahelenia =?utf-8?Q?Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>,
+ Alex Shumsky <alexthreed@gmail.com>,
+ Alexander Dahl <ada@thorsis.com>, Alexander Graf <agraf@csgraf.de>,
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Chen-Yu Tsai <wens@csie.org>, Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Dmitry Gerasimov <di.gerasimov@gmail.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Dragan Simic <dsimic@manjaro.org>, Heiko Schocher <hs@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Janne Grunau <j@jannau.net>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Joshua Watt <jpewhacker@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Levi Yun <yeoreum.yun@arm.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek =?iso-8859-1?Q?Moj=EDk?= <marek.mojik@nic.cz>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Philip Oberfichtner <pro@denx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: Re: [PATCH v2 00/33] upl: Prerequite patches for updated spec
+Message-ID: <20250108183724.GP3476@bill-the-cat>
+References: <20250106143229.3023771-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2nkNF7X64Pgbfe8c"
+Content-Disposition: inline
+In-Reply-To: <20250106143229.3023771-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Wed, 08 Jan 2025 21:33:28 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,20 +146,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Dec 2024 10:09:16 +0530, Venkatesh Yadav Abbarapu wrote:
 
-> Add the basic 'hello world ta' command which increments the value passed.
-> This provides easy test for establishing a session with OP-TEE TA and verify.
-> 
-> It includes following subcommands:
-> optee hello
-> optee hello <value>; value to increment via OP-TEE HELLO WORLD TA.
-> 
-> [...]
+--2nkNF7X64Pgbfe8c
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Mon, Jan 06, 2025 at 07:31:56AM -0700, Simon Glass wrote:
 
--- 
+> The current UPL spec[1] has been tidied up and improved over the last
+> year, since U-Boot's original UPL support was written.
+>=20
+> This series includes some prerequisite patches needed for the real UPL
+> patches. It is split from [2]
+>=20
+> [1] git@github.com:UniversalPayload/spec.git commit 3f1450d
+> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=3D438574&stat=
+e=3D*
+>=20
+> Changes in v2:
+> - Fix 'Emable' typo
+> - Enable the command in cmd/Kconfig instead
+> - Fix unbalanced {}
+> - Add new patch to move x86 tables to use SZ macros
+> - Use 4K instead of 4KB
+> - Add new patch to enable bloblist on x86
+> - Split this into its own function
+> - Split prerequisite patches into their own series
+>=20
+> Raymond Mao (1):
+>   bloblist: add api to get blob with size
+>=20
+> Simon Glass (32):
+>   bloblist: Drop BSD license
+>   bloblist: Make BLOBLIST_ALLOC the default
+>   abuf: Provide a way to get the buffer address
+>   abuf: Allow use in host tools
+>   abuf: Provide a constant buffer
+>   cpu: Provide a way to get the physical-address size
+>   serial: Support info() method in ns16550 xPL with UPL
+>   mkimage: Update map_to_sysmem() to match its prototype
+>   x86: Enable meminfo command
+>   x86: Show the timestamp counter with bdinfo
+>   ofnode: Use 4K for a default tree-size
+>   ofnode: Indicate when out of space in a few places
+>   ofnode: Update of_add_subnode() to indicate name is alloced
+>   boot: Rename fit_image_get_data()
+>   boot: Rename fit_image_get_data_and_size()
+>   boot: Update fit_image_get_emb_data to use abuf
+>   boot: Use fit_image_get_data() to get data
+>   boot: Update fit_image_get_data() to use abuf
+>   test: Fix inpected typo in upl test
+>   emulation: fdt: Relax condition for OF_HAS_PRIOR_STAGE
+>   emulation: Use bloblist to hold tables
+>   x86: Create more space for SPL with qemu-x86_64
+>   pci: video: Set up the pixel-format field
+>   x86: Show an error if video fails
+>   x86: Support jumping to a UPL image
+>   x86: Enable UPL handoff for SPL
+>   x86: Move tables to use SZ macros
+>   x86: Align the SMBIOS table to a 4K boundary
+>   x86: emulation: Enable bloblist
+>   dm: core: Clarify behaviour of ofnode_name_eq()
+>   dm: core: Provide ofnode_name_eq_unit() to accept a unit address
+>   dm: core: Provide ofnode_find_subnode_unit()
+
+Setting aside the bloblist parts of this. The x86 parts (and pci: video)
+are likely fine. I've commented about abuf now. I'm not keen, but I'm
+not nak'ing all of the rename stuff. All of the dm stuff is still you,
+and it doesn't look like there's anything behavior changing there, so
+that's fine. The rest of the QEMU related stuff needs a think.
+
+--=20
 Tom
 
+--2nkNF7X64Pgbfe8c
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd+xeQACgkQFHw5/5Y0
+tyy2Kwv+IMoONx0gO895EDUaRs3XWniaW7i0KjtutfCcWA8y/WyJZZ4+Lt1hlXo/
+g9YH71v/FKU/gmS0AyZ73xoWQvrFt5rWsnrgYRFjaDJoWNKIg1kXfLwbq4pdhq4N
+MVU86sYoOWADVSFetgBqCkLiBAnh/2rwix7fSyEg1oQFk4anL7DDIN1C9TajY/6D
++5j+9FLH9tZhEFFUBVQ4MAvVhZOmsJWZ3VBNier887/9/hGIxv3o46O9GbQZ7sXF
+MyIXZiZndIAlQjoBjeVJhqiD1ZCOznpYb3s6KHLOH/pEVomRtvfgdY6Fm1aBLcTt
+rM4E2o5ifETYzxRYj9jC6Pvd3UoQTHma4r7pvHLABIbToamwSQTVibt4xEF3eu83
+igfiqHxmVFKdLWJ2Pbyusl2qld5n98A1oAlO5pCY++8uRuP9ijDOwXnJlYaEq/Zm
+fO/OZLllQdIHODQBA38Lqlg7twp/ex5nDK0qhSkaYYxfKBi0mR0l0mPc6HbC4pOn
+o7M4f8BJ
+=jonc
+-----END PGP SIGNATURE-----
+
+--2nkNF7X64Pgbfe8c--
