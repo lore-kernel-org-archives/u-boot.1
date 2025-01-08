@@ -4,66 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1BBFE77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 06:58:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F92E77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 07:11:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 320D5805EA;
-	Wed,  8 Jan 2025 07:58:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 22A578006D;
+	Wed,  8 Jan 2025 08:11:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="J+HIQZlf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ly3QneKK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 204CF8005B; Wed,  8 Jan 2025 07:58:23 +0100 (CET)
-Received: from mail-m12740.qiye.163.com (mail-m12740.qiye.163.com
- [115.236.127.40])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 25BB5801E8; Wed,  8 Jan 2025 08:11:46 +0100 (CET)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E836805EA
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 07:58:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 487B08001F
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 08:11:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 81535871;
- Wed, 8 Jan 2025 14:58:14 +0800 (GMT+08:00)
-Message-ID: <4ce26e9f-08ca-41f4-8401-e995a835cdff@rock-chips.com>
-Date: Wed, 8 Jan 2025 14:58:13 +0800
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e39f43344c5so21769603276.1
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 23:11:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1736320302; x=1736925102; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Al3NffFubdwcdjCyagFBJOkH+U19GjDUFdJpjKkJjuc=;
+ b=ly3QneKKQAmIEfviEKIcb3mH8nm5LcJNNuolkBY6FyC49u13FGldZeBEXkk5SnliGA
+ r9lcp1OokwRtqHwG2B+mMjGHLc12YYU4CpckpUrVTAHxRfIFIGK1g2wWgc/uCtpc1mgi
+ M/hl1RbvGX5BzaKM9DDvLffoCp2gdaaXCwD73rLdk5Ev21F/MGwNlWBuwjbQlIzNeMRx
+ ggSJ7PiNPcuHlphsTNKxa5TyryJhKwPZfMc2UPQ+e2CNUySSXWN5B1t3p58F7yy097BX
+ byIlaF4KFlB/0q5CuOm+Z2S/uz78Q3pb+eKtm0cUtnfOwt+7FTUauUSni4ZO4ZRVakbc
+ roWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736320302; x=1736925102;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Al3NffFubdwcdjCyagFBJOkH+U19GjDUFdJpjKkJjuc=;
+ b=EcjOhDKDyS7+MkK4Ga6KJ8GcBJkO674Mm/gMX/aDci2N9arz0XQe/nPo6butdxkBzh
+ 5ea5hHDzkwSkEMtaxFnqbgB1oQ7M21meIPTDjslwFtrgd3UfJdawdPB3ih20ObZbT9nd
+ B8PW5DPIrOPQia2s+pr4TwO29dKWhNArGC5dGtC5ipn/C+xs9eJpoPZ7gSTtPTg4JY4B
+ h0QtQBAzleiyksrTPo+iyVtC/FJn5OT3cDIUJ34C5dx4yKsm1hPWdyQ/1hq7iDvBGqXO
+ 2e+Rbszz4A+uFj5teyWCTEeBGA8WfLa9xW/qrMhWDuYIb+7rAyvWBy0NcMNtgQSRR1o8
+ rfGQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWL9+PVQgYWWWAciC18bhlQbmr6G+ks0XUDgtibjH4CMiCscmy522IMFFCcnz9ogA19aJXtEG4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz72moanaBM/y0B4Z4TWZlZutCy2l1gMIgHtc9LRd93LQxo3P1A
+ UMD8OncR6UkRhKedc43pljztklNRPKGoHOYj47ONfqRVk+6xwA0EONu6Qc6/+bahkI9n44drX9t
+ ypwoHyPhFaQeEtgNCkpJf5drewA/DNQujxvWAHQ==
+X-Gm-Gg: ASbGncsJUDYqD9RNtu111T5/YeM2QeAuMHwWYu5NZ4i7OUr5AyMQVaKZYwMcQ4S4CFn
+ hD666LA98OxRfUHqbuk/CmF6ID+LFfpIwwsuylA==
+X-Google-Smtp-Source: AGHT+IFrFkeytasKOKv/fOvQCfp403av7RxOzBB67ZiyTsxHEouFJHz5izqMUoHN/8e1Gh6hfUnft4JX3/Ehk2gbXZA=
+X-Received: by 2002:a05:6902:1b8d:b0:e38:b34d:121f with SMTP id
+ 3f1490d57ef6-e54ee15ca25mr1258225276.15.1736320302081; Tue, 07 Jan 2025
+ 23:11:42 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/4] rockchip: Add support for Radxa ROCK 5C
-To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
- sumit.garg@linaro.org, jonas@kwiboo.se, eugen.hristev@linaro.org,
- quentin.schulz@cherry.de, michal.simek@amd.com, seb-dev@mail.de,
- liujianfeng1994@gmail.com, heiko@sntech.de, zhangzj@rock-chips.com,
- macromorgan@hotmail.com, dsimic@manjaro.org, pbrobinson@gmail.com,
- cfsworks@gmail.com, sebastian.reichel@collabora.com, alchark@gmail.com,
- didi.debian@cknow.org, cassel@kernel.org, boris.brezillon@collabora.com,
- cristian.ciocaltea@collabora.com, jing@jing.rocks
-References: <20250104015704.1238-1-naoki@radxa.com>
- <20250104015704.1238-5-naoki@radxa.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250104015704.1238-5-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx8aTFZLSU4aGEweQ0wfTEhWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSEtNT0
- 1VSktLVUpCWQY+
-X-HM-Tid: 0a9444b4e8ad03afkunm81535871
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pxg6Fjo5KjIPLRcILBQQCjZI
- KRUwCyNVSlVKTEhNSEpCT0JNQkNOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDSUhMNwY+
-DKIM-Signature: a=rsa-sha256;
- b=J+HIQZlfHC1tHdZCKdVucHxSOs2e5MsxrzP8IRKP15siVFnvy+KO6X8ELT6DVGtCibQr6TbMbzrKeV+73C8MhpniGsBuHTikt+0eaLmZa757ETySmkfOCcEssv/Z7DSoEfXwLYDkV8ng8qW/nkvIcalXDJE6ftoFj7+OR+ahdXo=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=SF80TfQPESzp2JNZT3V1bVFcR2XUTDFNR1b2G+U73aY=;
- h=date:mime-version:subject:message-id:from;
+References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
+ <20250102181133.378867-4-heinrich.schuchardt@canonical.com>
+ <CAC_iWjJhQQrNPyFDTAdo14X+x_CWer05+WVWu71xu_vxUb1iTw@mail.gmail.com>
+ <05ffa461-d4ae-4522-b9db-b7ee34e20737@canonical.com>
+In-Reply-To: <05ffa461-d4ae-4522-b9db-b7ee34e20737@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 8 Jan 2025 09:11:06 +0200
+X-Gm-Features: AbW1kvbTjQQBCZZctURz3e-Nak8TpeV21bU9oKUkMRA3D26N_q9B0YsyatupCqA
+Message-ID: <CAC_iWjKrr0rKi7SVN2rzSvkhCwOH+dTErdOEPJ2yuMQ-A1eDBg@mail.gmail.com>
+Subject: Re: [PATCH 3/4] efi_loader: install DXE services table
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,250 +94,361 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 7 Jan 2025 at 19:19, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 07.01.25 14:30, Ilias Apalodimas wrote:
+> > On Thu, 2 Jan 2025 at 20:11, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> The debug version of the UEFI shell requires a DXE services table to exist.
+> >>
+> >> Implement the table and let all DXE functions return EFI_UNSUPPORTED.
+> >>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >>   include/efi_dxe.h          |  54 ++++++++++++
+> >>   include/efi_loader.h       |   7 ++
+> >>   lib/efi_loader/Kconfig     |   7 ++
+> >>   lib/efi_loader/Makefile    |   1 +
+> >>   lib/efi_loader/efi_dxe.c   | 176 +++++++++++++++++++++++++++++++++++++
+> >>   lib/efi_loader/efi_setup.c |   6 ++
+> >>   6 files changed, 251 insertions(+)
+> >>   create mode 100644 include/efi_dxe.h
+> >>   create mode 100644 lib/efi_loader/efi_dxe.c
+> >>
+> >> diff --git a/include/efi_dxe.h b/include/efi_dxe.h
+> >> new file mode 100644
+> >> index 00000000000..5623189de0c
+> >> --- /dev/null
+> >> +++ b/include/efi_dxe.h
+> >> @@ -0,0 +1,54 @@
+> >> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> >> +/*
+> >> + *  DXE services table
+> >> + *
+> >> + *  Copyright (c) 2025 Heinrich Schuchardt
+> >> + */
+> >> +
+> >> +#ifndef _EFI_DXE_H
+> >> +#define _EFI_DXE_H 1
+> >> +
+> >> +#include <efi.h>
+> >> +
+> >> +/**
+> >> + * define DXE_SERVICES_SIGNATURE - DXE services signature ('DXE_SERV')
+> >> + */
+> >> +#define DXE_SERVICES_SIGNATURE 0x565245535f455844
+> >> +/**
+> >> + * define DXE_SERVICES_REVISION - DXE services revision (1.8)
+> >> + */
+> >> +#define DXE_SERVICES_REVISION 0x00010050
+> >> +
+> >> +/**
+> >> + * define EFI_DXE_SERVICES_TABLE_GUID - GUID of the EFI DXE services table
+> >> + */
+> >> +#define EFI_DXE_SERVICES_TABLE_GUID \
+> >> +       EFI_GUID(0x5ad34ba, 0x6f02, 0x4214, \
+> >> +                0x95, 0x2e, 0x4d, 0xa0, 0x39, 0x8e, 0x2b, 0xb9)
+> >> +
+> >> +struct efi_dxe_services {
+> >> +       struct efi_table_hdr hdr;
+> >> +
+> >> +       efi_status_t (EFIAPI *add_memory_space)(void);
+> >> +       efi_status_t (EFIAPI *allocate_memory_space)(void);
+> >> +       efi_status_t (EFIAPI *free_memory_space)(void);
+> >> +       efi_status_t (EFIAPI *remove_memory_space)(void);
+> >> +       efi_status_t (EFIAPI *get_memory_space_descriptor)(void);
+> >> +       efi_status_t (EFIAPI *set_memory_space_attributes)(void);
+> >> +       efi_status_t (EFIAPI *get_memory_space_map)(void);
+> >> +       efi_status_t (EFIAPI *add_io_space)(void);
+> >> +       efi_status_t (EFIAPI *allocate_io_space)(void);
+> >> +       efi_status_t (EFIAPI *free_io_space)(void);
+> >> +       efi_status_t (EFIAPI *remove_io_space)(void);
+> >> +       efi_status_t (EFIAPI *get_io_space_descriptor)(void);
+> >> +       efi_status_t (EFIAPI *get_io_space_map)(void);
+> >> +       efi_status_t (EFIAPI *dispatch)(void);
+> >> +       efi_status_t (EFIAPI *schedule)(void);
+> >> +       efi_status_t (EFIAPI *trust)(void);
+> >> +       efi_status_t (EFIAPI *process_firmware_volume)(void);
+> >> +       efi_status_t (EFIAPI *set_memory_space_capabilities)(void);
+> >> +};
+> >> +
+> >> +extern efi_guid_t efi_dxe_services_table_guid;
+> >> +
+> >> +#endif /* _EFI_DXE_H */
+> >> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> >> index c1258098217..d474866184f 100644
+> >> --- a/include/efi_loader.h
+> >> +++ b/include/efi_loader.h
+> >> @@ -663,6 +663,13 @@ efi_status_t efi_smbios_register(void);
+> >>    */
+> >>   efi_status_t efi_hob_list_register(void);
+> >>
+> >> +/**
+> >> + * efi_dxe_services_register() - install DXE services table
+> >> + *
+> >> + * Return:     status code
+> >> + */
+> >> +efi_status_t efi_dxe_services_register(void);
+> >> +
+> >>   struct efi_simple_file_system_protocol *
+> >>   efi_fs_from_path(struct efi_device_path *fp);
+> >>
+> >> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> >> index ec38a0ea352..ed3470508ff 100644
+> >> --- a/lib/efi_loader/Kconfig
+> >> +++ b/lib/efi_loader/Kconfig
+> >> @@ -384,6 +384,13 @@ config EFI_DT_FIXUP
+> >>            The EFI device-tree fix-up protocol provides a function to let the
+> >>            firmware apply fix-ups. This may be used by boot loaders.
+> >>
+> >> +config EFI_DXE
+> >> +       bool 'DXE services table'
+> >> +       default y
+> >> +       help
+> >> +         Install the DXE services table. The debug version of the UEFI shell
+> >> +         requires it.
+> >> +
+> >>   config EFI_LOADER_HII
+> >>          bool "HII protocols"
+> >>          default y
+> >> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> >> index 195ed8667fe..4f250f21811 100644
+> >> --- a/lib/efi_loader/Makefile
+> >> +++ b/lib/efi_loader/Makefile
+> >> @@ -33,6 +33,7 @@ obj-y += efi_console.o
+> >>   obj-y += efi_device_path.o
+> >>   obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_device_path_to_text.o
+> >>   obj-$(CONFIG_EFI_DEVICE_PATH_UTIL) += efi_device_path_utilities.o
+> >> +obj-$(CONFIG_EFI_DXE) += efi_dxe.o
+> >>   obj-y += efi_dt_fixup.o
+> >>   obj-y += efi_fdt.o
+> >>   obj-y += efi_file.o
+> >> diff --git a/lib/efi_loader/efi_dxe.c b/lib/efi_loader/efi_dxe.c
+> >> new file mode 100644
+> >> index 00000000000..f8920575b0c
+> >> --- /dev/null
+> >> +++ b/lib/efi_loader/efi_dxe.c
+> >> @@ -0,0 +1,176 @@
+> >> +// SPDX-License-Identifier: GPL-2.0-or-later
+> >> +/*
+> >> + *  DXE services table
+> >> + *
+> >> + *  Copyright (c) 2025 Heinrich Schuchardt
+> >> + */
+> >> +
+> >> +#include <efi_dxe.h>
+> >> +#include <efi_loader.h>
+> >> +
+> >> +efi_guid_t efi_dxe_services_table_guid = EFI_DXE_SERVICES_TABLE_GUID;
+> >> +
+> >> +static efi_status_t EFIAPI add_memory_space(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI allocate_memory_space(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI free_memory_space(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI remove_memory_space(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI get_memory_space_descriptor(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI set_memory_space_attributes(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI get_memory_space_map(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI add_io_space(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI allocate_io_space(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI free_io_space(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI remove_io_space(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI get_io_space_descriptor(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI get_io_space_map(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI dispatch(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI schedule(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI trust(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI process_firmware_volume(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static efi_status_t EFIAPI set_memory_space_capabilities(void)
+> >> +{
+> >> +       EFI_ENTRY();
+> >> +
+> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
+> >> +}
+> >> +
+> >> +static struct efi_dxe_services efi_dxe_services = {
+> >> +       .hdr = {
+> >> +               .signature = DXE_SERVICES_SIGNATURE,
+> >> +               .revision = DXE_SERVICES_REVISION,
+> >> +               .headersize = sizeof(struct efi_dxe_services),
+> >> +       },
+> >> +       .add_memory_space = add_memory_space,
+> >> +       .allocate_memory_space = allocate_memory_space,
+> >> +       .free_memory_space = free_memory_space,
+> >> +       .remove_memory_space = remove_memory_space,
+> >> +       .get_memory_space_descriptor = get_memory_space_descriptor,
+> >> +       .set_memory_space_attributes = set_memory_space_attributes,
+> >> +       .get_memory_space_map = get_memory_space_map,
+> >> +       .add_io_space = add_io_space,
+> >> +       .allocate_io_space = allocate_io_space,
+> >> +       .free_io_space = free_io_space,
+> >> +       .remove_io_space = remove_io_space,
+> >> +       .get_io_space_descriptor = get_io_space_descriptor,
+> >> +       .get_io_space_map = get_io_space_map,
+> >> +       .dispatch = dispatch,
+> >> +       .schedule = schedule,
+> >> +       .trust = trust,
+> >> +       .process_firmware_volume = process_firmware_volume,
+> >> +       .set_memory_space_capabilities = set_memory_space_capabilities,
+> >
+> > Do we plan on ever implementing those? If not we could use a single
+> > function returning EFI_UNSUPPORTED instead of all of them for code
+> > size reasons
+>
+> Currently I don't plan to implement these. But I wanted to be able to add
+>
+>      #define _DEBUG 1
+>
+> to find out which of the functions is possibly used.
+>
+> On x86 and sandbox I don't think our memory restrictions are very tight.
+>
+> Best regards
+>
+> Heinrich
 
-On 2025/1/4 09:57, FUKAUMI Naoki wrote:
-> Radxa ROCK 5C[1] is a Rockchip RK3588S2 based single board computer.
->
-> [1] https://radxa.com/products/rock5/5c
->
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Fair enough
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Thanks,
-- Kever
-> ---
-> Changes in v5:
-> - None
-> Changes in v4:
-> - ROCK 5A section was removed and most of it rewritten for ROCK 5C
-> - Trivial changes
-> Changes in v3:
-> - Fix compile error
-> Changes in v2:
-> - arch/arm/dts/rk3588s-rock-5-u-boot.dtsi: remove unused node
-> - include/configs/rock-5-rk3588s.h: fix include order
-> ---
->   arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi | 11 ++++
->   arch/arm/mach-rockchip/rk3588/Kconfig    | 21 ++++++
->   board/radxa/rock-5c-rk3588s/Kconfig      | 12 ++++
->   board/radxa/rock-5c-rk3588s/MAINTAINERS  |  7 ++
->   configs/rock-5c-rk3588s_defconfig        | 84 ++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst          |  1 +
->   include/configs/rock-5c-rk3588s.h        | 15 +++++
->   7 files changed, 151 insertions(+)
->   create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
->   create mode 100644 board/radxa/rock-5c-rk3588s/Kconfig
->   create mode 100644 board/radxa/rock-5c-rk3588s/MAINTAINERS
->   create mode 100644 configs/rock-5c-rk3588s_defconfig
->   create mode 100644 include/configs/rock-5c-rk3588s.h
 >
-> diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..1dc574c2f219
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2024-2025 Radxa Computer (Shenzhen) Co., Ltd.
-> + */
-> +
-> +#include "rk3588s-u-boot.dtsi"
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-> index b5a0e624a532..448cfaf0d60d 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -260,6 +260,26 @@ config TARGET_ROCK_5_ITX_RK3588
->   	  Front-panel connectors for audio and case-power, -leds
->   	  Powered by either 12V, ATX power-supply or PoE
->   
-> +config TARGET_ROCK_5C_RK3588S
-> +	bool "Radxa ROCK 5C RK3588S2 board"
-> +	select BOARD_LATE_INIT
-> +	help
-> +	  Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
-> +
-> +	  Specification:
-> +
-> +	  Quad A76 and Quad A55 CPU
-> +	  6 TOPS NPU
-> +	  up to 32GB LPDDR4x RAM
-> +	  eMMC / SPI flash connector
-> +	  Micro SD Card slot
-> +	  Gigabit ethernet port (supports PoE with add-on PoE HAT)
-> +	  WiFi6 / BT5.4
-> +	  1x USB 3.0 Type-A HOST port
-> +	  1x USB 3.0 Type-A OTG port
-> +	  2x USB 2.0 Type-A HOST port
-> +	  1x USB Type-C 5V power port
-> +
->   config TARGET_SIGE7_RK3588
->   	bool "ArmSoM Sige7 RK3588 board"
->   	select BOARD_LATE_INIT
-> @@ -398,6 +418,7 @@ source "board/turing/turing-rk1-rk3588/Kconfig"
->   source "board/radxa/rock5a-rk3588s/Kconfig"
->   source "board/radxa/rock5b-rk3588/Kconfig"
->   source "board/radxa/rock-5-itx-rk3588/Kconfig"
-> +source "board/radxa/rock-5c-rk3588s/Kconfig"
->   source "board/rockchip/evb_rk3588/Kconfig"
->   source "board/rockchip/toybrick_rk3588/Kconfig"
->   source "board/theobroma-systems/jaguar_rk3588/Kconfig"
-> diff --git a/board/radxa/rock-5c-rk3588s/Kconfig b/board/radxa/rock-5c-rk3588s/Kconfig
-> new file mode 100644
-> index 000000000000..ec964bdcb934
-> --- /dev/null
-> +++ b/board/radxa/rock-5c-rk3588s/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_ROCK_5C_RK3588S
-> +
-> +config SYS_BOARD
-> +	default "rock-5c-rk3588s"
-> +
-> +config SYS_VENDOR
-> +	default "radxa"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "rock-5c-rk3588s"
-> +
-> +endif
-> diff --git a/board/radxa/rock-5c-rk3588s/MAINTAINERS b/board/radxa/rock-5c-rk3588s/MAINTAINERS
-> new file mode 100644
-> index 000000000000..17183c739d67
-> --- /dev/null
-> +++ b/board/radxa/rock-5c-rk3588s/MAINTAINERS
-> @@ -0,0 +1,7 @@
-> +ROCK-5C-RK3588S
-> +M:	FUKAUMI Naoki <naoki@radxa.com>
-> +S:	Maintained
-> +F:	arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-> +F:	board/radxa/rock-5c-rk3588s/
-> +F:	configs/rock-5c-rk3588s_defconfig
-> +F:	include/configs/rock-5c-rk3588s.h
-> diff --git a/configs/rock-5c-rk3588s_defconfig b/configs/rock-5c-rk3588s_defconfig
-> new file mode 100644
-> index 000000000000..59f9f25edcb8
-> --- /dev/null
-> +++ b/configs/rock-5c-rk3588s_defconfig
-> @@ -0,0 +1,84 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5c"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_ROCK_5C_RK3588S=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5c.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_ADC=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_RTL8169=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SPI=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_SYSRESET_PSCI=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 9bab86d23479..dbe199a13c46 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -141,6 +141,7 @@ List of mainline supported Rockchip boards:
->        - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
->        - Radxa ROCK 5A (rock5a-rk3588s)
->        - Radxa ROCK 5B (rock5b-rk3588)
-> +     - Radxa ROCK 5C (rock-5c-rk3588s)
->        - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
->        - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
->        - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
-> diff --git a/include/configs/rock-5c-rk3588s.h b/include/configs/rock-5c-rk3588s.h
-> new file mode 100644
-> index 000000000000..0fd76c96f0ca
-> --- /dev/null
-> +++ b/include/configs/rock-5c-rk3588s.h
-> @@ -0,0 +1,15 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2024-2025 Radxa Computer (Shenzhen) Co., Ltd.
-> + */
-> +
-> +#ifndef __ROCK_5C_RK3588S_H
-> +#define __ROCK_5C_RK3588S_H
-> +
-> +#define ROCKCHIP_DEVICE_SETTINGS \
-> +		"stdout=serial,vidconsole\0" \
-> +		"stderr=serial,vidconsole\0"
-> +
-> +#include <configs/rk3588_common.h>
-> +
-> +#endif /* __ROCK_5C_RK3588S_H */
+> >
+> > Cheers
+> > /Ilias
+> >> +};
+> >> +
+> >> +efi_status_t efi_dxe_services_register(void)
+> >> +{
+> >> +       struct efi_dxe_services *dxe;
+> >> +
+> >> +       dxe = efi_alloc(sizeof(struct efi_dxe_services));
+> >> +       if (!dxe)
+> >> +               return EFI_OUT_OF_RESOURCES;
+> >> +
+> >> +       memcpy(dxe, &efi_dxe_services, sizeof(struct efi_dxe_services));
+> >> +
+> >> +       return efi_install_configuration_table(&efi_dxe_services_table_guid, dxe);
+> >> +}
+> >> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> >> index 393b690c3ee..796da5d5678 100644
+> >> --- a/lib/efi_loader/efi_setup.c
+> >> +++ b/lib/efi_loader/efi_setup.c
+> >> @@ -260,6 +260,12 @@ efi_status_t efi_init_obj_list(void)
+> >>          if (ret != EFI_SUCCESS)
+> >>                  goto out;
+> >>
+> >> +       if (IS_ENABLED(CONFIG_EFI_DXE)) {
+> >> +               ret = efi_dxe_services_register();
+> >> +               if (ret != EFI_SUCCESS)
+> >> +                       goto out;
+> >> +       }
+> >> +
+> >>          if (IS_ENABLED(CONFIG_EFI_ECPT)) {
+> >>                  ret = efi_ecpt_register();
+> >>                  if (ret != EFI_SUCCESS)
+> >> --
+> >> 2.47.1
+> >>
+>
