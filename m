@@ -4,68 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26544E77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:50:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F568E77199
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:50:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE37A80702;
-	Wed,  8 Jan 2025 16:49:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
+	by phobos.denx.de (Postfix) with ESMTP id 705AF8070B;
+	Wed,  8 Jan 2025 16:49:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="HrmX0P2X";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eHhM46HU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF29B800DF; Wed,  8 Jan 2025 13:44:52 +0100 (CET)
-Received: from mail.per1cycle.org (unknown [IPv6:2a01:4f8:c013:8d4e::1])
+ id 102A3803DC; Wed,  8 Jan 2025 15:04:13 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::612])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A761A8006D
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 13:44:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D8458006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 15:04:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=per1cycle.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id B5CFB3F6BE; Wed,  8 Jan 2025 12:44:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
- s=dkim; t=1736340287;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=vkIyoU2ufjWz8RsbjenHCqi2Ir32jfBX01l9SyLrlN0=;
- b=HrmX0P2XGX2GmRi9DmKwWbggRM12KBLX40woR2GfaI6E4ObJOBSfumy8WnzF+KgZOTEmgB
- wt42XSLm2tgkbW2OAM3gJ8qBi5Zdq29t+719ZbQ3C3TweRcPq+K7i9GiCUk3Km3ZT2mOS3
- kbDq9spVg75mhX1Cc1b33H55H5StCqZhbzM/K5D/Tt2EchNynTn00Q4BCeSrV2+GuzYvVb
- ZPIgtt/eGQ5bjFECYdTY4lIo7OIqmVgrVPTdPKuL6HwZpMCfU4HmOHqGDyLAPUH5GwxghL
- zpkPKLHQP06LeKuJaZmr6+Zckt4RwwB2XlVPMEcZK2YBFerwKMtWNMneatSl3Q==
-Date: Wed, 8 Jan 2025 20:44:27 +0800
-From: Huan Zhou <me@per1cycle.org>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Yixun Lan <dlan@gentoo.org>,
- u-boot@lists.denx.de, Ben Dooks <ben.dooks@codethink.co.uk>,
- Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Jonas =?utf-8?B?U2Nod8O2YmVs?= <jonasschwoebel@yahoo.de>,
- Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
- Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
- Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>,
- Huan Zhou <pericycle.cc@gmail.com>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Padmarao Begari <padmarao.begari@amd.com>
-Subject: Re: [PATCH] riscv: spacemit: k1: probe dram size during boot phase.
-Message-ID: <20250108124427.kxuuey4a2kqbjqfu@per1cycle.per1cycle>
-References: <20250108-get-dram-size-v1-1-4bae32ecf756@per1cycle.org>
- <20250108111105-GYA3276837@gentoo>
- <34F2FA88-E868-45C0-B73B-98BADEF49263@gmx.de>
- <2f6d95b7-da47-4a6c-a566-b73db825410b@stanley.mountain>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=ibai.erkiaga-elorza@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=a25rjoHtb9cq4//7m7VvPTa2QXLdxsSZyYe9HGDjKY0/ElhdLV/gJG4dMAUUC7CT12Q95fsqCzQkMLkdF93J9hCJ9B7u+SVetBCvxtX6YOJ1EyJgh+uy0fgsMOcmHrxrswsABX7+KFm5RJd041cgCZkhAzt7yBe+UMKQqrzMs0XhsPgsFlGT0waH8PwDXXNujvndewEioqR+GZCEl+u728INiezhpGCUDFFf04XqqNUPVx1w1zfkW7d6Q9v8fgTkwwdq0Ey6re+uieWnrwgDFiN8+H2gOK56ovqZaqbu1Q/7P3GN58qe6zct4AD9tpax7HL4WBVwGg0W5WBQxgQzLw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4S06m7NZtFkYTUGagPP66MmBNo9+uVkHmOB6cFeWxxg=;
+ b=tz3UqqiqA26qSK1blDJ1dFXBibpWXfZUirbV9wEuaG5Zw83VuXZNO5/UBoh5OhIVcrBUdx4zQZY2JYts2EvnbLbhrfii1q1907njgCP0NkAMrOMjRmdNrPLs2xHQAuynW7FbWb16Gr/XbzLwYnp6xPMQDuORabNhlIMm6eJWMc6rZeOf+qJIP2DIf4eVRjQ61v2fgx/mzYw+NhYuj+7qb93I1oUibJPG3EyUzFdvyCWc+a19yKOHthjAPIZeFIvBPLpbFKNOGOzLmuHb8ipTU2sDwT6cWgH/rLXLTU9hYhAfiu7ojbYO+zsjWcs9LGgzfqGUHWokUJmnJmJbDrqPsg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4S06m7NZtFkYTUGagPP66MmBNo9+uVkHmOB6cFeWxxg=;
+ b=eHhM46HUUQdpTk8P34fDDIpqxoHZE2z6dmt5OV3qJQsfQWHKhu4zENNWHRSgusC/tqKBiZ4n4AElzhilYYMe+vNESA3Hofv4wv034goWDPyjkwk9J2CghqC8m8QHKZMIoyuddhUVHwpPkDxEgGQyrPAb93ZNgLvvBkYqIeCzW6g=
+Received: from BY1P220CA0011.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:59d::11)
+ by CH0PR12MB8532.namprd12.prod.outlook.com (2603:10b6:610:191::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.10; Wed, 8 Jan
+ 2025 14:04:06 +0000
+Received: from CO1PEPF000044F1.namprd05.prod.outlook.com
+ (2603:10b6:a03:59d:cafe::64) by BY1P220CA0011.outlook.office365.com
+ (2603:10b6:a03:59d::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8335.11 via Frontend Transport; Wed,
+ 8 Jan 2025 14:04:05 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CO1PEPF000044F1.mail.protection.outlook.com (10.167.241.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8335.7 via Frontend Transport; Wed, 8 Jan 2025 14:04:05 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 8 Jan
+ 2025 08:04:04 -0600
+Received: from xirengwts04.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Wed, 8 Jan 2025 08:04:03 -0600
+From: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
+To: <u-boot@lists.denx.de>
+CC: Michal Simek <michal.simek@amd.com>, Ibai Erkiaga
+ <ibai.erkiaga-elorza@amd.com>
+Subject: [U-Boot][PATCH 0/2] Improve fpga cmd usage information
+Date: Wed, 8 Jan 2025 14:03:49 +0000
+Message-ID: <20250108140357.969380-1-ibai.erkiaga-elorza@amd.com>
+X-Mailer: git-send-email 2.42.0.325.g3a06386e31
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2f6d95b7-da47-4a6c-a566-b73db825410b@stanley.mountain>
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: ibai.erkiaga-elorza@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F1:EE_|CH0PR12MB8532:EE_
+X-MS-Office365-Filtering-Correlation-Id: fdc817da-05d9-4651-800a-08dd2fed504e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GiTGE6DBZ71jcykP3WJnBAeHccvd+zDAmkoFb2KU0r0zM2qzlknGmp6l4JSj?=
+ =?us-ascii?Q?BIbum4nD7puXG8NXspJz9GXRZqOJwREq5idpVExuFq9eMsyBQmnIWwXTyrSH?=
+ =?us-ascii?Q?tWThMvbSMVfwr1rtm+0gdArREZqU63AuoyFX1iMx2GcDcvh3tOY8T0aP2Uo+?=
+ =?us-ascii?Q?bHX74xlCyHsF5iCUhKhIv/cYgmc7gudCDY+ch+Cgpup1ZYKV1GTWRtyI73Gh?=
+ =?us-ascii?Q?OoSgn159X5WxVOf33pdsaocoJsFIINwtOOz8Y6lmYOmUVERPU0IJWNC8bML5?=
+ =?us-ascii?Q?CQaDPU9VujgvL2RZlrs9rZ5lARebDbftmteDwBTcp74EZI2jw9B0NZpFHj0P?=
+ =?us-ascii?Q?IJAIs3wsxf4Y1mqf24KPcOkvPLPEHB3NyIuzf4rtbSYiQ3+U6Wg4jmfttGq0?=
+ =?us-ascii?Q?bekkQ4+iiR6yE/vTMZwqncL3iJqN3qzN+lc4mcut1ViCeBqUcz9SRL6Jfxjz?=
+ =?us-ascii?Q?2/Oyp30UWwCiiz2zD5eMvNue1Ycocw5ArMEPSEYMhtI4M3gHdZrgEQV6DE7V?=
+ =?us-ascii?Q?zXsWEBMCiMfwkiNVEIIHUHOOD5h2wZGw1jNGVO2UBHDx7+b0N2qKv3qfrFej?=
+ =?us-ascii?Q?YoUqFU+oNlgdo28ua3Wu3SM1XSZiqK3kvjjnW+4XlmxAvX6aQmch4rrAiuGp?=
+ =?us-ascii?Q?BAUobg3/xPs6QxIo3euhQacZ2vay/mgB0Oy3El979rtacz0f3JySipiW0mYw?=
+ =?us-ascii?Q?vrTQjw6j+zNgWFA0vxcWKF1aUhl9bBxjn0eUBXToIoAWEhqRHkJC8Ynvt8UY?=
+ =?us-ascii?Q?otnHUuFXTWYSmebxEFgkzoXhD+Wf5wNKxgdaVBEjzTodJMAkmZn+aeAmGZpA?=
+ =?us-ascii?Q?p/pbDFKdQkQnmJRTMQ3P8fBhFnUhHFcZ9b4PVhwqsiLudEv5bwsskUDvTXIz?=
+ =?us-ascii?Q?/p7yc9RslJMeYgRsLL3VxIThnGjpaKwTFEqt49NGKSLpzxYpJMAeKqZmVBRt?=
+ =?us-ascii?Q?DA0gTRpoHWdRqtDJwr5ISfRLD19N1oAqM7Z4ugBlGL4SFW6f9vcxAEmF0hWT?=
+ =?us-ascii?Q?FNpYGLXielScPvv9TAl3vDVhVhWOQcyASTCnwiWC4omQGA/zNoSVXLORKGqy?=
+ =?us-ascii?Q?r0hzaJ0Xq3qFciV4pNjNz/+j9j7vVrUXKcRMNZ3iua2MpBEzyB7ApjofI3RQ?=
+ =?us-ascii?Q?5Gvpln3qqickJy6LCaRTq2tp8RfauKGSdXTkMD35Zb2pDFVThZjd5W+s6fgK?=
+ =?us-ascii?Q?l0Mo3zJWau6j0dJdXWOp14zpBXUqEjg6NryVbRM9Su+T6Y1tU38r0wl54mVX?=
+ =?us-ascii?Q?f5EWY7/2EYX7saRyrSpORuIlnZjrLUzK0HbidML7PJxyG6VdAi6M3U1ckgaT?=
+ =?us-ascii?Q?/i49CAmdC9CZDHa/WvKs66k5cF+FDZy99XU6/0bqkKfU5/xkk38k9PH5Kc91?=
+ =?us-ascii?Q?7xIO8p5t1cGum78oGshQPTLEb8cDnsas2N7uYOVl5BYOGJFQst/QV0miD9nG?=
+ =?us-ascii?Q?h1w2zkg9O9ouvIklYFgYLzKqfZpWppBMe8u9wXUGgYOIF9Bi5pl0SSQI8fMj?=
+ =?us-ascii?Q?6t92XdFd99QEjyk=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2025 14:04:05.6461 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fdc817da-05d9-4651-800a-08dd2fed504e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044F1.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB8532
 X-Mailman-Approved-At: Wed, 08 Jan 2025 16:49:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,113 +147,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 08, 2025 at 03:37:37PM +0300, Dan Carpenter wrote:
-> On Wed, Jan 08, 2025 at 12:21:18PM +0100, Heinrich Schuchardt wrote:
-> > Am 8. Januar 2025 12:11:05 MEZ schrieb Yixun Lan <dlan@gentoo.org>:
-> > >Hi Huan:
-> > >
-> > >On 16:49 Wed 08 Jan     , Huan Zhou wrote:
-> > >> 
-> > >> 
-> > >..
-> > >> ---
-> > >remove above "---"? otherwise following commit message will be
-> > >dropped during patch application..
-> > >
-> > >> This patch introduce improvement for get dram size on bananapi BPI-F3,
-> > >> retrieving the dram size dynamically.
-> > >> Have tested on bananapi BPIF3 4G and jupiter 8G.
-> > >> 
-> > >> Signed-off-by: Huan Zhou <me@per1cycle.org>
-> > >> ---
-> > >>  arch/riscv/cpu/k1/dram.c | 40 ++++++++++++++++++++++++++++++++++++++--
-> > >>  1 file changed, 38 insertions(+), 2 deletions(-)
-> > >> 
-> > >> diff --git a/arch/riscv/cpu/k1/dram.c b/arch/riscv/cpu/k1/dram.c
-> > >> index c477c15cbfb19f0e3a0ee72985b602f5bda352d7..095217f2a4c053f7477d62c0776bcb51e623db47 100644
-> > >> --- a/arch/riscv/cpu/k1/dram.c
-> > >> +++ b/arch/riscv/cpu/k1/dram.c
-> > >> @@ -4,17 +4,53 @@
-> > >>   */
-> > >>  
-> > >>  #include <asm/global_data.h>
-> > >> +#include <asm/io.h>
-> > >>  #include <config.h>
-> > >> +#include <bitfield.h>
-> > >>  #include <fdt_support.h>
-> > >>  #include <linux/sizes.h>
-> > >>  
-> > >> +#define DDR_BASE 0xC0000000
-> > >>  DECLARE_GLOBAL_DATA_PTR;
-> > >>  
-> > >> +static inline u32 map_format_size(u32 val)
-> > >> +{
-> > >> +	u32 tmp;
-> > >> +
-> > >> +	if (val & 0x1 == 0)
-> > >please add brackets explicitly, something like
-> > >	if ((val & 0x1) == 0)
-> > 
-> > We tend to avoid == 0 in U-Boot
-> > 
-> > if (val & BIT(0))
-it should be (val & 0x1) == 0 here, i test that version of patch and do some simplification on the origin code..
-but forgot test here, btw personally i would keep the (==0) here... 
-> > 
-> 
-> That's reversed.
-> 
-> 	if (!(val & BIT(0)) {
-> 
-> I have really complicated rules about when to use ! vs == 0.
-> https://staticthinking.wordpress.com/2024/02/20/when-to-use-0/
-> 
-> > >
-> > >> +		return 0;
-> > >> +
-> > >> +	tmp = bitfield_extract(val, 16, 5);
-> > >> +	switch (tmp) {
-> > >> +	case 0xd:
-> > >> +		return 512;
-> > >> +	case 0xe:
-> > >> +		return 1024;
-> > >> +	case 0xf:
-> > >> +		return 2048;
-> > >> +	case 0x10:
-> > >> +		return 4096;
-> > >> +	case 0x11:
-> > >> +		return 8192;
-> > >> +	default:
-> > >> +		pr_info("Invalid DRAM density %x\n", val);
-> > >> +		return 0;
-> > >> +	}
-> > >> +}
-> > >> +
-> > >> +u32 ddr_get_density(void)
-> > >> +{
-> > >> +	u32 cs0_size = map_format_size(readl((void *)DDR_BASE + 0x200));
-> > >> +	u32 cs1_size = map_format_size(readl((void *)DDR_BASE + 0x208));
-> > >> +	u32 ddr_size = cs0_size + cs1_size;
-> > >> +
-> > >> +	return ddr_size;
-> > >> +}
-> > >> +
-> > >>  int dram_init(void)
-> > >>  {
-> > >>  	gd->ram_base = CFG_SYS_SDRAM_BASE;
-> > >> -	/* TODO get ram size from ddr controller */
-> > >> -	gd->ram_size = SZ_4G;
-> > >> +	gd->ram_size = (u64)ddr_get_density() * SZ_1M;
-> > 
-> > This is C and not C++. We don't need a cast to assign here.
-> > 
-> 
-> I assumed the cast was to prevent an integer overflow.  The commit
-> message mentions 8GB?  I agree with Yixun Lan that the type of
-> ddr_get_density() should be fixed and probably SZ_1M should be declared
-> as unsigned long as well.
-ok, will fixed in next version, thx.
-> 
-> regards,
-> dan carpenter
-> 
+
+Current usage information is not read friendly specially when all the
+options are selected. This series fix some of the issues in the info,
+from one side aligment and overlapping issues and from the other the
+excess of verbosity on the loads command.
+
+
+Ibai Erkiaga (2):
+  fpga: fix alignment on fpga cmd usage info
+  fpga: improve loads usage information
+
+ cmd/fpga.c | 45 ++++++++++++++++++---------------------------
+ 1 file changed, 18 insertions(+), 27 deletions(-)
+
+-- 
+2.42.0.325.g3a06386e31
+
