@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EC34E77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:50:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 733C0E77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A457D806D5;
+	by phobos.denx.de (Postfix) with ESMTP id EFC67806DD;
 	Wed,  8 Jan 2025 16:49:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JfaMG16G";
+	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="te10H70g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AABE5803DC; Wed,  8 Jan 2025 11:25:27 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E575D8006D
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 11:25:24 +0100 (CET)
+ id DCA98805E1; Wed,  8 Jan 2025 12:22:14 +0100 (CET)
+Received: from mail.per1cycle.org (mail.per1cycle.org [188.245.231.141])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CA6BA80040
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 12:22:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 508APKH12788768
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 8 Jan 2025 04:25:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736331920;
- bh=4rPfae7bVyTF725Pp4/nLE31J6mUY1o/BRXPXwy50Hs=;
- h=From:To:CC:Subject:Date;
- b=JfaMG16GsR4Y7mHY6P4KdB+7m4r6mznvuo5lPn/JdJm2oXJMrq/HNYfqMuvSlb9nT
- J0PdPMe0jp00cvNGuHowpRD7u6N3wd4ZWl7E2OjXhyKzci2jKE/DfS7BExepDX6G+q
- ArWitZneimsJoM2JGf6ojEJqywabZuFlaeAv3WXs=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 508APKuI017110
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 8 Jan 2025 04:25:20 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 8
- Jan 2025 04:25:19 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 8 Jan 2025 04:25:20 -0600
-Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [172.24.227.151])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 508APGgt127878;
- Wed, 8 Jan 2025 04:25:17 -0600
-From: Beleswar Padhi <b-padhi@ti.com>
-To: <trini@konsulko.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>
-CC: <rogerq@kernel.org>, <nm@ti.com>, <n-francis@ti.com>, <bb@ti.com>,
- <u-kumar1@ti.com>, <afd@ti.com>, <hnagalla@ti.com>, <b-padhi@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH] board: ti: j722s: j722s.env: Set remoteproc firmware names
-Date: Wed, 8 Jan 2025 15:55:16 +0530
-Message-ID: <20250108102516.2103132-1-b-padhi@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=per1cycle.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 509A43F5F8; Wed,  8 Jan 2025 11:21:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
+ s=dkim; t=1736335330;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=J7zKora7bzrw2oeZjoskBUVcKANNlag7HPNnmZri888=;
+ b=te10H70ga8qJIZgi7iYNkgDVFEXmb7bBCUKmMCFztR6dj9iYW26+Dj9MBQkho42SW9/v48
+ 0sC1U59lh9Y4k8Fu3C/aVlZbAyNc4erwQY09NXjzRdZ7X0qywhK6XWJW5A3tDjNeRu2O65
+ vGXetkKxTz4jmnWz1gUwU/MYP7RC/xKYyVDVZ2unDII7BCydjaVkgHYF6vxSCkGFxIC43J
+ ODyuvlnFg616ibeRgLMRkEGp8ah+KVkcNGv/Zu6hOrx2jzU3cqtsNt2zpm6inTeTrjhnlq
+ yDYVAvcr4uRz+pdnaptCuOwXxxhKdXze8YjrgBsPnzRrB19sNzHi1g02aayg2A==
+Date: Wed, 8 Jan 2025 19:21:52 +0800
+From: Huan Zhou <me@per1cycle.org>
+To: Yixun Lan <dlan@gentoo.org>
+Cc: u-boot@lists.denx.de, Ben Dooks <ben.dooks@codethink.co.uk>,
+ Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jonas =?utf-8?B?U2Nod8O2YmVs?= <jonasschwoebel@yahoo.de>,
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Huan Zhou <pericycle.cc@gmail.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Padmarao Begari <padmarao.begari@amd.com>
+Subject: Re: [PATCH] riscv: spacemit: k1: probe dram size during boot phase.
+Message-ID: <20250108112152.ghaeihrjrk2t3kzb@per1cycle.per1cycle>
+References: <20250108-get-dram-size-v1-1-4bae32ecf756@per1cycle.org>
+ <20250108111105-GYA3276837@gentoo>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250108111105-GYA3276837@gentoo>
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Wed, 08 Jan 2025 16:49:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,52 +82,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include k3_rproc.env to access rproc boot commands and specify rproc
-firmware names for adding remoteproc support in J722S SoCs.
-
-Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
----
-This patch is independent and puts the environment in place to boot remote
-processors at U-Boot stage. 
-
-However, for successfully loading the firmwares into remote cores, rproc
-DT node definitions are required. These DT changes have been merged into
-Linux and available with v6.12 tag[0]. Once the DT Sync happens in U-Boot,
-remote processors can be probed and booted with the help of env commands
-enabled with this patch.
-
-Sample Boot Test logs after manually adding DT nodes in U-Boot:
-https://gist.github.com/3V3RYONE/0b5c7df5b5c88d2a2f273b6a04a3dd46
-
-[0]: https://lore.kernel.org/all/20240830161742.925145-1-b-padhi@ti.com/
-
-Thanks,
-Beleswar
-
- board/ti/j722s/j722s.env | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/board/ti/j722s/j722s.env b/board/ti/j722s/j722s.env
-index f8b6aff2c2f..10d62034e1a 100644
---- a/board/ti/j722s/j722s.env
-+++ b/board/ti/j722s/j722s.env
-@@ -1,6 +1,10 @@
- #include <env/ti/ti_common.env>
- #include <env/ti/mmc.env>
- 
-+#if CONFIG_CMD_REMOTEPROC
-+#include <env/ti/k3_rproc.env>
-+#endif
-+
- name_kern=Image
- console=ttyS2,115200n8
- args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
-@@ -13,3 +17,5 @@ mmcdev=1
- bootpart=1:2
- bootdir=/boot
- rd_spec=-
-+
-+rproc_fw_binaries= 0 /lib/firmware/j722s-mcu-r5f0_0-fw 2 /lib/firmware/j722s-main-r5f0_0-fw 3 /lib/firmware/j722s-c71_0-fw 4 /lib/firmware/j722s-c71_1-fw
--- 
-2.34.1
-
+On Wed, Jan 08, 2025 at 07:11:05PM +0800, Yixun Lan wrote:
+> Hi Huan:
+> 
+> On 16:49 Wed 08 Jan     , Huan Zhou wrote:
+> > 
+> > 
+> ..
+> > ---
+> remove above "---"? otherwise following commit message will be
+> dropped during patch application..
+> 
+> > This patch introduce improvement for get dram size on bananapi BPI-F3,
+> > retrieving the dram size dynamically.
+> > Have tested on bananapi BPIF3 4G and jupiter 8G.
+> > 
+> > Signed-off-by: Huan Zhou <me@per1cycle.org>
+> > ---
+> >  arch/riscv/cpu/k1/dram.c | 40 ++++++++++++++++++++++++++++++++++++++--
+> >  1 file changed, 38 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/arch/riscv/cpu/k1/dram.c b/arch/riscv/cpu/k1/dram.c
+> > index c477c15cbfb19f0e3a0ee72985b602f5bda352d7..095217f2a4c053f7477d62c0776bcb51e623db47 100644
+> > --- a/arch/riscv/cpu/k1/dram.c
+> > +++ b/arch/riscv/cpu/k1/dram.c
+> > @@ -4,17 +4,53 @@
+> >   */
+> >  
+> >  #include <asm/global_data.h>
+> > +#include <asm/io.h>
+> >  #include <config.h>
+> > +#include <bitfield.h>
+> >  #include <fdt_support.h>
+> >  #include <linux/sizes.h>
+> >  
+> > +#define DDR_BASE 0xC0000000
+> >  DECLARE_GLOBAL_DATA_PTR;
+> >  
+> > +static inline u32 map_format_size(u32 val)
+> > +{
+> > +	u32 tmp;
+> > +
+> > +	if (val & 0x1 == 0)
+> please add brackets explicitly, something like
+> 	if ((val & 0x1) == 0)
+ok, mb, will correct and test in next version.
+> 
+> > +		return 0;
+> > +
+> > +	tmp = bitfield_extract(val, 16, 5);
+> > +	switch (tmp) {
+> > +	case 0xd:
+> > +		return 512;
+> > +	case 0xe:
+> > +		return 1024;
+> > +	case 0xf:
+> > +		return 2048;
+> > +	case 0x10:
+> > +		return 4096;
+> > +	case 0x11:
+> > +		return 8192;
+> > +	default:
+> > +		pr_info("Invalid DRAM density %x\n", val);
+> > +		return 0;
+> > +	}
+> > +}
+> > +
+> > +u32 ddr_get_density(void)
+> > +{
+> > +	u32 cs0_size = map_format_size(readl((void *)DDR_BASE + 0x200));
+> > +	u32 cs1_size = map_format_size(readl((void *)DDR_BASE + 0x208));
+> > +	u32 ddr_size = cs0_size + cs1_size;
+> > +
+> > +	return ddr_size;
+> > +}
+> > +
+> >  int dram_init(void)
+> >  {
+> >  	gd->ram_base = CFG_SYS_SDRAM_BASE;
+> > -	/* TODO get ram size from ddr controller */
+> > -	gd->ram_size = SZ_4G;
+> > +	gd->ram_size = (u64)ddr_get_density() * SZ_1M;
+> while using cast, why not define ddr_get_density() return as same type?
+> also it's more reasonable to use phys_size_t as I checked gd_t
+ok, got it.
+> 
+> >  	return 0;
+> >  }
+> >  
+> > 
+> > ---
+> > base-commit: 19fc0b7f7d907119a13e9c207991899f0817f8fc
+> > change-id: 20250108-get-dram-size-65cf59a15201
+> > 
+> > Best regards,
+> > -- 
+> > Huan Zhou <me@per1cycle.org>
+> > 
+> 
+> -- 
+> Yixun Lan (dlan)
+> Gentoo Linux Developer
+> GPG Key ID AABEFD55
