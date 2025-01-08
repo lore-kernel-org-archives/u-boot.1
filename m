@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E10FDE77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:48:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B848E77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C706805FB;
+	by phobos.denx.de (Postfix) with ESMTP id E0AEF80608;
 	Wed,  8 Jan 2025 16:48:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="aGaA+U/w";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="AiMVq8vN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B31B800DF; Wed,  8 Jan 2025 13:00:29 +0100 (CET)
-Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com
- [91.218.175.189])
+ id 963FB8036B; Wed,  8 Jan 2025 13:00:32 +0100 (CET)
+Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::bc])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5598280040
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 13:00:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DAD880040
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 13:00:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,16 +29,17 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1736337618;
+ s=key1; t=1736337627;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=/qAekYVsODDjDI6/sqF2Sx3Li2pWHg1qcQ+KcWbIvRk=;
- b=aGaA+U/wlXP6BEy8L8UOgaLzWqFGKiyPDs4YQhwISVxcGsbAYg/TzJ/sWT0sapz0zrylFw
- Aa+d8CdMxfMM7o8og8Ex0KkG+JaJIOE6FGSCioxJuDE31L4sBHRgjiLmmapANjlFVsY5tB
- AymwVoAZiB+m20PvaXSDnUqT3FE1YoBABy3K8ILRql+ycVhzBr88XUBsL/7T6gUog6pJZl
- kQf6gMwZwIzSHQO9wtw/ZJLsqpYqZbL7i6XMeD3gu231m7ezTPn1pycwHTzymTiCA8FlU4
- e8y1GJQMW4yMQqF/5nS1XO1L4wJaKSNCF+tL/iMoPq75Kk7kkXA7baXufMOQWg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2bvLrFskS9ai7Xe6I5jOdOLqMh+WuebVu7AKKFnbCwU=;
+ b=AiMVq8vN5oC5Pez8dHvoqFygs6RyhIyKLeLa/nnChMP/t/dO48uh8ZsKeQ0JbCukrD6kNy
+ PAvR0ZUEksDWODf4OPxD753z+HpSniy1KvVAuNxdGEE1fguLNrYMJkc0imZwpY2J0DzNlc
+ ZcT4nTLTGYfAvNujITQDUbGznvHl5/IQEZ6cazpClc6N7fdfdnPFbNvUzr8JFBtzrFm6R4
+ KLdXiZPmhuWENkpYW06Ajw7EV2MdRy3W7UbihFUl1r8DmZ/T4RiGpdHCy/GJQdXgdjxJ7M
+ o8sqToYWojB5hreufSYYn/3+UB6IvEerNMnq0wYS0WdTl7erI+OcRe2NdG7YlA==
 From: Alexey Minnekhanov <alexeymin@postmarketos.org>
 To: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Caleb Connolly <caleb.connolly@linaro.org>
@@ -46,9 +47,11 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Alexey Minnekhanov <alexeymin@postmarketos.org>
-Subject: [PATCH 1/4] clk/qcom: Print more details about stuck GDSC
-Date: Wed,  8 Jan 2025 14:59:08 +0300
-Message-ID: <20250108115911.4163437-1-alexeymin@postmarketos.org>
+Subject: [PATCH 2/4] clk/qcom: Treat different GDSCs didderently
+Date: Wed,  8 Jan 2025 14:59:09 +0300
+Message-ID: <20250108115911.4163437-2-alexeymin@postmarketos.org>
+In-Reply-To: <20250108115911.4163437-1-alexeymin@postmarketos.org>
+References: <20250108115911.4163437-1-alexeymin@postmarketos.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Migadu-Flow: FLOW_OUT
@@ -69,28 +72,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clearly say whether it's stuck during power on or power off.
+Apparently not all GDSCs are the same. In Linux driver, depending on which
+GDSC flags are set, different status register is checked when powering it
+on/off. And on top of that, different bit inside that register is tested.
+
+Port missing parts from Linux driver to U-Boot:
+ - add GDSC flags;
+ - adjust logic when checking GDSC status to match one in Linux driver.
+
+This fixes e.g. SDM660's USB_30_GDSC to be forever stuck during power on,
+since unlike SDM845 one it doesn't have POLL_CFG_GDSCR flag.
+
+Even though only POLL_CFG_GDSCR is the important one here, add all flags
+from Linux driver, to make it easier to compare which flags are needed
+for which GDSC, making porting process easier.
 
 Signed-off-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
 ---
- drivers/clk/qcom/clock-qcom.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/clk/qcom/clock-qcom.c | 45 ++++++++++++++++++++++++-----------
+ drivers/clk/qcom/clock-qcom.h | 16 ++++++++++++-
+ 2 files changed, 46 insertions(+), 15 deletions(-)
 
 diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 25ca67e537d1..1cfc430c14a5 100644
+index 1cfc430c14a5..bf9249b55af3 100644
 --- a/drivers/clk/qcom/clock-qcom.c
 +++ b/drivers/clk/qcom/clock-qcom.c
-@@ -496,8 +496,8 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
- 					 GDSC_STATUS_POLL_TIMEOUT_US);
+@@ -461,7 +461,7 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
+ 	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(pwr->dev);
+ 	void __iomem *base = dev_get_priv(pwr->dev);
+ 	const struct qcom_power_map *map;
+-	u32 value;
++	u32 value, status_reg;
+ 	int ret;
+ 
+ 	if (pwr->id >= data->num_power_domains)
+@@ -481,19 +481,36 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
+ 
+ 	writel(value, base + map->reg);
+ 
+-	if (on)
+-		ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
+-					 value,
+-					 (value & GDSC_POWER_UP_COMPLETE) ||
+-					 (value & GDSC_PWR_ON_MASK),
+-					 GDSC_STATUS_POLL_TIMEOUT_US);
+-
+-	else
+-		ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
+-					 value,
+-					 (value & GDSC_POWER_DOWN_COMPLETE) ||
+-					 !(value & GDSC_PWR_ON_MASK),
+-					 GDSC_STATUS_POLL_TIMEOUT_US);
++	/* depending on the type of gdsc the status register is different */
++	/* and we need to check different status bit */
++	if (map->flags & POLL_CFG_GDSCR) {
++		status_reg = map->reg + CFG_GDSCR_OFFSET;
++
++		if (on)
++			ret = readl_poll_timeout(base + status_reg,
++						 value,
++						 (value & GDSC_POWER_UP_COMPLETE),
++						 GDSC_STATUS_POLL_TIMEOUT_US);
++		else
++			ret = readl_poll_timeout(base + status_reg,
++						 value,
++						 (value & GDSC_POWER_DOWN_COMPLETE),
++						 GDSC_STATUS_POLL_TIMEOUT_US);
++	} else {
++		status_reg = map->reg;
++
++		if (on)
++			ret = readl_poll_timeout(base + status_reg,
++						 value,
++						 (value & GDSC_PWR_ON_MASK),
++						 GDSC_STATUS_POLL_TIMEOUT_US);
++
++		else
++			ret = readl_poll_timeout(base + status_reg,
++						 value,
++						 !(value & GDSC_PWR_ON_MASK),
++						 GDSC_STATUS_POLL_TIMEOUT_US);
++	}
  
  	if (ret == -ETIMEDOUT)
--		printf("WARNING: GDSC %lu is stuck during power on/off\n",
--		       pwr->id);
-+		printf("WARNING: GDSC %lu is stuck during power o%s\n",
-+		       pwr->id, on ? "n" : "ff");
- 	return ret;
- }
+ 		printf("WARNING: GDSC %lu is stuck during power o%s\n",
+diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+index 78d9b1d81ece..84965b2555c7 100644
+--- a/drivers/clk/qcom/clock-qcom.h
++++ b/drivers/clk/qcom/clock-qcom.h
+@@ -63,8 +63,22 @@ struct qcom_reset_map {
+ 	u8 bit;
+ };
  
++enum qcom_gdsc_flags {
++	VOTABLE = BIT(0),
++	CLAMP_IO = BIT(1),
++	HW_CTRL = BIT(2),
++	SW_RESET = BIT(3),
++	AON_RESET = BIT(4),
++	POLL_CFG_GDSCR = BIT(5),
++	ALWAYS_ON = BIT(6),
++	RETAIN_FF_ENABLE = BIT(7),
++	NO_RET_PERIPH = BIT(8),
++	HW_CTRL_TRIGGER = BIT(9),
++};
++
+ struct qcom_power_map {
+-	unsigned int reg;
++	unsigned int reg; /* GDSCR */
++	unsigned int flags;
+ };
+ 
+ struct clk;
 -- 
 2.45.2
 
