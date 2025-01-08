@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4738EE77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 13:54:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138E8E77199
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 13:58:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B523B805E2;
-	Wed,  8 Jan 2025 14:54:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7D4D7800DF;
+	Wed,  8 Jan 2025 14:58:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y0/x3KNV";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PTu9zL5l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A9E0805E9; Wed,  8 Jan 2025 14:54:03 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id ED34E803DC; Wed,  8 Jan 2025 14:58:29 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21AA78006D
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 14:54:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C4978006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 14:58:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aa67ac42819so2438974566b.0
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 05:54:01 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4361815b96cso112510455e9.1
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 05:58:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736344440; x=1736949240; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0edrhxKphjKjRO8CJGbC/gcdAivY4JBM7YcbNHx7bgE=;
- b=y0/x3KNV3dVY0jgvVxeU2wpCsDes5ujB9dkw5oYVQwFJa0l/yVVfmWpT9nJ4gBdB7L
- 63KEOQQ2sVSNSp4jL7m6V4FsoX3d9S23KNWc5eqmyMcL2JElYOY535QABURcOX10h6Hl
- QXf2TPg1biPHIuDybfie/MkR9G9yezRM+K9dpaRaVhOMOYXNiTVIzXrFRtWi2Vq8nWbE
- h+GfTUrKiTOjdwhItKH9ps1/v1sMALr2o2VAQ6Q2Nc11Lfhnvc4JhH5qmGwSABjb8Zvf
- zt5PJBPeAFAlwR3st27EKZgCStV0KGI6WnTcSlDgLQG5QVhT1HSHjziRZooKgHT3b0Nb
- Do5w==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736344706; x=1736949506;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ndUmhqUkIp2BPQqLEK8kzxoRrr17IIg8eOs8hS6EvZY=;
+ b=PTu9zL5lXFKjlz+w7xeU5ze/MxGIUbNVk99J5Qu5PK39GO0GfhY8KWyaX/NOQ0eyrb
+ I1eqJiu8Ua0WMT1/2QNk+hS6m0h0oCTVqbb8EhX8knTKI0geTibrI8jh1XeWD0fyCuiZ
+ Y8k6a5y0q277Rwcxgi+UmslDpqHsIj628pFQGMLhiCAt/9tNiqL8dM6xfhRrd6lYg37z
+ JQ2RkGxdw8ae2JVYCHloyz1kKMkt2DVCDAmrKputjA9BFjAw0RSg40bU1DAGmF+bIhEy
+ uDDw+n7nbm9LDFqJHb9SaMpfso/kRGl1SlktUAPm0IahizCqTJY1xSJMvv8QrQ8h58VI
+ rymg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736344440; x=1736949240;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0edrhxKphjKjRO8CJGbC/gcdAivY4JBM7YcbNHx7bgE=;
- b=syaA+9nNgihjNjJw7UMM3EUWQCuDGkcLgSRFZcRkuwlIQqwbsGdBRDo3Z5iF7HcVRP
- i2Bh1iSPEIZcJgVVe86Ia/8EXZ2f62S9zqGH5r5O0nmE7r3ZhTS0sxl6kF0nUSb9B3wx
- qfxSY+1ILmj9NoJYRcYIuy/KwoBHUtTIJbxm9/kfjhKipbdved/zG/Dvjj7RSSJVO2jz
- oOWboj566f9hobOF+bMy1o0MS+a+f7AvgvoOlzD8RM3v25hYs16zs/Aa7F6+bUTpIoeo
- Tyv8R9pThvZ9oHAZmcBB/cVJjKP9y18u2m7P/FkWrERkTwzixSZ45ZG5u3cyTHV1+0NW
- WrIQ==
-X-Gm-Message-State: AOJu0YzjeFgA4jaOLYH8uT+KFIr5ZCmRUNq8r8lxnPuyhxgGF4IAp6cZ
- 8dDz/hZmxvv6vfhNAQJM9TZS69nrjmkhKTEbs6luVt+HgvZ8KHkDb/+E3zmVPx8=
-X-Gm-Gg: ASbGncu/rl30DUAwA0NF+0QFDfmXQA/v0kKm/M70Ng2MDduIy9UgNXLcXopspK/imco
- 6x34mLUk9quZFaEqSR79Rh1RV7eqPmkGJj4itS52LXpNZMHbGKpfx3oOGkPlVgci3msKTu9kojQ
- TFWnQ0yo+/BI/MCb9UD3CoTD8v5p9GxBPSrArON8k4J22BkpaTB4pAFCGkVeY4cOvspT5CCpk4T
- OpJq4bYL1ar3AsdLrli54lVfhX9sE9C4AozdqFnHIe45Boaj0p5H6/5scGll15c+XgCY5T5mvuG
- nmMKiszb/cs=
-X-Google-Smtp-Source: AGHT+IHhr5SKhVAJ0LdcBemFfbS09edHE/Cc4rV0tW/vusUG+MRA7y6RT7MSwbfPYwdd+wC1OausZA==
-X-Received: by 2002:a17:906:ef0b:b0:aa6:88ae:22a with SMTP id
- a640c23a62f3a-ab2abc6f22dmr216609666b.37.1736344440452; 
- Wed, 08 Jan 2025 05:54:00 -0800 (PST)
-Received: from hera (ppp176092181030.access.hol.gr. [176.92.181.30])
+ d=1e100.net; s=20230601; t=1736344706; x=1736949506;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ndUmhqUkIp2BPQqLEK8kzxoRrr17IIg8eOs8hS6EvZY=;
+ b=o5eCdXipv89pUu2z3q7Wvjq8ycFEP+s81vPqNHeZ5nRasFisck19nrMKmik+o5Nzt4
+ 5JWB1oqhYNjXU+q/H00q8MUrNBM7rZ8dwR48llULq5zNgqG52X1LSNwoV1llMZDqGhZt
+ 1Ola66NAuuaTvmOe5yPpU2DGPO4Eqo7n1yPXN8PsC+tg9kVZYYa7A7z+5Kh0M4DdY2u+
+ QFNuXW6Gnu2renYfymNV1CW3KsZKXugvmbVnj0IcNn6MN2x6vzCrXWV4a8jmqghwkHE5
+ I0+l+kZyMbNALmclYgJcOWveNFwIt3rqzqLrhm9eoplWI3gE2GqlKxp0FZUovVftVUeA
+ JkiQ==
+X-Gm-Message-State: AOJu0YzvTeUMmWIkzz0zRqbbAJFHvmhcVbLdDIcL7XmDJJWqHUpWhC1j
+ 3b6kECdj+3w45k6/1r0BQN1wQj7blb8y0+4lqZGQHW9HrebmPpa3XfrgZdYTXPA=
+X-Gm-Gg: ASbGncu6vFuBU3unDhyqvFpbwr2htCr6kLNU0GaMv6LdklNItkLnSE9mmnzDp78XLa7
+ HZ8SuHk46YgHX1bmcIqk9W1sKwEboa2htjSdTCWZbOKtAoV/TFV7kn6owcmGWQ9INo+RWX9FUUi
+ 4q6VtOpPCeIdIumUc1XSo9MgD+MyEH/pCCyP/Fr2iyt+c/TsK0tCn8Pg1gX3BMfpUMw3FLNC/Mh
+ wYjnlTM9bIiKWcNj+tfdD3cYC0jjFhgjV9byldjsN0nQHWOjkC6G4xFasNx7VBc4Q==
+X-Google-Smtp-Source: AGHT+IHNTMfrWbzeMu4eu7cE/+laBy4r23Hkp90InnUKL+o7zdSC7mEDIDAWJek4bL9SgKVvB6NRDA==
+X-Received: by 2002:a05:600c:4f06:b0:436:6160:5b81 with SMTP id
+ 5b1f17b1804b1-436e26b98d1mr26010405e9.14.1736344706311; 
+ Wed, 08 Jan 2025 05:58:26 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0f014572sm2480721766b.151.2025.01.08.05.53.59
+ 5b1f17b1804b1-436e2da6336sm21786955e9.8.2025.01.08.05.58.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 05:54:00 -0800 (PST)
-Date: Wed, 8 Jan 2025 15:53:57 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: Simon Glass's future with Das U-Boot project?
-Message-ID: <Z36DdfO_EH454Xdw@hera>
-References: <20250102161313.GP3476@bill-the-cat>
+ Wed, 08 Jan 2025 05:58:25 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Julien
+ Masson <jmasson@baylibre.com>, Guillaume La Roque <glaroque@baylibre.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] bootstd: android: Allow boot with AVB failures when
+ unlocked
+In-Reply-To: <20250108-avb-disable-verif-v1-2-009c35710ef4@baylibre.com>
+References: <20250108-avb-disable-verif-v1-0-009c35710ef4@baylibre.com>
+ <20250108-avb-disable-verif-v1-2-009c35710ef4@baylibre.com>
+Date: Wed, 08 Jan 2025 14:58:25 +0100
+Message-ID: <87tta9be66.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250102161313.GP3476@bill-the-cat>
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,55 +96,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-On Thu, Jan 02, 2025 at 10:13:13AM -0600, Tom Rini wrote:
-> Hey all,
+Please ignore this patch, I've send this a bit too fast and did not test
+all the cases.
+
+Sorry for the noise.
+
+Mattijs
+
+On mer., janv. 08, 2025 at 14:43, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+
+> When the bootloader is UNLOCKED, it should be possible to boot Android
+> even if AVB reports verification errors [1].
 >
-> While I had hoped that the quiet of the last week or so had meant that
-> things would perhaps return to how they had been before, Simon's large
-> patch series and then comments on the TPM+bloblist patch have shown
-> otherwise.
+> This allows developers to flash modified partitions on
+> userdebug/engineering builds.
 >
-> At this point, I do not know how best to handle Simon's behavior,
-> without soliciting feedback in public first. At best he's created a
-> soft-fork of the project with his "sjg/master" branch. I've asked him
-> repeatedly to explain how he thinks this is all going to work out, in
-> public. I've had private conversations with him, but I want him to
-
-Everyone is entitled to create a fork. But as noted in another mail, he
-can't use the public mailing lists asking feedback for his forked patches,
-nor can he use the public infra (incl patchwork) to test and maintain his
-changes.
-
-> explain in public. Or, he can post the messages if he likes.
+> Developers can do so on unlocked devices with:
+> $ fastboot flash --disable-verity --disable-verification vbmeta vbmeta.img
 >
-> And I am in the process of getting outside help that would in turn be
-> able to help the project move beyond the BDFL model we've always used.
-> Because at the end of the day, if most of the active developers would
-> prefer the direction Simon wants to take everything in, that's something
-> I can accept.
-
-+1 here. As long as patches get reviewed properly we should follow what the
-majority thinks is the proper technical direction.
-
-> But what's going on now is towards the worst end of
-> possible outcomes I think for the project itself. And by that I mean,
-> one prominent contributor steam-rolling over others and doing as the
-> please and implicitly acting as an authoritative voice for the project.
-
-I personally don't want to pay attention to out of tree patches.
-Simon randomly responds to emails 'applied to sjg1/master' or something
-along those lines, which further complicates things as people might think
-their code got merged.
-
-I think we should wait a few more days and give Simon a chance to respond
-and perhaps explain what drove him to create his fork.
-
-Regards
-/Ilias
+> In such case, bootmeth_android refuses to boot.
 >
-> --
-> Tom
-
-
+> Allow the boot to continue when the device is UNLOCKED and AVB reports
+> verification errors.
+>
+> [1] https://source.android.com/docs/security/features/verifiedboot/boot-flow#unlocked-devices
+> Fixes: 125d9f3306ea ("bootstd: Add a bootmeth for Android")
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  boot/bootmeth_android.c | 15 +++++++++++----
+>  1 file changed, 11 insertions(+), 4 deletions(-)
+>
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 2cd167f80280801618a317a65e93a10e70a0d9ee..564d21784feb0667bf9bed2a59be0a232601a7dd 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -407,11 +407,16 @@ static int run_avb_verification(struct bootflow *bflow)
+>  				 AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
+>  				 &out_data);
+>  
+> -	if (result != AVB_SLOT_VERIFY_RESULT_OK) {
+> +	if (result != AVB_SLOT_VERIFY_RESULT_OK && !unlocked) {
+>  		printf("Verification failed, reason: %s\n",
+>  		       str_avb_slot_error(result));
+>  		avb_slot_verify_data_free(out_data);
+>  		return log_msg_ret("avb verify", -EIO);
+> +	} else if (result != AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION && unlocked) {
+> +		printf("Unlocked verification failed, reason: %s\n",
+> +		       str_avb_slot_error(result));
+> +		avb_slot_verify_data_free(out_data);
+> +		return log_msg_ret("avb verify unlocked", -EIO);
+>  	}
+>  
+>  	if (unlocked)
+> @@ -427,9 +432,11 @@ static int run_avb_verification(struct bootflow *bflow)
+>  			goto free_out_data;
+>  	}
+>  
+> -	ret = avb_append_commandline(bflow, out_data->cmdline);
+> -	if (ret < 0)
+> -		goto free_out_data;
+> +	if (result == AVB_SLOT_VERIFY_RESULT_OK) {
+> +		ret = avb_append_commandline(bflow, out_data->cmdline);
+> +		if (ret < 0)
+> +			goto free_out_data;
+> +	}
+>  
+>  	return 0;
+>  
+>
+> -- 
+> 2.47.1
