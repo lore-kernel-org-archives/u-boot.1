@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57465E77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 16:27:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3466AE77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 16:57:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 954FD800DF;
-	Wed,  8 Jan 2025 17:27:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 63E73800DF;
+	Wed,  8 Jan 2025 17:57:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QDBYdQN/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k4WV3a+5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 888AD80196; Wed,  8 Jan 2025 17:27:50 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 008378036B; Wed,  8 Jan 2025 17:57:52 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FD608006D
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 17:27:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B36A58006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 17:57:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aafc9d75f8bso1995666b.2
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 08:27:48 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7b6e5ee6ac7so224185a.0
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 08:57:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736353668; x=1736958468; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aue52UTo0kszhaewfQrVQasYHqLrOykV77aVz107J1k=;
- b=QDBYdQN/IqzJ84ePUn+xAk8ZDAdpzd+lB02oDuDPWg9JTUQBRzP8NphfXrTOzmU8hT
- FCLXVpXaMiatDwG/diLPObHGsDmpw4ADHGkn2viv/aIFUDxOynjYIcGdNB2qm4B5FRFK
- gSBt5aPFzA77IkGqOM7kVq4TwPR3aaokZoXQU=
+ d=konsulko.com; s=google; t=1736355468; x=1736960268; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VPI2XRQRb0ORBA4v/I7pPxMESyM873YGMyAAAyIJikQ=;
+ b=k4WV3a+5t/yjXcoufTwut2R0UXpj9sU75hzn6LOq/Hx3ZceQbNI7AgxWmYsX2OCTrx
+ TVBaRScGhK72toGGzVJJmLnajA8X+soHpUUizcg2Q/imuY/CVd/yIC4VeR2X/gyqKbgn
+ nlTyDTMf1A0gudnArfazf1sVFVnPNae4VTj+4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736353668; x=1736958468;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aue52UTo0kszhaewfQrVQasYHqLrOykV77aVz107J1k=;
- b=QzsjLRCsvFljLfutw1AI5LOtgTwnJ0hp1e1VwniFEztLAeQUFFMJvQ4RvVTLRIkUWz
- yRVikENrYrS74oArBjZwNJ4SX+V9vGnPmW3fGiqovacCE1JaUlBaC6x7oLVIi7dQkjec
- EFg1Nc2CkmY1JTkbrTwrs2UoAYVXjW8aGjJWFdr4dq/sbqsOm3fBc78dGvDxKYic+QZ3
- 25Hpl69w+APVygm6zKugEAqN3USwNk6s2MFSXu4XY0vPu77xj+qzbST+zCiryMG05ptM
- BML2LzyCWoJGsFupj3uaGwyq81D8pU3DQq3GwdIg7lAJ0nbYYR90FP0AW2Tb6CiBjmR4
- EYYw==
+ d=1e100.net; s=20230601; t=1736355468; x=1736960268;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VPI2XRQRb0ORBA4v/I7pPxMESyM873YGMyAAAyIJikQ=;
+ b=aNs4vvy2r46WMJyS5liPL2VyGPAKvjzWBGQhG3AWMqYGMilS/9ItfRIvJV5VmPvv0E
+ uFmreRcE1f/GKZuRUHhZQqOWvpXXO0xQYLAo8OW1JJP6j9wRx4sUW403M2d+Lp/yTwKE
+ BrQS0i1/FfC6MGvKSNx0oBMSHBXXnIz3lfnarVFqkZdLalwL3iDGm6vfsl31n3xX2sUs
+ SF6gcSTIYcN7QTNj2RAYF7GQk2OIQhVHm0rd25YJXKUROVnOuH41GGHrcc7a8VKt1pCI
+ s8SPcM8hEKjbT5JpHqbvFsPMyh1d9hMZ/VxQq2NEkJ9tRz5p5Nr2EN8OeeNFqqzDhGQj
+ OrKA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUAWTbHfQOmS1vA/NxjkzdsaSlVJ9LA0NhxJ8N+ujTUa175KzsgS7tQbIVNt8hTuKO2S4WrM+I=@lists.denx.de
-X-Gm-Message-State: AOJu0YxEddWUTePitUDJXtntdxUJoQVxp2AbdHk183KrdaQjAg2Qxgi9
- sHsdRTNe2PVjZXyJFaYBekaDxKbjSzUm5N6K9WlXc4Ia+Y9AoS1FX5hVBjqN4tLwKgRNLP2lDiV
- 0Jj3lHGOIv+73QwHfh5HZ3bPlo1EOHXRr9vO7
-X-Gm-Gg: ASbGncuZM8lteBiNooOJWbFGYpqSA8dChrd2cIgHCBrqqpFLx2oTC+PCEPnbvSENdUG
- O68L7S7mOL8mtZyd00jiZGdgcU1bNZnCywUq3n5U=
-X-Google-Smtp-Source: AGHT+IHBMOdSl+iFyY8O4oi5liUx4M4P9gWWLIkMTG+4vYl7RJ/BjP3Yx/Tv9rbe+dobGYWVoOiBEEDEDYGNtOzn980=
-X-Received: by 2002:a17:907:c10:b0:aa6:77e6:ea3d with SMTP id
- a640c23a62f3a-ab2abc92415mr286810966b.45.1736353667789; Wed, 08 Jan 2025
- 08:27:47 -0800 (PST)
+ AJvYcCXG0kqTipOHCEttwjk9niasPDUh7Kz8qiGDSNXmQO/elriTGOprXMidIFX8j8au7aiFl1ZnDgA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxIzsSPnc/ZQsvV1ESJJnFVg/t+i4pw+HzzFfetyWuYVRUrMwPn
+ 2xKsOMLYpaSg7KMcck3uXipcDknpAXDufmKlqgiZR2gPcGp2O8wxIQWSU9TYhms=
+X-Gm-Gg: ASbGncsYSgeOI3nY5jTpE4Kjv5lmJRWNkOKCrVeWm5MIFcxuUDalEWjvfZIemJyHnRL
+ DhAL3xE4MjZj7GwB9TCc1pbwdWznRopdy2mSZW3AjQ5SuZsDnMOSrkd7nq7+mjURqj328jAdXQc
+ lRVGDY7SPmPRG/IJu5y+0pTrX1Ve63vfBxGd+K4L77P+Xkj5YKQvxkJSSu0naK93ZLE3iTShlay
+ JbhBuLf7nfy3EeUdX6VwlbfMrqPVNjnkMW/hiiMVKpMDIedo7OyH9s=
+X-Google-Smtp-Source: AGHT+IGkETAtVf+UVdGWLr6lKHmbX6eiOE1vRdq0le89v4MomULp+oVXQQMBXOzPMI7HK3eXURilzA==
+X-Received: by 2002:a05:620a:2552:b0:7b6:c673:7427 with SMTP id
+ af79cd13be357-7bcd97b87d4mr444951385a.59.1736355468576; 
+ Wed, 08 Jan 2025 08:57:48 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b9ac2bc18dsm1691165485a.22.2025.01.08.08.57.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jan 2025 08:57:47 -0800 (PST)
+Date: Wed, 8 Jan 2025 10:57:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Judith Mendez <jm@ti.com>
+Cc: "Andrew F . Davis" <afd@ti.com>, Hong Guan <hguan@ti.com>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [RFC PATCH] am335x* defconfig: Increase u-boot partition in
+ mtdparts
+Message-ID: <20250108165744.GJ3476@bill-the-cat>
+References: <20250107225055.592941-1-jm@ti.com>
 MIME-Version: 1.0
-References: <20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com>
- <CAFLszTi_px3qRGvpcC5WKLw+r5BqqQciOP-Vg1LEN+rt9876wQ@mail.gmail.com>
- <20250106013311.GA8414@localhost.localdomain>
- <CAFLszTi2ya3V4SDfpZxLzzyAdyM9KN0MGuZPnK2XeO8wRNw69w@mail.gmail.com>
- <PAXPR04MB8459B6A69CA0713B0B51058988102@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <CAFLszTg8UHbgHnFM-6JjYFK5pd_+HW61_jzMM-eeV9+hQgOspQ@mail.gmail.com>
- <PAXPR04MB8459A3864AB97715CE45D52B88112@PAXPR04MB8459.eurprd04.prod.outlook.com>
-In-Reply-To: <PAXPR04MB8459A3864AB97715CE45D52B88112@PAXPR04MB8459.eurprd04.prod.outlook.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Jan 2025 09:27:35 -0700
-X-Gm-Features: AbW1kvZCeEzhCmeqvu5i3vlzcMp0zR_xGYYJ3erWlVIvnpQUcr-VuuFJW9yeVGI
-Message-ID: <CAFLszTgCOrdjVMne9=cMqf568+QPXXYSfHK7n1tOsnSdsW2Wxg@mail.gmail.com>
-Subject: Re: [PATCH 00/12] imx9: switch to bootstd for i.MX93/1 EVK/QSB and
- i.MX8M EVK
-To: Peng Fan <peng.fan@nxp.com>
-Cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Stefano Babic <sbabic@denx.de>, 
- Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1c0GpNVQcj4nWB7h"
+Content-Disposition: inline
+In-Reply-To: <20250107225055.592941-1-jm@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,96 +97,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
 
-On Mon, 6 Jan 2025 at 18:40, Peng Fan <peng.fan@nxp.com> wrote:
->
-> Hi Simon,
->
-> > Subject: Re: [PATCH 00/12] imx9: switch to bootstd for i.MX93/1
-> > EVK/QSB and i.MX8M EVK
-> >
-> > Hi Peng,
-> >
-> > On Sun, 5 Jan 2025 at 18:14, Peng Fan <peng.fan@nxp.com> wrote:
-> > >
-> > > > Subject: Re: [PATCH 00/12] imx9: switch to bootstd for i.MX93/1
-> > > > EVK/QSB and i.MX8M EVK
-> > > >
-> > > > Hi Peng,
-> > > >
-> > > > On Sun, 5 Jan 2025 at 17:27, Peng Fan <peng.fan@oss.nxp.com>
-> > wrote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > On Sun, Jan 05, 2025 at 08:30:55AM +1300, Simon Glass wrote:
-> > > > > >Hi Peng,
-> > > > > >
-> > > > > >On Sat, 4 Jan 2025 at 16:19, Peng Fan (OSS)
-> > > > <peng.fan@oss.nxp.com> wrote:
-> > > > > >>
-> > > > > >> Switch to bootstd for NXP i.MX9/8M boards with a
-> > bsp_bootcmd
-> > > > as fallback.
-> > > > > >>
-> > > > > [...]
-> > > > > >>
-> > > > > >
-> > > > > >This also switches to a text environment, great!
-> > > > > >
-> > > > > >For bsp_bootcmd is it possible to create a bootmeth for your use
-> > > > case?
-> > > > > >If you would like to take a look (separate from this series), I
-> > > > > >could help with any issues that come up.
-> > > > >
-> > > > > I just give a quick look of bootmeth, seems needs extlinux or
-> > > > > bootscript (boot.scr). But both are used on NXP i.MX release as of
-> > > > > now. In NXP releases, we put all script in the U-Boot ENV.
-> > > > >
-> > > > > Do you have suggestions how to move to support bootmeth.
-> > > >
-> > > > I'm not entirely sure what you are trying to do with the bootcmd,
-> > >
-> > > With a single u-boot, we want to support Fedora/SUSE/etc and NXP
-> > Yocto
-> > > releases.
-> > >
-> > > So add a bsp_bootcmd as fallback to run NXP Yocto releases.
-> > > NXP Yocto releases not have extlinux.cfg, nor boot.scr, we just have
-> > > simple uboot hush command in bootcmd, simplied saying:
-> > > run loadimage; run loadfdt; run mmcargs; booti ${loadaddr} -
-> > > ${fdtaddr}
-> > >
-> > > > you could write your own bootmeth, e.g. using common code from
-> > the
-> > > > others. For example, bootmeth_script.c shows how to run a script
-> > and
-> > > > bootmeth_extlinux.c shows how to run an extlinux file. You could
-> > > > then create C code to perform your 'bsp' function, e.g. a new
-> > > > bootmeth_bsp.c.
-> > >
-> > > I will give a look, but this seems we need put the "run loadimage and
-> > etc"
-> > > in dtb and needs bootmeth_imx.c to support it.
-> >
-> > Note that my suggestion here is as a follow-on to you current series,
-> > which I believe can be applied as is.
-> >
->
-> I see.
->
-> > Anyway, as a starting point, yes you can use run_command() lots of
-> > times in the bootmeth to run the things you need. From there you can
-> > potentially change some commands to direct calls into the U-Boot
-> > functionality. The idea is to be able to locate the bootflow as a separate
-> > thing from booting it. I am quite happy to help as well.
->
-> It would be great if you could help here. Appreciate in advance.
+--1c0GpNVQcj4nWB7h
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Separately, if you have access to a low-cost board you can send me,
-I'd like to add it to my lab, which is now available to custodians via
-gitlab now.
+On Tue, Jan 07, 2025 at 04:50:55PM -0600, Judith Mendez wrote:
 
-Regards,
-Simon
+> From: Hong Guan <hguan@ti.com>
+>=20
+> Fix u-boot NAND partition in MTDPARTS_DEFAULT since the size
+> of u-boot image has grown beyond 1MB and no longer fits in 1MB
+> NAND partition, thus we are failing to flash and boot via GPMC
+> NAND.
+>=20
+> Increase the size of NAND.u-boot to 2MB since the size of
+> u-boot.img is currently 1.4M.
+>=20
+> Signed-off-by: Hong Guan <hguan@ti.com>
+> [Judith: extend fix to HS defconfigs and add commit msg]
+> Signed-off-by: Judith Mendez <jm@ti.com>
+> ---
+> This patch is marked RFC to understand if solution is acceptable
+> since changing partition sizes will not be backwards compatible
+> solution.
+>=20
+> One other solution was too try to reduce the size of u-boot proper,
+> but removing features (boot modes.. etc) did not seem to get the
+> size of u-boot proper to 1MB with a usable u-boot proper.
+
+So the big problem here is that we have more space being taken up by
+device trees than U-Boot itself. A quick mkimage -l and adding things up
+shows that we have 851936 bytes of device trees. You should look at
+switching to MULTI_DTB_FIT and enabling some compression, along with
+possibly LTO of U-Boot itself.
+
+--=20
+Tom
+
+--1c0GpNVQcj4nWB7h
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd+roUACgkQFHw5/5Y0
+tyzUZAwAsDVpWgW14Pl/3mBEx2vu17gN93igxPLXT7qp9WYhJHd5esYlnUSaukdn
+BjVfHJ611gbyDzgtRP2abiNHIu53XqfebcDTp+ovbKKiSsD3mMw577WgJFE45ag6
+QF/3IJOs3JPggJyo0eIxLtpkZLLJUz3yu/pF4qJidx1t4wnG6mVPCVIem+7nWSGP
+XhQ75l8jqf8L9DZAqrEuh+5oKEgvqUhXaP/TMzMoM8L4TVSsCAz/TTa9VWqG1TEB
+6kRE8x0Y7/5o1h3Mt13vhEWx1bFGeGIU5nJmCCuizyIsHn44W+JQQVD2IXqS2ile
+TKXIpbTW+Bsfor8IuskUW0yMTHlaSLL026T4y2kNQSkfbscRU3dfNf5Pu4pQ/HD0
+r/DrF8J4RBoPvcnHaui6wzzfh5gn+r0iPTN2usPfZVheO2zMPOHGJZtC35UIIYZB
+7eXmriHX1FF14+oqFtHPJbrO4rd6Kersb45lsi97wMM/fxGY0P5/MSg2hw7/umuk
+fdaZD59h
+=ulct
+-----END PGP SIGNATURE-----
+
+--1c0GpNVQcj4nWB7h--
