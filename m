@@ -4,92 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87974E77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C2F5E77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:05:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFA8D8036B;
-	Wed,  8 Jan 2025 16:03:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E3B3E805E2;
+	Wed,  8 Jan 2025 16:05:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K5hntRpH";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DLp3DwEB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97B0A803DC; Wed,  8 Jan 2025 16:03:54 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 05A29805EA; Wed,  8 Jan 2025 16:05:11 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 794348001F
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 16:03:52 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aaf3c3c104fso724584666b.1
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 07:03:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736348632; x=1736953432; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Gb/SbbjkP/9CfgPhrvKfgxLhQaIkSYXQtlcCcgQhkS0=;
- b=K5hntRpHpItWpy3HiEQijBvWIkEgsrCbqqKPjS6iviOW+M1vzO8h8mT9CCjBGns1ss
- F7W2LJlOxFY2NoVMxRadnghvudMMhcLx/4JXpqm4s+UxnVxiVzr/FnNI3uqDhI5ejbsk
- c1nPZlfVgXxEhoY+O5LlvvN4tXWXjcA4d0ThzgS7OmiZWH3yNgIyV8He7hcLY7P4gZ4d
- iaGpLYjRl10I/5FbY5+3tgOYplp5eYGzjkI2/QxNHJToTVHP3PiYy6ziZtJZeRTE4xw2
- YsKeyIE3xGLTGZ1zVBl6K62/a1B5/I0L4/XdvobiqzlqrCrBvUio4MMlnNdWB4TpOohU
- MiFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736348632; x=1736953432;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Gb/SbbjkP/9CfgPhrvKfgxLhQaIkSYXQtlcCcgQhkS0=;
- b=rOsB4QLiSmqlSBBWms4InRc6KJelAWJSJj1UmzBXF9nwqy3tbxM77lgiYb1Mjkz9sp
- 7+Z+KH7qkOfI/uDrJ9kdNMkAKgZD2azfbJcb1Dd7XtHqfvpY77ZaST7WGbaiIt3+EC6e
- FK02Ih1NkHr87kXCAsti/+SYDcIfCOKc1CvXTusPxBaVk6V+b5bnHXMgYPuoxHlZk25i
- EIW0i9Nuk1tVFdDBI/s0o9Sh0OiS9bTNMYIpIBKyR/FpobivkPb8h6A4HQi62UBY192d
- pG48mCWKAolv7krFChE68hs3DxP8VoH38rFE2JOl5zcvP8XKDMAcMpz1Ozx88tXlyg8Z
- 6x/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVtFGKH/Z8SFVbFlnEe7ZuzTI8GEIeOgidqW43N4JlHY9AX5P9BX6N68Pa2xM7TkcOxpEAJYnA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTg/8zTQP4SUE/okUB70iIzns2QxjcqZ6GgXt694cZrq2HES9e
- GXLOQYVOyCbPHFK5Q/7UuOzpZkwMyYQvECHYv0/oFvR6tv0t6qGZmQT/8bUQZLs=
-X-Gm-Gg: ASbGncvMdcaK7HLy+gf/dGG3kN8w0lo0N3fIpIxGNGvHUGiR7mfB5I8PtrAZUkYdx0Z
- NgO+U01iu3sWTmilsD+fha9NTRNsWLEedqQ+eesCVLf9Evdvt89fN1Z38GjACNko2w9/Qn1nugt
- +Qz+REHk+U7xU8R8wuYm5cvRpEpbKnJ0yBY8gOBicxsx4Q7NUQvMqHgyZoQKCSRPMW1Vuu4p7dS
- 0R2pyxTliTWk2rkAhzuBU2Ycd7nvym7c7fS8CN7W8cKukxgM5QgNOBV6WOFWEem6VPsVeaWtaKr
- fkp5TajCiqt+KVHurVZPmirB409DRhaTzG6OJhQ=
-X-Google-Smtp-Source: AGHT+IExHkXM1+XA7nYZeSmTOBat2uOhb87GCY9hrJXI7l35ySbj6akJGj7duPXjdUWQWa8iavIAgA==
-X-Received: by 2002:a17:907:6d20:b0:aa6:800a:1291 with SMTP id
- a640c23a62f3a-ab2ab167fb7mr236078666b.7.1736348631514; 
- Wed, 08 Jan 2025 07:03:51 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0e8954bfsm2532289466b.60.2025.01.08.07.03.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jan 2025 07:03:50 -0800 (PST)
-Message-ID: <1c39aea0-a4ef-4465-bf09-fb58ec7a2050@linaro.org>
-Date: Wed, 8 Jan 2025 16:03:49 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/15] mach-snapdragon: fetch serial# from SMEM
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Mario Six <mario.six@gdsys.cc>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
- <20241124-b4-modernise-smem-v1-14-b7852c11b67c@linaro.org>
- <CAFLszThinPHnJ5BRDMGFMuOyYBmvP93+fBzBzbEPuX2vEoJG3w@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszThinPHnJ5BRDMGFMuOyYBmvP93+fBzBzbEPuX2vEoJG3w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ by phobos.denx.de (Postfix) with ESMTPS id A4EC28036B
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 16:05:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=maz@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4D66F5C10BC;
+ Wed,  8 Jan 2025 15:04:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1232FC4CED3;
+ Wed,  8 Jan 2025 15:05:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1736348707;
+ bh=m31/Z/97NWN1SkWYeRtrJJtXeuu5LaLwrjt76AuaLjQ=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=DLp3DwEBmYJRm01RTBqSzJV3sN8vfZQ4m+xlSuj4OoscSJ1NbXjnBEh9PIGhMzQtx
+ bmE6Jy8A704glDRjX7ZG19M8eeNLjmj6TO0Q7sDFbZonmK9SLliomZm9e/p9p0ro4y
+ vQCccU4tpUi+hKxUpXTH0tMnzk3xmXEQUBzv2Ynkgce0qMY1U7zC14EAa3HhBqFQkf
+ jkDjkTm0tO9ZiOO+mN+F3zdY8tgVFZbWWsCN6cVJHl1enphlV55aYU1fdFHSO1b83Q
+ vnVI/k2gVg9ByCnsH08FTE/N1JQxa1iJWht1rGRdM2kH2J13WoWtVuVUB9egZgT362
+ 90MfLOZnjpmDg==
+Received: from sofa.misterjones.org ([185.219.108.64]
+ helo=goblin-girl.misterjones.org)
+ by disco-boy.misterjones.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <maz@kernel.org>) id 1tVXcG-00ACOz-TI;
+ Wed, 08 Jan 2025 15:05:05 +0000
+Date: Wed, 08 Jan 2025 15:05:04 +0000
+Message-ID: <86septwdlr.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Andre Przywara <andre.przywara@arm.com>,	Neil Armstrong
+ <neil.armstrong@linaro.org>,	Patrick Rudolph
+ <patrick.rudolph@9elements.com>,	Peter Hoyes <Peter.Hoyes@arm.com>,
+ =?UTF-8?B?UGllcnJlLUNsw6ltZW50?= Tosi <ptosi@google.com>,	Simon Glass
+ <sjg@chromium.org>,	Sumit Garg <sumit.garg@linaro.org>,	Tom Rini
+ <trini@konsulko.com>,	u-boot-qcom@groups.io,	Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>,	u-boot@lists.denx.de
+Subject: Re: [PATCH] armv8: mmu: don't switch to emergency tlb when adding a
+ dynamic mapping
+In-Reply-To: <20250108142235.1194640-1-caleb.connolly@linaro.org>
+References: <20250108142235.1194640-1-caleb.connolly@linaro.org>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/29.4
+ (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=US-ASCII
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: caleb.connolly@linaro.org, andre.przywara@arm.com,
+ neil.armstrong@linaro.org, patrick.rudolph@9elements.com, Peter.Hoyes@arm.com,
+ ptosi@google.com, sjg@chromium.org, sumit.garg@linaro.org, trini@konsulko.com,
+ u-boot-qcom@groups.io, ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
+ SAEximRunCond expanded to false
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,98 +89,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 08 Jan 2025 14:22:24 +0000,
+Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> 
+> This seems to cause crashes on a bunch of Qualcomm platforms. It's safer
+> to just update the live table and flush it.
 
+You may want to provide a bit more information, because that's not
+much to go on, really.
 
-On 07/01/2025 16:32, Simon Glass wrote:
-> Hi Caleb,
 > 
-> On Sun, 24 Nov 2024 at 12:18, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> If available, otherwise fall back to cmdline.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  arch/arm/mach-snapdragon/board.c | 11 ++++++++++-
->>  1 file changed, 10 insertions(+), 1 deletion(-)
->>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  arch/arm/cpu/armv8/cache_v8.c | 11 ++---------
+>  arch/arm/include/asm/system.h |  3 +--
+>  drivers/soc/qcom/cmd-db.c     |  2 +-
+>  3 files changed, 4 insertions(+), 12 deletions(-)
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> Thoughts below
-> 
->> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
->> index 269d39e4f6e1..dbac8aa2709a 100644
->> --- a/arch/arm/mach-snapdragon/board.c
->> +++ b/arch/arm/mach-snapdragon/board.c
->> @@ -30,8 +30,9 @@
->>  #include <malloc.h>
->>  #include <fdt_support.h>
->>  #include <usb.h>
->>  #include <sort.h>
->> +#include <soc/qcom/smem.h>
->>  #include <time.h>
->>
->>  #include "qcom-priv.h"
->>
->> @@ -198,11 +199,16 @@ static const char *get_cmdline(void)
->>  }
->>
->>  void qcom_set_serialno(void)
->>  {
->> -       const char *cmdline = get_cmdline();
->> +       const char *cmdline;
->>         char serial[32];
->>
->> +       if (!qcom_socinfo_init())
-> 
-> Hmmm that function should return an error code, i.e. 0 on success.
-> Does Linux use a boot interface here?
+> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> index e6be6359c5d9..43051d156122 100644
+> --- a/arch/arm/cpu/armv8/cache_v8.c
+> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> @@ -338,9 +338,9 @@ static void map_range(u64 virt, u64 phys, u64 size, int level,
+>  		size -= next_size;
+>  	}
+>  }
+>  
+> -void mmu_map_region(phys_addr_t addr, u64 size, bool emergency)
+> +void mmu_map_region(phys_addr_t addr, u64 size)
+>  {
+>  	u64 va_bits;
+>  	int level = 0;
+>  	u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE;
+> @@ -350,19 +350,12 @@ void mmu_map_region(phys_addr_t addr, u64 size, bool emergency)
+>  	get_tcr(NULL, &va_bits);
+>  	if (va_bits < 39)
+>  		level = 1;
+>  
+> -	if (emergency)
+> -		map_range(addr, addr, size, level,
+> -			  (u64 *)gd->arch.tlb_emerg, attrs);
+> -
+> -	/* Switch pagetables while we update the primary one */
+> -	__asm_switch_ttbr(gd->arch.tlb_emerg);
+> -
+>  	map_range(addr, addr, size, level,
+>  		  (u64 *)gd->arch.tlb_addr, attrs);
+>  
+> -	__asm_switch_ttbr(gd->arch.tlb_addr);
+> +	flush_dcache_range(gd->arch.tlb_addr, gd->arch.tlb_size);
 
-the name of this function isn't great, what it actually does it retrieve
-the serial number from smem and set serial#, returning 0 on success
-(meaning the serial number is set, so we have nothing else to do).
-> 
->> +               return;
-> 
-> Shouldn't this return an error?
-> 
->> +
->> +       cmdline = get_cmdline();
->> +
-> 
-> drop blank line
-> 
->>         if (!cmdline) {
->>                 log_debug("Failed to get bootargs\n");
-> 
-> Shouldn't this be an error? If not, please add a comment.
+Why would you invalidate anything when *mapping* something? By
+definition, if there was nothing mapped before, there is nothing to
+invalidate (hint: the architecture forbids negative caching).
 
-bootargs are only available when we're chainloading from ABL (something
-we can't easily detect at runtime). I would eventually like to drop this
-and rely on smem only ideally. But that's quite unrelated to this series.
-> 
->>                 return;
->>         }
->> @@ -353,8 +359,11 @@ int board_late_init(void)
->>
->>         /* By default copy U-Boots FDT, it will be used as a fallback */
->>         memcpy((void *)addr, (void *)gd->fdt_blob, fdt32_to_cpu(fdt_blob->totalsize));
->>
->> +       /* Initialise SMEM if it wasn't done already */
->> +       qcom_smem_init();
->> +
->>         configure_env();
->>         qcom_late_init();
->>
->>         /* Configure the dfu_string for capsule updates */
->>
->> --
->> 2.47.0
->>
-> 
-> Regards,
-> Simon
+	M.
 
 -- 
-// Caleb (they/them)
-
+Without deviation from the norm, progress is not possible.
