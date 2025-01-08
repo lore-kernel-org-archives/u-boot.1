@@ -4,85 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8315DE77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 13:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4AF5E77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 13:44:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1C1780608;
-	Wed,  8 Jan 2025 14:43:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4345380612;
+	Wed,  8 Jan 2025 14:43:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="aXn36o+1";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1736343823;
+	bh=ELVzvut/EKgkPEzNWZpWalpkTQpqe9ONxfA6x9k62ME=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=VYGoiLZXrj4QlH1Zdl9zspck2T5vettsYnclT22ji+eI0YEc5BtVY0CmB3KPUBPRH
+	 zweL4NTJ6cNy7om98EzKmnsohgCFvLoHA25AMtT2T7Bntdc858jK67W0rKqOBVK86m
+	 QT898Qbsw+bqpxyxKg2unseLlAAoKoF3xWntr8foOpPpk4B9lqOI29nIgx+sFE6paj
+	 ODUaOZAlCTs+YInxuns5XE9na3NSmbwZPbC/Ywb/IyizcHZLrTEXsf11guZGx+hT3b
+	 qpN5yJVtJBns1oOdQUZDE1EohBZkVQAwg4XwTThPqXj+0AdQHGv6g7pRNRdY6/oL0/
+	 dKkqhiikrq5oQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03391805E2; Wed,  8 Jan 2025 14:43:35 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BA48180600; Wed,  8 Jan 2025 14:43:42 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F858805EA
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 14:43:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA83D80634
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 14:43:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-385e1fcb0e1so9120099f8f.2
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 05:43:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736343811; x=1736948611;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CIJ11LU6vCyTwtiQ6QtxTy2bNxZ7ziaUccIPBIk3nTE=;
- b=aXn36o+1NanEsGCgOwckIFAfSn8lMactQj3pUK6RPXeDtuoY13tiap4gEvEnz/x0DT
- /0Wf6XYgt3UCciLxNyvmJvt22ZfXgs7YE8Cwb08UDDMTy7MW7xxoifnGTYuP/Bort3RF
- f4UX6WmnpcHo+LyQY0i4KtjJZvCouRCPV9CkR11cb8j/plsFOmhnl08+cVBl+HKeg1kO
- 7eBBCScEJ3PGcH2Kp1te9V+aTrVgSxFcEcU2QXL0trhDgkUQcHQlN0fPcfk4h9cp54AM
- 0Ty+6l9OdfLF+gE4A2cmf6lkial7KrwfYaqLoXzPTSrJIZY5AIgpkRsOUkR+XDwAOi/y
- 8M9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736343811; x=1736948611;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CIJ11LU6vCyTwtiQ6QtxTy2bNxZ7ziaUccIPBIk3nTE=;
- b=chxDGdkJ/rzZAjeMLinEB1buD9SIvSN2NoOxSy5Al4Q8nx8jQftiv1t4T+Tg2CP7Jq
- HKrwghzEQW68xObjROmAnbPfgsBwrVW1xihzu0R+d26jfbtbDIWWaDKkv5iCt4JwWvwb
- 0jde8DUZPpk20HAXlR1v94lEl449Vg8pArzwZWo7XKOiwZsSDEBl78fluNERTt8GLs5N
- KQqu2jmk+5J7QNtG8KWiFNVzwuI1Pjf3FXBjCHXoJQAEYGX5Uu3E1/lcu53pozFTBPBL
- cM45IXk6OScsvAHKKIYGXyCPU9Upq3ZqjEq/8KUZh0ejSiZcW3a3hulEAHTiiT5M6uYX
- 2DTw==
-X-Gm-Message-State: AOJu0YwrHSxyG0ANLDckMBcvj+PGymX1JEGC6OhPt4JSiQadUBAGZO8/
- FtXGQaLBgRr2ohdXScVFwndiqC+8HrxRtGtmfO3qeFyJ4WBVGQroZ1tS6wKiUnU=
-X-Gm-Gg: ASbGncsw0E5T9KgN1RvGmuEc87r2fTt3vsgFjWO5IWGRWkQYV2F1hF1xkb/drSYkPDL
- OSQ0vRj61G/r/39wUoxLQaWzHC+s56X0hV4oSXb/aqDhrnehxs9DnSYVcqmh2f2oe39h8IeIMlq
- 3EOtmjbj77gkdDRTizb/xh8vJOQkRxaIw2/16ql9s7psVUGSL24lTSVut2jDfmB7xC9Dam8lu1B
- u7h8MzpjcXa93E5H/ZQFeGNl87UqE2WGW81UuBmNtREBU1rFbVYlCLjQbw8q/6NyjYUQZdc
-X-Google-Smtp-Source: AGHT+IF5Na+SdJxrsB96aw+tN8AB0SjUXnxw2NY6hLUNe7QhtLW9sBzC+PTeNPyPgmIfD5ClrrdAOA==
-X-Received: by 2002:a05:6000:709:b0:386:3803:bbd5 with SMTP id
- ffacd0b85a97d-38a8733a1f9mr2620321f8f.45.1736343810790; 
- Wed, 08 Jan 2025 05:43:30 -0800 (PST)
-Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e2e22767sm21166045e9.39.2025.01.08.05.43.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 05:43:30 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Wed, 08 Jan 2025 14:43:15 +0100
-Subject: [PATCH 2/2] bootstd: android: Allow boot with AVB failures when
- unlocked
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4YSpzD3Gdbz9slj;
+ Wed,  8 Jan 2025 14:43:36 +0100 (CET)
+Message-ID: <f33c4d86-045f-43bf-841b-7bc8dcb8d382@denx.de>
+Date: Wed, 8 Jan 2025 14:43:35 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250108-avb-disable-verif-v1-2-009c35710ef4@baylibre.com>
-References: <20250108-avb-disable-verif-v1-0-009c35710ef4@baylibre.com>
-In-Reply-To: <20250108-avb-disable-verif-v1-0-009c35710ef4@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Julien Masson <jmasson@baylibre.com>, 
- Guillaume La Roque <glaroque@baylibre.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14.3-dev-86319
+Subject: Re: [PATCH v2 1/3] serial: ns16550: Add Intel XScale support
+To: =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
+ Tom Rini <trini@konsulko.com>
+Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
+ u-boot@lists.denx.de
+References: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
+ <20241231-coreprimevelte-v2-1-6a5445d92d11@skole.hr>
+ <0f39cd7a-c64c-45b6-9e69-4612b884c15f@denx.de> <4975523.31r3eYUQgx@radijator>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <4975523.31r3eYUQgx@radijator>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4YSpzD3Gdbz9slj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,65 +73,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the bootloader is UNLOCKED, it should be possible to boot Android
-even if AVB reports verification errors [1].
+On 07.01.25 19:06, Duje Mihanović wrote:
+> On Tuesday 7 January 2025 12:30:40 Central European Standard Time Stefan Roese
+> wrote:
+>> On 31.12.24 17:49, Duje Mihanović wrote:
+>>>    	{ .compatible = "ingenic,jz4780-uart",	.data = PORT_JZ4780  },
+>>>    	{ .compatible = "nvidia,tegra20-uart",	.data = PORT_NS16550 },
+>>>    	{ .compatible = "snps,dw-apb-uart",	.data = PORT_NS16550 },
+>>>
+>>> +	{ .compatible = "intel,xscale-uart",	.data = PORT_NS16550 },
+>>
+>> Looking at the Linux 8250 of_device_id struct I see this entry:
+>>
+>> 	{ .compatible = "mrvl,mmp-uart",
+>> 		.data = (void *)PORT_XSCALE, },
+>>
+>> Wouldn't it make more sense to use this compatible property instead?
+> 
+> I was going by the logic that intel,xscale-uart is more generic. They use
+> identical platform data, so it would be no problem at all.
 
-This allows developers to flash modified partitions on
-userdebug/engineering builds.
+Please check which compatible property is present in the Linux upstream
+dts/dtsi file for the Marvel SoC and use this one. This will make
+sync'ing with upstream dts easier.
 
-Developers can do so on unlocked devices with:
-$ fastboot flash --disable-verity --disable-verification vbmeta vbmeta.img
-
-In such case, bootmeth_android refuses to boot.
-
-Allow the boot to continue when the device is UNLOCKED and AVB reports
-verification errors.
-
-[1] https://source.android.com/docs/security/features/verifiedboot/boot-flow#unlocked-devices
-Fixes: 125d9f3306ea ("bootstd: Add a bootmeth for Android")
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- boot/bootmeth_android.c | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
-
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 2cd167f80280801618a317a65e93a10e70a0d9ee..564d21784feb0667bf9bed2a59be0a232601a7dd 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -407,11 +407,16 @@ static int run_avb_verification(struct bootflow *bflow)
- 				 AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
- 				 &out_data);
- 
--	if (result != AVB_SLOT_VERIFY_RESULT_OK) {
-+	if (result != AVB_SLOT_VERIFY_RESULT_OK && !unlocked) {
- 		printf("Verification failed, reason: %s\n",
- 		       str_avb_slot_error(result));
- 		avb_slot_verify_data_free(out_data);
- 		return log_msg_ret("avb verify", -EIO);
-+	} else if (result != AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION && unlocked) {
-+		printf("Unlocked verification failed, reason: %s\n",
-+		       str_avb_slot_error(result));
-+		avb_slot_verify_data_free(out_data);
-+		return log_msg_ret("avb verify unlocked", -EIO);
- 	}
- 
- 	if (unlocked)
-@@ -427,9 +432,11 @@ static int run_avb_verification(struct bootflow *bflow)
- 			goto free_out_data;
- 	}
- 
--	ret = avb_append_commandline(bflow, out_data->cmdline);
--	if (ret < 0)
--		goto free_out_data;
-+	if (result == AVB_SLOT_VERIFY_RESULT_OK) {
-+		ret = avb_append_commandline(bflow, out_data->cmdline);
-+		if (ret < 0)
-+			goto free_out_data;
-+	}
- 
- 	return 0;
- 
-
--- 
-2.47.1
+Thanks,
+Stefan
 
