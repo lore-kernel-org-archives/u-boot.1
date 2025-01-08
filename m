@@ -4,59 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B735E77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9083CE77199
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:49:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BBD180196;
+	by phobos.denx.de (Postfix) with ESMTP id 80DF380609;
 	Wed,  8 Jan 2025 16:49:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=liwest.at
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=liwest.at header.i=@liwest.at header.b="QwYHFyRt";
+	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="vnqzJGoP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9428800D7; Wed,  8 Jan 2025 09:30:16 +0100 (CET)
-Received: from so.liwest.at (so.liwest.at [212.33.55.16])
+ id 265EC801E8; Wed,  8 Jan 2025 09:50:26 +0100 (CET)
+Received: from mail.per1cycle.org (mail.per1cycle.org [188.245.231.141])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FAB18005B
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 09:30:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=liwest.at
+ by phobos.denx.de (Postfix) with ESMTPS id C8C548006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 09:50:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tanjadeu@liwest.at
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=liwest.at; 
- s=20140502;
- h=Content-Type:MIME-Version:Subject:Message-ID:To:From:Date:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=uBoKIGsZFhvszofpliylpe7Hp2rMQgB5fUcd5YGQZuc=; b=QwYHFyRtr6nAdCH0Fx6c0N3EL4
- smfVMOcuLPOQVh+5fSrZNotfgxLUVJNCMcJdasjNH/VkHHRCSpb1EcrFYf1tG1TvlD4Z4dW9XsDLu
- niO6a0QRv5Bt5jMI7JSiT5PgFVtsNu+SIVrbhr0r6LtAzDlYR4BYrLquUfxyBGqYNZOaO8XAj/epL
- SWFcfjdzWsENiKniveAIeFHi6hpLIFtJGUGdoTH4xGlINJVhAuqzL4SAjxua5lZro3T3aUqrrWgUN
- oitlUvlEBzv+jGjS1QmtjtjuaiWef8S72SWQrl2+F0Y+ZKKO9Qa5oJoYH+gFtZMMYbQPOQoRkxdxP
- pi0FSShg==;
-Received: from [192.168.224.101] (helo=ox111.liwestmail.local)
- by so.liwest.at with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.94.2) (envelope-from <tanjadeu@liwest.at>)
- id 1tVRRz-00AhO1-5z
- for u-boot@lists.denx.de; Wed, 08 Jan 2025 09:30:11 +0100
-Date: Wed, 8 Jan 2025 09:30:10 +0100 (CET)
-From: tanjadeu@liwest.at
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Message-ID: <416280384.272214.1736325010687@webmail.liwest.at>
-Subject: Issue JTAG debugging U-Boot
+ dmarc=pass (p=none dis=none) header.from=per1cycle.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 9121A3F699; Wed,  8 Jan 2025 08:50:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
+ s=dkim; t=1736326222;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=PDooda27VV4iq4Pj+w+cKgYrjosjQl+j65osKW0MlWQ=;
+ b=vnqzJGoPQz7jXdI5Ipb9SWggjckT25vXyQJZIcggnYYE2zgz5KNbm0o3gS8ZF0oB1JDon4
+ ZD26HFAv23uI3/U3xsN3iKbwWn5lqXfpWW5ZC45/uRQ0zebvTghQ23Sv4Rm+E+E3wyOQge
+ CXlUdx76j5NkDfD020EsawqAHza5Kb25tOJkA2nHpV8mMh7FPZX4TinqlEoy7Y94RgZNpK
+ 14/23H0y2mgIrQqHAltOmh3kIGFqmWu//J/R7BKMZtfp6vDA2u0KucBOjozL7TG3pMcrg4
+ mYY4J6SpFUa8L1lwCClJKzap7wiJKKK8i7zaUR6rTYqhThX9pwu88Z7Tq+CKeg==
+From: Huan Zhou <me@per1cycle.org>
+Date: Wed, 08 Jan 2025 16:49:58 +0800
+Subject: [PATCH] riscv: spacemit: k1: probe dram size during boot phase.
 MIME-Version: 1.0
-X-Priority: 3
-Importance: Normal
-X-Mailer: Open-Xchange Mailer v7.10.4-Rev30
-X-Originating-Client: open-xchange-appsuite
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250108-get-dram-size-v1-1-4bae32ecf756@per1cycle.org>
+X-B4-Tracking: v=1; b=H4sIADU8fmcC/x3MQQqAIBBA0avErBtQwaiuEi1ER5tFFhoRiXdPW
+ r7F/wUyJaYMc1cg0c2Zj9gg+w7sZmIgZNcMSigtpBgx0IUumR0zv4SDtl5PRmolJLTmTOT5+X/
+ LWusHGWYxdV8AAAA=
+X-Change-ID: 20250108-get-dram-size-65cf59a15201
+To: u-boot@lists.denx.de
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>, 
+ Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, Yixun Lan <dlan@gentoo.org>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ =?utf-8?q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>, 
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>, 
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Yu Chien Peter Lin <peterlin@andestech.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, 
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Padmarao Begari <padmarao.begari@amd.com>, Huan Zhou <me@per1cycle.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1736326200; l=1817;
+ i=me@per1cycle.org; s=20241231; h=from:subject:message-id;
+ bh=GdV7T5Tdccu3YJaHO9VIlHvhxUQMs403VwJI3hEOGCA=;
+ b=0hppDzsf5tBNWJMEivU8Y67FVGB/AB0eWuS1jI6drtkVUh5kjIyjNagFjz9g8f6Vog9NASSd+
+ dScjPJOeuNyDLdmMRXJyflf/dyC+2SmTqFEvr9Sxy2boUAolZOUVQpa
+X-Developer-Key: i=me@per1cycle.org; a=ed25519;
+ pk=LfN2kXe1uCRoaEzAJ8quXuPIH4MiEnZHOCRZwGytJwE=
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Wed, 08 Jan 2025 16:49:18 +0100
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,17 +91,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
 
-I am trying to debug the NAND driver (U-boot 2016.09) and ran into the foll=
-owing issue:
-After changing target CC options to -Og -g in the Makefile and building U-B=
-oot the debugger doesn=E2=80=99t show the value for the nand_chip structure=
- and tells me that is has been optimized out.
-Also, I can view all values of the MTD structure, but the pointer to the ch=
-ip structured shows the same.
-Marking the chip structure as volatile does not change the behavior.
-So, why is just this structure optimized out and how can I fix this?
 
-BTW: I do not have such problems debugging U-Boot 2013.
+---
+This patch introduce improvement for get dram size on bananapi BPI-F3,
+retrieving the dram size dynamically.
+Have tested on bananapi BPIF3 4G and jupiter 8G.
+
+Signed-off-by: Huan Zhou <me@per1cycle.org>
+---
+ arch/riscv/cpu/k1/dram.c | 40 ++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 38 insertions(+), 2 deletions(-)
+
+diff --git a/arch/riscv/cpu/k1/dram.c b/arch/riscv/cpu/k1/dram.c
+index c477c15cbfb19f0e3a0ee72985b602f5bda352d7..095217f2a4c053f7477d62c0776bcb51e623db47 100644
+--- a/arch/riscv/cpu/k1/dram.c
++++ b/arch/riscv/cpu/k1/dram.c
+@@ -4,17 +4,53 @@
+  */
+ 
+ #include <asm/global_data.h>
++#include <asm/io.h>
+ #include <config.h>
++#include <bitfield.h>
+ #include <fdt_support.h>
+ #include <linux/sizes.h>
+ 
++#define DDR_BASE 0xC0000000
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++static inline u32 map_format_size(u32 val)
++{
++	u32 tmp;
++
++	if (val & 0x1 == 0)
++		return 0;
++
++	tmp = bitfield_extract(val, 16, 5);
++	switch (tmp) {
++	case 0xd:
++		return 512;
++	case 0xe:
++		return 1024;
++	case 0xf:
++		return 2048;
++	case 0x10:
++		return 4096;
++	case 0x11:
++		return 8192;
++	default:
++		pr_info("Invalid DRAM density %x\n", val);
++		return 0;
++	}
++}
++
++u32 ddr_get_density(void)
++{
++	u32 cs0_size = map_format_size(readl((void *)DDR_BASE + 0x200));
++	u32 cs1_size = map_format_size(readl((void *)DDR_BASE + 0x208));
++	u32 ddr_size = cs0_size + cs1_size;
++
++	return ddr_size;
++}
++
+ int dram_init(void)
+ {
+ 	gd->ram_base = CFG_SYS_SDRAM_BASE;
+-	/* TODO get ram size from ddr controller */
+-	gd->ram_size = SZ_4G;
++	gd->ram_size = (u64)ddr_get_density() * SZ_1M;
+ 	return 0;
+ }
+ 
+
+---
+base-commit: 19fc0b7f7d907119a13e9c207991899f0817f8fc
+change-id: 20250108-get-dram-size-65cf59a15201
+
+Best regards,
+-- 
+Huan Zhou <me@per1cycle.org>
 
