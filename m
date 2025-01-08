@@ -4,62 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA14E77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:48:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E10FDE77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 15:48:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11F0F800DF;
-	Wed,  8 Jan 2025 16:48:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C706805FB;
+	Wed,  8 Jan 2025 16:48:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="J4iS+mzu";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="aGaA+U/w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 522DD801E8; Wed,  8 Jan 2025 09:39:50 +0100 (CET)
-Received: from out-189.mta1.migadu.com (out-189.mta1.migadu.com
- [95.215.58.189])
+ id 7B31B800DF; Wed,  8 Jan 2025 13:00:29 +0100 (CET)
+Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com
+ [91.218.175.189])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0360A8006D
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 09:39:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5598280040
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 13:00:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alexeymin@postmarketos.org
-Message-ID: <de8dafef-187e-402d-87cb-fc79b4249a40@postmarketos.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1736325587;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=WtG0Q66FejxT31nXrIwS6bNb15kkBwrZYXXPg32wXZU=;
- b=J4iS+mzu9PRqUu9k3LTZfySC/+9BRbEPA8PsNbDUZ4ncTyciAd5kchR1gVYEt9Jeps044d
- SdC0sZh+uyvzmLzMzeTgbqyPtuFhfmy25GHCPhKBh9HePMNmNBdmTULmug/NyhWGGs0Gf4
- iq+SaSF+ffSzt+mmr6A13+PTT9BJYKHo0jmMoJi2aWir7lDPrIIHeHRGxkNvQ6c287y+s2
- /9VrSs5vIv1zh4gYQ2ZmXbLOdzgnGuccOaMpGTx640KGBs1SwMq6hIPW4+po9Gz7GRo9Jr
- n7sf2q+2j1Gb8AL/4SfVqlxrBWvbjl33RtQ2zETwuchGp1UeaysB9LHFb6mkeA==
-Date: Wed, 8 Jan 2025 11:39:43 +0300
-MIME-Version: 1.0
-Subject: Re: [PATCH RFC 12/14] pinctrl: qcom: Add X1E80100 pinctrl driver
-To: u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Anatolij Gustschin <agust@denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20241124-b4-efistub-arm64-v1-0-3e33f0340071@linaro.org>
- <20241124-b4-efistub-arm64-v1-12-3e33f0340071@linaro.org>
-Content-Language: en-US
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1736337618;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=/qAekYVsODDjDI6/sqF2Sx3Li2pWHg1qcQ+KcWbIvRk=;
+ b=aGaA+U/wlXP6BEy8L8UOgaLzWqFGKiyPDs4YQhwISVxcGsbAYg/TzJ/sWT0sapz0zrylFw
+ Aa+d8CdMxfMM7o8og8Ex0KkG+JaJIOE6FGSCioxJuDE31L4sBHRgjiLmmapANjlFVsY5tB
+ AymwVoAZiB+m20PvaXSDnUqT3FE1YoBABy3K8ILRql+ycVhzBr88XUBsL/7T6gUog6pJZl
+ kQf6gMwZwIzSHQO9wtw/ZJLsqpYqZbL7i6XMeD3gu231m7ezTPn1pycwHTzymTiCA8FlU4
+ e8y1GJQMW4yMQqF/5nS1XO1L4wJaKSNCF+tL/iMoPq75Kk7kkXA7baXufMOQWg==
 From: Alexey Minnekhanov <alexeymin@postmarketos.org>
-In-Reply-To: <20241124-b4-efistub-arm64-v1-12-3e33f0340071@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Alexey Minnekhanov <alexeymin@postmarketos.org>
+Subject: [PATCH 1/4] clk/qcom: Print more details about stuck GDSC
+Date: Wed,  8 Jan 2025 14:59:08 +0300
+Message-ID: <20250108115911.4163437-1-alexeymin@postmarketos.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Migadu-Flow: FLOW_OUT
 X-Mailman-Approved-At: Wed, 08 Jan 2025 16:48:26 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -78,26 +69,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/24/24 23:27, Caleb Connolly via groups.io wrote:
+Clearly say whether it's stuck during power on or power off.
 
-> From: Neil Armstrong <neil.armstrong@linaro.org>
-> 
-> Add pinctrl driver for the TLMM block found in the X1E80100 SoC.
-> 
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->   
-> +config PINCTRL_QCOM_X1E80100
-> +	bool "Qualcomm X1E80100 GCC"
+Signed-off-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+---
+ drivers/clk/qcom/clock-qcom.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-That's not GCC though. Pin controllers on qcom SoCs are called TLMM
-(Top Level Mode Multiplexer). GCC is for Global Clock Controller.
+diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+index 25ca67e537d1..1cfc430c14a5 100644
+--- a/drivers/clk/qcom/clock-qcom.c
++++ b/drivers/clk/qcom/clock-qcom.c
+@@ -496,8 +496,8 @@ static int qcom_power_set(struct power_domain *pwr, bool on)
+ 					 GDSC_STATUS_POLL_TIMEOUT_US);
+ 
+ 	if (ret == -ETIMEDOUT)
+-		printf("WARNING: GDSC %lu is stuck during power on/off\n",
+-		       pwr->id);
++		printf("WARNING: GDSC %lu is stuck during power o%s\n",
++		       pwr->id, on ? "n" : "ff");
+ 	return ret;
+ }
+ 
+-- 
+2.45.2
 
-> +	select PINCTRL_QCOM
-> +	help
-> +	  Say Y here to enable support for pinctrl on the Snapdragon X1E80100 SoC,
-> +	  as well as the associated GPIO driver.
-> +
-
---
-Regards,
-Alexey
