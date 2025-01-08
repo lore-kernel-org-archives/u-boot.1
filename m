@@ -4,98 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A47AE77199
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 17:32:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD678E77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 18:25:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 584F5800DF;
-	Wed,  8 Jan 2025 18:32:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 074AC800DF;
+	Wed,  8 Jan 2025 19:25:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="d8i28b61";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dZLQuoEv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6399F8036B; Wed,  8 Jan 2025 18:32:03 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id BFBC58036B; Wed,  8 Jan 2025 19:25:27 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 483148006D
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 18:31:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BFC28006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 19:25:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-467a8d2d7f1so137918981cf.1
- for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 09:31:57 -0800 (PST)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7b6e4d38185so8409185a.0
+ for <u-boot@lists.denx.de>; Wed, 08 Jan 2025 10:25:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736357516; x=1736962316; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736360724; x=1736965524; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=t67ey+dlGgcr1vPFM8Ge/va+hwyhqcoWfo6MlSUaHGs=;
- b=d8i28b61fgAyamMGe2kNJRD7J5Pwnq6fpZO5HgvND0CfvodRlbTcaY+2qFUXR5NxmP
- 3xPOapFVZ3BxCPPU41dpRLbjGLoGxJy82ibk95cP3KbGkYXPVkS0SlwsyoCceIlKc+Hr
- GAu2xeLCgfIXAB1g8VoouYB8w2q3YcvH9dyAE=
+ bh=DRWdw7z36MA4DyLBkQ3yEDlMp+FL2r1BZ8VwssDYIqs=;
+ b=dZLQuoEvt0MSWhv1NiIkWZRdCNtWKH0Qhs7yBUVi71JPE8De4qESSqoM8Sepn2fe5u
+ zyiopt0Q1HJPmb2onsE6jSmBBcJoRIWCM6w6sK5/DBMUMBkXTuxeof473NSP0BHwq4rq
+ Ep0uO2D9txQSbwHoMYKQt8JC2w6YEj7UQN6VM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736357516; x=1736962316;
+ d=1e100.net; s=20230601; t=1736360724; x=1736965524;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t67ey+dlGgcr1vPFM8Ge/va+hwyhqcoWfo6MlSUaHGs=;
- b=N5111y6wbmt5+ZWowNafEaTIvt1gMy6kD7rQNvBrzZW1zrWCoUG8md3gHFxmxillHw
- Yr9WLsfc4N/1qnchnny9KMemZAkR+3eTwuw5CkQFgjSlj2q7cTSq6kZygzo1B90iyTOe
- LLIGsb7MNTyFyPNLEiCgIah8Clymgg3nnUDV5k+LpW+MQPf2ZFwp931qZkHL13C19D6m
- hhtVOm5hB1pL/NMzcT9UIyj7XdXRfNufLD7a/LSAXw/FG33U4Xg0fPIMFRgi19IIV5n0
- OaZ5Wj1yF0elyKOhxp64ia2TYnE+UHsFgsb8lU/yQCcellrYyHePA2wvqTu71mQYuv3a
- houg==
-X-Gm-Message-State: AOJu0YzxqP+5htU9np9Ukw4vJ+UJyY8gmwU2VUnq+Y9a+TgBfWLEyRtU
- zAzonXggX5ps6E5lFYXYvqTsZi0+dUiOFSCqNKIjJnvCwL1mD4Xh0GM82zUeZQQ=
-X-Gm-Gg: ASbGncu/fR0C5ozONyDjcYSrUhTFRSYDaZfhUBOCBI+tJa0vVlYBjYaOyASg6IM/IoO
- iRkp0uTFpbi3aTy67Jr17s1JKyj48dASWLvJ2g9Y3FcGVQoeCkeZDBMCVapZ6K6uPxVGcxu8iwa
- Ta/hDEhlrSnlss2m7aM34g9jKoledEbzAFEjGBZRk0yEWjdVPyuYSqw3U4gqX2b/jQdUSbW2/O+
- 9X/tvfdF5nmhiJHYDlVa3XUZuRW23HEAkOZab9seI+S2XZVD/jFNz4=
-X-Google-Smtp-Source: AGHT+IF3lIqgEKPhcHCezyXs7yhKFZe4Thm4qRzuWBWhjMf7cUuuv9XbhjqGA/1Rub/2Nm7AZEb0Kw==
-X-Received: by 2002:a05:6214:3111:b0:6d4:2910:7f13 with SMTP id
- 6a1803df08f44-6df9b286032mr58742536d6.32.1736357516116; 
- Wed, 08 Jan 2025 09:31:56 -0800 (PST)
+ bh=DRWdw7z36MA4DyLBkQ3yEDlMp+FL2r1BZ8VwssDYIqs=;
+ b=H88MGPDyfUqqCmaAa4N1Mc5Z1bAQWgbsRAtNjsxB1mlOlIEiDV45VvY/HFPob8odve
+ OrQaaOy2J2zPiB6eQSgeAitJnsOQ/eOV4lmlZDqo4F9aeLu09S/osqKiNHWX0RvoFir3
+ 5/s33M3A9wos/jTmzQipP5uL95JaMOBdsKH4O0CabCoxMmW9X3HSzw29uVkX+6k8gKi2
+ 4ar2sAqrbMf0mXxOKhfakVGbhTggI/pWnlyLoVx6/3C5jzJNSI0PWCxIva4U5cMxyfMD
+ BQO3/iSXOs/2SE1H8M5quzUzZT1Yase1EmDELxd3USw6lNTde5i1YxHLp8ZvbcIExSRC
+ y8UA==
+X-Gm-Message-State: AOJu0YxZzdHMREmaMzoUYRGloeM8c2DaALpkR7Oozjy9ERUeLjPyxbuz
+ ldRNKu1RxaNVKB5kyhMCeW4EQTbfnYhhgES5fw/iZ+DDDnyjZqsGcaqA5UY68Qc=
+X-Gm-Gg: ASbGncvLHAyXJBJjOyUCEwht7uUYf+8ZAv4S2J2rZWGhExoaQ1SmInxnaHPu2ktoHoQ
+ byW9B7x1QWgZXCm6pOJLeJtYua/vk7XBqS536zOPfYB/vBM7NMFB1+IhBF7wRhJUiBalqJ46n/i
+ z5XzdWrd4JoMt65l/6bQKKIV+EGy3/qNGRlLP7ZGDh97pLzXIeBcUV5yJAjfxzhAaxPvzhXpPz0
+ ocgVed5qptW/mGiYbDnlfB2e7BmzE7L8wpxvZTyla1YiZxpqkzW6vM=
+X-Google-Smtp-Source: AGHT+IFHyD3SmZ8wNDNeX5RNVzrk1Pb6phMzwhlcvMcmZZNm7zsO+F8HqWSNeUywlLec07JMdWO+RA==
+X-Received: by 2002:a05:620a:46a6:b0:7b6:d9b6:b53 with SMTP id
+ af79cd13be357-7bcd97ae65amr562228685a.60.1736360724172; 
+ Wed, 08 Jan 2025 10:25:24 -0800 (PST)
 Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181a7c1fsm195623996d6.72.2025.01.08.09.31.53
+ af79cd13be357-7b9ac2bbfbasm1698913685a.17.2025.01.08.10.25.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 09:31:55 -0800 (PST)
-Date: Wed, 8 Jan 2025 11:31:51 -0600
+ Wed, 08 Jan 2025 10:25:23 -0800 (PST)
+Date: Wed, 8 Jan 2025 12:25:20 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Richard Weinberger <richard@nod.at>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 4/5] pxe_utils: Support a backup for localboot
-Message-ID: <20250108173151.GL3476@bill-the-cat>
-References: <20241220040120.3245610-1-sjg@chromium.org>
- <20241220040120.3245610-5-sjg@chromium.org>
- <20241220145609.GD1505244@bill-the-cat>
- <CAFLszTjzP+vm1YoUX_avNq4_4qnUtNzzjLyFocEhJYrCA7cGOA@mail.gmail.com>
- <20241220172348.GJ1505244@bill-the-cat>
- <CAFLszTjMWU7f_Db+qp6hFecx=mv+54ojX+zSZcrV-2CxT5dcxw@mail.gmail.com>
- <20241220204840.GM1505244@bill-the-cat>
- <CAFLszThNrYMZtiPRewdvY-ip6XmHKdLFbQ5OHZLTsULpiJZKsw@mail.gmail.com>
+ Christian Marangi <ansuelsmth@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v2 13/33] ofnode: Indicate when out of space in a few
+ places
+Message-ID: <20250108182520.GM3476@bill-the-cat>
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-14-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZfSA+qa0kr09bc6E"
+ protocol="application/pgp-signature"; boundary="GBNrFz5tVTuRLH94"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThNrYMZtiPRewdvY-ip6XmHKdLFbQ5OHZLTsULpiJZKsw@mail.gmail.com>
+In-Reply-To: <20250106143229.3023771-14-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,119 +97,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZfSA+qa0kr09bc6E
+--GBNrFz5tVTuRLH94
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 08, 2025 at 10:04:07AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Mon, Jan 06, 2025 at 07:32:09AM -0700, Simon Glass wrote:
+
+> Update ofnode_add_subnode() and ofnode_add_prop() to return a suitable
+> error when space is exhausted in the FDT. This makes it easier to see
+> what is going wrong.
 >=20
-> On Fri, 20 Dec 2024 at 13:48, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Dec 20, 2024 at 10:37:34AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 20 Dec 2024 at 10:23, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Dec 20, 2024 at 10:18:17AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 20 Dec 2024 at 07:56, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Dec 19, 2024 at 09:01:19PM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > The current localboot implementation assumes that a 'localcmd'
-> > > > > > > environment variable is provided, with the instructions to fo=
-llow. This
-> > > > > > > may not be included, so provide a fallback in that case.
-> > > > > > >
-> > > > > > > Add a test image and test as well.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > >
-> > > > > > This is a pretty niche feature, I had to dig around a bit to se=
-e how
-> > > > > > it's specified elsewhere (not really) and how it's used. And I =
-think
-> > > > > > that based on how it's used, making up a bootcmd when localcmd =
-is
-> > > > > > undefined is the wrong approach. It's the hook for "run what I =
-defined
-> > > > > > in the environment", so if not set erroring back out seems appr=
-opriate.
-> > > > >
-> > > > > Yes, but unfortunately it seems to be used and we should support =
-it.
-> > > > > The problem with scripts is that we don't know the boot device, e=
-tc,
-> > > > > so it needs to be integrated into PXE. I did consider putting
-> > > > > something in bootstd, but we only find out that it is requesting a
-> > > > > localboot when actually running the extlinux bootmeth, so this is=
- what
-> > > > > I came up with.
-> > > > >
-> > > > > It will be interesting to see if any other cases come up.
-> > > >
-> > > > It would be helpful at this point I think if you can point to how t=
-he
-> > > > code for handling this case (the LOCALBOOT keyword followed by an
-> > > > integer) in other projects so that we can be compliant with what's
-> > > > expected, even if it's poorly documented.
-> > >
-> > > Yes, it seems very hard to find anything at all.
-> > >
-> > > The implementation in syslinux uses the BIOS to jump to a boot sector:
-> > >
-> > > https://repo.or.cz/syslinux.git/blob/HEAD:/core/bios/localboot.c
-> > >
-> > > I'm really not sure how it is supposed to work with a filesystem.
-> > >
-> > > [1] is a usage of it for rpi
-> >
-> > Yes, I did some searching on extlinux.conf and localboot and got a few
-> > hits on people using localcmd for when they need to run their own
-> > special thing, for various reasons, for example:
-> > https://stackoverflow.com/questions/54258960/applying-fdt-overlay-with-=
-u-boot-using-extlinux-conf
-> >
-> > > But other than that, even Gemini doesn't seems to have much idea.
-> >
-> > I'm only half surprised it didn't make something up for it.
->=20
-> I've been quite amazed at its capabilities recently. I can mostly get
-> good answers to quite complex questions and it is very fast now. I'm
-> just waiting for when I can start using it for development.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Oh no, please no. We don't have a policy yet, but no "AI" created code,
-please.
-
-> I wonder who maintains the extlinux stuff. Do you have any idea? It
-> would be nice to move it into a git tree and generate the spec from
-> there.
-
-I would say the syslinux project should be the authority unless they say
-otherwise.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---ZfSA+qa0kr09bc6E
+--GBNrFz5tVTuRLH94
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd+toAACgkQFHw5/5Y0
-tyz+dAwAjw7VepKlp5Gd33kmb8pU0wty/AtcRggXmYVnJd60mPGk9ja7NLimPAZE
-skYgnnAriNQzLdRbwt5TlZWNuzcsWzc9RWX9ENGNt1WcIG8vKMEOyJPO4z/PEQXV
-VEu4L2vMJjnWv2QC6hk214k8Z5gNS8XKNUhOANxkzPK7wyltEw/2Yz1rEaicsIcF
-gdBOBKT6Er/7Hs/IlzamUA9+hbLPIDAnkwKNx8Fb6P4wA/dT3a5wxGCbWy81tMzU
-T3TVI5Axompsgoe9kuF8OXWjXPqPBCILS/IoqGdKx0QO+ScpZHKUqlwzYyfoq5P2
-OI6nKf1OYSWMDhlW4dQxssPZe3OT+fum2lD5XNfTG+FLPklacYstNhp1U10n9bUY
-7a+f87j/lIftgY5eco+FNZyXQNwrj4w6CnsllZBwc6A9tngNBLC+Sl5ppGlIJXu9
-B89XKFg7yFUBs1bIr5NwT3cp7jSu99RfZy1XCAHdAeQeczlaRMR8Q9IVKW7slA4Q
-o6JutiTs
-=Dkm6
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd+wwkACgkQFHw5/5Y0
+tyztfwwAnnHwRIuWVfOwVYGG4ov6lDJSm9XsSoybXGr+3H5O6WvoPpelQJNFZEpp
+ECDUST8NiOEzSJySzqzrgPIp/hmHL9iLnMIttsIwYZOd5TOzyN9VcXdjmBBa6NaU
+7byAq6VN2dBYl+Ajh5fjPQl4sYoO5J/j1A7x6XaudoW6obmUUFNe8VI3kM1JsNjz
+yJaJ7nwgm3Kfua+0IwdNnd2BjP8qB0jW/JKRAoh5Eb2bi90J8VLPG0M1vu2EXjDK
+ChVpiLxLy8st6LeAUMSxoJoRlZ+KyYCUe+pRMavoA4tiw1wPXYtJzEXENu6GAS5k
+ygYisxURRutcO0VeeJ+EexRibfHqTw9xnjSbHrVe2vXUt2WvmR7lQti+L6i6jiXE
+qN+w8qZL/4gXlsc1K/RdmaOUTXfNwVHuAeXs/Xv+R6zjNNTR9QblISuu+qnhs5MO
+pK9zUm7YftwM2WAZ3BWmZtDDZyqzxilh2KeRwiWvcp3OXsPFwUOsDGE4jvwgwW6y
+5S2euqxJ
+=8SIB
 -----END PGP SIGNATURE-----
 
---ZfSA+qa0kr09bc6E--
+--GBNrFz5tVTuRLH94--
