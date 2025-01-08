@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F92E77188
-	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 07:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F07DE77188
+	for <u-boot@archiver.kernel.org>; Wed,  8 Jan 2025 07:12:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22A578006D;
-	Wed,  8 Jan 2025 08:11:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 015DF801E8;
+	Wed,  8 Jan 2025 08:12:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ly3QneKK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K7YUKNMz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25BB5801E8; Wed,  8 Jan 2025 08:11:46 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id 014EF803DC; Wed,  8 Jan 2025 08:12:50 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 487B08001F
- for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 08:11:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89E1A8006D
+ for <u-boot@lists.denx.de>; Wed,  8 Jan 2025 08:12:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-e39f43344c5so21769603276.1
- for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 23:11:43 -0800 (PST)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e537d9e3d75so24556498276.3
+ for <u-boot@lists.denx.de>; Tue, 07 Jan 2025 23:12:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736320302; x=1736925102; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1736320365; x=1736925165; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Al3NffFubdwcdjCyagFBJOkH+U19GjDUFdJpjKkJjuc=;
- b=ly3QneKKQAmIEfviEKIcb3mH8nm5LcJNNuolkBY6FyC49u13FGldZeBEXkk5SnliGA
- r9lcp1OokwRtqHwG2B+mMjGHLc12YYU4CpckpUrVTAHxRfIFIGK1g2wWgc/uCtpc1mgi
- M/hl1RbvGX5BzaKM9DDvLffoCp2gdaaXCwD73rLdk5Ev21F/MGwNlWBuwjbQlIzNeMRx
- ggSJ7PiNPcuHlphsTNKxa5TyryJhKwPZfMc2UPQ+e2CNUySSXWN5B1t3p58F7yy097BX
- byIlaF4KFlB/0q5CuOm+Z2S/uz78Q3pb+eKtm0cUtnfOwt+7FTUauUSni4ZO4ZRVakbc
- roWw==
+ bh=+D6kt4Ul6nIRN6uH/g4ZgVP8PIiBQvIfHUz9LfNHleU=;
+ b=K7YUKNMzxiYlk69uPuUYvinfNWb4nLqSIzl7Poc7syIGVANV5BU0DNRgFzmGMV14ty
+ hndT1G2R/se618bVcNygJH01cIHO49oQVz8X9Fu0hYuwSsg1vd/2wVJt63dw+ySdmEAV
+ URHocLAXqLM1DG5OyapZ2pqelgbPOMlzLdY7YccPLMwu2lD5H7tqmTyY8ZD8cNY7/QYb
+ DZndn1ov7mcP9yxYyl5jZTz8yjv9obMv1zy9S9jyn2t59ODrXQWL85OFDmnvNzlAReg5
+ 94cGjg6RDwHG+1+2z59cX5WbB3s/RxtLW8qlmB1hYFt3qjzbTn4axBmrc2+mKDgIehN6
+ rdWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736320302; x=1736925102;
+ d=1e100.net; s=20230601; t=1736320365; x=1736925165;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Al3NffFubdwcdjCyagFBJOkH+U19GjDUFdJpjKkJjuc=;
- b=EcjOhDKDyS7+MkK4Ga6KJ8GcBJkO674Mm/gMX/aDci2N9arz0XQe/nPo6butdxkBzh
- 5ea5hHDzkwSkEMtaxFnqbgB1oQ7M21meIPTDjslwFtrgd3UfJdawdPB3ih20ObZbT9nd
- B8PW5DPIrOPQia2s+pr4TwO29dKWhNArGC5dGtC5ipn/C+xs9eJpoPZ7gSTtPTg4JY4B
- h0QtQBAzleiyksrTPo+iyVtC/FJn5OT3cDIUJ34C5dx4yKsm1hPWdyQ/1hq7iDvBGqXO
- 2e+Rbszz4A+uFj5teyWCTEeBGA8WfLa9xW/qrMhWDuYIb+7rAyvWBy0NcMNtgQSRR1o8
- rfGQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWL9+PVQgYWWWAciC18bhlQbmr6G+ks0XUDgtibjH4CMiCscmy522IMFFCcnz9ogA19aJXtEG4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz72moanaBM/y0B4Z4TWZlZutCy2l1gMIgHtc9LRd93LQxo3P1A
- UMD8OncR6UkRhKedc43pljztklNRPKGoHOYj47ONfqRVk+6xwA0EONu6Qc6/+bahkI9n44drX9t
- ypwoHyPhFaQeEtgNCkpJf5drewA/DNQujxvWAHQ==
-X-Gm-Gg: ASbGncsJUDYqD9RNtu111T5/YeM2QeAuMHwWYu5NZ4i7OUr5AyMQVaKZYwMcQ4S4CFn
- hD666LA98OxRfUHqbuk/CmF6ID+LFfpIwwsuylA==
-X-Google-Smtp-Source: AGHT+IFrFkeytasKOKv/fOvQCfp403av7RxOzBB67ZiyTsxHEouFJHz5izqMUoHN/8e1Gh6hfUnft4JX3/Ehk2gbXZA=
-X-Received: by 2002:a05:6902:1b8d:b0:e38:b34d:121f with SMTP id
- 3f1490d57ef6-e54ee15ca25mr1258225276.15.1736320302081; Tue, 07 Jan 2025
- 23:11:42 -0800 (PST)
+ bh=+D6kt4Ul6nIRN6uH/g4ZgVP8PIiBQvIfHUz9LfNHleU=;
+ b=C8OuMgeuv3y7ks3NHrl2/vKEnK8Rec3StOustuQKQFCSq6uZVQ6LCXD0mATY/nPQQ7
+ z3Pz5Qqm8JyEuo8yJarHoVKrt2hANBpOLX/iq6zipYnnREWYHSsuvDWlR5X+xYEDl9bG
+ jUR0w43KtIw0aCsIfzu+V5aSYzlT/C6utp+SiJqDoLZaPkSgkaBUXIgwHO5wUms0b/uJ
+ slDrP951DDB31/qBROajB9g1ponbUVHoIP1oYOt+6rZJNW/k8WWlq3ZZCtCx6YSf2ijZ
+ Rr074KsAKs9mlo1JAXcW0SZ+U6ybtY1SGPGHr3hJakv8O00nUTvtttCXxI0ljdP668aC
+ bfgg==
+X-Gm-Message-State: AOJu0YxtIMdiCxo7EDrej33bqP8VY75cTETqTWPhjjvIlB0kD5BcMBvF
+ 35hN7Bf5S9o3QQC11A2hod7hmGxcxXnYXS9D4r/sSR/C5xrBV1XlKsSopLpGJpRJLfe6L3CAAr3
+ 5UYLHYf2WFtjPmAuteEJ+i6WClC2bAN6BxnVm3wPoq9IyRwum
+X-Gm-Gg: ASbGncuf42npbF/SDQHzpq0hX3RPkzkPtlJ4i4TYDv3z+hO6j/b77nunqN2tj/Ui+Se
+ qb4DLdToJvjYRmXo3YSsuRtqiQNdPPIVI6kqcJQ==
+X-Google-Smtp-Source: AGHT+IHeHwlG3VX/RYogC3YY7N7zpqTcEL9j+m3280GBmdAuGJE0b11ttiSfLL2sZ4QMa4ZhWjzLJqIzg8q6LpvtZKU=
+X-Received: by 2002:a25:1e45:0:b0:e3c:9548:e92d with SMTP id
+ 3f1490d57ef6-e54edf0b337mr933062276.5.1736320365352; Tue, 07 Jan 2025
+ 23:12:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
- <20250102181133.378867-4-heinrich.schuchardt@canonical.com>
- <CAC_iWjJhQQrNPyFDTAdo14X+x_CWer05+WVWu71xu_vxUb1iTw@mail.gmail.com>
- <05ffa461-d4ae-4522-b9db-b7ee34e20737@canonical.com>
-In-Reply-To: <05ffa461-d4ae-4522-b9db-b7ee34e20737@canonical.com>
+References: <20250106144755.3054780-1-sjg@chromium.org>
+ <20250106144755.3054780-3-sjg@chromium.org>
+ <CAC_iWjLrSEpHgTGK3WhHTGQ-SF5Zg6o_h14x++ot8FD+JAm3RA@mail.gmail.com>
+ <CAFLszTjaeMimD_0HczGXxJUhjDjP+-TjT6RdfW5XOzBFhg+hkQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjaeMimD_0HczGXxJUhjDjP+-TjT6RdfW5XOzBFhg+hkQ@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 8 Jan 2025 09:11:06 +0200
-X-Gm-Features: AbW1kvbTjQQBCZZctURz3e-Nak8TpeV21bU9oKUkMRA3D26N_q9B0YsyatupCqA
-Message-ID: <CAC_iWjKrr0rKi7SVN2rzSvkhCwOH+dTErdOEPJ2yuMQ-A1eDBg@mail.gmail.com>
-Subject: Re: [PATCH 3/4] efi_loader: install DXE services table
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- u-boot@lists.denx.de
+Date: Wed, 8 Jan 2025 09:12:09 +0200
+X-Gm-Features: AbW1kvacuKfrW3sVMUnu6G9Gn_W-_NdAuwxpHmgAoHAjRLDENwcBFJslhDtCawc
+Message-ID: <CAC_iWjLp3Yrr35CJLvZKM9nLS0X8PtOn7nQs205MZ69kO5R2CQ@mail.gmail.com>
+Subject: Re: [PATCH 2/8] efi_loader: Fix display of addresses in log
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,361 +92,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 7 Jan 2025 at 19:19, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, 7 Jan 2025 at 15:58, Simon Glass <sjg@chromium.org> wrote:
 >
-> On 07.01.25 14:30, Ilias Apalodimas wrote:
-> > On Thu, 2 Jan 2025 at 20:11, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> The debug version of the UEFI shell requires a DXE services table to exist.
-> >>
-> >> Implement the table and let all DXE functions return EFI_UNSUPPORTED.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   include/efi_dxe.h          |  54 ++++++++++++
-> >>   include/efi_loader.h       |   7 ++
-> >>   lib/efi_loader/Kconfig     |   7 ++
-> >>   lib/efi_loader/Makefile    |   1 +
-> >>   lib/efi_loader/efi_dxe.c   | 176 +++++++++++++++++++++++++++++++++++++
-> >>   lib/efi_loader/efi_setup.c |   6 ++
-> >>   6 files changed, 251 insertions(+)
-> >>   create mode 100644 include/efi_dxe.h
-> >>   create mode 100644 lib/efi_loader/efi_dxe.c
-> >>
-> >> diff --git a/include/efi_dxe.h b/include/efi_dxe.h
-> >> new file mode 100644
-> >> index 00000000000..5623189de0c
-> >> --- /dev/null
-> >> +++ b/include/efi_dxe.h
-> >> @@ -0,0 +1,54 @@
-> >> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> >> +/*
-> >> + *  DXE services table
-> >> + *
-> >> + *  Copyright (c) 2025 Heinrich Schuchardt
-> >> + */
-> >> +
-> >> +#ifndef _EFI_DXE_H
-> >> +#define _EFI_DXE_H 1
-> >> +
-> >> +#include <efi.h>
-> >> +
-> >> +/**
-> >> + * define DXE_SERVICES_SIGNATURE - DXE services signature ('DXE_SERV')
-> >> + */
-> >> +#define DXE_SERVICES_SIGNATURE 0x565245535f455844
-> >> +/**
-> >> + * define DXE_SERVICES_REVISION - DXE services revision (1.8)
-> >> + */
-> >> +#define DXE_SERVICES_REVISION 0x00010050
-> >> +
-> >> +/**
-> >> + * define EFI_DXE_SERVICES_TABLE_GUID - GUID of the EFI DXE services table
-> >> + */
-> >> +#define EFI_DXE_SERVICES_TABLE_GUID \
-> >> +       EFI_GUID(0x5ad34ba, 0x6f02, 0x4214, \
-> >> +                0x95, 0x2e, 0x4d, 0xa0, 0x39, 0x8e, 0x2b, 0xb9)
-> >> +
-> >> +struct efi_dxe_services {
-> >> +       struct efi_table_hdr hdr;
-> >> +
-> >> +       efi_status_t (EFIAPI *add_memory_space)(void);
-> >> +       efi_status_t (EFIAPI *allocate_memory_space)(void);
-> >> +       efi_status_t (EFIAPI *free_memory_space)(void);
-> >> +       efi_status_t (EFIAPI *remove_memory_space)(void);
-> >> +       efi_status_t (EFIAPI *get_memory_space_descriptor)(void);
-> >> +       efi_status_t (EFIAPI *set_memory_space_attributes)(void);
-> >> +       efi_status_t (EFIAPI *get_memory_space_map)(void);
-> >> +       efi_status_t (EFIAPI *add_io_space)(void);
-> >> +       efi_status_t (EFIAPI *allocate_io_space)(void);
-> >> +       efi_status_t (EFIAPI *free_io_space)(void);
-> >> +       efi_status_t (EFIAPI *remove_io_space)(void);
-> >> +       efi_status_t (EFIAPI *get_io_space_descriptor)(void);
-> >> +       efi_status_t (EFIAPI *get_io_space_map)(void);
-> >> +       efi_status_t (EFIAPI *dispatch)(void);
-> >> +       efi_status_t (EFIAPI *schedule)(void);
-> >> +       efi_status_t (EFIAPI *trust)(void);
-> >> +       efi_status_t (EFIAPI *process_firmware_volume)(void);
-> >> +       efi_status_t (EFIAPI *set_memory_space_capabilities)(void);
-> >> +};
-> >> +
-> >> +extern efi_guid_t efi_dxe_services_table_guid;
-> >> +
-> >> +#endif /* _EFI_DXE_H */
-> >> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> >> index c1258098217..d474866184f 100644
-> >> --- a/include/efi_loader.h
-> >> +++ b/include/efi_loader.h
-> >> @@ -663,6 +663,13 @@ efi_status_t efi_smbios_register(void);
-> >>    */
-> >>   efi_status_t efi_hob_list_register(void);
-> >>
-> >> +/**
-> >> + * efi_dxe_services_register() - install DXE services table
-> >> + *
-> >> + * Return:     status code
-> >> + */
-> >> +efi_status_t efi_dxe_services_register(void);
-> >> +
-> >>   struct efi_simple_file_system_protocol *
-> >>   efi_fs_from_path(struct efi_device_path *fp);
-> >>
-> >> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> >> index ec38a0ea352..ed3470508ff 100644
-> >> --- a/lib/efi_loader/Kconfig
-> >> +++ b/lib/efi_loader/Kconfig
-> >> @@ -384,6 +384,13 @@ config EFI_DT_FIXUP
-> >>            The EFI device-tree fix-up protocol provides a function to let the
-> >>            firmware apply fix-ups. This may be used by boot loaders.
-> >>
-> >> +config EFI_DXE
-> >> +       bool 'DXE services table'
-> >> +       default y
-> >> +       help
-> >> +         Install the DXE services table. The debug version of the UEFI shell
-> >> +         requires it.
-> >> +
-> >>   config EFI_LOADER_HII
-> >>          bool "HII protocols"
-> >>          default y
-> >> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> >> index 195ed8667fe..4f250f21811 100644
-> >> --- a/lib/efi_loader/Makefile
-> >> +++ b/lib/efi_loader/Makefile
-> >> @@ -33,6 +33,7 @@ obj-y += efi_console.o
-> >>   obj-y += efi_device_path.o
-> >>   obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_device_path_to_text.o
-> >>   obj-$(CONFIG_EFI_DEVICE_PATH_UTIL) += efi_device_path_utilities.o
-> >> +obj-$(CONFIG_EFI_DXE) += efi_dxe.o
-> >>   obj-y += efi_dt_fixup.o
-> >>   obj-y += efi_fdt.o
-> >>   obj-y += efi_file.o
-> >> diff --git a/lib/efi_loader/efi_dxe.c b/lib/efi_loader/efi_dxe.c
-> >> new file mode 100644
-> >> index 00000000000..f8920575b0c
-> >> --- /dev/null
-> >> +++ b/lib/efi_loader/efi_dxe.c
-> >> @@ -0,0 +1,176 @@
-> >> +// SPDX-License-Identifier: GPL-2.0-or-later
-> >> +/*
-> >> + *  DXE services table
-> >> + *
-> >> + *  Copyright (c) 2025 Heinrich Schuchardt
-> >> + */
-> >> +
-> >> +#include <efi_dxe.h>
-> >> +#include <efi_loader.h>
-> >> +
-> >> +efi_guid_t efi_dxe_services_table_guid = EFI_DXE_SERVICES_TABLE_GUID;
-> >> +
-> >> +static efi_status_t EFIAPI add_memory_space(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI allocate_memory_space(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI free_memory_space(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI remove_memory_space(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI get_memory_space_descriptor(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI set_memory_space_attributes(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI get_memory_space_map(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI add_io_space(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI allocate_io_space(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI free_io_space(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI remove_io_space(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI get_io_space_descriptor(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI get_io_space_map(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI dispatch(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI schedule(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI trust(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI process_firmware_volume(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static efi_status_t EFIAPI set_memory_space_capabilities(void)
-> >> +{
-> >> +       EFI_ENTRY();
-> >> +
-> >> +       return EFI_EXIT(EFI_UNSUPPORTED);
-> >> +}
-> >> +
-> >> +static struct efi_dxe_services efi_dxe_services = {
-> >> +       .hdr = {
-> >> +               .signature = DXE_SERVICES_SIGNATURE,
-> >> +               .revision = DXE_SERVICES_REVISION,
-> >> +               .headersize = sizeof(struct efi_dxe_services),
-> >> +       },
-> >> +       .add_memory_space = add_memory_space,
-> >> +       .allocate_memory_space = allocate_memory_space,
-> >> +       .free_memory_space = free_memory_space,
-> >> +       .remove_memory_space = remove_memory_space,
-> >> +       .get_memory_space_descriptor = get_memory_space_descriptor,
-> >> +       .set_memory_space_attributes = set_memory_space_attributes,
-> >> +       .get_memory_space_map = get_memory_space_map,
-> >> +       .add_io_space = add_io_space,
-> >> +       .allocate_io_space = allocate_io_space,
-> >> +       .free_io_space = free_io_space,
-> >> +       .remove_io_space = remove_io_space,
-> >> +       .get_io_space_descriptor = get_io_space_descriptor,
-> >> +       .get_io_space_map = get_io_space_map,
-> >> +       .dispatch = dispatch,
-> >> +       .schedule = schedule,
-> >> +       .trust = trust,
-> >> +       .process_firmware_volume = process_firmware_volume,
-> >> +       .set_memory_space_capabilities = set_memory_space_capabilities,
+> Hi Ilias,
+>
+> On Tue, 7 Jan 2025 at 06:37, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > Do we plan on ever implementing those? If not we could use a single
-> > function returning EFI_UNSUPPORTED instead of all of them for code
-> > size reasons
->
-> Currently I don't plan to implement these. But I wanted to be able to add
->
->      #define _DEBUG 1
->
-> to find out which of the functions is possibly used.
->
-> On x86 and sandbox I don't think our memory restrictions are very tight.
->
-> Best regards
->
-> Heinrich
-
-Fair enough
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->
+> > Hi Simon,
 > >
-> > Cheers
-> > /Ilias
-> >> +};
-> >> +
-> >> +efi_status_t efi_dxe_services_register(void)
-> >> +{
-> >> +       struct efi_dxe_services *dxe;
-> >> +
-> >> +       dxe = efi_alloc(sizeof(struct efi_dxe_services));
-> >> +       if (!dxe)
-> >> +               return EFI_OUT_OF_RESOURCES;
-> >> +
-> >> +       memcpy(dxe, &efi_dxe_services, sizeof(struct efi_dxe_services));
-> >> +
-> >> +       return efi_install_configuration_table(&efi_dxe_services_table_guid, dxe);
-> >> +}
-> >> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> >> index 393b690c3ee..796da5d5678 100644
-> >> --- a/lib/efi_loader/efi_setup.c
-> >> +++ b/lib/efi_loader/efi_setup.c
-> >> @@ -260,6 +260,12 @@ efi_status_t efi_init_obj_list(void)
-> >>          if (ret != EFI_SUCCESS)
-> >>                  goto out;
-> >>
-> >> +       if (IS_ENABLED(CONFIG_EFI_DXE)) {
-> >> +               ret = efi_dxe_services_register();
-> >> +               if (ret != EFI_SUCCESS)
-> >> +                       goto out;
-> >> +       }
-> >> +
-> >>          if (IS_ENABLED(CONFIG_EFI_ECPT)) {
-> >>                  ret = efi_ecpt_register();
-> >>                  if (ret != EFI_SUCCESS)
-> >> --
-> >> 2.47.1
-> >>
+> > On Mon, 6 Jan 2025 at 16:48, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > The allocate/free-pages functions return an address, so there is no need
+> > > to convert it. Fix this.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Fixes: c824a96d76d ("efi_loader: Use the log with memory-related...")
+> >
+> > I can't find that commit in -master. Is there anything I am missing?
 >
+> Sort-of. You, Tom and Heinrich NAKed this series. See [1]
+
+Ok, please don't cc me on patches that are not destined for master or
+next. I have no interest in out-of-tree work
+
+
+Thanks
+/Ilias
+>
+> > >  lib/efi_loader/efi_log.c | 5 ++---
+> > >  1 file changed, 2 insertions(+), 3 deletions(-)
+> > >
+> > > diff --git a/lib/efi_loader/efi_log.c b/lib/efi_loader/efi_log.c
+> > > index 4b9c6727fe7..ad490bb431c 100644
+> > > --- a/lib/efi_loader/efi_log.c
+> > > +++ b/lib/efi_loader/efi_log.c
+> > > @@ -340,8 +340,7 @@ void show_rec(int seq, struct efil_rec_hdr *rec_hdr)
+> > >                 show_ulong("pgs", (ulong)rec->pages);
+> > >                 show_addr("mem", (ulong)rec->memory);
+> > >                 if (rec_hdr->ended) {
+> > > -                       show_addr("*mem",
+> > > -                                 (ulong)map_to_sysmem((void *)rec->e_memory));
+> > > +                       show_addr("*mem", rec->e_memory);
+> > >                         show_ret(rec_hdr->e_ret);
+> > >                 }
+> > >                 break;
+> > > @@ -349,7 +348,7 @@ void show_rec(int seq, struct efil_rec_hdr *rec_hdr)
+> > >         case EFILT_FREE_PAGES: {
+> > >                 struct efil_free_pages *rec = start;
+> > >
+> > > -               show_addr("mem", map_to_sysmem((void *)rec->memory));
+> > > +               show_addr("mem", rec->memory);
+> > >                 show_ulong("pag", (ulong)rec->pages);
+> > >                 if (rec_hdr->ended)
+> > >                         show_ret(rec_hdr->e_ret);
+> > > --
+> > > 2.34.1
+> > >
+>
+> Regards,
+> Simon
+>
+> [1] https://lore.kernel.org/u-boot/CAC_iWjKtaN54B98OKbkoXkC_GmKJ=x+M4=UY_O6roSOpZaDxag@mail.gmail.com/
