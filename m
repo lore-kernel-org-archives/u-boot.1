@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E742E77199
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:12:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F104E77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:14:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 186C780602;
-	Thu,  9 Jan 2025 16:12:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C72AE80602;
+	Thu,  9 Jan 2025 16:14:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jAoHv5g/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gv7CmHgP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D89AD8066C; Thu,  9 Jan 2025 16:12:18 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id A59848066C; Thu,  9 Jan 2025 16:14:22 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79F6F805E2
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:12:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31DE5805E2
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:14:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-2f441791e40so1432422a91.3
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:12:16 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6dccccd429eso7753996d6.3
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:14:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736435535; x=1737040335; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cw1NRIWqGCu3mZjQmjezK2NlJ4hcJkAPbRYFhDGtL2U=;
- b=jAoHv5g/FHcmIHAoTg32ikEmaXcwB4v+ri0mdOD1E6g6QtqYl6FIM5Ad8z6f7HkAZ0
- UXY5xbcd022gVAC3UAI/4HrPB15Z0eZS5kH7YIv3m0L0ZcUghr0aD7UagRsCr+UXbVJ2
- stotYPGpZU43DcL8CFtSggkQeXuxVGehJD8P8=
+ d=konsulko.com; s=google; t=1736435659; x=1737040459; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sD4Rm1Xb7fJKGK0KzYbS0ppe5QISAuNWUFykOZK7ylc=;
+ b=gv7CmHgPqhSC9TPLhA+pzxdTC+yRBlVn8k4Y5fC9N31FN1Pc948zaIoIUv/KCQbTR/
+ XOUYnEGav0zPf6Wf+7RCGkJnZybfwvJoHAsV+EII9I1goE1J7/yDR+zyNlQnN8cP0Rtf
+ E3temuAc8l6lg0qEdKnBbNgDCxK4VSztjipos=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736435535; x=1737040335;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cw1NRIWqGCu3mZjQmjezK2NlJ4hcJkAPbRYFhDGtL2U=;
- b=jWyAy6zhPZt+gvV54BFQK4EeaNChr2JyOOQ43H8D+jGYJJghQQuJIq6PojK5eVGPw3
- GBZhNP80Mh4xTYbhAViWHcEt0jWWsfuXtmkHh/wTRL0/FVgsG7rHLU+1npGv8eWAWAhP
- 4q+5j3zcKRMeFrmojQKgEzEMZCbSU/6lKJvHTWbOSUkp8RTLgE2fc2zKEZ5vpJXDij4k
- ziXf4KLhWmRjDH18YD2cxIOescdjwsNIeOhz8SBxBY4c0PcmAZfYkuBwXvQlDi+xxdsy
- loP6UxiKl+7Ok0+/uFBYoDB4Oy6/QMj9CRVVhqDAoJKa8qGUN4t7FTDcqOBEcCXwbLAQ
- isfA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX/E24CC+rld1/LPwniA6UB+FFEX2ujeUTjfJrC7NQraYUaXwIOj/16P5vxvfl2y3PiQGKi3CI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy051kmS5TtH/45BB2YehgyMP+7qT3P2I29tbgsrZAV9CpV1Xkm
- hon0jwKFfEWrQJPQhRerUgS4d6N+5RmB02yMlCXnieZTTz0e7E2mNhQe4cKIkuOxDUOKAq/1QPo
- WP7lxbhY647ky1v7oudKCMEzLZrFs0lytCXf3NOjXFs03NCM=
-X-Gm-Gg: ASbGnctM3YIZOekzBNjzwECEbEEwf+7Bk6JpLjqHmeQw5MKRWlw1h8Gh80Dn5G/AwzY
- wJYJ8r9CJwmdLZzk4jtaZFM/rhC8gwoXX7YK58A4=
-X-Google-Smtp-Source: AGHT+IG7e+3rQvBSsfVzpiS2cCYGvRLdN3u/5+KnuxYuKPE55yZQ8LsX/49OREPwPNwEKAZ/Ypx+DJfKdS3vOADCr4A=
-X-Received: by 2002:a17:90b:2748:b0:2f1:30c8:6e75 with SMTP id
- 98e67ed59e1d1-2f5490e89e0mr9024850a91.32.1736435535005; Thu, 09 Jan 2025
- 07:12:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736435659; x=1737040459;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sD4Rm1Xb7fJKGK0KzYbS0ppe5QISAuNWUFykOZK7ylc=;
+ b=tXBhFYNx1Rnj2VeeBLYf3Y7i1Fr2IWAVrq+JyjBcUZhylGXP2LD6QpVZ8E3QV5HCWQ
+ /qM81EBeR+5Iu6YT9j/l12RS7rgK+v8o4MfNH7cuXTSrjnVFEWIR48DlBv3wK/xYKL6I
+ Qy5hJAqSuux+ANf74ouKAU3Leh8b8qhwo4JHbW3y2+mOqIRrSET0pxDkjuaLCSpdNNeH
+ k0Lvus2RtCXC0APvXAueZ5m5TcBhyavzxF2CuoHT2HLr1EfxRnayIOsJ6ZpJm7sJwAPs
+ uaum+nZfvgVkNWYEQDPrT7nQiMp177l9hOk1flfyi4CvOFDfbsmZUQxZ3ltxeuHJcjvT
+ E5vA==
+X-Gm-Message-State: AOJu0YxZhoKUn02e41xpQ3sHU1PHMEPSOHOgadP/u9ulDyUc5FlSHdeo
+ NXbvsFR2nsCye5WZRcV1th0vvhcEMaS4FPoB7N1qSyNImpCvUv4rtsktJlUWTjk=
+X-Gm-Gg: ASbGncuEkKZS819biEwfTKhOuEWPOIgaaOfA24Ep3E1SbHLz55SKG6I17Q2VSpuLp2s
+ hLyA/J13UbngBHw27JO8Bz6FuZ0/ZC97G6Pt8+U9ajdDQoOV6Q7SbxPmeh6VFBgkgMgLF7TUT6Q
+ ds2fczlXfF9TzqhFlq5PfUVDL+ueEB8wQ+RSupP3R9L1XWRHrBUmYS2oOtq4yK+nv22zuegZN9a
+ Dum/vpQAXOEhuHZQyOAXde2R81tZ9mXGYcM4n95M9e0AbwyL1wqL14=
+X-Google-Smtp-Source: AGHT+IGUDAB0GsRV1/dQeFiJ6p6sEDP9LtiHFR67XdkX/jG76e5cQU0iin3fJVriTM/jZJ4ZGhzp5A==
+X-Received: by 2002:a05:6214:4890:b0:6d8:a70d:5e48 with SMTP id
+ 6a1803df08f44-6df9b2ad13dmr109714846d6.30.1736435658756; 
+ Thu, 09 Jan 2025 07:14:18 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dfabf36ff1sm1996766d6.38.2025.01.09.07.14.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2025 07:14:18 -0800 (PST)
+Date: Thu, 9 Jan 2025 09:14:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
+ Marek =?iso-8859-1?Q?Moj=EDk?= <marek.mojik@nic.cz>,
+ Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: Re: [PATCH v2 21/33] emulation: fdt: Relax condition for
+ OF_HAS_PRIOR_STAGE
+Message-ID: <20250109151414.GV3476@bill-the-cat>
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-22-sjg@chromium.org>
+ <20250106214025.GB3476@bill-the-cat>
+ <CAFLszTjt3mr+ZZF0SmKdhDKsT8khmLG8NNsTnmWSXbX9+ei5=g@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241113150938.1534931-1-sjg@chromium.org>
- <20241113150938.1534931-5-sjg@chromium.org>
- <517d087e-4ac5-4fd5-a37f-d4d3aaa534bd@gmx.de>
- <CAFLszTjbDHvMvv3U+SaW0_7b4oajW8RRf6KYbF_jex34en6ByA@mail.gmail.com>
- <20250109150454.GT3476@bill-the-cat>
-In-Reply-To: <20250109150454.GT3476@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Jan 2025 08:11:58 -0700
-X-Gm-Features: AbW1kvbP2KdfuBg6REtX0zWT7ChngKYfEmXSe9a2WDsqNc1a0z7KDOYRf-TpvzM
-Message-ID: <CAFLszTgtP5vXT+HsvHP8i50KihetHf2-h3KPp2-f6M4XJ3+i8g@mail.gmail.com>
-Subject: Re: [PATCH v5 4/8] RFC: Revert "bootstd: Make efi_mgr bootmeth work
- for non-sandbox setups"
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oJ1cKdDyL9MXIFZc"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjt3mr+ZZF0SmKdhDKsT8khmLG8NNsTnmWSXbX9+ei5=g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,111 +102,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Thu, 9 Jan 2025 at 08:05, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Jan 09, 2025 at 08:01:13AM -0700, Simon Glass wrote:
-> > Hi Heinrich,
+--oJ1cKdDyL9MXIFZc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jan 09, 2025 at 08:01:22AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 6 Jan 2025 at 14:40, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sat, 4 Jan 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > On Mon, Jan 06, 2025 at 07:32:17AM -0700, Simon Glass wrote:
+> > > QEMU always gets its devicetree from the OF_BOARD mechanism so we sho=
+uld
+> > > not depend on !BLOBLIST here.
 > > >
-> > > On 11/13/24 16:09, Simon Glass wrote:
-> > > > This is another option to fix sunxi booting with bootstd, which may be
-> > > > better since it will work for all boards. We can then figure out how to
-> > > > automatically and deterministicaly decide when bootmgr should be used.
-> > > >
-> > > > This reverts commit f2bfa0cb17948aa4a0fa20fdf9014296b9c4d9c7.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > > If this patch is applied, we don't need to drop bootmgr for sunxi
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >   boot/bootmeth_efi_mgr.c | 18 +-----------------
-> > > >   1 file changed, 1 insertion(+), 17 deletions(-)avilable
-> > > >
-> > > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> > > > index 23ae1e610ac..095fa74fc60 100644
-> > > > --- a/boot/bootmeth_efi_mgr.c
-> > > > +++ b/boot/bootmeth_efi_mgr.c
-> > > > @@ -14,8 +14,6 @@
-> > > >   #include <command.h>
-> > > >   #include <dm.h>
-> > > >   #include <efi_loader.h>
-> > > > -#include <efi_variable.h>
-> > > > -#include <malloc.h>
-> > > >
-> > > >   /**
-> > > >    * struct efi_mgr_priv - private info for the efi-mgr driver
-> > > > @@ -48,27 +46,13 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
-> > > >   static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> > > >   {
-> > > >       struct efi_mgr_priv *priv = dev_get_priv(dev);
-> > > > -     efi_status_t ret;
-> > > > -     efi_uintn_t size;
-> > > > -     u16 *bootorder;
-> > > >
-> > > >       if (priv->fake_dev) {
-> > > >               bflow->state = BOOTFLOWST_READY;
-> > > >               return 0;
-> > > >       }
-> > > >
-> > > > -     ret = efi_init_obj_list();
-> > > > -     if (ret)
-> > > > -             return log_msg_ret("init", ret);
-> > > > -
-> > > > -     /* Enable this method if the "BootOrder" UEFI exists. */
-> > > > -     bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
-> > > > -                             &size);
-> > > > -     if (bootorder) {
-> > > > -             free(bootorder);
-> > > > -             bflow->state = BOOTFLOWST_READY;
-> > > > -             return 0;
-> > > > -     }
-> > > > +     /* To be implemented */
+> > > The logic of PRIOR_STAGE is quite a mess, unfortuantely. We should re=
+ly
+> > > only standard passage to receive things from the prior stage. QEMU
+> > > should implement standard passage to provide its devicetree to U-Boot
+> > > However Linaro has blocked my patch to provide devicetree additions[1=
+],
+> > > so little breath should be held in respect of either change.
 > > >
-> > > The EFI boot manager can boot based on:
+> > > [1] https://lore.kernel.org/qemu-devel/20210926183410.256484-1-sjg@ch=
+romium.org/
 > > >
-> > > * variable BootOrder
-> > > * variable BootNext
-> > > * an existing file EFI/BOOT/BOOT<arch>.EFI
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Fixes: 2b71470628c dts: OF_HAS_PRIOR_STAGE should depend on !BLOBLIST
+> > > ---
 > > >
-> > > It obsoletes bootsmeth_efi.
+> > > (no changes since v1)
 > > >
-> > > >
-> > > >       return -EINVAL;
+> > >  dts/Kconfig | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
 > > >
-> > > We must always run the EFI boot manager if it is enabled. So -EINVAL is
-> > > wrong here.
+> > > diff --git a/dts/Kconfig b/dts/Kconfig
+> > > index 41a758e83a6..fc25a854708 100644
+> > > --- a/dts/Kconfig
+> > > +++ b/dts/Kconfig
+> > > @@ -191,7 +191,7 @@ config OF_BOARD
+> > >
+> > >  config OF_HAS_PRIOR_STAGE
+> > >       bool
+> > > -     depends on !BLOBLIST
+> > > +     depends on !BLOBLIST || ARCH_QEMU
+> > >       help
+> > >         Indicates that a prior stage of the firmware (before U-Boot p=
+roper)
+> > >         makes use of device tree and this board normally boots with t=
+hat prior
 > >
-> > Well, I don't believe you have a solution, then.
-> >
-> > You did suggest putting bootmgr later, as we discussed on irc.
-> >
-> > For now, I think we should apply this patch (and series), while we
-> > sort out how to make bootmgr more incremental. It should not be
-> > scanning every available device before it starts, since that can be
-> > very slow.
->
-> Heinrich and I talked the other day, and we think the right path is the
-> "later" path, where we don't try and use efi bootmanager until
-> everything has been probed, and also drop the single "efi" option. This
-> should mean that by the time we would be trying efi bootmanager most if
-> not everything that needs to be probed has been probed. It doesn't make
-> any sense to have "efi bootmanger" be more incremental as conceptually
-> it's point is to show the user all the options.
+> > Since OF_HAS_PRIOR_STAGE has no prompt, it shouldn't have a depends line
+> > either really. I believe 2b71470628c is part of an attempt to say that
+> > if you have bloblist enabled then that's how the previous loader needs
+> > to pass the device tree. But indeed that's not quite how to enforce that
+> > kind of demand, so we should just drop the restriction here (and some
+> > other time fix the "imply OF_HAS_PRIOR_STAGE" to be "select
+> > OF_HAS_PRIOR_STAGE" because it's not prompted, imply is the wrong
+> > keyword.
+>=20
+> So, just drop the 'depends' line?
 
-What is the single 'efi' option? I hope you don't mean the EFI bootmeth.
+Correct.
 
-Putting bootmanager at the very end is OK with me, if we really cannot
-figure out a way to know whether the system is using it or now. It is
-'putting it in the middle' that I don't like.
+> I don't understand all this prior-stage stuff and I believe it is the
+> Wrong Direction. We should just say where the DT comes from.
 
-How to handle the case where bootorder only specifies a subset of
-options? Ideally we would just probe devices related to that subset.
-That is what I was getting at.
+Yes, but we're all keen to not rehash years worth of discussion here
+either.
 
-Regards,
-Simon
+--=20
+Tom
+
+--oJ1cKdDyL9MXIFZc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd/58YACgkQFHw5/5Y0
+tyx+DQv/fq/+hy5PPpYzGWOEuN64GKBllD6An3W86fT0rsjfF06xiK9D1wBWPxTC
+WQsZdvZCEzAgjpSJkUDxkJnW2TbGuOYL4YuBQJX1jlD2Y1+N7lXLqzf9zM56jNRP
+uj3iIWmdFEaG1+uZDvW7wAk8weZAPJP1ovmEjaUILUX8ctsu7Fn/ISi1pjtH7+5s
+AVzRaEfJA4aSIE6984OkgdxiC1TyiNsJVy5cpY2z6yuS7JXdh68LpBMkldmMHYv8
+RVSKiKIm5rctv2qiSWIOzEpb56pw9SzhF31CA8IY5f5+TWhOyKskcwBbc91qBW+Z
+BicMm1mdOrXru0nODLw/EoRK30aGn/NDtMsV4toD+JtV6waJPS2elT63hNLPUYSU
+JreXSdkhw/A1D13uhOdImBSAt9a6U6k5Hx0kz0yL7DYkuFVCLn3RC152z4W3fJQd
+HKHKCDFl0InWZDwnQeA8cJSqWdIT8S6a0/m63IDY1Q62yRfH22BbSkDoha6GN68H
+859SNqox
+=xpQ5
+-----END PGP SIGNATURE-----
+
+--oJ1cKdDyL9MXIFZc--
