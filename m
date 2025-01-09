@@ -4,80 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0B42E77199
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 12:33:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 279D6E77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 12:33:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5813380714;
-	Thu,  9 Jan 2025 13:31:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B217B805EA;
+	Thu,  9 Jan 2025 13:31:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QleteA7y";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FhqVnuVS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C64C280704; Thu,  9 Jan 2025 13:31:23 +0100 (CET)
-Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
- [IPv6:2607:f8b0:4864:20::e2a])
+ id 2BE428005B; Thu,  9 Jan 2025 13:31:39 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D38D80619
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 13:31:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1B50805EA
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 13:31:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-4afed12283eso656111137.1
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 04:31:19 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aaf6b1a5f2bso376912666b.1
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 04:31:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736425878; x=1737030678; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wF5K/Beq8EQBuJPqMd8lDc5q0liPhy5jrIzOX64EXJY=;
- b=QleteA7yfAkV8eaUUtRRMsbcLMqyaF2Sar6T+EF8HcqsJdmIEeNHqIgVI+QRAnTFgs
- rH60DwY/zn9WvG3ViuZ6iO9bfV7+q3Cwoxo50USGS5KU/VINkXJgLRHs+/r5hPApixX1
- sSRwKfz58PXWcZObQI2Lliz+wY7aNqDoACeOA=
+ d=chromium.org; s=google; t=1736425895; x=1737030695; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EZQwjQXsGBBT13xCMysjGoS3c+Up+M4Y2sLc5Lwvl9U=;
+ b=FhqVnuVSGYK31KG0xHBuL3vrmCrmUtpy9K/jXaEKGd4zNgbvoStfNEgaysOKAH9Idz
+ iCXZ1JIqiYa83ZSXZGm/1vz2g/mQduaFMs9vnUwACBEKg+wQFexbDts4JeSbMUoNIDap
+ pHXOz8h8jI8Y14sqeAh3VNddElS+reqX9EiAU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736425878; x=1737030678;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wF5K/Beq8EQBuJPqMd8lDc5q0liPhy5jrIzOX64EXJY=;
- b=vRUo7BVafHIMw+qYSd7Uv5u6APJ1FqCIcqMX6DdBiMs53PhOFkXxDOTRCGU1Ajlzki
- QLkqIgPrUeKgpNN8ZA1TPEMfdU9mtAh+JG4+kg8Rs8UvYzG+OyKTdeBIw0rMBq9hTE4k
- 8ZnK0gf7r4wPW9IQfwaFKu+o0Y9psViorhfQ3uXTa0yNJEjSJmchs008IWcEWzNA9Rja
- i95PCsF6f0huTcRLo8ZtctQdsACzwyDpAsjaYRn2fk3BPeKbDR1kURC+pfY9BdAZvyrP
- z9A2TSsPUlxXySlATwPusCFa8Ds4xtqWeTUOoIgFhz46+rOQefpjYZolAaTzdzoElDK1
- S+ZA==
-X-Gm-Message-State: AOJu0YzhqV7cQVT+hvClyHAQzn+JbE5/OJQSAQwQNOGmL2FR02CaRsAd
- aasq5u3Yc0Pfs73xpbZ0COoKfgmlDAvM6ovcr0+agzZy4Pd/BC3Y/PQdMHOdxz8A/MZkS9xUuu4
- =
-X-Gm-Gg: ASbGncvjs0l9HqQAIF2VoJCDNRi+P24CN/zreouWs+O1Hv26rrYsDoqMaogrdE+5RIJ
- qjjM2XBdcxq3ZczMOgi6gkpHJ3m6qkvORWPx55GOh0tgQrSgLqPAIpeeem2MjXxQbVysXQaioXm
- P+jYyzyWIrXBx/kFeM5CPl6PJtrXlF0IzU6QAbVgJyVnbL8iujAcwBU4jJFAOnCEi0uHsjc/yiV
- 8cHry5nIsLbNJCKbGyC7Ck2bNHSkwX5QK8SmR0Yo7b1kMhsZYS9McUuBxZQIKFqM1d9meZgCYD6
- 7Mvi6lFzXjLY08eJsA==
-X-Google-Smtp-Source: AGHT+IEX6orRTsEMRjLj2ZnGckzHfYL9EQ+Ir55CidVP/VxnUJtVr/GjBcDtslXJafP1dqzcgBQQvA==
-X-Received: by 2002:a05:6e02:3201:b0:3a7:4e3e:d03a with SMTP id
- e9e14a558f8ab-3ce3a8e1e77mr46470495ab.22.1736425866846; 
- Thu, 09 Jan 2025 04:31:06 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f836csm281678173.20.2025.01.09.04.31.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 04:31:05 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 14/15] vbe: Support loading SPL images
-Date: Thu,  9 Jan 2025 05:30:09 -0700
-Message-Id: <20250109123010.4005298-15-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250109123010.4005298-1-sjg@chromium.org>
-References: <20250109123010.4005298-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1736425895; x=1737030695;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EZQwjQXsGBBT13xCMysjGoS3c+Up+M4Y2sLc5Lwvl9U=;
+ b=ov/6kCaAanyj+lXVt7gnLa9UoJZdvQiZX8n3EzQfaCKCpr8qxW+zc/lKBsPETI5BSq
+ tKcmxoqbFklLRmqTDaHummKFNZxpEhg6HMZHYHsApYO3XmkTzhKlWNtt+TZTORb2RIti
+ HQ5UGRZaYlCJEJJiThoSXA7Dn5jyrQ+zjXCkx+inuH0qg6PjIMBRgqg5qiUz9ByHown4
+ RGwJPZZ499TEmSGMRwyQiB0Ua2HY/y12+pBL4FOMBP+HOwBy50iW6hl5Eo7RyZqA5gQk
+ e5G/AK11n8uK9CjT0ARbkK+WqyqrMTicciax9af75JptxuReuYGd7xi2pXWfRRPzRLZt
+ va0w==
+X-Gm-Message-State: AOJu0YwIK8kWFuS+4BLtNVRUsOPC3wo1N2AX3IfU3h6TUZCglymVAqC7
+ R3iv/AM/60dwEhbfROc22K8mC3gNnAz7ZYtnspp/XlJeHj0wPO6t43sBSGx1Xq16h+7J1ELlSei
+ u4LacV4lnf15RVtnI3UdlO694Ff0bv/Ndvv8q
+X-Gm-Gg: ASbGncvheO++WobFRLCrAs2s9kyRJL75dOQf9WZUzycQmF68TjXnWeoxDQJIY9w2YKH
+ Br3EvwxuRMqbUaaDhKEvqMUs6M0GZvusWLftv+J0=
+X-Google-Smtp-Source: AGHT+IFnQ93VQwqQeS4jssaX6NCZvIHMuNu00m6xN43V1/abIZY29ydFdqdszshWifJXOgPtgukr/4NZ3mZWJ0HfiiA=
+X-Received: by 2002:a17:907:1b05:b0:aab:a02c:764e with SMTP id
+ a640c23a62f3a-ab2c3c7a0c6mr301493666b.14.1736425895109; Thu, 09 Jan 2025
+ 04:31:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241220040120.3245610-1-sjg@chromium.org>
+ <20241220040120.3245610-5-sjg@chromium.org>
+ <20241220145609.GD1505244@bill-the-cat>
+ <CAFLszTjzP+vm1YoUX_avNq4_4qnUtNzzjLyFocEhJYrCA7cGOA@mail.gmail.com>
+ <20241220172348.GJ1505244@bill-the-cat>
+ <CAFLszTjMWU7f_Db+qp6hFecx=mv+54ojX+zSZcrV-2CxT5dcxw@mail.gmail.com>
+ <20241220204840.GM1505244@bill-the-cat>
+ <CAFLszThNrYMZtiPRewdvY-ip6XmHKdLFbQ5OHZLTsULpiJZKsw@mail.gmail.com>
+ <20250108173151.GL3476@bill-the-cat>
+In-Reply-To: <20250108173151.GL3476@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 9 Jan 2025 05:31:23 -0700
+X-Gm-Features: AbW1kvZvJ51AgMsiAb8ZT38WW1K3EFcClglGM764gmh64nmDQseuj0zmfdxSE-Q
+Message-ID: <CAFLszTj2TSZYHUWUA2GmXrYQQWH8=vxqs80GCCH1a8sJre69Ug@mail.gmail.com>
+Subject: Re: [PATCH 4/5] pxe_utils: Support a backup for localboot
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Richard Weinberger <richard@nod.at>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,196 +106,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-VBE needs to load different images from a FIT depending on the xPL phase
-in use. The IH_PHASE value is used to select the image to load.
+On Wed, 8 Jan 2025 at 10:31, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Jan 08, 2025 at 10:04:07AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 20 Dec 2024 at 13:48, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Dec 20, 2024 at 10:37:34AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Fri, 20 Dec 2024 at 10:23, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Fri, Dec 20, 2024 at 10:18:17AM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Fri, 20 Dec 2024 at 07:56, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Thu, Dec 19, 2024 at 09:01:19PM -0700, Simon Glass wrote:
+> > > > > > >
+> > > > > > > > The current localboot implementation assumes that a 'localcmd'
+> > > > > > > > environment variable is provided, with the instructions to follow. This
+> > > > > > > > may not be included, so provide a fallback in that case.
+> > > > > > > >
+> > > > > > > > Add a test image and test as well.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > >
+> > > > > > > This is a pretty niche feature, I had to dig around a bit to see how
+> > > > > > > it's specified elsewhere (not really) and how it's used. And I think
+> > > > > > > that based on how it's used, making up a bootcmd when localcmd is
+> > > > > > > undefined is the wrong approach. It's the hook for "run what I defined
+> > > > > > > in the environment", so if not set erroring back out seems appropriate.
+> > > > > >
+> > > > > > Yes, but unfortunately it seems to be used and we should support it.
+> > > > > > The problem with scripts is that we don't know the boot device, etc,
+> > > > > > so it needs to be integrated into PXE. I did consider putting
+> > > > > > something in bootstd, but we only find out that it is requesting a
+> > > > > > localboot when actually running the extlinux bootmeth, so this is what
+> > > > > > I came up with.
+> > > > > >
+> > > > > > It will be interesting to see if any other cases come up.
+> > > > >
+> > > > > It would be helpful at this point I think if you can point to how the
+> > > > > code for handling this case (the LOCALBOOT keyword followed by an
+> > > > > integer) in other projects so that we can be compliant with what's
+> > > > > expected, even if it's poorly documented.
+> > > >
+> > > > Yes, it seems very hard to find anything at all.
+> > > >
+> > > > The implementation in syslinux uses the BIOS to jump to a boot sector:
+> > > >
+> > > > https://repo.or.cz/syslinux.git/blob/HEAD:/core/bios/localboot.c
+> > > >
+> > > > I'm really not sure how it is supposed to work with a filesystem.
+> > > >
+> > > > [1] is a usage of it for rpi
+> > >
+> > > Yes, I did some searching on extlinux.conf and localboot and got a few
+> > > hits on people using localcmd for when they need to run their own
+> > > special thing, for various reasons, for example:
+> > > https://stackoverflow.com/questions/54258960/applying-fdt-overlay-with-u-boot-using-extlinux-conf
+> > >
+> > > > But other than that, even Gemini doesn't seems to have much idea.
+> > >
+> > > I'm only half surprised it didn't make something up for it.
+> >
+> > I've been quite amazed at its capabilities recently. I can mostly get
+> > good answers to quite complex questions and it is very fast now. I'm
+> > just waiting for when I can start using it for development.
+>
+> Oh no, please no. We don't have a policy yet, but no "AI" created code,
+> please.
 
-Add the required logic to handle this. For compatibility with the
-SPL-loader driver, fill out a struct spl_image_info with the details
-needed to boot the next phase.
+lol me too :-)
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+>
+> > I wonder who maintains the extlinux stuff. Do you have any idea? It
+> > would be nice to move it into a git tree and generate the spec from
+> > there.
+>
+> I would say the syslinux project should be the authority unless they say
+> otherwise.
 
- boot/vbe_common.c    | 85 ++++++++++++++++++++++++++++++++++++++++++--
- boot/vbe_common.h    |  4 ++-
- boot/vbe_simple_fw.c |  3 +-
- 3 files changed, 87 insertions(+), 5 deletions(-)
+Yes I've tried irc and will see if I get any ideas. Will send an email too.
 
-diff --git a/boot/vbe_common.c b/boot/vbe_common.c
-index 46b39cf8910..799f33d9ffa 100644
---- a/boot/vbe_common.c
-+++ b/boot/vbe_common.c
-@@ -18,17 +18,48 @@
- #include <u-boot/crc.h>
- #include "vbe_common.h"
- 
-+binman_sym_declare(ulong, u_boot_vpl_nodtb, size);
-+binman_sym_declare(ulong, u_boot_vpl_bss_pad, size);
-+binman_sym_declare(ulong, u_boot_spl_nodtb, size);
-+binman_sym_declare(ulong, u_boot_spl_bss_pad, size);
-+
-+/**
-+ * h_vbe_load_read() - Handler for reading an SPL image from a FIT
-+ *
-+ * See spl_load_reader for the definition
-+ */
-+ulong h_vbe_load_read(struct spl_load_info *load, ulong off, ulong size,
-+		      void *buf)
-+{
-+	struct blk_desc *desc = load->priv;
-+	lbaint_t sector = off >> desc->log2blksz;
-+	lbaint_t count = size >> desc->log2blksz;
-+	int ret;
-+
-+	log_debug("vbe read log2blksz %x offset %lx sector %lx count %lx\n",
-+		  desc->log2blksz, (ulong)off, (long)sector, (ulong)count);
-+
-+	ret = blk_dread(desc, sector, count, buf);
-+	log_debug("ret=%x\n", ret);
-+	if (ret < 0)
-+		return ret;
-+
-+	return ret << desc->log2blksz;
-+}
-+
- int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
--		 ulong *load_addrp, ulong *lenp, char **namep)
-+		 struct spl_image_info *image, ulong *load_addrp, ulong *lenp,
-+		 char **namep)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(u8, sbuf, MMC_MAX_BLOCK_LEN);
--	ulong size, blknum, addr, len, load_addr, num_blks;
-+	ulong size, blknum, addr, len, load_addr, num_blks, spl_load_addr;
- 	ulong aligned_size, fdt_load_addr, fdt_size;
- 	const char *fit_uname, *fit_uname_config;
- 	struct bootm_headers images = {};
- 	enum image_phase_t phase;
- 	struct blk_desc *desc;
- 	int node, ret;
-+	bool for_xpl;
- 	void *buf;
- 
- 	desc = dev_get_uclass_plat(blk);
-@@ -81,7 +112,8 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
- 		  gd->malloc_base + gd->malloc_limit);
- #endif
- 	/* figure out the phase to load */
--	phase = IS_ENABLED(CONFIG_VPL_BUILD) ? IH_PHASE_SPL : IH_PHASE_U_BOOT;
-+	phase = IS_ENABLED(CONFIG_TPL_BUILD) ? IH_PHASE_NONE :
-+		IS_ENABLED(CONFIG_VPL_BUILD) ? IH_PHASE_SPL : IH_PHASE_U_BOOT;
- 
- 	/*
- 	 * Load the image from the FIT. We ignore any load-address information
-@@ -92,6 +124,20 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
- 	fit_uname = NULL;
- 	fit_uname_config = NULL;
- 	log_debug("loading FIT\n");
-+
-+	if (xpl_phase() == PHASE_SPL && !IS_ENABLED(CONFIG_SANDBOX)) {
-+		struct spl_load_info info;
-+
-+		spl_load_init(&info, h_vbe_load_read, desc, desc->blksz);
-+		xpl_set_phase(&info, IH_PHASE_U_BOOT);
-+		log_debug("doing SPL from %s blksz %lx log2blksz %x area_offset %lx + fdt_size %lx\n",
-+			  blk->name, desc->blksz, desc->log2blksz, area_offset, ALIGN(size, 4));
-+		ret = spl_load_simple_fit(image, &info, area_offset, buf);
-+		log_debug("spl_load_abrec_fit() ret=%d\n", ret);
-+
-+		return ret;
-+	}
-+
- 	ret = fit_image_load(&images, addr, &fit_uname, &fit_uname_config,
- 			     IH_ARCH_DEFAULT, image_ph(phase, IH_TYPE_FIRMWARE),
- 			     BOOTSTAGE_ID_FIT_SPL_START, FIT_LOAD_IGNORED,
-@@ -110,6 +156,31 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
- 
- 	fdt_load_addr = 0;
- 	fdt_size = 0;
-+	if ((xpl_phase() == PHASE_TPL || xpl_phase() == PHASE_VPL) &&
-+	    !IS_ENABLED(CONFIG_SANDBOX)) {
-+		/* allow use of a different image from the configuration node */
-+		fit_uname = NULL;
-+		ret = fit_image_load(&images, addr, &fit_uname,
-+				     &fit_uname_config, IH_ARCH_DEFAULT,
-+				     image_ph(phase, IH_TYPE_FLATDT),
-+				     BOOTSTAGE_ID_FIT_SPL_START,
-+				     FIT_LOAD_IGNORED, &fdt_load_addr,
-+				     &fdt_size);
-+		fdt_size = ALIGN(fdt_size, desc->blksz);
-+		log_debug("FDT noload to %lx size %lx\n", fdt_load_addr,
-+			  fdt_size);
-+	}
-+
-+	for_xpl = !USE_BOOTMETH && CONFIG_IS_ENABLED(RELOC_LOADER);
-+	if (for_xpl) {
-+		image->size = len;
-+		image->fdt_size = fdt_size;
-+		ret = spl_reloc_prepare(image, &spl_load_addr);
-+		if (ret)
-+			return log_msg_ret("spl", ret);
-+	}
-+	if (!IS_ENABLED(CONFIG_SANDBOX))
-+		image->os = IH_OS_U_BOOT;
- 
- 	/* For FIT external data, read in the external data */
- 	log_debug("load_addr %lx len %lx addr %lx aligned_size %lx\n",
-@@ -137,6 +208,8 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
- 		 * to load to, then load the blocks
- 		 */
- 		num_blks = DIV_ROUND_UP(full_size, desc->blksz);
-+		if (for_xpl)
-+			base = spl_load_addr;
- 		base_buf = map_sysmem(base, full_size);
- 		ret = blk_read(blk, blknum, num_blks, base_buf);
- 		log_debug("read foffset %lx blknum %lx full_size %lx num_blks %lx to %lx / %p: ret=%d\n",
-@@ -152,6 +225,12 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
- 			memmove(base_buf, base_buf + extra, len);
- 		}
- 
-+		if ((xpl_phase() == PHASE_VPL || xpl_phase() == PHASE_TPL) &&
-+		    !IS_ENABLED(CONFIG_SANDBOX)) {
-+			image->load_addr = spl_get_image_text_base();
-+			image->entry_point = image->load_addr;
-+		}
-+
- 		/* now the FDT */
- 		if (fdt_size) {
- 			fdt_offset = area_offset + fdt_load_addr - addr;
-diff --git a/boot/vbe_common.h b/boot/vbe_common.h
-index 403391ff1ea..98b7aff0b5d 100644
---- a/boot/vbe_common.h
-+++ b/boot/vbe_common.h
-@@ -155,6 +155,7 @@ int vbe_get_blk(const char *storage, struct udevice **blkp);
-  * @blk: Block device containing FIT
-  * @area_offset: Byte offset of the VBE area in @blk containing the FIT
-  * @area_size: Size of the VBE area
-+ * @image: SPL image to fill in with details of the loaded image, or NULL
-  * @load_addrp: If non-null, returns the address where the image was loaded
-  * @lenp: If non-null, returns the size of the image loaded, in bytes
-  * @namep: If non-null, returns the name of the FIT-image node that was loaded
-@@ -166,6 +167,7 @@ int vbe_get_blk(const char *storage, struct udevice **blkp);
-  * FIT-parsing (see fit_image_load()).
-  */
- int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
--		 ulong *load_addrp, ulong *lenp, char **namep);
-+		 struct spl_image_info *image, ulong *load_addrp, ulong *lenp,
-+		 char **namep);
- 
- #endif /* __VBE_ABREC_H */
-diff --git a/boot/vbe_simple_fw.c b/boot/vbe_simple_fw.c
-index 0bf25ccad23..9da3e49a66e 100644
---- a/boot/vbe_simple_fw.c
-+++ b/boot/vbe_simple_fw.c
-@@ -52,7 +52,8 @@ int vbe_simple_read_bootflow_fw(struct udevice *dev, struct bootflow *bflow)
- 	log_debug("blk=%s\n", blk->name);
- 
- 	ret = vbe_read_fit(blk, priv->area_start + priv->skip_offset,
--			   priv->area_size, &load_addr, &len, &bflow->name);
-+			   priv->area_size, NULL, &load_addr, &len,
-+			   &bflow->name);
- 
- 	/* set up the bootflow with the info we obtained */
- 	bflow->blk = blk;
--- 
-2.34.1
-
+Regards,
+Simon
