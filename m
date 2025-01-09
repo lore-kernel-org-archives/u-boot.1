@@ -4,69 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4C9E77199
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 12:37:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7A8E77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 13:08:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40601800D0;
-	Thu,  9 Jan 2025 13:37:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4568A801F5;
+	Thu,  9 Jan 2025 14:08:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="brHkPCP1";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="pz+ZebHF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEF1F8005B; Thu,  9 Jan 2025 13:37:36 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 92901801FD; Thu,  9 Jan 2025 14:08:30 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C45B8060C
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 13:37:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF29980017
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 14:08:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aaf6b1a5f2bso377941866b.1
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 04:37:34 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-385ddcfc97bso799208f8f.1
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 05:08:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736426253; x=1737031053; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=lKk/uTYn3D3JSLCnUDCYtRvAG/j8AyZNG5hDVeCWIeo=;
- b=brHkPCP1osUwylPdFvc58Zj6olT4Z+thChPHyVgeoAz9ZXC7TuwOMYbmt+iHh7cs5a
- EQUYJXGlZk9/MrexbP5eHpLNzsLyETmeU1PEqWiNjeCnlaOnU5kP948sNGSwVp0us+tm
- /TxencN/VNPLE2maSEp7qh0mDGvTG8U7T7xY4=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736428106; x=1737032906;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ok0D0kQIcp4fulnM2hyBAfp5SqBMPhWV/MkfhnuRrRM=;
+ b=pz+ZebHFQoZ4ZSrq4V3WT2bH5G8XzIG25nDOGlNqyYvsMYTaQeUMVMjPhx6S0dV437
+ KZ4pZwVYATs90el3lugX+O8kmtyZrZLy0q8u2QIJI6nRkvj2VoPwreRkXjZgV/PrgpFA
+ 3Ys2za0EKB+cTBJQZenPwOuHgWMA0aQ/GmsawLn31SMmH0H04Rxky6Z4NWGIwZHOqWR4
+ 5NxHFbMJqlplGLiBH+xSBZoymN85KEqFmBRg+rnjbamS0cr2L9TzPTkkJAlmFWM/uTHn
+ PchxKxcPGbDcxBzh370rOGYs7npCKhNd6BTd84+evWw0H+wZH70WDXEhANxaxNU3jusO
+ H9Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736426253; x=1737031053;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lKk/uTYn3D3JSLCnUDCYtRvAG/j8AyZNG5hDVeCWIeo=;
- b=smonxYsVHxh2QS1agYxIdTSg/FnFEOLUhIdxLqCRdZroZa3Td+i0L1ZYBxXYkm4a9X
- 6QphpEr/KS807cFkSscTVTr/fOZa9z/fIdbc7cBCEveUF42j6r6z3N9583vO85dGkD5R
- bZ3VeESrLNCkFzfS0VCS0KdM7dV/ET/ihhXh7H3tzFQmQ5kCOyUiy9S4C3+pUBPH1BvV
- XI2EGmE7rB5sv278qRmg+NI7xzFM1RJq3qLUbs6csYAJWR3CQXcEOiR3REBxGb8v5Mc4
- C6EX7Y/DxgDSbfwpeBiV/2B9WyfplZ+9yhg9iOMd9AvagmYxg/7/xo33L5C5L+VEx4b0
- +l6g==
-X-Gm-Message-State: AOJu0YwwQ5gf7txP71mE8MzNzHJsuHjymqM9vD+5z6nYDas4ezfzCBL3
- D41UHiDcI4Fie1z9D92brpKglxILIEfZeDvkOq6bJpJZUM0qcDeMaaCtZry6wT5UER7p4ARwG4E
- YjqGyfKd4KJ+Ujzo16ecduR13zyhorXq5qxbAFQAdkKJ4HEE=
-X-Gm-Gg: ASbGncu639uejEaAeB5ikrWtTPBAF+JyQL3zc11wN5FFcAgGJd02RzO0QBhNFp9A57b
- LOSUh8lF65J49fqCwlaxWtzR3ULS2GYLy7qMw67o=
-X-Google-Smtp-Source: AGHT+IGJfvPJZSnX1YyRJt9RP+2Y5tjJGsaILAVyEibj/5/FcyIWj8emRottKT/OZwTVnb/rrZnR3FZWK7SsTHKlrDw=
-X-Received: by 2002:a17:907:c1c:b0:aab:882e:921e with SMTP id
- a640c23a62f3a-ab2c3c63988mr252123466b.2.1736426253532; Thu, 09 Jan 2025
- 04:37:33 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736428106; x=1737032906;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ok0D0kQIcp4fulnM2hyBAfp5SqBMPhWV/MkfhnuRrRM=;
+ b=HV2BJdFWT4QDjtD/oWiRJik8DcvKQOmNvF2ZCSNknysQXIv60HK0j2Wtw9TLJEDS+w
+ 7MkzPh9VMMCRbHgWujEooQe06HDb1odq4tuyp7I6a0xbewaKr3jFrgdb3vltd23V6vAM
+ bD7AJbbsKzeKwcCB3piUGc1LpNwYfrchuW3aTGQ+7BdWorFvKL/ei6lI45kYG5gTkYdw
+ A4+9c2R1yKp+itz3yQV27+INsWwggE0tarjbgnBrIs6yc0OklNBqSU4UigDeBpLPPicZ
+ BQOELsHTkG7HLz57XvjEE1JbQY+Fj91p4feRX+Zzo/FKcbMc0O7ciTjcHXV6PmuKbyWM
+ iXLw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVHPvCRUEyKJKi11oINpqmk1NrEyiNDLOWIfUSCfq9fhD1qW1EB0yjFKfoj5h66brCoX9if/CE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw2/Kxka2483+CFqD6ItdYLDQRrmf/Q+Imlk85yZNzpHCmjDcBn
+ E0wXmgBQZi5SsJ8K4fzERCY8vOrRyIw9uGnVLVxvKi2K8+cWDPB2l8L2FLd52UQ=
+X-Gm-Gg: ASbGncsAjasQdEffkrn5Wtk84W6e4A5H32frW7RKWNxXmpLFMSpmCl2fuws70pFOVUP
+ iqt2wTFj350Chmt+BuTqcirBi1iwSj53BWq4ttgxJnUtTDsOYRB4tKH1p8Cxz5H0ZCeLCiTWe1p
+ MgIl+Vd1fSXrt/ZgSJ6TL9c162t+OCnx1Nwz1xJJG37s6s9iCWiT+SZF3CVCPGfHBYzRpzzcs6c
+ XzlvJoySg0o+ELDFe21mc1faXrkpkCsn5eRA4mDdC1eAI6kdjrGDpOi00zu
+X-Google-Smtp-Source: AGHT+IH41IePjPYA0rdb1jYZoLsxeINh/Gls3IX/6eK5nPebGusS2uVBBrU6Ud6bzKaTPJrlPnqfJg==
+X-Received: by 2002:a05:6000:1f81:b0:385:fb56:5596 with SMTP id
+ ffacd0b85a97d-38a872de1e4mr5266216f8f.19.1736428105907; 
+ Thu, 09 Jan 2025 05:08:25 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a8e37d0fasm1826762f8f.19.2025.01.09.05.08.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2025 05:08:25 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, Sumit Garg
+ <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] MAINTAINERS: move myself to reviewers for avb/ab
+In-Reply-To: <20250109112854.825204-1-igor.opaniuk@gmail.com>
+References: <20250109112854.825204-1-igor.opaniuk@gmail.com>
+Date: Thu, 09 Jan 2025 14:08:22 +0100
+Message-ID: <87r05cxhh5.fsf@baylibre.com>
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Jan 2025 05:37:21 -0700
-X-Gm-Features: AbW1kvb3xfhhYV4VZqrGl5Ht87dYGM2KarI9lH6Yl1WEVUz-pqCCFVRA1P_2seg
-Message-ID: <CAFLszTgi8FxpM=uCe5vZ4rWR81W9fnc77KxjrQ4-+yijXb5a=w@mail.gmail.com>
-Subject: Lab failure on JH7110 (StarFive VisionFive 2)
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,22 +100,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Igor,
 
-I am seeing a lab failure on this board with the test_dm_compat test[1]:
+Thank you for the patch.
 
-=================================== FAILURES ===================================
-559________________________________ test_dm_compat
-________________________________
-560test/py/tests/test_dm.py:20: in test_dm_compat
-561 assert not bad_drivers
-562E AssertionError: assert not {'starfive_gpio'}
+On jeu., janv. 09, 2025 at 12:28, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
 
-Would you have time to take a look, please? A patch to fix a similar
-problem on another board is [2].
+> As Mattijs Korpershoek is in fact doing overall
+> maintenance of AVB/AB code, move myself to reviewers.
+>
+> CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 
-Regards,
-Simon
+Thanks for staying reviewer. Your insights have been very helpful in the
+past so I'm glad you are staying as R: in MAINTAINERS.
 
-[1] https://ci.u-boot.org/u-boot/u-boot/-/jobs/14394
-[2] https://patchwork.ozlabs.org/project/uboot/patch/20240611200156.2245525-19-sjg@chromium.org/
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+>
+>  MAINTAINERS | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index ba31f86feb..72a446acf9 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -66,8 +66,8 @@ F:	lib/alist.c
+>  F:	test/lib/alist.c
+>  
+>  ANDROID AB
+> -M:	Igor Opaniuk <igor.opaniuk@gmail.com>
+>  M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> +R:	Igor Opaniuk <igor.opaniuk@gmail.com>
+>  R:	Sam Protsenko <semen.protsenko@linaro.org>
+>  S:	Maintained
+>  T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+> @@ -77,8 +77,8 @@ F:	include/android_ab.h
+>  F:	test/py/tests/test_android/test_ab.py
+>  
+>  ANDROID AVB
+> -M:	Igor Opaniuk <igor.opaniuk@gmail.com>
+>  M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> +R:	Igor Opaniuk <igor.opaniuk@gmail.com>
+>  S:	Maintained
+>  T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+>  F:	cmd/avb.c
+> -- 
+> 2.43.0
