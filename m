@@ -4,86 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7A8E77197
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 13:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11258E77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 14:10:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4568A801F5;
-	Thu,  9 Jan 2025 14:08:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AE9D8005B;
+	Thu,  9 Jan 2025 15:10:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="pz+ZebHF";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ewNNjf4j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92901801FD; Thu,  9 Jan 2025 14:08:30 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF29980017
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 14:08:26 +0100 (CET)
+ id 1FD698060A; Thu,  9 Jan 2025 11:23:38 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 29BCE80601
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 11:23:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-385ddcfc97bso799208f8f.1
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 05:08:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736428106; x=1737032906;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=ok0D0kQIcp4fulnM2hyBAfp5SqBMPhWV/MkfhnuRrRM=;
- b=pz+ZebHFQoZ4ZSrq4V3WT2bH5G8XzIG25nDOGlNqyYvsMYTaQeUMVMjPhx6S0dV437
- KZ4pZwVYATs90el3lugX+O8kmtyZrZLy0q8u2QIJI6nRkvj2VoPwreRkXjZgV/PrgpFA
- 3Ys2za0EKB+cTBJQZenPwOuHgWMA0aQ/GmsawLn31SMmH0H04Rxky6Z4NWGIwZHOqWR4
- 5NxHFbMJqlplGLiBH+xSBZoymN85KEqFmBRg+rnjbamS0cr2L9TzPTkkJAlmFWM/uTHn
- PchxKxcPGbDcxBzh370rOGYs7npCKhNd6BTd84+evWw0H+wZH70WDXEhANxaxNU3jusO
- H9Ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736428106; x=1737032906;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ok0D0kQIcp4fulnM2hyBAfp5SqBMPhWV/MkfhnuRrRM=;
- b=HV2BJdFWT4QDjtD/oWiRJik8DcvKQOmNvF2ZCSNknysQXIv60HK0j2Wtw9TLJEDS+w
- 7MkzPh9VMMCRbHgWujEooQe06HDb1odq4tuyp7I6a0xbewaKr3jFrgdb3vltd23V6vAM
- bD7AJbbsKzeKwcCB3piUGc1LpNwYfrchuW3aTGQ+7BdWorFvKL/ei6lI45kYG5gTkYdw
- A4+9c2R1yKp+itz3yQV27+INsWwggE0tarjbgnBrIs6yc0OklNBqSU4UigDeBpLPPicZ
- BQOELsHTkG7HLz57XvjEE1JbQY+Fj91p4feRX+Zzo/FKcbMc0O7ciTjcHXV6PmuKbyWM
- iXLw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVHPvCRUEyKJKi11oINpqmk1NrEyiNDLOWIfUSCfq9fhD1qW1EB0yjFKfoj5h66brCoX9if/CE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2/Kxka2483+CFqD6ItdYLDQRrmf/Q+Imlk85yZNzpHCmjDcBn
- E0wXmgBQZi5SsJ8K4fzERCY8vOrRyIw9uGnVLVxvKi2K8+cWDPB2l8L2FLd52UQ=
-X-Gm-Gg: ASbGncsAjasQdEffkrn5Wtk84W6e4A5H32frW7RKWNxXmpLFMSpmCl2fuws70pFOVUP
- iqt2wTFj350Chmt+BuTqcirBi1iwSj53BWq4ttgxJnUtTDsOYRB4tKH1p8Cxz5H0ZCeLCiTWe1p
- MgIl+Vd1fSXrt/ZgSJ6TL9c162t+OCnx1Nwz1xJJG37s6s9iCWiT+SZF3CVCPGfHBYzRpzzcs6c
- XzlvJoySg0o+ELDFe21mc1faXrkpkCsn5eRA4mDdC1eAI6kdjrGDpOi00zu
-X-Google-Smtp-Source: AGHT+IH41IePjPYA0rdb1jYZoLsxeINh/Gls3IX/6eK5nPebGusS2uVBBrU6Ud6bzKaTPJrlPnqfJg==
-X-Received: by 2002:a05:6000:1f81:b0:385:fb56:5596 with SMTP id
- ffacd0b85a97d-38a872de1e4mr5266216f8f.19.1736428105907; 
- Thu, 09 Jan 2025 05:08:25 -0800 (PST)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a8e37d0fasm1826762f8f.19.2025.01.09.05.08.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 05:08:25 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Robert Marko <robert.marko@sartura.hr>, Sam Protsenko
- <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, Sumit Garg
- <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] MAINTAINERS: move myself to reviewers for avb/ab
-In-Reply-To: <20250109112854.825204-1-igor.opaniuk@gmail.com>
-References: <20250109112854.825204-1-igor.opaniuk@gmail.com>
-Date: Thu, 09 Jan 2025 14:08:22 +0100
-Message-ID: <87r05cxhh5.fsf@baylibre.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-padhi@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 509ANRL83148526
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 9 Jan 2025 04:23:27 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1736418207;
+ bh=VAzGDa8iFUPfi2INHWFAtFHWMl2di+98c7Z+gBSjxHE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ewNNjf4jWwnzjEv65rkuA6XpPZ0m5rYvSge8ugS8DmS8NPrdgshZ/crMupLKTTl3b
+ Xd8TzaKvFbb9QNrQrUlYLPV/dJdzWPx+JnpkX0JbX3xAS8bHqUB81cxwV+puFdz0Vf
+ MDoeeFFx6xopbeZ1S9bmlv4dVOl92IUcvVpl/Q+0=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 509ANR43057059
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 9 Jan 2025 04:23:27 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
+ Jan 2025 04:23:26 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 9 Jan 2025 04:23:26 -0600
+Received: from [172.24.227.151] (uda0510294.dhcp.ti.com [172.24.227.151])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 509ANNA8003872;
+ Thu, 9 Jan 2025 04:23:23 -0600
+Message-ID: <251ea7ec-03b9-4f73-9951-0f89f9cf2959@ti.com>
+Date: Thu, 9 Jan 2025 15:53:22 +0530
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: ti: j722s: j722s.env: Set remoteproc firmware names
+To: Bryan Brattlof <bb@ti.com>
+CC: <trini@konsulko.com>, <vaishnav.a@ti.com>, <j-choudhary@ti.com>,
+ <rogerq@kernel.org>, <nm@ti.com>, <n-francis@ti.com>,
+ <u-kumar1@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
+ <u-boot@lists.denx.de>, "Limaye, Aniket" <a-limaye@ti.com>
+References: <20250108102516.2103132-1-b-padhi@ti.com>
+ <20250108141659.rsvnmlurqdyxnocc@bryanbrattlof.com>
+Content-Language: en-US
+From: Beleswar Prasad Padhi <b-padhi@ti.com>
+In-Reply-To: <20250108141659.rsvnmlurqdyxnocc@bryanbrattlof.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Thu, 09 Jan 2025 15:10:50 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,51 +85,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+Hi Bryan!
 
-Thank you for the patch.
-
-On jeu., janv. 09, 2025 at 12:28, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
-
-> As Mattijs Korpershoek is in fact doing overall
-> maintenance of AVB/AB code, move myself to reviewers.
+On 08/01/25 19:46, Bryan Brattlof wrote:
+> Hi Beleswar!
 >
-> CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+> On January  8, 2025 thus sayeth Beleswar Padhi:
+>> Include k3_rproc.env to access rproc boot commands and specify rproc
+>> firmware names for adding remoteproc support in J722S SoCs.
+>>
+>> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+>> ---
+>> This patch is independent and puts the environment in place to boot remote
+>> processors at U-Boot stage.
+>>
+>> However, for successfully loading the firmwares into remote cores, rproc
+>> DT node definitions are required. These DT changes have been merged into
+>> Linux and available with v6.12 tag[0]. Once the DT Sync happens in U-Boot,
+>> remote processors can be probed and booted with the help of env commands
+>> enabled with this patch.
+>>
+>> Sample Boot Test logs after manually adding DT nodes in U-Boot:
+>> https://gist.github.com/3V3RYONE/0b5c7df5b5c88d2a2f273b6a04a3dd46
+>>
+>> [0]: https://lore.kernel.org/all/20240830161742.925145-1-b-padhi@ti.com/
+>>
+>> Thanks,
+>> Beleswar
+>>
+>>   board/ti/j722s/j722s.env | 6 ++++++
+>>   1 file changed, 6 insertions(+)
+>>
+>> diff --git a/board/ti/j722s/j722s.env b/board/ti/j722s/j722s.env
+>> index f8b6aff2c2f..10d62034e1a 100644
+>> --- a/board/ti/j722s/j722s.env
+>> +++ b/board/ti/j722s/j722s.env
+>> @@ -1,6 +1,10 @@
+>>   #include <env/ti/ti_common.env>
+>>   #include <env/ti/mmc.env>
+>>   
+>> +#if CONFIG_CMD_REMOTEPROC
+>> +#include <env/ti/k3_rproc.env>
+>> +#endif
+>> +
+>>   name_kern=Image
+>>   console=ttyS2,115200n8
+>>   args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+>> @@ -13,3 +17,5 @@ mmcdev=1
+>>   bootpart=1:2
+>>   bootdir=/boot
+>>   rd_spec=-
+>> +
+>> +rproc_fw_binaries= 0 /lib/firmware/j722s-mcu-r5f0_0-fw 2 /lib/firmware/j722s-main-r5f0_0-fw 3 /lib/firmware/j722s-c71_0-fw 4 /lib/firmware/j722s-c71_1-fw
+> For SE devices do these firmware have that *-sig suffix?
 
-Thanks for staying reviewer. Your insights have been very helpful in the
-past so I'm glad you are staying as R: in MAINTAINERS.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Yes, for all K3 SE devices, the "*-sec" suffix is appended to the 
+existing firmware paths[0].
 
-> ---
+> My thinking is
+> this seems fairly specific to yocto with other distributions like debian
+> or QNX will have different names or paths. Should this be put in the env
+> that yocto builds?
+
+
+Debian currently uses the same firmware names like Yocto. But yes, 
+thinking about multi-distro, we can leave the default firmware paths as 
+empty, and leave it to the user to override these paths according to 
+their distro. That will have to be done for all K3 devices, as currently 
+all those define Yocto based firmware paths in the U-Boot board environment.
+
+However, if we leave the default `rproc_fw_binaries` as empty, rproc 
+boot will fail silently without complaining, which could be confusing to 
+the user. Whereas, if we have Yocto (or any other distro's) firmware 
+paths as default, rproc boot will complain "No such file or directory" 
+and fail when using with a different distro. What are your thoughts?
+
+[0]: 
+https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/k3_rproc.env?ref_type=heads#L18
+
+Thanks,
+Beleswar
+
 >
->  MAINTAINERS | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index ba31f86feb..72a446acf9 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -66,8 +66,8 @@ F:	lib/alist.c
->  F:	test/lib/alist.c
->  
->  ANDROID AB
-> -M:	Igor Opaniuk <igor.opaniuk@gmail.com>
->  M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> +R:	Igor Opaniuk <igor.opaniuk@gmail.com>
->  R:	Sam Protsenko <semen.protsenko@linaro.org>
->  S:	Maintained
->  T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
-> @@ -77,8 +77,8 @@ F:	include/android_ab.h
->  F:	test/py/tests/test_android/test_ab.py
->  
->  ANDROID AVB
-> -M:	Igor Opaniuk <igor.opaniuk@gmail.com>
->  M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> +R:	Igor Opaniuk <igor.opaniuk@gmail.com>
->  S:	Maintained
->  T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
->  F:	cmd/avb.c
-> -- 
-> 2.43.0
+> ~Bryan
