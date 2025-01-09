@@ -4,81 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 721FFE77197
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 17:22:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C11E77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 18:08:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AADD08005B;
-	Thu,  9 Jan 2025 18:22:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 272EB800D0;
+	Thu,  9 Jan 2025 19:08:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CDQTlehf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gi3is/ix";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93943800D0; Thu,  9 Jan 2025 18:22:26 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 1F4FE80107; Thu,  9 Jan 2025 19:08:27 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2C008001F
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 18:22:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1EE48001F
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 19:08:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7b6fc5bf609so85269585a.1
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 09:22:23 -0800 (PST)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7b70e78351aso97287585a.0
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 10:08:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736443342; x=1737048142; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736446103; x=1737050903; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FyUefC+oKlFBO8vTzs4yRc/3e73kNrJIDbi9EundWLQ=;
- b=CDQTlehf8ljE+cktUoL+oR7U7d2rSFnJ0lMcL/o+F+nOBs6S+lTlH6s54Gs192cAnN
- U1KpmOHtDcamHVYmMv1WhMVwjxA8vEx5Qugb06zrhdJ9bCCRfZnVJpT0CDNR4mXersiW
- rBD4+tp0caIYyxec+cacB1DSorS9zJLTn6yuc=
+ bh=/e01hIPxOZa6cpxjbWg6UQR4oQ4IxoQWYcqXkg2SMyo=;
+ b=gi3is/ixCiCDQINXywzmVzl1bqvHWkKJlRVOtyexdGrirzjBT4P6+oF1yjASrEWyO+
+ AbULpQ9RGPohXTIqlHbzJtGku1RDqio/0CTpbDlSu8FimuZSx1/p/Kvtj1fgzugElYyJ
+ +Laj00O1ug6uvv7ktwsITDzHGQO2oZ9ngrwyo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736443342; x=1737048142;
+ d=1e100.net; s=20230601; t=1736446103; x=1737050903;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FyUefC+oKlFBO8vTzs4yRc/3e73kNrJIDbi9EundWLQ=;
- b=Ob23gRiWqJBcldZBMyryq0no+VmjdKdDwt1dayx3GGPD4eEjLGJ12BGxE39UOZYRb/
- hMDipFTa+jYF/NNwzD5l7lVIWruExOmkJE0Ix/2KGBmkYkNhev8r5pz4BGLn/HF4+/Nq
- 2FHagUbO3e05Zb58GiugFPPqYHFDPPhh19o2lOeTgIwhn6KJGbhX3nKHXL234fvmTc4t
- ZMJbnfP/PXax74NKC248O9NSOhj/8MYJ6jgn11OXmSDvGjxdlowbQMD6q8pkeQ32Z+m/
- 5CSg4Hd9O6RAOa7AVdtDYFwtsNeptdgf2XrMwPTmGlNGZ1YCEeWZleKZoIDQZEzGCJ7e
- 8nxw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVdH9RfTWThSltw32/i+p2y+jL2hjISDpFP5x9K+WM4IxMZYmxHdKyZ8+ywDcvjX/o1Ky1cs1c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzDgHSm2zv1/Mgf//juXoFAvOm+fixRjZISzKgU0t/cOTMgeXsc
- WDFHHHQw2Fc6fNJKzSehOnOuoijAUd8FB37lpaO4TuvQDMzZfoS3kzk/Hgd26f4=
-X-Gm-Gg: ASbGncuTgWA5Mc9C5WTaWAkNUY9pY1IHJnOjCnQAWjITMlOvYRGbqaY3R3R/yF44nVd
- XeziNaPtYUNjqgcPxd6c/Wn5Fxy9m0Zt7LV1EeTgdWbxz/MWPa15DHF/oLn05Ko3xFGwBrWX1om
- 2KkoyP4UJtY3BO8Cmg6CBHyEwyPWapVupPDXopAehbXr/ImLUvA7dBcLMXZuRhTYXl0WT3XI7+9
- D+FHffXC8P28UXQN9QHUAALxZ1ID3JGyyHSEVuXFFAWrWQxTwKhgDE=
-X-Google-Smtp-Source: AGHT+IF8XZDTIKz5QfDBMJsfGn2t2cRxI9ACb5BPkQ6c08Cti4nwJR/KGkfShVZLcwhwd49SG0wJYw==
-X-Received: by 2002:a05:620a:472c:b0:7b6:c543:7e54 with SMTP id
- af79cd13be357-7bcd973e241mr1196472185a.22.1736443342543; 
- Thu, 09 Jan 2025 09:22:22 -0800 (PST)
+ bh=/e01hIPxOZa6cpxjbWg6UQR4oQ4IxoQWYcqXkg2SMyo=;
+ b=S5mWNPBM+R6CH1vJpYAQ8fytzTfmi5ugDN21y2B2pjRSuC+GDr8ST+apLWpo0Mk9xY
+ GhJNq+BlTvY6N9ItaRimyenrE0QQRXhTt4D89zsqYQtFvBbzShrS4Mz+W4bUAX+fXXQC
+ mGbschG/6/FDBYB+NCG7SNlP8Y9ih6AT+yreMhlyxMOZ1OoAEAC+8F8Sg40tX5b3DZsu
+ 3VvwhtJnBOudm72gv54N+mwf17YUO5g0fwMQznvXfzofeanL9PMgB4J9iDsXijN9B/rk
+ D5EmY33eO5cU+vXbImbP3tDcbfn1p2a8oK1rHy51DmpwlBuy+wrop5q2ouAzBPYi3UDJ
+ bF4g==
+X-Gm-Message-State: AOJu0YyE1QIfpnNGvaRtR40ekHqrs7FefWmwDZlUclAUpnmUFSDnIzgK
+ 8HH7yfHlj5LjtnwS1VZuhDI1mKCiW9WCompzEOWCmWSstuqCG2fGWuvnryGSjVY=
+X-Gm-Gg: ASbGncsqpIHsJoaKrWLfXzSI90FGlE0lvl4jmUdm81g492S5B+hr+cY75r9ecqyY/3i
+ OluZAp5cXFFoO7C0xRtCIgqGUMgFAH11qCGZyCz2LjsOy1G04/TrUjSzku2ZWr8yIiWcxhNt2x/
+ ShPc5g0EgvArIl4j+1I6J2sdPmHHUeDKsp/WSf8HiRUwRvicpR+sqBaTWXIiRRc+gV/GZNgBTCV
+ 3U7rNERsdtslq0jMjFWH8qdVmgE6VcGdC+gNtGGKEQQYvWmlUqVyMA=
+X-Google-Smtp-Source: AGHT+IG/sgQ4a1L8UoaqjXUEHCPoq9423Z39kOK3TtyJc5kycKqRVsYA40T6X+UjsGgoIpM/XUQ1QQ==
+X-Received: by 2002:a05:620a:2490:b0:7b6:6e7c:8efc with SMTP id
+ af79cd13be357-7bcd97bf690mr1219348885a.44.1736446103577; 
+ Thu, 09 Jan 2025 10:08:23 -0800 (PST)
 Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7bce324875fsm86707785a.47.2025.01.09.09.22.21
+ af79cd13be357-7bce328128fsm91352785a.61.2025.01.09.10.08.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 09:22:21 -0800 (PST)
-Date: Thu, 9 Jan 2025 11:22:19 -0600
+ Thu, 09 Jan 2025 10:08:22 -0800 (PST)
+Date: Thu, 9 Jan 2025 12:08:17 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Frantisek Rysanek <Frantisek.Rysanek@post.cz>
-Cc: Syslinux <syslinux-bounces@syslinux.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [syslinux] Purpose of 'localboot'
-Message-ID: <20250109172219.GB3476@bill-the-cat>
-References: <CAFLszTiT59PBvpxtpwMXcX3f-dbAfkZ=2xW=bHm6LrGAAe_TrQ@mail.gmail.com>
- <677FEBAD.16689.1CC4743B@Frantisek.Rysanek.post.cz>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Dahl <ada@thorsis.com>,
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
+Message-ID: <20250109180817.GC3476@bill-the-cat>
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-18-sjg@chromium.org>
+ <20250108182528.GN3476@bill-the-cat>
+ <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
+ <20250109150954.GU3476@bill-the-cat>
+ <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4HJ39Rv/FB9SS11y"
+ protocol="application/pgp-signature"; boundary="l70G/xSdBcNUzwkN"
 Content-Disposition: inline
-In-Reply-To: <677FEBAD.16689.1CC4743B@Frantisek.Rysanek.post.cz>
+In-Reply-To: <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,88 +118,170 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---4HJ39Rv/FB9SS11y
+--l70G/xSdBcNUzwkN
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 09, 2025 at 04:30:53PM +0100, Frantisek Rysanek wrote:
-> > Hi,
-> >=20
-> > The documentation on this feature[1] doesn't quite explain how the
-> > system should actually do a localboot. Is this for BIOS / x86 only?
-> > There was a recent discussion about this on the U-Boot mailing
-> > list[2].
-> >=20
-> > Is someone able to help with how / if this should be implemented in
-> > U-Boot?
-> >=20
-> > Regards,
-> > Simon
+On Thu, Jan 09, 2025 at 08:14:53AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 9 Jan 2025 at 08:10, Tom Rini <trini@konsulko.com> wrote:
 > >
+> > On Thu, Jan 09, 2025 at 05:36:03AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Wed, 8 Jan 2025 at 11:25, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Mon, Jan 06, 2025 at 07:32:13AM -0700, Simon Glass wrote:
+> > > >
+> > > > > This function uses separate arguments for data and size. Use the =
+new
+> > > > > abuf instead, so that they are paired and in one place. In some c=
+ases it
+> > > > > also saves an argument, thus potentially reducing code size.
+> > > >
+> > > > This is one of the commits that globally increases size in both full
+> > > > U-Boot and SPL/etc.
+> > > >
+> > > > Is all of the "abuf" changes just a "tidy up" that increases the co=
+de a
+> > > > bit?
+> > >
+> > > Yes, a tidy-up which I hope will help overall. I have been thinking
+> > > for a while of how to avoid having addr/size and ptr/size passed
+> > > everywhere. For now abuf seems to provide some sort of solution.
+> > >
+> > > I see this:
+> > >
+> > > 18: boot: Update fit_image_get_emb_data to use abuf
+> > >    aarch64: (for 1/1 boards) all +4.0 bss -24.0 spl/u-boot-spl:all
+> > > +16.0 spl/u-boot-spl:text +16.0 text +28.0
+> > >
+> > > so growth on firefly-rk3399 but not with rk3288. I am not sure if the
+> > > growth will tail off as there are more users, though. We might even be
+> > > able to be more clever with static inlines.
+> >
+> > Yeah, lets not do this now then and worry about some "clean up" later
+> > when we can show that it does, or does not, improve size.
 >=20
-> I feel that you actually understand the whole point :-)
+> Oh.
 >=20
-> Syslinux is a bootloader for the PC's - those have a BIOS and=20
-> nowadays a Bios Boot Sequence (BBS). And, a specific member of the=20
-> syslinux family (package) is pxelinux, which loads from the LAN.
+> > And there's
+> > something wrong with your numbers:
+> > 01: Fix neighbor discovery ethernet address saving
+> >    aarch64:  w+   firefly-rk3399
+> > +(firefly-rk3399) Image 'simple-bin' is missing external blobs and is n=
+on-functional: atf-bl31
+> > +(firefly-rk3399)
+> > +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (atf-=
+bl31):
+> > +(firefly-rk3399)    See the documentation for your board. You may need=
+ to build ARM Trusted
+> > +(firefly-rk3399)    Firmware and build with BL31=3D/path/to/bl31.bin
+> > +(firefly-rk3399) Image 'simple-bin' is missing optional external blobs=
+ but is still functional: tee-os
+> > +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os=
+):
+> > +(firefly-rk3399)    See the documentation for your board. You may need=
+ to build Open Portable
+> > +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and build w=
+ith TEE=3D/path/to/tee.bin
+> > +(firefly-rk3399) Some images are invalid
+> > 37: dm: core: Provide ofnode_find_subnode_unit()
+> >    aarch64: (for 1/1 boards) all +324.0 bss +32.0 spl/u-boot-spl:all +1=
+6.0 spl/u-boot-spl:text +16.0 text +292.0
+> >             firefly-rk3399 : all +324 bss +32 spl/u-boot-spl:all +16 sp=
+l/u-boot-spl:text +16 text +292
+> >                u-boot: add: 6/-1, grow: 4/-4 bytes: 516/-224 (292)
+> >                  function                                   old     new=
+   delta
+> >                  ofnode_name_eq_unit                          -     160=
+    +160
+> >                  ofnode_find_subnode_unit                     -     116=
+    +116
+> >                  fit_image_get_data                          80     176=
+     +96
+> >                  fit_image_get_emb_data                       -      84=
+     +84
+> >                  ofnode_write_prop                          224     236=
+     +12
+> >                  ofnode_add_subnode                         232     244=
+     +12
+> >                  abuf_init_const                              -      12=
+     +12
+> >                  abuf_init                                    -      12=
+     +12
+> >                  abuf_addr                                    -       8=
+      +8
+> >                  fit_image_print                            780     784=
+      +4
+> >                  image_locate_script                        696     692=
+      -4
+> >                  fit_image_load                            1584    1580=
+      -4
+> >                  fit_image_verify                           176     164=
+     -12
+> >                  ofnode_find_subnode                        140     116=
+     -24
+> >                  fit_image_get_data_and_size                180       -=
+    -180
+> >                spl-u-boot-spl: add: 3/-1, grow: 0/-1 bytes: 108/-92 (16)
+> >                  function                                   old     new=
+   delta
+> >                  fit_image_get_emb_data                       -      84=
+     +84
+> >                  abuf_init_const                              -      12=
+     +12
+> >                  abuf_init                                    -      12=
+     +12
+> >                  load_simple_fit                            580     568=
+     -12
+> >                  fit_image_get_data                          80       -=
+     -80
 >=20
-> The "local" boot means, that while the PC is trying to boot, in a=20
-> particular step of the BIOS Boot Sequence (=3D the order of bootable=20
-> devices) it has loaded PXElinux, and now the user has a choice,=20
-> either to chainload some "payload" (e.g. the Linux kernel + initrd or=20
-> some such via TFTP), or to hand over to the next entry in the "BIOS=20
-> Boot Sequence" - effectively by calling an "iret" at the top-level=20
-> function called by its respective BBS entry, which is effectively a=20
-> software interrupt... which will end up trying another boot media,=20
-> the next one up in the BBS.
->=20
-> Yes this is specific to machines having a BIOS.
->=20
-> Not sure about UEFI, the bootloader loading mechanism is different,=20
-> but Syslinux never quite got there with UEFI, so I believe this point=20
-> is moot.
-> I haven't actually tried this with iPXE, there doesn't seem to be an=20
-> explicit keyword for this. Possibly if you "let the ipxe boot script=20
-> fall off the end" or by calling an exit... or possibly not.
-> https://www.google.com/search?q=3DUEFI+exit+ipxe+and+try+the+next+boot+e
-> ntry%3F
->=20
-> Now compare that to uBoot. Who typically has just a single purpose in=20
-> life, and a single option what to boot: the one kernel and initrd,=20
-> typically from a NAND flash MTD (or sometimes NOR flash for that=20
-> matter). You can possibly break normal boot and try loading something=20
-> via TFTP...
+> Yes, that's the whole series, so not related to this change.
 
-So the reason Simon is asking is that the syslinux / pxelinux file
-format is used outside of just the syslinux project, but it's a little
-unclear what the authoritative source is (systemd used to have a page,
-but that moved and then got dropped). We're hoping to find what the real
-intent of the keyword is, so that
-https://docs.u-boot.org/en/latest/develop/distro.html#boot-configuration-fi=
-les
-can say the right thing, rather than the few stackoverflow examples of
-how people use "localboot" within U-Boot today.
+Yes, that's the whole series including this change, so it's related to
+this change.
+
+>  I elected to have two versions of ofnode_find_subnode() to avoid the
+> size growth in the previous version. But the cost is larger size
+> growth when OF_LIVE is used.
+>=20
+> Without OF_LIVE, the size growth is tiny.
+
+And even worse in SPL, somehow. But you want more OF_LIVE users, not
+less, yes?
+
+> So...what to do?
+
+Well, if you drop the abuf changes for now, SPL won't change at all for
+most platforms and that'll be an improvement.
+
+And I'm going to keep complaining about size growth here because a
+non-trivial subset of users just wants things to boot quickly and be
+small.
 
 --=20
 Tom
 
---4HJ39Rv/FB9SS11y
+--l70G/xSdBcNUzwkN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeABcgACgkQFHw5/5Y0
-tyynIgv/eN0r54DCyrUOLSz4trTlcq+huF+E70JkoS6tHCx4EOHzIlyPxY+73BL+
-JflrnFSfj08KjIxBFCSM1VM0PenYNaTmiVQZuZrggGT6abjjaIPwvUVWO9ZxRF4g
-qrjhZbqXh0z2fGuXsRC20HO0nZyFBXTXfDd3t00+61mwwOoK6c10anauiCe/BZhy
-+9Sx8oC9/nPq1fh2aU1mUsbdBA3+sTnhqaun1S6ZptG7gy9QCfdVRrcwsNtsyvYL
-R5m+ohp2DC4veQJ4N/56wWqllyPJyo+OBhuRzZKMJEByW0IQRggLxaZrOtH7muX0
-pWYz5xtAO0FZJCTncHT4fUuTwDYGiFpPtE4U5usvP54GAkjfUhD0q/GwAPqUEREe
-2/5Hbkb3J9d+Ms8tc0JN2+HBE2OmeSLVjPMbbBvI752q2ZztZnGSetpIDAf3kaFH
-WgaXd3NBB6iPawGufIexmHU61kHsTqfVmWeQG2SmN9+78LxV1HqRCsOoD+6er5Xh
-JNYWm+mc
-=ee37
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeAEIoACgkQFHw5/5Y0
+tyxGZwv/ccClIXXqY12Beb2jigOOC1+/SXbUhtQsilsuOg1hVpsXO71YnwVr9m4s
+/e4qLaJ76pz6JgqOEWKO+hqaJfKNJHVtSqyqhwkoIJeipbY2QsARxpfoq0nq0snD
+AKtUd7on/vjrq17yCL7jkjdi96JEWvuNfT3RBp1j1R9zfugR+6UPZ5yjbbdsgFBw
+f7jpxKvLvcdpB8L2F+oEPOGJqNVSuypC1/w7OQVjx3QEreX21aQbQCVFv7ujoPKP
+PdIl7LWkeb4SheEd4y/ZCRbf1k6CUXDSi6zA5VBu6QL5V1TCGU1SSHAZ1QEmy8en
+Zwc03vOH1GmKvccJopYyRs/G0xxdEjUxVS9t1YVnDf0knclbBnI3ijWQ+vu3yKc6
+pBp5FKfWmJQlI9BppZ6prGwlUGBK3cj0Qx4nveJPlje23hLAxcmpcxMINcTtT1Cf
+gYkoGYEpZKEMy4m0WJnVlEdPudCcQJx+M8hX0PbbTS6xCVXLqPDmR9ECzGnfrFqk
+XUM7UMMA
+=Wnki
 -----END PGP SIGNATURE-----
 
---4HJ39Rv/FB9SS11y--
+--l70G/xSdBcNUzwkN--
