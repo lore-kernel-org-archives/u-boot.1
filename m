@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC9F9E77197
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:01:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F19E7719B
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:01:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01A4980107;
-	Thu,  9 Jan 2025 16:01:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6360A80608;
+	Thu,  9 Jan 2025 16:01:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KTluX5mx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gZmNABmA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35EEB805E2; Thu,  9 Jan 2025 16:01:31 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id DB95680602; Thu,  9 Jan 2025 16:01:36 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91BFA8001F
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:01:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41F2B805EA
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:01:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d437235769so1457107a12.2
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:01:27 -0800 (PST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d96944401dso1545883a12.0
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:01:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736434887; x=1737039687; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736434893; x=1737039693; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f4Gj910Ocm96gi7HU5VSN5ZeGZjU1ikhXPb2Zte+8xU=;
- b=KTluX5mxJwk/52MHTKXnEFmHADblPhWWPMZJMQXIjZOscfXETljpbhbFIHmb8DQKXa
- 26T8NqE6G8g9d82wjecRCEj7FD+1rACmEqAmP9WncDm5ta4jMXxSGcRFFX2qFj4/+d7Y
- fFkziX+A/HOE7i5JlWNQ9MNFxLP2lYAZI0yic=
+ bh=EQkVo/7CUfJN/b7/Z+4OLVa5h4CYzr2EoqhKlz/n8xo=;
+ b=gZmNABmAYvP+Yh7vK2LQaELD8OLV8neSStsVYcfUJGgD1RRxCA9dA5oEDONn2uMchE
+ uQqjxMCBJHI5TUI8gz3NKvPJEZnlihH/Hvf66fzz2A11dzVhKUzM4F6MXlTZNh71Vjrz
+ bUOAr8WcXQ27i9nQQ3YLDa+ASB3zaQkl7u2rs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736434887; x=1737039687;
+ d=1e100.net; s=20230601; t=1736434893; x=1737039693;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=f4Gj910Ocm96gi7HU5VSN5ZeGZjU1ikhXPb2Zte+8xU=;
- b=SYcDMrpqFPj/kiSTfBHPk4+12c+3xuhjxdo/n9l3Ur44eb8GmPaaZ1oaqzaFl6cPI/
- hzAQvVAIPmAJ0qnMwYPki7pe/kec6Dgt8+ZiIPv/znn+94AW6kQq31tqDsyAIhCd5CR9
- B8KCk0nJXlkU2EvGpyk8SAu4zHoEjZ8K1icBwRd7XFMMn6XQaPij210oOPNdA+NB9UA/
- lRBSnFUoDeal0lov/J+QxT+++NimU70A9qS+eotXCtx/wV2kNGK1OH/kmjJKOqsqZk2T
- tZHSTa8+pS6kQJIuxV4iVAndoEsOgL1z2jRNmkq3/xuLXL5xRpRVPzjOljUzx27tdbxv
- Zejg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWxcufszeDhgX0r7+/ENmRMb+GG+sujUdKtdtyilGxC6D5swABYgOH/kfiw8njDcX38LJVfMRY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yws88CqW17ToBHpWRPfyJC7NZjNX/tk6J1Esh/NZqoPkEUfcFE+
- 08ue+9JAomSOekc4lbUC5bpZwjhcO6vdmR6lATTAYOQfkvpkSNbhn2ENKiZPu1K+F7oZmplZrVm
- s0fIZdMO5CQ1Q9I6H6HSAgFOi3bR7fGJGZAtQ
-X-Gm-Gg: ASbGnctadSlc0NC1tRXS0D+qhg5XzXCFpRKPXTZu9z9fEMNaamXAxHpq0del2eNmtS+
- YQubyVIt70hazlTglyg7965+dnEeoFSSsZYXhKEY=
-X-Google-Smtp-Source: AGHT+IG3NaG+g6WziBEFB0dB0gZx1za3IQjvGQjkszII3dkMjxGJ0tfvQE06CijQu7FVWDrBe6qcts2fqxSlgSd2WCc=
-X-Received: by 2002:a05:6402:4416:b0:5cf:c33c:34cf with SMTP id
- 4fb4d7f45d1cf-5d972e1c42amr6451897a12.15.1736434886679; Thu, 09 Jan 2025
- 07:01:26 -0800 (PST)
+ bh=EQkVo/7CUfJN/b7/Z+4OLVa5h4CYzr2EoqhKlz/n8xo=;
+ b=UxSMB7Foe/SfD5LApJ2wYFouL7tkQ5jeNFwD1eryeb8dsECzMGT78RORdROqZkmhlp
+ QjvQ7+7ligrCTkOnr1d++RbGylzmngfdlkFhaPCroTGeSSlb+U92kN9XzdyfdgVFSfiQ
+ Gj0ukJh274IMId6mnPSmCY1XPJ/o291R9Dh1jdysFaMB93+C7DyihbuM6M1sL85A7KI6
+ iY4WJ48P7DJfBBSiJfMaKZnvCKJ6VKMlI+h47YMkITfZCgGpIfrEn4MDl/Ns++9OOyGI
+ XNGHc/k3toNDTys4dkUZV3dFdZk+SUBswDHUuxyiwc2PP1akB6V3uyKr41M3h6b9aXwh
+ a+Fg==
+X-Gm-Message-State: AOJu0YxRKL+UCn5TxPmTB4b0zazx67v/BtcREV3wZNIbPKS61fv7rbHL
+ u+uUiszzhlN7pAcGjkueGLY+TqOJxY/krus7YKZA8KPph8jF/fxVpStepbKCurg4nfHV2o7WUeE
+ qih2vAb/vpTNKMZH6jjjRs3/Brph5iRHABCSo4vi0Z0qzkjM=
+X-Gm-Gg: ASbGncueXEZkov0OyYTZKzFmpQ+f+4WssS83XWmmR6IXZnSHSvtt4m7JPWmZ9O6ZzWq
+ hQ75BTrF9g0Dfi+Lye1C6sJKuAZgOizzLDyu3YN8=
+X-Google-Smtp-Source: AGHT+IGoGxv9ZP5fvqdrLx0+RVd/lNYEVBi0mb4tgwwTOsQQDDTUuxl9a+BvbOYkE7Ra+aKuh1vQUSFTqYLMa4A+2ms=
+X-Received: by 2002:a05:6402:50c6:b0:5d0:b60a:2ff6 with SMTP id
+ 4fb4d7f45d1cf-5d972e4c915mr6700663a12.22.1736434890423; Thu, 09 Jan 2025
+ 07:01:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20241113150938.1534931-1-sjg@chromium.org>
- <20241113150938.1534931-5-sjg@chromium.org>
- <517d087e-4ac5-4fd5-a37f-d4d3aaa534bd@gmx.de>
-In-Reply-To: <517d087e-4ac5-4fd5-a37f-d4d3aaa534bd@gmx.de>
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-4-sjg@chromium.org>
+ <20250106214130.GC3476@bill-the-cat>
+In-Reply-To: <20250106214130.GC3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Jan 2025 08:01:13 -0700
-X-Gm-Features: AbW1kvbfZ1L_ztTxlN3rBW538WnysTxjyZONu7fNfiOjTH7O18nA9s_wsI84I8g
-Message-ID: <CAFLszTjbDHvMvv3U+SaW0_7b4oajW8RRf6KYbF_jex34en6ByA@mail.gmail.com>
-Subject: Re: [PATCH v5 4/8] RFC: Revert "bootstd: Make efi_mgr bootmeth work
- for non-sandbox setups"
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 9 Jan 2025 08:01:17 -0700
+X-Gm-Features: AbW1kvYLu_Kx5edT2g6Be1odBJM_GMoMf3jdyPDjQ3Y0FROciqKk4lGAnLhuAjg
+Message-ID: <CAFLszTif6J6r48DWca3GSuGwnARuzJdnuhbi9wkr8ws=0S6Cjw@mail.gmail.com>
+Subject: Re: [PATCH v2 03/33] bloblist: Make BLOBLIST_ALLOC the default
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alex Shumsky <alexthreed@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Chen-Yu Tsai <wens@csie.org>, Dragan Simic <dsimic@manjaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Joshua Watt <jpewhacker@gmail.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,88 +98,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Sat, 4 Jan 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Mon, 6 Jan 2025 at 14:41, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 11/13/24 16:09, Simon Glass wrote:
-> > This is another option to fix sunxi booting with bootstd, which may be
-> > better since it will work for all boards. We can then figure out how to
-> > automatically and deterministicaly decide when bootmgr should be used.
+> On Mon, Jan 06, 2025 at 07:31:59AM -0700, Simon Glass wrote:
+>
+> > We want to encourage people to use an allocated bloblist since it is
+> > more flexible than a fixed one. Make this the default, being sure not to
+> > change existing users.
 > >
-> > This reverts commit f2bfa0cb17948aa4a0fa20fdf9014296b9c4d9c7.
+> > The unit tests require BLOBLIST_FIXED so add a dependency in the
+> > Makefile to avoid build errors.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> > If this patch is applied, we don't need to drop bootmgr for sunxi
+> [snip]
+> > diff --git a/common/Kconfig b/common/Kconfig
+> > index e8d89bf6eb9..a00387a4609 100644
+> > --- a/common/Kconfig
+> > +++ b/common/Kconfig
+> > @@ -1039,16 +1039,10 @@ if BLOBLIST
 > >
-> > (no changes since v1)
-> >
-> >   boot/bootmeth_efi_mgr.c | 18 +-----------------
-> >   1 file changed, 1 insertion(+), 17 deletions(-)avilable
-> >
-> > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> > index 23ae1e610ac..095fa74fc60 100644
-> > --- a/boot/bootmeth_efi_mgr.c
-> > +++ b/boot/bootmeth_efi_mgr.c
-> > @@ -14,8 +14,6 @@
-> >   #include <command.h>
-> >   #include <dm.h>
-> >   #include <efi_loader.h>
-> > -#include <efi_variable.h>
-> > -#include <malloc.h>
-> >
-> >   /**
-> >    * struct efi_mgr_priv - private info for the efi-mgr driver
-> > @@ -48,27 +46,13 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
-> >   static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> >   {
-> >       struct efi_mgr_priv *priv = dev_get_priv(dev);
-> > -     efi_status_t ret;
-> > -     efi_uintn_t size;
-> > -     u16 *bootorder;
-> >
-> >       if (priv->fake_dev) {
-> >               bflow->state = BOOTFLOWST_READY;
-> >               return 0;
-> >       }
-> >
-> > -     ret = efi_init_obj_list();
-> > -     if (ret)
-> > -             return log_msg_ret("init", ret);
-> > -
-> > -     /* Enable this method if the "BootOrder" UEFI exists. */
-> > -     bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
-> > -                             &size);
-> > -     if (bootorder) {
-> > -             free(bootorder);
-> > -             bflow->state = BOOTFLOWST_READY;
-> > -             return 0;
-> > -     }
-> > +     /* To be implemented */
+> >  choice
+> >       prompt "Bloblist location"
+> > +     default BLOBLIST_FIXED if SANDBOX
+> >       help
+> >         Select the location of the bloblist, via various means.
 >
-> The EFI boot manager can boot based on:
->
-> * variable BootOrder
-> * variable BootNext
-> * an existing file EFI/BOOT/BOOT<arch>.EFI
->
-> It obsoletes bootsmeth_efi.
->
-> >
-> >       return -EINVAL;
->
-> We must always run the EFI boot manager if it is enabled. So -EINVAL is
-> wrong here.
+> This should just be "default BLOBLIST_ALLOC" and sandbox platforms that
+> are using the bloblist can be like the other platforms using a fixed
+> address.
 
-Well, I don't believe you have a solution, then.
+We don't need 'default BLOBLIST_ALLOC' as it is now first, so is the
+default. I would like the 'fixed' thing to be later on so that people
+know we want to stop using it.
 
-You did suggest putting bootmgr later, as we discussed on irc.
-
-For now, I think we should apply this patch (and series), while we
-sort out how to make bootmgr more incremental. It should not be
-scanning every available device before it starts, since that can be
-very slow.
+All the sandbox platforms use BLOBLIST_FIXED. I'm not sure what change
+you are wanting me to make to this patch?
 
 Regards,
 Simon
