@@ -4,90 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8731BE77197
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:09:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE38E77199
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:10:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2117F806D3;
-	Thu,  9 Jan 2025 16:09:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 893C4806DD;
+	Thu,  9 Jan 2025 16:10:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xxP8EsTk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EkFKZzoh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07634806E6; Thu,  9 Jan 2025 16:09:48 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 28CBA8005B; Thu,  9 Jan 2025 16:10:03 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95038806D3
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:09:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C4003806DD
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:10:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-4678cce3d60so8954071cf.2
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:09:43 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7ba0fa25f07so79756785a.2
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:10:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736435382; x=1737040182; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oxDsn3kT2MmXKnaZjp4itwhipiUEOUCGQEeMD1MqHXQ=;
- b=xxP8EsTkxklcVNBGr2Nj0IYpTxzOqTfRt9HO/rcJLymIC986FC3HOnDMZdnvhW68rk
- eVaKyF7G/5pxTZeTUN/oLVRQmjpHQmQHZSXt9AT60T1XndBPdH5NVY3eJPDzN6T2Lj6E
- rXvaGkeFuw70KoWQCeU+5rQDOBzc0wOWgskAar9XC/bLOmiRz7kMmFpWnqrgw9vgNuXq
- FPyTFy0kyaQ3JSYQ5Y/sI1lIvARNVAKg63YevfjPJT3Wh265IO7UIT6UujU9TnSM65cr
- +sdGoK0LoGx6gixTKeBiTzC0nAwQMwrNWDXO+2TKdpk6zk4IAhNBt53WPz8gTufqDTJA
- WRvA==
+ d=konsulko.com; s=google; t=1736435399; x=1737040199; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aNxp2xWaEVLbULJALCHy9vyGMHgqroHoKpVvXFLECu4=;
+ b=EkFKZzohxV+DV6buJ77WYYFQEYTMYh7WPjHu52ALi5/CmoZDOgBTfhVyZEYM/Qff3m
+ vN5Rh7KeGhbLEseWHrgYw+Hx3bJTyftiVwo9CjQt2jI+HN114PiU629L2lXT5HJ94QUL
+ sselirmz/+e3H0aNCJ9vWpgbsaxdGZOocAsnY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736435382; x=1737040182;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oxDsn3kT2MmXKnaZjp4itwhipiUEOUCGQEeMD1MqHXQ=;
- b=a9Z+FYaKJwgujPMPghLEZHH7Yik5y6+CuMClWDBxFakKK9fM97GwlpwHbxzNtHqvvX
- Zo6m0V4azwftIV9wIpv4PqoKEhX0D3pMDw2uXt5faFJAYQuPKcHL3eKtoZpUmq1za2ui
- mGCLUU23niF1LsEm2C+sqrYHxPckxiFegFsoTAwcPyfpwt95wmVF2JRDebySL+MZsfCD
- NLyJEY8g2gt6dmCmTca+nDliXZQu8XRbZcd7Hgbfo0VVqT2iIXzM7IwdIATM5MZ7byr+
- h6xn9kyAbWQ7jHvDZJRrD5eaRVTJxj43o4DprspT6s2biahzblirGOC11f/KNsCNhmvk
- 7FlQ==
-X-Gm-Message-State: AOJu0YyGOGvijMTkdNIVTD6PT02fMVLqWzECHeAKwR17NPmSSsGSl147
- d5aWgl4UYhr280j9s7sKL/WaYAINVJe88j38C6Mi5hG+HfMtOlHZH/4+k5kWWBWIIKzHEkXlZLn
- 4FV4=
-X-Gm-Gg: ASbGncvFbVicTMx5PVkxEJUvkzfO4jJ8ZLkdIOA3ObDvqoardXU1FcVROIn45X2tVJf
- 1k7lv8H6tdIRRLvQFFRFERM8ffWcXgD3J3msH1sSWV2oISP7Uc3SX98NRAvSIhZLJ0W+bgMpiuZ
- l/Fj7WIZDk4y4acDPN/y0v5st27LvRANxy5+jYwPNBGYcRwgRGwSx14SK1qqM6T0Ttkjw4XFQlw
- xQIQcjW3T5AOYj7zaWgrqVsYpMSaLqKIvo3KbgRAu3uEEurIMNAZvwHGAMLH79gsynJQAJupMch
- O/fioeTKFwENYpYoBCtVWEZTaFLkJOSn6pNUvUhBM5br8yvW686DwU4=
-X-Google-Smtp-Source: AGHT+IHR+jxuO7FO5ywV4KBNpqbRhn4TIIOj4wiafdjiL+2xyVdANJ6kklm7lmnOYtZUVVVXk7edLw==
-X-Received: by 2002:a05:622a:1f99:b0:46c:7646:4a3a with SMTP id
- d75a77b69052e-46c76464d85mr83679131cf.7.1736435382147; 
- Thu, 09 Jan 2025 07:09:42 -0800 (PST)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46a3e4fdf93sm206396451cf.0.2025.01.09.07.09.41
+ d=1e100.net; s=20230601; t=1736435399; x=1737040199;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aNxp2xWaEVLbULJALCHy9vyGMHgqroHoKpVvXFLECu4=;
+ b=gVoJvjbpVBc7uqCoOeYwdo6LdsqyVR2SJbUmvvenH91oMx72K0jW1xlGiJw0S5Cxd8
+ 0laf77Rp5Z34Ogp4Tc0EhD3mG1ceL2/Vs28/UG5k/NPk1Uzp7WfVnNceqYc89p3moxS+
+ t/KyaaAqhiM7UuzklkNbph+HJpHUddD6Nwb11ZsbrXnpgrqfjX15p33J5LvaEmkLvS2p
+ 33sbChgNqACXoTPbi7p5xShKKA5lfCNjfI+/9f/ybR+XHdMduUv751DVkKglbgm/66gK
+ 8NvW6vitxnTEzaPLGE91q2ObTbZSbKF42Kn1Dj/UGG1qmtqY5weHgGLULUJLa5yRgSUb
+ jcSw==
+X-Gm-Message-State: AOJu0Yx1QD/seQOvCU7Vi07TNjcyT53/zmlEkS26/X6JGAUifzhmmFvm
+ bbb8ZymL7yqFj/icG0YFP10BEPedfgu5Z+X+r7i54GiXQLN+pSpgQ1Ns6OeGrUA=
+X-Gm-Gg: ASbGncu2LMv9+RfuBXjPqgIBAdfoTo4YkfLTqYnsamHSvHqMpQqPG6jfcJKEkiBTrxL
+ 2akC+I/dMDSUXB1DWTs/G+gqiGOOrM3Yuyf+LkhxEEbXWJzxdf1yfcpgBmNHnFsNOga0y5KhT2D
+ ptiS6VtrV0hsk7eP4kCDt5F606ZwTIpWWetASG2RO8vuGTlpwtsWcp6MannBJU8H6TPJEWRLb8y
+ FQ0b2JXloVYOl4rQJXYgYl4tT/EnYwSeqruMsv2BB1QGKM9gevrO0Y=
+X-Google-Smtp-Source: AGHT+IESGvfxEP4srU9qFOm1c98TCHi1JbxzB/D7LXJVrsfxiZ2vR3hPqkb52NKdPmc5eoTffaSeiA==
+X-Received: by 2002:a05:620a:29c2:b0:7b8:5629:5d65 with SMTP id
+ af79cd13be357-7bcd970d48cmr503749985a.24.1736435399593; 
+ Thu, 09 Jan 2025 07:09:59 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7bce35160c6sm74763885a.114.2025.01.09.07.09.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 07:09:41 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Thu, 09 Jan 2025 07:09:58 -0800 (PST)
+Date: Thu, 9 Jan 2025 09:09:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Dahl <ada@thorsis.com>,
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Levi Yun <yeoreum.yun@arm.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>
-Subject: [PATCH v3 2/2] tpm: get tpm event log from bloblist
-Date: Thu,  9 Jan 2025 07:09:23 -0800
-Message-Id: <20250109150928.878849-2-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250109150928.878849-1-raymond.mao@linaro.org>
-References: <20250109150928.878849-1-raymond.mao@linaro.org>
+ Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
+Message-ID: <20250109150954.GU3476@bill-the-cat>
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-18-sjg@chromium.org>
+ <20250108182528.GN3476@bill-the-cat>
+ <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9UpsjYNLJz9vKI7A"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,142 +115,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get tpm event log from bloblist instead of FDT when bloblist is
-enabled and valid from previous boot stage.
 
-As a fallback, when no event log from previous stage is observed
-and no user buffer is passed, malloc an 8KB buffer to initialize
-the event log.
+--9UpsjYNLJz9vKI7A
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
-Changes in v2
-- Remove patch dependency.
-- Remove the fallback to FDT when BLOBLIST is selected.
-Changes in v3
-- Malloc an 8KB buffer when user eventlog buffer does not exist.
+On Thu, Jan 09, 2025 at 05:36:03AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 8 Jan 2025 at 11:25, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Jan 06, 2025 at 07:32:13AM -0700, Simon Glass wrote:
+> >
+> > > This function uses separate arguments for data and size. Use the new
+> > > abuf instead, so that they are paired and in one place. In some cases=
+ it
+> > > also saves an argument, thus potentially reducing code size.
+> >
+> > This is one of the commits that globally increases size in both full
+> > U-Boot and SPL/etc.
+> >
+> > Is all of the "abuf" changes just a "tidy up" that increases the code a
+> > bit?
+>=20
+> Yes, a tidy-up which I hope will help overall. I have been thinking
+> for a while of how to avoid having addr/size and ptr/size passed
+> everywhere. For now abuf seems to provide some sort of solution.
+>=20
+> I see this:
+>=20
+> 18: boot: Update fit_image_get_emb_data to use abuf
+>    aarch64: (for 1/1 boards) all +4.0 bss -24.0 spl/u-boot-spl:all
+> +16.0 spl/u-boot-spl:text +16.0 text +28.0
+>=20
+> so growth on firefly-rk3399 but not with rk3288. I am not sure if the
+> growth will tail off as there are more users, though. We might even be
+> able to be more clever with static inlines.
 
- include/tpm_tcg2.h |  2 ++
- lib/tpm_tcg2.c     | 55 ++++++++++++++++++++++++++++++----------------
- 2 files changed, 38 insertions(+), 19 deletions(-)
+Yeah, lets not do this now then and worry about some "clean up" later
+when we can show that it does, or does not, improve size. And there's
+something wrong with your numbers:
+01: Fix neighbor discovery ethernet address saving
+   aarch64:  w+   firefly-rk3399
++(firefly-rk3399) Image 'simple-bin' is missing external blobs and is non-f=
+unctional: atf-bl31
++(firefly-rk3399)
++(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (atf-bl31=
+):
++(firefly-rk3399)    See the documentation for your board. You may need to =
+build ARM Trusted
++(firefly-rk3399)    Firmware and build with BL31=3D/path/to/bl31.bin
++(firefly-rk3399) Image 'simple-bin' is missing optional external blobs but=
+ is still functional: tee-os
++(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
++(firefly-rk3399)    See the documentation for your board. You may need to =
+build Open Portable
++(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and build with =
+TEE=3D/path/to/tee.bin
++(firefly-rk3399) Some images are invalid
+37: dm: core: Provide ofnode_find_subnode_unit()
+   aarch64: (for 1/1 boards) all +324.0 bss +32.0 spl/u-boot-spl:all +16.0 =
+spl/u-boot-spl:text +16.0 text +292.0
+            firefly-rk3399 : all +324 bss +32 spl/u-boot-spl:all +16 spl/u-=
+boot-spl:text +16 text +292
+               u-boot: add: 6/-1, grow: 4/-4 bytes: 516/-224 (292)
+                 function                                   old     new   d=
+elta
+                 ofnode_name_eq_unit                          -     160    =
++160
+                 ofnode_find_subnode_unit                     -     116    =
++116
+                 fit_image_get_data                          80     176    =
+ +96
+                 fit_image_get_emb_data                       -      84    =
+ +84
+                 ofnode_write_prop                          224     236    =
+ +12
+                 ofnode_add_subnode                         232     244    =
+ +12
+                 abuf_init_const                              -      12    =
+ +12
+                 abuf_init                                    -      12    =
+ +12
+                 abuf_addr                                    -       8    =
+  +8
+                 fit_image_print                            780     784    =
+  +4
+                 image_locate_script                        696     692    =
+  -4
+                 fit_image_load                            1584    1580    =
+  -4
+                 fit_image_verify                           176     164    =
+ -12
+                 ofnode_find_subnode                        140     116    =
+ -24
+                 fit_image_get_data_and_size                180       -    =
+-180
+               spl-u-boot-spl: add: 3/-1, grow: 0/-1 bytes: 108/-92 (16)
+                 function                                   old     new   d=
+elta
+                 fit_image_get_emb_data                       -      84    =
+ +84
+                 abuf_init_const                              -      12    =
+ +12
+                 abuf_init                                    -      12    =
+ +12
+                 load_simple_fit                            580     568    =
+ -12
+                 fit_image_get_data                          80       -    =
+ -80
 
-diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
-index 6519004cc4..6ea316888b 100644
---- a/include/tpm_tcg2.h
-+++ b/include/tpm_tcg2.h
-@@ -65,6 +65,8 @@
- #define EFI_DTB_EVENT_STRING \
- 	"DTB DATA"
- 
-+#define EVENT_LOG_DEF_BUF_SIZE 0x2000
-+
- /**
-  *  struct TCG_EfiSpecIdEventAlgorithmSize - hashing algorithm information
-  *
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 7f868cc883..d880b14888 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -5,6 +5,7 @@
- 
- #include <dm.h>
- #include <dm/of_access.h>
-+#include <malloc.h>
- #include <tpm_api.h>
- #include <tpm-common.h>
- #include <tpm-v2.h>
-@@ -19,6 +20,7 @@
- #include <linux/unaligned/generic.h>
- #include <linux/unaligned/le_byteshift.h>
- #include "tpm-utils.h"
-+#include <bloblist.h>
- 
- int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
- 		      u32 *pcr_banks)
-@@ -607,15 +609,24 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
- 		elog->found = log.found;
- 	}
- 
-+	if (elog->found)
-+		return 0;
-+
- 	/*
--	 * Initialize the log buffer if no log was discovered and the buffer is
--	 * valid. User's can pass in their own buffer as a fallback if no
--	 * memory region is found.
-+	 * Initialize the log buffer if no log was discovered.
-+	 * User can pass in their own buffer as a fallback if no memory region
-+	 * is found, else malloc a buffer if it does not exist.
- 	 */
--	if (!elog->found && elog->log_size)
--		rc = tcg2_log_init(dev, elog);
-+	if (!elog->log_size) {
-+		elog->log = malloc(EVENT_LOG_DEF_BUF_SIZE);
-+		if (!elog->log)
-+			return -ENOMEM;
-+
-+		memset(elog->log, 0, EVENT_LOG_DEF_BUF_SIZE);
-+		elog->log_size = EVENT_LOG_DEF_BUF_SIZE;
-+	}
- 
--	return rc;
-+	return tcg2_log_init(dev, elog);
- }
- 
- int tcg2_measurement_init(struct udevice **dev, struct tcg2_event_log *elog,
-@@ -668,10 +679,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
- 	const __be32 *size_prop;
- 	int asize;
- 	int ssize;
-+	struct ofnode_phandle_args args;
-+	phys_addr_t a;
-+	fdt_size_t s;
- 
- 	*addr = NULL;
- 	*size = 0;
- 
-+	*addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
-+	if (*addr && *size)
-+		return 0;
-+	else if (CONFIG_IS_ENABLED(BLOBLIST))
-+		return -ENODEV;
-+
- 	addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
- 	if (!addr_prop)
- 		addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
-@@ -686,22 +706,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
- 
- 		*addr = map_physmem(a, s, MAP_NOCACHE);
- 		*size = (u32)s;
--	} else {
--		struct ofnode_phandle_args args;
--		phys_addr_t a;
--		fdt_size_t s;
- 
--		if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
--					       0, &args))
--			return -ENODEV;
-+		return 0;
-+	}
- 
--		a = ofnode_get_addr_size(args.node, "reg", &s);
--		if (a == FDT_ADDR_T_NONE)
--			return -ENOMEM;
-+	if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
-+		return -ENODEV;
- 
--		*addr = map_physmem(a, s, MAP_NOCACHE);
--		*size = (u32)s;
--	}
-+	a = ofnode_get_addr_size(args.node, "reg", &s);
-+	if (a == FDT_ADDR_T_NONE)
-+		return -ENOMEM;
-+
-+	*addr = map_physmem(a, s, MAP_NOCACHE);
-+	*size = (u32)s;
- 
- 	return 0;
- }
--- 
-2.25.1
+--=20
+Tom
 
+--9UpsjYNLJz9vKI7A
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd/5sIACgkQFHw5/5Y0
+tywAcQv8CMEyVUW/1eWTOQnRM2nxiqkb++ys5fjsmAsr/d0ssDrtwqtVP6tJHUMF
+WJWY4avvQoCKVmGSiVjW8/RYJN9dFj5qt7ao3WoA39OrDN4bAMZoNlyd1tTBDLWm
+Hz3lWCribXKnSsGHMKFt58qyTSSz83BaniYYETXCVRR5tP1orFmmKFWYW2bSjM86
+bPDCMyvZUufeW4XrOW1jvlLevVU8zWcKf7S2vo/wKzOAzOuee7YPPpvqRKY+e83k
+Zj/cRQ0kXFIowlwE0lCaayk4q26VQ+c+LXf7ODmJVlRd0tkPTtavEd49l5/msKei
+7p0zxf1yD3m8Hp8WFFaWxR78B4Hedrelr6Bhhk/66007EqUc4YacRSXpF9Ne4dvr
+9/KrHNsUMQelqxWCNyCd1rNkX9vXf0/jBVJ3xcQJS40u4FWRtxBESyCzLVN0LxuR
+quPN3UU3Ry+YmQPZzNU6WQmkdzUq2cIqd0izkaQgmytECfWj2UvAMMw7QlcFDXAt
+ir/EZcH5
+=0FbZ
+-----END PGP SIGNATURE-----
+
+--9UpsjYNLJz9vKI7A--
