@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2881EC02188
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B116DC02183
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56A42806FE;
-	Thu,  9 Jan 2025 16:03:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B405D805EA;
+	Thu,  9 Jan 2025 16:03:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a5OgU1rg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QU0aGux1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B882806FE; Thu,  9 Jan 2025 16:03:15 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 68954805E2; Thu,  9 Jan 2025 16:03:19 +0100 (CET)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4AE4806DC
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:03:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D8C20806FC
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:03:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-844eb33827eso30703039f.2
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:03:10 -0800 (PST)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-844e7bc6d84so31975939f.0
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:03:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736434987; x=1737039787; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736434991; x=1737039791; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zpkx/TkeEtPlTIlMdwSF6ErijNV5amko0sZEUd8dV+4=;
- b=a5OgU1rgwBMPsIFwI+BS18Dr3btTccfMglt/qwRRfdDwnLhe9AwEm1EDo36a5zoogo
- 7XDgcKMcfkRViVAOcmvjBfo6DTdRfidYw1nDd4ZD03/dHH4vgml3V7hgFpOemFP/s4AU
- serZE++W7Y6XhBJ6v85JdpWeRRh9xVuGeJMXU=
+ bh=sTyuC2je7vrHTN8yLUER7REjzZHI7AiPfX4QtpH4MmM=;
+ b=QU0aGux1CCL4hZN5jUc5VVc/ylxDg1tK/NhMf0ApE108CZcM49nZldlLQLB3jRPAdi
+ xt12Yax31dj8KK4004cJ9+ntsw019+rUGrMbDR2+4dh6fBe113DMtBfRw+bI0A3sFHPo
+ QwQr7EJuv41RBnwh8Ft3sW3j5Ncj/d4pw28JE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736434987; x=1737039787;
+ d=1e100.net; s=20230601; t=1736434991; x=1737039791;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zpkx/TkeEtPlTIlMdwSF6ErijNV5amko0sZEUd8dV+4=;
- b=UUxBHI6OCHRie3M/Vb3g+LE1BQqSvZEFCi1hm9BBIi2oUbP7+vZqx/ulva4CNCOAyw
- gw5CUHeoR+70Em2C+b3Vu6vgnMAk7sAQCLwiQ7ZTVjnyANfnthGD7b4J7wDcGhmYfSFD
- Og6F3h+QG+CY6CBnhv1BhqlTHd6Ulhr0MhLeOPTKKS4bkXbeG38WmNbq2DtoiXFBrqpq
- 57v0/rjLBq0yqqucHiF28Yf6n/fIPEIelQ8juT1YuB2BbHLb3lHaka7Q6iPYI+tybf3q
- NI7XPCEfSa8Nr0xRcycSX/rJokLqmTvOOAzY0CuYun9202vnE6PPOwQarTnE9tOefKUo
- VDhw==
-X-Gm-Message-State: AOJu0YzGW/qiC4YV+397Ppeh9l4Y8jnUl/V4QfxiwRLWdSxgaHyF7rlP
- ZbUnWHRb5dwHo7PYqr86M2J8E7CDqAAEIbUg9BwGZrIsrzXfdnzpi0S+tzUUB4fDRByvesIj4ck
+ bh=sTyuC2je7vrHTN8yLUER7REjzZHI7AiPfX4QtpH4MmM=;
+ b=A2I91HrNdiqNybcvJs4LgcUB+CiQK+MGZguCFbBYUb4fYJ2VeINqpxEw8Zng/egwix
+ sNPIl7BxLcBwytSYyq6jD6II/CYXO5W1eZ4VQzIvM1PUqqRnyg/X+xd6+CXAu0m2ePgs
+ vm8wOb70stpAmJ1GbdJvFYqKKqafLfxfVHOhEnk8RKifsD+F3ZEDAtBdJa81b2A0QqTV
+ ilMLBJVnTDQHhOTchdMPw0bHcvvHPEgw5w0mQaCJMgZK1e2AX3loVaz2vCliMXp2lF6x
+ gkzYajDOBEY3CuYLGWqAqW6a0ygEdHD8rZ4Np3RHavTwJCDFWiPEK4AhC+Z5/bxt9tyy
+ dNYQ==
+X-Gm-Message-State: AOJu0YwBTSAycsYF7TcuDM5GdoWxx/gorzI3i+69KfeN+Ri6v0nACxPi
+ bFiT5tj+gKZuGEEe4MNTx9UgAvTzipEiHT+8VmGnQz4GZiN6CJ6fL+eA/EwyQK9S5CxmhEewXXs
  =
-X-Gm-Gg: ASbGnct5Vijw4/6y6ED+jGA8ZJTj5etpYa6cHbJy3RQOL5MfHisE/uwd/wTm2n0VjVg
- NDn0xVZXxju7AspXUzC4mIEcifp56AA7FN3O1BHibgXLk5uIAo9a37fd1HnE1XagAyV7e5H7hG6
- u3adGL0u8HCDRVmcENIu9ERCWvNRzRE8hhq+9NY4IUuRjsZz3JTKsiQg0XFq+9N49wNzg6YDTxY
- AGlJcyMEd551XuLRGj0RaXb3D44iHhgCNaJ/u4+9JPUVLcG6XvfVJ2HWM2kqG5hkRfluB77LMp5
- 8OeL8slkyWaQ+ikzQQ==
-X-Google-Smtp-Source: AGHT+IH/VZK4ukmAhVUAA9DvdjjYRWY3kc3McC3y3lsYfE694jkgaZuytjyYJVae+Rl0bqCZmk7VUw==
-X-Received: by 2002:a05:6e02:214f:b0:3a7:e528:6ee6 with SMTP id
- e9e14a558f8ab-3ce3a888287mr54541005ab.13.1736434987330; 
- Thu, 09 Jan 2025 07:03:07 -0800 (PST)
+X-Gm-Gg: ASbGncv/F66R34Wb7hAwVYj+xRPX3VmiYPQRv9TSUCp4LZVCRmIpMH4lO9AZp2Ocoks
+ fX+Ws44/Qfhr1Jg1FrLqCcxJy7NVMjtm8n5oGWL01jFogu9FzPsxNVSr6RlOqTVX7PUJBYtim3N
+ yNMJW1R+SiYmDXFDHPxJlc9HyDyPFTG1GtLDp+Wg+QeJKyr0cJJd/Ehyji+Uo2VfmluOOsdMU4Z
+ PgyWq79BHsZ+imAZuPGCyPOzJkwC8Xhq8+qAOK3805YRzv2WMPUgq328mu0HCO66hcKmCCzoR1H
+ qlyTw/Nwk1lsHE+I4g==
+X-Google-Smtp-Source: AGHT+IHlyQZbAeESNEloni+YCOWVIP2sg/4VYnmAKdqsro20UFIlJh4+OHeYmxrMhx9tUuWrFImNtg==
+X-Received: by 2002:a05:6602:3a87:b0:84a:5ded:b7c6 with SMTP id
+ ca18e2360f4ac-84cebef565emr266820839f.5.1736434991107; 
+ Thu, 09 Jan 2025 07:03:11 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b7463d0sm350530173.123.2025.01.09.07.03.04
+ 8926c6da1cb9f-4ea1b7463d0sm350530173.123.2025.01.09.07.03.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 07:03:04 -0800 (PST)
+ Thu, 09 Jan 2025 07:03:08 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Adriano Cordova <adrianox@gmail.com>, Moritz Fischer <moritzf@google.com>,
- Patrick Wildt <pwildt@google.com>
-Subject: [PATCH v4 5/7] efi_loader: Move the fallback code from efi_run_image()
-Date: Thu,  9 Jan 2025 08:02:42 -0700
-Message-Id: <20250109150244.141173-6-sjg@chromium.org>
+ Adriano Cordova <adrianox@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v4 6/7] efi_loader: Pass in the required parameters from EFI
+ bootmeth
+Date: Thu,  9 Jan 2025 08:02:43 -0700
+Message-Id: <20250109150244.141173-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250109150244.141173-1-sjg@chromium.org>
 References: <20250109150244.141173-1-sjg@chromium.org>
@@ -96,140 +101,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This code is only needed if an invalid image/device path is passed in.
-Move the code out to a caller where this can be dealt with. The normal
-flow will provide these parameters.
+Rather than setting up the global variables and then making the call,
+pass them into function directly. This cleans up the code and makes it
+all a bit easier to understand.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- lib/efi_loader/efi_bootbin.c | 90 +++++++++++++++++++-----------------
- 1 file changed, 48 insertions(+), 42 deletions(-)
+Changes in v2:
+- Use efi_loader tag instead of efi
+- Drop unnecessary path removal
+- Fix 'require' typo
+- Move calculation of dev-name into a separate function
 
+ boot/bootmeth_efi.c          | 49 +------------------------
+ include/efi_loader.h         | 10 +++++
+ lib/efi_loader/efi_bootbin.c | 71 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 83 insertions(+), 47 deletions(-)
+
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index f836aa655f5..fa7f66c9a0b 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -52,40 +52,6 @@ static bool bootmeth_uses_network(struct bootflow *bflow)
+ 	    device_get_uclass_id(media) == UCLASS_ETH;
+ }
+ 
+-static void set_efi_bootdev(struct blk_desc *desc, struct bootflow *bflow)
+-{
+-	const struct udevice *media_dev;
+-	int size = bflow->size;
+-	const char *dev_name;
+-	char devnum_str[9];
+-	char dirname[200];
+-	char *last_slash;
+-
+-	/*
+-	 * This is a horrible hack to tell EFI about this boot device. Once we
+-	 * unify EFI with the rest of U-Boot we can clean this up. The same hack
+-	 * exists in multiple places, e.g. in the fs, tftp and load commands.
+-	 *
+-	 * Once we can clean up the EFI code to make proper use of driver model,
+-	 * this can go away.
+-	 */
+-	media_dev = dev_get_parent(bflow->dev);
+-	snprintf(devnum_str, sizeof(devnum_str), "%x:%x",
+-		 desc ? desc->devnum : dev_seq(media_dev),
+-		 bflow->part);
+-
+-	strlcpy(dirname, bflow->fname, sizeof(dirname));
+-	last_slash = strrchr(dirname, '/');
+-	if (last_slash)
+-		*last_slash = '\0';
+-
+-	dev_name = device_get_uclass_id(media_dev) == UCLASS_MASS_STORAGE ?
+-		 "usb" : blk_get_uclass_name(device_get_uclass_id(media_dev));
+-	log_debug("setting bootdev %s, %s, %s, %p, %x\n",
+-		  dev_name, devnum_str, bflow->fname, bflow->buf, size);
+-	efi_set_bootdev(dev_name, devnum_str, bflow->fname, bflow->buf, size);
+-}
+-
+ static int efiload_read_file(struct bootflow *bflow, ulong addr)
+ {
+ 	struct blk_desc *desc = NULL;
+@@ -103,8 +69,6 @@ static int efiload_read_file(struct bootflow *bflow, ulong addr)
+ 		return log_msg_ret("read", ret);
+ 	bflow->buf = map_sysmem(addr, bflow->size);
+ 
+-	set_efi_bootdev(desc, bflow);
+-
+ 	return 0;
+ }
+ 
+@@ -342,17 +306,8 @@ static int distro_efi_boot(struct udevice *dev, struct bootflow *bflow)
+ 		fdt = env_get_hex("fdt_addr_r", 0);
+ 	}
+ 
+-	if (bflow->flags & BOOTFLOWF_USE_BUILTIN_FDT) {
+-		log_debug("Booting with built-in fdt\n");
+-		if (efi_binary_run(map_sysmem(kernel, 0), bflow->size,
+-				   EFI_FDT_USE_INTERNAL))
+-			return log_msg_ret("run", -EINVAL);
+-	} else {
+-		log_debug("Booting with external fdt\n");
+-		if (efi_binary_run(map_sysmem(kernel, 0), bflow->size,
+-				   map_sysmem(fdt, 0)))
+-			return log_msg_ret("run", -EINVAL);
+-	}
++	if (efi_bootflow_run(bflow))
++		return log_msg_ret("run", -EINVAL);
+ 
+ 	return 0;
+ }
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 9afbec35ebf..a9325b1a9d0 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -20,6 +20,7 @@
+ #include <linux/oid_registry.h>
+ 
+ struct blk_desc;
++struct bootflow;
+ struct jmp_buf_data;
+ 
+ #if CONFIG_IS_ENABLED(EFI_LOADER)
+@@ -578,6 +579,15 @@ efi_status_t efi_install_fdt(void *fdt);
+ efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
+ /* Run loaded UEFI image with given fdt */
+ efi_status_t efi_binary_run(void *image, size_t size, void *fdt);
++
++/**
++ * efi_bootflow_run() - Run a bootflow containing an EFI application
++ *
++ * @bootflow: Bootflow to run
++ * Return: Status code, something went wrong
++ */
++efi_status_t efi_bootflow_run(struct bootflow *bootflow);
++
+ /* Initialize variable services */
+ efi_status_t efi_init_variables(void);
+ /* Notify ExitBootServices() is called */
 diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index 6cbc5fa050c..7c6a88c79fd 100644
+index 7c6a88c79fd..a4f6b4264fb 100644
 --- a/lib/efi_loader/efi_bootbin.c
 +++ b/lib/efi_loader/efi_bootbin.c
-@@ -165,37 +165,13 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
- 				  struct efi_device_path *device,
- 				  struct efi_device_path *image)
- {
--	efi_handle_t mem_handle = NULL, handle;
--	struct efi_device_path *file_path = NULL;
--	struct efi_device_path *msg_path;
-+	efi_handle_t handle;
-+	struct efi_device_path *msg_path, *file_path;
- 	efi_status_t ret;
- 	u16 *load_options;
+@@ -6,13 +6,16 @@
  
--	if (!device || !image) {
--		log_debug("Not loaded from disk\n");
--		/*
--		 * Special case for efi payload not loaded from disk,
--		 * such as 'bootefi hello' or for example payload
--		 * loaded directly into memory via JTAG, etc:
--		 */
--		file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
--					    (uintptr_t)source_buffer,
--					    source_size);
--		/*
--		 * Make sure that device for device_path exist
--		 * in load_image(). Otherwise, shell and grub will fail.
--		 */
--		ret = efi_install_multiple_protocol_interfaces(&mem_handle,
--							       &efi_guid_device_path,
--							       file_path, NULL);
--		if (ret != EFI_SUCCESS)
--			goto out;
--		msg_path = file_path;
--	} else {
--		file_path = efi_dp_concat(device, image, 0);
--		msg_path = image;
--		log_debug("Loaded from disk\n");
--	}
-+	file_path = efi_dp_concat(device, image, 0);
-+	msg_path = image;
+ #define LOG_CATEGORY LOGC_EFI
  
- 	log_info("Booting %pD\n", msg_path);
++#include <bootflow.h>
+ #include <charset.h>
++#include <dm.h>
+ #include <efi.h>
+ #include <efi_loader.h>
+ #include <env.h>
+ #include <image.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <mapmem.h>
  
-@@ -214,15 +190,6 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
- 	ret = do_bootefi_exec(handle, load_options);
- 
- out:
--	if (mem_handle) {
--		efi_status_t r;
--
--		r = efi_uninstall_multiple_protocol_interfaces(
--			mem_handle, &efi_guid_device_path, file_path, NULL);
--		if (r != EFI_SUCCESS)
--			log_err("Uninstalling protocol interfaces failed\n");
--	}
--	efi_free_pool(file_path);
- 
+ static struct efi_device_path *bootefi_image_path;
+ static struct efi_device_path *bootefi_device_path;
+@@ -285,3 +288,71 @@ out:
  	return ret;
  }
-@@ -241,9 +208,9 @@ out:
-  *
-  * Return:	status code
-  */
--efi_status_t _efi_binary_run(void *image_ptr, size_t size, void *fdt,
--			     struct efi_device_path *device,
--			     struct efi_device_path *image)
-+static efi_status_t _efi_binary_run(void *image_ptr, size_t size, void *fdt,
-+				    struct efi_device_path *device,
-+				    struct efi_device_path *image)
- {
- 	efi_status_t ret;
  
-@@ -276,6 +243,45 @@ efi_status_t _efi_binary_run(void *image_ptr, size_t size, void *fdt,
-  */
- efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
- {
--	return _efi_binary_run(image, size, fdt, bootefi_device_path,
--			       bootefi_image_path);
-+	efi_handle_t mem_handle = NULL;
-+	struct efi_device_path *file_path = NULL;
++/**
++ * calc_dev_name() - Calculate the device name to give to EFI
++ *
++ * If not supported, this shows an error.
++ *
++ * Return name, or NULL if not supported
++ */
++static const char *calc_dev_name(struct bootflow *bflow)
++{
++	const struct udevice *media_dev;
++
++	media_dev = dev_get_parent(bflow->dev);
++
++	if (!bflow->blk) {
++		log_err("Cannot boot EFI app on media '%s'\n",
++			dev_get_uclass_name(media_dev));
++
++		return NULL;
++	}
++
++	if (device_get_uclass_id(media_dev) == UCLASS_MASS_STORAGE)
++		return "usb";
++
++	return blk_get_uclass_name(device_get_uclass_id(media_dev));
++}
++
++efi_status_t efi_bootflow_run(struct bootflow *bflow)
++{
++	struct efi_device_path *device, *image;
++	const struct udevice *media_dev;
++	struct blk_desc *desc = NULL;
++	const char *dev_name;
++	char devnum_str[9];
 +	efi_status_t ret;
++	void *fdt;
 +
-+	if (!bootefi_device_path || !bootefi_image_path) {
-+		log_debug("Not loaded from disk\n");
-+		/*
-+		 * Special case for efi payload not loaded from disk,
-+		 * such as 'bootefi hello' or for example payload
-+		 * loaded directly into memory via JTAG, etc:
-+		 */
-+		file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-+					    (uintptr_t)image, size);
-+		/*
-+		 * Make sure that device for device_path exist
-+		 * in load_image(). Otherwise, shell and grub will fail.
-+		 */
-+		ret = efi_install_multiple_protocol_interfaces(&mem_handle,
-+							       &efi_guid_device_path,
-+							       file_path, NULL);
-+		if (ret != EFI_SUCCESS)
-+			goto out;
++	media_dev = dev_get_parent(bflow->dev);
++	if (bflow->blk) {
++		desc = dev_get_uclass_plat(bflow->blk);
++
++		snprintf(devnum_str, sizeof(devnum_str), "%x:%x",
++			 desc ? desc->devnum : dev_seq(media_dev), bflow->part);
 +	} else {
-+		log_debug("Loaded from disk\n");
++		*devnum_str = '\0';
 +	}
 +
-+	ret = _efi_binary_run(image, size, fdt, bootefi_device_path,
-+			      bootefi_image_path);
-+out:
-+	if (mem_handle) {
-+		efi_status_t r;
++	dev_name = calc_dev_name(bflow);
++	log_debug("dev_name '%s' devnum_str '%s' fname '%s' media_dev '%s'\n",
++		  dev_name, devnum_str, bflow->fname, media_dev->name);
++	if (!dev_name)
++		return EFI_UNSUPPORTED;
++	ret = calculate_paths(dev_name, devnum_str, bflow->fname, &device,
++			      &image);
++	if (ret)
++		return ret;
 +
-+		r = efi_uninstall_multiple_protocol_interfaces(mem_handle,
-+					&efi_guid_device_path, file_path, NULL);
-+		if (r != EFI_SUCCESS)
-+			log_err("Uninstalling protocol interfaces failed\n");
++	if (bflow->flags & BOOTFLOWF_USE_BUILTIN_FDT) {
++		log_debug("Booting with built-in fdt\n");
++		fdt = EFI_FDT_USE_INTERNAL;
++	} else {
++		log_debug("Booting with external fdt\n");
++		fdt = map_sysmem(bflow->fdt_addr, 0);
 +	}
-+	efi_free_pool(file_path);
++	ret = _efi_binary_run(bflow->buf, bflow->size, fdt, device, image);
 +
 +	return ret;
- }
++}
 +
 -- 
 2.34.1
