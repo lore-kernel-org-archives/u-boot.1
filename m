@@ -4,79 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E47BE77199
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:08:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FC4E77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:09:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29BEE80107;
-	Thu,  9 Jan 2025 16:08:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B8AA980107;
+	Thu,  9 Jan 2025 16:09:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fzxiEWOW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M8P37syr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F95F80601; Thu,  9 Jan 2025 16:08:13 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id A134F80601; Thu,  9 Jan 2025 16:09:39 +0100 (CET)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 887968005B
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:08:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5525B8005B
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:09:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2eeb4d643a5so1830452a91.3
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:08:10 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-467a37a2a53so10240041cf.2
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:09:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736435289; x=1737040089; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5rTO4nendVka1Gm0lA4o/R65fB68qlSp5Z2PfRymXHY=;
- b=fzxiEWOWIEx4DZQ0GQ8mCXIlOiPQxtmQC7NItJxREgkCo0oXUDFHaie7B3b5fb5dnb
- CiGDI3fmo0QBIZi/DCeFA1U8w2Eane2BXl6e658m3Mn58OyTx7inMgOJI0GImsuFDSPP
- eyIFgJpLzRBXrM2jZd+43npipJ2R1yvPGQwb8=
+ d=linaro.org; s=google; t=1736435376; x=1737040176; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jh3E7vzoxDYdkl3v4fYsLXr2VlBMnc6oyBKvL9uteaA=;
+ b=M8P37syrbo4sWQ73Fwhs/NcuQeGjZcNkBMSC126sQn5N/FVVHCKr1zuCKqpZgx2Cp0
+ PuzynCzWcU0FGjB++UlyAu1+HQ+h2v6wdrkuXbx6nQRgPz5BUOivb4Rg67SlSsPwWq+g
+ H60G35d9OgxUWytEhORBOdFOlKKBYAKdr7WJa4SMsGNzy8JFvHpfHreH58wNkaRAb2PA
+ Z/9tvt4mRK6uYgpr8e/LZxdDrnvuNbRvw5F19vWfGM23GHMUnPLrWUdtiPIfKyPd99tP
+ bx0foq7ccQwRjoiGr7JbzHUcM/yYiD4mayft8QJr4ESrBv2+MdJlF/rpHDOfSvNhkZDm
+ Bq1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736435289; x=1737040089;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1736435376; x=1737040176;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5rTO4nendVka1Gm0lA4o/R65fB68qlSp5Z2PfRymXHY=;
- b=pJyck3gx8AOYT5yhD9d5XKbppUI/sc1f1IsJH4JT9/a3Y6/86e5+3eZJug87Rw+jmV
- ioabRR/e4KhWzvrhA4lMxYveL8FJICjEeQ84+2/15ZjNmDNotvzJe4lfFxaMk95Hbgmi
- iUshU3OBQhtK9Ro36c/4soZ5c2I5zlm19JpIj43PRfFITFCwcDBwQUVDYVq0xA7puwHg
- JaQIgtICXS4+/Ox0BBtUukyrhF/SvhcsyYGa02xjNI2IDB02YMB0vSPbUDR3GW1KZw1J
- FNUmK98rJnvb7m6Ub8cfwvUj4Da/xLIxlHwoQCq2ABl1NX5omqo6cwT+X6hjfy/IuICS
- kLWw==
-X-Gm-Message-State: AOJu0YxhYEf+XBTx1JIVqOi2p6tjFZ+WFNF81pJNhTnkEeUZeGx1N86Q
- BgopPe9yfrN3+JVI2P+4QozM+MRv+3C+4nkJ973er4I5WgJbktUdt+OEwUGAEv/g9Y06xilwyNY
- Z6A0RU46sA/bZQlPo295TOfZhud5VyjdqXyli
-X-Gm-Gg: ASbGncu3OO2DuNDCpUbSNUyxSORQ9v6F1lSUnPjXq+0o6zd0E3IUUJA8e+q8hFtYENv
- M0HE/Z8QiIRrkoKJljFQIOiKpoDyEGwqEaGVmCpY=
-X-Google-Smtp-Source: AGHT+IEWhwsH2raVzxtECq3X65SvzE9t7Z4jopY8LlRefsAHTK+nxWaDE3YGV6zVIEvnI7zq7Qwvgp7us5ZqYkvL474=
-X-Received: by 2002:a17:90b:2d88:b0:2ea:8aac:6aa9 with SMTP id
- 98e67ed59e1d1-2f548f69ff3mr9317345a91.21.1736435289111; Thu, 09 Jan 2025
- 07:08:09 -0800 (PST)
+ bh=jh3E7vzoxDYdkl3v4fYsLXr2VlBMnc6oyBKvL9uteaA=;
+ b=fb2KpC0ppHqk2GZWZ6+Y+HPkH0Rh4E96zeSqudvDxFoe48A9/U0OFYkF6tmtEntrGM
+ DIf7EbeRKu91KGUIFBmnnW3mMoki1F6w1rlXRIBO1I63bIEhpa3TJ4VN3JeLVDVl4V4G
+ WqiBV1l2reYw3/bwotnFRAUVPHsX2mKnn8KieLt4G9qRONiJiVWElSbD2w7RjK0iPSBs
+ F3p6+di0aIvZ626nxh68NnZBiwUUsaqOZUwpT3N2pTonQSrJCROfUY+vFtCeH54G7PWf
+ YdR2ACVIC+wy/H/3kUlxVNMz+NN1xKd/iqucSpsBNB5OPdKrXUEYIUnGx13OF8HnhbT0
+ MmXA==
+X-Gm-Message-State: AOJu0YxTBniwg1KOmRoxCR53I5v8PewRZkRJnZYUoivhbfKzhiK+Zsw7
+ znzz6MlZZWcpPDZhmv+jY3tY73CmEE3nmn5uq24BjpYhNZYRgJBnowrQ4SescQxSxHcFMRgxQkk
+ iwss=
+X-Gm-Gg: ASbGncuxjjcHc6BCWfkCmqlLPVvU/V1yg/IP+ecdNqTo3qL1DNEKYQxR7+mlGa+abuf
+ LzVHHJUOcV2/Snue1YwFMumPCBOUMs4E9uyjfhE3qu77FBeKL2BaZ1B0kKoSbjAwm1YSqjBIraW
+ N34FQ6xrV57hiJRmzqHNjPfmg7FZZa2ntJP/u8j2vYoN3XvonYkPUY0dTpEf2Y7UFzwZI/J/yBd
+ Nr1Xnt+RDyWe9ZtAly6mZsw3M3G2+48NsrqCDyhBnz8az1sLpgB7fCoJUwXa6eDIxn8PCKpANel
+ 7kFuCj1tC100EJlQW1GqWXz7ck6c/ThgqlLYbEbE5g3Q8wp5dL91FS0=
+X-Google-Smtp-Source: AGHT+IEdVauyB2Yedo28iPpnstysKEN6t3wrhPXdMU3iMrCzBag2500RSiusSdNJDgbT93VFWIy1pQ==
+X-Received: by 2002:ac8:57c9:0:b0:467:73f3:887d with SMTP id
+ d75a77b69052e-46c710467c9mr98324361cf.33.1736435375939; 
+ Thu, 09 Jan 2025 07:09:35 -0800 (PST)
+Received: from ubuntu.localdomain
+ (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46a3e4fdf93sm206396451cf.0.2025.01.09.07.09.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2025 07:09:35 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>
+Subject: [PATCH v3 1/2] bloblist: add api to get blob with size
+Date: Thu,  9 Jan 2025 07:09:22 -0800
+Message-Id: <20250109150928.878849-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20241209195528.730260-1-sjg@chromium.org>
- <20241209195528.730260-6-sjg@chromium.org>
- <CALeDE9M_Bgaxom1Ac3Uomu=Mnd+mvKeGNAsHxn63kve8qfwzUg@mail.gmail.com>
- <CAFLszTitLSCc71TUV8fB0dzWFQwRxO8mVwhwao6ornPGc3AamQ@mail.gmail.com>
- <CALeDE9Mya5U1LfcUuNU9SQtpqpKUG9vXOkYmjo=9H39nz=YvQg@mail.gmail.com>
-In-Reply-To: <CALeDE9Mya5U1LfcUuNU9SQtpqpKUG9vXOkYmjo=9H39nz=YvQg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Jan 2025 08:07:55 -0700
-X-Gm-Features: AbW1kva-cIPBPz68OTi5kHDuunMT0asl5CZyWe21J2ArH4LBOQ3fxN0kOXL_msU
-Message-ID: <CAFLszTjj7Y9X==P=XXZZ=_KwrcMhF7NMKoAJCONeeD=0Cd2pWw@mail.gmail.com>
-Subject: Re: [PATCH v3 5/5] rpi: Use the U-Boot control FDT for fdt_addr
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Stephen Warren <swarren@wwwdotorg.org>, Stephen Warren <swarren@nvidia.com>,
- Matthias Brugger <mbrugger@suse.com>, Francois Berder <fberder@outlook.fr>, 
- "Ivan T. Ivanov" <iivanov@suse.de>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,66 +101,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+bloblist_find function only returns the pointer of blob data,
+which is fine for those self-describing data like FDT.
+But as a common scenario, an interface is needed to retrieve both
+the pointer and the size of the blob data.
 
-On Wed, 18 Dec 2024 at 09:26, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> Hi Simon.
->
-> On Mon, 16 Dec 2024 at 00:27, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Peter,
->>
->> On Wed, 11 Dec 2024 at 09:36, Peter Robinson <pbrobinson@gmail.com> wrote:
->> >
->> >
->> >
->> > On Mon, 9 Dec 2024 at 19:55, Simon Glass <sjg@chromium.org> wrote:
->> >>
->> >> The fdt_addr variable is used in extlinux as a fallback devicetree if
->> >> none is provided by the boot command.
->> >
->> >
->> > And what about where extlinux isn't used?
->> >
->> >>
->> >> The existing mechanism uses the devicetree provided to U-Boot, but in
->> >> its original, unrelocated position. For the rpi_4 I am using, this is
->> >> at 2b35ef00 which is not a convenient place in memory, if the ramdisk
->> >> is large.
->> >>
->> >> U-Boot already deals with this sort of problem by relocating the FDT
->> >> to a safe address.
->> >>
->> >> So use the control-FDT address instead.
->> >
->> >
->> > Please re-word the above, it doesn't make sense to me, "the rpi_4 I am using" .... what about the other millions of RPis out there?
->> >
->> >>
->> >> Remove the existing comment, which is confusing, since the FDT is not
->> >> actually passed unmodified to the kernel: U-Boot adds various things
->> >> using its FDT-fixup mechanism.
->> >
->> >
->> > Don't remove it, re-word it so it's up to date.
->> >
->> >>
->> >> Note that board_get_usable_ram_top() reduces the RAM top for boards with
->> >> less RAM. This behaviour is left unchanged as there is no other
->> >> mechanism for U-Boot to handle this.
->> >
->> >
->> > The below looks irrelevant to the patch at hand, it looks like it should be in the cover letter.
->>
->> Do you have any comments on the code in this series?
->
->
-> I did already comment on it, please go back through your emails ;-)
+Add a few ut test cases for the new api.
 
-The only thing I got was some comments about the commit message and
-the comment for set_fdt_addr(). I sent a new v4 here:
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+Changes in v2
+- Rename function argument.
+- Add ut tests.
+Changes in v3
+- None.
 
-https://patchwork.ozlabs.org/project/uboot/patch/20241220003447.2913443-6-sjg@chromium.org/
+ common/bloblist.c      | 17 +++++++++++++++--
+ include/bloblist.h     | 18 ++++++++++++++++++
+ test/common/bloblist.c |  4 ++++
+ 3 files changed, 37 insertions(+), 2 deletions(-)
 
-My question was really about whether you are happy with the code itself.
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 110bb9dc44..ab48a3cdb9 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
+ }
+ 
+ void *bloblist_find(uint tag, int size)
++{
++	void *blob = NULL;
++	int blob_size;
++
++	blob = bloblist_get_blob(tag, &blob_size);
++
++	if (size && size != blob_size)
++		return NULL;
++
++	return blob;
++}
++
++void *bloblist_get_blob(uint tag, int *sizep)
+ {
+ 	struct bloblist_rec *rec;
+ 
+ 	rec = bloblist_findrec(tag);
+ 	if (!rec)
+ 		return NULL;
+-	if (size && size != rec->size)
+-		return NULL;
++
++	*sizep = rec->size;
+ 
+ 	return (void *)rec + rec_hdr_size(rec);
+ }
+diff --git a/include/bloblist.h b/include/bloblist.h
+index f999391f74..52ba0ddcf8 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -250,6 +250,24 @@ static inline void *bloblist_check_magic(ulong addr)
+ 	return ptr;
+ }
+ 
++#if CONFIG_IS_ENABLED(BLOBLIST)
++/**
++ * bloblist_get_blob() - Find a blob and get the size of it
++ *
++ * Searches the bloblist and returns the blob with the matching tag
++ *
++ * @tag:	Tag to search for (enum bloblist_tag_t)
++ * @sizep:	Size of the blob found
++ * Return: pointer to bloblist if found, or NULL if not found
++ */
++void *bloblist_get_blob(uint tag, int *sizep);
++#else
++static inline void *bloblist_get_blob(uint tag, int *sizep)
++{
++	return NULL;
++}
++#endif
++
+ /**
+  * bloblist_find() - Find a blob
+  *
+diff --git a/test/common/bloblist.c b/test/common/bloblist.c
+index 4bca62110a..324127596f 100644
+--- a/test/common/bloblist.c
++++ b/test/common/bloblist.c
+@@ -98,10 +98,12 @@ static int bloblist_test_blob(struct unit_test_state *uts)
+ 	struct bloblist_hdr *hdr;
+ 	struct bloblist_rec *rec, *rec2;
+ 	char *data;
++	int size = 0;
+ 
+ 	/* At the start there should be no records */
+ 	hdr = clear_bloblist();
+ 	ut_assertnull(bloblist_find(TEST_TAG, TEST_BLOBLIST_SIZE));
++	ut_assertnull(bloblist_get_blob(TEST_TAG, &size));
+ 	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
+ 	ut_asserteq(sizeof(struct bloblist_hdr), bloblist_get_size());
+ 	ut_asserteq(TEST_BLOBLIST_SIZE, bloblist_get_total_size());
+@@ -114,6 +116,8 @@ static int bloblist_test_blob(struct unit_test_state *uts)
+ 	ut_asserteq_addr(rec + 1, data);
+ 	data = bloblist_find(TEST_TAG, TEST_SIZE);
+ 	ut_asserteq_addr(rec + 1, data);
++	ut_asserteq_addr(bloblist_get_blob(TEST_TAG, &size), data);
++	ut_asserteq(size, TEST_SIZE);
+ 
+ 	/* Check the data is zeroed */
+ 	ut_assertok(check_zero(data, TEST_SIZE));
+-- 
+2.25.1
+
