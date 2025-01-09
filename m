@@ -4,94 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B52EFE77197
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 16:42:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA5EE77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 16:45:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B70058005B;
-	Thu,  9 Jan 2025 17:42:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 384938005B;
+	Thu,  9 Jan 2025 17:45:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XrHvn+Gv";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VM2lPjq0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C45C9800C2; Thu,  9 Jan 2025 17:42:38 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5966D800C2; Thu,  9 Jan 2025 17:45:07 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 934EB8001F
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 17:42:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D98A8001F
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 17:45:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b6f7d7e128so187587285a.1
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 08:42:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736440955; x=1737045755; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QRhzDpG2JcVHa7YguEoY5nlSZ+bKXuo3Avy2V1wG6BI=;
- b=XrHvn+GvtzET+rIUBPrPtsrDHeD9XaHQKw8XegJixB7QO9iSsZZApZdUiP7ZFbfDid
- dHrBhK/owMtnVkHhUX/9fl1UGtqBe5RjS1eDmZEG7YKlVQPuZwwkNlnl2DXTbVzUqDuX
- EyJyjMmOBoJXOSBpvFxggZ6b4V8nSkJrEllHI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736440955; x=1737045755;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QRhzDpG2JcVHa7YguEoY5nlSZ+bKXuo3Avy2V1wG6BI=;
- b=a7ATXEkFqAnO3UUUWhqCOwgmFDJq+8mdCSeg69SKp63VIWVRY9ZmlDsaPDT7g3Ajmy
- OkIblYGBiIGlhfZu0CgT0Aupfn+7GMSP+6//M2Htnsa1s6KPfDGvZyhzTrqJrxaPSOpG
- J/ypOVkghI0MqT5jmbLA5h5FC5Ebkg/xOiNKAk8OXdysBK6Z5LDK+VRIVdEWWgkDRUtH
- nVujbyqD/I4lNAManPx/dZHcU0MNEcClu5fmQGOGpkXfofccAy0TfJjNxv402ApeEA7P
- 7XRn0QAiP4W6Z4FHIx8Wibw+rpqkHn/6wO6aj+tNQRYrx28C1Jd9rWBH0Xp2wu0+SvQg
- 3jkQ==
-X-Gm-Message-State: AOJu0Yyz/BwpZZXUeH8iaDLE9UlddBT3LeTtbJ1MAZqdCkIHlKsBrAd+
- 2J+jq2yMO2mGu25zSE7zeUNRQrHdoxI9aRfYlg6z1ajMCk8PMmUmiIaCQZ59UnE=
-X-Gm-Gg: ASbGncuohtUAPe0tFGs1Kypiy9yCwfy+akL5fElVeZzyRqOcsZeS3WV72r8TMvcDZbq
- UrfJnt3hgJspQLN78dbdjKAZ+DCIgipoPXwdSsJsDKqKW7zW8NiwEC2TJNWd2p3Z/h871FColRP
- 6wJflGCnSRFBqPZnGUqM1/5XVOzeNBABg5guS2fXfupamIsteVwJJeAmXZaEEMf32OKrDVF8brY
- Wb+e9eDRkKZ5Z0nHu4mh15AESTfzoiC+9AbkKX1AJG/1UeFbp1bkbk=
-X-Google-Smtp-Source: AGHT+IGjvMjB9LXY/NCdzWgH0UR+cdqRnuGxi6+QeAVb/jtX4OltkyAWwnf00jXqbRVtUnGLGW5H2Q==
-X-Received: by 2002:a05:620a:244d:b0:7bc:de68:e932 with SMTP id
- af79cd13be357-7bce1265ce8mr545261885a.23.1736440955383; 
- Thu, 09 Jan 2025 08:42:35 -0800 (PST)
-Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7bce3248ad6sm83348785a.44.2025.01.09.08.42.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 08:42:34 -0800 (PST)
-Date: Thu, 9 Jan 2025 10:42:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alex Shumsky <alexthreed@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Dragan Simic <dsimic@manjaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Jonas Karlman <jonas@kwiboo.se>, Joshua Watt <jpewhacker@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v2 03/33] bloblist: Make BLOBLIST_ALLOC the default
-Message-ID: <20250109164230.GY3476@bill-the-cat>
-References: <20250106143229.3023771-1-sjg@chromium.org>
- <20250106143229.3023771-4-sjg@chromium.org>
- <20250106214130.GC3476@bill-the-cat>
- <CAFLszTif6J6r48DWca3GSuGwnARuzJdnuhbi9wkr8ws=0S6Cjw@mail.gmail.com>
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 1F9705C5C14;
+ Thu,  9 Jan 2025 16:44:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02777C4CED2;
+ Thu,  9 Jan 2025 16:44:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1736441102;
+ bh=gaiJZShVKkY/+x8dNTzpGQGPKxV5IgN7dBTTOY/Ck2A=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=VM2lPjq0mDeC/JAGU8j4me1bxzPPhTY8bSl0hGzhuVBtgkFPCrZPsR5vyhlICVKFY
+ tM01YgvoVWi1V7kxs98Zlv+YvbrKNEALUimtd7ecws8m7d7pAZDQm/KPHFbCh3ZnN5
+ KALf3mj5Gw2k5cv4PeVMQixjcWHdLbXAui713v9x4CN9VdjOH3ficLTBArKTbImEY1
+ SsZ1l6Jzcp0E9/MjIoUBgr7o/f/y/ecuJTOBjpL7JG2SdmqQGOZOcONCPiNBr2n6hw
+ WNdXOLuFxTF2Yr1OCo8Qu6lWPVqN6YR3jGVmC+JZeYgs8A7sp/LuTsOerS/8sH0ueU
+ OaG72/PRYQZ9Q==
+Message-ID: <b35d8b31-8de0-4735-a68b-fbdeade53682@kernel.org>
+Date: Thu, 9 Jan 2025 18:44:54 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YtNYCxJY4dBrdBB5"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTif6J6r48DWca3GSuGwnARuzJdnuhbi9wkr8ws=0S6Cjw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/13] configs: am68: Add configs for enabling Ethboot in
+ R5SPL
+To: "Vankar, Chintan" <c-vankar@ti.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Nishanth Menon <nm@ti.com>,
+ Hari Nagalla <hnagalla@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Simon Glass <sjg@chromium.org>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Aniket Limaye <a-limaye@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: srk@ti.com, s-vadapalli@ti.com, danishanwar@ti.com, u-boot@lists.denx.de
+References: <20250107093840.2211381-1-c-vankar@ti.com>
+ <20250107093840.2211381-6-c-vankar@ti.com>
+ <82c602bb-f823-484d-97a9-1bf6de2b4a9b@kernel.org>
+ <20a4ff7a-7c84-46db-bb5a-f6e03b5a3283@ti.com>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20a4ff7a-7c84-46db-bb5a-f6e03b5a3283@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,73 +89,144 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YtNYCxJY4dBrdBB5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 09, 2025 at 08:01:17AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 6 Jan 2025 at 14:41, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Jan 06, 2025 at 07:31:59AM -0700, Simon Glass wrote:
-> >
-> > > We want to encourage people to use an allocated bloblist since it is
-> > > more flexible than a fixed one. Make this the default, being sure not=
- to
-> > > change existing users.
-> > >
-> > > The unit tests require BLOBLIST_FIXED so add a dependency in the
-> > > Makefile to avoid build errors.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > [snip]
-> > > diff --git a/common/Kconfig b/common/Kconfig
-> > > index e8d89bf6eb9..a00387a4609 100644
-> > > --- a/common/Kconfig
-> > > +++ b/common/Kconfig
-> > > @@ -1039,16 +1039,10 @@ if BLOBLIST
-> > >
-> > >  choice
-> > >       prompt "Bloblist location"
-> > > +     default BLOBLIST_FIXED if SANDBOX
-> > >       help
-> > >         Select the location of the bloblist, via various means.
-> >
-> > This should just be "default BLOBLIST_ALLOC" and sandbox platforms that
-> > are using the bloblist can be like the other platforms using a fixed
-> > address.
->=20
-> We don't need 'default BLOBLIST_ALLOC' as it is now first, so is the
-> default. I would like the 'fixed' thing to be later on so that people
-> know we want to stop using it.
->=20
-> All the sandbox platforms use BLOBLIST_FIXED. I'm not sure what change
-> you are wanting me to make to this patch?
+On 09/01/2025 10:43, Vankar, Chintan wrote:
+> 
+> 
+> On 1/7/2025 8:08 PM, Roger Quadros wrote:
+>>
+>>
+>> On 07/01/2025 11:38, Chintan Vankar wrote:
+>>> Add configs for enabling Ethernet boot in R5SPL.
+>>>
+>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+>>> ---
+>>>   configs/am68_sk_r5_ethboot_defconfig | 80 ++++++++++++++++++++++++++++
+>>>   1 file changed, 80 insertions(+)
+>>>   create mode 100644 configs/am68_sk_r5_ethboot_defconfig
+>>>
+>>> diff --git a/configs/am68_sk_r5_ethboot_defconfig b/configs/am68_sk_r5_ethboot_defconfig
+>>> new file mode 100644
+>>> index 00000000000..9bfbb5a3bfe
+>>> --- /dev/null
+>>> +++ b/configs/am68_sk_r5_ethboot_defconfig
+>>> @@ -0,0 +1,80 @@
+>>> +#include <configs/am68_sk_r5_defconfig>
+>>> +
+>>> +CONFIG_ARM=y
+>>> +CONFIG_ARCH_K3=y
+>>> +CONFIG_SOC_K3_J721S2=y
+>>> +CONFIG_TARGET_J721S2_R5_EVM=y
+>>> +CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
+>>
+>> Please don't add duplicates that are already included in configs/am68_sk_r5_defconfig
+>> or configs/j721s2_evm_r5_defconfig
+>>
+> 
+> Hello Roger, These config options are required despite of they are
+> present in the file that is being included for buildman to work, you can
+> refer to Tom's comment at here:
+> https://lore.kernel.org/r/20240705153721.GF38804@bill-the-cat/
+> after which I included the same while posting config file for AM62x-SK.
+> 
 
-I'm wanting you to not re-order the list to change the default and
-instead use the default keyword to change the default.
+Understood. Thanks!
 
---=20
-Tom
+>>> +CONFIG_SPL_GPIO=y
+>>> +CONFIG_SPL_BOARD_INIT=y
+>>> +CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
+>>> +CONFIG_SPL_DMA=y
+>>> +CONFIG_SPL_ENV_SUPPORT=y
+>>> +CONFIG_SPL_ETH=y
+>>> +CONFIG_SPL_I2C=y
+>>> +CONFIG_SPL_NET=y
+>>> +CONFIG_SPL_NET_VCI_STRING="AM68 U-Boot R5 SPL"
+>>> +CONFIG_CMD_DHCP=y
+>>> +CONFIG_SPL_SYSCON=y
+>>> +CONFIG_DMA_CHANNELS=y
+>>> +CONFIG_TI_K3_NAVSS_UDMA=y
+>>> +CONFIG_DM_I2C=y
+>>> +CONFIG_PHY_TI_DP83867=y
+>>> +CONFIG_TI_AM65_CPSW_NUSS=y
+>>> +CONFIG_SPI=n
+>>> +CONFIG_SPL_SPI=n
+>>> +CONFIG_DM_SPI=n
+>>> +CONFIG_SPL_DM_SPI=n
+>>> +CONFIG_SPL_SYS_MALLOC=y
+>>> +CONFIG_SPI_MEM=n
+>>> +CONFIG_CMD_FAT=n
+>>> +CONFIG_FS_FAT=n
+>>> +CONFIG_SPL_FS_FAT=n
+>>> +CONFIG_MMC_SDHCI=n
+>>> +CONFIG_MTD=n
+>>> +CONFIG_CMD_FAT=n
+>>
+>> Please explain in commit log why you are setting many of the
+>> options to "n". Is it due to memory limitation?
+>>
+> 
+> Yes, that is because of memory limitation, we have faced the same
+> limitation while working with AM62x Ethernet boot.
+> 
+>>> +CONFIG_SYS_RELOC_GD_ENV_ADD=y
+>>> +CONFIG_SPL_DM_SPI_FLASH=n
+>>> +CONFIG_SPL_HAS_CUSTOM_MALLOC_START=n
+>>> +CONFIG_HUSH_PARSER=n
+>>> +CONFIG_CMD_DFU=n
+>>> +CONFIG_CMD_GPT=n
+>>> +CONFIG_SPL_YMODEM_SUPPORT=n
+>>> +CONFIG_ARCH_FIXUP_FDT_MEMORY=n
+>>> +CONFIG_SPL_ENV_IS_NOWHERE=y
+>>> +CONFIG_DM_EVENT=y
+>>> +CONFIG_INPUT=n
+>>> +CONFIG_ESM_K3=y
+>>> +CONFIG_SPL_LOAD_BLOCK=y
+>>> +CONFIG_DFU=n
+>>> +CONFIG_SPL_DFU=n
+>>> +CONFIG_TI_I2C_BOARD_DETECT=y
+>>> +CONFIG_K3_EARLY_CONS=n
+>>> +CONFIG_K3_QOS=n
+>>> +CONFIG_USE_BOOTCOMMAND=n
+>>> +CONFIG_SPL_MTD=n
+>>> +CONFIG_SPL_NAND_SPI_SUPPORT=n
+>>> +CONFIG_BOOTDEV_ETH=y
+>>> +CONFIG_USB=n
+>>> +CONFIG_FS_LOADER=n
+>>> +CONFIG_SPL_FS_LOADER=n
+>>> +CONFIG_SPL_DM_SPI=y
+>>> +CONFIG_PINCTRL_GENERIC=n
+>>> +CONFIG_PINMUX=n
+>>> +CONFIG_SPL_PINCTRL_GENERIC=n
+>>> +CONFIG_SPL_PINMUX=n
+>>> +CONFIG_DM_REGULATOR=n
+>>> +CONFIG_TI_SCI_POWER_DOMAIN=n
+>>> +CONFIG_CMD_REMOTEPROC=y
+>>> +CONFIG_SYSRESET=n
+>>> +CONFIG_LAST_STAGE_INIT=y
+>>> +CONFIG_OF_UPSTREAM=n
+>>
+>> Why no OF_UPSTREAM?
+>>
+> 
+> Device tree files are not in-sync with upstream linux for AM68, getting
+> compile time errors for the same, that's the reason I have disabled this
+> config option.
 
---YtNYCxJY4dBrdBB5
-Content-Type: application/pgp-signature; name="signature.asc"
+I suggest to do a sync and not disable CONFIG_OF_UPSTREAM.
 
------BEGIN PGP SIGNATURE-----
+> 
+>>> +CONFIG_K3_DM_FW=y
+>>> +CONFIG_SPL_SPI_LOAD=n
+>>> +CONFIG_SPL_DM_SPI=n
+>>> +CONFIG_NOR_SUPPORT=n
+>>> +CONFIG_SPL_NOR_SUPPORT=n
+>>> +CONFIG_SPL_DM_SPI=n
+>>> +CONFIG_SYS_MALLOC_CLEAR_ON_INIT=n
+>>> +CONFIG_SPL_SYS_MALLOC_CLEAR_ON_INIT=n
+>>> +CONFIG_BOOTDEV_ETH=n
+>>
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd//GwACgkQFHw5/5Y0
-tywo+wwAolOZKT2aKVsEBEOpZZfqW5mOc8zYa6BDvRtgmpLXRLzaNq3RQspBtem2
-y+ibmfeLYIf3ro4WbUrzTeAdRONYdzilyf13IFajA8bclMdp328S8nSiGwWXpdJi
-a/v2+JBQRo2vbvOrteyPcE2VeHbbCyk3vo6MzGt9DTHJe1YaVyiVk/9t3tmH1Awq
-+fXMedp3hp2rpjl67gk4n0D2XZdCQrhcDufeUngya0Tv3N+ypb9vZSt4Cpvd1ieB
-ZJmOsmCfgsqAf24scFRBketkyxwx8DyqcQforMn6f6AUyL0+JITbKLP1vtjEhm4Q
-MYz+cAP9XvTYLLSRMAnwafVIOy9/QrzSsS6sno/GC8u7/mnm0LixNIKWOLta6epx
-LUwbVZs6N8QBxh/Xzc3bdmy9y9UuQRLZ7Y6Di5VtxXdXKzHLOWtW978DQAW+d9xR
-JslgJyfyeZBCek+ELEvumis/smRXFiC9z7qtTz9kLrhhhRZYNC0I0jri9a+zGcZ0
-XogLyXJ3
-=JDt2
------END PGP SIGNATURE-----
+-- 
+cheers,
+-roger
 
---YtNYCxJY4dBrdBB5--
