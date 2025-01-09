@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9510E77199
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 05:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4820CE77199
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 05:27:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89B30805F0;
-	Thu,  9 Jan 2025 06:26:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D0833806CB;
+	Thu,  9 Jan 2025 06:26:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="I0D6A3Il";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="ZXvZ5arb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD2708006D; Thu,  9 Jan 2025 06:26:49 +0100 (CET)
+ id 5478380613; Thu,  9 Jan 2025 06:26:53 +0100 (CET)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82BB0806C6
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 06:26:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 17FE08006D
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 06:26:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5094FGAL011340;
- Thu, 9 Jan 2025 05:26:30 GMT
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5094C6Jc019021;
+ Thu, 9 Jan 2025 05:26:35 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- M1Qg7tmDbiZL9PJqQDlbjcT29X1sRhTFkJ81FKJAp6E=; b=I0D6A3IlVzRvDqqZ
- hMW1oftW/n0lxbsT/VbNELtSnCxMiXAswLMzuxBP12/EJ1D8zj28ffk2+Z17m8xq
- ixMPYUPSJl2Mzaiq0oZRUTOwaRMdNqn88q58yHHSnLsdX4ssViJjhDX+4qey23S+
- xDWJlZvDkJqH7l66eArrIDDG6zz3pUuhK3I/UNwZXU1rkFPmaB7WsNVFTUTYRw5V
- 0cl8oI3RZIXjtREQqwr5dN5gvMWJpXD2NJ/Yue3sZQKeFKtdsSXfOTzGkm4bfkbk
- ELNpE7Mo7VLhzHEbe916kRI6ZuAwbw5BvpLxC8CZhToT1DRTTnf312Kzhy848qdG
- H03wlg==
-Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
+ 6mJ1e4ZujYS4rTUapUM8y6vV3Whk+EEF03m95lSZEe4=; b=ZXvZ5arb4DRoaZUS
+ 9N6w0Txf8c78OmGSz8/7NS9I8s+0G4DkHH5W1jAPQGan7h/y5kfyeoMgv1AYsC/i
+ gKb+Shv+MZeWK7F9srojQe/9EhMICtJaZKoD4z20mSGUQWLXEuucyf6oEnzckRxs
+ sLDAkd0pIe/wNtVqwCkjThUYD5OlVpM6kF2LDSt/GMcRLP5wdZxrwG41aH8EeYGc
+ q30FppqrXBHqMq5cxWFoFUOjoZeGUR4n7J3vkMhJc+Ox94Lt+CMkWuzHxIl8bes7
+ KXfnp3a58NW8T7mXcWkZ0WY1mEftTlTVRr/tgJntH7UDxkmY4gPhyKcPABfX2j/E
+ N00h3g==
+Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44278t841k-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44277e04dt-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 09 Jan 2025 05:26:30 +0000 (GMT)
+ Thu, 09 Jan 2025 05:26:35 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 5095QTpV006217
+ by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 5095QY6J018291
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 9 Jan 2025 05:26:29 GMT
+ Thu, 9 Jan 2025 05:26:35 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 8 Jan 2025 21:26:24 -0800
+ 15.2.1544.9; Wed, 8 Jan 2025 21:26:29 -0800
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
@@ -62,9 +62,9 @@ To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <bhupesh.linux@gmail.com>, <andersson@kernel.org>,
  <quic_tengfan@quicinc.com>, <konradybcio@kernel.org>,
  <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
-Subject: [PATCH v2 5/6] qcom_defconfig: enable SA8775P clock driver
-Date: Thu, 9 Jan 2025 10:55:44 +0530
-Message-ID: <20250109052545.2921502-6-quic_varada@quicinc.com>
+Subject: [PATCH v2 6/6] configs: add qcs9100_defconfig
+Date: Thu, 9 Jan 2025 10:55:45 +0530
+Message-ID: <20250109052545.2921502-7-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250109052545.2921502-1-quic_varada@quicinc.com>
 References: <20250109052545.2921502-1-quic_varada@quicinc.com>
@@ -77,15 +77,15 @@ X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-GUID: 44riLVktdK12WKyJ9wuuzwjHRFIyY7kB
-X-Proofpoint-ORIG-GUID: 44riLVktdK12WKyJ9wuuzwjHRFIyY7kB
+X-Proofpoint-ORIG-GUID: K0r40ZA3Xd2M4crwZdTi7ESOePlB39KC
+X-Proofpoint-GUID: K0r40ZA3Xd2M4crwZdTi7ESOePlB39KC
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
  definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 priorityscore=1501
- bulkscore=0 lowpriorityscore=0 malwarescore=0 impostorscore=0 phishscore=0
- adultscore=0 mlxlogscore=874 suspectscore=0 clxscore=1015 spamscore=0
+ clxscore=1015 suspectscore=0
+ malwarescore=0 bulkscore=0 mlxlogscore=967 impostorscore=0 phishscore=0
+ adultscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0 mlxscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2411120000
  definitions=main-2501090042
 X-BeenThere: u-boot@lists.denx.de
@@ -104,28 +104,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the SA8775P clock driver in the Qualcomm defconfig.
+Introduce a defconfig for the Ride R3 and other QCS9100 boards with a
+dedicated uefi partition. These can replace EDK2 entirely with U-Boot.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
-v2: Added 'Reviewed-by: Neil Armstrong'
+v2: Use qcs9100-ride-r3 for default DT instead of sa8775p-ride-r3
 ---
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/qcs9100_defconfig | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 configs/qcs9100_defconfig
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index cd94315f176..2cd5a5602ea 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -48,6 +48,7 @@ CONFIG_CLK_QCOM_APQ8016=y
- CONFIG_CLK_QCOM_APQ8096=y
- CONFIG_CLK_QCOM_QCM2290=y
- CONFIG_CLK_QCOM_QCS404=y
-+CONFIG_CLK_QCOM_SA8775P=y
- CONFIG_CLK_QCOM_SDM845=y
- CONFIG_CLK_QCOM_SM6115=y
- CONFIG_CLK_QCOM_SM8150=y
+diff --git a/configs/qcs9100_defconfig b/configs/qcs9100_defconfig
+new file mode 100644
+index 00000000000..7e72c64968b
+--- /dev/null
++++ b/configs/qcs9100_defconfig
+@@ -0,0 +1,24 @@
++# Configuration for building U-Boot to be flashed
++# to the uefi partition of QCS9100 based dev boards with
++# the "Linux Embedded" partition layout (which have
++# a dedicated "uefi" partition for edk2/U-Boot)
++
++#include "qcom_defconfig"
++
++# Otherwise buildman thinks this isn't an ARM platform
++CONFIG_ARM=y
++
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_BASE=0xA8C000
++CONFIG_DEBUG_UART_MSM_GENI=y
++CONFIG_DEBUG_UART_CLOCK=14745600
++
++# Address where U-Boot will be loaded
++CONFIG_TEXT_BASE=0xaf000000
++CONFIG_REMAKE_ELF=y
++
++CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs9100-ride-r3"
++
++CONFIG_PHY_QCOM_QMP_UFS=y
++CONFIG_QCOM_UFS=y
 -- 
 2.34.1
 
