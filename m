@@ -4,88 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F104E77197
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:14:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A43C3E77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 15:15:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C72AE80602;
-	Thu,  9 Jan 2025 16:14:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 42E2A80602;
+	Thu,  9 Jan 2025 16:15:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gv7CmHgP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AolLvu97";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A59848066C; Thu,  9 Jan 2025 16:14:22 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id D6AEE8066C; Thu,  9 Jan 2025 16:15:10 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31DE5805E2
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:14:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AA31805E2
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 16:15:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6dccccd429eso7753996d6.3
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:14:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2f441904a42so1858681a91.1
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 07:15:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736435659; x=1737040459; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sD4Rm1Xb7fJKGK0KzYbS0ppe5QISAuNWUFykOZK7ylc=;
- b=gv7CmHgPqhSC9TPLhA+pzxdTC+yRBlVn8k4Y5fC9N31FN1Pc948zaIoIUv/KCQbTR/
- XOUYnEGav0zPf6Wf+7RCGkJnZybfwvJoHAsV+EII9I1goE1J7/yDR+zyNlQnN8cP0Rtf
- E3temuAc8l6lg0qEdKnBbNgDCxK4VSztjipos=
+ d=chromium.org; s=google; t=1736435706; x=1737040506; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mDqcuQTkVw0GrRm5j+QC8P+9PcAqQDeKip3w9wFb/kk=;
+ b=AolLvu97wE/e95D6tXnppNjcoimPmikCMkeQz5zIFu10lsAZn9a70/LIoH6eNGuQxt
+ RuCUrF3EY4mSM1N9pOl9rk7jV7L2YjcxpujuA8FtchFGtgGjTMCm9xbXtTHkIsPT5aEA
+ GXh0knjeyjlVMy+etIsaz99V+5hBnMalLeh60=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736435659; x=1737040459;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sD4Rm1Xb7fJKGK0KzYbS0ppe5QISAuNWUFykOZK7ylc=;
- b=tXBhFYNx1Rnj2VeeBLYf3Y7i1Fr2IWAVrq+JyjBcUZhylGXP2LD6QpVZ8E3QV5HCWQ
- /qM81EBeR+5Iu6YT9j/l12RS7rgK+v8o4MfNH7cuXTSrjnVFEWIR48DlBv3wK/xYKL6I
- Qy5hJAqSuux+ANf74ouKAU3Leh8b8qhwo4JHbW3y2+mOqIRrSET0pxDkjuaLCSpdNNeH
- k0Lvus2RtCXC0APvXAueZ5m5TcBhyavzxF2CuoHT2HLr1EfxRnayIOsJ6ZpJm7sJwAPs
- uaum+nZfvgVkNWYEQDPrT7nQiMp177l9hOk1flfyi4CvOFDfbsmZUQxZ3ltxeuHJcjvT
- E5vA==
-X-Gm-Message-State: AOJu0YxZhoKUn02e41xpQ3sHU1PHMEPSOHOgadP/u9ulDyUc5FlSHdeo
- NXbvsFR2nsCye5WZRcV1th0vvhcEMaS4FPoB7N1qSyNImpCvUv4rtsktJlUWTjk=
-X-Gm-Gg: ASbGncuEkKZS819biEwfTKhOuEWPOIgaaOfA24Ep3E1SbHLz55SKG6I17Q2VSpuLp2s
- hLyA/J13UbngBHw27JO8Bz6FuZ0/ZC97G6Pt8+U9ajdDQoOV6Q7SbxPmeh6VFBgkgMgLF7TUT6Q
- ds2fczlXfF9TzqhFlq5PfUVDL+ueEB8wQ+RSupP3R9L1XWRHrBUmYS2oOtq4yK+nv22zuegZN9a
- Dum/vpQAXOEhuHZQyOAXde2R81tZ9mXGYcM4n95M9e0AbwyL1wqL14=
-X-Google-Smtp-Source: AGHT+IGUDAB0GsRV1/dQeFiJ6p6sEDP9LtiHFR67XdkX/jG76e5cQU0iin3fJVriTM/jZJ4ZGhzp5A==
-X-Received: by 2002:a05:6214:4890:b0:6d8:a70d:5e48 with SMTP id
- 6a1803df08f44-6df9b2ad13dmr109714846d6.30.1736435658756; 
- Thu, 09 Jan 2025 07:14:18 -0800 (PST)
-Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfabf36ff1sm1996766d6.38.2025.01.09.07.14.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 07:14:18 -0800 (PST)
-Date: Thu, 9 Jan 2025 09:14:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
- Marek =?iso-8859-1?Q?Moj=EDk?= <marek.mojik@nic.cz>,
- Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: Re: [PATCH v2 21/33] emulation: fdt: Relax condition for
- OF_HAS_PRIOR_STAGE
-Message-ID: <20250109151414.GV3476@bill-the-cat>
-References: <20250106143229.3023771-1-sjg@chromium.org>
- <20250106143229.3023771-22-sjg@chromium.org>
- <20250106214025.GB3476@bill-the-cat>
- <CAFLszTjt3mr+ZZF0SmKdhDKsT8khmLG8NNsTnmWSXbX9+ei5=g@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1736435706; x=1737040506;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mDqcuQTkVw0GrRm5j+QC8P+9PcAqQDeKip3w9wFb/kk=;
+ b=iPowoTtSx9NgNbUBlE7lizWfV/0CVtKz0WRTtV0CAwO85n9vu648MfxdrQqczIYXzC
+ Cb5TjmA389c36aYSosLgGln5sCnfNTqV4KhW0uqEZ79jhGlO/HvexM6GMECNi52RQWNz
+ pB91RsUszaUh4DXbA2RJSguyuiq/OsDDfuLmnIX2vnZzt4Su6o9rK5jlCovdKpA54AKq
+ rIKdkJLHIN8IhXWfo3KF6sjmf6WUai0yobNcmEyWg7nysy81ci/OtZ8W2wKi9TaHJqOt
+ Ktvg4wWG4TQpAwC0II34eIMGcs/0cJauChMNt7l/xcsBo3O4USIZ0UEozjRQwVhsoXdZ
+ 0h9w==
+X-Gm-Message-State: AOJu0Yyr+6fIznsmKf3cCQ6hXAj7hn5duX9zF3adgfKoK5iMKY6PIquM
+ qEro2/T7vPq9GpgVjhhAUyRBTOk5UXlH91x4EgWB87MZgCuDJHo3D0ChCrP7vTaJVwMLSh4ZzC/
+ dPluDb7sjdDpQRvzj6Sfqh//zwAqT5mHyuzPc
+X-Gm-Gg: ASbGncvEEMR7HlzQ5VrXasqjR4kqwN2076725/I/yJw74UJ+8RMWcM1xVJv0C6E2E2g
+ AKObj6bAOyfRjjY29a84fhvBYAOS2bI4+0rqNmCI=
+X-Google-Smtp-Source: AGHT+IEwY8viBFaDwKx8NrqSF1uHS9wqPBVCgLoH688yGAphwjB4EiU1x6Df6FJlVj0kdSjX+AAzYv1dpLufJzgfsg8=
+X-Received: by 2002:a17:90b:51c1:b0:2ee:f687:6acb with SMTP id
+ 98e67ed59e1d1-2f548f35587mr9898382a91.13.1736435706505; Thu, 09 Jan 2025
+ 07:15:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oJ1cKdDyL9MXIFZc"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjt3mr+ZZF0SmKdhDKsT8khmLG8NNsTnmWSXbX9+ei5=g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-18-sjg@chromium.org>
+ <20250108182528.GN3476@bill-the-cat>
+ <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
+ <20250109150954.GU3476@bill-the-cat>
+In-Reply-To: <20250109150954.GU3476@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 9 Jan 2025 08:14:53 -0700
+X-Gm-Features: AbW1kvZ-on0myYOidnLd4hramdslvPRokdIqdEO4n4jXrgcrLZ4mELCX4QRucU0
+Message-ID: <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
+Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Dahl <ada@thorsis.com>, 
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Julien Masson <jmasson@baylibre.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,96 +106,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---oJ1cKdDyL9MXIFZc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Jan 09, 2025 at 08:01:22AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 6 Jan 2025 at 14:40, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 9 Jan 2025 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Jan 09, 2025 at 05:36:03AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Mon, Jan 06, 2025 at 07:32:17AM -0700, Simon Glass wrote:
-> > > QEMU always gets its devicetree from the OF_BOARD mechanism so we sho=
-uld
-> > > not depend on !BLOBLIST here.
+> > On Wed, 8 Jan 2025 at 11:25, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > The logic of PRIOR_STAGE is quite a mess, unfortuantely. We should re=
-ly
-> > > only standard passage to receive things from the prior stage. QEMU
-> > > should implement standard passage to provide its devicetree to U-Boot
-> > > However Linaro has blocked my patch to provide devicetree additions[1=
-],
-> > > so little breath should be held in respect of either change.
+> > > On Mon, Jan 06, 2025 at 07:32:13AM -0700, Simon Glass wrote:
 > > >
-> > > [1] https://lore.kernel.org/qemu-devel/20210926183410.256484-1-sjg@ch=
-romium.org/
+> > > > This function uses separate arguments for data and size. Use the new
+> > > > abuf instead, so that they are paired and in one place. In some cases it
+> > > > also saves an argument, thus potentially reducing code size.
 > > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > Fixes: 2b71470628c dts: OF_HAS_PRIOR_STAGE should depend on !BLOBLIST
-> > > ---
+> > > This is one of the commits that globally increases size in both full
+> > > U-Boot and SPL/etc.
 > > >
-> > > (no changes since v1)
-> > >
-> > >  dts/Kconfig | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/dts/Kconfig b/dts/Kconfig
-> > > index 41a758e83a6..fc25a854708 100644
-> > > --- a/dts/Kconfig
-> > > +++ b/dts/Kconfig
-> > > @@ -191,7 +191,7 @@ config OF_BOARD
-> > >
-> > >  config OF_HAS_PRIOR_STAGE
-> > >       bool
-> > > -     depends on !BLOBLIST
-> > > +     depends on !BLOBLIST || ARCH_QEMU
-> > >       help
-> > >         Indicates that a prior stage of the firmware (before U-Boot p=
-roper)
-> > >         makes use of device tree and this board normally boots with t=
-hat prior
+> > > Is all of the "abuf" changes just a "tidy up" that increases the code a
+> > > bit?
 > >
-> > Since OF_HAS_PRIOR_STAGE has no prompt, it shouldn't have a depends line
-> > either really. I believe 2b71470628c is part of an attempt to say that
-> > if you have bloblist enabled then that's how the previous loader needs
-> > to pass the device tree. But indeed that's not quite how to enforce that
-> > kind of demand, so we should just drop the restriction here (and some
-> > other time fix the "imply OF_HAS_PRIOR_STAGE" to be "select
-> > OF_HAS_PRIOR_STAGE" because it's not prompted, imply is the wrong
-> > keyword.
->=20
-> So, just drop the 'depends' line?
+> > Yes, a tidy-up which I hope will help overall. I have been thinking
+> > for a while of how to avoid having addr/size and ptr/size passed
+> > everywhere. For now abuf seems to provide some sort of solution.
+> >
+> > I see this:
+> >
+> > 18: boot: Update fit_image_get_emb_data to use abuf
+> >    aarch64: (for 1/1 boards) all +4.0 bss -24.0 spl/u-boot-spl:all
+> > +16.0 spl/u-boot-spl:text +16.0 text +28.0
+> >
+> > so growth on firefly-rk3399 but not with rk3288. I am not sure if the
+> > growth will tail off as there are more users, though. We might even be
+> > able to be more clever with static inlines.
+>
+> Yeah, lets not do this now then and worry about some "clean up" later
+> when we can show that it does, or does not, improve size.
 
-Correct.
+Oh.
 
-> I don't understand all this prior-stage stuff and I believe it is the
-> Wrong Direction. We should just say where the DT comes from.
+> And there's
+> something wrong with your numbers:
+> 01: Fix neighbor discovery ethernet address saving
+>    aarch64:  w+   firefly-rk3399
+> +(firefly-rk3399) Image 'simple-bin' is missing external blobs and is non-functional: atf-bl31
+> +(firefly-rk3399)
+> +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (atf-bl31):
+> +(firefly-rk3399)    See the documentation for your board. You may need to build ARM Trusted
+> +(firefly-rk3399)    Firmware and build with BL31=/path/to/bl31.bin
+> +(firefly-rk3399) Image 'simple-bin' is missing optional external blobs but is still functional: tee-os
+> +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
+> +(firefly-rk3399)    See the documentation for your board. You may need to build Open Portable
+> +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+> +(firefly-rk3399) Some images are invalid
+> 37: dm: core: Provide ofnode_find_subnode_unit()
+>    aarch64: (for 1/1 boards) all +324.0 bss +32.0 spl/u-boot-spl:all +16.0 spl/u-boot-spl:text +16.0 text +292.0
+>             firefly-rk3399 : all +324 bss +32 spl/u-boot-spl:all +16 spl/u-boot-spl:text +16 text +292
+>                u-boot: add: 6/-1, grow: 4/-4 bytes: 516/-224 (292)
+>                  function                                   old     new   delta
+>                  ofnode_name_eq_unit                          -     160    +160
+>                  ofnode_find_subnode_unit                     -     116    +116
+>                  fit_image_get_data                          80     176     +96
+>                  fit_image_get_emb_data                       -      84     +84
+>                  ofnode_write_prop                          224     236     +12
+>                  ofnode_add_subnode                         232     244     +12
+>                  abuf_init_const                              -      12     +12
+>                  abuf_init                                    -      12     +12
+>                  abuf_addr                                    -       8      +8
+>                  fit_image_print                            780     784      +4
+>                  image_locate_script                        696     692      -4
+>                  fit_image_load                            1584    1580      -4
+>                  fit_image_verify                           176     164     -12
+>                  ofnode_find_subnode                        140     116     -24
+>                  fit_image_get_data_and_size                180       -    -180
+>                spl-u-boot-spl: add: 3/-1, grow: 0/-1 bytes: 108/-92 (16)
+>                  function                                   old     new   delta
+>                  fit_image_get_emb_data                       -      84     +84
+>                  abuf_init_const                              -      12     +12
+>                  abuf_init                                    -      12     +12
+>                  load_simple_fit                            580     568     -12
+>                  fit_image_get_data                          80       -     -80
 
-Yes, but we're all keen to not rehash years worth of discussion here
-either.
+Yes, that's the whole series, so not related to this change.
 
---=20
-Tom
+ I elected to have two versions of ofnode_find_subnode() to avoid the
+size growth in the previous version. But the cost is larger size
+growth when OF_LIVE is used.
 
---oJ1cKdDyL9MXIFZc
-Content-Type: application/pgp-signature; name="signature.asc"
+Without OF_LIVE, the size growth is tiny.
 
------BEGIN PGP SIGNATURE-----
+So...what to do?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmd/58YACgkQFHw5/5Y0
-tyx+DQv/fq/+hy5PPpYzGWOEuN64GKBllD6An3W86fT0rsjfF06xiK9D1wBWPxTC
-WQsZdvZCEzAgjpSJkUDxkJnW2TbGuOYL4YuBQJX1jlD2Y1+N7lXLqzf9zM56jNRP
-uj3iIWmdFEaG1+uZDvW7wAk8weZAPJP1ovmEjaUILUX8ctsu7Fn/ISi1pjtH7+5s
-AVzRaEfJA4aSIE6984OkgdxiC1TyiNsJVy5cpY2z6yuS7JXdh68LpBMkldmMHYv8
-RVSKiKIm5rctv2qiSWIOzEpb56pw9SzhF31CA8IY5f5+TWhOyKskcwBbc91qBW+Z
-BicMm1mdOrXru0nODLw/EoRK30aGn/NDtMsV4toD+JtV6waJPS2elT63hNLPUYSU
-JreXSdkhw/A1D13uhOdImBSAt9a6U6k5Hx0kz0yL7DYkuFVCLn3RC152z4W3fJQd
-HKHKCDFl0InWZDwnQeA8cJSqWdIT8S6a0/m63IDY1Q62yRfH22BbSkDoha6GN68H
-859SNqox
-=xpQ5
------END PGP SIGNATURE-----
-
---oJ1cKdDyL9MXIFZc--
+Regards,
+Simon
