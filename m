@@ -4,73 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B103E77199
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 12:37:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4C9E77199
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 12:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D47E7801F5;
-	Thu,  9 Jan 2025 13:37:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 40601800D0;
+	Thu,  9 Jan 2025 13:37:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kDvVr1Gj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="brHkPCP1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4526D80602; Thu,  9 Jan 2025 13:37:23 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id DEF1F8005B; Thu,  9 Jan 2025 13:37:36 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 083F38005B
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 13:37:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C45B8060C
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 13:37:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aa6c0d1833eso198368966b.1
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 04:37:21 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aaf6b1a5f2bso377941866b.1
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 04:37:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736426240; x=1737031040; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BlC1Vszyd7ItOd0IMAPNpKih3vpg9+J32hWsBMXAqPw=;
- b=kDvVr1Gj5lFJTENQPgnj/Dub9D11k1ArlBc14Q3ifBvXpaOE/t/UY7HEDK4I2zXed8
- gw4/m+jA826xSO7HhahNUlVO7G148v2Ggj6eb36Clm6p/mojEXcFjKBot3ROEyfTAgxZ
- uL5iu8hWb83AqUIgjMartN225bDQRqI09lg1Q=
+ d=chromium.org; s=google; t=1736426253; x=1737031053; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=lKk/uTYn3D3JSLCnUDCYtRvAG/j8AyZNG5hDVeCWIeo=;
+ b=brHkPCP1osUwylPdFvc58Zj6olT4Z+thChPHyVgeoAz9ZXC7TuwOMYbmt+iHh7cs5a
+ EQUYJXGlZk9/MrexbP5eHpLNzsLyETmeU1PEqWiNjeCnlaOnU5kP948sNGSwVp0us+tm
+ /TxencN/VNPLE2maSEp7qh0mDGvTG8U7T7xY4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736426240; x=1737031040;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BlC1Vszyd7ItOd0IMAPNpKih3vpg9+J32hWsBMXAqPw=;
- b=fBB6mQ3mQUwQbv52cYjkI++yP0iXi+TQrLgbhZu1OyWzLOAUTns7YjZnOX0XwnCZ09
- qrhZEKSP9T27VRCJQ9cdRH972LGMCrwienUnri7mylZqYAWGsktioyGCmbuiIGuO2cs5
- VP5ud9r9Zy5Adtd0Oz99ngShNQxK+XFfJCwDe9WI/oFWbU3XMyIjUodD0gozWiEIkMqF
- +LxNHkmkkPq1uCy+fHBfAcldNlUShO3Urobg4SRHIifwgENxNDv8yirAep8b8kb7mJBR
- 2zDz5enNP0zoOt5Ibb7ZmjWztO0+7/MezLU+ElctOeJuABi/UJOJtWJDEFoPh5W8I3am
- OrzA==
-X-Gm-Message-State: AOJu0YwSULOHS6UJX9quX4m97w0KnmURtBUL5BH+zBUVYelLLkx82e5f
- CFjObTv3haMN+CHJSLFTgSSlP4GMgJg8bN4fVsrznyAD7YYm+ry6Ms24pQGGqptMfUlMZxlwcU2
- PiMxGm1R7HMzwKL389hso/otDgwATNCKaui+c
-X-Gm-Gg: ASbGncvwcWBEKfSd8dvUj+FiKq5KMSbb9OtQkEUdbEGerSYIVLrnhLkHoNT+rG+qNE2
- CJAIabyFARogkhE/4an+MQnBjsjzaVjMmP/AzgxY=
-X-Google-Smtp-Source: AGHT+IEuCohVZhiSY7naIB2Nffrc7kZj2kzktakhzVU6odrO1c4Rc62CWD+PbBfJ7v/St6932Gcr7m16heFGCWLIdD0=
-X-Received: by 2002:a17:906:f58a:b0:aa6:b473:8500 with SMTP id
- a640c23a62f3a-ab2abcaafb9mr514238766b.42.1736426240406; Thu, 09 Jan 2025
- 04:37:20 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736426253; x=1737031053;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lKk/uTYn3D3JSLCnUDCYtRvAG/j8AyZNG5hDVeCWIeo=;
+ b=smonxYsVHxh2QS1agYxIdTSg/FnFEOLUhIdxLqCRdZroZa3Td+i0L1ZYBxXYkm4a9X
+ 6QphpEr/KS807cFkSscTVTr/fOZa9z/fIdbc7cBCEveUF42j6r6z3N9583vO85dGkD5R
+ bZ3VeESrLNCkFzfS0VCS0KdM7dV/ET/ihhXh7H3tzFQmQ5kCOyUiy9S4C3+pUBPH1BvV
+ XI2EGmE7rB5sv278qRmg+NI7xzFM1RJq3qLUbs6csYAJWR3CQXcEOiR3REBxGb8v5Mc4
+ C6EX7Y/DxgDSbfwpeBiV/2B9WyfplZ+9yhg9iOMd9AvagmYxg/7/xo33L5C5L+VEx4b0
+ +l6g==
+X-Gm-Message-State: AOJu0YwwQ5gf7txP71mE8MzNzHJsuHjymqM9vD+5z6nYDas4ezfzCBL3
+ D41UHiDcI4Fie1z9D92brpKglxILIEfZeDvkOq6bJpJZUM0qcDeMaaCtZry6wT5UER7p4ARwG4E
+ YjqGyfKd4KJ+Ujzo16ecduR13zyhorXq5qxbAFQAdkKJ4HEE=
+X-Gm-Gg: ASbGncu639uejEaAeB5ikrWtTPBAF+JyQL3zc11wN5FFcAgGJd02RzO0QBhNFp9A57b
+ LOSUh8lF65J49fqCwlaxWtzR3ULS2GYLy7qMw67o=
+X-Google-Smtp-Source: AGHT+IGJfvPJZSnX1YyRJt9RP+2Y5tjJGsaILAVyEibj/5/FcyIWj8emRottKT/OZwTVnb/rrZnR3FZWK7SsTHKlrDw=
+X-Received: by 2002:a17:907:c1c:b0:aab:882e:921e with SMTP id
+ a640c23a62f3a-ab2c3c63988mr252123466b.2.1736426253532; Thu, 09 Jan 2025
+ 04:37:33 -0800 (PST)
 MIME-Version: 1.0
-References: <20250106143229.3023771-1-sjg@chromium.org>
- <20250106143229.3023771-13-sjg@chromium.org>
- <20250108183345.GO3476@bill-the-cat>
-In-Reply-To: <20250108183345.GO3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Jan 2025 05:37:08 -0700
-X-Gm-Features: AbW1kvb4wHpbLOizm7ILyDqP9lE4XoV5vuK33F4vWA9ZvJl5883t3LVUPdEgR50
-Message-ID: <CAFLszTjJVB4C-LG2oNxDtvdG1xzfsWhk=4ByBBQDwBeDRqVjfA@mail.gmail.com>
-Subject: Re: [PATCH v2 12/33] ofnode: Use 4K for a default tree-size
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
+Date: Thu, 9 Jan 2025 05:37:21 -0700
+X-Gm-Features: AbW1kvb3xfhhYV4VZqrGl5Ht87dYGM2KarI9lH6Yl1WEVUz-pqCCFVRA1P_2seg
+Message-ID: <CAFLszTgi8FxpM=uCe5vZ4rWR81W9fnc77KxjrQ4-+yijXb5a=w@mail.gmail.com>
+Subject: Lab failure on JH7110 (StarFive VisionFive 2)
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,33 +83,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-On Wed, 8 Jan 2025 at 11:33, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Jan 06, 2025 at 07:32:08AM -0700, Simon Glass wrote:
->
-> > At some point it would be nice to have the ofnode API automatically
-> > expand the tree as required, to accommodate new nodes. For now, expand
-> > the default size so that UPL can be supported.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >  drivers/core/ofnode.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> Why not have oftree_new take a size parameter?
+I am seeing a lab failure on this board with the test_dm_compat test[1]:
 
-Well, the real solution is as in the commit message. This commit is
-just kicking it down the road, but we need to make progress on
-livetree, as the logic to automatically expand a flattree could be a
-bit painful. I'm not sure if someone other than me is interested in
-working on it.
+=================================== FAILURES ===================================
+559________________________________ test_dm_compat
+________________________________
+560test/py/tests/test_dm.py:20: in test_dm_compat
+561 assert not bad_drivers
+562E AssertionError: assert not {'starfive_gpio'}
 
-I just felt that 1K was a bit small to be useful.
+Would you have time to take a look, please? A patch to fix a similar
+problem on another board is [2].
 
 Regards,
 Simon
+
+[1] https://ci.u-boot.org/u-boot/u-boot/-/jobs/14394
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20240611200156.2245525-19-sjg@chromium.org/
