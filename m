@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 587A6E77197
-	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 05:26:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEDA4E77197
+	for <u-boot@archiver.kernel.org>; Thu,  9 Jan 2025 05:26:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 846578006D;
-	Thu,  9 Jan 2025 06:26:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 252D5800D0;
+	Thu,  9 Jan 2025 06:26:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="dooFP4Pa";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="QeIjXMjw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3717C800D0; Thu,  9 Jan 2025 06:26:23 +0100 (CET)
+ id B20B48001F; Thu,  9 Jan 2025 06:26:31 +0100 (CET)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C29C58001F
- for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 06:26:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FDCE80609
+ for <u-boot@lists.denx.de>; Thu,  9 Jan 2025 06:26:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508HbmBg011239;
- Thu, 9 Jan 2025 05:26:04 GMT
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508Jt2jH013190;
+ Thu, 9 Jan 2025 05:26:11 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=9Ez9wQKW5m3fi7254/duqN
- yIRnV+7epUsXvswh+W2nM=; b=dooFP4Pa9oNDJe7JLw39+5oPHh8VWzkCW17We0
- jKLFPyWzwE3/wiGk4t8j1a0qcoIKLY6XJHijulk71SyMr6ggGuS61s7Irc/ZSJ/b
- WTfDXHdlBMF4O99QgwDc7wDZ9Hd8Nas/ypCntNhrbuvzdbl6F4NmCWYwBijkLehF
- spax/eLnF434bHyfbzo0ba2c3XJUFgC9m+qxZ/9zJukEVlhpiCpOaxUA48PLsVoY
- qD8GRxkEdj9fVUOpEZP6YxSHqDPHQK1aKSzeiTQsxoUcz2qcP5bBIyHYyB+RoJQc
- qwi7rChkWQarHrdkCwHD5ooTUdRycqNDw9k0OMicsqYxNJng==
-Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ ptiUsGJHzFTQaHrD2UjIFnawAwZiMPD36Ii+wGlFEUA=; b=QeIjXMjwe2kBWWNx
+ 5Dnt3PwssVQmHDQH9IPqP1ZgZAeVwNdk71lC703iOzhbyeyLG+mq/lwEqgqwaCuJ
+ 4wQqaTwI+rA4Qh2/HKafb0/o4wBEsFG4Qa7G/6eZ+5FuYyo6GdlThs9XWnllULpF
+ uiGWyctKpBpD4diXPc+lEQ8ImPW7H3tjzaOoW2eJxxGjE2tuRmF6FY/oHY23N/L4
+ 8av15jrAmcJse14OTN0hYIRadEPxBPMjCEfTY8I3TwTKhHQyaOhs7LxrSxTpKhlT
+ l/Q45r8lVm3HdRpxcI/7I9C2h4uxZYRaMf/nX/wwMEF7vs/CEgsgVS+Xbq+z6eKT
+ OwlOAg==
+Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 441wx61d65-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 441yxbs3ee-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 09 Jan 2025 05:26:04 +0000 (GMT)
+ Thu, 09 Jan 2025 05:26:11 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 5095Q3aT017824
+ by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 5095Q8H2029597
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 9 Jan 2025 05:26:03 GMT
+ Thu, 9 Jan 2025 05:26:08 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 8 Jan 2025 21:25:58 -0800
+ 15.2.1544.9; Wed, 8 Jan 2025 21:26:03 -0800
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
@@ -61,10 +62,13 @@ To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <bhupesh.linux@gmail.com>, <andersson@kernel.org>,
  <quic_tengfan@quicinc.com>, <konradybcio@kernel.org>,
  <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
-Subject: [PATCH v2 0/6] Enable QCOM QCS9100 Ride platform support
-Date: Thu, 9 Jan 2025 10:55:39 +0530
-Message-ID: <20250109052545.2921502-1-quic_varada@quicinc.com>
+Subject: [PATCH v2 1/6] arm64: dts: qcom: qcs9100: Add support for the QCS9100
+ Ride and Ride Rev3 boards
+Date: Thu, 9 Jan 2025 10:55:40 +0530
+Message-ID: <20250109052545.2921502-2-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250109052545.2921502-1-quic_varada@quicinc.com>
+References: <20250109052545.2921502-1-quic_varada@quicinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -74,17 +78,17 @@ X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-GUID: 3KoLM9YvgUFpOJrOHQK03WYLcEFFdVFe
-X-Proofpoint-ORIG-GUID: 3KoLM9YvgUFpOJrOHQK03WYLcEFFdVFe
+X-Proofpoint-GUID: 6gaAC3hS4qbL6aCo7ZdG-2BguvhkrG5l
+X-Proofpoint-ORIG-GUID: 6gaAC3hS4qbL6aCo7ZdG-2BguvhkrG5l
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
  definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- impostorscore=0 adultscore=0 mlxscore=0 spamscore=0 suspectscore=0
- clxscore=1015 mlxlogscore=999 phishscore=0 malwarescore=0
- priorityscore=1501 bulkscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2411120000 definitions=main-2501090042
+ mlxlogscore=999 spamscore=0
+ impostorscore=0 priorityscore=1501 malwarescore=0 adultscore=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 mlxscore=0 phishscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2411120000 definitions=main-2501090042
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,56 +105,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following patch series enables support for QCOM QCS9100 based
-Ride platform. The QCS9100 SoC is a derivative of SA8775p and hence
-this series makes use of the SA8775p related code to enable the
-QCS9100 based Ride platform support.
+From: Tengfei Fan <quic_tengfan@quicinc.com>
 
-Use 'make qcs9100_defconfig' to generate '.config'.
+Add device tree support for the QCS9100 Ride and Ride Rev3 boards. The
+QCS9100 is a variant of the SA8775p, and they are fully compatible with
+each other. The QCS9100 Ride/Ride Rev3 board is essentially the same as
+the SA8775p Ride/Ride Rev3 board, with the QCS9100 SoC mounted instead
+of the SA8775p.
 
+Signed-off-by: Tengfei Fan <quic_tengfan@quicinc.com>
+Reviewed-by: Konrad Dybcio <konradybcio@kernel.org>
+Link: https://lore.kernel.org/r/20240911-add_qcs9100_support-v2-4-e43a71ceb017@quicinc.com
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
+
+[ upstream commit: 7dcc1dfaa3d1cd3aafed2beb7086ed34fdb22303 ]
+
+(cherry picked from commit db6231faa8ef46e5ff5d5ece0c930a07c6358562)
 ---
-v2: * Added reviewed-by tags to some of the patches
-    * Add separate patch to bring QCS9100 DT files from Linux
-    * Dropped 'arch/arm/dts/sa8775p-*.dtsi' from first patch and
-      use qcs9100 DT files instead
-    * Added one more range to memory definition
-    * Updated commit log to include linux version from where
-      headers were taken
-
----
-Tengfei Fan (1):
-  arm64: dts: qcom: qcs9100: Add support for the QCS9100 Ride and Ride
-    Rev3 boards
-
-Varadarajan Narayanan (5):
-  dts: qcs9100-ride-r3-u-boot: add override dtsi
-  clk/qcom: add initial clock driver for qcs9100
-  phy: qcom: Add SA8775 to QMP UFS PHY driver
-  qcom_defconfig: enable SA8775P clock driver
-  configs: add qcs9100_defconfig
-
- arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi      |  20 ++
- configs/qcom_defconfig                        |   1 +
- configs/qcs9100_defconfig                     |  24 ++
- drivers/clk/qcom/Kconfig                      |   8 +
- drivers/clk/qcom/Makefile                     |   1 +
- drivers/clk/qcom/clock-sa8775p.c              | 142 +++++++++++
- .../phy/qcom/phy-qcom-qmp-qserdes-com-v5.h    | 124 ++++++++++
- .../phy/qcom/phy-qcom-qmp-qserdes-txrx-v5.h   | 231 ++++++++++++++++++
- drivers/phy/qcom/phy-qcom-qmp-ufs.c           | 171 +++++++++++++
- .../src/arm64/qcom/qcs9100-ride-r3.dts        |  11 +
- dts/upstream/src/arm64/qcom/qcs9100-ride.dts  |  11 +
- 11 files changed, 744 insertions(+)
- create mode 100644 arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi
- create mode 100644 configs/qcs9100_defconfig
- create mode 100644 drivers/clk/qcom/clock-sa8775p.c
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v5.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v5.h
+ dts/upstream/src/arm64/qcom/qcs9100-ride-r3.dts | 11 +++++++++++
+ dts/upstream/src/arm64/qcom/qcs9100-ride.dts    | 11 +++++++++++
+ 2 files changed, 22 insertions(+)
  create mode 100644 dts/upstream/src/arm64/qcom/qcs9100-ride-r3.dts
  create mode 100644 dts/upstream/src/arm64/qcom/qcs9100-ride.dts
 
-
-base-commit: 3bfd12008bef1a8353e7ceaca2cb06cf388527ed
+diff --git a/dts/upstream/src/arm64/qcom/qcs9100-ride-r3.dts b/dts/upstream/src/arm64/qcom/qcs9100-ride-r3.dts
+new file mode 100644
+index 00000000000..759d1ec694b
+--- /dev/null
++++ b/dts/upstream/src/arm64/qcom/qcs9100-ride-r3.dts
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
++ */
++/dts-v1/;
++
++#include "sa8775p-ride-r3.dts"
++/ {
++	model = "Qualcomm QCS9100 Ride Rev3";
++	compatible = "qcom,qcs9100-ride-r3", "qcom,qcs9100", "qcom,sa8775p";
++};
+diff --git a/dts/upstream/src/arm64/qcom/qcs9100-ride.dts b/dts/upstream/src/arm64/qcom/qcs9100-ride.dts
+new file mode 100644
+index 00000000000..979462dfec3
+--- /dev/null
++++ b/dts/upstream/src/arm64/qcom/qcs9100-ride.dts
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
++ */
++/dts-v1/;
++
++#include "sa8775p-ride.dts"
++/ {
++	model = "Qualcomm QCS9100 Ride";
++	compatible = "qcom,qcs9100-ride", "qcom,qcs9100", "qcom,sa8775p";
++};
 -- 
 2.34.1
 
