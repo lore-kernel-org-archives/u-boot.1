@@ -4,64 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF214E7719C
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 18:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED95BE7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 18:53:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCF368072F;
-	Fri, 10 Jan 2025 19:43:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 77379801F5;
+	Fri, 10 Jan 2025 19:53:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="jzFTCnUG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pyf0LNbr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45EFE80726; Fri, 10 Jan 2025 19:43:16 +0100 (CET)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::223])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F00A78036B; Fri, 10 Jan 2025 19:53:49 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CD878070D
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 19:43:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7843800D0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 19:53:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 311C16000E;
- Fri, 10 Jan 2025 18:43:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1736534594;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=AKnDGtWKZnOcyX7cCD/DdlNQooB0t7R5wRpfdwcqgYY=;
- b=jzFTCnUGr2SPJLtAf6jHMP8iKNoNobqkrtQbkOKDNtNOPgG5lWsNzV9i4jB00iD/Mpf7Yt
- ywBQHzYNWHrYjJv2yicJkmveEffiftUmVkY+F5mPQ15h6pfLTR6XVhB7LPxYMo8zmKFmva
- ABd+BiYx3rjh1JQUMKnQ9s8j/BUbPSuBwWc/WsMCdyTHbh4ELwY2JFtxIkvoPEmy/6GeZj
- /vYNRL7G33P+lryj52bkqK5gdUFa6mt2AlWItZ8e8vhnsC+jWiNhWpyMh+yBoq9uBeF+4O
- +BXrL5m4fADS6dHg1e4yLu17XYwSR9QW5iIY3BSMaHUVUYACZOFYAKKBFtNcPA==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Fri, 10 Jan 2025 19:43:10 +0100
-Subject: [PATCH v3 13/13] imx8mp_evk: Enable display support
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-30219437e63so32601271fa.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 10:53:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1736535227; x=1737140027; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nfcXsEtIqVb4f3IAJaoiZaQr/oizd+cj4AQVa0oY7lw=;
+ b=Pyf0LNbr7KdtAnsX9ZTXYX3Tk2jB/UBQlcQKAbtdtlr56j1fKxqVbZrwOS42gcRFdt
+ 6+zUdKLqXomFzNwGlflwvN3D4WH0Lg92OFtojEM+UHDW3Pf6qLKxwWSzrSFu7lMQlRJh
+ Fw0Igw/JOTk9Tlp23uXPyofNFH2YIU3hqk4IfB3fdoOicXYkHkgfMQP/QyhFPqJovcUG
+ axl32Ox58IPV19XJloMtFHs3EEOpPQID/vSDxB6bxBCaE0KHNirwNkSnquMi6h4rIZ5n
+ e4TQou7GlBp9contEoV1TqoAJjRDfJUe8hgUHCOBWWERl4feb/KiqTRrSb/8UAMgsety
+ QlsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736535227; x=1737140027;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nfcXsEtIqVb4f3IAJaoiZaQr/oizd+cj4AQVa0oY7lw=;
+ b=t2GGPPspGi2kPSldLHsx1gILafzQ9wGZXEjZhlHx3ehGo1iI32Z8sIT2qMnvCzyZ9V
+ ifApQwAWOZCHkhs4VhrFA94Ryl01zFaoo5gE9to4ZRNJhRwQWso5wopEF+cpYeEt1ir3
+ CVHzd2JwOQAFgPIVzkSZMniCxvs0h/ooRjw7iQF3oZh+/F5hmq3do21Ogz/CAo0Ep26z
+ XIejeUj5uwZhHBil/IJTzSBV7iuwgTtjI2sd7r5ABHz3AWlOGOSVa2CsJ6rsks/CJPKa
+ xAXUV2J4x0mJqCMvaxD1T5P35WcqJigjiq/XM0Yx86unAlHqyTT0cPJjjoM4MYxR1Oc7
+ JXDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXpaoPIqmKUy7i8niaLyazDMRXjic3aGnqs2C26JXjVeT8dEC0ZC23bUHWrB15We4vkRBLDuJk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxjtfe83XLCpqL6UC8sK8wvGdTt3T8Vqyg2OQupvH+J0w8fFAvl
+ HGc2gLNYyyEVA0dn/WASXl0FzDz+9CAWuFjz1/8ScP8AfZC8Bpx3ixmHEosna/vcYWXuZoqMRuZ
+ BO98RZa/jNSACoYSFYGJVaX9tGuo=
+X-Gm-Gg: ASbGncsA7zQwI+kcBkps6Zd7Otq18pKpZ5ICVTGf94cYlSleYiVrkYUUONcscmifBKT
+ REK49npMLzbuW5Vqzd8j6KC4XrD9Y5Anm6auLIniNVkFVkixO2+PooTqu+1GXzYtjuq4wKA==
+X-Google-Smtp-Source: AGHT+IFOa7MC9qD32rXW9w1RrJiWD1sS9TuNy/wjJieiPLGwBls9GN9Py9V3jjhZc/I1LqhkM8zbRxZGlANk8VdEikY=
+X-Received: by 2002:a05:651c:1505:b0:2ff:b8f5:5a17 with SMTP id
+ 38308e7fff4ca-305fedd0bd4mr25449491fa.5.1736535226793; Fri, 10 Jan 2025
+ 10:53:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250110-ge-mainline-display-support-v3-13-d2c0acea6feb@bootlin.com>
 References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
-In-Reply-To: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ <20250110-ge-mainline-display-support-v3-13-d2c0acea6feb@bootlin.com>
+In-Reply-To: <20250110-ge-mainline-display-support-v3-13-d2c0acea6feb@bootlin.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 10 Jan 2025 15:53:35 -0300
+X-Gm-Features: AbW1kvbXbPy6X9q_ZCHizZNKFOIdvBTjSiuRwuCWH1EuxBC6p1Cz4VohAKUwsx0
+Message-ID: <CAOMZO5B2K64cc1v3yn26fXqHtEcsMf+eSj_Smm_vAr5shzfboQ@mail.gmail.com>
+Subject: Re: [PATCH v3 13/13] imx8mp_evk: Enable display support
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Anatolij Gustschin <agust@denx.de>, 
- Fabio Estevm <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Mario Six <mario.six@gdsys.cc>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
- Ian Ray <ian.ray@gehealthcare.com>, 
+ Sean Anderson <seanga2@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Mario Six <mario.six@gdsys.cc>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>, 
  Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>, 
- Miquel Raynal <miquel.raynal@bootlin.com>
-X-Mailer: b4 0.15-dev
-X-GND-Sasl: miquel.raynal@bootlin.com
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,58 +101,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is now support for the display pipeline using one LCD interface,
-the LDB bridge and of course the related media power domain controls.
+Hi Peng,
 
-This is untested as I do not have the EVK but should be enough to use
-the display, using bmp, lcdputs and co. For console-like commands, it
-might be also needed to enable the VIDEO_CONSOLE explicitly using:
+On Fri, Jan 10, 2025 at 3:43=E2=80=AFPM Miquel Raynal <miquel.raynal@bootli=
+n.com> wrote:
+>
+> There is now support for the display pipeline using one LCD interface,
+> the LDB bridge and of course the related media power domain controls.
+>
+> This is untested as I do not have the EVK but should be enough to use
+> the display, using bmp, lcdputs and co. For console-like commands, it
+> might be also needed to enable the VIDEO_CONSOLE explicitly using:
+>
+>      setenv stdout serial,vidconsole0
 
-     setenv stdout serial,vidconsole0
+I have access to an imx8mp-evk but don't have an LVDS panel to test.
 
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
----
- configs/imx8mp_evk_defconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
+Could you please test this series on an imx8mp-evk + LVDS setup?
 
-diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-index 5369f8b84a4172434dcef142c854d06e3437caf1..a3cdf0f3cb237d7b555a2dca741deee21b771e8c 100644
---- a/configs/imx8mp_evk_defconfig
-+++ b/configs/imx8mp_evk_defconfig
-@@ -31,6 +31,7 @@ CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_DEFAULT_FDT_FILE="imx8mp-evk.dtb"
- CONFIG_SYS_CBSIZE=2048
- CONFIG_SYS_PBSIZE=2074
-+# CONFIG_CONSOLE_MUX is not set
- CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x26000
- CONFIG_SPL_BOARD_INIT=y
-@@ -60,6 +61,7 @@ CONFIG_CMD_USB=y
- CONFIG_CMD_USB_SDP=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_CACHE=y
-+# CONFIG_CMD_CLS is not set
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_OF_CONTROL=y
-@@ -112,6 +114,7 @@ CONFIG_PINCTRL_IMX8M=y
- CONFIG_POWER_DOMAIN=y
- CONFIG_IMX8M_POWER_DOMAIN=y
- CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
-+CONFIG_IMX8MP_MEDIAMIX_BLKCTRL=y
- CONFIG_DM_PMIC=y
- CONFIG_DM_PMIC_PCA9450=y
- CONFIG_SPL_DM_PMIC_PCA9450=y
-@@ -139,4 +142,8 @@ CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_MANUFACTURER="FSL"
- CONFIG_USB_GADGET_VENDOR_NUM=0x0525
- CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_VIDEO=y
-+CONFIG_VIDEO_BRIDGE=y
-+CONFIG_IMX_LDB=y
-+CONFIG_IMX_LCDIF=y
- CONFIG_IMX_WATCHDOG=y
-
--- 
-2.47.0
-
+Thanks
