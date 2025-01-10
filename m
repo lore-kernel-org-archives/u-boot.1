@@ -4,107 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6F8FE77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 21:15:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E185E77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 21:56:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DFC5800D0;
-	Fri, 10 Jan 2025 22:15:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BB8C800D0;
+	Fri, 10 Jan 2025 22:56:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RCTOPWFz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NKAD6tGV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFC83801F5; Fri, 10 Jan 2025 22:15:37 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id C6B2E801F5; Fri, 10 Jan 2025 22:56:50 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 778AB80050
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 22:15:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82F8480050
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 22:56:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6d8ece4937fso19422506d6.2
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 13:15:35 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b6ef047e9bso227331485a.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 13:56:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736543734; x=1737148534; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IaDQBbJDQZVs5ooHpvzkNDGJeRIKDVlK5s7YLNSmvMY=;
- b=RCTOPWFz9YfXieUBxciPHi2ilpZezTDprHIGLGxCl+RMzswGUW0dCL4K31Q/5g7wfx
- /Vjv+QPuPSmNyFakan8LeO8KecfDoZh030eG/nL73dePu85LY2rwIckAN+9XQcJjt1y6
- jMffBi1fz8iQ7IwROcFGkaWClJUo3l/nEy6AY=
+ d=linaro.org; s=google; t=1736546207; x=1737151007; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SfO/NB2lbWAPnyEWemikr3mnDVxO0vJeD8sVbPT+N/s=;
+ b=NKAD6tGV46rfsfa0X6VZxt20LT/sgPuC62zJXjPD0ItwGuS+SeD6WGmPjaUj1IEMkC
+ SfHrDmATANES1uNUNzP85St7ym7yFH0qsEUTl10vGk0BgbMTxhMiaqO/F9PfthchluSc
+ 197JRUOu16nQZj8+l/tG2o30V1IUdCsfKZX/ZUANvMm+wI80INqp4E338RuXTS+vlQY+
+ gRpsAUvpB+NPejeit1exf604yyoKhhaCLbcTpSW2tcC76SJLV+20YspOsbkcOUy0/uZF
+ prw1jt466zhZxqgTW+DS9cAFFcU35UV35vzquUVxG50+injPJLXxfNRnmS6zUFEVjHct
+ t49g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736543734; x=1737148534;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IaDQBbJDQZVs5ooHpvzkNDGJeRIKDVlK5s7YLNSmvMY=;
- b=rvu6AbWhY5ay0qiTU3zwrEeg7ZOlsh2mF1PIuw7Yi/ij2sNG/AHi9O6jsWRm2d6PLe
- Q0Ep5eyyKZHAfkVCZKsB76F0w/UBblMxjLQEst2Zyn/l7bsrV/9kQTzfW7qgb3oW7dd1
- 3OjmabnovT2Nhs+F75S6Ak79/gyxgzgF7jCEA9eD5OjmiTxmqQtYJ3RXginVw80wzwsc
- tBiVrt1sbDXY3vRz4Qc1zWYypqZGDyZwN5uZi5XQCuv9k03Ig+g/HjIQQMLZKRyOFTcD
- 1cDGkqpHE08R+GswDYhOFbxdG2GjudteAATGB5eXrCJgsWbBzt+Xu/mB/ZwBY6fmlNvF
- OAuQ==
-X-Gm-Message-State: AOJu0YyZGiGsT6LIOGGEvE1HUi3bD4sbOd15+dfzRl1JE93OlVLcG9/j
- 9SZ+3FPBy7xgtzkp6km6MwR3zaIixt6lHMrO7TRWNxT8pvqqKooY6oqmO0lEexA=
-X-Gm-Gg: ASbGncs6oZKQNRj/k4sJFHSkrQbNobHxWTJR6YpIAkSg7EsglvWr8gGypZCkOyZYIul
- 9Sb3ixmP/vb3jWdSiz4q/oZA0A1GOHnZz0S/nJPwy+c1ZqPX8IT537wUJB+5cSwpfNl1n9LDM3F
- khxULB0AD9lCzll9UBUnrCaIC2CAPHFcKwOcUkv7M4gBq6ks9p0Ad4odOL0cvk5JCfuGcrSYJvS
- 932owN3L+I39UhgzRXCzHVOjXyicGC7HatHyGS7m2bSfbpEmF4CG8c=
-X-Google-Smtp-Source: AGHT+IGdPN4DQhniMkrX7/8PFcblDgnB3faKXc3N93+8MAcUDCxSIzS32pdnY722QztkIuh82IakgQ==
-X-Received: by 2002:a05:6214:1316:b0:6d8:e634:204d with SMTP id
- 6a1803df08f44-6df9b2b29d3mr208760516d6.38.1736543734259; 
- Fri, 10 Jan 2025 13:15:34 -0800 (PST)
-Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfad88e3a3sm13081636d6.46.2025.01.10.13.15.30
+ d=1e100.net; s=20230601; t=1736546207; x=1737151007;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SfO/NB2lbWAPnyEWemikr3mnDVxO0vJeD8sVbPT+N/s=;
+ b=WlO35tWWy28yh3Y/v3apdtNqKNq7R3zL4JQk60HTXbZxAYD3lHwJ3LX2PZZ26rxaDc
+ 8eCliAfsT+dYty5pGFL0CNQE7yMVTt9jypKzk7JRvUDnnZWt+za7dtPfs5TWFixmrVCi
+ VKTZ1PlnycMnWHA2SBQiAmv11p4zWQmDZEd0NmdzOHJEBgvBkvoQKilHxZCKwIVqy9M3
+ wd8QavCbrsmkFBAN4XU1xCYjqRlASlruBaFpRscQKS3N/1lJnV+f+fohJk/31XmeOsqX
+ S87lEBnJc0mygVsKLEQu9VatX3O8FAy81cFP0dMEFHTRRp2oo9JZQKfBhD3YcHG/AC6J
+ Fd2w==
+X-Gm-Message-State: AOJu0YzO9TzVFsxHSVDjlBL7cxFh2ME5iKV/LoQAQoHdHUu6LDZ7TS6I
+ OCDCfItvYUhDdrdr/2Nr/fZ6iuxZ3NEzUueJoG6fPSIs78rqNaNWzeCpdwbgqT7mmDfreWHpk4y
+ 2Vas=
+X-Gm-Gg: ASbGncvO3JWqoIr2OCS1MBpwQoO5Tkv6RV516XCosv+ht4vN1YQGu9g4mb0YJYt+3Ey
+ nygoR6bthFwIdLzoemESQCHTiR1kAx1O4ZLrqVNuo28ruYIOXU/aeDBxwKcsXaYMokVcEgTN4i3
+ OQ4e8F8uZZ8ZMlFoNRWq8dxTK+/fQerYj31jJ7drcsDOULRrKIrylPjJG4aTdayZX0PMyf3fjBJ
+ N3ZXlz+xaHHcHGc+5SagJLSI82Ka+APtLMSmC0EIK8CA47JDb7T+8sUbR8lylMQnFXmE6S3iNOc
+ 9pBv8Vk+RUdq48ExLCHJM778BEPZSqfAf4EMaLLmTw+cwQw3rRi8nBw=
+X-Google-Smtp-Source: AGHT+IFQeV6FQtb/1x2DCS1G9al0e+IzPfuRcVjMbzNbWsvaujc2gW71VzOOpYZl1C1kx5irevbbeQ==
+X-Received: by 2002:a05:620a:254d:b0:7a8:554:c368 with SMTP id
+ af79cd13be357-7bce11af046mr1194928185a.6.1736546206867; 
+ Fri, 10 Jan 2025 13:56:46 -0800 (PST)
+Received: from ubuntu.localdomain
+ (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dfad85f6bdsm13839496d6.17.2025.01.10.13.56.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 13:15:33 -0800 (PST)
-Date: Fri, 10 Jan 2025 15:15:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Dahl <ada@thorsis.com>,
- Alexander Kochetkov <al.kochet@gmail.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Cornelis <hugo.cornelis@essensium.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Fri, 10 Jan 2025 13:56:46 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
-Message-ID: <20250110211528.GO3476@bill-the-cat>
-References: <20250106143229.3023771-1-sjg@chromium.org>
- <20250106143229.3023771-18-sjg@chromium.org>
- <20250108182528.GN3476@bill-the-cat>
- <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
- <20250109150954.GU3476@bill-the-cat>
- <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
- <20250109180817.GC3476@bill-the-cat>
- <CAFLszThn-XcHruFe60TH8FnsKsH08NFEco2zt+9JBHkneQgo0Q@mail.gmail.com>
- <20250110161732.GI3476@bill-the-cat>
- <CAFLszTgiO2zPy06LziSOQ2tQAz9hh1rd9LEPtRfW+VxuLR1A4g@mail.gmail.com>
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>
+Subject: [PATCH v4 1/3] bloblist: add api to get blob with size
+Date: Fri, 10 Jan 2025 13:56:33 -0800
+Message-Id: <20250110215640.892539-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CjNsaXyKlO0SiJqu"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgiO2zPy06LziSOQ2tQAz9hh1rd9LEPtRfW+VxuLR1A4g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,53 +101,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+bloblist_find function only returns the pointer of blob data,
+which is fine for those self-describing data like FDT.
+But as a common scenario, an interface is needed to retrieve both
+the pointer and the size of the blob data.
 
---CjNsaXyKlO0SiJqu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add a few ut test cases for the new api.
 
-On Fri, Jan 10, 2025 at 12:23:42PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 10 Jan 2025 at 09:17, Tom Rini <trini@konsulko.com> wrote:
-[snip]
-> > It be great if buildman size comparison had some way to csv the output.
-> > That's what's missing imo from being able to have some automation or
-> > even just nicer tooling.
->=20
-> What sort of tooling could we have? I would like something in CI which
-> reports code-size changes in a useful way, perhaps failing if the
-> delta is too large for more than x boards. WDYT?
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+Changes in v2
+- Rename function argument.
+- Add ut tests.
+Changes in v3
+- None.
+Changes in v4
+- None.
 
-I don't want it making automated decisions (for example when platforms
-enable features they grow, a lot, on purpose) but generating an output
-that can be imported elsewhere would be good.  I want something that can
-be thrown in a database (or added to a database). Setting aside the
-challenge of LTO, and looking at what I see in a recent before/after, it
-would be good to query and see that for ~60 platforms mpc8xxx_gpio_probe
-grew by 44 bytes. Which platforms that is only matters if it's not clear
-=66rom the log which commit that's likely from.
+ common/bloblist.c      | 17 +++++++++++++++--
+ include/bloblist.h     | 18 ++++++++++++++++++
+ test/common/bloblist.c |  4 ++++
+ 3 files changed, 37 insertions(+), 2 deletions(-)
 
---=20
-Tom
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 110bb9dc44..ab48a3cdb9 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
+ }
+ 
+ void *bloblist_find(uint tag, int size)
++{
++	void *blob = NULL;
++	int blob_size;
++
++	blob = bloblist_get_blob(tag, &blob_size);
++
++	if (size && size != blob_size)
++		return NULL;
++
++	return blob;
++}
++
++void *bloblist_get_blob(uint tag, int *sizep)
+ {
+ 	struct bloblist_rec *rec;
+ 
+ 	rec = bloblist_findrec(tag);
+ 	if (!rec)
+ 		return NULL;
+-	if (size && size != rec->size)
+-		return NULL;
++
++	*sizep = rec->size;
+ 
+ 	return (void *)rec + rec_hdr_size(rec);
+ }
+diff --git a/include/bloblist.h b/include/bloblist.h
+index f999391f74..52ba0ddcf8 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -250,6 +250,24 @@ static inline void *bloblist_check_magic(ulong addr)
+ 	return ptr;
+ }
+ 
++#if CONFIG_IS_ENABLED(BLOBLIST)
++/**
++ * bloblist_get_blob() - Find a blob and get the size of it
++ *
++ * Searches the bloblist and returns the blob with the matching tag
++ *
++ * @tag:	Tag to search for (enum bloblist_tag_t)
++ * @sizep:	Size of the blob found
++ * Return: pointer to bloblist if found, or NULL if not found
++ */
++void *bloblist_get_blob(uint tag, int *sizep);
++#else
++static inline void *bloblist_get_blob(uint tag, int *sizep)
++{
++	return NULL;
++}
++#endif
++
+ /**
+  * bloblist_find() - Find a blob
+  *
+diff --git a/test/common/bloblist.c b/test/common/bloblist.c
+index 4bca62110a..324127596f 100644
+--- a/test/common/bloblist.c
++++ b/test/common/bloblist.c
+@@ -98,10 +98,12 @@ static int bloblist_test_blob(struct unit_test_state *uts)
+ 	struct bloblist_hdr *hdr;
+ 	struct bloblist_rec *rec, *rec2;
+ 	char *data;
++	int size = 0;
+ 
+ 	/* At the start there should be no records */
+ 	hdr = clear_bloblist();
+ 	ut_assertnull(bloblist_find(TEST_TAG, TEST_BLOBLIST_SIZE));
++	ut_assertnull(bloblist_get_blob(TEST_TAG, &size));
+ 	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
+ 	ut_asserteq(sizeof(struct bloblist_hdr), bloblist_get_size());
+ 	ut_asserteq(TEST_BLOBLIST_SIZE, bloblist_get_total_size());
+@@ -114,6 +116,8 @@ static int bloblist_test_blob(struct unit_test_state *uts)
+ 	ut_asserteq_addr(rec + 1, data);
+ 	data = bloblist_find(TEST_TAG, TEST_SIZE);
+ 	ut_asserteq_addr(rec + 1, data);
++	ut_asserteq_addr(bloblist_get_blob(TEST_TAG, &size), data);
++	ut_asserteq(size, TEST_SIZE);
+ 
+ 	/* Check the data is zeroed */
+ 	ut_assertok(check_zero(data, TEST_SIZE));
+-- 
+2.25.1
 
---CjNsaXyKlO0SiJqu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeBjeMACgkQFHw5/5Y0
-tyzTPgv/QdjS4yLFvPcn/zC3hQmR3ZidlFBcnzficKuRl0CA/C2WNftHlarF8wLU
-jZPEB3d5lrJROx7dQjwlHWJhPXaEQpzmw8AGOofos8Y8lG4520KaclAYXn62JtSG
-rwCheJzZInkGgQiB2fGrywnFVcVgzv8w0AQA+/i1H7GgUe+VA+92i+b74ZF8zamS
-SPKjBe03Eh5M2SW+R0aj7vX4lnB1Z/nO3XuOL6pz0DW/rlIjJrgYGvUMRKa267i1
-Izf1UqLfdwPMCfQsrN7gUItHFzTuWx/YMUjhdQ66lGNX/+jvie0TyOu27ZYUdwQK
-wIzJlqQ/QW1/ex6VVhFk1qusWTXG0CoYZUljEPn3ddQsytaYH9k6egbiLwta1rGn
-D4AUtvOQBRAv4szCwDiYDJNTB0ghRSrKo4uncf66y1lHyLi840TiHGxvoTxTLTbL
-DNZC7xL79jiAFqGw/WrSEhp86ZYpSPT7Px3NvYbg/qyu/cji6Bo+xBCsdL4/spUs
-5eJ593SC
-=2noR
------END PGP SIGNATURE-----
-
---CjNsaXyKlO0SiJqu--
