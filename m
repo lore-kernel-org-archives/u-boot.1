@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBBBDE77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 13:54:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24319E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 14:15:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47CF5801F5;
-	Fri, 10 Jan 2025 14:54:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
+	by phobos.denx.de (Postfix) with ESMTP id 73428801F5;
+	Fri, 10 Jan 2025 15:15:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="HKYu1tDv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XLFEI7UM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ED8A805EA; Fri, 10 Jan 2025 09:53:17 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id E64128036B; Fri, 10 Jan 2025 15:15:34 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39AAF800C2
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 09:53:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FE87800D0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 15:15:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peter.lin@sifive.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2164b662090so27315045ad.1
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 00:53:15 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e4a6b978283so5136634276.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 06:15:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1736499194; x=1737103994; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tr75m9C9S0AwMpUgRHmLBOe/pATZR7OZXJKp7ez5JYY=;
- b=HKYu1tDvmycHUCkpO+2xp5qXKVftIM+SJWbTmeF1CBCUnlGxCtyUUZJYFVRIVm7lzP
- zIACmPwgmi3UhnksjP96vfhB+OZcgGcZct7TkllJnoRUJ/8k7UnQc2Ldnwa8DlzKCunf
- Fs41QGKdGffTGj2SdKtqtsJDij+ZeUzrDvX5AhJXa6PxGMjqvm9xUKJPsIPo/dnxg5Eq
- Ecty5eGkGfI3SnOtThphCSCGCSrXHh7BPiyHUsWw/NBrqNOYLnjt2SMDkuwtszRDy+T8
- ZiZvigcVKB7nRGsRR4d5Amx1f9KcY1wdm1bMsUCPBtTure5UAIZUQyLUeLTve1Pv81oR
- U8vw==
+ d=linaro.org; s=google; t=1736518531; x=1737123331; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gEGoBThx+W4OgK02wHNbhTvaOaRXMqGkS9Kkp1xIeos=;
+ b=XLFEI7UMnYnSTpF0y5yEBqwvjgQWCLW9z9cLKr9YBsprvUlbw1OIiqxpFEiFpAxzYm
+ zl0T8LhYM/X2fNcmJgVwXfkmlry8VkYMTJcYdQr74i65KernDgt5cGSPOLq/SXTsQ4wV
+ gyJBHVUUD4Szz/WEY9q6YHMsWZBFmDsDFC4UEHBs2wvcc9eTrOz+iA8McAO8iS9UJzQS
+ TbS6TLnRy86EVfDgNLo2kTL2bRlsuxVOW2a1VmoOS6xU4CfK8ZeP6FsY2V2HYi+K3NuV
+ hKoz1YngPRJrHjqy9rEo0Axc97z25XJBB6ig/gBvUNvTCB8smICg7DAgsbNnhsgzYMAJ
+ ENZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736499194; x=1737103994;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1736518531; x=1737123331;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=tr75m9C9S0AwMpUgRHmLBOe/pATZR7OZXJKp7ez5JYY=;
- b=sOqLglizP4arX4+2A/HBfXylSe9145kPF0vZoAm7XXhJGSA8SmDiJa4cpRVboZo7Tu
- fVvjzkKkKIZF4PVfq0yzNtNzSFvCMXrtjsgxItSvu2laz0LutUz8kaAE/T91iiOjQZks
- RhMu1Xo8qlx7zvXHnRlMX3YcICUwuPnLNN5WP6m2OcNzYu8kvYrRDi7TCdoJFT442onC
- 8jsYh5JahOE877XlnFv8cVDnQDNW4qgR9FxpAFhyzg31g2a/2p6UfUA4tB/OJBuL+U0c
- lkA8Fee2tiLcPUvnjL7hSUWPY5Yh06P2KoEwslIk9Zgfnir72w51II8LlFcEikDZpfp/
- cwXA==
+ bh=gEGoBThx+W4OgK02wHNbhTvaOaRXMqGkS9Kkp1xIeos=;
+ b=j5Q46pSiEzLN7ZDvkGQJXbfNp4bXBo3kU98Qg/x4cstYwgXGgAYlVfs7zdBB92PeQ2
+ jUueABWAfgfdaETteDPOBmCBuRLF2dWPr4+YcGaGWn4aD2fGTjW+whPH01kB1CJe3Nn6
+ e6GC2Lp7mB7wHKEyyJAL9EZ565m7xqeam3P2VkMxWKwI++5IpHInwZ4XLUxVCXF35iSa
+ SMrU160DUHk56miJuJWM1xW7fJ6eAQ7WmzdIH79GfEHZZq8PHqnOuHjksFg1H1b6z1+A
+ IPxNIBoOyJnEPTbfWoKjuen2MBwIr0uodPgv+FROzAfw2Svx2zc3tdJl/nPQB/ihHfbc
+ ITEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4JHtq6/14uCyE0kaeAykEB7/wS6ilnnj4dy5CocxPy4rBlHHrtUDxzRMPyaWrj6cGlazhNA0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzziEf0WMnl5tfCsERojlfCtm5dIlzM0SnWaqTky0AEOSa5a/R3
- skduM49NGEFzPYYv386R1TmAmylbY6ipxN9UrDC0/Gi+tIsRcOPbaAvPX+uXLGg=
-X-Gm-Gg: ASbGncsrNIHyzsZwxtZXeu1wB+D3++PchDO+vRV3MNDJi+7GbuoEKtoQ8/zX8eHo+Zn
- vnw4s8BXMB9WM+K7z5ey6TH3Hhybz0VpUSpH/DM/kPVfC0tIWs1Ho9cLbtVAAHwoU4M2ddnvxDP
- kqJTdOK8oiE4k+NsdGDNbFf+DqZk56XWW1x9Cp6jJ602ZDoqbcAM60OwUw8SDtwaJAFr5cSmmDn
- T98zaUYVzbcSM2VwSrLen/1iXK/7BqEZkAKOZ9VevpdprXVX3kbaAhW5dsEYVjCRcSx5fy5zzbI
- +dOsF8HVJNrYuxupWRgU9cLhPRs=
-X-Google-Smtp-Source: AGHT+IEd10PgQ3fagYS9UVAhDwnJeYXu3yqYcEazVzQcvvpY0rTC0Hpc9bzmRNfhSvurzIGH6/rLaQ==
-X-Received: by 2002:a17:903:1cf:b0:216:1cfa:2bbf with SMTP id
- d9443c01a7336-21a83fc77c3mr156685615ad.35.1736499193738; 
- Fri, 10 Jan 2025 00:53:13 -0800 (PST)
-Received: from peterlin-1873.internal.sifive.com ([210.176.154.33])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21a9f217b38sm9813315ad.145.2025.01.10.00.53.11
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 10 Jan 2025 00:53:13 -0800 (PST)
-From: Yu-Chien Peter Lin <peter.lin@sifive.com>
-To: zong.li@sifive.com, greentime.hu@sifive.com, ycliang@andestech.com,
- trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
- jiaxun.yang@flygoat.com, u-boot@lists.denx.de
-Cc: Yu-Chien Peter Lin <peter.lin@sifive.com>
-Subject: [PATCH] Kconfig: Add a default cache line size for RISC-V
-Date: Fri, 10 Jan 2025 16:53:08 +0800
-Message-Id: <20250110085308.20760-1-peter.lin@sifive.com>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+ AJvYcCVpFPoUTGsvuxvUg++tnm84Yb2tP8+1DkIKr7W6337CmeoK46ZYC/F0+1VhJx2dWIs73inhR6s=@lists.denx.de
+X-Gm-Message-State: AOJu0YxusYgVX3+PORIPpBkkCXBr1pbQJVAWyOBJVba1QZ7EQJ2MRF+I
+ WfDCJyIjBrBPeV8FSvB2q+yETrvm4eknENaDhViI7PaJED6leMQVap2R+tZcdHVnCr/MWSDR3kW
+ PcTd+9hnrXd1dseUzAVyzOOV/aaB/5xIlrAtCRA==
+X-Gm-Gg: ASbGncvtTwF3g5ulj/8lDk0y2OVXlYszK8xTy4mOioAXxl6UPSE4kNgS7FiaZh6vm/0
+ N8N9ziVfxt/zmsvQje2lEzqQiKNNl40IEgVXyLA==
+X-Google-Smtp-Source: AGHT+IFEvUVBamvX+5twC1wWXSEWDd0P2a5P3nXzFxComWbBAJKVdgfbPWdvjfghnoyU53iNbt+wjA29LUla4cWotBM=
+X-Received: by 2002:a05:690c:4b0b:b0:6db:e1e0:bf6a with SMTP id
+ 00721157ae682-6f5494cc418mr46019597b3.7.1736518530909; Fri, 10 Jan 2025
+ 06:15:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 10 Jan 2025 14:54:57 +0100
+References: <20241206173033.2403998-1-adriano.cordova@canonical.com>
+ <20241206173033.2403998-2-adriano.cordova@canonical.com>
+ <9cc4a4e0-1a80-4bdc-9fd7-a04260ff7cb7@gmx.de>
+ <CAFLszTiH9+avmapq8CEEr-tqybP9mWZGzqp52mVHsM87FGTfhw@mail.gmail.com>
+In-Reply-To: <CAFLszTiH9+avmapq8CEEr-tqybP9mWZGzqp52mVHsM87FGTfhw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 10 Jan 2025 16:14:55 +0200
+X-Gm-Features: AbW1kvYp2KcdiYanI_LdPgrH8tOz4n8QnX_0C2QA6Amz0I3Q02QeLVaJjQolrZg
+Message-ID: <CAC_iWjKmzfbWGD3URheJS4w0Bhr8K_Unwi0KpFV56b4gwwO3pg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] efi_loader: efi_setup: Add efi_start_obj_list() to
+ efi_setup.c
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Adriano Cordova <adrianox@gmail.com>, joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, jerome.forissier@linaro.org, trini@konsulko.com, 
+ Adriano Cordova <adriano.cordova@canonical.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,40 +97,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some RISC-V platforms do not define the d-cache line size
-through SYS_CACHE_SHIFT_n. Set a default value of 64 bytes
-for such cases.
+Hi Simon,
 
-Signed-off-by: Yu-Chien Peter Lin <peter.lin@sifive.com>
----
-This patch resolves compilation errors that occurs when
-the TEE driver is enabled:
+On Fri, 10 Jan 2025 at 15:41, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Heinrich,
+>
+> On Fri, 3 Jan 2025 at 12:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > On 06.12.24 18:30, Adriano Cordova wrote:
+> > > The command bootefi calls efi_init_obj_list to do the efi set up
+> > > before launching an .efi payload, but efi_init_obj_list is called
+> > > only once. There are some initializations which depend on the
+> > > environment and should be done each time a payload gets launched and
+> > > not only once and can now be done in efi_start_obj_list(). A motivation
+> > > for this change is the following order of events:
+> > >
+> > > 1. Launch an EFI application (e.g. bootefi hello)
+> > > 2. Change the ip address
+> > > 3. Launch another application which uses the pxe protocol
+> >
+> > Hello Adriano,
+> >
+> > Thanks for addressing this issue.
+> >
+> > There are a number of events that can lead to updating the IP address:
+> >
+> > * EFI_PXE_BASE_CODE_PROTOCOL.Dhcp()
+> > * EFI_PXE_BASE_CODE_PROTOCOL.SetStationIp()
+> > * EFI_HTTP_PROTOCOL.Configure()
+> > * command set env ethaddr#
+> > * command dhcp
+> >
+> > All of these events require:
+> >
+> > * Updating the relevant ethaddr* variable.
+> > * Updating any other references to the IP address.
+> >
+> > When not only considering EFI applications but also EFI drivers
+> > installed via the bootefi command all of these events can occur during
+> > the runtime of EFI binaries.
+> >
+> > Function efi_init_obj_list() is used for setups that are needed only
+> > once before accessing the UEFI sub-system. It is not able to handle events.
+> >
+> > If we need to update any internal UEFI data structures, we should do
+> > this instantaneously when the event occurs and not when executing a UEFI
+> > related shell command.
+> >
+> > U-Boot already has callbacks invoked when variables are changed. These
+> > are set up with U_BOOT_ENV_CALLBACK(). There is even a command 'env
+> > callbacks' to list these callbacks.
+> >
+> > You could define a new function to handle changes of the IP address and
+> > invoke it via U_BOOT_ENV_CALLBACK(ipaddr, <function name>) or
+> > U_BOOT_ENV_CALLBACK(netmask, <function name>).
+> >
+> > With lwIP we can have multiple network interfaces. Each has a different
+> > variable ipaddr# assigned to it. We will have to extend the concept of
+> > U_BOOT_ENV_CALLBACK() to allow for wildcard matches by adjusting
+> > find_env_callback(). With CONFIG_REGEX=y regular expressions could be
+> > used for this purpose (cf. include/slre.h) but we should better avoid
+> > the code size increase.
+> >
+>
+> I have been saying for some time that EFI_LOADER should make use of
+> U-Boot's existing tables, rather than creating its own duplicate ones
+> with extra info.
+>
+> This seems to have been understood as 'hang the EFI tables onto
+> existing data structures', e.g. efi_disk_create_part(). But this leads
+> to duplication.
+>
+> Perhaps the EFI_LOADER init should be quite small, and be done each
+> time an app starts, to deal with the 'current' state of U-Boot?
 
-  drivers/tee/tee-uclass.c:247:41: error: 'CONFIG_SYS_CACHELINE_SIZE' undeclared (first use in this function); did you mean 'CONFIG_SYS_CBSIZE'?
-    247 |                                         CONFIG_SYS_CACHELINE_SIZE);
-        |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~ 
-  drivers/tee/optee/core.c: In function 'flush_shm_dcache':
-  drivers/tee/optee/core.c:505:50: error: 'CONFIG_SYS_CACHELINE_SIZE' undeclared (first use in this function); did you mean 'CONFIG_SYS_CBSIZE'?
-    505 |         flush_dcache_range(rounddown((ulong)arg, CONFIG_SYS_CACHELINE_SIZE),
-        |                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
----
- arch/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/arch/Kconfig b/arch/Kconfig
-index bb2e7bedd10..b0190b1f415 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -52,7 +52,8 @@ config SYS_CACHELINE_SIZE
- 	default 64 if SYS_CACHE_SHIFT_6
- 	default 32 if SYS_CACHE_SHIFT_5
- 	default 16 if SYS_CACHE_SHIFT_4
--	# Fall-back for MIPS
-+	# Fall-back for MIPS and RISC-V
-+	default 64 if RISCV
- 	default 32 if MIPS
- 
- config LINKER_LIST_ALIGN
--- 
-2.39.3
-
+That would break all the command line tools that use the EFI subsystem
+-- e.g printenv -e, efidebug, eficonfig etc
+/Ilias
+>
+> Regards,
+> Simon
