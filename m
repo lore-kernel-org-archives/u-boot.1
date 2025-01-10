@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F286E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 04:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C42E77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 04:12:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F4C3801F5;
-	Fri, 10 Jan 2025 05:04:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39BB6800D0;
+	Fri, 10 Jan 2025 05:12:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H1LTBAWp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EFKqKGwl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5879780196; Fri, 10 Jan 2025 05:03:59 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 0EFAF80196; Fri, 10 Jan 2025 05:12:33 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B74B8001F
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:03:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F6C28001F
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:12:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christianshewitt@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-436249df846so11994595e9.3
- for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 20:03:57 -0800 (PST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43621d27adeso12041165e9.2
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 20:12:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736481837; x=1737086637; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=K9Bo1wufBfvDp17xEGdBsgVq8YY1KmqG+B+4M+rmsTk=;
- b=H1LTBAWph0K6V1tHC9NI6Gz05nXmBT50746QANptDrWHwBJEFbWw7VSusnVS7F7AWy
- OM8fCzqNTAXyMv6cAWH4dUEGtrX/N5HFX8ldb7LfqpTTbc5FBeUoUfVEjQR1mbven6eA
- VXN4qsmLNfRnVYCuKVs4aP7zKTrAf21w51AASDPmUFrHvneNZnNWzZrf1vCN3Zc4Z5nv
- yy7CGe76gVgpGuX/GO4OWGCluK75E/lp1cSLjiSujY7Sx7Geaxx1FHJF8NVR3gvcSxXr
- AVbB7G9Hu7Cf4DpQ+gZmJXaJvflZsOpwxEG2nlrQ6r+eDWZ/CMIJQE1rYT3fYopuBruc
- kGKA==
+ d=gmail.com; s=20230601; t=1736482350; x=1737087150; darn=lists.denx.de;
+ h=message-id:in-reply-to:to:references:date:subject:mime-version
+ :content-transfer-encoding:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=hcg+AbNUagdr/GnXOyARNpX3VNRzL5mr6RLcmdmpWq4=;
+ b=EFKqKGwlzxCEDrpOxhK0wsYqGA/UbwMk1kEIhWEJIugofpsNkQks80W8/XtVuaO8Ri
+ pI9fnq2X72ewpCyCVXf9PlWmBtXqYgeYGM5SFbROhZgJxxLh5q/l22buKtZ/N43czRON
+ FOxCHqsiYErMVntus8mObNng88xAXVvuy1NgPxc0nWQj1MtU1k4XdF+bb34Hgzy68aqb
+ /cfXVxcUHePWLrDpechFeWmfdNEXKHr3cQUu2vbeWgVDp4VdJE3ult/rYijNoYmnH8vE
+ 3S36dyuZHklINKM1pGm7yNd3EN4hDQsXrHWrBvQFKq+oDHo0uM45LNsdlNZI3zTjc9Cl
+ +iLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736481837; x=1737086637;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=K9Bo1wufBfvDp17xEGdBsgVq8YY1KmqG+B+4M+rmsTk=;
- b=jy2pA+TBEDiLOsYn2pQc5K4L8QspMAzMXxSypJyMA0QwnT+dHbHohhHJpHhAj4albv
- FUbeP8KJVQO97WVwQWf9hqVHLtGyqzLYTH3ClBQ2qnOHiqq2AINxGKmyC4dVMwRLqXCJ
- /64e/QWUYoFhkuoV+kJh/T84Py87eIMUu+A7Cd080N5EbYlyFqV5dyczMNaC2JiPRlM1
- Gddecx80XJLSFYWQBDqx1mQ9XZsVs245a3mNxgaiE3CkTb6t1+LbInT8/JdG6gwWB1Kg
- NlqYrPslWTutYrZKredcE1a9NUt+S471LOWNnXywGGFk3l6IdAYfx6pe5UzFUFaHko1z
- HVCg==
+ d=1e100.net; s=20230601; t=1736482350; x=1737087150;
+ h=message-id:in-reply-to:to:references:date:subject:mime-version
+ :content-transfer-encoding:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hcg+AbNUagdr/GnXOyARNpX3VNRzL5mr6RLcmdmpWq4=;
+ b=hAirP4uu6n2XB/GKgdyWnIUW6KA6BdiGQYxAtpxD+SDhDy9GoA0eXXzg03+HYKoCZk
+ RjlCdwERxD9OJrmtQzqvkAgl+1FSWx41Z6ajgMkZFUW6YU0i7TOClc8BJ6mZVkmdQkzC
+ a91IM+4gg2LfGrjQovOG2jypgwJFZKCipgynLtUCdSRHAodFYgx12qTlG9t217JbQFzx
+ aNFo+RUlopYZPsxPRJDFcDHgdFz/bWdfZBCaQgsKN4oEf4YKNGH1SKegODwEVmpE8ZMn
+ Ez0aUREC8QwwnDMBwQl7OYTn3G2Z/3KUWVrRhEe+tEkqAuIuijPdCE755UozU8ujAKhI
+ 5vfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCIL9coEgWln5+t3sFxeNOqCAOgSSxaX50q36mifgKdKgr3FCj5XAANYxFz5WO2diWdr2GwAM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPwWuslZLnrYz6nem5wPQ1b3uYLk+JfZefXT6fQ79Vz5MAwMIV
- ITE16zXg3ja/3YBnQGhu0kyXFj3JFPzytU+RSk4XYRxLtW9jxBu/
-X-Gm-Gg: ASbGnct9/ZK1Ufqn8Ylqp2WcI/ww34nVRN1SF19UANDoW9jz01wHSCvMuITPD08o5Ou
- lsxYmxs1ilkKa734waNmSzFD9d4vaL2OqtXXkNS8hhwZijJLxteYUs2husTN5yQr1rLjHDbpO4K
- dJpvV+piMy7l0bbUeMl8D5wYUBHf3NoJwFtObNIOpnCLdyvnnhwUvnA8Xu1rdcBNed7eOrlBxCk
- PDwU44c5i88oQMTwrEexwpb21ASI0yCRXs4GeUNfIOtcAQK9ZSe2bKLAU7rlA==
-X-Google-Smtp-Source: AGHT+IHiy+F2Jl4v5xbpj+sHo2KV7tlexhqY548aspvjHj4DdDRLp+zVYDo51bSm0OoUyQn9/eyrcw==
-X-Received: by 2002:adf:b1dc:0:b0:38a:88bc:ace1 with SMTP id
- ffacd0b85a97d-38a88bcadc9mr5438179f8f.34.1736481836597; 
- Thu, 09 Jan 2025 20:03:56 -0800 (PST)
-Received: from toolbox.. ([87.200.95.144]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e9e37d69sm38686505e9.30.2025.01.09.20.03.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 20:03:56 -0800 (PST)
+ AJvYcCV5nNpWI5VMtvMiiTIPMDEYwQHg3Cw20pjxta5Zwj1FDVoHCE+zADeqbNwY4810IyWJPGSByng=@lists.denx.de
+X-Gm-Message-State: AOJu0YynO3Q7nCfpmucmPQyv71fYE1Z9VuS1mntga9XXSb4dYbZmk3wm
+ +2jyC/IwJQF4Ykp3YJ5tDxQeefr930mZ4/m/2xf+Otf7R2rs+8hytdZvpg==
+X-Gm-Gg: ASbGncsqiUwl0QHBRMooEUrZSxnxc86kyTrFcgGXH/6petsM9xHDFHTnvCsHfsVZ3bf
+ Zpgp/vLmMXcgTrpKAW1zXrnjPOR5+pX4rcxhdkED46RbhkZjI8kdz2xe3leZOuneEap7uK4ESa0
+ vYhYx3ls8fqrIM+s7tfdV2HSbSHOhPRJ30wlHyH+WNpEgolR9WxUfnpRbkCysI5f8XEC3zkrNKK
+ JKVWQxio6S1w5ZxTknhzPMeYW4Q60biOp4E3cTqHH4M6gaSlJH6FGgd/gyANhO27YlDm9BtRHvx
+ EFk=
+X-Google-Smtp-Source: AGHT+IGbDMIld2lAh5kd8KV7ln8byuZOqPwrIxJ4sixY28HelypxvHQugYQ+DIZdYNNqD3wjEoTaLQ==
+X-Received: by 2002:a05:6000:1fa1:b0:388:caf4:e909 with SMTP id
+ ffacd0b85a97d-38a872e8bc4mr8994719f8f.25.1736482350274; 
+ Thu, 09 Jan 2025 20:12:30 -0800 (PST)
+Received: from smtpclient.apple ([87.200.95.144])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a8e38c697sm3429114f8f.52.2025.01.09.20.12.28
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 09 Jan 2025 20:12:29 -0800 (PST)
 From: Christian Hewitt <christianshewitt@gmail.com>
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.200.121\))
+Subject: Re: [PATCH] board: amlogic: odroid-n2: remove amlogic prefix from
+ fdtdir path
+Date: Fri, 10 Jan 2025 08:12:17 +0400
+References: <20250110040353.3424412-1-christianshewitt@gmail.com>
 To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  linux-amlogic@lists.infradead.org
-Cc: Christian Hewitt <christianshewitt@gmail.com>
-Subject: [PATCH] board: amlogic: odroid-n2: remove amlogic prefix from fdtdir
- path
-Date: Fri, 10 Jan 2025 04:03:53 +0000
-Message-Id: <20250110040353.3424412-1-christianshewitt@gmail.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250110040353.3424412-1-christianshewitt@gmail.com>
+Message-Id: <CC4AC28B-2FB2-4AE0-B4CB-8FCA84D8A6C2@gmail.com>
+X-Mailer: Apple Mail (2.3826.200.121)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,35 +101,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 834e7c8136c6 ("dts: meson-g12a: Switch to using upstream DT")
-changed Amlogic configs to contain the default /amlogic device-tree
-path prefix, e.g. for odroid-n2:
+> On 10 Jan 2025, at 8:03=E2=80=AFam, Christian Hewitt =
+<christianshewitt@gmail.com> wrote:
+>=20
+> Commit 834e7c8136c6 ("dts: meson-g12a: Switch to using upstream DT")
+> changed Amlogic configs to contain the default /amlogic device-tree
+> path prefix, e.g. for odroid-n2:
+>=20
+> CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-g12b-odroid-n2"
+>=20
+> The board files also prefix amlogic when using fdtdir resulting in
+> an /amlogic/amlogic/meson-g12b-odroid-n2.dtb path which is invalid
+> with most distro packaging. Drop the prefix here to align with the
+> board configs. This resolves fdtdir boot on Odroid N2/C4/HC4.
+>=20
+> Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
 
-CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-g12b-odroid-n2"
+Please disregard this patch. I=E2=80=99ve spotted the issue in our =
+distro
+packaging and this is not required. Apologies for the noise.
 
-The board files also prefix amlogic when using fdtdir resulting in
-an /amlogic/amlogic/meson-g12b-odroid-n2.dtb path which is invalid
-with most distro packaging. Drop the prefix here to align with the
-board configs. This resolves fdtdir boot on Odroid N2/C4/HC4.
-
-Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
----
- board/amlogic/odroid-n2/odroid-n2.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/board/amlogic/odroid-n2/odroid-n2.c b/board/amlogic/odroid-n2/odroid-n2.c
-index ae953d0e4ba..e98580631ec 100644
---- a/board/amlogic/odroid-n2/odroid-n2.c
-+++ b/board/amlogic/odroid-n2/odroid-n2.c
-@@ -62,7 +62,7 @@ static void odroid_set_fdtfile(char *soc, char *variant)
- {
- 	char s[128];
- 
--	snprintf(s, sizeof(s), "amlogic/meson-%s-odroid-%s.dtb", soc, variant);
-+	snprintf(s, sizeof(s), "meson-%s-odroid-%s.dtb", soc, variant);
- 	env_set("fdtfile", s);
- }
- 
--- 
-2.34.1
+CH.
 
