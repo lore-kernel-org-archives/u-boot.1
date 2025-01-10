@@ -4,95 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E4CE77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 19:23:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AA1E77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 19:50:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D64C800D0;
-	Fri, 10 Jan 2025 20:23:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 70651800D0;
+	Fri, 10 Jan 2025 20:50:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="be/FscvB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IRrPJL5n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4818A801F5; Fri, 10 Jan 2025 20:23:57 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 3947A801F5; Fri, 10 Jan 2025 20:50:35 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F169B80050
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 20:23:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45CFF80050
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 20:50:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aa684b6d9c7so433404766b.2
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 11:23:54 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ab2bb0822a4so491630366b.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 11:50:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736537034; x=1737141834; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736538632; x=1737143432; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VdOxvJHcxITRJsXbQ/fwx86lF4KI3p5wjxIGGFDs8Jg=;
- b=be/FscvBRLEJD8sxe18lB/agQs+yNxzXyRiGN86IpQ3Ly1VI4BXlBIQDA2DDf5jX4z
- HXgxtebfKmRS0zq317TO0HuhH/g+JKRoTYa3sdBZsntOh6hf17r3h5jrfeMSfEpjxMq8
- EKOZUHb0HkRfj1eJ8eG1DSIqjOYorVeBop0XM=
+ bh=VfJ+bImTZkn+JGksHirbFskh4uwpIIKOlMHM8FmJp48=;
+ b=IRrPJL5nNNdfpQe+8/YrNmU6UNyTimcvXTLVQLQHTO/beTmoUWj1VBm+LTqIJoIHm3
+ DPDWOnjFMy3ljYxunpqBRvdPzMSh+lm7cm1CHDJjYlcvtxaqnyps0fu9U1wSmxrN16M5
+ YDGeInDPqvQdRwc1pWF+/vHkO44+vVeMJx+ns=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736537034; x=1737141834;
+ d=1e100.net; s=20230601; t=1736538632; x=1737143432;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VdOxvJHcxITRJsXbQ/fwx86lF4KI3p5wjxIGGFDs8Jg=;
- b=l+ZkXoj4Xwvab0Vae5QEFbkLmkQXxHa0Fn48Xb3p0/VAB68H33nDoUP646Ue01XOko
- i5ZetYRiLwKSqwylh04v3f70wtxtnVDmt4mg3Q8l9Axcbn6nD7JXm/povk9RJP9FcRYi
- NM0he326SEGQNyCrmITFxdMN5fWJ5lq8H2ci3hWbKYV+CXyiPWECjuiiHTYdOIuRfK0r
- 8WQlGB1GujId2p5/QysWJgf0gKnBnyAADM7wgrZ4CJipd6ZetIL+RPEaN3f8CGuZNBXP
- ehpwNLxlgUpZ2/6BpeQAfcMziiVBvC9PGa+M/F1zOpzPz2gmCCoVvtEKf6IxhaySKn9K
- Xbpw==
-X-Gm-Message-State: AOJu0YwaOpBkwtLTUp+X6hgPne/KOZTGI6vMUl3e3C4uQbemdKCXo92l
- QBUFWllAy+flDzrskFWKnenWpoj7HXKhQ0hQftGsvngfOqJfkah+h8kkACKLdh9Xl2wkjQ1OW7q
- que8YTzLpgOQom86PAPJJ3di++f691IR58De7
-X-Gm-Gg: ASbGnculfcSn+j4gxSp+07hBpFgoFTXqPs9fZl+jzCkzMsEYyFixfS+CYCZ3wpQhxPX
- EpoBtaTRaWQgmu8FHBINGe/348AnG16KcTR3KFp0=
-X-Google-Smtp-Source: AGHT+IFqBKsDDo+U6eGZ6x2pbzgIxeKejlvvb2vQU+iG9/niKoKcdLvKuZiuqsx/NDGwMKFuE1ZxZMgTFUoxwwxuKHk=
-X-Received: by 2002:a17:907:8a8f:b0:ab2:d721:ed92 with SMTP id
- a640c23a62f3a-ab2d721f27dmr502269366b.45.1736537034225; Fri, 10 Jan 2025
- 11:23:54 -0800 (PST)
+ bh=VfJ+bImTZkn+JGksHirbFskh4uwpIIKOlMHM8FmJp48=;
+ b=iX6bBa1e7nKq5tuPMad0DNyhs7QGg1K5bf/c2Si4O+GWTCV7snBS6AscRRVgkhVNMl
+ nkItfHyGAQC1+0NeGtngyHVbUHnGXeV15L4wrIvz6B/0nj1lX7FOzfEMg5Rntq5cPsJE
+ s9tThwhHu5ywRdOt8vaKHnEPPDf/I0d1Pf25DeIvrkI6keoKM1A1C+3P8w27Dpxdxpzz
+ sVE9KNBmCypNsKoAUBwt6M6q9I+aeA3vEN1mhY6WkHf9cqsnk+rlsLK6hFOS6kJpOEPR
+ +Ovve8LuaSOa69kkqngoEBj23CQlXylliLEb8o72qQaPMRRY3A5yYc5q4L0IYR7vahRp
+ myWQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVuE+cNFfa0rCtd3/VQX5KNu8GeuR9cV7cr1/pDspl+Q++I0iFL9wxqTGFhVfalR9Njv6lJuoc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOaKnzmEH53k2lkqiXpOZRv+A3qdYcQEwNEOmLJKQk8uH3r9eC
+ zVePFWqwNbZgX9q6dalubMBt2t6kdVwVXcrjPU6swzfVbbegZM7KxKLR6aq/wP6SALhCdnhCdwR
+ EUkeGXolAXNO5CzCetx+yxhBKzZyk+OOHh5OK
+X-Gm-Gg: ASbGncu2iFbA3oQNxTPKjtPRlA2kM/corWoHJqwd+jg0hPPVthxBAao3oj8RFQRPiud
+ SgyCMBtJsbXiJDvs4QVAltxqHez/a+oXYohD4wXk=
+X-Google-Smtp-Source: AGHT+IGiG1NDbCZ7GDbolFZ4sHWarSXGWmyN79pRxPZSJVETF8Ty4o4RiWLpXr7mq5GBKQDOe7u4qLFQHA0w3l2Ipw0=
+X-Received: by 2002:a17:907:d03:b0:aa6:730c:acb with SMTP id
+ a640c23a62f3a-ab2ab16a3bamr1101055766b.8.1736538631669; Fri, 10 Jan 2025
+ 11:50:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20250106143229.3023771-1-sjg@chromium.org>
- <20250106143229.3023771-18-sjg@chromium.org>
- <20250108182528.GN3476@bill-the-cat>
- <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
- <20250109150954.GU3476@bill-the-cat>
- <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
- <20250109180817.GC3476@bill-the-cat>
- <CAFLszThn-XcHruFe60TH8FnsKsH08NFEco2zt+9JBHkneQgo0Q@mail.gmail.com>
- <20250110161732.GI3476@bill-the-cat>
-In-Reply-To: <20250110161732.GI3476@bill-the-cat>
+References: <20241112135911.630586-1-sjg@chromium.org>
+ <20241112135911.630586-2-sjg@chromium.org>
+ <1529CE41-E674-400F-BB4E-00C27711F523@gmx.de>
+ <20241113005447.GF3600562@bill-the-cat>
+ <CAFLszTjk6w0zUGOh+Q_gZGETN8Vu2hqvrdYexeSAkPmMOp5uvQ@mail.gmail.com>
+ <20241115151403.GW3600562@bill-the-cat> <20250106145517.GY3476@bill-the-cat>
+ <CAFLszTjJvA7=QdNTza48O45e85yGO=XGr6EEkVVd=xYrrkH-GA@mail.gmail.com>
+ <20250109145620.GS3476@bill-the-cat>
+ <CAFLszTiyUyFyp57VuAXV1SS67tSWVmxyrs8Oqs-Jd27UAwDz2w@mail.gmail.com>
+ <20250110160109.GH3476@bill-the-cat>
+In-Reply-To: <20250110160109.GH3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Jan 2025 12:23:42 -0700
-X-Gm-Features: AbW1kvaOr8-OAmEXIHXvu3dfaxEhPo6hf1lvczrcEmT51xBUdqi5SG10KFuu6Cc
-Message-ID: <CAFLszTgiO2zPy06LziSOQ2tQAz9hh1rd9LEPtRfW+VxuLR1A4g@mail.gmail.com>
-Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
+Date: Fri, 10 Jan 2025 12:50:20 -0700
+X-Gm-Features: AbW1kvYE0RcfXD0YRlclgF6V_XF5GGMWSMzYZapJh5SUZ3p1tHD6tDkwK4CTLuE
+Message-ID: <CAFLszThPDT3WzG169D+KaGKOT0vo4GJc7T4SoCZ6R+VbLed_Xw@mail.gmail.com>
+Subject: Re: [PATCH 01/18] scripts: Add a script for building and booting QEMU
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Dahl <ada@thorsis.com>, 
- Alexander Kochetkov <al.kochet@gmail.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
  Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hugo Cornelis <hugo.cornelis@essensium.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
- Julien Masson <jmasson@baylibre.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Paul-Erwan Rio <paulerwan.rio@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,153 +107,412 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Fri, 10 Jan 2025 at 09:17, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 10 Jan 2025 at 09:01, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Jan 10, 2025 at 06:39:11AM -0700, Simon Glass wrote:
+> On Fri, Jan 10, 2025 at 06:39:19AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Thu, 9 Jan 2025 at 11:08, Tom Rini <trini@konsulko.com> wrote:
+> > On Thu, 9 Jan 2025 at 07:56, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Thu, Jan 09, 2025 at 08:14:53AM -0700, Simon Glass wrote:
+> > > On Thu, Jan 09, 2025 at 05:36:34AM -0700, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Thu, 9 Jan 2025 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Mon, 6 Jan 2025 at 07:55, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Thu, Jan 09, 2025 at 05:36:03AM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Wed, 8 Jan 2025 at 11:25, Tom Rini <trini@konsulko.com> wrote:
+> > > > > On Fri, Nov 15, 2024 at 09:14:03AM -0600, Tom Rini wrote:
+> > > > > > On Fri, Nov 15, 2024 at 07:21:47AM -0700, Simon Glass wrote:
+> > > > > > > Hi Tom,
 > > > > > > >
-> > > > > > > On Mon, Jan 06, 2025 at 07:32:13AM -0700, Simon Glass wrote:
+> > > > > > > On Tue, 12 Nov 2024 at 17:54, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > >
+> > > > > > > > On Wed, Nov 13, 2024 at 01:49:30AM +0100, Heinrich Schuchardt wrote:
+> > > > > > > > > Am 12. November 2024 14:58:54 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> > > > > > > > > >It is handy to be able to quickly build and boot a QEMU image for a
+> > > > > > > > > >particular architecture and distro.
+> > > > > > > > > >
+> > > > > > > > > >Add a script for this purpose. It supports only arm and x86 at present.
+> > > > > > > > > >For distros it only supports Ubuntu. Both 32- and 64-bit builds are
+> > > > > > > > > >supported.
+> > > > > > > > > >
+> > > > > > > > > >Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > >---
+> > > > > > > > > >
+> > > > > > > > > > MAINTAINERS                    |   8 ++
+> > > > > > > > > > doc/board/emulation/index.rst  |   1 +
+> > > > > > > > > > doc/board/emulation/script.rst |  61 ++++++++++++
+> > > > > > > > > > scripts/build-qemu.sh          | 175 +++++++++++++++++++++++++++++++++
+> > > > > > > > > > 4 files changed, 245 insertions(+)
+> > > > > > > > > > create mode 100644 doc/board/emulation/script.rst
+> > > > > > > > > > create mode 100755 scripts/build-qemu.sh
+> > > > > > > > > >
+> > > > > > > > > >diff --git a/MAINTAINERS b/MAINTAINERS
+> > > > > > > > > >index 0399ed1dbf6..b45bb96d5a5 100644
+> > > > > > > > > >--- a/MAINTAINERS
+> > > > > > > > > >+++ b/MAINTAINERS
+> > > > > > > > > >@@ -1110,6 +1110,14 @@ F:    tools/efivar.py
+> > > > > > > > > > F:  tools/file2include.c
+> > > > > > > > > > F:  tools/mkeficapsule.c
+> > > > > > > > > >
+> > > > > > > > > >+EMULATION
+> > > > > > > > > >+M:  Simon Glass <sjg@chromium.org>
+> > > > > > > > > >+S:  Maintained
+> > > > > > > > > >+W:  https://docs.u-boot.org/en/latest/board/emulation/script.html
+> > > > > > > > > >+F:  configs/qemu_x86*
+> > > > > > > > > >+F:  doc/board/emulation/script.rst
+> > > > > > > > > >+F:  scripts/build-qemu.sh
+> > > > > > > > >
+> > > > > > > > > Please, avoid misnomers. This script does not build QEMU.
+> > > > > > > > >
+> > > > > > > > > >+
+> > > > > > > > > > ENVIRONMENT
+> > > > > > > > > > M:  Joe Hershberger <joe.hershberger@ni.com>
+> > > > > > > > > > S:  Maintained
+> > > > > > > > > >diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+> > > > > > > > > >index f8908166276..5a2a00ae225 100644
+> > > > > > > > > >--- a/doc/board/emulation/index.rst
+> > > > > > > > > >+++ b/doc/board/emulation/index.rst
+> > > > > > > > > >@@ -8,6 +8,7 @@ Emulation
+> > > > > > > > > >
+> > > > > > > > > >    acpi
+> > > > > > > > > >    blkdev
+> > > > > > > > > >+   script
+> > > > > > > > > >    qemu-arm
+> > > > > > > > > >    qemu-mips
+> > > > > > > > > >    qemu-ppce500
+> > > > > > > > > >diff --git a/doc/board/emulation/script.rst b/doc/board/emulation/script.rst
+> > > > > > > > >
+> > > > > > > > > Just another misnomer. This page is not about script.sh.
+> > > > > > > > >
+> > > > > > > > > >new file mode 100644
+> > > > > > > > > >index 00000000000..23981e333cb
+> > > > > > > > > >--- /dev/null
+> > > > > > > > > >+++ b/doc/board/emulation/script.rst
+> > > > > > > > > >@@ -0,0 +1,61 @@
+> > > > > > > > > >+.. SPDX-License-Identifier: GPL-2.0+
+> > > > > > > > >
+> > > > > > > > > This is not a valid SPDX identifier.
+> > > > > > > > >
+> > > > > > > > > >+
+> > > > > > > > > >+Script for building and running
+> > > > > > > > > >+===============================
+> > > > > > > > > >+
+> > > > > > > > > >+You may find the script `scripts/build-qemu.sh` helpful for building and testing
+> > > > > > > > > >+U-Boot on QEMU.
+> > > > > > > > > >+
+> > > > > > > > > >+If uses a environment variables to control how it works:
+> > > > > > > > > >+
+> > > > > > > > > >+ubdir
+> > > > > > > > > >+    base directory for building U-Boot, with each board being in its own
+> > > > > > > > > >+    subdirectory
+> > > > > > > > > >+
+> > > > > > > > > >+imagedir
+> > > > > > > > > >+    directory containing OS images, containin a subdirectory for each distro
+> > > > > > > > > >+    type (e.g. ubuntu/
+> > > > > > > > > >+
+> > > > > > > > > >+Once configured, you can build and run QEMU for arm64 like this::
+> > > > > > > > >
+> > > > > > > > > This downloads the QEMU source and builds it?
+> > > > > > > > >
+> > > > > > > > > >+
+> > > > > > > > > >+    scripts/build-qemu.sh -rsw
+> > > > > > > > > >+
+> > > > > > > > > >+No support is currently included for specifying a root disk, so this script can
+> > > > > > > > > >+only be used to start installers.
+> > > > > > > > > >+
+> > > > > > > > > >+Options
+> > > > > > > > > >+~~~~~~~
+> > > > > > > > > >+
+> > > > > > > > > >+Options are available to control the script:
+> > > > > > > > > >+
+> > > > > > > > > >+-a <arch>
+> > > > > > > > > >+    Select architecture (default arm, x86)
+> > > > > > > > > >+
+> > > > > > > > > >+-B
+> > > > > > > > > >+    Don't build; assume a build exists
+> > > > > > > > > >+
+> > > > > > > > > >+-k
+> > > > > > > > > >+    Use kvm - kernel-based Virtual Machine. By default QEMU uses its own
+> > > > > > > > > >+    emulator
+> > > > > > > > > >+
+> > > > > > > > > >+-o <os>
+> > > > > > > > > >+    Run an Operating System. For now this only supports 'ubuntu'. The name of
+> > > > > > > > > >+    the OS file must remain unchanged from its standard name on the Ubuntu
+> > > > > > > > > >+    website.
+> > > > > > > > >
+> > > > > > > > > The U-Boot project should remain open to all operating systems. How will this work with OpenBSD?
+> > > > > > > > >
+> > > > > > > > > Use the URL of the image as argument.
+> > > > > > > > >
+> > > > > > > > > >+
+> > > > > > > > > >+-r
+> > > > > > > > > >+    Run QEMU with the image (by default this is not done)
+> > > > > > > > > >+
+> > > > > > > > > >+-R
+> > > > > > > > > >+    Select OS release (e.g. 24.04).
+> > > > > > > > > >+
+> > > > > > > > > >+-s
+> > > > > > > > > >+    Use serial only (no display)
+> > > > > > > > > >+
+> > > > > > > > > >+-w
+> > > > > > > > > >+    Use word version (32-bit). By default, 64-bit is used
+> > > > > > > > >
+> > > > > > > > > "word version" is not helpful as explanation.
+> > > > > > > > >
+> > > > > > > > > Look at <https://en.m.wikipedia.org/wiki/Word_(computer_architecture)> which says a word is 64 bit on a 64-bit system and 16 bit on a 16-bit system.
+> > > > > > > > >
+> > > > > > > > > >+
+> > > > > > > > > >+.. note::
+> > > > > > > > > >+
+> > > > > > > > > >+    Note: For now this is a shell script, but if it expands it might be better
+> > > > > > > > > >+    as Python, accepting the slower startup.
+> > > > > > > > > >diff --git a/scripts/build-qemu.sh b/scripts/build-qemu.sh
+> > > > > > > > > >new file mode 100755
+> > > > > > > > > >index 00000000000..0ff53593cf9
+> > > > > > > > > >--- /dev/null
+> > > > > > > > > >+++ b/scripts/build-qemu.sh
+> > > > > > > > > >@@ -0,0 +1,175 @@
+> > > > > > > > > >+#!/bin/bash
+> > > > > > > > > >+# SPDX-License-Identifier: GPL-2.0+
+> > > > > > > > >
+> > > > > > > > > This is not a valid SPDX identifier.
+> > > > > > > > >
+> > > > > > > > > >+#
+> > > > > > > > > >+# Script to build U-Boot suitable for booting with QEMU, possibly running
+> > > > > > > > > >+# it, possibly with an OS image
+> > > > > > > > > >+
+> > > > > > > > > >+# This just an example. It assumes that
+> > > > > > > > > >+
+> > > > > > > > > >+# - you build U-Boot in ${ubdir}/<name> where <name> is the U-Boot board config
+> > > > > > > > > >+# - your OS images are in ${imagedir}/{distroname}/...
+> > > > > > > > > >+
+> > > > > > > > > >+# So far the script supports only ARM and x86.
+> > > > > > > > >
+> > > > > > > > > Why support obsolete i386 but not riscv64?
+> > > > > > > > >
+> > > > > > > > > >+
+> > > > > > > > > >+set -e
+> > > > > > > > > >+
+> > > > > > > > > >+usage() {
+> > > > > > > > > >+    (
+> > > > > > > > > >+    if [[ -n "$1" ]]; then
+> > > > > > > > > >+            echo "$1"
+> > > > > > > > > >+            echo
+> > > > > > > > > >+    fi
+> > > > > > > > > >+    echo "Usage: $0 -aBkrsw"
+> > > > > > > > > >+    echo
+> > > > > > > > > >+    echo "   -a   - Select architecture (arm, x86)"
+> > > > > > > > > >+    echo "   -B   - Don't build; assume a build exists"
+> > > > > > > > > >+    echo "   -k   - Use kvm (kernel-based Virtual Machine)"
+> > > > > > > > > >+    echo "   -o   - Run Operating System ('ubuntu' only for now)"
+> > > > > > > > > >+    echo "   -r   - Run QEMU with the image"
+> > > > > > > > > >+    echo "   -R   - Select OS release (e.g. 24.04)"
+> > > > > > > > > >+    echo "   -s   - Use serial only (no display)"
+> > > > > > > > > >+    echo "   -w   - Use word version (32-bit)" ) >&2
+> > > > > > > > > >+    exit 1
+> > > > > > > > > >+}
+> > > > > > > > > >+
+> > > > > > > > > >+# Directory tree for OS images
+> > > > > > > > > >+imagedir=${imagedir-/vid/software/linux}
+> > > > > > > > > >+
+> > > > > > > > > >+# architecture (arm or x86)
+> > > > > > > > > >+arch=arm
+> > > > > > > > > >+
+> > > > > > > > > >+# 32- or 64-bit build
+> > > > > > > > > >+bitness=64
+> > > > > > > > > >+
+> > > > > > > > > >+# Build U-Boot
+> > > > > > > > > >+build=yes
+> > > > > > > > > >+
+> > > > > > > > > >+# Extra setings
+> > > > > > > > > >+extra=
+> > > > > > > > > >+
+> > > > > > > > > >+# Operating System to boot (ubuntu)
+> > > > > > > > > >+os=
+> > > > > > > > > >+
+> > > > > > > > > >+release=24.04.1
+> > > > > > > > > >+
+> > > > > > > > > >+# run the image with QEMU
+> > > > > > > > > >+run=
+> > > > > > > > > >+
+> > > > > > > > > >+# run QEMU without a display (U-Boot must be set to stdout=serial)
+> > > > > > > > > >+serial=
+> > > > > > > > > >+
+> > > > > > > > > >+# Use kvm
+> > > > > > > > > >+kvm=
+> > > > > > > > > >+
+> > > > > > > > > >+# Set ubdir to the build directory where you build U-Boot out-of-tree
+> > > > > > > > > >+# We avoid in-tree build because it gets confusing trying different builds
+> > > > > > > > > >+ubdir=${ubdir-/tmp/b}
+> > > > > > > > > >+
+> > > > > > > > > >+while getopts "a:Bko:rR:sw" opt; do
+> > > > > > > > > >+    case "${opt}" in
+> > > > > > > > > >+    a)
+> > > > > > > > > >+            arch=$OPTARG
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    B)
+> > > > > > > > > >+            build=
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    k)
+> > > > > > > > > >+            kvm="-enable-kvm"
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    o)
+> > > > > > > > > >+            os=$OPTARG
+> > > > > > > > > >+
+> > > > > > > > > >+            # Expand memory and CPUs
+> > > > > > > > > >+            extra+=" -m 4G -smp 4"
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    r)
+> > > > > > > > > >+            run=1
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    R)
+> > > > > > > > > >+            release=$OPTARG
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    s)
+> > > > > > > > > >+            serial=1
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    w)
+> > > > > > > > > >+            bitness=32
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    *)
+> > > > > > > > > >+            usage
+> > > > > > > > > >+            ;;
+> > > > > > > > > >+    esac
+> > > > > > > > > >+done
+> > > > > > > > > >+
+> > > > > > > > > >+# Build U-Boot for the selected board
+> > > > > > > > > >+build_u_boot() {
+> > > > > > > > > >+    buildman -w -o $DIR --board $BOARD -I || exit $?
+> > > > > > > > > >+}
+> > > > > > > > > >+
+> > > > > > > > > >+# Run QEMU with U-Boot
+> > > > > > > > > >+run_qemu() {
+> > > > > > > > > >+    if [[ -n "${os_image}" ]]; then
+> > > > > > > > > >+            extra+=" -drive if=virtio,file=${os_image},format=raw,id=hd0"
+> > > > > > > > > >+    fi
+> > > > > > > > > >+    if [[ -n "${serial}" ]]; then
+> > > > > > > > > >+            extra+=" -display none -serial mon:stdio"
+> > > > > > > > > >+    else
+> > > > > > > > > >+            extra+=" -serial mon:stdio"
+> > > > > > > > > >+    fi
+> > > > > > > > > >+    echo "Running ${qemu} ${extra}"
+> > > > > > > > > >+    "${qemu}" -bios "$DIR/${BIOS}" \
+> > > > > > > > > >+            -m 512 \
+> > > > > > > > >
+> > > > > > > > > Ubuntu suggests 4 GiB as minimum for a desktop.
+> > > > > > > > >
+> > > > > > > > > >+            -nic none \
+> > > > > > > > >
+> > > > > > > > > Who wants to run without network?
+> > > > > > > > > Use the virtio nic.
+> > > > > > > > >
+> > > > > > > > > >+            ${kvm} \
+> > > > > > > > > >+            ${extra}
+> > > > > > > > > >+}
+> > > > > > > > > >+
+> > > > > > > > > >+# Check architecture
+> > > > > > > > > >+case "${arch}" in
+> > > > > > > > > >+arm)
+> > > > > > > > > >+    BOARD="qemu_arm"
+> > > > > > > > > >+    BIOS="u-boot.bin"
+> > > > > > > > > >+    qemu=qemu-system-arm
+> > > > > > > > > >+    extra+=" -machine virt"
+> > > > > > > > > >+    suffix="arm"
+> > > > > > > > > >+    if [[ "${bitness}" == "64" ]]; then
+> > > > > > > > > >+            BOARD="qemu_arm64"
+> > > > > > > > > >+            qemu=qemu-system-aarch64
+> > > > > > > > > >+            extra+=" -cpu cortex-a57"
+> > > > > > > > >
+> > > > > > > > > That CPU is 12 years old and not all distros are stuck on ARM v8.0. See <https://en.opensuse.org/Arm_architecture_support>.
+> > > > > > > > >
+> > > > > > > > > -cpu max works fine with both tcg and kvm.
+> > > > > > > > >
+> > > > > > > > > >+            suffix="arm64"
+> > > > > > > > >
+> > > > > > > > > >+    fi
+> > > > > > > > > >+    ;;
+> > > > > > > > > >+x86)
+> > > > > > > > > >+    BOARD="qemu-x86"
+> > > > > > > > > >+    BIOS="u-boot.rom"
+> > > > > > > > > >+    qemu=qemu-system-i386
+> > > > > > > > > >+    suffix="i386"
+> > > > > > > > > >+    if [[ "${bitness}" == "64" ]]; then
+> > > > > > > > > >+            BOARD="qemu-x86_64"
+> > > > > > > > > >+            qemu=qemu-system-x86_64
+> > > > > > > > > >+            suffix="amd64"
+> > > > > > > > > >+    fi
+> > > > > > > > > >+    ;;
+> > > > > > > > > >+*)
+> > > > > > > > > >+    usage "Unknown architecture '${arch}'"
+> > > > > > > > > >+esac
+> > > > > > > > > >+
+> > > > > > > > > >+# Check OS
+> > > > > > > > > >+case "${os}" in
+> > > > > > > > > >+ubuntu)
+> > > > > > > > > >+    os_image="${imagedir}/${os}/${os}-${release}-desktop-${suffix}.iso"
+> > > > > > > > >
+> > > > > > > > > There is no ARM 32-bit Ubuntu desktop. And for i386 there is no image in 24.04.1.
+> > > > > > > > >
+> > > > > > > > > Running a foreign architecture desktop with tcg is not enjoyable.
+> > > > > > > > >
+> > > > > > > > > For testing U-Boot a server image is all it takes.
+> > > > > > > >
+> > > > > > > > And _all_ of this is why I don't want to add a useful personal script
+> > > > > > > > as an additional tool we support. I've seen how much work goes in to the
+> > > > > > > > OpenEmbedded runqemu script, we don't have the spare cycles for
+> > > > > > > > something like that. Doubly so when ultimately I believe we would be
+> > > > > > > > well served by having a document that says (in much more words) to look
+> > > > > > > > at u-boot-test-hooks for how to invoke QEMU for a large number of
+> > > > > > > > architectures and platforms and to then further leverage general QEMU
+> > > > > > > > tips and guides on how to run an OS of your choice with that.
 > > > > > > >
-> > > > > > > > This function uses separate arguments for data and size. Use the new
-> > > > > > > > abuf instead, so that they are paired and in one place. In some cases it
-> > > > > > > > also saves an argument, thus potentially reducing code size.
+> > > > > > > I'm not sure it matters that much. Everyone is going to have their
+> > > > > > > preference as to how this script should look, but no one else has
+> > > > > > > taken the time to write one...
 > > > > > > >
-> > > > > > > This is one of the commits that globally increases size in both full
-> > > > > > > U-Boot and SPL/etc.
+> > > > > > > People are free to send patches to enhance it. But I believe it is
+> > > > > > > helpful, e.g. for repeating problems caused by recent lmb patches.
 > > > > > > >
-> > > > > > > Is all of the "abuf" changes just a "tidy up" that increases the code a
-> > > > > > > bit?
+> > > > > > > Re the test hooks, I just get tired of looking them up and trying to
+> > > > > > > figure out what to do. Every board name and arch is slightly
+> > > > > > > different. Just a hassle that I don't need.
+> > > > > > >
+> > > > > > > We can put it in scripts/contrib if you like.
 > > > > > >
-> > > > > > Yes, a tidy-up which I hope will help overall. I have been thinking
-> > > > > > for a while of how to avoid having addr/size and ptr/size passed
-> > > > > > everywhere. For now abuf seems to provide some sort of solution.
-> > > > > >
-> > > > > > I see this:
-> > > > > >
-> > > > > > 18: boot: Update fit_image_get_emb_data to use abuf
-> > > > > >    aarch64: (for 1/1 boards) all +4.0 bss -24.0 spl/u-boot-spl:all
-> > > > > > +16.0 spl/u-boot-spl:text +16.0 text +28.0
-> > > > > >
-> > > > > > so growth on firefly-rk3399 but not with rk3288. I am not sure if the
-> > > > > > growth will tail off as there are more users, though. We might even be
-> > > > > > able to be more clever with static inlines.
+> > > > > > It's handy to point people to scripts, yes. I frequently point people at
+> > > > > > my wrappers around buildman for example for "how do I find code bloat?"
+> > > > > > and similar. But no, I don't think this rises to the level of
+> > > > > > "scripts/contrib".
 > > > > >
-> > > > > Yeah, lets not do this now then and worry about some "clean up" later
-> > > > > when we can show that it does, or does not, improve size.
+> > > > > Coming back to this question again. I'd be willing to make a new
+> > > > > top-level repository for "contributor tooling" and also make that more
+> > > > > widely writable. But I also think you're underestimating the level of
+> > > > > work required to have a "generic" script here that works on arbitrary
+> > > > > developer machines.
 > > > >
-> > > > Oh.
-> > > >
-> > > > > And there's
-> > > > > something wrong with your numbers:
-> > > > > 01: Fix neighbor discovery ethernet address saving
-> > > > >    aarch64:  w+   firefly-rk3399
-> > > > > +(firefly-rk3399) Image 'simple-bin' is missing external blobs and is non-functional: atf-bl31
-> > > > > +(firefly-rk3399)
-> > > > > +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (atf-bl31):
-> > > > > +(firefly-rk3399)    See the documentation for your board. You may need to build ARM Trusted
-> > > > > +(firefly-rk3399)    Firmware and build with BL31=/path/to/bl31.bin
-> > > > > +(firefly-rk3399) Image 'simple-bin' is missing optional external blobs but is still functional: tee-os
-> > > > > +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
-> > > > > +(firefly-rk3399)    See the documentation for your board. You may need to build Open Portable
-> > > > > +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
-> > > > > +(firefly-rk3399) Some images are invalid
-> > > > > 37: dm: core: Provide ofnode_find_subnode_unit()
-> > > > >    aarch64: (for 1/1 boards) all +324.0 bss +32.0 spl/u-boot-spl:all +16.0 spl/u-boot-spl:text +16.0 text +292.0
-> > > > >             firefly-rk3399 : all +324 bss +32 spl/u-boot-spl:all +16 spl/u-boot-spl:text +16 text +292
-> > > > >                u-boot: add: 6/-1, grow: 4/-4 bytes: 516/-224 (292)
-> > > > >                  function                                   old     new   delta
-> > > > >                  ofnode_name_eq_unit                          -     160    +160
-> > > > >                  ofnode_find_subnode_unit                     -     116    +116
-> > > > >                  fit_image_get_data                          80     176     +96
-> > > > >                  fit_image_get_emb_data                       -      84     +84
-> > > > >                  ofnode_write_prop                          224     236     +12
-> > > > >                  ofnode_add_subnode                         232     244     +12
-> > > > >                  abuf_init_const                              -      12     +12
-> > > > >                  abuf_init                                    -      12     +12
-> > > > >                  abuf_addr                                    -       8      +8
-> > > > >                  fit_image_print                            780     784      +4
-> > > > >                  image_locate_script                        696     692      -4
-> > > > >                  fit_image_load                            1584    1580      -4
-> > > > >                  fit_image_verify                           176     164     -12
-> > > > >                  ofnode_find_subnode                        140     116     -24
-> > > > >                  fit_image_get_data_and_size                180       -    -180
-> > > > >                spl-u-boot-spl: add: 3/-1, grow: 0/-1 bytes: 108/-92 (16)
-> > > > >                  function                                   old     new   delta
-> > > > >                  fit_image_get_emb_data                       -      84     +84
-> > > > >                  abuf_init_const                              -      12     +12
-> > > > >                  abuf_init                                    -      12     +12
-> > > > >                  load_simple_fit                            580     568     -12
-> > > > >                  fit_image_get_data                          80       -     -80
-> > > >
-> > > > Yes, that's the whole series, so not related to this change.
+> > > > Having it in a separate repo seems like too much of a pain, to me.
+> > > > When things change in U-Boot I would want to update the script (e.g.
+> > > > to add UPL support, booting Ubuntu and the like).
 > > >
-> > > Yes, that's the whole series including this change, so it's related to
-> > > this change.
+> > > Being external means it's easier to use for bisect'ing problems and you
+> > > still have to handle UPL / no UPL and so on.
 > >
-> > Right, but it is due to ofnode_find_subnode(), etc.
-> >
-> > >
-> > > >  I elected to have two versions of ofnode_find_subnode() to avoid the
-> > > > size growth in the previous version. But the cost is larger size
-> > > > growth when OF_LIVE is used.
-> > > >
-> > > > Without OF_LIVE, the size growth is tiny.
-> > >
-> > > And even worse in SPL, somehow. But you want more OF_LIVE users, not
-> > > less, yes?
-> >
-> > Well, OF_LIVE is always quite a bit larger, at least at the moment. It
-> > has both Linux's of_access stuff and libfdt. It's not OF_LIVE I am
-> > bothered about, but I do want people using ofnode. Unfortunately
-> > people still send patches which use libfdt directly.
-> >
-> > >
-> > > > So...what to do?
-> > >
-> > > Well, if you drop the abuf changes for now, SPL won't change at all for
-> > > most platforms and that'll be an improvement.
-> >
-> > Yes, I'll look at that. This is one of many examples where I have a
-> > problem and realise that we need a nicer way of dealing with it, then
-> > implement it in the series, but then the series loses focus. So then I
-> > take it out again, then forget about it until next time, but I never
-> > actually make the change.
+> > There are trade-offs, for sure. Sometimes I use buildman from a
+> > separate tree when trying to debug something which changes buildman.
+> > But I don't think that warrants creating an entirely new tree for
+> > scripts.
 >
-> I hate to start to derail this, but refactor for "nicer code" is very
-> much subjective. Especially when it also grows the code (and it's not
-> clear that wider usage would result in shrinkage). So yes, this really
-> needs to be put aside and also part of why I keep asking for one thing
-> at a time.
+> It would also encourage others. I for example might put the scripts I
+> use for having buildman do various tasks there as well.
 
-Yes I very much agree with this.
+OK well I think we've reached a dead end here. If you'd like to create
+a repo for it, please do. I can then try it out and see how useful it
+is for me. I wonder if it should share the u-boot-test-hooks thing to
+reduce the number of repos? Rename to u-boot-extra ?
 
->
-> > > And I'm going to keep complaining about size growth here because a
-> > > non-trivial subset of users just wants things to boot quickly and be
-> > > small.
-> >
-> > Yes, you won't get any complaints from me on that. I did propose some
-> > automated checking a few years back, but it never went anywhere.
->
-> It be great if buildman size comparison had some way to csv the output.
-> That's what's missing imo from being able to have some automation or
-> even just nicer tooling.
-
-What sort of tooling could we have? I would like something in CI which
-reports code-size changes in a useful way, perhaps failing if the
-delta is too large for more than x boards. WDYT?
+For u-boot-test-hooks at some point you said you don't want to take
+patches specific to my setup, so it has become a complete mess on my
+side, with different versions for upstream Labgrid, etc. Just some
+feedback...
 
 Regards,
 Simon
