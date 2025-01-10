@@ -4,86 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B37E7719C
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 13:39:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B284E77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 13:39:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 092968036B;
-	Fri, 10 Jan 2025 14:39:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 77D0580608;
+	Fri, 10 Jan 2025 14:39:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B1KaJh1Y";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="boUS8EGp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3D3D80608; Fri, 10 Jan 2025 14:39:03 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 36567806B7; Fri, 10 Jan 2025 14:39:09 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69AA7800D0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 14:39:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B3FA80619
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 14:39:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2ef6c56032eso2663820a91.2
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:39:00 -0800 (PST)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2f441791e40so2758640a91.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:39:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736516339; x=1737121139; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dWvPT+2KnlcFFXfoS/QqipS2fNmdlyLchje9GFjWMIg=;
- b=B1KaJh1YGFgiwM04XdfGsmgdl0qdWppE+UbEnoPEm0Vg20FUnBwtG8925b1z8K+dVK
- 22e/qm0HQWojZaUXHYZsh6pHrdkhDB0turirnRaJQzE2xjzqsoxKsGq4lDuIR4jFt5NQ
- EUiZlzbCHcC+nQgrjjudMWtirXQioAzjd2XYk=
+ d=chromium.org; s=google; t=1736516345; x=1737121145; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L9dVGM7J5eCxlndWX510+LkDvAe9KTh2dTl4VJJipMY=;
+ b=boUS8EGpLiNfcRIjfQPLODR37EIoCFb9QXfnojaSm1exS0QE4BijP1Tq5xeCnwqu8G
+ EcmkgLRl8jldN01f8zoxoWb575jK5HFSgzV3R+Cu0uwIoUqxUtnYt91Zmob0fLOWvrys
+ cJkhthanJbQWmSisGcTo5lYUcb2hfIBP+AOKU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736516339; x=1737121139;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dWvPT+2KnlcFFXfoS/QqipS2fNmdlyLchje9GFjWMIg=;
- b=FL4OM8qNR4Y/uX9j8BV0F4jwzymxAiFij0JNiEKzBksPSD9T0FasKl46raXVAtp924
- QjdbOYCpYoCUisx8K9L+v+HSwmtew+EJ2ca5TDiH4XAye9yapLOPdG+TOTJeYI8y/5cv
- jXwDmT7WoT3et5zcf0vLE/+JjiF2l7INfG/5NusH5ljCChWWcVvJtShuEXbIQM/e1r56
- ZrOIrJ0SqfuOJv3siF4R0ayXk0fPLxXmzgoVylt2gzmMrvrX26j+fWaZ/jV9rW6l/ZEp
- 6+fXqdNwfyC1F/YuV1hSd+SFlZTpSvJgxHtBh6EgtCSlBBYOMcju+rUo/aSVjgEz9oyH
- ecMQ==
-X-Gm-Message-State: AOJu0Ywd24/VJw+Jq8cu4CSU41I7LtTDsvr7I58mI/UnoOQnwng/JMBH
- knJtVcPBLs9FdMX+HO871/JJv3XnRGoDKKBXCUy50KIfTZpiyaXAXk8SHoL5i92jzjTUkDvD/KF
- eOJwlot+2TMa1i/cML2uWiLbBAdzG9SHTsVDF
-X-Gm-Gg: ASbGnctABx/zjZn5jd3cMx+JTV8qPNc7M7X7j2hyD9NBHCjqXZlcAb0inZB/SuOLsnk
- rBNSqo1gFXWjMT5lWJ6SQEn4v4J4DoVM7Sy0/gV0=
-X-Google-Smtp-Source: AGHT+IFZDENatPFqYdTuHdGEiL+x5pNfdfoDjghnIzIUCHvJTjqQWmqk0NVu+5x8Vlo3EcEOUDDpfEtxwu95WBpyUJ8=
-X-Received: by 2002:a17:90b:270c:b0:2ee:b2be:f390 with SMTP id
- 98e67ed59e1d1-2f548f45fbfmr15145101a91.28.1736516337509; Fri, 10 Jan 2025
- 05:38:57 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736516345; x=1737121145;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=L9dVGM7J5eCxlndWX510+LkDvAe9KTh2dTl4VJJipMY=;
+ b=L8dAWXZ/IXFXCI6xMx/vfRhniUQhFU5MUheadiRfz22xRlT4RKITdeEYDMGhWJVGnk
+ U28zbd2KGlBmMPQDFEqR4rYOleX4q4SwQSdFn0ghW2+KzvVJ5mLHimCt2YIC43FUWCly
+ oR+ce5QEUI06XdJbdhypDst7Ea6/5q78LLSs0oVI/VGeLvvbdGWrfbxdKc441vG6sXdK
+ 7SSnruML0gC1CVzqpMjOr1onzpnhYrh0at93Yxj1ic5QhTsec8sFQtQapr3vrdQ01VMX
+ 6FYUPNxTf9QRi3qag6LY9NELaeLVRrjYkjPJQ99QwA9kaSj5nKFyyzpOS70zTrqKgd78
+ Tm9Q==
+X-Gm-Message-State: AOJu0YxA9D7tLHK4QvxG1oeRVdr8iGDQlrYJ4OUB/1AMH8ndfiAxG09e
+ i5v+yuTbbbUPWJ8zLMsRInDLvqwca7AFI8VazQoaraB0u9XHyitrYHM+2Si5NoX5BmUMm3SW4KF
+ zilhxnSHyBu8maEZORL1RL/BuHsZVQX8qbocB
+X-Gm-Gg: ASbGnct8sg0G4pQAF5YpaeCqCWTKDQIhpq8e6sc4wR7pKU4PYm2E3vIyDffiCrq3kQL
+ Pi17GXEqgYIJjGCUCcms8gY/35oN5F7wdiFrEedc=
+X-Google-Smtp-Source: AGHT+IGyk5o8I1RJvCXDld3tXtpXyGDSGMbtJXVFnRb3/eVaAT5N6ksoGsOC6l09EMZSZ/WwhDQLIA8xs6dNMkXliVA=
+X-Received: by 2002:a17:90b:1f85:b0:2f2:a796:26b with SMTP id
+ 98e67ed59e1d1-2f548f103d2mr14866830a91.1.1736516345066; Fri, 10 Jan 2025
+ 05:39:05 -0800 (PST)
 MIME-Version: 1.0
-References: <20250106143229.3023771-1-sjg@chromium.org>
- <20250106143229.3023771-4-sjg@chromium.org>
- <20250106214130.GC3476@bill-the-cat>
- <CAFLszTif6J6r48DWca3GSuGwnARuzJdnuhbi9wkr8ws=0S6Cjw@mail.gmail.com>
- <20250109164230.GY3476@bill-the-cat>
-In-Reply-To: <20250109164230.GY3476@bill-the-cat>
+References: <AM6PR04MB55584A5EF725E8DF69629DF39A302@AM6PR04MB5558.eurprd04.prod.outlook.com>
+In-Reply-To: <AM6PR04MB55584A5EF725E8DF69629DF39A302@AM6PR04MB5558.eurprd04.prod.outlook.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Jan 2025 06:38:32 -0700
-X-Gm-Features: AbW1kvbtqFqUP8SbWJffZWtRV0pqjuLZzhA8ylpGgzgl31muJ_NzJ9A5bT_jcg4
-Message-ID: <CAFLszTij6xE_tSNPj3D-6=O3_sbpbOTJdgOrtukJzfRMAq4W+w@mail.gmail.com>
-Subject: Re: [PATCH v2 03/33] bloblist: Make BLOBLIST_ALLOC the default
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alex Shumsky <alexthreed@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Chen-Yu Tsai <wens@csie.org>, Dragan Simic <dsimic@manjaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Joshua Watt <jpewhacker@gmail.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Stefan Roese <sr@denx.de>
+Date: Fri, 10 Jan 2025 06:38:44 -0700
+X-Gm-Features: AbW1kvYLXQau4WOqdxO02b29oIwX9fwGlDIoxI6qK0-Hj0eDqmRLos9e-WS21fE
+Message-ID: <CAFLszTg3D9C-XR7TwCqB6RAOvZH-TK7=CEN-WioSfEKWCVVGLg@mail.gmail.com>
+Subject: Re: How would I do signature verification of standalone binary?
+To: "Koch, Fabian" <Fabian.Koch@hima.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,53 +86,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Fabian,
 
-On Thu, 9 Jan 2025 at 09:42, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 5 Dec 2024 at 06:09, Koch, Fabian <Fabian.Koch@hima.com> wrote:
 >
-> On Thu, Jan 09, 2025 at 08:01:17AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Mon, 6 Jan 2025 at 14:41, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Jan 06, 2025 at 07:31:59AM -0700, Simon Glass wrote:
-> > >
-> > > > We want to encourage people to use an allocated bloblist since it is
-> > > > more flexible than a fixed one. Make this the default, being sure not to
-> > > > change existing users.
-> > > >
-> > > > The unit tests require BLOBLIST_FIXED so add a dependency in the
-> > > > Makefile to avoid build errors.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > [snip]
-> > > > diff --git a/common/Kconfig b/common/Kconfig
-> > > > index e8d89bf6eb9..a00387a4609 100644
-> > > > --- a/common/Kconfig
-> > > > +++ b/common/Kconfig
-> > > > @@ -1039,16 +1039,10 @@ if BLOBLIST
-> > > >
-> > > >  choice
-> > > >       prompt "Bloblist location"
-> > > > +     default BLOBLIST_FIXED if SANDBOX
-> > > >       help
-> > > >         Select the location of the bloblist, via various means.
-> > >
-> > > This should just be "default BLOBLIST_ALLOC" and sandbox platforms that
-> > > are using the bloblist can be like the other platforms using a fixed
-> > > address.
-> >
-> > We don't need 'default BLOBLIST_ALLOC' as it is now first, so is the
-> > default. I would like the 'fixed' thing to be later on so that people
-> > know we want to stop using it.
-> >
-> > All the sandbox platforms use BLOBLIST_FIXED. I'm not sure what change
-> > you are wanting me to make to this patch?
+> Hey all,
 >
-> I'm wanting you to not re-order the list to change the default and
-> instead use the default keyword to change the default.
+> I have a SoC which does secure boot in a multi staged process.
+> (ROM loads a signed SPL to an aux core, which loads another signed SPL to=
+ main core, which loads a signed u-boot.img)
+>
+> But the thing I want u-boot to load, verify signature and then run/boot i=
+s a standalone binary app, not a Linux Kernel.
+> (It does work fine when I load that and run it with the "go" command, but=
+ no signature verification is done as of now)
+>
+> All the research I did pointed towards using signed FIT images and then "=
+bootm" to do the verification and loading.
+> But I cannot get "bootm" to load a FIT containing only my raw binary stan=
+dalone app.
+>
+> Is that road a dead-end and I need to do something completely else?
+>
+> I would love to stay as close to vanilla u-boot (or at least the SDK vani=
+lla version) and not implement a fully custom signature verification.
+>
+> Any pointers would be highly appreciated.
 
-Oh, OK I see.
+So long as you put your image in a configuration, it can be verified.
+The question is whether you can load it.
+
+bootm assumes it is booting an OS. It does not support
+IH_TYPE_FIRMWARE as a type. You could write a new command to handle
+that, perhaps. SPL does support loading firmware, but you are running
+U-Boot proper so that isn't very useful.
+
+For your command, you could call fit_config_verify() to verify the
+config, then fit_image_load() to load the image you want.
 
 Regards,
 Simon
+
+>
+> kind regards
+> Fabian
+>
+> Informationspflicht nach Art. 13 und 14 DS-GVO: https://www.hima.com/de/i=
+nformationen-DSGVO Information obligation according to Art. 13 and 14 DS-GV=
+O: https://www.hima.com/en/information-GDPR
+>
+> HIMA Paul Hildebrandt GmbH, Albert-Bassermann-Str. 28, 68782 Bruehl bei M=
+annheim
+> Gesellschaft mit beschraenkter Haftung, Sitz Bruehl, Deutschland - Regist=
+ergericht Mannheim HRB 720409
+> USt-ID: DE 144286400
+> WEEE-Reg.-Nr.: DE87326515
+>
+> Geschaeftsfuehrender Gesellschafter: Steffen Philipp, Geschaeftsfuehrer: =
+Joerg de la Motte (Vorsitz), Dr. Michael Loebig
+>
+> Diese Nachricht und saemtliche Anhaenge sind vertraulich und duerfen nich=
+t an Dritte weitergeleitet oder sonst veroeffentlicht werden, soweit nicht =
+ausdruecklich etwas anderes bestimmt ist. Falls Sie nicht der beabsichtigte=
+ Empfaenger sind, bitten wir Sie, mit dem Absender Kontakt aufzunehmen und =
+diese Nachricht und saemtliche Anhaenge von Ihrem System zu loeschen. Auch =
+in diesem Fall sind Sie weder berechtigt, diese Nachricht oder etwaige Anha=
+enge zu kopieren noch deren Inhalt einem Dritten zugaenglich zu machen.
+>
+> This message and its attachments are confidential and can contain privile=
+ged information which may not be distributed or published, unless expressly=
+ stated otherwise. If you are not the intended recipient, please notify us =
+immediately and delete this email and its attachments. If you have received=
+ this communication in error, you are hereby notified that any disseminatio=
+n, distribution or copying of this communication is strictly prohibited.
+
+[can you please drop this as it is not correct for a public mailing list?]
