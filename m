@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB7F6E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 16:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76856E7719D
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 17:05:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23EEC800D0;
-	Fri, 10 Jan 2025 17:48:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D2346800D0;
+	Fri, 10 Jan 2025 18:05:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sc7nMx31";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a/wUIhiY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA2498036B; Fri, 10 Jan 2025 17:48:37 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 7435C801F5; Fri, 10 Jan 2025 18:05:39 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1F1080050
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 17:48:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05E3C80050
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 18:05:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-4679fc9b5f1so16591131cf.1
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 08:48:34 -0800 (PST)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7b9ad0e84e6so224176885a.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 09:05:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736527714; x=1737132514; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736528736; x=1737133536; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=33CA0B14hXF+1oZJzkpaMI7jt4WQKVRxRRybajoVm38=;
- b=Sc7nMx31KmuIVroV1WExrIU/BQtoC3QK40s4p4UjhJBmsDEEK+uRdwhaq0+N4Disff
- rcLfoP1TDJEPS8g5qKbmVzkdk3o5uOePOObsVhZAm6DdXOtKWRf+/lYb2EmZyEPs8DRq
- H6HnA1cUTzaweQqmyV3k1hBFzvO1WiEPIIZWg=
+ bh=Iw/f2J5PPJ/bpX/divms+cNBge6RwcSBR7kZzBsdooY=;
+ b=a/wUIhiYnrGEMkaaZ1liBGxcgEuNJiUixTXQK9IdpdVo4Qq+kfUxyLrbzvOu7Xccwm
+ sMbg2wetN2e/l9/jMi84zkdilC1zUdJLcljwrrggtEwqc4lspQA9MLYjij6bXv5i8WwA
+ ct8dpu0xXBNGWwt0Zzth8s560v1NdiRmurHaU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736527714; x=1737132514;
+ d=1e100.net; s=20230601; t=1736528736; x=1737133536;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=33CA0B14hXF+1oZJzkpaMI7jt4WQKVRxRRybajoVm38=;
- b=aU8sh8GPAVNZIujzlAM4kp2Agk7bAhJEOTulRZs4nLNYGVREwhcBI3dHMawTDIjpf9
- KoCEGVPeb4Q2GumCSsUhojPR3SptSctMd0KcXDij+IPxlW+H7HdCgwPEHb7TLIZrbJLr
- nHY+fFVJwQa+E7cFDxh5m+xliDXvmSkMI1d7QTuOGiNGIwosF89lN4JpMVVTNigJxSq+
- jdVIz3JAb1Jde46ayd0/gnFPG+szV664/EBdptE1DFEQm/GYoJ0yfBuF63TSBWo6OPF8
- toOWO61dB8ACpr191NzHzw0QFG9OZg6m6VKEof2EeY0q8OWT0cc92brhApx38lOVRIvg
- boPw==
+ bh=Iw/f2J5PPJ/bpX/divms+cNBge6RwcSBR7kZzBsdooY=;
+ b=d1XkxV1r4BQB2jDle89KMkwdH+lm8gJRn/4DoHQfLMEoZIpxJ/ncWlzBIyH/1ni5cl
+ NFkhiBNDnwANjzmfzJ4a0VloHM5ntXArpdnARskTG0idvyP/wfFHV+gWRygxxbBQjKZJ
+ SEp9+xwqxAqlM9my0Ni3tVDP4DtLNP/y3JqmKNUzm7ALc0K0YlALpKJrPaVAfwBWvupm
+ p8QE0k6715t79odEMTZhLj6X4ehGhV+WFg1eucN8/WsiqisuUabQGyiSgt/vx2XspC+o
+ Pn8lt3jZlcioyOXaQplyS8+NutXEQb+lsm2Q+XE6yveevCgI/O36+BCIpmIokTyZG6IV
+ c64Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDEq20TZFHooyDXx1ZWH8vsi0xOzmCCD1E0eK24p8RFq95ja4whzJR7hl8L2c/yUTif6fgBCA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/e92+iwIVBxyZEaFExrLWOH9PPqMy5Hhs1K7bhMouD8cuCKK9
- FduT2wVV55BX1LR2IkA9fZD2fnYwilYzmNDl6FTzKSWlShBR7vUBN23GDslFBAU=
-X-Gm-Gg: ASbGncvet2+WUKCUh98li1rWcFIq5DO38h+b3ZVtE0u1zkaEF3L2Y1dBZ0ykNwzKcSh
- nMu1z6Sym5N6BEsphNcEtd7f444kPdYZUc5hRLbGPCf3bLmGt6J8jWmBRYb7qv67c48FNqyrMn/
- l1mYG5TPh3IZk8vzfZufVINHKASgWy/3yeF+sAvYeTb11OghWA6k377g2EUXldkYkTEpEa4915a
- 5VDmaMSJdJMoNuxBBQ9OwKL3pK7JoaqtyfI9fgtvA9EULLfNDZCh+0=
-X-Google-Smtp-Source: AGHT+IGGKZ207RzUSoHw4aTF7vZx0u/SiGkztf8VNIIiVrxlPctBJZ4fbrwtMlm+zmqFjiSbOa+Trw==
-X-Received: by 2002:ac8:7d8f:0:b0:467:45b7:c495 with SMTP id
- d75a77b69052e-46c7108f867mr173651421cf.15.1736527713542; 
- Fri, 10 Jan 2025 08:48:33 -0800 (PST)
+ AJvYcCW+MfNUIPrH4cNqf3Xx+V55vB4xxocSRrB6B/ywb3Y1xdkKEdSQh0B4H5+Nfdux0YIqF01FDPs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZad5goqwbXwzpWjf15US0Z8if7JehfoT9BBnMzkI3emGcd6T/
+ isWOtFbGxWqq+j0/ZnWyAFo/F1teJgY+/K1i7MYyEqXxiN3sltnKqQZH8d6xyLE=
+X-Gm-Gg: ASbGncsR9JZuqgaDvGexZAK5wvOKUvRen4LTNW/FIUkstA4YExSWrtSs0Pw45idXepv
+ WwGA3HpJyBxJdQr2RKU7/9e1Cz1trndZGy6sb9TT5W4zI+lToid9ReVvHMQO72XVcWvfy4talpA
+ vDcaocYsmXo7uuxtP/4XGJAgxBf2uwZ5Axbuw5M4lA/1N5Z8NS/QLK5zHyy3S0PJO35f9Gs8Rvp
+ LI4XBSJ2pE/O0qbWXXWGs3/ymfvGHMhLmJxaivnb8CKQtmi2NO8hUc=
+X-Google-Smtp-Source: AGHT+IGV8zgV+0H6G3jaBoyvLHjMffkTs5rwfQRMrgN123RY3oRLeXD2vLj28NqCG6BqNresfXFmDA==
+X-Received: by 2002:a05:620a:2490:b0:7b1:19f4:c6e0 with SMTP id
+ af79cd13be357-7bcd97bdeb6mr1762276885a.51.1736528735521; 
+ Fri, 10 Jan 2025 09:05:35 -0800 (PST)
 Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46c873eaf88sm10875531cf.81.2025.01.10.08.48.31
+ af79cd13be357-7bce3281697sm191045785a.67.2025.01.10.09.05.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 08:48:32 -0800 (PST)
-Date: Fri, 10 Jan 2025 10:48:29 -0600
+ Fri, 10 Jan 2025 09:05:34 -0800 (PST)
+Date: Fri, 10 Jan 2025 11:05:31 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Guillaume La Roque <glaroque@baylibre.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 0/8] efi_loader: Complete the bootflow_efi() test
-Message-ID: <20250110164829.GJ3476@bill-the-cat>
-References: <CAFLszTi5dxQyf_wRpGWRz9S7YsETpeRxA3_YJrhm+Lp0uw7bmw@mail.gmail.com>
- <3b854695-990e-47f3-a9b8-34b1b2790d28@gmx.de>
- <CAFLszTieNX4-JJqQrdNdm+sBhnBHZrAwawvQ+J-D3s118uob2w@mail.gmail.com>
- <20250107151127.GI3476@bill-the-cat>
- <0d35cb20-3509-419b-ad4e-7736a35398f0@gmx.de>
- <CAFLszTgWe7-zDejNzn1+QDLhjAHz8e=m+r5zYSmf91RAY=ZkTQ@mail.gmail.com>
- <20250108191457.GQ3476@bill-the-cat>
- <CAFLszTh8BZGEpTs_gxo89dMdd6v3PmuFtTMHxmfGXDUwmdaMfQ@mail.gmail.com>
- <20250109165121.GZ3476@bill-the-cat>
- <CAFLszThGNgH2rtLK5d+YEj4-p+cFpVLtMu_+Z_SHYbU8vp6Wkw@mail.gmail.com>
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v5 4/8] RFC: Revert "bootstd: Make efi_mgr bootmeth work
+ for non-sandbox setups"
+Message-ID: <20250110170531.GK3476@bill-the-cat>
+References: <20241113150938.1534931-1-sjg@chromium.org>
+ <20241113150938.1534931-5-sjg@chromium.org>
+ <517d087e-4ac5-4fd5-a37f-d4d3aaa534bd@gmx.de>
+ <CAFLszTjbDHvMvv3U+SaW0_7b4oajW8RRf6KYbF_jex34en6ByA@mail.gmail.com>
+ <20250109150454.GT3476@bill-the-cat>
+ <CAFLszTgtP5vXT+HsvHP8i50KihetHf2-h3KPp2-f6M4XJ3+i8g@mail.gmail.com>
+ <20250109152234.GW3476@bill-the-cat>
+ <CAFLszThy9OkfMMbbyzUvWF19rvTRk64q62J+Lhk=U0VABwZNbQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9p3Fp/JFMkXlfXcE"
+ protocol="application/pgp-signature"; boundary="+1Kx8ajUq07DMi+4"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThGNgH2rtLK5d+YEj4-p+cFpVLtMu_+Z_SHYbU8vp6Wkw@mail.gmail.com>
+In-Reply-To: <CAFLszThy9OkfMMbbyzUvWF19rvTRk64q62J+Lhk=U0VABwZNbQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,376 +110,219 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9p3Fp/JFMkXlfXcE
+--+1Kx8ajUq07DMi+4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 10, 2025 at 06:40:37AM -0700, Simon Glass wrote:
+On Fri, Jan 10, 2025 at 06:41:00AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 9 Jan 2025 at 09:51, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 9 Jan 2025 at 08:22, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Thu, Jan 09, 2025 at 08:02:01AM -0700, Simon Glass wrote:
+> > On Thu, Jan 09, 2025 at 08:11:58AM -0700, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Wed, 8 Jan 2025 at 12:15, Tom Rini <trini@konsulko.com> wrote:
+> > > On Thu, 9 Jan 2025 at 08:05, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Wed, Jan 08, 2025 at 10:02:52AM -0700, Simon Glass wrote:
-> > > > > Hi Heinrich, Tom,
+> > > > On Thu, Jan 09, 2025 at 08:01:13AM -0700, Simon Glass wrote:
+> > > > > Hi Heinrich,
 > > > > >
-> > > > > On Tue, 7 Jan 2025 at 08:47, Heinrich Schuchardt <xypron.glpk@gmx=
+> > > > > On Sat, 4 Jan 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx=
 =2Ede> wrote:
 > > > > > >
-> > > > > > On 07.01.25 16:11, Tom Rini wrote:
-> > > > > > > On Tue, Jan 07, 2025 at 06:57:50AM -0700, Simon Glass wrote:
-> > > > > > >> Hi Heinrich,
-> > > > > > >>
-> > > > > > >> On Tue, 7 Jan 2025 at 06:11, Heinrich Schuchardt <xypron.glp=
-k@gmx.de> wrote:
-> > > > > > >>>
-> > > > > > >>> On 07.01.25 13:15, Simon Glass wrote:
-> > > > > > >>>> Hi Heinrich,
-> > > > > > >>>>
-> > > > > > >>>> On Mon, 6 Jan 2025 at 10:00, Heinrich Schuchardt <xypron.g=
-lpk@gmx.de> wrote:
-> > > > > > >>>>>
-> > > > > > >>>>> On 06.01.25 15:47, Simon Glass wrote:
-> > > > > > >>>>>> This test was hamstrung in code review so this series is=
- an attempt to
-> > > > > > >>>>>> complete the intended functionality:
-> > > > > > >>>>>>
-> > > > > > >>>>>> - Check memory allocations look correct
-> > > > > > >>>>>> - Check that exit-boot-services removes active-DMA devic=
-es
-> > > > > > >>>>>> - Check that the bootflow is still present after testapp=
- finishes
-> > > > > > >>>>>>
-> > > > > > >>>>>> The EFI functionality duplicates bootm_announce_and_clea=
-nup() and still
-> > > > > > >>>>>> uses the defunct board_quiesce_devices() so a nice clean=
-up would be to
-> > > > > > >>>>>> call the bootm function instead, with suitable modificat=
-ions. That would
-> > > > > > >>>>>> allow bootstage to work too.
-> > > > > > >>>>>>
-> > > > > > >>>>>> This series is based on sjg/master since the EFI logging=
- was rejected so
-> > > > > > >>>>>> far.
-> > > > > > >>>>>
-> > > > > > >>>>> Yes, it was rejected because a solution at the lib/log.c =
-level would be
-> > > > > > >>>>> more generic.
-> > > > > > >>>>
-> > > > > > >>>> As I mentioned, that idea isn't suitable for programmatic =
-use.
-> > > > > > >>>
-> > > > > > >>> What can be done with show_addr("mem", rec->memory); that l=
-og_debug()
-> > > > > > >>> does not offer or which you could not do with a new log fun=
-ction in
-> > > > > > >>> lib/log.c that takes variadic arguments?
-> > > > > > >>
-> > > > > > >> There are asserts in [1], for example. How do you propose to=
- handle
-> > > > > > >> that? See [2] for my previous explanation, quoted here:
-> > > > > > >>
-> > > > > > >>> CONFIG_LOG with a bloblist option would be a great idea, bu=
-t it's hard
-> > > > > > >>> to programmatically scan text...plus only the external call=
- sites are
-> > > > > > >>> actually logged.
-> > > > > > >>
-> > > > > > >> Also see the discussion on the original patch [3]. There was=
- also your
-> > > > > > >> reply at [4], but I think you missed that this is intended f=
-or use in
-> > > > > > >> unit tests (i.e. with ut_assert()).
-> > > > > > >>
-> > > > > > >> You also requested that this be generalised, rather than bei=
-ng
-> > > > > > >> EFI-loader-specific. I have no objection to that, but don't =
-have a use
-> > > > > > >> case for it yet, so have deferred that to later. It's a fair=
-ly simple
-> > > > > > >> change, if/when needed. If the series was not NAKed, I'd be =
-happy to
-> > > > > > >> do it now.
-> > > > > > >>
-> > > > > > >>>>
-> > > > > > >>>>>
-> > > > > > >>>>> Tom suggested not to send patches that are for private en=
-joyment to the
-> > > > > > >>>>> mailing list.
-> > > > > > >>>>
-> > > > > > >>>> My contributions to U-Boot are only ever about private enj=
-oyment :-)
-> > > > > > >>>>
-> > > > > > >>>> Do you have any comments on the patches?
-> > > > > > >>
-> > > > > > >> Regards,
-> > > > > > >> Simon
-> > > > > > >>
-> > > > > > >> [1] https://patchwork.ozlabs.org/project/uboot/patch/2025010=
-6144755.3054780-6-sjg@chromium.org/
-> > > > > > >> [2] https://lore.kernel.org/u-boot/CAFLszTjxOE_037+kR0jgdax8=
-0sBombYo_k0YgiuVnP=3DKZCOvuA@mail.gmail.com/
-> > > > > > >> [3] https://lore.kernel.org/u-boot/CAC_iWjKtaN54B98OKbkoXkC_=
-GmKJ=3Dx+M4=3DUY_O6roSOpZaDxag@mail.gmail.com/
-> > > > > > >> [4] https://lore.kernel.org/u-boot/D513D326-41A6-425E-B11F-8=
-5958065BCD2@gmx.de/
+> > > > > > On 11/13/24 16:09, Simon Glass wrote:
+> > > > > > > This is another option to fix sunxi booting with bootstd, whi=
+ch may be
+> > > > > > > better since it will work for all boards. We can then figure =
+out how to
+> > > > > > > automatically and deterministicaly decide when bootmgr should=
+ be used.
 > > > > > > >
-> > > > > > > Looking at the logging portions of the original series again,=
- especially
-> > > > > > > if this was made generic, we probably don't want to print to =
-actual
-> > > > > > > console every time we're making a note of some memory allocat=
-ion for
-> > > > > > > example, that would be unreadable outside of a debug context.=
- The point
-> > > > > > > of this really seems to be "log things for verifying in tests=
- later".
-> > > > > > > Does that end up being useful? I don't know. Heinrich or Ilia=
-s, do the
-> > > > > > > tests in [1] look generally useful?
+> > > > > > > This reverts commit f2bfa0cb17948aa4a0fa20fdf9014296b9c4d9c7.
 > > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > > If this patch is applied, we don't need to drop bootmgr for s=
+unxi
+> > > > > > >
+> > > > > > > (no changes since v1)
+> > > > > > >
+> > > > > > >   boot/bootmeth_efi_mgr.c | 18 +-----------------
+> > > > > > >   1 file changed, 1 insertion(+), 17 deletions(-)avilable
+> > > > > > >
+> > > > > > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
+> > > > > > > index 23ae1e610ac..095fa74fc60 100644
+> > > > > > > --- a/boot/bootmeth_efi_mgr.c
+> > > > > > > +++ b/boot/bootmeth_efi_mgr.c
+> > > > > > > @@ -14,8 +14,6 @@
+> > > > > > >   #include <command.h>
+> > > > > > >   #include <dm.h>
+> > > > > > >   #include <efi_loader.h>
+> > > > > > > -#include <efi_variable.h>
+> > > > > > > -#include <malloc.h>
+> > > > > > >
+> > > > > > >   /**
+> > > > > > >    * struct efi_mgr_priv - private info for the efi-mgr driver
+> > > > > > > @@ -48,27 +46,13 @@ static int efi_mgr_check(struct udevice *=
+dev, struct bootflow_iter *iter)
+> > > > > > >   static int efi_mgr_read_bootflow(struct udevice *dev, struc=
+t bootflow *bflow)
+> > > > > > >   {
+> > > > > > >       struct efi_mgr_priv *priv =3D dev_get_priv(dev);
+> > > > > > > -     efi_status_t ret;
+> > > > > > > -     efi_uintn_t size;
+> > > > > > > -     u16 *bootorder;
+> > > > > > >
+> > > > > > >       if (priv->fake_dev) {
+> > > > > > >               bflow->state =3D BOOTFLOWST_READY;
+> > > > > > >               return 0;
+> > > > > > >       }
+> > > > > > >
+> > > > > > > -     ret =3D efi_init_obj_list();
+> > > > > > > -     if (ret)
+> > > > > > > -             return log_msg_ret("init", ret);
+> > > > > > > -
+> > > > > > > -     /* Enable this method if the "BootOrder" UEFI exists. */
+> > > > > > > -     bootorder =3D efi_get_var(u"BootOrder", &efi_global_var=
+iable_guid,
+> > > > > > > -                             &size);
+> > > > > > > -     if (bootorder) {
+> > > > > > > -             free(bootorder);
+> > > > > > > -             bflow->state =3D BOOTFLOWST_READY;
+> > > > > > > -             return 0;
+> > > > > > > -     }
+> > > > > > > +     /* To be implemented */
 > > > > > >
-> > > > > > The tests in [1] are not documented, not even in the commit mes=
-sage. So
-> > > > > > the reasoning behind the tests remains Simon's secret.
-> > > > >
-> > > > > Are you asking for code comments in the test? If so, I can add so=
-me.
-> > > > >
+> > > > > > The EFI boot manager can boot based on:
 > > > > > >
-> > > > > > At first sight the tests in [1] don't make much sense. E.g. tha=
-t only a
-> > > > > > subset of memory types have been used does not tell that the ri=
-ght
-> > > > > > memory type has been used for the right object.
-> > > > >
-> > > > > It is a pretty good start, though. It makes sure that the memory =
-types
-> > > > > are sane, checks addresses are within DRAM, etc. With [5] it makes
-> > > > > sure that devices are removed.
-> > > > >
+> > > > > > * variable BootOrder
+> > > > > > * variable BootNext
+> > > > > > * an existing file EFI/BOOT/BOOT<arch>.EFI
 > > > > > >
-> > > > > > Implementing a specific tracing functionality for EFI is defini=
-tively
-> > > > > > the wrong way forward as it will lead to code duplication.
+> > > > > > It obsoletes bootsmeth_efi.
+> > > > > >
+> > > > > > >
+> > > > > > >       return -EINVAL;
+> > > > > >
+> > > > > > We must always run the EFI boot manager if it is enabled. So -E=
+INVAL is
+> > > > > > wrong here.
 > > > > >
-> > > > > We can cross that bridge when we come to it.
+> > > > > Well, I don't believe you have a solution, then.
+> > > > >
+> > > > > You did suggest putting bootmgr later, as we discussed on irc.
+> > > > >
+> > > > > For now, I think we should apply this patch (and series), while we
+> > > > > sort out how to make bootmgr more incremental. It should not be
+> > > > > scanning every available device before it starts, since that can =
+be
+> > > > > very slow.
 > > > >
-> > > > Well, no. It's backwards to make a bridge in one place when everyone
-> > > > agrees it needs to be moved somewhere else. I mean [5] is a generic
-> > > > issue and test/py/tests/test_net_boot.py or some other test we alre=
-ady
-> > > > have which tests booting an OS should confirm that we've quiesced
-> > > > devices before moving on. And as a bonus it's in python where deali=
-ng
-> > > > with strings doesn't suck.
-> > >
-> > > I really don't want to write C tests in Python. CI is slow enough as
-> > > it is, something realy want to fix. I'm also not sure how you can tell
-> > > if a device has been removed. Run 'dm tree' and look for the missing
-> > > 'star' in the resulting 300 lines of text?
-> >
-> > As I'm in a bisect-hell in our C tests you'll have to forgive me for not
-> > thinking the C tests are noticeably faster than python tests. Or that
-> > they aren't their own potential source of corner-case bugs. But I
-> > digress..
->=20
-> Welcome to my world. I bisected my lab devices so many times to try to
-> isolate all the breakages that have crept in. What is the problem,
-> maybe I can help?
-
-Sure. test/cmd/hash.c::dm_test_cmd_hash_md5 fails randomly, in maybe 1
-out of 100 runs, via pytest, in sandbox. Not via "./u-boot -T -c 'ut dm
-dm_test_cmd_hash_md5'" however (I stopped checking after 1000
-iterations). I was iterating over "and built with clang" but I think it
-happens with gcc too, from the actual failures in CI. And you can use
-"-k ut" to limit to just what's matched there, so it's a quicker
-iteration.
-
-> > And yes, taking a bunch of text and parsing it, is what python is fast
-> > at. And easier to write.
-> >
-> > > But actually [5] is not generic, since EFI uses its own code to remove
-> > > devices. This test is solely focussed on EFI.
-> >
-> > Yes, you're testing the EFI version of the code in
-> > arch/$(ARCH)/lib/bootm.c. The remove devices functions being called in
-> > both cases are generic.
->=20
-> The code in EFI is:
->=20
-> if (!efi_st_keep_devices) {
-> bootm_disable_interrupts();
-> if (IS_ENABLED(CONFIG_USB_DEVICE))
-> udc_disconnect();
-> board_quiesce_devices();
-> dm_remove_devices_active();
-> }
->=20
-> It does call somewhat the same functions, but is doing its own thing,
-> not even using the arch-specific code. As I mentioned, a nice clean-up
-> would be to make bootm_announce_and_cleanup() common.
-
-Yes, we almost agree? Both the EFI code, and arch/$(ARCH)/lib/bootm.c
-have functions that make the above calls. A nice clean-up would be to
-have something common.
-
->=20
-> Actually, now that I see efi_st_keep_devices, I wonder why Heinrich
-> didn't want my ANSI patch[6] which serves a similar function.
-
-No? Your patch disables ANSI output in those tests, that variable is for
-making sure those tests can accomplish (if I skim things right) similar
-kinds of tests you've asked for before, but with an EFI app instead? But
-perhaps better to not start yet another tangent here...
-
-> > > If you want the logging to be renamed and placed centrally I don't
-> > > mind doing it now. But note that only EFI will use it for now.
-> > >
-> > > >
-> > > > >
-> > > > > >
-> > > > > > We already have function _log() which is variadic.
-> > > > > >
-> > > > > > Simon could write a new log driver that parses the `format` par=
-ameter
-> > > > > > and saves the binary data in an appropriate format for analysis=
- by the
-> > > > > > unit tests:
-> > > > > >
-> > > > > > * For %s the driver should save the string and not the address =
-of the
-> > > > > > string.
-> > > > > > * For %pD the driver should save the device path instead of the=
- pointer.
-> > > > > > * ...
-> > > > > >
-> > > > > > Some changes to the log driver interface will be needed to pass=
+> > > > Heinrich and I talked the other day, and we think the right path is=
  the
-> > > > > > variadic arguments instead of the formatted message.
-> > > > >
-> > > > > Perhaps the word 'log' is confusing people. But the above suggest=
-ion
-> > > > > is quite a complicated way of handling things. We have no way to
-> > > > > decode printf() strings in this way. See log_dispatch() for how t=
-his
-> > > > > is handled today. It uses sprintf(). Trying to test based on text
-> > > > > output would be very clumsy (lots of regexes and sscan() calls?) =
-and
-> > > > > result in a huge amount of parsing code, highly dependent on the
-> > > > > printf() format, etc.
-> > > > >
-> > > > > I very-much doubt that would produce a useful implementation, but=
- if
-> > > > > you would like to try it out then I would be happy to look at it.
-> > > > >
-> > > > > I mentioned this several times, but even if we did go that way, we
-> > > > > only have logging on the external calls, so much of the EFI-memory
-> > > > > allocation in U-Boot would not be logged.
-> > > > >
-> > > > > Regards,
-> > > > > Simon
-> > > > >
-> > > > > [5] https://patchwork.ozlabs.org/project/uboot/patch/202501061447=
-55.3054780-9-sjg@chromium.org/
-> > > >
-> > > > Yes, calling this a "log" when it's intended for capturing informat=
-ion
-> > > > for tests got some of this off on the wrong track. But that also he=
-lps
-> > > > explain now that this is still on the wrong track and should instea=
-d be
-> > > > following normal design practices for testing and expanding existing
-> > > > infrastructure and not inventing a new everything. So if you don't =
-like
-> > > > Heinrich's suggestion, take a look at Caleb's suggestion.
+> > > > "later" path, where we don't try and use efi bootmanager until
+> > > > everything has been probed, and also drop the single "efi" option. =
+This
+> > > > should mean that by the time we would be trying efi bootmanager mos=
+t if
+> > > > not everything that needs to be probed has been probed. It doesn't =
+make
+> > > > any sense to have "efi bootmanger" be more incremental as conceptua=
+lly
+> > > > it's point is to show the user all the options.
 > > >
-> > > I don't have the energy to port the tracing framework from Linux to
-> > > U-Boot, although I agree it would be useful. Still, function tracing
-> > > is quite fragile and confusing to work with when refactoring code. I
-> > > don't like that idea much for this use case, although if function
-> > > tracing did exist in U-Boot I would likely have used it.
+> > > What is the single 'efi' option? I hope you don't mean the EFI bootme=
+th.
 > >
-> > I mean yes, it would be good if you went back and expanded on the trace
-> > functionality you did before.
+> > Yes, the single EFI bootmeth. Because part of the issue with that is to
+> > be compliant a bunch of things need to be probed. And rather than have
+> > an option to be only semi-compliant, the preference is to be compliant
+> > and just tried later in the boot sequence.
 >=20
-> I still don't believe it is the best solution and seems like yet
-> another ocean I should avoid sticking my heater into.
+> Well then you need a way to disable the single EFI bootmeth?
 
-I strongly disagree. If you go back to the trace code you brought in to
-start with and make it more useful / include newer features existing
-elsewhere you're not going to end up in conflict with everyone asking
-why you're doing something subsystem specific.
+We have BOOTMETH_EFILOADER already.
 
-> > > > And if you
-> > > > don't like Caleb's suggestion, go put this in a topic branch you can
-> > > > merge when you need to debug some problem that seemingly nothing el=
-se
-> > > > will catch.
-> > >
-> > > Here we are over a year after I reported the bug and we still don't
-> > > have a test to cover it. This series is better than the available
-> > > alternatives, IMO.
+> > > Putting bootmanager at the very end is OK with me, if we really cannot
+> > > figure out a way to know whether the system is using it or now. It is
+> > > 'putting it in the middle' that I don't like.
 > >
-> > Well, no. We have commit dabaa4ae3206 ("dm: Add
-> > dm_remove_devices_active() for ordered device removal") we have a test
-> > for the underlying problem. We need more functional boot tests, but we
-> > need those to be in python too, and not more C code.
+> > In the case of no specified boot order, after block (and after very
+> > special things like FEL) and before network is what makes the most
+> > sense. We don't need to try and DHCP/etc for it, just need to know if
+> > the interface exists (and so the user can say / have configured, to try
+> > and boot it).
 >=20
-> That is a nice improvement, but did not fix the underlying problem.
-> The underlying problem was that EFI was calling exit-boot-services,
-> causing U-Boot to free up data structures which were needed to boot.
-> This was on x86_64. I never quite figured out which one (very hard
-> when you cannot get back to U-Boot to check).
->=20
-> There were quite a lot of problems, actually. There v2 series is at [7]
->=20
-> Only a C test can check what actually happens inside U-Boot.
+> Apart from FEL, we also have ChromeOS, Android, QFW.
 
-Yes, I think now we get back to disagreeing on which symptoms lead to
-which code problems and then what to do about them.
+OK? Yes, bootstd needs to handle "we're in a special update things
+state". I'm not sure if QFW counts as a faux-block device or not. And
+ChromeOS I would have thought is "try and boot like $this from $device".
+I don't know if by "Android" you mean booting the OS, or the AVB state
+machine. The former would be like ChromeOS and the latter the special
+state machine case.
 
-> > And you're not just coming up with a test, you're refactoring a bunch of
-> > code and introducing new subsystems in order to do that. When as I keep
-> > pointing out, we don't need that. We could easily extend the existing OS
-> > boot tests we have to script booting an ISO. And we only run those when
-> > say "ENABLE_SLOW_TESTS" is set, and only do that on tagged releases.
+> > > How to handle the case where bootorder only specifies a subset of
+> > > options? Ideally we would just probe devices related to that subset.
+> > > That is what I was getting at.
+> >
+> > Yes, that should work just fine, especially if we're in the middle?
+> >
+> > The big challenge here is that conceptually, "bootstd" and "efi
+> > bootmanager" are duplicate functionality. They are both "figure out what
+> > on the system we should boot". The compromise is to try "bootstd" on
+> > block devices first (the common case).
 >=20
-> Yes of course we need to refactor to make tests work. This is not
-> necessarily a bad thing, as it helps us break code down into testable
-> chunks. We cannot rely only on large functional-tests, not that you
-> are suggesting that. See [8], but they are too slow, too hard to debug
-> when they fail. They also tend to devolve into chaos as people get
-> lazy and stop writing unit/smaller tests.
+> Are we trying to make boot slower?
 
-I'll just note that I don't ever even think to use "make tests" or
-"qcheck" or any of the others since they never work for me. With only a
-little bit of wrappering I can however run pytest like in CI.
+We're already in the slow path, because we're making guesses. But no, we
+aren't trying to make anything slower. This should potentially faster in
+the non-EFI case since we won't be trying to EFI boot every block device
+until we have exhausted the non-EFI methods.
+
+> A better way to design this would be to integrate the EFI stuff with
+> bootstd, rather than duplicating things. For example, a way to convert
+> a BOOTxxxx device into a bootdev would permit faster booting, since we
+> can just work through the boot order and request each device in turn.
+>=20
+> Once we give up on that and ask the user, we need to probe all devices.
+
+No, we're trying to untangle "EFI", "EFI bootmanager" and "bootstd".
+
+> The monolithic init of EFI_LOADER is creating quite a few problems. Am
+> I the only one that sees it?
+
+Yes, because your "monolithic init is a problem" is the subsystem
+maintainers "monolithic init makes us spec compliant".
+
+And when we're in some sort of "probe the device and see what can be
+booted" the subsystem maintainers would rather be spec compliant.
+
+And for the role I played in this confusion by suggesting how to
+integrate things privately and has now gone off the rails, I am sorry
+for the confusion and wasted efforts. I don't know if I was unclear or
+misspoke.
 
 --=20
 Tom
 
---9p3Fp/JFMkXlfXcE
+--+1Kx8ajUq07DMi+4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeBT1cACgkQFHw5/5Y0
-tyzfagv/fP8PzAYbM4A7LGDWQ/Uhw6g0dWyd+aF7Te6VkU4Q3MvB/VDRwmltdSZP
-KeMDY3wC5a5VGCsZXWi4yXJ9cYPJEe0RsP9LvSHWQu9TMjZuLhmtbdzAln/I21TY
-VRipbg82b/cTSolrEmQtcgStVsFu3syS0UCSawdElCoIJ3VgTVuyH2Mi+HfabYt1
-SxnpPmWY8myTz6d74TycRU4jsXvoCsaorXhUY4JqCjhoTF3SPTVUBbtiahthTqhZ
-APtYQ5jbCdh5S0sLtqBSUgebsHvjBRzMsVanPNMc47dx+agyWBgySvvDbcvdwe4P
-Qfr8ntW1MHgYBhJO8cq+755eIBJdk16hisKD9vE5LFbEjrHD+5A9d2S/7fSgrrSj
-nWqtGN22JK6vkYn8cC6DZiFmfTEZXb0fPOOvbLEa0dwVPOHoAgWgMAcQ6W95PruC
-8q0HTM6Zx3LietxB6EurO3UvP3+uPi92HYxEFwwVumxSVafllWBr9H5cPg88cgZ4
-bYIxVKEX
-=yxOE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeBU08ACgkQFHw5/5Y0
+tyyh3Qv9GDoPG6vWzc7nXmkIUCmlAodd0py6O5gYrAMZIHV5H5Q9b82fAvWMTbrw
+5wuPP3E1v2Jiwp3Ii1r3CQGuaMdk6eqoAxz1SGkrddONXaGAurSn7dtqhf+RHWG2
++1jb2k5Aqfwujt0gjCea7mehWjBRzVAmqPfmWwJhzFczfdAwDbhaM13o9UjrnUli
+/1g+8Tr5JMfhlwuO2v2r8UKknVsl7ZAC+c089B5ziIzdJgLa5ebCNcsEmxmDJasi
+vji/uwt9hwefTSeYd9QnYxbXnwXptrmuYtpZhr9ftle/b25Bvqt9WpmAnGmKttqT
+epdh4deBNZS3gwt8UkukMibr5+c43gpy72LJtF9T7QB1mhC9kbNxs71WzsMKWBWE
+6XNRrQYuRM1XCTZDB0qduY7ftjDd3Ea4F+7JmQgwUcGuUqfOsrbDD/5df+qKSdkK
+DA6cL+0yhZDzrblv/0pUgRzxMUTCrR90dafcE+ZilJC9Nzy8CkG8tIGk7X9EUDN3
+oAdWGCxZ
+=nlTf
 -----END PGP SIGNATURE-----
 
---9p3Fp/JFMkXlfXcE--
+--+1Kx8ajUq07DMi+4--
