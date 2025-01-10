@@ -4,64 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37912E7719A
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 00:54:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F286E77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 04:04:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8688A800C2;
-	Fri, 10 Jan 2025 01:54:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 7F4C3801F5;
+	Fri, 10 Jan 2025 05:04:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="CKlmhDr5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H1LTBAWp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBF4D80196; Fri, 10 Jan 2025 01:54:31 +0100 (CET)
-Received: from mail-m60192.netease.com (mail-m60192.netease.com
- [210.79.60.192])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5879780196; Fri, 10 Jan 2025 05:03:59 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43EAB8001F
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 01:54:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5B74B8001F
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:03:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 844cd4d2;
- Fri, 10 Jan 2025 08:54:24 +0800 (GMT+08:00)
-Message-ID: <a1b48fbd-6870-42e0-a9c9-9617a0ee2d01@rock-chips.com>
-Date: Fri, 10 Jan 2025 08:54:23 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=christianshewitt@gmail.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-436249df846so11994595e9.3
+ for <u-boot@lists.denx.de>; Thu, 09 Jan 2025 20:03:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1736481837; x=1737086637; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=K9Bo1wufBfvDp17xEGdBsgVq8YY1KmqG+B+4M+rmsTk=;
+ b=H1LTBAWph0K6V1tHC9NI6Gz05nXmBT50746QANptDrWHwBJEFbWw7VSusnVS7F7AWy
+ OM8fCzqNTAXyMv6cAWH4dUEGtrX/N5HFX8ldb7LfqpTTbc5FBeUoUfVEjQR1mbven6eA
+ VXN4qsmLNfRnVYCuKVs4aP7zKTrAf21w51AASDPmUFrHvneNZnNWzZrf1vCN3Zc4Z5nv
+ yy7CGe76gVgpGuX/GO4OWGCluK75E/lp1cSLjiSujY7Sx7Geaxx1FHJF8NVR3gvcSxXr
+ AVbB7G9Hu7Cf4DpQ+gZmJXaJvflZsOpwxEG2nlrQ6r+eDWZ/CMIJQE1rYT3fYopuBruc
+ kGKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736481837; x=1737086637;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=K9Bo1wufBfvDp17xEGdBsgVq8YY1KmqG+B+4M+rmsTk=;
+ b=jy2pA+TBEDiLOsYn2pQc5K4L8QspMAzMXxSypJyMA0QwnT+dHbHohhHJpHhAj4albv
+ FUbeP8KJVQO97WVwQWf9hqVHLtGyqzLYTH3ClBQ2qnOHiqq2AINxGKmyC4dVMwRLqXCJ
+ /64e/QWUYoFhkuoV+kJh/T84Py87eIMUu+A7Cd080N5EbYlyFqV5dyczMNaC2JiPRlM1
+ Gddecx80XJLSFYWQBDqx1mQ9XZsVs245a3mNxgaiE3CkTb6t1+LbInT8/JdG6gwWB1Kg
+ NlqYrPslWTutYrZKredcE1a9NUt+S471LOWNnXywGGFk3l6IdAYfx6pe5UzFUFaHko1z
+ HVCg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCIL9coEgWln5+t3sFxeNOqCAOgSSxaX50q36mifgKdKgr3FCj5XAANYxFz5WO2diWdr2GwAM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzPwWuslZLnrYz6nem5wPQ1b3uYLk+JfZefXT6fQ79Vz5MAwMIV
+ ITE16zXg3ja/3YBnQGhu0kyXFj3JFPzytU+RSk4XYRxLtW9jxBu/
+X-Gm-Gg: ASbGnct9/ZK1Ufqn8Ylqp2WcI/ww34nVRN1SF19UANDoW9jz01wHSCvMuITPD08o5Ou
+ lsxYmxs1ilkKa734waNmSzFD9d4vaL2OqtXXkNS8hhwZijJLxteYUs2husTN5yQr1rLjHDbpO4K
+ dJpvV+piMy7l0bbUeMl8D5wYUBHf3NoJwFtObNIOpnCLdyvnnhwUvnA8Xu1rdcBNed7eOrlBxCk
+ PDwU44c5i88oQMTwrEexwpb21ASI0yCRXs4GeUNfIOtcAQK9ZSe2bKLAU7rlA==
+X-Google-Smtp-Source: AGHT+IHiy+F2Jl4v5xbpj+sHo2KV7tlexhqY548aspvjHj4DdDRLp+zVYDo51bSm0OoUyQn9/eyrcw==
+X-Received: by 2002:adf:b1dc:0:b0:38a:88bc:ace1 with SMTP id
+ ffacd0b85a97d-38a88bcadc9mr5438179f8f.34.1736481836597; 
+ Thu, 09 Jan 2025 20:03:56 -0800 (PST)
+Received: from toolbox.. ([87.200.95.144]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-436e9e37d69sm38686505e9.30.2025.01.09.20.03.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2025 20:03:56 -0800 (PST)
+From: Christian Hewitt <christianshewitt@gmail.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ linux-amlogic@lists.infradead.org
+Cc: Christian Hewitt <christianshewitt@gmail.com>
+Subject: [PATCH] board: amlogic: odroid-n2: remove amlogic prefix from fdtdir
+ path
+Date: Fri, 10 Jan 2025 04:03:53 +0000
+Message-Id: <20250110040353.3424412-1-christianshewitt@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/20] rockchip: mkimage: Add rk3576 support
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Heiko Stuebner <heiko@sntech.de>, sjg@chromium.org, philipp.tomsich@vrull.eu
-Cc: lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
- jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
- jonas@kwiboo.se, detlev.casanova@collabora.com, u-boot@lists.denx.de,
- sebastian.reichel@collabora.com, Xuhui Lin <xuhui.lin@rock-chips.com>
-References: <20241121142731.1202209-1-heiko@sntech.de>
- <20241121142731.1202209-10-heiko@sntech.de>
- <421a8aa9-4f7b-4d63-8f5e-34eae97b8b06@cherry.de>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <421a8aa9-4f7b-4d63-8f5e-34eae97b8b06@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUweGlZMQkJJSklJTklKTk5WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
- JVSktLVUpCS0tZBg++
-X-HM-Tid: 0a944db486e503afkunm844cd4d2
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ogw6EQw4MjIPSAlPMTM9Dy48
- AThPCilVSlVKTEhNT0xLT01OTk1MVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKQ0lINwY+
-DKIM-Signature: a=rsa-sha256;
- b=CKlmhDr5RfBRlZxGNDOyJOnLjlINCrhozuiNg1ZSMAhNEMt4WKpf1B5iph7dggfWZ4ynhpHPxWASHL63AigDJdjb++w9nUQwcfgLHvuOztf5d6Fegloc3HycDtmutbJFEvkW3G+SWFk8beiUy89/B9cu5s50iYJMUKnUSygrSrY=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=HD3f/UIiTbv9+wklKnmvEIDD1ApwmKTv9NrtovJst9A=;
- h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,55 +96,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Commit 834e7c8136c6 ("dts: meson-g12a: Switch to using upstream DT")
+changed Amlogic configs to contain the default /amlogic device-tree
+path prefix, e.g. for odroid-n2:
 
-On 2024/11/27 00:53, Quentin Schulz wrote:
-> Hi Heiko,
->
-> On 11/21/24 3:27 PM, Heiko Stuebner wrote:
->> From: Xuhui Lin <xuhui.lin@rock-chips.com>
->>
->> Add support for rk3576 package header in mkimage tool.
->>
->> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
->> ---
->>   tools/rkcommon.c | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
->> index 3e52236b15a..d89c7d3afea 100644
->> --- a/tools/rkcommon.c
->> +++ b/tools/rkcommon.c
->> @@ -135,6 +135,7 @@ static struct spl_info spl_infos[] = {
->>       { "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
->>       { "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
->>       { "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
->> +    { "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2 },
->
-> I don't understand why we remove 0x1000 here from the size of the SRAM.
->
-> If I go back in git history, I found 
-> 915e09814a83128fee8b87b2ee2e5f4a17e04a01 which states it's total SRAM 
-> - size used by BootROM.
->
-> Can anyone provide feedback on how one is supposed to find this out? I 
-> think it's not the first time I'm confused by this and I'm not sure 
-> anyone's answered me before, but in any case, documenting this would 
-> be much welcome :)
-If you look this change at vendor U-Boot, you can find below commit msg:
-"Sram total size is 512KB and 4KB is used as bootrom stack."
-This size limit is for the first blob binary which is TPL/DDR init, and 
-after running the DDR init,
-we need to back to bootROM, so we should not touch the bootRom stack to 
-keep the bootRom
-available.
+CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-g12b-odroid-n2"
 
-Thanks,
-- Kever
->
-> The RK3576 does have 512KiB of SRAM so the base value before 
-> subtracting is fine :)
->
-> Cheers,
-> Quentin
->
+The board files also prefix amlogic when using fdtdir resulting in
+an /amlogic/amlogic/meson-g12b-odroid-n2.dtb path which is invalid
+with most distro packaging. Drop the prefix here to align with the
+board configs. This resolves fdtdir boot on Odroid N2/C4/HC4.
+
+Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
+---
+ board/amlogic/odroid-n2/odroid-n2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/board/amlogic/odroid-n2/odroid-n2.c b/board/amlogic/odroid-n2/odroid-n2.c
+index ae953d0e4ba..e98580631ec 100644
+--- a/board/amlogic/odroid-n2/odroid-n2.c
++++ b/board/amlogic/odroid-n2/odroid-n2.c
+@@ -62,7 +62,7 @@ static void odroid_set_fdtfile(char *soc, char *variant)
+ {
+ 	char s[128];
+ 
+-	snprintf(s, sizeof(s), "amlogic/meson-%s-odroid-%s.dtb", soc, variant);
++	snprintf(s, sizeof(s), "meson-%s-odroid-%s.dtb", soc, variant);
+ 	env_set("fdtfile", s);
+ }
+ 
+-- 
+2.34.1
+
