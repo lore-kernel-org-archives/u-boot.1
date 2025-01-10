@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4C89E7719C
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 18:43:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5190E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 18:43:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59ACC8060C;
-	Fri, 10 Jan 2025 19:43:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC9B7806DB;
+	Fri, 10 Jan 2025 19:43:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="DNScpOgV";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="gyTaloDa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CE2C8069D; Fri, 10 Jan 2025 19:43:07 +0100 (CET)
+ id A66148060C; Fri, 10 Jan 2025 19:43:07 +0100 (CET)
 Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::223])
+ [217.70.183.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60C008060C
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 19:43:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 910A3805EA
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 19:43:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 4BA9F60010;
- Fri, 10 Jan 2025 18:43:04 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 67E2260005;
+ Fri, 10 Jan 2025 18:43:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1736534585;
+ t=1736534584;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hVD5sHnIpAI9ZC+Mu2/Pl1CJxa/RtGELqDFn9Ad+1og=;
- b=DNScpOgVadioI1hNGd56hpprdcvNL5Towme+XJkIXOb4HTmsHAtSrW3dws6qpOIC5g8T/O
- lTzdTL8Qw/aJaLa8XbigjpoqHzrV13/HMCxkJENRgG5P37mxZr5g8l8ZtDARezV1xt4YzB
- 3MrOuca769mA00RhUk3uuUCRat00IN09rtvYI4VVx/iHbxOcDmDohPLOXi+s83Em6wpPNp
- Eq5cbDh/DaYEMVjYqDp51LjiPxLs2qAKUPtja+tUDqzhWTN9yI5f3mr9M7ePSCopMA1gkj
- zzeE151ToPmvP6LYbSto/bSNaf0qlnzqwHdAl5ry3a+yq8DFBZhRdohik3cVPw==
+ bh=l62iZpJ5uU/w+5Pn9kV7eNxSUz9xdejEaImBQJa2wDc=;
+ b=gyTaloDan7fCYTWVcYYPmdMh+WWJzlPG11MPtJXtt3Gr1kgvjefgxyOF8eP8iAwJr6SFHz
+ /KOFy1NNPsmirJrdji4eJ5GGy3cDsgY7OLlwKluRLPpAiXhdOb+E/zIgDtpe1tYmioXIPh
+ vOGbZ2mn6lOh0FzMb54/RWr9F9x2b//uZseBrVQ1qzZyjQjIVgghgcE4hxIV+a5z5AGrb7
+ q+DHkdyAvSZMjIIXtH+d7iXFf8NIpsMBQFxhJas2FU2GH2dwANconwbLrMNRG/rSK3OObO
+ leVuCU+s91CCfFH7SrSNv15kFD7Sy+slakRpC2bi+8/b4Sj6fsOUNWKcVkq9ow==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Fri, 10 Jan 2025 19:43:00 +0100
-Subject: [PATCH v3 03/13] sandbox: Add a fake DSI controller and link it to
- the panel
+Date: Fri, 10 Jan 2025 19:42:59 +0100
+Subject: [PATCH v3 02/13] dm: core: Add a helper to retrieve devices
+ through graph endpoints
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250110-ge-mainline-display-support-v3-3-d2c0acea6feb@bootlin.com>
+Message-Id: <20250110-ge-mainline-display-support-v3-2-d2c0acea6feb@bootlin.com>
 References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
 In-Reply-To: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -79,59 +79,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use a graph endpoint representation for that in order to test a new core
-DM helper going through these properties.
+There are already several helpers to find a udevice based on its
+position in a device tree, like getting a child or a node pointed by a
+phandle, but there was no support for graph endpoints, which are very
+common in display pipelines.
 
-Display pipelines typically include graph endpoints, but the helper is
-generic and would work with any device type.
+Add a new helper, named uclass_get_device_by_endpoint() which enters the
+child graph reprensentation, looks for a specific port, then follows the
+remote endpoint, and finally retrieves the first parent of the given
+uclass_id.
+
+This is a very handy and straightforward way to get a bridge or a panel
+handle.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- arch/sandbox/dts/test.dts | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ drivers/core/uclass.c | 62 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ include/dm/uclass.h   | 21 +++++++++++++++++
+ 2 files changed, 83 insertions(+)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 36cfbf213e4cfe17d9ca98d6e40f7caf95631254..f7d4d9824454207f2d4650739e43a36e4936ef9e 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -295,6 +295,23 @@
- 
- 	dsi_host: dsi_host {
- 		compatible = "sandbox,dsi-host";
+diff --git a/drivers/core/uclass.c b/drivers/core/uclass.c
+index f846a35d6b2537bab56bca158cedfb134b37f477..c9c5debbe7cd9ec44f95dc80d3199ee11521e997 100644
+--- a/drivers/core/uclass.c
++++ b/drivers/core/uclass.c
+@@ -582,6 +582,68 @@ int uclass_get_device_by_phandle(enum uclass_id id, struct udevice *parent,
+ 	ret = uclass_find_device_by_phandle(id, parent, name, &dev);
+ 	return uclass_get_device_tail(dev, ret, devp);
+ }
 +
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			port@0 {
-+				reg = <0>;
-+				unused_ep: endpoint {
-+				};
-+			};
++int uclass_get_device_by_endpoint(enum uclass_id class_id, struct udevice *dev,
++				  u32 ep_idx, struct udevice **devp)
++{
++	ofnode port = ofnode_null(), ep, remote_ep;
++	struct udevice *target = NULL;
++	u32 remote_phandle;
++	int ret;
 +
-+			port@1 {
-+				reg = <1>;
-+				dispc_out1: endpoint {
-+					remote-endpoint = <&panel_to_dispc>;
-+				};
-+			};
-+		};
- 	};
- 
- 	a-test {
-@@ -1359,6 +1376,12 @@
- 	panel {
- 		compatible = "simple-panel";
- 		backlight = <&backlight 0 100>;
++	if (!ep_idx)
++		port = dev_read_subnode(dev, "port");
 +
-+		port {
-+			panel_to_dispc: endpoint {
-+				remote-endpoint = <&dispc_out1>;
-+			};
-+		};
- 	};
++	if (!ofnode_valid(port)) {
++		char port_name[32];
++
++		port = dev_read_subnode(dev, "ports");
++		if (!ofnode_valid(port)) {
++			debug("%s: no 'port'/'ports' subnode\n",
++			      dev_read_name(dev));
++			return -EINVAL;
++		}
++
++		snprintf(port_name, sizeof(port_name), "port@%x", ep_idx);
++		port = ofnode_find_subnode(port, port_name);
++		if (!ofnode_valid(port)) {
++			debug("%s: no 'port@%x' subnode\n",
++			      dev_read_name(dev), ep_idx);
++			return -EINVAL;
++		}
++	}
++
++	ep = ofnode_find_subnode(port, "endpoint");
++	if (!ofnode_valid(ep)) {
++		debug("%s: no 'endpoint' in %s subnode\n",
++		      ofnode_get_name(port), dev_read_name(dev));
++		return -EINVAL;
++	}
++
++	ret = ofnode_read_u32(ep, "remote-endpoint", &remote_phandle);
++	if (ret)
++		return ret;
++
++	remote_ep = ofnode_get_by_phandle(remote_phandle);
++	if (!ofnode_valid(remote_ep))
++		return -EINVAL;
++
++	while (ofnode_valid(remote_ep)) {
++		remote_ep = ofnode_get_parent(remote_ep);
++		debug("trying subnode: %s\n", ofnode_get_name(remote_ep));
++		if (!ofnode_valid(remote_ep)) {
++			debug("%s: no more remote devices\n",
++			      ofnode_get_name(remote_ep));
++			return -ENODEV;
++		}
++
++		ret = uclass_find_device_by_ofnode(class_id, remote_ep, &target);
++		if (!ret)
++			break;
++	};
++
++	return uclass_get_device_tail(target, ret, devp);
++}
+ #endif
  
- 	scsi {
+ /*
+diff --git a/include/dm/uclass.h b/include/dm/uclass.h
+index c279304092352200d5297ad2d17f527173ec506b..6b76a9a588e70f487c2ce5398526d98b4547e2a7 100644
+--- a/include/dm/uclass.h
++++ b/include/dm/uclass.h
+@@ -333,6 +333,27 @@ int uclass_get_device_by_phandle(enum uclass_id id, struct udevice *parent,
+ int uclass_get_device_by_driver(enum uclass_id id, const struct driver *drv,
+ 				struct udevice **devp);
+ 
++/**
++ * uclass_get_device_by_endpoint() - Get a uclass device for a remote endpoint
++ *
++ * This searches through the parents of the specified remote endpoint
++ * for the first device matching the uclass. Said otherwise, this helper
++ * goes through the graph (endpoint) representation and searches for
++ * matching devices. Endpoints can be subnodes of the "port" node or
++ * subnodes of ports identified with a reg property, themselves in a
++ * "ports" container.
++ *
++ * The device is probed to activate it ready for use.
++ *
++ * @class_id: uclass ID to look up
++ * @dev: Device to start from
++ * @ep_idx: Index of the endpoint to follow, 0 if there is none.
++ * @target: Returns pointer to the first device matching the expected uclass.
++ * Return: 0 if OK, -ve on error
++ */
++int uclass_get_device_by_endpoint(enum uclass_id class_id, struct udevice *dev,
++				  u32 ep_idx, struct udevice **target);
++
+ /**
+  * uclass_first_device() - Get the first device in a uclass
+  *
 
 -- 
 2.47.0
