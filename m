@@ -4,105 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEAB1E7719C
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 16:17:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66C32E77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 16:45:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FAE9801F5;
-	Fri, 10 Jan 2025 17:17:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 91F618036B;
+	Fri, 10 Jan 2025 17:45:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NrmNM3AR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J+05kbdj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D97CB8036B; Fri, 10 Jan 2025 17:17:40 +0100 (CET)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
+ id 1CA4A801F5; Fri, 10 Jan 2025 17:45:29 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79E3D80050
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 17:17:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 952DA805E9
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 17:45:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-467a8d2d7f1so17077321cf.1
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 08:17:38 -0800 (PST)
+ spf=pass smtp.mailfrom=alex.kiernan@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-54024ecc33dso2384282e87.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 08:45:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736525857; x=1737130657; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vlOOScPZQbGdVQ1Av9dLus2ES0R1LmIBC//t/fz1LwI=;
- b=NrmNM3ARdf6j2w7X3ZquxgVyu9lgnh4qZ/OCWK6srdVWOClJf4KapQELDKSPcAczwD
- Hx5lft3/0Xn4pa8WM7YaQz4KU8crRyuBtdKQBQJHyyVMgUObXX/65g3CrFn8Isv70eDv
- 2Eo9MUsCKlKDMHzGhGrVWB9EMamITsC2VRWJ8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736525857; x=1737130657;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1736527526; x=1737132326; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vlOOScPZQbGdVQ1Av9dLus2ES0R1LmIBC//t/fz1LwI=;
- b=rg/PQlngyaRUyG98W0jcQOx4AGPUvA3+zLTYiIgxouOIxV8EG8Ls3S9sge9nen+ShQ
- xZZOl0lMkN1hQekHDPOUYNaZZwSHXI70ZTHWLbmLuIiXUUt4GJqLdEFsOijGU6QaKibH
- /uKKiaiauhQu8iFSUKVB/Y4vMFI2u39l8Bb3nVtLvA23h2IN4KMZq5GofrgLgCKfCflS
- 65rl9+kkYxVoBuzCZTqtepIlnp3pN8PoUxTzIZXe1FGK8hn/xGJUCGdwePMpfUxKIx3G
- 5p3VFRmz5t3UdlOZ0hhhJYNr9Y3ZgIeevaFH1N8Gxo+jmT+kI7U1kUCKXlbt8fhTQG/w
- Ko+A==
-X-Gm-Message-State: AOJu0YxbHxGW04Z3bfj9gZpB71OCQvr1Qe0KiiH/poKK29rPtWE8fMNL
- jgwvfId90DyJyJceh5HppsUbb83ZZpHvVfpk4y9pO1fDguJqf2z7nRWUyHC+UUQ=
-X-Gm-Gg: ASbGncu651su09SEzOmbLA2tcLTuuGz5Bto/cYjOGsdoDA0QM9Necqn96V/fcCbJHTU
- DGLUIdHU7MmgE3ldsiQxaGnbSoBWrdVQyy+TV9ymuj6VTjbIU7CXmzIRlz/GPqUOfSXhye7EGfY
- HF/s+EE/WNCFR3IRYOvqicScxux+0iWwCAXTMd9VQX00jUaqTotDxm3CHGfcBMnPBwl0r1su0fR
- 6bG2mvKCM8XK1u5bxvSjowg7fjl+I09x1jMRSzvhc39zw2TKt5bHsk=
-X-Google-Smtp-Source: AGHT+IFvtY44u5FPUs57d1KhslXwYF08GjUkib26yT7fK10NaunAh24VvFqnKExy6hdwEjvdFnSEJw==
-X-Received: by 2002:a05:622a:1996:b0:466:a584:69f8 with SMTP id
- d75a77b69052e-46c7107a481mr207339941cf.43.1736525857237; 
- Fri, 10 Jan 2025 08:17:37 -0800 (PST)
-Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46c873cc5c9sm10525261cf.52.2025.01.10.08.17.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 08:17:36 -0800 (PST)
-Date: Fri, 10 Jan 2025 10:17:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Dahl <ada@thorsis.com>,
- Alexander Kochetkov <al.kochet@gmail.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Cornelis <hugo.cornelis@essensium.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
-Message-ID: <20250110161732.GI3476@bill-the-cat>
-References: <20250106143229.3023771-1-sjg@chromium.org>
- <20250106143229.3023771-18-sjg@chromium.org>
- <20250108182528.GN3476@bill-the-cat>
- <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
- <20250109150954.GU3476@bill-the-cat>
- <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
- <20250109180817.GC3476@bill-the-cat>
- <CAFLszThn-XcHruFe60TH8FnsKsH08NFEco2zt+9JBHkneQgo0Q@mail.gmail.com>
+ bh=NwZlQhuq/jGyP2sDlLjjMtx0ytVEHiT9DtggRvZM7GA=;
+ b=J+05kbdj8wbKrnHYgHSLXcV0DNoLC3yTRN4o/iHcyRsOj5VipoOzZwQEO5fQazCs3X
+ R9W+x3xrT0fhEUB6FsmArTWYzpu/17pBs2TspWQqzuiU6/4LTxXyrUZfsfWZK9Lk2atT
+ N6tcGdIkZSMGxIi9EmKHkmDpYjbNyfi1EccChvA5rTmt8ddLQVEyTR4Yw3rEOV3VlOHy
+ VBCtaDWYF5b3pmdxUr/X8yZZC1lAhyiBPwX2HJxqoUjgczmK/2/xGftPOBOaYau00fGs
+ d3pSqaY3AmN/Z7MSAxYvuax/gYiIH0sodjbYDWg0LUpTkhZhvhZkXt92dBm0WHeKHjit
+ 5+Hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736527526; x=1737132326;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NwZlQhuq/jGyP2sDlLjjMtx0ytVEHiT9DtggRvZM7GA=;
+ b=XqGMTLEwHl1WuKus2UCZ1/Qm9BjymMzzb+ED56SgeRFcx1RkwAiaKD+MRx/Gu3L3fq
+ Kdb75d362cwTi0J7J4hNluv/FF82kHWlb9Giw9vLTHOIMMr6Wq8zefSxTlRYGGCXJtPX
+ Eal7uuksl6Y1rsSmBuDSaebZRZTDCha7C62V66/xNqo7Qcxe0yrS9ECKRIT5s8EqcXuw
+ xl1WON1KjLp+yFdWRogoUQJ1FNZbrDFLqpt3nQnCeZG1nqKFti3FkN4LTkLb4pf3F37h
+ zXjZskRrbYqgehd792gOEUf/mk9xxakhLSg6rDLRvFZvRKsvEU/eNyQNJeawu8CPzxlv
+ /QHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWd217vUK3E18JZ7c/SmhuxxcOrjFkRLIJkdOMBOSHPrOObobikAFHrNTSkbOqfs1nb2PGctuc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw5BtM+JgCqE7/Pn88aeo9BO79KQtMQyfY8kOfHg7ZU1dJRvLOm
+ mo/tX/tcQEzNBZw2FisvTcOSqv373XlODC6PuciyCFD0nwxrWjab+McxbO6AV5HKcsYaw2p6N9+
+ Kw56UvLe3+pXLdQTyH2yisWEqloI=
+X-Gm-Gg: ASbGnctqzIeD2YRaChx3t91uRknm+7OpnsO1W1PGZjVATjGzT31j+GQwmeMTXSJAb8l
+ lpFVE5IRqH/eg2fgpaVzol+hlxclS6sh/XVP6
+X-Google-Smtp-Source: AGHT+IGbV8NWjX+6AQKpizofpQscbC67SblJHQqJetF0dwug/D35cF3pJkaR+52Pn0OBpzqGEjYVUDuCvpSjj+qIbcE=
+X-Received: by 2002:a05:6512:10d4:b0:540:1be6:f15f with SMTP id
+ 2adb3069b0e04-5428444c0f4mr3916127e87.0.1736527525501; Fri, 10 Jan 2025
+ 08:45:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3beDTD9YfYlJwbJU"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThn-XcHruFe60TH8FnsKsH08NFEco2zt+9JBHkneQgo0Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250102161313.GP3476@bill-the-cat> <Z36DdfO_EH454Xdw@hera>
+ <CAOf5uwnODo9ZpBMDBi6LGG3Fx-cggiryDZ_mrrTEV+S9mx7s8g@mail.gmail.com>
+In-Reply-To: <CAOf5uwnODo9ZpBMDBi6LGG3Fx-cggiryDZ_mrrTEV+S9mx7s8g@mail.gmail.com>
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Fri, 10 Jan 2025 16:45:15 +0000
+X-Gm-Features: AbW1kvaupdfulz5t_fVwfsgfPqVJpV69p94OJPs3okCeo-T5_68LxWoLfSdQJdE
+Message-ID: <CAO5Uq5S9DraM5_R97VRqDumdOcTqLVOH4wdwBf9oQY3E6RmP2Q@mail.gmail.com>
+Subject: Re: Simon Glass's future with Das U-Boot project?
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ U-Boot-Denx <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,211 +95,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---3beDTD9YfYlJwbJU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jan 10, 2025 at 06:39:11AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 9 Jan 2025 at 11:08, Tom Rini <trini@konsulko.com> wrote:
+On Fri, Jan 10, 2025 at 3:51=E2=80=AFPM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi
+>
+> On Wed, Jan 8, 2025 at 2:54=E2=80=AFPM Ilias Apalodimas <ilias.apalodimas=
+@linaro.org>
+> wrote:
 > >
-> > On Thu, Jan 09, 2025 at 08:14:53AM -0700, Simon Glass wrote:
-> > > Hi Tom,
+> > Hi Tom,
+> >
+> > On Thu, Jan 02, 2025 at 10:13:13AM -0600, Tom Rini wrote:
+> > > Hey all,
 > > >
-> > > On Thu, 9 Jan 2025 at 08:10, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Thu, Jan 09, 2025 at 05:36:03AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Wed, 8 Jan 2025 at 11:25, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Mon, Jan 06, 2025 at 07:32:13AM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > This function uses separate arguments for data and size. Use =
-the new
-> > > > > > > abuf instead, so that they are paired and in one place. In so=
-me cases it
-> > > > > > > also saves an argument, thus potentially reducing code size.
-> > > > > >
-> > > > > > This is one of the commits that globally increases size in both=
- full
-> > > > > > U-Boot and SPL/etc.
-> > > > > >
-> > > > > > Is all of the "abuf" changes just a "tidy up" that increases th=
-e code a
-> > > > > > bit?
-> > > > >
-> > > > > Yes, a tidy-up which I hope will help overall. I have been thinki=
-ng
-> > > > > for a while of how to avoid having addr/size and ptr/size passed
-> > > > > everywhere. For now abuf seems to provide some sort of solution.
-> > > > >
-> > > > > I see this:
-> > > > >
-> > > > > 18: boot: Update fit_image_get_emb_data to use abuf
-> > > > >    aarch64: (for 1/1 boards) all +4.0 bss -24.0 spl/u-boot-spl:all
-> > > > > +16.0 spl/u-boot-spl:text +16.0 text +28.0
-> > > > >
-> > > > > so growth on firefly-rk3399 but not with rk3288. I am not sure if=
- the
-> > > > > growth will tail off as there are more users, though. We might ev=
-en be
-> > > > > able to be more clever with static inlines.
-> > > >
-> > > > Yeah, lets not do this now then and worry about some "clean up" lat=
-er
-> > > > when we can show that it does, or does not, improve size.
+> > > While I had hoped that the quiet of the last week or so had meant tha=
+t
+> > > things would perhaps return to how they had been before, Simon's larg=
+e
+> > > patch series and then comments on the TPM+bloblist patch have shown
+> > > otherwise.
 > > >
-> > > Oh.
-> > >
-> > > > And there's
-> > > > something wrong with your numbers:
-> > > > 01: Fix neighbor discovery ethernet address saving
-> > > >    aarch64:  w+   firefly-rk3399
-> > > > +(firefly-rk3399) Image 'simple-bin' is missing external blobs and =
-is non-functional: atf-bl31
-> > > > +(firefly-rk3399)
-> > > > +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (=
-atf-bl31):
-> > > > +(firefly-rk3399)    See the documentation for your board. You may =
-need to build ARM Trusted
-> > > > +(firefly-rk3399)    Firmware and build with BL31=3D/path/to/bl31.b=
-in
-> > > > +(firefly-rk3399) Image 'simple-bin' is missing optional external b=
-lobs but is still functional: tee-os
-> > > > +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (te=
-e-os):
-> > > > +(firefly-rk3399)    See the documentation for your board. You may =
-need to build Open Portable
-> > > > +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and bui=
-ld with TEE=3D/path/to/tee.bin
-> > > > +(firefly-rk3399) Some images are invalid
-> > > > 37: dm: core: Provide ofnode_find_subnode_unit()
-> > > >    aarch64: (for 1/1 boards) all +324.0 bss +32.0 spl/u-boot-spl:al=
-l +16.0 spl/u-boot-spl:text +16.0 text +292.0
-> > > >             firefly-rk3399 : all +324 bss +32 spl/u-boot-spl:all +1=
-6 spl/u-boot-spl:text +16 text +292
-> > > >                u-boot: add: 6/-1, grow: 4/-4 bytes: 516/-224 (292)
-> > > >                  function                                   old    =
- new   delta
-> > > >                  ofnode_name_eq_unit                          -    =
- 160    +160
-> > > >                  ofnode_find_subnode_unit                     -    =
- 116    +116
-> > > >                  fit_image_get_data                          80    =
- 176     +96
-> > > >                  fit_image_get_emb_data                       -    =
-  84     +84
-> > > >                  ofnode_write_prop                          224    =
- 236     +12
-> > > >                  ofnode_add_subnode                         232    =
- 244     +12
-> > > >                  abuf_init_const                              -    =
-  12     +12
-> > > >                  abuf_init                                    -    =
-  12     +12
-> > > >                  abuf_addr                                    -    =
-   8      +8
-> > > >                  fit_image_print                            780    =
- 784      +4
-> > > >                  image_locate_script                        696    =
- 692      -4
-> > > >                  fit_image_load                            1584    =
-1580      -4
-> > > >                  fit_image_verify                           176    =
- 164     -12
-> > > >                  ofnode_find_subnode                        140    =
- 116     -24
-> > > >                  fit_image_get_data_and_size                180    =
-   -    -180
-> > > >                spl-u-boot-spl: add: 3/-1, grow: 0/-1 bytes: 108/-92=
- (16)
-> > > >                  function                                   old    =
- new   delta
-> > > >                  fit_image_get_emb_data                       -    =
-  84     +84
-> > > >                  abuf_init_const                              -    =
-  12     +12
-> > > >                  abuf_init                                    -    =
-  12     +12
-> > > >                  load_simple_fit                            580    =
- 568     -12
-> > > >                  fit_image_get_data                          80    =
-   -     -80
-> > >
-> > > Yes, that's the whole series, so not related to this change.
+> > > At this point, I do not know how best to handle Simon's behavior,
+> > > without soliciting feedback in public first. At best he's created a
+> > > soft-fork of the project with his "sjg/master" branch. I've asked him
+> > > repeatedly to explain how he thinks this is all going to work out, in
+> > > public. I've had private conversations with him, but I want him to
 > >
-> > Yes, that's the whole series including this change, so it's related to
-> > this change.
->=20
-> Right, but it is due to ofnode_find_subnode(), etc.
->=20
-> >
-> > >  I elected to have two versions of ofnode_find_subnode() to avoid the
-> > > size growth in the previous version. But the cost is larger size
-> > > growth when OF_LIVE is used.
-> > >
-> > > Without OF_LIVE, the size growth is tiny.
-> >
-> > And even worse in SPL, somehow. But you want more OF_LIVE users, not
-> > less, yes?
->=20
-> Well, OF_LIVE is always quite a bit larger, at least at the moment. It
-> has both Linux's of_access stuff and libfdt. It's not OF_LIVE I am
-> bothered about, but I do want people using ofnode. Unfortunately
-> people still send patches which use libfdt directly.
->=20
-> >
-> > > So...what to do?
-> >
-> > Well, if you drop the abuf changes for now, SPL won't change at all for
-> > most platforms and that'll be an improvement.
->=20
-> Yes, I'll look at that. This is one of many examples where I have a
-> problem and realise that we need a nicer way of dealing with it, then
-> implement it in the series, but then the series loses focus. So then I
-> take it out again, then forget about it until next time, but I never
-> actually make the change.
+>
+> I have some private fork of the project and have some project that
+> implements
+> some features that are still not in the mainline. I think that forking
+> u-boot in general
+> is not a good idea.
 
-I hate to start to derail this, but refactor for "nicer code" is very
-much subjective. Especially when it also grows the code (and it's not
-clear that wider usage would result in shrinkage). So yes, this really
-needs to be put aside and also part of why I keep asking for one thing
-at a time.
+This (with honourable exceptions) is the SoC vendor model - in my
+current world I'm stuck on 2015 U-Boot for goodness sake... forking it
+is a terrible idea.
 
-> > And I'm going to keep complaining about size growth here because a
-> > non-trivial subset of users just wants things to boot quickly and be
-> > small.
->=20
-> Yes, you won't get any complaints from me on that. I did propose some
-> automated checking a few years back, but it never went anywhere.
+> > > But what's going on now is towards the worst end of
+> > > possible outcomes I think for the project itself. And by that I mean,
+> > > one prominent contributor steam-rolling over others and doing as the
+> > > please and implicitly acting as an authoritative voice for the projec=
+t.
+> >
+> > I personally don't want to pay attention to out of tree patches.
+> > Simon randomly responds to emails 'applied to sjg1/master' or something
+> > along those lines, which further complicates things as people might thi=
+nk
+> > their code got merged.
+> >
+>
+> Me too. I don't have that time and for the moment how the project is
+> progressive is fine.
+>
 
-It be great if buildman size comparison had some way to csv the output.
-That's what's missing imo from being able to have some automation or
-even just nicer tooling.
+Sitting on the sidelines mostly these days, when I dip in, then
+realising that I spent time reading a thread which isn't on code which
+is heading towards the mainline, is at best annoying and frankly a
+waste of time.
 
 --=20
-Tom
-
---3beDTD9YfYlJwbJU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeBSBQACgkQFHw5/5Y0
-tyw8fAv/X5zP9du0b+p+o4m5PohpnObT9DHfjW/B5KAd4n7lnJSc7YxofcLnHOAb
-KVUO/CNwzEGIwp+q930DkARozQJTkknL236ipzXXsBVwsJpx7kaNIXEWsLWY2rQg
-NJL/ZAk4j6iLjsaDbrFsf3K3wrjxlMCqtUM7UtQ2wyYcvoCOxuSZmL3PKd99jo2P
-GpkfAO+OpOo9QCg3LngBTdEMqlEtK27UjKwzfzaEXed2c2H+Ie6u+4DS3pM9O8UP
-N2g8taZJNfGCTHwDTQjYcoTDV/9GbmY2K8vkjgx++gBy8xe83s1AmN+TuJu7ofpA
-usuGUPITUPe5POOCreHWvTzYdqKcSVPHF4pHaudkl3wIGrqtKW8FHJeJqdVdK6Sf
-d5FsHEYfdo0C83R4vLWDtvK8ECtGQcVXp8pFpmlfUm/nDRSfFFtcsgnu6p5k8/Gy
-Sv02+X8M296ycotYfloyQgueOIjUQGme6DvHgC470TKyT3dkce7PGXy1uIMNv8T1
-v8TQ/12V
-=UL1v
------END PGP SIGNATURE-----
-
---3beDTD9YfYlJwbJU--
+Alex Kiernan
