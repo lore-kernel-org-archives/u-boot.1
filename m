@@ -4,81 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB42E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 11:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E28EE77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 12:35:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14DBF801F5;
-	Fri, 10 Jan 2025 12:55:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5F72A805EA;
+	Fri, 10 Jan 2025 13:35:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fQVlagnU";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="LvjHo0e3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4A388036B; Fri, 10 Jan 2025 12:55:18 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 0F6538061B; Fri, 10 Jan 2025 13:35:57 +0100 (CET)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20727.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::727])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4D0B800D0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 12:55:16 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1736510116; x=1737114916; i=xypron.glpk@gmx.de;
- bh=QNU9MXVT8ACXDZ26Fr4STB+pDewxi1nCDv7TAoAPXkw=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:Cc:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=fQVlagnUJctLQZE+RbqWl3x6yN68IeW8SUNxtK8sUVLboIAcCdn1E3kt3YisF1p8
- oMMMxiUrJ2DEyLgLlQUatHOvI8UiaVI9yEAfCtJlLUaGA2L4xbsKhQNN0hjjZxuCp
- pZIsXYSpBc5sgIKNUDeTFWg2zcg9XA2cd7tV6TRe6cgqYGTQ6fflzlr6uqnGBX2sC
- JdRCp2kqEmq1fxdhk02X9E53/+6Y07hTQeBVgS5z4Ly9ihbVsAJpCQuj5lPhsqwv8
- SxETpKPo5trxXiF6GnWC4AEfpbKTd9Wh/AZgrEIuTI4UYP4khy53iABB0qooQbx9S
- 62wvYvjP+LWm/D+3BA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MqJm5-1tAgMR0kWx-00ZXIC; Fri, 10
- Jan 2025 12:55:16 +0100
-Message-ID: <977fc27a-3a5f-4e11-b81c-4e18569b083a@gmx.de>
-Date: Fri, 10 Jan 2025 12:55:09 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 089D98036B
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 13:35:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rTqdU9Ycw04wCUG881GUWc/kt8TM7grKroRfV/TcOa7J1WpY4EMTKq4284Ty67Py3QTLCcWkcIRCJ59AbuQqtWGIQak3P2WvadFbOKQ7H2s3V43Sq2jI9u+3ZltToglw+HFNIOV9wx3DkqS3nBsJXgTq1ey6Mh3or4S56iJnr2jfrVCK3Q2kasCVh+2hYOjmCPtX75e/UidStJ5OpVIR1pO8egYS5qdkfgKPonaX09uN9oTqP+lkug468IX4i+EqqaDv4N0A5hm8KNQp+kZqYOXYDtUS8WbXdQFy/Yaa6YJsVegxC6Pp8kbrpFz+UNY6OWJIxgHB1sRThXLBA5zgGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mnnmoYPrqt83H1XIb0KuVwKpjGehoiG+u7MSI/tmpWs=;
+ b=UuUgmNx7HUjJoEceqAuCVTcGuUVZOXubjfiI9N3OAlNUJeSTo7EJY2kYc6HfnDbnxZoFEtQfHNewoW/KdAH+YEev1LJU8qi8dyG79B/Uq/fu3nGnVOcP4ssjuIRko/MWhXiyZN/+qQOpf670L7JAxvru4y6AByb+vhQNUwEi5G9rma9n0148/DFiaZU75ptRUeKg67tr+1Af5LfnKACUD6dQn//gExW24ewi4RSIT1zSiGbHgCkVA/shWSLTH9Z9hLHe628uMdRC19cbFiOiNsqe6z3NiawEyVnVsbQoFH4jRR4gRT8IQTYDpXR9R2yaeNYKeovkjmyUOZzY8ZxdfQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=gateworks.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mnnmoYPrqt83H1XIb0KuVwKpjGehoiG+u7MSI/tmpWs=;
+ b=LvjHo0e3sPaAshojxS0qYV5R9Ex6rZ4twgM9HzZdaRwg7RjjCHMqjNc1yFQg78WbYvHhHLKpOfquWC5vZWNGfpSalfzpazg5mw38EPJxX4i5tMrr6C8+CyW90+lyc0BOAyaOeOJXzbWt1c0g1CSo9XoZSP9lnrr6O9/RatgxWBYMV31fmvU59zmrwShTFsikkjBPvt8za05+Qb+MaxBb9cLyoXZWJlrqw9uUPDLudfZABnntfO+IEXWTuKL1K2HCcLKQ/JzQ/9MRD73mB+Fm7x2BRL8Dzz/6cckYfhsR+mdDqV+J69dHzCocNJousc2wuH0YvdRIT3IiLM/pZwV7oQ==
+Received: from PA7P264CA0140.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:377::18)
+ by AS4P195MB1886.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:576::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.11; Fri, 10 Jan
+ 2025 12:35:53 +0000
+Received: from AM4PEPF00027A65.eurprd04.prod.outlook.com
+ (2603:10a6:102:377:cafe::43) by PA7P264CA0140.outlook.office365.com
+ (2603:10a6:102:377::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8335.12 via Frontend Transport; Fri,
+ 10 Jan 2025 12:35:53 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ AM4PEPF00027A65.mail.protection.outlook.com (10.167.16.86) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8335.7 via Frontend Transport; Fri, 10 Jan 2025 12:35:53 +0000
+Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Fri, 10 Jan
+ 2025 13:35:50 +0100
+Received: from lws-moog.phytec.de (172.25.32.31) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Fri, 10 Jan
+ 2025 13:35:50 +0100
+From: Yannic Moog <y.moog@phytec.de>
+Date: Fri, 10 Jan 2025 13:35:35 +0100
+Subject: [PATCH v3 3/6] imx8mm-phygate-tauri-l_defconfig: add optee load
+ address
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Kconfig: Add a default cache line size for RISC-V
-To: Yu-Chien Peter Lin <peter.lin@sifive.com>
-References: <20250110085308.20760-1-peter.lin@sifive.com>
-Content-Language: en-US
-Cc: zong.li@sifive.com, greentime.hu@sifive.com, ycliang@andestech.com,
- trini@konsulko.com, sjg@chromium.org, jiaxun.yang@flygoat.com,
- u-boot@lists.denx.de, Rick Chen <rick@andestech.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250110085308.20760-1-peter.lin@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:gIhftMb4Yoa1Igd7V2DUUyeCjX836Xbic7HYSsK9irazblpCB8M
- upZjvabbAy/83rfDL0NjZBT7rH/cidI7weJFV/7Rd5IZQCGil6FFbVDcPZDapBrnkz8sPfb
- P3Qym052EihTwgWCH0/kB8QcOe9mNVxwRxpjPttL1CWDKDcTNnCa5cvZtKwVLAOIXj9ihdV
- gHxskXJwBXn/rZLr2kO1g==
-UI-OutboundReport: notjunk:1;M01:P0:y4aMBcBIO+Q=;F3aQb6ji6M4SfDcsTGRrBWiBP7v
- MDlolZCdKmuBor7NODVoXFnK/wKT59gVHubUZ/pDCogCQOvAKpjmuuVUw/NOwbV3YrRbz/VXR
- O5b/kaxJ4aLo9d3eVeAPmhZFeuVaTztMYgwD5PKEa1weJLM7576hrRyND041um6VtTHyU9Crg
- c8jLJ+IP9x8fEQQ8YSo8d/qUdUKttfSQLQi4cAFivjpKHinwZ6jauzLuo3RG3rCM5f8SOrNnh
- rH/I0vHoSVFRPdU2Ja+CAQwkJlMPU5kg4U3xNQxbbNlKnaEkrUElpRYTQG4rH1jw66i3+RAHA
- wCy/z8NmaJ6Tlv3fEiqaB741sxNGGl1M8bYokrr3hYJ9hHeQ4eGLDkXEy9joKhjxp/S8uQhpH
- nEMTcjAkpPE0HDg0xOvlBqKlEHTrvmq81CvgxVRvFXPR6hz4zkvBO48nXSQiEZl/rKpI+QhQr
- iVxW9er6N+xo58n/WFjgMsp5JF/TDoXDpNhO5OaxVQiVYUMuuaHJOx80GPRK6EUUAxtDZm4zO
- Z8P+kSgE6uxRYRLRmcbBFwaKbPupbhKWKbTkYqY//XHPVXl+aesb9769v2SeZDdF1QE02ETuo
- qICDUyVPJ5jGnC792O3ROWF69qF4m3vpB1UPWgCPMiKt8XegU/MWOvZXAkTieaV78SsRMLdXc
- 8WFyUETeb3oel2dN9tHjI+5d/FIFTtgvCyB5mv9Salm7u1LpWLLpv5C+chRmPHqubALFRvRGB
- 9WXXVFr+AsmFWFxHBGSd+LLhlHashclQToN8cyDlcUhGHXLfYhQrT7nt3pDJvGY7w/VQzYfb9
- MhGDARjF9i5uzLkWfsq1azGXxPlHbqnkWmOrkwr5ccDo9HDYGtJt7zJSk3JxiyLKvimqv3ESO
- Lx7n4qM8m613NoZsWVYNNoOg71NevPtqkSQyDQV7LK88N1CiHQunD/+3gdcpUZwfQ8/mFuLL2
- k3gnGFdPbfaMFHJbwPuS4Pvad1ECvQzLGkAX8re5VnYnZisB/f5Ptu4W3xEiGBOKw9xYsTWrc
- OiznFPqF5U2IDmIID9LNwWO0KD47tqPtbhwJJdl3SUd/kY1i9GqCkIFvONec21MNuV+tL9Itr
- l1HGEEv2h0bXoKviAj9H/Z/qM5UCPO
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20250110-phytec_imx8m_optee-v3-3-6c39dab15592@phytec.de>
+References: <20250110-phytec_imx8m_optee-v3-0-6c39dab15592@phytec.de>
+In-Reply-To: <20250110-phytec_imx8m_optee-v3-0-6c39dab15592@phytec.de>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, "NXP
+ i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
+CC: Tim Harvey <tharvey@gateworks.com>, Manuel Traut <manut@mecka.net>,
+ Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>,
+ Yashwanth Varakala <y.varakala@phytec.de>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>, Yannic Moog <y.moog@phytec.de>
+X-Mailer: b4 0.14.1
+X-Originating-IP: [172.25.32.31]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Berlix.phytec.de
+ (172.25.0.12)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM4PEPF00027A65:EE_|AS4P195MB1886:EE_
+X-MS-Office365-Filtering-Correlation-Id: 73e56f8c-1f56-4da5-be8e-08dd31735295
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?M1BFNGpwTVZGK2ZMMW1QOXhNb0RnbzRHUlZ2M0pFY21GVitzU3pPeXoraUwr?=
+ =?utf-8?B?Y2dUT0dqY3VXb1JFdUdUenF6RHduanU1b28wL1EyOXJJQ0RET3BVeVh4YW4r?=
+ =?utf-8?B?ZzVZMklSemJqQndCZmFUMDlQc3phQWtrR3ZXdkNvVVJZSkRDNkJlQmgwUDFj?=
+ =?utf-8?B?Rlk5UUt3by9OVnU4QXhZcGRrL0hWdVRLeFB3UC9GTzYwdDEzUElxWnZ2MUdE?=
+ =?utf-8?B?MFlaRUprZGdWN3N2SDZSeFNzQldEL3ptM2J3a0orc3UyaythVk1jK2R3akJj?=
+ =?utf-8?B?T3dMdXhMNWFKU2oyZUNhdk1aSlc1UW9JemVIMXNXUGR5MktlZ1N0dFJNLzZL?=
+ =?utf-8?B?cXFuL05NRTduZ2trRTRYWmJJbERWUkkyajlKMXlMNy82OXBCSlZKYWcrQWd2?=
+ =?utf-8?B?OENxMHVDdml6d3ljb04yLzRLTytGeW5VN25kdmw1T0RWQXp6WW1kMnpOK2Q5?=
+ =?utf-8?B?cXBDWkxENExZWkFvS3dHOW5PWUQybDExSUs4a21iTzdCTlNNK3V2VGJPUUpv?=
+ =?utf-8?B?TkFZZ2xmcUFGZjJEM1hZQkN1UGRIeWF2WVdkeXNjdllaUHRJTDhuWGswV1A3?=
+ =?utf-8?B?R0Z6WDREWGxQZTA4UUFMY0pZb0pzMDZFVDl6Wi9pM3M4N2ZHTThwUDdJampJ?=
+ =?utf-8?B?V2duTXpMUkM4dXBySytTNldEOEVrOE9uU2ZDdUt6RTVGUVdOVXExM3RzZkZi?=
+ =?utf-8?B?MjBPWWtXNVBBVWcrT2VwaWw5Q1hCWDllNjN2djBoOWNseTZhbFhvWDRJNVJO?=
+ =?utf-8?B?TEcwZlNuZDg4dXV0Q0NXSG1JdTVoYmh5L2xqY05hbkJ5bC9HV3NuRHBJZXlQ?=
+ =?utf-8?B?ZnVwT0wrK2xSTVBnVGRKZTduNzdjZG44TmhHeUZHeWQxdnBnMXFTclVwc2dZ?=
+ =?utf-8?B?NDJHYlBzcStUUWYrbzE2NDh0eEh2aGFlT3JCdndsby9hTFN6NXZQNkN5R0kr?=
+ =?utf-8?B?SUducE5aMU11WnJ1NVZtSzlrc3JyNDhaRnc0S2hLTXdKenI3cGtDaU1jZk82?=
+ =?utf-8?B?bk5qeUVJVzZBUDlxTHErRTZVMVpUbitsNUJOcG45RTREcklLeEFydWNGUVp4?=
+ =?utf-8?B?T1VKRUdaRWgwcy9PZE8zc1ZQWUpONUJFN0E3L2szckszTlZFaFVBbmFldzIx?=
+ =?utf-8?B?elJ5WDVveXB1ak0xelJ3ZUlGN21icU1hZmNHZ1RvSXNmb3FEVFpPOFFYcVVE?=
+ =?utf-8?B?QStsaUFxMUIyc1Iwa05FUWMybk5KTEVITXdEdnROT1grcW42d0dGa1hLVk5F?=
+ =?utf-8?B?czhacHhicWY0Rk8rWTZWZVhKVDhOcG5XeVcwajlqalFKRmZQdjBSNWQ3bW9v?=
+ =?utf-8?B?djFIamNOVzYxR2p4M3BaZm1BaEl0Q1U0dmdjcmZyZmx5U2M0REVORlFZSkxt?=
+ =?utf-8?B?U0xseTZsaFJaalJVRlZyWE9KTmp2RG5nTlV1dTIrQU9LZVU1QUlCUmVucDNt?=
+ =?utf-8?B?YnUvbm5sVk9Eb09HSldKUXFMNzBwZDgvR2JkZXVpL05TMDE4MTBVVDdFbUVH?=
+ =?utf-8?B?bnFMSUhCUW1xTzIwajFQbk55cmhnNElWMWVRZkcrS1J5N0lKcXRMZWF3R2kx?=
+ =?utf-8?B?bG85aW9WcGlQdGVPM2Jta0tTV3dTdzRHQStBREx5SmVlR0paRmlWWG5HSk5P?=
+ =?utf-8?B?Mm5halkwTmswREFGNjZQOURNVkVlWTJXRXB2VFE2cENNbGl0YXdmd2RmRFB3?=
+ =?utf-8?B?M2xoMTNmQWJNdFdJVFhCc2NPbTRVaUwrQ3JkQnhpcVdEUzRzZWI4ZXo3RUJG?=
+ =?utf-8?B?TUY4Q0FvbU52T3NPQTk2MElWNFJCa2ZBUi8vNVlTVHZScGRPcXFZT2FwYmkz?=
+ =?utf-8?B?WU01MEQ4MTJVbW9Xd1NTSzJCZkhBSjZjdTdjcEwyb0I4SXRkNGJoSStua3Np?=
+ =?utf-8?B?eG04eVFTVlRyVFl3WThNZXNmYXhEUXBLMzhBWE00R0ZVdEIvdHdrN0hvRmpo?=
+ =?utf-8?B?ZVVkOXRMTDdFOWQ4dEUxRitmTzFwalBkTURNOHRGcTUyOVpkeDFPV2pwanBo?=
+ =?utf-8?Q?wNjy4vp5M70g6OPf5G3PXYxHz7Bm0U=3D?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2025 12:35:53.2711 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73e56f8c-1f56-4da5-be8e-08dd31735295
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A65.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4P195MB1886
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,56 +161,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10.01.25 09:53, Yu-Chien Peter Lin wrote:
-> Some RISC-V platforms do not define the d-cache line size
-> through SYS_CACHE_SHIFT_n. Set a default value of 64 bytes
-> for such cases.
->
-> Signed-off-by: Yu-Chien Peter Lin <peter.lin@sifive.com>
+The phyGATE-Tauri-L expects 0x56000000 address to load optee.
 
-You might want to add the following sentence to the commit message to
-make it clear from where you took the 64 byte default value:
+Signed-off-by: Yannic Moog <y.moog@phytec.de>
+---
+ configs/imx8mm-phygate-tauri-l_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-The RISC-V ISA profile RVA23U64 requires extension Zic64b (Cache blocks
-must be 64 bytes in size, naturally aligned in the address space).
+diff --git a/configs/imx8mm-phygate-tauri-l_defconfig b/configs/imx8mm-phygate-tauri-l_defconfig
+index 18fffa7405e..c87062404da 100644
+--- a/configs/imx8mm-phygate-tauri-l_defconfig
++++ b/configs/imx8mm-phygate-tauri-l_defconfig
+@@ -5,6 +5,7 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
+ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_IMX8M_OPTEE_LOAD_ADDR=0x56000000
+ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x3C0000
+ CONFIG_DM_GPIO=y
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-CCing Rick as co-maintainer of RISC-V.
-
-> ---
-> This patch resolves compilation errors that occurs when
-> the TEE driver is enabled:
->
->    drivers/tee/tee-uclass.c:247:41: error: 'CONFIG_SYS_CACHELINE_SIZE' u=
-ndeclared (first use in this function); did you mean 'CONFIG_SYS_CBSIZE'?
->      247 |                                         CONFIG_SYS_CACHELINE_=
-SIZE);
->          |                                         ^~~~~~~~~~~~~~~~~~~~~=
-~~~~
->    drivers/tee/optee/core.c: In function 'flush_shm_dcache':
->    drivers/tee/optee/core.c:505:50: error: 'CONFIG_SYS_CACHELINE_SIZE' u=
-ndeclared (first use in this function); did you mean 'CONFIG_SYS_CBSIZE'?
->      505 |         flush_dcache_range(rounddown((ulong)arg, CONFIG_SYS_C=
-ACHELINE_SIZE),
->          |                                                  ^~~~~~~~~~~~=
-~~~~~~~~~~~~~
-> ---
->   arch/Kconfig | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/Kconfig b/arch/Kconfig
-> index bb2e7bedd10..b0190b1f415 100644
-> --- a/arch/Kconfig
-> +++ b/arch/Kconfig
-> @@ -52,7 +52,8 @@ config SYS_CACHELINE_SIZE
->   	default 64 if SYS_CACHE_SHIFT_6
->   	default 32 if SYS_CACHE_SHIFT_5
->   	default 16 if SYS_CACHE_SHIFT_4
-> -	# Fall-back for MIPS
-> +	# Fall-back for MIPS and RISC-V
-> +	default 64 if RISCV
->   	default 32 if MIPS
->
->   config LINKER_LIST_ALIGN
+-- 
+2.43.0
 
