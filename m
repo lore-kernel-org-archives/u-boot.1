@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7745AE77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 14:54:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88581E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 14:54:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFE428036B;
-	Fri, 10 Jan 2025 15:54:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FB02805E9;
+	Fri, 10 Jan 2025 15:54:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jLaU/SIX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W/QpFyw0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19943805E9; Fri, 10 Jan 2025 15:54:21 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 47E6380602; Fri, 10 Jan 2025 15:54:35 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8351801F5
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 15:54:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E92E1801F5
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 15:54:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5d7e3f1fdafso4205700a12.0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 06:54:18 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f57582a2so6170065a12.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 06:54:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736520858; x=1737125658; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736520872; x=1737125672; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=l2v64/jmMxkBRwv9KSPIp8M7bWgYPRwflTzV3rpisSg=;
- b=jLaU/SIXIpV1oGw11DqiXDJvUUYUYAIxsQE+Ur6uprKo3WEKgkyc+5ViipED2yKBxx
- Bh9/vXWSmww47kRoS3AkLbgweQjXox8OEMwTKfsQvhtl4fPNi6hjDbY0gPdnNubA14KN
- 414fC3QQy7GEZeA8xNlOwJrGzL5uy2BYKEV3Y=
+ bh=IreOfaL/wD22Y18lZyF7Wo6SaLX7pyOqaP6EZJ2hqqA=;
+ b=W/QpFyw06TQhYqqpAs7+cmCp7fYgdO5CUrP8kqme3vm4VWU0JQpNK5b2tescYkWYfQ
+ MyUir9I81sUZUedRA3d0dbI6yzMFJMdulrCUAwbC3Xd6byFhLgutB1h3Ta68MVgWZ0bM
+ EHnYxu3utTGhAEVepD1BtTdm/E5l14EU+H60g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736520858; x=1737125658;
+ d=1e100.net; s=20230601; t=1736520872; x=1737125672;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=l2v64/jmMxkBRwv9KSPIp8M7bWgYPRwflTzV3rpisSg=;
- b=v99s3cVMat1bOUEEsN1gqTMwnqeU9sBGtVt9q+Brg76SqOjUqKF4FOmoY2zqbM/cJy
- zRcws50y66VOeW2gm366YHJZ9JcaAGFHJS3yM0sY69gm+IHQUWTlTX1f0YG3sN1Kuxk8
- WgNRPZG5Kd02fbhOsC/UUCFO5RK6Zt3S/0CTlCO0mOj89XEe8hdgUoa7w7EO1cVQb5eQ
- 8+26s6/4eZEKvMcF8iJY/PMXF9QkZgl0g0QZHlB/rU1maUp7m7ijM5Bl6SpETkcH7Rt0
- xjN5LBjTsjN8k+7oO63qiH90OnykDH06z0ZMXMLxCG3Xqio1DWnYS8AHKczPZIK7pGs+
- 3Uzw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUxyfbyKUl3P0Qi4m80NkhjoxkLKQpsZSfVoWLocfsOlqLt3f7YXrha7PvKJBBsOITVReT3fEA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxm/H5U26bIugdJxRT0w9yNTC0+ijdrU3vnVGA/KeFxcskbzpzE
- FJykFe92O5UivQpAf0D0+K24/kaIQUbS0+OFPOoXKkD+PA9tjl9qf/JBg7bPwmciSpDuIdAUubn
- 96XAYY2jj+CeTjiqwMwHdK5Z5vy5uEA49l/Aj
-X-Gm-Gg: ASbGnctZ2O/CMkOMuiov84Lzh/KWwq7WjjMZ3xuFARr6l/NMKiJb5uTxeyI5c3ldmkM
- GQDCjHL4+9qwy6sGBO0UtGtR/fPhhRx7f+Q9LXTc=
-X-Google-Smtp-Source: AGHT+IHnU7Xk0Bfq4Co0/mSJxxCOWkC7KeBKjXkNznzomsZqymnswdjQafPBHAQE0Y8JWSxZQoqNFnv3FXFtH8eYDz4=
-X-Received: by 2002:a17:907:7ea2:b0:aa6:7737:1991 with SMTP id
- a640c23a62f3a-ab2ab16a902mr1004253866b.2.1736520858239; Fri, 10 Jan 2025
- 06:54:18 -0800 (PST)
+ bh=IreOfaL/wD22Y18lZyF7Wo6SaLX7pyOqaP6EZJ2hqqA=;
+ b=Y6e3rOcKfHnrH4JBD9eP2Fb40WOBfu8vJXsnX9bY3SlJCT5PEVmL+DXwg+6iD1Yi75
+ 3edsbxbkLSSlZeAb30tFvRCdVrO664fAMRBa+X7qf4Fmzh0cxc7IxQF/wSfpmn7+O+Lg
+ cSRvBoM7LWgkwbU2dnxwB1slmBm6+4soSR2Bd8rFj409plwXAE2uesVoFYwDJH9w5X2K
+ Ni4CVyte3t37Xq+vwSzu2ghESBzmOTDfeHri3629t6wDmLd/2pSJmh5LnvvH3g83avfk
+ htNPCmgrQjsdLsyymakVg0iP5uItHmCh7nt6eNaFh8C3Vzav1QC491MRervnX/dosCYy
+ pkjQ==
+X-Gm-Message-State: AOJu0YyzYhJr6gIbLFRSMSEUEiZCrUtalN+T4T7dDsSplFboKgUp7UCf
+ t4cEM0XQfohwt+7VmKpaVpFuXqiZRXrcU1qHW6rsMbzhqcN7HAtiPuUtOcj2bAwIE2EXArf0ou2
+ nx3NoV5g3/se7zAz+BR6teYjaKHfJXKD9Fxdu
+X-Gm-Gg: ASbGncv3eeOfcnLnOw0vm2cpSukuBT3Xbz+xXBu4NgS8lkztJ9PYplj8Oc9enhsSJTV
+ 4pM6ssuI3HNOTdFsDcUTsQR6iRpE1WWQ5iNHW9mU=
+X-Google-Smtp-Source: AGHT+IGQhkmxqJf2sxiBookeb/IIbhV+R3ZaUdntc6O7B1wF0Pe66VzjAEIUM81Jpi9SeOix3S1GiTSExK+utpH+KVU=
+X-Received: by 2002:a17:906:f5aa:b0:aa6:945c:4531 with SMTP id
+ a640c23a62f3a-ab2c3c5c93dmr740226266b.7.1736520872415; Fri, 10 Jan 2025
+ 06:54:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20241206173033.2403998-1-adriano.cordova@canonical.com>
- <20241206173033.2403998-2-adriano.cordova@canonical.com>
- <9cc4a4e0-1a80-4bdc-9fd7-a04260ff7cb7@gmx.de>
- <CAFLszTiH9+avmapq8CEEr-tqybP9mWZGzqp52mVHsM87FGTfhw@mail.gmail.com>
- <CAC_iWjKmzfbWGD3URheJS4w0Bhr8K_Unwi0KpFV56b4gwwO3pg@mail.gmail.com>
-In-Reply-To: <CAC_iWjKmzfbWGD3URheJS4w0Bhr8K_Unwi0KpFV56b4gwwO3pg@mail.gmail.com>
+References: <20250101195817.995321-1-sjg@chromium.org>
+ <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
+ <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
+In-Reply-To: <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Jan 2025 07:54:06 -0700
-X-Gm-Features: AbW1kvaWCUg2A28Q6WcB-zyGduFgoz4OpimdRh-rZjPztWeTM07_mfIGr-vcivg
-Message-ID: <CAFLszTgkL4o6OoL_dMC45JmCc=YMroFUiLc2BbM8FYgKfSkRSQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] efi_loader: efi_setup: Add efi_start_obj_list() to
- efi_setup.c
+Date: Fri, 10 Jan 2025 07:54:19 -0700
+X-Gm-Features: AbW1kvYXWqvBF07Ut2avHBXJj-0Op4CTYly82Wu0flPRvZ9xsslRt76vgrIw9eU
+Message-ID: <CAFLszTiXHKdf_QUUsWpQpwv69HSGPNknkDW4JHgRUfT0r_G-aA@mail.gmail.com>
+Subject: Re: [PATCH] bloblist: Drop BSD license
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Adriano Cordova <adrianox@gmail.com>, joe.hershberger@ni.com, 
- rfried.dev@gmail.com, jerome.forissier@linaro.org, trini@konsulko.com, 
- Adriano Cordova <adriano.cordova@canonical.com>, u-boot@lists.denx.de
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,103 +88,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi again Ilias,
 
-On Fri, 10 Jan 2025 at 07:15, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 2 Jan 2025 at 18:41, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Simon,
+> Hi Ilias,
 >
-> On Fri, 10 Jan 2025 at 15:41, Simon Glass <sjg@chromium.org> wrote:
+> On Fri, 3 Jan 2025 at 08:15, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > Hi Heinrich,
 > >
-> > On Fri, 3 Jan 2025 at 12:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > On 06.12.24 18:30, Adriano Cordova wrote:
-> > > > The command bootefi calls efi_init_obj_list to do the efi set up
-> > > > before launching an .efi payload, but efi_init_obj_list is called
-> > > > only once. There are some initializations which depend on the
-> > > > environment and should be done each time a payload gets launched and
-> > > > not only once and can now be done in efi_start_obj_list(). A motivation
-> > > > for this change is the following order of events:
-> > > >
-> > > > 1. Launch an EFI application (e.g. bootefi hello)
-> > > > 2. Change the ip address
-> > > > 3. Launch another application which uses the pxe protocol
-> > >
-> > > Hello Adriano,
-> > >
-> > > Thanks for addressing this issue.
-> > >
-> > > There are a number of events that can lead to updating the IP address:
-> > >
-> > > * EFI_PXE_BASE_CODE_PROTOCOL.Dhcp()
-> > > * EFI_PXE_BASE_CODE_PROTOCOL.SetStationIp()
-> > > * EFI_HTTP_PROTOCOL.Configure()
-> > > * command set env ethaddr#
-> > > * command dhcp
-> > >
-> > > All of these events require:
-> > >
-> > > * Updating the relevant ethaddr* variable.
-> > > * Updating any other references to the IP address.
-> > >
-> > > When not only considering EFI applications but also EFI drivers
-> > > installed via the bootefi command all of these events can occur during
-> > > the runtime of EFI binaries.
-> > >
-> > > Function efi_init_obj_list() is used for setups that are needed only
-> > > once before accessing the UEFI sub-system. It is not able to handle events.
-> > >
-> > > If we need to update any internal UEFI data structures, we should do
-> > > this instantaneously when the event occurs and not when executing a UEFI
-> > > related shell command.
-> > >
-> > > U-Boot already has callbacks invoked when variables are changed. These
-> > > are set up with U_BOOT_ENV_CALLBACK(). There is even a command 'env
-> > > callbacks' to list these callbacks.
-> > >
-> > > You could define a new function to handle changes of the IP address and
-> > > invoke it via U_BOOT_ENV_CALLBACK(ipaddr, <function name>) or
-> > > U_BOOT_ENV_CALLBACK(netmask, <function name>).
-> > >
-> > > With lwIP we can have multiple network interfaces. Each has a different
-> > > variable ipaddr# assigned to it. We will have to extend the concept of
-> > > U_BOOT_ENV_CALLBACK() to allow for wildcard matches by adjusting
-> > > find_env_callback(). With CONFIG_REGEX=y regular expressions could be
-> > > used for this purpose (cf. include/slre.h) but we should better avoid
-> > > the code size increase.
-> > >
+> > Apologies for the formatting, replying on mobile.
 > >
-> > I have been saying for some time that EFI_LOADER should make use of
-> > U-Boot's existing tables, rather than creating its own duplicate ones
-> > with extra info.
+> > On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Linaro has decided to write their own version of bloblist from scratch,
+> >> so there is no point in having a non-GPL license on this file. Change
+> >> it, to better fit with the U-Boot project.
 > >
-> > This seems to have been understood as 'hang the EFI tables onto
-> > existing data structures', e.g. efi_disk_create_part(). But this leads
-> > to duplication.
 > >
-> > Perhaps the EFI_LOADER init should be quite small, and be done each
-> > time an app starts, to deal with the 'current' state of U-Boot?
+> > Apart from the commit message being wrong, it's also intentionally provoking. There was no bloblist in TF-A.
+> >
+> > The TF-A code is implementing the firmware hand-off spec [0], which Linaro participated in the creation. The U-Boot implementation was adjusted to adhere to the same spec after the TF-A code was merged.
 >
-> That would break all the command line tools that use the EFI subsystem
-> -- e.g printenv -e, efidebug, eficonfig etc
+> The U-Boot series was [1], for reference. This was mostly about using
+> different tags and shrinking the headers. My clear understanding was
+> that we were going to try to have a single codebase, which is why I
+> changed the license.
+>
+> So, since you have a different view of events, why did Linaro write it
+> from scratch? Was it to avoid having U-Boot code in TF-A? Or was the
+> author just unaware of the original intention? It isn't relevant for
+> the commit message, but if you can find out I would be interested.
 
-Obviously we would not do it in such a way as to break anything! I'm
-not quite sure if that is was a serious comment, or just a reminder
-that we should not break things?
+Just following up on this as I'm not sure of the status of this patch.
+Can you perhaps write your own commit message with your version of
+what Linaro has done?
 
-As a very simple example, somewhat unrelated to this patch, rather
-than maintaining its own efi_cout_modes[], it could make use of
-U-Boot's information.
 
-There is quite a bit of effort involved in maintaining two separate
-states. It started from a design to run independently of driver model
-(which was a mistake), but has since become common in many areas. It
-means that a special, heavyweight 'init' has to be done and we need to
-pick when that is done and how to update it later. We should chart a
-slightly different course and chip away at this problem.
-
-Regards,
-Simon
+>
+> [..]
+>
+> Regards,
+> Simon
+>
+> > [0] https://github.com/FirmwareHandoff/firmware_handoff
+> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=387200&state=*
