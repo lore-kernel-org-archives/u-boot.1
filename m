@@ -4,60 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF04E7719A
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 00:40:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37912E7719A
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 00:54:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EE6E800C2;
-	Fri, 10 Jan 2025 01:40:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8688A800C2;
+	Fri, 10 Jan 2025 01:54:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="EXxw373p";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="CKlmhDr5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A21A80196; Fri, 10 Jan 2025 01:40:45 +0100 (CET)
-Received: from mail-m49228.qiye.163.com (mail-m49228.qiye.163.com
- [45.254.49.228])
+ id DBF4D80196; Fri, 10 Jan 2025 01:54:31 +0100 (CET)
+Received: from mail-m60192.netease.com (mail-m60192.netease.com
+ [210.79.60.192])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A622F8001F
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 01:40:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43EAB8001F
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 01:54:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 84493da9;
- Fri, 10 Jan 2025 08:40:36 +0800 (GMT+08:00)
-Message-ID: <b93e650c-f6f2-4a9a-ba2d-f155b9cda69a@rock-chips.com>
-Date: Fri, 10 Jan 2025 08:40:36 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 844cd4d2;
+ Fri, 10 Jan 2025 08:54:24 +0800 (GMT+08:00)
+Message-ID: <a1b48fbd-6870-42e0-a9c9-9617a0ee2d01@rock-chips.com>
+Date: Fri, 10 Jan 2025 08:54:23 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3588-nanopc-t6-lts: Add missing board
- -u-boot.dtsi
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Ricardo Pardini <ricardo@pardini.net>, u-boot@lists.denx.de
-References: <20250106182232.3741304-1-jonas@kwiboo.se>
+Subject: Re: [PATCH 09/20] rockchip: mkimage: Add rk3576 support
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Heiko Stuebner <heiko@sntech.de>, sjg@chromium.org, philipp.tomsich@vrull.eu
+Cc: lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
+ jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jonas@kwiboo.se, detlev.casanova@collabora.com, u-boot@lists.denx.de,
+ sebastian.reichel@collabora.com, Xuhui Lin <xuhui.lin@rock-chips.com>
+References: <20241121142731.1202209-1-heiko@sntech.de>
+ <20241121142731.1202209-10-heiko@sntech.de>
+ <421a8aa9-4f7b-4d63-8f5e-34eae97b8b06@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250106182232.3741304-1-jonas@kwiboo.se>
+In-Reply-To: <421a8aa9-4f7b-4d63-8f5e-34eae97b8b06@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkMeHVYaGE9NGUkdQkNJGRpWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSEpOTE
- pVSktLVUpCS0tZBg++
-X-HM-Tid: 0a944da7e66003afkunm84493da9
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUweGlZMQkJJSklJTklKTk5WFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
+ JVSktLVUpCS0tZBg++
+X-HM-Tid: 0a944db486e503afkunm844cd4d2
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MS46EQw4EzIUDwkBIhI4MQks
- Sj8aCzlVSlVKTEhNT01CTUhMTElJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJSk5PNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ogw6EQw4MjIPSAlPMTM9Dy48
+ AThPCilVSlVKTEhNT0xLT01OTk1MVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKQ0lINwY+
 DKIM-Signature: a=rsa-sha256;
- b=EXxw373p0+v/Atgndgyx8uRa3vvWhbCvsAWC0f29hqptGhY3596IPk/jqD364/Yng4DuJgkVIWtcK3lEDawJZuM7ZIe+soIjp8yAm7kK88ewWtXeaXaD+Occ0EGLri9JZHs9SsoZuPqK5QgHwUeHWWxbcsi6lV919vLou1kYxtI=;
+ b=CKlmhDr5RfBRlZxGNDOyJOnLjlINCrhozuiNg1ZSMAhNEMt4WKpf1B5iph7dggfWZ4ynhpHPxWASHL63AigDJdjb++w9nUQwcfgLHvuOztf5d6Fegloc3HycDtmutbJFEvkW3G+SWFk8beiUy89/B9cu5s50iYJMUKnUSygrSrY=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=DStl0elXeIqQ/MUHUVsOVXYBb34rsQQXkGntH25YDyk=;
+ bh=HD3f/UIiTbv9+wklKnmvEIDD1ApwmKTv9NrtovJst9A=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,54 +78,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
-On 2025/1/7 02:22, Jonas Karlman wrote:
-> The commit 7cec3e701940 ("rockchip: rk3588-nanopc-t6: Add support for
-> NanoPC-T6 LTS") added support for the LTS variant of NanoPC T6. However,
-> a board specific -u-boot.dtsi file was never added.
+On 2024/11/27 00:53, Quentin Schulz wrote:
+> Hi Heiko,
 >
-> Due to the missing -u-boot.dtsi file the LTS fdt included in the FIT is
-> never tagged with bootph props.
+> On 11/21/24 3:27 PM, Heiko Stuebner wrote:
+>> From: Xuhui Lin <xuhui.lin@rock-chips.com>
+>>
+>> Add support for rk3576 package header in mkimage tool.
+>>
+>> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>> ---
+>>   tools/rkcommon.c | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+>> index 3e52236b15a..d89c7d3afea 100644
+>> --- a/tools/rkcommon.c
+>> +++ b/tools/rkcommon.c
+>> @@ -135,6 +135,7 @@ static struct spl_info spl_infos[] = {
+>>       { "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
+>>       { "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
+>>       { "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+>> +    { "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2 },
 >
-> When ENV_IS_IN_SPI_FLASH is enabled, not enabled in defconfig, the env
-> can successfully load from SPI flash on the non-LTS variant, something
-> that does not work on the LTS variant due to missing bootph-some-ram
-> props in the LTS fdt.
+> I don't understand why we remove 0x1000 here from the size of the SRAM.
 >
-> Fix this by adding a LTS -u-boot.dtsi file that just include the non-LTS
-> -u-boot.dtsi file.
+> If I go back in git history, I found 
+> 915e09814a83128fee8b87b2ee2e5f4a17e04a01 which states it's total SRAM 
+> - size used by BootROM.
 >
-> Reported-by: Ricardo Pardini <ricardo@pardini.net>
-> Fixes: 7cec3e701940 ("rockchip: rk3588-nanopc-t6: Add support for NanoPC-T6 LTS")
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Can anyone provide feedback on how one is supposed to find this out? I 
+> think it's not the first time I'm confused by this and I'm not sure 
+> anyone's answered me before, but in any case, documenting this would 
+> be much welcome :)
+If you look this change at vendor U-Boot, you can find below commit msg:
+"Sram total size is 512KB and 4KB is used as bootrom stack."
+This size limit is for the first blob binary which is TPL/DDR init, and 
+after running the DDR init,
+we need to back to bootROM, so we should not touch the bootRom stack to 
+keep the bootRom
+available.
 
 Thanks,
 - Kever
-> ---
->   arch/arm/dts/rk3588-nanopc-t6-lts-u-boot.dtsi   | 3 +++
->   board/friendlyelec/nanopc-t6-rk3588/MAINTAINERS | 3 +--
->   2 files changed, 4 insertions(+), 2 deletions(-)
->   create mode 100644 arch/arm/dts/rk3588-nanopc-t6-lts-u-boot.dtsi
 >
-> diff --git a/arch/arm/dts/rk3588-nanopc-t6-lts-u-boot.dtsi b/arch/arm/dts/rk3588-nanopc-t6-lts-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..b18f958c8a28
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-nanopc-t6-lts-u-boot.dtsi
-> @@ -0,0 +1,3 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588-nanopc-t6-u-boot.dtsi"
-> diff --git a/board/friendlyelec/nanopc-t6-rk3588/MAINTAINERS b/board/friendlyelec/nanopc-t6-rk3588/MAINTAINERS
-> index 63ff6fafc8d7..27853188e59e 100644
-> --- a/board/friendlyelec/nanopc-t6-rk3588/MAINTAINERS
-> +++ b/board/friendlyelec/nanopc-t6-rk3588/MAINTAINERS
-> @@ -5,5 +5,4 @@ S:	Maintained
->   F:	board/friendlyelec/nanopc-t6-rk3588
->   F:	include/configs/nanopc-t6-rk3588.h
->   F:	configs/nanopc-t6-rk3588_defconfig
-> -F:	arch/arm/dts/rk3588-nanopc-t6.dts
-> -F:	arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-> +F:	arch/arm/dts/rk3588-nanopc-t6*
+> The RK3576 does have 512KiB of SRAM so the base value before 
+> subtracting is fine :)
+>
+> Cheers,
+> Quentin
+>
