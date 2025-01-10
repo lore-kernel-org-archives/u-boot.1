@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3BFE77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 18:44:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF214E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 18:45:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 745868069D;
+	by phobos.denx.de (Postfix) with ESMTP id BCF368072F;
 	Fri, 10 Jan 2025 19:43:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="f3sWUUGu";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="jzFTCnUG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC1EF806E8; Fri, 10 Jan 2025 19:43:15 +0100 (CET)
+ id 45EFE80726; Fri, 10 Jan 2025 19:43:16 +0100 (CET)
 Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [217.70.183.195])
+ [IPv6:2001:4b98:dc4:8::223])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66F2D80619
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 19:43:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CD878070D
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 19:43:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 46EBC60009;
- Fri, 10 Jan 2025 18:43:12 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 311C16000E;
+ Fri, 10 Jan 2025 18:43:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1736534593;
+ t=1736534594;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=yjmhB0sgRhopLMS87VnB4pZYaHqN8RnOMqpF8vV95i0=;
- b=f3sWUUGuqAMcTxtkPTX5KpDgS9XNDQ95dy5NfRj36C1+rLjQzEGgsiCkDb8SSd8zajkrGs
- npZxBkrryOzIhE67egAeC1hCT3t1oPZhHAAI9nnjd3zIA79pVAQ2wOZC4u+txgX4kUxg46
- bzDCv6gc7qAJJJXcWMJco9UqFdjG0HwIxIgHeZuazqsxNt+WJwKMslhNmPSV6Bn+ar2Cm+
- KNYmBHTiSHEQqpSTNTabBqDtoniPdRA2kq0LYDop5ysPK//JZZmz6Oe02mlwnxOT6oxpd+
- 3h9UlJEWhJzBjpLJgdxPZ3/2XUsqswBerYjiR9ikdfHeicLs1A0RLV7gtPDLAw==
+ bh=AKnDGtWKZnOcyX7cCD/DdlNQooB0t7R5wRpfdwcqgYY=;
+ b=jzFTCnUGr2SPJLtAf6jHMP8iKNoNobqkrtQbkOKDNtNOPgG5lWsNzV9i4jB00iD/Mpf7Yt
+ ywBQHzYNWHrYjJv2yicJkmveEffiftUmVkY+F5mPQ15h6pfLTR6XVhB7LPxYMo8zmKFmva
+ ABd+BiYx3rjh1JQUMKnQ9s8j/BUbPSuBwWc/WsMCdyTHbh4ELwY2JFtxIkvoPEmy/6GeZj
+ /vYNRL7G33P+lryj52bkqK5gdUFa6mt2AlWItZ8e8vhnsC+jWiNhWpyMh+yBoq9uBeF+4O
+ +BXrL5m4fADS6dHg1e4yLu17XYwSR9QW5iIY3BSMaHUVUYACZOFYAKKBFtNcPA==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Fri, 10 Jan 2025 19:43:09 +0100
-Subject: [PATCH v3 12/13] video: imx: Add LCDIF driver
+Date: Fri, 10 Jan 2025 19:43:10 +0100
+Subject: [PATCH v3 13/13] imx8mp_evk: Enable display support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250110-ge-mainline-display-support-v3-12-d2c0acea6feb@bootlin.com>
+Message-Id: <20250110-ge-mainline-display-support-v3-13-d2c0acea6feb@bootlin.com>
 References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
 In-Reply-To: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -78,366 +78,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the LCD interfaces (LCDIF1/2). When probed, these
-interfaces request numerous clocks and power domains, attach the bridge
-and look for a panel in order to retrieve its capabilities and
-properties.
+There is now support for the display pipeline using one LCD interface,
+the LDB bridge and of course the related media power domain controls.
 
-There is a similar existing driver in the upper folder for other i.MX
-targets, I discovered this driver a bit late. It is not targeting the
-i.MX8MP and I have no idea how different can the LCDIF be on this SoC,
-but I did not manage to get it work, especially because it is not fully
-compliant with the device-model, especially on the clocks/power
-management side which is all ad-hoc. This is normal though, it was
-contributed more than ten years ago.
+This is untested as I do not have the EVK but should be enough to use
+the display, using bmp, lcdputs and co. For console-like commands, it
+might be also needed to enable the VIDEO_CONSOLE explicitly using:
+
+     setenv stdout serial,vidconsole0
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/video/imx/Kconfig  |   3 +
- drivers/video/imx/Makefile |   1 +
- drivers/video/imx/lcdif.c  | 314 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 318 insertions(+)
+ configs/imx8mp_evk_defconfig | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
-index c5cd2fecf780b62c0264b9627137517388aae1ab..12f11c2eea8c98cc341448923c80919afbceed46 100644
---- a/drivers/video/imx/Kconfig
-+++ b/drivers/video/imx/Kconfig
-@@ -19,3 +19,6 @@ config IMX_LDB
- 	depends on VIDEO_BRIDGE
- 	help
- 	  Support for i.MX8MP DPI-to-LVDS on-SoC encoder.
-+
-+config IMX_LCDIF
-+	bool "i.MX LCDIFv3 LCD controller"
-diff --git a/drivers/video/imx/Makefile b/drivers/video/imx/Makefile
-index 8d106589b7544ef9694613a2284e2fbfb564cf63..1edf5a6bdf0c3afb218fbcd81384c7c277ca6b28 100644
---- a/drivers/video/imx/Makefile
-+++ b/drivers/video/imx/Makefile
-@@ -5,3 +5,4 @@
- 
- obj-$(CONFIG_VIDEO_IPUV3) += mxc_ipuv3_fb.o ipu_common.o ipu_disp.o
- obj-$(CONFIG_IMX_LDB) += ldb.o
-+obj-$(CONFIG_IMX_LCDIF) += lcdif.o
-diff --git a/drivers/video/imx/lcdif.c b/drivers/video/imx/lcdif.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..eb677e84a5e11c8fa2b66973fb3529dd9d2c797b
---- /dev/null
-+++ b/drivers/video/imx/lcdif.c
-@@ -0,0 +1,314 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * i.MX8 LCD interface driver inspired from the Linux driver
-+ * Copyright 2019 NXP
-+ * Copyright 2024 Bootlin
-+ * Adapted by Miquel Raynal <miquel.raynal@bootlin.com>
-+ */
-+
-+#include <asm/io.h>
-+#include <asm/mach-imx/dma.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <panel.h>
-+#include <power-domain.h>
-+#include <video.h>
-+#include <video_bridge.h>
-+#include <linux/delay.h>
-+
-+#include "../videomodes.h"
-+
-+#define LCDIFV3_CTRL 0x0
-+#define LCDIFV3_CTRL_SET 0x4
-+#define LCDIFV3_CTRL_CLR 0x8
-+#define   CTRL_INV_HS BIT(0)
-+#define   CTRL_INV_VS BIT(1)
-+#define   CTRL_INV_DE BIT(2)
-+#define   CTRL_INV_PXCK BIT(3)
-+#define   CTRL_CLK_GATE BIT(30)
-+#define   CTRL_SW_RESET BIT(31)
-+
-+#define LCDIFV3_DISP_PARA 0x10
-+#define   DISP_PARA_DISP_MODE_NORMAL 0
-+#define   DISP_PARA_LINE_PATTERN_RGB_YUV 0
-+#define   DISP_PARA_DISP_ON BIT(31)
-+
-+#define LCDIFV3_DISP_SIZE 0x14
-+#define   DISP_SIZE_DELTA_X(x) ((x) & 0xffff)
-+#define   DISP_SIZE_DELTA_Y(x) ((x) << 16)
-+
-+#define LCDIFV3_HSYN_PARA 0x18
-+#define   HSYN_PARA_FP_H(x) ((x) & 0xffff)
-+#define   HSYN_PARA_BP_H(x) ((x) << 16)
-+
-+#define LCDIFV3_VSYN_PARA 0x1C
-+#define   VSYN_PARA_FP_V(x) ((x) & 0xffff)
-+#define   VSYN_PARA_BP_V(x) ((x) << 16)
-+
-+#define LCDIFV3_VSYN_HSYN_WIDTH 0x20
-+#define   VSYN_HSYN_PW_H(x) ((x) & 0xffff)
-+#define   VSYN_HSYN_PW_V(x) ((x) << 16)
-+
-+#define LCDIFV3_CTRLDESCL0_1 0x200
-+#define   CTRLDESCL0_1_WIDTH(x) ((x) & 0xffff)
-+#define   CTRLDESCL0_1_HEIGHT(x) ((x) << 16)
-+
-+#define LCDIFV3_CTRLDESCL0_3 0x208
-+#define   CTRLDESCL0_3_PITCH(x) ((x) & 0xFFFF)
-+
-+#define LCDIFV3_CTRLDESCL_LOW0_4 0x20C
-+#define LCDIFV3_CTRLDESCL_HIGH0_4 0x210
-+
-+#define LCDIFV3_CTRLDESCL0_5 0x214
-+#define   CTRLDESCL0_5_YUV_FORMAT(x) (((x) & 0x3) << 14)
-+#define   CTRLDESCL0_5_BPP(x) (((x) & 0xf) << 24)
-+#define     BPP32_ARGB8888 0x9
-+#define   CTRLDESCL0_5_SHADOW_LOAD_EN BIT(30)
-+#define   CTRLDESCL0_5_EN BIT(31)
-+
-+struct lcdifv3_priv {
-+	void __iomem *base;
-+	struct clk pix_clk;
-+	struct power_domain pd;
-+	struct udevice *panel;
-+	struct udevice *bridge;
-+};
-+
-+static void lcdifv3_set_mode(struct lcdifv3_priv *priv,
-+			     struct display_timing *timings)
-+{
-+	u32 reg;
-+
-+	writel(DISP_SIZE_DELTA_X(timings->hactive.typ) |
-+	       DISP_SIZE_DELTA_Y(timings->vactive.typ),
-+	       priv->base + LCDIFV3_DISP_SIZE);
-+
-+	writel(HSYN_PARA_FP_H(timings->hfront_porch.typ) |
-+	       HSYN_PARA_BP_H(timings->hback_porch.typ),
-+	       priv->base + LCDIFV3_HSYN_PARA);
-+
-+	writel(VSYN_PARA_BP_V(timings->vback_porch.typ) |
-+	       VSYN_PARA_FP_V(timings->vfront_porch.typ),
-+	       priv->base + LCDIFV3_VSYN_PARA);
-+
-+	writel(VSYN_HSYN_PW_H(timings->hsync_len.typ) |
-+	       VSYN_HSYN_PW_V(timings->vsync_len.typ),
-+	       priv->base + LCDIFV3_VSYN_HSYN_WIDTH);
-+
-+	writel(CTRLDESCL0_1_WIDTH(timings->hactive.typ) |
-+	       CTRLDESCL0_1_HEIGHT(timings->vactive.typ),
-+	       priv->base + LCDIFV3_CTRLDESCL0_1);
-+
-+	if (timings->flags & DISPLAY_FLAGS_HSYNC_LOW)
-+		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_SET);
-+	else
-+		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_CLR);
-+
-+	if (timings->flags & DISPLAY_FLAGS_VSYNC_LOW)
-+		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_SET);
-+	else
-+		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_CLR);
-+
-+	if (timings->flags & DISPLAY_FLAGS_DE_LOW)
-+		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_SET);
-+	else
-+		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_CLR);
-+
-+	if (timings->flags & DISPLAY_FLAGS_PIXDATA_POSEDGE)
-+		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_SET);
-+	else
-+		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_CLR);
-+
-+	writel(0, priv->base + LCDIFV3_DISP_PARA);
-+
-+	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
-+	reg &= ~(CTRLDESCL0_5_BPP(0xf) | CTRLDESCL0_5_YUV_FORMAT(0x3));
-+	reg |= CTRLDESCL0_5_BPP(BPP32_ARGB8888);
-+	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
-+}
-+
-+static void lcdifv3_enable_controller(struct lcdifv3_priv *priv)
-+{
-+	u32 reg;
-+
-+	reg = readl(priv->base + LCDIFV3_DISP_PARA);
-+	reg |= DISP_PARA_DISP_ON;
-+	writel(reg, priv->base + LCDIFV3_DISP_PARA);
-+
-+	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
-+	reg |= CTRLDESCL0_5_EN;
-+	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
-+}
-+
-+static int lcdifv3_video_sync(struct udevice *dev)
-+{
-+	struct lcdifv3_priv *priv = dev_get_priv(dev);
-+	u32 reg;
-+
-+	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
-+	reg |= CTRLDESCL0_5_SHADOW_LOAD_EN;
-+	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
-+
-+	return 0;
-+}
-+
-+static void lcdifv3_init(struct udevice *dev, struct display_timing *timings)
-+{
-+	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
-+	struct lcdifv3_priv *priv = dev_get_priv(dev);
-+
-+	clk_set_rate(&priv->pix_clk, timings->pixelclock.typ);
-+
-+	writel(CTRL_SW_RESET | CTRL_CLK_GATE, priv->base + LCDIFV3_CTRL_CLR);
-+	udelay(10);
-+
-+	lcdifv3_set_mode(priv, timings);
-+
-+	writel(plat->base & 0xFFFFFFFF, priv->base + LCDIFV3_CTRLDESCL_LOW0_4);
-+	writel(plat->base >> 32, priv->base + LCDIFV3_CTRLDESCL_HIGH0_4);
-+
-+	writel(CTRLDESCL0_3_PITCH(timings->hactive.typ * 4), /* 32bpp */
-+	       priv->base + LCDIFV3_CTRLDESCL0_3);
-+
-+	lcdifv3_enable_controller(priv);
-+}
-+
-+static int lcdifv3_video_probe(struct udevice *dev)
-+{
-+	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
-+	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
-+	struct lcdifv3_priv *priv = dev_get_priv(dev);
-+	struct clk axi_clk, disp_axi_clk;
-+	struct display_timing timings;
-+	u32 fb_start, fb_end;
-+	int ret;
-+
-+	ret = power_domain_get(dev, &priv->pd);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_get_by_name(dev, "pix", &priv->pix_clk);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_get_by_name(dev, "axi", &axi_clk);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_get_by_name(dev, "disp_axi", &disp_axi_clk);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = power_domain_on(&priv->pd);
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_enable(&priv->pix_clk);
-+	if (ret)
-+		goto dis_pd;
-+
-+	ret = clk_enable(&axi_clk);
-+	if (ret)
-+		goto dis_pix_clk;
-+
-+	ret = clk_enable(&disp_axi_clk);
-+	if (ret)
-+		goto dis_axi_clk;
-+
-+	priv->base = dev_remap_addr(dev);
-+	if (!priv->base) {
-+		ret = -EINVAL;
-+		goto dis_clks;
-+	}
-+
-+	/* Attach bridge */
-+	ret = uclass_get_device_by_endpoint(UCLASS_VIDEO_BRIDGE, dev,
-+					    0, &priv->bridge);
-+	if (ret)
-+		goto dis_clks;
-+
-+	ret = video_bridge_attach(priv->bridge);
-+	if (ret)
-+		goto dis_clks;
-+
-+	ret = video_bridge_set_backlight(priv->bridge, 80);
-+	if (ret)
-+		goto dis_clks;
-+
-+	/* Attach panels */
-+	ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
-+					    1, &priv->panel);
-+	if (ret) {
-+		ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
-+						    2, &priv->panel);
-+		if (ret)
-+			goto dis_clks;
-+	}
-+
-+	ret = panel_get_display_timing(priv->panel, &timings);
-+	if (ret) {
-+		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
-+						   0, &timings);
-+		if (ret) {
-+			printf("Cannot decode panel timings (%d)\n", ret);
-+			goto dis_clks;
-+		}
-+	}
-+
-+	lcdifv3_init(dev, &timings);
-+
-+	/* Only support 32bpp for now */
-+	uc_priv->bpix = VIDEO_BPP32;
-+	uc_priv->xsize = timings.hactive.typ;
-+	uc_priv->ysize = timings.vactive.typ;
-+
-+	/* Enable dcache for the frame buffer */
-+	fb_start = plat->base & ~(MMU_SECTION_SIZE - 1);
-+	fb_end = ALIGN(plat->base + plat->size, 1 << MMU_SECTION_SHIFT);
-+	mmu_set_region_dcache_behaviour(fb_start, fb_end - fb_start,
-+					DCACHE_WRITEBACK);
-+	video_set_flush_dcache(dev, true);
-+
-+	return 0;
-+
-+dis_clks:
-+	clk_disable(&disp_axi_clk);
-+dis_axi_clk:
-+	clk_disable(&axi_clk);
-+dis_pix_clk:
-+	clk_disable(&priv->pix_clk);
-+dis_pd:
-+	power_domain_off(&priv->pd);
-+
-+	return ret;
-+}
-+
-+static int lcdifv3_video_bind(struct udevice *dev)
-+{
-+	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
-+
-+	/* Max size supported by LCDIF */
-+	plat->size = 1920 * 1080 * VNBYTES(VIDEO_BPP32);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id lcdifv3_video_ids[] = {
-+	{ .compatible = "fsl,imx8mp-lcdif" },
-+	{ }
-+};
-+
-+static struct video_ops lcdifv3_video_ops = {
-+	.video_sync = lcdifv3_video_sync,
-+};
-+
-+U_BOOT_DRIVER(lcdifv3_video) = {
-+	.name = "lcdif",
-+	.id = UCLASS_VIDEO,
-+	.of_match = lcdifv3_video_ids,
-+	.bind = lcdifv3_video_bind,
-+	.ops = &lcdifv3_video_ops,
-+	.probe = lcdifv3_video_probe,
-+	.priv_auto = sizeof(struct lcdifv3_priv),
-+	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
-+};
+diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
+index 5369f8b84a4172434dcef142c854d06e3437caf1..a3cdf0f3cb237d7b555a2dca741deee21b771e8c 100644
+--- a/configs/imx8mp_evk_defconfig
++++ b/configs/imx8mp_evk_defconfig
+@@ -31,6 +31,7 @@ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_DEFAULT_FDT_FILE="imx8mp-evk.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
++# CONFIG_CONSOLE_MUX is not set
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_MAX_SIZE=0x26000
+ CONFIG_SPL_BOARD_INIT=y
+@@ -60,6 +61,7 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_SDP=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_CACHE=y
++# CONFIG_CMD_CLS is not set
+ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_OF_CONTROL=y
+@@ -112,6 +114,7 @@ CONFIG_PINCTRL_IMX8M=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_IMX8M_POWER_DOMAIN=y
+ CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
++CONFIG_IMX8MP_MEDIAMIX_BLKCTRL=y
+ CONFIG_DM_PMIC=y
+ CONFIG_DM_PMIC_PCA9450=y
+ CONFIG_SPL_DM_PMIC_PCA9450=y
+@@ -139,4 +142,8 @@ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="FSL"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
++CONFIG_VIDEO=y
++CONFIG_VIDEO_BRIDGE=y
++CONFIG_IMX_LDB=y
++CONFIG_IMX_LCDIF=y
+ CONFIG_IMX_WATCHDOG=y
 
 -- 
 2.47.0
