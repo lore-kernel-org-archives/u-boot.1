@@ -4,91 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77EA5E7719C
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 21:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AD87E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 22:46:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BDCF801F5;
-	Fri, 10 Jan 2025 22:57:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7D27D800D0;
+	Fri, 10 Jan 2025 23:46:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AE6GvXTW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RRBf+faV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 713AC801F5; Fri, 10 Jan 2025 22:57:03 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 8F69B800D0; Fri, 10 Jan 2025 23:46:05 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29DD880050
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 22:57:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71A8A80050
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 23:46:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6d888fc8300so13904436d6.3
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 13:57:01 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7b6e9586b82so207866285a.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 14:46:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736546220; x=1737151020; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MyxsR5e4w5Q4jexJaGb3uKMflqLkpgEb9HnZCFdzkFc=;
- b=AE6GvXTWyvlFUQ5I3vOHY/5JtsiJxR8yyxYw6S3MNI17+vvaZV3Rg4fhB/vGwh+7lb
- hPAL0tQloZqVB3FKP4qjOAMNg02k3LhFhUMPyugzJiqCXIOiVaWN9X9uXy8Yp3jzjprP
- S3CQ0s6HL3DaRQBLNZOQiYrxOwuSerfxHjIKhEemJXNCmJLjpxNFZ+SCn4zo0HMpazmb
- I6M6SPh+s1fnH6z+BhPj2ArdUsdGqCRhmR4hT314f7KV9xlSQwP/Jft1to5xQ/VqUA91
- Yhqx6XnKNAlFj1xD+6He9R5RvVof3hkGtCZ0Fv8q1qqCYhyTH0WpiqWhZMQj6NsYW8bH
- kNBQ==
+ d=konsulko.com; s=google; t=1736549160; x=1737153960; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ubRMGJwf4yhRgul+jXopjExLug6Oen+e45LPKBt8GtE=;
+ b=RRBf+faVPEyCHp/Ltx2agTa97aK/Mc6YDOlsHyV7jznh3n09pVt0IcXXjUpha3UOxw
+ KYY7ce8Ca8gNgTB1UmvJaVfhYPhRMJrAKxRIUTN6zTKcYvIvzzt3Gf2XzJsiwhFOc8Fa
+ jaXDFON1SXNkY18OdG+GaoXagwyc+Co3U34i8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736546220; x=1737151020;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MyxsR5e4w5Q4jexJaGb3uKMflqLkpgEb9HnZCFdzkFc=;
- b=VWfPNu89JtGAqzYuxUD8s7CZ3R2V3IBDE3zOozPuD9kq/xWPq9djEUR04KDov/FUPw
- gCHWnIMduj/Lhf/bUv0QCeVZ223jPy2tvRrLSrRU5TCcKqUrTLVESPPRiozeflmcGAod
- 0puMmVVI4nS7H4Awn8TNX063dhy3X1tc/43Uta8a9clhAAq8IDsRn7s4DvCBe1DZ+alg
- kIO1CwHoQhyxQXGP/PmhixsGlANHQJZz+iXVaQHJ36y90dsxGPcIhqwxxSJweF/fMAS3
- 5GqBlRRqqGG4I3vacLCnB1flNU4I5C7fFhIXoPoC8hBomucO6IlkXoMhEZF+n7rWyUjT
- qm8A==
-X-Gm-Message-State: AOJu0Yz5yEcBnYHaIwHv55Udms3O6wz3n4HGMDnI5C09lfDB6u7xfaE7
- UhPy4j5DMc+biTvZLx7iqyxOLGcU9k5c5WQ9OJoyHSX7h6SSJ1VqXAn2NfwaYHIQC8Y3Smp6wpJ
- 3m7M=
-X-Gm-Gg: ASbGncsLWoREw743iiOsR6iXvrRYe8MtAJWJn939quQilkxLxpb9PpYxR/dMPO/0xch
- OS4VZH2ThL5mWy0SLkYKS8cHC8CpXedoch0o7xT5mwOB1twN0Qk1n5XCyhvaswmDN0MjTxFZPTS
- uWwznXO6rU6ifi7nVFsdhaYJHev093DRleUGb4xdRzCythmq8rx+X1vnj+Mo/IXutzPBb/ABDY+
- Kai0x6fLKLdFyARZhm3Fu4+/hBA/VQv00njllvzkhoOPmgINvz5MI1SRO8Ys+MdHKQBKj1Hny86
- ZfFsiHQCZHN8TVjh2DY/cJeC+s9GlXWjmOQ/IVASvtjmA6d8QMDEO68=
-X-Google-Smtp-Source: AGHT+IGTTcSH0MxZ3i1i+mEsfxJtX3TO3B8YtgLHMvQyjxDoV0xeIsvksrHC8cjD9vcfyTktrZ/QcQ==
-X-Received: by 2002:a05:6214:c6a:b0:6d8:b2f2:bccf with SMTP id
- 6a1803df08f44-6df9b1d21ffmr137416506d6.1.1736546219758; 
- Fri, 10 Jan 2025 13:56:59 -0800 (PST)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfad85f6bdsm13839496d6.17.2025.01.10.13.56.58
+ d=1e100.net; s=20230601; t=1736549160; x=1737153960;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ubRMGJwf4yhRgul+jXopjExLug6Oen+e45LPKBt8GtE=;
+ b=O1fsHNilhgVBat+pHMBDc+obNkKnDl5El5mxuQBPvh8Q4ojMwKKNoXl0r8XDQyCo48
+ OycyC/0+eHCJ1bnj515tGGmTYJhMH35q0nnGKnnT/ESIhLF4Nu04hSQZs8ZaYMHBJ7Ao
+ nUINmMA311rnYrZBsTlm1TnZTLMvgPgG7wrs5NXy+pud9BQ/VMSOc2YAU02CFTYN2Lrd
+ WAQCgd2qErw9R7nX936qDVBDcPcrIF7/l4v9NYRJLrJUe1ajoyvobE2jo+h1H4xfprDE
+ d+Y0Fwhzfami2GrSe1EQGCf3EMvFktFfdTjGUzW1b9EIxrMUJLqB3XmvDy4EbNAMNydz
+ YaNA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUtYQ8CPWOXPfANVzOvt7JV1Em3bChfBRJagjuA0ymSOngPqXQwGerx8bCC45KsLn/EDCDG/yE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMwpYeRyWmR8UX7rZq1IAmoh/G7WkZKSqJfwr4xrGrb9TVGx6M
+ R/5tjwR8kFfQWiARLHqKkZ+KmEy751Axkqelag1Ft6zC8szCd88ILhHQas3L7sI=
+X-Gm-Gg: ASbGnctLFaGOJ9sY1B8jjSSArsqK1ANUjubAUAdePCrSuaJkzdnQxjSrlQVJZDqlPYi
+ ZjO/G85S3gQi6pHOa0WcRFy+VbE7ch9xCfCbP+0AvkKKk9tuivUpd51DEzv+WghWhrUu4eaKNxV
+ yKAgkUyPSJQKsvuAQ4kp6AdT/gTOjTyvw5rVZdi25na5wyNmhrVfK0HahZn8+wbGRAk+U0mLSVC
+ MqhqB8nJdLQew6JFMU1SO2xhsNLl7opGtVT1PYQosoxEo5gQdCdQjI=
+X-Google-Smtp-Source: AGHT+IG90YYZPVsQfxi7xbU8XCthSkCOPbaGkDKelqxD2x4Xn/amPKZ4gepgCMZceqplbXFh/dX+4g==
+X-Received: by 2002:a05:620a:45a3:b0:7b6:f557:a840 with SMTP id
+ af79cd13be357-7bcd970c130mr1897302585a.26.1736549160134; 
+ Fri, 10 Jan 2025 14:46:00 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7bce3238003sm222198485a.2.2025.01.10.14.45.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 13:56:59 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Fri, 10 Jan 2025 14:45:59 -0800 (PST)
+Date: Fri, 10 Jan 2025 16:45:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Levi Yun <yeoreum.yun@arm.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>
-Subject: [PATCH v4 3/3] tpm: get tpm event log from bloblist
-Date: Fri, 10 Jan 2025 13:56:35 -0800
-Message-Id: <20250110215640.892539-3-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250110215640.892539-1-raymond.mao@linaro.org>
-References: <20250110215640.892539-1-raymond.mao@linaro.org>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Weijie Gao <weijie.gao@mediatek.com>, Daniel Golle <daniel@makrotopia.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 5/6] cmd: bootmenu: add parameter -e for UEFI boot
+ options
+Message-ID: <20250110224554.GA2278614@bill-the-cat>
+References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
+ <20241127070631.16412-6-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bEaR7c7BNWPbX+Sj"
+Content-Disposition: inline
+In-Reply-To: <20241127070631.16412-6-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,130 +109,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get tpm event log from bloblist instead of FDT when bloblist is
-enabled and valid from previous boot stage.
 
-As a fallback, when no event log from previous stage is observed
-and no user buffer is passed, malloc a default buffer to initialize
-the event log.
+--bEaR7c7BNWPbX+Sj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
-Changes in v2
-- Remove patch dependency.
-- Remove the fallback to FDT when BLOBLIST is selected.
-Changes in v3
-- Malloc an 8KB buffer when user eventlog buffer does not exist.
-Changes in v4
-- Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
+On Wed, Nov 27, 2024 at 08:06:30AM +0100, Heinrich Schuchardt wrote:
 
- lib/tpm_tcg2.c | 55 +++++++++++++++++++++++++++++++++-----------------
- 1 file changed, 36 insertions(+), 19 deletions(-)
+> The bootmenu command can display
+>=20
+> * menu entries defined by environment variables
+> * menu entries defined by UEFI boot options
+>=20
+> Not in all cases showing the UEFI boot options is desired.
+> Provide a new parameter '-e' to select the display of UEFI boot options.
+>=20
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 7f868cc883..685699688b 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -5,6 +5,7 @@
- 
- #include <dm.h>
- #include <dm/of_access.h>
-+#include <malloc.h>
- #include <tpm_api.h>
- #include <tpm-common.h>
- #include <tpm-v2.h>
-@@ -19,6 +20,7 @@
- #include <linux/unaligned/generic.h>
- #include <linux/unaligned/le_byteshift.h>
- #include "tpm-utils.h"
-+#include <bloblist.h>
- 
- int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
- 		      u32 *pcr_banks)
-@@ -607,15 +609,24 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
- 		elog->found = log.found;
- 	}
- 
-+	if (elog->found)
-+		return 0;
-+
- 	/*
--	 * Initialize the log buffer if no log was discovered and the buffer is
--	 * valid. User's can pass in their own buffer as a fallback if no
--	 * memory region is found.
-+	 * Initialize the log buffer if no log was discovered.
-+	 * User can pass in their own buffer as a fallback if no memory region
-+	 * is found, else malloc a buffer if it does not exist.
- 	 */
--	if (!elog->found && elog->log_size)
--		rc = tcg2_log_init(dev, elog);
-+	if (!elog->log_size) {
-+		elog->log = malloc(TPM2_EVENT_LOG_SIZE);
-+		if (!elog->log)
-+			return -ENOMEM;
-+
-+		memset(elog->log, 0, TPM2_EVENT_LOG_SIZE);
-+		elog->log_size = TPM2_EVENT_LOG_SIZE;
-+	}
- 
--	return rc;
-+	return tcg2_log_init(dev, elog);
- }
- 
- int tcg2_measurement_init(struct udevice **dev, struct tcg2_event_log *elog,
-@@ -668,10 +679,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
- 	const __be32 *size_prop;
- 	int asize;
- 	int ssize;
-+	struct ofnode_phandle_args args;
-+	phys_addr_t a;
-+	fdt_size_t s;
- 
- 	*addr = NULL;
- 	*size = 0;
- 
-+	*addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
-+	if (*addr && *size)
-+		return 0;
-+	else if (CONFIG_IS_ENABLED(BLOBLIST))
-+		return -ENODEV;
-+
- 	addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
- 	if (!addr_prop)
- 		addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
-@@ -686,22 +706,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
- 
- 		*addr = map_physmem(a, s, MAP_NOCACHE);
- 		*size = (u32)s;
--	} else {
--		struct ofnode_phandle_args args;
--		phys_addr_t a;
--		fdt_size_t s;
- 
--		if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
--					       0, &args))
--			return -ENODEV;
-+		return 0;
-+	}
- 
--		a = ofnode_get_addr_size(args.node, "reg", &s);
--		if (a == FDT_ADDR_T_NONE)
--			return -ENOMEM;
-+	if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
-+		return -ENODEV;
- 
--		*addr = map_physmem(a, s, MAP_NOCACHE);
--		*size = (u32)s;
--	}
-+	a = ofnode_get_addr_size(args.node, "reg", &s);
-+	if (a == FDT_ADDR_T_NONE)
-+		return -ENOMEM;
-+
-+	*addr = map_physmem(a, s, MAP_NOCACHE);
-+	*size = (u32)s;
- 
- 	return 0;
- }
--- 
-2.25.1
+Very strangely, this leads to the EFI selftest "Executing 'random number
+generator'" test failing on Pi 4, where was was passing previously (and
+Pi 4 has an RNG, unlike Pi 3), and this is on rpi_4_defconfig with:
+CONFIG_CMD_BOOTEFI_HELLO=3Dy
+CONFIG_CMD_BOOTEFI_SELFTEST=3Dy
+CONFIG_IPV6=3Dy
+CONFIG_IPV6_ROUTER_DISCOVERY=3Dy
+CONFIG_CMD_TFTPPUT=3Dy
+CONFIG_FIT=3Dy
+CONFIG_FIT_SIGNATURE=3Dy
+CONFIG_CMD_BOOTMENU=3Dy
+CONFIG_CMD_LOG=3Dy
+CONFIG_UNIT_TEST=3Dy
+# CONFIG_CMD_EFIDEBUG is not set
+CONFIG_BOOTSTAGE_STASH_ADDR=3D0x02400000
+CONFIG_BOOTSTAGE=3Dy
+CONFIG_BOOTSTAGE_STASH=3Dy
+CONFIG_CMD_BOOTSTAGE=3Dy
 
+added.
+
+--=20
+Tom
+
+--bEaR7c7BNWPbX+Sj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeBoxsACgkQFHw5/5Y0
+tyzh6wwAgrG1rTOQA8UeNll6GFJ6ocLlit9CPiPh2XHDN/yWrxvQE7lzXhiDB9mC
+Tzl1YgVE9Rsn6tBwCgxvhUsYOooKK06aFiH9MidUpqzyJ8uywDxFsn0jaEGhC3gg
+lyzoC+EoLMn3U/K5kwolSS+K1ejtHe7MY/8ouziNmetJsI6ax6bXx3lvfRqSxKM0
+sec6qlT2i726BNFvBlYMVenUCu1/m375y60YObniWkEDhcYEKVUD7dyHUGWt5L/Z
+cKWg2vQR1urmRHLKLXwgCD+zRSIgXbmNkpwn1LRFMv4tvQS+inwc8dpKUYy7HJZo
+OMJVTend+2RRQ67NJUqpauYyAlfQPdNv2W7fa4JBbNeVKr/D3kttd1ATewY6YBtj
+YlDPec2/tixoX0ZDiHGR7Oejy2KOaWy/6MuPL0KoaclwT0b4uLw9Ez4Nc+fNBhUI
+DgZ4HVBvgD5JEbfbPNUFk63BYVZ6hecGAH5wZgXeHoLKMxoN1mqTnqGuw+Lq5cpn
+3O0Zwvu+
+=rksc
+-----END PGP SIGNATURE-----
+
+--bEaR7c7BNWPbX+Sj--
