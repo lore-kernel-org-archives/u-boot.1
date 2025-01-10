@@ -4,77 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C58DE77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 13:41:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C5B0E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 13:41:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD21C80619;
-	Fri, 10 Jan 2025 14:41:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 17F5A801F5;
+	Fri, 10 Jan 2025 14:41:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L6B0V9BA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ET/3smWM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 236E5800D0; Fri, 10 Jan 2025 14:41:20 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id 64BCB801F5; Fri, 10 Jan 2025 14:41:32 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C86548069A
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 14:41:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04094800D0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 14:41:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2167141dfa1so36160425ad.1
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:41:17 -0800 (PST)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-216281bc30fso40165095ad.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:41:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736516476; x=1737121276; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736516488; x=1737121288; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/Uw4Z1gwZMxNgF1uw6q9X5OrAPKBq2CtQz4ww6j6LbM=;
- b=L6B0V9BAPHPBFGL4kkA0F4aJdHaw+O0RBgxqKC33Yob0vx6GNFTkC7A+9SYmxRQxFv
- N+XTiFxCjEF/z3sEFbhlDnoQVkfksCtoGn+6aiyfkj/6OJNtHNUCwy3nsQWGvZ7jlQGx
- uLni+jwJ1ZHSNEKoZF5ptlbptIwNoBc3ybsZM=
+ bh=KDeWhcCz2P5kp6T9mAA0fRT1X5rb5HcU9Jkn4MZbO0M=;
+ b=ET/3smWM1EOi1iQO5VbWCMjuDHVpzfTf8bep5zaaC6bIxxusTmfA18CfgIzBZCXwcu
+ ceO1Zmeh8J99AkPSRCuvvlwV7lb5juiHgjLHi7F88DYMAF/S5tA7CMkjLSzu2sBXF2hm
+ OE09LSw4dRdbP+jB6oRoCpJTBjQbdVprILH3M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736516476; x=1737121276;
+ d=1e100.net; s=20230601; t=1736516488; x=1737121288;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/Uw4Z1gwZMxNgF1uw6q9X5OrAPKBq2CtQz4ww6j6LbM=;
- b=XfXbXKd7ZghZvv4VZi3uHpDpvEXEcavGUUIytYBcLh28dU96TOK+3NERoQhigolKAg
- UejKQWrgSu4mbmpBmVzpq7yj+VHWkLY1M3HAY2VoS0BtrGJ8Kt5198zcTmkvHWNC8Bpp
- wuyRaVdJqc8cPNhrZkPxQDap8C6HU+rzKA3s2x1Djky1U/LZyIq3nTqHLQZlP1cW1oh5
- J4oguZ6xh3UoSeTmRghn3E+edWx+Gy2ygeiD4G2ZcKkIMadkEit58yjSQFXNWplDIa4E
- nXu8D7gkO5M2tSCNYNAHUwp5FyOXWazkCMh7gw+2R+QhLqH/VSPhPRUPMeLSWC8IM6Tb
- Exdw==
+ bh=KDeWhcCz2P5kp6T9mAA0fRT1X5rb5HcU9Jkn4MZbO0M=;
+ b=DlROkuiLAR47l3mHzMcoeXILqo40Z0HvL7quzjNAoQdEMHyb0g+ImMrG0FkS3jPEZY
+ KL84Nqb715iVBu/5NE7ee676oEDke5808amVdCcUREbyI6zyMuDxDCTNG6Q35ulninYz
+ dVN9db1U1L3VXdv8ihmtusnFJwpDxwTUZodlY7ssxBgqDUjX1hWbPz4i1hBJOHIY3F3l
+ SnbGpxhRX+k4dRAAxGt/3vlX3CJ4FT1reBz95sr3q0eBRGDrVg2FqIKz02mlqXTy8RF/
+ tjHOlf/HM0kM1Zl/APMQoNFHq8S9cxEo5vQB8/hzD4v9iZzYu2e5fB9pbTGRN16bNvud
+ b75Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNYvNqyEYaryJTiy7Y4sZ1Ll2CP7Hjo2vQMZ0E6aKW3rBeZ0gcHSlVvxa065sFKqFtlrDs8FM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyh2P6DsXsEixvX3XS9n4ZCHX3oTKUZEAj4fpnkCxF57I+fzR/f
- tTznk3+NOxX7tuS7Zq4lDPONquUqjOAIMZc+Z1E3rzDREVLNZRj2YUOYYYfLcMbeTQ62mifSOrH
- l/KFr5ByFx3hlHKc/iHTOkgh8NPZB6yGvVXri
-X-Gm-Gg: ASbGncsGAPtP82jwr7aPBycy0eVZ7eQRjo6TFjpz6P2PxNkk6bnK6bw4XMoTMkm13nO
- yoobvEeIFk1xNEkWvDxP2lgDNqRdwtS4ROaJn7T8=
-X-Google-Smtp-Source: AGHT+IHGjWSKj7QC7HV33Yfo4G6z5xgnBSx3hfhxI6ZOupVa8DltPpPkBjSBllWgi0Wyi42AB/YCBVyLwNFGWyXVLIM=
-X-Received: by 2002:a17:90b:2c8d:b0:2ee:5a82:433a with SMTP id
- 98e67ed59e1d1-2f5583add61mr9240812a91.17.1736516476279; Fri, 10 Jan 2025
- 05:41:16 -0800 (PST)
+ AJvYcCUVaO0g4jJiDh8P0aI/hEEBa2r03C3ixIqNX4TLwwcv3aT9HvaqpFGlIk10srcj4rhxGbcFXcw=@lists.denx.de
+X-Gm-Message-State: AOJu0YytJblMFZaKTYH6kXMVhE39yM3d3V2NKssgtNOu4VFKcZxHqmfn
+ WDPEImAJqMvDB1vX+tOASqzWfCN//JU8WOVqLJWr50A1eSuf4WtYlT2crNpON2K+seNZPVO4bd6
+ lGzv4sw2gxlGgbFlvx2s1nFo9YGXTX1++KAiF
+X-Gm-Gg: ASbGncsa9ivkWccNWQRqOBDlJaYa8BmH01T0TyE4VJZsoeXuvygcxTsXF0hQKHwM3Ga
+ wE3+Ibygg7N4JBZViyim6w2rBDFs8ypKCsnY5ilY=
+X-Google-Smtp-Source: AGHT+IEZ7R7AWP9GQfatVAxTUsqpcjVKuJvQCOiQ6GKP7WDQ7SEPld84kbUBtRTDSDWbvTsqULxHAz/uQi0O1VTuOIw=
+X-Received: by 2002:a17:90b:5483:b0:2ea:3d2e:a0d7 with SMTP id
+ 98e67ed59e1d1-2f548f2a897mr17063536a91.15.1736516488577; Fri, 10 Jan 2025
+ 05:41:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20241206173033.2403998-1-adriano.cordova@canonical.com>
- <20241206173033.2403998-2-adriano.cordova@canonical.com>
- <9cc4a4e0-1a80-4bdc-9fd7-a04260ff7cb7@gmx.de>
-In-Reply-To: <9cc4a4e0-1a80-4bdc-9fd7-a04260ff7cb7@gmx.de>
+References: <20241113150938.1534931-1-sjg@chromium.org>
+ <20241113150938.1534931-5-sjg@chromium.org>
+ <517d087e-4ac5-4fd5-a37f-d4d3aaa534bd@gmx.de>
+ <CAFLszTjbDHvMvv3U+SaW0_7b4oajW8RRf6KYbF_jex34en6ByA@mail.gmail.com>
+ <20250109150454.GT3476@bill-the-cat>
+ <CAFLszTgtP5vXT+HsvHP8i50KihetHf2-h3KPp2-f6M4XJ3+i8g@mail.gmail.com>
+ <20250109152234.GW3476@bill-the-cat>
+In-Reply-To: <20250109152234.GW3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Jan 2025 06:40:51 -0700
-X-Gm-Features: AbW1kvbLNcf2rjO4umhT7wyJx1W0iJ-UeLluhSmiTpTjvUTtZQwQGhypSk8K75c
-Message-ID: <CAFLszTiH9+avmapq8CEEr-tqybP9mWZGzqp52mVHsM87FGTfhw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] efi_loader: efi_setup: Add efi_start_obj_list() to
- efi_setup.c
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Adriano Cordova <adrianox@gmail.com>, joe.hershberger@ni.com,
- rfried.dev@gmail.com, 
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org, trini@konsulko.com, 
- Adriano Cordova <adriano.cordova@canonical.com>, u-boot@lists.denx.de
+Date: Fri, 10 Jan 2025 06:41:00 -0700
+X-Gm-Features: AbW1kvZ8CzKX1oUG-ic2ECSx1GY2Y3iGSXssyQxt-1iWY8UkCZF7sWdxiWy9ZB8
+Message-ID: <CAFLszThy9OkfMMbbyzUvWF19rvTRk64q62J+Lhk=U0VABwZNbQ@mail.gmail.com>
+Subject: Re: [PATCH v5 4/8] RFC: Revert "bootstd: Make efi_mgr bootmeth work
+ for non-sandbox setups"
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Mark Kettenis <kettenis@openbsd.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,76 +100,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Fri, 3 Jan 2025 at 12:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 9 Jan 2025 at 08:22, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 06.12.24 18:30, Adriano Cordova wrote:
-> > The command bootefi calls efi_init_obj_list to do the efi set up
-> > before launching an .efi payload, but efi_init_obj_list is called
-> > only once. There are some initializations which depend on the
-> > environment and should be done each time a payload gets launched and
-> > not only once and can now be done in efi_start_obj_list(). A motivation
-> > for this change is the following order of events:
+> On Thu, Jan 09, 2025 at 08:11:58AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > 1. Launch an EFI application (e.g. bootefi hello)
-> > 2. Change the ip address
-> > 3. Launch another application which uses the pxe protocol
+> > On Thu, 9 Jan 2025 at 08:05, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jan 09, 2025 at 08:01:13AM -0700, Simon Glass wrote:
+> > > > Hi Heinrich,
+> > > >
+> > > > On Sat, 4 Jan 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > >
+> > > > > On 11/13/24 16:09, Simon Glass wrote:
+> > > > > > This is another option to fix sunxi booting with bootstd, which may be
+> > > > > > better since it will work for all boards. We can then figure out how to
+> > > > > > automatically and deterministicaly decide when bootmgr should be used.
+> > > > > >
+> > > > > > This reverts commit f2bfa0cb17948aa4a0fa20fdf9014296b9c4d9c7.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > > If this patch is applied, we don't need to drop bootmgr for sunxi
+> > > > > >
+> > > > > > (no changes since v1)
+> > > > > >
+> > > > > >   boot/bootmeth_efi_mgr.c | 18 +-----------------
+> > > > > >   1 file changed, 1 insertion(+), 17 deletions(-)avilable
+> > > > > >
+> > > > > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
+> > > > > > index 23ae1e610ac..095fa74fc60 100644
+> > > > > > --- a/boot/bootmeth_efi_mgr.c
+> > > > > > +++ b/boot/bootmeth_efi_mgr.c
+> > > > > > @@ -14,8 +14,6 @@
+> > > > > >   #include <command.h>
+> > > > > >   #include <dm.h>
+> > > > > >   #include <efi_loader.h>
+> > > > > > -#include <efi_variable.h>
+> > > > > > -#include <malloc.h>
+> > > > > >
+> > > > > >   /**
+> > > > > >    * struct efi_mgr_priv - private info for the efi-mgr driver
+> > > > > > @@ -48,27 +46,13 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
+> > > > > >   static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+> > > > > >   {
+> > > > > >       struct efi_mgr_priv *priv = dev_get_priv(dev);
+> > > > > > -     efi_status_t ret;
+> > > > > > -     efi_uintn_t size;
+> > > > > > -     u16 *bootorder;
+> > > > > >
+> > > > > >       if (priv->fake_dev) {
+> > > > > >               bflow->state = BOOTFLOWST_READY;
+> > > > > >               return 0;
+> > > > > >       }
+> > > > > >
+> > > > > > -     ret = efi_init_obj_list();
+> > > > > > -     if (ret)
+> > > > > > -             return log_msg_ret("init", ret);
+> > > > > > -
+> > > > > > -     /* Enable this method if the "BootOrder" UEFI exists. */
+> > > > > > -     bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
+> > > > > > -                             &size);
+> > > > > > -     if (bootorder) {
+> > > > > > -             free(bootorder);
+> > > > > > -             bflow->state = BOOTFLOWST_READY;
+> > > > > > -             return 0;
+> > > > > > -     }
+> > > > > > +     /* To be implemented */
+> > > > >
+> > > > > The EFI boot manager can boot based on:
+> > > > >
+> > > > > * variable BootOrder
+> > > > > * variable BootNext
+> > > > > * an existing file EFI/BOOT/BOOT<arch>.EFI
+> > > > >
+> > > > > It obsoletes bootsmeth_efi.
+> > > > >
+> > > > > >
+> > > > > >       return -EINVAL;
+> > > > >
+> > > > > We must always run the EFI boot manager if it is enabled. So -EINVAL is
+> > > > > wrong here.
+> > > >
+> > > > Well, I don't believe you have a solution, then.
+> > > >
+> > > > You did suggest putting bootmgr later, as we discussed on irc.
+> > > >
+> > > > For now, I think we should apply this patch (and series), while we
+> > > > sort out how to make bootmgr more incremental. It should not be
+> > > > scanning every available device before it starts, since that can be
+> > > > very slow.
+> > >
+> > > Heinrich and I talked the other day, and we think the right path is the
+> > > "later" path, where we don't try and use efi bootmanager until
+> > > everything has been probed, and also drop the single "efi" option. This
+> > > should mean that by the time we would be trying efi bootmanager most if
+> > > not everything that needs to be probed has been probed. It doesn't make
+> > > any sense to have "efi bootmanger" be more incremental as conceptually
+> > > it's point is to show the user all the options.
+> >
+> > What is the single 'efi' option? I hope you don't mean the EFI bootmeth.
 >
-> Hello Adriano,
->
-> Thanks for addressing this issue.
->
-> There are a number of events that can lead to updating the IP address:
->
-> * EFI_PXE_BASE_CODE_PROTOCOL.Dhcp()
-> * EFI_PXE_BASE_CODE_PROTOCOL.SetStationIp()
-> * EFI_HTTP_PROTOCOL.Configure()
-> * command set env ethaddr#
-> * command dhcp
->
-> All of these events require:
->
-> * Updating the relevant ethaddr* variable.
-> * Updating any other references to the IP address.
->
-> When not only considering EFI applications but also EFI drivers
-> installed via the bootefi command all of these events can occur during
-> the runtime of EFI binaries.
->
-> Function efi_init_obj_list() is used for setups that are needed only
-> once before accessing the UEFI sub-system. It is not able to handle events.
->
-> If we need to update any internal UEFI data structures, we should do
-> this instantaneously when the event occurs and not when executing a UEFI
-> related shell command.
->
-> U-Boot already has callbacks invoked when variables are changed. These
-> are set up with U_BOOT_ENV_CALLBACK(). There is even a command 'env
-> callbacks' to list these callbacks.
->
-> You could define a new function to handle changes of the IP address and
-> invoke it via U_BOOT_ENV_CALLBACK(ipaddr, <function name>) or
-> U_BOOT_ENV_CALLBACK(netmask, <function name>).
->
-> With lwIP we can have multiple network interfaces. Each has a different
-> variable ipaddr# assigned to it. We will have to extend the concept of
-> U_BOOT_ENV_CALLBACK() to allow for wildcard matches by adjusting
-> find_env_callback(). With CONFIG_REGEX=y regular expressions could be
-> used for this purpose (cf. include/slre.h) but we should better avoid
-> the code size increase.
->
+> Yes, the single EFI bootmeth. Because part of the issue with that is to
+> be compliant a bunch of things need to be probed. And rather than have
+> an option to be only semi-compliant, the preference is to be compliant
+> and just tried later in the boot sequence.
 
-I have been saying for some time that EFI_LOADER should make use of
-U-Boot's existing tables, rather than creating its own duplicate ones
-with extra info.
+Well then you need a way to disable the single EFI bootmeth?
 
-This seems to have been understood as 'hang the EFI tables onto
-existing data structures', e.g. efi_disk_create_part(). But this leads
-to duplication.
+>
+> > Putting bootmanager at the very end is OK with me, if we really cannot
+> > figure out a way to know whether the system is using it or now. It is
+> > 'putting it in the middle' that I don't like.
+>
+> In the case of no specified boot order, after block (and after very
+> special things like FEL) and before network is what makes the most
+> sense. We don't need to try and DHCP/etc for it, just need to know if
+> the interface exists (and so the user can say / have configured, to try
+> and boot it).
 
-Perhaps the EFI_LOADER init should be quite small, and be done each
-time an app starts, to deal with the 'current' state of U-Boot?
+Apart from FEL, we also have ChromeOS, Android, QFW.
+
+>
+> > How to handle the case where bootorder only specifies a subset of
+> > options? Ideally we would just probe devices related to that subset.
+> > That is what I was getting at.
+>
+> Yes, that should work just fine, especially if we're in the middle?
+>
+> The big challenge here is that conceptually, "bootstd" and "efi
+> bootmanager" are duplicate functionality. They are both "figure out what
+> on the system we should boot". The compromise is to try "bootstd" on
+> block devices first (the common case).
+
+Are we trying to make boot slower?
+
+A better way to design this would be to integrate the EFI stuff with
+bootstd, rather than duplicating things. For example, a way to convert
+a BOOTxxxx device into a bootdev would permit faster booting, since we
+can just work through the boot order and request each device in turn.
+
+Once we give up on that and ask the user, we need to probe all devices.
+
+The monolithic init of EFI_LOADER is creating quite a few problems. Am
+I the only one that sees it?
 
 Regards,
 Simon
