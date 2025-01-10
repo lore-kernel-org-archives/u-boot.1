@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F58E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 11:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB42E77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 11:55:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46417801F5;
-	Fri, 10 Jan 2025 12:14:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 14DBF801F5;
+	Fri, 10 Jan 2025 12:55:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jN020L2A";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fQVlagnU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A50778036B; Fri, 10 Jan 2025 12:14:05 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B4A388036B; Fri, 10 Jan 2025 12:55:18 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6888E800D0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 12:14:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4D0B800D0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 12:55:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=baltazar.radics@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4361dc6322fso13993155e9.3
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 03:14:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736507643; x=1737112443; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=oPd19QcP7V3uZa7KsYCbdkODezOp4JfahAu8Fpuf+wk=;
- b=jN020L2A2Ev/1u71yZAS6AB4by+0kO3VarPNhkHMnFNMhUQ4MFxTChn1/V2mTNiquE
- KAJCzInv/PG2qQdef7Pm2H2DgTaJ+hOMwZ5U1lrqTkxJJTnjWUKk3XHWA8iEkwUB5EE/
- hyLAMnHV5nOkkjJlNHpVX5s76JtwE1FjFUJM1U32Q/9FphAloOufNWm4WWy6XAotiK8N
- TCk/xbjTLnb092K3zP1qoQQQ4S0GCJHAATNIrFAj53vO5faxT/e+rPqkWS/C/y1oEcnI
- J0Ixr+Zieqn8kWXEbpdnmc6NBhz2vB02PvnbiU9TpXVAxD8jBbuBzszCZ/b3K/QpHoSp
- Vqpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736507643; x=1737112443;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oPd19QcP7V3uZa7KsYCbdkODezOp4JfahAu8Fpuf+wk=;
- b=el53mO4/apPt52nN5eS9H4OO7hfeJZ6nliGf/BUbBv+RFobAQjb7AcxOGSa76xL64u
- awT05Y4ukj4pBDtqqFunJSVGm85CDRq4kridgy0BqSDSP6BMUGuSUkXyd4j4zIPsNWPx
- IuXg/wuWctcXpxZZiSI8+EdhPA6uNC7g+0P+n5eWItmD+/EHjci16pi1R/YLEtY2/4UV
- hkov2McC7BCpjbgOZSJ05BsBbauauZ5YvWR9fK26DZV4HHWOTUR+OXP9l8fylcXGsNx/
- iA44WG1KBlVeYC6UC84V8AhLB4UBZcVsffcx+J9oP6CsXMX7KIMG22SNc3iFhcOiDCId
- h1+Q==
-X-Gm-Message-State: AOJu0YwU/uuIveAeQb241CdrDKelKPlKyjV313Pa9RC0e5JkLAWEF0GM
- O+OJA+oUE+/LcbGPY7ki42fkiFAEAJr4n24/o3y2JsZ6TdxqnmhZyCfQyTym
-X-Gm-Gg: ASbGncuSqu8Ybwq5xRpA6n1PP9iKMbT5V+ZfwT1CRq+SQxzvOgz3Ju2sKX9TAjDvK0o
- 1kTzi10PwOLplR3AxKBjNLUIFSXD+8VAYz838j00tQk8XMDkDgx1N5KL5/HAUqTd4ALg9KLxbzn
- rs6DljSyPtyIVPM54NIjxjawpL/L8mfUA/6su/mkDaTVGCQEwHKP/Yv6PnI0iAelLR1IFhDfaPu
- JQl2a5nRtD95KJXaizPZmIVNmYZU4Zvmxow2DH0TGdfRElJhdJTlFfHZOZrAvtAbitu5YgtD2Sx
- PwU=
-X-Google-Smtp-Source: AGHT+IGlttaxKPpoAYPz4GQvpy6zbS9ubm1lRliMdHZNh02xpU6cQst+F/wbTquvAMzs6Q7zLq64Vw==
-X-Received: by 2002:a05:600c:1d10:b0:434:9e46:5bc with SMTP id
- 5b1f17b1804b1-436e26a7af2mr106392185e9.10.1736507642469; 
- Fri, 10 Jan 2025 03:14:02 -0800 (PST)
-Received: from pluto.karinthy.edu.hu ([2001:738:80e:b5f3:51ba:c885:8ac2:fd5d])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a9407fd62sm2469452f8f.92.2025.01.10.03.14.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 03:14:02 -0800 (PST)
-From: =?UTF-8?q?Baltaz=C3=A1r=20Radics?= <baltazar.radics@gmail.com>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?Baltaz=C3=A1r=20Radics?= <baltazar.radics@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot-amlogic@groups.io
-Subject: [PATCH v2] board: odroid-n2: Update docs for signing
-Date: Fri, 10 Jan 2025 12:11:24 +0100
-Message-ID: <20250110111335.9221-1-baltazar.radics@gmail.com>
-X-Mailer: git-send-email 2.47.1
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1736510116; x=1737114916; i=xypron.glpk@gmx.de;
+ bh=QNU9MXVT8ACXDZ26Fr4STB+pDewxi1nCDv7TAoAPXkw=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=fQVlagnUJctLQZE+RbqWl3x6yN68IeW8SUNxtK8sUVLboIAcCdn1E3kt3YisF1p8
+ oMMMxiUrJ2DEyLgLlQUatHOvI8UiaVI9yEAfCtJlLUaGA2L4xbsKhQNN0hjjZxuCp
+ pZIsXYSpBc5sgIKNUDeTFWg2zcg9XA2cd7tV6TRe6cgqYGTQ6fflzlr6uqnGBX2sC
+ JdRCp2kqEmq1fxdhk02X9E53/+6Y07hTQeBVgS5z4Ly9ihbVsAJpCQuj5lPhsqwv8
+ SxETpKPo5trxXiF6GnWC4AEfpbKTd9Wh/AZgrEIuTI4UYP4khy53iABB0qooQbx9S
+ 62wvYvjP+LWm/D+3BA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MqJm5-1tAgMR0kWx-00ZXIC; Fri, 10
+ Jan 2025 12:55:16 +0100
+Message-ID: <977fc27a-3a5f-4e11-b81c-4e18569b083a@gmx.de>
+Date: Fri, 10 Jan 2025 12:55:09 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Kconfig: Add a default cache line size for RISC-V
+To: Yu-Chien Peter Lin <peter.lin@sifive.com>
+References: <20250110085308.20760-1-peter.lin@sifive.com>
+Content-Language: en-US
+Cc: zong.li@sifive.com, greentime.hu@sifive.com, ycliang@andestech.com,
+ trini@konsulko.com, sjg@chromium.org, jiaxun.yang@flygoat.com,
+ u-boot@lists.denx.de, Rick Chen <rick@andestech.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250110085308.20760-1-peter.lin@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:gIhftMb4Yoa1Igd7V2DUUyeCjX836Xbic7HYSsK9irazblpCB8M
+ upZjvabbAy/83rfDL0NjZBT7rH/cidI7weJFV/7Rd5IZQCGil6FFbVDcPZDapBrnkz8sPfb
+ P3Qym052EihTwgWCH0/kB8QcOe9mNVxwRxpjPttL1CWDKDcTNnCa5cvZtKwVLAOIXj9ihdV
+ gHxskXJwBXn/rZLr2kO1g==
+UI-OutboundReport: notjunk:1;M01:P0:y4aMBcBIO+Q=;F3aQb6ji6M4SfDcsTGRrBWiBP7v
+ MDlolZCdKmuBor7NODVoXFnK/wKT59gVHubUZ/pDCogCQOvAKpjmuuVUw/NOwbV3YrRbz/VXR
+ O5b/kaxJ4aLo9d3eVeAPmhZFeuVaTztMYgwD5PKEa1weJLM7576hrRyND041um6VtTHyU9Crg
+ c8jLJ+IP9x8fEQQ8YSo8d/qUdUKttfSQLQi4cAFivjpKHinwZ6jauzLuo3RG3rCM5f8SOrNnh
+ rH/I0vHoSVFRPdU2Ja+CAQwkJlMPU5kg4U3xNQxbbNlKnaEkrUElpRYTQG4rH1jw66i3+RAHA
+ wCy/z8NmaJ6Tlv3fEiqaB741sxNGGl1M8bYokrr3hYJ9hHeQ4eGLDkXEy9joKhjxp/S8uQhpH
+ nEMTcjAkpPE0HDg0xOvlBqKlEHTrvmq81CvgxVRvFXPR6hz4zkvBO48nXSQiEZl/rKpI+QhQr
+ iVxW9er6N+xo58n/WFjgMsp5JF/TDoXDpNhO5OaxVQiVYUMuuaHJOx80GPRK6EUUAxtDZm4zO
+ Z8P+kSgE6uxRYRLRmcbBFwaKbPupbhKWKbTkYqY//XHPVXl+aesb9769v2SeZDdF1QE02ETuo
+ qICDUyVPJ5jGnC792O3ROWF69qF4m3vpB1UPWgCPMiKt8XegU/MWOvZXAkTieaV78SsRMLdXc
+ 8WFyUETeb3oel2dN9tHjI+5d/FIFTtgvCyB5mv9Salm7u1LpWLLpv5C+chRmPHqubALFRvRGB
+ 9WXXVFr+AsmFWFxHBGSd+LLhlHashclQToN8cyDlcUhGHXLfYhQrT7nt3pDJvGY7w/VQzYfb9
+ MhGDARjF9i5uzLkWfsq1azGXxPlHbqnkWmOrkwr5ccDo9HDYGtJt7zJSk3JxiyLKvimqv3ESO
+ Lx7n4qM8m613NoZsWVYNNoOg71NevPtqkSQyDQV7LK88N1CiHQunD/+3gdcpUZwfQ8/mFuLL2
+ k3gnGFdPbfaMFHJbwPuS4Pvad1ECvQzLGkAX8re5VnYnZisB/f5Ptu4W3xEiGBOKw9xYsTWrc
+ OiznFPqF5U2IDmIID9LNwWO0KD47tqPtbhwJJdl3SUd/kY1i9GqCkIFvONec21MNuV+tL9Itr
+ l1HGEEv2h0bXoKviAj9H/Z/qM5UCPO
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,66 +95,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The previous instructions resulted in a bootloader that wouldn't fit in
-an MBR gap. I have updated the docs based on upstream's build process.
+On 10.01.25 09:53, Yu-Chien Peter Lin wrote:
+> Some RISC-V platforms do not define the d-cache line size
+> through SYS_CACHE_SHIFT_n. Set a default value of 64 bytes
+> for such cases.
+>
+> Signed-off-by: Yu-Chien Peter Lin <peter.lin@sifive.com>
 
-Signed-off-by: Baltazár Radics <baltazar.radics@gmail.com>
----
+You might want to add the following sentence to the commit message to
+make it clear from where you took the 64 byte default value:
 
- doc/board/amlogic/odroid-n2.rst | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
+The RISC-V ISA profile RVA23U64 requires extension Zic64b (Cache blocks
+must be 64 bytes in size, naturally aligned in the address space).
 
-diff --git a/doc/board/amlogic/odroid-n2.rst b/doc/board/amlogic/odroid-n2.rst
-index 883720f8fb..5222a21c80 100644
---- a/doc/board/amlogic/odroid-n2.rst
-+++ b/doc/board/amlogic/odroid-n2.rst
-@@ -54,10 +54,9 @@ image so it is necessary to obtain binaries from sources published by the board
-     $ tar xvfJ gcc-linaro-arm-none-eabi-4.8-2013.11_linux.tar.xz
-     $ export PATH=$PWD/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux/bin:$PWD/gcc-linaro-arm-none-eabi-4.8-2013.11_linux/bin:$PATH
- 
--    $ DIR=odroid-n2
--    $ git clone --depth 1 https://github.com/hardkernel/u-boot.git -b odroidn2-v2015.01 $DIR
-+    $ git clone --depth 1 https://github.com/hardkernel/u-boot.git -b odroidg12-v2015.01 odroidg12
- 
--    $ cd odroid-n2
-+    $ cd odroidg12
-     $ make odroidn2_defconfig
-     $ make
-     $ export UBOOTDIR=$PWD
-@@ -74,12 +73,8 @@ Go back to the mainline U-Boot source tree then:
-     $ cp $UBOOTDIR/fip/g12b/bl2.bin fip/
-     $ cp $UBOOTDIR/fip/g12b/bl30.bin fip/
-     $ cp $UBOOTDIR/fip/g12b/bl31.img fip/
--    $ cp $UBOOTDIR/fip/g12b/ddr3_1d.fw fip/
-     $ cp $UBOOTDIR/fip/g12b/ddr4_1d.fw fip/
-     $ cp $UBOOTDIR/fip/g12b/ddr4_2d.fw fip/
--    $ cp $UBOOTDIR/fip/g12b/diag_lpddr4.fw fip/
--    $ cp $UBOOTDIR/fip/g12b/lpddr4_1d.fw fip/
--    $ cp $UBOOTDIR/fip/g12b/lpddr4_2d.fw fip/
-     $ cp $UBOOTDIR/fip/g12b/piei.fw fip/
-     $ cp $UBOOTDIR/fip/g12b/aml_ddr.fw fip/
-     $ cp u-boot.bin fip/bl33.bin
-@@ -113,7 +108,7 @@ Go back to the mainline U-Boot source tree then:
-                                           --level v3 --type bl31
-     $ $UBOOTDIR/fip/g12b/aml_encrypt_g12b --bl3sig --input fip/bl33.bin --compress lz4 \
-                                           --output fip/bl33.bin.enc \
--                                          --level v3 --type bl33 --compress lz4
-+                                          --level v3 --type bl33
-     $ $UBOOTDIR/fip/g12b/aml_encrypt_g12b --bl2sig --input fip/bl2_new.bin \
-                                           --output fip/bl2.n.bin.sig
-     $ $UBOOTDIR/fip/g12b/aml_encrypt_g12b --bootmk \
-@@ -124,11 +119,7 @@ Go back to the mainline U-Boot source tree then:
-                                           --bl33 fip/bl33.bin.enc \
-                                           --ddrfw1 fip/ddr4_1d.fw \
-                                           --ddrfw2 fip/ddr4_2d.fw \
--                                          --ddrfw3 fip/ddr3_1d.fw \
-                                           --ddrfw4 fip/piei.fw \
--                                          --ddrfw5 fip/lpddr4_1d.fw \
--                                          --ddrfw6 fip/lpddr4_2d.fw \
--                                          --ddrfw7 fip/diag_lpddr4.fw \
-                                           --ddrfw8 fip/aml_ddr.fw \
-                                           --level v3
- 
--- 
-2.47.1
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+CCing Rick as co-maintainer of RISC-V.
+
+> ---
+> This patch resolves compilation errors that occurs when
+> the TEE driver is enabled:
+>
+>    drivers/tee/tee-uclass.c:247:41: error: 'CONFIG_SYS_CACHELINE_SIZE' u=
+ndeclared (first use in this function); did you mean 'CONFIG_SYS_CBSIZE'?
+>      247 |                                         CONFIG_SYS_CACHELINE_=
+SIZE);
+>          |                                         ^~~~~~~~~~~~~~~~~~~~~=
+~~~~
+>    drivers/tee/optee/core.c: In function 'flush_shm_dcache':
+>    drivers/tee/optee/core.c:505:50: error: 'CONFIG_SYS_CACHELINE_SIZE' u=
+ndeclared (first use in this function); did you mean 'CONFIG_SYS_CBSIZE'?
+>      505 |         flush_dcache_range(rounddown((ulong)arg, CONFIG_SYS_C=
+ACHELINE_SIZE),
+>          |                                                  ^~~~~~~~~~~~=
+~~~~~~~~~~~~~
+> ---
+>   arch/Kconfig | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/arch/Kconfig b/arch/Kconfig
+> index bb2e7bedd10..b0190b1f415 100644
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -52,7 +52,8 @@ config SYS_CACHELINE_SIZE
+>   	default 64 if SYS_CACHE_SHIFT_6
+>   	default 32 if SYS_CACHE_SHIFT_5
+>   	default 16 if SYS_CACHE_SHIFT_4
+> -	# Fall-back for MIPS
+> +	# Fall-back for MIPS and RISC-V
+> +	default 64 if RISCV
+>   	default 32 if MIPS
+>
+>   config LINKER_LIST_ALIGN
 
