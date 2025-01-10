@@ -4,73 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0367E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 16:14:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEAB1E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 16:17:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0628C80702;
-	Fri, 10 Jan 2025 17:13:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
+	by phobos.denx.de (Postfix) with ESMTP id 5FAE9801F5;
+	Fri, 10 Jan 2025 17:17:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="TAERF0EN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NrmNM3AR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8383D8036B; Fri, 10 Jan 2025 14:57:42 +0100 (CET)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D97CB8036B; Fri, 10 Jan 2025 17:17:40 +0100 (CET)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDA49800D0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 14:57:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79E3D80050
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 17:17:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
-ARC-Seal: i=1; a=rsa-sha256; t=1736517455; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=KRgd6E6eCp3A0Jkm9KmNE6y95/wigCOql6Mchq8Jt4L92duHJz6WHEaqfg3xB4iTHJ7uwARfmHSg7Ks1VBquwrMo+qEGqlpLspCXv12NzpPJsf3bPqR+wpJR/bIHFaVB4dQl0b7AS2EvFU+hsRkprQBJLwcqGsSP2yMLSgVT+cc=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1736517455;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=WF2q2bNBu6S7hBAxvPl2Gzie053gP0B8HlyjaX16ixw=; 
- b=kq8QphzexYDjiw5qu20bXQ2yD1Vg8dy+5409T+Tm4TtknKn0YkBQSeHnAjUC18C4zFwkyLhw9mCMv28l6H0XFPjUmJk9jPgSKNCRWrJfN+7mH+gTdDOsPF39c84B25JQnLWVQt6dW0UhlbVOQ3tfViE4Llwlh6aD/5u13aqj1M0=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=pigmoral.tech;
- spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
- dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1736517455; 
- s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
- h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=WF2q2bNBu6S7hBAxvPl2Gzie053gP0B8HlyjaX16ixw=;
- b=TAERF0ENTeI6st0hGLAIrPfYP5FOSUOd2MiOI8z5WOch7qbekXe33Xnz1SHOZonw
- w8GtZFrdVBsgkkGqzhpw1UbTd+Thp4kUGcQC/5jHXq+VJyYDJ3NZq99UNrdUFHbapjg
- 4+f+rjPV4twZEkkEMACxWN2pAOlPtFQoVU9GI9Wo=
-Received: by mx.zohomail.com with SMTPS id 1736517453754483.8193132308568;
- Fri, 10 Jan 2025 05:57:33 -0800 (PST)
-From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Fri, 10 Jan 2025 21:55:27 +0800
-Subject: [PATCH v4 8/8] usb: dwc2: Replace uint<x>_t types with u<x>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-467a8d2d7f1so17077321cf.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 08:17:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1736525857; x=1737130657; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vlOOScPZQbGdVQ1Av9dLus2ES0R1LmIBC//t/fz1LwI=;
+ b=NrmNM3ARdf6j2w7X3ZquxgVyu9lgnh4qZ/OCWK6srdVWOClJf4KapQELDKSPcAczwD
+ Hx5lft3/0Xn4pa8WM7YaQz4KU8crRyuBtdKQBQJHyyVMgUObXX/65g3CrFn8Isv70eDv
+ 2Eo9MUsCKlKDMHzGhGrVWB9EMamITsC2VRWJ8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736525857; x=1737130657;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vlOOScPZQbGdVQ1Av9dLus2ES0R1LmIBC//t/fz1LwI=;
+ b=rg/PQlngyaRUyG98W0jcQOx4AGPUvA3+zLTYiIgxouOIxV8EG8Ls3S9sge9nen+ShQ
+ xZZOl0lMkN1hQekHDPOUYNaZZwSHXI70ZTHWLbmLuIiXUUt4GJqLdEFsOijGU6QaKibH
+ /uKKiaiauhQu8iFSUKVB/Y4vMFI2u39l8Bb3nVtLvA23h2IN4KMZq5GofrgLgCKfCflS
+ 65rl9+kkYxVoBuzCZTqtepIlnp3pN8PoUxTzIZXe1FGK8hn/xGJUCGdwePMpfUxKIx3G
+ 5p3VFRmz5t3UdlOZ0hhhJYNr9Y3ZgIeevaFH1N8Gxo+jmT+kI7U1kUCKXlbt8fhTQG/w
+ Ko+A==
+X-Gm-Message-State: AOJu0YxbHxGW04Z3bfj9gZpB71OCQvr1Qe0KiiH/poKK29rPtWE8fMNL
+ jgwvfId90DyJyJceh5HppsUbb83ZZpHvVfpk4y9pO1fDguJqf2z7nRWUyHC+UUQ=
+X-Gm-Gg: ASbGncu651su09SEzOmbLA2tcLTuuGz5Bto/cYjOGsdoDA0QM9Necqn96V/fcCbJHTU
+ DGLUIdHU7MmgE3ldsiQxaGnbSoBWrdVQyy+TV9ymuj6VTjbIU7CXmzIRlz/GPqUOfSXhye7EGfY
+ HF/s+EE/WNCFR3IRYOvqicScxux+0iWwCAXTMd9VQX00jUaqTotDxm3CHGfcBMnPBwl0r1su0fR
+ 6bG2mvKCM8XK1u5bxvSjowg7fjl+I09x1jMRSzvhc39zw2TKt5bHsk=
+X-Google-Smtp-Source: AGHT+IFvtY44u5FPUs57d1KhslXwYF08GjUkib26yT7fK10NaunAh24VvFqnKExy6hdwEjvdFnSEJw==
+X-Received: by 2002:a05:622a:1996:b0:466:a584:69f8 with SMTP id
+ d75a77b69052e-46c7107a481mr207339941cf.43.1736525857237; 
+ Fri, 10 Jan 2025 08:17:37 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46c873cc5c9sm10525261cf.52.2025.01.10.08.17.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Jan 2025 08:17:36 -0800 (PST)
+Date: Fri, 10 Jan 2025 10:17:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Dahl <ada@thorsis.com>,
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janne Grunau <j@jannau.net>, Julien Masson <jmasson@baylibre.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
+Message-ID: <20250110161732.GI3476@bill-the-cat>
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-18-sjg@chromium.org>
+ <20250108182528.GN3476@bill-the-cat>
+ <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
+ <20250109150954.GU3476@bill-the-cat>
+ <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
+ <20250109180817.GC3476@bill-the-cat>
+ <CAFLszThn-XcHruFe60TH8FnsKsH08NFEco2zt+9JBHkneQgo0Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250110-dwc2-dev-v4-8-987f4fd6f8b2@pigmoral.tech>
-References: <20250110-dwc2-dev-v4-0-987f4fd6f8b2@pigmoral.tech>
-In-Reply-To: <20250110-dwc2-dev-v4-0-987f4fd6f8b2@pigmoral.tech>
-To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
- Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de, seashell11234455@gmail.com, pbrobinson@gmail.com, 
- junhui.liu@pigmoral.tech
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1736517374; l=10630;
- i=junhui.liu@pigmoral.tech; s=20250109; h=from:subject:message-id;
- bh=lLg8Ujj6CpKn/kqhhRal6AGlR8dOD3RTP+F+KjIPUtI=;
- b=IDOsg3hjMXFYEe6fAO3Et/d2iCB5TyKbBW6jlnAcYydSb7e8u0kzgn3GESOJXBbtAzg5Z1TXX
- +vv7y3a8BzaAY+IRLZ8FndNfLOSYb8CZuwgecqhoooTaQOF5IfyG6hk
-X-Developer-Key: i=junhui.liu@pigmoral.tech; a=ed25519;
- pk=68KnSr7PNU3x0/qPdqkmlkr3EChzKC0ewuARfy9ZNnc=
-X-ZohoMailClient: External
-X-Mailman-Approved-At: Fri, 10 Jan 2025 17:13:21 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3beDTD9YfYlJwbJU"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThn-XcHruFe60TH8FnsKsH08NFEco2zt+9JBHkneQgo0Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,305 +119,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kongyang Liu <seashell11234455@gmail.com>
 
-Updates all instances of uint8_t, uint16_t, and uint32_t to u8, u16, and
-u32 respectively, ensuring consistent use of kernel-preferred types and
-resolving checkpatch.pl warnings.
+--3beDTD9YfYlJwbJU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
-Tested-by: Peter Robinson <pbrobinson@gmail.com>
-Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
----
- drivers/usb/gadget/dwc2_udc_otg.c |   4 +-
- drivers/usb/host/dwc2.c           | 100 +++++++++++++++++++-------------------
- 2 files changed, 52 insertions(+), 52 deletions(-)
+On Fri, Jan 10, 2025 at 06:39:11AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 9 Jan 2025 at 11:08, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Jan 09, 2025 at 08:14:53AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 9 Jan 2025 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Jan 09, 2025 at 05:36:03AM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Wed, 8 Jan 2025 at 11:25, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Mon, Jan 06, 2025 at 07:32:13AM -0700, Simon Glass wrote:
+> > > > > >
+> > > > > > > This function uses separate arguments for data and size. Use =
+the new
+> > > > > > > abuf instead, so that they are paired and in one place. In so=
+me cases it
+> > > > > > > also saves an argument, thus potentially reducing code size.
+> > > > > >
+> > > > > > This is one of the commits that globally increases size in both=
+ full
+> > > > > > U-Boot and SPL/etc.
+> > > > > >
+> > > > > > Is all of the "abuf" changes just a "tidy up" that increases th=
+e code a
+> > > > > > bit?
+> > > > >
+> > > > > Yes, a tidy-up which I hope will help overall. I have been thinki=
+ng
+> > > > > for a while of how to avoid having addr/size and ptr/size passed
+> > > > > everywhere. For now abuf seems to provide some sort of solution.
+> > > > >
+> > > > > I see this:
+> > > > >
+> > > > > 18: boot: Update fit_image_get_emb_data to use abuf
+> > > > >    aarch64: (for 1/1 boards) all +4.0 bss -24.0 spl/u-boot-spl:all
+> > > > > +16.0 spl/u-boot-spl:text +16.0 text +28.0
+> > > > >
+> > > > > so growth on firefly-rk3399 but not with rk3288. I am not sure if=
+ the
+> > > > > growth will tail off as there are more users, though. We might ev=
+en be
+> > > > > able to be more clever with static inlines.
+> > > >
+> > > > Yeah, lets not do this now then and worry about some "clean up" lat=
+er
+> > > > when we can show that it does, or does not, improve size.
+> > >
+> > > Oh.
+> > >
+> > > > And there's
+> > > > something wrong with your numbers:
+> > > > 01: Fix neighbor discovery ethernet address saving
+> > > >    aarch64:  w+   firefly-rk3399
+> > > > +(firefly-rk3399) Image 'simple-bin' is missing external blobs and =
+is non-functional: atf-bl31
+> > > > +(firefly-rk3399)
+> > > > +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (=
+atf-bl31):
+> > > > +(firefly-rk3399)    See the documentation for your board. You may =
+need to build ARM Trusted
+> > > > +(firefly-rk3399)    Firmware and build with BL31=3D/path/to/bl31.b=
+in
+> > > > +(firefly-rk3399) Image 'simple-bin' is missing optional external b=
+lobs but is still functional: tee-os
+> > > > +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (te=
+e-os):
+> > > > +(firefly-rk3399)    See the documentation for your board. You may =
+need to build Open Portable
+> > > > +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and bui=
+ld with TEE=3D/path/to/tee.bin
+> > > > +(firefly-rk3399) Some images are invalid
+> > > > 37: dm: core: Provide ofnode_find_subnode_unit()
+> > > >    aarch64: (for 1/1 boards) all +324.0 bss +32.0 spl/u-boot-spl:al=
+l +16.0 spl/u-boot-spl:text +16.0 text +292.0
+> > > >             firefly-rk3399 : all +324 bss +32 spl/u-boot-spl:all +1=
+6 spl/u-boot-spl:text +16 text +292
+> > > >                u-boot: add: 6/-1, grow: 4/-4 bytes: 516/-224 (292)
+> > > >                  function                                   old    =
+ new   delta
+> > > >                  ofnode_name_eq_unit                          -    =
+ 160    +160
+> > > >                  ofnode_find_subnode_unit                     -    =
+ 116    +116
+> > > >                  fit_image_get_data                          80    =
+ 176     +96
+> > > >                  fit_image_get_emb_data                       -    =
+  84     +84
+> > > >                  ofnode_write_prop                          224    =
+ 236     +12
+> > > >                  ofnode_add_subnode                         232    =
+ 244     +12
+> > > >                  abuf_init_const                              -    =
+  12     +12
+> > > >                  abuf_init                                    -    =
+  12     +12
+> > > >                  abuf_addr                                    -    =
+   8      +8
+> > > >                  fit_image_print                            780    =
+ 784      +4
+> > > >                  image_locate_script                        696    =
+ 692      -4
+> > > >                  fit_image_load                            1584    =
+1580      -4
+> > > >                  fit_image_verify                           176    =
+ 164     -12
+> > > >                  ofnode_find_subnode                        140    =
+ 116     -24
+> > > >                  fit_image_get_data_and_size                180    =
+   -    -180
+> > > >                spl-u-boot-spl: add: 3/-1, grow: 0/-1 bytes: 108/-92=
+ (16)
+> > > >                  function                                   old    =
+ new   delta
+> > > >                  fit_image_get_emb_data                       -    =
+  84     +84
+> > > >                  abuf_init_const                              -    =
+  12     +12
+> > > >                  abuf_init                                    -    =
+  12     +12
+> > > >                  load_simple_fit                            580    =
+ 568     -12
+> > > >                  fit_image_get_data                          80    =
+   -     -80
+> > >
+> > > Yes, that's the whole series, so not related to this change.
+> >
+> > Yes, that's the whole series including this change, so it's related to
+> > this change.
+>=20
+> Right, but it is due to ofnode_find_subnode(), etc.
+>=20
+> >
+> > >  I elected to have two versions of ofnode_find_subnode() to avoid the
+> > > size growth in the previous version. But the cost is larger size
+> > > growth when OF_LIVE is used.
+> > >
+> > > Without OF_LIVE, the size growth is tiny.
+> >
+> > And even worse in SPL, somehow. But you want more OF_LIVE users, not
+> > less, yes?
+>=20
+> Well, OF_LIVE is always quite a bit larger, at least at the moment. It
+> has both Linux's of_access stuff and libfdt. It's not OF_LIVE I am
+> bothered about, but I do want people using ofnode. Unfortunately
+> people still send patches which use libfdt directly.
+>=20
+> >
+> > > So...what to do?
+> >
+> > Well, if you drop the abuf changes for now, SPL won't change at all for
+> > most platforms and that'll be an improvement.
+>=20
+> Yes, I'll look at that. This is one of many examples where I have a
+> problem and realise that we need a nicer way of dealing with it, then
+> implement it in the series, but then the series loses focus. So then I
+> take it out again, then forget about it until next time, but I never
+> actually make the change.
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-index 084e9824faac03d47e23e0d52e81a9d12308e06a..c3fdc81e9096bb216b63ff0ac672d216bed3f23d 100644
---- a/drivers/usb/gadget/dwc2_udc_otg.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg.c
-@@ -466,8 +466,8 @@ static void reconfig_usbd(struct dwc2_udc *dev)
- 	/* 2. Soft-reset OTG Core and then unreset again. */
- 	int i;
- 	unsigned int uTemp;
--	uint32_t dflt_gusbcfg;
--	uint32_t rx_fifo_sz, tx_fifo_sz, np_tx_fifo_sz;
-+	u32 dflt_gusbcfg;
-+	u32 rx_fifo_sz, tx_fifo_sz, np_tx_fifo_sz;
- 	u32 max_hw_ep;
- 	int pdata_hw_ep;
- 
-diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-index b27429235798ce223bb8a11999e3d520c26ef377..16f21fa9083a71da1c8dd62d174712962d0227b1 100644
---- a/drivers/usb/host/dwc2.c
-+++ b/drivers/usb/host/dwc2.c
-@@ -39,16 +39,16 @@
- 
- struct dwc2_priv {
- #if CONFIG_IS_ENABLED(DM_USB)
--	uint8_t aligned_buffer[DWC2_DATA_BUF_SIZE] __aligned(ARCH_DMA_MINALIGN);
--	uint8_t status_buffer[DWC2_STATUS_BUF_SIZE] __aligned(ARCH_DMA_MINALIGN);
-+	u8 aligned_buffer[DWC2_DATA_BUF_SIZE] __aligned(ARCH_DMA_MINALIGN);
-+	u8 status_buffer[DWC2_STATUS_BUF_SIZE] __aligned(ARCH_DMA_MINALIGN);
- #ifdef CONFIG_DM_REGULATOR
- 	struct udevice *vbus_supply;
- #endif
- 	struct phy phy;
- 	struct clk_bulk clks;
- #else
--	uint8_t *aligned_buffer;
--	uint8_t *status_buffer;
-+	u8 *aligned_buffer;
-+	u8 *status_buffer;
- #endif
- 	u8 in_data_toggle[MAX_DEVICE][MAX_ENDPOINT];
- 	u8 out_data_toggle[MAX_DEVICE][MAX_ENDPOINT];
-@@ -67,10 +67,10 @@ struct dwc2_priv {
- 
- #if !CONFIG_IS_ENABLED(DM_USB)
- /* We need cacheline-aligned buffers for DMA transfers and dcache support */
--DEFINE_ALIGN_BUFFER(uint8_t, aligned_buffer_addr, DWC2_DATA_BUF_SIZE,
--		ARCH_DMA_MINALIGN);
--DEFINE_ALIGN_BUFFER(uint8_t, status_buffer_addr, DWC2_STATUS_BUF_SIZE,
--		ARCH_DMA_MINALIGN);
-+DEFINE_ALIGN_BUFFER(u8, aligned_buffer_addr, DWC2_DATA_BUF_SIZE,
-+		    ARCH_DMA_MINALIGN);
-+DEFINE_ALIGN_BUFFER(u8, status_buffer_addr, DWC2_STATUS_BUF_SIZE,
-+		    ARCH_DMA_MINALIGN);
- 
- static struct dwc2_priv local;
- #endif
-@@ -85,7 +85,7 @@ static struct dwc2_priv local;
-  */
- static void init_fslspclksel(struct dwc2_core_regs *regs)
- {
--	uint32_t phyclk;
-+	u32 phyclk;
- 
- #if (DWC2_PHY_TYPE == DWC2_PHY_TYPE_FS)
- 	phyclk = HCFG_FSLSPCLKSEL_48_MHZ;	/* Full speed PHY */
-@@ -95,9 +95,9 @@ static void init_fslspclksel(struct dwc2_core_regs *regs)
- #endif
- 
- #ifdef DWC2_ULPI_FS_LS
--	uint32_t hwcfg2 = readl(&regs->global_regs.ghwcfg2);
--	uint32_t hval = FIELD_GET(GHWCFG2_HS_PHY_TYPE_MASK, ghwcfg2);
--	uint32_t fval = FIELD_GET(GHWCFG2_FS_PHY_TYPE_MASK, ghwcfg2);
-+	u32 hwcfg2 = readl(&regs->global_regs.ghwcfg2);
-+	u32 hval = FIELD_GET(GHWCFG2_HS_PHY_TYPE_MASK, ghwcfg2);
-+	u32 fval = FIELD_GET(GHWCFG2_FS_PHY_TYPE_MASK, ghwcfg2);
- 
- 	if (hval == GHWCFG2_FS_PHY_TYPE_SHARED_UTMI && fval == GHWCFG2_HS_PHY_TYPE_UTMI)
- 		phyclk = HCFG_FSLSPCLKSEL_48_MHZ;	/* Full speed PHY */
-@@ -172,9 +172,9 @@ static int dwc_vbus_supply_exit(struct udevice *dev)
- static void dwc_otg_core_host_init(struct udevice *dev,
- 				   struct dwc2_core_regs *regs)
- {
--	uint32_t nptxfifosize = 0;
--	uint32_t ptxfifosize = 0;
--	uint32_t hprt0 = 0;
-+	u32 nptxfifosize = 0;
-+	u32 ptxfifosize = 0;
-+	u32 hprt0 = 0;
- 	int i, ret, num_channels;
- 
- 	/* Restart the Phy Clock */
-@@ -253,9 +253,9 @@ static void dwc_otg_core_init(struct udevice *dev)
- {
- 	struct dwc2_priv *priv = dev_get_priv(dev);
- 	struct dwc2_core_regs *regs = priv->regs;
--	uint32_t ahbcfg = 0;
--	uint32_t usbcfg = 0;
--	uint8_t brst_sz = DWC2_DMA_BURST_SIZE;
-+	u32 ahbcfg = 0;
-+	u32 usbcfg = 0;
-+	u8 brst_sz = DWC2_DMA_BURST_SIZE;
- 
- 	/* Common Initialization */
- 	usbcfg = readl(&regs->global_regs.gusbcfg);
-@@ -347,9 +347,9 @@ static void dwc_otg_core_init(struct udevice *dev)
- 	usbcfg = readl(&regs->global_regs.gusbcfg);
- 	usbcfg &= ~(GUSBCFG_ULPI_FS_LS | GUSBCFG_ULPI_CLK_SUSP_M);
- #ifdef DWC2_ULPI_FS_LS
--	uint32_t hwcfg2 = readl(&regs->global_regs.ghwcfg2);
--	uint32_t hval = FIELD_GET(GHWCFG2_HS_PHY_TYPE_MASK, ghwcfg2);
--	uint32_t fval = FIELD_GET(GHWCFG2_FS_PHY_TYPE_MASK, ghwcfg2);
-+	u32 hwcfg2 = readl(&regs->global_regs.ghwcfg2);
-+	u32 hval = FIELD_GET(GHWCFG2_HS_PHY_TYPE_MASK, ghwcfg2);
-+	u32 fval = FIELD_GET(GHWCFG2_FS_PHY_TYPE_MASK, ghwcfg2);
- 
- 	if (hval == GHWCFG2_FS_PHY_TYPE_SHARED_UTMI && fval == GHWCFG2_HS_PHY_TYPE_UTMI) {
- 		usbcfg |= GUSBCFG_ULPI_FS_LS;
-@@ -402,9 +402,9 @@ static void dwc_otg_core_init(struct udevice *dev)
-  * @param regs Programming view of DWC_otg controller
-  * @param hc Information needed to initialize the host channel
-  */
--static void dwc_otg_hc_init(struct dwc2_core_regs *regs, uint8_t hc_num,
--		struct usb_device *dev, uint8_t dev_addr, uint8_t ep_num,
--		uint8_t ep_is_in, uint8_t ep_type, uint16_t max_packet)
-+static void dwc_otg_hc_init(struct dwc2_core_regs *regs, u8 hc_num,
-+			    struct usb_device *dev, u8 dev_addr, u8 ep_num,
-+			    u8 ep_is_in, u8 ep_type, u16 max_packet)
- {
- 	struct dwc2_hc_regs *hc_regs = &regs->host_regs.hc[hc_num];
- 	u32 hcchar = FIELD_PREP(HCCHAR_DEVADDR_MASK, dev_addr) |
-@@ -427,9 +427,9 @@ static void dwc_otg_hc_init(struct dwc2_core_regs *regs, uint8_t hc_num,
- }
- 
- static void dwc_otg_hc_init_split(struct dwc2_hc_regs *hc_regs,
--				  uint8_t hub_devnum, uint8_t hub_port)
-+				  u8 hub_devnum, u8 hub_port)
- {
--	uint32_t hcsplt = 0;
-+	u32 hcsplt = 0;
- 
- 	hcsplt = HCSPLT_SPLTENA;
- 	hcsplt |= FIELD_PREP(HCSPLT_HUBADDR_MASK, hub_devnum);
-@@ -447,24 +447,24 @@ static int dwc_otg_submit_rh_msg_in_status(struct dwc2_core_regs *regs,
- 					   struct usb_device *dev, void *buffer,
- 					   int txlen, struct devrequest *cmd)
- {
--	uint32_t hprt0 = 0;
--	uint32_t port_status = 0;
--	uint32_t port_change = 0;
-+	u32 hprt0 = 0;
-+	u32 port_status = 0;
-+	u32 port_change = 0;
- 	int len = 0;
- 	int stat = 0;
- 
- 	switch (cmd->requesttype & ~USB_DIR_IN) {
- 	case 0:
--		*(uint16_t *)buffer = cpu_to_le16(1);
-+		*(u16 *)buffer = cpu_to_le16(1);
- 		len = 2;
- 		break;
- 	case USB_RECIP_INTERFACE:
- 	case USB_RECIP_ENDPOINT:
--		*(uint16_t *)buffer = cpu_to_le16(0);
-+		*(u16 *)buffer = cpu_to_le16(0);
- 		len = 2;
- 		break;
- 	case USB_TYPE_CLASS:
--		*(uint32_t *)buffer = cpu_to_le32(0);
-+		*(u32 *)buffer = cpu_to_le32(0);
- 		len = 4;
- 		break;
- 	case USB_RECIP_OTHER | USB_TYPE_CLASS:
-@@ -498,7 +498,7 @@ static int dwc_otg_submit_rh_msg_in_status(struct dwc2_core_regs *regs,
- 		if (hprt0 & HPRT0_OVRCURRCHG)
- 			port_change |= USB_PORT_STAT_C_OVERCURRENT;
- 
--		*(uint32_t *)buffer = cpu_to_le32(port_status |
-+		*(u32 *)buffer = cpu_to_le32(port_status |
- 					(port_change << 16));
- 		len = 4;
- 		break;
-@@ -519,11 +519,11 @@ static int dwc_otg_submit_rh_msg_in_descriptor(struct usb_device *dev,
- 					       struct devrequest *cmd)
- {
- 	unsigned char data[32];
--	uint32_t dsc;
-+	u32 dsc;
- 	int len = 0;
- 	int stat = 0;
--	uint16_t wValue = cpu_to_le16(cmd->value);
--	uint16_t wLength = cpu_to_le16(cmd->length);
-+	u16 wValue = cpu_to_le16(cmd->value);
-+	u16 wLength = cpu_to_le16(cmd->length);
- 
- 	switch (cmd->requesttype & ~USB_DIR_IN) {
- 	case 0:
-@@ -606,7 +606,7 @@ static int dwc_otg_submit_rh_msg_in_configuration(struct usb_device *dev,
- 
- 	switch (cmd->requesttype & ~USB_DIR_IN) {
- 	case 0:
--		*(uint8_t *)buffer = 0x01;
-+		*(u8 *)buffer = 0x01;
- 		len = 1;
- 		break;
- 	default:
-@@ -650,8 +650,8 @@ static int dwc_otg_submit_rh_msg_out(struct dwc2_priv *priv,
- 	struct dwc2_core_regs *regs = priv->regs;
- 	int len = 0;
- 	int stat = 0;
--	uint16_t bmrtype_breq = cmd->requesttype | (cmd->request << 8);
--	uint16_t wValue = cpu_to_le16(cmd->value);
-+	u16 bmrtype_breq = cmd->requesttype | (cmd->request << 8);
-+	u16 wValue = cpu_to_le16(cmd->value);
- 
- 	switch (bmrtype_breq & ~USB_DIR_IN) {
- 	case (USB_REQ_CLEAR_FEATURE << 8) | USB_RECIP_ENDPOINT:
-@@ -724,10 +724,10 @@ static int dwc_otg_submit_rh_msg(struct dwc2_priv *priv, struct usb_device *dev,
- 	return stat;
- }
- 
--int wait_for_chhltd(struct dwc2_hc_regs *hc_regs, uint32_t *sub, u8 *toggle)
-+int wait_for_chhltd(struct dwc2_hc_regs *hc_regs, u32 *sub, u8 *toggle)
- {
- 	int ret;
--	uint32_t hcint, hctsiz;
-+	u32 hcint, hctsiz;
- 
- 	ret = wait_for_bit_le32(&hc_regs->hcint, HCINTMSK_CHHLTD, true,
- 				2000, false);
-@@ -764,7 +764,7 @@ static int transfer_chunk(struct dwc2_hc_regs *hc_regs, void *aligned_buffer,
- 			  int xfer_len, int *actual_len, int odd_frame)
- {
- 	int ret = 0;
--	uint32_t sub;
-+	u32 sub;
- 
- 	debug("%s: chunk: pid %d xfer_len %u pkts %u\n", __func__,
- 	      *pid, xfer_len, num_packets);
-@@ -834,10 +834,10 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
- 	int ret = 0;
- 	int do_split = 0;
- 	int complete_split = 0;
--	uint32_t xfer_len;
--	uint32_t num_packets;
-+	u32 xfer_len;
-+	u32 num_packets;
- 	int stop_transfer = 0;
--	uint32_t max_xfer_len;
-+	u32 max_xfer_len;
- 	int ssplit_frame_num = 0;
- 
- 	debug("%s: msg: pipe %lx pid %d in %d len %d\n", __func__, pipe, *pid,
-@@ -859,9 +859,9 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
- 
- 	/* Check if the target is a FS/LS device behind a HS hub */
- 	if (dev->speed != USB_SPEED_HIGH) {
--		uint8_t hub_addr;
--		uint8_t hub_port;
--		uint32_t hprt0 = readl(&regs->host_regs.hprt0);
-+		u8 hub_addr;
-+		u8 hub_port;
-+		u32 hprt0 = readl(&regs->host_regs.hprt0);
- 
- 		if (FIELD_GET(HPRT0_SPD_MASK, hprt0) == HPRT0_SPD_HIGH_SPEED) {
- 			usb_find_usb2_hub_address_port(dev, &hub_addr,
-@@ -876,7 +876,7 @@ int chunk_msg(struct dwc2_priv *priv, struct usb_device *dev,
- 
- 	do {
- 		int actual_len = 0;
--		uint32_t hcint;
-+		u32 hcint;
- 		int odd_frame = 0;
- 		xfer_len = len - done;
- 
-@@ -1083,7 +1083,7 @@ static int dwc2_reset(struct udevice *dev)
- static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
- {
- 	struct dwc2_core_regs *regs = priv->regs;
--	uint32_t snpsid;
-+	u32 snpsid;
- 	int i, j;
- 	int ret;
- 
+I hate to start to derail this, but refactor for "nicer code" is very
+much subjective. Especially when it also grows the code (and it's not
+clear that wider usage would result in shrinkage). So yes, this really
+needs to be put aside and also part of why I keep asking for one thing
+at a time.
 
--- 
-2.47.1
+> > And I'm going to keep complaining about size growth here because a
+> > non-trivial subset of users just wants things to boot quickly and be
+> > small.
+>=20
+> Yes, you won't get any complaints from me on that. I did propose some
+> automated checking a few years back, but it never went anywhere.
 
+It be great if buildman size comparison had some way to csv the output.
+That's what's missing imo from being able to have some automation or
+even just nicer tooling.
+
+--=20
+Tom
+
+--3beDTD9YfYlJwbJU
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeBSBQACgkQFHw5/5Y0
+tyw8fAv/X5zP9du0b+p+o4m5PohpnObT9DHfjW/B5KAd4n7lnJSc7YxofcLnHOAb
+KVUO/CNwzEGIwp+q930DkARozQJTkknL236ipzXXsBVwsJpx7kaNIXEWsLWY2rQg
+NJL/ZAk4j6iLjsaDbrFsf3K3wrjxlMCqtUM7UtQ2wyYcvoCOxuSZmL3PKd99jo2P
+GpkfAO+OpOo9QCg3LngBTdEMqlEtK27UjKwzfzaEXed2c2H+Ie6u+4DS3pM9O8UP
+N2g8taZJNfGCTHwDTQjYcoTDV/9GbmY2K8vkjgx++gBy8xe83s1AmN+TuJu7ofpA
+usuGUPITUPe5POOCreHWvTzYdqKcSVPHF4pHaudkl3wIGrqtKW8FHJeJqdVdK6Sf
+d5FsHEYfdo0C83R4vLWDtvK8ECtGQcVXp8pFpmlfUm/nDRSfFFtcsgnu6p5k8/Gy
+Sv02+X8M296ycotYfloyQgueOIjUQGme6DvHgC470TKyT3dkce7PGXy1uIMNv8T1
+v8TQ/12V
+=UL1v
+-----END PGP SIGNATURE-----
+
+--3beDTD9YfYlJwbJU--
