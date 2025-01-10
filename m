@@ -4,114 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEC98E7719C
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 09:53:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6959CE7719D
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 10:09:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21FA7800D0;
-	Fri, 10 Jan 2025 10:52:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CCF37801F5;
+	Fri, 10 Jan 2025 11:09:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CCspnT5L";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="P3AoluZf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47CE1801F5; Fri, 10 Jan 2025 10:52:58 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 65EE98036B; Fri, 10 Jan 2025 11:09:14 +0100 (CET)
+Received: from mail-m32124.qiye.163.com (mail-m32124.qiye.163.com
+ [220.197.32.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADF34800C2
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 10:52:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C996A800D0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 11:09:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4364a37a1d7so19841955e9.3
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 01:52:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736502775; x=1737107575; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=KTGvgSlqHSdjdGjgvqmgklWQachImCGJkJPC8PaU2PE=;
- b=CCspnT5Ld4bqwSRK4NTNEc5qxBPnukvgLgJTXgTRlLfEBH4aug8WCnCVO410BCRj3x
- AxDhieLyhALqkICyKMI/s8PMqI0KZuhyNXl+jrnPoR+R0TgOM6F8b2CEe0+vR22Tmlgw
- +lMFlXxWJOJLlV3Zx6y6EgCclYrMOXJIPILXdqt9XVFebw1G3OWSl9XNLyT5hG6puL7e
- HjpaaHOGPRX33ioLWVwf30UF2B6laNLGmchswkSa3bQES7M+XTtKHc1JDRPPOIQdfY+w
- 56Hnz/ot/0lcubjyk3ub/S8RA/PBn36jrgm07TG+rjgBJIl4kqyhka82JL6HFSNzjLcy
- Octw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736502775; x=1737107575;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=KTGvgSlqHSdjdGjgvqmgklWQachImCGJkJPC8PaU2PE=;
- b=I5XbdOOx7EXzrJuLQTcxRPkZonsg5SAjEkqnE/y3FFDKZGi/taFOeoq1YrqZEo5/Cw
- SdYuwWWrAVTHf0iB8wUKMI5XMrm0jdKCATTC9s9a8PcrKaSE1+z30gFnXPAOt/Edyrzm
- eD1l4khQgs79Urp53uNo87L6nXnLcdXnBgpsKUfhqTI0Q0VZI1C9mbMf7d0ztSoqadFu
- x5k+Kd/xrpr2Oq9eBeekYtMhKm4Jnoz15qMyfHGXyE+o13o9EKCxJdGdhaWmzankJqbS
- UPI+yA3LS9nxCfmAS0sy1Jalnrkmoa2x6c1CG0pfv6UMo5awulI+5lGekcfIXA202Pfn
- frpw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVjmmOSVN5a1QgcFkbSi65eeA8Bl3QSeGu8WqBhDT0xX8rx1NAWHS/ESoBsRIbKwl56Ihw85aU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyn35/WXt4ArKUKmMsEaCYmzF71cfU0l8AlrGhaL3X/32jnvzjk
- ierVybiSsSDJZ+sQheX8XftBJAzp3cYDOslVRtWz42Okog0KGSekOtzOQIJ1b6c=
-X-Gm-Gg: ASbGncv93ZRecYxAipTGvgQrN9zh+zEkmycS7Uf35feH0+Mo/P9uq5O2ozJ2zkYE8ug
- AVlBO0KcmKinJjjiX4RCgOV3F3lxRERKqG2V9buL8xyFvQ/WDVOvJZJHsXxJPiB6wchZo3VV66j
- cKo7IoeTg+WPqjhZcykq9FlT5qHUD6/m2LzzQY8TY0j50Q3/+/xInJv8WR8WA6kzYRnErrHWjRd
- LhfDazRisfs8QzYzTbQ7pHZp/REqCJKoX4R/UXglKh61jWp+//yuAUS1SqklFi2WoFGtVOdq8De
- xxnJYZxUwj+fqeU8RTibMRpA9//r1D448A==
-X-Google-Smtp-Source: AGHT+IE+e1o6at3dxDpqHrOfkViJYmpSZv8MJO0NYLPQcunMxYHijSnmT6If/sH48qvI1z7Tdfeylw==
-X-Received: by 2002:a05:600c:470f:b0:434:a94f:f8a9 with SMTP id
- 5b1f17b1804b1-436e26f1305mr72758085e9.28.1736502774962; 
- Fri, 10 Jan 2025 01:52:54 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:bf4e:5758:59ef:deb8?
- ([2a01:e0a:982:cbb0:bf4e:5758:59ef:deb8])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e2e89ca5sm81330755e9.29.2025.01.10.01.52.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Jan 2025 01:52:54 -0800 (PST)
-Message-ID: <242faa80-7b18-4d03-b7f8-b9a809eeb585@linaro.org>
-Date: Fri, 10 Jan 2025 10:52:53 +0100
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from localhost.localdomain (unknown [103.29.142.67])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 856632fb;
+ Fri, 10 Jan 2025 18:09:00 +0800 (GMT+08:00)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip-20250110
+Date: Fri, 10 Jan 2025 18:08:56 +0800
+Message-Id: <20250110100856.1567840-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v1] usb: dwc3: core: Fix timeout check
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, marex@denx.de,
- trini@konsulko.com, mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
- u-boot@lists.denx.de
-References: <20250110074306.3897847-1-quic_varada@quicinc.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250110074306.3897847-1-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSUJDVh1ITx5IHhpNGUpIQ1YVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxOVUpLS1
+ VKQktLWQY+
+X-HM-Tid: 0a944fb0487203afkunm856632fb
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PQg6Ogw5PDINOQ4qP1EOI09I
+ LkgwCzhVSlVKTEhNTktITE9KTEhIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUpIT0hKNwY+
+DKIM-Signature: a=rsa-sha256;
+ b=P3AoluZfG/UzqM03wbjvJ99QE1F3q3mg1C+ps9ZCAayhs0+YYw320U9gy68h8CHVVOvZ0dfikyHgaA+mLF655ZnIPKzrH1M3c4EyDSM+ELwMaDFVILY1ezYcamRYUOdc25dKe8dfjT1BXIy85oD3wc59EACljWThE8uAivXQyEI=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=xvaLoIIiviDxCIhLHCEDgf4qMffTyoBQi7uRlgB/9QE=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,42 +63,253 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/01/2025 08:43, Varadarajan Narayanan wrote:
-> dwc3_core_init loops 'timeout' times to check if the IP block is out
-> of reset using 'while (timeout--)'. If there is some issue and
-> the block doesn't come out of reset, the loop will run till
-> 'timeout' becomes zero and the post decrement operator would set
-> timeout to 0xffffffff. Though the IP block is not out reset, the
-> subsequent if check 'if !timeout' would fail as timeout is not
-> equal to zero and the function proceeds with the initialization.
-> 
-> Make this a pre decrement to address this.
-> 
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> ---
->   drivers/usb/dwc3/core.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> index a35b8c2f64..8f58e4ea2d 100644
-> --- a/drivers/usb/dwc3/core.c
-> +++ b/drivers/usb/dwc3/core.c
-> @@ -612,7 +612,7 @@ static int dwc3_core_init(struct dwc3 *dwc)
->   	/* issue device SoftReset too */
->   	timeout = 5000;
->   	dwc3_writel(dwc->regs, DWC3_DCTL, DWC3_DCTL_CSFTRST);
-> -	while (timeout--) {
-> +	while (--timeout) {
->   		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
->   		if (!(reg & DWC3_DCTL_CSFTRST))
->   			break;
+Hi Tom,
 
-Good catch !
+Please pull the updates for rockchip platform:
+- Add boards:
+	rk3566: FriendlyARM NanoPi R3S
+	rk3588s: Radxa ROCK 5C,
+	rk3588: Khadas Edge2
+- Migrate to OF_UPSTREAM:
+	rk3066a/rk3188;
+	rk3288: tinker, miqi, firefly;
+- Migrate to TPL: rk3399 kevin and bob;
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/24129
+
+Thanks,
+- Kever
+
+The following changes since commit 38a371110308ebeb277e20531a7b698b7981bbfa:
+
+  Merge tag 'tpm-master-07012025' of https://source.denx.de/u-boot/custodians/u-boot-tpm (2025-01-09 11:11:27 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20250110
+
+for you to fetch changes up to 34df868161e470e5de04db059daa90f12e824693:
+
+  rockchip: rk3308: Implement checkboard() to print SoC variant (2025-01-10 15:17:26 +0800)
+
+----------------------------------------------------------------
+Cristian Ciocaltea (1):
+      arm64: dts: rockchip: Add HDMI0 node to rk3588
+
+Daniel Semkowicz (1):
+      board: theobroma-systems: Update TF-A setup steps for RK3588 boards
+
+FUKAUMI Naoki (3):
+      arm64: dts: rockchip: add Radxa ROCK 5C
+      rockchip: Add support for Radxa ROCK 5C
+      rockchip: rk3399: expand space for decompressed kernel
+
+Heiko Stuebner (1):
+      clk: rockchip: rk3588: fix mask define for aclk_vop_root
+
+Jacobe Zang (1):
+      board: rockchip: add Khadas Edge2 RK3588 board
+
+Johan Jonker (2):
+      rockchip: use OF_UPSTREAM for rk3066a/rk3188
+      rockchip: rk3066a/rk3188: use includes from dts/upstream
+
+Jonas Karlman (56):
+      rockchip: rk3288: Use rk3288-power.h from dts/upstream
+      rockchip: clk: rk3288: Drop use of SCLK_MAC_PLL
+      rockchip: rk3288: Use rk3288.dtsi from dts/upstream
+      rockchip: rk3288: Fix bootph prop for vop nodes
+      board: rockchip: rk3288-tinker: Add myself as reviewer to MAINTAINERS
+      rockchip: rk3288-tinker: Sort u-boot.dtsi nodes alphabetically
+      rockchip: rk3288-tinker: Only include required DT nodes in TPL
+      rockchip: rk3288-tinker: Drop unused vcc_sd regulator from SPL
+      rockchip: rk3288-tinker: Include mmc nodes in pre-reloc for env load
+      rockchip: rk3288-tinker: Set cpuid and serial env var
+      rockchip: rk3288-tinker: Sync defconfig options from rk3288-tinker-s
+      rockchip: rk3288-tinker: Use common bss and stack addresses
+      rockchip: rk3288-tinker: Drop use of silent console and late boardinfo
+      rockchip: rk3288-tinker: Drop USE_PREBOOT Kconfig option
+      rockchip: rk3288-tinker: Migrate to OF_UPSTREAM
+      rockchip: rk3288-tinker: Fix slow Ethernet initializion
+      rockchip: rk3288-tinker: Change to use FIT
+      rockchip: rk3288-miqi: Sort u-boot.dtsi nodes alphabetically
+      rockchip: rk3288-miqi: Remove unused work led node from xPL
+      rockchip: rk3288-miqi: Set ethaddr env based on cpuid
+      rockchip: rk3288-miqi: Use TPL with common bss and stack addresses
+      rockchip: rk3288-miqi: Include required DT nodes in xPL
+      rockchip: rk3288-miqi: Include sdmmc regulator in SPL
+      rockchip: rk3288-miqi: Drop use of silent console and late boardinfo
+      rockchip: rk3288-miqi: Drop USE_PREBOOT Kconfig option
+      rockchip: rk3288-miqi: Migrate to OF_UPSTREAM
+      rockchip: rk3288-miqi: Fix slow Ethernet initializion
+      rockchip: rk3288-miqi: Change to use FIT
+      rockchip: rk3288-firefly: Drop unused SPL_LED related code
+      rockchip: rk3288-firefly: Sort u-boot.dtsi nodes alphabetically
+      rockchip: rk3288-firefly: Set ethaddr env based on cpuid
+      rockchip: rk3288-firefly: Use common bss and stack addresses
+      rockchip: rk3288-firefly: Include required DT nodes in xPL
+      rockchip: rk3288-firefly: Include sdmmc regulator in SPL
+      rockchip: rk3288-firefly: Drop use of silent console and late boardinfo
+      rockchip: rk3288-firefly: Drop USE_PREBOOT Kconfig option
+      rockchip: rk3288-firefly: Migrate to OF_UPSTREAM
+      rockchip: rk3288-firefly: Fix slow Ethernet initializion
+      rockchip: rk3288-firefly: Change to use FIT
+      rockchip: rk3399: Fix TPL build of bob and kevin
+      rockchip: rk3399-gru: Use SYS_SPI_U_BOOT_OFFS value in offset prop
+      rockchip: rk3399-gru: Move SPI flash payload offset for bob and kevin
+      rockchip: rk3399-gru: Fix include of TPL in u-boot.rom image
+      rockchip: rk3399-gru: Use TPL with common bss and stack addresses
+      rockchip: rk3399-gru: Include binman generated FIT in u-boot.rom image
+      rockchip: rk3399: Drop common Kconfig options already implied
+      rockchip: rk3399-gru: Remove unused nodes from xPL control FDT
+      rockchip: rk3399-gru: Enable dcache and signature validation in SPL
+      rockchip: rk3399-gru: Use SDMA mode to read from eMMC
+      rockchip: rk3399-gru: Include pinctrl and regulators in SPL
+      rockchip: rk3399: Drop unneeded bob and kevin board specific code
+      rockchip: rk3588-nanopc-t6-lts: Add missing board -u-boot.dtsi
+      rockchip: rk3399-rock-pi-4: Fix Synchronous Abort
+      rockchip: rk356x: Implement checkboard() to print SoC variant
+      rockchip: rk3588: Implement checkboard() to print SoC variant
+      rockchip: rk3308: Implement checkboard() to print SoC variant
+
+Paul Kocialkowski (3):
+      rockchip: rk3399-roc-pc: Hook sysreset gpio to enable full reset
+      rockchip: rk3399-rockpro64: Hook sysreset gpio to enable full reset
+      rockchip: rk3399-rockpro64: Disable bootstage instrumentation config
+
+Sam Edwards (1):
+      arm64: dts: rockchip: Split up RK3588's PCIe pinctrls
+
+Tianling Shen (7):
+      arm64: dts: rockchip: Add FriendlyARM NanoPi R3S board
+      arm64: dts: rockchip: fix model name for FriendlyElec NanoPi R3S
+      arm64: dts: rockchip: replace deprecated snps, reset props for NanoPi R3S
+      arm64: dts: rockchip: sort props in pmu_io_domains node for NanoPi R3S
+      arm64: dts: rockchip: enable eMMC HS200 mode for NanoPi R3S
+      arm64: dts: rockchip: reorder mmc aliases for NanoPi R3S
+      board: rockchip: add FriendlyElec NanoPi R3S
+
+ arch/arm/dts/Makefile                              |   10 -
+ arch/arm/dts/rk3066a-mk808.dts                     |  241 ---
+ arch/arm/dts/rk3066a-u-boot.dtsi                   |   20 -
+ arch/arm/dts/rk3066a.dtsi                          |  880 ---------
+ arch/arm/dts/rk3188-radxarock.dts                  |  389 ----
+ arch/arm/dts/rk3188-u-boot.dtsi                    |   17 -
+ arch/arm/dts/rk3188.dtsi                           |  815 --------
+ arch/arm/dts/rk3288-firefly-u-boot.dtsi            |   91 +-
+ arch/arm/dts/rk3288-firefly.dts                    |   43 -
+ arch/arm/dts/rk3288-firefly.dtsi                   |  491 -----
+ arch/arm/dts/rk3288-miqi-u-boot.dtsi               |   83 +-
+ arch/arm/dts/rk3288-miqi.dts                       |   16 -
+ arch/arm/dts/rk3288-miqi.dtsi                      |  417 ----
+ arch/arm/dts/rk3288-tinker-s-u-boot.dtsi           |   13 +-
+ arch/arm/dts/rk3288-tinker-s.dts                   |   29 -
+ arch/arm/dts/rk3288-tinker-u-boot.dtsi             |   53 +-
+ arch/arm/dts/rk3288-tinker.dts                     |   33 -
+ arch/arm/dts/rk3288-tinker.dtsi                    |  533 -----
+ arch/arm/dts/rk3288-u-boot.dtsi                    |   13 +-
+ arch/arm/dts/rk3288.dtsi                           | 2035 --------------------
+ arch/arm/dts/rk3399-gru-u-boot.dtsi                |   29 +-
+ arch/arm/dts/rk3399-roc-pc-u-boot.dtsi             |    8 +
+ arch/arm/dts/rk3399-rockpro64-u-boot.dtsi          |    8 +
+ arch/arm/dts/rk3399-u-boot.dtsi                    |   14 +-
+ arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi         |    8 +
+ arch/arm/dts/rk356x-u-boot.dtsi                    |    4 +
+ arch/arm/dts/rk3588-nanopc-t6-lts-u-boot.dtsi      |    3 +
+ arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi           |   11 +
+ arch/arm/dts/rk3588s-u-boot.dtsi                   |    4 +
+ arch/arm/dts/rk3xxx.dtsi                           |  488 -----
+ arch/arm/include/asm/arch-rockchip/cru_rk3588.h    |    2 +-
+ arch/arm/mach-rockchip/Kconfig                     |    2 +
+ arch/arm/mach-rockchip/rk3288/Kconfig              |   10 +-
+ arch/arm/mach-rockchip/rk3308/rk3308.c             |   16 +
+ arch/arm/mach-rockchip/rk3399/Kconfig              |   12 -
+ arch/arm/mach-rockchip/rk3399/rk3399.c             |   23 +-
+ arch/arm/mach-rockchip/rk3568/rk3568.c             |   61 +
+ arch/arm/mach-rockchip/rk3588/Kconfig              |   44 +
+ arch/arm/mach-rockchip/rk3588/rk3588.c             |   52 +
+ board/firefly/firefly-rk3288/MAINTAINERS           |    1 +
+ board/firefly/firefly-rk3288/Makefile              |    7 -
+ board/firefly/firefly-rk3288/firefly-rk3288.c      |   46 -
+ board/friendlyelec/nanopc-t6-rk3588/MAINTAINERS    |    3 +-
+ board/khadas/khadas-edge2-rk3588s/Kconfig          |   12 +
+ board/khadas/khadas-edge2-rk3588s/MAINTAINERS      |    6 +
+ board/mqmaker/miqi_rk3288/MAINTAINERS              |    1 -
+ board/radxa/rock-5c-rk3588s/Kconfig                |   12 +
+ board/radxa/rock-5c-rk3588s/MAINTAINERS            |    7 +
+ board/radxa/rockpi4-rk3399/rockpi4-rk3399.c        |    2 +
+ board/rockchip/evb_rk3568/MAINTAINERS              |    7 +
+ board/rockchip/tinker_rk3288/MAINTAINERS           |    7 +-
+ board/rockchip/tinker_rk3288/tinker-rk3288.c       |    2 +-
+ configs/chromebook_bob_defconfig                   |   24 +-
+ configs/chromebook_kevin_defconfig                 |   24 +-
+ configs/firefly-rk3288_defconfig                   |   39 +-
+ configs/khadas-edge2-rk3588s_defconfig             |  215 +++
+ configs/miqi-rk3288_defconfig                      |   43 +-
+ configs/mk808_defconfig                            |    4 +-
+ configs/nanopi-r3s-rk3566_defconfig                |   75 +
+ configs/rock-5c-rk3588s_defconfig                  |   84 +
+ configs/rock_defconfig                             |    4 +-
+ configs/rockpro64-rk3399_defconfig                 |    3 -
+ configs/tinker-rk3288_defconfig                    |   41 +-
+ configs/tinker-s-rk3288_defconfig                  |   38 +-
+ doc/board/rockchip/rockchip.rst                    |    3 +
+ doc/board/theobroma-systems/jaguar_rk3588.rst      |    6 +-
+ doc/board/theobroma-systems/tiger_rk3588.rst       |    6 +-
+ drivers/clk/rockchip/clk_rk3288.c                  |    8 +-
+ .../src/arm64/rockchip/rk3566-nanopi-r3s.dts       |  554 ++++++
+ .../src/arm64/rockchip/rk3588-base-pinctrl.dtsi    |  271 ++-
+ dts/upstream/src/arm64/rockchip/rk3588-base.dtsi   |   41 +
+ .../src/arm64/rockchip/rk3588s-rock-5a.dts         |    6 +-
+ .../src/arm64/rockchip/rk3588s-rock-5c.dts         |  920 +++++++++
+ include/configs/khadas-edge2-rk3588s.h             |   15 +
+ include/configs/rk3399_common.h                    |   16 +-
+ include/configs/rock-5c-rk3588s.h                  |   15 +
+ include/dt-bindings/clock/rk3066a-cru.h            |   31 -
+ include/dt-bindings/clock/rk3188-cru-common.h      |  261 ---
+ include/dt-bindings/clock/rk3188-cru.h             |   47 -
+ include/dt-bindings/power/rk3066-power.h           |   22 -
+ include/dt-bindings/power/rk3188-power.h           |   24 -
+ include/dt-bindings/power/rk3288-power.h           |   32 -
+ 82 files changed, 2760 insertions(+), 7246 deletions(-)
+ delete mode 100644 arch/arm/dts/rk3066a-mk808.dts
+ delete mode 100644 arch/arm/dts/rk3066a.dtsi
+ delete mode 100644 arch/arm/dts/rk3188-radxarock.dts
+ delete mode 100644 arch/arm/dts/rk3188.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-firefly.dts
+ delete mode 100644 arch/arm/dts/rk3288-firefly.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-miqi.dts
+ delete mode 100644 arch/arm/dts/rk3288-miqi.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-tinker-s.dts
+ delete mode 100644 arch/arm/dts/rk3288-tinker.dts
+ delete mode 100644 arch/arm/dts/rk3288-tinker.dtsi
+ delete mode 100644 arch/arm/dts/rk3288.dtsi
+ create mode 100644 arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-nanopc-t6-lts-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/rk3xxx.dtsi
+ delete mode 100644 board/firefly/firefly-rk3288/Makefile
+ delete mode 100644 board/firefly/firefly-rk3288/firefly-rk3288.c
+ create mode 100644 board/khadas/khadas-edge2-rk3588s/Kconfig
+ create mode 100644 board/khadas/khadas-edge2-rk3588s/MAINTAINERS
+ create mode 100644 board/radxa/rock-5c-rk3588s/Kconfig
+ create mode 100644 board/radxa/rock-5c-rk3588s/MAINTAINERS
+ create mode 100644 configs/khadas-edge2-rk3588s_defconfig
+ create mode 100644 configs/nanopi-r3s-rk3566_defconfig
+ create mode 100644 configs/rock-5c-rk3588s_defconfig
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-nanopi-r3s.dts
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3588s-rock-5c.dts
+ create mode 100644 include/configs/khadas-edge2-rk3588s.h
+ create mode 100644 include/configs/rock-5c-rk3588s.h
+ delete mode 100644 include/dt-bindings/clock/rk3066a-cru.h
+ delete mode 100644 include/dt-bindings/clock/rk3188-cru-common.h
+ delete mode 100644 include/dt-bindings/clock/rk3188-cru.h
+ delete mode 100644 include/dt-bindings/power/rk3066-power.h
+ delete mode 100644 include/dt-bindings/power/rk3188-power.h
+ delete mode 100644 include/dt-bindings/power/rk3288-power.h
