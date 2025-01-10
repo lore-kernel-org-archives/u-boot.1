@@ -4,72 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B284E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 13:39:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67EA7E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 13:39:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77D0580608;
-	Fri, 10 Jan 2025 14:39:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF812801F5;
+	Fri, 10 Jan 2025 14:39:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="boUS8EGp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n46ck6Zi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36567806B7; Fri, 10 Jan 2025 14:39:09 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 8EF43805E9; Fri, 10 Jan 2025 14:39:36 +0100 (CET)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B3FA80619
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 14:39:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D927800D0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 14:39:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2f441791e40so2758640a91.3
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:39:06 -0800 (PST)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2eec9b3a1bbso2810619a91.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 05:39:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736516345; x=1737121145; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L9dVGM7J5eCxlndWX510+LkDvAe9KTh2dTl4VJJipMY=;
- b=boUS8EGpLiNfcRIjfQPLODR37EIoCFb9QXfnojaSm1exS0QE4BijP1Tq5xeCnwqu8G
- EcmkgLRl8jldN01f8zoxoWb575jK5HFSgzV3R+Cu0uwIoUqxUtnYt91Zmob0fLOWvrys
- cJkhthanJbQWmSisGcTo5lYUcb2hfIBP+AOKU=
+ d=chromium.org; s=google; t=1736516373; x=1737121173; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mfi5AZwTv8pUjgS7DfYJPfiABHg40kk9Qx2ejPAppEo=;
+ b=n46ck6ZihJ+QLVmaFK3I2MmhYY0cXg/OIddQBcVSiXoeIUpZ4jESTIBUvHmCb32eVL
+ k4s7nsHyJfxjV9C6Y+axKnbU8AL+5htJEX91bhaEJZv+vog5vtV5/L7CWJIfGXJ50Wle
+ lOmt3WLecCRXUoBqiWhQssDkJDzijxhTy9ubo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736516345; x=1737121145;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=L9dVGM7J5eCxlndWX510+LkDvAe9KTh2dTl4VJJipMY=;
- b=L8dAWXZ/IXFXCI6xMx/vfRhniUQhFU5MUheadiRfz22xRlT4RKITdeEYDMGhWJVGnk
- U28zbd2KGlBmMPQDFEqR4rYOleX4q4SwQSdFn0ghW2+KzvVJ5mLHimCt2YIC43FUWCly
- oR+ce5QEUI06XdJbdhypDst7Ea6/5q78LLSs0oVI/VGeLvvbdGWrfbxdKc441vG6sXdK
- 7SSnruML0gC1CVzqpMjOr1onzpnhYrh0at93Yxj1ic5QhTsec8sFQtQapr3vrdQ01VMX
- 6FYUPNxTf9QRi3qag6LY9NELaeLVRrjYkjPJQ99QwA9kaSj5nKFyyzpOS70zTrqKgd78
- Tm9Q==
-X-Gm-Message-State: AOJu0YxA9D7tLHK4QvxG1oeRVdr8iGDQlrYJ4OUB/1AMH8ndfiAxG09e
- i5v+yuTbbbUPWJ8zLMsRInDLvqwca7AFI8VazQoaraB0u9XHyitrYHM+2Si5NoX5BmUMm3SW4KF
- zilhxnSHyBu8maEZORL1RL/BuHsZVQX8qbocB
-X-Gm-Gg: ASbGnct8sg0G4pQAF5YpaeCqCWTKDQIhpq8e6sc4wR7pKU4PYm2E3vIyDffiCrq3kQL
- Pi17GXEqgYIJjGCUCcms8gY/35oN5F7wdiFrEedc=
-X-Google-Smtp-Source: AGHT+IGyk5o8I1RJvCXDld3tXtpXyGDSGMbtJXVFnRb3/eVaAT5N6ksoGsOC6l09EMZSZ/WwhDQLIA8xs6dNMkXliVA=
-X-Received: by 2002:a17:90b:1f85:b0:2f2:a796:26b with SMTP id
- 98e67ed59e1d1-2f548f103d2mr14866830a91.1.1736516345066; Fri, 10 Jan 2025
- 05:39:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736516373; x=1737121173;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Mfi5AZwTv8pUjgS7DfYJPfiABHg40kk9Qx2ejPAppEo=;
+ b=hMBMiXhAykOGB+lseMEJP8ULmsPSWNGW36dCOW7kVX+zcvUPIeEab3+Foroz2U4s9z
+ nPc1gofZn9jLKH9MQaFRfv3wzTLulsPi6EXIqLEwMTvQ2EFSFMqpsd8RKbNju97Pmhnr
+ 1sTEgwB+dPPWSVyn0mcWy/P5rWQkSU1vc9hRb2bh86uRA5GgYlM3QoI3BUfs9LxHhq86
+ FdV2ybmKQA9Thv0KtNsanglX5orVkdDmhTuViindvyCkmCnmorWwoGBgXqaxsB/4FVK+
+ WfRIP2IIdmYKmHhtRScI8eyqD95Sbk1wU05jnk7smerEVUkDhVSz9Gn6vF3NTDHiludH
+ Lyaw==
+X-Gm-Message-State: AOJu0YxkNJsFMttireGLZNh2I13ALfF9vm4aOhH9vWOJ6TIik+EVQ4Xn
+ tsd3uXEjEBxYj34C1nw4KhkYjNWTbx7Sw5Ul6UBiamOSOwylBohaEhnZSgVp97Jq5uvckra2060
+ aFeB0oc6l45zRd3Aei/1gs/rC7rMSW4BT5hjz
+X-Gm-Gg: ASbGncv9HQrUwQXqpS/+xW7vDTb8kHaaSH92fXukbXmwMYdzvHKjdoRAJt1B/T1vE3d
+ FwP8ElARGuPxtIY9OWc0hXGP18ofXKBpRbjdwKuM=
+X-Google-Smtp-Source: AGHT+IERgxOnIQhIl2VbHVhON/DsdcjUAI32NW87TT+s/5yeBqQYjUBUamOlAyI61sU39hNt30LGANDP+hGLuX9pQc4=
+X-Received: by 2002:a17:90b:51c5:b0:2f4:423a:8fb2 with SMTP id
+ 98e67ed59e1d1-2f548eca27emr15980931a91.20.1736516372704; Fri, 10 Jan 2025
+ 05:39:32 -0800 (PST)
 MIME-Version: 1.0
-References: <AM6PR04MB55584A5EF725E8DF69629DF39A302@AM6PR04MB5558.eurprd04.prod.outlook.com>
-In-Reply-To: <AM6PR04MB55584A5EF725E8DF69629DF39A302@AM6PR04MB5558.eurprd04.prod.outlook.com>
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-18-sjg@chromium.org>
+ <20250108182528.GN3476@bill-the-cat>
+ <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
+ <20250109150954.GU3476@bill-the-cat>
+ <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
+ <20250109180817.GC3476@bill-the-cat>
+In-Reply-To: <20250109180817.GC3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Jan 2025 06:38:44 -0700
-X-Gm-Features: AbW1kvYLXQau4WOqdxO02b29oIwX9fwGlDIoxI6qK0-Hj0eDqmRLos9e-WS21fE
-Message-ID: <CAFLszTg3D9C-XR7TwCqB6RAOvZH-TK7=CEN-WioSfEKWCVVGLg@mail.gmail.com>
-Subject: Re: How would I do signature verification of standalone binary?
-To: "Koch, Fabian" <Fabian.Koch@hima.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Date: Fri, 10 Jan 2025 06:39:11 -0700
+X-Gm-Features: AbW1kvaPJd_fAQQh2SVt43ymXeI9OdlQdB71LkF0LkcAxXgeDi_wqlypjiivuCQ
+Message-ID: <CAFLszThn-XcHruFe60TH8FnsKsH08NFEco2zt+9JBHkneQgo0Q@mail.gmail.com>
+Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Dahl <ada@thorsis.com>, 
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Julien Masson <jmasson@baylibre.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,78 +108,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabian,
+Hi Tom,
 
-On Thu, 5 Dec 2024 at 06:09, Koch, Fabian <Fabian.Koch@hima.com> wrote:
+On Thu, 9 Jan 2025 at 11:08, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hey all,
+> On Thu, Jan 09, 2025 at 08:14:53AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Thu, 9 Jan 2025 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jan 09, 2025 at 05:36:03AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Wed, 8 Jan 2025 at 11:25, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Jan 06, 2025 at 07:32:13AM -0700, Simon Glass wrote:
+> > > > >
+> > > > > > This function uses separate arguments for data and size. Use the new
+> > > > > > abuf instead, so that they are paired and in one place. In some cases it
+> > > > > > also saves an argument, thus potentially reducing code size.
+> > > > >
+> > > > > This is one of the commits that globally increases size in both full
+> > > > > U-Boot and SPL/etc.
+> > > > >
+> > > > > Is all of the "abuf" changes just a "tidy up" that increases the code a
+> > > > > bit?
+> > > >
+> > > > Yes, a tidy-up which I hope will help overall. I have been thinking
+> > > > for a while of how to avoid having addr/size and ptr/size passed
+> > > > everywhere. For now abuf seems to provide some sort of solution.
+> > > >
+> > > > I see this:
+> > > >
+> > > > 18: boot: Update fit_image_get_emb_data to use abuf
+> > > >    aarch64: (for 1/1 boards) all +4.0 bss -24.0 spl/u-boot-spl:all
+> > > > +16.0 spl/u-boot-spl:text +16.0 text +28.0
+> > > >
+> > > > so growth on firefly-rk3399 but not with rk3288. I am not sure if the
+> > > > growth will tail off as there are more users, though. We might even be
+> > > > able to be more clever with static inlines.
+> > >
+> > > Yeah, lets not do this now then and worry about some "clean up" later
+> > > when we can show that it does, or does not, improve size.
+> >
+> > Oh.
+> >
+> > > And there's
+> > > something wrong with your numbers:
+> > > 01: Fix neighbor discovery ethernet address saving
+> > >    aarch64:  w+   firefly-rk3399
+> > > +(firefly-rk3399) Image 'simple-bin' is missing external blobs and is non-functional: atf-bl31
+> > > +(firefly-rk3399)
+> > > +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (atf-bl31):
+> > > +(firefly-rk3399)    See the documentation for your board. You may need to build ARM Trusted
+> > > +(firefly-rk3399)    Firmware and build with BL31=/path/to/bl31.bin
+> > > +(firefly-rk3399) Image 'simple-bin' is missing optional external blobs but is still functional: tee-os
+> > > +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
+> > > +(firefly-rk3399)    See the documentation for your board. You may need to build Open Portable
+> > > +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+> > > +(firefly-rk3399) Some images are invalid
+> > > 37: dm: core: Provide ofnode_find_subnode_unit()
+> > >    aarch64: (for 1/1 boards) all +324.0 bss +32.0 spl/u-boot-spl:all +16.0 spl/u-boot-spl:text +16.0 text +292.0
+> > >             firefly-rk3399 : all +324 bss +32 spl/u-boot-spl:all +16 spl/u-boot-spl:text +16 text +292
+> > >                u-boot: add: 6/-1, grow: 4/-4 bytes: 516/-224 (292)
+> > >                  function                                   old     new   delta
+> > >                  ofnode_name_eq_unit                          -     160    +160
+> > >                  ofnode_find_subnode_unit                     -     116    +116
+> > >                  fit_image_get_data                          80     176     +96
+> > >                  fit_image_get_emb_data                       -      84     +84
+> > >                  ofnode_write_prop                          224     236     +12
+> > >                  ofnode_add_subnode                         232     244     +12
+> > >                  abuf_init_const                              -      12     +12
+> > >                  abuf_init                                    -      12     +12
+> > >                  abuf_addr                                    -       8      +8
+> > >                  fit_image_print                            780     784      +4
+> > >                  image_locate_script                        696     692      -4
+> > >                  fit_image_load                            1584    1580      -4
+> > >                  fit_image_verify                           176     164     -12
+> > >                  ofnode_find_subnode                        140     116     -24
+> > >                  fit_image_get_data_and_size                180       -    -180
+> > >                spl-u-boot-spl: add: 3/-1, grow: 0/-1 bytes: 108/-92 (16)
+> > >                  function                                   old     new   delta
+> > >                  fit_image_get_emb_data                       -      84     +84
+> > >                  abuf_init_const                              -      12     +12
+> > >                  abuf_init                                    -      12     +12
+> > >                  load_simple_fit                            580     568     -12
+> > >                  fit_image_get_data                          80       -     -80
+> >
+> > Yes, that's the whole series, so not related to this change.
 >
-> I have a SoC which does secure boot in a multi staged process.
-> (ROM loads a signed SPL to an aux core, which loads another signed SPL to=
- main core, which loads a signed u-boot.img)
->
-> But the thing I want u-boot to load, verify signature and then run/boot i=
-s a standalone binary app, not a Linux Kernel.
-> (It does work fine when I load that and run it with the "go" command, but=
- no signature verification is done as of now)
->
-> All the research I did pointed towards using signed FIT images and then "=
-bootm" to do the verification and loading.
-> But I cannot get "bootm" to load a FIT containing only my raw binary stan=
-dalone app.
->
-> Is that road a dead-end and I need to do something completely else?
->
-> I would love to stay as close to vanilla u-boot (or at least the SDK vani=
-lla version) and not implement a fully custom signature verification.
->
-> Any pointers would be highly appreciated.
+> Yes, that's the whole series including this change, so it's related to
+> this change.
 
-So long as you put your image in a configuration, it can be verified.
-The question is whether you can load it.
+Right, but it is due to ofnode_find_subnode(), etc.
 
-bootm assumes it is booting an OS. It does not support
-IH_TYPE_FIRMWARE as a type. You could write a new command to handle
-that, perhaps. SPL does support loading firmware, but you are running
-U-Boot proper so that isn't very useful.
+>
+> >  I elected to have two versions of ofnode_find_subnode() to avoid the
+> > size growth in the previous version. But the cost is larger size
+> > growth when OF_LIVE is used.
+> >
+> > Without OF_LIVE, the size growth is tiny.
+>
+> And even worse in SPL, somehow. But you want more OF_LIVE users, not
+> less, yes?
 
-For your command, you could call fit_config_verify() to verify the
-config, then fit_image_load() to load the image you want.
+Well, OF_LIVE is always quite a bit larger, at least at the moment. It
+has both Linux's of_access stuff and libfdt. It's not OF_LIVE I am
+bothered about, but I do want people using ofnode. Unfortunately
+people still send patches which use libfdt directly.
+
+>
+> > So...what to do?
+>
+> Well, if you drop the abuf changes for now, SPL won't change at all for
+> most platforms and that'll be an improvement.
+
+Yes, I'll look at that. This is one of many examples where I have a
+problem and realise that we need a nicer way of dealing with it, then
+implement it in the series, but then the series loses focus. So then I
+take it out again, then forget about it until next time, but I never
+actually make the change.
+
+>
+> And I'm going to keep complaining about size growth here because a
+> non-trivial subset of users just wants things to boot quickly and be
+> small.
+
+Yes, you won't get any complaints from me on that. I did propose some
+automated checking a few years back, but it never went anywhere.
 
 Regards,
-Simon
-
->
-> kind regards
-> Fabian
->
-> Informationspflicht nach Art. 13 und 14 DS-GVO: https://www.hima.com/de/i=
-nformationen-DSGVO Information obligation according to Art. 13 and 14 DS-GV=
-O: https://www.hima.com/en/information-GDPR
->
-> HIMA Paul Hildebrandt GmbH, Albert-Bassermann-Str. 28, 68782 Bruehl bei M=
-annheim
-> Gesellschaft mit beschraenkter Haftung, Sitz Bruehl, Deutschland - Regist=
-ergericht Mannheim HRB 720409
-> USt-ID: DE 144286400
-> WEEE-Reg.-Nr.: DE87326515
->
-> Geschaeftsfuehrender Gesellschafter: Steffen Philipp, Geschaeftsfuehrer: =
-Joerg de la Motte (Vorsitz), Dr. Michael Loebig
->
-> Diese Nachricht und saemtliche Anhaenge sind vertraulich und duerfen nich=
-t an Dritte weitergeleitet oder sonst veroeffentlicht werden, soweit nicht =
-ausdruecklich etwas anderes bestimmt ist. Falls Sie nicht der beabsichtigte=
- Empfaenger sind, bitten wir Sie, mit dem Absender Kontakt aufzunehmen und =
-diese Nachricht und saemtliche Anhaenge von Ihrem System zu loeschen. Auch =
-in diesem Fall sind Sie weder berechtigt, diese Nachricht oder etwaige Anha=
-enge zu kopieren noch deren Inhalt einem Dritten zugaenglich zu machen.
->
-> This message and its attachments are confidential and can contain privile=
-ged information which may not be distributed or published, unless expressly=
- stated otherwise. If you are not the intended recipient, please notify us =
-immediately and delete this email and its attachments. If you have received=
- this communication in error, you are hereby notified that any disseminatio=
-n, distribution or copying of this communication is strictly prohibited.
-
-[can you please drop this as it is not correct for a public mailing list?]
+SImon
