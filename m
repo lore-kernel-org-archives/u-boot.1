@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E860E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 18:44:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3BFE77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 18:44:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E52480713;
-	Fri, 10 Jan 2025 19:43:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 745868069D;
+	Fri, 10 Jan 2025 19:43:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="YVz1DuCj";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="f3sWUUGu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3834680050; Fri, 10 Jan 2025 19:43:15 +0100 (CET)
+ id DC1EF806E8; Fri, 10 Jan 2025 19:43:15 +0100 (CET)
 Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
  [217.70.183.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE870806D6
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 19:43:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66F2D80619
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 19:43:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 8BA7260011;
- Fri, 10 Jan 2025 18:43:09 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 46EBC60009;
+ Fri, 10 Jan 2025 18:43:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1736534590;
+ t=1736534593;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=4IVQj2up60k+s+5gyWdbvzdIsUqOvWLuL4Tld29aExY=;
- b=YVz1DuCj69OITXp6A04DW62t4cfgCrZNYgaofoZ4yUGcvA/R3Db9sNVdYIPsGeL2nxFiiw
- QSKCV5DaXF3gtqf16y5gHFeIXQEGto/Qea8rSknzX02u+IQxi+O0b9J4zwvpw9NmJ2sixN
- C55KXANaYypQ++SjzH7Tb8Vz2LrUFquzx5gSCACAccM51wXIEesMIs6k/bM8J29BchPPes
- 5fG5KM3n+5kigwMeTLFpgCcCCBkw4gCH3G/hMqb1F8TjfQRqAcJ2UaNUuV6m0+u8RIjSSn
- hTE+wQlVTmsjnwQ112V1C1ZiUY6TJNTlYg5d19njTfQPRTiskbKQ1k/Wsb/Zcg==
+ bh=yjmhB0sgRhopLMS87VnB4pZYaHqN8RnOMqpF8vV95i0=;
+ b=f3sWUUGuqAMcTxtkPTX5KpDgS9XNDQ95dy5NfRj36C1+rLjQzEGgsiCkDb8SSd8zajkrGs
+ npZxBkrryOzIhE67egAeC1hCT3t1oPZhHAAI9nnjd3zIA79pVAQ2wOZC4u+txgX4kUxg46
+ bzDCv6gc7qAJJJXcWMJco9UqFdjG0HwIxIgHeZuazqsxNt+WJwKMslhNmPSV6Bn+ar2Cm+
+ KNYmBHTiSHEQqpSTNTabBqDtoniPdRA2kq0LYDop5ysPK//JZZmz6Oe02mlwnxOT6oxpd+
+ 3h9UlJEWhJzBjpLJgdxPZ3/2XUsqswBerYjiR9ikdfHeicLs1A0RLV7gtPDLAw==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Fri, 10 Jan 2025 19:43:06 +0100
-Subject: [PATCH v3 09/13] imx: power-domain: Add support for the MEDIAMIX
- control block
+Date: Fri, 10 Jan 2025 19:43:09 +0100
+Subject: [PATCH v3 12/13] video: imx: Add LCDIF driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250110-ge-mainline-display-support-v3-9-d2c0acea6feb@bootlin.com>
+Message-Id: <20250110-ge-mainline-display-support-v3-12-d2c0acea6feb@bootlin.com>
 References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
 In-Reply-To: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -79,259 +78,365 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This block delivers power and clocks to the whole display and rendering
-pipeline.
+Add support for the LCD interfaces (LCDIF1/2). When probed, these
+interfaces request numerous clocks and power domains, attach the bridge
+and look for a panel in order to retrieve its capabilities and
+properties.
+
+There is a similar existing driver in the upper folder for other i.MX
+targets, I discovered this driver a bit late. It is not targeting the
+i.MX8MP and I have no idea how different can the LCDIF be on this SoC,
+but I did not manage to get it work, especially because it is not fully
+compliant with the device-model, especially on the clocks/power
+management side which is all ad-hoc. This is normal though, it was
+contributed more than ten years ago.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/power/domain/Kconfig           |   7 ++
- drivers/power/domain/Makefile          |   1 +
- drivers/power/domain/imx8mp-mediamix.c | 208 +++++++++++++++++++++++++++++++++
- 3 files changed, 216 insertions(+)
+ drivers/video/imx/Kconfig  |   3 +
+ drivers/video/imx/Makefile |   1 +
+ drivers/video/imx/lcdif.c  | 314 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 318 insertions(+)
 
-diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-index bd82d2f7044b3c3f8c88dea27c39193efedb4c84..5f5218bd8b5f4bed8283e91da61ac7c8c3eb97ae 100644
---- a/drivers/power/domain/Kconfig
-+++ b/drivers/power/domain/Kconfig
-@@ -47,6 +47,13 @@ config IMX8MP_HSIOMIX_BLKCTRL
+diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
+index c5cd2fecf780b62c0264b9627137517388aae1ab..12f11c2eea8c98cc341448923c80919afbceed46 100644
+--- a/drivers/video/imx/Kconfig
++++ b/drivers/video/imx/Kconfig
+@@ -19,3 +19,6 @@ config IMX_LDB
+ 	depends on VIDEO_BRIDGE
  	help
- 	  Enable support for manipulating NXP i.MX8MP on-SoC HSIOMIX block controller.
- 
-+config IMX8MP_MEDIAMIX_BLKCTRL
-+	bool "Enable i.MX8MP MEDIAMIX domain driver"
-+	depends on POWER_DOMAIN && IMX8MP
-+	select CLK
-+	help
-+	  Enable support for manipulating NXP i.MX8MP on-SoC MEDIAMIX block controller.
+ 	  Support for i.MX8MP DPI-to-LVDS on-SoC encoder.
 +
- config MTK_POWER_DOMAIN
- 	bool "Enable the MediaTek power domain driver"
- 	depends on POWER_DOMAIN && ARCH_MEDIATEK
-diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
-index 110646c503ab97941a2bb86caf53f94542008219..356ec07163fd299f00e81a629ffc06c663a26c25 100644
---- a/drivers/power/domain/Makefile
-+++ b/drivers/power/domain/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_BCM6328_POWER_DOMAIN) += bcm6328-power-domain.o
- obj-$(CONFIG_IMX8_POWER_DOMAIN) += imx8-power-domain-legacy.o imx8-power-domain.o
- obj-$(CONFIG_IMX8M_POWER_DOMAIN) += imx8m-power-domain.o
- obj-$(CONFIG_IMX8MP_HSIOMIX_BLKCTRL) += imx8mp-hsiomix.o
-+obj-$(CONFIG_IMX8MP_MEDIAMIX_BLKCTRL) += imx8mp-mediamix.o
- obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
- obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
- obj-$(CONFIG_MESON_EE_POWER_DOMAIN) += meson-ee-pwrc.o
-diff --git a/drivers/power/domain/imx8mp-mediamix.c b/drivers/power/domain/imx8mp-mediamix.c
++config IMX_LCDIF
++	bool "i.MX LCDIFv3 LCD controller"
+diff --git a/drivers/video/imx/Makefile b/drivers/video/imx/Makefile
+index 8d106589b7544ef9694613a2284e2fbfb564cf63..1edf5a6bdf0c3afb218fbcd81384c7c277ca6b28 100644
+--- a/drivers/video/imx/Makefile
++++ b/drivers/video/imx/Makefile
+@@ -5,3 +5,4 @@
+ 
+ obj-$(CONFIG_VIDEO_IPUV3) += mxc_ipuv3_fb.o ipu_common.o ipu_disp.o
+ obj-$(CONFIG_IMX_LDB) += ldb.o
++obj-$(CONFIG_IMX_LCDIF) += lcdif.o
+diff --git a/drivers/video/imx/lcdif.c b/drivers/video/imx/lcdif.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..78c32ca3d3a87febdefd5d128d39d817674b8d32
+index 0000000000000000000000000000000000000000..eb677e84a5e11c8fa2b66973fb3529dd9d2c797b
 --- /dev/null
-+++ b/drivers/power/domain/imx8mp-mediamix.c
-@@ -0,0 +1,208 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/drivers/video/imx/lcdif.c
+@@ -0,0 +1,314 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * i.MX8 MEDIAMIX control block driver
-+ * Copyright (C) 2024 Miquel Raynal <miquel.raynal@bootlin.com>
-+ * Inspired from Marek Vasut <marex@denx.de> work on the hsiomix driver.
++ * i.MX8 LCD interface driver inspired from the Linux driver
++ * Copyright 2019 NXP
++ * Copyright 2024 Bootlin
++ * Adapted by Miquel Raynal <miquel.raynal@bootlin.com>
 + */
 +
 +#include <asm/io.h>
++#include <asm/mach-imx/dma.h>
 +#include <clk.h>
 +#include <dm.h>
-+#include <power-domain-uclass.h>
++#include <panel.h>
++#include <power-domain.h>
++#include <video.h>
++#include <video_bridge.h>
 +#include <linux/delay.h>
 +
-+#include <dt-bindings/power/imx8mp-power.h>
++#include "../videomodes.h"
 +
-+#define BLK_SFT_RSTN		0x0
-+#define BLK_CLK_EN		0x4
++#define LCDIFV3_CTRL 0x0
++#define LCDIFV3_CTRL_SET 0x4
++#define LCDIFV3_CTRL_CLR 0x8
++#define   CTRL_INV_HS BIT(0)
++#define   CTRL_INV_VS BIT(1)
++#define   CTRL_INV_DE BIT(2)
++#define   CTRL_INV_PXCK BIT(3)
++#define   CTRL_CLK_GATE BIT(30)
++#define   CTRL_SW_RESET BIT(31)
 +
-+struct imx8mp_mediamix_priv {
++#define LCDIFV3_DISP_PARA 0x10
++#define   DISP_PARA_DISP_MODE_NORMAL 0
++#define   DISP_PARA_LINE_PATTERN_RGB_YUV 0
++#define   DISP_PARA_DISP_ON BIT(31)
++
++#define LCDIFV3_DISP_SIZE 0x14
++#define   DISP_SIZE_DELTA_X(x) ((x) & 0xffff)
++#define   DISP_SIZE_DELTA_Y(x) ((x) << 16)
++
++#define LCDIFV3_HSYN_PARA 0x18
++#define   HSYN_PARA_FP_H(x) ((x) & 0xffff)
++#define   HSYN_PARA_BP_H(x) ((x) << 16)
++
++#define LCDIFV3_VSYN_PARA 0x1C
++#define   VSYN_PARA_FP_V(x) ((x) & 0xffff)
++#define   VSYN_PARA_BP_V(x) ((x) << 16)
++
++#define LCDIFV3_VSYN_HSYN_WIDTH 0x20
++#define   VSYN_HSYN_PW_H(x) ((x) & 0xffff)
++#define   VSYN_HSYN_PW_V(x) ((x) << 16)
++
++#define LCDIFV3_CTRLDESCL0_1 0x200
++#define   CTRLDESCL0_1_WIDTH(x) ((x) & 0xffff)
++#define   CTRLDESCL0_1_HEIGHT(x) ((x) << 16)
++
++#define LCDIFV3_CTRLDESCL0_3 0x208
++#define   CTRLDESCL0_3_PITCH(x) ((x) & 0xFFFF)
++
++#define LCDIFV3_CTRLDESCL_LOW0_4 0x20C
++#define LCDIFV3_CTRLDESCL_HIGH0_4 0x210
++
++#define LCDIFV3_CTRLDESCL0_5 0x214
++#define   CTRLDESCL0_5_YUV_FORMAT(x) (((x) & 0x3) << 14)
++#define   CTRLDESCL0_5_BPP(x) (((x) & 0xf) << 24)
++#define     BPP32_ARGB8888 0x9
++#define   CTRLDESCL0_5_SHADOW_LOAD_EN BIT(30)
++#define   CTRLDESCL0_5_EN BIT(31)
++
++struct lcdifv3_priv {
 +	void __iomem *base;
-+	struct clk clk_apb;
-+	struct clk clk_axi;
-+	struct clk clk_disp2;
-+	struct power_domain pd_bus;
-+	struct power_domain pd_lcdif2;
++	struct clk pix_clk;
++	struct power_domain pd;
++	struct udevice *panel;
++	struct udevice *bridge;
 +};
 +
-+static int imx8mp_mediamix_on(struct power_domain *power_domain)
++static void lcdifv3_set_mode(struct lcdifv3_priv *priv,
++			     struct display_timing *timings)
 +{
-+	struct udevice *dev = power_domain->dev;
-+	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
-+	struct power_domain *domain;
-+	struct clk *clk;
-+	u32 reset;
++	u32 reg;
++
++	writel(DISP_SIZE_DELTA_X(timings->hactive.typ) |
++	       DISP_SIZE_DELTA_Y(timings->vactive.typ),
++	       priv->base + LCDIFV3_DISP_SIZE);
++
++	writel(HSYN_PARA_FP_H(timings->hfront_porch.typ) |
++	       HSYN_PARA_BP_H(timings->hback_porch.typ),
++	       priv->base + LCDIFV3_HSYN_PARA);
++
++	writel(VSYN_PARA_BP_V(timings->vback_porch.typ) |
++	       VSYN_PARA_FP_V(timings->vfront_porch.typ),
++	       priv->base + LCDIFV3_VSYN_PARA);
++
++	writel(VSYN_HSYN_PW_H(timings->hsync_len.typ) |
++	       VSYN_HSYN_PW_V(timings->vsync_len.typ),
++	       priv->base + LCDIFV3_VSYN_HSYN_WIDTH);
++
++	writel(CTRLDESCL0_1_WIDTH(timings->hactive.typ) |
++	       CTRLDESCL0_1_HEIGHT(timings->vactive.typ),
++	       priv->base + LCDIFV3_CTRLDESCL0_1);
++
++	if (timings->flags & DISPLAY_FLAGS_HSYNC_LOW)
++		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_VSYNC_LOW)
++		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_DE_LOW)
++		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_PIXDATA_POSEDGE)
++		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_CLR);
++
++	writel(0, priv->base + LCDIFV3_DISP_PARA);
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg &= ~(CTRLDESCL0_5_BPP(0xf) | CTRLDESCL0_5_YUV_FORMAT(0x3));
++	reg |= CTRLDESCL0_5_BPP(BPP32_ARGB8888);
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
++}
++
++static void lcdifv3_enable_controller(struct lcdifv3_priv *priv)
++{
++	u32 reg;
++
++	reg = readl(priv->base + LCDIFV3_DISP_PARA);
++	reg |= DISP_PARA_DISP_ON;
++	writel(reg, priv->base + LCDIFV3_DISP_PARA);
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg |= CTRLDESCL0_5_EN;
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
++}
++
++static int lcdifv3_video_sync(struct udevice *dev)
++{
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
++	u32 reg;
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg |= CTRLDESCL0_5_SHADOW_LOAD_EN;
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
++
++	return 0;
++}
++
++static void lcdifv3_init(struct udevice *dev, struct display_timing *timings)
++{
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
++
++	clk_set_rate(&priv->pix_clk, timings->pixelclock.typ);
++
++	writel(CTRL_SW_RESET | CTRL_CLK_GATE, priv->base + LCDIFV3_CTRL_CLR);
++	udelay(10);
++
++	lcdifv3_set_mode(priv, timings);
++
++	writel(plat->base & 0xFFFFFFFF, priv->base + LCDIFV3_CTRLDESCL_LOW0_4);
++	writel(plat->base >> 32, priv->base + LCDIFV3_CTRLDESCL_HIGH0_4);
++
++	writel(CTRLDESCL0_3_PITCH(timings->hactive.typ * 4), /* 32bpp */
++	       priv->base + LCDIFV3_CTRLDESCL0_3);
++
++	lcdifv3_enable_controller(priv);
++}
++
++static int lcdifv3_video_probe(struct udevice *dev)
++{
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
++	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
++	struct clk axi_clk, disp_axi_clk;
++	struct display_timing timings;
++	u32 fb_start, fb_end;
 +	int ret;
 +
-+	switch (power_domain->id) {
-+	case IMX8MP_MEDIABLK_PD_LCDIF_2:
-+		domain = &priv->pd_lcdif2;
-+		clk = &priv->clk_disp2;
-+		reset = BIT(11) | BIT(12) | BIT(24);
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
++	ret = power_domain_get(dev, &priv->pd);
++	if (ret < 0)
++		return ret;
 +
-+	/* Make sure bus domain is awake */
-+	ret = power_domain_on(&priv->pd_bus);
++	ret = clk_get_by_name(dev, "pix", &priv->pix_clk);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "axi", &axi_clk);
++	if (ret < 0)
++		return ret;
++
++	ret = clk_get_by_name(dev, "disp_axi", &disp_axi_clk);
++	if (ret < 0)
++		return ret;
++
++	ret = power_domain_on(&priv->pd);
 +	if (ret)
 +		return ret;
 +
-+	/* Put devices into reset */
-+	clrbits_le32(priv->base + BLK_SFT_RSTN, reset);
-+
-+	/* Enable upstream clocks */
-+	ret = clk_enable(&priv->clk_apb);
++	ret = clk_enable(&priv->pix_clk);
 +	if (ret)
-+		goto dis_bus_pd;
++		goto dis_pd;
 +
-+	ret = clk_enable(&priv->clk_axi);
++	ret = clk_enable(&axi_clk);
 +	if (ret)
-+		goto dis_apb_clk;
++		goto dis_pix_clk;
 +
-+	/* Enable blk-ctrl clock to allow reset to propagate */
-+	ret = clk_enable(clk);
++	ret = clk_enable(&disp_axi_clk);
 +	if (ret)
 +		goto dis_axi_clk;
-+	setbits_le32(priv->base + BLK_CLK_EN, reset);
 +
-+	/* Power up upstream GPC domain */
-+	ret = power_domain_on(domain);
-+	if (ret)
-+		goto dis_lcdif_clk;
-+
-+	/* Wait for reset to propagate */
-+	udelay(5);
-+
-+	/* Release reset */
-+	setbits_le32(priv->base + BLK_SFT_RSTN, reset);
-+
-+	return 0;
-+
-+dis_lcdif_clk:
-+	clk_disable(clk);
-+dis_axi_clk:
-+	clk_disable(&priv->clk_axi);
-+dis_apb_clk:
-+	clk_disable(&priv->clk_apb);
-+dis_bus_pd:
-+	power_domain_off(&priv->pd_bus);
-+
-+	return ret;
-+}
-+
-+static int imx8mp_mediamix_off(struct power_domain *power_domain)
-+{
-+	struct udevice *dev = power_domain->dev;
-+	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
-+	struct power_domain *domain;
-+	struct clk *clk;
-+	u32 reset;
-+
-+	switch (power_domain->id) {
-+	case IMX8MP_MEDIABLK_PD_LCDIF_2:
-+		domain = &priv->pd_lcdif2;
-+		clk = &priv->clk_disp2;
-+		reset = BIT(11) | BIT(12) | BIT(24);
-+		break;
-+	default:
-+		return -EINVAL;
++	priv->base = dev_remap_addr(dev);
++	if (!priv->base) {
++		ret = -EINVAL;
++		goto dis_clks;
 +	}
 +
-+	/* Put devices into reset and disable clocks */
-+	clrbits_le32(priv->base + BLK_SFT_RSTN, reset);
-+	clrbits_le32(priv->base + BLK_CLK_EN, reset);
++	/* Attach bridge */
++	ret = uclass_get_device_by_endpoint(UCLASS_VIDEO_BRIDGE, dev,
++					    0, &priv->bridge);
++	if (ret)
++		goto dis_clks;
 +
-+	/* Power down upstream GPC domain */
-+	power_domain_off(domain);
++	ret = video_bridge_attach(priv->bridge);
++	if (ret)
++		goto dis_clks;
 +
-+	clk_disable(clk);
-+	clk_disable(&priv->clk_axi);
-+	clk_disable(&priv->clk_apb);
++	ret = video_bridge_set_backlight(priv->bridge, 80);
++	if (ret)
++		goto dis_clks;
 +
-+	/* Allow bus domain to suspend */
-+	power_domain_off(&priv->pd_bus);
++	/* Attach panels */
++	ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
++					    1, &priv->panel);
++	if (ret) {
++		ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
++						    2, &priv->panel);
++		if (ret)
++			goto dis_clks;
++	}
 +
-+	return 0;
-+}
++	ret = panel_get_display_timing(priv->panel, &timings);
++	if (ret) {
++		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
++						   0, &timings);
++		if (ret) {
++			printf("Cannot decode panel timings (%d)\n", ret);
++			goto dis_clks;
++		}
++	}
 +
-+static int imx8mp_mediamix_of_xlate(struct power_domain *power_domain,
-+				    struct ofnode_phandle_args *args)
-+{
-+	power_domain->id = args->args[0];
++	lcdifv3_init(dev, &timings);
 +
-+	return 0;
-+}
++	/* Only support 32bpp for now */
++	uc_priv->bpix = VIDEO_BPP32;
++	uc_priv->xsize = timings.hactive.typ;
++	uc_priv->ysize = timings.vactive.typ;
 +
-+static int imx8mp_mediamix_bind(struct udevice *dev)
-+{
-+	/* Bind child lcdif */
-+	return dm_scan_fdt_dev(dev);
-+}
-+
-+static int imx8mp_mediamix_probe(struct udevice *dev)
-+{
-+	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	priv->base = dev_read_addr_ptr(dev);
-+
-+	ret = clk_get_by_name(dev, "apb", &priv->clk_apb);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_get_by_name(dev, "axi", &priv->clk_axi);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_get_by_name(dev, "disp2", &priv->clk_disp2);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = power_domain_get_by_name(dev, &priv->pd_bus, "bus");
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = power_domain_get_by_name(dev, &priv->pd_lcdif2, "lcdif2");
-+	if (ret < 0)
-+		goto free_bus_pd;
++	/* Enable dcache for the frame buffer */
++	fb_start = plat->base & ~(MMU_SECTION_SIZE - 1);
++	fb_end = ALIGN(plat->base + plat->size, 1 << MMU_SECTION_SHIFT);
++	mmu_set_region_dcache_behaviour(fb_start, fb_end - fb_start,
++					DCACHE_WRITEBACK);
++	video_set_flush_dcache(dev, true);
 +
 +	return 0;
 +
-+free_bus_pd:
-+	power_domain_free(&priv->pd_bus);
++dis_clks:
++	clk_disable(&disp_axi_clk);
++dis_axi_clk:
++	clk_disable(&axi_clk);
++dis_pix_clk:
++	clk_disable(&priv->pix_clk);
++dis_pd:
++	power_domain_off(&priv->pd);
++
 +	return ret;
 +}
 +
-+static int imx8mp_mediamix_remove(struct udevice *dev)
++static int lcdifv3_video_bind(struct udevice *dev)
 +{
-+	struct imx8mp_mediamix_priv *priv = dev_get_priv(dev);
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
 +
-+	power_domain_free(&priv->pd_lcdif2);
-+	power_domain_free(&priv->pd_bus);
++	/* Max size supported by LCDIF */
++	plat->size = 1920 * 1080 * VNBYTES(VIDEO_BPP32);
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id imx8mp_mediamix_ids[] = {
-+	{ .compatible = "fsl,imx8mp-media-blk-ctrl" },
++static const struct udevice_id lcdifv3_video_ids[] = {
++	{ .compatible = "fsl,imx8mp-lcdif" },
 +	{ }
 +};
 +
-+struct power_domain_ops imx8mp_mediamix_ops = {
-+	.on = imx8mp_mediamix_on,
-+	.off = imx8mp_mediamix_off,
-+	.of_xlate = imx8mp_mediamix_of_xlate,
++static struct video_ops lcdifv3_video_ops = {
++	.video_sync = lcdifv3_video_sync,
 +};
 +
-+U_BOOT_DRIVER(imx8mp_mediamix) = {
-+	.name		= "imx8mp_mediamix",
-+	.id		= UCLASS_POWER_DOMAIN,
-+	.of_match	= imx8mp_mediamix_ids,
-+	.bind		= imx8mp_mediamix_bind,
-+	.probe		= imx8mp_mediamix_probe,
-+	.remove		= imx8mp_mediamix_remove,
-+	.priv_auto	= sizeof(struct imx8mp_mediamix_priv),
-+	.ops		= &imx8mp_mediamix_ops,
++U_BOOT_DRIVER(lcdifv3_video) = {
++	.name = "lcdif",
++	.id = UCLASS_VIDEO,
++	.of_match = lcdifv3_video_ids,
++	.bind = lcdifv3_video_bind,
++	.ops = &lcdifv3_video_ops,
++	.probe = lcdifv3_video_probe,
++	.priv_auto = sizeof(struct lcdifv3_priv),
++	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
 +};
 
 -- 
