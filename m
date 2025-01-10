@@ -4,73 +4,157 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C73E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 08:42:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35C62E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 08:44:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24679800D0;
-	Fri, 10 Jan 2025 09:41:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 99FA8801F5;
+	Fri, 10 Jan 2025 09:43:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="egDdKXYe";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="kekI+EKD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02313800C2; Fri, 10 Jan 2025 09:41:37 +0100 (CET)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id 87BE4800C2; Fri, 10 Jan 2025 09:43:57 +0100 (CET)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20627.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::627])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F58D8061B
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 09:41:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0E8EF80655
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 09:43:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: ae9f5162cf2e11ef99858b75a2457dd9-20250110
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=2HDeOqJRvihsFNGCxG0gqF9gyj72hU6W2s89Z1aEnhU=; 
- b=egDdKXYeqY8voyguLN1bQMtdctNrDzCcxAhFD1Zlp1XLyOcxPYJlrjCNZOpmLK6fkKoGLwSZOgpLwY0DqMSdbzY2w3gDbRL7jHpPvs4wt1orcWInaK42UraU7maH24JBjlicCSD5wki3PoYsTGJpShAeLt4TIE/e46absh5q14M=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.46, REQID:5bda7fcc-be79-43bf-8c3a-6f51f831c6b2, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:60aa074, CLOUDID:8f8bad37-e11c-4c1a-89f7-e7a032832c40,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102,TC:nil,Content:0|50,EDM:-3
- ,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV
- :0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: ae9f5162cf2e11ef99858b75a2457dd9-20250110
-Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 613676166; Fri, 10 Jan 2025 16:41:27 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Fri, 10 Jan 2025 16:41:26 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Fri, 10 Jan 2025 16:41:25 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Joe
- Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, Tom
- Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 3/3] net: mediatek: add support for Airoha AN8855 ethernet
- switch
-Date: Fri, 10 Jan 2025 16:41:24 +0800
-Message-ID: <e541ccc8ef00bf33ed0fd897f4f207d44d0cb5ad.1736498083.git.weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <cover.1736498083.git.weijie.gao@mediatek.com>
-References: <cover.1736498083.git.weijie.gao@mediatek.com>
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JyUu8vGns3clL63/VHwyjrYOFMpnrSMIMVzMu5H1CYBL2A8VrZCGrglvezoF3q0WiUHkDJR/t+5EVEpXKw1Se3+1hFEP6TQX/rAWqeGNi3FQaZynY87X3PjptZcl/xGHOn3EZaxGjIlQESCK+Jtsxw7X5HbQ/WXtkAruQP7wF3AFttE70GAYLE8mFsuMr6rOLNna1TwSnfuX3uXj8fYiF0SE4n4JC6ioN+dWC14pXIjMBB/5G3BrGzRj8Uwaon/BDrPH+Mcrhi/d9P/WGEQ6NcG5+dEViBVMZIrvS1cSTidRoOPTl+X0sBcaWtF1WJV8gD6EtdL8bk6aOYrINRdsvw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qpuPpAaEbVey4EsnHZvzhLp+HtBtWuQOZuqX78Dmpjo=;
+ b=cTcl7xTB0HuM0jhfuRFhG18WpjtfNNNEnoIwSQEPN3Vhpx5+6DPD+9YiIQ0zUfg2bje1I+UhGIsa+WmQ6FEjqYOFPxGPqf7ErzaN644GoVoGs9sKV7LTl0K4aWF6L9QglurAbL1Yn5yG+kUl6HKQaUlrde17l7z1vw/9NjSqICebszK9yrkBdpLpPqeFtm+qOc1TD4RQu1NWboKcU5EKvNRqA8OpgnbrThIdXikylamuB6fYSXomelXixDk5RXEyOdT4hngqUUYG9zXU5lYtYrR9FRyjxFmcFepmAKcchA029x8QhjHtY46Wn8HpuEPPu9jb2OQbBVDjH/4RAENyNA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qpuPpAaEbVey4EsnHZvzhLp+HtBtWuQOZuqX78Dmpjo=;
+ b=kekI+EKD1RS2tfJOfAlFwOP2Xh58qio/kLaMgsFqZQM60HLHhoTjpLltt5/W2jbB1/YPxLiCo4Lc7P1yUH4oqGtZfSSoS5r9NYYEkZmszeMluSjCSxVBB7xo7jIhRuewu88zXq+SnUsA2XHuNGwHjmcDUPz/eFUstiWIQycaNpyM8uRLT4ZH5XSebvGALRFbLZUVqWM7WMX0gaM1fDPOM72bZzC/JT2upOMaSUzjw76PMDCgXUak3g2XuKCT0tcYoFKQ/2T0w736eNlph6fO3KmvFZ/ouv/4bnFQlTEDT1GF4i9oDTImWe7g9wLc+vcFxAS4OjjgbnKrNteFnKdK5A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by DBBPR04MB7993.eurprd04.prod.outlook.com (2603:10a6:10:1eb::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.11; Fri, 10 Jan
+ 2025 08:43:51 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8335.012; Fri, 10 Jan 2025
+ 08:43:51 +0000
+Date: Fri, 10 Jan 2025 17:49:41 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Marek Vasut <marex@denx.de>
+Cc: Alice Guo <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Alice Guo <alice.guo@nxp.com>, u-boot@lists.denx.de,
+ tharvey@gateworks.com, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH v3 11/17] imx9: scmi: soc: Override h_spl_load_read with
+ trampoline buffer
+Message-ID: <20250110094941.GA23168@localhost.localdomain>
+References: <20250103-imx95-v1-0-6744df5dc020@oss.nxp.com>
+ <20250103-imx95-v1-11-6744df5dc020@oss.nxp.com>
+ <e7f2e938-e6a1-4927-91d7-682ca9d683f9@denx.de>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e7f2e938-e6a1-4927-91d7-682ca9d683f9@denx.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SG3P274CA0005.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::17)
+ To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DBBPR04MB7993:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7b789dcc-9c23-4f3a-15e0-08dd3152e866
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|7416014|1800799024|376014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Ip2LVAWzYKxsgRR0CQbnWX9nJJkvGWLNaq6+G28jJ13Cz62vQeIpyWKB8emD?=
+ =?us-ascii?Q?BJ0ey5SqVirlIrsWLomG3fIVyByL61xlfVuP+cJgVOI2ZjUHF1h7wPaTa/cG?=
+ =?us-ascii?Q?TOgrNA9wiSJO/65gyZTpkggHbWAwlAqVTmu5NxzEGT40AyXDdI1oe9APccYa?=
+ =?us-ascii?Q?QltQcNMtqOxBBwU/OoD/YWvYO+MFJMVqLdE/eOcUUtlJviEUPm4gQUs5x133?=
+ =?us-ascii?Q?s+PI2cykxAF7qT0/40Dm7vH9tifEE5KL5uQl7D4rx+SBnXU5Jk6ur12j0LIm?=
+ =?us-ascii?Q?Jng3JxGVd7kxUFAcHFE8LSnXj122uGflTpYMab0xMdPd08AtTwtxyDL1CdOP?=
+ =?us-ascii?Q?KTSnnJTjZKeJPFR5/HHoanFLj/wFZiBhxICL+dlx9b2c/3cKbfNggUT1NIeS?=
+ =?us-ascii?Q?8brU3Z3Y0QL71DCGpI79hm8mGoL7IDqsrxsnQjPvR/CBEJEuXoG2KYE0Etxy?=
+ =?us-ascii?Q?M2vvlsscm30KE1yF0iYjzVwk8+Et2IEESnMkjLk7lWXl1X9Fqaqct38O849r?=
+ =?us-ascii?Q?+BtA8CLENgUwGXI8/+32LNFQccS3IxqrcRp/1fvr0wphN84J36HnaSlcVobc?=
+ =?us-ascii?Q?+VqE9LQTh53XawkDbQHBpfN3vbvtX6tdR74C/7LpEZj9iD5DSbz6fVZtUw+n?=
+ =?us-ascii?Q?HnnDhEFhlr0TBoKWQZZF9bPm9AGMHy7rnlXK4mefmV6U9Ba1oOP6xA5Dbpbl?=
+ =?us-ascii?Q?8Zb8pDk0e/PQ1eV8AMgqMzwEEeLZafH31AcqhwnpWSL0bR6IvT/f6mpgWmPg?=
+ =?us-ascii?Q?/E5+Hn7sABFdEPleMvXg0E8CmpfT8FJCcQ6FQCf3KVYmZEweHS35UcB8f2l2?=
+ =?us-ascii?Q?DfVkMPZCAd7aRSzkzVZzcIrOr9IHt/IUWpROHciyb3ZcYtHZh5YLB2jJCQCT?=
+ =?us-ascii?Q?gvnixokMP2aFyMp8mZD25+bNQXXKDofz1qsaiLeFoak67E5XTnrp8jOlF7JT?=
+ =?us-ascii?Q?su61EQAZ+XSQtok73UbIHSLgLvjxF4RZ3vUqJJqTOlIicv/C1x4m4/k9p2cd?=
+ =?us-ascii?Q?EJosEMPNPMFbqGtG2p8Q4oRfXsVW1j4Z1uxeh23rKbY7kE3CUgsdWnncl5AS?=
+ =?us-ascii?Q?sqooOa8Vfa7r+O0vyQsWfZIr0iBb/70n2FQRG1EkdUUCi4kJnz4lxFBpk1uB?=
+ =?us-ascii?Q?6Gz6L1QxDaz9x1pcWRsvMcVl3IlsrePi/A1y0otGWgAir1zzL34C7rmgpONV?=
+ =?us-ascii?Q?/4ZbqUSUQPPD1Pr48+ENgBQjaKIJkKfj2+Z13lQQsO6MpHYlcl7Sm2gVpDwO?=
+ =?us-ascii?Q?wrvP2Id5/rhWLHv25M5/o4twOpRgUst1Mh45Is0hPisupaSBfXVqm6EYChsZ?=
+ =?us-ascii?Q?0vMVMPPYNIWn+WfCl5KIl7uB8MlHA2hpQhcyvodmGXevMlTDCf203JFyJiti?=
+ =?us-ascii?Q?2c3edfg+/fUiYS1fdGXwNI/ijng2XYaaPsYHrRN0pE3gRsfuPmLaOlXQkyiA?=
+ =?us-ascii?Q?d8eg3+fFWT6z+Au5cb30ytrnb5lRoI5j?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(7416014)(1800799024)(376014)(366016)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?l0RsGbIMjaQtqZpS3R3Xt470PanNQpImtnl+HCwLl7o1edGeMexjhra3t1IW?=
+ =?us-ascii?Q?Sa1ww+QSSK3Y1aItaqL48/tvH1U/xTI8or19k38vPLzv5MiNNQyspRpFndyb?=
+ =?us-ascii?Q?sMU5AReek+G9e+L06g1UPb6MtXYHLHBHJdFJV9z6ORw4pgpL1HAJzlQlZ2wb?=
+ =?us-ascii?Q?JLpQ43UsFL86P2gIWQG5aeKjeEiXLv/wuqKhlMGwfJVgk8lUfA0VbBKfaRs8?=
+ =?us-ascii?Q?jgCAHrly2VtAzr5VYLULSCaoZZAffXDYgGGa3VmjAymnm26Pd/KluVliSxyz?=
+ =?us-ascii?Q?84OoT8nS4n4dkg9Y6lQ+v3BZ3ewLNBTTypmgNI49GHYg0+XbKjeb6gNM4gqA?=
+ =?us-ascii?Q?PZ88rKW22JRyalxpSoCXItKdORlVOa4uvqNGjRObCTzii/GUNaCOkNfHHjOh?=
+ =?us-ascii?Q?RiEe6pGKc8VC6dv7tBkQV32mQa5iOI9v2mDMVzuH4m9lRaWOWssrGSG6uEoe?=
+ =?us-ascii?Q?vDdINkO9ZkU3MXB7jIgaNprCztdHG87KrayK/r3XpG1/l52lUhZnhyXq5SRP?=
+ =?us-ascii?Q?8/hrbwy7dqLlfOLcnu8WzscTIC7L61swCebHXhh2JrUSeWpYacmI+zWZeLsG?=
+ =?us-ascii?Q?h2X9SfrZRfPEBKCzDtkLrZN465LwptJi5KGe65UiYue5NVRBPlu45DvWdBnI?=
+ =?us-ascii?Q?SDpS9i59s1kqXDH84DQ1sd3NbMQcexJ9RJxYl2yZTUUGQEd8I/uou/FY2cNO?=
+ =?us-ascii?Q?7eGtBSOm4hre7cds7c30bR8Mv27kohwPSu/5hl+X0hXR4ERK730xzLiW6r46?=
+ =?us-ascii?Q?oj5m6M7FG1PBJaF6dHUpsjvQS2056AuVLaHg45wO1XlEhlZFTVAegBfGyQpI?=
+ =?us-ascii?Q?/QYdcdYRW5d2d3o6TBawoAmLs/V6cfj7g8lfK8l/yjcPUPrMqZwKeKY35fjR?=
+ =?us-ascii?Q?iqoZFkTRORCLqD3yP55v6CkMQ0HoyDd3lhSTnbQ7Rk8Ydlf6mtqXGjSDanN0?=
+ =?us-ascii?Q?wdzzMJWDvWZlHaJdH7QWs5hMZDMYZFNH5g6eUbhOuDZRYFj++fQKUW+4SThA?=
+ =?us-ascii?Q?5/WoIZV8Y8okPB3lvl/Pz4N6s5FBEQmn3+apItdd8c4JHRqivVCB1fFlcwa8?=
+ =?us-ascii?Q?UowrfAtwDruhzxljrWU7pAKsgbBCHYxZU730+M24jTYbFXxojYjlezivCI4z?=
+ =?us-ascii?Q?T2wMLKRf15aV7SPUtr7nL84nyKc/QaXfGlG279ghcZbsQJwADdE+kZ6HAfKo?=
+ =?us-ascii?Q?7it5M4OOkb7g27ungzZ88s4AuHUYnMFb9evmcOvoesNfOPqJDf7LSiCXuYn5?=
+ =?us-ascii?Q?yhLatWXLphSQjSvP5at1OiRKmEDadeM/Ic5zaZ6/9X/Cn+pfmXol+kuwGVfJ?=
+ =?us-ascii?Q?BPwQcmPmMMTBImMmTVFrPPnAGY+/KA0GQxAFDaxxzgo9QBTzAOn5O3e8809B?=
+ =?us-ascii?Q?bTiz9IJqUL9BmE0norqtIpgvsu4GKUvzi30XBoRQN3a9jjGj8BDDrUBSw6ie?=
+ =?us-ascii?Q?kPB4k3DuxnhWgVQBK1vXK10Jm3ijHu/z+kllvn5OQK3I/TF7Ab5yZrs6WzQQ?=
+ =?us-ascii?Q?zYUYsSZr/9ckEj2P4arPYEiBscUypLMRIgn5DCe85tT3sE27Knwap8Vx7tP0?=
+ =?us-ascii?Q?b2PSH6bhcyEnpF7hLZoYgvtlUQzBKQvMb6fnjL5/?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b789dcc-9c23-4f3a-15e0-08dd3152e866
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2025 08:43:51.5498 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: og0cYy/dKkHOsqYTkiVccSQOJqTN6Y1x7orYEmpoUFkm3uiMGnK6b4sDdSR2pHxxPq/M2grTfCp5QpraQEFjOQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7993
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,1140 +171,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Airoha AN8855 is a 5-port gigabit switch with a 2.5G HSGMII CPU port
+On Sun, Jan 05, 2025 at 10:56:29PM +0100, Marek Vasut wrote:
+>On 1/3/25 7:45 AM, Alice Guo wrote:
+>> From: Ye Li <ye.li@nxp.com>
+>> 
+>> When SPL loading image to secure region, for example, ATF and tee to
+>> DDR secure region. Because the USDHC controller is non-secure master,
+>> it can't access this region and will cause loading issue.
+>> 
+>> So override h_spl_load_read to use a trampoline buffer in nonsecure
+>> region, then use CPU to copy the image from trampoline buffer to
+>> destination secure region.
+>> 
+>> Signed-off-by: Ye Li <ye.li@nxp.com>
+>> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+>> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+>> ---
+>>   arch/arm/mach-imx/imx9/scmi/soc.c | 40 +++++++++++++++++++++++++++++++++++++++
+>>   common/spl/spl_mmc.c              |  2 +-
+>>   2 files changed, 41 insertions(+), 1 deletion(-)
+>> 
+>> diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
+>> index fefb1a6f4ca58722a5d93c39e4f6a7aaf85aa177..8a7df24afecc1d6d77b7162be639b56af95fd975 100644
+>> --- a/arch/arm/mach-imx/imx9/scmi/soc.c
+>> +++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+>> @@ -41,6 +41,8 @@
+>>   #include <scmi_agent.h>
+>>   #include <scmi_protocols.h>
+>>   #endif
+>> +#include <spl.h>
+>> +#include <mmc.h>
+>>   DECLARE_GLOBAL_DATA_PTR;
+>> @@ -830,3 +832,41 @@ enum boot_device get_boot_device(void)
+>>   	return boot_dev;
+>>   }
+>>   #endif
+>> +
+>> +ulong h_spl_load_read(struct spl_load_info *load, ulong off,
+>> +		      ulong size, void *buf)
+>
+>Can you simply define spl_get_load_buffer() instead to make sure SPL loads
+>your stuff into the correct location ?
 
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
- drivers/net/mtk_eth/Kconfig  |    4 +
- drivers/net/mtk_eth/Makefile |    1 +
- drivers/net/mtk_eth/an8855.c | 1096 ++++++++++++++++++++++++++++++++++
- 3 files changed, 1101 insertions(+)
- create mode 100644 drivers/net/mtk_eth/an8855.c
+spl_get_load_buffer does not help here, unless do a big change to spl_mmc.c
+h_spl_load_read is set to info->read, info->read is not just for reading
+headers, it also needs to read container image data.
 
-diff --git a/drivers/net/mtk_eth/Kconfig b/drivers/net/mtk_eth/Kconfig
-index 467684749f1..e8cdf408237 100644
---- a/drivers/net/mtk_eth/Kconfig
-+++ b/drivers/net/mtk_eth/Kconfig
-@@ -32,4 +32,8 @@ config MTK_ETH_SWITCH_MT7988
- 	depends on TARGET_MT7988
- 	default y
- 
-+config MTK_ETH_SWITCH_AN8855
-+	bool "Support for Airoha AN8855 ethernet switch"
-+	default y if TARGET_MT7981 || TARGET_MT7987
-+
- endif # MEDIATEK_ETH
-diff --git a/drivers/net/mtk_eth/Makefile b/drivers/net/mtk_eth/Makefile
-index 885375c5b38..a342325ed5d 100644
---- a/drivers/net/mtk_eth/Makefile
-+++ b/drivers/net/mtk_eth/Makefile
-@@ -7,3 +7,4 @@ obj-y += mtk_eth.o
- obj-$(CONFIG_MTK_ETH_SWITCH_MT7530) += mt753x.o mt7530.o
- obj-$(CONFIG_MTK_ETH_SWITCH_MT7531) += mt753x.o mt7531.o
- obj-$(CONFIG_MTK_ETH_SWITCH_MT7988) += mt753x.o mt7988.o
-+obj-$(CONFIG_MTK_ETH_SWITCH_AN8855) += an8855.o
-diff --git a/drivers/net/mtk_eth/an8855.c b/drivers/net/mtk_eth/an8855.c
-new file mode 100644
-index 00000000000..4bd7506a58b
---- /dev/null
-+++ b/drivers/net/mtk_eth/an8855.c
-@@ -0,0 +1,1096 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2025 MediaTek Inc.
-+ *
-+ * Author: Neal Yen <neal.yen@mediatek.com>
-+ * Author: Weijie Gao <weijie.gao@mediatek.com>
-+ */
-+
-+#include <phy.h>
-+#include <miiphy.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/mdio.h>
-+#include <linux/mii.h>
-+#include "mtk_eth.h"
-+
-+/* AN8855 Register Definitions */
-+#define AN8855_SYS_CTRL_REG			0x100050c0
-+#define AN8855_SW_SYS_RST			BIT(31)
-+
-+#define AN8855_PMCR_REG(p)			(0x10210000 + (p) * 0x200)
-+#define AN8855_FORCE_MODE_LNK			BIT(31)
-+#define AN8855_FORCE_MODE			0xb31593f0
-+
-+#define AN8855_PORT_CTRL_BASE			(0x10208000)
-+#define AN8855_PORT_CTRL_REG(p, r)		(AN8855_PORT_CTRL_BASE + (p) * 0x200 + (r))
-+
-+#define AN8855_PORTMATRIX_REG(p)		AN8855_PORT_CTRL_REG(p, 0x44)
-+
-+#define AN8855_PVC(p)				AN8855_PORT_CTRL_REG(p, 0x10)
-+#define AN8855_STAG_VPID_S			16
-+#define AN8855_STAG_VPID_M			0xffff0000
-+#define AN8855_VLAN_ATTR_S			6
-+#define AN8855_VLAN_ATTR_M			0xc0
-+
-+#define VLAN_ATTR_USER				0
-+
-+#define AN8855_INT_MASK				0x100050F0
-+#define AN8855_INT_SYS_BIT			BIT(15)
-+
-+#define AN8855_RG_CLK_CPU_ICG			0x10005034
-+#define AN8855_MCU_ENABLE			BIT(3)
-+
-+#define AN8855_RG_TIMER_CTL			0x1000a100
-+#define AN8855_WDOG_ENABLE			BIT(25)
-+
-+#define AN8855_CKGCR				0x10213e1c
-+
-+#define AN8855_SCU_BASE 			0x10000000
-+#define AN8855_RG_RGMII_TXCK_C			(AN8855_SCU_BASE + 0x1d0)
-+#define AN8855_RG_GPIO_LED_MODE			(AN8855_SCU_BASE + 0x0054)
-+#define AN8855_RG_GPIO_LED_SEL(i)		(AN8855_SCU_BASE + (0x0058 + ((i) * 4)))
-+#define AN8855_RG_INTB_MODE			(AN8855_SCU_BASE + 0x0080)
-+#define AN8855_RG_GDMP_RAM			(AN8855_SCU_BASE + 0x10000)
-+#define AN8855_RG_GPIO_L_INV			(AN8855_SCU_BASE + 0x0010)
-+#define AN8855_RG_GPIO_CTRL			(AN8855_SCU_BASE + 0xa300)
-+#define AN8855_RG_GPIO_DATA			(AN8855_SCU_BASE + 0xa304)
-+#define AN8855_RG_GPIO_OE			(AN8855_SCU_BASE + 0xa314)
-+
-+#define AN8855_HSGMII_AN_CSR_BASE		0x10220000
-+#define AN8855_SGMII_REG_AN0			(AN8855_HSGMII_AN_CSR_BASE + 0x000)
-+#define AN8855_SGMII_REG_AN_13			(AN8855_HSGMII_AN_CSR_BASE + 0x034)
-+#define AN8855_SGMII_REG_AN_FORCE_CL37		(AN8855_HSGMII_AN_CSR_BASE + 0x060)
-+
-+#define AN8855_HSGMII_CSR_PCS_BASE		0x10220000
-+#define AN8855_RG_HSGMII_PCS_CTROL_1		(AN8855_HSGMII_CSR_PCS_BASE + 0xa00)
-+#define AN8855_RG_AN_SGMII_MODE_FORCE		(AN8855_HSGMII_CSR_PCS_BASE + 0xa24)
-+
-+#define AN8855_MULTI_SGMII_CSR_BASE 		0x10224000
-+#define AN8855_SGMII_STS_CTRL_0 		(AN8855_MULTI_SGMII_CSR_BASE + 0x018)
-+#define AN8855_MSG_RX_CTRL_0			(AN8855_MULTI_SGMII_CSR_BASE + 0x100)
-+#define AN8855_MSG_RX_LIK_STS_0 		(AN8855_MULTI_SGMII_CSR_BASE + 0x514)
-+#define AN8855_MSG_RX_LIK_STS_2 		(AN8855_MULTI_SGMII_CSR_BASE + 0x51c)
-+#define AN8855_PHY_RX_FORCE_CTRL_0		(AN8855_MULTI_SGMII_CSR_BASE + 0x520)
-+
-+#define AN8855_XFI_CSR_PCS_BASE 		0x10225000
-+#define AN8855_RG_USXGMII_AN_CONTROL_0		(AN8855_XFI_CSR_PCS_BASE + 0xbf8)
-+
-+#define AN8855_MULTI_PHY_RA_CSR_BASE		0x10226000
-+#define AN8855_RG_RATE_ADAPT_CTRL_0 		(AN8855_MULTI_PHY_RA_CSR_BASE + 0x000)
-+#define AN8855_RATE_ADP_P0_CTRL_0		(AN8855_MULTI_PHY_RA_CSR_BASE + 0x100)
-+#define AN8855_MII_RA_AN_ENABLE 		(AN8855_MULTI_PHY_RA_CSR_BASE + 0x300)
-+
-+#define AN8855_QP_DIG_CSR_BASE			0x1022a000
-+#define AN8855_QP_CK_RST_CTRL_4 		(AN8855_QP_DIG_CSR_BASE + 0x310)
-+#define AN8855_QP_DIG_MODE_CTRL_0		(AN8855_QP_DIG_CSR_BASE + 0x324)
-+#define AN8855_QP_DIG_MODE_CTRL_1		(AN8855_QP_DIG_CSR_BASE + 0x330)
-+
-+#define AN8855_QP_PMA_TOP_BASE			0x1022e000
-+#define AN8855_PON_RXFEDIG_CTRL_0		(AN8855_QP_PMA_TOP_BASE + 0x100)
-+#define AN8855_PON_RXFEDIG_CTRL_9		(AN8855_QP_PMA_TOP_BASE + 0x124)
-+
-+#define AN8855_SS_LCPLL_PWCTL_SETTING_2 	(AN8855_QP_PMA_TOP_BASE + 0x208)
-+#define AN8855_SS_LCPLL_TDC_FLT_2		(AN8855_QP_PMA_TOP_BASE + 0x230)
-+#define AN8855_SS_LCPLL_TDC_FLT_5		(AN8855_QP_PMA_TOP_BASE + 0x23c)
-+#define AN8855_SS_LCPLL_TDC_PCW_1		(AN8855_QP_PMA_TOP_BASE + 0x248)
-+#define AN8855_INTF_CTRL_8			(AN8855_QP_PMA_TOP_BASE + 0x320)
-+#define AN8855_INTF_CTRL_9			(AN8855_QP_PMA_TOP_BASE + 0x324)
-+#define AN8855_PLL_CTRL_0			(AN8855_QP_PMA_TOP_BASE + 0x400)
-+#define AN8855_PLL_CTRL_2			(AN8855_QP_PMA_TOP_BASE + 0x408)
-+#define AN8855_PLL_CTRL_3			(AN8855_QP_PMA_TOP_BASE + 0x40c)
-+#define AN8855_PLL_CTRL_4			(AN8855_QP_PMA_TOP_BASE + 0x410)
-+#define AN8855_PLL_CK_CTRL_0			(AN8855_QP_PMA_TOP_BASE + 0x414)
-+#define AN8855_RX_DLY_0 			(AN8855_QP_PMA_TOP_BASE + 0x614)
-+#define AN8855_RX_CTRL_2			(AN8855_QP_PMA_TOP_BASE + 0x630)
-+#define AN8855_RX_CTRL_5			(AN8855_QP_PMA_TOP_BASE + 0x63c)
-+#define AN8855_RX_CTRL_6			(AN8855_QP_PMA_TOP_BASE + 0x640)
-+#define AN8855_RX_CTRL_7			(AN8855_QP_PMA_TOP_BASE + 0x644)
-+#define AN8855_RX_CTRL_8			(AN8855_QP_PMA_TOP_BASE + 0x648)
-+#define AN8855_RX_CTRL_26			(AN8855_QP_PMA_TOP_BASE + 0x690)
-+#define AN8855_RX_CTRL_42			(AN8855_QP_PMA_TOP_BASE + 0x6d0)
-+
-+#define AN8855_QP_ANA_CSR_BASE			0x1022f000
-+#define AN8855_RG_QP_RX_DAC_EN			(AN8855_QP_ANA_CSR_BASE + 0x00)
-+#define AN8855_RG_QP_RXAFE_RESERVE		(AN8855_QP_ANA_CSR_BASE + 0x04)
-+#define AN8855_RG_QP_CDR_LPF_MJV_LIM		(AN8855_QP_ANA_CSR_BASE + 0x0c)
-+#define AN8855_RG_QP_CDR_LPF_SETVALUE		(AN8855_QP_ANA_CSR_BASE + 0x14)
-+#define AN8855_RG_QP_CDR_PR_CKREF_DIV1		(AN8855_QP_ANA_CSR_BASE + 0x18)
-+#define AN8855_RG_QP_CDR_PR_KBAND_DIV_PCIE	(AN8855_QP_ANA_CSR_BASE + 0x1c)
-+#define AN8855_RG_QP_CDR_FORCE_IBANDLPF_R_OFF	(AN8855_QP_ANA_CSR_BASE + 0x20)
-+#define AN8855_RG_QP_TX_MODE_16B_EN 		(AN8855_QP_ANA_CSR_BASE + 0x28)
-+#define AN8855_RG_QP_PLL_IPLL_DIG_PWR_SEL	(AN8855_QP_ANA_CSR_BASE + 0x3c)
-+#define AN8855_RG_QP_PLL_SDM_ORD		(AN8855_QP_ANA_CSR_BASE + 0x40)
-+
-+#define AN8855_ETHER_SYS_BASE			0x1028c800
-+#define RG_GPHY_AFE_PWD				(AN8855_ETHER_SYS_BASE + 0x40)
-+
-+#define AN8855_PKG_SEL				0x10000094
-+#define PAG_SEL_AN8855H				0x2
-+
-+/* PHY LED Register bitmap of define */
-+#define PHY_LED_CTRL_SELECT			0x3e8
-+#define PHY_SINGLE_LED_ON_CTRL(i)		(0x3e0 + ((i) * 2))
-+#define PHY_SINGLE_LED_BLK_CTRL(i)		(0x3e1 + ((i) * 2))
-+#define PHY_SINGLE_LED_ON_DUR(i)		(0x3e9 + ((i) * 2))
-+#define PHY_SINGLE_LED_BLK_DUR(i)		(0x3ea + ((i) * 2))
-+
-+#define PHY_PMA_CTRL				(0x340)
-+
-+#define PHY_DEV1F				0x1f
-+
-+#define PHY_LED_ON_CTRL(i)			(0x24 + ((i) * 2))
-+#define LED_ON_EN				(1 << 15)
-+#define LED_ON_POL				(1 << 14)
-+#define LED_ON_EVT_MASK				(0x7f)
-+
-+/* LED ON Event */
-+#define LED_ON_EVT_FORCE			(1 << 6)
-+#define LED_ON_EVT_LINK_HD			(1 << 5)
-+#define LED_ON_EVT_LINK_FD			(1 << 4)
-+#define LED_ON_EVT_LINK_DOWN			(1 << 3)
-+#define LED_ON_EVT_LINK_10M			(1 << 2)
-+#define LED_ON_EVT_LINK_100M			(1 << 1)
-+#define LED_ON_EVT_LINK_1000M			(1 << 0)
-+
-+#define PHY_LED_BLK_CTRL(i)			(0x25 + ((i) * 2))
-+#define LED_BLK_EVT_MASK			(0x3ff)
-+/* LED Blinking Event */
-+#define LED_BLK_EVT_FORCE			(1 << 9)
-+#define LED_BLK_EVT_10M_RX_ACT			(1 << 5)
-+#define LED_BLK_EVT_10M_TX_ACT			(1 << 4)
-+#define LED_BLK_EVT_100M_RX_ACT			(1 << 3)
-+#define LED_BLK_EVT_100M_TX_ACT			(1 << 2)
-+#define LED_BLK_EVT_1000M_RX_ACT		(1 << 1)
-+#define LED_BLK_EVT_1000M_TX_ACT		(1 << 0)
-+
-+#define PHY_LED_BCR				(0x21)
-+#define LED_BCR_EXT_CTRL			(1 << 15)
-+#define LED_BCR_CLK_EN				(1 << 3)
-+#define LED_BCR_TIME_TEST			(1 << 2)
-+#define LED_BCR_MODE_MASK			(3)
-+#define LED_BCR_MODE_DISABLE			(0)
-+
-+#define PHY_LED_ON_DUR				(0x22)
-+#define LED_ON_DUR_MASK				(0xffff)
-+
-+#define PHY_LED_BLK_DUR				(0x23)
-+#define LED_BLK_DUR_MASK			(0xffff)
-+
-+#define PHY_LED_BLINK_DUR_CTRL			(0x720)
-+
-+/* Definition of LED */
-+#define LED_ON_EVENT	(LED_ON_EVT_LINK_1000M | \
-+			LED_ON_EVT_LINK_100M | LED_ON_EVT_LINK_10M |\
-+			LED_ON_EVT_LINK_HD | LED_ON_EVT_LINK_FD)
-+
-+#define LED_BLK_EVENT	(LED_BLK_EVT_1000M_TX_ACT | \
-+			LED_BLK_EVT_1000M_RX_ACT | \
-+			LED_BLK_EVT_100M_TX_ACT | \
-+			LED_BLK_EVT_100M_RX_ACT | \
-+			LED_BLK_EVT_10M_TX_ACT | \
-+			LED_BLK_EVT_10M_RX_ACT)
-+
-+#define LED_FREQ				AIR_LED_BLK_DUR_64M
-+
-+#define AN8855_NUM_PHYS				5
-+#define AN8855_NUM_PORTS			6
-+#define AN8855_PHY_ADDR(base, addr)		(((base) + (addr)) & 0x1f)
-+
-+/* PHY LED Register bitmap of define */
-+#define PHY_LED_CTRL_SELECT			0x3e8
-+#define PHY_SINGLE_LED_ON_CTRL(i)		(0x3e0 + ((i) * 2))
-+#define PHY_SINGLE_LED_BLK_CTRL(i)		(0x3e1 + ((i) * 2))
-+#define PHY_SINGLE_LED_ON_DUR(i)		(0x3e9 + ((i) * 2))
-+#define PHY_SINGLE_LED_BLK_DUR(i)		(0x3ea + ((i) * 2))
-+
-+/* AN8855 LED */
-+enum an8855_led_blk_dur {
-+	AIR_LED_BLK_DUR_32M,
-+	AIR_LED_BLK_DUR_64M,
-+	AIR_LED_BLK_DUR_128M,
-+	AIR_LED_BLK_DUR_256M,
-+	AIR_LED_BLK_DUR_512M,
-+	AIR_LED_BLK_DUR_1024M,
-+	AIR_LED_BLK_DUR_LAST
-+};
-+
-+enum an8855_led_polarity {
-+	LED_LOW,
-+	LED_HIGH,
-+};
-+
-+enum an8855_led_mode {
-+	AN8855_LED_MODE_DISABLE,
-+	AN8855_LED_MODE_USER_DEFINE,
-+	AN8855_LED_MODE_LAST
-+};
-+
-+enum phy_led_idx {
-+	P0_LED0,
-+	P0_LED1,
-+	P0_LED2,
-+	P0_LED3,
-+	P1_LED0,
-+	P1_LED1,
-+	P1_LED2,
-+	P1_LED3,
-+	P2_LED0,
-+	P2_LED1,
-+	P2_LED2,
-+	P2_LED3,
-+	P3_LED0,
-+	P3_LED1,
-+	P3_LED2,
-+	P3_LED3,
-+	P4_LED0,
-+	P4_LED1,
-+	P4_LED2,
-+	P4_LED3,
-+	PHY_LED_MAX
-+};
-+
-+struct an8855_led_cfg {
-+	u16 en;
-+	u8  phy_led_idx;
-+	u16 pol;
-+	u16 on_cfg;
-+	u16 blk_cfg;
-+	u8 led_freq;
-+};
-+
-+struct an8855_switch_priv {
-+	struct mtk_eth_switch_priv epriv;
-+	struct mii_dev *mdio_bus;
-+	u32 phy_base;
-+};
-+
-+/* AN8855 Reference Board */
-+static const struct an8855_led_cfg led_cfg[] = {
-+/*************************************************************************
-+ * Enable, LED idx, LED Polarity, LED ON event,  LED Blink event  LED Freq
-+ *************************************************************************
-+ */
-+	/* GPIO0 */
-+	{1, P4_LED0, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO1 */
-+	{1, P4_LED1, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO2 */
-+	{1, P0_LED0, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO3 */
-+	{1, P0_LED1, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO4 */
-+	{1, P1_LED0, LED_LOW,  LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO5 */
-+	{1, P1_LED1, LED_LOW,  LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO6 */
-+	{0, PHY_LED_MAX, LED_LOW,  LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO7 */
-+	{0, PHY_LED_MAX, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO8 */
-+	{0, PHY_LED_MAX, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO9 */
-+	{1, P2_LED0, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO10 */
-+	{1, P2_LED1, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO11 */
-+	{1, P3_LED0, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO12 */
-+	{1, P3_LED1, LED_HIGH,  LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO13 */
-+	{0, PHY_LED_MAX, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO14 */
-+	{0, PHY_LED_MAX, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO15 */
-+	{0, PHY_LED_MAX, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO16 */
-+	{0, PHY_LED_MAX, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO17 */
-+	{0, PHY_LED_MAX, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO18 */
-+	{0, PHY_LED_MAX, LED_HIGH, LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO19 */
-+	{0, PHY_LED_MAX, LED_LOW,  LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+	/* GPIO20 */
-+	{0, PHY_LED_MAX, LED_LOW,  LED_ON_EVENT, LED_BLK_EVENT, LED_FREQ},
-+};
-+
-+static int __an8855_reg_read(struct mtk_eth_priv *priv, u8 phy_base, u32 reg, u32 *data)
-+{
-+	int ret, low_word, high_word;
-+
-+	ret = mtk_mii_write(priv, phy_base, 0x1f, 0x4);
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv, phy_base, 0x10, 0);
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv, phy_base, 0x15, ((reg >> 16) & 0xFFFF));
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv, phy_base, 0x16, (reg & 0xFFFF));
-+	if (ret)
-+		return ret;
-+
-+	low_word = mtk_mii_read(priv, phy_base, 0x18);
-+	if (low_word < 0)
-+		return low_word;
-+
-+	high_word = mtk_mii_read(priv, phy_base, 0x17);
-+	if (high_word < 0)
-+		return high_word;
-+
-+	ret = mtk_mii_write(priv, phy_base, 0x1f, 0);
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv, phy_base, 0x10, 0);
-+	if (ret)
-+		return ret;
-+
-+	if (data)
-+		*data = ((u32)high_word << 16) | (low_word & 0xffff);
-+
-+	return 0;
-+}
-+
-+static int an8855_reg_read(struct an8855_switch_priv *priv, u32 reg, u32 *data)
-+{
-+	return __an8855_reg_read(priv->epriv.eth, priv->phy_base, reg, data);
-+}
-+
-+static int an8855_reg_write(struct an8855_switch_priv *priv, u32 reg, u32 data)
-+{
-+	int ret;
-+
-+	ret = mtk_mii_write(priv->epriv.eth, priv->phy_base, 0x1f, 0x4);
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv->epriv.eth, priv->phy_base, 0x10, 0);
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv->epriv.eth, priv->phy_base, 0x11,
-+			    ((reg >> 16) & 0xFFFF));
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv->epriv.eth, priv->phy_base, 0x12,
-+			    (reg & 0xFFFF));
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv->epriv.eth, priv->phy_base, 0x13,
-+			    ((data >> 16) & 0xFFFF));
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv->epriv.eth, priv->phy_base, 0x14,
-+			    (data & 0xFFFF));
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv->epriv.eth, priv->phy_base, 0x1f, 0);
-+	if (ret)
-+		return ret;
-+
-+	ret = mtk_mii_write(priv->epriv.eth, priv->phy_base, 0x10, 0);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int an8855_phy_cl45_read(struct an8855_switch_priv *priv, int port,
-+				int devad, int regnum, u16 *data)
-+{
-+	u16 phy_addr = AN8855_PHY_ADDR(priv->phy_base, port);
-+
-+	*data = mtk_mmd_ind_read(priv->epriv.eth, phy_addr, devad, regnum);
-+
-+	return 0;
-+}
-+
-+static int an8855_phy_cl45_write(struct an8855_switch_priv *priv, int port,
-+				 int devad, int regnum, u16 data)
-+{
-+	u16 phy_addr = AN8855_PHY_ADDR(priv->phy_base, port);
-+
-+	mtk_mmd_ind_write(priv->epriv.eth, phy_addr, devad, regnum, data);
-+
-+	return 0;
-+}
-+
-+static int an8855_port_sgmii_init(struct an8855_switch_priv *priv, u32 port)
-+{
-+	u32 val = 0;
-+
-+	if (port != 5) {
-+		printf("an8855: port %d is not a SGMII port\n", port);
-+		return -EINVAL;
-+	}
-+
-+	/* PLL */
-+	an8855_reg_read(priv, AN8855_QP_DIG_MODE_CTRL_1, &val);
-+	val &= ~(0x3 << 2);
-+	val |= (0x1 << 2);
-+	an8855_reg_write(priv, AN8855_QP_DIG_MODE_CTRL_1, val);
-+
-+	/* PLL - LPF */
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_2, &val);
-+	val &= ~(0x3 << 0);
-+	val |= (0x1 << 0);
-+	val &= ~(0x7 << 2);
-+	val |= (0x5 << 2);
-+	val &= ~GENMASK(7, 6);
-+	val &= ~(0x7 << 8);
-+	val |= (0x3 << 8);
-+	val |= BIT(29);
-+	val &= ~GENMASK(13, 12);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_2, val);
-+
-+	/* PLL - ICO */
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_4, &val);
-+	val |= BIT(2);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_4, val);
-+
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_2, &val);
-+	val &= ~BIT(14);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_2, val);
-+
-+	/* PLL - CHP */
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_2, &val);
-+	val &= ~(0xf << 16);
-+	val |= (0x6 << 16);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_2, val);
-+
-+	/* PLL - PFD */
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_2, &val);
-+	val &= ~(0x3 << 20);
-+	val |= (0x1 << 20);
-+	val &= ~(0x3 << 24);
-+	val |= (0x1 << 24);
-+	val &= ~BIT(26);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_2, val);
-+
-+	/* PLL - POSTDIV */
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_2, &val);
-+	val |= BIT(22);
-+	val &= ~BIT(27);
-+	val &= ~BIT(28);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_2, val);
-+
-+	/* PLL - SDM */
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_4, &val);
-+	val &= ~GENMASK(4, 3);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_4, val);
-+
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_2, &val);
-+	val &= ~BIT(30);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_2, val);
-+
-+	an8855_reg_read(priv, AN8855_SS_LCPLL_PWCTL_SETTING_2, &val);
-+	val &= ~(0x3 << 16);
-+	val |= (0x1 << 16);
-+	an8855_reg_write(priv, AN8855_SS_LCPLL_PWCTL_SETTING_2, val);
-+
-+	an8855_reg_write(priv, AN8855_SS_LCPLL_TDC_FLT_2, 0x7a000000);
-+	an8855_reg_write(priv, AN8855_SS_LCPLL_TDC_PCW_1, 0x7a000000);
-+
-+	an8855_reg_read(priv, AN8855_SS_LCPLL_TDC_FLT_5, &val);
-+	val &= ~BIT(24);
-+	an8855_reg_write(priv, AN8855_SS_LCPLL_TDC_FLT_5, val);
-+
-+	an8855_reg_read(priv, AN8855_PLL_CK_CTRL_0, &val);
-+	val &= ~BIT(8);
-+	an8855_reg_write(priv, AN8855_PLL_CK_CTRL_0, val);
-+
-+	/* PLL - SS */
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_3, &val);
-+	val &= ~GENMASK(15, 0);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_3, val);
-+
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_4, &val);
-+	val &= ~GENMASK(1, 0);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_4, val);
-+
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_3, &val);
-+	val &= ~GENMASK(31, 16);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_3, val);
-+
-+	/* PLL - TDC */
-+	an8855_reg_read(priv, AN8855_PLL_CK_CTRL_0, &val);
-+	val &= ~BIT(9);
-+	an8855_reg_write(priv, AN8855_PLL_CK_CTRL_0, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_PLL_SDM_ORD, &val);
-+	val |= BIT(3);
-+	val |= BIT(4);
-+	an8855_reg_write(priv, AN8855_RG_QP_PLL_SDM_ORD, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_RX_DAC_EN, &val);
-+	val &= ~(0x3 << 16);
-+	val |= (0x2 << 16);
-+	an8855_reg_write(priv, AN8855_RG_QP_RX_DAC_EN, val);
-+
-+	/* TCL Disable (only for Co-SIM) */
-+	an8855_reg_read(priv, AN8855_PON_RXFEDIG_CTRL_0, &val);
-+	val &= ~BIT(12);
-+	an8855_reg_write(priv, AN8855_PON_RXFEDIG_CTRL_0, val);
-+
-+	/* TX Init */
-+	an8855_reg_read(priv, AN8855_RG_QP_TX_MODE_16B_EN, &val);
-+	val &= ~BIT(0);
-+	val &= ~(0xffff << 16);
-+	val |= (0x4 << 16);
-+	an8855_reg_write(priv, AN8855_RG_QP_TX_MODE_16B_EN, val);
-+
-+	/* RX Control */
-+	an8855_reg_read(priv, AN8855_RG_QP_RXAFE_RESERVE, &val);
-+	val |= BIT(11);
-+	an8855_reg_write(priv, AN8855_RG_QP_RXAFE_RESERVE, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_CDR_LPF_MJV_LIM, &val);
-+	val &= ~(0x3 << 4);
-+	val |= (0x1 << 4);
-+	an8855_reg_write(priv, AN8855_RG_QP_CDR_LPF_MJV_LIM, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_CDR_LPF_SETVALUE, &val);
-+	val &= ~(0xf << 25);
-+	val |= (0x1 << 25);
-+	val &= ~(0x7 << 29);
-+	val |= (0x3 << 29);
-+	an8855_reg_write(priv, AN8855_RG_QP_CDR_LPF_SETVALUE, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_CDR_PR_CKREF_DIV1, &val);
-+	val &= ~(0x1f << 8);
-+	val |= (0xf << 8);
-+	an8855_reg_write(priv, AN8855_RG_QP_CDR_PR_CKREF_DIV1, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_CDR_PR_KBAND_DIV_PCIE, &val);
-+	val &= ~(0x3f << 0);
-+	val |= (0x19 << 0);
-+	val &= ~BIT(6);
-+	an8855_reg_write(priv, AN8855_RG_QP_CDR_PR_KBAND_DIV_PCIE, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_CDR_FORCE_IBANDLPF_R_OFF, &val);
-+	val &= ~(0x7f << 6);
-+	val |= (0x21 << 6);
-+	val &= ~(0x3 << 16);
-+	val |= (0x2 << 16);
-+	val &= ~BIT(13);
-+	an8855_reg_write(priv, AN8855_RG_QP_CDR_FORCE_IBANDLPF_R_OFF, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_CDR_PR_KBAND_DIV_PCIE, &val);
-+	val &= ~BIT(30);
-+	an8855_reg_write(priv, AN8855_RG_QP_CDR_PR_KBAND_DIV_PCIE, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_QP_CDR_PR_CKREF_DIV1, &val);
-+	val &= ~(0x7 << 24);
-+	val |= (0x4 << 24);
-+	an8855_reg_write(priv, AN8855_RG_QP_CDR_PR_CKREF_DIV1, val);
-+
-+	an8855_reg_read(priv, AN8855_PLL_CTRL_0, &val);
-+	val |= BIT(0);
-+	an8855_reg_write(priv, AN8855_PLL_CTRL_0, val);
-+
-+	an8855_reg_read(priv, AN8855_RX_CTRL_26, &val);
-+	val &= ~BIT(23);
-+	val |= BIT(26);
-+	an8855_reg_write(priv, AN8855_RX_CTRL_26, val);
-+
-+	an8855_reg_read(priv, AN8855_RX_DLY_0, &val);
-+	val &= ~(0xff << 0);
-+	val |= (0x6f << 0);
-+	val |= GENMASK(13, 8);
-+	an8855_reg_write(priv, AN8855_RX_DLY_0, val);
-+
-+	an8855_reg_read(priv, AN8855_RX_CTRL_42, &val);
-+	val &= ~(0x1fff << 0);
-+	val |= (0x150 << 0);
-+	an8855_reg_write(priv, AN8855_RX_CTRL_42, val);
-+
-+	an8855_reg_read(priv, AN8855_RX_CTRL_2, &val);
-+	val &= ~(0x1fff << 16);
-+	val |= (0x150 << 16);
-+	an8855_reg_write(priv, AN8855_RX_CTRL_2, val);
-+
-+	an8855_reg_read(priv, AN8855_PON_RXFEDIG_CTRL_9, &val);
-+	val &= ~(0x7 << 0);
-+	val |= (0x1 << 0);
-+	an8855_reg_write(priv, AN8855_PON_RXFEDIG_CTRL_9, val);
-+
-+	an8855_reg_read(priv, AN8855_RX_CTRL_8, &val);
-+	val &= ~(0xfff << 16);
-+	val |= (0x200 << 16);
-+	val &= ~(0x7fff << 14);
-+	val |= (0xfff << 14);
-+	an8855_reg_write(priv, AN8855_RX_CTRL_8, val);
-+
-+	/* Frequency memter */
-+	an8855_reg_read(priv, AN8855_RX_CTRL_5, &val);
-+	val &= ~(0xfffff << 10);
-+	val |= (0x10 << 10);
-+	an8855_reg_write(priv, AN8855_RX_CTRL_5, val);
-+
-+	an8855_reg_read(priv, AN8855_RX_CTRL_6, &val);
-+	val &= ~(0xfffff << 0);
-+	val |= (0x64 << 0);
-+	an8855_reg_write(priv, AN8855_RX_CTRL_6, val);
-+
-+	an8855_reg_read(priv, AN8855_RX_CTRL_7, &val);
-+	val &= ~(0xfffff << 0);
-+	val |= (0x2710 << 0);
-+	an8855_reg_write(priv, AN8855_RX_CTRL_7, val);
-+
-+	/* PCS Init */
-+	an8855_reg_read(priv, AN8855_RG_HSGMII_PCS_CTROL_1, &val);
-+	val &= ~BIT(30);
-+	an8855_reg_write(priv, AN8855_RG_HSGMII_PCS_CTROL_1, val);
-+
-+	/* Rate Adaption */
-+	an8855_reg_read(priv, AN8855_RATE_ADP_P0_CTRL_0, &val);
-+	val &= ~BIT(31);
-+	an8855_reg_write(priv, AN8855_RATE_ADP_P0_CTRL_0, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_RATE_ADAPT_CTRL_0, &val);
-+	val |= BIT(0);
-+	val |= BIT(4);
-+	val |= GENMASK(27, 26);
-+	an8855_reg_write(priv, AN8855_RG_RATE_ADAPT_CTRL_0, val);
-+
-+	/* Disable AN */
-+	an8855_reg_read(priv, AN8855_SGMII_REG_AN0, &val);
-+	val &= ~BIT(12);
-+	an8855_reg_write(priv, AN8855_SGMII_REG_AN0, val);
-+
-+	/* Force Speed */
-+	an8855_reg_read(priv, AN8855_SGMII_STS_CTRL_0, &val);
-+	val |= BIT(2);
-+	val |= GENMASK(5, 4);
-+	an8855_reg_write(priv, AN8855_SGMII_STS_CTRL_0, val);
-+
-+	/* bypass flow control to MAC */
-+	an8855_reg_write(priv, AN8855_MSG_RX_LIK_STS_0, 0x01010107);
-+	an8855_reg_write(priv, AN8855_MSG_RX_LIK_STS_2, 0x00000EEF);
-+
-+	return 0;
-+}
-+
-+static void an8855_led_set_usr_def(struct an8855_switch_priv *priv, u8 entity,
-+				   enum an8855_led_polarity pol, u16 on_evt,
-+				   u16 blk_evt, u8 led_freq)
-+{
-+	u32 cl45_data;
-+
-+	if (pol == LED_HIGH)
-+		on_evt |= LED_ON_POL;
-+	else
-+		on_evt &= ~LED_ON_POL;
-+
-+	/* LED on event */
-+	an8855_phy_cl45_write(priv, (entity / 4), 0x1e,
-+			      PHY_SINGLE_LED_ON_CTRL(entity % 4),
-+			      on_evt | LED_ON_EN);
-+
-+	/* LED blink event */
-+	an8855_phy_cl45_write(priv, (entity / 4), 0x1e,
-+			      PHY_SINGLE_LED_BLK_CTRL(entity % 4),
-+			      blk_evt);
-+
-+	/* LED freq */
-+	switch (led_freq) {
-+	case AIR_LED_BLK_DUR_32M:
-+		cl45_data = 0x30e;
-+		break;
-+
-+	case AIR_LED_BLK_DUR_64M:
-+		cl45_data = 0x61a;
-+		break;
-+
-+	case AIR_LED_BLK_DUR_128M:
-+		cl45_data = 0xc35;
-+		break;
-+
-+	case AIR_LED_BLK_DUR_256M:
-+		cl45_data = 0x186a;
-+		break;
-+
-+	case AIR_LED_BLK_DUR_512M:
-+		cl45_data = 0x30d4;
-+		break;
-+
-+	case AIR_LED_BLK_DUR_1024M:
-+		cl45_data = 0x61a8;
-+		break;
-+
-+	default:
-+		cl45_data = 0;
-+		break;
-+	}
-+
-+	an8855_phy_cl45_write(priv, (entity / 4), 0x1e,
-+			      PHY_SINGLE_LED_BLK_DUR(entity % 4),
-+			      cl45_data);
-+
-+	an8855_phy_cl45_write(priv, (entity / 4), 0x1e,
-+			      PHY_SINGLE_LED_ON_DUR(entity % 4),
-+			      (cl45_data >> 1));
-+
-+	/* Disable DATA & BAD_SSD for port LED blink behavior */
-+	cl45_data = mtk_mmd_ind_read(priv->epriv.eth, (entity / 4), 0x1e, PHY_PMA_CTRL);
-+	cl45_data &= ~BIT(0);
-+	cl45_data &= ~BIT(15);
-+	an8855_phy_cl45_write(priv, (entity / 4), 0x1e, PHY_PMA_CTRL, cl45_data);
-+}
-+
-+static int an8855_led_set_mode(struct an8855_switch_priv *priv, u8 mode)
-+{
-+	u16 cl45_data;
-+
-+	an8855_phy_cl45_read(priv, 0, 0x1f, PHY_LED_BCR, &cl45_data);
-+
-+	switch (mode) {
-+	case AN8855_LED_MODE_DISABLE:
-+		cl45_data &= ~LED_BCR_EXT_CTRL;
-+		cl45_data &= ~LED_BCR_MODE_MASK;
-+		cl45_data |= LED_BCR_MODE_DISABLE;
-+		break;
-+
-+	case AN8855_LED_MODE_USER_DEFINE:
-+		cl45_data |= LED_BCR_EXT_CTRL;
-+		cl45_data |= LED_BCR_CLK_EN;
-+		break;
-+
-+	default:
-+		printf("an8855: LED mode%d is not supported!\n", mode);
-+		return -EINVAL;
-+	}
-+
-+	an8855_phy_cl45_write(priv, 0, 0x1f, PHY_LED_BCR, cl45_data);
-+
-+	return 0;
-+}
-+
-+static int an8855_led_set_state(struct an8855_switch_priv *priv, u8 entity,
-+				u8 state)
-+{
-+	u16 cl45_data = 0;
-+
-+	/* Change to per port contorl */
-+	an8855_phy_cl45_read(priv, (entity / 4), 0x1e, PHY_LED_CTRL_SELECT,
-+			     &cl45_data);
-+
-+	if (state == 1)
-+		cl45_data |= (1 << (entity % 4));
-+	else
-+		cl45_data &= ~(1 << (entity % 4));
-+
-+	an8855_phy_cl45_write(priv, (entity / 4), 0x1e, PHY_LED_CTRL_SELECT,
-+			      cl45_data);
-+
-+	/* LED enable setting */
-+	an8855_phy_cl45_read(priv, (entity / 4), 0x1e,
-+			     PHY_SINGLE_LED_ON_CTRL(entity % 4), &cl45_data);
-+
-+	if (state == 1)
-+		cl45_data |= LED_ON_EN;
-+	else
-+		cl45_data &= ~LED_ON_EN;
-+
-+	an8855_phy_cl45_write(priv, (entity / 4), 0x1e,
-+			      PHY_SINGLE_LED_ON_CTRL(entity % 4), cl45_data);
-+
-+	return 0;
-+}
-+
-+static int an8855_led_init(struct an8855_switch_priv *priv)
-+{
-+	u32 val, id, tmp_id = 0;
-+	int ret;
-+
-+	ret = an8855_led_set_mode(priv, AN8855_LED_MODE_USER_DEFINE);
-+	if (ret) {
-+		printf("an8855: led_set_mode failed with %d!\n", ret);
-+		return ret;
-+	}
-+
-+	for (id = 0; id < ARRAY_SIZE(led_cfg); id++) {
-+		ret = an8855_led_set_state(priv, led_cfg[id].phy_led_idx,
-+					   led_cfg[id].en);
-+		if (ret != 0) {
-+			printf("an8855: led_set_state failed with %d!\n", ret);
-+			return ret;
-+		}
-+
-+		if (led_cfg[id].en == 1) {
-+			an8855_led_set_usr_def(priv,
-+					       led_cfg[id].phy_led_idx,
-+					       led_cfg[id].pol,
-+					       led_cfg[id].on_cfg,
-+					       led_cfg[id].blk_cfg,
-+					       led_cfg[id].led_freq);
-+		}
-+	}
-+
-+	/* Setting for System LED & Loop LED */
-+	an8855_reg_write(priv, AN8855_RG_GPIO_OE, 0x0);
-+	an8855_reg_write(priv, AN8855_RG_GPIO_CTRL, 0x0);
-+	an8855_reg_write(priv, AN8855_RG_GPIO_L_INV, 0);
-+
-+	an8855_reg_write(priv, AN8855_RG_GPIO_CTRL, 0x1001);
-+	an8855_reg_read(priv, AN8855_RG_GPIO_DATA, &val);
-+	val |= GENMASK(3, 1);
-+	val &= ~(BIT(0));
-+	val &= ~(BIT(6));
-+	an8855_reg_write(priv, AN8855_RG_GPIO_DATA, val);
-+
-+	an8855_reg_read(priv, AN8855_RG_GPIO_OE, &val);
-+	val |= 0x41;
-+	an8855_reg_write(priv, AN8855_RG_GPIO_OE, val);
-+
-+	/* Mapping between GPIO & LED */
-+	val = 0;
-+	for (id = 0; id < ARRAY_SIZE(led_cfg); id++) {
-+		/* Skip GPIO6, due to GPIO6 does not support PORT LED */
-+		if (id == 6)
-+			continue;
-+
-+		if (led_cfg[id].en == 1) {
-+			if (id < 7)
-+				val |= led_cfg[id].phy_led_idx << ((id % 4) * 8);
-+			else
-+				val |= led_cfg[id].phy_led_idx << (((id - 1) % 4) * 8);
-+		}
-+
-+		if (id < 7)
-+			tmp_id = id;
-+		else
-+			tmp_id = id - 1;
-+
-+		if ((tmp_id % 4) == 0x3) {
-+			an8855_reg_write(priv,
-+					 AN8855_RG_GPIO_LED_SEL(tmp_id / 4),
-+					 val);
-+			val = 0;
-+		}
-+	}
-+
-+	/* Turn on LAN LED mode */
-+	val = 0;
-+	for (id = 0; id < ARRAY_SIZE(led_cfg); id++) {
-+		if (led_cfg[id].en == 1)
-+			val |= 0x1 << id;
-+	}
-+	an8855_reg_write(priv, AN8855_RG_GPIO_LED_MODE, val);
-+
-+	/* Force clear blink pulse for per port LED */
-+	an8855_phy_cl45_write(priv, 0, 0x1f, PHY_LED_BLINK_DUR_CTRL, 0x1f);
-+	udelay(1000);
-+	an8855_phy_cl45_write(priv, 0, 0x1f, PHY_LED_BLINK_DUR_CTRL, 0);
-+
-+	return 0;
-+}
-+
-+static void an8855_port_isolation(struct an8855_switch_priv *priv)
-+{
-+	u32 i;
-+
-+	for (i = 0; i < AN8855_NUM_PORTS; i++) {
-+		/* Set port matrix mode */
-+		if (i != 5)
-+			an8855_reg_write(priv, AN8855_PORTMATRIX_REG(i), 0x20);
-+		else
-+			an8855_reg_write(priv, AN8855_PORTMATRIX_REG(i), 0x1f);
-+
-+		/* Set port mode to user port */
-+		an8855_reg_write(priv, AN8855_PVC(i),
-+				 (0x8100 << AN8855_STAG_VPID_S) |
-+				 (VLAN_ATTR_USER << AN8855_VLAN_ATTR_S));
-+	}
-+}
-+
-+static void an8855_mac_control(struct mtk_eth_switch_priv *swpriv, bool enable)
-+{
-+	struct an8855_switch_priv *priv = (struct an8855_switch_priv *)swpriv;
-+	u32 pmcr = AN8855_FORCE_MODE_LNK;
-+
-+	if (enable)
-+		pmcr = AN8855_FORCE_MODE;
-+
-+	an8855_reg_write(priv, AN8855_PMCR_REG(5), pmcr);
-+}
-+
-+static int an8855_mdio_read(struct mii_dev *bus, int addr, int devad, int reg)
-+{
-+	struct an8855_switch_priv *priv = bus->priv;
-+
-+	if (devad < 0)
-+		return mtk_mii_read(priv->epriv.eth, addr, reg);
-+
-+	return mtk_mmd_ind_read(priv->epriv.eth, addr, devad, reg);
-+}
-+
-+static int an8855_mdio_write(struct mii_dev *bus, int addr, int devad, int reg,
-+			     u16 val)
-+{
-+	struct an8855_switch_priv *priv = bus->priv;
-+
-+	if (devad < 0)
-+		return mtk_mii_write(priv->epriv.eth, addr, reg, val);
-+
-+	return mtk_mmd_ind_write(priv->epriv.eth, addr, devad, reg, val);
-+}
-+
-+static int an8855_mdio_register(struct an8855_switch_priv *priv)
-+{
-+	struct mii_dev *mdio_bus = mdio_alloc();
-+	int ret;
-+
-+	if (!mdio_bus)
-+		return -ENOMEM;
-+
-+	mdio_bus->read = an8855_mdio_read;
-+	mdio_bus->write = an8855_mdio_write;
-+	snprintf(mdio_bus->name, sizeof(mdio_bus->name), priv->epriv.sw->name);
-+
-+	mdio_bus->priv = priv;
-+
-+	ret = mdio_register(mdio_bus);
-+	if (ret) {
-+		mdio_free(mdio_bus);
-+		return ret;
-+	}
-+
-+	priv->mdio_bus = mdio_bus;
-+
-+	return 0;
-+}
-+
-+static int an8855_setup(struct mtk_eth_switch_priv *swpriv)
-+{
-+	struct an8855_switch_priv *priv = (struct an8855_switch_priv *)swpriv;
-+	u16 phy_addr, phy_val;
-+	u32 i, id, val = 0;
-+	int ret;
-+
-+	priv->phy_base = 1;
-+
-+	/* Turn off PHYs */
-+	for (i = 0; i < AN8855_NUM_PHYS; i++) {
-+		phy_addr = AN8855_PHY_ADDR(priv->phy_base, i);
-+		phy_val = mtk_mii_read(priv->epriv.eth, phy_addr, MII_BMCR);
-+		phy_val |= BMCR_PDOWN;
-+		mtk_mii_write(priv->epriv.eth, phy_addr, MII_BMCR, phy_val);
-+	}
-+
-+	/* Force MAC link down before reset */
-+	an8855_reg_write(priv, AN8855_PMCR_REG(5), AN8855_FORCE_MODE_LNK);
-+
-+	/* Switch soft reset */
-+	an8855_reg_write(priv, AN8855_SYS_CTRL_REG, AN8855_SW_SYS_RST);
-+	udelay(100000);
-+
-+	an8855_reg_read(priv, AN8855_PKG_SEL, &val);
-+	if ((val & 0x7) == PAG_SEL_AN8855H) {
-+		/* Release power down */
-+		an8855_reg_write(priv, RG_GPHY_AFE_PWD, 0x0);
-+
-+		/* Invert for LED activity change */
-+		an8855_reg_read(priv, AN8855_RG_GPIO_L_INV, &val);
-+		for (id = 0; id < ARRAY_SIZE(led_cfg); id++) {
-+			if ((led_cfg[id].pol == LED_HIGH) &&
-+			    (led_cfg[id].en == 1))
-+				val |= 0x1 << id;
-+		}
-+		an8855_reg_write(priv, AN8855_RG_GPIO_L_INV, (val | 0x1));
-+
-+		/* MCU NOP CMD */
-+		an8855_reg_write(priv, AN8855_RG_GDMP_RAM, 0x846);
-+		an8855_reg_write(priv, AN8855_RG_GDMP_RAM + 4, 0x4a);
-+
-+		/* Enable MCU */
-+		an8855_reg_read(priv, AN8855_RG_CLK_CPU_ICG, &val);
-+		an8855_reg_write(priv, AN8855_RG_CLK_CPU_ICG,
-+				 val | AN8855_MCU_ENABLE);
-+		udelay(1000);
-+
-+		/* Disable MCU watchdog */
-+		an8855_reg_read(priv, AN8855_RG_TIMER_CTL, &val);
-+		an8855_reg_write(priv, AN8855_RG_TIMER_CTL,
-+				 (val & (~AN8855_WDOG_ENABLE)));
-+
-+		/* LED settings for T830 reference board */
-+		ret = an8855_led_init(priv);
-+		if (ret < 0) {
-+			printf("an8855: an8855_led_init failed with %d\n", ret);
-+			return ret;
-+		}
-+	}
-+
-+	switch (priv->epriv.phy_interface) {
-+	case PHY_INTERFACE_MODE_2500BASEX:
-+		an8855_port_sgmii_init(priv, 5);
-+		break;
-+
-+	default:
-+		break;
-+	}
-+
-+	an8855_reg_read(priv, AN8855_CKGCR, &val);
-+	val &= ~(0x3);
-+	an8855_reg_write(priv, AN8855_CKGCR, val);
-+
-+	/* Enable port isolation to block inter-port communication */
-+	an8855_port_isolation(priv);
-+
-+	/* Turn on PHYs */
-+	for (i = 0; i < AN8855_NUM_PHYS; i++) {
-+		phy_addr = AN8855_PHY_ADDR(priv->phy_base, i);
-+		phy_val = mtk_mii_read(priv->epriv.eth, phy_addr, MII_BMCR);
-+		phy_val &= ~BMCR_PDOWN;
-+		mtk_mii_write(priv->epriv.eth, phy_addr, MII_BMCR, phy_val);
-+	}
-+
-+	return an8855_mdio_register(priv);
-+}
-+
-+static int an8855_cleanup(struct mtk_eth_switch_priv *swpriv)
-+{
-+	struct an8855_switch_priv *priv = (struct an8855_switch_priv *)swpriv;
-+
-+	mdio_unregister(priv->mdio_bus);
-+
-+	return 0;
-+}
-+
-+static int an8855_detect(struct mtk_eth_priv *priv)
-+{
-+	int ret;
-+	u32 val;
-+
-+	ret = __an8855_reg_read(priv, 1, 0x10005000, &val);
-+	if (ret)
-+		return ret;
-+
-+	if (val == 0x8855)
-+		return 0;
-+
-+	return -ENODEV;
-+}
-+
-+MTK_ETH_SWITCH(an8855) = {
-+	.name = "an8855",
-+	.desc = "Airoha AN8855",
-+	.priv_size = sizeof(struct an8855_switch_priv),
-+	.reset_wait_time = 100,
-+
-+	.detect = an8855_detect,
-+	.setup = an8855_setup,
-+	.cleanup = an8855_cleanup,
-+	.mac_control = an8855_mac_control,
-+};
--- 
-2.34.1
+>
+>This hack in generic code is a NAK.
 
+This is set it as __weak, and overwrite in soc code, there are many
+similar code
+
+Regards,
+Peng
