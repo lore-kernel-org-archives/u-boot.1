@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60042E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 14:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7745AE77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 14:54:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3A17801F5;
-	Fri, 10 Jan 2025 15:38:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AFE428036B;
+	Fri, 10 Jan 2025 15:54:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ojR63B52";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jLaU/SIX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77CF68036B; Fri, 10 Jan 2025 15:38:33 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id 19943805E9; Fri, 10 Jan 2025 15:54:21 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDC63800D0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 15:38:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8351801F5
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 15:54:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-2f42992f608so3087117a91.0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 06:38:30 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d7e3f1fdafso4205700a12.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 06:54:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736519909; x=1737124709; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736520858; x=1737125658; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hAf2sz/P+vqeCXOvAePuHgX8skepnaGh41vTxw1lQc0=;
- b=ojR63B52y1QkcegxaM66d/z6rpJWrK4nPgRj3FtQBBzKCCOnco7R4CqsVN2GAMhKha
- aUVckx5gGqqQVMOlkdgKJYJI7je7OOCzY29TVvtK6iutr4hP2U6wVwx3nx1HbXjf0+r3
- NVIc1tphzVu2dmexmuzCRzeomkfQyvsH2xDjAq0qxTVQK45S068GzWm9msxbPT9LnV0G
- lyRIyGir41cMHRvCBdwcYEifQCUyr2cNeeJgy2dXwhYCFa1lzm+6SbopFn/OIITG1hC8
- 6HvmDGaynElaQOKm4jWGbcUbhlXfA1i4G4rzFl+CgKei4w80K63Prk0oclL4ycdD71DZ
- TjcQ==
+ bh=l2v64/jmMxkBRwv9KSPIp8M7bWgYPRwflTzV3rpisSg=;
+ b=jLaU/SIXIpV1oGw11DqiXDJvUUYUYAIxsQE+Ur6uprKo3WEKgkyc+5ViipED2yKBxx
+ Bh9/vXWSmww47kRoS3AkLbgweQjXox8OEMwTKfsQvhtl4fPNi6hjDbY0gPdnNubA14KN
+ 414fC3QQy7GEZeA8xNlOwJrGzL5uy2BYKEV3Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736519909; x=1737124709;
+ d=1e100.net; s=20230601; t=1736520858; x=1737125658;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hAf2sz/P+vqeCXOvAePuHgX8skepnaGh41vTxw1lQc0=;
- b=gqXH2cLaWSAa1mNdXqn56aq6PgzmzFzsIfkqH0T2dQ2PG6CIeow4stPiRmAj1DNlAD
- 0Gaa4/h/w1uENnwQyiYFn24fLYtEwmFuhyXxuy4NvZKiVaOcxOXciBWJeJ0OtYZPjuPb
- 5+9RrmgAT7k20o6/vAviS32fGZpO99dbCd3L9Xdvq7kyH81m8sWeueEq2VPsoasOIg2O
- g/6ag7CAc9HA5xJiLvEIXe4BCtJUAD192wNd9jurbwyOG4dwdfPfRHRtsLQujTTTT8vn
- w0IJPqcdkzYBdNED/bwRvIteO4N5w3Cm2mYuF45NGp0LjM3JVxRziQK579dUbgLrHVJc
- u83Q==
-X-Gm-Message-State: AOJu0Yzm8P+uFbq5Do8ritnsQvozJQCIb9cjbepAl6XGvWBd/Ne+wVVz
- QELDDMjegC56yppwd7akgYeBVg25fArLwohd74G3tMFuqMt3ubAuD84tbjbdVFsfFEn1iD1uDf0
- jkqfbewyGVtFDRJWHcjhWu0cUxt/1RlbAMIdQgQ==
-X-Gm-Gg: ASbGnctXbJUSd+UT/M9s7typnPN/RsWdRDTdir4paGtZdIRIh8h0sQ/CzvN86kXCVor
- Zza6HadQQLOeCINPrvtYinShGUIfJJa5wv0NUhW6eTAgpbL2Pig9YWsWyF08mQNKFjC8dklY=
-X-Google-Smtp-Source: AGHT+IHWhmnWt9vUL2b6ja7wF+2wT7TZ/GoVjT8opqqgrXHRLgTrWzBn6fRz3V2lBOKjMp11Pd/OI0Mt0KR9fKtLiio=
-X-Received: by 2002:a17:90b:2dc5:b0:2ee:5bc9:75c7 with SMTP id
- 98e67ed59e1d1-2f548e9862amr15318439a91.5.1736519909206; Fri, 10 Jan 2025
- 06:38:29 -0800 (PST)
+ bh=l2v64/jmMxkBRwv9KSPIp8M7bWgYPRwflTzV3rpisSg=;
+ b=v99s3cVMat1bOUEEsN1gqTMwnqeU9sBGtVt9q+Brg76SqOjUqKF4FOmoY2zqbM/cJy
+ zRcws50y66VOeW2gm366YHJZ9JcaAGFHJS3yM0sY69gm+IHQUWTlTX1f0YG3sN1Kuxk8
+ WgNRPZG5Kd02fbhOsC/UUCFO5RK6Zt3S/0CTlCO0mOj89XEe8hdgUoa7w7EO1cVQb5eQ
+ 8+26s6/4eZEKvMcF8iJY/PMXF9QkZgl0g0QZHlB/rU1maUp7m7ijM5Bl6SpETkcH7Rt0
+ xjN5LBjTsjN8k+7oO63qiH90OnykDH06z0ZMXMLxCG3Xqio1DWnYS8AHKczPZIK7pGs+
+ 3Uzw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUxyfbyKUl3P0Qi4m80NkhjoxkLKQpsZSfVoWLocfsOlqLt3f7YXrha7PvKJBBsOITVReT3fEA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxm/H5U26bIugdJxRT0w9yNTC0+ijdrU3vnVGA/KeFxcskbzpzE
+ FJykFe92O5UivQpAf0D0+K24/kaIQUbS0+OFPOoXKkD+PA9tjl9qf/JBg7bPwmciSpDuIdAUubn
+ 96XAYY2jj+CeTjiqwMwHdK5Z5vy5uEA49l/Aj
+X-Gm-Gg: ASbGnctZ2O/CMkOMuiov84Lzh/KWwq7WjjMZ3xuFARr6l/NMKiJb5uTxeyI5c3ldmkM
+ GQDCjHL4+9qwy6sGBO0UtGtR/fPhhRx7f+Q9LXTc=
+X-Google-Smtp-Source: AGHT+IHnU7Xk0Bfq4Co0/mSJxxCOWkC7KeBKjXkNznzomsZqymnswdjQafPBHAQE0Y8JWSxZQoqNFnv3FXFtH8eYDz4=
+X-Received: by 2002:a17:907:7ea2:b0:aa6:7737:1991 with SMTP id
+ a640c23a62f3a-ab2ab16a902mr1004253866b.2.1736520858239; Fri, 10 Jan 2025
+ 06:54:18 -0800 (PST)
 MIME-Version: 1.0
-References: <20250109150928.878849-1-raymond.mao@linaro.org>
- <20250109150928.878849-2-raymond.mao@linaro.org>
- <CAC_iWjLLMiu_B=A3g-r6d9MiQpwRnyghSFVCJ5GNQGmMHb4DuQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjLLMiu_B=A3g-r6d9MiQpwRnyghSFVCJ5GNQGmMHb4DuQ@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 10 Jan 2025 09:38:16 -0500
-X-Gm-Features: AbW1kvbpUKXMmL0C7KQRUBqed4t3FV6uaiHD-hcNg9-oU4PdEbNEGbFC9jTZUzI
-Message-ID: <CAEfUkUJXL+i6OBj4HoPspq-oQrWGzs2jy9cEzeghof9_3eccYw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] tpm: get tpm event log from bloblist
+References: <20241206173033.2403998-1-adriano.cordova@canonical.com>
+ <20241206173033.2403998-2-adriano.cordova@canonical.com>
+ <9cc4a4e0-1a80-4bdc-9fd7-a04260ff7cb7@gmx.de>
+ <CAFLszTiH9+avmapq8CEEr-tqybP9mWZGzqp52mVHsM87FGTfhw@mail.gmail.com>
+ <CAC_iWjKmzfbWGD3URheJS4w0Bhr8K_Unwi0KpFV56b4gwwO3pg@mail.gmail.com>
+In-Reply-To: <CAC_iWjKmzfbWGD3URheJS4w0Bhr8K_Unwi0KpFV56b4gwwO3pg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 10 Jan 2025 07:54:06 -0700
+X-Gm-Features: AbW1kvaWCUg2A28Q6WcB-zyGduFgoz4OpimdRh-rZjPztWeTM07_mfIGr-vcivg
+Message-ID: <CAFLszTgkL4o6OoL_dMC45JmCc=YMroFUiLc2BbM8FYgKfSkRSQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] efi_loader: efi_setup: Add efi_start_obj_list() to
+ efi_setup.c
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Levi Yun <yeoreum.yun@arm.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Adriano Cordova <adrianox@gmail.com>, joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, jerome.forissier@linaro.org, trini@konsulko.com, 
+ Adriano Cordova <adriano.cordova@canonical.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,49 +96,101 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Fri, 10 Jan 2025 at 08:32, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+On Fri, 10 Jan 2025 at 07:15, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Fri, 10 Jan 2025 at 15:41, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Heinrich,
+> >
+> > On Fri, 3 Jan 2025 at 12:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > >
+> > > On 06.12.24 18:30, Adriano Cordova wrote:
+> > > > The command bootefi calls efi_init_obj_list to do the efi set up
+> > > > before launching an .efi payload, but efi_init_obj_list is called
+> > > > only once. There are some initializations which depend on the
+> > > > environment and should be done each time a payload gets launched and
+> > > > not only once and can now be done in efi_start_obj_list(). A motivation
+> > > > for this change is the following order of events:
+> > > >
+> > > > 1. Launch an EFI application (e.g. bootefi hello)
+> > > > 2. Change the ip address
+> > > > 3. Launch another application which uses the pxe protocol
+> > >
+> > > Hello Adriano,
+> > >
+> > > Thanks for addressing this issue.
+> > >
+> > > There are a number of events that can lead to updating the IP address:
+> > >
+> > > * EFI_PXE_BASE_CODE_PROTOCOL.Dhcp()
+> > > * EFI_PXE_BASE_CODE_PROTOCOL.SetStationIp()
+> > > * EFI_HTTP_PROTOCOL.Configure()
+> > > * command set env ethaddr#
+> > > * command dhcp
+> > >
+> > > All of these events require:
+> > >
+> > > * Updating the relevant ethaddr* variable.
+> > > * Updating any other references to the IP address.
+> > >
+> > > When not only considering EFI applications but also EFI drivers
+> > > installed via the bootefi command all of these events can occur during
+> > > the runtime of EFI binaries.
+> > >
+> > > Function efi_init_obj_list() is used for setups that are needed only
+> > > once before accessing the UEFI sub-system. It is not able to handle events.
+> > >
+> > > If we need to update any internal UEFI data structures, we should do
+> > > this instantaneously when the event occurs and not when executing a UEFI
+> > > related shell command.
+> > >
+> > > U-Boot already has callbacks invoked when variables are changed. These
+> > > are set up with U_BOOT_ENV_CALLBACK(). There is even a command 'env
+> > > callbacks' to list these callbacks.
+> > >
+> > > You could define a new function to handle changes of the IP address and
+> > > invoke it via U_BOOT_ENV_CALLBACK(ipaddr, <function name>) or
+> > > U_BOOT_ENV_CALLBACK(netmask, <function name>).
+> > >
+> > > With lwIP we can have multiple network interfaces. Each has a different
+> > > variable ipaddr# assigned to it. We will have to extend the concept of
+> > > U_BOOT_ENV_CALLBACK() to allow for wildcard matches by adjusting
+> > > find_env_callback(). With CONFIG_REGEX=y regular expressions could be
+> > > used for this purpose (cf. include/slre.h) but we should better avoid
+> > > the code size increase.
+> > >
+> >
+> > I have been saying for some time that EFI_LOADER should make use of
+> > U-Boot's existing tables, rather than creating its own duplicate ones
+> > with extra info.
+> >
+> > This seems to have been understood as 'hang the EFI tables onto
+> > existing data structures', e.g. efi_disk_create_part(). But this leads
+> > to duplication.
+> >
+> > Perhaps the EFI_LOADER init should be quite small, and be done each
+> > time an app starts, to deal with the 'current' state of U-Boot?
+>
+> That would break all the command line tools that use the EFI subsystem
+> -- e.g printenv -e, efidebug, eficonfig etc
 
-> On Thu, 9 Jan 2025 at 17:09, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Get tpm event log from bloblist instead of FDT when bloblist is
-> > enabled and valid from previous boot stage.
-> >
-> > As a fallback, when no event log from previous stage is observed
-> > and no user buffer is passed, malloc an 8KB buffer to initialize
-> > the event log.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - Remove patch dependency.
-> > - Remove the fallback to FDT when BLOBLIST is selected.
-> > Changes in v3
-> > - Malloc an 8KB buffer when user eventlog buffer does not exist.
-> >
-> >  include/tpm_tcg2.h |  2 ++
-> >  lib/tpm_tcg2.c     | 55 ++++++++++++++++++++++++++++++----------------
-> >  2 files changed, 38 insertions(+), 19 deletions(-)
-> >
-> > diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
-> > index 6519004cc4..6ea316888b 100644
-> > --- a/include/tpm_tcg2.h
-> > +++ b/include/tpm_tcg2.h
-> > @@ -65,6 +65,8 @@
-> >  #define EFI_DTB_EVENT_STRING \
-> >         "DTB DATA"
-> >
-> > +#define EVENT_LOG_DEF_BUF_SIZE 0x2000
->
-> That's too small for an eventlog. We have a confog option for the TCG
-> eventlog size (EFI_TCG2_PROTOCOL_EVENTLOG_SIZE). I'd prefer decoupling
-> this from EFI only and using that instead.
->
->
-I got this size from "reg" of "memory-region", but yes I agree with what
-you suggested.
+Obviously we would not do it in such a way as to break anything! I'm
+not quite sure if that is was a serious comment, or just a reminder
+that we should not break things?
 
-[snip]
+As a very simple example, somewhat unrelated to this patch, rather
+than maintaining its own efi_cout_modes[], it could make use of
+U-Boot's information.
+
+There is quite a bit of effort involved in maintaining two separate
+states. It started from a design to run independently of driver model
+(which was a mistake), but has since become common in many areas. It
+means that a special, heavyweight 'init' has to be done and we need to
+pick when that is done and how to update it later. We should chart a
+slightly different course and chip away at this problem.
 
 Regards,
-Raymond
+Simon
