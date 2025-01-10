@@ -4,62 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C57EAE77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 07:17:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9AB8E7719C
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 07:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D2B580613;
-	Fri, 10 Jan 2025 08:17:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 19B5B800C2;
+	Fri, 10 Jan 2025 08:43:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="HZOIoZnx";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="H8An9q3/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8621680657; Fri, 10 Jan 2025 08:17:23 +0100 (CET)
-Received: from mail-m49214.qiye.163.com (mail-m49214.qiye.163.com
- [45.254.49.214])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E9736801F5; Fri, 10 Jan 2025 08:43:30 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B9C88067D
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 08:17:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8453A80017
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 08:43:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTP id 85062dd6;
- Fri, 10 Jan 2025 15:17:14 +0800 (GMT+08:00)
-Message-ID: <cc77ef2a-0c14-49b0-a54d-877ebab4ca0d@rock-chips.com>
-Date: Fri, 10 Jan 2025 15:17:14 +0800
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50A0rSbQ006374;
+ Fri, 10 Jan 2025 07:43:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=PxwdafiPSHLToJYQvDQcR3
+ 4dCWHwdQwws/nX4eC+KU0=; b=H8An9q3/63+vUWjoCJI1uk0yaXYMoosKU9vt5F
+ RXlxC2B+qRLx1hvazpVwPbpWNkT4h+XYhwIXiR11aMTcBlg21uIft9ASc/0K3UId
+ LDJgHw5n/PVXUZhjG08UxF7+yH3eDx57gtcCmkdmTIxFB2SVLLSjeCdMaOLSKaT/
+ 6qwJaN/24SOM+pyYdvkcUWmz1Q1yF6MAdoEfIwaLlC9QTqcMTGyKnWKd1EQBR5NS
+ r6r6d/q0Mn687HdZxx6xRZlObDRmhxBUO6VbCU1xfODr0Mh8zQJPhXc8F5sZAIaQ
+ noNcWKuXQkSmt7IarIhqWbRGqalxjzfPwjoXsMPW7s5txRuQ==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 442sd90t89-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Jan 2025 07:43:23 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 50A7hMPb022645
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Jan 2025 07:43:22 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Thu, 9 Jan 2025 23:43:19 -0800
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <marex@denx.de>, <trini@konsulko.com>, <mkorpershoek@baylibre.com>,
+ <caleb.connolly@linaro.org>, <neil.armstrong@linaro.org>,
+ <u-boot@lists.denx.de>
+CC: Varadarajan Narayanan <quic_varada@quicinc.com>
+Subject: [PATCH v1] usb: dwc3: core: Fix timeout check
+Date: Fri, 10 Jan 2025 13:13:06 +0530
+Message-ID: <20250110074306.3897847-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] rockchip: rk3308: Implement checkboard() to print
- SoC variant
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
-References: <20241110005622.1515100-1-jonas@kwiboo.se>
- <20241110005622.1515100-4-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20241110005622.1515100-4-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGBlPVkMZH08eGEJCSUgdQlYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-X-HM-Tid: 0a944f13078f03afkunm85062dd6
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6KyI6Aww6HDIPCw8yUQ0eFQ8V
- TR8wFB9VSlVKTEhNT0JIT0hNSkhIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUpIQ0k3Bg++
-DKIM-Signature: a=rsa-sha256;
- b=HZOIoZnx6kIlFVb/S4ReJ+bDlTA3F0P64Q3+QZoF2any5/SQu7IuKfZBgH98qvkM66kiO0Mvv52zJY7rdiDbhM9NYCqP+qOZ5/8eq4PO9siQRENVHDwBhkW3gPK8hjjvQG/eXGug0Eb7e0cisrv5LF+Rc5bnW+tg9H1syW5pyjI=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=/wboxADqwepmbLz6RHgbzKDLsx8i3FWuSrfqdABpAO8=;
- h=date:mime-version:subject:message-id:from;
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: yj5DwZ24WK_b3VWxWSJl3_y0f4MYLacg
+X-Proofpoint-ORIG-GUID: yj5DwZ24WK_b3VWxWSJl3_y0f4MYLacg
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0
+ mlxlogscore=931 bulkscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0
+ clxscore=1015 impostorscore=0 phishscore=0 mlxscore=0 adultscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2411120000 definitions=main-2501100062
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,58 +97,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+dwc3_core_init loops 'timeout' times to check if the IP block is out
+of reset using 'while (timeout--)'. If there is some issue and
+the block doesn't come out of reset, the loop will run till
+'timeout' becomes zero and the post decrement operator would set
+timeout to 0xffffffff. Though the IP block is not out reset, the
+subsequent if check 'if !timeout' would fail as timeout is not
+equal to zero and the function proceeds with the initialization.
 
-On 2024/11/10 08:56, Jonas Karlman wrote:
-> Implement checkboard() to print current SoC variant used by a board,
-> e.g. one of:
->
->    SoC:   RK3308
->    SoC:   RK3308B
->    SoC:   RK3308B-S
->
-> when U-Boot proper is running.
->
->    U-Boot 2025.01-rc1 (Nov 02 2024 - 20:26:25 +0000)
->
->    Model: Radxa ROCK Pi S
->    SoC:   RK3308B
->    DRAM:  512 MiB (effective 510 MiB)
->
-> Information about the SoC variant is read from GRF.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Make this a pre decrement to address this.
 
-Thanks,
-- Kever
-> ---
-> v3: No change
-> v2: New patch
-> ---
->   arch/arm/mach-rockchip/rk3308/rk3308.c | 16 ++++++++++++++++
->   1 file changed, 16 insertions(+)
->
-> diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
-> index c6b1a35f47e6..03d97e1d7460 100644
-> --- a/arch/arm/mach-rockchip/rk3308/rk3308.c
-> +++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
-> @@ -216,3 +216,19 @@ int arch_cpu_init(void)
->   	return 0;
->   }
->   #endif
-> +
-> +#define RK3308_GRF_CHIP_ID	0xFF000800
-> +
-> +int checkboard(void)
-> +{
-> +	u32 chip_id = readl(RK3308_GRF_CHIP_ID);
-> +
-> +	if (chip_id == 0x3308)
-> +		printf("SoC:   RK3308B\n");
-> +	else if (chip_id == 0x3308c)
-> +		printf("SoC:   RK3308B-S\n");
-> +	else
-> +		printf("SoC:   RK3308\n");
-> +
-> +	return 0;
-> +}
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+---
+ drivers/usb/dwc3/core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index a35b8c2f64..8f58e4ea2d 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -612,7 +612,7 @@ static int dwc3_core_init(struct dwc3 *dwc)
+ 	/* issue device SoftReset too */
+ 	timeout = 5000;
+ 	dwc3_writel(dwc->regs, DWC3_DCTL, DWC3_DCTL_CSFTRST);
+-	while (timeout--) {
++	while (--timeout) {
+ 		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+ 		if (!(reg & DWC3_DCTL_CSFTRST))
+ 			break;
+-- 
+2.34.1
+
