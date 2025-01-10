@@ -4,123 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDECAE77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 14:21:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60042E77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 14:38:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56A4E801F5;
-	Fri, 10 Jan 2025 15:21:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A3A17801F5;
+	Fri, 10 Jan 2025 15:38:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W9dgSP+p";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ojR63B52";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 432208036B; Fri, 10 Jan 2025 15:21:01 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 77CF68036B; Fri, 10 Jan 2025 15:38:33 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 118BC800D0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 15:20:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDC63800D0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 15:38:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-385deda28b3so1318005f8f.0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 06:20:59 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2f42992f608so3087117a91.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 06:38:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736518858; x=1737123658; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=svvSZs+lqK/CKisjunuCU9B3+i69fyZWhv/kILaitmI=;
- b=W9dgSP+pXshMxkXpTFblhiyRBZtxYsaGQs4QtRTd6prEIaGIwPgMmiUtfb7zdBgPa4
- p5Ark6AoqDG/DhxNCozn7uFbkA4TqCVtfbRv5BaJResrOquoMrA00EVXTgusJckc1ms6
- uq2Fhe1kdV0/Uqiinumvu4GOZq6dXaB5vP+kFn/sAZu4TNsOgPzXfs6sLVTWYHnzZOoK
- 4Lrzm4WeYUz2TWaTU5QpCR+diVrcKyHEcYXz/or1ioSf+GLNL+QEWrA4L3mBDKv0bygj
- saCEeIBJnlFysC7+FEkjvj+kkHjzY/zbo6EN+ptHtX6xu4kogIX4LT0j7VDRhMUmJy+g
- SXLQ==
+ d=linaro.org; s=google; t=1736519909; x=1737124709; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hAf2sz/P+vqeCXOvAePuHgX8skepnaGh41vTxw1lQc0=;
+ b=ojR63B52y1QkcegxaM66d/z6rpJWrK4nPgRj3FtQBBzKCCOnco7R4CqsVN2GAMhKha
+ aUVckx5gGqqQVMOlkdgKJYJI7je7OOCzY29TVvtK6iutr4hP2U6wVwx3nx1HbXjf0+r3
+ NVIc1tphzVu2dmexmuzCRzeomkfQyvsH2xDjAq0qxTVQK45S068GzWm9msxbPT9LnV0G
+ lyRIyGir41cMHRvCBdwcYEifQCUyr2cNeeJgy2dXwhYCFa1lzm+6SbopFn/OIITG1hC8
+ 6HvmDGaynElaQOKm4jWGbcUbhlXfA1i4G4rzFl+CgKei4w80K63Prk0oclL4ycdD71DZ
+ TjcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736518858; x=1737123658;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=svvSZs+lqK/CKisjunuCU9B3+i69fyZWhv/kILaitmI=;
- b=K87UeE1ENqZl8HmPG98FOH+Mbe3ylbw9OAQHhElRKhrRlMMH/yF6fcwPwMZdlmpcsZ
- 3x8ZPNo4Fx+x8zpoHu/Dosw7AKd+o2T9G0ktmz2eXzJfMsxIvBQUViTDD/Csw3GQeRel
- TyYhAARRKIcJMPKdKELIO0HsY58sWA7hDzLU2LCCTwG5aRHro2Ra/HNII56D+XGlVNAV
- blWjTD1pT0dZk2jGLAlcREvwExsEXJSRaBnSocfcDxJZ3jYCw4plzDc0rzc125I/ey7e
- azrdhxx0/HCW8oAUFSu1auWQ01/xT7fJlaWXu0igcP6xK3s2EWQhuxZQ0PxDTDXFy68E
- OkoA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXVPf9zQbI9MCs4heOW7HSLJhP9d8byfHS+DSibQLfth4ZI9LNZzs9Db09n1qvR+8FzhRxZNak=@lists.denx.de
-X-Gm-Message-State: AOJu0YzRsbX0NWDLALfxr4x5KfVrFuPNquoRvzgX6omrPLFM0+9TLSrk
- 6bDTVyyn+vTKnfoAlkgHyft43YKrG46wqxLGM4m2/yASHcq4DWok/p9SpRBmHuY=
-X-Gm-Gg: ASbGncuHuZh0NXgupZIwNuIhoydrpAibWKsiWKwMMs+SVe6BpiaxCWMIb5ybCYcehlh
- 7SkCu7JUP932DNDrMhvR97qD+gUKvPjuXD9tc3sdKu6A1vSvaDnrUK/oOfvaNdfaeaZtlK/Rj+s
- Ht5a0kTYiSpg37D8liwvi+RyMXvyujNdO9w6F+gpy6DDrGbIfwR/xM9KmNw9iA3WW+pYZGEhHbc
- 6PInGKZftBHHGsZBjtPt5QP4YYuhQQ0QlhmtFR53Myg4xma2so3y/tkr9KyORg7MYBTCUw+zc0l
- yZUFkGENjwTaSkdp22UQhE0AJsioIFiP+A==
-X-Google-Smtp-Source: AGHT+IGd6qWyZw/44dxYCKCcrvsWFdCVNg0IoOT1mg5K2+1T3cbxNfbZOt//63IUvYn97h5gCPlp4g==
-X-Received: by 2002:a05:6000:1884:b0:385:ea2b:12cc with SMTP id
- ffacd0b85a97d-38a8730442fmr10345931f8f.13.1736518858363; 
- Fri, 10 Jan 2025 06:20:58 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:bf4e:5758:59ef:deb8?
- ([2a01:e0a:982:cbb0:bf4e:5758:59ef:deb8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a8e37d0casm4696821f8f.11.2025.01.10.06.20.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Jan 2025 06:20:57 -0800 (PST)
-Message-ID: <1621d9a2-3fbb-4858-b5dc-929917dd5018@linaro.org>
-Date: Fri, 10 Jan 2025 15:20:56 +0100
+ d=1e100.net; s=20230601; t=1736519909; x=1737124709;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hAf2sz/P+vqeCXOvAePuHgX8skepnaGh41vTxw1lQc0=;
+ b=gqXH2cLaWSAa1mNdXqn56aq6PgzmzFzsIfkqH0T2dQ2PG6CIeow4stPiRmAj1DNlAD
+ 0Gaa4/h/w1uENnwQyiYFn24fLYtEwmFuhyXxuy4NvZKiVaOcxOXciBWJeJ0OtYZPjuPb
+ 5+9RrmgAT7k20o6/vAviS32fGZpO99dbCd3L9Xdvq7kyH81m8sWeueEq2VPsoasOIg2O
+ g/6ag7CAc9HA5xJiLvEIXe4BCtJUAD192wNd9jurbwyOG4dwdfPfRHRtsLQujTTTT8vn
+ w0IJPqcdkzYBdNED/bwRvIteO4N5w3Cm2mYuF45NGp0LjM3JVxRziQK579dUbgLrHVJc
+ u83Q==
+X-Gm-Message-State: AOJu0Yzm8P+uFbq5Do8ritnsQvozJQCIb9cjbepAl6XGvWBd/Ne+wVVz
+ QELDDMjegC56yppwd7akgYeBVg25fArLwohd74G3tMFuqMt3ubAuD84tbjbdVFsfFEn1iD1uDf0
+ jkqfbewyGVtFDRJWHcjhWu0cUxt/1RlbAMIdQgQ==
+X-Gm-Gg: ASbGnctXbJUSd+UT/M9s7typnPN/RsWdRDTdir4paGtZdIRIh8h0sQ/CzvN86kXCVor
+ Zza6HadQQLOeCINPrvtYinShGUIfJJa5wv0NUhW6eTAgpbL2Pig9YWsWyF08mQNKFjC8dklY=
+X-Google-Smtp-Source: AGHT+IHWhmnWt9vUL2b6ja7wF+2wT7TZ/GoVjT8opqqgrXHRLgTrWzBn6fRz3V2lBOKjMp11Pd/OI0Mt0KR9fKtLiio=
+X-Received: by 2002:a17:90b:2dc5:b0:2ee:5bc9:75c7 with SMTP id
+ 98e67ed59e1d1-2f548e9862amr15318439a91.5.1736519909206; Fri, 10 Jan 2025
+ 06:38:29 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] armv8: mmu: don't switch to emergency tlb when adding a
- dynamic mapping
-To: Marc Zyngier <maz@kernel.org>, Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Andre Przywara <andre.przywara@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>, =?UTF-8?Q?Pierre-Cl=C3=A9ment_Tosi?=
- <ptosi@google.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de
-References: <20250108142235.1194640-1-caleb.connolly@linaro.org>
- <86septwdlr.wl-maz@kernel.org>
- <37c914cd-8f66-4474-8b88-7464b256cd49@linaro.org>
- <86r05dwbva.wl-maz@kernel.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <86r05dwbva.wl-maz@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250109150928.878849-1-raymond.mao@linaro.org>
+ <20250109150928.878849-2-raymond.mao@linaro.org>
+ <CAC_iWjLLMiu_B=A3g-r6d9MiQpwRnyghSFVCJ5GNQGmMHb4DuQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjLLMiu_B=A3g-r6d9MiQpwRnyghSFVCJ5GNQGmMHb4DuQ@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 10 Jan 2025 09:38:16 -0500
+X-Gm-Features: AbW1kvbpUKXMmL0C7KQRUBqed4t3FV6uaiHD-hcNg9-oU4PdEbNEGbFC9jTZUzI
+Message-ID: <CAEfUkUJXL+i6OBj4HoPspq-oQrWGzs2jy9cEzeghof9_3eccYw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] tpm: get tpm event log from bloblist
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Levi Yun <yeoreum.yun@arm.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,112 +91,56 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08/01/2025 16:42, Marc Zyngier wrote:
-> On Wed, 08 Jan 2025 15:19:07 +0000,
-> Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Hi Marc,
->>
->> Thanks for your comments.
->>
->> On 08/01/2025 16:05, Marc Zyngier wrote:
->>> On Wed, 08 Jan 2025 14:22:24 +0000,
->>> Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>
->>>> This seems to cause crashes on a bunch of Qualcomm platforms. It's safer
->>>> to just update the live table and flush it.
->>>
->>> You may want to provide a bit more information, because that's not
->>> much to go on, really.
->>
->> Best I have is "the board hangs and then resets when trying to switch
->> pagetables", I didn't manage to narrow it down exactly, but since it
->> seems to work to update the tables without switching that feels like a
->> better approach at least for now.
-> 
-> I think you should completely characterise the issue before changing
-> things like this. My hunch is that the so-called "emergency" page
-> tables do not map the page tables you're modifying. Or something along
-> those lines. But you really want to get to the bottom of it.
+Hi Ilias,
 
-I narrowed to the call to __asm_switch_ttbr() even with the same table
-address (so no change), and I can't explain why this doesn't work.
+On Fri, 10 Jan 2025 at 08:32, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-> 
->>
->> In hindsight, this mmu_map_region() function is not great in a lot of
->> ways, I'm still getting my head around the MMU and I expect this will
->> keep being improved.
->>>
->>>>
->>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>> ---
->>>>   arch/arm/cpu/armv8/cache_v8.c | 11 ++---------
->>>>   arch/arm/include/asm/system.h |  3 +--
->>>>   drivers/soc/qcom/cmd-db.c     |  2 +-
->>>>   3 files changed, 4 insertions(+), 12 deletions(-)
->>>>
->>>> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
->>>> index e6be6359c5d9..43051d156122 100644
->>>> --- a/arch/arm/cpu/armv8/cache_v8.c
->>>> +++ b/arch/arm/cpu/armv8/cache_v8.c
->>>> @@ -338,9 +338,9 @@ static void map_range(u64 virt, u64 phys, u64 size, int level,
->>>>   		size -= next_size;
->>>>   	}
->>>>   }
->>>>   
->>>> -void mmu_map_region(phys_addr_t addr, u64 size, bool emergency)
->>>> +void mmu_map_region(phys_addr_t addr, u64 size)
->>>>   {
->>>>   	u64 va_bits;
->>>>   	int level = 0;
->>>>   	u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE;
->>>> @@ -350,19 +350,12 @@ void mmu_map_region(phys_addr_t addr, u64 size, bool emergency)
->>>>   	get_tcr(NULL, &va_bits);
->>>>   	if (va_bits < 39)
->>>>   		level = 1;
->>>>   
->>>> -	if (emergency)
->>>> -		map_range(addr, addr, size, level,
->>>> -			  (u64 *)gd->arch.tlb_emerg, attrs);
->>>> -
->>>> -	/* Switch pagetables while we update the primary one */
->>>> -	__asm_switch_ttbr(gd->arch.tlb_emerg);
->>>> -
->>>>   	map_range(addr, addr, size, level,
->>>>   		  (u64 *)gd->arch.tlb_addr, attrs);
->>>>   
->>>> -	__asm_switch_ttbr(gd->arch.tlb_addr);
->>>> +	flush_dcache_range(gd->arch.tlb_addr, gd->arch.tlb_size);
->>>
->>> Why would you invalidate anything when *mapping* something? By
->>> definition, if there was nothing mapped before, there is nothing to
->>> invalidate (hint: the architecture forbids negative caching).
->>
->> This isn't flushing the region or TLB, it's flushing the translation
->> table we just modified.
-> 
-> Ah, you're obviously right. I can't read today...
-> 
-> But it then begs the question: are the page tables configured to be
-> accessed by the page-table walker in a non-cacheable fashion? That'd
-> be rather silly, and the only reason why you'd need any form of CMO at
-> this point.
-> 
->> I'm wondering if this tlb_addr variable is misnamed, I'm reading ARM
->> docs which suggest the TLB is some cache inside(?) the MMU, but this
->> tlb_addr in U-Boot actually points to the translation table in memory if
->> my understanding is correct?
-> 
-> That's my impression, but each time I look at this code, I feel a bit
-> sick...
-> 
-> 	M.
-> 
+> On Thu, 9 Jan 2025 at 17:09, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Get tpm event log from bloblist instead of FDT when bloblist is
+> > enabled and valid from previous boot stage.
+> >
+> > As a fallback, when no event log from previous stage is observed
+> > and no user buffer is passed, malloc an 8KB buffer to initialize
+> > the event log.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Remove patch dependency.
+> > - Remove the fallback to FDT when BLOBLIST is selected.
+> > Changes in v3
+> > - Malloc an 8KB buffer when user eventlog buffer does not exist.
+> >
+> >  include/tpm_tcg2.h |  2 ++
+> >  lib/tpm_tcg2.c     | 55 ++++++++++++++++++++++++++++++----------------
+> >  2 files changed, 38 insertions(+), 19 deletions(-)
+> >
+> > diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
+> > index 6519004cc4..6ea316888b 100644
+> > --- a/include/tpm_tcg2.h
+> > +++ b/include/tpm_tcg2.h
+> > @@ -65,6 +65,8 @@
+> >  #define EFI_DTB_EVENT_STRING \
+> >         "DTB DATA"
+> >
+> > +#define EVENT_LOG_DEF_BUF_SIZE 0x2000
+>
+> That's too small for an eventlog. We have a confog option for the TCG
+> eventlog size (EFI_TCG2_PROTOCOL_EVENTLOG_SIZE). I'd prefer decoupling
+> this from EFI only and using that instead.
+>
+>
+I got this size from "reg" of "memory-region", but yes I agree with what
+you suggested.
 
+[snip]
+
+Regards,
+Raymond
