@@ -4,87 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75DF9E77188
-	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 19:11:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E4CE77188
+	for <u-boot@archiver.kernel.org>; Fri, 10 Jan 2025 19:23:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D75A3800D0;
-	Fri, 10 Jan 2025 20:11:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D64C800D0;
+	Fri, 10 Jan 2025 20:23:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eJgTtOEb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="be/FscvB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9533A801F5; Fri, 10 Jan 2025 20:11:50 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 4818A801F5; Fri, 10 Jan 2025 20:23:57 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71A7380050
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 20:11:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F169B80050
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 20:23:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-540254357c8so2234383e87.1
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 11:11:48 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa684b6d9c7so433404766b.2
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 11:23:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736536308; x=1737141108; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XUS2GeSio0d1EOOCKF9MbJtNtCC7l6NlQ3z1RIqyCqg=;
- b=eJgTtOEbTLSJUWFYzg+WkrqfxV2/CypiZNA7B9APc8RHqH65CfUvUU3wcjO5skeklE
- I/Zq9pt8x4zuht/aXPBqFby/SRJXOBYPJDzP4+ZD9bfMUYMinjRVm3ijjo3GagCbAOp1
- Tgz05CPJYR16BNKZo2FEmVrxnCuw8+6Z2VfPcrcCyg2/r4LxvjCkqTjR0WivFU9Y6Qph
- O7tFZIqZe5HXZm6KNnjrEwv4SUI7gzLYFqKRlWrsZ8hbKmbF30TDHhfki/5XwIUzxOqz
- NPpKkRyyI52litgrfeEWkrDBixIfaqb+Qk+ICNCvk5qyhALGer1KdX51M9RwTbkWMlXS
- KXVg==
+ d=chromium.org; s=google; t=1736537034; x=1737141834; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VdOxvJHcxITRJsXbQ/fwx86lF4KI3p5wjxIGGFDs8Jg=;
+ b=be/FscvBRLEJD8sxe18lB/agQs+yNxzXyRiGN86IpQ3Ly1VI4BXlBIQDA2DDf5jX4z
+ HXgxtebfKmRS0zq317TO0HuhH/g+JKRoTYa3sdBZsntOh6hf17r3h5jrfeMSfEpjxMq8
+ EKOZUHb0HkRfj1eJ8eG1DSIqjOYorVeBop0XM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736536308; x=1737141108;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XUS2GeSio0d1EOOCKF9MbJtNtCC7l6NlQ3z1RIqyCqg=;
- b=XqdZNckar3uRyzLYKZGAH7ifqCURW1CPkKrA8WxHXf3waOMBC585jkJ1r+mdcUgix3
- f6AgO3vLyRY50SxQMcBZgc7FoGBmG4j/fZWQFqpci1799St/8QI9LJFcRQqbO+ac8ZGB
- 3nLRNrr6wuT2v0kMoL/s91N0Qj1qfTj2K5zXf+V3gvSwAAzWyO7RxVmfkYgDZXgoryYO
- t0O2BFHzqy0sMUw1kTthelwZNlfzX5m3BX1XGhviwbQin8JgHzcJuSiN48iJR3M/cjK6
- eTQo5fxbQ5SKafK2BKF5GnW6L9mrhczXNPCttcOvOyk+eo3++8yRy03ftwguUa+BUuL/
- 4k3g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcQbqIoCX9r2qrEx8iQLyn1ImVJnf7Hb9rN9D2vXUH5/AcFgB9rnKfY9FLgKZ7fORLF6fA0T8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx60ww84h580Ww2k0yR+viLpMPWFd/D0DhLS99vwkvHySg1ve3a
- lTWnqH8RGuXQnzMIKzSqORiHcfrroglvIvbEged+wFFPOMn+Box0d4BJL26A5gw01EOH6J7HIe4
- YTqPvFYQ4Y2KEkq3ztYzQ3eQ6kmQ=
-X-Gm-Gg: ASbGncuGgBtM5enDwFa+HJlBYVs/Gffs6yEK4K78Lh571Dypxy5+pcJYeGZzhVtVOXD
- 8JcfdDrHghf8GZLCxlCfv3yRlR/lcCy/XkRYR+eWn50zUa9vJLaNbO7iRYJmkBTB+yi0upQ==
-X-Google-Smtp-Source: AGHT+IE+7vViQ4fK/bBC2GEFORPYkclIdCsTIX2lSHIRms1vLSDQuZ5VXIsoIR7C84cp8gLuEvpRHLSnVJ7wawtez8U=
-X-Received: by 2002:a05:6512:6cc:b0:53e:350a:729e with SMTP id
- 2adb3069b0e04-542845b94d0mr4259955e87.35.1736536307559; Fri, 10 Jan 2025
- 11:11:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736537034; x=1737141834;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VdOxvJHcxITRJsXbQ/fwx86lF4KI3p5wjxIGGFDs8Jg=;
+ b=l+ZkXoj4Xwvab0Vae5QEFbkLmkQXxHa0Fn48Xb3p0/VAB68H33nDoUP646Ue01XOko
+ i5ZetYRiLwKSqwylh04v3f70wtxtnVDmt4mg3Q8l9Axcbn6nD7JXm/povk9RJP9FcRYi
+ NM0he326SEGQNyCrmITFxdMN5fWJ5lq8H2ci3hWbKYV+CXyiPWECjuiiHTYdOIuRfK0r
+ 8WQlGB1GujId2p5/QysWJgf0gKnBnyAADM7wgrZ4CJipd6ZetIL+RPEaN3f8CGuZNBXP
+ ehpwNLxlgUpZ2/6BpeQAfcMziiVBvC9PGa+M/F1zOpzPz2gmCCoVvtEKf6IxhaySKn9K
+ Xbpw==
+X-Gm-Message-State: AOJu0YwaOpBkwtLTUp+X6hgPne/KOZTGI6vMUl3e3C4uQbemdKCXo92l
+ QBUFWllAy+flDzrskFWKnenWpoj7HXKhQ0hQftGsvngfOqJfkah+h8kkACKLdh9Xl2wkjQ1OW7q
+ que8YTzLpgOQom86PAPJJ3di++f691IR58De7
+X-Gm-Gg: ASbGnculfcSn+j4gxSp+07hBpFgoFTXqPs9fZl+jzCkzMsEYyFixfS+CYCZ3wpQhxPX
+ EpoBtaTRaWQgmu8FHBINGe/348AnG16KcTR3KFp0=
+X-Google-Smtp-Source: AGHT+IFqBKsDDo+U6eGZ6x2pbzgIxeKejlvvb2vQU+iG9/niKoKcdLvKuZiuqsx/NDGwMKFuE1ZxZMgTFUoxwwxuKHk=
+X-Received: by 2002:a17:907:8a8f:b0:ab2:d721:ed92 with SMTP id
+ a640c23a62f3a-ab2d721f27dmr502269366b.45.1736537034225; Fri, 10 Jan 2025
+ 11:23:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
- <20250110-ge-mainline-display-support-v3-13-d2c0acea6feb@bootlin.com>
-In-Reply-To: <20250110-ge-mainline-display-support-v3-13-d2c0acea6feb@bootlin.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 10 Jan 2025 16:11:36 -0300
-X-Gm-Features: AbW1kvYiVdbV_62VQwm9wvgYXOUfCwKTLl9F4wwQhl5miP0QPXiNQij_n5EiSTY
-Message-ID: <CAOMZO5AdTLF867Zo7wp_SCQSeDRZihkqTi04aXN-hcDyNBiiRA@mail.gmail.com>
-Subject: Re: [PATCH v3 13/13] imx8mp_evk: Enable display support
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Peng Fan <peng.fan@nxp.com>, 
- Mario Six <mario.six@gdsys.cc>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
+References: <20250106143229.3023771-1-sjg@chromium.org>
+ <20250106143229.3023771-18-sjg@chromium.org>
+ <20250108182528.GN3476@bill-the-cat>
+ <CAFLszTh=HYTxwNSBOOmaiPpG+DO8tc52=XsQQiXAfMSpcwediA@mail.gmail.com>
+ <20250109150954.GU3476@bill-the-cat>
+ <CAFLszTg+pyMWMW-9rXe9D=siFpk1bbgTq1yk0g-+cms2aKnEuw@mail.gmail.com>
+ <20250109180817.GC3476@bill-the-cat>
+ <CAFLszThn-XcHruFe60TH8FnsKsH08NFEco2zt+9JBHkneQgo0Q@mail.gmail.com>
+ <20250110161732.GI3476@bill-the-cat>
+In-Reply-To: <20250110161732.GI3476@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 10 Jan 2025 12:23:42 -0700
+X-Gm-Features: AbW1kvaOr8-OAmEXIHXvu3dfaxEhPo6hf1lvczrcEmT51xBUdqi5SG10KFuu6Cc
+Message-ID: <CAFLszTgiO2zPy06LziSOQ2tQAz9hh1rd9LEPtRfW+VxuLR1A4g@mail.gmail.com>
+Subject: Re: [PATCH v2 17/33] boot: Update fit_image_get_emb_data to use abuf
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Dahl <ada@thorsis.com>, 
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Devarsh Thakkar <devarsht@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hugo Cornelis <hugo.cornelis@essensium.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Julien Masson <jmasson@baylibre.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,67 +110,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 10, 2025 at 3:43=E2=80=AFPM Miquel Raynal <miquel.raynal@bootli=
-n.com> wrote:
->
-> There is now support for the display pipeline using one LCD interface,
-> the LDB bridge and of course the related media power domain controls.
->
-> This is untested as I do not have the EVK but should be enough to use
-> the display, using bmp, lcdputs and co. For console-like commands, it
+Hi Tom,
 
-Hmm, this cannot work. The upstream imx8mp-evk.dts does not have the
-LDB enabled.
+On Fri, 10 Jan 2025 at 09:17, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Jan 10, 2025 at 06:39:11AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Thu, 9 Jan 2025 at 11:08, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jan 09, 2025 at 08:14:53AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Thu, 9 Jan 2025 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Thu, Jan 09, 2025 at 05:36:03AM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Wed, 8 Jan 2025 at 11:25, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Mon, Jan 06, 2025 at 07:32:13AM -0700, Simon Glass wrote:
+> > > > > > >
+> > > > > > > > This function uses separate arguments for data and size. Use the new
+> > > > > > > > abuf instead, so that they are paired and in one place. In some cases it
+> > > > > > > > also saves an argument, thus potentially reducing code size.
+> > > > > > >
+> > > > > > > This is one of the commits that globally increases size in both full
+> > > > > > > U-Boot and SPL/etc.
+> > > > > > >
+> > > > > > > Is all of the "abuf" changes just a "tidy up" that increases the code a
+> > > > > > > bit?
+> > > > > >
+> > > > > > Yes, a tidy-up which I hope will help overall. I have been thinking
+> > > > > > for a while of how to avoid having addr/size and ptr/size passed
+> > > > > > everywhere. For now abuf seems to provide some sort of solution.
+> > > > > >
+> > > > > > I see this:
+> > > > > >
+> > > > > > 18: boot: Update fit_image_get_emb_data to use abuf
+> > > > > >    aarch64: (for 1/1 boards) all +4.0 bss -24.0 spl/u-boot-spl:all
+> > > > > > +16.0 spl/u-boot-spl:text +16.0 text +28.0
+> > > > > >
+> > > > > > so growth on firefly-rk3399 but not with rk3288. I am not sure if the
+> > > > > > growth will tail off as there are more users, though. We might even be
+> > > > > > able to be more clever with static inlines.
+> > > > >
+> > > > > Yeah, lets not do this now then and worry about some "clean up" later
+> > > > > when we can show that it does, or does not, improve size.
+> > > >
+> > > > Oh.
+> > > >
+> > > > > And there's
+> > > > > something wrong with your numbers:
+> > > > > 01: Fix neighbor discovery ethernet address saving
+> > > > >    aarch64:  w+   firefly-rk3399
+> > > > > +(firefly-rk3399) Image 'simple-bin' is missing external blobs and is non-functional: atf-bl31
+> > > > > +(firefly-rk3399)
+> > > > > +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (atf-bl31):
+> > > > > +(firefly-rk3399)    See the documentation for your board. You may need to build ARM Trusted
+> > > > > +(firefly-rk3399)    Firmware and build with BL31=/path/to/bl31.bin
+> > > > > +(firefly-rk3399) Image 'simple-bin' is missing optional external blobs but is still functional: tee-os
+> > > > > +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
+> > > > > +(firefly-rk3399)    See the documentation for your board. You may need to build Open Portable
+> > > > > +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+> > > > > +(firefly-rk3399) Some images are invalid
+> > > > > 37: dm: core: Provide ofnode_find_subnode_unit()
+> > > > >    aarch64: (for 1/1 boards) all +324.0 bss +32.0 spl/u-boot-spl:all +16.0 spl/u-boot-spl:text +16.0 text +292.0
+> > > > >             firefly-rk3399 : all +324 bss +32 spl/u-boot-spl:all +16 spl/u-boot-spl:text +16 text +292
+> > > > >                u-boot: add: 6/-1, grow: 4/-4 bytes: 516/-224 (292)
+> > > > >                  function                                   old     new   delta
+> > > > >                  ofnode_name_eq_unit                          -     160    +160
+> > > > >                  ofnode_find_subnode_unit                     -     116    +116
+> > > > >                  fit_image_get_data                          80     176     +96
+> > > > >                  fit_image_get_emb_data                       -      84     +84
+> > > > >                  ofnode_write_prop                          224     236     +12
+> > > > >                  ofnode_add_subnode                         232     244     +12
+> > > > >                  abuf_init_const                              -      12     +12
+> > > > >                  abuf_init                                    -      12     +12
+> > > > >                  abuf_addr                                    -       8      +8
+> > > > >                  fit_image_print                            780     784      +4
+> > > > >                  image_locate_script                        696     692      -4
+> > > > >                  fit_image_load                            1584    1580      -4
+> > > > >                  fit_image_verify                           176     164     -12
+> > > > >                  ofnode_find_subnode                        140     116     -24
+> > > > >                  fit_image_get_data_and_size                180       -    -180
+> > > > >                spl-u-boot-spl: add: 3/-1, grow: 0/-1 bytes: 108/-92 (16)
+> > > > >                  function                                   old     new   delta
+> > > > >                  fit_image_get_emb_data                       -      84     +84
+> > > > >                  abuf_init_const                              -      12     +12
+> > > > >                  abuf_init                                    -      12     +12
+> > > > >                  load_simple_fit                            580     568     -12
+> > > > >                  fit_image_get_data                          80       -     -80
+> > > >
+> > > > Yes, that's the whole series, so not related to this change.
+> > >
+> > > Yes, that's the whole series including this change, so it's related to
+> > > this change.
+> >
+> > Right, but it is due to ofnode_find_subnode(), etc.
+> >
+> > >
+> > > >  I elected to have two versions of ofnode_find_subnode() to avoid the
+> > > > size growth in the previous version. But the cost is larger size
+> > > > growth when OF_LIVE is used.
+> > > >
+> > > > Without OF_LIVE, the size growth is tiny.
+> > >
+> > > And even worse in SPL, somehow. But you want more OF_LIVE users, not
+> > > less, yes?
+> >
+> > Well, OF_LIVE is always quite a bit larger, at least at the moment. It
+> > has both Linux's of_access stuff and libfdt. It's not OF_LIVE I am
+> > bothered about, but I do want people using ofnode. Unfortunately
+> > people still send patches which use libfdt directly.
+> >
+> > >
+> > > > So...what to do?
+> > >
+> > > Well, if you drop the abuf changes for now, SPL won't change at all for
+> > > most platforms and that'll be an improvement.
+> >
+> > Yes, I'll look at that. This is one of many examples where I have a
+> > problem and realise that we need a nicer way of dealing with it, then
+> > implement it in the series, but then the series loses focus. So then I
+> > take it out again, then forget about it until next time, but I never
+> > actually make the change.
+>
+> I hate to start to derail this, but refactor for "nicer code" is very
+> much subjective. Especially when it also grows the code (and it's not
+> clear that wider usage would result in shrinkage). So yes, this really
+> needs to be put aside and also part of why I keep asking for one thing
+> at a time.
 
+Yes I very much agree with this.
 
-> might be also needed to enable the VIDEO_CONSOLE explicitly using:
 >
->      setenv stdout serial,vidconsole0
+> > > And I'm going to keep complaining about size growth here because a
+> > > non-trivial subset of users just wants things to boot quickly and be
+> > > small.
+> >
+> > Yes, you won't get any complaints from me on that. I did propose some
+> > automated checking a few years back, but it never went anywhere.
 >
-> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> ---
->  configs/imx8mp_evk_defconfig | 7 +++++++
->  1 file changed, 7 insertions(+)
->
-> diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-> index 5369f8b84a4172434dcef142c854d06e3437caf1..a3cdf0f3cb237d7b555a2dca7=
-41deee21b771e8c 100644
-> --- a/configs/imx8mp_evk_defconfig
-> +++ b/configs/imx8mp_evk_defconfig
-> @@ -31,6 +31,7 @@ CONFIG_OF_SYSTEM_SETUP=3Dy
->  CONFIG_DEFAULT_FDT_FILE=3D"imx8mp-evk.dtb"
->  CONFIG_SYS_CBSIZE=3D2048
->  CONFIG_SYS_PBSIZE=3D2074
-> +# CONFIG_CONSOLE_MUX is not set
->  CONFIG_BOARD_LATE_INIT=3Dy
->  CONFIG_SPL_MAX_SIZE=3D0x26000
->  CONFIG_SPL_BOARD_INIT=3Dy
-> @@ -60,6 +61,7 @@ CONFIG_CMD_USB=3Dy
->  CONFIG_CMD_USB_SDP=3Dy
->  CONFIG_CMD_USB_MASS_STORAGE=3Dy
->  CONFIG_CMD_CACHE=3Dy
-> +# CONFIG_CMD_CLS is not set
->  CONFIG_CMD_REGULATOR=3Dy
->  CONFIG_CMD_EXT4_WRITE=3Dy
->  CONFIG_OF_CONTROL=3Dy
-> @@ -112,6 +114,7 @@ CONFIG_PINCTRL_IMX8M=3Dy
->  CONFIG_POWER_DOMAIN=3Dy
->  CONFIG_IMX8M_POWER_DOMAIN=3Dy
->  CONFIG_IMX8MP_HSIOMIX_BLKCTRL=3Dy
-> +CONFIG_IMX8MP_MEDIAMIX_BLKCTRL=3Dy
->  CONFIG_DM_PMIC=3Dy
->  CONFIG_DM_PMIC_PCA9450=3Dy
->  CONFIG_SPL_DM_PMIC_PCA9450=3Dy
-> @@ -139,4 +142,8 @@ CONFIG_USB_GADGET=3Dy
->  CONFIG_USB_GADGET_MANUFACTURER=3D"FSL"
->  CONFIG_USB_GADGET_VENDOR_NUM=3D0x0525
->  CONFIG_USB_GADGET_PRODUCT_NUM=3D0xa4a5
-> +CONFIG_VIDEO=3Dy
-> +CONFIG_VIDEO_BRIDGE=3Dy
-> +CONFIG_IMX_LDB=3Dy
-> +CONFIG_IMX_LCDIF=3Dy
->  CONFIG_IMX_WATCHDOG=3Dy
->
-> --
-> 2.47.0
->
+> It be great if buildman size comparison had some way to csv the output.
+> That's what's missing imo from being able to have some automation or
+> even just nicer tooling.
+
+What sort of tooling could we have? I would like something in CI which
+reports code-size changes in a useful way, perhaps failing if the
+delta is too large for more than x boards. WDYT?
+
+Regards,
+Simon
