@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B62E77188
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:02:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5064DE7719C
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:02:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A60F580691;
-	Sat, 11 Jan 2025 01:01:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30AE2806FD;
+	Sat, 11 Jan 2025 01:01:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ilJA+txB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VbzJLDSr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3A1580691; Sat, 11 Jan 2025 01:01:12 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id 2CC4A80050; Sat, 11 Jan 2025 01:01:13 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90D7680050
- for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC94D806C6
+ for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-84cdacbc3dbso195601539f.2
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:07 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-844bff5ba1dso173770339f.1
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736553666; x=1737158466; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736553668; x=1737158468; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=po2aAfbffbEV82CCrdgF7VQpKG0lRJ9swXG8eu3xnYo=;
- b=ilJA+txBciwUCA+tA3+ufj0fxjiTDhcEvGXpN2tZRgxneqlhUg1Avosoz12CM46j2f
- R1AWKfI28F8s1UphbJ7l/m2dBXc3joATCovHt7cpf3jGP8NiTZdf0si0PZ2brwmPH0Bw
- dyUb87vXaOsmk8rqn81+UGd2uRcNafjz3meuY=
+ bh=rNzhiYaDuSY2qfMKKPj+FTxYW/XZvJ39nNjskChGRyY=;
+ b=VbzJLDSrC1zA+CURqFCWcMsn77XVcZ685NVOQxvHfJ0PEsGuzK7sOSGpwE6upg6LVa
+ qsqu2Dr8kLXWSobKu2S+cBEtYmWwXeGXM/5eje1uYt9rZg90OJjA3+S5rvXSg9dXaU9A
+ 3CMWq5lCzhSeUbPVCLcVNMY4i5J8F27KFu7aI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736553666; x=1737158466;
+ d=1e100.net; s=20230601; t=1736553668; x=1737158468;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=po2aAfbffbEV82CCrdgF7VQpKG0lRJ9swXG8eu3xnYo=;
- b=OUeHfJkPSc1aKG6iEc6EZqwXUxlj00bRR0dfFqOrgdT2/FSDWK26xY116cuW56X35Y
- QoahaHGnzXPtEFPrWj3sNr0wxrQde3k4BH93MDzQJZCC+4DpnR5SOlatYYkRID+PF/bD
- IhMwE8zLmURqpSNm/d2Ac5tyBPQm3HMPhuhToLOdn0qzFcjb2irXuXzZAZQwXPRIhLHx
- /nr6sh8jiJCQN1Rulb6ktwT+Ys8ztVdNxswur3sfYElkt2FM8ztCM1rO94YCLYutSZRC
- ls4Iq4bRkNUZWwPXmoXnDgubIJMnT004GeQ+/GYxHxAxrlnHlI973NcnZXeeeAXElzZ1
- CjcA==
-X-Gm-Message-State: AOJu0Yx6MF9/915fm0YubrIrB+DWmUFMMXS8iiUJbZaMhsF1cnyu17IW
- aIGv5VJ83S6fs9aK2KCHWKvcXZ4mHHi6E3gocKMRT8GfMBgdhNEJkInVuWFZqEeXvhEdwNChVvw
+ bh=rNzhiYaDuSY2qfMKKPj+FTxYW/XZvJ39nNjskChGRyY=;
+ b=Xz2GYIgrWQFawHFtzXSLBGLx4Jhp3OFJ60eg8Y/eg9E2ZbRDbJUgpnqEBmvi9nhkCC
+ 94oXKrPEujIu7RgBS8GeP1iwqmWfBnBym7Y5RoKZ2OwwxTV+vFdBYKZIQb06RJt7G76t
+ HGyEY1izNb7GWU4ofsY7CwVCt4UWvVsh0uToMpy7gO3d+mHj/CuzJpdEhmcrqxfMYL7K
+ XyNqMqQsIvrqs4VyMEPzXOtRrWVgx3ZZauTgA7P/A8tiHdOO4Bo3juQkJr4frYHFMSGK
+ N/2aJVPitU5oT+2hYGuxcDer4FMQmTVw9jgdkkrsJnGfyhD1YD2BCFsYzF3PWH33GdFM
+ sX+w==
+X-Gm-Message-State: AOJu0Yw0KwHfjZisC6dpvY9VIrnt83Tq+9BQB++V1ZbPjKixq1S1X5Tu
+ 11CAZCOwlguSWvcpHs+Dumzs9ADtwcCvBD8AmiY5lUuslZ/T62ljKxaPJz+n8rMje4+QBgbXthw
  =
-X-Gm-Gg: ASbGnctpGxlYAs6ryMBO5ZopWwEfmEUCYDFYgGFlvmrd+LIRGBzF8ZqHMXNb14TI8WM
- m5xu3b5uxxlxBdpL2SK+xWU3bwzruq+B2CGNHpVapSUMwBXR5pMUfNCLugZsHArewe9OyhtWtJJ
- pNmcCn/w6AXYQlamAYcrpqWtT0mZpRhYWf/qY54h8OeL37RQC5QDZFPHF2tGSsIiO6QKq7pO88U
- j2mfZ0V/B+MRUWv7y/7JdoSXvweJaflcadd5FQkSwe+f0IYNOYMefK3xtvycyVMM0sYaH7Jkztv
- v50iIQS/PvUUR17TuA==
-X-Google-Smtp-Source: AGHT+IEJaSNJ7meo0ezFMWTmWawAIB5cVsbKDXWytv/bYTOaXRb6yrROxIVi3NneCiUlX5Xos7h6Fg==
-X-Received: by 2002:a05:6e02:2411:b0:3ce:5af3:79de with SMTP id
- e9e14a558f8ab-3ce5af44a55mr31949405ab.20.1736553665835; 
- Fri, 10 Jan 2025 16:01:05 -0800 (PST)
+X-Gm-Gg: ASbGnctW7LqFRhC6EPLvK3HxdinW7lWGXH7D/CsKS3LFwTw69Af71MF3wawekKnQi8J
+ fupdCu7JWdIkfndC5FFdZa2RA16PYj/SBdiYKiuHMzjjUJXbPKan3dKH+R69blfkgPf0J8ynuh7
+ UCfQkIW0BhnGGx14++x2ohqc9+2Cc16y6Wh8OFdYL3LrBmXkwaOUIIAS+ZGaXwVFnllaeeu+UZw
+ VXg3LT+gHGVfe3oU+oGdLYmsBxmEd6yTm4Yda26XmqbwePmb/nhVagmQVHem+d9JrdOmZvx/5UZ
+ 7gDN33XT008dAvl4ig==
+X-Google-Smtp-Source: AGHT+IFVDckHOYyycB9SwpMoIDkHY4CJ/GRPLpX9Fr3D0PlZ7UL2moj5PnPgDa19l4rMyPyu0vcZJQ==
+X-Received: by 2002:a05:6602:36c6:b0:843:e9c0:8290 with SMTP id
+ ca18e2360f4ac-84ce00bb460mr1277116439f.6.1736553668613; 
+ Fri, 10 Jan 2025 16:01:08 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.03
+ 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 16:01:04 -0800 (PST)
+ Fri, 10 Jan 2025 16:01:07 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+Cc: Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 09/30] x86: Show the timestamp counter with bdinfo
-Date: Fri, 10 Jan 2025 17:00:08 -0700
-Message-Id: <20250111000029.245022-10-sjg@chromium.org>
+Subject: [PATCH v3 10/30] ofnode: Use 4K for a default tree-size
+Date: Fri, 10 Jan 2025 17:00:09 -0700
+Message-Id: <20250111000029.245022-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250111000029.245022-1-sjg@chromium.org>
 References: <20250111000029.245022-1-sjg@chromium.org>
@@ -94,30 +95,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a line to the 'bdinfo' command which shows the current value of the
-TSC.
+At some point it would be nice to have the ofnode API automatically
+expand the tree as required, to accommodate new nodes. For now, expand
+the default size so that UPL can be supported.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/lib/bdinfo.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/core/ofnode.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/x86/lib/bdinfo.c b/arch/x86/lib/bdinfo.c
-index bd2cf0b9fcb..4b016d4a0fc 100644
---- a/arch/x86/lib/bdinfo.c
-+++ b/arch/x86/lib/bdinfo.c
-@@ -33,6 +33,8 @@ void arch_print_bdinfo(void)
- 	bdinfo_print_num_l(" high start", gd->arch.table_start_high);
- 	bdinfo_print_num_l(" high end", gd->arch.table_end_high);
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index 950895e72a9..ec03f6f550d 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -118,7 +118,7 @@ int oftree_new(oftree *treep)
+ 			return log_msg_ret("liv", ret);
+ 		tree = oftree_from_np(root);
+ 	} else {
+-		const int size = 1024;
++		const int size = 4096;
+ 		void *fdt;
  
-+	bdinfo_print_num_ll("tsc", rdtsc());
-+
- 	if (IS_ENABLED(CONFIG_EFI_STUB))
- 		efi_show_bdinfo();
- }
+ 		ret = check_tree_count();
 -- 
 2.34.1
 
