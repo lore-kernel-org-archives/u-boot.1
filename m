@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEA2FE7719C
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:05:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB480E77188
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:05:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 678AD80797;
-	Sat, 11 Jan 2025 01:02:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B63DE807BC;
+	Sat, 11 Jan 2025 01:02:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y+tQ37tK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GEoRN+Sb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 692F0806B7; Sat, 11 Jan 2025 01:02:01 +0100 (CET)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 3E4D2807B4; Sat, 11 Jan 2025 01:02:03 +0100 (CET)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A052800D0
- for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E531780690
+ for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:02:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3a8160382d4so6922685ab.0
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:59 -0800 (PST)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-3a8180205f3so11457805ab.0
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:02:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736553717; x=1737158517; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736553719; x=1737158519; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4PzNvg8Mj2yNnCqJSH8SSPEZ/lELoyx2JStmTgWmyeA=;
- b=Y+tQ37tKwUKKj5OVcA3Thg7W6WyCcY2P3yw+skihZNJ7+1B18kVye+4z9vG9Un2iiU
- w2+WhppR8meIQXQJv3klhfsw1Nzynqvknubc9Kqj0Npo8UpgyPgQ+zv5/HfRmV74Ub8a
- 8yFJcNWySo3L5hShASQngJ5VywhqI7f/Wmfzs=
+ bh=xWXQ6gVFCh8WJXgqexWukHBrjeOAkjpN7GHOKlkuA7o=;
+ b=GEoRN+SbZwJStmvlF1v8cGFrM0XIwB4qSOg1iEzFxwWS59kokzdk0lVZ1jkllkUHwW
+ fYIQdir9w56M//IRnXoYv+eMjmGwvZxqIzGqIpo4iTcX5TaWMCidbxcEPQ89PYL1ReZN
+ jOGydNSUAVQY91dsxuwOysrW3UUgvZIhOht9Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736553717; x=1737158517;
+ d=1e100.net; s=20230601; t=1736553719; x=1737158519;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4PzNvg8Mj2yNnCqJSH8SSPEZ/lELoyx2JStmTgWmyeA=;
- b=bPIjG9Jc0XvPInA/GMjCoiFT89ik2VYnoFluLNczgbcT2uo4gd2yf/g5y9AOQzOFw4
- wOy6fajBCppROYVVIs4Y3SD0hEhpuFrvHRnZPMon7pg+6SjRb9AM9WacJ0MOk3G+Lo3/
- iRie/H/Xoez0smLmy4QLDutzBypKgCOGbhnYFr7mIVNYVsbGD3qJ0seMn2DuP5T1HIPq
- z0nUx28fcYGIqdHHWljLs2VzntSEYspLwhf5Z9PZMxlneq33ajGpl0N9f1aXn5O2bSus
- o//4stSStrT3NfSGxZZ0pS/Da9t1UpuVNnecV8xTdce5p3tkOGGaagRcsxgojJ6OxDAL
- 9/tA==
-X-Gm-Message-State: AOJu0YxZ78RMVaCkEaru8dDPbLcJuccMfuGvwxwW3bW+Ye1PLzwDPLaZ
- /tEnBg/Ptb7+2fdNLHIi5Plxe5lKYuovhM45l+0jpvGqg1b81uKkfPSAf5MuWbRBrRkdK+w0d9M
+ bh=xWXQ6gVFCh8WJXgqexWukHBrjeOAkjpN7GHOKlkuA7o=;
+ b=A+V1Wp48KU6eqnUQ1KE8L7sYPIMkXddJKNx3S9X3NO7rpnX9VgLicadxMEKlPCSpa5
+ lONOqQ22Nop+/oE/HWAIeQIPH1FBVZkP3Px4qOiXG8+s/LgnpgTzx2eqT4h5wlFuDw5U
+ oQMT+s/B+AyewndPWxZui28dRKz28OtgU3ZokQG5oAEVjH/leJofym3ysDZ5vXubGhwA
+ 1fTCjxF8VAzApAvaM9Xtrfm3ck525Sl3L1LaEZacbRxgfiJButW4deIZF+u/S2dYLGlj
+ sS31WXHDYUhU870Y2dKPHT7mOZYjU92YOhT/t2ozp7XCsQ9VgA6vZiu2GKo3fhUhc7it
+ BARQ==
+X-Gm-Message-State: AOJu0YxYPTzzIGHn6/2nDTFW5StIQ+wYPJoVQ8PuCcM+6ZbVEiar3zdX
+ o8kuKNWQRLiEdBe7OXT1AqR8+5E5yJ0Tx135wydXF2woNWVXeBloh5J0u7WX3OV1iPknS9j1tzk
  =
-X-Gm-Gg: ASbGncvFDKD/AOSp1CzPNUJ5IUd8Ud+Uhg8eifc26xnAjtS0qtMDONFmolMnFldtJ9l
- NX9pnsmMs2cuCNetxW/bAX8CVY5Ju5lqRVcjYTMShg7gN/a9vqEtOhMD29u/YQn61Bu+hr1QHeb
- IjTCWxOKrvslPVvla/+RVEujcCNP11nvqR5rY+rz06zJ9olfKGIZvAV5eNcVwa2TD9BCbZ12TVF
- yAjzZ7ikJOlOupaRmUAIUxD96gbIW/3PUbBWyoFzbs16GFsoGWFzVn/rOEBQ7qHfCudngRl7mYy
- Szv9ImvuD0mL8zRORA==
-X-Google-Smtp-Source: AGHT+IFzU+8WNRVZSLhOSPkMugfq85pIXLL4lH3UR9BC17xQz8U7TJM99u6GJ0SdTZzU3hF0mxSKcw==
-X-Received: by 2002:a05:6e02:160e:b0:3a7:c5b1:a55f with SMTP id
- e9e14a558f8ab-3ce3a893945mr96862565ab.0.1736553717023; 
- Fri, 10 Jan 2025 16:01:57 -0800 (PST)
+X-Gm-Gg: ASbGncs477l4ADjSXt+ITpUKBDJGKCh02wbBkyWuweGAVYGITqSc0+MZV35BX+wTHak
+ Ou85/EnQGjxMmQU5J0S/lI/QBhqr+iyiACLG6lcoaeL0jcpNAeUf13l7lsvHWl29PP+LOTYRtmo
+ u+6jH4938+9axmzSc1lh5wtvslt+QMpaxqZTq4Wr/sRNTD8JBsqb75VJFCt6M8z35QVno2AHR3q
+ kV9YFKEkebs5xgg0MDk/1RBNM7X4Waw1giAc2vBHa4iVhI5cNx7/qpaRhZUlWsxz8XSMInglVQp
+ x2KwXS50sJonlzpeJw==
+X-Google-Smtp-Source: AGHT+IERisX9/w7W1aGfZsmLean0wU0mkBpsdl3AyC+5yHdawrZuvtjiB623/Xro6IO7SQwXfInuNQ==
+X-Received: by 2002:a05:6e02:1605:b0:3ce:3395:f7b1 with SMTP id
+ e9e14a558f8ab-3ce475fbc60mr61325125ab.9.1736553718639; 
+ Fri, 10 Jan 2025 16:01:58 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.54
+ 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 16:01:55 -0800 (PST)
+ Fri, 10 Jan 2025 16:01:57 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Janne Grunau <j@jannau.net>,
  Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
  Pavel Herrmann <morpheus.ibis@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 29/30] dm: core: Provide ofnode_name_eq_unit() to accept a
- unit address
-Date: Fri, 10 Jan 2025 17:00:28 -0700
-Message-Id: <20250111000029.245022-30-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 30/30] dm: core: Provide ofnode_find_subnode_unit()
+Date: Fri, 10 Jan 2025 17:00:29 -0700
+Message-Id: <20250111000029.245022-31-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250111000029.245022-1-sjg@chromium.org>
 References: <20250111000029.245022-1-sjg@chromium.org>
@@ -100,111 +96,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a unit-address is provided, use it to match against the node
-name.
+The ofnode_find_subnode() function currently processes things two
+different ways, so the treatment of unit addresses differs depending on
+whether OF_LIVE is enabled or not.
 
-Since this increases code size, put it into a separate function.
+Add a new version which uses the ofnode API and add a test to check that
+unit addresses can be matched correctly. Leave the old function in place
+for the !OF_LIVE case, to avoid a code-size increase, e.g. on
+firefly-rk3288
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Be careful not to resend the bloblist license and get_size patches
 
 Changes in v2:
-- Split this into its own function
+- Split prerequisite patches into their own series
 
- drivers/core/ofnode.c | 23 +++++++++++++++++++++++
- include/dm/ofnode.h   | 14 ++++++++++++++
- test/dm/core.c        | 18 ++++++++++++++++++
- 3 files changed, 55 insertions(+)
+ drivers/core/ofnode.c | 29 ++++++++++++++++++++++-------
+ include/dm/ofnode.h   | 12 ++++++++++++
+ test/dm/ofnode.c      | 19 +++++++++++++++++++
+ 3 files changed, 53 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 5b8be218d3b..529bc132f7d 100644
+index 529bc132f7d..c9b03b0f925 100644
 --- a/drivers/core/ofnode.c
 +++ b/drivers/core/ofnode.c
-@@ -309,6 +309,29 @@ bool ofnode_name_eq(ofnode node, const char *name)
- 	return (strlen(name) == len) && !strncmp(node_name, name, len);
+@@ -599,14 +599,9 @@ ofnode ofnode_find_subnode(ofnode node, const char *subnode_name)
+ 	log_debug("%s: %s: ", __func__, subnode_name);
+ 
+ 	if (ofnode_is_np(node)) {
+-		struct device_node *np = ofnode_to_np(node);
+-
+-		for (np = np->child; np; np = np->sibling) {
+-			if (!strcmp(subnode_name, np->name))
+-				break;
+-		}
+-		subnode = np_to_ofnode(np);
++		subnode = ofnode_find_subnode_unit(node, subnode_name);
+ 	} else {
++		/* special case to avoid code-size increase */
+ 		int ooffset = fdt_subnode_offset(ofnode_to_fdt(node),
+ 				ofnode_to_offset(node), subnode_name);
+ 		subnode = noffset_to_ofnode(node, ooffset);
+@@ -617,6 +612,26 @@ ofnode ofnode_find_subnode(ofnode node, const char *subnode_name)
+ 	return subnode;
  }
  
-+bool ofnode_name_eq_unit(ofnode node, const char *name)
++ofnode ofnode_find_subnode_unit(ofnode node, const char *subnode_name)
 +{
-+	const char *node_name, *p;
-+	int len;
++	ofnode subnode, found = ofnode_null();
 +
 +	assert(ofnode_valid(node));
++	log_debug("%s: ", subnode_name);
 +
-+	node_name = ofnode_get_name(node);
++	ofnode_for_each_subnode(subnode, node) {
++		if (ofnode_name_eq_unit(subnode, subnode_name)) {
++			found = subnode;
++			break;
++		}
++	}
 +
-+	/* check the whole name */
-+	if (!strcmp(node_name, name))
-+		return true;
++	log_debug("%s\n", ofnode_valid(found) ?
++		  ofnode_get_name(found) : "<none>");
 +
-+	/* if @name has no unit address, try the node name without it */
-+	len = strlen(name);
-+	p = strchr(node_name, '@');
-+	if (p && !strchr(name, '@') && len == p - node_name &&
-+	    !strncmp(node_name, name, len))
-+		return true;
-+
-+	return false;
++	return found;
 +}
 +
- int ofnode_read_u8(ofnode node, const char *propname, u8 *outp)
+ int ofnode_read_u32_array(ofnode node, const char *propname,
+ 			  u32 *out_values, size_t sz)
  {
- 	const u8 *cell;
 diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index 6d6a6fef8ef..3bb7d3e05e1 100644
+index 3bb7d3e05e1..74ee6fb4ee2 100644
 --- a/include/dm/ofnode.h
 +++ b/include/dm/ofnode.h
-@@ -394,6 +394,20 @@ void oftree_dispose(oftree tree);
+@@ -607,6 +607,18 @@ bool ofnode_read_bool(ofnode node, const char *propname);
   */
- bool ofnode_name_eq(ofnode node, const char *name);
+ ofnode ofnode_find_subnode(ofnode node, const char *subnode_name);
  
 +/**
-+ * ofnode_name_eq_unit() - Check a node name ignoring its unit address
++ * ofnode_find_subnode_unit() - find a named subnode of a parent node
 + *
-+ * This is separate from ofnode_name_eq() to avoid code-size increase for
-+ * boards which don't need this function
-+ *
-+ * @node:	valid node to compared, which may have a unit address
-+ * @name:	name to compare with the node name. If this contains a unit
-+ *		address, it is matched, otherwise the unit address is ignored
-+ *		when searching for matches
-+ * Return: true if matches, false if it doesn't match
++ * @node:	valid reference to parent node
++ * @subnode_name: name of subnode to find, including any unit address. If the
++ *	unit address is omitted, any subnode which matches the name (excluding
++ *	any unit address) is returned
++ * Return: reference to subnode (which can be invalid if there is no such
++ * subnode)
 + */
-+bool ofnode_name_eq_unit(ofnode node, const char *name);
++ofnode ofnode_find_subnode_unit(ofnode node, const char *subnode_name);
 +
- /**
-  * ofnode_read_u8() - Read a 8-bit integer from a property
-  *
-diff --git a/test/dm/core.c b/test/dm/core.c
-index d40916ef588..959b834576f 100644
---- a/test/dm/core.c
-+++ b/test/dm/core.c
-@@ -192,6 +192,24 @@ static int dm_test_compare_node_name(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_compare_node_name, UTF_SCAN_PDATA);
+ #if CONFIG_IS_ENABLED(DM_INLINE_OFNODE)
+ #include <asm/global_data.h>
  
-+/* compare node names ignoring the unit address */
-+static int dm_test_compare_node_name_unit(struct unit_test_state *uts)
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index ce996567c3c..521359c9bd7 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -1201,6 +1201,25 @@ static int dm_test_ofnode_find_subnode(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_ofnode_find_subnode, UTF_SCAN_FDT);
+ 
++/* check ofnode_find_subnode() with unit addresses */
++static int dm_test_ofnode_find_subnode_unit(struct unit_test_state *uts)
 +{
-+	ofnode node;
++	ofnode node, subnode;
 +
-+	node = ofnode_path("/mmio-bus@0");
++	node = ofnode_path("/some-bus");
 +	ut_assert(ofnode_valid(node));
-+	ut_assert(ofnode_name_eq_unit(node, "mmio-bus"));
++	subnode = ofnode_find_subnode_unit(node, "c-test@5");
++	ut_assert(ofnode_valid(subnode));
++	ut_asserteq_str("c-test@5", ofnode_get_name(subnode));
 +
-+	ut_assert(ofnode_name_eq_unit(node, "mmio-bus@0"));
-+	ut_assert(!ofnode_name_eq_unit(node, "mmio-bus@1"));
-+	ut_assert(!ofnode_name_eq_unit(node, "mmio-bu"));
-+	ut_assert(!ofnode_name_eq_unit(node, "mmio-buss@0"));
++	subnode = ofnode_find_subnode_unit(node, "c-test");
++	ut_assert(ofnode_valid(subnode));
++	ut_asserteq_str("c-test@5", ofnode_get_name(subnode));
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_compare_node_name_unit, UTF_SCAN_PDATA);
++DM_TEST(dm_test_ofnode_find_subnode_unit, UTF_SCAN_FDT);
 +
- /* Test that binding with uclass plat setting occurs correctly */
- static int dm_test_autobind_uclass_pdata_valid(struct unit_test_state *uts)
+ /* test ofnode_find_subnode() on the 'other' tree */
+ static int dm_test_ofnode_find_subnode_ot(struct unit_test_state *uts)
  {
 -- 
 2.34.1
