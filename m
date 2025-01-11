@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83782E7719D
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:04:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA2F4E77188
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82E048070D;
-	Sat, 11 Jan 2025 01:01:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EF9B880763;
+	Sat, 11 Jan 2025 01:01:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GUhMw1Ug";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ocYcD4Rz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52F1480785; Sat, 11 Jan 2025 01:01:48 +0100 (CET)
+ id 6F6A9806D6; Sat, 11 Jan 2025 01:01:50 +0100 (CET)
 Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
  [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B6988070D
- for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CC37980763
+ for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-844d7f81dd1so87993339f.2
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:46 -0800 (PST)
+ ca18e2360f4ac-844dfe4b136so67407439f.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736553704; x=1737158504; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736553706; x=1737158506; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9HWfSBlvLy3gAWIoCNj61AabhKzHBwJHKFe/SDfZvaU=;
- b=GUhMw1UgdcBfWktTeAuFjSHcyi3esS61ceXwGOEhHfOVmKFosJCWBaaCYLaK67XS6D
- 8uYs6YtLBqQt1xZblwRyaxEdYI+I/QSdS2Yk4jKqXMsvm99EdPw65qTTpdWwQ6FfC/yY
- QjQFVDBQyUU/l8Pzv7bPgVDdJ/0pJ+G9Ndxpc=
+ bh=/oVBX9bzTw0hUsUEwfSab0KuEBnmq4dvXBe3OkCVGTQ=;
+ b=ocYcD4RzmzZkkPE2XT3v9CBXlrbBBzL+3FtaNhUvjpP8mZjOCzgeJFUeELKmnbeG9W
+ 2jSijAE/1hyk5jq91rorV9RVuL6EAm/dfzI9Okr0ElzoLDtzNiedGfzRl5iypXOKWsk2
+ tLglRW0dKtkDMBVY3MW6YjDUOYysY1LPuAXxY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736553704; x=1737158504;
+ d=1e100.net; s=20230601; t=1736553706; x=1737158506;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9HWfSBlvLy3gAWIoCNj61AabhKzHBwJHKFe/SDfZvaU=;
- b=GNJmk8Go2L5hatKjQoNP22B9pTx0i5zrbF+chdykf1KrMg+4Dwwy6jZzAZwxeQNwgP
- 7lXgtgLgtx2J2OHzcIZgutEWfkLGBsTy3gHC+s5ROZKJ8IGjnWJ5BkAHh5NADjBy6Onw
- EtYnPbIEonPTFqfJEdwkRohJ05RM9XJH3lJGHF6eSmMKi+WdNZmKJRmnzXi77I2Mjy5W
- 0Ef/zU8rKgAdDDIqem6+VRMQ9d+wTdpoKID/v6I63e7C1pF7AEqtIGQJfzLtJOOQ5KlA
- 5MjJxp+6GMVzFULzvdIWlbJaWBw6J0WPaq0whCGYinz7WcFlpjClncpjlNAopCLFnx5z
- Rvkg==
-X-Gm-Message-State: AOJu0YwY61ZNiSKR9PsepM6sOTXA/q/uFbNGTnOZzkMeb+uMNsHe7QpE
- TDHvWeFhYr78aRCRkEfug2I+CnPt6e+rEaFomTbwd3xaQ0Tv74bCZdtTBsoEgDCDZYbcEbI7eho
+ bh=/oVBX9bzTw0hUsUEwfSab0KuEBnmq4dvXBe3OkCVGTQ=;
+ b=T1HHxInnYdkiLBrjy4kpBn0K4jvmBYmp+fEu3Jsh2AhsWk7+8Q6hxfbQkX1lq+LERw
+ n3HS8fELlvMMxwfWrCneDtKT2846jcsubfAjHIvI3ol4AsT/qtCBfHJXxtJ/7c+6tX/j
+ Noe1GmAxrHeY7ebVRolzZSPi44ee69mfeuw3I41wvluPvXEuszNZCN8MDiEarYwgfM43
+ LAp7Lx8epUEpXrBTn1xou1g3xhNx+qk6ysYDMAoCbZ/cWwcIy5q3QnbDPPayyw6+BufE
+ c64c+aowIpyzbabBgiwvQ1meEj6HqodXEMqHhN7kV+xlHNunx4JaICYWLh2RRXi3P1oj
+ RXSw==
+X-Gm-Message-State: AOJu0YwJE43rVn9bKC9eDvSraSTBG71eSBu6wfdjE1w/hNhtKdn5vXEY
+ pPPN1E3wrBr9oJyRf4LO745OYqpnBGvv6GUilOR8LyEn7dSZbjKqf7NI6iqmls2M+4XYZOaeb6A
  =
-X-Gm-Gg: ASbGncupIzuoYlQaJlbU/zZYpdlLWlf7nS5XLTI1+tY16o+wfk5bjif2gOW66vCQ3Zd
- JrVyhaStSnysYbsGDc0ComR4FYBdhrLOTUpHdyRfmyMx6fRC3E8Kf4hTN+TdQbcYhYtXeeXbcYA
- XhYhsbdtvbCIgyzdsVSoLUjFROZfn9wuaUJFyWAmwSaCD28QWRllpr7vEYq4aSggK/nXOSh9tnB
- gd25VsF9DYoJp0jnCICJ1xUDyRYTrCU8HdMrdOMrEvy9pHRfldlH5idToVZS2ZcBD3lh2qvhKsQ
- fFZV/R5rnvMeduaUOg==
-X-Google-Smtp-Source: AGHT+IEJRkL5Jznzv3QaKOsUAY1RciEyp4QS7bWU27V9+W2ZXt9CV+Wgc/KPFGwd+KZ8QX0lWdxgcw==
-X-Received: by 2002:a05:6e02:308b:b0:3a7:9736:501e with SMTP id
- e9e14a558f8ab-3ce3a9d0941mr88119505ab.14.1736553704017; 
- Fri, 10 Jan 2025 16:01:44 -0800 (PST)
+X-Gm-Gg: ASbGncsDm7bDVA6H4Q6/5x3LDdGhUqqWbuqrG02WqWnwaBiN1BhtfzKPodkXy8iscKy
+ 9h6PZerDGXXpShnZSFrLWqZxddM6nqomdl1G49dSQXMrvhh0EH2zeobciWwuieW9B8eQMrVElNH
+ 5DfmMkKeupD+ak8P8vSWKkye0F5DLYOEK25hxvMPl9yCLmaJSZY2GH3ex4BVOLFYJ/n7k2X2UaV
+ c1DTZumk+CwI9R55hMoA8m0ic+w9KjTaGkUl1Z5J6n5KA4jWQ/5XmhEKdXsJQLs0mRQouo37ayu
+ nqCuGT/L1wXRM+C3ag==
+X-Google-Smtp-Source: AGHT+IFVhVG6PyTePFilj27BcJqmxDzuftDjTPcwBxbGwHWOPd37pJe+U8MAoEJmmALIzDpBn7AKww==
+X-Received: by 2002:a05:6602:3a04:b0:847:22a7:2412 with SMTP id
+ ca18e2360f4ac-84ce00d41f0mr1157617539f.8.1736553706119; 
+ Fri, 10 Jan 2025 16:01:46 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.42
+ 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 16:01:42 -0800 (PST)
+ Fri, 10 Jan 2025 16:01:45 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 24/30] x86: Move tables to use SZ macros
-Date: Fri, 10 Jan 2025 17:00:23 -0700
-Message-Id: <20250111000029.245022-25-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 25/30] x86: Align the SMBIOS table to a 4K boundary
+Date: Fri, 10 Jan 2025 17:00:24 -0700
+Message-Id: <20250111000029.245022-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250111000029.245022-1-sjg@chromium.org>
 References: <20250111000029.245022-1-sjg@chromium.org>
@@ -94,42 +94,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the tables to use linux/sizes rather than open-coped values.
+This isn't strictly needed, but with UPL we use the reserved-memory
+nodes to indicate where the SMBIOS table is. Tianocore requires 4KB
+alignment on these regions, so it is easier to adjust the alignment
+to match.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
 
 (no changes since v2)
 
 Changes in v2:
-- Add new patch to move x86 tables to use SZ macros
+- Use 4K instead of 4KB
 
- arch/x86/lib/tables.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ arch/x86/lib/tables.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/arch/x86/lib/tables.c b/arch/x86/lib/tables.c
-index 5fc7dc75377..9e4f21ae5ad 100644
+index 9e4f21ae5ad..44fe80c5224 100644
 --- a/arch/x86/lib/tables.c
 +++ b/arch/x86/lib/tables.c
-@@ -16,6 +16,7 @@
- #include <asm/tables.h>
- #include <asm/coreboot_tables.h>
- #include <linux/log2.h>
-+#include <linux/sizes.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -59,10 +60,10 @@ static struct table_info table_list[] = {
- 	 * that the calculation of gd->table_end works properly
- 	 */
- #ifdef CONFIG_GENERATE_ACPI_TABLE
--	{ "acpi", write_acpi_tables, BLOBLISTT_ACPI_TABLES, 0x10000, 0x1000},
-+	{ "acpi", write_acpi_tables, BLOBLISTT_ACPI_TABLES, SZ_64K, SZ_4K},
+@@ -63,7 +63,11 @@ static struct table_info table_list[] = {
+ 	{ "acpi", write_acpi_tables, BLOBLISTT_ACPI_TABLES, SZ_64K, SZ_4K},
  #endif
  #ifdef CONFIG_GENERATE_SMBIOS_TABLE
--	{ "smbios", write_smbios_table, BLOBLISTT_SMBIOS_TABLES, 0x1000, 0x100},
-+	{ "smbios", write_smbios_table, BLOBLISTT_SMBIOS_TABLES, SZ_4K, SZ_256},
+-	{ "smbios", write_smbios_table, BLOBLISTT_SMBIOS_TABLES, SZ_4K, SZ_256},
++	/*
++	 * align this to a 4K boundary, since UPL adds a reserved-memory node
++	 * for it
++	 */
++	{ "smbios", write_smbios_table, BLOBLISTT_SMBIOS_TABLES, SZ_4K, SZ_4K},
  #endif
  };
  
