@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF33EE77188
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BEEEE77188
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:04:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AD28807C4;
-	Sat, 11 Jan 2025 01:01:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6911806F4;
+	Sat, 11 Jan 2025 01:01:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WpZwywV6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jdAV/BOl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A492A807AE; Sat, 11 Jan 2025 01:01:52 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id B74E780786; Sat, 11 Jan 2025 01:01:56 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E792080050
- for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5EF7807BC
+ for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-844cd85f5ebso187876539f.3
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:49 -0800 (PST)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-844dfe4b136so67410039f.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736553708; x=1737158508; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736553711; x=1737158511; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rpGQfZegeQI1qwELLZgZj7L1SLX9Cv3Hs3PbJhfiNDw=;
- b=WpZwywV6umDRKXegrNLnO6d/Z+WegoHzMqCv2qMxA13Eivz8izeNmuDh+1WlPDY5+9
- EIsp2lN6mDittKzacmQQEPGtNAdrgTgowPJUw9mmV2o0ynG03+F0h3CnN+eUw396dqDN
- JaTDurYTBE734/H5pcdyun2wVRMdnN6v+u1fg=
+ bh=UhDaDPw97OFhuvkVemnAE0kR+gd2M32irzua9SKwE5M=;
+ b=jdAV/BOlel2nyBByvdSxXimdh8IwI8AjSD1SRCiGWG+LFBRVLhqLx0a63ZWYc7tGFP
+ E0qjolWys8ztpdrnTbLmYU924BV1Qj+D4+RCZkcRdff424/JgvQ1S0HEuRvrJONbMb3W
+ 3ZbUvTBB4VFjHtl7qjG7jKBvxU0aUmxouX+i0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736553708; x=1737158508;
+ d=1e100.net; s=20230601; t=1736553711; x=1737158511;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rpGQfZegeQI1qwELLZgZj7L1SLX9Cv3Hs3PbJhfiNDw=;
- b=g2TxZk6vrXnFtZ/UeXYZqiNirykgj9LvN4a9gxqrktfZDZMCrM6H/addpA9oO5Zt4w
- jS/xHO6d/cQbwVRqkyp/EvKipCZBlxmLb/gCGCSjDO1usSmmxW+uqVVotXdLb/iVvfQx
- N3mc235dzgcMOPDutZ5V4bt0/SsVq/LZzCjdwVtN/YDVj7X8aOdPWGFvnI+xbXx9HnjF
- l6v2pyTrZWm57ZokgUDnV9b6ubQKcF8q1opueAqk9acaxGumM6I386FOVGVvLPQTxpdp
- tMymbfi1s2UxmDo4spq3kb4SREBSjbOAfE1uu01vLBdo8P/GkOsvxVt+vDdfwpixokdY
- kTwA==
-X-Gm-Message-State: AOJu0Yy8j/yfKcewSmVuK/qZoosrRQn/2dcFKqFlMJyJneIqrYXuW741
- 5fFDeYBHx7id/Ad6o5M+/7P47UvHYoFagv+GanHs9w03gYnCsyNdvVacnhr+NrEa3gdWbIyeQB4
+ bh=UhDaDPw97OFhuvkVemnAE0kR+gd2M32irzua9SKwE5M=;
+ b=Mh35M1cnv7+j0QAWLpVbLKyG45LA8BWOUtPqRQugVYbh/z8QSrwNHSpFQLi383VAkM
+ R4+OFVRsIwSAgaAajXZP4vVxkjXe7xBkxSgokg3nCkzGkJD8Ko+VZMcAv7DXCC0fArxe
+ NGPheN0yyW7SW3Jl8RRItDYYEbprD5VGpueAd0+l5Vgki5zV58H9KOAsLNyD3HlJKf4T
+ 31D6m8iUAD3c+tiVGGRmU4eEeoPjghc7EpufGwIb6ufZef/mlQbtQKM0OZ9wmq8ILMtu
+ CvszF+wts2rL2lj61uH6f9I99B07L8fX4FDscn5OVPbKVov75mY6uWBPwD+vNAnj0Tlw
+ vO3w==
+X-Gm-Message-State: AOJu0Ywc2ERlqitVDh1LEkZBWoEEz2n/ITagIVUDtBZhKkfb15sTGz6m
+ SryuTIaOVHfKcrHWDfgv4X7V7anuTzFg/RSPSsxKHZ1cXdRSAmVTlKJLDbMb7UznfUTfVcrTVJw
  =
-X-Gm-Gg: ASbGncvsmljJ29tgLRaN5UHftGmpJZ+nTGEqQPaUb6BPk0jTbVI37+BabiIcigafaBM
- XoF4QY/z7DJKlvbqszA+hVKNv4eZGIH3pfrqc9jSxzaUbiefXz50N6TwSSFMuKN7rhqaUS+NT/9
- uBzy4trBeehVyItUyskiOl57h31EF/gzn5LoVgyCrXcvYXgZeTN92dPgU5Kk4UVlAC8zbq5aVXs
- /FAS9YLpDRDnG7g5iT6nL0WGX5Ut15Fz1lSO56J2tBJm+t4Mynv9O5TW7pcNYeJN5Drgu679s0X
- dtZnKTmUUbLdKnzj5Q==
-X-Google-Smtp-Source: AGHT+IGGE1trUfDx4ePxepyrhnaCmtsR7noX5E549suHd+VRzg2+CbRbJ68CPC8WxPy3y9hBBK3p4Q==
-X-Received: by 2002:a05:6e02:1488:b0:3a7:a2c6:e6d1 with SMTP id
- e9e14a558f8ab-3ce3a93a83emr104870075ab.16.1736553708218; 
- Fri, 10 Jan 2025 16:01:48 -0800 (PST)
+X-Gm-Gg: ASbGncsZoaKuU9qP/IB7SJQaoVTWipy0WL3kWeHj9yY6XBHHp35oJRT2UoLRIXbBTA5
+ zql1dumZyqSYefLoqbsfjM6QUDBXSOSjA/M+RvVeAtvOQlSOPS9SAeJg6tP7A5iDDEYzXFKJHDH
+ jPrSIWt1SPOBJ+XlRCWG7laRHe9FR89b+nPIRCbLRUd/FC2di1Vfvw+OOQnHEAUzKQpPySgorYK
+ nyh/W82U6cnjnaBGz/JFJum4FxxRW0G/Oo5x98DYwFPKGMqCGiXalNbzYX48MqpdhPKMLoewbMQ
+ foFqwZkF/x5s0now1w==
+X-Google-Smtp-Source: AGHT+IHZnODohQ1VxbDiTbx1yIpULR/BgzCegb09YikOiUyf7ACCrcHP0vp8kys1QX8EH4ZZ2w8KIQ==
+X-Received: by 2002:a05:6e02:1d0a:b0:3a7:a553:72f with SMTP id
+ e9e14a558f8ab-3ce3aa5b1ddmr97820945ab.18.1736553711018; 
+ Fri, 10 Jan 2025 16:01:51 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.46
+ 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 16:01:46 -0800 (PST)
+ Fri, 10 Jan 2025 16:01:49 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 26/30] efi_loader: Avoid mapping the ACPI tables twice
-Date: Fri, 10 Jan 2025 17:00:25 -0700
-Message-Id: <20250111000029.245022-27-sjg@chromium.org>
+Subject: [PATCH v3 27/30] x86: emulation: Enable bloblist
+Date: Fri, 10 Jan 2025 17:00:26 -0700
+Message-Id: <20250111000029.245022-28-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250111000029.245022-1-sjg@chromium.org>
 References: <20250111000029.245022-1-sjg@chromium.org>
@@ -94,85 +94,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The add_u_boot_and_runtime() function paints with a broad brush,
-considering all of the memory from the top of U-Boot stack to
-gd->ram_top as EFI_RUNTIME_SERVICES_CODE
-
-This is fine, but we need to make sure we don't add a separate entry for
-any ACPI tables in this region (which happens when bloblist is used for
-tables). Otherwise the memory map looks strange and we get a test
-failure on qemu-x86 (only) for the 'virtual address map' test.
-
-Good map:
-
-   Type             Start            End              Attributes
-   ================ ================ ================ ==========
-   CONVENTIONAL     0000000000000000-00000000000a0000 WB
-   RESERVED         00000000000a0000-00000000000f0000 WB
-   RUNTIME DATA     00000000000f0000-00000000000f2000 WB|RT
-   RESERVED         00000000000f2000-0000000000100000 WB
-   CONVENTIONAL     0000000000100000-0000000005cc7000 WB
-   BOOT DATA        0000000005cc7000-0000000005ccc000 WB
-   RUNTIME DATA     0000000005ccc000-0000000005ccd000 WB|RT
-   BOOT DATA        0000000005ccd000-0000000005cce000 WB
-   RUNTIME DATA     0000000005cce000-0000000005cf0000 WB|RT
-   BOOT DATA        0000000005cf0000-0000000006cf5000 WB
-   RESERVED         0000000006cf5000-0000000006cfa000 WB
-   ACPI RECLAIM MEM 0000000006cfa000-0000000006d1c000 WB
-   RESERVED         0000000006d1c000-0000000006f35000 WB
-   RUNTIME CODE     0000000006f35000-0000000006f37000 WB|RT
-   RESERVED         0000000006f37000-0000000008000000 WB
-   RESERVED         00000000e0000000-00000000f0000000 WB
-
-Bad map: (with BLOBLIST_TABLES but without this patch):
-
-   Type             Start            End              Attributes
-   ================ ================ ================ ==========
-   CONVENTIONAL     0000000000000000-00000000000a0000 WB
-   RESERVED         00000000000a0000-00000000000f0000 WB
-   ACPI RECLAIM MEM 00000000000f0000-00000000000f1000 WB
-   RESERVED         00000000000f1000-0000000000100000 WB
-   CONVENTIONAL     0000000000100000-0000000005ca5000 WB
-   BOOT DATA        0000000005ca5000-0000000005caa000 WB
-   RUNTIME DATA     0000000005caa000-0000000005cab000 WB|RT
-   BOOT DATA        0000000005cab000-0000000005cac000 WB
-   RUNTIME DATA     0000000005cac000-0000000005cce000 WB|RT
-   BOOT DATA        0000000005cce000-0000000006cd3000 WB
-   RUNTIME DATA     0000000006cd3000-0000000006cd5000 WB|RT
-   BOOT DATA        0000000006cd5000-0000000006cf4000 WB
-   RESERVED         0000000006cf4000-0000000006cf9000 WB
-   ACPI RECLAIM MEM 0000000006cf9000-0000000006ce6000 WB
+Add bloblist support so that tables can be generated and placed in a
+bloblist, then passed to a payload using UPL
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Add new patch to avoid mapping the ACPI tables twice
+(no changes since v2)
 
- lib/efi_loader/efi_acpi.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Changes in v2:
+- Add new patch to enable bloblist on x86
 
-diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-index 67bd7f8ca24..ff305a6b13e 100644
---- a/lib/efi_loader/efi_acpi.c
-+++ b/lib/efi_loader/efi_acpi.c
-@@ -25,6 +25,16 @@ efi_status_t efi_acpi_register(void)
- 	ulong addr, start, end;
- 	efi_status_t ret;
- 
-+	/*
-+	 * The bloblist is already marked reserved. For now, we don't bother
-+	 * marking it with EFI_ACPI_RECLAIM_MEMORY since we would need to cut a
-+	 * hole in the EFI_BOOT_SERVICES_CODE region added by
-+	 * add_u_boot_and_runtime(). At some point that function could create a
-+	 * more detailed map.
-+	 */
-+	if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
-+		return EFI_SUCCESS;
-+
- 	/* Mark space used for tables */
- 	start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
- 	end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
+ configs/qemu-x86_64_defconfig | 2 ++
+ configs/qemu-x86_defconfig    | 4 ++++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
+index 2771a4b9e19..792ba06c2b8 100644
+--- a/configs/qemu-x86_64_defconfig
++++ b/configs/qemu-x86_64_defconfig
+@@ -1,6 +1,7 @@
+ CONFIG_X86=y
+ CONFIG_TEXT_BASE=0x1110000
+ CONFIG_SYS_MALLOC_F_LEN=0x1000
++CONFIG_BLOBLIST_SIZE_RELOC=0x20000
+ CONFIG_NR_DRAM_BANKS=8
+ CONFIG_ENV_SIZE=0x40000
+ CONFIG_MAX_CPUS=2
+@@ -33,6 +34,7 @@ CONFIG_LOGF_FUNC=y
+ CONFIG_SPL_LOG=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_PCI_INIT_R=y
++CONFIG_BLOBLIST=y
+ CONFIG_BLOBLIST_FIXED=y
+ CONFIG_BLOBLIST_ADDR=0x10000
+ CONFIG_SPL_NO_BSS_LIMIT=y
+diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
+index 947d15cd727..0b0e10c795f 100644
+--- a/configs/qemu-x86_defconfig
++++ b/configs/qemu-x86_defconfig
+@@ -1,6 +1,7 @@
+ CONFIG_X86=y
+ CONFIG_TEXT_BASE=0xFFF00000
+ CONFIG_SYS_MALLOC_F_LEN=0x1000
++CONFIG_BLOBLIST_SIZE_RELOC=0x20000
+ CONFIG_NR_DRAM_BANKS=8
+ CONFIG_ENV_SIZE=0x40000
+ CONFIG_MAX_CPUS=2
+@@ -23,6 +24,9 @@ CONFIG_LOG=y
+ CONFIG_LOGF_FUNC=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_PCI_INIT_R=y
++CONFIG_BLOBLIST=y
++CONFIG_BLOBLIST_FIXED=y
++CONFIG_BLOBLIST_ADDR=0x10000
+ CONFIG_CMD_CPU=y
+ CONFIG_CMD_BOOTEFI_SELFTEST=y
+ CONFIG_CMD_NVEDIT_EFI=y
 -- 
 2.34.1
 
