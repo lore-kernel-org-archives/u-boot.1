@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A09EE77188
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:07:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 204F0E77188
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:12:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FE498036B;
-	Sat, 11 Jan 2025 01:07:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AC0C3800D0;
+	Sat, 11 Jan 2025 01:12:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="aiLimcgK";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jw1yMOy4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEFDA805E9; Sat, 11 Jan 2025 01:06:58 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 2742D801B0; Sat, 11 Jan 2025 01:12:54 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C525A800D0
- for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:06:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10D2F80050
+ for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:12:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1736554012; x=1737158812; i=xypron.glpk@gmx.de;
- bh=hPJ2eVtOgK99tOuUou8TrUE6qBPiGXjcmfmRqeHPKIs=;
+ s=s31663417; t=1736554367; x=1737159167; i=xypron.glpk@gmx.de;
+ bh=6xhmYgZHip18Y1wDqvcRZ58mizDxjLE0V9sPjttl4+A=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=aiLimcgKVsnx18YtRC+9KDJfH3nYXacOwfBKVYhriNSig++ybwX7v2zjW4pWoHK0
- xf56T6TEkznlERL2TtQDXYe7VwhNCnB1ewU5vFoBalkPTLuqvyVZFH/oG31/Wxdb7
- UH4Je8nyGQh3YPWbVk06sqc29DwAN+WnZ2uBDGWiicHzV5jjcXpe4YnsKuiG9O33k
- rw5nTDQ8bDBbc+jf5o0p/DhUzvpgcjshZSUOvb1wXd499uymKIm3KF4PXcF3SkrZa
- 6fpwjtp1o8McuSi0Ml9XXtQsAxf9qkDjZjTw3Qs1tdWSSBph/Mm+klIcWL/duWN+L
- O3h1tZI7lHQZdr16CA==
+ b=jw1yMOy43rJIpx3Rc1rioiH5im9d8FjZAx/sSx4GQ5vHua02uVo/skJmmigsstyS
+ jm7pT6SF1F4INMQwOcI/DS+8BVDjG5VUoo1S7AxrPSH1emkcaZuUYhfMxVeLJvXqW
+ UiydBHpzIlbgaEGxqHf2uVBRt8tneRPxMTREAw5AuLGQRHVaaNusPJUlvNdE+Ngn4
+ xociLnsvSeQRHgGfQNgFFCOA0SIiND6erlxVUwIojTQcvAGTgqA61kNVNfGaovxWJ
+ aOy0xTKtqYSR0lTdB6kG0tQ5CrqZsd0AHFFBDMGgK1bm56+yP5tws6xFEgWbV7V/t
+ dKyl9rxJ3ya6zRYCFw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MKKUv-1treGh2WK7-00YaWL; Sat, 11
- Jan 2025 01:06:52 +0100
-Date: Sat, 11 Jan 2025 01:06:50 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MkHMZ-1t7lbC2csD-00gek7; Sat, 11
+ Jan 2025 01:12:47 +0100
+Date: Sat, 11 Jan 2025 01:12:45 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
 CC: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Simon Glass <sjg@chromium.org>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, Levi Yun <yeoreum.yun@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Levi Yun <yeoreum.yun@arm.com>, 
  Evgeny Bachinin <EABachinin@salutedevices.com>
-Subject: Re: [PATCH v4 2/3] tcg2: decouple eventlog size from efi
+Subject: Re: [PATCH v4 3/3] tpm: get tpm event log from bloblist
 User-Agent: Thunderbird for Android
-In-Reply-To: <20250110215640.892539-2-raymond.mao@linaro.org>
+In-Reply-To: <20250110215640.892539-3-raymond.mao@linaro.org>
 References: <20250110215640.892539-1-raymond.mao@linaro.org>
- <20250110215640.892539-2-raymond.mao@linaro.org>
-Message-ID: <E578B5D7-5692-4989-B222-D11ABBFD8478@gmx.de>
+ <20250110215640.892539-3-raymond.mao@linaro.org>
+Message-ID: <C7D7CE8A-CA02-4093-BA34-DC990717D32C@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:RMy6Au34uuZ0VHQsXvu0DH5fbfyTQ1G3dcs/k4Q3FtwLsw0SFnf
- kG3ZOza0docvPA6XADUAK9rDwLLd1nwMg6DhHrBiPjekrQgNrzWXSadSeY2k47pvdr484uF
- KHzti5lUephpy7YK7kVeSvsVGn3ooMH+jHXsUwn45Z/rSfR11oYLViqLKafd/NmdAfdlc4+
- RHHGg5MDjMuX2e3QclfCw==
-UI-OutboundReport: notjunk:1;M01:P0:nJEv2Awx41k=;0bn6doHtqpM3wfRlrbsBDh2iasn
- qn8Owzey4H6mzZU2g2fTcs3umuBUsO7s/X/NL9PbAsxHLYcCzplwXbPMciaPuQpLxdhaX+W7o
- CtNKt201kelEmmmMTF4uB0MjOMcdyynQgdZOE8AOkrlvdJMwA6AV4606dKSvBYM3HKeWdEqag
- 1AKmqEWJyjrN9NI8CkNjLWOvfqcnoKD/8Y14fAyZyEtx6tlkO8S0lcHKMKXPnuPvmGWn8YEya
- fteqhtqkvklGSc9+4ahn2ga1D7fN0nEyQ2ssyyPEy69Z+5Oh4Jch1orOal53gNN3xbEsVMt6j
- /KDrgKLjLa5pzMnKPHMGJOr2Xcs4IrxaKvCj4+PSYxalseUHKWj1+c36zCTGmI6AbD87VQ0Hx
- jVdValUb08q23Y558z4C6JpZnjd2EvPpc1pACqjrPBEG6K2eCyc6MVaZKSIAxblz/OrJzCKaO
- SKo3qEMYjTsRpi49Kx+R1jDnOm9whDOpbFm//vxzg9dm3/TujBSswiSReFS5uTGWtpzh3tD/k
- BoK4uTdFPmNiwFAHmXawJp4gsvZ8VLGYWq8Zosq32P4eP1GV1lPVJJlszqIzBcItFAMdRYfEe
- OJFE7eD7Zgew51mUR/VU2E8PiTsZptuU8//oxoCrYppJuTQ6GksSjSQ/5lnDHhMoz5ChGgFQk
- uwtOtqL1FTltrGkp5e2+3aDeW7UWVXFxRj0xmW3hkIe6CnaXR82EwSaqMlEuHGkIdsTvI+3cr
- O45QwmeZQcWJk5vb0as1a4VhyBfHqIKaKVQGvEIEVHEnLwN4yPCQxnhuSvBXSNLYPHou/G4cJ
- O7C/5MKbPis2MsDZJwOT+bNCofgK5BOzEGnQwuiwasX1YyBcX5il5wWhVyxrP3JIb4o9yW3vu
- k0HZBg5QPcO0Yxh5jt6r3ZGtmIQ+zJAOMEUahN5sJAWuJf1xGPjzogipDRXgATFf9fb2vy/cO
- ApzHe5vk7g8DLqIW/X+LOlnhEDeR/n9b/ETlSnd7+jXmC3HbcJca0VGnBYYJG5BBY8Q2A00oZ
- BVf/+dKV/AsXtVIA8hq51uJWSNwQ7nwUHxgwQVsKmmQVhDYsudQ2a1XNMqEHE3SePKiDz/TOd
- 26vLvv3lW032uc+DCMnqDS5C5vzuT+
+X-Provags-ID: V03:K1:15CtRBe9omTGArq1ESf3H+vNaywYXbTgk0ClDhhjZVOtHPmOku4
+ 5lfJedk4lInFvZiihoDpRRR1lBlCnih2ZaqLs02MNdme36hZpgtLb325G3ii4qWkauW276r
+ ApqIh1YrZ0iSksmFuSSd1iDacgactZvhSygkcq5Vblht/oEjF3fFMO7SDHQsFg31zwyc4Sg
+ ntXcWsU/QoQbvQhUd68vA==
+UI-OutboundReport: notjunk:1;M01:P0:Vp/n68PuYr8=;Fr/DK98bDMTkZu9TMcViB8KrDCG
+ 5Trb4lWMEVsAM7wcokCs1fBBW4giXZ8flzVj3kkUSeXI6VyLyXM7EAB8e1Wh5JJFo92KHS7Ci
+ hG/KS1asa8jBBseiddf/P2Y2qVGJDwXVn36TM5ct7tGiQJsmpuOaMwtPQMa/kVc15GofFcY0P
+ 6tC9bUQBkOCeQGcjgPqsbF0hySbpvsCvnnTYLBhmdVPVaizw1FIZuRG2XSqNG91VgImNw6xD8
+ /scHyLLRivi8yPrLc0U+670aCR9Q2u90HY5T4cDu/ZNqZH9viWRj6fhpRnAkh5UP59OpX/BnI
+ k1rbCJJcNtcG9FV15DQJ2R76B6sNEp0gxskekc1gXzifBKCCzn8EI895oT55plh3NCZbyBrbb
+ Q7hkLYv4n/usO2r5Ag9Ap7tfzS095oKlk8lPLoxkjTqNW87VdzL4OydC2gZnx/duTQBLrR9pU
+ ypbKd25IxkaJHuqTr/qFmFSGxluHCUqxQvHUVbXNSDd/XRTrZMH4j7DFrV2d6gyWsxDOvSZ93
+ U+BU8GC3kfIngtjsjDYUiX64edjXEGemO5sBaQyUB9kcScFgI+RbbxVeAH5U6czcwCELIHsN3
+ zntuTCHAWm0d9iuHbdHn/wnKvjdeRAsyvcYyc84vQVBhcyCC/FjCjf/iixjAMcRVnof2L8tSX
+ IBc3jfoRO6OGWenr+30GBWXWzvovAV0mYr5vZDJjE3shHOIcUjSd4C0afjWCgRJewJkn8EbN6
+ uSESflb8ndSNOj+KUvHMVmM30iVhg8yucw7pkipGJW9rUoquDbouA8n60xNBo2vTBrGtQJ1X1
+ s7nCmu1KGg5voU1KIiQOPO/x/aVny5v27MKYx7iAQAyi/TM1HRQPd2J9+GaBRZAeiV5YplW/m
+ ISgI6Yfk3CrKbwlGrqxE0FW+ei2kp1sxOpPKTc9yG5FJX2g7BVj1hGJg7I4MzsQsuwuHstFNC
+ YrFAsQQUjhHkqOxOgPIL6YesCT8FSvOT7dW8PpZkOvrPThCDsdupCPkLUZuhpHwp0YmfKJ6Jd
+ 9IoFYhDBKR7+yBGpbvVm3460bDwedhMrsC0ZTvGAGcmuWluMOZXl93d6WLMMUolkiRXeChtEm
+ sR4zbAQ4RDoecthIbFh1rKw8hT6ub3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,59 +98,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 10=2E Januar 2025 22:56:34 MEZ schrieb Raymond Mao <raymond=2Emao@linaro=
+Am 10=2E Januar 2025 22:56:35 MEZ schrieb Raymond Mao <raymond=2Emao@linaro=
 =2Eorg>:
->Move default eventlog size from efi to tpm for using in both
->modules=2E
+>Get tpm event log from bloblist instead of FDT when bloblist is
+>enabled and valid from previous boot stage=2E
+>
+>As a fallback, when no event log from previous stage is observed
+>and no user buffer is passed, malloc a default buffer to initialize
+>the event log=2E
 >
 >Signed-off-by: Raymond Mao <raymond=2Emao@linaro=2Eorg>
 >---
+>Changes in v2
+>- Remove patch dependency=2E
+>- Remove the fallback to FDT when BLOBLIST is selected=2E
+>Changes in v3
+>- Malloc an 8KB buffer when user eventlog buffer does not exist=2E
 >Changes in v4
->- Initial patch=2E
+>- Replace the default eventlog size with TPM2_EVENT_LOG_SIZE=2E
 >
-> include/efi_tcg2=2Eh | 2 --
-> include/tpm_tcg2=2Eh | 2 ++
-> 2 files changed, 2 insertions(+), 2 deletions(-)
+> lib/tpm_tcg2=2Ec | 55 +++++++++++++++++++++++++++++++++-----------------
+> 1 file changed, 36 insertions(+), 19 deletions(-)
 >
->diff --git a/include/efi_tcg2=2Eh b/include/efi_tcg2=2Eh
->index 8dfb1bc952=2E=2E7ed8880991 100644
->--- a/include/efi_tcg2=2Eh
->+++ b/include/efi_tcg2=2Eh
->@@ -28,8 +28,6 @@
-> #define EFI_TCG2_MAX_PCR_INDEX 23
-> #define EFI_TCG2_FINAL_EVENTS_TABLE_VERSION 1
+>diff --git a/lib/tpm_tcg2=2Ec b/lib/tpm_tcg2=2Ec
+>index 7f868cc883=2E=2E685699688b 100644
+>--- a/lib/tpm_tcg2=2Ec
+>+++ b/lib/tpm_tcg2=2Ec
+>@@ -5,6 +5,7 @@
 >=20
->-#define TPM2_EVENT_LOG_SIZE CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE
->-
-> typedef u32 efi_tcg_event_log_bitmap;
-> typedef u32 efi_tcg_event_log_format;
-> typedef u32 efi_tcg_event_algorithm_bitmap;
->diff --git a/include/tpm_tcg2=2Eh b/include/tpm_tcg2=2Eh
->index 6519004cc4=2E=2E25a31daf65 100644
->--- a/include/tpm_tcg2=2Eh
->+++ b/include/tpm_tcg2=2Eh
->@@ -65,6 +65,8 @@
-> #define EFI_DTB_EVENT_STRING \
-> 	"DTB DATA"
+> #include <dm=2Eh>
+> #include <dm/of_access=2Eh>
+>+#include <malloc=2Eh>
+> #include <tpm_api=2Eh>
+> #include <tpm-common=2Eh>
+> #include <tpm-v2=2Eh>
+>@@ -19,6 +20,7 @@
+> #include <linux/unaligned/generic=2Eh>
+> #include <linux/unaligned/le_byteshift=2Eh>
+> #include "tpm-utils=2Eh"
+>+#include <bloblist=2Eh>
 >=20
+> int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *acti=
+ve_pcr,
+> 		      u32 *pcr_banks)
+>@@ -607,15 +609,24 @@ int tcg2_log_prepare_buffer(struct udevice *dev, st=
+ruct tcg2_event_log *elog,
+> 		elog->found =3D log=2Efound;
+> 	}
+>=20
+>+	if (elog->found)
+>+		return 0;
+>+
+> 	/*
+>-	 * Initialize the log buffer if no log was discovered and the buffer is
+>-	 * valid=2E User's can pass in their own buffer as a fallback if no
+>-	 * memory region is found=2E
+>+	 * Initialize the log buffer if no log was discovered=2E
+>+	 * User can pass in their own buffer as a fallback if no memory region
+>+	 * is found, else malloc a buffer if it does not exist=2E
+> 	 */
+>-	if (!elog->found && elog->log_size)
+>-		rc =3D tcg2_log_init(dev, elog);
+>+	if (!elog->log_size) {
+>+		elog->log =3D malloc(TPM2_EVENT_LOG_SIZE);
+>+		if (!elog->log)
+>+			return -ENOMEM;
+>+
+>+		memset(elog->log, 0, TPM2_EVENT_LOG_SIZE);
+>+		elog->log_size =3D TPM2_EVENT_LOG_SIZE;
+>+	}
+>=20
+>-	return rc;
+>+	return tcg2_log_init(dev, elog);
+> }
+>=20
+> int tcg2_measurement_init(struct udevice **dev, struct tcg2_event_log *e=
+log,
+>@@ -668,10 +679,19 @@ __weak int tcg2_platform_get_log(struct udevice *de=
+v, void **addr, u32 *size)
+> 	const __be32 *size_prop;
+> 	int asize;
+> 	int ssize;
+>+	struct ofnode_phandle_args args;
+>+	phys_addr_t a;
+>+	fdt_size_t s;
+>=20
+> 	*addr =3D NULL;
+> 	*size =3D 0;
+>=20
+>+	*addr =3D bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
+>+	if (*addr && *size)
+>+		return 0;
+>+	else if (CONFIG_IS_ENABLED(BLOBLIST))
+>+		return -ENODEV;
+>+
 
-Please, provide Sphinx style documentation for defines=2E
-
->+#define TPM2_EVENT_LOG_SIZE CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE
-
-Why would we need such a define at all? Can't we directly use the CONFIG v=
-alue?
-
-Why should the CONFIG value remain in lib/efi_loader/Kconfig? I would not =
-expect the log size in the non-EFI case to depend on the UEFI subsystem=2E
+You are querying the CONFIG value=2E Why call function bloblist_get_blob i=
+f blobs are not supported? Please, simply skip in this case=2E
 
 Best regards
 
 Heinrich
 
+> 	addr_prop =3D dev_read_prop(dev, "tpm_event_log_addr", &asize);
+> 	if (!addr_prop)
+> 		addr_prop =3D dev_read_prop(dev, "linux,sml-base", &asize);
+>@@ -686,22 +706,19 @@ __weak int tcg2_platform_get_log(struct udevice *de=
+v, void **addr, u32 *size)
+>=20
+> 		*addr =3D map_physmem(a, s, MAP_NOCACHE);
+> 		*size =3D (u32)s;
+>-	} else {
+>-		struct ofnode_phandle_args args;
+>-		phys_addr_t a;
+>-		fdt_size_t s;
+>=20
+>-		if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
+>-					       0, &args))
+>-			return -ENODEV;
+>+		return 0;
+>+	}
+>=20
+>-		a =3D ofnode_get_addr_size(args=2Enode, "reg", &s);
+>-		if (a =3D=3D FDT_ADDR_T_NONE)
+>-			return -ENOMEM;
+>+	if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args)=
+)
+>+		return -ENODEV;
+>=20
+>-		*addr =3D map_physmem(a, s, MAP_NOCACHE);
+>-		*size =3D (u32)s;
+>-	}
+>+	a =3D ofnode_get_addr_size(args=2Enode, "reg", &s);
+>+	if (a =3D=3D FDT_ADDR_T_NONE)
+>+		return -ENOMEM;
 >+
-> /**
->  *  struct TCG_EfiSpecIdEventAlgorithmSize - hashing algorithm informati=
-on
->  *
+>+	*addr =3D map_physmem(a, s, MAP_NOCACHE);
+>+	*size =3D (u32)s;
+>=20
+> 	return 0;
+> }
 
