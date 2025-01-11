@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA2F4E77188
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:04:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF33EE77188
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:04:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF9B880763;
-	Sat, 11 Jan 2025 01:01:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4AD28807C4;
+	Sat, 11 Jan 2025 01:01:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ocYcD4Rz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WpZwywV6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F6A9806D6; Sat, 11 Jan 2025 01:01:50 +0100 (CET)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id A492A807AE; Sat, 11 Jan 2025 01:01:52 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC37980763
- for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E792080050
+ for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-844dfe4b136so67407439f.3
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:47 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-844cd85f5ebso187876539f.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736553706; x=1737158506; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736553708; x=1737158508; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/oVBX9bzTw0hUsUEwfSab0KuEBnmq4dvXBe3OkCVGTQ=;
- b=ocYcD4RzmzZkkPE2XT3v9CBXlrbBBzL+3FtaNhUvjpP8mZjOCzgeJFUeELKmnbeG9W
- 2jSijAE/1hyk5jq91rorV9RVuL6EAm/dfzI9Okr0ElzoLDtzNiedGfzRl5iypXOKWsk2
- tLglRW0dKtkDMBVY3MW6YjDUOYysY1LPuAXxY=
+ bh=rpGQfZegeQI1qwELLZgZj7L1SLX9Cv3Hs3PbJhfiNDw=;
+ b=WpZwywV6umDRKXegrNLnO6d/Z+WegoHzMqCv2qMxA13Eivz8izeNmuDh+1WlPDY5+9
+ EIsp2lN6mDittKzacmQQEPGtNAdrgTgowPJUw9mmV2o0ynG03+F0h3CnN+eUw396dqDN
+ JaTDurYTBE734/H5pcdyun2wVRMdnN6v+u1fg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736553706; x=1737158506;
+ d=1e100.net; s=20230601; t=1736553708; x=1737158508;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/oVBX9bzTw0hUsUEwfSab0KuEBnmq4dvXBe3OkCVGTQ=;
- b=T1HHxInnYdkiLBrjy4kpBn0K4jvmBYmp+fEu3Jsh2AhsWk7+8Q6hxfbQkX1lq+LERw
- n3HS8fELlvMMxwfWrCneDtKT2846jcsubfAjHIvI3ol4AsT/qtCBfHJXxtJ/7c+6tX/j
- Noe1GmAxrHeY7ebVRolzZSPi44ee69mfeuw3I41wvluPvXEuszNZCN8MDiEarYwgfM43
- LAp7Lx8epUEpXrBTn1xou1g3xhNx+qk6ysYDMAoCbZ/cWwcIy5q3QnbDPPayyw6+BufE
- c64c+aowIpyzbabBgiwvQ1meEj6HqodXEMqHhN7kV+xlHNunx4JaICYWLh2RRXi3P1oj
- RXSw==
-X-Gm-Message-State: AOJu0YwJE43rVn9bKC9eDvSraSTBG71eSBu6wfdjE1w/hNhtKdn5vXEY
- pPPN1E3wrBr9oJyRf4LO745OYqpnBGvv6GUilOR8LyEn7dSZbjKqf7NI6iqmls2M+4XYZOaeb6A
+ bh=rpGQfZegeQI1qwELLZgZj7L1SLX9Cv3Hs3PbJhfiNDw=;
+ b=g2TxZk6vrXnFtZ/UeXYZqiNirykgj9LvN4a9gxqrktfZDZMCrM6H/addpA9oO5Zt4w
+ jS/xHO6d/cQbwVRqkyp/EvKipCZBlxmLb/gCGCSjDO1usSmmxW+uqVVotXdLb/iVvfQx
+ N3mc235dzgcMOPDutZ5V4bt0/SsVq/LZzCjdwVtN/YDVj7X8aOdPWGFvnI+xbXx9HnjF
+ l6v2pyTrZWm57ZokgUDnV9b6ubQKcF8q1opueAqk9acaxGumM6I386FOVGVvLPQTxpdp
+ tMymbfi1s2UxmDo4spq3kb4SREBSjbOAfE1uu01vLBdo8P/GkOsvxVt+vDdfwpixokdY
+ kTwA==
+X-Gm-Message-State: AOJu0Yy8j/yfKcewSmVuK/qZoosrRQn/2dcFKqFlMJyJneIqrYXuW741
+ 5fFDeYBHx7id/Ad6o5M+/7P47UvHYoFagv+GanHs9w03gYnCsyNdvVacnhr+NrEa3gdWbIyeQB4
  =
-X-Gm-Gg: ASbGncsDm7bDVA6H4Q6/5x3LDdGhUqqWbuqrG02WqWnwaBiN1BhtfzKPodkXy8iscKy
- 9h6PZerDGXXpShnZSFrLWqZxddM6nqomdl1G49dSQXMrvhh0EH2zeobciWwuieW9B8eQMrVElNH
- 5DfmMkKeupD+ak8P8vSWKkye0F5DLYOEK25hxvMPl9yCLmaJSZY2GH3ex4BVOLFYJ/n7k2X2UaV
- c1DTZumk+CwI9R55hMoA8m0ic+w9KjTaGkUl1Z5J6n5KA4jWQ/5XmhEKdXsJQLs0mRQouo37ayu
- nqCuGT/L1wXRM+C3ag==
-X-Google-Smtp-Source: AGHT+IFVhVG6PyTePFilj27BcJqmxDzuftDjTPcwBxbGwHWOPd37pJe+U8MAoEJmmALIzDpBn7AKww==
-X-Received: by 2002:a05:6602:3a04:b0:847:22a7:2412 with SMTP id
- ca18e2360f4ac-84ce00d41f0mr1157617539f.8.1736553706119; 
- Fri, 10 Jan 2025 16:01:46 -0800 (PST)
+X-Gm-Gg: ASbGncvsmljJ29tgLRaN5UHftGmpJZ+nTGEqQPaUb6BPk0jTbVI37+BabiIcigafaBM
+ XoF4QY/z7DJKlvbqszA+hVKNv4eZGIH3pfrqc9jSxzaUbiefXz50N6TwSSFMuKN7rhqaUS+NT/9
+ uBzy4trBeehVyItUyskiOl57h31EF/gzn5LoVgyCrXcvYXgZeTN92dPgU5Kk4UVlAC8zbq5aVXs
+ /FAS9YLpDRDnG7g5iT6nL0WGX5Ut15Fz1lSO56J2tBJm+t4Mynv9O5TW7pcNYeJN5Drgu679s0X
+ dtZnKTmUUbLdKnzj5Q==
+X-Google-Smtp-Source: AGHT+IGGE1trUfDx4ePxepyrhnaCmtsR7noX5E549suHd+VRzg2+CbRbJ68CPC8WxPy3y9hBBK3p4Q==
+X-Received: by 2002:a05:6e02:1488:b0:3a7:a2c6:e6d1 with SMTP id
+ e9e14a558f8ab-3ce3a93a83emr104870075ab.16.1736553708218; 
+ Fri, 10 Jan 2025 16:01:48 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.44
+ 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 16:01:45 -0800 (PST)
+ Fri, 10 Jan 2025 16:01:46 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 25/30] x86: Align the SMBIOS table to a 4K boundary
-Date: Fri, 10 Jan 2025 17:00:24 -0700
-Message-Id: <20250111000029.245022-26-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 26/30] efi_loader: Avoid mapping the ACPI tables twice
+Date: Fri, 10 Jan 2025 17:00:25 -0700
+Message-Id: <20250111000029.245022-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250111000029.245022-1-sjg@chromium.org>
 References: <20250111000029.245022-1-sjg@chromium.org>
@@ -94,39 +94,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This isn't strictly needed, but with UPL we use the reserved-memory
-nodes to indicate where the SMBIOS table is. Tianocore requires 4KB
-alignment on these regions, so it is easier to adjust the alignment
-to match.
+The add_u_boot_and_runtime() function paints with a broad brush,
+considering all of the memory from the top of U-Boot stack to
+gd->ram_top as EFI_RUNTIME_SERVICES_CODE
+
+This is fine, but we need to make sure we don't add a separate entry for
+any ACPI tables in this region (which happens when bloblist is used for
+tables). Otherwise the memory map looks strange and we get a test
+failure on qemu-x86 (only) for the 'virtual address map' test.
+
+Good map:
+
+   Type             Start            End              Attributes
+   ================ ================ ================ ==========
+   CONVENTIONAL     0000000000000000-00000000000a0000 WB
+   RESERVED         00000000000a0000-00000000000f0000 WB
+   RUNTIME DATA     00000000000f0000-00000000000f2000 WB|RT
+   RESERVED         00000000000f2000-0000000000100000 WB
+   CONVENTIONAL     0000000000100000-0000000005cc7000 WB
+   BOOT DATA        0000000005cc7000-0000000005ccc000 WB
+   RUNTIME DATA     0000000005ccc000-0000000005ccd000 WB|RT
+   BOOT DATA        0000000005ccd000-0000000005cce000 WB
+   RUNTIME DATA     0000000005cce000-0000000005cf0000 WB|RT
+   BOOT DATA        0000000005cf0000-0000000006cf5000 WB
+   RESERVED         0000000006cf5000-0000000006cfa000 WB
+   ACPI RECLAIM MEM 0000000006cfa000-0000000006d1c000 WB
+   RESERVED         0000000006d1c000-0000000006f35000 WB
+   RUNTIME CODE     0000000006f35000-0000000006f37000 WB|RT
+   RESERVED         0000000006f37000-0000000008000000 WB
+   RESERVED         00000000e0000000-00000000f0000000 WB
+
+Bad map: (with BLOBLIST_TABLES but without this patch):
+
+   Type             Start            End              Attributes
+   ================ ================ ================ ==========
+   CONVENTIONAL     0000000000000000-00000000000a0000 WB
+   RESERVED         00000000000a0000-00000000000f0000 WB
+   ACPI RECLAIM MEM 00000000000f0000-00000000000f1000 WB
+   RESERVED         00000000000f1000-0000000000100000 WB
+   CONVENTIONAL     0000000000100000-0000000005ca5000 WB
+   BOOT DATA        0000000005ca5000-0000000005caa000 WB
+   RUNTIME DATA     0000000005caa000-0000000005cab000 WB|RT
+   BOOT DATA        0000000005cab000-0000000005cac000 WB
+   RUNTIME DATA     0000000005cac000-0000000005cce000 WB|RT
+   BOOT DATA        0000000005cce000-0000000006cd3000 WB
+   RUNTIME DATA     0000000006cd3000-0000000006cd5000 WB|RT
+   BOOT DATA        0000000006cd5000-0000000006cf4000 WB
+   RESERVED         0000000006cf4000-0000000006cf9000 WB
+   ACPI RECLAIM MEM 0000000006cf9000-0000000006ce6000 WB
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Add new patch to avoid mapping the ACPI tables twice
 
-Changes in v2:
-- Use 4K instead of 4KB
+ lib/efi_loader/efi_acpi.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
- arch/x86/lib/tables.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/arch/x86/lib/tables.c b/arch/x86/lib/tables.c
-index 9e4f21ae5ad..44fe80c5224 100644
---- a/arch/x86/lib/tables.c
-+++ b/arch/x86/lib/tables.c
-@@ -63,7 +63,11 @@ static struct table_info table_list[] = {
- 	{ "acpi", write_acpi_tables, BLOBLISTT_ACPI_TABLES, SZ_64K, SZ_4K},
- #endif
- #ifdef CONFIG_GENERATE_SMBIOS_TABLE
--	{ "smbios", write_smbios_table, BLOBLISTT_SMBIOS_TABLES, SZ_4K, SZ_256},
-+	/*
-+	 * align this to a 4K boundary, since UPL adds a reserved-memory node
-+	 * for it
-+	 */
-+	{ "smbios", write_smbios_table, BLOBLISTT_SMBIOS_TABLES, SZ_4K, SZ_4K},
- #endif
- };
+diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+index 67bd7f8ca24..ff305a6b13e 100644
+--- a/lib/efi_loader/efi_acpi.c
++++ b/lib/efi_loader/efi_acpi.c
+@@ -25,6 +25,16 @@ efi_status_t efi_acpi_register(void)
+ 	ulong addr, start, end;
+ 	efi_status_t ret;
  
++	/*
++	 * The bloblist is already marked reserved. For now, we don't bother
++	 * marking it with EFI_ACPI_RECLAIM_MEMORY since we would need to cut a
++	 * hole in the EFI_BOOT_SERVICES_CODE region added by
++	 * add_u_boot_and_runtime(). At some point that function could create a
++	 * more detailed map.
++	 */
++	if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
++		return EFI_SUCCESS;
++
+ 	/* Mark space used for tables */
+ 	start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
+ 	end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
 -- 
 2.34.1
 
