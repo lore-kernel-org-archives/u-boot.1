@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00CE2E7719C
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:57:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9F44E77188
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:57:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 121DE801B0;
-	Sat, 11 Jan 2025 01:57:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 678D380619;
+	Sat, 11 Jan 2025 01:57:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="orY5ZNse";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QuqI8Cws";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 590F0801CE; Sat, 11 Jan 2025 01:57:17 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 2078680050; Sat, 11 Jan 2025 01:57:26 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2877A80050
- for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:57:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06771801CE
+ for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:57:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-4679ea3b13bso20918211cf.1
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:57:15 -0800 (PST)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b700c13edaso146319485a.3
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:57:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736557034; x=1737161834; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736557042; x=1737161842; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pUAOzUmXJ766JpAvfzXZ77yRZNU+clas67M3L+fKahQ=;
- b=orY5ZNsecJOMhnn88tfWDi8LdFI3QYmkDb8QAPf+zDMsArpz9nAbMhKVoU9yZ7g/kx
- DlxYZAVKkXVUEhS00hA3Rw2CqfJgd4XUOLNVRRKjo71+v/MqYv2YFvcgjUTceCM+GR3c
- bYjMFmZf1xiFZYcM6QPvb4UDS7cwYlMnKLq2c=
+ bh=9jooCcwmxSv28DAnaByevaFyNyu2C/kNbvxust9TV7E=;
+ b=QuqI8CwsYF/4Hx6p7fvKwhAjxSAqC16p5KbUatlmanspYDMqS1qH9fMbc6Y6pAO4Tw
+ pZOH49LE9hY2AYHsAlk9kj1g0PK0oEFjzCzpq3CgUen6OaY3ohUZR6WA2VZSo41qlt60
+ +V/PAy/pKaSfYdrfqwu9ig4R/U6YwwWE19lnM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736557034; x=1737161834;
+ d=1e100.net; s=20230601; t=1736557042; x=1737161842;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pUAOzUmXJ766JpAvfzXZ77yRZNU+clas67M3L+fKahQ=;
- b=ZyyruN1GEXN87SSBTtvFTFt50yIoIsjtKI0fSSg1LpdymXFWUiIvifRFaAsRUw6Dvw
- AgWu0vpFdl8ij9eeos7c6YpXJl2LuRLX4eO0e3Oy5rYwGI96JIAePSAVZ0LOVHegaLSE
- Xrus0tz//qbzaUSx8y09ZpvGKArmQ6SyeTrxm9fszK8fBVXZM3T0zY5Z4l34nHGQqrpo
- DNpizqW+XURJ3+mkj01tpPQAHxwN/Pic884kOrNnjEJxCS9fTgBSxy8oyMb3qr8myXcE
- 0LPVjTNBleTE278tTsTVZg9tRGHSE7yZJL93FlrPednX2rmxG6Im07+Q8UHkMHtW3OS8
- cJSg==
-X-Gm-Message-State: AOJu0Yzfp+VFj6ndcvsucAtbga78YRPW3LUEu9qZX1FC0t86LQQ0yTiy
- +GsqyVEQSNZ1p0KyQr6mgyCIRAn4hb2xamnvkvZvocAIsKFfJOJ6lMuG9RL7OmxfRj7Lbr+B4xe
- 8
-X-Gm-Gg: ASbGnctTRzKxQzokYvZBKdCQ4jKOLUprNMITI7z0fMGEFgyNRC7I/4myZZFgG1yk9BO
- wrFsIehGouGHqPfzVcXZf2m4jXQ8Us9I7gII1eZPUO+1po+/7xB8v/4krzetDlxpgll1zy/3oKI
- v0Sg4xVbjibdn2hqmf97kG+AbomgBAA1LbkXsMNa5D2zFjBtvJf62uvtnyf4G+dINhotrnI5SvD
- IHQnxa6nzRPtNdr1YUGsGw+h/jQSew6JeA81bcRN8ldqri0aQxQCGM=
-X-Google-Smtp-Source: AGHT+IEnZT7pZvfTln7/v4Dbu2HwhRdfBB+bNzCotfdl6WmzU8PdmldsZcdYycYALOc9HezdUiwvfw==
-X-Received: by 2002:ac8:5fd1:0:b0:466:8eb7:59c5 with SMTP id
- d75a77b69052e-46c7108c0e3mr217562551cf.34.1736557034019; 
- Fri, 10 Jan 2025 16:57:14 -0800 (PST)
+ bh=9jooCcwmxSv28DAnaByevaFyNyu2C/kNbvxust9TV7E=;
+ b=hUrUNdT++LE27nlFHzcp4p+aHuyxy4n6g8BY/4Rnu/ybhbMyteTjOcwNCthcGsRYA4
+ rOdYSRG/ZT4MC0AMDvmHOo0Mgstc/7+cs9miMsJB/o8Ih/5MFtQK3CT0QiVn3WKIzQFD
+ vbMMlBD1rx5CSb/UBzGpYb2d1FmiYD9KPwBqvzhSmmpJv1BiXSQoz23wkrQjMEvzulL9
+ XI9G+fqmVzqdcLfMtwSxMceTTj0lXUCvx1jWfcB+BFlTNczMNeRreF7PS5t/H7u9K5jl
+ eIM7RUb2aM6mDICKIhhGFpeGZVEgWYmIpP/UfFs21Y3yWbqpK7f48P27cKWDRQOwbmJJ
+ zz/A==
+X-Gm-Message-State: AOJu0Yz7k16o4gYCDutbIUyzo1nCWcmaPpU3fwBRDB4NGw++fDS1aRlC
+ 6uRHwp0Zvct1IuUkIMq1EO+ZB/Qudsh3NNDnCqurR5fFX8R6CZXsKAySWOvvBk3zrRI78bpgMcN
+ E
+X-Gm-Gg: ASbGncvojLj2uyKh/qpXz89UROYj6h3BiGFzPDx/83YrKVPxIfY0jjMz/GEtGSmiPkt
+ nVEZYDOVB2eIGZuSRGZG8ckyNV4t8rCccZVjfN07DaKQ0wykV8AHQGGF31RBd/MfTPttVSnlE8P
+ I/O93VS8tWKk7djXa0EOw9LBOw4/XQdhX+wIeJ3WlJXwroF9LyQ8Sy9qCULDYFYVCu7mzOddoWX
+ NbHa/+oxdcHomfJ8a40noT3GExj7kFolG/Ww+Kgnc6E1lig2fySF+8=
+X-Google-Smtp-Source: AGHT+IFrxSxUQ0KblywmqBNvmuuw73DKUUywfle7y3NONibrU+oosEkUFXLBvvhLk3b0Zt+8w2v0Jg==
+X-Received: by 2002:a05:620a:1a83:b0:7b6:6ee8:6c03 with SMTP id
+ af79cd13be357-7bcd97aecd0mr1902210785a.58.1736557041846; 
+ Fri, 10 Jan 2025 16:57:21 -0800 (PST)
 Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46c8732fbe4sm15295491cf.24.2025.01.10.16.57.11
+ af79cd13be357-7bce3515f88sm228580185a.104.2025.01.10.16.57.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 16:57:12 -0800 (PST)
-Date: Fri, 10 Jan 2025 18:57:09 -0600
+ Fri, 10 Jan 2025 16:57:20 -0800 (PST)
+Date: Fri, 10 Jan 2025 18:57:17 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Stefan Roese <sr@denx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-watchdog/master
-Message-ID: <20250111005709.GQ3476@bill-the-cat>
-References: <2d78e7a4-1722-41b7-8b29-a722d27075cf@denx.de>
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Pull request: u-boot-rockchip-20250110
+Message-ID: <20250111005717.GR3476@bill-the-cat>
+References: <20250110100856.1567840-1-kever.yang@rock-chips.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="m9H5TAd0q+KhlqSo"
+ protocol="application/pgp-signature"; boundary="vaoJv2vw6Ems5KRl"
 Content-Disposition: inline
-In-Reply-To: <2d78e7a4-1722-41b7-8b29-a722d27075cf@denx.de>
+In-Reply-To: <20250110100856.1567840-1-kever.yang@rock-chips.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,16 +94,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---m9H5TAd0q+KhlqSo
+--vaoJv2vw6Ems5KRl
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 07, 2025 at 01:45:47PM +0100, Stefan Roese wrote:
+On Fri, Jan 10, 2025 at 06:08:56PM +0800, Kever Yang wrote:
 
 > Hi Tom,
 >=20
-> please pull the following watchdog patches:
+> Please pull the updates for rockchip platform:
+> - Add boards:
+> 	rk3566: FriendlyARM NanoPi R3S
+> 	rk3588s: Radxa ROCK 5C,
+> 	rk3588: Khadas Edge2
+> - Migrate to OF_UPSTREAM:
+> 	rk3066a/rk3188;
+> 	rk3288: tinker, miqi, firefly;
+> - Migrate to TPL: rk3399 kevin and bob;
+>=20
+> CI:
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/24129
+>=20
+> Thanks,
+> - Kever
+>=20
+> The following changes since commit 38a371110308ebeb277e20531a7b698b7981bb=
+fa:
+>=20
+>   Merge tag 'tpm-master-07012025' of https://source.denx.de/u-boot/custod=
+ians/u-boot-tpm (2025-01-09 11:11:27 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
+t-rockchip-20250110
+>=20
+> for you to fetch changes up to 34df868161e470e5de04db059daa90f12e824693:
+>=20
+>   rockchip: rk3308: Implement checkboard() to print SoC variant (2025-01-=
+10 15:17:26 +0800)
 >=20
 
 Applied to u-boot/master, thanks!
@@ -111,22 +141,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---m9H5TAd0q+KhlqSo
+--vaoJv2vw6Ems5KRl
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeBwd4ACgkQFHw5/5Y0
-tyxHMAwAunUuwXobLhgiDZFSeC2Zx0lQOYkHrq7E69mbiMsB417iWD2n/3U3ossO
-mTgdASyYBdGmW4tAth4Ri6Sv94Bc0ZwR+HOR0/Nxo2bQwWehW4hinhuyJm1ENT40
-potwdn+RtMYYBan2jrbYt51FDtsp/GaKRg6zkOH2o7E0n2jX0wxbidqbUSrlt5DN
-XGR/mXCdBGSvdjfe7BTL9InZMOHNjSuLio24AI7DZ1KfPVHWU9VwkVeacf4+0sFG
-nTIv33AVZOSOhpFxcZ/KXtHTe5v9y9p/WQAHBO9yGvAs39WvLcBcPrBwI2UrWJ6Q
-gxO+nJ3B62ohoJuJzq0CThB3Q6OldgaP2/H81HNDqbgUnIO8f5LhnCZC+UW0v+UV
-7U9rX8KPrJGGU1NOzJV7mfJ2FOFbhas28R6Bbfz3QG7GEXrItG3KuvvWWC68dkfA
-HGxPeiXKBwHSnHUwFmWdUIqy7dGeXUbqlbI0+2q84Q5qd2bG/u7XJF+rmWKd4ozM
-Wkyzu+NA
-=P38a
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeBwe0ACgkQFHw5/5Y0
+tyxK3wv/WsUTYyY7s9ybFwg4F9Clcxsn4U3UvANNLXoR8l7zbp2O3f46PUk8kAWS
+qKVReMku2kKiDjxsB/GnVfR02apW2t1NhN12Y+PQzoioX4Obf479mSRjnAajabJ9
+td10B8p8qR+MrXiZGdBPdwh1WEbnfdwU/EQINGrp9A6vWLW0vbmBzYZeTGbZ1n88
+f49W9RLXJxmh3bvJs9Y4byqcmv/fz/dFVjlBo7mlRf6SdcxWeqYR91GPy/8JyjFD
+grfm+UqcmnJriWtdEerkPvpgoaN5AXkOBYV/0GRTHDpXTCdm6z7OTifepp1T11Nt
+Y6PU8Ji3tj5UWQ6kBzuPHaqMwAYw9HrCypf3YKw4XgZvOuheWhy2pI6UEiUczJ5I
+0eL1Za2QDdHtKQ/XvSE3FopXbmcVjOer0okAvFQNtfUPKE5nKLUqrvwXzsFjAAWN
+7+4dGrUpbdud5PVQ/ZwqhdEJax6r0GXUwkMUN+vead5n1VikjFTroAS5CLzTsYQI
+sfi3CzFE
+=qlkY
 -----END PGP SIGNATURE-----
 
---m9H5TAd0q+KhlqSo--
+--vaoJv2vw6Ems5KRl--
