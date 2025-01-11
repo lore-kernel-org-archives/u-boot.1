@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BEEEE77188
-	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7F1BE7719C
+	for <u-boot@archiver.kernel.org>; Sat, 11 Jan 2025 00:05:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6911806F4;
-	Sat, 11 Jan 2025 01:01:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 18A658060C;
+	Sat, 11 Jan 2025 01:02:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jdAV/BOl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y7io709c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B74E780786; Sat, 11 Jan 2025 01:01:56 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 119C58077F; Sat, 11 Jan 2025 01:01:58 +0100 (CET)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5EF7807BC
- for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D76F280785
+ for <u-boot@lists.denx.de>; Sat, 11 Jan 2025 01:01:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-844dfe4b136so67410039f.3
- for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:52 -0800 (PST)
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-3a77bd62fdeso16748095ab.2
+ for <u-boot@lists.denx.de>; Fri, 10 Jan 2025 16:01:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736553711; x=1737158511; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736553714; x=1737158514; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UhDaDPw97OFhuvkVemnAE0kR+gd2M32irzua9SKwE5M=;
- b=jdAV/BOlel2nyBByvdSxXimdh8IwI8AjSD1SRCiGWG+LFBRVLhqLx0a63ZWYc7tGFP
- E0qjolWys8ztpdrnTbLmYU924BV1Qj+D4+RCZkcRdff424/JgvQ1S0HEuRvrJONbMb3W
- 3ZbUvTBB4VFjHtl7qjG7jKBvxU0aUmxouX+i0=
+ bh=FLNpEHbXDFYER1Eoo5giPZH0piO6CUmHZPZQWcsggRM=;
+ b=Y7io709cvfsSRDgd5YjnzCRZilssHrhpKxGh2a78L1R4lP/XrAS0Bywui8xehybu49
+ 8tcTiBGsfnSYutqHTlcVqSWpYqg1DalGyVuCYhE9fpo28kS8UUKHE/VD5w12r91NAbd+
+ I8sWNFUGtALrTZjBb1lqo8CH3Q/Lcl3djay2k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736553711; x=1737158511;
+ d=1e100.net; s=20230601; t=1736553714; x=1737158514;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UhDaDPw97OFhuvkVemnAE0kR+gd2M32irzua9SKwE5M=;
- b=Mh35M1cnv7+j0QAWLpVbLKyG45LA8BWOUtPqRQugVYbh/z8QSrwNHSpFQLi383VAkM
- R4+OFVRsIwSAgaAajXZP4vVxkjXe7xBkxSgokg3nCkzGkJD8Ko+VZMcAv7DXCC0fArxe
- NGPheN0yyW7SW3Jl8RRItDYYEbprD5VGpueAd0+l5Vgki5zV58H9KOAsLNyD3HlJKf4T
- 31D6m8iUAD3c+tiVGGRmU4eEeoPjghc7EpufGwIb6ufZef/mlQbtQKM0OZ9wmq8ILMtu
- CvszF+wts2rL2lj61uH6f9I99B07L8fX4FDscn5OVPbKVov75mY6uWBPwD+vNAnj0Tlw
- vO3w==
-X-Gm-Message-State: AOJu0Ywc2ERlqitVDh1LEkZBWoEEz2n/ITagIVUDtBZhKkfb15sTGz6m
- SryuTIaOVHfKcrHWDfgv4X7V7anuTzFg/RSPSsxKHZ1cXdRSAmVTlKJLDbMb7UznfUTfVcrTVJw
+ bh=FLNpEHbXDFYER1Eoo5giPZH0piO6CUmHZPZQWcsggRM=;
+ b=fijou+Owq/XDaIHyl0no1s4V2dktpiTlH+4+OXJyRehG/EhhB+/4qosly5+z58wcxO
+ V94VzqEZru4e5wk9B+2A+uNjABeR8uv2aQ2fdH7pql+UGQndnM+5AMuqKEmPSzfEGw9f
+ bMKEx051mmdC7kr/ROLXZReFjwHj5kQT7562BQ2unoEBa7WSsPgjnYmRzxmFj+xryZKp
+ MciwRWASjUn6uNvOmf4EblByr53dlEtZua5kualVDqd8cIEz4JIlQ2JEzr6Macn4bjBU
+ zfclAIDrgS+oVS5KaQAiaAZFE5yxLzxfpGBrPhLVcyxOUcGmEoHqV1cL1A5J+jbvsonN
+ /lQQ==
+X-Gm-Message-State: AOJu0Yxhmh0uygkMWwMK+LkinLW8Rwpw6nmo50zq+3fKeqA+mBgkaYw4
+ v6VjgKV2Vf6CVO7VPOS8YS8ymHiO/L+csOqZfYN3ct7PIBN9cVRdXAZDy8FTcbuU4npWFfo5h/M
  =
-X-Gm-Gg: ASbGncsZoaKuU9qP/IB7SJQaoVTWipy0WL3kWeHj9yY6XBHHp35oJRT2UoLRIXbBTA5
- zql1dumZyqSYefLoqbsfjM6QUDBXSOSjA/M+RvVeAtvOQlSOPS9SAeJg6tP7A5iDDEYzXFKJHDH
- jPrSIWt1SPOBJ+XlRCWG7laRHe9FR89b+nPIRCbLRUd/FC2di1Vfvw+OOQnHEAUzKQpPySgorYK
- nyh/W82U6cnjnaBGz/JFJum4FxxRW0G/Oo5x98DYwFPKGMqCGiXalNbzYX48MqpdhPKMLoewbMQ
- foFqwZkF/x5s0now1w==
-X-Google-Smtp-Source: AGHT+IHZnODohQ1VxbDiTbx1yIpULR/BgzCegb09YikOiUyf7ACCrcHP0vp8kys1QX8EH4ZZ2w8KIQ==
-X-Received: by 2002:a05:6e02:1d0a:b0:3a7:a553:72f with SMTP id
- e9e14a558f8ab-3ce3aa5b1ddmr97820945ab.18.1736553711018; 
- Fri, 10 Jan 2025 16:01:51 -0800 (PST)
+X-Gm-Gg: ASbGncu1EWGsZ1Guuche+xKDToMEYfYfGDZ2MAdUH2pdqdtzs5CjR0xpqVJKjsiWO77
+ qdJhlVAabqQ3INfD9cJoUw5McpKWJolz+caF4IoKnRocQF/lwVY/zdM7jOOztU7OaCFqp+stEJe
+ fCnBU8fD1OLubKW8CCMQ+0LiucSdfbsqZbc2ZRkZyRCew5I3wHECmi5Wn/euEqFusBSQ4cHLwUu
+ M+V+yiihNirra0vBdGFw+orrIBzCdw1PCkwBeRslV9b3vKsJnQMamlBrjPZVOmxQiFu4k6s8Iu4
+ xaNh4Hrbsftv5IXS1A==
+X-Google-Smtp-Source: AGHT+IEl2BkcP25kcOfdZMfRGJ6v2qJygvl6DwJ8+nzVJHwLrhVjI+Bs4qwYQTVfpSqd1P1JImhd8Q==
+X-Received: by 2002:a05:6e02:160e:b0:3a7:e732:471b with SMTP id
+ e9e14a558f8ab-3ce3a88ace0mr95913565ab.11.1736553714014; 
+ Fri, 10 Jan 2025 16:01:54 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.48
+ 8926c6da1cb9f-4ea1b5f93desm1171884173.14.2025.01.10.16.01.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 16:01:49 -0800 (PST)
+ Fri, 10 Jan 2025 16:01:52 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 27/30] x86: emulation: Enable bloblist
-Date: Fri, 10 Jan 2025 17:00:26 -0700
-Message-Id: <20250111000029.245022-28-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Janne Grunau <j@jannau.net>,
+ Marek Vasut <marex@denx.de>, Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 28/30] dm: core: Clarify behaviour of ofnode_name_eq()
+Date: Fri, 10 Jan 2025 17:00:27 -0700
+Message-Id: <20250111000029.245022-29-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250111000029.245022-1-sjg@chromium.org>
 References: <20250111000029.245022-1-sjg@chromium.org>
@@ -94,63 +97,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bloblist support so that tables can be generated and placed in a
-bloblist, then passed to a payload using UPL
+This function is somewhat ambiguous, so expand the comments and add a
+test for the undefined behaviour.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Add new patch to enable bloblist on x86
+ include/dm/ofnode.h | 7 +++----
+ test/dm/core.c      | 2 ++
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
- configs/qemu-x86_64_defconfig | 2 ++
- configs/qemu-x86_defconfig    | 4 ++++
- 2 files changed, 6 insertions(+)
-
-diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-index 2771a4b9e19..792ba06c2b8 100644
---- a/configs/qemu-x86_64_defconfig
-+++ b/configs/qemu-x86_64_defconfig
-@@ -1,6 +1,7 @@
- CONFIG_X86=y
- CONFIG_TEXT_BASE=0x1110000
- CONFIG_SYS_MALLOC_F_LEN=0x1000
-+CONFIG_BLOBLIST_SIZE_RELOC=0x20000
- CONFIG_NR_DRAM_BANKS=8
- CONFIG_ENV_SIZE=0x40000
- CONFIG_MAX_CPUS=2
-@@ -33,6 +34,7 @@ CONFIG_LOGF_FUNC=y
- CONFIG_SPL_LOG=y
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_PCI_INIT_R=y
-+CONFIG_BLOBLIST=y
- CONFIG_BLOBLIST_FIXED=y
- CONFIG_BLOBLIST_ADDR=0x10000
- CONFIG_SPL_NO_BSS_LIMIT=y
-diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
-index 947d15cd727..0b0e10c795f 100644
---- a/configs/qemu-x86_defconfig
-+++ b/configs/qemu-x86_defconfig
-@@ -1,6 +1,7 @@
- CONFIG_X86=y
- CONFIG_TEXT_BASE=0xFFF00000
- CONFIG_SYS_MALLOC_F_LEN=0x1000
-+CONFIG_BLOBLIST_SIZE_RELOC=0x20000
- CONFIG_NR_DRAM_BANKS=8
- CONFIG_ENV_SIZE=0x40000
- CONFIG_MAX_CPUS=2
-@@ -23,6 +24,9 @@ CONFIG_LOG=y
- CONFIG_LOGF_FUNC=y
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_PCI_INIT_R=y
-+CONFIG_BLOBLIST=y
-+CONFIG_BLOBLIST_FIXED=y
-+CONFIG_BLOBLIST_ADDR=0x10000
- CONFIG_CMD_CPU=y
- CONFIG_CMD_BOOTEFI_SELFTEST=y
- CONFIG_CMD_NVEDIT_EFI=y
+diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+index 024ae4cd289..6d6a6fef8ef 100644
+--- a/include/dm/ofnode.h
++++ b/include/dm/ofnode.h
+@@ -386,11 +386,10 @@ static inline oftree oftree_from_np(struct device_node *root)
+ void oftree_dispose(oftree tree);
+ 
+ /**
+- * ofnode_name_eq() - Check if the node name is equivalent to a given name
+- *                    ignoring the unit address
++ * ofnode_name_eq() - Check a node name ignoring its unit address
+  *
+- * @node:	valid node reference that has to be compared
+- * @name:	name that has to be compared with the node name
++ * @node:	valid node to compared, which may have a unit address
++ * @name:	name (without unit address) to compare with the node name
+  * Return: true if matches, false if it doesn't match
+  */
+ bool ofnode_name_eq(ofnode node, const char *name);
+diff --git a/test/dm/core.c b/test/dm/core.c
+index c59ffc6f611..d40916ef588 100644
+--- a/test/dm/core.c
++++ b/test/dm/core.c
+@@ -186,6 +186,8 @@ static int dm_test_compare_node_name(struct unit_test_state *uts)
+ 	ut_assert(ofnode_valid(node));
+ 	ut_assert(ofnode_name_eq(node, "mmio-bus"));
+ 
++	ut_assert(!ofnode_name_eq(node, "mmio-bus@0"));
++
+ 	return 0;
+ }
+ DM_TEST(dm_test_compare_node_name, UTF_SCAN_PDATA);
 -- 
 2.34.1
 
