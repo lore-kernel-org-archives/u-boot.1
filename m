@@ -4,57 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 120B3E77188
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 22:39:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7200FE77188
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 22:48:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AF75800D2;
-	Sun, 12 Jan 2025 23:39:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EF23480079;
+	Sun, 12 Jan 2025 23:48:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="t2ZvDjvQ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LK4wNp0z";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="t22/nr+J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2378D801A9; Sun, 12 Jan 2025 23:39:53 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 22EFB800D2; Sun, 12 Jan 2025 23:48:36 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C17C80079
- for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 23:39:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D8F9A80027
+ for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 23:48:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=db07=UF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1736721588;
- bh=3Nvkt4itQsuTEc60YSm5G5fpffAsShPONHBpvZCu/qs=;
- b=t2ZvDjvQhOGqLXHCTEcUmYge9OJKiQOcoEe2JMKVXKYJmQTHkBKN8Bx0tSuuNuFzQtTeYPBnL
- VAV+JbDWtQVB4EiehHkACBBveWVkElv2fKbugvPj0teRifdXIac6WFe3Y0H4GPCwCrRkBBcuIaL
- 3peAD3k4L3TMj2NYpmSXFLhhvz/YLhjCSywizMtIhljgGIp76/4ySu8Um801rmN5dq8heA27Sdm
- mH2EeYYkTGJAZs8yxmf/c5VUYwDIvXgZLL3E8643cSh7zKIPq9NEgjm1U4rjCEHcCqtvLnEjbf5
- P8MyqesxMeTAorsyBPYqZIAaQxXBcMX/LxEjQIbHqeuQ==
-X-Forward-Email-ID: 678444aed3c779c3d8b30c44
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
-	u-boot@lists.denx.de
-Subject: [PATCH v2] rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw
- revision
-Date: Sun, 12 Jan 2025 22:39:32 +0000
-Message-ID: <20250112223935.1897791-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.47.1
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YWVt94C4Xz9sS4;
+ Sun, 12 Jan 2025 23:48:33 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1736722113;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dPLO6Are+/DBJZaaibA3tC2Rf/hUF2OsCtzgsrUqLs0=;
+ b=LK4wNp0zkUO3i+Ep7mVNRhQChBOrhCcbhpGdBMaAPQxosQoFqn7gKKpGl0M95IEqNYkhQ6
+ sH2EXeDG6ZvwpMu0NmgCiOGVvo0pBxZRFRUz2UXx/N0ArT1j5lkncnc4Qkz7bvt+RV9ZhA
+ n0xKXbQsFwJxYLxibjz7UOqL4zY1+vEa6Gsa7VLnlH01lCWJ96T95eaixHIhDeD0lmcMvV
+ yVbWD+nTYch0gUQRO0DOhY+bijR2ASfygG8SZBWexbtZzGkz38IF8QoF5LkrExOw7+K4qV
+ H/TjawNswBUgp8vYtFNpFnAfL8g6gVLiTf69UpI6SFX9p8LCLakn7RRC2QPKXQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1736722111;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dPLO6Are+/DBJZaaibA3tC2Rf/hUF2OsCtzgsrUqLs0=;
+ b=t22/nr+JF1EX1cmGWDyWvGFYikoxlDjd2awCbLLmTuOrwJFXYK5yup4RSHxBy9p1JrqTeI
+ +pIGeRybLhjo4D+pqTrrI2zSkdXw9h+aer7NOANfqfiwY+M2uejLNLcLnzIrXf/XHS85x8
+ FMWCMN8VbcyoykZ4vFiQyGFMgdhjZ+BOI7G9yz3tl6ucRV0wxU0F17wnt8qbqFbdHJBxAD
+ TJtj7Wsu3ChpnJ1QhC9d9Zrm7rsc0uEBu0CYuxGvITNyxmCt0cKhybmINyPUdmEIAPYP7X
+ fJsCVti6oFCcoXBgNs7fDPAl8Uj7jhgefieu8PyIgdvHcRtgJ04wkHnPR7Mbfg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: renesas: Rewrite u-boot-elf.srec base address if PIE
+ for R-Car Gen3
+Date: Sun, 12 Jan 2025 23:47:45 +0100
+Message-ID: <20250112224814.200121-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 6hgzhtsm3asayhd49eo6dbpfakzmox5d
+X-MBO-RS-ID: 03f8ae30cc93b69823a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,126 +84,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-BootROM leave GPIO4_D6 configured as SDMMC_PWREN function and DW MMC
-driver set PWREN high in dwmci_init().
+The flash_writer tool and previous recovery tools require the SREC load
+address to be 0x5000_0000 . The PIE U-Boot build sets the address to 0x0
+instead, so override the address back to make u-boot-elf.srec compatible
+with the recovery tools.
 
-However, HW revision prior to v1.2 must pull GPIO4_D6 low to access
-sdmmc. For HW revision v1.2 the state of GPIO4_D6 has no impact.
-
-Upstream linux-rockchip maintainer tree has merged a patch "arm64: dts:
-rockchip: Fix sdmmc access on rk3308-rock-s0 v1.1 boards" for v6.14 to
-fix this issue.
-
-Add the upstream vmmc-supply regulator in board u-boot.dtsi and enable
-required Kconfig options to set GPIO4_D6 low to fix reading sdmmc on
-v1.1 hw revision.
-
-The regulator-3v3-vcc-sd and sdmmc-2030 nodes along with the vmmc-supply
-prop can be dropped once dts/upstream sync v6.14 DTs.
-
-Fixes: 25438c40a007 ("board: rockchip: Add Radxa ROCK S0")
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Tested-by: Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-v2:
-- Rebased to fix clean apply on master
-- Collect r-b tags
-
-This matches pending Linux commit 26c100232b09 ("arm64: dts: rockchip:
-Fix sdmmc access on rk3308-rock-s0 v1.1 boards") targeting v6.14:
-https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/commit/?h=v6.14-rockchip-dts64-1&id=26c100232b09ced0857306ac9831a4fa9c9aa231
+Cc: Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 ---
- arch/arm/dts/rk3308-rock-s0-u-boot.dtsi | 43 +++++++++++++++++++++++++
- configs/rock-s0-rk3308_defconfig        |  2 ++
- 2 files changed, 45 insertions(+)
+ Makefile | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-index 84ca2ee0d5fb..7de8c9b59ca7 100644
---- a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-+++ b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-@@ -2,11 +2,50 @@
+diff --git a/Makefile b/Makefile
+index 0500eb6e0a7..c7318950f33 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1286,6 +1286,15 @@ u-boot.hex u-boot.srec: u-boot FORCE
  
- #include "rk3308-u-boot.dtsi"
+ OBJCOPYFLAGS_u-boot-elf.srec := $(OBJCOPYFLAGS_u-boot.srec)
  
-+/ {
-+	/*
-+	 * HW revision prior to v1.2 must pull GPIO4_D6 low to access sdmmc.
-+	 * This is modeled as an always-on active low fixed regulator.
-+	 */
-+	vcc_sd: regulator-3v3-vcc-sd {
-+		compatible = "regulator-fixed";
-+		gpios = <&gpio4 RK_PD6 GPIO_ACTIVE_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&sdmmc_2030>;
-+		regulator-name = "vcc_sd";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc_io>;
-+	};
-+};
++ifeq ($(CONFIG_POSITION_INDEPENDENT)$(CONFIG_RCAR_GEN3),yy)
++# The flash_writer tool and previous recovery tools
++# require the SREC load address to be 0x5000_0000 .
++# The PIE U-Boot build sets the address to 0x0, so
++# override the address back to make u-boot-elf.srec
++# compatible with the recovery tools.
++OBJCOPYFLAGS_u-boot-elf.srec += --change-addresses=0x50000000
++endif
 +
- &emmc_pwren {
- 	bootph-pre-ram;
- 	bootph-some-ram;
- };
+ u-boot-elf.srec: u-boot.elf FORCE
+ 	$(call if_changed,objcopy)
  
-+&gpio4 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl {
-+	sdmmc {
-+		sdmmc_2030: sdmmc-2030 {
-+			rockchip,pins = <4 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
-+
-+&sdmmc {
-+	vmmc-supply = <&vcc_sd>;
-+};
-+
-+&sdmmc_2030 {
-+	bootph-pre-ram;
-+};
-+
- &uart0 {
- 	bootph-all;
- 	clock-frequency = <24000000>;
-@@ -16,6 +55,10 @@
- 	bootph-all;
- };
- 
-+&vcc_sd {
-+	bootph-pre-ram;
-+};
-+
- &vdd_core {
- 	regulator-init-microvolt = <1015000>;
- };
-diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
-index 0a46e7bb1871..063e0b921d73 100644
---- a/configs/rock-s0-rk3308_defconfig
-+++ b/configs/rock-s0-rk3308_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
-@@ -53,6 +54,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM=y
- CONFIG_BAUDRATE=1500000
 -- 
-2.47.1
+2.45.2
 
