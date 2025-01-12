@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB21FE7719E
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 22:36:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E59EAE77188
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 22:38:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B7DD806FE;
-	Sun, 12 Jan 2025 23:36:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 57374800D2;
+	Sun, 12 Jan 2025 23:38:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XYt/Ppd3";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mTVKbbF9";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lgbZgqFk";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jAQI2cu9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 486B9801F5; Sun, 12 Jan 2025 23:36:07 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id A93ED801A9; Sun, 12 Jan 2025 23:38:27 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C7B080691
- for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 23:36:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA7FB80079
+ for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 23:38:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YWVbm0jxYz9shk;
- Sun, 12 Jan 2025 23:36:04 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YWVfS2w2mz9sRx;
+ Sun, 12 Jan 2025 23:38:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1736721364;
+ s=mail20150812; t=1736721504;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=a75lep1tlkU/3BKw+4lunyjsscvAgD8H+d5h+cF08/0=;
- b=XYt/Ppd3suOv9vZHDcp5sKqo2TD1LwQcv0FBTIUzJsO9OPF72usPnSNgbaJEK7h18+BxIG
- Sz9VtDavpTVMb+DOHZ0PGq7E+a6YmlUIfthqHh71Z4PKaYuD9H3KMJqvS0eCyt4yQkif0l
- CYxeHpqC4cDrQZsPzV8qwQ6FhOfVxeg/P+wSg7ndAw1ua1O+D9fdeehPQHJi3ookNMEB4k
- 63HyU7sArNwHkTamQu1kmCYxLO+hDDZfWvd35EzwBrUHfbZ9F36/UJFxkPueVAmUCTW2wf
- pt99NP7/lPn1xQoldoE7QYVb6PY+1k5Z1UVkQDDM4n2agl+TKlZQYySr9ax3ww==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=G4fPl43AD90vyfin5cQ8ti+FHwXovPYz4/KEymIAQFU=;
+ b=lgbZgqFkXDxNGPkcrvjpEr35AnAMhM1p3FuO6IFXvhDrwOIGqLsgXa4aMolLJIGl0d9obl
+ asWtMghmvzed9rlhTOszMhYfz7RBNiK54zkW99Nq+ivhUlaJqSQNr5eZHKd0Ic4o7PcQQo
+ /xWaSEzszBMbLx8+8VoD8Gdk4aDQJF9sD59UYLW09ojiXm8UNxHJs76cbU9VM3uCU/kzId
+ kwMoChgVTuocKJiJQUhgDoqMt7rg8rNTuFmGcVYU3Bd4YB8ZFBJSiG1xc/2oajp7aoTEUW
+ YbyIo4uElF3HZqtAQWq1oDnednbxxu5SBcdCEqCPOziQJK0Z1DumKzZ5v5Mz6g==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1736721362;
+ s=mail20150812; t=1736721502;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=a75lep1tlkU/3BKw+4lunyjsscvAgD8H+d5h+cF08/0=;
- b=mTVKbbF9F61cP0ufMQuBKm1ZY9A6hWdQAs2v9gFv2AewWHYj5csGoBvX8Ro7IFJScKq7WD
- +/d99oOpAuMdQYvg2U9DJt0INoyNV3N4fVRipPZACJzofS5kldWPuNF2rYVK7ljewMVwSA
- Bt1c2Kb2AFOWKggJSSFYTS9+WQ6upOZagP1ZCHHTHdz4wnWYobjeVwqqCG5iyVqPVrz0D6
- VXkbhOxwydl7LtVNBeTghJuYpxKYQKrXDN46E4mQpCRbPVsjcn9uGIMlJj+nK+2PrjYZG1
- RbiRycf4LfuifzIjsSpLh04ZyyhKNgIRKBbOHq+GLNRZ5jxnBE6cG17uiOO/YQ==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=G4fPl43AD90vyfin5cQ8ti+FHwXovPYz4/KEymIAQFU=;
+ b=jAQI2cu94ebm9Z5RaLPFh2vkow5OQrE4Km2AfGvS8e2bb+V7iPOeQ6ctLr0igtrWNrr0s/
+ sAy2l3eVtNwTVCyvSYhFKY2CGsXTG+/0yiliXP/lMJjVTBLeaGO8ip0D+dRZwYNySPHhK0
+ QR6t2bbcPyeLEiCwdoz2+xcpTHuAg1G54HplbDq228ibbRvaHWN4Kpxh7MLB0wq7tbVNN6
+ wMc2F1uAdKw/4d5tdTdvJHRonqXTC2k2hl4PW3tYN4tiDcyeuiBp66d9EIeMcLES0oJgSN
+ 60GJqGtjlKbt4JU2W2JcJVILG1RjXYCSwjfLCg2z/dp+W7u+2Fm4evZs88q4NQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 8/8] arm64: renesas: Deduplicate R-Car Gen3 and Gen4 SPL
-Date: Sun, 12 Jan 2025 23:34:27 +0100
-Message-ID: <20250112223528.179828-8-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250112223528.179828-1-marek.vasut+renesas@mailbox.org>
-References: <20250112223528.179828-1-marek.vasut+renesas@mailbox.org>
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/3] arm64: Add late jump to kernel board hook
+Date: Sun, 12 Jan 2025 23:36:57 +0100
+Message-ID: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: o8tn8hafyesapqrb8cbjqu3a6wb1z5fg
-X-MBO-RS-ID: 0da2eb5590785492096
+X-MBO-RS-ID: 40a0de83a2a50240585
+X-MBO-RS-META: ofwsicaiq9ceu8ey7x7tzgxbxiejwgrz
+X-Rspamd-Queue-Id: 4YWVfS2w2mz9sRx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,143 +96,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move R-Car Gen3 and Gen4 jump_to_image_no_args() into dedicated
-rcar64-spl.c file. The implementation of jump_to_image_no_args()
-is identical. No functional change.
+Add empty weak assembler function armv8_switch_to_el2_prep() which is
+jumped to just before U-Boot determines which EL it is running in and
+decides which path to take to boot the Linux kernel.
+
+This weak function is meant to be used by architecture specific code
+to implement jump to a firmware blob, which then returns right past
+this weak function and continues execution of U-Boot code which then
+boots the Linux kernel. One example of such use case is when U-Boot
+jump tp TFA BL31, which switches from EL3 to EL2 and then returns to
+U-Boot code newly running in EL2 and starts the Linux kernel.
+
+The weak function is called with caches already disabled and DM shut
+down. Any preparatory work or even loading of more data must be done
+in board_prep_linux(), this hook is meant only for the final jump to
+the firmware and return to U-Boot before booting Linux.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Adam Ford <aford173@gmail.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>
-Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Julien Masson <jmasson@baylibre.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Maxim Moskalets <maximmosk4@gmail.com>
+Cc: Michael Walle <mwalle@kernel.org>
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
+Cc: Peter Hoyes <Peter.Hoyes@arm.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- board/renesas/common/Makefile     |  4 +++-
- board/renesas/common/gen3-spl.c   | 21 ---------------------
- board/renesas/common/gen4-spl.c   | 17 -----------------
- board/renesas/common/rcar64-spl.c | 24 ++++++++++++++++++++++++
- 4 files changed, 27 insertions(+), 39 deletions(-)
- create mode 100644 board/renesas/common/rcar64-spl.c
+ arch/arm/cpu/armv8/transition.S |  8 ++++++++
+ arch/arm/include/asm/system.h   | 16 ++++++++++++++++
+ 2 files changed, 24 insertions(+)
 
-diff --git a/board/renesas/common/Makefile b/board/renesas/common/Makefile
-index e6dde3c2597..7a9f3a25440 100644
---- a/board/renesas/common/Makefile
-+++ b/board/renesas/common/Makefile
-@@ -15,7 +15,9 @@ endif
+diff --git a/arch/arm/cpu/armv8/transition.S b/arch/arm/cpu/armv8/transition.S
+index 9dbdff3a4fc..85f13ccd0d2 100644
+--- a/arch/arm/cpu/armv8/transition.S
++++ b/arch/arm/cpu/armv8/transition.S
+@@ -9,8 +9,16 @@
+ #include <linux/linkage.h>
+ #include <asm/macro.h>
  
- # 64 bit SoCs
- ifdef CONFIG_RCAR_64
--ifndef CONFIG_XPL_BUILD
-+ifdef CONFIG_XPL_BUILD
-+obj-y	+= rcar64-spl.o
-+else
- obj-y	+= rcar64-common.o
- endif
++.pushsection .text.armv8_switch_to_el2_prep, "ax"
++WEAK(armv8_switch_to_el2_prep)
++	ret
++ENDPROC(armv8_switch_to_el2_prep)
++.popsection
++
+ .pushsection .text.armv8_switch_to_el2, "ax"
+ ENTRY(armv8_switch_to_el2)
++	bl	armv8_switch_to_el2_prep
++	nop
+ 	switch_el x6, 1f, 0f, 0f
+ 0:
+ 	cmp x5, #ES_TO_AARCH64
+diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+index dbf9ab43e28..091082281c7 100644
+--- a/arch/arm/include/asm/system.h
++++ b/arch/arm/include/asm/system.h
+@@ -238,6 +238,22 @@ int __asm_flush_l3_dcache(void);
+ int __asm_invalidate_l3_icache(void);
+ void __asm_switch_ttbr(u64 new_ttbr);
  
-diff --git a/board/renesas/common/gen3-spl.c b/board/renesas/common/gen3-spl.c
-index 44a20cef2df..9590b5d6a2e 100644
---- a/board/renesas/common/gen3-spl.c
-+++ b/board/renesas/common/gen3-spl.c
-@@ -5,13 +5,9 @@
-  * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include <cpu_func.h>
--#include <image.h>
- #include <init.h>
--#include <log.h>
- #include <asm/io.h>
- #include <spl.h>
--#include <linux/bitops.h>
- 
- #define RCAR_CNTC_BASE	0xE6080000
- #define CNTCR_EN	BIT(0)
-@@ -33,23 +29,6 @@ u32 spl_boot_device(void)
- 	return BOOT_DEVICE_UART;
- }
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
--{
--	debug("image entry point: 0x%lx\n", spl_image->entry_point);
--	if (spl_image->os == IH_OS_ARM_TRUSTED_FIRMWARE) {
--		typedef void (*image_entry_arg_t)(int, int, int, int)
--			__attribute__ ((noreturn));
--		image_entry_arg_t image_entry =
--			(image_entry_arg_t)(uintptr_t) spl_image->entry_point;
--		image_entry(IH_MAGIC, CONFIG_SPL_TEXT_BASE, 0, 0);
--	} else {
--		typedef void __noreturn (*image_entry_noargs_t)(void);
--		image_entry_noargs_t image_entry =
--			(image_entry_noargs_t)spl_image->entry_point;
--		image_entry();
--	}
--}
--
- void s_init(void)
- {
- }
-diff --git a/board/renesas/common/gen4-spl.c b/board/renesas/common/gen4-spl.c
-index 2aca8baf3dd..e46ef0a3075 100644
---- a/board/renesas/common/gen4-spl.c
-+++ b/board/renesas/common/gen4-spl.c
-@@ -76,23 +76,6 @@ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
- 	return map_sysmem(CONFIG_SYS_LOAD_ADDR + offset, 0);
- }
- 
--void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
--{
--	debug("image entry point: 0x%lx\n", spl_image->entry_point);
--	if (spl_image->os == IH_OS_ARM_TRUSTED_FIRMWARE) {
--		typedef void (*image_entry_arg_t)(int, int, int, int)
--			__attribute__ ((noreturn));
--		image_entry_arg_t image_entry =
--			(image_entry_arg_t)(uintptr_t) spl_image->entry_point;
--		image_entry(IH_MAGIC, CONFIG_SPL_TEXT_BASE, 0, 0);
--	} else {
--		typedef void __noreturn (*image_entry_noargs_t)(void);
--		image_entry_noargs_t image_entry =
--			(image_entry_noargs_t)spl_image->entry_point;
--		image_entry();
--	}
--}
--
- #define APMU_BASE 0xe6170000U
- #define CL0GRP3_BIT			BIT(3)
- #define CL1GRP3_BIT			BIT(7)
-diff --git a/board/renesas/common/rcar64-spl.c b/board/renesas/common/rcar64-spl.c
-new file mode 100644
-index 00000000000..76f2bde924e
---- /dev/null
-+++ b/board/renesas/common/rcar64-spl.c
-@@ -0,0 +1,24 @@
-+// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright (C) 2024 Marek Vasut <marek.vasut+renesas@mailbox.org>
++ * armv8_switch_to_el2_prep() - prepare for switch from EL3 to EL2 for ARMv8
++ *
++ * @args:        For loading 64-bit OS, fdt address.
++ *               For loading 32-bit OS, zero.
++ * @mach_nr:     For loading 64-bit OS, zero.
++ *               For loading 32-bit OS, machine nr
++ * @fdt_addr:    For loading 64-bit OS, zero.
++ *               For loading 32-bit OS, fdt address.
++ * @arg4:	 Input argument.
++ * @entry_point: kernel entry point
++ * @es_flag:     execution state flag, ES_TO_AARCH64 or ES_TO_AARCH32
 + */
++void armv8_switch_to_el2_prep(u64 args, u64 mach_nr, u64 fdt_addr,
++			      u64 arg4, u64 entry_point, u64 es_flag);
 +
-+#include <image.h>
-+#include <spl.h>
-+
-+void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
-+{
-+	debug("image entry point: 0x%lx\n", spl_image->entry_point);
-+	if (spl_image->os == IH_OS_ARM_TRUSTED_FIRMWARE) {
-+		typedef void (*image_entry_arg_t)(int, int, int, int)
-+			__attribute__ ((noreturn));
-+		image_entry_arg_t image_entry =
-+			(image_entry_arg_t)(uintptr_t) spl_image->entry_point;
-+		image_entry(IH_MAGIC, CONFIG_SPL_TEXT_BASE, 0, 0);
-+	} else {
-+		typedef void __noreturn (*image_entry_noargs_t)(void);
-+		image_entry_noargs_t image_entry =
-+			(image_entry_noargs_t)spl_image->entry_point;
-+		image_entry();
-+	}
-+}
+ /*
+  * armv8_switch_to_el2() - switch from EL3 to EL2 for ARMv8
+  *
 -- 
 2.45.2
 
