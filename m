@@ -4,84 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C8FFE7719E
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 22:38:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 120B3E77188
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 22:39:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72D52801A9;
-	Sun, 12 Jan 2025 23:38:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7AF75800D2;
+	Sun, 12 Jan 2025 23:39:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NYQTHRkQ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="vE7+mrEU";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="t2ZvDjvQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B22380079; Sun, 12 Jan 2025 23:38:33 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 2378D801A9; Sun, 12 Jan 2025 23:39:53 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15F3780658
- for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 23:38:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C17C80079
+ for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 23:39:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YWVfZ4vHPz9sW6;
- Sun, 12 Jan 2025 23:38:30 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1736721510;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YpqmVbcJOqpKdqXN1GLmdMYYxxA/yfPcnNZClsfHiT8=;
- b=NYQTHRkQEGssIItpJTLtXHpwoFblxomajmZJwq4V1yjD+8fhgTCRWhnviyi9R/TO5bnRuN
- bQwtPN9aGdaSWSszOffhGlbmn6ihCy/7CffEWPZeZuzmYWCP7VDRbm7Lr8CrLJBURg9Rzs
- Bip/Vaf2kG0RhDQQGGrw7rTQIJ5Y9kd/WKAKtOrtatodgQuV6/ko+zyXyZTOT7ALZuzzHC
- 2ab1zroNocyN1oCv4zpU7PSw86fIWkNp3mhe2STZuaGPy8gRex3w7KDlwrO6Y/5fjH3Br+
- SdnzI/i5OhjS0GEH0bBAT5bNi/GP0csEJ20NNNX0mYfJ44UWcFcijfLyk/wyAg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1736721508;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YpqmVbcJOqpKdqXN1GLmdMYYxxA/yfPcnNZClsfHiT8=;
- b=vE7+mrEU3I21I3y3DOUcj3CKKVbRfRNVDryFEKzT4vL41lrIuNJukEJC0Ok4aWfq7kb+EA
- cKk/nwDDFNX+nhCpgV3HuJgWN85uG/42/hYWUJp4pFz+Ytyqq3vZnCrNrdaFbyEKatnf7+
- cV5ExbqKhDtdQzqC4XzW5sUt5sr0ls2HIu7pVW31vU7f+gs4zDwg1m2Z6TX1as2x6Y1orv
- Sa+1CmYLZzAwU1thOLmUKxD6Z8ajAmIvPGQd7xqSZDatf86JC2P141+0GT6KzkFGAxMNnI
- 5qVuHYgIbTY7XtVOzVhSKzHc3EOaCYCM4VB4yHGtW2/Mq5cIRsEOTbSeNsDEVw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>, Raymond Mao <raymond.mao@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] arm64: renesas: Add TFA BL31 handoff support
-Date: Sun, 12 Jan 2025 23:36:59 +0100
-Message-ID: <20250112223755.179959-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
-References: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=db07=UF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1736721588;
+ bh=3Nvkt4itQsuTEc60YSm5G5fpffAsShPONHBpvZCu/qs=;
+ b=t2ZvDjvQhOGqLXHCTEcUmYge9OJKiQOcoEe2JMKVXKYJmQTHkBKN8Bx0tSuuNuFzQtTeYPBnL
+ VAV+JbDWtQVB4EiehHkACBBveWVkElv2fKbugvPj0teRifdXIac6WFe3Y0H4GPCwCrRkBBcuIaL
+ 3peAD3k4L3TMj2NYpmSXFLhhvz/YLhjCSywizMtIhljgGIp76/4ySu8Um801rmN5dq8heA27Sdm
+ mH2EeYYkTGJAZs8yxmf/c5VUYwDIvXgZLL3E8643cSh7zKIPq9NEgjm1U4rjCEHcCqtvLnEjbf5
+ P8MyqesxMeTAorsyBPYqZIAaQxXBcMX/LxEjQIbHqeuQ==
+X-Forward-Email-ID: 678444aed3c779c3d8b30c44
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw
+ revision
+Date: Sun, 12 Jan 2025 22:39:32 +0000
+Message-ID: <20250112223935.1897791-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 73ef1c87008674c0a9e
-X-MBO-RS-META: 1y51ptktjg98jzmxxabnq3z53t6nzbto
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,218 +71,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement custom U_BOOT_FIT_LOADABLE_HANDLER and armv8_switch_to_el2_prep()
-handling in case the TFA was loaded. The loadables handler sets up custom
-handoff structure used by Renesas TFA fork in fixed location in DRAM and
-indicates the TFA has been loaded.
+BootROM leave GPIO4_D6 configured as SDMMC_PWREN function and DW MMC
+driver set PWREN high in dwmci_init().
 
-The custom armv8_switch_to_el2_prep() handling tests whether the TFA BL31
-was previously loaded and the custom handoff structure was set up, and if
-so, jumps to TFA BL31 which switches from EL3 to EL2 and then returns to
-U-Boot just past bl in armv8_switch_to_el2() to finish starting the Linux
-kernel.
+However, HW revision prior to v1.2 must pull GPIO4_D6 low to access
+sdmmc. For HW revision v1.2 the state of GPIO4_D6 has no impact.
 
-The jump to Linux through TFA works in such a way that the custom
-armv8_switch_to_el2_prep() handler configures the custom handoff structure
-such that the target jump address of the TFA BL31 on exit is set to the
-armv8_switch_to_el2() + 4, which is just past the bl, and just before the
-U-Boot code which implements the Linux kernel boot from either EL. The
-registers passed through the TFA BL31 are all the registers passed into
-armv8_switch_to_el2_prep() to assure maximum compatibility with all the
-boot modes. The armv8_switch_to_el2_prep() handler jumps to the TFA BL31,
-which does its setup, drops EL from EL3 to EL2 and finally jumps to the
-armv8_switch_to_el2() + 4 entry point, which then allows U-Boot to boot
-the Linux kernel the usual way.
+Upstream linux-rockchip maintainer tree has merged a patch "arm64: dts:
+rockchip: Fix sdmmc access on rk3308-rock-s0 v1.1 boards" for v6.14 to
+fix this issue.
 
-In order to build suitable kernel fitImage, build TFA first, temporarily
-from downstream repository:
-remote: https://github.com/renesas-rcar/arm-trusted-firmware.git
-branch: rcar_gen4_v2.7_v4x
+Add the upstream vmmc-supply regulator in board u-boot.dtsi and enable
+required Kconfig options to set GPIO4_D6 low to fix reading sdmmc on
+v1.1 hw revision.
 
-```
-$ git clean -fqdx
-$ MBEDTLS_DIR=/path/to/mbedtls/ make -j$(nproc) bl31 \
-	PLAT=rcar_gen4 ARCH=aarch64 LSI=V4H SPD=none \
-	CTX_INCLUDE_AARCH32_REGS=0 MBEDTLS_COMMON_MK=1 \
-	PTP_NONSECURE_ACCESS=1 LOG_LEVEL=20 DEBUG=0 \
-	ENABLE_ASSERTIONS=0 E=0
-```
+The regulator-3v3-vcc-sd and sdmmc-2030 nodes along with the vmmc-supply
+prop can be dropped once dts/upstream sync v6.14 DTs.
 
-Build Linux kernel Image and device tree from current mainline Linux
-kernel repository, obtain 'Image' and 'r8a779g0-white-hawk.dtb' .
-
-Bundle the files together using provided fit-image.its fitImage description:
-```
-$ mkimage -f fit-image.its fitImage
-```
-
-To start the kernel fiImage generated in previous step, load fitImage
-to DRAM and use the 'bootm' command to start it:
-=> load 0x58000000 ... fitImage && bootm 0x58000000
-
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Fixes: 25438c40a007 ("board: rockchip: Add Radxa ROCK S0")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Julien Masson <jmasson@baylibre.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Maxim Moskalets <maximmosk4@gmail.com>
-Cc: Michael Walle <mwalle@kernel.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
-Cc: Peter Hoyes <Peter.Hoyes@arm.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- board/renesas/common/gen4-common.c | 118 +++++++++++++++++++++++++++++
- 1 file changed, 118 insertions(+)
+v2:
+- Rebased to fix clean apply on master
+- Collect r-b tags
 
-diff --git a/board/renesas/common/gen4-common.c b/board/renesas/common/gen4-common.c
-index 52a0639073b..c7f3f9a30ab 100644
---- a/board/renesas/common/gen4-common.c
-+++ b/board/renesas/common/gen4-common.c
-@@ -7,11 +7,13 @@
+This matches pending Linux commit 26c100232b09 ("arm64: dts: rockchip:
+Fix sdmmc access on rk3308-rock-s0 v1.1 boards") targeting v6.14:
+https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/commit/?h=v6.14-rockchip-dts64-1&id=26c100232b09ced0857306ac9831a4fa9c9aa231
+---
+ arch/arm/dts/rk3308-rock-s0-u-boot.dtsi | 43 +++++++++++++++++++++++++
+ configs/rock-s0-rk3308_defconfig        |  2 ++
+ 2 files changed, 45 insertions(+)
+
+diff --git a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+index 84ca2ee0d5fb..7de8c9b59ca7 100644
+--- a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
++++ b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+@@ -2,11 +2,50 @@
  
- #include <asm/arch/renesas.h>
- #include <asm/arch/sys_proto.h>
-+#include <asm/armv8/mmu.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/mach-types.h>
- #include <asm/processor.h>
- #include <asm/system.h>
-+#include <image.h>
- #include <linux/errno.h>
+ #include "rk3308-u-boot.dtsi"
  
- #define RST_BASE	0xE6160000 /* Domain0 */
-@@ -88,3 +90,119 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- {
- 	return 0;
- }
-+
-+/* R-Car Gen4 TFA BL31 handoff structure and handling. */
-+struct param_header {
-+	u8			type;
-+	u8			version;
-+	u16			size;
-+	u32			attr;
-+};
-+
-+struct tfa_image_info {
-+	struct param_header	h;
-+	uintptr_t		image_base;
-+	u32			image_size;
-+	u32			image_max_size;
-+};
-+
-+struct aapcs64_params {
-+	u64			arg0;
-+	u64			arg1;
-+	u64			arg2;
-+	u64			arg3;
-+	u64			arg4;
-+	u64			arg5;
-+	u64			arg6;
-+	u64			arg7;
-+};
-+
-+struct entry_point_info {
-+	struct param_header	h;
-+	uintptr_t		pc;
-+	u32			spsr;
-+	struct aapcs64_params	args;
-+};
-+
-+struct bl2_to_bl31_params_mem {
-+	struct tfa_image_info	bl32_image_info;
-+	struct tfa_image_info	bl33_image_info;
-+	struct entry_point_info	bl33_ep_info;
-+	struct entry_point_info	bl32_ep_info;
-+};
-+
-+/* Default jump address, return to U-Boot */
-+#define BL33_BASE	0x44100000
-+/* Custom parameters address passed to TFA by ICUMXA loader */
-+#define PARAMS_BASE	0x46422200
-+
-+/* Usually such a structure is produced by ICUMXA and passed in at 0x46422200 */
-+static const struct bl2_to_bl31_params_mem blinfo_template = {
-+	.bl33_ep_info.h.type = 1,	/* PARAM_EP */
-+	.bl33_ep_info.h.version = 2,	/* Version 2 */
-+	.bl33_ep_info.h.size = sizeof(struct entry_point_info),
-+	.bl33_ep_info.h.attr = 0x81,	/* Executable | Non-Secure */
-+	.bl33_ep_info.spsr = 0x2c9,	/* Mode=EL2, SP=ELX, Exceptions=OFF */
-+	.bl33_ep_info.pc = BL33_BASE,
-+
-+	.bl33_image_info.h.type = 1,	/* PARAM_EP */
-+	.bl33_image_info.h.version = 2,	/* Version 2 */
-+	.bl33_image_info.h.size = sizeof(struct image_info),
-+	.bl33_image_info.h.attr = 0,
-+	.bl33_image_info.image_base = BL33_BASE,
-+};
-+
-+static bool tfa_bl31_image_loaded;
-+static ulong tfa_bl31_image_addr;
-+
-+static void tfa_bl31_image_process(ulong image, size_t size)
-+{
-+	/* Custom parameters address passed to TFA by ICUMXA loader */
-+	struct bl2_to_bl31_params_mem *blinfo = (struct bl2_to_bl31_params_mem *)PARAMS_BASE;
-+
-+	/* Clear a page and copy template */
-+	memset((void *)PARAMS_BASE, 0, PAGE_SIZE);
-+	memcpy(blinfo, &blinfo_template, sizeof(*blinfo));
-+	tfa_bl31_image_addr = image;
-+	tfa_bl31_image_loaded = true;
-+}
-+
-+U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_TFA_BL31, tfa_bl31_image_process);
-+
-+void armv8_switch_to_el2_prep(u64 args, u64 mach_nr, u64 fdt_addr,
-+			      u64 arg4, u64 entry_point, u64 es_flag)
-+{
-+	typedef void __noreturn (*image_entry_noargs_t)(void);
-+	image_entry_noargs_t image_entry =
-+		(image_entry_noargs_t)(void *)tfa_bl31_image_addr;
-+	struct bl2_to_bl31_params_mem *blinfo =
-+		(struct bl2_to_bl31_params_mem *)PARAMS_BASE;
-+
++/ {
 +	/*
-+	 * Destination address in arch/arm/cpu/armv8/transition.S
-+	 * right past the first bl in armv8_switch_to_el2() to let
-+	 * the rest of U-Boot pre-Linux code run. The code does run
-+	 * without stack pointer!
++	 * HW revision prior to v1.2 must pull GPIO4_D6 low to access sdmmc.
++	 * This is modeled as an always-on active low fixed regulator.
 +	 */
-+	const u64 ep = ((u64)(uintptr_t)&armv8_switch_to_el2) + 4;
++	vcc_sd: regulator-3v3-vcc-sd {
++		compatible = "regulator-fixed";
++		gpios = <&gpio4 RK_PD6 GPIO_ACTIVE_LOW>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&sdmmc_2030>;
++		regulator-name = "vcc_sd";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&vcc_io>;
++	};
++};
 +
-+	/* If TFA BL31 was not part of the fitImage, do regular boot. */
-+	if (!tfa_bl31_image_loaded)
-+		return;
+ &emmc_pwren {
+ 	bootph-pre-ram;
+ 	bootph-some-ram;
+ };
+ 
++&gpio4 {
++	bootph-pre-ram;
++};
 +
-+	/*
-+	 * Set up kernel entry point and parameters:
-+	 * x0 is FDT address, x1..x3 must be 0
-+	 */
-+	blinfo->bl33_ep_info.pc = ep;
-+	blinfo->bl33_ep_info.args.arg0 = args;
-+	blinfo->bl33_ep_info.args.arg1 = mach_nr;
-+	blinfo->bl33_ep_info.args.arg2 = fdt_addr;
-+	blinfo->bl33_ep_info.args.arg3 = arg4;
-+	blinfo->bl33_ep_info.args.arg4 = entry_point;
-+	blinfo->bl33_ep_info.args.arg5 = es_flag;
-+	blinfo->bl33_image_info.image_base = ep;
++&pinctrl {
++	sdmmc {
++		sdmmc_2030: sdmmc-2030 {
++			rockchip,pins = <4 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
 +
-+	/* Jump to TFA BL31 */
-+	image_entry();
-+}
++&sdmmc {
++	vmmc-supply = <&vcc_sd>;
++};
++
++&sdmmc_2030 {
++	bootph-pre-ram;
++};
++
+ &uart0 {
+ 	bootph-all;
+ 	clock-frequency = <24000000>;
+@@ -16,6 +55,10 @@
+ 	bootph-all;
+ };
+ 
++&vcc_sd {
++	bootph-pre-ram;
++};
++
+ &vdd_core {
+ 	regulator-init-microvolt = <1015000>;
+ };
+diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
+index 0a46e7bb1871..063e0b921d73 100644
+--- a/configs/rock-s0-rk3308_defconfig
++++ b/configs/rock-s0-rk3308_defconfig
+@@ -2,6 +2,7 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SPL_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3308=y
+@@ -53,6 +54,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_REGULATOR_PWM=y
+ CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_RAM=y
+ CONFIG_BAUDRATE=1500000
 -- 
-2.45.2
+2.47.1
 
