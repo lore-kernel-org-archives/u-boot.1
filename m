@@ -4,67 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B22C1E77188
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 15:44:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38B69E77188
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 19:08:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0134A801DB;
-	Sun, 12 Jan 2025 16:44:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F06D80079;
+	Sun, 12 Jan 2025 20:08:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="WWfK35da";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sBcrk8ZZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE6B78058A; Sun, 12 Jan 2025 16:44:55 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 429F9800D2; Sun, 12 Jan 2025 20:08:32 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42B9E800D2
- for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 16:44:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 222A580027
+ for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 20:08:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=muhammad.hazim.izzat.zamri@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1736696693; x=1768232693;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=Bq3iVSexk4nNIrX5ugKG3oYKOma/Xax2n20YBoXWTn8=;
- b=WWfK35daOpQdiG0VKMZb4JG6wSVKl9cRjHuF/YUu3rF+ByQYbiLD2TXH
- nOeUfr3aqyxOa24uX0bhi7i71/n1aUTIER98Y9yB38kBKALqHCB81l/bq
- kwNOiKfV7g3SYJpvsV0AA4JrCoMnTPPHrtIkqU7V3/6xQK3dWubtTsTSc
- uHnAnx0Gf/NwJQEvN41EifLY/hJ4N2mfu21zE5puOAkyfs5mGGp4EKvth
- DESp42Ehr76VTgcNsJHUF4jXd30otNZsnDX316uDaJkIsy2EbZ3JHsrYG
- iac769KloVM2xD7gztLvuaMvemwvsqG0j38cuadGzv44KBL/RgpE7Qn4Y g==;
-X-CSE-ConnectionGUID: V4fZmJ+EQfy9ScRejb5ZAg==
-X-CSE-MsgGUID: PWnVL9EXSeKUjAVhgrdAIQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11313"; a="40868177"
-X-IronPort-AV: E=Sophos;i="6.12,309,1728975600"; d="scan'208";a="40868177"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
- by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Jan 2025 07:44:52 -0800
-X-CSE-ConnectionGUID: pthMFjLwRtmrDqjYwW1EqQ==
-X-CSE-MsgGUID: Ah48Ks4ERsm84yciQDTZ+g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,309,1728975600"; d="scan'208";a="109198970"
-Received: from apgcp0d540107.png.altera.com ([10.244.77.29])
- by orviesa004.jf.intel.com with ESMTP; 12 Jan 2025 07:44:49 -0800
-From: muhammad.hazim.izzat.zamri@intel.com
-To: Tien Fong <tien.fong.chee@intel.com>
-Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Tingting Meng <tingting.meng@intel.com>,
- Alif <alif.zakuan.yuslaimi@intel.com>,
- Hazim <muhammad.hazim.izzat.zamri@intel.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 1/1] arm: socfpga:agilex5: Fix system manager watchdog mode
- setting
-Date: Sun, 12 Jan 2025 23:44:06 +0800
-Message-Id: <20250112154406.1556-2-muhammad.hazim.izzat.zamri@intel.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20250112154406.1556-1-muhammad.hazim.izzat.zamri@intel.com>
-References: <20250112154406.1556-1-muhammad.hazim.izzat.zamri@intel.com>
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5254E3F473
+ for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 19:08:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1736708907;
+ bh=eH9JTIJhGye1sBq2FoTXd0ORYV9vOfwK9vfscNMC3VU=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=sBcrk8ZZYT3+9RK1zul5SFQ1pWr+GB2BumoQ4T655cwqL4mSF3wErtKR9yG5BWb57
+ hoX1Se/6ZV70KzRo9baRn1HlZYTrwgEjYxDdbKiW+1r1qGbqxQ9/CdPIq75u6LZQnA
+ fg1UDA4Azay8n0xDRB1rZ9yzWydVm1s4HYVvnipRKISjT4oNvqnrcHOd3x89J9UiYg
+ 6Wj3TRsK4Evc6CzxO0TQvJy8vyE1Tacm8X38KtWOkr2IHK5SKTuoAuErj6Pm0dFyry
+ H3vI6FALrcH+joWJLl4swYscA1T7GQXmr1pgU+7CBKFQM6Ne29brwJLUmh8doaeQZv
+ b7jSadbAsN3EA==
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-2f550d28f7dso6280257a91.3
+ for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 11:08:27 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736708905; x=1737313705;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eH9JTIJhGye1sBq2FoTXd0ORYV9vOfwK9vfscNMC3VU=;
+ b=QI4AowapfBTWeXgl7gJWGAAMnIYvTMuTTymJ3DL48efejk714pblxw6RPCd1FYuWYd
+ 35EaquWexmfMlazrl2e8J3GpYQkBoXchmjT5KEiAbqVUAFMvdekMjt8bCjuUNsDQhaKC
+ EYEzh0J1EA0KW7S82PpV6gzQj33CCthUVW5NEDNNMjmsRRQm1OGOxrTM2SVydtG1UC2J
+ 57Y4OvKVsntPBtU5cJgdbBfaUVZeLBOnjkd0MdWt5bh2J5EGp332HwwmllIJxKbfhNBi
+ r33wieRdfhFHXJU9VnD5C80yxsnhwiyBZISKkMtvmYNoLBjypiZkVYh/dcCyn6wzy3Jr
+ gPAw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfMt0raVWPaqHsoSN/UrtZ05o1wiXInTyDkV+79aQSxnMVRg5ncL4C9luhQQlmRbV0pvp9iHQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzKnFOMmF4bfKqm/MdxmI2xUAui/R/2Ku1Mjgh9D9z+9tlqPmqU
+ bRk7IW5JSTL7+9XS7+Z8Ywzl5dzjFtvBUqYjR3OQEHTcLf3HUYWqyUW5evMJ1PqntlH4frMFQbx
+ TRl5KF9TIMhm9ydIIyjw8r4WZChh1X1Bt8zNQjR6+HqGEy23I+yvSI96LyQKKVfSPGOQY8bMP50
+ 1h0KK12ivrbah+jR3Jbf/E7UlY6vEP2hiDUrAPR26EEA==
+X-Gm-Gg: ASbGncsPCWF+7K95mrOahZe+oj4Y+jysAmDvmIolXMOwk/1m3TznGE9+tJxDe2511Uw
+ TAfRL6b7qYNABTKBqXJRE1uu3EwRTjy60KN4=
+X-Received: by 2002:a17:90b:540b:b0:2ee:d824:b559 with SMTP id
+ 98e67ed59e1d1-2f548f44e6bmr25393287a91.28.1736708905664; 
+ Sun, 12 Jan 2025 11:08:25 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHRTZTkuA7wy+xkOpkGa5SLmZ0p45WC1DSBNbcK9tLNSEJ1xKvjjbxdsA0aRqhAEzYnDlWh3suQlzizJ9PXmz0=
+X-Received: by 2002:a17:90b:540b:b0:2ee:d824:b559 with SMTP id
+ 98e67ed59e1d1-2f548f44e6bmr25393250a91.28.1736708905322; Sun, 12 Jan 2025
+ 11:08:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
+ <20241127070631.16412-6-heinrich.schuchardt@canonical.com>
+ <20250110224554.GA2278614@bill-the-cat>
+In-Reply-To: <20250110224554.GA2278614@bill-the-cat>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Sun, 12 Jan 2025 20:08:13 +0100
+X-Gm-Features: AbW1kvabBDbplFlYU5lwfTnDE0N4S8X9KQp2pvpqVdDS00zdJF21vNA0A7LPY4E
+Message-ID: <CAM=mAOmee=By9ErZrvk0hVbZyLH_viguu_wMfOsV3LzTwddArw@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] cmd: bootmenu: add parameter -e for UEFI boot
+ options
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,37 +119,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@intel.com>
+Tom Rini <trini@konsulko.com> schrieb am Fr., 10. Jan. 2025, 23:46:
 
-This commit is to fix the system manager watchdog mode setting to support
-until mode_4 for Agilex5. This changes can refer to system manager register
-map on wddbg fields.
+> On Wed, Nov 27, 2024 at 08:06:30AM +0100, Heinrich Schuchardt wrote:
+>
+> > The bootmenu command can display
+> >
+> > * menu entries defined by environment variables
+> > * menu entries defined by UEFI boot options
+> >
+> > Not in all cases showing the UEFI boot options is desired.
+> > Provide a new parameter '-e' to select the display of UEFI boot options.
+> >
+> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>
+> Very strangely, this leads to the EFI selftest "Executing 'random number
+> generator'" test failing on Pi 4, where was was passing previously (and
+> Pi 4 has an RNG, unlike Pi 3), and this is
 
-In Agilex7 it is not detected as an issue because Agilex7 only have 4 watchdog
-until mode_3 and it is already been set correctly for it to halt on any CPU in
-debug mode. However, in Agilex5 this fix is needed in order to enable the watchdog
-pause feature for mode_4 when entering debug mode. If 0xF is not been set on mode_4,
-the Watchdog Timers will not halt on any CPU. As by default value, the pause signal
-does not assert when any CPU is in debug mode and the watchdog continue to count.
 
-Signed-off-by: Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@intel.com>
----
- arch/arm/mach-socfpga/include/mach/system_manager_soc64.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-index b1ef4a70641..670aa3cc07e 100644
---- a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-@@ -182,7 +182,7 @@ void populate_sysmgr_pinmux(void);
+Do you have a link to the log?
 
- #define SYSMGR_DMAPERIPH_ALL_NS		0xFFFFFFFF
+Best regards
 
--#define SYSMGR_WDDBG_PAUSE_ALL_CPU	0x0F0F0F0F
-+#define SYSMGR_WDDBG_PAUSE_ALL_CPU	0xFF0F0F0F
+Heinrich
 
- #if IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X)
- #define	SYSMGR_SOC64_DDR_MODE_MSK	BIT(0)
---
-2.26.2
-
+on rpi_4_defconfig with:
+> CONFIG_CMD_BOOTEFI_HELLO=y
+> CONFIG_CMD_BOOTEFI_SELFTEST=y
+> CONFIG_IPV6=y
+> CONFIG_IPV6_ROUTER_DISCOVERY=y
+> CONFIG_CMD_TFTPPUT=y
+> CONFIG_FIT=y
+> CONFIG_FIT_SIGNATURE=y
+> CONFIG_CMD_BOOTMENU=y
+> CONFIG_CMD_LOG=y
+> CONFIG_UNIT_TEST=y
+> # CONFIG_CMD_EFIDEBUG is not set
+> CONFIG_BOOTSTAGE_STASH_ADDR=0x02400000
+> CONFIG_BOOTSTAGE=y
+> CONFIG_BOOTSTAGE_STASH=y
+> CONFIG_CMD_BOOTSTAGE=y
+>
+> added.
+>
+> --
+> Tom
+>
