@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EB52E7719E
-	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 22:35:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C56CE7719E
+	for <u-boot@archiver.kernel.org>; Sun, 12 Jan 2025 22:36:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B15C800D2;
-	Sun, 12 Jan 2025 23:35:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EF66780619;
+	Sun, 12 Jan 2025 23:35:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GOCX8KPB";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="lyWwwC4f";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rMc2+MnY";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Vu5tnM1N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1814A8058A; Sun, 12 Jan 2025 23:35:56 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id E976080619; Sun, 12 Jan 2025 23:35:57 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C44BF80079
- for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 23:35:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB83A801F5
+ for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 23:35:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,31 +31,33 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YWVbY3WZnz9sPn;
- Sun, 12 Jan 2025 23:35:53 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YWVbb37mPz9scw;
+ Sun, 12 Jan 2025 23:35:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1736721355;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=yGVTONTR7Boglcxbi73pTfYHV4sGDhdKw1TA5luu+Ck=;
+ b=rMc2+MnYw+Jrx9fHjUbc49PpACcuFGDdt++gasuzPwwA/cYj+7Uo2dtEW1miRBMCEmXGMc
+ dCv13pbqs4sTvtuCGrgBcIXUuLYESWSNNyifdKhe98XzpShfs8K+gh3/dWmm5Ztf5XQey9
+ uVMZNmYPHYnnwr8H3Iz2phF+qrwQPyFefoYBU2WBw731EKpYJHz5bHc88/+6bDRNebUSG8
+ mPUAiRo4QSsaCnlvHRE0o3ZFQ7t7n0cTUrzyH1HmvVvOkozWdkG6M2x8DDXY3RtuXZCliA
+ 0b5KfN/nA9pGswdCUVo5jsVGsrnoyNpdUrJT9m71ltZWhEjV2ah0Z8VaY81JfQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1736721353;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=LSGgO8N1psWc//EAg/yA8AZdx2JdfM30rpNIBjhiDqk=;
- b=GOCX8KPBZGrSvWiH1A2wUK93Qa6QrB+q0Q25MBgRdAgXUgtB3n1CS95amjYVxM1PDIsFeh
- UR3CCqvdY9mY6mm9+4XsmKznHdGkfU5jtXN7z/hTEM5x1895CnXh1qOsyOHXtrCOWtslZt
- rtCUfbvYfW9o2V4vxlDswYTFQhdFbgu5TnCHQf8wf4AlQR+aQJ3NAXYBLVS7ifgJDaP28F
- sTid9E0CtgULtytqB89sBvTl9l2EjyllIefI7uHkvG2UF/qvBOR5sdlML3bzeVCS/YbufQ
- tcmzl/jseAeB69Wndw8eVq9rfk9G9Hgje8pnG3YZ23oTrBOzA5n+lHmHl/DGhw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1736721351;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=LSGgO8N1psWc//EAg/yA8AZdx2JdfM30rpNIBjhiDqk=;
- b=lyWwwC4fRgxwKO/YvSHJGxNoMCB977l6rBg5G9WtI1cqjfLfYYGOPq7xrJbUVeQFa2Bsbs
- HtaAjNM6+qb+evBhDQFDNL99C9+YIVyAmcOAwwGO4hH+Vk1S83WnXQEFkgSotgIV2FQD49
- NAaitQTDCd3B/aRShzN1AMq1eI9zImTP8q8+2L5jqRKmAc09S5u/u9FGVHoi880lByjeGC
- U3SoMRkNc/uwyGZb2wFr5TdPwlBUN+GD6TTMVWTpiYfTpaiSZZqOgHNmrei9NXhl9qZMnQ
- xHDDr3MqaoLDC+UyHRHl+UA9MS7g+rSjiqk2uq2b4EWm5khzRIZ1viLko74Oxg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=yGVTONTR7Boglcxbi73pTfYHV4sGDhdKw1TA5luu+Ck=;
+ b=Vu5tnM1N7P0GNr/tDjlAC7l2jET8afVaSynWSKe4EQ68+7jSHrkic9NEnGnvCvxzg59MuC
+ 0E+vhE45S0jiLjFhclVCWsgzbOZQFo7CB7ciEvEjzLmhF6K6tSOLV1g3kJcGqawuaXKfk3
+ DYf9v817cnqCvu1v0GvnhLUOGg55MMtS3PgtMHSHZU7fBc8nqHz7oEQhwb4Ni4v2nLHjKN
+ C0LS4sMVW428ad5ewetEBUHMGkb+62d62IV1yLkUgWvi/hG25V8eXnShNOrFG0fFm11fgD
+ tHPk9Mbv/tSSmZFWL+Uo0K59OUS2NCO55kAkMxsEIPxY4NqUB/J79HVfRLvtRg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
@@ -63,15 +65,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/8] ARM: renesas: Rename board/renesas/rcar-common to
- board/renesas/common
-Date: Sun, 12 Jan 2025 23:34:20 +0100
-Message-ID: <20250112223528.179828-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 2/8] ARM: renesas: Simplify board Makefiles
+Date: Sun, 12 Jan 2025 23:34:21 +0100
+Message-ID: <20250112223528.179828-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250112223528.179828-1-marek.vasut+renesas@mailbox.org>
+References: <20250112223528.179828-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: ma5zns6njmxc31x5sm7pjfacszm3r33x
-X-MBO-RS-ID: 3235b7f66bfdd15491a
-X-Rspamd-Queue-Id: 4YWVbY3WZnz9sPn
+X-MBO-RS-META: n33okjnf76h9gz8kz44pe93aoxdt8qbc
+X-MBO-RS-ID: 08e5f00f576e57b5623
+X-Rspamd-Queue-Id: 4YWVbb37mPz9scw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,11 +91,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename directory board/renesas/rcar-common to board/renesas/common and
-move files. This allows the build system to use HAVE_VENDOR_COMMON_LIB
-which automatically includes board/$(VENDOR)/common/Makefile . This is
-a preparatory patch for board Makefile simplification. No functional
-change so far.
+Introduce board/renesas/common/Makefile and remove the multiple
+duplicate copies of obj := ../common/*.o from board Makefiles.
+Let the build system include the common Makefile using the
+HAVE_VENDOR_COMMON_LIB and build the common objects that are
+shared by all the boards that way. No functional change intended.
+
+Some of the remaining board files which include board specific
+settings have been updated to use obj-y += to avoid rewriting
+the board obj-y target and avoid dropping object files from the
+build.
+
+Board Makefiles cannot be empty, else they do not generate built-in.o,
+move the CONFIG_XPL_BUILD ifdeffery from Makefiles into .c files to
+make sure there is always a built-in.o generated from the remaining
+minimal Makefiles. This will be further cleaned up in follow up patches.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -105,288 +118,414 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- board/beacon/beacon-rzg2m/Makefile                  | 2 +-
- board/hoperun/hihope-rzg2/Makefile                  | 2 +-
- board/renesas/{rcar-common => common}/common.c      | 2 +-
- board/renesas/{rcar-common => common}/gen3-common.c | 2 +-
- board/renesas/{rcar-common => common}/gen3-spl.c    | 0
- board/renesas/{rcar-common => common}/gen4-common.c | 2 +-
- board/renesas/{rcar-common => common}/gen4-spl.c    | 0
- board/renesas/{rcar-common => common}/v3-common.c   | 0
- board/renesas/condor/Makefile                       | 4 ++--
- board/renesas/draak/Makefile                        | 4 ++--
- board/renesas/eagle/Makefile                        | 4 ++--
- board/renesas/ebisu/Makefile                        | 4 ++--
- board/renesas/falcon/Makefile                       | 4 ++--
- board/renesas/grayhawk/Makefile                     | 2 +-
- board/renesas/salvator-x/Makefile                   | 4 ++--
- board/renesas/spider/Makefile                       | 2 +-
- board/renesas/ulcb/Makefile                         | 4 ++--
- board/renesas/v3hsk/Makefile                        | 4 ++--
- board/renesas/v3msk/Makefile                        | 4 ++--
- board/renesas/whitehawk/Makefile                    | 4 ++--
- board/silinux/ek874/Makefile                        | 4 ++--
- 21 files changed, 29 insertions(+), 29 deletions(-)
- rename board/renesas/{rcar-common => common}/common.c (97%)
- rename board/renesas/{rcar-common => common}/gen3-common.c (99%)
- rename board/renesas/{rcar-common => common}/gen3-spl.c (100%)
- rename board/renesas/{rcar-common => common}/gen4-common.c (97%)
- rename board/renesas/{rcar-common => common}/gen4-spl.c (100%)
- rename board/renesas/{rcar-common => common}/v3-common.c (100%)
+ board/renesas/common/Makefile         | 45 +++++++++++++++++++++++++++
+ board/renesas/common/gen3-common.c    |  3 --
+ board/renesas/condor/Makefile         | 13 --------
+ board/renesas/draak/Makefile          |  6 +---
+ board/renesas/draak/draak.c           |  4 +++
+ board/renesas/eagle/Makefile          | 13 --------
+ board/renesas/ebisu/Makefile          | 13 --------
+ board/renesas/falcon/Makefile         | 13 --------
+ board/renesas/grayhawk/Makefile       |  9 ------
+ board/renesas/salvator-x/Makefile     |  6 +---
+ board/renesas/salvator-x/salvator-x.c |  4 +++
+ board/renesas/spider/Makefile         |  9 ------
+ board/renesas/ulcb/Makefile           |  6 +---
+ board/renesas/ulcb/cpld.c             |  4 +++
+ board/renesas/ulcb/ulcb.c             |  4 +++
+ board/renesas/v3hsk/Makefile          |  5 ---
+ board/renesas/v3hsk/cpld.c            |  4 +++
+ board/renesas/v3msk/Makefile          |  5 ---
+ board/renesas/v3msk/cpld.c            |  4 +++
+ board/renesas/whitehawk/Makefile      | 13 --------
+ 20 files changed, 72 insertions(+), 111 deletions(-)
+ create mode 100644 board/renesas/common/Makefile
+ delete mode 100644 board/renesas/condor/Makefile
+ delete mode 100644 board/renesas/eagle/Makefile
+ delete mode 100644 board/renesas/ebisu/Makefile
+ delete mode 100644 board/renesas/falcon/Makefile
+ delete mode 100644 board/renesas/grayhawk/Makefile
+ delete mode 100644 board/renesas/spider/Makefile
+ delete mode 100644 board/renesas/whitehawk/Makefile
 
-diff --git a/board/beacon/beacon-rzg2m/Makefile b/board/beacon/beacon-rzg2m/Makefile
-index 332b41f35c0..6a6ae94def8 100644
---- a/board/beacon/beacon-rzg2m/Makefile
-+++ b/board/beacon/beacon-rzg2m/Makefile
-@@ -6,4 +6,4 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
- 
--obj-y	:= beacon-rzg2m.o ../../renesas/rcar-common/gen3-common.o ../../renesas/rcar-common/common.o
-+obj-y	:= beacon-rzg2m.o ../../renesas/common/gen3-common.o ../../renesas/common/common.o
-diff --git a/board/hoperun/hihope-rzg2/Makefile b/board/hoperun/hihope-rzg2/Makefile
-index 700e26daa2b..a42c55b9d00 100644
---- a/board/hoperun/hihope-rzg2/Makefile
-+++ b/board/hoperun/hihope-rzg2/Makefile
-@@ -6,4 +6,4 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
- 
--obj-y	:= hihope-rzg2.o ../../renesas/rcar-common/gen3-common.o ../../renesas/rcar-common/common.o
-+obj-y	:= hihope-rzg2.o ../../renesas/common/gen3-common.o ../../renesas/common/common.o
-diff --git a/board/renesas/rcar-common/common.c b/board/renesas/common/common.c
-similarity index 97%
-rename from board/renesas/rcar-common/common.c
-rename to board/renesas/common/common.c
-index 90eb468e4c4..7fba8d10ff5 100644
---- a/board/renesas/rcar-common/common.c
-+++ b/board/renesas/common/common.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- * board/renesas/rcar-common/common.c
-+ * board/renesas/common/common.c
-  *
-  * Copyright (C) 2013 Renesas Electronics Corporation
-  * Copyright (C) 2013 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
-diff --git a/board/renesas/rcar-common/gen3-common.c b/board/renesas/common/gen3-common.c
-similarity index 99%
-rename from board/renesas/rcar-common/gen3-common.c
-rename to board/renesas/common/gen3-common.c
-index 4291e1d5bcb..549bec9e137 100644
---- a/board/renesas/rcar-common/gen3-common.c
+diff --git a/board/renesas/common/Makefile b/board/renesas/common/Makefile
+new file mode 100644
+index 00000000000..2072338ea05
+--- /dev/null
++++ b/board/renesas/common/Makefile
+@@ -0,0 +1,45 @@
++#
++# board/renesas/whitehawk/Makefile
++#
++# Copyright (C) 2024 Marek Vasut <marek.vasut+renesas@mailbox.org>
++#
++# SPDX-License-Identifier: GPL-2.0+
++#
++
++# R-Car SoCs
++ifndef CONFIG_RZG2L
++
++# 32 bit SoCs
++ifdef CONFIG_RCAR_GEN2
++endif
++
++# 64 bit SoCs
++ifdef CONFIG_RCAR_64
++ifndef CONFIG_XPL_BUILD
++obj-y	+= common.o
++endif
++
++ifdef CONFIG_RCAR_GEN3
++ifdef CONFIG_XPL_BUILD
++obj-y	+= gen3-spl.o
++else
++obj-y	+= gen3-common.o
++ifdef CONFIG_R8A77970
++obj-y	+= v3-common.o
++endif
++ifdef CONFIG_R8A77980
++obj-y	+= v3-common.o
++endif
++endif
++endif
++
++ifdef CONFIG_RCAR_GEN4
++ifdef CONFIG_XPL_BUILD
++obj-y	+= gen4-spl.o
++else
++obj-y	+= gen4-common.o
++endif
++endif
++endif
++
++endif
+diff --git a/board/renesas/common/gen3-common.c b/board/renesas/common/gen3-common.c
+index 549bec9e137..840ea6d7820 100644
+--- a/board/renesas/common/gen3-common.c
 +++ b/board/renesas/common/gen3-common.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- * board/renesas/rcar-common/gen3-common.c
-+ * board/renesas/common/gen3-common.c
-  *
-  * Copyright (C) 2013 Renesas Electronics Corporation
-  * Copyright (C) 2013 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
-diff --git a/board/renesas/rcar-common/gen3-spl.c b/board/renesas/common/gen3-spl.c
-similarity index 100%
-rename from board/renesas/rcar-common/gen3-spl.c
-rename to board/renesas/common/gen3-spl.c
-diff --git a/board/renesas/rcar-common/gen4-common.c b/board/renesas/common/gen4-common.c
-similarity index 97%
-rename from board/renesas/rcar-common/gen4-common.c
-rename to board/renesas/common/gen4-common.c
-index 2abe9660cf8..52a0639073b 100644
---- a/board/renesas/rcar-common/gen4-common.c
-+++ b/board/renesas/common/gen4-common.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * board/renesas/rcar-common/gen4-common.c
-+ * board/renesas/common/gen4-common.c
-  *
-  * Copyright (C) 2021-2024 Renesas Electronics Corp.
-  */
-diff --git a/board/renesas/rcar-common/gen4-spl.c b/board/renesas/common/gen4-spl.c
-similarity index 100%
-rename from board/renesas/rcar-common/gen4-spl.c
-rename to board/renesas/common/gen4-spl.c
-diff --git a/board/renesas/rcar-common/v3-common.c b/board/renesas/common/v3-common.c
-similarity index 100%
-rename from board/renesas/rcar-common/v3-common.c
-rename to board/renesas/common/v3-common.c
-diff --git a/board/renesas/condor/Makefile b/board/renesas/condor/Makefile
-index fe3a2fd3b7a..3b1756b44cd 100644
---- a/board/renesas/condor/Makefile
-+++ b/board/renesas/condor/Makefile
-@@ -7,7 +7,7 @@
- #
+@@ -17,8 +17,6 @@
+ #include <asm/arch/renesas.h>
+ #include <linux/libfdt.h>
  
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= ../rcar-common/gen3-common.o ../rcar-common/common.o
-+obj-y	:= ../common/gen3-common.o ../common/common.o
- endif
+-#ifdef CONFIG_RCAR_64
+-
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ /* If the firmware passed a device tree use it for e.g. U-Boot DRAM setup. */
+@@ -182,4 +180,3 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	return 0;
+ }
+ #endif
+-#endif
+diff --git a/board/renesas/condor/Makefile b/board/renesas/condor/Makefile
+deleted file mode 100644
+index 3b1756b44cd..00000000000
+--- a/board/renesas/condor/Makefile
++++ /dev/null
+@@ -1,13 +0,0 @@
+-#
+-# board/renesas/condor/Makefile
+-#
+-# Copyright (C) 2019 Renesas Electronics Corporation
+-#
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= ../common/gen3-common.o ../common/common.o
+-endif
 diff --git a/board/renesas/draak/Makefile b/board/renesas/draak/Makefile
-index 3ed7800b0e9..6ce05bcd649 100644
+index 6ce05bcd649..945cc2134e8 100644
 --- a/board/renesas/draak/Makefile
 +++ b/board/renesas/draak/Makefile
-@@ -7,7 +7,7 @@
- #
- 
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= draak.o ../rcar-common/gen3-common.o ../rcar-common/common.o
-+obj-y	:= draak.o ../common/gen3-common.o ../common/common.o
- endif
-diff --git a/board/renesas/eagle/Makefile b/board/renesas/eagle/Makefile
-index 3f5fdab1bc2..a5c18d81eef 100644
---- a/board/renesas/eagle/Makefile
-+++ b/board/renesas/eagle/Makefile
-@@ -7,7 +7,7 @@
- #
- 
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= ../rcar-common/v3-common.o ../rcar-common/gen3-common.o ../rcar-common/common.o
-+obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
- endif
-diff --git a/board/renesas/ebisu/Makefile b/board/renesas/ebisu/Makefile
-index 8139391029d..72130b76234 100644
---- a/board/renesas/ebisu/Makefile
-+++ b/board/renesas/ebisu/Makefile
-@@ -7,7 +7,7 @@
- #
- 
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= ../rcar-common/gen3-common.o ../rcar-common/common.o
-+obj-y	:= ../common/gen3-common.o ../common/common.o
- endif
-diff --git a/board/renesas/falcon/Makefile b/board/renesas/falcon/Makefile
-index 48fcfac9105..949953f6981 100644
---- a/board/renesas/falcon/Makefile
-+++ b/board/renesas/falcon/Makefile
-@@ -7,7 +7,7 @@
- #
- 
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= ../rcar-common/gen4-common.o ../rcar-common/common.o
-+obj-y	:= ../common/gen4-common.o ../common/common.o
- endif
-diff --git a/board/renesas/grayhawk/Makefile b/board/renesas/grayhawk/Makefile
-index 7414b773326..a70bd3739f1 100644
---- a/board/renesas/grayhawk/Makefile
-+++ b/board/renesas/grayhawk/Makefile
-@@ -6,4 +6,4 @@
+@@ -6,8 +6,4 @@
  # SPDX-License-Identifier: GPL-2.0+
  #
  
--obj-y	:= ../rcar-common/gen4-common.o ../rcar-common/common.o
-+obj-y	:= ../common/gen4-common.o ../common/common.o
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= draak.o ../common/gen3-common.o ../common/common.o
+-endif
++obj-y	+= draak.o
+diff --git a/board/renesas/draak/draak.c b/board/renesas/draak/draak.c
+index a51bf65674f..b742b8d6220 100644
+--- a/board/renesas/draak/draak.c
++++ b/board/renesas/draak/draak.c
+@@ -6,6 +6,8 @@
+  * Copyright (C) 2017 Marek Vasut <marek.vasut+renesas@gmail.com>
+  */
+ 
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++
+ #include <cpu_func.h>
+ #include <hang.h>
+ #include <init.h>
+@@ -65,3 +67,5 @@ int board_init(void)
+ 
+ 	return 0;
+ }
++
++#endif
+diff --git a/board/renesas/eagle/Makefile b/board/renesas/eagle/Makefile
+deleted file mode 100644
+index a5c18d81eef..00000000000
+--- a/board/renesas/eagle/Makefile
++++ /dev/null
+@@ -1,13 +0,0 @@
+-#
+-# board/renesas/eagle/Makefile
+-#
+-# Copyright (C) 2015 Renesas Electronics Corporation
+-#
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
+-endif
+diff --git a/board/renesas/ebisu/Makefile b/board/renesas/ebisu/Makefile
+deleted file mode 100644
+index 72130b76234..00000000000
+--- a/board/renesas/ebisu/Makefile
++++ /dev/null
+@@ -1,13 +0,0 @@
+-#
+-# board/renesas/ebisu/Makefile
+-#
+-# Copyright (C) 2018 Renesas Electronics Corporation
+-#
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= ../common/gen3-common.o ../common/common.o
+-endif
+diff --git a/board/renesas/falcon/Makefile b/board/renesas/falcon/Makefile
+deleted file mode 100644
+index 949953f6981..00000000000
+--- a/board/renesas/falcon/Makefile
++++ /dev/null
+@@ -1,13 +0,0 @@
+-#
+-# board/renesas/falcon/Makefile
+-#
+-# Copyright (C) 2020 Renesas Electronics Corp.
+-#
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= ../common/gen4-common.o ../common/common.o
+-endif
+diff --git a/board/renesas/grayhawk/Makefile b/board/renesas/grayhawk/Makefile
+deleted file mode 100644
+index a70bd3739f1..00000000000
+--- a/board/renesas/grayhawk/Makefile
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#
+-# board/renesas/grayhawk/Makefile
+-#
+-# Copyright (C) 2023 Renesas Electronics Corp.
+-#
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-
+-obj-y	:= ../common/gen4-common.o ../common/common.o
 diff --git a/board/renesas/salvator-x/Makefile b/board/renesas/salvator-x/Makefile
-index fe7c78ef2ff..fe53366829c 100644
+index fe53366829c..daea3e6838f 100644
 --- a/board/renesas/salvator-x/Makefile
 +++ b/board/renesas/salvator-x/Makefile
-@@ -7,7 +7,7 @@
- #
- 
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= salvator-x.o ../rcar-common/gen3-common.o ../rcar-common/common.o
-+obj-y	:= salvator-x.o ../common/gen3-common.o ../common/common.o
- endif
-diff --git a/board/renesas/spider/Makefile b/board/renesas/spider/Makefile
-index 9489917278c..e0f403d5fcc 100644
---- a/board/renesas/spider/Makefile
-+++ b/board/renesas/spider/Makefile
-@@ -6,4 +6,4 @@
+@@ -6,8 +6,4 @@
  # SPDX-License-Identifier: GPL-2.0+
  #
  
--obj-y	:= ../rcar-common/gen4-common.o ../rcar-common/common.o
-+obj-y	:= ../common/gen4-common.o ../common/common.o
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= salvator-x.o ../common/gen3-common.o ../common/common.o
+-endif
++obj-y	+= salvator-x.o
+diff --git a/board/renesas/salvator-x/salvator-x.c b/board/renesas/salvator-x/salvator-x.c
+index 2c8860bcee4..b6fb106ca5d 100644
+--- a/board/renesas/salvator-x/salvator-x.c
++++ b/board/renesas/salvator-x/salvator-x.c
+@@ -7,6 +7,8 @@
+  * Copyright (C) 2015 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+  */
+ 
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++
+ #include <cpu_func.h>
+ #include <image.h>
+ #include <init.h>
+@@ -93,3 +95,5 @@ int board_fit_config_name_match(const char *name)
+ 	return -1;
+ }
+ #endif
++
++#endif
+diff --git a/board/renesas/spider/Makefile b/board/renesas/spider/Makefile
+deleted file mode 100644
+index e0f403d5fcc..00000000000
+--- a/board/renesas/spider/Makefile
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#
+-# board/renesas/spider/Makefile
+-#
+-# Copyright (C) 2020 Renesas Electronics Corp.
+-#
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-
+-obj-y	:= ../common/gen4-common.o ../common/common.o
 diff --git a/board/renesas/ulcb/Makefile b/board/renesas/ulcb/Makefile
-index c3c2f391e55..6b2aa8c29f6 100644
+index 6b2aa8c29f6..4f608613c15 100644
 --- a/board/renesas/ulcb/Makefile
 +++ b/board/renesas/ulcb/Makefile
-@@ -7,7 +7,7 @@
+@@ -6,8 +6,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
  #
  
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= ulcb.o cpld.o ../rcar-common/gen3-common.o ../rcar-common/common.o
-+obj-y	:= ulcb.o cpld.o ../common/gen3-common.o ../common/common.o
- endif
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= ulcb.o cpld.o ../common/gen3-common.o ../common/common.o
+-endif
++obj-y	+= ulcb.o cpld.o
+diff --git a/board/renesas/ulcb/cpld.c b/board/renesas/ulcb/cpld.c
+index e72e45e3fb4..6a708d86cc8 100644
+--- a/board/renesas/ulcb/cpld.c
++++ b/board/renesas/ulcb/cpld.c
+@@ -6,6 +6,8 @@
+  * Copyright (C) 2017 Cogent Embedded, Inc.
+  */
+ 
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++
+ #include <command.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+@@ -189,3 +191,5 @@ U_BOOT_DRIVER(sysreset_renesas_ulcb) = {
+ 	.of_match	= renesas_ulcb_sysreset_ids,
+ 	.priv_auto	= sizeof(struct renesas_ulcb_sysreset_priv),
+ };
++
++#endif
+diff --git a/board/renesas/ulcb/ulcb.c b/board/renesas/ulcb/ulcb.c
+index 64f01b123cb..e1445adbb69 100644
+--- a/board/renesas/ulcb/ulcb.c
++++ b/board/renesas/ulcb/ulcb.c
+@@ -6,6 +6,8 @@
+  * Copyright (C) 2017 Renesas Electronics Corporation
+  */
+ 
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++
+ #include <image.h>
+ #include <init.h>
+ #include <malloc.h>
+@@ -84,3 +86,5 @@ int board_fit_config_name_match(const char *name)
+ 	return -1;
+ }
+ #endif
++
++#endif
 diff --git a/board/renesas/v3hsk/Makefile b/board/renesas/v3hsk/Makefile
-index ee04f67d986..936047cb3d5 100644
+index 936047cb3d5..0091bc9cd5b 100644
 --- a/board/renesas/v3hsk/Makefile
 +++ b/board/renesas/v3hsk/Makefile
-@@ -8,8 +8,8 @@
+@@ -7,9 +7,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
  #
  
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= ../rcar-common/v3-common.o ../rcar-common/gen3-common.o ../rcar-common/common.o
-+obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
  obj-$(CONFIG_SYSRESET)	+= cpld.o
- endif
+-endif
+diff --git a/board/renesas/v3hsk/cpld.c b/board/renesas/v3hsk/cpld.c
+index 1272aec7302..b82622f9c54 100644
+--- a/board/renesas/v3hsk/cpld.c
++++ b/board/renesas/v3hsk/cpld.c
+@@ -7,6 +7,8 @@
+  *
+  */
+ 
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++
+ #include <dm.h>
+ #include <errno.h>
+ #include <i2c.h>
+@@ -177,3 +179,5 @@ U_BOOT_DRIVER(sysreset_renesas_v3hsk) = {
+ 	.probe		= renesas_v3hsk_sysreset_probe,
+ 	.of_match	= renesas_v3hsk_sysreset_ids,
+ };
++
++#endif
 diff --git a/board/renesas/v3msk/Makefile b/board/renesas/v3msk/Makefile
-index 63e06a4b5fd..21eaddb6c28 100644
+index 21eaddb6c28..fe8bf1ed1ae 100644
 --- a/board/renesas/v3msk/Makefile
 +++ b/board/renesas/v3msk/Makefile
-@@ -8,8 +8,8 @@
+@@ -7,9 +7,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
  #
  
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../rcar-common/gen3-spl.o
-+obj-y	:= ../common/gen3-spl.o
- else
--obj-y	:= ../rcar-common/v3-common.o ../rcar-common/gen3-common.o ../rcar-common/common.o
-+obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
+-ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../common/gen3-spl.o
+-else
+-obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
  obj-$(CONFIG_SYSRESET)	+= cpld.o
- endif
+-endif
+diff --git a/board/renesas/v3msk/cpld.c b/board/renesas/v3msk/cpld.c
+index 260755ac746..93f3bf391cd 100644
+--- a/board/renesas/v3msk/cpld.c
++++ b/board/renesas/v3msk/cpld.c
+@@ -7,6 +7,8 @@
+  *
+  */
+ 
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <dm.h>
+@@ -365,3 +367,5 @@ U_BOOT_DRIVER(sysreset_renesas_v3msk) = {
+ 	.of_match	= renesas_v3msk_sysreset_ids,
+ 	.priv_auto	= sizeof(struct renesas_v3msk_sysreset_priv),
+ };
++
++#endif
 diff --git a/board/renesas/whitehawk/Makefile b/board/renesas/whitehawk/Makefile
-index 80f92e6b041..f10eb82d221 100644
+deleted file mode 100644
+index f10eb82d221..00000000000
 --- a/board/renesas/whitehawk/Makefile
-+++ b/board/renesas/whitehawk/Makefile
-@@ -7,7 +7,7 @@
- #
- 
- ifdef CONFIG_SPL_BUILD
--obj-y	:= ../rcar-common/gen4-spl.o
-+obj-y	:= ../common/gen4-spl.o
- else
--obj-y	:= ../rcar-common/gen4-common.o ../rcar-common/common.o
-+obj-y	:= ../common/gen4-common.o ../common/common.o
- endif
-diff --git a/board/silinux/ek874/Makefile b/board/silinux/ek874/Makefile
-index 879da9edacf..c1cab6fa788 100644
---- a/board/silinux/ek874/Makefile
-+++ b/board/silinux/ek874/Makefile
-@@ -7,7 +7,7 @@
- #
- 
- ifdef CONFIG_XPL_BUILD
--obj-y	:= ../../renesas/rcar-common/gen3-spl.o
-+obj-y	:= ../../renesas/common/gen3-spl.o
- else
--obj-y	:= ek874.o ../../renesas/rcar-common/gen3-common.o ../../renesas/rcar-common/common.o
-+obj-y	:= ek874.o ../../renesas/common/gen3-common.o ../../renesas/common/common.o
- endif
++++ /dev/null
+@@ -1,13 +0,0 @@
+-#
+-# board/renesas/whitehawk/Makefile
+-#
+-# Copyright (C) 2021 Renesas Electronics Corp.
+-#
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-
+-ifdef CONFIG_SPL_BUILD
+-obj-y	:= ../common/gen4-spl.o
+-else
+-obj-y	:= ../common/gen4-common.o ../common/common.o
+-endif
 -- 
 2.45.2
 
