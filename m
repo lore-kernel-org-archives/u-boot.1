@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 131F9E7719E
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 07:41:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED940E7719E
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 07:49:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D74C80141;
-	Mon, 13 Jan 2025 08:41:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 705E880141;
+	Mon, 13 Jan 2025 08:49:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HH7eCz2D";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DujgscdJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57379801CF; Mon, 13 Jan 2025 08:40:59 +0100 (CET)
+ id 4779C801CF; Mon, 13 Jan 2025 08:49:41 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4562A8007D
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 08:40:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 428248007D
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 08:49:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1736754053; x=1737358853; i=xypron.glpk@gmx.de;
- bh=uCatCkuc1PxE5/RMcx25gq8eN25cfzf9eeqdYwDU8As=;
+ s=s31663417; t=1736754575; x=1737359375; i=xypron.glpk@gmx.de;
+ bh=LeBfVOI4v4WgOSuKQbdJOhfBthkJBfh5Cg1QMJ8oGbQ=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=HH7eCz2D8G7iQ2ePzikZHTFZUb184NcKqn4Afsba0Kq6xqT5bAKF/e4mYyeLWzPu
- 3ey5y45fa0bhdxo72dGvCuuCrHbheAn7FNLFbI2vv4wsYVaYTOWzCmNng8qnNNUPy
- DctEZTdOP6LlMbbg6W7LdXBQGQTTXy8k3bM7JU4tfTp2vPCQsBaGnwj4j7ThBBXdd
- Mg3b+bh33Cwg28iCt9Nw8/5GK9k0ZDbnfgTGgVDlQEripB+3r0Qq2c/fI6UAOrWjy
- 7IL/ybcbyToLB68EoxksaoEiHudM5rgszjtBRWlsfDnLKhoFwwLLQVINyG3zDWl+G
- CX1EbGMdKZdTeo00Ng==
+ b=DujgscdJkIielQMtSCELt7MZ7lpEOQC979y33F4kkgIW+VaZcz8EsXGBw+Qk9nT0
+ xiIFc/4/HA4Eoa9xc4DxlJEzOatmUlqk53sol5rxH80dqGZvakz35NMQ442T9TcFk
+ L2pjp/uDWQu23L4i7ET/Fr8nswo+dcfiM+m/bgGIAexhFV7/q63dFQ8s0IJXPGFT5
+ dQfBg5GltquZvuCP3siLPIzHlsmXANhwBorcWUehz7PME8SvP7b+VYFz1pg2WrBXl
+ rN8/j2m07kJZ2+Egph2Ikm9qKvMrClvRpwl7UQaTO8NxHwRiURwYsq64I2fzG71pj
+ rw64jk0tdPfFWsFtWg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mj8qd-1t1V9U1Ht7-00o48P; Mon, 13
- Jan 2025 08:40:53 +0100
-Message-ID: <97107163-de68-45dc-9462-c4f7cae06e31@gmx.de>
-Date: Mon, 13 Jan 2025 08:40:52 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mz9Yv-1tKgKi29Vz-01465u; Mon, 13
+ Jan 2025 08:49:35 +0100
+Message-ID: <e865e678-3319-4b89-b2c9-28a2ddea46f1@gmx.de>
+Date: Mon, 13 Jan 2025 08:49:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] bootstd: Probe bootmeth devices for bootmeths env var
+Subject: Re: [PATCH 3/3] bootstd: Fix incorrect struct name in
+ bootmeth_setup_iter_order()
 To: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
 References: <20250112034213.13153-1-semen.protsenko@linaro.org>
- <20250112034213.13153-3-semen.protsenko@linaro.org>
+ <20250112034213.13153-4-semen.protsenko@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250112034213.13153-3-semen.protsenko@linaro.org>
+In-Reply-To: <20250112034213.13153-4-semen.protsenko@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:rTikuoxv7t3k/QJBawCZv789a5CwEYnQmZ9Eshe3Lg1NpQDExJj
- VieJHPj6jbYxfsZxw7q8KeSkGOAU2UKNnSwyKzrobM9BHYNfZW5oO4/Lw1yB2t8qP/Z4qql
- aQWriR42QKL26sT4+bG0bPQppQfkGO80YClQxlNfj7SMOOsMYzcTKQrufXIxsjHzwyttpOJ
- 2vihpxyy84g3QEcWHyh5A==
-UI-OutboundReport: notjunk:1;M01:P0:ZWGlnlsA4Yw=;kRPfh9ypUp4t8GXN7EjUVL4biBU
- ROiFZ+R2sZp3Y5W9xHwEMisgCYRf8tkudha+zHt0zUiAs5uBMAG3MgBXZvcvxRm6AjFbyW7CM
- nB04y+X9LFc1fA39aC9hEo4XJRY5FgTEItxL9wOR+GYdPOFc6258tJ8OQhTxEV6PxP1E2Lp+m
- 42KP0el+jnOZ2lN2Ze5yms9Rbk26H82JG8fZOD98aw1Dk5BZLQULlO8S5ib+u3zHalOAhRf/D
- BoL4NwNWaY+3ZTqKdaqCXwxkCvjmi0TbF0RrMtrH6H9K/DO+kIbtb6CRy54UAt5fqRxwV2tQa
- 0xKHim9VxmRpzWBwelA4HF2GOk8b2j2qAktK4Ed8pgG62YaDlmV3IrW3R0TGYL+5YA3EZJXnO
- viEb1JUB8MC95Z/oYx50vAlHkMBB3YY0W6hu/ZmXMTUKMmVN3BzP+cyjVidWPnvWAFJsc5Pz5
- uQ3HUvJRrQeYrHKYZQXylht5Jd2hXND3xNfgKw7g4/Ywmb9/qO0TZf+W5WqJgdHkiMCAvY8eo
- jnLihBjan4RaSv9AtvRByt4AK7+8XmOJn9oHjc/lEuBfrIhxJq4iURqE/1Jq0CYs6OWjHitm5
- J908K5Bz+nndgTcRNWqF0GZMRbbL+KwiwTdozOqiT7srpZOSrB8owI5gf4CCiv5VRAwWSL+yp
- J/iATgwzVChkwJ3u1Wtn5pL/rEqGcaoOotFoqex0VcXcQ4D0kDSFZMunLBb63QVqUPrKCM5Kq
- q6v07gmW0IMbjwx5Lz4JKPF9ukawQp8zhc47TgQydSTfPXmXvadp+bIWcl+Ku3W50WCcEm+p8
- +87QS9HSt15tuSMq0vVmFdG46e5Rci5ZAfKjMZ2eLu/rLKaakaMq4Hli6RSRAaMi8viOnzpxt
- /GD6Yp60RiqfA9NqCdsGPIZgtgXG6iAp3gni01YO0T55SUZ+KRxSWia5Ii8Hsubvpse9LMFqH
- kvNvRsUcnN2Ow7g4waiMotuDKdsIJ6G5+CcFM1TnfGN/srqvWApOhU+2tlVbEeSZLy+krvu65
- CuGBd9X0H6XuN/31UrFDHyT1ZQN6S54D/8Hi62eIBpe0/1xHu5Wx+ARhLBEW5T8Qaa5JImAdU
- GlbRUruVJl+wxFQGfTLYbK1y5JeF0g
+X-Provags-ID: V03:K1:+o1LCl9pP7vS6pllWpyrDBhuUzWG/Uvnv9ZDhtKGfXNws25MPq3
+ kXPNA7gle01vWKH8Y+H7RXlBGuzCAbjj4rUxWKu2WcFNVg/8jqsJ2TNkANuNryq59whbJdj
+ 2DPCRZE7SZ/tTxrlRtrNJAqE+3ywrN0rBml9rbo2AlcCqyw7m3zsAp2ppUZgzaQlE00pkyf
+ 74HpKGF6cLsk7DIbPoOYg==
+UI-OutboundReport: notjunk:1;M01:P0:sSB+OfKhlJ4=;LTNi9B3xHO2eZeO0v6Xv0hv4mig
+ fo/HJASAYYxGk/Iy7qYTBHXnkf9il0EUzR76vrR+wRX1BTZEqXFbrSSQN22pwiS86FYmQ9OgG
+ vRJ0pf84rB+HDUPGh3MkG+f5I33rggYPOuKByT+BrkuQBlS5DxZ9RgZL4gVWopSa1ruPAtP6F
+ fU/9ahYVSH5+31UgHW0v6lzHY3QtzJpdL0EgC8YSWQOqpeKxI2AsXdUZLs94611i9N1RQeYw2
+ R+ak0KnYeEXmM9cMrFyCxqCoyyZ+vP5/Yl7NLHKDL7EqN5aA0Z/ZcXuxsvs5mIzPijRFIpIie
+ iYs5qh5a8aDF7OG7KU1zdrP9rgVSVApuD+VAUG4Qcei2lV7zwBDXbebT266JxWsgiNRufo1mn
+ lhEh44/g8MZWqe/fSXHYfUUZhg5po9I2okYZi7urXPXnx0QkuNmY27a1TFXJsijazejPiHVzG
+ 2FhInflPexJf7XdeER7841nG1cjbQadyPdYDWaE1j1jdpjTyF0YSaH1Gy6pLffyCPReJUDz4T
+ 5fUiRBCCJ8wyeaLMdCqA1EcVS16HY2aJ6kXJqsGc6jjJZqm/vA+STZnA4DY9F+1mxBUx5bo4S
+ 1duXPc0uM3gCyFpe7aHaNKBZr+/43UVPJAwRIVtz/sPb48yGScFgdxN7vDS1ayDdk3nL4Dv2x
+ BOLJ1ammqT3hP5WrITdxfOVuEdV5DERJJWCFp72zVPReXI3cmtvXHF0qzPKvYed/lXnPxGG3v
+ 5hgZyuaQ4k1QAxSBAjdmDnEhthaMuLAnwB4e6olN17yug0aUvnciS/Iicgvq71dJ5vp6aEvU7
+ EYq0hjFoyGqHmimV4hBAiWL53rJyDIX/okarolqYxkTNVCEAXxoW70Bt77P5ddxEWvOt/rIzr
+ TZcpCMuO4eThPrxI4YhpPh9ITceaImWrMCJKFm6vqyQ5wfsxUGuJ7giXB/gq2mf2hzb3RVNcp
+ k76GQiFV3pFBSTMhqVDWFZijlsCC6QqJlKa1kM3I3cYNZsTyRqJdt0Uw2Im32sn8cq6xsWGeQ
+ sBubtDoJ+FDN3RXowTaD4Hk4e93YYZ9W1JssQHhwGixjgZ6cqR1RemH+6aaV1WFgM0pdb3sZE
+ 2JVismjcmH/7GzB1P29pTkxfozPbnn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,87 +98,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 1/12/25 04:42, Sam Protsenko wrote:
-> Specifying efi_mgr in 'bootmeths' environment variable leads to NULL
-> pointer dereference when 'bootflow scan' is executed, with call trace
-> like this:
+> There is no such thing as struct bootmeth, it's probably a typo. This
+> issue doesn't affect the execution as it's a pointer, and pointer sizes
+> are the same for all data types. But it can be confusing, so make it
+> struct udevice, as it should be.
 >
->      priv->fake_dev // NULL pointer dereference
->      .read_bootflow =3D efi_mgr_read_bootflow()
->      bootmeth_get_bootflow()
->      bootflow_check()
->      bootflow_scan_first()
->      do_bootflow_scan()
->      'bootflow scan -l'
->
-> That happens because in case when 'bootmeths' env var is defined the
-> bootmeth_efi_mgr driver is not probed, and the memory for its private
-> data isn't allocated by .priv_auto. In case when 'bootmeths' env var is
-> not defined, the std->bootmeth_count is 0, and the execution flow in
-> bootmeth_setup_iter_order() takes "no ordering" path, which in turn runs
-> uclass_get_device_by_seq() -> ... -> device_probe(), so issue isn't
-> present there. But when 'bootmeths' is defined and contains efi_mgr, the
-> std->bootmeth_count > 0, so bootmeth_setup_iter_order() follows the "we
-> have an ordering" path, where devices are not probed. In other words:
->
->      'bootmeths' defined           'bootmeths' not defined
->      --------------------------------------------------------
->      priv =3D=3D NULL                    priv !=3D NULL
->           ^                                ^
->           |                        device_alloc_priv()
->       no probe                     device_of_to_plat()
->           ^                        device_probe()
->           |                        uclass_get_device_tail()
->      dev =3D order[i]                uclass_get_device_by_seq()
->           ^                                ^
->           | have an ordering               | no ordering
->           +----------------+---------------+
->                            |
->               bootmeth_setup_iter_order()
->               bootflow_scan_first()
->               do_bootflow_scan()
->
-> Add an explicit device_probe() call in "we have an ordering" case to fix
-> the issue.
->
-> Fixes: c627cfc14c08 ("bootstd: Allow scanning for global bootmeths separ=
-ately")
+> Fixes: a950d31abe98 ("bootstd: Add the bootmeth uclass and helpers")
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
->   boot/bootmeth-uclass.c | 7 +++++++
->   1 file changed, 7 insertions(+)
+>   boot/bootmeth-uclass.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
 > diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-> index ff36da78d5a1..049389403191 100644
+> index 049389403191..2496e8c1d8a8 100644
 > --- a/boot/bootmeth-uclass.c
 > +++ b/boot/bootmeth-uclass.c
-> @@ -11,6 +11,7 @@
->   #include <bootmeth.h>
->   #include <bootstd.h>
->   #include <dm.h>
-> +#include <dm/device-internal.h>
->   #include <env_internal.h>
->   #include <fs.h>
->   #include <malloc.h>
-> @@ -146,6 +147,12 @@ int bootmeth_setup_iter_order(struct bootflow_iter =
-*iter, bool include_global)
->   				struct bootmeth_uc_plat *ucp;
->   				bool is_global;
->
-> +				ret =3D device_probe(dev);
-> +				if (ret) {
-> +					ret =3D log_msg_ret("probe", ret);
-> +					goto err_order;
-> +				}
+> @@ -139,7 +139,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *=
+iter, bool include_global)
+>   			goto err_order;
+>   		}
+>   		memcpy(order, std->bootmeth_order,
+> -		       count * sizeof(struct bootmeth *));
+> +		       count * sizeof(struct udevice *));
 
-This would mean that we fail boot if probing one of the boot devices
-fails. Shouldn't we remove the device from the order instead?
+I found this description of the field:
+@bootmeth_order: List of bootmeth devices to use, in order, NULL-terminate=
+d
+
+As the list is NULL terminated, shouldn't we copy the NULL value, i.e.
+
+     (count + 1) * sizeof(struct udevice *)
+
+so that we can still identify the end of the list?
 
 Best regards
 
 Heinrich
 
-> +
->   				ucp =3D dev_get_uclass_plat(dev);
->   				is_global =3D ucp->flags &
->   					BOOTMETHF_GLOBAL;
+>
+>   		if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL)) {
+>   			for (i =3D 0; i < count; i++) {
 
