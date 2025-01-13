@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2804E7719E
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 07:37:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 131F9E7719E
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 07:41:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31B2A80141;
-	Mon, 13 Jan 2025 08:37:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1D74C80141;
+	Mon, 13 Jan 2025 08:41:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Xbzn+1Sr";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HH7eCz2D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB4D78007D; Mon, 13 Jan 2025 08:37:06 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 57379801CF; Mon, 13 Jan 2025 08:40:59 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7C518007D
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 08:37:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4562A8007D
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 08:40:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1736753824; x=1737358624; i=xypron.glpk@gmx.de;
- bh=r66n1Vq6Tg1gD9DXAyRrPt5vMEg604RSj2QFcknvGHM=;
+ s=s31663417; t=1736754053; x=1737358853; i=xypron.glpk@gmx.de;
+ bh=uCatCkuc1PxE5/RMcx25gq8eN25cfzf9eeqdYwDU8As=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=Xbzn+1SrG1CgCqbMUORH6r0iJXZL2f+1QQmRetiT4j7otNEjNhytH4IC7rKhBG/U
- cL7S9jp3aIl2MfpQdfSypvarNiDhNtvsypc+62O2eCrv//pBTItR/+6PcRymqH+J3
- HLKQ0HW1Dd55pLlLUbGRBq1QcQWn+ZK0Dlls91fvcoyRE/zWi1YAennf0Kg0YNYrH
- SX5p24c/VPx7Aftcq6pgSxfzwWT+HkF0go3qdRD2fsAziLtwCzfOivGhjasyiC1eP
- skZBHfiaggTjO/dQz1bKDgr8esAByRCJ6SZdzI3BI7gGWS/Tv7XBNXQN0ciiZpCAy
- r5yOpqiH/cHQUB/59g==
+ b=HH7eCz2D8G7iQ2ePzikZHTFZUb184NcKqn4Afsba0Kq6xqT5bAKF/e4mYyeLWzPu
+ 3ey5y45fa0bhdxo72dGvCuuCrHbheAn7FNLFbI2vv4wsYVaYTOWzCmNng8qnNNUPy
+ DctEZTdOP6LlMbbg6W7LdXBQGQTTXy8k3bM7JU4tfTp2vPCQsBaGnwj4j7ThBBXdd
+ Mg3b+bh33Cwg28iCt9Nw8/5GK9k0ZDbnfgTGgVDlQEripB+3r0Qq2c/fI6UAOrWjy
+ 7IL/ybcbyToLB68EoxksaoEiHudM5rgszjtBRWlsfDnLKhoFwwLLQVINyG3zDWl+G
+ CX1EbGMdKZdTeo00Ng==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N95iH-1tSPlX1PN9-00wQb8; Mon, 13
- Jan 2025 08:37:04 +0100
-Message-ID: <420bb6ae-adf3-41ba-a6a7-1553a1eabf81@gmx.de>
-Date: Mon, 13 Jan 2025 08:37:03 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mj8qd-1t1V9U1Ht7-00o48P; Mon, 13
+ Jan 2025 08:40:53 +0100
+Message-ID: <97107163-de68-45dc-9462-c4f7cae06e31@gmx.de>
+Date: Mon, 13 Jan 2025 08:40:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] bootstd: Fix memleak on errors in
- bootmeth_setup_iter_order()
-To: Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 2/3] bootstd: Probe bootmeth devices for bootmeths env var
+To: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 References: <20250112034213.13153-1-semen.protsenko@linaro.org>
- <20250112034213.13153-2-semen.protsenko@linaro.org>
+ <20250112034213.13153-3-semen.protsenko@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250112034213.13153-2-semen.protsenko@linaro.org>
+In-Reply-To: <20250112034213.13153-3-semen.protsenko@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:4WxLB0yuRB+oubVHvXViv2Jsb6yaxhRdzd5EwWuikYJP/f4rUo9
- 8/KgTS4gsfQzPsAkFVAa9raRWorrYbLhE7LTBS5/zP71hVqRPvzJF3vtpp+UV1pIMQgdsSJ
- cH6ecFGCjYjt1L+E2NkwbMrwgs3ryXicwgc4EFlb4TU7s552/C5uApROiott/MqjC+pLcpD
- QUwrvnI69hcX0gZriE7kw==
-UI-OutboundReport: notjunk:1;M01:P0:bAq6TemnCaM=;tt6yRAqc30NrWNU7LVAPnhHPn69
- lv1ct0BQXzvW7pVZzbn+0TC/V4OOY596794KGb6TtMr1ajvW5WgvaVW3EI5IhFd7NjLBjVs/+
- AmaWOHMj7Aw8I+b3zuboB2orhCZiawNLBppB8k/PWy/jvdn1nvjmVLO4ed+VG9vObNBkoUftt
- SfL/Yk/epI1moKn4wYdJ4GjXx3XdubVQpl6LxnKVzGj0VWVRf+UaMo3/cuCjq9+Ew+K9Zy/VZ
- f2/k/ku5j3TPZM+Q5Zr6gh006N5zMl6NkWsdMR0ZjcH9feyHhGDg+u3yCN+UHnoM99rv+FPL+
- 9yKpqE1DLv38qAOryjCootHAw5hWcHWdPJKvDr89gB6idy4TWoktbl//1tYKlxvnxuSMRarTD
- Y+jnx7lZHxYJEybE+YmToX1MQ3vS1YDIf9g4BfACcnGkpcndUXQ/wY/qU8FR9wyvdYwwdFUxL
- vyMgWGDHFE7OiR14YgBFp3Sj+qmXng21M2Y9BMwQJE6I2SACnDjt+qg0xJbYutzzADu8psIGW
- MotqD0r+iRg38hGTmSNBAokxlM4AEaHBWQYoj9doN6t/HYU5HeNyxkKlIlEmi4G8jiA9f+LMQ
- 1u5dlVnr91gCH78S7jxycgswiCzFajeRAkludd33OGz0ccvf6sRZ0C4Otl59T8jpkQ4YuN8+Q
- 8daPYqj6CD0lEkD1WPt8AJINQqPjABsBzdbvDBhy30PRiGQOLFy02mWEdRT5FApiznFE9N4lE
- wkAwEEEMIjjQhTwmMZxgGx62RKwqUoAZXc0nQpOt6Snpc/XhL6Hsta95k6T3O65+J1+AugNLE
- lgII7yzxPKCjhX+4jKeRRtUwKKZ0ManxZoPav+23n20+Z0s61fzCLgjtTQACmePElKV5TtOBi
- 3srFRPFEaf4s8aYuHsLcwzY0njGWZXZOXPXHW/5fJivLGbUTifT8HbJ0dlu/3tP7FBjNkZz5Q
- 9LBAEN0lj9KzjRcLKSmRgxyolJ+RoaqQDNVKEM36RWvkA7Rl0r9jnIwdsGRH+atR2Xl1n8mUy
- jMJrkduIkDf26kAoFPgWvgJap976Fitehc0GKBiIq1OryUOfQ53mY8/O1qFTfFhuOFFulI25W
- hDfX3J6EZnXJ13KPyOlWy9b998wF6V
+X-Provags-ID: V03:K1:rTikuoxv7t3k/QJBawCZv789a5CwEYnQmZ9Eshe3Lg1NpQDExJj
+ VieJHPj6jbYxfsZxw7q8KeSkGOAU2UKNnSwyKzrobM9BHYNfZW5oO4/Lw1yB2t8qP/Z4qql
+ aQWriR42QKL26sT4+bG0bPQppQfkGO80YClQxlNfj7SMOOsMYzcTKQrufXIxsjHzwyttpOJ
+ 2vihpxyy84g3QEcWHyh5A==
+UI-OutboundReport: notjunk:1;M01:P0:ZWGlnlsA4Yw=;kRPfh9ypUp4t8GXN7EjUVL4biBU
+ ROiFZ+R2sZp3Y5W9xHwEMisgCYRf8tkudha+zHt0zUiAs5uBMAG3MgBXZvcvxRm6AjFbyW7CM
+ nB04y+X9LFc1fA39aC9hEo4XJRY5FgTEItxL9wOR+GYdPOFc6258tJ8OQhTxEV6PxP1E2Lp+m
+ 42KP0el+jnOZ2lN2Ze5yms9Rbk26H82JG8fZOD98aw1Dk5BZLQULlO8S5ib+u3zHalOAhRf/D
+ BoL4NwNWaY+3ZTqKdaqCXwxkCvjmi0TbF0RrMtrH6H9K/DO+kIbtb6CRy54UAt5fqRxwV2tQa
+ 0xKHim9VxmRpzWBwelA4HF2GOk8b2j2qAktK4Ed8pgG62YaDlmV3IrW3R0TGYL+5YA3EZJXnO
+ viEb1JUB8MC95Z/oYx50vAlHkMBB3YY0W6hu/ZmXMTUKMmVN3BzP+cyjVidWPnvWAFJsc5Pz5
+ uQ3HUvJRrQeYrHKYZQXylht5Jd2hXND3xNfgKw7g4/Ywmb9/qO0TZf+W5WqJgdHkiMCAvY8eo
+ jnLihBjan4RaSv9AtvRByt4AK7+8XmOJn9oHjc/lEuBfrIhxJq4iURqE/1Jq0CYs6OWjHitm5
+ J908K5Bz+nndgTcRNWqF0GZMRbbL+KwiwTdozOqiT7srpZOSrB8owI5gf4CCiv5VRAwWSL+yp
+ J/iATgwzVChkwJ3u1Wtn5pL/rEqGcaoOotFoqex0VcXcQ4D0kDSFZMunLBb63QVqUPrKCM5Kq
+ q6v07gmW0IMbjwx5Lz4JKPF9ukawQp8zhc47TgQydSTfPXmXvadp+bIWcl+Ku3W50WCcEm+p8
+ +87QS9HSt15tuSMq0vVmFdG46e5Rci5ZAfKjMZ2eLu/rLKaakaMq4Hli6RSRAaMi8viOnzpxt
+ /GD6Yp60RiqfA9NqCdsGPIZgtgXG6iAp3gni01YO0T55SUZ+KRxSWia5Ii8Hsubvpse9LMFqH
+ kvNvRsUcnN2Ow7g4waiMotuDKdsIJ6G5+CcFM1TnfGN/srqvWApOhU+2tlVbEeSZLy+krvu65
+ CuGBd9X0H6XuN/31UrFDHyT1ZQN6S54D/8Hi62eIBpe0/1xHu5Wx+ARhLBEW5T8Qaa5JImAdU
+ GlbRUruVJl+wxFQGfTLYbK1y5JeF0g
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,69 +97,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 1/12/25 04:42, Sam Protsenko wrote:
-> Free memory allocated for 'order' (array of bootmeths) on error paths in
-> bootmeth_setup_iter_order() function.
+> Specifying efi_mgr in 'bootmeths' environment variable leads to NULL
+> pointer dereference when 'bootflow scan' is executed, with call trace
+> like this:
+>
+>      priv->fake_dev // NULL pointer dereference
+>      .read_bootflow =3D efi_mgr_read_bootflow()
+>      bootmeth_get_bootflow()
+>      bootflow_check()
+>      bootflow_scan_first()
+>      do_bootflow_scan()
+>      'bootflow scan -l'
+>
+> That happens because in case when 'bootmeths' env var is defined the
+> bootmeth_efi_mgr driver is not probed, and the memory for its private
+> data isn't allocated by .priv_auto. In case when 'bootmeths' env var is
+> not defined, the std->bootmeth_count is 0, and the execution flow in
+> bootmeth_setup_iter_order() takes "no ordering" path, which in turn runs
+> uclass_get_device_by_seq() -> ... -> device_probe(), so issue isn't
+> present there. But when 'bootmeths' is defined and contains efi_mgr, the
+> std->bootmeth_count > 0, so bootmeth_setup_iter_order() follows the "we
+> have an ordering" path, where devices are not probed. In other words:
+>
+>      'bootmeths' defined           'bootmeths' not defined
+>      --------------------------------------------------------
+>      priv =3D=3D NULL                    priv !=3D NULL
+>           ^                                ^
+>           |                        device_alloc_priv()
+>       no probe                     device_of_to_plat()
+>           ^                        device_probe()
+>           |                        uclass_get_device_tail()
+>      dev =3D order[i]                uclass_get_device_by_seq()
+>           ^                                ^
+>           | have an ordering               | no ordering
+>           +----------------+---------------+
+>                            |
+>               bootmeth_setup_iter_order()
+>               bootflow_scan_first()
+>               do_bootflow_scan()
+>
+> Add an explicit device_probe() call in "we have an ordering" case to fix
+> the issue.
 >
 > Fixes: c627cfc14c08 ("bootstd: Allow scanning for global bootmeths separ=
 ately")
-> Fixes: 10d16faa436c ("bootstd: Detect empty bootmeth")
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
->   boot/bootmeth-uclass.c | 16 ++++++++++++----
->   1 file changed, 12 insertions(+), 4 deletions(-)
+>   boot/bootmeth-uclass.c | 7 +++++++
+>   1 file changed, 7 insertions(+)
 >
 > diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-> index 5b5fea39b3b3..ff36da78d5a1 100644
+> index ff36da78d5a1..049389403191 100644
 > --- a/boot/bootmeth-uclass.c
 > +++ b/boot/bootmeth-uclass.c
-> @@ -133,8 +133,10 @@ int bootmeth_setup_iter_order(struct bootflow_iter =
+> @@ -11,6 +11,7 @@
+>   #include <bootmeth.h>
+>   #include <bootstd.h>
+>   #include <dm.h>
+> +#include <dm/device-internal.h>
+>   #include <env_internal.h>
+>   #include <fs.h>
+>   #include <malloc.h>
+> @@ -146,6 +147,12 @@ int bootmeth_setup_iter_order(struct bootflow_iter =
 *iter, bool include_global)
->   		 * We don't support skipping global bootmeths. Instead, the user
->   		 * should omit them from the ordering
->   		 */
-> -		if (!include_global)
-> -			return log_msg_ret("glob", -EPERM);
-> +		if (!include_global) {
-> +			ret =3D log_msg_ret("glob", -EPERM);
-> +			goto err_order;
-> +		}
->   		memcpy(order, std->bootmeth_order,
->   		       count * sizeof(struct bootmeth *));
+>   				struct bootmeth_uc_plat *ucp;
+>   				bool is_global;
 >
-> @@ -188,8 +190,10 @@ int bootmeth_setup_iter_order(struct bootflow_iter =
-*iter, bool include_global)
->   		}
->   		count =3D upto;
->   	}
-> -	if (!count)
-> -		return log_msg_ret("count2", -ENOENT);
-> +	if (!count) {
-> +		ret =3D log_msg_ret("count2", -ENOENT);
-> +		goto err_order;
-> +	}
->
->   	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && include_global &&
->   	    iter->first_glob_method !=3D -1 && iter->first_glob_method !=3D c=
-ount) {
-> @@ -200,6 +204,10 @@ int bootmeth_setup_iter_order(struct bootflow_iter =
-*iter, bool include_global)
->   	iter->num_methods =3D count;
->
->   	return 0;
-> +
-> +err_order:
-> +	free(order);
-> +	return ret;
->   }
->
->   int bootmeth_set_order(const char *order_str)
+> +				ret =3D device_probe(dev);
+> +				if (ret) {
+> +					ret =3D log_msg_ret("probe", ret);
+> +					goto err_order;
+> +				}
 
-bootmeth_setup_iter_order() is called when the `boot scan` command is
-executed. The command can be executed multiple times, shouldn't we free
-iter->method_order before reassigning it? Hopefully the field is NULL if
-not initialized.
+This would mean that we fail boot if probing one of the boot devices
+fails. Shouldn't we remove the device from the order instead?
 
 Best regards
 
 Heinrich
+
+> +
+>   				ucp =3D dev_get_uclass_plat(dev);
+>   				is_global =3D ucp->flags &
+>   					BOOTMETHF_GLOBAL;
 
