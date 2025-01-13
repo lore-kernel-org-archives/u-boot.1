@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED940E7719E
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 07:49:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 928F5E7719E
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 09:12:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 705E880141;
-	Mon, 13 Jan 2025 08:49:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 84EE1805C5;
+	Mon, 13 Jan 2025 10:11:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DujgscdJ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jX91V+U4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4779C801CF; Mon, 13 Jan 2025 08:49:41 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2A91B805DA; Mon, 13 Jan 2025 10:11:58 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 428248007D
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 08:49:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F2CC1801CF
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 10:11:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1736754575; x=1737359375; i=xypron.glpk@gmx.de;
- bh=LeBfVOI4v4WgOSuKQbdJOhfBthkJBfh5Cg1QMJ8oGbQ=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=DujgscdJkIielQMtSCELt7MZ7lpEOQC979y33F4kkgIW+VaZcz8EsXGBw+Qk9nT0
- xiIFc/4/HA4Eoa9xc4DxlJEzOatmUlqk53sol5rxH80dqGZvakz35NMQ442T9TcFk
- L2pjp/uDWQu23L4i7ET/Fr8nswo+dcfiM+m/bgGIAexhFV7/q63dFQ8s0IJXPGFT5
- dQfBg5GltquZvuCP3siLPIzHlsmXANhwBorcWUehz7PME8SvP7b+VYFz1pg2WrBXl
- rN8/j2m07kJZ2+Egph2Ikm9qKvMrClvRpwl7UQaTO8NxHwRiURwYsq64I2fzG71pj
- rw64jk0tdPfFWsFtWg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mz9Yv-1tKgKi29Vz-01465u; Mon, 13
- Jan 2025 08:49:35 +0100
-Message-ID: <e865e678-3319-4b89-b2c9-28a2ddea46f1@gmx.de>
-Date: Mon, 13 Jan 2025 08:49:34 +0100
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-385deda28b3so2250257f8f.0
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 01:11:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1736759515; x=1737364315;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fQnmGEXVumQRMT3Mj4Iqro4rKso6BZFspWXTFeV2Lso=;
+ b=jX91V+U4QIbNtERrRFMnSKPVEUiTwnxUts+LePsyO77JRAZ8GrbVUgVaFGNYCVHqNG
+ 8ZlnMexavjbuI/vZoqkUeT7GVP9XfqI55QbN97z93JDrq5qdj5X9tfHuL3d1oB0ajqvv
+ yik2scKBU3wL6Z+VT9Qn7mR6FMr1HZmDzsmaI0A9ZolFUVdxxvZjrDBBO32sYdHfio0Z
+ Ksn5jDp7CfxEt+k6SgFfCF3FzxIqwZuam7E0wKLYIOmHOFRib9OsBfC5/czP8YjOC8UD
+ igYOn1zDZxp4rgEYelqaweKAPhG7tt5E3edrJ1EOK/Tm4Jz2Y4cQJ/nU+1n1MsHuRE2g
+ T9tA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736759515; x=1737364315;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fQnmGEXVumQRMT3Mj4Iqro4rKso6BZFspWXTFeV2Lso=;
+ b=HIhUDSK54BVxcz+FL/fL3wnvc0GJAVDnzaEwzY4AJSYCYsymIMzCkh9ghClXD5RTwn
+ F4KcYURyN0gNf1wtoWv8KY85d8WWmTsDZFm/4EWuyEx5aoo+w+FR5dAZAMKOaJgtt+0i
+ DEMKhnvqa3v93eM9x/05RXiEDBnuTw7I2HQ5KCLFmfB2M3OTbxe3lnA9qcBPwEv/6olC
+ qhjXfEvEDuscmAw91j3R/gbHSjWd2EVOdx4J+yKIihXbLRbKCxIBkaoIyrqic+13TsDE
+ qBqxXWm0gGGLMWIsHT5L1fe/KM6t+J9o1694ks3MQT71nuOVGK/FjkyUeqOM0Fu8XP5z
+ SIkg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXL2MTOfstCMpGdY1F+Dd4qfywSTKKCUUF4KhmWPkk/KY8y385m0/5KJ5ztvCM17754pgCOu9Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzm/L0VsuerKrNu2FzuWLtzNTNJ92x8AP5fMMk+9n1oxLZPRH97
+ a6Gsvpx8M4BuVZR8R8G018c66E8aoXoXH5JS0311mVmIUwLxoFxCj1pujR5rmSw=
+X-Gm-Gg: ASbGncvHA4LCpJ0xOCjY0edWbWIjwJXbvniSPGYIN3NsVIhy4fGskZSpixvdR2GaE6u
+ n1zEUnBATrmmd++Eg0qNPAqmLnRhCE0tE6BtmD8VJNXbsbPNbTpnapxQ1bm4cWjhWGTgeW6p90E
+ NWn9+TLyiym0gEdatfelI8rE59Y56yhdQ8S8xZmt03CVggoLQ5Wa+aLjRziBAHg9qM2DvgH2ueL
+ om77HIFgxz4SGNh/ojjiIelQQJyL9Olh5cWfKT/AKiXHaO/u7THZ2soU2g+Ow1JtHabd7xX
+X-Google-Smtp-Source: AGHT+IFHIg00wDeWODgGlJQLIGjNB06DHGDvQfR8SrmP19876LnxNAVCB4/KP8cf4OPME2gGchCABQ==
+X-Received: by 2002:a5d:598b:0:b0:38a:5ce8:df6d with SMTP id
+ ffacd0b85a97d-38a872fb0eemr15954979f8f.1.1736759514827; 
+ Mon, 13 Jan 2025 01:11:54 -0800 (PST)
+Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a8e38d013sm11857746f8f.58.2025.01.13.01.11.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Jan 2025 01:11:53 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Mon, 13 Jan 2025 10:11:45 +0100
+Subject: [PATCH] boot: android: Check kcmdline's for NULL in
+ android_image_get_kernel()
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] bootstd: Fix incorrect struct name in
- bootmeth_setup_iter_order()
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-References: <20250112034213.13153-1-semen.protsenko@linaro.org>
- <20250112034213.13153-4-semen.protsenko@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250112034213.13153-4-semen.protsenko@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:+o1LCl9pP7vS6pllWpyrDBhuUzWG/Uvnv9ZDhtKGfXNws25MPq3
- kXPNA7gle01vWKH8Y+H7RXlBGuzCAbjj4rUxWKu2WcFNVg/8jqsJ2TNkANuNryq59whbJdj
- 2DPCRZE7SZ/tTxrlRtrNJAqE+3ywrN0rBml9rbo2AlcCqyw7m3zsAp2ppUZgzaQlE00pkyf
- 74HpKGF6cLsk7DIbPoOYg==
-UI-OutboundReport: notjunk:1;M01:P0:sSB+OfKhlJ4=;LTNi9B3xHO2eZeO0v6Xv0hv4mig
- fo/HJASAYYxGk/Iy7qYTBHXnkf9il0EUzR76vrR+wRX1BTZEqXFbrSSQN22pwiS86FYmQ9OgG
- vRJ0pf84rB+HDUPGh3MkG+f5I33rggYPOuKByT+BrkuQBlS5DxZ9RgZL4gVWopSa1ruPAtP6F
- fU/9ahYVSH5+31UgHW0v6lzHY3QtzJpdL0EgC8YSWQOqpeKxI2AsXdUZLs94611i9N1RQeYw2
- R+ak0KnYeEXmM9cMrFyCxqCoyyZ+vP5/Yl7NLHKDL7EqN5aA0Z/ZcXuxsvs5mIzPijRFIpIie
- iYs5qh5a8aDF7OG7KU1zdrP9rgVSVApuD+VAUG4Qcei2lV7zwBDXbebT266JxWsgiNRufo1mn
- lhEh44/g8MZWqe/fSXHYfUUZhg5po9I2okYZi7urXPXnx0QkuNmY27a1TFXJsijazejPiHVzG
- 2FhInflPexJf7XdeER7841nG1cjbQadyPdYDWaE1j1jdpjTyF0YSaH1Gy6pLffyCPReJUDz4T
- 5fUiRBCCJ8wyeaLMdCqA1EcVS16HY2aJ6kXJqsGc6jjJZqm/vA+STZnA4DY9F+1mxBUx5bo4S
- 1duXPc0uM3gCyFpe7aHaNKBZr+/43UVPJAwRIVtz/sPb48yGScFgdxN7vDS1ayDdk3nL4Dv2x
- BOLJ1ammqT3hP5WrITdxfOVuEdV5DERJJWCFp72zVPReXI3cmtvXHF0qzPKvYed/lXnPxGG3v
- 5hgZyuaQ4k1QAxSBAjdmDnEhthaMuLAnwB4e6olN17yug0aUvnciS/Iicgvq71dJ5vp6aEvU7
- EYq0hjFoyGqHmimV4hBAiWL53rJyDIX/okarolqYxkTNVCEAXxoW70Bt77P5ddxEWvOt/rIzr
- TZcpCMuO4eThPrxI4YhpPh9ITceaImWrMCJKFm6vqyQ5wfsxUGuJ7giXB/gq2mf2hzb3RVNcp
- k76GQiFV3pFBSTMhqVDWFZijlsCC6QqJlKa1kM3I3cYNZsTyRqJdt0Uw2Im32sn8cq6xsWGeQ
- sBubtDoJ+FDN3RXowTaD4Hk4e93YYZ9W1JssQHhwGixjgZ6cqR1RemH+6aaV1WFgM0pdb3sZE
- 2JVismjcmH/7GzB1P29pTkxfozPbnn
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250113-kcmdline-extra-fix-v1-1-03cc9c039159@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIANDYhGcC/x2MQQqAIBAAvyJ7bkGziPpKdBBda6ksNCII/550n
+ IGZFxJFpgSDeCHSzYmPUEBVAuxiwkzIrjDUsm6lUhpXu7uNAyE9VzTo+cFW9loralznNZTwjFT
+ 0Px2nnD9quy/OZAAAAA==
+X-Change-ID: 20250113-kcmdline-extra-fix-509331e4d7f3
+To: Tom Rini <trini@konsulko.com>, Nicolas Belin <nbelin@baylibre.com>
+Cc: Guillaume La Roque <glaroque@baylibre.com>, 
+ Aaron Kling <webgeek1234@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
+ u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.14.3-dev-86319
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,45 +103,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/12/25 04:42, Sam Protsenko wrote:
-> There is no such thing as struct bootmeth, it's probably a typo. This
-> issue doesn't affect the execution as it's a pointer, and pointer sizes
-> are the same for all data types. But it can be confusing, so make it
-> struct udevice, as it should be.
->
-> Fixes: a950d31abe98 ("bootstd: Add the bootmeth uclass and helpers")
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> ---
->   boot/bootmeth-uclass.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-> index 049389403191..2496e8c1d8a8 100644
-> --- a/boot/bootmeth-uclass.c
-> +++ b/boot/bootmeth-uclass.c
-> @@ -139,7 +139,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *=
-iter, bool include_global)
->   			goto err_order;
->   		}
->   		memcpy(order, std->bootmeth_order,
-> -		       count * sizeof(struct bootmeth *));
-> +		       count * sizeof(struct udevice *));
+From: Aaron Kling <webgeek1234@gmail.com>
 
-I found this description of the field:
-@bootmeth_order: List of bootmeth devices to use, in order, NULL-terminate=
-d
+kcmdline and kcmdline_extra strings can be NULL. In that case, we still
+read the content from 0x00000 and pass that to the kernel, which is
+completely wrong.
 
-As the list is NULL terminated, shouldn't we copy the NULL value, i.e.
+Fix android_image_get_kernel() to check for NULL before checking if
+they are empty strings.
 
-     (count + 1) * sizeof(struct udevice *)
+Fixes: 53a0ddb6d3be ("boot: android: fix extra command line support")
+Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+Thanks to Aaron for reporting this on the aosp-devs discord and for
+fixing this.
+---
+ boot/image-android.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-so that we can still identify the end of the list?
+diff --git a/boot/image-android.c b/boot/image-android.c
+index 60a422dfb74a6c683b3cf9d2b19b3ad1dbd0d151..fa4e14ca4698e1dea105388dd2ea590024cafa58 100644
+--- a/boot/image-android.c
++++ b/boot/image-android.c
+@@ -337,12 +337,12 @@ int android_image_get_kernel(const void *hdr,
+ 	if (bootargs)
+ 		len += strlen(bootargs);
+ 
+-	if (*img_data.kcmdline) {
++	if (img_data.kcmdline && *img_data.kcmdline) {
+ 		printf("Kernel command line: %s\n", img_data.kcmdline);
+ 		len += strlen(img_data.kcmdline) + (len ? 1 : 0); /* +1 for extra space */
+ 	}
+ 
+-	if (*img_data.kcmdline_extra) {
++	if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
+ 		printf("Kernel extra command line: %s\n", img_data.kcmdline_extra);
+ 		len += strlen(img_data.kcmdline_extra) + (len ? 1 : 0); /* +1 for extra space */
+ 	}
+@@ -357,13 +357,13 @@ int android_image_get_kernel(const void *hdr,
+ 	if (bootargs)
+ 		strcpy(newbootargs, bootargs);
+ 
+-	if (*img_data.kcmdline) {
++	if (img_data.kcmdline && *img_data.kcmdline) {
+ 		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
+ 			strcat(newbootargs, " ");
+ 		strcat(newbootargs, img_data.kcmdline);
+ 	}
+ 
+-	if (*img_data.kcmdline_extra) {
++	if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
+ 		if (*newbootargs) /* If there is something in newbootargs, a space is needed */
+ 			strcat(newbootargs, " ");
+ 		strcat(newbootargs, img_data.kcmdline_extra);
 
-Best regards
+---
+base-commit: bc157bb6667ed97e33be8ce8436c28baa275b295
+change-id: 20250113-kcmdline-extra-fix-509331e4d7f3
 
-Heinrich
-
->
->   		if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL)) {
->   			for (i =3D 0; i < count; i++) {
+Best regards,
+-- 
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
