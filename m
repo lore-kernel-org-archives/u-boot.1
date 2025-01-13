@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBAB8C02180
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 15:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CD7FC02184
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 16:48:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB730801CF;
-	Mon, 13 Jan 2025 16:44:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ADD36801CF;
+	Mon, 13 Jan 2025 17:48:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kKEyjOr6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W9y8wHpa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E25F805DA; Mon, 13 Jan 2025 16:44:59 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 24589805DA; Mon, 13 Jan 2025 17:48:31 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B907980141
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 16:44:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA09480141
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 17:48:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b9ad0e84e6so429739785a.0
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 07:44:56 -0800 (PST)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-4679eacf25cso30661791cf.3
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 08:48:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736783095; x=1737387895; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736786907; x=1737391707; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CsP/lU5XOOr4NfZqpHPS5qM9nIJZETyeSg/lreaQ85o=;
- b=kKEyjOr6n87pjeYQx4pIsrnpO2Lbl/rZoElIzxCf+HIg/SGFuy4g6bI8yBbRGLeip5
- IwaIQ10+kKmp0MtP2vDejrEYXyqAIYnDXJ2cI01G8dU1imvFBSntEX6XHh12y/EmCesB
- h2cpJ5qOB0b/BT4ERLr3SZ5N//1JQi9oXeDa8=
+ bh=+x3XrTIc3qJl//3FIMK4wOelQLqbvFIjODF1zWPGO6M=;
+ b=W9y8wHpadjR/Xaj7r/ORCg/b0b1Tzaxs7rWxQr2Ye0fglRKhvBYy3dq1XR1L3klKdY
+ aFoQ3yEc5s74HSPsOtH56ufdbkjhG1Jnz0Pik4v0aU+0AVF/ubrqwtl1m2PyS7i6RdVc
+ Ctlw4OogUwV6Np5VDAWRdiX5kj2mizWtDQUko=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736783095; x=1737387895;
+ d=1e100.net; s=20230601; t=1736786907; x=1737391707;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CsP/lU5XOOr4NfZqpHPS5qM9nIJZETyeSg/lreaQ85o=;
- b=bFamxuStzmWa0V7mU6GXL6Kt4afg1dTkJCN6kmAMZrPxCCl4yUb5h7CdFfe5V1CHYF
- eqBzrq18HaZw0zbvVNZtzY5AOj7nl8OGlbtyIUmnx4zbOQ4cP8ALYMC2KQ+yxbkChM8B
- Gp0JlZfz1JEfbaLq6tdH3P0b2Gzf0IAv6yMdgrCB6wUHlukn3P0AF59bqLLAmpftS1XZ
- D9S1kowD6GMXIu+ar7FUzP+l1RJkCpWGmtbPg89C638O28rAAGtmM13wBOOup0KFYI9N
- 7NM+hY3SdIZ5q+0MtECqK+dYnsiuqFrqfY/+N+dOp2eXsPWwWDKYy+KhRpHc+B2wXrcL
- OzMg==
-X-Gm-Message-State: AOJu0Yzcg2XorW4xt00MTHApR5IxjU+e/LEwE02FseYyOtBchgz8McR8
- w61onG+KpUszN5b1PVdshdtLoOkno76Dq/qDul0LIA5jitVnBfPFO6cU1Hz4D8E=
-X-Gm-Gg: ASbGncukM2LIVU0e3mTb0EjFJs0+pbgmAAfPMeWqiCTqBF9tNOY8h21iHHMYqyugxAz
- 2m+zDHHnFI7hurFih0wDQpGFhbA1qRW726rnoMRczKbjiFruK18Ou6k9MMlcVe8pLPbZuu8YYki
- eUSmiaGCrjdXKZ/MUfk8QYohvCGMHAJm/j1AXokqQQuFdskbmHJFiob+gg9eJcNhUyNifvR+3t9
- 74eTjiuT6B1WPdnjfYoa7iUFf3QvJd3Bnp26A3w5FORw8HWbmcH/Us=
-X-Google-Smtp-Source: AGHT+IGDEXX8WiMzAQaBsPXtLijr3Jxv3S6yCT550lBleb6loanU8rzdJ3DPO5NWDek07UzHf4900g==
-X-Received: by 2002:a05:620a:2b9c:b0:7b6:d23a:be39 with SMTP id
- af79cd13be357-7bcd97a7077mr3355026985a.44.1736783095589; 
- Mon, 13 Jan 2025 07:44:55 -0800 (PST)
+ bh=+x3XrTIc3qJl//3FIMK4wOelQLqbvFIjODF1zWPGO6M=;
+ b=QWGtase3wYsLLhRPhu0C4Uszse9iS4Y5U5TfKv5aFNRzgQ2Uf5dBkFe50K/GtoEceG
+ TUtFNlkMI/fPcSee3WkO1dK1vnbWWQwCNWBrsV+c8W/QxEuMjy547DtmHtTeyNtAE8yD
+ R0tLbXcLlSunZxHuj3qM2jTbG6k27gC5Kxl5CSVhBBFypgvv9CPr0FnRAxQbjugwoEl+
+ qvUpUrAljn8SVLGLtnXqRUfmm3+UicouI6RmJyHHTlzMiNOoVxPNMUL/d6QBGTU+eFtI
+ +KzVOrJcTQ9/GBe3wJFdjT8imw6BPDHKG0HBsy6jwtVEMOzh/wtxHiMWEe/CptpSjUCJ
+ VpaQ==
+X-Gm-Message-State: AOJu0YwnDb3onIfpVsh4Ym31vYv6S/Lx1oPF2gCsh0ruUw9CG7V2sC4x
+ AiO/kNP40K2y411BYUZXOemBmLrya3Yp3NkzRh8GMI6oPua80wU9wJ7HQO1PLLM=
+X-Gm-Gg: ASbGncsPcTdEiHMwe9L7SebT4lSfcGpwG3+Fb+efQmQXn6Uoxtu/WQkdVVS7iao75Ue
+ oGAqydf44K9ODY3BHD8Azt4AZziQ+V+vsdrGeRn9jo6T4DeBVYl9k5v/yviM7tMdOibRCIw999K
+ A+jYVBHaUSIONpTLOmC+Xn1rXL+2Cd+wror9JPBiHgTMXrqHZMzpmn4ITyrqw6rMzkicVW9TVTA
+ +4JLDtStNGSafVnpB5Oy2OiLgSiylZp407G0XEtZTtcapDIxv35k7g=
+X-Google-Smtp-Source: AGHT+IH+fg5xsvNHACOi9gnydUpMfUgEaiPEMa7mhHs9VeWLCo+sETkYQTDYJ/bEkVl0vG9aeIJPdg==
+X-Received: by 2002:a05:622a:342:b0:46c:782f:5f85 with SMTP id
+ d75a77b69052e-46c782f611emr341923051cf.52.1736786907602; 
+ Mon, 13 Jan 2025 08:48:27 -0800 (PST)
 Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7bce35160f2sm499113885a.107.2025.01.13.07.44.53
+ d75a77b69052e-46c873dc8c0sm42799591cf.72.2025.01.13.08.48.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jan 2025 07:44:54 -0800 (PST)
-Date: Mon, 13 Jan 2025 09:44:51 -0600
+ Mon, 13 Jan 2025 08:48:26 -0800 (PST)
+Date: Mon, 13 Jan 2025 10:48:23 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Marek =?iso-8859-1?Q?Moj=EDk?= <marek.mojik@nic.cz>,
- Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: Re: [PATCH v3 17/30] emulation: fdt: Relax condition for
- OF_HAS_PRIOR_STAGE
-Message-ID: <20250113154451.GV3476@bill-the-cat>
-References: <20250111000029.245022-1-sjg@chromium.org>
- <20250111000029.245022-18-sjg@chromium.org>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PULL] u-boot-sh/master
+Message-ID: <20250113164823.GW3476@bill-the-cat>
+References: <20250113001853.296787-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="om8qEOMn/1kJZbyH"
+ protocol="application/pgp-signature"; boundary="pcJ4oUr4jo+54zJz"
 Content-Disposition: inline
-In-Reply-To: <20250111000029.245022-18-sjg@chromium.org>
+In-Reply-To: <20250113001853.296787-1-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,55 +93,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---om8qEOMn/1kJZbyH
+--pcJ4oUr4jo+54zJz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 10, 2025 at 05:00:16PM -0700, Simon Glass wrote:
+On Mon, Jan 13, 2025 at 01:17:30AM +0100, Marek Vasut wrote:
 
-> QEMU always gets its devicetree from the OF_BOARD mechanism so we should
-> not depend on !BLOBLIST here.
+> The following changes since commit bc157bb6667ed97e33be8ce8436c28baa275b2=
+95:
 >=20
-> It's not clear why we need to have any relationship with BLOBLIST so
-> let's remove the entire condition.
-
-This is fine.
-
-> The logic of PRIOR_STAGE is quite a mess, unfortuantely. We should rely
-> only standard passage to receive things from the prior stage. QEMU
-> should implement standard passage to provide its devicetree to U-Boot
-> However Linaro has blocked my patch to provide devicetree additions[1],
-> so little breath should be held in respect of either change.
+>   Merge tag 'u-boot-rockchip-20250110' of https://source.denx.de/u-boot/c=
+ustodians/u-boot-rockchip (2025-01-10 18:56:22 -0600)
 >=20
-> [1] https://lore.kernel.org/qemu-devel/20210926183410.256484-1-sjg@chromi=
-um.org/
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+>=20
+> for you to fetch changes up to 46a7999160da3167497e08a444417aea26171197:
+>=20
+>   arm64: renesas: Convert boards over to is_cortex_a() functions (2025-01=
+-12 23:49:58 +0100)
+>=20
 
-Drop this portion.
-
-Otherwise:
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---om8qEOMn/1kJZbyH
+--pcJ4oUr4jo+54zJz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeFNPMACgkQFHw5/5Y0
-tyySTgv/RDFm+kCb8kaA+JkHnCrhs5z4yta7pG1NK99cw2AnLPul2Xx4Sgo1Gj4j
-YuDO4j6jNgfv+OTyZ78fMvz+UMPK+DXXL30eAtRe2Bj/9/5GPW8O3HDl8dVh/tUM
-SHCHPcTgp7xGFzraF0qQXZrcESDiHjBxG0C+gXicSj00TAiGoCjVkkux1OAdKdlb
-7XeeCEvmadF6vwq0TaCcjwA4z6wfzWeTi7y6oy8pdrBiTsPYhpYmYxNkPmJIEVlG
-KESw4Rcgjv0bEAcYJYX5YRTQl/uoY9pekybyxdk6PmI8N9khDSpA187n9nACCjls
-ktgbOBGzJTR/adqV9d6F8NUhHxhdPnI7J5CMK8TGqhDOoRM5bikzDAv2jV4U3RMI
-Y2hrD4DSgHylJ5wdi58hULWDnNJULqEkTHHR37PXUbTXW4+re8co4crJ4/8ddB0X
-NzaVBYwMmgnsSz3fnbmt6iL2ALXoWgnfF5hcoO5b4bgH3zAQNXl0fXeyXtzATkji
-5zzbmude
-=934B
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeFQ8wACgkQFHw5/5Y0
+tyzFtAwAt/LHsEP4rd/jbMgo1mqKLomWO+k+FOcYYF+f9mE2/FdHcr9hehZInlcQ
+qYzKEhmZrc8Iyh6B0qRcUtfkQ7rZNbTylrzxnLOyJ8FkI9DO//alFKsUu7dfn7my
+oCm+xuXNssOE5Nt6ryzx2tRZvQqdzcMP1/6Y78XDNmv4SxJV+hWUEfyDYSA0tbYH
+vWqyij7JYmZRHUOWOfzi/htFOD5hdqt5N4J1wCLc/1cOqVpw+WnMOvF3vVyc4Q+U
+trMvafmC+AHjDVOGSAHZIgom6QXn2Wu8Nq92+FwidmlNNAUANnZuZJTL5RO+xAiP
+x6CMNNk/uDtvNn5eOZ49mi9KYPiDpOuXOUeans7h6P329XtqCihyj0r8AchCszKQ
+MKIs9mkrjuF8YjztEa2ncoaNSUCYANm0j7Jy6dAt39yfvHh7Qc70Vm+s9SQlS8Ss
+yO9mr46oP/mFX9GoA4BBo24WsfltNxHMM2Huhq8WDlMP4GJLxcJTlmZCWk/lii4S
+z0ysjs79
+=wrAX
 -----END PGP SIGNATURE-----
 
---om8qEOMn/1kJZbyH--
+--pcJ4oUr4jo+54zJz--
