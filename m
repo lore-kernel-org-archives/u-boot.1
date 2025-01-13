@@ -4,64 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D8DE7719A
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 04:25:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86A19E7719E
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 06:39:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 649498007D;
-	Mon, 13 Jan 2025 05:25:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A787180141;
+	Mon, 13 Jan 2025 07:39:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XaAuRIPo";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="neh1aNhU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3D9880141; Mon, 13 Jan 2025 05:25:37 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id E1F9A80141; Mon, 13 Jan 2025 07:39:08 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF66980027
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 05:25:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53A9D8007D
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 07:39:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 50D4PX7A005489;
- Sun, 12 Jan 2025 22:25:33 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736742333;
- bh=4eIJ79ybHY36xC5QdZ3T16LSxvHIbaYEDKJ7jQvAZYk=;
- h=From:To:CC:Subject:Date;
- b=XaAuRIPo1zDrLnaCv1pncTpc5ME076FzrSx6ZopWHEquA8QVU2egnPmQPW4/D+PFR
- bqzsZ7whjbJ7mBtxp2p8a5VR2EsEIbSzBE8dnK1qTmtL7Pe1cZ2ma2Tvfewx/Jswq+
- +KpdzUbTtRtNkvnDMVnJg84wTKV8mK4MQVOG03rE=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50D4PXnm026316
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 12 Jan 2025 22:25:33 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 12
- Jan 2025 22:25:32 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 12 Jan 2025 22:25:32 -0600
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.6])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50D4PTev002677;
- Sun, 12 Jan 2025 22:25:30 -0600
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <bb@ti.com>
-CC: <nm@ti.com>, <afd@ti.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>, Udit
- Kumar <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>
-Subject: [PATCH] arch: arm: mach-k3: Delete tifs node in DT fixup
-Date: Mon, 13 Jan 2025 09:55:24 +0530
-Message-ID: <20250113042524.219522-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50D5t1gG007147;
+ Mon, 13 Jan 2025 06:38:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=b0K6Ee30mIUri6R60K9FW6J4
+ sxm5ngdNMgiZTcz74Tc=; b=neh1aNhUqY1OQ49Ak223pl3hC6H9lIdudTVMHnI6
+ 6SaBFsyRMfChCqixz7pw6r6mL1XUVrJGzUok3Sj8AFYlsXBYQT3qDJe2wICYSghd
+ NTuW6JCdDwaQZfxhjjIqFW6QhQdj+BBrX3oxPeH53JSm+nzcZ0fE42e/0FlF4BhT
+ a2a/cGahvZNRngUpow7GkrohlLERL5M+7LTlvf6b8lKeWahYKoiUWCyjhsgfq1y/
+ F1Mc3bynUFuvG7awEdW40IeHX4Z7q4kTSOgUc0rSq6Aw4mWsPz/mwRQXaq9HfuZN
+ EtYwXqrGsVcMjtEaL1Ge7oU1o7JZcqsrkxErUXms3mXEfA==
+Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 444w368368-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 13 Jan 2025 06:38:57 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 50D6cuEl023049
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 13 Jan 2025 06:38:56 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Sun, 12 Jan 2025 22:38:53 -0800
+Date: Mon, 13 Jan 2025 12:08:49 +0530
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: Marek Vasut <marex@denx.de>
+CC: <trini@konsulko.com>, <mkorpershoek@baylibre.com>,
+ <caleb.connolly@linaro.org>, <neil.armstrong@linaro.org>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1] usb: dwc3: core: Fix timeout check
+Message-ID: <Z4S0+YLNHJ1j4j+g@hu-varada-blr.qualcomm.com>
+References: <20250110074306.3897847-1-quic_varada@quicinc.com>
+ <7f7962fb-1772-418d-b06e-97ea33099ade@denx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <7f7962fb-1772-418d-b06e-97ea33099ade@denx.de>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: MMnMUoisVA3hstaLlHNepsgi8vDnb4Ux
+X-Proofpoint-GUID: MMnMUoisVA3hstaLlHNepsgi8vDnb4Ux
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0
+ priorityscore=1501 impostorscore=0 bulkscore=0 malwarescore=0
+ mlxlogscore=999 clxscore=1015 lowpriorityscore=0 mlxscore=0 adultscore=0
+ phishscore=0 suspectscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2411120000 definitions=main-2501130055
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,51 +99,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Delete tifs DT node as part of fixup.
+On Sun, Jan 12, 2025 at 09:48:41PM +0100, Marek Vasut wrote:
+> On 1/10/25 8:43 AM, Varadarajan Narayanan wrote:
+> > dwc3_core_init loops 'timeout' times to check if the IP block is out
+> > of reset using 'while (timeout--)'. If there is some issue and
+> > the block doesn't come out of reset, the loop will run till
+> > 'timeout' becomes zero and the post decrement operator would set
+> > timeout to 0xffffffff. Though the IP block is not out reset, the
+> > subsequent if check 'if !timeout' would fail as timeout is not
+> > equal to zero and the function proceeds with the initialization.
+> >
+> > Make this a pre decrement to address this.
+> >
+> > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> Does the following patch work too ? It removes all the fragile open-coded
+> polling
+>
+> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+> index a35b8c2f646..7e7017d4be7 100644
+> --- a/drivers/usb/dwc3/core.c
+> +++ b/drivers/usb/dwc3/core.c
+> @@ -29,6 +29,7 @@
+>  #include <linux/usb/ch9.h>
+>  #include <linux/usb/gadget.h>
+>  #include <linux/bitfield.h>
+> +#include <linux/iopoll.h>
+>  #include <linux/math64.h>
+>  #include <linux/time.h>
+>
+> @@ -587,7 +588,6 @@ static void dwc3_set_incr_burst_type(struct dwc3 *dwc)
+>   */
+>  static int dwc3_core_init(struct dwc3 *dwc)
+>  {
+> -	unsigned long		timeout;
+>  	u32			hwparams4 = dwc->hwparams.hwparams4;
+>  	u32			reg;
+>  	int			ret;
+> @@ -610,17 +610,12 @@ static int dwc3_core_init(struct dwc3 *dwc)
+>  	}
+>
+>  	/* issue device SoftReset too */
+> -	timeout = 5000;
+>  	dwc3_writel(dwc->regs, DWC3_DCTL, DWC3_DCTL_CSFTRST);
+> -	while (timeout--) {
+> -		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+> -		if (!(reg & DWC3_DCTL_CSFTRST))
+> -			break;
+> -	};
+> -
+> -	if (!timeout) {
+> +	ret = read_poll_timeout(dwc3_readl, reg,
+> +				!(reg & DWC3_DCTL_CSFTRST),
+> +				1, 5000, dwc->regs, DWC3_DCTL);
+> +	if (ret) {
+>  		dev_err(dwc->dev, "Reset Timed Out\n");
+> -		ret = -ETIMEDOUT;
+>  		goto err0;
+>  	}
 
-TISCI API reported msmc_size, does not include 64KB reserved size for
-tifs aka MSMC comms memory, see documentation[0].
+This worked too.
 
-As part of fixup, original code uses TISCI API reported msmc_size as
-size for SRAM DT node.
+Tested-By: Varadarajan Narayanan <quic_varada@quicinc.com>
 
-tifs node is similar to l3-cache, which should hold address above
-msmc_size, and should be deleted before passing control to OS.
-
-[0] https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/general/core.html?highlight=msmc#tisci-msg-query-msmc
-
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
-RFC was sent to k.org with https://lore.kernel.org/all/20230506100826.1525641-1-u-kumar1@ti.com/
-So planning to go ahead with option 1.
-
-Changelog:
-Changes in v3:
-- Collected R/B of v2
-- Updated commit message typo
-
-Changes since v2:
-- moved tifs check above l3 as
-
-v2: https://lore.kernel.org/all/20230420081128.3617214-1-u-kumar1@ti.com/
-v1: https://lore.kernel.org/all/20230419061352.3156023-1-u-kumar1@ti.com/
-
- arch/arm/mach-k3/common_fdt.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
-index 3bdedd7b50..4a01671156 100644
---- a/arch/arm/mach-k3/common_fdt.c
-+++ b/arch/arm/mach-k3/common_fdt.c
-@@ -65,6 +65,7 @@ static int fdt_fixup_msmc_ram(void *blob, char *parent_path, char *node_name)
- 		      subnode, addr, size);
- 		if (addr + size > msmc_size ||
- 		    !strncmp(fdt_get_name(blob, subnode, &len), "sysfw", 5) ||
-+		    !strncmp(fdt_get_name(blob, subnode, &len), "tifs", 4)  ||
- 		    !strncmp(fdt_get_name(blob, subnode, &len), "l3cache", 7)) {
- 			fdt_del_node(blob, subnode);
- 			debug("%s: deleting subnode %d\n", __func__, subnode);
--- 
-2.34.1
-
+Thanks
+Varada
