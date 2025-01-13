@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 574FBC02180
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 18:23:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9D89C02183
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 18:34:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97B34805DA;
-	Mon, 13 Jan 2025 19:23:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 46B61805DA;
+	Mon, 13 Jan 2025 19:34:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="om5c4vtH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RF2AKvh3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76C23805E9; Mon, 13 Jan 2025 19:23:21 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id CD244805DA; Mon, 13 Jan 2025 19:34:16 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC98A801CF
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 19:23:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B0D3801CF
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 19:34:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2efb17478adso7711758a91.1
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 10:23:18 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-46677ef6910so47506181cf.2
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 10:34:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736792597; x=1737397397; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kK9Z/jtgBNOELDXrpfMdyH44b7kEkaH5khEU0KclI0E=;
- b=om5c4vtH5ax4uVWOTdvJYgiz+r/4tZd5yjyjgLbS1VJvJK1aFc8OfO3A3ShtjAEi6n
- H6WXVrJEixZQhqQWWjMGNl6U55IG+612sPk/5VANndpfmhr3jptbYNt8Za7hFmXOSx0r
- T4WYMFJkZNESjoYXEF+DChKpj5yrfwm8RUdfAnnEqXL2XvmAat6elvJiWAd2+odYViy9
- +gdgDZI9OQNp3cOopFYkH+BHldeSczGdOXj4lcgR1wChQi4mqjeDr6FKFM4aEEr3JEhC
- lOrI6gGvgQlZzW4J0rJOjHwqFSpDHClAJqoi/tNQwV/745lhLPdBxH07gGqDig+SGZVY
- ACPA==
+ d=konsulko.com; s=google; t=1736793253; x=1737398053; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MdbqbmeVt3PscmTFCCrqB1g6g05dUruz1f32RAnl92A=;
+ b=RF2AKvh3ZbeAygNqpFqwz7JkBeqwnP0oC32LZnG3kuZ5k4IpADGNSeLI7QEDLrgnaT
+ TZ3dsAB9glrNjVDBM+IZ1pymUgGIgMoJnKT8a7k/pq700KCUA2iGtOOFHx6F2jnSEBIB
+ KW3I0nHEShDcn8ePA2trWmIJrbVMJSziTa2Dw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736792597; x=1737397397;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kK9Z/jtgBNOELDXrpfMdyH44b7kEkaH5khEU0KclI0E=;
- b=V0ozZo0C8fFMNSHbRsmtRcCNVP+hb5an+FPuHjjkzlyfguFTQFyZBM6Tyq8GUdQ2cG
- NZL/PvVGrjfNh6nfdBxsj/R5wlbUlFHNh0SZZgWV1g5L6wPCZ2Qvy4mnrIgO1TocyZEp
- WM98++TPCwxbLfnsDO957xB2yEbKK1+H3+ppQjKwYsPGlZcKceHwq5qBeYYY9oZM++jb
- tncBZbbsA6RzZujdohkzZ+TisXVHcJPDUt0u3jnZfB5qC7BbIOOOuyW86oWTiW4izuCQ
- rTQOWa7pqHj+aO+6HOLczP2+l6vBhUALH/FELN+q7fo7rdLe9FbeZayZ2OL73tbWb3Ba
- eIcw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVY39TQ8i+Un68cNNeij2VHXkcjLCQC89MDxwRiD+axOfHwnuIg7UQwMv5f8EIf6Cy3RMS/5+4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBmvxBjfW6H0ZZrVCjAzpO33MPrkAZAyVZRxS/Vmy+UfKKanmX
- B6YquF2T1il3/i1ht/xPiN6W/+suAHhM/ccHLqdbzSqIGXjeV6HEKuoaoXbhzquRU81djZ62+Sn
- ybId3xH7y8z7XWR0gNrcDicvmXLAQ5lVg4EjVSQ==
-X-Gm-Gg: ASbGnctqJatxUYWFLpTQQW6G18RARWK9LHK3mLG2NiPpRsqLvTCw1TEVQbyhAn/Yl5v
- 2MrwSTCV4vu6PVdbf7cyYEOUPzNru8MxIiH1hCwhr8cfUQktihiH0JzV5ZZzGbG+7U93wog==
-X-Google-Smtp-Source: AGHT+IGd5dqRsUYDoGbRsiO0vOvA9kYW0tr4b5ruyU5zTZbDeVddZ+02FlumsiM1s94UBj81ejbmedpvmpyrAwaDYVg=
-X-Received: by 2002:a17:90b:2f0c:b0:2ee:7411:ca99 with SMTP id
- 98e67ed59e1d1-2f548f09f6cmr28379904a91.1.1736792596994; Mon, 13 Jan 2025
- 10:23:16 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736793253; x=1737398053;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=MdbqbmeVt3PscmTFCCrqB1g6g05dUruz1f32RAnl92A=;
+ b=DkfAvqTV9kcYbKTh/p3HMftNcFGQhRDXeG8l9JdxnVqqDHYVN6CwkROkJC4f5RVWYh
+ kFj3LLbL0M3RmlW6AInQHx9qiCkG11KGGl9aABwZ20zIG/Ahi4slFsHIgHjadL1ElQaq
+ iPPyRFRLggzJh/7ul1bNY8BSwOHp+BsC1WcbI6t7txCEXGL8w/E/8biJQrNcMOBIqvJJ
+ yOzlO2HHLqsdF/MWY2poi3wIjTMT26PQGgHQwbcntkyUbs8gZqkxcdOPBb10ZJFVcUjS
+ inBI6y4/WzHwH7c411+OSwGdkksnE+hN0lwinhrEX+aiKXFxFAcslq9wBpBXvpBfNRUV
+ QokA==
+X-Gm-Message-State: AOJu0YzGWcbiF4yKcMF82fCej+c0LnIT/RrnrexkbO8WqFaE/K+ArRav
+ lzKUUG7pJoPcCQgEKpua/ImiNolwe5Dn7AixtysWGrqp+mrX+Zir5kZwQvyV/r5wAbFOjAXr+8j
+ o
+X-Gm-Gg: ASbGncu8k8jpWoFuzfh49ulgq6Q0rIMNkfhoP2EMRtaqo/r9LE52hOEjc7F6g6YPAcj
+ C8tKv/PzWU96EkuAdUu7BHorElUbQJ6/ToXEw9NCwvvT6C3X6xi+9vGRxyetVgAe1SpAO8ZS41y
+ hMKR/MzDs663ziAYu4stkNJsdVaWf/aAXD781Ei7EslPIDofqI2DQcV40UkkU9Z2fbHCQmYDYCE
+ P0DOAQX6Yw87s6/lNQ6KJMB8CA5qeOOQj82PZpG6ZkOkz6PHrvcb5Y=
+X-Google-Smtp-Source: AGHT+IEYJkyDwLxYGkJjj6I3uEKNKod5Q3kZ8hIg/vI0hQjtEMqBIt5iv545C3ZSbo21aMmRIYL1DA==
+X-Received: by 2002:ac8:7f14:0:b0:467:63a5:fb9c with SMTP id
+ d75a77b69052e-46c710877bfmr345556381cf.44.1736793253004; 
+ Mon, 13 Jan 2025 10:34:13 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46c87366315sm44828101cf.48.2025.01.13.10.34.11
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Jan 2025 10:34:12 -0800 (PST)
+Date: Mon, 13 Jan 2025 12:34:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [ANN / RFC] Regular community calls?
+Message-ID: <20250113183409.GY3476@bill-the-cat>
 MIME-Version: 1.0
-References: <20250110215640.892539-1-raymond.mao@linaro.org>
- <7DADDD00-D471-46D9-B143-00FBA1171ECB@gmx.de>
- <CAEfUkULM_Zh8fG22DWKjkbJ0QeP1dtbVa_=EF0c1FLE_Sr4QBg@mail.gmail.com>
- <208dab19-e178-41c9-bb18-3a534a510d46@gmx.de>
-In-Reply-To: <208dab19-e178-41c9-bb18-3a534a510d46@gmx.de>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 13 Jan 2025 13:23:07 -0500
-X-Gm-Features: AbW1kvas4MsBiKlnEvk_FtbnRm3XcIxwv1lQ5XxtFusLMrX_8v7V3MXa0mKoeIE
-Message-ID: <CAEfUkUKt2vHL2xRjzw5ase-633hm3PBw+nM=30985XujSmkMsQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] bloblist: add api to get blob with size
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Levi Yun <yeoreum.yun@arm.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="/apuuo0oVYIwW469"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,191 +90,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Mon, 13 Jan 2025 at 12:50, Heinrich Schuchardt <xypron.glpk@gmx.de>
-wrote:
+--/apuuo0oVYIwW469
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On 13.01.25 15:33, Raymond Mao wrote:
-> > Hi Heinrich,
-> >
-> > On Fri, 10 Jan 2025 at 19:04, Heinrich Schuchardt <xypron.glpk@gmx.de
-> > <mailto:xypron.glpk@gmx.de>> wrote:
-> >
-> >     Am 10. Januar 2025 22:56:33 MEZ schrieb Raymond Mao
-> >     <raymond.mao@linaro.org <mailto:raymond.mao@linaro.org>>:
-> >      >bloblist_find function only returns the pointer of blob data,
-> >      >which is fine for those self-describing data like FDT.
-> >      >But as a common scenario, an interface is needed to retrieve both
-> >      >the pointer and the size of the blob data.
-> >      >
-> >      >Add a few ut test cases for the new api.
-> >      >
-> >      >Signed-off-by: Raymond Mao <raymond.mao@linaro.org
-> >     <mailto:raymond.mao@linaro.org>>
-> >      >Reviewed-by: Simon Glass <sjg@chromium.org <mailto:
-> sjg@chromium.org>>
-> >      >Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org
-> >     <mailto:ilias.apalodimas@linaro.org>>
-> >      >---
-> >      >Changes in v2
-> >      >- Rename function argument.
-> >      >- Add ut tests.
-> >      >Changes in v3
-> >      >- None.
-> >      >Changes in v4
-> >      >- None.
-> >      >
-> >      > common/bloblist.c      | 17 +++++++++++++++--
-> >      > include/bloblist.h     | 18 ++++++++++++++++++
-> >      > test/common/bloblist.c |  4 ++++
-> >      > 3 files changed, 37 insertions(+), 2 deletions(-)
-> >      >
-> >      >diff --git a/common/bloblist.c b/common/bloblist.c
-> >      >index 110bb9dc44..ab48a3cdb9 100644
-> >      >--- a/common/bloblist.c
-> >      >+++ b/common/bloblist.c
-> >      >@@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag,
-> >     struct bloblist_rec **recp, int size,
-> >      > }
-> >      >
-> >      > void *bloblist_find(uint tag, int size)
-> >      >+{
-> >      >+      void *blob = NULL;
-> >      >+      int blob_size;
-> >      >+
-> >      >+      blob = bloblist_get_blob(tag, &blob_size);
-> >      >+
-> >      >+      if (size && size != blob_size)
-> >      >+              return NULL;
-> >      >+
-> >      >+      return blob;
-> >      >+}
-> >      >+
-> >      >+void *bloblist_get_blob(uint tag, int *sizep)
-> >      > {
-> >      >       struct bloblist_rec *rec;
-> >      >
-> >      >       rec = bloblist_findrec(tag);
-> >      >       if (!rec)
-> >      >               return NULL;
-> >      >-      if (size && size != rec->size)
-> >      >-              return NULL;
-> >      >+
-> >      >+      *sizep = rec->size;
-> >      >
-> >      >       return (void *)rec + rec_hdr_size(rec);
-> >      > }
-> >      >diff --git a/include/bloblist.h b/include/bloblist.h
-> >      >index f999391f74..52ba0ddcf8 100644
-> >      >--- a/include/bloblist.h
-> >      >+++ b/include/bloblist.h
-> >      >@@ -250,6 +250,24 @@ static inline void
-> >     *bloblist_check_magic(ulong addr)
-> >      >       return ptr;
-> >      > }
-> >      >
-> >      >+#if CONFIG_IS_ENABLED(BLOBLIST)
-> >
-> >     Why should we use an #ifdef here?
-> >     Why would a caller invoke the function if the configuration is
-> disabled?
-> >
-> > Adding #ifdef here is to have the inline function so that we don't need
-> > to add the macro to all of its callers.
->
-> There is just one. See patch 3, where you already check the CONFIG
-> albeit in the wrong place.
->
->
-Currently it is only one for TPM eventlog, but according to the Firmware
-Handoff spec we will use Transfer List (aka bloblist in U-Boot) to handover
-different information (blobs) from previous boot stage, so that we will
-need to call bloblist_get_blob in multiple subsystems in the near future.
+Hey all,
 
-In patch #3, checking BLOBLIST is a temporary solution since we don't have
-a good idea at the moment on a required config to enable/disable "handoff
-from previous boot stage using bloblist" -  which is separate from BLOBLIST
-itself.
-As discussed with Tom, I use BLOBLIST as a temporary solution but this will
-be replaced in the future.
+It's been suggested again a few times recently that we should try and
+have some sort of regular open call / video chat as that might help
+clear up some issues. To that end, I'd like to propose we have the first
+one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a day
+after the v2025.04-rc1 release, and I'll include a link in the release
+email. If this works out well, we can make it a regular thing for the
+day after a release and also try rotating the time, or having a second
+meeting much later in my day that's at a better time for other parts of
+the world.
 
-See my reply in patch #3 for more information.
+--=20
+Tom
 
-Regards,
-Raymond
+--/apuuo0oVYIwW469
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-> >
-> >      >+/**
-> >      >+ * bloblist_get_blob() - Find a blob and get the size of it
-> >      >+ *
-> >      >+ * Searches the bloblist and returns the blob with the matching
-> tag
-> >      >+ *
-> >      >+ * @tag:      Tag to search for (enum bloblist_tag_t)
-> >      >+ * @sizep:    Size of the blob found
-> >      >+ * Return: pointer to bloblist if found, or NULL if not found
-> >      >+ */
-> >      >+void *bloblist_get_blob(uint tag, int *sizep);
-> >
-> >     If tag is expected to be a value from the enum, we should not use
-> >     uint here.
-> >
-> > This is just following the original convention of existing bloblist
-> > functions which are all using uint for the tag.
->
-> @Simon: Why aren't we using enum?
->
-> Best regards
->
-> Heinrich
->
-> >
-> > Regards,
-> > Raymond
-> >
-> >
-> >      >+#else
-> >      >+static inline void *bloblist_get_blob(uint tag, int *sizep)
-> >      >+{
-> >      >+      return NULL;
-> >      >+}
-> >      >+#endif
-> >      >+
-> >      > /**
-> >      >  * bloblist_find() - Find a blob
-> >      >  *
-> >      >diff --git a/test/common/bloblist.c b/test/common/bloblist.c
-> >      >index 4bca62110a..324127596f 100644
-> >      >--- a/test/common/bloblist.c
-> >      >+++ b/test/common/bloblist.c
-> >      >@@ -98,10 +98,12 @@ static int bloblist_test_blob(struct
-> >     unit_test_state *uts)
-> >      >       struct bloblist_hdr *hdr;
-> >      >       struct bloblist_rec *rec, *rec2;
-> >      >       char *data;
-> >      >+      int size = 0;
-> >      >
-> >      >       /* At the start there should be no records */
-> >      >       hdr = clear_bloblist();
-> >      >       ut_assertnull(bloblist_find(TEST_TAG, TEST_BLOBLIST_SIZE));
-> >      >+      ut_assertnull(bloblist_get_blob(TEST_TAG, &size));
-> >      >       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0,
-> 0));
-> >      >       ut_asserteq(sizeof(struct bloblist_hdr),
-> bloblist_get_size());
-> >      >       ut_asserteq(TEST_BLOBLIST_SIZE, bloblist_get_total_size());
-> >      >@@ -114,6 +116,8 @@ static int bloblist_test_blob(struct
-> >     unit_test_state *uts)
-> >      >       ut_asserteq_addr(rec + 1, data);
-> >      >       data = bloblist_find(TEST_TAG, TEST_SIZE);
-> >      >       ut_asserteq_addr(rec + 1, data);
-> >      >+      ut_asserteq_addr(bloblist_get_blob(TEST_TAG, &size), data);
-> >      >+      ut_asserteq(size, TEST_SIZE);
-> >      >
-> >      >       /* Check the data is zeroed */
-> >      >       ut_assertok(check_zero(data, TEST_SIZE));
-> >
->
->
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeFXJkACgkQFHw5/5Y0
+tyzIQwv8CQBtDojh5YFydTSggJ3QC+K2sqoIr17OP7l3UtEPZviPQlF5QbHoLFLe
+GPdxV7hOeKJpx79TyNtIYyRyPKkKpeamHxIQ4qMmQqC5OTgayus3DYgrkvQAkjnu
+wLFov+Sk32BhsK/Pxi1+kCAQeBwn5l7+olFgCWQu2ApzTtJ9vO+MGG9yOgxygVr9
+oVeAcZONFK/5V/0OiEOvzhJJdymAFa+gde2nP6KmBpLhXnShg682dQAtRXgkL0xw
+cfDcu3m1wLA+iSOnFVUZzRU0xwM2i61yXHT+4P9uJWmUotvWJhWRDPiO2u2y800+
+VsNQWbYR1gcgvmgq74NK1anKTPUtv9z5sTIagBvSpjBN8u8j128fm+0Hc49PbKWq
+O8L+j7HzuXUpK3/qUHyPvy3kTDliL1dsymNEx6LtmQYrd5YMPXzwnyeC+4uBHTRq
+LUsB7cVtt701/q7Waf0o2r5HtFVWVi5mEpS9Xj7D2zDHgDVjXn4zswqAeNSlL/rE
+YCMz0IK0
+=IS/w
+-----END PGP SIGNATURE-----
+
+--/apuuo0oVYIwW469--
