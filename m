@@ -4,72 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21D6DC02180
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 19:39:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C63EDC02187
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 19:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A37BC8060C;
-	Mon, 13 Jan 2025 20:39:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 37E44805E9;
+	Mon, 13 Jan 2025 20:49:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iIyU4Rhd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pIE/xT4r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A80A80628; Mon, 13 Jan 2025 20:39:23 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id CA5238060C; Mon, 13 Jan 2025 20:49:04 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D753A805E7
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 20:39:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 462D0805DA
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 20:49:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d647d5df90so7831960a12.2
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 11:39:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-7b6f1b54dc3so760878385a.1
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 11:49:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736797160; x=1737401960; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wLPtpU3c1Cp37fYoyfwJ32JYadsMoIqywghzvsgGMsc=;
- b=iIyU4Rhdxw3omP/cIKGO20UmUlAAJiJoLRcH5sb/E4nDA8wLnNPq9Yvt9VD/EnrRlW
- BN7I4cwmhzU5mqJRqH7MTZxbwoN8jMpJ4KoM3pb8EF7b1rI4SX/q+962OrfHTR9jZ+AJ
- qty3ZxDIH6ypEwEtj0CIelIONLNQUgen4+TxM=
+ d=konsulko.com; s=google; t=1736797741; x=1737402541; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+ron9iEkfIXlK6TSpfRkfPXiDMfTNcL/mZUCsjH+948=;
+ b=pIE/xT4rW7GW2fqxHrasPZBGNL39mZal39fLooQqECNwrJNF5dncVDtedKZvtcIg1f
+ I5u429X3//dD5+mDmd3+rPWG5WjzXHdH4o3cgSeMq1Nea0RlDF12iwmOdcyiX2q0fGef
+ LG+V/gfxMQ5S/s1ojiP/3NbhPivdWWuMozD3Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736797160; x=1737401960;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wLPtpU3c1Cp37fYoyfwJ32JYadsMoIqywghzvsgGMsc=;
- b=B4gCkiqQ+guYAc30pL/6T/AGfpc9RH2YO6/6yGV6RQLZ2ZjVoTDHjs/+e4brBotEot
- k/x5+VHEgFQrC/ggl/n+GewG3iC6KS23nI3hhgwieXg8bRk1wGog2F4kHodBzijOrbhF
- fEhHQ/wqHFiPVbQuLJ0UzrHKJg2GyCrEA0kfIxeVIKEfquHWT3e7sidEcXvkTa/A2v+e
- +aCN9WxtzhYvF78t4V4lFwjMON1msV60nZK0nifERu8TXp9Hztok1RP8/qGyvLgWy6OQ
- JBKYFWfus2nVQ6Utw36W6HjCQ0EKa2KP1bX2kuOydI6qeck2C0WYQXYaS0d2tdfwjaCs
- P7Ew==
-X-Gm-Message-State: AOJu0YyqqWOzSsRtga1uEM8gUugF9DdEBjsa7FzyN5Ipcgb8I/gsYCMk
- J+gc2N51z5FuQ8t38/d7VUFExmKmiOcWx3bI876vwcO9aoZLf6ArkIYkynQA2SB6khyaiWsmjHf
- Y4bFvfD4weCBczWdka//cFbe6J6avhFb08NC0Jnf7tSXhmJM=
-X-Gm-Gg: ASbGncvPorEpKLFglma73Nfg5CLK0hC+JRnxfeQAIDZ1jzGjMC0KuE3Jcz5xMesCr7/
- Wc1vLK6bVdM4SHzV25SzUpUklv47gKs+2eILh+Wg=
-X-Google-Smtp-Source: AGHT+IF68H3t2fI6pU5vgluRcI+Mh7hkbgnN4dpaUOugKp7464Xq0Cpkf85SuBvT4U4d1JKMs1QFdNHHG6ZMX1kF+DM=
-X-Received: by 2002:a17:906:7308:b0:ab2:faed:f180 with SMTP id
- a640c23a62f3a-ab2faedfd79mr1000317066b.33.1736797160309; Mon, 13 Jan 2025
- 11:39:20 -0800 (PST)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1736797741; x=1737402541;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+ron9iEkfIXlK6TSpfRkfPXiDMfTNcL/mZUCsjH+948=;
+ b=mMQp4dGyzzA95zd5RRDmPT4uUyev/9X8aeHCNPfxZgP0ck9V9iAGhuAI1IMBZWROHJ
+ qPeBLjawWJHPOzA+K1cm5LfbV1asCgr3g7WKjGti3MlpfunudgTIqE/tH0dEoFLWTvmI
+ by+EuMGYPQOcnrQmWFCU2j+U/hN8YqBQH/zYzhpHb3OTIOLlDM1dGr7kBDC3/7jdUQi2
+ iVTN3z7Ge1hm9x9rkH7HISTAOiixpWvLYZYigbFODiYUDyuWim/+Vzh5RskN7Dm+g5gM
+ npM62NIOoqCyfFdSieO0gTfZLmjVtNr+s4NpltIMA06tNTKHT7PPagXZLhQzouWMZI2X
+ xLZw==
+X-Gm-Message-State: AOJu0Yycd80yKFuFC/NmsE6N+BXWBzJg8tM6M05yJwR4yWET1zRKXjyF
+ GL5rXQ29XgOP9PjtEQatjy04WP6jXFz99TyWzCL6cha9ammd1L7xO4iuaS6kkgnIXQ5qvq1Kz87
+ a
+X-Gm-Gg: ASbGncsQoS1v+5+7oCN/Y8m6M13ljus1qVS9pB6MSTgl9iMpynezBNFgAsSLOv1Dl9n
+ i/T4BL6uhYEh/EZkgHAfpiTXkXeLRXNxcdZkFj0q6crmgtTiCOEx3mCpDF2ZLW+hqHGOjK4NYr0
+ vCVJxoNb7AxbKu07XMLotZapWlxZsQK2IcQA03RsEe5TaRbNIxeonOGVn4fSVvkKAkC2Td82y06
+ 0lyO67ltb3573rdJq5KkDoWyJmW70r2PZYXYcpP4sXaoMo1XPVpDyo=
+X-Google-Smtp-Source: AGHT+IH7TM6vIm2qsyqYCRw/rao8TgnV2uoLzI+sGhoyfBN8R31G8DyvipHHDzWoc2V7yLD7MBlT2A==
+X-Received: by 2002:a05:620a:1794:b0:7b6:ce6e:229c with SMTP id
+ af79cd13be357-7bcd97d5b78mr3620248985a.55.1736797741038; 
+ Mon, 13 Jan 2025 11:49:01 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be44d3da3bsm53097685a.114.2025.01.13.11.48.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Jan 2025 11:49:00 -0800 (PST)
+Date: Mon, 13 Jan 2025 13:48:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [ANN / RFC] Regular community calls?
+Message-ID: <20250113194857.GB3476@bill-the-cat>
 References: <20250113183409.GY3476@bill-the-cat>
  <CAFLszTjDx3bBwgnvB2v6ow70a4-XS-fR5UHFdFQNn7Fdytba8w@mail.gmail.com>
  <20250113193035.GA3476@bill-the-cat>
-In-Reply-To: <20250113193035.GA3476@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jan 2025 12:39:08 -0700
-X-Gm-Features: AbW1kvZNdyRW9bFarh7zbOYXpmenHkIgBYtXklzn_QETcLQ-HrdEsQgDefOLgoo
-Message-ID: <CAFLszTjPdX1kORnMNUMEUdrjYmQwiVm043nZGBZEV591oXtzEQ@mail.gmail.com>
-Subject: Re: [ANN / RFC] Regular community calls?
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <CAFLszTjPdX1kORnMNUMEUdrjYmQwiVm043nZGBZEV591oXtzEQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="by739v66IhQ9a98F"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjPdX1kORnMNUMEUdrjYmQwiVm043nZGBZEV591oXtzEQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,41 +96,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, 13 Jan 2025 at 12:30, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Jan 13, 2025 at 12:10:35PM -0700, Simon Glass wrote:
-> > Hi Tom,
+--by739v66IhQ9a98F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jan 13, 2025 at 12:39:08PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 13 Jan 2025 at 12:30, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Mon, 13 Jan 2025 at 11:34, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, Jan 13, 2025 at 12:10:35PM -0700, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > Hey all,
+> > > On Mon, 13 Jan 2025 at 11:34, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > Hey all,
+> > > >
+> > > > It's been suggested again a few times recently that we should try a=
+nd
+> > > > have some sort of regular open call / video chat as that might help
+> > > > clear up some issues. To that end, I'd like to propose we have the =
+first
+> > > > one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a d=
+ay
+> > > > after the v2025.04-rc1 release, and I'll include a link in the rele=
+ase
+> > > > email. If this works out well, we can make it a regular thing for t=
+he
+> > > > day after a release and also try rotating the time, or having a sec=
+ond
+> > > > meeting much later in my day that's at a better time for other part=
+s of
+> > > > the world.
 > > >
-> > > It's been suggested again a few times recently that we should try and
-> > > have some sort of regular open call / video chat as that might help
-> > > clear up some issues. To that end, I'd like to propose we have the first
-> > > one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a day
-> > > after the v2025.04-rc1 release, and I'll include a link in the release
-> > > email. If this works out well, we can make it a regular thing for the
-> > > day after a release and also try rotating the time, or having a second
-> > > meeting much later in my day that's at a better time for other parts of
-> > > the world.
+> > > So do you mean the first one will be in two weeks (i.e. Tues 28th Jan=
+uary
+> > > America/Europe, Wed for Asia?)
 > >
-> > So do you mean the first one will be in two weeks (i.e. Tues 28th January
-> > America/Europe, Wed for Asia?)
->
-> Yes, thanks for the clarification.
->
-> > Here are the running notes
-> > <https://docs.google.com/document/d/1YBOMsbM19uSFyoJWnt7-PsOLBaevzQUgV-hiR88a5-o/edit?tab=t.0>
-> > from the previous series.
->
-> Meeting minutes are good, but perhaps we should send them out via email
-> so they're more accessible.
+> > Yes, thanks for the clarification.
+> >
+> > > Here are the running notes
+> > > <https://docs.google.com/document/d/1YBOMsbM19uSFyoJWnt7-PsOLBaevzQUg=
+V-hiR88a5-o/edit?tab=3Dt.0>
+> > > from the previous series.
+> >
+> > Meeting minutes are good, but perhaps we should send them out via email
+> > so they're more accessible.
+>=20
+> Yes, I think Google docs has an option for that, but it would need to
+> be in text format.
 
-Yes, I think Google docs has an option for that, but it would need to
-be in text format.
+Yes, I think the key is taking minutes and avoiding discussing how we
+format the minutes. Whomever volunteers to take the minutes can take
+them however is easiest and then send them as an email afterwards.
 
-Regards,
-Simon
+--=20
+Tom
+
+--by739v66IhQ9a98F
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeFbiEACgkQFHw5/5Y0
+tyzU1gv+LzZS3WMcccr27OWQBuKVAC9kYgTYdc9cCs99PXxedkEoDq4VrWFY0nrT
+BE3Eg/KtY3M8lrjs7OtexlWYiEPVgKcyLEDiiNGcnRLLG0Njcm6zo457bvPgy9KM
+4cn8/0OGiisqYUBHRoTE7B1Oahs9PVntvUcPWL69P/ppPRkHrg6Clc3fTExzB/5V
+Zos1AwvWjmiPSNWsSgtLeOIv6knvJ0uth/TWaQfkcmx2ZCG0OKlI6IrcK7H0A0Wg
+k2y0QdM1NxuGYEPQM2PxLtVZNUb6POrTqZx1WeIuaEixEptjcYfZxegjLKLZX52k
+IOC0DykwL4XtHUddovgGoOiyN/P13+Z74lgctjDuy87C96MuUOdAN3AMJmbbJZ0e
+6Q/sk6YS4sZ5++Ih6B26xrLbmoScdZl488iozTz5EQ2FG8WeHQEAKE6UAWeG34l0
+azo2BANhSo7rWAhywB8my9p3ycDc+thW8m2RImy3CEcIGRarPH5t9K1vbPRtoy22
+pPcdcjp9
+=k9wG
+-----END PGP SIGNATURE-----
+
+--by739v66IhQ9a98F--
