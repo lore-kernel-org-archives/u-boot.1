@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EAD2E77188
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 02:08:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25821E77188
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 02:09:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5116E805C5;
-	Mon, 13 Jan 2025 03:08:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A052A805DA;
+	Mon, 13 Jan 2025 03:08:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="gSX1Q2Vm";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="W5CxN/tH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFD13805DA; Mon, 13 Jan 2025 03:08:46 +0100 (CET)
+ id 6F59480079; Mon, 13 Jan 2025 03:08:58 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5863A80079
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 03:08:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA5AC805EC
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 03:08:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=muhammad.hazim.izzat.zamri@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1736734123; x=1768270123;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=gCpgbu7cx9WFvchmOPpX8b71mdewf4c7+V0yNlgB90A=;
- b=gSX1Q2Vmu9jjBKKmZE6jEZtYhntF0zKjs3VViArD+70v3cE4pkik+N1u
- 0PV/tsRJ7ak9qGo6h4mCAHJ4QUuGbFTprzwec9QSbSChJUzxJZZAIFNbf
- XLdmqeI3rEGR6FPaPjw6Tmn/uRUQtOzK2z+s7/VNDwcc7GvzQ0yfZAWAc
- 9GvlZLJ/+X99XMDS1juLsGMSQzcrrSfjBT/FkNklI6F7KGrie+4/Z6j3K
- XdOc8ZYne+7quMXOCAE8trysUst6ZSKxi+eqKFsWibK4iv1g697EdyGIp
- VM3FaFLgzlz2TSaE6Fd8o2GzwKaxjal1UgKqoDwerYOrMpZchZvM/aSAR g==;
-X-CSE-ConnectionGUID: RjvXY/WzQLywHcXAzUEzVA==
-X-CSE-MsgGUID: rNotHYGhQFuZ44bG6DahmA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11313"; a="54522226"
-X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="54522226"
+ t=1736734136; x=1768270136;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Bq3iVSexk4nNIrX5ugKG3oYKOma/Xax2n20YBoXWTn8=;
+ b=W5CxN/tHQpgy0f3Wzm9ypdDjyJNk7tkgtghkutkrvq9KyAydWIKZzh7a
+ 3PKGGFqJrChqJz+dp6mZuDjxc0tw5Xa+IhbEOovT2VBnOSx8JaVyZIHr2
+ W0B8nWQANwqND8s0nwmHdFInjC/tmiO1TdEURx7mXhjqBhUYTXUQS6mlC
+ t/WuC660OqYzWZU2BZGaKu6InVGO6NgEJtjp8r+ArX1EELSxAwELFCFOR
+ ffWVsA/j64J+40XbfMzs2HhPjIhFQOaON2ij1pdxwRzvb7fvvIBjGr/tO
+ zotlF6plb39RaUHSeUVcTnMs5AAnpU9GsznjR94AJhJGw3cx3Hq3Gok2b Q==;
+X-CSE-ConnectionGUID: ui0WK7TJSXKA/kJMWntisw==
+X-CSE-MsgGUID: iPeu+nHATQCHCkWaQGd6cQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11313"; a="54522250"
+X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="54522250"
 Received: from orviesa002.jf.intel.com ([10.64.159.142])
  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Jan 2025 18:08:41 -0800
-X-CSE-ConnectionGUID: S4ysnyUpTBOmWFI/XfcpTQ==
-X-CSE-MsgGUID: pDvJFfhHQ3GgOFpDLPWJoA==
+ 12 Jan 2025 18:08:54 -0800
+X-CSE-ConnectionGUID: zfaFJg+/QA6SLuW7rQSvNA==
+X-CSE-MsgGUID: f1W7o/mxTgy+GyzFSz2u4g==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="135141569"
+X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="135141601"
 Received: from apgcp0d540107.png.altera.com ([10.244.77.29])
- by orviesa002.jf.intel.com with ESMTP; 12 Jan 2025 18:08:39 -0800
+ by orviesa002.jf.intel.com with ESMTP; 12 Jan 2025 18:08:52 -0800
 From: muhammad.hazim.izzat.zamri@intel.com
 To: Tien Fong <tien.fong.chee@intel.com>
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -59,10 +59,13 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Alif <alif.zakuan.yuslaimi@altera.com>,
  Hazim <muhammad.hazim.izzat.zamri@altera.com>, u-boot@lists.denx.de,
  Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@intel.com>
-Subject: [PATCH v2 0/1] SoCFPGA: Add watchdog mode setting for Agilex 5
-Date: Mon, 13 Jan 2025 10:08:06 +0800
-Message-Id: <20250113020807.32728-1-muhammad.hazim.izzat.zamri@intel.com>
+Subject: [PATCH v2 1/1] arm: socfpga:agilex5: Fix system manager watchdog mode
+ setting
+Date: Mon, 13 Jan 2025 10:08:07 +0800
+Message-Id: <20250113020807.32728-2-muhammad.hazim.izzat.zamri@intel.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20250113020807.32728-1-muhammad.hazim.izzat.zamri@intel.com>
+References: <20250113020807.32728-1-muhammad.hazim.izzat.zamri@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -83,19 +86,35 @@ X-Virus-Status: Clean
 
 From: Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@intel.com>
 
-This patch is to introduce another watchdog mode setting in Agilex 5
-as additional watchdog4 has been introduced. This is to enable
-the debug mode when the CPU is paused by the user.
+This commit is to fix the system manager watchdog mode setting to support
+until mode_4 for Agilex5. This changes can refer to system manager register
+map on wddbg fields.
 
-This patch has been tested on Agilex 5 devkit with QSPI boot (UBI/UBIFS)
-and RAM boot (TFTP & ARM DS debugger).
+In Agilex7 it is not detected as an issue because Agilex7 only have 4 watchdog
+until mode_3 and it is already been set correctly for it to halt on any CPU in
+debug mode. However, in Agilex5 this fix is needed in order to enable the watchdog
+pause feature for mode_4 when entering debug mode. If 0xF is not been set on mode_4,
+the Watchdog Timers will not halt on any CPU. As by default value, the pause signal
+does not assert when any CPU is in debug mode and the watchdog continue to count.
 
-Muhammad Hazim Izzat Zamri (1):
-  arm: socfpga:agilex5: Fix system manager watchdog mode setting
-
+Signed-off-by: Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@intel.com>
+---
  arch/arm/mach-socfpga/include/mach/system_manager_soc64.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+index b1ef4a70641..670aa3cc07e 100644
+--- a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
++++ b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+@@ -182,7 +182,7 @@ void populate_sysmgr_pinmux(void);
+
+ #define SYSMGR_DMAPERIPH_ALL_NS		0xFFFFFFFF
+
+-#define SYSMGR_WDDBG_PAUSE_ALL_CPU	0x0F0F0F0F
++#define SYSMGR_WDDBG_PAUSE_ALL_CPU	0xFF0F0F0F
+
+ #if IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X)
+ #define	SYSMGR_SOC64_DDR_MODE_MSK	BIT(0)
 --
 2.26.2
 
