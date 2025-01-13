@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9D89C02183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 18:34:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E3B0C02180
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 18:52:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46B61805DA;
-	Mon, 13 Jan 2025 19:34:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BBBE0805DA;
+	Mon, 13 Jan 2025 19:52:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RF2AKvh3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bAeLzbKp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD244805DA; Mon, 13 Jan 2025 19:34:16 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 13782805E9; Mon, 13 Jan 2025 19:52:25 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B0D3801CF
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 19:34:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F022C801CF
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 19:52:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-46677ef6910so47506181cf.2
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 10:34:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f28a4fccso6755171a12.2
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 10:52:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736793253; x=1737398053; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MdbqbmeVt3PscmTFCCrqB1g6g05dUruz1f32RAnl92A=;
- b=RF2AKvh3ZbeAygNqpFqwz7JkBeqwnP0oC32LZnG3kuZ5k4IpADGNSeLI7QEDLrgnaT
- TZ3dsAB9glrNjVDBM+IZ1pymUgGIgMoJnKT8a7k/pq700KCUA2iGtOOFHx6F2jnSEBIB
- KW3I0nHEShDcn8ePA2trWmIJrbVMJSziTa2Dw=
+ d=chromium.org; s=google; t=1736794342; x=1737399142; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jYBSJ8rUt/xVA6ojvrffG20JxSdu7m3OzC91KML+LlE=;
+ b=bAeLzbKpO+B1ErSaCnOH6k4WpSp1LiQphHZUgwXxiLb0325kcsgidjVV1AnieLT/PO
+ JNYm2gnSyhZe3ZMtGUr+o+VvXXeeZIbi+Mr4tQ/6qW6RM5NuovyFY4RigYENeHfxWrUz
+ Kjm1+Qa1AzT5DuOj6Lw5BPJ2Sz2Untv5gPZeI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736793253; x=1737398053;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MdbqbmeVt3PscmTFCCrqB1g6g05dUruz1f32RAnl92A=;
- b=DkfAvqTV9kcYbKTh/p3HMftNcFGQhRDXeG8l9JdxnVqqDHYVN6CwkROkJC4f5RVWYh
- kFj3LLbL0M3RmlW6AInQHx9qiCkG11KGGl9aABwZ20zIG/Ahi4slFsHIgHjadL1ElQaq
- iPPyRFRLggzJh/7ul1bNY8BSwOHp+BsC1WcbI6t7txCEXGL8w/E/8biJQrNcMOBIqvJJ
- yOzlO2HHLqsdF/MWY2poi3wIjTMT26PQGgHQwbcntkyUbs8gZqkxcdOPBb10ZJFVcUjS
- inBI6y4/WzHwH7c411+OSwGdkksnE+hN0lwinhrEX+aiKXFxFAcslq9wBpBXvpBfNRUV
- QokA==
-X-Gm-Message-State: AOJu0YzGWcbiF4yKcMF82fCej+c0LnIT/RrnrexkbO8WqFaE/K+ArRav
- lzKUUG7pJoPcCQgEKpua/ImiNolwe5Dn7AixtysWGrqp+mrX+Zir5kZwQvyV/r5wAbFOjAXr+8j
- o
-X-Gm-Gg: ASbGncu8k8jpWoFuzfh49ulgq6Q0rIMNkfhoP2EMRtaqo/r9LE52hOEjc7F6g6YPAcj
- C8tKv/PzWU96EkuAdUu7BHorElUbQJ6/ToXEw9NCwvvT6C3X6xi+9vGRxyetVgAe1SpAO8ZS41y
- hMKR/MzDs663ziAYu4stkNJsdVaWf/aAXD781Ei7EslPIDofqI2DQcV40UkkU9Z2fbHCQmYDYCE
- P0DOAQX6Yw87s6/lNQ6KJMB8CA5qeOOQj82PZpG6ZkOkz6PHrvcb5Y=
-X-Google-Smtp-Source: AGHT+IEYJkyDwLxYGkJjj6I3uEKNKod5Q3kZ8hIg/vI0hQjtEMqBIt5iv545C3ZSbo21aMmRIYL1DA==
-X-Received: by 2002:ac8:7f14:0:b0:467:63a5:fb9c with SMTP id
- d75a77b69052e-46c710877bfmr345556381cf.44.1736793253004; 
- Mon, 13 Jan 2025 10:34:13 -0800 (PST)
-Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46c87366315sm44828101cf.48.2025.01.13.10.34.11
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jan 2025 10:34:12 -0800 (PST)
-Date: Mon, 13 Jan 2025 12:34:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [ANN / RFC] Regular community calls?
-Message-ID: <20250113183409.GY3476@bill-the-cat>
+ d=1e100.net; s=20230601; t=1736794342; x=1737399142;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jYBSJ8rUt/xVA6ojvrffG20JxSdu7m3OzC91KML+LlE=;
+ b=sRZ+Af1nbneTF3y2i5y4+fFOWrP+e4cZXIT38OYoj5gNPBz5YL2QM8z2hvcVeVgntq
+ 4SqYhtBmPbRcf52dU0iFgyXZIHWPDPAgBFTsonpFvpX3IQGEIy8peVqNvqMG8OQIaLgF
+ q5bKABlAVeUQYjCGffKR2i+T34SX9uzEngh8BvCC7j86gIKwdnwL8Xp1iMm/OQnFklcN
+ hg9J65I0nNYeO0ikTK50oWw3ZaSSl3nGvs5WQHk+8MDaIGP2v3FyVNQbAbrG+5DxUim5
+ ig1ANJiko/wOi7629Q2DUDDeEljyJ7U0iaeCTEZYAM0qh6SCM3mvmTdCEEJiW2Rp2boV
+ bPBw==
+X-Gm-Message-State: AOJu0Yz6SZU7FNJNPqJPTNL5S30jHvFbtxHEC4igHjlJGbUReWc2+YJM
+ MGRGYx7kyNfZgMYbcRl4xRRIVDTNy7BCZ1s0ub070n5LNkAuu5imm+0NbqZFdHb13GN+40A3d4Z
+ rhSYOpphBzxXuXFwYiByQkfZUkyYzGtQDrtjEFw0nkH0yMFM=
+X-Gm-Gg: ASbGncuQWq8d7Cvr882QJojYpGItfwM4hcSMuiS9lb6S5QbxJf4FBN6LbF8F2dtXYhg
+ NarsmcgNQ3BIGuN2j1/OcQ87wXYgP/UVaB/YQ4YI=
+X-Google-Smtp-Source: AGHT+IGb/GVXntEm8yS4kunwbJM7uEOJHmQtMZ8n3U3irl8Ci/PmmzpVpExOe4PjH05kp6MKQG3+eL5efCqNmMpzWfA=
+X-Received: by 2002:a17:907:2dac:b0:aae:eb0b:f39a with SMTP id
+ a640c23a62f3a-ab2abc6ea73mr2110094166b.42.1736794342390; Mon, 13 Jan 2025
+ 10:52:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/apuuo0oVYIwW469"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250110215640.892539-1-raymond.mao@linaro.org>
+ <20250110215640.892539-3-raymond.mao@linaro.org>
+In-Reply-To: <20250110215640.892539-3-raymond.mao@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 13 Jan 2025 11:52:11 -0700
+X-Gm-Features: AbW1kvaePv4B8Nu6zwZGUE0hdtfiPTYbXh9nh-jue3serAfvigNA_VsaDF-cSus
+Message-ID: <CAFLszTiozCfFBm-6hukf7C74GCE4ZjQm9bo7hURKoD=tO7GFgw@mail.gmail.com>
+Subject: Re: [PATCH v4 3/3] tpm: get tpm event log from bloblist
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Levi Yun <yeoreum.yun@arm.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,43 +90,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 10 Jan 2025 at 14:57, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Get tpm event log from bloblist instead of FDT when bloblist is
+> enabled and valid from previous boot stage.
+>
+> As a fallback, when no event log from previous stage is observed
+> and no user buffer is passed, malloc a default buffer to initialize
+> the event log.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2
+> - Remove patch dependency.
+> - Remove the fallback to FDT when BLOBLIST is selected.
+> Changes in v3
+> - Malloc an 8KB buffer when user eventlog buffer does not exist.
+> Changes in v4
+> - Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
+>
+>  lib/tpm_tcg2.c | 55 +++++++++++++++++++++++++++++++++-----------------
+>  1 file changed, 36 insertions(+), 19 deletions(-)
+>
 
---/apuuo0oVYIwW469
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hey all,
-
-It's been suggested again a few times recently that we should try and
-have some sort of regular open call / video chat as that might help
-clear up some issues. To that end, I'd like to propose we have the first
-one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a day
-after the v2025.04-rc1 release, and I'll include a link in the release
-email. If this works out well, we can make it a regular thing for the
-day after a release and also try rotating the time, or having a second
-meeting much later in my day that's at a better time for other parts of
-the world.
-
---=20
-Tom
-
---/apuuo0oVYIwW469
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeFXJkACgkQFHw5/5Y0
-tyzIQwv8CQBtDojh5YFydTSggJ3QC+K2sqoIr17OP7l3UtEPZviPQlF5QbHoLFLe
-GPdxV7hOeKJpx79TyNtIYyRyPKkKpeamHxIQ4qMmQqC5OTgayus3DYgrkvQAkjnu
-wLFov+Sk32BhsK/Pxi1+kCAQeBwn5l7+olFgCWQu2ApzTtJ9vO+MGG9yOgxygVr9
-oVeAcZONFK/5V/0OiEOvzhJJdymAFa+gde2nP6KmBpLhXnShg682dQAtRXgkL0xw
-cfDcu3m1wLA+iSOnFVUZzRU0xwM2i61yXHT+4P9uJWmUotvWJhWRDPiO2u2y800+
-VsNQWbYR1gcgvmgq74NK1anKTPUtv9z5sTIagBvSpjBN8u8j128fm+0Hc49PbKWq
-O8L+j7HzuXUpK3/qUHyPvy3kTDliL1dsymNEx6LtmQYrd5YMPXzwnyeC+4uBHTRq
-LUsB7cVtt701/q7Waf0o2r5HtFVWVi5mEpS9Xj7D2zDHgDVjXn4zswqAeNSlL/rE
-YCMz0IK0
-=IS/w
------END PGP SIGNATURE-----
-
---/apuuo0oVYIwW469--
+Reviewed-by: Simon Glass <sjg@chromium.org>
