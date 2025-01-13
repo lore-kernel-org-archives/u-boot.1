@@ -4,82 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C63EDC02187
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 19:49:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4825C02180
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 20:04:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37E44805E9;
-	Mon, 13 Jan 2025 20:49:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1814D805E9;
+	Mon, 13 Jan 2025 21:04:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pIE/xT4r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iV8fdk5A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA5238060C; Mon, 13 Jan 2025 20:49:04 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id 6E23B805DA; Mon, 13 Jan 2025 21:04:07 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 462D0805DA
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 20:49:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D2718805DA
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 21:04:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7b6f1b54dc3so760878385a.1
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 11:49:02 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa67ac42819so683181166b.0
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 12:04:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736797741; x=1737402541; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+ron9iEkfIXlK6TSpfRkfPXiDMfTNcL/mZUCsjH+948=;
- b=pIE/xT4rW7GW2fqxHrasPZBGNL39mZal39fLooQqECNwrJNF5dncVDtedKZvtcIg1f
- I5u429X3//dD5+mDmd3+rPWG5WjzXHdH4o3cgSeMq1Nea0RlDF12iwmOdcyiX2q0fGef
- LG+V/gfxMQ5S/s1ojiP/3NbhPivdWWuMozD3Q=
+ d=chromium.org; s=google; t=1736798644; x=1737403444; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=N9/gjK9nmUsctnGdHbeHagtoHbs2bLjBuYWNmWBO/1A=;
+ b=iV8fdk5ArBr4vp1Lde4esyiTT9owL2WVUtiM7uCOqc/7Pn3YAG+soj9FPCMz6dg+Qa
+ tGC4ycbK74FFwyyXfadqqRiIiRxXX8k+xbtZ8gHGeBCTdmwx2z03Qirim0dUPoYXqMS6
+ 1mLkfzESbr0dA1SM0a77ex8jJJYaLPSZItZZk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736797741; x=1737402541;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+ron9iEkfIXlK6TSpfRkfPXiDMfTNcL/mZUCsjH+948=;
- b=mMQp4dGyzzA95zd5RRDmPT4uUyev/9X8aeHCNPfxZgP0ck9V9iAGhuAI1IMBZWROHJ
- qPeBLjawWJHPOzA+K1cm5LfbV1asCgr3g7WKjGti3MlpfunudgTIqE/tH0dEoFLWTvmI
- by+EuMGYPQOcnrQmWFCU2j+U/hN8YqBQH/zYzhpHb3OTIOLlDM1dGr7kBDC3/7jdUQi2
- iVTN3z7Ge1hm9x9rkH7HISTAOiixpWvLYZYigbFODiYUDyuWim/+Vzh5RskN7Dm+g5gM
- npM62NIOoqCyfFdSieO0gTfZLmjVtNr+s4NpltIMA06tNTKHT7PPagXZLhQzouWMZI2X
- xLZw==
-X-Gm-Message-State: AOJu0Yycd80yKFuFC/NmsE6N+BXWBzJg8tM6M05yJwR4yWET1zRKXjyF
- GL5rXQ29XgOP9PjtEQatjy04WP6jXFz99TyWzCL6cha9ammd1L7xO4iuaS6kkgnIXQ5qvq1Kz87
- a
-X-Gm-Gg: ASbGncsQoS1v+5+7oCN/Y8m6M13ljus1qVS9pB6MSTgl9iMpynezBNFgAsSLOv1Dl9n
- i/T4BL6uhYEh/EZkgHAfpiTXkXeLRXNxcdZkFj0q6crmgtTiCOEx3mCpDF2ZLW+hqHGOjK4NYr0
- vCVJxoNb7AxbKu07XMLotZapWlxZsQK2IcQA03RsEe5TaRbNIxeonOGVn4fSVvkKAkC2Td82y06
- 0lyO67ltb3573rdJq5KkDoWyJmW70r2PZYXYcpP4sXaoMo1XPVpDyo=
-X-Google-Smtp-Source: AGHT+IH7TM6vIm2qsyqYCRw/rao8TgnV2uoLzI+sGhoyfBN8R31G8DyvipHHDzWoc2V7yLD7MBlT2A==
-X-Received: by 2002:a05:620a:1794:b0:7b6:ce6e:229c with SMTP id
- af79cd13be357-7bcd97d5b78mr3620248985a.55.1736797741038; 
- Mon, 13 Jan 2025 11:49:01 -0800 (PST)
-Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be44d3da3bsm53097685a.114.2025.01.13.11.48.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jan 2025 11:49:00 -0800 (PST)
-Date: Mon, 13 Jan 2025 13:48:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [ANN / RFC] Regular community calls?
-Message-ID: <20250113194857.GB3476@bill-the-cat>
-References: <20250113183409.GY3476@bill-the-cat>
- <CAFLszTjDx3bBwgnvB2v6ow70a4-XS-fR5UHFdFQNn7Fdytba8w@mail.gmail.com>
- <20250113193035.GA3476@bill-the-cat>
- <CAFLszTjPdX1kORnMNUMEUdrjYmQwiVm043nZGBZEV591oXtzEQ@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1736798644; x=1737403444;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=N9/gjK9nmUsctnGdHbeHagtoHbs2bLjBuYWNmWBO/1A=;
+ b=JnPAPhuosqm1IuxABIqcnDGE2bJpo3C8jU+WJ9XtE1qA3SJTKT4rDQLKWTcNi50Pp0
+ js/dTlhVl3vIeIeRjrbhsnHP1gS6Rh3KCXc4DU9TgEB/xldt+/6zbdgMG/R2///CfHfT
+ oWiHCRonwOCKwbWJpR2iBMfHkjGCH3i8tmiouZy3a9nW2LYxnMd2d0+HWW7STxiX3m9z
+ Wdm+uvAzNg49Ymqlztc9fVjUQfDiEobboxNGmQCEcH+HJLeAGIMCrtrCKd2x7sQV5dRA
+ ioqoxItj2G8xzs8ilxFyi5DNkLogFhCEyqN5C1ZYz2j2sVKALUsYWFeqZ8b7gg8v6Dos
+ 8skw==
+X-Gm-Message-State: AOJu0YypUKCt7FdbKnBX56Mhqw980u7ppUGELme3FOWSgdTOi4Q6xvW2
+ kUHD+RGEGfeQg8OeAakoO5gecKY8sIya3ByJBCPE8cNwdjDuqPTPL3eXEDC+Gi2dcqWRbRM6ewa
+ i4OOdC8p4HY59Qn2qWUQU/R2xsSVbu+1+Soun9SNyiCQHyWBt7Q==
+X-Gm-Gg: ASbGncuXxol2HGQZ2LNgc6Upoqb7sDoiz4hgLxptZdY3HGEVG8YLzXeWRDIut0Z3kCE
+ FuUykmb7u2oXLkFEcU6EB/oGRycvCQ3qOwOX1nkM=
+X-Google-Smtp-Source: AGHT+IHOUs8Ye2jsTKn3AiKJFfEH2vWPWy+poPvszU1K1MBe2pEWH1YCn2+L8MRwLi6U7hgGu4/NKMC57W40gWrmEFU=
+X-Received: by 2002:a17:907:7f08:b0:aab:9430:40e9 with SMTP id
+ a640c23a62f3a-ab2ab70a84emr1981933166b.32.1736798644199; Mon, 13 Jan 2025
+ 12:04:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="by739v66IhQ9a98F"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjPdX1kORnMNUMEUdrjYmQwiVm043nZGBZEV591oXtzEQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250109123010.4005298-1-sjg@chromium.org>
+ <20250109123010.4005298-3-sjg@chromium.org>
+ <20250111225433.GS3476@bill-the-cat>
+In-Reply-To: <20250111225433.GS3476@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 13 Jan 2025 13:03:52 -0700
+X-Gm-Features: AbW1kvb2dJ4teOdFn2VagdJj1aaerH0vIDs7ELEHecBZzYQHj64bbPM28NA3cjg
+Message-ID: <CAFLszThO9BaSi8R8=3FpLq7Nnx7XdiCungY1vcRfKyfFQ0baJQ@mail.gmail.com>
+Subject: Re: [PATCH 02/15] vbe: Split out reading a FIT into a common file
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,81 +86,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---by739v66IhQ9a98F
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Jan 13, 2025 at 12:39:08PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 13 Jan 2025 at 12:30, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 11 Jan 2025 at 15:54, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Jan 09, 2025 at 05:29:57AM -0700, Simon Glass wrote:
+>
+> > Loading a FIT is useful for other VBE methods, such as ABrec. Create a
+> > new function to handling reading it.
 > >
-> > On Mon, Jan 13, 2025 at 12:10:35PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 13 Jan 2025 at 11:34, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > Hey all,
-> > > >
-> > > > It's been suggested again a few times recently that we should try a=
-nd
-> > > > have some sort of regular open call / video chat as that might help
-> > > > clear up some issues. To that end, I'd like to propose we have the =
-first
-> > > > one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a d=
-ay
-> > > > after the v2025.04-rc1 release, and I'll include a link in the rele=
-ase
-> > > > email. If this works out well, we can make it a regular thing for t=
-he
-> > > > day after a release and also try rotating the time, or having a sec=
-ond
-> > > > meeting much later in my day that's at a better time for other part=
-s of
-> > > > the world.
-> > >
-> > > So do you mean the first one will be in two weeks (i.e. Tues 28th Jan=
-uary
-> > > America/Europe, Wed for Asia?)
-> >
-> > Yes, thanks for the clarification.
-> >
-> > > Here are the running notes
-> > > <https://docs.google.com/document/d/1YBOMsbM19uSFyoJWnt7-PsOLBaevzQUg=
-V-hiR88a5-o/edit?tab=3Dt.0>
-> > > from the previous series.
-> >
-> > Meeting minutes are good, but perhaps we should send them out via email
-> > so they're more accessible.
->=20
-> Yes, I think Google docs has an option for that, but it would need to
-> be in text format.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+>
+> This causes a bunch of growth:
+>             a3y17lte       : all +1328 text +1328
+>                u-boot: add: 8/0, grow: 1/0 bytes: 1328/0 (1328)
+>                  function                                   old     new   delta
+>                  blkcache_fill                                -     332    +332
+>                  blkcache_read                                -     240    +240
+>                  blk_read                                     -     188    +188
+>                  vbe_read_nvdata                              -     156    +156
+>                  vbe_read_version                             -     140    +140
+>                  vbe_get_blk                                  -     100    +100
+>                  simple_read_nvdata                           -      96     +96
+>                  crc8                                         -      72     +72
+>                  vbe_simple_read_state                      108     112      +4
+>
+> Which is unexpected for just moving code around that's not newly used.
 
-Yes, I think the key is taking minutes and avoiding discussing how we
-format the minutes. Whomever volunteers to take the minutes can take
-them however is easiest and then send them as an email afterwards.
+I hadn't noticed that on the boards I was trying, so thank you for spotting it.
 
---=20
-Tom
+This is because it now uses blk_read() instead of blk_dread(), so if
+BLOCK_CACHE is enabled, it will use the block cache. We could disable
+BLOCK_CACHE on those boards perhaps? It is a speed optimisation so
+shouldn't be used by boards which care about code size.
 
---by739v66IhQ9a98F
-Content-Type: application/pgp-signature; name="signature.asc"
+> And even when it's just a move it's still growing:
+>             xilinx_zynqmp_virt: all +128 bss -72 text +200
+>                u-boot: add: 4/0, grow: 0/-1 bytes: 540/-340 (200)
+>                  function                                   old     new   delta
+>                  vbe_read_nvdata                              -     156    +156
+>                  vbe_get_blk                                  -     148    +148
+>                  vbe_read_version                             -     140    +140
+>                  simple_read_nvdata                           -      96     +96
+>                  vbe_simple_read_state                      452     112    -340
 
------BEGIN PGP SIGNATURE-----
+Unfortunately this one is hard to fix. As you know, whenever you take
+code from a single module and put it into another, the compiler cannot
+optimise away the function-call overhead. I'll note that there is no
+increase when LTO is used, e.g. with xilinx_versal_net_mini_qspi
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeFbiEACgkQFHw5/5Y0
-tyzU1gv+LzZS3WMcccr27OWQBuKVAC9kYgTYdc9cCs99PXxedkEoDq4VrWFY0nrT
-BE3Eg/KtY3M8lrjs7OtexlWYiEPVgKcyLEDiiNGcnRLLG0Njcm6zo457bvPgy9KM
-4cn8/0OGiisqYUBHRoTE7B1Oahs9PVntvUcPWL69P/ppPRkHrg6Clc3fTExzB/5V
-Zos1AwvWjmiPSNWsSgtLeOIv6knvJ0uth/TWaQfkcmx2ZCG0OKlI6IrcK7H0A0Wg
-k2y0QdM1NxuGYEPQM2PxLtVZNUb6POrTqZx1WeIuaEixEptjcYfZxegjLKLZX52k
-IOC0DykwL4XtHUddovgGoOiyN/P13+Z74lgctjDuy87C96MuUOdAN3AMJmbbJZ0e
-6Q/sk6YS4sZ5++Ih6B26xrLbmoScdZl488iozTz5EQ2FG8WeHQEAKE6UAWeG34l0
-azo2BANhSo7rWAhywB8my9p3ycDc+thW8m2RImy3CEcIGRarPH5t9K1vbPRtoy22
-pPcdcjp9
-=k9wG
------END PGP SIGNATURE-----
+So let me know what you think.
 
---by739v66IhQ9a98F--
+Regards,
+Simon
