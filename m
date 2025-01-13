@@ -4,75 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E3B0C02180
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 18:52:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE6EC02183
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 19:02:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBBE0805DA;
-	Mon, 13 Jan 2025 19:52:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 12805801CF;
+	Mon, 13 Jan 2025 20:02:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bAeLzbKp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V0V/cPVg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13782805E9; Mon, 13 Jan 2025 19:52:25 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id BDC8B80619; Mon, 13 Jan 2025 20:02:01 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F022C801CF
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 19:52:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 693F980027
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 20:01:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d3f28a4fccso6755171a12.2
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 10:52:22 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-aaf6b1a5f2bso24499566b.1
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 11:01:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736794342; x=1737399142; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736794918; x=1737399718; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jYBSJ8rUt/xVA6ojvrffG20JxSdu7m3OzC91KML+LlE=;
- b=bAeLzbKpO+B1ErSaCnOH6k4WpSp1LiQphHZUgwXxiLb0325kcsgidjVV1AnieLT/PO
- JNYm2gnSyhZe3ZMtGUr+o+VvXXeeZIbi+Mr4tQ/6qW6RM5NuovyFY4RigYENeHfxWrUz
- Kjm1+Qa1AzT5DuOj6Lw5BPJ2Sz2Untv5gPZeI=
+ bh=momjkciuTOCeVyHQrdrUdy9N8OyEOSInt1c6xBAxDao=;
+ b=V0V/cPVgsa2E/zHUwiODe5CKGF/6mhbPv2sGzDrQKBw9GO0+oVXOcvgG9Vd4GvH/7e
+ 5ZCKwdsm9ldMMwdFnKZhPvo29sXgL4l4w51dbpoDfV+B208juHtP2zlLeL+RuL7XY8wP
+ ytfz7NU4gstsICwhXiuJ/qz+KyWnA+4uVqCGk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736794342; x=1737399142;
+ d=1e100.net; s=20230601; t=1736794918; x=1737399718;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jYBSJ8rUt/xVA6ojvrffG20JxSdu7m3OzC91KML+LlE=;
- b=sRZ+Af1nbneTF3y2i5y4+fFOWrP+e4cZXIT38OYoj5gNPBz5YL2QM8z2hvcVeVgntq
- 4SqYhtBmPbRcf52dU0iFgyXZIHWPDPAgBFTsonpFvpX3IQGEIy8peVqNvqMG8OQIaLgF
- q5bKABlAVeUQYjCGffKR2i+T34SX9uzEngh8BvCC7j86gIKwdnwL8Xp1iMm/OQnFklcN
- hg9J65I0nNYeO0ikTK50oWw3ZaSSl3nGvs5WQHk+8MDaIGP2v3FyVNQbAbrG+5DxUim5
- ig1ANJiko/wOi7629Q2DUDDeEljyJ7U0iaeCTEZYAM0qh6SCM3mvmTdCEEJiW2Rp2boV
- bPBw==
-X-Gm-Message-State: AOJu0Yz6SZU7FNJNPqJPTNL5S30jHvFbtxHEC4igHjlJGbUReWc2+YJM
- MGRGYx7kyNfZgMYbcRl4xRRIVDTNy7BCZ1s0ub070n5LNkAuu5imm+0NbqZFdHb13GN+40A3d4Z
- rhSYOpphBzxXuXFwYiByQkfZUkyYzGtQDrtjEFw0nkH0yMFM=
-X-Gm-Gg: ASbGncuQWq8d7Cvr882QJojYpGItfwM4hcSMuiS9lb6S5QbxJf4FBN6LbF8F2dtXYhg
- NarsmcgNQ3BIGuN2j1/OcQ87wXYgP/UVaB/YQ4YI=
-X-Google-Smtp-Source: AGHT+IGb/GVXntEm8yS4kunwbJM7uEOJHmQtMZ8n3U3irl8Ci/PmmzpVpExOe4PjH05kp6MKQG3+eL5efCqNmMpzWfA=
-X-Received: by 2002:a17:907:2dac:b0:aae:eb0b:f39a with SMTP id
- a640c23a62f3a-ab2abc6ea73mr2110094166b.42.1736794342390; Mon, 13 Jan 2025
- 10:52:22 -0800 (PST)
+ bh=momjkciuTOCeVyHQrdrUdy9N8OyEOSInt1c6xBAxDao=;
+ b=b3RIEyNqjT3xYBJsLZ+nf0+xUuJE81n7c4yjcIT9UkPERX2nNXGkd8guBlFrrLk+ON
+ eoUNqSJnObQPnHlv3DfUN2xkTumadZxMI2EsJ8iGVYqPUi3ZHlyb+Qtab9EQG/Da8EHW
+ nmzenYB9bs46zDokG938yK3jigYj5U0R0ZszT19cK57ie/KRdOEbYAI/neHNqz+q/Yth
+ bKxxdnQN1XByrU4wwNTZaMyi3ikNRVDReqT+PYa0L6Altv97e02O/JLRamH8J0v1OGIu
+ dv64lHcaZwP3PJfWcfaW43JBe3xPuyHihmiIxS81NDSQy36PkXHmFJPRZuh1FIuBVrbW
+ RvzQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXd9npU/ThE8km3DG+bmY8mt5G46k2llpKXycggczrmCf82v5kZdVtkTG2SjGJBOEFeJIOHNeI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwAW6cWLlBzn9nrCTp/C6729MjbinLgniKaVsgEPUpzjC7hneRB
+ OjOgHxdrJRCu1T1NC3wGaw5ujEXmV7ZuOJ1CmuyUP5NDNoze9EmzqDTJ/HR6/5n1JPoNRqNAG0l
+ tqgP4ioBGwYdXi1EciTuwRiCr+VzKSR+CmC9V
+X-Gm-Gg: ASbGncvQ8ZAAx9JgQmt6ZaCZ3ib2IioUHg+VuzDsZkyFopFJByemyD+1zS0q/lOovDM
+ 9bqSQ+x9PkVvzyq+F83L9pNjlvQosYZykQletDKA=
+X-Google-Smtp-Source: AGHT+IGn5XxzozQluxnPfy3zSSVS9I79zP/BqhJExl6QcPDqM58vf5ICeQ6B1W6Kap4gVlK50KZKho2RAN8k0pP/SSI=
+X-Received: by 2002:a17:907:9447:b0:aa5:b1bb:10db with SMTP id
+ a640c23a62f3a-ab2c3c2833bmr1451546566b.1.1736794918612; Mon, 13 Jan 2025
+ 11:01:58 -0800 (PST)
 MIME-Version: 1.0
-References: <20250110215640.892539-1-raymond.mao@linaro.org>
- <20250110215640.892539-3-raymond.mao@linaro.org>
-In-Reply-To: <20250110215640.892539-3-raymond.mao@linaro.org>
+References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
+ <20241127070631.16412-6-heinrich.schuchardt@canonical.com>
+ <20250110224554.GA2278614@bill-the-cat>
+ <CAM=mAOmee=By9ErZrvk0hVbZyLH_viguu_wMfOsV3LzTwddArw@mail.gmail.com>
+ <20250113015108.GT3476@bill-the-cat>
+In-Reply-To: <20250113015108.GT3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jan 2025 11:52:11 -0700
-X-Gm-Features: AbW1kvaePv4B8Nu6zwZGUE0hdtfiPTYbXh9nh-jue3serAfvigNA_VsaDF-cSus
-Message-ID: <CAFLszTiozCfFBm-6hukf7C74GCE4ZjQm9bo7hURKoD=tO7GFgw@mail.gmail.com>
-Subject: Re: [PATCH v4 3/3] tpm: get tpm event log from bloblist
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+Date: Mon, 13 Jan 2025 12:01:45 -0700
+X-Gm-Features: AbW1kvYIJCRk1v33kXZ4ZPxLNfLerbDqqs_nTev7S1fhLZ2G41W1Gctb-nsraV8
+Message-ID: <CAFLszTh7S=jmezZNwg=b+96+6ravY41iRbgJ_ssJ48nx4d=0QA@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] cmd: bootmenu: add parameter -e for UEFI boot
+ options
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Levi Yun <yeoreum.yun@arm.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,27 +106,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 10 Jan 2025 at 14:57, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Get tpm event log from bloblist instead of FDT when bloblist is
-> enabled and valid from previous boot stage.
->
-> As a fallback, when no event log from previous stage is observed
-> and no user buffer is passed, malloc a default buffer to initialize
-> the event log.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - Remove patch dependency.
-> - Remove the fallback to FDT when BLOBLIST is selected.
-> Changes in v3
-> - Malloc an 8KB buffer when user eventlog buffer does not exist.
-> Changes in v4
-> - Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
->
->  lib/tpm_tcg2.c | 55 +++++++++++++++++++++++++++++++++-----------------
->  1 file changed, 36 insertions(+), 19 deletions(-)
->
+Hi,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sun, 12 Jan 2025 at 18:51, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Jan 12, 2025 at 08:08:13PM +0100, Heinrich Schuchardt wrote:
+> > Tom Rini <trini@konsulko.com> schrieb am Fr., 10. Jan. 2025, 23:46:
+> >
+> > > On Wed, Nov 27, 2024 at 08:06:30AM +0100, Heinrich Schuchardt wrote:
+> > >
+> > > > The bootmenu command can display
+> > > >
+> > > > * menu entries defined by environment variables
+> > > > * menu entries defined by UEFI boot options
+> > > >
+> > > > Not in all cases showing the UEFI boot options is desired.
+> > > > Provide a new parameter '-e' to select the display of UEFI boot options.
+> > > >
+> > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > >
+> > > Very strangely, this leads to the EFI selftest "Executing 'random number
+> > > generator'" test failing on Pi 4, where was was passing previously (and
+> > > Pi 4 has an RNG, unlike Pi 3), and this is
+> >
+> > Do you have a link to the log?
+>
+> Here's the failing part:
+> Setting up 'random number generator'
+> ESC[0;37;40mESC[1;32;40mSetting up 'random number generator' succeeded
+> ESC[0;37;40mESC[1;34;40m
+> Executing 'random number generator'
+> ESC[0;37;40mESC[1;31;40mlib/efi_selftest/efi_selftest_rng.c(52):
+> ERROR: ESC[0;37;40mESC[1;31;40mRandom number generator protocol not
+> available
+> ESC[0;37;40mESC[1;31;40mlib/efi_selftest/efi_selftest.c(114):
+> ERROR: ESC[0;37;40mESC[1;31;40mExecuting 'random number generator'
+> failed
+> ESC[0;37;40mESC[1;34;40m
+
+This might help make the log more intelligible.
+
+https://patchwork.ozlabs.org/project/uboot/patch/20240811145209.4191404-37-sjg@chromium.org/
+
+Regards,
+Simon
