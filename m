@@ -4,67 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B54E77188
-	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 00:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD3CE77188
+	for <u-boot@archiver.kernel.org>; Mon, 13 Jan 2025 01:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 768BB805C5;
-	Mon, 13 Jan 2025 01:19:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E38D9805C5;
+	Mon, 13 Jan 2025 02:51:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kYIq3uow";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wgxPKyNW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZGuc2M3S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64DBD805C5; Mon, 13 Jan 2025 01:19:15 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 64001805DA; Mon, 13 Jan 2025 02:51:17 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F14F680027
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 01:19:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3201780079
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 02:51:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YWXtl31xJz9sPq;
- Mon, 13 Jan 2025 01:19:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1736727551;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=A3zoogKQbhHI8EF/xdmT3LY/fiffniDBd8FBucQGRDQ=;
- b=kYIq3uowmrvmYY4dvv40iL83v9X2C6MN4g5020m+vRQj+Xej2vmao2Vibv2M49QfWTkcx4
- 14p5kqT/5Bv7QFcXxFrS9QdRPrE0WGvsqVEaq2E9I5ugUdRRW5S4Aj7Nj8rjirVw9QYcIG
- OZE419ylVPsvEFusZ11LJ14XkBwH/BgA2XtunROEiXrRqnwG1KHGpGPnQ81OeseajM5zFL
- 3xTQuCuaRVOiYs2Suk+7XEIg4PbHhwXebEI6KJ8SMTPpLeaKRumYPgTDp1DjH28FrD7ETQ
- wtScmzIlXcl3ZLc1p9vxaZ+JGEcPXGbdgBa9wiSg0PECFfcumXpswxv/UEiCmQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1736727549;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=A3zoogKQbhHI8EF/xdmT3LY/fiffniDBd8FBucQGRDQ=;
- b=wgxPKyNWj8HNrBqXlxglqVv17wpXXSr7JzHzPTQ6gw3KvMAwOGhIO2evZFk3d0Bw/s/ky7
- CKRhHtPWCDZll3ArfBxdEGOT+KfoZJGzbSB6wwLeZr0oLh9F5fumTJA/6Y5A7BJW6K4niU
- 8usqm9OzhivrI7YE+t3MYKv65fY5HC0r1ieYxDJACoFMIaZDZv7EVys5tP1+mhvRhExS00
- SUswzRFa/X0+GKEbiX3IYU8Ls9UzQsqI4ZrbMlPI2+PdetupbS9ZLYLK38GR6suxvZoqHS
- zQDBmXgKoiG9cPUTeGnl2dGpG8vmsHTCfm+x/N4QyCFqEwvSb6wfgSpIOrfnDQ==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master
-Date: Mon, 13 Jan 2025 01:17:30 +0100
-Message-ID: <20250113001853.296787-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6d900c27af7so36493686d6.2
+ for <u-boot@lists.denx.de>; Sun, 12 Jan 2025 17:51:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1736733074; x=1737337874; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UAq9QmMCEb/3cYu43spMeU4mw/F14/gC9mQ4/GPDi/s=;
+ b=ZGuc2M3SOvIwZRgeS2PdHBmAZWKpZH7Y7vo2JT8Gos2fDcIH0sRUxQv4bodkoe7+g0
+ oITBaY3CE+TwgPVsjG+nQ2hIXCyTmzomhf9FlP8xNPVAUmCHSFvfxVhBQL1fkedW20zn
+ pydYvTqNCkWhFziH6wmDl3bBBDN0LtY+p2Yx8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736733074; x=1737337874;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UAq9QmMCEb/3cYu43spMeU4mw/F14/gC9mQ4/GPDi/s=;
+ b=jVW5yEZ9Xqh0W1UFznrdCooX2X2f7fKuY/Dp7WLrxr66chAXJJWvN8NyWTSlrDjrJJ
+ 0PdCLbexLBnx3TUXts8sQrCAuBD3eqpMPVj/OE5C9u60QTARZ7UvAE8ltCC/We1hRrZE
+ 29bgoc4horrqK24kgQGSjLPJ7S3LhksH9Lrj8A8yZhA0fvfedJWUJlg5dTJpKSZhKUSb
+ YKfzDPr2XxdgnhL73LfH+OfET5FBFYK6QJlv2ZLdUpx7oSTen1k1iAOMNLlLcSudapFe
+ 9MKEhRMl5ip63BmPbB/9/kWYB72lC3e7ps9rBDqp9qZ0cvE+xQXnELCoEdDcfOfirCtr
+ ng2Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVm9qED1YOGzpPwenrHtulPodJPFo32rmFHHOEIGVecsvG0I/oufkdg1IuNfw9TJffrmt70lg0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4S5mXUSTrLBbNDt+PBKkUHdWM1bOHLjFJGW8bzTB1U2b2K/nP
+ JY1TJRhZVXjNqY5Rjeg1091EQ2zRk7a9vGwHco9eM8z9Qmf1eFlu8dWgTKHG23Y=
+X-Gm-Gg: ASbGnct5ol/jzmYd5ia+5ohB06KgUmOCPjpE7obfur66yo1ubzCjiL8488MVwaRKg20
+ zvbvl/CgZbOfbXILooyywAjBiV18hPFyg4t2OZGS0jc1VgLkE/9VdIgx48Nu8xZ+V2cLWGAoQ2m
+ fUaSfkRtyP2PS6d6pa9/x/PuJAwXjmzrq4Xs57ttwUQlrQy6Pgi+1d8c7XdXn8cdd4VvICsjkuk
+ 6yDCA+dP+fN+JG1fHRLYkgmJsdLsKQLxw9qtoIDw7mimw8l5m47SAY=
+X-Google-Smtp-Source: AGHT+IGJreF6ZXfkDFF8W+JXXfdK55AjhkK3IjmkUMfxSkW7u33kMqjk3NI9xsQIHqb+mycqdycTCg==
+X-Received: by 2002:a05:6214:3bc8:b0:6d8:9bbe:392d with SMTP id
+ 6a1803df08f44-6df9b1cfdc8mr300577176d6.6.1736733073984; 
+ Sun, 12 Jan 2025 17:51:13 -0800 (PST)
+Received: from bill-the-cat ([187.144.0.100]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dfadec2acbsm35710556d6.122.2025.01.12.17.51.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Jan 2025 17:51:13 -0800 (PST)
+Date: Sun, 12 Jan 2025 19:51:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Weijie Gao <weijie.gao@mediatek.com>, Daniel Golle <daniel@makrotopia.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 5/6] cmd: bootmenu: add parameter -e for UEFI boot
+ options
+Message-ID: <20250113015108.GT3476@bill-the-cat>
+References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
+ <20241127070631.16412-6-heinrich.schuchardt@canonical.com>
+ <20250110224554.GA2278614@bill-the-cat>
+ <CAM=mAOmee=By9ErZrvk0hVbZyLH_viguu_wMfOsV3LzTwddArw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: fa8581fbc213abd7dd7
-X-MBO-RS-META: kpqdqk8bjotdw797q6ef58msujf49ynz
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="SAm9EdvwSso+oTtr"
+Content-Disposition: inline
+In-Reply-To: <CAM=mAOmee=By9ErZrvk0hVbZyLH_viguu_wMfOsV3LzTwddArw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,25 +112,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit bc157bb6667ed97e33be8ce8436c28baa275b295:
 
-  Merge tag 'u-boot-rockchip-20250110' of https://source.denx.de/u-boot/custodians/u-boot-rockchip (2025-01-10 18:56:22 -0600)
+--SAm9EdvwSso+oTtr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-are available in the Git repository at:
+On Sun, Jan 12, 2025 at 08:08:13PM +0100, Heinrich Schuchardt wrote:
+> Tom Rini <trini@konsulko.com> schrieb am Fr., 10. Jan. 2025, 23:46:
+>=20
+> > On Wed, Nov 27, 2024 at 08:06:30AM +0100, Heinrich Schuchardt wrote:
+> >
+> > > The bootmenu command can display
+> > >
+> > > * menu entries defined by environment variables
+> > > * menu entries defined by UEFI boot options
+> > >
+> > > Not in all cases showing the UEFI boot options is desired.
+> > > Provide a new parameter '-e' to select the display of UEFI boot optio=
+ns.
+> > >
+> > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >
+> > Very strangely, this leads to the EFI selftest "Executing 'random number
+> > generator'" test failing on Pi 4, where was was passing previously (and
+> > Pi 4 has an RNG, unlike Pi 3), and this is
+>=20
+> Do you have a link to the log?
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+Here's the failing part:
+Setting up 'random number generator'
+ESC[0;37;40mESC[1;32;40mSetting up 'random number generator' succeeded
+ESC[0;37;40mESC[1;34;40m
+Executing 'random number generator'
+ESC[0;37;40mESC[1;31;40mlib/efi_selftest/efi_selftest_rng.c(52):
+ERROR: ESC[0;37;40mESC[1;31;40mRandom number generator protocol not
+available
+ESC[0;37;40mESC[1;31;40mlib/efi_selftest/efi_selftest.c(114):
+ERROR: ESC[0;37;40mESC[1;31;40mExecuting 'random number generator'
+failed
+ESC[0;37;40mESC[1;34;40m
 
-for you to fetch changes up to 46a7999160da3167497e08a444417aea26171197:
+--=20
+Tom
 
-  arm64: renesas: Convert boards over to is_cortex_a() functions (2025-01-12 23:49:58 +0100)
+--SAm9EdvwSso+oTtr
+Content-Type: application/pgp-signature; name="signature.asc"
 
-----------------------------------------------------------------
-Marek Vasut (3):
-      arm64: Convert core type check macros into inline functions
-      arm64: Add MIDR entries for Cortex-A57 and Cortex-A76
-      arm64: renesas: Convert boards over to is_cortex_a() functions
+-----BEGIN PGP SIGNATURE-----
 
- arch/arm/include/asm/armv8/cpu.h        | 32 +++++++++++++++++++++-----------
- board/hoperun/hihope-rzg2/hihope-rzg2.c |  8 ++------
- board/renesas/rcar-common/gen3-common.c | 10 +++-------
- 3 files changed, 26 insertions(+), 24 deletions(-)
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeEcYUACgkQFHw5/5Y0
+tyw9rwwAuGDoukBdq5q6ZkuCDpTQutXGSLBoYpm0ytoB4+1U3S1VvLtxH2Ir00uN
+IsgKXgx/tYx2izxpi7WqhIZClg/9QGBytJsNQhN9PqgrKzhXCTfvLOmwoa5vLQU2
+0OGJpYfhNuKqaIRbQKL36FwsaB8TnfBGu8zVLpgDSBRate4jNbP0nDDZ3Nt9XakJ
+WqKwgFL5hhIDgj9jIzn2fDFEh4eWABCs9IieCcsRKlRJM58Anxmx4UxlndYXpY3Y
+xCgVuKPsSYDiNOte0OAaKOA/r/4WjnTNv2UKn/rAQ1piELASLoTpxCdp4CuSUPYj
+9NPeHgxn/P2FmyGLUHRAoQCF4v1sWktlK++cDB3DVuBQTui3gur5oMgb+Q9FmDFG
+0kIWhb+2tclLf0RCrSXetGrruPz/HtjgChP0QzgSFaMDuUqCNgIFwcgdnIZ2ExtE
+myHO3XVjqQxdDOV23+49YeyMcRgjvtexIaBP64T7gv7+DtQHETH2Xisj2DfGtr/r
+NIx+nCKT
+=M4k9
+-----END PGP SIGNATURE-----
+
+--SAm9EdvwSso+oTtr--
