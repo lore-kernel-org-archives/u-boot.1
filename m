@@ -4,80 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B99DBE77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 16:40:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5CC4E77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 16:43:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A2348060C;
-	Tue, 14 Jan 2025 17:40:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 103CB8022E;
+	Tue, 14 Jan 2025 17:43:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eyt48RnF";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="N2Clas9a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCD0F8069D; Tue, 14 Jan 2025 17:40:10 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2AC9D8060C; Tue, 14 Jan 2025 17:43:42 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::612])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A0D58022E
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:40:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3B3F8007D
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:43:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6dd049b5428so46116646d6.2
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 08:40:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736872807; x=1737477607; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ur/NKTjRZ7FbiqRfeUqfIxZF+2YRZHJqr1BKJ0tfy+Q=;
- b=eyt48RnFM3o3Ew8Cyx8U5wHueqnzqE0Ri6fWREbTKYyJI+GQNMLFIMVmoXfj4ZN7dj
- KPQigbHkUVxTo1abzZT+ita+YDYXbwJ0xfZEsVBT2vHWCCwOJMPwH/wyAQZ1X8sChRrD
- n4Wtt7G+mNMdT3Ewp02VwSaRp3P+R0c8+eK0s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736872807; x=1737477607;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ur/NKTjRZ7FbiqRfeUqfIxZF+2YRZHJqr1BKJ0tfy+Q=;
- b=lGSV+tdiPkbzuBpUzx07Vf3vhj7cyDMNPKvikGs90emNJqKl9+0GhlYB0BomHnreR1
- 0SQVFnZM22PK8jtv+Yyb9qI9/2skPym0x62D5CQvR1sE0QiCqBK+UexG4N4ZknNVJRxe
- MUgQ/5ua3iS7q/v602nm5LeEUfU6L6v1rSajXLtLFQEbQiqE61xVDqTF5VygDBHaI7Bh
- xj6NvUKv0R4rIFo5qrbVQVe54XMyLYeNrvebQDq9TEutPut/HBYxoLinFe2EOYbmya0x
- CGHwUT1SbqJghkUWi1ueztohBI4qBuCll/z+5O5lkygOSoUqqO0UdmuFeVbuopt24LO4
- bvbg==
-X-Gm-Message-State: AOJu0YxbSVl3szTm80beRadt4Rc75ZynOfh1XZAqEGVU7bCUIWq+oiUq
- 7e0mkLnkVIBQoQo0klYcld5ZrWxuWQz7PU7owiqZPqrXoHS0ueGgJf0UqnU5zMssiGtOzvC/5Bl
- l
-X-Gm-Gg: ASbGncsw5DpYb3w+mkG+UzwAJQRrzkdZEsy8CIO6VAxo1Q7NLpXfNUqUlYWDE5qO70u
- aMUF8Y3AjI9Lhc0kDCP7ZcKB7V94VjFGGLX8CxYga7TC2mAsc6NHl4HqtG/ICpG7Xgwjzl3INHe
- 7GiuOjSnfbKRedgT9SbQ/5I/ywzVyevnVmF4IWsd6U9QYlgCwSfxZ4GQZ5UCxjciOakB591Gp3f
- A0N6eusxg5+8pbLOtDP10RRmYpbWcnWfBrrTdP846mbKo27oN0UIg==
-X-Google-Smtp-Source: AGHT+IFSCzQLooj5QSnMp/qU8X7UUon79VE8vsjiq8wyZch5DqZw0BPZYLysaMmT7n7W+iQjeuTxPA==
-X-Received: by 2002:ad4:5747:0:b0:6d8:8fdd:9797 with SMTP id
- 6a1803df08f44-6df9b2b1a16mr470094296d6.36.1736872807460; 
- Tue, 14 Jan 2025 08:40:07 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfade89362sm53895826d6.110.2025.01.14.08.40.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 08:40:06 -0800 (PST)
-Date: Tue, 14 Jan 2025 10:40:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <monstr@monstr.eu>
-Cc: u-boot@lists.denx.de
-Subject: Re: [ANN / RFC] Regular community calls?
-Message-ID: <20250114164004.GI3476@bill-the-cat>
-References: <20250113183409.GY3476@bill-the-cat>
- <31e9cdb8-72a1-401d-bd7b-6be8ef403507@monstr.eu>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LxWb+UZu+L+NEg+Y2FHR5Hp44ep/ahfkr04cbGf3sQ3eAuIRuuSq88d8tGT0VBEj4wsacsC0Jam4svoSIGSh3rjdkD+DNb4EQDioDOkVwyohE90Nx7p3nURCd1rSn6d1J/3TlDbixxjdKdA+z+IxL+d92dug68blqX/ZdvbvaHx6jYTPDu6KLPdUfk8QEDZlepzcGuQwlBNV8oBpTs9geLw8iWNYcl1FdHXLgawds2zS5B4uibxfl1BteVVM+x23wiIi1lX23iAl0fnuAQ/BJePjpJy9fp9AZrUiC8svOU/fmTjFMNNW99G3xuBkJZHut4M8B1/ek/i3C6HYlymhKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WGK518OelucMGhcXY35IbPAXve46LWEzB+bW5gq3j9s=;
+ b=RUUsAYbXUnqMj3ZOphZTJ4Tv7UcwQj90eItPm6lTQm72Hpx3sdWox7ml3mbcxlB1UJDnRA/qsp5ZeAcRVC4QinpXQpkTtMMzE4DvsfNzSVrdijpqEnMdedBO5pszLNqfcNgqXJWDXTaHyuv5oRoMD32NvfcEhmFWIUoBA/enGFLqqgaEEnqII1ZVCbHZ/oYIhi3dS8lWR7js9hRi62/ltIzXDMm2gvU4X+1zYwCSkY84GOMeDMjrBpoKVNU5QxaX1x5ZvsB+AHmhXsXJbYis7s5HxnVtvREQ1R0aTRfa6cMjDB7qVm8nqdrXzul/QcEWEnd9yRiTgNavuWxf/UWWHA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WGK518OelucMGhcXY35IbPAXve46LWEzB+bW5gq3j9s=;
+ b=N2Clas9anigumvTRG0twuEaoQrO67tH8hgOzLJ+peTio6I00SlNsAY6WM/0smYKTQGM2zJrk2u9O/Ywuz/DhlJgVYumTF2HVsTBjpXnAHNjG6RCVLnJERgcfuCiJEsxlk1nXy99YTmeo36YD85PXJQd0Z/VduL2zmgInZ6pOH+M=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by VI2PR04MB10882.eurprd04.prod.outlook.com (2603:10a6:800:27a::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.17; Tue, 14 Jan
+ 2025 16:43:36 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Tue, 14 Jan 2025
+ 16:43:36 +0000
+Message-ID: <75df4e27-bd92-46c2-8e60-633c1a200302@cherry.de>
+Date: Tue, 14 Jan 2025 17:43:34 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 09/20] rockchip: mkimage: Add rk3576 support
+To: Kever Yang <kever.yang@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
+ sjg@chromium.org, philipp.tomsich@vrull.eu
+Cc: lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
+ jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jonas@kwiboo.se, detlev.casanova@collabora.com, u-boot@lists.denx.de,
+ sebastian.reichel@collabora.com, Xuhui Lin <xuhui.lin@rock-chips.com>
+References: <20241121142731.1202209-1-heiko@sntech.de>
+ <20241121142731.1202209-10-heiko@sntech.de>
+ <421a8aa9-4f7b-4d63-8f5e-34eae97b8b06@cherry.de>
+ <a1b48fbd-6870-42e0-a9c9-9617a0ee2d01@rock-chips.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <a1b48fbd-6870-42e0-a9c9-9617a0ee2d01@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0069.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:49::22) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gim4wAE3pY14BULt"
-Content-Disposition: inline
-In-Reply-To: <31e9cdb8-72a1-401d-bd7b-6be8ef403507@monstr.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI2PR04MB10882:EE_
+X-MS-Office365-Filtering-Correlation-Id: 11316e22-b036-4701-d13a-08dd34ba9719
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?d3ExSHJQWnU0WGdrMVJTdi9aZUlKZ29FNjVDbjFMRWxyZnpYanU0OHpHRkxq?=
+ =?utf-8?B?YTVEdnVJS1loQVJOVnF1Tmkxa0Z1OWZDc3pseHJwRThGR2NBRTBDQ3ZrMDEw?=
+ =?utf-8?B?eU1IYk96YW1ZUmZpNU05WStJQXl0UmV1MFhHNytscksxaGxyRWxwTHdLV1VM?=
+ =?utf-8?B?Vktpc2NXK1NoTk1rTitqcU5yVllrODc4czlmZUUwclh3UWJjUldwQ0tOaHRM?=
+ =?utf-8?B?TkpPa0V4azBtc2hYR1V2Zngxc2E1cndMVGloZFVoREVZdzBid3dIYWRwaVFI?=
+ =?utf-8?B?UXFURjFPVm1hS2dzZlR1SmZtMTNKOGFLOTlPVk84T0xKT0VaWldUc0hKK21v?=
+ =?utf-8?B?UG1WQWdUWHUxM0tzYU9VdllqNm1BUnFLY0FyK3JVcFdxS1pVYmwvN1FnRWVL?=
+ =?utf-8?B?MXIwQ21Vb0tPOHpqN1hzdWZSVmdmK0kzVGk5dGJ3RWtIRE9kK0hFc1k4ZlZ1?=
+ =?utf-8?B?ZWJJVHI5dTdZdzZRMmxSeXo5cDdLV282ays5SXVRS3ZWYUFuS0ZzSldDeGkr?=
+ =?utf-8?B?U0pTaVBlSm9tRkJGQVQyMFFHdFlmdDMwcnFkWG9rVERadTJLZG9Nd3czc3d5?=
+ =?utf-8?B?WW9Kdnhmcy9rZ25VczhOTytrSFVaMUJBUGFPcXoxM3haOW5mOWpmQnlIU2k0?=
+ =?utf-8?B?RWNzU0lJZU1zYmNadEdSZ0h2WWVCSFltaTZLcHFWaWh4TmxoRjUrNDVxNDE0?=
+ =?utf-8?B?MGZleC8zMWhPQUp1UGFxR3M3ektWbm1vaitGeEFIU3pEN3Yxa2x6MzJIei9T?=
+ =?utf-8?B?YzF0blJJR0hCWmRrd2JzMGd0SXdKS1hXWU9HUXpMRytJVFZuQmFpY05WSlJw?=
+ =?utf-8?B?K0VoTzZLakppVmtkZjN5VHlWS0NRekdFc1RLdjVNUEo4NnE4TmxQTUxvZmJs?=
+ =?utf-8?B?MVNLWG9KVm9ZQnZCQ0JyZTl3ZEtjQURENHpNWllnWVFCQW80ZXJSejFFK29k?=
+ =?utf-8?B?S1UyWTY5YlRYOGJQRzdlTENwRmtDSDBTSk9hWVBFanNVdXQza09uYk9VRGlC?=
+ =?utf-8?B?dEc5SXduL3dNTGV2VHE0MlhGRElsTkN6M051QXVEdnI3VzFMMFhsRSsxZUNr?=
+ =?utf-8?B?TjBPU2FjSm5TM3U3aXZtZkhkZDhxOHBVMjgwbWhudm5Cb21wVVNER3hLL3JW?=
+ =?utf-8?B?UlNpc1RJeU1hUE5xT0xmU0VvUW0wTnoxUTlWbE9aZEF3ZEZwc2l4SmFWeTdt?=
+ =?utf-8?B?Y0NsdWZLR1YwRjFUWkJDTmNxaDBaV29MNGtJUGVnbHc4WTFaSGtpK21kOUI3?=
+ =?utf-8?B?dytKODBUd3dSM0w2QlpReDBZOEY5UjdMQ2liQTB1U2pOeDArVUl4dXR6Ynoz?=
+ =?utf-8?B?QVF1TVpTWmJkajBGb2tXRXdha0h4dGcrTnlDWHdsQmN3bUVnc3pVK0dDeUdF?=
+ =?utf-8?B?RmlzKzNjT1h6MzhyUG8yTjgzbmw3aVdXK0pMOTR4djZTUDA2VWIvbXZ3bE1r?=
+ =?utf-8?B?UXF3Z2l4MWNuOTFqMUYyQXB0U3R5dGljRnNkOXBRZWhVZTlpTmFyNDFyRzhB?=
+ =?utf-8?B?TndHSzRkQzF1eUVkWU5TSnAxczIzaWxwNGJYY1dIeFlydGd1MjdoOEw5TzRh?=
+ =?utf-8?B?VmladEE4ODFWbmtSSlUrVGRJYXBteUpKR09mTG8xS2JDdjZRV0dDNVl4YVhn?=
+ =?utf-8?B?cXVTRjRrWEQvVHBFSDYxSFFxM29Yc1JpTW9WajBhaUZkdUNubjhXNktZMTVQ?=
+ =?utf-8?B?NHFnM2RJOWc4bXNHVHp3NitHTHNiZ3lJSXFOdFNKTVA0cnBBdlNKQ2sxZjVa?=
+ =?utf-8?B?c2VOTGQ5VkphTTU5R0YveGE1NWUvdGFDWENwY0lzVk55M1BPQm42Z1Y1eElX?=
+ =?utf-8?B?RVZkbitLeHNMaEpTRnJKZU5oQnJlWnRjVUtmcHMxK1IxNGE1RDVYZGtsSmlh?=
+ =?utf-8?Q?9R/Ky5uE+cYl4?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7416014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YXVQRjd2QVlPRXRWbEw3Zi9OMlVKWnZYVmd1amxJZ3l6UWUxdFVSTE8wbXZY?=
+ =?utf-8?B?RGFrYnl1V0pEYTlvU1hNWGE5Vkg0N1lPeUNsZEt1SCtESGZDYUx6R0ptSllP?=
+ =?utf-8?B?QkV6S2I1Y2preUpDS2tTZTkrV09DbWh5a1lvb3JQZklWU2RyeUtNczZGeHFr?=
+ =?utf-8?B?a3h0VXBxbmlVMjdOaUtubEJZU25rblRMUWpGZDZzbUlEdkdTZ3FUcXhCS3V4?=
+ =?utf-8?B?ZnZiVEZUZWtCbENtNm1GTEZtRWxrdFpMN0dZb1dQeGFlak1tUjVnVzV6Q3Ev?=
+ =?utf-8?B?TVFJa0FwUlJxNnFCcFllbUpkTGNtampEcWVhM3hhR1FxdkwySHUzR1ppVE55?=
+ =?utf-8?B?M1k1R2RVZ2xBV2dhVkc5azhiTURPTlE2NXVhdys2R2kxL1pUdXJsM0F5b0FT?=
+ =?utf-8?B?UTZDd3lEdjk1MjZnc2hEWnZMZWhaSi9qRmdJaFV6aVA4elhYTVJ4a29qNWdL?=
+ =?utf-8?B?NXk2N0lMa3NhbGtYUUZqd1F2MHZGZnlaSE1IcW1GNTE3SHJoS002aG1Ca1o1?=
+ =?utf-8?B?NXg1OWJPYUNxU2pNQWgxOWdSVjJhSk1MZTNjeWlaMGpQMnVzYmhzditSVlZY?=
+ =?utf-8?B?UzE4NGliRXBVSS9URjJ1Zmdqa0czK01iV0V1ODNLQ3NqSThnb2ZMMno0bTZT?=
+ =?utf-8?B?UEhJMmNsWkdPeXAzWHR1SjhFQVhrUWhBUXNEeUdXK2FjMWkxTUp5MTV0ZHF2?=
+ =?utf-8?B?a29Vd1oyM0svb0NqYkptLzRsWG9vV2pQdktpK1ZiaWF0engzK0JzYWdvN3RS?=
+ =?utf-8?B?elFmUkljamhnc0E0N3NEOC81dDNDYlFQdUhBNTh1L3dpZ3c1SWlFdUhtajdZ?=
+ =?utf-8?B?VnNLaEtkNGJPa2lrT25MSnFicVQzT3d4LzdEcmJ4UjdGaE40Tk9Tb0cwZkFT?=
+ =?utf-8?B?bi83ZWN5a09xTU5GWEhtMEJWUU1FcU81VDhSaE1aT2xkOVNuaWNhc29EOGRa?=
+ =?utf-8?B?Q0JhZ0x0UVBrcHQwcnhuKzNMc2VPMWFKdFo2OFg4V3dWanBtdE1KMmIxWjdL?=
+ =?utf-8?B?dEpnMmwrcWdFdTlZUmZTUjBqMVdEaUZudlpKRXdwRjdETkY0ZFZyZGdmczdR?=
+ =?utf-8?B?WFhaeUoyb3ZyZlBsM3BuZzNlc2p1QjNZSUxpcXQxUmlQcnU1djMxN2NOU1Bp?=
+ =?utf-8?B?Y0dZNXdWVDZJTWh4VGtDRlVPNzE2b0hhSER2TVR2Qis1ZVRYd2I2SWdIcFZm?=
+ =?utf-8?B?S2x1TUlWb1l5cktDbXFEdHphdmZvRFRUNmJKVDJkaDRRYmE2WUtFWVkxUGkw?=
+ =?utf-8?B?R3RNNXFWQVpCUm5ObUphbzhUNXJyYXJVSzQxU2k4S3NzdGJzNDhudUNiOGsw?=
+ =?utf-8?B?TUgzZ1JGaHNCaHpWZHpTdXQ2ck90cVJrWG02MFdtcnZCRUdJYk5BQ3ZPdEhB?=
+ =?utf-8?B?cmdWeUxNcHVKTFNtUE9adytoU3FuOHgzaTdudFVBN2tjRUUvVVFYeDY5Rkpr?=
+ =?utf-8?B?WXJFTzFBZ2taSFJ2dGlUMmJJR1ZUbHlVMGlldkZuUkpyQ1BHYTJtdldoUlNz?=
+ =?utf-8?B?aDF1Q1JWaHluUEVDcUE1dDNoS0lkY0x4MUZ1UHZqNHdmUGlQSzFPSDUzOUYw?=
+ =?utf-8?B?dzhmVkp4a3cxem4zQWVkcVFUSVZRc0gxbEF6N0JGWXIrN1pUNjdnbkZoM2VC?=
+ =?utf-8?B?SlRlc1lOT3g1MzhpN2dxN3ZwUFAxOWFmdTd2UTZEU2xLUlZYbHMrWlltaHBC?=
+ =?utf-8?B?aGtEMU9PRCs3NHVEVk1qcmlnS0JYM3pyZmhsZjIrRFhBZ3AvaW9zRkdqNG1F?=
+ =?utf-8?B?RjF5U0sxRTZoSG9iMForWFl4aWVraUNPaGROYS9xcGdZNjJmTlFVb2QwVnFh?=
+ =?utf-8?B?NHUzdDBKUkErOGV3NDF3aWhSbnBrdjJCL3NZenMyazFCbzRvc2FSTGVTVWxk?=
+ =?utf-8?B?TC91eW16cjBtdEEvT2hSdEllTTUyU2RIZnFOVG9EV3hSRFpha1g4d2JHY1VD?=
+ =?utf-8?B?NFBwUHg1WVhHb09MNDg3NytHbWYrb0hjbDJHT1NlWTBmcjNONzkyVGhGd1Rl?=
+ =?utf-8?B?QllBOXQvcFdsbndVblFJaEdDVlVyb0xXRHlrY2NudmUvRkczOTNqdllqUWVz?=
+ =?utf-8?B?d3lmb2Fqb0FqMUhSbmtDL2drTzFseVdVdHFvc0EwSit3VE04WWVVdzNSaEU1?=
+ =?utf-8?B?ak5YVkNpMHdIalMzOU82d0VGL1FkK280MEZUWkQvS1lEWHViWmhYUWs0d3Rv?=
+ =?utf-8?B?RHc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11316e22-b036-4701-d13a-08dd34ba9719
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 16:43:36.1672 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: h84HbY3or2vN4yntHoSlkzdc9a880gUGMni2VJXPcalxHk66oIZicA3WxApH4oTEj7gDJ2KUh73dqpNTly4dRIIwehlv85+MPKpU75NWX30=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10882
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,56 +180,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Kever,
 
---gim4wAE3pY14BULt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 1/10/25 1:54 AM, Kever Yang wrote:
+> Hi Quentin,
+> 
+> On 2024/11/27 00:53, Quentin Schulz wrote:
+>> Hi Heiko,
+>>
+>> On 11/21/24 3:27 PM, Heiko Stuebner wrote:
+>>> From: Xuhui Lin <xuhui.lin@rock-chips.com>
+>>>
+>>> Add support for rk3576 package header in mkimage tool.
+>>>
+>>> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>>> ---
+>>>   tools/rkcommon.c | 1 +
+>>>   1 file changed, 1 insertion(+)
+>>>
+>>> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+>>> index 3e52236b15a..d89c7d3afea 100644
+>>> --- a/tools/rkcommon.c
+>>> +++ b/tools/rkcommon.c
+>>> @@ -135,6 +135,7 @@ static struct spl_info spl_infos[] = {
+>>>       { "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
+>>>       { "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
+>>>       { "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+>>> +    { "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2 },
+>>
+>> I don't understand why we remove 0x1000 here from the size of the SRAM.
+>>
+>> If I go back in git history, I found 
+>> 915e09814a83128fee8b87b2ee2e5f4a17e04a01 which states it's total SRAM 
+>> - size used by BootROM.
+>>
+>> Can anyone provide feedback on how one is supposed to find this out? I 
+>> think it's not the first time I'm confused by this and I'm not sure 
+>> anyone's answered me before, but in any case, documenting this would 
+>> be much welcome :)
+> If you look this change at vendor U-Boot, you can find below commit msg:
+> "Sram total size is 512KB and 4KB is used as bootrom stack."
 
-On Tue, Jan 14, 2025 at 03:21:09PM +0100, Michal Simek wrote:
-> Hi
->=20
-> On 1/13/25 19:34, Tom Rini wrote:
-> > Hey all,
-> >=20
-> > It's been suggested again a few times recently that we should try and
-> > have some sort of regular open call / video chat as that might help
-> > clear up some issues. To that end, I'd like to propose we have the first
-> > one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a day
-> > after the v2025.04-rc1 release, and I'll include a link in the release
-> > email. If this works out well, we can make it a regular thing for the
-> > day after a release and also try rotating the time, or having a second
-> > meeting much later in my day that's at a better time for other parts of
-> > the world.
->=20
-> +1
-> TBH would be the best to send meeting invitation to have a record in a ca=
-lendar.
+Somehow this value changed for a couple of SoCs in vendor U-Boot so I'm 
+not really trusting it ;)
 
-I agree in theory, but Google is being a bit of a challenge at making a
-public calendar link. I'm trying to avoid doing things that will result
-in a higher spam potential. How far in advance would it be good to send
-the meeting invite out do you think?
+> This size limit is for the first blob binary which is TPL/DDR init, and 
+> after running the DDR init,
+> we need to back to bootROM, so we should not touch the bootRom stack to 
+> keep the bootRom
+> available.
+> 
 
---=20
-Tom
+Considering we don't have access to the source code of the BootROM, I 
+assume we're in the case of "trust us the BootROM needs that much for 
+its stack" and there's nothing we can do to verify it?
 
---gim4wAE3pY14BULt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeGk1gACgkQFHw5/5Y0
-tyyLqQwAkTjnI6elfDi0W9Xx7yj/VNL2bVKj41DbnVz6BwwyIIGMrWDBZ+cMUYKF
-wl1hYOnUxhMB9MOY41yNR5MoH1zD9lD98KpsxXfZILqpFpl3rb+2SmQO5szvmuqS
-wiZmtP2YkbrBRXLKYlnwkPYg7d8ZP+CgQUWRbLheVFUjBfhNwidw/30p1wueDfE5
-4Dwz4eI61HbkVITha+gd5FlC2AKyF9ZRo6n0iAklgheVTY8pjVk6CeVNFNrzduQS
-KTi550+VYbHBe6Ttw8RjhT0Lb+zbeJs5DvABOrcF78QILjCxMVduga9sfwb9I8Ol
-iUQMhCGNn12wS2Qbis5YHZ1B+4J1/Re+B3EW0KYoKD10sCyhOdl8EgdlHBlgOq4D
-CHFAMAwEVMxFYsU15vpQrkCiTtgbPNTKvxtpJs3kTLG5rol+sEEOyowsGV2nppJv
-fC33lcEZXPbIi7TUVWZDcYLaUNZgT2NCITKi/+08mudw1rcBXwZgsBp4z5iJUBSo
-SX1htmRH
-=UJw4
------END PGP SIGNATURE-----
-
---gim4wAE3pY14BULt--
+Cheers,
+Quentin
