@@ -4,69 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE3EE77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 05:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED745C02183
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 07:12:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8657A80657;
-	Tue, 14 Jan 2025 06:49:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1318B80657;
+	Tue, 14 Jan 2025 08:12:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1736833791;
-	bh=NhFQgNHzbDD4Ddk4L2d5bCKuj9Q8xDjG+IbKAGmyh3w=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=OYxPgmR+S8mqwvXiHrbIqPiMCFE9SzzwAz5zE/3ORCsCAlIaxnAdxJwP1sqOWhB0L
-	 kdH7srxxY2dqejxoY2RFGR5VL27t5t36zaI35SNz0j7I/LsaNQ+uaUw7hHe3xKHWdF
-	 T6uvj1veqlI0QkY08n0ePXv9tAspLxiGD4sJIC6CPTE3p3uHW2knellyc+zeoMLJk5
-	 E/PU6uYRP1Xox1A2kjsGiAgHsAHUTGWgMqUCp+BhTTiBHxsNVAsiy6fUewAGdtqHy0
-	 W9jF+WyhzsdgZwXjv6egWPeSsvm/LGmiZQ+F7skTAEAN+ESIMEECPqzWlrrGW30PSq
-	 K/ou0pRZWx5Sg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E7A6806B7; Tue, 14 Jan 2025 06:49:50 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id B6FFF80658; Tue, 14 Jan 2025 08:12:38 +0100 (CET)
+Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C25580619
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 06:49:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5828A80619
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 08:12:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="ScONu1CG"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9137E10485886; Tue, 14 Jan 2025 06:49:45 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1736833786; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NhFQgNHzbDD4Ddk4L2d5bCKuj9Q8xDjG+IbKAGmyh3w=;
- b=ScONu1CGreDUDVyCAnoT8wpwXfGJE7vEuw91CmC5W9acooPKB/PXsu+IsmHD2czPi+gX9O
- v/Xkqz1wEYkS+9oMrcnW6/CmN4Z1lJT05o8zfgU5BuCcnTQi3UUU5Jm6i5W0ytqnf6OoRZ
- U+F6x66tLTsPNdIciISVkyApX+O57bQwT9qH6cIwH70SmB0y9dQH2tasikj5AgGPhv1j12
- 9X0fjox014eL0VCrDw1yToyU1w37ogtajg+s3MHyspUu6ILDdD+fGNHSQE98ctDuDtyYsz
- 3AlMYLH03whZC7/faNLsULVaOPT1BlY2FmNipZSjHcdlYqzNBcP2524hAks7bw==
-Message-ID: <fa756b86-3fda-3e4f-ad18-63f157d4c465@denx.de>
-Date: Tue, 14 Jan 2025 06:50:29 +0100
+ dmarc=fail (p=none dis=none) header.from=gentoo.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
+Date: Tue, 14 Jan 2025 07:12:27 +0000
+From: Yixun Lan <dlan@gentoo.org>
+To: Huan Zhou <me@per1cycle.org>
+Cc: u-boot@lists.denx.de, Ben Dooks <ben.dooks@codethink.co.uk>,
+ Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Huan Zhou <pericycle.cc@gmail.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Padmarao Begari <padmarao.begari@amd.com>
+Subject: Re: [PATCH v2] riscv: spacemit: k1: probe dram size during boot phase.
+Message-ID: <20250114071227-GYA17216@gentoo>
+References: <20250114-get-dram-size-v2-1-aba5a281ea28@per1cycle.org>
+ <20250114051313.4t25kkjldygjzrg2@per1cycle.per1cycle>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] configs: capricorn_cxg3: Enable CMD_WDT
-Content-Language: en-US
-To: "A. Sverdlin" <alexander.sverdlin@siemens.com>
-Cc: Anatolij Gustschin <agust@denx.de>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20250113211518.1276899-1-alexander.sverdlin@siemens.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250113211518.1276899-1-alexander.sverdlin@siemens.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250114051313.4t25kkjldygjzrg2@per1cycle.per1cycle>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,31 +59,122 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alexander,
+Hi Huan
 
-On 13.01.25 22:15, A. Sverdlin wrote:
-> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+On 13:13 Tue 14 Jan     , Huan Zhou wrote:
+> sry for the delay, i was setting my homelab these day.
 > 
-> Capricorn boards have WDT (WDT_SIEMENS_PMIC) and U-Boot is not configured
-> to trigger the WDT. Enable the "wdt" command to be able to stop the WDT
-> from the command line.
-> 
-> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> ---
->   configs/capricorn_cxg3_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+> On Tue, Jan 14, 2025 at 01:10:42PM +0800, Huan Zhou wrote:
+> > 
+> > 
+> these content is from the cover letter and imo should be ignore during patch step.
+still wrong, at least tags will be lost
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+IMO, it would be better to have some commit message
 
-bye,
-Heiko
+> > ---
+> > This patch introduce improvement for get dram size on bananapi BPI-F3,
+the patch for k1 SoC, it should be board agnostic        ~~~~~~~~~~~~~~~~
+> > retrieving the dram size dynamically.
+> > Have tested on bananapi Licheepi LPI3A 8G[1].
+> > 
+> > Links:
+> > [1] https://gist.github.com/per1cycle/e4eab66ebb6f83fe5118e823367fce28 .
+> > 
+> > Changes in v2:
+> > - Fix bracker and return type in map_format_size() function.
+> > - Add test log in the cover letter..
+> > - Link to v1: https://lore.kernel.org/r/20250108-get-dram-size-v1-1-4bae32ecf756@per1cycle.org
+> > 
+..
+> > Signed-off-by: Huan Zhou <me@per1cycle.org>
+> > Tested-by: Marcel Ziswiler <marcel@ziswiler.com> # BPI-F3 16G
+here lost
+> > ---
+> >  arch/riscv/cpu/k1/dram.c | 40 ++++++++++++++++++++++++++++++++++++++--
+> >  1 file changed, 38 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/arch/riscv/cpu/k1/dram.c b/arch/riscv/cpu/k1/dram.c
+> > index c477c15cbfb19f0e3a0ee72985b602f5bda352d7..4140440255fa1b3dbae521c58c6809445499a463 100644
+> > --- a/arch/riscv/cpu/k1/dram.c
+> > +++ b/arch/riscv/cpu/k1/dram.c
+> > @@ -4,17 +4,53 @@
+> >   */
+> >  
+> >  #include <asm/global_data.h>
+> > +#include <asm/io.h>
+> >  #include <config.h>
+> > +#include <bitfield.h>
+> >  #include <fdt_support.h>
+> >  #include <linux/sizes.h>
+> >  
+> > +#define DDR_BASE 0xC0000000
+> >  DECLARE_GLOBAL_DATA_PTR;
+> >  
+> > +static inline phys_size_t map_format_size(u32 val)
+I don't think it's necessary to use inline, it's not that short
+so personally I would drop it
+
+> > +{
+> > +	u32 tmp;
+> > +
+> > +	if (!(val & 0x1))
+> > +		return 0;
+> > +
+> > +	tmp = bitfield_extract(val, 16, 5);
+> > +	switch (tmp) {
+> > +	case 0xd:
+> > +		return 512;
+> > +	case 0xe:
+> > +		return 1024;
+> > +	case 0xf:
+> > +		return 2048;
+> > +	case 0x10:
+> > +		return 4096;
+> > +	case 0x11:
+> > +		return 8192;
+> > +	default:
+> > +		pr_info("Invalid DRAM density %x\n", val);
+> > +		return 0;
+> > +	}
+> > +}
+> > +
+> > +phys_size_t ddr_get_density(void)
+> > +{
+> > +	phys_size_t cs0_size = map_format_size(readl((void *)DDR_BASE + 0x200));
+> > +	phys_size_t cs1_size = map_format_size(readl((void *)DDR_BASE + 0x208));
+> > +	phys_size_t ddr_size = cs0_size + cs1_size;
+> > +
+> > +	return ddr_size;
+> > +}
+> > +
+> >  int dram_init(void)
+> >  {
+> >  	gd->ram_base = CFG_SYS_SDRAM_BASE;
+> > -	/* TODO get ram size from ddr controller */
+> > -	gd->ram_size = SZ_4G;
+> > +	gd->ram_size = ddr_get_density() * SZ_1M;
+> >  	return 0;
+> >  }
+> >  
+> > 
+> > ---
+> > base-commit: 19fc0b7f7d907119a13e9c207991899f0817f8fc
+> > change-id: 20250108-get-dram-size-65cf59a15201
+> > 
+> > Best regards,
+> > -- 
+> > Huan Zhou <me@per1cycle.org>
+> > 
+with above fixed, then
+
+Reviewed-by: Yixun Lan <dlan@gentoo.org>
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Yixun Lan (dlan)
+Gentoo Linux Developer
+GPG Key ID AABEFD55
