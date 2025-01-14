@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 004DDC02183
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 05:26:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A52A2C02183
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 05:26:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53AB9806B7;
-	Tue, 14 Jan 2025 06:26:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A2498806D3;
+	Tue, 14 Jan 2025 06:26:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hDzoPu6K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A/dcYwpR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 323D08060C; Tue, 14 Jan 2025 06:26:28 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 5C7EF806C6; Tue, 14 Jan 2025 06:26:29 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9BC880657
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 06:26:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B4F7B8067D
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 06:26:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=anarsoul@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2161eb94cceso61502275ad.2
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 21:26:25 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-216728b1836so88162905ad.0
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 21:26:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736832384; x=1737437184; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1736832385; x=1737437185; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yl0Oz+i8/GFuHt4UW+02z1VdDrTrMrlRs4OVsqCVGxo=;
- b=hDzoPu6K8SuQoARSixGA5HIEkbWBOGU93W7bYUgCUG/lTzRJ8VXN9Ct54/+IvOudDk
- AVSWRVR+t8dY8ajwuXnJqULwhJIxDvfjvI2PKvQsXm7qxGC5Wz672Hq2NNrEW8oyprFW
- SQ2Cq0611obbGki+Hm6EB/3YfLoIQ1Y1afIv6FgddMgaUSX1ABcYiCrLCmkarUUDrt3i
- g8ZyAC2u2iPLhpdt1TqyYje+gt3wCM4YwUM4xAu+sz6/SreNdPAmvFx/cpKmqRvaTREN
- jo+dM9V5l4zlfmmlLUChpyBPLO8Wt067zLD/4sElxvUeBOafwEFxp1OZAWCyGWD41rOb
- ZGnw==
+ bh=/mF2gvPXlMDa2hdXSS+0girgx6VkU3augbdVKXGrIK4=;
+ b=A/dcYwpRhvA417+tebd4KaLKcmNR08hv+SFanWb1GTSszB1xlfMEFumumtsNEpZeTl
+ DmX1lnLYWQjbbD+gDdKZvTHjbjCr0ibQ9JDFydheWSPhfmd0nMfWHEMciN5MTlpbxesR
+ 9QRb0r1VmYIzgkYk4tZ2Ceb+qchEtmj6cDnhoBV890AxPTHQutTL0hTlkOEFYZRtGYxp
+ yZ5N7RfaBove+n7pp6r2npyIE1h8J8oMgp1Ph8/Tx5vSvDhc5vLKJhvlGYDzFKP7bVz3
+ u5MXZsoAvRkiEX2X+nefy8IwOicwpd6lJWjCPOiPI29PTgxzJ+e5jO8uM2mlsNK6lTvq
+ +YsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736832384; x=1737437184;
+ d=1e100.net; s=20230601; t=1736832385; x=1737437185;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yl0Oz+i8/GFuHt4UW+02z1VdDrTrMrlRs4OVsqCVGxo=;
- b=qTwIF+CKnOFRIk0Fcoe78MgNIV3l612qd5y7n8ItazyJL3u+FM3wOKAkPf5lobHqJq
- pMTuo6POjvbxCYpObk0liACWczmxdqAJAWlnrq4mm59u1CKhwXKQd1BdQYzYyT+1yvFi
- h0q6D1u9LPGqzALWr0yEX2FZCDMW7bVs1iNRZDCWob/OHIFg75VHzOnqZXpci5tzIr7Q
- KxNuhxJMP+GHqlNPmikxxtRGQALFHIobCoF2Fs4IAfqSdInFsYbpFXGrOLy9BmonAk4N
- 1gMiaEuf8nEQ20c2YuFUHKXrDAvykAg0r5PthbIBdxd9bT9TF4JJnV7iL+JfjuQPXuCO
- SzYA==
+ bh=/mF2gvPXlMDa2hdXSS+0girgx6VkU3augbdVKXGrIK4=;
+ b=A6i+ypUPOyyzFbVpQEzZVnJfc+VndsBFcAO6d05Jy2TLc3zrKHJuboBr1V/x9l/fJQ
+ bY446Rtx1jYPnUcaunjlmcBa+qiQMeUoQ5vFj0YlTCH/PIJTRSpbSKiqazp1VXq8o7rI
+ TK0FLI5LOR65+47IBhh1a42qmCVS/y1TJ4r1x8nSvJW0WprxpnLpwBOKxb7GCHJ/9aq4
+ dxQ57LGsZXjtlHQ43DdB8hQ5/rGuFp+xgVS/92vzZTDN9I74LAQbZrmb9Pa4CwXXW1Eg
+ HQkfWxZsVjzfKqLL7jP9xU1G6UMdp3nNJv2iINE7oodJBoP5Pwd9m0Cwxx4XEMaelnGv
+ RbXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDyfs76zyaeexMZ5ELGbbN4TuV6SzBW+jqmY1HPAG60P4S3MJAQR8rmnENYFUKYozHci4o1Ls=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzd006+x+ZDVkZ5lVe1b9fITK6ST48L134hmyUWvDDB7wrOEBLG
- KnXMexj1Va/wQ3CqFIIC3BN01yaHhkIITxThlar52VwxWn7aswy8
-X-Gm-Gg: ASbGncukra0Ka3feCvk2j3IJ+IX1JSnGVLU/giKewlFTxxCRRYyI1dh77pmi1/0wZRa
- ncrEq8RNo95wxxasFAqfmunQRooOrTftdlMQ1UauwjBMGHO77XX+IWpL1hFffBN3FdNmXYxVo5e
- plnt3BQoQ15S6WtYw2MyoCVH3K1b+1Zw0uJZyz/9YcNyZiHlAMmEZ/BY4uakQSf/CDaNake5MAk
- b9XSydGe9LnY6QFpeGdGKtWW+P9CFCR1L6oCahC8te6xxWjnw==
-X-Google-Smtp-Source: AGHT+IEPQ2T3pJVTJlwM2Yz+w2Xcge5u72D8V1XoqWEkGXIVcGerbqHI0NSjXvAis4cBybkK5CCgwA==
-X-Received: by 2002:a05:6a20:2447:b0:1ea:e7e6:f94b with SMTP id
- adf61e73a8af0-1eae7e71661mr9897880637.34.1736832384076; 
- Mon, 13 Jan 2025 21:26:24 -0800 (PST)
+ AJvYcCXhu+r/CYHIg4yH0i7I59uyYlqEr4dYjLHphz7A+xXPafuRydjVbXPVzqC+c8Y0nU7s4ey1CSg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyqLCaaSiPqf9J5+jKEjEjPQxQvDhEK5ot+1aBxHQfg2dCBSw8i
+ 4UAKavH7tpJTqxFcZXYq1f5kLGI+VXl2p0Nsri8DWOBeWeM5cvuo
+X-Gm-Gg: ASbGncto83uv546cf5dzFfxTRmAwoWqeXRrmizf8puca2xle8CJmEJpnvJ+hmIgNlft
+ WtcnLdulKofskCCOKFltEUEQMCrNxMKbx7w84lCwOwKvIfs18REhgNd364h36gKb+ALKWwxwBfI
+ i8oYm1/RbZoIYdbGlY6cOBUz6HgxoBae0S/e4rwYrMYmr6p77dHym0aL+Lh0A02QB+QvH7Vjo4W
+ S8zz21dI38PreZ6qEM0YLcUz6b03MZ4TgAF+ORK4GDL5Y5S1w==
+X-Google-Smtp-Source: AGHT+IH8JkgwCiO7Rya6WaJX7DJpYC+bAn1jCgG2VIg7z2mO9DmfHPC79e44XG/ulrrApk0fT+V4fA==
+X-Received: by 2002:a05:6a00:230a:b0:725:ef4b:de30 with SMTP id
+ d2e1a72fcca58-72d21f4b537mr32944836b3a.14.1736832385248; 
+ Mon, 13 Jan 2025 21:26:25 -0800 (PST)
 Received: from anarsoul-xps15.lan ([2604:3d08:7780:1ca9::398])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72d40548922sm6713357b3a.30.2025.01.13.21.26.23
+ d2e1a72fcca58-72d40548922sm6713357b3a.30.2025.01.13.21.26.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Jan 2025 21:26:23 -0800 (PST)
+ Mon, 13 Jan 2025 21:26:24 -0800 (PST)
 From: Vasily Khoruzhick <anarsoul@gmail.com>
 To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
  Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
@@ -81,9 +81,10 @@ To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
  Jagan Teki <jagan@edgeble.ai>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Vasily Khoruzhick <anarsoul@gmail.com>
-Subject: [PATCH 2/3] video: rockchip: rk3328: filter unsupported modes
-Date: Mon, 13 Jan 2025 21:24:20 -0800
-Message-ID: <20250114052548.763611-2-anarsoul@gmail.com>
+Subject: [PATCH 3/3] rockchip: rock64-rk3328_defconfig: enable HDMI output and
+ USB keyboard
+Date: Mon, 13 Jan 2025 21:24:21 -0800
+Message-ID: <20250114052548.763611-3-anarsoul@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250114052548.763611-1-anarsoul@gmail.com>
 References: <20250114052548.763611-1-anarsoul@gmail.com>
@@ -105,39 +106,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While RK3328 is capable of 4K resolution, dw-hdmi driver in u-boot
-seems to have some issue with 4K. 1440p or lower works fine.
+Enable HDMI output and USB keyboard on Rock64 board
 
-Limit max resolution by 2560x1440x60Hz, by filtering the modes with
-pixel clock > 297MHz
-
-Fixes: f3ea872970d603 ("video: rockchip: Add rk3328 hdmi support")
 Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
 ---
- drivers/video/rockchip/rk3328_hdmi.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ configs/rock64-rk3328_defconfig | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/video/rockchip/rk3328_hdmi.c b/drivers/video/rockchip/rk3328_hdmi.c
-index 763669c09be..d02c58c44c5 100644
---- a/drivers/video/rockchip/rk3328_hdmi.c
-+++ b/drivers/video/rockchip/rk3328_hdmi.c
-@@ -105,9 +105,16 @@ static int rk3328_hdmi_probe(struct udevice *dev)
- 	return 0;
- }
- 
-+static bool rk3328_hdmi_mode_valid(struct udevice *dev,
-+				   const struct display_timing *timing)
-+{
-+	return timing->pixelclock.typ <= 297000000;
-+}
-+
- static const struct dm_display_ops rk3328_hdmi_ops = {
- 	.read_edid = rk_hdmi_read_edid,
- 	.enable = rk3328_hdmi_enable,
-+	.mode_valid = rk3328_hdmi_mode_valid,
- };
- 
- static const struct udevice_id rk3328_hdmi_ids[] = {
+diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+index 6d00b52e62f..ae3512625cf 100644
+--- a/configs/rock64-rk3328_defconfig
++++ b/configs/rock64-rk3328_defconfig
+@@ -21,7 +21,9 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_USE_PREBOOT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
++# CONFIG_SYS_DEVICE_NULLDEV is not set
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+@@ -72,6 +74,7 @@ CONFIG_DM_ETH_PHY=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_HDMI=y
+ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+@@ -80,6 +83,8 @@ CONFIG_PMIC_RK8XX=y
+ CONFIG_SPL_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SPL_DM_REGULATOR_GPIO=y
+ CONFIG_REGULATOR_RK8XX=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_RAM=y
+@@ -104,6 +109,11 @@ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC2=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_KEYBOARD=y
++CONFIG_VIDEO=y
++CONFIG_DISPLAY=y
++CONFIG_VIDEO_ROCKCHIP=y
++CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+ CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_TPL_TINY_MEMSET=y
+ CONFIG_ERRNO_STR=y
 -- 
 2.47.1
 
