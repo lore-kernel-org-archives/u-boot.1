@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88021E77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 13:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7193C02183
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 13:15:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F72A805CD;
-	Tue, 14 Jan 2025 14:15:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7AF20806E8;
+	Tue, 14 Jan 2025 14:15:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h7ZVQ9Oz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bd7MA1Ip";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19F7E80657; Tue, 14 Jan 2025 14:15:09 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 9B51380657; Tue, 14 Jan 2025 14:15:14 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07C958022E
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 14:15:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9005C8022E
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 14:15:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d647d5df90so9213125a12.2
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 05:15:07 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aaecf50578eso1056342766b.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 05:15:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736860506; x=1737465306; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736860512; x=1737465312; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=evEDUKwZzh5CsbUiafYtcWy9N/LieO4NpgDy/C5e3rw=;
- b=h7ZVQ9OzdKfOtfg1zBkwxOBOOSZfoqKFz6dRBAOsuXIf231me8Ng4YsEyMzZfh2zHw
- a+CJSA4nDJcPAcE5LNOgIezMivImWAcO8GpS+am1SXTNFWy8w9PlYZhFXf8XH+6xH+gl
- LxG3Vz9P6C/162SrSZeq6tubhKSXygox07//o=
+ bh=cPdrxToXg97SXfGCs6oWNtzUiTdufb6t/MBkbcy3uz4=;
+ b=bd7MA1IpVos+hmPenoiZgJhsGunt4lcnXqAWXyN+7KABVro0x3LmEDnUrrrWv93TDk
+ f/XdvqQmQLUpVbwMnJjmMibUgYze3LJvWW7hwvRLnCdh2bEKj6FN1oPqt+cX5aefelK9
+ GGs5+DdrNz0Hh1ZELj3gNTPtrvMq4CdtC6+nc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736860506; x=1737465306;
+ d=1e100.net; s=20230601; t=1736860512; x=1737465312;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=evEDUKwZzh5CsbUiafYtcWy9N/LieO4NpgDy/C5e3rw=;
- b=NfKz9NE6gMgvpjz2ObTFpdYezoTGk1MRbhPS/lmgK3ABkZnWjwjipQb5cxS4c9Gtbs
- q2k5hG/6TKHBl0Fz7vDm5knjonLliMFmF8F2zafyknVzBFg9izjnJ8DbpMGMKOJy4VKZ
- I5vc8PkjssUz2WzLWmLnqYii/z0tS4XVoZCZ1ewmCSHQhW17S9hmKTSu8K9KVnt6MXTA
- dVmtRENG5qGxA5Mse5LMCmdVASp2eqczLPqJ24j45j5tsBknLONX6NwjfdBC+oxSDEqg
- 32Vb8PF4yP3xJdpHQZsUm58/k3/mQuoH6S+PfTs/59Cq83nwCusPnhGiyAhwq4Y/KELo
- njZA==
-X-Gm-Message-State: AOJu0YwhccenX4Z9qOHOh9ZEk01Fw10KuUXyNMZiX/HDQDFZE1bF4T2g
- hybriabmEYYEGIZAQ7lTSZUKuh2+MfQpqsRg7ZR14hsiUpi4EGqIBmbY03RqWDmKSkvd5rE4SlW
- m2Feuu+yAQga9q0xsErQGR29t//X+33gkOsoP
-X-Gm-Gg: ASbGncu8YEcHf31Fg+XFa8auE9uJcoa7xMCBW5AwhhCLm33cnlIu9JREfOB1T/88gbg
- 7/EHXRy90khtoGgbzp9X3dTiqBU5bqks7FoQgS2A=
-X-Google-Smtp-Source: AGHT+IHlV561IO+JKbZvNEsUudeinovD2C50l549hAFtxYJzhQrO3ZNatQIc+CSuQ2KogN6aRbCaTZz6abhdinfrTVU=
-X-Received: by 2002:a17:907:c0d:b0:aaf:1183:ec2c with SMTP id
- a640c23a62f3a-ab2ab6bfc89mr2055445666b.5.1736860506463; Tue, 14 Jan 2025
- 05:15:06 -0800 (PST)
+ bh=cPdrxToXg97SXfGCs6oWNtzUiTdufb6t/MBkbcy3uz4=;
+ b=PZwMsevzuwJGeo1IAckKRRGup+o3begcc/49auLHn3rTBJvPQBfTK5ScG+XvsE7Rkd
+ ykHjslG+isaFdfNprV9aIN0ROhBYZoqK0X2ncI7fxqzswt4zVLtPFteEJSnE8zBF4G0Q
+ 9D/8DZhY7oe/HKzSeY2CM2krXflM6GzzaKV0godOyTo3HqzzmilbS9ozsYsKMaW3aINQ
+ wY+LRajMY7HvIB+7yE43ZqTzsRKsc2wqOAYDKUIgCLjKZdviXhgndEpmABQDjWftHXWI
+ YEpz473Nw/bCMn49ZzHV635TiNwwhK3ySNpRBLr3roxE40BgMxDAzcC/XUbHsJx+t/GV
+ 34NA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCViHQ+Lh+v+mP8M04CQTqgXj+18iR71PLLMoukyPnnAQYzWJMu6SG0umxjyS4yScfI9pEZ8Vls=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqtjWTLa/Fg0GGHY+ZlMsXHCWy0sdEvT0Sxn1kUhwTMRGTE1HH
+ yGYpY/sqFgoBtOSE9faBy2BgQDqyzRfkJHtukXML7qwPhkHbM4lsTYyuxl+I1fjT7LvsI64rK+4
+ DfKz6VXC+IG28KN4MxgUIvxVKY9DZL9SeGaUU
+X-Gm-Gg: ASbGncvqygCtfGJFhiBOnki8feQZeU/zX9STG/u0ND+zS23q0IhVDIN6rmnr8Yyddh9
+ CmJndBXzue+lr8kIVB69IH/xcOtR+NCxVMLtrUfY=
+X-Google-Smtp-Source: AGHT+IF4NCsqmGWIHuQL7xsDvECrBiqbnB28BoADt09wN5X4bHWAokXRgqYXZ6gU/oq09tmV3JEwNU1lzVy4F5Fl7b0=
+X-Received: by 2002:a17:907:7288:b0:aa6:73ae:b3b3 with SMTP id
+ a640c23a62f3a-ab2ab5f6f1cmr2193031166b.32.1736860512050; Tue, 14 Jan 2025
+ 05:15:12 -0800 (PST)
 MIME-Version: 1.0
-References: <20250101195817.995321-1-sjg@chromium.org>
- <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
- <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
- <CAFLszTiXHKdf_QUUsWpQpwv69HSGPNknkDW4JHgRUfT0r_G-aA@mail.gmail.com>
- <CAC_iWj+PwT2JmrWwrTsmHt_mGKDdhGUQgXKvzi3SCNCFxgJNRw@mail.gmail.com>
-In-Reply-To: <CAC_iWj+PwT2JmrWwrTsmHt_mGKDdhGUQgXKvzi3SCNCFxgJNRw@mail.gmail.com>
+References: <20241220-board_fdt_chosen_bootargs_improvements-v1-0-f6a7181787c5@salutedevices.com>
+ <20241220-board_fdt_chosen_bootargs_improvements-v1-3-f6a7181787c5@salutedevices.com>
+In-Reply-To: <20241220-board_fdt_chosen_bootargs_improvements-v1-3-f6a7181787c5@salutedevices.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jan 2025 06:14:55 -0700
-X-Gm-Features: AbW1kvYQbwxwNfI_Dtv2zNwekZPNXQhuvMh8JoObRCzrh5fSGWycFYQs5damKzc
-Message-ID: <CAFLszThXtZjgavkzKhHbSXahONLqpT7yEYBH3bQ_1qzS=AUx+Q@mail.gmail.com>
-Subject: Re: [PATCH] bloblist: Drop BSD license
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Date: Tue, 14 Jan 2025 06:14:59 -0700
+X-Gm-Features: AbW1kvamAW8CpLyC5JXsLCQbL8b0C7FqC1xhXyk_jGk4bREdXnev3n33WpuKK_Y
+Message-ID: <CAFLszTgdcz_0AgU51USW0PPQJ_O1tO42d7LQEpNCRajTK3FeBQ@mail.gmail.com>
+Subject: Re: [PATCH 3/3] common: fdt: hand over original fdt bootargs into
+ board chosen handler
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Cc: Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Devarsh Thakkar <devarsht@ti.com>,
+ u-boot@lists.denx.de, kernel@salutedevices.com, rockosov@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,76 +92,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Dmitry,
 
-On Tue, 14 Jan 2025 at 01:40, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 19 Dec 2024 at 14:42, Dmitry Rokosov
+<ddrokosov@salutedevices.com> wrote:
 >
-> Hi Simon,
+> Sometimes, it is necessary to provide an additional bootargs string to
+> the kernel command line.
 >
-> On Fri, 10 Jan 2025 at 16:54, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi again Ilias,
-> >
-> > On Thu, 2 Jan 2025 at 18:41, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Ilias,
-> > >
-> > > On Fri, 3 Jan 2025 at 08:15, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > >
-> > > > Apologies for the formatting, replying on mobile.
-> > > >
-> > > > On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
-> > > >>
-> > > >> Linaro has decided to write their own version of bloblist from scratch,
-> > > >> so there is no point in having a non-GPL license on this file. Change
-> > > >> it, to better fit with the U-Boot project.
-> > > >
-> > > >
-> > > > Apart from the commit message being wrong, it's also intentionally provoking. There was no bloblist in TF-A.
-> > > >
-> > > > The TF-A code is implementing the firmware hand-off spec [0], which Linaro participated in the creation. The U-Boot implementation was adjusted to adhere to the same spec after the TF-A code was merged.
-> > >
-> > > The U-Boot series was [1], for reference. This was mostly about using
-> > > different tags and shrinking the headers. My clear understanding was
-> > > that we were going to try to have a single codebase, which is why I
-> > > changed the license.
-> > >
-> > > So, since you have a different view of events, why did Linaro write it
-> > > from scratch? Was it to avoid having U-Boot code in TF-A? Or was the
-> > > author just unaware of the original intention?
+> We have a real scenario where one U-Boot blob needs to boot several
+> kernel images: the vendor-patched kernel image and the latest upstream
+> kernel image. The Amlogic (Meson architecture) tty driver has different
+> tty suffixes in these kernels: the vendor uses 'ttySx', while the
+> upstream implementation uses 'ttyAMLx'. The initial console setup is
+> provided to the kernel using the kernel command line (bootargs). For the
+> vendor kernel, we should use 'console=ttyS0,115200', while for the
+> upstream kernel, it must be 'console=ttyAML0,115200'. This means we have
+> to use different command line strings depending on the kernel version.
 >
-> I am not sure I am following 'from scratch'. Firmware handoff is a doc
-> describing a list. Raymond implemented it in U-Boot and TF-A.
-
-So in your mind, Raymond implemented it in U-Boot? Have you taken a
-look at 'git log' or 'git blame'?
-
-> The right way to do this is to move the firmware handoff code to a
-> library that can be used across projects.
-
-Not always. Probably not in this case. It has quite a bit of logic
-which depends on its environment. So I think it is better to have
-'similar' code in several projects. Certainly, writing it from scratch
-(meaning not based on existing code) is not the best approach.
-
+> To resolve this issue, we cannot use the CMDLINE_EXTEND kernel
+> configuration because it is considered legacy and is not supported for
+> the arm64 architecture. CMDLINE_EXTEND is outdated primarily because we
+> can provide additional command line strings through the
+> 'chosen/bootargs' FDT node. However, U-Boot uses this node to inject the
+> U-Boot bootargs environment variable content, which results in U-Boot
+> silently overriding all data in the 'chosen/bootargs' node. While we do
+> have the board_fdt_chosen_bootargs() board hook to address such issues,
+> this function lacks any FDT context, such as the original value of the
+> 'chosen/bootargs' node.
 >
-> > It isn't relevant for
-> > > the commit message, but if you can find out I would be interested.
-> >
-> > Just following up on this as I'm not sure of the status of this patch.
-> > Can you perhaps write your own commit message with your version of
-> > what Linaro has done?
+> This patch introduces a read-only (RO) fdt_property argument to
+> board_fdt_chosen_bootargs() to share the original 'chosen/bootargs' data
+> with the board code. Consequently, the board developer can decide how to
+> handle this information for their board setup: whether to drop it or
+> merge it with the bootargs environment.
 >
-> "The non-GPL license was inadvertently added, remove it". Raymond
-> wrote that code so I don't think he minds removing the extra license.
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> ---
+>  boot/fdt_support.c    | 5 +++--
+>  include/fdt_support.h | 4 +++-
+>  2 files changed, 6 insertions(+), 3 deletions(-)
+>
 
-Again, please check your assertion here. I for one am very surprised
-to hear that Raymond wrote the bloblist code :-)
+You could look at 'bootflow cmdline' which allows changing individual
+parts of the bootargs. It uses library functions which can do
+insertion and deletion, etc.
 
-But it does help to explain why you objected to my commit message.
+Another longer-term point to make is that there is the concept of 'OS
+requests' in VBE. So long as the kernel is packaged in a FIT we could
+have an OS-Request property indicating the serial port that it needs.
+
+Anyway, my comments are just some thoughts on how to solve this more generally.
 
 Regards,
 Simon
