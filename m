@@ -4,72 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AADB0E77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 10:43:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F0D8C02183
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 11:04:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A2148069A;
-	Tue, 14 Jan 2025 11:43:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id CB42B80658;
+	Tue, 14 Jan 2025 12:04:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="So+sBKXS";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="b0ilMo5r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEA3F80658; Tue, 14 Jan 2025 11:43:12 +0100 (CET)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id 9D10A80690; Tue, 14 Jan 2025 12:04:42 +0100 (CET)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on2062d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::62d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5AD7806D6
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 11:43:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BB7F8060C
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 12:04:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 54be14e2d26411ef99858b75a2457dd9-20250114
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=8AR8WaURyvuVzOgsK0bwbIxXClr+3fxcGN2/9+wYnso=; 
- b=So+sBKXS9BJi9ro775XgyxwZc5xh+mKMd5nBw2bgllbG5TNl8ZHx4dy2VJGAHisMXdJJte5JneG/ZKbzQk1AJe5oSIz+USdqQbY0tZJuf7q4A2kLPy44t4VThImT19u8UCV5mnbsDeBJZUV+nf0o0cjItWIWK62yXSw9qELgsBs=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.46, REQID:269bfdd4-ac72-40bb-8ed5-f4083b2053ba, IP:0,
- U
- RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
- N:release,TS:-25
-X-CID-META: VersionHash:60aa074, CLOUDID:db29df0e-078a-483b-8929-714244d25c49,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102,TC:nil,Content:0|50,EDM:-3
- ,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV
- :0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 54be14e2d26411ef99858b75a2457dd9-20250114
-Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 2024974290; Tue, 14 Jan 2025 18:43:03 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Tue, 14 Jan 2025 18:43:01 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.28 via Frontend Transport; Tue, 14 Jan 2025 18:43:01 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Sam Shih <sam.shih@mediatek.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH v2 2/2] board: mediatek: mt7629: Migrate to OF_UPSTREAM
-Date: Tue, 14 Jan 2025 18:43:00 +0800
-Message-ID: <7c629237463c092ea938a85fd1b4456a9d2eaf30.1736851116.git.weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <cover.1736851116.git.weijie.gao@mediatek.com>
-References: <cover.1736851116.git.weijie.gao@mediatek.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=u6vPngoShWnwpIYNIgA9AuAeZoEP9/dzOrA+W539Yg966rwBvdcpeLUtuOE0artBasT3nvDSyAJrLrHNPqehqUxabovvMGPcOOwAlFxOYjFVjfDLHPHFHBFC5Wo+z0zCbbKG7TLn+xkjOSFlKvih7HWfaEJjXq8u2c6cEEpdv8AVjVzWn6X0QU3jjafCc7DBEuWsgt/pu6Vqhja3p1oylPjkikz4DlHAgTWpoDYZwYMxVpjKlrRrk55Ri6azedzpRffOJt5m6IxXY7YNjmVvRmmtofRxee4MXrR/VZhfQ6m2NmA+AqK6rpaaeFuxwysSbH/oF9AG0jDPzaU6I2hv8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=g8ruI/hM7Pc+zLUH2O90ns8uO+a7xXDH/FRMWz5x5Fo=;
+ b=IaEq5C79kzwiMhAwan+pk41jAUZ2cOsignbCp6IX3e0NrOwjYbpZbeWWClN3vfdtoF3FKth1cHtcz1tp72FQo1qDnle3BqJXioiz8aWIm3jzIJEYkzEWpdPIvhqZ6mM4PgTukmv00eXynQdOCXuFst/lVnMaI+SJ4dCZQfhCd1fG3IcjyFzIAyjPapkhZs2/yQGiwq0d79PziAfEUHr+iyAYZEJqONr9OomEKV+Yz06UbIoa1RFRkU0WDdpGA6WRwC0lGlcb2e3XNbWHNxiMa+PM2OzxzMsnLTZ/t0Tn8AJ8AL4n/vS7FUjltUdkxItTUVrRc3CYw2BeVr+LCSzFtA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=g8ruI/hM7Pc+zLUH2O90ns8uO+a7xXDH/FRMWz5x5Fo=;
+ b=b0ilMo5r0eru5zjRUYhuD/x/GNfDqV9v/oxKacpeIxiEdH1W6xo9qJjJS8/hbSt8BwxTjC1jyBxUFL0/GsQkRnfTe6U4AeKtfH+QLwbhtNNR6G75GlMdpfH54KxksOw0ShL3snW0H8+L4GhXqYkG8SN817ah5WqNoMAbf133Cjw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DBAPR04MB7478.eurprd04.prod.outlook.com (2603:10a6:10:1b3::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.12; Tue, 14 Jan
+ 2025 11:04:35 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Tue, 14 Jan 2025
+ 11:04:35 +0000
+Message-ID: <8875f80c-48e3-4ad9-8c9e-4cbec49070ec@cherry.de>
+Date: Tue, 14 Jan 2025 12:04:33 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC] image: apply FDTOs on FDT image node without a load
+ property
+To: Marek Vasut <marex@denx.de>, Quentin Schulz <foss+uboot@0leil.net>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
+References: <20241219-extlinux-relocate-dtb-when-dtbo-v1-1-fe5eeb8fd4f1@cherry.de>
+ <fd67183b-c1a6-4e93-9b07-ac5fb8196d2b@denx.de>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <fd67183b-c1a6-4e93-9b07-ac5fb8196d2b@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0144.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:96::19) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DBAPR04MB7478:EE_
+X-MS-Office365-Filtering-Correlation-Id: ef41dbe8-0c0d-4262-758d-08dd348b3b29
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?azQ0UUthUXJ3RklvOXZFUkdjR2dqWHdsVVZjd1VUdk52VkJwT28rZUptNGpo?=
+ =?utf-8?B?bGVCcXlmRGptRHVGVWF0QVJwajBpenlndHZhVzZUbkpOQk1uZ2laRFI5VDk3?=
+ =?utf-8?B?RXhoQVdSRnVvWkt0bHBCckluK2I4cVNNMWFCSjRGVVJmc2pFSVVnc3lCcjhl?=
+ =?utf-8?B?b0Q1TUUwTlR3bmpTK250cnNmTGJ5eXB1elJvQ29OTjJJbDBXNHUycklMd3Iy?=
+ =?utf-8?B?R0lpSTNrYktGcmp6Nmx1ZHYwVitYOC9ueERaSXRSRm1wZUNtN2k1OG5tNGhm?=
+ =?utf-8?B?V3BqREVGRWY0UnVmT3M5TkZnVUJxWnNtVmE1V09Wdkh4MU12MUFvNUVZUi9s?=
+ =?utf-8?B?Tmhqa3BJNGNOV1VMbGJOZW5HVkxVbVdPalkwRlBLZmx3Z0syemxWMGQ5QzhU?=
+ =?utf-8?B?Wjh6VnFQa0VybVdvUG1ZQU9nQ1pQbDN0MzZ0QU9QSDVqOURWcGo5bFdEblVS?=
+ =?utf-8?B?dnF1clp4SXYxSlMrQWkwUndNMWZDUlNJQUFJdHkrUUpZM0RIZFdtRDZBTXdW?=
+ =?utf-8?B?d25KM2lSZVVoRUZuVmZ6RnpNS2k4bnBXa0dJaDkzQnVqaW5GY3lFcXRBdCsx?=
+ =?utf-8?B?WWtiSCtuZFdVRm1xMWo3dFBYYzQ0M0RUYTl4elM3ZDJkYlcrRjV5TXRCTmsv?=
+ =?utf-8?B?ZmxSZnpLNWRhMDR1WS9hS29GVnhuQkpwSk9icG9oMnJBSTJxdXU1QzMyay8v?=
+ =?utf-8?B?a25WY2NtbHNCSmI1bFJodWpNeGtVZ29uaURPdmhrUTFHUXREN3dodms5Qjc0?=
+ =?utf-8?B?KzJPMGlkajI2R2x1azFuc3hsM2VZRzRWZE9XOXh1VXpNVE9BY2MyQU5nZ1Vy?=
+ =?utf-8?B?dExTbVhza2ZTeHZvYTdmS3pmRXNsTm94T0pPc3hxTG9JTzFVaUtqWWt2dWFJ?=
+ =?utf-8?B?NWR3L2JRN1dQMGtSdVZ6L0lCQlk3a1UvNTJ5ZmdDNUlKSWR5Y3FFNCtiM2Vz?=
+ =?utf-8?B?N0I0UVBmYVVkdU5CRGFnWjMwWDgrbTlFdnZXZWFYMWV3Q2xINkVFNGtEUVRV?=
+ =?utf-8?B?V0cyOXU5eHZBL3pKeGQvM0REelp2ajhDZmI5bDRoOEV2eTR3aGFIWXlXaEgy?=
+ =?utf-8?B?c0ZtYTZRRnZwT2JpWVpFY3RaOHZzOUxkRUE1SkdWYnpMNTg5ZGR4dGJYR0pL?=
+ =?utf-8?B?OC84anYxWkJQTlNHRnV1c3dSTHJRU2VhK3BXMmpkVkVtajNIRnNabjNCV3Vp?=
+ =?utf-8?B?Q2s1OEhKUW83OTEvakZyS2dRbWZ4cmdwVS9uSEhMWGFuK210eXpBMnJjQ2lC?=
+ =?utf-8?B?ZDY5Q1dZUE9DdVUwK0w5WDNtZzJGK0JrYVVNVUd1MEhKMXNtc1RNL1ZKSHV6?=
+ =?utf-8?B?aDFCdkE3c2Y4bmd2dEtLempHb1dkbUdjTGJxOS8yY2lJcDNjMXZrbjFPdThZ?=
+ =?utf-8?B?YkZ2ODkzT2didE9WalR0K3AvVTdvWUNaMjNadUpuTE5QdHhOZWQvR2x3M2cy?=
+ =?utf-8?B?aE5admxNMGxOZmNZN3c0U2NNYUh6VWx0TmtYZXFjbTgrQ1Vod2xaWGNoQkwv?=
+ =?utf-8?B?Q0VZR2lvQjVkUmNIZW54N2o1TVcyTmZ2a1JFYytFNXNHeitDdERpbHk5enoy?=
+ =?utf-8?B?ZmU0ZFZSMFNkQ2xqUG1FOERiUjBJaUg4SVVBdWFCK3lLSU5yc2ROL1Focnd5?=
+ =?utf-8?B?QWRxTUw4L2l0eGErNXh5dXZMTGNwVTdNQ1BJRWZiL2NWYWRnNmVXT3Q4QUQ2?=
+ =?utf-8?B?ZTVueW42czh4U2N0TVBHV0JoSlFMYzVmSWdOVFV6dkNFVXp1eERXMldWV2ha?=
+ =?utf-8?B?TEtZVUlVM0RCTVZOZitNSGZkd0tqbHY0TXhjU3NqV3RtUXBza1U4ZHVucTlK?=
+ =?utf-8?B?bEEvbzNvUWZNQXR5Si9sdFF1Ulc2M3hGMUVDeHBzMG9iVVRrcDJ4UmtmcGo2?=
+ =?utf-8?Q?9VIuu6mRcmd6z?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bmxsN1VNZFZ3MzJPbmRmVXgzNmk2bGNNcUlIZU55bHZVNTNMdWpMVEJCWnhr?=
+ =?utf-8?B?NmJsTFR2RVF1cWQ3T2ZKSzlQWUtCVks2d2dXQnFKRHViMG11WE5iQmlIYTVY?=
+ =?utf-8?B?ck54cVQwOWxLdmFlRDBYaE9TSTJxbXBvRUZ2UXZvM0hvQTIzUklqNXZqamV4?=
+ =?utf-8?B?MHhqSUQwS1NDSzI0NWNuTjlrODhuMjlmSm0va1k5YlRpZ3FhdFVTUzR1RUlS?=
+ =?utf-8?B?V2NPSWN1VTVjMmo1bHhEa2FtN2U5cFhsVno1UTllTU9WQ2JYZ2VaUlRvN0ZS?=
+ =?utf-8?B?czdlZy9OS2FnT2hHRnU2NXdzRmNjamwvOUMyQmJTNU1GcEUzU1BYTjJsRzBu?=
+ =?utf-8?B?WGtkbmpVWmxYRjh2VUg3ZG90NXltNExSNWlJYm01bitLNTNSRjN2bVdMNVlT?=
+ =?utf-8?B?cXROUkQ5RU5KTTRFWHdYRkRPdzZEVUZJT0swNDhDZWhsRC9mRU1KbjBoU2FU?=
+ =?utf-8?B?MDBZdGl6cmpFVUhGSTZwVXFrMTFrTUpsTHZzdjFpQ1FpWWpjcHhOcmZqVkts?=
+ =?utf-8?B?NElVZ2ZoRkxjZlJXcTdRV2ZCdVVncGxaSUpGdWU5Ulk4OEdvUzA2YXZybGJV?=
+ =?utf-8?B?QnlKK1k3WHduc3JJMzJsZVN0TFZmKzV0SnBWTG8zb0JMN1pGN0d3SC9ZUG8r?=
+ =?utf-8?B?Rmd4ZmtlSXZTcHczZ3F4R0JzVFRkMGgxejk5N0l6RW1OeE9mWnNKVWZGSlQv?=
+ =?utf-8?B?RTZHSzc4RWg5MFNEaE1RNnpoNUw5dEhiNWJZVElrREhtejBDbzlVRDl6VmRK?=
+ =?utf-8?B?MnNpS1NUUnp3c0JjWTNMbmFzSTB5WXRrTmJBWmN5REV1NlpZMnZjVTBXR3ZJ?=
+ =?utf-8?B?bHRqdkluL1kzWnAzVklyUlNQVGQvOFA3RWwxVWFhTVhlTXUyRm9aQUszeTlQ?=
+ =?utf-8?B?a3dWUnBFZFRXZiszYUs2MGJYZUIvL3YxSnVSYUo1cENIWk1vUnJXYTB3all2?=
+ =?utf-8?B?MWlmd0EzREtkRzI4ZnQ3NUZpNWN2Mnp1ZUh0enF3L0E5ekNsVzNLeEtNbE5W?=
+ =?utf-8?B?NCsyM1dHUmdOTmtqcWMzdld2V056NFA3TnkxcnZFMm1ZMkF6dGNMeWczOG1M?=
+ =?utf-8?B?R2tjdHN2Y3VBVVZMK1d6aFJWZ2pUVUxuMGFyT3dvWDRBVHJMeHhDTDUrTXZi?=
+ =?utf-8?B?ZVBMVjBCYnovc3dVSDZoNTRSQjNZeWEyNlZGRnVucXNyZzIzaExBV05PTFgy?=
+ =?utf-8?B?VlUxYUhwVFo0TXJYWmMvTTBwQldCTnZEaXdhWE5PWW1UelVkYnArdWxFdmR3?=
+ =?utf-8?B?RGREMG5meUpPUUdEa2UxR1Zsd1hzNytWR2ozRlJ3Zjk3ZVZwcUREOG1QRUhM?=
+ =?utf-8?B?Z2N0eDRiejc0S2xJV1YxSDdvR2RBOHZvalNqUU1QeGNkL2RDOE84RjlLOEdn?=
+ =?utf-8?B?cklhT1FOYmFvZ3VadUdFeVFtTkM3endwMHhpU2VrUDJtcksvM0QwOGFuUVc5?=
+ =?utf-8?B?TjdNOGxCTjFId1lhVHUxZi9YVVhYQkI2NlJHcSt1UDh5Ly9NbmtIVmRuMlo4?=
+ =?utf-8?B?Z2t4UmdzTnErUGxGUGE4ai8vT01pTEZXcHZTSzdoZTltbjZKVE01ZTUxOENP?=
+ =?utf-8?B?RWt3dW5sdDIxRjEzYll6bG5VR3hZWmcyTWlwSFBReEhmTUd3OFJHM0oySGlO?=
+ =?utf-8?B?YXIwdU5KNGthcjlJTEhDL0FpYjNGaEt4cFh2dHJRNm03V3Ivd2locVVjbXZk?=
+ =?utf-8?B?Z3pVazlCdEVNbXJwOTFhcllEbStGOXgva21UaDdaWTlwaGM1S2lxQzZqOU5K?=
+ =?utf-8?B?c1ZMZ1hQOFVCVjdTMWNncW1MMGIyaEVlM090ZmcxQUt2eVAyVHgzTE9tN0JD?=
+ =?utf-8?B?WnVsSXVSU3ZGVDVocFpRV0MyNkZ1NFhqVXJXYTE2cEx3ZnhzRlZsUmVxazRV?=
+ =?utf-8?B?dG95bW80RnZDV0MwVUh5b0c3aTZ5bm9kRkZ3cy85TGNEWkY0Yndwd3o2YVZt?=
+ =?utf-8?B?N2lXdFhTZ1hUTCtXRkwrTjBKOWI3eDNFanR5VHVEYmp3Ri9FRGhnMkNmeFlt?=
+ =?utf-8?B?MDhSUis3aUFiUloySHliWXpZSzJsR0owRU9tZXQ3QVdYNEVTUllETU1xVHBW?=
+ =?utf-8?B?TFRUTVNjc3pzdVFQZ0FldkNWRmpla0hQTDI2MEtFNC9LOVV3Zy9UM014R1RE?=
+ =?utf-8?B?VXJSZ0cyME5wa2pLVVYvNTBjaURvK3h4MHEwZVEvaDlCR2x4SExTWHptMWdL?=
+ =?utf-8?B?Znc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: ef41dbe8-0c0d-4262-758d-08dd348b3b29
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 11:04:35.5443 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nM83MohOshp4YghHyq4zJid9nRCYy+4WtRdY+HqISBNqVoXVOMA2cHVF2HocIxCDj4lCQrl3KuxtFzsFQA39WMPPyVKNxsJPrcPfQIlotvA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR04MB7478
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,909 +176,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sam Shih <sam.shih@mediatek.com>
+Hi Marek,
 
-Move differences in DT files between upstream Linux DT and U-Boot DT to
-mt7629-rfb-u-boot.dtsi.
-Remove old copies of mt7629-related clock bindings, .dts, and .dtsi files.
-Update defconfig to switch the whole mt7629 SoC to use OF_UPSTREAM.
+On 12/19/24 7:26 PM, Marek Vasut wrote:
+> On 12/19/24 4:03 PM, Quentin Schulz wrote:
+>> From: Quentin Schulz <quentin.schulz@cherry.de>
+>>
+>> A FIT image which is NOT using -E when created by mkimage - that is with
+>> image data within the FIT - will fail to apply FDTO if the base FDT
+>> image node does not specify a load property (which points to an address
+>> in DRAM). This is because we check that the FDT address we want to apply
+>> overlay to (i.e. modify and likely increase in size) is not inside the
+>> FIT and give up otherwise. This is assumed necessary because we may then
+>> overwrite other data when applying in-place.
+>>
+>> However, we can do better than giving up: relocating the FDT in another
+>> place in DRAM where it's safe to increase its size and apply FDTOs.
+>>
+>> Suggested-by: Marek Vasut <marex@denx.de>
+>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>> ---
+>> Tested with extlinux with:
+>> - conf node with multiple fdt entries
+>> - conf node with base fdt + conf node with fdto (stored in fdt property)
+>> - FDT image node with load property (behavior unchanged)
+>> - FDT image node without load property
+>>
+>> I'll be frank, I don't really know what I'm doing here and I'm on
+>> holidays for a month in a few hours, so take this with a bigger grain of
+>> salt than usual (hence the RFC). It works (tm) for now.
+>>
+>> Cc: Heiko Stuebner <heiko@sntech.de>
+>> ---
+>>   boot/image-fit.c | 17 +++++++++++------
+>>   1 file changed, 11 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/boot/image-fit.c b/boot/image-fit.c
+>> index 
+>> 7d56f0b5e6ed39a75e029b09dc95d605835c0f91..088482c4d5d2e194cce66f10b0acd9e586f826b2 100644
+>> --- a/boot/image-fit.c
+>> +++ b/boot/image-fit.c
+>> @@ -2392,13 +2392,18 @@ int boot_get_fdt_fit(struct bootm_headers 
+>> *images, ulong addr,
+>>       image_end = addr + fit_get_size(fit);
+>>       /* verify that relocation took place by load address not being 
+>> in fit */
+>>       if (load >= image_start && load < image_end) {
+> 
+> This has to be updated to handle the mkimage -E case too. Basically, if 
+> the FDT is outside of the fitImage tree area, but still in the trailing 
+> blob area at the end of fitImage generated with mkimage -E, then any 
+> modification to the DT which would result in resize may either fail or 
+> corrupt the surrounding blobs.
+> 
+> The safe but heavy handed option would be to relocate unconditionally .
+> 
 
-Signed-off-by: Sam Shih <sam.shih@mediatek.com>
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
-Changes in v2:
-* Remove mt7629-rfb.dtb from arch/arm/dts/Makefile
-* Add wdt-reboot node to make reset command work
----
- arch/arm/dts/Makefile                  |   1 -
- arch/arm/dts/mt7629-rfb-u-boot.dtsi    | 119 +++++++-
- arch/arm/dts/mt7629-rfb.dts            | 123 ---------
- arch/arm/dts/mt7629.dtsi               | 360 -------------------------
- configs/mt7629_rfb_defconfig           |   3 +-
- include/dt-bindings/clock/mt7629-clk.h | 206 --------------
- 6 files changed, 120 insertions(+), 692 deletions(-)
- delete mode 100644 arch/arm/dts/mt7629-rfb.dts
- delete mode 100644 arch/arm/dts/mt7629.dtsi
- delete mode 100644 include/dt-bindings/clock/mt7629-clk.h
+Will do.
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 23b537a2fcb..991ba55e9bd 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1190,7 +1190,6 @@ dtb-$(CONFIG_ARCH_MEDIATEK) += \
- 	mt7623a-unielec-u7623-02-emmc.dtb \
- 	mt7622-bananapi-bpi-r64.dtb \
- 	mt7623n-bananapi-bpi-r2.dtb \
--	mt7629-rfb.dtb \
- 	mt7981-rfb.dtb \
- 	mt7981-emmc-rfb.dtb \
- 	mt7981-sd-rfb.dtb \
-diff --git a/arch/arm/dts/mt7629-rfb-u-boot.dtsi b/arch/arm/dts/mt7629-rfb-u-boot.dtsi
-index 41170474658..667c9c89ed5 100644
---- a/arch/arm/dts/mt7629-rfb-u-boot.dtsi
-+++ b/arch/arm/dts/mt7629-rfb-u-boot.dtsi
-@@ -5,6 +5,59 @@
-  * Author: Weijie Gao <weijie.gao@mediatek.com>
-  */
- 
-+#include <dt-bindings/reset/mt7629-reset.h>
-+
-+/ {
-+	dramc: dramc@10203000 {
-+		compatible = "mediatek,mt7629-dramc";
-+		reg = <0x10203000 0x600>,	/* EMI */
-+		      <0x10213000 0x1000>,	/* DDRPHY */
-+		      <0x10214000 0xd00>;	/* DRAMC_AO */
-+		clocks = <&topckgen CLK_TOP_DDRPHYCFG_SEL>,
-+			 <&topckgen CLK_TOP_SYSPLL1_D8>,
-+			 <&topckgen CLK_TOP_MEM_SEL>,
-+			 <&topckgen CLK_TOP_DMPLL>;
-+		clock-names = "phy", "phy_mux", "mem", "mem_mux";
-+	};
-+
-+	mcucfg: syscon@10200000 {
-+		compatible = "mediatek,mt7629-mcucfg", "syscon";
-+		reg = <0x10200000 0x1000>;
-+		#clock-cells = <1>;
-+	};
-+
-+	timer0: timer@10004000 {
-+		compatible = "mediatek,timer";
-+		reg = <0x10004000 0x80>;
-+		interrupts = <GIC_SPI 152 IRQ_TYPE_LEVEL_LOW>;
-+		clocks = <&topckgen CLK_TOP_CLKXTAL_D4>,
-+			 <&topckgen CLK_TOP_10M_SEL>;
-+		clock-names = "mux", "src";
-+	};
-+
-+	snand: snand@1100d000 {
-+		compatible = "mediatek,mt7629-snand";
-+		reg = <0x1100d000 0x1000>,
-+		      <0x1100e000 0x1000>;
-+		reg-names = "nfi", "ecc";
-+		clocks = <&pericfg CLK_PERI_NFI_PD>,
-+			 <&pericfg CLK_PERI_SNFI_PD>,
-+			 <&pericfg CLK_PERI_NFIECC_PD>;
-+		clock-names = "nfi_clk", "pad_clk", "ecc_clk";
-+		assigned-clocks = <&topckgen CLK_TOP_AXI_SEL>,
-+				  <&topckgen CLK_TOP_NFI_INFRA_SEL>;
-+		assigned-clock-parents = <&topckgen CLK_TOP_SYSPLL1_D2>,
-+					 <&topckgen CLK_TOP_UNIVPLL2_D8>;
-+		status = "disabled";
-+	};
-+
-+	wdt-reboot {
-+		compatible = "wdt-reboot";
-+		wdt = <&watchdog>;
-+	};
-+
-+};
-+
- &infracfg {
- 	bootph-all;
- };
-@@ -35,8 +88,72 @@
- 
- &uart0 {
- 	bootph-all;
-+	reg-shift = <2>;
-+	assigned-clocks = <&topckgen CLK_TOP_AXI_SEL>;
-+	assigned-clock-parents = <&topckgen CLK_TOP_SYSPLL1_D2>;
-+};
-+
-+&qspi {
-+	bootph-all;
-+	compatible = "mediatek,mtk-snor";
-+	reg = <0x11014000 0x1000>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&qspi_pins>;
-+	status = "okay";
-+
-+	/delete-node/ flash@0;
-+
-+	spi-flash@0{
-+		bootph-all;
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		spi-tx-bus-width = <1>;
-+		spi-rx-bus-width = <1>;
-+	};
- };
- 
--&snfi {
-+&pio {
- 	bootph-all;
-+	snfi_pins: snfi-pins {
-+		mux {
-+			bootph-all;
-+			function = "flash";
-+			groups = "snfi";
-+		};
-+	};
-+	snor_pins: snor-pins {
-+		mux {
-+			bootph-all;
-+			function = "flash";
-+			groups = "spi_nor";
-+		};
-+	};
-+};
-+
-+&snand {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&snfi_pins>;
-+	status = "okay";
-+	quad-spi;
-+	bootph-all;
-+};
-+
-+&eth {
-+	resets = <&ethsys ETHSYS_FE_RST>;
-+	reset-names = "fe";
-+	status = "okay";
-+	mediatek,gmac-id = <0>;
-+	phy-mode = "2500base-x";
-+	mediatek,switch = "mt7531";
-+	reset-gpios = <&pio 28 GPIO_ACTIVE_HIGH>;
-+	assigned-clocks = <&topckgen CLK_TOP_ETH_SEL>,
-+			  <&topckgen CLK_TOP_F10M_REF_SEL>,
-+			  <&topckgen CLK_TOP_SGMII_REF_1_SEL>;
-+	assigned-clock-parents = <&topckgen CLK_TOP_UNIVPLL1_D2>,
-+				 <&topckgen CLK_TOP_SYSPLL4_D16>,
-+				 <&topckgen CLK_TOP_SGMIIPLL_D2>;
-+	fixed-link {
-+		speed = <2500>;
-+		full-duplex;
-+	};
- };
-diff --git a/arch/arm/dts/mt7629-rfb.dts b/arch/arm/dts/mt7629-rfb.dts
-deleted file mode 100644
-index f347725f2f6..00000000000
---- a/arch/arm/dts/mt7629-rfb.dts
-+++ /dev/null
-@@ -1,123 +0,0 @@
--/*
-- * Copyright (C) 2018 MediaTek Inc.
-- * Author: Ryder Lee <ryder.lee@mediatek.com>
-- *
-- * SPDX-License-Identifier: (GPL-2.0 OR MIT)
-- */
--
--/dts-v1/;
--#include "mt7629.dtsi"
--#include "mt7629-rfb-u-boot.dtsi"
--
--/ {
--	model = "MediaTek MT7629 RFB";
--	compatible = "mediatek,mt7629-rfb", "mediatek,mt7629";
--
--	aliases {
--		spi0 = &snor;
--	};
--
--	chosen {
--		stdout-path = &uart0;
--	};
--};
--
--&eth {
--	status = "okay";
--	mediatek,gmac-id = <0>;
--	phy-mode = "2500base-x";
--	mediatek,switch = "mt7531";
--	reset-gpios = <&gpio 28 GPIO_ACTIVE_HIGH>;
--
--	fixed-link {
--		speed = <2500>;
--		full-duplex;
--	};
--};
--
--&pinctrl {
--	state_default: pinmux_conf {
--		bootph-all;
--
--		mux {
--			function = "jtag";
--			groups = "ephy_leds_jtag";
--			bootph-all;
--		};
--	};
--
--	snfi_pins: snfi-pins {
--		mux {
--			function = "flash";
--			groups = "snfi";
--		};
--	};
--
--	snor_pins: snor-pins {
--		mux {
--			function = "flash";
--			groups = "spi_nor";
--		};
--	};
--
--	uart0_pins: uart0-default {
--		mux {
--			function = "uart";
--			groups = "uart0_txd_rxd";
--		};
--	};
--
--	watchdog_pins: watchdog-default {
--		mux {
--			function = "watchdog";
--			groups = "watchdog";
--		};
--	};
--};
--
--&snfi {
--	pinctrl-names = "default", "snfi";
--	pinctrl-0 = <&snor_pins>;
--	pinctrl-1 = <&snfi_pins>;
--	status = "disabled";
--
--	spi-flash@0{
--		compatible = "jedec,spi-nor";
--		reg = <0>;
--		bootph-all;
--	};
--};
--
--&snor {
--	pinctrl-names = "default";
--	pinctrl-0 = <&snor_pins>;
--	status = "okay";
--
--	spi-flash@0{
--		compatible = "jedec,spi-nor";
--		reg = <0>;
--		spi-tx-bus-width = <1>;
--		spi-rx-bus-width = <4>;
--		bootph-all;
--	};
--};
--
--&uart0 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&uart0_pins>;
--	status = "okay";
--};
--
--&xhci {
--	status = "okay";
--};
--
--&u3phy {
--	status = "okay";
--};
--
--&watchdog {
--	pinctrl-names = "default";
--	pinctrl-0 = <&watchdog_pins>;
--	status = "okay";
--};
-diff --git a/arch/arm/dts/mt7629.dtsi b/arch/arm/dts/mt7629.dtsi
-deleted file mode 100644
-index cd8277deafe..00000000000
---- a/arch/arm/dts/mt7629.dtsi
-+++ /dev/null
-@@ -1,360 +0,0 @@
--/*
-- * Copyright (C) 2018 MediaTek Inc.
-- * Author: Ryder Lee <ryder.lee@mediatek.com>
-- *
-- * SPDX-License-Identifier: (GPL-2.0 OR MIT)
-- */
--
--#include <dt-bindings/clock/mt7629-clk.h>
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/interrupt-controller/irq.h>
--#include <dt-bindings/interrupt-controller/arm-gic.h>
--#include <dt-bindings/power/mt7629-power.h>
--#include <dt-bindings/reset/mt7629-reset.h>
--#include <dt-bindings/phy/phy.h>
--#include "skeleton.dtsi"
--
--/ {
--	compatible = "mediatek,mt7629";
--	interrupt-parent = <&sysirq>;
--	#address-cells = <1>;
--	#size-cells = <1>;
--
--	cpus {
--		#address-cells = <1>;
--		#size-cells = <0>;
--		enable-method = "mediatek,mt6589-smp";
--
--		cpu@0 {
--			device_type = "cpu";
--			compatible = "arm,cortex-a7";
--			reg = <0x0>;
--			clock-frequency = <1250000000>;
--		};
--
--		cpu@1 {
--			device_type = "cpu";
--			compatible = "arm,cortex-a7";
--			reg = <0x1>;
--			clock-frequency = <1250000000>;
--		};
--	};
--
--	clk20m: oscillator@0 {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <20000000>;
--		clock-output-names = "clk20m";
--	};
--
--	clk40m: oscillator@1 {
--		compatible = "fixed-clock";
--		#clock-cells = <0>;
--		clock-frequency = <40000000>;
--		clock-output-names = "clkxtal";
--	};
--
--	timer {
--		compatible = "arm,armv7-timer";
--		interrupt-parent = <&gic>;
--		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>,
--			     <GIC_PPI 14 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>,
--			     <GIC_PPI 11 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>,
--			     <GIC_PPI 10 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
--		clock-frequency = <20000000>;
--		arm,cpu-registers-not-fw-configured;
--	};
--
--	infracfg: syscon@10000000 {
--		compatible = "mediatek,mt7629-infracfg", "syscon";
--		reg = <0x10000000 0x1000>;
--		#clock-cells = <1>;
--	};
--
--	pericfg: syscon@10002000 {
--		compatible = "mediatek,mt7629-pericfg", "syscon";
--		reg = <0x10002000 0x1000>;
--		#clock-cells = <1>;
--	};
--
--	timer0: timer@10004000 {
--		compatible = "mediatek,timer";
--		reg = <0x10004000 0x80>;
--		interrupts = <GIC_SPI 152 IRQ_TYPE_LEVEL_LOW>;
--		clocks = <&topckgen CLK_TOP_CLKXTAL_D4>,
--			 <&topckgen CLK_TOP_10M_SEL>;
--		clock-names = "mux", "src";
--	};
--
--	scpsys: scpsys@10006000 {
--		compatible = "mediatek,mt7629-scpsys";
--		reg = <0x10006000 0x1000>;
--		clocks = <&topckgen CLK_TOP_HIF_SEL>;
--		clock-names = "hif_sel";
--		assigned-clocks = <&topckgen CLK_TOP_HIF_SEL>;
--		assigned-clock-parents = <&topckgen CLK_TOP_UNIVPLL1_D2>;
--		#power-domain-cells = <1>;
--		infracfg = <&infracfg>;
--	};
--
--	mcucfg: syscon@10200000 {
--		compatible = "mediatek,mt7629-mcucfg", "syscon";
--		reg = <0x10200000 0x1000>;
--		#clock-cells = <1>;
--	};
--
--	sysirq: interrupt-controller@10200a80 {
--		compatible = "mediatek,sysirq";
--		reg = <0x10200a80 0x20>;
--		interrupt-controller;
--		#interrupt-cells = <3>;
--		interrupt-parent = <&gic>;
--	};
--
--	dramc: dramc@10203000 {
--		compatible = "mediatek,mt7629-dramc";
--		reg = <0x10203000 0x600>,	/* EMI */
--		      <0x10213000 0x1000>,	/* DDRPHY */
--		      <0x10214000 0xd00>;	/* DRAMC_AO */
--		clocks = <&topckgen CLK_TOP_DDRPHYCFG_SEL>,
--			 <&topckgen CLK_TOP_SYSPLL1_D8>,
--			 <&topckgen CLK_TOP_MEM_SEL>,
--			 <&topckgen CLK_TOP_DMPLL>;
--		clock-names = "phy", "phy_mux", "mem", "mem_mux";
--	};
--
--	apmixedsys: clock-controller@10209000 {
--		compatible = "mediatek,mt7629-apmixedsys";
--		reg = <0x10209000 0x1000>;
--		#clock-cells = <1>;
--	};
--
--	topckgen: clock-controller@10210000 {
--		compatible = "mediatek,mt7629-topckgen";
--		reg = <0x10210000 0x1000>;
--		#clock-cells = <1>;
--	};
--
--	watchdog: watchdog@10212000 {
--		compatible = "mediatek,wdt";
--		reg = <0x10212000 0x600>;
--		interrupts = <GIC_SPI 128 IRQ_TYPE_EDGE_FALLING>;
--		#reset-cells = <1>;
--		status = "disabled";
--	};
--
--	wdt-reboot {
--		compatible = "wdt-reboot";
--		wdt = <&watchdog>;
--	};
--
--	pinctrl: pinctrl@10217000 {
--		compatible = "mediatek,mt7629-pinctrl";
--		reg = <0x10217000 0x8000>;
--
--		pinctrl-names = "default";
--		pinctrl-0 = <&state_default>;
--
--		state_default: pinmux_conf {
--		};
--
--		gpio: gpio-controller {
--			gpio-controller;
--			#gpio-cells = <2>;
--		};
--	};
--
--	gic: interrupt-controller@10300000 {
--		compatible = "arm,gic-400";
--		interrupt-controller;
--		#interrupt-cells = <3>;
--		interrupt-parent = <&gic>;
--		reg = <0x10310000 0x1000>,
--		      <0x10320000 0x1000>,
--		      <0x10340000 0x2000>,
--		      <0x10360000 0x2000>;
--	};
--
--	uart0: serial@11002000 {
--		compatible = "mediatek,hsuart";
--		reg = <0x11002000 0x400>;
--		reg-shift = <2>;
--		interrupts = <GIC_SPI 91 IRQ_TYPE_LEVEL_LOW>;
--		clocks = <&topckgen CLK_TOP_UART_SEL>,
--			 <&pericfg CLK_PERI_UART0_PD>;
--		clock-names = "baud", "bus";
--		status = "disabled";
--		assigned-clocks = <&topckgen CLK_TOP_AXI_SEL>;
--		assigned-clock-parents = <&topckgen CLK_TOP_SYSPLL1_D2>;
--	};
--
--	uart1: serial@11003000 {
--		compatible = "mediatek,hsuart";
--		reg = <0x11003000 0x400>;
--		reg-shift = <2>;
--		interrupts = <GIC_SPI 92 IRQ_TYPE_LEVEL_LOW>;
--		clocks = <&topckgen CLK_TOP_UART_SEL>,
--			 <&pericfg CLK_PERI_UART1_PD>;
--		clock-names = "baud", "bus";
--		assigned-clocks = <&topckgen CLK_TOP_AXI_SEL>;
--		assigned-clock-parents = <&topckgen CLK_TOP_SYSPLL1_D2>;
--		status = "disabled";
--	};
--
--	uart2: serial@11004000 {
--		compatible = "mediatek,hsuart";
--		reg = <0x11004000 0x400>;
--		reg-shift = <2>;
--		interrupts = <GIC_SPI 93 IRQ_TYPE_LEVEL_LOW>;
--		clocks = <&topckgen CLK_TOP_UART_SEL>,
--			 <&pericfg CLK_PERI_UART2_PD>;
--		clock-names = "baud", "bus";
--		assigned-clocks = <&topckgen CLK_TOP_AXI_SEL>;
--		assigned-clock-parents = <&topckgen CLK_TOP_SYSPLL1_D2>;
--		status = "disabled";
--	};
--
--	snfi: snfi@1100d000 {
--		compatible = "mediatek,mtk-snfi-spi";
--		reg = <0x1100d000 0x2000>;
--		clocks = <&pericfg CLK_PERI_NFI_PD>,
--			 <&pericfg CLK_PERI_SNFI_PD>;
--		clock-names = "nfi_clk", "pad_clk";
--		assigned-clocks = <&topckgen CLK_TOP_AXI_SEL>,
--				  <&topckgen CLK_TOP_NFI_INFRA_SEL>;
--		assigned-clock-parents = <&topckgen CLK_TOP_SYSPLL1_D2>,
--					 <&topckgen CLK_TOP_UNIVPLL2_D8>;
--		status = "disabled";
--		#address-cells = <1>;
--		#size-cells = <0>;
--	};
--
--	snor: snor@11014000 {
--		compatible = "mediatek,mtk-snor";
--		reg = <0x11014000 0x1000>;
--		clocks = <&pericfg CLK_PERI_FLASH_PD>,
--			 <&topckgen CLK_TOP_FLASH_SEL>;
--		clock-names = "spi", "sf";
--		status = "disabled";
--		#address-cells = <1>;
--		#size-cells = <0>;
--	};
--
--	ssusbsys: ssusbsys@1a000000 {
--		compatible = "mediatek,mt7629-ssusbsys", "syscon";
--		reg = <0x1a000000 0x1000>;
--		#clock-cells = <1>;
--	};
--
--	xhci: usb@1a0c0000 {
--		compatible = "mediatek,mt7629-xhci", "mediatek,mtk-xhci";
--		reg = <0x1a0c0000 0x1000>, <0x1a0c3e00 0x0100>;
--		reg-names = "mac", "ippc";
--		power-domains = <&scpsys MT7629_POWER_DOMAIN_HIF1>;
--		clocks = <&ssusbsys CLK_SSUSB_SYS_EN>,
--			 <&ssusbsys CLK_SSUSB_REF_EN>,
--			 <&ssusbsys CLK_SSUSB_MCU_EN>,
--			 <&ssusbsys CLK_SSUSB_DMA_EN>;
--		clock-names = "sys_ck", "ref_ck", "mcu_ck", "dma_ck";
--		phys = <&u2port0 PHY_TYPE_USB2>, <&u3port0 PHY_TYPE_USB3>;
--		status = "disabled";
--	};
--
--	u3phy: usb-phy@1a0c4000 {
--		compatible = "mediatek,mt7629-tphy", "mediatek,generic-tphy-v2";
--		#address-cells = <1>;
--		#size-cells = <1>;
--		ranges = <0 0x1a0c4000 0x1000>;
--		status = "disabled";
--
--		u2port0: usb-phy@0 {
--			reg = <0x0 0x0700>;
--			#phy-cells = <1>;
--			clocks = <&ssusbsys CLK_SSUSB_U2_PHY_EN>;
--			clock-names = "ref";
--		};
--
--		u3port0: usb-phy@700 {
--			reg = <0x0700 0x0700>;
--			#phy-cells = <1>;
--		};
--	};
--
--	ethsys: syscon@1b000000 {
--		compatible = "mediatek,mt7629-ethsys", "syscon";
--		reg = <0x1b000000 0x1000>;
--		#clock-cells = <1>;
--		#reset-cells = <1>;
--	};
--
--	eth: ethernet@1b100000 {
--		compatible = "mediatek,mt7629-eth", "syscon";
--		reg = <0x1b100000 0x20000>;
--		clocks = <&topckgen CLK_TOP_ETH_SEL>,
--			<&topckgen CLK_TOP_F10M_REF_SEL>,
--			<&ethsys CLK_ETH_ESW_EN>,
--			<&ethsys CLK_ETH_GP0_EN>,
--			<&ethsys CLK_ETH_GP1_EN>,
--			<&ethsys CLK_ETH_GP2_EN>,
--			<&ethsys CLK_ETH_FE_EN>,
--			<&sgmiisys0 CLK_SGMII_TX_EN>,
--			<&sgmiisys0 CLK_SGMII_RX_EN>,
--			<&sgmiisys0 CLK_SGMII_CDR_REF>,
--			<&sgmiisys0 CLK_SGMII_CDR_FB>,
--			<&sgmiisys1 CLK_SGMII_TX_EN>,
--			<&sgmiisys1 CLK_SGMII_RX_EN>,
--			<&sgmiisys1 CLK_SGMII_CDR_REF>,
--			<&sgmiisys1 CLK_SGMII_CDR_FB>,
--			<&apmixedsys CLK_APMIXED_SGMIPLL>,
--			<&apmixedsys CLK_APMIXED_ETH2PLL>;
--		clock-names = "ethif", "sgmiitop", "esw", "gp0", "gp1", "gp2",
--				"fe", "sgmii_tx250m", "sgmii_rx250m",
--				"sgmii_cdr_ref", "sgmii_cdr_fb",
--				"sgmii2_tx250m", "sgmii2_rx250m",
--				"sgmii2_cdr_ref", "sgmii2_cdr_fb",
--				"sgmii_ck", "eth2pll";
--		assigned-clocks = <&topckgen CLK_TOP_ETH_SEL>,
--				  <&topckgen CLK_TOP_F10M_REF_SEL>,
--				  <&topckgen CLK_TOP_SGMII_REF_1_SEL>;
--		assigned-clock-parents = <&topckgen CLK_TOP_UNIVPLL1_D2>,
--					 <&topckgen CLK_TOP_SYSPLL4_D16>,
--					 <&topckgen CLK_TOP_SGMIIPLL_D2>;
--		power-domains = <&scpsys MT7629_POWER_DOMAIN_ETHSYS>;
--		resets = <&ethsys ETHSYS_FE_RST>;
--		reset-names = "fe";
--		mediatek,ethsys = <&ethsys>;
--		mediatek,sgmiisys = <&sgmiisys0>;
--		mediatek,infracfg = <&infracfg>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--		status = "disabled";
--	};
--
--	sgmiisys0: syscon@1b128000 {
--		compatible = "mediatek,mt7629-sgmiisys", "syscon";
--		reg = <0x1b128000 0x1000>;
--		#clock-cells = <1>;
--	};
--
--	sgmiisys1: syscon@1b130000 {
--		compatible = "mediatek,mt7629-sgmiisys", "syscon";
--		reg = <0x1b130000 0x1000>;
--		#clock-cells = <1>;
--	};
--
--	pwm: pwm@11006000 {
--		compatible = "mediatek,mt7629-pwm";
--		reg = <0x11006000 0x1000>;
--		#clock-cells = <1>;
--		#pwm-cells = <2>;
--		interrupts = <GIC_SPI 77 IRQ_TYPE_LEVEL_LOW>;
--		clocks = <&topckgen CLK_TOP_PWM_SEL>,
--			 <&pericfg CLK_PERI_PWM_PD>,
--			 <&pericfg CLK_PERI_PWM1_PD>;
--		clock-names = "top", "main", "pwm1";
--		assigned-clocks = <&topckgen CLK_TOP_PWM_SEL>;
--		assigned-clock-parents = <&topckgen CLK_TOP_UNIVPLL2_D4>;
--		status = "disabled";
--	};
--
--};
-diff --git a/configs/mt7629_rfb_defconfig b/configs/mt7629_rfb_defconfig
-index abdf3d0cc49..4acf521e7fd 100644
---- a/configs/mt7629_rfb_defconfig
-+++ b/configs/mt7629_rfb_defconfig
-@@ -9,7 +9,7 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x41fffef0
- CONFIG_ENV_SIZE=0x1000
--CONFIG_DEFAULT_DEVICE_TREE="mt7629-rfb"
-+CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt7629-rfb"
- CONFIG_TARGET_MT7629=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-@@ -52,6 +52,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_CMD_LOG=y
-+CONFIG_OF_UPSTREAM=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-parents"
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-diff --git a/include/dt-bindings/clock/mt7629-clk.h b/include/dt-bindings/clock/mt7629-clk.h
-deleted file mode 100644
-index 0bbfbfa744a..00000000000
---- a/include/dt-bindings/clock/mt7629-clk.h
-+++ /dev/null
-@@ -1,206 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (C) 2018 MediaTek Inc.
-- */
--
--#ifndef _DT_BINDINGS_CLK_MT7629_H
--#define _DT_BINDINGS_CLK_MT7629_H
--
--/* TOPCKGEN */
--#define CLK_TOP_FCLKS_OFF		0
--
--#define CLK_TOP_TO_U2_PHY		0
--#define CLK_TOP_TO_U2_PHY_1P		1
--#define CLK_TOP_PCIE0_PIPE_EN		2
--#define CLK_TOP_PCIE1_PIPE_EN		3
--#define CLK_TOP_SSUSB_TX250M		4
--#define CLK_TOP_SSUSB_EQ_RX250M		5
--#define CLK_TOP_SSUSB_CDR_REF		6
--#define CLK_TOP_SSUSB_CDR_FB		7
--#define CLK_TOP_SATA_ASIC		8
--#define CLK_TOP_SATA_RBC		9
--
--#define CLK_TOP_TO_USB3_SYS		10
--#define CLK_TOP_P1_1MHZ			11
--#define CLK_TOP_4MHZ			12
--#define CLK_TOP_P0_1MHZ			13
--#define CLK_TOP_ETH_500M		14
--#define CLK_TOP_TXCLK_SRC_PRE		15
--#define CLK_TOP_RTC			16
--#define CLK_TOP_PWM_QTR_26M		17
--#define CLK_TOP_CPUM_TCK_IN		18
--#define CLK_TOP_TO_USB3_DA_TOP		19
--#define CLK_TOP_MEMPLL			20
--#define CLK_TOP_DMPLL			21
--#define CLK_TOP_DMPLL_D4		22
--#define CLK_TOP_DMPLL_D8		23
--#define CLK_TOP_SYSPLL_D2		24
--#define CLK_TOP_SYSPLL1_D2		25
--#define CLK_TOP_SYSPLL1_D4		26
--#define CLK_TOP_SYSPLL1_D8		27
--#define CLK_TOP_SYSPLL1_D16		28
--#define CLK_TOP_SYSPLL2_D2		29
--#define CLK_TOP_SYSPLL2_D4		30
--#define CLK_TOP_SYSPLL2_D8		31
--#define CLK_TOP_SYSPLL_D5		32
--#define CLK_TOP_SYSPLL3_D2		33
--#define CLK_TOP_SYSPLL3_D4		34
--#define CLK_TOP_SYSPLL_D7		35
--#define CLK_TOP_SYSPLL4_D2		36
--#define CLK_TOP_SYSPLL4_D4		37
--#define CLK_TOP_SYSPLL4_D16		38
--#define CLK_TOP_UNIVPLL			39
--#define CLK_TOP_UNIVPLL1_D2		40
--#define CLK_TOP_UNIVPLL1_D4		41
--#define CLK_TOP_UNIVPLL1_D8		42
--#define CLK_TOP_UNIVPLL_D3		43
--#define CLK_TOP_UNIVPLL2_D2		44
--#define CLK_TOP_UNIVPLL2_D4		45
--#define CLK_TOP_UNIVPLL2_D8		46
--#define CLK_TOP_UNIVPLL2_D16		47
--#define CLK_TOP_UNIVPLL_D5		48
--#define CLK_TOP_UNIVPLL3_D2		49
--#define CLK_TOP_UNIVPLL3_D4		50
--#define CLK_TOP_UNIVPLL3_D16		51
--#define CLK_TOP_UNIVPLL_D7		52
--#define CLK_TOP_UNIVPLL_D80_D4		53
--#define CLK_TOP_UNIV48M			54
--#define CLK_TOP_SGMIIPLL_D2		55
--#define CLK_TOP_CLKXTAL_D4		56
--#define CLK_TOP_HD_FAXI			57
--#define CLK_TOP_FAXI			58
--#define CLK_TOP_F_FAUD_INTBUS		59
--#define CLK_TOP_AP2WBHIF_HCLK		60
--#define CLK_TOP_10M_INFRAO		61
--#define CLK_TOP_MSDC30_1		62
--#define CLK_TOP_SPI			63
--#define CLK_TOP_SF			64
--#define CLK_TOP_FLASH			65
--#define CLK_TOP_TO_USB3_REF		66
--#define CLK_TOP_TO_USB3_MCU		67
--#define CLK_TOP_TO_USB3_DMA		68
--#define CLK_TOP_FROM_TOP_AHB		69
--#define CLK_TOP_FROM_TOP_AXI		70
--#define CLK_TOP_PCIE1_MAC_EN		71
--#define CLK_TOP_PCIE0_MAC_EN		72
--
--#define CLK_TOP_AXI_SEL			73
--#define CLK_TOP_MEM_SEL			74
--#define CLK_TOP_DDRPHYCFG_SEL		75
--#define CLK_TOP_ETH_SEL			76
--#define CLK_TOP_PWM_SEL			77
--#define CLK_TOP_F10M_REF_SEL		78
--#define CLK_TOP_NFI_INFRA_SEL		79
--#define CLK_TOP_FLASH_SEL		80
--#define CLK_TOP_UART_SEL		81
--#define CLK_TOP_SPI0_SEL		82
--#define CLK_TOP_SPI1_SEL		83
--#define CLK_TOP_MSDC50_0_SEL		84
--#define CLK_TOP_MSDC30_0_SEL		85
--#define CLK_TOP_MSDC30_1_SEL		86
--#define CLK_TOP_AP2WBMCU_SEL		87
--#define CLK_TOP_AP2WBHIF_SEL		88
--#define CLK_TOP_AUDIO_SEL		89
--#define CLK_TOP_AUD_INTBUS_SEL		90
--#define CLK_TOP_PMICSPI_SEL		91
--#define CLK_TOP_SCP_SEL			92
--#define CLK_TOP_ATB_SEL			93
--#define CLK_TOP_HIF_SEL			94
--#define CLK_TOP_SATA_SEL		95
--#define CLK_TOP_U2_SEL			96
--#define CLK_TOP_AUD1_SEL		97
--#define CLK_TOP_AUD2_SEL		98
--#define CLK_TOP_IRRX_SEL		99
--#define CLK_TOP_IRTX_SEL		100
--#define CLK_TOP_SATA_MCU_SEL		101
--#define CLK_TOP_PCIE0_MCU_SEL		102
--#define CLK_TOP_PCIE1_MCU_SEL		103
--#define CLK_TOP_SSUSB_MCU_SEL		104
--#define CLK_TOP_CRYPTO_SEL		105
--#define CLK_TOP_SGMII_REF_1_SEL		106
--#define CLK_TOP_10M_SEL			107
--#define CLK_TOP_NR_CLK			108
--
--/* INFRACFG */
--#define CLK_INFRA_MUX1_SEL		0
--#define CLK_INFRA_DBGCLK_PD		1
--#define CLK_INFRA_TRNG_PD		2
--#define CLK_INFRA_DEVAPC_PD		3
--#define CLK_INFRA_APXGPT_PD		4
--#define CLK_INFRA_SEJ_PD		5
--#define CLK_INFRA_NR_CLK		6
--
--/* PERICFG */
--#define CLK_PERIBUS_SEL			0
--#define CLK_PERI_PWM1_PD		1
--#define CLK_PERI_PWM2_PD		2
--#define CLK_PERI_PWM3_PD		3
--#define CLK_PERI_PWM4_PD		4
--#define CLK_PERI_PWM5_PD		5
--#define CLK_PERI_PWM6_PD		6
--#define CLK_PERI_PWM7_PD		7
--#define CLK_PERI_PWM_PD			8
--#define CLK_PERI_AP_DMA_PD		9
--#define CLK_PERI_MSDC30_1_PD		10
--#define CLK_PERI_UART0_PD		11
--#define CLK_PERI_UART1_PD		12
--#define CLK_PERI_UART2_PD		13
--#define CLK_PERI_UART3_PD		14
--#define CLK_PERI_BTIF_PD		15
--#define CLK_PERI_I2C0_PD		16
--#define CLK_PERI_SPI0_PD		17
--#define CLK_PERI_SNFI_PD		18
--#define CLK_PERI_NFI_PD			19
--#define CLK_PERI_NFIECC_PD		20
--#define CLK_PERI_FLASH_PD		21
--#define CLK_PERI_NR_CLK			22
--
--/* APMIXEDSYS */
--#define CLK_APMIXED_ARMPLL		0
--#define CLK_APMIXED_MAINPLL		1
--#define CLK_APMIXED_UNIV2PLL		2
--#define CLK_APMIXED_ETH1PLL		3
--#define CLK_APMIXED_ETH2PLL		4
--#define CLK_APMIXED_SGMIPLL		5
--#define CLK_APMIXED_NR_CLK		6
--
--/* SSUSBSYS */
--#define CLK_SSUSB_U2_PHY_1P_EN		0
--#define CLK_SSUSB_U2_PHY_EN		1
--#define CLK_SSUSB_REF_EN		2
--#define CLK_SSUSB_SYS_EN		3
--#define CLK_SSUSB_MCU_EN		4
--#define CLK_SSUSB_DMA_EN		5
--#define CLK_SSUSB_NR_CLK		6
--
--/* PCIESYS */
--#define CLK_PCIE_P1_AUX_EN		0
--#define CLK_PCIE_P1_OBFF_EN		1
--#define CLK_PCIE_P1_AHB_EN		2
--#define CLK_PCIE_P1_AXI_EN		3
--#define CLK_PCIE_P1_MAC_EN		4
--#define CLK_PCIE_P1_PIPE_EN		5
--#define CLK_PCIE_P0_AUX_EN		6
--#define CLK_PCIE_P0_OBFF_EN		7
--#define CLK_PCIE_P0_AHB_EN		8
--#define CLK_PCIE_P0_AXI_EN		9
--#define CLK_PCIE_P0_MAC_EN		10
--#define CLK_PCIE_P0_PIPE_EN		11
--#define CLK_PCIE_NR_CLK			12
--
--/* ETHSYS */
--#define CLK_ETH_FE_EN			0
--#define CLK_ETH_GP2_EN			1
--#define CLK_ETH_GP1_EN			2
--#define CLK_ETH_GP0_EN			3
--#define CLK_ETH_ESW_EN			4
--#define CLK_ETH_NR_CLK			5
--
--/* SGMIISYS */
--#define CLK_SGMII_TX_EN			0
--#define CLK_SGMII_RX_EN			1
--#define CLK_SGMII_CDR_REF		2
--#define CLK_SGMII_CDR_FB		3
--#define CLK_SGMII_NR_CLK		4
--
--#endif /* _DT_BINDINGS_CLK_MT7629_H */
--- 
-2.34.1
+>> -        /* check is simplified; fit load checks for overlaps */
+>> -        printf("Overlayed FDT requires relocation\n");
+>> -        fdt_noffset = -EBADF;
+>> -        goto out;
+>> -    }
+>> +        /* Cannot overlay an FDT stored inside the fitImage, so let's 
+>> relocate */
+>> +        char *of_flat_tree = map_sysmem(load, len);
+>> -    base = map_sysmem(load, len);
+>> +        len = ALIGN(fdt_totalsize(load), SZ_4K);
+>> +        if (boot_relocate_fdt(&of_flat_tree, &len)) {
+> 
+> Please print the error value in case of failure here, it is useful for 
+> debugging.
+> 
 
+The function returns 0 on success, 1 on any error, not sure it's that 
+useful as it'll always be 1. Do we want to anticipate this function 
+being updated to have other error codes in the future?
+
+Cheers,
+Quentin
