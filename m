@@ -4,73 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D2B6C02180
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 00:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A099FC02180
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 00:15:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73A63805C5;
-	Tue, 14 Jan 2025 01:13:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EACAA805C5;
+	Tue, 14 Jan 2025 01:15:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NiF1YpZF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C7TPsQc8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F28C8060C; Tue, 14 Jan 2025 01:13:54 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 661C58060C; Tue, 14 Jan 2025 01:15:15 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D15E80285
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 01:13:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EA2E80285
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 01:15:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d3f28881d6so7286833a12.1
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 16:13:51 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ab2b29dfc65so756305266b.1
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 16:15:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736813631; x=1737418431; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736813712; x=1737418512; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RoFtq9oA8kgx2D/cQRA7R0zhilTOiNzT75wEefUtPuY=;
- b=NiF1YpZFsl8hcI4k6R9LjxFAypmPXDRpAtTXmOAkhyAoCJMENNbIoaPSZeeR2dQvon
- ieNrvelIf7obGWZ82NTUTH6vJXgzueNGtl6k1iSAc0M5OZuIvdj8t7WjLrOoI5xpN/nf
- xAsCqthBoKWGF/dEw3j9YdeGYLByKl5d+CFrE=
+ bh=vRnveguGH5okgHXE0lltO7FkBHNaLmlINhbSQ96ZaE8=;
+ b=C7TPsQc84CMwHNYPX2mZK8IXHUHHkNoGQ5z077uEYqUSd18JVwkbumMygqAcNSNe/p
+ 7keo/Q3iQ5U23TIXQDVY5oafQ4pm8r/DBx7ikFOKwJ2/jseEJomCntno/RSZ8KVlhpLT
+ tBAjbgVvKs4GYQoFRWgN6El7j6fTG1C1rUnvM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736813631; x=1737418431;
+ d=1e100.net; s=20230601; t=1736813712; x=1737418512;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RoFtq9oA8kgx2D/cQRA7R0zhilTOiNzT75wEefUtPuY=;
- b=V6NiQF8Wl9yOC0b8DQe/tL5FLeGmLo0nWx1JjfjWGVFsHXNH/stJ5AtFFXeLQmsGdu
- +bAwdf6UhyLFJyGs/nm27iv15eUl3czjWoM4hkrA8ZZlOC55kbUtYOP2ZE+zHSznxoxb
- D3Eyd+FQX/kkKAqhCIYKocCPYKdI0KN0asY8dTQxgonZSuVIu6hTprQGiinH2yKvfgQq
- glrc0Nc508RIYXvel7GUs7m6YW3rbag8tQ4Aq5S7jrouHu1A8/GYAvoAiZoDDNzDa6ov
- i+elb3ckmsqLtRANi7ndSy3OQUloP0bRmxrkRl1/QAtISyD2rbQxYwrcx5ihMym6Ph7s
- 9x7w==
-X-Gm-Message-State: AOJu0YximaN+1s9CKHyefMb9m1h5euhE5+q+k6YcKHl9jL9M85uRJ/iD
- t6J6PbKNfVqB9OaAKrwU8Vc8ZLWbUtoUA4g+tSrhZMoq4YTJzoRjN/drCePQ0WzmLKrbuLSs6Hy
- gGbOTx4nkmNot1KSebgedkhvoDxYIiciwk1qhy/GKtD0ioEqezQ==
-X-Gm-Gg: ASbGncuukTin0Anj6dlxHp7iYuDKh86z+aQWQo3OK8tgyy7JTmeRfm2ky+3TxjFCp83
- XJEvP+A8h5AY08ME0WCoSLtanqEJmZMzckZp1Oo8=
-X-Google-Smtp-Source: AGHT+IEzR1yN0m1NYXx1bX8Jc7XeNQaERL53rj/RD+HjIP87rekPBBmbvk8Y/qUHaRJL9QBKB0vC3Rs3vg63+c29fkc=
-X-Received: by 2002:a05:6402:520d:b0:5d9:ae5:8318 with SMTP id
- 4fb4d7f45d1cf-5d972e1da12mr53820751a12.20.1736813630782; Mon, 13 Jan 2025
- 16:13:50 -0800 (PST)
+ bh=vRnveguGH5okgHXE0lltO7FkBHNaLmlINhbSQ96ZaE8=;
+ b=cErx3C6lKKMhBDVLKtH2iGmylTp9KbQ9lR6+oOU5lCjJ+edligDHJSSSbCa10V+PDb
+ iMSc9gycLQsxlYCA4sMXvtPiZiM9h3rO/3ZeUMjVviYIrzt24yTiC9RtsnraYvurN1TY
+ XdRXg6T/bdey+KZl2PUB9yOIguQ2M4OvVjJ8x28WyJ89b+MgcAltjNqpqsWqNBbWAiTq
+ jLRI9HRAnSycDPMHXh2JihT6OoEvvXVNZWsfgNbz94RIFLo0q+iXjqyRZg2x3TPxWRTi
+ vKh+AcUOJIe6IOUbFgew4ItfkOT/kNFR6mMFY/dkFqzNJX9UUzsK48TKQczNC+KHOtgo
+ CQGw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUsGTrH4SvntRZZT0mp/OI44akuGAWHWV1Kcvrc6oFJkj/FabSmaxwbO6nVvJ/EQMhXtOVgYmw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwxWjAbBRkkCiOYlphXa4T0O0ziC6UaH7RQd/Gz04kSKFd4/6yL
+ 9Kb9OKvAN2pR+DcvReT7IYJZnYBOKvhB38OEQUwgfIhGpR+Wu08Wp24oLGqgaEQFO6BSSpzW/eF
+ dZuKTeUWqG9R3fGfDAdxOHvsnk+1bSWPn/Qx5
+X-Gm-Gg: ASbGncunS9hvK9FbGz8VgTJhfxzoSyKCwnfw6B/KqqEIiXl4Mwca/aliySUsH24gMmE
+ qsIfczlCv1FSttq1uQj8TMxi38lrcppioqMSldu4=
+X-Google-Smtp-Source: AGHT+IGj0G4RBmh4ZnnH0wcmlQRJYOpAAh57wetsp+XJDe6qwlKPtPyQuho7nb3a7iOKeEtz1/zyBWH2ZSfNvAqZv88=
+X-Received: by 2002:a17:907:3a96:b0:ab2:b5f1:568c with SMTP id
+ a640c23a62f3a-ab2b5f15bf1mr1367896666b.28.1736813712545; Mon, 13 Jan 2025
+ 16:15:12 -0800 (PST)
 MIME-Version: 1.0
-References: <20250109123010.4005298-1-sjg@chromium.org>
- <20250109123010.4005298-3-sjg@chromium.org>
- <20250111225433.GS3476@bill-the-cat>
- <CAFLszThO9BaSi8R8=3FpLq7Nnx7XdiCungY1vcRfKyfFQ0baJQ@mail.gmail.com>
- <20250113204419.GE3476@bill-the-cat>
-In-Reply-To: <20250113204419.GE3476@bill-the-cat>
+References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
+ <20241127070631.16412-6-heinrich.schuchardt@canonical.com>
+ <20250110224554.GA2278614@bill-the-cat>
+ <CAM=mAOmee=By9ErZrvk0hVbZyLH_viguu_wMfOsV3LzTwddArw@mail.gmail.com>
+ <20250113015108.GT3476@bill-the-cat>
+ <CAFLszTh7S=jmezZNwg=b+96+6ravY41iRbgJ_ssJ48nx4d=0QA@mail.gmail.com>
+ <20250113192352.GZ3476@bill-the-cat>
+ <CAFLszTht-DdniDnZDgMsf7F5oK3X19ahjcNsM6u1-sN-D_8kdQ@mail.gmail.com>
+ <20250113203519.GD3476@bill-the-cat>
+In-Reply-To: <20250113203519.GD3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Jan 2025 17:13:46 -0700
-X-Gm-Features: AbW1kvYnu5weY0eSbC2-jEte8XssMDhA77-ojY4cYz2U9GL-iNgOQMSeWLY4QQ0
-Message-ID: <CAFLszTjo1FcHL4G76u1tS3caEgdpk7FHdstoXe+AhERO8rJJfg@mail.gmail.com>
-Subject: Re: [PATCH 02/15] vbe: Split out reading a FIT into a common file
+Date: Mon, 13 Jan 2025 17:15:08 -0700
+X-Gm-Features: AbW1kvaAPTcpEXCCyEo1I7IYQhLyoR-u5ycyxzd81FYmIBC6OXGYwZ5sceGe1GI
+Message-ID: <CAFLszTjWf546_gO9UEUzWkc1tFcf70dGw1Oxe=3UCvzgGsWgSA@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] cmd: bootmenu: add parameter -e for UEFI boot
+ options
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,92 +112,73 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 13 Jan 2025 at 13:44, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 13 Jan 2025 at 13:35, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Jan 13, 2025 at 01:03:52PM -0700, Simon Glass wrote:
+> On Mon, Jan 13, 2025 at 01:09:16PM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Sat, 11 Jan 2025 at 15:54, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 13 Jan 2025 at 12:24, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Thu, Jan 09, 2025 at 05:29:57AM -0700, Simon Glass wrote:
-> > >
-> > > > Loading a FIT is useful for other VBE methods, such as ABrec. Create a
-> > > > new function to handling reading it.
+> > > On Mon, Jan 13, 2025 at 12:01:45PM -0700, Simon Glass wrote:
+> > > > Hi,
 > > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > On Sun, 12 Jan 2025 at 18:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Sun, Jan 12, 2025 at 08:08:13PM +0100, Heinrich Schuchardt wrote:
+> > > > > > Tom Rini <trini@konsulko.com> schrieb am Fr., 10. Jan. 2025, 23:46:
+> > > > > >
+> > > > > > > On Wed, Nov 27, 2024 at 08:06:30AM +0100, Heinrich Schuchardt wrote:
+> > > > > > >
+> > > > > > > > The bootmenu command can display
+> > > > > > > >
+> > > > > > > > * menu entries defined by environment variables
+> > > > > > > > * menu entries defined by UEFI boot options
+> > > > > > > >
+> > > > > > > > Not in all cases showing the UEFI boot options is desired.
+> > > > > > > > Provide a new parameter '-e' to select the display of UEFI boot options.
+> > > > > > > >
+> > > > > > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > > > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > > > > >
+> > > > > > > Very strangely, this leads to the EFI selftest "Executing 'random number
+> > > > > > > generator'" test failing on Pi 4, where was was passing previously (and
+> > > > > > > Pi 4 has an RNG, unlike Pi 3), and this is
+> > > > > >
+> > > > > > Do you have a link to the log?
+> > > > >
+> > > > > Here's the failing part:
+> > > > > Setting up 'random number generator'
+> > > > > ESC[0;37;40mESC[1;32;40mSetting up 'random number generator' succeeded
+> > > > > ESC[0;37;40mESC[1;34;40m
+> > > > > Executing 'random number generator'
+> > > > > ESC[0;37;40mESC[1;31;40mlib/efi_selftest/efi_selftest_rng.c(52):
+> > > > > ERROR: ESC[0;37;40mESC[1;31;40mRandom number generator protocol not
+> > > > > available
+> > > > > ESC[0;37;40mESC[1;31;40mlib/efi_selftest/efi_selftest.c(114):
+> > > > > ERROR: ESC[0;37;40mESC[1;31;40mExecuting 'random number generator'
+> > > > > failed
+> > > > > ESC[0;37;40mESC[1;34;40m
+> > > >
+> > > > This might help make the log more intelligible.
+> > > >
+> > > > https://patchwork.ozlabs.org/project/uboot/patch/20240811145209.4191404-37-sjg@chromium.org/
 > > >
-> > > This causes a bunch of growth:
-> > >             a3y17lte       : all +1328 text +1328
-> > >                u-boot: add: 8/0, grow: 1/0 bytes: 1328/0 (1328)
-> > >                  function                                   old     new   delta
-> > >                  blkcache_fill                                -     332    +332
-> > >                  blkcache_read                                -     240    +240
-> > >                  blk_read                                     -     188    +188
-> > >                  vbe_read_nvdata                              -     156    +156
-> > >                  vbe_read_version                             -     140    +140
-> > >                  vbe_get_blk                                  -     100    +100
-> > >                  simple_read_nvdata                           -      96     +96
-> > >                  crc8                                         -      72     +72
-> > >                  vbe_simple_read_state                      108     112      +4
-> > >
-> > > Which is unexpected for just moving code around that's not newly used.
+> > > Shrug, it's the age old problem of sending raw stdout to a file. It
+> > > looks fine on console as it happens, I was just grabbing from an
+> > > existing log.
 > >
-> > I hadn't noticed that on the boards I was trying, so thank you for spotting it.
-> >
-> > This is because it now uses blk_read() instead of blk_dread(), so if
+> > Oh well. I would probably suggest only writing this junk to log files
+> > if we actually need it in there (i.e. something is programmatically
+> > checking), but it seems like this is a different situation from the
+> > one my patch fixes.
 >
-> That's not what this patch does? There's no caller before or after in
-> this patch of "blk_dread". Just moving functions around should not
-> increase size on platforms that weren't using the existing
-> functionality.
+> I mean, yes? The problem here is that the random number generator test
+> now fails, when it didn't before. As far as I know (and I think the rest
+> of us understood?) your problem was that the ANSI sequences exist.
 
-Firstly, are we looking at the same patch? Here is the one I am looking at:
-
-https://patchwork.ozlabs.org/project/uboot/patch/20250109123010.4005298-2-sjg@chromium.org/
-
-It has blk_dread() in the old code and blk_read() in the new.
-
-> Why is vbe_simple_read_state changing at all here, when
-> it's not being touched?
-
-Again, I'm not sure we are looking at the same code. In my version, it
-does get changed, since it now calls vbe_get_blk() rather than finding
-the block device itself. This is to avoid duplicating that code in
-simple and abrec.
-
->
-> > BLOCK_CACHE is enabled, it will use the block cache. We could disable
-> > BLOCK_CACHE on those boards perhaps? It is a speed optimisation so
-> > shouldn't be used by boards which care about code size.
-> >
-> > > And even when it's just a move it's still growing:
-> > >             xilinx_zynqmp_virt: all +128 bss -72 text +200
-> > >                u-boot: add: 4/0, grow: 0/-1 bytes: 540/-340 (200)
-> > >                  function                                   old     new   delta
-> > >                  vbe_read_nvdata                              -     156    +156
-> > >                  vbe_get_blk                                  -     148    +148
-> > >                  vbe_read_version                             -     140    +140
-> > >                  simple_read_nvdata                           -      96     +96
-> > >                  vbe_simple_read_state                      452     112    -340
-> >
-> > Unfortunately this one is hard to fix. As you know, whenever you take
-> > code from a single module and put it into another, the compiler cannot
-> > optimise away the function-call overhead. I'll note that there is no
-> > increase when LTO is used, e.g. with xilinx_versal_net_mini_qspi
-> >
-> > So let me know what you think.
->
-> You likely need to re-think your refactor a bit then. If it's in part G
-> or H that we have more than one caller of any of these functions, that's
-> perhaps where it's time to refactor and expose them?
-
-Yes of course I can move things around. I would need to drop the FIT
-loader as well, so this series would become quite small. Shall I do
-that for the next version?
-
-But just so that I understand...in the next series, when abrec is
-added, and I have these same patches, will you accept this size
-increase?
+Yes, I want them to be controlled, so we can have them when needed
+(e.g. for user benefit, getting the terminal size) but not when not
+needed (CI output, log files, testing that ANSI works, etc.)
 
 Regards,
 Simon
