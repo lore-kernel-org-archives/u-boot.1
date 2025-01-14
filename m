@@ -4,162 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F0D8C02183
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 11:04:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09CA6C02183
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 11:16:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB42B80658;
-	Tue, 14 Jan 2025 12:04:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4634380285;
+	Tue, 14 Jan 2025 12:16:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="b0ilMo5r";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="lzepDrAW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D10A80690; Tue, 14 Jan 2025 12:04:42 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on2062d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::62d])
+ id 60A758060C; Tue, 14 Jan 2025 12:16:43 +0100 (CET)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20609.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::609])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BB7F8060C
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 12:04:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54AE28007D
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 12:16:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u6vPngoShWnwpIYNIgA9AuAeZoEP9/dzOrA+W539Yg966rwBvdcpeLUtuOE0artBasT3nvDSyAJrLrHNPqehqUxabovvMGPcOOwAlFxOYjFVjfDLHPHFHBFC5Wo+z0zCbbKG7TLn+xkjOSFlKvih7HWfaEJjXq8u2c6cEEpdv8AVjVzWn6X0QU3jjafCc7DBEuWsgt/pu6Vqhja3p1oylPjkikz4DlHAgTWpoDYZwYMxVpjKlrRrk55Ri6azedzpRffOJt5m6IxXY7YNjmVvRmmtofRxee4MXrR/VZhfQ6m2NmA+AqK6rpaaeFuxwysSbH/oF9AG0jDPzaU6I2hv8Q==
+ b=ffTSU319D0Vy7Z+yayHNJ1MKIeJw+eyEG7kVw9r6ldRSFeIUf4Y9Itb9cMSyrA4u5oo/c+uTVxHjCZBrenELmmBt40i6mKmfEBAi9+8auSmDfQKRfyr3kUI+oscnT4CbaS+w++WvR6qHnTk9TbuUPxx7o4Hk2Z6THMmBOcnmj4+bTKBvI9ZYoiOGpIWMPfOx6TLOGRQahSy0G7JqmDhXsBAAHJGqf7BVVA6L8xF0J4a+TsDTxmtOnY82H4PANHhOSXEJ7pa7rkNiC9Muhibb3ufjUcgnqEDVpSHlRfnRPxwTCm3/knWjRYlNPtR50711Jt4dDTasj2Uy1idFEhIv4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=g8ruI/hM7Pc+zLUH2O90ns8uO+a7xXDH/FRMWz5x5Fo=;
- b=IaEq5C79kzwiMhAwan+pk41jAUZ2cOsignbCp6IX3e0NrOwjYbpZbeWWClN3vfdtoF3FKth1cHtcz1tp72FQo1qDnle3BqJXioiz8aWIm3jzIJEYkzEWpdPIvhqZ6mM4PgTukmv00eXynQdOCXuFst/lVnMaI+SJ4dCZQfhCd1fG3IcjyFzIAyjPapkhZs2/yQGiwq0d79PziAfEUHr+iyAYZEJqONr9OomEKV+Yz06UbIoa1RFRkU0WDdpGA6WRwC0lGlcb2e3XNbWHNxiMa+PM2OzxzMsnLTZ/t0Tn8AJ8AL4n/vS7FUjltUdkxItTUVrRc3CYw2BeVr+LCSzFtA==
+ bh=QeFv8Xl0noRjsWUKD2o7uIO/Rem1KOViPmv/pxOlAM4=;
+ b=jlRnrwhATDSxpdgRFRwPgIV8sRzyDzvRrzzoBqrFo8dNzsbUtFfRsclMC6+2XFrzZshhm1vaL/IILTd5ebtt2/49RUQA/E2SGLe6FGcMuJjg0yN5qeqze6tN3DKXmwSgWZhluJPhuzC74nMN2splb1cg1vAwQ49X+cNGOdtzBO+OacJX4oaYvfjj6zPe6xBkWxMQlqvwInVFfWj8M+wrCpDQmNEbb3ETEaO1CzMbKFSQ8MFKXRY5jhopXZNBjeFFUWiLJvM9hUFcVPLrwchL5Qb4sGXBx7MqgJDqc1Tix98N0IFsZ93iZKE9x6T3KhqNY+QssfMQLbQonTOc7WxCww==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=g8ruI/hM7Pc+zLUH2O90ns8uO+a7xXDH/FRMWz5x5Fo=;
- b=b0ilMo5r0eru5zjRUYhuD/x/GNfDqV9v/oxKacpeIxiEdH1W6xo9qJjJS8/hbSt8BwxTjC1jyBxUFL0/GsQkRnfTe6U4AeKtfH+QLwbhtNNR6G75GlMdpfH54KxksOw0ShL3snW0H8+L4GhXqYkG8SN817ah5WqNoMAbf133Cjw=
+ bh=QeFv8Xl0noRjsWUKD2o7uIO/Rem1KOViPmv/pxOlAM4=;
+ b=lzepDrAW2+ydtBik2DoN/rIT0/bycsVqZ828ClcL4PIXDYImSjccH4PlvcoB8WjgIcgB+0DU1tYwhLywfdM2X+qWa+n381xQHbY4c5FBU0LsT0wtfreFAO8fI3arG+VcfXIa6puU7E31A1EonEAgBqMn70gHYgQqKNDZOQ5dZiw=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by DBAPR04MB7478.eurprd04.prod.outlook.com (2603:10a6:10:1b3::24)
+ by AS8PR04MB8005.eurprd04.prod.outlook.com (2603:10a6:20b:2ac::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.12; Tue, 14 Jan
- 2025 11:04:35 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.18; Tue, 14 Jan
+ 2025 11:16:36 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Tue, 14 Jan 2025
- 11:04:35 +0000
-Message-ID: <8875f80c-48e3-4ad9-8c9e-4cbec49070ec@cherry.de>
-Date: Tue, 14 Jan 2025 12:04:33 +0100
+ 11:16:36 +0000
+Message-ID: <2d821f40-b52a-44f0-8dc1-5d9ec2992993@cherry.de>
+Date: Tue, 14 Jan 2025 12:16:35 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC] image: apply FDTOs on FDT image node without a load
- property
-To: Marek Vasut <marex@denx.de>, Quentin Schulz <foss+uboot@0leil.net>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
-References: <20241219-extlinux-relocate-dtb-when-dtbo-v1-1-fe5eeb8fd4f1@cherry.de>
- <fd67183b-c1a6-4e93-9b07-ac5fb8196d2b@denx.de>
+Subject: Re: [PATCH 3/3] common: fdt: hand over original fdt bootargs into
+ board chosen handler
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Devarsh Thakkar <devarsht@ti.com>
+Cc: u-boot@lists.denx.de, kernel@salutedevices.com, rockosov@gmail.com
+References: <20241220-board_fdt_chosen_bootargs_improvements-v1-0-f6a7181787c5@salutedevices.com>
+ <20241220-board_fdt_chosen_bootargs_improvements-v1-3-f6a7181787c5@salutedevices.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <fd67183b-c1a6-4e93-9b07-ac5fb8196d2b@denx.de>
+In-Reply-To: <20241220-board_fdt_chosen_bootargs_improvements-v1-3-f6a7181787c5@salutedevices.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0144.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:96::19) To AS8PR04MB8897.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0177.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a0::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DBAPR04MB7478:EE_
-X-MS-Office365-Filtering-Correlation-Id: ef41dbe8-0c0d-4262-758d-08dd348b3b29
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS8PR04MB8005:EE_
+X-MS-Office365-Filtering-Correlation-Id: 57672a21-3984-4caa-40dc-08dd348ce8ef
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?azQ0UUthUXJ3RklvOXZFUkdjR2dqWHdsVVZjd1VUdk52VkJwT28rZUptNGpo?=
- =?utf-8?B?bGVCcXlmRGptRHVGVWF0QVJwajBpenlndHZhVzZUbkpOQk1uZ2laRFI5VDk3?=
- =?utf-8?B?RXhoQVdSRnVvWkt0bHBCckluK2I4cVNNMWFCSjRGVVJmc2pFSVVnc3lCcjhl?=
- =?utf-8?B?b0Q1TUUwTlR3bmpTK250cnNmTGJ5eXB1elJvQ29OTjJJbDBXNHUycklMd3Iy?=
- =?utf-8?B?R0lpSTNrYktGcmp6Nmx1ZHYwVitYOC9ueERaSXRSRm1wZUNtN2k1OG5tNGhm?=
- =?utf-8?B?V3BqREVGRWY0UnVmT3M5TkZnVUJxWnNtVmE1V09Wdkh4MU12MUFvNUVZUi9s?=
- =?utf-8?B?Tmhqa3BJNGNOV1VMbGJOZW5HVkxVbVdPalkwRlBLZmx3Z0syemxWMGQ5QzhU?=
- =?utf-8?B?Wjh6VnFQa0VybVdvUG1ZQU9nQ1pQbDN0MzZ0QU9QSDVqOURWcGo5bFdEblVS?=
- =?utf-8?B?dnF1clp4SXYxSlMrQWkwUndNMWZDUlNJQUFJdHkrUUpZM0RIZFdtRDZBTXdW?=
- =?utf-8?B?d25KM2lSZVVoRUZuVmZ6RnpNS2k4bnBXa0dJaDkzQnVqaW5GY3lFcXRBdCsx?=
- =?utf-8?B?WWtiSCtuZFdVRm1xMWo3dFBYYzQ0M0RUYTl4elM3ZDJkYlcrRjV5TXRCTmsv?=
- =?utf-8?B?ZmxSZnpLNWRhMDR1WS9hS29GVnhuQkpwSk9icG9oMnJBSTJxdXU1QzMyay8v?=
- =?utf-8?B?a25WY2NtbHNCSmI1bFJodWpNeGtVZ29uaURPdmhrUTFHUXREN3dodms5Qjc0?=
- =?utf-8?B?KzJPMGlkajI2R2x1azFuc3hsM2VZRzRWZE9XOXh1VXpNVE9BY2MyQU5nZ1Vy?=
- =?utf-8?B?dExTbVhza2ZTeHZvYTdmS3pmRXNsTm94T0pPc3hxTG9JTzFVaUtqWWt2dWFJ?=
- =?utf-8?B?NWR3L2JRN1dQMGtSdVZ6L0lCQlk3a1UvNTJ5ZmdDNUlKSWR5Y3FFNCtiM2Vz?=
- =?utf-8?B?N0I0UVBmYVVkdU5CRGFnWjMwWDgrbTlFdnZXZWFYMWV3Q2xINkVFNGtEUVRV?=
- =?utf-8?B?V0cyOXU5eHZBL3pKeGQvM0REelp2ajhDZmI5bDRoOEV2eTR3aGFIWXlXaEgy?=
- =?utf-8?B?c0ZtYTZRRnZwT2JpWVpFY3RaOHZzOUxkRUE1SkdWYnpMNTg5ZGR4dGJYR0pL?=
- =?utf-8?B?OC84anYxWkJQTlNHRnV1c3dSTHJRU2VhK3BXMmpkVkVtajNIRnNabjNCV3Vp?=
- =?utf-8?B?Q2s1OEhKUW83OTEvakZyS2dRbWZ4cmdwVS9uSEhMWGFuK210eXpBMnJjQ2lC?=
- =?utf-8?B?ZDY5Q1dZUE9DdVUwK0w5WDNtZzJGK0JrYVVNVUd1MEhKMXNtc1RNL1ZKSHV6?=
- =?utf-8?B?aDFCdkE3c2Y4bmd2dEtLempHb1dkbUdjTGJxOS8yY2lJcDNjMXZrbjFPdThZ?=
- =?utf-8?B?YkZ2ODkzT2didE9WalR0K3AvVTdvWUNaMjNadUpuTE5QdHhOZWQvR2x3M2cy?=
- =?utf-8?B?aE5admxNMGxOZmNZN3c0U2NNYUh6VWx0TmtYZXFjbTgrQ1Vod2xaWGNoQkwv?=
- =?utf-8?B?Q0VZR2lvQjVkUmNIZW54N2o1TVcyTmZ2a1JFYytFNXNHeitDdERpbHk5enoy?=
- =?utf-8?B?ZmU0ZFZSMFNkQ2xqUG1FOERiUjBJaUg4SVVBdWFCK3lLSU5yc2ROL1Focnd5?=
- =?utf-8?B?QWRxTUw4L2l0eGErNXh5dXZMTGNwVTdNQ1BJRWZiL2NWYWRnNmVXT3Q4QUQ2?=
- =?utf-8?B?ZTVueW42czh4U2N0TVBHV0JoSlFMYzVmSWdOVFV6dkNFVXp1eERXMldWV2ha?=
- =?utf-8?B?TEtZVUlVM0RCTVZOZitNSGZkd0tqbHY0TXhjU3NqV3RtUXBza1U4ZHVucTlK?=
- =?utf-8?B?bEEvbzNvUWZNQXR5Si9sdFF1Ulc2M3hGMUVDeHBzMG9iVVRrcDJ4UmtmcGo2?=
- =?utf-8?Q?9VIuu6mRcmd6z?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|7416014|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cWo5dythUWhhR1I5VmtxbjlsNHF0RzB1Q3dSTndMaUxZdmZ0NjBNa3lEWER0?=
+ =?utf-8?B?dHNBMnVxSDdqcTYvQnlFQmFZVWxua2UyNk82WlB0SHloQWltMzVHVHNnVHV1?=
+ =?utf-8?B?QUN5WXRNNjVRRFdMY0s5Vzg3U01aTnFUR1g5ZkRXRXNLUkJzZHBCS25ETGh1?=
+ =?utf-8?B?ZnZVb1FKTERTL2wrVUxVRU4zd3F6RTdFWUZVUjY0eHdhZ1kyVDJnNnpiYml0?=
+ =?utf-8?B?REpnMThEV1kweUNTZWN3dnNnZXRDbG1aOFRDOTY0YUwwMVlUSUZKUE4wZW9i?=
+ =?utf-8?B?K0hxMStyOGk5MkR0cXZhei93QWx4czlFS29hZUQrRjRDMDBIb0xxcWM0Z3lC?=
+ =?utf-8?B?SXNWcjVEQ3NlTVZmZGd0TUY0ald1aGtmaXZtTmp1TVF4SmNqbWtwTThqcTRH?=
+ =?utf-8?B?UjRCcEZPeSt6OG40cGd2ZkZiR1NxZnhyNGZyN3hONnhoRVJNS3pEdDR6V2Qw?=
+ =?utf-8?B?V2ZXcHJHbEpUZnM5QUdURkh3QnRyK0d3SFVwazZsaHpPUlRxOFU4K3RSdEZT?=
+ =?utf-8?B?TlNlMFlXV01RMHdiMVVsMW5jMk5SUlFHaFNFMWU1U0xweVVxM29HMHA5b0V4?=
+ =?utf-8?B?M25Zd0lBNGc1MkhQSHNVZ0E2czlsa28wc3hDazVzNnRqODNlRHlwTXpiWG5R?=
+ =?utf-8?B?QXVsZ1EwaGI2NzVIRWh6NWNnVXlWZ1djS0xYZy9VNEJNRDJzelpQNkxJTzlR?=
+ =?utf-8?B?c3pGWFR0SnF5SjZwSktjMzRpVVI1M2pHa0xZcHExZXRYcWdNUVhpMC9PcDhT?=
+ =?utf-8?B?bnJKTURmWnA2UlgrQ1N6emdyWTlPR3ZaTG1qZFZmUTdCRWExMmNiK3dGTHFT?=
+ =?utf-8?B?WDlkVWovS25oNVJ4a2FYUzRGdXY5WFZZM3Y0WDJlOHRUdEVmUVN0emZqdXF0?=
+ =?utf-8?B?Q1dRUi9Jd2N5YkdLVFg2Nm4rUlhTbnVyeXZXV3cydzJKRSsvTzZhRG1rSk5n?=
+ =?utf-8?B?bWF2SnRPNHpPemdhU3pNUHFNVEswMkhPd3RGV1hzTC9tcGl2clRuYkVaR3lE?=
+ =?utf-8?B?Qm1Vb1g3NFIvVkgxYUtVMCtRMVlmNU9HckRTQ3dYY29DeDEydzE3MnVza1l3?=
+ =?utf-8?B?N0ZaRWlOMGhyZERJamQyRXNrdTYxMnV2YmtoaDRoQ2QvWlJXb282SFJFcmkx?=
+ =?utf-8?B?WElSTDFReHhTVkx2NHV0VW4xdGRSUFpQdFpBSWxXOTZkWENzOHlGS1ZFcHp5?=
+ =?utf-8?B?MkYxVk04TWlOV213UHQ5N0J5cnFmdWVqUExnOVlZdGFhaHNvT2xGZnIrZjlB?=
+ =?utf-8?B?enAvbXhjVEZnd1R3dVQzanNnZGZwYkExOTlpOHhaVWdmb0o3bkJDM0w4N3Vx?=
+ =?utf-8?B?NUdvNnFuM05OVGs4emI2SDRWTzJUWGJSaXhrbEZHYnFjcDYvejlUencrRVJr?=
+ =?utf-8?B?MDVwOGVUSjFacm96TmUyNGM1L3NTM3JqUUtiMnpvWnFUQjArdjZjemVaekVW?=
+ =?utf-8?B?UmdRb1YwRzh1M3NLcGZmOEc1M2ZWZ24vbzJ2OThqZ2FkMHFrVG1YcWtnamRt?=
+ =?utf-8?B?cy9ZanRVUHhoSVV3OWhwYytRMkMzNWc0TDloazdDWFlwaFZReGJmYTR1NVJ4?=
+ =?utf-8?B?SURIZ2Z6MTVEalBrN3Y0bi92Y0ZwV00zdlRTcGlCbG1wUEZWRis4N1hrZUdh?=
+ =?utf-8?B?NlFqVGhBQVB4RXhpTW5ldmp0TTc0UW5QZkZWNzZGeG5GTXUwWVJQWHlYUjBT?=
+ =?utf-8?B?RDlPQ092bWFtZFpJaHo5dWxsRVNVWS93OWRpeGpzcnVENjFrRFlKaDlnQitz?=
+ =?utf-8?B?aDhWdjkyaUxPWHd4a0xpcXBNa1ZLWjVZTDhISFMvdk1MclR0NkgwSXdmajBV?=
+ =?utf-8?B?ZEZXb2JnTFdKZ0VnUmZMVlVQTU42VU5jSFQ2QVpCazVXUXEreDR6MjRNNUR3?=
+ =?utf-8?Q?P0u5nviHyjA7H?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(366016)(7416014)(1800799024)(7053199007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bmxsN1VNZFZ3MzJPbmRmVXgzNmk2bGNNcUlIZU55bHZVNTNMdWpMVEJCWnhr?=
- =?utf-8?B?NmJsTFR2RVF1cWQ3T2ZKSzlQWUtCVks2d2dXQnFKRHViMG11WE5iQmlIYTVY?=
- =?utf-8?B?ck54cVQwOWxLdmFlRDBYaE9TSTJxbXBvRUZ2UXZvM0hvQTIzUklqNXZqamV4?=
- =?utf-8?B?MHhqSUQwS1NDSzI0NWNuTjlrODhuMjlmSm0va1k5YlRpZ3FhdFVTUzR1RUlS?=
- =?utf-8?B?V2NPSWN1VTVjMmo1bHhEa2FtN2U5cFhsVno1UTllTU9WQ2JYZ2VaUlRvN0ZS?=
- =?utf-8?B?czdlZy9OS2FnT2hHRnU2NXdzRmNjamwvOUMyQmJTNU1GcEUzU1BYTjJsRzBu?=
- =?utf-8?B?WGtkbmpVWmxYRjh2VUg3ZG90NXltNExSNWlJYm01bitLNTNSRjN2bVdMNVlT?=
- =?utf-8?B?cXROUkQ5RU5KTTRFWHdYRkRPdzZEVUZJT0swNDhDZWhsRC9mRU1KbjBoU2FU?=
- =?utf-8?B?MDBZdGl6cmpFVUhGSTZwVXFrMTFrTUpsTHZzdjFpQ1FpWWpjcHhOcmZqVkts?=
- =?utf-8?B?NElVZ2ZoRkxjZlJXcTdRV2ZCdVVncGxaSUpGdWU5Ulk4OEdvUzA2YXZybGJV?=
- =?utf-8?B?QnlKK1k3WHduc3JJMzJsZVN0TFZmKzV0SnBWTG8zb0JMN1pGN0d3SC9ZUG8r?=
- =?utf-8?B?Rmd4ZmtlSXZTcHczZ3F4R0JzVFRkMGgxejk5N0l6RW1OeE9mWnNKVWZGSlQv?=
- =?utf-8?B?RTZHSzc4RWg5MFNEaE1RNnpoNUw5dEhiNWJZVElrREhtejBDbzlVRDl6VmRK?=
- =?utf-8?B?MnNpS1NUUnp3c0JjWTNMbmFzSTB5WXRrTmJBWmN5REV1NlpZMnZjVTBXR3ZJ?=
- =?utf-8?B?bHRqdkluL1kzWnAzVklyUlNQVGQvOFA3RWwxVWFhTVhlTXUyRm9aQUszeTlQ?=
- =?utf-8?B?a3dWUnBFZFRXZiszYUs2MGJYZUIvL3YxSnVSYUo1cENIWk1vUnJXYTB3all2?=
- =?utf-8?B?MWlmd0EzREtkRzI4ZnQ3NUZpNWN2Mnp1ZUh0enF3L0E5ekNsVzNLeEtNbE5W?=
- =?utf-8?B?NCsyM1dHUmdOTmtqcWMzdld2V056NFA3TnkxcnZFMm1ZMkF6dGNMeWczOG1M?=
- =?utf-8?B?R2tjdHN2Y3VBVVZMK1d6aFJWZ2pUVUxuMGFyT3dvWDRBVHJMeHhDTDUrTXZi?=
- =?utf-8?B?ZVBMVjBCYnovc3dVSDZoNTRSQjNZeWEyNlZGRnVucXNyZzIzaExBV05PTFgy?=
- =?utf-8?B?VlUxYUhwVFo0TXJYWmMvTTBwQldCTnZEaXdhWE5PWW1UelVkYnArdWxFdmR3?=
- =?utf-8?B?RGREMG5meUpPUUdEa2UxR1Zsd1hzNytWR2ozRlJ3Zjk3ZVZwcUREOG1QRUhM?=
- =?utf-8?B?Z2N0eDRiejc0S2xJV1YxSDdvR2RBOHZvalNqUU1QeGNkL2RDOE84RjlLOEdn?=
- =?utf-8?B?cklhT1FOYmFvZ3VadUdFeVFtTkM3endwMHhpU2VrUDJtcksvM0QwOGFuUVc5?=
- =?utf-8?B?TjdNOGxCTjFId1lhVHUxZi9YVVhYQkI2NlJHcSt1UDh5Ly9NbmtIVmRuMlo4?=
- =?utf-8?B?Z2t4UmdzTnErUGxGUGE4ai8vT01pTEZXcHZTSzdoZTltbjZKVE01ZTUxOENP?=
- =?utf-8?B?RWt3dW5sdDIxRjEzYll6bG5VR3hZWmcyTWlwSFBReEhmTUd3OFJHM0oySGlO?=
- =?utf-8?B?YXIwdU5KNGthcjlJTEhDL0FpYjNGaEt4cFh2dHJRNm03V3Ivd2locVVjbXZk?=
- =?utf-8?B?Z3pVazlCdEVNbXJwOTFhcllEbStGOXgva21UaDdaWTlwaGM1S2lxQzZqOU5K?=
- =?utf-8?B?c1ZMZ1hQOFVCVjdTMWNncW1MMGIyaEVlM090ZmcxQUt2eVAyVHgzTE9tN0JD?=
- =?utf-8?B?WnVsSXVSU3ZGVDVocFpRV0MyNkZ1NFhqVXJXYTE2cEx3ZnhzRlZsUmVxazRV?=
- =?utf-8?B?dG95bW80RnZDV0MwVUh5b0c3aTZ5bm9kRkZ3cy85TGNEWkY0Yndwd3o2YVZt?=
- =?utf-8?B?N2lXdFhTZ1hUTCtXRkwrTjBKOWI3eDNFanR5VHVEYmp3Ri9FRGhnMkNmeFlt?=
- =?utf-8?B?MDhSUis3aUFiUloySHliWXpZSzJsR0owRU9tZXQ3QVdYNEVTUllETU1xVHBW?=
- =?utf-8?B?TFRUTVNjc3pzdVFQZ0FldkNWRmpla0hQTDI2MEtFNC9LOVV3Zy9UM014R1RE?=
- =?utf-8?B?VXJSZ0cyME5wa2pLVVYvNTBjaURvK3h4MHEwZVEvaDlCR2x4SExTWHptMWdL?=
- =?utf-8?B?Znc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NTRVOEZldE9JZmlBTE1EalpjQU9OUkd3VnVENW5XbFFBMkl5UmJkTVJ0OW94?=
+ =?utf-8?B?T043Z0pEVituV1FycWtnTHVpM0VBTU9pSGNXRWRBbDlpeFZjQ3NSM052R1pX?=
+ =?utf-8?B?SFBGSFdzM0dXUE1XOWptaCtkcnIybnQ2QkhjdHJUWmZ1Znd6R3J5MjBVZ2tz?=
+ =?utf-8?B?ckNmd0lPT0JMUCtaaFJvS1l0aTY0OUl4MldoaGhyWWlOamtqM0ZvdE5pZkxm?=
+ =?utf-8?B?NVdoVTRNQkJaeDNrRDBOMDU0dGpDa1FKMzE4K2FrUllUUFR6NjFpTmFPbGRV?=
+ =?utf-8?B?K2s2UGdHbFZQY1dxTWtKZ1J3KzZPUld0Q2MwY1FWdnNOMFhGSEdJc3hISnlq?=
+ =?utf-8?B?YjFVTFEra015bnBJWmdIOGVPZHFIWkdVT2hxcmRDcXA1ZjhTWEF2WU5Ba3JZ?=
+ =?utf-8?B?ck1tNmFkMlV5WmRMVDFyOWRVNzVtK1hjbEVKUVBwY3hvc2FlWHpXczBsR1dv?=
+ =?utf-8?B?bW5GTGIxQnZLNHRzd1RjREZnNS9CNkVZMWZvQ2E0RFJPUGpoV042Mm0vRWJ6?=
+ =?utf-8?B?Z0RLbFJtbnU5OHoybm1mbGNCOHpRY01uNzltYkRtYXB0ZXhZelV4dkkvTzRj?=
+ =?utf-8?B?Sk9nRjl1MWFCV21hWWs2WUU0SzJnWUk0bGp6ZDllcUNlMnBmRk1FZWlSRDJj?=
+ =?utf-8?B?SVJKUCtYdXI4N09GMTNILzVLUktiMU9PTm1UTFlLTURBaW9yNC95S3RZTjVV?=
+ =?utf-8?B?bUtOYVpnVnQ2YTBpdTcxS2Q2NVl4eXFUN3ZDM2hOWW1GaFhOSUtTaEdIZUZU?=
+ =?utf-8?B?SUI4SlRtOG9UdWNtbTcrMm9WL2JvSzZJaTZSazk3UWRwNHFmT0E4K01EazlV?=
+ =?utf-8?B?Y2l6aHp6R2JoRTdlT3lidnBCUEhiQ0FSUXpxMUJPeVRiSVAyRGV6d1l1dkFP?=
+ =?utf-8?B?ZDhwV2duN3ZQVnlua2ZjQmRRdHZSVHpYcmZpL0hmVms0R0NuSXhWV1c4bnlI?=
+ =?utf-8?B?QXFvNWdwOEJiaFRqYnUrVDdlZ1QzK1AzSzBNQ080OUNObkc4Z2lVamx6YitZ?=
+ =?utf-8?B?UTd2Nm9FWEdUQ281eXBwMml4M1IyZjVhQ0E2R3lKU2NEa1o3V2QvLzF3Yzk4?=
+ =?utf-8?B?dW5vMzZIaW9MS2NEdG1FN0NRY0phai9aRXYvQnJBczZtM0RaT3g4NVQ0aWla?=
+ =?utf-8?B?aENaUFdUV0luc1pBd2tTV1ZiMzBYNklWQXZSUW5JSEJyUnVGM1pQSnJmRkp3?=
+ =?utf-8?B?cmFNbFJ2VTg5WHM5TFdPY3cxaUY3cUFXa2Z4eDRidExDanI3OHpYVzAzK3pT?=
+ =?utf-8?B?dXd0TC9nc1B4d3JzWGJ5K0E3a0Q3cG4yQkhmWTdES3hCdXRkbUliMlVJdlJR?=
+ =?utf-8?B?MUxFMEJpa1ZjTUIwNXFyTkp5ckpMMGF2cDUzNy93aVhWcG96M29JSmFub2FZ?=
+ =?utf-8?B?NDd4KzJWOUhSZG1tazc0dWE0UGhKNkVmQ3dMdEtQT3FRUjJLQXJBcXFRcWp0?=
+ =?utf-8?B?UVFuZS83N1RMcnArMGl5bWovNThmQ2NSRGVHU3J0MmxQQlltWi9xL25FVVRU?=
+ =?utf-8?B?SHYxV3VoTXpUMG1ES0VGY1FRZVlKa2RkK0JiVisxQ1o2K1FUa3c0cXpjOVRU?=
+ =?utf-8?B?bldOci9YOEhOUkMxY3pldzhwQUVXVklVSS9kUHk3bTliTFY2WWNnSkhCZ3R3?=
+ =?utf-8?B?cVN0SVdXK0tEcUxxcmhhbVhYbjA2YnpCb0QycU9aTHNYVkpLck9rcVg4alBv?=
+ =?utf-8?B?TWJ2c05LU2wrR1VsQVM5ZWUvd0ZVRGlXY0FqLzRYM2tmdTFxS3ByNjF6QWxZ?=
+ =?utf-8?B?eGllc1pOdEFGWFVCeC9VKzh3RXpiTFc4SjhCcGdTdWpmNXVwL3FxMzJWZmxz?=
+ =?utf-8?B?SUd0ZmdzQ0laMmNQSU5sMWwvVkZSZFNJT1VONFd0V0wwWmF5K1dXS3BTMTZJ?=
+ =?utf-8?B?NFFBaVdEWnZFK1pxRkhYVUkybTVZTFp2ZS8xL2EybERIdjdKTEtWbFRtTGh0?=
+ =?utf-8?B?d0FaWlZ2TmlXcWwxUkoxdXFraFZqNk5FbUZtNTN1YmtROEhWQ0Vub1M1RFFO?=
+ =?utf-8?B?YUJsQkMydjRvaUpCQ0lGQTVERldqVVRXMHFuWE9qZDVwaExOd0tURmFqYnk2?=
+ =?utf-8?B?MURhWkJVSGpoNFZXb1FmNXh2VzZRcGZFQWxQaFcvaDRPelVBOWVNS3FLSnRR?=
+ =?utf-8?B?c0hBR2RneWRrL2tHV0tBWnc2RmVQQklhZThzRW9ycmg0cHgrRVRORUNrNVRS?=
+ =?utf-8?B?Q2c9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: ef41dbe8-0c0d-4262-758d-08dd348b3b29
+X-MS-Exchange-CrossTenant-Network-Message-Id: 57672a21-3984-4caa-40dc-08dd348ce8ef
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 11:04:35.5443 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 11:16:36.6332 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nM83MohOshp4YghHyq4zJid9nRCYy+4WtRdY+HqISBNqVoXVOMA2cHVF2HocIxCDj4lCQrl3KuxtFzsFQA39WMPPyVKNxsJPrcPfQIlotvA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR04MB7478
+X-MS-Exchange-CrossTenant-UserPrincipalName: FyTlpDqnhQX9qJbtom8WTUsxE+pKqTB0FwyAcJHnmPRCu04NecYDAY5QCYwctnp2HdUZBgChWVQ0MEZflhRtRhIAgRebxqGv6B8Q7znKPOA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8005
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,83 +182,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Dmitry,
 
-On 12/19/24 7:26 PM, Marek Vasut wrote:
-> On 12/19/24 4:03 PM, Quentin Schulz wrote:
->> From: Quentin Schulz <quentin.schulz@cherry.de>
->>
->> A FIT image which is NOT using -E when created by mkimage - that is with
->> image data within the FIT - will fail to apply FDTO if the base FDT
->> image node does not specify a load property (which points to an address
->> in DRAM). This is because we check that the FDT address we want to apply
->> overlay to (i.e. modify and likely increase in size) is not inside the
->> FIT and give up otherwise. This is assumed necessary because we may then
->> overwrite other data when applying in-place.
->>
->> However, we can do better than giving up: relocating the FDT in another
->> place in DRAM where it's safe to increase its size and apply FDTOs.
->>
->> Suggested-by: Marek Vasut <marex@denx.de>
->> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->> ---
->> Tested with extlinux with:
->> - conf node with multiple fdt entries
->> - conf node with base fdt + conf node with fdto (stored in fdt property)
->> - FDT image node with load property (behavior unchanged)
->> - FDT image node without load property
->>
->> I'll be frank, I don't really know what I'm doing here and I'm on
->> holidays for a month in a few hours, so take this with a bigger grain of
->> salt than usual (hence the RFC). It works (tm) for now.
->>
->> Cc: Heiko Stuebner <heiko@sntech.de>
->> ---
->>   boot/image-fit.c | 17 +++++++++++------
->>   1 file changed, 11 insertions(+), 6 deletions(-)
->>
->> diff --git a/boot/image-fit.c b/boot/image-fit.c
->> index 
->> 7d56f0b5e6ed39a75e029b09dc95d605835c0f91..088482c4d5d2e194cce66f10b0acd9e586f826b2 100644
->> --- a/boot/image-fit.c
->> +++ b/boot/image-fit.c
->> @@ -2392,13 +2392,18 @@ int boot_get_fdt_fit(struct bootm_headers 
->> *images, ulong addr,
->>       image_end = addr + fit_get_size(fit);
->>       /* verify that relocation took place by load address not being 
->> in fit */
->>       if (load >= image_start && load < image_end) {
+On 12/19/24 10:42 PM, Dmitry Rokosov wrote:
+> Sometimes, it is necessary to provide an additional bootargs string to
+> the kernel command line.
 > 
-> This has to be updated to handle the mkimage -E case too. Basically, if 
-> the FDT is outside of the fitImage tree area, but still in the trailing 
-> blob area at the end of fitImage generated with mkimage -E, then any 
-> modification to the DT which would result in resize may either fail or 
-> corrupt the surrounding blobs.
-> 
-> The safe but heavy handed option would be to relocate unconditionally .
+> We have a real scenario where one U-Boot blob needs to boot several
+> kernel images: the vendor-patched kernel image and the latest upstream
+> kernel image. The Amlogic (Meson architecture) tty driver has different
+> tty suffixes in these kernels: the vendor uses 'ttySx', while the
+> upstream implementation uses 'ttyAMLx'. The initial console setup is
+> provided to the kernel using the kernel command line (bootargs). For the
+> vendor kernel, we should use 'console=ttyS0,115200', while for the
+> upstream kernel, it must be 'console=ttyAML0,115200'. This means we have
+> to use different command line strings depending on the kernel version.
 > 
 
-Will do.
+Can't you have both in bootargs to handle both versions of the kernel 
+with the same bootargs?
 
->> -        /* check is simplified; fit load checks for overlaps */
->> -        printf("Overlayed FDT requires relocation\n");
->> -        fdt_noffset = -EBADF;
->> -        goto out;
->> -    }
->> +        /* Cannot overlay an FDT stored inside the fitImage, so let's 
->> relocate */
->> +        char *of_flat_tree = map_sysmem(load, len);
->> -    base = map_sysmem(load, len);
->> +        len = ALIGN(fdt_totalsize(load), SZ_4K);
->> +        if (boot_relocate_fdt(&of_flat_tree, &len)) {
+> To resolve this issue, we cannot use the CMDLINE_EXTEND kernel
+> configuration because it is considered legacy and is not supported for
+> the arm64 architecture. CMDLINE_EXTEND is outdated primarily because we
+> can provide additional command line strings through the
+> 'chosen/bootargs' FDT node. However, U-Boot uses this node to inject the
+> U-Boot bootargs environment variable content, which results in U-Boot
+> silently overriding all data in the 'chosen/bootargs' node. While we do
+> have the board_fdt_chosen_bootargs() board hook to address such issues,
+> this function lacks any FDT context, such as the original value of the
+> 'chosen/bootargs' node.
 > 
-> Please print the error value in case of failure here, it is useful for 
-> debugging.
+> This patch introduces a read-only (RO) fdt_property argument to
+> board_fdt_chosen_bootargs() to share the original 'chosen/bootargs' data
+> with the board code. Consequently, the board developer can decide how to
+> handle this information for their board setup: whether to drop it or
+> merge it with the bootargs environment.
 > 
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> ---
+>   boot/fdt_support.c    | 5 +++--
+>   include/fdt_support.h | 4 +++-
+>   2 files changed, 6 insertions(+), 3 deletions(-)
+> 
+> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> index 2c39b2dd14b7c447bc4c7c8fad64e22cb00e88e0..49efeec3681f7c97341ccdce596bcaa4e1f037eb 100644
+> --- a/boot/fdt_support.c
+> +++ b/boot/fdt_support.c
+> @@ -321,7 +321,7 @@ int fdt_kaslrseed(void *fdt, bool overwrite)
+>    * board_fdt_chosen_bootargs - boards may override this function to use
+>    *                             alternative kernel command line arguments
+>    */
+> -__weak const char *board_fdt_chosen_bootargs(void)
+> +__weak const char *board_fdt_chosen_bootargs(const struct fdt_property *fdt_ba)
+>   {
+>   	return env_get("bootargs");
+>   }
+> @@ -364,7 +364,8 @@ int fdt_chosen(void *fdt)
+>   		}
+>   	}
+>   
+> -	str = board_fdt_chosen_bootargs();
+> +	str = board_fdt_chosen_bootargs(fdt_get_property(fdt, nodeoffset,
+> +							 "bootargs", NULL));
+>   
+>   	if (str) {
+>   		err = fdt_setprop(fdt, nodeoffset, "bootargs", str,
+> diff --git a/include/fdt_support.h b/include/fdt_support.h
+> index f481881ce640797e0f6204d599f008d0e5dc2bf7..7731feba5f068f82c8ee25f18a9f0e57729e2bd8 100644
+> --- a/include/fdt_support.h
+> +++ b/include/fdt_support.h
+> @@ -231,12 +231,14 @@ int board_rng_seed(struct abuf *buf);
+>   /**
+>    * board_fdt_chosen_bootargs() - arbitrarily amend fdt kernel command line
+>    *
+> + * @fdt_ba: FDT chosen/bootargs from the kernel image if available
+> + *
 
-The function returns 0 on success, 1 on any error, not sure it's that 
-useful as it'll always be 1. Do we want to anticipate this function 
-being updated to have other error codes in the future?
+Missing leading /
 
-Cheers,
+/chosen/bootargs
+
++property
+to highlight what this path refers to.
+
+Makes sense to me otherwise!
+
+With those changes,
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
 Quentin
