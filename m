@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F19AFE77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 21:29:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7273EC02183
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 21:29:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A6BC806B7;
-	Tue, 14 Jan 2025 22:29:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 80B9C8060C;
+	Tue, 14 Jan 2025 22:29:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pNtquZ9N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hwn2J7qv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10A798069D; Tue, 14 Jan 2025 22:29:11 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id B0827806E8; Tue, 14 Jan 2025 22:29:13 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 828C88022E
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 22:29:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 917A88022E
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 22:29:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b98a2e3b3eso330898285a.2
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 13:29:08 -0800 (PST)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7b700c13edaso332512885a.3
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 13:29:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736890147; x=1737494947; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736890150; x=1737494950; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Hxodn4dvrGXCrK+Vr0Od7GBEw0iqywODBL93OnVIu3s=;
- b=pNtquZ9N7J+rLcCcrSxi05MxY/SxjiGqITHJkSOAuEG8VPWWaEGOvutBxWymTtAV8r
- GiCz1cuLNF6IrXoLO2VPB9xPx1qKjV7/5pVYVyctuPwS4LPkgnzZHzPLmBIEBLoZYxD3
- tpfg+KeycW3fpr/GOYS2R3ZIA7fs94jWVYnT0=
+ bh=2TTQrIY0ojZwiVnvrPn9SJEoFyG3W4y35KluO3+BVOU=;
+ b=hwn2J7qvQjNOOY5FZ7iWoBGEuOK62mgwtpJt/UsmoZ1doki1L83oJK4pohqsYaKYIF
+ vZXoODdLbSuy9sPuLso8RG2aKF6Z3x0OHay0iruGgzMVtGTvepKol/bdzIo8l8SyDI22
+ ueTp3aUvzh7IJJw51OgcrYmN30RWKrqVR8ORE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736890147; x=1737494947;
+ d=1e100.net; s=20230601; t=1736890150; x=1737494950;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Hxodn4dvrGXCrK+Vr0Od7GBEw0iqywODBL93OnVIu3s=;
- b=SElM/Pkbe9SSzU+TEgGgNNUmqsUqXRtWtq+wlMeylhGf5yRXTcSy+8Aq0/qYy8w7yC
- URjPjLr0rIYHOyrdq1CCREVGyQ/SqonbLNA5MH/6S4CIb/t28Ekl4XXukti2bqRxZr7q
- FROq5o6tj3MYD7qjJuT2oCp/AjaHivic0W7uHDItzhMzFcDlNmVELypVbDQLSikJ2Zfs
- Hw8B6PQhLOKSPfdlUaoX6wYeye6UIBHUJJxkY0dw7prgm22hoStlGGGCM17kTvasRF7E
- XB04sHFpMdRUt8IzzaScKzHexCGHBcFuus8nWhWnKBg5KL34HGrLmC5vYGIGtqPe/vcp
- +6Rg==
-X-Gm-Message-State: AOJu0Yxu7A1nVrBmc2aLlTfcWgKL0SlqFJThnq+V2u7eXorzGRGvyJLe
- euYyqyvWmrBTFki/rI3XhKOkifL5tsr+3X+vfTZcWTpV/I97mvYK5EwVoR23oXQ=
-X-Gm-Gg: ASbGncu+EVtqSNCfyL7VBktvqlWq2uYD56qxW9zuC1vYz/wKZOUECzJxBMayCvTECis
- DR4wEkH9U/Yg5wFIpSc8eySlrxPMNwoBS8E4mlr8KnshMYXlOOKh8Ckt7sV3IBrDZwXaKRGNzhw
- KmSlJ7w0bze4vV+h1Xfu0M3kIhFAMIihuKxRhGqRfPMG1TyMdpNuSJ1/hRNHT+05TV7IxAzbgK4
- B/cL0wzgvLVsZVOjtdk7Ogtqy/E9AhUum6Zq2CmctiLc243/Ozr
-X-Google-Smtp-Source: AGHT+IFImLW/cY36w7AzELoXGp0EU+SFQ5Q9U+4740KaRC5WFMP9/2ORNIwm/DFKlZyJ1smRT9OpNQ==
-X-Received: by 2002:a05:620a:4721:b0:7b6:cd90:c0e1 with SMTP id
- af79cd13be357-7bcd971a16bmr3626224485a.37.1736890147395; 
- Tue, 14 Jan 2025 13:29:07 -0800 (PST)
+ bh=2TTQrIY0ojZwiVnvrPn9SJEoFyG3W4y35KluO3+BVOU=;
+ b=S9SiNNbLLoWIZJ2CVnl5DszmmjvrGZP+znjKFHsDKYKvXsER33+Jx4jr3r3sYu1mfh
+ F1yC70G9rT2iev0SYkOrpaVICFmyPHuirjTCVxwBcPSlWHwDmH98R/fzBfDfNaMsqGTp
+ MPgXc8Mlc7+gBdMxMrfsnnF5kFC/Rr7PXyQ9OfH5ZrO46cw9PTOvMV0SM1UnT/r42KQz
+ jStv5+EYdWuGOqUpqCS08R35dJ1ZFQD/Z5y0thrKc41KnYPZJVN3YIRI45atngAr5DAh
+ o2xmxgPUtywq2yw/rzHUvCcxW+iJRke1NhULhv2DMZHNmtKQkJOIa4upD1tDWmLRPw0j
+ sn/Q==
+X-Gm-Message-State: AOJu0Yy26wsMjAlSDtkokk8Nhp6QJDhnurFdlOTyWlhSwYVUyJQRfESq
+ 06wIihmWS1XlqwBb47s2H9QP2vYtpcNgE/Hv5XJecJIORUogsWcgAw2wmBkgs5o=
+X-Gm-Gg: ASbGncvO/YZAZLePgPu0wOgs2a0/sTKOdI7XEXD+WmMrhavvNveTH58dvlBOGGbrqMm
+ 3ZlUd2eug+Uq8Pk4L7wcHim6sjH3mOCPXbB65qgRAk2P9affLFqbi8jBtqP9/pEo+Lao4IUrTwM
+ v57NbPp8uEcdbf7oF1IDMCyaeceiXdFIZDmgC1wpOUGTnPZlGII90nW7rZzV5dNf8zPziGVq3+k
+ E4f44keZl8T37SWgshcKjLDBN1Gdx6Hq2LEy7A2POZY37OolXQc
+X-Google-Smtp-Source: AGHT+IFFx3nlxRI/QRrZcZzRjQAwLQPYUDAEh+IWYwT/yl0bbFqISFioCSrHMIxxs0zkdX3PgDAP9A==
+X-Received: by 2002:a05:620a:2416:b0:7b6:e697:2090 with SMTP id
+ af79cd13be357-7bcd96ed1d2mr3769522085a.2.1736890150499; 
+ Tue, 14 Jan 2025 13:29:10 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7bce324826esm642891285a.41.2025.01.14.13.29.04
+ af79cd13be357-7bce324826esm642891285a.41.2025.01.14.13.29.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 13:29:06 -0800 (PST)
+ Tue, 14 Jan 2025 13:29:09 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Svyatoslav <clamor95@gmail.com>, Marek Vasut <marex@denx.de>, 
+To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Stefan Roese <sr@denx.de>, 
+ =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Jonas Karlman <jonas@kwiboo.se>, Pavel Herrmann <morpheus.ibis@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- This contributor prefers not to receive mails <noreply@example.com>
-In-Reply-To: <20241120153642.861633-1-sjg@chromium.org>
-References: <20241120153642.861633-1-sjg@chromium.org>
-Subject: Re: [PATCH v3 0/3] Adjust how autoprobe is implemented
-Message-Id: <173689014483.93138.17921853829552422063.b4-ty@konsulko.com>
-Date: Tue, 14 Jan 2025 15:29:04 -0600
+ Alexander Gendin <agendin@matrox.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>
+In-Reply-To: <20241206225438.13866-1-raymond.mao@linaro.org>
+References: <20241206225438.13866-1-raymond.mao@linaro.org>
+Subject: Re: [PATCH v3 00/10] SMBIOS improvements
+Message-Id: <173689014760.93138.7098054700427646114.b4-ty@konsulko.com>
+Date: Tue, 14 Jan 2025 15:29:07 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,14 +106,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Nov 2024 08:36:38 -0700, Simon Glass wrote:
+On Fri, 06 Dec 2024 14:54:17 -0800, Raymond Mao wrote:
 
-> This little series makes a minor change to how autoprobe is
-> implemeneted, as discussed on the list:
-> 
->    https://patchwork.ozlabs.org/project/uboot/patch/
->       20240626235717.272219-1-marex@denx.de/
-> 
+> Motivations for changes:
+> Current SMBIOS library and command-line tool is not fully matching with
+> the requirements:
+> 1. Missing support for other mandatory types (#7, #9, #16, #17, #19).
+> 2. Only a few platforms support SMBIOS node from the device tree.
+> 3. Values of some fields are hardcoded in the library other than fetching
+>    from the device hardware.
+> 4. Embedded data with dynamic length is not supported (E.g. Contained
+>    Object Handles in Type #2 and Contained Elements in Type #3)
 > 
 > [...]
 
