@@ -4,66 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02FEDE77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 13:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C48EE77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 13:53:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 870C18060C;
-	Tue, 14 Jan 2025 14:48:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
+	by phobos.denx.de (Postfix) with ESMTP id B55D380657;
+	Tue, 14 Jan 2025 14:53:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="ZSYy616y";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="bqdzO2/j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFD6880657; Tue, 14 Jan 2025 14:48:01 +0100 (CET)
-Received: from mail.per1cycle.org (unknown [IPv6:2a01:4f8:c013:8d4e::1])
+ id 3056B80703; Tue, 14 Jan 2025 14:53:53 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20611.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::611])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 798B2805CD
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 14:47:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AACB8060C
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 14:53:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=per1cycle.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 171193F708; Tue, 14 Jan 2025 13:47:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
- s=dkim; t=1736862476;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dWeQ0xvDXstfobWgnb14RQXXMOsOZFTQIQ2/1bpIYwE=;
- b=ZSYy616yKyxkV4FIQWl6uEz2w55MtjDJ8K5qyFoklrvhaJKcaMhgbXUl/rDNQfv76WYbzA
- ShV8U4Xo9brL8VWxohgzgQ1ZoLiJr/f/whhK53Mkw9Sh2Vx3Tiyut8MysXdKgpgjwhTeYx
- l9TpDMq/kb1au6UqxeXJVm8EeyExWDEncXEFnhm43CbbjyTuDra6jiADNvUuF40ZmJ2WR6
- mmMHbGhANrk4zAGZeN7CUt+itvnHBNVtffhEGwckL1WqTlQw0rl4BCeV/zgLaoUUQ48Irw
- SKczi/qcXHBRp1jD1MzCuY9fc64aNVLylCtBj1VJ60Oa6Q4fhzXlDEBoMZu4Qw==
-Date: Tue, 14 Jan 2025 21:47:36 +0800
-From: Huan Zhou <me@per1cycle.org>
-To: u-boot@lists.denx.de
-Cc: Ben Dooks <ben.dooks@codethink.co.uk>,
- Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, Yixun Lan <dlan@gentoo.org>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jonas =?utf-8?B?U2Nod8O2YmVs?= <jonasschwoebel@yahoo.de>,
- Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
- Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
- Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>,
- Huan Zhou <pericycle.cc@gmail.com>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Padmarao Begari <padmarao.begari@amd.com>
-Subject: Re: [PATCH v3] riscv: spacemit: k1: probe dram size during boot phase.
-Message-ID: <20250114134736.swn65kx4hxz47nss@per1cycle.per1cycle>
-References: <20250114-get-dram-size-v3-1-83d5f88154d4@per1cycle.org>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sJJ+dOogB+5cwyjheoaZ5sBWSTxhzP/ycp2vSKh1gPI6yIjovtlDST2wbshdXPnVH05BvlnjhPspITJ7FpS8bycyona9bJMg+5pH5pZl5OzhbZev/PWlvtloriT3Zg5OIg1D8O7aQ6NcovQylKqUtCIdV9JLDNJ2WKlY37w6YG20ZZVzqfHIqzzS8JuJztxfoxyZdyRFd2VkFAZZ1++iC7ygqQ95hd+aMmS2ARF1IMoBHZW+hNhpw2en7Fp8ytP+WOlKRlenhQ52w/ew/MzDYwkdvEmZF86EtBArQ79pnAakcW0dGEfHgSl3fvVkE6+sXdzHromzEiXm3rUE2jrqOQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OuqvNEGSt3BpMGztEkXy8CGHRpWsHYxRhbPAkUf0GTU=;
+ b=wPCgE/o5TnArfyjB2dxknQTEHaPf8snuu/yLuJ/ArxAoJWovKOMWlvK8Y08xA9J5yC8KQZUDQbJIAgBJbVSa94hYKllwj0MwgYAoUiwUcSvszgewrrJQpsE7RwGNK/4Ao460mEN7whuQZHlYya3u5bEJV27vowKsO0uy5njgvek3OWNNSXbqAuDUkAb8/nanT6L3QQMivPVWA7TFjeF9YPR6GavF54e0ECDdNST+6XPEaxGo1QwStfiN5h/5nLMFcWeXiJw8MNRvHi3S+dqjxrjDTta8SflJzOmkGkTjW5LyVOqip8DKbLSHhvkByDFrt73HPilAOUkUTtQfHGgo/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OuqvNEGSt3BpMGztEkXy8CGHRpWsHYxRhbPAkUf0GTU=;
+ b=bqdzO2/jQWgLP1jFtLojkQ56zYmEdEtIX85+I+pB3o0svugAUsms1DxGpMoBh/Hzg1Gc5fygVZ54jtDHRYZx0vmsj5h2NaUqo/6GYNLIILqc49o0zK9mxxBHmfNZKdB4nBdwd90ai/yRHFpIgN+XCscGyjtifxNkgsy7YntMIgk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PAXPR04MB8125.eurprd04.prod.outlook.com (2603:10a6:102:1cc::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.18; Tue, 14 Jan
+ 2025 13:53:49 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Tue, 14 Jan 2025
+ 13:53:49 +0000
+Message-ID: <2b3e1050-7cbe-4dde-a298-5efb63cb4ebd@cherry.de>
+Date: Tue, 14 Jan 2025 14:53:48 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 6/6] block: Remove "select BLK" from non-block drivers
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20241220222612.1757884-1-trini@konsulko.com>
+ <20241220222612.1757884-7-trini@konsulko.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241220222612.1757884-7-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0222.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ac::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250114-get-dram-size-v3-1-83d5f88154d4@per1cycle.org>
-X-Last-TLS-Session-Version: TLSv1.3
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB8125:EE_
+X-MS-Office365-Filtering-Correlation-Id: 04a6db0c-3e07-426d-dc14-08dd34a2df5d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WWZwZjRiZVVac0ZBbndtL2w2TUJvdFdwOWhpeHhPcVA0OENTUDNnd2UzQzc2?=
+ =?utf-8?B?ZzdDMmZ3ejhKVTRKbzQwVWVpQ2Z2QnozSTdJcnkyejRjTm4xdUlUREIzUS9a?=
+ =?utf-8?B?aHdoNHhwdUhZRThzcEt5UnhrYmRnTEYrRGZEaVVjMERpS1ZwTi95MWQvMm9l?=
+ =?utf-8?B?TnZBMW9uS3NRQktKOWdvVnh2YVMvNSt6SUdUaDZHdnRSc3cydXVCM2d4Qkdo?=
+ =?utf-8?B?MmszMkxRQlh6ZWhqY0x2dFNONDdHY0V0TTFxZ28wYlZFMjB4TFUzL0ZsUDBB?=
+ =?utf-8?B?aFVqN3BSdXRsYmNvazdXckc5ZkJrRUlubFhWMW56TktnbFJsQUhqRmlhSzRO?=
+ =?utf-8?B?Y0pLcFpyTDJkN0tTU20zelA0MmNJTURpMzROem9RWS82T1BUYnRrWHU2T3R3?=
+ =?utf-8?B?b0V6eHRqazl5MXpvMVpGVGxwa0VOMi9udzlFZFlxMzA5Vmhvc0JiMm56enZu?=
+ =?utf-8?B?UXU4OHBlR1dKYjVvU0RlT0Q5akRWaG5zbG9hc2cxa0tFNHJOOFZsOUQ1ZWNw?=
+ =?utf-8?B?WldJN0trMzNqdHVFU1A2YU4wNkg4RTdsN1dhMFA4c1lweWlJMEMySWhtaklH?=
+ =?utf-8?B?RS9JVC9hZU1GbVpIanlHU2RrUkZiUDNDNnVpUkFlc0NKNmNDcmtNMm1QYURP?=
+ =?utf-8?B?d3FadHdPemVhbVZTa28vVzJrQ1FkTnJiWmxLS0lkZ0FvNExVcnV5RFljUlVu?=
+ =?utf-8?B?QUMzYnFXRk1PYUtCQ3YyZUpsT3VlcmVvWEY1eHNsd0ZMZExUcTQ5djZ4YkVU?=
+ =?utf-8?B?WWd1Zi9PTlJLdUMzY0R4N2FwNGF1cFBLMkYwaXdKTEduT2VYMjJLZWFCTlZr?=
+ =?utf-8?B?V3RpTmtDdWJnQjc4eU1OdUVac21JMnJNOEZ4Y2k3K1N1MjBxem81cDljZUZx?=
+ =?utf-8?B?S0xCcGprUUFuRU0yZmxVUjV5clFTd0NGbml2WTlaZHNpWWJ1T3VrcmRNK1B2?=
+ =?utf-8?B?M2ZDc2hhNk1vWEJSZFBJdTlEalRsNEFQalQraDZUSjRRZGRvM3hjN3lHZHBv?=
+ =?utf-8?B?T0xMT0treWIvQngvaDVWV3pkQzhROFc4K0tUTG1OSFZDNmwyaVBvSVVzZ2hY?=
+ =?utf-8?B?N3V1VllxOVAvMEhIamNZd0FMcjFqWmgxYk80Uk1Cc3Vod2dEaUt2K1BHU1dl?=
+ =?utf-8?B?a1p1dW91ekQrbVJPbGVUOUJndElreXdCV0djVGR3aGVEQzg4TVZ3QkUrbkRi?=
+ =?utf-8?B?ME1EdllPLzZLbm1TNlcrUTFUY0IycGhxNngvT2d2ekRBS3VOVTdSR0RTUFFh?=
+ =?utf-8?B?cEdTSU5qWi9tOUFXWW5sY3lLNXpFelFhOUI3dmZQdlNhSExFd3NUbHd6bFhP?=
+ =?utf-8?B?LytyWHh6blNVNDU1cFQ1SDd2N2Q3cDlSSElTRXpvZEh4a1EwcEFheVFPNFd2?=
+ =?utf-8?B?NEZsYWZVbEZ2VS81T2w1UG9XY0VWcFZaZ2xzeWZoMXFvT0JsZTFlS1JuU1ZM?=
+ =?utf-8?B?eWduZ1JoWWc0Skd4Q0JSbG9YZEpEZVgxa0NlRnFBeno1T2FWOEJ5dTdMVWpK?=
+ =?utf-8?B?amNIZVFNZDRqVlB2NWcyL0FEV2MvZ29QUUo1T21MR3ArL0NmTGFsc0VISlZ3?=
+ =?utf-8?B?SDRzanVjYjVHL3VLWjg0OUplVVZmTUZkSFBHYWJZYlRVN1BDazZUQjBpc2Fh?=
+ =?utf-8?B?ckxoOFhPZWNrSVNpR1dTU3cwV2Z0NHdxdzl0YlJIQkx2VU0weldqL3NKdkFP?=
+ =?utf-8?B?SkpvUHBxYjNsWldzVzNRM2pEMS9IYjJOdENLbE9EeCs5Sk5oR0I4bFo2WTRw?=
+ =?utf-8?B?MG54NHBBN3k4Z1oxVE9lVWRzZlBRa1RTTmxGcWxNZ1V2Z2JSYTJTU0ZYSWhx?=
+ =?utf-8?B?Q09hU0JQZUQwSWQxemZyeTdzRi93SzUrd0FUUWp0Tjd4SkFKbHl6VEF6U0Vk?=
+ =?utf-8?Q?bpaCHPvk/AFVk?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VGwxZ1dZdjI4WER5Rm9pcWkydFkvcFJFSHl4NUZYMWlHODd0Y3p0bkE0SDNM?=
+ =?utf-8?B?bE0yTTRYVDgwTm5DL0hIUVo3SW0zaFN3WEJKUUEvVFpxOG04TlNqRkVySkpt?=
+ =?utf-8?B?YmZINEFDcm9JV1VlRENJRExIZ01UbS8rZUNWSVZ0VUE0bVZnU3ZvRGRDek9Q?=
+ =?utf-8?B?dzd2OEVEMDhvRVBPK29RM0VkbEtRVU00QnBXSEVBYTZ1cjdQMGFjZTNrbG1V?=
+ =?utf-8?B?MzJjMkYwT2RvSEJkNklxY2t4L3VFTVJ4UmJQYkkza1RmNlZLOStub0JNM2tR?=
+ =?utf-8?B?UnhRZWJVVThhK3ZXT3h0bVZlamgrRFlqRVEwaGw2MFhLM0NNbk1wME1FWGtO?=
+ =?utf-8?B?VkxNRS94K0IvMW5JaHA3c0E2L2tuOVY3dmlaL0MxeEgrVW1ZdEROZkczL0px?=
+ =?utf-8?B?dmxyY0lqcTdjYlAxdndqbnJXMjhHa2Q5d2svMGxUWms4cXo0MzFqV3pKczFQ?=
+ =?utf-8?B?ZGlHc05KcXQzRGJOQWI0N1NiT09ORTh4bFJSMTlUTkd2TkFlT1lIckhjdmox?=
+ =?utf-8?B?SHIweHluV3Qxd1FQMDkxUFNtYms4MjZ1b1JNMjYrczRrL0pxZGMvaW5ma0FI?=
+ =?utf-8?B?OE5XOWQyMkFPSERLdjRBWVZrMFRZSU4rOVRYWnFjTzhtNEhNRmF0ejBsWllM?=
+ =?utf-8?B?cHpxL3QzWXRDbFJPb2RVYmdkclBFY0dYSXArOWw2NnBvL0t3RXlhOGJCaFAx?=
+ =?utf-8?B?bDkyMFgzYWsvc0pMN25vcytyMnQyRXgwVTFBOUNrblBzOU5aVlFDTitGWmZG?=
+ =?utf-8?B?Uy9URkI1UFNaenNXUVBWOGp1bE5IeDlVYXRnK0g4a1ZJSXA5dGxLaG1xS0pn?=
+ =?utf-8?B?ZkxpNllWMXgwU3E4anU5a0p2aUxMUjFTemxRNTRYOVpJQVQ5VGsvaUxtYXRJ?=
+ =?utf-8?B?dEVyRFhlV21ZUWVlNHNCRzd2dk5pUUExaWlLWU12VXNYNWxJRHRZN2I0NXIw?=
+ =?utf-8?B?T1VlQnB1ODJKaUF2bzZ2QzAvNEsvb2JWUEhuTXg1My9sVys4RS9yWHRXRHBS?=
+ =?utf-8?B?c3JEa1k5TG9Ic2cySWpyS1Jqc2tVMlF5QkVYZ2VpaWtGTWdPZFE0SjJCeWxu?=
+ =?utf-8?B?U0xpWUhhVUVvcUc3YTNvZ1N3NCt3OVFXVEFQNDRxdHdDODh5YUJFMWI0UEpz?=
+ =?utf-8?B?azEybjFzR0V5blZyczBVZ0VLU1ZDVnU3WkRuS0FOK1RLWXZYUXpPbDlBVXV0?=
+ =?utf-8?B?RWNFemQ1YXA1S1pSU1NZdmMvV21saUJJZ1RSUHpDcitPNDl3Z21yRUdQSGpV?=
+ =?utf-8?B?NUU1SDRVaHJKckNKSk5JOERmR1pOMDlKSGZRODFsV3hWMUJEOG5YQUw0MzFV?=
+ =?utf-8?B?Yzhrc1g0cGZBRUllQ0paak0yd1hhSFhSb1RWM2hCOTZmRW0vWHBUbTcxK2tG?=
+ =?utf-8?B?SkYwMWNtWWRwRHh4Q2tOUGEyU0FySnNrRG1RTmxMZHhSMHoyS2doY3lsbngz?=
+ =?utf-8?B?dVY4dkJ5dVo4SU54cmp6WVZ3TFFVSGtFNXJKcjVZWUYzQWpSZkRBME1MelhC?=
+ =?utf-8?B?RVp2TTkraFhQcUdKOWlXTmVRT2NPWFN6Q2k1VEdSNTZnV0M5WE1ZUFovR205?=
+ =?utf-8?B?dWx5WU96elhRVG5udmxhSWQzZGtZMUhSaU9VVm9iaUdNdHBDME03VUpSQWJO?=
+ =?utf-8?B?WUFEUFV6S0o0aHAwUTB5REErL0I3WDVwbFZ6aCtZVUhnc3JLU3dkNEFJeG1J?=
+ =?utf-8?B?QlZmQ2lBOERFSzYrSEhaTllLZ3VraHo0U0g5VTlwZ1BpZ2lyMmdKbmVvcEJn?=
+ =?utf-8?B?c20wTFFybndaTi9hRkhldExEY09WM3Jta2JDbjJPYTJMeHgyYmtpUXVWTFBK?=
+ =?utf-8?B?d1FHZ2ZWU3dxVCt6WGNRS0hnY2JJT3BrVFQzNlBMSWQ2b3NIYTBqNHhTeFJ2?=
+ =?utf-8?B?VVVORlFrNWt0UzI5UnhiYWw1WDFVazllbzZFK0Jxd2lpVmV6VVp3VVB3bnFn?=
+ =?utf-8?B?VUI0cy9oaktUeGJBbEYwMEh0U3VNbDdKMVdzb3JzbG9kQ1NWU3h5Z1BJa2xN?=
+ =?utf-8?B?ODlwUkFQblBrRUxORjNIWHdpZmRuK2hvMys1R29xK3JXVmJIZWtKZklrcmg0?=
+ =?utf-8?B?ZHpMTlBIZ055cVVVSXl5NnlRWlJZMS9MNWc4NGhVVE5aNUVFVmh0bUx5U2t4?=
+ =?utf-8?B?Qld6UVpTT2R0VDJIQkZsOStFalhGNERxdlV2Z0JLSVUwTFgrWG94TjJVOFY3?=
+ =?utf-8?B?ZkE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 04a6db0c-3e07-426d-dc14-08dd34a2df5d
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 13:53:49.4531 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kQZJlE5JCrrzK8yxDpxREQINhbhF8IsmT7LHvaCR/dEvn1uT9abYGiLQM5V3mJpaP+JD+OhE8TNK39JXizpNHAbQXugoifWrOBnhBFZNLv8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8125
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,102 +173,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 14, 2025 at 04:01:25PM +0800, Huan Zhou wrote:
-> Implement functionality to probe and calculate the DRAM size during the boot phase for the RISC-V spacemit K1 platform.
-> The `map_format_size` function extracts the memory density from a given value, while `ddr_get_density` aggregates the sizes of the memory chips.
-> The `dram_init` function initializes the global RAM base and size based on the detected DRAM density, ensuring proper memory configuration at boot.
+Hi Tom,
+
+On 12/20/24 11:22 PM, Tom Rini wrote:
+> Now that block drivers are all selecting the BLK symbol, there's no need
+> for other options to be select'ing BLK so that other required
+> functionality can be enabled. Remove these places.
 > 
-This commit message is a little bit too long, will be fixed in next version :(
-> Tested-by: Marcel Ziswiler <marcel@ziswiler.com> # BPI-F3 16G
-> Signed-off-by: Huan Zhou <me@per1cycle.org>
-> ---
-> This patch introduce improvement for get dram size on spacemit k1 platform,
-> retrieving the dram size dynamically.
-> Have tested on Licheepi LPI3A 8G[1].
-> 
-> Links:
-> [1] https://gist.github.com/per1cycle/e4eab66ebb6f83fe5118e823367fce28 .
-> 
-> Changes in v3:
-> - Remove the inline attr in arch/riscv/cpu/k1/dram.c map_format_size().
-> - Add detailed commit message.
-> - Link to v2: https://lore.kernel.org/r/20250114-get-dram-size-v2-1-aba5a281ea28@per1cycle.org
-> 
-> Changes in v2:
-> - Fix bracker and return type in map_format_size() function.
-> - Add test log in the cover letter..
-> - Link to v1: https://lore.kernel.org/r/20250108-get-dram-size-v1-1-4bae32ecf756@per1cycle.org
-> ---
->  arch/riscv/cpu/k1/dram.c | 40 ++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 38 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/riscv/cpu/k1/dram.c b/arch/riscv/cpu/k1/dram.c
-> index c477c15cbfb19f0e3a0ee72985b602f5bda352d7..54d209ca277db7b304df04f81b12ae4efa400e45 100644
-> --- a/arch/riscv/cpu/k1/dram.c
-> +++ b/arch/riscv/cpu/k1/dram.c
-> @@ -4,17 +4,53 @@
->   */
->  
->  #include <asm/global_data.h>
-> +#include <asm/io.h>
->  #include <config.h>
-> +#include <bitfield.h>
->  #include <fdt_support.h>
->  #include <linux/sizes.h>
->  
-> +#define DDR_BASE 0xC0000000
->  DECLARE_GLOBAL_DATA_PTR;
->  
-> +static phys_size_t map_format_size(u32 val)
-also this part will be rename more properly.
-> +{
-> +	u32 tmp;
-> +
-> +	if (!(val & 0x1))
-> +		return 0;
-> +
-> +	tmp = bitfield_extract(val, 16, 5);
-> +	switch (tmp) {
-> +	case 0xd:
-> +		return 512;
-> +	case 0xe:
-> +		return 1024;
-> +	case 0xf:
-> +		return 2048;
-> +	case 0x10:
-> +		return 4096;
-> +	case 0x11:
-> +		return 8192;
-> +	default:
-> +		pr_info("Invalid DRAM density %x\n", val);
-> +		return 0;
-> +	}
-> +}
-> +
-> +phys_size_t ddr_get_density(void)
-> +{
-> +	phys_size_t cs0_size = map_format_size(readl((void *)DDR_BASE + 0x200));
-> +	phys_size_t cs1_size = map_format_size(readl((void *)DDR_BASE + 0x208));
-> +	phys_size_t ddr_size = cs0_size + cs1_size;
-> +
-> +	return ddr_size;
-> +}
-> +
->  int dram_init(void)
->  {
->  	gd->ram_base = CFG_SYS_SDRAM_BASE;
-> -	/* TODO get ram size from ddr controller */
-> -	gd->ram_size = SZ_4G;
-> +	gd->ram_size = ddr_get_density() * SZ_1M;
->  	return 0;
->  }
->  
-> 
-> ---
-> base-commit: 19fc0b7f7d907119a13e9c207991899f0817f8fc
-> change-id: 20250108-get-dram-size-65cf59a15201
-> 
-> Best regards,
-> -- 
-> Huan Zhou <me@per1cycle.org>
-> 
+
+We have multiple commands depending on the BLK symbol.
+
+BOOTSTD also depends on it, but I assume we should be able to network 
+boot without HW block drivers?
+
+CMD_UFETCH wouldn't be usable without those drivers as well.
+
+Should we do something about that by making them not depend on BLK e.g. 
+use CONFIG_IS_ENABLED in the right places? Not sure if all devicess 
+based on those archs have at least one HW block driver enabled. I guess 
+checking if all .config before and after that change are identical would 
+help us figure out if this could introduce a regression?
+
+Cheers,
+Quentin
