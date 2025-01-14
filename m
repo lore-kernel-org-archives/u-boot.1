@@ -4,65 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 396D8E77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 07:54:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF586E77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 07:58:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E03C8069D;
-	Tue, 14 Jan 2025 08:54:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 425418069D;
+	Tue, 14 Jan 2025 08:58:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="5l9LC+HT";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="sgyqg6YP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21EB7806B7; Tue, 14 Jan 2025 08:54:01 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20627.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::627])
+ id D3A8C806B7; Tue, 14 Jan 2025 08:58:20 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20619.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::619])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF12680657
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 08:53:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50FDD80657
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 08:58:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q8xSxDwrymNUnv2wgM6Rmn3lJxhhdjZmvQ7DOtvS3BVrLkedTZKYdVdSv2CD/gpp21yCnSiLjtxcl+l45UElme2RDWdTL2ELcASENMhf8xF04t7jaxcxgGSdiDuhfLKb4vC+j5C6b7E3kx4dPXtdp9DMDbWOE9mkuB93yE1zqqHD0qQ2RcuUVTC7RMG3k12KXopqVSxDLIsoWt5jtqJHZ44Ux1HutPdm3gWFPZBqDmB184WlEHIo9d1UNbCg5FhquKBiW/tFULyGLfPBTI2RiLL27I+dOXRiwmUMgZ9p4lzM4AmSfkQbcuyEQ9gBYGN15eUlOlOulxfZ/kuBVNMihg==
+ b=nQ5cg6svNXgJ+FG7yF9HvlCEHIeYGcPVA+MOBHmitEP5zCCpeacVy59jF2cHRnwzz2fvyOFHI6hRztkRBUKDW1ZhplFDGNRHEZKIoQVLrM8tGUux6267dP5VrTKrOyCLzZtzRQnEmDRF9Y9MzWpPxlFpjjOxFrC1OOADce8XskzvwjEw2g+VYl3Mp+RhlNT+HS6lW8ZYSF77cHMH8aABEtGUbNSNhRShaBjhjVp8c++vKv76zUM6LUXOl+2pqBklJc6jOfw2slDPt5m9PjZHTP6ccpsLvD89GtHmNeRcg25v/HYfkXlFualfIr7Dm2Wn9Jr6Ufl481iHtYr+EMBj9Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GGJqGiXWl/IBhqX8MgwRNeY7+Fhi87MTFHrwmq/uaNk=;
- b=yCA7+DadU7yxcrBEok5U5ibfRBOlCcSYi0wiODiCCs3SAGPXm/oVwWYioGRjh78yx3YCP8S77YWaqtlAE+qO44cXVLZX4cKouADASF2mmvpSS/SYtBxpgiYte33YUPfKHXkIhQsU2FUH1ZCFIeu4SqleHcsiy3VIXPhq1b1RkepMLXVojuH4QnQn/HNX7dcPBy5a45XIY33Meul3aHj+usLrNAO5sKqpQvO5vVjEO3qwzpz0Y2o3l/Gn1W6yNCUq0wj/vai/XF7DD5r4xtbo5w9xgU73aHO6wRqL0SenFGVdupz2h3xBw8cYqhegpwXcycYZvcVDjpM/x0RZHrm/cw==
+ bh=+gT9enEgTPmK9K/T7ljjNzqXgZbfMyr7hn/wJp4MZkQ=;
+ b=x1AMYDmv0OpwLYd4szCmMRzTD5++sixvYxZwyAYSuU4xygenQmWzqJHNdl6R1L+KbX6R9jdh8lR7YQnb54uOqsn8HZsTquSUWDCXdXVpHMU/Bdtg+6gRnc0qibDl2yuwrueamsej6Za8pv/oUmvZClwKe2HD0V8Yuip/e6MebEtile4/sk2AbHb7rErzd4o1GSO7XgcKlv7efDUhJxX0/Or2XQ6rJ/XpV8gdNk/OwskeSOOUDKTL6yWSc8ohg4PhC/NWsG50kIoaNy7QpfMsR7SGBEI6MZ2e0AkT2qmQWMjaraqUAG+CNmPXUcCrx81dce8FdtxvxOUStTDAM3MY5A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GGJqGiXWl/IBhqX8MgwRNeY7+Fhi87MTFHrwmq/uaNk=;
- b=5l9LC+HT0m2l9Lhg5/g/tKf86LDu3hduo3gFyRrnklz0a8nZuf3JeyaDncVka8lVP10W8452YxagK24XWdqJCevbyVUVC+foRxHzhQE04cxXURbb+i3JltYncGGPfgEi+vzfUkF2Vw09kuB/m4sse4etuW36W2mEgVFZKuI15ZQ=
+ bh=+gT9enEgTPmK9K/T7ljjNzqXgZbfMyr7hn/wJp4MZkQ=;
+ b=sgyqg6YP1w0H+ev8ffygU8lDjfPsbJYXMNbBbzuGCVwh4UGARB+AZRRkTZVB9vuSj+nd6pDrAulR+353dlPZ3z1Wdp9nBtkryy1R+QXeezos3Px9KXePRLgKDay0Y7UHSZNfm4ZkRCdYQZKn4TKZH9QsA2KIYMTiC2hpYoob8vE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by SA1PR12MB8700.namprd12.prod.outlook.com (2603:10b6:806:388::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.12; Tue, 14 Jan
- 2025 07:53:55 +0000
+ 2025 07:58:14 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%3]) with mapi id 15.20.8335.017; Tue, 14 Jan 2025
- 07:53:55 +0000
-Message-ID: <92e6fdbd-d367-47bd-8c4e-ba62c4b7745e@amd.com>
-Date: Tue, 14 Jan 2025 08:53:46 +0100
+ 07:58:15 +0000
+Message-ID: <aa491b27-4310-4164-8ea0-f8b738b0321f@amd.com>
+Date: Tue, 14 Jan 2025 08:58:07 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [U-Boot][PATCH 1/2] fpga: fix alignment on fpga cmd usage info
-To: "Erkiaga Elorza, Ibai" <ibai.erkiaga-elorza@amd.com>,
- Alexander Dahl <ada@thorsis.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [U-Boot][PATCH 2/2] fpga: improve loads usage information
+To: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, u-boot@lists.denx.de
 References: <20250108140357.969380-1-ibai.erkiaga-elorza@amd.com>
- <20250108140357.969380-2-ibai.erkiaga-elorza@amd.com>
- <20250109-auction-blob-00a19a40dbb8@thorsis.com>
- <MN0PR12MB600443410FBC58B96C973CD5A0132@MN0PR12MB6004.namprd12.prod.outlook.com>
+ <20250108140357.969380-3-ibai.erkiaga-elorza@amd.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -109,100 +105,100 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <MN0PR12MB600443410FBC58B96C973CD5A0132@MN0PR12MB6004.namprd12.prod.outlook.com>
+In-Reply-To: <20250108140357.969380-3-ibai.erkiaga-elorza@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR02CA0059.eurprd02.prod.outlook.com
- (2603:10a6:802:14::30) To SJ2PR12MB8109.namprd12.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0095.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a1::7) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SA1PR12MB8700:EE_
-X-MS-Office365-Filtering-Correlation-Id: d661e5d5-941c-4899-009f-08dd3470986d
+X-MS-Office365-Filtering-Correlation-Id: 8cf74b50-c4b3-4365-d50e-08dd347132f0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VjNZWEc0UGhyK0lhallFcFR0cUdsdDhTOGpMZUhSRnJaT3Y2MnVZcVMzdHlY?=
- =?utf-8?B?RDhFVTQzVjIxYVpuNi9jTmRGVm5MWEVPenlUNjNmZ1h4YlRwLzZ5T295a2VT?=
- =?utf-8?B?QWJsTzd5MkEwNmxOTFBnRnVlUW0vRlpCSHpVTHhNUjY1MDJZcDQ0QWQyOTdu?=
- =?utf-8?B?TXpwMEQ4TDZTYTlYTzZubkpIZTNtRHVDTzd0UzFiei95VWdvMEdDME5iejlm?=
- =?utf-8?B?aEIxUHZVakdVN3FvWjRaZGxNWHRPa1VUVnplaGFpaGg4Ui81Y3RYSnFFZGhK?=
- =?utf-8?B?ak94T0xqckVYa0F0cGdqZG5qRWRPSnNTeGZMZ01ndUUwR0JtUHpNc2lhWnp6?=
- =?utf-8?B?d1kzcy9XcEVOSkRac3J3U0pEYytmZGV1NzdodEUzaVJRVU1tOUVzVXIzRHdr?=
- =?utf-8?B?QUFpU01yQk5NYXBEREhHMGRQRXhjNm0rYnVwUVFndFpzelVUOUlEYWJiVVlX?=
- =?utf-8?B?cVlyR1RxWUxzYTdyZFBWQVRiSExUNkViSTlKVk1QSEZBL3FTOERTWCtjQTJM?=
- =?utf-8?B?dlQ1TWU5ZnN0QnZNaUxrTnR5aWxNbVlGcmUzeDJqT0V2WHVKVy8rOTZ6dDl6?=
- =?utf-8?B?M08vNEFFUWJIYzNpR0w4WmRyUkFicXZ4MllLUzdMUjNMRmF5VWxNaUtOWDU3?=
- =?utf-8?B?ZTJyODE1dmg0d3c1L2JZdG5vZjB5bW5ZaWF2RXdCejZqSG9wMjE0S01pQ2RR?=
- =?utf-8?B?SHAwWHIxcWlYc3ZWUWFBSW5mQjdZN1JvaTcxNktvTHFOL2pvMHpYWTBjTlVR?=
- =?utf-8?B?aXEvTmRCSG55aytjeGRXSWlTb05XQmsxNmMzTS95WTRtUGduN3BwdW1mZUhS?=
- =?utf-8?B?bGQ4Q0pKeG1oSWtQVFcrN1VaanRMSCtRUERBbmpkd2YxZUxybE80eTN5aGd3?=
- =?utf-8?B?RXFsT2NpQ1hveVJLRTBaaU0vek8vTHNDaFR0Q01CWitTNXVuR3RleGphWEo4?=
- =?utf-8?B?eGJsOXBCbjZkZGdEMmIyVXRvWmoyS0IzVTQ1Zmgxc3JuczlQK0cxczM5U2pK?=
- =?utf-8?B?bzNVVGpKeDJmOG82dmR5K1Vxa0JQOGZTczViNE1aOEh6UWdSOVVJYWVjaUtF?=
- =?utf-8?B?Z0lSa2J2aW9teVBPWWhDVDlnKzZqTmhnVDFJdkJsdjg4Q2hoaUVzcnVFc3hh?=
- =?utf-8?B?by9XdXJ0R1NzWXhxTTVUVnBjNTZQZ3hpY1QvbStUTy9HUHg3NnJ1dm1ZVmk4?=
- =?utf-8?B?Ni9DOVJnNytOUUlocHlYVTdRaWZHMExHNkRKbEVPdTZmc0xiR01DRWQ5SEhM?=
- =?utf-8?B?ZzRKTk5qQWJNMm5HYmJTSDg4UXF6dlgrZytHZjRHRXgrSXNYUUs2R2Z2V21Q?=
- =?utf-8?B?ZzRSMXZmMVVYR1BoakJZRkVIbzNTdTQxcmcxYXZyUkNUeEIrTkpEN3R5endY?=
- =?utf-8?B?RWtJSjBnRmk1VWthZFl1VERqYlRDdHFuRDZjZXFRenl0bHpIb1grTEpwSVBu?=
- =?utf-8?B?NVhrSUd5MEtWS0RNMlQ3OHZyY0F1RTNSR0VqUHdhSnRNUXBobXJiQjh1Zkh6?=
- =?utf-8?B?aWJkRE5pNm40TDdMM21MbzVScTZwcnlobnp5R09NbG5naWZNTnpMUWF6THRC?=
- =?utf-8?B?WFlwNk91RFFoWWVPUnR4RE8xRURvUlFTNHViNU5lKzNhVnozVWZqYnZqbHVT?=
- =?utf-8?B?NDlvZVZkWGRsWGtnaG0ybXBySjRBN3FiSlVvT0w4Zmw2Q1h2WXUwcEQxZEZS?=
- =?utf-8?B?WkxCMTlQcFpGT0JBRjlVUVh4MXVUNzE3SFY0TjJPSDRMYzFUaVY3UW9DRXM2?=
- =?utf-8?B?RlF4d2cvSmZrNmR2SWJ0MFVQLzlxRTFSL0MzWGtJZGhyWEE5QVdVU3hmSjRC?=
- =?utf-8?B?cWZzVU10dnhId29qM0kwRDRKOTZsQVBNMEhuaFVRcWVWQkJqaGJ6Ylg4UXR0?=
- =?utf-8?Q?Jdjh9zDTsYFj4?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?R3FGWlFPUmtLZW9Zam1DQk1uSVpUY3l3TEdEekJGV1ByVE1qdUNHVEx1eW1G?=
+ =?utf-8?B?cjNZQk9DZzdDbnlnRVRzY1hod0ZaMFVUTnlCS2k2d2pSNldFSnY0cEpJZWEw?=
+ =?utf-8?B?NGRtd2JxWGt6RUs1czhHUmZ6dmhkMHFiK3RFQzh6QzIwb0gzS0F5V1dKTFU0?=
+ =?utf-8?B?MWl3bkVGNDVja2p1bFN5QjVaOXlTRGhzU0NCUFNpaUM4M1BOS0VjWVluMmVI?=
+ =?utf-8?B?TGhkMzBJOVA1Q0F0QkFrSWE0ZzB3VlRYUkU2Q1VkS1czRTNBYzhDdWtHSEtD?=
+ =?utf-8?B?RTc5WmszS0x6N0dHTitNajdoZGpTRHI1dUwyQnAxWllIUXpXbDBwWlphVHJY?=
+ =?utf-8?B?OVI4TDN6WUk5MVQ2dmc4OGJmUG80SnN5S0l1YWtRc2NWamdSY0lTaEs0RW1U?=
+ =?utf-8?B?WjZHSGN3YTFSTitqUjE2R2VMaTRVVW5lOVU1S3R2bk1NRjRWL3BwMFBwRVQr?=
+ =?utf-8?B?T1drTEtkcUxRdVpLaGE0dm9NNnZnWXhYUHpWdlMwRlpaTlhlQm83ZVpFZVRj?=
+ =?utf-8?B?c21GbWNVeExBS1gxUmZNazFidmdES2dGdkF5Z0huN1NNUlFkcGhhdThQUTF4?=
+ =?utf-8?B?b0JIcng1bFVZOTNzbjRBd1pXK1ZKWEJUM05zb1F0by9zRVVMSjVwajlyZDg2?=
+ =?utf-8?B?MW9KVStySGE1bDlnSnNQcTdxVGJzcXJKT0tsYTdHc05YRVFwWkRYaWtlSFU2?=
+ =?utf-8?B?bnlGM1ZsYVBVeitsbVNVenBaUHlzWFcwcHBIcUp0WjUyWXdSaHlnRWR0Qysx?=
+ =?utf-8?B?Q2RwNndGMTBFSHZ5OTlkbGVoT1B4ZWV6MUZyMFdtTVdGQ2Z2OW1HeXJ4eHFB?=
+ =?utf-8?B?ZmtCc3M4UlAyTkRNUHZiMlRFTHdRZERDQ1NrL3pXZWlsZUNqaWdmbmp0YUJQ?=
+ =?utf-8?B?bmt0eEdGWG9USGp0endhd2c0ejZTSy9xenVFQ3pJMUdHQStCTHBaZmp1eFY5?=
+ =?utf-8?B?VmZKSFREbDN4aXFBeGd1SnFFSVJLdUYxczRKVmtxMTR3VXlVekkzMWpkUmR6?=
+ =?utf-8?B?Ymw5QURBcjFZNzVWM0gvMWNyeHBjOHJjZTJFU0hVaE9xQXA0OW1mRjZnL3FT?=
+ =?utf-8?B?KzlTQmhWTC8yQ2RXSWZIOStybVM3L3hpbDJFRFdEZnZOTDRwcVFuOHlxNU43?=
+ =?utf-8?B?cU5VcE9VdWpDdFFZMExBcGdCbmlzSHJxK0dGL0hiVEMrUVhsamt2N1RmWlEv?=
+ =?utf-8?B?aDU4MnlUS3FsMkNRSXhxSThib2VVcWhzUTZ2RW1HTUUxNmdTS043YytZNWl4?=
+ =?utf-8?B?MDBIdmtJUHQ2ellEQjJ2czhJaTlCR21QQ3hESklSU0R5eUhnemV5QStmUU9I?=
+ =?utf-8?B?MkZlMmcyZDlXWHFFVzM1YkpqMExHaGVmakZMb2RadS9kR2Nld082d1ZNZC9y?=
+ =?utf-8?B?QVlvYWY2dFJjNFJIanV0UVNzZUl2ckpvV25CR29vV3B5bEdGQzRpa3dwQVpV?=
+ =?utf-8?B?bDI1ditEajY1ZVpNTm9hMnA1MlBGYWlFSURWNVdqUkhXdnlRNDhrMUc1SkRp?=
+ =?utf-8?B?TDJxVG9TTThLbVFLS1JLL1c0akRsWDR0TU9VZEtCSWxsWEVnL242TFcyZ01I?=
+ =?utf-8?B?ZWFZYXNSOGNQK2ZBT05MaEkvZ1RzRWdXNjZwc1RubXl5eEpFcUlwR01aNmpz?=
+ =?utf-8?B?TFZ2WHJVWXhmSERhT3hqNXRnMDRzRjRvb004TUNqOVYzdHNmRXY1TFZZWGFI?=
+ =?utf-8?B?bDhnancxekwwOEFPYUUvQnBLTTloVDN2QTNFU1g4OC9QVjJNRTRJM2FaQTZ2?=
+ =?utf-8?B?L1ZVUkRVTWphYUtGZzlUV21CTUtMcXZPSFpIRzdSdXQ2bW9sMk9JWVVmWWpl?=
+ =?utf-8?B?aGNVdmxoUDBIMEYvQTBUVG9zNlNzWGk3WndXWmFMVWNKb2F6NGg5eE12TEl6?=
+ =?utf-8?Q?yR51CwOCqlV8I?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bDdRRkxmNG9VZDZFMVIvMXBUaVFBdVl4U0M5SWYwQ2ppcU96MzVnUnMwZGtW?=
- =?utf-8?B?RHJ4WjRoYzkxR1h5NzZUVkNXd2RDWk90SjdvcWY3Ym5Ga1ZtRXM4eDBHMWt3?=
- =?utf-8?B?Um1FcFZnT3hRdjcrU3BLSElpVVB4Um4zbUtpVmRsRXB4dVdINjhGZmdBS3U1?=
- =?utf-8?B?R1lNYy9Ma3RmUFMxL3dhWUpIYjh5M1VRcTkraGRwajFZNXZubjZ1My8vZ1Ra?=
- =?utf-8?B?alFjY0VrQ2pZOHNmNDR6dDR6WmtUaGRwUXlFNk13WHkwaWNxMHNJVnZXbjVB?=
- =?utf-8?B?Z3hXTUJUdW5jeFpoUDlmTkVQWWcwUUVxVGU5ZlFsbjNsWFdGNXlZcW5WdC9v?=
- =?utf-8?B?SzJVZ0Z0Y2duUGs0WWMzU3ZyRDVmMnI1eDFDMXVRSGo0a01LSCt6Rk5xZHBk?=
- =?utf-8?B?NVBYOXVFVDc5MDQ2VnR0dGlqUktvTFRDdnJkN2pJK0VLcmhwSS8wTFlGQXRV?=
- =?utf-8?B?MGJMb3pta25wdUhVTjMvL1VZNnNKb0tNZit2UXBGOGRQSGZ1Z2NhMGpUTVZW?=
- =?utf-8?B?ODluOGdqeFB6azlNQ1dmQUR4RW16M2ZyMS9RNU93dFB4TW5WbVVhbVJzNERF?=
- =?utf-8?B?WWQ0U1QzMEpUZFo1MyswUDdlalN4Zkd5TFU4Nm4rbm9vNkczbTB6c3VqMjNu?=
- =?utf-8?B?Q0Q4S3FFMFVOL04yckpweXhaRFBPNHFDL2FZY1BleEQ1UVBTUkNiNDJ5MWsx?=
- =?utf-8?B?UUJ2cGc2MUwvZG1Sb0dFMzJFa0Mwc2N3VTBMVVB4bi94c3ZlZExLb2ZtOW5T?=
- =?utf-8?B?anZHQkIvN3dsTi9QSGVDUTNoZ1Y3Vk9mQWxDN3NXL09oK2NrYk9LdlJFOGR5?=
- =?utf-8?B?U0hEOGFSSXJnT2VBZXJwSmo0UWZwUDRPOG5ibE1ZbVlYOXZlRU5HN0tnWVZG?=
- =?utf-8?B?Ty9odlR2Y2huR3hOdzF6UkwySmE4NmI1amN1Q0hJVFQrWUVvVjR1UXJRRUZq?=
- =?utf-8?B?d1pWbENBODFWSHIvMy8yRFVBY296Uzd5V0EwZ1d3MjNQNHg1SC9kQWtuZFZh?=
- =?utf-8?B?eTJwczRYb0ordVJSU1VKSGlSQzVnRHpJZXI4clE3K1p6NW95Q3ZoR0RHT1Bj?=
- =?utf-8?B?VkFIOG9BazRkbmFFaGZIcVRZNmRVR1l5ZUhLVU5FNVhKcmRpNk01VEIzNDVY?=
- =?utf-8?B?Vmg0T0Q2YVZKQ01sM3VLM3dSZzRCU3RnWENLM3hjTDBId0xJeno1T3ZnT3Vi?=
- =?utf-8?B?V0JCYzhnMm9oSXR3K2RQZ2FkSFU1RUY5M3ZCdWhSSjkzQUt6citYN0tPZDdD?=
- =?utf-8?B?NFJGYmpIeng5YUdTa01oZWFweElpeUYwU0pKRWZWSnNlVE5oam5Lb0YwalMv?=
- =?utf-8?B?RFdvRWJ3ZVNOZGE0Y1lNcEVLc0ZBMFJ5aXpITjVOV2lNM3FWL3liNTRoZE5j?=
- =?utf-8?B?bmpCQ0RMaDdLZmpBeVlkOE9aVVl5b29lSWFWZSsvalRIdWxGL2JXMnpEODlL?=
- =?utf-8?B?cU1HWXBqdEgydi8vb1k4Q0lwaDVMakJuVmh1Q3pDazF5RU92d1htMXVadmZP?=
- =?utf-8?B?N0J3ZUFxUXo0Z1h1SmlWN2xkdkJvellEUWxaTkFwOHJKWTV0SlROTExBSVNy?=
- =?utf-8?B?eDlLTDZvdW5tdjM5dFJ0b3FENWhMZWo1LzBYOGxENXZjVHhiaXBZZ1V2Y2ln?=
- =?utf-8?B?MCtYUDF6MFNHUnRjOUx6REZTcEgrVmxSRmx6NWJuSWlIT04xSG9UU01TSThn?=
- =?utf-8?B?amp4SlNVOEV5dytlRlJlNUVLV3dxZ3dycEpvcjdRQ3ArWFhaaXFmK2JXaS9H?=
- =?utf-8?B?Sm05WEtqOFd3aGJ6dHNxNEViZTcwK1FrcWZWaHBYc1Jjak9xR2t3V1NocGho?=
- =?utf-8?B?U1cyMkpTZ1BoaDdmK1lKek5YN3d5WTNtN0taZXBVTXFUT3lYb1ZZTlBtQnI1?=
- =?utf-8?B?YTYvV0JBOGJVNzM4VXhHY29jUWJkeUtoUEZxQ0FsL1pTMkUwcGxFdCtJbVlN?=
- =?utf-8?B?T1o1WkpIOEtvVGNiaVJDNkpKbFdUQy83QW85K3BSVXJ2ZlBuWE56amRLZFgx?=
- =?utf-8?B?T2NoQ3dHWjY0N1VIeTI5OUZpWGYrQjlYd0dBK2ZUczBIYWo2T3hYY3JRN095?=
- =?utf-8?B?eTBjNk5TajNBd0N3ZDR3SDNVL2Jrd3JFUzlDVDJ5VW5xS3F4eTM2cS8wMTNi?=
- =?utf-8?Q?OQXN7DWUwdODkHky7kALD+edk?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YnJqbjFyalh4VW9PcmxyMDlPM0t4OEVIeUFkTUZzN09uWi91VHkxakN6YXBn?=
+ =?utf-8?B?NmdUcnVQa2tUcFFoMjhJTFlmSGNUWWtNblo3blVXMkYwcW1uN0daMURqc1ZT?=
+ =?utf-8?B?TzFqeUFqWlVnTTNpZDFwQzBwdHhmeU1OZ1lrUThzQlZpeTVKckR2WXhtMSt1?=
+ =?utf-8?B?STFrY3p1ampkZ0d0OUZnWVczOXlDTGhZN1dZQ3AzTTJzOHhtVEVCQUxVWjNN?=
+ =?utf-8?B?VjMzWnc0NU9LeFFJK0dIcEdheWVGVm9SYUVIS3Vva2pWYktYb1VQUWI0VTlh?=
+ =?utf-8?B?VjFHZXhRRWU0WklTRWhHM3VSUU1qRXVKcGpBSUxIZlpsMUFyTEltMWhSdTF4?=
+ =?utf-8?B?c0c2d3BqTWtvTGlodm5mVzdrdCtUYStwWUM5WGNoeklremtEeGw0OWl6eWh3?=
+ =?utf-8?B?dXRPMVkyZFFQbnJzRlVnTEM0Mzh2K3hydlMxQkNGZlpkY3BDdHRsdDFiZGpz?=
+ =?utf-8?B?SFk4UHYvZU9XQTBLRlQzZGhNQ2pOdXoybDJzemw5UVIydDViTU9FVjZqeTdP?=
+ =?utf-8?B?TCtWSzRvWTlQT3NPekRXb1ArREIyNHV3Tk1WbE5hZTZIamVmZUM2YVVhQlgr?=
+ =?utf-8?B?bVA4U015eGdRTXdXWjRJZHlEZ0s2b2tidHVXcGl2UDBEVDZNRVFaSFRNMUps?=
+ =?utf-8?B?MDFDQU5vZ251SlVSKzcwYzNBT2ZQUGVNVTRxdWxBOXZscUtqVkVnNHd5Y3F1?=
+ =?utf-8?B?aUNEbGtpMTNkdGZ0Z2M4ZmczeDdlSnZZVVVySEVNRjk3d1hrVXM4TDF2MmhP?=
+ =?utf-8?B?ejJpdTBONGJCRStnaW1uYURkNnc0bzlPVWtrWnpTVkV2cm90Wkd4UmdCMmFo?=
+ =?utf-8?B?T2l4U2RTN1NpTGkvdVFNRVJBMWdSTWhwVVNGTlBoQ2h1dmd5TnVHd1dKclVk?=
+ =?utf-8?B?cWw2VEQveWRWbDJNZDlNakk2MlRKNElDeVpxR3hielZvYTRYVjZRYWtuRHY4?=
+ =?utf-8?B?bnU3cVJnOWx5dllGWWNDeDBrN2dnVGRVeFo5MldBbjREOVFaa3loQ24vQzg1?=
+ =?utf-8?B?aThXVjZWOGQ4ZUJIOUYxaFhkRHpPY0RYV0Q3TFJlT0tmaTh4SzNJcFQzVEkw?=
+ =?utf-8?B?T3FRU0xZOThVeXdDTjdTOUZSeHlNMTAycFhTQ09YYkZJWVN6bDgxMVBXeGMw?=
+ =?utf-8?B?Mk1yemlkTkM2MFEvZU1OTVl1Tk14RHJoR0ZRUDZTRXZ1OGVCd3Z2Y25vc21h?=
+ =?utf-8?B?aVZ6ZWR1VmRLSkpMNDdRRnhRZ0hKK0Q1ZlB3ZkJFRG1uZEtlZW9ERzlFek1E?=
+ =?utf-8?B?TVFxR3JqdnRhN0lPK0ZZTUVRL1hXSDdoRUVFMmlzaEpKWUNBdnhmRGhWZHpK?=
+ =?utf-8?B?OWhmZG5sK2ZkWkl1SDNjWXdocjVlaEZZZGJhcWtWUlZtdENuRFZpMmZwNGNU?=
+ =?utf-8?B?cXZiT2paS3d5d0g3bEgrdWtFT1c0NEJNNEFRQnVkWnVGRU92NUhJNFllSzlh?=
+ =?utf-8?B?VlB3enBUYXQwVFVlaForcStIOWdJZmcxdkF2N3R4eExtLzlmcFY2MVFsNm1X?=
+ =?utf-8?B?YmlCK0lKcjFzeEpxVitPMHdQU0FMaVRRVVNJY0lWWG5WaU5oZXo1OTQzZ1Jp?=
+ =?utf-8?B?Rlo5dXVLWGMyZ0JZYTNPMUxYU1JaRHZSZWRsOHNFR3Zmck1xU0ZBdmUyVi9s?=
+ =?utf-8?B?OWRQalBDeGFVbFdBWUN4aDFld2JUdlJlRWNRL2hFLzRIaStMQWZnVExxT2ln?=
+ =?utf-8?B?bXNPTVFJb2tVVjllZmhRN2c3bHVxYVl1WjlhZ3YxTWxXMUlrTHc4WnF6VWlU?=
+ =?utf-8?B?bmFLVjI5ZU14ZldJeHVNaGJGY01ZaW9TeDg1OE9WKzFVRXFKTm16RnFiMHBp?=
+ =?utf-8?B?TGxYQjZzY2V2QTBPYVpiTzlURko2UkVLMHpuQ2M1UjBhbHYyZ21lWTFDVmFZ?=
+ =?utf-8?B?Sytyd2dRd3FOcUZ2S1Q2RytpMUdHc2hUV2FOOE9neFJEMGZSeUhvWU9EaEdL?=
+ =?utf-8?B?ZUhyVTM5RkRUSkNGcTQySkJ1VzZsMmkybEYvMGp6Z0o2WXBLUlkyT01RRTU5?=
+ =?utf-8?B?YjBSMCtwbGFueTA1WjFBS1Y0N2pzZTFOcFVPMG1Va1pYZkFzUG42MktOQnlG?=
+ =?utf-8?B?Y1k0MUhNNVJCS21JRWtHV0lhQ0N0YnZOZnVzSzJEQXdBUDJxTXpIcmY0SWFM?=
+ =?utf-8?Q?RVcvU8fXu8p5PhkQExLKOIQDY?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d661e5d5-941c-4899-009f-08dd3470986d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8cf74b50-c4b3-4365-d50e-08dd347132f0
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 07:53:55.7270 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 07:58:14.9527 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xJelZHebJOfNSXfN4NkcV+PLxCpqwaH+ETWylK48tjEUc+jEY5ME/5Kc95NLI2cs
+X-MS-Exchange-CrossTenant-UserPrincipalName: cHxlw9QIffRoS8ONp0O5HLXLgLtVmcI5xebsOLSH/40JQpOaIh9YqyKuSWn9SHT/
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8700
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -222,42 +218,94 @@ X-Virus-Status: Clean
 
 
 
-On 1/9/25 13:45, Erkiaga Elorza, Ibai wrote:
-> [AMD Official Use Only - AMD Internal Distribution Only]
+On 1/8/25 15:03, Ibai Erkiaga wrote:
+> Current usage information for loads command is too verbose and long for
+> a command usage prompt. This flag simplifies the text for readability
+> purposes.
 > 
+> Signed-off-by: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
+> ---
 > 
-> Agree Alex,
+> The authentication and encryption flag naming is redundant with the
+> description notes included. Use authflag and encflag names for the
+> command pattern and use description lines for explanation.
 > 
-> I just used /t to stick as much as possible to the current implementation, but 
-> I'm open to change to white spaces if Michal thinks it's better.
+> New output looks like this:
+> loads  [dev] [address] [size] [authflag] [encflag] [Userkey address]
+>          Load device from memory buffer with secure bistream (authenticated/encrypted/both)(Xilinx only)
+>           -authflag: 0 for OCM, 1 for DDR, 2 for no authentication (specifies where to perform authentication)
+>           -encflag: 0 for device key, 1 for user key, 2 for no encryption
+>           -Userkey address: specifies the address where user key is stored when user key is selected
+>          NOTE: the secure bitstream has to be created using Xilinx bootgen tool only.
 > 
-> Regards
-> Ibai
+> ---
+>   cmd/fpga.c | 18 ++++++------------
+>   1 file changed, 6 insertions(+), 12 deletions(-)
 > 
-> --------------------------------------------------------------------------------
-> *From:* Alexander Dahl <ada@thorsis.com>
-> *Sent:* 09 January 2025 07:52
-> *To:* Erkiaga Elorza, Ibai <ibai.erkiaga-elorza@amd.com>
-> *Cc:* u-boot@lists.denx.de <u-boot@lists.denx.de>; Simek, Michal 
-> <michal.simek@amd.com>
-> *Subject:* Re: [U-Boot][PATCH 1/2] fpga: fix alignment on fpga cmd usage info
-> Caution: This message originated from an External Source. Use proper caution 
-> when opening attachments, clicking links, or responding.
-> 
-> 
-> Hello,
-> 
-> Am Wed, Jan 08, 2025 at 02:03:50PM +0000 schrieb Ibai Erkiaga:
->> The current implementation generates some alignment issues as well as
->> some overlapping when all the fpga command options are enabled. The fix
->> is intended to improve readability of the usage info.
-> 
-> Alignment could indeed improved.  One question: the \t is dependent on
-> the terminal, right?  Would it be better to use spaces instead?  That
-> would also make the code more readable.
+> diff --git a/cmd/fpga.c b/cmd/fpga.c
+> index cba38662958..cbcbe9c32f1 100644
+> --- a/cmd/fpga.c
+> +++ b/cmd/fpga.c
+> @@ -437,17 +437,11 @@ U_BOOT_CMD(fpga, 6, 1, do_fpga_wrapper,
+>   #endif
+>   #endif
+>   #if defined(CONFIG_CMD_FPGA_LOAD_SECURE)
+> -	   " loads\t[dev] [address] [size] [auth-OCM-0/DDR-1/noauth-2]\n"
+> -	   "\t[enc-devkey(0)/userkey(1)/nenc(2) [Userkey address]\n"
+> -	   "\tLoads the secure bistreams(authenticated/encrypted/both\n"
+> -	   "\tauthenticated and encrypted) of [size] from [address] (Xilinx only)\n"
+> -	   "\t -The auth-OCM/DDR flag specifies to perform authentication\n"
+> -	   "\tin OCM or in DDR. 0 for OCM, 1 for DDR, 2 for no authentication.\n"
+> -	   "\t -The enc flag specifies which key to be used for decryption\n"
+> -	   "\t0-device key, 1-user key, 2-no encryption.\n"
+> -	   "\t -The optional Userkey address specifies from which address key\n"
+> -	   "\thas to be used for decryption if user key is selected.\n"
+> -	   "\tNOTE: the secure bitstream has to be created using Xilinx\n"
+> -	   "\tbootgen tool only.\n"
+> +	   " loads\t[dev] [address] [size] [authflag] [encflag] [Userkey address]\n"
+> +	   "\tLoad device from memory buffer with secure bistream (authenticated/encrypted/both)(Xilinx only)\n"
+> +	   "\t -authflag: 0 for OCM, 1 for DDR, 2 for no authentication (specifies where to perform authentication)\n"
+> +	   "\t -encflag: 0 for device key, 1 for user key, 2 for no encryption\n"
+> +	   "\t -Userkey address: specifies the address where user key is stored when user key is selected\n"
+> +	   "\tNOTE: the secure bitstream has to be created using Xilinx bootgen tool only.\n"
+>   #endif
+>   );
 
-Agree. Even other commands are using tabs using spaces would be better.
+When you are on this one I can't see any reason to state that this is Xilinx 
+only. Pretty much CONFIG_CMD_FPGA_LOAD_SECURE should depends on FPGA_XILINX and 
+then you don't need to state it in help. The same is for that Kconfig symbol.
+
+CONFIG_CMD_FPGA_LOADFS
+CONFIG_CMD_FPGA_LOAD_SECURE
+and LOADB should have own symbol too which also depends on FPGA_XILINX.
+
+Then you can remove Xilinx only from help too.
 
 Thanks,
 Michal
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 4c4ad9d99799..89f0c162145c 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1178,8 +1178,8 @@ config CMD_FPGA_LOADBP
+           a partial bitstream.
+
+  config CMD_FPGA_LOADFS
+-       bool "fpga loadfs - load bitstream from FAT filesystem (Xilinx only)"
+-       depends on CMD_FPGA
++       bool "fpga loadfs - load bitstream from FAT filesystem"
++       depends on CMD_FPGA && FPGA_XILINX
+         help
+           Supports loading an FPGA device from a FAT filesystem.
+
+@@ -1198,7 +1198,7 @@ config CMD_FPGA_LOADP
+
+  config CMD_FPGA_LOAD_SECURE
+         bool "fpga loads - loads secure bitstreams"
+-       depends on CMD_FPGA
++       depends on CMD_FPGA && FPGA_XILINX
+         select FPGA_LOAD_SECURE
+         help
+           Enables the fpga loads command which is used to load secure
 
