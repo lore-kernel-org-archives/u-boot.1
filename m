@@ -4,76 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35410E77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 12:58:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA777E77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 13:14:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B771805CD;
-	Tue, 14 Jan 2025 13:58:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 520ED805CD;
+	Tue, 14 Jan 2025 14:14:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UHCOw+vs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WTI00VJr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64B7380657; Tue, 14 Jan 2025 13:58:19 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id E775580657; Tue, 14 Jan 2025 14:14:04 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECE898022E
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 13:58:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C057E8022E
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 14:14:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ab2bb0822a4so1107662466b.3
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 04:58:16 -0800 (PST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d414b8af7bso9735947a12.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 05:14:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736859496; x=1737464296; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0RTAS2gSquCE97LYHJeVIXST6Z14mYox0QBajC+jqSQ=;
- b=UHCOw+vsbcht1WRFliZAZS1cfRPjDbzl2TkeFLsGRsVWeGODR5NyZCND9IEv8FaBAC
- XFTih32ZnRuNriuNrBox9ji6z9ByvMRGk3t16kbjRnOSzWoTvYxH3xOCnRJ0logIQKbb
- LbF+GZHGKPZJzvuYtD7zZb2akYsIN+RSRsejc=
+ d=chromium.org; s=google; t=1736860442; x=1737465242; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NFCHQLCgM5n+QGIXP4vu7iZM3gIVui19wQIurFtrILM=;
+ b=WTI00VJrp5jO+OwvKjhz7GteNVAwN3iGIGA+ZfeTxCw6ETwmDD/kxDUQrV/GaumlKh
+ 843tUI2EXkqIDhsTJ81Jpw0jbnOVwSlOQfI0Kxy5okHAXxhJ9/NOgGsm+cVUSre2Hl3H
+ uaCytuHG6KinxOp2yCiGhLyAhoAI+co5VHtPo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736859496; x=1737464296;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0RTAS2gSquCE97LYHJeVIXST6Z14mYox0QBajC+jqSQ=;
- b=hhRWWGbymncPOw5TrT8SerlEi9zU3RXFhLzsvZbYAt9735e/GhfFzSLeV+WtJxoigM
- YB2yn90/SPZsQoY2ipftb5bXq4B9gjJJEUbf2kJQrxemB+B6gd3YyzuqQ0cw4rcqMR0p
- K4KGsaarauoC7ABR3WVLOw960BxF/KhWmsuDUTnPQqRuu2dQsqIBEY+8xqSMgUAeqmxo
- jI3x18+B26UFL4wL2PIKHz4GpXVYPyPuSJFOl5kR+IxS05116Omq7ZtFHXJJvXCx7UZy
- plS2gQOgLrSn9b4tf6vctLrWC0Jl9Grle8WJgKiS7fjOmwUcpbLUDkFunc9NqnH1l7ni
- QuFg==
-X-Gm-Message-State: AOJu0Yzhjvg45TFdwKgc3E20ZiGQxIi//SvTYhSTk4dkw+EHtJy0ezde
- qur3SKlA9FirenP7TbxDi3HrVb48XhK3z/3tFAhUcoZchxrZTKmxgAF23p4LJU+1bIPQ6g1moiy
- 3pTGpOL22nT4+hdS4hqndYU4tKY5/52E+fQFb
-X-Gm-Gg: ASbGncsw/qZnf3GZOOMIXvaWTeYZIrBusLUE0xxg85G+uZCjxafEc1jPh6kf0YA7g9X
- nyB4ndN/JWKAN9qpAyySn/FVHlyTz21zf5C6g25k=
-X-Google-Smtp-Source: AGHT+IFC9XDEKreW73vD6AVZsC4y/tBRxYk2E75if31TJ6WYD3myTudAuGkNVbr5s0UtzmoLC6L821AqIo2ZGmvSMew=
-X-Received: by 2002:a17:907:72d6:b0:aa6:88c6:9449 with SMTP id
- a640c23a62f3a-ab2ab56abc5mr2488552966b.19.1736859495974; Tue, 14 Jan 2025
- 04:58:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736860442; x=1737465242;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NFCHQLCgM5n+QGIXP4vu7iZM3gIVui19wQIurFtrILM=;
+ b=YwEIRKB84rxshafS3xLkYJVab7E23x1LlbNbpdNe3gv9Yb+tvjMa4+169OhSft0uwR
+ US/f83aiezgqtbveREKUvdkHWEl6DlRUq0yCFvtVo7KkrdCmRmuTP78aoV5NWD35z9xN
+ /WXkDvj3m/2L5avURz82c3sL+7UX2uAbtSz29igd7L9Un+yb+WdSrG61uxidMo8ROzXG
+ XCj6EAfs6DGrCBfBzZUci40c2Tlu1FlkOtBPmgSRkxDGte2+ll5RgmGX1WbPxenLHwbY
+ 9HVdRsYCI3g2wTyEu/0OABsHzqkSIflgfA8RWHYMUjMbwbi1JfppWqCqWzwqBWfYuc61
+ xmuA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFczUAXUtVSGAS5SgFs/LfJxqRIjCj01+8Xw8IIfQJ9ChvLv0PkDSKJ+3RzzFJePMYV2d3lL8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxwRS5Q7fIdlnTW/kq/KF9t0BCA9JFAa/qE40ws99uAwn1zvh5s
+ +40bOE/I//zvHhXSRaFml3UHDIfef6wjxzgceJPkxbBi2gNNLLeI7BAALlUC4ArrCIr1iJh/o2t
+ HYiuRsK7lMx7IrzO4L+wh3Bt8oJU8UiFK0B4H
+X-Gm-Gg: ASbGncthrxGiYvO6n5b/+Swu51BbWjeeB+NSnVz2yF92HMwDkgTofoiMQ85DZBk4LUm
+ WNfH3w4SDqsSKqbnvNDXT/iMdka1O7TZduBO2V6U=
+X-Google-Smtp-Source: AGHT+IEON0ODEG9jH66ObIN6wk/CZr/YjTZDhnAyoYXcbwrmJJLY9CLBx1CZQ8zOtpZ35XgLW6F5bCnPMGY/Q/3owgE=
+X-Received: by 2002:a17:907:3e9e:b0:aa6:a572:49fd with SMTP id
+ a640c23a62f3a-ab2abdc0262mr2613467066b.54.1736860442125; Tue, 14 Jan 2025
+ 05:14:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20250109123010.4005298-1-sjg@chromium.org>
- <20250109123010.4005298-2-sjg@chromium.org>
- <20250114012226.GG3476@bill-the-cat>
-In-Reply-To: <20250114012226.GG3476@bill-the-cat>
+References: <20250104-imx-bootstd-v1-0-e09618cc1d65@nxp.com>
+ <CAFLszTi_px3qRGvpcC5WKLw+r5BqqQciOP-Vg1LEN+rt9876wQ@mail.gmail.com>
+ <20250106013311.GA8414@localhost.localdomain>
+ <CAFLszTi2ya3V4SDfpZxLzzyAdyM9KN0MGuZPnK2XeO8wRNw69w@mail.gmail.com>
+ <PAXPR04MB8459B6A69CA0713B0B51058988102@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <CAFLszTg8UHbgHnFM-6JjYFK5pd_+HW61_jzMM-eeV9+hQgOspQ@mail.gmail.com>
+ <CAJaLiFy2FTtxgsb4N8GB8wxTsgyi=oPzSnjznsa_DRAbTSTixw@mail.gmail.com>
+ <1ad10326-67e3-42f9-b8e8-b8a19781f1c9@kontron.de>
+In-Reply-To: <1ad10326-67e3-42f9-b8e8-b8a19781f1c9@kontron.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jan 2025 05:58:04 -0700
-X-Gm-Features: AbW1kvb3xo21WI-D54jE6pJ2gv5ajZ5gu2MOqNSsaHmAP-NFqa-JvK1eJyZJC24
-Message-ID: <CAFLszTj9zAE_KniCZ2xHGHt1fK7jhTBHzfkdSif6XNuzKtWOTA@mail.gmail.com>
-Subject: Re: [PATCH 01/15] vbe: Split out some VBE code into a common file
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Tue, 14 Jan 2025 06:13:50 -0700
+X-Gm-Features: AbW1kvZBSdd_7HKqd1Bl18xP1c96DPWlq7sIcHCHwNtdBLzJPP6kFuuFkf1YyNg
+Message-ID: <CAFLszThFRPexfpRf64XoPzPr+vSQN3-wA6w1hyhgudrDCyxMQw@mail.gmail.com>
+Subject: Re: [PATCH 00/12] imx9: switch to bootstd for i.MX93/1 EVK/QSB and
+ i.MX8M EVK
+To: Frieder Schrempf <frieder.schrempf@kontron.de>
+Cc: Tony Dinh <mibodhi@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Stefano Babic <sbabic@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,49 +99,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Frieder,
 
-On Mon, 13 Jan 2025 at 18:22, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 13 Jan 2025 at 02:48, Frieder Schrempf
+<frieder.schrempf@kontron.de> wrote:
 >
-> On Thu, Jan 09, 2025 at 05:29:56AM -0700, Simon Glass wrote:
+> On 07.01.25 12:45 AM, Tony Dinh wrote:
+> > Hi Peng & Simon,
+> >
+> > On Mon, Jan 6, 2025 at 4:15=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
+rote:
+> >>
+> >> Hi Peng,
+> >>
+> >> On Sun, 5 Jan 2025 at 18:14, Peng Fan <peng.fan@nxp.com> wrote:
+> >>>
+> >>>> Subject: Re: [PATCH 00/12] imx9: switch to bootstd for i.MX93/1
+> >>>> EVK/QSB and i.MX8M EVK
+> >>>>
+> >>>> Hi Peng,
+> >>>>
+> >>>> On Sun, 5 Jan 2025 at 17:27, Peng Fan <peng.fan@oss.nxp.com> wrote:
+> >>>>>
+> >>>>> Hi Simon,
+> >>>>>
+> >>>>> On Sun, Jan 05, 2025 at 08:30:55AM +1300, Simon Glass wrote:
+> >>>>>> Hi Peng,
+> >>>>>>
+> >>>>>> On Sat, 4 Jan 2025 at 16:19, Peng Fan (OSS)
+> >>>> <peng.fan@oss.nxp.com> wrote:
+> >>>>>>>
+> >>>>>>> Switch to bootstd for NXP i.MX9/8M boards with a bsp_bootcmd
+> >>>> as fallback.
+> >>>>>>>
+> >>>>> [...]
+> >>>>>>>
+> >>>>>>
+> >>>>>> This also switches to a text environment, great!
+> >>>>>>
+> >>>>>> For bsp_bootcmd is it possible to create a bootmeth for your use
+> >>>> case?
+> >>>>>> If you would like to take a look (separate from this series), I co=
+uld
+> >>>>>> help with any issues that come up.
+> >>>>>
+> >>>>> I just give a quick look of bootmeth, seems needs extlinux or
+> >>>>> bootscript (boot.scr). But both are used on NXP i.MX release as of
+> >>>>> now. In NXP releases, we put all script in the U-Boot ENV.
+> >>>>>
+> >>>>> Do you have suggestions how to move to support bootmeth.
+> >>>>
+> >>>> I'm not entirely sure what you are trying to do with the bootcmd,
+> >>>
+> >>> With a single u-boot, we want to support Fedora/SUSE/etc and NXP
+> >>> Yocto releases.
+> >>>
+> >>> So add a bsp_bootcmd as fallback to run NXP Yocto releases.
+> >>> NXP Yocto releases not have extlinux.cfg, nor boot.scr, we just
+> >>> have simple uboot hush command in bootcmd, simplied saying:
+> >>> run loadimage; run loadfdt; run mmcargs; booti ${loadaddr} - ${fdtadd=
+r}
+> >>>
+> >>>> you could write your own bootmeth, e.g. using common code from the
+> >>>> others. For example, bootmeth_script.c shows how to run a script and
+> >>>> bootmeth_extlinux.c shows how to run an extlinux file. You could the=
+n
+> >>>> create C code to perform your 'bsp' function, e.g. a new
+> >>>> bootmeth_bsp.c.
+> >>>
+> >>> I will give a look, but this seems we need put the "run loadimage and=
+ etc"
+> >>> in dtb and needs bootmeth_imx.c to support it.
+> >>
+> >> Note that my suggestion here is as a follow-on to you current series,
+> >> which I believe can be applied as is.
+> >>
+> >> Anyway, as a starting point, yes you can use run_command() lots of
+> >> times in the bootmeth to run the things you need. From there you can
+> >> potentially change some commands to direct calls into the U-Boot
+> >> functionality. The idea is to be able to locate the bootflow as a
+> >> separate thing from booting it. I am quite happy to help as well.
+> >>
+> >
+> > Can we call this bootmeth_internal, and have it read the internal
+> > board/xxx/yyy/bootflow? And then this "default' bootflow can contain
+> > the envs scripting to boot the board when all other boot methods have
+> > failed. Of course, it can also be executed manually at command prompt
+> > like other bootflows.
+> >
+> > I think if we go this far to add another bootmeth, it would be nice to
+> > make it generic so it can be used in other boards.
 >
-> > Loading a FIT is useful for other VBE methods, such as ABrec, so start
-> > a new common file. Add functions for reading the version and nvdata.
-> > Also add a function to get the block device.
->
-> This is not a good commit message when you're also introducing
-> functional changes (blk_dread -> blk_read).
+> I agree that a generic bootmeth would be really helpful. We would like
+> to have some simple A/B boot mechanism (using RAUC) and I think
+> implementing it as bootmeth and sharing it across different platforms
+> and boards is better than implementing it in the env for each board/vendo=
+r.
 
-Yes, I did not actually notice this size change at all, as mentioned,
-as I only built for a few boards (firefly rk3399/rk3288 and a few
-sandbox ones). The blk_dread() function is the old API for reading
-from a block. It didn't occur to me that blk_dread() would bypass the
-cache.
-
-> Further, this functional
-> change seems to introduce some other code being pulled in very
-> unexpectedly, and that needs to be explained. For example,
-> phycore_am62x_r5_usbdfu is another case and that has
-> CONFIG_BLOCK_CACHE=y but CONFIG_SPL_BLOCK_CACHE=n, and yet the size
-> growth is in full U-Boot.
-
-This board currently uses blk_dread(), but not blk_read(), so the
-addition of a blk_read() call in non-SPL causes the BLK cache to be
-pulled in.
-
-> Just moving code should not result in
-> unexpected size change.
-
-That's correct, so long as 'expected' size changes includes the normal
-function-call overhead and loss of intra-module optimisation.
-
-So, what to do here? I certainly don't want to use the old blk API.
-But I can perhaps do a patch which changes VBE to use the new one,
-first, so the size growth is within that commit. I looked up
-BLOCK_CACHE and it is used by 90% of boards.
-
-Another thing I could do (down the track) is a separate series to
-remove blk_d...() functions.
+I am hoping that VBE's abrec will land before too long. That is
+programmatic. Fwupd only supports VBE-simple at present but I plan to
+add support for that in the middle of the year.
 
 Regards,
 Simon
