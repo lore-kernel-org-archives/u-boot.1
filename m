@@ -4,67 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFD68E77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 20:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F19AFE77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 21:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEC408022E;
-	Tue, 14 Jan 2025 21:36:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A6BC806B7;
+	Tue, 14 Jan 2025 22:29:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HqzJVL4i";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pNtquZ9N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 318698060C; Tue, 14 Jan 2025 21:36:34 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 10A798069D; Tue, 14 Jan 2025 22:29:11 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 769C48007D
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 21:36:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4EA435C5990
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 20:35:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1A18C4CEE3
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 20:36:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1736886989;
- bh=kTP9oDtkcZApaMj9+tUVDDb/EhjaAw4lOXL2LiglYIk=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=HqzJVL4i9qQYjSY/H4PIn2eaz111eXQbr1NhepXfurCoLL5S7NiaY3L7fZDMSd59D
- Fmo8fdqqkpYeqPI6aMz4QTXFaMy+fKV3Bqfr0NIWxgffd3U+8Lamq7+uwutLtldNTn
- SmDT3+9sHF4oqntWQgZQv9Nc1otmf++LqOuaRJ8L1kzw1+HLM+95lKs9b4JTIVC+R/
- C6c8/KD4OEsWLp2jiYi1FXGjX0GQ7B5LryPbe6yNWuX5se3VHWQFw6IGpU5uXo9zFu
- P7Mc3w6Q5KQUMCf1L9jM8uML6TcrsJNZnEmV48IbhA+t/c4SPv9yJ29WyPnD/FGJQt
- 0hZQHoXC0udEw==
-Received: by mail-lf1-f49.google.com with SMTP id
- 2adb3069b0e04-5401bd6cdb4so5507389e87.2
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 12:36:29 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCU4ty5kI8qRpmPdT7QnsiZoibNhBAuWDsqIROd4S26IGZKDShDXhJnDUc2JWysJL2nMAcd/0hI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHVO74rND6HpTB9LGWjDEGCaPu4FQMzCfYB1kqRnmTQ9LtBBEK
- 1whSu0SkgGTfDiaDIsR6ECwZmWE1v+2rJeVQGiQOXbJbWtDjGhEI4GTpWqa5nDF2kZqV9+9F99F
- bTzJMg69nrbz4yA+CVQqDkIS8FA==
-X-Google-Smtp-Source: AGHT+IFxHDI+0tDcinyedlDz4rkyUyt9IF3K11VmEn3dUB+UdJfAK7LOTZ/iZkjh1J1fpvcLdekprZ6TvKxeM4YEe6g=
-X-Received: by 2002:a05:6512:159e:b0:542:98bb:5674 with SMTP id
- 2adb3069b0e04-54298bb57famr3994823e87.33.1736886988123; Tue, 14 Jan 2025
- 12:36:28 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 828C88022E
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 22:29:08 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b98a2e3b3eso330898285a.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 13:29:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1736890147; x=1737494947; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Hxodn4dvrGXCrK+Vr0Od7GBEw0iqywODBL93OnVIu3s=;
+ b=pNtquZ9N7J+rLcCcrSxi05MxY/SxjiGqITHJkSOAuEG8VPWWaEGOvutBxWymTtAV8r
+ GiCz1cuLNF6IrXoLO2VPB9xPx1qKjV7/5pVYVyctuPwS4LPkgnzZHzPLmBIEBLoZYxD3
+ tpfg+KeycW3fpr/GOYS2R3ZIA7fs94jWVYnT0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736890147; x=1737494947;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Hxodn4dvrGXCrK+Vr0Od7GBEw0iqywODBL93OnVIu3s=;
+ b=SElM/Pkbe9SSzU+TEgGgNNUmqsUqXRtWtq+wlMeylhGf5yRXTcSy+8Aq0/qYy8w7yC
+ URjPjLr0rIYHOyrdq1CCREVGyQ/SqonbLNA5MH/6S4CIb/t28Ekl4XXukti2bqRxZr7q
+ FROq5o6tj3MYD7qjJuT2oCp/AjaHivic0W7uHDItzhMzFcDlNmVELypVbDQLSikJ2Zfs
+ Hw8B6PQhLOKSPfdlUaoX6wYeye6UIBHUJJxkY0dw7prgm22hoStlGGGCM17kTvasRF7E
+ XB04sHFpMdRUt8IzzaScKzHexCGHBcFuus8nWhWnKBg5KL34HGrLmC5vYGIGtqPe/vcp
+ +6Rg==
+X-Gm-Message-State: AOJu0Yxu7A1nVrBmc2aLlTfcWgKL0SlqFJThnq+V2u7eXorzGRGvyJLe
+ euYyqyvWmrBTFki/rI3XhKOkifL5tsr+3X+vfTZcWTpV/I97mvYK5EwVoR23oXQ=
+X-Gm-Gg: ASbGncu+EVtqSNCfyL7VBktvqlWq2uYD56qxW9zuC1vYz/wKZOUECzJxBMayCvTECis
+ DR4wEkH9U/Yg5wFIpSc8eySlrxPMNwoBS8E4mlr8KnshMYXlOOKh8Ckt7sV3IBrDZwXaKRGNzhw
+ KmSlJ7w0bze4vV+h1Xfu0M3kIhFAMIihuKxRhGqRfPMG1TyMdpNuSJ1/hRNHT+05TV7IxAzbgK4
+ B/cL0wzgvLVsZVOjtdk7Ogtqy/E9AhUum6Zq2CmctiLc243/Ozr
+X-Google-Smtp-Source: AGHT+IFImLW/cY36w7AzELoXGp0EU+SFQ5Q9U+4740KaRC5WFMP9/2ORNIwm/DFKlZyJ1smRT9OpNQ==
+X-Received: by 2002:a05:620a:4721:b0:7b6:cd90:c0e1 with SMTP id
+ af79cd13be357-7bcd971a16bmr3626224485a.37.1736890147395; 
+ Tue, 14 Jan 2025 13:29:07 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7bce324826esm642891285a.41.2025.01.14.13.29.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jan 2025 13:29:06 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Svyatoslav <clamor95@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Pavel Herrmann <morpheus.ibis@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>
+In-Reply-To: <20241120153642.861633-1-sjg@chromium.org>
+References: <20241120153642.861633-1-sjg@chromium.org>
+Subject: Re: [PATCH v3 0/3] Adjust how autoprobe is implemented
+Message-Id: <173689014483.93138.17921853829552422063.b4-ty@konsulko.com>
+Date: Tue, 14 Jan 2025 15:29:04 -0600
 MIME-Version: 1.0
-References: <48defa98-9718-4997-86cb-b171187708a6@cherry.de>
-In-Reply-To: <48defa98-9718-4997-86cb-b171187708a6@cherry.de>
-From: Rob Herring <robh@kernel.org>
-Date: Tue, 14 Jan 2025 14:36:15 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqLJ86n8iX5wt4dEuZz6rudxXKFOuuEGXbk7f4ydvTZLjg@mail.gmail.com>
-X-Gm-Features: AbW1kvYk8uSNemjuW7kZFQyGqN4obc41splUmWhupts8VGdl-n3N7N5MoFUPXM4
-Message-ID: <CAL_JsqLJ86n8iX5wt4dEuZz6rudxXKFOuuEGXbk7f4ydvTZLjg@mail.gmail.com>
-Subject: Re: [RFC] Adding bootsource and reset-source* to /chosen
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: devicetree-spec@vger.kernel.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,81 +103,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 13, 2024 at 12:08=E2=80=AFPM Quentin Schulz
-<quentin.schulz@cherry.de> wrote:
->
-> Hi all,
->
-> In U-Boot, there are multiple stages which can be loaded from different
-> media each. On Rockchip SoCs, it mostly goes this way, SoC BootROM loads
-> from a medium (storage or over USB) and executes the TPL (or SPL if no
-> TPL supported), the TPL goes back to BootROM and reads the SPL from the
-> same medium and executes it. The SPL will favor the same medium for
-> loading the U-Boot FIT image (containing TF-A BL31, OP-TEE OS BL32 and
-> U-Boot proper image), but in case it fails, falls back to other possible
-> media. In U-Boot we have the storage medium used for loading the U-Boot
-> FIT image stored in the DTB under /chosen/u-boot,spl-boot-device
-> property. But we do not have a property for the medium the BootROM
-> loaded the TPL (or SPL) from. This could be useful information. For
-> example, I have some CI where I want to check whether the BootROM loaded
-> the TPL from the expected location (important when checking that they
-> all work and don't depend on a bootloader flashed in a fallback medium
-> for example). Another usecase could be to detect whenever one loads the
-> TPL from USB (not a USB stick, some USB transfer; see rockusb for
-> Rockchip for example) and decide to do something else in U-Boot or the
-> OS depending on that (could be starting DFU for flashing the device, or
-> fastboot for loading the rest of the system).
->
-> Barebox currently does that by setting /chosen/bootsource to the full
-> path of the device the BootROM says it booted from, but that isn't part
-> of the DT spec so before I add support in U-Boot for that, I'm asking
-> whether that's fine or if we should correct course in Barebox and use
-> another name and/or location.
->
-> I've also been made aware of other "sources" that are added to the
-> /chosen node in Barebox, reset-source, reset-source-instance and
-> reset-source-device. I am not entirely sure what those exactly are for
-> BUT it seems that this is of interest to U-Boot as well since we do try
-> to report a reset cause as read from the CPU for Rockchip SoCs, c.f.
-> https://elixir.bootlin.com/u-boot/v2024.10/source/arch/arm/mach-rockchip/=
-cpu-info.c#L14.
-> I believe /chosen/reset-source would be the reason, e.g. "POR", "RST",
-> "WDG", "WKE", "THERM", etc. /chosen/reset-source-device contains the
-> node path to the device that triggered that, that could be useful in the
-> event there are more than one thermal trip point (e.g. CPU or GPU), or
-> more than one hardware watchdog (I for example have a system with
-> potentially 4: SoC, PMIC, 2 separate in an external MCU). I guess
-> /chosen/reset-source-instance is for HW blocks that expose the same
-> reset but from two different sources which aren't modeled in Device
-> Tree. Again, this would be useful for the bootloader or OS to decide to
-> do something else based on the reset cause (e.g. have data on why some
-> devices reboot in the field, e.g. because of thermals, power loss,
-> brownout, etc..).
+On Wed, 20 Nov 2024 08:36:38 -0700, Simon Glass wrote:
 
-Is the handling of these properties something common/generic or going
-to be device (e.g. wdog, pmic) specific. For the former, then /chosen
-makes sense. For the latter, maybe everything being in the device
-nodes makes more sense. Then you wouldn't need a link to the device.
+> This little series makes a minor change to how autoprobe is
+> implemeneted, as discussed on the list:
+> 
+>    https://patchwork.ozlabs.org/project/uboot/patch/
+>       20240626235717.272219-1-marex@denx.de/
+> 
+> 
+> [...]
 
-> I'm reaching out to the devicetree-spec community before I add code in
-> U-Boot to implement this so we don't add unnecessary backward
-> compatibility code, were the properties or locations to be modified to
-> match the spec.
->
-> Does anyone disagree with adding this to the spec? Does anyone have
-> another suggestion for the naming or location of the properties?
+Applied to u-boot/master, thanks!
 
-I always feel better if we have multiple users for a new, common
-binding. A new binding extended by a 2nd user shortly after defining
-it makes me grumpy. Here's a thread that came up with the same type of
-issue:
+-- 
+Tom
 
-https://lore.kernel.org/all/20250113112349.801875-1-prabhakar.mahadev-lad.r=
-j@bp.renesas.com/
 
-> Would you prefer a patch to the spec and discuss "code" directly there?
-
-Generally, anything new is schema first. Ideally the spec would get
-generated from schemas, but there's no work being done on that.
-
-Rob
