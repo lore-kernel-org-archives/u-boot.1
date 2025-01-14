@@ -4,95 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A1EDE77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 15:21:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E1BE77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 15:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F3F580740;
-	Tue, 14 Jan 2025 16:21:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C6467806DD;
+	Tue, 14 Jan 2025 16:21:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wSfbR1TA";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Z0oay6LU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3ED8D806F4; Tue, 14 Jan 2025 16:21:03 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C93E8060C; Tue, 14 Jan 2025 16:21:29 +0100 (CET)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::610])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDE468070D
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 16:20:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B120806DD
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 16:21:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b6f1b54dc3so894971385a.1
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 07:20:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736868058; x=1737472858; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GJq9GhsO5crEp32JTB6T5xt9VkNFdW2Yo6ZOBSXazM4=;
- b=wSfbR1TAOTHOST+7fgqMNH39Zh/WWTqpj5564K5D/nuIS434+lZqwK+D7kD4vy9INA
- DzpdcBcT7IObBcQWGR+SvKG/lMcpjlTg8EeMlOnHACH2ouMQAjNipnR1OPQGFmysJqJP
- NizQ5lVbYf1lcgnxa4q1+Unow5r71MKmNJBBVfI+6QNO/4gOyX2OnW3ojSRxoX1NZMby
- 4aMb8z214HaByT9ElTQoraIGo+XY5ePMZqmujWHirDK6kt/ypZYc/A+nSjNVzR1YRECj
- FLEljYK1mB1gVRen1FSOqbXugbdY4KOzJXhHfpioysDEZwVI8/5qBvnR2Hg/Z8NXBQff
- whrQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736868058; x=1737472858;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GJq9GhsO5crEp32JTB6T5xt9VkNFdW2Yo6ZOBSXazM4=;
- b=L+Z6VfZQtv6upvSdk3aNNIG9ZzvjinkK+AA4LHqhATyXMhbLWWfortMJ5V8mm7aa4T
- +S/ZGefLwquI9ZKOvUJziz+qN1u52EuAyvu20oLaVr4iYRNIFIdxIAIxVqvqKFskWgq0
- AxriZPHLY9w8cP7UjyR/+I88N+4MRahsdScJ7nMWOqLEzQwIBQrd4Z1ZsmTJRSGshJMF
- l3tmln5roEgZCCyg7crwAOp093xyrO+Z/kDsE1RZF3u62RLN87VguZB+M2GO6Rq6UycX
- jTWj4oYZ9DMeQ8+FeqNVGCbCz6OtovMp/WYG4OLcDnG9iBo+FAVjUoiCXKA2qxvng4xB
- uobQ==
-X-Gm-Message-State: AOJu0YwacdnjN0e+OstAyoBf190f9KsiCS3r1yyqYVpXSgk2+YP9S+1o
- Kq/CgyqMQ6iUKovwJ052kWBRj4e0HmZIXxSxqm9EuUSYeGsnb9FOQ+aqn55PykrSwbfht4dswKg
- 0p6E=
-X-Gm-Gg: ASbGnctIynDXVmanCd6CuUiQ2tsf3G2Oo51uITWHBy/BXLEi5UrjZfRn2Qqrqzupjh3
- wofWdzzvlob9jvXdRbqvGHy/H+q0iCUkn5La0CEaibHnGAOzxjJh8RYff53Gvjj1BuHcPUEZr3K
- F+bb46Pl655vOOQ3j1zMJ7/CGExe2e9vD+sX6x+Xp0uEHwlG60Zg2HLRf4hmH5GJhkqvmmzVQ+5
- I8kMGLg1plOJit//PgNRtvZxdxDC/ZfQQE5rWbaHn4DCPNvHtBMAuuo252j77rM6fGf8pjA0h86
- Ou1mr1PzuLT4UYOZOv5Dj2Kdqaqxh7TtjtPdFnsDHleY4xcc1PsCU7I=
-X-Google-Smtp-Source: AGHT+IF6uCSuf5NuUtG5J9v1a3csau9mz7gEk4oOTNcGZSLEnaCAOAbrnzBMl1fFWfgbQkt9vwAiqA==
-X-Received: by 2002:a05:620a:462c:b0:7b6:d4df:2890 with SMTP id
- af79cd13be357-7bcd97292a8mr4011433385a.4.1736868058643; 
- Tue, 14 Jan 2025 07:20:58 -0800 (PST)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7bce3281697sm613736885a.67.2025.01.14.07.20.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 07:20:58 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Tim Harvey <tharvey@gateworks.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH v5 3/3] tpm: get tpm event log from bloblist
-Date: Tue, 14 Jan 2025 07:20:18 -0800
-Message-Id: <20250114152022.933662-3-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250114152022.933662-1-raymond.mao@linaro.org>
-References: <20250114152022.933662-1-raymond.mao@linaro.org>
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZC1sKra8kp5FAO0QP8cbF3WoeqPOjxm5tSoKDWIlBxGwra6FJYOkW8WOHyfM3HIuI5EbK9px+2EcAJHHdwM8ggGJD5scKzeQusMMLPJav3kO7SlxpgJOptv0BiCBAJFhBYjK9iU1ZmeP/hfSxGBHRGYVmijVDEq9mnYoJRo6n3XkGbtxClMsv55Y0kHKcsWd9HDjnEOVgr0666sR2tQcJq9WxFqc256fOiY0YJHgj4nn8/+GeTlEf4vW556EoA6tXC8t0wEaXm2ZE4fnaKmSBagagDNClHHEUV/s/w+zh28Bw2WxaAQSUgwH6ywKTWQh0Yz5kxhJ70QPQz8UBzUmOw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Roh9TugX00lFO/jzYURBBGMLUWDpXBLB6QuBXCy19Xg=;
+ b=bWDyK08LiVf2RRv4iHHgviMsK87iB6U8CFmqr3WEl0uiTOxpnp0Ok34V5sobzxZ0CFnbTgMpTVF+8lyU43tkJtHCQyNk0sj6+lzlZBQX372ENeNdz3/DddgOHgLHNavQIMkSfPB+k4KDipfWPBNEoLn+jrns9xQJlL8f628Rip8RB4XmAzZ5miH+NChWIqTmthvkFiBD2m49vby5qBm+SOH1+UiyZK7IJfG6zroh1DrDoTII0hX7BAyDNStxfW0zVOBIsQ6MZdBCrAF92S9yX8gLSu72HJupUhdD1yIn1eJe6RQXEqFbH1V/pdfE8jZi3/8y68fbcI7/7PqwoFtAng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Roh9TugX00lFO/jzYURBBGMLUWDpXBLB6QuBXCy19Xg=;
+ b=Z0oay6LUbxW78cvREunzudBC3e8ChfUTjC93vJj4pd/y6Ty6OVMGfb0EmEOTacDybzJIeYOKvpOxIHXcfGKS5+yujUeK+58cKK4BpKskIJT6LlYaxuRTnwmVb9340sJqWl444glbsUyB1bpWfgmVjNvN9rlxXxZ2gl2DU3KYGD4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PAXPR04MB8574.eurprd04.prod.outlook.com (2603:10a6:102:215::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.18; Tue, 14 Jan
+ 2025 15:21:25 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Tue, 14 Jan 2025
+ 15:21:25 +0000
+Message-ID: <5f42abef-4aad-4f57-8396-6d8d17a89285@cherry.de>
+Date: Tue, 14 Jan 2025 16:21:24 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/7] board: rockchip: add FriendlyElec NanoPi R3S
+To: Tianling Shen <cnsztl@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+References: <20241226092043.419511-1-cnsztl@gmail.com>
+ <2b658c60-480f-4488-8c40-f781a849cb32@cherry.de>
+ <5d2fb256-cd0a-4a94-ba9f-f13a928656ed@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <5d2fb256-cd0a-4a94-ba9f-f13a928656ed@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR2P281CA0094.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9b::20) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB8574:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0007d65a-aff8-4be9-450f-08dd34af1c1b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MEJ1YXFmQVRvbk5tcFNuT0VuS0hEM0pOSEJMdTB3bGtCOVNJd0hHZ2VFenNE?=
+ =?utf-8?B?NWtXT0M4WnZvQ1N0WUt2dlN2R3ZZU1I2L2ZaRUpBdDFDb1J0bVZJemJWdUpw?=
+ =?utf-8?B?Y0NmY3FGOUJXU0djZm1MUTg2Nmx0SzNaVmJoeDBnRFQzMnpqNHNoSzZyMWNO?=
+ =?utf-8?B?bGpjc0ZQZHdWSXo1YlZmMXVLY0ZzYy9vSC9YMkVpUlZIZERuTHg2dzRnRUQr?=
+ =?utf-8?B?SXhLQWFkRHpXK2xMNTBJSjRzQWZkMHVnZ2F4dWlUNExqZG1jMVRUaXNmNmJR?=
+ =?utf-8?B?dWxPZ1FnVEFwR0ZxY3I5ZjJMdTVNWmw0SUUza2pJeHpTWmoxZ0RLYTA4bnpE?=
+ =?utf-8?B?NlNWSGVZeFJJOHZ1d1ZuNytsZlFnUlpsZVdQcWMrSXQwV1QwWk9MN0pwSy80?=
+ =?utf-8?B?M0dESEFaSnlacnNtRnpJM1lia2FMMENPNFZ0K1I3MTV6MklxNXJIUmlQSm05?=
+ =?utf-8?B?SXdIaEU2TkFnbUdKekJXSnJsRmpVRU5KOG05OWhWcW1mK21rbm9oMmJjWTNz?=
+ =?utf-8?B?Y2pEb0oxell4SDlTQmtTQ0xIbm1FRi9wYW5BcTlkdkNJUkk5T21IU0xsUitX?=
+ =?utf-8?B?MGpSdjk2dWpuOG5PY2svWlJ5ZGdTSzRRSDZjczdGeVB2T3p1VGhmSVhSUjJK?=
+ =?utf-8?B?UTlRMlZXUVdoSzR3V1FkbWJHOUpqazlqaElRTXp0N0g2WUpvY2x0OVFNcHBq?=
+ =?utf-8?B?UEhaY0RWRUYzZFhHWlR1UHJzT1RsUWVyQThIYTBORkZxeVFEUTNZbTRnbkk0?=
+ =?utf-8?B?UWtKVmhLQmxzSmdqbko3Z0pVelVNeXRsL21sSkRvNFQwS2llMjlrb1dNNjJG?=
+ =?utf-8?B?cFNTS2l2RGV4WEJWV3haSkJHTUxDVjRVTjBXbmppclh1Mi9zZGtCQ0RDWk1q?=
+ =?utf-8?B?WnlTVXAxVG1XRUdVcUQzOHVoRUlBeTRoakFGRm14UzRqamRTL3ZUSTFRRllW?=
+ =?utf-8?B?ZlJpbUZnTjJNaEg5TnJONEtsMGRZdkNTRXZWNEs2Z2VvT1JPRWJjbENUNFhH?=
+ =?utf-8?B?a3h0TkxFTWtUVFNObUorNmY1NXhCTVlMRWVPUTQzeDAySzBtN3UxaEViR3Bx?=
+ =?utf-8?B?YXpnSmlLV1FVYnlNem1BTmRlaWlqbHl0WFlSRUQxcE5Hd2tzN1ZSdS9ZSitO?=
+ =?utf-8?B?aTk5OGREeSt4dTZuRFQ2eGRyaG8waHFWTjF4c0dyaDlFblpnNVI4ZVUrekJU?=
+ =?utf-8?B?d2NPYzNmQXU0K0NYeTkwQ0ZlS3NWNjEvR2ZWcW9mWFpuK1h0b0lFRWVTdzNT?=
+ =?utf-8?B?Z3kxZVBwaGNhSkdwRmNaUWhiaURBNURjUGpoS29kZHZUTTZiZU9vRGc2MDQr?=
+ =?utf-8?B?K2hvTXloQU14MDNaNURLb052RnlLSFZQSmk3dmVsNEM4eU1iSE9ZWkQ4a2dI?=
+ =?utf-8?B?SmNMeGFFU3YrL2pYRWRrVEw5WHd2alMyblNzWHpJWnR0TnhwN3ZWdjZwTjBs?=
+ =?utf-8?B?U0o1Q0ViMUhkYk1NcFBZWTducHRLY0tIeUY1OGFScVpmMC9CQU11KzlmN1Bk?=
+ =?utf-8?B?blptZjJja0hLZU94QWpaeHpEMUxLUXVWcklaamsyL3pjdko3UWxNM25DRFNY?=
+ =?utf-8?B?R09NQlFIVmNyeUcycldpVExKQzZEMHNQV01DQ0NNS2w2SDdhRW1KOXJ0Mitt?=
+ =?utf-8?B?SWs0UUh3VGFVaCtKYmpXMmJBbGRJVEJvTCs0cDBKS29hSURNYnc1a2Rxb0xq?=
+ =?utf-8?B?K0NicE5Pd2JrUVEyRStmanFnbkFoQlMyMHpGa0xScUQ1SE1qQjd4bWNVVXZa?=
+ =?utf-8?B?WlRwaVdSNkE2L1RCMzRhRXJsdk10dHhaRkY5OXBtZk1FVVZyT3lmYVJVVXNP?=
+ =?utf-8?B?R3BRdU9mOCtQK0RpczBiWjVKMkpSOWhSY2xlOTVDQ0lIa05nNWdvWUNabFVD?=
+ =?utf-8?Q?mt7MHwgAD8sQx?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WUUrVDRGM3ErNFA0WFRrTnBzbE56NzBUcHgwQ1NnZUxJTlhzUVJGRmViVFNm?=
+ =?utf-8?B?dnQ0QTIyaERBT29BM1hSV0pRZXhuMTFCZU50UFVtZElpSXJHTGFKLzJvOS9S?=
+ =?utf-8?B?d3h6SXR0VUtvd3Q4VDdMaER0L3Q5eE5ZWEluc3JJOEVENW9qMVdWRHlLT1pq?=
+ =?utf-8?B?U1NENVU5MXozSWowa0xpWndEL1JDVUZpbDZlLzBMM0hoRGR3eG5xUFBNaFhC?=
+ =?utf-8?B?OFpvb052TzhkZmtDM0NqQ3cwRSt1T2YwayszdmlkN2FPdDNBb25qQ1FZemVL?=
+ =?utf-8?B?N1lWcjJiYzllL3JCMG5td3BsZDdORW1DLzdVdDh6dWpWOGlwY1hRbFhPM2Rk?=
+ =?utf-8?B?NGFGcXlFRjZBSDVRLzlrWDVBMXBaR09nMzQrbjJ6ZEVSbjMrQzVuOC9ZN01s?=
+ =?utf-8?B?R3pTbnZjRC95K0tiVkFSc0kvQThEVTBya2JLUDU5cHUzNmNmWnF5YmRURldx?=
+ =?utf-8?B?cS9RdU1kbEMxUnBaZ003bnhxNUc2VmxITUVlcGIzbGhKakRZNXlPY1Q2ZkRG?=
+ =?utf-8?B?UjRBUzNKTkdIRlg1NU5ReWUyYmZ1R3VsNVorWkNqOXB6QzMyRkZPRjhLZWF0?=
+ =?utf-8?B?cGdkNEhkSjF0VjdsOGhSRndXKzl1b09PdXBvalNEUEpCY0FCRTBrU3UwWHNs?=
+ =?utf-8?B?OWkrTUwwNm53YisyTUtTQ3YwSzRCYm1hWGEwdy9aYVQ3enJkc05Xa1A2TzhQ?=
+ =?utf-8?B?MzRXU09nd1BtMUVzeHBRSXJGVTBrM2JMNkJKYTBnbVIweGwrcDRDZkJEc0N3?=
+ =?utf-8?B?czJVNnNHZEJsOWxxQWUyd3Eza2lweEZ4WkNPYlVmNlJzTHlWeTJJbzNVMkZy?=
+ =?utf-8?B?UjRBS0poYk5lMUtDTHpqeXdlbXNTajVRa2xNdndwYkZBVUVtVndlNUdySnp6?=
+ =?utf-8?B?cStjcXVSZkFhM1ZCSUxTMndZandiZjRNcXREZThHMVNESGhiSEhNUFVqOG5E?=
+ =?utf-8?B?T2htNGJtbFEyWDFRUE9RTVNOcE1uSFRRSEptdUxDaG5hNmEwSW9MTkhVckZB?=
+ =?utf-8?B?NUtsOU1USmg5aC9tdVdYTFdHUkE2a2JHbk9mb3dzZmg3SzZnNkJ5dkNiM3dK?=
+ =?utf-8?B?clpuaS8wZkJUK1hlTFNjMlcrd1UvQ295M3p1c2dxUkJSTlBLaUljVTVQd0U0?=
+ =?utf-8?B?MzZzSHVVYlJJRnZQcFFKMEpUL1lRU0VXWVpzUFRjM0xHYlV6S2NZRGdnNjgw?=
+ =?utf-8?B?K3FkeldQTyszVzZpaEFsTHJNTktsSFc5RzRhdWJINFlzckkwVk53SU03RWdq?=
+ =?utf-8?B?c2MvdkhzTURCMHFKbEVKYm9aQjNoQmV3dzc5N2VmbXQ3eE9WZGdYQ0FEUHA4?=
+ =?utf-8?B?ejRGcGFYV1pJNHpEMmd0SUQxOXZ1dUo4SDFXbVRObDJNZ08vSmdVWHFRKzhV?=
+ =?utf-8?B?cm1IQUxCQkNDRnkrVG84d2pSVE1pUVFzLzFLZnpGU0VNck8rMy9PMitHMU9R?=
+ =?utf-8?B?ckVSZ3NEN1IrWDRlMEwrTkZ3WWk1eE9FdytxVkRZR2FUOVRVZHc4OVd3aDVh?=
+ =?utf-8?B?bVllbUdJNkJBSDVCZ3F5eGJqTGpvanlyNTlEQXVzOXZyd2lpUGdLSStVZjVh?=
+ =?utf-8?B?K3ZzeGRLYXh2eCszVzdtNHUyNEdoUjZVTG5PV1FIMjJ2aDFKL0ZsUElSRk9k?=
+ =?utf-8?B?am9mZVNXSGFBOHJKZzJxRjJVeGNZY1ROU2l1T2ZTOFpBdVJDa3JlOUkzdTM0?=
+ =?utf-8?B?YVFva2FJTFlmMEpSVVAvOEt2SmM3QW5KaUs4V3pUU0RNdUo1TmNna1h6bWdp?=
+ =?utf-8?B?YjE2WE9Mak1oWkh1VTNSakMxZVhob2NXaGsrS0lLdk5kSjV4eCttNS9lV2dy?=
+ =?utf-8?B?MXp6TGl1Zm4zVVFDWFlObEJwcW9rcTJsVHRWNElZWmVNZkN6d0I2aHpOVmpJ?=
+ =?utf-8?B?R0I0d0h1ZXlBQWQrRzhNNVd3UVgxQXFmU2dIdUd5QlF6SVZYVVFYVjhDdWhD?=
+ =?utf-8?B?YUpxUENuTWlvZVFrTy9LdldxckwwQUYwamNEb055SHZiWnREdWZUSk9Oamd5?=
+ =?utf-8?B?K3MyeXoxRUFNd2lyeEJ6TWcwR2NCRkladVRCbFBTSnFsV3JETzZNT1BJL2pT?=
+ =?utf-8?B?K0s4NzFsTVIzWFBBUE1Ua0FyNjhTNFVWeEdNbTRmVzJ4ZnpMTjArV215aGRp?=
+ =?utf-8?B?bEIwd3hhTjRQTm4wY3VTM3JCbXFzT0ZVekp0bkNWYjUyWkJmL0FsMUdOWDJQ?=
+ =?utf-8?B?amc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0007d65a-aff8-4be9-450f-08dd34af1c1b
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 15:21:25.3099 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: RKbY3lza34fuSmwIdOlm+bE3GPzeKGtnKbdWiV2j6W/Bx7FRaQd5VMZJfeDjVGfxrDsz8P8Z0ilXolG9ufbybNfCS+8Atrc5lsY4o9cNzi8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8574
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,139 +177,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get tpm event log from bloblist instead of FDT when bloblist is
-enabled and valid from previous boot stage.
+Hi Tianling,
 
-As a fallback, when no event log from previous stage is observed
-and no user buffer is passed, malloc a default buffer to initialize
-the event log.
+On 1/14/25 3:49 PM, Tianling Shen wrote:
+> Hi Quentin,
+> 
+> On 2025/1/14 22:39, Quentin Schulz wrote:
+>> Hi Tianling,
+>>
+>> On 12/26/24 10:20 AM, Tianling Shen wrote:
+>>> The NanoPi R3S(as "R3S") is an open source platform with dual-Gbps
+>>> Ethernet ports designed and developed by FriendlyElec for IoT
+>>> applications.
+>>>
+>>> Tianling Shen (7):
+>>>    arm64: dts: rockchip: Add FriendlyARM NanoPi R3S board
+>>>    arm64: dts: rockchip: fix model name for FriendlyElec NanoPi R3S
+>>>    arm64: dts: rockchip: replace deprecated snps,reset props for NanoPi
+>>>      R3S
+>>>    arm64: dts: rockchip: sort props in pmu_io_domains node for NanoPi 
+>>> R3S
+>>>    arm64: dts: rockchip: enable eMMC HS200 mode for NanoPi R3S
+>>>    arm64: dts: rockchip: reorder mmc aliases for NanoPi R3S
+>>
+>> How did you backport the above patches?
+>>
+>> ./tools/update-subtree.sh pick dts <commit>
+>>
+>> is the tool to be used, it should have added a
+>>
+> 
+> Thank you for the tip! I did not know there's such a script and
+> I just copy&paste the commit message from linux tree manually.
+> 
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
-Changes in v2
-- Remove patch dependency.
-- Remove the fallback to FDT when BLOBLIST is selected.
-Changes in v3
-- Malloc an 8KB buffer when user eventlog buffer does not exist.
-Changes in v4
-- Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
-Changes in v5
-- Replace TPM2_EVENT_LOG_SIZE with CONFIG_TPM2_EVENT_LOG_SIZE.
-- Add an inline TODO comment.
+Mmmm, how did you apply the patch in your tree then? Trying to figure 
+out how we can avoid this in the future.
 
- lib/tpm_tcg2.c | 61 ++++++++++++++++++++++++++++++++++----------------
- 1 file changed, 42 insertions(+), 19 deletions(-)
+I'm wondering if we shouldn't have tooling in place to detect when 
+things aren't done the proper way (for maintainers I mean). We 
+**really** want to have dts/upstream be upstream + some patches that 
+were already merged in devicetree-rebasing tree. I don't know enough 
+about subtree merges that Tom does when updating to a new tagged release 
+to know if it's actually safe or if the possible mistake made when 
+applying a commit by hand can persist without us noticing. I guess a 
+mistake made in a manually applied patch would be caught by Tom during 
+the merge from the next release with a merge conflict, but then that's 
+pain for him to debug.
 
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 4134d93a35..2d9076f091 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -5,6 +5,7 @@
- 
- #include <dm.h>
- #include <dm/of_access.h>
-+#include <malloc.h>
- #include <tpm_api.h>
- #include <tpm-common.h>
- #include <tpm-v2.h>
-@@ -19,6 +20,7 @@
- #include <linux/unaligned/generic.h>
- #include <linux/unaligned/le_byteshift.h>
- #include "tpm-utils.h"
-+#include <bloblist.h>
- 
- int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
- 		      u32 *bank_num)
-@@ -615,15 +617,24 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
- 		elog->found = log.found;
- 	}
- 
-+	if (elog->found)
-+		return 0;
-+
- 	/*
--	 * Initialize the log buffer if no log was discovered and the buffer is
--	 * valid. User's can pass in their own buffer as a fallback if no
--	 * memory region is found.
-+	 * Initialize the log buffer if no log was discovered.
-+	 * User can pass in their own buffer as a fallback if no memory region
-+	 * is found, else malloc a buffer if it does not exist.
- 	 */
--	if (!elog->found && elog->log_size)
--		rc = tcg2_log_init(dev, elog);
-+	if (!elog->log_size) {
-+		elog->log = malloc(CONFIG_TPM2_EVENT_LOG_SIZE);
-+		if (!elog->log)
-+			return -ENOMEM;
-+
-+		memset(elog->log, 0, CONFIG_TPM2_EVENT_LOG_SIZE);
-+		elog->log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
-+	}
- 
--	return rc;
-+	return tcg2_log_init(dev, elog);
- }
- 
- int tcg2_measurement_init(struct udevice **dev, struct tcg2_event_log *elog,
-@@ -676,10 +687,25 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
- 	const __be32 *size_prop;
- 	int asize;
- 	int ssize;
-+	struct ofnode_phandle_args args;
-+	phys_addr_t a;
-+	fdt_size_t s;
- 
- 	*addr = NULL;
- 	*size = 0;
- 
-+	*addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
-+	if (*addr && *size)
-+		return 0;
-+	/*
-+	 * TODO:
-+	 * replace BLOBLIST with a new kconfig for handoff all components
-+	 * (fdt, tpm event log, etc...) from previous boot stage via bloblist
-+	 * mandatorily following Firmware Handoff spec.
-+	 */
-+	else if (CONFIG_IS_ENABLED(BLOBLIST))
-+		return -ENODEV;
-+
- 	addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
- 	if (!addr_prop)
- 		addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
-@@ -694,22 +720,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
- 
- 		*addr = map_physmem(a, s, MAP_NOCACHE);
- 		*size = (u32)s;
--	} else {
--		struct ofnode_phandle_args args;
--		phys_addr_t a;
--		fdt_size_t s;
- 
--		if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
--					       0, &args))
--			return -ENODEV;
-+		return 0;
-+	}
- 
--		a = ofnode_get_addr_size(args.node, "reg", &s);
--		if (a == FDT_ADDR_T_NONE)
--			return -ENOMEM;
-+	if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
-+		return -ENODEV;
- 
--		*addr = map_physmem(a, s, MAP_NOCACHE);
--		*size = (u32)s;
--	}
-+	a = ofnode_get_addr_size(args.node, "reg", &s);
-+	if (a == FDT_ADDR_T_NONE)
-+		return -ENOMEM;
-+
-+	*addr = map_physmem(a, s, MAP_NOCACHE);
-+	*size = (u32)s;
- 
- 	return 0;
- }
--- 
-2.25.1
-
+Cheers,
+Quentin
