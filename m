@@ -4,88 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E178DE77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 16:14:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B99DBE77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 16:40:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DB858060C;
-	Tue, 14 Jan 2025 17:14:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A2348060C;
+	Tue, 14 Jan 2025 17:40:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SFJQf5DQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eyt48RnF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB8788022E; Tue, 14 Jan 2025 17:14:56 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id CCD0F8069D; Tue, 14 Jan 2025 17:40:10 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 394D78022E
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:14:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A0D58022E
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:40:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2164b1f05caso101479095ad.3
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 08:14:54 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6dd049b5428so46116646d6.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 08:40:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736871293; x=1737476093; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v2u58ssit771NMsId1nthOUvRo/vKSKLzTMUGdR2QG0=;
- b=SFJQf5DQbwqnGUu9P8iR1ltVFc+bNHX2TO7OvzccjWFargLffXO9V/ipMWukdmd2I0
- +9b5OCBwlbtnud0wFjp783dFw0EjgTZzvLDelrawWA9Z8jR+HlKKMmGQHE9z6J1BnmxE
- Fo9st1Ow3yp+AcHIGQTlcyspsUFBf7ehHGZgt2nxFNPy2WalpkMpVPoo/MNnSftEyhl0
- 8rKvTv887fzfGLdOj9uxPQ5xcpJm84qgyBcHrfj+CRF0hh/We68UDGYzF9iD1RuRgPa8
- JXPRSgPZK5yY/C4i/HZdIYXSL2uh+1lN5BcJNUi0iD58Gj17Njw1vkzh0DO7j1U6pnjS
- mF7A==
+ d=konsulko.com; s=google; t=1736872807; x=1737477607; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ur/NKTjRZ7FbiqRfeUqfIxZF+2YRZHJqr1BKJ0tfy+Q=;
+ b=eyt48RnFM3o3Ew8Cyx8U5wHueqnzqE0Ri6fWREbTKYyJI+GQNMLFIMVmoXfj4ZN7dj
+ KPQigbHkUVxTo1abzZT+ita+YDYXbwJ0xfZEsVBT2vHWCCwOJMPwH/wyAQZ1X8sChRrD
+ n4Wtt7G+mNMdT3Ewp02VwSaRp3P+R0c8+eK0s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736871293; x=1737476093;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=v2u58ssit771NMsId1nthOUvRo/vKSKLzTMUGdR2QG0=;
- b=A4GZ59FQF/c+A3wNBx6/Kr2CH/x51QOZKnQUw2i7yE4sv9bxIFRszq7SJ41kHz4Ai8
- Uef/z+QVpnBFrhBlFXpCa78H5yaXWfzApr8TE+h69SlRJO1+Rm5XdsIvgr6H0WG4tOKn
- GoC4Khs59WqHgHl4XvnYJMj+UUBjo1bijIr7y2No/pFKH+9C3OOWsKfgO8UZzA7Za+Da
- nBiXe61xEjcjxquUGBuKOAZj9ndZdZA9T/qIFjv0EkBMtHYzXnoe3jSh1cRBV24SJ2i7
- VOp3htEOuUoFvczdq4uL/HXfcV668YFFjyLNjrUzPGv9YSt/rZ3ppYTzsrHbzk+Y4wt6
- /jMQ==
-X-Gm-Message-State: AOJu0YwFHof+EXzR6VfwJr1NP3zVYGHlhIhxB1Q7gLUyklnAp/ajpUtY
- KCvj6SHspoYp1B4TGddOaXbhVov+N2cpLDPKx2JDBgcMowsiigWU
-X-Gm-Gg: ASbGncug5L5Adyp2G4YhAUVYhUjEGoCZezBT4dM5widDuByrnQjGXCmatGbFf6DUHQf
- lp70x1HHtO0hmr86lhzp2pKjumhpseLNgyRuZS4nrmI86eNAvJUmKdORbazINmFEs0Z/xBullDV
- o54RTGA5EBgHso8ZG1ofRRnMBczoZaQJWDUnptLQ4oK/lxdOdYzyh8O6S68FrPhIucpq/je0ooB
- WXGiqj3oYkZRxsrwqw1/K4EKEQBtc4oa/McEYDYKuq9HiGaPE65J9RCXsCnq0SZB/l8bfVrPnOF
- YThPm0RyJP27UmAF9mPrNPI=
-X-Google-Smtp-Source: AGHT+IGNuYgjhgoLFWTvrFbU96loXKB2WwdUBw6ZBfS5qayAGuGaH5WQjv6RHIuJftv41pXRR2DTPw==
-X-Received: by 2002:a05:6a21:3a42:b0:1e1:b12e:edb8 with SMTP id
- adf61e73a8af0-1e88d0a9373mr47321800637.30.1736871292230; 
- Tue, 14 Jan 2025 08:14:52 -0800 (PST)
-Received: from ?IPV6:2408:8362:245d:4738:bc4b:53ff:fead:2724?
- ([2401:b60:5:867d:3631:b7db:c3f4:aae2])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72d406587a1sm7822966b3a.105.2025.01.14.08.14.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Jan 2025 08:14:51 -0800 (PST)
-Message-ID: <b0af95e7-1e4b-4630-8355-d4218896ace6@gmail.com>
-Date: Wed, 15 Jan 2025 00:14:47 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] board: rockchip: add FriendlyElec NanoPi R3S
-To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass
- <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
+ d=1e100.net; s=20230601; t=1736872807; x=1737477607;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ur/NKTjRZ7FbiqRfeUqfIxZF+2YRZHJqr1BKJ0tfy+Q=;
+ b=lGSV+tdiPkbzuBpUzx07Vf3vhj7cyDMNPKvikGs90emNJqKl9+0GhlYB0BomHnreR1
+ 0SQVFnZM22PK8jtv+Yyb9qI9/2skPym0x62D5CQvR1sE0QiCqBK+UexG4N4ZknNVJRxe
+ MUgQ/5ua3iS7q/v602nm5LeEUfU6L6v1rSajXLtLFQEbQiqE61xVDqTF5VygDBHaI7Bh
+ xj6NvUKv0R4rIFo5qrbVQVe54XMyLYeNrvebQDq9TEutPut/HBYxoLinFe2EOYbmya0x
+ CGHwUT1SbqJghkUWi1ueztohBI4qBuCll/z+5O5lkygOSoUqqO0UdmuFeVbuopt24LO4
+ bvbg==
+X-Gm-Message-State: AOJu0YxbSVl3szTm80beRadt4Rc75ZynOfh1XZAqEGVU7bCUIWq+oiUq
+ 7e0mkLnkVIBQoQo0klYcld5ZrWxuWQz7PU7owiqZPqrXoHS0ueGgJf0UqnU5zMssiGtOzvC/5Bl
+ l
+X-Gm-Gg: ASbGncsw5DpYb3w+mkG+UzwAJQRrzkdZEsy8CIO6VAxo1Q7NLpXfNUqUlYWDE5qO70u
+ aMUF8Y3AjI9Lhc0kDCP7ZcKB7V94VjFGGLX8CxYga7TC2mAsc6NHl4HqtG/ICpG7Xgwjzl3INHe
+ 7GiuOjSnfbKRedgT9SbQ/5I/ywzVyevnVmF4IWsd6U9QYlgCwSfxZ4GQZ5UCxjciOakB591Gp3f
+ A0N6eusxg5+8pbLOtDP10RRmYpbWcnWfBrrTdP846mbKo27oN0UIg==
+X-Google-Smtp-Source: AGHT+IFSCzQLooj5QSnMp/qU8X7UUon79VE8vsjiq8wyZch5DqZw0BPZYLysaMmT7n7W+iQjeuTxPA==
+X-Received: by 2002:ad4:5747:0:b0:6d8:8fdd:9797 with SMTP id
+ 6a1803df08f44-6df9b2b1a16mr470094296d6.36.1736872807460; 
+ Tue, 14 Jan 2025 08:40:07 -0800 (PST)
+Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dfade89362sm53895826d6.110.2025.01.14.08.40.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jan 2025 08:40:06 -0800 (PST)
+Date: Tue, 14 Jan 2025 10:40:04 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <monstr@monstr.eu>
 Cc: u-boot@lists.denx.de
-References: <20241226092043.419511-1-cnsztl@gmail.com>
- <2b658c60-480f-4488-8c40-f781a849cb32@cherry.de>
- <5d2fb256-cd0a-4a94-ba9f-f13a928656ed@gmail.com>
- <5f42abef-4aad-4f57-8396-6d8d17a89285@cherry.de>
-From: Tianling Shen <cnsztl@gmail.com>
-In-Reply-To: <5f42abef-4aad-4f57-8396-6d8d17a89285@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [ANN / RFC] Regular community calls?
+Message-ID: <20250114164004.GI3476@bill-the-cat>
+References: <20250113183409.GY3476@bill-the-cat>
+ <31e9cdb8-72a1-401d-bd7b-6be8ef403507@monstr.eu>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gim4wAE3pY14BULt"
+Content-Disposition: inline
+In-Reply-To: <31e9cdb8-72a1-401d-bd7b-6be8ef403507@monstr.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,82 +94,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On 2025/1/14 23:21, Quentin Schulz wrote:
-> Hi Tianling,
-> 
-> On 1/14/25 3:49 PM, Tianling Shen wrote:
->> Hi Quentin,
->>
->> On 2025/1/14 22:39, Quentin Schulz wrote:
->>> Hi Tianling,
->>>
->>> On 12/26/24 10:20 AM, Tianling Shen wrote:
->>>> The NanoPi R3S(as "R3S") is an open source platform with dual-Gbps
->>>> Ethernet ports designed and developed by FriendlyElec for IoT
->>>> applications.
->>>>
->>>> Tianling Shen (7):
->>>>    arm64: dts: rockchip: Add FriendlyARM NanoPi R3S board
->>>>    arm64: dts: rockchip: fix model name for FriendlyElec NanoPi R3S
->>>>    arm64: dts: rockchip: replace deprecated snps,reset props for NanoPi
->>>>      R3S
->>>>    arm64: dts: rockchip: sort props in pmu_io_domains node for 
->>>> NanoPi R3S
->>>>    arm64: dts: rockchip: enable eMMC HS200 mode for NanoPi R3S
->>>>    arm64: dts: rockchip: reorder mmc aliases for NanoPi R3S
->>>
->>> How did you backport the above patches?
->>>
->>> ./tools/update-subtree.sh pick dts <commit>
->>>
->>> is the tool to be used, it should have added a
->>>
->>
->> Thank you for the tip! I did not know there's such a script and
->> I just copy&paste the commit message from linux tree manually.
->>
-> 
-> Mmmm, how did you apply the patch in your tree then? Trying to figure 
-> out how we can avoid this in the future.
+--gim4wAE3pY14BULt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I fetched the patches[1] as-is from kernel and applied them by `git am 
--3` with path correction, then maually added the line "[ upstream 
-commit: xxxxxx ]" to commit message.
+On Tue, Jan 14, 2025 at 03:21:09PM +0100, Michal Simek wrote:
+> Hi
+>=20
+> On 1/13/25 19:34, Tom Rini wrote:
+> > Hey all,
+> >=20
+> > It's been suggested again a few times recently that we should try and
+> > have some sort of regular open call / video chat as that might help
+> > clear up some issues. To that end, I'd like to propose we have the first
+> > one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a day
+> > after the v2025.04-rc1 release, and I'll include a link in the release
+> > email. If this works out well, we can make it a regular thing for the
+> > day after a release and also try rotating the time, or having a second
+> > meeting much later in my day that's at a better time for other parts of
+> > the world.
+>=20
+> +1
+> TBH would be the best to send meeting invitation to have a record in a ca=
+lendar.
 
-1. 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/patch/?id=50decd493c8394c52d04561fe4ede34df27a46ba
-  
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/patch/?id=b5bf84206a5c77528f9dd4cbca4e72caa063c102
-  
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/patch/?id=82b2868937883b65732da498b26366d34db61510
-  
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/patch/?id=17e150fdd983c7e59b9240e34a166285f3c3fb39
-  
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/patch/?id=1b5365034410f1ca21adadadd492b99bdf4f2c55
-  
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/patch/?id=b7cd1115456d312f8c5e60c80fdc35fd35ea6eab
+I agree in theory, but Google is being a bit of a challenge at making a
+public calendar link. I'm trying to avoid doing things that will result
+in a higher spam potential. How far in advance would it be good to send
+the meeting invite out do you think?
 
-> 
-> I'm wondering if we shouldn't have tooling in place to detect when 
-> things aren't done the proper way (for maintainers I mean). We 
-> **really** want to have dts/upstream be upstream + some patches that 
-> were already merged in devicetree-rebasing tree. I don't know enough 
-> about subtree merges that Tom does when updating to a new tagged release 
-> to know if it's actually safe or if the possible mistake made when 
-> applying a commit by hand can persist without us noticing. I guess a 
-> mistake made in a manually applied patch would be caught by Tom during 
-> the merge from the next release with a merge conflict, but then that's 
-> pain for him to debug.
+--=20
+Tom
 
-I'm really sorry for that. All of those commits were already landed on 
-devicetree-rebasing tree so hope everything would be fine.
+--gim4wAE3pY14BULt
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks,
-Tianling.
+-----BEGIN PGP SIGNATURE-----
 
-> 
-> Cheers,
-> Quentin
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeGk1gACgkQFHw5/5Y0
+tyyLqQwAkTjnI6elfDi0W9Xx7yj/VNL2bVKj41DbnVz6BwwyIIGMrWDBZ+cMUYKF
+wl1hYOnUxhMB9MOY41yNR5MoH1zD9lD98KpsxXfZILqpFpl3rb+2SmQO5szvmuqS
+wiZmtP2YkbrBRXLKYlnwkPYg7d8ZP+CgQUWRbLheVFUjBfhNwidw/30p1wueDfE5
+4Dwz4eI61HbkVITha+gd5FlC2AKyF9ZRo6n0iAklgheVTY8pjVk6CeVNFNrzduQS
+KTi550+VYbHBe6Ttw8RjhT0Lb+zbeJs5DvABOrcF78QILjCxMVduga9sfwb9I8Ol
+iUQMhCGNn12wS2Qbis5YHZ1B+4J1/Re+B3EW0KYoKD10sCyhOdl8EgdlHBlgOq4D
+CHFAMAwEVMxFYsU15vpQrkCiTtgbPNTKvxtpJs3kTLG5rol+sEEOyowsGV2nppJv
+fC33lcEZXPbIi7TUVWZDcYLaUNZgT2NCITKi/+08mudw1rcBXwZgsBp4z5iJUBSo
+SX1htmRH
+=UJw4
+-----END PGP SIGNATURE-----
 
+--gim4wAE3pY14BULt--
