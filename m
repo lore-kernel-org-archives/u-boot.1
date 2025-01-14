@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79DA0E77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 05:36:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B33E8E77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 05:36:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB607806DC;
-	Tue, 14 Jan 2025 06:36:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D613806F8;
+	Tue, 14 Jan 2025 06:36:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="MMJMBXmD";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="bRBZrYul";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09C828061B; Tue, 14 Jan 2025 05:54:39 +0100 (CET)
-Received: from mail-qv1-xf63.google.com (mail-qv1-xf63.google.com
- [IPv6:2607:f8b0:4864:20::f63])
+ id 016888061B; Tue, 14 Jan 2025 05:54:41 +0100 (CET)
+Received: from mail-qv1-xf64.google.com (mail-qv1-xf64.google.com
+ [IPv6:2607:f8b0:4864:20::f64])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDB91805DA
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 05:54:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C35E58060C
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 05:54:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=dregan@broadcom.com
-Received: by mail-qv1-xf63.google.com with SMTP id
- 6a1803df08f44-6dada7c89d9so2063766d6.3
- for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 20:54:36 -0800 (PST)
+Received: by mail-qv1-xf64.google.com with SMTP id
+ 6a1803df08f44-6dd481f6d3aso8100616d6.2
+ for <u-boot@lists.denx.de>; Mon, 13 Jan 2025 20:54:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1736830475; x=1737435275; darn=lists.denx.de;
+ d=broadcom.com; s=google; t=1736830477; x=1737435277; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=i7brHBQ/ZVR8bvkHmmziFYK8/1cpRo7sbozODT+wJUg=;
- b=MMJMBXmDrG0dfvvSr4K40bSmqP7v89ZeWkmUe0+3GPUjYjGYgHBd3GnwVlz3jJHYW7
- Az5ylaHJX5I6MIg9gg4zFCtxbT0obJo5kgoXM9JqxajqpE9KEDKvNxId30M5Ygm7uOFu
- qkooh3oAskcdSpLO0i0z8oP1AiMMkzabJtUzY=
+ :reply-to; bh=NuRB7N3koWQP54nFCYAWAKJv8rbs3Pt8EU+77N+kL3k=;
+ b=bRBZrYulmfTQ5Tw4HXUx3GCNYrqaF1580NNQjg20QPTcJPXCkyuuCJX/83M827G0EJ
+ NkMu/MuYSmgP25SdLSZRZY4ocUWYdQQv1WXsan9zM1IZTqH2iE07bZs2JiDvosqCdu9D
+ 60QaNvG9wBCZJcqX5/u5cAGOhz8pHtG1cToTY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736830475; x=1737435275;
+ d=1e100.net; s=20230601; t=1736830477; x=1737435277;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i7brHBQ/ZVR8bvkHmmziFYK8/1cpRo7sbozODT+wJUg=;
- b=UfWZLnLjPPAbvKudEVDtRJqBG+sEKS2o/Qvdj1cB8pMAWvUnZv6N6Ws7pybsdt3MiM
- ff1Wua5bv3j+fwAwmBH3FBHUF9uGK/+C6ZT1ODmTM+sNfH4dTk9tTd5lI8W39EEFl3ob
- 1oxY0VD1ZsgpmRvRGNxlVx9TboIPawBuRHPKzMv7deBjC1xnSsAKZlvRfFokIr47e3/h
- 32Y270yJj5RKrpsCEx/lvXYh0UwSsj5kg+O9WjeNDHLQEg8oAIbN6W0PXrVx7GqgLvtL
- mnvpfHyAO7WQ30rpfxt8znVPMzzK96WvlYp6a/ccJvwmqdAQ96fox6LyMP94uM9SLV/z
- Kpfw==
-X-Gm-Message-State: AOJu0YydXLwGOEy1ca786je1Eh+rVbAu7GjTeK/Fm1iqujyU3TdmOdLq
- xijcQx9fVMxDzzBzSXLoPQQdPsMKahG9KS7tuGgCHkAWo8b15MFM8G3C13VwAQJX1F1HOJZtinW
- AqPgi6E6CyFzWLMwcrLp7YkM9yMybPmguUo1Pzdnkd0TQj9kdCFy4p2KAnPKMj1P7POD506CodA
- UWYeQIohm95/O8R+FgKPgPklJL4v4RNXaXQT8pnhsV0a1DKeDs21aW+cbYHDnkLl0Xb+N2
-X-Gm-Gg: ASbGncunV+ypWRoYHqOMGuTKrgOi2fgGN7yF8ycLNpn32qC0xr0Oe93mlnlEx0hP47K
- ZhOk6NHzOzGy+2ujKFdbkWR0JtuFmm3Nd+bf75zxZQseiRuR1Evj2L0fWfsh8tmDSLalODz4a5B
- swADNs/fclP+S+Q6OoUiNuNWaGj+pTCy59gGsfY+nOhh44OIggvjjcWX9jDdGUVEKSS0IQVhIjN
- 0qa69GwxrSEqJwYrQ9PpWu93ZNvUxSD0M0r1pDVu/5xxH4NzenFnob0sguGgmxcrKshtvK2Ou0b
- fwelV7HD9B2hb9I7XL5ybz04ZJnhkUI=
-X-Google-Smtp-Source: AGHT+IF42yvyAT9fXngLmR9YJvRs42hvMV0rGmevux8vhAlIqeB15T5nFWuCuQLY1BE5Mu3PMMb2oLRRnBgD
-X-Received: by 2002:ac8:5702:0:b0:469:c8e8:d50d with SMTP id
- d75a77b69052e-46c7109dbfemr154563621cf.15.1736830475560; 
- Mon, 13 Jan 2025 20:54:35 -0800 (PST)
+ bh=NuRB7N3koWQP54nFCYAWAKJv8rbs3Pt8EU+77N+kL3k=;
+ b=kalEjcQrX09qhkMNbvpyNumhMK0xoLVGm+C76Y/HXRz4LY31aRs9vzYrHhYQsri7qV
+ Iodkzdrvn8c1+gQPX/rtisBJaZ69naXr00pVyEL21+lWNGObyBFfHha8+s0VxcDLvBUn
+ q/WYXKSHtFUnNxfpzNo6TuDATXScaXxcZBl1fNcF6LgH+0PliOoIkY32jxrfLXe/9A5k
+ CFrT2TmfYdnxV9AweK/LC323EnHNIuOaeyTAnMfSXXu2bWJbCryZKSfC6lMR0uBzpeTC
+ EQHfiEPp+KznBg8vEf6i4RbMWEzJmu7myeyHHjGiHVAoBS5Zcx3dWaf+5guoNTfjccwu
+ jiRw==
+X-Gm-Message-State: AOJu0YztS6SBA5/GDtcUzZEoernT8OZqx8Lh9iaVX+BeGfJadizwAxRf
+ n31t++mUuqL2EAqH7jjwtjJ8WHZgjPu2pnam447yByIwx/5IITgjpc3E+1wfBaCKHOj+Y0ueTLD
+ Jqf7h9nfIqItVPs95z2swGAgT8tLBsC39PbV+h5//mgZNHK/CLsugPor9FS+35OQ4rF9LeZF52A
+ jwcGMKEBlsuUsOwTvoJcL+8AFJ9hWDEFpZuFMrM545o5s0UjrINdUMn2Sl9kcHXcHm2jQb
+X-Gm-Gg: ASbGncsEiRI77hiS8NgsynP5UXH0vRs0JqGmiHjP3Bo+IkoSuJWNaC/fE1IVGOYDnOt
+ MfK9HlRaX6KzU67lGeG/l4ghN0J7yvlLz/lMCiLiqYRiAXtC8WcqHdoTV8Tf0JwwKO7TpPThK1/
+ RSqbNCH5/94CJwDCujq8mBFlOczokifLwdRfyRdNIjzF2u6At40HuwC0SaKYvqNdHrT2GHWZC1o
+ csljuHM9yDjuOqoIExeZbEfk/eSL8FaJBJTDQNGczZi6Qvh/2b18zd9nB68GikOmSF2+y6zqfdm
+ oJQcFGOtJv3R/JiVLYTS/nRPWnBs1UY=
+X-Google-Smtp-Source: AGHT+IGBLm+fWV5O2IPam1F03NapzuDCWufAUEL2t+64k+3CE5ApfZa1EtkC0GupjdnB9Mu0RqOteubxkkKu
+X-Received: by 2002:a05:6214:320b:b0:6d8:967a:1a60 with SMTP id
+ 6a1803df08f44-6df9b1d20eemr141340196d6.2.1736830477698; 
+ Mon, 13 Jan 2025 20:54:37 -0800 (PST)
 Received: from bcacpedev-irv-3.lvn.broadcom.net ([192.19.161.250])
  by smtp-relay.gmail.com with ESMTPS id
- d75a77b69052e-46c8731f2d6sm2613821cf.3.2025.01.13.20.54.33
+ d75a77b69052e-46c8731f2d6sm2613821cf.3.2025.01.13.20.54.35
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 13 Jan 2025 20:54:35 -0800 (PST)
+ Mon, 13 Jan 2025 20:54:37 -0800 (PST)
 X-Relaying-Domain: broadcom.com
 From: david regan <dregan@broadcom.com>
 To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -83,9 +83,10 @@ To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michal Simek <michal.simek@amd.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, dregan@mail.com, dregan@broadcom.com
-Subject: [PATCH v2 2/3] arm: dts: Update nand node for bcmbca board dts
-Date: Mon, 13 Jan 2025 20:54:24 -0800
-Message-Id: <20250114045425.148801-3-dregan@broadcom.com>
+Subject: [PATCH v2 3/3] arm: dts: Enable basic nand functionality for bcmbca
+ devices
+Date: Mon, 13 Jan 2025 20:54:25 -0800
+Message-Id: <20250114045425.148801-4-dregan@broadcom.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20250114045425.148801-1-dregan@broadcom.com>
 References: <20250114045425.148801-1-dregan@broadcom.com>
@@ -108,113 +109,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update bcmbca dts to current nand node naming convention.
+Enable rudimentary nand read/write capability.
 
 Changes in v2:
-- Removed addition of nand-on-flash-bbt parameter
+- New patch in series added enabling of nand functionality
 
 Signed-off-by: david regan <dregan@broadcom.com>
 Reviewed-by: William Zhang <william.zhang@broadcom.com>
 Reviewed-by: Anand Gore <anand.gore@broadcom.com>
 ---
- arch/arm/dts/bcm96753ref.dts   | 18 +++++++-----------
- arch/arm/dts/bcm968360bg.dts   | 18 +++++++-----------
- arch/arm/dts/bcm968580xref.dts | 18 +++++++-----------
- 3 files changed, 21 insertions(+), 33 deletions(-)
+ configs/bcm94908_defconfig  | 8 ++++++++
+ configs/bcm963138_defconfig | 8 ++++++++
+ configs/bcm963148_defconfig | 8 ++++++++
+ 3 files changed, 24 insertions(+)
 
-diff --git a/arch/arm/dts/bcm96753ref.dts b/arch/arm/dts/bcm96753ref.dts
-index ebc8c8e4ce77..c763358514fc 100644
---- a/arch/arm/dts/bcm96753ref.dts
-+++ b/arch/arm/dts/bcm96753ref.dts
-@@ -64,19 +64,15 @@
- 	status = "okay";
- };
- 
--&nand {
-+&nand_controller {
-+	brcm,wp-not-connected;
- 	status = "okay";
--	write-protect = <0>;
--	#address-cells = <1>;
--	#size-cells = <0>;
-+};
- 
--	nandcs@0 {
--		compatible = "brcm,nandcs";
--		reg = <0>;
--		nand-ecc-strength = <4>;
--		nand-ecc-step-size = <512>;
--		brcm,nand-oob-sector-size = <16>;
--	};
-+&nandcs {
-+	nand-ecc-strength = <4>;
-+	nand-ecc-step-size = <512>;
-+	brcm,nand-oob-sector-size = <16>;
- };
- 
- &leds {
-diff --git a/arch/arm/dts/bcm968360bg.dts b/arch/arm/dts/bcm968360bg.dts
-index 1335f484ee6c..a5b30f4e4a6b 100644
---- a/arch/arm/dts/bcm968360bg.dts
-+++ b/arch/arm/dts/bcm968360bg.dts
-@@ -62,19 +62,15 @@
- 	status = "okay";
- };
- 
--&nand {
-+&nand_controller {
-+	brcm,wp-not-connected;
- 	status = "okay";
--	write-protect = <0>;
--	#address-cells = <1>;
--	#size-cells = <0>;
-+};
- 
--	nandcs@0 {
--		compatible = "brcm,nandcs";
--		reg = <0>;
--		nand-ecc-strength = <4>;
--		nand-ecc-step-size = <512>;
--		brcm,nand-oob-sector-size = <16>;
--	};
-+&nandcs {
-+	nand-ecc-strength = <4>;
-+	nand-ecc-step-size = <512>;
-+	brcm,nand-oob-sector-size = <16>;
- };
- 
- &leds {
-diff --git a/arch/arm/dts/bcm968580xref.dts b/arch/arm/dts/bcm968580xref.dts
-index 9aa45877b543..77616023010e 100644
---- a/arch/arm/dts/bcm968580xref.dts
-+++ b/arch/arm/dts/bcm968580xref.dts
-@@ -62,19 +62,15 @@
- 	status = "okay";
- };
- 
--&nand {
-+&nand_controller {
-+	brcm,wp-not-connected;
- 	status = "okay";
--	write-protect = <0>;
--	#address-cells = <1>;
--	#size-cells = <0>;
-+};
- 
--	nandcs@0 {
--		compatible = "brcm,nandcs";
--		reg = <0>;
--		nand-ecc-strength = <4>;
--		nand-ecc-step-size = <512>;
--		brcm,nand-oob-sector-size = <16>;
--	};
-+&nandcs {
-+	nand-ecc-strength = <4>;
-+	nand-ecc-step-size = <512>;
-+	brcm,nand-oob-sector-size = <16>;
- };
- 
- &leds {
+diff --git a/configs/bcm94908_defconfig b/configs/bcm94908_defconfig
+index 0b6db9aa52e9..e651212d6853 100644
+--- a/configs/bcm94908_defconfig
++++ b/configs/bcm94908_defconfig
+@@ -16,7 +16,15 @@ CONFIG_ENV_VARS_UBOOT_CONFIG=y
+ CONFIG_OF_STDOUT_VIA_ALIAS=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_HUSH_PARSER=y
++CONFIG_CMD_NAND=y
+ CONFIG_CMD_CACHE=y
++CONFIG_OF_CONTROL=y
+ CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_EMBED=y
++CONFIG_DM=y
+ CONFIG_CLK=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_RAW_NAND=y
++CONFIG_NAND_BRCMNAND=y
++CONFIG_NAND_BRCMNAND_BCMBCA=y
+diff --git a/configs/bcm963138_defconfig b/configs/bcm963138_defconfig
+index 9459a232560d..f1f83dc2f1be 100644
+--- a/configs/bcm963138_defconfig
++++ b/configs/bcm963138_defconfig
+@@ -16,7 +16,15 @@ CONFIG_ENV_VARS_UBOOT_CONFIG=y
+ CONFIG_OF_STDOUT_VIA_ALIAS=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_HUSH_PARSER=y
++CONFIG_CMD_NAND=y
+ CONFIG_CMD_CACHE=y
++CONFIG_OF_CONTROL=y
+ CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_EMBED=y
++CONFIG_DM=y
+ CONFIG_CLK=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_RAW_NAND=y
++CONFIG_NAND_BRCMNAND=y
++CONFIG_NAND_BRCMNAND_BCMBCA=y
+diff --git a/configs/bcm963148_defconfig b/configs/bcm963148_defconfig
+index d6fbc34927cb..579fdd5d22c3 100644
+--- a/configs/bcm963148_defconfig
++++ b/configs/bcm963148_defconfig
+@@ -17,7 +17,15 @@ CONFIG_ENV_VARS_UBOOT_CONFIG=y
+ CONFIG_OF_STDOUT_VIA_ALIAS=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_HUSH_PARSER=y
++CONFIG_CMD_NAND=y
+ CONFIG_CMD_CACHE=y
++CONFIG_OF_CONTROL=y
+ CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_EMBED=y
++CONFIG_DM=y
+ CONFIG_CLK=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_RAW_NAND=y
++CONFIG_NAND_BRCMNAND=y
++CONFIG_NAND_BRCMNAND_BCMBCA=y
 -- 
 2.37.3
 
