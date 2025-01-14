@@ -4,116 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D0BC02180
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 01:53:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85241E77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 05:11:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C819805C5;
-	Tue, 14 Jan 2025 02:53:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ACB58060C;
+	Tue, 14 Jan 2025 06:11:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=per1cycle.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="td/wcD24";
+	dkim=pass (2048-bit key; unprotected) header.d=per1cycle.org header.i=@per1cycle.org header.b="aIeB8dFK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A5D4805DA; Tue, 14 Jan 2025 02:53:37 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 567688061B; Tue, 14 Jan 2025 06:11:23 +0100 (CET)
+Received: from mail.per1cycle.org (mail.per1cycle.org [188.245.231.141])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E93EB801F5
- for <U-Boot@lists.denx.de>; Tue, 14 Jan 2025 02:53:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F61D805DA
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 06:11:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20250114015329epoutp0220891c03278b696f88d7be5927726443~abDuxtxbu0378203782epoutp027
- for <U-Boot@lists.denx.de>; Tue, 14 Jan 2025 01:53:29 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20250114015329epoutp0220891c03278b696f88d7be5927726443~abDuxtxbu0378203782epoutp027
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1736819609;
- bh=9gEo/qGsuPGh4Oo4xvXi1e4r7o/FoI1zUXWf0p7yDWM=;
- h=Date:To:Cc:From:Subject:References:From;
- b=td/wcD24FZNwJmHdAn82MCXocE7bBpplXA6aoNaiuvxm1uO52yap9SLwwRS4kbdqa
- kThXaexKCQox8xq1HvHiWcIoNG8w0qWnVPzf6616XaL0xXOXzYVtY6D4Jl0JQA4xL1
- npt7S6PWPO3cEI61ldkwyjyTHaT+0m+bL9J2zWtQ=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20250114015329epcas1p218d6412a975c6eb456bc320c01b91307~abDuM8qoj1375113751epcas1p2I;
- Tue, 14 Jan 2025 01:53:29 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.237]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4YXBx36q2pz4x9Px; Tue, 14 Jan
- 2025 01:53:27 +0000 (GMT)
-Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- E9.D7.31735.593C5876; Tue, 14 Jan 2025 10:53:25 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20250114015324epcas1p4c2c83151f7110658531d7ac9c5222630~abDp-FJQn2231622316epcas1p4U;
- Tue, 14 Jan 2025 01:53:24 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20250114015324epsmtrp163689c975505316fcf9988a912efccdd~abDp_c7YE1212812128epsmtrp1X;
- Tue, 14 Jan 2025 01:53:24 +0000 (GMT)
-X-AuditID: b6c32a4c-ac3ff70000007bf7-15-6785c395fbc4
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 73.AA.18949.493C5876; Tue, 14 Jan 2025 10:53:24 +0900 (KST)
-Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20250114015323epsmtip1bf378f366ad00c37ed035ac81c89b193~abDpNmg-H3221032210epsmtip1C;
- Tue, 14 Jan 2025 01:53:23 +0000 (GMT)
-Message-ID: <302404b9-bd4a-4797-9b50-012b68ecf170@samsung.com>
-Date: Tue, 14 Jan 2025 10:53:23 +0900
+ dmarc=pass (p=none dis=none) header.from=per1cycle.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@per1cycle.org
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 08B923F715; Tue, 14 Jan 2025 05:10:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=per1cycle.org;
+ s=dkim; t=1736831477;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=cXxUZD/MJKhP5RfcZUGBwJ2ZvB2iBaINC13DtytEqnw=;
+ b=aIeB8dFK9BIVfodpvo1/Hc45phAs+R9SH3J3ly/2VNRVkZEWWjuex3EdSSpH4AHbaVUlK5
+ f77sPPP2n1stJ1/d7/Seh2pNG0gUh9hVbs4OWst7ZR63yyyhVzNubGbRs6j267sJOg36dm
+ m+dqAL2FPGNevP/IRKiJiX1s7NboEC4NrEAturenvzuJGJel2EHZogujOkJL06a3mYjk21
+ AxEuiKpxi0jmJmfqVKs1AvSQCBApQGTQy2G4rq9jdwBoxBllFdGIOdEdtj6zF0pJ0kjcZB
+ dLLu0S3DJEtxbZzzvc0/jNwcSlPs7PJeM7gspdPrRyke6aB1NERzCBhANs9/uw==
+From: Huan Zhou <me@per1cycle.org>
+Date: Tue, 14 Jan 2025 13:10:42 +0800
+Subject: [PATCH v2] riscv: spacemit: k1: probe dram size during boot phase.
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: U-Boot Mailing List <U-Boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, s-ramamoorthy@ti.com, u-kumar1@ti.com,
- Jaehoon Chung <jh80.chung@samsung.com>
-From: Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [GIT PULL] Please pull u-boot-pmic master
-Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpik+LIzCtJLcpLzFFi42LZdlhTV3fq4dZ0g18NvBY3frWxWvw6tJ7Z
- YuqkzewWb/d2sltM2zuD2YHV49WBVeweZ+/sYPTo27KK0eP4je1MASxR2TYZqYkpqUUKqXnJ
- +SmZeem2St7B8c7xpmYGhrqGlhbmSgp5ibmptkouPgG6bpk5QIuVFMoSc0qBQgGJxcVK+nY2
- RfmlJakKGfnFJbZKqQUpOQWmBXrFibnFpXnpenmpJVaGBgZGpkCFCdkZMx+9Zy24wlmx+mhW
- A+MH9i5GTg4JAROJT/8vsYLYQgJ7GCW2r2TpYuQCsj8xSpz6eJsdwvnGKPHm5y1GmI4dn2+x
- QST2Mkq0fnvACOG8Z5TY0rSGGaSKV8BOYvmhTWA7WARUJX60/IKKC0qcnPmEBcQWFZCXuH9r
- BlgNs4C4xK0n85lAbBEBPYnHZ4+yQsSLJA5MfgVWwyagI7H923GwGmEBI4kf1/6yQdTIS2x/
- O4cZ5AgJgVvsEo2fD0E95yLx7Nt+ZghbWOLV8S1QcSmJl/1t7BANzYwSS5ccZIVwehgl/jVc
- Z4OoMpbYv3Qy0DoOoBWaEut36UNs45N497WHFSQsIcAr0dEmBFGtInHp9UsmmPl3n/xnhbA9
- JLZO2MwICeBYifaVi5kmMMrPQgqLWUj+n4Xkn1kIixcwsqxilEotKM5NT002LDDUzUsth8dy
- cn7uJkZwYtTy2cH4ff1fvUOMTByMhxglOJiVRHiXsLWmC/GmJFZWpRblxxeV5qQWH2I0BcbK
- RGYp0eR8YGrOK4k3NLE0MDEzMjaxMDQzVBLnvbCtJV1IID2xJDU7NbUgtQimj4mDU6qBiUU7
- TU9j9wNnizSN62cUClhZZjU1Pb3e8eG6IO/Un+9tAp+dOcPD9bXGlbv+jnj2yrdXzmY6NLrO
- ONj7bUXYnJB2Y5HHRi+Pp/UXe0pfuWJj86v+VffpZbYc8+/dSF+dHr5liT2r8j433V91v5qZ
- E9/JC95hzliQ/nv9Sdmq2/1ctxbOXlenfuHd7UdH7tZ/nza5fu39uxJybyutPCSWiXgrbpmw
- IOXZv0X394TnqzfNLPtxYoHo8VMRmof6NFdNmLy6XWnuL45fYqsf6XOI8/1+pvbl2qYT6cxT
- dG33Ju0o/nRFnHdZzr3Wg1f77vKvNbgYKjhT3WtZ24wzNfbvZy/SlN/ovPRK/7Tps/LKFjkr
- sRRnJBpqMRcVJwIA+fc8iBUEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLLMWRmVeSWpSXmKPExsWy7bCSnO6Uw63pBh/WaFrc+NXGavHr0Hpm
- i6mTNrNbvN3byW4xbe8MZgdWj1cHVrF7nL2zg9Gjb8sqRo/jN7YzBbBEcdmkpOZklqUW6dsl
- cGXMfPSeteAKZ8Xqo1kNjB/Yuxg5OSQETCR2fL7F1sXIxSEksJtRYufOlawQCSmJz0+nAiU4
- gGxhicOHiyFq3jJK7FswkRGkhlfATmL5oU1gg1gEVCV+tPxihogLSpyc+YQFxBYVkJe4f2sG
- WA2zgLjErSfzmUBsEQE9icdnj7JCxIskTk3dCxZnE9CR2P7tOJgtLGAk8ePaX7AbmAXUJdbP
- E4Iol5fY/nYO8wRGgVlIts1CsmEWQscsJB0LGFlWMUqmFhTnpucWGxYY5aWW6xUn5haX5qXr
- JefnbmIEh7iW1g7GPas+6B1iZOJgPMQowcGsJMK7hK01XYg3JbGyKrUoP76oNCe1+BCjNAeL
- kjjvt9e9KUIC6YklqdmpqQWpRTBZJg5OqQYmxbXZM0+9U+tUmCvZEqFXX/12/R+hoqYf5+bf
- mHSgS/GNVmW6frlDei5/1j/xgEN+MjtVlzvXrF+omRqhqCP/50Vr+ZkWh/tK8jM5oqMtwyRU
- Fu+r3DYt0FDgiZieX2yi/Z4zN49ITFpka7l5dt/C+P9xZdoHBD8vWFNkt3LxFrEfcxn8jZrZ
- 9k0pnCyUk/bC2ebi5bX5tcFLQpZsUhKqmp6/bkLf4sNH6pWtI5c/13Hyljhc6PlH9vi7x8du
- 7n276+uFGhbLhtfOGjuC3vmqm71/yiAocYmlY02K06WYqYHT1d4e3WN+ovHyv4Oh32fc2qF7
- 0XHB4s3XDd6GbHIoM+dl2cWswbtL5qVa9zkpJZbijERDLeai4kQAamFsJuACAAA=
-X-CMS-MailID: 20250114015324epcas1p4c2c83151f7110658531d7ac9c5222630
-X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20250114015324epcas1p4c2c83151f7110658531d7ac9c5222630
-References: <CGME20250114015324epcas1p4c2c83151f7110658531d7ac9c5222630@epcas1p4.samsung.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250114-get-dram-size-v2-1-aba5a281ea28@per1cycle.org>
+X-B4-Tracking: v=1; b=H4sIANHxhWcC/3XMyw6CMBCF4Vchs3ZMp1q8rHwPw6KWASZRSqaEi
+ IR3t7J3+Z/kfAskVuEE12IB5UmSxD6H3RUQOt+3jFLnBmusM2TO2PKItfoXJvkwli407uLJWUO
+ QP4NyI+/Nu1e5O0lj1HnjJ/qt/6SJkPD48HywHJqTK28DK4U5PHkftYVqXdcv28QK9K4AAAA=
+X-Change-ID: 20250108-get-dram-size-65cf59a15201
+To: u-boot@lists.denx.de
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>, 
+ Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, Yixun Lan <dlan@gentoo.org>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ =?utf-8?q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>, 
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>, 
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Yu Chien Peter Lin <peterlin@andestech.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, 
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Padmarao Begari <padmarao.begari@amd.com>, Huan Zhou <me@per1cycle.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1736831458; l=2208;
+ i=me@per1cycle.org; s=20241231; h=from:subject:message-id;
+ bh=RDd9RESY4NJydjAdHcvekbwr0n6mfUen4BD9YhblD/0=;
+ b=qgTKYNLWHN5qsu2zl+TyIwXadvqRCbzHVjMOHCfGJ046gMib0j/1X/ac2tUi6NU4GTpLIUuKB
+ FeC0feoyt8aAzpfAewjj7R/1HE2HZYrVqta3boxvdmaWPe/dhbIa8Y3
+X-Developer-Key: i=me@per1cycle.org; a=ed25519;
+ pk=LfN2kXe1uCRoaEzAJ8quXuPIH4MiEnZHOCRZwGytJwE=
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,39 +90,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
 
 
-Please pull u-boot-pmic master into u-boot master branch.
-If there is any problem, let me know, plz. Thanks!
+---
+This patch introduce improvement for get dram size on bananapi BPI-F3,
+retrieving the dram size dynamically.
+Have tested on bananapi Licheepi LPI3A 8G[1].
 
+Links:
+[1] https://gist.github.com/per1cycle/e4eab66ebb6f83fe5118e823367fce28 .
 
-Best Regards,
-Jaehoon Chung
+Changes in v2:
+- Fix bracker and return type in map_format_size() function.
+- Add test log in the cover letter..
+- Link to v1: https://lore.kernel.org/r/20250108-get-dram-size-v1-1-4bae32ecf756@per1cycle.org
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-pmic/-/pipelines/24175
+Signed-off-by: Huan Zhou <me@per1cycle.org>
+Tested-by: Marcel Ziswiler <marcel@ziswiler.com> # BPI-F3 16G
+---
+ arch/riscv/cpu/k1/dram.c | 40 ++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 38 insertions(+), 2 deletions(-)
 
-The following changes since commit 6a0db9ee030f634731b792d864fc7a9df6cc6b80:
+diff --git a/arch/riscv/cpu/k1/dram.c b/arch/riscv/cpu/k1/dram.c
+index c477c15cbfb19f0e3a0ee72985b602f5bda352d7..4140440255fa1b3dbae521c58c6809445499a463 100644
+--- a/arch/riscv/cpu/k1/dram.c
++++ b/arch/riscv/cpu/k1/dram.c
+@@ -4,17 +4,53 @@
+  */
+ 
+ #include <asm/global_data.h>
++#include <asm/io.h>
+ #include <config.h>
++#include <bitfield.h>
+ #include <fdt_support.h>
+ #include <linux/sizes.h>
+ 
++#define DDR_BASE 0xC0000000
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++static inline phys_size_t map_format_size(u32 val)
++{
++	u32 tmp;
++
++	if (!(val & 0x1))
++		return 0;
++
++	tmp = bitfield_extract(val, 16, 5);
++	switch (tmp) {
++	case 0xd:
++		return 512;
++	case 0xe:
++		return 1024;
++	case 0xf:
++		return 2048;
++	case 0x10:
++		return 4096;
++	case 0x11:
++		return 8192;
++	default:
++		pr_info("Invalid DRAM density %x\n", val);
++		return 0;
++	}
++}
++
++phys_size_t ddr_get_density(void)
++{
++	phys_size_t cs0_size = map_format_size(readl((void *)DDR_BASE + 0x200));
++	phys_size_t cs1_size = map_format_size(readl((void *)DDR_BASE + 0x208));
++	phys_size_t ddr_size = cs0_size + cs1_size;
++
++	return ddr_size;
++}
++
+ int dram_init(void)
+ {
+ 	gd->ram_base = CFG_SYS_SDRAM_BASE;
+-	/* TODO get ram size from ddr controller */
+-	gd->ram_size = SZ_4G;
++	gd->ram_size = ddr_get_density() * SZ_1M;
+ 	return 0;
+ }
+ 
 
-  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-usb (2025-01-13 08:25:00 -0600)
+---
+base-commit: 19fc0b7f7d907119a13e9c207991899f0817f8fc
+change-id: 20250108-get-dram-size-65cf59a15201
 
-are available in the Git repository at:
+Best regards,
+-- 
+Huan Zhou <me@per1cycle.org>
 
-  git@source.denx.de:u-boot/custodians/u-boot-pmic.git master
-
-for you to fetch changes up to b9fe3ec8a235e2f4cb1091dd4b24150313944ccf:
-
-  power: pmic: tps65941: Fix TI TPS65224 PMIC compatiable (2025-01-14 07:44:51 +0900)
-
-----------------------------------------------------------------
-Shree Ramamoorthy (2):
-      power: regulator: replace printf() with pr_err()
-      power: replace magic numbers with macros
-
-Udit Kumar (1):
-      power: pmic: tps65941: Fix TI TPS65224 PMIC compatiable
-
- drivers/power/pmic/tps65941.c                |  2 +-
- drivers/power/regulator/tps65219_regulator.c | 30 ++++++++++++++--------------
- include/power/tps65219.h                     | 14 +++++++++++--
- 3 files changed, 28 insertions(+), 18 deletions(-)
