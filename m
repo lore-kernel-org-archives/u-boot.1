@@ -4,87 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA1FAE77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 15:04:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3474E77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 15:13:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4818E8060C;
-	Tue, 14 Jan 2025 16:04:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8112C8060C;
+	Tue, 14 Jan 2025 16:13:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OFMHizUh";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="gGpHQ/QS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 816A680657; Tue, 14 Jan 2025 16:04:02 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9C16E80657; Tue, 14 Jan 2025 16:13:11 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20611.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::611])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D35A38022E
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 16:03:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9482B8022E
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 16:13:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2166f1e589cso118838105ad.3
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 07:03:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736867038; x=1737471838; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jjpp6hNmf8uEnuVLg1/+DY6mMqCLnknoQAsgItXfi8I=;
- b=OFMHizUhh01g71XnGoTj0DXU79Vp9cm4eBlEbyf8F61Fq5AvjljTaly9lAJ83pL1KH
- ZJE8/tPC+Lj69MIlp/8MPjbIP9nNze++x+caHMzrHwazUrzWnMjPazVQdoiNMX9fRara
- FbdjZPNuFb0VsgZMakJeqJUTkKgsU2yGCMnvz0xEEhqslVlgU6gUIGgZnfaP2EWqE0cV
- 7iw2aTVZ+Gk1+O/9SCpclquWEYJS1JEf4MxCfJqm9mzNtFzaZynMThAWMG5IixQTv3kR
- ShlSO6aJe8rL9DyJb1XWKwuXYSK2Ah+UEcGHozALsMctN34Gi50oZ1p6x6yycUahqgPI
- 57UA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736867038; x=1737471838;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=jjpp6hNmf8uEnuVLg1/+DY6mMqCLnknoQAsgItXfi8I=;
- b=Cc0Qt0AmZXgAdLt2py/whQoXoJ740N4JhU+vUeL1iq5iRt5HCBwlHRv1DAFQpAttmi
- XUpSWuLtVxf6BhWnch05530s4fXfymCN0L+Nj31nmpbpiHji8vc0IKohicF4x08nUtv5
- iDGeyvzsc4A4QOhLNhhrpUHo5YXzDMHd4j8gupIs3gX6VgyKIohQSKv3/uKW9Ne1AULU
- CpYQiJaLx1su4TZvcf2yKsfvqXzsS+EsKS3T+GD9W/oDl1ThM1gXEvMfErzMVje2eOjl
- xsF1BK7UA9/fGuFJQX8DT+WR6g1aCC/5HtemZxIILmikzlIvfsBYQIxZDkhC/9BV700U
- vL9w==
-X-Gm-Message-State: AOJu0YxnuXXElqTQHKqfCxUlpd1z9n8oJ63wcLmZZumdRsPeFu4vp/US
- qe7CoIplUGt0MTMGQyjVs9jVoBL/qi+G15urRWaqC+B54y2MZTjP
-X-Gm-Gg: ASbGncsbpWfaxK5k2rcON4VetMjulf6dBPB1fx4Nf7hBPpMeDl02Y1EZJhik7dr+a6e
- La70sh0LwYMlC7PEJj8ofvifLPhn6Y28cPGDPiiP5Ju0Xwq/yYtE0mDMnydnKGAx3Q6siba3XhL
- +4sQdUBu/XLWMCjpBljni6e4IafLiQ3fWxxPIHMqxquwKGHGqB7Fwg4sAhnl/gkD5BUhwZ68e3F
- epa2sGGMp5uN9Wwj0igsdOackNU9i49ugQZcQU7VBOIC/yJ20UYKYX4+/2XdoRmHTHS76hYW4Fc
- 1VbX7faCTNQ+bOancGLfkA==
-X-Google-Smtp-Source: AGHT+IFKb9rL7p9g6Ic5ogAvhGH7pWjesxQm9X8maAO9iOS8zAMSOHRYXIVn48oJOvWJRvvoOAQ4kw==
-X-Received: by 2002:a17:902:fc8f:b0:216:48dd:d15c with SMTP id
- d9443c01a7336-21a83f65a79mr377213275ad.27.1736867037700; 
- Tue, 14 Jan 2025 07:03:57 -0800 (PST)
-Received: from ?IPV6:2408:8362:245d:4738:bc4b:53ff:fead:2724?
- ([2401:b60:5:867d:3631:b7db:c3f4:aae2])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21a9f13e9e7sm67920645ad.101.2025.01.14.07.03.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Jan 2025 07:03:57 -0800 (PST)
-Message-ID: <6ace686e-6cb7-402e-8272-269322353f9e@gmail.com>
-Date: Tue, 14 Jan 2025 23:03:54 +0800
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=C1CwfAWwqjoKcCUzawNXJEn/OP0z6GC+8SneUM66LLe6KqtoIFoCdSU+JltlEwg058cbHzewZWmMXPnDUTpYKDTUuupaNGbwqJfUnMdk5f8QoFLufexs+AML6X3gF3cDe0k7wUf/ZuHHAUSnouAOamw7klMAyjtjHXsjCFbnd9VUidiza1SDIjSHzGn7xym1uh4b22LGrW9sWYhEAHwfky57rdetFb3mfrhy2QqacdNWpJXxHzeicJhIigg9Uu9yUXHxTizdJogDfRiHd9BEJUGFd2fcxbom29aafamZijyrSoHUyMj6dbTrxNFk5h8XR0r+0jheGxVE7c2laWlHZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FBcAU1R/4HnYf3GGPRZGXWFWlgVQcqSQRPq8Doo5kVg=;
+ b=bV8KqWglGogTc0ipiYpJRRiwGYq3eLycxx411/1zOWArxjvLFTXA4I50zuDT6Swq2c519AZ0KexiA8ans/Q3iEhwcbiupql2dKEylEmpntTiofSgeGX1yRB0cqUdHmST4ysZ4a/2gQ6YPA2IZu9CV4347JDn5NnRe53D6l47s6DZLuFyYZzZ/iU7XVzy1We0vnERZOmWXPGl7+rtcjUtgEXz+jraqjHX5IhR64AmTTG+fcsRb8+nwb3xydSbBSPBKKo4hMdXSEIVBJyvIDJt3FAcvLrUYgHYAXarK801Em4AEFSDZd7lMsnjSS1qufUUfr07M86m6DwfxomXquJD7w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FBcAU1R/4HnYf3GGPRZGXWFWlgVQcqSQRPq8Doo5kVg=;
+ b=gGpHQ/QSGo2hpri2nBdUIx1CRiSD1+iV9KWyeHXJQ1ZadG/YPWNRho6ZRLOV7SqDMGztbm9bDco6MZhKG0+z6/y8KmPrhngSpgRSPt7ovk2WY836XcVxiRpWP9ijU2I64bXGh6KtW67Wl0D7U7V2rRnUlcMF/maLyoyWfAxIYeE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DU4PR04MB10840.eurprd04.prod.outlook.com (2603:10a6:10:58a::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.11; Tue, 14 Jan
+ 2025 15:13:08 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Tue, 14 Jan 2025
+ 15:13:08 +0000
+Message-ID: <a1572755-9853-4941-ac0f-3a30bce768a3@cherry.de>
+Date: Tue, 14 Jan 2025 16:13:07 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] board: rockchip: add FriendlyElec NanoPi R3S
-To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass
- <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-References: <20241226092043.419511-1-cnsztl@gmail.com>
- <20241226092043.419511-8-cnsztl@gmail.com>
- <b32bc9f1-3bcf-4cea-8242-e372e68740e3@cherry.de>
-From: Tianling Shen <cnsztl@gmail.com>
-In-Reply-To: <b32bc9f1-3bcf-4cea-8242-e372e68740e3@cherry.de>
+Subject: Re: [PATCH 3/5] pxe_utils: Allow the FDT to be missing
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20241220040120.3245610-1-sjg@chromium.org>
+ <20241220040120.3245610-4-sjg@chromium.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241220040120.3245610-4-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0152.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b3::7) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU4PR04MB10840:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0a0d9636-90ad-47c4-4c21-08dd34adf3b2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UDB4VXNaWjd4TjNaZVg1bTJtb1lGNyt2SWhJM2FmMmNGTkdXaW44WGRFQkhE?=
+ =?utf-8?B?aEdzUjRyNXVtcE1JTlRuWFZyOTJydnFid3VSeU94QkV1TWZDSmhnRE5OQzM3?=
+ =?utf-8?B?ODBheXpEbmJ1cUZMa3dqZUI2Vm1HRm1hckRvcXc5TU8zOEJLRTNGUUIyN3JP?=
+ =?utf-8?B?Y2Y0YmdxME05cUVSdFJEUDZkcWt6TnBjczBZaXRCdS9UOC9DdGowT2RMNERI?=
+ =?utf-8?B?cU51K0FYY1hLSTVCekYwUjMvMHIxaXEyVVJDZ2dUbmxZOUkxVk9LUTlzVndB?=
+ =?utf-8?B?NXo1TWErQTc3dnJEWWJtR0tzYjZmNGMxTUxZY1A5NzZGZUY3dkhaa1NCaFNl?=
+ =?utf-8?B?U1NsUWFUTUFhRGpaaUtyRzd3VGMvL0RKMFpocEx4UDB2WkpITkwxMEFEWFpU?=
+ =?utf-8?B?YjNBckROLzdkUldxS3BRVjZkc3lkczh3WUpTa1ZMNFNWdk56b0xPY1Z2SGht?=
+ =?utf-8?B?M2tGQ0t2L3dWREprWmNDNlc2OCtkRnF1YTZJeGp0WW5ZTDlmSkJUMCtmMjhq?=
+ =?utf-8?B?Snd3WGlZdTlxN0F6WnJYcW05SnBpdDFBWDgrNW9vNkVkMDUyRm8zRUltVEZE?=
+ =?utf-8?B?Z1dKTm9ZNUZWc3VnU25ETmFJeUhSa1NuUUZ3cmVCMzRoMjM5ckhacndYckhs?=
+ =?utf-8?B?blVObTZ3MTE2K0VSRjlhRzdjekIzYzI5dHNkVzZvd1Z2MjZnSlJmS3NPRGtr?=
+ =?utf-8?B?WUducUYxN2Q0YlR1dnNZb1h1eHB1UFQ2RHVZeDdCdkZkbHF0ZTR3REtCYXNq?=
+ =?utf-8?B?azA0MUphMkRIZEttZEJtREJkTlJMUG1HTVJId1ZBVkRCT2JpUkRibTQ4WVE5?=
+ =?utf-8?B?VjhJSXlFQkI3KzRMdXRMQXNYdkxTakVaSTE2UzkvMldwU0s0MHFldS8rV1d4?=
+ =?utf-8?B?WFFtVlJYUDhNK0ZkMkdpZDlQOExDRGZqRHF0cEFkRDh2VGNNMWdTNDVBakFC?=
+ =?utf-8?B?L3laZlJVdHY4aTR6NUFSQk8yS085WXo0Z3lJQ1JnOWd2b2t2TEt5cXd4ekRy?=
+ =?utf-8?B?OFhZaWhlMk9LaWR1UnhpaXhZWHZEVHlSVlhlZTQrZDJJY3lkckYwck96eitM?=
+ =?utf-8?B?bnB5anB1cFJyREFidXBIWWFZTGtiRG1CUDlHbHMyMGw3S2FRZUZHdkVNbUta?=
+ =?utf-8?B?ZmFyalFIeisxZ2FXQmZIcmFPOHlrQ0JHRUVFSUlEaSt5Y2o2aFZJU3ppOTVv?=
+ =?utf-8?B?V3hFSW8rYkNhanlxNkVSY2NuOThpdFVvZ0taL0FobVJvNlBrYVBnN0RxWllR?=
+ =?utf-8?B?dm5NdjVxQ3EzSDVhWXZwOVNQSXZBTXFTMmtMZ3hFOUdVdVA0NWx4QlhhRkFV?=
+ =?utf-8?B?S3pqbGRaRUIvYW5qYkVxajZiQ1dndFNaMUcvTDMveStqTGhHdllZNkN5V2dR?=
+ =?utf-8?B?a0VpWWRrKzExUHdpaHhCWDdlTUxlNHdsVVozVG0rNlhwRytZMG9nSHhkMjRS?=
+ =?utf-8?B?N2VrRTBpUE8vSzIyR2x4VEN2c1R4U2wzOHZ0blJ5am9PS1M3QUlDMVNjWVlp?=
+ =?utf-8?B?SEJCTERUditNblZwbWw3Ym52c24vTGlYaHpGSVNUanJZY0w0T0xkdURqT282?=
+ =?utf-8?B?Y3p6cDQ5eUtZS2xHUitoUG41T0JJbXFpem4xdzVvMlBvK3ZjYnQvU3hVekNL?=
+ =?utf-8?B?Z3FlRU5TZkZ6Mnptb0IvbTBrQjhFdHNMb2x3V0lhMlc4MHUxdkp6c0xIVno3?=
+ =?utf-8?B?YXJkZEY3YlZuM0RqbW9jVlhDbWJXbUkxSFZPT2dUR0FnY3JVc3I4TkJDYlFU?=
+ =?utf-8?B?R25TeW9uSmg5WnVDV0R0WkVPL3ZubW9sK1U5TFNidS9qTjY5QXRkMVBRZGds?=
+ =?utf-8?B?RGJVRDdpTWJqK0ttVkJsbklNVHBhMDVQM1YwcTVlRlhvL0t1SE1QdklZVjFX?=
+ =?utf-8?Q?zYgp+oU4Panrc?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UHBBbmZNNkJjQXRMZDZKVXJ4Qzl3Q1Z4RTBmRW1STEdnY1RpSWVCVUhQN2JO?=
+ =?utf-8?B?OW1ZUlhVV0dlL0EwUVJFY0lrdHRYZFQrdVJpMmhjKzV1b05HREh5TTYvRnZs?=
+ =?utf-8?B?dVBuaGNNdWptdVJ6d3ZHTkFUT0xsdCtXbytVSVJiZmFzTWtya0ZsTGdVcnho?=
+ =?utf-8?B?L1VJclAwRUdWN04rRTZsa005MjRWem0xV1RkNzVKWEdpRFBWTVVqNXhTVVNy?=
+ =?utf-8?B?ak9GUDVhUnZCbWEyWWVmS1VmdjF6Y2E1NmwwbS93MXhWMUdTR3hZaHhzdVkv?=
+ =?utf-8?B?OU1HMjFGbm93NGtnTExnWnNzVHNsQUR3bkZJOUgyV2dwZDlkdTRDNlRueWU0?=
+ =?utf-8?B?WHlCMGpTZEFMb3FrQWhiUkRxVHcvZnZJd00xNVdEYTRkanZXcUFWdlVGUGpo?=
+ =?utf-8?B?V2FXWFVCR0F6cW1MOTRPcWVVNjNUTmVQeXRSdWt3SUwyNzUwMmFuNEFVUkxZ?=
+ =?utf-8?B?Rm51Z1ZVTzFPNHovOU4wVDY3WkxYbXRwbTd1VlAvZGJzTGxTZWVaUkJJV3R3?=
+ =?utf-8?B?NGlaL1BLanBpY3NJMVVYZDZ4ZTVPV0tobkUzbXBScElEdEVSRW8ydEtkZGxQ?=
+ =?utf-8?B?ZFFvajh6cFc2TG5wcHpqRjQ1UDVnYzhnN29CSlJ6MWJFTDREWWZZdHdtSml6?=
+ =?utf-8?B?NkFoQlBnRWd3NHpKK2U2cUdiNWJHUFUwcXBKZGk1RHdqV2V0YitVODM2NkdS?=
+ =?utf-8?B?MUJpQkJHeXlsOFFibjJ3NW14MGVYa3hEYXlUMktUNEZFdytLbm5leWRsTld1?=
+ =?utf-8?B?UlovMUlaYzFsMVZMMStCay9KcVRkek5xeFQzK2Z3M0VLV0l6aVhyRW8vNGVs?=
+ =?utf-8?B?WS95clVPV00yWVVTQWpZb2Qrc21MWkFqZHM3V2ZOazREQUdaYVJIQWJnSDJB?=
+ =?utf-8?B?N3ZkNlRkbkhERHBITm1SMDlZR0drazlGSzhpVFZGU2pXK2p4RjJpWlI3VVFy?=
+ =?utf-8?B?RTBRRXJURkYvcGdjclhxWVJsbUNGWjdtck1uYW1PTFpRRTFNU055Z0lUUHFE?=
+ =?utf-8?B?VGNHZEdITDhQOWYzM1RncWwyTUJCdDlzeXNGKzAzcVRPUWFxb0Q1Z2g0ZjJU?=
+ =?utf-8?B?cTZqdW9HS3lqbjdxREw4QWV0eUp4ZGgvVGE5byszdXhpVHBxamdMT0UybFdK?=
+ =?utf-8?B?NmJuQTBIUXcxMlB4aUdVUE41VE53R3V1b01oTUc1cXJNVzFDb0k2RDNmdDRl?=
+ =?utf-8?B?dnhDT0c5cmcrRTgyQXpHVS84ZXVHZnp3WVBwSUVoZ3JDdVd3bHRtcVQ4ejBF?=
+ =?utf-8?B?MXdyY0I4TzE5aW5PWlBDdXIzWXk5MlNnNEJlSS9VNFhoeU1sR2N4elNYd2Nq?=
+ =?utf-8?B?U2hJVWZPZnFHWjByRm10NW9QOU9VODBEWVV5bnZsSXBVN2NDMDZPR1BscHNz?=
+ =?utf-8?B?U2xlYnM4S0F3eGoxdzl0RVYvTCtsWEk5YUtJWC9qNHR4WXh4K1poUWF5NnVX?=
+ =?utf-8?B?Ulg4Q0tVWGw3c3NObjhkalFUL1F4QlAyZTdBNjRwMGcxOUVTUWZERG9XR21G?=
+ =?utf-8?B?Ym1Ib3JuR09QWkI2RU9mQUR1cG9IUURTQzVDcEZYYlBIQTZNeG13a2hmckFv?=
+ =?utf-8?B?Y29QTGZpZmVkYnRpcmN0OU5velRkanc0V1JteUdxTE9Ga3UyRlAwN3pibjZv?=
+ =?utf-8?B?ZTA2NExQMjZ0eUZHcVRpZWZGakExd1QrQkdpeHg5WUlyVWk3RWx2dnV6aHpo?=
+ =?utf-8?B?OUkvR01aK25SRFZxY1ZVSUlpVkxPMWg0cUhIYmI5OUIzTU9yZlUzQUxlYVBN?=
+ =?utf-8?B?MlllYXYvdWo5UTFMalRBUVUvbkxKdWR2U0lEdlA4U2gwMzJYU01FRnczZG11?=
+ =?utf-8?B?dTZ4QjNOL3g2N2ozeURVS0VGZXM3K0k0eGQ1R3BYOU1SM1laSzFYNXJVTGJz?=
+ =?utf-8?B?ZFJUQjlGeEpkS0ZVb01xTW45L3F1cnlZRGx5RFJ6cG5YaWpGTUhPREpUdFlT?=
+ =?utf-8?B?ejBVbElhLyswOVBmQXoxckFuRE5oc29QeTRUQlFaRnlJbW5sSlFYdW9LU05S?=
+ =?utf-8?B?NWpoQTJYeVBiNjJ4TElvWkJVOEc4NE9LZ2J0OFVndURMd2hLRmtjaFNGODBF?=
+ =?utf-8?B?eHAyZjZCMGlWZjhWY3RQb0xncUVkdUpjVUlMSUhsdFM5d25VUHVEa1JlZi9B?=
+ =?utf-8?B?K1dNZHpwN2lXTHJRaE1tbVhSNkhoZjdWekF0a2FFa3c3aURGeHArWmhCOTUy?=
+ =?utf-8?B?Y0E9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0a0d9636-90ad-47c4-4c21-08dd34adf3b2
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2025 15:13:08.0599 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 26ytN5xWdsb3uxxDmEqmiGqNR34PbxR6PNy5DW5l+qfqLLX5xYevGGr0WoUOWPlvwj5yS8NjxqCWbsBuszGllRTVMECaWc4pHQKb9BAkZMU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10840
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,160 +177,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Simon,
 
-On 2025/1/14 22:48, Quentin Schulz wrote:
-> Hi Tianling,
+On 12/20/24 5:01 AM, Simon Glass wrote:
+> The devicetree file may not be provided, so avoid a failure in that
+> case.
 > 
-> On 12/26/24 10:20 AM, Tianling Shen wrote:
->> The NanoPi R3S(as "R3S") is an open source platform with dual-Gbps
->> Ethernet ports designed and developed by FriendlyElec for IoT
->> applications.
->>
->> Specification:
->> - Rockchip RK3566
->> - 2GB LPDDR4X RAM
->> - optional 32GB eMMC module
->> - SD card slot
->> - 2x 1000 Base-T
->> - 3x LEDs (POWER, LAN, WAN)
->> - 2x Buttons (Reset, MaskROM)
->> - 1x USB 3.0 Port
->> - Type-C 5V 2A Power
->>
->> Signed-off-by: Tianling Shen <cnsztl@gmail.com>
->> ---
->>   arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi |  8 +++
->>   board/rockchip/evb_rk3568/MAINTAINERS      |  7 ++
->>   configs/nanopi-r3s-rk3566_defconfig        | 74 ++++++++++++++++++++++
->>   doc/board/rockchip/rockchip.rst            |  1 +
->>   4 files changed, 90 insertions(+)
->>   create mode 100644 arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
->>   create mode 100644 configs/nanopi-r3s-rk3566_defconfig
->>
->> diff --git a/arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi b/arch/arm/ 
->> dts/rk3566-nanopi-r3s-u-boot.dtsi
->> new file mode 100644
->> index 0000000000..b66e5015d6
->> --- /dev/null
->> +++ b/arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
->> @@ -0,0 +1,8 @@
->> +// SPDX-License-Identifier: GPL-2.0-or-later
->> +
->> +#include "rk356x-u-boot.dtsi"
->> +
->> +&vcc5v0_usb {
->> +    /delete-property/ regulator-always-on;
->> +    /delete-property/ regulator-boot-on;
->> +};
-> 
-> Please justify this change, this seems very odd.
 
-This change is based on commit 5b155997d445 "rockchip: rk3568-nanopi-r5: 
-Update defconfig for NanoPi R5C and R5S" and it's copy&paste.
+Can you provide a bit more information on when/why this shouldn't be a 
+failure? I assume likely x86? or Aarch64 with ACPI instead of OF?
 
-And another commit a9e9445ea2bb "rockchip: rk3568-nanopi-r5: Enable PCIe 
-on NanoPi R5C and R5S" removes the vpcie3v3-supply prop, not sure why.
-
-> 
->> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/ 
->> evb_rk3568/MAINTAINERS
->> index 588134ecb2..b2780401a3 100644
->> --- a/board/rockchip/evb_rk3568/MAINTAINERS
->> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
->> @@ -28,6 +28,13 @@ F:    configs/lubancat-2-rk3568_defconfig
->>   F:    arch/arm/dts/rk3568-lubancat-2.dts
->>   F:    arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
->> +NANOPI-R3S
->> +M:    Tianling Shen <cnsztl@gmail.com>
->> +R:    Jonas Karlman <jonas@kwiboo.se>
->> +S:    Maintained
->> +F:    configs/nanopi-r3s-rk3566_defconfig
->> +F:    arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
->> +
->>   NANOPI-R5C
->>   M:    Tianling Shen <cnsztl@gmail.com>
->>   R:    Jonas Karlman <jonas@kwiboo.se>
->> diff --git a/configs/nanopi-r3s-rk3566_defconfig b/configs/nanopi-r3s- 
->> rk3566_defconfig
->> new file mode 100644
->> index 0000000000..f21c703ca7
->> --- /dev/null
->> +++ b/configs/nanopi-r3s-rk3566_defconfig
->> @@ -0,0 +1,74 @@
->> +CONFIG_ARM=y
->> +CONFIG_SKIP_LOWLEVEL_INIT=y
->> +CONFIG_COUNTER_FREQUENCY=24000000
->> +CONFIG_ARCH_ROCKCHIP=y
->> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-nanopi-r3s"
->> +CONFIG_ROCKCHIP_RK3568=y
->> +CONFIG_SPL_SERIAL=y
->> +CONFIG_SYS_LOAD_ADDR=0xc00800
->> +CONFIG_DEBUG_UART_BASE=0xFE660000
->> +CONFIG_DEBUG_UART_CLOCK=24000000
->> +CONFIG_PCI=y
->> +CONFIG_DEBUG_UART=y
->> +CONFIG_FIT=y
->> +CONFIG_FIT_VERBOSE=y
->> +CONFIG_SPL_FIT_SIGNATURE=y
->> +CONFIG_SPL_LOAD_FIT=y
->> +CONFIG_LEGACY_IMAGE_FORMAT=y
->> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-nanopi-r3s.dtb"
->> +# CONFIG_DISPLAY_CPUINFO is not set
->> +CONFIG_DISPLAY_BOARDINFO_LATE=y
->> +CONFIG_SPL_MAX_SIZE=0x40000
->> +CONFIG_SPL_PAD_TO=0x7f8000
->> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
->> +CONFIG_SPL_ATF=y
->> +CONFIG_CMD_GPIO=y
->> +CONFIG_CMD_GPT=y
->> +CONFIG_CMD_I2C=y
->> +CONFIG_CMD_MMC=y
->> +CONFIG_CMD_PCI=y
->> +CONFIG_CMD_USB=y
->> +CONFIG_CMD_PMIC=y
->> +CONFIG_CMD_REGULATOR=y
->> +# CONFIG_SPL_DOS_PARTITION is not set
->> +CONFIG_SPL_OF_CONTROL=y
->> +CONFIG_OF_LIVE=y
->> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned- 
->> clocks assigned-clock-rates assigned-clock-parents"
->> +CONFIG_SPL_DM_SEQ_ALIAS=y
->> +CONFIG_SPL_REGMAP=y
->> +CONFIG_SPL_SYSCON=y
->> +CONFIG_SPL_CLK=y
->> +CONFIG_ROCKCHIP_GPIO=y
->> +CONFIG_SYS_I2C_ROCKCHIP=y
->> +CONFIG_LED=y
->> +CONFIG_LED_GPIO=y
->> +CONFIG_MISC=y
->> +CONFIG_SUPPORT_EMMC_RPMB=y
->> +CONFIG_MMC_DW=y
->> +CONFIG_MMC_DW_ROCKCHIP=y
->> +CONFIG_MMC_SDHCI=y
->> +CONFIG_MMC_SDHCI_SDMA=y
->> +CONFIG_MMC_SDHCI_ROCKCHIP=y
->> +CONFIG_PHY_REALTEK=y
->> +CONFIG_DWC_ETH_QOS=y
->> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->> +CONFIG_RTL8169=y
->> +CONFIG_NVME_PCI=y
-> 
-> I didn't see any PCIe connector for an NVMe on the R3S[1]? Did I miss 
-> something? The wiki seems to indicate there may be an NVME but that 
-> could be just a bad copy-pasting[2]?
-
-Yes, I checked this board and it does not have NVMe slot. I will send a 
-new patch to disable it.
-
-Thanks,
-Tianling.
-
-> 
-> [1] https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R3S
-> [2] https://wiki.friendlyelec.com/wiki/index.php/ 
-> NanoPi_R3S#Expand_Docker_Storage
-> 
-> Cheers,
-> Quentin
-
+Cheers,
+Quentin
