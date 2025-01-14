@@ -4,71 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D988C02183
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 17:27:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ADE4C02183
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 17:33:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D699680719;
-	Tue, 14 Jan 2025 18:26:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
+	by phobos.denx.de (Postfix) with ESMTP id B50948060C;
+	Tue, 14 Jan 2025 18:33:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="NE9UrvW2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c/GhuYzh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15DBC8060C; Tue, 14 Jan 2025 17:47:39 +0100 (CET)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB0FB80657; Tue, 14 Jan 2025 18:33:50 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 643C68007D
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:47:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A80C08022E
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 18:33:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
-ARC-Seal: i=1; a=rsa-sha256; t=1736873254; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=WKz1FrxEK+PLtGGjtrsLjpb5y93gmR2mVzA1GbEXfKy6p2K80YT1Y3x8Et9LFymPBmgo5479m7+FYeozlDWXNqAEQZkxfWIE44LW6lIaNFgncNO3oUN2+HXrJlkGsQ7irGOGjHlPfRNerb2YcTOqd3EEVqo+vEm1rHJRP8C+SpI=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1736873254;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=sowDOmbbLwQE5LRvkVWWEIUVztCW9Hs45oAA8h+9g5w=; 
- b=C3h70zZ2v7l5mekmOTOfQUgbYBnna12zLyAGG0blx2XIcUyeDxr2p3fUZO4xl+oL4T1e6LjI8qahRPSFq3HhzrSDJGZjFqbRmoWCWFeb+ULQVFQcsOA2B8K9Cg4qCzUbdxovsDL1gHG198BysKb/3soSQaCqb3zg+fhQa9Gckik=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=pigmoral.tech;
- spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
- dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1736873254; 
- s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
- h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=sowDOmbbLwQE5LRvkVWWEIUVztCW9Hs45oAA8h+9g5w=;
- b=NE9UrvW2vc07Nzc/tov7oOuYET8yq8WqE089gsKx/ItEphRFsVtRAYF5cvClZZme
- 6v8H4lEyGO6Hl0gwv2xDcbVpe/QE/TALJk6n4j8UxqoXCF3PqZxaNn6EFWf4KSBx+Io
- AfzMb9SCrhy65AmYxz9n8MsG3HBYUCU7RraizOis=
-Received: by mx.zohomail.com with SMTPS id 1736873252724117.97056886506834;
- Tue, 14 Jan 2025 08:47:32 -0800 (PST)
-From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Wed, 15 Jan 2025 00:46:41 +0800
-Subject: [PATCH 5/5] doc: canaan: Add K230 CanMV board
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4678afeb133so129291cf.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 09:33:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1736876027; x=1737480827; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HjAL24VX5WdtIwf+8b3heHJlxvl1XUFFilTfhW8Ev0g=;
+ b=c/GhuYzhjmpzUFIw9jeWIUEwkEekkxU+x74JVQirXCJhrl7mmtmCvwXnALVFCSQgcm
+ yN6H4jZFnCFSulzk6eCdE5P7THNtdThxqz4fB5e0pZYnVLNVGsAXnWMpslO8y08UahtQ
+ azqFZ+Eox1Cvalh0vrdZ3KB/wEmzZiLrM4+CQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736876027; x=1737480827;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HjAL24VX5WdtIwf+8b3heHJlxvl1XUFFilTfhW8Ev0g=;
+ b=YQ5PZm83E5g88SNeZFsbFPsGhS9FVUn/Qa+KcXw645krs8JjgbeniOCgBFOXoODw5z
+ cIrwbtAh3m/oILUj3Zda840Ud5nVJ+KRP1mR/yMCoZ5SwR1CSjKCAtUrXz+6Xbr7tll/
+ ILFKaTe1UA6rT56XnKE7TckKGaZ9cVyz5QC9jIwD0TUcUk+kWv2xSkRoMMBuXBaKx1Y7
+ UTRs78reM8VvJeT54ddPm8wWzrxzSY1/XukCrgJt1jvcjo87tQ/OVYLdi2SLAwyna12p
+ fKvadjIgw1fhjLpI/8kakyGN1c6AwA/hFTXl3xaMLHMkvOp/BttsT/XBzP6zbxRJoMxw
+ c9qQ==
+X-Gm-Message-State: AOJu0YyCnt4bZK1AbnvyjLRnY/+Z8yxd/H65hHbCGaM6IrZxsd16SsVV
+ YIUQFDAX0X4fKgLMDn4y1h3//1iPwFfBmdy3UbfHKd8HxixpIZv754EWVRlIYco=
+X-Gm-Gg: ASbGncs80LzwAAJtHq7074yR/tPP6KjejtBzAKjb3caw661aI8bOrm8sxwijmqcQGn7
+ ZqY+0oXu/gDhj6hssdN6HzcHsdetTvoyYX/yphKG/WSKvmXMgFQWWsSFIucaaJWXk+3WSGekDhY
+ XhqfFyb4wlTBibp2oF6PbuCakneEtNcjyV//qyBeI0zeBmVaRN6va/VfT9oFmK/38TCJokW3ex3
+ 94ysVIgq3fyAa/lMD2DJ5P+UwHnFenS0SdyAx//cGkE+5MvhwUSIw==
+X-Google-Smtp-Source: AGHT+IGVyV8ZFA+OccA9Ea7UTIN0c2ekG1aFD6SBQ59CL0461wiuZohc5gX23i7TioUha8RtofvQgw==
+X-Received: by 2002:ac8:7d45:0:b0:46b:1c07:12c5 with SMTP id
+ d75a77b69052e-46c7b06dfbcmr350588601cf.17.1736876027411; 
+ Tue, 14 Jan 2025 09:33:47 -0800 (PST)
+Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46c8732fbd8sm55145911cf.27.2025.01.14.09.33.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jan 2025 09:33:46 -0800 (PST)
+Date: Tue, 14 Jan 2025 11:33:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: Re: [PATCH 01/15] vbe: Split out some VBE code into a common file
+Message-ID: <20250114173343.GO3476@bill-the-cat>
+References: <20250109123010.4005298-1-sjg@chromium.org>
+ <20250109123010.4005298-2-sjg@chromium.org>
+ <20250114012226.GG3476@bill-the-cat>
+ <CAFLszTj9zAE_KniCZ2xHGHt1fK7jhTBHzfkdSif6XNuzKtWOTA@mail.gmail.com>
+ <20250114165801.GJ3476@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250115-k230-dev-1-v1-5-f4b77259e34a@pigmoral.tech>
-References: <20250115-k230-dev-1-v1-0-f4b77259e34a@pigmoral.tech>
-In-Reply-To: <20250115-k230-dev-1-v1-0-f4b77259e34a@pigmoral.tech>
-To: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Junhui Liu <junhui.liu@pigmoral.tech>
-Cc: u-boot@lists.denx.de
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1736873211; l=4032;
- i=junhui.liu@pigmoral.tech; s=20250109; h=from:subject:message-id;
- bh=kgoALCnCzUCJLVcgTUtprD9SvQYcnFdCPECVPkasuoc=;
- b=v6SIa7DPz3tcaDKXbU6ocF77IKKcmmkmruThHKAePgi4/+0SpcBk/ruc76MD++gkWXAoufegf
- UJYM17NRXnXB1H9Gff2kMlsJxWj38+KNXX4DN+cCjNvExXBBe/ZlVU3
-X-Developer-Key: i=junhui.liu@pigmoral.tech; a=ed25519;
- pk=68KnSr7PNU3x0/qPdqkmlkr3EChzKC0ewuARfy9ZNnc=
-X-ZohoMailClient: External
-X-Mailman-Approved-At: Tue, 14 Jan 2025 18:26:11 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZGY/SVXTt7Z9nZcf"
+Content-Disposition: inline
+In-Reply-To: <20250114165801.GJ3476@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,142 +100,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add description of compiling u-boot for K230 CanMV.
 
-Since the vendor's u-boot-spl verifies u-boot header [1], it is
-necessary to use the Python script from vendor to add the header to the
-u-boot image.
+--ZGY/SVXTt7Z9nZcf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[1] https://github.com/kendryte/k230_sdk/blob/v1.8/src/little/uboot/board/canaan/common/k230_board_common.h#L52
+On Tue, Jan 14, 2025 at 10:58:01AM -0600, Tom Rini wrote:
+> On Tue, Jan 14, 2025 at 05:58:04AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >=20
+> > On Mon, 13 Jan 2025 at 18:22, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jan 09, 2025 at 05:29:56AM -0700, Simon Glass wrote:
+> > >
+> > > > Loading a FIT is useful for other VBE methods, such as ABrec, so st=
+art
+> > > > a new common file. Add functions for reading the version and nvdata.
+> > > > Also add a function to get the block device.
+> > >
+> > > This is not a good commit message when you're also introducing
+> > > functional changes (blk_dread -> blk_read).
+> >=20
+> > Yes, I did not actually notice this size change at all, as mentioned,
+> > as I only built for a few boards (firefly rk3399/rk3288 and a few
+> > sandbox ones). The blk_dread() function is the old API for reading
+>=20
+> You have much faster build machines available than I do, it would be
+> good to run a world build before/after (it might take an hour on
+> alexandra) before posting these big series.
+>=20
+> > from a block. It didn't occur to me that blk_dread() would bypass the
+> > cache.
+>=20
+> Yes, how is that happening? That's what doesn't make sense.
+>=20
+> >=20
+> > > Further, this functional
+> > > change seems to introduce some other code being pulled in very
+> > > unexpectedly, and that needs to be explained. For example,
+> > > phycore_am62x_r5_usbdfu is another case and that has
+> > > CONFIG_BLOCK_CACHE=3Dy but CONFIG_SPL_BLOCK_CACHE=3Dn, and yet the si=
+ze
+> > > growth is in full U-Boot.
+> >=20
+> > This board currently uses blk_dread(), but not blk_read(), so the
+> > addition of a blk_read() call in non-SPL causes the BLK cache to be
+> > pulled in.
+>=20
+> But, how? I mean, this sounds like some underlying bug that needs to be
+> fixed. The platform sets CONFIG_BLK=3Dy and CONFIG_BLOCK_CACHE=3Dy and
+> drivers/block/blk-uclass.c has:
+> ulong blk_dread(struct blk_desc *desc, lbaint_t start, lbaint_t blkcnt,
+>                 void *buffer)
+> {
+>         return blk_read(desc->bdev, start, blkcnt, buffer);
+> }
+>=20
+> Or perhaps the answer / problem here is that I need to track down what's
+> going wrong here instead of asking you to track this down.
 
-Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
----
- doc/board/canaan/index.rst      |  8 ++++
- doc/board/canaan/k230_canmv.rst | 88 +++++++++++++++++++++++++++++++++++++++++
- doc/board/index.rst             |  1 +
- 3 files changed, 97 insertions(+)
+So, digging in to this, what's going on is that the platforms I've noted
+here (and a few others) don't actually enable any block devices. That's
+why, today, with VBE on still, they discard all of the code still. Your
+rework means that while there's still no block devices, we're now
+including the code. What to do? Both of:
+- These platforms *should* disable the assorted block device related
+  library options they have enabled if / when possible (it might not be
+  a neat and easy un-tangle).
+- VBE needs to handle the case where there's not a block device enabled
+  and not fail the build. Part of this requires the Kconfig rework I
+  linked to earlier (so that we can have BLK off) to be complete, but
+  having the VBE code check for BLK being enabled either in Makefile or
+  C code should be the same regardless.
 
-diff --git a/doc/board/canaan/index.rst b/doc/board/canaan/index.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..e2892d2a7f342f507516a11eb81cd26181ecf66b
---- /dev/null
-+++ b/doc/board/canaan/index.rst
-@@ -0,0 +1,8 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Canaan
-+======
-+.. toctree::
-+   :maxdepth: 1
-+
-+   k230_canmv
-diff --git a/doc/board/canaan/k230_canmv.rst b/doc/board/canaan/k230_canmv.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..534ad7cb7a89ad1de2b18bcac64c120cdaec5003
---- /dev/null
-+++ b/doc/board/canaan/k230_canmv.rst
-@@ -0,0 +1,88 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+K230 CanMV
-+==========
-+
-+K230 RISC-V SoC
-+------------------
-+The K230 chip is the latest generation SoC product in Canaan Technology's
-+Kendryte series of AIOT chips.
-+
-+Mainline support
-+----------------
-+
-+The support for following drivers are already enabled:
-+
-+1. ns16550 UART
-+2. DWC2 OTG USB controller
-+
-+Building
-+~~~~~~~~
-+
-+1. Get the RISC-V toolchain.
-+2. Setup cross compilation environment variable:
-+3. Get the `firmware_gen.py`_ from vendor.
-+
-+.. code-block:: console
-+
-+   export CROSS_COMPILE=riscv64-linux-gnu-
-+   cd <U-Boot-dir>
-+   make k230_canmv_defconfig
-+   make
-+   cp u-boot-gz.img u-boot-gz.img.tmp
-+   pip install gmssl pycryptodome
-+   python3 firmware_gen.py -i u-boot-gz.img.tmp -o u-boot-head.img -n
-+
-+This will generate u-boot-head.img.
-+
-+.. _firmware_gen.py: https://raw.githubusercontent.com/kendryte/k230_sdk/refs/tags/v1.8/src/little/uboot/tools/firmware_gen.py
-+
-+Booting
-+~~~~~~~
-+
-+Currently, we rely on vendor u-boot-spl to initialize the
-+ddr and load the u-boot image, then bootup from it.
-+
-+1. Prepare a SD card with the `vendor image`_ burned on it.
-+
-+2. Write the U-Boot image to the SD card at offset 2MB.
-+
-+.. code-block:: console
-+
-+   dd if=u-boot-head.img of=/dev/sd[x] bs=1M seek=2
-+
-+3. Insert the SD card into the board and power it on.
-+
-+.. _vendor image: https://kendryte-download.canaan-creative.com/developer/k230/CanMV-K230_debian_sdcard_sdk_1.3.img.gz
-+
-+Sample boot log from K230 CanMV board
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+.. code-block:: none
-+
-+   U-Boot 2025.01-00645-g2d81c4788455 (Jan 14 2025 - 23:15:07 +0800)
-+
-+   DRAM:  512 MiB
-+   Core:  15 devices, 11 uclasses, devicetree: separate
-+   Loading Environment from nowhere... OK
-+   In:    serial@91400000
-+   Out:   serial@91400000
-+   Err:   serial@91400000
-+   Net:   No ethernet found.
-+   K230# cpu list
-+     0: cpu@0      thead,c908
-+   K230# usb start
-+   starting USB...
-+   Bus usb@91540000: USB DWC2
-+   scanning bus usb@91540000 for devices...
-+   Warning: r8152_eth (eth0) using random MAC address - 1e:33:97:47:e6:32
-+   2 USB Device(s) found
-+   K230# usb tree
-+   USB device tree:
-+     1  Hub (480 Mb/s, 0mA)
-+     |   U-Boot Root Hub
-+     |
-+     +-2  Vendor specific (480 Mb/s, 100mA)
-+          Realtek USB 10/100 LAN 000000000000
-+
-+   K230#
-diff --git a/doc/board/index.rst b/doc/board/index.rst
-index b1c470eb2cbb1c07f907eb2282039520c219c72a..74c4dd1f42d7e6a6d877020a79cb0a4f9c7c5335 100644
---- a/doc/board/index.rst
-+++ b/doc/board/index.rst
-@@ -21,6 +21,7 @@ Board-specific doc
-    beagle/index
-    broadcom/index
-    bsh/index
-+   canaan/index
-    cloos/index
-    congatec/index
-    coolpi/index
+--=20
+Tom
 
--- 
-2.47.1
+--ZGY/SVXTt7Z9nZcf
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeGn+wACgkQFHw5/5Y0
+tywU1Av/ZSTwm4XNmYA6MN9FZd6cZ/iipkNMwJLfnXVi+u0wobmt0iab7v8sXbk6
+GC5D9XYZM34E/xRNMrgcOob9kvr0LT9LtXkmLr6RospwDJJtQP7KZ8wLgZP1sXY0
+NpN0mRkWX0CVJdxVmKGxtEgLxwk6KO+f8AnGykSVSp7UccbhfzpOERy8uYNr0bKl
+AkUf7/WUvy9g51E+KaCnlFtKw35YQTOzkOS1bay9qumJwIerK5KOLi6I/dr3V4TC
+LWQnPprAvTMOG6jxBgpWpmuHVpgn/hZZPtPLHmOnFSvhELqk0vNlmHMP4PP+6tNJ
+j77hg86YruCYorjtvEkIebrve0YCZ93GcqxOGVhIwT5TBoxQftl6CMSuXWxkmCBP
+U43IsyyeV3hJ8dERYxImq/8bJ/9DaGOofW0C9bpsKkLZcSxsNGoW7+T4x/kPQLAg
+BSNclfiHx0mnLQcW2AOWSOXRamD2j+eLJGpXUU7JciClXGyOVhWhS0/y143kUhKt
+Sm5WxKQY
+=AE9A
+-----END PGP SIGNATURE-----
+
+--ZGY/SVXTt7Z9nZcf--
