@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9961E77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 10:30:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77420E77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 10:30:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0361806C6;
-	Tue, 14 Jan 2025 11:30:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E9D8C806D6;
+	Tue, 14 Jan 2025 11:30:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="CMe0S40a";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kv5uVtCy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3327580708; Tue, 14 Jan 2025 11:30:12 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 391AC806D6; Tue, 14 Jan 2025 11:30:18 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0F28806B7
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 11:30:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C8A18806B7
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 11:30:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 7C17A3F689
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 10:30:08 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 32BDA40B06
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 10:30:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1736850608;
- bh=X/GsFEBZi9OS94v4ZJZnDsKYiLceaB1EW+bjV7Cc4nI=;
+ s=20210705; t=1736850614;
+ bh=kiyF4DBJa2zy+qgj5GqI9LPPZvBjT9Ak6a+FhrTga/U=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=CMe0S40aN9nuVfiSIMmohf1sMA3moNQDQFLXA4qCN+zjGRqPxY1d2Xk7O+ops32dH
- SoEegLfZgmHTnBmM0jFSukl1CWNLt9FQBJ1ZlX/m7fvz9LjYbctDFlv7nOIZjdAJxf
- Bgr1Cy58rzvLc/mKkufIRaxr7idTjnJPFS/NpBgSkg4hsN7XESH5ti/I8yvEbSfJLY
- HsG8oJXzk2+4ixXeVifUsGT7GDpMv0zGcLXhOF/S6R5pYy3YNR6rFj47pAqxShhqME
- arRcVekbe8YT14klVHC7J0JSfEYjx7WeTAgDhcoQ94BiK9lwq5KRVTOS1aGS2F2JQG
- aaxkGF45fLg5A==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-436723bf7ffso16810535e9.3
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 02:30:08 -0800 (PST)
+ b=kv5uVtCyBIykVWGF7wHULDaaAszu+VvcEyJTrrroNjjzdUlyKqLMow0Y+YZioJiqT
+ vJV1s347AkZICXvFDRlEKgqwvzeyVOdK26AjgoEQjmb/e6yORpNcqzatEt/qwlecgK
+ 17ifbNMlG7N6Rxl54J44HyUNfgCp+vdQpDC3o7F0FH/LDJTtTA7f7hLs51rkq2SDSF
+ cv0/2HaAtG4lUm1Hu0MEAR2r+UkjxFDEANhw8ftLx28QWLLGddmV36/IDLroJ0JRCG
+ 3nvTJC72rKg08UMfFKoQbG3+ymo0P2DisyKsJfI5XabbZPJTlhcMlo//GL9boaTlib
+ mLDfc43xmII0Q==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4362f893bfaso29021825e9.1
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 02:30:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736850607; x=1737455407;
+ d=1e100.net; s=20230601; t=1736850610; x=1737455410;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X/GsFEBZi9OS94v4ZJZnDsKYiLceaB1EW+bjV7Cc4nI=;
- b=Fn8NucY5MoUnKfrM2acy1KzCIkna9ih3zFDJVOc1Owg/Wk109fTML09Atgds47Wl3M
- W9AtB60joOgS0cShUXUtXWP4KcHJ7uQa45pqSWF+/vqnBnBZg/VYckFCQ+kXNHlUHMHG
- ssu426gwwJUYBaMUjJ5wuQeiOg+S/UNVP7L4iVjTh5qO2zRyKtv4VovaPlGq4qa5x/jM
- oj+dRv83/lK1uXK9bXpZ/3louco/TDFtHtgcZTdcW8RkKlE1nY4PGur1MmbgFAwcNeXa
- buUvBk+l4cOCSh/AReyZQujjkwhR+EKnKArk+FWu7eh89WkzQn/Lx8EGSp9BHcg6dKL1
- teHA==
+ bh=kiyF4DBJa2zy+qgj5GqI9LPPZvBjT9Ak6a+FhrTga/U=;
+ b=CdkwGdiJcN9ceNZFb3Ttz6x4zrV3x5o2/z/KGQANLCThMxnX7WeO/48gmKLi5pRJss
+ 0m4rI0lbg3Mv+zYIE5gswiyF4p7HsGzLMwkOUCm4C2lgLuZod0yBoJJegyTmpakT9xgl
+ bbhgGH7EoEuYKOnwySgKfB6HmZjiaGiZ6zG1UfqW65Gn85Q8JJRLK7/8cBwbfXAlFcSH
+ AUc/JoGpuNQHp/9q+Fyfrgug1XAWrHy0QIM4jnw23LNP6uoORp7SoKQjAj2M5gbJ/1kj
+ o3dW6y27mH50PWHajELTNTZaNK+hNOnEbqUOv+KMMWDmxqjhxYgrY92A8thqInD8sqsp
+ A2og==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFpbC3sGXVlhticlyCuRj74v0mVS65w4Lh5+rcC/xWk5LtcqMk08Otxvk7wUlPIKlSIyohoB4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw5Xzu9+fEWR3gzKWgj6+8ioUOwxh6bjBYfSEOqTmepNWSEQFnP
- Rw/7EgJQ59yHy0+7K/NqXO6YuhNDLuOx/Knob3xyI9TFgcEPV14gcYVADlpFeAZIiCzyZm1KUve
- ZMYiFGtiPJtSO4Ya0Z3xsJDL0pYsvgzj5H6cBwKgxBdvI3jPIjZ7ahTTYco3TvzB5XrQ=
-X-Gm-Gg: ASbGnctihnr11998vMs6+AT8lAUJ2OQU639zWEr/aHUbn0DVgU/OMYdqQNHvuB4hWpJ
- CSa9t/boDDwFBa48EC8PsaLzrqw0rZwJfhzNsi+jtk58sXrGQFkLxScG2wz6G/e0qYqbp1QtmWJ
- I8d8U3Toj/iKSDYuXaMtK6kZdmJbjulk++i74jdEz+I8D34ZzYe3K/zZWYBz1eaKDqE81wGQ5p/
- A2eTZKghBITA3QWA/bdmKkwe8z2DttGD1XQTzgNDOgsm8YZASNBqLSwAYaLrJbOU+ZtZSIf1EPC
- CYSQYU3+t5LeODY=
-X-Received: by 2002:a05:600c:1c1a:b0:434:a802:e9a6 with SMTP id
- 5b1f17b1804b1-436e2679a94mr238786415e9.7.1736850607499; 
- Tue, 14 Jan 2025 02:30:07 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE0kEEw3yOQkgoij/40KtuqgNE7U73niTsXIJB60+KG3FPUiZ9Qb7nW/EWGKlpf1PDzFtVV1w==
-X-Received: by 2002:a05:600c:1c1a:b0:434:a802:e9a6 with SMTP id
- 5b1f17b1804b1-436e2679a94mr238786135e9.7.1736850607112; 
- Tue, 14 Jan 2025 02:30:07 -0800 (PST)
+ AJvYcCVaNQKP8i0A9ww/HmuTbLJhnpiTfShWkM08bEt11zq77eWcdXYlPx7Fy6G9fGpIRDQB5Ck2tHc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxwK8hS+I9rZzJGqHHVso3yJxFC1JgsH8wflZPhI1+TgnrI0dHj
+ Xq3HKyMA5Ig3IIBvcxpwp5kiDNPAOX31AJAPJwZA071SBPJ3YEGrUQD3MJovqtKEVyQfOPyM4U3
+ 8T/M/zrDqXZ6RL8HQzuYfdx5Tc98iB41D7IvKpVf/s+Y0RuE6IWgUDORq6nTs2OJ9qTU=
+X-Gm-Gg: ASbGncs4GvoIp18eSs4dsPUWFN5LUvAIWosDhZ24k6T6HOS4FD6rrwFgRutaa3bbmdr
+ FcJRpnAq6iyZ2sWjzglKJzKp/JpgObwfU7NLK+byxu+cn05ItcEfGkly81hiRm/wdlBtNc5IGo1
+ B48QfFh80SMzGWg+pEEZu9fISJziKfAJ8iXfQbz3aSjwpVp5WVJ8Xz7GLgzP/HfmDZ9LQaNobCi
+ LzBJ7y+FjGBJftN5ZFVvf21IIKQVpWbzaaCLh7dqwofZl4yK6+0Bz2Z5LHHCAt/ey/zfoWpQJWM
+ 2xOyO9/38+JSdgE=
+X-Received: by 2002:a05:600c:510a:b0:434:faa9:5266 with SMTP id
+ 5b1f17b1804b1-436e26adfc9mr213436085e9.13.1736850609884; 
+ Tue, 14 Jan 2025 02:30:09 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHQNalF19JzaUwEEvRTmpEK/8aFzJsrse/Xe6Sj4IQgzITmNUv+eFFKVJ+HGk2WHf8lMT+cmQ==
+X-Received: by 2002:a05:600c:510a:b0:434:faa9:5266 with SMTP id
+ 5b1f17b1804b1-436e26adfc9mr213435315e9.13.1736850608741; 
+ Tue, 14 Jan 2025 02:30:08 -0800 (PST)
 Received: from localhost.localdomain ([2a02:3035:6e0:642a:6b6a:606c:5383:21d9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e9dc8826sm169996455e9.11.2025.01.14.02.30.05
+ 5b1f17b1804b1-436e9dc8826sm169996455e9.11.2025.01.14.02.30.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 02:30:06 -0800 (PST)
+ Tue, 14 Jan 2025 02:30:08 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
@@ -91,9 +91,9 @@ Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Prasad Kummari <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/4] efi_loader: use INCLUDE in EFI linker scripts
-Date: Tue, 14 Jan 2025 11:29:52 +0100
-Message-ID: <20250114102953.64381-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 4/4] efi_loader: use include in ARM EFI linker script
+Date: Tue, 14 Jan 2025 11:29:53 +0100
+Message-ID: <20250114102953.64381-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250114102953.64381-1-heinrich.schuchardt@canonical.com>
 References: <20250114102953.64381-1-heinrich.schuchardt@canonical.com>
@@ -115,29 +115,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Except for the architecture specific lines ARM and RISC-V can use the same
-linker script. Move the common lines to an include.
+Use the same include as arm64 for the linker script.
+
+Adjust the 32-bit ARM PE-COFF header accordingly and harmonize it with the
+64-bit ARM header.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/arm/lib/elf_aarch64_efi.lds   | 68 +--------------------------
- arch/riscv/lib/elf_riscv32_efi.lds | 68 +--------------------------
- arch/riscv/lib/elf_riscv64_efi.lds | 68 +--------------------------
- lib/efi_loader/elf_efi.ldsi        | 74 ++++++++++++++++++++++++++++++
- 4 files changed, 77 insertions(+), 201 deletions(-)
- create mode 100644 lib/efi_loader/elf_efi.ldsi
+ arch/arm/lib/crt0_arm_efi.S  | 37 ++++++++++---------
+ arch/arm/lib/elf_arm_efi.lds | 71 +-----------------------------------
+ 2 files changed, 20 insertions(+), 88 deletions(-)
 
-diff --git a/arch/arm/lib/elf_aarch64_efi.lds b/arch/arm/lib/elf_aarch64_efi.lds
-index e382254a6cf..453d3511c28 100644
---- a/arch/arm/lib/elf_aarch64_efi.lds
-+++ b/arch/arm/lib/elf_aarch64_efi.lds
-@@ -8,70 +8,4 @@
- OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
- OUTPUT_ARCH(aarch64)
+diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
+index b5dfd4e3819..590fcf515da 100644
+--- a/arch/arm/lib/crt0_arm_efi.S
++++ b/arch/arm/lib/crt0_arm_efi.S
+@@ -14,11 +14,11 @@
+ 	/*
+ 	 * Magic "MZ" signature for PE/COFF
+ 	 */
+-	.globl	image_base
+-image_base:
++	.globl	ImageBase
++ImageBase:
+ 	.short	IMAGE_DOS_SIGNATURE		/* 'MZ' */
+ 	.skip	58				/* 'MZ' + pad + offset == 64 */
+-	.long	pe_header - image_base		/* Offset to the PE header */
++	.long	pe_header - ImageBase		/* Offset to the PE header */
+ pe_header:
+ 	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
+ coff_header:
+@@ -38,16 +38,16 @@ optional_header:
+ 	.short	IMAGE_NT_OPTIONAL_HDR32_MAGIC	/* PE32 format */
+ 	.byte	0x02				/* MajorLinkerVersion */
+ 	.byte	0x14				/* MinorLinkerVersion */
+-	.long	_edata - _start			/* SizeOfCode */
++	.long	_etext - _start			/* SizeOfCode */
+ 	.long	0				/* SizeOfInitializedData */
+ 	.long	0				/* SizeOfUninitializedData */
+-	.long	_start - image_base		/* AddressOfEntryPoint */
+-	.long	_start - image_base		/* BaseOfCode */
++	.long	_start - ImageBase		/* AddressOfEntryPoint */
++	.long	_start - ImageBase		/* BaseOfCode */
+ 	.long	0				/* BaseOfData */
+ 
+ extra_header_fields:
+-	.long	0				/* image_base */
+-	.long	0x200				/* SectionAlignment */
++	.long	0				/* ImageBase */
++	.long	0x1000				/* SectionAlignment */
+ 	.long	0x200				/* FileAlignment */
+ 	.short	0				/* MajorOperatingSystemVersion */
+ 	.short	0				/* MinorOperatingSystemVersion */
+@@ -57,14 +57,14 @@ extra_header_fields:
+ 	.short	0				/* MinorSubsystemVersion */
+ 	.long	0				/* Win32VersionValue */
+ 
+-	.long	_edata - image_base		/* SizeOfImage */
++	.long	_edata - ImageBase		/* SizeOfImage */
+ 
+ 	/*
+ 	 * Everything before the kernel image is considered part of the header
+ 	 */
+-	.long	_start - image_base		/* SizeOfHeaders */
++	.long	_start - ImageBase		/* SizeOfHeaders */
+ 	.long	0				/* CheckSum */
+-	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION	/* Subsystem */
++	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
+ #if CONFIG_VENDOR_EFI
+ 	.short	0				/* DllCharacteristics */
+ #else
+@@ -84,6 +84,7 @@ extra_header_fields:
+ 	.quad	0				/* CertificationTable */
+ 	.quad	0				/* BaseRelocationTable */
+ 
++	/* Section table */
+ section_table:
+ 
+ 	/*
+@@ -111,10 +112,10 @@ section_table:
+ 	.byte	0
+ 	.byte	0
+ 	.byte	0			/* end of 0 padding of section name */
+-	.long	_text_size		/* VirtualSize */
+-	.long	_start - image_base	/* VirtualAddress */
+-	.long	_text_size		/* SizeOfRawData */
+-	.long	_start - image_base	/* PointerToRawData */
++	.long	_etext - _start		/* VirtualSize */
++	.long	_start - ImageBase	/* VirtualAddress */
++	.long	_etext - _start		/* SizeOfRawData */
++	.long	_start - ImageBase	/* PointerToRawData */
+ 	.long	0			/* PointerToRelocations */
+ 	.long	0			/* PointerToLineNumbers */
+ 	.short	0			/* NumberOfRelocations */
+@@ -129,9 +130,9 @@ section_table:
+ 	.byte	0
+ 	.byte	0			/* end of 0 padding of section name */
+ 	.long	_data_size		/* VirtualSize */
+-	.long	_data - image_base	/* VirtualAddress */
++	.long	_data - ImageBase	/* VirtualAddress */
+ 	.long	_data_size		/* SizeOfRawData */
+-	.long	_data - image_base	/* PointerToRawData */
++	.long	_data - ImageBase	/* PointerToRawData */
+ 	.long	0			/* PointerToRelocations */
+ 	.long	0			/* PointerToLineNumbers */
+ 	.short	0			/* NumberOfRelocations */
+@@ -148,7 +149,7 @@ _start:
+ 	adr		r1, .L_DYNAMIC
+ 	ldr		r0, [r1]
+ 	add		r1, r0, r1
+-	adrl		r0, image_base
++	adrl		r0, ImageBase
+ 	bl		_relocate
+ 	teq		r0, #0
+ 	bne		0f
+diff --git a/arch/arm/lib/elf_arm_efi.lds b/arch/arm/lib/elf_arm_efi.lds
+index 41440594aa6..eb16fae74cf 100644
+--- a/arch/arm/lib/elf_arm_efi.lds
++++ b/arch/arm/lib/elf_arm_efi.lds
+@@ -8,73 +8,4 @@
+ OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
+ OUTPUT_ARCH(arm)
  
 -PHDRS
 -{
--	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
+-	data PT_LOAD FLAGS(3); /* PF_W | PF_X */
 -}
 -
 -ENTRY(_start)
@@ -155,162 +257,6 @@ index e382254a6cf..453d3511c28 100644
 -		*(.dynamic);
 -		. = ALIGN(512);
 -	}
--	.rela.dyn : { *(.rela.dyn) }
--	.rela.plt : { *(.rela.plt) }
--	.rela.got : { *(.rela.got) }
--	.rela.data : { *(.rela.data) *(.rela.data*) }
--	. = ALIGN(4096);
--	_etext = .;
--	_text_size = . - _text;
--	.data : {
--		_data = .;
--		*(.sdata)
--		*(.data)
--		*(.data1)
--		*(.data.*)
--		*(.got.plt)
--		*(.got)
--
--		/*
--		 * The EFI loader doesn't seem to like a .bss section, so we
--		 * stick it all into .data:
--		 */
--		. = ALIGN(16);
--		_bss = .;
--		*(.sbss)
--		*(.scommon)
--		*(.dynbss)
--		*(.bss)
--		*(.bss.*)
--		*(COMMON)
--		. = ALIGN(512);
--		_bss_end = .;
--		_edata = .;
--	} :data
--	_data_size = _edata - _data;
--
--	. = ALIGN(4096);
--	.dynsym   : { *(.dynsym) }
--	. = ALIGN(4096);
--	.dynstr   : { *(.dynstr) }
--	. = ALIGN(4096);
--	.note.gnu.build-id : { *(.note.gnu.build-id) }
--	/DISCARD/ : {
--		*(.rel.reloc)
--		*(.eh_frame)
--		*(.note.GNU-stack)
--	}
--	.comment 0 : { *(.comment) }
--}
-+INCLUDE lib/efi_loader/elf_efi.ldsi
-diff --git a/arch/riscv/lib/elf_riscv32_efi.lds b/arch/riscv/lib/elf_riscv32_efi.lds
-index 7b9bd7b7f15..e23521c4931 100644
---- a/arch/riscv/lib/elf_riscv32_efi.lds
-+++ b/arch/riscv/lib/elf_riscv32_efi.lds
-@@ -8,70 +8,4 @@
- OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv", "elf32-littleriscv")
- OUTPUT_ARCH(riscv)
- 
--PHDRS
--{
--	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
--}
--
--ENTRY(_start)
--SECTIONS
--{
--	.text 0x0 : {
--		_text = .;
--		*(.text.head)
--		*(.text)
--		*(.text.*)
--		*(.gnu.linkonce.t.*)
--		*(.srodata)
--		*(.rodata*)
--		. = ALIGN(16);
--		*(.dynamic);
--		. = ALIGN(512);
--	}
--	.rela.dyn : { *(.rela.dyn) }
--	.rela.plt : { *(.rela.plt) }
--	.rela.got : { *(.rela.got) }
--	.rela.data : { *(.rela.data) *(.rela.data*) }
--	_etext = .;
--	_text_size = . - _text;
--	. = ALIGN(4096);
--	.data : {
--		_data = .;
--		*(.sdata)
--		*(.data)
--		*(.data1)
--		*(.data.*)
--		*(.got.plt)
--		*(.got)
--
--		/*
--		 * The EFI loader doesn't seem to like a .bss section, so we
--		 * stick it all into .data:
--		 */
--		. = ALIGN(16);
--		_bss = .;
--		*(.sbss)
--		*(.scommon)
--		*(.dynbss)
--		*(.bss)
--		*(.bss.*)
--		*(COMMON)
--		. = ALIGN(512);
--		_bss_end = .;
--		_edata = .;
--	} :data
--	_data_size = _edata - _data;
--
--	. = ALIGN(4096);
--	.dynsym   : { *(.dynsym) }
--	. = ALIGN(4096);
--	.dynstr   : { *(.dynstr) }
--	. = ALIGN(4096);
--	.note.gnu.build-id : { *(.note.gnu.build-id) }
--	/DISCARD/ : {
--		*(.rel.reloc)
--		*(.eh_frame)
--		*(.note.GNU-stack)
--	}
--	.comment 0 : { *(.comment) }
--}
-+INCLUDE lib/efi_loader/elf_efi.ldsi
-diff --git a/arch/riscv/lib/elf_riscv64_efi.lds b/arch/riscv/lib/elf_riscv64_efi.lds
-index d0b4f3d1d64..8e4844c2eea 100644
---- a/arch/riscv/lib/elf_riscv64_efi.lds
-+++ b/arch/riscv/lib/elf_riscv64_efi.lds
-@@ -8,70 +8,4 @@
- OUTPUT_FORMAT("elf64-littleriscv", "elf64-littleriscv", "elf64-littleriscv")
- OUTPUT_ARCH(riscv)
- 
--PHDRS
--{
--	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
--}
--
--ENTRY(_start)
--SECTIONS
--{
--	.text 0x0 : {
--		_text = .;
--		*(.text.head)
--		*(.text)
--		*(.text.*)
--		*(.gnu.linkonce.t.*)
--		*(.srodata)
--		*(.rodata*)
--		. = ALIGN(16);
--		*(.dynamic);
--		. = ALIGN(512);
--	}
--	.rela.dyn : { *(.rela.dyn) }
--	.rela.plt : { *(.rela.plt) }
--	.rela.got : { *(.rela.got) }
--	.rela.data : { *(.rela.data) *(.rela.data*) }
 -	_etext = .;
 -	_text_size = . - _text;
 -	. = ALIGN(4096);
@@ -339,102 +285,29 @@ index d0b4f3d1d64..8e4844c2eea 100644
 -		_bss_end = .;
 -		_edata = .;
 -	} :data
--	_data_size = _edata - _data;
+-	_data_size = . - _data;
 -
--	. = ALIGN(4096);
--	.dynsym   : { *(.dynsym) }
--	. = ALIGN(4096);
--	.dynstr   : { *(.dynstr) }
--	. = ALIGN(4096);
--	.note.gnu.build-id : { *(.note.gnu.build-id) }
 -	/DISCARD/ : {
+-		/*
+-		 * We don't support relocations. These would have to be
+-		 * translated from ELF to PE format and added to the .reloc
+-		 * section.
+-		 */
+-		*(.rel.dyn)
+-		*(.rel.plt)
+-		*(.rel.got)
+-		*(.rel.data)
+-		*(.rel.data*)
 -		*(.rel.reloc)
 -		*(.eh_frame)
 -		*(.note.GNU-stack)
+-		*(.dynsym)
+-		*(.dynstr)
+-		*(.note.gnu.build-id)
+-		*(.comment)
 -	}
--	.comment 0 : { *(.comment) }
 -}
 +INCLUDE lib/efi_loader/elf_efi.ldsi
-diff --git a/lib/efi_loader/elf_efi.ldsi b/lib/efi_loader/elf_efi.ldsi
-new file mode 100644
-index 00000000000..190a88fb69e
---- /dev/null
-+++ b/lib/efi_loader/elf_efi.ldsi
-@@ -0,0 +1,74 @@
-+/* SPDX-License-Identifier: BSD-2-Clause */
-+/*
-+ * U-Boot EFI linker script include
-+ *
-+ * Modified from elf_aarch64_efi.lds in gnu-efi
-+ */
-+
-+PHDRS
-+{
-+	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
-+}
-+
-+ENTRY(_start)
-+SECTIONS
-+{
-+	.text 0x0 : {
-+		_text = .;
-+		*(.text.head)
-+		*(.text)
-+		*(.text.*)
-+		*(.gnu.linkonce.t.*)
-+		*(.srodata)
-+		*(.rodata*)
-+		. = ALIGN(16);
-+		*(.dynamic);
-+		. = ALIGN(512);
-+	}
-+	.rela.dyn : { *(.rela.dyn) }
-+	.rela.plt : { *(.rela.plt) }
-+	.rela.got : { *(.rela.got) }
-+	.rela.data : { *(.rela.data) *(.rela.data*) }
-+	. = ALIGN(4096);
-+	_etext = .;
-+	_text_size = . - _text;
-+	.data : {
-+		_data = .;
-+		*(.sdata)
-+		*(.data)
-+		*(.data1)
-+		*(.data.*)
-+		*(.got.plt)
-+		*(.got)
-+
-+		/*
-+		 * The EFI loader doesn't seem to like a .bss section, so we
-+		 * stick it all into .data:
-+		 */
-+		. = ALIGN(16);
-+		_bss = .;
-+		*(.sbss)
-+		*(.scommon)
-+		*(.dynbss)
-+		*(.bss)
-+		*(.bss.*)
-+		*(COMMON)
-+		. = ALIGN(512);
-+		_bss_end = .;
-+		_edata = .;
-+	} :data
-+	_data_size = _edata - _data;
-+
-+	. = ALIGN(4096);
-+	.dynsym   : { *(.dynsym) }
-+	. = ALIGN(4096);
-+	.dynstr   : { *(.dynstr) }
-+	. = ALIGN(4096);
-+	.note.gnu.build-id : { *(.note.gnu.build-id) }
-+	/DISCARD/ : {
-+		*(.rel.reloc)
-+		*(.eh_frame)
-+		*(.note.GNU-stack)
-+	}
-+	.comment 0 : { *(.comment) }
-+}
 -- 
 2.47.1
 
