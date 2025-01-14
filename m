@@ -4,81 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31C0DE77188
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 19:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFD68E77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 20:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 658778022E;
-	Tue, 14 Jan 2025 20:34:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DEC408022E;
+	Tue, 14 Jan 2025 21:36:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JzVL9NlF";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HqzJVL4i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 417E98060C; Tue, 14 Jan 2025 20:34:52 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 318698060C; Tue, 14 Jan 2025 21:36:34 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D36268007D
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 20:34:49 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e461015fbd4so8473025276.2
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 11:34:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736883288; x=1737488088; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lEAVTsD3mW1B4c0RJt4r1vd8knWdTadRzhqx/4/w6wE=;
- b=JzVL9NlFAJKtFhJz4t1jpXOafoNYsR0Wy7miaHZJ8lyvWMtyRGYVckwCDkDZksoZnZ
- PcA/hs8QWi/jQqhG2Uxrze0pBa2te6DBYWnRgnYrXH9Z3RSyOjvRALQ/uGYt68rbEqz0
- kZikJjdO1d3yE9IkLdUWiXYzER4z/N7YqaQOc8wi6AKzyKJX7wxaUm4ffRkgJtPd2iyK
- 6yCZxw5ZU7Qqqji2Brcr5JpU2ZHxu09Y/iU1RIipsiVp4Rm3n3zq2yq25vW8ZmigNQBz
- AaPqI+zr2qzEd5h8kqn+wDBgJc3Pj35mDflYdutw2It0KzG/qtVTELZSS7nFaXAEenQe
- e61w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736883288; x=1737488088;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lEAVTsD3mW1B4c0RJt4r1vd8knWdTadRzhqx/4/w6wE=;
- b=fR02auOM+mKA8BtOs1Hqf7Mwkm5MLPtaMp0CGQCvjsmSSntiXjWUk4A+2WP9sasEE1
- MUHUm1RfCG9cmTHWeHmNbqeK32UYDQOYb0JZyRsgiyemG9tkcRT4QPXxpwDHGY0danZV
- 3E8mR4uAynadMpJfkDgQM6wXzBGyuFT2JdHwpW4m8ojb51tXE6vIKULQWUCAxlFGn/Do
- Nvyj/jRCK5VIaHuEnfl8/GLpH5EZL7draiwgPGpC4EHtf1GonRuaK+ymK6CDWnu2gwqN
- pYpj9wOOf3eiDE793wCJiSO7AaqKp/UUY0kBTchnrD33sat8LDslGxGcel5lMN3VdI19
- /oRA==
-X-Gm-Message-State: AOJu0Yy2SySeaa9kMtUB2BNZEircSkBznyIUb1p98SIVwe7A6RCYKXz8
- 6iY5zOV0jGQnpFUkFP+mSVfOs58XT5YUh6jpNwDNoNWoPns3BAkcY3ThKLUCXthvYQ4g5r5ziOp
- iFFrGjLHr4Kgep9wEz5zhxpANBrDwFOHIoa16E5g6Aqwg+huaQUI=
-X-Gm-Gg: ASbGncumrKDre0oRTlh23ZUt4/fVzhCDDdYEhMgjv+1fkCOWx1G2S6vqAcnCr0r60jL
- PQK8rozG7LsTag8FCT6SSXOw6u9WRvrZAIzRLwg==
-X-Google-Smtp-Source: AGHT+IE3VMaqxX+h6VQ9dJlUBYfu2Kr/SZk+yOzclX0WVpxrH3vOHfcQCynaxxeccvAE4Ir7lT2xQmru9ImOikongV0=
-X-Received: by 2002:a05:690c:d96:b0:6ef:4fba:8143 with SMTP id
- 00721157ae682-6f531248e71mr228095137b3.18.1736883288664; Tue, 14 Jan 2025
- 11:34:48 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 769C48007D
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 21:36:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4EA435C5990
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 20:35:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1A18C4CEE3
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 20:36:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1736886989;
+ bh=kTP9oDtkcZApaMj9+tUVDDb/EhjaAw4lOXL2LiglYIk=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=HqzJVL4i9qQYjSY/H4PIn2eaz111eXQbr1NhepXfurCoLL5S7NiaY3L7fZDMSd59D
+ Fmo8fdqqkpYeqPI6aMz4QTXFaMy+fKV3Bqfr0NIWxgffd3U+8Lamq7+uwutLtldNTn
+ SmDT3+9sHF4oqntWQgZQv9Nc1otmf++LqOuaRJ8L1kzw1+HLM+95lKs9b4JTIVC+R/
+ C6c8/KD4OEsWLp2jiYi1FXGjX0GQ7B5LryPbe6yNWuX5se3VHWQFw6IGpU5uXo9zFu
+ P7Mc3w6Q5KQUMCf1L9jM8uML6TcrsJNZnEmV48IbhA+t/c4SPv9yJ29WyPnD/FGJQt
+ 0hZQHoXC0udEw==
+Received: by mail-lf1-f49.google.com with SMTP id
+ 2adb3069b0e04-5401bd6cdb4so5507389e87.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 12:36:29 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU4ty5kI8qRpmPdT7QnsiZoibNhBAuWDsqIROd4S26IGZKDShDXhJnDUc2JWysJL2nMAcd/0hI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHVO74rND6HpTB9LGWjDEGCaPu4FQMzCfYB1kqRnmTQ9LtBBEK
+ 1whSu0SkgGTfDiaDIsR6ECwZmWE1v+2rJeVQGiQOXbJbWtDjGhEI4GTpWqa5nDF2kZqV9+9F99F
+ bTzJMg69nrbz4yA+CVQqDkIS8FA==
+X-Google-Smtp-Source: AGHT+IFxHDI+0tDcinyedlDz4rkyUyt9IF3K11VmEn3dUB+UdJfAK7LOTZ/iZkjh1J1fpvcLdekprZ6TvKxeM4YEe6g=
+X-Received: by 2002:a05:6512:159e:b0:542:98bb:5674 with SMTP id
+ 2adb3069b0e04-54298bb57famr3994823e87.33.1736886988123; Tue, 14 Jan 2025
+ 12:36:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20250101195817.995321-1-sjg@chromium.org>
- <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
- <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
- <CAFLszTiXHKdf_QUUsWpQpwv69HSGPNknkDW4JHgRUfT0r_G-aA@mail.gmail.com>
- <CAC_iWj+PwT2JmrWwrTsmHt_mGKDdhGUQgXKvzi3SCNCFxgJNRw@mail.gmail.com>
- <CAFLszThXtZjgavkzKhHbSXahONLqpT7yEYBH3bQ_1qzS=AUx+Q@mail.gmail.com>
-In-Reply-To: <CAFLszThXtZjgavkzKhHbSXahONLqpT7yEYBH3bQ_1qzS=AUx+Q@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 14 Jan 2025 21:34:12 +0200
-X-Gm-Features: AbW1kva9cBX6EeZMuQNdLbODqC1fVZjjzULcmaorC8jPvEroKsC8EEx3jLjQqfA
-Message-ID: <CAC_iWjK5gOn4Ad=orCMhv4BY74U4E6AoOLR6rnYYHd9=-X7wEg@mail.gmail.com>
-Subject: Re: [PATCH] bloblist: Drop BSD license
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <48defa98-9718-4997-86cb-b171187708a6@cherry.de>
+In-Reply-To: <48defa98-9718-4997-86cb-b171187708a6@cherry.de>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 14 Jan 2025 14:36:15 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqLJ86n8iX5wt4dEuZz6rudxXKFOuuEGXbk7f4ydvTZLjg@mail.gmail.com>
+X-Gm-Features: AbW1kvYk8uSNemjuW7kZFQyGqN4obc41splUmWhupts8VGdl-n3N7N5MoFUPXM4
+Message-ID: <CAL_JsqLJ86n8iX5wt4dEuZz6rudxXKFOuuEGXbk7f4ydvTZLjg@mail.gmail.com>
+Subject: Re: [RFC] Adding bootsource and reset-source* to /chosen
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: devicetree-spec@vger.kernel.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,97 +81,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, Dec 13, 2024 at 12:08=E2=80=AFPM Quentin Schulz
+<quentin.schulz@cherry.de> wrote:
+>
+> Hi all,
+>
+> In U-Boot, there are multiple stages which can be loaded from different
+> media each. On Rockchip SoCs, it mostly goes this way, SoC BootROM loads
+> from a medium (storage or over USB) and executes the TPL (or SPL if no
+> TPL supported), the TPL goes back to BootROM and reads the SPL from the
+> same medium and executes it. The SPL will favor the same medium for
+> loading the U-Boot FIT image (containing TF-A BL31, OP-TEE OS BL32 and
+> U-Boot proper image), but in case it fails, falls back to other possible
+> media. In U-Boot we have the storage medium used for loading the U-Boot
+> FIT image stored in the DTB under /chosen/u-boot,spl-boot-device
+> property. But we do not have a property for the medium the BootROM
+> loaded the TPL (or SPL) from. This could be useful information. For
+> example, I have some CI where I want to check whether the BootROM loaded
+> the TPL from the expected location (important when checking that they
+> all work and don't depend on a bootloader flashed in a fallback medium
+> for example). Another usecase could be to detect whenever one loads the
+> TPL from USB (not a USB stick, some USB transfer; see rockusb for
+> Rockchip for example) and decide to do something else in U-Boot or the
+> OS depending on that (could be starting DFU for flashing the device, or
+> fastboot for loading the rest of the system).
+>
+> Barebox currently does that by setting /chosen/bootsource to the full
+> path of the device the BootROM says it booted from, but that isn't part
+> of the DT spec so before I add support in U-Boot for that, I'm asking
+> whether that's fine or if we should correct course in Barebox and use
+> another name and/or location.
+>
+> I've also been made aware of other "sources" that are added to the
+> /chosen node in Barebox, reset-source, reset-source-instance and
+> reset-source-device. I am not entirely sure what those exactly are for
+> BUT it seems that this is of interest to U-Boot as well since we do try
+> to report a reset cause as read from the CPU for Rockchip SoCs, c.f.
+> https://elixir.bootlin.com/u-boot/v2024.10/source/arch/arm/mach-rockchip/=
+cpu-info.c#L14.
+> I believe /chosen/reset-source would be the reason, e.g. "POR", "RST",
+> "WDG", "WKE", "THERM", etc. /chosen/reset-source-device contains the
+> node path to the device that triggered that, that could be useful in the
+> event there are more than one thermal trip point (e.g. CPU or GPU), or
+> more than one hardware watchdog (I for example have a system with
+> potentially 4: SoC, PMIC, 2 separate in an external MCU). I guess
+> /chosen/reset-source-instance is for HW blocks that expose the same
+> reset but from two different sources which aren't modeled in Device
+> Tree. Again, this would be useful for the bootloader or OS to decide to
+> do something else based on the reset cause (e.g. have data on why some
+> devices reboot in the field, e.g. because of thermals, power loss,
+> brownout, etc..).
 
-On Tue, 14 Jan 2025 at 15:15, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Tue, 14 Jan 2025 at 01:40, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Fri, 10 Jan 2025 at 16:54, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi again Ilias,
-> > >
-> > > On Thu, 2 Jan 2025 at 18:41, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Ilias,
-> > > >
-> > > > On Fri, 3 Jan 2025 at 08:15, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > >
-> > > > > Apologies for the formatting, replying on mobile.
-> > > > >
-> > > > > On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
-> > > > >>
-> > > > >> Linaro has decided to write their own version of bloblist from scratch,
-> > > > >> so there is no point in having a non-GPL license on this file. Change
-> > > > >> it, to better fit with the U-Boot project.
-> > > > >
-> > > > >
-> > > > > Apart from the commit message being wrong, it's also intentionally provoking. There was no bloblist in TF-A.
-> > > > >
-> > > > > The TF-A code is implementing the firmware hand-off spec [0], which Linaro participated in the creation. The U-Boot implementation was adjusted to adhere to the same spec after the TF-A code was merged.
-> > > >
-> > > > The U-Boot series was [1], for reference. This was mostly about using
-> > > > different tags and shrinking the headers. My clear understanding was
-> > > > that we were going to try to have a single codebase, which is why I
-> > > > changed the license.
-> > > >
-> > > > So, since you have a different view of events, why did Linaro write it
-> > > > from scratch? Was it to avoid having U-Boot code in TF-A? Or was the
-> > > > author just unaware of the original intention?
-> >
-> > I am not sure I am following 'from scratch'. Firmware handoff is a doc
-> > describing a list. Raymond implemented it in U-Boot and TF-A.
->
-> So in your mind, Raymond implemented it in U-Boot? Have you taken a
-> look at 'git log' or 'git blame'?
->
-> > The right way to do this is to move the firmware handoff code to a
-> > library that can be used across projects.
->
-> Not always. Probably not in this case. It has quite a bit of logic
-> which depends on its environment. So I think it is better to have
-> 'similar' code in several projects. Certainly, writing it from scratch
-> (meaning not based on existing code) is not the best approach.
->
-> >
-> > > It isn't relevant for
-> > > > the commit message, but if you can find out I would be interested.
-> > >
-> > > Just following up on this as I'm not sure of the status of this patch.
-> > > Can you perhaps write your own commit message with your version of
-> > > what Linaro has done?
-> >
-> > "The non-GPL license was inadvertently added, remove it". Raymond
-> > wrote that code so I don't think he minds removing the extra license.
->
-> Again, please check your assertion here. I for one am very surprised
-> to hear that Raymond wrote the bloblist code :-)
+Is the handling of these properties something common/generic or going
+to be device (e.g. wdog, pmic) specific. For the former, then /chosen
+makes sense. For the latter, maybe everything being in the device
+nodes makes more sense. Then you wouldn't need a link to the device.
 
-All of the patches carry his co-developed by or his signed off by. A
-big portion of those are sent by you as well
-
+> I'm reaching out to the devicetree-spec community before I add code in
+> U-Boot to implement this so we don't add unnecessary backward
+> compatibility code, were the properties or locations to be modified to
+> match the spec.
 >
-> But it does help to explain why you objected to my commit message.
+> Does anyone disagree with adding this to the spec? Does anyone have
+> another suggestion for the naming or location of the properties?
 
-The reason I object to the commit message is because it's
-*intentionally* misleading.
-The BSD-3 clause was added by you in 6c9e3d1fc0859 with the intention
-of other projects using 'bloblist'.
+I always feel better if we have multiple users for a new, common
+binding. A new binding extended by a 2nd user shortly after defining
+it makes me grumpy. Here's a thread that came up with the same type of
+issue:
 
-The actual firmware handoff code was added much later in e266d2731145.
-All of the patches in that series is co-developped by Raymond. Those
-were added Wed Dec 27 while the TF-A patches were merged much much
-earlier. commit 3ba2c15147c in TF-A was merged Tue Jul 25
+https://lore.kernel.org/all/20250113112349.801875-1-prabhakar.mahadev-lad.r=
+j@bp.renesas.com/
 
-/Ilias
+> Would you prefer a patch to the spec and discuss "code" directly there?
 
->
-> Regards,
-> Simon
+Generally, anything new is schema first. Ideally the spec would get
+generated from schemas, but there's no work being done on that.
+
+Rob
