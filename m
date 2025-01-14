@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BDE4C02183
-	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 17:26:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10B3CE77188
+	for <u-boot@archiver.kernel.org>; Tue, 14 Jan 2025 17:26:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E583806D4;
+	by phobos.denx.de (Postfix) with ESMTP id DACA3806E8;
 	Tue, 14 Jan 2025 18:26:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="a4LPfbbv";
+	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="UNR6l25H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74D54806D4; Tue, 14 Jan 2025 17:47:13 +0100 (CET)
+ id DBB668022E; Tue, 14 Jan 2025 17:47:19 +0100 (CET)
 Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
  [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C30AF8007D
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:47:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96EDC8007D
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:47:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
-ARC-Seal: i=1; a=rsa-sha256; t=1736873228; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1736873234; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=bpU6jgyPE1gg+e71YIeT02tFGHmK5vI6oYxXk0V3sV/PyI7HU8NAeFrL6jtyoAQJzctHcew/iEt1agi3Bt7rsdhAwd+G2bzI4OVR9jzYU6TKggV4mT5eZU+sJvtC8r+1I0rfeMQ0Zobs85zYPc/PiVjEcAzFpRypX4Xx9Vmb6F0=
+ b=YBSedV5mT300S2aFuQ68yywofminu2f5d0FCtAiyzihE13nDb9wPHciVWf+DRrmXFZgE8e3+oCJK2h1CcNI0RlPPEgRL1beabvn+BYzleeGovHzgJD2TveikQkiXtkysNf7bNVSIWY/ZVyjSt4/TNepxAeK9IfUKEKCskh97crg=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1736873228;
+ s=zohoarc; t=1736873234;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=nkMn8YAVfNdxODsm1ETWZImcHqgWjrsnjQQzBiAFAZU=; 
- b=Y/FVB6LNkTQXSQu9+XTwcEMHGP+ZEASM28mLVukYz5HaxOy3vUh75nO6k49ZQCYyz5nSX6n6g+fR/1+ehoSEFUsFDe2DplTHjCpB33Nz5LKFybTLEKRuSmr0VSHXzB1//rlC8G3VEex31diQ7FtMln5RXw0v4VO9WRGGoud3AZA=
+ bh=mJj28uziXgEFaFlzPAPHiP+6A0/2Delb4kF/huRa2uI=; 
+ b=Bjq7b85qxWQk1It/ZKXD9M59Ur2x1XDTuBp2f35tAAa0eyzstD5El7G2jC8xL2/p1emss6RyPHPIufMgbwjVBPWHDcA0lWPmu1WwecaOXY+6rVTEG0Kj0c3A08lhhKNrhuxPwkAH6xkfDxUNByRH3mlYbhe9hPQjhCDYuwVF4SE=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=pigmoral.tech;
  spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
  dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1736873228; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1736873234; 
  s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=nkMn8YAVfNdxODsm1ETWZImcHqgWjrsnjQQzBiAFAZU=;
- b=a4LPfbbvKin7oFJsSn63cOEJToYMi5VSCuCBv1/tqOoDnNK6yZtY9kUyFujtqtpV
- ZtFpHuBYAogjdHKLzC7F2iSKhX/MrncYa08CMRN8PevhVeNf/Iw8c4wLN7MJHknacH/
- OEBlI8oVycnoF+pYDN676HGm2IO9jibJtqR3eK2E=
-Received: by mx.zohomail.com with SMTPS id 1736873226403700.6859339816145;
- Tue, 14 Jan 2025 08:47:06 -0800 (PST)
+ bh=mJj28uziXgEFaFlzPAPHiP+6A0/2Delb4kF/huRa2uI=;
+ b=UNR6l25HqBI4/Rp3B4L7qPdXHuIeOlvSOu71iq7u3iTOY8JHYuixW1kla98eQzy+
+ aPqEq4KED6iBexp26XvwVEdCyo2tdaZKGlBnpJlN5E954mAR3cBKjE7scX6dETzUfF4
+ frkMygC2+Zh0fwcqwhiocCQLdjJEGofC0VPO1T5k=
+Received: by mx.zohomail.com with SMTPS id 1736873231520531.1253013619033;
+ Tue, 14 Jan 2025 08:47:11 -0800 (PST)
 From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Wed, 15 Jan 2025 00:46:37 +0800
-Subject: [PATCH 1/5] usb: dwc2: Add support for Canaan K230
+Date: Wed, 15 Jan 2025 00:46:38 +0800
+Subject: [PATCH 2/5] riscv: dts: canaan: Add basic device tree for K230
+ CanMV board
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250115-k230-dev-1-v1-1-f4b77259e34a@pigmoral.tech>
+Message-Id: <20250115-k230-dev-1-v1-2-f4b77259e34a@pigmoral.tech>
 References: <20250115-k230-dev-1-v1-0-f4b77259e34a@pigmoral.tech>
 In-Reply-To: <20250115-k230-dev-1-v1-0-f4b77259e34a@pigmoral.tech>
 To: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>, 
  Leo <ycliang@andestech.com>, Junhui Liu <junhui.liu@pigmoral.tech>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1736873211; l=1350;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1736873211; l=8619;
  i=junhui.liu@pigmoral.tech; s=20250109; h=from:subject:message-id;
- bh=p2v0GLeOWKnEzxxK8wGasqWnMkdCHouD1U28LQgN0jw=;
- b=5XlbVm0WTLOuZ5OFdgWIxT+ahYLAa2CWWsfy7i+c6SeutkfFzJElVGowPf59ZP0IawZzvpEQD
- gVres7URo/5BgSpWglqc2MgdbLjT9eJSi5BZSZOMGAP4bLWOT3JL3Ek
+ bh=HMi7Hrm1PT5YqifY6Qhj9Mssqnqe6Ov/oEvaO6OphAY=;
+ b=QioZI8qXpnwJxzkJTtAqXTPxcWpyYjeyV3BLIH7h4jeQcRM0grGKjNGD9Xm73h1eSw/MvTu9E
+ n0uzZVw/q8CAdrxdByYmVwVlRsmJ8Mt+GyP9kC+Tlz6IBgIXJGbySjY
 X-Developer-Key: i=junhui.liu@pigmoral.tech; a=ed25519;
  pk=68KnSr7PNU3x0/qPdqkmlkr3EChzKC0ewuARfy9ZNnc=
 X-ZohoMailClient: External
@@ -85,33 +86,295 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Canaan Kendryte K230 SoC instantiates a dwc2 v4.30a core. This patch
-adds the compatible for it.
+Add initial dts for K230-CanMV powered by Canaan Kendryte K230 SoC,
+which has two RISC-V C908 cores, a big core with vector 1.0 extension
+and a small core without vector extension.
+
+This patch is basically comes from Linux Kernel [1] and it assumes
+u-boot is running on the big core. Additionally, bootctl and reboot nodes
+are added to support sysreset [2] and an clk_dummy node is added to
+satisfy dependencies for usb [3].
+
+Currently, u-boot is booted by the vendor's u-boot-spl. To meet the
+requirements [4][5] of vendor's u-boot-spl for u-boot, a binman node with
+mkimage child node is added here, which will compress u-boot.bin with
+gzip and generate an image named "uboot" in the file u-boot-gz.img.
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git/log/?h=k230-basic
+[2] https://github.com/kendryte/k230_sdk/blob/v1.8/src/big/rt-smart/kernel/bsp/maix3/board/interdrv/sysctl/sysctl_boot/sysctl_boot.c#L67
+[3] https://lore.kernel.org/linux-riscv/tencent_AD84B436C2F31108B66B4739D6E306C5E80A@qq.com/
+[4] https://github.com/kendryte/k230_sdk/blob/v1.8/src/little/uboot/board/canaan/common/k230_img.c#L306
+[5] https://github.com/kendryte/k230_sdk/blob/v1.8/src/little/uboot/board/canaan/common/k230_img.c#L125
 
 Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
-
 ---
-The USB function on K230 currently relies on patch [1], which updates
-the core reset flow of dwc2 in version 4.20a and newer. However, the USB
-PHY drivers is not supported for now, and that will be a separate patch.
+ arch/riscv/dts/Makefile         |   1 +
+ arch/riscv/dts/k230-canmv.dts   |  31 +++++++
+ arch/riscv/dts/k230-u-boot.dtsi |  25 ++++++
+ arch/riscv/dts/k230.dtsi        | 175 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 232 insertions(+)
 
-[1] https://lore.kernel.org/u-boot/20250110-dwc2-dev-v4-0-987f4fd6f8b2@pigmoral.tech
----
- doc/device-tree-bindings/usb/dwc2.txt | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/doc/device-tree-bindings/usb/dwc2.txt b/doc/device-tree-bindings/usb/dwc2.txt
-index 7a533f6593435a9ac23833584cdd0adc14690d14..9a87202d4b9e5f4ac829c8d9e4b7ba4a1583965e 100644
---- a/doc/device-tree-bindings/usb/dwc2.txt
-+++ b/doc/device-tree-bindings/usb/dwc2.txt
-@@ -4,6 +4,7 @@ Platform DesignWare HS OTG USB 2.0 controller
- Required properties:
- - compatible : One of:
-   - brcm,bcm2835-usb: The DWC2 USB controller instance in the BCM2835 SoC.
-+  - canaan,k230-otg: The DWC2 USB controller instance in the K230 SoC.
-   - hisilicon,hi6220-usb: The DWC2 USB controller instance in the hi6220 SoC.
-   - "lantiq,arx100-usb": The DWC2 USB controller instance in Lantiq ARX SoCs;
-   - "lantiq,xrx200-usb": The DWC2 USB controller instance in Lantiq XRX SoCs;
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index b64fc0daf3cb8223737561c3c2221aeff687b45f..cf1872f3fdc397e6c1ccf533ebfea8421dd967d1 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -2,6 +2,7 @@
+ 
+ dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
+ dtb-$(CONFIG_TARGET_BANANAPI_F3) += k1-bananapi-f3.dtb
++dtb-$(CONFIG_TARGET_K230_CANMV) += k230-canmv.dtb
+ dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
+ dtb-$(CONFIG_TARGET_MILKV_DUO) += cv1800b-milkv-duo.dtb
+ dtb-$(CONFIG_TARGET_LICHEERV_NANO) += sg2002-licheerv-nano-b.dtb
+diff --git a/arch/riscv/dts/k230-canmv.dts b/arch/riscv/dts/k230-canmv.dts
+new file mode 100644
+index 0000000000000000000000000000000000000000..ced9c457cc24b35343c1d51569bc7d947840b5fa
+--- /dev/null
++++ b/arch/riscv/dts/k230-canmv.dts
+@@ -0,0 +1,31 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2024 Yangyu Chen <cyy@cyyself.name>
++ * Copyright (C) 2025 Junhui Liu <junhui.liu@pigmoral.tech>
++ */
++
++/dts-v1/;
++#include "k230.dtsi"
++
++/ {
++	model = "Canaan CanMV-K230";
++	compatible = "canaan,canmv-k230", "canaan,kendryte-k230";
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x20000000>;
++	};
++};
++
++&uart0 {
++	status = "okay";
++};
++
++/* onboard RTL8152 */
++&usb1 {
++	status = "okay";
++};
+diff --git a/arch/riscv/dts/k230-u-boot.dtsi b/arch/riscv/dts/k230-u-boot.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..bb66ad3c153df8655b4540760d95b4bc708c0036
+--- /dev/null
++++ b/arch/riscv/dts/k230-u-boot.dtsi
+@@ -0,0 +1,25 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2025 Junhui Liu <junhui.liu@pigmoral.tech>
++ */
++
++#include <linux/stringify.h>
++
++/ {
++	binman: binman {
++	};
++};
++
++&binman {
++	mkimage {
++		filename = "u-boot-gz.img";
++		args = "-A", "riscv", "-T", "firmware", "-O", "u-boot",
++			"-C", "gzip", "-n", "uboot",
++			"-a", __stringify(CONFIG_TEXT_BASE),
++			"-e", __stringify(CONFIG_TEXT_BASE);
++		blob {
++			filename = "u-boot.bin";
++			compress = "gzip";
++		};
++	};
++};
+diff --git a/arch/riscv/dts/k230.dtsi b/arch/riscv/dts/k230.dtsi
+new file mode 100644
+index 0000000000000000000000000000000000000000..cf596677de18a4d984d5f5f973dca61a86fe66cb
+--- /dev/null
++++ b/arch/riscv/dts/k230.dtsi
+@@ -0,0 +1,175 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2024 Yangyu Chen <cyy@cyyself.name>
++ * Copyright (C) 2025 Junhui Liu <junhui.liu@pigmoral.tech>
++ */
++
++#include <dt-bindings/interrupt-controller/irq.h>
++
++/ {
++	#address-cells = <2>;
++	#size-cells = <2>;
++	compatible = "canaan,kendryte-k230";
++
++	aliases {
++		serial0 = &uart0;
++		serial1 = &uart1;
++		serial2 = &uart2;
++		serial3 = &uart3;
++		serial4 = &uart4;
++	};
++
++	cpus {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		timebase-frequency = <27000000>;
++
++		cpu@0 {
++			compatible = "thead,c908", "riscv";
++			device_type = "cpu";
++			reg = <0>;
++			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zfh_zba_zbb_zbc_zbs_zvfh_svpbmt";
++			riscv,isa-base = "rv64i";
++			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
++					       "zicbop", "zicboz", "zicntr", "zicsr", "zifencei",
++					       "zihpm", "zfh", "zba", "zbb", "zbc", "zbs", "zvfh",
++					       "svpbmt";
++			riscv,cbom-block-size = <64>;
++			riscv,cbop-block-size = <64>;
++			riscv,cboz-block-size = <64>;
++			mmu-type = "riscv,sv39";
++
++			cpu0_intc: interrupt-controller {
++				compatible = "riscv,cpu-intc";
++				interrupt-controller;
++				#interrupt-cells = <1>;
++			};
++		};
++	};
++
++	apb_clk: apb-clk-clock {
++		compatible = "fixed-clock";
++		clock-frequency = <50000000>;
++		clock-output-names = "apb_clk";
++		#clock-cells = <0>;
++	};
++
++	clk_dummy: clock-dummy {
++		compatible = "fixed-clock";
++		clock-frequency = <0>;
++		clock-output-names = "clk_dummy";
++		#clock-cells = <0>;
++	};
++
++	reboot: syscon-reboot {
++		compatible = "syscon-reboot";
++		regmap = <&bootctl>;
++		offset = <0x60>;
++		mask = <0x10001>;
++		value = <0x10001>;
++	};
++
++	soc {
++		compatible = "simple-bus";
++		interrupt-parent = <&plic>;
++		#address-cells = <2>;
++		#size-cells = <2>;
++		dma-noncoherent;
++		ranges;
++
++		bootctl: syscon@0x91102000 {
++			compatible = "syscon";
++			reg = <0x0 0x91102000 0x0 0x1000>;
++		};
++
++		plic: interrupt-controller@f00000000 {
++			compatible = "canaan,k230-plic" ,"thead,c900-plic";
++			reg = <0xf 0x00000000 0x0 0x04000000>;
++			interrupts-extended = <&cpu0_intc 11>, <&cpu0_intc 9>;
++			interrupt-controller;
++			#address-cells = <0>;
++			#interrupt-cells = <2>;
++			riscv,ndev = <208>;
++		};
++
++		clint: timer@f04000000 {
++			compatible = "canaan,k230-clint", "thead,c900-clint";
++			reg = <0xf 0x04000000 0x0 0x00010000>;
++			interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>;
++		};
++
++		uart0: serial@91400000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x0 0x91400000 0x0 0x1000>;
++			clocks = <&apb_clk>;
++			interrupts = <16 IRQ_TYPE_LEVEL_HIGH>;
++			reg-io-width = <4>;
++			reg-shift = <2>;
++			status = "disabled";
++		};
++
++		uart1: serial@91401000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x0 0x91401000 0x0 0x1000>;
++			clocks = <&apb_clk>;
++			interrupts = <17 IRQ_TYPE_LEVEL_HIGH>;
++			reg-io-width = <4>;
++			reg-shift = <2>;
++			status = "disabled";
++		};
++
++		uart2: serial@91402000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x0 0x91402000 0x0 0x1000>;
++			clocks = <&apb_clk>;
++			interrupts = <18 IRQ_TYPE_LEVEL_HIGH>;
++			reg-io-width = <4>;
++			reg-shift = <2>;
++			status = "disabled";
++		};
++
++		uart3: serial@91403000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x0 0x91403000 0x0 0x1000>;
++			clocks = <&apb_clk>;
++			interrupts = <19 IRQ_TYPE_LEVEL_HIGH>;
++			reg-io-width = <4>;
++			reg-shift = <2>;
++			status = "disabled";
++		};
++
++		uart4: serial@91404000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x0 0x91404000 0x0 0x1000>;
++			clocks = <&apb_clk>;
++			interrupts = <20 IRQ_TYPE_LEVEL_HIGH>;
++			reg-io-width = <4>;
++			reg-shift = <2>;
++			status = "disabled";
++		};
++
++		usb0: usb@91500000 {
++			compatible = "canaan,k230-otg", "snps,dwc2";
++			reg = <0x0 0x91500000 0x0 0x40000>;
++			interrupts = <173 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&clk_dummy>;
++			clock-names = "otg";
++			g-rx-fifo-size = <512>;
++			g-np-tx-fifo-size = <64>;
++			g-tx-fifo-size = <512 1024 64 64 64 64>;
++			status = "disabled";
++		};
++
++		usb1: usb@91540000 {
++			compatible = "canaan,k230-otg", "snps,dwc2";
++			reg = <0x0 0x91540000 0x0 0x40000>;
++			interrupts = <174 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&clk_dummy>;
++			clock-names = "otg";
++			g-rx-fifo-size = <512>;
++			g-np-tx-fifo-size = <64>;
++			g-tx-fifo-size = <512 1024 64 64 64 64>;
++			status = "disabled";
++		};
++	};
++};
 
 -- 
 2.47.1
