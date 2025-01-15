@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38A4BE77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:13:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 896A2E77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:13:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E6AC8069A;
-	Wed, 15 Jan 2025 02:13:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1042D80714;
+	Wed, 15 Jan 2025 02:13:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NM3REaux";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lBSYoGi+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73A8A806EB; Wed, 15 Jan 2025 02:13:15 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 0C0E5806FE; Wed, 15 Jan 2025 02:13:17 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFFC08069A
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:13:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D47C806DD
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:13:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6d8ece4937fso50541246d6.2
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:13:12 -0800 (PST)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6d896be3992so40574276d6.1
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:13:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736903592; x=1737508392; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736903593; x=1737508393; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XOTBurSWhu++6ZLyzoh75kAVfJUSE6nIiEp9MqgXiwQ=;
- b=NM3REauxFZDGdjUja6uL8sTc8sBoNxZrq5wPIj87kuNGN0r5tDijvp5aS0wkpqXQ97
- 5AOSc22N509KdEjxG/+byNCmTKW5MUG1XPZDVhC/6BG9evSwTR/+cyaF9damyBttu9vw
- C1QhKZYcGXHbDGCk0Eyz+kV+g7rMWzTcQFJ+A=
+ bh=/NaWc4wbPM1JUJcQwT0TJDz8+WALXSGgQ3S8mYf937A=;
+ b=lBSYoGi+hKPe2zO37a1ijeRg8BZ+ITQ6i2VjZUwhQ8PhC/CmM0/AmaOUPT3+c+BPBN
+ ZK7p4EiYC5yzB8WXbKbyY32OFBPUy6DyNee2jd26+7tazNwf8IKGnykOhx2vJ/B92cKc
+ W5vEUpdjdot0rUnpGjIRc3W8lyMgFjLPRr3Mg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736903592; x=1737508392;
+ d=1e100.net; s=20230601; t=1736903593; x=1737508393;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XOTBurSWhu++6ZLyzoh75kAVfJUSE6nIiEp9MqgXiwQ=;
- b=rBeswidFqA8OuiYjmZ+J32UgkRNqFObIVzGxQvvdCG8d4Myjdwc+VVym+T/Jw2WMsd
- MC+CUViA1d06cMFPlFOnxy72GDXR/rDF7vTS+v++zabVeaNJRDtW4zbQUGlxc3JyXwnO
- zEc5gAJ+FGUvparIos5agJzFOjneD74gxOaguiBwjU5pc9F1eMXvRyLxMqSlQzNrzirp
- nA1Hw1Qx/ShysWlk/UU5uzhROJzITpylAxHlNN5GnPucOlWsxFE33lx5qavdDLvf4Zfl
- ShsxL8k1csdc/vrEZGkxTFLYVsC2/SJprNzO6S1SA8Z1FsfMrA6IoBa4v9WOHgRxxm0o
- DFUw==
-X-Gm-Message-State: AOJu0Yw98RIIGSXM/2s+sVQ8hs8RvqJoGfStpKnmTpiZREdPRYIXstdh
- ZyGPuWvckta2Hpb1oXOa6luNiYrfAT85cfhlwbNWjaFj//6QcaqCFlNDwxFYupY=
-X-Gm-Gg: ASbGnctDLiXpuZSAnl3FzEfUftja527CcGVSWQbMTEswGT5i6DyA/XMnW06nLciaBTh
- PVLCV1rDzc1QczP7E9cwpgFSsop0uHkSNm/PuSLFgxtlYGVL8R0LT73bZ9K61BR8hnTn2Qq4c4Q
- adtM13i0MUzOvYgm8wvXQmOLE5tE7E3z/eKv3WMfsOrnQyPlGqH7MmJRSG/afwvwynubwUdBLJz
- DBlrJlhY6vonfCSOexMgCq7lPZk7h7VpXgbZkoKhH1WbKDA1KKF
-X-Google-Smtp-Source: AGHT+IH0t+mE5QbntCVsySkWnVbwLUhW8HxiiT3Z6CwVhyCkMq/GV65KnJBlbO3moLeSCGwciIQVfA==
-X-Received: by 2002:a05:6214:2349:b0:6d4:1f86:b1e6 with SMTP id
- 6a1803df08f44-6df9b2328b9mr339995576d6.22.1736903591858; 
- Tue, 14 Jan 2025 17:13:11 -0800 (PST)
+ bh=/NaWc4wbPM1JUJcQwT0TJDz8+WALXSGgQ3S8mYf937A=;
+ b=S/AJwbj/K8BzUejunnDu0yJfELS93Z4iN8DtgnJAwEtLzBUUf4iAtaLIVNanbAHSmr
+ DkTvT1KeB1odwqV9kqwDuoGQEJ7x3HG90uMxxcFnkZgIlSIovreEnRMvlMyeFuW8STK/
+ rRqgFDtGoDSfCApRbuep4cJAzoy5DJRoXkn5OmDTcMUW4IHalAK+rL/I9NN11Y8TcsHb
+ Q6IQ4hxhkfx1WWYB5YG1KMu/TwCGf7n8yCcoxKcfk3ahezAhj75HE3wTjMFIsoBOt8ax
+ R/YVNyiecJ08YcrnfSV3iDbff1sKbl++qOmRKfhI0QWQtmMjz+5p4F8fdxLzTyEh5Mf0
+ Ah9A==
+X-Gm-Message-State: AOJu0YwfGrS5iGCyeEzm5hDoxOeGVBds9EZo6Kmp5gNtYsb1TPzHVpqF
+ 1ACl8RQBcl+Bh1drrARiSZHRq0vakc4tLOXAxtqaAxSi1Ji8wUr2FaGQ9P1mp+9jhvk43qgPqMd
+ D
+X-Gm-Gg: ASbGnctnjt/R2tuu/LCwJJY2yeRihWtH0m8D4pXf73Dl3cWm6wjDSLrt3mQUCjBWe+i
+ LMIROu9cuGgo2dKkAUYyBBWuWq14P82mH2qU/UhPSCyBt1/2u4nR3vQIK+oj9YyM8zvFF6XYkQj
+ +6ZffPh9/iloYl3f4wUyYZksYXJAp+jCL+XTtO5lHjpWUyZHuZaqArt7jgdXTzg8JWHQLFtGhei
+ 5q/wW5YQGBV+q7ZF7UYytf7n8AJwEP171DG7O9qTjne+IAhuN9C
+X-Google-Smtp-Source: AGHT+IHItYPhFhZHM5+xCTuVDC3W4fyuO/hVFGBYAdLvp5AQ/Yu6M/OL6Wt+eSTLyyuQ9pJLrVxLdw==
+X-Received: by 2002:a05:6214:1bc7:b0:6cb:d1ae:27a6 with SMTP id
+ 6a1803df08f44-6df9b227ea3mr328440016d6.24.1736903593456; 
+ Tue, 14 Jan 2025 17:13:13 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfade89283sm58989756d6.105.2025.01.14.17.13.10
+ 6a1803df08f44-6dfade89283sm58989756d6.105.2025.01.14.17.13.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 17:13:11 -0800 (PST)
+ Tue, 14 Jan 2025 17:13:12 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: nm@ti.com, vigneshr@ti.com, u-kumar1@ti.com, bb@ti.com, 
- m-chawdhry@ti.com, vaishnav.a@ti.com, j-choudhary@ti.com, 
- Santhosh Kumar K <s-k6@ti.com>
-Cc: u-boot@lists.denx.de, w.egorov@phytec.de, n-francis@ti.com
-In-Reply-To: <20250106090708.1541212-1-s-k6@ti.com>
-References: <20250106090708.1541212-1-s-k6@ti.com>
-Subject: Re: [PATCH v6 0/9] Inline ECC Series
-Message-Id: <173690359009.213810.14536717429114166440.b4-ty@konsulko.com>
-Date: Tue, 14 Jan 2025 19:13:10 -0600
+To: u-boot@lists.denx.de, bb@ti.com, Aparna Patra <a-patra@ti.com>
+Cc: d-gole@ti.com, vigneshr@ti.com, n-francis@ti.com, nm@ti.com
+In-Reply-To: <20250108044939.392785-1-a-patra@ti.com>
+References: <20250108044939.392785-1-a-patra@ti.com>
+Subject: Re: [PATCH v2 0/4] Add fdt-fixups for AM62P variants
+Message-Id: <173690359202.213810.7970895049738014059.b4-ty@konsulko.com>
+Date: Tue, 14 Jan 2025 19:13:12 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,23 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 06 Jan 2025 14:36:59 +0530, Santhosh Kumar K wrote:
+On Wed, 08 Jan 2025 10:19:35 +0530, Aparna Patra wrote:
 
-> This series adds support for Inline ECC in DDR for AM64X, AM62X,
-> AM62AX, AM62PX, J721E, J721S2, J722S and J784S4 devices.
+> This series implements fdt fixups, by reading hardware
+> information from registers and accordingly delete/modify
+> the DT nodes, at run-time.
 > 
-> (1/9) Add ss_cfg reg entry
-> (2/9) Enable ECC priming with BIST engine
-> (3/9) Add a function to store base address and size of RAM's banks
->       in a 64-bit device private data
-> (4/9) Setup the ECC region start and range
-> (5/9) Enable ECC 1-bit error, 2-bit error and multiple-bit
->       error interrupts
-> (6/9) Add CONFIG_K3_INLINE_ECC
-> (7/9) Remove 'ti,ecc-enable' flag
-> (8/9) Set default NR_DRAM_BANKS to 2
-> (9/9) Pull Redundant DDR functions to a common location and Fixup
->       DDR size when ECC is enabled
+> Logs for AM62P boot:
+> https://gist.github.com/itsme-aparna/b889fe59882c1acf0ef25a644bd325c4
 > 
 > [...]
 
