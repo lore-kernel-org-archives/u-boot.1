@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F1DC02183
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:33:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC9BC02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:33:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D1AE807F3;
-	Wed, 15 Jan 2025 14:31:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6F1C78073D;
+	Wed, 15 Jan 2025 14:31:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XXA88I3l";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kIw8OPtU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E9FD807EC; Wed, 15 Jan 2025 14:31:35 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 9873D80805; Wed, 15 Jan 2025 14:31:36 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7ACD380821
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:31:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44D1A80040
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:31:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-844ce6d0716so467521739f.1
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:31:32 -0800 (PST)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3a9c9f2a569so44397175ab.0
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:31:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947890; x=1737552690; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947892; x=1737552692; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i7YiGW3s6GUG0rSmv4oKSl4HkCSSizzCfWH106zQU+E=;
- b=XXA88I3lNs4YtnDhkot49h3QnPmjfwuK8dCNA5dA6TfC4YNjSV1GC8p95D9mVaiU47
- wUMV9FptNQj3My0IPqikVYk1REODUBgZc0GI0jyTeIBnNj6ZlsB39WOunkBhoveDGJdf
- lGFk2e9xKHt7CDO5b3wM9PQil+dYV0o10aVbI=
+ bh=BAmXwXa60yOkKUC2ZH8HOcyYgNlV/pkgcyRz6T7GCek=;
+ b=kIw8OPtUI9WQARGdDI2M1pT8wecz7KjWG0LFzOog41kssoKdgiyyx+eDlzC0LBZQ3B
+ jqtZugJpFoY9Bdzl23+A2/tDgRD2m69bbE0TmMC6OzcVRDtekZXmdv3bYlg58rUEqkLP
+ mt/oxi2LnWihOu9m+aKY7K08DhRrgWe5fclHs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947890; x=1737552690;
+ d=1e100.net; s=20230601; t=1736947892; x=1737552692;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i7YiGW3s6GUG0rSmv4oKSl4HkCSSizzCfWH106zQU+E=;
- b=TKNgaj4G8B4nt5fcHVmY8VQZKVj5Uz7rzop78xaDO1FEpziGDUVeKNrKcgqC+Xgvwb
- VBOZi1L64TdWs0tbXoE3A1+V2HZPXA/2cDkb6AYXeXiL2qRm8IRrM+bB3RqOFp78qltI
- noKNcMjBsjN4pPRyN048tHipsL/XyVRzS+aHlieTb1vr8mSm24oQ12u8SrFTMwCD2mfU
- BiZAtRmKF3a+2IkLCGsfiJW5dNATS810Hca9F+tIWt6jWZX1slPakcKWVZnDASzVVhmL
- 9bGu7M1gtXD9vFrsg+UkZ/mPRvfrpFFNRLj/jq4uAn6yre2XDrEXJ3rWYtyR0bSeWMcC
- BGYg==
-X-Gm-Message-State: AOJu0YxSg9lORoapiqQcYOIgTXqJFiRDD5iqD2XYVICFPZpZWiBVmmdK
- Bv7mv+dw/LlcbGkorsBjSlCYm1GUnr223ug+tbXaOIAHK5r6BTk59oO7DrsFGq4Cga02QakT5Jc
+ bh=BAmXwXa60yOkKUC2ZH8HOcyYgNlV/pkgcyRz6T7GCek=;
+ b=N903uDgSpluqYIDgt9cd02jXoNA7dwg213nJY+5V9zWfFKWiaaVAQS+ftYkevausKO
+ 3rv3+OilKDAu1dUAISxHs528Z61ymOz03s/EU5FsQHU/dcXe3GtA8BkMo5UGsBioQOwd
+ hQGUPwg74JK0UdFutKkFFof3m38EWyeQ82Z9CQjzjzDKoP49qvIvYAXFfeP7HLSiEP+n
+ LHj/CSFnTNUr5DV9qxibpCS0DeqUnlqdajFvc754BgIBtgqEuNQHarLtm76rZPvtbZ1d
+ u+GryMmUM4IgwciXYiEopWvRG+W9YOmOSj3vZQCmr86Oi82q6O81m9CXJnCOPgWs4E5K
+ 0nvQ==
+X-Gm-Message-State: AOJu0Yy/7Lzp1vMQrmiEhpXphEENnT7XM1SiITcCAALZr7rbRQu6f1ry
+ piFOvoILHlaxVOHb9LejbTd+TO51+vyNWImq9Xx3wHWqDe/jjyOCQ8DvlSmo4DX9lQcS4EQ+lRA
  =
-X-Gm-Gg: ASbGncvuUp6Odz4pSF1DXAd4eNYJSxr2soqCjumMs5EasJoCDobiKXiB+alLCEcFKDx
- dVQrzKr5m4lItx49/5kU59TfDhIOsOlQ12ZuhBTdf7Qvl7a/wdYhIo2dIx+0jJmyrMsKwMcdWOn
- j2eCZihe2NYa4Gl7YWmDssPF4RZ6ilrvnVl2b1U1OWsKZLedUmzNpeDhl3kqmSFavzBVQFbXMCM
- TbUQS8qutlTnoTIlGyKYHe9DssFdKGHQZrXuJBz39Qalz2ULRf+gt6sjWRvJJ4PfavBbOH/GoQ0
- CvnPGYiSWZRt1aYQ2g==
-X-Google-Smtp-Source: AGHT+IHT6Mgwa889M+BxLCO+Yq21Ta8R1LS0frysFe2nOXgtkNSEnZvJs2zalWb12y1dwq0wWgqODw==
-X-Received: by 2002:a05:6602:6cc6:b0:844:debf:2c8f with SMTP id
- ca18e2360f4ac-84ce01a47ebmr2920935339f.14.1736947890629; 
- Wed, 15 Jan 2025 05:31:30 -0800 (PST)
+X-Gm-Gg: ASbGncvvSClsnIHFfJPcWxCXAfxc1PA4xjMeSuAsX6iI27pp1D2x/R+5DWb0XlnGJhv
+ S+oYrzSIPzIndUvX+VBxISy8zqTvf1snIxhXQOgcDsaPVMIPP7D7kJCu6lVzuFxGaAWBk/cUGvK
+ yEbg3raULoXtYCJ5n+vQKTxwKSMj/2BN30L8gL5/ajhC3nLS7aBKmr17N46jZWDL7NxaTKerWRw
+ WHBaJftTSZoSyaUOl9iq4vnO0XYfhDPG275OZXq1OiwX8R9WMV7KjtQsLt5lTuSKKaY4kPze3hW
+ c0aTQRtCk0OOLq4xtg==
+X-Google-Smtp-Source: AGHT+IFINHxdFFomt0lIR8cWVIE/VD5dW9KkoPmTePUtpdBGd6+tXxGwA1YwERVmwqKwD1FmJTSZ2w==
+X-Received: by 2002:a05:6e02:8d:b0:3ce:87e3:c26c with SMTP id
+ e9e14a558f8ab-3ce87e3c4c7mr18837975ab.5.1736947892365; 
+ Wed, 15 Jan 2025 05:31:32 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.31.29
+ 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.31.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 05:31:29 -0800 (PST)
+ Wed, 15 Jan 2025 05:31:31 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Ion Agorria <ion@agorria.com>,
+Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Massimiliano Minella <massimiliano.minella@se.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 06/43] test: Add newlines to hush-test messages
-Date: Wed, 15 Jan 2025 06:30:36 -0700
-Message-Id: <20250115133114.590375-7-sjg@chromium.org>
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Ravi Minnikanti <rminnikanti@marvell.com>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 07/43] test: Rename test suites to match their linker-list name
+Date: Wed, 15 Jan 2025 06:30:37 -0700
+Message-Id: <20250115133114.590375-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
 References: <20250115133114.590375-1-sjg@chromium.org>
@@ -97,75 +100,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few messages lack a newline so the test output shows the next
-test-name on the same line. For example:
+Some suites have a different name from that used in the linker list.
+That makes it hard to programmatically match the name printed when the
+suite runs to the linker-list name it has.
 
-   Beware: this test sets local variable dollar_bar and dollar_quux
-      and they cannot be unset!Test: hush_test_env_dollar: dollar.c
-
-This is confusing, so fix it.
+Update the names so they are the same.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/hush/dollar.c | 7 ++++---
- test/hush/loop.c   | 4 ++--
- 2 files changed, 6 insertions(+), 5 deletions(-)
+ include/test/cmd.h    | 2 +-
+ test/boot/upl.c       | 3 +--
+ test/cmd/addrmap.c    | 2 +-
+ test/cmd/cmd_ut_cmd.c | 4 ++--
+ test/cmd/exit.c       | 2 +-
+ test/cmd/mem.c        | 2 +-
+ test/cmd/pci_mps.c    | 2 +-
+ test/cmd/setexpr.c    | 2 +-
+ test/dm/test-dm.c     | 3 +--
+ test/env/cmd_ut_env.c | 3 +--
+ 10 files changed, 11 insertions(+), 14 deletions(-)
 
-diff --git a/test/hush/dollar.c b/test/hush/dollar.c
-index 077dcd62c0e..820110799a2 100644
---- a/test/hush/dollar.c
-+++ b/test/hush/dollar.c
-@@ -108,7 +108,7 @@ static int hush_test_simple_dollar(struct unit_test_state *uts)
- 		/* Reset local variable. */
- 		ut_assertok(run_command("dollar_foo=", 0));
- 	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
--		puts("Beware: this test set local variable dollar_foo and it cannot be unset!");
-+		puts("Beware: this test set local variable dollar_foo and it cannot be unset!\n");
- 	}
+diff --git a/include/test/cmd.h b/include/test/cmd.h
+index c200570e423..3d1e3e3bddb 100644
+--- a/include/test/cmd.h
++++ b/include/test/cmd.h
+@@ -10,6 +10,6 @@
+ #include <test/test.h>
  
- 	return 0;
-@@ -140,7 +140,7 @@ static int hush_test_env_dollar(struct unit_test_state *uts)
- 		/* Reset local variable. */
- 		ut_assertok(run_command("env_foo=", 0));
- 	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
--		puts("Beware: this test set local variable env_foo and it cannot be unset!");
-+		puts("Beware: this test set local variable env_foo and it cannot be unset!\n");
- 	}
+ /* Declare a new command test */
+-#define CMD_TEST(_name, _flags) UNIT_TEST(_name, _flags, cmd_test)
++#define CMD_TEST(_name, _flags) UNIT_TEST(_name, _flags, cmd)
  
- 	return 0;
-@@ -206,7 +206,8 @@ static int hush_test_command_dollar(struct unit_test_state *uts)
- 		ut_assertok(run_command("dollar_bar=", 0));
- 		ut_assertok(run_command("dollar_quux=", 0));
- 	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
--		puts("Beware: this test sets local variable dollar_bar and dollar_quux and they cannot be unset!");
-+		puts("Beware: this test sets local variable dollar_bar and "
-+		     "dollar_quux and they cannot be unset!\n");
- 	}
+ #endif /* __TEST_CMD_H__ */
+diff --git a/test/boot/upl.c b/test/boot/upl.c
+index 99f02b7951b..ef65cf34055 100644
+--- a/test/boot/upl.c
++++ b/test/boot/upl.c
+@@ -432,6 +432,5 @@ int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(upl_test);
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(upl_test);
  
- 	return 0;
-diff --git a/test/hush/loop.c b/test/hush/loop.c
-index a9b6a8edf24..7154b9bc0ae 100644
---- a/test/hush/loop.c
-+++ b/test/hush/loop.c
-@@ -25,7 +25,7 @@ static int hush_test_for(struct unit_test_state *uts)
- 		/* Reset local variable. */
- 		ut_assertok(run_command("loop_i=", 0));
- 	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
--		puts("Beware: this test set local variable loop_i and it cannot be unset!");
-+		puts("Beware: this test set local variable loop_i and it cannot be unset!\n");
- 	}
+-	return cmd_ut_category("cmd_upl", "cmd_upl_", tests, n_ents, argc,
+-			       argv);
++	return cmd_ut_category("upl", "cmd_upl_", tests, n_ents, argc, argv);
+ }
+diff --git a/test/cmd/addrmap.c b/test/cmd/addrmap.c
+index b34be895f5d..43897615aa9 100644
+--- a/test/cmd/addrmap.c
++++ b/test/cmd/addrmap.c
+@@ -30,6 +30,6 @@ int do_ut_addrmap(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(addrmap_test);
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(addrmap_test);
  
- 	return 0;
-@@ -56,7 +56,7 @@ static int hush_test_while(struct unit_test_state *uts)
- 		/* Reset local variable. */
- 		ut_assertok(run_command("loop_foo=", 0));
- 	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
--		puts("Beware: this test set local variable loop_foo and it cannot be unset!");
-+		puts("Beware: this test set local variable loop_foo and it cannot be unset!\n");
- 	}
+-	return cmd_ut_category("cmd_addrmap", "cmd_addrmap_", tests, n_ents,
++	return cmd_ut_category("addrmap", "cmd_addrmap_", tests, n_ents,
+ 			       argc, argv);
+ }
+diff --git a/test/cmd/cmd_ut_cmd.c b/test/cmd/cmd_ut_cmd.c
+index e77fa1c7f01..ad192563c5a 100644
+--- a/test/cmd/cmd_ut_cmd.c
++++ b/test/cmd/cmd_ut_cmd.c
+@@ -13,8 +13,8 @@
  
- 	return 0;
+ int do_ut_cmd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+-	struct unit_test *tests = UNIT_TEST_SUITE_START(cmd_test);
+-	const int n_ents = UNIT_TEST_SUITE_COUNT(cmd_test);
++	struct unit_test *tests = UNIT_TEST_SUITE_START(cmd);
++	const int n_ents = UNIT_TEST_SUITE_COUNT(cmd);
+ 
+ 	return cmd_ut_category("cmd", "cmd_test_", tests, n_ents, argc, argv);
+ }
+diff --git a/test/cmd/exit.c b/test/cmd/exit.c
+index af58a57fca7..cf65c05e283 100644
+--- a/test/cmd/exit.c
++++ b/test/cmd/exit.c
+@@ -116,6 +116,6 @@ int do_ut_exit(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(exit_test);
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(exit_test);
+ 
+-	return cmd_ut_category("cmd_exit", "exit_test_", tests, n_ents,
++	return cmd_ut_category("exit", "exit_test_", tests, n_ents,
+ 			       argc, argv);
+ }
+diff --git a/test/cmd/mem.c b/test/cmd/mem.c
+index f1bbab6055b..d6f2544a4e9 100644
+--- a/test/cmd/mem.c
++++ b/test/cmd/mem.c
+@@ -14,6 +14,6 @@ int do_ut_mem(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(mem_test);
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(mem_test);
+ 
+-	return cmd_ut_category("cmd_mem", "mem_test_", tests, n_ents, argc,
++	return cmd_ut_category("mem", "mem_test_", tests, n_ents, argc,
+ 			       argv);
+ }
+diff --git a/test/cmd/pci_mps.c b/test/cmd/pci_mps.c
+index a265105600c..0c57d15d636 100644
+--- a/test/cmd/pci_mps.c
++++ b/test/cmd/pci_mps.c
+@@ -35,6 +35,6 @@ int do_ut_pci_mps(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(pci_mps_test);
+ 	const int n = UNIT_TEST_SUITE_COUNT(pci_mps_test);
+ 
+-	return cmd_ut_category("cmd_pci_mps", "pci_mps_test_", tests, n,
++	return cmd_ut_category("pci_mps", "pci_mps_test_", tests, n,
+ 			       argc, argv);
+ }
+diff --git a/test/cmd/setexpr.c b/test/cmd/setexpr.c
+index 21a3268bd81..9b3277f2ad9 100644
+--- a/test/cmd/setexpr.c
++++ b/test/cmd/setexpr.c
+@@ -485,6 +485,6 @@ int do_ut_setexpr(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(setexpr_test);
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(setexpr_test);
+ 
+-	return cmd_ut_category("cmd_setexpr", "setexpr_test_", tests, n_ents,
++	return cmd_ut_category("setexpr", "setexpr_test_", tests, n_ents,
+ 			       argc, argv);
+ }
+diff --git a/test/dm/test-dm.c b/test/dm/test-dm.c
+index 4bc2c45db61..7cfbefe02da 100644
+--- a/test/dm/test-dm.c
++++ b/test/dm/test-dm.c
+@@ -11,6 +11,5 @@ int do_ut_dm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(dm_test);
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(dm_test);
+ 
+-	return cmd_ut_category("driver model", "dm_test_", tests, n_ents, argc,
+-			       argv);
++	return cmd_ut_category("dm", "dm_test_", tests, n_ents, argc, argv);
+ }
+diff --git a/test/env/cmd_ut_env.c b/test/env/cmd_ut_env.c
+index 9f16a978f2a..494b5db395b 100644
+--- a/test/env/cmd_ut_env.c
++++ b/test/env/cmd_ut_env.c
+@@ -80,6 +80,5 @@ int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(env_test);
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(env_test);
+ 
+-	return cmd_ut_category("environment", "env_test_",
+-			       tests, n_ents, argc, argv);
++	return cmd_ut_category("env", "env_test_", tests, n_ents, argc, argv);
+ }
 -- 
 2.34.1
 
