@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38464C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:37:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0FEC02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:38:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB88380C5A;
-	Wed, 15 Jan 2025 14:32:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 11C4580BAA;
+	Wed, 15 Jan 2025 14:32:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QLZWj2W1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GQkTWB7E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19D0480BAD; Wed, 15 Jan 2025 14:32:20 +0100 (CET)
+ id BDC8F80C66; Wed, 15 Jan 2025 14:32:21 +0100 (CET)
 Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
  [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E70A780808
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:32:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A93B80BA5
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:32:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-844cd85f5ebso528051339f.3
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:32:17 -0800 (PST)
+ ca18e2360f4ac-844e39439abso216202539f.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:32:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947936; x=1737552736; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947938; x=1737552738; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aqHagMtNKlLMLqLwq3GlnxL6JosFtMUhcD2/tVgmF+0=;
- b=QLZWj2W1OhsNYqeApfsiebhU6xKQHmyxTkoF6OiWN6tAOkaBQ9hJq+Oj48dAxq4FGV
- fhtKVlKTeM5WA+DbcJi+0bmnf8qJ2nT5bjBHmc9kXdnP6lOe4GywA8obVuIKx72AruFe
- zZdWijYHNTOpMaItWsmiczyKDgIzUEMKRf5Ls=
+ bh=VcZxW71x6ISJc2qV7ozIRPsTRnDvrpfIp9U1cuzyYiU=;
+ b=GQkTWB7EBEBitURicm59bW83gdr/1NBUQL3VI0h7WTCRvBZz8dLE1P1QJKREAr9G0F
+ rApmHegNFoGIxpwXkIgOzhPuR9rpsK1QOjJog1CqAkI2tud5xc6tG6g4knpL87m7+ODn
+ SFmMo9FwdzAsb4XZY8q7rjHpUOZWSjohKM5tw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947936; x=1737552736;
+ d=1e100.net; s=20230601; t=1736947938; x=1737552738;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aqHagMtNKlLMLqLwq3GlnxL6JosFtMUhcD2/tVgmF+0=;
- b=B54EMn/oYSyrR3URzAyhiR95Jd6fcIcO21oDUIZ2RjV4OwVgFTFJT6OfajxOxEoShx
- xhG2FTmCAC3FzQ2ItBFj4yzOk/V2ahg66lcZn+ZnOZaRryoZVxH4kYjQ+8g1hYNDZnsv
- G2pPDBt3ZcZItVKi5VeOMqvMpEQbyjlqMC0oSKj5wPDeJROGOX1bAKqZ0NIJBFcCsldw
- IR+4hWSQ3QmeGg9iBfi4k3Ijuh79ppzsvP3r6XDRcKfg1sK5VAZfQlH8lqMGUVvWLcw3
- Cu2hYfcCQtXilJbLin2I2wpw0MXfgXKDD10q/gHW8XTA5yyjZsow7mKyz+6eFsmmicH/
- gF1w==
-X-Gm-Message-State: AOJu0YxqHycQxVR18zqXubqw1MWE8UAoVyTCaY3RO49wvcrPUIyBTsWZ
- nPW/ZvGSTIv2CgTqwfWaC2aMMHGD5xSt2TXnmcLMxY62kthzmPEyCqgyeMWim7fZvGE7DOn/Xjg
+ bh=VcZxW71x6ISJc2qV7ozIRPsTRnDvrpfIp9U1cuzyYiU=;
+ b=Dg889M1nstrzBAr2e+lz4uEr/8aF8mwfyCObjJ6i4Hp4Mmva4/S57/dpOKP19//6g/
+ xOm+uVte8ajAoHe1jlNSX0QP1vtORl25xpLrt4iNzW51zqUg4P9wQyZBf+AZZshiT9H0
+ PhjUYFADQG87n/o1L0J28NY37JjdsZonUcZeJyR6sqs5pbhdUoBpLIEbTv8ub0kYwKIo
+ /rQy483HOc9GQw11Sj41eAD3ZeHLFl57ynM7KhH0MaNWx9HyxC5gPyxt010SKL/KPBwC
+ +ak6FWrP7b67CSW5dvefg/GcJDPUHhClE0Uk8+WzMOOwNYLcrFAGyefq2obfW7TjzvFN
+ Ev5Q==
+X-Gm-Message-State: AOJu0YwN5Tzl7OqTQl0lfwcbvAQmT3Ny/kRwCLLnsVm9zERB0CWXpgCT
+ TA19cqqyMekRNezL+kYBFW7Bn1FnTyEzpQwA6dLRRYTsx/J9RNCWlavP2nZ6S45qY+8qbEzuY58
  =
-X-Gm-Gg: ASbGncspfHvYqh+7jra16+zqMs+qNzC22Sk+hDkpWhlMF03JR+1D8aqR0JDcpd4Mb7w
- TrS5fwgZh9rU/IIpbtK0jqgoSMwHapB8/M5Vqg3IJrN5O0NJeOT2pOG3SlM87lVTh8n3AlIog85
- 4YX8yL0bEtd3LOX3YqY/QtXSqlZ5vsDkkVPryqZyr6PQqQRLOXVUAz6b/WbRcLuUIVWO3tcNbH8
- fu2Eci1AB7XKxIsv6v0lPUR9jAHPG4L5UDtcd3V/ceQhATM3bTXZ3WVXVg6kdVdOot2egeTmb4x
- U+lz6ZfC7nALAzXSzw==
-X-Google-Smtp-Source: AGHT+IH0dTeKoJ4lA2dlMCPetllQJO71Brn07T9/qwBIOMfyLETEjPIvG16wAsQ7vh0VDtAj6qlznw==
-X-Received: by 2002:a05:6602:b90:b0:849:a2bb:ffde with SMTP id
- ca18e2360f4ac-84ce00766a7mr3309974339f.4.1736947936198; 
- Wed, 15 Jan 2025 05:32:16 -0800 (PST)
+X-Gm-Gg: ASbGncvG99uCQWsxwuVo5zhTbm1Tdq6rj6/B3xX6pKlC1k3XMZ1AIMGKnK7fxnB3LrB
+ nQGn7q3jwD7xv4BEJNLSFv97qV7LKgwOlrxRso0iMnMIrqge0VEqOasBHokHsBdOM9NeQi8Gack
+ ceDSVvI8Pnxc09viyv9MaONyXDKPPdTKX/fl4x8cFKwEe7vebdzGrMuRhyoRb5NM6BeOEzQFtHh
+ rCpviNtVQz/Fze6XO7CZkUW+xgMMmHj+F7UPW1B+0NJvui2MWAYE9VM3JGFNdJEJx/9Ez/xFpCG
+ M3Qyi4OZ7klJAl3NeA==
+X-Google-Smtp-Source: AGHT+IEFHRtNCg4keDOp8z0Ahho7q3JxfxmS2a5ku1DQD/4a13dlOAxRxAU/Cw50sAp/+CR5Kj1HnQ==
+X-Received: by 2002:a05:6e02:3891:b0:3bc:be0f:edcd with SMTP id
+ e9e14a558f8ab-3ce3a96da56mr196190525ab.11.1736947937775; 
+ Wed, 15 Jan 2025 05:32:17 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.32.14
+ 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.32.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 05:32:15 -0800 (PST)
+ Wed, 15 Jan 2025 05:32:16 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 33/43] test: Drop the function for running upl tests
-Date: Wed, 15 Jan 2025 06:31:03 -0700
-Message-Id: <20250115133114.590375-34-sjg@chromium.org>
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 34/43] test: Drop the info test from the list
+Date: Wed, 15 Jan 2025 06:31:04 -0700
+Message-Id: <20250115133114.590375-35-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
 References: <20250115133114.590375-1-sjg@chromium.org>
@@ -95,59 +94,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the new suite-runner to run these tests instead.
-
-It is not clear that these actually work, since they are not enabled on
-sandbox for some reason.
+The 'info' test is not a real test. With the new suite array we can drop
+this and the associated special-case code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/suites.h | 1 -
- test/boot/upl.c       | 8 --------
- test/cmd_ut.c         | 2 +-
- 3 files changed, 1 insertion(+), 10 deletions(-)
+ test/cmd_ut.c               |  4 +---
+ test/py/tests/test_suite.py | 13 +++++--------
+ 2 files changed, 6 insertions(+), 11 deletions(-)
 
-diff --git a/include/test/suites.h b/include/test/suites.h
-index cd758b8c464..20e6a2a113b 100644
---- a/include/test/suites.h
-+++ b/include/test/suites.h
-@@ -35,6 +35,5 @@ int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc,
- int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_overlay(struct cmd_tbl *cmdtp, int flag, int argc,
- 		  char *const argv[]);
--int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- 
- #endif /* __TEST_SUITES_H__ */
-diff --git a/test/boot/upl.c b/test/boot/upl.c
-index 2c9b8bc8bc0..aa58cdf083b 100644
---- a/test/boot/upl.c
-+++ b/test/boot/upl.c
-@@ -426,11 +426,3 @@ static int upl_test_info_norun(struct unit_test_state *uts)
- 	return 0;
- }
- UPL_TEST(upl_test_info_norun, UTF_CONSOLE | UTF_MANUAL);
--
--int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	struct unit_test *tests = UNIT_TEST_SUITE_START(upl);
--	const int n_ents = UNIT_TEST_SUITE_COUNT(upl);
--
--	return cmd_ut_category("upl", "cmd_upl_", tests, n_ents, argc, argv);
--}
 diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index c6b7ccdedbd..0d055119ce3 100644
+index 0d055119ce3..798710972e5 100644
 --- a/test/cmd_ut.c
 +++ b/test/cmd_ut.c
-@@ -188,7 +188,7 @@ static struct suite suites[] = {
- 	SUITE(seama),
- #endif
- #ifdef CONFIG_CMD_UPL
--	SUITE_CMD(upl, do_ut_upl),
-+	SUITE(upl),
- #endif
- };
+@@ -93,7 +93,6 @@ int cmd_ut_category(const char *name, const char *prefix,
+ 	NULL, \
+ 	}
  
+-SUITE_DECL(info);
+ SUITE_DECL(bdinfo);
+ SUITE_DECL(bootstd);
+ SUITE_DECL(cmd);
+@@ -121,7 +120,6 @@ SUITE_DECL(seama);
+ SUITE_DECL(upl);
+ 
+ static struct suite suites[] = {
+-	SUITE_CMD(info, do_ut_info),
+ #ifdef CONFIG_CMD_BDI
+ 	SUITE(bdinfo),
+ #endif
+@@ -247,7 +245,7 @@ static int do_ut_info(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 		puts("\nTests  Suite\n");
+ 		puts("-----  -----\n");
+-		for (i = 1; i < ARRAY_SIZE(suites); i++) {
++		for (i = 0; i < ARRAY_SIZE(suites); i++) {
+ 			struct suite *ste = &suites[i];
+ 			long n_ent = ste->end - ste->start;
+ 
+diff --git a/test/py/tests/test_suite.py b/test/py/tests/test_suite.py
+index ed636bbde74..938dfb468f6 100644
+--- a/test/py/tests/test_suite.py
++++ b/test/py/tests/test_suite.py
+@@ -8,7 +8,7 @@ import re
+ EXPECTED_SUITES = [
+     'addrmap', 'bdinfo', 'bloblist', 'bootm', 'bootstd',
+     'cmd', 'common', 'dm', 'env', 'exit',
+-    'fdt', 'font', 'hush', 'info', 'lib',
++    'fdt', 'font', 'hush', 'lib',
+     'loadm', 'log', 'mbr', 'measurement', 'mem',
+     'overlay', 'pci_mps', 'setexpr', 'upl',
+     ]
+@@ -145,9 +145,8 @@ def test_suite(u_boot_console):
+         suites, all_tests, exp_test_count, missing, extra = collect_info(cons,
+                                                                          output)
+ 
+-    # Make sure we got a test count for each suite (ignore 'info' since it isn't
+-    # a real suite
+-    assert suites - exp_test_count.keys() == {'info'}
++    # Make sure we got a test count for each suite
++    assert suites - exp_test_count.keys() == set()
+ 
+     # Run 'ut info' and compare with the log results
+     with cons.log.section('Check suite test-counts'):
+@@ -166,10 +165,8 @@ def test_suite(u_boot_console):
+ 
+         cons.log.info(str(exp_test_count))
+         for suite in EXPECTED_SUITES:
+-            # 'info' is not really a suite, just a subcommand of 'ut'
+-            if suite != 'info':
+-                assert test_count[suite] in ['?', str(exp_test_count[suite])],\
+-                    f'suite {suite} expected {exp_test_count[suite]}'
++            assert test_count[suite] in ['?', str(exp_test_count[suite])], \
++                f'suite {suite} expected {exp_test_count[suite]}'
+ 
+         assert suite_count == len(EXPECTED_SUITES)
+         assert total_test_count == len(all_tests)
 -- 
 2.34.1
 
