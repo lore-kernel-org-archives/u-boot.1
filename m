@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 727BCE77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:13:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38A4BE77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:13:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CCE7806D4;
-	Wed, 15 Jan 2025 02:13:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E6AC8069A;
+	Wed, 15 Jan 2025 02:13:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gZPbn3by";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NM3REaux";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 306A3806D4; Wed, 15 Jan 2025 02:13:13 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 73A8A806EB; Wed, 15 Jan 2025 02:13:15 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05C1880214
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:13:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFFC08069A
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:13:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6dd1962a75bso49720386d6.3
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:13:10 -0800 (PST)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6d8ece4937fso50541246d6.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:13:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736903590; x=1737508390; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736903592; x=1737508392; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OhU0JBGA3VOxjaBDSTgMgta5ymFKYmX1zDicfVGXu8Q=;
- b=gZPbn3byixjBNSQtKVQQvpwxETI/uEdnK4lZcUXUEYVvgzKJ/Kf9ZLsi0mUJRXoaoz
- 48/qwOzvr29CgP+xEMXqrZot14T4qf4ic/VIwM4qHd2ByogCY6olWqSCCNoGIxhW1YMo
- E0QuhisjLCn+xM9iDNWoncsGqa8qaLjAC1xNs=
+ bh=XOTBurSWhu++6ZLyzoh75kAVfJUSE6nIiEp9MqgXiwQ=;
+ b=NM3REauxFZDGdjUja6uL8sTc8sBoNxZrq5wPIj87kuNGN0r5tDijvp5aS0wkpqXQ97
+ 5AOSc22N509KdEjxG/+byNCmTKW5MUG1XPZDVhC/6BG9evSwTR/+cyaF9damyBttu9vw
+ C1QhKZYcGXHbDGCk0Eyz+kV+g7rMWzTcQFJ+A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736903590; x=1737508390;
+ d=1e100.net; s=20230601; t=1736903592; x=1737508392;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OhU0JBGA3VOxjaBDSTgMgta5ymFKYmX1zDicfVGXu8Q=;
- b=MFn+fORryOY2QtYi71Pln1rSEBMLpfXDTArtu7iQmItqwOIf6IT4KX8DZh8LtQ9VWb
- hpmSQ0Yac/tS2XqoxsL372/72x4Ak1QDg2fPgcNPQ0w1+q2P0QIjOHwcqVx2EA95kQKl
- oPE+q2sQcwnNGLCSgMW6B6TV8MHX74pgDjd30onWEgrsCDrKJZwmGYs7ZzupOYxncnji
- qZfSbFNhlofia0fKkdWurYCMkXo+jyegdMiAwabfE6ZqBuXosThLC3trRjyaL+km0GdM
- Yymog8x0a7v5QPdTfAKyFc1mjVao8ylghXF6WNdTTCIN3vA6qW6de5fPFjmRCUL5VBtD
- ccBA==
-X-Gm-Message-State: AOJu0Yzb6WyJrT/Q326zD24nZZ5AxVE1pNeGV1QNPs83edfbAwavNR/l
- chkRazB7VL7th0A4qdGP5a7cYK7DIM591KewJblj8avCmH5sy8lrTgs3pHVj0cs=
-X-Gm-Gg: ASbGncs4BrUx2yMefH6jtG5CDxgW6fFkAtRUWqFjSSRwsv2Ir+prPGy5dfaBl1rw5PQ
- j9SySZ/JMjboJacAEFhLULqVLknhrYLObmw8J2qYR93MDO3K1Ldp794K5x62FgvI9wRvdU2umpD
- K73633JqOzMHIql9NnBLQ4xkNBty2bM37Vb5+0e1RyvnlgTSLPdKt22R/UKPOi1BRuhN2mhjtVF
- /4EdSpJMXJqT7yTWXVQRfnRl1xW32e1Bt+jawR70aC7fErEHHA6
-X-Google-Smtp-Source: AGHT+IFZdGQRCC0HveVS+gKCjnyFsw1n/J1kOl1X+qDoiGqCVWllQw/dL/as6L1bguhf1+Wj4tw2Gw==
-X-Received: by 2002:a05:6214:1245:b0:6da:dc79:a3c3 with SMTP id
- 6a1803df08f44-6df9b1cc9cdmr371197606d6.5.1736903589885; 
- Tue, 14 Jan 2025 17:13:09 -0800 (PST)
+ bh=XOTBurSWhu++6ZLyzoh75kAVfJUSE6nIiEp9MqgXiwQ=;
+ b=rBeswidFqA8OuiYjmZ+J32UgkRNqFObIVzGxQvvdCG8d4Myjdwc+VVym+T/Jw2WMsd
+ MC+CUViA1d06cMFPlFOnxy72GDXR/rDF7vTS+v++zabVeaNJRDtW4zbQUGlxc3JyXwnO
+ zEc5gAJ+FGUvparIos5agJzFOjneD74gxOaguiBwjU5pc9F1eMXvRyLxMqSlQzNrzirp
+ nA1Hw1Qx/ShysWlk/UU5uzhROJzITpylAxHlNN5GnPucOlWsxFE33lx5qavdDLvf4Zfl
+ ShsxL8k1csdc/vrEZGkxTFLYVsC2/SJprNzO6S1SA8Z1FsfMrA6IoBa4v9WOHgRxxm0o
+ DFUw==
+X-Gm-Message-State: AOJu0Yw98RIIGSXM/2s+sVQ8hs8RvqJoGfStpKnmTpiZREdPRYIXstdh
+ ZyGPuWvckta2Hpb1oXOa6luNiYrfAT85cfhlwbNWjaFj//6QcaqCFlNDwxFYupY=
+X-Gm-Gg: ASbGnctDLiXpuZSAnl3FzEfUftja527CcGVSWQbMTEswGT5i6DyA/XMnW06nLciaBTh
+ PVLCV1rDzc1QczP7E9cwpgFSsop0uHkSNm/PuSLFgxtlYGVL8R0LT73bZ9K61BR8hnTn2Qq4c4Q
+ adtM13i0MUzOvYgm8wvXQmOLE5tE7E3z/eKv3WMfsOrnQyPlGqH7MmJRSG/afwvwynubwUdBLJz
+ DBlrJlhY6vonfCSOexMgCq7lPZk7h7VpXgbZkoKhH1WbKDA1KKF
+X-Google-Smtp-Source: AGHT+IH0t+mE5QbntCVsySkWnVbwLUhW8HxiiT3Z6CwVhyCkMq/GV65KnJBlbO3moLeSCGwciIQVfA==
+X-Received: by 2002:a05:6214:2349:b0:6d4:1f86:b1e6 with SMTP id
+ 6a1803df08f44-6df9b2328b9mr339995576d6.22.1736903591858; 
+ Tue, 14 Jan 2025 17:13:11 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfade89283sm58989756d6.105.2025.01.14.17.13.07
+ 6a1803df08f44-6dfade89283sm58989756d6.105.2025.01.14.17.13.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 17:13:08 -0800 (PST)
+ Tue, 14 Jan 2025 17:13:11 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Devarsh Thakkar <devarsht@ti.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>
-Cc: u-boot@lists.denx.de, kernel@salutedevices.com, rockosov@gmail.com
-In-Reply-To: <20241220-board_fdt_chosen_bootargs_improvements-v1-0-f6a7181787c5@salutedevices.com>
-References: <20241220-board_fdt_chosen_bootargs_improvements-v1-0-f6a7181787c5@salutedevices.com>
-Subject: Re: [PATCH 0/3] fdt_support: improve board_fdt_chosen_bootargs()
- for flexibility
-Message-Id: <173690358703.213810.11133619882489861517.b4-ty@konsulko.com>
-Date: Tue, 14 Jan 2025 19:13:07 -0600
+To: nm@ti.com, vigneshr@ti.com, u-kumar1@ti.com, bb@ti.com, 
+ m-chawdhry@ti.com, vaishnav.a@ti.com, j-choudhary@ti.com, 
+ Santhosh Kumar K <s-k6@ti.com>
+Cc: u-boot@lists.denx.de, w.egorov@phytec.de, n-francis@ti.com
+In-Reply-To: <20250106090708.1541212-1-s-k6@ti.com>
+References: <20250106090708.1541212-1-s-k6@ti.com>
+Subject: Re: [PATCH v6 0/9] Inline ECC Series
+Message-Id: <173690359009.213810.14536717429114166440.b4-ty@konsulko.com>
+Date: Tue, 14 Jan 2025 19:13:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,20 +94,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Dec 2024 00:42:07 +0300, Dmitry Rokosov wrote:
+On Mon, 06 Jan 2025 14:36:59 +0530, Santhosh Kumar K wrote:
 
-> This series consists of three patches.
+> This series adds support for Inline ECC in DDR for AM64X, AM62X,
+> AM62AX, AM62PX, J721E, J721S2, J722S and J784S4 devices.
 > 
-> The first patch modifies the function documentation style in the
-> include/fdt_support.h file to comply with kernel-doc requirements.
-> 
-> The second patch modifies the board_fdt_chosen_bootargs() function to
-> return a const char* type. This change clarifies to the caller that the
-> returned string should neither be freed nor modified. It aligns with the
-> existing fdt_setprop() function, which already utilizes a const char*
-> parameter. This promotes consistency within the codebase and enhances
-> code safety by preventing unintended modifications to the returned
-> string.
+> (1/9) Add ss_cfg reg entry
+> (2/9) Enable ECC priming with BIST engine
+> (3/9) Add a function to store base address and size of RAM's banks
+>       in a 64-bit device private data
+> (4/9) Setup the ECC region start and range
+> (5/9) Enable ECC 1-bit error, 2-bit error and multiple-bit
+>       error interrupts
+> (6/9) Add CONFIG_K3_INLINE_ECC
+> (7/9) Remove 'ti,ecc-enable' flag
+> (8/9) Set default NR_DRAM_BANKS to 2
+> (9/9) Pull Redundant DDR functions to a common location and Fixup
+>       DDR size when ECC is enabled
 > 
 > [...]
 
