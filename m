@@ -4,143 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 720B6E77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:11:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C196EE77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:22:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEF718069A;
-	Wed, 15 Jan 2025 03:11:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 276C28069A;
+	Wed, 15 Jan 2025 03:22:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="heIy57De";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="BdnZqr3P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C095B806FB; Wed, 15 Jan 2025 03:11:24 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 44B68806D4; Wed, 15 Jan 2025 03:22:10 +0100 (CET)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77DB98060C
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:11:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ABEA80027
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:21:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qJRGcLyA1AG6S77AbzqnphyxSroYiWO5z6EuivAyqWGmYifMJFxRbZ0/dHUGTgv3UGHoaaQ9tPlUK2kXu2zsUJS+2AVyd9Qdh/tHMS4nDJUwQvVCKZp5/O8jC3u47hzTS3D+uT07rIKqVEDo7ewhsXkh4W4sP0/x/h/Ip5sKsxgmfC5nDm5Cz5ZQ9aaSqEq2FxcVFU9ZdxKrO/omHtkPZWh7cQDHS8IDQ7W9pNlGQvx+JjnAUiJW6XjtMoE4YyCD1LuMBQ+h2ACrk7iFQDkjsX5yr2dciwikqopuJe3PRxCXFfg756d8lnaJyIRtAzAbybrDNJxSVF8RvB13Gx+r/Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5qfV4Y/1W20wJOCSjRGbf3SvAwTjPt0lXqLFymROQ3Q=;
- b=hjC9rYMyFGdyDDWPvjfGj0jMev55X48A2WuwOUlXcL/uVFRzpvUMkuubzS+6gTybYQSriK5ELEorNFyu36bRDbmOP3yPdBjkJy4AbFegqnEfMZsOOMyw7UN5Ns0z5W3IMkIdYPcpxOKME4zJ5GcyChdC69dxIBF6X52kKklUUrvLSXUUswTFvcCffYrGAV5wHnyiisibhOHAQFzGymB47ToEoAxuIEwlYTld+qOEMni6Onvs1jvYARyCSftXl8ubFPmOI4BXmBBeCIuIouhhFaC7T2vPTi5VkBoPlWWyI/QH7NoHeyjan4cfs5qp4/YdGbCL28441YL/mKF/EXmtvA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5qfV4Y/1W20wJOCSjRGbf3SvAwTjPt0lXqLFymROQ3Q=;
- b=heIy57DegnsyK4zsJBH49D/ira5Z1ZKjtlpkqIt3+oHGLSqEeYH6D6HWZWTS543VuWAQ3LHSgszcoomjDiJ8kYdhrwNbpWsYGEEcvyyZsSiseEabL/d3qPSo9El4KVacNmKdeYICKkjBFSMy0r6kyk8UZb6FQr02iu9cNdlgFMBgse6ZmaOVn+OvlysFXW04fTNtgCSwFx3uTV06epWILSw732OpCsAfBVRmmwLm+vU/bUlZseX3vkz8XxHxt7+e9LYwVzH+MRbc3KtIo9OCkghBt70i6YkNrnr6tAUmVOb2RlO8afSVfkGYTHcoHxiI6dc6qilIXfzABcpaYhSu7Q==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DUZPR04MB9847.eurprd04.prod.outlook.com (2603:10a6:10:4d9::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.18; Wed, 15 Jan
- 2025 02:11:19 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8335.017; Wed, 15 Jan 2025
- 02:11:19 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Jaehoon Chung <jh80.chung@samsung.com>
-Subject: RE: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA options
-Thread-Topic: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA options
-Thread-Index: AQHbZvJCTC/DvFt0EUmRStjKR4PGjbMXF4wg
-Date: Wed, 15 Jan 2025 02:11:19 +0000
-Message-ID: <PAXPR04MB8459AC7848B87D13DEF0DD4688192@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20250115020737.230558-1-trini@konsulko.com>
+ dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20250115022152epoutp02c06229c85a1c40e3559c81bb68a64416~avFyclZ_A2095320953epoutp02d
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:21:52 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20250115022152epoutp02c06229c85a1c40e3559c81bb68a64416~avFyclZ_A2095320953epoutp02d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1736907712;
+ bh=IHSxOV0Fc8EPPZ6uwQn+56BUpEpvabDl6wXc5HjKH+o=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=BdnZqr3PFvHSpFChNvP/60W+P/DV1BhZJPLje4XKO8uSUkjwMlJShhEhSW+4N0hKu
+ jU29UUfhF48yMDjulXaK2VZ79/mPKP/oxsKCjiDcJ025IJlzP4u1DaNAADVF1GDoct
+ yb5+Wsw1g2BQ/EwIs03QhSJZSiPO9YyTYR9n981Y=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20250115022151epcas1p411ed8f47b92826e172406e4c9d1204a3~avFyGFF5F1170111701epcas1p4G;
+ Wed, 15 Jan 2025 02:21:51 +0000 (GMT)
+Received: from epsmges1p5.samsung.com (unknown [182.195.38.233]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4YXqWL6VLgz4x9Q9; Wed, 15 Jan
+ 2025 02:21:50 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 3F.8F.23425.DBB17876; Wed, 15 Jan 2025 11:21:49 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20250115022148epcas1p1b26c92279fefa4f53ad679890e3721aa~avFvOW4R81371913719epcas1p18;
+ Wed, 15 Jan 2025 02:21:48 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20250115022148epsmtrp2a6e867ade5c94bb8f5f2989a2ed253a5~avFvNkUM70443304433epsmtrp2Z;
+ Wed, 15 Jan 2025 02:21:48 +0000 (GMT)
+X-AuditID: b6c32a39-967e870000005b81-74-67871bbd1149
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ DB.02.18949.CBB17876; Wed, 15 Jan 2025 11:21:48 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20250115022148epsmtip20c37a0dc71dcf4fac64c17304c611609~avFvAB_Ad0084200842epsmtip24;
+ Wed, 15 Jan 2025 02:21:48 +0000 (GMT)
+From: "Jaehoon Chung" <jh80.chung@samsung.com>
+To: "'Tom Rini'" <trini@konsulko.com>, <u-boot@lists.denx.de>
+Cc: "'Peng Fan'" <peng.fan@nxp.com>
 In-Reply-To: <20250115020737.230558-1-trini@konsulko.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|DUZPR04MB9847:EE_
-x-ms-office365-filtering-correlation-id: 9f6c6d74-df99-4b38-02eb-08dd3509e688
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?t021ysk/plK6BAXgHB95NREsbbNH7mxqnfJKUrhlGA4g9GeN7RfUqh6YjLHR?=
- =?us-ascii?Q?pjidjN2QeKVv/HR2XJD5N1LANWFWmkqj5V0J/CwZ3sVAJb0WggRRVC8OEGd9?=
- =?us-ascii?Q?9lBu03p6kVVWo9GWeRxMgauR+ap5UnXMSM8RFJ6Lvc5p34Z5ZtQFXigsf+xA?=
- =?us-ascii?Q?yN1yunE/c/T1qPTrmoZoLUlffjXh5dO+fvRzWg1EbWT8OuLaUIHfXpAgdpHj?=
- =?us-ascii?Q?uG9Fuq/saWw3m6TvZp5/dElbAc0Ob7Fa1rHgMnoyKaP3kMzQRVhkbWuQJHiy?=
- =?us-ascii?Q?OOe8l+gkACyZqDF4WiSNUpqrHjNOFFCsGL3TUnxASi3IppjYCRZl2BP9+eMG?=
- =?us-ascii?Q?R2P7riXq5GVq661m+lrWlusRH14rdC/4IewmJwwWc1y9I4P0/ENuv1dbMaka?=
- =?us-ascii?Q?VeaMwu/SJ24YrDoqoIsfekHA7n7wCNNp8abAXOvN5TxRapkCEgWCMc6deRSJ?=
- =?us-ascii?Q?imKrB21LPh+tEIdGRRKA0ZX2GwNUuil3TX0rW368HjSoiR8XVznO0qeS7DdP?=
- =?us-ascii?Q?wwYI5MEh6BUTVk5F37VOSrUGYt/9aAac/QAFAAgptUfFwtoqtnvPisqCDAsO?=
- =?us-ascii?Q?9nBSEQvyrolMm9qZsM+N4ApAzsLnt3YsOYbRGZpC5Pm/j3XDs+z/erE5DKBk?=
- =?us-ascii?Q?s5d74iGG8FtwIn8TOoszRx7sVT8LjzA/dtAOcm9ZYOQu9J8s40OViIdeHFhK?=
- =?us-ascii?Q?ompTkhS15qqnTXOe2z1pD4Em4Z96uCwD5FmRo8hceW9B2oHrskc1KSyi3CiM?=
- =?us-ascii?Q?T+WIesCs+wpBdejLgEXJMhKsh1LEtrdh8ySotA5xKl+vij+E7mF6FAEREvUF?=
- =?us-ascii?Q?iRv2oxetwvVm5TFwoObBMhp4Kxd8AJ9jGRnRCYlSvEHHqo4XGM8ZNlv8RlKi?=
- =?us-ascii?Q?FDvkCoLX2L9RbWknWC6Mr45euhEXErA/Obpj0hLXLa4tN6CXpt68LZ7L97WA?=
- =?us-ascii?Q?gxpftv3Bcg8EJlb7weKdR7jTxPKF7/ooeSYb3TgNlH20YBTrWpT1hbSoBnrR?=
- =?us-ascii?Q?7R/bZ+HWqjJYbTazwX8YLcuXWN/Jn63InJUvvW2hk46DrCBqgjdeccuV+0w+?=
- =?us-ascii?Q?eMdG5U93j3gQCp4F0YMX03nGN1UZ+948Hq30E0PQWIkblIiBQCm2OpqMhAqK?=
- =?us-ascii?Q?a+NoxyWdB222LKbpUkT1yDFQEmZQ4toGo4nMdyr8vIg4J9eosJsPHcOOTYM7?=
- =?us-ascii?Q?sZahBQJMypW7C8CA8OgYEAdnAxa/lVHm1jPbVYhS7Hwf595T0fxFHgqlb+9P?=
- =?us-ascii?Q?1Zx26UV4SX9J4Dj3DwTP9v6/CmPlFyFzLPylXB+YZ4D1+D9X31N1cSNAnT0T?=
- =?us-ascii?Q?Kr9uJ254yPXrAUlw+hAAQ1YP10gjSQrqEMPBVMH/DBkpX5CKQf+fY6fOJsQ3?=
- =?us-ascii?Q?xs+Xc9EJFygp/ss07fnfgXnVL6JCU00jez3y13d1dFUG7Fz1SXrse97UdUXJ?=
- =?us-ascii?Q?4+wHWyFgmYopyg+zJYkVoO4MT9zh723s?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?OwWVCkBFaVlbO13m4+xaUkxxnA1cZVAWZAhTHxQ+8Na9+Ayb9A0Co32kLjFN?=
- =?us-ascii?Q?gC56iFprYeWKq2smn/d3UuY4/CTxlc6fs5UUAj1YDvKVG0aBn1inV6p7sk05?=
- =?us-ascii?Q?O0rtEPcruf5eY60n6MSKEUvH4HWL/CHBZVItSOBiTvhPzxLUNJp8tCst3DgJ?=
- =?us-ascii?Q?QHx3gGphqIqbVoEM7mnrQ8rJA8Ztoy4SZiDvwfJk9A7uu7gJY/gJsBcAWf0M?=
- =?us-ascii?Q?dNA+SoPFz1I433JyLAf+MzX3vHhcqSQAfxNHlF5AR4G1R+XZzii72Z763eLi?=
- =?us-ascii?Q?sKxr3pceOHBube+oUfa7xDps9AXx7iAbOSM2AYAkR2RSVBIjdNHiwdmMwpYU?=
- =?us-ascii?Q?kTQIUeWpi2GD/ZGAw7fOS2nGPYdW+Vxd613MQQzU3V9wQ35BbpcXEbOAVaE9?=
- =?us-ascii?Q?QLBCm+L2k5zZr7jV4rjq2Sv2/3g5oLKmqpxuuLCXp5a89KojnFJFDP2mFQUt?=
- =?us-ascii?Q?vVFEeULb/4QXJ7vsSl0ICq9e+bp5w4FdMI3M89Emmc/E+ZNNi/nAlwKtgso+?=
- =?us-ascii?Q?lgidB04aB0aED1838x3xKDsloAAqSAM4FzHXSiSdHmtRDavfnjWE/8GsrXBw?=
- =?us-ascii?Q?52kpaHFkYEd8AY0exF2j69d/Agio0pyEKEdG9RLadsPgAdT4r5gIBVTZqZkM?=
- =?us-ascii?Q?V1TCQG/TTYWVOARBtCxa0ZqFI/q7Xo3298umIQxWJXEf433o1Fc9ZHTGMwcD?=
- =?us-ascii?Q?7isa9AqUAKWFRD1qjmc1uDmjAbm4VbMEy4xIK8Thp0SRnLEOd+PF9lG2WM1F?=
- =?us-ascii?Q?4yvqMqejmqgyAUQKgJKgvmrkMq6UrIbRwX8aFDUI0hcvT0Byv/dTejxzj+U8?=
- =?us-ascii?Q?KTEENfN5LlMi4iiLcS8tQfx0YEEmmNxMPMaYNgLYDcJLqVwgfWtb1iJ3GE69?=
- =?us-ascii?Q?aLrd+a2ZS8QmMktWxJk+rVWIUwTcSAQAWkDjSZrM1AHxmteW3nYxE6vVGoZD?=
- =?us-ascii?Q?F3EMROsya1jv6fSD83m6/AiAFFyZ4YgaqYFp1q+zxHspXOzeiyN1zvLOzWrq?=
- =?us-ascii?Q?8VoVf98Hlj6CrJFe9VCSi0p4m+JzG3r0XJEMfzV1BjLox0pB7ye1X5rcrZuq?=
- =?us-ascii?Q?nMx0Z+sUPhbJRkafe/Sx82GQBls+IrKtIydiga8YZuhOFPnvz6uXvUmJe5l0?=
- =?us-ascii?Q?JbFPM6tQIuAfq3Pxa6Qze4eIPr2LYGev0NNDcqaWRnPHimK2joj/5k9vhbgO?=
- =?us-ascii?Q?kOouiO7EKN8x/eYL7VLTbADTZ8r6U7VKLPb9p7fB9ceIxoaPPuFtk32ODvhk?=
- =?us-ascii?Q?/CiIZqIIHCqT1ylmuMEv/469YwOd/z2X0CTidwQX29LnvV/8A1gSGJ5Vb/P8?=
- =?us-ascii?Q?NPFxs+Cp74seLQC8x0FnBDXmI9cFcqDEWWElnjg1PlJu8s/iQOgDXVfuKMMZ?=
- =?us-ascii?Q?iDlg/j635Ny+gqE7cfHtiXowJlkklye7AzFz9ere85BQR+25rqyija3rcgbJ?=
- =?us-ascii?Q?GMEK1DSFtsIDFjLv2SaVrhbBOg2bgAjgx+PFMHPiDCPn2aK9BttxiGJdAxY+?=
- =?us-ascii?Q?reZIyyXLlvo0yKRfE7gZl1iqmrabP0Ie5RrSszz280+4A+hPjC5kzp9YwgXy?=
- =?us-ascii?Q?V+UaimItgDj6+/swd8I=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f6c6d74-df99-4b38-02eb-08dd3509e688
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jan 2025 02:11:19.4860 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 543Gow2NKtZEEG5I0yIz+KXrObwkxBpFlVUnueDZoHFBtLwJCjDj0ykOualyZ++F2hBDqCYEl4lv8BaWQ794Jg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR04MB9847
+Subject: RE: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA options
+Date: Wed, 15 Jan 2025 11:21:48 +0900
+Message-ID: <024301db66f4$3af88320$b0e98960$@samsung.com>
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQEsYfZJWsKashkyP9MBYkRpZOCHKAFBYuxNtGsZRNA=
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBKsWRmVeSWpSXmKPExsWy7bCmvu5e6fZ0g+75UhY/Vn1htZg6aTO7
+ xdu9newOzB6vDqxi9zh7Zwejx8Z3O5gCmKOybTJSE1NSixRS85LzUzLz0m2VvIPjneNNzQwM
+ dQ0tLcyVFPISc1NtlVx8AnTdMnOANikplCXmlAKFAhKLi5X07WyK8ktLUhUy8otLbJVSC1Jy
+ CkwL9IoTc4tL89L18lJLrAwNDIxMgQoTsjPerXrPVnCCu+LapVbmBsa1nF2MnBwSAiYSD35/
+ ZO5i5OIQEtjBKPH21i1GCOcTo8SW4ztZIZxvjBLH301mgWm5s+ccVMteRol7rW1sEM5LRomT
+ J7eBVbEJ6En8X7SQGcQWEbCV2Df3LzuIzSygLHHgz20wm1PAUmJ61z02EFtYwEtiwftmsF4W
+ AVWJWTsuMoHYvEA1F3tuQm1WkPj5dBnQSRxAM60k5jyvghgpIjG7sw3sIAmBXewSlw8eYoKo
+ d5FY39TEDGELS7w6voUdwpaS+PxuLxtEQzOjxNIlB1khnB5GiX8N19kgqowl9i+dzASyjVlA
+ U2L9Ln2IbXwS7772gB0hIcAr0dEmBFGtInHp9UsmmPl3n/yHKvGQOPncDBI+QNMvrT3COoFR
+ fhaSu2chLFjAyLSKUSy1oDg3PbXYsMAUHpXJ+bmbGMFJTMtyB+P0tx/0DjEycTAeYpTgYFYS
+ 4V3C1pouxJuSWFmVWpQfX1Sak1p8iNEUGJATmaVEk/OBaTSvJN7QxNLAxMzI2MTC0MxQSZz3
+ wraWdCGB9MSS1OzU1ILUIpg+Jg5OqQamDc80r1ubZx+svVa+7ebKS69OzzF5cuqK/s37RqyW
+ s781pwevmvNt+4EKQzXuQ72nb3d905OfOm/ajOcfztsGc95YEi9/Q15UYbbotWnHN5utDWNp
+ +cP5LTNqu5bY7H+Z72vExGxNLrInv4ub11txoSzozLOOxFNsb7Z+ebGcX6Er/aW5WZWL3pcs
+ R9vigoYHGdU16g/lCyoWO/1Mr7rzZlPXhRsvJ08V/2Ib99zax2NK+/qV24T3Te6Jy7Q85X7s
+ ZZjG7OdM6RueKtSVRp/eXP1f6RF38bfDl51P3rr867cv/z4viR0W04sTmxaLHG8+mB2+neO3
+ 8O9cj2cz/bmt7pTEZK080/zkjfiFuEwnFyWW4oxEQy3mouJEADm9oFvrAwAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprLLMWRmVeSWpSXmKPExsWy7bCSvO4e6fZ0g1cH1S1+rPrCajF10mZ2
+ i7d7O9kdmD1eHVjF7nH2zg5Gj43vdjAFMEdx2aSk5mSWpRbp2yVwZbxb9Z6t4AR3xbVLrcwN
+ jGs5uxg5OSQETCTu7DnH3MXIxSEksJtR4uO852wQCSmJz0+nAtkcQLawxOHDxRA1zxklPv1s
+ ZAepYRPQk/i/aCEziC0iYC9xuKsTrJdZQFniwJ/b7BANXYwSP+/fBUtwClhKTO+6B2YLC3hJ
+ LHjfzAJiswioSszacZEJxOYFqrnYc5MF4ggFiZ9Pl7GCHCEiYCUx53kVxHwRidmdbcwTGAVm
+ IXEXMDKuYpRMLSjOTc8tNiwwykst1ytOzC0uzUvXS87P3cQIDkEtrR2Me1Z90DvEyMTBeIhR
+ goNZSYR3CVtruhBvSmJlVWpRfnxRaU5q8SFGaQ4WJXHeb697U4QE0hNLUrNTUwtSi2CyTByc
+ Ug1Mh2T0Hi4yOae91sbW6GcmS2Wat4Xn1V/720+FmJxNtvqpNqn3Bo/dnit8CXKdvS+qDmSn
+ 5l47+bLmyGyXg/VORgyP1mwVeL805+LetXyGFx2Kf6utjbi08BbPxjV99l02i/g7b9e1MLj9
+ 53Pz672f4DE1aEZdAcM5iyNTXmxjF2FYxJ+xvfp8n52mgf7a0K+KyvznVNe+SWBJPCBi9858
+ 0wfz1Slr29cEKkza2rLEW9bq7r777J6nktjSvAoX9nELpV668+vQhSMbmsTf9kZu+r5Zf7to
+ dMipw8xXd+2f3Lr95gen6175pTHzHcWa+ve4Gs5n+7yg/fDM3RznHs5/NfMLD0t8xd8/769b
+ BG9mUmIpzkg01GIuKk4EAOdsfY2wAgAA
+X-CMS-MailID: 20250115022148epcas1p1b26c92279fefa4f53ad679890e3721aa
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20250115020743epcas1p1be3492abc3a2435f603c7b2dd14be15a
+References: <CGME20250115020743epcas1p1be3492abc3a2435f603c7b2dd14be15a@epcas1p1.samsung.com>
+ <20250115020737.230558-1-trini@konsulko.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,17 +129,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA
-> options
->=20
-> The option MMC_SDHCI_ADMA_FORCE_32BIT is only tested or used
-> when MMC_SDHCI_ADMA or SPL_MMC_SDHCI_ADMA is enabled. And
-> for MMC_SDHCI_ADMA_64BIT the same is true except we also require
+
+
+> -----Original Message-----
+> From: Tom Rini <trini@konsulko.com>
+> Sent: Wednesday, January 15, 2025 11:08 AM
+>
+> The option MMC_SDHCI_ADMA_FORCE_32BIT is only tested or used when
+> MMC_SDHCI_ADMA or SPL_MMC_SDHCI_ADMA is enabled. And for
+> MMC_SDHCI_ADMA_64BIT the same is true except we also require
 > MMC_SDHCI_ADMA_FORCE_32BIT to be disabled.
->=20
+>
 > Signed-off-by: Tom Rini <trini@konsulko.com>
+
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+
+Best Regards,
+Jaehoon Chung
+
 > ---
 > Cc: Peng Fan <peng.fan@nxp.com>
 > Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> ---
+>  drivers/mmc/Kconfig | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+> index f4fdf15242ce..6dc8d3bf9fe2 100644
+> --- a/drivers/mmc/Kconfig
+> +++ b/drivers/mmc/Kconfig
+> @@ -527,6 +527,7 @@ config SPL_MMC_SDHCI_ADMA
+>
+>  config MMC_SDHCI_ADMA_FORCE_32BIT
+>  	bool "Force 32 bit mode for ADMA on 64 bit platforms"
+> +	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
+>  	help
+>  	  This forces SDHCI ADMA to be built for 32 bit descriptors, even
+>  	  on a 64 bit platform where they would otherwise be assumed to
+> @@ -536,6 +537,7 @@ config MMC_SDHCI_ADMA_FORCE_32BIT
+>
+>  config MMC_SDHCI_ADMA_64BIT
+>  	bool "Use SHDCI ADMA with 64 bit descriptors"
+> +	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
+>  	depends on !MMC_SDHCI_ADMA_FORCE_32BIT
+>  	default y if DMA_ADDR_T_64BIT
+>  	help
+> --
+> 2.43.0
 
-Acked-by: Peng Fan <peng.fan@nxp.com>
+
+
