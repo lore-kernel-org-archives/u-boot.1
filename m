@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F03E77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:17:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E5B6E77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:17:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5809680735;
-	Wed, 15 Jan 2025 02:17:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D6EFA80702;
+	Wed, 15 Jan 2025 02:17:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ny1veSZQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="baMKGAx2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4A9880714; Wed, 15 Jan 2025 02:17:06 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 0145B80702; Wed, 15 Jan 2025 02:17:11 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 821C5806EB
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:17:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E5E0806D6
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:17:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aaeef97ff02so1003995366b.1
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:17:04 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aab925654d9so444893666b.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:17:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736903824; x=1737508624; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736903827; x=1737508627; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=h4e1PCp57iGXllR0euP5+QBOR8eqmhs9+DVh3cmxTXg=;
- b=ny1veSZQTZXMQYRKEFeKKTpeapFGc7xxQVfWpH1UNbOrRF3IesNqD3N+IXL7Kjxgkq
- Q0ydG3cLWOfUbvfwaKP09w/tPY/ycuU8wN/W4/YHyRaBbx7DTSidSFzimIc6w/zxDFJS
- 253PpgKIyU81+B3nxT552zyD4UDmkel3PCcME=
+ bh=YHgQ3slHPm9LCIY0cm+T0X4QbGK3rKywtohv9NR0iRQ=;
+ b=baMKGAx25m38USSCGl4dDaBdFT8Gh0a50sRhbNdzwtDQByjE4o1giAApVIx9RiLQF9
+ jxq/5E4voOUFQMbHJc8qrmyWSqY/Ld4PIIWIYyL7QfwF5gzclGThpEsXEaH9acRn0blB
+ gG8pXXVp0NvGBWqBpx/thC8/XoSNoBboPpxTk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736903824; x=1737508624;
+ d=1e100.net; s=20230601; t=1736903827; x=1737508627;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=h4e1PCp57iGXllR0euP5+QBOR8eqmhs9+DVh3cmxTXg=;
- b=eRX0+X/nfO20OxqmmIXdtzgbZPsdXyJn43csN+f+N1IDk1ctYKoOUhE6mxdqJ/xySy
- EGl+wlcs6m1IqQlwsARTT52cfAXjbCOIZA6XWghtbJvAa8nxtYEA/XLSrTyl3WZPDPNl
- TLHxo99clfJbqhWFYcPV59UnIlHq+B6YrXEQ/+WJok2YaPFSHsKocMH767Ug1wiUxiXT
- WaHM+9kSTA0lSvn1XWY05rKZ7sdAD20P0mzyC1kX5zYIkVmpI/v3XWW4qqebAJMmRkSA
- 9hxGOl/YZ64omAu40erHIPuk67In9Nm/XI9kb57EQFKwoTsbG3RxVuszXodmoDvrml+C
- b/JA==
-X-Gm-Message-State: AOJu0YyYPFpGwAV/9NAuFheF5oV1g5NSJcdieBmTio2LU/yCT/0jWoJZ
- Ry8fvxKjxxg25UZamtWmFoJUX4qjf1hJ7yug1mHIqv8Jq0gX1dixmWBpzzXk+8b0O/XVeuYbD4C
- udxpTAvofY1EAZIAYmyTLq8rtcL/xn5jfgC38
-X-Gm-Gg: ASbGnctIZqnUXGfJqWaxJozm9bVUuChXVxnRw7s04TyK/wEL3tnPppYZSzZV6muI1ZR
- yp6PCm1Cvu/amyu5b8UaTceY9Gp6ZeBlqdiqyvE0=
-X-Google-Smtp-Source: AGHT+IGPwCMxJD51oGfX0Mo4YSjRXWLcFMZi1WehSq+kj4cD2lr5YVOJ22LMFMO1nFQQa1ZNwME0ByBct4f5276xQsM=
-X-Received: by 2002:a17:907:c03:b0:aae:8308:b9f9 with SMTP id
- a640c23a62f3a-ab2ab6c1ae0mr2409858666b.13.1736903823921; Tue, 14 Jan 2025
- 17:17:03 -0800 (PST)
+ bh=YHgQ3slHPm9LCIY0cm+T0X4QbGK3rKywtohv9NR0iRQ=;
+ b=k/z6bT38bJ+J4jiSYvyCfQ8IS4/nN4T+PtDxPW9FyOOa4S8IHe9IHOu/FO8quptZSY
+ dulnN7x6w2ffvdT5LfPelPG6o9UZkfY/gBeXB3tymOYYADuSVxw/Ne04ae4KMQgzKzsR
+ AaE2+Q8CzgEVgKY7NE4vEKAJxXq0Tbh8UvCKstzYLg98MdWSXejxbWgT4fe23PkJYKsF
+ IYdHGdnVZ8AfQUPlnYiB6+Z8xCegGqERPTQL7DphGove/NTR1kSCZnazTDorAqTpiALy
+ CIfI0fKK8FvFv/qTScSUTKsPMOwoSUSHFV0YMvRWMErVTfkt+vWlNr5l/3dJCXcJUNGU
+ o/Pg==
+X-Gm-Message-State: AOJu0YzC4NCTg8qd/AOLHkJGlSpBOxeOYonDLSHQBbmnyUWLoPHwdkxy
+ cFqy08tV9nBYJRJvrdVW/EqJ1m9uPThc6RPYH0jZfHWlm3wadMvDE688lASsh6rJ6TCz7YDl7bP
+ JOw+xZYrIoeMbJMmiqJiDv/9N8FLOTaBYxN8or6DZQ/qyTHs=
+X-Gm-Gg: ASbGncsFUxRuAcEMSDg3zlz95253opr1IPVnHBj4Sv+LtEiClpOT+Anq/f6QbYNT+ho
+ 9bqWzW3xLWH+8Brfb/HbZODjFXY2fINkQUr/iAp0=
+X-Google-Smtp-Source: AGHT+IGak6TAHywKI+Z8LhLFzgsjC5w9gY3yT9T1x02yVlmccJFdTVyd2YEsihUcta8vKqCxemVS+VXR45DHyrL2XM8=
+X-Received: by 2002:a17:907:d87:b0:aa6:7a81:3077 with SMTP id
+ a640c23a62f3a-ab2abdc3649mr2966788166b.54.1736903826880; Tue, 14 Jan 2025
+ 17:17:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20250114152022.933662-1-raymond.mao@linaro.org>
- <20250114152022.933662-3-raymond.mao@linaro.org>
-In-Reply-To: <20250114152022.933662-3-raymond.mao@linaro.org>
+References: <AM6PR04MB55584A5EF725E8DF69629DF39A302@AM6PR04MB5558.eurprd04.prod.outlook.com>
+ <CAFLszTg3D9C-XR7TwCqB6RAOvZH-TK7=CEN-WioSfEKWCVVGLg@mail.gmail.com>
+ <AM6PR0402MB3575770B2FD604C0A153BDAC9A182@AM6PR0402MB3575.eurprd04.prod.outlook.com>
+In-Reply-To: <AM6PR0402MB3575770B2FD604C0A153BDAC9A182@AM6PR0402MB3575.eurprd04.prod.outlook.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jan 2025 18:16:51 -0700
-X-Gm-Features: AbW1kvYdAAhJBmaK0sJ2fTpdME6vCi9YPA0lu1Wk7drAXjKrX8JGbz1XVlTZ0EM
-Message-ID: <CAFLszTh=d=Brcrd-4He0nDZgybjKOdAqqUxvh_z245xjF1giuw@mail.gmail.com>
-Subject: Re: [PATCH v5 3/3] tpm: get tpm event log from bloblist
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Levi Yun <yeoreum.yun@arm.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Tim Harvey <tharvey@gateworks.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
+Date: Tue, 14 Jan 2025 18:16:55 -0700
+X-Gm-Features: AbW1kvbhsS_DIWOAKWjgXSTRv3-oMZgkEM5X-HcQbfmLACWe6mm0ww2LIxWZbVk
+Message-ID: <CAFLszTgRCzSN8ODXxXwS2afXktRHa9TOk3moWKroU45USJf+QA@mail.gmail.com>
+Subject: Re: [EXTERNAL] Re: How would I do signature verification of
+ standalone binary?
+To: "Koch, Fabian" <Fabian.Koch@hima.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,154 +87,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Hi Fabian,
 
-On Tue, 14 Jan 2025 at 08:20, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Get tpm event log from bloblist instead of FDT when bloblist is
-> enabled and valid from previous boot stage.
->
-> As a fallback, when no event log from previous stage is observed
-> and no user buffer is passed, malloc a default buffer to initialize
-> the event log.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - Remove patch dependency.
-> - Remove the fallback to FDT when BLOBLIST is selected.
-> Changes in v3
-> - Malloc an 8KB buffer when user eventlog buffer does not exist.
-> Changes in v4
-> - Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
-> Changes in v5
-> - Replace TPM2_EVENT_LOG_SIZE with CONFIG_TPM2_EVENT_LOG_SIZE.
-> - Add an inline TODO comment.
->
->  lib/tpm_tcg2.c | 61 ++++++++++++++++++++++++++++++++++----------------
->  1 file changed, 42 insertions(+), 19 deletions(-)
+Firstly, please can you drop your signature as it is not correct for a
+public mailing list.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 14 Jan 2025 at 08:12, Koch, Fabian <Fabian.Koch@hima.com> wrote:
+>
+> Hey Simon,
+>
+> Thanks for getting back to me.
+>
+> > So long as you put your image in a configuration, it can be verified.
+> > The question is whether you can load it.
+>
+> Yes. Meanwhile I got far enough to have a signed FIT image, a u-boot.img which contains the pub-key in a dtb and the means to load it all using "imxtract" which also does the signature verification.
+>
+> So my usecase might just work without any modifications to u-boot sources.
+>
+> I only need to confirm whether this can be secure enough against attacks.
 
-nit in case you respin again: -ENODEV is for driver model, when there
-is no device. It is actually handling specially by driver model. So
--ENOENT is what I try to use for things that don't exist but aren't
-devices.
+If you are just using a signed image, then there is no protection
+against a mix-and-match attack. Are you using a signed configuration?
+The best approach is to use a signed configuration and then just a
+hash for each image.
+
+> > bootm assumes it is booting an OS. It does not support IH_TYPE_FIRMWARE as a type.
+> I currently use "standalone" in the FIT source
+>
+> > You could write a new command to handle that, perhaps.
+> I wanted to stay as close as possible to vanilla u-boot (or at least vanilla TI-SDK u-boot) in order to not have to do as much work when upgrading later on.
+
+OK. Patches are welcome, though.
 
 >
-> diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-> index 4134d93a35..2d9076f091 100644
-> --- a/lib/tpm_tcg2.c
-> +++ b/lib/tpm_tcg2.c
-> @@ -5,6 +5,7 @@
+> > SPL does support loading firmware, but you are running U-Boot proper so that isn't very useful.
+> Honestly, we could probably ditch u-boot proper for our usecase, but again staying very close to the TI SDK, (which instead finally loads a Linux kernel of course) we have been going this road so far.
+> Might be worth checking if we can just use SPL only, also saving on boot time.
+> Can you point me to how the rest (loading, verification) would look there in SPL only?
+> Still a signed FIT image with "standalone" I suppose?
+
+You need to enable full FIT in SPL, but yes, it should work in a similar way.
+
 >
->  #include <dm.h>
->  #include <dm/of_access.h>
-> +#include <malloc.h>
->  #include <tpm_api.h>
->  #include <tpm-common.h>
->  #include <tpm-v2.h>
-> @@ -19,6 +20,7 @@
->  #include <linux/unaligned/generic.h>
->  #include <linux/unaligned/le_byteshift.h>
->  #include "tpm-utils.h"
-> +#include <bloblist.h>
+> > For your command, you could call fit_config_verify() to verify the config, then fit_image_load() to load the image you want.
+> Both "iminfo" and "imxtract" which I currently tried run through fit_image_check_sig() eventually, and in the .dtb I marked the image as "required" to be verified.
+> Doing the negative test of loading an unsigned FIT resulted in both commands failing and yielding a 1 as return value.
+> So my current plan is to do some basic bootcmd like:
 >
->  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
->                       u32 *bank_num)
-> @@ -615,15 +617,24 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
->                 elog->found = log.found;
->         }
+> If imxtract does not fail, use "go" to jump to the entry point, Else fail the boot
 >
-> +       if (elog->found)
-> +               return 0;
-> +
->         /*
-> -        * Initialize the log buffer if no log was discovered and the buffer is
-> -        * valid. User's can pass in their own buffer as a fallback if no
-> -        * memory region is found.
-> +        * Initialize the log buffer if no log was discovered.
-> +        * User can pass in their own buffer as a fallback if no memory region
-> +        * is found, else malloc a buffer if it does not exist.
->          */
-> -       if (!elog->found && elog->log_size)
-> -               rc = tcg2_log_init(dev, elog);
-> +       if (!elog->log_size) {
-> +               elog->log = malloc(CONFIG_TPM2_EVENT_LOG_SIZE);
-> +               if (!elog->log)
-> +                       return -ENOMEM;
-> +
-> +               memset(elog->log, 0, CONFIG_TPM2_EVENT_LOG_SIZE);
-> +               elog->log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
-> +       }
+> Then I would try the "u-boot hardening" tips I found so far (like disabling cli and console, hard-code the env, and set the delay to -2)
 >
-> -       return rc;
-> +       return tcg2_log_init(dev, elog);
->  }
+> If you have any more ideas on how to make this more robust, please let me know.
+
+That seems good to me, although I'm not a security expert!
+
 >
->  int tcg2_measurement_init(struct udevice **dev, struct tcg2_event_log *elog,
-> @@ -676,10 +687,25 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
->         const __be32 *size_prop;
->         int asize;
->         int ssize;
-> +       struct ofnode_phandle_args args;
-> +       phys_addr_t a;
-> +       fdt_size_t s;
+> >> [long signature with legalese]
+> > [can you please drop this as it is not correct for a public mailing
+> > list?]
 >
->         *addr = NULL;
->         *size = 0;
+> It is auto-inserted by (I suspect) the company MTA, so I don't think I can, sorry.
+> I tried to send this as a plaintext mail at least, maybe that makes it a bit more bearable.
+
+OK, please raise it with your IT people as it does create confusion
+and may make others reluctant to reply.
+
 >
-> +       *addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
-> +       if (*addr && *size)
-> +               return 0;
-> +       /*
-> +        * TODO:
-> +        * replace BLOBLIST with a new kconfig for handoff all components
-> +        * (fdt, tpm event log, etc...) from previous boot stage via bloblist
-> +        * mandatorily following Firmware Handoff spec.
-> +        */
-> +       else if (CONFIG_IS_ENABLED(BLOBLIST))
-> +               return -ENODEV;
-> +
->         addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
->         if (!addr_prop)
->                 addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
-> @@ -694,22 +720,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
 >
->                 *addr = map_physmem(a, s, MAP_NOCACHE);
->                 *size = (u32)s;
-> -       } else {
-> -               struct ofnode_phandle_args args;
-> -               phys_addr_t a;
-> -               fdt_size_t s;
+> Kind regards and happy new year
+> Fabian
+> Informationspflicht nach Art. 13 und 14 DS-GVO: https://www.hima.com/de/informationen-DSGVO Information obligation according to Art. 13 and 14 DS-GVO: https://www.hima.com/en/information-GDPR
 >
-> -               if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
-> -                                              0, &args))
-> -                       return -ENODEV;
-> +               return 0;
-> +       }
->
-> -               a = ofnode_get_addr_size(args.node, "reg", &s);
-> -               if (a == FDT_ADDR_T_NONE)
-> -                       return -ENOMEM;
-> +       if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
-> +               return -ENODEV;
->
-> -               *addr = map_physmem(a, s, MAP_NOCACHE);
-> -               *size = (u32)s;
-> -       }
-> +       a = ofnode_get_addr_size(args.node, "reg", &s);
-> +       if (a == FDT_ADDR_T_NONE)
-> +               return -ENOMEM;
-> +
-> +       *addr = map_physmem(a, s, MAP_NOCACHE);
-> +       *size = (u32)s;
->
->         return 0;
->  }
-> --
-> 2.25.1
->
+
+Happy New Year!
+
+[..]
 
 Regards,
-SImon
+Simon
