@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F02C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 18:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CDA5C02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 20:01:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D843E8033D;
-	Wed, 15 Jan 2025 19:29:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B56D80657;
+	Wed, 15 Jan 2025 21:01:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BP4I9+3T";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1736971289;
+	bh=gEuXCx5ML9WxtkIkKZU8U8rlmgV5Ltz2Ie0gwB/6yWQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Jomt2sGuGjpCEjlTuyoZwRSUPXidKvfYwiF9lgUdm7a88z5LLbqdUYkc9YWH4OaIh
+	 haEkfVLaLHumDCd00m2B2J4F+FLd7alugUtbXZG8cWIp4tDm4MZKG7foHeuevtgRKJ
+	 4g2f6Ql8HLaKwRi/a9sbVublcHDagsCxiaVksPMZzjpbXKvjD1cHyjLYX6/ydKPhVT
+	 WLX+kn6nJVbgrh1j5ON1LQuwZASeLksYrwab5ep864G4Ngc9cX48OsUm2yfyg16iBa
+	 QoQL6aTC/U2erWAIt5gyTw0yq2Sx6TeNDNS+6BO4YPiPGWRH/meTzGYQkzu5/Q1Pvo
+	 fPSy3eQOxMRFg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EEEA80657; Wed, 15 Jan 2025 19:29:06 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B5B3A80214; Wed, 15 Jan 2025 21:01:28 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C75E880214
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 19:29:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9DD680214
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 21:01:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7b6edb82f85so739485a.3
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 10:29:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736965742; x=1737570542; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3c4yYZa/hfH09UQVyq1tSeQtALb5nLAi9hdezjC2PEU=;
- b=BP4I9+3TtQB7HyK4jZdZ/hoB9Zc/osJMoQOu+JJ3n11ZA0SS1b957YyYi5P2yjX3QU
- eLor0OmtL6SdJGSCE/VBo3pmP62xxG8IzIXojZ1YhpF5lgOFlaLb5dO5WwEjfQle6SuH
- uD1D+JmAiK4eUwhnw8rK0cUBuJ4KQ6FbV8nNg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736965742; x=1737570542;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3c4yYZa/hfH09UQVyq1tSeQtALb5nLAi9hdezjC2PEU=;
- b=qmLpq5AZh/e1mGzPv2OkarsH/0hxbvZScCSGRCVSNSSaslgWr81wFa+1jPl64n92Vz
- Sf21IwfVk3twTbsj9q7XtAHZb0+rc5POSxzrU3rQNVXZOxVtQhnlEw9bB6zYzjkNgqXZ
- GS6Uplqb4ag9tD0hJWOwR4nOwdBUo+bSP2DELZf1no2Ft9hMeUX9H3FEBonBqC3dPqaG
- rzyulh6PbauVT54vak3y/bQrGOPSUmoRecnjBkJsydJwReuOUO06Zggj7aDrY1u8NzN6
- A78iTRTDa7/nMOpTr43mSxIuGhZuWLOFciWANT4niAbPGM4SBJW5xnJ/Tlbhv9Rxyn0H
- E7ZQ==
-X-Gm-Message-State: AOJu0Yx3HAysP9bmd5qKC+Owu0Fg5kIsZnZ+zpVCkvY+bD44jTXVPQfg
- BU47mkJG6jn6mEl8l0O6bkux0ZG3H+clep6k0qg65kXO+BXAncVPn5KFlqrdKA0=
-X-Gm-Gg: ASbGncsrxDtqFp6gVa1sWeOeK/6i90mDdPMN0rKUIfr/nSgY9RfKe18MaQEaXHYz2dc
- oUcxenjUPGpc8XxzUEMkQjL1hiHfnXwx5IF5J2suRVakL0pHQ7/PcyKcETa1+oHnbBqamuussxL
- x9XnQt7wR06aoZf5+Gd8HhDPTrO+m9uDZNyg/stcRG8SYyuvNrN2n2178qIzxp+dsVNzFSJojR/
- eCWL3xME4DpoFcOFwsku8VezDpQRpf3U9snmZlQVDdweQy2ik/m3g==
-X-Google-Smtp-Source: AGHT+IHcq3tTh4nTKudQSvc19PFwC66m5OSHBhSj7SglYzvch8db9+T0UPt8kO95Y7CEnAd2L0JgkA==
-X-Received: by 2002:a05:620a:1914:b0:7b6:d76d:3bf8 with SMTP id
- af79cd13be357-7bcd972908cmr4215757085a.11.1736965742669; 
- Wed, 15 Jan 2025 10:29:02 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfad9aec1bsm67047146d6.55.2025.01.15.10.29.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 10:29:01 -0800 (PST)
-Date: Wed, 15 Jan 2025 12:28:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCHv2 4/6] blk: Make block subsystems select BLK
-Message-ID: <20250115182858.GB3476@bill-the-cat>
-References: <20241220222612.1757884-1-trini@konsulko.com>
- <20250115012322.215243-1-trini@konsulko.com>
- <20250115012322.215243-5-trini@konsulko.com>
- <8d0713c8-06bb-48ca-badc-2bd752605190@cherry.de>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="NVc53Bbs"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7BBBA1092C1F3; Wed, 15 Jan 2025 21:01:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1736971284;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=gEuXCx5ML9WxtkIkKZU8U8rlmgV5Ltz2Ie0gwB/6yWQ=;
+ b=NVc53BbslsE4LQWRhshDQY4h+F8NPGdV1Ki4i968ka5PR8/l9neoKw5xxxn/jiUzRmAt6z
+ ryoHfR1+WGY2xvEidgt+A5DPoyI460IlXQc4RFICSLXmLBlQDEEKGQo49kyFFtObh3uVC8
+ knm9gUz02EH8E9prIPONXlcR2s57fqJChan9Ph+wKtji8ulPrBrVhXU2MZEjlZ9wVD2cGI
+ S840V/RESPu4pjByl8vMkDKC4bTIw/ci40WTNug0ivgrHiqmxemJSgPM+/OMzkFopu+/dE
+ ZZZmDaUQtgmMSw418eqe6DM1IsTLOzYJzI8UARktCKTUI/v9Ufbk6EtBgYw7eg==
+Message-ID: <962d01dd-aa01-43c6-aa0c-8281e04c5d53@denx.de>
+Date: Wed, 15 Jan 2025 20:07:08 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9UL+fkT7LijOCcQS"
-Content-Disposition: inline
-In-Reply-To: <8d0713c8-06bb-48ca-badc-2bd752605190@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 17/17] imx95_evk: add i.MX95 19x19 EVK board basic
+ support
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Alice Guo <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>,
+ u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
+References: <20250103-imx95-v1-0-6744df5dc020@oss.nxp.com>
+ <20250103-imx95-v1-17-6744df5dc020@oss.nxp.com>
+ <CAJ+vNU1xAhYdnoTRLuM6fWa1mQgkLrVj03BsSObtd7NDq9oogw@mail.gmail.com>
+ <84b18e4b-cdd8-4767-98d2-ef31167ed6be@denx.de>
+ <CAJ+vNU2yL1XBbtg=FhHohR72Wj58Y0wOEpckpzrNJCNUM=Px9A@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAJ+vNU2yL1XBbtg=FhHohR72Wj58Y0wOEpckpzrNJCNUM=Px9A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,51 +90,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/15/25 6:10 PM, Tim Harvey wrote:
 
---9UL+fkT7LijOCcQS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Wed, Jan 15, 2025 at 06:51:28PM +0100, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 1/15/25 2:22 AM, Tom Rini wrote:
-> > The BLK symbol has a few meanings, one of which is that it controls the
-> > driver model portion of a "block device". Rather than having this hidden
-> > symbol be "default y if ..." it should be select'd by the various block
-> > subsystems.
-> >=20
->=20
-> As just replied on v1, I would have liked an explicit mention that yes, t=
-his
-> diff doesn't include a change to PVBLOCK symbol, because it already does =
-the
-> right thing.
+> You're right. I have a set of messy patches pulled from nxp's u-boot
+> that is enabling PCI ECAM and enetc. With the latest patchset from
+> Alice PCI isn't there yet.
 
-I thought there was another symbol or two that was correct. I'll add
-something to the effect of "Symbols such as PVBLOCK which already
-select'd BLK are unchanged".
+I have ENETC pretty much cleaned up, the NETC block controller is what I 
+still need to finish.
 
---=20
-Tom
+>>> - i2c
+>>> - mmc
+>>>
+>>> the following are not yet supported by this series:
+>>> - ethernet
+>>> - usb
+>> USB 2.0 should be usable with u-boot/master now, although you will need
+>> to pull more recent DTs to obtain the controller node in imx95.dtsi .
+>>
+> 
+> Yes, I did get USB 2.0 by adding the relevant usb2 nodes to dt
+> (haven't seen this submitted upstream yet) and your "usb: ehci-mx6:
+> Add i.MX95 support" patch.
 
---9UL+fkT7LijOCcQS
-Content-Type: application/pgp-signature; name="signature.asc"
+Good.
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeH/mcACgkQFHw5/5Y0
-tywpRwv/RMzF4qWTCRKJvGMz+/eM+7YzMAmKHJdhJBIdGEIFBnmocYON2QqN4rsN
-M3lud4KMIh/57g6Ycg8K9WPVyFJv7FCM66cq2a0P/mcGOzWfKCCoPn8Msnv5XVXP
-dnQoL9LGObQ/tuYhviAaJz2q6iTqRg6MNXJpVXlKtf0jpUG7Ty+ag11r74aw9S26
-Lm5ZBolo9SMMmM6i6F3B4HKAvyiv96913HPzwLjUyfBxVPhBM4ll+Qsv4NYn+VZL
-UWZzYu2/KSvLlxvlW3fzCoh8BQfHfdeNJFSzD3lv8nECusWM+9/bRkB8Gep8h23w
-2ft82yqAR/FZx4zuB9RGgnhrviTeFfxGe6jML50sdT67S//+Wg5Q7uZ4PvnIU5I8
-W9ORO86uGW2c48zu5usaodcW952NSY3HLQTQZoUMLWCPYS1lmu0X3kyRri2v1imi
-6o3FsEFtTm3gVNNx1pJ9p3NNd5mHixfj3dl4UKcQ6mdUEB25nM2dBN6XQD5gbtkU
-Ivx8De9D
-=rOnr
------END PGP SIGNATURE-----
-
---9UL+fkT7LijOCcQS--
+>> USB 3.0 is possible without this TypeC switcher in PHY driver, I got it
+>> working as gadget I think.
+> 
+> Ok, the usb3 dt nodes have been submitted upstream [1] but I haven't
+> gotten usb3 to work as host yet but did not try peripheral mode. I did
+> notice there is no ptn5110 driver keeping type-C role selection
+> working.
+Indeed . Do you want to start looking at the PTN and TCA block (that 
+goes into USB PHY driver) support ?
