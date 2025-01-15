@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 325BDC02183
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:37:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82FF7C02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:37:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0008880A29;
-	Wed, 15 Jan 2025 14:32:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 59F358082D;
+	Wed, 15 Jan 2025 14:32:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MaVcChhe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RRSZThIy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E1D9809D4; Wed, 15 Jan 2025 14:32:17 +0100 (CET)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 818C080A29; Wed, 15 Jan 2025 14:32:18 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8C6280ADC
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:32:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 555AA807E1
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:32:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3ce34c6872aso47259415ab.0
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:32:14 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-844ce213af6so226688739f.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:32:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947933; x=1737552733; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947934; x=1737552734; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oy35b+CaiJ0OFlImJFJkWfo4M5/8TRvRkkJ0nO5J16w=;
- b=MaVcChheFe0tZTZctTgVNI+BVNp0g+1NIxtJ+j6JULNJSH6mZIaa0JJEfmAf/fuhkZ
- S6Xd4vut6U+HbG+HANjnj8b2W0cFvlaUarBhluJe0kNjzbusEkMPNhw2e27cNycUp+ER
- kGT9JaHsm9pml0P03bqQKAS784iZamPoXiZeQ=
+ bh=aRqzs9/m6h6pQG31hr8YpALZ0EtpuUz8umNXUkwzkow=;
+ b=RRSZThIyw2nedM6PDhu4x7vVhSGYSGD/a/BfJzAxGQrkuZCJTd0UjdDR8sO3CQ+tAi
+ euFjCplpOUIjvjYkcl+3m8v4dZvXW+fgPuhCOhwHSnU9P44+xJWqYOPm5n9ybnF5iFxy
+ AuEQW+sP2aajAWu5oEcahViMlRr1HF4ut5O3s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947933; x=1737552733;
+ d=1e100.net; s=20230601; t=1736947934; x=1737552734;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oy35b+CaiJ0OFlImJFJkWfo4M5/8TRvRkkJ0nO5J16w=;
- b=lPXTTxCEXUwLG892QQkBpMjGTrPWsKtVxlg7aUALlEg5Oox3ezeYnfL4QN9eJTOphd
- KwdnkPV3ElG7Zb3V5z38BYfGsdjFUBrkch6ZG6wzA6zztcflpddUhh+t+OLzkGBnDOV5
- 9HhAPo7HNz6EuISY5ht49jxQN975JRkx7J7ZMJrU9I/ZZGsy/qyo/dDXxoic2dgjnvNz
- FyuB4i4hC9anXCBNA6x1vd1IC9zcxb8WyaBc7CbdTh4SQtERjDoE1ps1brNGyDIHZzYL
- lt2pEdLXAsiBq7UK1cV8zFJ/I5S0ijQPOINnJnUVHbvY0lcGVM9Ammd0VH1FJ7vCQm6t
- YzMQ==
-X-Gm-Message-State: AOJu0YyQSHLVXNVcFfcJZ89sZPne0uhvg0SBwugizhvWOHV4y+dC7tyO
- ShsFgK3vEa94f9nai2S7Uf5Qh0Y7NxDITVX4mz6ayMJbeow+4lQkEK1d9l3CDUIga0tqNrwc6jw
+ bh=aRqzs9/m6h6pQG31hr8YpALZ0EtpuUz8umNXUkwzkow=;
+ b=TK746UDOIE8WD1nOa3oGOW0m0yPZKOEIQRfiq0aD+Y1gjCHR30uUB3SgI2w3nu2t0h
+ Lc+pl2Ak16EFcZtsfCforiD/Irwmsndxzep3cMbeI/GdKkCNIr60kdhZXYyysjAJ9xJ2
+ bemPsMvoEpakReUfsKhfGFjIeBCWaQUzLfsLwCxvRsKNTwN0oOCTreBqC17/PzxGHZbe
+ RmCE5VtsY9zCegTbjpBovrvmiLNs+q88ICzdL50/MryURo4fqNeHTRVUWjLAw3nXAzq+
+ wgqRrehF5ejRARXNtqzdGLNvv916N0NdsGaeUBIKIiCoVlsYGtnHxMO4/sjdSs3Qwer1
+ QQ/Q==
+X-Gm-Message-State: AOJu0YwRh1hEfUFDWzeonfUxmDv3P/h+nvrYNZGfpGBgLsOfz08/yVym
+ Su7FUIkUT/SrOHicfThBmSEjBTjUGShLJL3UNkkUcPB+CqZ7BS/KQIICvUglgnmu98wKXeAt4Zw
  =
-X-Gm-Gg: ASbGncteBAZY47yDW/aQjtlvEzA5zuzONtVdqxamTPRy1XlpTD6b2xroptFFYLpHRdh
- gnGMIXYMbiwRXKOV/D4ZwrvBlevpqYDxDKD5HiSfwayWEMYQ/+sENLjzdXuIdVpeJwQNu0tUKg9
- QGJ7vZc0fadKqSSS2f0HSKot9SMpcAzP2csvRxPYVrvL89jNOV4j88utkcZQQtI3gc+J64WZto4
- ETxenPuRiKLEoaGFUr5LiJCfOKh0KaTjjCAYLveKZWsS0oFihr5/ycqqDgitWpZXGdP1LLTNnCK
- Llyp4UwXDjatHQ3Vqw==
-X-Google-Smtp-Source: AGHT+IHs1orLBK256bmwf1qbcddOPExxItDelzddo2G4DC8c0bC7dO9UD6rzuYhZvz9Zc5IYRmeO0g==
-X-Received: by 2002:a05:6e02:1a86:b0:3a7:1a65:2fbd with SMTP id
- e9e14a558f8ab-3ce3a8bb194mr224343405ab.17.1736947933029; 
- Wed, 15 Jan 2025 05:32:13 -0800 (PST)
+X-Gm-Gg: ASbGncvCrTdlH9Rt5fgowp13KrHBFY7wu1kakzGirbyDEbaydT9E3Rgq5G2dq9e6ZWZ
+ 7xqPwGEq7jtpeDDnHU/u/e7D/hib4Y0EsGnts10cJyi/8TBcuaANp4FPas0Q5GTBndxYM3WdF83
+ 0q2mQ/LMi0ZWpJJTjptUzD0uZ4fdIj6Wwr/nxYW6I7OGhVTKKCMsacCzWWPfiLJFgvSNdj5D3Ip
+ W5T3Fee1a6XriOhvXVH7h7zg2zaADcHgLfwgcz1d8C35oaf0S/M3eDLsupCqqG7tWNkLi4xMKh9
+ s5SbQQ3tGumIRr4+MQ==
+X-Google-Smtp-Source: AGHT+IG09yqsGQ4fTTL/2OkVGhg8mJ+mwpl+2eiVP5/Iya1VcesUe317s3m4CpvlD8RzmyMTv26aqw==
+X-Received: by 2002:a05:6602:750d:b0:834:d7b6:4fea with SMTP id
+ ca18e2360f4ac-84ce0095c70mr2819586539f.6.1736947934469; 
+ Wed, 15 Jan 2025 05:32:14 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.32.11
+ 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.32.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 05:32:11 -0800 (PST)
+ Wed, 15 Jan 2025 05:32:13 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
+Cc: Simon Glass <sjg@chromium.org>, Linus Walleij <linus.walleij@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Carlson <stcarlso@linux.microsoft.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 31/43] test: Drop the function for running pci_mps tests
-Date: Wed, 15 Jan 2025 06:31:01 -0700
-Message-Id: <20250115133114.590375-32-sjg@chromium.org>
+Subject: [PATCH 32/43] test: Drop the function for running seama tests
+Date: Wed, 15 Jan 2025 06:31:02 -0700
+Message-Id: <20250115133114.590375-33-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
 References: <20250115133114.590375-1-sjg@chromium.org>
@@ -98,58 +97,59 @@ X-Virus-Status: Clean
 
 Use the new suite-runner to run these tests instead.
 
+It is not clear that these actually work, since they are not enabled on
+sandbox for some reason.
+
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/suites.h |  2 --
- test/cmd/pci_mps.c    | 10 ----------
- test/cmd_ut.c         |  2 +-
- 3 files changed, 1 insertion(+), 13 deletions(-)
+ include/test/suites.h | 1 -
+ test/cmd/seama.c      | 9 ---------
+ test/cmd_ut.c         | 2 +-
+ 3 files changed, 1 insertion(+), 11 deletions(-)
 
 diff --git a/include/test/suites.h b/include/test/suites.h
-index f6b33da5a28..49c18ebf456 100644
+index 49c18ebf456..cd758b8c464 100644
 --- a/include/test/suites.h
 +++ b/include/test/suites.h
-@@ -35,8 +35,6 @@ int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -35,7 +35,6 @@ int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc,
  int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
  int do_ut_overlay(struct cmd_tbl *cmdtp, int flag, int argc,
  		  char *const argv[]);
--int do_ut_pci_mps(struct cmd_tbl *cmdtp, int flag, int argc,
--		  char *const argv[]);
- int do_ut_seama(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+-int do_ut_seama(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
  int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
  
-diff --git a/test/cmd/pci_mps.c b/test/cmd/pci_mps.c
-index 2595ea103ff..8b3ea4a6134 100644
---- a/test/cmd/pci_mps.c
-+++ b/test/cmd/pci_mps.c
-@@ -28,13 +28,3 @@ static int test_pci_mps_safe(struct unit_test_state *uts)
+ #endif /* __TEST_SUITES_H__ */
+diff --git a/test/cmd/seama.c b/test/cmd/seama.c
+index 39590d162ac..1edc3fcac5a 100644
+--- a/test/cmd/seama.c
++++ b/test/cmd/seama.c
+@@ -56,12 +56,3 @@ static int seama_test_index(struct unit_test_state *uts)
  	return 0;
  }
- PCI_MPS_TEST(test_pci_mps_safe, UTF_CONSOLE);
+ SEAMA_TEST(seama_test_index, UTF_CONSOLE);
 -
--int do_ut_pci_mps(struct cmd_tbl *cmdtp, int flag, int argc,
--		  char * const argv[])
+-int do_ut_seama(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 -{
--	struct unit_test *tests = UNIT_TEST_SUITE_START(pci_mps);
--	const int n = UNIT_TEST_SUITE_COUNT(pci_mps);
+-	struct unit_test *tests = UNIT_TEST_SUITE_START(seama);
+-	const int n_ents = UNIT_TEST_SUITE_COUNT(seama);
 -
--	return cmd_ut_category("pci_mps", "pci_mps_test_", tests, n,
--			       argc, argv);
+-	return cmd_ut_category("seama", "seama_test_", tests, n_ents, argc,
+-			       argv);
 -}
 diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 0a6284e4962..7caf41da096 100644
+index 7caf41da096..c6b7ccdedbd 100644
 --- a/test/cmd_ut.c
 +++ b/test/cmd_ut.c
-@@ -182,7 +182,7 @@ static struct suite suites[] = {
- 	SUITE(loadm),
- #endif
- #ifdef CONFIG_CMD_PCI_MPS
--	SUITE_CMD(pci_mps, do_ut_pci_mps),
-+	SUITE(pci_mps),
+@@ -185,7 +185,7 @@ static struct suite suites[] = {
+ 	SUITE(pci_mps),
  #endif
  #ifdef CONFIG_CMD_SEAMA
- 	SUITE_CMD(seama, do_ut_seama),
+-	SUITE_CMD(seama, do_ut_seama),
++	SUITE(seama),
+ #endif
+ #ifdef CONFIG_CMD_UPL
+ 	SUITE_CMD(upl, do_ut_upl),
 -- 
 2.34.1
 
