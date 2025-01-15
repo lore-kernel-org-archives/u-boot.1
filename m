@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E56C8E77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B99C02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:17:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 840B78073F;
-	Wed, 15 Jan 2025 02:17:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 79DD8806D4;
+	Wed, 15 Jan 2025 02:17:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AT5aOhi5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WBpcntEK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B04C48072F; Wed, 15 Jan 2025 02:17:22 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id A3A8E806D6; Wed, 15 Jan 2025 02:17:55 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95170806D6
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:17:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E72B8069A
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:17:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aa6c0dbce1fso885725566b.2
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:17:20 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3ecae02beso7856811a12.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:17:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736903840; x=1737508640; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736903873; x=1737508673; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=txTyXqsjH4ySMyxJjcUOYl1e0+x0CDRl5YZIJIvDzNg=;
- b=AT5aOhi562HFSS5Xoh01e/x7ID+odkfTG26OV85Cwe+dvGqD6S6RVeXr28yYYj0arS
- UZfy9A2TfDj9tPNu9DHi5OTmf00M5ruinUV6yDEQ7tjNFBXRaV6JkL9Z9g2lPeVj7fTT
- 8UxKdMi2WkAqup+IcsT7G908pq0PaTwfiNk7k=
+ bh=zr31npFw6/oKrE7pFbrtGZwIr5ri7cadXnH1PlSYPzQ=;
+ b=WBpcntEK4Y3cGBNJ4WDhMNWV8GjGx69scHLA2EkKwhZpyIXfg69YNCMGoXf0EHikQX
+ y87gT5UPY7CGOp+oPhYisLywndwmHAqZDYbiMZ8LQ1Cy6ZwLNyzyAVnosnWwfECwPxly
+ PpEbdZ2tq2mg8pbanQwM+Z9JYgtZ97C7xo86Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736903840; x=1737508640;
+ d=1e100.net; s=20230601; t=1736903873; x=1737508673;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=txTyXqsjH4ySMyxJjcUOYl1e0+x0CDRl5YZIJIvDzNg=;
- b=DFR9B2M6Et5iNAN8hCBHtLdU5N1Tw4/jKSlxXY0EbtaQn+hqeMu4yI8zsZW3a6TcWX
- ma2w7cjCCsiRHftUwiERhpTy5A9t6YX2S+9PMSRmy1PQwd/U1hekV1fXJBA2qdZoQwCH
- sWjnOSRLMAZpn10iADvo5a+SuphvwpxCF//R9J7e0czkjGeuPs/Dg9ICWQoTFvEvqves
- QdG2qvpXv/asCv9Pr092uC+ISLDm+Kfm3p8ZYdPc4BDtoSJlxnLwJK1vCD/6YUF7y0ye
- opQ+vsbV7ifUNtJHKUV9MESG4ub4YZ0Uf7K9DufXEh6CjaE//4oR4IG1E0cOIevNkatM
- UCig==
+ bh=zr31npFw6/oKrE7pFbrtGZwIr5ri7cadXnH1PlSYPzQ=;
+ b=Yv0VGEuPyXn7Iw6y6uBHQlGTEVtE1joqOpqPJVoK2NwnkjpGOtMxYd7N6guzdAsB/Y
+ houg6mlGLlKm7Bmv4kwSgtx+3sb5QCiUzrUuz6JdG2B/oN29AARZDtW3CQRMXqc8GN8c
+ 3Xodnz+KzEyFmAxeUI27EOE06NBFlaFJvPgMeR7J1saIJkXGAXR7/46nywjA7QRjPJRm
+ 06c9JstAnfnbWcrbZv0pso056OWSl5vaxwk02NC8AQgcVmlE9RKbI3ONKI9nR96e2elz
+ m+k52dZ/1GDcpp+0kQYfvcW618TtvEiQD1yWxC9dTDmD75va1Br+L5+Pk2sUSF+qAi3B
+ UGaQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVV+RM+ImNUxLTYHjUFCyuII2KI0RAQYQiRaSLRFBBNy24VgozRX1JEk0U0S7aRhtxlHeaK8gE=@lists.denx.de
-X-Gm-Message-State: AOJu0YznDogUIq8dA3lsLp7Ot1bXAczIe4RPbZ+0+40rJbr3cs8tdZGj
- PK6J3GTRECQwBNrk4vQps2zijmjk1GPDt2EEzGvWxC4oovD+TBglDovYfXyGn3yRHRSi9FONivh
- OWqlU//HCVIuPcTi8ENgWQP3Z+Runhl9HfzfUwoHX2K7ICbk=
-X-Gm-Gg: ASbGncvhY+02Kz8CdWvnDDyaWbUfbwU5+mqNWCcsjmFzcEjv+AJi2OUmXHA6C0e3B4J
- gNCbBKJiEKQYMzcy4W4y60W3ArOdxSEJlhvTd6BU=
-X-Google-Smtp-Source: AGHT+IEM2wH/yqMp/gy1io5pNcXVlM7F+r9lsSXTCd/FT6OrNf5D5Hder+e6G01JnMXisSdl19hr0KPfrWzqgfE2Quw=
-X-Received: by 2002:a05:6402:26cf:b0:5d4:55e:f99e with SMTP id
- 4fb4d7f45d1cf-5d972e1d7dfmr67001176a12.18.1736903840072; Tue, 14 Jan 2025
- 17:17:20 -0800 (PST)
+ AJvYcCXJu0dMLN4xuwaL7yvl/zFP6OIyxSkxKC7oyglWeI1VzzRqrDi5j6WgLKoeIjH8cN9CbQMXcjI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzXFoXvpMrIyYEFb1q0WFxnB4HeGaSFLK3gdghXRszz2kA65rhi
+ brvFCYgcp1ElT6m30KYsvfY2HK5kSEDBeGUrf1dc1epRE0Hmc9Y74vE0ITJJDGaQ9cS/40SsMNs
+ K503jpys94ktdDMwZ4IQIxkoyKj2crFPjEI8k
+X-Gm-Gg: ASbGncuMFOXOAzFMCqYi259nlYZTAZijZeU+S+0XNqXeGoHaDVxvps0RZYWqy+l8IyV
+ aTThLlWFjdMpZ6MTURkopLYv9piMxzf9Iz43CDkQ=
+X-Google-Smtp-Source: AGHT+IF8xAIhZgHIe2UzWJlAsEdxBPl3hxhDlEaNMBu7t2Rr+wUnz3XnzfEFBwQZqPVjnpegjQeVRA1zcCdUAdKzdg8=
+X-Received: by 2002:a17:907:7f08:b0:aab:9430:40e9 with SMTP id
+ a640c23a62f3a-ab2ab70a84emr2408391366b.32.1736903873047; Tue, 14 Jan 2025
+ 17:17:53 -0800 (PST)
 MIME-Version: 1.0
 References: <20250112034213.13153-1-semen.protsenko@linaro.org>
- <20250112034213.13153-3-semen.protsenko@linaro.org>
- <97107163-de68-45dc-9462-c4f7cae06e31@gmx.de>
-In-Reply-To: <97107163-de68-45dc-9462-c4f7cae06e31@gmx.de>
+ <20250112034213.13153-4-semen.protsenko@linaro.org>
+ <e865e678-3319-4b89-b2c9-28a2ddea46f1@gmx.de>
+In-Reply-To: <e865e678-3319-4b89-b2c9-28a2ddea46f1@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jan 2025 18:17:07 -0700
-X-Gm-Features: AbW1kvYSycPhOU3DblmAQfS78WUFCTXINYwm-CY44VBL-SzDq5AdwU9frZ7vigI
-Message-ID: <CAFLszTj4Ezr5yZ+-7aUmAimy3zi1N5Vqsi0aqgX11H2CYiM+9Q@mail.gmail.com>
-Subject: Re: [PATCH 2/3] bootstd: Probe bootmeth devices for bootmeths env var
+Date: Tue, 14 Jan 2025 18:17:41 -0700
+X-Gm-Features: AbW1kvZ_5BJil5Z_sjkL--4txv7WBn2ouugsrzCEz-_KQw0-mSjbkCtTiCsyGBo
+Message-ID: <CAFLszTgieQ0d=Y0q_jovuwH6mtXUKr-TzE7mwfvDw4_vbbVV9A@mail.gmail.com>
+Subject: Re: [PATCH 3/3] bootstd: Fix incorrect struct name in
+ bootmeth_setup_iter_order()
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Sam Protsenko <semen.protsenko@linaro.org>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -91,101 +92,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich, Sam,
+Hi Heinrich,
 
-On Mon, 13 Jan 2025 at 00:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Mon, 13 Jan 2025 at 00:49, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 1/12/25 04:42, Sam Protsenko wrote:
-> > Specifying efi_mgr in 'bootmeths' environment variable leads to NULL
-> > pointer dereference when 'bootflow scan' is executed, with call trace
-> > like this:
+> > There is no such thing as struct bootmeth, it's probably a typo. This
+> > issue doesn't affect the execution as it's a pointer, and pointer sizes
+> > are the same for all data types. But it can be confusing, so make it
+> > struct udevice, as it should be.
 > >
-> >      priv->fake_dev // NULL pointer dereference
-> >      .read_bootflow = efi_mgr_read_bootflow()
-> >      bootmeth_get_bootflow()
-> >      bootflow_check()
-> >      bootflow_scan_first()
-> >      do_bootflow_scan()
-> >      'bootflow scan -l'
-> >
-> > That happens because in case when 'bootmeths' env var is defined the
-> > bootmeth_efi_mgr driver is not probed, and the memory for its private
-> > data isn't allocated by .priv_auto. In case when 'bootmeths' env var is
-> > not defined, the std->bootmeth_count is 0, and the execution flow in
-> > bootmeth_setup_iter_order() takes "no ordering" path, which in turn runs
-> > uclass_get_device_by_seq() -> ... -> device_probe(), so issue isn't
-> > present there. But when 'bootmeths' is defined and contains efi_mgr, the
-> > std->bootmeth_count > 0, so bootmeth_setup_iter_order() follows the "we
-> > have an ordering" path, where devices are not probed. In other words:
-> >
-> >      'bootmeths' defined           'bootmeths' not defined
-> >      --------------------------------------------------------
-> >      priv == NULL                    priv != NULL
-> >           ^                                ^
-> >           |                        device_alloc_priv()
-> >       no probe                     device_of_to_plat()
-> >           ^                        device_probe()
-> >           |                        uclass_get_device_tail()
-> >      dev = order[i]                uclass_get_device_by_seq()
-> >           ^                                ^
-> >           | have an ordering               | no ordering
-> >           +----------------+---------------+
-> >                            |
-> >               bootmeth_setup_iter_order()
-> >               bootflow_scan_first()
-> >               do_bootflow_scan()
-> >
-> > Add an explicit device_probe() call in "we have an ordering" case to fix
-> > the issue.
-> >
-> > Fixes: c627cfc14c08 ("bootstd: Allow scanning for global bootmeths separately")
+> > Fixes: a950d31abe98 ("bootstd: Add the bootmeth uclass and helpers")
 > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > > ---
-> >   boot/bootmeth-uclass.c | 7 +++++++
-> >   1 file changed, 7 insertions(+)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
+> >   boot/bootmeth-uclass.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
 > >
 > > diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-> > index ff36da78d5a1..049389403191 100644
+> > index 049389403191..2496e8c1d8a8 100644
 > > --- a/boot/bootmeth-uclass.c
 > > +++ b/boot/bootmeth-uclass.c
-> > @@ -11,6 +11,7 @@
-> >   #include <bootmeth.h>
-> >   #include <bootstd.h>
-> >   #include <dm.h>
-> > +#include <dm/device-internal.h>
-> >   #include <env_internal.h>
-> >   #include <fs.h>
-> >   #include <malloc.h>
-> > @@ -146,6 +147,12 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
-> >                               struct bootmeth_uc_plat *ucp;
-> >                               bool is_global;
-> >
-> > +                             ret = device_probe(dev);
-> > +                             if (ret) {
-> > +                                     ret = log_msg_ret("probe", ret);
-> > +                                     goto err_order;
-> > +                             }
+> > @@ -139,7 +139,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
+> >                       goto err_order;
+> >               }
+> >               memcpy(order, std->bootmeth_order,
+> > -                    count * sizeof(struct bootmeth *));
+> > +                    count * sizeof(struct udevice *));
 >
-> This would mean that we fail boot if probing one of the boot devices
-> fails. Shouldn't we remove the device from the order instead?
-
-It is actually a bootmeth failing to probe which causes problems, not
-a bootdev. I think that is catastrophic enough that failing is fine,
-at least for now.
-
-Strictly speaking we should not probe the bootmeth until it is
-actually used. One way to do this is to probe it in
-bootflow_iter_set_dev(), or in its callers, where we already probe the
-bootdev.
-
-> > +
-> >                               ucp = dev_get_uclass_plat(dev);
-> >                               is_global = ucp->flags &
-> >                                       BOOTMETHF_GLOBAL;
+> I found this description of the field:
+> @bootmeth_order: List of bootmeth devices to use, in order, NULL-terminated
 >
+> As the list is NULL terminated, shouldn't we copy the NULL value, i.e.
+>
+>      (count + 1) * sizeof(struct udevice *)
+>
+> so that we can still identify the end of the list?
+>
+
+Unfortunately that comment is out of date. The bootmeth_count member
+holds the count now.
+
+And probably it would be better as an alist now that we have that.
+
+[..]
 
 Regards,
-Simon
+Simom
