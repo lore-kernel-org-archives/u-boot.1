@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F254E77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F575E77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:07:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8A528060C;
-	Wed, 15 Jan 2025 02:56:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 501518060C;
+	Wed, 15 Jan 2025 03:07:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="jo62Ecsb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Oe1D3Zyi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0C208060C; Wed, 15 Jan 2025 02:56:20 +0100 (CET)
-Received: from out203-205-221-209.mail.qq.com (out203-205-221-209.mail.qq.com
- [203.205.221.209])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B0D2780027; Wed, 15 Jan 2025 03:07:35 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA15180027
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:56:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C54980027
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:07:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1736906172; bh=WRstnnVrvgLQJ8v09DQsCSBAXp+Y174MVZmFAA6eDRg=;
- h=From:To:Cc:Subject:Date;
- b=jo62EcsbytIZvpbAaWhb03x5CIYAWPuP+131l8KlDIjtYtO9nc4mepBWtH3pgWLCw
- Yzn07MstO1RWfDV/TyidUiLMj4cU5TyxcK1YB3TMM7rLDxYbcYnUGMyXR6gDoFLd3t
- wDEnl/D28WsEOzk9pDpM/WHBOGeQH+LW7Hnnm894=
-Received: from ubuntu.localdomain ([218.104.140.83])
- by newxmesmtplogicsvrszgpuc5-0.qq.com (NewEsmtp) with SMTP
- id E0A80811; Wed, 15 Jan 2025 09:56:10 +0800
-X-QQ-mid: xmsmtpt1736906170tgva0w43j
-Message-ID: <tencent_CCE8303926957C427AAE06F9D91282458109@qq.com>
-X-QQ-XMAILINFO: MgBIhzogXqENcxknT8tX1n4Rv8vjrAQ5ZAe272yokKUz/atuil/M2XeZoAbekC
- noboOP/kyL+uaCtMjBrSesY8iAhkSjOAtAyu8xC19FH4xjZL4uM+6prOWsdvFQVWDvPE2rq6ZOeF
- NfvDpXu2pM9pyqjqLNcTN7bF0Iy7lZSm0j0p6NrU7Sx+lzRirXCP2yjdkNPPJzLL77OQ3wC64KKM
- l+5t40BfT5KSLJ1fQJRGkkQjnHONSRF7NBuJfKj9erlYbUdKONWOIJ7jdgDaHYafkU5XSEktgTsX
- 26lyBeQBUd/eSpsicqmK3XfBq0enmejLWSntTmp1Qn2AwCOmFKdCA+QBt1Qmv0LaFCz2b1LVS4ZY
- DSXQvrvxlRIO56Yf/vQkAIs/PqZMHc4TFZjqpa2g8nFzCYWH2OgC0UI+A85cy6h8wigAklVQRuPn
- Ek/ZJhlKgVq4ra6DF42AndDPuhhLI62xwUC/tudd98RxuDK1PaYPf9qa91ddrHwFQu0m/UcypnRN
- 5R+2B3D3xRPz5SrS81TVukwIAa6/YEpyieFG2Z/sy9eY1dLV7MW0DSEmGT7JTRMsbjjTYdajWbfx
- bBnusUAtxVrck71gJfdGEdgBJfqeCwlRGiOI2COErm+orQspiUK5YHinLfKdbhCG8CvqyLhGMU2S
- cQS8+Qzng7V3NhrmtsXMi69r/k6H4bVq7d5rOBiwRMO/GZA4G7ndO+74bBOa/dN+FepFMnQTInOM
- RaiH3bop6tfxqqrG9qiJygmWLMnEVHwFW6+7DAgWg/UK56oQbxzmNMs45GSsAGEgKGudDMVKjMz0
- PZSdIEsEZOl8Rr1MlSCLFrwkbw2UYeJ3scsVMQgMHoXvHkM1K++jw3ERquHI2Nd7puebGY8gic3V
- 8l1QIPWyXYu4ouc9QhiHNKleoIJCvjAquDG7gUoC4mq+SvAsNxG85Q6ZlTwoTAPw==
-X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
-From: 1425075683@qq.com
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7b6f19a6c04so547741185a.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 18:07:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1736906852; x=1737511652; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z3OT9JFfy1uwauEFT4hDe5DLXljGa6RYZeo1yeFRcWs=;
+ b=Oe1D3ZyiKa7iCC8bx/YLLFndtK64x0mV47blGLk/LGedSBCT0KLjUmBbGDShCxRzMh
+ JL8DAwdZnMaJxzjZUfGgI0IWvEaYjx/oJw5sWgSjv8rEmClYfU5w4vS0CibiQoZa4qeg
+ 0qIXKmvo9VI9mYRiBd6HnT9o+EcUDayHWzdvU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736906852; x=1737511652;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Z3OT9JFfy1uwauEFT4hDe5DLXljGa6RYZeo1yeFRcWs=;
+ b=PzZytGqHb0rHE5i6ZavjRzN6j74RG1EkL1uMNTL+IlUvouj0wkvLwq0LgmaB/Z2Q83
+ UPirllQsfa7FCaoxVfYwO8BlESDJQrBanZp2jxAaykfWyu8+bTcFUsEfgo4AWQByS7EX
+ C570jGhLIulb4omaI4O4oNx+NQhLsrHUAhdzruZyiE5rsXqXY/+M8QTVtgCvbsnzIcjD
+ s6wDmd9B2OfK5VxPEkSaivY3rRirUa56GVhKJ25X62JZdG0YX+g+qGIXOdnCZXyi0rFo
+ HM50zUcXxtNME79VE1V3u0zDfQmTeNTHu/Kr0MPRqScpcoKEzeGOLF0IY5cemxILk3TO
+ IsXA==
+X-Gm-Message-State: AOJu0Ywvx4zM/z8+WK60QfPiyBGnSYld2tSgUrPRHhAW3CgZxyQf2KTh
+ 8OExIYrU87HFg6ZYNbLSK05v1Of6PdErYTZy7xaOO/VxCVL445ZvU/1QymrXTV7EVARbcbJafYs
+ v
+X-Gm-Gg: ASbGncvGMhv8suWSmoO7CICUESdJIbded0e8Mt+Ssw8rcKCNSC5cnu5zxV81O+PdWKE
+ LqPnYuRUZVUPV/pSq8MlyOs/uR9cWC8BtSYMRpR0Xq48bNfp0aY+z4yJ/eXK0xQ+N/8GFPzSqcC
+ whahps91O+Ai9eyJ1Baz8E76adDMRKbLQsBhAS48M3qWnc/xinh8V1Ha2mIIic2W1qu7+ZHgJTf
+ 72fYmMQBPNAUu6Rddov7pk1OxG+wUndrmS5uoHsllOkiOxOa6EBS5HfHOuKhxuRzj4pIA+K12GC
+X-Google-Smtp-Source: AGHT+IFCpArSDVrUpSISWdxzjzp9ujHg6bdpHd5ixd0AWbyxhgcNF6AJDUU/vd7FXNRFItKi9gxH2A==
+X-Received: by 2002:a05:620a:5dd9:b0:7be:2a68:6d79 with SMTP id
+ af79cd13be357-7be2a686e05mr1934652385a.7.1736906851977; 
+ Tue, 14 Jan 2025 18:07:31 -0800 (PST)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.16.9])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7bce3238003sm675238485a.2.2025.01.14.18.07.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jan 2025 18:07:31 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Liya Huang <1425075683@qq.com>, Simon Glass <sjg@chromium.org>,
- =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm: Remove redundant loading of image copy start
- offset.Because the beginning is already computed
-Date: Wed, 15 Jan 2025 09:56:06 +0800
-X-OQ-MSGID: <20250115015606.9356-1-1425075683@qq.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Sjoerd Simons <sjoerd@collabora.com>
+Subject: [PATCH] configs/am62x_r5_usbdfu.config: More completely disable MMC
+Date: Tue, 14 Jan 2025 20:07:29 -0600
+Message-ID: <20250115020729.230536-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,29 +90,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Liya Huang <1425075683@qq.com>
+As this fragment turns off MMC in both SPL and full U-Boot, we can turn
+the whole symbol off rather than just the MMC driver.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Pali Rohár <pali@kernel.org>
-Signed-off-by: Liya Huang <1425075683@qq.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
+Cc: Sjoerd Simons <sjoerd@collabora.com>
+---
+ configs/am62x_r5_usbdfu.config | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
- arch/arm/lib/relocate.S | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/arch/arm/lib/relocate.S b/arch/arm/lib/relocate.S
-index 345e282e3e..bffadfecba 100644
---- a/arch/arm/lib/relocate.S
-+++ b/arch/arm/lib/relocate.S
-@@ -83,8 +83,6 @@ relocate_base:
- 	add	r1, r3			/* r1 <- Run &__image_copy_start */
- 	subs	r4, r0, r1		/* r4 <- Run to copy offset      */
- 	beq	relocate_done		/* skip relocation               */
--	ldr	r1, _image_copy_start_ofs
--	add	r1, r3			/* r1 <- Run &__image_copy_start */
- 	ldr	r2, _image_copy_end_ofs
- 	add	r2, r3			/* r2 <- Run &__image_copy_end   */
- copy_loop:
+diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.config
+index 772bb2ab935d..414e7ddfe244 100644
+--- a/configs/am62x_r5_usbdfu.config
++++ b/configs/am62x_r5_usbdfu.config
+@@ -23,6 +23,5 @@ CONFIG_SPL_DFU=y
+ # CONFIG_SPL_SPI is not set
+ # CONFIG_SPL_SYS_MALLOC is not set
+ # CONFIG_CMD_GPT is not set
+-# CONFIG_CMD_MMC is not set
+ # CONFIG_CMD_FAT is not set
+-# CONFIG_MMC_SDHCI is not set
++# CONFIG_MMC is not set
 -- 
-2.25.1
+2.43.0
 
