@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 469ACC02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93189C02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:19:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AED2E80214;
-	Wed, 15 Jan 2025 14:19:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 131EE80714;
+	Wed, 15 Jan 2025 14:19:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m/yr88Sz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JbX6OJqf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32A35806D4; Wed, 15 Jan 2025 14:19:37 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 6C03680703; Wed, 15 Jan 2025 14:19:41 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D43B780040
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:19:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62EE0806FB
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:19:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5d3f28881d6so9800258a12.1
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:19:34 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aaee0b309adso1091083066b.3
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:19:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947174; x=1737551974; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947179; x=1737551979; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=s4yBGBe0P/Iz0RYbFRdYCHPw/9gJFH6nuN+r4GLkfGI=;
- b=m/yr88SzhjRT3yp48A6QPRPXPDZ5hAt6TUIUf1ANLkRPkTKcxDkCN/7Ifkl7Ib1vaY
- x7JamhNh8+bBSxCqqH5ryESDleW/T/W49SLjsKMRfhx5EiG/XzmaI1v+B2PV9jKdmbE1
- UotPUitxgWWshlTDj5ldT+YcUqWtmRm9kmEYE=
+ bh=WZmxD4DQfT0uGotCd6Mblngf0y+91OJCRK5UmOMTbVw=;
+ b=JbX6OJqf/0dShIjKPySIbShInYauCzWMkz0Nxc7+N06T+Y7QwsZtzvB1z2nqwn1Dr0
+ DDELsmkk31RJYx7k1CzWUCNvoNOQMqlzb1TnzCuxquFN4g3/X/8PH7E0tSILBHwDvdqZ
+ BEQOQ6wT0lhOS+06HiP47diidYDyscpA/9OcM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947174; x=1737551974;
+ d=1e100.net; s=20230601; t=1736947179; x=1737551979;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=s4yBGBe0P/Iz0RYbFRdYCHPw/9gJFH6nuN+r4GLkfGI=;
- b=pqXrydY/DSenep2XJzxchdDykNhJvZ0M043i/rPC535K7vPptMFeiw/XshH8/6B/rW
- PQaGc5Bfb2cNrnnAvoBgue3F8UAIrPRgHBxH/Lz5JQjDqEQlB6qGJeyzLg8xJ0vqW13R
- 6wfhrRto7eI36FeYf5lXFadwcYYYR/BNgqvLAF+2WNwgH6e25zTgjLRm8db4th3iT+aE
- dZLwwe/tydgKCj72V3DOdYI0r6hXFTWw80eIjTursSl4GC90/c/rg7U3nSWe+BisZarW
- jfOeFaCLAlDqqRQHFgfCfhrSy4IiMNiv/Icl9zxW+o/UMrlOGyKGOKZCivJr4kVH9YmE
- bdNw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWRY85FSnOU4+Ht3KcqOlOrvCR/vb93OgQvh31G8Evpeigki4RLmNLv3Asujrv79coTl/rTdCE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyiyOJrlg1ErY/Hvorn+C6iCoZH+ji2JkFEVE96vG3GBfCvAyO+
- 7YOc9q4ahgs5ep4W/KH771rC9uh3E4ki4veFX6jhHBz+RYAj7VWS5rCZGxDLwe3F2Y39O1pRHh+
- crjkTobjjJtN0ONy/aslTov6wQreIpeEK63o6
-X-Gm-Gg: ASbGnct2fHDkQBiyxdvegE6FKcvyi0ecJbryLD09rI9n0IW8aQJ9QiFwxIhpAdKwk8D
- 9K1BLZ6kbpF2TW3aLfpvy11tXm8JkP2GF5Kr9Isg=
-X-Google-Smtp-Source: AGHT+IGr06IRJSwkHjSSs70zX2rXZjiwNxsli9/OydhCAdHyuUYFPB6P0YfmIENyLM3/D8pIYUQcTexPTKdcJRmyhic=
-X-Received: by 2002:a05:6402:2105:b0:5d0:81f5:a398 with SMTP id
- 4fb4d7f45d1cf-5d972e00056mr63196822a12.1.1736947174293; Wed, 15 Jan 2025
- 05:19:34 -0800 (PST)
+ bh=WZmxD4DQfT0uGotCd6Mblngf0y+91OJCRK5UmOMTbVw=;
+ b=WGgChcz0v9SLObvsdmFRYW+u68GvpSKo0/l9L5wPJ/f8rFaBDFe+D/vpN4oPq/zyNa
+ zd+huedWTiatyxlSwSAh+9EkpI3/p8+mghTnnYGmQ57PcAq95cSFXxhpR0Ng7T92iR0S
+ CaLI58/VubOfA7CYavvxL3H+8sbKBlaudcdFppyzIABgx6WJvyj/C48xvzuh+dcv4lIx
+ jjGG+IYVnWBDHZ8OA3V7tj252xTsQpTk0g+g9971pHy0zI+xQMDkHcjfkt0I2Ivi85Ub
+ VVtj+OEuJobp1N6rXaA7hsrCAfDVdr+z319cNx3y9DarMqxbuJsokGamOOJd0R39yW+c
+ BXHQ==
+X-Gm-Message-State: AOJu0YzurVLXyQL7j80wGasyjcPUtEPVWVME2v5hku9m/SDpzLpWtcet
+ Q+VbLaE1At9cAXzKweMk3FyJgXr/eAsEgIsKs3rHlsYLkNGrmrlbz3ZK1Se5RQfebrYYm0aagEZ
+ HZcwsh6Q3eYTTNUjz96m5iwZe9hgw8X8FbB08
+X-Gm-Gg: ASbGncuVZexgEC4Ps2qI3/vdgNVTrPOWBNPJTKt+3a3r8TrKkGUUd7apBWmr0Nw75gw
+ CEGdkKA/F8dGkqnp3Vu8KHBwBNEweqtxiC1I9Btk=
+X-Google-Smtp-Source: AGHT+IHM8f3HdkKXmmOJ1hX5TcNK1qFadLbp4Sg94Ig18A1h1JONw0pN4xuPm8gx2lt5776/1VoMcqFj5v926p7S6nE=
+X-Received: by 2002:a17:907:d1b:b0:aac:23f4:f971 with SMTP id
+ a640c23a62f3a-ab2ab70a173mr3045980166b.33.1736947178832; Wed, 15 Jan 2025
+ 05:19:38 -0800 (PST)
 MIME-Version: 1.0
-References: <tencent_9739C1044069984893BE3E6D3DB783BB6C08@qq.com>
- <3d51107a-4761-4de8-9bae-a462c2a8e890@cherry.de>
-In-Reply-To: <3d51107a-4761-4de8-9bae-a462c2a8e890@cherry.de>
+References: <20241220040120.3245610-1-sjg@chromium.org>
+ <20241220040120.3245610-4-sjg@chromium.org>
+ <a1572755-9853-4941-ac0f-3a30bce768a3@cherry.de>
+ <CAFLszTi0CToKb8zLC1tRXW0XabQTAEQeT3PUZbR9YRybr9R9DA@mail.gmail.com>
+ <c2c5dee2-a8a7-4a1d-bd62-208c39db3b15@cherry.de>
+In-Reply-To: <c2c5dee2-a8a7-4a1d-bd62-208c39db3b15@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Jan 2025 06:19:22 -0700
-X-Gm-Features: AbW1kvYDPBNhKWmpThfEyzCFDyjO5lor55qgnETVQ4ekj6nI3OulEo_HBXYkP8c
-Message-ID: <CAFLszThNpc-L_hOdqbKs_4Rr8ZLsRQniNVMj_Ae9tEtY8d=ZXg@mail.gmail.com>
-Subject: Re: [PATCH] linker_lists: Update the alignment using
- CONFIG_LINKER_LIST_ALIGN
+Date: Wed, 15 Jan 2025 06:19:26 -0700
+X-Gm-Features: AbW1kvYmD6qkp3bx6ciYBdJO94Q25AjC7A-i_nbV17F_EBKIzrRSZTvdiaWj1fY
+Message-ID: <CAFLszTjUgW0ffd-vh3VnHa5g7sKtoPbDGaDZ7JKtNCt=2n0r2g@mail.gmail.com>
+Subject: Re: [PATCH 3/5] pxe_utils: Allow the FDT to be missing
 To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: 1425075683@qq.com, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,48 +93,77 @@ X-Virus-Status: Clean
 
 Hi Quentin,
 
-On Wed, 15 Jan 2025 at 03:58, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Wed, 15 Jan 2025 at 04:59, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> Hi Liya,
+> Hi Simon,
 >
-> On 1/14/25 8:09 AM, 1425075683@qq.com wrote:
-> > [You don't often get email from 1425075683@qq.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> On 1/15/25 2:16 AM, Simon Glass wrote:
+> > Hi Quentin,
 > >
-> > From: Liya Huang <1425075683@qq.com>
+> > On Tue, 14 Jan 2025 at 08:13, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >> On 12/20/24 5:01 AM, Simon Glass wrote:
+> >>> The devicetree file may not be provided, so avoid a failure in that
+> >>> case.
+> >>>
+> >>
+> >> Can you provide a bit more information on when/why this shouldn't be a
+> >> failure? I assume likely x86? or Aarch64 with ACPI instead of OF?
 > >
-> > This patch updates the alignment of linker lists to use the
-> > CONFIG_LINKER_LIST_ALIGN macro instead of a hardcoded value.
-> > This ensures that the alignment is consistent with the configuration.
-> > Replace __attribute__((unused)) with __maybe_unused and
-> > __always_unused to eliminate the warning of checkpatch.pl.
+> > Yes, either of those, but also, even on platforms which use a
+> > devicetree, some don't have it in the extlinux file. For example rpi
+> > passes it through to U-Boot from its own closed-source firmware.
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> This... is odd. I don't see an earlier version of that patch and your
-> name/mail only returns two patches on the U-Boot mailing list. I believe
-> Reviewed-by needs to be publicly given on the ML as they are a proof of
-> review by the mentioned person and is usually a trust mark for
-> maintainers to merge code. Here it may have been added without Simon's
-> consent. Now imagine Simon is not answering for a few days/weeks, the
-> maintainer could still believe Simon went through a proper review and
-> merge that patch taking that into account while no review may actually
-> have been conducted. This is making me uncomfortable.
+> Ah yes, I had forgotten about platforms using one DTB and passing it
+> through stages, I believe Qualcomm does this as well?
 >
-> Same issue for
-> https://lore.kernel.org/u-boot/tencent_CCE8303926957C427AAE06F9D91282458109@qq.com/.
->
-> I'm not saying review wasn't done properly, but its acknowledgment
-> should be made public by the mentioned person instead of being put into
-> the v1.
->
-> Have I missed an earlier version or discussion maybe?
+> Could you please add what you just said to the commit log so that we
+> have an idea which scenario this intends to support (for future
+> reference if this introduces a regression or we want to do refactoring
+> in the future).
 
-I was wondering the same thing, actually.
+OK
 
-I don't see anything wrong with the code in this patch, though.
+>
+> I'm wondering if this isn't going to allow booting FDT systems without
+> an FDT at all, which really isn't great? Is there something we
+> could/should do to prevent that from happening (or at least notify the
+> user of such a scenario so it's easier to debug)?
 
-The docs are here:
-https://docs.u-boot.org/en/latest/develop/sending_patches.html
+It shouldn't make any difference to the current code. Passing a
+bootflow just allows the information to be recorded. The logic of
+whether to use the FDT is not changed by this patch.
+
+>
+> > Somewhat related: my opinion with extlinux (and EFI for that matter)
+> > is that we should be using FIT.
+> >
+>
+> FIT images are not really developer-friendly though :/ I've been asked
+> to ditch FIT images to allow easy replacement of customer Device
+> Trees/kernel images. Much easier to say "copy your file there, modify
+> extlinux.conf to point at the new filepath for the FDT" rather than "so
+> this is the ITS, change the path here, and there, don't forget to have
+> those binaries in the current path, use mkimage, then copy this itb file
+> there".
+
+Yes we need to keep that flow working, of course.
+
+Re FIT, well, we could write a tool. Would that help? If someone did
+that, what would it look like?
+
+I've been happy with FIT for a long time, but particularly recently
+due to all the workarounds and gymnastics people are doing to make
+single files work, e.g. figuring out which devicetree to use.
+
+There is 'u-boot-menu' which works on the running system.
+
+>
+> In any case, I don't believe we could remove non-FIT support, so here we
+> are :)
 
 Regards,
-Simon
+SImon
