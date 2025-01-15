@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98568E77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:49:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 408AAC02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 05:37:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C415B8060C;
-	Wed, 15 Jan 2025 03:48:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6B8368060C;
+	Wed, 15 Jan 2025 06:37:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hrazA4Oo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CXjE22+i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06BC38069A; Wed, 15 Jan 2025 03:48:59 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 8296D80657; Wed, 15 Jan 2025 06:37:19 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EA3F80214
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:48:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E91C580214
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 06:37:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ab34a170526so99353766b.0
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 18:48:56 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2166f1e589cso135539585ad.3
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 21:37:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736909336; x=1737514136; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=A9fkbu0u3umH4AqbthhsRqHK56UqZKmYjbUT10sk9i4=;
- b=hrazA4Oof6UPN9WfpDUl3WMtiantde/UXn1ZfzR/OuOmIZ+JeyJh0ZW3S2Benk9ipM
- dnvula7TKUzy0fmbrrnKm7TWYdYpapOxo3QNpTWeK8I94Wfe+XHrpFpUvwdC7g5M4EQC
- rKRzs2ZXuY3QyvRieQC/oL1srkfS2hwmnYYks=
+ d=gmail.com; s=20230601; t=1736919435; x=1737524235; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z0Z6+io0CwIdWrwkJNL+et/nskeSXXgrkNUmglTxlMw=;
+ b=CXjE22+iGbDXeo1lzMLY3XpNZIgtWmvhq40lVajvEqF9Iz9PzcB4usO4GYMtxZXOO4
+ RVUfIxFehRRY0ydKhHqMZhw0I6PMxbzTjrUCKDCOwTTTYSocJOqGUD65+LjUV0Iqa2DN
+ 18Ku7E+4nnrCluwK6C158GS7L2OyvmbeocmtMc0eXpKFS/edP70h9W4+Lhv5c3+dYQA6
+ oGVmq30MgW0Qbb1X70aJwQvBY0j4DtMASOKDNzUu24XsJJAieP365gIubaxqhvWGxniD
+ O3hNJkSvQg4N3bU5Jxvzv6tRjc7ogz4Zz8FfNUlCBIhTzLegv1GZSVAFKRKtqF8QGtJe
+ 1KFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736909336; x=1737514136;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1736919435; x=1737524235;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=A9fkbu0u3umH4AqbthhsRqHK56UqZKmYjbUT10sk9i4=;
- b=KJH+6B2VmHcL9Bcn8lrIdEOD/qVZ/ZXOdbFTM51ca2vgsz+/h/J2S7N9/KeB/4Suk8
- 3XLatih1K4osBOabXidwhKrLZiMSI3Wg9Y0ze+zRaOiHWMW+vi1uh7j1EHii148jw2mH
- FbXA/vD6a1HKaFLnvPUzB7yAzvV4vhcea9DQshKoePG9njMX0Pxq58rCr7y7/qMNciAL
- GY8i60sisCP3kt0tNZ6JSfIGwPu0yUatD1XWzMXLzYrHNmRcxqPGy2juRDxmaH3hMGx7
- lEMKcIkm2X3MVfmlqHKruJtcjWjZW4FBBcTsHQ2Hcqo6KaQ/a42u7JNgHSw44O05ve1f
- x8QA==
-X-Gm-Message-State: AOJu0YyoXs8xlvPkFIVu+QwejCsRKe5P7+9pnj5yIEPp0q25dV5QHY+4
- Ow3JS/DwXZIbpgEyBFAUkNQKrv7qFZJJpYKlUr6ir7iOGIXX2V8fZOkB3eNFvQ3bIlu+wacZ+zp
- DNAz48vMKdGCtVJx5fybpQxW2Yghkrza5tNTL
-X-Gm-Gg: ASbGncvw7PfZD8vojUVhneeYCFdC9MJFPOVrmI1bzPbkvpcv9ZbSKnNpJWQOsV17L9Q
- H8uDQp4DP7kkl/uUWeiUWQLaTDp5VK2J2Yk/Y0M0=
-X-Google-Smtp-Source: AGHT+IGKgB0YSNx03KaxcsV7RB8YBxSQxO9zvyB8IUAYzGDlJiuCGmsmm+Vos5xCQ5xIt+lWD5mXzXWL6KURzLtVa6s=
-X-Received: by 2002:a17:907:9308:b0:ab3:4b0c:ea44 with SMTP id
- a640c23a62f3a-ab34b0cecc1mr135935566b.9.1736909335540; Tue, 14 Jan 2025
- 18:48:55 -0800 (PST)
+ bh=Z0Z6+io0CwIdWrwkJNL+et/nskeSXXgrkNUmglTxlMw=;
+ b=exixji2Bf5iKnkV/7/JJH/zCzdc1I9PZ79gKO0usdDkTrJkXkTWxyIP6O0TKMVSMEn
+ TPr/sx9lHf+KIQkgmuM1vCLo1PSNGUv7yoB3irf9zng59En+uMhosCTOC6hR2mBhLLBb
+ 28d5jqa700KlC2lsf3zk/mIbV+wy6CWdU4hIgCaJVELKBMNy/I/OccbvEzlf0Aet/6vv
+ vt4OBcVfOjFe9FyBxRAk5ksE9JWggym4WC3RT3C6Dyhv1iZlyi+PfEP4d1qPdDsGde+K
+ Y70vctPQnLG5qgb3oSCogVEmYOJvUC7qhpdmLz4vnepj3MzlsPVtoeCFr6ceS/f/2zHm
+ WJ6w==
+X-Gm-Message-State: AOJu0YzMxZMwD9NK9x+SkrT1+Dqqhtx8sQn0do6H9jfirpIcYZzluP7o
+ 5uUnSsIs6ZFuaO9DfKZBkYlOmnJKA3je9Q5U4BX067/3tqasFnPW
+X-Gm-Gg: ASbGncsm+T+0/0AL+FwL0CYLK09zl21FuLZdkVccp/+n3IsI4hDwm2FqjmqXL4F0Q64
+ lre5SSb5kAIZGYK5e+SbCakOsHJyXMaXrkgk4oJSOMXkRfGLP9qOHt5+R/xU5RNYL9XoHILOkQ6
+ O2KGJdp6hj8/VL+SaTcjuhZq3Z5JwZ0MLSMgNyPMAUupZkQvD8SjHzRa7vyP5CVTUNzNQ0TqTH2
+ p/lO+Qg271gXzoUzR9OgklR4zeeAiiWSgS982leZlfZwPgb0xG/ZpHuat4=
+X-Google-Smtp-Source: AGHT+IHxLXW/1RQLVgbNbYn6IPAGWeaK+8Ch/6D01U/EFTcjkVI5wZ+w2ezwcW1YssCDYT8s5ra2GQ==
+X-Received: by 2002:a05:6a00:170a:b0:725:d64c:f113 with SMTP id
+ d2e1a72fcca58-72d21f18064mr42426913b3a.3.1736919435080; 
+ Tue, 14 Jan 2025 21:37:15 -0800 (PST)
+Received: from CNSZTL-DEB.lan ([2408:8362:245d:4738:bc4b:53ff:fead:2725])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-72d4056a5f3sm8669003b3a.58.2025.01.14.21.37.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Jan 2025 21:37:14 -0800 (PST)
+From: Tianling Shen <cnsztl@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] rockchip: nanopi-r3s-rk3566: disable unneeded CONFIG_NVME_PCI
+Date: Wed, 15 Jan 2025 13:37:05 +0800
+Message-ID: <20250115053705.911296-1-cnsztl@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-References: <20250109123010.4005298-1-sjg@chromium.org>
- <20250109123010.4005298-2-sjg@chromium.org>
- <20250114012226.GG3476@bill-the-cat>
- <CAFLszTj9zAE_KniCZ2xHGHt1fK7jhTBHzfkdSif6XNuzKtWOTA@mail.gmail.com>
- <20250114165801.GJ3476@bill-the-cat> <20250114173343.GO3476@bill-the-cat>
- <CAFLszTi1epQ+6AGMK_pkjnTQmDU8--xS-NXfk5iM=q_wi6xyWw@mail.gmail.com>
- <20250115014121.GT3476@bill-the-cat>
-In-Reply-To: <20250115014121.GT3476@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jan 2025 19:48:43 -0700
-X-Gm-Features: AbW1kvZMuNAFsyDz1F7f4ypx4U85_W3IT1kh2oZ4FlOBzg7gtI6zi96j-T1EVhQ
-Message-ID: <CAFLszTjW-cpZn5haw-+4fmaFe==_fT+k4V5oBckHr_YbVaBeiQ@mail.gmail.com>
-Subject: Re: [PATCH 01/15] vbe: Split out some VBE code into a common file
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,165 +93,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This board does not have any NVMe slot, so disable unneeded
+CONFIG_NVME_PCI option.
 
-On Tue, 14 Jan 2025 at 18:41, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Jan 14, 2025 at 06:18:26PM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 14 Jan 2025 at 10:33, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Jan 14, 2025 at 10:58:01AM -0600, Tom Rini wrote:
-> > > > On Tue, Jan 14, 2025 at 05:58:04AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 13 Jan 2025 at 18:22, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Jan 09, 2025 at 05:29:56AM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > Loading a FIT is useful for other VBE methods, such as ABrec,
-so start
-> > > > > > > a new common file. Add functions for reading the version and
-nvdata.
-> > > > > > > Also add a function to get the block device.
-> > > > > >
-> > > > > > This is not a good commit message when you're also introducing
-> > > > > > functional changes (blk_dread -> blk_read).
-> > > > >
-> > > > > Yes, I did not actually notice this size change at all, as
-mentioned,
-> > > > > as I only built for a few boards (firefly rk3399/rk3288 and a few
-> > > > > sandbox ones). The blk_dread() function is the old API for reading
-> > > >
-> > > > You have much faster build machines available than I do, it would be
-> > > > good to run a world build before/after (it might take an hour on
-> > > > alexandra) before posting these big series.
-> >
-> > OK. I used to do this, but with CI sometimes grabbing the machines it
-> > ends up with a huge load and sometimes runs out of memory. I suppose I
-> > can stop the runner before doing it and remember to restart it
-> > afterwards. Or perhaps Alex has enough memory per thread? (96GB).
->
-> Personally, I would make the script that does the world build for size
-> test turn off the runner before starting and turn it back on when done
-> otherwise build time will suffer greatly and you would have been better
-> served doing it all on a slower class of machine.
->
-> >
-> > > >
-> > > > > from a block. It didn't occur to me that blk_dread() would bypass
-the
-> > > > > cache.
-> > > >
-> > > > Yes, how is that happening? That's what doesn't make sense.
-> >
-> > OK, I see. It is actually one level deeper than I thought.
-> >
-> > PARTITIONS is not enabled, for example on phycore_am62x_r5_usbdfu
-> > which means that blk_get_dev() returns NULL
-> >
-> > So long as all the code is in one module, blk_get_dev() returning NULL
-> > causes the calls to vbe_simple_read_state() and simple_read_nvdata()
-> > to be dropped, so their code is dropped too, so there is no
-> > blk_read()/blk_dread() call. It is optimised away. It just happens to
-> > be the only call in U-Boot
->
-> Ah, that is all also true, thanks.
->
-> > > > > > Further, this functional
-> > > > > > change seems to introduce some other code being pulled in very
-> > > > > > unexpectedly, and that needs to be explained. For example,
-> > > > > > phycore_am62x_r5_usbdfu is another case and that has
-> > > > > > CONFIG_BLOCK_CACHE=y but CONFIG_SPL_BLOCK_CACHE=n, and yet the
-size
-> > > > > > growth is in full U-Boot.
-> > > > >
-> > > > > This board currently uses blk_dread(), but not blk_read(), so the
-> > > > > addition of a blk_read() call in non-SPL causes the BLK cache to
-be
-> > > > > pulled in.
-> > > >
-> > > > But, how? I mean, this sounds like some underlying bug that needs
-to be
-> > > > fixed. The platform sets CONFIG_BLK=y and CONFIG_BLOCK_CACHE=y and
-> > > > drivers/block/blk-uclass.c has:
-> > > > ulong blk_dread(struct blk_desc *desc, lbaint_t start, lbaint_t
-blkcnt,
-> > > >                 void *buffer)
-> > > > {
-> > > >         return blk_read(desc->bdev, start, blkcnt, buffer);
-> > > > }
-> > > >
-> > > > Or perhaps the answer / problem here is that I need to track down
-what's
-> > > > going wrong here instead of asking you to track this down.
-> > >
-> > > So, digging in to this, what's going on is that the platforms I've
-noted
-> > > here (and a few others) don't actually enable any block devices.
-That's
-> > > why, today, with VBE on still, they discard all of the code still.
-Your
-> > > rework means that while there's still no block devices, we're now
-> > > including the code. What to do? Both of:
-> > > - These platforms *should* disable the assorted block device related
-> > >   library options they have enabled if / when possible (it might not
-be
-> > >   a neat and easy un-tangle).
-> >
-> > As above, the issue seems to be PARTITIONS
->
-> Yes, I think we both agree there's a number of useless functionality
-> enabled on these handful of platforms. PARTITIONS explains how it gets
-> optimized away and all of the useless block-related things like MMC
-> core should also be dropped.
->
-> > > - VBE needs to handle the case where there's not a block device
-enabled
-> > >   and not fail the build. Part of this requires the Kconfig rework I
-> > >   linked to earlier (so that we can have BLK off) to be complete, but
-> > >   having the VBE code check for BLK being enabled either in Makefile
-or
-> > >   C code should be the same regardless.
-> >
-> > I thought you NAK'd my patch to drop the 'depends on BLK' for bootstd?
->
-> I know I NAK'd
->
-https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-2-sjg@chromium.org/
-> as that should be instead done with
-> https://patchwork.ozlabs.org/project/uboot/list/?series=440336 instead.
->
-> With that series then yes, you should be able to have BOOTSTD not depend
-> on BLK. But in a practical sense I worry that your changes in this
-> series will break with BLK=n. My point above is to please make sure it
-> still works in that case.
->
-> > From what I can tell EFI_LOADER doesn't do any block access unless
-> > PARTITIONS is enabled. I don't want that for VBE because the VBE data
-> > is not actually in a partition (although perhaps it could be in
-> > future).
->
-> In a practical sense EFI_LOADER depends on BLK and I've fixed the
-> dependency with my series and talked with Ilias and Heinrich about it.
-> Making EFI_LOADER buildable without BLK is a mechanical effort, but
-> making it usefully functional still might require a bit more work and
-> they'll cross that bridge when they come to it.
->
-> > Anyway, from what I can tell, the code-size increase is explainable
-> > and perhaps we should just accept it.
->
-> Other than the double buffer one, yes, I suppose it's not unreasonable
-> to ask me to fixup the oddball platforms with extraneous PARTITIONS and
-> other block type things enabled. Still need to get back to the buffer
-> one as 200 bytes isn't normal for re-organizing things such that the
-> compiler can't decide to inline something.
+Fixes: bf4a33e725ae ("board: rockchip: add FriendlyElec NanoPi R3S")
+Signed-off-by: Tianling Shen <cnsztl@gmail.com>
+---
+ configs/nanopi-r3s-rk3566_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-What is the double buffer one?
+diff --git a/configs/nanopi-r3s-rk3566_defconfig b/configs/nanopi-r3s-rk3566_defconfig
+index 870613f690af..16e09753a72d 100644
+--- a/configs/nanopi-r3s-rk3566_defconfig
++++ b/configs/nanopi-r3s-rk3566_defconfig
+@@ -54,7 +54,6 @@ CONFIG_PHY_REALTEK=y
+ CONFIG_DWC_ETH_QOS=y
+ CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+ CONFIG_RTL8169=y
+-CONFIG_NVME_PCI=y
+ CONFIG_PCIE_DW_ROCKCHIP=y
+ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+-- 
+2.47.1
 
-I have a v2 of this series which splits the first patch up a bit more. But
-the end result is the same.
-
-Regards,
-Simon
