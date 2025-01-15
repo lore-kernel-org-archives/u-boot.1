@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF9A6C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 09:35:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A5B3C02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 09:39:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 378F080657;
-	Wed, 15 Jan 2025 10:35:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7935E80040;
+	Wed, 15 Jan 2025 10:39:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jG+if1XH";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="RgXrYAbc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B53880214; Wed, 15 Jan 2025 10:35:33 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 295B880214; Wed, 15 Jan 2025 10:39:07 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86435806D4
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 10:35:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA26A80027
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 10:39:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e3978c00a5aso10139035276.1
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 01:35:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736933729; x=1737538529; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W/ae25WIGqEOlh3H+5WnxJKJkAswrqzCm+mW9rJykOw=;
- b=jG+if1XHwTbNcdi7aBT9owdUroAtJJ9vQc/xnNUYUfgPo9uGWAWJQT3WXy+MtJB5mA
- vdWMD5hfjV3luL/ZcMLiEUr3tJcRVEA4XAMQS3yl3Qk1uI6icS4UiBfRY7yGflbiOVdz
- AL7fvy59PDT2p7MvpZplOYa8lkUgXIjr1wCO8igSjzIXZ821EPc/iU0Wcbl2fbZucGP3
- TP6Dr79mZ49WNkaXmx3PX/ge8yCKs9lXidYzbiLHqIRqRXX/AQSUzp2/+qDjAsJkyyun
- Zc1Rp1nemAY5upAYxwRWe6Dt3+HkcvO92HzZAPzIHp+a9sPDKZpg0V5gQ8MnR5b4hK22
- E4Ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736933729; x=1737538529;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=W/ae25WIGqEOlh3H+5WnxJKJkAswrqzCm+mW9rJykOw=;
- b=iV7jUTQ3RrtcJwyVWWYpvu2oJVEB4i2hujwy8mK6bawiJLyJLnY340WCh7/HQnFX/J
- 5ITJTSa/5UqE41YPFWlnlOJQtrtRpuNKV5eFQuEMrlinTATNyaKeImuY+Wzvwvtd+hQ+
- 93EdBOo3clu2LaaFSiMtBFOYZeLjsMG2EUFaJ+Yk0V2xoAVWywJ2KAj7zNLwxad1xaBB
- E8006wa1sNgj8NiVgZuTejqaCFOf2j+P4/4wFvHhVTCZ/ejLscrg1ORAMrlQfnYdrFQo
- tFI+spDry3HdO7AsVdfM2UnBYgHdJZAoleZjFunfoCe5n+DNfpXgwfe8wesayuLhQfWW
- jdCg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNkvdA2sYl10nt/xCcgqKBoIjsL0A6a+0PntXmf57Ct+xyG1OEaJaJUfry7dYIoq6/DXT4G68=@lists.denx.de
-X-Gm-Message-State: AOJu0YyVSZ7Y+Tt5DDyFNzWUO2nDbCoCSuEgb55IYbZNclr0sU1O2z8X
- 2TjFhLypzSn9JKLjlWIn9RFKMbtCXfw/I/+xDQNY49bJdfuvTq2cOVzc0y649/gqRFux3fpLcMv
- RU7el6xG4971wtJzgcJWIbaTOzsZCAhacAAxuIQ==
-X-Gm-Gg: ASbGncsvMX62hBreyE8M1cSo+FGOIAv3d+krfIy9vcNkZkSB0+1UYMnPahzxfy2xL25
- 5LizNvqfTGcwl2JFq8xnAhFq4QtHhXinawxLTSw==
-X-Google-Smtp-Source: AGHT+IHuRDR3AusEW1InM4oBEPXFnPBFAiraKPnl7KFGuVIRAFYVVVHmGCfDdRIXdx/r07gHGzYmO/zRmOd0EuF98sI=
-X-Received: by 2002:a05:690c:74c3:b0:6f5:241f:2725 with SMTP id
- 00721157ae682-6f53121d675mr232617007b3.18.1736933729337; Wed, 15 Jan 2025
- 01:35:29 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=3110841290=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50F3w7eN007100;
+ Wed, 15 Jan 2025 10:39:00 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ LSVrs6qM+IKY0aB7vbMLMhV6qq7CH6U/3k4F/PM0Y28=; b=RgXrYAbciOahIsVz
+ Y56hYoVahkBrgVxk46PsGrHLnoN40aSzjxVg/+78/2Y7YALtKyoYYUZggAOu9lP3
+ qsY59U3/oNmky17zdJMt75sBsoWFxNtdZzWRwWm54gPwBz8VBgv0CXaNLSV4RcN4
+ 4FZgNUUPbe21T1nsD7bO1nScCDaw7HyIkcg7J+RslZqyikBBmVNmKSNnHaPaasWu
+ jXDYbiDAa5YzcTtT3GVjN6hN0xVwvhxbJFGlKTa9HRx6ZQNsiUr7G13yT73GseRA
+ RbTS2B7yZhOYQ90w3iPOJ/tk9nb5m1XYb7+kfu13mtsAjMRfP+LvY4g4RiksURag
+ Et8bPA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4465jns801-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 15 Jan 2025 10:39:00 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 85C8740044;
+ Wed, 15 Jan 2025 10:37:51 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6C4BB246C80;
+ Wed, 15 Jan 2025 10:37:19 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 15 Jan
+ 2025 10:37:18 +0100
+Message-ID: <a0a4a9c1-a0b2-4ad7-90e6-95c34cf89e79@foss.st.com>
+Date: Wed, 15 Jan 2025 10:37:18 +0100
 MIME-Version: 1.0
-References: <20250114102953.64381-1-heinrich.schuchardt@canonical.com>
- <20250114102953.64381-5-heinrich.schuchardt@canonical.com>
- <CAC_iWjJdT_pn89aq3m1RaZesQSiKRGEqz4dVhoN6ntz4=2xqPg@mail.gmail.com>
- <0b2d844f-3719-4b9e-a3b2-28c6cfe33ebe@canonical.com>
-In-Reply-To: <0b2d844f-3719-4b9e-a3b2-28c6cfe33ebe@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 15 Jan 2025 11:34:53 +0200
-X-Gm-Features: AbW1kvYyKg33iewTWfGvk3-c4cQ3_5O-5BlWo3C8wbx5HjZyhAU9UwUTzKq9BQE
-Message-ID: <CAC_iWj+OR+-WdED-o=-W02NhVPvVWOoQe9mRQou2U7pjGRB6vA@mail.gmail.com>
-Subject: Re: [PATCH 4/4] efi_loader: use include in ARM EFI linker script
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Simon Glass <sjg@chromium.org>, Jonathan Humphreys <j-humphreys@ti.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Prasad Kummari <prasad.kummari@amd.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 03/10] usb: dwc3-generic: Reorder include
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Jan Kiszka <jan.kiszka@siemens.com>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250114144528.1612168-1-patrice.chotard@foss.st.com>
+ <20250114144528.1612168-4-patrice.chotard@foss.st.com>
+ <912f42f2-9358-4295-8382-8a5aa82c7804@denx.de>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <912f42f2-9358-4295-8382-8a5aa82c7804@denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-15_03,2025-01-15_02,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,96 +94,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 15 Jan 2025 at 10:53, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 15.01.25 09:06, Ilias Apalodimas wrote:
-> > Hi Heinrich
-> >
-> >
-> > On Tue, 14 Jan 2025 at 12:30, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> Use the same include as arm64 for the linker script.
-> >>
-> >> Adjust the 32-bit ARM PE-COFF header accordingly and harmonize it with the
-> >> 64-bit ARM header.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   arch/arm/lib/crt0_arm_efi.S  | 37 ++++++++++---------
-> >>   arch/arm/lib/elf_arm_efi.lds | 71 +-----------------------------------
-> >>   2 files changed, 20 insertions(+), 88 deletions(-)
-> >>
-> >> diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
-> >> index b5dfd4e3819..590fcf515da 100644
-> >> --- a/arch/arm/lib/crt0_arm_efi.S
-> >> +++ b/arch/arm/lib/crt0_arm_efi.S
-> >> @@ -14,11 +14,11 @@
-> >>          /*
-> >>           * Magic "MZ" signature for PE/COFF
-> >>           */
-> >> -       .globl  image_base
-> >> -image_base:
-> >> +       .globl  ImageBase
-> >> +ImageBase:
-> >>          .short  IMAGE_DOS_SIGNATURE             /* 'MZ' */
-> >>          .skip   58                              /* 'MZ' + pad + offset == 64 */
-> >> -       .long   pe_header - image_base          /* Offset to the PE header */
-> >> +       .long   pe_header - ImageBase           /* Offset to the PE header */
-> >>   pe_header:
-> >>          .long   IMAGE_NT_SIGNATURE              /* 'PE' */
-> >>   coff_header:
-> >> @@ -38,16 +38,16 @@ optional_header:
-> >>          .short  IMAGE_NT_OPTIONAL_HDR32_MAGIC   /* PE32 format */
-> >>          .byte   0x02                            /* MajorLinkerVersion */
-> >>          .byte   0x14                            /* MinorLinkerVersion */
-> >> -       .long   _edata - _start                 /* SizeOfCode */
-> >> +       .long   _etext - _start                 /* SizeOfCode */
-> >
-> > Was that an error all along? Or the boundaries changed by using the
-> > include file?
->
-> According to https://learn.microsoft.com/en-us/windows/win32/debug/pe-format
->
-> SizeOfCode:
-> "The size of the code (text) section, or the sum of all code sections if
-> there are multiple sections."
->
-> We only have one code section.
->
-> Looking at EDK2's Shell.efi SizeOfCode equals the VirtualSize of the
-> .text section. It does not include the .data section.
->
 
-Hmm that's interesting. gnu-efi includes .data AFAICT.
-Looking at the pe/coff spec there's SizeOfCode and
-SizeOfInitializedData (for .data) and SizeOfUninitializedData (for
-.bss).
-But in both gnu-efi and U-Boot we define those two as 0 though. So I
-think we should either keep SizeOfData as is, or define it as you
-propose and also define SizeOfInitializedData and
-SizeOfUninitializedData correctly -- and I don't know if the latter
-will have any implication on loaders.
 
-Cheers
-/Ilias
-> Best regards
->
-> Heinrich
->
-> >
-> >>          .long   0                               /* SizeOfInitializedData */
-> >>          .long   0                               /* SizeOfUninitializedData */
-> >> -       .long   _start - image_base             /* AddressOfEntryPoint */
-> >> -       .long   _start - image_base             /* BaseOfCode */
-> >> +       .long   _start - ImageBase              /* AddressOfEntryPoint */
-> >> +       .long   _start - ImageBase              /* BaseOfCode */
-> >>          .long   0                               /* BaseOfData */
-> > [...]
-> >
-> > Other than that it looks ok
-> >
-> > Thanks for cleaning this up!
-> > /Ilias
->
+On 1/14/25 15:51, Marek Vasut wrote:
+> On 1/14/25 3:45 PM, Patrice Chotard wrote:
+>> Reorder include following rules available here :
+>> https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Marek Vasut <marex@denx.de>
+>> ---
+>>
+>>   drivers/usb/dwc3/dwc3-generic.c | 21 ++++++++++-----------
+>>   1 file changed, 10 insertions(+), 11 deletions(-)
+>>
+>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+>> index 2ab41cbae45..cb96e1f344f 100644
+>> --- a/drivers/usb/dwc3/dwc3-generic.c
+>> +++ b/drivers/usb/dwc3/dwc3-generic.c
+>> @@ -7,29 +7,28 @@
+>>    * Based on dwc3-omap.c.
+>>    */
+>>   +#include <clk.h>
+>>   #include <cpu_func.h>
+>> -#include <log.h>
+>>   #include <dm.h>
+>> -#include <dm/device-internal.h>
+>> -#include <dm/lists.h>
+>>   #include <dwc3-uboot.h>
+>>   #include <generic-phy.h>
+>> +#include <log.h>
+>> +#include <malloc.h>
+>> +#include <reset.h>
+>> +#include <usb.h>
+>> +#include <asm/gpio.h>
+>> +#include <dm/device-internal.h>
+>> +#include <dm/lists.h>
+>>   #include <linux/bitops.h>
+>>   #include <linux/delay.h>
+>>   #include <linux/printk.h>
+>>   #include <linux/usb/ch9.h>
+>>   #include <linux/usb/gadget.h>
+>> -#include <malloc.h>
+>>   #include <power/regulator.h>
+>> -#include <usb.h>
+>> -#include "core.h"
+>> -#include "gadget.h"
+>> -#include <reset.h>
+>> -#include <clk.h>
+>>   #include <usb/xhci.h>
+>> -#include <asm/gpio.h>
+> Can you remove some of them too ?
+Hi Marek
+
+Effectively, some seems useless, i will fix this in v2
+
+Thanks
+Patrice
