@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4DB4C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 141ABC02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:19:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECB57800C2;
-	Wed, 15 Jan 2025 14:09:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 50CEC800C2;
+	Wed, 15 Jan 2025 14:19:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tvscjRQk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D+pQ+bCS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F7FA80214; Wed, 15 Jan 2025 14:09:28 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CC27480214; Wed, 15 Jan 2025 14:19:22 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6749680040
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:09:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A737F80040
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:19:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=3110841290=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50FAcavA014666;
- Wed, 15 Jan 2025 14:09:21 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- p6l2VJzcvD/YkZ3iEEOu/34LQtXHhFKnIgghrRQhS0s=; b=tvscjRQkSUq74ZG+
- 5vtDZ2THjJJXvbqTbJHshiGxXBlXdsgpaBirUW208rdCFyWZ9Uv0AzOEIDIo8fw2
- JWkysb4vLHbrJn9jYc0fXwIhFTsh4K5OXQXABdwXQaAyCpykkKX3vB/QGBZKL3KX
- jm83UvQTAF5QoDBBxmjWjCYbfTrE3W8rCRCpm1bP7GZCtYCByBHBFJbVgE5TVrW8
- kIxO5wf3uGHk2o5SnPgyztQz5ArSMPo7Q0glsL9NnPwjO2fMGl/11Og2ZGi/5aJw
- 4uz1axDH6nGz2zhECJL+lEOV0bchulhdHn23V2olXp66vyeeZgwm301CHqZNOGC0
- JekIPw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4466tjswr3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 15 Jan 2025 14:09:21 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 08B854004A;
- Wed, 15 Jan 2025 14:08:17 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 80FC224FBFA;
- Wed, 15 Jan 2025 14:07:44 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 15 Jan
- 2025 14:07:43 +0100
-Message-ID: <cd370701-ffe6-4840-b5d9-63d8aaeb4fc3@foss.st.com>
-Date: Wed, 15 Jan 2025 14:07:43 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-aaf8f0ea963so1302954466b.3
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:19:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1736947160; x=1737551960; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1CfR6AXHCy3d5vS0BkAdeJu2DIgMTKlQZF0FYsK7QL0=;
+ b=D+pQ+bCS5krNkdMz5kbZhcV+QtHljwUntzyo6npke6uGhgCRqW4uOMZTOKURSMmPT+
+ HQ+w3vIj0tyNshr22b6MIwsBA2qztmCjGA5OCbs9P/nzMYuq2O78L6CNwikVyQBRrrkj
+ UsjUJUYH9QCvDKEvCKPh5gZiZrtg5xiQiDMwY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736947160; x=1737551960;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1CfR6AXHCy3d5vS0BkAdeJu2DIgMTKlQZF0FYsK7QL0=;
+ b=k2QPK4iQ+7RfivQSgdSRjO0h/pfhRMqZ6YUOR6GiCuqPqmh9n3BDDIfAk+TWyt8Fzs
+ Cv05ZRG8fray7JMF1O0Szqu6VQhfMh4didniG+Knxa4uIYjSZiLKgdnvVoPBFBdz3Awx
+ YCzx5FlEmvdBC1yw77xQ8SQBnfUwiyyuyRN3dBbjmP+EZuxZk2zaRf0su4Ai2XKtW+lj
+ DS2tF/okzKUzOC77oDXO+8Oq606BaBaAhoHeX3ic7mEdHTQ6loEzIBQRFFNK+5gSGWrf
+ 689DFjN9uzQ5JTJxi+xzLyQadLDMQxs7yW2404r2o/6jWpjmnAotLCJAReFT8Tpv97p1
+ tw4Q==
+X-Gm-Message-State: AOJu0YxrYm2jg09D7ZbPzvFKC92MXcWUtWAlC6fSPEEsxEd6uYBmro7H
+ c1A1WXhbvDT04vJsdq3bYXBCxJKCmgFNPSXLje7V34J/0fJGwvPUXBVLxp3hJgODddDSer2N52C
+ 8dzXwF35ZSy1vlhlnujfeeFhwUPJltYvQihBS
+X-Gm-Gg: ASbGncutgMWoMmwEUuYGWBL+TbnXvRImY41ICiBErlXd8jw3H2/vOdYNwZH8vjE6RT8
+ A2NyBBN5evFa09woJ8fo1bbd5aSArtP8T9KzBkdg=
+X-Google-Smtp-Source: AGHT+IFztnruuaQcAPf/zkAjzwAe8kb6c5fa/MVvWFY1l9jMF/Jyc3Hhm85aV+8iu2BiqOuE1vAIOcpN21g3I7KGKWI=
+X-Received: by 2002:a17:907:86ac:b0:ab3:8b1:12aa with SMTP id
+ a640c23a62f3a-ab308b117f8mr1300234466b.8.1736947160061; Wed, 15 Jan 2025
+ 05:19:20 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/10] usb: dwc3-generic: Add STih407 support
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Jan Kiszka <jan.kiszka@siemens.com>, Mattijs
- Korpershoek <mkorpershoek@baylibre.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250114144528.1612168-1-patrice.chotard@foss.st.com>
- <20250114144528.1612168-5-patrice.chotard@foss.st.com>
- <366cef60-e32f-4557-9830-b1b642f0683f@denx.de>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <366cef60-e32f-4557-9830-b1b642f0683f@denx.de>
+References: <8b798c6e-60a3-4ef3-8ce6-a747e072807a@foss.st.com>
+In-Reply-To: <8b798c6e-60a3-4ef3-8ce6-a747e072807a@foss.st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 15 Jan 2025 06:19:08 -0700
+X-Gm-Features: AbW1kva7kamH_DEpNc8bSubwR2wwVTuxm_qW750N36HllCEQiyOTeolh9-Unjhk
+Message-ID: <CAFLszTj3O64xvA9buAfMf2RRRjwF5SjoOje+_1pWCT3QgV4Akg@mail.gmail.com>
+Subject: Re: dtc: "syntax error" linked to &{label/subnode} syntax
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-15_05,2025-01-15_02,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,36 +85,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Patrice,
 
+On Wed, 15 Jan 2025 at 03:19, Patrice CHOTARD
+<patrice.chotard@foss.st.com> wrote:
+>
+> Hi
+>
+> I am currently converting STM32MP platforms to OF_UPSTREAM.
+> As we use same binary for several boards, flags CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
+> and CONFIG_OF_UPSTREAM_VENDOR="st" are set.
+>
+> So all dts/upstream/src/arm/st/* dts files are compiled.
+>
+> I am facing an issue with dts/upstream/src/arm/st/stm32mp151a-prtt1* and
+> dts/upstream/src/arm/st/stm32mp15*-mec*.* files.
+>
+> To be more precise, these files are using a syntax which follows this
+> format &{label/subnode} to override some nodes.
+>
+> This leads to DTC error:
+>
+>  AR      drivers/usb/gadget/built-in.o
+>   LD      u-boot
+>   OBJCOPY u-boot.srec
+>   OBJCOPY u-boot-nodtb.bin
+>   SYM     u-boot.sym
+>   DTC     dts/upstream/src/arm/st/stm32mp157c-dhcom-picoitx.dtb
+>   DTC     dts/upstream/src/arm/st/stm32h750i-art-pi.dtb
+>   DTC     dts/upstream/src/arm/st/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dtb
+>   DTC     dts/upstream/src/arm/st/stm32mp157a-iot-box.dtb
+>   DTC     dts/upstream/src/arm/st/stm32746g-eval.dtb
+>   DTC     dts/upstream/src/arm/st/stm32mp151c-mecio1r0.dtb
+>   DTC     dts/upstream/src/arm/st/stm32mp157a-dhcor-avenger96.dtb
+>   DTC     dts/upstream/src/arm/st/ste-nomadik-s8815.dtb
+> Error: ../dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi:338.1-2 syntax error
+> FATAL ERROR: Unable to parse input tree
+>
+>
+> At line 338 in dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi we got :
+>
+> &{qspi_bk1_pins_a/pins} {
+>         pinmux = <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
+>                  <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
+>                  <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
+>                  <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
+>         /delete-property/ bias-disable;
+>         bias-pull-up;
+> };
+>
+> If i update it as following , the DTC compilation is OK :
+>
+> &qspi_bk1_pins_a {
+>         pins {
+>                 pinmux = <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
+>                          <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
+>                          <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
+>                          <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
+>                 /delete-property/ bias-disable;
+>                 bias-pull-up;
+>         };
+> };
+>
+> On kernel side, the DTC compilation is ok, but not on U-Boot side. I am not able to understand the difference.
+>
 
-On 1/14/25 15:53, Marek Vasut wrote:
-> On 1/14/25 3:45 PM, Patrice Chotard wrote:
-> 
->> +    /* glue init */
->> +    reg = readl(glue_base + CLKRST_CTRL);
->> +
->> +    reg |= AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION;
->> +    reg &= ~SW_PIPEW_RESET_N;
->> +
->> +    writel(reg, glue_base + CLKRST_CTRL);
->> +
->> +    /* configure mux for vbus, powerpresent and bvalid signals */
->> +    reg = readl(glue_base + USB2_VBUS_MNGMNT_SEL1);
->> +
->> +    reg |= SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
->> +           SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
->> +           SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG);
->> +
->> +    writel(reg, glue_base + USB2_VBUS_MNGMNT_SEL1);
-> setbits_le32() , please fix globally.
+Could it be that the kernel dtc is newer?
 
-Ok
+You could try DTC=`which dtc` if you already have that in your system.
 
-> 
-> Also, I am wondering if we're not overstuffing the dwc3-generic.c with too many disparate glue code shreds, and whether it isn't just about time to split the glue code parts out of it, into separate .c files. Thoughts ?
-
-OK i will introduce a specific dwc3-sti.c glue wrapper. I just notice that dwc3-am62.c or dwc3-uniphier.c are typically what i have to do.
-By the same occasion, it removes the need of patch 06/10 with REGMAP/SYSCON dependencies
-
-Thanks
-Patrice
+Regards,
+Simon
