@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E23C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:38:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9CA8C02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:38:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1302280BA5;
-	Wed, 15 Jan 2025 14:32:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 626EC80C75;
+	Wed, 15 Jan 2025 14:32:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bKr4g98B";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g+7qcnKs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 740F080C77; Wed, 15 Jan 2025 14:32:27 +0100 (CET)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id DAD2C80C8F; Wed, 15 Jan 2025 14:32:28 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9D7A80C8A
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:32:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B40A8096D
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:32:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3a7d7c1b190so20746445ab.3
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:32:24 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-84cdacbc3dbso521271039f.2
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:32:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947943; x=1737552743; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947945; x=1737552745; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q1U4AGjPuFfI7Dl6UNuDQDQBTgQtsmM1aI/mfNKL+4U=;
- b=bKr4g98BC5u7mnxS71JKC19f43LDbIqL8QFTkzziPEiC2YM7fgI78Z/hZQBgHP0CaB
- RhdwRV8fFbaFKPkQGbg2FQdi3RgTQmppjlHC2iEGo89GbwGCwvcaaYPaOPi/zwOk7GLQ
- NdJLNyjqNQbfYXAgBLlr8EQUK97XP0/fWLfkc=
+ bh=BkFmaOuhQjVWszjPFXj5NKbgQtlK8HbdyApsgBhUZFo=;
+ b=g+7qcnKspsciI27oKOrg32BwEtfikyI/H93WC1QYYvOdAjcAVdGwVezqgB3a2IuYYK
+ QVbGsyIzMgYOf7Z8EZUgQcyOtVSiEjLfkSEcBTJPaJVfVw+IgUniCFhIYtabjtFwVBCR
+ mmErvFMbUWDpCxyNGOjks09BPLrcTmo3sdA6c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947943; x=1737552743;
+ d=1e100.net; s=20230601; t=1736947945; x=1737552745;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q1U4AGjPuFfI7Dl6UNuDQDQBTgQtsmM1aI/mfNKL+4U=;
- b=xQHgUzTPyq66lkhwPb6axfVyXLcFGVuEgeRUcUiAWDAJeSSHVwIxHmRBkWo3yH8qkO
- TibGWg/gdaaHdR+YZrjZqJlUcPVdtIAthpFf3Y2MisD6U39lrhQfjMBnkkE+BIsTkZPX
- HTkTP6ZDunQ1PjMUzG1EN0/IKZ6ye1k7OwceCNxhbtcqP+Ticu9Oz44dqxuUM+tGlUfh
- 8nOcYqIu4KweznuKmAivCdm/6ejltXUxkp/hph9gnVXC7aDNvYKUY0JBkdt70kwYbIva
- CicOmGF0bBRF4IBzDTW6IwFgrhZnKGblVgNCPB31dkjGxMI+sCHtfivQ49dxvD/tZCjA
- 9noQ==
-X-Gm-Message-State: AOJu0Yz4rd21WzMsAy484MqOq50YyFtG+gpEX0T70h+pavyL5iGOHA5b
- QR3842dXysRfuzX2UUoIi1iYaUuGZCEX6ZKUjqoV5QTJSt6LoLBkRlsMqnJUH2xPqrpF672n5c0
+ bh=BkFmaOuhQjVWszjPFXj5NKbgQtlK8HbdyApsgBhUZFo=;
+ b=OCb1M5hBvOzhzUOdRGa1jQOJ6RBWRqVS9EFSVRHUrxjrzJ3gymmfyb1jYVmOT4SQ65
+ YT3AdqsEhpQ0ZNzKdxyv5L2I6O9Y0dzuq3SCE234VELxd0cF8X/Mkvp6uk5YLMoFP+6p
+ w0qDNN/tvwqnB7QEw6qdE5tXwwDk3Y+723Xr7udilUX5iRwNt+MCd+MmGdbXPyJVTR9N
+ w6t97fET/MF/ma8EmdgOiQIVTTSAody8F8Ry3wYfAkOjjiHRC+XKvydjcT8JgB33yC/G
+ TXQUnVujY8+YJNn8Mut8GKwLiTFdNgoLyR8o9eavPhfmOcAT+z97hzhGpYO87G3JwKXB
+ OFiQ==
+X-Gm-Message-State: AOJu0YxU7oRdvjJn7k3bNbnpG9GHenZMabsMCV4qejxXalD03UZkuR+H
+ y9tY64KOrsK4LObO5ipmHp6fnPBVFgZVVWH8+/kKu6k3UXQIYkauf38+ZICQT5rOqsLaup5WCCA
  =
-X-Gm-Gg: ASbGncshryZwxWMhtK0VPV6gRdUYDPBwBHOebXYawTfzkPPHBrEvQ59ecU+pt19u7Q9
- 82YaOF+jmsgUJTSxJJiV1tsVcVF1otsgr9IHp867DkX8pyqz6Xs/SvVYELH3GGZNgsLdEFReLKp
- DGw8Rgs27iUeb237JMKlYNJSQpQOII2BighypdGm8JGC1uykiXldXhclYB55X3zGpaRBWKsAZ5J
- Ci2FjYARhGCMrrCjzrThyvIXhoNj996epSc+wUejI6WgD9Iy5tEuPuolLKh2dU1gCxcOo0/U/ft
- vOjCZ6GeN/f5WIBYHA==
-X-Google-Smtp-Source: AGHT+IGSSgVzI33dgM7PLD9OTrekioWHsiFu/EUMu+7zgUu0Ep8fG9CuE06PT55IJhqBmqSAXxgUtg==
-X-Received: by 2002:a05:6e02:1c87:b0:3a7:a69c:9692 with SMTP id
- e9e14a558f8ab-3ce3aa74970mr259012235ab.21.1736947942740; 
- Wed, 15 Jan 2025 05:32:22 -0800 (PST)
+X-Gm-Gg: ASbGncvU4AFRNxhhRuGmUyzg3I6labSNEIuA6yByERBGPbAWJEEF1TNX2eRVCUwFBt4
+ 89sINdqq+qNXXXV28Pif/+K5W2fG8UF4SFAZPxQncA+yYZwbEvo4SOc7FCLxOHw5eG40LbFJIUp
+ RvOQwXkwknZKThFs/1aeCHtJo29CsnUnKEKpTuCN2aeLJRkGbudqEoSlp7CMuWurTr+mQLIzJiK
+ yYqAhT8wX5ZZMIskQgYvncjunsE68oiwY3snrzqJuge23Or505Lsm4gYnBvaU0wVDOIxaVIJL9F
+ 0QZ719VVvROdB7O/Fg==
+X-Google-Smtp-Source: AGHT+IEjtfWgbzc/wWG/gTfk4n4fvhAEPQrdECNv3gDk5fL2lfANftDVlWqrgmeJYmLt2sIdi4jrdw==
+X-Received: by 2002:a05:6602:3685:b0:847:22a7:240e with SMTP id
+ ca18e2360f4ac-84ce01a4b45mr2768142739f.13.1736947944816; 
+ Wed, 15 Jan 2025 05:32:24 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.32.21
+ 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.32.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 05:32:21 -0800 (PST)
+ Wed, 15 Jan 2025 05:32:23 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 37/43] test: Move stats into a struct
-Date: Wed, 15 Jan 2025 06:31:07 -0700
-Message-Id: <20250115133114.590375-38-sjg@chromium.org>
+Subject: [PATCH 38/43] test: Keep a track of the numbers of tests run
+Date: Wed, 15 Jan 2025 06:31:08 -0700
+Message-Id: <20250115133114.590375-39-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
 References: <20250115133114.590375-1-sjg@chromium.org>
@@ -95,181 +95,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use a struct to hold the stats, since we also want to have the same
-stats for all runs as we have for each suite.
+This is useful information and is not always the same as the 'count' arg
+to ut_run_list() so add it as a separate stat.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/test.h | 17 +++++++++++++----
- test/test-main.c    | 29 +++++++++++++++--------------
- test/ut.c           |  4 ++--
- 3 files changed, 30 insertions(+), 20 deletions(-)
+ include/test/test.h | 3 +++
+ test/test-main.c    | 2 ++
+ 2 files changed, 5 insertions(+)
 
 diff --git a/include/test/test.h b/include/test/test.h
-index 21c0478befe..bc8f0bbe501 100644
+index bc8f0bbe501..f7087ab4eea 100644
 --- a/include/test/test.h
 +++ b/include/test/test.h
-@@ -9,11 +9,21 @@
- #include <malloc.h>
- #include <linux/bitops.h>
- 
--/*
-- * struct unit_test_state - Entire state of test system
-+/**
-+ * struct ut_stats - Statistics about tests run
+@@ -14,10 +14,13 @@
   *
   * @fail_count: Number of tests that failed
   * @skip_count: Number of tests that were skipped
-+ */
-+struct ut_stats {
-+	int fail_count;
-+	int skip_count;
-+};
-+
-+/*
-+ * struct unit_test_state - Entire state of test system
-+ *
-+ * @cur: Statistics for the current run
-  * @start: Store the starting mallinfo when doing leak test
-  * @of_live: true to use livetree if available, false to use flattree
-  * @of_root: Record of the livetree root node (used for setting up tests)
-@@ -34,8 +44,7 @@
-  * @actual_str: Temporary string used to hold actual string value
++ * @test_count: Number of tests run. If a test is run muiltiple times, only one
++ *	is counted
   */
- struct unit_test_state {
--	int fail_count;
--	int skip_count;
-+	struct ut_stats cur;
- 	struct mallinfo start;
- 	struct device_node *of_root;
- 	bool of_live;
+ struct ut_stats {
+ 	int fail_count;
+ 	int skip_count;
++	int test_count;
+ };
+ 
+ /*
 diff --git a/test/test-main.c b/test/test-main.c
-index 391d4e7bb0e..e8aecd267c7 100644
+index e8aecd267c7..e36bc37d29e 100644
 --- a/test/test-main.c
 +++ b/test/test-main.c
-@@ -448,7 +448,7 @@ static int test_post_run(struct unit_test_state *uts, struct unit_test *test)
-  */
- static int skip_test(struct unit_test_state *uts)
- {
--	uts->skip_count++;
-+	uts->cur.skip_count++;
- 
- 	return -EAGAIN;
- }
-@@ -460,7 +460,7 @@ static int skip_test(struct unit_test_state *uts)
-  * the name of each test before running it.
-  *
-  * @uts: Test state to update. The caller should ensure that this is zeroed for
-- *	the first call to this function. On exit, @uts->fail_count is
-+ *	the first call to this function. On exit, @uts->cur.fail_count is
-  *	incremented by the number of failures (0, one hopes)
-  * @test_name: Test to run
-  * @name: Name of test, possibly skipping a prefix that should not be displayed
-@@ -510,7 +510,7 @@ static int ut_run_test(struct unit_test_state *uts, struct unit_test *test,
-  * SPL.
-  *
-  * @uts: Test state to update. The caller should ensure that this is zeroed for
-- *	the first call to this function. On exit, @uts->fail_count is
-+ *	the first call to this function. On exit, @uts->cur.fail_count is
-  *	incremented by the number of failures (0, one hopes)
-  * @test: Test to run
-  * Return: 0 if all tests passed, -EAGAIN if the test should be skipped, -1 if
-@@ -574,7 +574,7 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
-  * the name of each test before running it.
-  *
-  * @uts: Test state to update. The caller should ensure that this is zeroed for
-- *	the first call to this function. On exit, @uts->fail_count is
-+ *	the first call to this function. On exit, @uts->cur.fail_count is
-  *	incremented by the number of failures (0, one hopes)
-  * @prefix: String prefix for the tests. Any tests that have this prefix will be
-  *	printed without the prefix, so that it is easier to see the unique part
-@@ -632,7 +632,7 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- 			if (len < 6 || strcmp(test_name + len - 6, "_norun")) {
- 				printf("Test '%s' is manual so must have a name ending in _norun\n",
- 				       test_name);
--				uts->fail_count++;
-+				uts->cur.fail_count++;
- 				return -EBADF;
- 			}
- 			if (!uts->force_run) {
-@@ -641,23 +641,24 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- 				continue;
- 			}
+@@ -643,6 +643,7 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
  		}
--		old_fail_count = uts->fail_count;
-+		old_fail_count = uts->cur.fail_count;
+ 		old_fail_count = uts->cur.fail_count;
  
++		uts->cur.test_count++;
  		if (one && upto == pos) {
  			ret = ut_run_test_live_flat(uts, one);
--			if (uts->fail_count != old_fail_count) {
-+			if (uts->cur.fail_count != old_fail_count) {
- 				printf("Test '%s' failed %d times (position %d)\n",
- 				       one->name,
--				       uts->fail_count - old_fail_count, pos);
-+				       uts->cur.fail_count - old_fail_count,
-+				       pos);
- 			}
- 			return -EBADF;
- 		}
- 
- 		for (i = 0; i < uts->runs_per_test; i++)
- 			ret = ut_run_test_live_flat(uts, test);
--		if (uts->fail_count != old_fail_count) {
-+		if (uts->cur.fail_count != old_fail_count) {
- 			printf("Test '%s' failed %d times\n", test_name,
--			       uts->fail_count - old_fail_count);
-+			       uts->cur.fail_count - old_fail_count);
- 		}
- 		found++;
- 		if (ret == -EAGAIN)
-@@ -668,7 +669,7 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- 	if (select_name && !found)
- 		return -ENOENT;
- 
--	return uts->fail_count ? -EBADF : 0;
-+	return uts->cur.fail_count ? -EBADF : 0;
- }
- 
- int ut_run_list(struct unit_test_state *uts, const char *category,
-@@ -716,12 +717,12 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
+ 			if (uts->cur.fail_count != old_fail_count) {
+@@ -717,6 +718,7 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
  	if (has_dm_tests)
  		dm_test_restore(uts->of_root);
  
--	if (uts->skip_count)
--		printf("Skipped: %d, ", uts->skip_count);
-+	if (uts->cur.skip_count)
-+		printf("Skipped: %d, ", uts->cur.skip_count);
++	printf("Tests run: %d, ", uts->cur.test_count);
+ 	if (uts->cur.skip_count)
+ 		printf("Skipped: %d, ", uts->cur.skip_count);
  	if (ret == -ENOENT)
- 		printf("Test '%s' not found\n", select_name);
- 	else
--		printf("Failures: %d\n", uts->fail_count);
-+		printf("Failures: %d\n", uts->cur.fail_count);
- 
- 	return ret;
- }
-diff --git a/test/ut.c b/test/ut.c
-index 7454da3e001..a16fdfb3a93 100644
---- a/test/ut.c
-+++ b/test/ut.c
-@@ -21,7 +21,7 @@ void ut_fail(struct unit_test_state *uts, const char *fname, int line,
- {
- 	gd->flags &= ~(GD_FLG_SILENT | GD_FLG_RECORD);
- 	printf("%s:%d, %s(): %s\n", fname, line, func, cond);
--	uts->fail_count++;
-+	uts->cur.fail_count++;
- }
- 
- void ut_failf(struct unit_test_state *uts, const char *fname, int line,
-@@ -35,7 +35,7 @@ void ut_failf(struct unit_test_state *uts, const char *fname, int line,
- 	vprintf(fmt, args);
- 	va_end(args);
- 	putc('\n');
--	uts->fail_count++;
-+	uts->cur.fail_count++;
- }
- 
- ulong ut_check_free(void)
 -- 
 2.34.1
 
