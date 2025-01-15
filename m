@@ -4,83 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA759C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 20:20:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F37C02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 21:36:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E8A1806D4;
-	Wed, 15 Jan 2025 21:20:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 00DB78033D;
+	Wed, 15 Jan 2025 22:36:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RhBP0BZa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dc0JD3bW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 012C5806D8; Wed, 15 Jan 2025 21:20:37 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 51110806D8; Wed, 15 Jan 2025 14:50:38 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4DB38033D
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 21:20:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF49680214
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:50:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6d8e8445219so2578356d6.0
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 12:20:34 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aaf900cc7fbso1155894466b.3
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:50:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736972433; x=1737577233; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TdneqQgFAFNQVKeMQu1aWb52tAchr5qHu9EGdj9j3o4=;
- b=RhBP0BZaqueM1/BiES7V0Zp+uSD3pSMrwD36gitVfe76Hl+yJSbR92TM9Hia+qSXOU
- Xe+srvlTHj5I/t5wCkRkXuAjwuW8MyF1OB3wOZrwDEKg+B+P/M0aktWT19iTmw265fwI
- PVd4xpXmh35elzwtRXyP7vBVtkS1jzzFFfpRg=
+ d=chromium.org; s=google; t=1736949035; x=1737553835; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n6GyjMMcZ5Ne7y3J6xECHIpnyZsqzOVOMePYqzx69Zs=;
+ b=Dc0JD3bW6eojPf5nnBFzyLruRn5WEgRtONi4JcVsWk1fT6/7lTOMDMd6U1YHqevRbu
+ 91SYssAae/OX4HrxTZZ5kGIXcsIc7NWV9yi5GqhJPgSH0ZXiNTW6GDpZFuKEwzdZ9si6
+ oZOa5rq4bzcR1tzjg1y9z6dg6QuJwQqTEloZo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736972433; x=1737577233;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TdneqQgFAFNQVKeMQu1aWb52tAchr5qHu9EGdj9j3o4=;
- b=lmHPlim/jVilo6toEJ3f+JsHQ8L0evQoTWv9YvVzKACNsHE95QTWY7r0Sw4heA9Itl
- hIdLx9TwE6jPH1FTNhCzPb2ss1lcj31kCD1n3H8qq1XfyRKr8nqV0uBHkBsggfRJVVfQ
- MfyH3lDA04m7F4izfyjlzXPIMeAn7ThqMvBnUvgij79g5t98SGAXSihwbU+LNQ59TqfR
- X38HMKftKFiW8FGI2QEnah+q9SmH9oZfzq+x5H+yZBpgxwhB4IXdT6uAY8VcMZV61iJu
- iiOVW2yCkrKTX1q0hRHXePnLdWR3FjEnGgUh0SBJOvTiWMhFCgSD/bnv41LvgPfG7jla
- G2pg==
-X-Gm-Message-State: AOJu0YzkGxYLlrV5So3O1levulNwGwBkyYJ+dihWte2uvEem92YH8PmZ
- s0hUSKnj/YjTJE/1PhcteMnobcr3YrqTkm9M2F1U65u4o6mh32Ezf/4gqwh8rT0XSIpLyH78A5C
- h
-X-Gm-Gg: ASbGncs+AcydoEAlth5o3HjmQpybI+7dQrGBLV3IcjXm/sI3tH9+HbmIRPtebh5Aite
- 9Myu/5FGSzXrEYUjPlVQBVaw5dSQfNhcE/uEuZIKGB3EIKN7Z9ij2ArJ/Z1g1ObdSG4rDsHBcRd
- sFeZOcNtCnhhhnDWoM1wmg1D/j9wGXtIeHIE5dzJgSiifh8ZUpX55tAxy+FPFLsEdy1B0VVIwVP
- o9KAbVSTw65+k8FWncmIqzfKIlqOInazTFGO9/0+AogMukBtL1cGw==
-X-Google-Smtp-Source: AGHT+IFSImFiRrlpiTGsm9+yy+hVwfHSvkyUb7QZ+zNMPecSuUO6kOULENIqnPkYhnVlCwg5OyzC5A==
-X-Received: by 2002:ad4:5d64:0:b0:6d8:ad28:adbf with SMTP id
- 6a1803df08f44-6df9b22e522mr480007256d6.20.1736972433501; 
- Wed, 15 Jan 2025 12:20:33 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfade895b4sm68428816d6.101.2025.01.15.12.20.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 12:20:32 -0800 (PST)
-Date: Wed, 15 Jan 2025 14:20:29 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 6/6] block: Remove "select BLK" from non-block drivers
-Message-ID: <20250115202029.GC3476@bill-the-cat>
-References: <20241220222612.1757884-1-trini@konsulko.com>
- <20241220222612.1757884-7-trini@konsulko.com>
- <2b3e1050-7cbe-4dde-a298-5efb63cb4ebd@cherry.de>
- <20250114165914.GN3476@bill-the-cat>
- <4cb564bb-8c0d-43bf-bd91-04668a1deab2@cherry.de>
+ d=1e100.net; s=20230601; t=1736949035; x=1737553835;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n6GyjMMcZ5Ne7y3J6xECHIpnyZsqzOVOMePYqzx69Zs=;
+ b=GNB5apec+4VFsn/YLJc2YFSIN/KrkQBWnuVZUDUhscsLjmvTx8NoRIGElUoDJJ4q19
+ KfavovMycmM07nDqS4O0IQIItRP2YATPK7a67iQpSWXoFMpAwKFf3/K+QlgwwAiH6GDU
+ 7twPbpIEUkdpx09xNH9rlajrK26PH7rvANqgULNWS6nuaqxlo8BV6BG2WRgqca+Ci+eh
+ F62cQM/MoDJYK7CtKYBG3DEUGxYPywnIC+qiir43JKWtEvOynzApLL7YR1Bipf53Si8a
+ T/fsc3KkYsPfe2LtKTO/cCwRmSRQrsdH7DiYbVwZeX/8Xw2tZ3ltJXaucO1+v4hxLoC0
+ qdMw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWfNi9kM85YmGIZNiVfi8yf/caz97a0xB44VJsNT7mf69PueX4/e6LMz1vI5Wik/MU2WlyXwN4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSgJNbZ4yO8eWDHYM3LQT1cP9khS9Kp8ijk5xy3WJWgFa4KYTD
+ iumdLhE7QFH1nmDQ8e+OPg2atvVDnl5uQEsdZtif+9wwW3eooJdEmEX7dtqp7LYO5lV5vNT5nPw
+ x28H0SSIMGXru/59e8vL69QvZNSTdsfqTw2FYKxrIz3/CEbm1ug==
+X-Gm-Gg: ASbGnctN1zk1Syou+KbD7VHClX5XVAtVpPjrj6jt4m5Jh5Nsv7rm6eKPZ47a/UaMncC
+ OqYTy9J/BQJMQCq7JSnMv3FKq63EhbpnBMAeiMxk=
+X-Google-Smtp-Source: AGHT+IEb2hbG5qHr3THitJKxug3alTByYWPPct2dv43m3mCI9Q54NDBpCNN/bv5iqweoBRWKimF/X5nTTiPCJbX26tY=
+X-Received: by 2002:a17:907:c0d:b0:aaf:1183:ec2c with SMTP id
+ a640c23a62f3a-ab2ab6bfc89mr2383962366b.5.1736949035194; Wed, 15 Jan 2025
+ 05:50:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dPcmF1U6aDob6Vgz"
-Content-Disposition: inline
-In-Reply-To: <4cb564bb-8c0d-43bf-bd91-04668a1deab2@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241103003322.626036-1-sjg@chromium.org>
+ <CALeDE9MfWEAb91uzQPa6_jSo6beJv_GNHTY2TeKnSzFm6V97gw@mail.gmail.com>
+ <CAFLszTito2+-qgOc=7bc3i9WmBZZCcAVWSY5hoH0neGjTg6zEQ@mail.gmail.com>
+ <CALeDE9MORdUY440JAgHNXdoqWfJy5V9bC=TK5U242QG4Lc1Ptg@mail.gmail.com>
+ <20241203194847.GA4022002@bill-the-cat>
+In-Reply-To: <20241203194847.GA4022002@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 15 Jan 2025 06:50:23 -0700
+X-Gm-Features: AbW1kvZD2TxAXPYqX4CIRQrWgitRqTpk9mnEuW2FFclGO2erZ9XAfOCKTdV-dyI
+Message-ID: <CAFLszTj=x_ESLVmJ09zS8=7Nydu9Rw6u7CKJYb7G9nMykHe++w@mail.gmail.com>
+Subject: Re: [PATCH v3 00/25] led: Remove old status-LED code
+To: Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Alison Wang <alison.wang@nxp.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@kernel-space.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Charles Hardin <ckhardin@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, 
+ Doug Zobel <douglas.zobel@climate.com>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Hans de Goede <hdegoede@redhat.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Mario Six <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
+ Sean Edmond <seanedmond@microsoft.com>, Stefan Roese <sr@denx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Wolfgang Denk <wd@denx.de>, 
+ uboot-stm32@st-md-mailman.stormreply.com
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 15 Jan 2025 22:36:25 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,108 +126,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---dPcmF1U6aDob6Vgz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 3 Dec 2024 at 12:48, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Nov 07, 2024 at 07:33:51PM +0000, Peter Robinson wrote:
+> > Hi Simon,
+> >
+> > > On Tue, 5 Nov 2024 at 07:18, Peter Robinson <pbrobinson@gmail.com> wrote:
+> > > >
+> > > > On Sun, 3 Nov 2024 at 00:34, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > There has been an LED framework in U-Boot which uses driver model for
+> > > > > about 9 years now. Recent work is underway to improve it and provide
+> > > > > more features. It is probably a good time to drop the old code, which
+> > > > > is only used by 5 boards:
+> > > >
+> > > > I don't believe, from what I can tell, they are feature comparable, at
+> > > > the very least I have not been able to get the Pinephone working with
+> > > > this so as it stands I still don't think this patch set is ready yet.
+> > >
+> > > I don't have that hardware, nor the other 4, so cannot do anything
+> > > with this feedback.
+> >
+> > Don't you have any HW that has a LED on it that you can substitute to
+> > see what it does?
+> >
+> > > Can you please be clear what you are asking me to do?
+> >
+> > Either produce patches that work on the the pinephone, or docs I, or
+> > other developers, can use to implement the functionality.
+> >
+> > Currently on the Pinephone the green LED lights up in the TPL/SPL
+> > (very early before ATF) stage and is lit up right through the the
+> > various FW stages, with your patch set I get no LED what so ever.
+>
+> Please note that needing to confirm that we have equivalent
+> functionality between old and new frameworks (and
+> https://lore.kernel.org/all/20241110115054.2555-1-ansuelsmth@gmail.com/
+> might cover that) is why this series isn't ready for -next at this time.
 
-On Wed, Jan 15, 2025 at 06:49:45PM +0100, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 1/14/25 5:59 PM, Tom Rini wrote:
-> > On Tue, Jan 14, 2025 at 02:53:48PM +0100, Quentin Schulz wrote:
-> > > Hi Tom,
-> > >=20
-> > > On 12/20/24 11:22 PM, Tom Rini wrote:
-> > > > Now that block drivers are all selecting the BLK symbol, there's no=
- need
-> > > > for other options to be select'ing BLK so that other required
-> > > > functionality can be enabled. Remove these places.
-> > > >=20
-> > >=20
-> > > We have multiple commands depending on the BLK symbol.
-> >=20
-> > Yes.
-> >=20
-> > > BOOTSTD also depends on it, but I assume we should be able to network=
- boot
-> > > without HW block drivers?
-> >=20
-> > Correct. That's part of the motivation for this series (which I wasn't
-> > clear enough about on its own). Without something like this series if we
-> > remove the BLK dependency from BOOTSTD then some other platforms fail to
-> > build or grow a bunch in size (as BOOTSTD is default y and now it's
-> > enabled on those platforms).
-> >=20
-> > > CMD_UFETCH wouldn't be usable without those drivers as well.
-> > >=20
-> > > Should we do something about that by making them not depend on BLK e.=
-g. use
-> > > CONFIG_IS_ENABLED in the right places? Not sure if all devicess based=
- on
-> > > those archs have at least one HW block driver enabled. I guess checki=
-ng if
-> > > all .config before and after that change are identical would help us =
-figure
-> > > out if this could introduce a regression?
-> >=20
-> > There's a few options, depending on what the command is. For CMD_UFETCH
-> > it's likely that a small restructure would be needed to not try and
->=20
-> My point is that I believe this patch is too hastily removing the select =
-BLK
-> because some symbols have "depends on BLK" and by removing the select, we
-> make those symbols unselectable. This can cascade if other symbols depend=
- on
-> those now unselectable symbols.
->=20
-> Also, removing the select BLK from architecture/target symbols can introd=
-uce
-> regressions if BLK really is required?
->=20
-> I think a reasonable (albeit cumbersome) solution is to migrate all those
-> selects to the impacted defconfigs so that effectively no change is made =
-for
-> existing devices. If maintainers want to remove BLK, they could then do it
-> later.
->=20
-> This also makes sure that BOOTSTD and CMD_UFETCH (and others) are still
-> enabled, since BLK would still be enabled, just from a different location.
-> Then another patch series could remove BOOTSTD dependency on BLK by adapt=
-ing
-> the code, same for CMD_UFETCH (and others).
->=20
-> Does this make sense? Am I missing something?
+Link to series:
+https://patchwork.ozlabs.org/project/uboot/list/?series=431000&state=*
 
-What you're missing, I believe, is that this patch exists because prior
-to the first patch in the series and also going back to when BLK was
-optional, if something higher level like ARCH_ROCKCHIP didn't select BLK
-then it wouldn't be able to prompt about its MMC driver. This is similar
-to all of the high level places that "select DM" as that used to be
-meaningful but now it's not. As part of testing the series I did my
-world build before/after and the only change is that as noted in the
-cover letter, espresso7420 now has MMC again. Does this help? Thanks.
+Current status: marked 'changed requested' in patchwork. Applied to sjg tree.
 
---=20
-Tom
+Peter, if you would like to retest this series now that [1] is in
+-next, please do. Or if you can make time for some development with
+your device, that would be welcome.
 
---dPcmF1U6aDob6Vgz
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
+Simon
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeIGIYACgkQFHw5/5Y0
-tyxOSQwAh3xE0SOgI9Uo2hlTQD+kY1asft1KjmypjZQB0zC0SIPbQs28vq2oDfrl
-kKUXDgebcd2NURMxU+n4vjcMf+kFx2BuMsLk3lrKoOiedt8tNSn/7zh9lf9fE5m5
-XAg2snZEhDrJuopjpgSGJExG3lhf+CAbiqj30DxmMh+eVMSmlc1NNN3DZ7mcbRrK
-0vTMICsI0iTxaKgTG4L29cCZqxEcJUmf/QR+umABQ8gKIQGJxlHQ7xSnVBy2lVgW
-Ph85GyNI5YXl30+2wB6k+w+IFn3Su91dMExNmvC0lVhpW6Ik97SLhgu0tjOrgS0v
-Vq4frojCe1RhJ8CgtdikUnkB3HZtIAfqkKlrtlXJ8nEk46kMWutDETAHFAhBS3ab
-GwCNJ58Rqe6VYTQlnfuP2ipuFvh8LzXIf9so8g1rPUvs+43Avoq584HESEsfVMjX
-/gBYCksqvxJIfwPegWNQXN88Yeu9ptCqwDVfBWIzSbsbZ0/7hWRFI+jQ/3NRzH4P
-n1eFWX2j
-=PORj
------END PGP SIGNATURE-----
-
---dPcmF1U6aDob6Vgz--
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=432093&state=*
