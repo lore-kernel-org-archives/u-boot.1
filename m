@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93189C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CCCAC02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:19:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 131EE80714;
-	Wed, 15 Jan 2025 14:19:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 692C480657;
+	Wed, 15 Jan 2025 14:19:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JbX6OJqf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rb9zcAie";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C03680703; Wed, 15 Jan 2025 14:19:41 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id BFAD880657; Wed, 15 Jan 2025 14:19:45 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62EE0806FB
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:19:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E06A806D4
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:19:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-aaee0b309adso1091083066b.3
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:19:39 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa684b6d9c7so1187831766b.2
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:19:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947179; x=1737551979; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947183; x=1737551983; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WZmxD4DQfT0uGotCd6Mblngf0y+91OJCRK5UmOMTbVw=;
- b=JbX6OJqf/0dShIjKPySIbShInYauCzWMkz0Nxc7+N06T+Y7QwsZtzvB1z2nqwn1Dr0
- DDELsmkk31RJYx7k1CzWUCNvoNOQMqlzb1TnzCuxquFN4g3/X/8PH7E0tSILBHwDvdqZ
- BEQOQ6wT0lhOS+06HiP47diidYDyscpA/9OcM=
+ bh=pVKO6k/At7LtXsKzmXnpzu+frbavY4Y76y+D5hLb3pE=;
+ b=Rb9zcAieq1snRj5mEJqrPMolCyPPhEuhbU8N2F1f6QS512K6MKxIydHO41ge4CwnoU
+ nI2POZhM9v2u9sxNKiCJk+e1yRLl2aHFoOuRK/h4jMIE4LdcL1eKDHItRIr3psDJr/X+
+ KlZb2bxmKdqmALCdZZra6XWJ0u4Sp5laxUK1I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947179; x=1737551979;
+ d=1e100.net; s=20230601; t=1736947183; x=1737551983;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WZmxD4DQfT0uGotCd6Mblngf0y+91OJCRK5UmOMTbVw=;
- b=WGgChcz0v9SLObvsdmFRYW+u68GvpSKo0/l9L5wPJ/f8rFaBDFe+D/vpN4oPq/zyNa
- zd+huedWTiatyxlSwSAh+9EkpI3/p8+mghTnnYGmQ57PcAq95cSFXxhpR0Ng7T92iR0S
- CaLI58/VubOfA7CYavvxL3H+8sbKBlaudcdFppyzIABgx6WJvyj/C48xvzuh+dcv4lIx
- jjGG+IYVnWBDHZ8OA3V7tj252xTsQpTk0g+g9971pHy0zI+xQMDkHcjfkt0I2Ivi85Ub
- VVtj+OEuJobp1N6rXaA7hsrCAfDVdr+z319cNx3y9DarMqxbuJsokGamOOJd0R39yW+c
- BXHQ==
-X-Gm-Message-State: AOJu0YzurVLXyQL7j80wGasyjcPUtEPVWVME2v5hku9m/SDpzLpWtcet
- Q+VbLaE1At9cAXzKweMk3FyJgXr/eAsEgIsKs3rHlsYLkNGrmrlbz3ZK1Se5RQfebrYYm0aagEZ
- HZcwsh6Q3eYTTNUjz96m5iwZe9hgw8X8FbB08
-X-Gm-Gg: ASbGncuVZexgEC4Ps2qI3/vdgNVTrPOWBNPJTKt+3a3r8TrKkGUUd7apBWmr0Nw75gw
- CEGdkKA/F8dGkqnp3Vu8KHBwBNEweqtxiC1I9Btk=
-X-Google-Smtp-Source: AGHT+IHM8f3HdkKXmmOJ1hX5TcNK1qFadLbp4Sg94Ig18A1h1JONw0pN4xuPm8gx2lt5776/1VoMcqFj5v926p7S6nE=
-X-Received: by 2002:a17:907:d1b:b0:aac:23f4:f971 with SMTP id
- a640c23a62f3a-ab2ab70a173mr3045980166b.33.1736947178832; Wed, 15 Jan 2025
- 05:19:38 -0800 (PST)
+ bh=pVKO6k/At7LtXsKzmXnpzu+frbavY4Y76y+D5hLb3pE=;
+ b=U94qCmoBrD7jN+Y8zo1E5ZnFCP0IR+Zkvf8UqFxAwttV0aeiRCKDe+BWxVYM8mVlag
+ Sy9cX8sAaycOI7q2tPWWnlfqgFPFNDqBnH7NwWrnQCWAnYQXAig9OENoLiePV8Bn7xPi
+ ePKO9MFg/xgJLC9cNsqmpiB5T5+ZdIfsSBINRUG0HF7pXQunI9A+su9yVzjqaVffiPFj
+ VTMHHNBa0mXu0bUwdKULeGDO9GTvGFnB/9RdkfWmcDI3x7XlhRCaSdIhj1s6xKuGKBUa
+ m/qVDtQyPNhZR18HikQC15LV0xgQtHavy+OxoeJnRBx7GxYdCFwppmB7JwKaXHFUMtrT
+ wQZA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVXeSF7g63XjwWFWBMYqFgrFfTyQ6RZo2wlcck+ug4gV5i6wykv0MZZTJHWZuJvyGxFyOX7wOc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxTXIZ5d2A5MK0u1IY96gEVmhkHnBKl/PYDo0M7tVQqh18V2zHM
+ ofPeFGCYMM8yyICu0+bIdXMVKNSDTFRqydjrwJHR2PGA2db4j2e+ynhek4j1vPgWCGemnpZ10vo
+ cHwiY4LJ1JWJVEYFPAMpPRR383EMLkL34YGm0
+X-Gm-Gg: ASbGncs+PMg53SzomZzmZlL/CfV3LFgS8SlFu8ukF9FQZj6uVi7iDSF44wmhBgiK2qB
+ +aNNzuTR5vddZSpVn46C06RwUQBtljovJQXutY3Y=
+X-Google-Smtp-Source: AGHT+IHhdZR+DargdkJE1QPxlqD2OFQSkC281CY71vCg4+CTxr8cTI5YAdT8T7vnzT0y2GH9wpHh6DZzA0T+8gngys0=
+X-Received: by 2002:a17:907:8a8f:b0:ab2:d721:ed92 with SMTP id
+ a640c23a62f3a-ab2d721f27dmr2011299766b.45.1736947182932; Wed, 15 Jan 2025
+ 05:19:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20241220040120.3245610-1-sjg@chromium.org>
- <20241220040120.3245610-4-sjg@chromium.org>
- <a1572755-9853-4941-ac0f-3a30bce768a3@cherry.de>
- <CAFLszTi0CToKb8zLC1tRXW0XabQTAEQeT3PUZbR9YRybr9R9DA@mail.gmail.com>
- <c2c5dee2-a8a7-4a1d-bd62-208c39db3b15@cherry.de>
-In-Reply-To: <c2c5dee2-a8a7-4a1d-bd62-208c39db3b15@cherry.de>
+References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
+ <20250110-ge-mainline-display-support-v3-5-d2c0acea6feb@bootlin.com>
+In-Reply-To: <20250110-ge-mainline-display-support-v3-5-d2c0acea6feb@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Jan 2025 06:19:26 -0700
-X-Gm-Features: AbW1kvYmD6qkp3bx6ciYBdJO94Q25AjC7A-i_nbV17F_EBKIzrRSZTvdiaWj1fY
-Message-ID: <CAFLszTjUgW0ffd-vh3VnHa5g7sKtoPbDGaDZ7JKtNCt=2n0r2g@mail.gmail.com>
-Subject: Re: [PATCH 3/5] pxe_utils: Allow the FDT to be missing
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
+Date: Wed, 15 Jan 2025 06:19:29 -0700
+X-Gm-Features: AbW1kvZMnUHn0D6yBI78nKmAYPRza9PZdb-3Kkq-skrNOzDxpbKihrjUn_Wwqt0
+Message-ID: <CAFLszTinomkmj=gaKbX5WBPMsbr_3nxt45sQjXqKJ5q1rxcKwQ@mail.gmail.com>
+Subject: Re: [PATCH v3 05/13] power-domain: Add refcounting
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, 
+ Fabio Estevm <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
+ Ian Ray <ian.ray@gehealthcare.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,79 +96,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Miquel,
 
-On Wed, 15 Jan 2025 at 04:59, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Fri, 10 Jan 2025 at 11:43, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
 >
-> Hi Simon,
+> It is very surprising that such an uclass, specifically designed to
+> handle resources that may be shared by different devices, is not keeping
+> the count of the number of times a power domain has been
+> enabled/disabled to avoid shutting it down unexpectedly or disabling it
+> several times.
 >
-> On 1/15/25 2:16 AM, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Tue, 14 Jan 2025 at 08:13, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On 12/20/24 5:01 AM, Simon Glass wrote:
-> >>> The devicetree file may not be provided, so avoid a failure in that
-> >>> case.
-> >>>
-> >>
-> >> Can you provide a bit more information on when/why this shouldn't be a
-> >> failure? I assume likely x86? or Aarch64 with ACPI instead of OF?
-> >
-> > Yes, either of those, but also, even on platforms which use a
-> > devicetree, some don't have it in the extlinux file. For example rpi
-> > passes it through to U-Boot from its own closed-source firmware.
-> >
+> Doing this causes troubles on eg. i.MX8MP because disabling power
+> domains can be done in recursive loops were the same power domain
+> disabled up to 4 times in a row. PGCs seem to have tight FSM internal
+> timings to respect and it is easy to produce a race condition that puts
+> the power domains in an unstable state, leading to ADB400 errors and
+> later crashes in Linux.
 >
-> Ah yes, I had forgotten about platforms using one DTB and passing it
-> through stages, I believe Qualcomm does this as well?
+> CI tests using power domains are slightly updated to make sure the count
+> of on/off calls is even and the results match what we *now* expect.
 >
-> Could you please add what you just said to the commit log so that we
-> have an idea which scenario this intends to support (for future
-> reference if this introduces a regression or we want to do refactoring
-> in the future).
-
-OK
-
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> ---
+>  drivers/firmware/scmi/sandbox-scmi_devices.c     |  1 +
+>  drivers/power/domain/power-domain-uclass.c       | 37 ++++++++++++++++++++++--
+>  drivers/power/domain/sandbox-power-domain-test.c |  1 +
+>  include/power-domain.h                           |  4 +--
+>  test/dm/power-domain.c                           |  2 +-
+>  5 files changed, 40 insertions(+), 5 deletions(-)
 >
-> I'm wondering if this isn't going to allow booting FDT systems without
-> an FDT at all, which really isn't great? Is there something we
-> could/should do to prevent that from happening (or at least notify the
-> user of such a scenario so it's easier to debug)?
-
-It shouldn't make any difference to the current code. Passing a
-bootflow just allows the information to be recorded. The logic of
-whether to use the FDT is not changed by this patch.
-
+> diff --git a/drivers/firmware/scmi/sandbox-scmi_devices.c b/drivers/firmware/scmi/sandbox-scmi_devices.c
+> index 96c2922b067e2886b3fa963bcd7e396f4569a569..9f253b0fd40f703a5ec11d34c197423d27ad8b01 100644
+> --- a/drivers/firmware/scmi/sandbox-scmi_devices.c
+> +++ b/drivers/firmware/scmi/sandbox-scmi_devices.c
+> @@ -163,4 +163,5 @@ U_BOOT_DRIVER(sandbox_scmi_devices) = {
+>         .priv_auto = sizeof(struct sandbox_scmi_device_priv),
+>         .remove = sandbox_scmi_devices_remove,
+>         .probe = sandbox_scmi_devices_probe,
+> +       .flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>  };
+> diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/domain/power-domain-uclass.c
+> index 938bd8cbc9ffd1ba2109d702f886b6a99288d063..55a3d95d83c5aaac31acbd877199c87f8f6fb880 100644
+> --- a/drivers/power/domain/power-domain-uclass.c
+> +++ b/drivers/power/domain/power-domain-uclass.c
+> @@ -12,6 +12,10 @@
+>  #include <power-domain-uclass.h>
+>  #include <dm/device-internal.h>
 >
-> > Somewhat related: my opinion with extlinux (and EFI for that matter)
-> > is that we should be using FIT.
-> >
+> +struct power_domain_priv {
+> +       int on_count;
+> +};
+> +
+>  static inline struct power_domain_ops *power_domain_dev_ops(struct udevice *dev)
+>  {
+>         return (struct power_domain_ops *)dev->driver->ops;
+> @@ -110,19 +114,47 @@ int power_domain_free(struct power_domain *power_domain)
+>  int power_domain_on(struct power_domain *power_domain)
+>  {
+>         struct power_domain_ops *ops = power_domain_dev_ops(power_domain->dev);
+> +       struct power_domain_priv *priv = dev_get_uclass_priv(power_domain->dev);
+> +       int ret;
 >
-> FIT images are not really developer-friendly though :/ I've been asked
-> to ditch FIT images to allow easy replacement of customer Device
-> Trees/kernel images. Much easier to say "copy your file there, modify
-> extlinux.conf to point at the new filepath for the FDT" rather than "so
-> this is the ITS, change the path here, and there, don't forget to have
-> those binaries in the current path, use mkimage, then copy this itb file
-> there".
-
-Yes we need to keep that flow working, of course.
-
-Re FIT, well, we could write a tool. Would that help? If someone did
-that, what would it look like?
-
-I've been happy with FIT for a long time, but particularly recently
-due to all the workarounds and gymnastics people are doing to make
-single files work, e.g. figuring out which devicetree to use.
-
-There is 'u-boot-menu' which works on the running system.
-
+>         debug("%s(power_domain=%p)\n", __func__, power_domain);
 >
-> In any case, I don't believe we could remove non-FIT support, so here we
-> are :)
+> -       return ops->on ? ops->on(power_domain) : 0;
+> +       if (priv->on_count++ > 0)
+> +               return 0;
+
+-EALREADY
+
+> +
+> +       ret = ops->on ? ops->on(power_domain) : 0;
+> +       if (ret) {
+> +               priv->on_count--;
+> +               return ret;
+> +       }
+> +
+> +       return 0;
+>  }
+>
+>  int power_domain_off(struct power_domain *power_domain)
+>  {
+>         struct power_domain_ops *ops = power_domain_dev_ops(power_domain->dev);
+> +       struct power_domain_priv *priv = dev_get_uclass_priv(power_domain->dev);
+> +       int ret;
+>
+>         debug("%s(power_domain=%p)\n", __func__, power_domain);
+>
+> -       return ops->off ? ops->off(power_domain) : 0;
+> +       if (priv->on_count <= 0) {
+> +               debug("Power domain %s already off.\n", power_domain->dev->name);
+> +               priv->on_count--;
+> +               return 0;
+> +       }
+> +
+> +       if (priv->on_count-- > 1)
+> +               return 0;
+
+-EBUSY
+
+See how the regulator uclass does it.
+
+> +
+> +       ret = ops->off ? ops->off(power_domain) : 0;
+> +       if (ret) {
+> +               priv->on_count++;
+> +               return ret;
+> +       }
+> +
+> +       return 0;
+>  }
+>
+>  #if CONFIG_IS_ENABLED(OF_REAL)
+> @@ -180,4 +212,5 @@ int dev_power_domain_off(struct udevice *dev)
+>  UCLASS_DRIVER(power_domain) = {
+>         .id             = UCLASS_POWER_DOMAIN,
+>         .name           = "power_domain",
+> +       .per_device_auto = sizeof(struct power_domain_priv),
+>  };
+> diff --git a/drivers/power/domain/sandbox-power-domain-test.c b/drivers/power/domain/sandbox-power-domain-test.c
+> index 08c15ef342b3dd3ce01807ee59b7e97337f7dde5..5b530974e942ffcba453e53be330baaf3a113a13 100644
+> --- a/drivers/power/domain/sandbox-power-domain-test.c
+> +++ b/drivers/power/domain/sandbox-power-domain-test.c
+> @@ -51,4 +51,5 @@ U_BOOT_DRIVER(sandbox_power_domain_test) = {
+>         .id = UCLASS_MISC,
+>         .of_match = sandbox_power_domain_test_ids,
+>         .priv_auto      = sizeof(struct sandbox_power_domain_test),
+> +       .flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+>  };
+> diff --git a/include/power-domain.h b/include/power-domain.h
+> index 18525073e5e3534fcbac6fae4e18462f29a4dc49..0266fc2f864ef3645d2a8b3c6fa66fdbd868799c 100644
+> --- a/include/power-domain.h
+> +++ b/include/power-domain.h
+> @@ -147,7 +147,7 @@ static inline int power_domain_free(struct power_domain *power_domain)
+>  #endif
+>
+>  /**
+> - * power_domain_on - Enable power to a power domain.
+> + * power_domain_on - Enable power to a power domain (with refcounting)
+>   *
+>   * @power_domain:      A power domain struct that was previously successfully
+>   *             requested by power_domain_get().
+> @@ -163,7 +163,7 @@ static inline int power_domain_on(struct power_domain *power_domain)
+>  #endif
+>
+>  /**
+> - * power_domain_off - Disable power to a power domain.
+> + * power_domain_off - Disable power to a power domain (with refcounting)
+>   *
+>   * @power_domain:      A power domain struct that was previously successfully
+>   *             requested by power_domain_get().
+> diff --git a/test/dm/power-domain.c b/test/dm/power-domain.c
+> index 896cf5b2ae9d26701150fad70e888f8b135a22b0..8a95f6bdb903be9d1993528d87d5cae0075a83e4 100644
+> --- a/test/dm/power-domain.c
+> +++ b/test/dm/power-domain.c
+> @@ -27,7 +27,7 @@ static int dm_test_power_domain(struct unit_test_state *uts)
+>
+>         ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "power-domain-test",
+>                                               &dev_test));
+> -       ut_asserteq(1, sandbox_power_domain_query(dev_power_domain,
+> +       ut_asserteq(0, sandbox_power_domain_query(dev_power_domain,
+>                                                   TEST_POWER_DOMAIN));
+>         ut_assertok(sandbox_power_domain_test_get(dev_test));
+>
+>
+> --
+> 2.47.0
+>
 
 Regards,
 SImon
