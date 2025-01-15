@@ -4,77 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC87C02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 00:24:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4CCFC02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 01:14:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60AE18033D;
-	Thu, 16 Jan 2025 01:24:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id C392380658;
+	Thu, 16 Jan 2025 02:14:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="PC4NqLfu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MRab2cJt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A9A88069D; Thu, 16 Jan 2025 01:24:53 +0100 (CET)
-Received: from xmbghk7.mail.qq.com (xmbghk7.mail.qq.com [43.163.128.49])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CCABF806D4; Thu, 16 Jan 2025 00:14:42 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B3BC80214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 01:24:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 208B98033D
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 00:14:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1736987085; bh=sKaTFM8lUoT6CHV+wUua6N0CToCb020B2LyXcwYJdtc=;
- h=In-Reply-To:References:From:To:Cc:Subject:Date;
- b=PC4NqLfu4yxjqHjVStxuhoAHT+f2uNpXf1nKJJkkuHamV81U4o1UVUbtIOTHgwxWR
- +mNnNVkQZ9DE9T+ceYzLXAJPDXGRUElilUDhudZAhwxkz0HrpWPkQZwSMszZ7VGQuY
- NPV89o/VzBZS+kd6mFUZSXJJErxODg3NnbuV0L+o=
-X-QQ-FEAT: oHWrrGTW1dCni6VLWI7Xi3lwP5c1dnPf
-X-QQ-SSF: 00000000000000F0000000000000
-X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
-X-QQ-XMAILINFO: Md8NwmqZYy3fvageUsGvioLMQKwZ/e5O3VMtFpPZYs5KnR8tc42GI9P7oqBZiL
- hhDlD7aIptDJE8mKxJ5t6g4pel0mPGXmcZC4OqqXRQmeAo/fvdk52uJqRcyxDiTceJUtMtSJUqHPc
- PTfkg+UrR2AZNovMCvR8Qpw/HY6GYf0ZQUQKbiPGIxzFjgX5rG9rY4/VqJIB/1T+k3hiewODDJ9kV
- 81KoGMdmKndyLr1X8dThSYJajVEX6HkFkR0KJIv3Q0UVD6agAT3RbeGHrdsE25wuG8k+n5iZgpv9b
- F0tQ0IPWl3Sk61UZ8XPbluumfdx736n5CGKwN391pb60VN7HG7tv5gRlqi+HuLjdCEkr1yBGmf4Kq
- V+KrfCsL9dCWP0k4UKcMb8gkSE7TqFEeU54Ux5QaT2Fv1ItX+AHJhV5xcdxtCoZfqsYS9BvmtaoMd
- 6Wsm+zQC3XQ46FInpAkJ00GAtdXy23l/zLUSe5PWqL+iHOswPAn1hIlwu/02if+jppBMAcToJKHyl
- otaH4sQfIPkiv59WqA8tAuXvapEwL4i//OyQ5b/De47Cgp3+SXUF6OUpiaonGfEn8somn1SvdFVzy
- OC2Ku6iP7VDonaLlZMOujJyJqA3ycxqX8Gp9JYaB29/grTFMQFeZPuy4yFDQfHNLMnMqNSdAER3vA
- FB0C36F8kSR3EAPjLPXIpDY1Haol1LwsX77uDAHb7mAFX5mOxYcxcI7atx4NY1IkGHh+8YdnYhQTG
- /H+XiOLU438FskeDQGAMterm46fCKbM6KDVUcE+TIfdChEAHtkaPMQ2bAyB2immS0qJ0ovMhbIqPq
- NZe0IhpPZHNtu77/pDQMh3kIE2TBDjzMA271WqAEEZ8vMHMULyzXmJCSqoScxG+kFF94OJtR8iy5d
- /cHgAAmdUY6MRBzc/R2EYQRqDzknC7FHDkBTWPBivkhnFZuvtgTqIh3C7sLRzHBsdGfWC5edAAxJ3
- I7tVPX8khaJjONX1d/
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 218.104.148.31
-In-Reply-To: <3d51107a-4761-4de8-9bae-a462c2a8e890@cherry.de>
-References: <tencent_9739C1044069984893BE3E6D3DB783BB6C08@qq.com>
- <3d51107a-4761-4de8-9bae-a462c2a8e890@cherry.de>
-X-QQ-STYLE: 
-X-QQ-mid: webmail864t1736987084t294286
-From: "=?gb18030?B?u8bA+9HH?=" <1425075683@qq.com>
-To: "=?gb18030?B?UXVlbnRpbiBTY2h1bHo=?=" <quentin.schulz@cherry.de>,
- "=?gb18030?B?dS1ib290?=" <u-boot@lists.denx.de>
-Cc: "=?gb18030?B?U2ltb24gR2xhc3M=?=" <sjg@chromium.org>,
- "=?gb18030?B?VG9tIFJpbmk=?=" <trini@konsulko.com>
-Subject: =?gb18030?B?u9i4tKO6IFtQQVRDSF0gbGlua2VyX2xpc3RzOiBV?=
- =?gb18030?B?cGRhdGUgdGhlIGFsaWdubWVudCB1c2luZyBDT05G?=
- =?gb18030?B?SUdfTElOS0VSX0xJU1RfQUxJR04=?=
-Mime-Version: 1.0
-Date: Thu, 16 Jan 2025 08:24:44 +0800
-X-Priority: 3
-Message-ID: <tencent_B912404198CB93E73E013D2783596C4DC108@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aaf57c2e0beso78630066b.3
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 15:14:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1736982879; x=1737587679; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1mon+XSQw5tjFY9zbKSnrRiGeuhK5FJdl/joAtMBIrE=;
+ b=MRab2cJtvcsRTzbt0+8eLJ1wxExqD1UsuqFkhn8qUe4PA6+qKTZwUPRnjC2b/XwBXk
+ 7Mh3pkfAfVYCOYT7MuGaAE1FeaaJcVod210Xzh7+plKTtg7A0cTdUxzNxFB+hR93OxjC
+ h6m5gBLd708TYh4+wEBLtArploqFtGzdk+Nac=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736982879; x=1737587679;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1mon+XSQw5tjFY9zbKSnrRiGeuhK5FJdl/joAtMBIrE=;
+ b=AKYxIzz3bHomWDVnv33ymzlz9B2y8eF9qT2HxeOnT6B1mJW09+xUBoo1n+Z2ZSmbQc
+ 0kzf/7cTxBNlAYtSNeKwivv98Kv+9Kv41CLGWdDSvflF3asWqyvjliBkv1nJo30JoWiJ
+ mkTUsG0PXE43AFSN8XrmgIjsMIj6F9xc/HfM8mndxfsFRj9qIO2CK/OweYC43hpbOeOQ
+ 0zJNCmwjMNf2qxFP3ahPOqt6yA/xJ33cdzKEbeUw8X+81lC3e1soR3wfHNKWKRm0bRb7
+ cSjycUg7j9YGjA/muCPoCk6NnCvCbRkwP/B7d4+vYZEuzDpJwRV5cYQyHe2/kUwj5vaf
+ HgjQ==
+X-Gm-Message-State: AOJu0Yz3UsMhAgKt3lDp2nKHStfafxOk9COeIFGNal7/hiel0osHX0gR
+ KJlVmhCGysh4ZC4pmalBQ6HzHbly1SrC1iZ3PK+YSuQTDqAUVc0SpjJKAJV1srH53Zc+zSU6g0w
+ IcyG2HIeH+tW4b48HmWwhRVDaHk+D3qATdECP
+X-Gm-Gg: ASbGncslWZn9kikwiV1HcPz1I4XQyQMWQNmAuB4LO/ityKGVhOaeWYJc5VYl1nCRZE1
+ evvSNmn+zOBYfmznFdkDj4xvUZJvHkT5W0QuiJDM=
+X-Google-Smtp-Source: AGHT+IFC9jY5opgkUyRhSTQIFBIFGAUnxjfEglLG4rrQqdVYaBk1bxAoMhqE7YFc5cvQKaqtfY8q2WJj9WEidxIxXWU=
+X-Received: by 2002:a17:907:d1a:b0:aa6:a501:9b3b with SMTP id
+ a640c23a62f3a-ab2ab6fdbb6mr2363912666b.19.1736982879525; Wed, 15 Jan 2025
+ 15:14:39 -0800 (PST)
+MIME-Version: 1.0
+References: <20241104175110.1048449-1-sjg@chromium.org>
+ <CAFLszTgFdNrRev+7n6j+NqCM+em_p-ONAc=+sztoYaP50HUivw@mail.gmail.com>
+ <20250115212439.GD3476@bill-the-cat>
+In-Reply-To: <20250115212439.GD3476@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 15 Jan 2025 16:14:27 -0700
+X-Gm-Features: AbW1kvYdGX1xMRtfuSdZRKtkSGLwpxq-gLkMS33dOO1NWThPU-M_27zEmAI2eXg
+Message-ID: <CAFLszTiSSq-+cSxVgxLJ8atAAjjxRP2AEQmXMbrf+c3FOepnFQ@mail.gmail.com>
+Subject: Re: [PATCH v3 00/19] bootstd: Support recording images
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Dragan Simic <dsimic@manjaro.org>, 
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Ion Agorria <ion@agorria.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mark Kettenis <kettenis@openbsd.org>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sean Anderson <seanga2@gmail.com>, Sean Edmond <seanedmond@microsoft.com>, 
+ Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
+ Tim Harvey <tharvey@gateworks.com>, Tony Dinh <mibodhi@gmail.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Thu, 16 Jan 2025 02:14:38 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,55 +115,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U29ycnkgZm9yIHRoZSBjb25mdXNpb24gYW5kIGRpc3J1cHRpb24uJm5ic3A7DQpJIGhhdmVu
-J3Qgc3VibWl0dGVkIHBhdGNoZXMgdGhpcyB3YXkgYmVmb3JlLCZuYnNwOw0KYW5kIG15IEVu
-Z2xpc2ggaXMgbm90IHZlcnkgZ29vZC4mbmJzcDsNCkkgd2FzIGNvbmR1Y3RlZCBhY2NvcmRp
-bmcgdG8gdGhlIHN0ZXBzJm5ic3A7DQppbiB0aGUgaHR0cHM6Ly9kb2NzLnUtYm9vdC5vcmcv
-ZW4vbGF0ZXN0L2RldmVsb3AvcGF0bWFuLmh0bWwgb3BlcmF0aW9uLg0KDQoNCkNhbiB5b3Ug
-dGVsbCBtZSB3aGF0IGVsc2UgSSBuZWVkIHRvIGRvPyZuYnNwOw0KV2hhdCBJIGtub3cgc28g
-ZmFyIGlzIDoNCjEuIEkgc2hvdWxkIHVzZSBhbm90aGVyIGVtYWlsIGFkZHJlc3M7Jm5ic3A7
-DQoyLiBTZWVtcyBsaWtlIGkgc2hvdWxkbid0IHNlbmQgcGF0Y2hlcyBkaXJlY3RseSB0byB0
-aGlzIGxpc3Q/DQombmJzcDtBbmQgaXQncyBvbmx5IHN1Ym1pdHRlZCB0byB0aGUgcmV2aWV3
-ZXIgZm9yIHJldmlldyBhbmQgdGhlbiBzdWJtaXR0ZWQgYnkgdGhlIHJldmlld2VyPw0KDQoN
-Cg0KDQoNCg0KLS0tLS0tLS0tLS0tLS0tLS0tJm5ic3A71K3KvNPKvP4mbmJzcDstLS0tLS0t
-LS0tLS0tLS0tLS0NCreivP7IyzogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiUXVlbnRpbiBTY2h1bHoiICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgPHF1ZW50aW4uc2NodWx6QGNoZXJyeS5kZSZndDs7
-DQq3osvNyrG85DombmJzcDsyMDI1xOox1MIxNcjVKNDHxtrI/Skgze3JzzY6NTgNCsrVvP7I
-yzombmJzcDsiu8bA+9HHIjwxNDI1MDc1NjgzQHFxLmNvbSZndDs7InUtYm9vdCI8dS1ib290
-QGxpc3RzLmRlbnguZGUmZ3Q7Ow0Ks63LzTombmJzcDsiU2ltb24gR2xhc3MiPHNqZ0BjaHJv
-bWl1bS5vcmcmZ3Q7OyJUb20gUmluaSI8dHJpbmlAa29uc3Vsa28uY29tJmd0OzsNCtb3zOI6
-Jm5ic3A7UmU6IFtQQVRDSF0gbGlua2VyX2xpc3RzOiBVcGRhdGUgdGhlIGFsaWdubWVudCB1
-c2luZyBDT05GSUdfTElOS0VSX0xJU1RfQUxJR04NCg0KDQoNCkhpIExpeWEsDQoNCk9uIDEv
-MTQvMjUgODowOSBBTSwgMTQyNTA3NTY4M0BxcS5jb20gd3JvdGU6DQomZ3Q7IFtZb3UgZG9u
-J3Qgb2Z0ZW4gZ2V0IGVtYWlsIGZyb20gMTQyNTA3NTY4M0BxcS5jb20uIExlYXJuIHdoeSB0
-aGlzIGlzIGltcG9ydGFudCBhdCBodHRwczovL2FrYS5tcy9MZWFybkFib3V0U2VuZGVySWRl
-bnRpZmljYXRpb24gXQ0KJmd0OyANCiZndDsgRnJvbTogTGl5YSBIdWFuZyA8MTQyNTA3NTY4
-M0BxcS5jb20mZ3Q7DQomZ3Q7IA0KJmd0OyBUaGlzIHBhdGNoIHVwZGF0ZXMgdGhlIGFsaWdu
-bWVudCBvZiBsaW5rZXIgbGlzdHMgdG8gdXNlIHRoZQ0KJmd0OyBDT05GSUdfTElOS0VSX0xJ
-U1RfQUxJR04gbWFjcm8gaW5zdGVhZCBvZiBhIGhhcmRjb2RlZCB2YWx1ZS4NCiZndDsgVGhp
-cyBlbnN1cmVzIHRoYXQgdGhlIGFsaWdubWVudCBpcyBjb25zaXN0ZW50IHdpdGggdGhlIGNv
-bmZpZ3VyYXRpb24uDQomZ3Q7IFJlcGxhY2UgX19hdHRyaWJ1dGVfXygodW51c2VkKSkgd2l0
-aCBfX21heWJlX3VudXNlZCBhbmQNCiZndDsgX19hbHdheXNfdW51c2VkIHRvIGVsaW1pbmF0
-ZSB0aGUgd2FybmluZyBvZiBjaGVja3BhdGNoLnBsLg0KJmd0OyANCiZndDsgUmV2aWV3ZWQt
-Ynk6IFNpbW9uIEdsYXNzIDxzamdAY2hyb21pdW0ub3JnJmd0Ow0KDQpUaGlzLi4uIGlzIG9k
-ZC4gSSBkb24ndCBzZWUgYW4gZWFybGllciB2ZXJzaW9uIG9mIHRoYXQgcGF0Y2ggYW5kIHlv
-dXIgDQpuYW1lL21haWwgb25seSByZXR1cm5zIHR3byBwYXRjaGVzIG9uIHRoZSBVLUJvb3Qg
-bWFpbGluZyBsaXN0LiBJIGJlbGlldmUgDQpSZXZpZXdlZC1ieSBuZWVkcyB0byBiZSBwdWJs
-aWNseSBnaXZlbiBvbiB0aGUgTUwgYXMgdGhleSBhcmUgYSBwcm9vZiBvZiANCnJldmlldyBi
-eSB0aGUgbWVudGlvbmVkIHBlcnNvbiBhbmQgaXMgdXN1YWxseSBhIHRydXN0IG1hcmsgZm9y
-IA0KbWFpbnRhaW5lcnMgdG8gbWVyZ2UgY29kZS4gSGVyZSBpdCBtYXkgaGF2ZSBiZWVuIGFk
-ZGVkIHdpdGhvdXQgU2ltb24ncyANCmNvbnNlbnQuIE5vdyBpbWFnaW5lIFNpbW9uIGlzIG5v
-dCBhbnN3ZXJpbmcgZm9yIGEgZmV3IGRheXMvd2Vla3MsIHRoZSANCm1haW50YWluZXIgY291
-bGQgc3RpbGwgYmVsaWV2ZSBTaW1vbiB3ZW50IHRocm91Z2ggYSBwcm9wZXIgcmV2aWV3IGFu
-ZCANCm1lcmdlIHRoYXQgcGF0Y2ggdGFraW5nIHRoYXQgaW50byBhY2NvdW50IHdoaWxlIG5v
-IHJldmlldyBtYXkgYWN0dWFsbHkgDQpoYXZlIGJlZW4gY29uZHVjdGVkLiBUaGlzIGlzIG1h
-a2luZyBtZSB1bmNvbWZvcnRhYmxlLg0KDQpTYW1lIGlzc3VlIGZvciANCmh0dHBzOi8vbG9y
-ZS5rZXJuZWwub3JnL3UtYm9vdC90ZW5jZW50X0NDRTgzMDM5MjY5NTdDNDI3QUFFMDZGOUQ5
-MTI4MjQ1ODEwOUBxcS5jb20vLg0KDQpJJ20gbm90IHNheWluZyByZXZpZXcgd2Fzbid0IGRv
-bmUgcHJvcGVybHksIGJ1dCBpdHMgYWNrbm93bGVkZ21lbnQgDQpzaG91bGQgYmUgbWFkZSBw
-dWJsaWMgYnkgdGhlIG1lbnRpb25lZCBwZXJzb24gaW5zdGVhZCBvZiBiZWluZyBwdXQgaW50
-byANCnRoZSB2MS4NCg0KSGF2ZSBJIG1pc3NlZCBhbiBlYXJsaWVyIHZlcnNpb24gb3IgZGlz
-Y3Vzc2lvbiBtYXliZT8NCg0KQ2hlZXJzLA0KUXVlbnRpbg==
+Hi Tom,
+
+On Wed, 15 Jan 2025 at 14:24, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Jan 15, 2025 at 06:55:45AM -0700, Simon Glass wrote:
+> > Hi,
+> >
+> > On Mon, 4 Nov 2024 at 10:51, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > This series provides a way to keep track of the images used in bootstd,
+> > > including the type of each image.
+> > >
+> > > At present this is sort-of handled by struct bootflow but in quite an
+> > > ad-hoc way. The structure has become quite large and is hard to query.
+> > > Future work will be able to reduce its size.
+> > >
+> > > Ultimately the 'bootflow info' command may change to also show images as
+> > > a list, but that is left for later, as this series is already fairly
+> > > long. So for now, just introduce the concept and adjust bootstd to use
+> > > it, with a simple command to list the images.
+> > >
+> > > This series includes various alist enhancements, to make use of this new
+> > > data structure a little easier.
+> > >
+> > > Changes in v3:
+> > > - Add a helper in bootflow
+> > > - Add a new patch supporting ad-hoc bootflows
+> > > - Add new patch to export bootdev_get_from_blk()
+> > > - Add new patch to record loaded files in an ad-hoc bootflow
+> > > - Update bootstd_add_bootflow() to return the element number
+> > > - Use the helper function
+> > >
+> > > Changes in v2:
+> > > - Add an image type extension in bootflow.h
+> > > - Change the tag to bootmeth_efi
+> > > - Drop patches already applied
+> > > - Drop patches which add new image types
+> > > - Update to use a new image-type enum in bootflow.h
+> > > - Use the word 'feature' instead of 'hack'
+> > >
+> > > Simon Glass (19):
+> > >   bootstd: Move bootflow-adding to bootstd
+> > >   bootstd: Move bootflow-clearing to bootstd
+> > >   bootstd: Add a function to get bootstd only if available
+> > >   bootstd: Drop the bootdev-specific list of bootflows
+> > >   bootstd: Move the bootflow list into an alist
+> > >   bootstd: Maintain a list of images
+> > >   bootstd: Update bootmeth_alloc_file() to record images
+> > >   boot: pxe: Drop the duplicate comment on get_pxe_file()
+> > >   bootmeth_efi: Simplify reading files by using the common function
+> > >   bootmeth: Update the read_file() method to include a type
+> > >   bootmeth_efi: Check the filename-allocation in the network path
+> > >   boot: Update extlinux pxe_getfile_func() to include type
+> > >   boot: Update pxe bootmeth to record images
+> > >   Update bootmeth_alloc_other() to record images
+> > >   bootstd: Update cros bootmeth to record images
+> > >   bootstd: Add a simple command to list images
+> > >   bootstd: Export bootdev_get_from_blk()
+> > >   bootstd: Add the concept of an ad-hoc bootflow
+> > >   fs: Record loaded files in an ad-hoc bootflow
+> > >
+> > >  boot/bootdev-uclass.c            |  78 ++++++-------------
+> > >  boot/bootflow.c                  |  77 +++++++++++++++----
+> > >  boot/bootmeth-uclass.c           |  29 +++++--
+> > >  boot/bootmeth_android.c          |   3 +-
+> > >  boot/bootmeth_cros.c             |  17 ++++-
+> > >  boot/bootmeth_efi.c              |  16 ++--
+> > >  boot/bootmeth_efi_mgr.c          |   3 +-
+> > >  boot/bootmeth_extlinux.c         |   7 +-
+> > >  boot/bootmeth_pxe.c              |  10 ++-
+> > >  boot/bootmeth_qfw.c              |   3 +-
+> > >  boot/bootmeth_sandbox.c          |   3 +-
+> > >  boot/bootmeth_script.c           |   7 +-
+> > >  boot/bootstd-uclass.c            | 104 +++++++++++++++++++++++--
+> > >  boot/pxe_utils.c                 |  36 ++++-----
+> > >  boot/vbe_simple.c                |   5 +-
+> > >  cmd/Kconfig                      |   9 +++
+> > >  cmd/Makefile                     |   1 +
+> > >  cmd/bootdev.c                    |   2 +-
+> > >  cmd/bootflow.c                   |  11 +--
+> > >  cmd/bootstd.c                    |  65 ++++++++++++++++
+> > >  cmd/pxe.c                        |   2 +-
+> > >  cmd/sysboot.c                    |   6 +-
+> > >  doc/develop/bootstd/overview.rst |  24 +++++-
+> > >  doc/usage/cmd/bootstd.rst        |  79 +++++++++++++++++++
+> > >  doc/usage/index.rst              |   1 +
+> > >  fs/fs.c                          |  15 ++++
+> > >  include/bootdev.h                |  36 +++------
+> > >  include/bootflow.h               |  88 ++++++++++++++++++---
+> > >  include/bootmeth.h               |  22 ++++--
+> > >  include/bootstd.h                |  69 ++++++++++++++++-
+> > >  include/pxe_utils.h              |  14 +++-
+> > >  test/boot/bootflow.c             | 126 +++++++++++++++++++++++++++++++
+> > >  test/py/tests/test_ut.py         |   3 +-
+> > >  33 files changed, 788 insertions(+), 183 deletions(-)
+> > >  create mode 100644 cmd/bootstd.c
+> > >  create mode 100644 doc/usage/cmd/bootstd.rst
+> > >
+> > > --
+> > > 2.34.1
+> > >
+> >
+> > patchwork link: https://patchwork.ozlabs.org/project/uboot/list/?series=433068
+> >
+> > What is the status of this series please?
+>
+> So, for v4 of this series, most arm64 platforms grow by ~1KiB (a few are
+> 2, a few are a bit less than 1). 32bit ARM is similar but now mx6sabresd
+> doesn't build in CI (there's some embedded path names that now overflow,
+> try make O=/tmp/1/2/3/4/5/6/7/8/9/10/mx6sabresd mx6sabresd_config all).
+> For size changes, really most architectures are like that, so perhaps
+> it's worth stepping back again and asking where this should be default
+> enabled. For the mx6sabresd part, if we drop the recording for ad-hoc
+> (which I think you had suggested at some point since I wasn't sure about
+> that direction), everything builds at least.
+
+Thanks for looking at it. So what do you think about dropping those
+last two patches and applying the rest? The increase is about 416
+bytes on pinecube (Thumb2). Quite a bit of this seems to be bringing
+alist which is something of a one-off hit:
+
+                 alist_ensure_ptr                             -      64     +64
+                 alist_calc_index                             -      32     +32
+                 alist_add_ptr                                -      26     +26
+                 alist_update_end                             -      18     +18
+                 alist_empty                                  -       6      +6
+                 alist_add_placeholder                        -       6      +6
+
+Then I can use the final two patches as the start of the series to
+finish off ad-hoc images.
+
+As to default-enabled, moving bootflow to an alist isn't really
+something we can disable.
+
+Regards,
+Simon
