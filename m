@@ -4,37 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FA1AC02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:52:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 941BEC02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:52:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80DE980657;
-	Wed, 15 Jan 2025 14:52:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 09D18806D8;
+	Wed, 15 Jan 2025 14:52:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA4B3806DD; Wed, 15 Jan 2025 14:52:40 +0100 (CET)
+ id 18C5180714; Wed, 15 Jan 2025 14:52:42 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id AD70580214
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:52:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 10D76806D4
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:52:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harrison.mutai@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4F9FB11FB;
- Wed, 15 Jan 2025 05:53:06 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DCD9311FB;
+ Wed, 15 Jan 2025 05:53:07 -0800 (PST)
 Received: from localhost.localdomain (F4CK67LV29.cambridge.arm.com
  [10.1.37.153])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 058303F63F;
- Wed, 15 Jan 2025 05:52:36 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 932493F63F;
+ Wed, 15 Jan 2025 05:52:38 -0800 (PST)
 From: Harrison Mutai <harrison.mutai@arm.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: nd@arm.com, andre.przywara@arm.com, manish.pandey2@arm.com,
  Harrison Mutai <harrison.mutai@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 0/4] Enable bloblist support on Vexpress64
-Date: Wed, 15 Jan 2025 13:52:03 +0000
-Message-ID: <20250115135209.13946-1-harrison.mutai@arm.com>
+Subject: [PATCH v2 1/4] bloblist: fix typo in code comments
+Date: Wed, 15 Jan 2025 13:52:04 +0000
+Message-ID: <20250115135209.13946-2-harrison.mutai@arm.com>
 X-Mailer: git-send-email 2.46.2
+In-Reply-To: <20250115135209.13946-1-harrison.mutai@arm.com>
+References: <20250115135209.13946-1-harrison.mutai@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -53,37 +55,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series of patches enhances the vexpress64 platform by enabling bloblist
-support. It also introduces support for CONFIG_BLOBLIST_PASSAGE. This is
-necessary to boot vexpress64 and other boards without manually specifying a
-fixed address and size for the bloblist.
+Fix the two typos in the spelling of same and set in common/Kconfig and
+include/bloblist.h.
 
-After this change, all the bloblist init modes are supported (i.e., fixed,
-alloc, passage) and Vexpress64 boots with CONFIG_BLOBLIST_PASSAGE.
+Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
+---
+ common/Kconfig     | 2 +-
+ include/bloblist.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Changes in v2:
-
-* The commit body for the typo fix was expanded.
-* The default BLOBLIST_RELOC_SIZE was removed when CONFIG_BLOBLIST_PASSAGE is
-  enabled, the relocation size depends on the size of bloblist received.
-
-Harrison Mutai (4):
-  bloblist: fix typo in code comments
-  board: vexpress64: default to hardware device tree
-  bloblist: add support for CONFIG_BLOBLIST_PASSAGE
-  board: vexpress64: enable bloblist for SPL handoff
-
- board/armltd/vexpress64/Makefile        |  3 ++-
- board/armltd/vexpress64/vexpress64.c    |  4 ++++
- common/Kconfig                          | 10 ++++++++--
- common/bloblist.c                       |  5 ++++-
- configs/vexpress_fvp_bloblist_defconfig |  5 +++++
- doc/board/armltd/vexpress64.rst         | 16 ++++++++++++++++
- include/bloblist.h                      |  2 +-
- include/configs/vexpress_aemv8.h        |  6 ++++--
- 8 files changed, 44 insertions(+), 7 deletions(-)
- create mode 100644 configs/vexpress_fvp_bloblist_defconfig
-
+diff --git a/common/Kconfig b/common/Kconfig
+index 0e8c44f3f7..7a80b797df 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1083,7 +1083,7 @@ config BLOBLIST_SIZE
+ 	  Sets the size of the bloblist in bytes. This must include all
+ 	  overhead (alignment, bloblist header, record header). The bloblist
+ 	  is set up in the first part of U-Boot to run (TPL, SPL or U-Boot
+-	  proper), and this sane bloblist is used for subsequent phases.
++	  proper), and this same bloblist is used for subsequent phases.
+ 
+ config BLOBLIST_SIZE_RELOC
+ 	hex "Size of bloblist after relocation"
+diff --git a/include/bloblist.h b/include/bloblist.h
+index f999391f74..03d9862c0f 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -463,7 +463,7 @@ int bloblist_init(void);
+ /**
+  * bloblist_maybe_init() - Init the bloblist system if not already done
+  *
+- * Calls bloblist_init() if the GD_FLG_BLOBLIST_READY flag is not et
++ * Calls bloblist_init() if the GD_FLG_BLOBLIST_READY flag is not set
+  *
+  * Return: 0 if OK, -ve on error
+  */
 -- 
 2.46.2
 
