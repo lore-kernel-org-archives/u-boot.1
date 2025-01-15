@@ -4,77 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29C3C02183
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:07:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBD00E77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:09:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8F1B806FB;
-	Wed, 15 Jan 2025 03:07:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E53F8069A;
+	Wed, 15 Jan 2025 03:09:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LipUcXth";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U4SUNzNz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC758806FB; Wed, 15 Jan 2025 03:07:42 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 88B1F806D4; Wed, 15 Jan 2025 02:43:55 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 597F4806FB
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:07:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5590480027
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:43:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6d8e8445219so54886496d6.0
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 18:07:40 -0800 (PST)
+ spf=pass smtp.mailfrom=zhang971090220@gmail.com
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-216426b0865so108682425ad.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:43:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736906859; x=1737511659; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1736905432; x=1737510232; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rOLQUoLgXZV8xkRvSRYHbZkxaBxVKWjPEGa68lA4g3Y=;
- b=LipUcXthM9qCEn3OmNPG3BWDRBLuhIlb2tDKnjHMuVLrA8s0lu6EOx7z2EL1BsMUpY
- 9q0nw8X40UEDicajVh7+0QiZR2iX8xzQAi8rTO8f9v/r/rMnRysem9uBRMs0IA4YKLUH
- J4DF/HiEuSWFJMVDZOhIzUz8MrE6R4JUL9Q6c=
+ bh=6CBVz5021LfmNYPPOCpoOCJxOPZ0KxEsd/n+moihRM4=;
+ b=U4SUNzNzTBlgxE2VW1ipD7aLwyV51+5RnXDcCU4OG/pK84ikoj/mmIGjFi7c9PltUz
+ fp2QvDUGPkNLA7C2/NTgLcNoGbM2WJ1Sl9gYSIbIcOTe4rDON3mgQObkufGfb5DrO5gt
+ aq4GXe27Pv8VVeMSaoHWB9bfWqmjEZgY5R0T10lfgoZWtS0g0z6ITZlrRQ2a4GtGypAP
+ K0a6ka468bxNip13iREV7myz7OwZT8DYagjmyXhOU4k5oshLWeOD/BRkKqYABUI5nr29
+ rvuyXasiZ1ZvyNgprFkcXnKwHN8YoKzZy6ccboSe3/LJGIs01pacar8t3KTh4NOJAIFm
+ 5D3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736906859; x=1737511659;
+ d=1e100.net; s=20230601; t=1736905432; x=1737510232;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rOLQUoLgXZV8xkRvSRYHbZkxaBxVKWjPEGa68lA4g3Y=;
- b=A2gwBoO+wq/rr6MZrkYcbd9CCDhkVDpdmsR2oNLWWOVoHv5ztvMfsoDx6pU7pES9tt
- 0qaak1+K9NXIlaMYRL0Uca5OloTIq5V+MshTlr0bfOleqa4BX3OxK4DE5zTREpRyQ04N
- h2R4ONDVDA8uFaiNLiQzJRNt2wuRKAiHUslbkcZMB+n4XLzbe1git2aXYiq3VWadmUjq
- M587cSYFVwo3meFdTUpKJse/pySw6AW6nDDL+pW56VaS0H/c7/QlBvDJb0ObulFgy/Ca
- wF7FPOMB8swAHqR56V7nZyiIezzXlyHYbWPE6OIZ25eMDwWtNe4Jzl7ufEaXYDMtBvnz
- E/wg==
-X-Gm-Message-State: AOJu0YzC/rdjnxOPHlfqcCHMgbUYHLdE3FI6DqSziBvcqj8d9bbNoWcD
- 0t+8fY9mM4ylJNxGSBp4vNMQvhIeIncvmMeNdDhsuqYZUioUmRVCMXiKbsSh5aPy61cab8LWJYW
- E
-X-Gm-Gg: ASbGncskt8oKk7zLJhZGWhrdJHKtdp/kA7p1n6tUnUg4T8s+teXD5H7J76lOWL1aaGS
- eAHQcy27jo5pLZ2JoZzvEi9CNi3cXApDiSNmnQ/sqb1rVgpaLxKXyEPi0tgESoxDl49MGQXCbfe
- Vr1Cz99640d+dRwgLxLaNZO9ULsr40LqGjTl6vVHxbcupPRwnSc3hxtB/qMXbpxNnaOpHdwFfet
- rWJ88xMEBI/jpdxib3Sy6akIzIQ8ndQHJxGOgYmbLTia6WvUiQZ54hAI2mJDql95Qaq/7hAEXC4
-X-Google-Smtp-Source: AGHT+IGNU6vDW1Jit+CQ3JeTyRZztXRqeh4RY3KFBoLb55LLD+0yWnPigONFCBa99xzAkTrBotMcRA==
-X-Received: by 2002:a05:6214:1d0a:b0:6d8:9e9d:c223 with SMTP id
- 6a1803df08f44-6df9b1cee68mr495899916d6.7.1736906859350; 
- Tue, 14 Jan 2025 18:07:39 -0800 (PST)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.16.9])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfadeb3e69sm59388056d6.124.2025.01.14.18.07.38
+ bh=6CBVz5021LfmNYPPOCpoOCJxOPZ0KxEsd/n+moihRM4=;
+ b=RcA0Se5LxE9c5yMEX3V/pshzteUMNyOTTZJ6bqduRGBJtZNKCTgu714Bnm9vLQEfjv
+ Gh/K9xTVSVWy5NUVdu0fyGogvybrgJCgCDuSMHPWhgLSluvhq9d/0DsVgmVcz+1xwyUC
+ rmmpeWehs8sEsuUZsowFXO3Nw79MOLBk/sjuzR3OjXVeldIRgLA2Jp5j2SCDHQd1xkK+
+ T46wIiyzFNZnnkPuQP+HD2GbHN7K+pTXWLtT0lfLMkX29jfBxzQ740qv/PE7ADiitiEc
+ fmFtxCoE75aQwly33aNmq4n+NK8ZMedccy/lgaM5UXMLDbVwLiF8c2Ot5XcTyteMDNzd
+ 1Qow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWuRAy/vUDAAjh4rIDtbDU36vB9dOQyeNS/iR5b/hhWXSWAysk1tfCgdM6W8c5kbYc57OkCIOE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz9mmsIgaPkYXiQlkHmbWcHJbPeHJaK1HqhGAoYjo+4VzEvx5Y0
+ FYnh5ccOKGBa5ZeJmYdEXon2cA7wA+LDv2T5bgJSnianbEPVJ49N
+X-Gm-Gg: ASbGnctgLEBFQqAtdmt8DXi0ylkXOSbjT95HOc+VIKmWtfSGerlBD9GciBNwnRGSF94
+ 1/iNTvo9K/uZcPA7gnXANrluncuNSIgsDW/f6Pspow7ireIG8NcZt+wScI0TNSCej9sxOMHCJ8O
+ I6OBCJGcaf2YfoU+IBIH6GzQ/StG34EzBC0fj160uFx0d6T/i6UaEXl63ySUBda63weX5+YRr41
+ gimm1G5QxxEDmMe2U68XnraXpOqpQtvdxZEMS45hJ++0ODjpcXH9+T/DyoaMezK6ZSEUQeNVoY5
+ 3RLuRZYyACz8vnQTO1001QJvjwQr
+X-Google-Smtp-Source: AGHT+IHuCU4v8v3OWPjDjMiLIPlLC/gPLe1VRgb9IsCo9OaBYT9K7Qa2lNwhZ75Y2duW9fuXhSeMrw==
+X-Received: by 2002:a17:902:db0f:b0:21a:5501:938 with SMTP id
+ d9443c01a7336-21a8400ae3fmr419967255ad.52.1736905431749; 
+ Tue, 14 Jan 2025 17:43:51 -0800 (PST)
+Received: from hcdev-d520mt2.. (60-250-196-139.hinet-ip.hinet.net.
+ [60.250.196.139]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21a9f10ddbesm73634675ad.2.2025.01.14.17.43.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 18:07:38 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Peng Fan <peng.fan@nxp.com>,
-	Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA options
-Date: Tue, 14 Jan 2025 20:07:36 -0600
-Message-ID: <20250115020737.230558-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ Tue, 14 Jan 2025 17:43:51 -0800 (PST)
+From: Michael Chang <zhang971090220@gmail.com>
+To: trini@konsulko.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ zhang971090220@gmail.com
+Cc: JJLIU0@nuvoton.com,
+	u-boot@lists.denx.de
+Subject: [PATCH v3 0/1] net: designware: Add bitbang feature for designware
+ driver
+Date: Wed, 15 Jan 2025 09:42:10 +0800
+Message-Id: <20250115014211.2599328-1-zhang971090220@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 15 Jan 2025 03:09:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,39 +99,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The option MMC_SDHCI_ADMA_FORCE_32BIT is only tested or used when
-MMC_SDHCI_ADMA or SPL_MMC_SDHCI_ADMA is enabled. And for
-MMC_SDHCI_ADMA_64BIT the same is true except we also require
-MMC_SDHCI_ADMA_FORCE_32BIT to be disabled.
+Changes for v3:
+	- Support multiple buses for multiple Ethernet interfaces.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
----
- drivers/mmc/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+Changes for v2:
+	- add bitbang delay dts read
+	- modify printf to debug
 
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index f4fdf15242ce..6dc8d3bf9fe2 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -527,6 +527,7 @@ config SPL_MMC_SDHCI_ADMA
- 
- config MMC_SDHCI_ADMA_FORCE_32BIT
- 	bool "Force 32 bit mode for ADMA on 64 bit platforms"
-+	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
- 	help
- 	  This forces SDHCI ADMA to be built for 32 bit descriptors, even
- 	  on a 64 bit platform where they would otherwise be assumed to
-@@ -536,6 +537,7 @@ config MMC_SDHCI_ADMA_FORCE_32BIT
- 
- config MMC_SDHCI_ADMA_64BIT
- 	bool "Use SHDCI ADMA with 64 bit descriptors"
-+	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
- 	depends on !MMC_SDHCI_ADMA_FORCE_32BIT
- 	default y if DMA_ADDR_T_64BIT
- 	help
+
+Michael Chang (1):
+  net: designware: Add bitbang feature for designware driver
+
+ arch/arm/dts/nuvoton-npcm845-evb.dts |   1 +
+ drivers/net/designware.c             | 111 +++++++++++++++++++++++++++
+ drivers/net/designware.h             |   6 +-
+ 3 files changed, 117 insertions(+), 1 deletion(-)
+
 -- 
-2.43.0
+2.34.1
 
