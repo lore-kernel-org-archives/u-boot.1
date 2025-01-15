@@ -4,88 +4,181 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96FC3C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:22:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E33DC02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:29:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 210F3800C2;
-	Wed, 15 Jan 2025 14:22:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 147C8800C2;
+	Wed, 15 Jan 2025 14:29:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YHFXO+tQ";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="Opz3v4xn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D55280214; Wed, 15 Jan 2025 14:22:56 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9993880214; Wed, 15 Jan 2025 14:29:11 +0100 (CET)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::618])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EE2F80040
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:22:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 506E880040
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:29:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d3f65844deso10932358a12.0
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:22:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947374; x=1737552174; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XjckX0jnYMieB2wXp400b5WzGKpGylvUqZVHqzd3ano=;
- b=YHFXO+tQZlNYynzHCfuyIOGidLJV3Ex6E8WF3JTBFAsibtAcVSKytqRbM7BnTDcMW2
- s0P7vvWCaqF7iwkZjqw4OSOKYTQDvXzw+5lGcij8CFt0ywOzHLNbQG0X7I5r6b29yAjP
- cwZqYngDS3bMLGUUBFaLKwP0loeLcwFJwv9dw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947374; x=1737552174;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XjckX0jnYMieB2wXp400b5WzGKpGylvUqZVHqzd3ano=;
- b=fpRMOLxZsppx95UE5icIy0K/5t/5RAzDTx07DixvQjAVoMkkURNZ8RNV46XLM6+lzv
- DzQ0PudxJeXq6EnmT6goA1AUQjakbLg1MR39K1VZVFa5I+4I4zHByQDwqrOFE7McxALP
- F9Yuo27vEOcZXmw2/vxK1CzQ/xvMMxULmaZ49wWcG1kvZ1U9EsVjuyZGmrrrKoMBI6lz
- DL8lbhe443M8m3gfHgWuZsz50oyCVL6tHNsTq1jxzt9yI7J3YJWVnO33Dzh/rcGIuipd
- MiR8v2719uqZjuEpRXfdnAqty3iDoew8PL/8UEHZk00YFSzHlxM6hkzYVMF8Rrun+PZy
- Jk4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWaML70dHqnJilKn+ipMY9FVNQxuzghjE8nOmBuikTBSskHq8dtriWrBiA0KaXnj7PN5RMhtt8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwlbdTHA39NO2Ck++B101GIqk5aNjJX+/M0sgJD4MlOLFg12dCM
- zszivdMi3fOoD/aQnqnYnOvaGEOliNU0eMsqnMzIO1nZC7V3ECYCgZ3bWsBy4JJlAtgUbj1XJsp
- 14zyNZv1BJqGkWKTWQa0CpjPk3bR63+hmAQqx
-X-Gm-Gg: ASbGncu9t3pMRbMlOe5z2ZsoPXbXEg/Z4vFs8LSBUTqBpF+YWtoVoRcal/vrp7djY0U
- F8r1W5uG34yC9kbB9uIBUPWfYJpMzQc7tYKnv2EQ=
-X-Google-Smtp-Source: AGHT+IGfUuyXxYOgtWbLjvz+uybZ+02KHGxVIeYNMLScP7fqd4QxdiNY5I+dVWSrZlQhrQHC3iZh2PutQ2HBI4lsjE0=
-X-Received: by 2002:a17:907:97c1:b0:ab2:db7b:5db3 with SMTP id
- a640c23a62f3a-ab2db7b5ee7mr1783090766b.54.1736947373735; Wed, 15 Jan 2025
- 05:22:53 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SQAOAlrjPM0FBrEmjaIauQ1CM1vQLffgnF1Bv1xOktUTjBeMg3i2T/rLedlNgB3vKwjh0cJdLrIIdvregDly51lfWGare+0c1tzsu2YCl4RlBDiM5X7h2yoVbnDNlUlb4LWuInXLY0bgrNhEMwlYL5PE8I1VoDlli8t4dp8PDYECl9l0elY5ttJvVYGoXiFiMoKGKrBywmr1c3S2n2IriFpapvkhQ6iM0AxO25sAwURDICsNushkrgbViSot4ms6BLNdew8QlngwlnN5Zy8Vn2ejI8O0pI2H+NdERYHKkkBwXIweAZqTHy/gBOVP7MEeWblEvkYfsPUFxFyBvakQGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=p9F5n2usOYWNVDNBJrOEeEp5A9yxZwLck4GxIfsNN4s=;
+ b=wQaYc2Yw6TYmncD+h/hyTRrcBbQZEUD/nF+gNtQlIGhySWOFGVJ5JkbQC3uyDuJYlwvlasACRguLTIHc0xkwfmX9KALEP+3iIdS/H116ztv3cYzAbnFQDKou2zqUOsFLlS1UuVQeSVS9cRiS+59xgJwMZzhpGz0E3vTSb1V4HedwazJEwbadpnx02X2enRcungi2Ri/8zOSoiAzU/TcS83OtTDNFzjjtEMhuVPf6q7YW/L1Vcn3R8ukEHri8PDhfhDM5B1Ne+1foNUbS6el2tJpFcQvUIlkJQ2GR1t2OUU1PuAB5MQRSBRbspeMdon93aVIdhPhfNvNwe+7cvR5D1Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=p9F5n2usOYWNVDNBJrOEeEp5A9yxZwLck4GxIfsNN4s=;
+ b=Opz3v4xnEfF6gBjI0P6NFOk5P+zMp2B/cPo3bo0/Amr35yt3tPll6Rwx9PcaXyj7/heQR2JvSjSiPjuBMGC+qiqBfFtvSLsTAHlyY0+ntSw+FumpSomQ9PtOhETD2HHifuLBLdd/pOml5HBuKdRmGLO2EB/vv9FEuXl8b1npdQs/tyWjhsaaDZF30yoQarC4w+t4wHkJlELVnVEmM4/2FYcRqdBXoE9iiQyWDjaLUCPWKeZMywOu2i0Z3Oj8uiDJcPVdGMm3DoSDJUPEDcUeOKmNCSR/rMZLvrLqI6t9NFVZubyCF+AC4CRWMfPqIxM5owlSYWX8gsPvz/YFj6dEcg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by AM8PR04MB7764.eurprd04.prod.outlook.com (2603:10a6:20b:244::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.13; Wed, 15 Jan
+ 2025 13:29:07 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%5]) with mapi id 15.20.8335.017; Wed, 15 Jan 2025
+ 13:29:07 +0000
+From: Alice Guo <alice.guo@oss.nxp.com>
+Subject: [PATCH v4 00/20] imx: add i.MX95 support
+Date: Wed, 15 Jan 2025 21:28:47 +0800
+Message-Id: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABC4h2cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDQ0MT3czcCktT3cRki6Sk5OQUc8NUUyWg2oKi1LTMCrA50UplJkqxtbU
+ AQIOJmlsAAAA=
+X-Change-ID: 20250114-imx95-ac8bbccd71e5
+To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, marex@denx.de
+Cc: u-boot@lists.denx.de, tharvey@gateworks.com, 
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ Viorel Suman <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>, 
+ Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>, 
+ Teo Hall <teo.hall@nxp.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1736947742; l=5159;
+ i=alice.guo@oss.nxp.com; s=20250115; h=from:subject:message-id;
+ bh=wStFnrTCGDJ4Whxtf2dyDJLUUZhN7KXk/rbn+0HsTN8=;
+ b=+NfEjzevDPPzZEqzoIWtqFesMk6Ty31wAE3EgxxhGV21o91h8TuXRrLtnO72Mg8jkDtKaC5w4
+ IpV/froFLIqCwj9oeDnpYmPxkZryix8raJfJUTrAXoj2U/Wn60Bj2W5
+X-Developer-Key: i=alice.guo@oss.nxp.com; a=ed25519;
+ pk=MQFotjdbgvdbpnpHmN/PUzfJXX0wchusR4L7yfs2VZQ=
+X-ClientProxiedBy: SG3P274CA0022.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::34)
+ To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
 MIME-Version: 1.0
-References: <20241113150938.1534931-1-sjg@chromium.org>
- <20241113150938.1534931-5-sjg@chromium.org>
- <517d087e-4ac5-4fd5-a37f-d4d3aaa534bd@gmx.de>
- <CAFLszTjbDHvMvv3U+SaW0_7b4oajW8RRf6KYbF_jex34en6ByA@mail.gmail.com>
- <20250109150454.GT3476@bill-the-cat>
- <CAFLszTgtP5vXT+HsvHP8i50KihetHf2-h3KPp2-f6M4XJ3+i8g@mail.gmail.com>
- <20250109152234.GW3476@bill-the-cat>
- <CAFLszThy9OkfMMbbyzUvWF19rvTRk64q62J+Lhk=U0VABwZNbQ@mail.gmail.com>
- <20250110170531.GK3476@bill-the-cat>
-In-Reply-To: <20250110170531.GK3476@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Jan 2025 06:22:40 -0700
-X-Gm-Features: AbW1kvYnx1SHRGdLPLgbVEnDF1RNtAaobBa1E48T59rKmUEOVdlhlFdBKm0nugU
-Message-ID: <CAFLszTgHe5ZOvD_6w=hGhA2E97kPXxLS7tPPZWMm0_w4gGn58A@mail.gmail.com>
-Subject: Re: [PATCH v5 4/8] RFC: Revert "bootstd: Make efi_mgr bootmeth work
- for non-sandbox setups"
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AM8PR04MB7764:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f8f3b85-a535-4f95-6495-08dd35689624
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|52116014|7416014|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RnJRenBjb0RmVndFZFhqb1RpOEpYay9VMk9GK1ZqeUZIZnovOGlLM2xERkRp?=
+ =?utf-8?B?MnJ0blhGQ1Naa1FINmhHbGZhUXZUK3BQRXpEbitYczdWa0ZFdVpiOHpLR2s2?=
+ =?utf-8?B?SHVUOXVLcUs4cWgxajQ5TzJIdXNEcW5SbWNHOVZMcUU0N1pwdEdWOTFKME5r?=
+ =?utf-8?B?MXpEdnJoOE9zdGFCbXlWUUtjQ01uSnYxR3NtL01jOFJOcXlxMmpOQWF5NmhS?=
+ =?utf-8?B?NTFFaFN6Z3VlMDNUdlhwTzNFeWt2Q1FQSlEwTXRaYkoyQWNoZVB3NmIwT2VD?=
+ =?utf-8?B?cnZSalh4MHNTWWc3dG9TbVU1TnlyVUFGVVR4RDFvcS9qK0lCNmVuQ2dFWnUz?=
+ =?utf-8?B?bW1QZUE3bVdqeEFHR3FRTCtUcE5vN20vTENONElCVHNETklYckdTSmh6ME1H?=
+ =?utf-8?B?anliTmhJVzNuZ3BDK2RNeW5LZktCdDlYR0NETzdPOURNclZaWHdYUkFGR0VL?=
+ =?utf-8?B?b0tNdDViMXpndEVmZWp2WC9VQjhVd252STNyMmE1alEyNkIzU3haWUdiU2JR?=
+ =?utf-8?B?d2tISVlldERaUjNWQTJldGNJSWZQMXJBY1ROaHZOaWEyNUN6UEJGMG03YTk1?=
+ =?utf-8?B?NnM3dm9NeUtuWDVoRlphQ1ZGcTE2TXRzRW9yQkwvSFZwQUxmYll6aFRoODRn?=
+ =?utf-8?B?UE5JcmlyaVovSGVBY2g0S09OeGpKR04xdnBoeEMzMUtCWHdJUEFhcWFjcExk?=
+ =?utf-8?B?OUZpZHZBYVdiY2NUR2FxeDZJZXd6TGlKMEFuendLaXZuT2tUTzlodkcydDA5?=
+ =?utf-8?B?cm9VYTltUTcvRTdjdEpSK2JtWmpObHlyY3ZoTW4wZ1MxQm11ZnhPSHBMbWVX?=
+ =?utf-8?B?eGNzWHRPWk5MOFl0dmgvNWh3M0tFRmx1a0p3K3AvdHlIZmpFaHQxREphQnJP?=
+ =?utf-8?B?dmxadkx0QVQ1UWFWb1pFdnlSclBDVEFGVDNwS0RjVVpqOGNiQWVyQW1ha3pn?=
+ =?utf-8?B?T2xMTERWRmZ6YXhCeVJnMkk5RlhQNUxzSDB5clVBODJxZEZtQ1IyM1Yvckti?=
+ =?utf-8?B?cENwY0xWaVVRY3ZNUEdUblVFSnVZbzBxNGhCalNBUUZiUURoOXpPbkh6K0s0?=
+ =?utf-8?B?b28vb0VtbExtSCtDanhMeGlZV1UyY09TSG9DZmhHbGt4cE1DL2Fpcnl0V0hh?=
+ =?utf-8?B?MktQd0lCZE9DWTM4MTl0b1F2L21mWHF6MDdSM203VUZHMG1hY2Y4UzJBNTJJ?=
+ =?utf-8?B?UHZ1Sk9WNXRpd1pOYXBiNUFvQjlrTzlLQTRMWkJYNm9HYTRYbTUxOXRIc3cv?=
+ =?utf-8?B?dTBxYStZdmJHR2xmdG5ocUpDT3dmMTRuK2hnU2taLzlRUXFhSnNHMTk0ZkY1?=
+ =?utf-8?B?REx0V21GMFVnVUx4ZXZRaTFGRHF5K2cySG10aTVrdWNaRVdIN29XQnZUYlJp?=
+ =?utf-8?B?WjlkWTIwcnNTSm84bW9WWGhOdlFSQ1BVY09BWHVhbERSc1BEamZaMEZlR2VC?=
+ =?utf-8?B?Y3QxSWluS3Y0ZUd5MWlqRWlYQXJYZ1hnN2U4OVBFZCtQd1lKYWtLVVpxNUQ0?=
+ =?utf-8?B?Vjd4WHoyUXdOcDRhc1BnVEpKQ0M2Rm9ydmluM2FZOWg1SnNzU1hIcFgvV20v?=
+ =?utf-8?B?SDFhR2pSKyt1cUpSOVpWWm9jREkwSWI3QlNjYThuWWhlcS9oMEZ3RWtMdFhG?=
+ =?utf-8?B?UmVycnc1RGNQYWxlUzgyeEdVWnFEYk0wenRyYVQyWWNpTnB4a3RITTNqZmdY?=
+ =?utf-8?B?MHBWVlVlNXh0amE2U2tHci9ydUcxT2s3NTl4azNLN2tGUFY5RjEvYlYzNHFx?=
+ =?utf-8?B?SklhMG9Jc0YyekhDTVR3cGNWeDJ5Si9vZE52VSs4YjljY3l3QUw2d1hYbTNk?=
+ =?utf-8?B?eDV1MVBiY0Z5dTBHV2YyNXh5VjdOTFlaYTU0eVBYc1c2cGlZT2l5MWZRNHhx?=
+ =?utf-8?B?TUFMMnZWcTh0ODI0YTUwQjEyWTdTZWJ1SlIxWlEzSmMwVWVyanBZdlpWUTZa?=
+ =?utf-8?Q?jfbgc9dSdAI4UPmzvTtOH8gQK3z2jG0s?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(52116014)(7416014)(376014)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cTJqVGpRSjR6WUlhMzZUOENORitQUVhnNVRwTmlBUGc1RHhRUTIvRGZUb215?=
+ =?utf-8?B?a3V3elF2eGROQlJPcG5uMkFUejNaRVJCQlJLN2NDZHJXZDMzem5IZDQrNEVJ?=
+ =?utf-8?B?WnJUa2hMSkxERzBDazVDTmFPdnZSN21PTG13ak1zajdad3RIMFZJM25Ta1pJ?=
+ =?utf-8?B?dE9RMGM5ckM3ZW5DTjkxRGVHU204eVFOSEMvSnNrQVhsUWFTZmdWRGtUNkt3?=
+ =?utf-8?B?SWlxVUM0MGU3bG1VUUZiQUk2ZXlKeElacGp2NmFjeVYwSUdwNmFHK01DbEpY?=
+ =?utf-8?B?UldQOFFxUTdUVFdBRHN3bXVGZHNMWVpRY0Z3UTFEMXB3cDNtYkdUK0tOQ0RZ?=
+ =?utf-8?B?RDFPKzZMWjNva1phK1ZJTmdzZUpNdngwRERCRzZtWS9EYzUwR3VLaUowaWdh?=
+ =?utf-8?B?c3kyTVJhb1pnU28vZVE1L3p4VEQ4bExveWNVRlBZakhLcDc1WUJsWkw0VE42?=
+ =?utf-8?B?bFpEWWtINHF6Y09yRFVRR0RJN2lvUlhqdkZRN2JNR0tUM3lVSWE4eFpVSHY1?=
+ =?utf-8?B?SXorRE41M2Y3djI2NDdhTkp1b0ZEcFFkeWE3RExjemJEajdIUmhaQXRxMi9l?=
+ =?utf-8?B?SklQeUlFeSt1SVM0QUVBWmlRNGlrZkhCOThORTBqdS9RdlIzMHhGcHF1WjRw?=
+ =?utf-8?B?SXdQWTl5SmNVVEpFVjNhZzhuTDZab2hUY3M2dDJTUmtlM2w1cm9GZ24vY3FI?=
+ =?utf-8?B?alJyN0NPeHEybmgyVmxVNDR4ejVyVElZczNpeFF6RUp0ZEdpNGk0RmNPbnE1?=
+ =?utf-8?B?eXFaZkg1OFNJb3hKNURvOVNPZExPdER3aGg5bWR6OWlMVjFmcWNndVRaL2Ez?=
+ =?utf-8?B?NG9oTnlFaDk0RHJpNDMrazVjNHppUXVzUlZlMTZ5MnlpUXE0SkRxWklMczM5?=
+ =?utf-8?B?N3ZLNjdyYWhwQ2pkVGl4enJkWnNsdVRXT2NBYnNNd3YwbVduRzduOVAxU3dQ?=
+ =?utf-8?B?Rm00N1hGOXNoNGZxUlEwRENsRWRlUjlwSmllSlFqNnROeGtyVHNoOE1zWTk4?=
+ =?utf-8?B?ak9qNUJnV1JCV29XQnBhTExHQVJvRzdqT2FmNWpBT3FiNHlNdXZ2K1Q3MzJk?=
+ =?utf-8?B?eG9qYUhGK1BJdmtVQUZJSHNkbjVuYTlYNFVLZGU1RnJuTWZTbzRvYWsrK0p4?=
+ =?utf-8?B?dytQV0FHYi8yM0hwd2orcXFmVUdQeTRpNHArbFJDNyt6d1EwdVc3eWZQYXQ0?=
+ =?utf-8?B?eHJYZXZlT2JKcU14aEpsNWFoOUVOR0JGM1FKVlZ4bnQvc29neEJaclE3SVp4?=
+ =?utf-8?B?cFRrOE91YmJuVElsZlkzVUNuV0QxK3VDdkI4RUNteUpjeEgyWlZBVXNOd1g5?=
+ =?utf-8?B?MG5RcmdPSzVmMHRXVmpLUFIyeDUrUXRpVE1sNjJsL3U2OFV5ZStObG9hL1ht?=
+ =?utf-8?B?RGlxenphRDl6dlY5eHprTTRtQ3hSVHRESHhzVHRybFpJSS83dlZ0OUJHVng3?=
+ =?utf-8?B?bHgxREhPRFlCYWNyS09qa2xJbmhwZjdkUk13TFlPcmk2bUFQMHJJOWdmQTNQ?=
+ =?utf-8?B?eFMxYzZZOVI1L21MclQvcEFxZHJPVUZLQlVydUplMlprOHdvRC95UkZjZDJC?=
+ =?utf-8?B?SXRZcE4vUTh3UXFzak1yb0VKeGl3azFDYWUrNUJkVUpidnp1RDlFS3NsZUVF?=
+ =?utf-8?B?MUEwZktldURubm5FdkU0WHkybTh5RU5OeDlDVEN1UFVUN09BU3Y1VWQzKzB6?=
+ =?utf-8?B?WElWOHAwcmM5ejhOa09oWStHTGNnRmxTT0lrV0p0UEFYRlZUbm9KK0ZXeGZx?=
+ =?utf-8?B?VlFxUUxMckJaVTZoWmdnV0ZIZDM5RmNSTjh2SVp2b1VWckU1S1UyZDJqeTZK?=
+ =?utf-8?B?N3hlM09WOE9vRHJZYjd1M0tMS1B3NHlqVEdjWTJOVDJLRVdUaGYva01GVm9i?=
+ =?utf-8?B?dG5tREtzelAzakVacjV3VUVTYlpMTWl4MHhtN1lObzFsbmNyWWRqYm1OR0Vl?=
+ =?utf-8?B?aEJ1bm9BdCs5T1ZPREFCZlFZOFZkT1FPelZlV21zUk9rdW5CYzZZSDh6LzQv?=
+ =?utf-8?B?TDZ0VDJ1cDJ2SUY0eWxteWt0dUFSbmpiMXo5dm1ZYnRVVFlnOHQ2dDJSOFMz?=
+ =?utf-8?B?SnZyK1pJRTlJamhxTDY3WExTeDhwK0dOR0lRbzVmV3h3cWNsbHdNNXpjenNO?=
+ =?utf-8?Q?b1rzkjKl22yBhBebTRmi/G9k7?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f8f3b85-a535-4f95-6495-08dd35689624
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 13:29:07.0859 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: XVuhs5Deq5U/VG6DmaqTklYpNmQiLmUzEVX1tRbFrR2xeINwBSvb7iLC9kIjKt5KnpJ2I0OW7nzXQzr9BADwaQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7764
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,198 +195,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Changes in v4:
+- split the SCMI pin controller driver and SCMI agent code
+- update i.MX95 SoC and clock related code, board basic support code 
+  and so on according to comments
+- move the function that loads ATF and tee.bin to spl_imx_container.c
+- add document for i.MX95 image container format
 
-On Fri, 10 Jan 2025 at 10:05, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Jan 10, 2025 at 06:41:00AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 9 Jan 2025 at 08:22, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Jan 09, 2025 at 08:11:58AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 9 Jan 2025 at 08:05, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Jan 09, 2025 at 08:01:13AM -0700, Simon Glass wrote:
-> > > > > > Hi Heinrich,
-> > > > > >
-> > > > > > On Sat, 4 Jan 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > >
-> > > > > > > On 11/13/24 16:09, Simon Glass wrote:
-> > > > > > > > This is another option to fix sunxi booting with bootstd, which may be
-> > > > > > > > better since it will work for all boards. We can then figure out how to
-> > > > > > > > automatically and deterministicaly decide when bootmgr should be used.
-> > > > > > > >
-> > > > > > > > This reverts commit f2bfa0cb17948aa4a0fa20fdf9014296b9c4d9c7.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > > If this patch is applied, we don't need to drop bootmgr for sunxi
-> > > > > > > >
-> > > > > > > > (no changes since v1)
-> > > > > > > >
-> > > > > > > >   boot/bootmeth_efi_mgr.c | 18 +-----------------
-> > > > > > > >   1 file changed, 1 insertion(+), 17 deletions(-)avilable
-> > > > > > > >
-> > > > > > > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> > > > > > > > index 23ae1e610ac..095fa74fc60 100644
-> > > > > > > > --- a/boot/bootmeth_efi_mgr.c
-> > > > > > > > +++ b/boot/bootmeth_efi_mgr.c
-> > > > > > > > @@ -14,8 +14,6 @@
-> > > > > > > >   #include <command.h>
-> > > > > > > >   #include <dm.h>
-> > > > > > > >   #include <efi_loader.h>
-> > > > > > > > -#include <efi_variable.h>
-> > > > > > > > -#include <malloc.h>
-> > > > > > > >
-> > > > > > > >   /**
-> > > > > > > >    * struct efi_mgr_priv - private info for the efi-mgr driver
-> > > > > > > > @@ -48,27 +46,13 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
-> > > > > > > >   static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> > > > > > > >   {
-> > > > > > > >       struct efi_mgr_priv *priv = dev_get_priv(dev);
-> > > > > > > > -     efi_status_t ret;
-> > > > > > > > -     efi_uintn_t size;
-> > > > > > > > -     u16 *bootorder;
-> > > > > > > >
-> > > > > > > >       if (priv->fake_dev) {
-> > > > > > > >               bflow->state = BOOTFLOWST_READY;
-> > > > > > > >               return 0;
-> > > > > > > >       }
-> > > > > > > >
-> > > > > > > > -     ret = efi_init_obj_list();
-> > > > > > > > -     if (ret)
-> > > > > > > > -             return log_msg_ret("init", ret);
-> > > > > > > > -
-> > > > > > > > -     /* Enable this method if the "BootOrder" UEFI exists. */
-> > > > > > > > -     bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
-> > > > > > > > -                             &size);
-> > > > > > > > -     if (bootorder) {
-> > > > > > > > -             free(bootorder);
-> > > > > > > > -             bflow->state = BOOTFLOWST_READY;
-> > > > > > > > -             return 0;
-> > > > > > > > -     }
-> > > > > > > > +     /* To be implemented */
-> > > > > > >
-> > > > > > > The EFI boot manager can boot based on:
-> > > > > > >
-> > > > > > > * variable BootOrder
-> > > > > > > * variable BootNext
-> > > > > > > * an existing file EFI/BOOT/BOOT<arch>.EFI
-> > > > > > >
-> > > > > > > It obsoletes bootsmeth_efi.
-> > > > > > >
-> > > > > > > >
-> > > > > > > >       return -EINVAL;
-> > > > > > >
-> > > > > > > We must always run the EFI boot manager if it is enabled. So -EINVAL is
-> > > > > > > wrong here.
-> > > > > >
-> > > > > > Well, I don't believe you have a solution, then.
-> > > > > >
-> > > > > > You did suggest putting bootmgr later, as we discussed on irc.
-> > > > > >
-> > > > > > For now, I think we should apply this patch (and series), while we
-> > > > > > sort out how to make bootmgr more incremental. It should not be
-> > > > > > scanning every available device before it starts, since that can be
-> > > > > > very slow.
-> > > > >
-> > > > > Heinrich and I talked the other day, and we think the right path is the
-> > > > > "later" path, where we don't try and use efi bootmanager until
-> > > > > everything has been probed, and also drop the single "efi" option. This
-> > > > > should mean that by the time we would be trying efi bootmanager most if
-> > > > > not everything that needs to be probed has been probed. It doesn't make
-> > > > > any sense to have "efi bootmanger" be more incremental as conceptually
-> > > > > it's point is to show the user all the options.
-> > > >
-> > > > What is the single 'efi' option? I hope you don't mean the EFI bootmeth.
-> > >
-> > > Yes, the single EFI bootmeth. Because part of the issue with that is to
-> > > be compliant a bunch of things need to be probed. And rather than have
-> > > an option to be only semi-compliant, the preference is to be compliant
-> > > and just tried later in the boot sequence.
-> >
-> > Well then you need a way to disable the single EFI bootmeth?
->
-> We have BOOTMETH_EFILOADER already.
->
-> > > > Putting bootmanager at the very end is OK with me, if we really cannot
-> > > > figure out a way to know whether the system is using it or now. It is
-> > > > 'putting it in the middle' that I don't like.
-> > >
-> > > In the case of no specified boot order, after block (and after very
-> > > special things like FEL) and before network is what makes the most
-> > > sense. We don't need to try and DHCP/etc for it, just need to know if
-> > > the interface exists (and so the user can say / have configured, to try
-> > > and boot it).
-> >
-> > Apart from FEL, we also have ChromeOS, Android, QFW.
->
-> OK? Yes, bootstd needs to handle "we're in a special update things
-> state". I'm not sure if QFW counts as a faux-block device or not. And
-> ChromeOS I would have thought is "try and boot like $this from $device".
-> I don't know if by "Android" you mean booting the OS, or the AVB state
-> machine. The former would be like ChromeOS and the latter the special
-> state machine case.
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
+---
+Alice Guo (8):
+      pinctrl: nxp: add a pin controller driver based on SCMI pin control protocol
+      firmware: scmi: add pin control protocol support to SCMI agent
+      clk: scmi: check the clock state/parent/rate control permissions
+      sandbox: add SCMI clock control permissions to sandbox
+      imx: Kconfig: IMX8_ROMAPI is not configured for i.MX95
+      binman: add a new entry type for packing DDR PHY firmware images
+      tools: imx8image: add i.MX95 support
+      doc: imx: add document for i.MX95 Image Container Format
 
-Standard boot is designed as a generalisation of the boot process and
-is able to cope with most use cases. Everything uses the same
-algorithm, at a high level.
+Peng Fan (6):
+      mailbox: add i.MX95 Messaging Unit (MU) driver
+      scmi_protocols: add SCMI misc protocol protocol_id and message_id for getting the ROM passover data
+      scmi_protocols: add SCMI Performance domain management protocol message IDs
+      clk: scmi: add the command CLOCK_PARENT_SET
+      scmi: add the macro SCMI_MSG
+      imx9: scmi: add i.MX95 SoC and clock related code
 
->
-> > > > How to handle the case where bootorder only specifies a subset of
-> > > > options? Ideally we would just probe devices related to that subset.
-> > > > That is what I was getting at.
-> > >
-> > > Yes, that should work just fine, especially if we're in the middle?
-> > >
-> > > The big challenge here is that conceptually, "bootstd" and "efi
-> > > bootmanager" are duplicate functionality. They are both "figure out what
-> > > on the system we should boot". The compromise is to try "bootstd" on
-> > > block devices first (the common case).
-> >
-> > Are we trying to make boot slower?
->
-> We're already in the slow path, because we're making guesses. But no, we
-> aren't trying to make anything slower. This should potentially faster in
-> the non-EFI case since we won't be trying to EFI boot every block device
-> until we have exhausted the non-EFI methods.
->
-> > A better way to design this would be to integrate the EFI stuff with
-> > bootstd, rather than duplicating things. For example, a way to convert
-> > a BOOTxxxx device into a bootdev would permit faster booting, since we
-> > can just work through the boot order and request each device in turn.
-> >
-> > Once we give up on that and ask the user, we need to probe all devices.
->
-> No, we're trying to untangle "EFI", "EFI bootmanager" and "bootstd".
+Teo Hall (1):
+      imx: add V2X container support on i.MX95
 
-By neutering bootstd? It would be better to update EFI to make use of
-bootdev, for example. Heinrich did a patch to use the 'hunt' feature
-of bootdev.
+Viorel Suman (1):
+      firmware: scmi: smt: Interrupt communication enable
 
->
-> > The monolithic init of EFI_LOADER is creating quite a few problems. Am
-> > I the only one that sees it?
->
-> Yes, because your "monolithic init is a problem" is the subsystem
-> maintainers "monolithic init makes us spec compliant".
->
-> And when we're in some sort of "probe the device and see what can be
-> booted" the subsystem maintainers would rather be spec compliant.
+Ye Li (4):
+      scmi_protocols: update struct scmi_base_discover_list_protocols_out
+      spl: imx: use trampoline buffer to load images to secure region
+      imx9: add i.MX95 Kconfig and Makefile
+      imx95_evk: add i.MX95 19x19 EVK board basic support
 
-We don't need to be noncompliant with spec. But some thoughtful design
-would help us a lot.
+ MAINTAINERS                                   |   1 +
+ arch/arm/dts/imx95-19x19-evk-u-boot.dtsi      |  68 +++
+ arch/arm/dts/imx95-u-boot.dtsi                | 157 +++++
+ arch/arm/include/asm/arch-imx/cpu.h           |   2 +
+ arch/arm/include/asm/arch-imx9/clock.h        |  10 +
+ arch/arm/include/asm/arch-imx9/imx-regs.h     |   5 +
+ arch/arm/include/asm/arch-imx9/sys_proto.h    |   1 +
+ arch/arm/include/asm/mach-imx/sys_proto.h     |  39 ++
+ arch/arm/mach-imx/Kconfig                     |   2 +-
+ arch/arm/mach-imx/image-container.c           |  63 +-
+ arch/arm/mach-imx/imx9/Kconfig                |  14 +
+ arch/arm/mach-imx/imx9/Makefile               |   9 +-
+ arch/arm/mach-imx/imx9/scmi/Makefile          |   6 +
+ arch/arm/mach-imx/imx9/scmi/clock.c           | 105 ++++
+ arch/arm/mach-imx/imx9/scmi/clock_scmi.c      | 135 +++++
+ arch/arm/mach-imx/imx9/scmi/container.cfg     |  10 +
+ arch/arm/mach-imx/imx9/scmi/imximage.cfg      |  15 +
+ arch/arm/mach-imx/imx9/scmi/soc.c             | 827 ++++++++++++++++++++++++++
+ arch/sandbox/include/asm/scmi_test.h          |   4 +-
+ board/freescale/imx95_evk/Kconfig             |  12 +
+ board/freescale/imx95_evk/MAINTAINERS         |   6 +
+ board/freescale/imx95_evk/Makefile            |  11 +
+ board/freescale/imx95_evk/imx95_19x19_evk.env |  90 +++
+ board/freescale/imx95_evk/imx95_evk.c         |  54 ++
+ board/freescale/imx95_evk/spl.c               |  72 +++
+ common/spl/Kconfig                            |   6 +
+ common/spl/spl_imx_container.c                |  41 +-
+ configs/imx95_19x19_evk_defconfig             | 177 ++++++
+ doc/board/nxp/imx95_evk.rst                   | 114 ++++
+ doc/board/nxp/index.rst                       |   1 +
+ doc/imx/imx95_container.txt                   | 136 +++++
+ drivers/clk/clk_scmi.c                        | 191 +++++-
+ drivers/firmware/scmi/Kconfig                 |   6 +
+ drivers/firmware/scmi/sandbox-scmi_agent.c    |  56 +-
+ drivers/firmware/scmi/scmi_agent-uclass.c     |  11 +
+ drivers/firmware/scmi/smt.c                   |   3 +
+ drivers/firmware/scmi/smt.h                   |  10 +
+ drivers/mailbox/Kconfig                       |   7 +
+ drivers/mailbox/Makefile                      |   1 +
+ drivers/mailbox/imx-mailbox.c                 | 417 +++++++++++++
+ drivers/pinctrl/nxp/Kconfig                   |  13 +
+ drivers/pinctrl/nxp/Makefile                  |   1 +
+ drivers/pinctrl/nxp/pinctrl-imx.c             |   7 +-
+ drivers/pinctrl/nxp/pinctrl-imx.h             |  11 +
+ drivers/pinctrl/nxp/pinctrl-scmi.c            | 136 +++++
+ include/configs/imx95_evk.h                   |  27 +
+ include/imx8image.h                           |  19 +-
+ include/scmi_agent-uclass.h                   |   2 +
+ include/scmi_agent.h                          |  11 +
+ include/scmi_protocols.h                      | 105 +++-
+ tools/binman/entries.rst                      |  10 +
+ tools/binman/etype/nxp_header_ddrfw.py        |  32 +
+ tools/binman/ftest.py                         |  11 +
+ tools/binman/test/346_nxp_ddrfw_imx95.dts     |  24 +
+ tools/imx8image.c                             | 143 ++++-
+ tools/imx9_image.sh                           |   8 +
+ 56 files changed, 3390 insertions(+), 65 deletions(-)
+---
+base-commit: d6da3dbaef57fc1d319b6b552efa009e2489d7d9
+change-id: 20250114-imx95-ac8bbccd71e5
 
->
-> And for the role I played in this confusion by suggesting how to
-> integrate things privately and has now gone off the rails, I am sorry
-> for the confusion and wasted efforts. I don't know if I was unclear or
-> misspoke.
+Best regards,
+-- 
+Alice Guo <alice.guo@oss.nxp.com>
 
-I'm not sure what that relates to?
-
-Regards,
-Simon
