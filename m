@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9A61C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 05:58:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E19D6C02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 06:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E26418060C;
-	Wed, 15 Jan 2025 06:58:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 17D2880040;
+	Wed, 15 Jan 2025 07:21:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="O/7NExe2";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Yy3go+3D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D54BF80657; Wed, 15 Jan 2025 06:58:02 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 391FB80214
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 06:58:00 +0100 (CET)
+ id 10FB780214; Wed, 15 Jan 2025 07:21:30 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CDF580027
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 07:21:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50F5vwpV3699796
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 14 Jan 2025 23:57:58 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1736920678;
- bh=+mAotMdRibs4JVADzBXoBIW8V9Qaw81pebGSvDDzN54=;
- h=Date:Subject:To:References:From:In-Reply-To;
- b=O/7NExe2vhhFxLFuw+YX4eFbSqj37G/ulv/86rXZzs9kwan2xkYvwIyy6y6lJOG95
- cTJKcte9Yj6hPzQ9XWm9QZ+k/TumyBLEVHR4KbvPFeoGJcFO83AG3MnPKWZL5iLNv3
- KKIHL/mLH1slPDDWuosSmU4XFXZI328Z4VtY9TW0=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50F5vvqS016690
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 14 Jan 2025 23:57:57 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 14
- Jan 2025 23:57:57 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 14 Jan 2025 23:57:57 -0600
-Received: from [10.24.69.37]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50F5vuSN087071;
- Tue, 14 Jan 2025 23:57:56 -0600
-Message-ID: <05272e42-5c55-4285-9ad6-fd7c9e913054@ti.com>
-Date: Wed, 15 Jan 2025 11:27:55 +0530
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50EMObMl016715;
+ Wed, 15 Jan 2025 06:21:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=iKKKzYG58VsfYxr1KBZ+Nh
+ e5MtqQ7a+6b7hVrgsWrcU=; b=Yy3go+3DDxYnNtjrNZgzOb+ocmhiVnI5AZJ/e4
+ 45iCFHcBEvrGfatBeJ6Gl8sXe0Nk5ft4NYXcMRDpHw3SHlaTlrNwcxyTeIIUIiPH
+ Vda9ZGBbAYl5S5pOVQn7Dj6KdI7WAyHQ1bygpht/O+1cuUTVAb4gC3R9c+/EaADd
+ 0P7M6bFlKdRA68QBdNIJaBdeKli34qy+Tj5RiP8D0YJmIPP8TW0A+opzyE7/KU9k
+ SwCOcz2fXWLMt468Y50It/jm+a1Byp2XQVh/E1iTKGfqVRnY0NoBnHzWDy6iE8nn
+ U7ZJmlwIRxAK7MfHQt2ZxGKgPeFe0aiYmmct5Q5kLljBxNhQ==
+Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4460ps0wc1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 15 Jan 2025 06:21:24 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 50F6LDFO032459
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 15 Jan 2025 06:21:13 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Tue, 14 Jan 2025 22:21:10 -0800
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <ni@konsulko.com>, <mkorpershoek@baylibre.com>,
+ <caleb.connolly@linaro.org>, <quic_varada@quicinc.com>,
+ <neil.armstrong@linaro.org>, <u-boot@lists.denx.de>
+Subject: [PATCH v2] usb: dwc3: core: Fix timeout check
+Date: Wed, 15 Jan 2025 11:50:44 +0530
+Message-ID: <20250115062044.3834433-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [ANN / RFC] Regular community calls?
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-References: <20250113183409.GY3476@bill-the-cat>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250113183409.GY3476@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: 3tMBNQ4dVKxNNgiQ-3Ftp9p5IsXYM4PK
+X-Proofpoint-GUID: 3tMBNQ4dVKxNNgiQ-3Ftp9p5IsXYM4PK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-15_02,2025-01-13_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 spamscore=0
+ priorityscore=1501 clxscore=1011 suspectscore=0 mlxlogscore=999
+ malwarescore=0 impostorscore=0 adultscore=0 lowpriorityscore=0 mlxscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2411120000 definitions=main-2501150045
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,26 +96,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+dwc3_core_init loops 'timeout' times to check if the IP block is out
+of reset using 'while (timeout--)'. If there is some issue and
+the block doesn't come out of reset, the loop will run till
+'timeout' becomes zero and the post decrement operator would set
+timeout to 0xffffffff. Though the IP block is not out reset, the
+subsequent if check 'if !timeout' would fail as timeout is not
+equal to zero and the function proceeds with the initialization.
 
-On 14/01/25 00:04, Tom Rini wrote:
-> Hey all,
-> 
-> It's been suggested again a few times recently that we should try and
-> have some sort of regular open call / video chat as that might help
-> clear up some issues. To that end, I'd like to propose we have the first
-> one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a day
-> after the v2025.04-rc1 release, and I'll include a link in the release
-> email. If this works out well, we can make it a regular thing for the
-> day after a release and also try rotating the time, or having a second
-> meeting much later in my day that's at a better time for other parts of
-> the world.
-> 
+Use poll API instead to resolve this.
 
-Thanks for initiating this, I think it will be helpful for most of us. For folks 
-in the IST region, this is a pretty okay time in the evening so sounds good at 
-least for me.
+Tested-By: Varadarajan Narayanan <quic_varada@quicinc.com>
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+---
+v2: * Use poll API and remove the timeout variable based loop as
+      suggested by 'Marek Vasut'
+    * Drop 'Reviewed-by: Neil Armstrong' as the patch has taken
+      a very different shape
+---
+ drivers/usb/dwc3/core.c | 14 +++++---------
+ 1 file changed, 5 insertions(+), 9 deletions(-)
 
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index a35b8c2f64..847fa1f82c 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -23,6 +23,7 @@
+ #include <linux/delay.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/err.h>
++#include <linux/iopoll.h>
+ #include <linux/ioport.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+@@ -587,7 +588,6 @@ static void dwc3_set_incr_burst_type(struct dwc3 *dwc)
+  */
+ static int dwc3_core_init(struct dwc3 *dwc)
+ {
+-	unsigned long		timeout;
+ 	u32			hwparams4 = dwc->hwparams.hwparams4;
+ 	u32			reg;
+ 	int			ret;
+@@ -610,15 +610,11 @@ static int dwc3_core_init(struct dwc3 *dwc)
+ 	}
+ 
+ 	/* issue device SoftReset too */
+-	timeout = 5000;
+ 	dwc3_writel(dwc->regs, DWC3_DCTL, DWC3_DCTL_CSFTRST);
+-	while (timeout--) {
+-		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+-		if (!(reg & DWC3_DCTL_CSFTRST))
+-			break;
+-	};
+-
+-	if (!timeout) {
++	ret = read_poll_timeout(dwc3_readl, reg,
++				!(reg & DWC3_DCTL_CSFTRST),
++				1, 5000, dwc->regs, DWC3_DCTL);
++	if (ret) {
+ 		dev_err(dwc->dev, "Reset Timed Out\n");
+ 		ret = -ETIMEDOUT;
+ 		goto err0;
 -- 
-Thanking You
-Neha Malcom Francis
+2.34.1
+
