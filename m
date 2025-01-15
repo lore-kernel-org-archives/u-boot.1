@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54DCAC02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:53:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79D82C02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BB1C806DD;
-	Wed, 15 Jan 2025 14:52:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6473A80740;
+	Wed, 15 Jan 2025 14:52:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EAC080719; Wed, 15 Jan 2025 14:52:45 +0100 (CET)
+ id 6796B80737; Wed, 15 Jan 2025 14:52:47 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4D63280719
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:52:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 102EE8073D
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:52:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harrison.mutai@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 25F7911FB;
- Wed, 15 Jan 2025 05:53:11 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D435412FC;
+ Wed, 15 Jan 2025 05:53:12 -0800 (PST)
 Received: from localhost.localdomain (F4CK67LV29.cambridge.arm.com
  [10.1.37.153])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CE9AA3F63F;
- Wed, 15 Jan 2025 05:52:41 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 67C2E3F63F;
+ Wed, 15 Jan 2025 05:52:43 -0800 (PST)
 From: Harrison Mutai <harrison.mutai@arm.com>
-To: Tom Rini <trini@konsulko.com>
+To: Liviu Dudau <liviu.dudau@foss.arm.com>,
+	Tom Rini <trini@konsulko.com>
 Cc: nd@arm.com, andre.przywara@arm.com, manish.pandey2@arm.com,
  Harrison Mutai <harrison.mutai@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 3/4] bloblist: add support for CONFIG_BLOBLIST_PASSAGE
-Date: Wed, 15 Jan 2025 13:52:06 +0000
-Message-ID: <20250115135209.13946-4-harrison.mutai@arm.com>
+Subject: [PATCH v2 4/4] board: vexpress64: enable bloblist for SPL handoff
+Date: Wed, 15 Jan 2025 13:52:07 +0000
+Message-ID: <20250115135209.13946-5-harrison.mutai@arm.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20250115135209.13946-1-harrison.mutai@arm.com>
 References: <20250115135209.13946-1-harrison.mutai@arm.com>
@@ -55,73 +56,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the configuration option CONFIG_BLOBLIST_PASSAGE is selected, the
-bloblist present in the incoming standard passage is utilised in-place.
-There is no need to specify the size of the bloblist as the system
-automatically detects it using the header information.
+Enable bloblist on vexpress64 platforms to facilitate information
+passing from TF-A using the firmware handoff framework.
 
 Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
----
- common/Kconfig    | 8 +++++++-
- common/bloblist.c | 5 ++++-
- 2 files changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 7a80b797df..49fe04ffca 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1064,6 +1064,12 @@ config BLOBLIST_ALLOC
- 	  specify a fixed address on systems where this is unknown or can
- 	  change at runtime.
+---
+ board/armltd/vexpress64/Makefile        |  3 ++-
+ board/armltd/vexpress64/vexpress64.c    |  4 ++++
+ configs/vexpress_fvp_bloblist_defconfig |  5 +++++
+ doc/board/armltd/vexpress64.rst         | 16 ++++++++++++++++
+ 4 files changed, 27 insertions(+), 1 deletion(-)
+ create mode 100644 configs/vexpress_fvp_bloblist_defconfig
+
+diff --git a/board/armltd/vexpress64/Makefile b/board/armltd/vexpress64/Makefile
+index 1878fbed4e..4729787c5e 100644
+--- a/board/armltd/vexpress64/Makefile
++++ b/board/armltd/vexpress64/Makefile
+@@ -3,5 +3,6 @@
+ # (C) Copyright 2000-2004
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
  
-+config BLOBLIST_PASSAGE
-+	bool "Use bloblist in-place"
-+	help
-+	  Use a bloblist in the incoming standard passage. The size is detected
-+	  automatically so CONFIG_BLOBLIST_SIZE can be 0.
+-obj-y	:= vexpress64.o lowlevel_init.o
++obj-y	:= vexpress64.o
++obj-$(CONFIG_OF_HAS_PRIOR_STAGE)	:= lowlevel_init.o
+ obj-$(CONFIG_TARGET_VEXPRESS64_JUNO)	+= pcie.o
+diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress64/vexpress64.c
+index b5ede58757..0b75c1358f 100644
+--- a/board/armltd/vexpress64/vexpress64.c
++++ b/board/armltd/vexpress64/vexpress64.c
+@@ -100,7 +100,9 @@ int dram_init_banksize(void)
+  * Push the variable into the .data section so that it
+  * does not get cleared later.
+  */
++#ifdef CONFIG_OF_HAS_PRIOR_STAGE
+ unsigned long __section(".data") prior_stage_fdt_address[2];
++#endif
+ 
+ #ifdef CONFIG_OF_BOARD
+ 
+@@ -151,6 +153,7 @@ static phys_addr_t find_dtb_in_nor_flash(const char *partname)
+ }
+ #endif
+ 
++#ifdef CONFIG_OF_HAS_PRIOR_STAGE
+ /*
+  * Filter for a valid DTB, as TF-A happens to provide a pointer to some
+  * data structure using the DTB format, which we cannot use.
+@@ -201,6 +204,7 @@ int board_fdt_blob_setup(void **fdtp)
+ 	return -ENXIO;
+ }
+ #endif
++#endif
+ 
+ /* Actual reset is done via PSCI. */
+ void reset_cpu(void)
+diff --git a/configs/vexpress_fvp_bloblist_defconfig b/configs/vexpress_fvp_bloblist_defconfig
+new file mode 100644
+index 0000000000..dcc87db872
+--- /dev/null
++++ b/configs/vexpress_fvp_bloblist_defconfig
+@@ -0,0 +1,5 @@
++#include <configs/vexpress_fvp_defconfig>
 +
- endchoice
++CONFIG_BLOBLIST=y
++CONFIG_BLOBLIST_PASSAGE=y
++CONFIG_BLOBLIST_SIZE_RELOC=0x10000
+diff --git a/doc/board/armltd/vexpress64.rst b/doc/board/armltd/vexpress64.rst
+index a7f771d266..4dadadb53d 100644
+--- a/doc/board/armltd/vexpress64.rst
++++ b/doc/board/armltd/vexpress64.rst
+@@ -43,6 +43,22 @@ Juno is an Arm development board with the following features:
  
- config BLOBLIST_ADDR
-@@ -1078,6 +1084,7 @@ config BLOBLIST_ADDR
+ More details can be found in the board documentation [3]_.
  
- config BLOBLIST_SIZE
- 	hex "Size of bloblist"
-+	default 0x0 if BLOBLIST_PASSAGE
- 	default 0x400
- 	help
- 	  Sets the size of the bloblist in bytes. This must include all
-@@ -1088,7 +1095,6 @@ config BLOBLIST_SIZE
- config BLOBLIST_SIZE_RELOC
- 	hex "Size of bloblist after relocation"
- 	default BLOBLIST_SIZE if BLOBLIST_FIXED || BLOBLIST_ALLOC
--	default 0x0 if BLOBLIST_PASSAGE
- 	default 0x20000 if (ARM && EFI_LOADER && GENERATE_ACPI_TABLE)
- 	help
- 	  Sets the size of the bloblist in bytes after relocation. Since U-Boot
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 110bb9dc44..f52f1eaca9 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -475,6 +475,9 @@ int bloblist_reloc(void *to, uint to_size)
- {
- 	struct bloblist_hdr *hdr;
- 
-+	if (to_size == 0)
-+		return 0;
++Bloblist Support
++----------------
 +
- 	if (to_size < gd->bloblist->total_size)
- 		return -ENOSPC;
++The ``vexpress_fvp_bloblist_defconfig`` configures U-Boot to be compiled for
++Vexpress64 with Bloblist as the primary method for information handoff between
++boot stages. U-Boot offers three methods to set up a bloblist: using a
++predefined bloblist at a specified address, dynamically allocating memory for a
++bloblist, or utilizing a standard passage-provided bloblist with automatic size
++detection.
++
++By default, ``vexpress_fvp_bloblist_defconfig`` uses the standard passage method
++(CONFIG_BLOBLIST_PASSAGE) because TF-A provides a Transfer List in non-secure
++memory that U-Boot can utilise. This Bloblist, which is referred to as a Transfer List in
++TF-A, contains all necessary data for the handoff process, including DT and ACPI
++tables.
++
+ References
+ ----------
  
-@@ -510,7 +513,7 @@ int bloblist_init(void)
- 	 * install the bloblist passed from previous loader to this fixed
- 	 * address.
- 	 */
--	bool from_boot_arg = fixed && xpl_is_first_phase();
-+	bool from_boot_arg = xpl_is_first_phase();
- 
- 	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
- 		from_addr = false;
 -- 
 2.46.2
 
