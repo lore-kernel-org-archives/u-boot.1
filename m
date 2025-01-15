@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E5B6E77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:17:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E56C8E77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:17:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6EFA80702;
-	Wed, 15 Jan 2025 02:17:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 840B78073F;
+	Wed, 15 Jan 2025 02:17:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="baMKGAx2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AT5aOhi5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0145B80702; Wed, 15 Jan 2025 02:17:11 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id B04C48072F; Wed, 15 Jan 2025 02:17:22 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E5E0806D6
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:17:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95170806D6
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:17:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-aab925654d9so444893666b.2
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:17:07 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aa6c0dbce1fso885725566b.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:17:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736903827; x=1737508627; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736903840; x=1737508640; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YHgQ3slHPm9LCIY0cm+T0X4QbGK3rKywtohv9NR0iRQ=;
- b=baMKGAx25m38USSCGl4dDaBdFT8Gh0a50sRhbNdzwtDQByjE4o1giAApVIx9RiLQF9
- jxq/5E4voOUFQMbHJc8qrmyWSqY/Ld4PIIWIYyL7QfwF5gzclGThpEsXEaH9acRn0blB
- gG8pXXVp0NvGBWqBpx/thC8/XoSNoBboPpxTk=
+ bh=txTyXqsjH4ySMyxJjcUOYl1e0+x0CDRl5YZIJIvDzNg=;
+ b=AT5aOhi562HFSS5Xoh01e/x7ID+odkfTG26OV85Cwe+dvGqD6S6RVeXr28yYYj0arS
+ UZfy9A2TfDj9tPNu9DHi5OTmf00M5ruinUV6yDEQ7tjNFBXRaV6JkL9Z9g2lPeVj7fTT
+ 8UxKdMi2WkAqup+IcsT7G908pq0PaTwfiNk7k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736903827; x=1737508627;
+ d=1e100.net; s=20230601; t=1736903840; x=1737508640;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YHgQ3slHPm9LCIY0cm+T0X4QbGK3rKywtohv9NR0iRQ=;
- b=k/z6bT38bJ+J4jiSYvyCfQ8IS4/nN4T+PtDxPW9FyOOa4S8IHe9IHOu/FO8quptZSY
- dulnN7x6w2ffvdT5LfPelPG6o9UZkfY/gBeXB3tymOYYADuSVxw/Ne04ae4KMQgzKzsR
- AaE2+Q8CzgEVgKY7NE4vEKAJxXq0Tbh8UvCKstzYLg98MdWSXejxbWgT4fe23PkJYKsF
- IYdHGdnVZ8AfQUPlnYiB6+Z8xCegGqERPTQL7DphGove/NTR1kSCZnazTDorAqTpiALy
- CIfI0fKK8FvFv/qTScSUTKsPMOwoSUSHFV0YMvRWMErVTfkt+vWlNr5l/3dJCXcJUNGU
- o/Pg==
-X-Gm-Message-State: AOJu0YzC4NCTg8qd/AOLHkJGlSpBOxeOYonDLSHQBbmnyUWLoPHwdkxy
- cFqy08tV9nBYJRJvrdVW/EqJ1m9uPThc6RPYH0jZfHWlm3wadMvDE688lASsh6rJ6TCz7YDl7bP
- JOw+xZYrIoeMbJMmiqJiDv/9N8FLOTaBYxN8or6DZQ/qyTHs=
-X-Gm-Gg: ASbGncsFUxRuAcEMSDg3zlz95253opr1IPVnHBj4Sv+LtEiClpOT+Anq/f6QbYNT+ho
- 9bqWzW3xLWH+8Brfb/HbZODjFXY2fINkQUr/iAp0=
-X-Google-Smtp-Source: AGHT+IGak6TAHywKI+Z8LhLFzgsjC5w9gY3yT9T1x02yVlmccJFdTVyd2YEsihUcta8vKqCxemVS+VXR45DHyrL2XM8=
-X-Received: by 2002:a17:907:d87:b0:aa6:7a81:3077 with SMTP id
- a640c23a62f3a-ab2abdc3649mr2966788166b.54.1736903826880; Tue, 14 Jan 2025
- 17:17:06 -0800 (PST)
+ bh=txTyXqsjH4ySMyxJjcUOYl1e0+x0CDRl5YZIJIvDzNg=;
+ b=DFR9B2M6Et5iNAN8hCBHtLdU5N1Tw4/jKSlxXY0EbtaQn+hqeMu4yI8zsZW3a6TcWX
+ ma2w7cjCCsiRHftUwiERhpTy5A9t6YX2S+9PMSRmy1PQwd/U1hekV1fXJBA2qdZoQwCH
+ sWjnOSRLMAZpn10iADvo5a+SuphvwpxCF//R9J7e0czkjGeuPs/Dg9ICWQoTFvEvqves
+ QdG2qvpXv/asCv9Pr092uC+ISLDm+Kfm3p8ZYdPc4BDtoSJlxnLwJK1vCD/6YUF7y0ye
+ opQ+vsbV7ifUNtJHKUV9MESG4ub4YZ0Uf7K9DufXEh6CjaE//4oR4IG1E0cOIevNkatM
+ UCig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVV+RM+ImNUxLTYHjUFCyuII2KI0RAQYQiRaSLRFBBNy24VgozRX1JEk0U0S7aRhtxlHeaK8gE=@lists.denx.de
+X-Gm-Message-State: AOJu0YznDogUIq8dA3lsLp7Ot1bXAczIe4RPbZ+0+40rJbr3cs8tdZGj
+ PK6J3GTRECQwBNrk4vQps2zijmjk1GPDt2EEzGvWxC4oovD+TBglDovYfXyGn3yRHRSi9FONivh
+ OWqlU//HCVIuPcTi8ENgWQP3Z+Runhl9HfzfUwoHX2K7ICbk=
+X-Gm-Gg: ASbGncvhY+02Kz8CdWvnDDyaWbUfbwU5+mqNWCcsjmFzcEjv+AJi2OUmXHA6C0e3B4J
+ gNCbBKJiEKQYMzcy4W4y60W3ArOdxSEJlhvTd6BU=
+X-Google-Smtp-Source: AGHT+IEM2wH/yqMp/gy1io5pNcXVlM7F+r9lsSXTCd/FT6OrNf5D5Hder+e6G01JnMXisSdl19hr0KPfrWzqgfE2Quw=
+X-Received: by 2002:a05:6402:26cf:b0:5d4:55e:f99e with SMTP id
+ 4fb4d7f45d1cf-5d972e1d7dfmr67001176a12.18.1736903840072; Tue, 14 Jan 2025
+ 17:17:20 -0800 (PST)
 MIME-Version: 1.0
-References: <AM6PR04MB55584A5EF725E8DF69629DF39A302@AM6PR04MB5558.eurprd04.prod.outlook.com>
- <CAFLszTg3D9C-XR7TwCqB6RAOvZH-TK7=CEN-WioSfEKWCVVGLg@mail.gmail.com>
- <AM6PR0402MB3575770B2FD604C0A153BDAC9A182@AM6PR0402MB3575.eurprd04.prod.outlook.com>
-In-Reply-To: <AM6PR0402MB3575770B2FD604C0A153BDAC9A182@AM6PR0402MB3575.eurprd04.prod.outlook.com>
+References: <20250112034213.13153-1-semen.protsenko@linaro.org>
+ <20250112034213.13153-3-semen.protsenko@linaro.org>
+ <97107163-de68-45dc-9462-c4f7cae06e31@gmx.de>
+In-Reply-To: <97107163-de68-45dc-9462-c4f7cae06e31@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jan 2025 18:16:55 -0700
-X-Gm-Features: AbW1kvbhsS_DIWOAKWjgXSTRv3-oMZgkEM5X-HcQbfmLACWe6mm0ww2LIxWZbVk
-Message-ID: <CAFLszTgRCzSN8ODXxXwS2afXktRHa9TOk3moWKroU45USJf+QA@mail.gmail.com>
-Subject: Re: [EXTERNAL] Re: How would I do signature verification of
- standalone binary?
-To: "Koch, Fabian" <Fabian.Koch@hima.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Date: Tue, 14 Jan 2025 18:17:07 -0700
+X-Gm-Features: AbW1kvYSycPhOU3DblmAQfS78WUFCTXINYwm-CY44VBL-SzDq5AdwU9frZ7vigI
+Message-ID: <CAFLszTj4Ezr5yZ+-7aUmAimy3zi1N5Vqsi0aqgX11H2CYiM+9Q@mail.gmail.com>
+Subject: Re: [PATCH 2/3] bootstd: Probe bootmeth devices for bootmeths env var
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>, 
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,83 +91,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabian,
+Hi Heinrich, Sam,
 
-Firstly, please can you drop your signature as it is not correct for a
-public mailing list.
+On Mon, 13 Jan 2025 at 00:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 1/12/25 04:42, Sam Protsenko wrote:
+> > Specifying efi_mgr in 'bootmeths' environment variable leads to NULL
+> > pointer dereference when 'bootflow scan' is executed, with call trace
+> > like this:
+> >
+> >      priv->fake_dev // NULL pointer dereference
+> >      .read_bootflow = efi_mgr_read_bootflow()
+> >      bootmeth_get_bootflow()
+> >      bootflow_check()
+> >      bootflow_scan_first()
+> >      do_bootflow_scan()
+> >      'bootflow scan -l'
+> >
+> > That happens because in case when 'bootmeths' env var is defined the
+> > bootmeth_efi_mgr driver is not probed, and the memory for its private
+> > data isn't allocated by .priv_auto. In case when 'bootmeths' env var is
+> > not defined, the std->bootmeth_count is 0, and the execution flow in
+> > bootmeth_setup_iter_order() takes "no ordering" path, which in turn runs
+> > uclass_get_device_by_seq() -> ... -> device_probe(), so issue isn't
+> > present there. But when 'bootmeths' is defined and contains efi_mgr, the
+> > std->bootmeth_count > 0, so bootmeth_setup_iter_order() follows the "we
+> > have an ordering" path, where devices are not probed. In other words:
+> >
+> >      'bootmeths' defined           'bootmeths' not defined
+> >      --------------------------------------------------------
+> >      priv == NULL                    priv != NULL
+> >           ^                                ^
+> >           |                        device_alloc_priv()
+> >       no probe                     device_of_to_plat()
+> >           ^                        device_probe()
+> >           |                        uclass_get_device_tail()
+> >      dev = order[i]                uclass_get_device_by_seq()
+> >           ^                                ^
+> >           | have an ordering               | no ordering
+> >           +----------------+---------------+
+> >                            |
+> >               bootmeth_setup_iter_order()
+> >               bootflow_scan_first()
+> >               do_bootflow_scan()
+> >
+> > Add an explicit device_probe() call in "we have an ordering" case to fix
+> > the issue.
+> >
+> > Fixes: c627cfc14c08 ("bootstd: Allow scanning for global bootmeths separately")
+> > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > ---
+> >   boot/bootmeth-uclass.c | 7 +++++++
+> >   1 file changed, 7 insertions(+)
 
-On Tue, 14 Jan 2025 at 08:12, Koch, Fabian <Fabian.Koch@hima.com> wrote:
->
-> Hey Simon,
->
-> Thanks for getting back to me.
->
-> > So long as you put your image in a configuration, it can be verified.
-> > The question is whether you can load it.
->
-> Yes. Meanwhile I got far enough to have a signed FIT image, a u-boot.img which contains the pub-key in a dtb and the means to load it all using "imxtract" which also does the signature verification.
->
-> So my usecase might just work without any modifications to u-boot sources.
->
-> I only need to confirm whether this can be secure enough against attacks.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-If you are just using a signed image, then there is no protection
-against a mix-and-match attack. Are you using a signed configuration?
-The best approach is to use a signed configuration and then just a
-hash for each image.
-
-> > bootm assumes it is booting an OS. It does not support IH_TYPE_FIRMWARE as a type.
-> I currently use "standalone" in the FIT source
+> >
+> > diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
+> > index ff36da78d5a1..049389403191 100644
+> > --- a/boot/bootmeth-uclass.c
+> > +++ b/boot/bootmeth-uclass.c
+> > @@ -11,6 +11,7 @@
+> >   #include <bootmeth.h>
+> >   #include <bootstd.h>
+> >   #include <dm.h>
+> > +#include <dm/device-internal.h>
+> >   #include <env_internal.h>
+> >   #include <fs.h>
+> >   #include <malloc.h>
+> > @@ -146,6 +147,12 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
+> >                               struct bootmeth_uc_plat *ucp;
+> >                               bool is_global;
+> >
+> > +                             ret = device_probe(dev);
+> > +                             if (ret) {
+> > +                                     ret = log_msg_ret("probe", ret);
+> > +                                     goto err_order;
+> > +                             }
 >
-> > You could write a new command to handle that, perhaps.
-> I wanted to stay as close as possible to vanilla u-boot (or at least vanilla TI-SDK u-boot) in order to not have to do as much work when upgrading later on.
+> This would mean that we fail boot if probing one of the boot devices
+> fails. Shouldn't we remove the device from the order instead?
 
-OK. Patches are welcome, though.
+It is actually a bootmeth failing to probe which causes problems, not
+a bootdev. I think that is catastrophic enough that failing is fine,
+at least for now.
 
->
-> > SPL does support loading firmware, but you are running U-Boot proper so that isn't very useful.
-> Honestly, we could probably ditch u-boot proper for our usecase, but again staying very close to the TI SDK, (which instead finally loads a Linux kernel of course) we have been going this road so far.
-> Might be worth checking if we can just use SPL only, also saving on boot time.
-> Can you point me to how the rest (loading, verification) would look there in SPL only?
-> Still a signed FIT image with "standalone" I suppose?
+Strictly speaking we should not probe the bootmeth until it is
+actually used. One way to do this is to probe it in
+bootflow_iter_set_dev(), or in its callers, where we already probe the
+bootdev.
 
-You need to enable full FIT in SPL, but yes, it should work in a similar way.
-
+> > +
+> >                               ucp = dev_get_uclass_plat(dev);
+> >                               is_global = ucp->flags &
+> >                                       BOOTMETHF_GLOBAL;
 >
-> > For your command, you could call fit_config_verify() to verify the config, then fit_image_load() to load the image you want.
-> Both "iminfo" and "imxtract" which I currently tried run through fit_image_check_sig() eventually, and in the .dtb I marked the image as "required" to be verified.
-> Doing the negative test of loading an unsigned FIT resulted in both commands failing and yielding a 1 as return value.
-> So my current plan is to do some basic bootcmd like:
->
-> If imxtract does not fail, use "go" to jump to the entry point, Else fail the boot
->
-> Then I would try the "u-boot hardening" tips I found so far (like disabling cli and console, hard-code the env, and set the delay to -2)
->
-> If you have any more ideas on how to make this more robust, please let me know.
-
-That seems good to me, although I'm not a security expert!
-
->
-> >> [long signature with legalese]
-> > [can you please drop this as it is not correct for a public mailing
-> > list?]
->
-> It is auto-inserted by (I suspect) the company MTA, so I don't think I can, sorry.
-> I tried to send this as a plaintext mail at least, maybe that makes it a bit more bearable.
-
-OK, please raise it with your IT people as it does create confusion
-and may make others reluctant to reply.
-
->
->
-> Kind regards and happy new year
-> Fabian
-> Informationspflicht nach Art. 13 und 14 DS-GVO: https://www.hima.com/de/informationen-DSGVO Information obligation according to Art. 13 and 14 DS-GVO: https://www.hima.com/en/information-GDPR
->
-
-Happy New Year!
-
-[..]
 
 Regards,
 Simon
