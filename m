@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F575E77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29C3C02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:07:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 501518060C;
-	Wed, 15 Jan 2025 03:07:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E8F1B806FB;
+	Wed, 15 Jan 2025 03:07:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Oe1D3Zyi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LipUcXth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0D2780027; Wed, 15 Jan 2025 03:07:35 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id EC758806FB; Wed, 15 Jan 2025 03:07:42 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C54980027
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:07:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 597F4806FB
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:07:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7b6f19a6c04so547741185a.0
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 18:07:33 -0800 (PST)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6d8e8445219so54886496d6.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 18:07:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736906852; x=1737511652; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736906859; x=1737511659; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Z3OT9JFfy1uwauEFT4hDe5DLXljGa6RYZeo1yeFRcWs=;
- b=Oe1D3ZyiKa7iCC8bx/YLLFndtK64x0mV47blGLk/LGedSBCT0KLjUmBbGDShCxRzMh
- JL8DAwdZnMaJxzjZUfGgI0IWvEaYjx/oJw5sWgSjv8rEmClYfU5w4vS0CibiQoZa4qeg
- 0qIXKmvo9VI9mYRiBd6HnT9o+EcUDayHWzdvU=
+ bh=rOLQUoLgXZV8xkRvSRYHbZkxaBxVKWjPEGa68lA4g3Y=;
+ b=LipUcXthM9qCEn3OmNPG3BWDRBLuhIlb2tDKnjHMuVLrA8s0lu6EOx7z2EL1BsMUpY
+ 9q0nw8X40UEDicajVh7+0QiZR2iX8xzQAi8rTO8f9v/r/rMnRysem9uBRMs0IA4YKLUH
+ J4DF/HiEuSWFJMVDZOhIzUz8MrE6R4JUL9Q6c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736906852; x=1737511652;
+ d=1e100.net; s=20230601; t=1736906859; x=1737511659;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Z3OT9JFfy1uwauEFT4hDe5DLXljGa6RYZeo1yeFRcWs=;
- b=PzZytGqHb0rHE5i6ZavjRzN6j74RG1EkL1uMNTL+IlUvouj0wkvLwq0LgmaB/Z2Q83
- UPirllQsfa7FCaoxVfYwO8BlESDJQrBanZp2jxAaykfWyu8+bTcFUsEfgo4AWQByS7EX
- C570jGhLIulb4omaI4O4oNx+NQhLsrHUAhdzruZyiE5rsXqXY/+M8QTVtgCvbsnzIcjD
- s6wDmd9B2OfK5VxPEkSaivY3rRirUa56GVhKJ25X62JZdG0YX+g+qGIXOdnCZXyi0rFo
- HM50zUcXxtNME79VE1V3u0zDfQmTeNTHu/Kr0MPRqScpcoKEzeGOLF0IY5cemxILk3TO
- IsXA==
-X-Gm-Message-State: AOJu0Ywvx4zM/z8+WK60QfPiyBGnSYld2tSgUrPRHhAW3CgZxyQf2KTh
- 8OExIYrU87HFg6ZYNbLSK05v1Of6PdErYTZy7xaOO/VxCVL445ZvU/1QymrXTV7EVARbcbJafYs
- v
-X-Gm-Gg: ASbGncvGMhv8suWSmoO7CICUESdJIbded0e8Mt+Ssw8rcKCNSC5cnu5zxV81O+PdWKE
- LqPnYuRUZVUPV/pSq8MlyOs/uR9cWC8BtSYMRpR0Xq48bNfp0aY+z4yJ/eXK0xQ+N/8GFPzSqcC
- whahps91O+Ai9eyJ1Baz8E76adDMRKbLQsBhAS48M3qWnc/xinh8V1Ha2mIIic2W1qu7+ZHgJTf
- 72fYmMQBPNAUu6Rddov7pk1OxG+wUndrmS5uoHsllOkiOxOa6EBS5HfHOuKhxuRzj4pIA+K12GC
-X-Google-Smtp-Source: AGHT+IFCpArSDVrUpSISWdxzjzp9ujHg6bdpHd5ixd0AWbyxhgcNF6AJDUU/vd7FXNRFItKi9gxH2A==
-X-Received: by 2002:a05:620a:5dd9:b0:7be:2a68:6d79 with SMTP id
- af79cd13be357-7be2a686e05mr1934652385a.7.1736906851977; 
- Tue, 14 Jan 2025 18:07:31 -0800 (PST)
+ bh=rOLQUoLgXZV8xkRvSRYHbZkxaBxVKWjPEGa68lA4g3Y=;
+ b=A2gwBoO+wq/rr6MZrkYcbd9CCDhkVDpdmsR2oNLWWOVoHv5ztvMfsoDx6pU7pES9tt
+ 0qaak1+K9NXIlaMYRL0Uca5OloTIq5V+MshTlr0bfOleqa4BX3OxK4DE5zTREpRyQ04N
+ h2R4ONDVDA8uFaiNLiQzJRNt2wuRKAiHUslbkcZMB+n4XLzbe1git2aXYiq3VWadmUjq
+ M587cSYFVwo3meFdTUpKJse/pySw6AW6nDDL+pW56VaS0H/c7/QlBvDJb0ObulFgy/Ca
+ wF7FPOMB8swAHqR56V7nZyiIezzXlyHYbWPE6OIZ25eMDwWtNe4Jzl7ufEaXYDMtBvnz
+ E/wg==
+X-Gm-Message-State: AOJu0YzC/rdjnxOPHlfqcCHMgbUYHLdE3FI6DqSziBvcqj8d9bbNoWcD
+ 0t+8fY9mM4ylJNxGSBp4vNMQvhIeIncvmMeNdDhsuqYZUioUmRVCMXiKbsSh5aPy61cab8LWJYW
+ E
+X-Gm-Gg: ASbGncskt8oKk7zLJhZGWhrdJHKtdp/kA7p1n6tUnUg4T8s+teXD5H7J76lOWL1aaGS
+ eAHQcy27jo5pLZ2JoZzvEi9CNi3cXApDiSNmnQ/sqb1rVgpaLxKXyEPi0tgESoxDl49MGQXCbfe
+ Vr1Cz99640d+dRwgLxLaNZO9ULsr40LqGjTl6vVHxbcupPRwnSc3hxtB/qMXbpxNnaOpHdwFfet
+ rWJ88xMEBI/jpdxib3Sy6akIzIQ8ndQHJxGOgYmbLTia6WvUiQZ54hAI2mJDql95Qaq/7hAEXC4
+X-Google-Smtp-Source: AGHT+IGNU6vDW1Jit+CQ3JeTyRZztXRqeh4RY3KFBoLb55LLD+0yWnPigONFCBa99xzAkTrBotMcRA==
+X-Received: by 2002:a05:6214:1d0a:b0:6d8:9e9d:c223 with SMTP id
+ 6a1803df08f44-6df9b1cee68mr495899916d6.7.1736906859350; 
+ Tue, 14 Jan 2025 18:07:39 -0800 (PST)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.16.9])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7bce3238003sm675238485a.2.2025.01.14.18.07.30
+ 6a1803df08f44-6dfadeb3e69sm59388056d6.124.2025.01.14.18.07.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 18:07:31 -0800 (PST)
+ Tue, 14 Jan 2025 18:07:38 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Sjoerd Simons <sjoerd@collabora.com>
-Subject: [PATCH] configs/am62x_r5_usbdfu.config: More completely disable MMC
-Date: Tue, 14 Jan 2025 20:07:29 -0600
-Message-ID: <20250115020729.230536-1-trini@konsulko.com>
+Cc: Peng Fan <peng.fan@nxp.com>,
+	Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA options
+Date: Tue, 14 Jan 2025 20:07:36 -0600
+Message-ID: <20250115020737.230558-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -90,28 +91,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As this fragment turns off MMC in both SPL and full U-Boot, we can turn
-the whole symbol off rather than just the MMC driver.
+The option MMC_SDHCI_ADMA_FORCE_32BIT is only tested or used when
+MMC_SDHCI_ADMA or SPL_MMC_SDHCI_ADMA is enabled. And for
+MMC_SDHCI_ADMA_64BIT the same is true except we also require
+MMC_SDHCI_ADMA_FORCE_32BIT to be disabled.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Sjoerd Simons <sjoerd@collabora.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
 ---
- configs/am62x_r5_usbdfu.config | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/mmc/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.config
-index 772bb2ab935d..414e7ddfe244 100644
---- a/configs/am62x_r5_usbdfu.config
-+++ b/configs/am62x_r5_usbdfu.config
-@@ -23,6 +23,5 @@ CONFIG_SPL_DFU=y
- # CONFIG_SPL_SPI is not set
- # CONFIG_SPL_SYS_MALLOC is not set
- # CONFIG_CMD_GPT is not set
--# CONFIG_CMD_MMC is not set
- # CONFIG_CMD_FAT is not set
--# CONFIG_MMC_SDHCI is not set
-+# CONFIG_MMC is not set
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index f4fdf15242ce..6dc8d3bf9fe2 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -527,6 +527,7 @@ config SPL_MMC_SDHCI_ADMA
+ 
+ config MMC_SDHCI_ADMA_FORCE_32BIT
+ 	bool "Force 32 bit mode for ADMA on 64 bit platforms"
++	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
+ 	help
+ 	  This forces SDHCI ADMA to be built for 32 bit descriptors, even
+ 	  on a 64 bit platform where they would otherwise be assumed to
+@@ -536,6 +537,7 @@ config MMC_SDHCI_ADMA_FORCE_32BIT
+ 
+ config MMC_SDHCI_ADMA_64BIT
+ 	bool "Use SHDCI ADMA with 64 bit descriptors"
++	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
+ 	depends on !MMC_SDHCI_ADMA_FORCE_32BIT
+ 	default y if DMA_ADDR_T_64BIT
+ 	help
 -- 
 2.43.0
 
