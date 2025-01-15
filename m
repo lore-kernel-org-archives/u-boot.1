@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE852C02183
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 21:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13F21C02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 21:36:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A426E8070C;
-	Wed, 15 Jan 2025 22:36:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 04D3980717;
+	Wed, 15 Jan 2025 22:36:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QxDvsNJI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="POyrwZBb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86B8680657; Wed, 15 Jan 2025 16:23:10 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 54E4B80657; Wed, 15 Jan 2025 16:32:03 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3607C8033D
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 16:23:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50CBF8033D
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 16:31:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=parkch98@gmail.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-21636268e43so163071325ad.2
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 07:23:08 -0800 (PST)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2f43d17b0e3so11819636a91.0
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 07:31:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736954587; x=1737559387; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1736955116; x=1737559916; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=DLGShLw7FnA7jCeWRX2FmnAwQIHhzI0H311VyO1AQks=;
- b=QxDvsNJIoGFqm0pqW8+yiIWzuIHsrQBM81BKGv62sknSr7xMRwsnMCzP/spFXFJjaz
- iJFKozzbqg8vTsbNOKoUaiHA5ZoKQ52Kqw5e/++mVUbrZ3Toh0Q89ncrcrP3XCQZV41C
- 1O+7fxO41wGGOqyYYaMESno04c5kTrnPplg3wOc5MNk1hZdpnohPXvBkpdbJ74cwjmuV
- +ykFTGUywDakPTXs3+0ulyGubg8sGiCwJl98Wiyb48BWErMeGmXXHvdzei4v0zRpPi+e
- BsViNO82X9QtQic4buBIjnlHAiYBcplQncir4WhDPqsnnkinIH4T402jg99KGlJ8jhec
- WhJg==
+ b=POyrwZBbOyiBY5I4BEmu+hm03wf6w/+Hke+eDwm29GlgRFC2XlIjMKYYqsCfV3hy06
+ mjzjn9HcJFxMC90dGIAOtK6Ez+hvEsJzKVLgM82U0DW6ER7UQYHFt6U9b1ds78eE0Hex
+ Wja7D1P4daguKucUCilsJnaehbXj/jjKwMLj8yMVl9m7ISwdK8ZZ0is3e0vU6ekqKv97
+ VlMG4HM5n4fabS7hMP/VZgNKN7kt+rh9F4rdeBXS5/HQ27xFU8kWh+1kSZoIMLFLjOSt
+ CLqc80w5/+BmEKfHE0pU3sLJUlGa695Cazh+DYVcxrgOYLPk0IHb2ytikNaHOlcArZMn
+ 7O8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736954587; x=1737559387;
+ d=1e100.net; s=20230601; t=1736955116; x=1737559916;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=DLGShLw7FnA7jCeWRX2FmnAwQIHhzI0H311VyO1AQks=;
- b=LK+69AlF3/3Fa6tPVH5O6xm6CIRXD/loT2JLelJO4k945InCNSxGR9hDJvk6ls0/5w
- PjzxXq1rZKMymUCFbcJ8rfdNfELWLTeWsZ+qXscqmNX3F5HSbBAt7kQIPE5/x7/M6L/2
- 5hCJ+XdW526Ki4raBYMu1ya9GU5hIMDaS3o0lvLzHZUU6aS2zgQ+80wHIYtpVavv5Afm
- nbgvIRNJ+p5m3iWz4zYis3GB21LbN0iy+vNVRTnJt+uTi5BX56YFfGm44BnuB0WiisiY
- 6umzEsWsok9kYUIAYMn8oYbUp8pAYRuEbWhjsaXqeTgWvbSFdWtunGJEHVcokSVLo0ns
- hEMw==
+ b=mAGRifBWGsd8UuR3e8N29xt3CPK9VYWtqmQ8X+HOb4O1UqsUHAMvTvTk3Rgox8n4L7
+ /ZdmkwQnJeGjtfRr+XOdTbHbG19S7Ks7KKkWvXwkPjTI+DcI9LdGVxc1xDycnuVj83It
+ /VPIlaDs7CMq3a+pEtrmLB2dqJM/X5QkEt8JKd+rlCpU6Pv5PSNLf4Sn2mw36k1JEBwQ
+ kNGxTxJb0vmDCu0369OeRow4zwiRt34lcEsRQW1Eg/DFcqLkMJvuW6NEDE9vJG2+/fZy
+ 6Dg66LjMcQ1d+65pjg65dZO7z+AUSFS8L+I9SLgNUZ9S9M1MgyojwVmazair3bqQ0r7c
+ qpHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3Fak9Dmzf60+AEc2ps2G1/rrPiK34vw8/MCIEGxIRYaqCqj9BrWMmX1ti2/9M9igHaUggZmY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzwDdwp2dIjF8YTgV4kCUV9ShsGu6xIHPWQFwYtHKGwsdhYNJhJ
- oEdavZM81wTMS4+3yuZyI6FtZKXjv8oB2MNT3TwoXvQBqo0aQm0g
-X-Gm-Gg: ASbGncux97eGbVgJUHylJ09oQJildQIg4dKpDN/rJAaagpLXcLShVlD5H9/QrSCKUBF
- ZgC1rfiMrRk2j27e3f0o8sOQwhv16SgkUEdY/nMLhmW3Q4HhEU2KMJTGZ2127lN0yy/OX+SBYA6
- Mh0zZZ535WoDgRjQ1b7CDquvtbO42dtxcBDP9ne77bYiQgqbee+q34EN6idv5pyUlGSqriZM+L+
- YnCzIAb8ymHTlqlNS0KOQL4AZEBBw6Ls32Lt17zjey67zm2mMRLjB6gW3FrWCjOtp8=
-X-Google-Smtp-Source: AGHT+IH5IveuBU4ktcojbZKHZQC2ZSo9ODiWiazNCiS833GudQ7v+6Ki6WJMm0p2S+tbFGJO+rGwnA==
-X-Received: by 2002:a17:902:d50e:b0:215:8695:ef91 with SMTP id
- d9443c01a7336-21a83f469ebmr375662195ad.6.1736954586561; 
- Wed, 15 Jan 2025 07:23:06 -0800 (PST)
+ AJvYcCVMLTigSPI6GH6NJJ85TkCz8a09UwgBiHQ/Ue5GVq2q6quPjM59odM2KxhW6Z1ScinbU4UcrVE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQ/Nrwt6AXqyS8U9lCaccoJS9YyIvlofNg0ysbxmsFt7DAx3TG
+ fSANzLPK1DdTwDNmCBvliLSUwpUKa19G8qwJY+qxDggLQ7X7wLzgkPeSrw==
+X-Gm-Gg: ASbGncv3p/Zh2PT+X800etSxdpbB0OIx6ii5REENdeoYbCF8R5kjMErbpDXRnifBYXB
+ Ald9/XUwnZj1D9DPS9HX53nz72YdizOivp9BcNuTK+6/oZcP2Aial80+dx6mD2ktYe+wP1nMGTo
+ CN/BjXgPFjud4CcQqtaeN/5BH1EPHM7ClErY0MgPof5610fRIVt1V3PpxXtHcqLKgnT7uCVMNzH
+ y4jW/3YuE+8FRdjeWWBT4JRzmEwsc8PiMqWp6T0XH3/sKQlNINvev3ZfN4lO1aCr8E=
+X-Google-Smtp-Source: AGHT+IGFwnBOTavXOeGKI8bTrWk/K8O6Q1JN75pPvlInfA5pSSjnmJ5Cwj37wzYkG6mlMwPHQE31ew==
+X-Received: by 2002:a17:90b:250b:b0:2f6:f107:fae4 with SMTP id
+ 98e67ed59e1d1-2f6f107fd61mr13439074a91.8.1736955115727; 
+ Wed, 15 Jan 2025 07:31:55 -0800 (PST)
 Received: from localhost.localdomain ([220.127.31.92])
  by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-21a9f234977sm83919855ad.204.2025.01.15.07.23.04
+ d9443c01a7336-21a9f21bd3esm83948635ad.122.2025.01.15.07.31.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 07:23:06 -0800 (PST)
+ Wed, 15 Jan 2025 07:31:55 -0800 (PST)
 From: Chanho Park <parkch98@gmail.com>
 To: David Feng <fenghua@phytium.com.cn>,
  Linus Walleij <linus.walleij@linaro.org>, Peter Hoyes <Peter.Hoyes@arm.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Chanho Park <parkch98@gmail.com>
 Subject: [PATCH] vexpress64: Fix bootargs when building without NET
-Date: Thu, 16 Jan 2025 00:22:44 +0900
+Date: Thu, 16 Jan 2025 00:31:48 +0900
 Message-ID: <3d64bf095ad00a79e185ad034c0a8accdb9f2a15.1736954361.git.parkch98@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
@@ -97,6 +97,7 @@ Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
+Message-ID: <20250115153148.Fv82Qw252ue4N0CpUnyuRb5rsla-JPV8AhHLDH30Uxs@z>
 
 When building without DHCP/PXE configurations (NET disabled),
 compilation errors may occur due to mismatched bootargs.
