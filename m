@@ -4,78 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFBBC02183
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E8B5E77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:13:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF0C680702;
-	Wed, 15 Jan 2025 02:13:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B33F480703;
+	Wed, 15 Jan 2025 02:13:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uIYFcSMy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LXvxPvz9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D38A580214; Wed, 15 Jan 2025 02:13:34 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 493CB806D6; Wed, 15 Jan 2025 02:13:43 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71461806FE
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:13:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1819880214
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:13:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6d89a727a19so3824376d6.0
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:13:32 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b6e9586b82so519933485a.1
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:13:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736903611; x=1737508411; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1736903620; x=1737508420; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LQs1chD39Rt91YsejXU1Jig4WEn+8sF211FMm8mBNk0=;
- b=uIYFcSMygYwcJk+Hjh+0J8CYclWywWGBH0CU5ujmwzRh+Is5jnx6RpE3GQxKz94Isw
- JQ9uixdxgBahW9N7V4mYqEnq6nVfkSJkeo3N04m6W3jHsEB33CUImF1VP1xQCSHTb5i4
- 1i0s6Ppr1KzeNEgX5iAyWsZs8+Yg4UEwbq2Yk=
+ bh=LwNQKJaxgUGnPPASFTPdp4tM4QhcJjWxmqwsTFus1Cw=;
+ b=LXvxPvz9i25cg+E8p2W4z7EJTQHvDySyi6ruhjGTR2OiWd0YJkjh15qHD/Jwln/hft
+ ndw36Q8gKMOEwEQqWvcGDyYm+pHdX3n5uIQXBtacyiPECGQUcwVoIWIFSKKNc5x6nnGx
+ uyBbT7ToWtNFYgAfcRFTUmM/EUfe32i3lQy1w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736903611; x=1737508411;
+ d=1e100.net; s=20230601; t=1736903620; x=1737508420;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LQs1chD39Rt91YsejXU1Jig4WEn+8sF211FMm8mBNk0=;
- b=k4Mqo8ggzB5SpVngI0RzbhIGygb91OZPpG2hwES2IELq4zv9/sbLQu3sWH3h/9JynV
- uR2TEg7xQF+TPbpit4MZ+dmt7F3wUuA4Q/F2FeAPfeZAZuP48uP0YGE+xOlNRF6we8ev
- 8/HTi3WrXM2Y1e1Pct1RqYBLRK3gjZ6yAFbMS4keQUCpGIJuP8gH0vrWAi/uMRVA7xjW
- N/8TBFT8cAlmv6W7ldxb+ZVXimxwvkwaaQ1cuvZHU1guwEPdM3vAghVSsNczibBhk9SJ
- MIb8r2CzPPcqwGqmOpWQwBrfB7P1Ode30viPVcVEL8MD4budOEt/fJYzfm+yxSG+uwpF
- C1fg==
-X-Gm-Message-State: AOJu0YyYwAb2eCRhTyH86Yc0HqQmfdG9jhodWKFVLwVOWP8LqZuAHI2g
- QePM9/PxVGkPqviYhwi2V3omyLvNPRCMeUngqDiRiU6UNf4/9nLkg16glmADnTioc0MaIGkiHFH
- z
-X-Gm-Gg: ASbGncsd6aDzwnwMKqD6+TQed0uneaZ4HSXZBYh3Skkum81FoXBO4CJma9oKW4li1XY
- pxk+5IFBPWfGjnHgSzDkCMQK/75kya4gvsWumTRxawvuxBT9wweUrCd3APXzYOEbCjQl8cNfROI
- cwHzQZd+mhzVx2BjoVxtuLy1dqAML3x+zTWqeIE9dpFnnN7x6GU27FJwC+VerI16BY+su2pJaJ5
- vb/76qZpmPPXmOmV9oBPEUYEYdtNGouX/GsWlYnBBuN+QcaxFv8qg==
-X-Google-Smtp-Source: AGHT+IFrYcfcCpycCyZQgTAuAZv2/pfSlTOSJRIv1aiUyqrFc2SbC9emSJBxiZaQi37mf6akKUQpFA==
-X-Received: by 2002:a05:6214:4344:b0:6d9:2f70:2dab with SMTP id
- 6a1803df08f44-6e192c3be29mr20189526d6.16.1736903611237; 
- Tue, 14 Jan 2025 17:13:31 -0800 (PST)
+ bh=LwNQKJaxgUGnPPASFTPdp4tM4QhcJjWxmqwsTFus1Cw=;
+ b=LiCgs+JLdDTLfm9cCenHSwckIui4HP93pIc3pW4UrNYCPeg75CPze47kM23vkwlbHF
+ aYNfC86KQo3YUxYBS35T4jymZAaefTx5dmopLHvkRqytR9C+I/Vr7aBk+lwwZ1JS4wHc
+ YS6H20VHzkULvbaXDqmWG3X9bTveCh/UHTvWDrFFUlHwLQPWwYKxl6gqeBod0iWnQltU
+ ha/y23muypUNZWGziHUzDTP1jsuMWDmpxVOUZCakULt3UHIEVhPzAN+KGFAGyweXdrcx
+ EHgBSJtgrQLirZ4/eXwFW6Ch7HYYhATgHKiFcx9mmQ6hToQuIafQg5F/kZkl29CXZQk4
+ YDDg==
+X-Gm-Message-State: AOJu0Yx4/SLJ8+dR8FUdaJxJO8BVPa66lJ9Bw1inwTfgWhUyJcOBi597
+ 140idwFCb+hCORHjI4EGvvN5FlvTI7FY5dWHdQ3lBYilvGRbVX6vqdr6f7tfJZk=
+X-Gm-Gg: ASbGnct6TK7aT+hyaAGOz/ubm1s6ZABcJf4ZbClmHgi2tVpBIT21DkVOyRG+nMk9DgB
+ rwcz1CCfKTGt1a4MOVNxE/Jk1HgTAOciGY9bRPyX7OVg9NReGoXsdPai0y8mKQr4dPuOeOwcYRc
+ +tPUDZN4Qw33FI2emILqwpwbDViNm1L+C+HQ2jPjZ0v/iM3/EvaO4l6K/4L24gUprztxTFnYfhH
+ EbmCtFoZz5jkl9v8LmIoz8ElZIKcFm7p9Ks4gCtkcI1F1HeywaWcg==
+X-Google-Smtp-Source: AGHT+IEOHDqIYDXJoArftTsC78qPMg6Hc1sa59XCfF/qPYVJuJ4gMGzWzHgksgcDF5w8CpR+SiKDjw==
+X-Received: by 2002:a05:620a:4046:b0:7b6:eed4:695c with SMTP id
+ af79cd13be357-7bcd971628fmr4556566885a.32.1736903619865; 
+ Tue, 14 Jan 2025 17:13:39 -0800 (PST)
 Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dfade8929asm59059836d6.100.2025.01.14.17.13.29
+ af79cd13be357-7bce324830fsm660356585a.46.2025.01.14.17.13.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 17:13:30 -0800 (PST)
-Date: Tue, 14 Jan 2025 19:13:27 -0600
+ Tue, 14 Jan 2025 17:13:38 -0800 (PST)
+Date: Tue, 14 Jan 2025 19:13:34 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <monstr@monstr.eu>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [GIT PULL] xilinx patches for v2025.04-rc1 v2
-Message-ID: <20250115011327.GQ3476@bill-the-cat>
-References: <c9bd4bcb-8118-4433-b103-4fdc476c7344@monstr.eu>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 1/3] arm64: Add late jump to kernel board hook
+Message-ID: <20250115011334.GR3476@bill-the-cat>
+References: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1cSMIZL0ZhDTEeJ4"
+ protocol="application/pgp-signature"; boundary="gC8NIsN1QJT58y2G"
 Content-Disposition: inline
-In-Reply-To: <c9bd4bcb-8118-4433-b103-4fdc476c7344@monstr.eu>
+In-Reply-To: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,61 +106,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---1cSMIZL0ZhDTEeJ4
+--gC8NIsN1QJT58y2G
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 14, 2025 at 03:50:16PM +0100, Michal Simek wrote:
+On Sun, Jan 12, 2025 at 11:36:57PM +0100, Marek Vasut wrote:
 
-> Hi Tom,
+> Add empty weak assembler function armv8_switch_to_el2_prep() which is
+> jumped to just before U-Boot determines which EL it is running in and
+> decides which path to take to boot the Linux kernel.
 >=20
-> here are some patches I have collected so far. There is nothing significa=
-nt
-> in it. Just trying to clean my inbox. I am not expecting many changes for
-> .04 anyway.
+> This weak function is meant to be used by architecture specific code
+> to implement jump to a firmware blob, which then returns right past
+> this weak function and continues execution of U-Boot code which then
+> boots the Linux kernel. One example of such use case is when U-Boot
+> jump tp TFA BL31, which switches from EL3 to EL2 and then returns to
+> U-Boot code newly running in EL2 and starts the Linux kernel.
 >=20
-> Thanks,
-> Michal
+> The weak function is called with caches already disabled and DM shut
+> down. Any preparatory work or even loading of more data must be done
+> in board_prep_linux(), this hook is meant only for the final jump to
+> the firmware and return to U-Boot before booting Linux.
 >=20
-> The following changes since commit 6a0db9ee030f634731b792d864fc7a9df6cc6b=
-80:
->=20
->   Merge branch 'master' of
-> https://source.denx.de/u-boot/custodians/u-boot-usb (2025-01-13 08:25:00
-> -0600)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
-> tags/xilinx-for-v2025.04-rc1-v2
->=20
-> for you to fetch changes up to 3a2bf24a85b2b35f1c7d6f0633d6aa528a6970b8:
->=20
->   rtc: zynqmp: allow on Versal architectures (2025-01-14 15:34:51 +0100)
->=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Applied to u-boot/master, thanks!
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---1cSMIZL0ZhDTEeJ4
+--gC8NIsN1QJT58y2G
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeHC7cACgkQFHw5/5Y0
-tyyo5Qv9Fdynif41W/dGcZwtkjYO909++mdH5qY6djdv0e4RqWdwc0vSMMfp+CHt
-YCeoN/ZlU26eEe+Gzc7MnqB3WwpemXwQmV2CIORaSb7oAqYxqrDIxYhqHySfXkmg
-IHNOkaryfien2BPyzQK0xlJH28EDWbmUvNUSAa7G/2VHanBvkO09h7kbcGEOohQh
-1GFuoe9E/l0nhAESoVK5deolNFot5hV3gQzp7GrHrtbwfKMVxTs+5Cz9MRhMlT3l
-CXN6Pelit5VQ25U+t4wUw1QuGOt6g1GmFYy9XLd55b93mHTdlaVaD4cQMdvl9UuJ
-IkXb+zIsA6wXGoBynr67H787Iqb6wUhgo/zoK7T2Ecm6HsDFqCrSHEuYYVZ1KKFe
-vp9dYmS1xeFHE7lvyrB2Q7qHINCF4cEqK/bdctCkhbAdN/OcWwc1BAeZBnV9jdtj
-sGT+gJseZjEL0OxkxjscKXTXUAvYvCBttuF9rJfqvRH50Xz2EB3HlTKFb4Dc/CbJ
-WZDyaxVC
-=BCCy
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeHC74ACgkQFHw5/5Y0
+tywtWQv/YEm+YWrhAAc10FOLB16CK2zSoPn3JK71KvXJxqny1DTIWaUt6Y+pRnC9
+ZBtMPkyMEaI7CNRY7rCt2rT2yZY4fDU9OCIlIRcXIP+qI8so87RhSOEYHVe/xLTp
+/M9WcjM4Q8Y9dNoudLzCDrni7OlBvxQRDUMVrkKv8dsdFvAi/cS5VmkssreZnMiC
+Et/kDbDiVTqYRIisd720AcKPqRcBdneYbWdoVTwTsuBDdKvpveNNOQtTeO5eMHV4
+htpKULuKV2F4EbszUYwCW2ouPxc03qAi6Ul5Ktboc23EtHOtMWfdlXPSe6jvEUAi
+mnVftbk+zx/1m3S1Osk/EzN+0BG28QxEHD6m2GwEYY6q1mrAwqerkyJGdaMtns9W
+FK8sFId7499GbVOiSN2843bmhX7XaS9ObQXgkyVVVp5ze+oF0dFa/lP8PvNmzP1L
+1+AeErWfsaP3DZBW1+qDrBLuln4ZX4xqGlblDmogMynlOHxGzG4kAP9gUmfhGHZs
+ZsKEx071
+=sP+i
 -----END PGP SIGNATURE-----
 
---1cSMIZL0ZhDTEeJ4--
+--gC8NIsN1QJT58y2G--
