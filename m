@@ -4,85 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 106C4C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 14:47:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D156DC02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 15:33:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9305180657;
-	Wed, 15 Jan 2025 15:47:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 183398060C;
+	Wed, 15 Jan 2025 16:33:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RyRoF36x";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GcEUCxLd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B28548060C; Wed, 15 Jan 2025 15:47:40 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC2C780657; Wed, 15 Jan 2025 16:33:22 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85BDA80657
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 15:47:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B99AB8033D
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 16:33:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7b6f53c12adso539843385a.1
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 06:47:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1736952457; x=1737557257; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=l/+6u9pH/e97TllxAAAWsF364ivpgNlZTMKrR8IOdmU=;
- b=RyRoF36x/oo3y05aO0Me5oqH2GqSsX2gLxbNcRYPvbGjijVRZzeHnDqaTEo11Iijla
- Iyffb6xpZvq9rcTie2j1NbAeunS4FqqCdGRMgYpZouGazsYl2QlMSo9+1B23zUby0PiQ
- vxYouzi0GynahywMIerBvtizPvC9jvJ1D410I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736952457; x=1737557257;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l/+6u9pH/e97TllxAAAWsF364ivpgNlZTMKrR8IOdmU=;
- b=v6bks9Lo0Z0IWxR/MNd9mPWvJI9tanogMLNHWaIjpcg6yO88m6+UR0/MPbfhXRz2Cg
- 7m2sQJ5wtzi97EN3/7NqNw+PcbhvGD/Vg/52RTWpDqoId78Y5BzpY7j+bW+nEu9rLBTG
- SvZ/XPMKmLXsmj14OOruip1RKcSqpC4cPda8hh1YJOg2ws7VPZL13DJ/l0LmDee+PVQ0
- GMDh0q/WpOjzkyZ40xAqXWpQtzlODkVXQKwycBYdZtdIzFycA4oPyGD5hMBZ9r86J3VF
- UZDAGqdIF20PmH92ou5vTj1co3qZ6sYljuTHM1N6lNAVvsBmuW5iN258EWisBIJM6fcc
- jD5Q==
-X-Gm-Message-State: AOJu0YzyvV3ly5wSq45OpPojqCGA+QMgsgpvmd44PjqwDDPBZhJY1XOw
- 6pplHK0Cq1e4vg3Vzgcq5kI2l0QvqnhQuhwokA2tcg3hcl5emRsgz1zFzY9dUTYI+7lMBJhkewX
- T
-X-Gm-Gg: ASbGncv8iKi5aCxEKNvnBjqvqiDeVmtuL23PKJg6GXoHpXhHsagjIRblgHZQnpwJGiz
- j1ijIzLvMGhsiWsmQW5Z4jjF95UolETGY9jj1FAfGHTq6kIPY159e76gSj+zph49UfiQD2me54A
- PbdPpzNjgNFpXeiWNr/RbmfR85MhI60nRyLTVmM4CRIan3ll8u6h5Y48odH3GOTkQxkZYA3kRZi
- 3talhsnb+PJAQaFnV6ujfH+Tq2kwomKXo4tEZVNMK1rrBi3rZusHA==
-X-Google-Smtp-Source: AGHT+IGi3iTzN6+Z0HwSoxrwUem5P3i2R+itDMHY/OHjbIKisUoVoR/Cx3pHehVVI+szlhNhnYx1mQ==
-X-Received: by 2002:a05:620a:2805:b0:7b6:f595:7550 with SMTP id
- af79cd13be357-7bcd9783e00mr5398730585a.36.1736952457384; 
- Wed, 15 Jan 2025 06:47:37 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7bce3503196sm721857785a.92.2025.01.15.06.47.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 06:47:36 -0800 (PST)
-Date: Wed, 15 Jan 2025 08:47:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Jerry Van Baren <vanbaren@cideas.com>, Marek Vasut <marex@denx.de>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: Re: [PATCH v4 17/30] emulation: fdt: Relax condition for
- OF_HAS_PRIOR_STAGE
-Message-ID: <20250115144733.GA3476@bill-the-cat>
-References: <20250115143700.851043-18-sjg@chromium.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1736955166; x=1737559966; i=xypron.glpk@gmx.de;
+ bh=z1qEyPZyq8/QCXCquili4vfecVt7GzDBQGTxCWBGRb4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=GcEUCxLdjooLKxQ0bUZF1GHSuzbqsL+Bg/Lm41JWZkwbAqcJBbsdzCmZ+uK5Baca
+ 776QT4sVHoH+r0MrzwwwoTD1H1NTpm5zhkp8QpvZulF76HZLdJE430KwmV3pTzQ3S
+ r9Uk7cYLJyi81mjM8vbOanDKyw19NhzAzVpXzs4dqbIdmlKvdTSOnTr5fCMG+Ew5F
+ Da3jJksbPWgE6AfUwAzf2+CWLq4Rx5c+9NlfYT4iWbVkM4VuQCcMvX8xhZgn41lBg
+ Mgj3hCa6Q9D0uZVaQxdRhfmKAYD/XIgfVkfmovYBW0IdQBQV3j8TZB26lBFRBePZG
+ dkoQBKenruLYEMOmdw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MFKKh-1tnEbn2KnR-007L2l; Wed, 15
+ Jan 2025 16:32:46 +0100
+Message-ID: <8fde0244-546c-48dc-8480-068970df30e9@gmx.de>
+Date: Wed, 15 Jan 2025 16:32:40 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cJI4d3doIhbjreE7"
-Content-Disposition: inline
-In-Reply-To: <20250115143700.851043-18-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/43] test: Improvements to ut command and test-suite
+ running
+To: Simon Glass <sjg@chromium.org>
+Cc: Alexander Gendin <agendin@matrox.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>, Ion Agorria <ion@agorria.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Massimiliano Minella <massimiliano.minella@se.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rasmus Villemoes <ravi@prevas.dk>, Ravi Minnikanti
+ <rminnikanti@marvell.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Richard Weinberger <richard@nod.at>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel
+ <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20250115133114.590375-1-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:gBDhantonwdiKvi/W7BdA+ClOqpI3prpp8RYbXyMpKr1kMzW1rb
+ OuhTxZYDCUb5d1852xhyoHNmH8QRECu0MlOIDCtSaoXSxT2++qhZ+rlnXs9mjOgAea8uhy0
+ CQvIa1Xnu66ZjjTzV0LE37ipTMaEW5RVA9fBp4QI+jQYAfJTmTjN0Sg18hZdfRbO+Xrh52n
+ b8Mt0KXZRHSE+58SUE8cA==
+UI-OutboundReport: notjunk:1;M01:P0:CDIJ4KFDT6k=;B7FJo1NJ2/DCvZv1a0Yir6lG7Sh
+ RALNBO6D2pt5OyCXUEY/lbWEmZZZGmj6Wapqn6sAhKjJzqPIC/isdW9CAQvkEfLty9c89IuNK
+ yjyB5bqsEPtsQ9+//xVPz2KkU//IGmxJvoPwafQHwe+wyXoxgYuDo2wxFDsnwBPuApZLCzxeM
+ w3irL4SapcwyFYHln58P6iXICj45/z8r5luO9K7uqS/6mlp8H960ptxR2sPDw5RvogzRP6WKZ
+ VkfFcZlUxAIX4JWWs82mI8DJK9bwpgqeSFtFehJh96C9LGJJ0UHXShDI57vb0S6BH31wHTyQ/
+ 51LwHdXbvkGJYuzRtO1aX6hXlxA742MTNgVjJRF5bAjTwVC+8b820zQS2y230tR26kXa6D3wU
+ wtH5Kd2LsO3CXmciUvL6/zNR1P9pcVztpMJ6pRJ4w0D9qk7grpn/iLNT3BIDMbKUKAU2vMzvr
+ qYh0cIPkdCDmuAR4t/QbMkahezPHgiZhMJ8Hs78F7dfgR7ClmjXQ05Ip4HME+mpr9jwQ5sc/W
+ aSRZpsXE8YVwA85riKOrn0+CBAjyMSZlpXKchYJcktO3jAkrSJHDT7/N7Fib7ASAdYMXW7sKb
+ RSiZQhXb/coxyP9t74H6tOkBkr8tumhuWrWI9pYeJC84P9euObIKbW7x5a3b7/5yPgpIMw4v9
+ TwAjzXB1C8aNzGmdb2ctWt4982O+g73kLXgvkEgjjHkuaNlKctSqTdF7I0mDiX6fWOg1xju/w
+ FXtG/M0bAbzcDE11620KCymLusujMQY719JupLlmzTkhbGzWd3drORB5mfk7CprBHe3dJGEMH
+ UhglEtAfwUoP7dFXAsyPTfi0xUxeMXmevD5ItoeNFLbOqMyw0qms6dJSARgsjzLpB9RN/ZoOd
+ cJ/HR5d0EsAsCTR0X2unsMKYRb6GjK61Uojf29+FeAmTVadpLFQMu3ptnza2MUD0ZYZ9iOuzm
+ nr0TpN8H6xNzMoAw+jfOsgzY3D2opFAP3FEFSMPv9jUGqxJy+V6pC0iHy1mv1wInu1npd/iYz
+ 7yjwhGkCJETEcN0Hb9Wlgbq0yDh/9x52GSx68wjvy4+4EnQ3ep0ZQFut5nIfi/tkmkTKDkoMo
+ srHdpm/NUbOyvPgRJRqPjvUVCJ6lcu466OvfdnFGngKiiR1KtERburFBGPMFeU4Ibp6ToBn+i
+ M8t2K+ZWmBcGroXKhpegd1HmIwl0Lc1cX9kSiYuP4nw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,44 +117,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 15.01.25 14:30, Simon Glass wrote:
+> The current method of running unit tests relies on subcommands of the
+> ut command. Only the code in each subcommand knows how to find the tests
+> related to that subcomand.
+>
+> This is not ideal and we now have quite a few subcommands which do
+> nothing but locate the relevant tests in a linker list, then call a
+> common function to run them.
+>
+> This series adds a list of test suites, so that these subcommands can be
+> removed.
+>
+> An issue with 'ut all' is that it doesn't record how many tests failed
+> overall, so it is necessary to examine copious amounts of output to look
+> for failures. This series adds a new 'total' feature allow recording the
+> total number of failed tests.
+>
+> To help with 'ut all' a new pytest is created which runs it (as well as
+> 'ut info') and makes sure that all is well. Due to the 'ut all' failures
+> this does not pass, so the test is disabled for now. It is here because
+> it provides security against misnaming a test suite and causing it not
+> to run.
+>
+> Future work may:
+> - get 'ut all' passing
+> - enable test_suite() in CL, to ensure that 'ut all' keeps passing
+> - record duration of each suite
+> - allow running the tests in random order to tease out dependencies
+> - tweak the output to remove common prefixes
+> - getting rid of bootstd, optee and seame 'ut' subcommands
 
---cJI4d3doIhbjreE7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Am I missing a patch for doc/ or will the usage of the ut command remain
+unchanged?
 
-On Wed, Jan 15, 2025 at 07:36:47AM -0700, Simon Glass wrote:
+How would you specify a test suite like 'lib' in future?
+How would you specify running all tests in future?
 
-> QEMU always gets its devicetree from the OF_BOARD mechanism so we should
-> not depend on !BLOBLIST here.
->=20
-> It's not clear why we need to have any relationship with BLOBLIST so
-> let's remove the entire condition.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: 2b71470628c dts: OF_HAS_PRIOR_STAGE should depend on !BLOBLIST
+Best regards
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Heinrich
 
---=20
-Tom
+>
+>
+> Simon Glass (43):
+>    test: Drop unused suite prototypes
+>    test: Rename test_get_state() to ut_get_state()
+>    test: Add functions to init and uninit the test state
+>    test: Pass the test-state into ut_run_list()
+>    Improve support for linker lists in data structures
+>    test: Add newlines to hush-test messages
+>    test: Rename test suites to match their linker-list name
+>    test: Update ut info to show suites
+>    test/py: Add a test which runs all unit tests
+>    test: Drop the _test suffix on linker lists
+>    test: Introduce a better array of test suites
+>    test: Drop the function for running bdinfo tests
+>    test: Drop the function for running cmd tests
+>    test: Drop the function for running common tests
+>    test: Drop the function for running dm tests
+>    test: Drop the function for running env tests
+>    test: Drop the function for running exit tests
+>    test: Drop the function for running fdt tests
+>    test: Drop the function for running font tests
+>    test: Drop the function for running lib tests
+>    test: Drop the function for running log tests
+>    test: Drop the function for running mbr tests
+>    test: Drop the function for running mem tests
+>    test: Drop the function for running setexpr tests
+>    test: Drop the function for running measurement tests
+>    test: Drop the function for running bloblist tests
+>    test: Drop the function for running bootm tests
+>    test: Drop the function for running addrmap tests
+>    test: Drop the function for running hush tests
+>    test: Drop the function for running loadm tests
+>    test: Drop the function for running pci_mps tests
+>    test: Drop the function for running seama tests
+>    test: Drop the function for running upl tests
+>    test: Drop the info test from the list
+>    test: Drop conditional compilation for suites
+>    test: Pass the test state to cmd_ut_category()
+>    test: Move stats into a struct
+>    test: Keep a track of the numbers of tests run
+>    test: Move stat-printing into its own function
+>    test: Record and show the totals for all test runs
+>    test: Sort the test suites
+>    test: Disable test_suite
+>    test: Move help into the suite declaration
+>
+>   arch/sandbox/cpu/spl.c        |   6 +-
+>   include/dm/test.h             |   2 +-
+>   include/linker_lists.h        |  51 +++++
+>   include/test/cmd.h            |   2 +-
+>   include/test/common.h         |   2 +-
+>   include/test/env.h            |   2 +-
+>   include/test/hush.h           |   2 +-
+>   include/test/lib.h            |   2 +-
+>   include/test/log.h            |   4 +-
+>   include/test/optee.h          |   2 +-
+>   include/test/overlay.h        |   2 +-
+>   include/test/suites.h         |  53 ++---
+>   include/test/test.h           |  23 ++-
+>   include/test/ut.h             |  45 ++++-
+>   test/boot/bootm.c             |  11 +-
+>   test/boot/bootstd_common.c    |   9 +-
+>   test/boot/bootstd_common.h    |   3 +-
+>   test/boot/measurement.c       |  12 +-
+>   test/boot/upl.c               |  11 +-
+>   test/cmd/Makefile             |   4 +-
+>   test/cmd/addrmap.c            |  11 +-
+>   test/cmd/bdinfo.c             |  10 +-
+>   test/cmd/cmd_ut_cmd.c         |  20 --
+>   test/cmd/exit.c               |  11 +-
+>   test/cmd/fdt.c                |  10 +-
+>   test/cmd/font.c               |  10 +-
+>   test/cmd/loadm.c              |  11 +-
+>   test/cmd/mbr.c                |  10 +-
+>   test/cmd/mem.c                |  19 --
+>   test/cmd/mem_copy.c           |   2 +-
+>   test/cmd/mem_search.c         |   2 +-
+>   test/cmd/pci_mps.c            |  12 +-
+>   test/cmd/seama.c              |  11 +-
+>   test/cmd/setexpr.c            |  11 +-
+>   test/cmd_ut.c                 | 361 +++++++++++++++++++++-------------
+>   test/common/Makefile          |   1 -
+>   test/common/bloblist.c        |  12 +-
+>   test/common/cmd_ut_common.c   |  21 --
+>   test/dm/Makefile              |   2 -
+>   test/dm/test-dm.c             |  16 --
+>   test/dm/test-driver.c         |  10 +-
+>   test/dm/test-uclass.c         |   8 +-
+>   test/env/cmd_ut_env.c         |  10 -
+>   test/hush/Makefile            |   1 -
+>   test/hush/cmd_ut_hush.c       |  19 --
+>   test/hush/dollar.c            |   7 +-
+>   test/hush/loop.c              |   4 +-
+>   test/lib/Makefile             |   1 -
+>   test/lib/cmd_ut_lib.c         |  19 --
+>   test/log/Makefile             |   2 -
+>   test/log/log_ut.c             |  20 --
+>   test/optee/cmd_ut_optee.c     |   4 +-
+>   test/overlay/cmd_ut_overlay.c |  14 +-
+>   test/py/conftest.py           |   7 +-
+>   test/py/tests/test_spl.py     |   2 +-
+>   test/py/tests/test_suite.py   | 182 +++++++++++++++++
+>   test/py/tests/test_upl.py     |   2 +-
+>   test/py/tests/test_ut.py      |   2 +-
+>   test/py/tests/test_vbe.py     |   2 +-
+>   test/py/tests/test_vpl.py     |   2 +-
+>   test/test-main.c              | 104 ++++++----
+>   test/ut.c                     |   4 +-
+>   62 files changed, 657 insertions(+), 580 deletions(-)
+>   delete mode 100644 test/cmd/cmd_ut_cmd.c
+>   delete mode 100644 test/cmd/mem.c
+>   delete mode 100644 test/common/cmd_ut_common.c
+>   delete mode 100644 test/dm/test-dm.c
+>   delete mode 100644 test/hush/cmd_ut_hush.c
+>   delete mode 100644 test/lib/cmd_ut_lib.c
+>   delete mode 100644 test/log/log_ut.c
+>   create mode 100644 test/py/tests/test_suite.py
+>
 
---cJI4d3doIhbjreE7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeHyoUACgkQFHw5/5Y0
-tyx2pwv/ULeHcK0uxl541fgwo1rJeQmXwvinOup7G56ASOUzB+jipMHVUzl4jYlv
-9KZGLDbWVnVGFYXC9oCK8eo2GklUVHgs0ecuaRKAC2mBI9TkZY3U1NOznj3uiSdq
-4HAr+/AAn0xWPi9xAhF3K2WZ1V3FpFss4H4e7+6wMXOLFOYwA8xz67Cj6OSIrOEV
-uqZ6FFYZDnzU570RtKPjkn1DxF21VZy/8FQgOQtc1JGtWIvGYCvoNvKvn25aDpk6
-1Y5rQJ0TKsFm6iHcp6qljJ/k+Sjv/dGw5u2cP7GAjYdZUUN5PUwz9+3aCWyuol6P
-slQlsVv+snBDPIh3QqWE+OK7nFU0SUzrY/IWKA6sJJTl9QHmtawvSmB5mM0rAP7N
-dbBTrCdmhgI/8176sDe9i0+VDeU6ysq1SiWNyYU2wtwWfDf/74orRo2pYzNkrFhd
-7n+QXPbCTIIDJuZJDqWsrxByaDBcXLe0EmEmc3EiGoZXOeiyn3iEVbH5XFtqZGnl
-rPo++bLs
-=M8xc
------END PGP SIGNATURE-----
-
---cJI4d3doIhbjreE7--
