@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 408AAC02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 05:37:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9A61C02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 05:58:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B8368060C;
-	Wed, 15 Jan 2025 06:37:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E26418060C;
+	Wed, 15 Jan 2025 06:58:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CXjE22+i";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="O/7NExe2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8296D80657; Wed, 15 Jan 2025 06:37:19 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E91C580214
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 06:37:16 +0100 (CET)
+ id D54BF80657; Wed, 15 Jan 2025 06:58:02 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 391FB80214
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 06:58:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2166f1e589cso135539585ad.3
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 21:37:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736919435; x=1737524235; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Z0Z6+io0CwIdWrwkJNL+et/nskeSXXgrkNUmglTxlMw=;
- b=CXjE22+iGbDXeo1lzMLY3XpNZIgtWmvhq40lVajvEqF9Iz9PzcB4usO4GYMtxZXOO4
- RVUfIxFehRRY0ydKhHqMZhw0I6PMxbzTjrUCKDCOwTTTYSocJOqGUD65+LjUV0Iqa2DN
- 18Ku7E+4nnrCluwK6C158GS7L2OyvmbeocmtMc0eXpKFS/edP70h9W4+Lhv5c3+dYQA6
- oGVmq30MgW0Qbb1X70aJwQvBY0j4DtMASOKDNzUu24XsJJAieP365gIubaxqhvWGxniD
- O3hNJkSvQg4N3bU5Jxvzv6tRjc7ogz4Zz8FfNUlCBIhTzLegv1GZSVAFKRKtqF8QGtJe
- 1KFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736919435; x=1737524235;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z0Z6+io0CwIdWrwkJNL+et/nskeSXXgrkNUmglTxlMw=;
- b=exixji2Bf5iKnkV/7/JJH/zCzdc1I9PZ79gKO0usdDkTrJkXkTWxyIP6O0TKMVSMEn
- TPr/sx9lHf+KIQkgmuM1vCLo1PSNGUv7yoB3irf9zng59En+uMhosCTOC6hR2mBhLLBb
- 28d5jqa700KlC2lsf3zk/mIbV+wy6CWdU4hIgCaJVELKBMNy/I/OccbvEzlf0Aet/6vv
- vt4OBcVfOjFe9FyBxRAk5ksE9JWggym4WC3RT3C6Dyhv1iZlyi+PfEP4d1qPdDsGde+K
- Y70vctPQnLG5qgb3oSCogVEmYOJvUC7qhpdmLz4vnepj3MzlsPVtoeCFr6ceS/f/2zHm
- WJ6w==
-X-Gm-Message-State: AOJu0YzMxZMwD9NK9x+SkrT1+Dqqhtx8sQn0do6H9jfirpIcYZzluP7o
- 5uUnSsIs6ZFuaO9DfKZBkYlOmnJKA3je9Q5U4BX067/3tqasFnPW
-X-Gm-Gg: ASbGncsm+T+0/0AL+FwL0CYLK09zl21FuLZdkVccp/+n3IsI4hDwm2FqjmqXL4F0Q64
- lre5SSb5kAIZGYK5e+SbCakOsHJyXMaXrkgk4oJSOMXkRfGLP9qOHt5+R/xU5RNYL9XoHILOkQ6
- O2KGJdp6hj8/VL+SaTcjuhZq3Z5JwZ0MLSMgNyPMAUupZkQvD8SjHzRa7vyP5CVTUNzNQ0TqTH2
- p/lO+Qg271gXzoUzR9OgklR4zeeAiiWSgS982leZlfZwPgb0xG/ZpHuat4=
-X-Google-Smtp-Source: AGHT+IHxLXW/1RQLVgbNbYn6IPAGWeaK+8Ch/6D01U/EFTcjkVI5wZ+w2ezwcW1YssCDYT8s5ra2GQ==
-X-Received: by 2002:a05:6a00:170a:b0:725:d64c:f113 with SMTP id
- d2e1a72fcca58-72d21f18064mr42426913b3a.3.1736919435080; 
- Tue, 14 Jan 2025 21:37:15 -0800 (PST)
-Received: from CNSZTL-DEB.lan ([2408:8362:245d:4738:bc4b:53ff:fead:2725])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72d4056a5f3sm8669003b3a.58.2025.01.14.21.37.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 21:37:14 -0800 (PST)
-From: Tianling Shen <cnsztl@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] rockchip: nanopi-r3s-rk3566: disable unneeded CONFIG_NVME_PCI
-Date: Wed, 15 Jan 2025 13:37:05 +0800
-Message-ID: <20250115053705.911296-1-cnsztl@gmail.com>
-X-Mailer: git-send-email 2.47.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50F5vwpV3699796
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 14 Jan 2025 23:57:58 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1736920678;
+ bh=+mAotMdRibs4JVADzBXoBIW8V9Qaw81pebGSvDDzN54=;
+ h=Date:Subject:To:References:From:In-Reply-To;
+ b=O/7NExe2vhhFxLFuw+YX4eFbSqj37G/ulv/86rXZzs9kwan2xkYvwIyy6y6lJOG95
+ cTJKcte9Yj6hPzQ9XWm9QZ+k/TumyBLEVHR4KbvPFeoGJcFO83AG3MnPKWZL5iLNv3
+ KKIHL/mLH1slPDDWuosSmU4XFXZI328Z4VtY9TW0=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50F5vvqS016690
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 14 Jan 2025 23:57:57 -0600
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 14
+ Jan 2025 23:57:57 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 14 Jan 2025 23:57:57 -0600
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50F5vuSN087071;
+ Tue, 14 Jan 2025 23:57:56 -0600
+Message-ID: <05272e42-5c55-4285-9ad6-fd7c9e913054@ti.com>
+Date: Wed, 15 Jan 2025 11:27:55 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [ANN / RFC] Regular community calls?
+To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+References: <20250113183409.GY3476@bill-the-cat>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20250113183409.GY3476@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,27 +81,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This board does not have any NVMe slot, so disable unneeded
-CONFIG_NVME_PCI option.
+Hi Tom
 
-Fixes: bf4a33e725ae ("board: rockchip: add FriendlyElec NanoPi R3S")
-Signed-off-by: Tianling Shen <cnsztl@gmail.com>
----
- configs/nanopi-r3s-rk3566_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+On 14/01/25 00:04, Tom Rini wrote:
+> Hey all,
+> 
+> It's been suggested again a few times recently that we should try and
+> have some sort of regular open call / video chat as that might help
+> clear up some issues. To that end, I'd like to propose we have the first
+> one at 9am -0600 UTC (3pm +0 UTC) via Google Meet. This will be a day
+> after the v2025.04-rc1 release, and I'll include a link in the release
+> email. If this works out well, we can make it a regular thing for the
+> day after a release and also try rotating the time, or having a second
+> meeting much later in my day that's at a better time for other parts of
+> the world.
+> 
 
-diff --git a/configs/nanopi-r3s-rk3566_defconfig b/configs/nanopi-r3s-rk3566_defconfig
-index 870613f690af..16e09753a72d 100644
---- a/configs/nanopi-r3s-rk3566_defconfig
-+++ b/configs/nanopi-r3s-rk3566_defconfig
-@@ -54,7 +54,6 @@ CONFIG_PHY_REALTEK=y
- CONFIG_DWC_ETH_QOS=y
- CONFIG_DWC_ETH_QOS_ROCKCHIP=y
- CONFIG_RTL8169=y
--CONFIG_NVME_PCI=y
- CONFIG_PCIE_DW_ROCKCHIP=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+Thanks for initiating this, I think it will be helpful for most of us. For folks 
+in the IST region, this is a pretty okay time in the evening so sounds good at 
+least for me.
+
 -- 
-2.47.1
-
+Thanking You
+Neha Malcom Francis
