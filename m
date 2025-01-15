@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F3BC02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:34:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE92BC02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:34:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C528083C;
+	by phobos.denx.de (Postfix) with ESMTP id 5E86F80882;
 	Wed, 15 Jan 2025 14:31:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QoWQy12p";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oayQLbCW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6257980836; Wed, 15 Jan 2025 14:31:45 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id DADE9807DD; Wed, 15 Jan 2025 14:31:45 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9738D8083B
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:31:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FC27807E1
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:31:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-844e1eb50e2so233578539f.0
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:31:41 -0800 (PST)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-84f1ea04c64so485010539f.3
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:31:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947900; x=1737552700; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947901; x=1737552701; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O6+V+tAiU0jaZsJyriSWlbGjpg3rMVjK4Q4w6OJjn0w=;
- b=QoWQy12pRMP9M8Xvo7labYXzSQiv+tBW1PPgmhxf9t8uSJ3yZ1++RSeccWPlOvXmb0
- DnXqDFSr6Rk7p+cuds5gS4QXXW0ZnhZL+PMmyAAsxx/OcvhahuQd4ChfvK5GAiEUK+ge
- lCzodJcpkxueNI1EieHWmKM7qnat9jFgdj7Sk=
+ bh=aU8R8AN33Fiet5MHRqBAjXjgJpaYK3BRgKl9z/qyz+M=;
+ b=oayQLbCWiPY1Y1S+PkvpsPbeW3H9AqgCCiuSMefXOQl0sS9oTwMdaulCkiX+AtHu5w
+ 4TjNLvWRBzc7fFthW7TlCKExJ0Fb3hBRvmgsMPPHNGAxvzUf/UJ72LW6RCcZ9BpENyje
+ KTO9NTMF1vCfVMWZDtjAteRWzamhYfqeqUTIY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947900; x=1737552700;
+ d=1e100.net; s=20230601; t=1736947901; x=1737552701;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=O6+V+tAiU0jaZsJyriSWlbGjpg3rMVjK4Q4w6OJjn0w=;
- b=wofeAtdjy/lfht0kNpMDiaUQJLR7FypX+xSp1HiyDpeUl+QSo6X5nhdVAX52uoWIll
- 1IH/2KYlNJNnLGd6JzE2iA2Ablsghjs68x5oP2BnbkN3yEOM/l68ooYmyTOnkYhTQZot
- vOzjHhfwL0ezM6MUSu7waUEaTvtVxirn1sDSBQO0Ev1UAo/ygkd3q+CQK0+sSTG+Ltii
- DaulB8YIIxLx/ZFym1NtICo18CknAtOMygb7QNCrULPb4KNf0e/c2AF7fhwVtd7PqXaD
- n6AOrgKRNXzs+OSIXjOdMRBIh/uoDDlQnxwh3+G7HrUUgGqkDUjg1mRdTW3uQlmmx61K
- Vqhg==
-X-Gm-Message-State: AOJu0YygVJH3mNBEEEzLof52G80c/EGo7tcnaX+D9CI+THGKi1PSu24c
- YP+/G65ZczTroPJKm4cKUB5ZV4uAzzFtAH2cUeo4jCv1+X77H0N0dhUi0BIrrUTeKjXE+4N+5mE
+ bh=aU8R8AN33Fiet5MHRqBAjXjgJpaYK3BRgKl9z/qyz+M=;
+ b=wazuHpnSzoZKYmz4VTNkDZ18H0JgZeLcVZ2TgkTwE7OvkyaBL5fMYRp8oHua4g6xxO
+ 21geoSxze3vn5me8ShE9iKahR4TNEwd+A+K+OA7L0YDIjUtMt/sTi6krj+4Jqht5Knbo
+ +3NYkfY4mIQzXTqBE9oRzAcA8gLCj9UKx79u6VxGx1mMaWikylWVAuXWo290cZxu8DtQ
+ yRE2bZ02Xr4SvxMQtRYd4L2Vqj7z2pyxCc9swmCPeRkvDWRRvtZzRNAKVotvm+HvwEcu
+ TPOV5i3wQmHQxH2iUZ4FPQ401v7zOK8CGa1q9mXtO+ssQ6QP1UmpDgcsduMoaiXtSuox
+ WWmg==
+X-Gm-Message-State: AOJu0Yw6NX16se1xysVY+h91fNe/mvSja2n6z1FC39kFXa0gJGUOqWer
+ 21DP0c05bDCUBsSMKEk16I5KZ7xYXr9AGagcpi5KH6jaYJbbyBNr3WL3Ge9z74c5dIbqixyGnRo
  =
-X-Gm-Gg: ASbGnctizJY6pMI392ZtQ9vB+YAQtGeMYUsw+HOijQ2i3gVLFc3N3APHlF9cocuRTeL
- 3CtGm4yj2C3WfTkcMkn8d+hM/+PzotbAdkzDea8NtWK680AM+jttLab5B/ohq/vB2mOuiqKsDxi
- mt0eR6z8zjldqC3QFyH12kOtGL8SlXq9UO3zp6T+LjupHa7suQv57g95UaSosSS4gamjvBWWszl
- IDbVnJCRpdDajmNIvhsFT1kCwyEuuiq7PeT8ovJOI3qIazKFQC+i7YYAHraZUhnYjsClIUHdR9M
- M5pwsJTX60L9lYKv0A==
-X-Google-Smtp-Source: AGHT+IH4mlSrFlgRGivt+8EnGGvOCBRZMA1urF3+BW5SVFEeX7LY/17xh13brXTDCVJRhG8JddjZVw==
-X-Received: by 2002:a05:6602:3e99:b0:842:ff2d:c3bb with SMTP id
- ca18e2360f4ac-84ce0081e7amr2866879139f.6.1736947899676; 
- Wed, 15 Jan 2025 05:31:39 -0800 (PST)
+X-Gm-Gg: ASbGncvP5vvYe8mmRHu0nxm70wtXRnH7kDE8cmYvGEtMV79B1bK3ibGu6cUC2HjSNVm
+ Y8XNrOeI3WVy70Pq+bXnuc3PPOABotE4fJr9h4wVPpB4BxljV8gB3xTmGzrucuwYO8T4AZoBaaW
+ LgpZBI4hRhhw1rODyU0K5vbi67GKXFdfbJFIFx67uAq+dxDqzZhzdJJjrUKuTBLHndTOJf83kGL
+ n1X9wx7bF/G2QkkZX5ONYdUSHUjFOe89tfb6E3yF3rufz8kC6+dhsEizof1gR8Ys6C+4dTZ8SBP
+ glAtfUvOBMLmZCBw8A==
+X-Google-Smtp-Source: AGHT+IHY5HIlVXeSPHJ7WVLuvBttQfI9bbc4v1LQna78mr74uPFNSiYDVgMDoM7SflyAA8ra1kDZ5g==
+X-Received: by 2002:a05:6602:418d:b0:84a:7902:d424 with SMTP id
+ ca18e2360f4ac-84cdfdce129mr2838643839f.0.1736947901270; 
+ Wed, 15 Jan 2025 05:31:41 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.31.38
+ 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.31.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 05:31:38 -0800 (PST)
+ Wed, 15 Jan 2025 05:31:40 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/43] test: Introduce a better array of test suites
-Date: Wed, 15 Jan 2025 06:30:41 -0700
-Message-Id: <20250115133114.590375-12-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 12/43] test: Drop the function for running bdinfo tests
+Date: Wed, 15 Jan 2025 06:30:42 -0700
+Message-Id: <20250115133114.590375-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
 References: <20250115133114.590375-1-sjg@chromium.org>
@@ -94,355 +95,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current cmd_ut_sub[] array was fine when there were only a few test
-suites. But is quite unwieldy now:
-
-- it requires a separate do_ut_xxx for each suite, even though the code
-  for most is almost identical
-- running more than one suite requires running multiple commands, and
-  there is no record of which suites passed or failed
-- 'ut all' runs all suites but reports their results individually
-- we need lots of #ifdefs in the array, mirroring those in the makefile
-  but maintained in a separate place
-
-In fact the tests are all in the same linker list. The suites are
-grouped, so it is possible to access the information without a command.
-
-Introduce a 'suite' array, which holds the cmd_ut_...() function to
-call, but can also support running a suite without that function. This
-means that the array of struct cmd_tbl is transformed into an array of
-'struct suite'.
-
-This will allow removal of many of the functions, particularly those
-without test-specific init.
+Use the new suite-runner to run these tests instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/suites.h |   4 +
- test/cmd_ut.c         | 205 +++++++++++++++++++++++++++++++++---------
- 2 files changed, 166 insertions(+), 43 deletions(-)
+ include/test/suites.h | 1 -
+ test/cmd/bdinfo.c     | 8 --------
+ test/cmd_ut.c         | 2 +-
+ 3 files changed, 1 insertion(+), 10 deletions(-)
 
 diff --git a/include/test/suites.h b/include/test/suites.h
-index e40ad634702..c1119e44999 100644
+index c1119e44999..b6af9295424 100644
 --- a/include/test/suites.h
 +++ b/include/test/suites.h
-@@ -10,6 +10,10 @@
- struct cmd_tbl;
- struct unit_test;
+@@ -32,7 +32,6 @@ int cmd_ut_category(const char *name, const char *prefix,
  
-+/* 'command' functions normally called do_xxx where xxx is the command name */
-+typedef int (*ut_cmd_func)(struct cmd_tbl *cmd, int flags, int argc,
-+			   char *const argv[]);
-+
- /**
-  * cmd_ut_category() - Run a category of unit tests
-  *
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index b81708b3e57..10557be6d6d 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -11,6 +11,24 @@
- #include <test/test.h>
- #include <test/ut.h>
- 
-+/**
-+ * struct suite - A set of tests for a certain topic
-+ *
-+ * All tests end up in a single 'struct unit_test' linker-list array, in order
-+ * of the suite they are in
-+ *
-+ * @name: Name of suite
-+ * @start: First test in suite
-+ * end: End test in suite (points to the first test in the next suite
-+ * cmd: Command to use to run the suite
-+ */
-+struct suite {
-+	const char *name;
-+	struct unit_test *start;
-+	struct unit_test *end;
-+	ut_cmd_func cmd;
-+};
-+
- static int do_ut_all(struct cmd_tbl *cmdtp, int flag, int argc,
- 		     char *const argv[]);
- 
-@@ -54,83 +72,147 @@ int cmd_ut_category(const char *name, const char *prefix,
- 	return ret ? CMD_RET_FAILURE : 0;
- }
- 
--static struct cmd_tbl cmd_ut_sub[] = {
--	U_BOOT_CMD_MKENT(all, CONFIG_SYS_MAXARGS, 1, do_ut_all, "", ""),
--	U_BOOT_CMD_MKENT(info, 1, 1, do_ut_info, "", ""),
-+/* declare linker-list symbols for the start and end of a suite */
-+#define SUITE_DECL(_name) \
-+	ll_start_decl(suite_start_ ## _name, struct unit_test, ut_ ## _name); \
-+	ll_end_decl(suite_end_ ## _name, struct unit_test, ut_ ## _name)
-+
-+/* declare a test suite which uses a subcommand to run */
-+#define SUITE_CMD(_name, _cmd_func) { \
-+	#_name, \
-+	suite_start_ ## _name, \
-+	suite_end_ ## _name, \
-+	_cmd_func, \
-+	}
-+
-+/* declare a test suite which can be run directly without a subcommand */
-+#define SUITE(_name) { \
-+	#_name, \
-+	suite_start_ ## _name, \
-+	suite_end_ ## _name, \
-+	NULL, \
-+	}
-+
-+SUITE_DECL(info);
-+SUITE_DECL(bdinfo);
-+SUITE_DECL(bootstd);
-+SUITE_DECL(cmd);
-+SUITE_DECL(common);
-+SUITE_DECL(dm);
-+SUITE_DECL(env);
-+SUITE_DECL(exit);
-+SUITE_DECL(fdt);
-+SUITE_DECL(font);
-+SUITE_DECL(optee);
-+SUITE_DECL(overlay);
-+SUITE_DECL(lib);
-+SUITE_DECL(log);
-+SUITE_DECL(mbr);
-+SUITE_DECL(mem);
-+SUITE_DECL(setexpr);
-+SUITE_DECL(measurement);
-+SUITE_DECL(bloblist);
-+SUITE_DECL(bootm);
-+SUITE_DECL(addrmap);
-+SUITE_DECL(hush);
-+SUITE_DECL(loadm);
-+SUITE_DECL(pci_mps);
-+SUITE_DECL(seama);
-+SUITE_DECL(upl);
-+
-+static struct suite suites[] = {
-+	SUITE_CMD(info, do_ut_info),
- #ifdef CONFIG_CMD_BDI
--	U_BOOT_CMD_MKENT(bdinfo, CONFIG_SYS_MAXARGS, 1, do_ut_bdinfo, "", ""),
-+	SUITE_CMD(bdinfo, do_ut_bdinfo),
- #endif
- #ifdef CONFIG_UT_BOOTSTD
--	U_BOOT_CMD_MKENT(bootstd, CONFIG_SYS_MAXARGS, 1, do_ut_bootstd,
--			 "", ""),
-+	SUITE_CMD(bootstd, do_ut_bootstd),
- #endif
- #ifdef CONFIG_CMDLINE
--	U_BOOT_CMD_MKENT(cmd, CONFIG_SYS_MAXARGS, 1, do_ut_cmd, "", ""),
-+	SUITE_CMD(cmd, do_ut_cmd),
- #endif
--	U_BOOT_CMD_MKENT(common, CONFIG_SYS_MAXARGS, 1, do_ut_common, "", ""),
-+	SUITE_CMD(common, do_ut_common),
- #if defined(CONFIG_UT_DM)
--	U_BOOT_CMD_MKENT(dm, CONFIG_SYS_MAXARGS, 1, do_ut_dm, "", ""),
-+	SUITE_CMD(dm, do_ut_dm),
- #endif
- #if defined(CONFIG_UT_ENV)
--	U_BOOT_CMD_MKENT(env, CONFIG_SYS_MAXARGS, 1, do_ut_env, "", ""),
-+	SUITE_CMD(env, do_ut_env),
- #endif
--	U_BOOT_CMD_MKENT(exit, CONFIG_SYS_MAXARGS, 1, do_ut_exit, "", ""),
-+	SUITE_CMD(exit, do_ut_exit),
- #ifdef CONFIG_CMD_FDT
--	U_BOOT_CMD_MKENT(fdt, CONFIG_SYS_MAXARGS, 1, do_ut_fdt, "", ""),
-+	SUITE_CMD(fdt, do_ut_fdt),
- #endif
- #ifdef CONFIG_CONSOLE_TRUETYPE
--	U_BOOT_CMD_MKENT(font, CONFIG_SYS_MAXARGS, 1, do_ut_font, "", ""),
-+	SUITE_CMD(font, do_ut_font),
- #endif
- #ifdef CONFIG_UT_OPTEE
--	U_BOOT_CMD_MKENT(optee, CONFIG_SYS_MAXARGS, 1, do_ut_optee, "", ""),
-+	SUITE_CMD(optee, do_ut_optee),
- #endif
- #ifdef CONFIG_UT_OVERLAY
--	U_BOOT_CMD_MKENT(overlay, CONFIG_SYS_MAXARGS, 1, do_ut_overlay, "", ""),
-+	SUITE_CMD(overlay, do_ut_overlay),
- #endif
- #ifdef CONFIG_UT_LIB
--	U_BOOT_CMD_MKENT(lib, CONFIG_SYS_MAXARGS, 1, do_ut_lib, "", ""),
-+	SUITE_CMD(lib, do_ut_lib),
- #endif
- #ifdef CONFIG_UT_LOG
--	U_BOOT_CMD_MKENT(log, CONFIG_SYS_MAXARGS, 1, do_ut_log, "", ""),
-+	SUITE_CMD(log, do_ut_log),
- #endif
- #if defined(CONFIG_SANDBOX) && defined(CONFIG_CMD_MBR) && defined(CONFIG_CMD_MMC) \
-         && defined(CONFIG_MMC_SANDBOX) && defined(CONFIG_MMC_WRITE)
--	U_BOOT_CMD_MKENT(mbr, CONFIG_SYS_MAXARGS, 1, do_ut_mbr, "", ""),
-+	SUITE_CMD(mbr, do_ut_mbr),
- #endif
--	U_BOOT_CMD_MKENT(mem, CONFIG_SYS_MAXARGS, 1, do_ut_mem, "", ""),
-+	SUITE_CMD(mem, do_ut_mem),
- #if defined(CONFIG_SANDBOX) && defined(CONFIG_CMD_SETEXPR)
--	U_BOOT_CMD_MKENT(setexpr, CONFIG_SYS_MAXARGS, 1, do_ut_setexpr, "",
--			 ""),
-+	SUITE_CMD(setexpr, do_ut_setexpr),
- #endif
- #ifdef CONFIG_MEASURED_BOOT
--	U_BOOT_CMD_MKENT(measurement, CONFIG_SYS_MAXARGS, 1, do_ut_measurement,
--			 "", ""),
-+	SUITE_CMD(measurement, do_ut_measurement),
- #endif
- #ifdef CONFIG_SANDBOX
--	U_BOOT_CMD_MKENT(bloblist, CONFIG_SYS_MAXARGS, 1, do_ut_bloblist,
--			 "", ""),
--	U_BOOT_CMD_MKENT(bootm, CONFIG_SYS_MAXARGS, 1, do_ut_bootm, "", ""),
-+	SUITE_CMD(bloblist, do_ut_bloblist),
-+	SUITE_CMD(bootm, do_ut_bootm),
- #endif
- #ifdef CONFIG_CMD_ADDRMAP
--	U_BOOT_CMD_MKENT(addrmap, CONFIG_SYS_MAXARGS, 1, do_ut_addrmap, "", ""),
-+	SUITE_CMD(addrmap, do_ut_addrmap),
- #endif
- #if CONFIG_IS_ENABLED(HUSH_PARSER)
--	U_BOOT_CMD_MKENT(hush, CONFIG_SYS_MAXARGS, 1, do_ut_hush, "", ""),
-+	SUITE_CMD(hush, do_ut_hush),
- #endif
- #ifdef CONFIG_CMD_LOADM
--	U_BOOT_CMD_MKENT(loadm, CONFIG_SYS_MAXARGS, 1, do_ut_loadm, "", ""),
-+	SUITE_CMD(loadm, do_ut_loadm),
- #endif
- #ifdef CONFIG_CMD_PCI_MPS
--	U_BOOT_CMD_MKENT(pci_mps, CONFIG_SYS_MAXARGS, 1, do_ut_pci_mps, "", ""),
-+	SUITE_CMD(pci_mps, do_ut_pci_mps),
- #endif
- #ifdef CONFIG_CMD_SEAMA
--	U_BOOT_CMD_MKENT(seama, CONFIG_SYS_MAXARGS, 1, do_ut_seama, "", ""),
-+	SUITE_CMD(seama, do_ut_seama),
- #endif
- #ifdef CONFIG_CMD_UPL
--	U_BOOT_CMD_MKENT(upl, CONFIG_SYS_MAXARGS, 1, do_ut_upl, "", ""),
-+	SUITE_CMD(upl, do_ut_upl),
- #endif
- };
- 
-+/** run_suite() - Run a suite of tests */
-+static int run_suite(struct suite *ste, struct cmd_tbl *cmdtp, int flag,
-+		     int argc, char *const argv[])
-+{
-+	int ret;
-+
-+	if (ste->cmd) {
-+		ret = ste->cmd(cmdtp, flag, argc, argv);
-+	} else {
-+		int n_ents = ste->end - ste->start;
-+		char prefix[30];
-+
-+		/* use a standard prefix */
-+		snprintf(prefix, sizeof(prefix), "%s_test", ste->name);
-+		ret = cmd_ut_category(ste->name, prefix, ste->start, n_ents,
-+				      argc, argv);
-+	}
-+
-+	return ret;
-+}
-+
- static int do_ut_all(struct cmd_tbl *cmdtp, int flag, int argc,
- 		     char *const argv[])
- {
-@@ -138,9 +220,12 @@ static int do_ut_all(struct cmd_tbl *cmdtp, int flag, int argc,
- 	int retval;
- 	int any_fail = 0;
- 
--	for (i = 1; i < ARRAY_SIZE(cmd_ut_sub); i++) {
--		printf("----Running %s tests----\n", cmd_ut_sub[i].name);
--		retval = cmd_ut_sub[i].cmd(cmdtp, flag, 1, &cmd_ut_sub[i].name);
-+	for (i = 0; i < ARRAY_SIZE(suites); i++) {
-+		struct suite *ste = &suites[i];
-+		char *const argv[] = {(char *)ste->name, NULL};
-+
-+		printf("----Running %s tests----\n", ste->name);
-+		retval = run_suite(ste, cmdtp, flag, 1, argv);
- 		if (!any_fail)
- 			any_fail = retval;
- 	}
-@@ -153,7 +238,7 @@ static int do_ut_info(struct cmd_tbl *cmdtp, int flag, int argc,
- {
- 	const char *flags;
- 
--	printf("Test suites: %d\n", (int)ARRAY_SIZE(cmd_ut_sub) - 1);
-+	printf("Test suites: %d\n", (int)ARRAY_SIZE(suites));
- 	printf("Total tests: %d\n", (int)UNIT_TEST_ALL_COUNT());
- 
- 	flags = cmd_arg1(argc, argv);
-@@ -162,16 +247,38 @@ static int do_ut_info(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 		puts("\nTests  Suite\n");
- 		puts("-----  -----\n");
--		for (i = 1; i < ARRAY_SIZE(cmd_ut_sub); i++)
--			printf("%5s  %s\n", "?", cmd_ut_sub[i].name);
-+		for (i = 1; i < ARRAY_SIZE(suites); i++) {
-+			struct suite *ste = &suites[i];
-+			long n_ent = ste->end - ste->start;
-+
-+			if (n_ent)
-+				printf("%5ld  %s\n", n_ent, ste->name);
-+			else
-+				printf("%5s  %s\n", "?", ste->name);
-+		}
- 	}
- 
+ int do_ut_addrmap(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		  char *const argv[]);
+-int do_ut_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_bootm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		  char *const argv[]);
+diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
+index 46482b1f56b..11f717bf43e 100644
+--- a/test/cmd/bdinfo.c
++++ b/test/cmd/bdinfo.c
+@@ -282,11 +282,3 @@ static int bdinfo_test_eth(struct unit_test_state *uts)
  	return 0;
  }
- 
-+static struct suite *find_suite(const char *name)
-+{
-+	struct suite *ste;
-+	int i;
-+
-+	for (i = 0, ste = suites; i < ARRAY_SIZE(suites); i++, ste++) {
-+		if (!strcmp(ste->name, name))
-+			return ste;
-+	}
-+
-+	return NULL;
-+}
-+
- static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	struct cmd_tbl *cp;
-+	struct suite *ste;
-+	const char *name;
-+	int ret;
- 
- 	if (argc < 2)
- 		return CMD_RET_USAGE;
-@@ -180,12 +287,24 @@ static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	argc--;
- 	argv++;
- 
--	cp = find_cmd_tbl(argv[0], cmd_ut_sub, ARRAY_SIZE(cmd_ut_sub));
-+	name = argv[0];
-+	if (!strcmp(name, "all")) {
-+		ret = do_ut_all(cmdtp, flag, argc, argv);
-+	} else if (!strcmp(name, "info")) {
-+		ret = do_ut_info(cmdtp, flag, argc, argv);
-+	} else {
-+		ste = find_suite(argv[0]);
-+		if (!ste) {
-+			printf("Suite '%s' not found\n", argv[0]);
-+			return CMD_RET_FAILURE;
-+		}
- 
--	if (cp)
--		return cp->cmd(cmdtp, flag, argc, argv);
-+		ret = run_suite(ste, cmdtp, flag, argc, argv);
-+	}
-+	if (ret)
-+		return ret;
- 
--	return CMD_RET_USAGE;
-+	return 0;
- }
- 
- U_BOOT_LONGHELP(ut,
+ BDINFO_TEST(bdinfo_test_eth, UTF_CONSOLE);
+-
+-int do_ut_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	struct unit_test *tests = UNIT_TEST_SUITE_START(bdinfo);
+-	const int n_ents = UNIT_TEST_SUITE_COUNT(bdinfo);
+-
+-	return cmd_ut_category("bdinfo", "bdinfo_test_", tests, n_ents, argc, argv);
+-}
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 10557be6d6d..2ee9b589b52 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -123,7 +123,7 @@ SUITE_DECL(upl);
+ static struct suite suites[] = {
+ 	SUITE_CMD(info, do_ut_info),
+ #ifdef CONFIG_CMD_BDI
+-	SUITE_CMD(bdinfo, do_ut_bdinfo),
++	SUITE(bdinfo),
+ #endif
+ #ifdef CONFIG_UT_BOOTSTD
+ 	SUITE_CMD(bootstd, do_ut_bootstd),
 -- 
 2.34.1
 
