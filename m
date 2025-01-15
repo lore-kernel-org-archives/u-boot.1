@@ -4,115 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C196EE77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:22:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98568E77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 02:49:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 276C28069A;
-	Wed, 15 Jan 2025 03:22:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id C415B8060C;
+	Wed, 15 Jan 2025 03:48:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="BdnZqr3P";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hrazA4Oo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44B68806D4; Wed, 15 Jan 2025 03:22:10 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 06BC38069A; Wed, 15 Jan 2025 03:48:59 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ABEA80027
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:21:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EA3F80214
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 03:48:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20250115022152epoutp02c06229c85a1c40e3559c81bb68a64416~avFyclZ_A2095320953epoutp02d
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:21:52 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20250115022152epoutp02c06229c85a1c40e3559c81bb68a64416~avFyclZ_A2095320953epoutp02d
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1736907712;
- bh=IHSxOV0Fc8EPPZ6uwQn+56BUpEpvabDl6wXc5HjKH+o=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=BdnZqr3PFvHSpFChNvP/60W+P/DV1BhZJPLje4XKO8uSUkjwMlJShhEhSW+4N0hKu
- jU29UUfhF48yMDjulXaK2VZ79/mPKP/oxsKCjiDcJ025IJlzP4u1DaNAADVF1GDoct
- yb5+Wsw1g2BQ/EwIs03QhSJZSiPO9YyTYR9n981Y=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20250115022151epcas1p411ed8f47b92826e172406e4c9d1204a3~avFyGFF5F1170111701epcas1p4G;
- Wed, 15 Jan 2025 02:21:51 +0000 (GMT)
-Received: from epsmges1p5.samsung.com (unknown [182.195.38.233]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4YXqWL6VLgz4x9Q9; Wed, 15 Jan
- 2025 02:21:50 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
- 3F.8F.23425.DBB17876; Wed, 15 Jan 2025 11:21:49 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20250115022148epcas1p1b26c92279fefa4f53ad679890e3721aa~avFvOW4R81371913719epcas1p18;
- Wed, 15 Jan 2025 02:21:48 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20250115022148epsmtrp2a6e867ade5c94bb8f5f2989a2ed253a5~avFvNkUM70443304433epsmtrp2Z;
- Wed, 15 Jan 2025 02:21:48 +0000 (GMT)
-X-AuditID: b6c32a39-967e870000005b81-74-67871bbd1149
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- DB.02.18949.CBB17876; Wed, 15 Jan 2025 11:21:48 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20250115022148epsmtip20c37a0dc71dcf4fac64c17304c611609~avFvAB_Ad0084200842epsmtip24;
- Wed, 15 Jan 2025 02:21:48 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Tom Rini'" <trini@konsulko.com>, <u-boot@lists.denx.de>
-Cc: "'Peng Fan'" <peng.fan@nxp.com>
-In-Reply-To: <20250115020737.230558-1-trini@konsulko.com>
-Subject: RE: [PATCH] mmc: Kconfig: Correct dependencies SDHCI ADMA options
-Date: Wed, 15 Jan 2025 11:21:48 +0900
-Message-ID: <024301db66f4$3af88320$b0e98960$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQEsYfZJWsKashkyP9MBYkRpZOCHKAFBYuxNtGsZRNA=
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBKsWRmVeSWpSXmKPExsWy7bCmvu5e6fZ0g+75UhY/Vn1htZg6aTO7
- xdu9newOzB6vDqxi9zh7Zwejx8Z3O5gCmKOybTJSE1NSixRS85LzUzLz0m2VvIPjneNNzQwM
- dQ0tLcyVFPISc1NtlVx8AnTdMnOANikplCXmlAKFAhKLi5X07WyK8ktLUhUy8otLbJVSC1Jy
- CkwL9IoTc4tL89L18lJLrAwNDIxMgQoTsjPerXrPVnCCu+LapVbmBsa1nF2MnBwSAiYSD35/
- ZO5i5OIQEtjBKPH21i1GCOcTo8SW4ztZIZxvjBLH301mgWm5s+ccVMteRol7rW1sEM5LRomT
- J7eBVbEJ6En8X7SQGcQWEbCV2Df3LzuIzSygLHHgz20wm1PAUmJ61z02EFtYwEtiwftmsF4W
- AVWJWTsuMoHYvEA1F3tuQm1WkPj5dBnQSRxAM60k5jyvghgpIjG7sw3sIAmBXewSlw8eYoKo
- d5FY39TEDGELS7w6voUdwpaS+PxuLxtEQzOjxNIlB1khnB5GiX8N19kgqowl9i+dzASyjVlA
- U2L9Ln2IbXwS7772gB0hIcAr0dEmBFGtInHp9UsmmPl3n/yHKvGQOPncDBI+QNMvrT3COoFR
- fhaSu2chLFjAyLSKUSy1oDg3PbXYsMAUHpXJ+bmbGMFJTMtyB+P0tx/0DjEycTAeYpTgYFYS
- 4V3C1pouxJuSWFmVWpQfX1Sak1p8iNEUGJATmaVEk/OBaTSvJN7QxNLAxMzI2MTC0MxQSZz3
- wraWdCGB9MSS1OzU1ILUIpg+Jg5OqQamDc80r1ubZx+svVa+7ebKS69OzzF5cuqK/s37RqyW
- s781pwevmvNt+4EKQzXuQ72nb3d905OfOm/ajOcfztsGc95YEi9/Q15UYbbotWnHN5utDWNp
- +cP5LTNqu5bY7H+Z72vExGxNLrInv4ub11txoSzozLOOxFNsb7Z+ebGcX6Er/aW5WZWL3pcs
- R9vigoYHGdU16g/lCyoWO/1Mr7rzZlPXhRsvJ08V/2Ib99zax2NK+/qV24T3Te6Jy7Q85X7s
- ZZjG7OdM6RueKtSVRp/eXP1f6RF38bfDl51P3rr867cv/z4viR0W04sTmxaLHG8+mB2+neO3
- 8O9cj2cz/bmt7pTEZK080/zkjfiFuEwnFyWW4oxEQy3mouJEADm9oFvrAwAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprLLMWRmVeSWpSXmKPExsWy7bCSvO4e6fZ0g1cH1S1+rPrCajF10mZ2
- i7d7O9kdmD1eHVjF7nH2zg5Gj43vdjAFMEdx2aSk5mSWpRbp2yVwZbxb9Z6t4AR3xbVLrcwN
- jGs5uxg5OSQETCTu7DnH3MXIxSEksJtR4uO852wQCSmJz0+nAtkcQLawxOHDxRA1zxklPv1s
- ZAepYRPQk/i/aCEziC0iYC9xuKsTrJdZQFniwJ/b7BANXYwSP+/fBUtwClhKTO+6B2YLC3hJ
- LHjfzAJiswioSszacZEJxOYFqrnYc5MF4ggFiZ9Pl7GCHCEiYCUx53kVxHwRidmdbcwTGAVm
- IXEXMDKuYpRMLSjOTc8tNiwwykst1ytOzC0uzUvXS87P3cQIDkEtrR2Me1Z90DvEyMTBeIhR
- goNZSYR3CVtruhBvSmJlVWpRfnxRaU5q8SFGaQ4WJXHeb697U4QE0hNLUrNTUwtSi2CyTByc
- Ug1Mh2T0Hi4yOae91sbW6GcmS2Wat4Xn1V/720+FmJxNtvqpNqn3Bo/dnit8CXKdvS+qDmSn
- 5l47+bLmyGyXg/VORgyP1mwVeL805+LetXyGFx2Kf6utjbi08BbPxjV99l02i/g7b9e1MLj9
- 53Pz672f4DE1aEZdAcM5iyNTXmxjF2FYxJ+xvfp8n52mgf7a0K+KyvznVNe+SWBJPCBi9858
- 0wfz1Slr29cEKkza2rLEW9bq7r777J6nktjSvAoX9nELpV668+vQhSMbmsTf9kZu+r5Zf7to
- dMipw8xXd+2f3Lr95gen6175pTHzHcWa+ve4Gs5n+7yg/fDM3RznHs5/NfMLD0t8xd8/769b
- BG9mUmIpzkg01GIuKk4EAOdsfY2wAgAA
-X-CMS-MailID: 20250115022148epcas1p1b26c92279fefa4f53ad679890e3721aa
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20250115020743epcas1p1be3492abc3a2435f603c7b2dd14be15a
-References: <CGME20250115020743epcas1p1be3492abc3a2435f603c7b2dd14be15a@epcas1p1.samsung.com>
- <20250115020737.230558-1-trini@konsulko.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ab34a170526so99353766b.0
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 18:48:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1736909336; x=1737514136; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=A9fkbu0u3umH4AqbthhsRqHK56UqZKmYjbUT10sk9i4=;
+ b=hrazA4Oof6UPN9WfpDUl3WMtiantde/UXn1ZfzR/OuOmIZ+JeyJh0ZW3S2Benk9ipM
+ dnvula7TKUzy0fmbrrnKm7TWYdYpapOxo3QNpTWeK8I94Wfe+XHrpFpUvwdC7g5M4EQC
+ rKRzs2ZXuY3QyvRieQC/oL1srkfS2hwmnYYks=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736909336; x=1737514136;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=A9fkbu0u3umH4AqbthhsRqHK56UqZKmYjbUT10sk9i4=;
+ b=KJH+6B2VmHcL9Bcn8lrIdEOD/qVZ/ZXOdbFTM51ca2vgsz+/h/J2S7N9/KeB/4Suk8
+ 3XLatih1K4osBOabXidwhKrLZiMSI3Wg9Y0ze+zRaOiHWMW+vi1uh7j1EHii148jw2mH
+ FbXA/vD6a1HKaFLnvPUzB7yAzvV4vhcea9DQshKoePG9njMX0Pxq58rCr7y7/qMNciAL
+ GY8i60sisCP3kt0tNZ6JSfIGwPu0yUatD1XWzMXLzYrHNmRcxqPGy2juRDxmaH3hMGx7
+ lEMKcIkm2X3MVfmlqHKruJtcjWjZW4FBBcTsHQ2Hcqo6KaQ/a42u7JNgHSw44O05ve1f
+ x8QA==
+X-Gm-Message-State: AOJu0YyoXs8xlvPkFIVu+QwejCsRKe5P7+9pnj5yIEPp0q25dV5QHY+4
+ Ow3JS/DwXZIbpgEyBFAUkNQKrv7qFZJJpYKlUr6ir7iOGIXX2V8fZOkB3eNFvQ3bIlu+wacZ+zp
+ DNAz48vMKdGCtVJx5fybpQxW2Yghkrza5tNTL
+X-Gm-Gg: ASbGncvw7PfZD8vojUVhneeYCFdC9MJFPOVrmI1bzPbkvpcv9ZbSKnNpJWQOsV17L9Q
+ H8uDQp4DP7kkl/uUWeiUWQLaTDp5VK2J2Yk/Y0M0=
+X-Google-Smtp-Source: AGHT+IGKgB0YSNx03KaxcsV7RB8YBxSQxO9zvyB8IUAYzGDlJiuCGmsmm+Vos5xCQ5xIt+lWD5mXzXWL6KURzLtVa6s=
+X-Received: by 2002:a17:907:9308:b0:ab3:4b0c:ea44 with SMTP id
+ a640c23a62f3a-ab34b0cecc1mr135935566b.9.1736909335540; Tue, 14 Jan 2025
+ 18:48:55 -0800 (PST)
+MIME-Version: 1.0
+References: <20250109123010.4005298-1-sjg@chromium.org>
+ <20250109123010.4005298-2-sjg@chromium.org>
+ <20250114012226.GG3476@bill-the-cat>
+ <CAFLszTj9zAE_KniCZ2xHGHt1fK7jhTBHzfkdSif6XNuzKtWOTA@mail.gmail.com>
+ <20250114165801.GJ3476@bill-the-cat> <20250114173343.GO3476@bill-the-cat>
+ <CAFLszTi1epQ+6AGMK_pkjnTQmDU8--xS-NXfk5iM=q_wi6xyWw@mail.gmail.com>
+ <20250115014121.GT3476@bill-the-cat>
+In-Reply-To: <20250115014121.GT3476@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 14 Jan 2025 19:48:43 -0700
+X-Gm-Features: AbW1kvZMuNAFsyDz1F7f4ypx4U85_W3IT1kh2oZ4FlOBzg7gtI6zi96j-T1EVhQ
+Message-ID: <CAFLszTjW-cpZn5haw-+4fmaFe==_fT+k4V5oBckHr_YbVaBeiQ@mail.gmail.com>
+Subject: Re: [PATCH 01/15] vbe: Split out some VBE code into a common file
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,53 +95,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
-
-> -----Original Message-----
-> From: Tom Rini <trini@konsulko.com>
-> Sent: Wednesday, January 15, 2025 11:08 AM
+On Tue, 14 Jan 2025 at 18:41, Tom Rini <trini@konsulko.com> wrote:
 >
-> The option MMC_SDHCI_ADMA_FORCE_32BIT is only tested or used when
-> MMC_SDHCI_ADMA or SPL_MMC_SDHCI_ADMA is enabled. And for
-> MMC_SDHCI_ADMA_64BIT the same is true except we also require
-> MMC_SDHCI_ADMA_FORCE_32BIT to be disabled.
+> On Tue, Jan 14, 2025 at 06:18:26PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 14 Jan 2025 at 10:33, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Jan 14, 2025 at 10:58:01AM -0600, Tom Rini wrote:
+> > > > On Tue, Jan 14, 2025 at 05:58:04AM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Mon, 13 Jan 2025 at 18:22, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Thu, Jan 09, 2025 at 05:29:56AM -0700, Simon Glass wrote:
+> > > > > >
+> > > > > > > Loading a FIT is useful for other VBE methods, such as ABrec,
+so start
+> > > > > > > a new common file. Add functions for reading the version and
+nvdata.
+> > > > > > > Also add a function to get the block device.
+> > > > > >
+> > > > > > This is not a good commit message when you're also introducing
+> > > > > > functional changes (blk_dread -> blk_read).
+> > > > >
+> > > > > Yes, I did not actually notice this size change at all, as
+mentioned,
+> > > > > as I only built for a few boards (firefly rk3399/rk3288 and a few
+> > > > > sandbox ones). The blk_dread() function is the old API for reading
+> > > >
+> > > > You have much faster build machines available than I do, it would be
+> > > > good to run a world build before/after (it might take an hour on
+> > > > alexandra) before posting these big series.
+> >
+> > OK. I used to do this, but with CI sometimes grabbing the machines it
+> > ends up with a huge load and sometimes runs out of memory. I suppose I
+> > can stop the runner before doing it and remember to restart it
+> > afterwards. Or perhaps Alex has enough memory per thread? (96GB).
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Best Regards,
-Jaehoon Chung
-
-> ---
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> ---
->  drivers/mmc/Kconfig | 2 ++
->  1 file changed, 2 insertions(+)
+> Personally, I would make the script that does the world build for size
+> test turn off the runner before starting and turn it back on when done
+> otherwise build time will suffer greatly and you would have been better
+> served doing it all on a slower class of machine.
 >
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> index f4fdf15242ce..6dc8d3bf9fe2 100644
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -527,6 +527,7 @@ config SPL_MMC_SDHCI_ADMA
+> >
+> > > >
+> > > > > from a block. It didn't occur to me that blk_dread() would bypass
+the
+> > > > > cache.
+> > > >
+> > > > Yes, how is that happening? That's what doesn't make sense.
+> >
+> > OK, I see. It is actually one level deeper than I thought.
+> >
+> > PARTITIONS is not enabled, for example on phycore_am62x_r5_usbdfu
+> > which means that blk_get_dev() returns NULL
+> >
+> > So long as all the code is in one module, blk_get_dev() returning NULL
+> > causes the calls to vbe_simple_read_state() and simple_read_nvdata()
+> > to be dropped, so their code is dropped too, so there is no
+> > blk_read()/blk_dread() call. It is optimised away. It just happens to
+> > be the only call in U-Boot
 >
->  config MMC_SDHCI_ADMA_FORCE_32BIT
->  	bool "Force 32 bit mode for ADMA on 64 bit platforms"
-> +	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
->  	help
->  	  This forces SDHCI ADMA to be built for 32 bit descriptors, even
->  	  on a 64 bit platform where they would otherwise be assumed to
-> @@ -536,6 +537,7 @@ config MMC_SDHCI_ADMA_FORCE_32BIT
+> Ah, that is all also true, thanks.
 >
->  config MMC_SDHCI_ADMA_64BIT
->  	bool "Use SHDCI ADMA with 64 bit descriptors"
-> +	depends on MMC_SDHCI_ADMA || SPL_MMC_SDHCI_ADMA
->  	depends on !MMC_SDHCI_ADMA_FORCE_32BIT
->  	default y if DMA_ADDR_T_64BIT
->  	help
-> --
-> 2.43.0
+> > > > > > Further, this functional
+> > > > > > change seems to introduce some other code being pulled in very
+> > > > > > unexpectedly, and that needs to be explained. For example,
+> > > > > > phycore_am62x_r5_usbdfu is another case and that has
+> > > > > > CONFIG_BLOCK_CACHE=y but CONFIG_SPL_BLOCK_CACHE=n, and yet the
+size
+> > > > > > growth is in full U-Boot.
+> > > > >
+> > > > > This board currently uses blk_dread(), but not blk_read(), so the
+> > > > > addition of a blk_read() call in non-SPL causes the BLK cache to
+be
+> > > > > pulled in.
+> > > >
+> > > > But, how? I mean, this sounds like some underlying bug that needs
+to be
+> > > > fixed. The platform sets CONFIG_BLK=y and CONFIG_BLOCK_CACHE=y and
+> > > > drivers/block/blk-uclass.c has:
+> > > > ulong blk_dread(struct blk_desc *desc, lbaint_t start, lbaint_t
+blkcnt,
+> > > >                 void *buffer)
+> > > > {
+> > > >         return blk_read(desc->bdev, start, blkcnt, buffer);
+> > > > }
+> > > >
+> > > > Or perhaps the answer / problem here is that I need to track down
+what's
+> > > > going wrong here instead of asking you to track this down.
+> > >
+> > > So, digging in to this, what's going on is that the platforms I've
+noted
+> > > here (and a few others) don't actually enable any block devices.
+That's
+> > > why, today, with VBE on still, they discard all of the code still.
+Your
+> > > rework means that while there's still no block devices, we're now
+> > > including the code. What to do? Both of:
+> > > - These platforms *should* disable the assorted block device related
+> > >   library options they have enabled if / when possible (it might not
+be
+> > >   a neat and easy un-tangle).
+> >
+> > As above, the issue seems to be PARTITIONS
+>
+> Yes, I think we both agree there's a number of useless functionality
+> enabled on these handful of platforms. PARTITIONS explains how it gets
+> optimized away and all of the useless block-related things like MMC
+> core should also be dropped.
+>
+> > > - VBE needs to handle the case where there's not a block device
+enabled
+> > >   and not fail the build. Part of this requires the Kconfig rework I
+> > >   linked to earlier (so that we can have BLK off) to be complete, but
+> > >   having the VBE code check for BLK being enabled either in Makefile
+or
+> > >   C code should be the same regardless.
+> >
+> > I thought you NAK'd my patch to drop the 'depends on BLK' for bootstd?
+>
+> I know I NAK'd
+>
+https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.1534931-2-sjg@chromium.org/
+> as that should be instead done with
+> https://patchwork.ozlabs.org/project/uboot/list/?series=440336 instead.
+>
+> With that series then yes, you should be able to have BOOTSTD not depend
+> on BLK. But in a practical sense I worry that your changes in this
+> series will break with BLK=n. My point above is to please make sure it
+> still works in that case.
+>
+> > From what I can tell EFI_LOADER doesn't do any block access unless
+> > PARTITIONS is enabled. I don't want that for VBE because the VBE data
+> > is not actually in a partition (although perhaps it could be in
+> > future).
+>
+> In a practical sense EFI_LOADER depends on BLK and I've fixed the
+> dependency with my series and talked with Ilias and Heinrich about it.
+> Making EFI_LOADER buildable without BLK is a mechanical effort, but
+> making it usefully functional still might require a bit more work and
+> they'll cross that bridge when they come to it.
+>
+> > Anyway, from what I can tell, the code-size increase is explainable
+> > and perhaps we should just accept it.
+>
+> Other than the double buffer one, yes, I suppose it's not unreasonable
+> to ask me to fixup the oddball platforms with extraneous PARTITIONS and
+> other block type things enabled. Still need to get back to the buffer
+> one as 200 bytes isn't normal for re-organizing things such that the
+> compiler can't decide to inline something.
 
+What is the double buffer one?
 
+I have a v2 of this series which splits the first patch up a bit more. But
+the end result is the same.
 
+Regards,
+Simon
