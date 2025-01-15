@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5235AC02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 991FAC02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:36:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9923C808B6;
-	Wed, 15 Jan 2025 14:32:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E8F0880A35;
+	Wed, 15 Jan 2025 14:32:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PEqpt65I";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="beppZt98";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71F538092B; Wed, 15 Jan 2025 14:32:04 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 6E93980934; Wed, 15 Jan 2025 14:32:06 +0100 (CET)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44AF580702
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:32:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EEA0D80ADB
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:32:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3ce4b009465so24582135ab.0
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:32:02 -0800 (PST)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-3a8146a8ddaso16660225ab.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:32:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947920; x=1737552720; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947922; x=1737552722; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sejEG8lDbX3/Yhi+KrzrV3b4ZTGs5O7z4q4eU4Nhtqs=;
- b=PEqpt65ID385pHKGI5lAuSXzfzHi7T5AdEyePkhxP4eMEMQomWezY03MH7BuCjoMpn
- dqPdJZXuXTBkuHLyX6w0PnG0U1BsuXKNtypPgqLCrtNcJQ7hcFdDHDRW13cXt9Kf6ex1
- Z0PSvdo2wMpJ0vswaG63L42uJsZ2ZUUI/Ih1Y=
+ bh=TqFGqpcbI4ji9ZX9czXCD5lkg5wsdXiWt2LwCvUxCfo=;
+ b=beppZt98kLDqhWS2mJveU6ot0vikS7MM178oncOE0ekL+q+Tyb+UPwgfPFLwg4Av3q
+ ujUsXWmB7LMpnocNri8SYEYwv7Dmcod88ArvF2ZGWEmD61tl8uJS6t+ltffiqHDLUi6n
+ Tm0OnaN8givknXsVwGiHEye3x29cwXmfyH0TU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947920; x=1737552720;
+ d=1e100.net; s=20230601; t=1736947922; x=1737552722;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sejEG8lDbX3/Yhi+KrzrV3b4ZTGs5O7z4q4eU4Nhtqs=;
- b=P6Y6CYg1GIhK9niV6clyR8Qqs4fPaOALLtVn2ertgneW8eJSz78IYz8Dpy8+Qe2IjH
- 0e70qAgPilkIf6oXsI0fUwb7ibDrxo6HC3cJpWjIwvNW6PLEaa3Oc00VWvVZlD9XkdAJ
- 8iecOad5ecjOUEUuFApz+E+u9lv8i3RH0QAmaH1wB8+pi9R8XEjP/7B4uFHip1p4/MQI
- EF/xZMluCEOCYC+yjcluOi13+pjIBjVYNwXJYuQk7aboowNJWwUCPcborsteYbv6Jhwc
- WyTJ2zPVitFF9qdC5vGT47IdpjVUWlT/uFaxbL//fxMG5o6haBu3FE7/Eyv9GtdwZn/7
- W3rg==
-X-Gm-Message-State: AOJu0YzzQfGGyBAi2LmvOJfOOhvlsBO+hfWgI0YAUWOyb5pZia3Gr2rF
- jw63vLNY00nmfks4Q893/ZbvlOIY1XLv5uYpytXZASRsuqTcwBjPjJ7W3k8BtlbIEZfrYNJlj+M
+ bh=TqFGqpcbI4ji9ZX9czXCD5lkg5wsdXiWt2LwCvUxCfo=;
+ b=l8WipYKCCrj446wjUYEk4XW/x7L2XWWQ0Vbj0hi3J3iRzyOBXOzEc+vFN9pt4+Pggt
+ GPC8hd0+9gQ6xhx7ejHMW0u7ECYAwane4SP3eEE9kkzEZow/CvpeIsuSTvyvZTdamAFA
+ aYRwe1jag4LkiqrWV8GzJ0gKpQ+m8e4Fxph3qvNZbXmJCqtwyUqcvp4sioq1wLGT5hHj
+ Tj5ejkDNJP7nKTcRJeH3DYKeur3cWAPQ8UxlPuxNcb/aPx57Frq0nUzxIGNgpkYFPVqh
+ 1Dxx+gtzuJNO8AHn+iwFUWGRgN9HKAn2+mDVbfDarmoXoZ6gpecowJI8eiZb6NxtU4Nj
+ PpCg==
+X-Gm-Message-State: AOJu0YyjGNl3anrIbP5r8shju7sECB8VQfji7VxqjQaPBpCHz8yRj2dT
+ fGGWuhvQQpApZ5Gl+275S5X7SEvHHqrne5FdlOAz2fng0l2QR1pa7xNX4HX8T7HReYQ8JR6vlrE
  =
-X-Gm-Gg: ASbGncsSwyVDGS/2e8DbBqbd4vobyY8TMMYD/dd6ZSbnjwnR7XmcAu0+nugomkbbSwl
- h7UuEDEqZ+TRInhAhc8Y4z/jDaZ9aLQxS/kfXPVRUXFlxhVpVa2oOel/1/mYLk9WQz5LR2/LniP
- RpFrZbvDaDTTlhxsaENHMJO5bSm8525lXjvv56UPhB6Qz8EcKut3dwiNv7P3I+wLxWd6BoTCaND
- aVczPtZ3liOpwzb8aZRUzpEUkOg2YEBhedrfQbjKoII0kvrrfrFep5Q4WYO1W7ii05w/YqOjpj4
- 2JNtjiTuNcfVav5PiA==
-X-Google-Smtp-Source: AGHT+IGqJ0mjfFhJ5L/lsjF/eg0qzKFL3vWSNvHMbS7ZZXu7kd6o3LLWIGcX7Cq2EAVLhY2QIz2VyA==
-X-Received: by 2002:a05:6e02:2144:b0:3ce:7f8a:8548 with SMTP id
- e9e14a558f8ab-3ce7f8a86b5mr44877435ab.12.1736947920473; 
- Wed, 15 Jan 2025 05:32:00 -0800 (PST)
+X-Gm-Gg: ASbGncudkvbuqe8pKzcYaCD1s2lVZoXTHAXwJjvIYTXkUkQ6xlOBvvKMzZuytM+d/Am
+ MM7X3abMzORCrhDvtvitJFjSm0LCwAznQkfCx3fWdf6jK1QVZRRpREHYXjDLirb0e9ZyQKPwTea
+ uTi+oqtdvB1GVQ6jjrnZDeM0Wym+omLytkgKZgf6riaVbekYL8qclDmEWmvB7C6VNtbxrNuB3IM
+ RRIY5FK9Vw+uB1yR4wct7aSUN8CV9/6rC11b55fDXsj4i/kSeE/XOALzEhOurH4kijPSLnfMkSk
+ jbR9eQ2oEYE3z/DZJQ==
+X-Google-Smtp-Source: AGHT+IGABw7B0d68H5W2PWG7tXD2OgmkIo5WYs/wpWY/vZlB8gN8fxkaT2JTR0+I47O0w943Ukqf4w==
+X-Received: by 2002:a92:d782:0:b0:3ce:7a5d:d2dc with SMTP id
+ e9e14a558f8ab-3ce7a5dd465mr48988525ab.17.1736947922135; 
+ Wed, 15 Jan 2025 05:32:02 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.31.59
+ 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.32.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 05:31:59 -0800 (PST)
+ Wed, 15 Jan 2025 05:32:01 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Massimiliano Minella <massimiliano.minella@se.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 24/43] test: Drop the function for running setexpr tests
-Date: Wed, 15 Jan 2025 06:30:54 -0700
-Message-Id: <20250115133114.590375-25-sjg@chromium.org>
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 25/43] test: Drop the function for running measurement tests
+Date: Wed, 15 Jan 2025 06:30:55 -0700
+Message-Id: <20250115133114.590375-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
 References: <20250115133114.590375-1-sjg@chromium.org>
@@ -102,54 +99,54 @@ Use the new suite-runner to run these tests instead.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/suites.h | 2 --
- test/cmd/setexpr.c    | 9 ---------
- test/cmd_ut.c         | 2 +-
+ include/test/suites.h   |  1 -
+ test/boot/measurement.c | 10 ----------
+ test/cmd_ut.c           |  2 +-
  3 files changed, 1 insertion(+), 12 deletions(-)
 
 diff --git a/include/test/suites.h b/include/test/suites.h
-index cb6b6fba240..775b0a5a131 100644
+index 775b0a5a131..1a40af6599a 100644
 --- a/include/test/suites.h
 +++ b/include/test/suites.h
-@@ -46,8 +46,6 @@ int do_ut_overlay(struct cmd_tbl *cmdtp, int flag, int argc,
- int do_ut_pci_mps(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -39,7 +39,6 @@ int do_ut_bloblist(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		   char *const argv[]);
+ int do_ut_hush(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_loadm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+-int do_ut_measurement(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+ int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_overlay(struct cmd_tbl *cmdtp, int flag, int argc,
  		  char *const argv[]);
- int do_ut_seama(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
--int do_ut_setexpr(struct cmd_tbl *cmdtp, int flag, int argc,
--		  char *const argv[]);
- int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- 
- #endif /* __TEST_SUITES_H__ */
-diff --git a/test/cmd/setexpr.c b/test/cmd/setexpr.c
-index 49eac5890aa..7f318a42ead 100644
---- a/test/cmd/setexpr.c
-+++ b/test/cmd/setexpr.c
-@@ -479,12 +479,3 @@ static int setexpr_test_fmt(struct unit_test_state *uts)
+diff --git a/test/boot/measurement.c b/test/boot/measurement.c
+index 018e8af45f0..5a49c7a6b23 100644
+--- a/test/boot/measurement.c
++++ b/test/boot/measurement.c
+@@ -53,13 +53,3 @@ static int measure(struct unit_test_state *uts)
+ 	return 0;
  }
- SETEXPR_TEST(setexpr_test_fmt, UTF_CONSOLE);
- #endif
+ MEASUREMENT_TEST(measure, 0);
 -
--int do_ut_setexpr(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-int do_ut_measurement(struct cmd_tbl *cmdtp, int flag, int argc,
+-		      char *const argv[])
 -{
--	struct unit_test *tests = UNIT_TEST_SUITE_START(setexpr);
--	const int n_ents = UNIT_TEST_SUITE_COUNT(setexpr);
+-	struct unit_test *tests = UNIT_TEST_SUITE_START(measurement);
+-	const int n_ents = UNIT_TEST_SUITE_COUNT(measurement);
 -
--	return cmd_ut_category("setexpr", "setexpr_test_", tests, n_ents,
--			       argc, argv);
+-	return cmd_ut_category("measurement", "measurement_test_", tests,
+-			       n_ents, argc, argv);
 -}
 diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 4e57fcf0005..c53b24bfde9 100644
+index c53b24bfde9..6f5aa7e4924 100644
 --- a/test/cmd_ut.c
 +++ b/test/cmd_ut.c
-@@ -163,7 +163,7 @@ static struct suite suites[] = {
- #endif
- 	SUITE(mem),
- #if defined(CONFIG_SANDBOX) && defined(CONFIG_CMD_SETEXPR)
--	SUITE_CMD(setexpr, do_ut_setexpr),
-+	SUITE(setexpr),
+@@ -166,7 +166,7 @@ static struct suite suites[] = {
+ 	SUITE(setexpr),
  #endif
  #ifdef CONFIG_MEASURED_BOOT
- 	SUITE_CMD(measurement, do_ut_measurement),
+-	SUITE_CMD(measurement, do_ut_measurement),
++	SUITE(measurement),
+ #endif
+ #ifdef CONFIG_SANDBOX
+ 	SUITE_CMD(bloblist, do_ut_bloblist),
 -- 
 2.34.1
 
