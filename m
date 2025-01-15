@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF9B5C02180
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:33:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D384C02183
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5597E8081A;
-	Wed, 15 Jan 2025 14:31:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB076807A8;
+	Wed, 15 Jan 2025 14:31:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MKQvrISA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XmJEZckb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A8D4807FE; Wed, 15 Jan 2025 14:31:31 +0100 (CET)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 18F2B8082A; Wed, 15 Jan 2025 14:31:33 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13F48807A8
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:31:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C30B480714
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:31:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3a8f1c97ef1so19517625ab.2
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:31:29 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-844e9b8b0b9so503276739f.0
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 05:31:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736947887; x=1737552687; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736947889; x=1737552689; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0M88nnmuNK4ffH5LgUZg8MRvw0/3b3HH1AM0dosFT8E=;
- b=MKQvrISACTivHaMTVDb+Co6tgK8RQ5BJj8B5zbUG0GMDMFLx5F48UtQ5NnE0LvRS2+
- 1UKOMneiaPC4b5o0elSkU/pMhKv0ukWciP1szqQH1sQ1ngL+7fbcWHCE4xSZMCPS/143
- +3H8/UAYF3CqMGRSUyk4sXvlEn7Q/VVNSxnDM=
+ bh=Np2pIR4nIF+vH15uf8exWEQ9+7XhSI4DWbdzaFxPZ88=;
+ b=XmJEZckbphxbTyk8wRoyjLA183Ur97xB52v/+4HETMZZLXiecrfLCoPnOVQQjcKfYL
+ 6OAwc6gcHS9h0RTDz0xyEhNqsvd2ifmb5xiO+3G8ZEIlWYsX9kBz6Udb0KjvSlXcjww1
+ bSkigSWZpckKtzNlXQiMr1UeUNrhSUhc+VReo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736947887; x=1737552687;
+ d=1e100.net; s=20230601; t=1736947889; x=1737552689;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0M88nnmuNK4ffH5LgUZg8MRvw0/3b3HH1AM0dosFT8E=;
- b=uTEl6e9IxeZcrKuswRK8++b4mrr6eubxh6O1zVTdN7NiGpisL++SunvREAPgQiZAbO
- vnPRZWys+0wDxd2v5qNJ2d3tCuG/9mdLqs8OhbHLZ1uPcfUnKVe/WIQg7z93O6Ou6HsI
- svkz4Dz/bQlhmHbcWlAVqcmQZhey3iPGMX42luBt60pS7LJALifh7fk1L81aq938FpWO
- i43+s4X7sERYycvIC+v9LzUcuLsV8QrlM/S4qzQp/vDKZWhI6jYZ7bPJHdVy3HDtF+qh
- Kf+Ph+/Ym5U44Se8SRbnxB9zo8s9prX9jsDNmsw23/o8IQrvx9sIKQKoCJXtOG2yvD9Q
- m7zA==
-X-Gm-Message-State: AOJu0Yz0Sde2c5WnPeq8DiCqD7ys1jJ8cqaN3JMKPD1zT1DX6QJkGtts
- Uiny10JzicdQXWCyzxoOE+FOLHM51x4SsN3lPmfBzQ0x8l0jn9nllpjJlQ4hlewNSisgKR8wI6c
+ bh=Np2pIR4nIF+vH15uf8exWEQ9+7XhSI4DWbdzaFxPZ88=;
+ b=AU/JCchxeZTdHk2IhzqQMCzkEqfRF2kc6NRx7qqLKz0PflPxNi6Hn1t8FW6jUmvb2k
+ hcerxl/fOO73JMDn51QOKzzX78otHaLtCyX840E1vNqe/8v8APh3AMuUrYATIqW7DvoL
+ jiBY0HArERGBXCts/b3blT4tLCwiI8Ips7TLq+z3PrL9B0XNLErVB7Kp9D4qFSmwcAqX
+ zu51mK7bdDl77SaUggAfOyJY12UkxXjXicP2ov9UvW8BE0x0EVkyXEBwJuued/LDleTn
+ rZy02/E7kODaK2DgyHNB5HJf2ziVSCRbE0SNQSalm8fIY4anw22RLHKpKgw2ND7rsWCR
+ 67hQ==
+X-Gm-Message-State: AOJu0Yz3gn4d05sgBQwFYaFVSt9Nd10QTedknx2f1a+UD4B0eEM7jPIc
+ l3I6xDyenUHDu3wsaCxPSxktXuTImOHYLfa4lRW2+UQ69L5V4EANrpIwUBfxNLoP1knBZKX/mlY
  =
-X-Gm-Gg: ASbGncu2UB0vYsJSagrSAF3Rjv32nIJyouusTdk+PSMQdqvh4pvHSHl3xkCJlskZtET
- Z/vfeDUvDX1ukEXZUe3Iit7aIAtLFj9IVGTzNztzYgqR4HOmb4AFKjXGe1Fn57UN7I1FvZh9yi0
- qKGOlsLkzxRQ6x6Cm2QVc2SheCFrlx6baTG+ngauWvvufU6M8MbcL0tw9tPEzflb+T3ccBw3jhO
- VwrlxhRZ/Se0dn1snD2QlNGv477nRV3+V5yUOClbhfeFe++zTBIG0auDDwZ5LkV9nAZ8stXCGjj
- W/Ei4kVq2iCCWmAeCQ==
-X-Google-Smtp-Source: AGHT+IEYKy4iA8oqytYMUugv6KaAujcod8wQhgvQiUdgNtIpa9rCXwj+AdbYLSdDbcaUecHHwAmEqQ==
-X-Received: by 2002:a05:6e02:2206:b0:3ce:6aa8:6c56 with SMTP id
- e9e14a558f8ab-3ce6aa86d30mr126591395ab.8.1736947886890; 
- Wed, 15 Jan 2025 05:31:26 -0800 (PST)
+X-Gm-Gg: ASbGncsEvb4kN4gt7sPy8Ov2qNvuWX8Lz7ya6ESLTBXebZLRo5PzWvOBMmzh6Si9Kbf
+ hS3fqIKBds1HqNIu+2To5WhzKbqH01ZXhlAPbI0DaBN0r+ZAXG7FmPGQI7Z9vMVrpsvW/kbEc0U
+ PkfLoFhFVUke+CorLT3cO5JGRpzq2lKwEvGrG9QuT5ttsg+D7OFUf8IX6V8ojl1Z2mBSumIxXZy
+ HIRa3GPA3RWjSUo9OnHK68lb6IpWc5rlc5QMsqQMv+44S6TpmbA6908DJmF31gfztn6QUAfTPQM
+ MJlKVub4FVaw8oce0w==
+X-Google-Smtp-Source: AGHT+IET+p0ImuywxcvxZn9znJic8YVgVnyq4kAA/ADe/qga4lslQveGCiADzp2acgfd7lltRq0zNQ==
+X-Received: by 2002:a05:6602:36c8:b0:841:95b5:8953 with SMTP id
+ ca18e2360f4ac-84ce018cbf3mr2901707539f.14.1736947888926; 
+ Wed, 15 Jan 2025 05:31:28 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.31.25
+ 8926c6da1cb9f-4ea1b5f836csm4091248173.20.2025.01.15.05.31.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 05:31:26 -0800 (PST)
+ Wed, 15 Jan 2025 05:31:27 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 04/43] test: Pass the test-state into ut_run_list()
-Date: Wed, 15 Jan 2025 06:30:34 -0700
-Message-Id: <20250115133114.590375-5-sjg@chromium.org>
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 05/43] Improve support for linker lists in data structures
+Date: Wed, 15 Jan 2025 06:30:35 -0700
+Message-Id: <20250115133114.590375-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
 References: <20250115133114.590375-1-sjg@chromium.org>
@@ -96,184 +94,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pass this into the function so that callers can inspect the state
-afterwards.
+A limitation of most linker_list macros is that they cannot easily be
+used in data structures. This is because they include code inside their
+expressions.
+
+Provide a way to support this, with new ll_start_decl() and
+ll_end_decl() macros.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/sandbox/cpu/spl.c |  5 ++++-
- include/test/ut.h      | 29 ++++++++++++++++++++++++++---
- test/cmd_ut.c          |  5 ++++-
- test/test-main.c       | 35 +++++++++++++++++------------------
- 4 files changed, 51 insertions(+), 23 deletions(-)
+ include/linker_lists.h | 51 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 51 insertions(+)
 
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index 7056cfd0180..0ad23e4ba95 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -147,10 +147,13 @@ void spl_board_init(void)
- 	if (state->run_unittests) {
- 		struct unit_test *tests = UNIT_TEST_ALL_START();
- 		const int count = UNIT_TEST_ALL_COUNT();
-+		struct unit_test_state uts;
- 		int ret;
- 
--		ret = ut_run_list("spl", NULL, tests, count,
-+		ut_init_state(&uts);
-+		ret = ut_run_list(&uts, "spl", NULL, tests, count,
- 				  state->select_unittests, 1, false, NULL);
-+		ut_uninit_state(&uts);
- 		/* continue execution into U-Boot */
- 	}
- }
-diff --git a/include/test/ut.h b/include/test/ut.h
-index 2e4d8edf826..a51defc3b90 100644
---- a/include/test/ut.h
-+++ b/include/test/ut.h
-@@ -479,12 +479,34 @@ struct unit_test_state *ut_get_state(void);
-  */
- void ut_set_state(struct unit_test_state *uts);
+diff --git a/include/linker_lists.h b/include/linker_lists.h
+index f9a2ee0c762..c05b99c886f 100644
+--- a/include/linker_lists.h
++++ b/include/linker_lists.h
+@@ -186,6 +186,57 @@
+ 		_ll_result;						\
+ 	})
  
 +/**
-+ * ut_init_state() - Set up a new test state
++ * Declares a symbol that points to the start/end of the list. The name of the
++ * (new) symbol is arbitrary and can be anything that is not already declared in
++ * the file where it appears. It is provided in _sym and can then be used (later
++ * in the same file) within a data structure.
 + *
-+ * This must be called before using the test state with ut_run_tests()
++ * The _type and _list arguments must match those passed to ll_entry_start/end()
 + *
-+ * @uts: Test state to init
++ * Example:
++ *
++ * ::
++ *   Here we want to record the start of each sub-command in a list. We have two
++ *   sub-commands, 'bob' and 'mary'.
++ *
++ *   In bob.c:
++ *     ll_entry_declare(struct my_sub_cmd, bob_cmd, cmd_sub) = {...}
++ *
++ *   In mary.c:
++ *     ll_entry_declare(struct my_sub_cmd, mary_cmd, cmd_sub) = {...}
++ *
++ *   In a different file where we want a list the start of all sub-commands.
++ *   It is not possible to use ll_entry_start() in a data structure, due to its
++ *   use of code inside expressions - ({ ... }) - so this fails to compile:
++ *
++ *   In sub_cmds.c:
++ *     struct cmd_sub *my_list[] = {
++ *       ll_entry_start(cmd_sub, bob),
++ *       ll_entry_start(cmd_sub, bob),
++ *     }
++ *
++ *   Instead, we can use:
++ *
++ *     ll_start_decl(bob, struct my_sub_cmd, cmd_sub);
++ *     ll_start_decl(mary, struct my_sub_cmd, cmd_sub);
++ *
++ *     struct cmd_sub *my_list[] = {
++ *       bob,
++ *       mary,
++ *     }
++ *
++ *     So 'bob' is declared as symbol, a struct my_list * which points to the
++ *     start of the bob sub-commands. It is then used in my_list[]
 + */
-+void ut_init_state(struct unit_test_state *uts);
++#define ll_start_decl(_sym, _type, _list)					\
++	static _type _sym[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
++		__maybe_unused __section("__u_boot_list_2_" #_list "_1")
 +
-+/**
-+ * ut_uninit_state() - Free memory used by test state
-+ *
-+ * This must be called before after the test state with ut_run_tests(). To later
-+ * reuse the test state to run more tests, call test_state_init() first
-+ *
-+ * @uts: Test state to uninit
-+ */
-+void ut_uninit_state(struct unit_test_state *uts);
++#define ll_end_decl(_sym, _type, _list)					\
++	static _type _sym[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
++		__maybe_unused __section("__u_boot_list_2_" #_list "_3")
 +
  /**
-  * ut_run_tests() - Run a set of tests
-  *
-  * This runs the test, handling any preparation and clean-up needed. It prints
-  * the name of each test before running it.
-  *
-+ * @uts: Unit-test state, which must be ready for use, i.e. ut_init_state()
-+ *	has been called. The caller is responsible for calling
-+ *	ut_uninit_state() after this function returns
-  * @category: Category of these tests. This is a string printed at the start to
-  *	announce the the number of tests
-  * @prefix: String prefix for the tests. Any tests that have this prefix will be
-@@ -503,8 +525,9 @@ void ut_set_state(struct unit_test_state *uts);
-  * Pass NULL to disable this
-  * Return: 0 if all tests passed, -1 if any failed
-  */
--int ut_run_list(const char *name, const char *prefix, struct unit_test *tests,
--		int count, const char *select_name, int runs_per_test,
--		bool force_run, const char *test_insert);
-+int ut_run_list(struct unit_test_state *uts, const char *category,
-+		const char *prefix, struct unit_test *tests, int count,
-+		const char *select_name, int runs_per_test, bool force_run,
-+		const char *test_insert);
- 
- #endif
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 195b7ea50ac..d25c2c37e7a 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -21,6 +21,7 @@ int cmd_ut_category(const char *name, const char *prefix,
- 		    struct unit_test *tests, int n_ents,
- 		    int argc, char *const argv[])
- {
-+	struct unit_test_state uts;
- 	const char *test_insert = NULL;
- 	int runs_per_text = 1;
- 	bool force_run = false;
-@@ -44,9 +45,11 @@ int cmd_ut_category(const char *name, const char *prefix,
- 		argc--;
- 	}
- 
--	ret = ut_run_list(name, prefix, tests, n_ents,
-+	ut_init_state(&uts);
-+	ret = ut_run_list(&uts, name, prefix, tests, n_ents,
- 			  cmd_arg1(argc, argv), runs_per_text, force_run,
- 			  test_insert);
-+	ut_uninit_state(&uts);
- 
- 	return ret ? CMD_RET_FAILURE : 0;
- }
-diff --git a/test/test-main.c b/test/test-main.c
-index 871fc1f22b4..e12c5a95e45 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -673,15 +673,15 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- 	return uts->fail_count ? -EBADF : 0;
- }
- 
--int ut_run_list(const char *category, const char *prefix,
--		struct unit_test *tests, int count, const char *select_name,
--		int runs_per_test, bool force_run, const char *test_insert)
-+int ut_run_list(struct unit_test_state *uts, const char *category,
-+		const char *prefix, struct unit_test *tests, int count,
-+		const char *select_name, int runs_per_test, bool force_run,
-+		const char *test_insert)
- {
--	struct unit_test_state uts;
-+	;
- 	bool has_dm_tests = false;
- 	int ret;
- 
--	ut_init_state(&uts);
- 	if (!CONFIG_IS_ENABLED(OF_PLATDATA) &&
- 	    ut_list_has_dm_tests(tests, count, prefix, select_name)) {
- 		has_dm_tests = true;
-@@ -699,32 +699,31 @@ int ut_run_list(const char *category, const char *prefix,
- 	if (!select_name)
- 		printf("Running %d %s tests\n", count, category);
- 
--	uts.of_root = gd_of_root();
--	uts.runs_per_test = runs_per_test;
-+	uts->of_root = gd_of_root();
-+	uts->runs_per_test = runs_per_test;
- 	if (fdt_action() == FDTCHK_COPY && gd->fdt_blob) {
--		uts.fdt_size = fdt_totalsize(gd->fdt_blob);
--		uts.fdt_copy = os_malloc(uts.fdt_size);
--		if (!uts.fdt_copy) {
-+		uts->fdt_size = fdt_totalsize(gd->fdt_blob);
-+		uts->fdt_copy = os_malloc(uts->fdt_size);
-+		if (!uts->fdt_copy) {
- 			printf("Out of memory for device tree copy\n");
- 			return -ENOMEM;
- 		}
--		memcpy(uts.fdt_copy, gd->fdt_blob, uts.fdt_size);
-+		memcpy(uts->fdt_copy, gd->fdt_blob, uts->fdt_size);
- 	}
--	uts.force_run = force_run;
--	ret = ut_run_tests(&uts, prefix, tests, count, select_name,
-+	uts->force_run = force_run;
-+	ret = ut_run_tests(uts, prefix, tests, count, select_name,
- 			   test_insert);
- 
- 	/* Best efforts only...ignore errors */
- 	if (has_dm_tests)
--		dm_test_restore(uts.of_root);
-+		dm_test_restore(uts->of_root);
- 
--	if (uts.skip_count)
--		printf("Skipped: %d, ", uts.skip_count);
-+	if (uts->skip_count)
-+		printf("Skipped: %d, ", uts->skip_count);
- 	if (ret == -ENOENT)
- 		printf("Test '%s' not found\n", select_name);
- 	else
--		printf("Failures: %d\n", uts.fail_count);
--	ut_uninit_state(&uts);
-+		printf("Failures: %d\n", uts->fail_count);
- 
- 	return ret;
- }
+  * ll_entry_get() - Retrieve entry from linker-generated array by name
+  * @_type:	Data type of the entry
 -- 
 2.34.1
 
