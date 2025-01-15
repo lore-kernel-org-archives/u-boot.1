@@ -4,166 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0CC1C02183
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 10:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABBBFC02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 10:35:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7705880040;
-	Wed, 15 Jan 2025 11:34:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 385E280040;
+	Wed, 15 Jan 2025 11:35:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Hh48V+W1";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="MNNqARCl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A537800C2; Wed, 15 Jan 2025 11:34:50 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20623.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::623])
+ id 10CFF806DD; Wed, 15 Jan 2025 11:35:30 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20716.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::716])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F4CF80027
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 11:34:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C245B80027
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 11:35:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LG26TqMp1CiyuSL/ql3PxyMUy325kuOHN5W1qjNgMJgIvX4R++2rx3dPrEgaoQmJd34ZIBBYNgYJMnnJGaEXz6kmvcOrq5mXTQ0hdEZhXS8Svt1NalC04KcH5HjXAvn5vE6XaEkxPP0lLVGCYIXL1ogF+n23K58loJc8fM/azVOHmLFOpWRvb+LJ+kP9fjWfZ5CcdPE/0nS4DEAdCmjKinJL56xFTuU5pPgucn6o4obJGygwvMJK2y+PvhQ88MlYAzoES+EFdanzMmjJTKa37EYcQuK5TtmwjvnWe2hO4sL3BiV6bTlJitoSghvTjK9Ui9bAe4YY7FkiMqJjtNJurQ==
+ b=rfCsFJ2Mrsen6VWwdS7QkBjcBZLuzHxWv2oJpv8RZfck40oEsG83qaLaysQfjAPr/VjhqinQwirEMIzhdw6newtLzfJMmty6nr4ilnhYnATSCqaYGqMT/e7UxlG+fXAbUV1S9WHZsS7Y2es7qD5OHt+ebHdf/63haY4aQdtks4xWEoc0fYRTHiuAUIYgiR11RAa8HyP5/ZY0XtsOYAowMqxmQR+nVIod0aJkFSPdkYwXw/pPG5nUE07NfQV4ZFQBgnXfBQG6gRem2yZbmn/+DQlfo0JqX+PMnFlADHOcK+yEwTTb0I+msZOmvTVanpgttuQkf/psJ3Ihu7gp8Xa0RQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dm2EWbVbQnpikms+tEpwyoqRRSeP+VWqbbp1xC82dnY=;
- b=W+ainHMHx3a7tViHwJa+cQPGXc1/5/S0KQ+USUGvdSXcMyTBsUTYwLegOIXYzwzZzCxuQoHE/YUfrMa8zl+luPQkR6uEA8Q1ozxmQF8RMXYoVlNtTainF9Ws0fhV4Zi818QxdHU1QUrDYxOci6eHL4uTs6LQaOMHExv4rYZ8jEIN6QV7eymbfSBVdCdX02qawCr6VPFWcc+ImxZb65wCS8lELUVbZD2jEWgiggOHBQPlQ6yAKwVDM81Smu4khCV1a6AwGBZUDew93Jih7Ja+DcpyYQYLRoe3lDU8O5YKYxMmdrBtJNfqpaXXrR0uZiysUMrfPcObc7heESy3L6l4xA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=l7dFsk1NX9kv5i048lF8nwTWgFtNcesLdAdmnGiKHIs=;
+ b=qmo+cVwc0+xNq5H2gf6ssE6uCNDGOS+iaPNmKTX1/YXe79OT2FNCXvroDfLr9FM+3w6Vg0E+aduqOP7JIb6ctSgEar3AUsMbS88w8hN9Gp7pSNHXANmc5Z1seL6qYp8TGF3lowYKbWU/4ojYKwxn18uQBAp3v+jLQVwPR/vtvLOnl1HrcjpTDL+U89Zvbi/vpKv2Hlg1xfBhQy3GS2oRj30Lv6ve92w+wIWIaCXgEV3hkES69hXzYkxBmqV6MxMSBHyTf/Ft3d+8yrv3nStDBwVSLXXi1p/BDD8hLmAl6ZwQcDSEq12vDV+iMErdm7Bj0/D5PcjfrblhRI8XqhM1Uw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dm2EWbVbQnpikms+tEpwyoqRRSeP+VWqbbp1xC82dnY=;
- b=Hh48V+W1D5zIIO6cNutUOaLtUPoUmE3rzHsF6LpYsoOKMiDZV+Ezqrkncga/nLoNEjflWm21UhzOUYqt2NjXdtvTSGHwJ68xV5TgDa+/boa6ebH6HaSwgoADppd/AteXS49GF9ka4eWSt6vevYiv38zrU8OwZDaoGbAQ7RQDcUU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM7PR04MB7032.eurprd04.prod.outlook.com (2603:10a6:20b:112::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.12; Wed, 15 Jan
- 2025 10:34:46 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Wed, 15 Jan 2025
- 10:34:46 +0000
-Message-ID: <b2ed3bad-9c9f-433e-979b-557d646978f3@cherry.de>
-Date: Wed, 15 Jan 2025 11:34:44 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 8/8] arm64: renesas: Deduplicate R-Car Gen3 and Gen4 SPL
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250112223528.179828-1-marek.vasut+renesas@mailbox.org>
- <20250112223528.179828-8-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250112223528.179828-8-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VE1PR03CA0012.eurprd03.prod.outlook.com
- (2603:10a6:802:a0::24) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ bh=l7dFsk1NX9kv5i048lF8nwTWgFtNcesLdAdmnGiKHIs=;
+ b=MNNqARCl/hUTLzL9011e9gKN/wEoBgMjGBkgon3YG66WQ8cteszlMC8A/5FYHYtpC8OvR0+JVbsjmUqy3PHSEfv5y0BlkMEz2uiGFaEok1ENpHLM+GuukhqAYOF39Nhy7UZz5jTxgXw+umBXD5AVip4VmOD51mxFzAcMd6MdjP+n2J/4oZypxEW9YYvuQh29L+QW34P8J/0uGGPdm8h8Nu6r/UDYWOX2d+4zv6Lne9yKZqLI/j86vXMlnzIQVc7vJ/FpktVA4UNfBC6MKPQA9tyZB+ba4Q1Yn5Swe+jfqstcvFTn37cAN5UQQjdQTUnoZ5aBuSLUc8C0f7v7k3iBMQ==
+Received: from DUZPR01CA0123.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4bc::8) by DB9P195MB1444.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:10:33e::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8335.18; Wed, 15 Jan
+ 2025 10:35:25 +0000
+Received: from DU6PEPF00009525.eurprd02.prod.outlook.com
+ (2603:10a6:10:4bc:cafe::e0) by DUZPR01CA0123.outlook.office365.com
+ (2603:10a6:10:4bc::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8356.12 via Frontend Transport; Wed,
+ 15 Jan 2025 10:35:25 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ DU6PEPF00009525.mail.protection.outlook.com (10.167.8.6) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8356.11 via Frontend Transport; Wed, 15 Jan 2025 10:35:25 +0000
+Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 15 Jan
+ 2025 11:35:24 +0100
+Received: from ls-radium.phytec (172.25.39.17) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 15 Jan
+ 2025 11:35:23 +0100
+From: Daniel Schultz <d.schultz@phytec.de>
+To: <w.egorov@phytec.de>, <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <d-gole@ti.com>, <upstream@lists.phytec.de>, Daniel Schultz
+ <d.schultz@phytec.de>
+Subject: [PATCH v2 1/2] board: phytec: common: Add product information to FTD
+Date: Wed, 15 Jan 2025 02:35:01 -0800
+Message-ID: <20250115103502.844304-1-d.schultz@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.39.17]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Berlix.phytec.de
+ (172.25.0.12)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM7PR04MB7032:EE_
-X-MS-Office365-Filtering-Correlation-Id: f9e92d85-c864-4662-df9b-08dd35503b34
+X-MS-TrafficTypeDiagnostic: DU6PEPF00009525:EE_|DB9P195MB1444:EE_
+X-MS-Office365-Filtering-Correlation-Id: c8010bba-453b-4443-1290-08dd35505281
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|10070799003|1800799024|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bkViTmtzNWh2NkRueHRadmJJQWNQUkNiRUp4WWkxNnBiZEpuQitPTXk0a2p5?=
- =?utf-8?B?RWEvdE5XVTJBUkkrM2w4ckwzM285NG8rQTd0Y0lxOUlnSUEvRksvcUtQcnFr?=
- =?utf-8?B?T0M0UWMyWW1aWGNGNVhtcVFXRHphVWNqbEFyejdiRTN5QmVqOGRibDFZejZE?=
- =?utf-8?B?OUM0aEZSUEJmb25GTjBWdDFNN3J4RkhHRkIzTmh6QkI2K04vbkw2Mlo2OVcz?=
- =?utf-8?B?QWhiRWFsUG5MZEtHTVNmZTNvNHN5Yk1rZyt4NEx1ZnpibFh5akxtalFIcUZx?=
- =?utf-8?B?MEVLcEFVMGYva0tOcnhzTFh0M1BhaFNLSEdIS1hqd1ZSNXlWbmROVHhaV2ZU?=
- =?utf-8?B?OVN2Ry9DR1JyRWQvTHVUOTc2UEdXck1zS1Z3YS8vUllYTGUrSGxpOFNkaWY5?=
- =?utf-8?B?SFVLdmZob21vV3BnNGJjS0dXMWliWWExdlVqK0pFcE9HNy94SGJ0WDZYMDZY?=
- =?utf-8?B?V2UzeG1vSmY1cFhVM01mTU5DTldBZW1UbE5EdUJhUjR5UnB5TmYxVjhGWTdj?=
- =?utf-8?B?dVczT3diYWpnbFVoUFRoODJmYjhCcDBKVWNHK0Q0MGV0MG9hYzlyOEQ1bWJk?=
- =?utf-8?B?ZGp5RXdKY3UyWkVYRXkvZGtIWmlPZXdnWkJXODhFZU9GcExvTnN5blpjVktY?=
- =?utf-8?B?bW9mby9saEFRYTVYaWtLdW43ZFk5cnRtbWM5N0g1blhIQXpseUxuZUhkU09K?=
- =?utf-8?B?VDg4RVJ6ci85bEcrNThpeElWN3pkd3kraDRVeko4d3k5ZVFMb1lFL3hKUUNW?=
- =?utf-8?B?QldMdnA3SzlsNFhwditOVGVianU0dExuQjF2bFRRbmo0cGQ1WmhaaTJ6VWV2?=
- =?utf-8?B?Si9TMGtJWkxJTlNtNkllMzFWbS8yUVcra0FBQUg4OWprVWdVUm9OeDU2cVRy?=
- =?utf-8?B?blkvK0I2alQ0SkFpWmFnNlAreTJya29PUkFpSWVBeWNpVFZweTN3emlmRVZw?=
- =?utf-8?B?N3lWZzN2MUFoNHAzTGFoZjdZWlB4YkVleWRFQjJKa1I0NnlZWWFvYzNySVZ0?=
- =?utf-8?B?S0FPNTlvRGhTY0ZIR1BIdUpydGgvM0JUU0lWdk5iV0J4VlVWT3Y0ZFhIUlVs?=
- =?utf-8?B?VkhoYUdMVjhpbGkraVhnb000Yk01bytIckFsUkk3OVFjdkg0S0kxaVRjU2NT?=
- =?utf-8?B?YWpZOEtaT09tNmRUZ3FJZmoyemF3eFRqSzc0Vmc5Z0hWVmVTV1lCMjN1ZktC?=
- =?utf-8?B?ZmczV08yUDZ4TjhIZ1FyMDc5WHZQT2RmMVRURVo3Qm5KWThiZ3E2TlZFV0Rp?=
- =?utf-8?B?VDlob2Vreko3ZUM3UkVWWkxBSThmdEErdU1LNm9aQXBwQVFnbjFMSUNsL0dC?=
- =?utf-8?B?UUFTcitWNmRrTjRPZmdyUlNMZHZYVVFMVUNBREhTR21WckV6MUZUUHQ4WjRt?=
- =?utf-8?B?dGRXUFVGSklXRXltdDBCSFBLdHFSSzQzOFNZalB0N2RVeGtZbzd1eERQaEU2?=
- =?utf-8?B?N01Od04wNS9XWFNDaXExbkVRL01xZzd0Z1gzNHFWM1hIckE2SDl4SzBpQlJj?=
- =?utf-8?B?dEhTbFY4Y2F2endxUS9qWmF3a0dlK0pYbzJJWk13b0M2VnpqQUUyUjE4UjEw?=
- =?utf-8?B?VlIwMVRkdTh1WXpjNHgzT2pXNWlSeHlBeUE2VkVGa3F3bUhxbVd4aGJmOXdj?=
- =?utf-8?B?V3R3d1J4SmpCbnBHMkR1Q1loc3puRUl0RjlRTjhFQmdxQ3ZwRnRnMjNvdE9Z?=
- =?utf-8?B?dm95T1hEc2s0cDVJSGpwQWI5NlNjTmNpOFFXTXcvMGxlRStoYVFNMXAxOEQ2?=
- =?utf-8?B?REVkU3ZXOFBScUlpSFA3Mjhpc1ZwNlk0RkpQZWVXdmpuWE45R3Nzcnd6THRL?=
- =?utf-8?B?bDdBTC92OUxKUk8vNmkra0U1cEhQN1AwdkRQSE1Gb2MxTlRCYzlDcS8wWE1X?=
- =?utf-8?Q?DGrZjVbcB3j7w?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(10070799003)(1800799024)(376014)(7053199007); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z1hUUlErWktGSlNCYjRoTm1hYytZWjBOSXZSS1duclFSY2NIVnk2aUxvQ0lW?=
- =?utf-8?B?SVhKa1RSeU5IRjdCeHJ3d2NwMnRkRmZzbUNRUFU4UENOdFMxZTV3cU9pRXlh?=
- =?utf-8?B?OTMyOUgxcHp0c0U1eXVNYjh0VnhaeUY0M1QwMSthZGF4cU1mank3dEpWUFc4?=
- =?utf-8?B?T3dmTlBubjNuSE14Q001clhmcms1d20zU1pzTy96UFo5RDYyV05objkvSldJ?=
- =?utf-8?B?TXlnTkJpOXdqNjI3bGNEVXA4cGh2M1hPTVZwN0oxdjJUY1A4eTk1T1JiSWY2?=
- =?utf-8?B?VDhRL1FvUnpwVEhQNEpDbVNPNGVaZ1pFbFpia1Z0WFJqNFVkaVJ6MlBZbFdT?=
- =?utf-8?B?RnlHT25jdVpiV21aanRzT0xTRE1PdzFjb0dqSWF4NlU0Z3dpSFVLZFU3Mysx?=
- =?utf-8?B?bHBvYmRRa01iYzZpaWpOSDNnKzV2THF1L2ZqZmVuOEFxZFFlalNZL2FPcnFk?=
- =?utf-8?B?ZXI1RTh4Tk9wbWdXV1R4VDBOdWtMSHpqRXprMHpkWlk5SlhPVlByOWV2NXpz?=
- =?utf-8?B?ZFBSOEdsTmR1RVkvbTdmVHpDODV3VnZtRW0xMHNVRzBpeld2V1RLbFc0T054?=
- =?utf-8?B?b0pCVGVlK2JRVUErZDVmS1BtN1NrMTlVZ1NmbDVDUkV6dEdRaVF3VVdPTnVT?=
- =?utf-8?B?NCtoUnpDRDhJdWd4R0hTMmgxM05kU3dacm9DQlhkOVFwaXNPc0RHc2cxemRI?=
- =?utf-8?B?RlUySFZTME0vY0JGYU9iT3cxeHJiMXcwVG52MmFTSkNNNDZwUUljTXZRM2Ft?=
- =?utf-8?B?NUI5RFVVUXpyV3Nrc3YxWU5nZkNiOGNEYUthYmNDVy9OQ1Z2NUo4eHVDKzVK?=
- =?utf-8?B?RGVMamJlZEg1MlhGQW0yVWVESEZZRTNnZ2RNODE0ZXRFaE1Pcm1qQnpNcTQ0?=
- =?utf-8?B?WkhDMURYeXI2U0QrUmVKQ29zcTN1c3NtVzZ1MnVaRkNWQWlJaHlmeko4cFpQ?=
- =?utf-8?B?dS9hUUF3UzVKNURQRVNlNGhjR0VKSHhHTVNuSWxNS3lrYUV2d2ZhQlZrTEVX?=
- =?utf-8?B?R0ExcjRQTW5ZSDQwSE1ickQ1cUdjTlhRUTlWMWFKWFZJZUtLYmhXMloyRjFX?=
- =?utf-8?B?S2FnZE51Zjh1MGtjM1ZvSGJ0c3h6WTQyYjFmajkyNkQ5YzRMWC9TWURtUXNE?=
- =?utf-8?B?MkFlNnA0MXdPdEJXTjBPbTRhUUJFbHBEVDhJUTZOcTFWMGpkVnR1RnhIeGlR?=
- =?utf-8?B?QXVhUi82OUtuTWVFd1AyUlo3dU1XcmoyV2ZUUnNaSnBMcW9NSHh5N202T1N3?=
- =?utf-8?B?ZENKMWRORkdndXM3TGt5dnUySEwzdjJoSEtvcnRmT2N2bmtRNFUrVlc2QldG?=
- =?utf-8?B?eHhFdFVXNUdSV3g2bjFUQWR0TXJxcDgyS3pYd2hVb0lmOGJJaXNxeDhpRnVQ?=
- =?utf-8?B?Vmh4MHZHaERtVXNLdXR4ZUtYL2pMT0kzVVQ5NUk4OUFNT3g3N1MydGtoZTJy?=
- =?utf-8?B?WDhYRXdPZU1ZN2o1emJXdTlyb3dvS1lodStBZ0J4ZzNHZjBMNFc3c3dDNDNV?=
- =?utf-8?B?NGFRTzVSMW0vd3pDaTVjRmRXeDYvWmc5K09obFIzeTl5TEt3dSthTGRJQzVC?=
- =?utf-8?B?ejZBTXIrQVZqREE5dDBTTGxJWTJYTGVyYVBKU2J2VGc2b3dlMWpzV3YySHhQ?=
- =?utf-8?B?REt0UU15QTY1K0dUNGNjRFFoTU45dTlPa1ZvWWFuclQzdENKd0tTRmdFRDdT?=
- =?utf-8?B?MW5STUVMN3pZRkM3bjNwMVRobk5UK20xcWNKZFFjcjkwTENSaEkwOVBqK2FR?=
- =?utf-8?B?Q1pRc0RYdzROZmN1aUM4UVkwYWZBZGNUeHVVVDdLNEtkWmdWbktlRVFzTVRk?=
- =?utf-8?B?TTVlYmFYVWY2ampEeHhidDlQU0pGOUVqM2dTWmdSVWNXV2U0NUV5empIUDFR?=
- =?utf-8?B?WEk2L3JTYzhzdS8wZ2lBa3U2TnRuK1Y4ZzErUmxnSUdvaFN0Y1lhRTQxbVhM?=
- =?utf-8?B?TkdyaThwV0o1Q09sZXdoU3VmWGdod21HSlJrbk1tbHNETUhtRVRqVmR6QWY4?=
- =?utf-8?B?UjRkNkJ5YmllTi8wMTRIMzJtQ3k4U1U3K2FQUjQ4YWhWMTRXTWtDYW5QdU95?=
- =?utf-8?B?bk1QaytiY1U2RWxFcTYzL0hnNzRUS1pRVzBaNk1aUDZYMW5OY004MjdxaEZ0?=
- =?utf-8?B?ODk5cS9TK2hHT1FuemxENFcwSHkxOHIvZGpaUU9oV1RFOTR0RzRnYmF0NTQ4?=
- =?utf-8?Q?kQf5MiTKUL2YND5fwrsCRoQ=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: f9e92d85-c864-4662-df9b-08dd35503b34
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 10:34:46.4799 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SWrQGAYRgqC1oreOe+zgp8IxOZmPJbrLa97TkhpRG5vusg/mHxvvvKjCYfypDySN7IwT5O5/no54WUu8aE98I01KQzA1vefDXeAqPc+Lo6A=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB7032
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HA3+B52ObOOXX5WuRbmUOuS3EeSucfDIhQI1wSQHPzTobqrr6QaE8Mb0JlW5?=
+ =?us-ascii?Q?fptzDHByb3sR9QxooisMnlrgTUTn+ekYem7HRVM+p/nDd4agkVKbSzc8Xji7?=
+ =?us-ascii?Q?9DRQ5xZr1NgpFjjQY/ZwIBaY2mTheDiAZsl+4QFNUtlLJ1bLXslIveiDefpf?=
+ =?us-ascii?Q?Sxtn76PZVENiNwPWHxkbvQRxYi4d9cmgqGzboh1WUuRyru8NruKeZO0OF6yk?=
+ =?us-ascii?Q?ULb8eBh+hFNhDlkjxpl5LNFRKVk6mWvMEHB5K7y45frWndj0NgKVNG5QIlIf?=
+ =?us-ascii?Q?0vhBGGtoLxxEvRv3uYV+8vOSCChhofpnt9uwaBU2+IgqfQqHPCpu5ZmilsSX?=
+ =?us-ascii?Q?JbFsp+wEewFfYTPXEWgTML/1iOMRVlhC2Q+AJTQewQ+tz+fMXQvgge+ifyrd?=
+ =?us-ascii?Q?KcboEvBmUA5NSk+buTovle7g49PPUHmVDL89B5CVjS/vyUR8Fey0kwHySRaY?=
+ =?us-ascii?Q?oDVTv4lB3b3j9x1j/HxGIoDpcM4ytssbvzdc9RI8/zY6Woxhiv2fUT/2YUYk?=
+ =?us-ascii?Q?eBt1oNlbVXvjWWZ9tqU7zu0f9Gzaav/9ScNfWOm6bIV0WcLSZ3O61I6WvOq0?=
+ =?us-ascii?Q?Tr+i1NdadGR9bRYq504590A6lCfnplmvipMIr/pf+GahF1Eae7VQg0oDguFg?=
+ =?us-ascii?Q?RThaCSZoOg0f+aZftCn2kIk9rqg+6aS06aRJfRxHDW8nD/g+4OoSFdIKD4Qd?=
+ =?us-ascii?Q?M+J9uMzuMQLxMLnrprmDP87OSIvIAk6SMWK3tFcaFmJLZ33FZZ49ErrBLH91?=
+ =?us-ascii?Q?h8+rutYNbjiHhjjxI4qayr050N0ll1vDqU6U9mb/PoFqsj2B9Kc34ykNRWwk?=
+ =?us-ascii?Q?fQAyN2HjCyYXcptHuU2lrPCrRtJeDG0cGD7PzZbWn16R5wPbApNP24gz9pMA?=
+ =?us-ascii?Q?4vbi+eI9Dcjd2dd3g5CphBMcGUIpVV1DnfChhkVlJ4gV853wrFtrfxgXKz7H?=
+ =?us-ascii?Q?sxACfcNgOcE6IQtXSSnLx5PzUJ48O+mDJrMUFZKOQGWJvnLVDh4pSDb/GHIz?=
+ =?us-ascii?Q?tmHUbROKPWrEF2bMlNAJQ1kMMnNzotTBn1nOhPd4fj9sO4hW5wNBY2gmYL8c?=
+ =?us-ascii?Q?pn+ZEZXbXzE+jmzCG3u3yTGo2GBiZXKvlEJYYkBwCMCL3zWY6hcn1m5Dn70l?=
+ =?us-ascii?Q?D8+UzUiqI6cZyloQbURFuvn3b57bbhJzffNsqWIFe6MQBQOZE5ErTW4j1pIC?=
+ =?us-ascii?Q?aCCcIa6p5FXw7iFh3QPoT9XymULwTyy5QRkZ5RIjOx0KOu15oN7vCJYE0FIa?=
+ =?us-ascii?Q?PMck/G6GsqaPcuVwMpVhQhOujPU7hcaOLX4q7FT49nkkLFsHJN+K4SzU69Ah?=
+ =?us-ascii?Q?jrvHiEvJlmbTnKoUqoKUrhJyhG5QHSzt+Bns5VlAD8M0PQkVw30Wn+QbGVju?=
+ =?us-ascii?Q?4NT2+Q3RuxJxWGEc8K6oOV/CpCVqXNH0+rp7m9mDtXeMjeaL4WaL7y4Nqk8j?=
+ =?us-ascii?Q?MSniMgCDoz+/a1VWZ+NZHagq0Cry2PNryQkjQVACpc2DcY5WvakJQ3kNeROn?=
+ =?us-ascii?Q?izJLT7SK/vJAyM0=3D?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 10:35:25.3543 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8010bba-453b-4443-1290-08dd35505281
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF00009525.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB1444
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,69 +148,300 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+ft_board_setup inside the board code allows to alter
+device-tree during the boot process.
 
-On 1/12/25 11:34 PM, Marek Vasut wrote:
-> Move R-Car Gen3 and Gen4 jump_to_image_no_args() into dedicated
-> rcar64-spl.c file. The implementation of jump_to_image_no_args()
-> is identical. No functional change.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Introduce a new function for the PHYTEC SOM detection
+to read the product name and part number from the EEPROM
+content and include both into the device-tree as
+* phytec,som-part-number
+* phytec,som-product-name
 
-This is just factoring code and looks fine to me,
+This function can be called from the board code when those
+values should be exposed to Linux.
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+---
 
-> ---
-> Cc: Adam Ford <aford173@gmail.com>
-> Cc: Biju Das <biju.das.jz@bp.renesas.com>
-> Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->   board/renesas/common/Makefile     |  4 +++-
->   board/renesas/common/gen3-spl.c   | 21 ---------------------
->   board/renesas/common/gen4-spl.c   | 17 -----------------
->   board/renesas/common/rcar64-spl.c | 24 ++++++++++++++++++++++++
->   4 files changed, 27 insertions(+), 39 deletions(-)
->   create mode 100644 board/renesas/common/rcar64-spl.c
-> 
-> diff --git a/board/renesas/common/Makefile b/board/renesas/common/Makefile
-> index e6dde3c2597..7a9f3a25440 100644
-> --- a/board/renesas/common/Makefile
-> +++ b/board/renesas/common/Makefile
-> @@ -15,7 +15,9 @@ endif
->   
->   # 64 bit SoCs
->   ifdef CONFIG_RCAR_64
-> -ifndef CONFIG_XPL_BUILD
-> +ifdef CONFIG_XPL_BUILD
-> +obj-y	+= rcar64-spl.o
-> +else
->   obj-y	+= rcar64-common.o
->   endif
->   
+Changes in v2:
+  * Removed 'struct bd_info' as argument in function phytec_ft_board_fixup
 
-Wondering if we couldn't use variables to make the Makefile a bit easier 
-on the eye (though not necessarily more readable)?
+ board/phytec/common/phytec_som_detection.c | 202 ++++++++++++++++-----
+ board/phytec/common/phytec_som_detection.h |   7 +
+ 2 files changed, 166 insertions(+), 43 deletions(-)
 
-Something like
+diff --git a/board/phytec/common/phytec_som_detection.c b/board/phytec/common/phytec_som_detection.c
+index 166c3eae565..a4a1d20e0ec 100644
+--- a/board/phytec/common/phytec_som_detection.c
++++ b/board/phytec/common/phytec_som_detection.c
+@@ -271,11 +271,126 @@ err:
+ 	return ret;
+ }
+ 
++static int phytec_get_product_name(struct phytec_eeprom_data *data,
++				   char *product)
++{
++	struct phytec_api2_data *api2;
++	unsigned int ksp_no, som_type;
++	int len;
++
++	if (!data)
++		data = &eeprom_data;
++
++	if (!data->valid || data->payload.api_rev < PHYTEC_API_REV2)
++		return -EINVAL;
++
++	api2 = &data->payload.data.data_api2;
++
++	if (api2->som_type > 1 && api2->som_type <= 3) {
++		ksp_no = (api2->ksp_no << 8) | api2->som_no;
++		len = snprintf(product, PHYTEC_PRODUCT_NAME_LEN, "%s-%04u",
++			       phytec_som_type_str[api2->som_type], ksp_no);
++		if (len != 8)
++			return -1;
++		return 0;
++	}
++
++	switch (api2->som_type) {
++	case 0:
++		som_type = api2->som_type;
++		break;
++	case 4:
++		som_type = 0;
++		break;
++	case 5:
++		som_type = 0;
++		break;
++	case 6:
++		som_type = 1;
++		break;
++	case 7:
++		som_type = 1;
++		break;
++	default:
++		pr_err("%s: Invalid SOM type: %i", __func__, api2->som_type);
++		return -EINVAL;
++	};
++
++	len = snprintf(product, PHYTEC_PRODUCT_NAME_LEN, "%s-%03u",
++		       phytec_som_type_str[som_type], api2->som_no);
++	if (len != 7)
++		return -1;
++	return 0;
++}
++
++static int phytec_get_part_number(struct phytec_eeprom_data *data,
++				  char  *part)
++{
++	char product_name[PHYTEC_PRODUCT_NAME_LEN] = {'\0'};
++	struct phytec_api2_data *api2;
++	unsigned int ksp_type;
++	int res, len;
++
++	if (!data)
++		data = &eeprom_data;
++
++	if (!data->valid || data->payload.api_rev < PHYTEC_API_REV2)
++		return -EINVAL;
++
++	api2 = &data->payload.data.data_api2;
++
++	res = phytec_get_product_name(data, product_name);
++	if (res)
++		return res;
++
++	if (api2->som_type <= 1) {
++		len = snprintf(part, PHYTEC_PART_NUMBER_LEN, "%s-%s.%s",
++			       product_name, api2->opt, api2->bom_rev);
++		if (len < 11)
++			return -1;
++		return 0;
++	}
++	if (api2->som_type <= 3) {
++		snprintf(part, PHYTEC_PART_NUMBER_LEN, "%s.%s", product_name,
++			 api2->bom_rev);
++		if (len != 11)
++			return -1;
++		return 0;
++	}
++
++	switch (api2->som_type) {
++	case 4:
++		ksp_type = 3;
++		break;
++	case 5:
++		ksp_type = 2;
++		break;
++	case 6:
++		ksp_type = 3;
++		break;
++	case 7:
++		ksp_type = 2;
++		break;
++	default:
++		pr_err("%s: Invalid SOM type: %i", __func__, api2->som_type);
++		return -EINVAL;
++	};
++
++	len = snprintf(part, PHYTEC_PART_NUMBER_LEN, "%s-%s%02u.%s",
++		       product_name, phytec_som_type_str[ksp_type],
++		       api2->ksp_no, api2->bom_rev);
++	if (len < 16)
++		return -1;
++
++	return 0;
++}
++
+ void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data)
+ {
++	char part_number[PHYTEC_PART_NUMBER_LEN] = {'\0'};
+ 	struct phytec_api2_data *api2;
+ 	char pcb_sub_rev;
+-	unsigned int ksp_no, sub_som_type1, sub_som_type2;
++	int res;
+ 
+ 	if (!data)
+ 		data = &eeprom_data;
+@@ -289,50 +404,14 @@ void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data)
+ 	pcb_sub_rev = api2->pcb_sub_opt_rev & 0x0f;
+ 	pcb_sub_rev = pcb_sub_rev ? ((pcb_sub_rev - 1) + 'a') : ' ';
+ 
+-	/* print standard product string */
+-	if (api2->som_type <= 1) {
+-		printf("SoM: %s-%03u-%s.%s PCB rev: %u%c\n",
+-		       phytec_som_type_str[api2->som_type], api2->som_no,
+-		       api2->opt, api2->bom_rev, api2->pcb_rev, pcb_sub_rev);
++	res = phytec_get_part_number(data, part_number);
++	if (res)
+ 		return;
+-	}
+-	/* print KSP/KSM string */
+-	if (api2->som_type <= 3) {
+-		ksp_no = (api2->ksp_no << 8) | api2->som_no;
+-		printf("SoM: %s-%u ",
+-		       phytec_som_type_str[api2->som_type], ksp_no);
+-	/* print standard product based KSP/KSM strings */
+-	} else {
+-		switch (api2->som_type) {
+-		case 4:
+-			sub_som_type1 = 0;
+-			sub_som_type2 = 3;
+-			break;
+-		case 5:
+-			sub_som_type1 = 0;
+-			sub_som_type2 = 2;
+-			break;
+-		case 6:
+-			sub_som_type1 = 1;
+-			sub_som_type2 = 3;
+-			break;
+-		case 7:
+-			sub_som_type1 = 1;
+-			sub_som_type2 = 2;
+-			break;
+-		default:
+-			pr_err("%s: Invalid SoM type: %i", __func__, api2->som_type);
+-			return;
+-		};
+-
+-		printf("SoM: %s-%03u-%s-%03u ",
+-		       phytec_som_type_str[sub_som_type1],
+-		       api2->som_no, phytec_som_type_str[sub_som_type2],
+-		       api2->ksp_no);
+-	}
+ 
+-	printf("Option: %s BOM rev: %s PCB rev: %u%c\n", api2->opt,
+-	       api2->bom_rev, api2->pcb_rev, pcb_sub_rev);
++	printf("SOM: %s\n", part_number);
++	printf("PCB Rev.: %u%c\n", api2->pcb_rev, pcb_sub_rev);
++	if (api2->som_type > 1)
++		printf("Options: %s\n", api2->opt);
+ }
+ 
+ char * __maybe_unused phytec_get_opt(struct phytec_eeprom_data *data)
+@@ -379,6 +458,37 @@ u8 __maybe_unused phytec_get_som_type(struct phytec_eeprom_data *data)
+ 	return data->payload.data.data_api2.som_type;
+ }
+ 
++#if IS_ENABLED(CONFIG_OF_LIBFDT)
++int phytec_ft_board_fixup(struct phytec_eeprom_data *data, void *blob)
++{
++	char product_name[PHYTEC_PRODUCT_NAME_LEN] = {'\0'};
++	char part_number[PHYTEC_PART_NUMBER_LEN] = {'\0'};
++	int res;
++
++	if (!data)
++		data = &eeprom_data;
++
++	if (!data->valid || data->payload.api_rev < PHYTEC_API_REV2)
++		return -EINVAL;
++
++	res = phytec_get_product_name(data, product_name);
++	if (res)
++		return res;
++
++	fdt_setprop(blob, 0, "phytec,som-product-name", product_name,
++		    strlen(product_name) + 1);
++
++	res = phytec_get_part_number(data, part_number);
++	if (res)
++		return res;
++
++	fdt_setprop(blob, 0, "phytec,som-part-number", part_number,
++		    strlen(part_number) + 1);
++
++	return 0;
++}
++#endif /* IS_ENABLED(CONFIG_OF_LIBFDT) */
++
+ #if IS_ENABLED(CONFIG_CMD_EXTENSION)
+ struct extension *phytec_add_extension(const char *name, const char *overlay,
+ 				       const char *other)
+@@ -458,6 +568,12 @@ inline struct phytec_api3_element * __maybe_unused
+ 	return NULL;
+ }
+ 
++#if IS_ENABLED(CONFIG_OF_LIBFDT)
++inline int phytec_ft_board_fixup(struct phytec_eeprom_data *data, void *blob)
++{
++	return 0;
++}
++#endif /* IS_ENABLED(CONFIG_OF_LIBFDT) */
+ #if IS_ENABLED(CONFIG_CMD_EXTENSION)
+ inline struct extension *phytec_add_extension(const char *name,
+ 					      const char *overlay,
+diff --git a/board/phytec/common/phytec_som_detection.h b/board/phytec/common/phytec_som_detection.h
+index 5e35a13cb21..5b0ff9b0c89 100644
+--- a/board/phytec/common/phytec_som_detection.h
++++ b/board/phytec/common/phytec_som_detection.h
+@@ -8,6 +8,7 @@
+ #define _PHYTEC_SOM_DETECTION_H
+ 
+ #include "phytec_som_detection_blocks.h"
++#include <fdtdec.h>
+ 
+ #define PHYTEC_MAX_OPTIONS	17
+ #define PHYTEC_EEPROM_INVAL	0xff
+@@ -17,6 +18,9 @@
+ #define PHYTEC_GET_OPTION(option) \
+ 	(((option) > '9') ? (option) - 'A' + 10 : (option) - '0')
+ 
++#define PHYTEC_PRODUCT_NAME_LEN		8 + 1
++#define PHYTEC_PART_NUMBER_LEN		PHYTEC_PRODUCT_NAME_LEN + 14 + 1
++
+ enum {
+ 	PHYTEC_API_REV0 = 0,
+ 	PHYTEC_API_REV1,
+@@ -86,6 +90,9 @@ void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data);
+ char * __maybe_unused phytec_get_opt(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_som_type(struct phytec_eeprom_data *data);
++#if IS_ENABLED(CONFIG_OF_LIBFDT)
++int phytec_ft_board_fixup(struct phytec_eeprom_data *data, void *blob);
++#endif /* IS_ENABLED(CONFIG_OF_LIBFDT) */
+ 
+ #if IS_ENABLED(CONFIG_CMD_EXTENSION)
+ struct extension *phytec_add_extension(const char *name, const char *overlay,
+-- 
+2.25.1
 
-ifdef CONFIG_XPL_BUILD
-SPL_COMMON := spl
-else
-SPL_COMMON := common
-endif
-
-obj-y += rcar64-$(SPL_COMMON).o
-
-Then we could use it for gen3 and gen4 object files as well for example.
-
-I really struggle to parse Makefile/C code when there are a lot of 
-ifdefs especially once they get nested, but maybe that's just me :)
-
-Thanks!
-Quentin
