@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A712E77188
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:18:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9934E77188
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 01:18:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1E42806D6;
-	Wed, 15 Jan 2025 02:18:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A008806D4;
+	Wed, 15 Jan 2025 02:18:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YMdw1A/r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VmcW9Idv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AF3E80702; Wed, 15 Jan 2025 02:18:14 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 3A6E280702; Wed, 15 Jan 2025 02:18:41 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6308E8069A
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:18:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 219308069A
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 02:18:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aaedd529ba1so866640866b.1
- for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:18:12 -0800 (PST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5d4e2aa7ea9so12175940a12.2
+ for <u-boot@lists.denx.de>; Tue, 14 Jan 2025 17:18:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736903892; x=1737508692; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736903918; x=1737508718; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zq2NET+yJ++A+YGlZPnBIVgYrSTmPdzzWKi74+VrUxI=;
- b=YMdw1A/rSBaFmmwzVzvcQwO8vBD+c47U3sib5NEyE+cRzkuJGFnLKxyUczDpfIlnB7
- 0IQK7SClWCFg4myCZFZs+PjxRW5lj0C64jOiQMVY7qjefifRdFyb9JHyOgCnmDUfpHXP
- ykRy5wz1N4y5+sUx9sw78c/lNS8/Sv5fcXkbg=
+ bh=LMKJIJOJc9C0XJes7Ry9Hu/dCxNCF73Vj4/4JCsAn8M=;
+ b=VmcW9IdvsojGlK6mxMBTOIDZNj5ycQdS/XHKsbJGU7T0dqAibbthAc60rMa68QGU4u
+ OYIt1Fi5d6+R3V8rZoO6rNOKT/Ju/FfKFX0RdnWryCPd3PcgTymFkmhe93/LfvkJ4ptf
+ Tr5b01KC4i8L6rfOvxHdrPqxvmMgeCq4v8FRw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736903892; x=1737508692;
+ d=1e100.net; s=20230601; t=1736903918; x=1737508718;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zq2NET+yJ++A+YGlZPnBIVgYrSTmPdzzWKi74+VrUxI=;
- b=saQACVG01GoxeOM2lwW/ELP8MK7tpZsLBw55DfwRYsLaYhlYPdWXZBRCwNUIuCX6UE
- r2KIGmfHB0v7QXLMD7LWfkEhDZzUhHZBefqfwQ26wRfk9UP+QOi9sFvz8YDrIP1q793Y
- AXdZy1w5lXasl8fg4gSkDvLKBn8av/vnWXMxvys2MpDDbGysBF35AB8L2RvsZuraaTR3
- o12znZuFgrWnR+Me9D/ERBMNU8WMFoZexUuw1KOTKUAOdqfXnwnxtlBQbGhfc6c5eZ6j
- 8uG+9j9EIQjWXjynk+cpGGRUUXvyKZOEbMH91x0v9tmWopr9o/0werT5BuLRkol6Ib/z
- Iw5g==
-X-Gm-Message-State: AOJu0YwMhIBJjHVWuouIgig0fHfS+0ss7CtAj18ZiPhxHt9eniAcumdK
- D9omBH/63KtiZU8jSMbAU+MxygndSkrdGM0HB23Nzk1ce+EBT9Bdlm3Czbg21yz+SoIyVkRP5PP
- vhgh2Uluy8qRKZ/VN3rXlkZ9X/sV9MLFcV4Em
-X-Gm-Gg: ASbGncutP30NmYp6S8dxAkkMtu2Ln4ApMkaVUMnUqeRJw2rQ85AueR6s3U1iV/+YHYl
- KGsh6IUR/2SMpC789ztCveYP+eswUL1WFeYxAcCw=
-X-Google-Smtp-Source: AGHT+IG3gnKO9lETktFX3h2mWRFYztA5+68ozn9Gx9nlFHxSzk9NXNwwzlunZeGWjzxXxci3nS7DIokY9mAx0Bg8/fw=
-X-Received: by 2002:a05:6402:26cf:b0:5d4:55e:f99e with SMTP id
- 4fb4d7f45d1cf-5d972e1d7dfmr67006688a12.18.1736903891869; Tue, 14 Jan 2025
- 17:18:11 -0800 (PST)
+ bh=LMKJIJOJc9C0XJes7Ry9Hu/dCxNCF73Vj4/4JCsAn8M=;
+ b=Fkm3v6yBRxY24Qm2Dysr2xaB5pw9a9f64uwqp5tuD2WMzAK8NQtns3s9kyc2IXRS17
+ XkEXiuVgbGNiqu7yyyJ0eRyRU/tEatCLuzTwabxVCBOSmEsYuq/EDMIFTK8SJVetUKaV
+ hYrHgDrhrcptwxRBN6jrJpc7V3rurC/Vfcm526YoRYDFFXqfubz3nNqSV9g9qiAqGY91
+ nZKFfqV5JLWKax2699M/PkcFRX0pvC1kwmiiX4aghjBqaSJBDE1b5aBsXYd9DzA9UPbG
+ npSzm4YV0Rl9OQmYEyhd2GwgkUfTl1XuIIkXeH1VhBeKzvh7xVaQe2AAMMwYQTEHHZv5
+ RH/g==
+X-Gm-Message-State: AOJu0YzPBQT0pAukn3/Qn1AtM8w03K5KwnK8lj6eYPZ7HWU1FN04Mb55
+ KbeoArtkY/f1IUC8MZ6OPMsSOUfWxxc3FI2pRvcDf4AD0XsVxC2HcF3AF8E2hBs5UcjZ68kSkEz
+ 6RshOTmILeVIYCdz5mfotVmvs2rfFXT6XbgCR
+X-Gm-Gg: ASbGncuuiB5AIm9N/c0mPwUB4GLa7FG3GHYZeVj8A5G/VtZAo297Tv7wGtYHzzQXzY3
+ 6Bo0oa5twA0D1zqsPro+KcGWCPiiaMJ12JQ3gxRo=
+X-Google-Smtp-Source: AGHT+IGV6aW37OcpSECWB+b7ngyp6BByrl65XnzD1uT8LjAxLDx9J3SKYqNU1w7XVdxS0tpLBIp+e0Gz6u3q30KRh+M=
+X-Received: by 2002:a17:907:cbc9:b0:ab2:b6e2:fcc9 with SMTP id
+ a640c23a62f3a-ab2b6e2ff66mr2486995366b.45.1736903917858; Tue, 14 Jan 2025
+ 17:18:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20250101195817.995321-1-sjg@chromium.org>
- <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
- <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
- <CAFLszTiXHKdf_QUUsWpQpwv69HSGPNknkDW4JHgRUfT0r_G-aA@mail.gmail.com>
- <CAC_iWj+PwT2JmrWwrTsmHt_mGKDdhGUQgXKvzi3SCNCFxgJNRw@mail.gmail.com>
- <CAFLszThXtZjgavkzKhHbSXahONLqpT7yEYBH3bQ_1qzS=AUx+Q@mail.gmail.com>
- <CAC_iWjK5gOn4Ad=orCMhv4BY74U4E6AoOLR6rnYYHd9=-X7wEg@mail.gmail.com>
-In-Reply-To: <CAC_iWjK5gOn4Ad=orCMhv4BY74U4E6AoOLR6rnYYHd9=-X7wEg@mail.gmail.com>
+References: <20250109123010.4005298-1-sjg@chromium.org>
+ <20250109123010.4005298-2-sjg@chromium.org>
+ <20250114012226.GG3476@bill-the-cat>
+ <CAFLszTj9zAE_KniCZ2xHGHt1fK7jhTBHzfkdSif6XNuzKtWOTA@mail.gmail.com>
+ <20250114165801.GJ3476@bill-the-cat> <20250114173343.GO3476@bill-the-cat>
+In-Reply-To: <20250114173343.GO3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Jan 2025 18:18:00 -0700
-X-Gm-Features: AbW1kvaYUuuHaIxFJAsxxjRs0jyAPGAP1tzo9TOFHvHBGs0Lxdxg3SFhr6AQDHE
-Message-ID: <CAFLszThHFzKL=N=nKQGtTdZjkjY3nq85Yg+vzkBdODOcZOhoyw@mail.gmail.com>
-Subject: Re: [PATCH] bloblist: Drop BSD license
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Date: Tue, 14 Jan 2025 18:18:26 -0700
+X-Gm-Features: AbW1kvbKo--TwwVgCV-Q3bwW0rd4lKtTT3DSEu6OuSuUkaCXtW6l1FZ4QKbmfCo
+Message-ID: <CAFLszTi1epQ+6AGMK_pkjnTQmDU8--xS-NXfk5iM=q_wi6xyWw@mail.gmail.com>
+Subject: Re: [PATCH 01/15] vbe: Split out some VBE code into a common file
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,126 +92,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Tue, 14 Jan 2025 at 12:34, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Tue, 14 Jan 2025 at 10:33, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> On Tue, 14 Jan 2025 at 15:15, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Tue, 14 Jan 2025 at 01:40, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
+> On Tue, Jan 14, 2025 at 10:58:01AM -0600, Tom Rini wrote:
+> > On Tue, Jan 14, 2025 at 05:58:04AM -0700, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > Hi Simon,
-> > >
-> > > On Fri, 10 Jan 2025 at 16:54, Simon Glass <sjg@chromium.org> wrote:
+> > > On Mon, 13 Jan 2025 at 18:22, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > Hi again Ilias,
+> > > > On Thu, Jan 09, 2025 at 05:29:56AM -0700, Simon Glass wrote:
 > > > >
-> > > > On Thu, 2 Jan 2025 at 18:41, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Ilias,
-> > > > >
-> > > > > On Fri, 3 Jan 2025 at 08:15, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > >
-> > > > > > Apologies for the formatting, replying on mobile.
-> > > > > >
-> > > > > > On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
-> > > > > >>
-> > > > > >> Linaro has decided to write their own version of bloblist from scratch,
-> > > > > >> so there is no point in having a non-GPL license on this file. Change
-> > > > > >> it, to better fit with the U-Boot project.
-> > > > > >
-> > > > > >
-> > > > > > Apart from the commit message being wrong, it's also intentionally provoking. There was no bloblist in TF-A.
-> > > > > >
-> > > > > > The TF-A code is implementing the firmware hand-off spec [0], which Linaro participated in the creation. The U-Boot implementation was adjusted to adhere to the same spec after the TF-A code was merged.
-> > > > >
-> > > > > The U-Boot series was [1], for reference. This was mostly about using
-> > > > > different tags and shrinking the headers. My clear understanding was
-> > > > > that we were going to try to have a single codebase, which is why I
-> > > > > changed the license.
-> > > > >
-> > > > > So, since you have a different view of events, why did Linaro write it
-> > > > > from scratch? Was it to avoid having U-Boot code in TF-A? Or was the
-> > > > > author just unaware of the original intention?
-> > >
-> > > I am not sure I am following 'from scratch'. Firmware handoff is a doc
-> > > describing a list. Raymond implemented it in U-Boot and TF-A.
-> >
-> > So in your mind, Raymond implemented it in U-Boot? Have you taken a
-> > look at 'git log' or 'git blame'?
-> >
-> > > The right way to do this is to move the firmware handoff code to a
-> > > library that can be used across projects.
-> >
-> > Not always. Probably not in this case. It has quite a bit of logic
-> > which depends on its environment. So I think it is better to have
-> > 'similar' code in several projects. Certainly, writing it from scratch
-> > (meaning not based on existing code) is not the best approach.
-> >
-> > >
-> > > > It isn't relevant for
-> > > > > the commit message, but if you can find out I would be interested.
+> > > > > Loading a FIT is useful for other VBE methods, such as ABrec, so start
+> > > > > a new common file. Add functions for reading the version and nvdata.
+> > > > > Also add a function to get the block device.
 > > > >
-> > > > Just following up on this as I'm not sure of the status of this patch.
-> > > > Can you perhaps write your own commit message with your version of
-> > > > what Linaro has done?
+> > > > This is not a good commit message when you're also introducing
+> > > > functional changes (blk_dread -> blk_read).
 > > >
-> > > "The non-GPL license was inadvertently added, remove it". Raymond
-> > > wrote that code so I don't think he minds removing the extra license.
+> > > Yes, I did not actually notice this size change at all, as mentioned,
+> > > as I only built for a few boards (firefly rk3399/rk3288 and a few
+> > > sandbox ones). The blk_dread() function is the old API for reading
 > >
-> > Again, please check your assertion here. I for one am very surprised
-> > to hear that Raymond wrote the bloblist code :-)
->
-> All of the patches carry his co-developed by or his signed off by. A
-> big portion of those are sent by you as well
+> > You have much faster build machines available than I do, it would be
+> > good to run a world build before/after (it might take an hour on
+> > alexandra) before posting these big series.
 
-So here you are referring just to the patches which changed the header
-formats, not the original bloblist code.
+OK. I used to do this, but with CI sometimes grabbing the machines it
+ends up with a huge load and sometimes runs out of memory. I suppose I
+can stop the runner before doing it and remember to restart it
+afterwards. Or perhaps Alex has enough memory per thread? (96GB).
 
->
 > >
-> > But it does help to explain why you objected to my commit message.
+> > > from a block. It didn't occur to me that blk_dread() would bypass the
+> > > cache.
+> >
+> > Yes, how is that happening? That's what doesn't make sense.
+
+OK, I see. It is actually one level deeper than I thought.
+
+PARTITIONS is not enabled, for example on phycore_am62x_r5_usbdfu
+which means that blk_get_dev() returns NULL
+
+So long as all the code is in one module, blk_get_dev() returning NULL
+causes the calls to vbe_simple_read_state() and simple_read_nvdata()
+to be dropped, so their code is dropped too, so there is no
+blk_read()/blk_dread() call. It is optimised away. It just happens to
+be the only call in U-Boot
+
+> >
+> > >
+> > > > Further, this functional
+> > > > change seems to introduce some other code being pulled in very
+> > > > unexpectedly, and that needs to be explained. For example,
+> > > > phycore_am62x_r5_usbdfu is another case and that has
+> > > > CONFIG_BLOCK_CACHE=y but CONFIG_SPL_BLOCK_CACHE=n, and yet the size
+> > > > growth is in full U-Boot.
+> > >
+> > > This board currently uses blk_dread(), but not blk_read(), so the
+> > > addition of a blk_read() call in non-SPL causes the BLK cache to be
+> > > pulled in.
+> >
+> > But, how? I mean, this sounds like some underlying bug that needs to be
+> > fixed. The platform sets CONFIG_BLK=y and CONFIG_BLOCK_CACHE=y and
+> > drivers/block/blk-uclass.c has:
+> > ulong blk_dread(struct blk_desc *desc, lbaint_t start, lbaint_t blkcnt,
+> >                 void *buffer)
+> > {
+> >         return blk_read(desc->bdev, start, blkcnt, buffer);
+> > }
+> >
+> > Or perhaps the answer / problem here is that I need to track down what's
+> > going wrong here instead of asking you to track this down.
 >
-> The reason I object to the commit message is because it's
-> *intentionally* misleading.
-> The BSD-3 clause was added by you in 6c9e3d1fc0859 with the intention
-> of other projects using 'bloblist'.
+> So, digging in to this, what's going on is that the platforms I've noted
+> here (and a few others) don't actually enable any block devices. That's
+> why, today, with VBE on still, they discard all of the code still. Your
+> rework means that while there's still no block devices, we're now
+> including the code. What to do? Both of:
+> - These platforms *should* disable the assorted block device related
+>   library options they have enabled if / when possible (it might not be
+>   a neat and easy un-tangle).
 
-Yes, that's why I added the license, since I was led to believe that
-TF-A would use the U-Boot code with some modifications.
+As above, the issue seems to be PARTITIONS
 
->
-> The actual firmware handoff code was added much later in e266d2731145.
-> All of the patches in that series is co-developped by Raymond. Those
-> were added Wed Dec 27 while the TF-A patches were merged much much
-> earlier. commit 3ba2c15147c in TF-A was merged Tue Jul 25
+> - VBE needs to handle the case where there's not a block device enabled
+>   and not fail the build. Part of this requires the Kconfig rework I
+>   linked to earlier (so that we can have BLK off) to be complete, but
+>   having the VBE code check for BLK being enabled either in Makefile or
+>   C code should be the same regardless.
 
-The original bloblist impl was in 2018:
+I thought you NAK'd my patch to drop the 'depends on BLK' for bootstd?
 
-commit 9f407d4ef092c2ce7ab0f4f366aee252611dab3c
-Author: Simon Glass <sjg@chromium.org>
-Date:   Thu Nov 15 18:43:50 2018 -0700
+From what I can tell EFI_LOADER doesn't do any block access unless
+PARTITIONS is enabled. I don't want that for VBE because the VBE data
+is not actually in a partition (although perhaps it could be in
+future).
 
-    Add core support for a bloblist to convey data from SPL
-
-    At present there is no standard way in U-Boot to pass information from SPL
-    to U-Boot proper. But sometimes SPL wants to convey information to U-Boot
-    that U-Boot cannot easily figure out. For example, if SPL sets up SDRAM
-    then it might want to pass the size of SDRAM, or the location of each
-    bank, to U-Boot proper.
-
-    Add a new 'bloblist' feature which provides this. A bloblist is set up in
-    the first phase of U-Boot that runs (i.e. TPL or SPL). The location of
-    this info may be in SRAM or CAR (x86 cache-as-RAM) or somewhere else.
-    ...
+Anyway, from what I can tell, the code-size increase is explainable
+and perhaps we should just accept it.
 
 Regards,
 Simon
