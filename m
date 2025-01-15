@@ -4,163 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61025C02183
-	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 12:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4DB4C02180
+	for <u-boot@archiver.kernel.org>; Wed, 15 Jan 2025 13:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA2F0800C2;
-	Wed, 15 Jan 2025 13:16:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id ECB57800C2;
+	Wed, 15 Jan 2025 14:09:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="hCADN117";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tvscjRQk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55D3580214; Wed, 15 Jan 2025 13:16:40 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8F7FA80214; Wed, 15 Jan 2025 14:09:28 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F197780040
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 13:16:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 6749680040
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 14:09:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cJ2gzXTtO9iXXHFz72pTX2ezrEtgOVHhM7IECYFpFs5nFxlEsjzUr7dgsbUZ9fRo8f0DwFolKJrnZrpTXdovyme63Cuns3h4zkwM8bYJSJ32BbQ1p1Oe3euxwxvoYheJCXhZervTPnq9JQLxasGNoyJZ/Z7nyc3pPwrtolX5iec4F3/RdY6/yD9CNBgVDjnrUhMQapA3IvheOy6Xu/dnUtYJlHFGaMNG1d6q6ijTUszKXqw9UcWn/uiQKTBQ18cNTKFfYhf1o2ZDiy61I6qElThE7AvaadDAkzG7hv3tiVIVZq0Q0sbi6WSBf8alLgpmbhFEaaXFf1Y9TCXLpAnLSw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r2a/ghRpyCPkF9EGb17IZZgHTyzNT0km90yP5MGwg7U=;
- b=LelEqDETH8woAzY/9wa022ycAqGUfstwpF6oEu9SqaZZmqRM+yPtSA/VyIc/IZsYF4Hg14p20TKdjmltXYxEusM1elxiqcJfSdm9qFLOLsuGCUgIRnZsX18tp3XjywsAeZNroOpau/AeSzTwj2PSbu0QFlbrK5xWimCdmayl3WjibY9OE8BYE2+Dhje1fqwwIoiW40z2y/ehhlpCjS/frWpGdGfDovi48fAOg0R2ugJ2LrV0HqCBetaFVoDEhcAx+vhvSXEJ1D4OVOBUvRH0kZVCCCcsKYYf4SLLBrp5AGEnSwm8iXhM4LVVxEdBXVBuHQXEO7i+ZNe40XCy2HY4JA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r2a/ghRpyCPkF9EGb17IZZgHTyzNT0km90yP5MGwg7U=;
- b=hCADN117jU8cEiA0S1FM3GEp1RMTrk5XA+1W2h1N+KhqK6IOeu/JRw+fkh8b6K2cUikoPY9YY2qY4AUT1p2w6i82Z/lcYkA/XX9cD55Wam9Ipz4ykFCgdF4f85hwN27OcwhjBMiJ4Jn1+B650uR27z0ftHy4a4MMX9VCNKd4uqA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PA1PR04MB10442.eurprd04.prod.outlook.com (2603:10a6:102:44a::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.13; Wed, 15 Jan
- 2025 12:16:36 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Wed, 15 Jan 2025
- 12:16:36 +0000
-Message-ID: <1b0d38ab-28be-47f7-a41a-cf6e36c953bb@cherry.de>
-Date: Wed, 15 Jan 2025 13:16:35 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: Remove redundant loading of image copy start
- offset.Because the beginning is already computed
-To: 1425075683@qq.com, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, =?UTF-8?Q?Pali_Roh=C3=A1r?=
- <pali@kernel.org>, Tom Rini <trini@konsulko.com>
-References: <tencent_CCE8303926957C427AAE06F9D91282458109@qq.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <tencent_CCE8303926957C427AAE06F9D91282458109@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR04CA0127.eurprd04.prod.outlook.com
- (2603:10a6:803:f0::25) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=3110841290=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50FAcavA014666;
+ Wed, 15 Jan 2025 14:09:21 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ p6l2VJzcvD/YkZ3iEEOu/34LQtXHhFKnIgghrRQhS0s=; b=tvscjRQkSUq74ZG+
+ 5vtDZ2THjJJXvbqTbJHshiGxXBlXdsgpaBirUW208rdCFyWZ9Uv0AzOEIDIo8fw2
+ JWkysb4vLHbrJn9jYc0fXwIhFTsh4K5OXQXABdwXQaAyCpykkKX3vB/QGBZKL3KX
+ jm83UvQTAF5QoDBBxmjWjCYbfTrE3W8rCRCpm1bP7GZCtYCByBHBFJbVgE5TVrW8
+ kIxO5wf3uGHk2o5SnPgyztQz5ArSMPo7Q0glsL9NnPwjO2fMGl/11Og2ZGi/5aJw
+ 4uz1axDH6nGz2zhECJL+lEOV0bchulhdHn23V2olXp66vyeeZgwm301CHqZNOGC0
+ JekIPw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4466tjswr3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 15 Jan 2025 14:09:21 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 08B854004A;
+ Wed, 15 Jan 2025 14:08:17 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 80FC224FBFA;
+ Wed, 15 Jan 2025 14:07:44 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 15 Jan
+ 2025 14:07:43 +0100
+Message-ID: <cd370701-ffe6-4840-b5d9-63d8aaeb4fc3@foss.st.com>
+Date: Wed, 15 Jan 2025 14:07:43 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA1PR04MB10442:EE_
-X-MS-Office365-Filtering-Correlation-Id: e131f22a-4f9a-4e4c-4d55-08dd355e74cf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|1800799024|366016|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VG5XQWFoOTZpVUZaZXRYRXNWSDlDN1hnRno0Q01LcGczanpqSXViNWJLc09Q?=
- =?utf-8?B?WU1UcHpMNmZLV1IyYWdvYkwvQVN2NWxJQk1tLzR0VFZrM0pSSnVTZURZQXFn?=
- =?utf-8?B?aW1RMll0QnhOWTdyOFpaS2kvRDd2d0N6MWZIb2NRVzVmd25GcjJadlFmazln?=
- =?utf-8?B?UkZwQTUxMWgrRi9wRVFZRGNuMGliYVI2OFhxWjBSMVJFdCs2cUNraUc3cFBa?=
- =?utf-8?B?NTBXTWthTVRJdzY0KzYyNWFZVWNPS2VBMnhCZ2NnOWFTcDZaME5hNytNYjND?=
- =?utf-8?B?SmozRXVHVlh2clQzNnBmTUlWamJWanljR1hmREM1M0ZvWXQwODRjQmhQNFVG?=
- =?utf-8?B?MHR4Z0tKZWZaRUhRVDhNd1h4VkJSNEhsWWNnMGIvdHpqbTF1SlZ2SVdiZHlt?=
- =?utf-8?B?cks4eTljdlNhL2NoRGVmU1ljOTJVZ0wzWUo1REd4TTRZTkFvZ1NGK1k5d1U3?=
- =?utf-8?B?TWRQUENpN3YvYUpGTm9sTTNESUtvN0h3ajNBVTJFOHVoTk9HTWYzRG9ZSGls?=
- =?utf-8?B?cDNyRGw3L3RaVit6Zk9iZHh5Ri9rVVRxNEhKMlhiMEhVMTU1WkQzaVdBaXlN?=
- =?utf-8?B?QWUzZzhjMjc0WmZjeWVDZ0xsbUZ0UEx4NVgxRFVzK1BnSmxXNFNObTN5eUxP?=
- =?utf-8?B?VUZTQ3FmMU8rc1l6WWw1aURab0VrWkJjUVd3Zk9PbkZCYWdqdS9sNjZNYjFM?=
- =?utf-8?B?Ync5cFRWL2ZaeXFRYjArMlZrWFdKbmpIV1FTbENhYjlSN2dmNm8raS85UTh1?=
- =?utf-8?B?ajZFMHREWHJNV2ZNMkhoRzRIeTdUdytxempKQVFrZmRqcThwUEw3dnBJblI2?=
- =?utf-8?B?UjVFcWcySWJidkVxODV6M0d3YjNYN0ZGeW1wL09NUWhNU2Vrd3ZBUFN4UGI3?=
- =?utf-8?B?QXJjUXgwKzBqTzg2UUltRVlyNy83MGZ1YXUvdDFFMnZvRmZIMytDM3M3R2dp?=
- =?utf-8?B?VytKcFpEUnhVK25zdGdVTlU4di9Tc3B2SG9FdzJjVEJuK3Zwd0lwUjEvOXI3?=
- =?utf-8?B?VWZMMjMwK21xcDE1dmZ0SGdzYXRUSjZ6ckN5cUVlS0FhdCswaDA3SDZ5YUZk?=
- =?utf-8?B?NitaVVhHMHJWd2VaRTRvdUMxbWp2eitzMFhnZDk3RXArRXhnSWJGUVNEOE9T?=
- =?utf-8?B?VVFPNVU4OWMrUnpMVTJPaitUbGpDUkdzNlpVdnJHK2l1d0hscTM5RkEvS0hz?=
- =?utf-8?B?dnlVYkl1ckZCN2dyREtNTFoxMG80NjRaQTZ0bWFUWFYzR0RhNyt6Y0tSNGdp?=
- =?utf-8?B?WkZlbzVUNHdDcTZmelV0SDVyNUJoTkdCMERUMy9WYkY2d0lUYlBkTHg5ZVAz?=
- =?utf-8?B?M0hEajJHWGozcW91eER3L0hZZlE0eHJ1a3prcXJ0eGNyOG1hczBzRDlSVDkw?=
- =?utf-8?B?NkhOTHR1eHZWVkJVU2hEb0lmYnNOWXMxK21DNFFEVE9RMUJZOTBWYjNCS0JO?=
- =?utf-8?B?TkczREg3ZjVoZDR3cGZ4dkprZllJcjlURnYxN0pLK3FuZjhmL1IyL2J4OVpI?=
- =?utf-8?B?L05IaFN3YXJ0T1JMV0JtSVpKb2E4ME5yMW5vWVFRdVA2Zlh2VThHRGhWbXJt?=
- =?utf-8?B?OUVST0h5dG1CaFRzdWZyQzVZUWllWGZBNjNuMFBGL0NmWFNoZGJWeXYxOVg5?=
- =?utf-8?B?WUUvZTJUVUM3V1NCN3FnNkUvam9NSDNlYnpJSzB2bHp2cEhRT3c5NzVJelNV?=
- =?utf-8?B?NTJENUIzbEVwSVVna1FpcHJCUnU3a2YxcFZhSnVPcVN1TWlneXJnVlUrY1FZ?=
- =?utf-8?B?K3BSSllyeUtWZVpoRGlMV0lyUmhYYUdYRGQ0WjQ1SmVEMFQyZUJPeFVtemd4?=
- =?utf-8?B?U0ZLMERyMWxDck9ETE0yWlY4a0VGQ3J3eHBld1F6MHpqQ1lsbkUxUTNIL04x?=
- =?utf-8?Q?LONCo8RBIGKtF?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(1800799024)(366016)(376014)(7053199007); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TGptMUdTcVFUeDRLRngranhkblRlcXdMVHEvd1ZIOXpWSzNCYy9nTCthU1ZT?=
- =?utf-8?B?TnhpV25CTEFGZDAwU1BKekgrNDZtNVFWU3d1cXk3QlNEZ2lWUkxUOVZtRTk1?=
- =?utf-8?B?cVZKQ0x4OHdQcmM1SWFWb3BTR1Ezby90RWsrTThOYm1LTDFyOGRZRkJXMTIx?=
- =?utf-8?B?eEFCSzRrSkd4QnMvbGNFeWZ0OHVkQm44VmJ0ZDQwZ21hbUNrajRlMXBwNnhT?=
- =?utf-8?B?eFI5ajIyZk95RUQydFNVcnBFb2l5Z0lrT1BCQU1UMGNFTTg3K2ZiRURrMk10?=
- =?utf-8?B?OW9meDhCTnFhMTR1YlU4SUE3Qm8rZFdGcmlEd3VIeHpTRTJEVGN6TjJzYUxx?=
- =?utf-8?B?YmZYQXB5S1g1Kzdud2JRUnU0aU91RWN1cm4yMHA5RVQzYjhtQk1kWHRVeVg4?=
- =?utf-8?B?eHczTHdWWFB0S3QyTHBUYjdKZzFWSXYvcjlDdGVaN1hkWXFMcFpZaXVSSitM?=
- =?utf-8?B?emUrYnkrMy9LZTlLVDFhVkZVbG1ZdnpkaUNwYVhKazRUT1JLaE8wZmlkYk9q?=
- =?utf-8?B?WThCSXo3dURCNmRQb1NsbWFpeXdjWnVvM3BxN1p6YTVQaXRXbnNGdlUyMGZ1?=
- =?utf-8?B?ckFSUUgwS1A1TSt0VVc2RDVjK3g0aTNJYURXN2I3WmxPeVkrRlRYRnFSWWFv?=
- =?utf-8?B?a2g3WnkrSTUrRFhiRW9wSi9kRVphWDFDTmtRQVBtMm5HUkluclQ0MUIzeDMw?=
- =?utf-8?B?aU9Kbm1DUEpHVjZnTldPWExzOVRjQ0VEUU5LT1ZvQkZEdmJXSUpNU2FCbVcz?=
- =?utf-8?B?NFRva01mZjNrSHQ3S3IrRFF2dmxzR1FxYTZiOTF3aUZmbXQ0NjhZazgyd1Zv?=
- =?utf-8?B?U2tpVStzQzgydWJaU2k3d3hQQWpLcUF5dlluTHBnM25CWTE1SXZFTzcrZkgz?=
- =?utf-8?B?eEtTNTB0cElzcTU3QjlDdWVYTDl5dXYvM2ZEckJuREV5OFo4YjdtMzVnbDVq?=
- =?utf-8?B?a2Q0RUl5cXdNdmNCVFA3RzlwaWhaTk5meENENmU5SHFJdUcyTG4xUnZMMUtC?=
- =?utf-8?B?NFdNZHNmeXczZWJvOGltNDY1eURKd3dQUHJibmk3OHFKUUtBMHlaNEJIMUlI?=
- =?utf-8?B?RE1vOUtUNkFLbXlJa3FzeVpZdkpkeWRyY2svWXBUZ1MzQURzNGdjWURNUTFx?=
- =?utf-8?B?eUtWcWEwbnhlanNZQlJWSmx2TWhDSWFaWU5MWDBzRDZnNEwxSHJ0MXd4T20r?=
- =?utf-8?B?SnlqMzRMRmZmQU0rWElYdmNSckQ0QXlEbW5RZCttdVh5ZW9lU2pNVVlkOWFC?=
- =?utf-8?B?V2RJNlRPK25DQWwwcDI5SGhYVGNjVEJPRlV4M3UyMUg5VnR5S280OFNHcy96?=
- =?utf-8?B?MnJYT3VwRXU3elFJRitNdWhhdzdTU3B3UjMvUm9SQlVIcWk1c2FZZUJFS3Nn?=
- =?utf-8?B?aUZ1OEZUV1VWOUJsbHVQaENQUGQ3VVc0OWM5ZTVrckMvTWN2ZTYwVDhPaElU?=
- =?utf-8?B?cnlza3M2VmozNjVlcEhBZkM2TnEvaUZLVFE1L01CcTNRemVma2xSMy9BK1hu?=
- =?utf-8?B?cGFacnV4N0QydEtab29TMWNmby84WHpPNy8xK2lTaEVNNTVNbDltWnhjL0ZF?=
- =?utf-8?B?WkJ4TGJGWDN6S0FKMldTUk5ZR0N2cmFPUHM0TkFMMGZXa2twRVdMSnppYlF1?=
- =?utf-8?B?OXVvTmkzNzZ1TEJjVHdxNnRKT25Qb0tBRlBrUjN4SlpRT1VpY2ZLcWxpTDBx?=
- =?utf-8?B?bS9uVHBJUlVxYWVzYjVUZHAzQ3pNY0lvVEVCYVZ3RzdVY2p0Mm5WcjhVOTNQ?=
- =?utf-8?B?dk82L1ZQWStSVlZzaHZ6ZS9uUmNUdytFQjB5WkNkc0s1eUFuODBkbys4Vyth?=
- =?utf-8?B?U3dSbEJPVDZzdEdBeC9meS9VRmxNVktTZEdvNE85dnJBOHVDM2VWcm9hd0dC?=
- =?utf-8?B?QlRSc2xCNVBobVhwT2lzMURKdGZPRTdmYnBKUlJpNzUzY21YQWwwcHZGQWNK?=
- =?utf-8?B?SXlaUGpvRllSWjBlZ0hBQUhuZjk5em5RRzl6bFVPZHU2eDdWaXo2aEpITWtj?=
- =?utf-8?B?cXhHZlZjeXdxUnpSUk94RG9pQVNiN2N1TzZsWVNxQkpXNUJRQWJhVGFvL1J3?=
- =?utf-8?B?T2I1ZUFYSGRET3VFSGpLSWJQOC9TQnlQVkV0WEw2VU91N0xqWldLYjQ0Mi9r?=
- =?utf-8?B?S3pueWRmZ04xVzlUNkVBNFZKcVBYRVoyVkx0Y2Rock5QNXltTXc3M2cyTzhm?=
- =?utf-8?Q?mZDHT3TjWA32xEC0PftyqdA=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: e131f22a-4f9a-4e4c-4d55-08dd355e74cf
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2025 12:16:36.1986 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ixKoanuiPlyk18CqfB1sJ3k3acLcPBjgAocIeXMSrhVx1Tq4T0HyBR5mQhKL+6RgGJx42OZ+xtRhS816IR/nTBJILKxyh1NpzCdT2us61MM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10442
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/10] usb: dwc3-generic: Add STih407 support
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Jan Kiszka <jan.kiszka@siemens.com>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250114144528.1612168-1-patrice.chotard@foss.st.com>
+ <20250114144528.1612168-5-patrice.chotard@foss.st.com>
+ <366cef60-e32f-4557-9830-b1b642f0683f@denx.de>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <366cef60-e32f-4557-9830-b1b642f0683f@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-15_05,2025-01-15_02,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,54 +94,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Liya,
 
-On 1/15/25 2:56 AM, 1425075683@qq.com wrote:
-> [You don't often get email from 1425075683@qq.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+
+On 1/14/25 15:53, Marek Vasut wrote:
+> On 1/14/25 3:45 PM, Patrice Chotard wrote:
 > 
-> From: Liya Huang <1425075683@qq.com>
+>> +    /* glue init */
+>> +    reg = readl(glue_base + CLKRST_CTRL);
+>> +
+>> +    reg |= AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION;
+>> +    reg &= ~SW_PIPEW_RESET_N;
+>> +
+>> +    writel(reg, glue_base + CLKRST_CTRL);
+>> +
+>> +    /* configure mux for vbus, powerpresent and bvalid signals */
+>> +    reg = readl(glue_base + USB2_VBUS_MNGMNT_SEL1);
+>> +
+>> +    reg |= SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
+>> +           SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
+>> +           SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG);
+>> +
+>> +    writel(reg, glue_base + USB2_VBUS_MNGMNT_SEL1);
+> setbits_le32() , please fix globally.
+
+Ok
+
 > 
+> Also, I am wondering if we're not overstuffing the dwc3-generic.c with too many disparate glue code shreds, and whether it isn't just about time to split the glue code parts out of it, into separate .c files. Thoughts ?
 
-Please have some commit log in there justifying the change. There seems 
-to be some issues with the commit title so probably part of it should be 
-in the commit log rather than in the title (one needs an empty line 
-between the commit title and the start of the commit log when editing 
-the commit "description" with a text editor).
+OK i will introduce a specific dwc3-sti.c glue wrapper. I just notice that dwc3-am62.c or dwc3-uniphier.c are typically what i have to do.
+By the same occasion, it removes the need of patch 06/10 with REGMAP/SYSCON dependencies
 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Pali Rohár <pali@kernel.org>
-
-Same remark as for your other patch 
-(https://lore.kernel.org/u-boot/3d51107a-4761-4de8-9bae-a462c2a8e890@cherry.de/), 
-pasting here what I said there:
-
-"""
-This... is odd. I don't see an earlier version of that patch and your
-name/mail only returns two patches on the U-Boot mailing list. I believe
-Reviewed-by needs to be publicly given on the ML as they are a proof of
-review by the mentioned person and is usually a trust mark for
-maintainers to merge code. Here it may have been added without Simon's
-consent. Now imagine Simon is not answering for a few days/weeks, the
-maintainer could still believe Simon went through a proper review and
-merge that patch taking that into account while no review may actually
-have been conducted. This is making me uncomfortable.
-
-[...]
-
-I'm not saying review wasn't done properly, but its acknowledgment
-should be made public by the mentioned person instead of being put into
-the v1.
-
-Have I missed an earlier version or discussion maybe?
-"""
-
-Even odder is that Pali has explicitly requested to not be receiving any 
-mail from the U-Boot project anymore, c.f. 
-https://lore.kernel.org/u-boot/20231106090908.7938-1-xypron.glpk@gmx.de/. 
-That doesn't exclude him for doing reviews of course but that is still 
-odd. I'm explicitly keeping him in Cc here as I am not sure this went 
-through the proper review process and he may not want his name put in 
-there acknowledging something he might not have done.
-
-Cheers,
-Quentin
+Thanks
+Patrice
