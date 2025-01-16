@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53EE8E77188
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 07:44:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D327FE77188
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 07:45:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBEC680702;
-	Thu, 16 Jan 2025 08:44:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C58980702;
+	Thu, 16 Jan 2025 08:45:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 639358070C; Thu, 16 Jan 2025 08:44:02 +0100 (CET)
+ id 5C7638070C; Thu, 16 Jan 2025 08:45:15 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18D6980214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 08:43:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DE6E80214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 08:45:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 50G7htWw035226
+ by Atcsqr.andestech.com with ESMTPS id 50G7j3on035566
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 16 Jan 2025 15:43:55 +0800 (+08)
+ Thu, 16 Jan 2025 15:45:03 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 16 Jan
- 2025 15:43:55 +0800
-Date: Thu, 16 Jan 2025 15:43:51 +0800
+ 2025 15:45:03 +0800
+Date: Thu, 16 Jan 2025 15:44:59 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Junhui Liu <junhui.liu@pigmoral.tech>
 CC: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  <u-boot@lists.denx.de>
-Subject: Re: [PATCH 4/5] riscv: canaan: k230_canmv: Add initial support
-Message-ID: <Z4i4t-vZ8wcTjPGC@swlinux02>
+Subject: Re: [PATCH 5/5] doc: canaan: Add K230 CanMV board
+Message-ID: <Z4i4-4khx8fwHjWu@swlinux02>
 References: <20250115-k230-dev-1-v1-0-f4b77259e34a@pigmoral.tech>
- <20250115-k230-dev-1-v1-4-f4b77259e34a@pigmoral.tech>
+ <20250115-k230-dev-1-v1-5-f4b77259e34a@pigmoral.tech>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250115-k230-dev-1-v1-4-f4b77259e34a@pigmoral.tech>
+In-Reply-To: <20250115-k230-dev-1-v1-5-f4b77259e34a@pigmoral.tech>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 50G7htWw035226
+X-MAIL: Atcsqr.andestech.com 50G7j3on035566
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,18 +68,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 15, 2025 at 12:46:40AM +0800, Junhui Liu wrote:
-> Add support for K230 CanMV board with serial console and usb otg
-> support. It can boot via vendor's u-boot-spl and boot into Linux
-> via tftp through the onboard RTL8152.
+On Wed, Jan 15, 2025 at 12:46:41AM +0800, Junhui Liu wrote:
+> Add description of compiling u-boot for K230 CanMV.
+> 
+> Since the vendor's u-boot-spl verifies u-boot header [1], it is
+> necessary to use the Python script from vendor to add the header to the
+> u-boot image.
+> 
+> [1] https://github.com/kendryte/k230_sdk/blob/v1.8/src/little/uboot/board/canaan/common/k230_board_common.h#L52
 > 
 > Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
 > ---
->  board/canaan/k230_canmv/Kconfig     | 19 +++++++++++++++++++
->  board/canaan/k230_canmv/MAINTAINERS |  6 ++++++
->  board/canaan/k230_canmv/Makefile    |  5 +++++
->  board/canaan/k230_canmv/board.c     |  9 +++++++++
->  configs/k230_canmv_defconfig        | 19 +++++++++++++++++++
->  5 files changed, 58 insertions(+)
+>  doc/board/canaan/index.rst      |  8 ++++
+>  doc/board/canaan/k230_canmv.rst | 88 +++++++++++++++++++++++++++++++++++++++++
+>  doc/board/index.rst             |  1 +
+>  3 files changed, 97 insertions(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
