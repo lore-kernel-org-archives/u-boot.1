@@ -4,100 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 542E3C02180
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 13:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E77C2C02187
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 14:01:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABD128022B;
-	Thu, 16 Jan 2025 14:34:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 228528022B;
+	Thu, 16 Jan 2025 15:01:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="u1qafLcJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yLiMYfHA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF0B88033D; Thu, 16 Jan 2025 14:34:22 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 67C018033D; Thu, 16 Jan 2025 15:01:18 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C337080214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 14:34:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4A2E80214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:01:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8B2A53F683
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 13:34:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1737034458;
- bh=WhHwRfx3fwinWLlRFAjhOjhT41Zezy3hJ14zMtGLbeE=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=u1qafLcJEDkwc/qikJgT/cYppUbfN4bzvsu+Dr/epyHbXnxXgkLbYiXPMOlNOhze+
- yrkbkiNyxMmMEO+pUIMZf1dutkJK61zJl/XijpOeg+qYECPxvvVf9qy2o2u7dCtNvx
- DuWUJE5ezcpUtkfmGL6yeTk4DziJqFsOoJK0zRjLMwnzqaPOU6KdeAdptxM3CY7MmW
- H6cR35xvF/OzlKlenTOLUuZCLH/xfOgQKsa+zkcSfBQLJPnUttvDN/GGaQW2+PtQPS
- Gz6MZOHjQ//H6S4Cz1r5yb9MVmInOPGVJrb4UdUDdFgb7YmgtZSOu8Dkw0PUuNhljr
- b071i0PZIdh3A==
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-ab2e529dc35so111154466b.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 05:34:18 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-e455bf1f4d3so1329899276.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 06:01:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737036075; x=1737640875; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=buYPNjZTusYOMMDINiTo75ckYJtMteVUGQPWyMw9pYc=;
+ b=yLiMYfHAFuJaGTYSgxJmyUO2t0yHB2p5WoNSUjq7G5Ux4senqfRrHtirTTvAh2f/NY
+ pEd2mm9JMvn3ouTP3Qwfqqms/EGTsgHBYz4MpZBBLlhTFL5qm8wiivbD5Nwp0L0OUMZx
+ otFqlgsJX0XwHB3TTS4SpRGtx1V7wkWNiIaD8jVQw2g0bxnGi9N4u591WsXBa0OSbeG1
+ p3WztRmXXjU5TSIymrq6uTwURo7oTPWcFoIeMmGWv6uYhQgW8wCimzFSneUi/tTTNBXN
+ oJZeD0LslEq7bKDSgSQlpSTdcUp3zPWu6vJOl1QZ4JAZfCmzOaletj8N+T/hzqdr4hqj
+ OY7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737034457; x=1737639257;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WhHwRfx3fwinWLlRFAjhOjhT41Zezy3hJ14zMtGLbeE=;
- b=D5a6HA+7XmKsoXgUuhAneYuykBC9Vu/tOOvl9fqGPiKgmA7UFJ5SKb7h11K+1elftJ
- khmGTPOD3LI6Kp30P+PnveoaOUZ4ZLCF/aZK3AS32cGy/OoyOuLe0yaCN1u49hpNci+g
- CPRwoaGTIOgodtT1idOnQzhvzuUzI8e9vTM6bYiUyUfLqjJQyaY7elEwX6uWwc7BToNU
- p7nUK//OZKxLHJkkgRRTIgiVJIDhoPP6UIfOcmBsI/MeBcMWCzaxgAmHOwZW51CJmhD6
- 1DlsRcTF3lvZe2T4R+063+x5XkxKt4AG3FPU98+hNeHgZRWh68bAYe9WiPldoqp/RJxf
- MN5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVXinJ5gIdTlrSERgWDthW5GqxYp8n4NmCkFCNiysa/mOCXmZ232iVgUl61A+lvu6j3GjOpZFg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0EtAD39JpxxXsqHfveazNuGckMdENlG6TBZNerLC0qrqnmciP
- XAZmwtkycaRuoT4s5NTy7mNQQZsI93mX0PqGjDryXzYynk7A/qENJ5ZTnBUHQpEZkjCcH4rGz7a
- VIzvh5j2EwHQYhlNVbeX+LB5/1I4MWsy6Ie5A0e1KVGZsnAQFqvQF6Z3uaQ26XTXGqKU=
-X-Gm-Gg: ASbGncvITAU2o4CPAf4F246sTFkKqr3xkE6CByl8+v1HwwrUeVTEzw2AxgsmR12DSvn
- lD9MvaBHd96CKDEIDmA6CRhNHPFtipmRco/fwZylPWQGGWJUQeYvT7/U1Ciz187+rO0su8vSQt7
- S91h9KHU5+NvyLnKZbDG4UVtIHp8vYQPN8Pto/GK8MgK6KzSkygoUN4zDGcdoisdy7ewxNe3VQS
- 4i+IMbGTtJLL7A26sCCvM6GYKtfyq/pPYscW3YJIWcj1VOH9qOuj4TNY5zN2G5MTtOpprOhdpdo
- qGboxE+YQfnb8w0oUZYDoGgwnucwATShjeh19RdfHJTr
-X-Received: by 2002:a17:907:7f08:b0:aaf:c27e:12e9 with SMTP id
- a640c23a62f3a-ab2ab709a68mr2676860966b.14.1737034456825; 
- Thu, 16 Jan 2025 05:34:16 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGjbqkV+sfiEujiXa3nnFVOxwISXYGUAlTZr9idHd/HWk+EiAUIYUZ9su/Dr4edAQ9s7R4m3w==
-X-Received: by 2002:a17:907:7f08:b0:aaf:c27e:12e9 with SMTP id
- a640c23a62f3a-ab2ab709a68mr2676859066b.14.1737034456413; 
- Thu, 16 Jan 2025 05:34:16 -0800 (PST)
-Received: from ?IPV6:2a02:3035:6e0:18b7:2225:e8f4:a4b5:e79?
- ([2a02:3035:6e0:18b7:2225:e8f4:a4b5:e79])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab2c95b1207sm912606566b.153.2025.01.16.05.34.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jan 2025 05:34:15 -0800 (PST)
-Message-ID: <8251256c-d1d6-478c-aa2c-6dcb8f5e4c12@canonical.com>
-Date: Thu, 16 Jan 2025 14:34:13 +0100
+ d=1e100.net; s=20230601; t=1737036075; x=1737640875;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=buYPNjZTusYOMMDINiTo75ckYJtMteVUGQPWyMw9pYc=;
+ b=AxEEBM2dvYYaZUKXsKGAzY6Ua16kktLI+I0xkPPxtiw+Se3J7oXwAQ633T9T9OWCfQ
+ HWzGm5uqM450GuU+crCfSXcJYpog1TwNvH2Adnj3iaQo/bEs65HvWwqYh15+jqVeDCX4
+ 3sbifTejqaM0sjnD8nYcu7CFwJcAuvlt0cQGhTYlxiL5gXf/SpeK9sWz9U4LMXpzR0on
+ Muy3rb6t2XOeS/wthlNj5FUR/Dz9KanCj7cUiJJb1iU21t0YRh3GbkXj5YoFLRG3p80T
+ LdYotqpk0R7eHo8YuFeHLFJSteIZbAwK6AGMbuovvGRjgkkLqzw6Frhno3YnrSkqChd4
+ 6sLQ==
+X-Gm-Message-State: AOJu0YzvncQq3WkDtgLSpYi3V46LmaLawylZWYhIlX/tfFr5oM3aBomM
+ MkFVPt0OG/mtSF8fxg1X8hH3GErvdQfV7BnaeMHJLK2YaKppKjgJ8QGOMv3VHiuRO/DGfBbkjX5
+ sgkONdWilKIEgD7ERGTnVoWTKqW6C3I6WBIn4jg==
+X-Gm-Gg: ASbGncstejSJxwTbbNzV+S2MAHIng7VqhRa1wIeUZbSS/HBqCUanrrYlLKpqdOVmu/s
+ XAZ1k4m3sei1qyv1FDQ2O2z0N+XZ+zWHumhYcqA==
+X-Google-Smtp-Source: AGHT+IGSIRZrb/dkXJVtbstRv4Zn+RV8V1vgOTLNkUrn7JxaBWNsJRXTqJZhy1nG3fJP5kTuInHsGRoMp2Nt4IHaf50=
+X-Received: by 2002:a05:690c:b04:b0:6ef:59ef:f194 with SMTP id
+ 00721157ae682-6f531203885mr248990347b3.4.1737036074579; Thu, 16 Jan 2025
+ 06:01:14 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] acpi: don't fill FADT, MADT if CONFIG_QFW_ACPI=y
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de
-References: <20241220003759.89252-1-heinrich.schuchardt@canonical.com>
- <CALNFmy3ca5Z_Dr=1dzK8F4_+YWK4LtzK8Pq9VdNKMKS2kjWStg@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CALNFmy3ca5Z_Dr=1dzK8F4_+YWK4LtzK8Pq9VdNKMKS2kjWStg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20250114152022.933662-1-raymond.mao@linaro.org>
+ <20250114152022.933662-2-raymond.mao@linaro.org>
+In-Reply-To: <20250114152022.933662-2-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 16 Jan 2025 16:00:38 +0200
+X-Gm-Features: AbW1kvZvnNhBhAkAo1oTCv_v8lKswXKxh8P0xbnYeZ_GsWWTHYKPrtfTfKg6fRM
+Message-ID: <CAC_iWjLR0JgVLQ8YnFvDztfHNs3=0EXQf-8DCiO7-KesagrU1g@mail.gmail.com>
+Subject: Re: [PATCH v5 2/3] tcg2: decouple eventlog size from efi
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Levi Yun <yeoreum.yun@arm.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Adriano Cordova <adrianox@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Eddie James <eajames@linux.ibm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Tim Harvey <tharvey@gateworks.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,70 +99,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20.12.24 07:30, Patrick Rudolph wrote:
-> On Fri, Dec 20, 2024 at 1:38 AM Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> When using the ACPI tables supplied by QEMU, we don't need to build the
->> FADT and MADT tables in U-Boot.
->>
->> This patch avoids a build failure
->>
->>      make qemu-riscv64_smode_defconfig acpi.config
->>
->>      riscv64-linux-gnu-ld.bfd: lib/acpi/acpi_table.o:
->>      in function `acpi_write_fadt':
->>      lib/acpi/acpi_table.c:265:(.text.acpi_write_fadt+0x15c):
->>      undefined reference to `acpi_fill_fadt'
->>
->>      riscv64-linux-gnu-ld.bfd: lib/acpi/acpi_table.o:
->>      in function `acpi_write_madt':
->>      lib/acpi/acpi_table.c:294:(.text.acpi_write_madt+0x52):
->>      undefined reference to `acpi_fill_madt'
->>
->> Fixes: f5f7962091e4 ("acpi: x86: Write FADT in common code")
->> Fixes: 4a3fc0f525da ("acpi: x86: Move MADT to common code")
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   lib/acpi/acpi_table.c | 4 ++++
->>   1 file changed, 4 insertions(+)
->>
->> diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
->> index 150f75027a5..c0ed24984af 100644
->> --- a/lib/acpi/acpi_table.c
->> +++ b/lib/acpi/acpi_table.c
->> @@ -273,7 +273,9 @@ int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
->>          return acpi_add_fadt(ctx, fadt);
->>   }
->>
->> +#ifndef CONFIG_QFW_ACPI
->>   ACPI_WRITER(5fadt, "FADT", acpi_write_fadt, 0);
->> +#endif
->>
->>   int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
->>   {
->> @@ -308,7 +310,9 @@ int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
->>          return 0;
->>   }
->>
->> +#ifndef CONFIG_QFW_ACPI
->>   ACPI_WRITER(5madt, "MADT", acpi_write_madt, 0);
->> +#endif
->>
->>   void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
->>                        int port_type, int port_subtype,
->> --
->> 2.47.1
->>
-> 
-> Anything wrong with the patch series send Nov 14 2024 that addressed
-> this issue as well?
-> 
-> Reviewed-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-
-Could you, please, provide a link?
-
-Best regards
-
-Heinrich
-
+On Tue, 14 Jan 2025 at 17:20, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Move default eventlog size from efi to tpm for using in both
+> efi and measured boot.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v5
+> - Move eventlog size kconfig from EFI to TPM2, so that it can be used by
+>   both EFI and MEASURED_BOOT.
+>
+>  doc/usage/measured_boot.rst |  1 -
+>  drivers/tpm/Kconfig         |  9 +++++++++
+>  include/efi_tcg2.h          |  2 --
+>  lib/efi_loader/Kconfig      |  9 ---------
+>  lib/efi_loader/efi_tcg2.c   | 15 ++++++++-------
+>  5 files changed, 17 insertions(+), 19 deletions(-)
+>
+> diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
+> index 05c439e9ac..488dd546f1 100644
+> --- a/doc/usage/measured_boot.rst
+> +++ b/doc/usage/measured_boot.rst
+> @@ -24,7 +24,6 @@ Requirements
+>
+>  * A hardware TPM 2.0 supported by an enabled U-Boot driver
+>  * CONFIG_EFI_TCG2_PROTOCOL=y
+> -* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=y
+>  * optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y will measure the loaded DTB
+>    in PCR 1
+>
+> diff --git a/drivers/tpm/Kconfig b/drivers/tpm/Kconfig
+> index d59102d9a6..01bc686d36 100644
+> --- a/drivers/tpm/Kconfig
+> +++ b/drivers/tpm/Kconfig
+> @@ -209,6 +209,15 @@ config TPM2_MMIO
+>           to the device using the standard TPM Interface Specification (TIS)
+>           protocol.
+>
+> +config TPM2_EVENT_LOG_SIZE
+> +       int "EventLog size"
+> +       depends on TPM_V2
+> +       default 65536
+> +       help
+> +         Define the size of the EventLog. Note that this is going to be
+> +         allocated twice. One for the eventlog it self and one for the
+> +         configuration table that is required from the TCG2 spec
+> +
+>  endif # TPM_V2
+>
+>  endmenu
+> diff --git a/include/efi_tcg2.h b/include/efi_tcg2.h
+> index 8dfb1bc952..7ed8880991 100644
+> --- a/include/efi_tcg2.h
+> +++ b/include/efi_tcg2.h
+> @@ -28,8 +28,6 @@
+>  #define EFI_TCG2_MAX_PCR_INDEX 23
+>  #define EFI_TCG2_FINAL_EVENTS_TABLE_VERSION 1
+>
+> -#define TPM2_EVENT_LOG_SIZE CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE
+> -
+>  typedef u32 efi_tcg_event_log_bitmap;
+>  typedef u32 efi_tcg_event_log_format;
+>  typedef u32 efi_tcg_event_algorithm_bitmap;
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index c46ffe3a9d..d703e901ed 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -437,15 +437,6 @@ config EFI_TCG2_PROTOCOL
+>           Provide a EFI_TCG2_PROTOCOL implementation using the TPM hardware
+>           of the platform.
+>
+> -config EFI_TCG2_PROTOCOL_EVENTLOG_SIZE
+> -       int "EFI_TCG2_PROTOCOL EventLog size"
+> -       depends on EFI_TCG2_PROTOCOL
+> -       default 65536
+> -       help
+> -               Define the size of the EventLog for EFI_TCG2_PROTOCOL. Note that
+> -               this is going to be allocated twice. One for the eventlog it self
+> -               and one for the configuration table that is required from the spec
+> -
+>  config EFI_TCG2_PROTOCOL_MEASURE_DTB
+>         bool "Measure DTB with EFI_TCG2_PROTOCOL"
+>         depends on EFI_TCG2_PROTOCOL
+> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+> index a15c73162e..6dba8b1406 100644
+> --- a/lib/efi_loader/efi_tcg2.c
+> +++ b/lib/efi_loader/efi_tcg2.c
+> @@ -111,7 +111,7 @@ static efi_status_t tcg2_agile_log_append(u32 pcr_index, u32 event_type,
+>         /* if ExitBootServices hasn't been called update the normal log */
+>         if (!event_log.ebs_called) {
+>                 if (event_log.truncated ||
+> -                   event_log.pos + event_size > TPM2_EVENT_LOG_SIZE) {
+> +                   event_log.pos + event_size > CONFIG_TPM2_EVENT_LOG_SIZE) {
+>                         event_log.truncated = true;
+>                         return EFI_VOLUME_FULL;
+>                 }
+> @@ -124,7 +124,7 @@ static efi_status_t tcg2_agile_log_append(u32 pcr_index, u32 event_type,
+>                 return ret;
+>
+>         /* if GetEventLog has been called update FinalEventLog as well */
+> -       if (event_log.final_pos + event_size > TPM2_EVENT_LOG_SIZE)
+> +       if (event_log.final_pos + event_size > CONFIG_TPM2_EVENT_LOG_SIZE)
+>                 return EFI_VOLUME_FULL;
+>
+>         log = (void *)((uintptr_t)event_log.final_buffer + event_log.final_pos);
+> @@ -822,12 +822,12 @@ static efi_status_t create_final_event(void)
+>          * EFI_TCG2_GET_EVENT_LOGS need to be stored in an instance of an
+>          * EFI_CONFIGURATION_TABLE
+>          */
+> -       ret = efi_allocate_pool(EFI_ACPI_MEMORY_NVS, TPM2_EVENT_LOG_SIZE,
+> +       ret = efi_allocate_pool(EFI_ACPI_MEMORY_NVS, CONFIG_TPM2_EVENT_LOG_SIZE,
+>                                 &event_log.final_buffer);
+>         if (ret != EFI_SUCCESS)
+>                 goto out;
+>
+> -       memset(event_log.final_buffer, 0xff, TPM2_EVENT_LOG_SIZE);
+> +       memset(event_log.final_buffer, 0xff, CONFIG_TPM2_EVENT_LOG_SIZE);
+>         final_event = event_log.final_buffer;
+>         final_event->number_of_events = 0;
+>         final_event->version = EFI_TCG2_FINAL_EVENTS_TABLE_VERSION;
+> @@ -913,7 +913,8 @@ static efi_status_t efi_init_event_log(void)
+>         if (tcg2_platform_get_tpm2(&dev))
+>                 return EFI_DEVICE_ERROR;
+>
+> -       ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA, TPM2_EVENT_LOG_SIZE,
+> +       ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA,
+> +                               CONFIG_TPM2_EVENT_LOG_SIZE,
+>                                 (void **)&event_log.buffer);
+>         if (ret != EFI_SUCCESS)
+>                 return ret;
+> @@ -922,7 +923,7 @@ static efi_status_t efi_init_event_log(void)
+>          * initialize log area as 0xff so the OS can easily figure out the
+>          * last log entry
+>          */
+> -       memset(event_log.buffer, 0xff, TPM2_EVENT_LOG_SIZE);
+> +       memset(event_log.buffer, 0xff, CONFIG_TPM2_EVENT_LOG_SIZE);
+>
+>         /*
+>          * The log header is defined to be in SHA1 event log entry format.
+> @@ -939,7 +940,7 @@ static efi_status_t efi_init_event_log(void)
+>          * platforms can use different ways to do so.
+>          */
+>         elog.log = event_log.buffer;
+> -       elog.log_size = TPM2_EVENT_LOG_SIZE;
+> +       elog.log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
+>         rc = tcg2_log_prepare_buffer(dev, &elog, false);
+>         if (rc) {
+>                 ret = (rc == -ENOBUFS) ? EFI_BUFFER_TOO_SMALL : EFI_DEVICE_ERROR;
+> --
+> 2.25.1
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
