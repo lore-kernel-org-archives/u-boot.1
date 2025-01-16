@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA212E77188
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 04:05:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F291FC02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 04:05:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58FA58033D;
-	Thu, 16 Jan 2025 05:05:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A803380719;
+	Thu, 16 Jan 2025 05:05:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737000339;
-	bh=BC1hFDQ6cqse32agj7/r9fvQHJYYyW+urmYbe/vGRAI=;
+	s=phobos-20191101; t=1737000341;
+	bh=pWJYL6rCJoOmbmTLyt3dMXQSru86QttghhLVvT0+Sfo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZigVza5mRXUpI7B0bXbkSizqCZqrpMfF34A7p1IKDpOmlaK6b+JIpD9BuPMWzPvIW
-	 mbpMKu/fUoNksJREZu/bvMlWf4f+VgoFkUHgpxnQEq3lSZgVvTZPFDWvBq6TvCNSqy
-	 DaVr1RpwoStBzQKswWD6iXCD6LHZqgYTGWhVhqC736Tsnk389+7IdoGj66NXfopqOY
-	 afbIb2rtqKVRt5iVqVsLdNd0HUPB/BZCoHvnask44Nl2ot/3F97DKyMQH4IdDDOeKJ
-	 76tdbQnqhF/nfNIJrpsvEEzg9kMcb8yEvLOCVg1k1hWGIH63trYYla8Q3mj5yIh3/Z
-	 3476NiDiKi+fw==
+	b=VABX+BS7/b0k/UbsbSF+doBPvv8LWe8ZJjj8J/zS54GLORetaGW3bWH6V430Tqqam
+	 /w5vc0K4DyrBRWeYKP2bJBq4GMLnXAgFyw9vyCsOH79F7OyCaGauViLgHadNaWXbAB
+	 LsqQ9zdro8RJMYfShbi8+WuLJp7+LNpiVrcWI5ecl6giNeOhyHAIiMtwF2LIQUW6yU
+	 TzlroH1HmpOgVHiUEw/fcgJ6lFMQVKpKOsnpNgKumA1dyGOFftjxzo91/5Vja4BfMo
+	 2oke2ESDdVnNW+njIZPpyWAh6EvlRHSJttl9kqoqqtFScduCK3lpdzu6mn6ykx5LTQ
+	 L2R9S9VOcizVQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FF4E806D4; Thu, 16 Jan 2025 05:05:37 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 3B7F1806FE; Thu, 16 Jan 2025 05:05:39 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83F8E80658
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 05:05:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EA5380214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 05:05:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="gqa2Jkpp"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Vv+sBAQL"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9AC5810936A0E; Thu, 16 Jan 2025 05:05:33 +0100 (CET)
+ with ESMTPSA id 2BABB1093C3BD; Thu, 16 Jan 2025 05:05:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737000334;
+ t=1737000336;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=BC1hFDQ6cqse32agj7/r9fvQHJYYyW+urmYbe/vGRAI=;
- b=gqa2JkppDz+kvPT8fCMnCAyYx1wI5HQsac/JFXiWLS3Q38/ghpG0XPMLrxjzxQ4hWEfpE1
- /p3hLI/mpw5FAMeTCGQ9SyqIt+h6+RN4kIe5CqoPWrCYS1I3YdvNxn98YsbMzyBhfq4n86
- c87bVeK3I5dcsHXI9fYS+qRjpDThOfl8UYvhkivQtFHX04hSgQIQXNjJEEfI4fdfqt7+9O
- pWxHb0gB6elYrHiwShVNZWl+aLaMVcoGDmSLDrQcvbkdReKmHwzPzU4yh+J09ptqo7vRH4
- 5Htbzbo9H/yHckTZvlFaQTczNhdOzSHizbwLvCC+kSKp+PRTAZpAPMi+qCaNZA==
+ bh=pWJYL6rCJoOmbmTLyt3dMXQSru86QttghhLVvT0+Sfo=;
+ b=Vv+sBAQLosHapkKDnPS3uvEueJ8HB9wc34nLta0g3IZM4ibbAYWvOgnPy9osTDw/G91sQG
+ 8Vwv2icJ+8fHk4wUI0NNnIvB4Bo0UPTtX4kZd8GVwF+eppJQpvUXsbtyMhuVxBxeGKYt5s
+ uWDNi4IEtkJ7/4pYllSro5M4tp6FF0y4dn+S9/pZYU/F2M22HM4QjkbZX3lwbWaxTZf8dH
+ wLhBbg+M9kH8PUd05ZpW4sKIklZsCcH5xI26sZZYF644pmwij/UY+UlXVEPRvHyFleVW7P
+ J8U4TPKjk2PRGBDFp+qhsqXb+74xkHff3TcBc3DR3BW6Hvag0o9IVOLHv1vWwg==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
@@ -61,10 +62,10 @@ Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
  Romain Naour <romain.naour@smile.fr>, Simon Glass <sjg@chromium.org>,
  Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
  Ye Li <ye.li@nxp.com>
-Subject: [PATCH 02/13] net: fsl_enetc: Remove ifdef around
+Subject: [PATCH 03/13] net: fsl_enetc: Fold DT MAC address update into
  enetc_set_ierb_primary_mac()
-Date: Thu, 16 Jan 2025 05:03:19 +0100
-Message-ID: <20250116040449.306098-2-marex@denx.de>
+Date: Thu, 16 Jan 2025 05:03:20 +0100
+Message-ID: <20250116040449.306098-3-marex@denx.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250116040449.306098-1-marex@denx.de>
 References: <20250116040449.306098-1-marex@denx.de>
@@ -87,8 +88,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use enetc_is_ls1028() instead of ifdef around enetc_set_ierb_primary_mac()
-and clean up the function. No functional change intended.
+The entire content of the loop can be folded into enetc_set_ierb_primary_mac(),
+do it. This changes the behavior slightly such that the DT is only updated in
+case of a LS1028A, which is the only SoC with ethernet MAC path in DT matching
+"/soc/pcie@1f0000000/ethernet@%x,%x" anyway, so this slight change should have
+no impact.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -107,59 +111,89 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: Ye Li <ye.li@nxp.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/net/fsl_enetc.c | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ drivers/net/fsl_enetc.c | 39 +++++++++++++++++++--------------------
+ 1 file changed, 19 insertions(+), 20 deletions(-)
 
 diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
-index d1414167723..fc51647257e 100644
+index fc51647257e..826b1971bb0 100644
 --- a/drivers/net/fsl_enetc.c
 +++ b/drivers/net/fsl_enetc.c
-@@ -36,29 +36,29 @@ static int enetc_is_ls1028a(struct udevice *dev)
-  * sets the MAC address in IERB registers, this setting is persistent and
-  * carried over to Linux.
-  */
--static void enetc_set_ierb_primary_mac(struct udevice *dev, int devfn,
--				       const u8 *enetaddr)
--{
--#ifdef CONFIG_ARCH_LS1028A
--/*
-- * LS1028A is the only part with IERB at this time and there are plans to change
-- * its structure, keep this LS1028A specific for now
-- */
- #define IERB_BASE		0x1f0800000ULL
+@@ -40,12 +40,16 @@ static int enetc_is_ls1028a(struct udevice *dev)
  #define IERB_PFMAC(pf, vf, n)	(IERB_BASE + 0x8000 + (pf) * 0x100 + (vf) * 8 \
  				 + (n) * 4)
  
--static int ierb_fn_to_pf[] = {0, 1, 2, -1, -1, -1, 3};
--
-+static void enetc_set_ierb_primary_mac(struct udevice *dev, int devfn,
-+				       const u8 *enetaddr)
-+{
-+	static int ierb_fn_to_pf[] = {0, 1, 2, -1, -1, -1, 3};
+-static void enetc_set_ierb_primary_mac(struct udevice *dev, int devfn,
+-				       const u8 *enetaddr)
++static void enetc_set_ierb_primary_mac(struct udevice *dev, void *blob)
+ {
+-	static int ierb_fn_to_pf[] = {0, 1, 2, -1, -1, -1, 3};
++	static int ierb_fn_to_pf[] = { 0, 1, 2, -1, -1, -1, 3 };
++	struct pci_child_plat *ppdata = dev_get_parent_plat(dev);
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	const u8 *enetaddr = pdata->enetaddr;
  	u16 lower = *(const u16 *)(enetaddr + 4);
  	u32 upper = *(const u32 *)enetaddr;
++	int devfn, offset;
++	char path[256];
  
--	if (ierb_fn_to_pf[devfn] < 0)
--		return;
--
--	out_le32(IERB_PFMAC(ierb_fn_to_pf[devfn], 0, 0), upper);
--	out_le32(IERB_PFMAC(ierb_fn_to_pf[devfn], 0, 1), (u32)lower);
--#endif
-+	if (enetc_is_ls1028a(dev)) {
-+		/*
-+		 * LS1028A is the only part with IERB at this time and
-+		 * there are plans to change its structure, keep this
-+		 * LS1028A specific for now.
-+		 */
-+		if (ierb_fn_to_pf[devfn] < 0)
-+			return;
+ 	if (enetc_is_ls1028a(dev)) {
+ 		/*
+@@ -53,24 +57,30 @@ static void enetc_set_ierb_primary_mac(struct udevice *dev, int devfn,
+ 		 * there are plans to change its structure, keep this
+ 		 * LS1028A specific for now.
+ 		 */
++		devfn = PCI_FUNC(ppdata->devfn);
 +
-+		out_le32(IERB_PFMAC(ierb_fn_to_pf[devfn], 0, 0), upper);
-+		out_le32(IERB_PFMAC(ierb_fn_to_pf[devfn], 0, 1), (u32)lower);
-+	}
+ 		if (ierb_fn_to_pf[devfn] < 0)
+ 			return;
+ 
+ 		out_le32(IERB_PFMAC(ierb_fn_to_pf[devfn], 0, 0), upper);
+ 		out_le32(IERB_PFMAC(ierb_fn_to_pf[devfn], 0, 1), (u32)lower);
++
++		snprintf(path, 256, "/soc/pcie@1f0000000/ethernet@%x,%x",
++			 PCI_DEV(ppdata->devfn), PCI_FUNC(ppdata->devfn));
++	} else {
++		return;
+ 	}
++
++	offset = fdt_path_offset(blob, path);
++	if (offset >= 0)
++		fdt_setprop(blob, offset, "mac-address", pdata->enetaddr, 6);
  }
  
  /* sets up primary MAC addresses in DT/IERB */
+ void fdt_fixup_enetc_mac(void *blob)
+ {
+-	struct pci_child_plat *ppdata;
+-	struct eth_pdata *pdata;
+ 	struct udevice *dev;
+ 	struct uclass *uc;
+-	char path[256];
+-	int offset;
+-	int devfn;
+ 
+ 	uclass_get(UCLASS_ETH, &uc);
+ 	uclass_foreach_dev(dev, uc) {
+@@ -78,18 +88,7 @@ void fdt_fixup_enetc_mac(void *blob)
+ 		    strcmp(dev->driver->name, ENETC_DRIVER_NAME))
+ 			continue;
+ 
+-		pdata = dev_get_plat(dev);
+-		ppdata = dev_get_parent_plat(dev);
+-		devfn = PCI_FUNC(ppdata->devfn);
+-
+-		enetc_set_ierb_primary_mac(dev, devfn, pdata->enetaddr);
+-
+-		snprintf(path, 256, "/soc/pcie@1f0000000/ethernet@%x,%x",
+-			 PCI_DEV(ppdata->devfn), PCI_FUNC(ppdata->devfn));
+-		offset = fdt_path_offset(blob, path);
+-		if (offset < 0)
+-			continue;
+-		fdt_setprop(blob, offset, "mac-address", pdata->enetaddr, 6);
++		enetc_set_ierb_primary_mac(dev, blob);
+ 	}
+ }
+ 
 -- 
 2.45.2
 
