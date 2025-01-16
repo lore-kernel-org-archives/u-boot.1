@@ -4,81 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0EDFC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 23:28:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D13FC02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 23:28:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47F1B80716;
-	Fri, 17 Jan 2025 00:28:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9B01E80717;
+	Fri, 17 Jan 2025 00:28:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RqHqPGTR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EQRvyrJ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D9F880717; Fri, 17 Jan 2025 00:28:08 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 9780A8073F; Fri, 17 Jan 2025 00:28:49 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5DE180703
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:28:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7245B80703
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:28:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b6f0afda3fso162780985a.2
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:28:05 -0800 (PST)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6dd43b08674so15665736d6.3
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:28:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737070084; x=1737674884; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737070126; x=1737674926; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bfN68DL8ti8+NIcRqrD45TSVD0MZHGSQILbCQggZyFE=;
- b=RqHqPGTROLfzxuDAOqnVL+k7JpMOJBl9/rhTqAz6znwhwA+4woRjH7eiyUEI0hXU7S
- h3SxRATocyS7LDX25lONOhinJo8lvapC6EmmAUdGRJd1zwq4PfcF2DTODU7z6mD1ewRJ
- Qhwa8tGL3tpKyATJtWxUZy/VAQ7ikUmWVNw4s=
+ bh=uYGPigbvHV3y3/SGux3oEoSVecgrmZh11F0XD1zwUgE=;
+ b=EQRvyrJ4iHUMViCPzlEduQbBksx6zcqNamwbIhVyJZd0Db+WBG58jvsHrwoo+3pFTw
+ Q1SEwBZ/NxqXH7SLtbAIqwz8ayzl/SjkwNzsjDC39NFuDNi2ZOjMLO8Cr4dH1tAZYM3l
+ 3LsvdoSaYmPm4V+7THGgCRd4K6UpkqxUnaPss=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737070084; x=1737674884;
+ d=1e100.net; s=20230601; t=1737070126; x=1737674926;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bfN68DL8ti8+NIcRqrD45TSVD0MZHGSQILbCQggZyFE=;
- b=J6+tmvqwS98IIsXKf5JN/JWE821wWtw4BTuSjwRu24ILB4ajmzPKpZWsu5AyFVerOx
- kN9F5SKCq4Qfa/mkFIUTn8wJHqeTPHOfQaNOXAdENYSlEfTpPW1HYH2LEEjyCPjhbT9n
- YkCkifms4Z5/CUuFuZd4AwASJvZNNX4bzg/w3udhmcWmrdAuTcdETUWKlXBxS9KtwSED
- T8KoBn/T9GdfDDAy9HDPsbyDjdzZ3wszxYOa20cbJv2RZJPz612gknv8azMWFa9hU4oV
- KWuLdVvEsWtHedDdh/KrOruLrrI7xbvainrz3e8Yq4ZMfgy8sI21Cs1xO32TrSpQvA9T
- J1Wg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVEOaDDgaK85Q0PaZFwTs0aSmn1u8dkI6cE+hTWTQfmQGAKosOFWnEhrPIOP3G5NaVhYzJUpDQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPztcKze+IFsf15sPH+9AeVf8OB2oL/l5hlZ7eV2KWin0iQlrQ
- mzoECBBDCK0ZShyARDpSbX7Y2MIx+FYo50L+/TaiW1djc7feMXlhpWqERsp82m0=
-X-Gm-Gg: ASbGncsw9+CaIBCVF1IcTg4pmYNU5eCXETkH6y5tg6OPsk7cd9KFMrFXZVr1pWOOrAB
- 1E/9sMUAz6lqFaRzokqUrUluNTfz3B1kKfSdDA07Z6lwZT51hPG/3EyzSdTUREXJeEcnnDhF4rI
- M20JLPUS7aUtKoz3U/gFoWWrKDQ/+EN5+v75IbWfi2ZNLRQyCrxc+TyHbUrVUBcy99rmSTahbTD
- RGg59jxIx19Kp3Swmshg6dHdc1vSfDzY4AYmcjnS/VGMbYTuO8Aww==
-X-Google-Smtp-Source: AGHT+IEShGMBB56QsGCuOZQfTvZDZag1owYKFv7ngTnj2V+HsiFcA9HxRnKl4iukAsuyofiSNRvJ4w==
-X-Received: by 2002:a05:620a:2a0c:b0:7b6:d4df:28a7 with SMTP id
- af79cd13be357-7be6324d3f2mr100642685a.38.1737070084630; 
- Thu, 16 Jan 2025 15:28:04 -0800 (PST)
+ bh=uYGPigbvHV3y3/SGux3oEoSVecgrmZh11F0XD1zwUgE=;
+ b=Yf0ozWYYWLi82EA95I4pG1/dNtqRaVLmj3dc0ABGwp8kuzDH2eCrlr7JP2dNMzeBdu
+ blMnCLy582jcKzDyP8IBQMfF2u2yEoXG81w1SwBJ9ZdbpY0bvR3i2qgH9rX9NiDyrq5V
+ PX4oHfa7sAa4GfOQUSzmZ/F60/w9k9bL2rDHwsexcpG5eU8MAQ96A9VXeLVonqGX4Efm
+ MwaIEjYG/yZcesbcadadyFrNGRnihsEK4HVXg+dLrdUgnhLBpOewCX9slDRoQeKWkN4O
+ KsqTtsNmIUYt347dSA8Nx0lsgBR1k/o4VPbF15LMmhVl3EO7uN7Tw14SC/qYXhSxsVEr
+ BbLg==
+X-Gm-Message-State: AOJu0YyR1uJPrfZV2JmxBcxsyHsQiKsawl8dNQpdv6vbpL2LYHhJ/KUA
+ IxIaNlovDyu3qHH5DWTsKyeiBtrf+NsQ8Spf1uh/9hc/EYeHDttkT7IVcesAHsI=
+X-Gm-Gg: ASbGncu7+TzHcEI2k6K/LHzjaRsuYqMK+P4egMppXa2GMM8zQKyfK2itBhPP4StSFX2
+ 58PYJA3gAaqmpBZ1qugGaLJQpuSAezgfpckzLmlCKd0DO75MM42Lov/kjoN+fgHiH8V2hSUb486
+ Adl6m4FtFLaZe7cwsSj7XghummR9vXGqEByky36Tyo+2T/cfjpkO8PV/fD+Te+hnLK8OlQDpBvC
+ aZ7KXxx+Kjr7KsoFNmDDMnPWkWxf08PtB6Ovrsgqo+C0qUs+I1b5A==
+X-Google-Smtp-Source: AGHT+IGld09DOqki1m+p+sM2s6o+JM66KCdmnIxp/ciQXLa3YVrdufJoJUXlYYkv8vLh0MCqr9VViA==
+X-Received: by 2002:a05:6214:3197:b0:6d8:ab7e:e554 with SMTP id
+ 6a1803df08f44-6e1b222f1f3mr14165106d6.34.1737070126324; 
+ Thu, 16 Jan 2025 15:28:46 -0800 (PST)
 Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be614d98e6sm56823685a.84.2025.01.16.15.28.01
+ 6a1803df08f44-6e1afcd3753sm5370266d6.73.2025.01.16.15.28.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 15:28:03 -0800 (PST)
-Date: Thu, 16 Jan 2025 17:27:59 -0600
+ Thu, 16 Jan 2025 15:28:45 -0800 (PST)
+Date: Thu, 16 Jan 2025 17:28:40 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: uboot-imx@nxp.com, peng.fan@nxp.com, y.moog@phytec.de,
- u-boot@lists.denx.de, marex@denx.de, Fabio Estevam <festevam@denx.de>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH] imx8m: Guard binman nodes with CONFIG_OPTEE
-Message-ID: <20250116232759.GM3476@bill-the-cat>
-References: <20250116231032.2312636-1-festevam@gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ion Agorria <ion@agorria.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH v3 00/46] pxe: Support read_all() for extlinux and PXE
+Message-ID: <20250116232840.GN3476@bill-the-cat>
+References: <20241206023626.2456858-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Y7hz0DjCDrqU6TZ7"
+ protocol="application/pgp-signature"; boundary="z0rn8UmduGN2lUFz"
 Content-Disposition: inline
-In-Reply-To: <20250116231032.2312636-1-festevam@gmail.com>
+In-Reply-To: <20241206023626.2456858-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,61 +118,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Y7hz0DjCDrqU6TZ7
+--z0rn8UmduGN2lUFz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 16, 2025 at 08:10:32PM -0300, Fabio Estevam wrote:
+On Thu, Dec 05, 2024 at 07:35:39PM -0700, Simon Glass wrote:
 
-> From: Fabio Estevam <festevam@denx.de>
+> This series implements read_all() so that it is possible to read all the
+> files relating to a bootflow, make adjustments and then boot.
 >=20
-> Guard binman nodes with CONFIG_OPTEE to fix the following error
-> when building without optee support:
+> Unfortunately quite a few things stand in the way, so this series
+> finishes off several pending items: zboot without CONFIG_CMDLINE,
+> required support in pxe_utils and the differing code in the extlinux and
+> PXE bootmeths. There is very little new code, but quite a lot of
+> refactoring.
 >=20
->   BINMAN  .binman_stamp
-> Image 'image' has faked external blobs and is non-functional: tee.bin
+> The bootm, booti and bootz commands have all been refactored previously,
+> so that they can operate without needing CONFIG_CMDLINE to be enabled.
+> At the, time, zboot was left alone, since it is x86-specific and a bit
+> more trouble.
 >=20
-> Image 'image' is missing optional external blobs but is still functional:=
- tee-os
+> However it turns out that the booti support doesn't work with compressed
+> booti images, so this series resolved that problem too.
 >=20
-> /binman/section/fit/images/tee/tee-os (tee.bin):
->    See the documentation for your board. You may need to build Open Porta=
-ble
->    Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to/t=
-ee.bin
+> This series adds a programatic API for zboot and uses the forthcoming
+> bootstd 'image list' to collect information from an extlinux file. It is
+> therefore possible to parse the file, load the resulting images and then
+> examine/adjust the resulting bootflow, before booting.
 >=20
-> Some images are invalid
-> make: *** [Makefile:1135: .binman_stamp] Error 103
->=20
-> Reported-by: Tim Harvey <tharvey@gateworks.com>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> The addition of options to extlinux resulted in the PXE and extlinux
+> bootmeth having slightly different features. This is tidied up in this
+> series, with common functions for both. This allows the same features
+> (loading images as a separate step) to be provided for PXE.
 
-Given that the earlier part of the dtsi already guards with OPTEE
-(except for the 'q' variant which doesn't have that entry to start with)
-this seems correct to me.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+To sync up with what I said on IRC, this breaks
+test/py/tests/test_net_boot.py likely due to changes in the output.
 
 --=20
 Tom
 
---Y7hz0DjCDrqU6TZ7
+--z0rn8UmduGN2lUFz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeJlfwACgkQFHw5/5Y0
-tyyHzQwAsOtbmdnC/QQAlCSPk6xYIDRWU+jvOD6ZHv4Z+XQoi0+MYK/L71jBsakM
-6IagCLVkY0NQ1Yp30pJMWtQaOadrLHXHvEallVLA/T8bWTsfQqMD9FC+C5c0lgF1
-G30oghp57l0nRCkPD0oIV79Ku4nC/9YZCpk5jb5Ohq8grqRG3iMtETe6RJj6PMbX
-F1avrle9ns++oy5m44eU/xmIU+w7SM9UXYl2jGvXzCejVd3dWe8At41zQOofhLcf
-udzP4Hz+kcMTyCcfqM1ohV0+WXIzUydCkTpA47N91iE50Vik6uQwLFZwxIiCcYk2
-dkggTj1dGU4A95VmQKzbX8NwG68xrwzUE0NPRXHXGnX/ZjOPNWcHhlfcyXTCRoQe
-vUsDRU6qngrkQcmbdWbMBTWXHhUOONTDC4l046s4SIWcb8VNQdRoirsuQaJbbImP
-BGZ47GDxm+6zp/59UnVM7awzZstN3Ok7iRquXQr8SNuQqvFLybmJ4sWgLwNqBhyt
-hHeHltaP
-=C1Op
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeJligACgkQFHw5/5Y0
+tyzUlAwAmBYX0QioEv2Aw37pTf6rk6BDRj5ybtHEityfAife7Q13QNXwlAgfObMR
+KEXmGeCvCOgGUugrBepLXf4L89+XDFgESYNpc6BP4bAWQOkNiU+ktj4gKhaG6FD9
+je7A4RXfXNUKFaWBapIp04K/EdHZ7wash+l/b8JmjaYaY+ubjiv2PxAMuGSHebkE
+hjVYS7lxeBoCWZz+clN3uYq7mkFEsgu868d7Ym86IDNLzI0ZsxlzZabHGcRHLZ9T
+tRRXPGIddF0vkr817vszxAIXG8ESYH9vElnKgZa+jS7S5EFCj8dvivtLnZk3bkvY
+Dol7Mv+I3u899H6oySA7xvUDHTfscYMcLSRLKjWJz9f0jyQcUXsPMPDgw4tYOS5/
+lOfs9jZ2q0rdixDk0XysCe2tCxAYphdwI1/RdHrdTUWfuhiltgz6zX/Np5xVE3QK
+AK81YzjJDf/qwnyYIgHjILbVInznCdCCSCpSQVWhdxZpxUKSxnZD6otxrE0kUKcA
+zheBjXCt
+=3kCS
 -----END PGP SIGNATURE-----
 
---Y7hz0DjCDrqU6TZ7--
+--z0rn8UmduGN2lUFz--
