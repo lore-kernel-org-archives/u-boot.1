@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4587BC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 14:33:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF7ACC02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 14:35:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96ED78022B;
-	Thu, 16 Jan 2025 15:33:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 301CF80708;
+	Thu, 16 Jan 2025 15:35:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ek5PZrn2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O+t1pv1O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CDF580283; Thu, 16 Jan 2025 15:33:07 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id AFDC680703; Thu, 16 Jan 2025 15:35:52 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0159D80214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:33:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 347158022B
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:35:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6dce7263beaso9876356d6.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 06:33:04 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e53c9035003so1606141276.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 06:35:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737037984; x=1737642784; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aVX316p0wsek//GCijrqQTaWvxsun/T+6LZ9EaPxL4c=;
- b=Ek5PZrn2tssOk8hpDPqW74gDZGz4t0ym9jl1eIi72v1O5+t/e7QH4a8LHgfYZL70H7
- 1IQmuJDCh5NvQON11buMsi6qL9EA5Yddxa/EVvOZYLwx+cxyhY+1isCG8DCDkLfN402v
- X0nFWOHcZg71JEZPgTpBDxJGElQaTMUFue65U=
+ d=linaro.org; s=google; t=1737038149; x=1737642949; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z7NoCW5IZy44MUXhOERYpEYbqZ4k7cBFqW/+Z7M3scc=;
+ b=O+t1pv1OdRx3OPltdO0mqhJmQ8pJ5FRX+h9dzXghcI+gzp0teshM3hX+uEC97iFU4w
+ hvkhdObOLiKh6aHBDLQtqy9tRmvRDnTttqZuVJwzF1NqMMUG7Aqakof3wvqXsJ1gQu1R
+ WlEmuBlPn0FDzTb6UUAHjL9IegYzlPs8DCnsaaLOUSKpIbSdI5ZApW2pizjtpLogjoUl
+ uAVuKP3EiQir192Pg7cPK+ZWcPlzPjqTxVi0DG4SfkC7ohznB65xszco40EVe9ahAH+F
+ EX/GTZ7R4vtfDe8F0NSCVf0SAasQiqvTr2JJsvtY7lIraADYWp9POsUxF6tGv5yYSF7s
+ iMNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737037984; x=1737642784;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aVX316p0wsek//GCijrqQTaWvxsun/T+6LZ9EaPxL4c=;
- b=LYPUvWNrP30cRk9p/PzjbG/vRRi60qE1c1nLfaltMq3EF1wOaFyoRrYgjwuo9HdVKb
- YOn9qpP/QRyQWNw7c/nyPv2H8fJUb3yOmD8NSNUdNJ5eP8qwPgR6C9yt42JmXuWKMSXc
- p32xq0GdDCmzf4czAMClKXl3vSQe3DP871e3q5/fE4u1pQDXIOTq5KB3JOe47hZa7aIw
- uN14ARI4sLcG8m6sPCXKBYGZOMKOWTDGqkfz1a1TFijaDIzSFTycC16ZJUTcwC1U01Dh
- 4/k63/wqVNw3TgxqRrzeqc4wiM87v/SuhcdSKoKtUTWNpbxHRH6/LeyPiGosrdLSOgcM
- iDEw==
-X-Gm-Message-State: AOJu0YxqRkhBtzzHcZXL4a0zNlIZu0sXtaFzMVUsg831JFH0CerI4X/3
- eqeB3b+BREUOQou+KHkO8o6s3rnpDCdRDoQXwneCHMPnhopLKJ7UCuf10pFkkAk=
-X-Gm-Gg: ASbGncu+zZ9ulGiqzMcxl66E/ozzpgZAs2BUhmzKXRYCZ+otkjy6OoFOp7IY7+Fb6zX
- Woqxcu6v/nZF9Kb1D17NsyJYAQNE/JSNAV7kZhTORoll5WAgIwza298FtTHpTBzkIrty9fxA4Cn
- FzCTAeuJjfQ0VbOmCOKZOVbFoMys/pm/GUyry9/rpcnKzx7Jy0qE0l6/WVP7X1+A3u3/gH6x19C
- CX41KDSZL51NWr0ObE2Lcq4SIiG+pZFHIKDz2n3JYP7SkBCGaMi8A==
-X-Google-Smtp-Source: AGHT+IEb7MTl2t1rt07RBgrSbkYDvM62xePVMLH+7QWq0dP+gxMY3AnD1k9/6ToeuoQ2dE2FZNHMFQ==
-X-Received: by 2002:a05:6214:3212:b0:6d8:7db7:1f2e with SMTP id
- 6a1803df08f44-6df9b1db07amr571684046d6.14.1737037983841; 
- Thu, 16 Jan 2025 06:33:03 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afc21ce5sm476466d6.52.2025.01.16.06.33.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 06:33:03 -0800 (PST)
-Date: Thu, 16 Jan 2025 08:33:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 6/6] block: Remove "select BLK" from non-block drivers
-Message-ID: <20250116143300.GG3476@bill-the-cat>
-References: <20241220222612.1757884-1-trini@konsulko.com>
- <20241220222612.1757884-7-trini@konsulko.com>
- <2b3e1050-7cbe-4dde-a298-5efb63cb4ebd@cherry.de>
- <20250114165914.GN3476@bill-the-cat>
- <4cb564bb-8c0d-43bf-bd91-04668a1deab2@cherry.de>
- <20250115202029.GC3476@bill-the-cat>
- <240a9f89-2374-46eb-b780-a628c08e2a3e@cherry.de>
+ d=1e100.net; s=20230601; t=1737038149; x=1737642949;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Z7NoCW5IZy44MUXhOERYpEYbqZ4k7cBFqW/+Z7M3scc=;
+ b=aISmwscO31msOX7YeLcDP91o99mjpKUTEWJ9w7CGidUr/i+JAw5inwfm4K4U8ctCFK
+ w6T750aMVRsf+ABDJOvPO3KeXGexZHmwxRJocUWPQHR8QHmStsR3YLPzv0ZdDkuocH86
+ GCiUqpIu6cn8jW9LBunyRzan4u71/kAKLOOYx+DECzTPUgYExxR60GLJ/Rbwf+MfM0pO
+ T37SPfqUjKSKnE20FtksPa5tys+ap0lKU6bc1AnrDAqtlEyS7XQgeyo6amVV26n4B8H7
+ 98VZ5t1jk022POf56A5IV2h+w3q84KiAELMpaTBWvgp09A+6NAYQXAgZP/OpvlLlCXii
+ JLDQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/tFo4SS7d1v+EarV7O/k8ycXCRy90Rvh3dCdV5ZF0gEcFhi40mtPS4vHsFpC78DHwBLrg/Iw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3FH+J5eHzy8ne1n/4rAemxkqnD5kMGAXFtWWsOgUdOXdTopqP
+ mJMWlH/v7vRfK0E79vOJgJRShMI3wazP8tKbaxcmhp8q9Q1UPSa61nik+fq9+ninBrHkUAS2AS0
+ qqqcLrHWI6JARZ7499evj4BwWBelrwzrLzI/2gA==
+X-Gm-Gg: ASbGnctBJWVPA9DnBLhqN6NkNx9+2qlEJDTe251qdtVqUR6uqw4HwArMKNuUC5i7V1X
+ Ykbzt6mjKRVxYsCMNieM9G5Tm+8zGKCQ5IHsVIg==
+X-Google-Smtp-Source: AGHT+IFWABF2oZXzWU/8iLevzrarOElKwjctSQG3VPmf/RvxriI4c4LcKr294RwBhkkvaZyGN4k4StLxz3pBm8AHhk8=
+X-Received: by 2002:a05:690c:4983:b0:6ef:57ad:9d91 with SMTP id
+ 00721157ae682-6f531238d2amr292353217b3.24.1737038148819; Thu, 16 Jan 2025
+ 06:35:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cwrZf967ml7CDN72"
-Content-Disposition: inline
-In-Reply-To: <240a9f89-2374-46eb-b780-a628c08e2a3e@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250114152022.933662-1-raymond.mao@linaro.org>
+ <20250114152022.933662-3-raymond.mao@linaro.org>
+ <CAFLszTh=d=Brcrd-4He0nDZgybjKOdAqqUxvh_z245xjF1giuw@mail.gmail.com>
+In-Reply-To: <CAFLszTh=d=Brcrd-4He0nDZgybjKOdAqqUxvh_z245xjF1giuw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 16 Jan 2025 16:35:12 +0200
+X-Gm-Features: AbW1kvaquEag0-1laYSD5K8MRP09zZDvLyAj9Mpz2Km6jEd3ncydzKPdjY6G_uw
+Message-ID: <CAC_iWjL7y6QyjQtRp6qd_5QxF6aUw+qrhY6snXZ2B-Qiz7Dy1g@mail.gmail.com>
+Subject: Re: [PATCH v5 3/3] tpm: get tpm event log from bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Levi Yun <yeoreum.yun@arm.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Tim Harvey <tharvey@gateworks.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,132 +101,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 15 Jan 2025 at 03:17, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Raymond,
+>
+> On Tue, 14 Jan 2025 at 08:20, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Get tpm event log from bloblist instead of FDT when bloblist is
+> > enabled and valid from previous boot stage.
+> >
+> > As a fallback, when no event log from previous stage is observed
+> > and no user buffer is passed, malloc a default buffer to initialize
+> > the event log.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Remove patch dependency.
+> > - Remove the fallback to FDT when BLOBLIST is selected.
+> > Changes in v3
+> > - Malloc an 8KB buffer when user eventlog buffer does not exist.
+> > Changes in v4
+> > - Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
+> > Changes in v5
+> > - Replace TPM2_EVENT_LOG_SIZE with CONFIG_TPM2_EVENT_LOG_SIZE.
+> > - Add an inline TODO comment.
+> >
+> >  lib/tpm_tcg2.c | 61 ++++++++++++++++++++++++++++++++++----------------
+> >  1 file changed, 42 insertions(+), 19 deletions(-)
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> nit in case you respin again: -ENODEV is for driver model, when there
+> is no device. It is actually handling specially by driver model. So
+> -ENOENT is what I try to use for things that don't exist but aren't
+> devices.
+>
 
---cwrZf967ml7CDN72
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
++1,
 
-On Thu, Jan 16, 2025 at 10:21:36AM +0100, Quentin Schulz wrote:
-> Hi Tom,
->=20
-> On 1/15/25 9:20 PM, Tom Rini wrote:
-> > On Wed, Jan 15, 2025 at 06:49:45PM +0100, Quentin Schulz wrote:
-> > > Hi Tom,
-> > >=20
-> > > On 1/14/25 5:59 PM, Tom Rini wrote:
-> > > > On Tue, Jan 14, 2025 at 02:53:48PM +0100, Quentin Schulz wrote:
-> > > > > Hi Tom,
-> > > > >=20
-> > > > > On 12/20/24 11:22 PM, Tom Rini wrote:
-> > > > > > Now that block drivers are all selecting the BLK symbol, there'=
-s no need
-> > > > > > for other options to be select'ing BLK so that other required
-> > > > > > functionality can be enabled. Remove these places.
-> > > > > >=20
-> > > > >=20
-> > > > > We have multiple commands depending on the BLK symbol.
-> > > >=20
-> > > > Yes.
-> > > >=20
-> > > > > BOOTSTD also depends on it, but I assume we should be able to net=
-work boot
-> > > > > without HW block drivers?
-> > > >=20
-> > > > Correct. That's part of the motivation for this series (which I was=
-n't
-> > > > clear enough about on its own). Without something like this series =
-if we
-> > > > remove the BLK dependency from BOOTSTD then some other platforms fa=
-il to
-> > > > build or grow a bunch in size (as BOOTSTD is default y and now it's
-> > > > enabled on those platforms).
-> > > >=20
-> > > > > CMD_UFETCH wouldn't be usable without those drivers as well.
-> > > > >=20
-> > > > > Should we do something about that by making them not depend on BL=
-K e.g. use
-> > > > > CONFIG_IS_ENABLED in the right places? Not sure if all devicess b=
-ased on
-> > > > > those archs have at least one HW block driver enabled. I guess ch=
-ecking if
-> > > > > all .config before and after that change are identical would help=
- us figure
-> > > > > out if this could introduce a regression?
-> > > >=20
-> > > > There's a few options, depending on what the command is. For CMD_UF=
-ETCH
-> > > > it's likely that a small restructure would be needed to not try and
-> > >=20
-> > > My point is that I believe this patch is too hastily removing the sel=
-ect BLK
-> > > because some symbols have "depends on BLK" and by removing the select=
-, we
-> > > make those symbols unselectable. This can cascade if other symbols de=
-pend on
-> > > those now unselectable symbols.
-> > >=20
-> > > Also, removing the select BLK from architecture/target symbols can in=
-troduce
-> > > regressions if BLK really is required?
-> > >=20
-> > > I think a reasonable (albeit cumbersome) solution is to migrate all t=
-hose
-> > > selects to the impacted defconfigs so that effectively no change is m=
-ade for
-> > > existing devices. If maintainers want to remove BLK, they could then =
-do it
-> > > later.
-> > >=20
-> > > This also makes sure that BOOTSTD and CMD_UFETCH (and others) are sti=
-ll
-> > > enabled, since BLK would still be enabled, just from a different loca=
-tion.
-> > > Then another patch series could remove BOOTSTD dependency on BLK by a=
-dapting
-> > > the code, same for CMD_UFETCH (and others).
-> > >=20
-> > > Does this make sense? Am I missing something?
-> >=20
-> > What you're missing, I believe, is that this patch exists because prior
-> > to the first patch in the series and also going back to when BLK was
-> > optional, if something higher level like ARCH_ROCKCHIP didn't select BLK
-> > then it wouldn't be able to prompt about its MMC driver. This is similar
-> > to all of the high level places that "select DM" as that used to be
-> > meaningful but now it's not. As part of testing the series I did my
-> > world build before/after and the only change is that as noted in the
-> > cover letter, espresso7420 now has MMC again. Does this help? Thanks.
-> >=20
->=20
-> Please add this to the patch commit log as well. The cover letter content
-> doesn't make it to the git history :)
->=20
-> But with the world build you've done, I'm now confident what I was worried
-> about will not happen, therefore:
->=20
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Thanks, I'll reword this slightly to include the above when applying.
+> >
+> > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+> > index 4134d93a35..2d9076f091 100644
+> > --- a/lib/tpm_tcg2.c
+> > +++ b/lib/tpm_tcg2.c
+> > @@ -5,6 +5,7 @@
+> >
+> >  #include <dm.h>
+> >  #include <dm/of_access.h>
+> > +#include <malloc.h>
+> >  #include <tpm_api.h>
+> >  #include <tpm-common.h>
+> >  #include <tpm-v2.h>
+> > @@ -19,6 +20,7 @@
+> >  #include <linux/unaligned/generic.h>
+> >  #include <linux/unaligned/le_byteshift.h>
+> >  #include "tpm-utils.h"
+> > +#include <bloblist.h>
+> >
+> >  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
+> >                       u32 *bank_num)
+> > @@ -615,15 +617,24 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
+> >                 elog->found = log.found;
+> >         }
+> >
+> > +       if (elog->found)
+> > +               return 0;
+> > +
+> >         /*
+> > -        * Initialize the log buffer if no log was discovered and the buffer is
+> > -        * valid. User's can pass in their own buffer as a fallback if no
+> > -        * memory region is found.
+> > +        * Initialize the log buffer if no log was discovered.
+> > +        * User can pass in their own buffer as a fallback if no memory region
+> > +        * is found, else malloc a buffer if it does not exist.
+> >          */
+> > -       if (!elog->found && elog->log_size)
+> > -               rc = tcg2_log_init(dev, elog);
+> > +       if (!elog->log_size) {
+> > +               elog->log = malloc(CONFIG_TPM2_EVENT_LOG_SIZE);
+> > +               if (!elog->log)
+> > +                       return -ENOMEM;
+> > +
+> > +               memset(elog->log, 0, CONFIG_TPM2_EVENT_LOG_SIZE);
+> > +               elog->log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
 
---=20
-Tom
+Why are you doing this? There are 2 ways to pass an EventLog to the
+kernel. Either via a config table from EFI, or using sml-base and
+sml-size in a DT (which are both required). IOW you will create an
+EventLog no one will discover
 
---cwrZf967ml7CDN72
-Content-Type: application/pgp-signature; name="signature.asc"
+Cheers
+/Ilias
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeJGJgACgkQFHw5/5Y0
-tyygwQwAtlRXEaPa5LiaYQEWczPyba+4bYzrATi4EZiS7WhmPUA/EUK/q4l4rEAH
-KZ/CZprhXoQU5QpqOWD5TFnwVTeN3PV/RCrzB/5dR0lADtvL9SXna6dgcE8ltzIV
-ENMI+mFWtmJTxBR/ml/jAEXVwf7UB+Ml8dlfR24OJBl+mlT56gD/ncP5pdS+SMv2
-cF0cF4QXJp5x5GAUotbFVwAFEKYyUEzQblpzm4J8XfCFKpqzT8VZZbq0aAgZOT9P
-Y/IakkrhD4b2lRw79AjiKCVLO5XB20zm4Vn8ZafFLiZl8KI/Gu6oR9P3sE/JPsnx
-XwQe5KTfRYN/J5v5DX9xw766792ByPOTPbcGUkpQQ8b5Q3xIvkKY8XM+O4lafC6q
-rADC4AH4zCvtlK3FXhhJEGPRJcrEmiv8yUt+WeYRdfDf1KzxxY+VsAjS8m2jvt9u
-rmtMJMreiLR1x9bsRab0bBes5AjyMuEqc/g3D4GxG14EihON8pwQTDGIiEWJijUw
-5CGRco4c
-=67gc
------END PGP SIGNATURE-----
-
---cwrZf967ml7CDN72--
+> > +       }
+> >
+> > -       return rc;
+> > +       return tcg2_log_init(dev, elog);
+> >  }
+> >
+> >  int tcg2_measurement_init(struct udevice **dev, struct tcg2_event_log *elog,
+> > @@ -676,10 +687,25 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
+> >         const __be32 *size_prop;
+> >         int asize;
+> >         int ssize;
+> > +       struct ofnode_phandle_args args;
+> > +       phys_addr_t a;
+> > +       fdt_size_t s;
+> >
+> >         *addr = NULL;
+> >         *size = 0;
+> >
+> > +       *addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
+> > +       if (*addr && *size)
+> > +               return 0;
+> > +       /*
+> > +        * TODO:
+> > +        * replace BLOBLIST with a new kconfig for handoff all components
+> > +        * (fdt, tpm event log, etc...) from previous boot stage via bloblist
+> > +        * mandatorily following Firmware Handoff spec.
+> > +        */
+> > +       else if (CONFIG_IS_ENABLED(BLOBLIST))
+> > +               return -ENODEV;
+> > +
+> >         addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
+> >         if (!addr_prop)
+> >                 addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
+> > @@ -694,22 +720,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
+> >
+> >                 *addr = map_physmem(a, s, MAP_NOCACHE);
+> >                 *size = (u32)s;
+> > -       } else {
+> > -               struct ofnode_phandle_args args;
+> > -               phys_addr_t a;
+> > -               fdt_size_t s;
+> >
+> > -               if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
+> > -                                              0, &args))
+> > -                       return -ENODEV;
+> > +               return 0;
+> > +       }
+> >
+> > -               a = ofnode_get_addr_size(args.node, "reg", &s);
+> > -               if (a == FDT_ADDR_T_NONE)
+> > -                       return -ENOMEM;
+> > +       if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
+> > +               return -ENODEV;
+> >
+> > -               *addr = map_physmem(a, s, MAP_NOCACHE);
+> > -               *size = (u32)s;
+> > -       }
+> > +       a = ofnode_get_addr_size(args.node, "reg", &s);
+> > +       if (a == FDT_ADDR_T_NONE)
+> > +               return -ENOMEM;
+> > +
+> > +       *addr = map_physmem(a, s, MAP_NOCACHE);
+> > +       *size = (u32)s;
+> >
+> >         return 0;
+> >  }
+> > --
+> > 2.25.1
+> >
+>
+> Regards,
+> SImon
