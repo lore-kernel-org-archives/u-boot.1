@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F307DC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 14:41:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEC75C02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 14:42:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7651A80703;
-	Thu, 16 Jan 2025 15:41:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 210188022B;
+	Thu, 16 Jan 2025 15:42:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JCu1lpwC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fB14NliS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED2B780708; Thu, 16 Jan 2025 15:41:29 +0100 (CET)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id D6788806DD; Thu, 16 Jan 2025 15:42:00 +0100 (CET)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90A788022B
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:41:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E064D80214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:41:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-3002c324e7eso9170431fa.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 06:41:27 -0800 (PST)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-3047818ac17so9397721fa.3
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 06:41:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737038487; x=1737643287; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737038518; x=1737643318; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bVGVLnyvdVwjD0pdbGviaBmT+TfqIVYqhOo8iIwM8yY=;
- b=JCu1lpwCmPG4+TVPQfIq+JIVsUxtRbU4t1yfrTKYQO+OG1C7gbNyY+qcuLPnQnB1Qq
- MZDxl61qVQBqNBPhn2oJTaA+NFzMCBwnNVGHOoOBvyrg2zkeVLJ1JRDCRS7uonLFLxMA
- Rk/9AluKGQ3zSFyD2kM4B4YPAglzyq136/FGFpkPVZogQ+EApSUD6oXftrCsLCvMOXj6
- vF9BdTI5ttuuvnr6wrRw9YMXiCxSSEmZC8NkfM+MNeqTPprAf9U7LNjzVK+ff4DdhxzT
- Y4ybgXb5IXo7BhkGY3fO9coa9Dc2TexyOVjDmIVs6rCKNOrDvAObOGhTzPHH/UreRewH
- GG2A==
+ bh=7h/Pv37Nfw4BTpccO0LQNLOYEFGuQWXxsgKQnoplGuQ=;
+ b=fB14NliS9sBUore73+xmVXgo/AWOx4bX5zFS4wxCi6SomNjmuThVB3ugrWYHzL5pJI
+ ftYjd2+ABvmA7MzvnAji3UAoWADLGjc16O2BEgkWEJUHpjQ13bhB5RZuuW4G9OK0DK8P
+ dPCGhHds2SJbmJTiGJi7IR4WZyboeop1FjPbdA25AVAv03pDvT2divuDiGd5RRjI5TKz
+ YbeiviqY3aP4AmgTaTdJQDyNGfP6WGOd7boFEHU1gJVWELfVI78oQ9H3T++d8+utq74l
+ E6nTzzYeziWhIu3H9P87QqpyXO4YM+/gg3/QGR6Tc2wYN1j6GdToc7Ug22q6njotb7nR
+ 3JFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737038487; x=1737643287;
+ d=1e100.net; s=20230601; t=1737038518; x=1737643318;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bVGVLnyvdVwjD0pdbGviaBmT+TfqIVYqhOo8iIwM8yY=;
- b=rAvZxtLOyW/QEfNwGPxF/7X1jPyoiJ6tB4+wq6tJ7KlTKddKjcX0B7QVy5S3F3lpUC
- gTABoxx5xpWVgpbnY156GnqhgC/vbWU7YKc8ndx+agviBAN78UKUQMsSNl8U1DN8s0SF
- M7hh+DSuvaeXgqUvMNk+vnXHO+/UU8x2Qi5w1AzlI5BNLd68icEkx2fSBQrSuc9WCnOw
- JCJTZDgi8uFVdu2iT4EpSSpv6xdpv/CixztbzZF4BhSpneN1mkCSVst1+ap3jaqUgiY0
- BCLIoKxo0RWdjbMoZQn4Kg9tEBlBb7DlGQMWjiE8W6Q+unAHI7M3Z8Fz01pRjo5pnAU2
- F0zA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXV/b/xj2bD0mFg3uJw+8ggnImEzqh8YvIJELZx/+BHyE61uBcFGSVdAqwwFCPESgGwmZ/GkmM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBj5rK/PlOiaXzspgU+E8NFlZo5YtZ0dEV0SUUXg2ymT8/W2Ux
- NlCAHxhYUzEpHcfNMXGdAWDbaAfOdAf2/A6X7kN+q9w6R7HdZsOGiNwz3bPlN73TPLj4LrMGSam
- 5rKkA1C2TZDSPneehuFX5w4m/j5+o1g==
-X-Gm-Gg: ASbGncue47dFx00zeLFw8yYPRVGkQUGPTwtSRs86hqk7ZNCh0JO21Fw3Y4eh/4aLsjS
- p3Acxs2/KLc/L2wY4gGjUj5qcuPq9Enilgp+8BbQJjhfdRkBtRxG1IagKS6h5vJme5d93Fg==
-X-Google-Smtp-Source: AGHT+IGkqPOY2M820Yw7Ce0dau1czUlfdgw4HdoYPP29KahxHxuL2DwZgJ3JMdLJDJfoXASMafggDf5tItkWtEhPRXY=
-X-Received: by 2002:a2e:bea8:0:b0:302:1b18:2c09 with SMTP id
- 38308e7fff4ca-305f45ba080mr119028201fa.27.1737038486506; Thu, 16 Jan 2025
- 06:41:26 -0800 (PST)
+ bh=7h/Pv37Nfw4BTpccO0LQNLOYEFGuQWXxsgKQnoplGuQ=;
+ b=cEWvGCiAGsJXjd3sKzK1p4h3kvZQ8KAu7ZXEgcChpFAAjaqZJ/oqBL5F9tQ7momz2+
+ bT8rip0CLUwQcniLumSUAj8T3LieC+qkhyLYuBMgAJAAe3jYZONW2rUJ+DZmtKur4l0y
+ pidgKFczqIyEy04sVfboKJc4kGoHx/OGQRvx0Wyh+GMkrlzLp76nxKudTA3p6GY/Td0F
+ 5HcvB79V0RdAM7vbd+sBei0pBXgak5nD9AVlgjnukLt7XJCrX4U28/XObeC86I3IHSTT
+ f4BJy2OhQj4KLG1MwALUQqG8ci32F2IPa7Be+9XgdKL6pTBzf62Xd9/PSQwjcGhwHikB
+ 2LNQ==
+X-Gm-Message-State: AOJu0YyBQo6GmNYe/p8CpXu8CT3VeKG0C5N+Wn9rZHBEHlfzN24d4saR
+ qG8ZNi0NHp1Ndm65HWBjKd/1zST8XbgVdPOZ8v+2xa8nYf94GnTpwYpesMMQBn6Vo/GNZuPSgNG
+ bozSz2A+1yWZQ5y6fI37qdPB2yYw=
+X-Gm-Gg: ASbGncsjcKqY4J3fNAwH1v2vJmW2TFfK7L7WyTS5hxY/OSv8cIeR+djxOK0/jhK2kXx
+ XefsJwn/iy6LdSPRtFH5ggUWcTm0VCH0XwyUBtvR+B2EvHgdcwTURup4jEtj9M/4gTHn0UQ==
+X-Google-Smtp-Source: AGHT+IEoDSxDj+4qhLKCtHCLI/FvCk098BSSgbqezhCCZbs+2rnyLAy734W3T5GM+6R/XEVSa4GjyG+IIJAw86PImHY=
+X-Received: by 2002:a05:651c:1504:b0:300:c10:7c26 with SMTP id
+ 38308e7fff4ca-305f4535890mr124607061fa.4.1737038518082; Thu, 16 Jan 2025
+ 06:41:58 -0800 (PST)
 MIME-Version: 1.0
-References: <20250110-phytec_imx8m_optee-v3-0-6c39dab15592@phytec.de>
-In-Reply-To: <20250110-phytec_imx8m_optee-v3-0-6c39dab15592@phytec.de>
+References: <20250113211518.1276899-1-alexander.sverdlin@siemens.com>
+In-Reply-To: <20250113211518.1276899-1-alexander.sverdlin@siemens.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 16 Jan 2025 11:41:14 -0300
-X-Gm-Features: AbW1kvYsW8g9KYYxR2I73mBuMV4Enw2BpcliCntKisHS-k36ikJ5kfDh-qFETWE
-Message-ID: <CAOMZO5Bser0d8o+73TR_wpsFgh5PWE7LURW5SGBseFAFWif9eg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] imx8(m): add optee node to binman FIT image
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Tom Rini <trini@konsulko.com>, 
- Tim Harvey <tharvey@gateworks.com>, Manuel Traut <manut@mecka.net>, 
- Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
- Yashwanth Varakala <y.varakala@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
+Date: Thu, 16 Jan 2025 11:41:46 -0300
+X-Gm-Features: AbW1kvaEjig7G-euge28zH6QKvAJpMtiPKwbCieeI0HGEXgGGtRV962x0IxvNlw
+Message-ID: <CAOMZO5DKUvyTHv8dRy7kQoPcxMpWYj=jQUvt-wRqYYSR7FXLXA@mail.gmail.com>
+Subject: Re: [PATCH] configs: capricorn_cxg3: Enable CMD_WDT
+To: "A. Sverdlin" <alexander.sverdlin@siemens.com>
+Cc: u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>,
+ Heiko Schocher <hs@denx.de>, 
+ Walter Schweizer <walter.schweizer@siemens.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,34 +92,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 10, 2025 at 9:35=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrot=
-e:
+On Mon, Jan 13, 2025 at 6:21=E2=80=AFPM A. Sverdlin
+<alexander.sverdlin@siemens.com> wrote:
 >
-> There have been attempts to get op-tee node integrated upstream in the
-> past [1][2]. The challenge is on how to handle the load and entry
-> addresses where the op-tee image should be loaded to.
-> Different SoC families and architectures have different RAM base
-> addresses. Further the final addresses can vary from board to board
-> (e.g. depending on populated RAM size).
-> This approach follows the TI k3 kconfig solution.
-> To be able to define a sensible default for the new config option, put
-> it in the imx8m kconfig. For other imx families, the RAM start addresses
-> are different and thus finding a common sensible default is not
-> possible.
-> I do not have a working Nano and quad board so I was not able to test the=
-m.
+> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 >
-> I included usage for PHYTEC boards for examples (with documentation).
+> Capricorn boards have WDT (WDT_SIEMENS_PMIC) and U-Boot is not configured
+> to trigger the WDT. Enable the "wdt" command to be able to stop the WDT
+> from the command line.
 >
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20230622173006.39218=
-91-1-tharvey@gateworks.com/
-> [2] https://patchwork.ozlabs.org/project/uboot/patch/ZeHDVr-Bzm935-5N@mec=
-ka.net/
->
-> ---
-> Changes in v3:
-> - use OPTEE_LOAD_ADDR defaults as defined in upstream tf-a
-> - add imx8mq (untested)
-> - move common PHYTEC imx8mm optee build doc into include file
+> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-Applied the series, thanks.
+Applied, thanks.
