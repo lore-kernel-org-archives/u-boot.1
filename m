@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F513C02180
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 12:37:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53DD9C02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 13:01:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A1558022B;
-	Thu, 16 Jan 2025 13:37:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 904E88022B;
+	Thu, 16 Jan 2025 14:01:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LJffBl63";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gLaih0am";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9CFB80283; Thu, 16 Jan 2025 13:37:39 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 1C29380283; Thu, 16 Jan 2025 14:01:37 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70F01801B0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 13:37:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A19FC801B0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 14:01:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e54bd61e793so1624858276.2
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 04:37:37 -0800 (PST)
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e4930eca0d4so1361801276.3
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 05:01:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737031056; x=1737635856; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1737032493; x=1737637293; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mJPMobiAMXOQPpOQp7l4sRsVUR6IHKff0bR37X8CoZM=;
- b=LJffBl63qO/JhJI41rBinXruH/3kFybgvixbe7hDQPUECaYCylaRIRho4TuDLGBPim
- 8YSrWw9m+GthGsB0bfqsbmQFCoS61+Svmp6lEeCbjpeN4qTu/vBCDUAhPy5kFLDes9By
- fQaQkpNx7iUpuLFCqIuXqEfvOcTAraBap/M5szbvJsveUL/OB8+V3JBiQYNMhXvOSCHz
- hxNOrocLA7PrpQSYz3INd06M/1LCA8jXtO386oTZ2i3pTk2kVTYZUWgPQNVRpun9XTVe
- 5fJq1OUpg5qyGwxqb7ME4s9Pl2xnHKYJg5vLULlbxdWI8C1tCnd3mr/7L+LTG6aR5Qvd
- 2TtQ==
+ bh=5tNfREidDWMhMHxrhZkb+bO2+eQyAk+xR0gXVQt9ksk=;
+ b=gLaih0am1RifdkXO1LKFWriOlNmLseLPDJrZv/pY+vqyVA3YEVCr89u0UFYTJ7fLOJ
+ TR7Wtu5/U99A+QKItUw9KlQPi2LH98tbhhnPpHXX8E96xj48I1M5ph1VhupTT01weNTi
+ 7gBXbCq8Nt48UzOP9M/ZIPmha1duTip58zOH16dmkmJqhv+wRivlAZswy/RytNKyIVaw
+ YlD6vJFPYDdCv2jKwhKwhg8876X3G+Cvi4ircHaTnYSBF7acfl7Bwpj4pagN+e4zypsa
+ H+BmFPdQZUj/IbjlMQouEkljgUtQo/VEYN5hCicPfeaiegzswicdoODHU2uEyq0pBF+C
+ +ZMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737031056; x=1737635856;
+ d=1e100.net; s=20230601; t=1737032493; x=1737637293;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mJPMobiAMXOQPpOQp7l4sRsVUR6IHKff0bR37X8CoZM=;
- b=h1Zdbcb+rfq9aw1n/aTWWWeXeZo9yGkSwfd5uBjeztojJqJiIgUAmpqiaVsI5DU2vG
- zzoP/DX+Hiz6qdTEA2f4PC/v8FpMQ+ldwxKTzmEaP8snJMqU6BojV0ZAW/3M6rbZg6u1
- U1zU8LFzgvPEUhMPYlMOdQmb2n+WP2x8Td0BHqGmapGcknkDsJuFK1xhkLmsHNyu9Z1y
- yTcapvrDaKQxwq1Lg4L3uSmIC3O0j2VQALSdGM5LFYbSq7w/mfwKNGCkjwfLuvprJrhQ
- NsXNgQ50nXTB/6be132zggIv+dUG7j1uMpSp+l4HpzlKz58F153HbH9D2w8hkpylqSWw
- SRTg==
-X-Gm-Message-State: AOJu0Yw/4OUpN4q9j9+FoJ7MrhJ2s/m+Pe4m2mLbtl94i11Oc5FBJe3Y
- DVIL+Ad/OhwOamurnaoqJejSAF0+ZjwYs82V47PicdmckekXe7HySTyePliaLH+YzdHfs/vKESj
- cym5jh6JfMZmmkn62NVttCFBoZ4Bv724byEdAKg==
-X-Gm-Gg: ASbGncuPUnwVy24R2N4g4F7xN8QCaCQYQbFopMXxKPBAbk1v9a69PSw286b8DVFijoI
- msfQ6cHl5aJbo/fi+lSryNJ7LXa5889KYq60BRA==
-X-Google-Smtp-Source: AGHT+IHyprmB4miMqO/VxzRcJnHuHgBGRgR2ypUPqJpqoPZWIsFYAZT9lN9Snxy69bcaH91A44/g5G3toNRf/wTREME=
-X-Received: by 2002:a05:690c:3804:b0:6ef:4a1f:36d6 with SMTP id
- 00721157ae682-6f531249a60mr257980957b3.23.1737031056284; Thu, 16 Jan 2025
- 04:37:36 -0800 (PST)
+ bh=5tNfREidDWMhMHxrhZkb+bO2+eQyAk+xR0gXVQt9ksk=;
+ b=HV1TWCbO5OYKg2DCPLd3wh0PZQAWyDhlRcArpOBPiMUzVjF0nGs3UHtAVc36Wwo61c
+ iUdKuRL4q1yiwwa4t0Z5zyA9IWKq5doihawrP+4hhShQYyP/xhRDHGzCIqJA3lv1og1o
+ O9lKfwZ6gN4ML0NwZYR6Fum3r5XdRuSja1OpAHsjBT6H8+72E8xuRYwHdySU2iLB+nU2
+ EEdXcsroW2nWjBF0wnSf1d6XQkupFR64EDvJ4YKBdgDFZ0WWTAH/kJMRmXN9OYH5IAvq
+ V8yQx83StNYzgkoT22ibMMDJB6FQubloCbEQLFtKPEcgFWRSXBp/y2mbFjY5LI/37hEj
+ Og3A==
+X-Gm-Message-State: AOJu0YzRIfsv8sXzMWS0KwvfTMLM+WTPsy88kOHiE7Rw6LXkH3cf1zz1
+ YgrJho3ilXnUWbxjqmeudsS/Vt1e6Qy2uksqicibobhOLaAMiqSL1cbvZfw3S5aqRcBJDexig8d
+ 3KzaJHx/bhnxgzYmmtb5ZFjsBouARLj42Hrg1lw==
+X-Gm-Gg: ASbGnctlNA26toWOGBvuqlOSyv5vbgr5r/wpsbuEOfDhZbaJ+YamRIKTO70DSMAzeND
+ gHw4YiaK3Ml/EFBAbcVn0qYBcufQYxkWZIdBGLA==
+X-Google-Smtp-Source: AGHT+IEKNFIngW4Lwcl8X7U3YZIw+Hk0OPYr8KoMmhm6GEtA1FUSYYSDmlQ5aLGIrY0XKb3GnA4qM/fPkitl+27+oC8=
+X-Received: by 2002:a05:690c:6185:b0:6dc:7877:1ea3 with SMTP id
+ 00721157ae682-6f53124c672mr251242887b3.17.1737032493272; Thu, 16 Jan 2025
+ 05:01:33 -0800 (PST)
 MIME-Version: 1.0
 References: <20250115200144.951530-1-raymond.mao@linaro.org>
- <20250115200144.951530-3-raymond.mao@linaro.org>
-In-Reply-To: <20250115200144.951530-3-raymond.mao@linaro.org>
+ <20250115200144.951530-4-raymond.mao@linaro.org>
+In-Reply-To: <20250115200144.951530-4-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 16 Jan 2025 14:36:59 +0200
-X-Gm-Features: AbW1kvYcavxZjVtaDvZZUqWPHg19K-4rm9l4iaPSemmswtg4AbukbKjSobPQ43A
-Message-ID: <CAC_iWjKgoNdON5u2GHjKT+HPwt9hd+JkD6k48VeMWoWoFLbmpQ@mail.gmail.com>
-Subject: Re: [PATCH 2/6] tmp: add TPM2_PCR_Allocate command
+Date: Thu, 16 Jan 2025 15:00:57 +0200
+X-Gm-Features: AbW1kvZ0b581ASpuRsSf0cAEAUaEHPPoyRLRIgP0M3Fu8hlmupZCbrDn_Vma7eI
+Message-ID: <CAC_iWjLFUPCCopHrgrRLq7Z6oT=rV+PWjaVurzRWkuoRCR6Okw@mail.gmail.com>
+Subject: Re: [PATCH 3/6] tpm: add wrapper and helper APIs for PCR allocate
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Tim Harvey <tharvey@gateworks.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Michal Simek <michal.simek@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -93,137 +95,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
-
 On Wed, 15 Jan 2025 at 22:02, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> TPM2_PCR_Allocate command is required to re-configurate
+> Add PCR allocate wrapper APIs for using in tcg2 protocol.
+> The wrapper proceeds a PCR allocate command, followed by a
+> shutdown command.
 
+We have lib/tpm_tcg2.c does any of the functions belong to that file?
+Unless we expect the non-TCG version to do something similar....
 
-reconfigure
-
-> a TPM device
-> to enable or disable algorithms in run-time, thus this patch introduces
-> the implementation of PCR allocate APIs and adds related cmd functions
-> for testing.
->
-> To test the feature, ensure that TPM is started up.
-> Run pcr_allocate command to turn on/off an algorithm, multiple calls
-> are supported and all changes will be cached:
-> `tpm2 pcr_allocate <algorithm_name> <on|off>`
-> Run startup command with argument 'off' to shutdown the TPM.
-> `tpm2 startup TPM2_SU_CLEAR off`
-> Reboot the board via `reset` to activate the changes.
+> A system boot is required after two commands since TPM device needs
+> a HW reset to activate the new algorithms config.
+> Also, a helper function is included to determine the new bank mask
+> for PCR allocation by combining the status of current active,
+> supported and eventlog bank masks.
+> A new kconfig is created. PCR allocate and system reboot only
+> happens when the kconfig is selected, otherwise just exit with
+> errors.
 >
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->  cmd/tpm-v2.c     |  94 +++++++++++++++++++++++++++++++++++
->  include/tpm-v2.h |  29 +++++++++++
->  lib/tpm-v2.c     | 124 +++++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 247 insertions(+)
+>  include/tpm-v2.h |  20 ++++++++
+>  lib/Kconfig      |  12 +++++
+>  lib/tpm-v2.c     | 121 +++++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 153 insertions(+)
 >
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> index a6d57ee7c4..2302e8e94c 100644
-> --- a/cmd/tpm-v2.c
-> +++ b/cmd/tpm-v2.c
-> @@ -232,6 +232,86 @@ unmap_data:
->         return report_return_code(rc);
+> diff --git a/include/tpm-v2.h b/include/tpm-v2.h
+> index af3158f6e4..79dc4a34e2 100644
+> --- a/include/tpm-v2.h
+> +++ b/include/tpm-v2.h
+> @@ -703,6 +703,17 @@ u32 tpm2_report_state(struct udevice *dev, uint vendor_cmd, uint vendor_subcmd,
+>  u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
+>                           uint vendor_subcmd);
+>
+> +/**
+> + * tpm2_pcr_allocate_get_mask - Get algorithm bitmask for PCR allocate
+
+Naming nit. This is comparing the EventLog, U-Boot supported, and
+active algorithms. Can we rename it to tpm2_scan_masks() or something
+similar and update the description with that?
+
+> + *
+> + * @dev                TPM device
+> + * @log_active Active algorithm bitmask
+> + * @mask       Bitmask for PCR allocate
+> + *
+> + * Return: zero on success, negative errno otherwise
+> + */
+> +int tpm2_pcr_allocate_get_mask(struct udevice *dev, u32 log_active, u32 *mask);
+> +
+>  /**
+>   * tpm2_pcr_config_algo() - Allocate the active PCRs. Requires reboot
+>   *
+> @@ -730,6 +741,15 @@ u32 tpm2_pcr_config_algo(struct udevice *dev, u32 algo_mask,
+>  u32 tpm2_send_pcr_allocate(struct udevice *dev, const char *pw,
+>                            const ssize_t pw_sz, struct tpml_pcr_selection *pcr,
+>                            u32 pcr_len);
+> +/**
+> + * tpm2_pcr_allocate() - Allocate the PCRs
+> + *
+> + * @param dev   TPM device
+> + * @log_active Bitmask of eventlog algorithms
+> + *
+> + * Return: code of the operation
+> + */
+> +int tpm2_pcr_allocate(struct udevice *dev, u32 log_active);
+>
+>  /**
+>   * tpm2_auto_start() - start up the TPM and perform selftests.
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index baeb615626..0732333849 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -514,6 +514,18 @@ config VPL_TPM
+>           for the low-level TPM interface, but only one TPM is supported at
+>           a time by the TPM library.
+>
+> +config TPM_PCR_ALLOCATE
+> +       bool "Re-configurate TPM algorithms in run-time (PCR allocate)"
+> +       depends on TPM_V2 && (MEASURED_BOOT || EFI_TCG2_PROTOCOL)
+> +       help
+> +         This enables a detection for the dismatches of algorithms among TPM
+> +         device, eventlog from previous boot stage and U-Boot support.
+> +         A PCR allocate command will be sent to reconfigurate the TPM device
+> +         in run-time to make sure algorithms in TPM device, eventlog and
+> +         U-Boot are aligned with each other.
+> +         A system reboot will be proceeded after then to activate the new
+> +         algorithms.
+> +
+>  endmenu
+>
+>  menu "Android Verified Boot"
+> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> index 045b5dd9eb..71abf070de 100644
+> --- a/lib/tpm-v2.c
+> +++ b/lib/tpm-v2.c
+> @@ -44,6 +44,127 @@ static int tpm2_update_active_banks(struct udevice *dev)
+>         return 0;
 >  }
 >
-> +static u32 select_mask(u32 mask, enum tpm2_algorithms algo, bool select)
+> +static void tpm2_print_selected_algorithm_name(u32 selected)
 > +{
 > +       size_t i;
+> +       const char *str;
 > +
 > +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-> +               if (hash_algo_list[i].hash_alg != algo)
+> +               const struct digest_info *algo = &hash_algo_list[i];
+> +
+> +               if (!(selected & algo->hash_mask))
 > +                       continue;
 > +
-> +               if (select)
-> +                       mask |= hash_algo_list[i].hash_mask;
-> +               else
-> +                       mask &= ~hash_algo_list[i].hash_mask;
-> +
-> +               break;
+> +               str = tpm2_algorithm_name(algo->hash_alg);
+> +               if (str)
+> +                       log_info("%s\n", str);
 > +       }
-> +
-> +       return mask;
 > +}
 > +
-> +static int do_tpm2_pcrallocate(struct cmd_tbl *cmdtp, int flag, int argc,
-> +                              char *const argv[])
+> +int tpm2_pcr_allocate_get_mask(struct udevice *dev, u32 log_active, u32 *mask)
 > +{
-> +       struct udevice *dev;
-> +       int ret;
-> +       enum tpm2_algorithms algo;
-> +       const char *pw = (argc < 4) ? NULL : argv[3];
-> +       const ssize_t pw_sz = pw ? strlen(pw) : 0;
-> +       static struct tpml_pcr_selection pcr = { 0 };
-> +       u32 pcr_len = 0;
-> +       bool bon = false;
-> +       static u32 mask;
-> +       int i;
+> +       struct tpml_pcr_selection pcrs;
+> +       u32 active = 0;
+> +       u32 supported = 0;
+> +       int rc, i;
 > +
-> +       /* argv[1]: algorithm (bank), argv[2]: on/off */
-> +       if (argc < 3 || argc > 4)
-> +               return CMD_RET_USAGE;
+> +       *mask = 0;
 > +
-> +       if (!strcasecmp("on", argv[2]))
-> +               bon = true;
-> +       else if (strcasecmp("off", argv[2]))
-> +               return CMD_RET_USAGE;
+> +       rc = tpm2_get_pcr_info(dev, &pcrs);
+> +       if (rc)
+> +               return rc;
 > +
-> +       algo = tpm2_name_to_algorithm(argv[1]);
-> +       if (algo == -EINVAL)
-> +               return CMD_RET_USAGE;
+> +       for (i = 0; i < pcrs.count; i++) {
+> +               struct tpms_pcr_selection *sel = &pcrs.selection[i];
+> +               size_t j;
+> +               u32 hash_mask = 0;
 > +
-> +       ret = get_tpm(&dev);
-> +       if (ret)
-> +               return ret;
-> +
-> +       if (!pcr.count) {
-
-
-Ins't this always true?
-
-> +               /*
-> +                * Get current in-use algorithms (banks), PCRs and mask via the
-> +                * first call
-> +                */
-
-
-in-use translates to active PCR banks. Isn't that function returning
-the hardware-supported banks?
-
-
-> +               ret = tpm2_get_pcr_info(dev, &pcr);
-> +               if (ret)
-> +                       return ret;
-
-
-So we have the TPM banks the hardware supports here. Does it make
-sense to check if the requested algorithm is supported and exit early?
-In theory, it doesn't matter because the hardware will reject the
-configuration later, but I'd like to have a comment about this.
-
-> +
-> +               for (i = 0; i < pcr.count; i++) {
-> +                       struct tpms_pcr_selection *sel = &pcr.selection[i];
-> +
-> +                       if (!tpm2_is_active_bank(sel))
-> +                               continue;
-> +
-> +                       mask = select_mask(mask, sel->hash, true);
-> +                       printf("Active bank[%d] with algo[%#x]\n", i,
-> +                              sel->hash);
+> +               for (j = 0; j < ARRAY_SIZE(hash_algo_list); j++) {
+> +                       if (hash_algo_list[j].hash_alg == sel->hash)
+> +                               hash_mask = hash_algo_list[j].hash_mask;
 > +               }
+> +
+> +               if (tpm2_algorithm_supported(sel->hash))
+> +                       supported |= hash_mask;
+> +
+> +               if (tpm2_is_active_bank(sel))
+> +                       active |= hash_mask;
+
+We duplicate this in the tcg functions for getting active pcr banks,
+but I can live with it now and refactor it later.
+
 > +       }
 > +
-> +       mask = select_mask(mask, algo, bon);
-> +       ret = tpm2_pcr_config_algo(dev, mask, &pcr, &pcr_len);
+> +       /* All eventlog algorithm(s) must be supported */
+> +       if (log_active & ~supported) {
+> +               log_err("EventLog contains U-Boot unsupported algorithm(s)\n");
+> +               tpm2_print_selected_algorithm_name(log_active & ~supported);
+> +               rc = -1;
+> +       }
+> +       if (log_active && active & ~log_active) {
+> +               log_warning("TPM active algorithm(s) not exist in eventlog\n");
+> +               tpm2_print_selected_algorithm_name(active & ~log_active);
+> +               *mask = log_active;
+> +       }
 > +
-[...]
+> +       /* Any active algorithm(s) which are not supported must be removed */
+> +       if (active & ~supported) {
+> +               log_warning("TPM active algorithm(s) unsupported by u-boot\n");
+> +               tpm2_print_selected_algorithm_name(active & ~supported);
+> +               if (*mask)
 
-Other than that this looks good to me
+if (rc) is clearer here I think
+
+> +                       *mask = active & supported & *mask;
+> +               else
+> +                       *mask = active & supported;
+> +       }
+> +
+> +       return rc;
+> +}
+> +
+> +static int tpm2_proceed_pcr_allocate(struct udevice *dev, u32 algo_mask)
+
+Naming this tpm2_pcr_allocate() is better
+
+> +{
+> +       struct tpml_pcr_selection pcr = { 0 };
+> +       u32 pcr_len = 0;
+> +       int rc;
+> +
+> +       rc = tpm2_get_pcr_info(dev, &pcr);
+> +       if (rc)
+> +               return rc;
+> +
+> +       rc = tpm2_pcr_config_algo(dev, algo_mask, &pcr, &pcr_len);
+> +       if (rc)
+> +               return rc;
+> +
+> +       /* Assume no password */
+> +       rc = tpm2_send_pcr_allocate(dev, NULL, 0, &pcr, pcr_len);
+> +       if (rc)
+> +               return rc;
+> +
+> +       /* Send TPM2_Shutdown, assume mode = TPM2_SU_CLEAR */
+> +       return tpm2_startup(dev, false, TPM2_SU_CLEAR);
+> +}
+> +
+> +int tpm2_pcr_allocate(struct udevice *dev, u32 log_active)
+
+This assumes there's a log involved. So let's find a better name and
+keep the current one for the function above.
+
+> +{
+> +       u32 algo_mask = 0;
+> +       int rc;
+> +
+> +       rc = tpm2_pcr_allocate_get_mask(dev, log_active, &algo_mask);
+> +       if (rc)
+> +               return rc;
+> +
+> +       if (algo_mask) {
+> +               if (!IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE))
+> +                       return -1;
+> +
+> +               rc = tpm2_proceed_pcr_allocate(dev, algo_mask);
+> +               if (rc)
+> +                       return rc;
+> +
+> +               log_info("PCR allocate done, shutdown TPM and reboot\n");
+> +               do_reset(NULL, 0, 0, NULL);
+> +               log_err("reset does not work!\n");
+> +               return -1;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+>  u32 tpm2_startup(struct udevice *dev, bool bon, enum tpm2_startup_types mode)
+>  {
+>         int op = bon ? TPM2_CC_STARTUP : TPM2_CC_SHUTDOWN;
+> --
+> 2.25.1
+>
 
 Thanks
 /Ilias
