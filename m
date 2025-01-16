@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6725C02187
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 22:57:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0250C02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 23:01:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 328B780312;
-	Thu, 16 Jan 2025 23:57:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 34ED080719;
+	Fri, 17 Jan 2025 00:01:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OZBwMH/M";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WQErDItU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BB258033D; Thu, 16 Jan 2025 23:57:54 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id C89E280717; Fri, 17 Jan 2025 00:01:37 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26EE48022B
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 23:57:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 903528022B
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:01:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-30227c56b11so14965081fa.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 14:57:52 -0800 (PST)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3eb7ecc3c54so966404b6e.0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:01:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737068271; x=1737673071; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1737068494; x=1737673294; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yy25Xd5LeDrBrBLLPDXRf0R8e9CRNLMm86pv7O4nbvo=;
- b=OZBwMH/M4Mq783wMyW/JbEuwIVsUdECP7nBbWmDrKCpMwQn2tA5E8zCKw4f938Qb1D
- JY3o0n896pRVvWsLHCBHZkb8oY1OpvNTYMCjAeNrbwisXBNpLxDJbFd3A75WE256kMnG
- Z0rqw0M9TbON8B9wzM5T6cV/0HMiqcXRfmAUuofU8MnkokRDZpnOKXfr/iEgOaxf2c0X
- +OEjhUTqqM32mH0cltjTW2lseciYLWl3o04pcrjQ5J1r456gqmTPc5AHpX4l2Z5YqT8B
- fQeQcrnMCsQHQRSjBQ3MEmwvnEWeiMrXRIarmhmUdIdax/lqwrQpyBN0cFHj2EPVrf8w
- YOGg==
+ bh=EpsYxKOZtZvw4QcRQyOhSzssllEy/xoROUXq6Ygrmnk=;
+ b=WQErDItUC+1EhZd9bIAZ+6lvkivuDVt6nMIONYDk03aHZA3hEif2qWOmhBZ3vbANqy
+ uigGCLkyl8i6aQ//M/wwCypopz2BDjEBuCVW0GvWQiHrvop4/2KakAHtgo1j7euK1n3v
+ 38G5NX0s+x/p0MZ7vaZd0FvepRyneI+nGqOUfnR0yhzF+apCQ1FsZ722DiqdSIbOznMW
+ 7zguhJOwcVb65NAY3K8g1Q8D1ilFRFve/lp4kSTyE0VS3fDT3B7rQgFRIklbw2gYfWYA
+ /NykzT7f+3zFWy6L33Kb1yYiQcfb/TZUZapps7d9KkPifs7TrQJQ3JFisTUHDtePgWPD
+ x+GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737068271; x=1737673071;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1737068494; x=1737673294;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yy25Xd5LeDrBrBLLPDXRf0R8e9CRNLMm86pv7O4nbvo=;
- b=rknUIWTLjYm4w3UfTgb9Cp7i5/q3Czb/jm8+prYLkTLJJKD0aSdieMtBAgPChAgCOp
- CX6lGY5LzUDfFTRWZ/WNIrLNNxplBs2nS2mQsQTScZVyPZF7CWHeXeY8RQdRckhSkuI/
- 7t8lhsWzPtisnhxBIPkbY5jn5Re3ylO/a1bgMm01smlmhFriJXWvS9YIm2itznok2AKq
- 0OiyQQPG77kmSiw0X6/DQfmw9GVVr8zkBYKFHpEyuvLUEr2JwZTbxCq9np2VK1+rWTna
- mi+H9eoVPFGVTAJn1W9ZCjpfa0dpHg5D2IxcfLsuSDdOlm6kRu42U+F4Vq+QUvr8wDlt
- 2tkQ==
+ bh=EpsYxKOZtZvw4QcRQyOhSzssllEy/xoROUXq6Ygrmnk=;
+ b=uEmjcqNxWlaYiuOq6gN/vAfPRqpTz5Nj/eDv2aZA79JdXhjA2Z7poQBmK173UNLhuA
+ alhPzcTO8j7naJDcwNmzSyM/JlYtftrphpiW1uvxRZUtIvRQmqLiJJRq/mjsYwgZjRpS
+ DdJmDR/rnbBK+oopZn79G4DqKHtPahT7tkjITZEMhM1XsIAaTuYeaoNpKMh0JXDpG1/9
+ Wl2T04ycpyKSgiM8wl2FcS0vCGHOlst7Bgvnb/FpBAH6ErBIOYE5SZ0SQcYpgwTYI51Y
+ dX2nJu8q3HW+cBYaA8Q0EXYUTAVFTvnNMMeJSQtLSE51JlAMRTLmoZdQPNE7WuQUs24W
+ 8rgA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUeKo/KPfanWhEWmHj4FiuUzU0sDi40uEzlN66sIuGX5RtDkiCm3LK8vcbOlr3Mwc4qi8IZ634=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBn2TlbYw0OotsFGmXD5DkZ9FVAr2DRp2FezC36oKgmttq45y2
- ZAfODRONDWw8rBVFh7cGG04bYFY779xFfPBC4ChHIXqtl9LTNOIAgnz+abaqV5I76J/dYiMEyEr
- 4eIzZLwtblm8q5atb4Xe3DvqJA84=
-X-Gm-Gg: ASbGnct8Q/Vj43DJlXVNJhD9qwBOvSoh9q2a2As4QCgO6lWGWILWQ3gnBiIBg+4MfOF
- ktN7/SVycWFGlGVbiQbZWYZZKg92WgieaFKbNsacX85GhFLiH57qE6V2GsTCVNQhNNdWaAQ==
-X-Google-Smtp-Source: AGHT+IFyJ5Nw5Aoei58shGRIUTPnw5M0bNwRmNWew6xK9lGnWyxIXQhFVXxjV/8pgm5YEddGk6zbHDsRiV/FRuDyX4g=
-X-Received: by 2002:a05:651c:b1f:b0:302:210d:3b44 with SMTP id
- 38308e7fff4ca-3072cb343c4mr1478211fa.35.1737068271070; Thu, 16 Jan 2025
- 14:57:51 -0800 (PST)
+ AJvYcCVqb2m8wHAz/w9OVyDxlq4w8wb1clgoIdkb08ILsJpi9qo+HexEFAXLQ+6bxPBF1bGzaWBk4FM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yze0WKuMGPJiQcEarwyvsF9S4C/IZEGGtLLzGwES5SdfzGVlybK
+ NCmNrFxT+bIEIt59mONX+/qmSF0iG6mrMbf2tVI2Ewvs7XyyJU3jvpUNBNcupC8=
+X-Gm-Gg: ASbGncvr633WOxePw+MZygMmwxbmVfd6xPVxXIqF7QqQR106M5WQwogD9NkPdXib20P
+ Lev+Gu5jXUB6lk+ZZ8sIvMwOaPSGO699WKEDxUkOsbBSD8B9JJzZdzhAdavFInbBE4QYNN1escd
+ S6FJ2Rozrb0H/KZka2ZOA2E6ZVVtQN4X7G0LWJmPBeUT4Xh+6d1OOOg/DCut3sLYOfF6BkJlxR2
+ Jl/BzkxaEdqoAIFZ/D4r4yv21woqjktGK4KTZwF8PxjGvntXBx+zfOTzRTwgw5MycU=
+X-Google-Smtp-Source: AGHT+IF6KI34qJsoeL4ZRXFwUbGKw5nS8UUUs5pliPfFvM+nM5q1OXoOsa67dZIwH3M76Rhk8PJ2Cw==
+X-Received: by 2002:a05:6870:2f05:b0:29e:2cd6:4d1d with SMTP id
+ 586e51a60fabf-2b1c08bfd8amr423354fac.9.1737068494370; 
+ Thu, 16 Jan 2025 15:01:34 -0800 (PST)
+Received: from localhost ([2605:a601:a0f4:b000:264b:feff:fe59:d7f7])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2b1b8ceff9bsm578510fac.18.2025.01.16.15.01.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jan 2025 15:01:33 -0800 (PST)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>,
+	Minkyu Kang <mk7.kang@samsung.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Subject: [PATCH 1/7] configs: e850-96: Enable options for updated env
+Date: Thu, 16 Jan 2025 17:01:24 -0600
+Message-Id: <20250116230130.3337-2-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250116230130.3337-1-semen.protsenko@linaro.org>
+References: <20250116230130.3337-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
-References: <20250110-phytec_imx8m_optee-v3-0-6c39dab15592@phytec.de>
- <20250110-phytec_imx8m_optee-v3-1-6c39dab15592@phytec.de>
- <CAJ+vNU24PA3S3aEu5CjyECaF0aKKvbs7svHVuGUyHFA08NObOw@mail.gmail.com>
-In-Reply-To: <CAJ+vNU24PA3S3aEu5CjyECaF0aKKvbs7svHVuGUyHFA08NObOw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 16 Jan 2025 19:57:39 -0300
-X-Gm-Features: AbW1kvZTw2clpDt8noBlTshu0DjsPHzhg3V1p5lDRTQtblvmabyz-Q1Qfuvxs5g
-Message-ID: <CAOMZO5DPBJAXm99DTwBjfgOUpUqWzCiZH=vM-Mq_cDde3QzynQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/6] arm: imx8m: add OP-TEE node
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Yannic Moog <y.moog@phytec.de>, Stefano Babic <sbabic@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Manuel Traut <manut@mecka.net>, 
- Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
- Yashwanth Varakala <y.varakala@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,39 +100,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 16, 2025 at 7:45=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
-wrote:
+The E850-96 default environment is going to be updated soon, requiring
+next config options to be enabled:
 
-> Hi Yannic,
->
-> As I mentioned before, I still don't see how this builds when tee.bin
-> is missing because someone isn't using tee?
->
-> It looks like Fabio has merged this already to imx/master which now
-> fails to build for imx8m*_venice boards because of it.
+  - CONFIG_DEFAULT_FDT_FILE: $fdtfile will use this value
+  - CONFIG_PARTITION_TYPE_GUID: $partitions will rely on "type" feature
 
-make mrproper
-make imx8mp_venice_defconfig
-make
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+---
+ configs/e850-96_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-flash.bin is still generated despite this nasty warning:
+diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
+index c36196c510c5..b1b3510d691d 100644
+--- a/configs/e850-96_defconfig
++++ b/configs/e850-96_defconfig
+@@ -13,6 +13,7 @@ CONFIG_SYS_LOAD_ADDR=0x80000000
+ # CONFIG_PSCI_RESET is not set
+ CONFIG_ANDROID_BOOT_IMAGE=y
+ # CONFIG_AUTOBOOT is not set
++CONFIG_DEFAULT_FDT_FILE="exynos850-e850-96.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_HUSH_PARSER=y
+ CONFIG_CMD_ABOOTIMG=y
+@@ -22,6 +23,7 @@ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PART=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_RNG=y
++CONFIG_PARTITION_TYPE_GUID=y
+ CONFIG_NO_NET=y
+ CONFIG_CLK_EXYNOS850=y
+ CONFIG_MMC_DW=y
+-- 
+2.39.5
 
-  CFGS    spl/u-boot-spl.cfgout
-  BINMAN  .binman_stamp
-Image 'image' has faked external blobs and is non-functional: tee.bin
-
-Image 'image' is missing optional external blobs but is still functional: t=
-ee-os
-
-/binman/section/fit/images/tee/tee-os (tee.bin):
-   See the documentation for your board. You may need to build Open Portabl=
-e
-   Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to/tee=
-.bin
-
-Some images are invalid
-make: *** [Makefile:1135: .binman_stamp] Error 103
-
-CI also did not complain.
-
-Yes, I would welcome a patch that removes these tee messages by default.
