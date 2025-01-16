@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF7ACC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 14:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598BAC02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 14:37:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 301CF80708;
-	Thu, 16 Jan 2025 15:35:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D6CFD8022B;
+	Thu, 16 Jan 2025 15:37:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O+t1pv1O";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c6ZRtRPJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFDC680703; Thu, 16 Jan 2025 15:35:52 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id D5C8C80283; Thu, 16 Jan 2025 15:37:14 +0100 (CET)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 347158022B
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:35:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 408E6801B0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:37:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e53c9035003so1606141276.2
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 06:35:50 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5f32fab5de9so252543eaf.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 06:37:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737038149; x=1737642949; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z7NoCW5IZy44MUXhOERYpEYbqZ4k7cBFqW/+Z7M3scc=;
- b=O+t1pv1OdRx3OPltdO0mqhJmQ8pJ5FRX+h9dzXghcI+gzp0teshM3hX+uEC97iFU4w
- hvkhdObOLiKh6aHBDLQtqy9tRmvRDnTttqZuVJwzF1NqMMUG7Aqakof3wvqXsJ1gQu1R
- WlEmuBlPn0FDzTb6UUAHjL9IegYzlPs8DCnsaaLOUSKpIbSdI5ZApW2pizjtpLogjoUl
- uAVuKP3EiQir192Pg7cPK+ZWcPlzPjqTxVi0DG4SfkC7ohznB65xszco40EVe9ahAH+F
- EX/GTZ7R4vtfDe8F0NSCVf0SAasQiqvTr2JJsvtY7lIraADYWp9POsUxF6tGv5yYSF7s
- iMNA==
+ d=gmail.com; s=20230601; t=1737038231; x=1737643031; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dbZpxlL2KeatXF/U2T+3ayB2do3aIUxOF/wMKnid5Yw=;
+ b=c6ZRtRPJw84cOBkODmo3dWbsf28PiKWpo5XoonqeQ4vMRTPiF7M4DPTJoGHbohAFE+
+ EKMWRb2c/T29rFDalCKxV84n0JFIzmZMljyI+5RVLLr9M0RdyzU1FdhxB1aOFMPe/bna
+ ZgPJAIIIU+ABbqPsZvY5XTOXms7Stxir/5alZWwGi6lJRsJoS97hkYx+NLqHSm3Hcyet
+ +yoXzTaDar8hnaQI43t2lK/Uh4fO/4xF161XdpvP5/0pS7bbBgKOYWiHP8ElUGIbt2E+
+ H5rMFaeVzlpForUcUyFQT4SIcCm3uhhJoRWbgr3coIsGtz4yfc9G0UZghaeWtEbA9gv5
+ 3qtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737038149; x=1737642949;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1737038231; x=1737643031;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Z7NoCW5IZy44MUXhOERYpEYbqZ4k7cBFqW/+Z7M3scc=;
- b=aISmwscO31msOX7YeLcDP91o99mjpKUTEWJ9w7CGidUr/i+JAw5inwfm4K4U8ctCFK
- w6T750aMVRsf+ABDJOvPO3KeXGexZHmwxRJocUWPQHR8QHmStsR3YLPzv0ZdDkuocH86
- GCiUqpIu6cn8jW9LBunyRzan4u71/kAKLOOYx+DECzTPUgYExxR60GLJ/Rbwf+MfM0pO
- T37SPfqUjKSKnE20FtksPa5tys+ap0lKU6bc1AnrDAqtlEyS7XQgeyo6amVV26n4B8H7
- 98VZ5t1jk022POf56A5IV2h+w3q84KiAELMpaTBWvgp09A+6NAYQXAgZP/OpvlLlCXii
- JLDQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/tFo4SS7d1v+EarV7O/k8ycXCRy90Rvh3dCdV5ZF0gEcFhi40mtPS4vHsFpC78DHwBLrg/Iw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3FH+J5eHzy8ne1n/4rAemxkqnD5kMGAXFtWWsOgUdOXdTopqP
- mJMWlH/v7vRfK0E79vOJgJRShMI3wazP8tKbaxcmhp8q9Q1UPSa61nik+fq9+ninBrHkUAS2AS0
- qqqcLrHWI6JARZ7499evj4BwWBelrwzrLzI/2gA==
-X-Gm-Gg: ASbGnctBJWVPA9DnBLhqN6NkNx9+2qlEJDTe251qdtVqUR6uqw4HwArMKNuUC5i7V1X
- Ykbzt6mjKRVxYsCMNieM9G5Tm+8zGKCQ5IHsVIg==
-X-Google-Smtp-Source: AGHT+IFWABF2oZXzWU/8iLevzrarOElKwjctSQG3VPmf/RvxriI4c4LcKr294RwBhkkvaZyGN4k4StLxz3pBm8AHhk8=
-X-Received: by 2002:a05:690c:4983:b0:6ef:57ad:9d91 with SMTP id
- 00721157ae682-6f531238d2amr292353217b3.24.1737038148819; Thu, 16 Jan 2025
- 06:35:48 -0800 (PST)
+ bh=dbZpxlL2KeatXF/U2T+3ayB2do3aIUxOF/wMKnid5Yw=;
+ b=xBhD9RnU28Z1HTeQweazhdvhFjeIqvFNbk5NTcQnehM9lQsyGHnmS74D3wNnYaMdGK
+ 0JJCTlYjySCohCaWB+0PHUfrDQpZ/MbgBZhxNltRa3n9ZlGIpEzRY/91wHG5WOfaVLrj
+ 968xGw4aIT0hn6KpVOpwA9Xik98Qka7AIQk0SgqMylmnbPWxveZShDHBkHiDiwlO7Xk9
+ JckoMQZrnHyUiVl/aHivIempw1pkzfWfq3fXjjIv/hnneDfQXXu8YoXhShBSNwup8K4l
+ JvCoxBsUCsJM9CFqx0Lowqr18FoM5gbWktVQrxZ9ln5lQPectZyLwScroCgrMXEJdczE
+ BYVQ==
+X-Gm-Message-State: AOJu0Yw6Mh5ei0tgASJQE3nIU5vk2Kf5KVgIpc1C201jj4jXsXbmt5rp
+ HHmKhkZimYZPdLlWxRTDsKuVaLmK3dlTwHkmJamK/7+bLWtK2t1E7jUUsA==
+X-Gm-Gg: ASbGncty8t09VJk1P5axVNsJRszyQyvyua+x14BFk0fMdJb2BFB36g7c/uG2r1DZvYA
+ K0UiAjA3mwLdWuPcoRhSgii18/p0rD0dgt+dX4G7nZPlTsqBy6rfKWhOaPHBekWGt5W3y73EnyA
+ R2pUkNqUwwgsHoNXfo5isjvXck98obHiXK6hV4Dlld/ZFk+VN8vSaTfw+8tredYiG9HJdpj1pqs
+ vxJbFD+cW8G0Et1x54v2oohEPw8mVYNYMXJDKzcNXoJK1Jor66cIAV/pCqAX+ocC3Z0cpM=
+X-Google-Smtp-Source: AGHT+IFslPGrNrRno4VDtKapCiCeiJFA5+cJksMcY5mZMyUTu/5LC4AA7d5EYStq6K+Ymr9X4X1T2A==
+X-Received: by 2002:a05:6871:378d:b0:29e:5df2:3e50 with SMTP id
+ 586e51a60fabf-2aa066d3e3dmr18529937fac.15.1737038230845; 
+ Thu, 16 Jan 2025 06:37:10 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b1a4:73e9:7e6a:ebcd])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2b1b8d4b3c9sm87613fac.25.2025.01.16.06.37.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jan 2025 06:37:10 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20250116
+Date: Thu, 16 Jan 2025 11:37:06 -0300
+Message-Id: <20250116143706.2011606-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250114152022.933662-1-raymond.mao@linaro.org>
- <20250114152022.933662-3-raymond.mao@linaro.org>
- <CAFLszTh=d=Brcrd-4He0nDZgybjKOdAqqUxvh_z245xjF1giuw@mail.gmail.com>
-In-Reply-To: <CAFLszTh=d=Brcrd-4He0nDZgybjKOdAqqUxvh_z245xjF1giuw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 16 Jan 2025 16:35:12 +0200
-X-Gm-Features: AbW1kvaquEag0-1laYSD5K8MRP09zZDvLyAj9Mpz2Km6jEd3ncydzKPdjY6G_uw
-Message-ID: <CAC_iWjL7y6QyjQtRp6qd_5QxF6aUw+qrhY6snXZ2B-Qiz7Dy1g@mail.gmail.com>
-Subject: Re: [PATCH v5 3/3] tpm: get tpm event log from bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Levi Yun <yeoreum.yun@arm.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Tim Harvey <tharvey@gateworks.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,170 +93,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 15 Jan 2025 at 03:17, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Raymond,
->
-> On Tue, 14 Jan 2025 at 08:20, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Get tpm event log from bloblist instead of FDT when bloblist is
-> > enabled and valid from previous boot stage.
-> >
-> > As a fallback, when no event log from previous stage is observed
-> > and no user buffer is passed, malloc a default buffer to initialize
-> > the event log.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - Remove patch dependency.
-> > - Remove the fallback to FDT when BLOBLIST is selected.
-> > Changes in v3
-> > - Malloc an 8KB buffer when user eventlog buffer does not exist.
-> > Changes in v4
-> > - Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
-> > Changes in v5
-> > - Replace TPM2_EVENT_LOG_SIZE with CONFIG_TPM2_EVENT_LOG_SIZE.
-> > - Add an inline TODO comment.
-> >
-> >  lib/tpm_tcg2.c | 61 ++++++++++++++++++++++++++++++++++----------------
-> >  1 file changed, 42 insertions(+), 19 deletions(-)
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> nit in case you respin again: -ENODEV is for driver model, when there
-> is no device. It is actually handling specially by driver model. So
-> -ENOENT is what I try to use for things that don't exist but aren't
-> devices.
->
+Hi Tom,
 
-+1,
+Please pull from u-boot-imx/master, thanks.
 
+The following changes since commit 178f6ecb21fe12ada74a9a1a08093c812b15eea5:
 
-> >
-> > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-> > index 4134d93a35..2d9076f091 100644
-> > --- a/lib/tpm_tcg2.c
-> > +++ b/lib/tpm_tcg2.c
-> > @@ -5,6 +5,7 @@
-> >
-> >  #include <dm.h>
-> >  #include <dm/of_access.h>
-> > +#include <malloc.h>
-> >  #include <tpm_api.h>
-> >  #include <tpm-common.h>
-> >  #include <tpm-v2.h>
-> > @@ -19,6 +20,7 @@
-> >  #include <linux/unaligned/generic.h>
-> >  #include <linux/unaligned/le_byteshift.h>
-> >  #include "tpm-utils.h"
-> > +#include <bloblist.h>
-> >
-> >  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
-> >                       u32 *bank_num)
-> > @@ -615,15 +617,24 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
-> >                 elog->found = log.found;
-> >         }
-> >
-> > +       if (elog->found)
-> > +               return 0;
-> > +
-> >         /*
-> > -        * Initialize the log buffer if no log was discovered and the buffer is
-> > -        * valid. User's can pass in their own buffer as a fallback if no
-> > -        * memory region is found.
-> > +        * Initialize the log buffer if no log was discovered.
-> > +        * User can pass in their own buffer as a fallback if no memory region
-> > +        * is found, else malloc a buffer if it does not exist.
-> >          */
-> > -       if (!elog->found && elog->log_size)
-> > -               rc = tcg2_log_init(dev, elog);
-> > +       if (!elog->log_size) {
-> > +               elog->log = malloc(CONFIG_TPM2_EVENT_LOG_SIZE);
-> > +               if (!elog->log)
-> > +                       return -ENOMEM;
-> > +
-> > +               memset(elog->log, 0, CONFIG_TPM2_EVENT_LOG_SIZE);
-> > +               elog->log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
+  Merge patch series "bootstd: Support recording images" (2025-01-15 19:27:14 -0600)
 
-Why are you doing this? There are 2 ways to pass an EventLog to the
-kernel. Either via a config table from EFI, or using sml-base and
-sml-size in a DT (which are both required). IOW you will create an
-EventLog no one will discover
+are available in the Git repository at:
 
-Cheers
-/Ilias
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20250116
 
+for you to fetch changes up to 985268107d4c0389d154126aa74c1d21706a7ce8:
 
-> > +       }
-> >
-> > -       return rc;
-> > +       return tcg2_log_init(dev, elog);
-> >  }
-> >
-> >  int tcg2_measurement_init(struct udevice **dev, struct tcg2_event_log *elog,
-> > @@ -676,10 +687,25 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
-> >         const __be32 *size_prop;
-> >         int asize;
-> >         int ssize;
-> > +       struct ofnode_phandle_args args;
-> > +       phys_addr_t a;
-> > +       fdt_size_t s;
-> >
-> >         *addr = NULL;
-> >         *size = 0;
-> >
-> > +       *addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
-> > +       if (*addr && *size)
-> > +               return 0;
-> > +       /*
-> > +        * TODO:
-> > +        * replace BLOBLIST with a new kconfig for handoff all components
-> > +        * (fdt, tpm event log, etc...) from previous boot stage via bloblist
-> > +        * mandatorily following Firmware Handoff spec.
-> > +        */
-> > +       else if (CONFIG_IS_ENABLED(BLOBLIST))
-> > +               return -ENODEV;
-> > +
-> >         addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
-> >         if (!addr_prop)
-> >                 addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
-> > @@ -694,22 +720,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
-> >
-> >                 *addr = map_physmem(a, s, MAP_NOCACHE);
-> >                 *size = (u32)s;
-> > -       } else {
-> > -               struct ofnode_phandle_args args;
-> > -               phys_addr_t a;
-> > -               fdt_size_t s;
-> >
-> > -               if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
-> > -                                              0, &args))
-> > -                       return -ENODEV;
-> > +               return 0;
-> > +       }
-> >
-> > -               a = ofnode_get_addr_size(args.node, "reg", &s);
-> > -               if (a == FDT_ADDR_T_NONE)
-> > -                       return -ENOMEM;
-> > +       if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
-> > +               return -ENODEV;
-> >
-> > -               *addr = map_physmem(a, s, MAP_NOCACHE);
-> > -               *size = (u32)s;
-> > -       }
-> > +       a = ofnode_get_addr_size(args.node, "reg", &s);
-> > +       if (a == FDT_ADDR_T_NONE)
-> > +               return -ENOMEM;
-> > +
-> > +       *addr = map_physmem(a, s, MAP_NOCACHE);
-> > +       *size = (u32)s;
-> >
-> >         return 0;
-> >  }
-> > --
-> > 2.25.1
-> >
->
-> Regards,
-> SImon
+  imx: fdt: fix cooling-device property corruption (2025-01-16 10:16:47 -0300)
+
+u-boot-imx-master-20250116
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/24221
+
+- Enable watchdog command on Capricorn board.
+- Convert imx8m evk boards to BOOTSTD.
+- Enable dynamic mmcdev setting on imx8m evk boards.
+- Fix i.MX FDT cooling-device property corruption.
+- Add OP-TEE support on Phycore i.MX8M boards/
+----------------------------------------------------------------
+Alexander Sverdlin (1):
+      configs: capricorn_cxg3: Enable CMD_WDT
+
+Peng Fan (17):
+      imx: imx93_evk: switch to BOOTSTD
+      imx: imx93_qsb: switch to BOOTSTD
+      imx: imx91_evk: switch to BOOTSTD
+      imx: imx8mp_evk: Enable dynamic settings to mmcdev and mmcroot
+      imx: imx8mp_evk: Switch to BOOTSTD
+      imx: imx8mn_evk: Cleanup headers
+      imx: imx8mn_evk: Drop DECLARE_GLOBAL_DATA_PTR
+      imx: imx8mn_evk: Enable dynamic settings to mmcdev and mmcroot
+      imx: imx8mn_evk: Switch to BOOTSTD
+      imx: imx8mm_evk: Enable dynamic settings to mmcdev and mmcroot
+      imx: imx8mm_evk: Switch to BOOTSTD
+      imx: imx8mq_evk: Cleanup headers
+      imx: imx8mq_evk: Drop DECLARE_GLOBAL_DATA_PTR
+      imx: imx8mq_evk: Enable dynamic settings to mmcdev and mmcroot
+      imx: imx8mq_evk: Switch to BOOTSTD
+      imx: imx93-11x11-evk: drop duplicated nodes
+      gpio: adp5585: Update compatible string
+
+Sébastien Szymanski (1):
+      imx: fdt: fix cooling-device property corruption
+
+Yannic Moog (6):
+      arm: imx8m: add OP-TEE node
+      phycore-imx8mp_defconfig: add optee load address
+      imx8mm-phygate-tauri-l_defconfig: add optee load address
+      phycore-imx8mm_defconfig: add optee load address
+      doc: phytec: imx8mp: add OP-TEE documentation
+      doc: phytec: imx8mm: add OP-TEE documentation
+
+ arch/arm/dts/imx8mm-u-boot.dtsi              |  17 +++-
+ arch/arm/dts/imx8mn-u-boot.dtsi              |  17 +++-
+ arch/arm/dts/imx8mp-u-boot.dtsi              |  17 +++-
+ arch/arm/dts/imx8mq-u-boot.dtsi              |  17 +++-
+ arch/arm/dts/imx93-11x11-evk-u-boot.dtsi     | 118 ---------------------------
+ arch/arm/mach-imx/fdt.c                      |   2 +-
+ arch/arm/mach-imx/imx8m/Kconfig              |  19 +++++
+ arch/arm/mach-imx/imx9/Kconfig               |   6 ++
+ board/freescale/common/Makefile              |   2 +-
+ board/freescale/imx8mm_evk/imx8mm_evk.c      |   3 +
+ board/freescale/imx8mm_evk/imx8mm_evk.env    |  67 +++++++++++++++
+ board/freescale/imx8mn_evk/imx8mn_evk.c      |  12 +--
+ board/freescale/imx8mn_evk/imx8mn_evk.env    |  67 +++++++++++++++
+ board/freescale/imx8mp_evk/imx8mp_evk.c      |   5 ++
+ board/freescale/imx8mp_evk/imx8mp_evk.env    |  57 +++++++++++++
+ board/freescale/imx8mq_evk/imx8mq_evk.c      |  29 ++-----
+ board/freescale/imx8mq_evk/imx8mq_evk.env    |  60 ++++++++++++++
+ board/freescale/imx91_evk/imx91_evk.env      |  29 ++++++-
+ board/freescale/imx93_evk/imx93_evk.env      |  88 ++++++++++++++++++++
+ board/freescale/imx93_qsb/imx93_qsb.env      |  29 ++++++-
+ board/phytec/phycore_imx8mm/MAINTAINERS      |   1 +
+ configs/capricorn_cxg3_defconfig             |   1 +
+ configs/imx8mm-phygate-tauri-l_defconfig     |   1 +
+ configs/imx8mm_evk_defconfig                 |   3 +-
+ configs/imx8mm_evk_fspi_defconfig            |   4 +-
+ configs/imx8mn_evk_defconfig                 |   2 +-
+ configs/imx8mp_evk_defconfig                 |   2 +-
+ configs/imx8mq_evk_defconfig                 |   3 +-
+ configs/imx91_11x11_evk_defconfig            |   3 +-
+ configs/imx91_11x11_evk_inline_ecc_defconfig |   3 +-
+ configs/imx93_11x11_evk_defconfig            |   2 +-
+ configs/imx93_9x9_qsb_defconfig              |   3 +-
+ configs/imx93_9x9_qsb_inline_ecc_defconfig   |   3 +-
+ configs/phycore-imx8mm_defconfig             |   1 +
+ configs/phycore-imx8mp_defconfig             |   1 +
+ doc/board/phytec/imx8mm-optee-build.rsti     |  14 ++++
+ doc/board/phytec/imx8mm-phygate-tauri-l.rst  |   9 +-
+ doc/board/phytec/phycore-imx8mm.rst          |   8 +-
+ doc/board/phytec/phycore-imx8mp.rst          |  20 ++++-
+ drivers/gpio/adp5585_gpio.c                  |   2 +-
+ include/configs/imx8mm_evk.h                 |  22 -----
+ include/configs/imx8mn_evk.h                 |  30 -------
+ include/configs/imx8mp_evk.h                 |  21 -----
+ include/configs/imx8mq_evk.h                 |  22 -----
+ include/configs/imx93_evk.h                  | 105 ------------------------
+ 45 files changed, 573 insertions(+), 374 deletions(-)
+ create mode 100644 board/freescale/imx8mm_evk/imx8mm_evk.env
+ create mode 100644 board/freescale/imx8mn_evk/imx8mn_evk.env
+ create mode 100644 board/freescale/imx8mp_evk/imx8mp_evk.env
+ create mode 100644 board/freescale/imx8mq_evk/imx8mq_evk.env
+ create mode 100644 board/freescale/imx93_evk/imx93_evk.env
+ create mode 100644 doc/board/phytec/imx8mm-optee-build.rsti
