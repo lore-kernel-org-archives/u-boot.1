@@ -4,100 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6C7BC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 15:47:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CDC8C02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 15:50:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 043A480214;
-	Thu, 16 Jan 2025 16:47:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id B456C8033D;
+	Thu, 16 Jan 2025 16:50:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KMct4UH0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O2sRJ5CD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B47438033D; Thu, 16 Jan 2025 16:47:30 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6F684806DD; Thu, 16 Jan 2025 16:50:09 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CE40801B0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 16:47:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 180E580214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 16:50:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id E8FC43F677
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:47:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1737042447;
- bh=tglB0fkv1KpNqRQiVFR5GvWOYddsmDUrcJG//zrOXBo=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=KMct4UH01ewLd4jBar9G4/MX0Bxjm4iSoqTSmhMiFh743LzhUcWFBF09ndfDPpKbs
- 4wDPM8D882G4sILTQlbsXqQ0nqz43DwA3QG4Qm7O64sSq7/LV6qW4V/8uB1alnfTP2
- vLsFL+UBr7zWma0IuvVx1aGlviQacVVJTOzaaTJY1IY4HPIYuh2R6XTMFz+vQOQFCk
- +IQbKUzyKhk1YASFDTYZJR+aHa1tH1hbbx7Z9G/stXkoaZZhKAgQe6roc5T6jy+MJC
- p+Co76C3m6wIA7QerJz4xndwZnqN+UfL8zba3oJfyZmz0pWokIAedDkvEJuJ0h1ZsN
- KaWNbEhVJIDiQ==
-Received: by mail-ed1-f70.google.com with SMTP id
- 4fb4d7f45d1cf-5d3f01eeef8so1063893a12.0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 07:47:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-aa67ac42819so168014166b.0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 07:50:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1737042606; x=1737647406; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1CPf4RPLvTEHbKtkXMWADK8dplvexbms21MPwwIE1EQ=;
+ b=O2sRJ5CDzHe7lfioS2+F372TY1k7kdvRTbyjJ+Ke9D+nR1uSZ7vHNLgTdOnvhhS7AG
+ OFSvTZ7g5E/Wj2Mg3Q+0m0cuJDfVS6MX6dcrslGH+9l7BAcifL3uWaBtRcThDQ895scN
+ pMS6X+0PWwnPJTAVM3bkauW59iBh8PKNgNyHM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737042447; x=1737647247;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tglB0fkv1KpNqRQiVFR5GvWOYddsmDUrcJG//zrOXBo=;
- b=c/bdiClt9pTf4wgHhr47ucp5hhNPl+HpL9ZNv8QJuQQG+1/fdxF1eU3OT4vtjRIeH/
- R0iYaOEpDB5KCH8JZwcglf48txNNGjInpu8NXfyEQov/yVTg3NbvQdw1Cqne/I0NwurV
- vZHk9WIPwrCxsLvn7iOhc09RIwFHbJlE3/5L7xhNz5s/GBK6horm4KTTVprJ3+zWdXj9
- gbv6j9UjqGhzcrEbcS2jGEk96gxOp8JIiljr5LYF8apEkGBxTmbQ4AgD20+05pH4eFTX
- 8adwmiYFvVir1dxBtegTKu9g5SzgWLbnloUHJyJDskELDGshi+TZdeBQYtu2C+lqe775
- ARlA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYQ3q4yJSqP/U7QyKJ4oPTr+4DTPveLhrC/sGb3W1Ay7qMTI0lyDwF5dKcYcbghkTUv4dt45E=@lists.denx.de
-X-Gm-Message-State: AOJu0YxH3zaUU1AqMMNIIhb++K03aBnrZfKsfafwcZDn3mLIyNQVL7Wp
- HVNwc1Dsu1JWpSIDMdlDdLMN2JweSgQutLf1f4WMj98qZ+gFoU3093aX7OW1HSD8q4LepuLfDFP
- 3vej5azZbJzKw1LoG5YwYQdb80z/lYGedRN1/AoXvjXJI6YfPddfiZcIXJFBMjKPQioI=
-X-Gm-Gg: ASbGncvpEV3vVX2lih1KUA29J2GkYVZYFas4tSYBghzFp9GG1ZkDMuE4EEt5WCLFoeh
- uL5oA0yX/gxVUgnRVoHUJDSous/elW+ETft8W4jjEXzFL3N0NKOeJnwRFoq8Y+1XMlsea1a7IZ/
- alUVt1oT5lCmhWNnBBtJmeBzbk1gFH1JPXWB5ztOiiQy9e0HlyzBCHm1fNea1/7ETaJdN932aoV
- Fod4ILK0AMNQcoKrKIU1IcszLJBVF9sdKOK+hHDlJ8D9LM7r4txn6O21RAPviNv6hjvBBt3Iq+L
- Re1TfrsJTfS3RIDjrcXTrPBs5ixiMN4eixBweynTZ0bz
-X-Received: by 2002:a05:6402:2342:b0:5d9:f362:1693 with SMTP id
- 4fb4d7f45d1cf-5d9f36217d1mr30679095a12.30.1737042446999; 
- Thu, 16 Jan 2025 07:47:26 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHNE+prrjR3cRSyV12OjV3+asvR7tMktdgxOqEHFtxl8afFWZz3CTOTppAPSaTaFlsdQCAl+g==
-X-Received: by 2002:a05:6402:2342:b0:5d9:f362:1693 with SMTP id
- 4fb4d7f45d1cf-5d9f36217d1mr30679042a12.30.1737042446619; 
- Thu, 16 Jan 2025 07:47:26 -0800 (PST)
-Received: from ?IPV6:2a02:3035:6e0:18b7:2225:e8f4:a4b5:e79?
- ([2a02:3035:6e0:18b7:2225:e8f4:a4b5:e79])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5db73edccd4sm89179a12.77.2025.01.16.07.47.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jan 2025 07:47:25 -0800 (PST)
-Message-ID: <dede82a9-f8ad-40e9-a2b7-8c0193974af2@canonical.com>
-Date: Thu, 16 Jan 2025 16:47:23 +0100
+ d=1e100.net; s=20230601; t=1737042606; x=1737647406;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1CPf4RPLvTEHbKtkXMWADK8dplvexbms21MPwwIE1EQ=;
+ b=b4sCSXchNUpt45NuqI8uz15z567dED3mYWgOAdOWZ6nIccisiRn2/YTSWAPNFxSTym
+ zanB60k2STGdwiscY+2XvaHrfAlB1ZuvqeOXRBkPItHv2MvYDyGcF2CGBizXzg68I0k9
+ esw/l72fJbP+cHrzwVzlut8y60J5V5eeIzCex25OBOXhN5vexIvcIsZ6exLiMc8Xr0TK
+ iAB0gsBjAsFR0jdnueFJuKSFdZKqRX0DAVJ8kwZmwhSE5uRvMU/7MgUSShL60/Uwcr4w
+ nbgShSAKjY/5boNS+IvoTrYut/Wq8hFlSUDVJAqQjPqCSppSqZayhTLKCKLt6kHpJcg0
+ UhvA==
+X-Gm-Message-State: AOJu0Yx7jD8STcWSSMP0ml7I011sCWIM/y+6kJVACHfbiSu6caxEgojw
+ l9Vq7otpZn2lhJensVWHiIFX4Wrfe/mNy0BbQC68Ed4innP5q9iefoNztxkFLIWJeXtl46gYIVY
+ 3lxCOalpiCd1Ec6/S9yjnxVdcv6GXdUnYPlKx
+X-Gm-Gg: ASbGncv0U0fzn3WzWfPfFEGTAXUawSLRxhkBbNwWB5tSmSzyAJkcb5w1KHDYHnMJi6t
+ BD/KhWmCYAxkcoDGtxZWSMoL2PEz7nBt4K+wAzLk=
+X-Google-Smtp-Source: AGHT+IGFCc1hjNya/EHCuVV5mM34jCFrWFrkexK9fAvSI2aqB8XUQ20IRRRrjWqRPWOzhE4i6M3dgug9rIYHzoZ0q68=
+X-Received: by 2002:a17:906:f5a2:b0:aa6:8676:3b33 with SMTP id
+ a640c23a62f3a-ab2abc6e768mr3020955566b.47.1737042606468; Thu, 16 Jan 2025
+ 07:50:06 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] efi_loader: print image load address in StartImage
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- u-boot@lists.denx.de
-References: <20250102181133.378867-1-heinrich.schuchardt@canonical.com>
- <20250102181133.378867-5-heinrich.schuchardt@canonical.com>
- <CAC_iWjLykW-kgo65mCGfnwBEmYGbGa6mq52yxfCZHC1Rep1FQg@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAC_iWjLykW-kgo65mCGfnwBEmYGbGa6mq52yxfCZHC1Rep1FQg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250115133114.590375-1-sjg@chromium.org>
+ <87a5br850s.fsf@baylibre.com>
+In-Reply-To: <87a5br850s.fsf@baylibre.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 16 Jan 2025 08:49:55 -0700
+X-Gm-Features: AbW1kvYWW4ZOObhHvqRqLwFlzsZddXwsY7Xw_AgDzi7cCBi-ptnidGdSTWUFqbI
+Message-ID: <CAFLszTjJp0oTLf=Fzt4MKMbjiz7yv4iz-8LNHZkYXwBD77p2Lg@mail.gmail.com>
+Subject: Re: [PATCH 00/43] test: Improvements to ut command and test-suite
+ running
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ion Agorria <ion@agorria.com>, Jens Wiklander <jens.wiklander@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Julien Masson <jmasson@baylibre.com>, Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Massimiliano Minella <massimiliano.minella@se.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Ravi Minnikanti <rminnikanti@marvell.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Richard Weinberger <richard@nod.at>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,63 +107,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07.01.25 14:32, Ilias Apalodimas wrote:
-> On Thu, 2 Jan 2025 at 20:11, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> When starting image add the image load address to the debug output.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   lib/efi_loader/efi_boottime.c | 7 ++++---
->>   1 file changed, 4 insertions(+), 3 deletions(-)
->>
->> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
->> index 080e7f78ae3..bc0cbd96e74 100644
->> --- a/lib/efi_loader/efi_boottime.c
->> +++ b/lib/efi_loader/efi_boottime.c
->> @@ -3194,7 +3194,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
->>          struct efi_loaded_image_obj *image_obj =
->>                  (struct efi_loaded_image_obj *)image_handle;
->>          efi_status_t ret;
->> -       void *info;
->> +       struct efi_loaded_image *info;
->>          efi_handle_t parent_image = current_image;
->>          efi_status_t exit_status;
->>          struct jmp_buf_data exit_jmp;
->> @@ -3212,7 +3212,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
->>                  return EFI_EXIT(EFI_SECURITY_VIOLATION);
->>
->>          ret = EFI_CALL(efi_open_protocol(image_handle, &efi_guid_loaded_image,
->> -                                        &info, NULL, NULL,
->> +                                        (void **)&info, NULL, NULL,
-> 
-> We don't really need the cast here
+Hi Mattijs,
 
-Without the cast building fails.
+On Thu, 16 Jan 2025 at 02:47, Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> Hi Simon,
+>
+> Thank you for the series.
+>
+> On mer., janv. 15, 2025 at 06:30, Simon Glass <sjg@chromium.org> wrote:
+>
+> > The current method of running unit tests relies on subcommands of the
+> > ut command. Only the code in each subcommand knows how to find the tests
+> > related to that subcomand.
+> >
+> > This is not ideal and we now have quite a few subcommands which do
+> > nothing but locate the relevant tests in a linker list, then call a
+> > common function to run them.
+> >
+> > This series adds a list of test suites, so that these subcommands can be
+> > removed.
+> >
+> > An issue with 'ut all' is that it doesn't record how many tests failed
+> > overall, so it is necessary to examine copious amounts of output to look
+> > for failures. This series adds a new 'total' feature allow recording the
+> > total number of failed tests.
+> >
+> > To help with 'ut all' a new pytest is created which runs it (as well as
+> > 'ut info') and makes sure that all is well. Due to the 'ut all' failures
+> > this does not pass, so the test is disabled for now. It is here because
+> > it provides security against misnaming a test suite and causing it not
+> > to run.
+>
+> I wanted to test this, but it seems it does not apply on both master or
+> next:
+>
+> With master: 178f6ecb21fe ("Merge patch series "bootstd: Support recording images"")
+> With next: d6da3dbaef57 ("Merge patch series "cmd: Add support for optee commands."")
+>
+> When running:
+> $ b4 shazam -s -l --check 20250115133114.590375-1-sjg@chromium.org
+>
+> I see:
+>
+> """
+> [...] snip
+>
+> Total patches: 43
+> ---
+> Applying: test: Drop unused suite prototypes
+> Applying: test: Rename test_get_state() to ut_get_state()
+> Applying: test: Add functions to init and uninit the test state
+> Applying: test: Pass the test-state into ut_run_list()
+> Applying: Improve support for linker lists in data structures
+> Applying: test: Add newlines to hush-test messages
+> Applying: test: Rename test suites to match their linker-list name
+> Applying: test: Update ut info to show suites
+> Applying: test/py: Add a test which runs all unit tests
+> Applying: test: Drop the _test suffix on linker lists
+> Applying: test: Introduce a better array of test suites
+> Patch failed at 0011 test: Introduce a better array of test suites
+> error: sha1 information is lacking or useless (test/cmd_ut.c).
+> error: could not build fake ancestor
+> hint: Use 'git am --show-current-patch=diff' to see the failed patch
+> hint: When you have resolved this problem, run "git am --continue".
+> hint: If you prefer to skip this patch, run "git am --skip" instead.
+> hint: To restore the original branch and stop patching, run "git am --abort".
+> """
+>
+> On what base should this be applied if we want to test this?
+> Sorry if this is a sily question, usually I get dependencies from the
+> cover letter but I could not find any here.
 
-Best regards
+Yes, it is supposed to be based on -next but there are two patches in
+-next but not in the tree I used:
 
-Heinrich
+90856d695f2 test: sandbox: fix link error with do_ut_bootm if BLOBLIST=n
+6970eeb7885 test: sandbox: fix link error with do_ut_bloblist if BLOBLIST=n
 
-> 
->>                                           EFI_OPEN_PROTOCOL_GET_PROTOCOL));
->>          if (ret != EFI_SUCCESS)
->>                  return EFI_EXIT(EFI_INVALID_PARAMETER);
->> @@ -3266,7 +3266,8 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
->>
->>          current_image = image_handle;
->>          image_obj->header.type = EFI_OBJECT_TYPE_STARTED_IMAGE;
->> -       EFI_PRINT("Jumping into 0x%p\n", image_obj->entry);
->> +       EFI_PRINT("Starting image loaded at 0x%p, entry point 0x%p\n",
->> +                 info->image_base, image_obj->entry);
->>          ret = EFI_CALL(image_obj->entry(image_handle, &systab));
->>
->>          /*
->> --
->> 2.47.1
->>
-> 
-> With or without the cast removed
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+The series is available at
+sjg.u-boot.org/u-boot/u-boot/-/tree/tes?ref_type=heads
 
+I'll sort this out when I send v2, but will wait for some more feedback.
+
+[..]
+
+Regards,
+SImon
