@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD18CE77188
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 07:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17636E77188
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 07:22:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28B1E806D8;
-	Thu, 16 Jan 2025 08:20:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 800A68033D;
+	Thu, 16 Jan 2025 08:22:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0FE280658; Thu, 16 Jan 2025 08:20:53 +0100 (CET)
+ id BC9CA80658; Thu, 16 Jan 2025 08:22:22 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B68F780214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 08:20:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 433D980214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 08:22:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 50G7Kdlc025796
+ by Atcsqr.andestech.com with ESMTPS id 50G7MC3t025975
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 16 Jan 2025 15:20:39 +0800 (+08)
+ Thu, 16 Jan 2025 15:22:12 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 16 Jan
- 2025 15:20:39 +0800
-Date: Thu, 16 Jan 2025 15:20:35 +0800
+ 2025 15:22:12 +0800
+Date: Thu, 16 Jan 2025 15:22:08 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Mayuresh Chitale <mchitale@ventanamicro.com>
 CC: <u-boot@lists.denx.de>, Rick Chen <rick@andestech.com>, Tom Rini
  <trini@konsulko.com>, Conor Dooley <conor.dooley@microchip.com>, "Heinrich
  Schuchardt" <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v1 1/2] riscv: Enhance extension probing
-Message-ID: <Z4izQxsRwiDo4jtC@swlinux02>
+Subject: Re: [PATCH v1 2/2] riscv: Fallback to riscv,isa
+Message-ID: <Z4izoAfiTZHh_ZD3@swlinux02>
 References: <20250106130405.220369-1-mchitale@ventanamicro.com>
- <20250106130405.220369-2-mchitale@ventanamicro.com>
+ <20250106130405.220369-3-mchitale@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250106130405.220369-2-mchitale@ventanamicro.com>
+In-Reply-To: <20250106130405.220369-3-mchitale@ventanamicro.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 50G7Kdlc025796
+X-MAIL: Atcsqr.andestech.com 50G7MC3t025975
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,18 +69,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 06, 2025 at 01:04:04PM +0000, Mayuresh Chitale wrote:
-> Enhance the existing extension probing mechanism by adding support for
-> more extensions and probing using the "riscv,isa" property. This patch
-> is ported from the latest upstream linux.
+On Mon, Jan 06, 2025 at 01:04:05PM +0000, Mayuresh Chitale wrote:
+> Update the cpu probing to fallback to "riscv,isa" property if
+> "riscv,isa-extensions" is not available and modify the riscv CMO code
+> to use the block size that was probed during cpu setup.
 > 
 > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 > ---
->  arch/riscv/cpu/cpu.c                | 557 ++++++++++++++++++++++++++++
->  arch/riscv/include/asm/cpufeature.h |  37 ++
->  arch/riscv/include/asm/hwcap.h      | 105 ++++++
->  3 files changed, 699 insertions(+)
->  create mode 100644 arch/riscv/include/asm/cpufeature.h
->  create mode 100644 arch/riscv/include/asm/hwcap.h
+>  arch/riscv/cpu/cpu.c   | 71 +++++++++++++-----------------------------
+>  arch/riscv/lib/cache.c | 26 +++-------------
+>  2 files changed, 25 insertions(+), 72 deletions(-)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
