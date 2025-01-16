@@ -4,60 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD3AC02180
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 13:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFAFC02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 13:07:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1207C807C4;
-	Thu, 16 Jan 2025 14:05:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
+	by phobos.denx.de (Postfix) with ESMTP id 83A2280214;
+	Thu, 16 Jan 2025 14:05:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="UltkdIgs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="et7e1QQJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8A6C8069D; Thu, 16 Jan 2025 10:16:52 +0100 (CET)
-Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2E5078033D; Thu, 16 Jan 2025 02:59:35 +0100 (CET)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF41D801B0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 10:16:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03CCC80214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 02:59:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=riseup.net
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danct12@riseup.net
-Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx0.riseup.net (Postfix) with ESMTPS id 4YYcgj19cNz9t9V;
- Thu, 16 Jan 2025 09:16:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1737019009; bh=O/sXEtk6SqJ84q3Ofn+MMdRRJfLs/3yRb8Oq+TGXhYc=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=UltkdIgsdpD2fqG0Q3/KYrvr4SAPPPnyY2oLjky+z5bcQjZbMYDyOQSBsj7Oi7Jfv
- 8eq30JiMlKzBlNsaKNutwJ/psZP8nl3I0g1WOFlJveTN/+B4Xtp22xhls1FmXxe242
- Y3rkgRn5aX3y2h3c8C5d4rMQ3anPeFIX8sNLfMt0=
-X-Riseup-User-ID: ABF14187318540B57A2389230720F100A422D752202057B6BB1E8A0F6D6E7462
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4YYcgf2hDnzJrSq;
- Thu, 16 Jan 2025 09:16:46 +0000 (UTC)
-From: Dang Huynh <danct12@riseup.net>
-Date: Thu, 16 Jan 2025 16:15:59 +0700
-Subject: [PATCH 10/10] configs: pinetab2-rk3566: Enable video and USB keyboard
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-467a8d2d7f1so4037761cf.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 17:59:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1736992772; x=1737597572; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=v4tWoucHdYZcxyQuDCHPKf5o/9FAcip3CYgQH8wvP9M=;
+ b=et7e1QQJ26hhmvZhKAEhvlDq8TTSj+C9jryUFCIVyTexy1t5YP7PrDigLUYylsArQB
+ jWvPpElEAg4dsqFfTGSEi55NYbEqfheIgKtf7cubx14L9iL1xJ9KxxQXwut1UbVzJnzF
+ poIoqUDot3QlYWp53vRcL3JbR3D42im2RmQDU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736992772; x=1737597572;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=v4tWoucHdYZcxyQuDCHPKf5o/9FAcip3CYgQH8wvP9M=;
+ b=j+imN8T0iYD8z0Soe9/Gxag/6hkcwl5XXlfBNXG4ufRFsTCAJMVlGxfK/dfnDg6XO3
+ CoYRLE6D7ie7mEHwJX4+IPavTmMJEp5Xb1cczaK/q0Y0BaeBNSH4yVojGwAohnPct3q7
+ I+5cm07H7Qee5buJYYU/64+cUa5JXxX9r5kq9SAe6WypLcOMMHETBN4xImPUmBoWzBHy
+ 0bq627VY9cd5NTUlUoGq4Gq0FSPDCK+R7tLn3nACzjZ4UqdIoC9OwOzEmQUhqhXT3ccu
+ 3JDktWp/kpI95JGO9UeNJjryELRJuoADfXx2yVmRkYoZm1h2mM48+q/1OAvg+YBKQ3jz
+ vPrw==
+X-Gm-Message-State: AOJu0YzvBsSE8gAIlPuks5C258utfiRyF1lHCWYP16wOB/QF0TE0oUgg
+ Zc38xoMrbHR709yc5DokIIqUiAjrdNwdnTlS6d1idfDKK1g3H8QzqD77dwJ5Rog=
+X-Gm-Gg: ASbGncsSIfH/8dDUmdF/PGumqLshWBVThBkyGrZtxzhrxHHqAT/MJmB4k4dbZeu18lY
+ 2wy5hLPUk6wJVE4nu3AmbCrmzj3qgR+dM5Dl9puf6Aik397ecp8XV8Yc3pAsLxL5ozRI4JjuUUf
+ ZM4kj5cWX8gfxc5Bw/eBnuJQ1jyAEC3YlWyOe7tljyxcqveo9Eful7BgixVb0szhTrCFWcHxxSB
+ m36Cn+VAK56Vzb7GU6WaXf619NIBj9o5KNp4LJwsnrd/wTmN3ti
+X-Google-Smtp-Source: AGHT+IGh/NSqjfK6/7bdjzamxWTLEFX3kBv7FQgaYhlyxq6l/DjqnDfK4r5vWh1Q/oeGeR4noJgbQQ==
+X-Received: by 2002:a05:622a:190d:b0:467:8734:994f with SMTP id
+ d75a77b69052e-46c70eb036fmr464222831cf.0.1736992771858; 
+ Wed, 15 Jan 2025 17:59:31 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46c873dbf16sm70740921cf.67.2025.01.15.17.59.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Jan 2025 17:59:30 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Dragan Simic <dsimic@manjaro.org>, 
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Ion Agorria <ion@agorria.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Julien Masson <jmasson@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sean Anderson <seanga2@gmail.com>, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
+ Tim Harvey <tharvey@gateworks.com>, 
+ =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Wang Jie <dave.wang@rock-chips.com>
+In-Reply-To: <20241115231926.211999-1-sjg@chromium.org>
+References: <20241115231926.211999-1-sjg@chromium.org>
+Subject: Re: (subset) [PATCH v4 00/19] bootstd: Support recording images
+Message-Id: <173699276700.697899.2030941287512738823.b4-ty@konsulko.com>
+Date: Wed, 15 Jan 2025 19:59:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250116-vop2-pt2-v1-10-c9d646b53930@riseup.net>
-References: <20250116-vop2-pt2-v1-0-c9d646b53930@riseup.net>
-In-Reply-To: <20250116-vop2-pt2-v1-0-c9d646b53930@riseup.net>
-To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Ondrej Jirman <megi@xff.cz>, 
- Dragan Simic <dsimic@manjaro.org>
-Cc: u-boot@lists.denx.de, Dang Huynh <danct12@riseup.net>
-X-Mailman-Approved-At: Thu, 16 Jan 2025 14:05:20 +0100
+X-Mailer: b4 0.14.2
+X-Mailman-Approved-At: Thu, 16 Jan 2025 14:05:52 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,68 +122,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we have VOP2 support, let's enable it and support the
-built in USB keyboard.
+On Fri, 15 Nov 2024 16:19:07 -0700, Simon Glass wrote:
 
-Signed-off-by: Dang Huynh <danct12@riseup.net>
----
- configs/pinetab2-rk3566_defconfig | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+> This series provides a way to keep track of the images used in bootstd,
+> including the type of each image.
+> 
+> At present this is sort-of handled by struct bootflow but in quite an
+> ad-hoc way. The structure has become quite large and is hard to query.
+> Future work will be able to reduce its size.
+> 
+> [...]
 
-diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
-index 45e63b42d192dc172f24e071b09c8203675965d8..b250d8d12e9d5e045e28db4d455850f94514321f 100644
---- a/configs/pinetab2-rk3566_defconfig
-+++ b/configs/pinetab2-rk3566_defconfig
-@@ -23,7 +23,10 @@ CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_USE_PREBOOT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-pinetab2-v2.0.dtb"
-+CONFIG_PRE_CONSOLE_BUFFER=y
-+CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
-@@ -57,6 +60,8 @@ CONFIG_BUTTON=y
- CONFIG_BUTTON_ADC=y
- CONFIG_BUTTON_GPIO=y
- CONFIG_SPL_CLK=y
-+CONFIG_CLK_CCF=y
-+CONFIG_CLK_COMPOSITE_CCF=y
- # CONFIG_USB_FUNCTION_FASTBOOT is not set
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-@@ -69,6 +74,7 @@ CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPI_FLASH_SILICONKAISER=y
-+CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
- CONFIG_SPL_PINCTRL=y
-@@ -94,6 +100,7 @@ CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC3=y
- CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_ETHER_ASIX88179=y
-@@ -101,4 +108,12 @@ CONFIG_USB_ETHER_RTL8152=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_VIDEO=y
-+CONFIG_CONSOLE_ROTATION=y
-+CONFIG_VIDEO_LCD_BOE_TH101MB31IG002_28A=y
-+CONFIG_DISPLAY=y
-+CONFIG_VIDEO_ROCKCHIP=y
-+CONFIG_DISPLAY_ROCKCHIP_HDMI=y
-+CONFIG_DISPLAY_ROCKCHIP_DW_MIPI=y
-+CONFIG_VIDEO_DT_SIMPLEFB=y
- CONFIG_ERRNO_STR=y
+Applied to u-boot/master, thanks!
 
 -- 
-2.48.1
+Tom
+
 
