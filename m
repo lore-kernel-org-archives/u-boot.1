@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E6F6C02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 18:13:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C85CC02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 18:14:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1937180312;
-	Thu, 16 Jan 2025 19:13:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CCFC8069D;
+	Thu, 16 Jan 2025 19:14:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QE25Qvdg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Urvc3/uv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D10358069D; Thu, 16 Jan 2025 19:13:00 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 43EBF80703; Thu, 16 Jan 2025 19:14:21 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FA1D8022B
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 19:12:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 654938022B
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 19:14:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6dfbc45355bso16905606d6.2
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 10:12:58 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2ee8e8e29f6so1865419a91.0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 10:14:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737051177; x=1737655977; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1cwBNdn4EFveaMbXBCN0LCWKVkKABqiCaYNgSEx50l0=;
- b=QE25QvdgrrzEvQMOg1+T7SUbqvmA8XAlCDTZnS18cUp0PSAqK7ZPauNjdUNTY+rVFI
- tgVU6ej95A2livA3L10/db9Yma6zlYRyZosRC8fDw1inTg2B2ynrv03zcCEwevlT/QjP
- RK+E+5nkH/2lF+owlHq49BVYDkSC/hcY1g8IM=
+ d=linaro.org; s=google; t=1737051257; x=1737656057; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=itIhGfKLjTj7V8y+C+ThmAooFAZDwHsLhpHeK9utAKg=;
+ b=Urvc3/uvUNr90ECJr34dWhNYCnO5BrTZ7OqjCF0vxBAbrhpvrJnX1caZQ1BWmjhOkV
+ 8gIlEtLLXtCT0zf9g3uAnVED2zKuxoC7zv1sYAVdI8xPtXBvfGYtDvtMJjmYHBXZJ3xr
+ Go/anL4wq5Zdfsa8rMFwWXsLZRHWjMRR8Q1Bw8NUjA69Jw3Wcqwt8KWJWB3FQFHrDX2+
+ +o8UwY/whrPYAVYsyP+9ELmZG0SxdICEVUc8gkV+iOANZsVZFLXNL/HYfWh0NXF5kywX
+ JQk5o57ef/GlF09XWF2C7WDc0fFV6Vav23FU7YNfrbhbZ8acZ457q5I2zXQk37SjnVXX
+ 9/kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737051177; x=1737655977;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1cwBNdn4EFveaMbXBCN0LCWKVkKABqiCaYNgSEx50l0=;
- b=ZacG3YeuK9YYHnjn8DF7Y4SD4ILnaDDPwKqhJiX7lVLGYB7NSgCvGc382GWwPT4r/S
- dgxuQMThWNFMUuYk/ZOdgQtZgmMQ6HSrZ60eiY/kDrKgDThPppTnlG3VIRWTji64p5kf
- JeVTAY3Hxe0TrGCiiE8IpAGEFwlHr48cmP8GkHhfu6jM1ICJur3OJiZDi1FM98hdpXJF
- /E747BCLoUqnFMDJjULexwZjxencS81hieN7Ou6goFj84g3L3/wuNUG7of1/6P5zmhyS
- 9nEvqhQ4j6eCOfpSKV/Qhw6r0kg8Ee4bniia2lDAiRrXVAe/W0YO9pu+3QEgszZMLX7+
- zeVg==
-X-Gm-Message-State: AOJu0Yx24gRc6ROXaFC8FBAwLbPFAyaJHrjA9Zmegk4fb5WNS10JFC/p
- NJC1KBFbSU9kfASe4gweBed+Y4aA2KJgqP580m6v+R3ZfwflAcAv8+U75Xnh2bkfV1XoZjOgGj5
- zYVw=
-X-Gm-Gg: ASbGnctcrQE0vW6QF/EqV4D1+WzZAQdFSQ2fP+m+D3FQ+MltlRe+GMKAaKq447znzHa
- bSIlkzIV6K/8YdjA9Lvk2xcq0e1J+93BcPoMseQxI1LeM/mY01KoeZHZMCUkLK8YNdZ6aoGHrea
- 2dvhc1fX769b+1UG8zvwQUnrdEHO//UVGzGMUxGcLLL6PWjCReJdyx8dmR+BWgaHcpZxjUgz0By
- ry2QwDYp0yYhsDwD93gKj1GKeSyopbmxI9CLpzywLxa8BBQTjnTGw==
-X-Google-Smtp-Source: AGHT+IFQfTPGeFzKRoWqJlc59vdHaJhAQlLt3gnY474mpmpyFhgAmpAfgYuzTXuQ6UeegkB+H0vIRg==
-X-Received: by 2002:a05:6214:1bc7:b0:6d8:846b:cd8d with SMTP id
- 6a1803df08f44-6df9b2ff367mr426784666d6.30.1737051177220; 
- Thu, 16 Jan 2025 10:12:57 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afcd3806sm2306406d6.85.2025.01.16.10.12.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 10:12:56 -0800 (PST)
-Date: Thu, 16 Jan 2025 12:12:53 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20250116
-Message-ID: <20250116181253.GI3476@bill-the-cat>
-References: <20250116143706.2011606-1-festevam@gmail.com>
+ d=1e100.net; s=20230601; t=1737051257; x=1737656057;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=itIhGfKLjTj7V8y+C+ThmAooFAZDwHsLhpHeK9utAKg=;
+ b=s7b0YF0F4BQdU7Y4ZfdpNOa+YVj+FEcLT+DFZ9Gbro/VceJgqeVGY0+VIJucYIxx+7
+ AEjz0Fp6BZfagot16leYqP66zYtWtLNkoZDsUAfzjIZsR9P3dJc0g5RnLJXGJCNhOjiq
+ wXiSG4P1H4JMYPyMHiEGnQxQwHCfvAI9QW8LCsKYrGY/IYJUGC53C/XMamLmW4zMqXJo
+ cbS29kfK49K2jK0qcqtPH51uFJyrXdHGptMDA0yuRwKnGgrlu1gP9Y1vhwhUYgOu/uuH
+ VlGZr7VlcsT7QkMoAnSaLzIsXsuYDLo7dPW2QIBugdB13s8UqnYG9uX2jU/TiWbYp8fq
+ URoQ==
+X-Gm-Message-State: AOJu0YwFkJfvn9Rs2nrw8ahF0b93OCjLvcsJhC+IWpYbuhv0HrYYjh8/
+ qhf5pfKE/xxJrenR9LmXKrXosTHwZWeDsK0Gdndi6dkgUjQOKqmB7tDVci1LRoNS8BhhyaifLPc
+ Wwc1wnvAoX4vaI6gq7NUBp6ePWebzI8UcrpJiVA==
+X-Gm-Gg: ASbGnctRH2PcFzJ1OmzWSBCDWtUr+7QJg7eYNarnmp+q/BiVMIDQ31xRtf9MZ/TW+ZK
+ BFtTVELIN0aLcBlSqoinrZh66fKjS14dcXSypah6SdaDjNW/48sf9Ue79bdRrvGU3a1fmDA==
+X-Google-Smtp-Source: AGHT+IHEA5oDb9aiixOoxN6WjtkDfb4yNYRsn7Jo2/MjXVIbBuVAkQI5j7k8kksaC7xUtnuG6qLIMWf6yZUzbkbkNU0=
+X-Received: by 2002:a17:90a:fc48:b0:2ee:b4bf:2d06 with SMTP id
+ 98e67ed59e1d1-2f548f6a5f4mr46607926a91.19.1737051256882; Thu, 16 Jan 2025
+ 10:14:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JaYcj+57XCjlfnqW"
-Content-Disposition: inline
-In-Reply-To: <20250116143706.2011606-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250115200144.951530-1-raymond.mao@linaro.org>
+ <20250115200144.951530-3-raymond.mao@linaro.org>
+ <CAC_iWjKgoNdON5u2GHjKT+HPwt9hd+JkD6k48VeMWoWoFLbmpQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjKgoNdON5u2GHjKT+HPwt9hd+JkD6k48VeMWoWoFLbmpQ@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 16 Jan 2025 13:14:03 -0500
+X-Gm-Features: AbW1kvZrH_0BOInxGUWV8DKD0u_lrhoB7_wPUfIo3h4TkjukzwJoyCh87Lk4hg8
+Message-ID: <CAEfUkUKWscSz_hHkXWH9ehcThSKW4sBA3gAKz50oPuOfSsOD+Q@mail.gmail.com>
+Subject: Re: [PATCH 2/6] tmp: add TPM2_PCR_Allocate command
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Tim Harvey <tharvey@gateworks.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Michal Simek <michal.simek@amd.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,57 +95,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---JaYcj+57XCjlfnqW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 16 Jan 2025 at 07:37, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-On Thu, Jan 16, 2025 at 11:37:06AM -0300, Fabio Estevam wrote:
+> Hi Raymond,
+>
+> On Wed, 15 Jan 2025 at 22:02, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > TPM2_PCR_Allocate command is required to re-configurate
+>
+>
+> reconfigure
+>
+> > a TPM device
+> > to enable or disable algorithms in run-time, thus this patch introduces
+> > the implementation of PCR allocate APIs and adds related cmd functions
+> > for testing.
+> >
+> > To test the feature, ensure that TPM is started up.
+> > Run pcr_allocate command to turn on/off an algorithm, multiple calls
+> > are supported and all changes will be cached:
+> > `tpm2 pcr_allocate <algorithm_name> <on|off>`
+> > Run startup command with argument 'off' to shutdown the TPM.
+> > `tpm2 startup TPM2_SU_CLEAR off`
+> > Reboot the board via `reset` to activate the changes.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> >  cmd/tpm-v2.c     |  94 +++++++++++++++++++++++++++++++++++
+> >  include/tpm-v2.h |  29 +++++++++++
+> >  lib/tpm-v2.c     | 124 +++++++++++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 247 insertions(+)
+> >
+> > diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
+> > index a6d57ee7c4..2302e8e94c 100644
+> > --- a/cmd/tpm-v2.c
+> > +++ b/cmd/tpm-v2.c
+> > @@ -232,6 +232,86 @@ unmap_data:
+> >         return report_return_code(rc);
+> >  }
+> >
+> > +static u32 select_mask(u32 mask, enum tpm2_algorithms algo, bool select)
+> > +{
+> > +       size_t i;
+> > +
+> > +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
+> > +               if (hash_algo_list[i].hash_alg != algo)
+> > +                       continue;
+> > +
+> > +               if (select)
+> > +                       mask |= hash_algo_list[i].hash_mask;
+> > +               else
+> > +                       mask &= ~hash_algo_list[i].hash_mask;
+> > +
+> > +               break;
+> > +       }
+> > +
+> > +       return mask;
+> > +}
+> > +
+> > +static int do_tpm2_pcrallocate(struct cmd_tbl *cmdtp, int flag, int
+> argc,
+> > +                              char *const argv[])
+> > +{
+> > +       struct udevice *dev;
+> > +       int ret;
+> > +       enum tpm2_algorithms algo;
+> > +       const char *pw = (argc < 4) ? NULL : argv[3];
+> > +       const ssize_t pw_sz = pw ? strlen(pw) : 0;
+> > +       static struct tpml_pcr_selection pcr = { 0 };
+> > +       u32 pcr_len = 0;
+> > +       bool bon = false;
+> > +       static u32 mask;
+> > +       int i;
+> > +
+> > +       /* argv[1]: algorithm (bank), argv[2]: on/off */
+> > +       if (argc < 3 || argc > 4)
+> > +               return CMD_RET_USAGE;
+> > +
+> > +       if (!strcasecmp("on", argv[2]))
+> > +               bon = true;
+> > +       else if (strcasecmp("off", argv[2]))
+> > +               return CMD_RET_USAGE;
+> > +
+> > +       algo = tpm2_name_to_algorithm(argv[1]);
+> > +       if (algo == -EINVAL)
+> > +               return CMD_RET_USAGE;
+> > +
+> > +       ret = get_tpm(&dev);
+> > +       if (ret)
+> > +               return ret;
+> > +
+> > +       if (!pcr.count) {
+>
+>
+> Ins't this always true?
+>
+> Not really, pcr is a static variable to cache the latest configurations.
+The command itself is designed to turn on/off one algorithm each time for
+easy usage, and expects to be called multiple times when the user wants to
+change more than one algorithm.
+We just need to get the active bank at the first call when the command is
+running multiple times.
+Since tpm2_get_pcr_info() will not return the real actual active banks
+after one PCR allocate command is sent until a reset occurs.
 
-> Hi Tom,
->=20
-> Please pull from u-boot-imx/master, thanks.
->=20
-> The following changes since commit 178f6ecb21fe12ada74a9a1a08093c812b15ee=
-a5:
->=20
->   Merge patch series "bootstd: Support recording images" (2025-01-15 19:2=
-7:14 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--master-20250116
->=20
-> for you to fetch changes up to 985268107d4c0389d154126aa74c1d21706a7ce8:
->=20
->   imx: fdt: fix cooling-device property corruption (2025-01-16 10:16:47 -=
-0300)
->=20
-> u-boot-imx-master-20250116
 
-Applied to u-boot/master, thanks!
+> > +               /*
+> > +                * Get current in-use algorithms (banks), PCRs and mask
+> via the
+> > +                * first call
+> > +                */
+>
+>
+> in-use translates to active PCR banks. Isn't that function returning
+> the hardware-supported banks?
+>
+> That returns the active ones only but not includes the inactive ones if
+any.
 
---=20
-Tom
 
---JaYcj+57XCjlfnqW
-Content-Type: application/pgp-signature; name="signature.asc"
+>
+> > +               ret = tpm2_get_pcr_info(dev, &pcr);
+> > +               if (ret)
+> > +                       return ret;
+>
+>
+> So we have the TPM banks the hardware supports here. Does it make
+> sense to check if the requested algorithm is supported and exit early?
+> In theory, it doesn't matter because the hardware will reject the
+> configuration later, but I'd like to have a comment about this.
+>
+> Ditto. It knows the active algorithms only but not includes the supported
+but inactive ones.
 
------BEGIN PGP SIGNATURE-----
+Regards,
+Raymond
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeJTB8ACgkQFHw5/5Y0
-tyzCIAwAhNotoLdvDT4iF4SD4avlxZHu6RUryeptZ09L0DHwvJqkQwotS2Py0tNk
-LWGPoIITTD7EPOjffSDOcRRbqKFxuehi8fC/cMIuWJhXBCycUTaP/Z8CTt8k78S6
-w3rXwTOC1+MvJcZZzr8lWU8UrQYuVFMIKzw5fmoxvJfR3FZkK/TzrHO+94p9V0vt
-Hv3I0ddtD5AdBidFKbOXzhc0aLCjI6zB+1mijbYBszfaWMJP/5PdpXI+EWC0MVjb
-KkUdz6eRXKgKL9ihzL/d0IV5h2U5qNG8szMnNbdT+shyYhl5J9ljhJIT1LOoR/s9
-TGI7iWje1xK9/fAVCSY7lPrR+QNM7LvkkM6M76O5qcvD9FlaAcRbbJWqyLORCWbg
-vRbAtCFsXhs5MXo8RPa39MS75z6qk8OOeTGlzjNITNeUjioYDEdVlBKZYBLGWT4y
-eIy83H+OekmnUtqT9LYlL4u0pYc0QAwwZDnF5vP+mRjB3C1QV8YaYFzIYSyXt2YG
-n6X8tzM2
-=g5nn
------END PGP SIGNATURE-----
 
---JaYcj+57XCjlfnqW--
+> > +
+> > +               for (i = 0; i < pcr.count; i++) {
+> > +                       struct tpms_pcr_selection *sel =
+> &pcr.selection[i];
+> > +
+> > +                       if (!tpm2_is_active_bank(sel))
+> > +                               continue;
+> > +
+> > +                       mask = select_mask(mask, sel->hash, true);
+> > +                       printf("Active bank[%d] with algo[%#x]\n", i,
+> > +                              sel->hash);
+> > +               }
+> > +       }
+> > +
+> > +       mask = select_mask(mask, algo, bon);
+> > +       ret = tpm2_pcr_config_algo(dev, mask, &pcr, &pcr_len);
+> > +
+> [...]
+>
+> Other than that this looks good to me
+>
+> Thanks
+> /Ilias
+>
