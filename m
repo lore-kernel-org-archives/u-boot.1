@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE820C02187
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 13:06:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD3AC02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 13:07:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B121D807A8;
-	Thu, 16 Jan 2025 14:05:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1207C807C4;
+	Thu, 16 Jan 2025 14:05:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="Pzd/5eU2";
+	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="UltkdIgs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34A1F806D8; Thu, 16 Jan 2025 10:16:50 +0100 (CET)
-Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
+ id D8A6C8069D; Thu, 16 Jan 2025 10:16:52 +0100 (CET)
+Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14E2380214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 10:16:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF41D801B0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 10:16:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de;
@@ -29,25 +29,25 @@ Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx1.riseup.net (Postfix) with ESMTPS id 4YYcgf13RgzDqk9;
- Thu, 16 Jan 2025 09:16:46 +0000 (UTC)
+ by mx0.riseup.net (Postfix) with ESMTPS id 4YYcgj19cNz9t9V;
+ Thu, 16 Jan 2025 09:16:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1737019006; bh=rE7E5IIouFJg7M17jMLvPe/dVutZqArHZ8zyRQX5RA8=;
+ t=1737019009; bh=O/sXEtk6SqJ84q3Ofn+MMdRRJfLs/3yRb8Oq+TGXhYc=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=Pzd/5eU2uoR+QEAkTRWkJM0t4ldJW1NtPUHvJtnoxQN0sBpenU+FEU9tb/pJ+bCOp
- 4Hn1HEs4bSq6+jMBwQlQX9yW/51Z7XJwlvXOSZcMXPjPd9M98Tfl9F90Qcoln45+xo
- VYZ4LaW4R+qgfienEakgHFxRZZW0VKeIXji7oTRM=
-X-Riseup-User-ID: 63A9CAF19F47D3CA0BDAFF841FB1C0652348E07CAF3E9703DD86BDCFB7AF6A92
+ b=UltkdIgsdpD2fqG0Q3/KYrvr4SAPPPnyY2oLjky+z5bcQjZbMYDyOQSBsj7Oi7Jfv
+ 8eq30JiMlKzBlNsaKNutwJ/psZP8nl3I0g1WOFlJveTN/+B4Xtp22xhls1FmXxe242
+ Y3rkgRn5aX3y2h3c8C5d4rMQ3anPeFIX8sNLfMt0=
+X-Riseup-User-ID: ABF14187318540B57A2389230720F100A422D752202057B6BB1E8A0F6D6E7462
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4YYcgb2G6wzJq7r;
- Thu, 16 Jan 2025 09:16:43 +0000 (UTC)
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4YYcgf2hDnzJrSq;
+ Thu, 16 Jan 2025 09:16:46 +0000 (UTC)
 From: Dang Huynh <danct12@riseup.net>
-Date: Thu, 16 Jan 2025 16:15:58 +0700
-Subject: [PATCH 09/10] video: rockchip: Add HDMI support for RK3568
+Date: Thu, 16 Jan 2025 16:15:59 +0700
+Subject: [PATCH 10/10] configs: pinetab2-rk3566: Enable video and USB keyboard
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250116-vop2-pt2-v1-9-c9d646b53930@riseup.net>
+Message-Id: <20250116-vop2-pt2-v1-10-c9d646b53930@riseup.net>
 References: <20250116-vop2-pt2-v1-0-c9d646b53930@riseup.net>
 In-Reply-To: <20250116-vop2-pt2-v1-0-c9d646b53930@riseup.net>
 To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>, 
@@ -74,96 +74,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HDMI on RK3568 is mostly simplified, all this does is enabling
-DDC for display timings and HPD.
+Now that we have VOP2 support, let's enable it and support the
+built in USB keyboard.
 
 Signed-off-by: Dang Huynh <danct12@riseup.net>
 ---
- drivers/video/rockchip/Makefile      |  1 +
- drivers/video/rockchip/rk3568_hdmi.c | 63 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 64 insertions(+)
+ configs/pinetab2-rk3566_defconfig | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
-index 2f89a979a2848733be5a6d05817ad76ce3ad3a34..b751c969b46f1933e91a6c0434f31227a709d8e5 100644
---- a/drivers/video/rockchip/Makefile
-+++ b/drivers/video/rockchip/Makefile
-@@ -14,6 +14,7 @@ obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
- obj-hdmi-$(CONFIG_ROCKCHIP_RK3288) += rk3288_hdmi.o
- obj-hdmi-$(CONFIG_ROCKCHIP_RK3328) += rk3328_hdmi.o
- obj-hdmi-$(CONFIG_ROCKCHIP_RK3399) += rk3399_hdmi.o
-+obj-hdmi-$(CONFIG_ROCKCHIP_RK3568) += rk3568_hdmi.o
- obj-$(CONFIG_DISPLAY_ROCKCHIP_HDMI) += rk_hdmi.o $(obj-hdmi-y)
- obj-mipi-$(CONFIG_ROCKCHIP_RK3288) += rk3288_mipi.o
- obj-mipi-$(CONFIG_ROCKCHIP_RK3399) += rk3399_mipi.o
-diff --git a/drivers/video/rockchip/rk3568_hdmi.c b/drivers/video/rockchip/rk3568_hdmi.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..e0dae919c89d685c145373c8520c52c760f60864
---- /dev/null
-+++ b/drivers/video/rockchip/rk3568_hdmi.c
-@@ -0,0 +1,63 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2024 Dang Huynh <danct12@riseup.net>
-+ */
-+
-+#include <display.h>
-+#include <dm.h>
-+#include <dw_hdmi.h>
-+#include <edid.h>
-+#include <asm/arch-rockchip/hardware.h>
-+#include <asm/arch-rockchip/grf_rk3568.h>
-+#include "rk_hdmi.h"
-+
-+#define RK3568_IO_DDC_IN_MSK             ((3 << 14) | (3 << (14 + 16)))
-+
-+static int rk3568_hdmi_enable(struct udevice *dev, int panel_bpp,
-+			      const struct display_timing *edid)
-+{
-+	struct rk_hdmi_priv *priv = dev_get_priv(dev);
-+
-+	return dw_hdmi_enable(&priv->hdmi, edid);
-+}
-+
-+static int rk3568_hdmi_of_to_plat(struct udevice *dev)
-+{
-+	struct rk_hdmi_priv *priv = dev_get_priv(dev);
-+	struct dw_hdmi *hdmi = &priv->hdmi;
-+
-+	hdmi->i2c_clk_high = 0x71;
-+	hdmi->i2c_clk_low = 0x76;
-+
-+	return rk_hdmi_of_to_plat(dev);
-+}
-+
-+static int rk3568_hdmi_probe(struct udevice *dev)
-+{
-+	struct rk_hdmi_priv *priv = dev_get_priv(dev);
-+	struct rk3568_grf *grf = priv->grf;
-+
-+	writel(RK3568_IO_DDC_IN_MSK, &grf->vo_con1);
-+
-+	return rk_hdmi_probe(dev);
-+}
-+
-+static const struct dm_display_ops rk3568_hdmi_ops = {
-+	.read_edid = rk_hdmi_read_edid,
-+	.enable = rk3568_hdmi_enable,
-+};
-+
-+static const struct udevice_id rk3568_hdmi_ids[] = {
-+	{ .compatible = "rockchip,rk3568-dw-hdmi" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(rk3568_hdmi_rockchip) = {
-+	.name = "rk3568_hdmi_rockchip",
-+	.id = UCLASS_DISPLAY,
-+	.of_match = rk3568_hdmi_ids,
-+	.ops = &rk3568_hdmi_ops,
-+	.of_to_plat = rk3568_hdmi_of_to_plat,
-+	.probe = rk3568_hdmi_probe,
-+	.priv_auto	= sizeof(struct rk_hdmi_priv),
-+};
+diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
+index 45e63b42d192dc172f24e071b09c8203675965d8..b250d8d12e9d5e045e28db4d455850f94514321f 100644
+--- a/configs/pinetab2-rk3566_defconfig
++++ b/configs/pinetab2-rk3566_defconfig
+@@ -23,7 +23,10 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_USE_PREBOOT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-pinetab2-v2.0.dtb"
++CONFIG_PRE_CONSOLE_BUFFER=y
++CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+@@ -57,6 +60,8 @@ CONFIG_BUTTON=y
+ CONFIG_BUTTON_ADC=y
+ CONFIG_BUTTON_GPIO=y
+ CONFIG_SPL_CLK=y
++CONFIG_CLK_CCF=y
++CONFIG_CLK_COMPOSITE_CCF=y
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+@@ -69,6 +74,7 @@ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
+ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_SILICONKAISER=y
++CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY=y
+ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+ CONFIG_SPL_PINCTRL=y
+@@ -94,6 +100,7 @@ CONFIG_USB_OHCI_HCD=y
+ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_KEYBOARD=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_ASIX88179=y
+@@ -101,4 +108,12 @@ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
++CONFIG_VIDEO=y
++CONFIG_CONSOLE_ROTATION=y
++CONFIG_VIDEO_LCD_BOE_TH101MB31IG002_28A=y
++CONFIG_DISPLAY=y
++CONFIG_VIDEO_ROCKCHIP=y
++CONFIG_DISPLAY_ROCKCHIP_HDMI=y
++CONFIG_DISPLAY_ROCKCHIP_DW_MIPI=y
++CONFIG_VIDEO_DT_SIMPLEFB=y
+ CONFIG_ERRNO_STR=y
 
 -- 
 2.48.1
