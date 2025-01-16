@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3042FC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 18:20:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5150C02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 18:32:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87D388033D;
-	Thu, 16 Jan 2025 19:20:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 492B880312;
+	Thu, 16 Jan 2025 19:32:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t8vVMK3f";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wGbJGfrf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B632E8069D; Thu, 16 Jan 2025 19:20:30 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id E6BEA8033D; Thu, 16 Jan 2025 19:32:35 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 652D48022B
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 19:20:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85D068022B
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 19:32:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e46ebe19489so1888889276.2
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 10:20:28 -0800 (PST)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e549dd7201cso2236810276.0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 10:32:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737051627; x=1737656427; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1737052352; x=1737657152; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=exX8gtIzcx+cQ0Z1YbgrOhFyH98ZcmIk0qtSVHNXOOQ=;
- b=t8vVMK3fyPxlaWYZ1+tfI7ttHIXQLT2Z1pM8JEXF7MuOlfM8RqSV428cpAyp0NJZ9J
- woUdJ05W0+EPhmiKUsgMi7XzJJah3SjSmgbrfmcT+nYSNdyROC2XyBB3ez67y/rx9j/P
- hONyk+Ky09tr28UenFQ9oBL4PgAbOYOfro1j9uOGb3bZa5CGhfOVl3w75TOBaRwohCp8
- hu/hVRMu3rwEoWs644B8MyDRgnESY3nEORwwmrXq8DOpkF33iAKIcq50qhSthiUZ07uh
- ON3K8sSbw6GOXqgnv94Hv8h/bPvaI7TwB+s7QDe3HgVPJNpZAPNjU+uNYIrmtDp5KkPE
- wIig==
+ bh=lnKHurUMXVT02cOYpPdTNoSNIlnjPqSZN4115SBoUe4=;
+ b=wGbJGfrfNt/Sr6Qw8tM1oz+XnIwX9dLbfdMmYgf1GAl8DwwrqszatQCsC7xR05lS3j
+ jb0iumxwrxLE9dPY0Cau9Cbp4d2p7YSnol4ZkoDGexwq6MoMkQDAmq1BTSdYN2BXBe+3
+ VoM1AMt8PUaL6z/qMM+zwilMaE/nSxnzmy6yNhGu3pOXM0lJ9qFBQTNMP2lFvO6jYHzH
+ mhKLlRNRGjyOO0nijzJpa6utfKF4DFGUlT0zuhbZUUrK0I4XO00H5Qv661/B16MOCGl1
+ oMaloPkKya+hg++DFOmEOhy5Y5hui/cr6dvBSV1hPPuYXspyYrtUtfaru5tcJA1a41kh
+ NObQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737051627; x=1737656427;
+ d=1e100.net; s=20230601; t=1737052352; x=1737657152;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=exX8gtIzcx+cQ0Z1YbgrOhFyH98ZcmIk0qtSVHNXOOQ=;
- b=c6UikWYYd2ljp0VG4WFRE/tOntX6NliY/59XpD1fE/zbde9FPLhT+ntssL/4jEZl5V
- LqIarMn6R2mjpIVI2h9ZEGWRJDZ2yYIxqL0JDeLmIhEBaQf0gGs2aPzNkrl1DtyGuUZu
- oBMi/27i/yo2NZlpKRTp0KuFmJ4YhSsjPQcHM9U1AnVYuEwFs8s7axtiQ9S6kFMNQAUp
- FU0U+Ei6F1WJYsu2RSYTq+DDyPwT3SCp6ultsa026bjP8mUfBaaio+G9UgMdBWQ2MkWO
- c2AHV2XpyrQOg+/cX2RYYtMgKVwVhFuntxFu27NF9efGbODmzbvpJAb7L4Bj/DhrlJMV
- jSFw==
-X-Gm-Message-State: AOJu0YzzrDR/9/oB9BvACfGh+rX8NQIc/zHfO0ma18gM0CusUfmZ7NeR
- pWUqSGQ2gn6KBpysHGNHnuHh1Mxjs+wX2Lo5MQF8xjip5UoToV88w28/IMbsZV986tjsxyC4470
- P8Y2/NpJbE+eocJbyWaqC4kDB0veBYIQ2CaxG2g==
-X-Gm-Gg: ASbGncvFbMcNLkPWy3JZXzOOcpZAmKN7MLy/07c9BOemSy56AS8EH6brL6ZZ/0WQt9n
- MobPBH3BMVAy0rG7MiutCP8m038zhAlAGJa+VTQ==
-X-Google-Smtp-Source: AGHT+IH2fbI4yzr7wL/a5iO+kFxgjd1cTRQ7pOGynzu9kxXAf397zqRSebcgciR021g3oM21WVGtZIS8otkIgUJ/BTE=
-X-Received: by 2002:a05:690c:6a85:b0:6ef:6e34:6561 with SMTP id
- 00721157ae682-6f5312dd8c2mr313060687b3.32.1737051627101; Thu, 16 Jan 2025
- 10:20:27 -0800 (PST)
+ bh=lnKHurUMXVT02cOYpPdTNoSNIlnjPqSZN4115SBoUe4=;
+ b=kwSQ5lgjThk+7RvuE+7Gq6twq2Hf+YzSiZdW2L2jzYzeiulAjq7+F41+b362Mi/9O0
+ cGphGMCRxpwoM+XDZhE1HNKtsjauBeXfnjbGYDkjA8WckK+8QVqt++AAs3o/M6NaTo+V
+ TrLevgSX7Wj2fIOKHt47+wSmbpy2d14FTfDT7LThujpRuzH8dHLxgTbKHXj1mL5/qfMy
+ /lEAt5TfSBe1EAmI4jQuR9iTuPwKhf7p/qfixaIFWlotEWKsEdo/L51lUZX6RNwrE13Y
+ Ae2WAn2tJhiD83D/iuA7d165ze+zmyn0CCJEk37OXPuCL0kfC0186Kifw0b1nNEAMlPJ
+ ARyQ==
+X-Gm-Message-State: AOJu0YyWC0l2E8mi6cOU4Hj2pW2ndmGVJLy55Jzz5BIEbnoSl/qyIRc9
+ LafgKT3LVavAU4V28e6AgFsqADyXLH4V5vAPkVVHh2wiiYTY8Iu/5sPydtp9qYcAGs1t+YeajGH
+ lkMI9758oiHSQTntxhdM3sTVfegrxzDXfoj00Tw==
+X-Gm-Gg: ASbGncufIxigaqNku9VZHIeFcv0cfeGPmC55I/R25R7M0oEIVxpBnWYkbCZAfn2rSMs
+ YXW/nG2MbiT42UvskR2QsWl6nlXT4vwrTLEd5yw==
+X-Google-Smtp-Source: AGHT+IGYoUJ1Hvv9LcFA4xEq0VsOKNoeg0eB0zjy8hcqL/faYWMehiUfqKhz48LYDej3qOE1I7XmCgBidivtTIyQak0=
+X-Received: by 2002:a05:690c:4d88:b0:6ef:8c41:defc with SMTP id
+ 00721157ae682-6f531238c2amr314605937b3.11.1737052350867; Thu, 16 Jan 2025
+ 10:32:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20250115200144.951530-1-raymond.mao@linaro.org>
- <20250115200144.951530-3-raymond.mao@linaro.org>
- <CAC_iWjKgoNdON5u2GHjKT+HPwt9hd+JkD6k48VeMWoWoFLbmpQ@mail.gmail.com>
- <CAEfUkUKWscSz_hHkXWH9ehcThSKW4sBA3gAKz50oPuOfSsOD+Q@mail.gmail.com>
-In-Reply-To: <CAEfUkUKWscSz_hHkXWH9ehcThSKW4sBA3gAKz50oPuOfSsOD+Q@mail.gmail.com>
+References: <20250101195817.995321-1-sjg@chromium.org>
+ <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
+ <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
+ <CAFLszTiXHKdf_QUUsWpQpwv69HSGPNknkDW4JHgRUfT0r_G-aA@mail.gmail.com>
+ <CAC_iWj+PwT2JmrWwrTsmHt_mGKDdhGUQgXKvzi3SCNCFxgJNRw@mail.gmail.com>
+ <CAFLszThXtZjgavkzKhHbSXahONLqpT7yEYBH3bQ_1qzS=AUx+Q@mail.gmail.com>
+ <CAC_iWjK5gOn4Ad=orCMhv4BY74U4E6AoOLR6rnYYHd9=-X7wEg@mail.gmail.com>
+ <CAFLszThHFzKL=N=nKQGtTdZjkjY3nq85Yg+vzkBdODOcZOhoyw@mail.gmail.com>
+In-Reply-To: <CAFLszThHFzKL=N=nKQGtTdZjkjY3nq85Yg+vzkBdODOcZOhoyw@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 16 Jan 2025 20:19:51 +0200
-X-Gm-Features: AbW1kvbVPOhYwpUMVu-ULEbgNW300CwM_6ubvDiS052igcknMz_b9q0r5GR4980
-Message-ID: <CAC_iWjLJ6OcB2QnR2DUFB4FzBTz123eptF3xWGSVSd1n5=9AfA@mail.gmail.com>
-Subject: Re: [PATCH 2/6] tmp: add TPM2_PCR_Allocate command
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Tim Harvey <tharvey@gateworks.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Michal Simek <michal.simek@amd.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Thu, 16 Jan 2025 20:31:55 +0200
+X-Gm-Features: AbW1kvbzZstr5dqlRdp7BaIIyMABEmTDLxJgSJ4I5krwBRrXF0ErQphUy_io9Dc
+Message-ID: <CAC_iWjKRE-B1DRY=O17_QB6eQF67ifg=DyQnio8iMARNjBbMfQ@mail.gmail.com>
+Subject: Re: [PATCH] bloblist: Drop BSD license
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,166 +97,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 Jan 2025 at 20:14, Raymond Mao <raymond.mao@linaro.org> wrote:
+On Wed, 15 Jan 2025 at 03:18, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Ilias,
 >
-> On Thu, 16 Jan 2025 at 07:37, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
->>
->> Hi Raymond,
->>
->> On Wed, 15 Jan 2025 at 22:02, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >
->> > TPM2_PCR_Allocate command is required to re-configurate
->>
->>
->> reconfigure
->>
->> > a TPM device
->> > to enable or disable algorithms in run-time, thus this patch introduces
->> > the implementation of PCR allocate APIs and adds related cmd functions
->> > for testing.
->> >
->> > To test the feature, ensure that TPM is started up.
->> > Run pcr_allocate command to turn on/off an algorithm, multiple calls
->> > are supported and all changes will be cached:
->> > `tpm2 pcr_allocate <algorithm_name> <on|off>`
->> > Run startup command with argument 'off' to shutdown the TPM.
->> > `tpm2 startup TPM2_SU_CLEAR off`
->> > Reboot the board via `reset` to activate the changes.
->> >
->> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> > ---
->> >  cmd/tpm-v2.c     |  94 +++++++++++++++++++++++++++++++++++
->> >  include/tpm-v2.h |  29 +++++++++++
->> >  lib/tpm-v2.c     | 124 +++++++++++++++++++++++++++++++++++++++++++++++
->> >  3 files changed, 247 insertions(+)
->> >
->> > diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
->> > index a6d57ee7c4..2302e8e94c 100644
->> > --- a/cmd/tpm-v2.c
->> > +++ b/cmd/tpm-v2.c
->> > @@ -232,6 +232,86 @@ unmap_data:
->> >         return report_return_code(rc);
->> >  }
->> >
->> > +static u32 select_mask(u32 mask, enum tpm2_algorithms algo, bool select)
->> > +{
->> > +       size_t i;
->> > +
->> > +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
->> > +               if (hash_algo_list[i].hash_alg != algo)
->> > +                       continue;
->> > +
->> > +               if (select)
->> > +                       mask |= hash_algo_list[i].hash_mask;
->> > +               else
->> > +                       mask &= ~hash_algo_list[i].hash_mask;
->> > +
->> > +               break;
->> > +       }
->> > +
->> > +       return mask;
->> > +}
->> > +
->> > +static int do_tpm2_pcrallocate(struct cmd_tbl *cmdtp, int flag, int argc,
->> > +                              char *const argv[])
->> > +{
->> > +       struct udevice *dev;
->> > +       int ret;
->> > +       enum tpm2_algorithms algo;
->> > +       const char *pw = (argc < 4) ? NULL : argv[3];
->> > +       const ssize_t pw_sz = pw ? strlen(pw) : 0;
->> > +       static struct tpml_pcr_selection pcr = { 0 };
->> > +       u32 pcr_len = 0;
->> > +       bool bon = false;
->> > +       static u32 mask;
->> > +       int i;
->> > +
->> > +       /* argv[1]: algorithm (bank), argv[2]: on/off */
->> > +       if (argc < 3 || argc > 4)
->> > +               return CMD_RET_USAGE;
->> > +
->> > +       if (!strcasecmp("on", argv[2]))
->> > +               bon = true;
->> > +       else if (strcasecmp("off", argv[2]))
->> > +               return CMD_RET_USAGE;
->> > +
->> > +       algo = tpm2_name_to_algorithm(argv[1]);
->> > +       if (algo == -EINVAL)
->> > +               return CMD_RET_USAGE;
->> > +
->> > +       ret = get_tpm(&dev);
->> > +       if (ret)
->> > +               return ret;
->> > +
->> > +       if (!pcr.count) {
->>
->>
->> Ins't this always true?
->>
-> Not really, pcr is a static variable to cache the latest configurations.
-> The command itself is designed to turn on/off one algorithm each time for easy usage, and expects to be called multiple times when the user wants to change more than one algorithm.
-> We just need to get the active bank at the first call when the command is running multiple times.
-> Since tpm2_get_pcr_info() will not return the real actual active banks after one PCR allocate command is sent until a reset occurs.
+> On Tue, 14 Jan 2025 at 12:34, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Tue, 14 Jan 2025 at 15:15, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Tue, 14 Jan 2025 at 01:40, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Fri, 10 Jan 2025 at 16:54, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi again Ilias,
+> > > > >
+> > > > > On Thu, 2 Jan 2025 at 18:41, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Ilias,
+> > > > > >
+> > > > > > On Fri, 3 Jan 2025 at 08:15, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > >
+> > > > > > > Apologies for the formatting, replying on mobile.
+> > > > > > >
+> > > > > > > On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
+> > > > > > >>
+> > > > > > >> Linaro has decided to write their own version of bloblist from scratch,
+> > > > > > >> so there is no point in having a non-GPL license on this file. Change
+> > > > > > >> it, to better fit with the U-Boot project.
+> > > > > > >
+> > > > > > >
+> > > > > > > Apart from the commit message being wrong, it's also intentionally provoking. There was no bloblist in TF-A.
+> > > > > > >
+> > > > > > > The TF-A code is implementing the firmware hand-off spec [0], which Linaro participated in the creation. The U-Boot implementation was adjusted to adhere to the same spec after the TF-A code was merged.
+> > > > > >
+> > > > > > The U-Boot series was [1], for reference. This was mostly about using
+> > > > > > different tags and shrinking the headers. My clear understanding was
+> > > > > > that we were going to try to have a single codebase, which is why I
+> > > > > > changed the license.
+> > > > > >
+> > > > > > So, since you have a different view of events, why did Linaro write it
+> > > > > > from scratch? Was it to avoid having U-Boot code in TF-A? Or was the
+> > > > > > author just unaware of the original intention?
+> > > >
+> > > > I am not sure I am following 'from scratch'. Firmware handoff is a doc
+> > > > describing a list. Raymond implemented it in U-Boot and TF-A.
+> > >
+> > > So in your mind, Raymond implemented it in U-Boot? Have you taken a
+> > > look at 'git log' or 'git blame'?
+> > >
+> > > > The right way to do this is to move the firmware handoff code to a
+> > > > library that can be used across projects.
+> > >
+> > > Not always. Probably not in this case. It has quite a bit of logic
+> > > which depends on its environment. So I think it is better to have
+> > > 'similar' code in several projects. Certainly, writing it from scratch
+> > > (meaning not based on existing code) is not the best approach.
+> > >
+> > > >
+> > > > > It isn't relevant for
+> > > > > > the commit message, but if you can find out I would be interested.
+> > > > >
+> > > > > Just following up on this as I'm not sure of the status of this patch.
+> > > > > Can you perhaps write your own commit message with your version of
+> > > > > what Linaro has done?
+> > > >
+> > > > "The non-GPL license was inadvertently added, remove it". Raymond
+> > > > wrote that code so I don't think he minds removing the extra license.
+> > >
+> > > Again, please check your assertion here. I for one am very surprised
+> > > to hear that Raymond wrote the bloblist code :-)
+> >
+> > All of the patches carry his co-developed by or his signed off by. A
+> > big portion of those are sent by you as well
+>
+> So here you are referring just to the patches which changed the header
+> formats, not the original bloblist code.
 
-I completely ignored the static in that variable.
+I never said bloblist in any of my emails. I only mentioned the
+firmware handoff.
 
 >
->>
->> > +               /*
->> > +                * Get current in-use algorithms (banks), PCRs and mask via the
->> > +                * first call
->> > +                */
->>
->>
->> in-use translates to active PCR banks. Isn't that function returning
->> the hardware-supported banks?
->>
-> That returns the active ones only but not includes the inactive ones if any.
+> >
+> > >
+> > > But it does help to explain why you objected to my commit message.
+> >
+> > The reason I object to the commit message is because it's
+> > *intentionally* misleading.
+> > The BSD-3 clause was added by you in 6c9e3d1fc0859 with the intention
+> > of other projects using 'bloblist'.
+>
+> Yes, that's why I added the license, since I was led to believe that
+> TF-A would use the U-Boot code with some modifications.
+>
+> >
+> > The actual firmware handoff code was added much later in e266d2731145.
+> > All of the patches in that series is co-developped by Raymond. Those
+> > were added Wed Dec 27 while the TF-A patches were merged much much
+> > earlier. commit 3ba2c15147c in TF-A was merged Tue Jul 25
+>
+> The original bloblist impl was in 2018:
+>
+> commit 9f407d4ef092c2ce7ab0f4f366aee252611dab3c
+> Author: Simon Glass <sjg@chromium.org>
+> Date:   Thu Nov 15 18:43:50 2018 -0700
+>
+>     Add core support for a bloblist to convey data from SPL
+>
+>     At present there is no standard way in U-Boot to pass information from SPL
+>     to U-Boot proper. But sometimes SPL wants to convey information to U-Boot
+>     that U-Boot cannot easily figure out. For example, if SPL sets up SDRAM
+>     then it might want to pass the size of SDRAM, or the location of each
+>     bank, to U-Boot proper.
+>
+>     Add a new 'bloblist' feature which provides this. A bloblist is set up in
+>     the first phase of U-Boot that runs (i.e. TPL or SPL). The location of
+>     this info may be in SRAM or CAR (x86 cache-as-RAM) or somewhere else.
+>     ...
+>
 
-It returns the hardware available PCR banks regardless of them being
-active or not
+So the tl;dr is that when the firmware handoff code was added in TF-A,
+there was no u-boot implementation. It all got added afterwards.
+The way the development happened is that Raymond implemented the TF-A
+code, and also plugged in the transfer mechanism so we use that info.
+The fact that there was a similar implementation in U-Boot, which did
+not adhere to the standard to begin with doesn't justify your commit
+message. As I said we didn't decide to write a 'bloblist' we
+implemented the spec in TF-A.
 
 /Ilias
->
->>
->>
->> > +               ret = tpm2_get_pcr_info(dev, &pcr);
->> > +               if (ret)
->> > +                       return ret;
->>
->>
->> So we have the TPM banks the hardware supports here. Does it make
->> sense to check if the requested algorithm is supported and exit early?
->> In theory, it doesn't matter because the hardware will reject the
->> configuration later, but I'd like to have a comment about this.
->>
-> Ditto. It knows the active algorithms only but not includes the supported but inactive ones.
->
+
 > Regards,
-> Raymond
->
->>
->> > +
->> > +               for (i = 0; i < pcr.count; i++) {
->> > +                       struct tpms_pcr_selection *sel = &pcr.selection[i];
->> > +
->> > +                       if (!tpm2_is_active_bank(sel))
->> > +                               continue;
->> > +
->> > +                       mask = select_mask(mask, sel->hash, true);
->> > +                       printf("Active bank[%d] with algo[%#x]\n", i,
->> > +                              sel->hash);
->> > +               }
->> > +       }
->> > +
->> > +       mask = select_mask(mask, algo, bon);
->> > +       ret = tpm2_pcr_config_algo(dev, mask, &pcr, &pcr_len);
->> > +
->> [...]
->>
->> Other than that this looks good to me
->>
->> Thanks
->> /Ilias
+> Simon
