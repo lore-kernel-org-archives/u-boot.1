@@ -4,100 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2137DC02180
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 09:47:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C205AC02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 10:01:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1C0D80214;
-	Thu, 16 Jan 2025 10:47:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 44A8A80283;
+	Thu, 16 Jan 2025 11:01:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="x6s3ybok";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="WXVIoS4v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6C4D801B0; Thu, 16 Jan 2025 10:47:03 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 95F30806DD; Thu, 16 Jan 2025 11:01:07 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CC2E80214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 10:47:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21486801B0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 11:01:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43618283dedso6104365e9.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 01:47:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1737020821; x=1737625621;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Aq9kn0tsKihtwX2i5B750lP3pU7Qt3SAEthVMJvIH2o=;
- b=x6s3ybokC1VxvqY3lvvHLwjS9MPNMDFvGuC5cmij8nWV7Vq67VL0v93eJThjJ+PPOx
- 6PSZwh7L8o8CymMFejgVBWXNGE7BJYYcjdCIOFyfuxdqRdYlXD5YAtqO4kW22x77qRwk
- 5bnKrzkqcw/5M4hzCjYLzNR/9jGFZXSSOU5JNQWEf8Akz1fRftwzkfOk0L9ojg5Qc2Eq
- ZtXybR1pvbnl8o2+6HB3kfNLKrFYvqo7wh+447g60Rw0lY83UdPt2uz1/bxQq6gdP+XB
- JuGS5eUs6lKSN78u7vZqCCaJC3cvKsXbrytuVXvRHSGen+e4NNIN2kjhF/aRi9MfF/bm
- 0uNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737020821; x=1737625621;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Aq9kn0tsKihtwX2i5B750lP3pU7Qt3SAEthVMJvIH2o=;
- b=Tsgg1k1N2UNsECNwWPtjOdf2vVo1g0EeY5QYcoILOhxmw13awwGDSW4wxwBNHczwwR
- nkZbiumbDoV4VUm7olbIm2tAsy1wBM2Jv5o4AKRGOvbz7B2ZUDBEm+DbhggmgPwYlfHj
- XTv+HvdAeH0095qGIRyrClnrdMEWx676yV1quYQ8WJQgw535SvmDoHdMoDFj6GGhdv7a
- x9EzX63BW16mWWaZY23f6lwCJXAMrQmSiASBSTbTGUP74pma5+USHqiNZ85KfkSsZhno
- umQN2ZhYNuHxUyyiom8Y4zxijDJGxig8u35jsHvrGAEYfv0ZdQsAZXCUMiMfNORG6IfN
- bppg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5zUbvSlB6UvBWCdS0kHsHaBwznmqinSNeYuPr0c+d0ao4Gg3hBmd0qe7LwkzEIYoM/9YDRGQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxchvqp8Pttps+ztlGGrQC7rR+q9SrFw+A+7WA9doLy/C4V7MXX
- 7M8587+C032f1wO3VHuEfkTG8N7kWoyo6TX7lzGcmBGMciJ2+4f+Pk8yOF1t9Cs=
-X-Gm-Gg: ASbGnctfQDYIYymfjyfAEcAcL5lCWNNFlEwwCPJ4Yx0bqjqWexnRFbRygf8eZAyGvAx
- lCqvGHPpVOHPIZ6VesjXYu5oBQ6lS1u7RSgk2HBbsQEI9uWhkNm7kALRKJy8ek7Qge1Kz0MWbG7
- 6d0NYglSIZD/K8Xi1SK9tJjfNT5QEs48mkrUtx1THxAbB6hvBRiHULu+lHxPHIMb/IU4zACO2Av
- FIFXAFzF+x3XQLmIGeMS2Pdb3YIsLPnTZMrP5zyqpy4CLbuz+ureqCrcDEvOa+o4A==
-X-Google-Smtp-Source: AGHT+IGbRNrE362eAMBYbh0Lu1YV0KVdjj7GnuvLSpVJcdhJtuJIyGjZI7m6nkO7mhRLcte+yce5VA==
-X-Received: by 2002:a05:600c:524f:b0:435:d22:9c9e with SMTP id
- 5b1f17b1804b1-436e26d0cf9mr261000745e9.19.1737020820637; 
- Thu, 16 Jan 2025 01:47:00 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-437c74e6511sm53761945e9.38.2025.01.16.01.47.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 01:47:00 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Alexander Gendin <agendin@matrox.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dan Carpenter
- <dan.carpenter@linaro.org>, Francis Laniel
- <francis.laniel@amarulasolutions.com>, Guillaume La Roque
- <glaroque@baylibre.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion
- Agorria <ion@agorria.com>, Jens Wiklander <jens.wiklander@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Joe Hershberger
- <joe.hershberger@ni.com>, Julien Masson <jmasson@baylibre.com>, Linus
- Walleij <linus.walleij@linaro.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Massimiliano Minella <massimiliano.minella@se.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, Rasmus Villemoes <ravi@prevas.dk>, Ravi
- Minnikanti <rminnikanti@marvell.com>, Raymond Mao
- <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, Stephen
- Carlson <stcarlso@linux.microsoft.com>, Stephen Warren
- <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Tim
- Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 00/43] test: Improvements to ut command and test-suite
- running
-In-Reply-To: <20250115133114.590375-1-sjg@chromium.org>
-References: <20250115133114.590375-1-sjg@chromium.org>
-Date: Thu, 16 Jan 2025 10:46:59 +0100
-Message-ID: <87a5br850s.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uOsI0L/fxYpQsCCjFxEtKxlG/8hqeYHO7VR2/eZt++OYbJcFDSISU4vRRWBvLTjzogpaEFUd2H1Ijz0Xq842yiEsbfQ8T5QcB5DafZ7gbM8tMhsfQ7FImQz3CeEYH/gNbDNrucjNz7xFab0fMT1fi4TM40Wkb7pVD1SBuRDIdo8e5FDoimqFcEMxBMiqbll1iYj25hFrBsy2x7YKbMYNvfCare8rk5fNWHfhFbXK4vel1jedy0vYjZ3O27XJ1pcGMWdWizDeEqb/BlZHQa3UOR3vovf4TL0GpC3qApIX2zipEwPkyQH4VeXw3GDbbTE+5zqlCzUqreQX/wouJvn0Yw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mnZ7f+hJvAz32/LrFFQo+LemvBh53H34DIR9zREIBDg=;
+ b=HD7WVb+uVAVnBPBSKxClmgQrfk9XBukWjQhVnaIRiWDiB58FiFfZ2rYPcpd0vp3+9ub8QRCgBdd4xBuLCZKMWRq79EihQZolguESqCDlN9RLlyVG4LayKXfpr1t6f/+q3BOJKeGeG+kjFRbLukpTYExt/A7EkVg1syEQw9K5dJVVNrSs4N+jpdKkJWxWAsWoUa2FHJk8OBy9YfJdlU1XHhc24d9q2tsFKjMY8Guy+h5OBrzU+phdaUFtYcrN8jZ/sxEIvi9WzuR0FgZLMV54aZc4hQFf9omUgqynJYSvdCTxsj5cdYvQoELgjrQfMlUnlFTId9zmY1FU1K+zrwW8Bw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mnZ7f+hJvAz32/LrFFQo+LemvBh53H34DIR9zREIBDg=;
+ b=WXVIoS4vE0fh3CcxQfAUXdEKaWo1vSE5Kad6lZgoNIzuiSHI6ismGnVJlMiu2Z6VXQbzwZxawz1F/qMqIZnUO/NJXN8eBZ2Gmqi7gC4uBkS95vizZ4RTQzlaJGkys0nLxXEvx8Azimc0rdHO8Gc6ehkaWOsbB1XAwHgNWHLX5c0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DB8PR04MB7177.eurprd04.prod.outlook.com (2603:10a6:10:127::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.13; Thu, 16 Jan
+ 2025 10:01:03 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8335.015; Thu, 16 Jan 2025
+ 10:01:03 +0000
+Message-ID: <ae46a9f9-ce4a-436e-84dd-2ae50497981d@cherry.de>
+Date: Thu, 16 Jan 2025 11:01:02 +0100
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?B?UmU6IOWbnuWkje+8miBbUEFUQ0hdIGxpbmtlcl9saXN0czogVXBkYXRl?=
+ =?UTF-8?Q?_the_alignment_using_CONFIG=5FLINKER=5FLIST=5FALIGN?=
+To: =?UTF-8?B?6buE5Yip5Lqa?= <1425075683@qq.com>, u-boot <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <tencent_9739C1044069984893BE3E6D3DB783BB6C08@qq.com>
+ <3d51107a-4761-4de8-9bae-a462c2a8e890@cherry.de>
+ <tencent_B912404198CB93E73E013D2783596C4DC108@qq.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <tencent_B912404198CB93E73E013D2783596C4DC108@qq.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR5P281CA0004.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f2::13) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DB8PR04MB7177:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5ddeb93a-95b3-4458-b187-08dd3614afa0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?M3NmR2VPN0tpZ2IxZVV0dFd4YWlpaUhHQkd1RnB6TFRIN0NnZ0NSeGJxRkx0?=
+ =?utf-8?B?UGw4cHpsTHhEaTBJWHEwOFZTemo3MHRDNE5VWU1yQlcra1Y3bkExcnBqR09n?=
+ =?utf-8?B?elFDVk1MUlorT1hXVEt6bFNCbUlGQWk1aWlCcFlYUEZOV29EZTVLcWNwUWZn?=
+ =?utf-8?B?TUp0cmpOU1FMSUdza2RtVFpvL0tReXlUd3czQnZjQmFoMVpTRTA2ODQwQlVy?=
+ =?utf-8?B?eGRCY25ZV24rRjRZMFVxMi9ZTmRVUDVCVGFuRjZteTZEWkdXTUI4Vk40a0Qv?=
+ =?utf-8?B?R2FjWGJWaEplVEdKTS8wY255ZHpFcTJVcnFmK0VSd3ZuMFkyZzdEOGZ4SHNW?=
+ =?utf-8?B?endFT2VXa1Z0MVdtamwzWTlESlNqcHhQQjhJeG8vSFdDTXRwbWVJT2RTTExH?=
+ =?utf-8?B?US8yOU56N0o5VXV1aGEveS81Vi8vRTV4R0hYbFZvb3BmSExzc3Q1N2VhTDBy?=
+ =?utf-8?B?Mk1uSFUxazUzQ1dPTVlheWhDWkx4YmtKQ3lCMWRVdElBSW90SVhxdStjODFp?=
+ =?utf-8?B?MTB1RHJPVzB3Zzh3aDNuU1Rqa2dYRENrZTgrdEtKZVdzMkticE43bHhuQWxR?=
+ =?utf-8?B?MndFU0NhUHIxaTVIUEEyZUZlNS9yZjNrU25YcktOelNTVUlYVDZObE42bEty?=
+ =?utf-8?B?bHA4ckh4MG9pbXB5MXNjc1NXNU9tcDU4NUYyVnpPVEVKelVhMVBDRGZ4ajBH?=
+ =?utf-8?B?b29wTVFKZjRjQjA0ZDgvZmFGbG9BSDFUK1NKakFURkJZWTVERzZLNUJhSTZX?=
+ =?utf-8?B?eWdLeUFIUzdVY21waWdRWXlLVGxaMnBFZjgyellTVy9vb3lJaUtNNkNIRTRZ?=
+ =?utf-8?B?WFFLVG1GWWExNFY4Wk51K2JmdlMvakd2QVIyZEcrWW9uMHdHdmliQWpZTXNY?=
+ =?utf-8?B?WUpzVjhVcTJ3aXIwS0tpQXVTMTNrUjA0T0JtbFZzMWtWT2pIQzMrbUlMTUha?=
+ =?utf-8?B?MHJ1UGY2bkFqK1pVMFNKb2Z4OU41VTBldUxvNGhyY0sxZ0Q0WmNJb1BjREs4?=
+ =?utf-8?B?S3NIcS94dVE3NHBaYklwdzZzTWRrSFRmWmQ4a2hHcjJXWTBydXpxTjVxeVpD?=
+ =?utf-8?B?eHJsUTlFbmZ5MmtlK2gwYTFnOHJZdnBPN3MxYzZzZ2FTS3ZjazFUMXUzTE0z?=
+ =?utf-8?B?Z3pGd3pwMVJ3NE1vSkxEZjArRTVJZVB6L3hHWktGVjNSRWdxd3JFKzdqdjJJ?=
+ =?utf-8?B?bGJvOVVHM0oxcHlHcmRyVisxTS9oczNQdjVqMlNFZW4vOTJrUy90dU9wRmVn?=
+ =?utf-8?B?TGh3QjB2eXU4K0FvRU5HVHhkWUZJUkF5RDg4NTFGN1ZSQVYzdCtSMEZGZ0xR?=
+ =?utf-8?B?dTJqMVJWOU1WWDRxTGZoUHk0cG9nMGN0SEFMTVRmNGRFaE5wcEx0NmppZ2RT?=
+ =?utf-8?B?djFSY3BPVXZxaDcrak1yemJabmJKZ2RnRDVZVHZHNjg5SHN5Tmg3N2VTN2h2?=
+ =?utf-8?B?dDBXVFVFcE1lQTFKZXdTWHpIL2FXUGFBYTVHblYrYWhxUjdiMUtOYzR5K2NH?=
+ =?utf-8?B?TmkwVldkd1ZRUkIzU1dsWlZzY3JKRnlTUEVJZmVHcWdCZTJHUnpHSk1NYWwz?=
+ =?utf-8?B?VDF5ZzBhTzR3RVl0Sitlb1NPM0p2c3N6ZEVmUTRPZ2lLM3U0aXRoeWN5bXk1?=
+ =?utf-8?B?NWNrMHBFNXQ0YnhDTUV1N3lxUVc5NUdab0JrbWRyem9PMUxzRW54SFYrM3ZL?=
+ =?utf-8?B?QTNHeGhUd25DN1dvNjluRTZoV3JuS01NUS9aV0FvejBCQ1AvSDBhK01RYkNH?=
+ =?utf-8?Q?KGA2saC//zQ04b3s9FhMyKAzxlBxDoGcB6haxAD?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b015UmtlNDBXanMwQWtEbEs5MjdURkZyOUhhMkxkVndBVGRBNlNmVUxNR05W?=
+ =?utf-8?B?RGY4YkRQVnlWbEVVNVZVM2NYUndYWWZGc1YrTUFKY3NmZWRwWEQwSnhxMzVW?=
+ =?utf-8?B?WFRlOHR6c00vVTAxeTFrSzlHc2w0akhETm5WbVFOMm9Rc1VvVEJxNEVNMGFo?=
+ =?utf-8?B?YzRBVWtTQm1VcG0wTjQxSkVUWTBDUFhuanZoVHpVRklSdHV3NGprd1pVUUlY?=
+ =?utf-8?B?eit5ekcyRkd5ZmI3dkdtb3V6NmZTT0dHKzRWMWNQVzlKMEh3QVdFc25LdnJj?=
+ =?utf-8?B?d1M4N08zT0pDS09OQ3FuUDZocEI3L0laMnNsbDI0bEd6N3VHZFlrMzE2MXha?=
+ =?utf-8?B?dStVQWlQbzRDU1NLWlFZb21PbGY1UjV3djIvcDNWU3JRcGhzK3daVDJjSURQ?=
+ =?utf-8?B?Z1RBUk54U2VnVGJNQ3IzeDdkSWhFRFNDU0lFL1d3VHJWVXdWVzRIUElOQTJQ?=
+ =?utf-8?B?WE5QWmFZZXhCS0ZxVVBtdjhWSGl0dW5LT3lrM2x1TDlaeE94bFBBQ3NUQytI?=
+ =?utf-8?B?d2R4Ulp0TUw0bjVoMW5LVUlXL0haSzZYWTA5emxyMU9JaXVlTnRxWHlIV0JU?=
+ =?utf-8?B?eXRxTWlESDNkNUwxMHEwZFlNaGVvQmUxZ090VGtnL3dEemkwNVpUc1cxTk9R?=
+ =?utf-8?B?ek82OGErbGhwZHQzVUNVSGdQdmRUVFZIOElEVk1NaVlzVC9yWTR6MTFkRHJO?=
+ =?utf-8?B?RU81YzVlVXJKYzZ0RW4rcHFndExoWWtCcDhsMmR6SXAwd3FwSDhReEQ5eDhw?=
+ =?utf-8?B?a0FEc2sxRU54ZTZWd1k3TkRwRkgyUHJTWEMvaHJKS3BJUWUzQUVyUHgvejJ5?=
+ =?utf-8?B?bFA1TlBvVTE1Zkw0NjdvUnVhL0tkdkFFMEJLZnQ4YXNtWXhuVnAyeXBVeVhP?=
+ =?utf-8?B?L3oxNWUrZFNVYmpFYTFCMHEzQjBrcVY2U2NWcFBTcWR3eU13ZUE0b3FnMXpK?=
+ =?utf-8?B?YjVWTklyMmo5T2orQXI3NUI0SDdBWDhxaUFZazBtUWZ6NVc0L0hvUThZSHJw?=
+ =?utf-8?B?TUFyUDhIRXlKNkg1czRpRnZuUXMwUHhRdWFXY0M0RDBCSmxiVTByREFWQ3Uy?=
+ =?utf-8?B?d1R4M3htMXBhRkR3OEFtUmJQN0pCTEZRaG8xbFo3eXF1dDEvZC9rOXFtLzRZ?=
+ =?utf-8?B?SjM2VHBEQVVsM2hEOFlxVTNSYmVuaGcvS3l6WTdWZnR2TDFRZnZYNUF5WnFT?=
+ =?utf-8?B?TEtFczd2SEJRV2xoeHB3QlR1cU1qb0NxblNydDlxNW9iRnRXUGVNZzhKZU9E?=
+ =?utf-8?B?THRNOXp2RWtuaGNjdnFtMXZpbnM3Tk0zRXNrTzJVQXZZZUFOQklZMjlqeEor?=
+ =?utf-8?B?QWdBbUwvZ0tId0V3NWVwTmlJUmdUeDIyL0F5aC9hNzM0Wm9xM3pibS9EdDZX?=
+ =?utf-8?B?V3lXaHZWVW11TXVHcUw3YndaVVZoVnR6U2JrOFBmRGlvbjg0dk5Hemp5d3l4?=
+ =?utf-8?B?YWxvU2syLy8rMWJsdTZMOUM1QTdkSmlTNmtyZEhmK1hHRkFjdzltQkRGTEdx?=
+ =?utf-8?B?TTZvcmVIMitDSTE4NVBnT3BldjdKVEVuQVIxUnREdjVrK2VzREQ5azV1Q0hl?=
+ =?utf-8?B?Ym1yLzRJN2IwaWNaV3VIN0hSdC9zWXdMTWVGWFdZRldKN2kxOTRVWXI3QTd0?=
+ =?utf-8?B?VWtvVWlzWVNsZXF3SnpOUkxtaTVEbGMyMjN0OG1leUs4L3U2dERlREdBN05t?=
+ =?utf-8?B?N3duYXRUaHhSL2NYWVZjU2FQbkZaaFY2TUQ3UkJsV2FPTVBqT0l6bWlNNVlN?=
+ =?utf-8?B?aitLdVRnRlJtbGUxWHV1YnJ4OTQ4MDFBVnpYZDJJSVVSM3JqbDZpRTN1WURU?=
+ =?utf-8?B?UVlWdC95Q0dmNERxdkJIZEpiYWV2TXBvdjlrYm4vS1MyVER6RzhNdnA1aVNM?=
+ =?utf-8?B?Tm9qd1ZnWWFncHRucnlCSkV5ZHI0SjZQTzNZaklsRHpLa2drMXlCY1JYMGQx?=
+ =?utf-8?B?eGtWTE5WNUlqZ3gycFlScHpkcWZvdlp0eGs3TXQ4VnplQVZFMzlyVGpGT3FX?=
+ =?utf-8?B?ZUQyUVhxTTQ5ME02QVg1N01HbjZtSVIrMHJYdmhZMnc3LzBzTWNBdDI2Ylgw?=
+ =?utf-8?B?c2ZVSFdra3ltWTEvNHZTSEJYUXhZZnY4WVZEU1dtaHF1OWtJUXppbUEyNDNX?=
+ =?utf-8?B?V2h1VVV3a1lkTTdZMkxPb3lwT0EyY3d1YWdIWFgrYVJ1Q2J3Z3VtN1BEUEs0?=
+ =?utf-8?B?U1E9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5ddeb93a-95b3-4458-b187-08dd3614afa0
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2025 10:01:03.1752 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UA9JhgBWB+P2Morytklf7FAb9y++OC/PYDawpbz81z7lB7mv8OokLqip5YMNdqSHZWsvB2JK/Eabn95N2MLevFqg6hzGF6Z9IqIawET0QUA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB7177
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,200 +174,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi,
 
-Thank you for the series.
+On 1/16/25 1:24 AM, 黄利亚 wrote:
+> Sorry for the confusion and disruption.&nbsp;
+> I haven't submitted patches this way before,&nbsp;
+> and my English is not very good.&nbsp;
+> I was conducted according to the steps&nbsp;
+> in the https://docs.u-boot.org/en/latest/develop/patman.html operation.
+> 
 
-On mer., janv. 15, 2025 at 06:30, Simon Glass <sjg@chromium.org> wrote:
+The patch is fine, it is properly formatted and sent correctly so that 
+is okay.
 
-> The current method of running unit tests relies on subcommands of the
-> ut command. Only the code in each subcommand knows how to find the tests
-> related to that subcomand.
->
-> This is not ideal and we now have quite a few subcommands which do
-> nothing but locate the relevant tests in a linker list, then call a
-> common function to run them.
->
-> This series adds a list of test suites, so that these subcommands can be
-> removed.
->
-> An issue with 'ut all' is that it doesn't record how many tests failed
-> overall, so it is necessary to examine copious amounts of output to look
-> for failures. This series adds a new 'total' feature allow recording the
-> total number of failed tests.
->
-> To help with 'ut all' a new pytest is created which runs it (as well as
-> 'ut info') and makes sure that all is well. Due to the 'ut all' failures
-> this does not pass, so the test is disabled for now. It is here because
-> it provides security against misnaming a test suite and causing it not
-> to run.
-
-I wanted to test this, but it seems it does not apply on both master or
-next:
-
-With master: 178f6ecb21fe ("Merge patch series "bootstd: Support recording images"")
-With next: d6da3dbaef57 ("Merge patch series "cmd: Add support for optee commands."")
-
-When running:
-$ b4 shazam -s -l --check 20250115133114.590375-1-sjg@chromium.org
-
-I see:
+In the documentation[1], you can read:
 
 """
-[...] snip
+Tested-by / Reviewed-by / Acked-by
 
-Total patches: 43
----
-Applying: test: Drop unused suite prototypes
-Applying: test: Rename test_get_state() to ut_get_state()
-Applying: test: Add functions to init and uninit the test state
-Applying: test: Pass the test-state into ut_run_list()
-Applying: Improve support for linker lists in data structures
-Applying: test: Add newlines to hush-test messages
-Applying: test: Rename test suites to match their linker-list name
-Applying: test: Update ut info to show suites
-Applying: test/py: Add a test which runs all unit tests
-Applying: test: Drop the _test suffix on linker lists
-Applying: test: Introduce a better array of test suites
-Patch failed at 0011 test: Introduce a better array of test suites
-error: sha1 information is lacking or useless (test/cmd_ut.c).
-error: could not build fake ancestor
-hint: Use 'git am --show-current-patch=diff' to see the failed patch
-hint: When you have resolved this problem, run "git am --continue".
-hint: If you prefer to skip this patch, run "git am --skip" instead.
-hint: To restore the original branch and stop patching, run "git am --abort".
+     These indicate that someone has tested/reviewed/acked your patch. 
+When you get this reply on the mailing list, you can add this tag to the 
+relevant commit and the script will include it when you send out the 
+next version. If ‘Tested-by:’ is set to yourself, it will be removed. No 
+one will believe you.
 """
 
-On what base should this be applied if we want to test this?
-Sorry if this is a sily question, usually I get dependencies from the
-cover letter but I could not find any here.
+Specifically: "when you get this reply on the mailing list". Since you 
+didn't send the patch on the mailing list before (as this is the first 
+version), you didn't get a reply on the mailing list yet so you cannot 
+add "Reviewed-by: " from Simon (yet). If Simon gives his Reviewed-by 
+publicly on the mailing list and if someone else requests a change, you 
+will need to send a second version (v2) of your patch, then you need to 
+add "Reviewed-by:" from Simon.
 
->
-> Future work may:
-> - get 'ut all' passing
-> - enable test_suite() in CL, to ensure that 'ut all' keeps passing
-> - record duration of each suite
-> - allow running the tests in random order to tease out dependencies
-> - tweak the output to remove common prefixes
-> - getting rid of bootstd, optee and seame 'ut' subcommands
->
->
-> Simon Glass (43):
->   test: Drop unused suite prototypes
->   test: Rename test_get_state() to ut_get_state()
->   test: Add functions to init and uninit the test state
->   test: Pass the test-state into ut_run_list()
->   Improve support for linker lists in data structures
->   test: Add newlines to hush-test messages
->   test: Rename test suites to match their linker-list name
->   test: Update ut info to show suites
->   test/py: Add a test which runs all unit tests
->   test: Drop the _test suffix on linker lists
->   test: Introduce a better array of test suites
->   test: Drop the function for running bdinfo tests
->   test: Drop the function for running cmd tests
->   test: Drop the function for running common tests
->   test: Drop the function for running dm tests
->   test: Drop the function for running env tests
->   test: Drop the function for running exit tests
->   test: Drop the function for running fdt tests
->   test: Drop the function for running font tests
->   test: Drop the function for running lib tests
->   test: Drop the function for running log tests
->   test: Drop the function for running mbr tests
->   test: Drop the function for running mem tests
->   test: Drop the function for running setexpr tests
->   test: Drop the function for running measurement tests
->   test: Drop the function for running bloblist tests
->   test: Drop the function for running bootm tests
->   test: Drop the function for running addrmap tests
->   test: Drop the function for running hush tests
->   test: Drop the function for running loadm tests
->   test: Drop the function for running pci_mps tests
->   test: Drop the function for running seama tests
->   test: Drop the function for running upl tests
->   test: Drop the info test from the list
->   test: Drop conditional compilation for suites
->   test: Pass the test state to cmd_ut_category()
->   test: Move stats into a struct
->   test: Keep a track of the numbers of tests run
->   test: Move stat-printing into its own function
->   test: Record and show the totals for all test runs
->   test: Sort the test suites
->   test: Disable test_suite
->   test: Move help into the suite declaration
->
->  arch/sandbox/cpu/spl.c        |   6 +-
->  include/dm/test.h             |   2 +-
->  include/linker_lists.h        |  51 +++++
->  include/test/cmd.h            |   2 +-
->  include/test/common.h         |   2 +-
->  include/test/env.h            |   2 +-
->  include/test/hush.h           |   2 +-
->  include/test/lib.h            |   2 +-
->  include/test/log.h            |   4 +-
->  include/test/optee.h          |   2 +-
->  include/test/overlay.h        |   2 +-
->  include/test/suites.h         |  53 ++---
->  include/test/test.h           |  23 ++-
->  include/test/ut.h             |  45 ++++-
->  test/boot/bootm.c             |  11 +-
->  test/boot/bootstd_common.c    |   9 +-
->  test/boot/bootstd_common.h    |   3 +-
->  test/boot/measurement.c       |  12 +-
->  test/boot/upl.c               |  11 +-
->  test/cmd/Makefile             |   4 +-
->  test/cmd/addrmap.c            |  11 +-
->  test/cmd/bdinfo.c             |  10 +-
->  test/cmd/cmd_ut_cmd.c         |  20 --
->  test/cmd/exit.c               |  11 +-
->  test/cmd/fdt.c                |  10 +-
->  test/cmd/font.c               |  10 +-
->  test/cmd/loadm.c              |  11 +-
->  test/cmd/mbr.c                |  10 +-
->  test/cmd/mem.c                |  19 --
->  test/cmd/mem_copy.c           |   2 +-
->  test/cmd/mem_search.c         |   2 +-
->  test/cmd/pci_mps.c            |  12 +-
->  test/cmd/seama.c              |  11 +-
->  test/cmd/setexpr.c            |  11 +-
->  test/cmd_ut.c                 | 361 +++++++++++++++++++++-------------
->  test/common/Makefile          |   1 -
->  test/common/bloblist.c        |  12 +-
->  test/common/cmd_ut_common.c   |  21 --
->  test/dm/Makefile              |   2 -
->  test/dm/test-dm.c             |  16 --
->  test/dm/test-driver.c         |  10 +-
->  test/dm/test-uclass.c         |   8 +-
->  test/env/cmd_ut_env.c         |  10 -
->  test/hush/Makefile            |   1 -
->  test/hush/cmd_ut_hush.c       |  19 --
->  test/hush/dollar.c            |   7 +-
->  test/hush/loop.c              |   4 +-
->  test/lib/Makefile             |   1 -
->  test/lib/cmd_ut_lib.c         |  19 --
->  test/log/Makefile             |   2 -
->  test/log/log_ut.c             |  20 --
->  test/optee/cmd_ut_optee.c     |   4 +-
->  test/overlay/cmd_ut_overlay.c |  14 +-
->  test/py/conftest.py           |   7 +-
->  test/py/tests/test_spl.py     |   2 +-
->  test/py/tests/test_suite.py   | 182 +++++++++++++++++
->  test/py/tests/test_upl.py     |   2 +-
->  test/py/tests/test_ut.py      |   2 +-
->  test/py/tests/test_vbe.py     |   2 +-
->  test/py/tests/test_vpl.py     |   2 +-
->  test/test-main.c              | 104 ++++++----
->  test/ut.c                     |   4 +-
->  62 files changed, 657 insertions(+), 580 deletions(-)
->  delete mode 100644 test/cmd/cmd_ut_cmd.c
->  delete mode 100644 test/cmd/mem.c
->  delete mode 100644 test/common/cmd_ut_common.c
->  delete mode 100644 test/dm/test-dm.c
->  delete mode 100644 test/hush/cmd_ut_hush.c
->  delete mode 100644 test/lib/cmd_ut_lib.c
->  delete mode 100644 test/log/log_ut.c
->  create mode 100644 test/py/tests/test_suite.py
->
-> -- 
-> 2.34.1
+Did you add the Reviewed-by from Simon manually in the commit log? Did 
+patman add it automatically? It would be nice for us to know if it's a 
+bug in the tooling we use so we can fix it.
+
+If you added the tag manually, what was your intent? Did you want to 
+specifically request Simon to review your patch? If this is what you 
+wanted, you can use "Cc: " instead.
+
+For what it's worth, I personally use `b4` now (but I have never used 
+patman before so I don't know how what would be best for your workflow). 
+You can have a look there: 
+https://b4.docs.kernel.org/en/latest/contributor/overview.html#what-s-the-b4-contributor-workflow.
+
+[1] https://docs.u-boot.org/en/latest/develop/patman.html#how-to-add-tags
+
+> 
+> Can you tell me what else I need to do?&nbsp;
+> What I know so far is :
+> 1. I should use another email address;&nbsp;
+
+The email address is okay, but you are not allowed to put
+Reviewed-by: <person>
+in the commit log if <person> didn't actually **publicly** told you in a 
+mail on the mailing list. For example,
+
+https://lore.kernel.org/u-boot/20241220222612.1757884-1-trini@konsulko.com/T/#me93a6e7f1307c05e355fa8405eaa18713026a544 
+is the first version (v1) of a patch.
+See there's no Reviewed-by tag in the commit log.
+
+Then, Heinrich answers with
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+c.f. 
+https://lore.kernel.org/u-boot/20241220222612.1757884-1-trini@konsulko.com/T/#m76d346553039e8c6e1bdadc3c635ad4dcedf67f1
+
+Then you can see in the second version of the patch, here
+https://lore.kernel.org/u-boot/20241220222612.1757884-1-trini@konsulko.com/T/#m496f7d8af192cd92da1f0fe0783de39e65f99d8f
+that the Reviewed-by tag from Heinrich is added in the commit log.
+
+This is okay, because Heinrich publicly said they reviewed Tom's patch 
+by sending a mail with "Reviewed-by: Heinrich Schuchardt 
+<xypron.glpk@gmx.de>" in it.
+
+> 2. Seems like i shouldn't send patches directly to this list?
+> &nbsp;And it's only submitted to the reviewer for review and then submitted by the reviewer?
+> 
+
+You did almost everything correctly! The only change you need to do is 
+remove the "Reviewed-by:" lines from the commit log in your first 
+version. The rest is perfectly ok with the normal process!
+
+Let me know if you want me to rephrase or clarify something.
+
+Cheers,
+Quentin
