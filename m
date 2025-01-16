@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E28CDC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 11:39:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D7BC02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 11:39:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66ED38022B;
-	Thu, 16 Jan 2025 12:39:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B3D9680713;
+	Thu, 16 Jan 2025 12:39:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="LXKk56xl";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="UT3sFEx2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 099878033D; Thu, 16 Jan 2025 12:39:19 +0100 (CET)
+ id B954C8073F; Thu, 16 Jan 2025 12:39:25 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBB6C80214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 12:39:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CABF980214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 12:39:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 61A113F686
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 11:39:16 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 603083FA4F
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 11:39:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1737027556;
- bh=otzYu17dCQzMffdutsJBAYOHPxjJyCCxVKcIQHLrl7M=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=LXKk56xlXUXIrnEHoL77201PwJSMYEUnZ6M7KYnaR2EOmTHspCPi3uxPx6XS0tTCe
- ROmLEOpBKdNAOxRqICzSsU5lBg6zkae2+4xM1HA5AUEiHrqFFhebc6az+ZWUaULwiL
- zEVjq26YuSFQiW4qpKk//OHVAzmLjCUUx4UvscGEStdMc9TQukxK7e7chsflgnP0Zg
- SGhF3ur0g6rDHkzcA1n3Rz3QmG5gXlkstzU/1TfzSy1j4n/crXyuItv2C5x5tfYb6o
- MBL5kcjCpwnwPYKKofkZWtaEgH+rF5qrCOfXxW9mEVtnneX+Y+3Q1cKb1tUiMHV+dg
- pg7gRoAvqTRhg==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4361d4e8359so5117725e9.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 03:39:16 -0800 (PST)
+ s=20210705; t=1737027559;
+ bh=aTro9zBev9Nr9pYSJ4siLZqw1fqhdb2HBXKsWxuL0R0=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=UT3sFEx2rI3bOuJFtlUrYHvxHKxixmol0q9X2vqPX8JftWM6jviV9T7Wp/dsfYaop
+ /WlVg4hqWGAtAw/LE4oW+d5+8vK0CNHvtON5dj1H/xILNtDJrui6Mv2CHUu3D/cCWL
+ f/vLl2HgrRLz6CyLY61vwOUAoGB4kQq8/rHL1Fu0Ya4ChS8aAmUVjSxy2uEQ776KOa
+ W/roSDopl78H0LPk7kpYsYjQjs4O9RuDyigxxtjRUjBqF5hLaIAD1g0flYibtH0teB
+ 6b7Y+XY3RXqxD05FNGippool4tBKVSTwqcH2bJTtxDCfJTYBFvzTBDF+/TBz3npi5M
+ otJXuyT5wptuQ==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-43582d49dacso5056175e9.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 03:39:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737027556; x=1737632356;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=otzYu17dCQzMffdutsJBAYOHPxjJyCCxVKcIQHLrl7M=;
- b=ibizgA+Fr/XPtFsW9jUOpA2tQnRaEuu3bCIMchwyi/A2aaIESbmvjHZxqOa6G1Z9uG
- 7ocMi62WM6RZIQR2VpEU9eNaDcf2Xfch6MKGVFhVcXABDGkxRT4krc0vu1WIYk5E47Oq
- L+eNZu6Tw9QLUkFMM0/zdiKf2lLPcsHBx9JzIKFnLl2RqhS7M7lrKTZZDXzVGXGL6022
- TZoUBP9eyUrmpIK4LxI2DdclqC/ECbUbn0HNR5BOP0YbXLk9FYnGUkjJzfmXKBgCACMB
- DX8AzaMKaaB9epks7PBU1Kdr5aEeagTuUXB7zzM4LNUq2Ueb2Qc+wDji6YVSb9fFg25t
- 7Y+Q==
+ d=1e100.net; s=20230601; t=1737027558; x=1737632358;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aTro9zBev9Nr9pYSJ4siLZqw1fqhdb2HBXKsWxuL0R0=;
+ b=G0Fd81rtxs3sevT/X01rCh7Uk4iY75pNJBeSR5SJlVwJ7YynGUY3r2t7sfHsEXLwA4
+ D5F5hgW3N6IT1tQwvuZ9X3Yh0u0dVIuIWM4M6KAxlBLBxFZ5eyJCLmHISRnZx742TWcr
+ uNVBrGi9vzuApiREEcGPJoLZcFaGKvWbHyOsl4iqJHwsz4XC3Wd+NHBAFXQozaTK6Wus
+ 0UgyFPUqunkECWuDZhYwHgWt0m/+lpYxqZiaDJ/KQQawa6Zj8fqDg6WgGqhoFRIfmjND
+ Gp+R6ZMMCM9L5eHGqNl8NEh6Tqmr41cEmAl3U1jLlDHETk+FPrybam7oVaH5Ba/EzNb4
+ Mahw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvldcA8r+mBKuJcER3DEgHZSzD6cj/n0hP6EghQ+6tY2w4KERshyeiBzxV/ODnz0ai1IlnMOk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDDnxwNzEJYStxpt0e0UOul5CuDwiFgfWcoyfx3djpLDRJWEEw
- oHG1Uit0cQVQHFVwKA20Xs7CROeteOOPBoajmq/D3v3ZLCJU3UUUjzQ+SbCxfRx33omkstGzAu4
- NFV9lYZ7NyNI5ULKX2sXZMiNS/N/9kCDN9yz5fmDGrSENW8dgfBG54iYw6xpl3r+Isgk=
-X-Gm-Gg: ASbGnct3r78VJctdbsLNxhFmvasJ2sf6KoumQLqeQSreugMfz/PjmL5oirY+d/zYQ/g
- iqO5H++DLzNT5wof29J/xr9tOCf4b6qLxMIGqCdZQjLbIO+9I3tyGIZODYlE021Y6kuI2VrBZBd
- SY+eW5zQNRiLQ+Vm9trGHLypNelK00wau4rGfcu+Q/HkRkWwNWfcyxQ0mdkNwsMjKZ+1Hmknhyk
- 1QpixVY6Mgd849F2Rrr895Lc01FuQxQhT+HyAkjImjhAqe/Ua1+sSMXO/0Hg1ZYRJ4zOy2JWucP
- /kW4SphKQaawhg==
-X-Received: by 2002:a5d:648a:0:b0:386:3e87:2cd6 with SMTP id
- ffacd0b85a97d-38a8730fb57mr31488905f8f.38.1737027555899; 
- Thu, 16 Jan 2025 03:39:15 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEUaVPlBUoH5KRZiHd3OTMx/P1j8PUdoiB1OKcqUiLnPu9FkQgjH3WVDx1mn5Qem31WzCuyrg==
-X-Received: by 2002:a5d:648a:0:b0:386:3e87:2cd6 with SMTP id
- ffacd0b85a97d-38a8730fb57mr31488875f8f.38.1737027555562; 
- Thu, 16 Jan 2025 03:39:15 -0800 (PST)
+ AJvYcCVrEt8RzxNYnMJsGaRmk33Rh0+oByOaebSa/H/UkSZyhbnCw6lkbFajEEtUHxhF1FsgRT9JbEs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpMpdPaxw2BvQuRx+hAqoy3Q4tbqF6rLeUrOTOGpiFgOC7yMoW
+ qjJw2319SSuSohXRpaZomsSVIyyMwk4Jb3LOaXbygClPbEm/LuVsVMOxBaPSbrRUDbLkhfJS5CZ
+ H4hJGUNoBM3i8Mc5eTA67RsrOyr1t8oDs0VR7eQHH9LDjdmq2Y8oZ4K0hJNw97LydT+8=
+X-Gm-Gg: ASbGncvVfRRFz52B8XWpt9psojxUfBNsrDcXF3bXNBNVtHK58elN6MYz5h25iDhWylR
+ YhNgEPY2SA4JMzUlVgFYahwqebAYjvUyvJRX+X0v5BIfeT4cRhAOiffRnG9M9eCKP/iadKQrdBv
+ vv6n7//WzJFRVSZW7WR9DToudDfT8214IPhhzmcHgvxv83q+yw16xMaigQMpTz7I2FXdoFzfEE8
+ bxND/T5Vcf0mX575NOwV05pr2aiKz6Egc8tRQlD+3w7BBgnEJt8lWg/7GZDGAhsP7OJSJZFBTH1
+ 2R7yVYTb40PgkA==
+X-Received: by 2002:a05:600c:46ce:b0:436:6ddf:7a27 with SMTP id
+ 5b1f17b1804b1-436e27072a7mr278983225e9.23.1737027558640; 
+ Thu, 16 Jan 2025 03:39:18 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHMtlaq9ejGHpAOrzNwqpYQyQ2g0ouqDAU3BjVvpk3ZFNDqs0b/K0CowynolWKCSIi5arACMA==
+X-Received: by 2002:a05:600c:46ce:b0:436:6ddf:7a27 with SMTP id
+ 5b1f17b1804b1-436e27072a7mr278982975e9.23.1737027558251; 
+ Thu, 16 Jan 2025 03:39:18 -0800 (PST)
 Received: from localhost.localdomain ([2a02:3035:6e0:18b7:2225:e8f4:a4b5:e79])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a8e3840bfsm20606320f8f.39.2025.01.16.03.39.14
+ ffacd0b85a97d-38a8e3840bfsm20606320f8f.39.2025.01.16.03.39.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 03:39:15 -0800 (PST)
+ Thu, 16 Jan 2025 03:39:17 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
@@ -89,10 +90,13 @@ Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Michal Simek <michal.simek@amd.com>,
  Prasad Kummari <prasad.kummari@amd.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/5] efi_loader: Fix section alignment on EFI binaries
-Date: Thu, 16 Jan 2025 12:39:04 +0100
-Message-ID: <20250116113909.113950-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/5] scripts/Makefile.lib: add -L option to LD command for
+ EFI binaries
+Date: Thu, 16 Jan 2025 12:39:06 +0100
+Message-ID: <20250116113909.113950-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250116113909.113950-1-heinrich.schuchardt@canonical.com>
+References: <20250116113909.113950-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,49 +115,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When creating EFI binaries, the alignment of the text section isn't
-correctly factored in. As a result trying to load signed EFI binaries
-throws an error with:
+The linker uses the path specified with -L to search for linker scripts
+and for linker script includes.
 
-    efi_image_region_add() efi_image_region_add:
-    new region already part of another Image
-    not authenticated
+For out-of-tree builds specify the build directory with -L instead of
+the absolute path of the linker script. This allows using an INCLUDE
+statement.
 
-Except for the fixing each linker script individually carve out a linker
-script include for ARM and RISC-V.
-
-Correct SizeOfCode and SizeOfInitializedData.
-
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 v2:
-	Correct SizeOfCode and SizeOfInitializedData.
+	no change
+---
+ scripts/Makefile.lib | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Heinrich Schuchardt (3):
-  scripts/Makefile.lib: add -L option to LD command for EFI binaries
-  efi_loader: use INCLUDE in EFI linker scripts
-  efi_loader: use include in ARM EFI linker script
-
-
-Heinrich Schuchardt (4):
-  scripts/Makefile.lib: add -L option to LD command for EFI binaries
-  efi_loader: use INCLUDE in EFI linker scripts
-  efi_loader: correct SizeOfCode, SizeOfInitializedData
-  efi_loader: use include in ARM EFI linker script
-
-Ilias Apalodimas (1):
-  efi_loader: Fix section alignment on EFI binaries
-
- arch/arm/lib/crt0_aarch64_efi.S    |  2 +-
- arch/arm/lib/crt0_arm_efi.S        | 13 +++---
- arch/arm/lib/elf_aarch64_efi.lds   | 68 +--------------------------
- arch/arm/lib/elf_arm_efi.lds       | 71 +---------------------------
- arch/riscv/lib/crt0_riscv_efi.S    |  4 +-
- arch/riscv/lib/elf_riscv32_efi.lds | 68 +--------------------------
- arch/riscv/lib/elf_riscv64_efi.lds | 68 +--------------------------
- lib/efi_loader/elf_efi.ldsi        | 74 ++++++++++++++++++++++++++++++
- scripts/Makefile.lib               |  4 +-
- 9 files changed, 90 insertions(+), 282 deletions(-)
- create mode 100644 lib/efi_loader/elf_efi.ldsi
-
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 54403040f00..18993435eae 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -523,10 +523,10 @@ $(obj)/%.efi: $(obj)/%_efi.so
+ KBUILD_EFILDFLAGS = -nostdlib -zexecstack -znocombreloc -znorelro
+ KBUILD_EFILDFLAGS += $(call ld-option,--no-warn-rwx-segments)
+ quiet_cmd_efi_ld = LD      $@
+-cmd_efi_ld = $(LD) $(KBUILD_EFILDFLAGS) -T $(EFI_LDS_PATH) \
++cmd_efi_ld = $(LD) $(KBUILD_EFILDFLAGS) -L $(srctree) -T $(EFI_LDS_PATH) \
+ 		-shared -Bsymbolic -s $^ -o $@
+ 
+-EFI_LDS_PATH = $(srctree)/arch/$(ARCH)/lib/$(EFI_LDS)
++EFI_LDS_PATH = arch/$(ARCH)/lib/$(EFI_LDS)
+ 
+ $(obj)/efi_crt0.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_CRT0:.o=.S) FORCE
+ 	$(call if_changed_dep,as_o_S)
 -- 
 2.47.1
 
