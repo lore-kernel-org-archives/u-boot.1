@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96359C02180
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 01:27:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC8DC02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 01:27:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B4B480658;
-	Thu, 16 Jan 2025 02:27:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6953D80703;
+	Thu, 16 Jan 2025 02:27:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QMW2KhN7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lsjko4tw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B1FD8069D; Thu, 16 Jan 2025 02:27:12 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id B76D180214; Thu, 16 Jan 2025 02:27:15 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B6BD80214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 02:27:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 99F56806DD
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 02:27:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aaeec07b705so70639766b.2
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 17:27:10 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f28881d6so542495a12.1
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 17:27:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736990829; x=1737595629; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736990833; x=1737595633; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fMZwGnskwGRy17v7FGG7grrpKqPw351xDtm5IRu2K/0=;
- b=QMW2KhN7rr3yBaETsccyp4gGN5fZ879BU5GxTHac/5Yk9UI2CDH/OXw1YoyYOZ9ZeG
- 1o2FRmfDxs01Y5dv83Ov62ZvviqTaPTClyCD4mPjdAKpeIgcF6HcwVOqPyLc5JE5+gn1
- 3Ki/MgXMToNVGcc+QnAQvBgLC7CkYjQUlSRXI=
+ bh=aRa1fIFp0YbvbNJhWc/LnCc0xVRhDIvd/cVo7xQGY4g=;
+ b=lsjko4twBorGhT5JmyT4LGFcv/GTnAH8JCnmRwYz8z93psNkYgECJmr+JtGq/9Vpm6
+ 2WFYDyXUO9qM2ZG8LSMMMN+qRVu6xmAfZ4c2VAk98r0w0ssyQ1D/InwAq6V/N1Qa83IE
+ cvOMTHCb/espFvzY6BzEjQLNinQ2vg8N9MCjM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736990829; x=1737595629;
+ d=1e100.net; s=20230601; t=1736990833; x=1737595633;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fMZwGnskwGRy17v7FGG7grrpKqPw351xDtm5IRu2K/0=;
- b=Uh10XddKeuWdXGrpzNRT41aY37yGROp8yzfLCIFiv/KoeN7Au17kFhv/n03F2OsGm0
- 5Rh3xqGYtc7XJn8pLIeCCTzbG5XcQAb32r/OvAWK3UGX0/rzlOVqKnqsdJKljAnvjlqH
- 3l3CsCNGYhgKGx8gX+cNxw9MOj8Uv9nD0zoNSF/kU/5yFd53BBHVfi+X+3JZZugtQUsA
- 7tSIgS0pb5rMzgdt06WMRd/xEaAn9q2jltThdiAsSuwuTKvLFEdc9N3BN5Cq1E/tlAWZ
- H7HsGv1rRvi5jBcuaksSn1btw9WfxqUt/e3CClu8PoNkBQZQ464sW83gB4QfM2f+jh12
- CdPw==
+ bh=aRa1fIFp0YbvbNJhWc/LnCc0xVRhDIvd/cVo7xQGY4g=;
+ b=sp+lreps/J41+J0VBMQJpE3qaZgx8C2KpoC+iG6LU/GoE881xnSeRHrxa+Y/VVOLxv
+ L5yqpapFD/02YivpGkQ8oGmcrXLVQKO8KEO8+2UaRTu7p1LCQergzQKIlmwATgXCc4gO
+ gpSu0FLII8Kx78DWewn6ENMCNZ/nSEeyksa2Ynax736KYCqeclAVes+rNHzzyORQ+XJt
+ GjDGIYCeskhWs4szTAXN+YJRh5Fx+IvzpEP0sTydAawFnKEsqVlKutOPUzjauOciEoo1
+ kPBsTEjo25D6CPxU7XbKI1lIK/9AIr4iWYgMdxlt+GC7ncPxGx4oexLC9VTSJJYjBzG3
+ s8VQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXHYCaoFP4sKedrhpazP7Fc6oSF3rHrff2TQcGL/5fio/kRZ5Ji6Z0vMh1GZxX9wLg+DRTY3GU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7MVVy4rt5ppsm3MtFars5lUWM7AAX/srBwIEKtK5i/8KqwS8P
- VkuRvgseUHTcOChGHkpxqiiZJ9YtG6skU06Q2INnb/iKBhtSpD4ygl4mEUvMtAl36TLWix53Liu
- JPr3jZv3yKJJc100Sl9pagDPf6v1HgxZy2oWYja/Zz3C/ZB8=
-X-Gm-Gg: ASbGnctlBCe0gxs368azF9uVxzicI7Tm6cTxtLKZMf4sN1WlNXlPoms4inHEMOcM0IW
- Q7XwdkoxxSL6dxFf87IVL9VWGPlcOV/CM/slH8f0=
-X-Google-Smtp-Source: AGHT+IG4bGURoEDesF5L8guC/DS1xcfdEbTzrc2Aapl2KxnGoyzQjBv8I9o7cu2eTyc2TinHT1R+TR1NZxH4C1SEki8=
-X-Received: by 2002:a17:907:c588:b0:ab2:c208:732d with SMTP id
- a640c23a62f3a-ab2c2087cbbmr2599519666b.40.1736990829498; Wed, 15 Jan 2025
- 17:27:09 -0800 (PST)
+ AJvYcCVY48saF/hhb+KT4uILi2X1I/kDM4ie/RxgXEXWzzGjjtxiM9b7eyPn/+B0KXrO6MfWNIjN/tE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzfPsslIuRmQ4/YtNobxkNjKybXwnS87BCemEHFDARme3ginic7
+ PwudYgtvn00bhHn3bAyoLJsnGXdl5fE92pMez9SFl2imUoQ8uWVWmvb0xxhIVQQLP6dhas162Ej
+ 9IENcXHqd6ufYtmp5mucX+Uy7B8qpWDwhdD2D
+X-Gm-Gg: ASbGncuES38DZn/uTDa1bXGbdSnovH905hEl2aBW57uKZzBLs3IBPS4cEQ1ZNmXQZDc
+ GZieFVG8FDxtHtwmAyAvxOCqzsrkrHoYDJeqS07Q=
+X-Google-Smtp-Source: AGHT+IEPjrmvw4Wag/BuQlkrmXpmYKpud1tZAHEO7Z60KsdjIxweZnx97cvnkF7A7tdp43dJ1XOvLeCN3TEcpWeVl0E=
+X-Received: by 2002:a05:6402:84f:b0:5d0:d3eb:a78f with SMTP id
+ 4fb4d7f45d1cf-5d972d26e91mr78491783a12.0.1736990833064; Wed, 15 Jan 2025
+ 17:27:13 -0800 (PST)
 MIME-Version: 1.0
 References: <20250115135209.13946-1-harrison.mutai@arm.com>
- <20250115135209.13946-3-harrison.mutai@arm.com>
-In-Reply-To: <20250115135209.13946-3-harrison.mutai@arm.com>
+ <20250115135209.13946-4-harrison.mutai@arm.com>
+In-Reply-To: <20250115135209.13946-4-harrison.mutai@arm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Jan 2025 18:26:57 -0700
-X-Gm-Features: AbW1kvYcflTP5pS9LkNiEdCvjClIgop54a89S6Ol5Vr2NPygzfy8qVsC9Zh_gYo
-Message-ID: <CAFLszTjS2mY1FrWM9dLAwOZ1soiOBP6GgMOYWwYQP6XPw9L9EA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] board: vexpress64: default to hardware device tree
+Date: Wed, 15 Jan 2025 18:26:58 -0700
+X-Gm-Features: AbW1kvYkQ3oetKEyW46fb8_7LeoW4r2llPOiymqQhQhD6MOiW4gto1i95eyoElg
+Message-ID: <CAFLszTh=c0VXjRN3kSPkJYkujEF3GhFcx9kx9DpjxaFx5addqg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] bloblist: add support for CONFIG_BLOBLIST_PASSAGE
 To: Harrison Mutai <harrison.mutai@arm.com>
-Cc: Liviu Dudau <liviu.dudau@foss.arm.com>, Tom Rini <trini@konsulko.com>,
- nd@arm.com, 
- andre.przywara@arm.com, manish.pandey2@arm.com, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, nd@arm.com, andre.przywara@arm.com, 
+ manish.pandey2@arm.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,42 +90,78 @@ X-Virus-Status: Clean
 
 Hi Harrison,
 
-On Wed, 15 Jan 2025 at 06:52, Harrison Mutai <harrison.mutai@arm.com> wrote:
+On Wed, 15 Jan 2025 at 06:53, Harrison Mutai <harrison.mutai@arm.com> wrote:
 >
-> When booting into the Linux kernel with semi-hosting, use the device
-> tree provided by hardware unless one is provided in the current
-> directory.
+> When the configuration option CONFIG_BLOBLIST_PASSAGE is selected, the
+> bloblist present in the incoming standard passage is utilised in-place.
+> There is no need to specify the size of the bloblist as the system
+> automatically detects it using the header information.
 >
 > Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
 > ---
->  include/configs/vexpress_aemv8.h | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+>  common/Kconfig    | 8 +++++++-
+>  common/bloblist.c | 5 ++++-
+>  2 files changed, 11 insertions(+), 2 deletions(-)
 >
+> diff --git a/common/Kconfig b/common/Kconfig
+> index 7a80b797df..49fe04ffca 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -1064,6 +1064,12 @@ config BLOBLIST_ALLOC
+>           specify a fixed address on systems where this is unknown or can
+>           change at runtime.
+>
+> +config BLOBLIST_PASSAGE
+> +       bool "Use bloblist in-place"
+> +       help
+> +         Use a bloblist in the incoming standard passage. The size is detected
+> +         automatically so CONFIG_BLOBLIST_SIZE can be 0.
+> +
+>  endchoice
+>
+>  config BLOBLIST_ADDR
+> @@ -1078,6 +1084,7 @@ config BLOBLIST_ADDR
+>
+>  config BLOBLIST_SIZE
+>         hex "Size of bloblist"
+> +       default 0x0 if BLOBLIST_PASSAGE
+>         default 0x400
+>         help
+>           Sets the size of the bloblist in bytes. This must include all
+> @@ -1088,7 +1095,6 @@ config BLOBLIST_SIZE
+>  config BLOBLIST_SIZE_RELOC
+>         hex "Size of bloblist after relocation"
+>         default BLOBLIST_SIZE if BLOBLIST_FIXED || BLOBLIST_ALLOC
+> -       default 0x0 if BLOBLIST_PASSAGE
+>         default 0x20000 if (ARM && EFI_LOADER && GENERATE_ACPI_TABLE)
+>         help
+>           Sets the size of the bloblist in bytes after relocation. Since U-Boot
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 110bb9dc44..f52f1eaca9 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -475,6 +475,9 @@ int bloblist_reloc(void *to, uint to_size)
+>  {
+>         struct bloblist_hdr *hdr;
+>
+> +       if (to_size == 0)
 
-Thinking about standard boot, could we add a bootdev for hostfs? Then
-we could drop these scripts.
+if (!to_size)
 
-> diff --git a/include/configs/vexpress_aemv8.h b/include/configs/vexpress_aemv8.h
-> index 8020689e39..2341b3a938 100644
-> --- a/include/configs/vexpress_aemv8.h
-> +++ b/include/configs/vexpress_aemv8.h
-> @@ -169,12 +169,14 @@
->                 "  if load hostfs - ${kernel_addr_r} ${kernel_name}; then"      \
->                 "    setenv fdt_high 0xffffffffffffffff;"               \
->                 "    setenv initrd_high 0xffffffffffffffff;"            \
-> -               "    load hostfs - ${fdt_addr_r} ${fdtfile};"                   \
-> +               "    if test -n load hostfs - ${fdt_addr_r} ${fdtfile}; then"                   \
-> +               "        fdt move $fdtcontroladdr $fdt_addr_r;"                 \
-> +               "    fi;"                       \
->                 "    load hostfs - ${ramdisk_addr_r} ${ramdisk_name};" \
->                 "    fdt addr ${fdt_addr_r};"                           \
->                 "    fdt resize;"                                       \
->                 "    fdt chosen ${ramdisk_addr_r} ${filesize};" \
-> -               "    booti $kernel_addr_r - $fdt_addr_r;"               \
-> +               "    booti $kernel_addr_r - ${fdt_addr_r};"             \
->                 "  fi;"                                                 \
->                 "fi\0"
->  #define BOOTENV_DEV_NAME_SMH(devtypeu, devtypel, instance) "smh "
+> +               return 0;
+> +
+>         if (to_size < gd->bloblist->total_size)
+>                 return -ENOSPC;
+>
+> @@ -510,7 +513,7 @@ int bloblist_init(void)
+>          * install the bloblist passed from previous loader to this fixed
+>          * address.
+>          */
+> -       bool from_boot_arg = fixed && xpl_is_first_phase();
+> +       bool from_boot_arg = xpl_is_first_phase();
+>
+>         if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+>                 from_addr = false;
 > --
 > 2.46.2
 >
