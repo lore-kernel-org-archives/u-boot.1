@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E28C02188
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 23:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C46C02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 23:11:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14B6B8033D;
-	Fri, 17 Jan 2025 00:10:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 80C34806FB;
+	Fri, 17 Jan 2025 00:11:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IyFdTM80";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="FQgXJqYq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C869806FB; Fri, 17 Jan 2025 00:10:48 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 77E028073D; Fri, 17 Jan 2025 00:11:05 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 233A28022B
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:10:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1044F8022B
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:11:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3eb939021bfso773658b6e.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:10:46 -0800 (PST)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e3a26de697fso2523237276.3
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:11:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737069045; x=1737673845; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gj5QTNElvkNsiGzY19/EU2oMS3qXTdXdjTFL3+bOKro=;
- b=IyFdTM80w4R4TVUwgB5EBhnNBNbZ5siLBFYuBNL4Dx643+9UsWNpFOipd841nz7+Rn
- svTGweYxpKhuYAa6VkcQgjYX7DSPBhYbd6iu0v+0fm3o+b+CMRzrtJeX8Z/OcqzeOP/9
- qw7GHCSY+044TDiNHBesidpfcZEQJIQGmGCuTpPxncBHOwNV6whd2Yd1CgAte8DoLIPX
- zo/ZU1MrYgWzhUPodPXJcMoIL6M+Yr74dhKpepAPPUW78jUW+qgrFJl4PVA0IKElchLW
- gi4czv4OopKxXDp0YGCa2OfuJpiqVkM62zDikwQnM53ldyCL+W4F1QgQ/TGXlv1RnECQ
- j0Iw==
+ d=gateworks.com; s=google; t=1737069061; x=1737673861; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JCqKcaXNb9ybBmshcj17QS3lj7K+Nlc3pvtpvBijT5U=;
+ b=FQgXJqYqQeBUldZO9+n+MD8zUl8jMCqM7s/M/Talo0Th68iXQTL46neesM6dhAV/NV
+ Iyxb2ZdY+Y94SGq/Yf+gk8zHCz/K9FktB4mYlqPym9WvcgobyiXqPcS48hRagPyn0Rdv
+ mZ9xM4FNBvFP+Y/l+vhcJ4K6Q1qnJtBMbYaNXxQjpQQKCutYPaIc4C9BYOtpvhpUhDdO
+ Qk54pzTE8rTOlJG++4pbOl39bTdjCco5ZJABl8E8p3ty0g8TiIxOn8Y9RqVdkoTFW/LI
+ uQ/v7XRTM9yq2LDCpwFffTkpAwBcKPT/vzz+dTjxyMOEQn6ILcNNdHEDiTSi5jzzP7AT
+ jd3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737069045; x=1737673845;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gj5QTNElvkNsiGzY19/EU2oMS3qXTdXdjTFL3+bOKro=;
- b=c47P00ow/ojqJF/QXsIm5DmF87mZlsLjVY51sjLV1SN6W8lPtK7KegoQc727+z6qpQ
- D/xDlzxCNpvtQpycKQ7eFz12h9TT6Kq/ABeCW6G4Tfa1rFJVo410dR+qdcoM/dYQKD3n
- KCZwxFEd473+imWtTPZrzTq42EBlC3Kb1S8yzJMrpW2S+rNqBVUNzj6KG0q3kaZ70A6J
- VabzrSa85e9j8Nv3swsrAPZ1OSsils0DW6v/Px/LS9uEAUlvO5u37G64obsDGgJwwzCQ
- uqaSxbqy1oeRObGYsWJLb8Y0PHpnnGJhITTAQysk5PdAdk3E4J33Ga1N0bxaJ9Mj+DOJ
- dgvQ==
+ d=1e100.net; s=20230601; t=1737069061; x=1737673861;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JCqKcaXNb9ybBmshcj17QS3lj7K+Nlc3pvtpvBijT5U=;
+ b=sRrrhfy2Zi1f9qCj7Rk6zCwH8KkkPDiTHi5tLEUVlQ0832gNh9Q9qCvwN9klV+Da3Y
+ +eV6sLdTD3P7YJCO33+kx4XhBcM88Rc0Zx6sdyNAWxhPtHPUY2VH52HOBiNVn5F8QZLW
+ A4dDtSeZ87Gt1qtYa3iuGqvY7J9Yz083X0BCEuhcpxMe+YPPXqnaXlPbJoebYNevaKjm
+ 7YLtNcBChYd7auNRjH2+ybVlhYZwnPm/qhIM9XIRgtIlqbAqd+VTJjLg1ntUIiGO1rtv
+ Bbtgldz0+B8NZq/66s9LZ7aGuWVix5qPtS0jTIY79SwHq7Fbjk7fPjdLuxyMmRZDqjbe
+ 8Z7A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWTzmhwft2WDkIe6Ck0FwiKlFYlIBbvBZrcDepV2rTa2w7TIXPnJnXwdUj0m1P4kLM/huN3bRU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwBrpTynMXLLSTPzgueD0m785YGpjfN2lkeGkySmf9az0WU2UD/
- 9AxOZcpQDtnGfUkOwx4ICiREXdLbjddFxzBJg/1fH1dEZ6xIfubt
-X-Gm-Gg: ASbGncvB7EzwLpnhqI454bmCv7zITqRGl/jRho/aE+LEz2dyIh+TwNYIapOGN9WnvaX
- QIA4vPCvcRpzogDoTAspIX+3WzjkCnxiHIdtUkDs5i69i0BibJdr40Joh7JMTjoUO2HNDkE5kuV
- 4t+n/9ZDetG/K1r+S0CkzmM6wV9zpUrGYZyttQheIbPHqy4eFOSZKYqmHyGcwxwOfk12yiN3OVe
- dQMYiOCyK49QskaH1srQbw7WbC5P6ReSvUnj+LWzP6z16hiyN36bYCw6KAa3nsh32Jl2NQ=
-X-Google-Smtp-Source: AGHT+IG+d7zVQ4ssdAfTL+F8s6gZ++LxxGwVtefxvCasjVQMIp59VUnkLye+0DGnwlLiU2X0JGyW9w==
-X-Received: by 2002:a05:6808:4e08:b0:3e5:f656:dd19 with SMTP id
- 5614622812f47-3f19fc2aceemr382398b6e.19.1737069044652; 
- Thu, 16 Jan 2025 15:10:44 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b1a4:73e9:7e6a:ebcd])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f19da6eab9sm422175b6e.17.2025.01.16.15.10.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 15:10:43 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: uboot-imx@nxp.com, peng.fan@nxp.com, y.moog@phytec.de,
- u-boot@lists.denx.de, marex@denx.de, Fabio Estevam <festevam@denx.de>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH] imx8m: Guard binman nodes with CONFIG_OPTEE 
-Date: Thu, 16 Jan 2025 20:10:32 -0300
-Message-Id: <20250116231032.2312636-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ AJvYcCWZWr8S6sTJedSM6JpobYpcX8eOEkWB9vRtf4+a8SAfrFfQjcgHNQwRuZApIeRPbeX/NOfsswY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyV0sM9RIaGpQodiWPF4/IS8LiFnvoxTPiuW741k626xaBzr18H
+ v0IZ5WjHC/uSrk2OiKkDjA0IIyEgKpmwEqc3ePxFE17aQCqEqBAW0Ya/1sOsW78l5Jl0UYCqG8n
+ Xyu/3XptTJ82A/yzmoEfzHxeuQ+4hJz06ayuGFQ==
+X-Gm-Gg: ASbGnctVOmRk4r32pMboIAbxD7N/wHVpkHW9NFQBhnKXwwaSLivwiaQJtLnzmSCFT4s
+ p7/FJoAlfpgU7WVNVSek37L3VHHUWCPYrDAV4mQ==
+X-Google-Smtp-Source: AGHT+IGZzJQW7UsI0CjGnHrVwZ+ZmfI8ZLFUDPydrDCu5cuptQfImhfwb2pSy0TuSNKFIwOcrwW70uxSxnG32wVtoD4=
+X-Received: by 2002:a05:6902:2587:b0:e38:b85c:31a4 with SMTP id
+ 3f1490d57ef6-e57b106171fmr274391276.14.1737069061310; Thu, 16 Jan 2025
+ 15:11:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250110-phytec_imx8m_optee-v3-0-6c39dab15592@phytec.de>
+ <20250110-phytec_imx8m_optee-v3-1-6c39dab15592@phytec.de>
+ <CAJ+vNU24PA3S3aEu5CjyECaF0aKKvbs7svHVuGUyHFA08NObOw@mail.gmail.com>
+ <CAOMZO5DPBJAXm99DTwBjfgOUpUqWzCiZH=vM-Mq_cDde3QzynQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5DPBJAXm99DTwBjfgOUpUqWzCiZH=vM-Mq_cDde3QzynQ@mail.gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 16 Jan 2025 15:10:50 -0800
+X-Gm-Features: AbW1kvZEhv1KGA2eaNmyUPbERXmvM5X1XIbKpKH13InFLiYdpWMxnZ-bpw6z1r0
+Message-ID: <CAJ+vNU3x51yG8i4N1DgCrg0DsaeGRurh2ZmK6td1jz22riiSYQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/6] arm: imx8m: add OP-TEE node
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Yannic Moog <y.moog@phytec.de>, Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Manuel Traut <manut@mecka.net>, 
+ Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
+ Yashwanth Varakala <y.varakala@phytec.de>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,112 +100,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On Thu, Jan 16, 2025 at 2:57=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> On Thu, Jan 16, 2025 at 7:45=E2=80=AFPM Tim Harvey <tharvey@gateworks.com=
+> wrote:
+>
+> > Hi Yannic,
+> >
+> > As I mentioned before, I still don't see how this builds when tee.bin
+> > is missing because someone isn't using tee?
+> >
+> > It looks like Fabio has merged this already to imx/master which now
+> > fails to build for imx8m*_venice boards because of it.
+>
+> make mrproper
+> make imx8mp_venice_defconfig
+> make
+>
+> flash.bin is still generated despite this nasty warning:
+>
+>   CFGS    spl/u-boot-spl.cfgout
+>   BINMAN  .binman_stamp
+> Image 'image' has faked external blobs and is non-functional: tee.bin
+>
+> Image 'image' is missing optional external blobs but is still functional:=
+ tee-os
+>
+> /binman/section/fit/images/tee/tee-os (tee.bin):
+>    See the documentation for your board. You may need to build Open Porta=
+ble
+>    Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to/t=
+ee.bin
+>
+> Some images are invalid
+> make: *** [Makefile:1135: .binman_stamp] Error 103
+>
+> CI also did not complain.
 
-Guard binman nodes with CONFIG_OPTEE to fix the following error
-when building without optee support:
+I must admit I don't know much about how CI works but the make process
+returns an error status, but you are correct flash.bin exists.
 
-  BINMAN  .binman_stamp
-Image 'image' has faked external blobs and is non-functional: tee.bin
+>
+> Yes, I would welcome a patch that removes these tee messages by default.
 
-Image 'image' is missing optional external blobs but is still functional: tee-os
+I'm not sure I agree that they should be considered nasty warnings and
+removed. What if you intended tee.bin to be included but forgot to
+copy it here and you end up with this?
 
-/binman/section/fit/images/tee/tee-os (tee.bin):
-   See the documentation for your board. You may need to build Open Portable
-   Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+Best Regards,
 
-Some images are invalid
-make: *** [Makefile:1135: .binman_stamp] Error 103
-
-Reported-by: Tim Harvey <tharvey@gateworks.com>
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- arch/arm/dts/imx8mm-u-boot.dtsi | 2 ++
- arch/arm/dts/imx8mn-u-boot.dtsi | 2 ++
- arch/arm/dts/imx8mp-u-boot.dtsi | 2 ++
- arch/arm/dts/imx8mq-u-boot.dtsi | 2 ++
- 4 files changed, 8 insertions(+)
-
-diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot.dtsi
-index ecc2319279ea..f1cc3fd2532b 100644
---- a/arch/arm/dts/imx8mm-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mm-u-boot.dtsi
-@@ -164,6 +164,7 @@
- 					};
- #endif
- 
-+#ifdef CONFIG_OPTEE
- 					tee: tee {
- 						description = "OP-TEE";
- 						type = "tee";
-@@ -178,6 +179,7 @@
- 							optional;
- 						};
- 					};
-+#endif
- 
- 					binman_fip: fip {
- 						arch = "arm64";
-diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot.dtsi
-index 4a4498b36b01..08a81ddc9cb2 100644
---- a/arch/arm/dts/imx8mn-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mn-u-boot.dtsi
-@@ -240,6 +240,7 @@
- 					};
- #endif
- 
-+#ifdef CONFIG_OPTEE
- 					tee: tee {
- 						description = "OP-TEE";
- 						type = "tee";
-@@ -254,6 +255,7 @@
- 							optional;
- 						};
- 					};
-+#endif
- 
- 					binman_fip: fip {
- 						arch = "arm64";
-diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
-index 9ede98a11e42..55be8e4f7cb0 100644
---- a/arch/arm/dts/imx8mp-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-u-boot.dtsi
-@@ -185,6 +185,7 @@
- 					};
- #endif
- 
-+#ifdef CONFIG_OPTEE
- 					tee: tee {
- 						description = "OP-TEE";
- 						type = "tee";
-@@ -199,6 +200,7 @@
- 							optional;
- 						};
- 					};
-+#endif
- 
- 					@fdt-SEQ {
- 						description = "NAME";
-diff --git a/arch/arm/dts/imx8mq-u-boot.dtsi b/arch/arm/dts/imx8mq-u-boot.dtsi
-index 93e2ef27f7ce..cdeacbac108b 100644
---- a/arch/arm/dts/imx8mq-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mq-u-boot.dtsi
-@@ -144,6 +144,7 @@
- 					};
- #endif
- 
-+#ifdef CONFIG_OPTEE
- 					tee: tee {
- 						description = "OP-TEE";
- 						type = "tee";
-@@ -158,6 +159,7 @@
- 							optional;
- 						};
- 					};
-+#endif
- 
- 					fdt {
- 						compression = "none";
--- 
-2.34.1
-
+Tim
