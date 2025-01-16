@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1295E77188
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 04:06:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0EDBC02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 04:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B30480726;
+	by phobos.denx.de (Postfix) with ESMTP id E7F9580775;
 	Thu, 16 Jan 2025 05:05:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1737000348;
-	bh=y/X9TG2+McjPgzqV7ZWUhwQOLfDSiWGZ9Bk9fSuLURc=;
+	bh=q5z3GanD5Zh05MWAtOUMgedlALl3N/6tWyul7SKyQYk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wleBKrMoz/xLhUU7+OPBfrMXL2f73ngVFsBzRjEQqNrtB5ekupaF+mZeBlneQrfLw
-	 WvxkBLwvF1YRb5UtPJDDDHSzHruYQbykUK0NX3dN5qWECOHVEDU2KgKeR6w1q/9dkM
-	 s68bx66TjM5I7z4CMzotUna2DzZ/NeinBjKpPHfpaRoOEoP8Wkp+uZxHCgj2kGYxeE
-	 GZT5jX2xCi1Tf6LPNVdhylRtAtSb9ai08EMOw2HguNk2dGbuRiC7l6l88LeF1kY0Qg
-	 j1MT6T9hnC3iAPH3tl8zpP2wPwO7ENOR2PB9fYa80cRxkkVDPtrTkiyZBLD0v8NDAq
-	 tWNRM17nwJbeg==
+	b=BFiR0rJY7/B+G0w+7dolq7q0RDeFqd2gL1rnOVfNKcZqUTQJPt1ukMwgpfblc10Eb
+	 cJ42h4HRNT/Cz8UGr0/o5f7rx/KBdC0ffZ6Tfk4zKCpBRmLk/HVNq43RRaSGzHfyZM
+	 3rvGppGmsKDDgdlG/un36pUHNm2VLozJ8GwajRqkeGJSkrTz/xW4h/Yn/A5Vw2vY/t
+	 I3jcVva8Vkr6GfI4/ojadGkvTOuMKiBZ2AeWqnCZass0Yg6ZwjEPVVLmAT7RHO8mUA
+	 Ye+cRx5YNrxuWOC+D7yWg7cv4I+8KAMClaVcDUcG3F0RMmW86rddUr4SMVRgD1F8n6
+	 nNI9NDNIME8VA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61A488076E; Thu, 16 Jan 2025 05:05:47 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 7C6A7806D4; Thu, 16 Jan 2025 05:05:47 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29E6A80762
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 05:05:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8C1D80748
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 05:05:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="T4mCvG4a"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Qkb+K80P"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 29D2610936A0E; Thu, 16 Jan 2025 05:05:41 +0100 (CET)
+ with ESMTPSA id BDE59109403D9; Thu, 16 Jan 2025 05:05:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737000342;
+ t=1737000344;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=y/X9TG2+McjPgzqV7ZWUhwQOLfDSiWGZ9Bk9fSuLURc=;
- b=T4mCvG4a+XZcmiFMNr+Z+i6oG3h6ha8cjpV6tCHSQNF8pSPn0IHfqlsUQHLKizqnL0ny3M
- JFRxX/L5Jr6TTevMOa0XfLE5Kk75wqVfDfwyK38Gw1eVLiUC3xLFk+Kn3+Lk4ZjOD6XGor
- 6j4+nA2lQB4z/uHKFduuRRGnBzSSGVK4WBm96ve0B1NASZsW2GRpkORE62So4+aQASselY
- eBKDte8rAAEAoXY03CuS8qzCiuxmApk1t4smogj/pxZe51Q1H5gqPPOijNSpKTvxGgVcYj
- fWmDqHE0yde+a5qpM3gUwCVaGsfLdCvlWg+sJu9l/SPQGpHmfKtjL18GqRxhgQ==
+ bh=q5z3GanD5Zh05MWAtOUMgedlALl3N/6tWyul7SKyQYk=;
+ b=Qkb+K80PwkhA0yUt/xFWBWltIkPaAZu8IsIzRiZJps6LXNuwH4e5XNxXuQyIJjT5k7EdtD
+ Fbs0wEx1pUWAaSIG1Y/i0uqfUzpgN0gdcjb+t8NpQwt0MZhucOWKW7ohHKQ0Uh1saoCe6B
+ 5QHO3jvbyJV4wQ+3+hjPtGq81HAnLl+6z+TpU7SfSKt0gg1A2zugwopaXqIOfbf5o07yqU
+ mq9eCy7d9gY7HKU+eOsu2ZP6imriDno2agAqlGwOUg8AZAD/4uggBsgPs/d0uzAlJGw6AE
+ 2EV8GH9mNKIT2oMml8maY7NFGJYkEC+8PPTAIJ6IzhUbvAc2jRGee7R8U4ojzw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
@@ -61,9 +62,9 @@ Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
  Romain Naour <romain.naour@smile.fr>, Simon Glass <sjg@chromium.org>,
  Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
  Ye Li <ye.li@nxp.com>
-Subject: [PATCH 07/13] net: fsl_enetc: Inline register accessors
-Date: Thu, 16 Jan 2025 05:03:24 +0100
-Message-ID: <20250116040449.306098-7-marex@denx.de>
+Subject: [PATCH 08/13] net: fsl_enetc: Split register accessors
+Date: Thu, 16 Jan 2025 05:03:25 +0100
+Message-ID: <20250116040449.306098-8-marex@denx.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250116040449.306098-1-marex@denx.de>
 References: <20250116040449.306098-1-marex@denx.de>
@@ -86,9 +87,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move register accessors from header files and turn them into proper
-inline functions, so typechecking can be done on them. Drop no longer
-enetc_port_regs() and unused enetc_read() and enetc_bdr_read().
+Split register accessors to the port base/station interface/port/mac
+registers as those are at different offsets on different SoCs. This
+is a preparatory patch which will allow addition of adjusted offsets
+for new SoCs easily.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -107,108 +109,187 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: Ye Li <ye.li@nxp.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/net/fsl_enetc.c      | 34 ++++++++++++++++++++++++++++++++++
- drivers/net/fsl_enetc.h      | 20 --------------------
- drivers/net/fsl_enetc_mdio.c | 10 ++++++++++
- 3 files changed, 44 insertions(+), 20 deletions(-)
+ drivers/net/fsl_enetc.c | 68 +++++++++++++++++++++++++++++++----------
+ drivers/net/fsl_enetc.h | 25 +++++++++------
+ 2 files changed, 67 insertions(+), 26 deletions(-)
 
 diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
-index e6f5ca633aa..ace1069efd9 100644
+index ace1069efd9..532a367c241 100644
 --- a/drivers/net/fsl_enetc.c
 +++ b/drivers/net/fsl_enetc.c
-@@ -40,6 +40,40 @@ static int enetc_dev_id(struct udevice *dev)
- 	return 0;
+@@ -56,14 +56,52 @@ static void enetc_write(struct enetc_priv *priv, u32 off, u32 val)
+ 	enetc_write_reg(priv->regs_base + off, val);
  }
  
-+/* register accessors */
-+static u32 enetc_read_reg(void __iomem *addr)
++/* base port register accessors */
++static void enetc_write_pmr(struct enetc_priv *priv, u32 val)
 +{
-+	return readl(addr);
-+}
++	const u32 off = ENETC_PMR + ENETC_PMR_OFFSET_LS;
 +
-+static void enetc_write_reg(void __iomem *addr, u32 val)
-+{
-+	writel(val, addr);
-+}
-+
-+static void enetc_write(struct enetc_priv *priv, u32 off, u32 val)
-+{
-+	enetc_write_reg(priv->regs_base + off, val);
-+}
-+
-+/* port register accessors */
-+static u32 enetc_read_port(struct enetc_priv *priv, u32 off)
-+{
-+	return enetc_read_reg(priv->port_regs + off);
-+}
-+
-+static void enetc_write_port(struct enetc_priv *priv, u32 off, u32 val)
-+{
 +	enetc_write_reg(priv->port_regs + off, val);
 +}
 +
-+/* BDR register accessor, see also ENETC_BDR() */
-+static void enetc_bdr_write(struct enetc_priv *priv, int type, int n,
-+			    u32 off, u32 val)
++static void enetc_write_psipmar(struct enetc_priv *priv, int n, u32 val)
 +{
-+	enetc_write(priv, ENETC_BDR(type, n, off), val);
++	const u32 off = (n ? ENETC_PSIPMAR1 : ENETC_PSIPMAR0) +
++			ENETC_PSIPMARn_OFFSET_LS;
++
++	enetc_write_reg(priv->port_regs + off, val);
 +}
 +
- /*
-  * sets the MAC address in IERB registers, this setting is persistent and
-  * carried over to Linux.
++/* port station register accessors */
++static void enetc_write_psicfgr(struct enetc_priv *priv, int port, u32 val)
++{
++	const u32 off = ENETC_PSICFGR(port, ENETC_PSICFGR_SHIFT_LS) +
++			ENETC_PSICFGR_OFFSET_LS;
++
++	enetc_write_reg(priv->port_regs + off, val);
++}
++
+ /* port register accessors */
+-static u32 enetc_read_port(struct enetc_priv *priv, u32 off)
++static u32 enetc_read_pcapr_mdio(struct enetc_priv *priv)
++{
++	const u32 off = ENETC_PCAPR0 + ENETC_PCAPR_OFFSET_LS;
++	u32 reg = enetc_read_reg(priv->port_regs + off);
++
++	return reg & ENETC_PCAPRO_MDIO;
++}
++
++/* MAC port register accessors */
++static u32 enetc_read_mac_port(struct enetc_priv *priv, u32 off)
+ {
++	off += ENETC_PM_OFFSET_LS;
++
+ 	return enetc_read_reg(priv->port_regs + off);
+ }
+ 
+-static void enetc_write_port(struct enetc_priv *priv, u32 off, u32 val)
++static void enetc_write_mac_port(struct enetc_priv *priv, u32 off, u32 val)
+ {
++	off += ENETC_PM_OFFSET_LS;
++
+ 	enetc_write_reg(priv->port_regs + off, val);
+ }
+ 
+@@ -234,7 +272,7 @@ static void enetc_init_rgmii(struct udevice *dev, struct phy_device *phydev)
+ 	struct enetc_priv *priv = dev_get_priv(dev);
+ 	u32 old_val, val;
+ 
+-	old_val = val = enetc_read_port(priv, ENETC_PM_IF_MODE);
++	old_val = val = enetc_read_mac_port(priv, ENETC_PM_IF_MODE);
+ 
+ 	/* disable unreliable RGMII in-band signaling and force the MAC into
+ 	 * the speed negotiated by the PHY.
+@@ -260,7 +298,7 @@ static void enetc_init_rgmii(struct udevice *dev, struct phy_device *phydev)
+ 	if (val == old_val)
+ 		return;
+ 
+-	enetc_write_port(priv, ENETC_PM_IF_MODE, val);
++	enetc_write_mac_port(priv, ENETC_PM_IF_MODE, val);
+ }
+ 
+ /* set up MAC configuration for the given interface type */
+@@ -280,9 +318,9 @@ static void enetc_setup_mac_iface(struct udevice *dev,
+ 	case PHY_INTERFACE_MODE_USXGMII:
+ 	case PHY_INTERFACE_MODE_10GBASER:
+ 		/* set ifmode to (US)XGMII */
+-		if_mode = enetc_read_port(priv, ENETC_PM_IF_MODE);
++		if_mode = enetc_read_mac_port(priv, ENETC_PM_IF_MODE);
+ 		if_mode &= ~ENETC_PM_IF_IFMODE_MASK;
+-		enetc_write_port(priv, ENETC_PM_IF_MODE, if_mode);
++		enetc_write_mac_port(priv, ENETC_PM_IF_MODE, if_mode);
+ 		break;
+ 	};
+ }
+@@ -313,7 +351,7 @@ static void enetc_start_pcs(struct udevice *dev)
+ 	struct enetc_priv *priv = dev_get_priv(dev);
+ 
+ 	/* register internal MDIO for debug purposes */
+-	if (enetc_read_port(priv, ENETC_PCAPR0) & ENETC_PCAPRO_MDIO) {
++	if (enetc_read_pcapr_mdio(priv)) {
+ 		priv->imdio.read = enetc_mdio_read;
+ 		priv->imdio.write = enetc_mdio_write;
+ 		priv->imdio.priv = priv->port_regs + ENETC_PM_IMDIO_BASE;
+@@ -472,8 +510,8 @@ static int enetc_write_hwaddr(struct udevice *dev)
+ 	u16 lower = *(const u16 *)(addr + 4);
+ 	u32 upper = *(const u32 *)addr;
+ 
+-	enetc_write_port(priv, ENETC_PSIPMAR0, upper);
+-	enetc_write_port(priv, ENETC_PSIPMAR1, lower);
++	enetc_write_psipmar(priv, 0, upper);
++	enetc_write_psipmar(priv, 1, lower);
+ 
+ 	return 0;
+ }
+@@ -482,18 +520,16 @@ static int enetc_write_hwaddr(struct udevice *dev)
+ static void enetc_enable_si_port(struct udevice *dev)
+ {
+ 	struct enetc_priv *priv = dev_get_priv(dev);
+-	u32 val;
+ 
+ 	/* set Rx/Tx BDR count */
+-	val = ENETC_PSICFGR_SET_TXBDR(ENETC_TX_BDR_CNT);
+-	val |= ENETC_PSICFGR_SET_RXBDR(ENETC_RX_BDR_CNT);
+-	enetc_write_port(priv, ENETC_PSICFGR(0), val);
++	enetc_write_psicfgr(priv, 0, ENETC_PSICFGR_SET_BDR(ENETC_RX_BDR_CNT,
++							   ENETC_TX_BDR_CNT));
+ 	/* set Rx max frame size */
+-	enetc_write_port(priv, ENETC_PM_MAXFRM, ENETC_RX_MAXFRM_SIZE);
++	enetc_write_mac_port(priv, ENETC_PM_MAXFRM, ENETC_RX_MAXFRM_SIZE);
+ 	/* enable MAC port */
+-	enetc_write_port(priv, ENETC_PM_CC, ENETC_PM_CC_RX_TX_EN);
++	enetc_write_mac_port(priv, ENETC_PM_CC, ENETC_PM_CC_RX_TX_EN);
+ 	/* enable port */
+-	enetc_write_port(priv, ENETC_PMR, ENETC_PMR_SI0_EN);
++	enetc_write_pmr(priv, ENETC_PMR_SI0_EN);
+ 	/* set SI cache policy */
+ 	enetc_write(priv, ENETC_SICAR0,
+ 		    ENETC_SICAR_RD_CFG | ENETC_SICAR_WR_CFG);
 diff --git a/drivers/net/fsl_enetc.h b/drivers/net/fsl_enetc.h
-index f2acf367aa3..da7414cbe99 100644
+index da7414cbe99..15408b669b4 100644
 --- a/drivers/net/fsl_enetc.h
 +++ b/drivers/net/fsl_enetc.h
-@@ -163,26 +163,6 @@ struct enetc_priv {
- 	struct phy_device *phy;
- };
+@@ -57,24 +57,29 @@ enum enetc_bdr_type {TX, RX};
+ #define ENETC_PORT_REGS_OFF		0x10000
  
--/* register accessors */
--#define enetc_read_reg(x)	readl((x))
--#define enetc_write_reg(x, val)	writel((val), (x))
--#define enetc_read(priv, off)	enetc_read_reg((priv)->regs_base + (off))
--#define enetc_write(priv, off, v) \
--			enetc_write_reg((priv)->regs_base + (off), v)
--
--/* port register accessors */
--#define enetc_port_regs(priv, off) ((priv)->port_regs + (off))
--#define enetc_read_port(priv, off) \
--			enetc_read_reg(enetc_port_regs((priv), (off)))
--#define enetc_write_port(priv, off, v) \
--			enetc_write_reg(enetc_port_regs((priv), (off)), v)
--
--/* BDR register accessors, see ENETC_BDR() */
--#define enetc_bdr_read(priv, t, n, off) \
--			enetc_read(priv, ENETC_BDR(t, n, off))
--#define enetc_bdr_write(priv, t, n, off, val) \
--			enetc_write(priv, ENETC_BDR(t, n, off), val)
--
- /* PCS / internal SoC PHY ID, it defaults to 0 on all interfaces */
- #define ENETC_PCS_PHY_ADDR	0
- 
-diff --git a/drivers/net/fsl_enetc_mdio.c b/drivers/net/fsl_enetc_mdio.c
-index 2d5fcbb6dbd..6a628e78883 100644
---- a/drivers/net/fsl_enetc_mdio.c
-+++ b/drivers/net/fsl_enetc_mdio.c
-@@ -14,6 +14,16 @@
- 
- #include "fsl_enetc.h"
- 
-+static u32 enetc_read(struct enetc_mdio_priv *priv, u32 off)
-+{
-+	return readl(priv->regs_base + off);
-+}
-+
-+static void enetc_write(struct enetc_mdio_priv *priv, u32 off, u32 val)
-+{
-+	writel(val, priv->regs_base + off);
-+}
-+
- static void enetc_mdio_wait_bsy(struct enetc_mdio_priv *priv)
- {
- 	int to = 10000;
+ /* Port registers */
++#define ENETC_PMR_OFFSET_LS		0x0000
+ #define ENETC_PMR			0x0000
+ #define  ENETC_PMR_SI0_EN		BIT(16)
+ #define ENETC_PSIPMMR			0x0018
+-#define ENETC_PSIPMAR0			0x0100
+-#define ENETC_PSIPMAR1			0x0104
+-#define ENETC_PCAPR0			0x0900
++#define ENETC_PSIPMARn_OFFSET_LS	0x0080
++#define ENETC_PSIPMAR0			0x0080
++#define ENETC_PSIPMAR1			0x0084
++#define ENETC_PCAPR_OFFSET_LS		0x0900
++#define ENETC_PCAPR0			0x0000
+ #define  ENETC_PCAPRO_MDIO		BIT(11)
+-#define ENETC_PSICFGR(n)		(0x0940 + (n) * 0x10)
+-#define  ENETC_PSICFGR_SET_TXBDR(val)	((val) & 0xff)
+-#define  ENETC_PSICFGR_SET_RXBDR(val)	(((val) & 0xff) << 16)
++#define ENETC_PSICFGR_OFFSET_LS		0x0940
++#define ENETC_PSICFGR_SHIFT_LS		0x10
++#define ENETC_PSICFGR(n, s)		((n) * (s))
++#define  ENETC_PSICFGR_SET_BDR(rx, tx)	(((rx) << 16) | (tx))
+ /* MAC configuration */
+-#define ENETC_PM_CC			0x8008
++#define ENETC_PM_OFFSET_LS		0x8000
++#define ENETC_PM_CC			0x0008
+ #define  ENETC_PM_CC_DEFAULT		0x0810
+ #define  ENETC_PM_CC_RX_TX_EN		0x8813
+-#define ENETC_PM_MAXFRM			0x8014
++#define ENETC_PM_MAXFRM			0x0014
+ #define  ENETC_RX_MAXFRM_SIZE		PKTSIZE_ALIGN
+-#define ENETC_PM_IMDIO_BASE		0x8030
+-#define ENETC_PM_IF_MODE		0x8300
++#define ENETC_PM_IMDIO_BASE		0x0030
++#define ENETC_PM_IF_MODE		0x0300
+ #define  ENETC_PM_IF_MODE_RG		BIT(2)
+ #define  ENETC_PM_IF_MODE_AN_ENA	BIT(15)
+ #define  ENETC_PM_IFM_SSP_MASK		GENMASK(14, 13)
 -- 
 2.45.2
 
