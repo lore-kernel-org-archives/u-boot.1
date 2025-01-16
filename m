@@ -4,73 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC8DC02180
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 01:27:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D92C02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 01:27:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6953D80703;
-	Thu, 16 Jan 2025 02:27:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BEFF9806DD;
+	Thu, 16 Jan 2025 02:27:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lsjko4tw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g+jGuCBt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B76D180214; Thu, 16 Jan 2025 02:27:15 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 835EE8069D; Thu, 16 Jan 2025 02:27:18 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99F56806DD
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 02:27:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41FD580214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 02:27:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5d3f28881d6so542495a12.1
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 17:27:13 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ab2bb0822a4so82526866b.3
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 17:27:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736990833; x=1737595633; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736990836; x=1737595636; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aRa1fIFp0YbvbNJhWc/LnCc0xVRhDIvd/cVo7xQGY4g=;
- b=lsjko4twBorGhT5JmyT4LGFcv/GTnAH8JCnmRwYz8z93psNkYgECJmr+JtGq/9Vpm6
- 2WFYDyXUO9qM2ZG8LSMMMN+qRVu6xmAfZ4c2VAk98r0w0ssyQ1D/InwAq6V/N1Qa83IE
- cvOMTHCb/espFvzY6BzEjQLNinQ2vg8N9MCjM=
+ bh=ZAyhSW7N303jSAmOruEtkI6GhNkz6nVPWV7pl8fEfb8=;
+ b=g+jGuCBtzXJmvxOVwTKy7i16egMsZT8qDof5BPO75lkXV6BliL1m0dpX+w4AlNSK3x
+ ZLojPZrOHNFXhRBqufjKLqVxoKVgGhmUWFdAD0c6BXqKoEW4pLmzXFfKOZggV99u4THE
+ c0Y9cO0CmVO16pYi0zyjmnpFu6nq6gdnACyOU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736990833; x=1737595633;
+ d=1e100.net; s=20230601; t=1736990836; x=1737595636;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aRa1fIFp0YbvbNJhWc/LnCc0xVRhDIvd/cVo7xQGY4g=;
- b=sp+lreps/J41+J0VBMQJpE3qaZgx8C2KpoC+iG6LU/GoE881xnSeRHrxa+Y/VVOLxv
- L5yqpapFD/02YivpGkQ8oGmcrXLVQKO8KEO8+2UaRTu7p1LCQergzQKIlmwATgXCc4gO
- gpSu0FLII8Kx78DWewn6ENMCNZ/nSEeyksa2Ynax736KYCqeclAVes+rNHzzyORQ+XJt
- GjDGIYCeskhWs4szTAXN+YJRh5Fx+IvzpEP0sTydAawFnKEsqVlKutOPUzjauOciEoo1
- kPBsTEjo25D6CPxU7XbKI1lIK/9AIr4iWYgMdxlt+GC7ncPxGx4oexLC9VTSJJYjBzG3
- s8VQ==
+ bh=ZAyhSW7N303jSAmOruEtkI6GhNkz6nVPWV7pl8fEfb8=;
+ b=ppx2JLQU9sPDPaPALxANMIoa8A7xMcOFPoWYADfVZifMIKyFeZKECkhpR7/0p/qdKH
+ wktMlBW0p5Zu5qRwVN/XIK9/SSdGYMLOQX2YxhWXnycUY7ZVzpUvHgq1DcWNqeZIRSZn
+ CqQ0LEE73QSc84ByP/cQzqQXArLlScaG82ncnpxKCqsZfjhqhVEL6Rv7+YUwvPI8F74o
+ 4qG3+rGnH5LuuzToWeJLwVhQmkTaSjxetV1FSWUnYM819sU4bYiEPOUm0U5jKYmB8Ccm
+ osZtlVm5bz7pEEVIH5WfeEZT4uHww2GAiGZuXp30dO+L+AkuEG1GKp891+vJ9MKAbHbx
+ 8D0w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVY48saF/hhb+KT4uILi2X1I/kDM4ie/RxgXEXWzzGjjtxiM9b7eyPn/+B0KXrO6MfWNIjN/tE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzfPsslIuRmQ4/YtNobxkNjKybXwnS87BCemEHFDARme3ginic7
- PwudYgtvn00bhHn3bAyoLJsnGXdl5fE92pMez9SFl2imUoQ8uWVWmvb0xxhIVQQLP6dhas162Ej
- 9IENcXHqd6ufYtmp5mucX+Uy7B8qpWDwhdD2D
-X-Gm-Gg: ASbGncuES38DZn/uTDa1bXGbdSnovH905hEl2aBW57uKZzBLs3IBPS4cEQ1ZNmXQZDc
- GZieFVG8FDxtHtwmAyAvxOCqzsrkrHoYDJeqS07Q=
-X-Google-Smtp-Source: AGHT+IEPjrmvw4Wag/BuQlkrmXpmYKpud1tZAHEO7Z60KsdjIxweZnx97cvnkF7A7tdp43dJ1XOvLeCN3TEcpWeVl0E=
-X-Received: by 2002:a05:6402:84f:b0:5d0:d3eb:a78f with SMTP id
- 4fb4d7f45d1cf-5d972d26e91mr78491783a12.0.1736990833064; Wed, 15 Jan 2025
- 17:27:13 -0800 (PST)
+ AJvYcCWQbunqSwveQc4WrucWXC1ahd4p/aufqo5o84ESWFASe/GPPeLxS+BWUeqi7Y/efI3UOF8HyyY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvsVDQENibJKPUEBCNhCNyCjDsicKwIZnXx5v6Sqxd8Whom0CM
+ 3geFjy1aUrZcNi8Pfk0LLCWf5WMr6XzDVT4yjFyFZSZFU/NUmZe/v+4gOn0hykccrpJS0JhoIFR
+ DZGX/YbmYQSlhNmkMnm59+7nRY8OqKXcjVZtz
+X-Gm-Gg: ASbGncuWu4EovgisymagsmfHKJzngyfbaNL96FVEe/1cC5a6JSpPr56B3P8GA9Zr2b2
+ 7cmsEMOTP+IgYAhH98Nu7vOF8vswzRVSBAovROLY=
+X-Google-Smtp-Source: AGHT+IH7UZIp/MXXyugPXL7VhBFa008ARw3yQldzCQlS2ZmsTQoIUcHwErmG2sxIJ7fePeVmYv5nd/p15Bu+PUBUkRY=
+X-Received: by 2002:a17:907:3e1c:b0:aa6:83cc:7996 with SMTP id
+ a640c23a62f3a-ab2ab6bfec7mr3243786666b.42.1736990835709; Wed, 15 Jan 2025
+ 17:27:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20250115135209.13946-1-harrison.mutai@arm.com>
- <20250115135209.13946-4-harrison.mutai@arm.com>
-In-Reply-To: <20250115135209.13946-4-harrison.mutai@arm.com>
+References: <20250115133114.590375-1-sjg@chromium.org>
+ <8fde0244-546c-48dc-8480-068970df30e9@gmx.de>
+In-Reply-To: <8fde0244-546c-48dc-8480-068970df30e9@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Jan 2025 18:26:58 -0700
-X-Gm-Features: AbW1kvYkQ3oetKEyW46fb8_7LeoW4r2llPOiymqQhQhD6MOiW4gto1i95eyoElg
-Message-ID: <CAFLszTh=c0VXjRN3kSPkJYkujEF3GhFcx9kx9DpjxaFx5addqg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] bloblist: add support for CONFIG_BLOBLIST_PASSAGE
-To: Harrison Mutai <harrison.mutai@arm.com>
-Cc: Tom Rini <trini@konsulko.com>, nd@arm.com, andre.przywara@arm.com, 
- manish.pandey2@arm.com, u-boot@lists.denx.de
+Date: Wed, 15 Jan 2025 18:26:59 -0700
+X-Gm-Features: AbW1kvZc299-YHHboj9bJGD0XkLWAmP_Yd1drlEG1RE5BMYRZGuopAYwxX4Og6g
+Message-ID: <CAFLszTht1zjWfReN+54rNfghkq31x7rTMrk3ft-U=E-WuK1-Pw@mail.gmail.com>
+Subject: Re: [PATCH 00/43] test: Improvements to ut command and test-suite
+ running
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Alexander Gendin <agendin@matrox.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>, Ion Agorria <ion@agorria.com>, 
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Julien Masson <jmasson@baylibre.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Marek Vasut <marex@denx.de>, Massimiliano Minella <massimiliano.minella@se.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Ravi Minnikanti <rminnikanti@marvell.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Richard Weinberger <richard@nod.at>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,83 +109,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Harrison,
+Hi Heinrich,
 
-On Wed, 15 Jan 2025 at 06:53, Harrison Mutai <harrison.mutai@arm.com> wrote:
+On Wed, 15 Jan 2025 at 08:33, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> When the configuration option CONFIG_BLOBLIST_PASSAGE is selected, the
-> bloblist present in the incoming standard passage is utilised in-place.
-> There is no need to specify the size of the bloblist as the system
-> automatically detects it using the header information.
+> On 15.01.25 14:30, Simon Glass wrote:
+> > The current method of running unit tests relies on subcommands of the
+> > ut command. Only the code in each subcommand knows how to find the tests
+> > related to that subcomand.
+> >
+> > This is not ideal and we now have quite a few subcommands which do
+> > nothing but locate the relevant tests in a linker list, then call a
+> > common function to run them.
+> >
+> > This series adds a list of test suites, so that these subcommands can be
+> > removed.
+> >
+> > An issue with 'ut all' is that it doesn't record how many tests failed
+> > overall, so it is necessary to examine copious amounts of output to look
+> > for failures. This series adds a new 'total' feature allow recording the
+> > total number of failed tests.
+> >
+> > To help with 'ut all' a new pytest is created which runs it (as well as
+> > 'ut info') and makes sure that all is well. Due to the 'ut all' failures
+> > this does not pass, so the test is disabled for now. It is here because
+> > it provides security against misnaming a test suite and causing it not
+> > to run.
+> >
+> > Future work may:
+> > - get 'ut all' passing
+> > - enable test_suite() in CL, to ensure that 'ut all' keeps passing
+> > - record duration of each suite
+> > - allow running the tests in random order to tease out dependencies
+> > - tweak the output to remove common prefixes
+> > - getting rid of bootstd, optee and seame 'ut' subcommands
 >
-> Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
-> ---
->  common/Kconfig    | 8 +++++++-
->  common/bloblist.c | 5 ++++-
->  2 files changed, 11 insertions(+), 2 deletions(-)
->
-> diff --git a/common/Kconfig b/common/Kconfig
-> index 7a80b797df..49fe04ffca 100644
-> --- a/common/Kconfig
-> +++ b/common/Kconfig
-> @@ -1064,6 +1064,12 @@ config BLOBLIST_ALLOC
->           specify a fixed address on systems where this is unknown or can
->           change at runtime.
->
-> +config BLOBLIST_PASSAGE
-> +       bool "Use bloblist in-place"
-> +       help
-> +         Use a bloblist in the incoming standard passage. The size is detected
-> +         automatically so CONFIG_BLOBLIST_SIZE can be 0.
-> +
->  endchoice
->
->  config BLOBLIST_ADDR
-> @@ -1078,6 +1084,7 @@ config BLOBLIST_ADDR
->
->  config BLOBLIST_SIZE
->         hex "Size of bloblist"
-> +       default 0x0 if BLOBLIST_PASSAGE
->         default 0x400
->         help
->           Sets the size of the bloblist in bytes. This must include all
-> @@ -1088,7 +1095,6 @@ config BLOBLIST_SIZE
->  config BLOBLIST_SIZE_RELOC
->         hex "Size of bloblist after relocation"
->         default BLOBLIST_SIZE if BLOBLIST_FIXED || BLOBLIST_ALLOC
-> -       default 0x0 if BLOBLIST_PASSAGE
->         default 0x20000 if (ARM && EFI_LOADER && GENERATE_ACPI_TABLE)
->         help
->           Sets the size of the bloblist in bytes after relocation. Since U-Boot
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index 110bb9dc44..f52f1eaca9 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -475,6 +475,9 @@ int bloblist_reloc(void *to, uint to_size)
->  {
->         struct bloblist_hdr *hdr;
->
-> +       if (to_size == 0)
+> Am I missing a patch for doc/ or will the usage of the ut command remain
+> unchanged?
 
-if (!to_size)
+No change to the command, but the output changes, so I can add an
+update to the 'examples' section.
 
-> +               return 0;
-> +
->         if (to_size < gd->bloblist->total_size)
->                 return -ENOSPC;
 >
-> @@ -510,7 +513,7 @@ int bloblist_init(void)
->          * install the bloblist passed from previous loader to this fixed
->          * address.
->          */
-> -       bool from_boot_arg = fixed && xpl_is_first_phase();
-> +       bool from_boot_arg = xpl_is_first_phase();
->
->         if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
->                 from_addr = false;
-> --
-> 2.46.2
->
+> How would you specify a test suite like 'lib' in future?
+
+LIB_TEST(...)
+
+If you want to create a new one, you need to add it to the list in
+cmd_ut.c as now. But it is now in a new format which is easier to
+maintain.
+
+> How would you specify running all tests in future?
+
+'ut -a' as now
+
+[..]
 
 Regards,
 Simon
