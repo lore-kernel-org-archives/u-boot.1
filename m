@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D60C02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 19:27:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02BD2C02188
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 19:38:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2E638033D;
-	Thu, 16 Jan 2025 20:27:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 670188033D;
+	Thu, 16 Jan 2025 20:38:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Cz2ar193";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Vt1PndFx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76B288069D; Thu, 16 Jan 2025 20:27:10 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BEB978069D; Thu, 16 Jan 2025 20:38:44 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1FFB8022B
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 20:27:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E46D98022B
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 20:38:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5731F3F686
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 19:27:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1737055627;
- bh=G9YLCo2P77yAOLOXKtcrUYOVEvGSQ9zZBzSwWm92ZTc=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=Cz2ar193a4EyUE00IScHTNpQk2++57qGPQdJyHb1XHsApzulGonu/K3AjfpnL5aF6
- u3bCOJTrFH00J+OLv/52yelfWzxVSWu18FoLP5Lq2S5E+0UE+1Ldy3RWDSgT+E7wBI
- 3Rzcl8SrwyEB1tB3+3Zanv5pcEZg4Gf1L0E58CzTAPEzOugzXx3TMpsqeJrfCto89f
- BKnfDwYKbkwNF1vK9n341cFa+DB5vzEHGEGre67aQ2C8A+O3qaKw6P/UGQMlZY87hI
- Sfw2R6ZP+YLFXj91FelYRM5FC8as93DAyh2vovqv8U8ekkmqmU0teI0TI0MMMDog8R
- 3TdETxQBccWgQ==
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-aafc90962ffso147963666b.0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 11:27:07 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-e5372a2fbddso2264313276.3
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 11:38:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1737056320; x=1737661120; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cyzfJrbvY6bT3T8AlQy3hqNq+sty85MyvomFHv1oKsc=;
+ b=Vt1PndFxRu5Nsn93iEROoE0GoLY480j+uNyjP4Xgeyx9O2BlVo21u1jv1buTRp7rat
+ VUipQNkJicYFQ/fSRyuu6KoviPIpJGxQ+H/avXf7dwwdrCOo7DI9coqsKAwNld9H9ZKv
+ 3nKv3UfVp65NA3CD7v6Twn1t/NDziLfdXat7v5Nk/4PlRO3bwVx7oLz6IHLit9sHZG+v
+ uZpZejVnvj2pcSHgJy2u8KXRfCXyFpX79A0nGs5Er8P9DK6+3vKZTp2gbXe91Zjhvec2
+ AkTYaXrXUY09RyxA+SEkXYYRh/Xvgxz4i0ROY0+6dIx1e95bL2wq5qqIeyjmck0XmoA0
+ EWcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737055627; x=1737660427;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=G9YLCo2P77yAOLOXKtcrUYOVEvGSQ9zZBzSwWm92ZTc=;
- b=IPq6yu2lFANSaeyrtyc6Usfo/sUug36pZaIpcWDS5D7tYgP/8TjoTx9DSbciGmyuGQ
- iIXABHs/mzKTwYX9Ih0UOeC3fyzz04NWQmcRks40Jc22ybJLHT6TzQEXG7oCggtnX0tM
- 1U2XPg3Se0nzEjd6MaOZ5fC9qouRsxhBF8dtnXK+wpkK8NbKrvbX57305j+Qklt9tNW5
- tHcpAzCuUmEvNboWCNusg12pQwRq6vtVHMA7LlAvpYWw3OzRWlyzIVUz1nPCPWHaWrwy
- /XDiP55s+V4sFhoDp3DKIpgiX5dCvgDAXq8yNUZAp7kFa8+EJ4fTluvn4cXxN2WHMdE1
- IGng==
+ d=1e100.net; s=20230601; t=1737056320; x=1737661120;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cyzfJrbvY6bT3T8AlQy3hqNq+sty85MyvomFHv1oKsc=;
+ b=OJW1bo2567fkhUcRTI7np5Yjh2zMdS+6onRMYxURM2kwWy0fxCxEABJraad3aRQP+q
+ qnnssrPZNW7VRrDAx3pGj2fK4IOIkzGg4wuVR18K2Utd7sv7EfB98DegsLYphuQk08V4
+ 3AUWAJFbwrz38WNIbFffUe2O6gjKD/uWo4iFErawH6wLiMud8TRLx5tHoMaAoi/0oCdw
+ 3UjRNnnFyS7PKA0ds+TSDXX4TN2XH2lnJnmAzLnAw8EHWQEVRe5LCA22vYGQHTz4w8Ro
+ sthvq3xBuhn9m4+1ubZCWvu3rXcGunIEzu9Uzp1AK1jl2o1p9vv9TI3xnmqXSHm+4sJO
+ 6+zQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7CDui8zusHu+ZdAqARaHgkw5OX/6ujEEqeDL0aVmNtppfmci3U1LefW6VUwumgOu3G5m9jZ4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzhQ60yXxhtU9ty3456D3R/Knl4D0VjsrAOh4a/vc0g00AdNUGB
- NBFYsXG7mUSIalU4JIv6a0xDcUy4ommqobDu1dSTY3Ced6UJOpjCiYylWvSX0FoY9WonWy0r7x6
- DzqDCx6PIWaMJoDqJLNz4phGuS+uysNZWM20Xs1r099kWSVnfj0wfTHQbMq1Jio9BvOs=
-X-Gm-Gg: ASbGncslAqCeXo1TR/TS0NBpZhRd8JhXDIXVFzyrRdl0x8StEPhfbLPXwvN5Mg4GPwR
- /rh7kBfFwl6S2zH79uN/vYQuaTVLWae8t2z5knJYPC4b1LMLb3IccfS0wPAM/kUi1t0GRMFhW5+
- nFtemuzo3syjqwg1er1QK02YlYufJaZg2jGCArRwqv3Jijb5ik0S+3O/KdWbM6JldEwijuo/dCl
- 2dW8Vi1XCf9fuDEWmQgx5UjI5plUgirzbklM8slq2Mgz8yiyeXfv9SoXUvxmbnpcd4dV9F9oQ4r
- qrmwByuFd7VBug==
-X-Received: by 2002:a17:906:f58e:b0:aa6:8e9e:1b5 with SMTP id
- a640c23a62f3a-ab38b1b4598mr3841666b.3.1737055626537; 
- Thu, 16 Jan 2025 11:27:06 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFQXjwot9hrc8Q+x+VWcglwFGJqRqXqHXHrs6SnbAEBok6ZOW95QoEE11M6aVmMffQ7S+2RhQ==
-X-Received: by 2002:a17:906:f58e:b0:aa6:8e9e:1b5 with SMTP id
- a640c23a62f3a-ab38b1b4598mr3839866b.3.1737055626077; 
- Thu, 16 Jan 2025 11:27:06 -0800 (PST)
-Received: from localhost.localdomain ([2a02:3035:6e0:18b7:2225:e8f4:a4b5:e79])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab384f87065sm37717666b.133.2025.01.16.11.27.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 11:27:05 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: use LOGC_EFI consistently
-Date: Thu, 16 Jan 2025 20:26:59 +0100
-Message-ID: <20250116192659.374576-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
+ AJvYcCUTLZsrkJfY6RY/t2qxKbk1MjoUIISzbbwR7jsRfTZPj/yrFu4aBaILlsbWr5BmA5EugGL742A=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyhgo3FiHiX+qF5J60KXvKQI5U8Hu4hg2lM/mdu9SmVcluF3M5M
+ cuGkm4D5wAK+FleTSZm/4FF2HG+g7eR/gLllMv6tEnP/ad0/8oa6/S6L+6N1ApSUm1m6pe6aVGD
+ E8eTRC2Z04tnoNauFCa5OgCCmhFLBzFygKEPQIA==
+X-Gm-Gg: ASbGnctkjzJhPbk5l6ODR49OxifcfZiAVSQQsX+WSZyI5Rn2z+N0mXr0rpQvd/mE/yV
+ 4VIYpvRpCrU7mq2TaYo49bA97xWUQyKPVxV4CKQ==
+X-Google-Smtp-Source: AGHT+IGPAkY4+3joDXJKX1vT/qXa9tyYau8KtsFITrLbJNrac+7iVCPF2idGMMowCPgMDczCSg3SX4Lwn9B4waMYkUA=
+X-Received: by 2002:a25:6d57:0:b0:e4b:cf66:8968 with SMTP id
+ 3f1490d57ef6-e54ee2348demr19531632276.45.1737056320464; Thu, 16 Jan 2025
+ 11:38:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
+ <20250115-imx95-v1-20-93b28a514dea@oss.nxp.com>
+In-Reply-To: <20250115-imx95-v1-20-93b28a514dea@oss.nxp.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 16 Jan 2025 11:38:29 -0800
+X-Gm-Features: AbW1kvZZtsK3o63qd7ldbs8wI0y37Aok4BhGzEo9TF3xL6xefKe_Ngsp4tz8pkk
+Message-ID: <CAJ+vNU0_GWaVtwiWw3Mt1J6jc57XgDWOehdzrPhfTAg+gJq4oA@mail.gmail.com>
+Subject: Re: [PATCH v4 20/20] imx95_evk: add i.MX95 19x19 EVK board basic
+ support
+To: Alice Guo <alice.guo@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, marex@denx.de,
+ u-boot@lists.denx.de, 
+ Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,442 +101,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The log category should be LOGC_EFI all over the EFI sub-system.
+On Wed, Jan 15, 2025 at 5:30=E2=80=AFAM Alice Guo <alice.guo@oss.nxp.com> w=
+rote:
+>
+> From: Ye Li <ye.li@nxp.com>
+>
+> This patch adds i.MX95 19x19 EVK board basic support.
+>
+> Messaging unit for EdgeLock Secure Enclave, messaging unit for System
+> Manager, uSDHC for SD Card, gpio, lpuart are supported now.
+>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> ---
+<snip...>
+> diff --git a/board/freescale/imx95_evk/imx95_evk.c b/board/freescale/imx9=
+5_evk/imx95_evk.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1ed15ca47b157067a7376b0b3=
+2101dc7f9899f4f
+> --- /dev/null
+> +++ b/board/freescale/imx95_evk/imx95_evk.c
+> @@ -0,0 +1,54 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2025 NXP
+> + */
+> +
+> +#include <env.h>
+> +#include <init.h>
+> +#include <asm/global_data.h>
+> +#include <asm/arch-imx9/ccm_regs.h>
+> +#include <asm/arch/clock.h>
+> +#include <fdt_support.h>
+> +#include <asm/io.h>
+> +#include <linux/bitfield.h>
+> +#include <linux/bitops.h>
+> +#include <linux/delay.h>
+> +#include <miiphy.h>
+> +#include <netdev.h>
+> +#include <asm/gpio.h>
+> +#include <asm/mach-imx/sys_proto.h>
+> +#include <scmi_agent.h>
+> +#include <scmi_protocols.h>
+> +#include "../../../dts/upstream/src/arm64/freescale/imx95-clock.h"
+> +#include "../../../dts/upstream/src/arm64/freescale/imx95-power.h"
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_driver/efi_block_device.c          | 2 ++
- lib/efi_driver/efi_uclass.c                | 2 ++
- lib/efi_loader/efi_acpi.c                  | 2 ++
- lib/efi_loader/efi_boottime.c              | 2 ++
- lib/efi_loader/efi_conformance.c           | 2 ++
- lib/efi_loader/efi_device_path_to_text.c   | 2 ++
- lib/efi_loader/efi_device_path_utilities.c | 2 ++
- lib/efi_loader/efi_dt_fixup.c              | 2 ++
- lib/efi_loader/efi_esrt.c                  | 2 ++
- lib/efi_loader/efi_fdt.c                   | 2 ++
- lib/efi_loader/efi_file.c                  | 2 ++
- lib/efi_loader/efi_firmware.c              | 2 ++
- lib/efi_loader/efi_gop.c                   | 2 ++
- lib/efi_loader/efi_helper.c                | 1 +
- lib/efi_loader/efi_hii.c                   | 2 ++
- lib/efi_loader/efi_hii_config.c            | 2 ++
- lib/efi_loader/efi_http.c                  | 2 ++
- lib/efi_loader/efi_ipconfig.c              | 2 ++
- lib/efi_loader/efi_load_initrd.c           | 1 +
- lib/efi_loader/efi_net.c                   | 2 ++
- lib/efi_loader/efi_riscv.c                 | 1 +
- lib/efi_loader/efi_root_node.c             | 2 ++
- lib/efi_loader/efi_runtime.c               | 2 ++
- lib/efi_loader/efi_signature.c             | 2 ++
- lib/efi_loader/efi_string.c                | 2 ++
- lib/efi_loader/efi_tcg2.c                  | 1 +
- lib/efi_loader/efi_unicode_collation.c     | 2 ++
- lib/efi_loader/efi_var_common.c            | 2 ++
- lib/efi_loader/efi_var_mem.c               | 2 ++
- lib/efi_loader/efi_variable_tee.c          | 2 ++
- lib/efi_loader/efi_watchdog.c              | 2 ++
- 31 files changed, 58 insertions(+)
+Hi Alice,
 
-diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block_device.c
-index 19a5ee24794..d3c668dc183 100644
---- a/lib/efi_driver/efi_block_device.c
-+++ b/lib/efi_driver/efi_block_device.c
-@@ -28,6 +28,8 @@
-  * iPXE uses the simple file protocol to load Grub or the Linux Kernel.
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <blk.h>
- #include <dm.h>
- #include <efi_driver.h>
-diff --git a/lib/efi_driver/efi_uclass.c b/lib/efi_driver/efi_uclass.c
-index e1e28df20b2..495be53cb77 100644
---- a/lib/efi_driver/efi_uclass.c
-+++ b/lib/efi_driver/efi_uclass.c
-@@ -17,6 +17,8 @@
-  * controllers.
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <dm.h>
- #include <efi_driver.h>
- #include <log.h>
-diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-index 67bd7f8ca24..c1cc6e7b311 100644
---- a/lib/efi_loader/efi_acpi.c
-+++ b/lib/efi_loader/efi_acpi.c
-@@ -5,6 +5,8 @@
-  *  Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <log.h>
- #include <mapmem.h>
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index ccbaad2b549..9f51db90f33 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -5,6 +5,8 @@
-  * Copyright (c) 2016 Alexander Graf
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <bootm.h>
- #include <div64.h>
- #include <dm/device.h>
-diff --git a/lib/efi_loader/efi_conformance.c b/lib/efi_loader/efi_conformance.c
-index 167067e26cd..2bae93a94bd 100644
---- a/lib/efi_loader/efi_conformance.c
-+++ b/lib/efi_loader/efi_conformance.c
-@@ -5,6 +5,8 @@
-  *  Copyright (C) 2022 Arm Ltd.
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <log.h>
- #include <efi_api.h>
-diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/efi_device_path_to_text.c
-index 481a9712d9d..f6889cb7399 100644
---- a/lib/efi_loader/efi_device_path_to_text.c
-+++ b/lib/efi_loader/efi_device_path_to_text.c
-@@ -5,6 +5,8 @@
-  *  Copyright (c) 2017 Heinrich Schuchardt
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <blk.h>
- #include <efi_loader.h>
- #include <malloc.h>
-diff --git a/lib/efi_loader/efi_device_path_utilities.c b/lib/efi_loader/efi_device_path_utilities.c
-index ac250bbfcc9..552c5bb1f05 100644
---- a/lib/efi_loader/efi_device_path_utilities.c
-+++ b/lib/efi_loader/efi_device_path_utilities.c
-@@ -5,6 +5,8 @@
-  *  Copyright (c) 2017 Leif Lindholm
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- 
- const efi_guid_t efi_guid_device_path_utilities_protocol =
-diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
-index 0dac94b0c6c..26928cfc454 100644
---- a/lib/efi_loader/efi_dt_fixup.c
-+++ b/lib/efi_loader/efi_dt_fixup.c
-@@ -5,6 +5,8 @@
-  * Copyright (c) 2020 Heinrich Schuchardt
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_dt_fixup.h>
- #include <efi_loader.h>
- #include <efi_rng.h>
-diff --git a/lib/efi_loader/efi_esrt.c b/lib/efi_loader/efi_esrt.c
-index 443bd999ce1..e235c8fe91c 100644
---- a/lib/efi_loader/efi_esrt.c
-+++ b/lib/efi_loader/efi_esrt.c
-@@ -5,6 +5,8 @@
-  *  Copyright (C) 2021 Arm Ltd.
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <log.h>
- #include <efi_api.h>
-diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
-index f882622fdad..1ba6641d821 100644
---- a/lib/efi_loader/efi_fdt.c
-+++ b/lib/efi_loader/efi_fdt.c
-@@ -6,6 +6,8 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <env.h>
- #include <errno.h>
-diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
-index 95b3c890ee9..201fa5f8f3c 100644
---- a/lib/efi_loader/efi_file.c
-+++ b/lib/efi_loader/efi_file.c
-@@ -5,6 +5,8 @@
-  * Copyright (c) 2017 Rob Clark
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <charset.h>
- #include <efi_loader.h>
- #include <log.h>
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 112775daf4c..5a754c9cd03 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -6,6 +6,8 @@
-  *			Author: AKASHI Takahiro
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <charset.h>
- #include <dfu.h>
- #include <efi_loader.h>
-diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-index 41e12fa7246..4593975be5a 100644
---- a/lib/efi_loader/efi_gop.c
-+++ b/lib/efi_loader/efi_gop.c
-@@ -5,6 +5,8 @@
-  *  Copyright (c) 2016 Alexander Graf
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <dm.h>
- #include <efi_loader.h>
- #include <log.h>
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index bf96f61d3d0..04b2efc4a3b 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -4,6 +4,7 @@
-  */
- 
- #define LOG_CATEGORY LOGC_EFI
-+
- #include <bootm.h>
- #include <env.h>
- #include <image.h>
-diff --git a/lib/efi_loader/efi_hii.c b/lib/efi_loader/efi_hii.c
-index 74e402df1b8..44235970a7c 100644
---- a/lib/efi_loader/efi_hii.c
-+++ b/lib/efi_loader/efi_hii.c
-@@ -6,6 +6,8 @@
-  *  Copyright (c) 2018 AKASHI Takahiro, Linaro Limited
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <malloc.h>
- #include <asm/unaligned.h>
-diff --git a/lib/efi_loader/efi_hii_config.c b/lib/efi_loader/efi_hii_config.c
-index 54a72d573be..521481a86d8 100644
---- a/lib/efi_loader/efi_hii_config.c
-+++ b/lib/efi_loader/efi_hii_config.c
-@@ -6,6 +6,8 @@
-  * Copyright (c) 2018 AKASHI Takahiro, Linaro Limited
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- 
- const efi_guid_t efi_guid_hii_config_routing_protocol
-diff --git a/lib/efi_loader/efi_http.c b/lib/efi_loader/efi_http.c
-index 694e1993418..88816256b03 100644
---- a/lib/efi_loader/efi_http.c
-+++ b/lib/efi_loader/efi_http.c
-@@ -7,6 +7,8 @@
-  * IP4_CONFIG2_PROTOCOL
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <charset.h>
- #include <efi_loader.h>
- #include <image.h>
-diff --git a/lib/efi_loader/efi_ipconfig.c b/lib/efi_loader/efi_ipconfig.c
-index 0b247a4c028..f1c092daafd 100644
---- a/lib/efi_loader/efi_ipconfig.c
-+++ b/lib/efi_loader/efi_ipconfig.c
-@@ -4,6 +4,8 @@
-  *
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <image.h>
- #include <malloc.h>
-diff --git a/lib/efi_loader/efi_load_initrd.c b/lib/efi_loader/efi_load_initrd.c
-index 23508431c83..fb8cc7bcbe3 100644
---- a/lib/efi_loader/efi_load_initrd.c
-+++ b/lib/efi_loader/efi_load_initrd.c
-@@ -4,6 +4,7 @@
-  */
- 
- #define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <efi_load_initrd.h>
- #include <efi_variable.h>
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index 67593ef50c0..ce9272fa240 100644
---- a/lib/efi_loader/efi_net.c
-+++ b/lib/efi_loader/efi_net.c
-@@ -15,6 +15,8 @@
-  * Reset():	 EfiSimpleNetworkInitialized -> EfiSimpleNetworkInitialized
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <dm.h>
- #include <linux/sizes.h>
-diff --git a/lib/efi_loader/efi_riscv.c b/lib/efi_loader/efi_riscv.c
-index 4d398c5be34..6f2ccf4f7e6 100644
---- a/lib/efi_loader/efi_riscv.c
-+++ b/lib/efi_loader/efi_riscv.c
-@@ -7,6 +7,7 @@
-  */
- 
- #define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <log.h>
-diff --git a/lib/efi_loader/efi_root_node.c b/lib/efi_loader/efi_root_node.c
-index 426f77cb2ad..e5246f65df2 100644
---- a/lib/efi_loader/efi_root_node.c
-+++ b/lib/efi_loader/efi_root_node.c
-@@ -5,6 +5,8 @@
-  *  Copyright (c) 2018 Heinrich Schuchardt
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <malloc.h>
- #include <efi_dt_fixup.h>
- #include <efi_loader.h>
-diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-index 05369c47b01..35eb6a77766 100644
---- a/lib/efi_loader/efi_runtime.c
-+++ b/lib/efi_loader/efi_runtime.c
-@@ -5,6 +5,8 @@
-  *  Copyright (c) 2016 Alexander Graf
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <command.h>
- #include <cpu_func.h>
- #include <dm.h>
-diff --git a/lib/efi_loader/efi_signature.c b/lib/efi_loader/efi_signature.c
-index 184eac8cddb..93a4f257016 100644
---- a/lib/efi_loader/efi_signature.c
-+++ b/lib/efi_loader/efi_signature.c
-@@ -4,6 +4,8 @@
-  * Copyright (c) 2019 Linaro Limited, Author: AKASHI Takahiro
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <charset.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
-diff --git a/lib/efi_loader/efi_string.c b/lib/efi_loader/efi_string.c
-index 413e329b600..50d1daf33a9 100644
---- a/lib/efi_loader/efi_string.c
-+++ b/lib/efi_loader/efi_string.c
-@@ -5,6 +5,8 @@
-  * Copyright (c) 2020 AKASHI Takahiro, Linaro Limited
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <charset.h>
- #include <efi_loader.h>
- #include <malloc.h>
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index a15c73162ee..c697b53441a 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -8,6 +8,7 @@
-  */
- 
- #define LOG_CATEGORY LOGC_EFI
-+
- #include <dm.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
-diff --git a/lib/efi_loader/efi_unicode_collation.c b/lib/efi_loader/efi_unicode_collation.c
-index d48700a352b..df2a988ee39 100644
---- a/lib/efi_loader/efi_unicode_collation.c
-+++ b/lib/efi_loader/efi_unicode_collation.c
-@@ -5,6 +5,8 @@
-  * Copyright (c) 2018 Heinrich Schuchardt <xypron.glpk@gmx.de>
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <charset.h>
- #include <cp1250.h>
- #include <cp437.h>
-diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
-index ea8d2a4cf98..4b34a58b4cf 100644
---- a/lib/efi_loader/efi_var_common.c
-+++ b/lib/efi_loader/efi_var_common.c
-@@ -5,6 +5,8 @@
-  * Copyright (c) 2020 Linaro Limited, Author: AKASHI Takahiro
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <stdlib.h>
-diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-index 139e16aad7c..b265d95dd6b 100644
---- a/lib/efi_loader/efi_var_mem.c
-+++ b/lib/efi_loader/efi_var_mem.c
-@@ -5,6 +5,8 @@
-  * Copyright (c) 2020, Heinrich Schuchardt
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <u-boot/crc.h>
-diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 8b6b0a39086..0d090d051dd 100644
---- a/lib/efi_loader/efi_variable_tee.c
-+++ b/lib/efi_loader/efi_variable_tee.c
-@@ -10,6 +10,8 @@
-  *    Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
- #include <arm_ffa.h>
- #endif
-diff --git a/lib/efi_loader/efi_watchdog.c b/lib/efi_loader/efi_watchdog.c
-index f5fb9117717..c21d8086074 100644
---- a/lib/efi_loader/efi_watchdog.c
-+++ b/lib/efi_loader/efi_watchdog.c
-@@ -5,6 +5,8 @@
-  *  Copyright (c) 2017 Heinrich Schuchardt
-  */
- 
-+#define LOG_CATEGORY LOGC_EFI
-+
- #include <efi_loader.h>
- 
- /* Conversion factor from seconds to multiples of 100ns */
--- 
-2.47.1
+Most of the above are not needed (and should be alphabetized anyway)
 
+The only ones needed are:
+#include <asm/arch/clock.h>
+#include <asm/gpio.h>
+#include <asm/mach-imx/sys_proto.h>
+
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+
+not needed as you don't use gd
+
+Best Regards,
+
+Tim
