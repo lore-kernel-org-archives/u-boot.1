@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5822EC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 23:02:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68945C02188
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 23:02:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B10680778;
+	by phobos.denx.de (Postfix) with ESMTP id 65E3680790;
 	Fri, 17 Jan 2025 00:01:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qVSC8Hm4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Dh7tMSrU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7383780757; Fri, 17 Jan 2025 00:01:40 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 1EEA28022B; Fri, 17 Jan 2025 00:01:41 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC0688022B
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:01:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4A848073D
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:01:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3eb9bbcc936so968191b6e.0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:01:37 -0800 (PST)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2addd5053c0so829884fac.1
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:01:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737068496; x=1737673296; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1737068497; x=1737673297; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EeIWRehaDvJW3klYrgdOiErw+8LPdGBx2RHkuWpcIL4=;
- b=qVSC8Hm4QkNfi2j04KIErovXZ1ESfA/bHvx4cABGRj5Yq5c5mtXDWWABQSoom5B0W1
- +P1XUPcCp4JERmuNIl4NzJgg+WS6TznF02risjN7xe+pPJfS/a2lY4B618WZ2HZJQcLV
- nPRq8QTVjYo29zh8UZ8ORHOJbaoa51myYe89M8yC+1n/G6JPXVBoyxzUY37FPaBFaTfe
- 0/taDwFlz6mYkaoSSkBGxGmu+JuiSphdfQ4xO7g0hvq0iVqHrt5iBVIOa1L9uAxSk4ce
- ZKBx1yrbM0MhRrkSYTP1NKpy/AhyLqJPfLJs2tkJTo+H3Y3tQ+60S0Cy9ila83qTjF1/
- ytxw==
+ bh=Rrgy3baiLJxl+ZSeXLdCueyRWZTgW85ExpoRH31UxJk=;
+ b=Dh7tMSrUm042Vvt5pBLgqPMwoeAHeh+EKQXxRC6sWf9cogth/7w+R8QQ30+K2YoYq1
+ Bz0mEymoICcKzEhvSRtz3bCALmcUQT7ulsLM9h/iaGJ98BL9tolt/zmM84pGhU8381Mr
+ OrjzWtM+nPFFDXkf3JvFSrZ0XPRtvfYDps7M44abt99GLe6wRwJQ8i8c9346bN4pH2iy
+ rf+7JFnZLUlFntUxjMAm1dEpDkjjB9Z/kgQ0P7cJjcywAtFtPS3870V+rl6/JC/ssOzu
+ iR3I49reOBg+zUusep2MoAcoReEJ0EWj91usBc7EIYkfZh/emn9SoOCyFKTVdZqpvBTd
+ suLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737068496; x=1737673296;
+ d=1e100.net; s=20230601; t=1737068497; x=1737673297;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EeIWRehaDvJW3klYrgdOiErw+8LPdGBx2RHkuWpcIL4=;
- b=mnf3xv2aTNwwbgSTU7E7MnKNDLT2Yzln2AC3GJPr4QyZa5spInkWZjMf3TzwJpP+Q8
- UWZATMG7TtTvwGsOcX0nl7FysmUc/oMlaMQFL21yn0g4yxnK7DAnHM4Gd+EZYhPtC6u6
- g1jpFXV79p3Am5xx7wxevBtxYCnGtqhrNEfeqOxOIYcuKLNuLXKnX7bmOThrYB/NM9cT
- lPABw60UVkNslorvFi08crozIKiijZi43ngHqVuvyM6C7JHpMqMgE4lOC1babSW4IKjm
- t2dTdocK3HjfN+Rr6NiUytpM772OChovgRalgCbf95GvAjUXSjI6Kbi/2PU/cQp+rTv3
- LBmw==
+ bh=Rrgy3baiLJxl+ZSeXLdCueyRWZTgW85ExpoRH31UxJk=;
+ b=Ri3ry/NYQxyuJnNtEeZ6T36qTp2wuihh35SP3oVpccTsBFAoRedaleDbWxA00pn6e6
+ OnuY81kfoWL3cvT0hCJSJ4czI+hfN2A5RHrKqAGO2YorE3V+DKwkEsbIwzSPQosrI4dw
+ r7jf+Na/Q8OjmQe1QMs2chHhGdLh/9olt/313C9ar5BCHaIH22yTr+CUu8Kv9tuHMtdY
+ oM5Y/eO9xhAY6b7fO0W4Vn53qt/im+qzPGXLlJq2iT2TnILz5WxNPs1qRqtByHrb2B6y
+ 8VEVMT6W7UMZtLsg5FrzmJzTYTumTa3ODXJIikCnWwEoaTn1RNUJMGZzpeQ3BUEebfk9
+ xCkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWosxPcZgfXxKD3TBmwIfwcpPOoDJRnW+9KPXOmv52fGy9Xa8Fh5SDn4eT56MmfOJvHPCzNDAo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+U4O3lBeDCFuhLHNFN8daZ/ByjeRQDdmqJQP+wAAM4fUJRupf
- 0C6GmjTLGc4Yjyb32dCrKrYufoGsyU60TPOylJAokpG5l3Y6PrYszIycU4bHdSk=
-X-Gm-Gg: ASbGncvgbEN8VqabUv8duGRXcUir9bnk2n7U5o+mnunfXnk/M8ckt+6Y/+GGr1l/tM3
- jvDjtBPT4BPh5a2fdnLbpsnnedR/47Dm0ICibfIL9U8v2SOwQTUv4p4lAIR9+s7hEr/IIlqJpKI
- S44RK/A7DeHCuLj+iosEYiDL7b7BlcLBGB4D4Nv5zDOZyineBcId33kLT18++585zQcXE7jwE8y
- SUBZC8Yn19KIdIRShno2qWxIUbKxbYqm9hMFOWAWiUMvfSsmkvnZ5nYonQypD5qV84=
-X-Google-Smtp-Source: AGHT+IHa4ShwKVgQ8aMPPQwtTPqrkBKL0itQfwAX0kgMhe99YcgHRUAStuYnBKQ51/Isn6SX2rGyoA==
-X-Received: by 2002:a05:6808:830f:b0:3e6:5f3:f0d8 with SMTP id
- 5614622812f47-3f19fdd1e38mr331284b6e.24.1737068496718; 
- Thu, 16 Jan 2025 15:01:36 -0800 (PST)
+ AJvYcCWIVYupBHBwE5weRqOnBgXTjrUIO0oDle47dkUXATkf06iRgnDXFZVzq+YrmsJodn288RE6spQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzD9yjfVJbActo+4eOauHGb84MvcIJH0U+r7/LgZ7aAyTpSi7kX
+ WzglCtVHEmBfDA43euUPIH3kaOXsxhgHIq0Tt3FvHmpecCCTudI5hOCkAOM7HvE=
+X-Gm-Gg: ASbGncvp8udmoLxIB2wJTgP6tmCnTU2xvIaWOFPqZBj+xv3z3tkkmOGdB/jht+MZaqy
+ 3BaonXymjs1sIuuPqFZccBXYqjOwbAOVPh2GBM3wdNuJpLehLuqzBLfjWqXEEU08ttOdvpFlZ+S
+ eh1MV25ic67sMYMkA1dBVyOHXyozXi6w7DWeRXMJMeyWGOlc6Zdw1sJAMIjEPf5kIsp5UQNZXwZ
+ yEjm+Ftcv07RUD8w/M1Jup1qQnTv1lcWUdA1mXJJdqP+A+x/rZGrl0c9Xh7kul1FcM=
+X-Google-Smtp-Source: AGHT+IGkV6SbPs4g16SrmtZYcYUCKZKPC1omJ4wyW1Prz6WKTBNhMFV+//o/xALLv1EZMac4ZPbJPg==
+X-Received: by 2002:a05:6871:d10c:b0:295:eb96:9fd4 with SMTP id
+ 586e51a60fabf-2b1c08bfdddmr396950fac.11.1737068497741; 
+ Thu, 16 Jan 2025 15:01:37 -0800 (PST)
 Received: from localhost ([2605:a601:a0f4:b000:264b:feff:fe59:d7f7])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f19da7a23dsm413084b6e.20.2025.01.16.15.01.35
+ 586e51a60fabf-2b1b90d0acdsm588976fac.50.2025.01.16.15.01.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 15:01:36 -0800 (PST)
+ Thu, 16 Jan 2025 15:01:37 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>,
 	Minkyu Kang <mk7.kang@samsung.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Subject: [PATCH 3/7] configs: e850-96: Enable more EFI features
-Date: Thu, 16 Jan 2025 17:01:26 -0600
-Message-Id: <20250116230130.3337-4-semen.protsenko@linaro.org>
+Subject: [PATCH 4/7] configs: e850-96: Enable Standard Boot
+Date: Thu, 16 Jan 2025 17:01:27 -0600
+Message-Id: <20250116230130.3337-5-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250116230130.3337-1-semen.protsenko@linaro.org>
 References: <20250116230130.3337-1-semen.protsenko@linaro.org>
@@ -100,65 +100,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The basic EFI support is already enabled by EFI_LOADER. Follow
-SystemReady IR recommendations [1,2] for U-Boot and enable support for
-more EFI features. That includes:
+Enable Standard Boot on E850-96 as documented in [1]. Along with
+corresponding changes in the default environment and properly prepared
+eMMC partitions (ESP and rootfs), it makes it possible to boot Debian
+rootfs automatically. All boot methods were tested: efi_mgr, efi,
+syslinux and script. The preferred boot method is efi_mgr, which relies
+on the configured EFI variables (stored in /ubootefi.var file on ESP
+partition), which boots either GRUB from /EFI/debian/grubaa64.efi, or
+systemd-boot from /EFI/BOOT/BOOTAA64.EFI. Currently used boot sequence:
 
-  - CONFIG_CMD_BOOTEFI_SELFTEST: support for "bootefi selftest" command
-  - CONFIG_CMD_NVEDIT_EFI: support for "env -e" to explore EFI vars
-  - CONFIG_CMD_EFIDEBUG: support for "efidebug" command
+  U-Boot -> bootcmd -> 'bootflow scan -lb' -> efi_mgr -> GRUB -> Debian
 
-Also enable RTC support:
-
-  - CONFIG_EFI_SET_TIME
-  - CONFIG_CMD_RTC
-  - CONFIG_DM_RTC
-  - CONFIG_RTC_EMULATION
-
-[1] https://developer.arm.com/documentation/DUI1101/1-1/Configure-U-Boot-for-SystemReady
-[2] https://developer.arm.com/documentation/DUI1101/1-1/Test-SystemReady-IR
+[1] doc/develop/bootstd/overview.rst
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- configs/e850-96_defconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/e850-96_defconfig | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
-index d287018ec632..1cae252175be 100644
+index 1cae252175be..5facd418260c 100644
 --- a/configs/e850-96_defconfig
 +++ b/configs/e850-96_defconfig
-@@ -14,16 +14,22 @@ CONFIG_DEFAULT_DEVICE_TREE="exynos/exynos850-e850-96"
- CONFIG_SYS_LOAD_ADDR=0x80000000
- CONFIG_ENV_OFFSET_REDUND=0x10000
+@@ -16,17 +16,15 @@ CONFIG_ENV_OFFSET_REDUND=0x10000
  # CONFIG_PSCI_RESET is not set
-+CONFIG_EFI_SET_TIME=y
+ CONFIG_EFI_SET_TIME=y
  CONFIG_ANDROID_BOOT_IMAGE=y
- # CONFIG_AUTOBOOT is not set
+-# CONFIG_AUTOBOOT is not set
++CONFIG_BOOTSTD_FULL=y
  CONFIG_DEFAULT_FDT_FILE="exynos850-e850-96.dtb"
  # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_BOOTEFI_SELFTEST=y
+-CONFIG_HUSH_PARSER=y
+ CONFIG_CMD_BOOTEFI_SELFTEST=y
  CONFIG_CMD_ABOOTIMG=y
-+CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CMD_NVEDIT_EFI=y
  CONFIG_CMD_CLK=y
  CONFIG_CMD_GPT=y
  CONFIG_CMD_MMC=y
- CONFIG_CMD_PART=y
-+CONFIG_CMD_EFIDEBUG=y
-+# CONFIG_CMD_DATE is not set
-+CONFIG_CMD_RTC=y
- CONFIG_CMD_TIME=y
- CONFIG_CMD_RNG=y
- CONFIG_PARTITION_TYPE_GUID=y
-@@ -36,6 +42,8 @@ CONFIG_NO_NET=y
- CONFIG_CLK_EXYNOS850=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_MMC_DW=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_EMULATION=y
- CONFIG_SOC_SAMSUNG=y
- CONFIG_EXYNOS_PMU=y
- CONFIG_EXYNOS_USI=y
+-CONFIG_CMD_PART=y
+ CONFIG_CMD_EFIDEBUG=y
+ # CONFIG_CMD_DATE is not set
+ CONFIG_CMD_RTC=y
 -- 
 2.39.5
 
