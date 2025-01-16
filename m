@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE1EC02180
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 01:28:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FAF0C02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 01:29:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E62A580753;
-	Thu, 16 Jan 2025 02:28:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D12080726;
+	Thu, 16 Jan 2025 02:28:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y0JuQIGO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mjq0XOai";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB51C806FE; Thu, 16 Jan 2025 02:28:01 +0100 (CET)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id AB61E8078B; Thu, 16 Jan 2025 02:28:05 +0100 (CET)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B0828033D
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 02:27:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34C8C80214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 02:28:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3ce886a2d5bso3244685ab.1
- for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 17:27:59 -0800 (PST)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3ce8c069840so3093175ab.3
+ for <u-boot@lists.denx.de>; Wed, 15 Jan 2025 17:28:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1736990877; x=1737595677; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1736990880; x=1737595680; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uth+3q/KOy1pJme7HaE9Aae4ZriK21QjLMjk1/CrjhI=;
- b=Y0JuQIGOMOFEkXV5WN2RFvuvGFqjDc+pGP4zRasAm9xwiXkg6ybEFZK4iC8Vwg7QkM
- s1ejlEnW7EnQOEXw7B3wCNCLwMFCI2tCP9KTqQMXl/Qf9HW68MYGuM+JruphvkyBp6Wv
- q7Nfowxs57D7eIH0T1yA5/eue/NBXw105LSVE=
+ bh=vB7voPKXXzq40erXc5sQuwRmNcsuofk2YTzbuofBPkg=;
+ b=Mjq0XOai3BU3Fnst44/SpRi5tt5b+xVFjoV9bIK92ttxHo64ERaonFZFApbaud1aYX
+ 7GO96z7GOH5CZVJqDlRIurtXOBKqtABcHLlseqszdZYQwoWvFUiLkNKV3hYduBkpyL+S
+ ChDJcPIXkW+EHah8mHO7Ra4cMfALkk7E3B5So=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736990877; x=1737595677;
+ d=1e100.net; s=20230601; t=1736990880; x=1737595680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uth+3q/KOy1pJme7HaE9Aae4ZriK21QjLMjk1/CrjhI=;
- b=vlgxa4C3rvFjb/RlZDZgr5O/MerlAxaQUT3ZzGy3KhbxPVr7pISudNeo9DCfwUI41G
- YyTnkAW0RHRu0SOH5/jXqs1I+ZDt7E6klMh2sqheY+jDqjCU53v0CGGAKDQncd8TV6N3
- 884bxdSZZ+kGXlw8fslVH7HaqhKxGNqMFmRND9Srrm8/SPibPEtz5/UxpxlJ2eezwc//
- OyRzUWBRsLsVzhjCOukJyNWpeI51MSosMu7CBu5eBdM/3o+mJgotX4vPkOHFRZiZSm6G
- vdlpnFqxnrb+dRGAb165smTR/vKAPFF1Fi/Z7jMK+SK3s8GI+GfHfjiESB2Kpj2yACnV
- QMpQ==
-X-Gm-Message-State: AOJu0Yyw7kByTj+q5vwWW0ryMl8P5trVvd51cEvEph2iXtuRfu2eooGl
- c0pzEu77HY+H+t5AWJlaMts69CAlepayH4k20Sn/4AWBA5czRD/GXsDAEpelk2kuPb/AOHV5oCk
+ bh=vB7voPKXXzq40erXc5sQuwRmNcsuofk2YTzbuofBPkg=;
+ b=nFgXafWLHWJ/1qROb1EYZ4MbBzXMenXaUyPn3JzuA3xqFKN07544AxKHNlY9boGotS
+ hoz6cbfRZs7gbc7NSTfVCRbJaEsBUbr6hPiwJHYRkUsderULMA6ej3EW7fYaK+UivdJE
+ 9yMrfmax/goDWRMDNyEEYeBcs9HqvE1aXcodod23ZvlmpoZXQsihFfz5vHeYSP4W5IZJ
+ jKk6WAGK5cdGuAvLaoDeQKfHKxBGmqK04zv7X2DdZEI9CnQ1dyOchftT9lpAV31hG8ri
+ KF3MFsGsfcOQnAuB+vZvsIxo0+Y+tVScIsLJyX1KUq9YcVU7dNcsu7HkBzOqwQmWhTdr
+ A43Q==
+X-Gm-Message-State: AOJu0Yx1pkYRcTLhE8Q2nQCR3KoV9TiH2PYTrSzxK1FMlzDBgmD5KMvr
+ 6x6BInwZjGr1gAnyQCmwKkafotjWnvAoqn46hfAkD8UPU3Wbpubo7I6c6aPAUkDxNYJ1LkGyGhI
  =
-X-Gm-Gg: ASbGncuVuZFQO2qX8L2bYpUcqg2gAgJDYxofhri0dTRpFUsLUh/LqvXxMqUMvUhGO6E
- LkkmaGVeYaqAANawL8U1+2YyIT3c2Y5jAUAze5fCxiwP2TEUCrLR3iKvnuqXggGGpPmDAdMZ7g6
- bb2Pe5x94D1K7DzXqAP7cdpb++/FReqzNi+PQcJWsChN7EHoeHvmkS3DgJ4PO+1Er4Fjf2EG9Tp
- LMITh0S1iquv4W5RCuBOOipK8j2JNq6c4qO6SoaepPKf2zKlU04YhFLabr5Tl7Cr1wBIWohrocZ
- A+KzJFoZMRvoigrZxA==
-X-Google-Smtp-Source: AGHT+IH3bnsQYF4UuITg0Afy+Wy4HjX9nF1aTuY6sHO7UuET/ortdYNDi0jkVQp1I7CNTfmp/0forA==
-X-Received: by 2002:a05:6e02:160e:b0:3a7:e732:471b with SMTP id
- e9e14a558f8ab-3ce3a88ace0mr250108665ab.11.1736990877505; 
- Wed, 15 Jan 2025 17:27:57 -0800 (PST)
+X-Gm-Gg: ASbGncuqLcjLsk32l8vA8/+bQ3uZlbJZEpn8RUtfi2XWNQU6dbOh+QTv0LjhYtgMq9k
+ 02v210O63AMxn6RZ9wIGS7iDf+rOhnhpYi1Yx1OJuaF5dEFFs0lONaOrTv1M7NaDKQDS4Cuq2sP
+ cP4vLxhZjUABJwAxId05nraqEHtXnpQhLNLMYepbJR/ygbxDHZJ6pkg/D7CpYP+u9I7gZrR7OBT
+ /V6bQOOuhfvZFkpUoTH4Sy0NPVt7HkBEUMQdDqvVP53csjSfYyOMnM8Qei8+o9SeGaniF6PdYQY
+ ZrE04Ny/fC/n+CKD2w==
+X-Google-Smtp-Source: AGHT+IGYQtd1Q1+TN6dLspdJRifBzEHNNE2E1ii3REyCGOE1M+qc9di7LXROTyk+xNc2FWyv4siwOw==
+X-Received: by 2002:a05:6e02:2183:b0:3ce:8aff:61a3 with SMTP id
+ e9e14a558f8ab-3ce8aff6479mr40308765ab.6.1736990880294; 
+ Wed, 15 Jan 2025 17:28:00 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3ce4add8570sm42587725ab.32.2025.01.15.17.27.55
+ e9e14a558f8ab-3ce4add8570sm42587725ab.32.2025.01.15.17.27.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 17:27:56 -0800 (PST)
+ Wed, 15 Jan 2025 17:27:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH v2 08/22] vbe: Move reading the nvdata into the common file
-Date: Wed, 15 Jan 2025 18:27:09 -0700
-Message-Id: <20250116012723.2820301-9-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 09/22] vbe: Split out reading a FIT into the common file
+Date: Wed, 15 Jan 2025 18:27:10 -0700
+Message-Id: <20250116012723.2820301-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250116012723.2820301-1-sjg@chromium.org>
 References: <20250116012723.2820301-1-sjg@chromium.org>
@@ -94,178 +94,299 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All VBE methods read non-volatile data, so move this function into a
-common file.
+Loading a FIT is useful for other VBE methods, such as ABrec. Create a
+new function to handling reading it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Split patch into several pieces
+- Reword commit subject
+- Move common code to the end of the file
 
- boot/vbe_common.c | 41 +++++++++++++++++++++++++++++++++++++++++
- boot/vbe_common.h | 16 ++++++++++++++++
- boot/vbe_simple.c | 44 ++++++++------------------------------------
- 3 files changed, 65 insertions(+), 36 deletions(-)
+ boot/vbe_common.c    | 107 +++++++++++++++++++++++++++++++++++++++++++
+ boot/vbe_common.h    |  28 +++++++++++
+ boot/vbe_simple_fw.c |  94 ++-----------------------------------
+ 3 files changed, 139 insertions(+), 90 deletions(-)
 
 diff --git a/boot/vbe_common.c b/boot/vbe_common.c
-index 8bbcc37e67e..672878fe6fe 100644
+index 672878fe6fe..0105d550bdf 100644
 --- a/boot/vbe_common.c
 +++ b/boot/vbe_common.c
-@@ -9,6 +9,7 @@
+@@ -6,7 +6,11 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
+ 
++#include <bootstage.h>
++#include <dm.h>
  #include <blk.h>
++#include <image.h>
++#include <mapmem.h>
  #include <memalign.h>
  #include <spl.h>
-+#include <u-boot/crc.h>
- #include "vbe_common.h"
- 
- int vbe_get_blk(const char *storage, struct udevice **blkp)
-@@ -59,3 +60,43 @@ int vbe_read_version(struct udevice *blk, ulong offset, char *version,
+ #include <u-boot/crc.h>
+@@ -100,3 +104,106 @@ int vbe_read_nvdata(struct udevice *blk, ulong offset, ulong size, u8 *buf)
  
  	return 0;
  }
 +
-+int vbe_read_nvdata(struct udevice *blk, ulong offset, ulong size, u8 *buf)
++int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
++		 ulong *load_addrp, ulong *lenp, char **namep)
 +{
-+	uint hdr_ver, hdr_size, data_size, crc;
-+	const struct vbe_nvdata *nvd;
++	ALLOC_CACHE_ALIGN_BUFFER(u8, sbuf, MMC_MAX_BLOCK_LEN);
++	ulong size, blknum, addr, len, load_addr, num_blks;
++	const char *fit_uname, *fit_uname_config;
++	struct bootm_headers images = {};
++	enum image_phase_t phase;
++	struct blk_desc *desc;
++	int node, ret;
++	void *buf;
 +
-+	/* we can use an assert() here since we already read only one block */
-+	assert(size <= MMC_MAX_BLOCK_LEN);
++	desc = dev_get_uclass_plat(blk);
++
++	/* read in one block to find the FIT size */
++	blknum =  area_offset / desc->blksz;
++	log_debug("read at %lx, blknum %lx\n", area_offset, blknum);
++	ret = blk_read(blk, blknum, 1, sbuf);
++	if (ret < 0)
++		return log_msg_ret("rd", ret);
++
++	ret = fdt_check_header(sbuf);
++	if (ret < 0)
++		return log_msg_ret("fdt", -EINVAL);
++	size = fdt_totalsize(sbuf);
++	if (size > area_size)
++		return log_msg_ret("fdt", -E2BIG);
++	log_debug("FIT size %lx\n", size);
 +
 +	/*
-+	 * We can use an assert() here since reading the wrong block will just
-+	 * cause invalid state to be (safely) read. If the crc passes, then we
-+	 * obtain invalid state and it will likely cause booting to fail.
-+	 *
-+	 * VBE relies on valid values being in U-Boot's devicetree, so this
-+	 * should not every be wrong on a production device.
++	 * Load the FIT into the SPL memory. This is typically a FIT with
++	 * external data, so this is quite small, perhaps a few KB.
 +	 */
-+	assert(!(offset & (MMC_MAX_BLOCK_LEN - 1)));
++	addr = CONFIG_VAL(TEXT_BASE);
++	buf = map_sysmem(addr, size);
++	num_blks = DIV_ROUND_UP(size, desc->blksz);
++	log_debug("read %lx, %lx blocks to %lx / %p\n", size, num_blks, addr,
++		  buf);
++	ret = blk_read(blk, blknum, num_blks, buf);
++	if (ret < 0)
++		return log_msg_ret("rd", ret);
 +
-+	if (offset & (MMC_MAX_BLOCK_LEN - 1))
-+		return log_msg_ret("get", -EBADF);
-+	offset /= MMC_MAX_BLOCK_LEN;
++	/* figure out the phase to load */
++	phase = IS_ENABLED(CONFIG_VPL_BUILD) ? IH_PHASE_SPL : IH_PHASE_U_BOOT;
 +
-+	if (blk_read(blk, offset, 1, buf) != 1)
-+		return log_msg_ret("read", -EIO);
-+	nvd = (struct vbe_nvdata *)buf;
-+	hdr_ver = (nvd->hdr & NVD_HDR_VER_MASK) >> NVD_HDR_VER_SHIFT;
-+	hdr_size = (nvd->hdr & NVD_HDR_SIZE_MASK) >> NVD_HDR_SIZE_SHIFT;
-+	if (hdr_ver != NVD_HDR_VER_CUR)
-+		return log_msg_ret("hdr", -EPERM);
-+	data_size = 1 << hdr_size;
-+	if (!data_size || data_size > sizeof(*nvd))
-+		return log_msg_ret("sz", -EPERM);
++	/*
++	 * Load the image from the FIT. We ignore any load-address information
++	 * so in practice this simply locates the image in the external-data
++	 * region and returns its address and size. Since we only loaded the FIT
++	 * itself, only a part of the image will be present, at best.
++	 */
++	fit_uname = NULL;
++	fit_uname_config = NULL;
++	log_debug("loading FIT\n");
++	ret = fit_image_load(&images, addr, &fit_uname, &fit_uname_config,
++			     IH_ARCH_SANDBOX, image_ph(phase, IH_TYPE_FIRMWARE),
++			     BOOTSTAGE_ID_FIT_SPL_START, FIT_LOAD_IGNORED,
++			     &load_addr, &len);
++	if (ret < 0)
++		return log_msg_ret("ld", ret);
++	node = ret;
++	log_debug("loaded to %lx\n", load_addr);
 +
-+	crc = crc8(0, buf + 1, data_size - 1);
-+	if (crc != nvd->crc8)
-+		return log_msg_ret("crc", -EPERM);
++	/* For FIT external data, read in the external data */
++	if (load_addr + len > addr + size) {
++		ulong base, full_size;
++		void *base_buf;
++
++		/* Find the start address to load from */
++		base = ALIGN_DOWN(load_addr, desc->blksz);
++
++		/*
++		 * Get the total number of bytes to load, taking care of
++		 * block alignment
++		 */
++		full_size = load_addr + len - base;
++
++		/*
++		 * Get the start block number, number of blocks and the address
++		 * to load to, then load the blocks
++		 */
++		blknum = (area_offset + base - addr) / desc->blksz;
++		num_blks = DIV_ROUND_UP(full_size, desc->blksz);
++		base_buf = map_sysmem(base, full_size);
++		ret = blk_read(blk, blknum, num_blks, base_buf);
++		log_debug("read %lx %lx, %lx blocks to %lx / %p: ret=%d\n",
++			  blknum, full_size, num_blks, base, base_buf, ret);
++		if (ret < 0)
++			return log_msg_ret("rd", ret);
++	}
++	if (load_addrp)
++		*load_addrp = load_addr;
++	if (lenp)
++		*lenp = len;
++	if (namep) {
++		*namep = strdup(fdt_get_name(buf, node, NULL));
++		if (!namep)
++			return log_msg_ret("nam", -ENOMEM);
++	}
 +
 +	return 0;
 +}
 diff --git a/boot/vbe_common.h b/boot/vbe_common.h
-index a122bead93e..37a81330325 100644
+index 37a81330325..bfa339008e1 100644
 --- a/boot/vbe_common.h
 +++ b/boot/vbe_common.h
-@@ -78,4 +78,20 @@ int vbe_get_blk(const char *storage, struct udevice **blkp);
- int vbe_read_version(struct udevice *blk, ulong offset, char *version,
- 		     int max_size);
+@@ -94,4 +94,32 @@ int vbe_read_version(struct udevice *blk, ulong offset, char *version,
+  */
+ int vbe_read_nvdata(struct udevice *blk, ulong offset, ulong size, u8 *buf);
  
 +/**
-+ * vbe_read_nvdata() - Read non-volatile data from a block device
++ * vbe_read_fit() - Read an image from a FIT
 + *
-+ * Reads the VBE nvdata from a device. This function reads a single block from
-+ * the device, so the nvdata cannot be larger than that.
++ * This handles most of the VBE logic for reading from a FIT. It reads the FIT
++ * metadata, decides which image to load and loads it to a suitable address,
++ * ready for jumping to the next phase of VBE.
 + *
-+ * @blk: Device to read from
-+ * @offset: Offset to read, in bytes
-+ * @size: Number of bytes to read
-+ * @buf: Buffer to hold the data
-+ * Return: 0 if OK, -E2BIG if @size > block size, -EBADF if the offset is not
-+ * block-aligned, -EIO if an I/O error occurred, -EPERM if the header version is
-+ * incorrect, the header size is invalid or the data fails its CRC check
++ * This supports transition from VPL to SPL as well as SPL to U-Boot proper. For
++ * now, TPL->VPL is not supported.
++ *
++ * Both embedded and external data are supported for the FIT
++ *
++ * @blk: Block device containing FIT
++ * @area_offset: Byte offset of the VBE area in @blk containing the FIT
++ * @area_size: Size of the VBE area
++ * @load_addrp: If non-null, returns the address where the image was loaded
++ * @lenp: If non-null, returns the size of the image loaded, in bytes
++ * @namep: If non-null, returns the name of the FIT-image node that was loaded
++ *	(allocated by this function)
++ * Return: 0 if OK, -EINVAL if the area does not contain an FDT (the underlying
++ * format for FIT), -E2BIG if the FIT extends past @area_size, -ENOMEM if there
++ * was not space to allocate the image-node name, other error if a read error
++ * occurred (see blk_read()), or something went wrong with the actually
++ * FIT-parsing (see fit_image_load()).
 + */
-+int vbe_read_nvdata(struct udevice *blk, ulong offset, ulong size, u8 *buf);
++int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
++		 ulong *load_addrp, ulong *lenp, char **namep);
 +
  #endif /* __VBE_ABREC_H */
-diff --git a/boot/vbe_simple.c b/boot/vbe_simple.c
-index ce385065321..c6766c532f2 100644
---- a/boot/vbe_simple.c
-+++ b/boot/vbe_simple.c
-@@ -18,48 +18,21 @@
- #include <vbe.h>
- #include <dm/device-internal.h>
- #include <dm/ofnode.h>
--#include <u-boot/crc.h>
- #include "vbe_simple.h"
- 
- static int simple_read_nvdata(const struct simple_priv *priv,
--			      struct udevice *blk, u8 *buf,
--			      struct simple_state *state)
-+			      struct udevice *blk, struct simple_state *state)
+diff --git a/boot/vbe_simple_fw.c b/boot/vbe_simple_fw.c
+index da9701f9eb9..0bf25ccad23 100644
+--- a/boot/vbe_simple_fw.c
++++ b/boot/vbe_simple_fw.c
+@@ -38,109 +38,23 @@
+  */
+ int vbe_simple_read_bootflow_fw(struct udevice *dev, struct bootflow *bflow)
  {
--	uint hdr_ver, hdr_size, size, crc;
-+	ALLOC_CACHE_ALIGN_BUFFER(u8, buf, MMC_MAX_BLOCK_LEN);
- 	const struct vbe_nvdata *nvd;
--	int start;
--
--	/* we can use an assert() here since we already read only one block */
--	assert(priv->state_size <= MMC_MAX_BLOCK_LEN);
--
--	start = priv->area_start + priv->state_offset;
--
--	/*
--	 * We can use an assert() here since reading the wrong block will just
--	 * cause invalid state to be (safely) read. If the crc passes, then we
--	 * obtain invalid state and it will likely cause booting to fail.
--	 *
--	 * VBE relies on valid values being in U-Boot's devicetree, so this
--	 * should not every be wrong on a production device.
--	 */
--	assert(!(start & (MMC_MAX_BLOCK_LEN - 1)));
+-	ALLOC_CACHE_ALIGN_BUFFER(u8, sbuf, MMC_MAX_BLOCK_LEN);
+ 	struct udevice *media = dev_get_parent(bflow->dev);
+ 	struct udevice *meth = bflow->method;
+ 	struct simple_priv *priv = dev_get_priv(meth);
+-	const char *fit_uname, *fit_uname_config;
+-	struct bootm_headers images = {};
+-	ulong offset, size, blknum, addr, len, load_addr, num_blks;
+-	enum image_phase_t phase;
+-	struct blk_desc *desc;
++	ulong len, load_addr;
+ 	struct udevice *blk;
+-	int node, ret;
+-	void *buf;
 +	int ret;
  
--	start /= MMC_MAX_BLOCK_LEN;
-+	ret = vbe_read_nvdata(blk, priv->area_start + priv->state_offset,
-+			      priv->state_size, buf);
-+	if (ret)
-+		return log_msg_ret("nv", ret);
- 
--	if (blk_read(blk, start, 1, buf) != 1)
--		return log_msg_ret("read", -EIO);
- 	nvd = (struct vbe_nvdata *)buf;
--	hdr_ver = (nvd->hdr & NVD_HDR_VER_MASK) >> NVD_HDR_VER_SHIFT;
--	hdr_size = (nvd->hdr & NVD_HDR_SIZE_MASK) >> NVD_HDR_SIZE_SHIFT;
--	if (hdr_ver != NVD_HDR_VER_CUR)
--		return log_msg_ret("hdr", -EPERM);
--	size = 1 << hdr_size;
--	if (!size || size > sizeof(*nvd))
--		return log_msg_ret("sz", -ENOEXEC);
+ 	log_debug("media=%s\n", media->name);
+ 	ret = blk_get_from_parent(media, &blk);
+ 	if (ret)
+ 		return log_msg_ret("med", ret);
+ 	log_debug("blk=%s\n", blk->name);
+-	desc = dev_get_uclass_plat(blk);
 -
--	crc = crc8(0, buf + 1, size - 1);
--	if (crc != nvd->crc8)
--		return log_msg_ret("crc", -EPERM);
- 	state->fw_vernum = nvd->fw_vernum;
+-	offset = priv->area_start + priv->skip_offset;
+-
+-	/* read in one block to find the FIT size */
+-	blknum =  offset / desc->blksz;
+-	log_debug("read at %lx, blknum %lx\n", offset, blknum);
+-	ret = blk_read(blk, blknum, 1, sbuf);
+-	if (ret < 0)
+-		return log_msg_ret("rd", ret);
+-
+-	ret = fdt_check_header(sbuf);
+-	if (ret < 0)
+-		return log_msg_ret("fdt", -EINVAL);
+-	size = fdt_totalsize(sbuf);
+-	if (size > priv->area_size)
+-		return log_msg_ret("fdt", -E2BIG);
+-	log_debug("FIT size %lx\n", size);
+-
+-	/*
+-	 * Load the FIT into the SPL memory. This is typically a FIT with
+-	 * external data, so this is quite small, perhaps a few KB.
+-	 */
+-	addr = CONFIG_VAL(TEXT_BASE);
+-	buf = map_sysmem(addr, size);
+-	num_blks = DIV_ROUND_UP(size, desc->blksz);
+-	log_debug("read %lx, %lx blocks to %lx / %p\n", size, num_blks, addr,
+-		  buf);
+-	ret = blk_read(blk, blknum, num_blks, buf);
+-	if (ret < 0)
+-		return log_msg_ret("rd", ret);
  
- 	log_debug("version=%s\n", state->fw_version);
-@@ -69,7 +42,6 @@ static int simple_read_nvdata(const struct simple_priv *priv,
+-	/* figure out the phase to load */
+-	phase = IS_ENABLED(CONFIG_VPL_BUILD) ? IH_PHASE_SPL : IH_PHASE_U_BOOT;
+-
+-	/*
+-	 * Load the image from the FIT. We ignore any load-address information
+-	 * so in practice this simply locates the image in the external-data
+-	 * region and returns its address and size. Since we only loaded the FIT
+-	 * itself, only a part of the image will be present, at best.
+-	 */
+-	fit_uname = NULL;
+-	fit_uname_config = NULL;
+-	log_debug("loading FIT\n");
+-	ret = fit_image_load(&images, addr, &fit_uname, &fit_uname_config,
+-			     IH_ARCH_SANDBOX, image_ph(phase, IH_TYPE_FIRMWARE),
+-			     BOOTSTAGE_ID_FIT_SPL_START, FIT_LOAD_IGNORED,
+-			     &load_addr, &len);
+-	if (ret < 0)
+-		return log_msg_ret("ld", ret);
+-	node = ret;
+-	log_debug("loaded to %lx\n", load_addr);
+-
+-	/* For FIT external data, read in the external data */
+-	if (load_addr + len > addr + size) {
+-		ulong base, full_size;
+-		void *base_buf;
+-
+-		/* Find the start address to load from */
+-		base = ALIGN_DOWN(load_addr, desc->blksz);
+-
+-		/*
+-		 * Get the total number of bytes to load, taking care of
+-		 * block alignment
+-		 */
+-		full_size = load_addr + len - base;
+-
+-		/*
+-		 * Get the start block number, number of blocks and the address
+-		 * to load to, then load the blocks
+-		 */
+-		blknum = (offset + base - addr) / desc->blksz;
+-		num_blks = DIV_ROUND_UP(full_size, desc->blksz);
+-		base_buf = map_sysmem(base, full_size);
+-		ret = blk_read(blk, blknum, num_blks, base_buf);
+-		log_debug("read %lx %lx, %lx blocks to %lx / %p: ret=%d\n",
+-			  blknum, full_size, num_blks, base, base_buf, ret);
+-		if (ret < 0)
+-			return log_msg_ret("rd", ret);
+-	}
++	ret = vbe_read_fit(blk, priv->area_start + priv->skip_offset,
++			   priv->area_size, &load_addr, &len, &bflow->name);
  
- int vbe_simple_read_state(struct udevice *dev, struct simple_state *state)
- {
--	ALLOC_CACHE_ALIGN_BUFFER(u8, buf, MMC_MAX_BLOCK_LEN);
- 	struct simple_priv *priv = dev_get_priv(dev);
- 	struct udevice *blk;
- 	int ret;
-@@ -83,7 +55,7 @@ int vbe_simple_read_state(struct udevice *dev, struct simple_state *state)
- 	if (ret)
- 		return log_msg_ret("ver", ret);
- 
--	ret = simple_read_nvdata(priv, blk, buf, state);
-+	ret = simple_read_nvdata(priv, blk, state);
- 	if (ret)
- 		return log_msg_ret("nvd", ret);
- 
+ 	/* set up the bootflow with the info we obtained */
+-	bflow->name = strdup(fdt_get_name(buf, node, NULL));
+-	if (!bflow->name)
+-		return log_msg_ret("name", -ENOMEM);
+ 	bflow->blk = blk;
+ 	bflow->buf = map_sysmem(load_addr, len);
+ 	bflow->size = len;
 -- 
 2.34.1
 
