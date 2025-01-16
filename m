@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B5A3C02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 22:48:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6725C02187
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 22:57:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D85F8033D;
-	Thu, 16 Jan 2025 23:47:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 328B780312;
+	Thu, 16 Jan 2025 23:57:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="FjQgWMZg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OZBwMH/M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FD7C8069D; Thu, 16 Jan 2025 23:47:58 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 2BB258033D; Thu, 16 Jan 2025 23:57:54 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3AC68022B
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 23:47:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 26EE48022B
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 23:57:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e549b0f8d57so2676025276.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 14:47:55 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-30227c56b11so14965081fa.3
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 14:57:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1737067675; x=1737672475; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737068271; x=1737673071; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6Ts9u7wtAGb7SfeGnYQx7ESCA2DC/iC6d0nlUfQ+Vtc=;
- b=FjQgWMZgr0AQv+YLGLFnCGYbNOdWeIeIykXtdAfg8acZJBG38CEHAMA4amK9ql35jK
- Wbi6HGEzWT/xapI6VRy93A9wArvoM7Quyu1wo6C3ybbHK4o7QqEycuZ1rbL1sCfS4cSr
- 5XyeNEwuSIKukevUnUcIbdjNdamJUfexkGhuW/bYxN9k7k+YyyGWSTjBeRgtZ1sh7IiZ
- lEFkVv5l/PIqWYrknEbpYbFrx5h1ckmPSwQBeI6Tm1UuFr7Qwq+ML0b8Yq79tUQD7cfY
- 7yqDkuj5SVKvPl0bL+zms3x7eF/YGfQLu7atgVnH+qDSwh9oGjw9BfAOFn5ABYeJWvfi
- whZQ==
+ bh=yy25Xd5LeDrBrBLLPDXRf0R8e9CRNLMm86pv7O4nbvo=;
+ b=OZBwMH/M4Mq783wMyW/JbEuwIVsUdECP7nBbWmDrKCpMwQn2tA5E8zCKw4f938Qb1D
+ JY3o0n896pRVvWsLHCBHZkb8oY1OpvNTYMCjAeNrbwisXBNpLxDJbFd3A75WE256kMnG
+ Z0rqw0M9TbON8B9wzM5T6cV/0HMiqcXRfmAUuofU8MnkokRDZpnOKXfr/iEgOaxf2c0X
+ +OEjhUTqqM32mH0cltjTW2lseciYLWl3o04pcrjQ5J1r456gqmTPc5AHpX4l2Z5YqT8B
+ fQeQcrnMCsQHQRSjBQ3MEmwvnEWeiMrXRIarmhmUdIdax/lqwrQpyBN0cFHj2EPVrf8w
+ YOGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737067675; x=1737672475;
+ d=1e100.net; s=20230601; t=1737068271; x=1737673071;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6Ts9u7wtAGb7SfeGnYQx7ESCA2DC/iC6d0nlUfQ+Vtc=;
- b=LP7A3MOZKodCbUMp5JFl3Ug+RUJABs5Z401Bd7G33wAUrQrr5gkhsAjYAQEkt6A0tt
- gX6I9fXofy9x/aq3s5Keug7PgeNbQPq6nq+QLhlqFDo10NkiKVcXJn2ZUfIBhLMeNqHU
- Sn3y3TuBYykeObg+giHPJ/o1Er+X/xCmhO+s5bNMi1WxCyW34ihpb/te1rfcqJ9f7ZwB
- 2pfnGM8x7/jvk51EOX+uU4KGdHLthC+fiZCpeLmHPLsGDHGa+6kr9uDPoTns7sx/o5B1
- QIi1ujAVIP1IqWRiN8WlN9Er8JC8x2l+XpPWjn/gVDgRjEn2B7Ff59OHOU6GV2gnMkVI
- DSVQ==
+ bh=yy25Xd5LeDrBrBLLPDXRf0R8e9CRNLMm86pv7O4nbvo=;
+ b=rknUIWTLjYm4w3UfTgb9Cp7i5/q3Czb/jm8+prYLkTLJJKD0aSdieMtBAgPChAgCOp
+ CX6lGY5LzUDfFTRWZ/WNIrLNNxplBs2nS2mQsQTScZVyPZF7CWHeXeY8RQdRckhSkuI/
+ 7t8lhsWzPtisnhxBIPkbY5jn5Re3ylO/a1bgMm01smlmhFriJXWvS9YIm2itznok2AKq
+ 0OiyQQPG77kmSiw0X6/DQfmw9GVVr8zkBYKFHpEyuvLUEr2JwZTbxCq9np2VK1+rWTna
+ mi+H9eoVPFGVTAJn1W9ZCjpfa0dpHg5D2IxcfLsuSDdOlm6kRu42U+F4Vq+QUvr8wDlt
+ 2tkQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWwmafo9ek+oePjjzJ9OMwid+1jMJw9ujiZTQVa2iS2wlmIxjZxu1JRFIWWqb/DCHpHJVQa9eI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxizS2nJMi4tMjbytabnmuom6y1qjndnMjjy+LcXDP+hJHomeD7
- KKKokf5VFModR1B31O8wmHF1qU0BdAr913s8EL6SULllp6nX/Ptu1CKp4pORyskPMVCYXKy6TvR
- wU0eb+dpF0HPlqs1ech2Mqv6UiDw82c4eUQDq0g==
-X-Gm-Gg: ASbGnctPT63hQlCKuzQVkPJ8HUlcjgP3D4jvzDUHfaPJ3ZQa5W/3k9lLSOOEQDkKvOY
- YLllhLAgRP4kM41c6indlNIKyl7I6xp+qXMnd1A==
-X-Google-Smtp-Source: AGHT+IF0OYQ2PfxwBL2coDlKeL4vHpwmA+Bowis6mbQhBINxg/nvwB/djJscodNRMxz9+IQEHfzMIMeblVm3kP/nDsM=
-X-Received: by 2002:a05:6902:2b8d:b0:e57:879b:2b2d with SMTP id
- 3f1490d57ef6-e57b1047493mr206018276.8.1737067674724; Thu, 16 Jan 2025
- 14:47:54 -0800 (PST)
+ AJvYcCUeKo/KPfanWhEWmHj4FiuUzU0sDi40uEzlN66sIuGX5RtDkiCm3LK8vcbOlr3Mwc4qi8IZ634=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBn2TlbYw0OotsFGmXD5DkZ9FVAr2DRp2FezC36oKgmttq45y2
+ ZAfODRONDWw8rBVFh7cGG04bYFY779xFfPBC4ChHIXqtl9LTNOIAgnz+abaqV5I76J/dYiMEyEr
+ 4eIzZLwtblm8q5atb4Xe3DvqJA84=
+X-Gm-Gg: ASbGnct8Q/Vj43DJlXVNJhD9qwBOvSoh9q2a2As4QCgO6lWGWILWQ3gnBiIBg+4MfOF
+ ktN7/SVycWFGlGVbiQbZWYZZKg92WgieaFKbNsacX85GhFLiH57qE6V2GsTCVNQhNNdWaAQ==
+X-Google-Smtp-Source: AGHT+IFyJ5Nw5Aoei58shGRIUTPnw5M0bNwRmNWew6xK9lGnWyxIXQhFVXxjV/8pgm5YEddGk6zbHDsRiV/FRuDyX4g=
+X-Received: by 2002:a05:651c:b1f:b0:302:210d:3b44 with SMTP id
+ 38308e7fff4ca-3072cb343c4mr1478211fa.35.1737068271070; Thu, 16 Jan 2025
+ 14:57:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
- <20250115-imx95-v1-20-93b28a514dea@oss.nxp.com>
- <CAJ+vNU0_GWaVtwiWw3Mt1J6jc57XgDWOehdzrPhfTAg+gJq4oA@mail.gmail.com>
- <CAJ+vNU2QytTfGuHcnY8QfoLBvxCxcMP4fKqvPYaM8w_rX-czkA@mail.gmail.com>
-In-Reply-To: <CAJ+vNU2QytTfGuHcnY8QfoLBvxCxcMP4fKqvPYaM8w_rX-czkA@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Thu, 16 Jan 2025 14:47:43 -0800
-X-Gm-Features: AbW1kvbZK4PICuh4QnJiBP7drnIVNTl_JZSPcvjg9_HbcxBrDUTjBtsPZRUYchU
-Message-ID: <CAJ+vNU1tUEvcFQdcEsdmuTiNe=J3=C1pqum=qvmKnstNz7Ci6g@mail.gmail.com>
-Subject: Re: [PATCH v4 20/20] imx95_evk: add i.MX95 19x19 EVK board basic
- support
-To: Alice Guo <alice.guo@oss.nxp.com>
-Cc: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, 
- Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, marex@denx.de,
- u-boot@lists.denx.de, 
- Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
+References: <20250110-phytec_imx8m_optee-v3-0-6c39dab15592@phytec.de>
+ <20250110-phytec_imx8m_optee-v3-1-6c39dab15592@phytec.de>
+ <CAJ+vNU24PA3S3aEu5CjyECaF0aKKvbs7svHVuGUyHFA08NObOw@mail.gmail.com>
+In-Reply-To: <CAJ+vNU24PA3S3aEu5CjyECaF0aKKvbs7svHVuGUyHFA08NObOw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 16 Jan 2025 19:57:39 -0300
+X-Gm-Features: AbW1kvZTw2clpDt8noBlTshu0DjsPHzhg3V1p5lDRTQtblvmabyz-Q1Qfuvxs5g
+Message-ID: <CAOMZO5DPBJAXm99DTwBjfgOUpUqWzCiZH=vM-Mq_cDde3QzynQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/6] arm: imx8m: add OP-TEE node
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Yannic Moog <y.moog@phytec.de>, Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Manuel Traut <manut@mecka.net>, 
+ Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
+ Yashwanth Varakala <y.varakala@phytec.de>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -103,96 +99,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 16, 2025 at 11:42=E2=80=AFAM Tim Harvey <tharvey@gateworks.com>=
- wrote:
->
-> On Thu, Jan 16, 2025 at 11:38=E2=80=AFAM Tim Harvey <tharvey@gateworks.co=
-m> wrote:
-> >
-> > On Wed, Jan 15, 2025 at 5:30=E2=80=AFAM Alice Guo <alice.guo@oss.nxp.co=
-m> wrote:
-> > >
-> > > From: Ye Li <ye.li@nxp.com>
-> > >
-> > > This patch adds i.MX95 19x19 EVK board basic support.
-> > >
-> > > Messaging unit for EdgeLock Secure Enclave, messaging unit for System
-> > > Manager, uSDHC for SD Card, gpio, lpuart are supported now.
-> > >
-> > > Signed-off-by: Ye Li <ye.li@nxp.com>
-> > > Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> > > Reviewed-by: Peng Fan <peng.fan@nxp.com>
-> > > ---
-> > <snip...>
-> > > diff --git a/board/freescale/imx95_evk/imx95_evk.c b/board/freescale/=
-imx95_evk/imx95_evk.c
-> > > new file mode 100644
-> > > index 0000000000000000000000000000000000000000..1ed15ca47b157067a7376=
-b0b32101dc7f9899f4f
-> > > --- /dev/null
-> > > +++ b/board/freescale/imx95_evk/imx95_evk.c
-> > > @@ -0,0 +1,54 @@
-> > > +// SPDX-License-Identifier: GPL-2.0+
-> > > +/*
-> > > + * Copyright 2025 NXP
-> > > + */
-> > > +
-> > > +#include <env.h>
-> > > +#include <init.h>
-> > > +#include <asm/global_data.h>
-> > > +#include <asm/arch-imx9/ccm_regs.h>
-> > > +#include <asm/arch/clock.h>
-> > > +#include <fdt_support.h>
-> > > +#include <asm/io.h>
-> > > +#include <linux/bitfield.h>
-> > > +#include <linux/bitops.h>
-> > > +#include <linux/delay.h>
-> > > +#include <miiphy.h>
-> > > +#include <netdev.h>
-> > > +#include <asm/gpio.h>
-> > > +#include <asm/mach-imx/sys_proto.h>
-> > > +#include <scmi_agent.h>
-> > > +#include <scmi_protocols.h>
-> > > +#include "../../../dts/upstream/src/arm64/freescale/imx95-clock.h"
-> > > +#include "../../../dts/upstream/src/arm64/freescale/imx95-power.h"
-> >
-> > Hi Alice,
-> >
-> > Most of the above are not needed (and should be alphabetized anyway)
-> >
-> > The only ones needed are:
-> > #include <asm/arch/clock.h>
-> > #include <asm/gpio.h>
-> > #include <asm/mach-imx/sys_proto.h>
-> >
-> > > +
-> > > +DECLARE_GLOBAL_DATA_PTR;
-> >
-> > not needed as you don't use gd
-> >
-> > Best Regards,
-> >
-> > Tim
->
-> Hi Alic,
->
-> One more thing to do for next series. Refresh your
-> imx95_19x19_evk_defconfig as its very out of sync:
->
-> make imx95_19x19_evk_defconfig
-> make savedefconfig
-> cp defconfig configs/imx95_19x19_evk_defconfig
->
+On Thu, Jan 16, 2025 at 7:45=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
 
-Hi Alice,
+> Hi Yannic,
+>
+> As I mentioned before, I still don't see how this builds when tee.bin
+> is missing because someone isn't using tee?
+>
+> It looks like Fabio has merged this already to imx/master which now
+> fails to build for imx8m*_venice boards because of it.
 
-I'm also seeing the following files left around after a build that are
-also not removed after a clean/distclean:
-        mkimage-out.imx-boot.spl
-        mkimage-out.imx-boot.u-boot
-        mkimage.imx-boot.spl
-        mkimage.imx-boot.u-boot
+make mrproper
+make imx8mp_venice_defconfig
+make
 
-Best Regards,
+flash.bin is still generated despite this nasty warning:
 
-Tim
+  CFGS    spl/u-boot-spl.cfgout
+  BINMAN  .binman_stamp
+Image 'image' has faked external blobs and is non-functional: tee.bin
+
+Image 'image' is missing optional external blobs but is still functional: t=
+ee-os
+
+/binman/section/fit/images/tee/tee-os (tee.bin):
+   See the documentation for your board. You may need to build Open Portabl=
+e
+   Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to/tee=
+.bin
+
+Some images are invalid
+make: *** [Makefile:1135: .binman_stamp] Error 103
+
+CI also did not complain.
+
+Yes, I would welcome a patch that removes these tee messages by default.
