@@ -4,87 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56DB2C02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 10:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C4B5C02180
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 10:19:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B87A380716;
-	Thu, 16 Jan 2025 11:15:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A56C801B0;
+	Thu, 16 Jan 2025 11:19:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rUwX367y";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fv8MgtXq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D4478070C; Thu, 16 Jan 2025 11:15:49 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F8D380040
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 11:15:47 +0100 (CET)
+ id 637B380283; Thu, 16 Jan 2025 11:18:59 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E1E6480040
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 11:18:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43635796b48so4599045e9.0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 02:15:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1737022547; x=1737627347;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=er8rp9CGjktBCm/y58SqcfOGuzBpC60m/kkY+m+C7e8=;
- b=rUwX367yllXm5tHxII3Oe3e7KFYFqd1i7eflNl+1gGzL6jmgG6ZCi6Cn8/hTqGyQrB
- 6bwsrh3VjwAIgQEngiwp270v4IxYpKtx+FPkpKF1gmWgcyugRuqxkV63JYXMcp33nbzx
- TgW0nMltlOcQK08j/JYnvI2Fma3jk6tauE8p8X6mo+RkFUERXBAQwJmu6IdqBIFtFD2F
- DXven9dpFkJd3uuEJqzfCidJZxfqidHjkCbb/0RUCWRq9IWpqaQh2Bdtb8+/spd+xsf3
- rKN7hxDDm4UE2TfkzLPnYRio2c+SNF894tQDzXQmfoj3m405HF6awR78pEPn1DH96t4I
- RiNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737022547; x=1737627347;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=er8rp9CGjktBCm/y58SqcfOGuzBpC60m/kkY+m+C7e8=;
- b=rOgjllwnpmxr+tu8UA4yHfB5d474f2Va3a8SWZB26Oc1VTnw7bA3fVy4ddKIYKwgT+
- 8SncXz4yLds6jeAykHo4jFZ0IwbzbsHHzkaRVlv7u+d+Htp+JtRsshbV5zmhMYqtm8mW
- L1gmhT39DYn8sveJN1es4sKmcJcBKbUW/8OfjQA2E1MjuAlt92hUJr02moOM3It6jI/K
- oJ6HJ86wjovmNU6+vuP8aZ49xEW+b664xwNX/eoyfRCjeOvuKYAIuslxjOzw/6HJazqs
- Nlj95HJ2Iby6CTugXMU72WON/qBvaV6D+B3ZgKXqk/l7qNHUM/1bdxzdSq6rueNbK4FW
- 45wQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWb/9Sxoj5Iq7F1W6qc68xmuFbeuiFoyTFHDGMnrwFJwHIpTR1WM2mMin/AliYrR104WJ6Syjo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0zQasqes5IGo5NpP0z1WVkoITO7PmY5zEqS5sWcslfQ2mpk8F
- 3yw7WRLIgjqGUV4ch89nWx7FTrtOsSyXypIYgPj4y1q6TuQMLzo/tAbBoUvOqdA=
-X-Gm-Gg: ASbGncsjj1k8J2pi+OGuq5vA9J4e9QCIQptxahQcJCok1zw39kVbCEUJSROfGibmwg+
- Ns6cR+gArJQl9Fh/2Xf3xGRt8FEE2OKA5CJbNi/6pnDM1FNC4vbE3jcjakszRa9bONLTGTMLvrW
- +e3/97Zwksynjv/Kr2OZ9d/RmwAnz3ttbNfTHvWLbgD5fo3ZmbeR8wczCpHJiGYxZAW8lOvloZ0
- aO3hjer2jS1bV5N0WP+SDYEuUy5IZwvHjuuBxsFnV+Az3NgZI8RB3ZX3TafhKnejw==
-X-Google-Smtp-Source: AGHT+IGBxsvY2KXA1C77rcCpOr3Sm2NbLbNgg7tMZCybLr+FbNI1hNLQ98qcgq2DDnVGcFy8lcvnIw==
-X-Received: by 2002:a05:600c:a014:b0:434:e69c:d338 with SMTP id
- 5b1f17b1804b1-437c6b014f7mr50794935e9.5.1737022546935; 
- Thu, 16 Jan 2025 02:15:46 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-437c7499558sm55137405e9.8.2025.01.16.02.15.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 02:15:46 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 8/9] board: stih410-b2260: Remove
- board_usb_init/cleanup()
-In-Reply-To: <20250116081738.2511223-9-patrice.chotard@foss.st.com>
-References: <20250116081738.2511223-1-patrice.chotard@foss.st.com>
- <20250116081738.2511223-9-patrice.chotard@foss.st.com>
-Date: Thu, 16 Jan 2025 11:15:45 +0100
-Message-ID: <874j1z83ou.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50GAIYQQ4193756
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 16 Jan 2025 04:18:34 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1737022714;
+ bh=oWVhx93/Ehwvj8njv25dN/9VnWQDoIiCFspyehUwdgU=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=fv8MgtXqCJEKMlfoC7CZcQtrlmTWqiV66YVeFxHYtqyFuk7EqzvXbXXZpjfqGQ3/O
+ Lzq6HcPNZrpwD5X89xPuS2PQlZ0oQacQLqpzxex8HNd3jLZIuxg0sMhdVEBy7QLuq8
+ r+uviQW+qdWBo1tSkhmskRd2JZE67y5HDF1uqUNA=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50GAIYld018928
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 16 Jan 2025 04:18:34 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 16
+ Jan 2025 04:18:34 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 16 Jan 2025 04:18:34 -0600
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.104])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50GAIXOt004782;
+ Thu, 16 Jan 2025 04:18:33 -0600
+Date: Thu, 16 Jan 2025 15:48:32 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+CC: Roger Quadros <rogerq@kernel.org>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, <trini@konsulko.com>,
+ <marex@denx.de>, <bmeng.cn@gmail.com>, <jonas@kwiboo.se>,
+ <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH] usb: xhci-dwc3: Bail out if "dr_mode" is "peripheral"
+Message-ID: <mjtlqk7ddt7mjxu62vl3fpizhu5djemaodlpuprh2dp2kfukwh@y4vyhmxfbdxm>
+References: <20241206110424.897283-1-s-vadapalli@ti.com>
+ <ceb060fa-d430-458d-b711-508a4bd34d48@kernel.org>
+ <87cygn85hu.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <87cygn85hu.fsf@baylibre.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,74 +85,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice,
+On Thu, Jan 16, 2025 at 10:36:45AM +0100, Mattijs Korpershoek wrote:
+> Hi Siddharth,
 
-Thank you for the patch.
+Hello Mattijs,
 
-On jeu., janv. 16, 2025 at 09:17, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
+> 
+> On lun., déc. 09, 2024 at 15:20, Roger Quadros <rogerq@kernel.org> wrote:
+> 
+> > Hi Siddharth,
+> >
+> > On 06/12/2024 13:04, Siddharth Vadapalli wrote:
 
-> Since DM_USB_GADGET is enable for this board, board_usb_init()
-> and board_usb_cleanup() can be removed.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+[...]
 
-Yay, glad to see some more board_usb_{init,cleanup}() getting removed!
+> >> diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
+> >> index e3e0ceff43e..7b1311503fe 100644
+> >> --- a/drivers/usb/host/xhci-dwc3.c
+> >> +++ b/drivers/usb/host/xhci-dwc3.c
+> >> @@ -208,6 +208,9 @@ static int xhci_dwc3_probe(struct udevice *dev)
+> >>  	writel(reg, &dwc3_reg->g_usb2phycfg[0]);
+> >>  
+> >>  	dr_mode = usb_get_dr_mode(dev_ofnode(dev));
+> >> +	if (dr_mode == USB_DR_MODE_PERIPHERAL)
+> >> +		return -ENODEV;
+> >> +
+> >>  	if (dr_mode == USB_DR_MODE_OTG &&
+> >>  	    dev_read_bool(dev, "usb-role-switch")) {
+> >>  		dr_mode = usb_get_role_switch_default_mode(dev_ofnode(dev));
+> >
+> > Although this proposal was suggested in [1] and later clarified in
+> > [2] I will summarize the discussion here.
+> >
+> > This patch fix is not sufficient for all cases as the xhci-dwc3.c
+> > driver will still be probed if dr_mode is OTG or HOST along with
+> > other platform drivers if enabled in config.
+> >
+> > The only current solution is not not enable CONFIG_USB_XHCI_DWC3
+> > together with another platform driver config (e.g. CONFIG_USB_DWC3_GENERIC)
+> > if snps,dwc3 should not be managed by xhci-dwc3.c.
+> 
+> Given Roger's explanation, should we simply drop this, or is any other
+> action expected from the U-Boot maintainers?
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+This patch could be dropped. Roger's suggestion is to fix this issue by
+updating the platform configs wherein CONFIG_USB_XHCI_DWC3 should be
+disabled on platforms that have "dr_mode" set to "peripheral".
 
-> ---
->
-> (no changes since v1)
->
->  board/st/stih410-b2260/board.c | 29 -----------------------------
->  1 file changed, 29 deletions(-)
->
-> diff --git a/board/st/stih410-b2260/board.c b/board/st/stih410-b2260/board.c
-> index 3a495eb5089..8ad593cccdd 100644
-> --- a/board/st/stih410-b2260/board.c
-> +++ b/board/st/stih410-b2260/board.c
-> @@ -7,10 +7,6 @@
->  #include <cpu_func.h>
->  #include <init.h>
->  #include <asm/cache.h>
-> -#include <asm/global_data.h>
-> -#include <linux/usb/otg.h>
-> -#include <dwc3-uboot.h>
-> -#include <usb.h>
->  
->  DECLARE_GLOBAL_DATA_PTR;
->  
-> @@ -42,31 +38,6 @@ int board_init(void)
->  }
->  
->  #ifdef CONFIG_USB_DWC3
-> -static struct dwc3_device dwc3_device_data = {
-> -	.maximum_speed = USB_SPEED_HIGH,
-> -	.dr_mode = USB_DR_MODE_PERIPHERAL,
-> -	.index = 0,
-> -};
-> -
-> -int board_usb_init(int index, enum usb_init_type init)
-> -{
-> -	int node;
-> -	const void *blob = gd->fdt_blob;
-> -
-> -	/* find the snps,dwc3 node */
-> -	node = fdt_node_offset_by_compatible(blob, -1, "snps,dwc3");
-> -
-> -	dwc3_device_data.base = fdtdec_get_addr(blob, node, "reg");
-> -
-> -	return dwc3_uboot_init(&dwc3_device_data);
-> -}
-> -
-> -int board_usb_cleanup(int index, enum usb_init_type init)
-> -{
-> -	dwc3_uboot_exit(index);
-> -	return 0;
-> -}
-> -
->  int g_dnl_board_usb_cable_connected(void)
->  {
->  	return 1;
-> -- 
-> 2.25.1
+Regards,
+Siddharth.
