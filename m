@@ -4,80 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37FE6C02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 16:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AE32C02183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 17:09:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 863EA80312;
-	Thu, 16 Jan 2025 17:28:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B8B78022B;
+	Thu, 16 Jan 2025 18:09:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uHaepCKP";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="VJGQp4YR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 741298033D; Thu, 16 Jan 2025 17:28:24 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 616B380312; Thu, 16 Jan 2025 18:09:44 +0100 (CET)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::228])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3654380214
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 17:28:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C72780214
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 18:09:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e455bf1f4d3so1614272276.2
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 08:28:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737044901; x=1737649701; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8wEMO2ZKEezVjs+v0Upz6USyDZ1J0DGEmkIUYvQ2wTw=;
- b=uHaepCKPCwTJT+nbhcDIIG6+dmphnvSpHENOjkLH7C6Lkjnu5ubbfSBRqvhdPp3WZ0
- aMy8xM+hAZoJlEjXBY4NHtlg9vUeU6iwRoOiIbh73alP1YHZYOVg26e1mQjytMZAovzw
- wV73/KjY0AQEsrrQ9HTrjdlwZB+NGT8Ad7rPFRM+ZL+rts8hQvciLWyuMdCHeCQbHJ73
- A8hwFP9cB3TJ4gisYNQwDI7uZ8zJX+ppSkAY6Yoh2mZrYJh6LfG0OCmKSbxWjGzz9pYQ
- v3lBy1EavB4kdEVdv6AzP4OLB3Z//lbvV8yu3dCLD258K+wZ7QZOgCbuLQ+cFV58DVV+
- RxlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737044901; x=1737649701;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8wEMO2ZKEezVjs+v0Upz6USyDZ1J0DGEmkIUYvQ2wTw=;
- b=qy+d61eCMkeUDJukOQRZEVmtIsB8xhTprvCiAfZEDQS0eg9hQ0P2E2ik1utqDFn66P
- 0Y1oePwQgJsCc/S8KhBYUedt5I3rSSpHt1FoBAz2wFXcMtzhGH7RYxlfDnz5L+7gUnhl
- G3qQZrfoU/4KN9MnO7Egn5HtQqUsGOpytG8V3RIwKwV8UiSwG1BH+2X22SlL7x8XUjqv
- eQfJRrEG/wMP+A3EfAcG89fQDjDqyZrJ1qEbvCHS2NlqJhMeD9n1PMLLxBocluoOXChn
- 7xdugfz1Ca6+S5RlvDKSnqkZah0fTGV6UUru7DjCqCdCtWSYSPoARse1SxoqA10BNgW4
- JF3Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVn5S5L5x6kVEDzzWxTuHKrnlDZLskLyI7hCohJYZrwu9FmV/oDtQFCDDzJnU/dQEAb85iFqfM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxF6fd5C3pKV6NGh/lrOWhnFrFIzt+sDnZPv+QhUPf2VSdbKcyC
- 0a0vwKOHaBJsWLEaH+eqHqyvKbRfajpwMFjJfYlB0UdUW3k3CfiUgyeTmDDSPa6Cx6NhGeaNEoc
- GFTnXTq1MTS6+S9zjj65CM7EHP2lASUQGha/MrQ==
-X-Gm-Gg: ASbGncuVhvKGYituk5nDWC1MaMj/MFU3ZnvIRw6In8zOf7G4Y0OCdKqTJXHMjotzRIo
- wdco+eSWBw2/TGXBmyWQ8pMa219piL7gxaSGGGA==
-X-Google-Smtp-Source: AGHT+IGGqeF+/t4NZ8jqAoo8lvcbqJA4WoJjG9ttfwSexyAH25gjaqvbuvrANZ4rdxfrNsF0vLgR1D5X3sdYDHTIjzA=
-X-Received: by 2002:a05:690c:6b03:b0:6f6:cd43:5468 with SMTP id
- 00721157ae682-6f6cd43561dmr62431147b3.33.1737044901094; Thu, 16 Jan 2025
- 08:28:21 -0800 (PST)
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id C43011BF205;
+ Thu, 16 Jan 2025 17:09:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1737047381;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LinRY8msd/3lU7ttloCpJbxCPUvrDV5Szc4+aqh5m1s=;
+ b=VJGQp4YROAh4JoEJqxIsP2zRzidLI5ULEfgE8zvip6zZ+2JtvIIeT5VvQUz5ndcTatrafX
+ RnONY6ly6MLe+FgrbtKG+E351sAfF5EWw95u5r20sFQ/+vjfg01Y4yUoII7tmRs1FkJTSC
+ jCFM/uZ5DxKdBS3LeUtuwNW4o8Ct+c0LuwNsJSZyOUJIIMv+lJXbf2IssL+KJBuKMrjFjN
+ dEhmDPyvAhKMRRyqYxMnfhK1l6rJD7jfI1kJ4mKyoYdiDUXLL2bnQAFYw8edAwQQaQriUt
+ Lo3rJZVikNM+XqWQyc1oPDwu29igYDyU0zykPxLoFvJXmG9xXMz80cpMHlF0Kg==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,  Simon Glass <sjg@chromium.org>,  Jaehoon
+ Chung <jh80.chung@samsung.com>,  Lukasz Majewski <lukma@denx.de>,  Sean
+ Anderson <seanga2@gmail.com>,  Anatolij Gustschin <agust@denx.de>,  Peng
+ Fan <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>,  Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
+ <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v3 13/13] imx8mp_evk: Enable display support
+In-Reply-To: <CAOMZO5DRfTh_iOFiJi9J1FrDq6-VV0dWkCJD1Oq1cwBeVQ4pjA@mail.gmail.com>
+ (Fabio Estevam's message of "Thu, 16 Jan 2025 13:13:53 -0300")
+References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
+ <20250110-ge-mainline-display-support-v3-13-d2c0acea6feb@bootlin.com>
+ <CAOMZO5B2K64cc1v3yn26fXqHtEcsMf+eSj_Smm_vAr5shzfboQ@mail.gmail.com>
+ <87zfjxsmpk.fsf@bootlin.com>
+ <CAOMZO5DRfTh_iOFiJi9J1FrDq6-VV0dWkCJD1Oq1cwBeVQ4pjA@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Thu, 16 Jan 2025 18:09:40 +0100
+Message-ID: <87jzauk7mz.fsf@bootlin.com>
 MIME-Version: 1.0
-References: <20250116140617.248830-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250116140617.248830-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 16 Jan 2025 18:27:45 +0200
-X-Gm-Features: AbW1kvYS3lzFoiT2z9JKA9m9SHU6z-Cbn1sJaj1avKzeC1XH3EuAjC6MkYhC3Z4
-Message-ID: <CAC_iWjKfvdBnWJuCwam7eERVwGXP=hZzCZ5WAp-bvQGe=BE7dA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] Makefile: let clean remove
- capsule_in.capsule*.efi-capsule
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,31 +82,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 Jan 2025 at 16:06, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Update the CLEAN_FILES list to remove capsule*.*.efi-capsule.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/Makefile b/Makefile
-> index 0500eb6e0a7..70d74e2e9a2 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -2218,7 +2218,7 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
->                itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
->                mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
->                idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
-> -              Test* capsule.*.efi-capsule capsule*.map
-> +              Test* capsule*.*.efi-capsule capsule*.map
->
->  # Directories & files removed with 'make mrproper'
->  MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
-> --
-> 2.47.1
->
+On 16/01/2025 at 13:13:53 -03, Fabio Estevam <festevam@gmail.com> wrote:
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Hi Miquel,
+>
+> On Sat, Jan 11, 2025 at 6:51=E2=80=AFAM Miquel Raynal <miquel.raynal@boot=
+lin.com> wrote:
+>
+>> I only worked on a custom design based on a i.MX8MP. We do have an EVK,
+>> but it has no display. I was asked to add a user, but in practice I
+>> cannot test that. I can enable the ldb in the EVK DTS or drop that
+>> patch.
+>
+> I wanted to have an in-tree user for the i.MX8MP LDB, but if you
+> cannot test, I suggest dropping the imx8mp-evk patch from v4.
+>
+> Hopefully, someone can enable LDB support for some other imx8mp-based boa=
+rd.
+
+Ok.
+
+> Besides that, there are some comments from Simon on the patch 05/13
+> that need to be addressed in v4.
+>
+> I hope v4 can be merged.
+
+Yes, I need to get into this again because he asked something similar in
+response to one of my previous versions, and I disagreed. I will
+reconsider his requests. Hopefully we'll settle at some point.
+
+Thanks,
+Miqu=C3=A8l
