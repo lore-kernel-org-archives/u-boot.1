@@ -4,79 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2993CC02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 07:18:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE60EC02188
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 07:29:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A5FA806FB;
-	Fri, 17 Jan 2025 08:18:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CE1678070C;
+	Fri, 17 Jan 2025 08:29:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BjSlObYD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YWkW5Eck";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 991BE80713; Fri, 17 Jan 2025 08:18:18 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id EFBAA80713; Fri, 17 Jan 2025 08:29:07 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08DF88069D
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 08:18:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A1BD480312
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 08:29:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e46ac799015so2485301276.0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 23:18:15 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aaeef97ff02so309997566b.1
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 23:29:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737098295; x=1737703095; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1cb6Dtj2ViXGuVhmsEc5ytFZ3Tej6GEDVAv1ybOivk4=;
- b=BjSlObYDba1Tr0Aa1ydXdeqRP/ekIILlCoxOe5I4k2tRkj8laJOJASS7DJ2XruqJUY
- C2ACv4DZN0Q0KRnV3bQRKXzP3C/FC1pNv2UX7jDw9OgV1VKVSskpQBY800Osy0pDhiZ7
- Ig+CJpg+zR0/ljFz3o2ClWvjmj0/5VeFt/in4nwITAAdLZoiF9XWkVIGV1ElzVGD7z5A
- sJ7nLa1vUjvSfUiFH0og/LXsA+igCVUWYAsJp+tP96D7SCtk2uvEEnFD1hJ/+CjbRaYe
- SVzfoQVLQDXGVsVf6rsyaHFQemqa8n/S4AapNVApx2FecmbJBs1gtZ8wu1U4uugsUKyw
- yXXg==
+ d=linaro.org; s=google; t=1737098945; x=1737703745; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KsdD74zLbBm1Ui6/4/7b+Kv5yjQuz4+ZxWkOJO+lcks=;
+ b=YWkW5EckUe7KpUg8+lSlZ+NgcYHFXTp6BiHlyIVJAELs3u+4H8oMhMRywW60ZwOKz1
+ J+7lWYUiIHDGDKVoh1LFqaVv9N5YSXRg9cb+JdS3bDirrGgxgDm77KvVrrajuqYpAJTN
+ DCpNEGMcimgjIQm1khWitlmRbSfurdAQlPE6+36WELB7k99QGLWZPprOIBNwRH3Oh/wW
+ FJM+y/8twrTacX9vQf0VLWtQvhFLif4mX40eHMc3kK4YjKmxCplXyagkP2rpoiYlz0g+
+ etEzzRyIM49P/ckC831z+t+an66/0yC0pFxbfHPjY7mUJUggcm6s0jjEYYIj7YqNw9cP
+ c6/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737098295; x=1737703095;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1737098945; x=1737703745;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1cb6Dtj2ViXGuVhmsEc5ytFZ3Tej6GEDVAv1ybOivk4=;
- b=EBgUEnoysImSd0XN/g9L+m9x9jMDKvhHDViCcXOFfpAc4v9tydNcTtYx2mGj16ZG74
- Ucl9PhFz7+EkSxDPwDTG0Vu2kVxOl+3DuIbvKpQA8rJDHeDusbNRu6pDBM0ok4VtMTiR
- FveYshMtqyFMG2+Tefsz9Kj8NrcFyxeffD2Fn4gmS3gVJMZlCvTenIfxFkPE38bpZuay
- On4hTGjHSOxg94xsdzp4Ep/+z9tgTROyMH+LWHt9CaiWuteNljsKU4+/giqVrSmt4M1K
- hgWuq89ojiHRAIA6pjav4TdoLsAWlTW5oCctfyh3OsalPCWZpQA/+jmdFDZUNjm8Khy8
- ZAFw==
+ bh=KsdD74zLbBm1Ui6/4/7b+Kv5yjQuz4+ZxWkOJO+lcks=;
+ b=lxhU5KRYPpu56tOy3xcmEtE7SypSgfivcLV2bRl3oNyy5i4CqyMd/zKJiO6V0E9l4j
+ 8hGUpllConip7/B7r7GSpQKHEkhSRJnZ42HRaYwsNej5r59u4emYBEbuFaK+0wjYhNsI
+ UD34B5LxeA+8eduHiV7Ow1HbYlYftbyyyraihic+q0Ai8lSiNFJHDYimH/kMROZazDX/
+ H1gkLwVPn/xB6XYb5tglcKG83I+GcgnMnMSEBAsLiaZqiIhVaqgQGN9/qh/iZJT5yDwQ
+ PcZxLb5pMVyZPFA+fYRu8HSfAfRnXeCO5P33QlBOIUjjWH7h/NAi0/+AsXMZk8Z9Vsiu
+ PplQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQbNQT3Z5n6FWUInImu8SSa9TVKSafwuXPZ2XkWgdGTVG7EWZ2t8y+V8fGURIgI1W4FBkCENE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyRdrxhkPbg/yhv4302g7Dfiv5GBxL363ct+XAIp067HE/moFp
- Ra/FofzKWo6fVjSB+DF4iabfFxl/i8w49pZCh1TqKZDXGVbfl2Qz3Yu2yvvYIA1tqJURVihNKf4
- p+Yqo3Uivm8diUP4Mgpg9K+u7+LD5rLt+i5yv0g==
-X-Gm-Gg: ASbGncs8TqXStOjc3lufdcsAHp+tH1b8HGX3EMak2qO8qRj0sAiYeZzONMjOEaJJ3+2
- S6YS/KwnqWY2ytAcEXsZ4I9kev6mt6L/dGeH2TA==
-X-Google-Smtp-Source: AGHT+IEIIU/wvDuwSx35KT+5qFpkXcifFweQVB8L1g0GQd3kqBz7pOU2qA9CYFMyyNY/4PHvSGQtq1ujwt11Du3/Ybk=
-X-Received: by 2002:a05:690c:6b86:b0:6f5:3944:c726 with SMTP id
- 00721157ae682-6f6eb6744f3mr11084357b3.11.1737098294889; Thu, 16 Jan 2025
- 23:18:14 -0800 (PST)
+ AJvYcCU1BeBfykfEZ1NseJWwZDuS96EU69HDhIV0TkihnBshB2T/ZbiQsjPc2HiBnTIKrd0p4Y/GNUc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxy6PwxHHPZaFeHkIGX3jE+EMM4LYlNwglPYT7zUB1xPLKB0gid
+ lNgZ2OQGm/aTnO88WKL9deEo1zbXdyAVPe64Gy6aYxbUXTG4oaTGVHEKk5OMFo8=
+X-Gm-Gg: ASbGncv6sMBwS5X9EDC5Y+Cfs+6n9klAId5Z+3XQsomhANR3t4JDzkVcCC1w8wgqstG
+ EHTbF0HYiLSmJ17NhB4QEPDj53cSv299ltfFC6dnwROOZieT0k3CXcAy0Bl/iH1UTc6dubrGMtU
+ f0sVV/ii3Gx9+1aOBMSnE2bhjx+mP0+e35gho6fhzqdRQG/+TTGTb6ard03CsLwF2mX92RsNE6k
+ gp5iKskIT8YzYxxJzwKIIh8lx4aoGfzzVuc25y8en+qme8yfOyAIcf55TiEUIlyRZBTK26Qe3g=
+X-Google-Smtp-Source: AGHT+IHwq2NvbH/5g4lON131bEhIr9XkoD6ph3+OohCTcx/b/4JAn3h1bRPL3XWMWyMPO57YzxeY4g==
+X-Received: by 2002:a17:906:d54d:b0:aae:bac6:6659 with SMTP id
+ a640c23a62f3a-ab38b190d52mr139239366b.7.1737098945089; 
+ Thu, 16 Jan 2025 23:29:05 -0800 (PST)
+Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab384ce2105sm125404866b.67.2025.01.16.23.29.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jan 2025 23:29:04 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH 0/2] Clarify DM_FLAG_PROBE_AFTER_BIND behaviour
+Date: Fri, 17 Jan 2025 08:28:55 +0100
+Message-Id: <20250117-clarify-probe-after-bind-v1-0-273f046ce5dd@linaro.org>
 MIME-Version: 1.0
-References: <20250116230130.3337-1-semen.protsenko@linaro.org>
- <20250116230130.3337-4-semen.protsenko@linaro.org>
-In-Reply-To: <20250116230130.3337-4-semen.protsenko@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 17 Jan 2025 09:17:39 +0200
-X-Gm-Features: AbW1kvbYpa0rZn-y55TQjf-L6eQIKI6TTGb_kDFHupVr7HB-Mzz4czCFQPvcN90
-Message-ID: <CAC_iWjL1BKUz6JzioC9aOckjGFNpTu2aZmqQS--9QkJTQKcUkw@mail.gmail.com>
-Subject: Re: [PATCH 3/7] configs: e850-96: Enable more EFI features
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALcGimcC/x3MQQqDMBBG4avIrB1IIjXqVaSLqH/aAYkykdIi3
+ t3Q5bd476QMFWQaqpMUH8mypQJbVzS/Q3qBZSkmZ9zDWOt5XoNK/PGu2wQO8YDyJGlh33Ye6Fv
+ TWEcl3xVRvv/1+LyuG7N+nFpqAAAA
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>
+Cc: Marek Vasut <marex@denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=896;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=MXgZrY6Hpy0u4U8v55fWqr+rG4rvMx9ktCSg9XCEQqw=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhvQutv0KrCunJslMco+oSKk4cSvWyedxvqmkwtI90fPiX
+ +TGHsnuKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABNJcWRkmKWw5VJC9uKXsrv2
+ 7empOOo+udAx+uuy102vmUTfqgZkuDMyTJovuDKN9b+g7jdBVqcFp01CX5jZN7roWoZ6Lm+a//B
+ 2IgA=
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,77 +110,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam
+In Simons series reworking autoprobe[1], a discussion came up about
+DM_FLAG_PROBE_AFTER_BIND, specifically that it wasn't very clear where
+this flag should be used.
 
-On Fri, 17 Jan 2025 at 01:01, Sam Protsenko <semen.protsenko@linaro.org> wrote:
->
-> The basic EFI support is already enabled by EFI_LOADER. Follow
-> SystemReady IR recommendations [1,2] for U-Boot and enable support for
-> more EFI features. That includes:
->
->   - CONFIG_CMD_BOOTEFI_SELFTEST: support for "bootefi selftest" command
+This series implements my suggestions made there to clarify the use of
+this flag, and fixup the two driver which erroneously apply it to their
+driver struct (this does nothing).
 
-I know that's on the Arm docs but not really a hard requirement. The
-tests will pass without it.
+[1]: https://lore.kernel.org/u-boot/20241120153642.861633-1-sjg@chromium.org/
 
->   - CONFIG_CMD_NVEDIT_EFI: support for "env -e" to explore EFI vars
->   - CONFIG_CMD_EFIDEBUG: support for "efidebug" command
->
-> Also enable RTC support:
->
->   - CONFIG_EFI_SET_TIME
->   - CONFIG_CMD_RTC
->   - CONFIG_DM_RTC
->   - CONFIG_RTC_EMULATION
->
-> [1] https://developer.arm.com/documentation/DUI1101/1-1/Configure-U-Boot-for-SystemReady
-> [2] https://developer.arm.com/documentation/DUI1101/1-1/Test-SystemReady-IR
->
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> ---
->  configs/e850-96_defconfig | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
-> index d287018ec632..1cae252175be 100644
-> --- a/configs/e850-96_defconfig
-> +++ b/configs/e850-96_defconfig
-> @@ -14,16 +14,22 @@ CONFIG_DEFAULT_DEVICE_TREE="exynos/exynos850-e850-96"
->  CONFIG_SYS_LOAD_ADDR=0x80000000
->  CONFIG_ENV_OFFSET_REDUND=0x10000
->  # CONFIG_PSCI_RESET is not set
-> +CONFIG_EFI_SET_TIME=y
->  CONFIG_ANDROID_BOOT_IMAGE=y
->  # CONFIG_AUTOBOOT is not set
->  CONFIG_DEFAULT_FDT_FILE="exynos850-e850-96.dtb"
->  # CONFIG_DISPLAY_CPUINFO is not set
->  CONFIG_HUSH_PARSER=y
-> +CONFIG_CMD_BOOTEFI_SELFTEST=y
->  CONFIG_CMD_ABOOTIMG=y
-> +CONFIG_CMD_NVEDIT_EFI=y
->  CONFIG_CMD_CLK=y
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_PART=y
-> +CONFIG_CMD_EFIDEBUG=y
-> +# CONFIG_CMD_DATE is not set
-> +CONFIG_CMD_RTC=y
->  CONFIG_CMD_TIME=y
->  CONFIG_CMD_RNG=y
->  CONFIG_PARTITION_TYPE_GUID=y
-> @@ -36,6 +42,8 @@ CONFIG_NO_NET=y
->  CONFIG_CLK_EXYNOS850=y
->  CONFIG_SUPPORT_EMMC_BOOT=y
->  CONFIG_MMC_DW=y
-> +CONFIG_DM_RTC=y
-> +CONFIG_RTC_EMULATION=y
->  CONFIG_SOC_SAMSUNG=y
->  CONFIG_EXYNOS_PMU=y
->  CONFIG_EXYNOS_USI=y
-> --
-> 2.39.5
->
+---
+Caleb Connolly (2):
+      dm: clarify DM_FLAG_PROBE_AFTER_BIND behaviour
+      drivers: remove bogus DM_FLAG_PROBE_AFTER_BIND flags
 
-Up to you, but I'd remove CONFIG_CMD_BOOTEFI_SELFTEST
-in any case
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+ doc/develop/driver-model/design.rst | 6 ++++--
+ drivers/mailbox/zynqmp-ipi.c        | 1 -
+ drivers/watchdog/da9063-wdt.c       | 1 -
+ include/dm/device.h                 | 5 ++++-
+ 4 files changed, 8 insertions(+), 5 deletions(-)
+---
+base-commit: e3f716fa2d58aadf53928475ee7e88eb41cb8031
+
+// Caleb (they/them)
+
