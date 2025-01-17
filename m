@@ -4,88 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 185AAC02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 07:04:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2993CC02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 07:18:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 723B98069D;
-	Fri, 17 Jan 2025 08:04:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A5FA806FB;
+	Fri, 17 Jan 2025 08:18:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LOH9NAZF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BjSlObYD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F698806FB; Fri, 17 Jan 2025 08:03:59 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 991BE80713; Fri, 17 Jan 2025 08:18:18 +0100 (CET)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED66C80312
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 08:03:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08DF88069D
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 08:18:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d9b6b034easo3616026a12.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 23:03:56 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-e46ac799015so2485301276.0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 23:18:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737097436; x=1737702236; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=V53o2TQbowLpvXuRbLTk4T64C8D+6/ERfyxJZnwFIC0=;
- b=LOH9NAZF1oiSTMwUdY0OWJhgMd4FTnDAtB3juO9ivjIga2mFETUcDQIykEkfiopQ+O
- ooC4+lhfnqY0jXfYqN7W1UvLmkGOAYgpnKOVgeu5dlN//uLvg3whIz1r3groY724gmOn
- Thl7dMbuxaWlyZb1sfw2n027D/aRc3eyVBco0cHM7EXVdMKG7GaGVvr4csIhKSNYnlup
- dom1NhglyTWlscyrYGn2Avyc3LgPplEt4Jpwn/wXB3a+Eb5utG6lm+yhkkUEaQgS4gEg
- OO8EliCV2M8OeIt9ia+qLQ8CnJ+ciSaV/uSnLakcnI9MbGHmxFcZQhDa87Fzy+8x2YL+
- FFhg==
+ d=linaro.org; s=google; t=1737098295; x=1737703095; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1cb6Dtj2ViXGuVhmsEc5ytFZ3Tej6GEDVAv1ybOivk4=;
+ b=BjSlObYDba1Tr0Aa1ydXdeqRP/ekIILlCoxOe5I4k2tRkj8laJOJASS7DJ2XruqJUY
+ C2ACv4DZN0Q0KRnV3bQRKXzP3C/FC1pNv2UX7jDw9OgV1VKVSskpQBY800Osy0pDhiZ7
+ Ig+CJpg+zR0/ljFz3o2ClWvjmj0/5VeFt/in4nwITAAdLZoiF9XWkVIGV1ElzVGD7z5A
+ sJ7nLa1vUjvSfUiFH0og/LXsA+igCVUWYAsJp+tP96D7SCtk2uvEEnFD1hJ/+CjbRaYe
+ SVzfoQVLQDXGVsVf6rsyaHFQemqa8n/S4AapNVApx2FecmbJBs1gtZ8wu1U4uugsUKyw
+ yXXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737097436; x=1737702236;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=V53o2TQbowLpvXuRbLTk4T64C8D+6/ERfyxJZnwFIC0=;
- b=DcAPnPY2CaQpGkyOp6dpMyQySIs4cVX2IPb8onjjS+Wyk0mmr0HxMmWeza6FFN+SaP
- ewNSWw7iYM3jRW0eMA1tnlxZqqUn6d2OAfFyyP1UUNdlDz5MOHfzc+JwAlbMjJvsHkms
- vWJ4N+FubP39f90R1rI9brGWR1XoxkjoeNHx0x826pXm/sIo1LfKsJkPHfymLq/w2Eq7
- gbrUkP+mVXnvC4vonDWYo9/cE+aZkKJ3E8lt+jkWUB+hPL72fg9yx3erBlvgOUeoOvVd
- +VZbYhwCzQfDAKlkq71ic2SO75vV8Ww4ukDvvUd2UI/E4rhxI+0hhVUFSj8oNmcHnLrZ
- IDRQ==
+ d=1e100.net; s=20230601; t=1737098295; x=1737703095;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1cb6Dtj2ViXGuVhmsEc5ytFZ3Tej6GEDVAv1ybOivk4=;
+ b=EBgUEnoysImSd0XN/g9L+m9x9jMDKvhHDViCcXOFfpAc4v9tydNcTtYx2mGj16ZG74
+ Ucl9PhFz7+EkSxDPwDTG0Vu2kVxOl+3DuIbvKpQA8rJDHeDusbNRu6pDBM0ok4VtMTiR
+ FveYshMtqyFMG2+Tefsz9Kj8NrcFyxeffD2Fn4gmS3gVJMZlCvTenIfxFkPE38bpZuay
+ On4hTGjHSOxg94xsdzp4Ep/+z9tgTROyMH+LWHt9CaiWuteNljsKU4+/giqVrSmt4M1K
+ hgWuq89ojiHRAIA6pjav4TdoLsAWlTW5oCctfyh3OsalPCWZpQA/+jmdFDZUNjm8Khy8
+ ZAFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUIUfAhyiuVbr55md2nfsp3LAPSfpllPngUefQmHv5xhMvFYrBGNK1KheCXz2dB1zlSRWWyFIM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFIqrB8swQ+MXJhf7FaGj8YsrupFrekXsmwSEVaMZnncs+9yQO
- S0OxXgUG/qTw4pHW0S45MHtf8QxF4o2HBIR5iy5TjOVCG8ZpV6LBS9iw8H9W6A7GmRO2UzAiexa
- L
-X-Gm-Gg: ASbGncuPTHYal5+MSZNsChNN2dmeb7l7HyTda+YclzrMSir2kqgEJH2GGbqWpchqVlX
- 4dM2+S8OhfmzumMq2p8kFrpsHO1gVojiqENB9Yu0qAOBGRXDilcmM4dpzQN9CXJ/d6JDzAeM0Ql
- t0/9BBBG+2A23mm57AEh79E1m6MKX1FVnimMlxO8f7YZZda3qWMhKMjWt2xTsdi/YAYU02Pp7hU
- aPi5bZQfQH+sMgghVI3Mcr6PLnkKNvpf52nOfgBRxsDyi9Z83q6HvZJV0vF2tXgqeF6zNbUZ+ft
- DJfGlkkPLMFyly2+m0zIKyizXM8vUD3yAYlCvxw=
-X-Google-Smtp-Source: AGHT+IE+FmbQyUk5oPA7uirDZEWrkDYOD0L41gJTNV0IEZxoB48cRtCRK/NvSOXEv1tK9Xt7ZXybaw==
-X-Received: by 2002:a05:6402:5206:b0:5d0:f904:c23d with SMTP id
- 4fb4d7f45d1cf-5db7db1d558mr1546259a12.28.1737097436286; 
- Thu, 16 Jan 2025 23:03:56 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5db7364258csm1037247a12.1.2025.01.16.23.03.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jan 2025 23:03:54 -0800 (PST)
-Message-ID: <f08b4610-b4d7-477a-8eda-709fdb67b5c0@linaro.org>
-Date: Fri, 17 Jan 2025 08:03:50 +0100
+ AJvYcCXQbNQT3Z5n6FWUInImu8SSa9TVKSafwuXPZ2XkWgdGTVG7EWZ2t8y+V8fGURIgI1W4FBkCENE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyRdrxhkPbg/yhv4302g7Dfiv5GBxL363ct+XAIp067HE/moFp
+ Ra/FofzKWo6fVjSB+DF4iabfFxl/i8w49pZCh1TqKZDXGVbfl2Qz3Yu2yvvYIA1tqJURVihNKf4
+ p+Yqo3Uivm8diUP4Mgpg9K+u7+LD5rLt+i5yv0g==
+X-Gm-Gg: ASbGncs8TqXStOjc3lufdcsAHp+tH1b8HGX3EMak2qO8qRj0sAiYeZzONMjOEaJJ3+2
+ S6YS/KwnqWY2ytAcEXsZ4I9kev6mt6L/dGeH2TA==
+X-Google-Smtp-Source: AGHT+IEIIU/wvDuwSx35KT+5qFpkXcifFweQVB8L1g0GQd3kqBz7pOU2qA9CYFMyyNY/4PHvSGQtq1ujwt11Du3/Ybk=
+X-Received: by 2002:a05:690c:6b86:b0:6f5:3944:c726 with SMTP id
+ 00721157ae682-6f6eb6744f3mr11084357b3.11.1737098294889; Thu, 16 Jan 2025
+ 23:18:14 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: dwc3: core: Fix timeout check
-Content-Language: en-US
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, ni@konsulko.com,
- mkorpershoek@baylibre.com, neil.armstrong@linaro.org, u-boot@lists.denx.de
-References: <20250115062044.3834433-1-quic_varada@quicinc.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250115062044.3834433-1-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250116230130.3337-1-semen.protsenko@linaro.org>
+ <20250116230130.3337-4-semen.protsenko@linaro.org>
+In-Reply-To: <20250116230130.3337-4-semen.protsenko@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 17 Jan 2025 09:17:39 +0200
+X-Gm-Features: AbW1kvbYpa0rZn-y55TQjf-L6eQIKI6TTGb_kDFHupVr7HB-Mzz4czCFQPvcN90
+Message-ID: <CAC_iWjL1BKUz6JzioC9aOckjGFNpTu2aZmqQS--9QkJTQKcUkw@mail.gmail.com>
+Subject: Re: [PATCH 3/7] configs: e850-96: Enable more EFI features
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,75 +93,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sam
 
+On Fri, 17 Jan 2025 at 01:01, Sam Protsenko <semen.protsenko@linaro.org> wrote:
+>
+> The basic EFI support is already enabled by EFI_LOADER. Follow
+> SystemReady IR recommendations [1,2] for U-Boot and enable support for
+> more EFI features. That includes:
+>
+>   - CONFIG_CMD_BOOTEFI_SELFTEST: support for "bootefi selftest" command
 
-On 15/01/2025 07:20, Varadarajan Narayanan wrote:
-> dwc3_core_init loops 'timeout' times to check if the IP block is out
-> of reset using 'while (timeout--)'. If there is some issue and
-> the block doesn't come out of reset, the loop will run till
-> 'timeout' becomes zero and the post decrement operator would set
-> timeout to 0xffffffff. Though the IP block is not out reset, the
-> subsequent if check 'if !timeout' would fail as timeout is not
-> equal to zero and the function proceeds with the initialization.
+I know that's on the Arm docs but not really a hard requirement. The
+tests will pass without it.
 
-Nice catch, this is a nasty one.
-> 
-> Use poll API instead to resolve this.
-> 
-> Tested-By: Varadarajan Narayanan <quic_varada@quicinc.com>
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+>   - CONFIG_CMD_NVEDIT_EFI: support for "env -e" to explore EFI vars
+>   - CONFIG_CMD_EFIDEBUG: support for "efidebug" command
+>
+> Also enable RTC support:
+>
+>   - CONFIG_EFI_SET_TIME
+>   - CONFIG_CMD_RTC
+>   - CONFIG_DM_RTC
+>   - CONFIG_RTC_EMULATION
+>
+> [1] https://developer.arm.com/documentation/DUI1101/1-1/Configure-U-Boot-for-SystemReady
+> [2] https://developer.arm.com/documentation/DUI1101/1-1/Test-SystemReady-IR
+>
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
-> v2: * Use poll API and remove the timeout variable based loop as
->       suggested by 'Marek Vasut'
->     * Drop 'Reviewed-by: Neil Armstrong' as the patch has taken
->       a very different shape
-> ---
->  drivers/usb/dwc3/core.c | 14 +++++---------
->  1 file changed, 5 insertions(+), 9 deletions(-)
-> 
-> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> index a35b8c2f64..847fa1f82c 100644
-> --- a/drivers/usb/dwc3/core.c
-> +++ b/drivers/usb/dwc3/core.c
-> @@ -23,6 +23,7 @@
->  #include <linux/delay.h>
->  #include <linux/dma-mapping.h>
->  #include <linux/err.h>
-> +#include <linux/iopoll.h>
->  #include <linux/ioport.h>
->  #include <dm.h>
->  #include <generic-phy.h>
-> @@ -587,7 +588,6 @@ static void dwc3_set_incr_burst_type(struct dwc3 *dwc)
->   */
->  static int dwc3_core_init(struct dwc3 *dwc)
->  {
-> -	unsigned long		timeout;
->  	u32			hwparams4 = dwc->hwparams.hwparams4;
->  	u32			reg;
->  	int			ret;
-> @@ -610,15 +610,11 @@ static int dwc3_core_init(struct dwc3 *dwc)
->  	}
->  
->  	/* issue device SoftReset too */
-> -	timeout = 5000;
->  	dwc3_writel(dwc->regs, DWC3_DCTL, DWC3_DCTL_CSFTRST);
-> -	while (timeout--) {
-> -		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
-> -		if (!(reg & DWC3_DCTL_CSFTRST))
-> -			break;
-> -	};
-> -
-> -	if (!timeout) {
-> +	ret = read_poll_timeout(dwc3_readl, reg,
-> +				!(reg & DWC3_DCTL_CSFTRST),
-> +				1, 5000, dwc->regs, DWC3_DCTL);
-> +	if (ret) {
->  		dev_err(dwc->dev, "Reset Timed Out\n");
->  		ret = -ETIMEDOUT;
->  		goto err0;
+>  configs/e850-96_defconfig | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
+> index d287018ec632..1cae252175be 100644
+> --- a/configs/e850-96_defconfig
+> +++ b/configs/e850-96_defconfig
+> @@ -14,16 +14,22 @@ CONFIG_DEFAULT_DEVICE_TREE="exynos/exynos850-e850-96"
+>  CONFIG_SYS_LOAD_ADDR=0x80000000
+>  CONFIG_ENV_OFFSET_REDUND=0x10000
+>  # CONFIG_PSCI_RESET is not set
+> +CONFIG_EFI_SET_TIME=y
+>  CONFIG_ANDROID_BOOT_IMAGE=y
+>  # CONFIG_AUTOBOOT is not set
+>  CONFIG_DEFAULT_FDT_FILE="exynos850-e850-96.dtb"
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  CONFIG_HUSH_PARSER=y
+> +CONFIG_CMD_BOOTEFI_SELFTEST=y
+>  CONFIG_CMD_ABOOTIMG=y
+> +CONFIG_CMD_NVEDIT_EFI=y
+>  CONFIG_CMD_CLK=y
+>  CONFIG_CMD_GPT=y
+>  CONFIG_CMD_MMC=y
+>  CONFIG_CMD_PART=y
+> +CONFIG_CMD_EFIDEBUG=y
+> +# CONFIG_CMD_DATE is not set
+> +CONFIG_CMD_RTC=y
+>  CONFIG_CMD_TIME=y
+>  CONFIG_CMD_RNG=y
+>  CONFIG_PARTITION_TYPE_GUID=y
+> @@ -36,6 +42,8 @@ CONFIG_NO_NET=y
+>  CONFIG_CLK_EXYNOS850=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_MMC_DW=y
+> +CONFIG_DM_RTC=y
+> +CONFIG_RTC_EMULATION=y
+>  CONFIG_SOC_SAMSUNG=y
+>  CONFIG_EXYNOS_PMU=y
+>  CONFIG_EXYNOS_USI=y
+> --
+> 2.39.5
+>
 
--- 
-// Caleb (they/them)
-
+Up to you, but I'd remove CONFIG_CMD_BOOTEFI_SELFTEST
+in any case
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
