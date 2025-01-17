@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70692C02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 01:47:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AFEFC02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 01:47:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AECB80762;
+	by phobos.denx.de (Postfix) with ESMTP id B386C80792;
 	Fri, 17 Jan 2025 02:47:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4319F8073F; Fri, 17 Jan 2025 02:47:13 +0100 (CET)
+ id E1A0680312; Fri, 17 Jan 2025 02:47:14 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id CA13D8073F
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 02:47:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 7D2B880755
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 02:47:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A6463175A;
- Thu, 16 Jan 2025 17:47:38 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 568CB2050;
+ Thu, 16 Jan 2025 17:47:40 -0800 (PST)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B90F73F673;
- Thu, 16 Jan 2025 17:47:08 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 844863F673;
+ Thu, 16 Jan 2025 17:47:10 -0800 (PST)
 From: Andre Przywara <andre.przywara@arm.com>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: Tom Rini <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>,
  Cody Eksal <masterr3c0rd@epochal.quest>, Simon Glass <sjg@chromium.org>,
  linux-sunxi@lists.linux.dev, Parthiban <parthiban@linumiz.com>
-Subject: [PATCH 3/8] sunxi: H616: DRAM: rename Kconfig parameters to be more
- generic
-Date: Fri, 17 Jan 2025 01:45:32 +0000
-Message-ID: <20250117014537.22513-4-andre.przywara@arm.com>
+Subject: [PATCH 4/8] clk: sunxi: Add support for the A100/A133 CCU
+Date: Fri, 17 Jan 2025 01:45:33 +0000
+Message-ID: <20250117014537.22513-5-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20250117014537.22513-1-andre.przywara@arm.com>
 References: <20250117014537.22513-1-andre.przywara@arm.com>
@@ -58,382 +57,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The H616 DRAM controller requires some board specific parameters, which
-we declare in Kconfig, let each board specify in their defconfig, and
-then use in the DRAM init code.
+The Allwinner A100 SoC has been around for a while, and has now seemingly
+been replaced with its close sibling A133.
 
-Other DRAM controllers now require a very similar, if not identical
-parameter set, with so far the same parameter names used.
-
-To help keep the Kconfig file at bay, rename the existing parameter
-names to drop the H616_ part in there, to make them more naturally
-reusable for other SoCs.
-
-No functional change, just a rename.
+Add support for the CCU, as far as used by U-Boot proper. Linux has some
+basic (clock and pinctrl) support for a while, so we can already use the
+existing binding headers.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- arch/arm/mach-sunxi/Kconfig            | 58 +++++++++++++-------------
- arch/arm/mach-sunxi/dram_sun50i_h616.c | 26 ++++++------
- configs/anbernic_rg35xx_h700_defconfig | 20 ++++-----
- configs/orangepi_zero2_defconfig       |  8 ++--
- configs/orangepi_zero2w_defconfig      | 16 +++----
- configs/orangepi_zero3_defconfig       | 16 +++----
- configs/tanix_tx1_defconfig            | 16 +++----
- configs/transpeed-8k618-t_defconfig    | 14 +++----
- configs/x96_mate_defconfig             | 14 +++----
- 9 files changed, 93 insertions(+), 95 deletions(-)
+ arch/arm/mach-sunxi/Kconfig   |   3 +
+ drivers/clk/sunxi/Kconfig     |   7 +++
+ drivers/clk/sunxi/Makefile    |   1 +
+ drivers/clk/sunxi/clk_a100.c  | 102 ++++++++++++++++++++++++++++++++++
+ drivers/clk/sunxi/clk_sunxi.c |   5 ++
+ 5 files changed, 118 insertions(+)
+ create mode 100644 drivers/clk/sunxi/clk_a100.c
 
 diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index f941bf4a493..ba1b1541437 100644
+index ba1b1541437..78fd74f3f28 100644
 --- a/arch/arm/mach-sunxi/Kconfig
 +++ b/arch/arm/mach-sunxi/Kconfig
-@@ -52,78 +52,76 @@ config DRAM_SUN50I_H616
- 	  like H616.
+@@ -457,6 +457,9 @@ config MACH_SUN50I_H616
+ 	select SUN50I_GEN_H6
+ 	imply OF_UPSTREAM
  
- if DRAM_SUN50I_H616
--config DRAM_SUN50I_H616_DX_ODT
--	hex "H616 DRAM DX ODT parameter"
-+config DRAM_SUNXI_DX_ODT
-+	hex "DRAM DX ODT parameter"
- 	help
- 	  DX ODT value from vendor DRAM settings.
- 
--config DRAM_SUN50I_H616_DX_DRI
--	hex "H616 DRAM DX DRI parameter"
-+config DRAM_SUNXI_DX_DRI
-+	hex "DRAM DX DRI parameter"
- 	help
- 	  DX DRI value from vendor DRAM settings.
- 
--config DRAM_SUN50I_H616_CA_DRI
--	hex "H616 DRAM CA DRI parameter"
-+config DRAM_SUNXI_CA_DRI
-+	hex "DRAM CA DRI parameter"
- 	help
- 	  CA DRI value from vendor DRAM settings.
- 
--config DRAM_SUN50I_H616_ODT_EN
--	hex "H616 DRAM ODT EN parameter"
-+config DRAM_SUNXI_ODT_EN
-+	hex "DRAM ODT EN parameter"
- 	default 0x1
- 	help
- 	  ODT EN value from vendor DRAM settings.
- 
--config DRAM_SUN50I_H616_TPR0
--	hex "H616 DRAM TPR0 parameter"
-+config DRAM_SUNXI_TPR0
-+	hex "DRAM TPR0 parameter"
- 	default 0x0
- 	help
- 	  TPR0 value from vendor DRAM settings.
- 
--config DRAM_SUN50I_H616_TPR2
--	hex "H616 DRAM TPR2 parameter"
-+config DRAM_SUNXI_TPR2
-+	hex "DRAM TPR2 parameter"
- 	default 0x0
- 	help
- 	  TPR2 value from vendor DRAM settings.
- 
--config DRAM_SUN50I_H616_TPR6
--	hex "H616 DRAM TPR6 parameter"
-+config DRAM_SUNXI_TPR6
-+	hex "DRAM TPR6 parameter"
- 	default 0x3300c080
- 	help
- 	  TPR6 value from vendor DRAM settings.
- 
--config DRAM_SUN50I_H616_TPR10
--	hex "H616 DRAM TPR10 parameter"
-+config DRAM_SUNXI_TPR10
-+	hex "DRAM TPR10 parameter"
- 	help
- 	  TPR10 value from vendor DRAM settings. It tells which features
- 	  should be configured, like write leveling, read calibration, etc.
- 
--config DRAM_SUN50I_H616_TPR11
--	hex "H616 DRAM TPR11 parameter"
-+config DRAM_SUNXI_TPR11
-+	hex "DRAM TPR11 parameter"
- 	default 0x0
- 	help
- 	  TPR11 value from vendor DRAM settings.
- 
--config DRAM_SUN50I_H616_TPR12
--	hex "H616 DRAM TPR12 parameter"
-+config DRAM_SUNXI_TPR12
-+	hex "DRAM TPR12 parameter"
- 	default 0x0
- 	help
- 	  TPR12 value from vendor DRAM settings.
- 
- choice
--	prompt "H616 PHY pin mapping selection"
--	default DRAM_SUN50I_H616_PHY_ADDR_MAP_0
-+	prompt "DRAM PHY pin mapping selection"
-+	default DRAM_SUNXI_PHY_ADDR_MAP_0
- 
--config DRAM_SUN50I_H616_PHY_ADDR_MAP_0
--	bool "H313/H616/H618"
-+config DRAM_SUNXI_PHY_ADDR_MAP_0
-+	bool "DRAM PHY address map 0"
- 	help
--	  The pin mapping selection used by the H313, H616, H618, and
--	  possibly other dies which use the H616 DRAM controller.
-+	  This pin mapping selection should be used by the H313, H616, H618.
- 
--config DRAM_SUN50I_H616_PHY_ADDR_MAP_1
--	bool "H700"
-+config DRAM_SUNXI_PHY_ADDR_MAP_1
-+	bool "DRAM PHY address map 1"
- 	help
--	  The pin mapping selection used by the H700 and possibly other
--	  dies which use the H616 DRAM controller.
-+	  This pin mapping selection should be used by the H700.
++config MACH_SUN50I_A133
++	bool "sun50i (Allwinner A133)"
++
  endchoice
- endif
  
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index 863c4f1d7a8..b3554cc64bf 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -226,7 +226,7 @@ static void mctl_set_addrmap(const struct dram_config *config)
- 	mctl_ctl->addrmap[8] = 0x3F3F;
- }
+ # The sun8i SoCs share a lot, this helps to avoid a lot of "if A23 || A33"
+diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
+index 8bdc0944896..f44db76c182 100644
+--- a/drivers/clk/sunxi/Kconfig
++++ b/drivers/clk/sunxi/Kconfig
+@@ -122,4 +122,11 @@ config CLK_SUN50I_A64
+ 	  This enables common clock driver support for platforms based
+ 	  on Allwinner A64 SoC.
  
--#ifdef CONFIG_DRAM_SUN50I_H616_PHY_ADDR_MAP_1
-+#ifdef CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1
- static const u8 phy_init[] = {
- #ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
- 	0x08, 0x02, 0x12, 0x05, 0x15, 0x17, 0x18, 0x0b,
-@@ -245,7 +245,7 @@ static const u8 phy_init[] = {
- 	0x18, 0x04, 0x1a
++config CLK_SUN50I_A100
++	bool "Clock driver for Allwinner A100/A133"
++	default MACH_SUN50I_A133
++	help
++	  This enables common clock driver support for platforms based
++	  on Allwinner A100/A133 SoCs.
++
+ endif # CLK_SUNXI
+diff --git a/drivers/clk/sunxi/Makefile b/drivers/clk/sunxi/Makefile
+index 90a277489dc..7ff71c756e0 100644
+--- a/drivers/clk/sunxi/Makefile
++++ b/drivers/clk/sunxi/Makefile
+@@ -24,3 +24,4 @@ obj-$(CONFIG_CLK_SUN50I_H6) += clk_h6.o
+ obj-$(CONFIG_CLK_SUN50I_H6_R) += clk_h6_r.o
+ obj-$(CONFIG_CLK_SUN50I_H616) += clk_h616.o
+ obj-$(CONFIG_CLK_SUN50I_A64) += clk_a64.o
++obj-$(CONFIG_CLK_SUN50I_A100) += clk_a100.o
+diff --git a/drivers/clk/sunxi/clk_a100.c b/drivers/clk/sunxi/clk_a100.c
+new file mode 100644
+index 00000000000..b641feb8612
+--- /dev/null
++++ b/drivers/clk/sunxi/clk_a100.c
+@@ -0,0 +1,102 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2023-2024 Arm Ltd.
++ */
++
++#include <clk/sunxi.h>
++#include <dt-bindings/clock/sun50i-a100-ccu.h>
++#include <dt-bindings/reset/sun50i-a100-ccu.h>
++#include <linux/bitops.h>
++
++static struct ccu_clk_gate a100_gates[] = {
++	[CLK_PLL_PERIPH0]	= GATE(0x020, BIT(31) | BIT(27)),
++
++	[CLK_APB1]		= GATE_DUMMY,
++
++	[CLK_DE]		= GATE(0x600, BIT(31)),
++	[CLK_BUS_DE]		= GATE(0x60c, BIT(0)),
++
++	[CLK_BUS_MMC0]		= GATE(0x84c, BIT(0)),
++	[CLK_BUS_MMC1]		= GATE(0x84c, BIT(1)),
++	[CLK_BUS_MMC2]		= GATE(0x84c, BIT(2)),
++
++	[CLK_BUS_UART0]		= GATE(0x90c, BIT(0)),
++	[CLK_BUS_UART1]		= GATE(0x90c, BIT(1)),
++	[CLK_BUS_UART2]		= GATE(0x90c, BIT(2)),
++	[CLK_BUS_UART3]		= GATE(0x90c, BIT(3)),
++	[CLK_BUS_UART4]		= GATE(0x90c, BIT(4)),
++
++	[CLK_BUS_I2C0]		= GATE(0x91c, BIT(0)),
++	[CLK_BUS_I2C1]		= GATE(0x91c, BIT(1)),
++	[CLK_BUS_I2C2]		= GATE(0x91c, BIT(2)),
++	[CLK_BUS_I2C3]		= GATE(0x91c, BIT(3)),
++
++	[CLK_SPI0]		= GATE(0x940, BIT(31)),
++	[CLK_SPI1]		= GATE(0x944, BIT(31)),
++	[CLK_SPI2]		= GATE(0x948, BIT(31)),
++
++	[CLK_BUS_SPI0]		= GATE(0x96c, BIT(0)),
++	[CLK_BUS_SPI1]		= GATE(0x96c, BIT(1)),
++	[CLK_BUS_SPI2]		= GATE(0x96c, BIT(2)),
++
++	[CLK_BUS_EMAC]		= GATE(0x97c, BIT(0)),
++
++	[CLK_USB_PHY0]		= GATE(0xa70, BIT(29)),
++	[CLK_USB_OHCI0]		= GATE(0xa70, BIT(31)),
++
++	[CLK_USB_PHY1]		= GATE(0xa74, BIT(29)),
++	[CLK_USB_OHCI1]		= GATE(0xa74, BIT(31)),
++
++	[CLK_BUS_OHCI0]		= GATE(0xa8c, BIT(0)),
++	[CLK_BUS_OHCI1]		= GATE(0xa8c, BIT(1)),
++	[CLK_BUS_EHCI0]		= GATE(0xa8c, BIT(4)),
++	[CLK_BUS_EHCI1]		= GATE(0xa8c, BIT(5)),
++	[CLK_BUS_OTG]		= GATE(0xa8c, BIT(8)),
++
++	[CLK_TCON_LCD]		= GATE(0xb60, BIT(31)),
++	[CLK_BUS_TCON_LCD]	= GATE(0xb7c, BIT(0)),
++};
++
++static struct ccu_reset a100_resets[] = {
++	[RST_BUS_DE]		= RESET(0x60c, BIT(16)),
++
++	[RST_BUS_MMC0]		= RESET(0x84c, BIT(16)),
++	[RST_BUS_MMC1]		= RESET(0x84c, BIT(17)),
++	[RST_BUS_MMC2]		= RESET(0x84c, BIT(18)),
++
++	[RST_BUS_UART0]		= RESET(0x90c, BIT(16)),
++	[RST_BUS_UART1]		= RESET(0x90c, BIT(17)),
++	[RST_BUS_UART2]		= RESET(0x90c, BIT(18)),
++	[RST_BUS_UART3]		= RESET(0x90c, BIT(19)),
++	[RST_BUS_UART4]		= RESET(0x90c, BIT(20)),
++
++	[RST_BUS_I2C0]		= RESET(0x91c, BIT(16)),
++	[RST_BUS_I2C1]		= RESET(0x91c, BIT(17)),
++	[RST_BUS_I2C2]		= RESET(0x91c, BIT(18)),
++	[RST_BUS_I2C3]		= RESET(0x91c, BIT(19)),
++
++	[RST_BUS_SPI0]		= RESET(0x96c, BIT(16)),
++	[RST_BUS_SPI1]		= RESET(0x96c, BIT(17)),
++	[RST_BUS_SPI2]		= RESET(0x96c, BIT(18)),
++
++	[RST_BUS_EMAC]		= RESET(0x97c, BIT(16)),
++
++	[RST_USB_PHY0]		= RESET(0xa70, BIT(30)),
++
++	[RST_USB_PHY1]		= RESET(0xa74, BIT(30)),
++
++	[RST_BUS_OHCI0]		= RESET(0xa8c, BIT(16)),
++	[RST_BUS_OHCI1]		= RESET(0xa8c, BIT(17)),
++	[RST_BUS_EHCI0]		= RESET(0xa8c, BIT(20)),
++	[RST_BUS_EHCI1]		= RESET(0xa8c, BIT(21)),
++	[RST_BUS_OTG]		= RESET(0xa8c, BIT(24)),
++
++	[RST_BUS_TCON_LCD]	= RESET(0xb7c, BIT(16)),
++};
++
++const struct ccu_desc a100_ccu_desc = {
++	.gates = a100_gates,
++	.resets = a100_resets,
++	.num_gates = ARRAY_SIZE(a100_gates),
++	.num_resets = ARRAY_SIZE(a100_resets),
++};
+diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
+index 2ef4f45dacf..e0765cbc6dc 100644
+--- a/drivers/clk/sunxi/clk_sunxi.c
++++ b/drivers/clk/sunxi/clk_sunxi.c
+@@ -122,6 +122,7 @@ extern const struct ccu_desc f1c100s_ccu_desc;
+ extern const struct ccu_desc h3_ccu_desc;
+ extern const struct ccu_desc h6_ccu_desc;
+ extern const struct ccu_desc h616_ccu_desc;
++extern const struct ccu_desc a100_ccu_desc;
+ extern const struct ccu_desc h6_r_ccu_desc;
+ extern const struct ccu_desc r40_ccu_desc;
+ extern const struct ccu_desc v3s_ccu_desc;
+@@ -215,6 +216,10 @@ static const struct udevice_id sunxi_clk_ids[] = {
+ 	{ .compatible = "allwinner,sun50i-h616-r-ccu",
+ 	  .data = (ulong)&h6_r_ccu_desc },
  #endif
- };
--#else /* CONFIG_DRAM_SUN50I_H616_PHY_ADDR_MAP_0 */
-+#else /* CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_0 */
- static const u8 phy_init[] = {
- #ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
- 	0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
-@@ -264,7 +264,7 @@ static const u8 phy_init[] = {
- 	0x18, 0x03, 0x1a
- #endif
- };
--#endif /* CONFIG_DRAM_SUN50I_H616_PHY_ADDR_MAP_0 */
-+#endif /* CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_0 */
- #define MASK_BYTE(reg, nr) (((reg) >> ((nr) * 8)) & 0x1f)
- static void mctl_phy_configure_odt(const struct dram_para *para)
- {
-@@ -1409,16 +1409,16 @@ static const struct dram_para para = {
- #elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
- 	.type = SUNXI_DRAM_TYPE_LPDDR4,
- #endif
--	.dx_odt = CONFIG_DRAM_SUN50I_H616_DX_ODT,
--	.dx_dri = CONFIG_DRAM_SUN50I_H616_DX_DRI,
--	.ca_dri = CONFIG_DRAM_SUN50I_H616_CA_DRI,
--	.odt_en = CONFIG_DRAM_SUN50I_H616_ODT_EN,
--	.tpr0 = CONFIG_DRAM_SUN50I_H616_TPR0,
--	.tpr2 = CONFIG_DRAM_SUN50I_H616_TPR2,
--	.tpr6 = CONFIG_DRAM_SUN50I_H616_TPR6,
--	.tpr10 = CONFIG_DRAM_SUN50I_H616_TPR10,
--	.tpr11 = CONFIG_DRAM_SUN50I_H616_TPR11,
--	.tpr12 = CONFIG_DRAM_SUN50I_H616_TPR12,
-+	.dx_odt = CONFIG_DRAM_SUNXI_DX_ODT,
-+	.dx_dri = CONFIG_DRAM_SUNXI_DX_DRI,
-+	.ca_dri = CONFIG_DRAM_SUNXI_CA_DRI,
-+	.odt_en = CONFIG_DRAM_SUNXI_ODT_EN,
-+	.tpr0 = CONFIG_DRAM_SUNXI_TPR0,
-+	.tpr2 = CONFIG_DRAM_SUNXI_TPR2,
-+	.tpr6 = CONFIG_DRAM_SUNXI_TPR6,
-+	.tpr10 = CONFIG_DRAM_SUNXI_TPR10,
-+	.tpr11 = CONFIG_DRAM_SUNXI_TPR11,
-+	.tpr12 = CONFIG_DRAM_SUNXI_TPR12,
- };
- 
- unsigned long sunxi_dram_init(void)
-diff --git a/configs/anbernic_rg35xx_h700_defconfig b/configs/anbernic_rg35xx_h700_defconfig
-index cd3d6bfba06..c5c40a158d3 100644
---- a/configs/anbernic_rg35xx_h700_defconfig
-+++ b/configs/anbernic_rg35xx_h700_defconfig
-@@ -2,16 +2,16 @@ CONFIG_ARM=y
- CONFIG_ARCH_SUNXI=y
- CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h700-anbernic-rg35xx-2024"
- CONFIG_SPL=y
--CONFIG_DRAM_SUN50I_H616_DX_ODT=0x08080808
--CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
--CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
--CONFIG_DRAM_SUN50I_H616_ODT_EN=0x7887bbbb
--CONFIG_DRAM_SUN50I_H616_TPR2=0x1
--CONFIG_DRAM_SUN50I_H616_TPR6=0x40808080
--CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6633
--CONFIG_DRAM_SUN50I_H616_TPR11=0x1b1f1e1c
--CONFIG_DRAM_SUN50I_H616_TPR12=0x06060606
--CONFIG_DRAM_SUN50I_H616_PHY_ADDR_MAP_1=y
-+CONFIG_DRAM_SUNXI_DX_ODT=0x08080808
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUNXI_ODT_EN=0x7887bbbb
-+CONFIG_DRAM_SUNXI_TPR2=0x1
-+CONFIG_DRAM_SUNXI_TPR6=0x40808080
-+CONFIG_DRAM_SUNXI_TPR10=0x402f6633
-+CONFIG_DRAM_SUNXI_TPR11=0x1b1f1e1c
-+CONFIG_DRAM_SUNXI_TPR12=0x06060606
-+CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1=y
- CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_LPDDR4=y
- CONFIG_DRAM_CLK=672
-diff --git a/configs/orangepi_zero2_defconfig b/configs/orangepi_zero2_defconfig
-index f60ee7375da..f2265ea5179 100644
---- a/configs/orangepi_zero2_defconfig
-+++ b/configs/orangepi_zero2_defconfig
-@@ -2,10 +2,10 @@ CONFIG_ARM=y
- CONFIG_ARCH_SUNXI=y
- CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h616-orangepi-zero2"
- CONFIG_SPL=y
--CONFIG_DRAM_SUN50I_H616_DX_ODT=0x08080808
--CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
--CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
--CONFIG_DRAM_SUN50I_H616_TPR10=0xf83438
-+CONFIG_DRAM_SUNXI_DX_ODT=0x08080808
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUNXI_TPR10=0xf83438
- CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
- CONFIG_USB1_VBUS_PIN="PC16"
-diff --git a/configs/orangepi_zero2w_defconfig b/configs/orangepi_zero2w_defconfig
-index cbb702d85b3..ec030f32403 100644
---- a/configs/orangepi_zero2w_defconfig
-+++ b/configs/orangepi_zero2w_defconfig
-@@ -2,14 +2,14 @@ CONFIG_ARM=y
- CONFIG_ARCH_SUNXI=y
- CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h618-orangepi-zero2w"
- CONFIG_SPL=y
--CONFIG_DRAM_SUN50I_H616_DX_ODT=0x07070707
--CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
--CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
--CONFIG_DRAM_SUN50I_H616_ODT_EN=0xaaaaeeee
--CONFIG_DRAM_SUN50I_H616_TPR6=0x48808080
--CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6663
--CONFIG_DRAM_SUN50I_H616_TPR11=0x26262524
--CONFIG_DRAM_SUN50I_H616_TPR12=0x100f100f
-+CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUNXI_ODT_EN=0xaaaaeeee
-+CONFIG_DRAM_SUNXI_TPR6=0x48808080
-+CONFIG_DRAM_SUNXI_TPR10=0x402f6663
-+CONFIG_DRAM_SUNXI_TPR11=0x26262524
-+CONFIG_DRAM_SUNXI_TPR12=0x100f100f
- CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_LPDDR4=y
- CONFIG_DRAM_CLK=792
-diff --git a/configs/orangepi_zero3_defconfig b/configs/orangepi_zero3_defconfig
-index 4e9b0ec4d33..63f9a735378 100644
---- a/configs/orangepi_zero3_defconfig
-+++ b/configs/orangepi_zero3_defconfig
-@@ -2,14 +2,14 @@ CONFIG_ARM=y
- CONFIG_ARCH_SUNXI=y
- CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h618-orangepi-zero3"
- CONFIG_SPL=y
--CONFIG_DRAM_SUN50I_H616_DX_ODT=0x07070707
--CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
--CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
--CONFIG_DRAM_SUN50I_H616_ODT_EN=0xaaaaeeee
--CONFIG_DRAM_SUN50I_H616_TPR6=0x44000000
--CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6663
--CONFIG_DRAM_SUN50I_H616_TPR11=0x24242624
--CONFIG_DRAM_SUN50I_H616_TPR12=0x0f0f100f
-+CONFIG_DRAM_SUNXI_DX_ODT=0x07070707
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUNXI_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUNXI_ODT_EN=0xaaaaeeee
-+CONFIG_DRAM_SUNXI_TPR6=0x44000000
-+CONFIG_DRAM_SUNXI_TPR10=0x402f6663
-+CONFIG_DRAM_SUNXI_TPR11=0x24242624
-+CONFIG_DRAM_SUNXI_TPR12=0x0f0f100f
- CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_LPDDR4=y
- CONFIG_DRAM_CLK=792
-diff --git a/configs/tanix_tx1_defconfig b/configs/tanix_tx1_defconfig
-index 706306b1444..28cf9513c30 100644
---- a/configs/tanix_tx1_defconfig
-+++ b/configs/tanix_tx1_defconfig
-@@ -2,14 +2,14 @@ CONFIG_ARM=y
- CONFIG_ARCH_SUNXI=y
- CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h313-tanix-tx1"
- CONFIG_SPL=y
--CONFIG_DRAM_SUN50I_H616_DX_ODT=0x06060606
--CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0d0d0d0d
--CONFIG_DRAM_SUN50I_H616_CA_DRI=0x1919
--CONFIG_DRAM_SUN50I_H616_ODT_EN=0x9988eeee
--CONFIG_DRAM_SUN50I_H616_TPR6=0x2fb08080
--CONFIG_DRAM_SUN50I_H616_TPR10=0x402f4469
--CONFIG_DRAM_SUN50I_H616_TPR11=0x0e0f0d0d
--CONFIG_DRAM_SUN50I_H616_TPR12=0x11131213
-+CONFIG_DRAM_SUNXI_DX_ODT=0x06060606
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0d0d0d0d
-+CONFIG_DRAM_SUNXI_CA_DRI=0x1919
-+CONFIG_DRAM_SUNXI_ODT_EN=0x9988eeee
-+CONFIG_DRAM_SUNXI_TPR6=0x2fb08080
-+CONFIG_DRAM_SUNXI_TPR10=0x402f4469
-+CONFIG_DRAM_SUNXI_TPR11=0x0e0f0d0d
-+CONFIG_DRAM_SUNXI_TPR12=0x11131213
- CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_LPDDR3=y
- CONFIG_R_I2C_ENABLE=y
-diff --git a/configs/transpeed-8k618-t_defconfig b/configs/transpeed-8k618-t_defconfig
-index 1d5a0c264b3..221614762e8 100644
---- a/configs/transpeed-8k618-t_defconfig
-+++ b/configs/transpeed-8k618-t_defconfig
-@@ -2,13 +2,13 @@ CONFIG_ARM=y
- CONFIG_ARCH_SUNXI=y
- CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h618-transpeed-8k618-t"
- CONFIG_SPL=y
--CONFIG_DRAM_SUN50I_H616_DX_ODT=0x03030303
--CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
--CONFIG_DRAM_SUN50I_H616_CA_DRI=0x1f12
--CONFIG_DRAM_SUN50I_H616_TPR0=0xc0001002
--CONFIG_DRAM_SUN50I_H616_TPR10=0x2f1107
--CONFIG_DRAM_SUN50I_H616_TPR11=0xddddcccc
--CONFIG_DRAM_SUN50I_H616_TPR12=0xeddc7665
-+CONFIG_DRAM_SUNXI_DX_ODT=0x03030303
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUNXI_CA_DRI=0x1f12
-+CONFIG_DRAM_SUNXI_TPR0=0xc0001002
-+CONFIG_DRAM_SUNXI_TPR10=0x2f1107
-+CONFIG_DRAM_SUNXI_TPR11=0xddddcccc
-+CONFIG_DRAM_SUNXI_TPR12=0xeddc7665
- CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
- CONFIG_DRAM_CLK=648
-diff --git a/configs/x96_mate_defconfig b/configs/x96_mate_defconfig
-index f876cc91f6e..bd9b611d6f5 100644
---- a/configs/x96_mate_defconfig
-+++ b/configs/x96_mate_defconfig
-@@ -2,13 +2,13 @@ CONFIG_ARM=y
- CONFIG_ARCH_SUNXI=y
- CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h616-x96-mate"
- CONFIG_SPL=y
--CONFIG_DRAM_SUN50I_H616_DX_ODT=0x03030303
--CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
--CONFIG_DRAM_SUN50I_H616_CA_DRI=0x1c12
--CONFIG_DRAM_SUN50I_H616_TPR0=0xc0000c05
--CONFIG_DRAM_SUN50I_H616_TPR10=0x2f0007
--CONFIG_DRAM_SUN50I_H616_TPR11=0xffffdddd
--CONFIG_DRAM_SUN50I_H616_TPR12=0xfedf7557
-+CONFIG_DRAM_SUNXI_DX_ODT=0x03030303
-+CONFIG_DRAM_SUNXI_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUNXI_CA_DRI=0x1c12
-+CONFIG_DRAM_SUNXI_TPR0=0xc0000c05
-+CONFIG_DRAM_SUNXI_TPR10=0x2f0007
-+CONFIG_DRAM_SUNXI_TPR11=0xffffdddd
-+CONFIG_DRAM_SUNXI_TPR12=0xfedf7557
- CONFIG_MACH_SUN50I_H616=y
- CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
- CONFIG_R_I2C_ENABLE=y
++#ifdef CONFIG_CLK_SUN50I_A100
++	{ .compatible = "allwinner,sun50i-a100-ccu",
++	  .data = (ulong)&a100_ccu_desc },
++#endif
+ #ifdef CONFIG_CLK_SUNIV_F1C100S
+ 	{ .compatible = "allwinner,suniv-f1c100s-ccu",
+ 	  .data = (ulong)&f1c100s_ccu_desc },
 -- 
 2.46.2
 
