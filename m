@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0936BC02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 14:13:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C0FC02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 14:13:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D211F8070C;
-	Fri, 17 Jan 2025 15:11:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8E01F807D9;
+	Fri, 17 Jan 2025 15:11:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lKnLZJ6x";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZlmfwW/i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9803C80737; Fri, 17 Jan 2025 11:46:00 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 5490180737; Fri, 17 Jan 2025 11:46:02 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4713580312
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 11:45:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EECBE806D8
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 11:45:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=zhang971090220@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2166651f752so44889285ad.3
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 02:45:58 -0800 (PST)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-21619108a6bso32169715ad.3
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 02:45:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737110757; x=1737715557; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rNmEB38QoTW2uludIBNRLYyuSbzwU3R892uesL0W9Zk=;
- b=lKnLZJ6x6W/TAZcH/rggIGR0okNoTfFoxbGiqRHNHm3INpwlwN6dGiDp28mXuUnFP+
- YHH4QNQOBpK8a6h9hLb+up/MlclGDVBM4XfFaGudbYCINLouE8P//ubjR5HnN5aqI0+M
- UvdlJkt/nMTEe24Z3cAU2f23PtX0fH3zVtjW7sJbOTSRbMCrmpPQ375tHUi9RVZ0v6bb
- qHFmkXWfcryyhi3J3rgv8LSdQCu4iDoarevqTV3IpifPacCPxEoz4eX8UEWkfzWRO1vd
- 3lbTQ9Rjqx85L7Bkx8UgKBXZohEo8F+GKgMWxF2LIRbzcF9bHZqOzJ/Yj9ZEq0VRSqcK
- gQXQ==
+ d=gmail.com; s=20230601; t=1737110758; x=1737715558; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=otWAEIpGBrK8yuULADl597iMnXT7134R2g5KBzNd/Zc=;
+ b=ZlmfwW/if69giofJvouEVrkhIoNQvy06cAcPl6aPbYGZiJt9e2bhKP2qlYyiJHTLJr
+ DuCBtpJ9GRzvC/8J7hrVJWYouJOo2Owzx2LDYFFiOMoGQsQSQ3oVEsWMPGoLX7oQ+4g4
+ YcZIMXmwGaVDuP5873P4oLHmewtArHGZL3fZQQlVnx+xBXIj8v+/ORLQ03H3VDbhH8uZ
+ z++WAIlrt/jdweO5CHGozCsYjuDwwgUCwnuPigYMpvboRnXelXsWbA5UJkYuso0JqtRp
+ lVjNwdLGAnwBY5LFAA7HJubvRl5319r6/OMfMH7KEdGlEitzckAPFYTtptQEqtgkzTeA
+ naGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737110757; x=1737715557;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rNmEB38QoTW2uludIBNRLYyuSbzwU3R892uesL0W9Zk=;
- b=E6zTAlCb+O6HKHz1mwr2ZE14HPvxq195WvKLxUqpZsCjZ4Q9trqoDHbhvR9srM0/Nc
- JD/yMra0zX5MEe+fKpDaIrhEpHmezkkkI0o9XVisrz3no+vSB/Mr789uJT9i6/dHmQDv
- o3zgeOvLZkh8/MkJV9g/dV3SvX9fb0hLK8udOJy1cX+vVlGklj9Ez7gfV/KjiXqwy1qa
- iAT++xGVgnPwlTn3w/T7S0qCZu9x4Ok0K+w1qvEDteBfIITpAoK5U9DP21zsX91mlr2N
- 2uZc1ryyfg0PHDlg2Kyba4ppRwcaRfVMRJssNxQO0nUHfftUWNrXGuyNnQsWTZzbJ1K7
- f40Q==
-X-Gm-Message-State: AOJu0Yzzv/dIFXarcFlJawLmcxOmvDTY6RbVVONJmYatjAyMM/73lnzT
- HWjvggF31IvjWbLSziPvkAEwqENN14KYpAH+eufOHX76dgNz1qVjLsmcirW3
-X-Gm-Gg: ASbGncvnuBqw0EtTy+DDoPtZMGN1Fuunb0ho9FKoppaSFxFWBdliPB/FQXi9tW9vGH2
- Zs6FzLsDL3ONqp21+VZ31PIazX3ikCmtWg8c86/WPJOUAwh739R7avsAOfoKQql5D4JGsSE/NPH
- /Jrpdt6G+kGSxdZZvlDATC4ewqd0W3aGSv9QgGy0oLt51I/+7WkhUNIqdOuBvOs1W3P8WrWYHxF
- +BjnshXrFpG+S+NDchFb0TS20+Y1RyDrLvdQLtN/Im2Npq9qCj7b86F55jw6zJ3Dq5sxfMCgKWf
- WYjuHO8+IyvHzZw4DtqgMVsyThvj
-X-Google-Smtp-Source: AGHT+IGAohCNQswEA0hZNO7UwQ34l9RchOM4ktvR2ii3ETI0bJkcTyz+keCaP5mmMnAsOj+9yaPotQ==
-X-Received: by 2002:a17:902:ec84:b0:215:3661:747e with SMTP id
- d9443c01a7336-21c353ef81cmr29130115ad.8.1737110756573; 
- Fri, 17 Jan 2025 02:45:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737110758; x=1737715558;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=otWAEIpGBrK8yuULADl597iMnXT7134R2g5KBzNd/Zc=;
+ b=BZ3cT+UbtrpFV+BdvtTnm3YotkUqPFWW0Ctx2vsI5oVtJN4Kc4VlQUyFSOpHmIZ/nh
+ HStlD2oBgiPmm0rH3NzD6vEh6jhXpZsQE+PsDC9mwLpc+eb2Yge8qOJC7mjo3FnhYf8n
+ SNqID3v3RaOhbt4MzMZQter5Vjm/6B9S7bsGi0ryd4Ikvdlw1Wsv+6cXWKWSQ0Qj6IaI
+ Z22VZMtGijC1b/v49PyPxGY1/k8d461WieES68WDCuESQWRbXFbZqOBXfe8bLnhH+usc
+ XFXQjQUIaygG0SbW7HtcFNeaHu5O+PBY/Zm+WliZBLWYTjUkb/qPsLW7V/UZaf9mkcA7
+ 8Zcw==
+X-Gm-Message-State: AOJu0YyyBUoozd6L02jGwlUH15pT3tsU+CJLX7iviXwsfcpXofyb9eGE
+ L5UV04SYv51ZCGIUdA8VpPlzEc+Rr7TkDTfVw6WifOiuDM0fBvZt
+X-Gm-Gg: ASbGnctUDinNe+qaXej94pgB8838XtIc036VSVKTVZdY2KZdZtDyTLQiQGE+4giKE1f
+ kHdpBwKgXEBpCf+UP0XI8wQ2JcF2ao1lI0ee4VQhcHgpLmKXrY0xPbJzxmtrAnhoDuJbCdV241A
+ MoZwHLVfUX58rCDBEc/5jx+ACyjpgYXnstMbcQA3+aV0zjkohqaFMevPgvG1l/WCSYmEyYthSxv
+ TjgT1wp1XrVwQBp7W36CBt8vRZZjEjv9ppo+rUOeyujw5gpACdbj3um1/1K8Ogm3nPMvVDs1uWd
+ NKm0gS9Jr56ehvz1+ikxON6zfRG5
+X-Google-Smtp-Source: AGHT+IHcglQqaIiQ/zphkowy5K+qdf4pMcNUkw5l24i6HkoEV8kKkawadkLw+qLfUVUnCECSjQ6VKA==
+X-Received: by 2002:a17:902:ebcd:b0:212:6187:6a76 with SMTP id
+ d9443c01a7336-21c354016c5mr40728595ad.14.1737110758438; 
+ Fri, 17 Jan 2025 02:45:58 -0800 (PST)
 Received: from hcdev-d520mt2.. (60-250-196-139.hinet-ip.hinet.net.
  [60.250.196.139]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21c2d4028d6sm12972885ad.226.2025.01.17.02.45.54
+ d9443c01a7336-21c2d4028d6sm12972885ad.226.2025.01.17.02.45.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jan 2025 02:45:56 -0800 (PST)
+ Fri, 17 Jan 2025 02:45:58 -0800 (PST)
 From: Michael Chang <zhang971090220@gmail.com>
 To: trini@konsulko.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
  zhang971090220@gmail.com, yschu@nuvoton.com, JJLIU0@nuvoton.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 0/3] Add bitbang feature for npcm8xx and driver
-Date: Fri, 17 Jan 2025 18:45:37 +0800
-Message-Id: <20250117104540.1580343-1-zhang971090220@gmail.com>
+Subject: [PATCH v4 1/3] ARM: dts: nuvoton: Add bitbang delay through dts
+ properties.
+Date: Fri, 17 Jan 2025 18:45:38 +0800
+Message-Id: <20250117104540.1580343-2-zhang971090220@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250117104540.1580343-1-zhang971090220@gmail.com>
+References: <20250117104540.1580343-1-zhang971090220@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 17 Jan 2025 15:10:59 +0100
@@ -95,75 +99,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I am resubmitting the patch titled "Add bitbang feature for npcm8xx
-and driver" for review and inclusion in the upstream project.
+Add bitbang delay through dts properties.
 
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+Signed-off-by: Michael Chang <zhang971090220@gmail.com>
+---
+ arch/arm/dts/nuvoton-npcm845-evb.dts | 1 +
+ 1 file changed, 1 insertion(+)
 
-Driver didn't support bitbang feature.
-Add bb_miiphy_bus function for driver and open feature for npcm8xx
-
-the log is as below:
--------------------------------------------------
-U-Boot 2024.10-g30b9cdaf2df5-dirty (Jan 09 2025 - 00:57:37 +0000)
-
-CPU-0: NPCM845 A1 @ Model: Nuvoton npcm845 Development Board (Device Tree)
-DRAM:  1 GiB
-RNG: NPCM RNG module bind OK
-OTP: NPCM OTP module bind OK
-AES: NPCM AES module bind OK
-SHA: NPCM SHA module bind OK
-I/TC: Reserved shared memory is enabled
-I/TC: Dynamic shared memory is enabled
-I/TC: Normal World virtualization support is disabled
-I/TC: Asynchronous notifications are disabled
-Core:  649 devices, 28 uclasses, devicetree: separate
-WDT:   Not starting watchdog@901c
-MMC:   sdhci@f0842000: 0
-Loading Environment from SPIFlash... SF:
-Detected w25q512jvq with page size 256 Bytes, erase size 64 KiB,
-total 64 MiB
-OK
-In:    serial@0
-Out:   serial@0
-Err:   serial@0
-Net:   eth0: eth@f0802000, eth1: eth@f0804000, eth3: eth@f0808000
-Hit any key to stop autoboot:  0
-U-Boot>
-U-Boot>
-U-Boot>setenv ipaddr 192.168.16.3
-U-Boot>ping 192.168.16.12
-eth@f0802000 Waiting for PHY auto negotiation to complete
-......... TIMEOUT !
-Could not initialize PHY eth@f0802000
-eth@f0804000 Waiting for PHY auto negotiation to complete
-......... TIMEOUT !
-Could not initialize PHY eth@f0804000
-Speed: 100, full duplex
-Using eth@f0808000 device
-host 192.168.16.12 is alive
--------------------------------------------------
-
-Changes for v4:
-    - Replece bitbang function prefix npcm to dw.
-
-Changes for v3:
-    - Support multiple buses for multiple Ethernet interfaces.
-
-Changes for v2:
-    - add bitbang delay dts read
-    - modify printf to debug
-
-Michael Chang (3):
-  ARM: dts: nuvoton: Add bitbang delay through dts properties.
-  ARM: configs: nuvoton: add bitbang feature for npcm8xx.
-  net: designware: Add bitbang feature for designware driver.
-
- arch/arm/dts/nuvoton-npcm845-evb.dts |   1 +
- configs/arbel_evb_defconfig          |   4 +
- drivers/net/designware.c             | 113 +++++++++++++++++++++++++++
- drivers/net/designware.h             |   6 +-
- 4 files changed, 123 insertions(+), 1 deletion(-)
-
+diff --git a/arch/arm/dts/nuvoton-npcm845-evb.dts b/arch/arm/dts/nuvoton-npcm845-evb.dts
+index 0d3aaa0fff..1535defe38 100644
+--- a/arch/arm/dts/nuvoton-npcm845-evb.dts
++++ b/arch/arm/dts/nuvoton-npcm845-evb.dts
+@@ -190,6 +190,7 @@
+ 	snps,mdio-gpio = <&gpio2 28 GPIO_ACTIVE_HIGH>;    /* gpio92 */
+ 	snps,reset-active-low;
+ 	snps,reset-delays-us = <0 10000 1000000>;
++	snps,bitbang-delay = <1>;
+ 	snps,reset-gpio = <&gpio2 29 GPIO_ACTIVE_LOW>;    /* gpio93 */
+ 	status = "okay";
+ };
 -- 
 2.34.1
 
