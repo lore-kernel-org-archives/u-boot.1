@@ -4,71 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F1C9C02185
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 20:41:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B087C02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 21:46:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 035C08069D;
-	Fri, 17 Jan 2025 21:41:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A70D980423;
+	Fri, 17 Jan 2025 22:46:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lDthq3m3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iZ4RuGQr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FF3E806D8; Fri, 17 Jan 2025 20:36:52 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 71C918069D; Fri, 17 Jan 2025 22:46:28 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E124B80423
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 20:36:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F23638036F
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 22:46:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=flobro30101@gmail.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3ebb669df2eso1323354b6e.1
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 11:36:49 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6ddcff5a823so23022876d6.0
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 13:46:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737142608; x=1737747408; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ITSyhoRmaxVG77yfJ2WgzJRyIIKHC7YtjMNg0E27Ocg=;
- b=lDthq3m3BZoApyv50G0PgxiMgbG+AFf4fBPXiILIob+Mj+u8qy2Mkbcg+0ds5uQqpS
- 4ziXjbaskE0oBFHu6b1B8gbJQQrXX9TQPD6VMJlqG1nqtH+K/6ZJW70ugCelahngty3l
- xCfXMbNIb16fYTy4XVgTgRe9OrvTXiw3lSEBNj9tBtLso3JpUJjW847GLWn57t6pM6DL
- GnM+szl+iCjMtsm+07Jj3FGB2W9adhp6geKaEDbigvYdrQ7WfU8PhaiwGWcoaQ62OHmP
- 4aK4npQOakYiuOJJEBvnFfoW1o01XHeWnMwoFXcf8RnA6a9IxrQycnhUHbzEHkooBG3/
- UZjA==
+ d=konsulko.com; s=google; t=1737150385; x=1737755185; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=maGyJADiu4kizlLNTKM6SDmZez9y8hR4o01avw+ihFA=;
+ b=iZ4RuGQrPq4wn+jqvkozIfqXm0oNu+CICbG2qL7n5P+5qgUT0fCAwpCZHV7tCtznbG
+ vuSqmC3tkMjrK2FdmgY09bJ4L7DJzLS68v13qbPcXrZHzvBYTUvmsBJcgFFDIhLhrUpY
+ hl7Qhcf17Dvck1bElgO4sCu0LbDB5YhvBYfp0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737142608; x=1737747408;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ITSyhoRmaxVG77yfJ2WgzJRyIIKHC7YtjMNg0E27Ocg=;
- b=iKFQ9rnkc6pQ1hnQNW1Jy/RFT5uPA6a2Kn6hgMU0X2LA8BYRpAc8cQ3pnh/xussDsA
- l8BhZRFpEJVUk5GBdFgzFGaCry6k4DTqm6nXxJpdVYRcLtpyweOsbidojY7OYW50GPKt
- gHP8oywWtsRM4/cJuyLqkCgjXgik09d8ZEXVnKsnSU7optf0tCDCfJ1bOx8rfy8EQYvt
- K47AMv5kBfW6Me3d6qh912b/JhhlKQJzU0J7X6/zrPu1UldfNRT1tZAwnB2ysoZkf8h6
- 8L2g6+hCzjwxIraQnSsl21t+/DcUuMV3MdMEZ4fqJO+0S3MZKouFNzVY+2v9TLg7AOkA
- 0KdA==
-X-Gm-Message-State: AOJu0Yy8bWML7z74rI3DIKquK/CcvRP96RXqts5Z7grm2InJ8Sczm04F
- FBr5ZIQNseW6FO7inOGeZEfUXmVWAfLjVvlUhrqJUPAVmccPsPV1RIqAtinSo2KosCcHDUCtEeb
- A17njxWD/Z2x3b4oJbEA/ODeOBeZlPBAD
-X-Gm-Gg: ASbGnctRLxt9E6aXLrtIp+SX22xmZqQxzA+HgQ2euwAAp8FTUc09lQhOT1LoHlBM1mb
- JzI05nUy1LtC30UikGnD1UEpCFSsuZiqgk5CyqkgBdB4kqNaLUO58DU2KhzASY2Y6XaaB
-X-Google-Smtp-Source: AGHT+IGeReg8BYTLi5n6NGHmo+Lo4hppO//9SmkhIVVyi+k5Bk+f4iSp70UuW5YlxJFMSxVsNgDT5Pq8NgG854EIExY=
-X-Received: by 2002:a05:6808:801c:b0:3eb:4acb:a86b with SMTP id
- 5614622812f47-3f1a07d1800mr1827937b6e.16.1737142608399; Fri, 17 Jan 2025
- 11:36:48 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737150385; x=1737755185;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=maGyJADiu4kizlLNTKM6SDmZez9y8hR4o01avw+ihFA=;
+ b=aB6+4/6tTyJ+H7xSOVXa0Bm7xwMmZhexYnqKoPT62ExJKpeqb5e4Zc05C1ceTjw8qe
+ scp2uy5MddupwK9Kzs82cEUfN3PboArLZaQwfDT7mQt5eW1zeVrH6o0NSW+N+v2e4NRl
+ hn8fIO4upO/kg/AKyEY1ahwGVigLLfSDCDBo4cW1TsMuSR/+/Fn1SZHmR5cjiftQmGR6
+ Y1oQCYC0REiRuH+iTKXYFSuAyXVIcGi4tG5Tbjqa/4rkq9fBxu3oVpQCHOMx4VBMsuB+
+ GtIqGpgo3tVCc7oCVFtrNSjwPszp+FHale6kSr3qMfw1eOE7/5aLIZ7j4/r5h+dDBPs6
+ yHZg==
+X-Gm-Message-State: AOJu0YxQhqxAlMQ7Tz3wfXnYvMFZIbMgVodFxcMQP7ql5zZ7ZlfxDJkU
+ xgK+WOw6h6+RN3LLfv3yw2tZiQFxgWtgA8ghQr+leaJk/CKlwB6YJy9RzHnCbvM=
+X-Gm-Gg: ASbGncvUQw/JjlVO85KeVBxTTtjKOuPug+ys+07Wt8o0+XV420uft+E2/Vt5zG1cBmO
+ zieidnVG0ikR52pDRY+1UnBvFUZgTSgcX7T26S1ffb1C5YF819dLdez5UJBAToYnTsJ5KbADdNB
+ 6OPvED7JbeSR0A1LlaH/Y+Q7OgQ2l8oy+PTNjRDYKp7GnQs4/uhxjC0J9liR7leI+QdwTZaN1TB
+ 27FSdop2K17++uPysjwWoT+hBR0GV/eIYGUMi3eJx8sP8EmfscyNg==
+X-Google-Smtp-Source: AGHT+IEPMXSEgZGR0R1I3KV+2Z4dyPsleQZkqrtruwzN8rgik4nFkSIRnRJYs8XMFvMZH5SLE1DXJw==
+X-Received: by 2002:a05:6214:5782:b0:6d8:88cf:e690 with SMTP id
+ 6a1803df08f44-6e1b216ff3fmr68893826d6.3.1737150384761; 
+ Fri, 17 Jan 2025 13:46:24 -0800 (PST)
+Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e1afc233ecsm15834156d6.57.2025.01.17.13.46.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Jan 2025 13:46:23 -0800 (PST)
+Date: Fri, 17 Jan 2025 15:46:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH v4 0/2] Static initcalls
+Message-ID: <20250117214621.GA2503843@bill-the-cat>
+References: <cover.1736174204.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-From: Floyd Brown <flobro30101@gmail.com>
-Date: Fri, 17 Jan 2025 14:36:37 -0500
-X-Gm-Features: AbW1kvaIS7URD6SR_q9ZgsSkqooWKjkQLg4V_szztTSxdjLreyA3Xoo903OQa-g
-Message-ID: <CAKiD1a85O8+cYj+8jNPmMEsEC_ysdKxZ-jDVKf5P=jBLnPz8Sw@mail.gmail.com>
-Subject: Environment CRC mismatch
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Fri, 17 Jan 2025 21:41:12 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="PsgnB2PFqxL+pBEG"
+Content-Disposition: inline
+In-Reply-To: <cover.1736174204.git.jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,19 +93,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CRC generated by mkenvimage is not valid when written to the
-storage device where uboot wants it.
-I get a "Loading Environment from MMC... *** Warning - bad CRC, using
-default environment" when I insert a SD card with U-boot and the
-environment I built.
 
-The environment is stored at the correct place on the SD card, I boot
-U-boot and get the error, perform a "saveenv" and then read back the
-saved environment from the SD card on my PC.
-They look the same (uboot adds a serial number and MAC addresses when
-the default is saved).
+--PsgnB2PFqxL+pBEG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-So the question then is, Do mkenvimage and the uboot build process use
-different crc algorithms?
+On Mon, Jan 06, 2025 at 03:40:12PM +0100, Jerome Forissier wrote:
 
-U-boot version 2020.04
+> This series replaces the dynamic initcalls (with function pointers) with
+> static calls, and gets rid of initcall_run_list(), init_sequence_f,
+> init_sequence_f_r and init_sequence_r. This makes the code simpler and the
+> binary slighlty smaller: -2281 bytes/-0.21 % with LTO enabled and -510
+> bytes/-0.05 % with LTO disabled (xilinx_zynqmp_kria_defconfig).
+>=20
+> Execution time doesn't seem to change noticeably. There is no impact on
+> the SPL.
+
+This fails in CI unfortunately:
+https://source.denx.de/u-boot/u-boot/-/pipelines/24241
+
+--=20
+Tom
+
+--PsgnB2PFqxL+pBEG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeKz6IACgkQFHw5/5Y0
+tywkFAv42P8KlCEoTpB+aWG2Dq94HJqt/5KNT2YbSPAIrBqzwiWTdr4YkFEdCbm9
+T8BJEjkTNUFTLjF2vLJfGztEuT8NmKinAmgX/ATiKOQmq6JqffJs7u+tfXP2Z4hd
+ZW8DUif8k4R55NA7oIP8lqOZpBhFDo9Dz7n2VnXGDjrh8XzlBY34QaY35XkPUeTL
+B0zTNAF4lt0UjNYZQhd+9Q17GDFk9rmwzMx/3cPx4q0nhmZmh7UsPhpDmpF1qWFy
+wOwBF8AygToVx0Y2p+1IblMcV9dka0roWdHPNl/Y3aR6gMCNclxwLzYzAg74xZfF
+48TE/bYjNeciwDcIqNbCYh38CXINPoEh5QB+pESdpbWv8Qom5d+5z+82ef4xYLyO
+30rKY0pjyAxB2GKhoZvzFFT2nEbBD8FzYy/hz/JdYFaj+NVGnFSJt5lrAQVXDfwA
+3JR8nWoZ3PMvWwRQRYvkSZRPgcfnaU71f5XmFczrkjuqOe6Gm/XuUfvGiuCjr4H+
+htMHCMY=
+=AEsf
+-----END PGP SIGNATURE-----
+
+--PsgnB2PFqxL+pBEG--
