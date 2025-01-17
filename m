@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80DB4C02185
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 09:19:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C613C02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 09:20:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EECA2806FB;
-	Fri, 17 Jan 2025 10:19:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9282C806FB;
+	Fri, 17 Jan 2025 10:20:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rlQntYK/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fij6vgw7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B15980312; Fri, 17 Jan 2025 10:19:55 +0100 (CET)
+ id 3467A80737; Fri, 17 Jan 2025 10:20:34 +0100 (CET)
 Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
  [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1A6180737
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 10:19:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFBC380312
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 10:20:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e549dd7201cso3257513276.0
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 01:19:52 -0800 (PST)
+ 3f1490d57ef6-e3978c00a5aso3067805276.1
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 01:20:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737105592; x=1737710392; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1737105631; x=1737710431; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zrTQ8fJOAKJn0/TGLbRNMcH9Gf+12aCtQmq6KO21KHk=;
- b=rlQntYK/u1cIofCZrJtJgNeBgG0tiD1+Jidz/eDBsItR/9nbTLV1XcBgv1/XpENl8u
- NDkRIYZZ/Wo5hoVLYocW2EnknUV1pMnM74Fc79YuGAyDj4QSe9JoN79PSD3vwVn77kZu
- ABNokkC5ndjpZbd46kMDW5Wszn2X83PwaatEWfKOuER2adif4S5QGxKormvTnWK+AKRN
- 9Gsv6yLmkHFAWLky6PuWIPrr3iZVpi6Im9f5Xy7SHZSnegP9/bTH9VyDfv+LYCtiSo4l
- 1sqhMim5fuxNiINVoDS4kvBLA3W3DncKjnE+U6qKPPaKekFqgIxjheLnf9W0dX445F5c
- d+FQ==
+ bh=zOJYOLPptNF5iUTSZL0R14aVDmrbAUZ5d66XaWDk1gQ=;
+ b=fij6vgw7GkUH/ppaaetFdAWNbsv0ekmD9L4T6OSONRZ6yiDljQztGdXqrqFTwyfZ8z
+ vAitr1eZIVHxDipSoaZzbHwhq6I0k+Hf1diMMhXrJNfTq9nPK65PHkp2dadYGAD++gS+
+ nOpzI2akXyFaDF1dhTBjVJqqQGv5Nvzo+kNBs8y+i/6BuAjC1rgpbcSphtQ9QGKXqhbZ
+ OWIZge3WcvB22UQOcy1NcFmjvITJ6ymP2ibd4t4Sg5hN3ST8uXSg7zNmnd95OCEjqLdy
+ hC2M6eMWms135ugziX/yr34Dg+vD8PqEC6zuLrZFErUFbL1Zr2UiQRpPYzYT3pVQdJiw
+ m50w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737105592; x=1737710392;
+ d=1e100.net; s=20230601; t=1737105631; x=1737710431;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zrTQ8fJOAKJn0/TGLbRNMcH9Gf+12aCtQmq6KO21KHk=;
- b=Gl0UdpbrraX+31T7mpviDIIYE14oc8aCfdccpFgLDkmkmyIE3HtU0DOW7vyzR7Purg
- XO7YTTeck5d1bfW5cjGljzuwXZzinQRZkK41vHaOdKXTBJ/U2TfXX9PxfTQGuj9dAkT6
- aiiogNcczIT5ODEkWSHwGMjf8A5Ymsd9F1o/pII6nBKgoMDeCrxMawhSL/064Irg7+jm
- JRPtxrHLEHyyT7bo1Y6Fvrlwp1kdNTOSADXf/qznqdbo5SmIcAWe4wrBBrFxHM4+SKnG
- rFFM0mpNYxIp9vwnCW1nryMZygeCQpi1tUBKe17aTbAeioS+s6l/JZH6lJn79aOdGoFN
- BhOQ==
+ bh=zOJYOLPptNF5iUTSZL0R14aVDmrbAUZ5d66XaWDk1gQ=;
+ b=wx9NEjLdEIxgyfoUJVxDPfFEr96aSAN+SKsBB0DORPg21956o2IpUF+NKMgEGhGnhz
+ ylNvGGXldPd0vumZOk1yZm2lO+jBDrIkcNHDHawFwVNqnTjtIRvR4Z3my0qhDtIeIytF
+ 67yscctI+4NqKfTGgdBdtqSbTLRvpeNuJkEif6jhnf05AtMNq4AFaAnRht17iLpsV4m6
+ RRNDjf2DL97IpzVax2SQ0e9VYtEXoxexHSKtxabZSImgb/YXa76o7CPnid6XjJMlhuKL
+ 3kSOl/27MmxSDyFJWs65Ohe3ph/019oFunOPGr/2hfuqDLxLFt8xh/S9Pw0YoBxW2IGX
+ 1E7g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWezwBvay+rXHaZmsc3jDgkC7yvdP10zlGIHtX053W6pmIMHtIwCaKKiKDLw4a9qzWH5J4Zung=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZ0k1q9obozIcwMlXumEgd15MBeaulhlEi7Qo3pW415EYV3FUK
- BdXnpObTo3SpgHZpe5HTaX7LbFoXutzLPQhBPRC0cKyoseqh04jIDXFMV4UUasXm5dtyiLFGSdN
- FnVazYFG/eFL9QlJQ2l5+OGx8Z5Iqo1eyM9hN/g==
-X-Gm-Gg: ASbGncup+FeSLEvEDp+HxkQ4Z0zQGnHudljd7Izlymjb+kYNibcIX+QKKWP6xwrNfDk
- fldi6jj2NOlfmd4OjlYEpwtFw9/b2n3RsuKs7WA==
-X-Google-Smtp-Source: AGHT+IHPBf33AmY/T98wPHl/vzXxbdLcvxdJP/MgJfH6+O+uaA9HgozZgYevoeJk/CG9CtHiS+HF31tZb3j213bpECw=
-X-Received: by 2002:a05:690c:9692:b0:6ef:94db:b208 with SMTP id
- 00721157ae682-6f6eb919df0mr11781637b3.24.1737105591779; Fri, 17 Jan 2025
- 01:19:51 -0800 (PST)
+ AJvYcCXwVbsttMAsuSqGOTo4syZ+QEv6XaZERk7eC2yQFRljVi7EmR7Qq9hxvMx3qfZjgP7eGdQxBUs=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywx/Evwnel+Ck2xVymBJYmGYyLgBERu9BnnSaIb2gU7oM9jHVbk
+ ZWs43WDtfEF02DLLlZN1dwKHjMtU2lMb+tZOZS4gAJrZ1x6czsRE1LdOs1BMWarA3PeXsEUpRcY
+ EO2FhUyOOZmFuREQv4O3pgQpZBLRn+FzmiHPhqA==
+X-Gm-Gg: ASbGncukIY+AysbUfIYcywyN2/HDfi4KQcP5ugk4VTDxMd43PJ22r20ykP2jRx+wxMy
+ u8oBEXRQBFeJZq/DCVgvOvP/4PZuvK3KrfxzHAw==
+X-Google-Smtp-Source: AGHT+IEJDvlrYkLeXq39ew9DK37YVO5Z3HDrtfDOghd2v8aQMenR3zAKUyqYjwqlkpVKCDh8r9wszHnIeISMsAfxxEg=
+X-Received: by 2002:a05:690c:7344:b0:6ef:5ab8:2c53 with SMTP id
+ 00721157ae682-6f6eb68695cmr13222237b3.19.1737105630837; Fri, 17 Jan 2025
+ 01:20:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20250116113909.113950-1-heinrich.schuchardt@canonical.com>
- <20250116113909.113950-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250116113909.113950-5-heinrich.schuchardt@canonical.com>
+ <20250116113909.113950-6-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250116113909.113950-6-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 17 Jan 2025 11:19:14 +0200
-X-Gm-Features: AbW1kvYJgAAw9dm3WS6euYU0D_HfKk150Zto3KQjHXmbSK_XKa2YJOpEGURwHOE
-Message-ID: <CAC_iWjLEmP-YjiOxhWC6TBx0toEtD5uDiNPOBwjYqunAx02Ctw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/5] efi_loader: correct SizeOfCode,
- SizeOfInitializedData
+Date: Fri, 17 Jan 2025 11:19:55 +0200
+X-Gm-Features: AbW1kvaVUiBw9qwMpcOzuJKmIGyxWj9Gg-eX2_6l5Gfh4hAuVhU2sn30888NYTc
+Message-ID: <CAC_iWj+Lrs=m49UNNejwa+tSusHQOa2w3a9u5rSnV83kvyXfcA@mail.gmail.com>
+Subject: Re: [PATCH v2 5/5] efi_loader: use include in ARM EFI linker script
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Leo <ycliang@andestech.com>, 
@@ -101,75 +100,135 @@ X-Virus-Status: Clean
 On Thu, 16 Jan 2025 at 13:39, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> The fields SizeOfCode, SizeOfInitializedData, and SizeOfUninitializedData
-> are define in the PE-COFF specification [1].
+> Use the same include as arm64 for the linker script.
 >
-> * SizeOfCode must match the size of all .text sections.
-> * SizeOfInitializedData must match the size of all .data sections.
-> * SizeOfUninitializedData must match the size of all .bss sections.
->
-> We only have one .text and one .data section. SizeOfCode and
-> SizeOfInitializedData have to be calculated as the difference between
-> the end and the start of the respective section.
->
-> As we don't have any .bss sections in the generated EFI binaries.
-> SizeOfUninitializedData must remain 0.
->
-> [1] https://learn.microsoft.com/en-us/windows/win32/debug/pe-format
+> Adjust the 32-bit ARM PE-COFF header accordingly and harmonize it with the
+> 64-bit ARM header.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
 > v2:
->         new patch
+>         Do not rename field image_base to ImageBase.
+>         Move SizeOfCode change to separate patch.
 > ---
->  arch/arm/lib/crt0_aarch64_efi.S | 2 +-
->  arch/arm/lib/crt0_arm_efi.S     | 4 ++--
->  arch/riscv/lib/crt0_riscv_efi.S | 4 ++--
->  3 files changed, 5 insertions(+), 5 deletions(-)
+>  arch/arm/lib/crt0_arm_efi.S  |  9 +++--
+>  arch/arm/lib/elf_arm_efi.lds | 71 +-----------------------------------
+>  2 files changed, 6 insertions(+), 74 deletions(-)
 >
-> diff --git a/arch/arm/lib/crt0_aarch64_efi.S b/arch/arm/lib/crt0_aarch64_efi.S
-> index fe6eca576ec..e21b54fdbcb 100644
-> --- a/arch/arm/lib/crt0_aarch64_efi.S
-> +++ b/arch/arm/lib/crt0_aarch64_efi.S
-> @@ -41,7 +41,7 @@ optional_header:
->         .byte   0x02                            /* MajorLinkerVersion */
->         .byte   0x14                            /* MinorLinkerVersion */
->         .long   _etext - _start                 /* SizeOfCode */
-> -       .long   0                               /* SizeOfInitializedData */
-> +       .long   _data_size                      /* SizeOfInitializedData */
->         .long   0                               /* SizeOfUninitializedData */
->         .long   _start - ImageBase              /* AddressOfEntryPoint */
->         .long   _start - ImageBase              /* BaseOfCode */
 > diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
-> index b5dfd4e3819..3664cce8412 100644
+> index 3664cce8412..91b0fe12c51 100644
 > --- a/arch/arm/lib/crt0_arm_efi.S
 > +++ b/arch/arm/lib/crt0_arm_efi.S
-> @@ -38,8 +38,8 @@ optional_header:
->         .short  IMAGE_NT_OPTIONAL_HDR32_MAGIC   /* PE32 format */
->         .byte   0x02                            /* MajorLinkerVersion */
->         .byte   0x14                            /* MinorLinkerVersion */
-> -       .long   _edata - _start                 /* SizeOfCode */
-> -       .long   0                               /* SizeOfInitializedData */
-> +       .long   _etext - _start                 /* SizeOfCode */
-> +       .long   _data_size                      /* SizeOfInitializedData */
->         .long   0                               /* SizeOfUninitializedData */
->         .long   _start - image_base             /* AddressOfEntryPoint */
->         .long   _start - image_base             /* BaseOfCode */
-> diff --git a/arch/riscv/lib/crt0_riscv_efi.S b/arch/riscv/lib/crt0_riscv_efi.S
-> index c7a4559eac8..9eacbe4a859 100644
-> --- a/arch/riscv/lib/crt0_riscv_efi.S
-> +++ b/arch/riscv/lib/crt0_riscv_efi.S
-> @@ -63,8 +63,8 @@ optional_header:
->         .short  PE_MAGIC                        /* PE32(+) format */
->         .byte   0x02                            /* MajorLinkerVersion */
->         .byte   0x14                            /* MinorLinkerVersion */
-> -       .long   _edata - _start                 /* SizeOfCode */
-> -       .long   0                               /* SizeOfInitializedData */
-> +       .long   _etext - _start                 /* SizeOfCode */
-> +       .long   _data_size                      /* SizeOfInitializedData */
->         .long   0                               /* SizeOfUninitializedData */
->         .long   _start - ImageBase              /* AddressOfEntryPoint */
->         .long   _start - ImageBase              /* BaseOfCode */
+> @@ -46,8 +46,8 @@ optional_header:
+>         .long   0                               /* BaseOfData */
+>
+>  extra_header_fields:
+> -       .long   0                               /* image_base */
+> -       .long   0x200                           /* SectionAlignment */
+> +       .long   0                               /* ImageBase */
+> +       .long   0x1000                          /* SectionAlignment */
+>         .long   0x200                           /* FileAlignment */
+>         .short  0                               /* MajorOperatingSystemVersion */
+>         .short  0                               /* MinorOperatingSystemVersion */
+> @@ -84,6 +84,7 @@ extra_header_fields:
+>         .quad   0                               /* CertificationTable */
+>         .quad   0                               /* BaseRelocationTable */
+>
+> +       /* Section table */
+>  section_table:
+>
+>         /*
+> @@ -111,9 +112,9 @@ section_table:
+>         .byte   0
+>         .byte   0
+>         .byte   0                       /* end of 0 padding of section name */
+> -       .long   _text_size              /* VirtualSize */
+> +       .long   _etext - _start         /* VirtualSize */
+>         .long   _start - image_base     /* VirtualAddress */
+> -       .long   _text_size              /* SizeOfRawData */
+> +       .long   _etext - _start         /* SizeOfRawData */
+>         .long   _start - image_base     /* PointerToRawData */
+>         .long   0                       /* PointerToRelocations */
+>         .long   0                       /* PointerToLineNumbers */
+> diff --git a/arch/arm/lib/elf_arm_efi.lds b/arch/arm/lib/elf_arm_efi.lds
+> index 41440594aa6..eb16fae74cf 100644
+> --- a/arch/arm/lib/elf_arm_efi.lds
+> +++ b/arch/arm/lib/elf_arm_efi.lds
+> @@ -8,73 +8,4 @@
+>  OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
+>  OUTPUT_ARCH(arm)
+>
+> -PHDRS
+> -{
+> -       data PT_LOAD FLAGS(3); /* PF_W | PF_X */
+> -}
+> -
+> -ENTRY(_start)
+> -SECTIONS
+> -{
+> -       .text 0x0 : {
+> -               _text = .;
+> -               *(.text.head)
+> -               *(.text)
+> -               *(.text.*)
+> -               *(.gnu.linkonce.t.*)
+> -               *(.srodata)
+> -               *(.rodata*)
+> -               . = ALIGN(16);
+> -               *(.dynamic);
+> -               . = ALIGN(512);
+> -       }
+> -       _etext = .;
+> -       _text_size = . - _text;
+> -       . = ALIGN(4096);
+> -       .data : {
+> -               _data = .;
+> -               *(.sdata)
+> -               *(.data)
+> -               *(.data1)
+> -               *(.data.*)
+> -               *(.got.plt)
+> -               *(.got)
+> -
+> -               /*
+> -                * The EFI loader doesn't seem to like a .bss section, so we
+> -                * stick it all into .data:
+> -                */
+> -               . = ALIGN(16);
+> -               _bss = .;
+> -               *(.sbss)
+> -               *(.scommon)
+> -               *(.dynbss)
+> -               *(.bss)
+> -               *(.bss.*)
+> -               *(COMMON)
+> -               . = ALIGN(512);
+> -               _bss_end = .;
+> -               _edata = .;
+> -       } :data
+> -       _data_size = . - _data;
+> -
+> -       /DISCARD/ : {
+> -               /*
+> -                * We don't support relocations. These would have to be
+> -                * translated from ELF to PE format and added to the .reloc
+> -                * section.
+> -                */
+> -               *(.rel.dyn)
+> -               *(.rel.plt)
+> -               *(.rel.got)
+> -               *(.rel.data)
+> -               *(.rel.data*)
+> -               *(.rel.reloc)
+> -               *(.eh_frame)
+> -               *(.note.GNU-stack)
+> -               *(.dynsym)
+> -               *(.dynstr)
+> -               *(.note.gnu.build-id)
+> -               *(.comment)
+> -       }
+> -}
+> +INCLUDE lib/efi_loader/elf_efi.ldsi
 > --
 > 2.47.1
 >
