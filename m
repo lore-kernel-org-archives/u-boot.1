@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03191C02185
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 16:41:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9631DC02185
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 16:41:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75B0680761;
-	Fri, 17 Jan 2025 17:41:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CA0A480756;
+	Fri, 17 Jan 2025 17:41:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w/+Bsbzl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h2UuKBbA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22A26807B3; Fri, 17 Jan 2025 17:41:13 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 4602A80756; Fri, 17 Jan 2025 17:41:18 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02CF38076E
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 17:41:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BEBF806D8
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 17:41:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6d8e773ad77so19652476d6.2
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 08:41:10 -0800 (PST)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-46c8474d8f6so20174931cf.3
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 08:41:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737132069; x=1737736869; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1737132075; x=1737736875; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/RMqhEn8bWWXmUCXOPw5yZm10kGPLvMhSh0jpuXE6KE=;
- b=w/+BsbzlV8bQZPuqjL6p2tG3SNfmRpVwEopCrpkKcPEWxsfpyIrLC9bmGi2Ze6SzAU
- JfAYTeHXDMbsl4J2aqpt5gtcDsTS6YmfemTvNaByrFay/QMINoer5Vy/m/Vm735oU9zK
- sK8WW+QNhBXN9t2Yss5BQigcDJI4e2LetrOfqnzvwvkzz8v44a29aGQZU2cjK6Qs0io+
- bYMtp55jFpvXxqMQUVOoHUiyYefCVEjlf/VCAxInE69UtRtNa+F9N6tubdx8rCg6Jt7b
- yhQbYDQnGSnf1z/mAesKA8WX0+t6BMcgp5KBbGDIU69UunZi92mu9SJ9LYbyJz7hfvv2
- vdHA==
+ bh=KJuRiUVW1EdpRTR/3E1u6rQuLToWRkhwGLuWsq5CX34=;
+ b=h2UuKBbAujAjKc+NXCkpY4qZGUfa7CJiUh+eqDG4Xyzu45FvjNCSRtfc12vLWw6Int
+ nc+cO9+t5IksHbef+KisW8+vCQAXfnQjsF+/RvYI5lD1tCKX848+fH2QUviJVl9ohyt1
+ /AdYkeXAQ+HkeYn49zCm/W767IQhLb7TkYDAOnWzLg97O8PgsIVGKM0SPiwZjm9rX5/s
+ 2+rhXzCRjtPdnYJm6C5n7LdhmY6YdF7XPI4E5La35xRir0Y80r9rGUKEFVE0CvxuFVz6
+ 4bP0mZSYoMhw34CDCjWWLLanCUuMeyq2bVano9jIfJxNHxz6/YwTN4NoX4JjBWmqPTB0
+ +Vvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737132069; x=1737736869;
+ d=1e100.net; s=20230601; t=1737132075; x=1737736875;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/RMqhEn8bWWXmUCXOPw5yZm10kGPLvMhSh0jpuXE6KE=;
- b=wmLFAl28dIrc8Q17fWtooQQbxhCQkWPcR2/rkPi83C30p80v9zH5fKJxLqhtM0ZVia
- i0Sl6x8mV63v14iQ2W5DXqWQ2nCsRQHWOQv6HzdUX6D2Qkmro3rQyvRQDFg87h8Wym8C
- CCd3Pm1mWW1JpZiEBejQjivFxhLM5eOQlAnKUMCprigr5m309t+gl4VL0gvs3VnS+L0W
- 4NAqk+JdlTcmaffbLrJ8m2iKAHNdEbkCb0yuBXN7/4AJodJxjlLEEcBRSBCO7HPrcYit
- cVHo+D//Vm+B3yFstdt7J6ICY48Jj/qCPAQRbB2XMxx0uQMFB78QtSZz2PN7b9lJPWBn
- aOyw==
-X-Gm-Message-State: AOJu0YwXlPp0LxTOCWGwnwH/z6+G0ZXgSjfn0BXq1asrUVpfrKjUcLE/
- At/JmKaWUZE7PUG34pEnJpy+zSSQf9A29i/B33Dnxo4HqFkQfFBoDNas9L1j0bj1IGgShltVpnS
- Jh5g=
-X-Gm-Gg: ASbGncvB72dNX5uSKZQEIov05sAL5l6wHFEYpMCzY9GIhkWtd+kbvtMeDRtxjPlVRsc
- etq4zfZ20xhpI4I9joMV3WPbS63E7C4o+3MTrYIgpXjTPWGF6/HECJPl7HsraJ+iA38q80A7mak
- grhXavMU7ean1Ngkx8vmBoStvNlBCaNEh7RlKw7wnam1mKkLxgVDYnEHCCITXai5wb2SiPiYCmJ
- 5YKoGBC/+jAOMkVosNNKHKmFkKfRr9OoW4ynRMUhkaQTIiybey2QlaYJglL80+LApb++fPMsvPq
- Ue25ogXprTDbzna6EnqHdLyASmfFmloHxx5OqUrP6V9AefZixCAX0wQ=
-X-Google-Smtp-Source: AGHT+IF8vpsko9h1ZXU0VBAki2XRUn3vIOGHcCJFs4DI7W1zoxr1rCpMhawasrqZD2TjGXwZ2dhP7w==
-X-Received: by 2002:a05:6214:cc6:b0:6e1:6a90:43ab with SMTP id
- 6a1803df08f44-6e1b2168bb3mr38009726d6.6.1737132069593; 
- Fri, 17 Jan 2025 08:41:09 -0800 (PST)
+ bh=KJuRiUVW1EdpRTR/3E1u6rQuLToWRkhwGLuWsq5CX34=;
+ b=FqBXGJ0cgkQk1srixzjG1urhaQ5/xwtogjph6TBuMZZTR+UpA2ab+/WRws/ntf0u3h
+ WAKLB4PSapM+PTZXh30pdHeCRGJ7XkDhJM4jY/nTldlDUQ20KVCLEPB+zswj/k4nK5yN
+ l7sQSSQ4j43aXPU+m/gSau60djEjcV2p50zPaKhF/6sCCScJq95bqKwNMkOzN1GmdYbf
+ y30LjGsto/F2CJsKSYZ1bFe660+uybdPBBUjXvubp8GFPZkgQkLvxYX16+PrGdjr90Ib
+ T8jrRNKl2VGMZNAoX4y6RF8HEQp6svCtiqIgAVhOyIcnNsvEKkD4ZuDefBxBSqx7AnjQ
+ zczQ==
+X-Gm-Message-State: AOJu0YyVlgKHpDtVJkvSv3WxmfBRWd7toZZZ1JbpGRDUMPGqZ/pHgclC
+ KPOZpU11krIGjTPeaHOLKa2YYUKBAejHrBhvvL3XJXwXhpvbk258Fnpnka8LJXOTZ1IMPyMCEGJ
+ SEc0=
+X-Gm-Gg: ASbGncvptCbx4GztaevKhiCcUnYeSWUo2o3/Rsc9Q1avyAJ170wkOdoi0bF4N+tkAbu
+ yeuHkafFHEleuTHxELd1b0NXxNKyQhgHFHh9jkUfQUvEkd5o09TnKwq1fW+fkZyy1QnHdBfh499
+ XJnBmW9yI2OmUrKoJ1VIW0NNUIEbC+gszb8SSVujpndF0iL0EUCB+0SlUkaCgQGXKG4uIGJa5EA
+ hBdw9gI77xFxFM9gs2q4lRdJPs266dh/t+kPcEF+l8k5AspDff75pdoAcTZw4z/sGqQY2Q7IWYy
+ JnQW1SXP3ygeVKI2+3Idbs3/DkMaw2B7GS33IHPLZ/Mh6kCE5r56bAA=
+X-Google-Smtp-Source: AGHT+IEDIZEOtKBklQFEQINMmS7zKkiQCP5gvHEEoqKq9PpZYJjqkanOi9pw8IYzmkKu/B+94TchoQ==
+X-Received: by 2002:a05:622a:1446:b0:46d:d2b7:4bb5 with SMTP id
+ d75a77b69052e-46e12a96f34mr49519861cf.28.1737132074743; 
+ Fri, 17 Jan 2025 08:41:14 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afbf3887sm12867746d6.9.2025.01.17.08.41.08
+ 6a1803df08f44-6e1afbf3887sm12867746d6.9.2025.01.17.08.41.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jan 2025 08:41:08 -0800 (PST)
+ Fri, 17 Jan 2025 08:41:14 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Tim Harvey <tharvey@gateworks.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: [PATCH v2 5/6] tpm: PCR allocate during PCR extend to disable the
- unsupported algorithms
-Date: Fri, 17 Jan 2025 08:40:28 -0800
-Message-Id: <20250117164032.88942-6-raymond.mao@linaro.org>
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v2 6/6] board: qemu-arm: select TPM_PCR_ALLOCATE
+Date: Fri, 17 Jan 2025 08:40:29 -0800
+Message-Id: <20250117164032.88942-7-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250117164032.88942-1-raymond.mao@linaro.org>
 References: <20250117164032.88942-1-raymond.mao@linaro.org>
@@ -107,33 +106,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During PCR extend process, if any unsupported algorithms are active,
-try to use PCR allocate to inactivate them.
+Enable PCR allocate and system reboot when algorithms don't match
+among the values from TPM device, U-Boot support and evenlog.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 changes in v2
 - None.
 
- lib/tpm-v2.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ configs/qemu_arm64_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 0e497b2c2a..4995ddc9af 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -344,7 +344,10 @@ u32 tpm2_pcr_extend(struct udevice *dev, u32 index, u32 algorithm,
- 
- 	if (!tpm2_check_active_banks(dev)) {
- 		log_err("Cannot extend PCRs if all the TPM enabled algorithms are not supported\n");
--		return -EINVAL;
-+
-+		ret = tpm2_pcr_allocate(dev, 0);
-+		if (ret)
-+			return -EINVAL;
- 	}
- 	/*
- 	 * Fill the command structure starting from the first buffer:
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index 0c7107c1f4..6ba3cb1bbd 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -73,3 +73,4 @@ CONFIG_SEMIHOSTING=y
+ CONFIG_MBEDTLS_LIB=y
+ CONFIG_TPM=y
+ CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=y
++CONFIG_TPM_PCR_ALLOCATE=y
 -- 
 2.25.1
 
