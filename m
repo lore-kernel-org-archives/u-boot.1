@@ -4,92 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF93C02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 16:36:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83E0CC02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 16:37:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7175080771;
-	Fri, 17 Jan 2025 17:36:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1014F80737;
+	Fri, 17 Jan 2025 17:37:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U4ncVZGj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A9P52Z0Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A42C8076E; Fri, 17 Jan 2025 17:36:15 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 318DB80717; Fri, 17 Jan 2025 17:37:55 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 008248074B
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 17:36:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B5508036F
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 17:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6dd420f82e2so31853796d6.1
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 08:36:11 -0800 (PST)
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6dd1b895541so51419736d6.0
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 08:37:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737131770; x=1737736570; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oxttJthZ2989iDMvN0xk6xJ+VIPmh3+fsvMCZ9QYcco=;
- b=U4ncVZGjbvPAKSS5iS6yuv6q1mSRU7IWiZJgG6mI4XdzBIz5PNneab/cgaehmRHAOg
- h9XzaTT3O95q7xCM+AqkO0N9YyKYneg+4lUX7SNNZbH2SwIjmeFULxR5QjejvSaRInYC
- VS4lI+tm3KNsngd2ezEKkx8L3//0hMm2aJnfVsA4Ox6jfTJjpcBBzA6CwGWjLXd4pOkz
- xIcTeJe6P3jGrxuOc+4LZ7sDD4QDlSfhVwZLPWdS0mtzypNbqYbnKshUjv+JSLmjgTms
- YKqcK81ILAh6EKj3/16aABYoFfyV+YtCJw6YSy8ARcmXfGwgDuEG0zKfFMicolUc29b7
- /Mtw==
+ d=gmail.com; s=20230601; t=1737131871; x=1737736671; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jvmESUlxSHA21/WMXtbVBpVxA8EAKPavsYPjYgxvLvA=;
+ b=A9P52Z0YrKuDcbaDmhpbVpFhbmkHtl78NcN3vcvrehdhmsl7h/dwZHSjicR0LVfzJI
+ twOMLRQi0k+nO5Htj3zuzYWfthxAqWvHfJRno08WWQRCoJboYSSWAXcB59aK9oaCVcW5
+ iL8a25WCBFK+XuflhlFN114ryoCjre2Ct3ntct7bKDKOt5ExdOQ22g2L3dhqxDPOPdwx
+ xJ5Ay4OG6SQSYgi/pwFVKXk8KHN6GjtCi70aYhTS1jOkks4OVqJc/jJ0OTZy1puN6kDk
+ Ix3wJ/iHjwknBY+46wPPL0TpGPp3Frr50fQt4VQoa6TPjFntea1HCfxkXBJ0VzBY75Tw
+ pfoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737131770; x=1737736570;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oxttJthZ2989iDMvN0xk6xJ+VIPmh3+fsvMCZ9QYcco=;
- b=nF4F70WO27mhvUAHtNtXMTJx3ZH1Oy0uWZq4tnqij3IMyPauw6bFsYFxcDlnlkeORA
- kK4+WCaOWYclJvGSl5xhvpAQdMT6M+rosS5JLyRmmgW1XhORB6Kog8Tx/xEB20iusCpI
- 2Wa4hPgzqOXtWGbXFEZflrsbe94OGPOQygoFhsFtBZZUUhzcFpNSJolKFwBlSk9jOgan
- FyX13Llh9k2dd1sQjS3Dnpg2HNOInUDDDP+RsYZIB19cx89z8AqucF0x+L7zdf/R19GC
- tijiNvKbqe1XI6Jph9u9TkPBGLNGcCQ+7aGKmHEw5l2Zj03A9rbBVzBRw/jzAf9K4EuJ
- 1e8Q==
-X-Gm-Message-State: AOJu0YyRxjtt+DpkaNzOqGcM/pUjkEmOJozFJ48QIPt2O3ZztULBkOZ3
- Wg7TWOhfBtpgneY2L7l3AWNpEuJa0qenKvLV0ovKAww9W8AGpt0an7PtOPsHERvoeyRZQ66VrM/
- /D+A=
-X-Gm-Gg: ASbGncstTmJIB7vATQMS4PtkM+UQ9fvHJ2bRzX4011lVCNM+mypyyz7W0CU4tIJ5++c
- iTEzSuFz533d0BmzRLUdWKR1NqpKEE4r3RxMNhnPEpCGTOaFyFXZVdhqQnCL8eJ+DbSFN0a1ZVx
- BoZsubz3WLw1yTRwJfJaMpxu6p4vZDBFkENFu+EUZ1lLJScbDyu7wijv2Riz5ZySkGVkieNHSMX
- rtSECCjHrIcsQuHmAK5JslTRhCw3G8HzaMUInqtK0nWoR9ygFgYG4J3MsQmDtnZN/WTlJIS4fma
- 1IrxrwMpdWY61NOi0CtZG0yykNFHjmbQfKiM9/MSnNhrt4atmgER9DU=
-X-Google-Smtp-Source: AGHT+IE+5AZMhSVakIQfA5Hx7D1ulnC7eKiQqdDcxY1G9CNCmRUgcQsqhi/Kmq9R+K/IT50Mi2ctvQ==
-X-Received: by 2002:ad4:5742:0:b0:6d8:821d:736e with SMTP id
- 6a1803df08f44-6e1b220d9b1mr60181616d6.36.1737131770518; 
- Fri, 17 Jan 2025 08:36:10 -0800 (PST)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afce45c0sm12733946d6.103.2025.01.17.08.36.08
+ d=1e100.net; s=20230601; t=1737131871; x=1737736671;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jvmESUlxSHA21/WMXtbVBpVxA8EAKPavsYPjYgxvLvA=;
+ b=AGNzLFzvB3v69yKrE6qGC44HxHeOITYoXk495/sgWs1lQ8qyCwNcwsG7w8b6fEPhcg
+ eFYPVpz/cwXus+ndmMP3R/NBilp0Yjpo8L5Cx6dczfz8B+0j/DZayYEcKsVoYu02nMSg
+ nXdGMyj6uLTu1E0XTvpYtMG+CZVDsaqz+wCUtUwQyacqgrkiHur0LDhe+SXJKklvSKMA
+ ibD7DIiiY+Gvq9e+832ESVUKiDDvpGzPzQ5Mg3EsLI6v0BdaItuYmgPuxqPxxEsuEVGR
+ pPtVfkar6QGO71WxGWdF8qb9W+bEk5CuHRe+LAyKl3ltyy2fAkNrceP8Tmn3H5q3nnjl
+ CBlw==
+X-Gm-Message-State: AOJu0YzPeC8mvO0cjFZ3Ag45WmKb6C+8xRk3JMGHvzWrYsSeQUahC1VK
+ HBQ7hoYQg1ZYP7i++TDsOaZIceDw+9+1aVR3PLFISHZZQOb/7Ar6KggAvA==
+X-Gm-Gg: ASbGncsBvVJjq/H86tcSRUD8xc4RFSicElFHoqITKSdBDSECtsEQPL/ukSpqjjbKosm
+ nlFD7Sv9lw4EvCi6Sr0U48VNc/mLycPD5LK3/Ar4/jFvRAi55Bscok1lW1c9snS7wf6dFET8aDZ
+ B0xOPz4Cnm7hiI3svB9ZSexg+fubGke8/5zgiRM4pd9jb1MRkEw/0HHMDHNYKIYd2I1UcyKnVFa
+ p7jEuSzCJpiJR0lpcAXMn7rrHEFJPHKnNJyvdpHxZ+JUHgXscJT7iFqtVNHMh2yfn/x/A7PWz72
+ g6xBEtj1G5bpOPd1uuHTLZpxdWLzpE+ARhk7Mw==
+X-Google-Smtp-Source: AGHT+IF18MSgXN+UmcqyipBKNHzQeiy0yrqyirCGdJLGfdP9ubOIDJIGbc+fcBisSPbTRQelFN6n0g==
+X-Received: by 2002:a05:6214:5b81:b0:6d8:9dad:e14b with SMTP id
+ 6a1803df08f44-6e1b2178768mr54160586d6.13.1737131871650; 
+ Fri, 17 Jan 2025 08:37:51 -0800 (PST)
+Received: from jesse-desktop.. (pool-108-26-179-17.bstnma.fios.verizon.net.
+ [108.26.179.17]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e1afcd388asm12770356d6.92.2025.01.17.08.37.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jan 2025 08:36:09 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
+ Fri, 17 Jan 2025 08:37:51 -0800 (PST)
+From: Jesse Taube <mr.bossman075@gmail.com>
+X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, Levi Yun <yeoreum.yun@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Eddie James <eajames@linux.ibm.com>, Tim Harvey <tharvey@gateworks.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Subject: [PATCH v6 3/3] tpm: get tpm event log from bloblist
-Date: Fri, 17 Jan 2025 08:35:41 -0800
-Message-Id: <20250117163545.88627-3-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250117163545.88627-1-raymond.mao@linaro.org>
-References: <20250117163545.88627-1-raymond.mao@linaro.org>
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Jesse Taube <Mr.Bossman075@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Shawn Guo <shawnguo@kernel.org>
+Subject: [PATCH v2 1/2] ARM: dts: imxrt1050: Fix clocks for mmc
+Date: Fri, 17 Jan 2025 11:37:49 -0500
+Message-ID: <20250117163750.3918082-1-Mr.Bossman075@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,129 +99,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get tpm event log from bloblist instead of FDT when bloblist is
-enabled and valid from previous boot stage.
+One of the usdhc1 controller's clocks should be IMXRT1050_CLK_AHB_PODF not
+IMXRT1050_CLK_OSC.
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Fixes: 1c4f01be3490 ("ARM: dts: imx: Add i.MXRT1050-EVK support")
+Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+Signed-off-by: Shawn Guo <shawnguo@kernel.org>
+
+[ upstream commit: 5f122030061db3e5d2bddd9cf5c583deaa6c54ff ]
+
+(cherry picked from commit 37ab64667e47adcfaaffc8264218fb5cc8a99a3e)
 ---
-Changes in v2
-- Remove patch dependency.
-- Remove the fallback to FDT when BLOBLIST is selected.
-Changes in v3
-- Malloc an 8KB buffer when user eventlog buffer does not exist.
-Changes in v4
-- Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
-Changes in v5
-- Replace TPM2_EVENT_LOG_SIZE with CONFIG_TPM2_EVENT_LOG_SIZE.
-- Add an inline TODO comment.
-Changes in v6
-- Remove the malloc and keep the buffer pointed by "sml" for the fallback
-  as it is the right place for linux to discover the eventlog.
+V1 -> V2:
+ - New patch
+---
+ dts/upstream/src/arm/nxp/imx/imxrt1050.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- lib/tpm_tcg2.c | 58 +++++++++++++++++++++++++++++++++-----------------
- 1 file changed, 38 insertions(+), 20 deletions(-)
-
-diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-index 4134d93a35..6425bf143a 100644
---- a/lib/tpm_tcg2.c
-+++ b/lib/tpm_tcg2.c
-@@ -5,6 +5,7 @@
- 
- #include <dm.h>
- #include <dm/of_access.h>
-+#include <malloc.h>
- #include <tpm_api.h>
- #include <tpm-common.h>
- #include <tpm-v2.h>
-@@ -19,6 +20,7 @@
- #include <linux/unaligned/generic.h>
- #include <linux/unaligned/le_byteshift.h>
- #include "tpm-utils.h"
-+#include <bloblist.h>
- 
- int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
- 		      u32 *bank_num)
-@@ -672,21 +674,40 @@ void tcg2_measurement_term(struct udevice *dev, struct tcg2_event_log *elog,
- 
- __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
- {
--	const __be32 *addr_prop;
--	const __be32 *size_prop;
-+	const __be32 *addr_prop = NULL;
-+	const __be32 *size_prop = NULL;
- 	int asize;
- 	int ssize;
-+	struct ofnode_phandle_args args;
-+	phys_addr_t a;
-+	fdt_size_t s;
- 
- 	*addr = NULL;
- 	*size = 0;
- 
--	addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
--	if (!addr_prop)
--		addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
-+	*addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
-+	if (*addr && *size)
-+		return 0;
- 
--	size_prop = dev_read_prop(dev, "tpm_event_log_size", &ssize);
--	if (!size_prop)
-+	/*
-+	 * TODO:
-+	 * Replace BLOBLIST with a new kconfig for handoff all components
-+	 * (fdt, tpm event log, etc...) from previous boot stage via bloblist
-+	 * mandatorily following Firmware Handoff spec.
-+	 */
-+	if (!CONFIG_IS_ENABLED(BLOBLIST)) {
-+		addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
-+		size_prop = dev_read_prop(dev, "tpm_event_log_size", &ssize);
-+	}
-+
-+	/*
-+	 * If no eventlog was observed, a sml buffer is required for the kernel
-+	 * to discover the eventlog.
-+	 */
-+	if (!addr_prop || !size_prop) {
-+		addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
- 		size_prop = dev_read_prop(dev, "linux,sml-size", &ssize);
-+	}
- 
- 	if (addr_prop && size_prop) {
- 		u64 a = of_read_number(addr_prop, asize / sizeof(__be32));
-@@ -694,22 +715,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
- 
- 		*addr = map_physmem(a, s, MAP_NOCACHE);
- 		*size = (u32)s;
--	} else {
--		struct ofnode_phandle_args args;
--		phys_addr_t a;
--		fdt_size_t s;
- 
--		if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
--					       0, &args))
--			return -ENODEV;
-+		return 0;
-+	}
-+
-+	if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
-+		return -ENODEV;
- 
--		a = ofnode_get_addr_size(args.node, "reg", &s);
--		if (a == FDT_ADDR_T_NONE)
--			return -ENOMEM;
-+	a = ofnode_get_addr_size(args.node, "reg", &s);
-+	if (a == FDT_ADDR_T_NONE)
-+		return -ENOMEM;
- 
--		*addr = map_physmem(a, s, MAP_NOCACHE);
--		*size = (u32)s;
--	}
-+	*addr = map_physmem(a, s, MAP_NOCACHE);
-+	*size = (u32)s;
- 
- 	return 0;
- }
+diff --git a/dts/upstream/src/arm/nxp/imx/imxrt1050.dtsi b/dts/upstream/src/arm/nxp/imx/imxrt1050.dtsi
+index dd714d235d5..b0bad0d1ba3 100644
+--- a/dts/upstream/src/arm/nxp/imx/imxrt1050.dtsi
++++ b/dts/upstream/src/arm/nxp/imx/imxrt1050.dtsi
+@@ -87,7 +87,7 @@
+ 			reg = <0x402c0000 0x4000>;
+ 			interrupts = <110>;
+ 			clocks = <&clks IMXRT1050_CLK_IPG_PDOF>,
+-				<&clks IMXRT1050_CLK_OSC>,
++				<&clks IMXRT1050_CLK_AHB_PODF>,
+ 				<&clks IMXRT1050_CLK_USDHC1>;
+ 			clock-names = "ipg", "ahb", "per";
+ 			bus-width = <4>;
 -- 
-2.25.1
+2.45.2
 
