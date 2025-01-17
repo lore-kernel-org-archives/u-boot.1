@@ -4,50 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94840C02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 01:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D33A0C02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 01:57:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11B2D80312;
-	Fri, 17 Jan 2025 02:54:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 5235F8069D;
+	Fri, 17 Jan 2025 02:57:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D0DB48069D; Fri, 17 Jan 2025 02:54:01 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED2FE8022B
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 02:53:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 50H1rm96071553
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Fri, 17 Jan 2025 09:53:48 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 17 Jan
- 2025 09:53:48 +0800
-Date: Fri, 17 Jan 2025 09:53:45 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
-Subject: [GIT PULL] u-boot-riscv/master
-Message-ID: <Z4m4KZ3IS8emTeLT@swlinux02>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iUbNUpao";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D8FCE806FB; Fri, 17 Jan 2025 02:57:35 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C76980312
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 02:57:33 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-219f8263ae0so28569945ad.0
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 17:57:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1737079052; x=1737683852; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4Oy0OUK0Eb9ouqYWoSkEn7G7OVyYBPPlE65VZtBHMWE=;
+ b=iUbNUpaoNYs+lmOYqoPiAwXtzSS5cFV4qEh+dt9CuT/+bjvBZCD3yn5sXrCjzvjbqX
+ c/8lMvXWyHCT7XbaqAz+ESJB2fRDCZS7XnXQ/o6TUCGABaYFZ7FIby/3sNikvp09CPLo
+ VpfnnGETCFvgoWQk9FH+FEvis04btMmsyCqxZ6BLl0oowgYD2Fus/iWGx/zjR4f5EHr8
+ NIsHx4tCGTMUF03uTMx3T4PtXs2sljQAxwP0YukDZC3ClRB3EZBVZErITtsflbKuCTt4
+ Z2c9SujkjHAfPDwp4jwvNQXkxjgx/9wCMmJE0eE4yO4kqR+p9jV3PMNB2mHK8MM/HFk6
+ QeMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737079052; x=1737683852;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4Oy0OUK0Eb9ouqYWoSkEn7G7OVyYBPPlE65VZtBHMWE=;
+ b=mrqwFAIv4+RkBo10sQuEMJ8Ykvlz3JwukRJ9WNF1WfRmy19XkEu17sb3UtUHyYVr6Y
+ zVZ9luKELXB/hW4aok77d36yJEHw/D6xnsSFw+j2eqOi/ljIP7vkio7SUXXF8M99Y/ad
+ U15I0C6m7CFY3EhLw31iob5mnij3QyfXBFPnvccNeuDrYrhXOUPYxVCqDWQr8r0B7/3G
+ oIPEsKhYm1BObLVNz2I3f+TbH7BPekmhcvBEO2ESmlgFgMmHHXdT1QK4S28Wpur6s7rm
+ jNBhatZBLTDNrfuccaabdgQOWq6nxYAuHmGzENcZFGQSko1C6JBtb67tZ39v8QAutVjo
+ 6t2w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJM6Z3GAswJwwPbQiB/WjU6dtSrN1Ka4TtC4xQ/h0Xx4jaPstUvzL7s6rq7/sr4lKnza2pBrQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyt/6FudKnBFXXqmam9hNmN4Zr7NH41vLpsONe4VWdJoYbGHkKG
+ JGUCURac4z8nTZdmomqXWN9/BUDoyHEjLVOKiqry4LX34NSuhthX
+X-Gm-Gg: ASbGncuJL/+yOSNAO3qLriXJDBOvtglAYcpe7HXGFYzjrYBI7SU9/JB5H7pek6OSiOd
+ WtWxF8RJ2Yc2R4vsZ8i2sTiWD9GC1Y0qkDHRwZNTrGfkPtvmhe4a+n99uVwENw1IOq1DdgckhGo
+ 9yDXfcsk9t1WN+hId2y2V2tWrBpaywaVQGMBXyI/tYDSP64nGhaGE93H8eTIklZPhUpfraFOCKH
+ O7AL+xa5yXPLRhRiDVU9pFHLpVewjhBqZp6VrLhvuvURNjSkvsCPi7K9rTh7K2dYPIAwpY=
+X-Google-Smtp-Source: AGHT+IGaXRoqgHHEI3zfewPhsYZwiGEJilG/bZ/ZIhOJNoiJPxiGDRAfTx8jS/3RheD39aF8VODZEw==
+X-Received: by 2002:a05:6a20:8724:b0:1e1:bd5b:b84b with SMTP id
+ adf61e73a8af0-1eb215fb386mr1063982637.40.1737079051913; 
+ Thu, 16 Jan 2025 17:57:31 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b1a4:73e9:7e6a:ebcd])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-72daba4eaacsm692964b3a.135.2025.01.16.17.57.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jan 2025 17:57:31 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: uboot-imx@nxp.com, peng.fan@nxp.com, y.moog@phytec.de,
+ u-boot@lists.denx.de, marex@denx.de, tharvey@gateworks.com,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v2] imx8m: Guard binman nodes with CONFIG_OPTEE 
+Date: Thu, 16 Jan 2025 22:56:42 -0300
+Message-Id: <20250117015642.2373824-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 50H1rm96071553
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,91 +96,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Fabio Estevam <festevam@denx.de>
 
-The following changes since commit 178f6ecb21fe12ada74a9a1a08093c812b15eea5:
+Guard binman nodes with CONFIG_OPTEE to fix the following error
+when building without optee support:
 
-  Merge patch series "bootstd: Support recording images" (2025-01-15 19:27:14 -0600)
+  BINMAN  .binman_stamp
+Image 'image' has faked external blobs and is non-functional: tee.bin
 
-are available in the Git repository at:
+Image 'image' is missing optional external blobs but is still functional: tee-os
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+/binman/section/fit/images/tee/tee-os (tee.bin):
+   See the documentation for your board. You may need to build Open Portable
+   Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
 
-for you to fetch changes up to b3ce35900cfa500a31fad652302a92cab604d6b5:
+Some images are invalid
+make: *** [Makefile:1135: .binman_stamp] Error 103
 
-  doc: canaan: Add K230 CanMV board (2025-01-16 15:55:27 +0800)
+While at it, only pass tee to the loadables lines when CONFIG_OPTEE is
+defined.
 
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/24215
-----------------------------------------------------------------
-- RISC-V: Add "riscv,isa-extensions" and multi-letter extension parsing support
-- RISC-V: Add default cache line size
-- Board: Canaan: Add K230-CanMV support
-- Board: VisionFive2: Split out target specific configuration
-----------------------------------------------------------------
-E Shattow (1):
-      riscv: dts: starfive: split out visionfive2 target specific configuration
+Reported-by: Tim Harvey <tharvey@gateworks.com>
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+---
+Changes since v1:
+- Also guard the loadables line. (Tim)
 
-Junhui Liu (5):
-      usb: dwc2: Add support for Canaan K230
-      riscv: dts: canaan: Add basic device tree for K230 CanMV board
-      riscv: cpu: k230: Add support for Canaan Kendryte K230 SoC
-      riscv: canaan: k230_canmv: Add initial support
-      doc: canaan: Add K230 CanMV board
+ arch/arm/dts/imx8mm-u-boot.dtsi | 6 ++++++
+ arch/arm/dts/imx8mn-u-boot.dtsi | 6 ++++++
+ arch/arm/dts/imx8mp-u-boot.dtsi | 6 ++++++
+ arch/arm/dts/imx8mq-u-boot.dtsi | 6 ++++++
+ 4 files changed, 24 insertions(+)
 
-Mayuresh Chitale (2):
-      riscv: Enhance extension probing
-      riscv: Fallback to riscv,isa
+diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot.dtsi
+index ecc2319279ea..8608fa004fdc 100644
+--- a/arch/arm/dts/imx8mm-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-u-boot.dtsi
+@@ -164,6 +164,7 @@
+ 					};
+ #endif
+ 
++#ifdef CONFIG_OPTEE
+ 					tee: tee {
+ 						description = "OP-TEE";
+ 						type = "tee";
+@@ -178,6 +179,7 @@
+ 							optional;
+ 						};
+ 					};
++#endif
+ 
+ 					binman_fip: fip {
+ 						arch = "arm64";
+@@ -207,7 +209,11 @@
+ 						fdt = "fdt-SEQ";
+ 						firmware = "uboot";
+ #ifndef CONFIG_ARMV8_PSCI
++#ifdef CONFIG_OPTEE
+ 						loadables = "atf", "tee";
++#else
++						loadables = "atf";
++#endif
+ #endif
+ 					};
+ 				};
+diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot.dtsi
+index 4a4498b36b01..bf2bb0f17c77 100644
+--- a/arch/arm/dts/imx8mn-u-boot.dtsi
++++ b/arch/arm/dts/imx8mn-u-boot.dtsi
+@@ -240,6 +240,7 @@
+ 					};
+ #endif
+ 
++#ifdef CONFIG_OPTEE
+ 					tee: tee {
+ 						description = "OP-TEE";
+ 						type = "tee";
+@@ -254,6 +255,7 @@
+ 							optional;
+ 						};
+ 					};
++#endif
+ 
+ 					binman_fip: fip {
+ 						arch = "arm64";
+@@ -283,7 +285,11 @@
+ 						fdt = "fdt-SEQ";
+ 						firmware = "uboot";
+ #ifndef CONFIG_ARMV8_PSCI
++#ifdef CONFIG_OPTEE
+ 						loadables = "atf", "tee";
++#else
++						loadables = "atf";
++#endif
+ #endif
+ 					};
+ 				};
+diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
+index 9ede98a11e42..9e590c3bba07 100644
+--- a/arch/arm/dts/imx8mp-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+@@ -185,6 +185,7 @@
+ 					};
+ #endif
+ 
++#ifdef CONFIG_OPTEE
+ 					tee: tee {
+ 						description = "OP-TEE";
+ 						type = "tee";
+@@ -199,6 +200,7 @@
+ 							optional;
+ 						};
+ 					};
++#endif
+ 
+ 					@fdt-SEQ {
+ 						description = "NAME";
+@@ -219,7 +221,11 @@
+ 						fdt = "fdt-SEQ";
+ 						firmware = "uboot";
+ #ifndef CONFIG_ARMV8_PSCI
++#ifdef CONFIG_OPTEE
+ 						loadables = "atf", "tee";
++#else
++						loadables = "atf";
++#endif
+ #endif
+ 					};
+ 				};
+diff --git a/arch/arm/dts/imx8mq-u-boot.dtsi b/arch/arm/dts/imx8mq-u-boot.dtsi
+index 93e2ef27f7ce..458657fc4749 100644
+--- a/arch/arm/dts/imx8mq-u-boot.dtsi
++++ b/arch/arm/dts/imx8mq-u-boot.dtsi
+@@ -144,6 +144,7 @@
+ 					};
+ #endif
+ 
++#ifdef CONFIG_OPTEE
+ 					tee: tee {
+ 						description = "OP-TEE";
+ 						type = "tee";
+@@ -158,6 +159,7 @@
+ 							optional;
+ 						};
+ 					};
++#endif
+ 
+ 					fdt {
+ 						compression = "none";
+@@ -179,7 +181,11 @@
+ 						fdt = "fdt";
+ 						firmware = "uboot";
+ #ifndef CONFIG_ARMV8_PSCI
++#ifdef CONFIG_OPTEE
+ 						loadables = "atf", "tee";
++#else
++						loadables = "atf";
++#endif
+ #endif
+ 					};
+ 				};
+-- 
+2.34.1
 
-Yu-Chien Peter Lin (1):
-      Kconfig: Add a default cache line size for RISC-V
-
- arch/Kconfig                                       |   3 +-
- arch/riscv/Kconfig                                 |   5 +
- arch/riscv/cpu/cpu.c                               | 600 +++++++++++++++++++--
- arch/riscv/cpu/k230/Kconfig                        |  14 +
- arch/riscv/cpu/k230/Makefile                       |   6 +
- arch/riscv/cpu/k230/cpu.c                          |   9 +
- arch/riscv/cpu/k230/dram.c                         |  21 +
- arch/riscv/dts/Makefile                            |   1 +
- arch/riscv/dts/jh7110-common-u-boot.dtsi           |  95 ----
- arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi       |   1 +
- arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi    |   1 +
- .../jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi |   1 +
- .../jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi |   1 +
- arch/riscv/dts/k230-canmv.dts                      |  31 ++
- arch/riscv/dts/k230-u-boot.dtsi                    |  25 +
- arch/riscv/dts/k230.dtsi                           | 175 ++++++
- arch/riscv/dts/starfive-visionfive2-binman.dtsi    | 102 ++++
- arch/riscv/include/asm/cpufeature.h                |  37 ++
- arch/riscv/include/asm/hwcap.h                     | 105 ++++
- arch/riscv/lib/cache.c                             |  26 +-
- board/canaan/k230_canmv/Kconfig                    |  19 +
- board/canaan/k230_canmv/MAINTAINERS                |   6 +
- board/canaan/k230_canmv/Makefile                   |   5 +
- board/canaan/k230_canmv/board.c                    |   9 +
- configs/k230_canmv_defconfig                       |  19 +
- doc/board/canaan/index.rst                         |   8 +
- doc/board/canaan/k230_canmv.rst                    |  88 +++
- doc/board/index.rst                                |   1 +
- doc/device-tree-bindings/usb/dwc2.txt              |   1 +
- 29 files changed, 1261 insertions(+), 154 deletions(-)
- create mode 100644 arch/riscv/cpu/k230/Kconfig
- create mode 100644 arch/riscv/cpu/k230/Makefile
- create mode 100644 arch/riscv/cpu/k230/cpu.c
- create mode 100644 arch/riscv/cpu/k230/dram.c
- create mode 100644 arch/riscv/dts/k230-canmv.dts
- create mode 100644 arch/riscv/dts/k230-u-boot.dtsi
- create mode 100644 arch/riscv/dts/k230.dtsi
- create mode 100644 arch/riscv/dts/starfive-visionfive2-binman.dtsi
- create mode 100644 arch/riscv/include/asm/cpufeature.h
- create mode 100644 arch/riscv/include/asm/hwcap.h
- create mode 100644 board/canaan/k230_canmv/Kconfig
- create mode 100644 board/canaan/k230_canmv/MAINTAINERS
- create mode 100644 board/canaan/k230_canmv/Makefile
- create mode 100644 board/canaan/k230_canmv/board.c
- create mode 100644 configs/k230_canmv_defconfig
- create mode 100644 doc/board/canaan/index.rst
- create mode 100644 doc/board/canaan/k230_canmv.rst
-
-Best regards,
-Leo
