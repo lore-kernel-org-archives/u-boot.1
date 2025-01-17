@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8434CC02185
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 17:56:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DBAAC02185
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 17:56:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 737728036F;
-	Fri, 17 Jan 2025 18:56:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C77CE8069D;
+	Fri, 17 Jan 2025 18:56:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F8GR2bVo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mI/6vffY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2D1D8069D; Fri, 17 Jan 2025 18:56:26 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 94DAB8069D; Fri, 17 Jan 2025 18:56:37 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6899F8022B
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 18:56:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D2048073D
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 18:56:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7be44a90468so264063285a.3
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 09:56:24 -0800 (PST)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7b6e9db19c8so210632285a.3
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 09:56:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737136583; x=1737741383; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737136594; x=1737741394; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LyZj/VNLJj7Gd4K/aTPEW7Tml9QIy0Lk6QNuakfF8WA=;
- b=F8GR2bVooiJ+k//jS/QOczJR35/gA6DLB+sYA+D+5TRzR16TiQdwK5Hi0vUz3gBX+5
- K0R2OB4S/CHUiaEW0OnTcQjy3uSWB9pO1rB40/vBvoqvINI87JXjR5ESkKbf6pwIs24x
- 4wrznAwKSzdNQteSgnhNhTuTt0/6uQbnkw5BQ=
+ bh=+uVYVMY2M3jTbI/agj8RmYisEuXXX4IoHHODL6B93Ro=;
+ b=mI/6vffYh/sopjsSe9k4pFHER2qwKV0Be5Igo5vIDbckHE8BYh/ZJKj9T3z2IA9D5V
+ oXxrPne4iREe7DhKgDZluixgZlQ2V+kf27DhaUjnj7JhO5n831qrNyxThoENC0PJMjNY
+ FiwFEWoKpotfM2sHkrKZ9U4gjQEIlInSUFkHA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737136583; x=1737741383;
+ d=1e100.net; s=20230601; t=1737136594; x=1737741394;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LyZj/VNLJj7Gd4K/aTPEW7Tml9QIy0Lk6QNuakfF8WA=;
- b=ba5pqysngMsyeI9V/rsGsBtO/bLjdgzHWCGVaXiU21VdxuhiurorTLKaeDfxCG5bxV
- wYdbKnJGc+YThfvQoEAhKMnwpf/qaS2zb/us0DSkLQSOQAYKRgXkLCMJDZCeXkq+e4pd
- xo0q1yEWI6go875pu1EnmLSizVdCxPXwNmgRzxBUQbeDfKEJmE6fUoU+njDcdSW3ig+d
- 52E+8MtB/AJ5cI8mxuDL0nWSszw+1+/72kgWUpyagXKglCS4rJvwuI2OR6BGKRe7c1uu
- 8mE/wGcxmMZoBpy0lC/z7mpW22LEtsNva9ZbTouOJV+pzjU3t+bnotCVQAfWfHHaxPOK
- gHSA==
-X-Gm-Message-State: AOJu0YyCQCyhWkFoeWexjHC1Dm+EEg4TP/jVccfTq/YIvvUEtNOynroR
- oa82/OE+cA39CIB9qUKmrNdyLvTXrhQBmhgbXfh7vdL0W7S0lkpHqamgBKLMviCe8oZdOARll3i
- VNhw=
-X-Gm-Gg: ASbGncuW8fv7K2twyakQwJQBGpOewd5zpPsk0JhsQyUlSW2le8fw3NbQXMin+Q0nAwU
- FfyW4fw7zdhQR29s6AyfbyLXHhO5ZxAKDtIEhNCyiSmzadcxmfcmzQEypa+L2deUXB5NYFFQgl7
- 2YKlEKJXzJMPlJlWBCl6AU0GNQyJHfNbVLANq4mzDIKmU8gXA3/aSHCQPoGmwwLV2zg63QRUCzq
- WapQkxz22xRY/sI8qVJIST/8vl1n4HawRS4BOk+pmQ/8T/s+16UsA==
-X-Google-Smtp-Source: AGHT+IF+DeAwqwIESUD0bBWJyAql8/Rv5MYMPj9uaNydavMFhzuLqHnPN2+U/AY/OPSFiCSWD7JFUA==
-X-Received: by 2002:a05:620a:6084:b0:7b6:c714:f65c with SMTP id
- af79cd13be357-7be6320bd46mr531842885a.28.1737136583125; 
- Fri, 17 Jan 2025 09:56:23 -0800 (PST)
+ bh=+uVYVMY2M3jTbI/agj8RmYisEuXXX4IoHHODL6B93Ro=;
+ b=Xq2qI/bZbIPWLLaZNH6LeoKXdE5q6L0XuObC+NiCdB2Y2Nwi+1HumuHY7HjXaPhnz0
+ 0LfLZDbyXjLmY8wwvWoo9vIie/6BoFei5FxU7egiNPCpsk1emdu/Jwi7PYZ/G8qO7HpF
+ NxTWuwpBPOQW2uVvMGNKbnu+HxoAWj15fAm2eGg3nZxjsGKOB7OSSeKvPcyBqjZNH9wW
+ CWseDwBc15S76BRcmBuBSprX72XIghbopGo6XYdOruzD0oxQ9xX8iOSyV8iDF+HaUa7i
+ QGWhxZHTxsqLp4HR2dkAoGLeJAtN7voMpQSy+sTMlB5NwD42v99ze22aZUhX1sORJJO1
+ n3xg==
+X-Gm-Message-State: AOJu0YzWqM1Amq/N4YF4UKS08WxjobgbJhBUP0JaU4NoaiaXKoL8YEap
+ BurKXHCV6jovN2YGTUuxeEoYI/SHCrB0veUbQr9H8sNCsmhaGW/elLLGwgVc8C4RVAmWwU0G7lu
+ iF94=
+X-Gm-Gg: ASbGncty5JMk4/4tpyxWkTZ8UcSx7589D4X3IWFB+CUzEAE6FvcCmQLtq/n09RVpZmT
+ SFfJhDXv2gY2R7vI8QmjSmzOhbeSBe/GMLJGYK2H5kL790OZMU9WCkz4i9vj23XdoWA9R9+fIE3
+ yC2JMcImPKr6EgRMVSDduygEDZGyey4fd84dNuwwmLTsz6Lw2fLEt//Bugs5BsJtubde0yaZyS0
+ pgzPnhBn+JuIl6ZcZN3oUeTTl3JhB6eZLtoHhfZWRneUg2kLOsfWg==
+X-Google-Smtp-Source: AGHT+IH1NJg1+Vqx1w0Hl9kOjCd4iGcWNF9ssqN15fYPjuOHRIrzryJhzfKA3Lg765SWk8eaSzZEig==
+X-Received: by 2002:a05:620a:f0f:b0:7a9:c333:c559 with SMTP id
+ af79cd13be357-7be63289330mr543451385a.48.1737136594357; 
+ Fri, 17 Jan 2025 09:56:34 -0800 (PST)
 Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be6147500csm135951685a.10.2025.01.17.09.56.21
+ af79cd13be357-7be61473c98sm135986185a.19.2025.01.17.09.56.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jan 2025 09:56:22 -0800 (PST)
-Date: Fri, 17 Jan 2025 11:56:19 -0600
+ Fri, 17 Jan 2025 09:56:33 -0800 (PST)
+Date: Fri, 17 Jan 2025 11:56:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com
-Subject: Re: [GIT PULL] u-boot-riscv/master
-Message-ID: <20250117175619.GT3476@bill-the-cat>
-References: <Z4m4KZ3IS8emTeLT@swlinux02>
+To: Boon Khai Ng <boon.khai.ng@intel.com>
+Cc: Uboot Open List <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@intel.com>,
+ Kok Kiang Hea <kok.kiang.hea@intel.com>,
+ Dinesh Maniyam <dinesh.maniyam@intel.com>,
+ Alif Zakuan <alif.zakuan.yuslaimi@intel.com>,
+ Muhammad Hazim <muhammad.hazim.izzat.zamri@intel.com>
+Subject: Re: [dt xgmac binding 0/1] Add Synopsys DWC XGMAC Binding
+Message-ID: <20250117175630.GU3476@bill-the-cat>
+References: <20250117025405.6206-1-boon.khai.ng@intel.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="P1mCzTpLL0cMOGjh"
+ protocol="application/pgp-signature"; boundary="2LkMnlm9m8RLKywc"
 Content-Disposition: inline
-In-Reply-To: <Z4m4KZ3IS8emTeLT@swlinux02>
+In-Reply-To: <20250117025405.6206-1-boon.khai.ng@intel.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,53 +99,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---P1mCzTpLL0cMOGjh
+--2LkMnlm9m8RLKywc
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 17, 2025 at 09:53:45AM +0800, Leo Liang wrote:
+On Fri, Jan 17, 2025 at 10:54:04AM +0800, Boon Khai Ng wrote:
 
-> Hi Tom,
+> The proposed patch introduces a new binding for the=20
+> Synopsys DWC 10G Ethernet MAC IP block(XGMAC). This block is
+> configurable and supports a wide range of options, including
+> various bus types, clocking and reset structures, and feature sets.
 >=20
-> The following changes since commit 178f6ecb21fe12ada74a9a1a08093c812b15ee=
-a5:
+> The patch includes the essential properties and optional
+> configurations to ensure compatibility with different
+> hardware setups that incorporate the Synopsys DWC XGMAC IP block.
 >=20
->   Merge patch series "bootstd: Support recording images" (2025-01-15 19:2=
-7:14 -0600)
+> Boon Khai Ng (1):
+>   dt: net: add DWC XGMAC binding
 >=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
->=20
-> for you to fetch changes up to b3ce35900cfa500a31fad652302a92cab604d6b5:
->=20
->   doc: canaan: Add K230 CanMV board (2025-01-16 15:55:27 +0800)
->=20
-> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
--riscv/-/pipelines/24215
+>  .../net/snps,dwc-xgmac-ethernet.txt           | 67 +++++++++++++++++++
+>  1 file changed, 67 insertions(+)
+>  create mode 100644 doc/device-tree-bindings/net/snps,dwc-xgmac-ethernet.=
+txt
 
-Applied to u-boot/master, thanks!
+We need to just use the upstream binding here, thanks.
 
 --=20
 Tom
 
---P1mCzTpLL0cMOGjh
+--2LkMnlm9m8RLKywc
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeKmbkACgkQFHw5/5Y0
-tyy/bAv/Zm0RTu07C7MFkCq2fjbHbyUZ4JtHkZu/lWxG0Zyl1721u1HSmzcR2G8D
-MpQ1KA5Doxc/bRDThsO3s1jtm9ykAdmJ6uxcrQKveboVbCbYcZPWJvYkOqxpRpjb
-82ZJ+b1ve8iJJ2z5vfDxfzKuGGXWCVL3inNsyivUQF60kIZu3YR67nEru2zYU+bZ
-xc9rhTeFrJgLr8ARUXESZerfaJNnce5nn7GC5bYF5k8o6UqqwP4Vu8bjlqr60syV
-NZ+FRUm5niVbHk+uHjUML5taSfvKJR0z8ivH4z/tgp0DoF7MUrLIe2gGC+3qsj6K
-4V6V0R5axqsOIRFxObqO9taCBsdytnGGnH/drs1YbS04rWdm9V57qcMksTrcnGFL
-90KZrkOi89ThRulSRMafB73AzijQ628XJZdzGJcuIUsf1KHHqoBFXKxkAuIg38Og
-ZhSB2MnUc4SdGxxMgsbEbv99zIV2pf0UpbP+t2VKhMefHNFo/ZsPC4rSHxDzX0/x
-acVqrxWZ
-=kVmZ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeKmc4ACgkQFHw5/5Y0
+tyyB1wwAq/6w2H5usljs3/PAch65xZhNb7+7u5CZoYORQpzhOhR5LsPpX0xpBFk2
+k/IDgFRFcHlO0+ohHum+MCI7thx+esuq5Qn8Pbpj3fq50LsaSV18HHB7CbsSK4d5
+um+is+/OY6bl57SrydzCWz8mwUs0uK6FHnVB2YEdNiIOCgJhoHKINSWtsl0HwxTB
+4DNYcWqdLdIHmMqDuGYnGdomN8Uztv+9Hoaf7Behff8JZv8PnW6FFNy+N9iXENrt
+ej0r0sYsTBSjPYMX8bYI1gXxsPLozee7vNR+1Rk3UaGJ3MSwky6f49trjxDKbeLe
+p5FgSfyJdUPE0xhUM4XEmSjmAfK89vag8wSiuzYRznmFs9I0q3SLK7OEeYc8371b
+FurOfA3Y5dRPMc0fEiwxEZM1Yxsiwokkos6jDT1iXFvoMsSFUkUAq2dZHMRPJcO+
+rZuQGV6uxtumfgvcojq6S2LeE0oWxTP+RC5zMPGJnn4b4ccWhdu/YBrw2z3EpJhd
+GgISUdmV
+=eRCF
 -----END PGP SIGNATURE-----
 
---P1mCzTpLL0cMOGjh--
+--2LkMnlm9m8RLKywc--
