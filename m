@@ -4,136 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0984C02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 14:12:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D350C02185
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 14:12:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21289807E0;
+	by phobos.denx.de (Postfix) with ESMTP id 7AD7F807E9;
 	Fri, 17 Jan 2025 15:10:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="C32JSfEt";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UtF7dpsr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E70F1806D8; Fri, 17 Jan 2025 10:28:29 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2060c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::60c])
+ id E22A5806D8; Fri, 17 Jan 2025 10:28:31 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20619.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::619])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 959F68069D
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 10:28:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B5F680737
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 10:28:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=ibai.erkiaga-elorza@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eZs26uAJ4eKf0cWe0uefVFhlAieMZWZ5yHrnrl79TDEt4TTwYdkIjDsQJX2QjXUNJpGdLO8ETVaZR037QBC5fEikOGDJaBkkP586lNbhfH747WKztgYDDqCbPGsCIhrE+dQ0vTBJ7XAyMfcKOar4K/Kf0el2m9I9TuLihwWDoLFStMhuY92Lt4Z/1UMDYW5xWLunrMHQUnR5WbT7khDYczpeapAHCbBLfhau9431eCJQFEd9QpI/6RQqaVE8yNohLtO/7WCvUZ4Q2OJHqOhJCCKtLw+ukKAHpRuAKkNT/VUJrw/c2KkJN9T/WwE3pGB0RK8lNzZ59pjhiAXwUyz0qQ==
+ b=x9ID6YT2cTHy/7IYDBopLN/06bBjdCLVdQRJQcPAJv/0K04SAUh6795+AQfDbMiixqdqGL6XtER7RuWaQRPi6VWvCDOrSSJuvNLwNmVq4uN8+xpZg8H4TCmWQGEjLXk+clAm4l91a/O5q0nS6lVls4sFkxrlmAgyd1V2XiaQcUcxBRdnSr9j3iOE/jSrsNs0vDsrSNibSBzCQxlT1//69/6LTt9T007PkCveqx7WvADuDbeupX5ld1cPYvrbzqaZ6wMPtoKoclNM2e4grqeIo1S505qxb5XOF3EAHlhecKk2F4RgMNLJZPEd81O4PdES4Afiy9GvrUyR69i6CnN8SQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JP69jb8HVMMbKjMKk1CvMORhOSeTcbfdbt9oDFcSPzc=;
- b=ujeEHx90tI4I45p0/kNGpgOAH2VhB9xAiQiNAgYL60mACoxwsr0nMijG/2sXkvpPv3/oblH5CyxkqZfsdqwXII/26Q1dxu2DWe81N0PyoMqtiLqQGQTc78y2NiLUWUdO3GnIl2laAimh/m7QCuFpWb1V9/tXIKRcIu8YSQgWA0/1R2DKYTB1hfhPNCajVvM8lHTRdrFO+eUN3rjQDPInj4hyxuhvcsceR1KoRRUsbGCpaN93F6TlpG0ncCr7d8ULZV7enUil1xiVvc7UgDcDzgC1pwNSNzlNrYch92m4asdietK7Vvck+lT1OrBK8w9mqK6Fvuv7ZsD2bN7hbAVL6w==
+ bh=N/REpDkTEzWfnL4wd/h9YbU3X+TI7kukkhY99ewQu70=;
+ b=bJ09hWPFssnMNi1xTPBCSgmju1pmacm9N4nxAkxMlVFNzAcizL5Gy6YlZM6+Y3FxOiZi8lmK6FyoO4Z3Q0byICrLWSIxd0FJjPWGLkR+izz7m447DpjS2r9PJ2mshqBtjoA4xN3PMuarDY//gMfs6vrJqIwFQov/8sOZH3QUPTfMoLFyKyRq62Uh891U4tLvOhEdrf+7Wv86rwAEjgWwGqtYyg2omsaf0hA0L84LkLxITWzD2jKD9w1kFd1kVprRUFa292riNdh+YDbDWRiSGHcSOgRz2KpijxdwSZUCPvWX1lb51RAdx/wN1NuhDihbZodOJQS8Nw0zteRFerrSyA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JP69jb8HVMMbKjMKk1CvMORhOSeTcbfdbt9oDFcSPzc=;
- b=C32JSfEt0ep+9Go0yDSw0gQunR14tdFdRPq67kHvkF5B0EcM9UdS3hpjZcP18EROGiOcGz0bgMFDCHqOElo9s97LIo1Qg268tkmhCJ2/DyWIlW03E8GczM2Pwb210OaGYzjio2o6oeE7zGg2kYjo+P/jv+tYE0yjMDPhVRAHojk=
-Received: from CH0PR03CA0096.namprd03.prod.outlook.com (2603:10b6:610:cd::11)
- by CY5PR12MB6623.namprd12.prod.outlook.com (2603:10b6:930:41::20)
+ bh=N/REpDkTEzWfnL4wd/h9YbU3X+TI7kukkhY99ewQu70=;
+ b=UtF7dpsrAbcO+53mXaW8RzWfoM2XBifRNFAsKO7CjYwVGxeDN73jKQDjeywLlbEYFkl7kFwIx+7JAOVApT+gVKE/xOZnaWkn9RB4tJUNny9KpWFBD8wL4Gst+M81Gk2LyL3vutz9GdXPccCuaZX6jE2wD0bc8xdrXOEBbOW+2/8=
+Received: from SA0PR13CA0027.namprd13.prod.outlook.com (2603:10b6:806:130::32)
+ by CY8PR12MB7290.namprd12.prod.outlook.com (2603:10b6:930:55::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.13; Fri, 17 Jan
- 2025 09:28:21 +0000
-Received: from DS3PEPF000099DB.namprd04.prod.outlook.com
- (2603:10b6:610:cd:cafe::1b) by CH0PR03CA0096.outlook.office365.com
- (2603:10b6:610:cd::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8356.16 via Frontend Transport; Fri,
- 17 Jan 2025 09:28:21 +0000
+ 2025 09:28:24 +0000
+Received: from SN1PEPF00026367.namprd02.prod.outlook.com
+ (2603:10b6:806:130:cafe::d2) by SA0PR13CA0027.outlook.office365.com
+ (2603:10b6:806:130::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8377.6 via Frontend Transport; Fri,
+ 17 Jan 2025 09:28:24 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS3PEPF000099DB.mail.protection.outlook.com (10.167.17.197) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF00026367.mail.protection.outlook.com (10.167.241.132) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8356.11 via Frontend Transport; Fri, 17 Jan 2025 09:28:21 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8356.11 via Frontend Transport; Fri, 17 Jan 2025 09:28:24 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 17 Jan
- 2025 03:28:20 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 17 Jan
- 2025 03:28:20 -0600
+ 2025 03:28:22 -0600
 Received: from xirengwts04.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
- Transport; Fri, 17 Jan 2025 03:28:19 -0600
+ Transport; Fri, 17 Jan 2025 03:28:21 -0600
 From: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
 To: <u-boot@lists.denx.de>
 CC: Michal Simek <michal.simek@amd.com>, Ibai Erkiaga
  <ibai.erkiaga-elorza@amd.com>
-Subject: [U-Boot][PATCH v2 1/3] fpga: fix alignment on fpga cmd usage info
-Date: Fri, 17 Jan 2025 09:28:02 +0000
-Message-ID: <20250117092815.2986832-2-ibai.erkiaga-elorza@amd.com>
+Subject: [U-Boot][PATCH v2 3/3] fpga: xilinx exclusive commands info
+Date: Fri, 17 Jan 2025 09:28:04 +0000
+Message-ID: <20250117092815.2986832-4-ibai.erkiaga-elorza@amd.com>
 X-Mailer: git-send-email 2.42.0.325.g3a06386e31
 In-Reply-To: <20250117092815.2986832-1-ibai.erkiaga-elorza@amd.com>
 References: <20250117092815.2986832-1-ibai.erkiaga-elorza@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: ibai.erkiaga-elorza@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DB:EE_|CY5PR12MB6623:EE_
-X-MS-Office365-Filtering-Correlation-Id: c7261e9e-5228-4f6c-1119-08dd36d948d7
+X-MS-TrafficTypeDiagnostic: SN1PEPF00026367:EE_|CY8PR12MB7290:EE_
+X-MS-Office365-Filtering-Correlation-Id: f66cc760-62a2-4c6e-2d53-08dd36d94a8d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KV+YDYPoVekZXmX/nMdSoXLb8DZYW8SuyvUoPnIXjnZjNXisj8ON0/TMKSDs?=
- =?us-ascii?Q?cklfQWIRcF6qpALmL9cwtTJ0BfSpgUvxCprKb1e0mOTl8QoXMBxaOlp/XVQL?=
- =?us-ascii?Q?q8sn/siSJr0gEdAYhwOtzpzuSipt30s4cothgtxESefNQqt8pB20ix/GG+aC?=
- =?us-ascii?Q?IVKZ6txPmlXPlsk/vy7Dmh29ED0gBaKl2t2cy+1FzscylaLl7hgs8RnKYmOf?=
- =?us-ascii?Q?gZt9RzTRgkrbrTtHavHgpksB1kbTFQ7f9nnss7EfmL+6MNIMpDa+qwDk9Z0F?=
- =?us-ascii?Q?7LzbHW06h1btD+g1akXMi7bB9244g6Jk45elvRsAr4nVyX/sOQlwWGgncMwL?=
- =?us-ascii?Q?zUb/XuofhPXBZnHYIcrcIoSmBwTB7gU9UflsAfphnopjtiLRz0PXTY2jZBRa?=
- =?us-ascii?Q?beY+oUrSV/2fNKB1ZRIcQz4uLQUBkNOpYU+Trf7P3xLa9bhTaDdq0vC48bxQ?=
- =?us-ascii?Q?ejs6/t1eeepHH75vm00ZqkRS+7CPX2Cy0mBwjW9zVCicwytZobRN9akGXSE+?=
- =?us-ascii?Q?edG+K0h5n9kmO2KumY1Ilm4jzcca0u9M+JXcfzmml97D45KsCfyh1vDo5psC?=
- =?us-ascii?Q?KH7P/AOdedRQD/HPbWWy3tC10c5m74Wy3EeoyQ87KTBjuDOoetYA6b+0g3AB?=
- =?us-ascii?Q?nP8ZDRNOJrgCmn2paa4lOMUYI5TkyDYzzJ+dq+X2hxOi2X2wnOxjZ4hIPlh4?=
- =?us-ascii?Q?OMHbx8DQj+Xc7TowalcQCiIwWA6oXp08DFkg5XRkWX04WRbLk6vEri/WnnM9?=
- =?us-ascii?Q?gK7hmv0jK5+zj6YMaipo2jL1CDGrI0zPYGA/F1wwssi1kIETxhvvlABg+YsT?=
- =?us-ascii?Q?4zdlon0lhwaghVOFWg3AGm09/KJhVhtItchXwR6UMOyPD0auqFpTutRfTNeE?=
- =?us-ascii?Q?yKAxCftUQPqE9StxxVSEFMbkXdft8xjvSnQpxudNvJy/FUjcX0//Roq28fp9?=
- =?us-ascii?Q?ezoGDlTH5lNQbi968wqwpY1den2C+laTdjOfSqpsmuodVuJwE4/x8upsE3Qb?=
- =?us-ascii?Q?VK7ERuBECsBgoRc68E1UppovcK+0e52dr8cHLaXKVBm/fIy/j5hX3bIUnufi?=
- =?us-ascii?Q?v0CvXoSXi3CpH+83PtIdWRCPHKkbzGPpw8PWY/4IgEDhzQCsydG25jXiaJBP?=
- =?us-ascii?Q?60rCXs2XO/4JybTsl4JAbzm/LYmy0jmEVAktnPH5w8bIzWgLUAiIx1rMTKEk?=
- =?us-ascii?Q?wEeDZfsGga8uZFjVtsJYePJ8wcgs3sYMR12sjNpIJ9cUBj8AbuuoEYp2OF7j?=
- =?us-ascii?Q?Dd5ZD25mL+SoDl5wqNpWRd7mnWVtl3VpTXHaPxDB72t0Np6Ep3byxrBC5ktb?=
- =?us-ascii?Q?JHn5o2U6O6s/96dGea2/IhtwXTBOlIOYy3h2ukwb5n3IH93yrllTnU6QqYmJ?=
- =?us-ascii?Q?eXBFhOUOzaR8l5ArnMVCRmHFZkjjEZMHmpJaaVVwEQn8avpNUW1pLcOZ0vWZ?=
- =?us-ascii?Q?HVFAM36H6cuFdx9S9Wr9ZFWsMR0WPtEceOuuujNW8QOqT52A3Lpu+gQG3LLQ?=
- =?us-ascii?Q?lPRmP4QsmAXQ3bM=3D?=
+ ARA:13230040|36860700013|82310400026|1800799024|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ZMqxLHeWeK7t/qOfwW8mmpiVzuIyVNt904e9dK7r3Mupxx9B782BxpngrbLn?=
+ =?us-ascii?Q?9EyuDP1GGj6eQG3kJRbGtv4zyKY4Zbkkjhjf846BLSSprA1a9/XcfbnbBwYz?=
+ =?us-ascii?Q?En3znhe17Iret9zrzpTUAi0Hb6s9TZeUcNycR04yHg9JHXbL9EEWtgvDzVY1?=
+ =?us-ascii?Q?nC7VFqlSssZtxJgrZn7GhPyW4Nf696WWu+kUv3wkqA2iHQ8CzPCJkJvOgQyq?=
+ =?us-ascii?Q?k2DejuV60hpqpiGTXv16EQhRnZXIzgjYGMhVL+FyJCK030x4JLUEC4ICDNYW?=
+ =?us-ascii?Q?65R5euXb1LfE1Ws03KTy+bFv/56SuSFmDnJ9AYxq3T2jZEmLRYCc2b8pQs4H?=
+ =?us-ascii?Q?vgWAiL30G2/Xy7VfrDMJgyTZUSeQbrssfj/Ag0QVTMJuikaigR2ki6+b3JOY?=
+ =?us-ascii?Q?3JXAYIXvceQ7IeMx4zI5zbya5eM3F+0QAJgicUhZzW69pv7WxmiQ0exAFIzp?=
+ =?us-ascii?Q?e/NYmBJXEDQljn3t0vh0QkhKHQbvP1W7d4Ev0xHnXABKgyJoUKyZvWwTwJbN?=
+ =?us-ascii?Q?+ounbp9GOcUUWl6cNDCxUmG+PSVROgYJk0JpmYd59rCIDLGLqfDohDYfOatW?=
+ =?us-ascii?Q?GJpNBJoBr5PIAX2zcvQwMy9VFsYqTviTx6gMnaF62b/EHogWFZpj6yMOK9FY?=
+ =?us-ascii?Q?ybyzD4JbS0NZbkv10A/zuCmtDPVurRkctrN/Aj9rrptM3LktVUJPyYqbfgjA?=
+ =?us-ascii?Q?RD/I9i0rZsJ5QYSrk2Po6UltdxBPP7YAcSyy8WhJ2XNeWQuxqKITCFaxEVtQ?=
+ =?us-ascii?Q?1pQKuY3FXUGyLj8Zhk00/4+Arce+gLjM4U3Z1eRMr8IoWToXDlhbbKqpdOUW?=
+ =?us-ascii?Q?z+vOwNIlgQJ65ygRFKoNYIskxxIyrH4gPdYVRK8ZVq54bPZmOYSuBhqX1ijR?=
+ =?us-ascii?Q?JZ+/Ky0f0Zd4pbbg3Vq/aeDfUgDdgurNLL4C0NogVNLhuOfV0XN8osvf8T7Y?=
+ =?us-ascii?Q?tMuoF3Ty2TF6yhoxXp0Oj3h1U6meeQhAEZcjYeFH/q9IuKIF5ZyAeZmud/Yv?=
+ =?us-ascii?Q?nfOoumnXoUAZcAhEaQnwh96Gmj0zpqJdDUTFg0dQ4MskPiJHyoKP0QgQ+z6H?=
+ =?us-ascii?Q?qkE/RS06Fp1bl5IG0DPZeT3HcAqXncpOQQyWZYqRonObEvp5t2Nm2DVGE6DK?=
+ =?us-ascii?Q?JrliU34zAbH5khDASPpegw2JZw/Hiwonslz3/N9rIN182JwJY6ilkjlNB1jT?=
+ =?us-ascii?Q?ttzHnoZIbMUxmWY4ac8lS1fxZuDeCzU+smWcDBdLo2Vc/zWRT2GM5jP7HVgD?=
+ =?us-ascii?Q?6NI8QMnN/a+CPV9hXCEO1iXWIGKQGxQNAvPVR57YOz7yOh4XQii4PcuS6pga?=
+ =?us-ascii?Q?em6PCwIZxtmrxkprB3JIjE4rhHdaPF7syDCcGspRKb+ydXgvIMHyvcz+P5qR?=
+ =?us-ascii?Q?VSQ9ZsRXGlQG2SG92ROvm7151MuG7fNv/L6QlhwQV2Q0VKgvnz1uTH1VEu0T?=
+ =?us-ascii?Q?JuT5V0okWECQRg+Hkf438LZgi8+WPiVMryKrKAuXJfSD4AuCu85kxW1XWmCl?=
+ =?us-ascii?Q?uxz85NlrC0TSUBc=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jan 2025 09:28:21.3242 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c7261e9e-5228-4f6c-1119-08dd36d948d7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jan 2025 09:28:24.2266 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f66cc760-62a2-4c6e-2d53-08dd36d94a8d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DB.namprd04.prod.outlook.com
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00026367.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6623
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7290
 X-Mailman-Approved-At: Fri, 17 Jan 2025 15:10:41 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -151,103 +149,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current implementation generates some alignment issues as well as
-some overlapping when all the fpga command options are enabled. The fix
-is intended to improve readability of the usage info.
+Remove statements of Xilinx Only from the fpga command information and
+ensure Kconfig dependencies to FPGA_XILINX are implemented instead.
 
 Signed-off-by: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
 ---
 
-Changes in v2:
-- Tabs replaced by spaces
-- fpga command added on each option similar to other commands like sf
-- Dependencies to Xilinx only commands added in Kconfig
+(no changes since v1)
 
- cmd/fpga.c | 61 +++++++++++++++++++++++++-----------------------------
- 1 file changed, 28 insertions(+), 33 deletions(-)
+Due to an issue with patman I had to add an empty line on the
+CONFIG_FPGA_LOADB description
+---
 
+---
+ cmd/Kconfig | 32 ++++++++++++++++++++------------
+ cmd/fpga.c  |  9 ++++-----
+ 2 files changed, 24 insertions(+), 17 deletions(-)
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 1d7ddb4ed36..31f1df2a67d 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1163,16 +1163,31 @@ config CMD_FPGA
+ 	help
+ 	  FPGA support.
+ 
+-config CMD_FPGA_LOADBP
+-	bool "fpga loadbp - load partial bitstream (Xilinx only)"
++config CMD_FPGA_LOADB
++	bool "fpga loadb - load bitstream"
++	depends on CMD_FPGA && FPGA_XILINX
++	help
++          Supports loading an FPGA device from a bitstream buffer
++          .
++
++
++config CMD_FPGA_LOADP
++	bool "fpga loadp - load partial bitstream"
+ 	depends on CMD_FPGA
+ 	help
+ 	  Supports loading an FPGA device from a bitstream buffer containing
+ 	  a partial bitstream.
+ 
++config CMD_FPGA_LOADBP
++	bool "fpga loadbp - load partial bitstream"
++	depends on CMD_FPGA && FPGA_XILINX
++	help
++	  Supports loading an FPGA device from a bitstream buffer containing
++	  a partial bitstream.
++
+ config CMD_FPGA_LOADFS
+-	bool "fpga loadfs - load bitstream from FAT filesystem (Xilinx only)"
+-	depends on CMD_FPGA
++	bool "fpga loadfs - load bitstream from FAT filesystem"
++	depends on CMD_FPGA && FPGA_XILINX
+ 	help
+ 	  Supports loading an FPGA device from a FAT filesystem.
+ 
+@@ -1182,16 +1197,9 @@ config CMD_FPGA_LOADMK
+ 	help
+ 	  Supports loading an FPGA device from a image generated by mkimage.
+ 
+-config CMD_FPGA_LOADP
+-	bool "fpga loadp - load partial bitstream"
+-	depends on CMD_FPGA
+-	help
+-	  Supports loading an FPGA device from a bitstream buffer containing
+-	  a partial bitstream.
+-
+ config CMD_FPGA_LOAD_SECURE
+ 	bool "fpga loads - loads secure bitstreams"
+-	depends on CMD_FPGA
++	depends on CMD_FPGA && FPGA_XILINX
+ 	select FPGA_LOAD_SECURE
+ 	help
+ 	  Enables the fpga loads command which is used to load secure
 diff --git a/cmd/fpga.c b/cmd/fpga.c
-index 93f14098ccb..ae85ff201b8 100644
+index 91ccbee0fef..f46ca040d28 100644
 --- a/cmd/fpga.c
 +++ b/cmd/fpga.c
-@@ -408,49 +408,44 @@ U_BOOT_CMD(fpga, 9, 1, do_fpga_wrapper,
- #else
- U_BOOT_CMD(fpga, 6, 1, do_fpga_wrapper,
- #endif
--	   "loadable FPGA image support",
--	   "[operation type] [device number] [image address] [image size]\n"
--	   "fpga operations:\n"
--	   "  dump\t[dev] [address] [size]\tLoad device to memory buffer\n"
--	   "  info\t[dev]\t\t\tlist known device information\n"
--	   "  load\t[dev] [address] [size]\tLoad device from memory buffer\n"
-+	 "loadable FPGA image support",
-+	 "info   [dev]                  List known device information\n"
-+	 "fpga dump   <dev> <address> <size> Load device to memory buffer\n"
-+	 "fpga load   <dev> <address> <size> Load device from memory buffer\n"
- #if defined(CONFIG_CMD_FPGA_LOADP)
--	   "  loadp\t[dev] [address] [size]\t"
--	   "Load device from memory buffer with partial bitstream\n"
-+	 "fpga loadp  <dev> <address> <size> Load device from memory buffer\n"
-+	 "            with partial bitstream\n"
- #endif
--	   "  loadb\t[dev] [address] [size]\t"
--	   "Load device from bitstream buffer (Xilinx only)\n"
+@@ -412,19 +412,18 @@ U_BOOT_CMD(fpga, 6, 1, do_fpga_wrapper,
+ 	 "info   [dev]                  List known device information\n"
+ 	 "fpga dump   <dev> <address> <size> Load device to memory buffer\n"
+ 	 "fpga load   <dev> <address> <size> Load device from memory buffer\n"
 +	 "fpga loadb  <dev> <address> <size> Load device from bitstream buffer\n"
-+	 "            (Xilinx only)\n"
+ #if defined(CONFIG_CMD_FPGA_LOADP)
+ 	 "fpga loadp  <dev> <address> <size> Load device from memory buffer\n"
+ 	 "            with partial bitstream\n"
+ #endif
+-	 "fpga loadb  <dev> <address> <size> Load device from bitstream buffer\n"
+-	 "            (Xilinx only)\n"
  #if defined(CONFIG_CMD_FPGA_LOADBP)
--	   "  loadbp\t[dev] [address] [size]\t"
--	   "Load device from bitstream buffer with partial bitstream"
--	   "(Xilinx only)\n"
-+	 "fpga loadbp <dev> <address> <size> Load device from bitstream buffer\n"
-+	 "             with partial bitstream (Xilinx only)\n"
+ 	 "fpga loadbp <dev> <address> <size> Load device from bitstream buffer\n"
+-	 "             with partial bitstream (Xilinx only)\n"
++	 "             with partial bitstream\n"
  #endif
  #if defined(CONFIG_CMD_FPGA_LOADFS)
--	   "Load device from filesystem (FAT by default) (Xilinx only)\n"
--	   "  loadfs [dev] [address] [image size] [blocksize] <interface>\n"
--	   "        [<dev[:part]>] <filename>\n"
-+	 "fpga loadfs <dev> <address> <size> <blocksize> <interface> [<dev[:part]>] <filename>\n"
-+	 "            Load device from filesystem (FAT by default) (Xilinx only)\n"
+ 	 "fpga loadfs <dev> <address> <size> <blocksize> <interface> [<dev[:part]>] <filename>\n"
+-	 "            Load device from filesystem (FAT by default) (Xilinx only)\n"
++	 "            Load device from filesystem (FAT by default)\n"
  #endif
  #if defined(CONFIG_CMD_FPGA_LOADMK)
--	   "  loadmk [dev] [address]\tLoad device generated with mkimage"
-+	 "fpga loadmk <dev> <address>        Load device generated with mkimage\n"
- #if defined(CONFIG_FIT)
--	   "\n"
--	   "\tFor loadmk operating on FIT format uImage address must include\n"
--	   "\tsubimage unit name in the form of addr:<subimg_uname>"
-+	 "            NOTE: loadmk operating on FIT must include subimage unit\n"
-+	 "            name in the form of addr:<subimg_uname>\n"
- #endif
- #endif
+ 	 "fpga loadmk <dev> <address>        Load device generated with mkimage\n"
+@@ -436,7 +435,7 @@ U_BOOT_CMD(fpga, 6, 1, do_fpga_wrapper,
  #if defined(CONFIG_CMD_FPGA_LOAD_SECURE)
--	   "Load encrypted bitstream (Xilinx only)\n"
--	   "  loads [dev] [address] [size] [auth-OCM-0/DDR-1/noauth-2]\n"
--	   "        [enc-devkey(0)/userkey(1)/nenc(2) [Userkey address]\n"
--	   "Loads the secure bistreams(authenticated/encrypted/both\n"
--	   "authenticated and encrypted) of [size] from [address].\n"
--	   "The auth-OCM/DDR flag specifies to perform authentication\n"
--	   "in OCM or in DDR. 0 for OCM, 1 for DDR, 2 for no authentication.\n"
--	   "The enc flag specifies which key to be used for decryption\n"
--	   "0-device key, 1-user key, 2-no encryption.\n"
--	   "The optional Userkey address specifies from which address key\n"
--	   "has to be used for decryption if user key is selected.\n"
--	   "NOTE: the secure bitstream has to be created using Xilinx\n"
--	   "bootgen tool only.\n"
-+	 "fpga loads  <dev> <address> <size> <auth-OCM-0/DDR-1/noauth-2>\n"
-+	 "            <enc-devkey(0)/userkey(1)/nenc(2> [Userkey address]\n"
-+	 "            Loads the secure bistreams(authenticated/encrypted/both\n"
-+	 "            authenticated and encrypted) of [size] from [address]\n"
-+	 "            (Xilinx only)\n"
-+	 "            -The auth-OCM/DDR flag specifies to perform authentication\n"
-+	 "            in OCM or in DDR. 0 for OCM, 1 for DDR, 2 for no authentication\n"
-+	 "            -The enc flag specifies which key to be used for decryption\n"
-+	 "            0-device key, 1-user key, 2-no encryption.\n"
-+	 "            -The optional Userkey address specifies from which address key\n"
-+	 "            has to be used for decryption if user key is selected.\n"
-+	 "            NOTE: the secure bitstream has to be created using Xilinx\n"
-+	 "            bootgen tool only.\n"
- #endif
- );
+ 	 "fpga loads  <dev> <address> <size> <authflag> <encflag> [Userkey address]\n"
+ 	 "            Load device from memory buffer with secure bistream\n"
+-	 "            (authenticated/encrypted/both)(Xilinx only)\n"
++	 "            (authenticated/encrypted/both)\n"
+ 	 "            -authflag: 0 for OCM, 1 for DDR, 2 for no authentication\n"
+ 	 "            (specifies where to perform authentication)\n"
+ 	 "            -encflag: 0 for device key, 1 for user key, 2 for no encryption\n"
 -- 
 2.42.0.325.g3a06386e31
 
