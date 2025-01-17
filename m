@@ -4,102 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D13FC02183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Jan 2025 23:28:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8EC9C02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 00:00:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B01E80717;
-	Fri, 17 Jan 2025 00:28:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 050488033D;
+	Fri, 17 Jan 2025 01:00:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EQRvyrJ4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kbtWF+wZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9780A8073F; Fri, 17 Jan 2025 00:28:49 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id E442B8069D; Fri, 17 Jan 2025 01:00:35 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7245B80703
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:28:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABD2180312
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 01:00:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6dd43b08674so15665736d6.3
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 15:28:47 -0800 (PST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b700c13edaso79279685a.3
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 16:00:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737070126; x=1737674926; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737072032; x=1737676832; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uYGPigbvHV3y3/SGux3oEoSVecgrmZh11F0XD1zwUgE=;
- b=EQRvyrJ4iHUMViCPzlEduQbBksx6zcqNamwbIhVyJZd0Db+WBG58jvsHrwoo+3pFTw
- Q1SEwBZ/NxqXH7SLtbAIqwz8ayzl/SjkwNzsjDC39NFuDNi2ZOjMLO8Cr4dH1tAZYM3l
- 3LsvdoSaYmPm4V+7THGgCRd4K6UpkqxUnaPss=
+ bh=+mVV6Fw8mSl9fPMk2cJ0VoZXY1PSe0okipUYm9yQkwo=;
+ b=kbtWF+wZdCrJYC47GMIU8qHGW0M9347JxvR6PdVFc4Pbl4VxkqI9BBWV0dLCeDYibn
+ 7vAdE34DIy3grWY53KXh9jL+0Sp7BaR21dt/eMMmjC8LGcUtMT+QBqtqkyPCB7B5AN/e
+ VKFVy6NCLpygubOZ7V2Q7N/dA4WIjODvxb828=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737070126; x=1737674926;
+ d=1e100.net; s=20230601; t=1737072032; x=1737676832;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uYGPigbvHV3y3/SGux3oEoSVecgrmZh11F0XD1zwUgE=;
- b=Yf0ozWYYWLi82EA95I4pG1/dNtqRaVLmj3dc0ABGwp8kuzDH2eCrlr7JP2dNMzeBdu
- blMnCLy582jcKzDyP8IBQMfF2u2yEoXG81w1SwBJ9ZdbpY0bvR3i2qgH9rX9NiDyrq5V
- PX4oHfa7sAa4GfOQUSzmZ/F60/w9k9bL2rDHwsexcpG5eU8MAQ96A9VXeLVonqGX4Efm
- MwaIEjYG/yZcesbcadadyFrNGRnihsEK4HVXg+dLrdUgnhLBpOewCX9slDRoQeKWkN4O
- KsqTtsNmIUYt347dSA8Nx0lsgBR1k/o4VPbF15LMmhVl3EO7uN7Tw14SC/qYXhSxsVEr
- BbLg==
-X-Gm-Message-State: AOJu0YyR1uJPrfZV2JmxBcxsyHsQiKsawl8dNQpdv6vbpL2LYHhJ/KUA
- IxIaNlovDyu3qHH5DWTsKyeiBtrf+NsQ8Spf1uh/9hc/EYeHDttkT7IVcesAHsI=
-X-Gm-Gg: ASbGncu7+TzHcEI2k6K/LHzjaRsuYqMK+P4egMppXa2GMM8zQKyfK2itBhPP4StSFX2
- 58PYJA3gAaqmpBZ1qugGaLJQpuSAezgfpckzLmlCKd0DO75MM42Lov/kjoN+fgHiH8V2hSUb486
- Adl6m4FtFLaZe7cwsSj7XghummR9vXGqEByky36Tyo+2T/cfjpkO8PV/fD+Te+hnLK8OlQDpBvC
- aZ7KXxx+Kjr7KsoFNmDDMnPWkWxf08PtB6Ovrsgqo+C0qUs+I1b5A==
-X-Google-Smtp-Source: AGHT+IGld09DOqki1m+p+sM2s6o+JM66KCdmnIxp/ciQXLa3YVrdufJoJUXlYYkv8vLh0MCqr9VViA==
-X-Received: by 2002:a05:6214:3197:b0:6d8:ab7e:e554 with SMTP id
- 6a1803df08f44-6e1b222f1f3mr14165106d6.34.1737070126324; 
- Thu, 16 Jan 2025 15:28:46 -0800 (PST)
+ bh=+mVV6Fw8mSl9fPMk2cJ0VoZXY1PSe0okipUYm9yQkwo=;
+ b=LE26Dk8WpAwHMRvYlNjggVoQUTFkSbtT6c3DCc7RwSG5+tWP9UOU9NCFeiZJOvDEjL
+ wOhB1pnEZtG1gS7BZvgvIjcZ7A5CU16b+kimY6usa5ux7lsjIy2gEnDhWbTbV4R6Erm5
+ q+4mw0ZWCNz65q7MlMu0HngudW3STL6zBphvzTljgdFXr3AIi5noJ7LcAsxk2pnYb9gk
+ TbRtPdbejBqwabgCUMnROL9coG1HyM/5gjjN7RiXvtS4mgcRFPcSIKiM8FLLZvQD2cFB
+ J74o5mQinHHQnYgUCZVjTlMzXwr5HzpB+/SUZBmA1eIrYMpynaRiWkomp62lNxzPWxTz
+ pNeg==
+X-Gm-Message-State: AOJu0YwL2xS3zvZoqW5mRZ4385eOtIYRjsvRA0PMcthlxVqJeb2wqyra
+ bzXl4HKo+245OZKOD2LWEkWrX4SfbRGIHRUgjV8IqrU0S0dYRqRIiFMS0/G20rY=
+X-Gm-Gg: ASbGncsbQ02+rLhmiu9rc2Ej8iBthutf8cvgC1oZk80AYXOUb96J03iYeDB2Hs1u/1m
+ xZlWJhWYdiT7VAYEqUmZsDdo7EuM2U931UaBqqOC/PdAx9Pvc/JqyF+2j7YMNsoK+2GTWGZG0Qa
+ jzuG9qyeOZnApGGyhNXyDGRivOQk6gD2fy5uO1MUEu9W+SiW/neeFZSvPXz+jmY99gqDZ6D0LJ8
+ htwN4U7OzPl3auEU28b8Q6yEjOfTpKUaq8cV1Z/FbfMr6b/opGW/g==
+X-Google-Smtp-Source: AGHT+IEjS1OTBaJUW2SuPZP4+IgDOlZUqAjEOGmdJpNtpj2Qb9GS+S/yPp7NiA5a2GGbmSkMgbEmCw==
+X-Received: by 2002:a05:620a:4713:b0:7b1:549b:b992 with SMTP id
+ af79cd13be357-7be632024dcmr168330085a.23.1737072032390; 
+ Thu, 16 Jan 2025 16:00:32 -0800 (PST)
 Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afcd3753sm5370266d6.73.2025.01.16.15.28.42
+ af79cd13be357-7be614872f6sm60165785a.56.2025.01.16.16.00.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 15:28:45 -0800 (PST)
-Date: Thu, 16 Jan 2025 17:28:40 -0600
+ Thu, 16 Jan 2025 16:00:31 -0800 (PST)
+Date: Thu, 16 Jan 2025 18:00:26 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Gary Bisson <bisson.gary@gmail.com>,
+ Greg Malysa <greg.malysa@timesys.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
- Peter Korsgaard <peter@korsgaard.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, Peng Fan <peng.fan@nxp.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v3 00/46] pxe: Support read_all() for extlinux and PXE
-Message-ID: <20250116232840.GN3476@bill-the-cat>
-References: <20241206023626.2456858-1-sjg@chromium.org>
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Trevor Woerner <twoerner@gmail.com>
+Subject: Re: [PATCH v2 00/22] vbe: Series part F
+Message-ID: <20250117000026.GO3476@bill-the-cat>
+References: <20250116012723.2820301-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="z0rn8UmduGN2lUFz"
+ protocol="application/pgp-signature"; boundary="Ry2a6zDuNAG7+qTm"
 Content-Disposition: inline
-In-Reply-To: <20241206023626.2456858-1-sjg@chromium.org>
+In-Reply-To: <20250116012723.2820301-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,62 +107,64 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---z0rn8UmduGN2lUFz
+--Ry2a6zDuNAG7+qTm
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 05, 2024 at 07:35:39PM -0700, Simon Glass wrote:
+On Wed, Jan 15, 2025 at 06:27:01PM -0700, Simon Glass wrote:
 
-> This series implements read_all() so that it is possible to read all the
-> files relating to a bootflow, make adjustments and then boot.
+> This includes various patches towards implementing the VBE abrec
+> bootmeth in U-Boot. It mostly focuses on introducing a relocating
+> SPL-loader so that VBE can run in the limited amount of SRAM available
+> on many devices.
 >=20
-> Unfortunately quite a few things stand in the way, so this series
-> finishes off several pending items: zboot without CONFIG_CMDLINE,
-> required support in pxe_utils and the differing code in the extlinux and
-> PXE bootmeths. There is very little new code, but quite a lot of
-> refactoring.
+> Another minor new feature is support in VBE for specifying the image
+> phase when loading from a FIT. This allows a single FIT to include
+> images for several boot phases, thus simplifying image-creation.
 >=20
-> The bootm, booti and bootz commands have all been refactored previously,
-> so that they can operate without needing CONFIG_CMDLINE to be enabled.
-> At the, time, zboot was left alone, since it is x86-specific and a bit
-> more trouble.
+> One lingering niggle in this series is that it has a different code path
+> for sandbox, since it does not support the relocating jump. It should be
+> possible to resolve this with additional work, but I have not attempted
+> this so far.
 >=20
-> However it turns out that the booti support doesn't work with compressed
-> booti images, so this series resolved that problem too.
->=20
-> This series adds a programatic API for zboot and uses the forthcoming
-> bootstd 'image list' to collect information from an extlinux file. It is
-> therefore possible to parse the file, load the resulting images and then
-> examine/adjust the resulting bootflow, before booting.
->=20
-> The addition of options to extlinux resulted in the PXE and extlinux
-> bootmeth having slightly different features. This is tidied up in this
-> series, with common functions for both. This allows the same features
-> (loading images as a separate step) to be provided for PXE.
+> For v2, I have split the first patch into 5 pieces, to make it easier to
+> see the code-size impact, plus added a few tweaks to reduce code size.
 
-To sync up with what I said on IRC, this breaks
-test/py/tests/test_net_boot.py likely due to changes in the output.
+Overall, size wise this looks better than v1, so I'm generally happy
+enough. That said:
+
+[snip]
+>  boot/vbe_common.c      | 375 +++++++++++++++++++++++++++++++++++++++++
+>  boot/vbe_common.h      | 137 +++++++++++++++
+>  boot/vbe_simple.c      |  98 ++---------
+>  boot/vbe_simple.h      |  16 +-
+>  boot/vbe_simple_fw.c   | 207 +++++++++--------------
+
+The size growth indeed comes from the compiler/linker not having as much
+insight as it used to (except for when LTO is enabled). Perhaps once we
+have more device types available it'll be clearer to see some way to
+better re-organize things for savings again. Thanks!
 
 --=20
 Tom
 
---z0rn8UmduGN2lUFz
+--Ry2a6zDuNAG7+qTm
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeJligACgkQFHw5/5Y0
-tyzUlAwAmBYX0QioEv2Aw37pTf6rk6BDRj5ybtHEityfAife7Q13QNXwlAgfObMR
-KEXmGeCvCOgGUugrBepLXf4L89+XDFgESYNpc6BP4bAWQOkNiU+ktj4gKhaG6FD9
-je7A4RXfXNUKFaWBapIp04K/EdHZ7wash+l/b8JmjaYaY+ubjiv2PxAMuGSHebkE
-hjVYS7lxeBoCWZz+clN3uYq7mkFEsgu868d7Ym86IDNLzI0ZsxlzZabHGcRHLZ9T
-tRRXPGIddF0vkr817vszxAIXG8ESYH9vElnKgZa+jS7S5EFCj8dvivtLnZk3bkvY
-Dol7Mv+I3u899H6oySA7xvUDHTfscYMcLSRLKjWJz9f0jyQcUXsPMPDgw4tYOS5/
-lOfs9jZ2q0rdixDk0XysCe2tCxAYphdwI1/RdHrdTUWfuhiltgz6zX/Np5xVE3QK
-AK81YzjJDf/qwnyYIgHjILbVInznCdCCSCpSQVWhdxZpxUKSxnZD6otxrE0kUKcA
-zheBjXCt
-=3kCS
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeJnY8ACgkQFHw5/5Y0
+tyxq6Qv+NZtS7tC1wjNRoTmjwJgmSSvF6D0c4X565xaay7lq+AlMZZiyuYw0vf16
+kjOL6p2pBlW9x7iAEcUX9WaIbBNthI374HCtJpX4C8RtOZzdYprvC3mqRBbVVei0
+CHu1QH/LfXEAoRaGTKhhsnGXSpIU+SriDtcTakAef5p6HgsTkC3vDHjQY4+OmaXu
+Uny6c4CL7dql6TGWJbwpz9PBDinTbqbayfQca/uFT7jifXeEFVbh0ZK5UZYAiiPe
+Idhyoj7lyrx+LyDxqbw7BZ64WcBs1uSMxGTVU3joFxT4lfue9z8jGtXtigm71JjI
+SoRP+615WpmsFnb4tQS2FwKEjLH5qvAbEoka4o1abyk30J2DG9cpx6GQne/UDXI1
+09whkhCOmb5IxGfratHKu0c99g3+ObPL8cdSXssesFLYYEeV3p/1ONWLMeWOoyLe
+cORSh+epQ62NKsM9mmsxhIsnESHDCFI6fxg0hcLtcVRNE02jwnAaINss70SKlx0E
+DQ0dHxCY
+=+upz
 -----END PGP SIGNATURE-----
 
---z0rn8UmduGN2lUFz--
+--Ry2a6zDuNAG7+qTm--
