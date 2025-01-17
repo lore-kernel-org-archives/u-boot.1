@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C119C02188
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 09:18:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6C3EC02188
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 09:18:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0ED080756;
-	Fri, 17 Jan 2025 10:18:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F26EA8073D;
+	Fri, 17 Jan 2025 10:18:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="nhlfG/4w";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="CXGVps54";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4F8C806FB; Fri, 17 Jan 2025 10:18:04 +0100 (CET)
+ id D6E8E80758; Fri, 17 Jan 2025 10:18:10 +0100 (CET)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A55980717
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 10:18:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A27D880778
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 10:18:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: ef78cc2ed4b311ef99858b75a2457dd9-20250117
+X-UUID: f2fbad1cd4b311ef99858b75a2457dd9-20250117
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=y3XyXy3dvYx30jW5Ob2ZbsRBNueHDgkAr8teWhGRaYA=; 
- b=nhlfG/4wFZve7+EQkK2TN87beSE4pA5MKBfSiheEitBzQQP2rbpNBCMgR3+u0+xTM+7dnu7WDnULtQd4FLcPBzfege7oajXEjVlTREBRGKGvigSP8LEPJFnzEd2fd8GISXY6QFXDQ/vchTvqLV1TjmXUtYojQOdzjwDBtbgmJsI=;
+ bh=5F91k4AGAlRpNdEQg4Zl04cn4dpShRt9E5/zcGm8e3g=; 
+ b=CXGVps54gOgh8GrExszM1O8t4nWtRTJcSUNhguTyW279vtaIPlOwGVKqVdPckf50sa0xgpqCnl8PBHZ8fZl85oL74q7Is8+7ovizUsPYTty/OxC9sb3VO47iHGuVloG/vnRz5NVNrvYKcaJ7Od1iO4eid+Xa6uNoK6np+s6xGrw=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.46, REQID:092c06a0-8140-44d6-a9b7-8d0d3f6c238c, IP:0,
+X-CID-O-INFO: VERSION:1.1.46, REQID:a61c5483-7542-4021-b50e-c81560fd538d, IP:0,
  U
  RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
  :release,TS:-5
-X-CID-META: VersionHash:60aa074, CLOUDID:e8073285-0f10-4f52-bb41-91703793d3e4,
+X-CID-META: VersionHash:60aa074, CLOUDID:48083285-0f10-4f52-bb41-91703793d3e4,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102,TC:nil,Content:0|50,EDM:-3
  ,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV
@@ -44,26 +44,27 @@ X-CID-META: VersionHash:60aa074, CLOUDID:e8073285-0f10-4f52-bb41-91703793d3e4,
 X-CID-BVR: 0,NGT
 X-CID-BAS: 0,NGT,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: ef78cc2ed4b311ef99858b75a2457dd9-20250117
-Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
+X-UUID: f2fbad1cd4b311ef99858b75a2457dd9-20250117
+Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1231105868; Fri, 17 Jan 2025 17:17:55 +0800
+ with ESMTP id 1154154929; Fri, 17 Jan 2025 17:18:01 +0800
 Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- MTKMBS14N2.mediatek.inc (172.21.101.76) with Microsoft SMTP Server
+ MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Fri, 17 Jan 2025 17:17:53 +0800
+ 15.2.1258.28; Fri, 17 Jan 2025 17:17:59 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.28 via Frontend Transport; Fri, 17 Jan 2025 17:17:53 +0800
+ 15.2.1258.28 via Frontend Transport; Fri, 17 Jan 2025 17:17:59 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH 05/15] spi: mtk_spim: add support to use DT live tree
-Date: Fri, 17 Jan 2025 17:17:51 +0800
-Message-ID: <9abc5daadfa91f8265949eeb71c650c10390169a.1737104723.git.weijie.gao@mediatek.com>
+ <weijie.gao@mediatek.com>, "SkyLake . Huang" <skylake.huang@mediatek.com>
+Subject: [PATCH 06/15] spi: mtk_spim: check slave device mode in spi-mem's
+ supports_op
+Date: Fri, 17 Jan 2025 17:17:55 +0800
+Message-ID: <161b349deaacb73b86b3de2441f5c4ce493006b0.1737104723.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1737104723.git.weijie.gao@mediatek.com>
 References: <cover.1737104723.git.weijie.gao@mediatek.com>
@@ -86,26 +87,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change devfdt_get_addr_ptr to dev_read_addr_ptr to support DT live tree.
+Call spi_mem_default_supports_op() in supports_op to honor the
+slave's supported single/dual/quad mode settings.
 
+Signed-off-by: SkyLake.Huang <skylake.huang@mediatek.com>
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
- drivers/spi/mtk_spim.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/spi/mtk_spim.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/drivers/spi/mtk_spim.c b/drivers/spi/mtk_spim.c
-index b66bcfc4233..cd9b9d305ef 100644
+index cd9b9d305ef..2b2c31b4b3f 100644
 --- a/drivers/spi/mtk_spim.c
 +++ b/drivers/spi/mtk_spim.c
-@@ -648,7 +648,7 @@ static int mtk_spim_probe(struct udevice *dev)
- 	struct mtk_spim_priv *priv = dev_get_priv(dev);
- 	int ret;
+@@ -359,6 +359,9 @@ static bool mtk_spim_supports_op(struct spi_slave *slave,
+ 	struct udevice *bus = dev_get_parent(slave->dev);
+ 	struct mtk_spim_priv *priv = dev_get_priv(bus);
  
--	priv->base = devfdt_get_addr_ptr(dev);
-+	priv->base = dev_read_addr_ptr(dev);
- 	if (!priv->base)
- 		return -EINVAL;
- 
++	if (!spi_mem_default_supports_op(slave, op))
++		return false;
++
+ 	if (op->cmd.buswidth == 0 || op->cmd.buswidth > 4 ||
+ 	    op->addr.buswidth > 4 || op->dummy.buswidth > 4 ||
+ 	    op->data.buswidth > 4)
 -- 
 2.34.1
 
