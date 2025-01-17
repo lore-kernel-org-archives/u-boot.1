@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87BDDC02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 14:13:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D87CC02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 14:53:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4144E8081A;
-	Fri, 17 Jan 2025 15:11:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A64C8069D;
+	Fri, 17 Jan 2025 15:53:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rujw6tTC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TvV8vrhO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1E5D80312; Fri, 17 Jan 2025 11:46:05 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 360DB806D8; Fri, 17 Jan 2025 15:53:08 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 960A1806D8
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 11:46:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A22C58036F
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 15:53:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=zhang971090220@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2167141dfa1so34807435ad.1
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 02:46:03 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b6ed0de64aso220471585a.0
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 06:53:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737110762; x=1737715562; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GAKzIkF86e1mUzKGjNADoW+BKKVAVLsarc0clozPSFc=;
- b=Rujw6tTCxl/PUjghjQZQwKP0UjLoReUhTP0VA3Q7F4szqZiZhNGuV9OrOcFJKIQ+eW
- lNekmyW8eMbZgX4WVoTozvZgKnT5XO6gn8xlgvk4KMVAlK9X5dEFARG/wJ0suLuwq389
- vIlsCYN6iEwrmiSOXDoEGxwehGK4Jq2+l5n0EMG0H52eAVasgE2r/WR8hxm3t8fDpiqF
- xHVPA+dFKsJTHl49JahTt1z/wz06ALfm6cNYBomcnHqjASxDdxbOeqXbIpckNL2apeh6
- 0gQdSj4bCNauvj4U5yn0ODQB1msZQxSTj2enYh+y2mkN+o7b78F8s9jMVzYFSMuigAZ2
- 011g==
+ d=konsulko.com; s=google; t=1737125584; x=1737730384; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TOXVSFJV0Fd6WhgC6xi4JMbtAih8A9mJxRNgmYq6O1E=;
+ b=TvV8vrhOaiU82DTqYuIkcNM6LkzZSem8/ZsCJ0FPxMDTNK/Coc6A595Be5Rdz12c+o
+ 5URFqZK2pwcRTIQG3o3juwLkLO0+3sisKzrDNQnqC5dY3kuvdLTbYT5o77U6XDPesmlK
+ 7vwNGnU4cqvkkqaTi9sQpc07Vs4yNi+9s9ojQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737110762; x=1737715562;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GAKzIkF86e1mUzKGjNADoW+BKKVAVLsarc0clozPSFc=;
- b=Wvg/WflxrYZvcblyRjv6+Im7/X8ATW/epdERAZDRJfqtQXatTQ695+yKqR/3hwSX55
- FTSxDOPHa7+MIZq/8NgqSqUotnYokRjfGQNAcKEG5kXok+SNjyHS40TC/geNVhK5MaHj
- 8d2AyMvY3lSBeaHzzBg6cEsBMzw8QGphA4Bp0zHYOmAv5EM8zVvdtzupZ3v1SFYI75Va
- uqedpblcV0mGdSV9z4/r2WLMbKjgvOlHUMnSdEuZ8dj42sqsqP0Pw7fKXoxJ4egvKm4J
- UbMvF/jb9KnOjQQZWi17yEo/8BDToEhzxpspdOJ6/KRwAIt9Fo/d38Bk1mz+f2I/NhXV
- DU2A==
-X-Gm-Message-State: AOJu0YwERU0etxTXMGI3/7gSkK4rcWKjOvCQRnhfNeEpo4vfV1MhkrOp
- d8vJPK5eExaPKYJu5ehskwFHRYhzdAnjUQaMq+hfaOTg3Cvx82Qzc16fQ26C
-X-Gm-Gg: ASbGncsG4sOEL0cejz8/X3oqttPVC1/SgTcKxwNL42L7ZqsVNC9dRyGW8ZqPBZWQnOh
- 07nK6g0oJWgY/DlZZuut0SGjFri8CjwGjWqVRBZJdGZczRKFoAhxxqPnDhNQQ4iGFPGJ16a25pl
- giiYWUv52YD5Bvh3/ozGLDbSEcdjQH35doI+SHzVAjT+f7Eq+wCpzUllK64rCFrmc2ijF7o5pjF
- vkkJg189iD+7twBZOgyUK4r9Qd3JgGIcoK3yTkLiZu4m15EvccMeUaxDkA0dcCWrksm7zya2NTB
- /MUcabWEVanPdxQPe52LP8Mka4hS
-X-Google-Smtp-Source: AGHT+IH9T4P2bkP+ujoywXUxTYNkPjkFWLqLHhzv0lutEzb03bFC3E4C8UOoGnSmiN1weaL479BosQ==
-X-Received: by 2002:a17:903:988:b0:215:ba2b:cd55 with SMTP id
- d9443c01a7336-21c35c53045mr34100285ad.2.1737110762055; 
- Fri, 17 Jan 2025 02:46:02 -0800 (PST)
-Received: from hcdev-d520mt2.. (60-250-196-139.hinet-ip.hinet.net.
- [60.250.196.139]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21c2d4028d6sm12972885ad.226.2025.01.17.02.46.00
+ d=1e100.net; s=20230601; t=1737125584; x=1737730384;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TOXVSFJV0Fd6WhgC6xi4JMbtAih8A9mJxRNgmYq6O1E=;
+ b=kRV1iAZgEDABmKt8BoiG14qd7lmpsDerYxA4nIZtIEz+KSAuU0HwF9GOOupo3OjeYL
+ Kbf4Dg8BQj4g3JE0C6bbFStEVI73ni+2Ba6Zaa0iJ2DDW5GY1VB4FyHGLkBBUXKJygxX
+ 1X4Is824r/gpT8OGynsg7c3syCCXO8HTmrHdMI0qpjtnsm2sGMc12pUWcRlX9hHvqpb6
+ T5UG53O0aSnP3s56mUsV+u6Uyd6eWL63RB8yWEd9W3zaIDOXomwNozUGMH/6iT0zKz+I
+ VK2G5VUy/BAVGejx2f22DQH0BpDZ+C+LfjKdbt7upNHPZpSzKir8iU7JEhe8gPl91c7y
+ Kzow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXBIeCvoIAFhzkXCaJsEZt4FwmRQSDYPWZa6yULs4RVGU7HUmmq9vwW6M65FVIaN4vMj4qIO/k=@lists.denx.de
+X-Gm-Message-State: AOJu0YzH817oz1AbSJf0ICtrEp9mLj7jmH8DD1FHUPJvLapMZ4fFTtfk
+ +1nNKq+t1IAQ/tD8adHBCTCcJCSv+uNhqvi8IlOXLxJmZ2XrYct4ygomJQCgkfU=
+X-Gm-Gg: ASbGncsP4CaSpZAfdxkIAjOBv/BXiQAlbIUUBfUgO7py6yWiZ2TlreBCb6Y/ysAcJeC
+ uMvrS6Ey9E22n7jSuZAx4/DsYQiuhFBhJyDY4FVvKuF8ZXg6e83/A2jkq8SMikYAqt1vUffkuYW
+ Rc1c04zMfVd8DDE36iL/Lp/BUhIxxqHRFc45bVzxHXAWdzVUYvPiB37I4Y+dZqOC7/vZstUnFtS
+ qbNepyN/feYUQF/nICGJoGObZvhdV1W0oDY5VyZbXq1khNyqV6PPQ==
+X-Google-Smtp-Source: AGHT+IHdfaUkzEAKegj5Nol3bBRtig1oTaHaKgfYWM94uz4U2Wc8h1RvDvbZRu+AjWYhZzK1417vmg==
+X-Received: by 2002:a05:620a:6018:b0:7b7:142d:53a8 with SMTP id
+ af79cd13be357-7be63a13124mr464540985a.19.1737125584444; 
+ Fri, 17 Jan 2025 06:53:04 -0800 (PST)
+Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be614ef631sm118642285a.109.2025.01.17.06.53.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jan 2025 02:46:01 -0800 (PST)
-From: Michael Chang <zhang971090220@gmail.com>
-To: trini@konsulko.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
- zhang971090220@gmail.com, yschu@nuvoton.com, JJLIU0@nuvoton.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 3/3] net: designware: Add bitbang feature for designware
- driver.
-Date: Fri, 17 Jan 2025 18:45:40 +0800
-Message-Id: <20250117104540.1580343-4-zhang971090220@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250117104540.1580343-1-zhang971090220@gmail.com>
-References: <20250117104540.1580343-1-zhang971090220@gmail.com>
+ Fri, 17 Jan 2025 06:53:03 -0800 (PST)
+Date: Fri, 17 Jan 2025 08:53:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Peng Fan <peng.fan@nxp.com>
+Cc: Jesse Taube <mr.bossman075@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH] ARM: dts: imxrt1050: Migrate to OF_UPSTREAM
+Message-ID: <20250117145300.GQ3476@bill-the-cat>
+References: <20250117030027.3874367-1-Mr.Bossman075@gmail.com>
+ <PAXPR04MB8459F5D8C54A1C406D408036881B2@PAXPR04MB8459.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 17 Jan 2025 15:10:59 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zFg+n7fpLEndIQo1"
+Content-Disposition: inline
+In-Reply-To: <PAXPR04MB8459F5D8C54A1C406D408036881B2@PAXPR04MB8459.eurprd04.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,160 +101,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bb_miiphy_bus function for designware bitbang feature.
 
-Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
-Signed-off-by: Michael Chang <zhang971090220@gmail.com>
----
- drivers/net/designware.c | 113 +++++++++++++++++++++++++++++++++++++++
- drivers/net/designware.h |   6 ++-
- 2 files changed, 118 insertions(+), 1 deletion(-)
+--zFg+n7fpLEndIQo1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-index 07b0f49ef5..94d8f1b4c0 100644
---- a/drivers/net/designware.c
-+++ b/drivers/net/designware.c
-@@ -784,6 +784,39 @@ int designware_eth_probe(struct udevice *dev)
- 	priv->bus = miiphy_get_dev_by_name(dev->name);
- 	priv->dev = dev;
- 
-+#if IS_ENABLED(CONFIG_BITBANGMII) && IS_ENABLED(CONFIG_DM_GPIO)
-+	if (dev_read_bool(dev, "snps,bitbang-mii")) {
-+		int bus_idx;
-+
-+		debug("\n%s: use bitbang mii..\n", dev->name);
-+		ret = gpio_request_by_name(dev, "snps,mdc-gpio", 0,
-+					   &priv->mdc_gpio, GPIOD_IS_OUT
-+					   | GPIOD_IS_OUT_ACTIVE);
-+		if (ret) {
-+			debug("no mdc-gpio\n");
-+			return ret;
-+		}
-+		ret = gpio_request_by_name(dev, "snps,mdio-gpio", 0,
-+					   &priv->mdio_gpio, GPIOD_IS_OUT
-+					   | GPIOD_IS_OUT_ACTIVE);
-+		if (ret) {
-+			debug("no mdio-gpio\n");
-+			return ret;
-+		}
-+		priv->bb_delay = dev_read_u32_default(dev, "snps,bitbang-delay", 1);
-+
-+		for (bus_idx = 0; bus_idx < bb_miiphy_buses_num; bus_idx++) {
-+			if (!bb_miiphy_buses[bus_idx].priv) {
-+				bb_miiphy_buses[bus_idx].priv = priv;
-+				strlcpy(bb_miiphy_buses[bus_idx].name, priv->bus->name,
-+					MDIO_NAME_LEN);
-+				priv->bus->read = bb_miiphy_read;
-+				priv->bus->write = bb_miiphy_write;
-+				break;
-+			}
-+		}
-+	}
-+#endif
- 	ret = dw_phy_init(priv, dev);
- 	debug("%s, ret=%d\n", __func__, ret);
- 	if (!ret)
-@@ -894,3 +927,83 @@ static struct pci_device_id supported[] = {
- };
- 
- U_BOOT_PCI_DEVICE(eth_designware, supported);
-+
-+#if IS_ENABLED(CONFIG_BITBANGMII) && IS_ENABLED(CONFIG_DM_GPIO)
-+static int dw_eth_bb_mdio_active(struct bb_miiphy_bus *bus)
-+{
-+	struct dw_eth_dev *priv = bus->priv;
-+	struct gpio_desc *desc = &priv->mdio_gpio;
-+
-+	desc->flags = 0;
-+	dm_gpio_set_dir_flags(&priv->mdio_gpio, GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-+
-+	return 0;
-+}
-+
-+static int dw_eth_bb_mdio_tristate(struct bb_miiphy_bus *bus)
-+{
-+	struct dw_eth_dev *priv = bus->priv;
-+	struct gpio_desc *desc = &priv->mdio_gpio;
-+
-+	desc->flags = 0;
-+	dm_gpio_set_dir_flags(&priv->mdio_gpio, GPIOD_IS_IN);
-+
-+	return 0;
-+}
-+
-+static int dw_eth_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
-+{
-+	struct dw_eth_dev *priv = bus->priv;
-+
-+	if (v)
-+		dm_gpio_set_value(&priv->mdio_gpio, 1);
-+	else
-+		dm_gpio_set_value(&priv->mdio_gpio, 0);
-+
-+	return 0;
-+}
-+
-+static int dw_eth_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
-+{
-+	struct dw_eth_dev *priv = bus->priv;
-+
-+	*v = dm_gpio_get_value(&priv->mdio_gpio);
-+
-+	return 0;
-+}
-+
-+static int dw_eth_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
-+{
-+	struct dw_eth_dev *priv = bus->priv;
-+
-+	if (v)
-+		dm_gpio_set_value(&priv->mdc_gpio, 1);
-+	else
-+		dm_gpio_set_value(&priv->mdc_gpio, 0);
-+
-+	return 0;
-+}
-+
-+static int dw_eth_bb_delay(struct bb_miiphy_bus *bus)
-+{
-+	struct dw_eth_dev *priv = bus->priv;
-+
-+	udelay(priv->bb_delay);
-+	return 0;
-+}
-+
-+struct bb_miiphy_bus bb_miiphy_buses[] = {
-+	{
-+		.name		= BB_MII_DEVNAME,
-+		.mdio_active	= dw_eth_bb_mdio_active,
-+		.mdio_tristate	= dw_eth_bb_mdio_tristate,
-+		.set_mdio	= dw_eth_bb_set_mdio,
-+		.get_mdio	= dw_eth_bb_get_mdio,
-+		.set_mdc	= dw_eth_bb_set_mdc,
-+		.delay		= dw_eth_bb_delay,
-+		.priv		= NULL,
-+	}
-+};
-+
-+int bb_miiphy_buses_num = ARRAY_SIZE(bb_miiphy_buses);
-+#endif
-diff --git a/drivers/net/designware.h b/drivers/net/designware.h
-index e47101ccaf..cccf9d54e0 100644
---- a/drivers/net/designware.h
-+++ b/drivers/net/designware.h
-@@ -229,7 +229,11 @@ struct dw_eth_dev {
- 	u32 max_speed;
- 	u32 tx_currdescnum;
- 	u32 rx_currdescnum;
--
-+#if IS_ENABLED(CONFIG_BITBANGMII) && IS_ENABLED(CONFIG_DM_GPIO)
-+	u32 bb_delay;
-+	struct gpio_desc mdc_gpio;
-+	struct gpio_desc mdio_gpio;
-+#endif
- 	struct eth_mac_regs *mac_regs_p;
- 	struct eth_dma_regs *dma_regs_p;
- #if CONFIG_IS_ENABLED(DM_GPIO)
--- 
-2.34.1
+On Fri, Jan 17, 2025 at 03:22:08AM +0000, Peng Fan wrote:
+> > Subject: [PATCH] ARM: dts: imxrt1050: Migrate to OF_UPSTREAM
+> >=20
+> > The device tree for imxrt1050 is now
+> > available in the /dts/upstream directory.
+> > Migrate board to use OF_UPSTREAM.
+> >=20
+> > Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+> > ---
+> > Please note /dts/upstream still needs to be updated
+> > the upstream commit is
+> > 5f122030061db3e5d2bddd9cf5c583deaa6c54ff
+>=20
+> You might need to update the dts/upstream to make
+> this patch in.
 
+Yes, you either need to wait for the next re-sync or to send the
+cherry-pick as well, see
+https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resyncing=
+-with-devicetree-rebasing
+Thanks!
+
+--=20
+Tom
+
+--zFg+n7fpLEndIQo1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeKbskACgkQFHw5/5Y0
+tywawAv/fqMkn3xqjIzZ4nJRgZlOwlZ2qiyI9Zw+00IQewBJUGJm7JSoUp1LMAbv
+xyjRsFxzOBprlmSn8jAeZEu8PjMMMkcvBZNzedY661oBD8SpgxGu43+FBJDO20Wp
+N7wyYak0MCNW5VpwmGqrS0RXXrvPUTfQvC/4DJdQEEDcUAM+dsylsQG6Qgj4PYjR
+qKRCewesk+6GmKdmL+Ji+ChNUF8wlijIhqfbmVJRPIU9du65Q2K8y+Cn4r1TM5kJ
+Chs75oTfn8lVU3Y7LFuBKEM1qZpKx+MUCeoNLm9yeE1k6G7a1FYJOQAy9/SV5Mht
+MENQ6+Qh6uc8tIpauIxAS9CBYkjjsLk1ScKNpxHTP8KC1kwv6h1pie/U1dRzhUic
+MKYi7ixfEQ0p6lXPBf5aLg0LxJ/p8xrTpLHvAMEWu1COovXMDD+MrSV0FeKsoxs7
+hDVISLwK+IYEpPiPJjR/cuDrCPZ0qPnKKy8qPE0N3JR8LtYe6GVxthR3hLzy1gVa
+S8rgqJq6
+=XWzO
+-----END PGP SIGNATURE-----
+
+--zFg+n7fpLEndIQo1--
