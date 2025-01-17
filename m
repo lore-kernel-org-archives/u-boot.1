@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C72C02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 00:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56522C02187
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 00:10:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3B6F8033D;
-	Fri, 17 Jan 2025 01:10:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8041C80755;
+	Fri, 17 Jan 2025 01:10:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GQHMKyEy";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IhtTW/yn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F9BA8069D; Fri, 17 Jan 2025 01:10:10 +0100 (CET)
+ id 598B680719; Fri, 17 Jan 2025 01:10:14 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80CC180312
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 01:10:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51ED880716
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 01:10:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70])
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B349B3F5B2
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:10:06 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8113B3F84B
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:10:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1737072606;
- bh=8jRbycU3CXZEiKk678yZlbF5UogP9d18IvbAHAED7Jo=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=GQHMKyEy4wiGJzvlh+8gHVPNCM1s08aDV5MJik8/UeRL6wMh2uDTR23niUaw+czKx
- 6sYDSOApCyKKariZwqRgHcQCfc7Uj3Qa8a5anIyTZtI1H77YzaBZGgzULctGeYPYJt
- VWVqfFdHtmit/GzlLI6ZO8uhZ7Api8I2bcTCSBdDQz2XpMU1Zjky3MZBA+bYMxv7o+
- ztsIQhphzi8ck3c3Aeq11chG2WEsdH7dw9DqgY0+djSATsju4zCbuQQFDMhPvOcfFc
- pzhs1djecT4O+n/Y1mh6d7RuQicXUR+XisbFxmGLo9uT8dBMm/8KbAUcY5qVKIB9g7
- 5Be7riqXJGb7Q==
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-aafc90962ffso172543766b.0
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 16:10:06 -0800 (PST)
+ s=20210705; t=1737072610;
+ bh=+Etk/75E3duFAb9G3SHU8eNFYYnQS+zJCZVp1VcpxxI=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=IhtTW/yn40Ox+c0HXlWjmAZYfwKinlLl8RCraRNPgAKikn4XK/ooGTDf1EAkmfBHL
+ iS7KoAk3iZbjMeZloR92B/KkTDrzQ9cyN82bYox7erK84KTjeBX5LGGcMsYUkd90p0
+ rcHHHpOGzemIhBE/r5OaBv510WFhEQe9V80vGLg8En4+hNtagm8aTNsYKFbq+XMHVY
+ Z+4TzgCizMOBnw8fnt4k31CPNx8IwB1gBqeTwtA/dssiYmeauo5LsdGtzYaX07DB5u
+ ULTmf3cSM1/lPA0IOoXFwZrBpto9pok8Q39+b6Pv85/Y3HYnTODry51DbiaZQAjf96
+ /sgrgxV/kMC0Q==
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-5d40c0c728aso1411753a12.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 16:10:10 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737072606; x=1737677406;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8jRbycU3CXZEiKk678yZlbF5UogP9d18IvbAHAED7Jo=;
- b=vU5j1VS3N+7Clm+PWciucVGApu+zFajGZaNINkqiQwDeaw74C5ynXY/lQ6NHRWvhC8
- t5oDKSdsWCx6RbcT56PrE/qP6u4rq7vRQ30jPDyKijD8/Fjc9jGxMX4MzijL647XkkfR
- VYeHorB1DsevDvxOHb6vKwKAgGYu/2mszg7TTAP8hCKn2VcDxhLs7JzXsvou7bJ1pZhe
- 051fNrT9YApzc6m0bafdC38BVsDbH4ccYdFsOSiTcKhVMYA6Y99ck1OiipTUZLPMBZyQ
- LYQD4IWiTxzNlHLtaFmVNBImG9mpg3t+Xji2rsBoTI75tppIHmdPmLcVLmTZxNj6vZdQ
- bEjg==
+ d=1e100.net; s=20230601; t=1737072609; x=1737677409;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+Etk/75E3duFAb9G3SHU8eNFYYnQS+zJCZVp1VcpxxI=;
+ b=YVE83D8ryVDNIzYCUd5RXKQoYa1w4A+wRfv4CaUvlr6eIktqaJNW1J87QvrXVNTXn7
+ XLM2QAjFUAJveqpmT2AW+LZCbNG9BJKlD6vdWdwRK/9O/LI2pEWEnheW0CyOIv+2qs11
+ aiB7nSsAebQKVyxV1ku/IxdUy60Lm8Gzr1wPFVNmarYjQR2wlKimPn4nhmzG/goWGmSL
+ XbS6w5lsLgo5KHtPUnHk/S6PQpH3TSfiHa6t4aJincA8ELddtskbsVGFS2BfMYrUAQTg
+ yIILsgyNDzTV0bw29AmKhmDzeoy12ixzExluA9ZXcCR0BuTa92SNeXb/yV7JAWeEdnJU
+ rT6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUMtS3gRv1u8vxmLkwXVzJFrbXMnzcWo5HafV+5BR9GhZOTr8In2SeFFie+wPPOI7+ETso8kFo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4K0X+2Fto71XRsotBV5o79np564tBN4C6r7m/Xu9FSS9SXhcI
- P7iupRZRNiYD23V0YQE1uG2OSWkja/IegwmKiZc24Ek4KEqAIksZdWPhgbfjzUtBqiKZv70KfSt
- iOmx77sak8snOAvytBynw/c30eyEbPj2GDt20fgRNOwy/eM9Sw7TYyw8J/K/Ma8SArC0=
-X-Gm-Gg: ASbGncttNUu2Q2glU8IkHDC1gPrK/+v/odwy6/9xHcD1qv6/6CfJrdHctUWma7gLA4n
- +DxiYJ3T+6i3jVBgD6zd0zb1uAhj+uXWivAdcxiK8gcHSNi6o6qKDq8sYPV/Q29QvEYnyqbJdlU
- 9nr5u2SEFDprJEJ55yPsxIkWK/YIYNEUGPf1g8m5ZTXE+LoikFIkI7zuxuFD1LMf8DeG8I+0PWt
- R0iAT15TSdCEld7A9U+3iR7XGg2d+6b3L8KZQlTjenmrTypH0iwy62md85BXVrRDDz5lo7qBRPQ
- EDAroApInOMrfg==
-X-Received: by 2002:a17:907:7dab:b0:aa6:a87e:f2df with SMTP id
- a640c23a62f3a-ab38b2b7842mr58519966b.25.1737072606156; 
- Thu, 16 Jan 2025 16:10:06 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IErA1zF/VSBT85HysXWD+SP1hx/7NEXht44BXwkNym/HDQ6frz8mNbOj6jWDLNFZVraoXbYuQ==
-X-Received: by 2002:a17:907:7dab:b0:aa6:a87e:f2df with SMTP id
- a640c23a62f3a-ab38b2b7842mr58518566b.25.1737072605842; 
- Thu, 16 Jan 2025 16:10:05 -0800 (PST)
+ AJvYcCWXXFcgWY3YvOpjrDTpumHMGcdsLAE9flFXJUAP4bMve5DxAf017/kAraTlozZ+8uyWODImif0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz0BFzEAD2d2SQZqFVPryYRFZM/BO79l2aLvtK3/WQqakzQpR04
+ ZanhDnwVOJDPHhnFaYQ3dkKtDX/jCAus32sfNEZATtiFXtfRb0j9oPfy7CyPNmy4FKo9j/D0Bdt
+ ekOWWzp6w0B1RzobCN3ErHIt4EujRjyJBdbGxCSHE6HHgM/QmswiCLU5HZz1n45V2c38=
+X-Gm-Gg: ASbGnctGxO2PtUmt7SX9vcyYP3ziq6pmm26OQILH2s17w56R8imZ7tmzJ80rqj4F42d
+ NrzUWcAyL8eaww0nnWRaF4fNzklrhvImoMVOrV9Yx3SeAcHN7v+EmTF9rESmRdHnXwu0vo1f/B2
+ VICGICl28NY5CsI8Jt3pYTvEYyPyTK0feYeKdIoBc5qeI57ytXvcACz0dMLzi2/r0BtXjrWgLki
+ uiEFGZ0yXDHQcTsPzXlxSFU5FO0zRoohKO0alnP3IwHyQeQeXbql2n1Bp1+gpXgwOP8L7yextKp
+ FOTuYUBakpP8vQ==
+X-Received: by 2002:a05:6402:3553:b0:5da:1263:306c with SMTP id
+ 4fb4d7f45d1cf-5db7d2f5b73mr1378517a12.10.1737072609488; 
+ Thu, 16 Jan 2025 16:10:09 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEnrOe/U6pUfNwD2DXqY+BxZLaqZ6V5xhiwZEbBgb9Xo22heJZyp+ODKZOMeC4B+4gfVUMl9g==
+X-Received: by 2002:a05:6402:3553:b0:5da:1263:306c with SMTP id
+ 4fb4d7f45d1cf-5db7d2f5b73mr1378483a12.10.1737072609152; 
+ Thu, 16 Jan 2025 16:10:09 -0800 (PST)
 Received: from localhost.localdomain ([2a02:3035:6e0:18b7:2225:e8f4:a4b5:e79])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab384d27117sm71986466b.75.2025.01.16.16.10.02
+ a640c23a62f3a-ab384d27117sm71986466b.75.2025.01.16.16.10.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 16:10:04 -0800 (PST)
+ Thu, 16 Jan 2025 16:10:07 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>,
@@ -87,10 +88,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/3] log: enable filtering on functions
-Date: Fri, 17 Jan 2025 01:09:50 +0100
-Message-ID: <20250117000954.531785-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH] efi_loader: correct logging StartImage()
+Date: Fri, 17 Jan 2025 01:09:51 +0100
+Message-ID: <20250117000954.531785-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250117000954.531785-1-heinrich.schuchardt@canonical.com>
+References: <20250117000954.531785-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,28 +112,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Up to now we could only use log level, category, and file for filtering.
+When logging running an image, e.g. `bootefi hello` the indent is not
+correctly reset.
 
-In the UEFI sub-system event handling functions which are called at a
-very high frequency are in the same files as other functions of interest.
-Filtering on file level is too coarse for generating useful debug output.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ include/efi_loader.h          | 33 ++++++++++++++++++++++-----------
+ lib/efi_loader/efi_boottime.c |  7 +++----
+ 2 files changed, 25 insertions(+), 15 deletions(-)
 
-Allow filtering on a list of functions and add unit tests.
-
-(Resending as mail did not reach the U-Boot list.)
-
-Heinrich Schuchardt (3):
-  log: make log_has_file() static
-  log: enable filtering on functions
-  test/log: test function filters
-
- cmd/log.c             | 42 ++++++++++++-----------
- common/log.c          | 33 ++++++++++++++----
- include/log.h         | 17 ++--------
- test/log/log_filter.c |  1 -
- test/log/log_test.c   | 78 +++++++++++++++++++++++++++++++++----------
- 5 files changed, 112 insertions(+), 59 deletions(-)
-
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index 9f51db90f33..95d416adf9d 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -3258,11 +3258,10 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
+ 		 * To get ready to call EFI_EXIT below we have to execute the
+ 		 * missed out steps of EFI_CALL.
+ 		 */
+-		assert(__efi_entry_check());
+-		EFI_PRINT("%lu returned by started image\n",
+-			  (unsigned long)((uintptr_t)exit_status &
+-			  ~EFI_ERROR_MASK));
++		EFI_RETURN(exit_status);
++
+ 		current_image = parent_image;
++
+ 		return EFI_EXIT(exit_status);
+ 	}
+ 
 -- 
 2.47.1
 
