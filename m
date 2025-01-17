@@ -4,147 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A05E7C02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 02:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28990C02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 03:00:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C161E80312;
-	Fri, 17 Jan 2025 03:38:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 7621480312;
+	Fri, 17 Jan 2025 04:00:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="Gz4KRczi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IRyBVl6P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76DB68069D; Fri, 17 Jan 2025 03:38:51 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E1FB380312; Fri, 17 Jan 2025 04:00:37 +0100 (CET)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53A2B801B0
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 03:38:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AC2E801B0
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 04:00:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dEp6xGBMSIbYrcxOHClYB2LMIRnCZCKfK9XoZysLudsoEwwMzAUr0HmMPgamfqiE97K3kwXONxpJkuw0eqoCoCCTpTQSENN5U+8KW7wcL+b3kmmcrhX9KoWKDelmpcPiYZTN7KfRRQv8gsQdGUWYOTqM+SSw6XLpbDgjfjtgJTPWUqC1pXPzwr0SrYUerypTl6NKaDhqV0uzHdsKmr9dEwgM5UVHnAZRyvfFSIi6rC6f8zaZAlMQnNVBHv7NbX2lnIrQQiw/CtGU0nQYhPnJmUshSzYcEbq/qm9wOFQxiN87eoGwFMi/gGoAF+yL23+OpA0lcadwdYy9KnTw/lpi1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gJZoTcjcTRc2TtqR8hKO4JnD1sdrHDZ0JY5PRHAjDuo=;
- b=Xsk38qyreFXjGqI53W+is1ZTg+5iTEtk4qbucxLS/w6OPP0fmO0G3TWSeCIa3iFam/tWPyGVYw0aqKxiM3/8uO+j5/DS2mFzay5/QemA3+PSFzQNH0GuofglIps5aDi0NGhuNdpx7UT+PR7rNHk2ceFMlrAkInCpBxvoMF+qtpuZyqKjdqQQDOMZ0agG6Mjmtjce4eBA1tnXF/1To0sQW4rvmFoay5FS+ht20agteLywiM1xWuGfpBTKmFUXBj1ElcmyipZEqies+Ed6wiVrdhi0HCC8sl1qDTsoZKB9+w3b7T+6nJDe1A+24t73sxWTuzbiU7uwLn1BApPNFzrFag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gJZoTcjcTRc2TtqR8hKO4JnD1sdrHDZ0JY5PRHAjDuo=;
- b=Gz4KRczi4A2DGYSAYCAKZYsMRI6b5Ziw2hm8F3fu2h45uQuU3qUNaqkCUUOFzWl+XK6UQJqldtPAWMZfASrvloVH31LhPtdMt6Yonf0nPYWA2CMMEOYNv8b8rMJHC9cfIuSCRh7Cw+Ye2lL5MG+wnDS/ID85zuTt+rQlLH1zOwRPtX6kxTwCilk1erN1UVD5WAb1li4gyF3KW4Y849LNMbPJvMEW3ajfPJZ1OlZe3gJLQnC6sCgm1gPGJCGqDACgHr4gvecWD3BJwnzvVQbNgS/D0J4u6bC5L2sn+7oQzH5xxpsgpawTQq3RPghI7afKqiRu2YXQjgQ4ihSXk8R9Yw==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AM8PR04MB7859.eurprd04.prod.outlook.com (2603:10a6:20b:24c::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.16; Fri, 17 Jan
- 2025 02:38:48 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8356.014; Fri, 17 Jan 2025
- 02:38:47 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Fabio Estevam <festevam@gmail.com>, "trini@konsulko.com"
- <trini@konsulko.com>
-CC: dl-uboot-imx <uboot-imx@nxp.com>, "y.moog@phytec.de" <y.moog@phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "marex@denx.de"
- <marex@denx.de>, "tharvey@gateworks.com" <tharvey@gateworks.com>, Fabio
- Estevam <festevam@denx.de>
-Subject: RE: [PATCH v2] imx8m: Guard binman nodes with CONFIG_OPTEE 
-Thread-Topic: [PATCH v2] imx8m: Guard binman nodes with CONFIG_OPTEE 
-Thread-Index: AQHbaIM1k3a8gLqXdUCT+B/wTpUuULMaQK0Q
-Date: Fri, 17 Jan 2025 02:38:47 +0000
-Message-ID: <PAXPR04MB84597F2ED81D0DE0C29E381D881B2@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20250117015642.2373824-1-festevam@gmail.com>
-In-Reply-To: <20250117015642.2373824-1-festevam@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AM8PR04MB7859:EE_
-x-ms-office365-filtering-correlation-id: b2c5e1b8-15aa-4bb9-0b74-08dd36a011ba
-x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?3KWXuP2p1P6tMLfvenuR7E9DWJOq4PJMQ1J9in79hhPDdWGQ1al3vcucPFWS?=
- =?us-ascii?Q?hvqf/hZyoOceOv0Ai/ZXo/4Sm+MmyzGsj1s0gIsFJja9NKYmq0WC9hM8+mG7?=
- =?us-ascii?Q?W/1qoDILypG/yfoHCE4xR1VqNFuZC/KUN1bEMzuPc2P+XZIDWPNVPqGyoKwF?=
- =?us-ascii?Q?9xKmAoqlsTV5CVssyGrfXOt7WL6XWJvUFPhGIIxSdmkc+yllvVEM7RjD+7pR?=
- =?us-ascii?Q?yvutA6QNFRTELBtWyLo5IxkuGMpidxhJM7WRVnUoEqMV69rIiBiMVdwBdfJH?=
- =?us-ascii?Q?8kN0L/kx/RLUTpkyg/liNUOguqXUV2WaUvny7X+FLFt07/CVisdeQGytpMxJ?=
- =?us-ascii?Q?cmxUPjBR709eKPYTOmYmbYd1I45GEibMP2oWdejnsfsEpG2UQ7xn9y2gRRCa?=
- =?us-ascii?Q?QrtxTyJMbhbGKE93uIFHfu8InNABBFRcqZUKBhEap9wUDX08PE5fSpm6xv5W?=
- =?us-ascii?Q?WRw+nh0oQ1I9n/OKSmbG6HX0yrYK3hwX0AuZ3tlHCE7FmVkydnVQNqPA9t7F?=
- =?us-ascii?Q?F/w7jg6LUB9t9kIEXjFfvoPzBpmTHQm9BWdq08lVMT6se3CR5REgiH0n55Dr?=
- =?us-ascii?Q?2YkezcQ90IOvWwlSXeOgI1Ls1ORYH3YSGmts4M4aJ6YOwwX57V8KJxoZlwMt?=
- =?us-ascii?Q?eNOP1hUM4SArkCNEein1sgKtoTuD8uEawxG2ORKHY+XkdnZrkKBd1SD74jjf?=
- =?us-ascii?Q?qgAu2JIqMNkbGGNouA/yF4WqgZt7ua+LoxqmrtZXIoZ7/qnwlkCFcKcY4pQG?=
- =?us-ascii?Q?uN6stJ11KZFKXCIQCw/wbYZ6bfb2QgakTdj2kcdWqFUHqwYKwGr5se5MJWWK?=
- =?us-ascii?Q?FO/XGZpkN0kZ7JLO1ew+JRG/PQEjNDzzXHc7dnhZs58TQe2hdkv9ppKi1b1W?=
- =?us-ascii?Q?ngapf9xyWDvyypIYda3jr8FM3XoC9wbjC5E4olhLsa3eGoSROsstlxl+3rFq?=
- =?us-ascii?Q?lFNybRHbOEdZRUenoy0NGPEDQX6t81hte5IXr2tgxIM91ca3o1ugVV30Pcth?=
- =?us-ascii?Q?IWDAp4+AEobc+3WRoQ01cdasJWzOlF+hWviPrfEmgN6/aAbh2BSNk0BT9e9Q?=
- =?us-ascii?Q?OWUGPdPbPsnJCoByv2b5Agf6E2E7R2e7hPm6cNvQCuvcl2MhIgScXYnt7u1c?=
- =?us-ascii?Q?5UK58DVxvF7IJhDRpxKncSJzC+oOI4+ZWOWfL/F98OF1Lfb9YamXrJedVAoc?=
- =?us-ascii?Q?eC8XR7TfUI/DU2jU422U6vi0S+1Ycm0JY8ZkK90YGhYQAbPJxYf4eEbJliVp?=
- =?us-ascii?Q?lO+XiATV9v9DXNBOu/yQ0Yf6P2kDbn85uXMKbj16DUxzpWrj4S9CNEiI2iDz?=
- =?us-ascii?Q?HOckOXBerGV4GbUgPQb403Eowkh96mkkuxTPeDO/B+MiraUmDpN0pRFhQAeZ?=
- =?us-ascii?Q?JbfTjDsJEH9h+V9KAAZxxtMg1D08K9uUlD5YZdpKv16RWSRzgHwcBkq/O2qx?=
- =?us-ascii?Q?Z/b63JmbeX0gwlB2n0c+YsB4uH8TLrjI?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?xjnQJTIYKPx3iSBMQYIzqLnBR0Afz+sfTYUt7ww4mhoE7nYHy+oq6kxNgCLO?=
- =?us-ascii?Q?tlmqMDVRliyK4UkqXDHRFn5H5V/6e1NNDovakx4KcLJijzbFPtx2OV2pHqcp?=
- =?us-ascii?Q?GliyIKpvzR3Ucfa2bSer+v7AytWBkfumBi7Zoi3Ces7CkClV9+yz+Jh2Rrq2?=
- =?us-ascii?Q?zrC8qg9JqZ+PBrDyxJ4Xsc9siIwDkRrdOru+Vwfrrom8UsdEluP8+kSFNTjN?=
- =?us-ascii?Q?n0B4J8XoOqkmyV4z4Cc2PVdRkZHOKZ9YIeRWVILSINpwUzTIj05/xKZVyam2?=
- =?us-ascii?Q?SJz2KYTlJRfr2P/0n1shQl7/56Sy0nRA21ZfQkeNmi9p/2OlarC1t394ztq4?=
- =?us-ascii?Q?KGXCQ4JFjnmda94uqyk6YQX7HdVRQ+UPUpZqpwvPMuI0Qhg28jaMg2DhPQeT?=
- =?us-ascii?Q?Wqhgc4FZgyELyjRrHWPCk9CHg7BlbG2VWfX4rsSSUges+dpNAIv2rvVavVMn?=
- =?us-ascii?Q?kx2RNr/2kvSPoG75H0YY9h9Xk8zipNdA2YUx9hZORq8IZQOnVVh4MyzqLgVw?=
- =?us-ascii?Q?sUhBTNRSm0aWSGvgIPcFw5UY26456WdNsMYqmomaRos6BkXylpkeO4T2cKAE?=
- =?us-ascii?Q?CGpBSOVAJyTTZlQFt7YF4SXY8WXPRERtMM+OniuulMQ8fpl3NTHL+E9ReWaT?=
- =?us-ascii?Q?seJONobflWjsZr1dox0hsy/H1H7h1lx3VCbkNyhLdcaCJkdJ0wpLj72NzrfY?=
- =?us-ascii?Q?ZL7LMRAOsiemeO91xt84+ssOeMsblcCAQof85RgLDMfLryCfiI3FouO14+yC?=
- =?us-ascii?Q?WypWHokS7hlQdV31uSildOOkzdEY8VkYkCCyLPTMXzp0Xrs1DSyGYzSTRuLj?=
- =?us-ascii?Q?Vv6y5AxvClTmv35XTiRuhSbObXHx5sJ5y3HOVyK+iY9LB2IxbD7vCvd8HjHj?=
- =?us-ascii?Q?9DGOtO82pau+GXfvtmU1t8up3YlAnOFMLP+CsbJK59IDOXyOEssnPxBWMXGd?=
- =?us-ascii?Q?g0vE6sXu5XEe76jYdarNIr28c/w5AcuQ+7L42J+rKdUA+ilAUWWDPP6RjpUl?=
- =?us-ascii?Q?7f91VQ2M/CR7n74yMdhRWlV59Fv1L6/raqZmwxHud7TWjR3OpG6RQzF6iA2w?=
- =?us-ascii?Q?wlD95KB1BFrqTD8QyLofkuWvp2g1xOXzSXCsxA6qhJhkdJ8uTogG+UO+qyNL?=
- =?us-ascii?Q?PLcV7DSVTl3IYfeD3vzwFq/XItyEeLXUeoigqGmd9l/Jxv2EYjio04xshtnz?=
- =?us-ascii?Q?AyzOyGtECogNNywFtmA8MRSOLfVWxELy7BxIhNkhGvkmkxOSzO4S8Axjws4A?=
- =?us-ascii?Q?MzTgQ1RL9ASW39YIy400h4aML51I3IN1DfYnNcoc4vIzi8n3PRMcJ4yFSqL5?=
- =?us-ascii?Q?Hip9IdGKNn2ce0uWd2wXIihuLnICAiUg0iS5AH0mlyE0zUXdBB07SLWKcPBv?=
- =?us-ascii?Q?AjASAAZCnYpyKM1CPekORSS6uOqi5ilfodSyKl1XpNeVjnjKM5/LhxJUyXca?=
- =?us-ascii?Q?ilLlEnDaX6CSN/qQwhGJ1vDS1bgQ0IwTCcqbYIhlchHvfFcNyS9EKHGUfD4Q?=
- =?us-ascii?Q?yyWwLdTNqKzR35qC7/ePMre/DVV3EENVgF7hS1iCTIVHhCj3IRzsVqR8OElJ?=
- =?us-ascii?Q?1zrqId8ChkKNlhblj9Q=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6df83fd01cbso8798046d6.2
+ for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 19:00:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1737082832; x=1737687632; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qgXytmQdAe5yMH3oC53nHbDcHSezCsD5KouQgexKgco=;
+ b=IRyBVl6P5O1PwvmHYac3Id9EKkAcBnzvj/AoNWOgzq1n3MZ7QvZz9Q4iekfNvzUkRb
+ tTb/ehlrVbkgmw5enRGRJWELdLyaSEHRsZaCw2obRLnvGaRhYXlQkUWzvAjjRE9fFVV/
+ fK28ymuBt99S/McbIjlnELXazS+RksmPAcLee1p9snprFvLoY1rmJsuGcCD0X83aM64W
+ fJ/tW3wj2QOLgjeGXFkqayTwSXV6HwKzB6jdkpdxMYIhBQEQedC8gcAh512yvFIEz4en
+ 8NpV7z6nxJD3weVDBFYpjZNlH34L22tsnj/V5sCOIgTwsowoxEA9s5WYzcIOGCR41w5K
+ NKnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737082832; x=1737687632;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qgXytmQdAe5yMH3oC53nHbDcHSezCsD5KouQgexKgco=;
+ b=j40+1lzx4SCbe5yJfeERYzvECkQbiybK1sOA+Wlbp7sPnN9frjcmkR3eJeYuDuJsF3
+ upvnPw2uzBEdiiJ8paZy2+6tlwYFwI2fr0Kv25wnZjIxzkBQcT4Gg55eSetZtvIJSxPB
+ eq6vjKoq0/HLpDJllsLcqwOxsHs/Z2ORbuGOGcfFgnWVl2hX0xSNrUimW6VSVGyrRcVU
+ 1d13ITOK92s9hUJP+IQA24RhIN7AjE77BTgGeJsGal2c3xGRYKzGHSDX7zacXtpwgjBH
+ Ofxo5VFlaJYddcohCRQ9Zk8BZibIRKmedB+tVkg4bDGJZASmqZ7m58TAnGc0ZZOPvx+o
+ ijjA==
+X-Gm-Message-State: AOJu0YwG34RL6ZZn0ZasWmR38VyENrsgLZ/WmexPsTACrz0wuB5xgfoM
+ irP6dsydIchl31tPwzOMZ0MXYRAt/isJ8LDUbRooFbDGj2LIIdDv1gH0nw==
+X-Gm-Gg: ASbGnctGH6u0B3e/tP0ZNjJHNaFjlc5TawMAn0eazmJdLvUR0WH5xLAzR0v1N2Ux/aX
+ v0pGdNj7GOP4BpqCjENl0jCGll1emvPg3y8xmRgWlAjKT+6hNRft/GNOlCEsswoZ6tfNfWMhfru
+ JUivgpKyV6BEYLK1wlsRmPxHTVAVEH2awmQ/DoIyMBa5PZh7rRGfihqBpRM5QXc63tlYQ1jNreZ
+ I5jl0rhkUn9ogyOpStN0Qy5T4Egm0CBnK1z2zBMj7Yt9VeNxkidLkMnLb4z7WC2p5oSBaYC5tYd
+ Ww6ouQMSy1jXLZWNoeN7sDrQmQjEGQpCjJAfaQ==
+X-Google-Smtp-Source: AGHT+IHbXfEssmz6k/9YNecoYGYA/q1UBOQt/u9bCPgHhLgCt+EywpWYbEL7OD5+XMBORfEd73NSCA==
+X-Received: by 2002:a05:6214:1312:b0:6d8:a486:e87c with SMTP id
+ 6a1803df08f44-6e1b2140ce0mr20785736d6.4.1737082830470; 
+ Thu, 16 Jan 2025 19:00:30 -0800 (PST)
+Received: from jesse-desktop.. (pool-108-26-179-17.bstnma.fios.verizon.net.
+ [108.26.179.17]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e1afc3371csm7103036d6.68.2025.01.16.19.00.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jan 2025 19:00:29 -0800 (PST)
+From: Jesse Taube <mr.bossman075@gmail.com>
+X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Jesse Taube <Mr.Bossman075@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH] ARM: dts: imxrt1050: Migrate to OF_UPSTREAM
+Date: Thu, 16 Jan 2025 22:00:27 -0500
+Message-ID: <20250117030027.3874367-1-Mr.Bossman075@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b2c5e1b8-15aa-4bb9-0b74-08dd36a011ba
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Jan 2025 02:38:47.5920 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: GdHLQSCdbR+R1/L+lh7SVJRD3f4EF0yKBb8w8+QU9pyEDs24e1dGNyL5QfjnqRBoc0imuR2iuVGqATs058986A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7859
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,35 +99,1310 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH v2] imx8m: Guard binman nodes with CONFIG_OPTEE
->=20
-> From: Fabio Estevam <festevam@denx.de>
->=20
-> Guard binman nodes with CONFIG_OPTEE to fix the following error
-> when building without optee support:
->=20
->   BINMAN  .binman_stamp
-> Image 'image' has faked external blobs and is non-functional: tee.bin
->=20
-> Image 'image' is missing optional external blobs but is still functional:
-> tee-os
->=20
-> /binman/section/fit/images/tee/tee-os (tee.bin):
->    See the documentation for your board. You may need to build Open
-> Portable
->    Trusted Execution Environment (OP-TEE) and build with
-> TEE=3D/path/to/tee.bin
->=20
-> Some images are invalid
-> make: *** [Makefile:1135: .binman_stamp] Error 103
->=20
-> While at it, only pass tee to the loadables lines when CONFIG_OPTEE is
-> defined.
->=20
-> Reported-by: Tim Harvey <tharvey@gateworks.com>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+The device tree for imxrt1050 is now
+available in the /dts/upstream directory.
+Migrate board to use OF_UPSTREAM.
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+---
+Please note /dts/upstream still needs to be updated
+the upstream commit is 5f122030061db3e5d2bddd9cf5c583deaa6c54ff
+---
+ arch/arm/dts/imxrt1050-evk.dts       |  72 --
+ arch/arm/dts/imxrt1050-pinfunc.h     | 993 ---------------------------
+ arch/arm/dts/imxrt1050.dtsi          | 160 -----
+ configs/imxrt1050-evk_defconfig      |   3 +-
+ configs/imxrt1050-evk_fspi_defconfig |   3 +-
+ 5 files changed, 4 insertions(+), 1227 deletions(-)
+ delete mode 100644 arch/arm/dts/imxrt1050-evk.dts
+ delete mode 100644 arch/arm/dts/imxrt1050-pinfunc.h
+ delete mode 100644 arch/arm/dts/imxrt1050.dtsi
 
+diff --git a/arch/arm/dts/imxrt1050-evk.dts b/arch/arm/dts/imxrt1050-evk.dts
+deleted file mode 100644
+index 6a9c10decf5..00000000000
+--- a/arch/arm/dts/imxrt1050-evk.dts
++++ /dev/null
+@@ -1,72 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+-/*
+- * Copyright (C) 2019
+- * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
+- */
+-
+-/dts-v1/;
+-#include "imxrt1050.dtsi"
+-#include "imxrt1050-pinfunc.h"
+-
+-/ {
+-	model = "NXP IMXRT1050-evk board";
+-	compatible = "fsl,imxrt1050-evk", "fsl,imxrt1050";
+-
+-	chosen {
+-		stdout-path = &lpuart1;
+-	};
+-
+-	aliases {
+-		gpio0 = &gpio1;
+-		gpio1 = &gpio2;
+-		gpio2 = &gpio3;
+-		gpio3 = &gpio4;
+-		gpio4 = &gpio5;
+-		mmc0 = &usdhc1;
+-		serial0 = &lpuart1;
+-	};
+-
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x80000000 0x2000000>;
+-	};
+-};
+-
+-&lpuart1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_lpuart1>;
+-	status = "okay";
+-};
+-
+-&iomuxc {
+-	pinctrl-names = "default";
+-	pinctrl_lpuart1: lpuart1grp {
+-		fsl,pins = <
+-			MXRT1050_IOMUXC_GPIO_AD_B0_12_LPUART1_TXD	0xf1
+-			MXRT1050_IOMUXC_GPIO_AD_B0_13_LPUART1_RXD	0xf1
+-		>;
+-	};
+-
+-	pinctrl_usdhc0: usdhc0grp {
+-		fsl,pins = <
+-			MXRT1050_IOMUXC_GPIO_B1_12_USDHC1_CD_B		0x1B000
+-			MXRT1050_IOMUXC_GPIO_B1_14_USDHC1_VSELECT	0xB069
+-			MXRT1050_IOMUXC_GPIO_SD_B0_00_USDHC1_CMD	0x17061
+-			MXRT1050_IOMUXC_GPIO_SD_B0_01_USDHC1_CLK	0x17061
+-			MXRT1050_IOMUXC_GPIO_SD_B0_05_USDHC1_DATA3	0x17061
+-			MXRT1050_IOMUXC_GPIO_SD_B0_04_USDHC1_DATA2	0x17061
+-			MXRT1050_IOMUXC_GPIO_SD_B0_03_USDHC1_DATA1	0x17061
+-			MXRT1050_IOMUXC_GPIO_SD_B0_02_USDHC1_DATA0	0x17061
+-		>;
+-	};
+-};
+-
+-&usdhc1 {
+-	pinctrl-names = "default", "state_100mhz", "state_200mhz", "sleep";
+-	pinctrl-0 = <&pinctrl_usdhc0>;
+-	pinctrl-1 = <&pinctrl_usdhc0>;
+-	pinctrl-2 = <&pinctrl_usdhc0>;
+-	pinctrl-3 = <&pinctrl_usdhc0>;
+-	cd-gpios = <&gpio2 28 GPIO_ACTIVE_LOW>;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/imxrt1050-pinfunc.h b/arch/arm/dts/imxrt1050-pinfunc.h
+deleted file mode 100644
+index 22c14a3262a..00000000000
+--- a/arch/arm/dts/imxrt1050-pinfunc.h
++++ /dev/null
+@@ -1,993 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+-/*
+- * Copyright (C) 2019
+- * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
+- */
+-
+-#ifndef _DT_BINDINGS_PINCTRL_IMXRT1050_PINFUNC_H
+-#define _DT_BINDINGS_PINCTRL_IMXRT1050_PINFUNC_H
+-
+-#define IMX_PAD_SION	0x40000000
+-
+-/*
+- * The pin function ID is a tuple of
+- * <mux_reg conf_reg input_reg mux_mode input_val>
+- */
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_00_SEMC_DA00				0x014 0x204 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_00_FLEXPWM4_PWM0_A			0x014 0x204 0x494 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_00_LPSPI2_SCK				0x014 0x204 0x500 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_00_XBAR_INOUT2				0x014 0x204 0x60C 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_00_FLEXIO1_D00				0x014 0x204 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_00_GPIO4_IO00				0x014 0x204 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_01_SEMC_DA01				0x018 0x208 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_01_FLEXPWM4_PWM0_B			0x018 0x208 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_01_LPSPI2_PCS0				0x018 0x208 0x4FC 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_01_XBAR_INOUT3				0x018 0x208 0x610 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_01_FLEXIO1_D01				0x018 0x208 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_01_GPIO4_IO01				0x018 0x208 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_02_SEMC_DA02				0x01C 0x20C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_02_FLEXPWM4_PWM1_A			0x01C 0x20C 0x498 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_02_LPSPI2_SDO				0x01C 0x20C 0x508 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_02_XBAR_INOUT4				0x01C 0x20C 0x614 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_02_FLEXIO1_D02				0x01C 0x20C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_02_GPIO4_IO02				0x01C 0x20C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_03_SEMC_DA03				0x020 0x210 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_03_FLEXPWM4_PWM1_B			0x020 0x210 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_03_LPSPI2_SDI				0x020 0x210 0x504 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_03_XBAR_INOUT5				0x020 0x210 0x618 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_03_FLEXIO1_D03				0x020 0x210 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_03_GPIO4_IO03				0x020 0x210 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_04_SEMC_DA04				0x024 0x214 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_04_FLEXPWM4_PWM2_A			0x024 0x214 0x49C 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_04_SAI2_TX_DATA			0x024 0x214 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_04_XBAR_INOUT6				0x024 0x214 0x61C 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_04_FLEXIO1_D04				0x024 0x214 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_04_GPIO4_IO04				0x024 0x214 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_05_SEMC_DA05				0x028 0x218 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_05_FLEXPWM4_PWM2_B			0x028 0x218 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_05_SAI2_TX_SYNC			0x028 0x218 0x5C4 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_05_XBAR_INOUT7				0x028 0x218 0x620 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_05_FLEXIO1_D05				0x028 0x218 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_05_GPIO4_IO05				0x028 0x218 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_06_SEMC_DA06				0x02C 0x21C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_06_FLEXPWM2_PWM0_A			0x02C 0x21C 0x478 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_06_SAI2_TX_BCLK			0x02C 0x21C 0x5C0 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_06_XBAR_INOUT8				0x02C 0x21C 0x624 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_06_FLEXIO1_D06				0x02C 0x21C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_06_GPIO4_IO06				0x02C 0x21C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_07_SEMC_DA07				0x030 0x220 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_07_FLEXPWM2_PWM0_B			0x030 0x220 0x488 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_07_SAI2_MCLK				0x030 0x220 0x5B0 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_07_XBAR_INOUT9				0x030 0x220 0x628 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_07_FLEXIO1_D07				0x030 0x220 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_07_GPIO4_IO07				0x030 0x220 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_08_SEMC_DM00				0x034 0x224 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_08_FLEXPWM2_PWM1_A			0x034 0x224 0x47C 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_08_SAI2_RX_DATA			0x034 0x224 0x5B8 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_08_XBAR_INOUT17			0x034 0x224 0x62C 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_08_FLEXIO1_D08				0x034 0x224 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_08_GPIO4_IO08				0x034 0x224 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_09_SEMC_ADDR00				0x038 0x228 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_09_FLEXPWM2_PWM1_B			0x038 0x228 0x48C 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_09_SAI2_RX_SYNC			0x038 0x228 0x5BC 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_09_FLEXCAN2_TX				0x038 0x228 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_09_FLEXIO1_D09				0x038 0x228 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_09_GPIO4_IO09				0x038 0x228 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_10_SEMC_ADDR01				0x03C 0x22C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_10_FLEXPWM2_PWM2_A			0x03C 0x22C 0x480 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_10_SAI2_RX_BCLK			0x03C 0x22C 0x5B4 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_10_FLEXCAN2_RX				0x03C 0x22C 0x450 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_10_FLEXIO1_D10				0x03C 0x22C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_10_GPIO4_IO10				0x03C 0x22C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_11_SEMC_ADDR02				0x040 0x230 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_11_FLEXPWM2_PWM2_B			0x040 0x230 0x490 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_11_LPI2C4_SDA				0x040 0x230 0x4E8 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_11_USDHC2_RESET_B			0x040 0x230 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_11_FLEXIO1_D11				0x040 0x230 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_11_GPIO4_IO11				0x040 0x230 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_12_SEMC_ADDR03				0x044 0x234 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_12_XBAR_INOUT24			0x044 0x234 0x640 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_12_LPI2C4_SCL				0x044 0x234 0x4E4 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_12_USDHC2_WP				0x044 0x234 0x5D8 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_12_FLEXPWM1_PWM3_A			0x044 0x234 0x454 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_12_GPIO4_IO12				0x044 0x234 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_13_SEMC_ADDR04				0x048 0x238 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_13_XBAR_INOUT25			0x048 0x238 0x650 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_13_LPUART3_TXD				0x048 0x238 0x53C 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_13_MQS_RIGHT				0x048 0x238 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_13_FLEXPWM1_PWM3_B			0x048 0x238 0x464 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_13_GPIO4_IO13				0x048 0x238 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_14_SEMC_ADDR05				0x04C 0x23C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_14_XBAR_INOUT19			0x04C 0x23C 0x654 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_14_LPUART3_RXD				0x04C 0x23C 0x538 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_14_MQS_LEFT				0x04C 0x23C 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_14_LPSPI2_PCS1				0x04C 0x23C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_14_GPIO4_IO14				0x04C 0x23C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_15_SEMC_ADDR06				0x050 0x240 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_15_XBAR_INOUT20			0x050 0x240 0x634 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_15_LPUART3_CTS_B			0x050 0x240 0x534 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_15_SPDIF_OUT				0x050 0x240 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_15_TMR3_TIMER0				0x050 0x240 0x57C 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_15_GPIO4_IO15				0x050 0x240 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_16_SEMC_ADDR07				0x054 0x244 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_16_XBAR_INOUT21			0x054 0x244 0x658 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_16_LPUART3_RTS_B			0x054 0x244 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_16_SPDIF_IN				0x054 0x244 0x5C8 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_16_TMR3_TIMER1				0x054 0x244 0x580 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_16_GPIO4_IO16				0x054 0x244 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_17_SEMC_ADDR08				0x058 0x248 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_17_FLEXPWM4_PWM3_A			0x058 0x248 0x4A0 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_17_LPUART4_CTS_B			0x058 0x248 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_17_FLEXCAN1_TX				0x058 0x248 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_17_TMR3_TIMER2				0x058 0x248 0x584 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_17_GPIO4_IO17				0x058 0x248 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_18_SEMC_ADDR09				0x05C 0x24C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_18_FLEXPWM4_PWM3_B			0x05C 0x24C 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_18_LPUART4_RTS_B			0x05C 0x24C 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_18_FLEXCAN1_RX				0x05C 0x24C 0x44C 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_18_TMR3_TIMER3				0x05C 0x24C 0x588 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_18_GPIO4_IO18				0x05C 0x24C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_18_SNVS_VIO_5_CTL			0x05C 0x24C 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_19_SEMC_ADDR11				0x060 0x250 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_19_FLEXPWM2_PWM3_A			0x060 0x250 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_19_LPUART4_TXD				0x060 0x250 0x544 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_19_ENET_RX_DATA01			0x060 0x250 0x438 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_19_TMR2_TIMER0				0x060 0x250 0x56C 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_19_GPIO4_IO19				0x060 0x250 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_19_SNVS_VIO_5				0x060 0x250 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_20_SEMC_ADDR12				0x064 0x254 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_20_FLEXPWM2_PWM3_B			0x064 0x254 0x484 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_20_LPUART4_RXD				0x064 0x254 0x540 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_20_ENET_RX_DATA00			0x064 0x254 0x434 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_20_TMR2_TIMER0				0x064 0x254 0x570 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_20_GPIO4_IO20				0x064 0x254 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_21_SEMC_BA0				0x068 0x258 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_21_FLEXPWM3_PWM3_A			0x068 0x258 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_21_LPI2C3_SDA				0x068 0x258 0x4E0 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_21_ENET_TX_DATA01			0x068 0x258 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_21_TMR2_TIMER2				0x068 0x258 0x574 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_21_GPIO4_IO21				0x068 0x258 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_22_SEMC_BA1				0x06C 0x25C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_22_FLEXPWM3_PWM3_B			0x06C 0x25C 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_22_LPI2C3_SCL				0x06C 0x25C 0x4DC 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_22_ENET_TX_DATA00			0x06C 0x25C 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_22_TMR2_TIMER3				0x06C 0x25C 0x578 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_22_GPIO4_IO22				0x06C 0x25C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_23_SEMC_ADDR10				0x070 0x260 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_23_FLEXPWM1_PWM0_A			0x070 0x260 0x458 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_23_LPUART5_TXD				0x070 0x260 0x54C 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_23_ENET_RX_EN				0x070 0x260 0x43C 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_23_GPT1_CAPTURE2			0x070 0x260 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_23_GPIO4_IO23				0x070 0x260 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_24_SEMC_CAS				0x074 0x264 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_24_FLEXPWM1_PWM0_B			0x074 0x264 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_24_LPUART5_RXD				0x074 0x264 0x548 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_24_ENET_TX_EN				0x074 0x264 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_24_GPT1_CAPTURE1			0x074 0x264 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_24_GPIO4_IO24				0x074 0x264 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_25_SEMC_RAS				0x078 0x268 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_25_FLEXPWM1_PWM1_A			0x078 0x268 0x45C 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_25_LPUART6_TXD				0x078 0x268 0x554 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_25_ENET_TX_CLK				0x078 0x268 0x448 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_25_ENET_REF_CLK			0x078 0x268 0x42C 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_25_GPIO4_IO25				0x078 0x268 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_26_SEMC_CLK				0x07C 0x26C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_26_FLEXPWM1_PWM1_B			0x07C 0x26C 0x46C 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_26_LPUART6_RXD				0x07C 0x26C 0x550 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_26_ENET_RX_ER				0x07C 0x26C 0x440 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_26_FLEXIO1_D12				0x07C 0x26C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_26_GPIO4_IO26				0x07C 0x26C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_27_SEMC_CKE				0x080 0x270 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_27_FLEXPWM1_PWM2_A			0x080 0x270 0x460 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_27_LPUART5_RTS_B			0x080 0x270 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_27_LPSPI1_SCK				0x080 0x270 0x4F0 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_27_FLEXIO1_D13				0x080 0x270 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_27_GPIO4_IO27				0x080 0x270 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_28_SEMC_WE				0x084 0x274 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_28_FLEXPWM1_PWM2_B			0x084 0x274 0x470 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_28_LPUART5_CTS_B			0x084 0x274 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_28_LPSPI1_SDO				0x084 0x274 0x4F8 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_28_FLEXIO1_D14				0x084 0x274 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_28_GPIO4_IO28				0x084 0x274 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_29_SEMC_CS0				0x088 0x278 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_29_FLEXPWM3_PWM0_A			0x088 0x278 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_29_LPUART6_RTS_B			0x088 0x278 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_29_LPSPI1_SDI				0x088 0x278 0x4F4 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_29_FLEXIO1_D15				0x088 0x278 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_29_GPIO4_IO29				0x088 0x278 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_30_SEMC_DA08				0x08C 0x27C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_30_FLEXPWM3_PWM0_B			0x08C 0x27C 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_30_LPUART6_CTS_B			0x08C 0x27C 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_30_LPSPI1_PCS0				0x08C 0x27C 0x4EC 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_30_CSI_DATA23				0x08C 0x27C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_30_GPIO4_IO30				0x08C 0x27C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_31_SEMC_DA09				0x090 0x280 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_31_FLEXPWM3_PWM1_A			0x090 0x280 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_31_LPUART7_TXD				0x090 0x280 0x55C 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_31_LPSPI1_PCS1				0x090 0x280 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_31_CSI_DATA22				0x090 0x280 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_31_GPIO4_IO31				0x090 0x280 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_32_SEMC_DA10				0x094 0x284 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_32_FLEXPWM3_PWM1_B			0x094 0x284 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_32_LPUART7_RXD				0x094 0x284 0x558 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_32_CCM_PMIC_READY			0x094 0x284 0x3FC 0x3 0x4
+-#define MXRT1050_IOMUXC_GPIO_EMC_32_CSI_DATA21				0x094 0x284 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_32_GPIO3_IO18				0x094 0x284 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_33_SEMC_DA11				0x098 0x288 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_33_FLEXPWM3_PWM2_A			0x098 0x288 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_33_USDHC1_RESET_B			0x098 0x288 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_33_SAI3_RX_DATA			0x098 0x288 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_33_CSI_DATA20				0x098 0x288 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_33_GPIO3_IO19				0x098 0x288 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_34_SEMC_DA12				0x09C 0x28C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_34_FLEXPWM3_PWM2_B			0x09C 0x28C 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_34_USDHC1_VSELECT			0x09C 0x28C 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_34_SAI3_RX_SYNC			0x09C 0x28C 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_34_CSI_DATA19				0x09C 0x28C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_34_GPIO3_IO20				0x09C 0x28C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_35_SEMC_DA13				0x0A0 0x290 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_35_XBAR_INOUT18			0x0A0 0x290 0x630 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_35_GPT1_COMPARE1			0x0A0 0x290 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_35_SAI3_RX_BCLK			0x0A0 0x290 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_35_CSI_DATA18				0x0A0 0x290 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_35_GPIO3_IO21				0x0A0 0x290 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_35_USDHC1_CD_B				0x0A0 0x290 0x5D4 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_36_SEMC_DA14				0x0A4 0x294 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_36_XBAR_INOUT22			0x0A4 0x294 0x638 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_36_GPT1_COMPARE2			0x0A4 0x294 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_36_SAI3_TX_DATA			0x0A4 0x294 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_36_CSI_DATA17				0x0A4 0x294 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_36_GPIO3_IO22				0x0A4 0x294 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_36_USDHC1_WP				0x0A4 0x294 0x5D8 0x6 0x1
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_37_SEMC_DA15				0x0A8 0x298 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_37_XBAR_INOUT23			0x0A8 0x298 0x63C 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_37_GPT1_COMPARE3			0x0A8 0x298 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_37_SAI3_MCLK				0x0A8 0x298 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_37_CSI_DATA16				0x0A8 0x298 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_37_GPIO3_IO23				0x0A8 0x298 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_37_USDHC2_WP				0x0A8 0x298 0x608 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_38_SEMC_DM01				0x0AC 0x29C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_38_FLEXPWM1_PWM3_A			0x0AC 0x29C 0x454 0x1 0x2
+-#define MXRT1050_IOMUXC_GPIO_EMC_38_LPUART8_TXD				0x0AC 0x29C 0x564 0x2 0x2
+-#define MXRT1050_IOMUXC_GPIO_EMC_38_SAI3_TX_BCLK			0x0AC 0x29C 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_38_CSI_FIELD				0x0AC 0x29C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_38_GPIO3_IO24				0x0AC 0x29C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_38_USDHC2_VSELECT			0x0AC 0x29C 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_39_SEMC_DQS				0x0B0 0x2A0 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_39_FLEXPWM1_PWM3_B			0x0B0 0x2A0 0x464 0x1 0x2
+-#define MXRT1050_IOMUXC_GPIO_EMC_39_LPUART8_RXD				0x0B0 0x2A0 0x560 0x2 0x2
+-#define MXRT1050_IOMUXC_GPIO_EMC_39_SAI3_TX_SYNC			0x0B0 0x2A0 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_39_WDOG1_B				0x0B0 0x2A0 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_39_GPIO3_IO25				0x0B0 0x2A0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_39_USDHC2_CD_B				0x0B0 0x2A0 0x5E0 0x6 0x1
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_40_SEMC_RDY				0x0B4 0x2A4 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_40_GPT2_CAPTURE2			0x0B4 0x2A4 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_40_LPSPI1_PCS2				0x0B4 0x2A4 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_40_USB_OTG2_OC				0x0B4 0x2A4 0x5CC 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_40_ENET_MDC				0x0B4 0x2A4 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_40_GPIO3_IO26				0x0B4 0x2A4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_40_USDHC2_RESET_B			0x0B4 0x2A4 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_EMC_41_SEMC_CSX0				0x0B8 0x2A8 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_41_GPT2_CAPTURE1			0x0B8 0x2A8 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_41_LPSPI1_PCS3				0x0B8 0x2A8 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_41_USB_OTG2_PWR			0x0B8 0x2A8 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_41_ENET_MDIO				0x0B8 0x2A8 0x430 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_EMC_41_GPIO3_IO27				0x0B8 0x2A8 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_EMC_41_USDHC2_VSELECT			0x0B8 0x2A8 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_00_FLEXPWM2_PWM3_A			0x0BC 0x2AC 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_00_XBAR_INOUT14			0x0BC 0x2AC 0x644 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_00_REF_CLK_32K			0x0BC 0x2AC 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_00_USB_OTG2_ID			0x0BC 0x2AC 0x3F8 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_00_LPI2C1_SCLS			0x0BC 0x2AC 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_00_GPIO1_IO00			0x0BC 0x2AC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_00_USDHC1_RESET_B			0x0BC 0x2AC 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_00_LPSPI3_SCK			0x0BC 0x2AC 0x510 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_01_FLEXPWM2_PWM3_B			0x0C0 0x2B0 0x484 0x0 0x2
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_01_XBAR_INOUT15			0x0C0 0x2B0 0x648 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_01_REF_CLK_24M			0x0C0 0x2B0 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_01_USB_OTG1_ID			0x0C0 0x2B0 0x3F4 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_01_LPI2C1_SDAS			0x0C0 0x2B0 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_01_GPIO1_IO01			0x0C0 0x2B0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_01_EWM_OUT_B				0x0C0 0x2B0 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_01_LPSPI3_SDO			0x0C0 0x2B0 0x518 0x7 0x1
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_02_FLEXCAN2_TX			0x0C4 0x2B4 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_02_XBAR_INOUT16			0x0C4 0x2B4 0x64C 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_02_LPUART6_TXD			0x0C4 0x2B4 0x554 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_02_USB_OTG1_PWR			0x0C4 0x2B4 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_02_FLEXPWM1_PWM0_X			0x0C4 0x2B4 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_02_GPIO1_IO02			0x0C4 0x2B4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_02_LPI2C1_HREQ			0x0C4 0x2B4 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_02_LPSPI3_SDI			0x0C4 0x2B4 0x514 0x7 0x1
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_03_FLEXCAN2_RX			0x0C8 0x2B8 0x450 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_03_XBAR_INOUT17			0x0C8 0x2B8 0x62C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_03_LPUART6_RXD			0x0C8 0x2B8 0x550 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_03_USB_OTG1_OC			0x0C8 0x2B8 0x5D0 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_03_FLEXPWM1_PWM1_X			0x0C8 0x2B8 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_03_GPIO1_IO03			0x0C8 0x2B8 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_03_REF_CLK_24M			0x0C8 0x2B8 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_03_LPSPI3_PCS0			0x0C8 0x2B8 0x50C 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_04_SRC_BOOT_MODE00			0x0CC 0x2BC 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_04_MQS_RIGHT				0x0CC 0x2BC 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_04_ENET_TX_DATA03			0x0CC 0x2BC 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_04_SAI2_TX_SYNC			0x0CC 0x2BC 0x5C4 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_04_CSI_DATA09			0x0CC 0x2BC 0x41C 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_04_GPIO1_IO04			0x0CC 0x2BC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_04_PIT_TRIGGER00			0x0CC 0x2BC 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_04_LPSPI3_PCS1			0x0CC 0x2BC 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_05_SRC_BOOT_MODE01			0x0D0 0x2C0 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_05_MQS_LEFT				0x0D0 0x2C0 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_05_ENET_TX_DATA02			0x0D0 0x2C0 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_05_SAI2_TX_BCLK			0x0D0 0x2C0 0x5C0 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_05_CSI_DATA08			0x0D0 0x2C0 0x418 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_05_GPIO1_IO05			0x0D0 0x2C0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_05_XBAR_INOUT17			0x0D0 0x2C0 0x62C 0x6 0x2
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_05_LPSPI3_PCS2			0x0D0 0x2C0 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_06_JTAG_TMS				0x0D4 0x2C4 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_06_GPT2_COMPARE1			0x0D4 0x2C4 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_06_ENET_RX_CLK			0x0D4 0x2C4 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_06_SAI2_RX_BCLK			0x0D4 0x2C4 0x5B4 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_06_CSI_DATA07			0x0D4 0x2C4 0x414 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_06_GPIO1_IO06			0x0D4 0x2C4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_06_XBAR_INOUT18			0x0D4 0x2C4 0x630 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_06_LPSPI3_PCS3			0x0D4 0x2C4 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_07_JTAG_TCK				0x0D8 0x2C8 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_07_GPT2_COMPARE2			0x0D8 0x2C8 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_07_ENET_TX_ER			0x0D8 0x2C8 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_07_SAI2_RX_SYNC			0x0D8 0x2C8 0x5BC 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_07_CSI_DATA06			0x0D8 0x2C8 0x410 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_07_GPIO1_IO07			0x0D8 0x2C8 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_07_XBAR_INOUT19			0x0D8 0x2C8 0x654 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_07_ENET_1588_EVENT3_OUT		0x0D8 0x2C8 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_08_JTAG_MOD				0x0DC 0x2CC 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_08_GPT2_COMPARE3			0x0DC 0x2CC 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_08_ENET_RX_DATA03			0x0DC 0x2CC 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_08_SAI2_RX_DATA			0x0DC 0x2CC 0x5B8 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_08_CSI_DATA05			0x0DC 0x2CC 0x40C 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_08_GPIO1_IO08			0x0DC 0x2CC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_08_XBAR_INOUT20			0x0DC 0x2CC 0x634 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_08_ENET_1588_EVENT3_IN		0x0DC 0x2CC 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_09_JTAG_TDI				0x0E0 0x2D0 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_09_FLEXPWM2_PWM3_A			0x0E0 0x2D0 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_09_ENET_RX_DATA02			0x0E0 0x2D0 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_09_SAI2_TX_DATA			0x0E0 0x2D0 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_09_CSI_DATA04			0x0E0 0x2D0 0x408 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_09_GPIO1_IO09			0x0E0 0x2D0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_09_XBAR_INOUT21			0x0E0 0x2D0 0x658 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_09_GPT2_CLK				0x0E0 0x2D0 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_10_JTAG_TDO				0x0E4 0x2D4 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_10_FLEXPWM1_PWM3_A			0x0E4 0x2D4 0x454 0x1 0x3
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_10_ENET_CRS				0x0E4 0x2D4 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_10_SAI2_MCLK				0x0E4 0x2D4 0x5B0 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_10_CSI_DATA03			0x0E4 0x2D4 0x404 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_10_GPIO1_IO10			0x0E4 0x2D4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_10_XBAR_INOUT22			0x0E4 0x2D4 0x638 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_10_ENET_1588_EVENT0_OUT		0x0E4 0x2D4 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_11_JTAG_TRSTB			0x0E8 0x2D8 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_11_FLEXPWM1_PWM3_B			0x0E8 0x2D8 0x464 0x1 0x3
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_11_ENET_COL				0x0E8 0x2D8 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_11_WDOG1_B				0x0E8 0x2D8 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_11_CSI_DATA02			0x0E8 0x2D8 0x400 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_11_GPIO1_IO11			0x0E8 0x2D8 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_11_XBAR_INOUT23			0x0E8 0x2D8 0x63C 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_11_ENET_1588_EVENT0_IN		0x0E8 0x2D8 0x444 0x7 0x1
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_12_LPI2C4_SCL			0x0EC 0x2DC 0x4E4 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_12_CCM_PMIC_READY			0x0EC 0x2DC 0x3FC 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_12_LPUART1_TXD			0x0EC 0x2DC 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_12_WDOG2_B				0x0EC 0x2DC 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_12_FLEXPWM1_PWM2_X			0x0EC 0x2DC 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_12_GPIO1_IO12			0x0EC 0x2DC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_12_ENET_1588_EVENT1_OUT		0x0EC 0x2DC 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_12_NMI				0x0EC 0x2DC 0x568 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_13_LPI2C4_SDA			0x0F0 0x2E0 0x4E8 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_13_GPT1_CLK				0x0F0 0x2E0 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_13_LPUART1_RXD			0x0F0 0x2E0 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_13_EWM_OUT_B				0x0F0 0x2E0 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_13_FLEXPWM1_PWM3_X			0x0F0 0x2E0 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_13_GPIO1_IO13			0x0F0 0x2E0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_13_ENET_1588_EVENT1_IN		0x0F0 0x2E0 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_13_REF_CLK_24M			0x0F0 0x2E0 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_14_USB_OTG2_OC			0x0F4 0x2E4 0x5CC 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_14_XBAR_INOUT24			0x0F4 0x2E4 0x640 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_14_LPUART1_CTS_B			0x0F4 0x2E4 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_14_ENET_1588_EVENT0_OUT		0x0F4 0x2E4 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_14_CSI_VSYNC				0x0F4 0x2E4 0x428 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_14_GPIO1_IO14			0x0F4 0x2E4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_14_FLEXCAN2_TX			0x0F4 0x2E4 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_15_USB_OTG2_PWR			0x0F8 0x2E8 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_15_XBAR_INOUT25			0x0F8 0x2E8 0x650 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_15_LPUART1_RTS_B			0x0F8 0x2E8 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_15_ENET_1588_EVENT0_IN		0x0F8 0x2E8 0x444 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_15_CSI_HSYNC				0x0F8 0x2E8 0x420 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_15_GPIO1_IO15			0x0F8 0x2E8 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_15_FLEXCAN2_RX			0x0F8 0x2E8 0x450 0x6 0x2
+-#define MXRT1050_IOMUXC_GPIO_AD_B0_15_WDOG1_WDOG_RST_B_DEB		0x0F8 0x2E8 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_00_USB_OTG2_ID			0x0FC 0x2EC 0x3F8 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_00_TMR3_TIMER0			0x0FC 0x2EC 0x57C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_00_LPUART2_CTS_B			0x0FC 0x2EC 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_00_LPI2C1_SCL			0x0FC 0x2EC 0x4CC 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_00_WDOG1_B				0x0FC 0x2EC 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_00_GPIO1_IO16			0x0FC 0x2EC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_00_USDHC1_WP				0x0FC 0x2EC 0x5D8 0x6 0x2
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_00_KPP_ROW07				0x0FC 0x2EC 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_01_USB_OTG1_PWR			0x100 0x2F0 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_01_TMR3_TIMER1			0x100 0x2F0 0x580 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_01_LPUART2_RTS_B			0x100 0x2F0 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_01_LPI2C1_SDA			0x100 0x2F0 0x4D0 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_01_CCM_PMIC_READY			0x100 0x2F0 0x3FC 0x4 0x2
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_01_GPIO1_IO17			0x100 0x2F0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_01_USDHC1_VSELECT			0x100 0x2F0 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_01_KPP_COL07				0x100 0x2F0 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_02_USB_OTG1_ID			0x104 0x2F4 0x3F4 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_02_TMR3_TIMER2			0x104 0x2F4 0x584 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_02_LPUART2_TXD			0x104 0x2F4 0x530 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_02_SPDIF_OUT				0x104 0x2F4 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_02_ENET_1588_EVENT2_OUT		0x104 0x2F4 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_02_GPIO1_IO18			0x104 0x2F4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_02_USDHC1_CD_B			0x104 0x2F4 0x5D4 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_02_KPP_ROW06				0x104 0x2F4 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_03_USB_OTG1_OC			0x108 0x2F8 0x5D0 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_03_TMR3_TIMER3			0x108 0x2F8 0x588 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_03_LPUART2_RXD			0x108 0x2F8 0x52C 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_03_SPDIF_IN				0x108 0x2F8 0x5C8 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_03_ENET_1588_EVENT2_IN		0x108 0x2F8 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_03_GPIO1_IO19			0x108 0x2F8 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_03_USDHC2_CD_B			0x108 0x2F8 0x5E0 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_03_KPP_COL06				0x108 0x2F8 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_04_FLEXSPI_B_DATA3			0x10C 0x2FC 0x4C4 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_04_ENET_MDC				0x10C 0x2FC 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_04_LPUART3_CTS_B			0x10C 0x2FC 0x534 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_04_SPDIF_SR_CLK			0x10C 0x2FC 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_04_CSI_PIXCLK			0x10C 0x2FC 0x424 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_04_GPIO1_IO20			0x10C 0x2FC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_04_USDHC2_DATA0			0x10C 0x2FC 0x5E8 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_04_KPP_ROW05				0x10C 0x2FC 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_05_FLEXSPI_B_DATA2			0x110 0x300 0x4C0 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_05_ENET_MDIO				0x110 0x300 0x430 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_05_LPUART3_RTS_B			0x110 0x300 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_05_SPDIF_OUT				0x110 0x300 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_05_CSI_MCLK				0x110 0x300 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_05_GPIO1_IO21			0x110 0x300 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_05_USDHC2_DATA1			0x110 0x300 0x5EC 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_05_KPP_COL05				0x110 0x300 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_06_FLEXSPI_B_DATA1			0x114 0x304 0x4BC 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_06_LPI2C3_SDA			0x114 0x304 0x4E0 0x1 0x2
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_06_LPUART3_TXD			0x114 0x304 0x53C 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_06_SPDIF_LOCK			0x114 0x304 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_06_CSI_VSYNC				0x114 0x304 0x428 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_06_GPIO1_IO22			0x114 0x304 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_06_USDHC2_DATA2			0x114 0x304 0x5F0 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_06_KPP_ROW04				0x114 0x304 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_07_FLEXSPI_B_DATA0			0x118 0x308 0x4B8 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_07_LPI2C3_SCL			0x118 0x308 0x4DC 0x1 0x2
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_07_LPUART3_RXD			0x118 0x308 0x538 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_07_SPDIF_EXT_CLK			0x118 0x308 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_07_CSI_HSYNC				0x118 0x308 0x420 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_07_GPIO1_IO23			0x118 0x308 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_07_USDHC2_DATA3			0x118 0x308 0x5F4 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_07_KPP_COL04				0x118 0x308 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_08_FLEXSPI_A_SS1_B			0x11C 0x30C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_08_FLEXPWM4_PWM0_A			0x11C 0x30C 0x494 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_08_FLEXCAN1_TX			0x11C 0x30C 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_08_CCM_PMIC_READY			0x11C 0x30C 0x3FC 0x3 0x3
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_08_CSI_DATA09			0x11C 0x30C 0x41C 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_08_GPIO1_IO24			0x11C 0x30C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_08_USDHC2_CMD			0x11C 0x30C 0x5E4 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_08_KPP_ROW03				0x11C 0x30C 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_09_FLEXSPI_A_DQS			0x120 0x310 0x4A4 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_09_FLEXPWM4_PWM1_A			0x120 0x310 0x498 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_09_FLEXCAN1_RX			0x120 0x310 0x44C 0x2 0x2
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_09_SAI1_MCLK				0x120 0x310 0x58C 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_09_CSI_DATA08			0x120 0x310 0x418 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_09_GPIO1_IO25			0x120 0x310 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_09_USDHC2_CLK			0x120 0x310 0x5DC 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_09_KPP_COL03				0x120 0x310 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_10_FLEXSPI_A_DATA3			0x124 0x314 0x4B4 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_10_WDOG1_B				0x124 0x314 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_10_LPUART8_TXD			0x124 0x314 0x564 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_10_SAI1_RX_SYNC			0x124 0x314 0x5A4 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_10_CSI_DATA07			0x124 0x314 0x414 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_10_GPIO1_IO26			0x124 0x314 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_10_USDHC2_WP				0x124 0x314 0x608 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_10_KPP_ROW02				0x124 0x314 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_11_FLEXSPI_A_DATA2			0x128 0x318 0x4B0 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_11_EWM_OUT_B				0x128 0x318 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_11_LPUART8_RXD			0x128 0x318 0x560 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_11_SAI1_RX_BCLK			0x128 0x318 0x590 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_11_CSI_DATA06			0x128 0x318 0x410 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_11_GPIO1_IO27			0x128 0x318 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_11_USDHC2_RESET_B			0x128 0x318 0x000 0x6 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_11_KPP_COL02				0x128 0x318 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_12_FLEXSPI_A_DATA1			0x12C 0x31C 0x4AC 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_12_ACMP1_OUT				0x12C 0x31C 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_12_LPSPI3_PCS0			0x12C 0x31C 0x50C 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_12_SAI1_RX_DATA00			0x12C 0x31C 0x594 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_12_CSI_DATA05			0x12C 0x31C 0x40C 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_12_GPIO1_IO28			0x12C 0x31C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_12_USDHC2_DATA4			0x12C 0x31C 0x5F8 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_12_KPP_ROW01				0x12C 0x31C 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_13_FLEXSPI_A_DATA0			0x130 0x320 0x4A8 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_13_ACMP2_OUT				0x130 0x320 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_13_LPSPI3_SDI			0x130 0x320 0x514 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_13_SAI1_TX_DATA00			0x130 0x320 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_13_CSI_DATA04			0x130 0x320 0x408 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_13_GPIO1_IO29			0x130 0x320 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_13_USDHC2_DATA5			0x130 0x320 0x5FC 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_13_KPP_COL01				0x130 0x320 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_14_FLEXSPI_A_SCLK			0x134 0x324 0x4C8 0x0 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_14_ACMP3_OUT				0x134 0x324 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_14_LPSPI3_SDO			0x134 0x324 0x518 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_14_SAI1_TX_BCLK			0x134 0x324 0x5A8 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_14_CSI_DATA03			0x134 0x324 0x404 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_14_GPIO1_IO30			0x134 0x324 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_14_USDHC2_DATA6			0x134 0x324 0x600 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_14_KPP_ROW00				0x134 0x324 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_15_FLEXSPI_A_SS0_B			0x138 0x328 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_15_ACMP4_OUT				0x138 0x328 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_15_LPSPI3_SCK			0x138 0x328 0x510 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_15_SAI1_TX_SYNC			0x138 0x328 0x5AC 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_15_CSI_DATA02			0x138 0x328 0x400 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_15_GPIO1_IO31			0x138 0x328 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_15_USDHC2_DATA7			0x138 0x328 0x604 0x6 0x1
+-#define MXRT1050_IOMUXC_GPIO_AD_B1_15_KPP_COL00				0x138 0x328 0x000 0x7 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_00_LCD_CLK				0x13C 0x32C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_00_TMR1_TIMER0				0x13C 0x32C 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_00_MQS_RIGHT				0x13C 0x32C 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_00_LPSPI4_PCS0				0x13C 0x32C 0x51C 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_00_FLEXIO2_D00				0x13C 0x32C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_00_GPIO2_IO00				0x13C 0x32C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_00_SEMC_CSX1				0x13C 0x32C 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_01_LCD_ENABLE				0x140 0x330 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_01_TMR1_TIMER1				0x140 0x330 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_01_MQS_LEFT				0x140 0x330 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_01_LPSPI4_SDI				0x140 0x330 0x524 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_01_FLEXIO2_D01				0x140 0x330 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_01_GPIO2_IO01				0x140 0x330 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_01_SEMC_CSX2				0x140 0x330 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_02_LCD_HSYNC				0x144 0x334 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_02_TMR1_TIMER2				0x144 0x334 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_02_FLEXCAN1_TX				0x144 0x334 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_02_LPSPI4_SDO				0x144 0x334 0x528 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_02_FLEXIO2_D02				0x144 0x334 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_02_GPIO2_IO02				0x144 0x334 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_02_SEMC_CSX3				0x144 0x334 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_03_LCD_VSYNC				0x148 0x338 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_03_TMR2_TIMER0				0x148 0x338 0x56C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_03_FLEXCAN1_RX				0x148 0x338 0x44C 0x2 0x3
+-#define MXRT1050_IOMUXC_GPIO_B0_03_LPSPI4_SCK				0x148 0x338 0x520 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_03_FLEXIO2_D03				0x148 0x338 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_03_GPIO2_IO03				0x148 0x338 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_03_WDOG2_RESET_B_DEB			0x148 0x338 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_04_LCD_DATA00				0x14C 0x33C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_04_TMR2_TIMER1				0x14C 0x33C 0x570 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_04_LPI2C2_SCL				0x14C 0x33C 0x4D4 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_04_ARM_TRACE00				0x14C 0x33C 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_04_FLEXIO2_D04				0x14C 0x33C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_04_GPIO2_IO04				0x14C 0x33C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_04_SRC_BT_CFG00				0x14C 0x33C 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_05_LCD_DATA01				0x150 0x340 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_05_TMR2_TIMER2				0x150 0x340 0x574 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_05_LPI2C2_SDA				0x150 0x340 0x4D8 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_05_ARM_TRACE01				0x150 0x340 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_05_FLEXIO2_D05				0x150 0x340 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_05_GPIO2_IO05				0x150 0x340 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_05_SRC_BT_CFG01				0x150 0x340 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_06_LCD_DATA02				0x154 0x344 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_06_TMR3_TIMER0				0x154 0x344 0x57C 0x1 0x2
+-#define MXRT1050_IOMUXC_GPIO_B0_06_FLEXPWM2_PWM0_A			0x154 0x344 0x478 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_06_ARM_TRACE02				0x154 0x344 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_06_FLEXIO2_D06				0x154 0x344 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_06_GPIO2_IO06				0x154 0x344 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_06_SRC_BT_CFG02				0x154 0x344 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_07_LCD_DATA03				0x158 0x348 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_07_TMR3_TIMER1				0x158 0x348 0x580 0x1 0x2
+-#define MXRT1050_IOMUXC_GPIO_B0_07_FLEXPWM2_PWM0_B			0x158 0x348 0x488 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_07_ARM_TRACE03				0x158 0x348 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_07_FLEXIO2_D07				0x158 0x348 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_07_GPIO2_IO07				0x158 0x348 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_07_SRC_BT_CFG03				0x158 0x348 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_08_LCD_DATA04				0x15C 0x34C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_08_TMR3_TIMER2				0x15C 0x34C 0x584 0x1 0x2
+-#define MXRT1050_IOMUXC_GPIO_B0_08_FLEXPWM2_PWM1_A			0x15C 0x34C 0x47C 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_08_LPUART3_TXD				0x15C 0x34C 0x53C 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B0_08_FLEXIO2_D08				0x15C 0x34C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_08_GPIO2_IO08				0x15C 0x34C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_08_SRC_BT_CFG04				0x15C 0x34C 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_09_LCD_DATA05				0x160 0x350 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_09_TMR4_TIMER0				0x160 0x350 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_09_FLEXPWM2_PWM1_B			0x160 0x350 0x48C 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_09_LPUART3_RXD				0x160 0x350 0x538 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B0_09_FLEXIO2_D09				0x160 0x350 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_09_GPIO2_IO09				0x160 0x350 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_09_SRC_BT_CFG05				0x160 0x350 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_10_LCD_DATA06				0x164 0x354 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_10_TMR4_TIMER1				0x164 0x354 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_10_FLEXPWM2_PWM2_A			0x164 0x354 0x480 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_10_SAI1_TX_DATA03			0x164 0x354 0x598 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_10_FLEXIO2_D10				0x164 0x354 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_10_GPIO2_IO10				0x164 0x354 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_10_SRC_BT_CFG06				0x164 0x354 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_11_LCD_DATA07				0x168 0x358 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_11_TMR4_TIMER2				0x168 0x358 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_11_FLEXPWM2_PWM2_B			0x168 0x358 0x490 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_11_SAI1_TX_DATA02			0x168 0x358 0x59C 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_11_FLEXIO2_D11				0x168 0x358 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_11_GPIO2_IO11				0x168 0x358 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_11_SRC_BT_CFG07				0x168 0x358 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_12_LCD_DATA08				0x16C 0x35C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_12_XBAR_INOUT10				0x16C 0x35C 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_12_ARM_TRACE_CLK			0x16C 0x35C 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_12_SAI1_TX_DATA01			0x16C 0x35C 0x5A0 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B0_12_FLEXIO2_D12				0x16C 0x35C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_12_GPIO2_IO12				0x16C 0x35C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_12_SRC_BT_CFG08				0x16C 0x35C 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_13_LCD_DATA09				0x170 0x360 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_13_XBAR_INOUT11				0x170 0x360 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_13_ARM_TRACE_SWO			0x170 0x360 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_13_SAI1_MCLK				0x170 0x360 0x58C 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B0_13_FLEXIO2_D13				0x170 0x360 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_13_GPIO2_IO13				0x170 0x360 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_13_SRC_BT_CFG09				0x170 0x360 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_14_LCD_DATA10				0x174 0x364 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_14_XBAR_INOUT12				0x174 0x364 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_14_ARM_CM7_TXEV				0x174 0x364 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_14_SAI1_RX_SYNC				0x174 0x364 0x5A4 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B0_14_FLEXIO2_D14				0x174 0x364 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_14_GPIO2_IO14				0x174 0x364 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_14_SRC_BT_CFG10				0x174 0x364 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B0_15_LCD_DATA11				0x178 0x368 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_15_XBAR_INOUT13				0x178 0x368 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_15_ARM_CM7_RXEV				0x178 0x368 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_15_SAI1_RX_BCLK				0x178 0x368 0x590 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B0_15_FLEXIO2_D15				0x178 0x368 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_15_GPIO2_IO15				0x178 0x368 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B0_15_SRC_BT_CFG11				0x178 0x368 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_00_LCD_DATA12				0x17C 0x36C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_00_XBAR_INOUT14				0x17C 0x36C 0x644 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_00_LPUART4_TXD				0x17C 0x36C 0x544 0x2 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_00_SAI1_RX_DATA00			0x17C 0x36C 0x594 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_00_FLEXIO2_D16				0x17C 0x36C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_00_GPIO2_IO16				0x17C 0x36C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_00_FLEXPWM1_PWM3_A			0x17C 0x36C 0x454 0x6 0x4
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_01_LCD_DATA13				0x180 0x370 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_01_XBAR_INOUT15				0x180 0x370 0x648 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_01_LPUART4_RXD				0x180 0x370 0x540 0x2 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_01_SAI1_TX_DATA00			0x180 0x370 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_01_FLEXIO2_D17				0x180 0x370 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_01_GPIO2_IO17				0x180 0x370 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_01_FLEXPWM1_PWM3_B			0x180 0x370 0x464 0x6 0x4
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_02_LCD_DATA14				0x184 0x374 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_02_XBAR_INOUT16				0x184 0x374 0x64C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_02_LPSPI4_PCS2				0x184 0x374 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_02_SAI1_TX_BCLK				0x184 0x374 0x5A8 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_02_FLEXIO2_D18				0x184 0x374 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_02_GPIO2_IO18				0x184 0x374 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_02_FLEXPWM2_PWM3_A			0x184 0x374 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_03_LCD_DATA15				0x188 0x378 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_03_XBAR_INOUT17				0x188 0x378 0x62C 0x1 0x3
+-#define MXRT1050_IOMUXC_GPIO_B1_03_LPSPI4_PCS1				0x188 0x378 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_03_SAI1_TX_SYNC				0x188 0x378 0x5AC 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_03_FLEXIO2_D19				0x188 0x378 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_03_GPIO2_IO19				0x188 0x378 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_03_FLEXPWM2_PWM3_B			0x188 0x378 0x484 0x6 0x3
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_04_LCD_DATA16				0x18C 0x37C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_04_LPSPI4_PCS0				0x18C 0x37C 0x51C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_04_CSI_DATA15				0x18C 0x37C 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_04_ENET_RX_DATA00			0x18C 0x37C 0x434 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_04_FLEXIO2_D20				0x18C 0x37C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_04_GPIO2_IO20				0x18C 0x37C 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_05_LCD_DATA17				0x190 0x380 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_05_LPSPI4_SDI				0x190 0x380 0x524 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_05_CSI_DATA14				0x190 0x380 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_05_ENET_RX_DATA01			0x190 0x380 0x438 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_05_FLEXIO2_D21				0x190 0x380 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_05_GPIO2_IO21				0x190 0x380 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_06_LCD_DATA18				0x194 0x384 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_06_LPSPI4_SDO				0x194 0x384 0x528 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_06_CSI_DATA13				0x194 0x384 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_06_ENET_RX_EN				0x194 0x384 0x43C 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_06_FLEXIO2_D22				0x194 0x384 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_06_GPIO2_IO22				0x194 0x384 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_07_LCD_DATA19				0x198 0x388 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_07_LPSPI4_SCK				0x198 0x388 0x520 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_07_CSI_DATA12				0x198 0x388 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_07_ENET_TX_DATA00			0x198 0x388 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_07_FLEXIO2_D23				0x198 0x388 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_07_GPIO2_IO23				0x198 0x388 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_08_LCD_DATA20				0x19C 0x38C 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_08_TMR1_TIMER3				0x19C 0x38C 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_08_CSI_DATA11				0x19C 0x38C 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_08_ENET_TX_DATA01			0x19C 0x38C 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_08_FLEXIO2_D24				0x19C 0x38C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_08_GPIO2_IO24				0x19C 0x38C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_08_FLEXCAN2_TX				0x19C 0x38C 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_09_LCD_DATA21				0x1A0 0x390 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_09_TMR2_TIMER3				0x1A0 0x390 0x578 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_09_CSI_DATA10				0x1A0 0x390 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_09_ENET_TX_EN				0x1A0 0x390 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_09_FLEXIO2_D25				0x1A0 0x390 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_09_GPIO2_IO25				0x1A0 0x390 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_09_FLEXCAN2_RX				0x1A0 0x390 0x450 0x6 0x3
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_10_LCD_DATA22				0x1A4 0x394 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_10_TMR3_TIMER3				0x1A4 0x394 0x588 0x1 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_10_CSI_DATA00				0x1A4 0x394 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_10_ENET_TX_CLK				0x1A4 0x394 0x448 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_10_FLEXIO2_D26				0x1A4 0x394 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_10_GPIO2_IO26				0x1A4 0x394 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_10_ENET_REF_CLK				0x1A4 0x394 0x42C 0x6 0x1
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_11_LCD_DATA23				0x1A8 0x398 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_11_TMR4_TIMER3				0x1A8 0x398 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_11_CSI_DATA01				0x1A8 0x398 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_11_ENET_RX_ER				0x1A8 0x398 0x440 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_11_FLEXIO2_D27				0x1A8 0x398 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_11_GPIO2_IO27				0x1A8 0x398 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_11_LPSPI4_PCS3				0x1A8 0x398 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_12_LPUART5_TXD				0x1AC 0x39C 0x54C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_12_CSI_PIXCLK				0x1AC 0x39C 0x424 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_12_ENET_1588_EVENT0_IN			0x1AC 0x39C 0x444 0x3 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_12_FLEXIO2_D28				0x1AC 0x39C 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_12_GPIO2_IO28				0x1AC 0x39C 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_12_USDHC1_CD_B				0x1AC 0x39C 0x5D4 0x6 0x2
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_13_WDOG1_B				0x1B0 0x3A0 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_13_LPUART5_RXD				0x1B0 0x3A0 0x548 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_13_CSI_VSYNC				0x1B0 0x3A0 0x428 0x2 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_13_ENET_1588_EVENT0_OUT			0x1B0 0x3A0 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_13_FLEXIO2_D29				0x1B0 0x3A0 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_13_GPIO2_IO29				0x1B0 0x3A0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_13_USDHC1_WP				0x1B0 0x3A0 0x5D8 0x6 0x3
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_14_ENET_MDC				0x1B4 0x3A4 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_14_FLEXPWM4_PWM2_A			0x1B4 0x3A4 0x49C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_14_CSI_HSYNC				0x1B4 0x3A4 0x420 0x2 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_14_XBAR_INOUT02				0x1B4 0x3A4 0x60C 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_14_FLEXIO2_D30				0x1B4 0x3A4 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_14_GPIO2_IO30				0x1B4 0x3A4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_14_USDHC1_VSELECT			0x1B4 0x3A4 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_B1_15_ENET_MDIO				0x1B8 0x3A8 0x430 0x0 0x2
+-#define MXRT1050_IOMUXC_GPIO_B1_15_FLEXPWM4_PWM3_A			0x1B8 0x3A8 0x4A0 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_15_CSI_MCLK				0x1B8 0x3A8 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_15_XBAR_INOUT03				0x1B8 0x3A8 0x610 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_B1_15_FLEXIO2_D31				0x1B8 0x3A8 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_15_GPIO2_IO31				0x1B8 0x3A8 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_B1_15_USDHC1_RESET_B			0x1B8 0x3A8 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_00_USDHC1_CMD			0x1BC 0x3AC 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_00_FLEXPWM1_PWM0_A			0x1BC 0x3AC 0x458 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_00_LPI2C3_SCL			0x1BC 0x3AC 0x4DC 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_00_XBAR_INOUT04			0x1BC 0x3AC 0x614 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_00_LPSPI1_SCK			0x1BC 0x3AC 0x4F0 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_00_GPIO3_IO12			0x1BC 0x3AC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_00_FLEXSPI_A_SS1_B			0x1BC 0x3AC 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_01_USDHC1_CLK			0x1C0 0x3B0 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_01_FLEXPWM1_PWM0_B			0x1C0 0x3B0 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_01_LPI2C3_SDA			0x1C0 0x3B0 0x4E0 0x2 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_01_XBAR_INOUT05			0x1C0 0x3B0 0x618 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_01_LPSPI1_PCS0			0x1C0 0x3B0 0x4EC 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_01_GPIO3_IO13			0x1C0 0x3B0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_01_FLEXSPI_B_SS1_B			0x1C0 0x3B0 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_02_USDHC1_DATA0			0x1C4 0x3B4 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_02_FLEXPWM1_PWM1_A			0x1C4 0x3B4 0x45C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_02_LPUART8_CTS_B			0x1C4 0x3B4 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_02_XBAR_INOUT06			0x1C4 0x3B4 0x61C 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_02_LPSPI1_SDO			0x1C4 0x3B4 0x4F8 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_02_GPIO3_IO14			0x1C4 0x3B4 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_03_USDHC1_DATA1			0x1C8 0x3B8 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_03_FLEXPWM1_PWM1_B			0x1C8 0x3B8 0x46C 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_03_LPUART8_RTS_B			0x1C8 0x3B8 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_03_XBAR_INOUT07			0x1C8 0x3B8 0x620 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_03_LPSPI1_SDI			0x1C8 0x3B8 0x4F4 0x4 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_03_GPIO3_IO15			0x1C8 0x3B8 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_04_USDHC1_DATA2			0x1CC 0x3BC 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_04_FLEXPWM1_PWM2_A			0x1CC 0x3BC 0x460 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_04_LPUART8_TXD			0x1CC 0x3BC 0x564 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_04_XBAR_INOUT08			0x1CC 0x3BC 0x624 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_04_FLEXSPI_B_SS0_B			0x1CC 0x3BC 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_04_GPIO3_IO16			0x1CC 0x3BC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_04_CCM_CLKO1				0x1CC 0x3BC 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_05_USDHC1_DATA3			0x1D0 0x3C0 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_05_FLEXPWM1_PWM2_B			0x1D0 0x3C0 0x470 0x1 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_05_LPUART8_RXD			0x1D0 0x3C0 0x560 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_05_XBAR_INOUT09			0x1D0 0x3C0 0x628 0x3 0x1
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_05_FLEXSPI_B_DQS			0x1D0 0x3C0 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_05_GPIO3_IO17			0x1D0 0x3C0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B0_05_CCM_CLKO2				0x1D0 0x3C0 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_00_USDHC2_DATA3			0x1D4 0x3C4 0x5F4 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_00_FLEXSPI_B_DATA3			0x1D4 0x3C4 0x4C4 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_00_FLEXPWM1_PWM3_A			0x1D4 0x3C4 0x454 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_00_SAI1_TX_DATA03			0x1D4 0x3C4 0x598 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_00_LPUART4_TXD			0x1D4 0x3C4 0x544 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_00_GPIO3_IO00			0x1D4 0x3C4 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_01_USDHC2_DATA2			0x1D8 0x3C8 0x5F0 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_01_FLEXSPI_B_DATA2			0x1D8 0x3C8 0x4C0 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_01_FLEXPWM1_PWM3_B			0x1D8 0x3C8 0x464 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_01_SAI1_TX_DATA02			0x1D8 0x3C8 0x59C 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_01_LPUART4_RXD			0x1D8 0x3C8 0x540 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_01_GPIO3_IO01			0x1D8 0x3C8 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_02_USDHC2_DATA1			0x1DC 0x3CC 0x5EC 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_02_FLEXSPI_B_DATA1			0x1DC 0x3CC 0x4BC 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_02_FLEXPWM2_PWM3_A			0x1DC 0x3CC 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_02_SAI1_TX_DATA01			0x1DC 0x3CC 0x5A0 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_02_FLEXCAN1_TX			0x1DC 0x3CC 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_02_GPIO3_IO02			0x1DC 0x3CC 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_02_CCM_WAIT				0x1DC 0x3CC 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_03_USDHC2_DATA0			0x1E0 0x3D0 0x5E8 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_03_FLEXSPI_B_DATA0			0x1E0 0x3D0 0x4B8 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_03_FLEXPWM2_PWM3_B			0x1E0 0x3D0 0x484 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_03_SAI1_MCLK				0x1E0 0x3D0 0x58C 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_03_FLEXCAN1_RX			0x1E0 0x3D0 0x44C 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_03_GPIO3_IO03			0x1E0 0x3D0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_03_CCM_PMIC_READY			0x1E0 0x3D0 0x3FC 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_04_USDHC2_CLK			0x1E4 0x3D4 0x5DC 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_04_FLEXSPI_B_SCLK			0x1E4 0x3D4 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_04_LPI2C1_SCL			0x1E4 0x3D4 0x4CC 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_04_SAI1_RX_SYNC			0x1E4 0x3D4 0x5A4 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_04_FLEXCAN1_A_SS1_B			0x1E4 0x3D4 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_04_GPIO3_IO04			0x1E4 0x3D4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_04_CCM_STOP				0x1E4 0x3D4 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_05_USDHC2_CMD			0x1E8 0x3D8 0x5E4 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_05_FLEXSPI_A_DQS			0x1E8 0x3D8 0x4A4 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_05_LPI2C1_SDA			0x1E8 0x3D8 0x4D0 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_05_SAI1_RX_BCLK			0x1E8 0x3D8 0x590 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_05_FLEXCAN1_B_SS0_B			0x1E8 0x3D8 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_05_GPIO3_IO05			0x1E8 0x3D8 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_06_USDHC2_RESET_B			0x1EC 0x3DC 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_06_FLEXSPI_A_SS0_B			0x1EC 0x3DC 0x000 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_06_LPUART7_CTS_B			0x1EC 0x3DC 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_06_SAI1_RX_DATA00			0x1EC 0x3DC 0x594 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_06_LPSPI2_PCS0			0x1EC 0x3DC 0x4FC 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_06_GPIO3_IO06			0x1EC 0x3DC 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_07_SEMC_CSX1				0x1F0 0x3E0 0x000 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_07_FLEXSPI_A_SCLK			0x1F0 0x3E0 0x4C8 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_07_LPUART7_RTS_B			0x1F0 0x3E0 0x000 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_07_SAI1_TX_DATA00			0x1F0 0x3E0 0x000 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_07_LPSPI2_SCK			0x1F0 0x3E0 0x500 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_07_GPIO3_IO07			0x1F0 0x3E0 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_07_CCM_REF_EN_B			0x1F0 0x3E0 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_08_USDHC2_DATA4			0x1F4 0x3E4 0x5F8 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_08_FLEXSPI_A_DATA0			0x1F4 0x3E4 0x4A8 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_08_LPUART7_TXD			0x1F4 0x3E4 0x55C 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_08_SAI1_TX_BLCK			0x1F4 0x3E4 0x5A8 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_08_LPSPI2_SDO			0x1F4 0x3E4 0x508 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_08_GPIO3_IO08			0x1F4 0x3E4 0x000 0x5 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_08_SEMC_CSX2				0x1F4 0x3E4 0x000 0x6 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_09_USDHC2_DATA5			0x1F8 0x3E8 0x5FC 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_09_FLEXSPI_A_DATA1			0x1F8 0x3E8 0x4AC 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_09_LPUART7_RXD			0x1F8 0x3E8 0x558 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_09_SAI1_TX_SYNC			0x1F8 0x3E8 0x5AC 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_09_LPSPI2_SDI			0x1F8 0x3E8 0x504 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_09_GPIO3_IO09			0x1F8 0x3E8 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_10_USDHC2_DATA6			0x1FC 0x3EC 0x600 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_10_FLEXSPI_A_DATA2			0x1FC 0x3EC 0x4B0 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_10_LPUART2_RXD			0x1FC 0x3EC 0x52C 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_10_LPI2C2_SDA			0x1FC 0x3EC 0x4D8 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_10_LPSPI2_PCS2			0x1FC 0x3EC 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_10_GPIO3_IO10			0x1FC 0x3EC 0x000 0x5 0x0
+-
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_11_USDHC2_DATA7			0x200 0x3F0 0x604 0x0 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_11_FLEXSPI_A_DATA3			0x200 0x3F0 0x4B4 0x1 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_11_LPUART2_TXD			0x200 0x3F0 0x530 0x2 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_11_LPI2C2_SCL			0x200 0x3F0 0x4D4 0x3 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_11_LPSPI2_PCS3			0x200 0x3F0 0x000 0x4 0x0
+-#define MXRT1050_IOMUXC_GPIO_SD_B1_11_GPIO3_IO11			0x200 0x3F0 0x000 0x5 0x0
+-
+-#endif /* _DT_BINDINGS_PINCTRL_IMXRT1050_PINFUNC_H */
+diff --git a/arch/arm/dts/imxrt1050.dtsi b/arch/arm/dts/imxrt1050.dtsi
+deleted file mode 100644
+index a25eae9bd38..00000000000
+--- a/arch/arm/dts/imxrt1050.dtsi
++++ /dev/null
+@@ -1,160 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+-/*
+- * Copyright (C) 2019
+- * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
+- */
+-
+-#include "armv7-m.dtsi"
+-#include <dt-bindings/interrupt-controller/arm-gic.h>
+-#include <dt-bindings/clock/imxrt1050-clock.h>
+-#include <dt-bindings/gpio/gpio.h>
+-
+-/ {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+-	clocks {
+-		osc: osc {
+-			compatible = "fixed-clock";
+-			#clock-cells = <0>;
+-			clock-frequency = <24000000>;
+-		};
+-
+-		osc3M: osc3M {
+-			compatible = "fixed-clock";
+-			#clock-cells = <0>;
+-			clock-frequency = <3000000>;
+-		};
+-	};
+-
+-	soc {
+-		lpuart1: serial@40184000 {
+-			compatible = "fsl,imxrt1050-lpuart", "fsl,imx7ulp-lpuart";
+-			reg = <0x40184000 0x4000>;
+-			interrupts = <20>;
+-			clocks = <&clks IMXRT1050_CLK_LPUART1>;
+-			clock-names = "ipg";
+-			status = "disabled";
+-		};
+-
+-		iomuxc: pinctrl@401f8000 {
+-			compatible = "fsl,imxrt1050-iomuxc";
+-			reg = <0x401f8000 0x4000>;
+-			fsl,mux_mask = <0x7>;
+-		};
+-
+-		anatop: anatop@400d8000 {
+-			compatible = "fsl,imxrt-anatop";
+-			reg = <0x400d8000 0x4000>;
+-		};
+-
+-		clks: clock-controller@400fc000 {
+-			compatible = "fsl,imxrt1050-ccm";
+-			reg = <0x400fc000 0x4000>;
+-			interrupts = <95>, <96>;
+-			clocks = <&osc>;
+-			clock-names = "osc";
+-			#clock-cells = <1>;
+-			assigned-clocks = <&clks IMXRT1050_CLK_PLL1_BYPASS>,
+-				<&clks IMXRT1050_CLK_PLL1_BYPASS>,
+-				<&clks IMXRT1050_CLK_PLL2_BYPASS>,
+-				<&clks IMXRT1050_CLK_PLL3_BYPASS>,
+-				<&clks IMXRT1050_CLK_PLL3_PFD1_664_62M>,
+-				<&clks IMXRT1050_CLK_PLL2_PFD2_396M>;
+-			assigned-clock-parents = <&clks IMXRT1050_CLK_PLL1_REF_SEL>,
+-				<&clks IMXRT1050_CLK_PLL1_ARM>,
+-				<&clks IMXRT1050_CLK_PLL2_SYS>,
+-				<&clks IMXRT1050_CLK_PLL3_USB_OTG>,
+-				<&clks IMXRT1050_CLK_PLL3_USB_OTG>,
+-				<&clks IMXRT1050_CLK_PLL2_SYS>;
+-		};
+-
+-		edma1: dma-controller@400e8000 {
+-			#dma-cells = <2>;
+-			compatible = "fsl,imx7ulp-edma";
+-			reg = <0x400e8000 0x4000>,
+-				<0x400ec000 0x4000>;
+-			dma-channels = <32>;
+-			interrupts = <0>, <1>, <2>, <3>, <4>, <5>, <6>, <7>, <8>,
+-				<9>, <10>, <11>, <12>, <13>, <14>, <15>, <16>;
+-			clock-names = "dma", "dmamux0";
+-			clocks = <&clks IMXRT1050_CLK_DMA>,
+-				 <&clks IMXRT1050_CLK_DMA_MUX>;
+-		};
+-
+-		usdhc1: mmc@402c0000 {
+-			compatible = "fsl,imxrt1050-usdhc", "fsl,imx6sl-usdhc";
+-			reg = <0x402c0000 0x4000>;
+-			interrupts = <110>;
+-			clocks = <&clks IMXRT1050_CLK_IPG_PDOF>,
+-				<&clks IMXRT1050_CLK_AHB_PODF>,
+-				<&clks IMXRT1050_CLK_USDHC1>;
+-			clock-names = "ipg", "ahb", "per";
+-			bus-width = <4>;
+-			fsl,wp-controller;
+-			no-1-8-v;
+-			max-frequency = <4000000>;
+-			fsl,tuning-start-tap = <20>;
+-			fsl,tuning-step = <2>;
+-			status = "disabled";
+-		};
+-
+-		gpio1: gpio@401b8000 {
+-			compatible = "fsl,imxrt1050-gpio", "fsl,imx35-gpio";
+-			reg = <0x401b8000 0x4000>;
+-			interrupts = <80>, <81>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-		};
+-
+-		gpio2: gpio@401bc000 {
+-			compatible = "fsl,imxrt1050-gpio", "fsl,imx35-gpio";
+-			reg = <0x401bc000 0x4000>;
+-			interrupts = <82>, <83>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-		};
+-
+-		gpio3: gpio@401c0000 {
+-			compatible = "fsl,imxrt1050-gpio", "fsl,imx35-gpio";
+-			reg = <0x401c0000 0x4000>;
+-			interrupts = <84>, <85>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-		};
+-
+-		gpio4: gpio@401c4000 {
+-			compatible = "fsl,imxrt1050-gpio", "fsl,imx35-gpio";
+-			reg = <0x401c4000 0x4000>;
+-			interrupts = <86>, <87>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-		};
+-
+-		gpio5: gpio@400c0000 {
+-			compatible = "fsl,imxrt1050-gpio", "fsl,imx35-gpio";
+-			reg = <0x400c0000 0x4000>;
+-			interrupts = <88>, <89>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-		};
+-
+-		gpt: timer@401ec000 {
+-			compatible = "fsl,imxrt1050-gpt", "fsl,imx6dl-gpt", "fsl,imx6sl-gpt";
+-			reg = <0x401ec000 0x4000>;
+-			interrupts = <100>;
+-			clocks = <&osc3M>;
+-			clock-names = "per";
+-		};
+-	};
+-};
+diff --git a/configs/imxrt1050-evk_defconfig b/configs/imxrt1050-evk_defconfig
+index b488ff1b7da..918713a1c7d 100644
+--- a/configs/imxrt1050-evk_defconfig
++++ b/configs/imxrt1050-evk_defconfig
+@@ -13,7 +13,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20020000
+ CONFIG_ENV_OFFSET=0x80000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="imxrt1050-evk"
++CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imxrt1050-evk"
+ CONFIG_TARGET_IMXRT1050_EVK=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -48,6 +48,7 @@ CONFIG_CMD_USB=y
+ # CONFIG_EFI_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_UPSTREAM=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+diff --git a/configs/imxrt1050-evk_fspi_defconfig b/configs/imxrt1050-evk_fspi_defconfig
+index 5d58e723a70..86acd158391 100644
+--- a/configs/imxrt1050-evk_fspi_defconfig
++++ b/configs/imxrt1050-evk_fspi_defconfig
+@@ -15,7 +15,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20020000
+ CONFIG_ENV_OFFSET=0x80000
+ CONFIG_IMX_CONFIG="board/freescale/imxrt1050-evk/imximage-nor.cfg"
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="imxrt1050-evk"
++CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imxrt1050-evk"
+ CONFIG_TARGET_IMXRT1050_EVK=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -50,6 +50,7 @@ CONFIG_CMD_USB=y
+ # CONFIG_EFI_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_UPSTREAM=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-- 
+2.45.2
 
