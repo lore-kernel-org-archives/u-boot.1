@@ -4,98 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1637C02187
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 00:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9372C02183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 01:42:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A5718070C;
-	Fri, 17 Jan 2025 01:10:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1AC718069D;
+	Fri, 17 Jan 2025 02:42:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="wVkHQCgq";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="kv74eI6a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C84BB80312; Fri, 17 Jan 2025 01:10:29 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 1A91F806FB; Fri, 17 Jan 2025 02:42:29 +0100 (CET)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on2071d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::71d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A63928073F
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 01:10:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04F9880312
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 02:42:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 10A953F851
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 00:10:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1737072620;
- bh=8/qf7ks47hvXcBqm2u6wCHUm0oOXQNO84XAPzqPga6s=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=wVkHQCgq5+fE3elzU4VNKZ512lxhdaUXffGf/1S7ODnrCIcTJNqPWSwIr56OdMFhn
- 6xRCLZaBXMi8e9YQjc1/ONb4HISSf6wb1u4vB33PMpNsz/8V9A39EdQEM/LnlfUSEh
- Gpnzi2ehY29eTVxvEDQ0pHYA2E8t+j0J9MjH2IGWzcG3uMCNt7/YoCrsYD6MmmVrCg
- S1uaoBhWUIL3/MYfhxGvDUJX1KqTNw+ISNZzT0FHzDBckqIyJnIJC85bDNGROD5/po
- 05eH0iYZ2JJJl9ZzneEfXMETXs2wr5ZJHSH8bgaQKiqfSKyMyS1HZm4zFkqed7hKJX
- S8S94aj5cVbsg==
-Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-5d9f2ec86d1so1203258a12.1
- for <u-boot@lists.denx.de>; Thu, 16 Jan 2025 16:10:19 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737072616; x=1737677416;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8/qf7ks47hvXcBqm2u6wCHUm0oOXQNO84XAPzqPga6s=;
- b=Dutn1hySOuVQSE2TOcqvN8mqIZIZtOftbAEKE58Ij+JjagD761dDSZfBCcYaPKMHql
- 101s31DNVpuuFmVtkX9Hc9H1vWHqq8sQkk/HghwdGP/PDAVUDxX76XLJfXbjjUNUPSWr
- yC7atxSpGn79lzrP1NTo2LhdhVniAPcphwWH+h0rHXYyceogFVsawdajvTKaOTgiy/7L
- ZWBLp5XpNagZyXyKutXt56ErwkjQqge7RiId5EClTZpwu/MA+W9hC9P5erngGBZ5uaua
- cQOFI1bohek7EXHUMcRTBxfbiiGQcqecoL7VB21e9dN8zwdf5S75fvRGubyQnETSj58B
- 4Qlw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW41ViExR/gfT10R90XhhI8GxOCnKMbEPmwSKIPE0iClLunws+SzJLPm9QF9DQC+oI06RwMA+c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbM/1EyNdgF5ZfwP+c8gOAw4GHi4fzfpf3NB1zhxKq6N3ug66s
- SrlDWeWI3iWs/e3l9ytJOAiJWIIDAeOwqYL2w3oV4gHuRj+K2l/WFsypiWdX4yJWXwjQzDCwo/g
- qT2R1Y4bnRyp8wwqxx19xkiVBUQyNZWXVMie5bhhwURF0GFCnpmo+hn+MykIRrZHcT1M=
-X-Gm-Gg: ASbGncuXxKpgv+yfpPz0TX9KijFVfBQmYsZc1hSpUsQbNDnl4Xv/IpPE4lTInLfBfMg
- JG8GOHNcVJB66dWMFmBJy1b1CnZY5Q8Gb/UmRVuWQPasXEdBx49ucn4yheokHrcA+7WehvGe1n6
- Ep6W1VKGcu1TtOjUlYMoHvDL2wOBmRl3JbuB4F0EZLcS2hR95pKhJj2DEVAa+mEd6JfZarsLhvH
- Dpvw3noqEp91nIPRGW7nTRhz55DVsO1QfDRAiXltCLK4kITcU5LvGZP0TLMItrpPB2Vsk7ZlG5A
- w1Bo3m1IrAtcNA==
-X-Received: by 2002:a05:6402:2742:b0:5d9:f21e:ffd with SMTP id
- 4fb4d7f45d1cf-5db7d2ff8ccmr1352805a12.15.1737072616251; 
- Thu, 16 Jan 2025 16:10:16 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGM53VZ/uJY3BMhgSXwiP26LdDlBE9jhb4WEu0XTTLDas427dfbUVld7yDw58g9gIxaQxJprw==
-X-Received: by 2002:a05:6402:2742:b0:5d9:f21e:ffd with SMTP id
- 4fb4d7f45d1cf-5db7d2ff8ccmr1352759a12.15.1737072615785; 
- Thu, 16 Jan 2025 16:10:15 -0800 (PST)
-Received: from localhost.localdomain ([2a02:3035:6e0:18b7:2225:e8f4:a4b5:e79])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab384d27117sm71986466b.75.2025.01.16.16.10.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 16:10:14 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/3] log: enable filtering on functions
-Date: Fri, 17 Jan 2025 01:09:53 +0100
-Message-ID: <20250117000954.531785-4-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250117000954.531785-1-heinrich.schuchardt@canonical.com>
-References: <20250117000954.531785-1-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Rlm2413fmO+m+ppZWq5shEyTxy/ssSGqm7rtjIVbMduIzdXaD8YQzf7fYVsVFFv6NDX/qnAN3VDiW4uGv5mCW5dIy0U74Jf+FuMo2qSYvK35v/6b0stZFtoXRb7rhK0RwSudNPXX8liQKQKDYFHVpJBc7RAyIdeDNkn5Upih87BhEit5kr3svLz8GLtfjZqxy0FhrdvyorXqW8juOy/0p7Wxzdj6M+9AFuHY8Dw6wu2juGobkfJ7svrw/o5Q2uGoktyvE0GR2VSTygW507Dad03B5wGGfKfGzFylQvNnxg7pRqBnNC5+ll/r8NW4czOvZXNoYQakq3nEcWI+yxDzKQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mncifQOLNB903LBe5CxqOvWjuJENnbO9SUkLIf5N1iQ=;
+ b=QOwbgSGkNQk5c5qS90ZsytRhWQirvp0k1i6gQq+KvmmtRhftYWqBorEfrsZUixNDk9ZKutBHjbvbyJX/dR2oeul1OdQBYcH82e1TIVp6wBxOds4sZSfqkLjxJBaI4RLaZmInknW82Jx1rqDwAm1sQEKFMgqv8iqcDC2N6ahVLD3jYiuertmtxEB1ci4StTcp+bf1zEXzIPJP4wft90JrHD5prqsUwebSKkBwRHnUUUjZptIDH7xofEdkpSJ5rfQh0nA4oibhyc9r01/HlZ/7ifyMP1bSAp8CbtZT2UBqsSXlI8HdgtNoHlpFHacyHqRNW3FON1byZcQCl9fa8QtycA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mncifQOLNB903LBe5CxqOvWjuJENnbO9SUkLIf5N1iQ=;
+ b=kv74eI6a3ED6yPteN5SbQ5zImOyN7LK+8pjnVKPMEJfDBVyrP8dvM+459K8ljLlhIgj8ShcnsYASAowX3UPuGYTEndgYIyp4VlpfF7ob8n5lxdqIuN/oy0GZ38qQa8MTMSY0pfO4PppeoIiSB7pnSJc3BWW1FDZvpKJZ7IaPAHxMGSQ4hVJfoZp6EYnEch57l9KdBYt5sdsxrBggkJw6Qn1vBEX1rzJNT0up/kXHyCZmpXWTOLRat7Sl+g2RwqLio6L282mnIpVlwpXqIa/QF0jSncdM5nNQPybrVSaiVJhK+Jx8qxi8u0WBNoqWSBdGq4g+KvIiyaYYO/Fb0qw+wQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by GV1P195MB1809.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:5c::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.12; Fri, 17 Jan
+ 2025 01:42:23 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a%6]) with mapi id 15.20.8356.014; Fri, 17 Jan 2025
+ 01:42:23 +0000
+Message-ID: <48099bba-4c87-4fe0-8499-31086c21218d@phytec.de>
+Date: Fri, 17 Jan 2025 08:42:17 +0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] board: phytec: common: k3: Add missing boot source to
+ env
+To: Daniel Schultz <d.schultz@phytec.de>, trini@konsulko.com,
+ u-boot@lists.denx.de
+Cc: d-gole@ti.com, n-francis@ti.com, mkorpershoek@baylibre.com,
+ upstream@lists.phytec.de
+References: <20250116112932.1983801-1-d.schultz@phytec.de>
+Content-Language: en-US
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20250116112932.1983801-1-d.schultz@phytec.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: KL1PR02CA0007.apcprd02.prod.outlook.com
+ (2603:1096:820:c::12) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|GV1P195MB1809:EE_
+X-MS-Office365-Filtering-Correlation-Id: 248bd329-837d-4ec9-756f-08dd3698307b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?a3ZiU000eVlEbXdsbWZHaE5hQ2hKazRzU2NhVStqK1YvTmdvQ3V6K0hHOUlm?=
+ =?utf-8?B?bHF6Q3M5QnoxVW1SdlUyb25HYXJKRWdYZEhYWGxjUHB3Kyt6aE5LeFM3Ykxn?=
+ =?utf-8?B?dE02ei9FMXFSVzltVURaeitiSFFzZ1c2d0RhNmJGcGtOSjZlYzY2alA0OE93?=
+ =?utf-8?B?TlV1am5PU1pIeUdUMGYyMEhvMSs0dUxRVzA1dUJ2aGhNZHdtY0pONlNGWWlC?=
+ =?utf-8?B?bHVpeFRrZzdBckhvNTdVejZrb1lZSEppY0xJZmlSS3JEUVJJYm50Z0JJd1pV?=
+ =?utf-8?B?VFlMYlVYZWpVcVBXL3pYbG8zQld4UWQzMllidzB4Zi8xZE9OS3pSUUZHTXBq?=
+ =?utf-8?B?MXdJeXVOTE4vVEY1ZThFOHBKMGFzUnlHOXY1aG51ZExKdk5sY3BlTmhyS1lm?=
+ =?utf-8?B?WjVmc1hUZDhlem0wSG5pRjdacktKekh0T0lBM1NsRjFwTUMrZHh3SlZYcGNk?=
+ =?utf-8?B?R1VtU3Zud0dDeHVycDU4Z2JYOGZKbVJkaTJSbjQ5MEJNUm1lY0lqbzdoS2Zh?=
+ =?utf-8?B?SW5WbVRpZVpGK05GZzc1UFp1MEVVMmIwcUVKWUxKdWhJQnJVUGFEU2trd1Q3?=
+ =?utf-8?B?VU83ckFQK2MyMVhRVGJTZkZGSzBJYjBUdmxzLzVGRzNJQy9HNUp1OXQ3QjRV?=
+ =?utf-8?B?N1Bwd2RSYlJtcGNvTE1tRjc1bHpqNE5RL2srZmtLV0FkM3l4MDZ4U21qaGNu?=
+ =?utf-8?B?bVhuM1BhSUlzdWx3UXhFVlkwWEY1V1JVUFJVT2Zya0RPRkRpV3JlMkE5Nkky?=
+ =?utf-8?B?MVlpUjFzN3ZwQWt5NEFjMjkwbERCOVhzUk1pVmJENlRIVHVvK01TUDVsS1Rs?=
+ =?utf-8?B?WGViSXNTMDVWRWRZbVZrMjN6T0tyM1oyaU5tY3pZV1poRklMUEQrOGFsTXIy?=
+ =?utf-8?B?Z2pMTkgyL1ZCS3c4VFpLUUlGT2lKN25EVDdpOGhZOCtjWXoyUjE4aTQyZDI3?=
+ =?utf-8?B?dVBjZStvR1hCOXpDTXB3RytBN0VRbHFqNEhYdTJONTNYS1BWb3pvek56K3Fs?=
+ =?utf-8?B?Qm1WaWdGK0R6cW5kV1ZBNG5QS0ZEY053VTNVVmNBTnZBK1BKSWpsUHVuOUFC?=
+ =?utf-8?B?elZ2VmUxY095cmE5aTU2K0UxeU1TdUpqL0pUSTZoS2pqTHZSWk9IMytmWmtN?=
+ =?utf-8?B?VjVvQWtEU0hDSWx2VW53K1JNNG4yTlVYQURRRkFQTnhwWjJGSHJBVW9RTnpL?=
+ =?utf-8?B?R08vM3g4NGVJMU9XbTViVXFuWlpyRXNEajREZ0tLNDdqRDhOWnRlZVU1WHJY?=
+ =?utf-8?B?WE9SS2RlY0FrYmZ3dzZMQWVUUnV5T1lLeHhqbjM0bWRtMTdCSmNuSmpuQnJC?=
+ =?utf-8?B?bFJmNUw3Q0FoRkFJT3BPWGtHV1lnd2R0NjlVc3JlWjBiU21LWUVtNnJqd3p0?=
+ =?utf-8?B?YU1ETmw4YUc3V0UrTXIrRGptRFlNNE84SHFPRXU4ZnZtWEI2N3owNnM1Y1RZ?=
+ =?utf-8?B?Umdwb0h1Y3R1L013UExuS1VuZC8vaDdjemdCM2Vlbm1kcUM3WXlkNzAxZnhG?=
+ =?utf-8?B?SW95SmFKQzFLOG9CVC9DWEk1akpmMGFMdEdkNEhlSlJIYlhOb2t0VGhNa0V5?=
+ =?utf-8?B?K3BSZWhEZkdLZHRaVFJTSmdEOW01RTVkQllVaW82MW9jRFJaTm0zd05SZzA3?=
+ =?utf-8?B?YklRNk5UbUNieHdDaktTUmpnOC9WV1R1OXEwOC9HNytKMGlVaEhxL2FvY04x?=
+ =?utf-8?B?MlduS1JJaXo1dkhXWjRUK3dhZGZTelVtWFJRRnAyVEVIUVNaREFIbTg4TU1J?=
+ =?utf-8?B?aTdsZTAwUEZhcjVCUnQrTVhCL0c5MW02VXliVHhjeU5UaW1WZ0ZHUmF1UGxQ?=
+ =?utf-8?B?bUdJVXg2Z3g0bGNBczZQenBRRWdBVjNzMmFDQ2FoLzhQZnZwV3dwWnJRVlRo?=
+ =?utf-8?Q?sLldXjTkrsarj?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S3ArMlZWQ0F3TXdZcGJFak9ucUJKSStQRk9ra0hFRGhtbjdRdkdYT0YrZjda?=
+ =?utf-8?B?OEZNK01jZTV1WWVMSFBiOTc5Ly9Xdkw0S25QSlZrbGJpdmd0ZGE2NG43SE9m?=
+ =?utf-8?B?L1RNV2Y1cWRGd1JTWm9udkZOanVjU2g3NCtPSFZhTWFkMkwzR3dRb09sYkxK?=
+ =?utf-8?B?dG5aTzBhOW40TmZlTWtQL0FMMDFEM2hCTkVXakwvODBoM1A1QmtMbXBQYllN?=
+ =?utf-8?B?WDdROFBXY1RQTjlPcC8wVmg1ci9LaG53K1diendLS0h6M0ZoaGUwZEdGMC8x?=
+ =?utf-8?B?SDgvcElueXlCdGs0U2FtNjBZR0hvQmNSUHZPU2JEazViZW5idndhZHRXU2l2?=
+ =?utf-8?B?ankrcUlsWXRPYWFwbEIzcjVsNTh1YXVQZEZQSU9rWXJVSkp0K1F4TGg5b0pM?=
+ =?utf-8?B?T0FZZkpCcVk1dDI3cG81QU1wUDBuQSsvQnNVaDEwbk90UmNtL29Xb1MvTnVQ?=
+ =?utf-8?B?bUVuMkF1VXFXczdhVHBJTlNxcVk2dmxXeTlraDJ1RnBtOUtmTEd5NW4vMXlM?=
+ =?utf-8?B?eTE5Yld1cTZXd1pBMXNuMUM1YUJZMk1zY3VBTXAvc0FMU3FZNWNyYVdINU1o?=
+ =?utf-8?B?U1ppWGxjQTd6eXBJb3doQzQzOGxBdVUzcHRTL1M4ZWJ0aTRVUzNRK3kvSGR4?=
+ =?utf-8?B?OW9HT2NhV3dRZnBHd0FHdEpSc2NmRkVXQThxMDNmZTl3Nk5rMHNNSUFoVng1?=
+ =?utf-8?B?bGs5RllBZjBCTGZDKzhxSGQ3bWJTcWQ5c2hZcHpBa0JrNlZpbUxXeFJXZ3pL?=
+ =?utf-8?B?ODBiNXZUUThwSHBWZU9MS25MQ0VlWVpvbURlajY2am1oeXVLWXhxclY5bjBj?=
+ =?utf-8?B?V0xsNGVlWmdjRTdNZUIrTUJja2h0UkJZM2dLcGZpeDR1T0hGeTRHKzB0dUhw?=
+ =?utf-8?B?c3lPS1lhdUpndXVMM0ZyNHQxS2owZUhNQnF6V1YyUHkvM0xXV1dITGNibVdl?=
+ =?utf-8?B?WlEvWkkvVmZhWkVnWDBUNnZjSDBOeUxrNTU1bHVlSWFaZUZjR213ZkZRNFA0?=
+ =?utf-8?B?cXVscjl6OVFOK1RxeTZZQ2w4aEdITW4xYkI5d29GZ25yTmt2V052T2ltMjZa?=
+ =?utf-8?B?YkRSdWZpd3dFUmVMRFRHZ2RWdnFkNHhuUTBZWERpU0JRdFBMVkhxOUd6S0RW?=
+ =?utf-8?B?K2g3aVBVZm1ncVFHTTVMRkJPS1BjSk9URWhUWGtQK2NoQy8vbFZSaTk2WHMz?=
+ =?utf-8?B?MzI0ckx5b091NXhpNnZkOXVMbUJuTVpIdTBqeWV0M1cxWHJXNzNEOStXSUNo?=
+ =?utf-8?B?bVFwSDRnMWpLcVNZRVdNOWo1YXVQNytlU0NQWlZyc3dYYjNsNVJkbW5YVUp0?=
+ =?utf-8?B?WUViZ1RSRFVGVFg3dW1xRlpQOWhwT1ZlNzZDUHIwajlNUmZveEp5elJuMU8v?=
+ =?utf-8?B?RktFMjMrL2VKelZWRUpVaXJ4cFRvN1AyOTA2SWdSWklSbFFEcTVrNUxxWVJq?=
+ =?utf-8?B?V3gzdFpnVk9nTkZyRjRSUEVqTzhrcy9HdmlMelN1Z0E0QXlkSDVXeEhZN0NX?=
+ =?utf-8?B?Qlg2cmpvd3gvRE5lV1NOMmJGNkhtWXUyYnE5clBlRHQ1Um90YlMxQ095TXA0?=
+ =?utf-8?B?WmJpNW0rRkV3NTg3RnN5bW1EcVZFM0hoNTRzZ2hJZW9wQ1hwWHpQZHc5c2JB?=
+ =?utf-8?B?Q1UxVWZBUHNEcTY5cXVhbTcvbXEyb21FM2FOemJDTlp1OW5PMGJyZ1lVWHRa?=
+ =?utf-8?B?WFVzZHFWM0NtTGZNWmVJRU9NT3YyT2pQOFhIYzZhQ1pNMEZMV2VXRWs3dHBE?=
+ =?utf-8?B?REEyU2p6UFNGaE5XVjE5SFkwWXBsRVRjdU01dkdMck9Ibjkyb1F4RmVINUw5?=
+ =?utf-8?B?d3VDR1FleFdaUGRGKzFjdE5OelhUalM4b2lhaUtEekRublJibXlOdjI0M0xo?=
+ =?utf-8?B?ZzJTWjgvcWN5YTlFSmpkMmwvQ2dvdVZ2OVgrT2lSaGdTdjQ1L3VSbm01UHV4?=
+ =?utf-8?B?dmh0cUNsZWhEOGs2Mk54bVJFbWZicDJwTWdEVHRSVmV6b1lGeWx3ZkFmbWNn?=
+ =?utf-8?B?dWloa0xQbytka096MG5HOVIyM0RpMFZ6VXo3RWtRUy9reGVRcGswdXY5OEJD?=
+ =?utf-8?B?UHNTSTdBczFlYXZscjFJZWk4L2luODlacmRvWVFkV0FkL2VuTGFGclFicUps?=
+ =?utf-8?Q?1wR6b/CiKCFxI++WKlhvAPdhZ?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 248bd329-837d-4ec9-756f-08dd3698307b
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jan 2025 01:42:23.5482 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LbKs7L0Rv8MlV77VTQK8ZVgoee6jn6lqYUANixKPu6oyjUrD90+u099OA8/bZaUZxYN5ZydWFczEpyS7kkaMxw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB1809
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,237 +175,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Up to now we could only use log level, category, and file for filtering.
-Allow filtering on a list of functions.
+Am 16.01.25 um 18:29 schrieb Daniel Schultz:
+> We set the boot source as environment variable 'boot'.
+> Also include 'uart' and 'usbdfu' as possible boot sources.
+> 
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/log.c             | 42 ++++++++++++++++++++++--------------------
- common/log.c          | 13 ++++++++++++-
- include/log.h         |  5 +++--
- test/log/log_filter.c |  1 -
- test/log/log_test.c   | 10 +++++-----
- 5 files changed, 42 insertions(+), 29 deletions(-)
-
-diff --git a/cmd/log.c b/cmd/log.c
-index 519ec76f3b5..64add6d8b5a 100644
---- a/cmd/log.c
-+++ b/cmd/log.c
-@@ -115,30 +115,27 @@ static int do_log_filter_list(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return CMD_RET_FAILURE;
- 	}
- 
--	/*      <3> < 6  > <2+1 + 7 > <      16      > < unbounded... */
--	printf("num policy level            categories files\n");
- 	list_for_each_entry(filt, &ldev->filter_head, sibling_node) {
--		printf("%3d %6.6s %s %-7.7s ", filt->filter_num,
--		       filt->flags & LOGFF_DENY ? "deny" : "allow",
-+		printf("%-3d: %s %s %s\n", filt->filter_num,
-+		       filt->flags & LOGFF_DENY ? "DENY" : "ALLOW",
- 		       filt->flags & LOGFF_LEVEL_MIN ? ">=" : "<=",
- 		       log_get_level_name(filt->level));
- 
- 		if (filt->flags & LOGFF_HAS_CAT) {
--			int i;
--
--			if (filt->cat_list[0] != LOGC_END)
--				printf("%16.16s %s\n",
--				       log_get_cat_name(filt->cat_list[0]),
--				       filt->file_list ? filt->file_list : "");
--
--			for (i = 1; i < LOGF_MAX_CATEGORIES &&
--				    filt->cat_list[i] != LOGC_END; i++)
--				printf("%21c %16.16s\n", ' ',
-+			printf("     Categories:");
-+			for (int i = 0;
-+			     i < LOGF_MAX_CATEGORIES &&
-+			     filt->cat_list[i] != LOGC_END;
-+			     ++i) {
-+				printf(" %s",
- 				       log_get_cat_name(filt->cat_list[i]));
--		} else {
--			printf("%16c %s\n", ' ',
--			       filt->file_list ? filt->file_list : "");
-+			}
-+			printf("\n");
- 		}
-+		if (filt->file_list)
-+			printf("     Files: %s\n", filt->file_list);
-+		if (filt->func_list)
-+			printf("     Functions: %s\n", filt->func_list);
- 	}
- 
- 	return CMD_RET_SUCCESS;
-@@ -151,6 +148,7 @@ static int do_log_filter_add(struct cmd_tbl *cmdtp, int flag, int argc,
- 	bool print_num = false;
- 	bool type_set = false;
- 	char *file_list = NULL;
-+	char *func_list = NULL;
- 	const char *drv_name = "console";
- 	int opt, err;
- 	int cat_count = 0;
-@@ -160,7 +158,7 @@ static int do_log_filter_add(struct cmd_tbl *cmdtp, int flag, int argc,
- 	struct getopt_state gs;
- 
- 	getopt_init_state(&gs);
--	while ((opt = getopt(&gs, argc, argv, "Ac:d:Df:l:L:p")) > 0) {
-+	while ((opt = getopt(&gs, argc, argv, "Ac:d:Df:F:l:L:p")) > 0) {
- 		switch (opt) {
- 		case 'A':
- #define do_type() do { \
-@@ -199,6 +197,9 @@ static int do_log_filter_add(struct cmd_tbl *cmdtp, int flag, int argc,
- 		case 'f':
- 			file_list = gs.arg;
- 			break;
-+		case 'F':
-+			func_list = gs.arg;
-+			break;
- 		case 'l':
- #define do_level() do { \
- 			if (level_set) { \
-@@ -229,7 +230,7 @@ static int do_log_filter_add(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 	cat_list[cat_count] = LOGC_END;
- 	err = log_add_filter_flags(drv_name, cat_count ? cat_list : NULL, level,
--				   file_list, flags);
-+				   file_list, func_list, flags);
- 	if (err < 0) {
- 		printf("Could not add filter (err = %d)\n", err);
- 		return CMD_RET_FAILURE;
-@@ -388,7 +389,8 @@ U_BOOT_LONGHELP(log,
- 	"\t-d <driver> - Specify the log driver to add the filter to; defaults\n"
- 	"\t              to console\n"
- 	"\t-D - Deny messages matching this filter; mutually exclusive with -A\n"
--	"\t-f <files_list> - A comma-separated list of files to match\n"
-+	"\t-f <file_list> - A comma-separated list of files to match\n"
-+	"\t-F <func_list> - A comma-separated list of functions to match\n"
- 	"\t-l <level> - Match log levels less than or equal to <level>;\n"
- 	"\t             mutually-exclusive with -L\n"
- 	"\t-L <level> - Match log levels greather than or equal to <level>;\n"
-diff --git a/common/log.c b/common/log.c
-index b2b5f3c81ba..b75e404420b 100644
---- a/common/log.c
-+++ b/common/log.c
-@@ -192,6 +192,10 @@ static bool log_passes_filters(struct log_device *ldev, struct log_rec *rec)
- 		    !log_has_member(filt->file_list, rec->file))
- 			continue;
- 
-+		if (filt->func_list &&
-+		    !log_has_member(filt->func_list, rec->func))
-+			continue;
-+
- 		if (filt->flags & LOGFF_DENY)
- 			return false;
- 		else
-@@ -329,7 +333,7 @@ int _log_buffer(enum log_category_t cat, enum log_level_t level,
- 
- int log_add_filter_flags(const char *drv_name, enum log_category_t cat_list[],
- 			 enum log_level_t level, const char *file_list,
--			 int flags)
-+			 const char *func_list, int flags)
- {
- 	struct log_filter *filt;
- 	struct log_device *ldev;
-@@ -364,6 +368,13 @@ int log_add_filter_flags(const char *drv_name, enum log_category_t cat_list[],
- 			goto err;
- 		}
- 	}
-+	if (func_list) {
-+		filt->func_list = strdup(func_list);
-+		if (!filt->func_list) {
-+			ret = -ENOMEM;
-+			goto err;
-+		}
-+	}
- 	filt->filter_num = ldev->next_filter_num++;
- 	/* Add deny filters to the beginning of the list */
- 	if (flags & LOGFF_DENY)
-diff --git a/include/log.h b/include/log.h
-index 3f9023ae0d2..7d8d10c1fb9 100644
---- a/include/log.h
-+++ b/include/log.h
-@@ -508,6 +508,7 @@ struct log_filter {
- 	enum log_category_t cat_list[LOGF_MAX_CATEGORIES];
- 	enum log_level_t level;
- 	const char *file_list;
-+	const char *func_list;
- 	struct list_head sibling_node;
- };
- 
-@@ -605,7 +606,7 @@ int do_log_test(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-  */
- int log_add_filter_flags(const char *drv_name, enum log_category_t cat_list[],
- 			 enum log_level_t level, const char *file_list,
--			 int flags);
-+			 const char *func_list, int flags);
- 
- /**
-  * log_add_filter() - Add a new filter to a log device
-@@ -628,7 +629,7 @@ static inline int log_add_filter(const char *drv_name,
- 				 const char *file_list)
- {
- 	return log_add_filter_flags(drv_name, cat_list, max_level, file_list,
--				    0);
-+				    NULL, 0);
- }
- 
- /**
-diff --git a/test/log/log_filter.c b/test/log/log_filter.c
-index d36e9d9714e..8622dcf2913 100644
---- a/test/log/log_filter.c
-+++ b/test/log/log_filter.c
-@@ -39,7 +39,6 @@ static int log_test_filter(struct unit_test_state *uts)
- 
- #define create_filter(args, filter_num) do {\
- 	ut_assertok(run_command("log filter-add -p " args, 0)); \
--	ut_assert_skipline(); \
- 	ut_assertok(strict_strtoul(uts->actual_str, 10, &(filter_num))); \
- 	ut_assert_console_end(); \
- } while (0)
-diff --git a/test/log/log_test.c b/test/log/log_test.c
-index 1c89df4ef18..8686b1cbef3 100644
---- a/test/log/log_test.c
-+++ b/test/log/log_test.c
-@@ -320,7 +320,7 @@ int log_test_cat_deny(struct unit_test_state *uts)
- 	filt1 = log_add_filter("console", cat_list, LOGL_MAX, NULL);
- 	ut_assert(filt1 >= 0);
- 	filt2 = log_add_filter_flags("console", cat_list, LOGL_MAX, NULL,
--				     LOGFF_DENY);
-+				     NULL, LOGFF_DENY);
- 	ut_assert(filt2 >= 0);
- 
- 	log_run_cat(UCLASS_SPI);
-@@ -340,7 +340,7 @@ int log_test_file_deny(struct unit_test_state *uts)
- 	filt1 = log_add_filter("console", NULL, LOGL_MAX, "file");
- 	ut_assert(filt1 >= 0);
- 	filt2 = log_add_filter_flags("console", NULL, LOGL_MAX, "file",
--				     LOGFF_DENY);
-+				     NULL, LOGFF_DENY);
- 	ut_assert(filt2 >= 0);
- 
- 	log_run_file("file");
-@@ -360,7 +360,7 @@ int log_test_level_deny(struct unit_test_state *uts)
- 	filt1 = log_add_filter("console", NULL, LOGL_INFO, NULL);
- 	ut_assert(filt1 >= 0);
- 	filt2 = log_add_filter_flags("console", NULL, LOGL_WARNING, NULL,
--				     LOGFF_DENY);
-+				     NULL, LOGFF_DENY);
- 	ut_assert(filt2 >= 0);
- 
- 	log_run();
-@@ -380,10 +380,10 @@ int log_test_min(struct unit_test_state *uts)
- 	int filt1, filt2;
- 
- 	filt1 = log_add_filter_flags("console", NULL, LOGL_WARNING, NULL,
--				     LOGFF_LEVEL_MIN);
-+				     NULL, LOGFF_LEVEL_MIN);
- 	ut_assert(filt1 >= 0);
- 	filt2 = log_add_filter_flags("console", NULL, LOGL_INFO, NULL,
--				     LOGFF_DENY | LOGFF_LEVEL_MIN);
-+				     NULL, LOGFF_DENY | LOGFF_LEVEL_MIN);
- 	ut_assert(filt2 >= 0);
- 
- 	log_run();
--- 
-2.47.1
+> ---
+>   board/phytec/common/k3/board.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
+> 
+> diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
+> index 9ff861cd3f4..ebdd5fb2abe 100644
+> --- a/board/phytec/common/k3/board.c
+> +++ b/board/phytec/common/k3/board.c
+> @@ -148,6 +148,12 @@ int board_late_init(void)
+>   	case BOOT_DEVICE_ETHERNET:
+>   		env_set("boot", "net");
+>   		break;
+> +	case BOOT_DEVICE_UART:
+> +		env_set("boot", "uart");
+> +		break;
+> +	case BOOT_DEVICE_DFU:
+> +		env_set("boot", "usbdfu");
+> +		break;
+>   	};
+>   
+>   	if (IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION_BLOCKS)) {
 
