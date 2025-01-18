@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47584C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:02:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02B4CC02187
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:02:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AE748073D;
-	Sat, 18 Jan 2025 05:02:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D1C7F80771;
+	Sat, 18 Jan 2025 05:02:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QfrpiZiK";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jNUjM7HV";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SViOLyTG";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qaCBpzdU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 664C58070C; Sat, 18 Jan 2025 05:02:08 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 2CB9980757; Sat, 18 Jan 2025 05:02:13 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28DF58036F
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:02:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 663048036F
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:02:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,31 +31,33 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YZjbd33Y3z9sX2;
- Sat, 18 Jan 2025 05:02:05 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YZjbh5s1lz9smf;
+ Sat, 18 Jan 2025 05:02:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737172925;
+ s=mail20150812; t=1737172929;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=xriR+QuqNQKLYuylhL8XpBglueKjJwxF/dfS8ACm67c=;
- b=QfrpiZiKs3DyaF8rSP51Ju/iF53kUnR2ALFomqsu62x7FheH6Qi7CdCBp8HA+MsIJkeU0Y
- 4cSRBn7wVagUdRkUUKfybE2X6FWOQh8GObBbq6PhpV7NRm+QC7iCgcMTE15P28YEW8ff1L
- VMgf3JnRmRz4w7te/xP+3sM31k5eqIcIskLLN34vWagjo4Z0aoY6LV5ilmgaCw/t5NeoC2
- VmVLtk6Vv5fTF7fAaPHT1IKoS7HZRB19vASWeHu5tBBlwlwtrmgv/3UPMWsnjsxZImTaMj
- 8Id9AFEx0fBtPC450rTUn80hzpVZIMcAx6eEzfwnpkHezGkOyw9U6UxgYPw7tA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=UncXETU0kca0ui6qkkgZAstxDMX4YkcXZnSzy7Hs/fc=;
+ b=SViOLyTGE+3HQZ6BMSrH5mvRq113RjpbqaW2/604GaLR3tNBo/x9n25b9iWnMSDJQ52w/0
+ qZEQ2YARL7QPsorbBOyqjH7ObjGAFq1q/6anYHMOKTs6EwCUyXnB6hOarazSsK3aJrr1k8
+ ZBbyFA03zDaMsym91rX0iV5fUjj/JjFWAxxGAP1ROhqfezj8O4pWCTdekvdhjzwXY1a32t
+ Bq0PoaSU+IIcSwKjx+oA6R9lP18WYnk8ItZDI1MW7HJxm0EMR2bQ3Fj92Wc9NLAQzuEziL
+ d0eylMjCP5PF2VlqTIYkCXxQz7+2JH0A03FYmW3DqObKdv0bg8RSpu2wk2fYxA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737172923;
+ s=mail20150812; t=1737172926;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=xriR+QuqNQKLYuylhL8XpBglueKjJwxF/dfS8ACm67c=;
- b=jNUjM7HVrENlVC6q/rARYdMpJFJolrX8JPPgpDep2UzJjP/THOBqwSn0XrTTxEhLvPCpRz
- ZlmxnUzgL5rHH9EhDv96W2q1vfSCOqyWk7aOfDg/BNJRZGcPDn5RKdvnsylDHKMUAcwR7z
- hFOJYOEfrQRKZYJo2cAB7dLWJ0xlJs55AyLxuF1SZqkaKy8pq3F+H/yI5nPqueevMXGGxP
- +TaWCkW+H9Jze1FcgHXSL2ePiCtzJkHdV/uK3K2vVce3H+f446wAYQIV2Kg13zg2hk87jq
- t7tOK2n2HkKZfUoDzUioC93SsYr0hkvZRDqQ7JKadUi0jxcAZKwwtjK727NXKg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=UncXETU0kca0ui6qkkgZAstxDMX4YkcXZnSzy7Hs/fc=;
+ b=qaCBpzdU6np7DdRNJbgTCYAQZVn5iauIDaNLkxoDb/JbJbdMvaQTUXTXdE1lKrSTXSp2jM
+ Hh6xWmCgG5YTQIm9KMbixlwaHQad9XIfylQvwoPmdSwwBeoV4QWYZPwkOAF1mE8JyjDcCV
+ G0eNlYwtjQWGivkoPC0rh6Cvkit7aZBlyzSnEoptvoXdHCNk5/PiJEngZya+v3rI7eKsy6
+ /GaoIHWeMoNdc7ISuVfVPKKrvib/DK1fgU4lIW7nj83qhCuxl45ge7PEAgOPleFZHVE29h
+ yEzBXPijrJuovVmoQSGtKN1xOsgSY0JMbVLurF7vTrdONLiJozwMMC3Nk4p2Cw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Aaron Williams <awilliams@marvell.com>, Anatolij Gustschin <agust@denx.de>,
@@ -71,13 +74,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ronald Wahl <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/8] cyclic: Prevent corruption of cyclic list on reassignment
-Date: Sat, 18 Jan 2025 05:00:55 +0100
-Message-ID: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 2/8] cyclic: Handle return code from cyclic_register() in demo
+ and docs
+Date: Sat, 18 Jan 2025 05:00:56 +0100
+Message-ID: <20250118040130.74921-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
+References: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 5bc8757db06a70b1997
-X-MBO-RS-META: w13becfrdiz1y3ioha6a8djbb948um9c
+X-MBO-RS-META: nbmgmoy3se1tmn63wung9u4qt8u98qox
+X-MBO-RS-ID: 3f8cd1743808adc03ad
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,12 +100,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make cyclic_register() return error code, 0 in case of success,
--EALREADY in case the called attempts to re-register already
-registered struct cyclic_info. The re-registration would lead
-to corruption of gd->cyclic_list because the re-registration
-would memset() one of its nodes, prevent that. Unregister only
-initialized struct cyclic_info.
+Update the cyclic demo code and documentation to indicate there
+is now a return code from cyclic_register().
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -123,76 +125,58 @@ Cc: Tim Harvey <tharvey@gateworks.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- common/cyclic.c  | 14 +++++++++++---
- include/cyclic.h |  9 ++++++---
- 2 files changed, 17 insertions(+), 6 deletions(-)
+ cmd/cyclic.c           | 10 ++++++----
+ doc/develop/cyclic.rst |  4 ++--
+ 2 files changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/common/cyclic.c b/common/cyclic.c
-index 196797fd61e..53156a704cc 100644
---- a/common/cyclic.c
-+++ b/common/cyclic.c
-@@ -27,9 +27,13 @@ struct hlist_head *cyclic_get_list(void)
- 	return (struct hlist_head *)&gd->cyclic_list;
- }
- 
--void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
--		     uint64_t delay_us, const char *name)
-+int cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
-+		    uint64_t delay_us, const char *name)
+diff --git a/cmd/cyclic.c b/cmd/cyclic.c
+index 339dd4a7bce..e98c4a488d6 100644
+--- a/cmd/cyclic.c
++++ b/cmd/cyclic.c
+@@ -33,8 +33,10 @@ static void cyclic_demo(struct cyclic_info *c)
+ static int do_cyclic_demo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			  char *const argv[])
  {
-+	/* Reassignment of function would corrupt cyclic list, exit */
-+	if (cyclic->func)
-+		return -EALREADY;
-+
- 	memset(cyclic, 0, sizeof(*cyclic));
++	const char *demo_name = "cyclic_demo";
+ 	struct cyclic_demo_info *info;
+ 	uint time_ms;
++	int ret;
  
- 	/* Store values in struct */
-@@ -38,11 +42,15 @@ void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
- 	cyclic->delay_us = delay_us;
- 	cyclic->start_time_us = timer_get_us();
- 	hlist_add_head(&cyclic->list, cyclic_get_list());
-+
-+	return 0;
+ 	if (argc < 3)
+ 		return CMD_RET_USAGE;
+@@ -49,12 +51,12 @@ static int do_cyclic_demo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	info->delay_us = simple_strtoul(argv[2], NULL, 0);
+ 
+ 	/* Register demo cyclic function */
+-	cyclic_register(&info->cyclic, cyclic_demo, time_ms * 1000, "cyclic_demo");
++	ret = cyclic_register(&info->cyclic, cyclic_demo, time_ms * 1000, demo_name);
+ 
+-	printf("Registered function \"%s\" to be executed all %dms\n",
+-	       "cyclic_demo", time_ms);
++	printf("Registered function \"%s\" to be executed all %dms with return code %d\n",
++	       demo_name, time_ms, ret);
+ 
+-	return 0;
++	return ret;
  }
  
- void cyclic_unregister(struct cyclic_info *cyclic)
- {
--	hlist_del(&cyclic->list);
-+	/* Unregister only initialized struct cyclic_info */
-+	if (cyclic->func)
-+		hlist_del(&cyclic->list);
- }
+ static int do_cyclic_list(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/doc/develop/cyclic.rst b/doc/develop/cyclic.rst
+index 6f1da6f0d9b..604c0463f8d 100644
+--- a/doc/develop/cyclic.rst
++++ b/doc/develop/cyclic.rst
+@@ -38,9 +38,9 @@ To register a cyclic function, use something like this::
+         /* Initialize donkey ... */
  
- static void cyclic_run(void)
-diff --git a/include/cyclic.h b/include/cyclic.h
-index c6c463d68e9..c86ac407332 100644
---- a/include/cyclic.h
-+++ b/include/cyclic.h
-@@ -60,8 +60,10 @@ typedef void (*cyclic_func_t)(struct cyclic_info *c);
-  * The function @func will be called with @cyclic as its
-  * argument. @cyclic will usually be embedded in some device-specific
-  * structure, which the callback can retrieve using container_of().
-+ *
-+ * @return 0 on success, -EALREADY on repeated registration, -ve otherwise
-  */
--void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
-+int cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
- 		     uint64_t delay_us, const char *name);
+         /* Register demo cyclic function */
+-        cyclic_register(&donkey->cyclic, cyclic_demo, 10 * 1000, "cyclic_demo");
++        ret = cyclic_register(&donkey->cyclic, cyclic_demo, 10 * 1000, "cyclic_demo");
+         
+-        return 0;
++        return ret;
+     }
  
- /**
-@@ -89,9 +91,10 @@ struct hlist_head *cyclic_get_list(void);
- 
- #else
- 
--static inline void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
--				   uint64_t delay_us, const char *name)
-+static inline int cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
-+				  uint64_t delay_us, const char *name)
- {
-+	return 0;
- }
- 
- static inline void cyclic_unregister(struct cyclic_info *cyclic)
+ This will register the function `cyclic_demo()` to be periodically
 -- 
 2.45.2
 
