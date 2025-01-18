@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BDD7C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 06:35:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E879BC02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 06:35:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF5FA8063E;
-	Sat, 18 Jan 2025 07:35:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 241008070C;
+	Sat, 18 Jan 2025 07:35:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="YXXCtY/M";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="WjoprHqO";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CmYMtil+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="S8g1LbO4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B16508073D; Sat, 18 Jan 2025 07:35:22 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id AB0D780758; Sat, 18 Jan 2025 07:35:24 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 179C380312
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 07:35:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A320A80657
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 07:35:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,31 +32,33 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YZn0R3l3vz9sls;
- Sat, 18 Jan 2025 07:35:19 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YZn0V1z3zz9sb6;
+ Sat, 18 Jan 2025 07:35:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737182119;
+ s=mail20150812; t=1737182122;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=6qj3dfPDMN2e7eEjgNJL25CflvkipdbQL30KEtHhXBs=;
- b=YXXCtY/MoQyPjOVRgsjvwOqEwzuQt5VC9+ISCjk0mihc3lgaPFl77BFW4Hm1odlz1YNdcD
- fLefIroPWL0n58vwvOIKaU2drhs5713DgUQ0xtUxJdbBLjzxXvM8NhwEDuUsWf0rZlXlyS
- 3BUv2aaKyouENG2I3Dt1rQ4wETuTEjm8fgTTi5cUlZn668FTBzkoyyW4Bzm+bko7U4VF2W
- N0henV9nQHju0hICfXNSPs0jGvrFHWpap5EwYHYE//IvVq//5NRPKr33Pa+nCQboSUUCOm
- YgAX6FZPJ8F4NNUkl+z7kS8P7yAzZl/RKOozwr7tx8ZmEjk1WXhGGatuCpKY+g==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=F9+798ThtyquuZ4cmlWzckotXwQ8fBrw4xaGaBKN4z4=;
+ b=CmYMtil+7WXm+FK9c2KU5hGamkW9b4LNkBUp6g8tjbFWmUjzmKko+wpuuzRLS6ODJ9mnwK
+ jqn8JUS2jPz8ocdbeU7PKc942loP0+x5YSrDi2BEajudGW9koet+xsAGbG9OK5IpeCH9K2
+ 0cLx37LiSJxslJzrrM1xR6b/SjeK0UFNtrELDm+T2h23cdT5DjwxkJjXITl5d+f/eSZ+bB
+ YGPd9v2To1Im28/LZi9jNBrdfG+Sm+e07RojB0XIiWB50lik5n29qbNHQJmai5CVSZzePZ
+ ebBX0y10lNUGnoDh4QL4DZn5SlL2zvMpFrK2geC6GY6qc4xVPZSULI7a5CEZnQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737182117;
+ s=mail20150812; t=1737182120;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=6qj3dfPDMN2e7eEjgNJL25CflvkipdbQL30KEtHhXBs=;
- b=WjoprHqOWOzUBEKsBEZPm9Rk0YQ+UXhA7tOz80CQ+1tQSITT8KoBW330ToqMDv11ilP0tL
- X4nimVyG+eN1B0JlQK1s1gsrHNpWjtWvpG5n3RGAiAm420HAKsPZeM0Voq7KSyvihBe///
- xoORAlH+Pb2uCFb+UdyxBfBDomkYxcBYFLbWFEsKbhpg+Ks51WxVyzZZxUiEvlsB62CtNP
- dfd1IYN228QwPx07zJSp6RI1TDS2slIhbZyISG8nSahh/0OJ87zAuFK3Sia5sbJPF0rxA4
- Hk1Ct6Sj8gf0Tp+yo3bVnAGdwsYh1lK71ZfKsBTcX0tBDyoC0BzqZuKi5WZoiw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=F9+798ThtyquuZ4cmlWzckotXwQ8fBrw4xaGaBKN4z4=;
+ b=S8g1LbO4YudPafv/vRPoKvtEbeuNjpiWXYI2U5O/rcl6AxCKmA0XTH9khmrl2vSGer9GJD
+ MupLzl2UuH5dcarwZeYkN5BpHA5l4N6npvYANqgVJJFBhK2IDxi0Q0aN9CJi43ydnX9dXv
+ NXxkZx0bA+mf9LqrnQcFb5kTjsSnxFjUycE31llFCdl7cfYFTSAfpXXQVm+MuvND18ewwa
+ twQY6oN70fejt31yLLhCA4lbUoB1BKqM+a92AXQay12T/7tgfGHvpTAUvMm7YaDSliiJaT
+ tGi3t+5rSwZNpHqXQnhqABhOw7v2c38BZWybv3nyvcRYT4RF+bYTgTC7hhqljw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -68,14 +71,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] net: ravb: Drop empty init callback
-Date: Sat, 18 Jan 2025 07:34:36 +0100
-Message-ID: <20250118063458.137258-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 2/2] net: sh_eth: Drop empty init callback
+Date: Sat, 18 Jan 2025 07:34:37 +0100
+Message-ID: <20250118063458.137258-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250118063458.137258-1-marek.vasut+renesas@mailbox.org>
+References: <20250118063458.137258-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 4b5e8550f4bfb4f5b8f
-X-MBO-RS-META: 88ab6dig95new749s9rdhoei3z85ujpc
-X-Rspamd-Queue-Id: 4YZn0R3l3vz9sls
+X-MBO-RS-META: psytspgiwx3bid5aoe4or77omxa8k3ng
+X-MBO-RS-ID: e30275deaa22ad8e7a6
+X-Rspamd-Queue-Id: 4YZn0V1z3zz9sb6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,34 +119,34 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/net/ravb.c | 7 +------
+ drivers/net/sh_eth.c | 7 +------
  1 file changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-index 7286ad19598..f9c27f0f370 100644
---- a/drivers/net/ravb.c
-+++ b/drivers/net/ravb.c
-@@ -560,11 +560,6 @@ static int ravb_remove(struct udevice *dev)
- 	return 0;
- }
+diff --git a/drivers/net/sh_eth.c b/drivers/net/sh_eth.c
+index f1ce994cfd5..8654f1b8085 100644
+--- a/drivers/net/sh_eth.c
++++ b/drivers/net/sh_eth.c
+@@ -777,11 +777,6 @@ U_BOOT_DRIVER(eth_sh_ether) = {
+ };
  
--static int ravb_bb_init(struct bb_miiphy_bus *bus)
+ /******* for bb_miiphy *******/
+-static int sh_eth_bb_init(struct bb_miiphy_bus *bus)
 -{
 -	return 0;
 -}
 -
- static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
+ static int sh_eth_bb_mdio_active(struct bb_miiphy_bus *bus)
  {
- 	struct ravb_priv *eth = bus->priv;
-@@ -626,7 +621,7 @@ static int ravb_bb_delay(struct bb_miiphy_bus *bus)
+ 	struct sh_eth_dev *eth = bus->priv;
+@@ -852,7 +847,7 @@ static int sh_eth_bb_delay(struct bb_miiphy_bus *bus)
  struct bb_miiphy_bus bb_miiphy_buses[] = {
  	{
- 		.name		= "ravb",
--		.init		= ravb_bb_init,
+ 		.name		= "sh_eth",
+-		.init		= sh_eth_bb_init,
 +		.init		= NULL,
- 		.mdio_active	= ravb_bb_mdio_active,
- 		.mdio_tristate	= ravb_bb_mdio_tristate,
- 		.set_mdio	= ravb_bb_set_mdio,
+ 		.mdio_active	= sh_eth_bb_mdio_active,
+ 		.mdio_tristate	= sh_eth_bb_mdio_tristate,
+ 		.set_mdio	= sh_eth_bb_set_mdio,
 -- 
 2.45.2
 
