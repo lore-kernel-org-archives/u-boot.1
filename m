@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49E65C02187
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:02:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 888D3C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:02:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A26A80761;
-	Sat, 18 Jan 2025 05:02:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 009B980763;
+	Sat, 18 Jan 2025 05:02:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vin1XFmk";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="YcSthUvg";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KSMHviur";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="cS1Z9Mcb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DB2080786; Sat, 18 Jan 2025 05:02:15 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id B3AE980793; Sat, 18 Jan 2025 05:02:17 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2594480758
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:02:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6815180786
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:02:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,33 +32,33 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YZjbm13FWz9sbl;
- Sat, 18 Jan 2025 05:02:12 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YZjbp67cBz9tDY;
+ Sat, 18 Jan 2025 05:02:14 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737172935;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Rq3JyGoUPbzg82zrqA06j7BKI/miKmJnMOnLgCax7WU=;
+ b=KSMHviurwtn2uOEURWeXfohFN+j2s8NPoq8XVXVfMGP6HF8k52ornO9YbTedf9qSpdSQO2
+ SBpPlpWnSwFuy8Znrj/yDeFUxcsprLMtiV3+hXz6IW5m+T5qO/EB7gP/2JPd+t+u6hnLgd
+ TmFoYQ4l4C36oHYMCyp1kTnqVR0rEzrRRmuwElGygN4ZgbFKWglwwH9tB/Xx+eTSa6jwl0
+ yzuSQZcMoLDn5vCMDOgYDv+fGgBQ4adreK//cOJfHboysVbxGlUk2hYZs/H4I2u10y/Y/L
+ 5gUb8Uk6dN7jNPrsV6r8ZqTCPg/mrYiFt7oQ1fnC5I5xgyCmWkJkgdlYKE+0RA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1737172932;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JVQ2KsZCF1RPttG/7wBu8fsA6BUmk+PsLoBm9//ENjU=;
- b=vin1XFmkKTd/sTzi5JCTm1axCF6m7oGXJ3uoq555NY0liEz7KI66P9l6Vv7JFc/NuD7Vl0
- +fvHvKJRAYcrzW1rybnA8HQ0PMuNHac+CefTI+xt/lSZlZnGGF/d7OFNcGRgnsttCOQ2wH
- lVIKPS4Y9OeJ+AIr+SVjDL93//CdYpV1q2FqVkP8Kp58tS33j1O9SVqi/rQ/LqzU2dSuTJ
- 9ftk9l8YBMKfS7/mFYNQ1zwVs8cN+aGWqrdayQK168Sbw7hHkIaSbkE3ssf8O22IWiHizv
- 2uLMwu6pqKiCi8feENzA+izqGtCj8QPJOrawBY15bXXqqgoLy0/Sh3I94qW9tw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737172930;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JVQ2KsZCF1RPttG/7wBu8fsA6BUmk+PsLoBm9//ENjU=;
- b=YcSthUvg1eRcK4bfFSvdjKi/BvUDA965JSxbDDdS/HTl+9tBJ+WXJr9s2XajIO12fzt0PG
- JbI3TwVkQFeSemY1f62mxFwcnZar7b6hEzDgWn2FE/WPMlqF381fEJqPmAzB1D0FNCcn9x
- EP68pPu+0oa2oFnjLIK04mhhPz7DvbvRum5pQ2ypM78kmFQVYRp2a2heshcjko0AKTcUvw
- f7eRNDkF666bK1LAJjKtJcxEkkRQv91UpZvyCIUFyj69C4VfnRQ9wcroq9PkDgsYaUgxSY
- LitwSzAzB2ofEmOK4PHTrrFWhZUqN1L1+5yJ//gvdXGuMUcpA03tWFeBwwMwbQ==
+ bh=Rq3JyGoUPbzg82zrqA06j7BKI/miKmJnMOnLgCax7WU=;
+ b=cS1Z9McbgxmBZeo7VXI1ZWqpn8vLNMHnWBWuaoHOKPfrb+CA0qFWcZ3m/tn9+um3VF05OL
+ WDNpnm7/4o5bt9+OFyInlNCvOqKRJmv+OFZEToAT7MGj4EUbNWKIP/NpwO7Nbqh4SUJd3A
+ uptVRuunB5BsRHIQ2ozv9JajcnxAmXydV8kfZOX+BiYQgr0hGY/fj6k7YqJ0OM198aCrDw
+ N0H8hjeO6Xma9ThjwAFLP7WA4xvJI9OVZSXXe9ZLDULojnhHEoCyyYSSDaeCHqeUx/KIEg
+ /eQMTen7IKui3weBN4rD0StzqFaiDICMoAl47udDZWloc2VfIgLLWoyPXA9dgg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Aaron Williams <awilliams@marvell.com>, Anatolij Gustschin <agust@denx.de>,
@@ -74,16 +75,17 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ronald Wahl <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/8] cyclic: Test return code from cyclic_register() in test
-Date: Sat, 18 Jan 2025 05:00:57 +0100
-Message-ID: <20250118040130.74921-3-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 4/8] mips: octeon: nic23: Handle return value from
+ cyclic_register()
+Date: Sat, 18 Jan 2025 05:00:58 +0100
+Message-ID: <20250118040130.74921-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
 References: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: a39b5097dc9731fa463
-X-MBO-RS-META: 5picophz61imx7uowuz3af573d7yfyd1
-X-Rspamd-Queue-Id: 4YZjbm13FWz9sbl
+X-MBO-RS-META: p9c6pz7xqkjuu4arozxqxb95rozq3a4i
+X-MBO-RS-ID: d74e7c04168be225463
+X-Rspamd-Queue-Id: 4YZjbp67cBz9tDY
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,7 +102,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the cyclic test code to verify return code from cyclic_register() works.
+Handle the error code returned by cyclic_register(). Report the error,
+but do not return it from board_late_init() as that would make the
+board not boot, which is undesired. Let the board boot somehow, so
+the user can fix the problem, even if the cyclic callback is not
+usable.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -124,46 +130,45 @@ Cc: Tim Harvey <tharvey@gateworks.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- test/common/cyclic.c | 21 ++++++++++++++++++++-
- 1 file changed, 20 insertions(+), 1 deletion(-)
+ board/Marvell/octeon_nic23/board.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/test/common/cyclic.c b/test/common/cyclic.c
-index 51a07c576b6..714dec60b7f 100644
---- a/test/common/cyclic.c
-+++ b/test/common/cyclic.c
-@@ -25,8 +25,11 @@ static void test_cb(struct cyclic_info *c)
- 
- static int dm_test_cyclic_running(struct unit_test_state *uts)
- {
+diff --git a/board/Marvell/octeon_nic23/board.c b/board/Marvell/octeon_nic23/board.c
+index cf20c97684a..5d1bf15ed50 100644
+--- a/board/Marvell/octeon_nic23/board.c
++++ b/board/Marvell/octeon_nic23/board.c
+@@ -341,6 +341,7 @@ int board_late_init(void)
+ 	struct cyclic_info *cyclic;
+ 	struct gpio_desc gpio = {};
+ 	ofnode node;
 +	int ret;
-+
- 	cyclic_test.called = false;
--	cyclic_register(&cyclic_test.cyclic, test_cb, 10 * 1000, "cyclic_test");
-+	ret = cyclic_register(&cyclic_test.cyclic, test_cb, 10 * 1000, "cyclic_test");
-+	ut_asserteq(ret, 0);
  
- 	/* Execute all registered cyclic functions */
- 	schedule();
-@@ -37,3 +40,19 @@ static int dm_test_cyclic_running(struct unit_test_state *uts)
+ 	/* Turn on SFP+ transmitters */
+ 	ofnode_for_each_compatible_node(node, "ethernet,sfp-slot") {
+@@ -358,13 +359,18 @@ int board_late_init(void)
+ 
+ 	/* Register cyclic function for PCIe FLR fixup */
+ 	cyclic = calloc(1, sizeof(*cyclic));
+-	if (cyclic) {
+-		cyclic_register(cyclic, octeon_board_restore_pf, 100,
+-				"pcie_flr_fix");
+-	} else {
+-		printf("Registering of cyclic function failed\n");
++	if (!cyclic) {
++		printf("Registering of cyclic function failed, ENOMEM\n");
++		/* Do not exit with error code, let the board boot somehow. */
++		return 0;
+ 	}
+ 
++	ret = cyclic_register(cyclic, octeon_board_restore_pf, 100,
++			      "pcie_flr_fix");
++	/* Do not exit with error code, let the board boot somehow. */
++	if (ret)
++		printf("Registering of cyclic function failed, %d\n", ret);
++
  	return 0;
  }
- COMMON_TEST(dm_test_cyclic_running, 0);
-+
-+static int dm_test_cyclic_reregister(struct unit_test_state *uts)
-+{
-+	int ret;
-+
-+	cyclic_test.called = false;
-+	ret = cyclic_register(&cyclic_test.cyclic, test_cb, 10 * 1000, "cyclic_test1");
-+	ut_asserteq(ret, 0);
-+	ret = cyclic_register(&cyclic_test.cyclic, test_cb, 10 * 1000, "cyclic_test2");
-+	ut_asserteq(ret, -EALREADY);
-+
-+	cyclic_unregister(&cyclic_test.cyclic);
-+
-+	return 0;
-+}
-+COMMON_TEST(dm_test_cyclic_reregister, 0);
+ 
 -- 
 2.45.2
 
