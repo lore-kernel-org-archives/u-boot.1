@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF1CCC02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 07:25:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA49C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 07:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 809F980748;
-	Sat, 18 Jan 2025 08:25:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 236D2807A7;
+	Sat, 18 Jan 2025 08:29:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A5D+A+XD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gXTS+5lO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BE6E80757; Sat, 18 Jan 2025 08:25:21 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id C0340807B9; Sat, 18 Jan 2025 08:29:47 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 792B28063E
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:25:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 169D5807A7
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:29:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5d3d14336f0so5072696a12.3
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 23:25:19 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-aaf60d85238so470118466b.0
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 23:29:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737185119; x=1737789919; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737185382; x=1737790182; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q6NM5SoYKjTNB7MotZdjeLUY0Rg5KV7cRGj7gqNG/rA=;
- b=A5D+A+XDqGjExT76yMhL74FvS/xgvdC6JASn9J+u+7YCjm5hCGDtFhV9wrkUUbCqKS
- ngUULvzo24aZYuaFZhCuS2M3EHR5Isn1P6lngmmTjMVhfWzygNahJ7A/aav0r2eQOW0g
- eqBIzos2VEWtVZCl+1NFNLMX+ieqGo6OG7XEfW+X1JFrYBFGSqA1LZAY4JK+i3SBA9F/
- OdltzoZPo4nC3VtdYWpMw7b3DEi8UhCol8kVloX7r4NJ0qU7+Jz9whubMEA8g2keyuVG
- oFBPJluP8C6cPCag7GXoNCC0fg9ayB+WtlhrIw+Joe6ht6AMZmLgz4U4Jdf9xZ9soHB1
- /iGA==
+ bh=c2AmFxt4+aN7bqCGwSgc6MOH4S2fqgDX+AG+SrwurYI=;
+ b=gXTS+5lOBEvpJ0jaX9D5BQgvkuW6hV6KQiK4WLAx4P05hulw2KcLy/HR9H7DApEPSF
+ SAZ5s+r98gFC0vEnrpdvD2esSOdhmja3t90vdCGoC71e+/FreVV32n9/fAYBfR9uoQP7
+ RIwC1b7/jHhYrxHvctWPISPtOJbkbPP+DNU4/kn/l0CfsawsttDOB7JT+MYniinCctoO
+ MydjMOs07Ps6JEP1p6slLt4Eq+NNMFGhkkHozexY8mrianhRF1xtaWHQCrlE5LNIhXsY
+ spdotqNaoPyRgE9WuSNwXKyht5f6bHWy5aG5phepZuj4fz26iV8bOv/4dEnb/OjKvzxM
+ /LvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737185119; x=1737789919;
+ d=1e100.net; s=20230601; t=1737185382; x=1737790182;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q6NM5SoYKjTNB7MotZdjeLUY0Rg5KV7cRGj7gqNG/rA=;
- b=O0eqVuTBBhGzr7Pf6Bl6+Hc1ODxjiir5M8gGEiciXSUSWiDMWYXoUBVbikzqjW9eVv
- hyVcTwwGQV3DOKVmZNfOyCPK4PQ+EU9eHaTIH3rhNmbCDoe58qgbxL05W7O3dCXjt6SK
- /catobJCMN/TbdsGcr+D4zmESUnsIwomlih9iwntuV/cT/xAlLyTRPNLLTpGu1AAmS3R
- bBtrkH8lLSYa0cMD64ORBFbH5Dls13WkwnwhuBMoGIGPQBnZWfD28sBClTaqWNbakgin
- uPsXP6O8JZgz1e30VHZDgAnQHSne23iC8/T1/eQkavzr+Q8PSgeqaYEhoI/Lt+57qM/u
- khAg==
-X-Gm-Message-State: AOJu0YxzecnRkOp7D1HjHH3NHMqcfuoddJW7Pi+FCHlDbYQEWO11QLcm
- M6/MNFYJ99Xiqqtumhes0j1QORaFSnTwJC1ZfTv/fNDq3C26mz8ns9Bheg==
-X-Gm-Gg: ASbGnctASJjA5cgIrh21CXS042gnmOflPzLLHDuXA3zGycvQSJD0Ln0xfnBCXDstA61
- 6cwF5s+Zd5h8nW8JhnypTllJpotPSTsYVpFM/egSAuWDXC4kZMaG9MfOCrYhJJz4hfRzDDRQ3Jb
- 8lHsmTNq86xGiY3ZjAeSbxDDhnRyRLE81U2p4qOsM4l0vDdQ1uCROSctB7KSlB6Ff+drNGT3zIg
- /0MIoJdM4IW/QMsy0aD9mqJHUYoe6i/ACS73pdu63nPlbIut7/rCSwLMr2tgNLrv0lQRIvDN85e
- HHgmUpBx6hIasuw=
-X-Google-Smtp-Source: AGHT+IGWa/8JOrQHxX/rMghlDOH7g+OOw5DujSYHR6LzG8RJbAwSGcXxZVDvheVQPXHNH493kDeWHg==
-X-Received: by 2002:a17:907:3f8f:b0:ab3:3184:6890 with SMTP id
- a640c23a62f3a-ab38b2eb297mr537331466b.33.1737185118715; 
- Fri, 17 Jan 2025 23:25:18 -0800 (PST)
+ bh=c2AmFxt4+aN7bqCGwSgc6MOH4S2fqgDX+AG+SrwurYI=;
+ b=Zm4yRzngSwBsyUUAqxRo3VpdUkSwz9Fu/MO78zDJvVvmzHocIJCsLJj+Z01ouEQl8n
+ ASxCGtsWdbs8Nxwg+3zRvsa5BWNXWMnhssxIc2HjgUf9mF4f4uYvZvDkxcThYWS2ARmK
+ AqI4vtzBpbpoeJaRkmt/KRRMccW+qQBdI1+UDAx0Oo6rdm5aTjJXkC8nK8IyA51litiF
+ khRe8PhYXhdpdKWHaVzAj1AdvJy/vUAWbnEkYch3Yu7E+c40hOJquQVI+1/IOh5P8Vcq
+ Zx+HWh6/ETKT/D86LL+kkWOXj4qWVnLWS2b0DzZxjsO+tl9SWIqQ5i78ZWD34XFB9DWV
+ qNvQ==
+X-Gm-Message-State: AOJu0YxhLsSjZg5WuSPCj7YnuTVvTdU3vmNSXHEMyLUdV33zt736V/ms
+ cQzSFYRrzhZpIyJkJJGbd9HfdsdgtSOTu/MagIEqAX/HeQde0uWNAjI0vA==
+X-Gm-Gg: ASbGnctif2qhqsq1KVENfAZHIbzi+n8IVEIpp2ECS5LiGoHgLy9t2xBFBAUzsKv68nH
+ OEU8+FAB4YPYh4InUaxY8LqoCm9TWkevIBRghCuZRck1PjHOU9e1Q9c+/go+TgHpNSyVlsfqAXQ
+ GvvSS4WcbD7ExK4pqr5tAAtlHytonr+ocLHsJm5x3bMIVbXRNloRBb+SsAef+0hK01NSOJpWA4c
+ jzHF/eBbasM3woQlQL9jGV0EyrXJf0LAJjT9Xsuw6ueIWajX1GDbhnlpOrPMssz7ntttqZF8rVK
+ ip3XR+H0UdFnINE=
+X-Google-Smtp-Source: AGHT+IHR7qTc96Z2y9tFOwncSihKZnT4bJk0zyDZbwWCUnNXwUqqYIL4r3LTH0yl+gNfwdEW7rerWw==
+X-Received: by 2002:a17:907:9408:b0:aab:daf9:972 with SMTP id
+ a640c23a62f3a-ab38b29cf07mr489715566b.28.1737185382455; 
+ Fri, 17 Jan 2025 23:29:42 -0800 (PST)
 Received: from jernej-laptop.localnet ([188.159.248.16])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab384fc35ffsm287878166b.160.2025.01.17.23.25.17
+ a640c23a62f3a-ab384d2e519sm290242066b.83.2025.01.17.23.29.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jan 2025 23:25:17 -0800 (PST)
+ Fri, 17 Jan 2025 23:29:41 -0800 (PST)
 From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -76,13 +76,12 @@ To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
 Cc: Tom Rini <trini@konsulko.com>, Cody Eksal <masterr3c0rd@epochal.quest>,
  Simon Glass <sjg@chromium.org>, linux-sunxi@lists.linux.dev,
  Parthiban <parthiban@linumiz.com>
-Subject: Re: [PATCH 5/8] pinctrl: sunxi: add Allwinner A100/A133 pinctrl
- description
-Date: Sat, 18 Jan 2025 08:25:16 +0100
-Message-ID: <3329551.aeNJFYEL58@jernej-laptop>
-In-Reply-To: <20250117014537.22513-6-andre.przywara@arm.com>
+Subject: Re: [PATCH 6/8] power: pmic: sunxi: add SPL support for the AXP803
+Date: Sat, 18 Jan 2025 08:29:40 +0100
+Message-ID: <8475686.T7Z3S40VBb@jernej-laptop>
+In-Reply-To: <20250117014537.22513-7-andre.przywara@arm.com>
 References: <20250117014537.22513-1-andre.przywara@arm.com>
- <20250117014537.22513-6-andre.przywara@arm.com>
+ <20250117014537.22513-7-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -102,15 +101,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne petek, 17. januar 2025 ob 02:45:34 Srednjeevropski standardni =C4=8Das =
+Dne petek, 17. januar 2025 ob 02:45:35 Srednjeevropski standardni =C4=8Das =
 je Andre Przywara napisal(a):
-> The Allwinner A100 SoC has been around for a while, and has now seemingly
-> been replaced with its close sibling A133.
+> The AXP803 has been around for about a decade now, but so far we didn't
+> need SPL support, since the DRAM rail was wired up correctly at reset.
 >=20
-> Add the required mapping between the pinmux group strings and their
-> respective mux value, as far as used by U-Boot proper. Linux has some
-> basic (clock and pinctrl) support for a while, so we can build on the
-> names already used there.
+> Now some boards using the A133 SoC use the (compatible) AXP707 with DDR4
+> memory, which requires the SPL to set the required 1.1V voltage manually.
+>=20
+> Add the descriptions for the DC/DC regulators of the AXP803, and enable
+> that when CONFIG_AXP803_POWER is enabled.
 >=20
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
