@@ -4,88 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F07C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 07:16:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E1A2C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 07:16:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 376B080755;
-	Sat, 18 Jan 2025 08:16:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8464780748;
+	Sat, 18 Jan 2025 08:16:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NseWb7ji";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Hw+nmfPJ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pXcxY0vV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D953A80748; Sat, 18 Jan 2025 08:16:28 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7089980758; Sat, 18 Jan 2025 08:16:39 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AAAA80755
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:16:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E9C980761
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:16:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-aab6fa3e20eso526263966b.2
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 23:16:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737184585; x=1737789385; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tvmsiMcnF2/uG8bi1GujCIOYQ4DypSOlsDW3rRw14hc=;
- b=NseWb7jik/DKGad/VkeAXJcfwBfZslC4ef1MPR/hUAlIsl+WjcAJY7+a3Ii9JGFSpm
- 28fzOSQVW7UmRGDdeaTWmY7+ZsCuNxObM+1flurAqOByjv6HWPxw3vMVXVPIjRPCpqJf
- FsCsklfcCk2QL1rv8/7jV995WjWoNyolE0xsmGHr7RILjgZWh2I268nPnwWQW1AU8n3C
- iegyaYci8RiCk/URmiuK9BCcNP42O7QKBoZ7ivvnZClATdFjyMzr/96SXIkAOjsaDs0/
- osuF6HPkul2t6ILmqIouYOk+x5so0EnqEzPYq74b9BqWgCf4o7TOZlxG3e7Anl9uEBHt
- JYSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737184585; x=1737789385;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tvmsiMcnF2/uG8bi1GujCIOYQ4DypSOlsDW3rRw14hc=;
- b=v53muzISAztJX8+Nt5tAh8NI2Favau8yCr6YJVB9Bnz/cg0oHz9z5Q5rbhdMe5kMlX
- GXEfHEMHOOBVvKylvG7tKYLXVVSfl9sKPLOA2VCDI/ClNn9C6bMm1iFqUsv+RtOUF/TD
- YLLLMIWZD+P2aV3+xmckf8TfYQ7zqMZ5hiocheKU70gMreScTlvviVGYb2EbwH9rnhl7
- 7hoQeP2AoNt/E5EJd9UyQwmH8531Mb2mfOkoJR5IL+Dgg+xqE7dDojHJIGaV7ZjRnhM0
- HEmHAwz9HAYXAzD9kmcGsGpe/ZfdYAEbXQeFHIOyuC6HhMpqm3l10dWAY/aMALJHvQvH
- 5dRQ==
-X-Gm-Message-State: AOJu0Yx6V6J7Bz6StMJIqD8/gvz6TOnhWNXs5Cx6plEJD081G3Hg9xc+
- jR8sCPSJhqCAMmIm8U7JoO9gHxZmHZWT3Pr3IU/LR6ddtj6MwzER8ki1ig==
-X-Gm-Gg: ASbGncsyACmkzkE2LiWaE6M6YT2j4dGdBCbIFgCssCWBOIbBJY4j5rfMLAe609lkfTe
- 87gOebIbxeNIDAHUx6hoATxmiZV4JUS30Kz0ujEfjjJcjDdb7cMfYz9xhyrAlc77s1P3sAGjQJA
- BD/PaHiLgKQHjQ0zolBvyAHqVCxYDqndCYEkgvT3iFF31JyufmGC+MbLFamTASh9deX8Cpzym37
- 1mcOF/HzCzsOPA8ptY+nw3IHUyVS8xE24GDuTnkm2agA9T2+0tZo/8IEarPiNjA9E5X4U6OmPrH
- VGXKn2dlFui0gls=
-X-Google-Smtp-Source: AGHT+IGLfOUnmOlf0dfv2EPZsI66QYNfhjl0KwhCdKMeegq4EfqhcelIy5iL++pD0InGzuI7g5FXdQ==
-X-Received: by 2002:a17:907:1c19:b0:aab:dee6:a3a2 with SMTP id
- a640c23a62f3a-ab38b4c6500mr434180366b.47.1737184584743; 
- Fri, 17 Jan 2025 23:16:24 -0800 (PST)
-Received: from jernej-laptop.localnet ([188.159.248.16])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab384ce0f58sm288083666b.48.2025.01.17.23.16.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jan 2025 23:16:24 -0800 (PST)
-From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Andre Przywara <andre.przywara@arm.com>
-Cc: Tom Rini <trini@konsulko.com>, Cody Eksal <masterr3c0rd@epochal.quest>,
- Simon Glass <sjg@chromium.org>, linux-sunxi@lists.linux.dev,
- Parthiban <parthiban@linumiz.com>
-Subject: Re: [PATCH 1/8] sunxi: clock: improve grouping of default clock
- register values
-Date: Sat, 18 Jan 2025 08:16:22 +0100
-Message-ID: <12589905.O9o76ZdvQC@jernej-laptop>
-In-Reply-To: <20250117014537.22513-2-andre.przywara@arm.com>
-References: <20250117014537.22513-1-andre.przywara@arm.com>
- <20250117014537.22513-2-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YZnw40p1dz9sbl;
+ Sat, 18 Jan 2025 08:16:36 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737184596;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FAsQQZmOwSAJ+788LXWP6p6kISKKQWabvrDQnGR0nUQ=;
+ b=Hw+nmfPJZkcvyjInVXah+olILQzm07+EnHvwYBAFTP6YuSjuQSAnnCrYceUQR77jDLICfR
+ 2XhWelI8HMDFQzKbeP6pswIROp4mZzvqOcSOIH2eSHM3VSTrR7dGR2LR0W3MPxZzg9Ssv/
+ MmO8ODztlrZX7wXrX05T5y+RSFwgkVwadD7wrfRn1sAiSQfACTtU7jO3ZdA92ue4mIuhZ/
+ Y2tD6qusef1Z9lqj7sxGM26OWtJLGjwGojRs/ilITpF5KT85igs1zyU8/n0ULC2a9SRirL
+ ZyaW0Hqzzd1qmmEF6smcF3HVfxcym/ezhe5BNvRuMA968ICy83mx2+23FjthMw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737184594;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FAsQQZmOwSAJ+788LXWP6p6kISKKQWabvrDQnGR0nUQ=;
+ b=pXcxY0vVNClTthqNrO5z9WEzN6cxsz+quVj0ZeJSR6MMTGiu+luLr4ntSqyBdZpfRQwnaP
+ z9tTHOoaZDcjF6Ryl9V8JW1aqsdI/wuaQKlygmdnaqpRvguTZ/oGOjMgOQH9p9gislxInZ
+ R/Teo0dKPuegpfZL/Qt5ljD2Nnsrm4FxorF8zJ8q21nB50mG0Xw6vvoCG7c2RsP/7sHtcY
+ EN7TskIYQ6zddX2v/cYwS7IROnrzZ++caWX2YDS5/KBjOwAq4IbTLtVWkXqvz7aKJiVLqx
+ tfFiecEL2tMVdiVKE6EGKDXc1iEZ5T+GLpPwR5wljtsTWLpDaK5Bi/IniOj9QQ==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Chris Paterson <chris.paterson2@renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3] arm64: dts: renesas: Deduplicate extalr_clk bootph-all
+Date: Sat, 18 Jan 2025 08:15:52 +0100
+Message-ID: <20250118071617.183795-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 8e4c23af7f21fd597a6
+X-MBO-RS-META: 1eksn8j1nshjrixope31hr9wbzyueg4g
+X-Rspamd-Queue-Id: 4YZnw40p1dz9sbl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,24 +86,254 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne petek, 17. januar 2025 ob 02:45:30 Srednjeevropski standardni =C4=8Das =
-je Andre Przywara napisal(a):
-> With each new SoC added to the clock_sun50i_h6.h header file, we add a
-> list of default values for the bus clock registers. This list gets a bit
-> hard to read, as the spacing between the lines looks confusing.
->=20
-> Tighten the lines by removing empty lines, to make it more obvious which
-> values belong together. Also remove those comments that were more or
-> less duplicating the next code line, and didn't add any information.
->=20
-> This makes it easier to find existing values and to add support for new
-> SoCs.
->=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Most R-Car Gen3 and Gen4 systems require extalr_clk very early
+in the boot process. Currently the extalr_clk { bootph-all } DT
+property to indicate this clock should be available early is set
+in each SoC U-Boot DT extras file. Deduplicate this assignment to
+new common r8a779x-rcar64-u-boot.dtsi file.
 
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Note that R-Car Gen3 R8A77990 E3 and R8A77995 D3 and RZ R8A774C0
+do not require extalr_clk early, therefore these SoCs still include
+plain r8a779x-u-boot.dtsi in their U-Boot DT extras .
 
-Best regards,
-Jernej
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Chris Paterson <chris.paterson2@renesas.com>
+Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: Rebase on u-boot/next
+V3: Fix up R8A774C0
+---
+ arch/arm/dts/r8a774a1-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a774b1-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a774e1-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77951-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77960-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77965-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77970-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77980-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a779a0-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a779f0-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a779g0-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a779x-rcar64-u-boot.dtsi | 12 ++++++++++++
+ 12 files changed, 23 insertions(+), 55 deletions(-)
+ create mode 100644 arch/arm/dts/r8a779x-rcar64-u-boot.dtsi
 
+diff --git a/arch/arm/dts/r8a774a1-u-boot.dtsi b/arch/arm/dts/r8a774a1-u-boot.dtsi
+index 3530eeb2718..bd91a963cd6 100644
+--- a/arch/arm/dts/r8a774a1-u-boot.dtsi
++++ b/arch/arm/dts/r8a774a1-u-boot.dtsi
+@@ -5,8 +5,4 @@
+  * Copyright (C) 2021 Renesas Electronics Corporation
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
+-
+-&extalr_clk {
+-	bootph-all;
+-};
++#include "r8a779x-rcar64-u-boot.dtsi"
+diff --git a/arch/arm/dts/r8a774b1-u-boot.dtsi b/arch/arm/dts/r8a774b1-u-boot.dtsi
+index 07aeabc46b4..38a82f065c0 100644
+--- a/arch/arm/dts/r8a774b1-u-boot.dtsi
++++ b/arch/arm/dts/r8a774b1-u-boot.dtsi
+@@ -5,8 +5,4 @@
+  * Copyright (C) 2021 Renesas Electronics Corp.
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
+-
+-&extalr_clk {
+-	bootph-all;
+-};
++#include "r8a779x-rcar64-u-boot.dtsi"
+diff --git a/arch/arm/dts/r8a774e1-u-boot.dtsi b/arch/arm/dts/r8a774e1-u-boot.dtsi
+index 2202731ccb3..f314b2b0cf8 100644
+--- a/arch/arm/dts/r8a774e1-u-boot.dtsi
++++ b/arch/arm/dts/r8a774e1-u-boot.dtsi
+@@ -5,8 +5,4 @@
+  * Copyright (C) 2020 Renesas Electronics Corp.
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
+-
+-&extalr_clk {
+-	bootph-all;
+-};
++#include "r8a779x-rcar64-u-boot.dtsi"
+diff --git a/arch/arm/dts/r8a77951-u-boot.dtsi b/arch/arm/dts/r8a77951-u-boot.dtsi
+index c16c5116592..768d633ded0 100644
+--- a/arch/arm/dts/r8a77951-u-boot.dtsi
++++ b/arch/arm/dts/r8a77951-u-boot.dtsi
+@@ -5,11 +5,7 @@
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
+-
+-&extalr_clk {
+-	bootph-all;
+-};
++#include "r8a779x-rcar64-u-boot.dtsi"
+ 
+ / {
+ 	soc {
+diff --git a/arch/arm/dts/r8a77960-u-boot.dtsi b/arch/arm/dts/r8a77960-u-boot.dtsi
+index 2245be2aa76..db062f8e8c7 100644
+--- a/arch/arm/dts/r8a77960-u-boot.dtsi
++++ b/arch/arm/dts/r8a77960-u-boot.dtsi
+@@ -5,11 +5,7 @@
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
+-
+-&extalr_clk {
+-	bootph-all;
+-};
++#include "r8a779x-rcar64-u-boot.dtsi"
+ 
+ / {
+ 	soc {
+diff --git a/arch/arm/dts/r8a77965-u-boot.dtsi b/arch/arm/dts/r8a77965-u-boot.dtsi
+index f39acc237d3..d67e94e318b 100644
+--- a/arch/arm/dts/r8a77965-u-boot.dtsi
++++ b/arch/arm/dts/r8a77965-u-boot.dtsi
+@@ -5,11 +5,7 @@
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
+-
+-&extalr_clk {
+-	bootph-all;
+-};
++#include "r8a779x-rcar64-u-boot.dtsi"
+ 
+ / {
+ 	soc {
+diff --git a/arch/arm/dts/r8a77970-u-boot.dtsi b/arch/arm/dts/r8a77970-u-boot.dtsi
+index 7900c641ba1..8dfa56c2f13 100644
+--- a/arch/arm/dts/r8a77970-u-boot.dtsi
++++ b/arch/arm/dts/r8a77970-u-boot.dtsi
+@@ -5,11 +5,7 @@
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
+-
+-&extalr_clk {
+-	bootph-all;
+-};
++#include "r8a779x-rcar64-u-boot.dtsi"
+ 
+ / {
+ 	soc {
+diff --git a/arch/arm/dts/r8a77980-u-boot.dtsi b/arch/arm/dts/r8a77980-u-boot.dtsi
+index aa7e058c585..088839907c2 100644
+--- a/arch/arm/dts/r8a77980-u-boot.dtsi
++++ b/arch/arm/dts/r8a77980-u-boot.dtsi
+@@ -5,11 +5,7 @@
+  * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
+-
+-&extalr_clk {
+-	bootph-all;
+-};
++#include "r8a779x-rcar64-u-boot.dtsi"
+ 
+ / {
+ 	soc {
+diff --git a/arch/arm/dts/r8a779a0-u-boot.dtsi b/arch/arm/dts/r8a779a0-u-boot.dtsi
+index 2b6d6ef05dc..f506a666518 100644
+--- a/arch/arm/dts/r8a779a0-u-boot.dtsi
++++ b/arch/arm/dts/r8a779a0-u-boot.dtsi
+@@ -5,7 +5,7 @@
+  * Copyright (C) 2020 Renesas Electronics Corp.
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
++#include "r8a779x-rcar64-u-boot.dtsi"
+ 
+ / {
+ 	soc {
+@@ -19,7 +19,3 @@
+ 		};
+ 	};
+ };
+-
+-&extalr_clk {
+-	bootph-all;
+-};
+diff --git a/arch/arm/dts/r8a779f0-u-boot.dtsi b/arch/arm/dts/r8a779f0-u-boot.dtsi
+index 0f98c09fc52..08d32fef2b9 100644
+--- a/arch/arm/dts/r8a779f0-u-boot.dtsi
++++ b/arch/arm/dts/r8a779f0-u-boot.dtsi
+@@ -5,7 +5,7 @@
+  * Copyright (C) 2021 Renesas Electronics Corp.
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
++#include "r8a779x-rcar64-u-boot.dtsi"
+ 
+ / {
+ 	soc {
+@@ -22,7 +22,3 @@
+ 		};
+ 	};
+ };
+-
+-&extalr_clk {
+-	bootph-all;
+-};
+diff --git a/arch/arm/dts/r8a779g0-u-boot.dtsi b/arch/arm/dts/r8a779g0-u-boot.dtsi
+index 2e731b628b3..10051c9dbfe 100644
+--- a/arch/arm/dts/r8a779g0-u-boot.dtsi
++++ b/arch/arm/dts/r8a779g0-u-boot.dtsi
+@@ -5,7 +5,7 @@
+  * Copyright (C) 2021 Renesas Electronics Corp.
+  */
+ 
+-#include "r8a779x-u-boot.dtsi"
++#include "r8a779x-rcar64-u-boot.dtsi"
+ 
+ / {
+ 	binman: binman {
+@@ -139,10 +139,6 @@
+ 	bootph-all;
+ };
+ 
+-&extalr_clk {
+-	bootph-all;
+-};
+-
+ &hscif0 {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/dts/r8a779x-rcar64-u-boot.dtsi b/arch/arm/dts/r8a779x-rcar64-u-boot.dtsi
+new file mode 100644
+index 00000000000..b59cc7deca7
+--- /dev/null
++++ b/arch/arm/dts/r8a779x-rcar64-u-boot.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Device Tree Source extras for U-Boot on R-Car 64bit SoC
++ *
++ * Copyright (C) 2024 Marek Vasut <marek.vasut+renesas@mailbox.org>
++ */
++
++#include "r8a779x-u-boot.dtsi"
++
++&extalr_clk {
++	bootph-all;
++};
+-- 
+2.45.2
 
