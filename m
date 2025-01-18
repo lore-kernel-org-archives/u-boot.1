@@ -4,67 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9EEC02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 13:22:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8FFDC02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 13:50:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4D87803CB;
-	Sat, 18 Jan 2025 14:22:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 132268063E;
+	Sat, 18 Jan 2025 14:50:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737206569;
-	bh=DbyTBSSKeslFOfwycpMk58TDyWziv0fYfqRniVzD6GQ=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=cijAWyof3zcZUc9MZvPC2Cj88b8boN+728ghhG8GEwldrya7rnNioovoAdmdlHLhQ
-	 Zq7aURUtFgDVZkXGNWPn2FUh/bE4ryxQOeiMbKE3JLD01R4sWb0dm6mq/Q54RDSNLC
-	 XlAWgQY2bXHi3ft1dcY1iICZqf46ypQQmufVPyjQDsb855e4qSqROYV5BBlSEhfBVK
-	 a0GdEt5HPlu+4G+ky/6AC987LPkNEVgQwGRcXqJ6XJtXA/BNeD0N8WrjMGjLsVseLB
-	 AvXVqALNKFvkyGf4bSy5dL1hQ9BJ6kqnBKZVb5w0S5cyp+TSLBvud3dqimryNRJDC5
-	 gsB8xWlT2vnDg==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="s521iGmz";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Rrrm4+0j";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27C058063E; Sat, 18 Jan 2025 14:22:47 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 9B73080657; Sat, 18 Jan 2025 14:50:55 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DF9280312
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 14:22:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 607FB80312
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 14:50:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="dgS5oh9D"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C6DF11040DBC5; Sat, 18 Jan 2025 14:22:39 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737206562;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YZyg06q6jz9sdR;
+ Sat, 18 Jan 2025 14:50:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737208253;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=DbyTBSSKeslFOfwycpMk58TDyWziv0fYfqRniVzD6GQ=;
- b=dgS5oh9DHuK42KGEJHjD/bpg6QmVh5lvYK+wtZt5x4ZdXgX5LFgxGL3NSXm7jwE+BImWd0
- jUOtyija54JT0jMp5iFjp31vi1YeMsvWExEzdyYIkJEFcZABLMlvy6CcyMimLo1m/zrJT7
- cnMkLT76FB5YmP7wl7yYkPf2ftxxyBt0QeFBNC+M71SbAFpjpzMTNfOL9bVj3tAg9WTYpO
- Lz5H7ktTFc8Wkb/K3IILBfqbcijbr+X/JPd0VacrCyxje+kPBsKJLucYnwJmcjhXQBXXom
- aiPLWXIfjKXIlx/epo+DaOFpU/uPeyE+XiM2L/eb8QuIB2OY4DO5RssEOG5/eQ==
-From: Heiko Schocher <hs@denx.de>
-To: u-boot@lists.denx.de
-Cc: Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1] led: add function naming option from linux
-Date: Sat, 18 Jan 2025 14:22:34 +0100
-Message-Id: <20250118132234.72046-1-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JIEtfDs6xE/MkYG3xzLauIIMe/DbJsGRUWTTK+vWUEA=;
+ b=s521iGmzdqQN9DaF59hDu7f/guD7wvOBDxzeaH3whcU1rip9LSqTD/CaP5m7T9f1p8q9T8
+ hSF7az9bIrQ9dGGQFyEtpv9d8KBipkP9CRTFAf/4xX2YSom2uCl3oc9VUsqEL/Bu0zAQfb
+ zJoJIN3ylDsdqNq1knY1PKufU2d+Q55G5SJjfQ4zQEZX02yWLTJ7sYjczzpHJ4vVDA4+Cp
+ gUDswzwPVd7+/w7fL2SRBVHWyfp3x05bTNHwo/yj7o/h2kW7fuk72ej5KJPta+EJQN5o89
+ wy+ZhX6SKhtl4o0zKNq//Q0SXwc4Svx4MufHan1njTJyhqOGtNEm5RmoKKt6mg==
+Message-ID: <689efebe-902c-4dbe-9af4-f2949df5bf5e@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737208251;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JIEtfDs6xE/MkYG3xzLauIIMe/DbJsGRUWTTK+vWUEA=;
+ b=Rrrm4+0j2aux1H1Dq/TR4d5WgXEZgFv3rtKbVlSs9XnY5ezzUPQZRXTi3exbSSS6WFavpJ
+ A8M8TuzPeRPfqpK4asI+gRJFMT0AMo+STVGwHR1QGyQiRL40GHMxjzf9zRgs1phe1IVuS1
+ UkAFkAT2SCFsMZ5LgquDkHUBsnZaZq47kVcVkDoMFCP/18Cwfu4C6r0+zKLKDdOI320Squ
+ 30xwbEZQ5ONaQkoYjWOeIe7TdYITl7g1tCugj+aPoR/5088E7QBxQHI3+agT3ozV6lvI/E
+ siy7L87RaASqLnIEQMpvaUXr3Itx+cdbg5M4RvEdcGefk+ZxHamftobCdCuKmA==
+Date: Sat, 18 Jan 2025 14:49:06 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+From: Marek Vasut <marek.vasut@mailbox.org>
+Subject: Re: [PATCH 2/3] image: Add support for starting TFA BL31 as fitImage
+ loadables
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Biju Das <biju.das.jz@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
+ <20250112223755.179959-2-marek.vasut+renesas@mailbox.org>
+ <TY3PR01MB113468B93D55B10C9D38ABFAE861F2@TY3PR01MB11346.jpnprd01.prod.outlook.com>
+ <4dddca99-dcc2-411e-af9a-b27115e60efa@mailbox.org>
+ <TY3PR01MB1134659D36AECF2B84B772B05861F2@TY3PR01MB11346.jpnprd01.prod.outlook.com>
+ <920265f4-4fdd-4c8c-a01c-bac9b9aafd9e@cherry.de>
+Content-Language: en-US
+In-Reply-To: <920265f4-4fdd-4c8c-a01c-bac9b9aafd9e@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 07f52a2d6078d8af3d0
+X-MBO-RS-META: 6nh8dqepw9toacyorjdu6duz7jiame8h
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,521 +108,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-in linux we have the option to create the name of a led
-optionally through the following properties:
+On 1/15/25 12:51 PM, Quentin Schulz wrote:
+> Hi Marek, Biju,
 
-- function
-- color
-- function-enumerator
+Hi,
 
-This patch adds support for parsing this properties if there
-is no label property.
+[...]
 
-To be as close as possible to linux import the following files
-from it:
+>>> See 3/3 , U-Boot runs in EL3 , before starting kernel it jumps into TFA
+>>> BL31 , TFA BL31 does its setup and switches from EL3 to EL2 , TFA 
+>>> BL31 returns to U-Boot
+>>> armv8_switch_to_el2 which checks if this code is running in EL2 (it 
+>>> is) and does the last few steps
+>>> before starting kernel, and then finally jumps to the kernel .
+>>
+>> Thanks for the explanation. I missed the details in 3/3.
+>>
+>> BL2(Secure)->U-boot(Secure)->BL31(Secure)-->U-boot(Normal)->Linux 
+>> Kernel(Normal)
+>>
+> 
+> If the fit image is missing the TF-A loadable property for example (and 
+> maybe in other corner case scenario?) the kernel will start in EL3 
+> though and fail very early since it needs TF-A BL31 for a few things. 
 
-include/dt-bindings/leds/common.h
-include/linux/uapi/linux/uleds.h
+Not quite, even if the TFA loadable is not present, the kernel will 
+still be started through armv8_switch_to_el2() , which will switch the 
+core into EL2 and then start the kernel. The kernel will however likely 
+fail to boot because it will attempt to access PSCI via SMC and there 
+will be nothing there, so it will fail at that point.
 
-base commit was:
-commit: b8f52214c61a ("Merge tag 'audit-pr-20241205' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/audit")
+There will be a follow up patch for R-Car Gen4, which will extend and 
+enable the current minimal R-Car Gen4 PSCI support in U-Boot, so even if 
+you do not bundle TFA into the fitImage, the kernel won't fail to boot 
+entirely.
 
-The led name is created in led_post_bind() and we need some
-storage place for it. Currently this patch prevents to use
-malloc() instead it stores the name in new member :
+With the current R-Car Gen4 PSCI implementation in U-Boot, the kernel 
+can boot and run on a single CPU core only, because the CPU core start 
+and stop callbacks are not implemented and not advertised to Linux yet.
 
-        char name[LED_MAX_NAME_SIZE];
+Any other SoC that would like to move TFA start after U-Boot start would 
+also likely have to implement at least minimal PSCI implementation to 
+provide a safety net for users who do not bundle the TFA BL31 PSCI 
+provider blob into the fitImage for some reason. The current R-Car Gen4 
+PSCI implementation is generic enough, that it can act as a template for 
+such other future SoC specific PSCI implementations.
 
-of struct led_uc_plat. While at it append led tests for the
-new feature.
+> However, part of the kernel code will actually run in EL3 and that could 
+> be enough to mess things up with a carefully crafted kernel image.
+> 
+> Is this actually possible or am I making stuff up? If it is possible, 
+> isn't that an issue?
+> 
+> Currently, this is already possible and has happened a few times already 
+> at my company with people forgetting to bundle TF-A in U-Boot and then 
+> the kernel would boot but stops early (no console output even IIRC). But 
+> the bootloader is not THAT often updated in the field compared to kernel 
+> (especially if coming from distros) which would now allow to store the 
+> TF-A, so this opens an even bigger can of worms?
 
-Signed-off-by: Heiko Schocher <hs@denx.de>
----
-as we introduce a new element in struct led_uc_priv, may we should add
-this functionality through a new Kconfig option? (Which also would make
-this optional and save some bytes for boards who do not need this...)
+See above, I think that answers this question.
 
-Ignored a lot of checkpatch warnigs for file include/dt-bindings/leds/common.h
+> In a way, it allows to 
+> update TF-A likely more securely
 
-WARNING: Block comments use * on subsequent lines
-+/*   Obsolete equivalents: "tpacpi::thinklight" (IBM/Lenovo Thinkpads),
-+     "lp5523:kb{1,2,3,4,5,6}" (Nokia N900) */
-WARNING: Block comments use a trailing */ on a separate line
-+     "lp5523:kb{1,2,3,4,5,6}" (Nokia N900) */
-WARNING: Block comments use * on subsequent lines
-+/* System LEDs, usually found on system body.
-+   platform::mute (etc) is sometimes seen, :mute would be better */
-WARNING: Block comments use a trailing */ on a separate line
-+   platform::mute (etc) is sometimes seen, :mute would be better */
-WARNING: Block comments use * on subsequent lines
-+/*   Used RGB notification LEDs common on phones.
-+     Obsolete equivalents: "status-led:{red,green,blue}" (Motorola Droid 4),
-WARNING: Block comments use a trailing */ on a separate line
-+     "lp5523:{r,g,b}" (Nokia N900) */
+That is very much the point of this, yes.
 
-as it is copied from linux
+Also, safely update as much as possible in lockstep, for example in case 
+someone has the idea to extend the TFA PSCI implementation with custom 
+SMC call handler(s) and make vendor Linux kernel fork depend on those 
+custom SMC calls for something (*). If the next kernel fork depends on a 
+different set of custom SMC calls (because stable ABI in such cases may 
+not be a guarantee) then updating only the kernel may lead to unbootable 
+system. Worse, updating the bootloader and kernel may lead to kernel 
+boot failure, AND if (usually seldom updated) recovery system kernel did 
+not get updated in lockstep with bootloader, recovery system which 
+depends on the old SMC ABI would also fail to boot, leaving the system 
+unrecoverable.
 
-commit: b8f52214c61a ("Merge tag 'audit-pr-20241205' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/audit")
+If both kernel and the custom TFA implementation are updated and booted 
+as part of the same fitImage file, the ABI problem goes away.
 
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=148&view=results
+Also, it allows for easy experimentation with the TFA, you can keep 
+swapping blobs in and out as needed to test them out.
 
+(*) This is not the case with Renesas to my knowledge , whew !
 
- arch/sandbox/dts/test.dts                |  37 +++++++-
- doc/device-tree-bindings/leds/common.txt |  28 ++++++
- drivers/led/led-uclass.c                 |  72 +++++++++++++-
- include/dt-bindings/leds/common.h        | 114 +++++++++++++++++++++++
- include/led.h                            |   2 +
- include/linux/uapi/linux/uleds.h         |  25 +++++
- test/dm/led.c                            |  22 ++++-
- test/dm/ofnode.c                         |   2 +-
- 8 files changed, 295 insertions(+), 7 deletions(-)
- create mode 100644 include/dt-bindings/leds/common.h
- create mode 100644 include/linux/uapi/linux/uleds.h
+> (which is VERY welcome on Rockchip for 
+> example, where we usually start new SoC bringups with a blob from 
+> Rockchip and then have upstream TF-A catch up a few years later. Having 
+> BL31 part of U-Boot is a huge pain because it is difficult for some 
+> devices to do safe updates of U-Boot) but may introduce some bigger 
+> security issues?
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index ae52b375ccb..b8f3012873e 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -13,6 +13,7 @@
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/gpio/sandbox-gpio.h>
- #include <dt-bindings/input/input.h>
-+#include <dt-bindings/leds/common.h>
- #include <dt-bindings/pinctrl/sandbox-pinmux.h>
- #include <dt-bindings/mux/mux.h>
- 
-@@ -820,7 +821,7 @@
- 			gpio-controller;
- 			#gpio-cells = <1>;
- 			gpio-bank-name = "a";
--			sandbox,gpio-count = <20>;
-+			sandbox,gpio-count = <25>;
- 			hog_input_active_low {
- 				gpio-hog;
- 				input;
-@@ -1010,6 +1011,40 @@
- 			/* label intentionally omitted */
- 			default-state = "off";
- 		};
-+
-+		led-20 {
-+			gpios = <&gpio_a 20 0>;
-+			/* label intentionally omitted */
-+			function = LED_FUNCTION_STATUS;
-+			color = <LED_COLOR_ID_RED>;
-+			function-enumerator = <20>;
-+		};
-+
-+		led-21 {
-+			gpios = <&gpio_a 21 0>;
-+			/* label intentionally omitted */
-+			function = LED_FUNCTION_STATUS;
-+			color = <LED_COLOR_ID_GREEN>;
-+		};
-+
-+		led-22 {
-+			gpios = <&gpio_a 22 0>;
-+			/* label intentionally omitted */
-+			function = LED_FUNCTION_STATUS;
-+		};
-+
-+		led-23 {
-+			gpios = <&gpio_a 23 0>;
-+			/* label intentionally omitted */
-+			color = <LED_COLOR_ID_GREEN>;
-+		};
-+
-+		led-24 {
-+			gpios = <&gpio_a 24 0>;
-+			label = "sandbox:function";
-+			function = LED_FUNCTION_STATUS;
-+			color = <LED_COLOR_ID_GREEN>;
-+		};
- 	};
- 
- 	wdt-gpio-toggle {
-diff --git a/doc/device-tree-bindings/leds/common.txt b/doc/device-tree-bindings/leds/common.txt
-index 2d88816dd55..10b2cd84113 100644
---- a/doc/device-tree-bindings/leds/common.txt
-+++ b/doc/device-tree-bindings/leds/common.txt
-@@ -4,6 +4,21 @@ Optional properties for child nodes:
- - label : The label for this LED.  If omitted, the label is
-   taken from the node name (excluding the unit address).
- 
-+- function:
-+  LED function. Use one of the LED_FUNCTION_* prefixed definitions
-+  from the header include/dt-bindings/leds/common.h. If there is no
-+  matching LED_FUNCTION available, add a new one.
-+
-+- color:
-+  Color of the LED. Use one of the LED_COLOR_ID_* prefixed definitions from
-+  the header include/dt-bindings/leds/common.h. If there is no matching
-+  LED_COLOR_ID available, add a new one.
-+
-+- function-enumerator:
-+  optional
-+    Integer to be used when more than one instance of the same function is
-+    needed, differing only with an ordinal number.
-+
- - linux,default-trigger :  This parameter, if present, is a
-     string defining the trigger assigned to the LED.  Current triggers are:
-      "backlight" - LED will act as a back-light, controlled by the framebuffer
-@@ -21,3 +36,16 @@ system-status {
- 	linux,default-trigger = "heartbeat";
- 	...
- };
-+
-+led-0 {
-+	function = LED_FUNCTION_STATUS;
-+	color = <LED_COLOR_ID_RED>;
-+	function-enumerator = <20>;
-+	...
-+};
-+
-+led-1 {
-+	function = LED_FUNCTION_STATUS;
-+	color = <LED_COLOR_ID_YELLOW>;
-+	...
-+};
-diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-index 760750568c0..564abf7eaca 100644
---- a/drivers/led/led-uclass.c
-+++ b/drivers/led/led-uclass.c
-@@ -13,6 +13,25 @@
- #include <dm/lists.h>
- #include <dm/root.h>
- #include <dm/uclass-internal.h>
-+#include <dt-bindings/leds/common.h>
-+
-+static const char * const led_colors[LED_COLOR_ID_MAX] = {
-+	[LED_COLOR_ID_WHITE] = "white",
-+	[LED_COLOR_ID_RED] = "red",
-+	[LED_COLOR_ID_GREEN] = "green",
-+	[LED_COLOR_ID_BLUE] = "blue",
-+	[LED_COLOR_ID_AMBER] = "amber",
-+	[LED_COLOR_ID_VIOLET] = "violet",
-+	[LED_COLOR_ID_YELLOW] = "yellow",
-+	[LED_COLOR_ID_IR] = "ir",
-+	[LED_COLOR_ID_MULTI] = "multicolor",
-+	[LED_COLOR_ID_RGB] = "rgb",
-+	[LED_COLOR_ID_PURPLE] = "purple",
-+	[LED_COLOR_ID_ORANGE] = "orange",
-+	[LED_COLOR_ID_PINK] = "pink",
-+	[LED_COLOR_ID_CYAN] = "cyan",
-+	[LED_COLOR_ID_LIME] = "lime",
-+};
- 
- int led_bind_generic(struct udevice *parent, const char *driver_name)
- {
-@@ -232,11 +251,56 @@ int led_activity_blink(void)
- #endif
- #endif
- 
--static const char *led_get_label(ofnode node)
-+static const char *led_get_function_name(struct udevice *dev)
-+{
-+	struct led_uc_plat *uc_plat;
-+	const char *func;
-+	u32 color;
-+	u32 enumerator;
-+	int ret;
-+	int cp;
-+
-+	if (!dev)
-+		return NULL;
-+
-+	uc_plat = dev_get_uclass_plat(dev);
-+	if (!uc_plat)
-+		return NULL;
-+
-+	if (uc_plat->label)
-+		return uc_plat->label;
-+
-+	/* Now try to detect function label name */
-+	func = dev_read_string(dev, "function");
-+	cp = dev_read_u32(dev, "color", &color);
-+	if (cp == 0 || func) {
-+		ret = dev_read_u32(dev, "function-enumerator", &enumerator);
-+		if (!ret) {
-+			snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-+				 "%s:%s-%d",
-+				 cp ? "" : led_colors[color],
-+				 func ? func : "", enumerator);
-+		} else {
-+			snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-+				 "%s:%s",
-+				 cp ? "" : led_colors[color],
-+				 func ? func : "");
-+		}
-+		uc_plat->label = uc_plat->name;
-+	}
-+
-+	return uc_plat->label;
-+}
-+
-+static const char *led_get_label(struct udevice *dev, ofnode node)
- {
- 	const char *label;
-+	const char *name;
- 
-+	name = ofnode_get_name(node);
- 	label = ofnode_read_string(node, "label");
-+	if (!label)
-+		label = led_get_function_name(dev);
- 	if (!label && !ofnode_read_string(node, "compatible"))
- 		label = ofnode_get_name(node);
- 
-@@ -249,7 +313,7 @@ static int led_post_bind(struct udevice *dev)
- 	const char *default_state;
- 
- 	if (!uc_plat->label)
--		uc_plat->label = led_get_label(dev_ofnode(dev));
-+		uc_plat->label = led_get_label(dev, dev_ofnode(dev));
- 
- 	uc_plat->default_state = LEDST_COUNT;
- 
-@@ -314,14 +378,14 @@ static int led_init(struct uclass *uc)
- #ifdef CONFIG_LED_BOOT
- 	ret = ofnode_options_get_by_phandle("boot-led", &led_node);
- 	if (!ret)
--		priv->boot_led_label = led_get_label(led_node);
-+		priv->boot_led_label = led_get_label(NULL, led_node);
- 	priv->boot_led_period = ofnode_options_read_int("boot-led-period-ms", 250);
- #endif
- 
- #ifdef CONFIG_LED_ACTIVITY
- 	ret = ofnode_options_get_by_phandle("activity-led", &led_node);
- 	if (!ret)
--		priv->activity_led_label = led_get_label(led_node);
-+		priv->activity_led_label = led_get_label(NULL, led_node);
- 	priv->activity_led_period = ofnode_options_read_int("activity-led-period-ms",
- 							    250);
- #endif
-diff --git a/include/dt-bindings/leds/common.h b/include/dt-bindings/leds/common.h
-new file mode 100644
-index 00000000000..4f017bea012
---- /dev/null
-+++ b/include/dt-bindings/leds/common.h
-@@ -0,0 +1,114 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * This header provides macros for the common LEDs device tree bindings.
-+ *
-+ * Copyright (C) 2015, Samsung Electronics Co., Ltd.
-+ * Author: Jacek Anaszewski <j.anaszewski@samsung.com>
-+ *
-+ * Copyright (C) 2019 Jacek Anaszewski <jacek.anaszewski@gmail.com>
-+ * Copyright (C) 2020 Pavel Machek <pavel@ucw.cz>
-+ */
-+
-+#ifndef __DT_BINDINGS_LEDS_H
-+#define __DT_BINDINGS_LEDS_H
-+
-+/* External trigger type */
-+#define LEDS_TRIG_TYPE_EDGE	0
-+#define LEDS_TRIG_TYPE_LEVEL	1
-+
-+/* Boost modes */
-+#define LEDS_BOOST_OFF		0
-+#define LEDS_BOOST_ADAPTIVE	1
-+#define LEDS_BOOST_FIXED	2
-+
-+/* Standard LED colors */
-+#define LED_COLOR_ID_WHITE	0
-+#define LED_COLOR_ID_RED	1
-+#define LED_COLOR_ID_GREEN	2
-+#define LED_COLOR_ID_BLUE	3
-+#define LED_COLOR_ID_AMBER	4
-+#define LED_COLOR_ID_VIOLET	5
-+#define LED_COLOR_ID_YELLOW	6
-+#define LED_COLOR_ID_IR		7
-+#define LED_COLOR_ID_MULTI	8	/* For multicolor LEDs */
-+#define LED_COLOR_ID_RGB	9	/* For multicolor LEDs that can do arbitrary color,
-+					   so this would include RGBW and similar */
-+#define LED_COLOR_ID_PURPLE	10
-+#define LED_COLOR_ID_ORANGE	11
-+#define LED_COLOR_ID_PINK	12
-+#define LED_COLOR_ID_CYAN	13
-+#define LED_COLOR_ID_LIME	14
-+#define LED_COLOR_ID_MAX	15
-+
-+/* Standard LED functions */
-+/* Keyboard LEDs, usually it would be input4::capslock etc. */
-+/*   Obsolete equivalent: "shift-key-light" */
-+#define LED_FUNCTION_CAPSLOCK "capslock"
-+#define LED_FUNCTION_SCROLLLOCK "scrolllock"
-+#define LED_FUNCTION_NUMLOCK "numlock"
-+#define LED_FUNCTION_FNLOCK "fnlock"
-+/*   Obsolete equivalents: "tpacpi::thinklight" (IBM/Lenovo Thinkpads),
-+     "lp5523:kb{1,2,3,4,5,6}" (Nokia N900) */
-+#define LED_FUNCTION_KBD_BACKLIGHT "kbd_backlight"
-+
-+/* System LEDs, usually found on system body.
-+   platform::mute (etc) is sometimes seen, :mute would be better */
-+#define LED_FUNCTION_POWER "power"
-+#define LED_FUNCTION_DISK "disk"
-+
-+/*   Obsolete: "platform:*:charging" (allwinner sun50i) */
-+#define LED_FUNCTION_CHARGING "charging"
-+/*   Used RGB notification LEDs common on phones.
-+     Obsolete equivalents: "status-led:{red,green,blue}" (Motorola Droid 4),
-+     "lp5523:{r,g,b}" (Nokia N900) */
-+#define LED_FUNCTION_STATUS "status"
-+
-+#define LED_FUNCTION_MICMUTE "micmute"
-+#define LED_FUNCTION_MUTE "mute"
-+
-+/* Used for player LEDs as found on game controllers from e.g. Nintendo, Sony. */
-+#define LED_FUNCTION_PLAYER1 "player-1"
-+#define LED_FUNCTION_PLAYER2 "player-2"
-+#define LED_FUNCTION_PLAYER3 "player-3"
-+#define LED_FUNCTION_PLAYER4 "player-4"
-+#define LED_FUNCTION_PLAYER5 "player-5"
-+
-+/* Miscelleaus functions. Use functions above if you can. */
-+#define LED_FUNCTION_ACTIVITY "activity"
-+#define LED_FUNCTION_ALARM "alarm"
-+#define LED_FUNCTION_BACKLIGHT "backlight"
-+#define LED_FUNCTION_BLUETOOTH "bluetooth"
-+#define LED_FUNCTION_BOOT "boot"
-+#define LED_FUNCTION_CPU "cpu"
-+#define LED_FUNCTION_DEBUG "debug"
-+#define LED_FUNCTION_DISK_ACTIVITY "disk-activity"
-+#define LED_FUNCTION_DISK_ERR "disk-err"
-+#define LED_FUNCTION_DISK_READ "disk-read"
-+#define LED_FUNCTION_DISK_WRITE "disk-write"
-+#define LED_FUNCTION_FAULT "fault"
-+#define LED_FUNCTION_FLASH "flash"
-+#define LED_FUNCTION_HEARTBEAT "heartbeat"
-+#define LED_FUNCTION_INDICATOR "indicator"
-+#define LED_FUNCTION_LAN "lan"
-+#define LED_FUNCTION_MAIL "mail"
-+#define LED_FUNCTION_MOBILE "mobile"
-+#define LED_FUNCTION_MTD "mtd"
-+#define LED_FUNCTION_PANIC "panic"
-+#define LED_FUNCTION_PROGRAMMING "programming"
-+#define LED_FUNCTION_RX "rx"
-+#define LED_FUNCTION_SD "sd"
-+#define LED_FUNCTION_SPEED_LAN "speed-lan"
-+#define LED_FUNCTION_SPEED_WAN "speed-wan"
-+#define LED_FUNCTION_STANDBY "standby"
-+#define LED_FUNCTION_TORCH "torch"
-+#define LED_FUNCTION_TX "tx"
-+#define LED_FUNCTION_USB "usb"
-+#define LED_FUNCTION_WAN "wan"
-+#define LED_FUNCTION_WAN_ONLINE "wan-online"
-+#define LED_FUNCTION_WLAN "wlan"
-+#define LED_FUNCTION_WLAN_2GHZ "wlan-2ghz"
-+#define LED_FUNCTION_WLAN_5GHZ "wlan-5ghz"
-+#define LED_FUNCTION_WLAN_6GHZ "wlan-6ghz"
-+#define LED_FUNCTION_WPS "wps"
-+
-+#endif /* __DT_BINDINGS_LEDS_H */
-diff --git a/include/led.h b/include/led.h
-index 64247cd3a70..ba42a5f69d2 100644
---- a/include/led.h
-+++ b/include/led.h
-@@ -10,6 +10,7 @@
- #include <stdbool.h>
- #include <cyclic.h>
- #include <dm/ofnode.h>
-+#include <linux/uapi/linux/uleds.h>
- 
- /**
-  * DOC: Overview
-@@ -86,6 +87,7 @@ struct led_sw_blink {
- struct led_uc_plat {
- 	const char *label;
- 	enum led_state_t default_state;
-+	char name[LED_MAX_NAME_SIZE];
- #ifdef CONFIG_LED_SW_BLINK
- 	struct led_sw_blink *sw_blink;
- #endif
-diff --git a/include/linux/uapi/linux/uleds.h b/include/linux/uapi/linux/uleds.h
-new file mode 100644
-index 00000000000..4d32a39965f
---- /dev/null
-+++ b/include/linux/uapi/linux/uleds.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0+ WITH Linux-syscall-note */
-+/*
-+ * Userspace driver support for the LED subsystem
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ */
-+#ifndef _UAPI__ULEDS_H_
-+#define _UAPI__ULEDS_H_
-+
-+#define LED_MAX_NAME_SIZE	64
-+
-+struct uleds_user_dev {
-+	char name[LED_MAX_NAME_SIZE];
-+	int max_brightness;
-+};
-+
-+#endif /* _UAPI__ULEDS_H_ */
-diff --git a/test/dm/led.c b/test/dm/led.c
-index e5b86326c3a..36652c2833a 100644
---- a/test/dm/led.c
-+++ b/test/dm/led.c
-@@ -20,7 +20,12 @@ static int dm_test_led_base(struct unit_test_state *uts)
- 	ut_assertok(uclass_get_device(UCLASS_LED, 1, &dev));
- 	ut_assertok(uclass_get_device(UCLASS_LED, 2, &dev));
- 	ut_assertok(uclass_get_device(UCLASS_LED, 3, &dev));
--	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_LED, 4, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 4, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 5, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 6, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 7, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 8, &dev));
-+	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_LED, 9, &dev));
- 
- 	return 0;
- }
-@@ -110,6 +115,21 @@ static int dm_test_led_label(struct unit_test_state *uts)
- 
- 	ut_asserteq(-ENODEV, led_get_by_label("sandbox:blue", &dev));
- 
-+	/* Test if function, color and function-enumerator naming works */
-+	ut_assertok(led_get_by_label("red:status-20", &dev));
-+
-+	/* Test if function, color naming works */
-+	ut_assertok(led_get_by_label("green:status", &dev));
-+
-+	/* Test if function, without color naming works */
-+	ut_assertok(led_get_by_label(":status", &dev));
-+
-+	/* Test if color without function naming works */
-+	ut_assertok(led_get_by_label("green:", &dev));
-+
-+	/* Test if function, color naming is ignored if label is found */
-+	ut_assertok(led_get_by_label("sandbox:function", &dev));
-+
- 	return 0;
- }
- DM_TEST(dm_test_led_label, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index f16b643fa3f..72f4e80f637 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -1580,7 +1580,7 @@ static int dm_test_ofnode_delete(struct unit_test_state *uts)
- 	ut_assert(!ofnode_valid(node));
- 	ut_assert(!ofnode_valid(ofnode_path("/leds/default_on")));
- 
--	ut_asserteq(2, ofnode_get_child_count(ofnode_path("/leds")));
-+	ut_asserteq(7, ofnode_get_child_count(ofnode_path("/leds")));
- 
- 	return 0;
- }
+U-Boot will run in EL3 instead of EL2 in this case, which gives it 
+complete unrestricted access to the entire system. It can act as a debug 
+tool, the way it was designed to work since the very beginning.
+
+Do you have anything specific in mind here ?
+
+> Finally, another question, what happens if we have a U-Boot with bundled 
+> TF-A BL31 AND it tries to boot a fitimage with a TF-A BL31 loadable? 
+
+It very much depends on the SoC specific TFA BL31 start handler 
+implementation (see patch 3/3). It is possible to add check in there to 
+test whether the system is already running in EL2 for example, and if 
+anything responds to PSCI version SMC call, and if so, skip starting the 
+TFA again.
+
+I don't think TFA BL31 can be started in EL2 in any case.
+
+> Should we only allow to load tf-a BL31 if running from EL3 (meaning if 
+> in EL2, TF-A is expected to be already running)?
+
+That's for the SoC specific handler to decide, see above.
+
 -- 
-2.20.1
-
+Best regards,
+Marek Vasut
