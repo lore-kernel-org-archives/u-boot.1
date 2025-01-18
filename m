@@ -4,74 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28478C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C765C02187
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:36:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA3FF80657;
-	Sat, 18 Jan 2025 05:35:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1781080657;
+	Sat, 18 Jan 2025 05:36:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fj5JXMqq";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NV7yCxQh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08DBD8070C; Sat, 18 Jan 2025 05:35:16 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id A5BF08070C; Sat, 18 Jan 2025 05:36:00 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4B4A8036F
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:35:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 37A308036F
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:35:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-aa6a92f863cso517454766b.1
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 20:35:13 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5d0d32cd31aso4159660a12.0
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 20:35:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737174913; x=1737779713; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737174957; x=1737779757; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=L1Eqabw6437JHFHJ6kYdeldHcQ4XEdsUJfUWc3v/l0Q=;
- b=Fj5JXMqqXD+4UXwYW3H2+AI5wcySP9dh6C0Oe0St+yJtowr7Wgi4Zm9oVsDkMxrqFW
- mN1vaBMNZgqvd7RGu8DKH0B/gSEFALk709285+7MiW/oqC3ZjWO6/8BPHAlfKJmAsAlS
- Fix+TBzZlSGrcCC4XyCaxbUSCKYmQ3Ua34ZEg=
+ bh=rkSXPyboaZKXeoq904zKYP25LjyRoiZO/EB+tdhAdf4=;
+ b=NV7yCxQhSkaN/Kph2fWhdCH9pdvTKmUBx8EzoSVKiUIW8CAELcJcMUjnAAFsXuf/3K
+ Sn/7RhOv9ItOLjjCEvXwrQ9rlDwv2TfUTKql+xhTAwBiPJ1QpFbAj++M+OQPSoBEfZ7p
+ 5GOyLK0fOYLipFJI7JtdRFMz1hErqG233dD+g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737174913; x=1737779713;
+ d=1e100.net; s=20230601; t=1737174957; x=1737779757;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=L1Eqabw6437JHFHJ6kYdeldHcQ4XEdsUJfUWc3v/l0Q=;
- b=lWjXNatiD9V8saNvI/Lr86E029jlRABfAIUKpykmsGEw7IfFKRwlo7biG8ZY4A1N2f
- R+fK1MgdkubexWw8jkyWLjGgEt8omglNu4K4Veqzo8msWrtKFHe6v0MbbShSG7QNnDRZ
- pNKtjfrxc5s7Kgj7cc6/ji6s96INC0SCQhMROQ6+AuW//4vLtVL8omgeVqe2NwL66l6T
- sY7wLNWS1+QgSRcGXQI33KI4vx0hnVL+h3yTwo3fJuEWvQ2EhcI5HD69/yfkZjwxw+lW
- u7jTBybAFhq9preqDPq6+G9R9ndjUnO1fgRLFlAjMSbWI5j7JvcZPYttfD+MdIffwwbb
- bbGQ==
-X-Gm-Message-State: AOJu0YylfpyLiEdVxai5dJ1pEqyNA03tED/+MpbtNWWIY0SuYWbs1KX8
- Km9AACv6ONoWG/3uh3VxYtmQnWTGRjMe4EvEtL1ldzYlCCm9khyQ/nX1Zfs8wPv/oNj/6ruYWT/
- FoF4H5wsnCrEhYONjh/faiFlq9WpvIo4qxOhoCsZ5Ei1zTZQ=
-X-Gm-Gg: ASbGnct2OcuKrKAGOcr1do0a8c5jVCyMJzMXVeldbM00CeG4tCIiaVY0TpAiZK6OOvZ
- OxM0M3cjDLBUIcRCJJi6QCknVJQ218n+IAedGTFQ1hhHRu2WTaYw9lJC71jRIpaInqa884exfRN
- xGOPT5AMJZ
-X-Google-Smtp-Source: AGHT+IG/dlmqHpWJu2hxVQo/gYyODfTuRS3ad7FjJrDLIjjTHVEzg0oi0JPlF8U6PeuWyOob3jOVfixZg/VzRGMBBso=
-X-Received: by 2002:a17:907:7b9c:b0:aae:ce4c:ca40 with SMTP id
- a640c23a62f3a-ab38b2e737cmr508957566b.32.1737174912808; Fri, 17 Jan 2025
- 20:35:12 -0800 (PST)
+ bh=rkSXPyboaZKXeoq904zKYP25LjyRoiZO/EB+tdhAdf4=;
+ b=uVtRIh5uX0IPPnSxAO9CV3r31KQXYoYDkdJnsmVT+qNBHCnqKcOzYKA5+qx/77pznn
+ nmYKMo3IejHGIb/M3y3UjjYvKQJbOPjCdCv7u0W1IEgCbxY70bJHLq4tosUQ1gjXINCP
+ vefkoNib1S5mjb4cELYS8JC0/zPbNVmlRU6Cs42via7ojxNQNqR8pO91ySNkz5cdJ5Nq
+ yMlmSUMF0r6OJ7vQzTp+CJoKJ96dJ7+rsgC3DMRh/iqcGJZ5vnxqVCvNlirZfoXIHXrk
+ l1pcrJPJM5Cz2+SOdp/M3qWjNm0Bgs13Ot/4vvNzabRkzYXlDxcgRQ8+YGAGFpbXuvro
+ DnWw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWzEFVIjonkjNvAFVdPco9BCTytLjSzHGr/Zcg1zysCY3qAT/rTD7Kxj+4xeDQhcOeB7v16pwM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOK/yscxIW1FvYIWbId9eA3fOzwhC7A4wQo+PhEaiFYfU3ZfkA
+ HsTdcswQcdqJbB90Ddj/VORWKxYDeVU+aeAJOiTKwi2EACQ9+TNDEsfrQRy4lFhaqOIMdWbeOpU
+ VaUo0YH/iTe6VUIfquEMnXH47Dg9ymMhGfXrb
+X-Gm-Gg: ASbGncsZ1HsrJGkiSERaP5Foivx/arq0BnIlCeVSIwiU3/tfOgmLow6NZxAHGQRndmK
+ 0GyKGH3nabpqVrDnQNW7ZGnWtLHUY7EgFuFM9l02GaH8uUyDKIX5e/pvTfB5R1t8d8nja8CdYqC
+ OskDPw3C0l
+X-Google-Smtp-Source: AGHT+IHp3VjRMAdtuCwk6S7vdqIZX3ZT6/Sw/tleHoQuIuqzwphU75RiXesIAnooL4tVXBG890uStEF8illLuEZv7hk=
+X-Received: by 2002:a05:6402:26c9:b0:5da:1219:c81 with SMTP id
+ 4fb4d7f45d1cf-5db7d300633mr11833624a12.16.1737174956426; Fri, 17 Jan 2025
+ 20:35:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20250106144755.3054780-1-sjg@chromium.org>
- <20250106144755.3054780-5-sjg@chromium.org>
- <CAC_iWjK2Arj5EkA8AsQh_BFGQoby5tNwf=GVpwSBaW8nBnQ_Yg@mail.gmail.com>
-In-Reply-To: <CAC_iWjK2Arj5EkA8AsQh_BFGQoby5tNwf=GVpwSBaW8nBnQ_Yg@mail.gmail.com>
+References: <CAFLszTieNX4-JJqQrdNdm+sBhnBHZrAwawvQ+J-D3s118uob2w@mail.gmail.com>
+ <20250107151127.GI3476@bill-the-cat>
+ <0d35cb20-3509-419b-ad4e-7736a35398f0@gmx.de>
+ <CAFLszTgWe7-zDejNzn1+QDLhjAHz8e=m+r5zYSmf91RAY=ZkTQ@mail.gmail.com>
+ <20250108191457.GQ3476@bill-the-cat>
+ <CAFLszTh8BZGEpTs_gxo89dMdd6v3PmuFtTMHxmfGXDUwmdaMfQ@mail.gmail.com>
+ <20250109165121.GZ3476@bill-the-cat>
+ <CAFLszThGNgH2rtLK5d+YEj4-p+cFpVLtMu_+Z_SHYbU8vp6Wkw@mail.gmail.com>
+ <20250110164829.GJ3476@bill-the-cat>
+ <CAFLszThVjiDgi5_V0yRbWo2pbbv3LEZA4TM=dkiJTd8D6gTe=g@mail.gmail.com>
+ <20250113202026.GC3476@bill-the-cat>
+In-Reply-To: <20250113202026.GC3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jan 2025 20:35:01 -0800
-X-Gm-Features: AbW1kvYBGpVABBlXJPLPs8Yuvr0w_a0DLjVSdskXzYpyt-cFoKt5IGPGJDmRzRQ
-Message-ID: <CAFLszTgDWbt9cM43XGPU4Ew9HxmPf1peEEP5Bw+cxHwV_EWjqw@mail.gmail.com>
-Subject: Re: [PATCH 4/8] efi_loader: Correct bounce-buffer setup
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Date: Fri, 17 Jan 2025 20:35:42 -0800
+X-Gm-Features: AbW1kvag6w8jeUJbTCpfC0dQIqiqY20KYnMfLtop7rS-7nL0-RFYeuya1jqg5Ek
+Message-ID: <CAFLszThscvJzBrnSovQsrMr5ie75NVc1yUss0-c_WZLksC7Rcg@mail.gmail.com>
+Subject: Re: [PATCH 0/8] efi_loader: Complete the bootflow_efi() test
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -90,71 +103,502 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Fri, 17 Jan 2025 at 03:34, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Mon, 13 Jan 2025 at 13:20, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Jan 13, 2025 at 12:01:36PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 10 Jan 2025 at 09:48, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Jan 10, 2025 at 06:40:37AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Thu, 9 Jan 2025 at 09:51, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Thu, Jan 09, 2025 at 08:02:01AM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Wed, 8 Jan 2025 at 12:15, Tom Rini <trini@konsulko.com>
 wrote:
+> > > > > > >
+> > > > > > > On Wed, Jan 08, 2025 at 10:02:52AM -0700, Simon Glass wrote:
+> > > > > > > > Hi Heinrich, Tom,
+> > > > > > > >
+> > > > > > > > On Tue, 7 Jan 2025 at 08:47, Heinrich Schuchardt <
+xypron.glpk@gmx.de> wrote:
+> > > > > > > > >
+> > > > > > > > > On 07.01.25 16:11, Tom Rini wrote:
+> > > > > > > > > > On Tue, Jan 07, 2025 at 06:57:50AM -0700, Simon Glass
+wrote:
+> > > > > > > > > >> Hi Heinrich,
+> > > > > > > > > >>
+> > > > > > > > > >> On Tue, 7 Jan 2025 at 06:11, Heinrich Schuchardt <
+xypron.glpk@gmx.de> wrote:
+> > > > > > > > > >>>
+> > > > > > > > > >>> On 07.01.25 13:15, Simon Glass wrote:
+> > > > > > > > > >>>> Hi Heinrich,
+> > > > > > > > > >>>>
+> > > > > > > > > >>>> On Mon, 6 Jan 2025 at 10:00, Heinrich Schuchardt <
+xypron.glpk@gmx.de> wrote:
+> > > > > > > > > >>>>>
+> > > > > > > > > >>>>> On 06.01.25 15:47, Simon Glass wrote:
+> > > > > > > > > >>>>>> This test was hamstrung in code review so this
+series is an attempt to
+> > > > > > > > > >>>>>> complete the intended functionality:
+> > > > > > > > > >>>>>>
+> > > > > > > > > >>>>>> - Check memory allocations look correct
+> > > > > > > > > >>>>>> - Check that exit-boot-services removes active-DMA
+devices
+> > > > > > > > > >>>>>> - Check that the bootflow is still present after
+testapp finishes
+> > > > > > > > > >>>>>>
+> > > > > > > > > >>>>>> The EFI functionality duplicates
+bootm_announce_and_cleanup() and still
+> > > > > > > > > >>>>>> uses the defunct board_quiesce_devices() so a nice
+cleanup would be to
+> > > > > > > > > >>>>>> call the bootm function instead, with suitable
+modifications. That would
+> > > > > > > > > >>>>>> allow bootstage to work too.
+> > > > > > > > > >>>>>>
+> > > > > > > > > >>>>>> This series is based on sjg/master since the EFI
+logging was rejected so
+> > > > > > > > > >>>>>> far.
+> > > > > > > > > >>>>>
+> > > > > > > > > >>>>> Yes, it was rejected because a solution at the
+lib/log.c level would be
+> > > > > > > > > >>>>> more generic.
+> > > > > > > > > >>>>
+> > > > > > > > > >>>> As I mentioned, that idea isn't suitable for
+programmatic use.
+> > > > > > > > > >>>
+> > > > > > > > > >>> What can be done with show_addr("mem", rec->memory);
+that log_debug()
+> > > > > > > > > >>> does not offer or which you could not do with a new
+log function in
+> > > > > > > > > >>> lib/log.c that takes variadic arguments?
+> > > > > > > > > >>
+> > > > > > > > > >> There are asserts in [1], for example. How do you
+propose to handle
+> > > > > > > > > >> that? See [2] for my previous explanation, quoted here:
+> > > > > > > > > >>
+> > > > > > > > > >>> CONFIG_LOG with a bloblist option would be a great
+idea, but it's hard
+> > > > > > > > > >>> to programmatically scan text...plus only the
+external call sites are
+> > > > > > > > > >>> actually logged.
+> > > > > > > > > >>
+> > > > > > > > > >> Also see the discussion on the original patch [3].
+There was also your
+> > > > > > > > > >> reply at [4], but I think you missed that this is
+intended for use in
+> > > > > > > > > >> unit tests (i.e. with ut_assert()).
+> > > > > > > > > >>
+> > > > > > > > > >> You also requested that this be generalised, rather
+than being
+> > > > > > > > > >> EFI-loader-specific. I have no objection to that, but
+don't have a use
+> > > > > > > > > >> case for it yet, so have deferred that to later. It's
+a fairly simple
+> > > > > > > > > >> change, if/when needed. If the series was not NAKed,
+I'd be happy to
+> > > > > > > > > >> do it now.
+> > > > > > > > > >>
+> > > > > > > > > >>>>
+> > > > > > > > > >>>>>
+> > > > > > > > > >>>>> Tom suggested not to send patches that are for
+private enjoyment to the
+> > > > > > > > > >>>>> mailing list.
+> > > > > > > > > >>>>
+> > > > > > > > > >>>> My contributions to U-Boot are only ever about
+private enjoyment :-)
+> > > > > > > > > >>>>
+> > > > > > > > > >>>> Do you have any comments on the patches?
+> > > > > > > > > >>
+> > > > > > > > > >> Regards,
+> > > > > > > > > >> Simon
+> > > > > > > > > >>
+> > > > > > > > > >> [1]
+https://patchwork.ozlabs.org/project/uboot/patch/20250106144755.3054780-6-sjg@chromium.org/
+> > > > > > > > > >> [2]
+https://lore.kernel.org/u-boot/CAFLszTjxOE_037+kR0jgdax80sBombYo_k0YgiuVnP=KZCOvuA@mail.gmail.com/
+> > > > > > > > > >> [3]
+https://lore.kernel.org/u-boot/CAC_iWjKtaN54B98OKbkoXkC_GmKJ=x+M4=UY_O6roSOpZaDxag@mail.gmail.com/
+> > > > > > > > > >> [4]
+https://lore.kernel.org/u-boot/D513D326-41A6-425E-B11F-85958065BCD2@gmx.de/
+> > > > > > > > > >
+> > > > > > > > > > Looking at the logging portions of the original series
+again, especially
+> > > > > > > > > > if this was made generic, we probably don't want to
+print to actual
+> > > > > > > > > > console every time we're making a note of some memory
+allocation for
+> > > > > > > > > > example, that would be unreadable outside of a debug
+context. The point
+> > > > > > > > > > of this really seems to be "log things for verifying in
+tests later".
+> > > > > > > > > > Does that end up being useful? I don't know. Heinrich
+or Ilias, do the
+> > > > > > > > > > tests in [1] look generally useful?
+> > > > > > > > > >
+> > > > > > > > >
+> > > > > > > > > The tests in [1] are not documented, not even in the
+commit message. So
+> > > > > > > > > the reasoning behind the tests remains Simon's secret.
+> > > > > > > >
+> > > > > > > > Are you asking for code comments in the test? If so, I can
+add some.
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > At first sight the tests in [1] don't make much sense.
+E.g. that only a
+> > > > > > > > > subset of memory types have been used does not tell that
+the right
+> > > > > > > > > memory type has been used for the right object.
+> > > > > > > >
+> > > > > > > > It is a pretty good start, though. It makes sure that the
+memory types
+> > > > > > > > are sane, checks addresses are within DRAM, etc. With [5]
+it makes
+> > > > > > > > sure that devices are removed.
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > Implementing a specific tracing functionality for EFI is
+definitively
+> > > > > > > > > the wrong way forward as it will lead to code duplication.
+> > > > > > > >
+> > > > > > > > We can cross that bridge when we come to it.
+> > > > > > >
+> > > > > > > Well, no. It's backwards to make a bridge in one place when
+everyone
+> > > > > > > agrees it needs to be moved somewhere else. I mean [5] is a
+generic
+> > > > > > > issue and test/py/tests/test_net_boot.py or some other test
+we already
+> > > > > > > have which tests booting an OS should confirm that we've
+quiesced
+> > > > > > > devices before moving on. And as a bonus it's in python where
+dealing
+> > > > > > > with strings doesn't suck.
+> > > > > >
+> > > > > > I really don't want to write C tests in Python. CI is slow
+enough as
+> > > > > > it is, something realy want to fix. I'm also not sure how you
+can tell
+> > > > > > if a device has been removed. Run 'dm tree' and look for the
+missing
+> > > > > > 'star' in the resulting 300 lines of text?
+> > > > >
+> > > > > As I'm in a bisect-hell in our C tests you'll have to forgive me
+for not
+> > > > > thinking the C tests are noticeably faster than python tests. Or
+that
+> > > > > they aren't their own potential source of corner-case bugs. But I
+> > > > > digress..
+> > > >
+> > > > Welcome to my world. I bisected my lab devices so many times to try
+to
+> > > > isolate all the breakages that have crept in. What is the problem,
+> > > > maybe I can help?
+> > >
+> > > Sure. test/cmd/hash.c::dm_test_cmd_hash_md5 fails randomly, in maybe 1
+> > > out of 100 runs, via pytest, in sandbox. Not via "./u-boot -T -c 'ut
+dm
+> > > dm_test_cmd_hash_md5'" however (I stopped checking after 1000
+> > > iterations). I was iterating over "and built with clang" but I think
+it
+> > > happens with gcc too, from the actual failures in CI. And you can use
+> > > "-k ut" to limit to just what's matched there, so it's a quicker
+> > > iteration.
+> >
+> > Hmmm do you have a link? It's hard to imagine what it is, but perhaps
+> > a dependency on a previous test.
 >
-> Hi Simon,
+> Sure:
+> https://source.denx.de/u-boot/u-boot/-/jobs/993200#L286
 >
-> Is this patch for -master of your tree?
+> My current gut feeling is that we've got some section overlap issue
+> somewhere. And, FWIW, if I turn off EFI_LOADER I still see it. And if
+> you use the same binary it won't always fail.
 
-Yes, but I haven't applied it yet. The updated bootflow_efi() test ([1]
-which this is part of) is throwing up problems with how testing is done. We
-cannot today reinit EFI so only get to run one test which does an EFI boot.
-I'd like to improve that at some point.
+The only way I think the hash command can return CMD_RET_USAGE is if there
+are not enough arguments.
 
-The address/pointer tidy-up was rejected as well, I think by you, but
-perhaps Heinrich?
+The only way that can happen with this code:
 
->
-> On Mon, 6 Jan 2025 at 16:48, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > This should set the bounce buffer to a pointer, not an address. Fix it.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  lib/efi_loader/efi_memory.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index 2e197e94edd..9374f77d3b7 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -837,11 +837,11 @@ int efi_memory_init(void)
-> >         uint64_t efi_bounce_buffer_addr = 0xffffffff;
-> >
-> >         if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
-EFI_BOOT_SERVICES_DATA,
-> > -                              (64 * 1024 * 1024) >> EFI_PAGE_SHIFT,
-> > +                              SZ_64M >> EFI_PAGE_SHIFT,
-> >                                &efi_bounce_buffer_addr) != EFI_SUCCESS)
-> >                 return -1;
-> >
-> > -       efi_bounce_buffer = (void*)(uintptr_t)efi_bounce_buffer_addr;
-> > +       efi_bounce_buffer = map_sysmem(efi_bounce_buffer_addr, SZ_64M);
->
-> map_sysmem does *exactly* the same thing so you need to adjust your
-> commit message.
->
-> Does this solve any sandbox crashes?
+ut_assertok(run_command("hash md5 $loadaddr 0", 0));
 
-No, sandbox doesn't test this feature yet, but the new code is more
-correct. Whenever you see an address, use map_sysmem() to turn it into a
-pointer.
+is if loadaddr is undefined.
+
+But (like you, I suspect) I cannot find how that could be.
+
+In fact, I can't even build with clang:
+
+$ buildman -O clang-17 --bo sandbox -w -o /tmp/b/sandbox-clang
+Building current source for 1 boards (1 thread, 32 jobs per thread)
+   sandbox:  +   sandbox
++/usr/bin/llvm-ar: error: arch/sandbox/cpu/built-in.o: Opaque pointers are
+only supported in -opaque-pointers mode (Producer: 'LLVM17.0.6' Reader:
+'LLVM 14.0.0')
++make[2]: *** [scripts/Makefile.build:333: arch/sandbox/cpu/built-in.o]
+Error 1
++make[1]: *** [Makefile:1906: arch/sandbox/cpu] Error 2
++make: *** [Makefile:177: sub-make] Error 2
+    0    0    1 /1              sandbox
+
 
 >
-> /Ilias
-> >  #endif
+> > At present 'ut all' fails so I am going to take a look at that. Quite
+> > a bit of clean-up needed in test system, though. Ideally we could run
+> > the tests in random order so we can find and fix the dependencies. For
+> > driver model we reinit as needed, but that's not the case for EFI, for
+> > example.
+>
+> Personally, for making pytest faster I'd look at the general
+> recommendations various blog posts about "make your pytest run faster"
+> and then go from there.
+
+I think the problem is that you are looking at the C tests through a Python
+lens, so everything seems a bit slow.
+
+'ut all' takes about 18 seconds for me.
+
+>
+> > > > > And yes, taking a bunch of text and parsing it, is what python is
+fast
+> > > > > at. And easier to write.
+> > > > >
+> > > > > > But actually [5] is not generic, since EFI uses its own code to
+remove
+> > > > > > devices. This test is solely focussed on EFI.
+> > > > >
+> > > > > Yes, you're testing the EFI version of the code in
+> > > > > arch/$(ARCH)/lib/bootm.c. The remove devices functions being
+called in
+> > > > > both cases are generic.
+> > > >
+> > > > The code in EFI is:
+> > > >
+> > > > if (!efi_st_keep_devices) {
+> > > > bootm_disable_interrupts();
+> > > > if (IS_ENABLED(CONFIG_USB_DEVICE))
+> > > > udc_disconnect();
+> > > > board_quiesce_devices();
+> > > > dm_remove_devices_active();
+> > > > }
+> > > >
+> > > > It does call somewhat the same functions, but is doing its own
+thing,
+> > > > not even using the arch-specific code. As I mentioned, a nice
+clean-up
+> > > > would be to make bootm_announce_and_cleanup() common.
+> > >
+> > > Yes, we almost agree? Both the EFI code, and arch/$(ARCH)/lib/bootm.c
+> > > have functions that make the above calls. A nice clean-up would be to
+> > > have something common.
 > >
-> >         return 0;
-> > --
-> > 2.34.1
+> > Yes indeed. It still does not provide a test for the EFI bootmeth,
+> > though, where I found half a dozen bugs.
+>
+> Yes, the bootmeth code is it's own thing.
+
+No I mean there were bugs in the EFI implementation.
+
+>
+> > > > Actually, now that I see efi_st_keep_devices, I wonder why Heinrich
+> > > > didn't want my ANSI patch[6] which serves a similar function.
+> > >
+> > > No? Your patch disables ANSI output in those tests, that variable is
+for
+> > > making sure those tests can accomplish (if I skim things right)
+similar
+> > > kinds of tests you've asked for before, but with an EFI app instead?
+But
+> > > perhaps better to not start yet another tangent here...
 > >
+> > I wouldn't know where to start, anyway...
+> >
+> > > > > > If you want the logging to be renamed and placed centrally I
+don't
+> > > > > > mind doing it now. But note that only EFI will use it for now.
+> > > > > >
+> > > > > > >
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > We already have function _log() which is variadic.
+> > > > > > > > >
+> > > > > > > > > Simon could write a new log driver that parses the
+`format` parameter
+> > > > > > > > > and saves the binary data in an appropriate format for
+analysis by the
+> > > > > > > > > unit tests:
+> > > > > > > > >
+> > > > > > > > > * For %s the driver should save the string and not the
+address of the
+> > > > > > > > > string.
+> > > > > > > > > * For %pD the driver should save the device path instead
+of the pointer.
+> > > > > > > > > * ...
+> > > > > > > > >
+> > > > > > > > > Some changes to the log driver interface will be needed
+to pass the
+> > > > > > > > > variadic arguments instead of the formatted message.
+> > > > > > > >
+> > > > > > > > Perhaps the word 'log' is confusing people. But the above
+suggestion
+> > > > > > > > is quite a complicated way of handling things. We have no
+way to
+> > > > > > > > decode printf() strings in this way. See log_dispatch() for
+how this
+> > > > > > > > is handled today. It uses sprintf(). Trying to test based
+on text
+> > > > > > > > output would be very clumsy (lots of regexes and sscan()
+calls?) and
+> > > > > > > > result in a huge amount of parsing code, highly dependent
+on the
+> > > > > > > > printf() format, etc.
+> > > > > > > >
+> > > > > > > > I very-much doubt that would produce a useful
+implementation, but if
+> > > > > > > > you would like to try it out then I would be happy to look
+at it.
+> > > > > > > >
+> > > > > > > > I mentioned this several times, but even if we did go that
+way, we
+> > > > > > > > only have logging on the external calls, so much of the
+EFI-memory
+> > > > > > > > allocation in U-Boot would not be logged.
+> > > > > > > >
+> > > > > > > > Regards,
+> > > > > > > > Simon
+> > > > > > > >
+> > > > > > > > [5]
+https://patchwork.ozlabs.org/project/uboot/patch/20250106144755.3054780-9-sjg@chromium.org/
+> > > > > > >
+> > > > > > > Yes, calling this a "log" when it's intended for capturing
+information
+> > > > > > > for tests got some of this off on the wrong track. But that
+also helps
+> > > > > > > explain now that this is still on the wrong track and should
+instead be
+> > > > > > > following normal design practices for testing and expanding
+existing
+> > > > > > > infrastructure and not inventing a new everything. So if you
+don't like
+> > > > > > > Heinrich's suggestion, take a look at Caleb's suggestion.
+> > > > > >
+> > > > > > I don't have the energy to port the tracing framework from
+Linux to
+> > > > > > U-Boot, although I agree it would be useful. Still, function
+tracing
+> > > > > > is quite fragile and confusing to work with when refactoring
+code. I
+> > > > > > don't like that idea much for this use case, although if
+function
+> > > > > > tracing did exist in U-Boot I would likely have used it.
+> > > > >
+> > > > > I mean yes, it would be good if you went back and expanded on the
+trace
+> > > > > functionality you did before.
+> > > >
+> > > > I still don't believe it is the best solution and seems like yet
+> > > > another ocean I should avoid sticking my heater into.
+> > >
+> > > I strongly disagree. If you go back to the trace code you brought in
+to
+> > > start with and make it more useful / include newer features existing
+> > > elsewhere you're not going to end up in conflict with everyone asking
+> > > why you're doing something subsystem specific.
+> >
+> > Perhaps someone else could do this? It would be a substantial amount
+> > of work to bring runtime tooling into U-Boot, bpf and the like. It
+> > would be quite a pain to use, I suspect, and certainly not possible to
+> > write a simple C test as I have done here.
+>
+> I'm not sure where bpf and the like comes from in what I said here. But
+> again, if you find that logging thing you wrote handy, keep it in a
+> topic branch somewhere and then later on you can "Told You So" the rest
+> of us later on.
+
+I'm not sure what you are suggesting re tracing, but I assumed it was that
+we patch the code at runtime and set tracepoints to check for particular
+calls in a test. I'm not sure how else we would get access to the function
+arguments. Then, presumably we need a bpf rule to collect the function
+args, etc.? It wasn't my idea, so perhaps we should let Caleb explain the
+intent.
+
+>
+> > > > > > > And if you
+> > > > > > > don't like Caleb's suggestion, go put this in a topic branch
+you can
+> > > > > > > merge when you need to debug some problem that seemingly
+nothing else
+> > > > > > > will catch.
+> > > > > >
+> > > > > > Here we are over a year after I reported the bug and we still
+don't
+> > > > > > have a test to cover it. This series is better than the
+available
+> > > > > > alternatives, IMO.
+> > > > >
+> > > > > Well, no. We have commit dabaa4ae3206 ("dm: Add
+> > > > > dm_remove_devices_active() for ordered device removal") we have a
+test
+> > > > > for the underlying problem. We need more functional boot tests,
+but we
+> > > > > need those to be in python too, and not more C code.
+> > > >
+> > > > That is a nice improvement, but did not fix the underlying problem.
+> > > > The underlying problem was that EFI was calling exit-boot-services,
+> > > > causing U-Boot to free up data structures which were needed to boot.
+> > > > This was on x86_64. I never quite figured out which one (very hard
+> > > > when you cannot get back to U-Boot to check).
+> > > >
+> > > > There were quite a lot of problems, actually. There v2 series is at
+[7]
+> > > >
+> > > > Only a C test can check what actually happens inside U-Boot.
+> > >
+> > > Yes, I think now we get back to disagreeing on which symptoms lead to
+> > > which code problems and then what to do about them.
+> >
+> > OK
+> >
+> > >
+> > > > > And you're not just coming up with a test, you're refactoring a
+bunch of
+> > > > > code and introducing new subsystems in order to do that. When as
+I keep
+> > > > > pointing out, we don't need that. We could easily extend the
+existing OS
+> > > > > boot tests we have to script booting an ISO. And we only run
+those when
+> > > > > say "ENABLE_SLOW_TESTS" is set, and only do that on tagged
+releases.
+> > > >
+> > > > Yes of course we need to refactor to make tests work. This is not
+> > > > necessarily a bad thing, as it helps us break code down into
+testable
+> > > > chunks. We cannot rely only on large functional-tests, not that you
+> > > > are suggesting that. See [8], but they are too slow, too hard to
+debug
+> > > > when they fail. They also tend to devolve into chaos as people get
+> > > > lazy and stop writing unit/smaller tests.
+> > >
+> > > I'll just note that I don't ever even think to use "make tests" or
+> > > "qcheck" or any of the others since they never work for me.
+> >
+> > Would you mind filing an issue on that? I use 'make pcheck' all the
+time.
+>
+> Done:
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/33
+>
+> I didn't file one for "qcheck" which fails differently in that same
+> environment.
+
+OK, I'll reply there, thanks.
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=439021
-[2] https://patchwork.ozlabs.org/project/uboot/list/?series=436241
