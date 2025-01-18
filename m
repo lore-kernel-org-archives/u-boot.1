@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E5BDC02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 12:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8A8FC02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 12:26:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B8E580657;
-	Sat, 18 Jan 2025 13:22:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 498C3803CB;
+	Sat, 18 Jan 2025 13:26:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="YhBPW3s3";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LZyKwgmr";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eNUrfVRZ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EcINky0p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99BFE8070C; Sat, 18 Jan 2025 13:22:35 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 9EB218063E; Sat, 18 Jan 2025 13:25:57 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38B978063E
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 13:22:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01B7980077
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 13:25:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YZwj35QQyz9smm;
- Sat, 18 Jan 2025 13:22:31 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YZwmy5DYkz9sc4;
+ Sat, 18 Jan 2025 13:25:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737202951;
+ s=mail20150812; t=1737203154;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=qWoyomYHKVoGH8f0NrCbDj7i0DnktoozhbNsxN6qVhA=;
- b=YhBPW3s3iPeqzobItF88SgiAWqZW6RTPFYRQWYUkardHxYQ1xS8dmLbhYWmoXlZlNXcS77
- Ucje4StthnydYWRiABrfKGc/YoFu4UY0avdCBw8CRi+lBvkFMHq0mmQNnxdtdTUlmXeVU1
- BU9PR4qDgS5C2MDxFGnko6CoEeZNRR9nXg67XKOyANw7wAYTBvY0UpGYzaafzLtP3mW0U1
- stoZYQTzr7HimtgcyCAeG8jDqy7i9yA6BoEj6smWUsopUXWKZC5qUDZoHBXWjo8HTAuSwP
- Q5OBk++ttKbkrhciY17EQtjewU0lc+Lwcc01Bp2cGi1S/fJsFCImYsIo8mo0xA==
+ bh=gyyf544jFW+EWsxr0QEHTjt0sigTTNGwKcWUBrdcJCg=;
+ b=eNUrfVRZ3ObqTh2o6FzyVr4zvUOVTe8dnAbYPMmLOjGf8zN4dSgO5kTQ/y4LEYnGm+9EOO
+ od53aBUp64EY+IQTBiGfxY9wTzwVv5tGClj40r/12QY9IETCvJVwvPyxYGW5gzsheixiI5
+ guNs7cw2QgYSuHMPYwqFSeycDhiL9PifGcsK/nYBBJWTTplJp2aScrJcyuz4XFx5+2nyns
+ 698yjhr0+hKTYj70D5KGhwE/W0hCV88NxMAwdc5RKw0doK0SFtwTkOLg7YNdOp70DEdY5U
+ 5DCxNNsv/1Kqd8li6I0BC4127wGoejCI77Z3szi5SLd8EF4rydMOa4LRSd1pOg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737202949;
+ s=mail20150812; t=1737203152;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=qWoyomYHKVoGH8f0NrCbDj7i0DnktoozhbNsxN6qVhA=;
- b=LZyKwgmr68Z7uiFnoS7WYhn0KbQZUfFSV+Z/L+yIGxPmm8xclvtijC9fJ925qHpKfhUYHk
- GiAgOhw6ZSkV0MdCVPma+v+LFxo7i/JUKbVmNQCBm45lQM9gRxJHu0deHwFZVUsCnhWmEn
- XOJwTJqIIAiBQmZ1KOy3en/H0jZM2xvob1/ic3IQ4dAcU1iu2ZuOvj7y5xvwz2XphInhWn
- HyG1OzJ7yOd24UhLTdNAscaSSYv/ob5/HGXyZQL9DoSArKX8RUo9xwFfTmgHC9M0SeuuxL
- Dwc61IudslWh9DGjDfnmK345bqmhCSWsgUGATebjmuZNp/w87Wpn3CNca2+c4A==
+ bh=gyyf544jFW+EWsxr0QEHTjt0sigTTNGwKcWUBrdcJCg=;
+ b=EcINky0pfSonCDD/yfUMblgmZJHNKV7BfnIGeFjHdoqUwwxo0OMtt2ByKRcIElOYeOOvKj
+ tmLaOI3/l5jxcTGaKc4/NJmJayFUie+SCF1NVexmmUpjbAhFJ+Y1gQt+hnt22hvUkWqV8P
+ dqZWDncBH2Md1XWbbUmFNtdVe+/ihEB3R2mb2TYF+b4WHlghVF7VQFqxmqQQkPp3hZ6qwn
+ 1TSD4V3xF0HaoNnRY0NboIjdvRbYtEKqoI+x0q7LtKnv3u/gT65cYa1qtzou7g/suRUy2U
+ NESBm2+3klfUV/imikpqso9j0v9UuIbxnZPSqVg9dTi04nPi6Ao7zxYIQiBKQw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: renesas: Add R-Car S4 Starter Kit support
-Date: Sat, 18 Jan 2025 13:21:23 +0100
-Message-ID: <20250118122214.388300-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2] arm64: renesas: Add R-Car S4 Starter Kit support
+Date: Sat, 18 Jan 2025 13:25:18 +0100
+Message-ID: <20250118122537.388585-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: d8abc95f19c399b08b7
-X-MBO-RS-META: jtxpcpqdoqgrp8moc1a1edx9ysm9u1to
+X-MBO-RS-ID: 4b4f4a4248dfd905d46
+X-MBO-RS-META: 7tt5ojbzz4uksyo3865h4moq48pudm4x
+X-Rspamd-Queue-Id: 4YZwmy5DYkz9sc4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,6 +104,8 @@ Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Sumit Garg <sumit.garg@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
+---
+V2: Include ethernet port connector placement and fix up TSN2, which yes is accessible
 ---
  arch/arm/dts/r8a779f4-s4sk-u-boot.dtsi | 42 +++++++++++++
  arch/arm/mach-renesas/Kconfig.rcar4    |  7 +++
@@ -245,7 +250,7 @@ index 00000000000..7a1985e5e8d
 +obj-y	:= s4sk.o ../rcar-common/gen4-common.o ../rcar-common/common.o
 diff --git a/board/renesas/s4sk/s4sk.c b/board/renesas/s4sk/s4sk.c
 new file mode 100644
-index 00000000000..92eb4ee0297
+index 00000000000..d2beb71c684
 --- /dev/null
 +++ b/board/renesas/s4sk/s4sk.c
 @@ -0,0 +1,85 @@
@@ -278,10 +283,10 @@ index 00000000000..92eb4ee0297
 +	 *
 +	 * The ethaddr/ethNaddr mapping follows Linux kernel DT aliases
 +	 * ethernetN property assignment:
-+	 * - ethaddr ..... TSN0
-+	 * - eth1addr .... TSN1
-+	 * - eth2addr .... TSN2 (not accessible)
-+	 * - eth3addr .... AVB
++	 * - ethaddr ..... TSN0 (IC104 connector)
++	 * - eth1addr .... TSN1 (IC101 connector)
++	 * - eth2addr .... TSN2 (Expansion connector)
++	 * - eth3addr .... AVB (CN1 connector)
 +	 */
 +	ofnode i2c_node = ofnode_path(S4SK_FPGA_I2C_BUS);
 +	struct udevice *bus, *dev;
