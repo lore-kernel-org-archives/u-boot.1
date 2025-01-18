@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 896D8C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 16:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0145EC02187
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 16:43:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E99E9803CB;
-	Sat, 18 Jan 2025 17:43:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4761B80778;
+	Sat, 18 Jan 2025 17:43:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LaYiSX+Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l3GPZ7Hz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45B7780758; Sat, 18 Jan 2025 17:43:26 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 3E1028063E; Sat, 18 Jan 2025 17:43:27 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28C4380312
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 17:43:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 259D28063E
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 17:43:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7b6eeff1fdfso284358285a.2
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:43:24 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7be44a90468so364745385a.3
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:43:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737218603; x=1737823403; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737218604; x=1737823404; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q26jX9KIlszJAv2oebZQosIpScztjIq68WK9b/GW6q8=;
- b=LaYiSX+YslJM8OdmLb2Q7NzZnvvqIWulmM8USShoXt8SqSMguRl4DZkVwOsL/fQ7+V
- 52H4BABL69WNKoGG9pDk6OTjDcB/jcIAGP2WQ2Ne53fhPtkU3VXbUbRv7aQ7jSaay6wW
- ql34P7jSWcVQejb5SY5DDGf5mcJpHPv/lje20=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=XxAzciuYYLOoIqtKAX6DvW6FOPpeOXioZQjCmTrcmHc=;
+ b=l3GPZ7HzxyJPssvcDr/PbYzDN7neEM6pzKnsiZvfXpkYQ1ltotY/239pOViassQh51
+ olS5uPss5/vBfFrCk5f9n9RR9zQWFgH1hRedphaH+oGmvhKeGxQw0JegjudT5ylzZ9oR
+ EKXFfRHh/crp0A26WvVYKcZQGsWe0cxsxGoUQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737218603; x=1737823403;
+ d=1e100.net; s=20230601; t=1737218604; x=1737823404;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q26jX9KIlszJAv2oebZQosIpScztjIq68WK9b/GW6q8=;
- b=C47IP+4cLrJb2Y7Fi5xFySP5DQF38Molb77kwYqD7j6i/9W43QJ7E5m58DSNGeMvLL
- lUWv8Lgi79hQ9+LOa3n6KM6FFqbOpSOzag13mr1Ptd2aZW5pkcCA2HTG+0AVfodQJ3lA
- /fz6cQR4sAT9tfVB5VWaWGvtRFkLIyveXgihm3VCxag43dOnH0KZ6J61x7K/cSH29bOu
- /AOGvmo/sODxSbzfcxCJWyK9e0LtEvvtdPcXF//zjo3eWK3jCK8ufNbkuYw6IbFPqlSV
- 8zuJO09AHg7DHbUqIHrmpfnAIkkadgBcIwki+L8z5gRt3RtNw+eF+0CllWAx+Nqz4mDL
- ZMDA==
-X-Gm-Message-State: AOJu0YxcBEnBZJX+gpVh6KDFMbhtwr/Z6LW3IOXrds3MfL5FEY3PUJ5B
- vJ7Oc+wdhWz5qn0Vy0ExYMh2E2eY8K3c3sfY9oOMcz0o8UI0NShvailqz/WgehU=
-X-Gm-Gg: ASbGncu4858egkVnfkx2I50AuTk6Ay1ngkgn5ziuqYlYm3FMi3/rP4vEnRa5id34AQi
- nHzc4ghV2KDBNzkQW+KBijQv/+WUCpCRPfvTZOf/7SfHv34cvSoCSJF0tinOrMSpEkBxUJ/nDPT
- Mlh8FgQuUMX2yEq8ElHsq6GsuyN0P6+esqG0z8nEfr42ozrtodyd8lM2oCKomVr+k0eKdGJToxQ
- uChDJ0dhWqNzxKosBuKW6n/1foCAgOnkoEhbRgzjnO5McuHkSRPD2jVuIa3LlVPuQ==
-X-Google-Smtp-Source: AGHT+IHOFP9Ng5EiVkuazwtaqSnunfmMNso0dST5sZ0o27OYPMOmG0ct/6pF1227hTIrHlNo0RGB/g==
-X-Received: by 2002:a05:620a:1a88:b0:7be:3cf2:5b4d with SMTP id
- af79cd13be357-7be6320c084mr1184321985a.9.1737218602994; 
- Sat, 18 Jan 2025 08:43:22 -0800 (PST)
+ bh=XxAzciuYYLOoIqtKAX6DvW6FOPpeOXioZQjCmTrcmHc=;
+ b=Murzq+tak45ndMP30Y348QKTA3NQWNW05kkruEhGSmVK/0Xg54iSiaWZSpiWFv52gf
+ xuv77YNw9oLl5Yza22OTFfiaT8ieE1PxMKo/O4zPjx8OpYPOce+tipjGGCAZ5zqAwpfe
+ GkqkzBMY6+7hReJutcQE+x7RP8ISeY0dmzL21JYo4Ibnqy+FdykRHnZ1XklVVsjdyIQV
+ s61y5hc/A55waJ2WtKpgWBMBwOKT9wTFHO5pmgLb4OTMrJ6oVSHVE/s2m+1HxF+XdTRF
+ wHZ77vhCYoKlRgotUNxHhi8VfODwOpBBuNEe7B/0+V8AIf9zQRoO9GG53LrPTTRWDPu4
+ OAbA==
+X-Gm-Message-State: AOJu0Yxhda57HkOJRTHwoYTEWNTPANLiRuANdXrp8qH135hqzkSZfkRM
+ AUN9qnZwuMhuEB6Sajc1OZA08FVD/YPCq1yZvtVtdPItQutdN4RAr64sJn5NDnZJIKdj3gjsi34
+ 5
+X-Gm-Gg: ASbGncsMvOFHY9aqh19uNdZSA9q6bc6n3lws7jwdIs6uDNKDlHpi0ddlMawIjGYLowE
+ Kqa6GQjIX4nOHnBQD/kj494ErDeTKbhIflMbsuQD2QWF90a0BFSxMAlhA751vtByCFaAS3d3UB/
+ PzvA6amO88dHBUeylo6C8zDu0DqyJY8Vsark/juvMxwrtoefpVEH5lOsTB8JcN4JS4KvrqwQG5S
+ yVkPXcoyd1cwSXHTz0SgeRLAG6P9fVSuA9ihOj2FTSNJX0a4Xt4Phd9Qefl93tmQA==
+X-Google-Smtp-Source: AGHT+IFOPQuzzU+WiC69dMirtiEp8yIUerD1FV8ys5iLKF2B9/E5FIEe0bBSTin6Vv7z+JshMsCVgw==
+X-Received: by 2002:a05:620a:2b9b:b0:7b6:d1e1:a239 with SMTP id
+ af79cd13be357-7be631e58d9mr1098634685a.2.1737218604129; 
+ Sat, 18 Jan 2025 08:43:24 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be614f5b3bsm241061585a.115.2025.01.18.08.43.20
+ af79cd13be357-7be614f5b3bsm241061585a.115.2025.01.18.08.43.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Jan 2025 08:43:21 -0800 (PST)
+ Sat, 18 Jan 2025 08:43:23 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Bryan Brattlof <bb@ti.com>, Greg Malysa <greg.malysa@timesys.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-In-Reply-To: <20250112223252.179123-1-marek.vasut+renesas@mailbox.org>
-References: <20250112223252.179123-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] Makefile: Make sure all linker input objects exist
-Message-Id: <173721860014.2563206.14366414311567161166.b4-ty@konsulko.com>
-Date: Sat, 18 Jan 2025 10:43:20 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20241231235412.1605761-1-trini@konsulko.com>
+References: <20241231235412.1605761-1-trini@konsulko.com>
+Subject: Re: [PATCH] qconfig.py: Update resync message
+Message-Id: <173721860317.2563206.2278355847847486850.b4-ty@konsulko.com>
+Date: Sat, 18 Jan 2025 10:43:23 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,28 +91,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 12 Jan 2025 23:32:38 +0100, Marek Vasut wrote:
+On Tue, 31 Dec 2024 17:54:12 -0600, Tom Rini wrote:
 
-> In case the build system builds a directory with empty Makefile,
-> one which does not contain any obj-y entries, the build fails to
-> link due to missing built-in.o .
+> When using qconfig.py to resync defconfig files and commit the result,
+> update it to say:
+> Resync all defconfig files using qconfig.py
 > 
-> This happens because of this part of scripts/Makefile.build
->  81 ifneq ($(strip $(obj-y) $(obj-m) $(obj-) $(subdir-m) $(lib-target)),)
->  82 builtin-target := $(obj)/built-in.o
->  83 endif
-> which does not assign builtin-target in case obj-y is empty. The
-> built-in target is then not built at all, and built-in.o is not
-> generated by this part of scripts/Makefile.build
->  325 ifdef builtin-target
->  326 quiet_cmd_link_o_target = AR      $@
->  327 # If the list of objects to link is empty, just create an empty built-in.o
->  ...
->  335 targets += $(builtin-target)
->  336 endif # builtin-target
-> This is the correct behavior.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
