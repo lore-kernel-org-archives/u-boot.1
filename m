@@ -4,65 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F31C02183
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 03:16:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2956C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 03:28:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B983880657;
-	Sat, 18 Jan 2025 04:16:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 40DC680657;
+	Sat, 18 Jan 2025 04:28:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="y8SrnNs2";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SNNppTJH";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="doDzV28A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D1B18069D; Sat, 18 Jan 2025 04:16:22 +0100 (CET)
-Received: from out203-205-221-209.mail.qq.com (out203-205-221-209.mail.qq.com
- [203.205.221.209])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F013F8070C; Sat, 18 Jan 2025 04:28:49 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 825F78036F
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 04:16:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DCC1F8036F
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 04:28:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1737170173; bh=wmsfRt6/bnrS20okV841+OgNwHWnc+2SQn0kQJnX+RE=;
- h=From:To:Cc:Subject:Date;
- b=y8SrnNs2m8rfDRGGKxsM3oRhwQmTzjy73rgvlmpU2+tsmtZNby9KrTJzfkTu0KhOQ
- kI1jcmeERPYvJLpJuT9BBIIlh38Io0X9lLpRzUe3IQKZZiUH06ALlpvaYudenlSrjD
- OlF6Esg09gGWuVAyxy4Ox126Xq2t30hVQilKpWwA=
-Received: from ubuntu.localdomain ([183.253.34.159])
- by newxmesmtplogicsvrszgpuc5-0.qq.com (NewEsmtp) with SMTP
- id 40C216E4; Sat, 18 Jan 2025 11:16:12 +0800
-X-QQ-mid: xmsmtpt1737170172to58oholz
-Message-ID: <tencent_49E0062008CCBCC96E1FFB1E894172B6D807@qq.com>
-X-QQ-XMAILINFO: NXMmzHJ6C+tbnQWsnNxNBi7u0y0uqJhWCMOPwIG+kG7upYSFuuYWBs8LxYWP3P
- 2pyT/RQ4kwFJQAbNr0z/vPtcurIsXRLs9YJzwNuw/lo0DoBQ2HonVCUUIITruS98jbFh5n+lpmPG
- SYlRNHewJt5m9DmP6NGlgQo1DKfYivcoZKAjiaiEPOe8x8NRgQaD9qjQYLo0wU/MqvbDqrmigBGp
- 7A60PvV4fIpVIqOkRPaSBKnyqzK4L37uEf37IuboIEeCISZGHXhM8KWM6xjbY04vETrdzzdGVm1a
- 7U0jztApBPMc6/HB+ZAn3k12mdLevNEQkOGXnr6FGqdAJXYw78/+AnDr9t3Tz+6NwGw89r8DvxlX
- TdpevwKRamPg+bO8spI/Xx3sZRH7kRhgI8B4g3hxoex9FjZ8GHw7b4IeWC7mz8DoLGwKw5MKMJ6m
- jxPsDlAhasyloPSIQxVWa47OhLIIGH4fSkSG57rFT5HPPd0bpgRhasH6/4qtOuoEBMjr6z3TR/LD
- QdKBnQFZne2M0g9fDriUBARUsk8RZIrVLmX9c6CkZPtaW1lwKuTNpf+/mXlieWb/7+7MIBHzGiJy
- OZPrW/MjcLRR6LVgRGmrL45/pG9VO2VS5eAQeEuc/E6mUFCAfMMttVA0eFqtDZ40iCrnE3Y5oCIn
- Aaofvh+DEb88FWUUKdTaWFuUzOOlW8BkdGyYPg1l2ceHv9zIfJDMkAFa55qtcshWtI3XIypsqQ0R
- wBLuTk0E3I8IK0BqykZ3NG/jIBK6N0qcRn/LhgroBLHLE0/yu5sLCe+mVihDJ7V3AnUcJJdG/nla
- lHnhIKYFUTJ78iIJxvfInsnHQ02Iq5h4gIvrC2y6N4+wqKIIhZqUfgCOjTiXMu6+kIXzucfxdOEg
- Tf/Ds+2pm4xlXBBShgxo1t208mM9SrG0/K/H5rCTlQCQWBUrPkTwWn/ZE0j8HbwCwOitmE2+78J6
- hYskzMFtkSMuiYlFe0g09dvTjbbG7n4sFGFx7Rm68=
-X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
-From: 1425075683@qq.com
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YZhsB741Yz9skn;
+ Sat, 18 Jan 2025 04:28:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737170927;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=fsIWdltBr0IOcJB+KPKWkY7bLVAGI3VI5p/WX95kXAQ=;
+ b=SNNppTJHDLeSPeMI6UY57kHnej5mSAOe1HvmbDMi7ufDCQQynemFJKFphaX6QPICMkze44
+ cUX5mOWEpv/RuInELi4wDyFUU5/BAS0+sbDYspDyDfhEAPDm/jKRVHM5HYH4uUwvkmAKhf
+ J6vnxEqBc20py71W8hBvKB9rWqdl6mAL8xzo7xarTmsCt+cQAMuHRGuTAwgKJ/HdgLMtYa
+ HD0DDVAVjjxffprTRIb4Tw3sC6o/Ee0qYoJh5ZUq70KfMjskTOOMnFabvkdAS470fhOAV7
+ gk3WZRGZa9gR2ZxQk/UpH7d6inj9mRajR7Sbnj8HR5L3SSJI26Q5B1zn4Q2P9A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737170925;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=fsIWdltBr0IOcJB+KPKWkY7bLVAGI3VI5p/WX95kXAQ=;
+ b=doDzV28AKze/MoIHDpQqG7vdu7aaHfxQ4aZw6FdSg+fCUQfaBt4UqbM3GNzv2V6ELBLHbd
+ tM0qEFnVA5ev+ksV28KAeNqr+JwIlKxrHJncq3Jhr7VNXY1aUW7bN0U9PYyRjQicRsQzl5
+ svF4aOGMPLxMPr2Aq/ftWF99IDy8KIjAMfO301VlbBF4pHbDm2njaQWpnkwQFbfy4FAeo5
+ eS67WtMtJ0Dfr10Xc+IbFB6DNfZbLkZjlbmwOou7npMONS63wCVp4HNtG15Wc6pw4s5H/L
+ foYbZ4wxZxjeaZDb0peL6TFEHLzhD0FG6arvv9bOi+qiKXtJP8mik3SfeasBNg==
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Liya Huang <1425075683@qq.com>
-Subject: [PATCH v1] linker_lists:Update the alignment using
- CONFIG_LINKER_LIST_ALIGN
-Date: Sat, 18 Jan 2025 11:16:09 +0800
-X-OQ-MSGID: <20250118031609.16647-1-1425075683@qq.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ronald Wahl <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] mmc: Exit from mmc_init() if mmc_complete_init() fails
+Date: Sat, 18 Jan 2025 04:27:34 +0100
+Message-ID: <20250118032832.32865-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: qpy1k4pi1xumxhowunuy4thiiu46e6y4
+X-MBO-RS-ID: fe03e3d126b051bea41
+X-Rspamd-Queue-Id: 4YZhsB741Yz9skn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,90 +90,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Liya Huang <1425075683@qq.com>
+In case mmc_complete_init() returns error, exit from mmc_init()
+without possibly calling cyclic_register(), which at that point
+would be undesired.
 
-This patch updates the alignment of linker lists to use the
-CONFIG_LINKER_LIST_ALIGN macro instead of a hardcoded value.
-This ensures that the alignment is consistent with the configuration.
-Replace __attribute__((unused)) with __maybe_unused and
-__always_unused to eliminate the warning of checkpatch.pl.
-
-Signed-off-by: Liya Huang <1425075683@qq.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Ronald Wahl <ronald.wahl@legrand.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/mmc/mmc.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Changes in v1:
-- Due to an error, the patch was resubmitted, leaving the code unchanged
-
- include/linker_lists.h | 21 +++++++++++++--------
- 1 file changed, 13 insertions(+), 8 deletions(-)
-
-diff --git a/include/linker_lists.h b/include/linker_lists.h
-index f9a2ee0c76..e8791430d7 100644
---- a/include/linker_lists.h
-+++ b/include/linker_lists.h
-@@ -68,8 +68,9 @@
-  *   };
-  */
- #define ll_entry_declare(_type, _name, _list)				\
--	_type _u_boot_list_2_##_list##_2_##_name __aligned(4)		\
--			__attribute__((unused))				\
-+	_type _u_boot_list_2_##_list##_2_##_name		\
-+			__aligned(CONFIG_LINKER_LIST_ALIGN)		\
-+			__maybe_unused							\
- 			__section("__u_boot_list_2_"#_list"_2_"#_name)
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 0d0bda5dd35..4ea97974383 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -3073,8 +3073,10 @@ int mmc_init(struct mmc *mmc)
  
- /**
-@@ -91,8 +92,9 @@
-  *   };
-  */
- #define ll_entry_declare_list(_type, _name, _list)			\
--	_type _u_boot_list_2_##_list##_2_##_name[] __aligned(4)		\
--			__attribute__((unused))				\
-+	_type _u_boot_list_2_##_list##_2_##_name[]		\
-+			__aligned(CONFIG_LINKER_LIST_ALIGN)		\
-+			__maybe_unused							\
- 			__section("__u_boot_list_2_"#_list"_2_"#_name)
+ 	if (!err)
+ 		err = mmc_complete_init(mmc);
+-	if (err)
++	if (err) {
+ 		pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
++		return err;
++	}
  
- /*
-@@ -125,7 +127,7 @@
- #define ll_entry_start(_type, _list)					\
- ({									\
- 	static char start[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
--		__attribute__((unused))					\
-+		__always_unused			\
- 		__section("__u_boot_list_2_"#_list"_1");			\
- 	_type * tmp = (_type *)&start;					\
- 	asm("":"+r"(tmp));						\
-@@ -153,7 +155,8 @@
-  */
- #define ll_entry_end(_type, _list)					\
- ({									\
--	static char end[0] __aligned(4) __attribute__((unused))		\
-+	static char end[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
-+		__always_unused			\
- 		__section("__u_boot_list_2_"#_list"_3");			\
- 	_type * tmp = (_type *)&end;					\
- 	asm("":"+r"(tmp));						\
-@@ -249,7 +252,8 @@
-  */
- #define ll_start(_type)							\
- ({									\
--	static char start[0] __aligned(4) __attribute__((unused))	\
-+	static char start[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
-+		__always_unused								\
- 		__section("__u_boot_list_1");				\
- 	_type * tmp = (_type *)&start;					\
- 	asm("":"+r"(tmp));						\
-@@ -274,7 +278,8 @@
-  */
- #define ll_end(_type)							\
- ({									\
--	static char end[0] __aligned(4) __attribute__((unused))		\
-+	static char end[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
-+		__always_unused								\
- 		__section("__u_boot_list_3");				\
- 	_type * tmp = (_type *)&end;					\
- 	asm("":"+r"(tmp));						\
+ 	if (CONFIG_IS_ENABLED(CYCLIC, (!mmc->cyclic.func), (NULL))) {
+ 		/* Register cyclic function for card detect polling */
 -- 
-2.25.1
+2.45.2
 
