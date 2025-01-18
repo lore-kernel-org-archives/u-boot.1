@@ -4,76 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B439EC02187
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 11:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 988A4C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 11:18:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3A0780657;
-	Sat, 18 Jan 2025 12:17:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 34A7F80657;
+	Sat, 18 Jan 2025 12:18:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="T31tj17v";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PnDPxJUt";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="b/yf3WbP";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Dcw6lu2g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5638807A8; Sat, 18 Jan 2025 12:17:08 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 33F3F8070C; Sat, 18 Jan 2025 12:18:48 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9B518073D
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 12:17:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55A8E8063E
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 12:18:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YZvFQ1JdLz9smr;
- Sat, 18 Jan 2025 12:16:58 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YZvHT0KXHz9sl3;
+ Sat, 18 Jan 2025 12:18:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737199018;
+ s=mail20150812; t=1737199125;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nR8NxXnBkDGI7B0M5v0ZKF2/MQcTCBunMmk9LEUXA/4=;
- b=T31tj17vaSz03dD93bn0eqhpFaOceDgVt7Fad6iPyJEDiWDlnqMiT8LOtSgAS0tRz0RzA3
- fWkeH8WXQlqZSU/P2zVDhh3tQfkjBaU4QzYx0CZqlwnoxnEs1zZua+2mdb0BhdCHxHsANj
- hHy2+ulA+PY2UR0gMqBkvG02q2DsWSIzZfIKYu0IE1k1a+5lLHPXLlOVZ2eODZlgfoem30
- Tn7MUF7Z30tenJJELMcbeNvBuc9UmtimQ216u+C82AdEDpdAVxPRnU8O/3asBVsOmvGjNt
- pVDa9z85LfkV8pyBJju51h4PukDzbUM7k1H4sEPtjj/9eT6+XsGEAi3+htw3nA==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lIilwQU7jBbA7QLCo/jFi/9Oj2d6aazQzUqbqmoVLT8=;
+ b=b/yf3WbPc27LRyvJuEZbZxUUS60DeH1QAICr2RjwPyleVYdRrYKhm1XqKuwocNoIg8gpVv
+ k/lEflVo+VmHcPHmpLqFbPE/l7ZOWbwRh+qd6H4odZ8Cq8vW6Kggu5hnS0AiywYeDrWE3u
+ 5Hm+JXvxgPDvFSdAjBPKqlo7lH13prQ2aVtqMOhuerPWkERkBirdsnNyKXqi0zwirERi7t
+ Uyqijj33IFBUkcVYGP/XKnghDusrmH3PmtbXwhN4lgqqGAoaHz9bFXsUvo9js6eqTDlado
+ 4ETYZz6XIpgoxLselCFbjco8j3+yiDpfhJJ83sECjV1YGFGyThx29+nu/471vg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737199016;
+ s=mail20150812; t=1737199122;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nR8NxXnBkDGI7B0M5v0ZKF2/MQcTCBunMmk9LEUXA/4=;
- b=PnDPxJUt98Q0d1rH1YLbhoYwL4GULyRF1vJuloWw6YBfTMG8HI/mMbQ3mzB7Z9rysFkxKM
- wLOp9nAerWdHvCjp23ETTPA6rnY167Dw6j+s02wAZVhzK4KKgweTZEnplzSazm1iQm9q4H
- 5INjgFvber3SG1csQWGJgJ7XaWRyqlwDcZeXs4DdPMTEC9Tu4qNJe3Y1sHC43kal9JsteA
- QN7RVErPvn3TXvb0Gxk5EhThyfX9hxD6TlGFfJoq3tMWlaBozaN7iNnX1x1OPzna8WsCKX
- vgvUKLl9v+crGAzSRDvywTtQKb8YafbbIOLjHn/lE3Zg0GlYpDqnQHns84OjqQ==
-To: u-boot@lists.denx.de
-Cc: quentin.schulz@cherry.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 5/8] arm64: renesas: Drop unused code and clean up headers
- on Salvator-X boards
-Date: Sat, 18 Jan 2025 12:15:28 +0100
-Message-ID: <20250118111621.362188-5-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250118111621.362188-1-marek.vasut+renesas@mailbox.org>
-References: <20250118111621.362188-1-marek.vasut+renesas@mailbox.org>
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lIilwQU7jBbA7QLCo/jFi/9Oj2d6aazQzUqbqmoVLT8=;
+ b=Dcw6lu2g/aA/u9Zy7433yUsXhdvaT2+lxaJZXhC+wxXe5Pf1KOeUR6BPYApPbT5KAnMyly
+ HrfhXDHlYQOVCU3GyV7FlnEmDmOLUtzdjq87RcC5HefKSh9REExQ7w6w8SnNgJ/CelrBoQ
+ a6nnDH3FutkDHtCTGnTSl7XluehV32ky3d4AW+fGqvKGCRJr7mt/SCgo+0HmHSHcXPz5T/
+ sOFordQsfC1pzr0joXA0iB5UaI2GXlxKXvScZqO+9r7Dzyldz8NHUtLQIZcRtLUCKvWH0K
+ Z8UcABhwMuNPeRcfsBPLVJMjbFB+2rvIydjhvyetVZe/Mm65hV38waqDerPJ8g==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Sat, 18 Jan 2025 12:18:17 +0100
+Message-ID: <20250118111830.362667-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2a585179839f0e4b080
-X-MBO-RS-META: 1xfmw9xsku88174fenb1ypju6aypcqe8
+X-MBO-RS-ID: 0dad0127074d5cfbc6a
+X-MBO-RS-META: u5ip31uggf633r8jwdb7s5eeada1jnpg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,90 +81,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CONFIG_IS_ENABLED(SYS_I2C_LEGACY) is not set on this board,
-remove the code and also remove all unnecessary headers that
-are included in this file.
+The following changes since commit c11dc783fb4418393dd08d39ee01debfc2dea4d4:
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Adam Ford <aford173@gmail.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>
-Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V2: No change
----
- board/renesas/salvator-x/salvator-x.c | 38 +++------------------------
- 1 file changed, 4 insertions(+), 34 deletions(-)
+  Merge https://source.denx.de/u-boot/custodians/u-boot-riscv (2025-01-17 08:27:40 -0600)
 
-diff --git a/board/renesas/salvator-x/salvator-x.c b/board/renesas/salvator-x/salvator-x.c
-index 2c8860bcee4..60f8b94e54a 100644
---- a/board/renesas/salvator-x/salvator-x.c
-+++ b/board/renesas/salvator-x/salvator-x.c
-@@ -7,41 +7,18 @@
-  * Copyright (C) 2015 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-  */
- 
--#include <cpu_func.h>
--#include <image.h>
--#include <init.h>
--#include <malloc.h>
--#include <netdev.h>
--#include <dm.h>
--#include <asm/global_data.h>
--#include <dm/platform_data/serial_sh.h>
--#include <asm/processor.h>
--#include <asm/mach-types.h>
- #include <asm/io.h>
--#include <linux/bitops.h>
--#include <linux/errno.h>
--#include <asm/arch/sys_proto.h>
--#include <asm/gpio.h>
--#include <asm/arch/gpio.h>
--#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
--#include <i2c.h>
--#include <mmc.h>
--
--DECLARE_GLOBAL_DATA_PTR;
--
--#define DVFS_MSTP926		BIT(26)
--#define HSUSB_MSTP704		BIT(4)	/* HSUSB */
-+#include <asm/arch/renesas.h>
-+#include <init.h>
- 
- int board_early_init_f(void)
- {
--#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY) && defined(CONFIG_SYS_I2C_SH)
--	/* DVFS for reset */
--	mstp_clrbits_le32(SMSTPCR9, SMSTPCR9, DVFS_MSTP926);
--#endif
- 	return 0;
- }
- 
-+#define HSUSB_MSTP704		BIT(4)	/* HSUSB */
-+
- /* HSUSB block registers */
- #define HSUSB_REG_LPSTS			0xE6590102
- #define HSUSB_REG_LPSTS_SUSPM_NORMAL	BIT(14)
-@@ -65,13 +42,6 @@ int board_init(void)
- 	return 0;
- }
- 
--#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY) && defined(CONFIG_SYS_I2C_SH)
--void reset_cpu(void)
--{
--	i2c_reg_write(CONFIG_SYS_I2C_POWERIC_ADDR, 0x20, 0x80);
--}
--#endif
--
- #ifdef CONFIG_MULTI_DTB_FIT
- int board_fit_config_name_match(const char *name)
- {
--- 
-2.45.2
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+
+for you to fetch changes up to 1487c34efa7b6a439ee7396e333cfc3f789f564c:
+
+  arm64: dts: renesas: Deduplicate extalr_clk bootph-all (2025-01-18 09:29:17 +0100)
+
+----------------------------------------------------------------
+Marek Vasut (2):
+      arm64: renesas: Rewrite u-boot-elf.srec base address if PIE for R-Car Gen3
+      arm64: dts: renesas: Deduplicate extalr_clk bootph-all
+
+ Makefile                                |  9 +++++++++
+ arch/arm/dts/r8a774a1-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a774b1-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a774e1-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77951-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77960-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77965-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77970-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a77980-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a779a0-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a779f0-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a779g0-u-boot.dtsi       |  6 +-----
+ arch/arm/dts/r8a779x-rcar64-u-boot.dtsi | 12 ++++++++++++
+ 13 files changed, 32 insertions(+), 55 deletions(-)
+ create mode 100644 arch/arm/dts/r8a779x-rcar64-u-boot.dtsi
