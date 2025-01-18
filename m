@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0619C02187
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:02:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FFDBC02187
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:02:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B4BE8075F;
-	Sat, 18 Jan 2025 05:02:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD8FD80793;
+	Sat, 18 Jan 2025 05:02:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PcM9lVfq";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="MexbfwRM";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KlBOW0U7";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="S8nG+flH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1F2F80790; Sat, 18 Jan 2025 05:02:20 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 1F824807BC; Sat, 18 Jan 2025 05:02:24 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1D7480657
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:02:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A59B48036F
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:02:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,33 +31,33 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YZjbt0kLjz9slV;
- Sat, 18 Jan 2025 05:02:18 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YZjbx1LhCz9sZL;
+ Sat, 18 Jan 2025 05:02:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737172938;
+ s=mail20150812; t=1737172941;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qq8BNQf6nACtX72pcKMEGbASiO6/i3TiCaXAd8qcmuE=;
- b=PcM9lVfqDt07m7c0jjot272k3ssG8c3azzyZHqza1SG8QM01AbeaSdEd8YXkZwKpsJo1iG
- fsZvmwFizVVK8ApEfif5q2zWZnDRYgeKB9h/lOtVc5ez3nczIvZ6LLPy3tKv5bRjVm/xCo
- W8shBmwHa1Qkr56N/0Tv0n/wTtCR+ZA5a8On/OKtYTrSXr/XtaJ1NXzQrXzHGG5C59OxGq
- YStCplrwZYjkjIB1vamEtjbOQLlmhQPnfssreqg68UTbyPRQchOHSA0R1tdT6YfV1YZ+Z+
- UFAbe270C+dLFNq/zzB43sLhbV9lYnfuHpc6ihb+B/XWmV69DqRTSU+NssMo9g==
+ bh=OryxPMtEMnAgyRGOi7HYME/V/fiFl3wcrzG5WIO1iTY=;
+ b=KlBOW0U7w7X3smNKNrwJ7JsM+HDe0yjy3XRSMKKdAJr5kQSIKYAP+3chnH33sfBCm1AOMr
+ i5imnmptjVhzVbzNEBj8Ell/btpGoOO2ldv2fCgKFH9hsjsJdQ5MlTlueIRt9Uf9yQCV7C
+ B/qJJvJps02BvL9Ntuy5JaOjSgYuwTbHxbvPRcLOsAP14qrGisSnsnolbsS1cExSyrXmsm
+ 8rLf/lW407IetYfEhYFZ8rZLQQjVA9970h45sB1VEJKXwfTkj/zuC9lOHNfiVetkxbFPRS
+ 4yjbTdiqoFO8LQe7cuANAOU6OM9qeYcnNW4kFJMtQzr6x2Nfkqe5gncxZGFtNQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737172936;
+ s=mail20150812; t=1737172939;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qq8BNQf6nACtX72pcKMEGbASiO6/i3TiCaXAd8qcmuE=;
- b=MexbfwRMds1delpUUEolNiclwjF4W1oJz3SMwQYPhYlTW3g7rhFn38aJB3rtzWGv48CMg4
- 3+iANdEUmIGiaAQFU06lUThRgNRewje4F/nYd4uX6lSZ3ufwnXQtGu6sLK63wazUcIHMMd
- 3vpXFucSDvMNUznzHuXVEMFDHyxK5nH2NIGUYZLM8pm9v/Di/h3sq/En1jw+/8ztQ7AxEu
- 6poYmTaJfhKuokK9dhARMbxkosEJtS4VFVOXEcQ5+BvGtTGJf65I+j8v68M/NlqWnE34fR
- bQqvg/Pe5joYaRkJupKakhelHgrwtQl1qucm2vQNXAGqVjrQCLWWihNLQUVFqw==
+ bh=OryxPMtEMnAgyRGOi7HYME/V/fiFl3wcrzG5WIO1iTY=;
+ b=S8nG+flHchEtWUQX2qPf1E2784I0SHiy1MFIPqGs3d7VkHIoZsD2zIwDOg/X7GrWCYO8zu
+ luKF4jvgPRWi94idkmzZPrWiZUxG4kZYeCIXr5HIVZCXH2+cmVdn5Tj46kyS0DOP3+TVrh
+ PuxpABYTdZFv5TqUXnTDie5CR6TEm/xEK7sO3ytihairyZ7l/msLwtUvxnjYzylyyujdrZ
+ 5PJ9AQbiIDpMQr8hXjY1Xuad5rJEaUnz4mmvuQKFtbiAmNlFh6N783x9ug4Ea4lKkEnwk7
+ lQ2sNUmeZIu2hxif2lBjcb8uT064HTRR5T0POtfAanrcDQH+ZO7mszh8VMrNgg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Aaron Williams <awilliams@marvell.com>, Anatolij Gustschin <agust@denx.de>,
@@ -73,15 +74,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ronald Wahl <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 5/8] led: Handle return value from cyclic_register()
-Date: Sat, 18 Jan 2025 05:00:59 +0100
-Message-ID: <20250118040130.74921-5-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 6/8] mmc: Handle return value from cyclic_register()
+Date: Sat, 18 Jan 2025 05:01:00 +0100
+Message-ID: <20250118040130.74921-6-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
 References: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 5cad8cd18051d0d55cc
-X-MBO-RS-META: oby44k48e97sya79ai7bunk3y4afxbg5
+X-MBO-RS-META: fqfj8i6o4fq5uxjnpo9oygrkbfionsyg
+X-MBO-RS-ID: 74179df69eafc50d345
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,7 +99,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Handle the error code returned by cyclic_register() and propagate it.
+Handle the error code returned by cyclic_register() and propagate it,
+except in case the return code is EALREADY. The cyclic_register() in
+mmc.c can be called multiple times with the same parameters, and that
+is not an error, so depend on the cyclic_register() to skip such a
+repeated registration and consider EALREADY as non-error here.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -122,41 +127,46 @@ Cc: Tim Harvey <tharvey@gateworks.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/led/led_sw_blink.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ drivers/mmc/mmc.c | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
-index ee1546d02d4..859dac47c30 100644
---- a/drivers/led/led_sw_blink.c
-+++ b/drivers/led/led_sw_blink.c
-@@ -50,6 +50,7 @@ int led_sw_set_period(struct udevice *dev, int period_ms)
- 	struct led_sw_blink *sw_blink = uc_plat->sw_blink;
- 	struct led_ops *ops = led_get_ops(dev);
- 	int half_period_us;
-+	int ret = 0;
- 
- 	half_period_us = period_ms * 1000 / 2;
- 
-@@ -71,8 +72,8 @@ int led_sw_set_period(struct udevice *dev, int period_ms)
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 4ea97974383..9c58d052261 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -3078,11 +3078,17 @@ int mmc_init(struct mmc *mmc)
+ 		return err;
  	}
  
- 	if (sw_blink->state == LED_SW_BLINK_ST_DISABLED) {
--		cyclic_register(&sw_blink->cyclic, led_sw_blink,
--				half_period_us, sw_blink->cyclic_name);
-+		ret = cyclic_register(&sw_blink->cyclic, led_sw_blink,
-+				      half_period_us, sw_blink->cyclic_name);
- 	} else {
- 		sw_blink->cyclic.delay_us = half_period_us;
- 		sw_blink->cyclic.start_time_us = timer_get_us();
-@@ -81,7 +82,7 @@ int led_sw_set_period(struct udevice *dev, int period_ms)
- 	sw_blink->state = LED_SW_BLINK_ST_NOT_READY;
- 	ops->set_state(dev, LEDST_OFF);
+-	if (CONFIG_IS_ENABLED(CYCLIC, (!mmc->cyclic.func), (NULL))) {
+-		/* Register cyclic function for card detect polling */
+-		cyclic_register(&mmc->cyclic, mmc_cyclic_cd_poll, 100 * 1000,
+-				mmc->cfg->name);
+-	}
++	/* Register cyclic function for card detect polling */
++	err = cyclic_register(&mmc->cyclic, mmc_cyclic_cd_poll, 100 * 1000,
++			      mmc->cfg->name);
++	/*
++	 * This cyclic_register() here might be called multiple times, this
++	 * is not a problem in this specific case, because the mmc subsystem
++	 * always registers the same function with the same polling delay,
++	 * so the EALREADY error can be ignored here.
++	 */
++	if (err && err == -EALREADY)
++		err = 0;
  
--	return 0;
-+	return ret;
+ 	return err;
  }
+@@ -3091,8 +3097,7 @@ int mmc_deinit(struct mmc *mmc)
+ {
+ 	u32 caps_filtered;
  
- bool led_sw_is_blinking(struct udevice *dev)
+-	if (CONFIG_IS_ENABLED(CYCLIC, (mmc->cyclic.func), (NULL)))
+-		cyclic_unregister(&mmc->cyclic);
++	cyclic_unregister(&mmc->cyclic);
+ 
+ 	if (!CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) &&
+ 	    !CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) &&
 -- 
 2.45.2
 
