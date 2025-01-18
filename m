@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B087C02183
-	for <u-boot@archiver.kernel.org>; Fri, 17 Jan 2025 21:46:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92555C02183
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 03:09:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A70D980423;
-	Fri, 17 Jan 2025 22:46:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B21468069D;
+	Sat, 18 Jan 2025 04:09:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iZ4RuGQr";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Arg231tt";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="meNuVnyv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71C918069D; Fri, 17 Jan 2025 22:46:28 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C2EEB8070C; Sat, 18 Jan 2025 04:09:20 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F23638036F
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 22:46:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0125A80657
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 04:09:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6ddcff5a823so23022876d6.0
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 13:46:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737150385; x=1737755185; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=maGyJADiu4kizlLNTKM6SDmZez9y8hR4o01avw+ihFA=;
- b=iZ4RuGQrPq4wn+jqvkozIfqXm0oNu+CICbG2qL7n5P+5qgUT0fCAwpCZHV7tCtznbG
- vuSqmC3tkMjrK2FdmgY09bJ4L7DJzLS68v13qbPcXrZHzvBYTUvmsBJcgFFDIhLhrUpY
- hl7Qhcf17Dvck1bElgO4sCu0LbDB5YhvBYfp0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737150385; x=1737755185;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=maGyJADiu4kizlLNTKM6SDmZez9y8hR4o01avw+ihFA=;
- b=aB6+4/6tTyJ+H7xSOVXa0Bm7xwMmZhexYnqKoPT62ExJKpeqb5e4Zc05C1ceTjw8qe
- scp2uy5MddupwK9Kzs82cEUfN3PboArLZaQwfDT7mQt5eW1zeVrH6o0NSW+N+v2e4NRl
- hn8fIO4upO/kg/AKyEY1ahwGVigLLfSDCDBo4cW1TsMuSR/+/Fn1SZHmR5cjiftQmGR6
- Y1oQCYC0REiRuH+iTKXYFSuAyXVIcGi4tG5Tbjqa/4rkq9fBxu3oVpQCHOMx4VBMsuB+
- GtIqGpgo3tVCc7oCVFtrNSjwPszp+FHale6kSr3qMfw1eOE7/5aLIZ7j4/r5h+dDBPs6
- yHZg==
-X-Gm-Message-State: AOJu0YxQhqxAlMQ7Tz3wfXnYvMFZIbMgVodFxcMQP7ql5zZ7ZlfxDJkU
- xgK+WOw6h6+RN3LLfv3yw2tZiQFxgWtgA8ghQr+leaJk/CKlwB6YJy9RzHnCbvM=
-X-Gm-Gg: ASbGncvUQw/JjlVO85KeVBxTTtjKOuPug+ys+07Wt8o0+XV420uft+E2/Vt5zG1cBmO
- zieidnVG0ikR52pDRY+1UnBvFUZgTSgcX7T26S1ffb1C5YF819dLdez5UJBAToYnTsJ5KbADdNB
- 6OPvED7JbeSR0A1LlaH/Y+Q7OgQ2l8oy+PTNjRDYKp7GnQs4/uhxjC0J9liR7leI+QdwTZaN1TB
- 27FSdop2K17++uPysjwWoT+hBR0GV/eIYGUMi3eJx8sP8EmfscyNg==
-X-Google-Smtp-Source: AGHT+IEPMXSEgZGR0R1I3KV+2Z4dyPsleQZkqrtruwzN8rgik4nFkSIRnRJYs8XMFvMZH5SLE1DXJw==
-X-Received: by 2002:a05:6214:5782:b0:6d8:88cf:e690 with SMTP id
- 6a1803df08f44-6e1b216ff3fmr68893826d6.3.1737150384761; 
- Fri, 17 Jan 2025 13:46:24 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afc233ecsm15834156d6.57.2025.01.17.13.46.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jan 2025 13:46:23 -0800 (PST)
-Date: Fri, 17 Jan 2025 15:46:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v4 0/2] Static initcalls
-Message-ID: <20250117214621.GA2503843@bill-the-cat>
-References: <cover.1736174204.git.jerome.forissier@linaro.org>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YZhQj4BbLz9snt;
+ Sat, 18 Jan 2025 04:09:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737169757;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Y6dPQ81r1beV7wwD+UXNqDQqL8pSK2UZUTAlpNUowMU=;
+ b=Arg231ttYMj/QxA0tFq++iDS+dvt6enzIdGcJYcjeBh7EdfySohiEA1K4GKBazra7kW1G3
+ Rgqozii3Him8sTngdnPnP6kFNcA3VYIJSPlTk1okU3kHSVZUz8YnNTvasDF5QVdVMPtMcx
+ Jux/huJG1/T80KkkYd59d6QZrnjiDsT00VoGRyeTi77v0KU7mpiYyEmxSIBPy7Ef6c1AU3
+ UhhRiOpaHWszWvwufevuZq30TvXEbm2wrqzFoRiq5g0yQ4Ah1xJV/l+O7ZYxE4V1Wlb5rq
+ 1XeSDDjYUxY6jUAtdVqSrUZkOfQfPOaUrLfkBzuZi3MBB+13z5yR4uTsDFLs/g==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737169755;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Y6dPQ81r1beV7wwD+UXNqDQqL8pSK2UZUTAlpNUowMU=;
+ b=meNuVnyvibndRrfO17v4DQtAtRZ2I6t0aGYLkQ3Cusz0bhTIk4sY43PZ29wIGPVcuMBuk0
+ +O9KtQ5vqFrqQ640Q+SotZ4+rN6t3BxU4ivAWu/RcqkntEjtA5tfQ3+FVnZH4dI+PDq1mI
+ O8KUvEjbfPxtyTScrTYcBLjq10Zekq0RSTyV41UXyhe0Xi3osSdjeetS71HZlLavERjt25
+ W4QQWAbJQj5+uM6xCELPJ772gSC/EoQevN/XDfPFg/haym7WThud198MY5z4oXa5yHpdGG
+ +Gjudc0xXqv6+ixYkHs5zAP5vXholRESZf+gRubhfR8Q9LJhWbyXYPs4Ot1pfg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ronald Wahl <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] mmc: Simplify poll CD logic in case cyclic framework is
+ enabled
+Date: Sat, 18 Jan 2025 04:08:39 +0100
+Message-ID: <20250118030857.29509-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PsgnB2PFqxL+pBEG"
-Content-Disposition: inline
-In-Reply-To: <cover.1736174204.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: c523130c56651dc0b05
+X-MBO-RS-META: pz8oau6puwsynuud3bxrewr75rtmfzou
+X-Rspamd-Queue-Id: 4YZhQj4BbLz9snt
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,45 +91,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Simplify 90cc07fd786d ("mmc: Poll CD in case cyclic framework is enabled")
+according to suggestions by Rasmus. The struct cyclic_info is zero-size in
+case CONFIG_CYCLIC is not enabled and does not add any size to struct mmc,
+so it can unconditionally be part of that structure. This allows clean up
+of all the other conditionals in mmc.c which can now be unconditionally
+present, as they also add no extra space.
 
---PsgnB2PFqxL+pBEG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Suggested-by: Rasmus Villemoes <ravi@prevas.dk>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Ronald Wahl <ronald.wahl@legrand.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/mmc/mmc.c | 10 ++++------
+ include/mmc.h     |  6 +++++-
+ 2 files changed, 9 insertions(+), 7 deletions(-)
 
-On Mon, Jan 06, 2025 at 03:40:12PM +0100, Jerome Forissier wrote:
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 799586891af..821abc7dd66 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -3042,7 +3042,7 @@ static int mmc_complete_init(struct mmc *mmc)
+ 
+ static void __maybe_unused mmc_cyclic_cd_poll(struct cyclic_info *c)
+ {
+-	struct mmc *m = CONFIG_IS_ENABLED(CYCLIC, (container_of(c, struct mmc, cyclic)), (NULL));
++	struct mmc *m = container_of(c, struct mmc, cyclic);
+ 
+ 	if (!m->has_init)
+ 		return;
+@@ -3078,10 +3078,8 @@ int mmc_init(struct mmc *mmc)
+ 
+ 	if (CONFIG_IS_ENABLED(CYCLIC, (!mmc->cyclic.func), (NULL))) {
+ 		/* Register cyclic function for card detect polling */
+-		CONFIG_IS_ENABLED(CYCLIC, (cyclic_register(&mmc->cyclic,
+-							   mmc_cyclic_cd_poll,
+-							   100 * 1000,
+-							   mmc->cfg->name)));
++		cyclic_register(&mmc->cyclic, mmc_cyclic_cd_poll, 100 * 1000,
++				mmc->cfg->name);
+ 	}
+ 
+ 	return err;
+@@ -3092,7 +3090,7 @@ int mmc_deinit(struct mmc *mmc)
+ 	u32 caps_filtered;
+ 
+ 	if (CONFIG_IS_ENABLED(CYCLIC, (mmc->cyclic.func), (NULL)))
+-		CONFIG_IS_ENABLED(CYCLIC, (cyclic_unregister(&mmc->cyclic)));
++		cyclic_unregister(&mmc->cyclic);
+ 
+ 	if (!CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) &&
+ 	    !CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) &&
+diff --git a/include/mmc.h b/include/mmc.h
+index e4b960b7294..c6ed25db728 100644
+--- a/include/mmc.h
++++ b/include/mmc.h
+@@ -759,7 +759,11 @@ struct mmc {
+ 
+ 	enum bus_mode user_speed_mode; /* input speed mode from user */
+ 
+-	CONFIG_IS_ENABLED(CYCLIC, (struct cyclic_info cyclic));
++	/*
++	 * If CONFIG_CYCLIC is not set, struct cyclic_info is
++	 * zero-size structure and does not add any space here.
++	 */
++	struct cyclic_info cyclic;
+ };
+ 
+ #if CONFIG_IS_ENABLED(DM_MMC)
+-- 
+2.45.2
 
-> This series replaces the dynamic initcalls (with function pointers) with
-> static calls, and gets rid of initcall_run_list(), init_sequence_f,
-> init_sequence_f_r and init_sequence_r. This makes the code simpler and the
-> binary slighlty smaller: -2281 bytes/-0.21 % with LTO enabled and -510
-> bytes/-0.05 % with LTO disabled (xilinx_zynqmp_kria_defconfig).
->=20
-> Execution time doesn't seem to change noticeably. There is no impact on
-> the SPL.
-
-This fails in CI unfortunately:
-https://source.denx.de/u-boot/u-boot/-/pipelines/24241
-
---=20
-Tom
-
---PsgnB2PFqxL+pBEG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeKz6IACgkQFHw5/5Y0
-tywkFAv42P8KlCEoTpB+aWG2Dq94HJqt/5KNT2YbSPAIrBqzwiWTdr4YkFEdCbm9
-T8BJEjkTNUFTLjF2vLJfGztEuT8NmKinAmgX/ATiKOQmq6JqffJs7u+tfXP2Z4hd
-ZW8DUif8k4R55NA7oIP8lqOZpBhFDo9Dz7n2VnXGDjrh8XzlBY34QaY35XkPUeTL
-B0zTNAF4lt0UjNYZQhd+9Q17GDFk9rmwzMx/3cPx4q0nhmZmh7UsPhpDmpF1qWFy
-wOwBF8AygToVx0Y2p+1IblMcV9dka0roWdHPNl/Y3aR6gMCNclxwLzYzAg74xZfF
-48TE/bYjNeciwDcIqNbCYh38CXINPoEh5QB+pESdpbWv8Qom5d+5z+82ef4xYLyO
-30rKY0pjyAxB2GKhoZvzFFT2nEbBD8FzYy/hz/JdYFaj+NVGnFSJt5lrAQVXDfwA
-3JR8nWoZ3PMvWwRQRYvkSZRPgcfnaU71f5XmFczrkjuqOe6Gm/XuUfvGiuCjr4H+
-htMHCMY=
-=AEsf
------END PGP SIGNATURE-----
-
---PsgnB2PFqxL+pBEG--
