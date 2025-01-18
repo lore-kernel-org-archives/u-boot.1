@@ -4,60 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E47F7C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 05:59:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C3EC02187
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 05:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01A3A8063E;
+	by phobos.denx.de (Postfix) with ESMTP id 4DB9480756;
 	Sat, 18 Jan 2025 06:59:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UMiN8QtQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j6WTasC+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D37D580657; Sat, 18 Jan 2025 05:32:45 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id BA89C8070C; Sat, 18 Jan 2025 06:50:12 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B78818036F
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:32:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A74980077
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 06:50:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aaeecbb7309so520072666b.0
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 20:32:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3e9a88793so4682927a12.1
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 21:50:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737174763; x=1737779563; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pYBhe4Asx1j4ql64T/IqHjJC2hyU+ACjkqCnMiiCIOg=;
- b=UMiN8QtQe3YnznZV+zoUoy3BbJX/C1YLNWSyRMofV9QNmFwmC+/gGyIpOAypaj0DMf
- JIUWBHnxy39nGYhmtf5onIyS7+eGWS3rpKkXyXlGRiugl2DK1oFyFbKxUmXIE1KjL4w5
- TCQpwnCu8A2CoMaIne4PtVt7Nu1wGMGxiyJhg=
+ d=gmail.com; s=20230601; t=1737179410; x=1737784210; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Aff9km3zIkIMhb4MW4tO/IOx1TMp5fPG1CdwAISjCOo=;
+ b=j6WTasC+iofuJu8jg5PUQ7N/0SBQvssVUFVUKwtCvli1MVwp0dSyUlsQrgk1n97w7o
+ t0pVGtZoyTqlypDFk7j16qk3eJATYyNSBHxYV4wtlaJPZ5842DFzUm8WIqj60+eKk/34
+ PPa2rrZCHERLOzEGJq/aBt9GlEwUNwAJHZM/waJl8+HqtFh3EjDRum1BRGwjdftZ6Ma1
+ O5B9LagvecY1TBxsPbz7R7vC0ofLGN5w0/Fkt3IU8Uk1fls1gblDVAVlONde64xgHbl6
+ FRp/HB14LUa991IdGTmLve4UcYfe9nEedYheAi9MFZ2RSMXILH2klu09yqKZvpTTh611
+ OrKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737174763; x=1737779563;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pYBhe4Asx1j4ql64T/IqHjJC2hyU+ACjkqCnMiiCIOg=;
- b=tCM6uMZdsDIjzLL1xxBF8mPZjS8PvefEsmHAB7oHAjWkY3ymFUMIJPgEfu/be7UgST
- /bRCfFlA8KxR8p0GTZS+KMxQX6JedKkc+7BxbVHKpYpQwBIwbKy0TrP3+sniPCJVPBMr
- /xeWnk8NBhzfqRZR55clsdmXu7pj3v2zfEb8o0abuxxDYQcx8rEZ3uon3mR7fDChy0J9
- rXmUBVG4clhz0VtuPbT49RsZ9ovPK3/sPr3heUX/tfFL/g/8ORxPtZS4577fOqGs0vmX
- XAM07H1QKlcGyVoEytF/eJ7axEneJlD/r/67AY2Bx+fpmqY5EH24FRTVkf5LyydlcVqX
- nxXQ==
-X-Gm-Message-State: AOJu0Ywk1NB6OunqvYyyhgYbeN8eIKRkVa/1MVMkG9ywm6O69sXNGeri
- kFpi6aD1eINdwp0MiJG8eSx1Dci7qHzA3ejeaUc9ANU2Ao6LoJPVXdQ83c/BUmlz7fsYbnv3ogr
- zmA8iBdHEqABsNNCtDwPbd5M+9LaEK163T6D3
-X-Gm-Gg: ASbGncuOFPYjq8YC5h7udICIKiPiJR6UPNKUwmH2uuuQgTMHAAv1pKO8qzQ5W446gFW
- Dqqi15ZolISBerPb9tMxwC/vJhCF/3Wj8AocqZFMxzBsGmfZhLAC13VVNNVu11q/BnjNe0yn3hS
- kFB7ujsW53
-X-Google-Smtp-Source: AGHT+IGV530ikGs/T+QXXdaPugnj0iqSd8pwYwXAqz468FO0ZOeaVY+ygQv4stLWtWqIi/b3kRpdoMDN9N+jIFpAaLU=
-X-Received: by 2002:a17:907:7205:b0:ab3:88a0:b71d with SMTP id
- a640c23a62f3a-ab38b2e734fmr559214566b.34.1737174763218; Fri, 17 Jan 2025
- 20:32:43 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737179410; x=1737784210;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Aff9km3zIkIMhb4MW4tO/IOx1TMp5fPG1CdwAISjCOo=;
+ b=qjSckEIU3SPfvuq6KqFAsk2ooDfPhOTDyLlaE1jej4ZHSErgmcPVO3HB3azAIFaSP0
+ kZfwiKbxkvkdYGt6ZA79bEIHRbN8kaMQfc+8gP5o8820N+DGsxPBht0OiT9yhAnnTrCs
+ B3EcOJZDrSDJ67xeCC7RYJJVXfXzGHI22w8hor5Qw2Enl3Hq2lnbFkMAKmWPz30AesiZ
+ SXbRrKidFltOb/fhi2e6oXweAl7mCSVDnI60AdJJdNVHtrDU3tPIQ8Gj1u2+BmRqPZsN
+ 0Pkhfub89E/fjKmtBdvV0ssO2rwRZsOZoyq+k6abKQnagvnF6Q3mKjKHfl/VzoA2O+FZ
+ a9zQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWn4yk5voPQJw5x4OIiFJFCROf5F/bWxYZJTwcC+HSbRrPqIgPmHV+OIQ8ihO0fRNLJuiB6p4Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YxCNmn9RPU37XmocbnFCU8o8l1/g6jDCw+2ShhvQH2xdcUz9eVU
+ h+3pI1VGw4i+sXrsYwbdcJni8u30ZaGsFZWPq7f/0wDPKXuW6XEtksgXdNZwuhrsplfpyWJSL4n
+ R5PR5rz5gqCisfaeRmgoUQc3IT74=
+X-Gm-Gg: ASbGncuDmaR4WHNn0zf7Los2xajznZrJLIWmIsRe7qgn25hp1oDkMIzo7odNXfBeexu
+ sbcWiF+ZpCYsdAq2Qq1gh3hNiyydJ4IlA3y13WWfX9UXSZTjuTT1b
+X-Google-Smtp-Source: AGHT+IFzVb8gWTPfpa4cmauPDw/Lb7ACbZPk5W13P6V/LUAOqWwXxmX4Jv9P/AZt9zZjH6e/xwazI8xm9YLJi91bpGM=
+X-Received: by 2002:a05:6402:34d5:b0:5d0:e50b:899e with SMTP id
+ 4fb4d7f45d1cf-5db7d2ec628mr4310856a12.4.1737179408233; Fri, 17 Jan 2025
+ 21:50:08 -0800 (PST)
 MIME-Version: 1.0
 References: <20241104175110.1048449-1-sjg@chromium.org>
  <CAFLszTgFdNrRev+7n6j+NqCM+em_p-ONAc=+sztoYaP50HUivw@mail.gmail.com>
@@ -66,17 +72,18 @@ References: <20241104175110.1048449-1-sjg@chromium.org>
  <20250115233157.GE3476@bill-the-cat>
  <CAFLszTga3RD95M2ujLfuXQor39sfcQrEUe3hwRKABiWx04PiZg@mail.gmail.com>
  <20250116172159.GH3476@bill-the-cat>
-In-Reply-To: <20250116172159.GH3476@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jan 2025 20:32:31 -0800
-X-Gm-Features: AbW1kvZOLmk-O_kMoaWbKQvaJDJlGIXZZPzCzj6oC7xsCV9Jg8CqmqlzdFIbIbY
-Message-ID: <CAFLszTigN+s1T0hjJXnkE4ucYafHCtabPFHh=gCFpro2WrLnpg@mail.gmail.com>
+ <CAFLszTigN+s1T0hjJXnkE4ucYafHCtabPFHh=gCFpro2WrLnpg@mail.gmail.com>
+In-Reply-To: <CAFLszTigN+s1T0hjJXnkE4ucYafHCtabPFHh=gCFpro2WrLnpg@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Fri, 17 Jan 2025 21:49:43 -0800
+X-Gm-Features: AbW1kvbvpySfQbtsRDolurGcbvKg5osavNmLf8vNThi1ENdva3Yb6vbH8IEeKus
+Message-ID: <CAJaLiFw3j1FTT25mNd_5Pk-UTCaNL=R2GmK0+m_VoCc7Yc2PRQ@mail.gmail.com>
 Subject: Re: [PATCH v3 00/19] bootstd: Support recording images
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Dragan Simic <dsimic@manjaro.org>, 
- Emil Kronborg <emil.kronborg@protonmail.com>, 
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Dragan Simic <dsimic@manjaro.org>, Emil Kronborg <emil.kronborg@protonmail.com>,
  Etienne Carriere <etienne.carriere@foss.st.com>, 
  Francis Laniel <francis.laniel@amarulasolutions.com>, 
  Guillaume La Roque <glaroque@baylibre.com>,
@@ -100,11 +107,11 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
  Svyatoslav Ryhel <clamor95@gmail.com>,
  =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- Tim Harvey <tharvey@gateworks.com>, Tony Dinh <mibodhi@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>,
  =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-X-Mailman-Approved-At: Sat, 18 Jan 2025 06:59:38 +0100
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 18 Jan 2025 06:59:38 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,44 +128,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Thu, 16 Jan 2025 at 10:22, Tom Rini <trini@konsulko.com> wrote:
+On Fri, Jan 17, 2025 at 8:32=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> On Thu, Jan 16, 2025 at 08:52:38AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 15 Jan 2025 at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> [snip]
-> > > I'm referring to the whole bootmeth/bootflow/etc thing. Is this going
-to
-> > > be put to use by anyone / anywhere on PowerPC? M68K? MIPS? 32bit ARM
-is
-> > > a harder question there, which is also where this particular overflow
-> > > was.
-> >
-> > I'm still not sure what you are saying. Are you wanting to disable
-> > bootstd by default / go back to distro scripts / force everyone to use
-> > EFI_LOADER / ?
+> Hi Tom,
 >
-> Yes, I'm asking where it's appropriate to enable this new functionality
-> by default.  It certainly should be enabled on arm64 (there's new
-> designs) and riscv (there's new designs). It still ought to be enabled
-> on arm32 because we otherwise lack a easy way to say "new" arm32 (say
-> i.MX7) and not "old" arm32 (say i.MX23). What is the point of enabling
-> this on PowerPC for example? The active users there are (generally)
-> supporting legacy hardware and I have no idea how much they want to
-> change their boot process, once bootstd supports flash for example.
-> There's similar questions for everything else under arch/ as well.
+> On Thu, 16 Jan 2025 at 10:22, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Jan 16, 2025 at 08:52:38AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Wed, 15 Jan 2025 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> > [snip]
+> > > > I'm referring to the whole bootmeth/bootflow/etc thing. Is this goi=
+ng to
+> > > > be put to use by anyone / anywhere on PowerPC? M68K? MIPS? 32bit AR=
+M is
+> > > > a harder question there, which is also where this particular overfl=
+ow
+> > > > was.
+> > >
+> > > I'm still not sure what you are saying. Are you wanting to disable
+> > > bootstd by default / go back to distro scripts / force everyone to us=
+e
+> > > EFI_LOADER / ?
+> >
+> > Yes, I'm asking where it's appropriate to enable this new functionality
+> > by default.  It certainly should be enabled on arm64 (there's new
+> > designs) and riscv (there's new designs). It still ought to be enabled
+> > on arm32 because we otherwise lack a easy way to say "new" arm32 (say
+> > i.MX7) and not "old" arm32 (say i.MX23). What is the point of enabling
+> > this on PowerPC for example? The active users there are (generally)
+> > supporting legacy hardware and I have no idea how much they want to
+> > change their boot process, once bootstd supports flash for example.
+> > There's similar questions for everything else under arch/ as well.
+>
+> To me this is in fact two different questions.
+>
+> 1. For PowerPC, m68k, MIPS, I suppose we can just disable BOOTSTD and wai=
+t for them to go away, if you are saying that they are behind on migrations=
+ will never catch up
+>
+> 2. As to the default, I believe BOOTSTD should be on by default, if we in=
+tend to remove the distro scripts and support things that are not EFI
 
-To me this is in fact two different questions.
+I'd agree with Simon on 2. Boards that have never been upgraded to
+distro boot or standard boot usually have an internal envs script in
+include/configs/xxx.h that boots the board the legacy way. Even if
+bootstd is enabled by default, it won't hurt those.
 
-1. For PowerPC, m68k, MIPS, I suppose we can just disable BOOTSTD and wait
-for them to go away, if you are saying that they are behind on migrations
-will never catch up
+All the best ,
+Tony
 
-2. As to the default, I believe BOOTSTD should be on by default, if we
-intend to remove the distro scripts and support things that are not EFI
-
-Regards,
-Simon
+>
+> Regards,
+> Simon
