@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92555C02183
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 03:09:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABBD9C02183
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 03:10:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B21468069D;
-	Sat, 18 Jan 2025 04:09:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B5248069D;
+	Sat, 18 Jan 2025 04:10:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Arg231tt";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="meNuVnyv";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oguxhy3v";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="r+fR18Oo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2EEB8070C; Sat, 18 Jan 2025 04:09:20 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 897848070C; Sat, 18 Jan 2025 04:10:27 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0125A80657
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 04:09:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A92F80657
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 04:10:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,31 +32,31 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YZhQj4BbLz9snt;
- Sat, 18 Jan 2025 04:09:17 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YZhS10lblz9sZq;
+ Sat, 18 Jan 2025 04:10:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737169757;
+ s=mail20150812; t=1737169825;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Y6dPQ81r1beV7wwD+UXNqDQqL8pSK2UZUTAlpNUowMU=;
- b=Arg231ttYMj/QxA0tFq++iDS+dvt6enzIdGcJYcjeBh7EdfySohiEA1K4GKBazra7kW1G3
- Rgqozii3Him8sTngdnPnP6kFNcA3VYIJSPlTk1okU3kHSVZUz8YnNTvasDF5QVdVMPtMcx
- Jux/huJG1/T80KkkYd59d6QZrnjiDsT00VoGRyeTi77v0KU7mpiYyEmxSIBPy7Ef6c1AU3
- UhhRiOpaHWszWvwufevuZq30TvXEbm2wrqzFoRiq5g0yQ4Ah1xJV/l+O7ZYxE4V1Wlb5rq
- 1XeSDDjYUxY6jUAtdVqSrUZkOfQfPOaUrLfkBzuZi3MBB+13z5yR4uTsDFLs/g==
+ bh=9PF1mG3xzQRMZREmZQYqZ0h9b6bJFml4iZiyOuMxkSU=;
+ b=oguxhy3vk2zww9CS2bAfvkS2hsZyPAihthnegFfg4jY8TPKxnFsN//yd8WXz/LPdiVzB8x
+ jiTNwLTB5VGSNUinuQZ+csLRqrdlCi2UmB2KRQ3Rxg5ZdajCjYtHrWkjesN01UWgsfFtWj
+ 50eDsnw8qTxkm77sSjBeegIv83MHRhYA7h+I4kpurdJankjJyroOqu9rQH2ngBInuHVz9F
+ ahAjs4VYn2h7iEk/WgA27xhyXMTX+Q6Eg9z2kg6iPFwJzI7ha5k4IAAjxfzYVDKd7bABIt
+ +QwOJ9DPFD2GBh1xQtQTWEzjtmYc2gJ1NQ3UxMUL/Pr2CCG6LkQ41ERsO1KEPg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737169755;
+ s=mail20150812; t=1737169823;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Y6dPQ81r1beV7wwD+UXNqDQqL8pSK2UZUTAlpNUowMU=;
- b=meNuVnyvibndRrfO17v4DQtAtRZ2I6t0aGYLkQ3Cusz0bhTIk4sY43PZ29wIGPVcuMBuk0
- +O9KtQ5vqFrqQ640Q+SotZ4+rN6t3BxU4ivAWu/RcqkntEjtA5tfQ3+FVnZH4dI+PDq1mI
- O8KUvEjbfPxtyTScrTYcBLjq10Zekq0RSTyV41UXyhe0Xi3osSdjeetS71HZlLavERjt25
- W4QQWAbJQj5+uM6xCELPJ772gSC/EoQevN/XDfPFg/haym7WThud198MY5z4oXa5yHpdGG
- +Gjudc0xXqv6+ixYkHs5zAP5vXholRESZf+gRubhfR8Q9LJhWbyXYPs4Ot1pfg==
+ bh=9PF1mG3xzQRMZREmZQYqZ0h9b6bJFml4iZiyOuMxkSU=;
+ b=r+fR18Oo7V4TUk/jrRSF8npKfYffWUxvJLaod4P4+HugXFKlT5RYgkLdskilAJbHmxkmEi
+ WkPBstKOaaKTZk8ZHlebmiN3rrmoN7ohv3fwLrw6AS6oalb5xfBoTIZM4AYivDIj2AnHZY
+ GOXGWzEot6wh2drWB3hoBCMmtMNJEGtGrtnkyLvnAJ7P/fDxTzhVfvDJmMF4nNhqOAm+M+
+ 0Ctk2u/beue7DAbiWQAnyc86s1hUyEfa46/Jsi7R0Kk00IShjb3teWwdLDIyB+Lt7HT+iC
+ 6PdOV3wmB5FA4hNQJx9yHCoBxcSjpa+iLxJongbxo3+8TZv1zGltcCjIkuAfrw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Rasmus Villemoes <ravi@prevas.dk>,
@@ -66,15 +67,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ronald Wahl <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
  Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] mmc: Simplify poll CD logic in case cyclic framework is
+Subject: [PATCH v2] mmc: Simplify poll CD logic in case cyclic framework is
  enabled
-Date: Sat, 18 Jan 2025 04:08:39 +0100
-Message-ID: <20250118030857.29509-1-marek.vasut+renesas@mailbox.org>
+Date: Sat, 18 Jan 2025 04:09:53 +0100
+Message-ID: <20250118031008.29702-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: c523130c56651dc0b05
-X-MBO-RS-META: pz8oau6puwsynuud3bxrewr75rtmfzou
-X-Rspamd-Queue-Id: 4YZhQj4BbLz9snt
+X-MBO-RS-ID: a27b7c0ae7e535090f6
+X-MBO-RS-META: 6mf9bk1aug9gfmrjxtq1976zqxrmf689
+X-Rspamd-Queue-Id: 4YZhS10lblz9sZq
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,17 +115,22 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/mmc/mmc.c | 10 ++++------
+V2: Drop __maybe_unused as well
+---
+ drivers/mmc/mmc.c | 12 +++++-------
  include/mmc.h     |  6 +++++-
- 2 files changed, 9 insertions(+), 7 deletions(-)
+ 2 files changed, 10 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index 799586891af..821abc7dd66 100644
+index 799586891af..0d0bda5dd35 100644
 --- a/drivers/mmc/mmc.c
 +++ b/drivers/mmc/mmc.c
-@@ -3042,7 +3042,7 @@ static int mmc_complete_init(struct mmc *mmc)
+@@ -3040,9 +3040,9 @@ static int mmc_complete_init(struct mmc *mmc)
+ 	return err;
+ }
  
- static void __maybe_unused mmc_cyclic_cd_poll(struct cyclic_info *c)
+-static void __maybe_unused mmc_cyclic_cd_poll(struct cyclic_info *c)
++static void mmc_cyclic_cd_poll(struct cyclic_info *c)
  {
 -	struct mmc *m = CONFIG_IS_ENABLED(CYCLIC, (container_of(c, struct mmc, cyclic)), (NULL));
 +	struct mmc *m = container_of(c, struct mmc, cyclic);
