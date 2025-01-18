@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8EF7C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 16:29:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 121F1C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 16:40:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53331803CB;
-	Sat, 18 Jan 2025 17:29:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 67ED3803CB;
+	Sat, 18 Jan 2025 17:40:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nj6OyEY/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QAoavsgj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E18E48063E; Sat, 18 Jan 2025 17:29:51 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 94B4E8063E; Sat, 18 Jan 2025 17:40:45 +0100 (CET)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A961D80312
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 17:29:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61F6C80312
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 17:40:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b6e5ee6ac7so256181485a.0
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:29:49 -0800 (PST)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6d92cd1e811so38920776d6.1
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:40:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737217788; x=1737822588; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737218442; x=1737823242; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=y251YPenY7DKDVO//15GNCjXMxGiz1b+ToEvdH9L70k=;
- b=nj6OyEY/FIx028KJ3W07K2uc3oTQ7Mxz1Ln7edoDw10oQZx6QZ6T8foZYug4ebw6pP
- usVCI6AnKJTl91rulO8V8ndhlNjUxFRpPLfqSbu8iOY3zz/0l7vQphAnnLGV/UJy8E2Y
- rw7h+Khtv63frYsxQtfCpfqX4j8/x+9MYxNsY=
+ bh=vXwacP9hLNlL2ytZg+igpjx4VrSNnrKFonJU89HH7og=;
+ b=QAoavsgj2Va+hsH1YbvTznYsKm8/BXDCxoi1W6Yivdg30jMrbLg23QRj9f4N82fz5F
+ c6ywivQSrqO+odXm46D4zBYCSVI4nMWKvV9Fqg2NEieFgJ736+DLZr6cpg/m/Hm0V8KY
+ Bbku+7c9bYPF0DYtxQEtcbdNs2Rb6ZdAX/lvU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737217788; x=1737822588;
+ d=1e100.net; s=20230601; t=1737218442; x=1737823242;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y251YPenY7DKDVO//15GNCjXMxGiz1b+ToEvdH9L70k=;
- b=tbjIFTYIEdlQA3DKugz+dAKzGz4RHMKxKIlDBi5lnC1Ubkc0vnbuy79/stOnWUGUTI
- d+bwqnGtbzjV/2L7ZViNREJn4/58bShmFe3xodz29hk+IJXw8/NjF+spmvLaveP+O6BR
- xbycdZZMZ2vsqdoZFfBzCuRVTZU0mJSmOhzRLC4/GHFhiy4P9oZptRJnQfzzUzB/99c5
- rBoJHp5x/8I1wEqaMNNwef35/U7Uogr8kQ0Q4KYzBTEWchFy/WtiDjqz6YikbwVjReLc
- Ogfv0hi3Vk20TIMDVwEmPbOwPTeYJXWHrdO0JmWgfLdYI1nybpx2iQmSPK+eHQ2L3GNx
- E49Q==
-X-Gm-Message-State: AOJu0YwUijx30PtD1kX1BgSUBgM1W9GTLDvSdiTRENZWmtGt2I0wVFqF
- dGiT9quQx2wthcBK5PcZh4qHIS8Q38cv67Ok6iTq2I9JtXs7UIkseLWsm0wj+ug=
-X-Gm-Gg: ASbGncvLAG+6ldg4oYtA8aYriwgo5IPw3MSd6MjW8zm7Jd8BaqfzhZYbI44g3vrCXaD
- T1VEqAxvmbkKr4tzoCl+OYDk9P5acBK+j+Tat3Hpd1U5uMBgCHyYBzolVD28pLbG072S5oB+3Vt
- HeDF3d8jCkYfRvuxcz7dUwTl/6+Qc+8DBYQu9iNOmLn1bxdlZWR+LzxbUdP+q++nI/QP8Y6Mq5V
- hg7hnDDcqQNuLiVV8BqIUTUrjIFRE6ECRj1p4nJ/22/CffXuRa2i8/zKdKlPOB/SDM=
-X-Google-Smtp-Source: AGHT+IG09V4Fg5PdWjXhlYuTzkwnTWdSk9H/ASDzgRihAZuBceZGLD/b3MWJI7cExdw2CTiiTyRr4A==
-X-Received: by 2002:a05:6214:1d22:b0:6d8:876e:ef41 with SMTP id
- 6a1803df08f44-6e1b21872bamr112888636d6.21.1737217788533; 
- Sat, 18 Jan 2025 08:29:48 -0800 (PST)
+ bh=vXwacP9hLNlL2ytZg+igpjx4VrSNnrKFonJU89HH7og=;
+ b=sHuxKrI0AmHPmuHjFTCCoE3aOkw/kGzG1Chn20XKiuncXEheJtC3hXeoSJgbrZ2w9P
+ M30H0/s8nGhhsmCoFjk/YXioF7iBn5HQmr/34Si4KBB6v+9da6xpDTX/451lU8cWBKtm
+ 82J0XaWQQiEJJW5VKHe1TpEvCKnJ5oELZyqbZLS9/pPfwN3wTXQHRTZBnG5saPWOgQaz
+ xu/MNZSvR6Xe6hVhF2KIRzih8mnCUfX6avKid1yNXteqRVeJfbZ2yLIQRHSI7GPvWPCA
+ XSgmL0IhCqN34p7ed1prV8wW8B/M4lMY2mUJjn2JKexR0zww6NZodnVEenSDuA0Cguza
+ JfGg==
+X-Gm-Message-State: AOJu0Yzlrj3zM9aDtDOXXteJrhC0wH1hzsje1UUGfPCqAavuoLQwEp/l
+ Wuo9Z4Kx89G4942AbKV5Cpz1ao2mcysdLr9K9TCQCY4MOhF1Jb3CkDBll0quyD4=
+X-Gm-Gg: ASbGnctbxwUtA9rAEXOvrPSFHEAycDKk3hWbgF67+EcQcJRL0JPxdzrPl0gf6gekZTq
+ 9qTaxTCqLwNTgKFiH7P2awtw96Sa/9BylRjONp6wP6wHASDY94skvE4ZtozWlqhQ22AVgUSK0m/
+ Ou8FY4vsZPWTj3yJiRJf40SrwRHvEyZTnhbonGLmL+4DeYKzk9Y2f1mhcNE3KqocQqqhOgXd/6k
+ p7WBRnih359ZvxqSPpD/J3fSvK2a9qHUWygCE0j2jkwd3qCoDTKDWr73HheOmn53WA=
+X-Google-Smtp-Source: AGHT+IFK2Kn1TAWzU7y4TkdFvBNyJeK2GD8Z0TcaJrnDAdY3+3lj9XiAI/IkNYf1CHvc2ECimWvY1g==
+X-Received: by 2002:a05:6214:5b09:b0:6d8:8a0b:db25 with SMTP id
+ 6a1803df08f44-6e1b27a47d5mr118257456d6.21.1737218442331; 
+ Sat, 18 Jan 2025 08:40:42 -0800 (PST)
 Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afce395csm23394386d6.98.2025.01.18.08.29.45
+ 6a1803df08f44-6e1afbf3783sm23150766d6.7.2025.01.18.08.40.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Jan 2025 08:29:47 -0800 (PST)
-Date: Sat, 18 Jan 2025 10:29:43 -0600
+ Sat, 18 Jan 2025 08:40:40 -0800 (PST)
+Date: Sat, 18 Jan 2025 10:40:38 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heiko Schocher <hs@denx.de>
-Cc: u-boot@lists.denx.de, Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v1] led: add function naming option from linux
-Message-ID: <20250118162943.GX3476@bill-the-cat>
-References: <20250118132234.72046-1-hs@denx.de>
+To: 1425075683@qq.com
+Cc: u-boot@lists.denx.de, Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v1] arm: Remove redundant loading of image copy start offse
+Message-ID: <20250118164038.GY3476@bill-the-cat>
+References: <tencent_78F00D5010A6F5A48D0F464FC0E026DB5906@qq.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kvOYLmWwfsV7ZAZg"
+ protocol="application/pgp-signature"; boundary="XfbsGWCjd3bZQUsh"
 Content-Disposition: inline
-In-Reply-To: <20250118132234.72046-1-hs@denx.de>
+In-Reply-To: <tencent_78F00D5010A6F5A48D0F464FC0E026DB5906@qq.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,50 +94,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kvOYLmWwfsV7ZAZg
-Content-Type: text/plain; charset=us-ascii
+--XfbsGWCjd3bZQUsh
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 18, 2025 at 02:22:34PM +0100, Heiko Schocher wrote:
+On Sat, Jan 18, 2025 at 11:39:18AM +0800, 1425075683@qq.com wrote:
 
-> in linux we have the option to create the name of a led
-> optionally through the following properties:
+> From: Liya Huang <1425075683@qq.com>
 >=20
-> - function
-> - color
-> - function-enumerator
+> Remove redundant loading of image copy start offset.
+> Because the beginning is already computed
 >=20
-> This patch adds support for parsing this properties if there
-> is no label property.
+> Reviewed-by: Pali Roh=E1r <pali@kernel.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Liya Huang <1425075683@qq.com>
+> ---
 >=20
-> To be as close as possible to linux import the following files
-> from it:
+> Changes in v1:
+> - Due to an error, the patch was resubmitted, leaving the code unchanged
 >=20
-> include/dt-bindings/leds/common.h
+>  arch/arm/lib/relocate.S | 2 --
+>  1 file changed, 2 deletions(-)
 
-We get this, and the binding, for free from dts/upstream now. Please
-rebase / rework to make use of that. Thanks!
+I don't understand what you're doing. Please stop posting patches that
+have "Reviewed-by" tags on them without pointing to other evidence that
+the person in question supplied that tag somewhere else in public.
+Thanks.
 
 --=20
 Tom
 
---kvOYLmWwfsV7ZAZg
+--XfbsGWCjd3bZQUsh
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeL1vMACgkQFHw5/5Y0
-tyz/Wwv/YCeoFqrtqE54pi9Lkemn5ikTgdkdEjw5NPt5fcj3JrUherf5CzO6z8/I
-wFH8oLfl2SMUd2azfvey6rlemsp7I56obzizl6rRlzinR4m+MaKEtPgwymuRuZXv
-fe2cqWOEUjPFij5AK+pDY9GxTZeOeLeQoQfQLacFAiOL442PAYBgmOHFrpRR24AU
-UyHvdXSnNMWUb91j8d0OuVuVlCeyCra9tDghWLbRHCint1L1kUuewOhpyJBE9LFL
-Dt0ftXW8rGM1zutFOFoR5et2b4QyD0OPabcB5GopZqiu3BLDUVqbLpw5AWremg43
-c7uUZauKPvinL8kLylFD8ronvhZPet0YObwE+I7H1dJDxOhIciv4JqRy9teTnVq9
-qeeP92+NoUk7nI4mzF/VrfzRg7vAnvna4uSKaDSEIyGiUvN8qkpOGWB/FnUdpyHg
-dUDV3/8nndvwO02JJ53ni53VRvV6h791BDm/scE/4S/KqnYTaoHP0tbJYksTdoeI
-mIAo3emK
-=TnFz
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeL2YIACgkQFHw5/5Y0
+tyx8WgwAgUkP11uom+Uqv34xEtsSEtuNq7qKDmgUL/21v+yqlGCI1DimDOLO8Qda
+4l5073GJeOpjj9hnR7U/OrT+K2Pjw6vFUQQSuThGwDuI9NridW5yWWCV1eyB6pud
+pYBiT4OpuJoLbYCT/T9RuZJsa93q9VND4rWott8rCKnDEOzz4W0tCbBujDwGBfRD
+46lIWA7SrRGNdG3jq1Q0iEqgRUBGr9huyBrSS7VnEZ85snQlMk8goCdo/Y7g95g+
+8wZcnZshYj0bt3KQhO8ZB+Lyi35FzfT6YNIc4Oe/gCcqSiBZB5ENef0xQt9BMfTh
+X6cStxyHP4C+PtQ8HFv+FM2H/Bvo9YWzNiGep5l5ZDCP74U7EcSAbfWtigZm6Rph
+N2S8tZrCkRCUJa2Y+bhehAvHdU4+RA3Hqb5qrwolzFk/zMoYWNUgDALeGj2sspeO
+qarxx9nOzhgFTyIUaPVZ45dnnRtaaQoT+JJQ3Vxwm19VpeKOaX670mtswOIvwUke
+Lqf0PgI5
+=sLTW
 -----END PGP SIGNATURE-----
 
---kvOYLmWwfsV7ZAZg--
+--XfbsGWCjd3bZQUsh--
