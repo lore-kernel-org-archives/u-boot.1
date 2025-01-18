@@ -4,90 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F69C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 10:08:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD43C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 11:16:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E40C480792;
-	Sat, 18 Jan 2025 11:08:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F22B98070C;
+	Sat, 18 Jan 2025 12:16:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eolneqV4";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dfbnAEWy";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ciw47ycT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D7AF80786; Sat, 18 Jan 2025 11:08:03 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 364658063E; Sat, 18 Jan 2025 12:16:56 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4275F8063E
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 11:07:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C84280312
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 12:16:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e39779a268bso4580733276.1
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 02:07:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737194876; x=1737799676; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cdeURmY1Utuj3vRgHeQJpa3e4zGvo4Tok7bpDceSjps=;
- b=eolneqV4CfjDBkPAAeDPN+EL2WFsVa4Hv8dPaGWc4BvSy1aAaSzO1nDluL4GyyALzn
- jNvUjK0pSvILw2z5wgUiVpBd4KtBAioWMhP20pW9qBHG4F0BAtEgx3OjzFFq7PRk4NI6
- oDhD3Tt4KZPzP25khbcoqEs5iHVaoiLEFbfq/iBlkSx5qAi8u9Qh6DRqCfPDv10VunBK
- ixhUPBIr/hCIZ+np/tFSaZGYR17Q/SdpcJ8PXPbp70u2MosS0zMMjvRN6J7EcNiNcNRb
- D+g3dWhwokuqpDvwmRB+X/EyJ96qOYsSb1QPlxUdOBSqt6l+apiReXLv5Za9cnlMRDqO
- VoUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737194876; x=1737799676;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cdeURmY1Utuj3vRgHeQJpa3e4zGvo4Tok7bpDceSjps=;
- b=WuDWZ7cK+nUoDI780r1NSmm6F3aLNMxidQU7gKHZ4NI5Dmym+2MeLgc92IDimYXhj+
- foT+nrhcdmL578HO256EpOKPl3fkSgVWULfSUZSK4aqaKIY8JAvPIU3J/xoLQsSPkTrG
- I9SDGajDEwKKzFSkaeYH/gtHXgxiHCQBwvgNyK98auKVPu8pp1wtAANKRB+UYob5eQE+
- +JXg6mOiUC2LZmgegdV3WDfx1DKnB8qMHpP9noJRZq2+DHyk1MyHDevnIS6HiWHAN5kK
- 8423URJeJJ+RMNamr0NMOb53glnsZswRf2NMoRKYXqS/x2Kg5UEAsen3iz82h5Fwpaxw
- GpOg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUv2LbprzHxwNTiT9BwLPsv1iM4CnC3jrdvbCmUYCsczs8YJAi6Zn0R8skUceCyNlIygdwvKec=@lists.denx.de
-X-Gm-Message-State: AOJu0YwP1Bqora4n0rKDHRIutVA46Cps378spMcVilYxaCT48xfX3SZd
- AMTOFU6vYqbnxg70YQVhpAkl3KwLy3IHLM8OubvyImFlHE/+3V94jKwc5hWcD+sxDeF92W427Rn
- O9L76GUnLo9PWXKkPPZklXm5s3XFEtLbo+DirMA==
-X-Gm-Gg: ASbGncv/dl3y3dh62ZXHRKV12fM6PMi4+O5aSa7Hn7DeQ+fwHa+2B4RR+UZnKWsex9Z
- G6RY6QeqJjdSgLeVHdkgwkpW9P521eprKmFRKxYgmgPTlazRukbs=
-X-Google-Smtp-Source: AGHT+IEBu6h+NY3pq+QUO+OqGjclK988CaMb04zZIw9sm29SYc7YN30PjB7/BE7DuIyXn3o2WNNANDsEiJaT3naWxio=
-X-Received: by 2002:a05:6902:12cc:b0:e57:3a14:a22a with SMTP id
- 3f1490d57ef6-e57b0c59d08mr4670200276.19.1737194875981; Sat, 18 Jan 2025
- 02:07:55 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YZvFJ1Wt9z9sTd;
+ Sat, 18 Jan 2025 12:16:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737199012;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=pKaWF+2Od1PF1u3oftLLfB8eniGo/To0rrsV3OYZr3M=;
+ b=dfbnAEWyFoo+s+TonKzTxfCfB1j0OSgF4cBmp1Zt+ZG6oZ9EhLeq8mepwUigQzKyGLHpcS
+ OSbXsnepNrmJX9hPMPJLphAVXbGQG1MgRiXzktaPirOhAHraYuwzN2kEFFLfSzbXOahHy2
+ 2xlQC+QWQl3zAbdQEgThse5HjLQeckNdMHq3YTSVlnfUsZeSuR2d/1S7aQXWHOFLhhGD4A
+ 5uNyspXDYlJfN4JHnWKDPyOLG7mvp0gGaJtl6IuErhK2XJwnkUD0bb9+UVBTU0qdLQ6H+c
+ AHwW4dpzsOISgLMSrw9L2mk5XJqd9oZKKP6LtyAEGRg/TxHiOla+G1jm19Py/A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737199010;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=pKaWF+2Od1PF1u3oftLLfB8eniGo/To0rrsV3OYZr3M=;
+ b=ciw47ycTUFi/u/O7oEqvMgaVnFsx7Is7CWf/UKbA+2EB64OXBUIi2wTrbCSj3FMjPZznhR
+ t4YmwJm9rRX8cl9iumXk9knDAnIzmufoK9Yuntc24Nk+HMbJe+wvsJon2QOXRrpT9XdnTO
+ c4haavqLqRdy6JzDOLXcHGY5d7kqkifoAe8kPI2PwM8W3jcTspw5meIdUelizCfe0MzOvn
+ LnUBrcwIvPzZN6IqT9SIlspAfu8NzpZ/HC2CtlVRhu2GJvWIepnI7EKdFXwF2456OjHXi2
+ c+oDI9F1mc+cRYFDCLqcWabzFKzsQrpYldpZmhwrT28q3vnQFgTOmW7B4hvu8w==
+To: u-boot@lists.denx.de
+Cc: quentin.schulz@cherry.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/8] ARM: renesas: Rename board/renesas/rcar-common to
+ board/renesas/common
+Date: Sat, 18 Jan 2025 12:15:24 +0100
+Message-ID: <20250118111621.362188-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20250114152022.933662-1-raymond.mao@linaro.org>
- <20250114152022.933662-3-raymond.mao@linaro.org>
- <CAFLszTh=d=Brcrd-4He0nDZgybjKOdAqqUxvh_z245xjF1giuw@mail.gmail.com>
- <CAC_iWjL7y6QyjQtRp6qd_5QxF6aUw+qrhY6snXZ2B-Qiz7Dy1g@mail.gmail.com>
- <CAFLszTiE05TAFQfcGANsCve-UhRV8gh6ZUB-nLZeLQpAr+0sRQ@mail.gmail.com>
-In-Reply-To: <CAFLszTiE05TAFQfcGANsCve-UhRV8gh6ZUB-nLZeLQpAr+0sRQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 18 Jan 2025 12:07:20 +0200
-X-Gm-Features: AbW1kvbyQNRHbdztgxxnDz7g-kil0aaLmo5DBRxkB0nvP5P_IKXIaPeI24ACevA
-Message-ID: <CAC_iWjJZUVmyYN6j1AFYGejaXWYNg2vXOz8VMKhObcj9u2HrtQ@mail.gmail.com>
-Subject: Re: [PATCH v5 3/3] tpm: get tpm event log from bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Levi Yun <yeoreum.yun@arm.com>, Patrick Rudolph <patrick.rudolph@9elements.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Tim Harvey <tharvey@gateworks.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: hsnxdkq5rs1t8pfpmx4czxo57s6oub19
+X-MBO-RS-ID: aac0d76da43587facd2
+X-Rspamd-Queue-Id: 4YZvFJ1Wt9z9sTd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,111 +88,316 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 Jan 2025 at 06:31, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Thu, 16 Jan 2025 at 07:35, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> >
-> > On Wed, 15 Jan 2025 at 03:17, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Raymond,
-> > >
-> > > On Tue, 14 Jan 2025 at 08:20, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > >
-> > > > Get tpm event log from bloblist instead of FDT when bloblist is
-> > > > enabled and valid from previous boot stage.
-> > > >
-> > > > As a fallback, when no event log from previous stage is observed
-> > > > and no user buffer is passed, malloc a default buffer to initialize
-> > > > the event log.
-> > > >
-> > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > > > ---
-> > > > Changes in v2
-> > > > - Remove patch dependency.
-> > > > - Remove the fallback to FDT when BLOBLIST is selected.
-> > > > Changes in v3
-> > > > - Malloc an 8KB buffer when user eventlog buffer does not exist.
-> > > > Changes in v4
-> > > > - Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
-> > > > Changes in v5
-> > > > - Replace TPM2_EVENT_LOG_SIZE with CONFIG_TPM2_EVENT_LOG_SIZE.
-> > > > - Add an inline TODO comment.
-> > > >
-> > > >  lib/tpm_tcg2.c | 61 ++++++++++++++++++++++++++++++++++----------------
-> > > >  1 file changed, 42 insertions(+), 19 deletions(-)
-> > >
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > nit in case you respin again: -ENODEV is for driver model, when there
-> > > is no device. It is actually handling specially by driver model. So
-> > > -ENOENT is what I try to use for things that don't exist but aren't
-> > > devices.
-> > >
-> >
-> > +1,
-> >
-> >
-> > > >
-> > > > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-> > > > index 4134d93a35..2d9076f091 100644
-> > > > --- a/lib/tpm_tcg2.c
-> > > > +++ b/lib/tpm_tcg2.c
-> > > > @@ -5,6 +5,7 @@
-> > > >
-> > > >  #include <dm.h>
-> > > >  #include <dm/of_access.h>
-> > > > +#include <malloc.h>
-> > > >  #include <tpm_api.h>
-> > > >  #include <tpm-common.h>
-> > > >  #include <tpm-v2.h>
-> > > > @@ -19,6 +20,7 @@
-> > > >  #include <linux/unaligned/generic.h>
-> > > >  #include <linux/unaligned/le_byteshift.h>
-> > > >  #include "tpm-utils.h"
-> > > > +#include <bloblist.h>
-> > > >
-> > > >  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
-> > > >                       u32 *bank_num)
-> > > > @@ -615,15 +617,24 @@ int tcg2_log_prepare_buffer(struct udevice *dev, struct tcg2_event_log *elog,
-> > > >                 elog->found = log.found;
-> > > >         }
-> > > >
-> > > > +       if (elog->found)
-> > > > +               return 0;
-> > > > +
-> > > >         /*
-> > > > -        * Initialize the log buffer if no log was discovered and the buffer is
-> > > > -        * valid. User's can pass in their own buffer as a fallback if no
-> > > > -        * memory region is found.
-> > > > +        * Initialize the log buffer if no log was discovered.
-> > > > +        * User can pass in their own buffer as a fallback if no memory region
-> > > > +        * is found, else malloc a buffer if it does not exist.
-> > > >          */
-> > > > -       if (!elog->found && elog->log_size)
-> > > > -               rc = tcg2_log_init(dev, elog);
-> > > > +       if (!elog->log_size) {
-> > > > +               elog->log = malloc(CONFIG_TPM2_EVENT_LOG_SIZE);
-> > > > +               if (!elog->log)
-> > > > +                       return -ENOMEM;
-> > > > +
-> > > > +               memset(elog->log, 0, CONFIG_TPM2_EVENT_LOG_SIZE);
-> > > > +               elog->log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
-> >
-> > Why are you doing this? There are 2 ways to pass an EventLog to the
-> > kernel. Either via a config table from EFI, or using sml-base and
-> > sml-size in a DT (which are both required). IOW you will create an
-> > EventLog no one will discover
->
-> My understanding is that it is still added to those tables (e.g. EFI). Linux does not see the bloblist structure.
+Rename directory board/renesas/rcar-common to board/renesas/common and
+move files. This allows the build system to use HAVE_VENDOR_COMMON_LIB
+which automatically includes board/$(VENDOR)/common/Makefile . Create
+temporarily empty board/renesas/common/Makefile to be extended with
+actual content later in this series. This is a preparatory patch for
+board Makefile simplification. No functional change so far.
 
-No that's not what happens.
-We either explicitly allocate memory from the EFI subsystem and use
-that, or parse the DT and map whatever the DT tells us, If you want to
-use malloc for allocating a non-EFI consumed EventLog you have to
-inject these values to a DT otherwise the OS won't be able to find it.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>
+Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+NOTE: Depends on https://patchwork.ozlabs.org/project/uboot/patch/20250112223252.179123-1-marek.vasut+renesas@mailbox.org/
+---
+V2: - Create empty Makefile in board/renesas/common/Makefile
+    - Update commit message
+---
+ board/beacon/beacon-rzg2m/Makefile                  | 2 +-
+ board/hoperun/hihope-rzg2/Makefile                  | 2 +-
+ board/renesas/common/Makefile                       | 0
+ board/renesas/{rcar-common => common}/common.c      | 2 +-
+ board/renesas/{rcar-common => common}/gen3-common.c | 2 +-
+ board/renesas/{rcar-common => common}/gen3-spl.c    | 0
+ board/renesas/{rcar-common => common}/gen4-common.c | 2 +-
+ board/renesas/{rcar-common => common}/gen4-spl.c    | 0
+ board/renesas/{rcar-common => common}/v3-common.c   | 0
+ board/renesas/condor/Makefile                       | 4 ++--
+ board/renesas/draak/Makefile                        | 4 ++--
+ board/renesas/eagle/Makefile                        | 4 ++--
+ board/renesas/ebisu/Makefile                        | 4 ++--
+ board/renesas/falcon/Makefile                       | 4 ++--
+ board/renesas/grayhawk/Makefile                     | 2 +-
+ board/renesas/salvator-x/Makefile                   | 4 ++--
+ board/renesas/spider/Makefile                       | 2 +-
+ board/renesas/ulcb/Makefile                         | 4 ++--
+ board/renesas/v3hsk/Makefile                        | 4 ++--
+ board/renesas/v3msk/Makefile                        | 4 ++--
+ board/renesas/whitehawk/Makefile                    | 4 ++--
+ board/silinux/ek874/Makefile                        | 4 ++--
+ 22 files changed, 29 insertions(+), 29 deletions(-)
+ create mode 100644 board/renesas/common/Makefile
+ rename board/renesas/{rcar-common => common}/common.c (97%)
+ rename board/renesas/{rcar-common => common}/gen3-common.c (99%)
+ rename board/renesas/{rcar-common => common}/gen3-spl.c (100%)
+ rename board/renesas/{rcar-common => common}/gen4-common.c (97%)
+ rename board/renesas/{rcar-common => common}/gen4-spl.c (100%)
+ rename board/renesas/{rcar-common => common}/v3-common.c (100%)
 
->
-> Regards,
-> Simon
+diff --git a/board/beacon/beacon-rzg2m/Makefile b/board/beacon/beacon-rzg2m/Makefile
+index 332b41f35c0..6a6ae94def8 100644
+--- a/board/beacon/beacon-rzg2m/Makefile
++++ b/board/beacon/beacon-rzg2m/Makefile
+@@ -6,4 +6,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ #
+ 
+-obj-y	:= beacon-rzg2m.o ../../renesas/rcar-common/gen3-common.o ../../renesas/rcar-common/common.o
++obj-y	:= beacon-rzg2m.o ../../renesas/common/gen3-common.o ../../renesas/common/common.o
+diff --git a/board/hoperun/hihope-rzg2/Makefile b/board/hoperun/hihope-rzg2/Makefile
+index 700e26daa2b..a42c55b9d00 100644
+--- a/board/hoperun/hihope-rzg2/Makefile
++++ b/board/hoperun/hihope-rzg2/Makefile
+@@ -6,4 +6,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ #
+ 
+-obj-y	:= hihope-rzg2.o ../../renesas/rcar-common/gen3-common.o ../../renesas/rcar-common/common.o
++obj-y	:= hihope-rzg2.o ../../renesas/common/gen3-common.o ../../renesas/common/common.o
+diff --git a/board/renesas/common/Makefile b/board/renesas/common/Makefile
+new file mode 100644
+index 00000000000..e69de29bb2d
+diff --git a/board/renesas/rcar-common/common.c b/board/renesas/common/common.c
+similarity index 97%
+rename from board/renesas/rcar-common/common.c
+rename to board/renesas/common/common.c
+index 90eb468e4c4..7fba8d10ff5 100644
+--- a/board/renesas/rcar-common/common.c
++++ b/board/renesas/common/common.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * board/renesas/rcar-common/common.c
++ * board/renesas/common/common.c
+  *
+  * Copyright (C) 2013 Renesas Electronics Corporation
+  * Copyright (C) 2013 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
+diff --git a/board/renesas/rcar-common/gen3-common.c b/board/renesas/common/gen3-common.c
+similarity index 99%
+rename from board/renesas/rcar-common/gen3-common.c
+rename to board/renesas/common/gen3-common.c
+index 004feca6180..05b01c846c6 100644
+--- a/board/renesas/rcar-common/gen3-common.c
++++ b/board/renesas/common/gen3-common.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * board/renesas/rcar-common/gen3-common.c
++ * board/renesas/common/gen3-common.c
+  *
+  * Copyright (C) 2013 Renesas Electronics Corporation
+  * Copyright (C) 2013 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
+diff --git a/board/renesas/rcar-common/gen3-spl.c b/board/renesas/common/gen3-spl.c
+similarity index 100%
+rename from board/renesas/rcar-common/gen3-spl.c
+rename to board/renesas/common/gen3-spl.c
+diff --git a/board/renesas/rcar-common/gen4-common.c b/board/renesas/common/gen4-common.c
+similarity index 97%
+rename from board/renesas/rcar-common/gen4-common.c
+rename to board/renesas/common/gen4-common.c
+index 2abe9660cf8..52a0639073b 100644
+--- a/board/renesas/rcar-common/gen4-common.c
++++ b/board/renesas/common/gen4-common.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * board/renesas/rcar-common/gen4-common.c
++ * board/renesas/common/gen4-common.c
+  *
+  * Copyright (C) 2021-2024 Renesas Electronics Corp.
+  */
+diff --git a/board/renesas/rcar-common/gen4-spl.c b/board/renesas/common/gen4-spl.c
+similarity index 100%
+rename from board/renesas/rcar-common/gen4-spl.c
+rename to board/renesas/common/gen4-spl.c
+diff --git a/board/renesas/rcar-common/v3-common.c b/board/renesas/common/v3-common.c
+similarity index 100%
+rename from board/renesas/rcar-common/v3-common.c
+rename to board/renesas/common/v3-common.c
+diff --git a/board/renesas/condor/Makefile b/board/renesas/condor/Makefile
+index fe3a2fd3b7a..3b1756b44cd 100644
+--- a/board/renesas/condor/Makefile
++++ b/board/renesas/condor/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= ../rcar-common/gen3-common.o ../rcar-common/common.o
++obj-y	:= ../common/gen3-common.o ../common/common.o
+ endif
+diff --git a/board/renesas/draak/Makefile b/board/renesas/draak/Makefile
+index 3ed7800b0e9..6ce05bcd649 100644
+--- a/board/renesas/draak/Makefile
++++ b/board/renesas/draak/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= draak.o ../rcar-common/gen3-common.o ../rcar-common/common.o
++obj-y	:= draak.o ../common/gen3-common.o ../common/common.o
+ endif
+diff --git a/board/renesas/eagle/Makefile b/board/renesas/eagle/Makefile
+index 3f5fdab1bc2..a5c18d81eef 100644
+--- a/board/renesas/eagle/Makefile
++++ b/board/renesas/eagle/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= ../rcar-common/v3-common.o ../rcar-common/gen3-common.o ../rcar-common/common.o
++obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
+ endif
+diff --git a/board/renesas/ebisu/Makefile b/board/renesas/ebisu/Makefile
+index 8139391029d..72130b76234 100644
+--- a/board/renesas/ebisu/Makefile
++++ b/board/renesas/ebisu/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= ../rcar-common/gen3-common.o ../rcar-common/common.o
++obj-y	:= ../common/gen3-common.o ../common/common.o
+ endif
+diff --git a/board/renesas/falcon/Makefile b/board/renesas/falcon/Makefile
+index 48fcfac9105..949953f6981 100644
+--- a/board/renesas/falcon/Makefile
++++ b/board/renesas/falcon/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= ../rcar-common/gen4-common.o ../rcar-common/common.o
++obj-y	:= ../common/gen4-common.o ../common/common.o
+ endif
+diff --git a/board/renesas/grayhawk/Makefile b/board/renesas/grayhawk/Makefile
+index 7414b773326..a70bd3739f1 100644
+--- a/board/renesas/grayhawk/Makefile
++++ b/board/renesas/grayhawk/Makefile
+@@ -6,4 +6,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ #
+ 
+-obj-y	:= ../rcar-common/gen4-common.o ../rcar-common/common.o
++obj-y	:= ../common/gen4-common.o ../common/common.o
+diff --git a/board/renesas/salvator-x/Makefile b/board/renesas/salvator-x/Makefile
+index fe7c78ef2ff..fe53366829c 100644
+--- a/board/renesas/salvator-x/Makefile
++++ b/board/renesas/salvator-x/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= salvator-x.o ../rcar-common/gen3-common.o ../rcar-common/common.o
++obj-y	:= salvator-x.o ../common/gen3-common.o ../common/common.o
+ endif
+diff --git a/board/renesas/spider/Makefile b/board/renesas/spider/Makefile
+index 9489917278c..e0f403d5fcc 100644
+--- a/board/renesas/spider/Makefile
++++ b/board/renesas/spider/Makefile
+@@ -6,4 +6,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ #
+ 
+-obj-y	:= ../rcar-common/gen4-common.o ../rcar-common/common.o
++obj-y	:= ../common/gen4-common.o ../common/common.o
+diff --git a/board/renesas/ulcb/Makefile b/board/renesas/ulcb/Makefile
+index c3c2f391e55..6b2aa8c29f6 100644
+--- a/board/renesas/ulcb/Makefile
++++ b/board/renesas/ulcb/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= ulcb.o cpld.o ../rcar-common/gen3-common.o ../rcar-common/common.o
++obj-y	:= ulcb.o cpld.o ../common/gen3-common.o ../common/common.o
+ endif
+diff --git a/board/renesas/v3hsk/Makefile b/board/renesas/v3hsk/Makefile
+index ee04f67d986..936047cb3d5 100644
+--- a/board/renesas/v3hsk/Makefile
++++ b/board/renesas/v3hsk/Makefile
+@@ -8,8 +8,8 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= ../rcar-common/v3-common.o ../rcar-common/gen3-common.o ../rcar-common/common.o
++obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
+ obj-$(CONFIG_SYSRESET)	+= cpld.o
+ endif
+diff --git a/board/renesas/v3msk/Makefile b/board/renesas/v3msk/Makefile
+index 63e06a4b5fd..21eaddb6c28 100644
+--- a/board/renesas/v3msk/Makefile
++++ b/board/renesas/v3msk/Makefile
+@@ -8,8 +8,8 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../rcar-common/gen3-spl.o
++obj-y	:= ../common/gen3-spl.o
+ else
+-obj-y	:= ../rcar-common/v3-common.o ../rcar-common/gen3-common.o ../rcar-common/common.o
++obj-y	:= ../common/v3-common.o ../common/gen3-common.o ../common/common.o
+ obj-$(CONFIG_SYSRESET)	+= cpld.o
+ endif
+diff --git a/board/renesas/whitehawk/Makefile b/board/renesas/whitehawk/Makefile
+index 80f92e6b041..f10eb82d221 100644
+--- a/board/renesas/whitehawk/Makefile
++++ b/board/renesas/whitehawk/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_SPL_BUILD
+-obj-y	:= ../rcar-common/gen4-spl.o
++obj-y	:= ../common/gen4-spl.o
+ else
+-obj-y	:= ../rcar-common/gen4-common.o ../rcar-common/common.o
++obj-y	:= ../common/gen4-common.o ../common/common.o
+ endif
+diff --git a/board/silinux/ek874/Makefile b/board/silinux/ek874/Makefile
+index 879da9edacf..c1cab6fa788 100644
+--- a/board/silinux/ek874/Makefile
++++ b/board/silinux/ek874/Makefile
+@@ -7,7 +7,7 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-y	:= ../../renesas/rcar-common/gen3-spl.o
++obj-y	:= ../../renesas/common/gen3-spl.o
+ else
+-obj-y	:= ek874.o ../../renesas/rcar-common/gen3-common.o ../../renesas/rcar-common/common.o
++obj-y	:= ek874.o ../../renesas/common/gen3-common.o ../../renesas/common/common.o
+ endif
+-- 
+2.45.2
+
