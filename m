@@ -4,119 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E83A4C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 14:41:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEAADC02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 15:43:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EE4680716;
-	Sat, 18 Jan 2025 15:41:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 17EF5803CB;
+	Sat, 18 Jan 2025 16:43:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kMglxh7N";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mtI+fI30";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 785C98073D; Sat, 18 Jan 2025 15:41:43 +0100 (CET)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EAEC480312; Sat, 18 Jan 2025 16:43:15 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21EFF803CB
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 15:41:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9952680312
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 16:43:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7b6ff72ba5aso289724185a.1
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 06:41:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737211300; x=1737816100; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MKtSMXPFLl6o2PZJ5iKgrFu3MVx1P9owvFKIfpxgfs0=;
- b=kMglxh7NSYnRRQMAJ6qFXddheYO/vyuBP5oIfZuHaexmliHKbGimS1nxMTcI4DvMrj
- 1uNDJ7Ect/le4vAc1SGZ28Ah6TIWJsUvSbXvlHc4hzcJde2JCY8RX3dMb6Jz0UZoXrJF
- qDU9pQUC4CDLA3MZHJd496P1LEYhyrrVOPmjI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737211300; x=1737816100;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MKtSMXPFLl6o2PZJ5iKgrFu3MVx1P9owvFKIfpxgfs0=;
- b=mNGu4eoM2E15rs0tCWj0GnoccovItRh8YiUvXSq3GH2hWDDs9GdA9nVTUivfrrZQkO
- 9dkDJJVbVpl9hqT51VkkrUZdPuG15St+YbFOJDSeCUcrUlL03SMImYB8BuOdRJkYcMES
- RA35Lhi9+VkWLx+5UMCKASi35wAmEL3jQFaTBUwZlEDP4aOV1HxH2z7QlOhq8ZzwPrBP
- 0+fNhyLDkXNtqTb6lL4qdcA/mI+6Dpf2gCuVuOaEff0Ul4T23GByS/khKBL4jKc0XxnA
- hUYr/8QSAyBEo7tzRBqjedG6v+12Z0x+Uw5K+GQd8S0HuO0IW0a8B50kE0aqhfq1AzuU
- 9Paw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW3jUytGgjv3qJQLKLO41owxQu7NGFL1XCIrKMWoizC2sZRe2k9W1+HaA0xRQAZ9lV6+sEAttw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyAxCef3ahP4W8wn0ruvhvbGdNTYpBk4la/cEGHHw0sCs1RVmcD
- fGs7scvuHdrjaMpaPQpCUo/YnT6xa20ufMX1jwQpyanB2sfRROl34eDORJOgBVE=
-X-Gm-Gg: ASbGnculHQ/cSk/LZjgqs7Z7Jrp4qLukfG2As8fiP52d51HzOUZcDJiULaES86iSzpC
- Z2V3bksEF6by72pKnltXX3WwkPEdTgPKEMQIZ6Eyr/YDL9P6ISicRwgK+94jCcC64JZuar+67ti
- RNT8bW6J1bvVcCCjHTEmk88Ulal5MHXB6PVlSFyXAflntzkk6/QilErc3Z4FzbgYVhaV/F/2uy9
- ESMxwGx/IIyGc0B3tJEzmM2oQQ0syY+X/c6Vsbsf/hJg3Zw76ilWwgtu9aPhdBxPIU=
-X-Google-Smtp-Source: AGHT+IFCGDm63/vV1O5fhaoQHVtzRrvbuWt6bWkrH/KUcP3yADId2gszUpAmkS24z/QVrb8f3kwpyw==
-X-Received: by 2002:a05:620a:4513:b0:7b6:eab3:cdd4 with SMTP id
- af79cd13be357-7be63289389mr1130498485a.50.1737211299904; 
- Sat, 18 Jan 2025 06:41:39 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be614d98cfsm232682385a.67.2025.01.18.06.41.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Jan 2025 06:41:38 -0800 (PST)
-Date: Sat, 18 Jan 2025 08:41:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dragan Simic <dsimic@manjaro.org>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>,
- Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
- Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Thomas =?iso-8859-1?Q?Wei=DFschuh?= <thomas.weissschuh@linutronix.de>,
- Tim Harvey <tharvey@gateworks.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v3 00/19] bootstd: Support recording images
-Message-ID: <20250118144132.GW3476@bill-the-cat>
-References: <20241104175110.1048449-1-sjg@chromium.org>
- <CAFLszTgFdNrRev+7n6j+NqCM+em_p-ONAc=+sztoYaP50HUivw@mail.gmail.com>
- <20250115212439.GD3476@bill-the-cat>
- <CAFLszTiSSq-+cSxVgxLJ8atAAjjxRP2AEQmXMbrf+c3FOepnFQ@mail.gmail.com>
- <20250115233157.GE3476@bill-the-cat>
- <CAFLszTga3RD95M2ujLfuXQor39sfcQrEUe3hwRKABiWx04PiZg@mail.gmail.com>
- <20250116172159.GH3476@bill-the-cat>
- <CAFLszTigN+s1T0hjJXnkE4ucYafHCtabPFHh=gCFpro2WrLnpg@mail.gmail.com>
- <CAJaLiFw3j1FTT25mNd_5Pk-UTCaNL=R2GmK0+m_VoCc7Yc2PRQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1737214992; x=1737819792; i=xypron.glpk@gmx.de;
+ bh=tuAiP4VfrZF6EkCiqsns2tdedKTQbshCkaVDFtTwKrM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=mtI+fI30arxBzcPZOUT0EV25eSuLgbTsFFT4Hc2RtTL/vidcD8RuH16ejHw/9OH4
+ jJ+HcGDDHXPDYSWyHAyojJ0KzcHIje8rSP0m4sLAJ7VTf/sUmwKNFiT+49kcRYlZF
+ LdslL7paoN/73AmHKmJRthdPMChDc7iMpsgXiEekio2d9eelrFykqm5ln4B8OPulD
+ UYYgjnb9afYsalw83XqAMNuc+LJ+9Lva1Ph719f07U2Ma/9zPERQcCEzom2KLtSKe
+ bZOXE2jx0khscs53Fi0497bNMyPc+th1s2XLFASQstQIQfgaJmaz0BaTfPlHwdJz6
+ oz8a4sqXgYpz0+OTSQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N1fii-1tNztQ28K0-00xPSe; Sat, 18
+ Jan 2025 16:43:12 +0100
+Message-ID: <95436c0e-14a6-4771-859e-30c62e2c4df2@gmx.de>
+Date: Sat, 18 Jan 2025 16:43:11 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="K4BfJAJreOutqR5z"
-Content-Disposition: inline
-In-Reply-To: <CAJaLiFw3j1FTT25mNd_5Pk-UTCaNL=R2GmK0+m_VoCc7Yc2PRQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Sat, 18 Jan 2025 15:41:48 +0100
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Andy Yan <andyshrk@163.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-2025-04-rc1
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:zExyUL2Tg+x4puhIoZC0cNCNmSN0sdUZjHvW34ff8rAHr31KrLh
+ 2uAMhKqrIpBQ7JZKjOMuVjR/J51rM3EEFejlcaaizKb6+G6e1hEFk0PcOZ4wPa9QQ+d3WHQ
+ D99+QT7aZuYEyu9J2g9fWbXJqYL5hlnB/M3ZEi1aupiykO4kzy4RnF3VFtRqzJekuuJhKoT
+ EBiro/FiY0MTp98xYjJJQ==
+UI-OutboundReport: notjunk:1;M01:P0:iS7br+6Hvu8=;czR+NcwpK9XJ7a2pmVnjS120i9v
+ Ty2yYCqaFybiZ8rC9V1Ny7+t39Dvm2v3dVbVMPyptoTsIVEXxFE4CLNrDEXylJ4wxI0Nkihd0
+ YS+Oo5p51UAH3JLr1RpF4ReRqAi+c7v8IwQlomv0y7h3DFLrzRRNm+fXL0gRxUcFLloXYC1Sc
+ 0FpPOS+jGMhIMthtNvKQPLu9LPUiVIzP8uawTKeaUqNuUfoldNW7QTFcu1pQ5mmbviLlqC3gv
+ /ANS+HQ/iF9KGsZB0A+EJZ6aYx4wEUGcA3PE6dLxI5fqIet5RnT87oqckSVo8C5XC+W+AQ1Uo
+ LfIBFHa0Mp2eP4JU8tN+ycrzk/SvRuR+YZlv8QRTVwZkEJyJL50jsJ1TdYUDZdnVN74SSQCzL
+ mq6V764JEzJm/Gc4RwZI+7sokWJTYtcWUkZZ4U6QgzY81P0vJRyJykRuihJf1IGDgJ7KE7gCO
+ grcQSOuWEkjPCy4N8Sx/wVdK964Jp4siLJCApVKfDX91QYmlrJoKEw8eySIdu2XKEIaIvbHzF
+ VEgas0u0p0WLIYKc1+j5wDipohnQzcRLFxPKz5/qh3x2GiaAov0QllwKyPHYTRKFK8JECqVJ/
+ Pc2biVhdvV3UxVH+bm4lxgNHsMp8Zr7RPBIcUK5VsJlwgwHE1pcv31Fzxsa2HJ9yUPNkWxcB8
+ Pdwfhvqeq7y3/dwzNrERRYkxGidwbEMn6blkZ29p1R6uxZOGPTp6KcmZr8krG24ZW0j3FKIQF
+ RH7N/zn1Gztwx2IKlFNd9pM5rPjWwKodEd4kXWTrH0Nrm36FeH55tLFmlaFaLwx+iyCIJVLyA
+ ZEuWnV96FE3nr+thPQVkMQhdezO5Bcfc9fJ502bElX+/5Dc9keOR7r5/iLCqDonDKoFufSAzW
+ 8Vt2f2kvUhjoONR4pWHeGVeWBMKh4zFXvl/uPL9DDpd2smU8HAww2h7bSumwaTDBI/Bz8wLqG
+ m857tOCv17eIQI/YR/x/BkkERAwIDABC8So2TsOp1497aOXP2gUcpkStqsct8M352djV2MxN1
+ iTYimCKW3+CATXYFkXY2Sv0YHu3jh5kFXhfn1/v8yY3CEjbpZDwOEMxK4LeN/MmKNndImJwAE
+ UPTKwXj5Pjda/vskufCRNFC9Rs5znWy5dPehV1CsINMZtGcl5s9Q8/YlYXfhdJPfHkN9FFStG
+ ngpwmOwzV3ZI0qF7AgqT9xsBXYntdUXt1uLfjxNYgKw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,97 +93,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Dear Tom,
 
---K4BfJAJreOutqR5z
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit c11dc783fb4418393dd08d39ee01debfc2dea4d=
+4:
 
-On Fri, Jan 17, 2025 at 09:49:43PM -0800, Tony Dinh wrote:
-> On Fri, Jan 17, 2025 at 8:32=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Tom,
-> >
-> > On Thu, 16 Jan 2025 at 10:22, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Jan 16, 2025 at 08:52:38AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 15 Jan 2025 at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> > > [snip]
-> > > > > I'm referring to the whole bootmeth/bootflow/etc thing. Is this g=
-oing to
-> > > > > be put to use by anyone / anywhere on PowerPC? M68K? MIPS? 32bit =
-ARM is
-> > > > > a harder question there, which is also where this particular over=
-flow
-> > > > > was.
-> > > >
-> > > > I'm still not sure what you are saying. Are you wanting to disable
-> > > > bootstd by default / go back to distro scripts / force everyone to =
-use
-> > > > EFI_LOADER / ?
-> > >
-> > > Yes, I'm asking where it's appropriate to enable this new functionali=
-ty
-> > > by default.  It certainly should be enabled on arm64 (there's new
-> > > designs) and riscv (there's new designs). It still ought to be enabled
-> > > on arm32 because we otherwise lack a easy way to say "new" arm32 (say
-> > > i.MX7) and not "old" arm32 (say i.MX23). What is the point of enabling
-> > > this on PowerPC for example? The active users there are (generally)
-> > > supporting legacy hardware and I have no idea how much they want to
-> > > change their boot process, once bootstd supports flash for example.
-> > > There's similar questions for everything else under arch/ as well.
-> >
-> > To me this is in fact two different questions.
-> >
-> > 1. For PowerPC, m68k, MIPS, I suppose we can just disable BOOTSTD and w=
-ait for them to go away, if you are saying that they are behind on migratio=
-ns will never catch up
+   Merge https://source.denx.de/u-boot/custodians/u-boot-riscv
+(2025-01-17 08:27:40 -0600)
 
-On what migrations? A board that has a boot command is not some legacy
-non-migrated case. That's a valid regular use case.
+are available in the Git repository at:
 
-But yes, I'm suggesting we should put some default y if ... logic around
-BOOTSTD.
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2025-04-rc1
 
-> > 2. As to the default, I believe BOOTSTD should be on by default, if we =
-intend to remove the distro scripts and support things that are not EFI
+for you to fetch changes up to f58b0d00126a906f9e1e9fc1c55512b47c8e51be:
 
+   efi_loader: Make efi_run_image() static (2025-01-17 21:05:49 +0100)
 
-In case you missed it, EFI_LOADER is default for some ARM32, ARM64, X86,
-RISC-V and sandbox. None of those are cases where I'm suggesting BOOTSTD
-shouldn't be default.
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24239
 
-> I'd agree with Simon on 2. Boards that have never been upgraded to
-> distro boot or standard boot usually have an internal envs script in
-> include/configs/xxx.h that boots the board the legacy way. Even if
-> bootstd is enabled by default, it won't hurt those.
+=2D---------------------------------------------------------------
+Pull request efi-2025-04-rc1
 
-It hurts them because of the strong likelyhood that they do have
-practical image size limitations (before they would then be leaking in
-to U-Boot environment or some other part of flash).
+Documentation:
 
---=20
-Tom
+* Correct the defconfig name in the coolpi documentation
 
---K4BfJAJreOutqR5z
-Content-Type: application/pgp-signature; name="signature.asc"
+UEFI:
 
------BEGIN PGP SIGNATURE-----
+* Carve out the biggest part of the RISC-V and ARM linker scripts for EFI
+   binary into a common include.
+* Correct the values of SizeOfCode and SizeOfInitializedData in generated
+   EFI binaries for RISC-V and ARM.
+* Avoid gaps between sections in EFI binaries causing a failure in secure
+   boot.
+* Makefile: let clean remove capsule_in.capsule*.efi-capsule
+* Refactor some of the code used for launching EFI binaries.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeLvZgACgkQFHw5/5Y0
-tywLOQv/SkCUoF0iwysTXq29vuK5D+lD69clQgt6fTMlFnKC8AQtsrRQ3zofvs82
-6XlAPq8AXD72DTpWu1rssqluPQQH5wf+fjF3zB8NwajZ11Zz610zfA1ADAJ808mB
-IbiVHvRNVfGCCckCqrFZg3ZFmIF8PH9Ygh/+i4vQwA4BJDQ+xF3UeZxjtYlXGMFe
-JMyFz/G8j8xe+Vv2J/YTvOQ38nuPqk+vus9DRoe72MxhGGam35Xco/q6eJFtJwip
-HtXZIjdqwyTI+zHDi5+rMS6lVof5HinOn9V4rg8VwwETxNOBwPFGGsCmDziMAHGk
-baLO8NXkgbSVWWnbydj2cgA5aST/mhiBXtPNdH+iH+ziMzCBWjhofBoRF2pzFg2r
-gPBrBz2wGf0T4K/fcSC3B7kC2iJM5Np3CnTMWnZw7d+uk2MCX1QLSX0jV7RvAB+X
-kayZuZTkXe6PHNKalDBBrqA2356c+bl2T4jEeyKjlFe5Wp3sE2xpeQ7Md8vi9Io0
-/F2PV8re
-=X9Rh
------END PGP SIGNATURE-----
+=2D---------------------------------------------------------------
+Andy Yan (1):
+       doc: coolpi: Fix the defconfig name
 
---K4BfJAJreOutqR5z--
+Heinrich Schuchardt (5):
+       scripts/Makefile.lib: add -L option to LD command for EFI binaries
+       efi_loader: use INCLUDE in EFI linker scripts
+       efi_loader: correct SizeOfCode, SizeOfInitializedData
+       efi_loader: use include in ARM EFI linker script
+       Makefile: let clean remove capsule_in.capsule*.efi-capsule
+
+Ilias Apalodimas (1):
+       efi_loader: Fix section alignment on EFI binaries
+
+Simon Glass (2):
+       efi_loader: Refactor device and image paths into a function
+       efi_loader: Make efi_run_image() static
+
+  Makefile                                |  2 +-
+  arch/arm/lib/crt0_aarch64_efi.S         |  2 +-
+  arch/arm/lib/crt0_arm_efi.S             | 13 ++---
+  arch/arm/lib/elf_aarch64_efi.lds        | 68 +-------------------------
+  arch/arm/lib/elf_arm_efi.lds            | 71 +--------------------------
+  arch/riscv/lib/crt0_riscv_efi.S         |  4 +-
+  arch/riscv/lib/elf_riscv32_efi.lds      | 68 +-------------------------
+  arch/riscv/lib/elf_riscv64_efi.lds      | 68 +-------------------------
+  doc/board/coolpi/genbook_cm5_rk3588.rst |  2 +-
+  lib/efi_loader/efi_bootbin.c            | 87
+++++++++++++++++++++++-----------
+  lib/efi_loader/elf_efi.ldsi             | 74 +++++++++++++++++++++++++++=
++
+  scripts/Makefile.lib                    |  4 +-
+  12 files changed, 150 insertions(+), 313 deletions(-)
+  create mode 100644 lib/efi_loader/elf_efi.ldsi
