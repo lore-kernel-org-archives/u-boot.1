@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDD2AC02187
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 08:00:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67AC4C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 08:03:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 539F380786;
-	Sat, 18 Jan 2025 09:00:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CECE08063E;
+	Sat, 18 Jan 2025 09:03:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nosEwhMS";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nosEwhMS";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="B6oc6odV";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mhyQu7co";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A39F58073D; Sat, 18 Jan 2025 09:00:28 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 691B18070C; Sat, 18 Jan 2025 09:03:17 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA2308063E
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 09:00:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7704780312
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 09:03:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YZptc4yhbz9sqH;
- Sat, 18 Jan 2025 09:00:24 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YZpxv0QvNz9scH;
+ Sat, 18 Jan 2025 09:03:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737187224;
+ s=mail20150812; t=1737187395;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tHwF0zkQsOY2q4fDVXApLr0w7QI/qZErxdffF/XpXz0=;
- b=nosEwhMSWfzuSrFc7bDILY7IWJpNoevcZZAoofb/e1P86u0dEWtLXO1gjnM94khSWmwxBB
- use9TqGwXASJQ0/vs/w5tYSWIBAzTwMHMQ/P4P2gqs2HSn1QXWRRiNnEJGSqJVEJN4FwSX
- rfWn1NP56cDlORLM/myROsf9M3FeyJUJTw68E9DBGEX/YBU/M/xNOVC7ONIcLNcuFr2Idj
- 9UAWZQmkD8NaV2xCJPKYzkwrntwkLc8FLzReiXCn07r1Km+zya10MndZwcGxe4dLUrm6IL
- O46AlzT/bj5ZKj7Qoh5X+V+EVE0/iSifdNZpGurp6OT/+z93ISfcTyT3ll64ng==
-Message-ID: <69d26454-10d5-4c3e-89f3-a4a0843700d3@mailbox.org>
+ bh=9l1/FPxylk+A4zBDELXssJhV1irq2pkdsUPAWY7MIWk=;
+ b=B6oc6odV2wcjFSxKKw0dayXzF2dOZLjIP+JfQOUmKuK9+HV7QolOCRcmmDpL0tv3MDzeos
+ /S/hf3FJiS7132qqErojF7x/K5ttvWDf3OHxXL721f2tmMtsZUPbJWGszHlOIsttzF2LAM
+ Edkm5TzN4PBIaGndl/ZSyqrmWSEK+dhcyFIoGQwF2Me8LzT4gMNSxOEAjSEriuSyiupPLe
+ O+Mz8whaLK9+xSxdNFZ0JCF8Gf2Fr4FXPFI7FWTPxk18n/assKNiEeoe89ZyviDV7JycJZ
+ y0clKaNzQqXtWOxzgZde8nS5RLIRxxUOJD263IaZ+O7F6OTRS8ELtvZHs5B9zg==
+Message-ID: <6b49eda4-44ca-4c10-81ef-ed179b1cf76c@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737187224;
+ s=mail20150812; t=1737187393;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tHwF0zkQsOY2q4fDVXApLr0w7QI/qZErxdffF/XpXz0=;
- b=nosEwhMSWfzuSrFc7bDILY7IWJpNoevcZZAoofb/e1P86u0dEWtLXO1gjnM94khSWmwxBB
- use9TqGwXASJQ0/vs/w5tYSWIBAzTwMHMQ/P4P2gqs2HSn1QXWRRiNnEJGSqJVEJN4FwSX
- rfWn1NP56cDlORLM/myROsf9M3FeyJUJTw68E9DBGEX/YBU/M/xNOVC7ONIcLNcuFr2Idj
- 9UAWZQmkD8NaV2xCJPKYzkwrntwkLc8FLzReiXCn07r1Km+zya10MndZwcGxe4dLUrm6IL
- O46AlzT/bj5ZKj7Qoh5X+V+EVE0/iSifdNZpGurp6OT/+z93ISfcTyT3ll64ng==
-Date: Sat, 18 Jan 2025 08:59:24 +0100
+ bh=9l1/FPxylk+A4zBDELXssJhV1irq2pkdsUPAWY7MIWk=;
+ b=mhyQu7cohcv1rdKn+1jeQuW6dYo42WlomG0WI0a52biTM09DfkFs8x9hC3G8wh1qVrq9Y/
+ bhodjd05pImT+WN8uWVqmUUDChVXq+1jt3Grs2eMFWQBxD+lxPVvI4bBECBDFp/u3+xZLk
+ wRIcLMt7TjUqeqZhex0hVn4tcRfEuDN0ixYejrFI8V7B31byQoMIUUZHBfTg+PABuEOqnr
+ 3/+JTV4mXzv35glP8Thpz9+w+PThLAymGuX/Ux+PuZ6v3ImdGfXNsiKdzjYynUBrFi4BUT
+ PImtbxGl/TAq1n4T5hI+HV9TdrZAv8DMMg4hvplSvAtJ92Vt/pOtwUd4tQ/5rA==
+Date: Sat, 18 Jan 2025 09:03:10 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 7/8] arm64: renesas: Deduplicate board_early_init_f()
-To: Adam Ford <aford173@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Biju Das <biju.das.jz@bp.renesas.com>,
+Subject: Re: [PATCH 3/8] ARM: renesas: Rename common/common.c to
+ common/rcar64-common.c
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
 References: <20250112223528.179828-1-marek.vasut+renesas@mailbox.org>
- <20250112223528.179828-7-marek.vasut+renesas@mailbox.org>
- <CAHCN7xJ+T_m_MR0PuHNMyuMegFGykPp-CpS8sCX6EYb3ksvfRg@mail.gmail.com>
+ <20250112223528.179828-3-marek.vasut+renesas@mailbox.org>
+ <de1d81bd-caf4-4604-89ad-68f7c1f180c4@cherry.de>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAHCN7xJ+T_m_MR0PuHNMyuMegFGykPp-CpS8sCX6EYb3ksvfRg@mail.gmail.com>
+In-Reply-To: <de1d81bd-caf4-4604-89ad-68f7c1f180c4@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 3ugcby984eergmk5mhrih5xyd1o7tjoi
-X-MBO-RS-ID: ee8c5773999f7eb64a0
-X-Rspamd-Queue-Id: 4YZptc4yhbz9sqH
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: tw7bna5ujkabozex8xdfhsut3iabd5ty
+X-MBO-RS-ID: 3f6a30b2e6390df6ada
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,20 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/13/25 4:40 PM, Adam Ford wrote:
-> On Sun, Jan 12, 2025 at 4:36 PM Marek Vasut
-> <marek.vasut+renesas@mailbox.org> wrote:
+On 1/15/25 11:27 AM, Quentin Schulz wrote:
+> Hi Marek,
+
+Hi,
+
+> On 1/12/25 11:34 PM, Marek Vasut wrote:
+>> The common.c content is specific to 64-bit R-Car SoCs, rename
+>> the file to rcar64-common.c and remove R-Car 64-bit ifdeffery
+>> in the file. No functional change.
 >>
->> Introduce common weak board_early_init_f() in rcar64-common.c
->> which is the default implementation in case there is no other
->> board specific board_early_init_f(). Remove board_early_init_f()
->> from Salvator-X, ULCB and Draak boards where this function is
->> empty.
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > 
-> Isn't there a config option to enable/disable board_early_init_f?  If
-> they are do-nothing functions, can the config option be disabled?
-There is , but I am still on the fence whether it wouldn't be better to 
-remove it in favor of weak symbol, which would get optimized out. I 
-think it is more user friendly as user does not have to fiddle with any 
-config options, only fill in the non-weak symbol with content in their 
-board file and it automatically takes effect.
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Since there are going to be significant changes to this series, I'll 
+send a V2 later today, and please give it a once over.
