@@ -4,76 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D1F6C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:33:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16173C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:34:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC97180761;
-	Sat, 18 Jan 2025 05:33:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7A74F80657;
+	Sat, 18 Jan 2025 05:34:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wk4BZZXE";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BOzy3l89";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F4E98070C; Sat, 18 Jan 2025 05:33:06 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id B4EBC8070C; Sat, 18 Jan 2025 05:33:59 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F85680761
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:33:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 995988036F
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:33:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-aa68b513abcso514729466b.0
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 20:33:04 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5d647d5df90so4688678a12.2
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 20:33:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737174783; x=1737779583; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737174837; x=1737779637; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Veka+VmgGyS8JVUgEEE7oaoJKWP5f1nK++Ju+JshfA0=;
- b=Wk4BZZXEfMaVZ+KNBonC/9gpzVJOaSfcQYXmkM3kE17rZg1kxjLQ+E2wP6D/XkrAzf
- YLTLh0u/I4Qodd4XijrtJ/x1+G5DCDect9Lb2HI6pWaY2tVy3GT1gp2N5cVoR/YgAwKD
- 1BLJ3mxiWVTAmNYP7tRnZKtVg7dXoKPszp59k=
+ bh=ESJZwf+BQGUuOXeuqbYGGZ0hs//YYnKCNjYToscc4L4=;
+ b=BOzy3l89U3iyqn0k8K83SYBWulyRn2/nBMAqxemyGdvPuvBmJ5YZOrv+NNwdXh9WnE
+ kz6yNPteUHPuBW2uYkglytq/1LeEdzv3gQEOzmGia8kucangetvB03rhQBJpW9wQJ15A
+ b6CyKySXXpTAjVXN12DyWJjelqt9txBGW+5Lo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737174783; x=1737779583;
+ d=1e100.net; s=20230601; t=1737174837; x=1737779637;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Veka+VmgGyS8JVUgEEE7oaoJKWP5f1nK++Ju+JshfA0=;
- b=USwtXKWJHW1BsD/Rg0Q0HiRfwOJfWDGJ+tOrWaOYN7etafAA4vdrTiWQ1FwIlUv9UH
- H0dvV6Zp+Qvj/fWlHgLZyeNbG376DDe4ZQevBLg5a4ZQdZBcwa+3dE+iREY2GrOCuG9c
- lHzcyjE6QKn/IjDSZouGryoNuiu/DPM90AHDkF0xKdQGMUjsKWPsBJcnK+b4UTkEvBGY
- dkrI7PkeP+49qnVP+/W43vhDP4LJVzD8rahZxf4bN1rIF5BT3W8Q9GAdcZrBrud1efE5
- C4xjqrWeX0GCvfaq/j3Cfd7NzjDSBSmTKQ5BoiZ/EMIxjpd/2T0RW9iz5ugkvgYp5N57
- tufA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7DdxfC8xzzK8hetvlh6QYSEFZOjhCSjweBWzU6wiIYqBpiOjSn7OMNygOJQ9o5DeUob+v8Ik=@lists.denx.de
-X-Gm-Message-State: AOJu0YwoF5mwdu7jaX3F4kQKXq8ENfjJJTMYjDPjqtvFdxIPMmfdW3cD
- 3d/UbrXJYsvr6JLPi/qYlXugBuG0UJ1KS7Ell2D3VZKuIp0FWbhCigLlBOYbNNihgUGSPJX4YGE
- rT89F/zmPEmlDPnEPEWx60dCghousO6H9YpDG06PaIomI/ek=
-X-Gm-Gg: ASbGncvOyeQI4AfOcSiHGBfJTIwKppB0K7ge6x9EDTs1hDE/g0R/svTIKoK54sTJka3
- VF8AtAU59m2vE942LqC0eMv6H86wgyOn33EuaBuYnptWZ20Pw9ywM8Vv/5q4WHE5txBFoZZQPBs
- 0ozSGkUIi1
-X-Google-Smtp-Source: AGHT+IETYP0gNtC0eOh+Z6dJU7UgPD2X6iObnTD6OvTQoEctvE73rAbxBDQ16KAAmF/F6CZkuNH1yiqS1Wul+i6NiLs=
-X-Received: by 2002:a17:907:d1b:b0:aa6:6fa5:65b3 with SMTP id
- a640c23a62f3a-ab38b3c495bmr446017566b.47.1737174783658; Fri, 17 Jan 2025
- 20:33:03 -0800 (PST)
+ bh=ESJZwf+BQGUuOXeuqbYGGZ0hs//YYnKCNjYToscc4L4=;
+ b=wkkXoLs3z0CpIiwiRPvC0lOCq/AWWxTZQVE2cHLEut5WLMvY1s4EQgGna4Cvqf/N6b
+ tOrMuPTP183RR7PloTFh1tU9lp0WXzrKBKb3q+4QJGmZE/rRFOYeZfr4rNN6GuUQ2N4n
+ YuZpXtzUYIrbJPtTU7L6BTKU0uxyQ3IGlk2PrUwoXrprTPUJ4xYU/4djhy6Qge0uEDa1
+ n7UEVWWrQQyz5EMSbtbTAco5T4C5Q12UhExvfezcu5mW0JALSHZeeaW8JwrXS1vO91nE
+ LAANV3jEanHOJFhTiDYlf2h0UFV/e7jYBNnW2oQj1ztxZhBzML0CLr1CtBTF8UMm0JaF
+ 4Uvw==
+X-Gm-Message-State: AOJu0Yw+XmhWWfWboZixEZX/G1GgT4OEvcFsAweHQuhOR9h1wWyfSjuL
+ xpU10Y/rGUZF/KlUPToWi0aI1UiqP9XI5sgOeQ3WUTHA9xbROXnfQTkl7A8xx8kcMb0hzEwfOX8
+ 8yknpSxu/YJ67TkANPT0gDoD2BU4YamOpPgQt
+X-Gm-Gg: ASbGncuJPdc6P4wSOsayiV1ri1VMwAadJpxuBwY7qPQl+WJ4SNCD8XAhkSl6Zk/v2a6
+ qGJWlQYOlStymtZPVMkgLtKGiVm5ASvl69gIftPb8C57cy9uG1vBvj82ZmfnhhYcjJF0EBAu+L5
+ oG591YkNmA
+X-Google-Smtp-Source: AGHT+IFb1ZsMLh0t932O0Eb9IKBK+Kdl2YmBH+UzpTRVNpIAjeYJMwG9mYTjJMusVh8rtiHwOIPomJMswJArRtxZHwo=
+X-Received: by 2002:a17:907:7d9e:b0:ab2:eb1a:9479 with SMTP id
+ a640c23a62f3a-ab38b0b7efemr516542866b.2.1737174836899; Fri, 17 Jan 2025
+ 20:33:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20250117-clarify-probe-after-bind-v1-0-273f046ce5dd@linaro.org>
- <20250117-clarify-probe-after-bind-v1-2-273f046ce5dd@linaro.org>
-In-Reply-To: <20250117-clarify-probe-after-bind-v1-2-273f046ce5dd@linaro.org>
+References: <20250116012723.2820301-1-sjg@chromium.org>
+ <20250117000026.GO3476@bill-the-cat>
+In-Reply-To: <20250117000026.GO3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jan 2025 20:32:52 -0800
-X-Gm-Features: AbW1kvZZ01GVK_BYqz54CH1rk-aYEp5snN9PpgiguU32HSR9rIp3SKUYSzE08t4
-Message-ID: <CAFLszTi_=S9m54DvKdjdNXf=zOhgg6tog8kcQ+dxjkjQ8BoP4Q@mail.gmail.com>
-Subject: Re: [PATCH 2/2] drivers: remove bogus DM_FLAG_PROBE_AFTER_BIND flags
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, 
- Marek Vasut <marex@denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Fri, 17 Jan 2025 20:33:35 -0800
+X-Gm-Features: AbW1kvZFGrAD3q2fjoGBJ6CtnEqWlJVziV6P7ptK8qL73Yg01WQvblwod9V2zug
+Message-ID: <CAFLszTgmgb-sNDO4kx4DzM=Uoq2VrOww3QHQ8i0e9vBcttRKSw@mail.gmail.com>
+Subject: Re: [PATCH v2 00/22] vbe: Series part F
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Gary Bisson <bisson.gary@gmail.com>, Greg Malysa <greg.malysa@timesys.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Trevor Woerner <twoerner@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -92,48 +101,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 17 Jan 2025 at 00:29, Caleb Connolly <caleb.connolly@linaro.org>
-wrote:
->
-> Some drivers set DM_FLAG_PROBE_AFTER_BIND, this does nothing since it's
-> only every applied on a per-device basis.
->
-> Remove the flags.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/mailbox/zynqmp-ipi.c  | 1 -
->  drivers/watchdog/da9063-wdt.c | 1 -
->  2 files changed, 2 deletions(-)
->
-> diff --git a/drivers/mailbox/zynqmp-ipi.c b/drivers/mailbox/zynqmp-ipi.c
-> index 713d93a200c4..851aa737c03e 100644
-> --- a/drivers/mailbox/zynqmp-ipi.c
-> +++ b/drivers/mailbox/zynqmp-ipi.c
-> @@ -269,6 +269,5 @@ U_BOOT_DRIVER(zynqmp_ipi) = {
->         .name = "zynqmp_ipi",
->         .id = UCLASS_NOP,
->         .of_match = zynqmp_ipi_ids,
->         .probe = zynqmp_ipi_probe,
-> -       .flags = DM_FLAG_PROBE_AFTER_BIND,
->  };
-> diff --git a/drivers/watchdog/da9063-wdt.c b/drivers/watchdog/da9063-wdt.c
-> index b7216b578630..ec9bc0330114 100644
-> --- a/drivers/watchdog/da9063-wdt.c
-> +++ b/drivers/watchdog/da9063-wdt.c
-> @@ -144,6 +144,5 @@ U_BOOT_DRIVER(da9063_wdt) = {
->         .name = "da9063-wdt",
->         .id = UCLASS_WDT,
->         .of_match = da9063_wdt_ids,
->         .ops = &da9063_wdt_ops,
-> -       .flags = DM_FLAG_PROBE_AFTER_BIND,
->  };
->
-> --
-> 2.48.0
->
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, 16 Jan 2025 at 17:00, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Jan 15, 2025 at 06:27:01PM -0700, Simon Glass wrote:
+>
+> > This includes various patches towards implementing the VBE abrec
+> > bootmeth in U-Boot. It mostly focuses on introducing a relocating
+> > SPL-loader so that VBE can run in the limited amount of SRAM available
+> > on many devices.
+> >
+> > Another minor new feature is support in VBE for specifying the image
+> > phase when loading from a FIT. This allows a single FIT to include
+> > images for several boot phases, thus simplifying image-creation.
+> >
+> > One lingering niggle in this series is that it has a different code path
+> > for sandbox, since it does not support the relocating jump. It should be
+> > possible to resolve this with additional work, but I have not attempted
+> > this so far.
+> >
+> > For v2, I have split the first patch into 5 pieces, to make it easier to
+> > see the code-size impact, plus added a few tweaks to reduce code size.
+>
+> Overall, size wise this looks better than v1, so I'm generally happy
+> enough. That said:
+>
+> [snip]
+> >  boot/vbe_common.c      | 375 +++++++++++++++++++++++++++++++++++++++++
+> >  boot/vbe_common.h      | 137 +++++++++++++++
+> >  boot/vbe_simple.c      |  98 ++---------
+> >  boot/vbe_simple.h      |  16 +-
+> >  boot/vbe_simple_fw.c   | 207 +++++++++--------------
+>
+> The size growth indeed comes from the compiler/linker not having as much
+> insight as it used to (except for when LTO is enabled). Perhaps once we
+> have more device types available it'll be clearer to see some way to
+> better re-organize things for savings again. Thanks!
 
-It is actually a bit unclear, since the comments for struct driver mention
-DM_FLAG_... for the flags.
+We need a clear idea of what data needs to be checked and what is
+considered trusted. One idea would be to have some extra checks which can
+be disabled to save code size. That is something which could help across
+U-Boot.
+
+Regards,
+Simon
