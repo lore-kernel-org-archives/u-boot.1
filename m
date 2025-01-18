@@ -4,80 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6387C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 20:58:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C035AC02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 21:04:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1558F80141;
-	Sat, 18 Jan 2025 21:58:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D31AB80141;
+	Sat, 18 Jan 2025 22:04:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jilq1JvJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QKIqU7N9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CBC6801CF; Sat, 18 Jan 2025 21:58:32 +0100 (CET)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 1EC4E8063E; Sat, 18 Jan 2025 20:26:32 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8C8C80077
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 21:58:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C0F9C80141
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 20:26:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-4679eacf2c5so32530031cf.0
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 12:58:29 -0800 (PST)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3d14336f0so5756885a12.3
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 11:26:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737233909; x=1737838709; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1737228389; x=1737833189; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d203k98MnlSUAl4rE5QYL26WJ5tugEgg9gN1qqYaJ18=;
- b=jilq1JvJCOUk7su1mlo3f9VRLuFMrATAqlFLQcAVfVwMyzxLEk9WI/ll5k9FWLMR1x
- 1UMwMjajjRj881IVDHowcw2AZZ60l8yxSdQAbWbliNS+YYMNIKTp628jV/n82MpATwRH
- Mu0PLGhW7xqJJAxhV66ATXcxSkdfhtvGUZNaY=
+ bh=s0reUeDbHIIghz3WpCRwx+Jptkk1Eo38GeLoLOSDyEw=;
+ b=QKIqU7N9f2PojrBGn/Gv2XjcP4/1tL1uKgQaKs0Re518fyVmbnmHRht+qutQPrNqrd
+ Ylie1L29mX2Ki8RWkAGoIpTGCojaSJQEiqVRjEWstbqPYVEkSiAmRf2+85QAzKK4yyDR
+ IOLBoZ3NTPXLePXvwfRTzjYlAKKRcNtaWI6iXoRe81cDDcmI0LZrUGwvi5BVmr0wYWxL
+ twOcovG1/EL37Qd3VCTS8OuCZdslPw8CveG3r1T+Wh6eiORSgInAtFqNBQw/vfR4J84J
+ k/2tx4gVaapscGSnes0w26k90tAX8Wn0eRHGX9IBHA2LiipiZUgqxVAuRWpWKaYqmsPr
+ 8Q+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737233909; x=1737838709;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1737228389; x=1737833189;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d203k98MnlSUAl4rE5QYL26WJ5tugEgg9gN1qqYaJ18=;
- b=JOXbqn6B5PT6yCUA8FpyI4W1rUVEAD81QguAO5zBag9pZnfO7kgLVcP7L++6FEB/AG
- 3Ine1eGk9gQ2iU34RTQ5ehOhUAyyLzyxeORr23AxQqVvdSQ9DkZdeNPJPWT0ZlK5QpyP
- qv6MTB8ZTtYzDQG8Gp+72Ty7REz51eFtj1J6wzEI9hFqX6H9zit1qbLYklC282acp3yp
- +uOgaLt67QDsWu9djwm77zT3aU5KgRTZf5XSi13vR2xuWCo5wZaxjIUUGOg80fXk4Hr9
- j3N4rLx/tpXXIs/2XTyeArNpbsebfcWjENwxbU1p+z1rY3YB41OKv2Z/c6j9hFFQxnr6
- yKpg==
-X-Gm-Message-State: AOJu0YykoGK3U/p+CXUYWNesLcA3sT9+m3SvdgSCkOPwywxktDOD95qX
- pSxGoIzechq0SL1wJmahoPdFSEkCax0v5wj5DyXgTGNGta9hU1GqkB2+Oe3/fCE=
-X-Gm-Gg: ASbGnctogObmsHY9kI3twF2Vnf/SmoSwr3sPMTKnIt5LP5OZLtQFfc6LJNbroOwOPZS
- ArlbwJm5PhmooMRt39ZAv9AWRXAe6RojaN4U14HhkDtDMlklziMi4y/YPJknCiBDPLyYkQPqzuQ
- X/SiEPB2NL0KE7gsBZqi/Pz4Kk1krxNH082Y0c4oUgB0iW26SnmI0+EUzty6CpsqRE+Az6Txn/z
- 2cIhz01lqk5/HtM8a+L9sdqK5z1qiiHKh9gJxUUet8El0w+dr3Bqrj6lKekEFDZBg==
-X-Google-Smtp-Source: AGHT+IHBUEKIOUPXPTEN80s7pT4c4O4jOFYtcfT6CO29dXpl3+LtW2jNZycxHA0aGqs8hX852GVguQ==
-X-Received: by 2002:a05:622a:134c:b0:466:77d0:5941 with SMTP id
- d75a77b69052e-46e12a25347mr98667311cf.10.1737233908818; 
- Sat, 18 Jan 2025 12:58:28 -0800 (PST)
-Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afcd3651sm24869006d6.80.2025.01.18.12.58.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Jan 2025 12:58:28 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Andy Yan <andyshrk@163.com>
-In-Reply-To: <95436c0e-14a6-4771-859e-30c62e2c4df2@gmx.de>
-References: <95436c0e-14a6-4771-859e-30c62e2c4df2@gmx.de>
-Subject: Re: Pull request efi-2025-04-rc1
-Message-Id: <173723390702.2590043.17030464061072914513.b4-ty@konsulko.com>
-Date: Sat, 18 Jan 2025 14:58:27 -0600
+ bh=s0reUeDbHIIghz3WpCRwx+Jptkk1Eo38GeLoLOSDyEw=;
+ b=V2LOrv//bRXc5QKaHGjP/ZHafOk4u2g+/z86ac+zlU7g271cavwfuCy6sObN7C9nQp
+ oauWPPS5B92Nug80VymKpGxQRTWGtJKOFuzdGDg15ACgkGqKZSOsSxtPV1SpS1ZZqBCj
+ 5/yy9PRPmHPbu6I2plNBWHS6JCX5NsSTnf0dKSmYjfEA48tXCPpDWgVqpKhjO82Atk59
+ ijAfLX679hBBCKGh39n1NphUdz+C9w3JfqLMcjm8/ZLRjpwZSCGCtAZsfna3qLxHI0nj
+ c74+8biOTZvYJMxJWjyUwtxbVHE/hAhT8VS1wBxBTY5uFQcuM65lt6jrqhVmZjSJ4ueH
+ jXZQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU5dZdRZyHkHOS6Vbz31Uglv5iuu07AaoO0Mq8o3l71Adk4MHpYpyVwf8DKwG0yrFzKXbLM0gE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxto5uUcL4Ps0jNdnbvZd4uJUp/VXwQhVyAbFaKljDfVVpHI/Lw
+ e9cPMsdrI1rXVhJkMpB96grAmkADZ+lVsITWwn2hXPEBy1lAcCLKIZe+fCpEGjRjeK8A5Y2K/2e
+ UFK/Ul6c+7ReI84HVxK41ffTyObk=
+X-Gm-Gg: ASbGnctOhlCThSuGdG4j33brbY1WdnkVuPnpkcNiQo13/qXQU7PmU2G3iVIIeFfVMkr
+ MPXI8EGsLWebf/kjV+aD35+6uAmCqJg8EmE7nonaLHldxKDDVEf5o
+X-Google-Smtp-Source: AGHT+IHOu8ihHkAFlUUMuRvGHU++sgL58np7j1uOAxcc9mL44RY9wtTmhnvRdfuXjI/K6AdRgY1vQswvYoCXc38W5sA=
+X-Received: by 2002:a05:6402:278f:b0:5d9:b50e:7008 with SMTP id
+ 4fb4d7f45d1cf-5db7d2f8c49mr6147002a12.8.1737228388917; Sat, 18 Jan 2025
+ 11:26:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20241104175110.1048449-1-sjg@chromium.org>
+ <CAFLszTgFdNrRev+7n6j+NqCM+em_p-ONAc=+sztoYaP50HUivw@mail.gmail.com>
+ <20250115212439.GD3476@bill-the-cat>
+ <CAFLszTiSSq-+cSxVgxLJ8atAAjjxRP2AEQmXMbrf+c3FOepnFQ@mail.gmail.com>
+ <20250115233157.GE3476@bill-the-cat>
+ <CAFLszTga3RD95M2ujLfuXQor39sfcQrEUe3hwRKABiWx04PiZg@mail.gmail.com>
+ <20250116172159.GH3476@bill-the-cat>
+ <CAFLszTigN+s1T0hjJXnkE4ucYafHCtabPFHh=gCFpro2WrLnpg@mail.gmail.com>
+ <CAJaLiFw3j1FTT25mNd_5Pk-UTCaNL=R2GmK0+m_VoCc7Yc2PRQ@mail.gmail.com>
+ <20250118144132.GW3476@bill-the-cat>
+In-Reply-To: <20250118144132.GW3476@bill-the-cat>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Sat, 18 Jan 2025 11:26:17 -0800
+X-Gm-Features: AbW1kvbuxbjmNQxzT8XkGHZcFVbuEK7X1OlBphXt7ykaBemWAoq753t6qizJHkg
+Message-ID: <CAJaLiFzSHwzSU=74o6OV4FakCMi4xeg=fU=v4G17FAY_QCUTsQ@mail.gmail.com>
+Subject: Re: [PATCH v3 00/19] bootstd: Support recording images
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Dragan Simic <dsimic@manjaro.org>, Emil Kronborg <emil.kronborg@protonmail.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Ion Agorria <ion@agorria.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mark Kettenis <kettenis@openbsd.org>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sean Anderson <seanga2@gmail.com>, Sean Edmond <seanedmond@microsoft.com>, 
+ Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
+ Tim Harvey <tharvey@gateworks.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 18 Jan 2025 22:04:37 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,23 +130,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 Jan 2025 16:43:11 +0100, Heinrich Schuchardt wrote:
+Hi Tom,
 
-> The following changes since commit c11dc783fb4418393dd08d39ee01debfc2dea4d4:
-> 
->    Merge https://source.denx.de/u-boot/custodians/u-boot-riscv
-> (2025-01-17 08:27:40 -0600)
-> 
-> are available in the Git repository at:
-> 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2025-04-rc1
-> 
-> [...]
+On Sat, Jan 18, 2025 at 6:41=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Fri, Jan 17, 2025 at 09:49:43PM -0800, Tony Dinh wrote:
+> > On Fri, Jan 17, 2025 at 8:32=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > Hi Tom,
+> > >
+> > > On Thu, 16 Jan 2025 at 10:22, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Jan 16, 2025 at 08:52:38AM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Wed, 15 Jan 2025 at 16:32, Tom Rini <trini@konsulko.com> wrote=
+:
+> > > > [snip]
+> > > > > > I'm referring to the whole bootmeth/bootflow/etc thing. Is this=
+ going to
+> > > > > > be put to use by anyone / anywhere on PowerPC? M68K? MIPS? 32bi=
+t ARM is
+> > > > > > a harder question there, which is also where this particular ov=
+erflow
+> > > > > > was.
+> > > > >
+> > > > > I'm still not sure what you are saying. Are you wanting to disabl=
+e
+> > > > > bootstd by default / go back to distro scripts / force everyone t=
+o use
+> > > > > EFI_LOADER / ?
+> > > >
+> > > > Yes, I'm asking where it's appropriate to enable this new functiona=
+lity
+> > > > by default.  It certainly should be enabled on arm64 (there's new
+> > > > designs) and riscv (there's new designs). It still ought to be enab=
+led
+> > > > on arm32 because we otherwise lack a easy way to say "new" arm32 (s=
+ay
+> > > > i.MX7) and not "old" arm32 (say i.MX23). What is the point of enabl=
+ing
+> > > > this on PowerPC for example? The active users there are (generally)
+> > > > supporting legacy hardware and I have no idea how much they want to
+> > > > change their boot process, once bootstd supports flash for example.
+> > > > There's similar questions for everything else under arch/ as well.
+> > >
+> > > To me this is in fact two different questions.
+> > >
+> > > 1. For PowerPC, m68k, MIPS, I suppose we can just disable BOOTSTD and=
+ wait for them to go away, if you are saying that they are behind on migrat=
+ions will never catch up
+>
+> On what migrations? A board that has a boot command is not some legacy
+> non-migrated case. That's a valid regular use case.
+>
+> But yes, I'm suggesting we should put some default y if ... logic around
+> BOOTSTD.
+>
+> > > 2. As to the default, I believe BOOTSTD should be on by default, if w=
+e intend to remove the distro scripts and support things that are not EFI
+>
+>
+> In case you missed it, EFI_LOADER is default for some ARM32, ARM64, X86,
+> RISC-V and sandbox. None of those are cases where I'm suggesting BOOTSTD
+> shouldn't be default.
+>
+> > I'd agree with Simon on 2. Boards that have never been upgraded to
+> > distro boot or standard boot usually have an internal envs script in
+> > include/configs/xxx.h that boots the board the legacy way. Even if
+> > bootstd is enabled by default, it won't hurt those.
+>
+> It hurts them because of the strong likelyhood that they do have
+> practical image size limitations (before they would then be leaking in
+> to U-Boot environment or some other part of flash).
 
-Merged into u-boot/master, thanks!
+Yes, indeed. The image size growth would be a problem.
 
--- 
-Tom
+Thanks,
+Tony
 
-
+>
+> --
+> Tom
