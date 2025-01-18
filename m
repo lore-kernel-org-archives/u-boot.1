@@ -4,114 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C3EC02187
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 05:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D7BC02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 06:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DB9480756;
-	Sat, 18 Jan 2025 06:59:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7402F8063E;
+	Sat, 18 Jan 2025 07:13:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j6WTasC+";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pZgD9eDt";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="UKXsEidi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA89C8070C; Sat, 18 Jan 2025 06:50:12 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 38B678070C; Sat, 18 Jan 2025 07:13:24 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A74980077
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 06:50:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EDEE580077
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 07:13:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5d3e9a88793so4682927a12.1
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 21:50:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737179410; x=1737784210; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Aff9km3zIkIMhb4MW4tO/IOx1TMp5fPG1CdwAISjCOo=;
- b=j6WTasC+iofuJu8jg5PUQ7N/0SBQvssVUFVUKwtCvli1MVwp0dSyUlsQrgk1n97w7o
- t0pVGtZoyTqlypDFk7j16qk3eJATYyNSBHxYV4wtlaJPZ5842DFzUm8WIqj60+eKk/34
- PPa2rrZCHERLOzEGJq/aBt9GlEwUNwAJHZM/waJl8+HqtFh3EjDRum1BRGwjdftZ6Ma1
- O5B9LagvecY1TBxsPbz7R7vC0ofLGN5w0/Fkt3IU8Uk1fls1gblDVAVlONde64xgHbl6
- FRp/HB14LUa991IdGTmLve4UcYfe9nEedYheAi9MFZ2RSMXILH2klu09yqKZvpTTh611
- OrKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737179410; x=1737784210;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Aff9km3zIkIMhb4MW4tO/IOx1TMp5fPG1CdwAISjCOo=;
- b=qjSckEIU3SPfvuq6KqFAsk2ooDfPhOTDyLlaE1jej4ZHSErgmcPVO3HB3azAIFaSP0
- kZfwiKbxkvkdYGt6ZA79bEIHRbN8kaMQfc+8gP5o8820N+DGsxPBht0OiT9yhAnnTrCs
- B3EcOJZDrSDJ67xeCC7RYJJVXfXzGHI22w8hor5Qw2Enl3Hq2lnbFkMAKmWPz30AesiZ
- SXbRrKidFltOb/fhi2e6oXweAl7mCSVDnI60AdJJdNVHtrDU3tPIQ8Gj1u2+BmRqPZsN
- 0Pkhfub89E/fjKmtBdvV0ssO2rwRZsOZoyq+k6abKQnagvnF6Q3mKjKHfl/VzoA2O+FZ
- a9zQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWn4yk5voPQJw5x4OIiFJFCROf5F/bWxYZJTwcC+HSbRrPqIgPmHV+OIQ8ihO0fRNLJuiB6p4Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCNmn9RPU37XmocbnFCU8o8l1/g6jDCw+2ShhvQH2xdcUz9eVU
- h+3pI1VGw4i+sXrsYwbdcJni8u30ZaGsFZWPq7f/0wDPKXuW6XEtksgXdNZwuhrsplfpyWJSL4n
- R5PR5rz5gqCisfaeRmgoUQc3IT74=
-X-Gm-Gg: ASbGncuDmaR4WHNn0zf7Los2xajznZrJLIWmIsRe7qgn25hp1oDkMIzo7odNXfBeexu
- sbcWiF+ZpCYsdAq2Qq1gh3hNiyydJ4IlA3y13WWfX9UXSZTjuTT1b
-X-Google-Smtp-Source: AGHT+IFzVb8gWTPfpa4cmauPDw/Lb7ACbZPk5W13P6V/LUAOqWwXxmX4Jv9P/AZt9zZjH6e/xwazI8xm9YLJi91bpGM=
-X-Received: by 2002:a05:6402:34d5:b0:5d0:e50b:899e with SMTP id
- 4fb4d7f45d1cf-5db7d2ec628mr4310856a12.4.1737179408233; Fri, 17 Jan 2025
- 21:50:08 -0800 (PST)
-MIME-Version: 1.0
-References: <20241104175110.1048449-1-sjg@chromium.org>
- <CAFLszTgFdNrRev+7n6j+NqCM+em_p-ONAc=+sztoYaP50HUivw@mail.gmail.com>
- <20250115212439.GD3476@bill-the-cat>
- <CAFLszTiSSq-+cSxVgxLJ8atAAjjxRP2AEQmXMbrf+c3FOepnFQ@mail.gmail.com>
- <20250115233157.GE3476@bill-the-cat>
- <CAFLszTga3RD95M2ujLfuXQor39sfcQrEUe3hwRKABiWx04PiZg@mail.gmail.com>
- <20250116172159.GH3476@bill-the-cat>
- <CAFLszTigN+s1T0hjJXnkE4ucYafHCtabPFHh=gCFpro2WrLnpg@mail.gmail.com>
-In-Reply-To: <CAFLszTigN+s1T0hjJXnkE4ucYafHCtabPFHh=gCFpro2WrLnpg@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 17 Jan 2025 21:49:43 -0800
-X-Gm-Features: AbW1kvbvpySfQbtsRDolurGcbvKg5osavNmLf8vNThi1ENdva3Yb6vbH8IEeKus
-Message-ID: <CAJaLiFw3j1FTT25mNd_5Pk-UTCaNL=R2GmK0+m_VoCc7Yc2PRQ@mail.gmail.com>
-Subject: Re: [PATCH v3 00/19] bootstd: Support recording images
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Dragan Simic <dsimic@manjaro.org>, Emil Kronborg <emil.kronborg@protonmail.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Ion Agorria <ion@agorria.com>, 
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YZmW55DvWz9sWC;
+ Sat, 18 Jan 2025 07:13:21 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737180801;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=jERMA/AgvKITjf2Vd4osswkEKujKPRwxJ/Y3DDs+5Kc=;
+ b=pZgD9eDtKaCAyHRurHcxmuADbAxg/E3/ygsVlofcjBzuX0JIk36Z/xTNSkFns6AKMPqZUh
+ n5Ei3u0LgWJx2Konxy8FS9PdePTPE709TewcEvifF94MknDmRIflAMOBRFAainkQBVMG7B
+ 5qRdmy6kAjsOVcsnqRSUfOguamVt4VHHeAUucleyjjdHOcAKxWkox1EjCKZ+3qlppYLmTm
+ ZJ+heP97ez0PTrinu5Qf3uV/eT25sZfzTzhJkEnDxYjBSmTcqMg1OxqeLjFAz6LaPSzP/U
+ sHkLVT/dPhoxWzDMg+4nrzuhhKcHywHhtcqRVGFAwuUDe+VOZ5o2RiTs4VO9Nw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737180799;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=jERMA/AgvKITjf2Vd4osswkEKujKPRwxJ/Y3DDs+5Kc=;
+ b=UKXsEidi6DBOyHlGg7sFTbUBJsK7L2R6i3TiFKfWrrI2yY5j6tfxJ9f+BDZ/DnCCSe78lv
+ TuTpmTQIyqyQIoVbfjm0280Y2xiZBBj1/SsisJBYrJ+72Nbc/XnsNHqEWIkp3F8RUHGTLN
+ vUfnr77agsauCJu05B1kg/QTPgnub2eA0nbSNficdEVn0c7E7PwWguGW2smCL8VwkJGFqX
+ 2hD4OOYWxXdMcMRFCEkm8TnDv1uI5PYWE23PqRDvQeXokzRIXMTlCu6joptrhwr+YI5zYI
+ pLa6TT0EAMDZKeDorvQs92/I8zSHfmb7nFuxctG4PtquRB9Y9sWLf3AkOVUiAg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Maximilian Brune <maximilian.brune@9elements.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>, 
- Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sean Anderson <seanga2@gmail.com>, Sean Edmond <seanedmond@microsoft.com>, 
- Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>,
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- Tim Harvey <tharvey@gateworks.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 18 Jan 2025 06:59:38 +0100
+ Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: ravb: Staticize bb_miiphy functions
+Date: Sat, 18 Jan 2025 07:12:47 +0100
+Message-ID: <20250118061304.124807-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 97ocpau4uct5dtxohthm5pzm3uj1j3ci
+X-MBO-RS-ID: ef0fcdc44aba444c295
+X-Rspamd-Queue-Id: 4YZmW55DvWz9sWC
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,58 +91,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 17, 2025 at 8:32=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Tom,
->
-> On Thu, 16 Jan 2025 at 10:22, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Jan 16, 2025 at 08:52:38AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 15 Jan 2025 at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> > [snip]
-> > > > I'm referring to the whole bootmeth/bootflow/etc thing. Is this goi=
-ng to
-> > > > be put to use by anyone / anywhere on PowerPC? M68K? MIPS? 32bit AR=
-M is
-> > > > a harder question there, which is also where this particular overfl=
-ow
-> > > > was.
-> > >
-> > > I'm still not sure what you are saying. Are you wanting to disable
-> > > bootstd by default / go back to distro scripts / force everyone to us=
-e
-> > > EFI_LOADER / ?
-> >
-> > Yes, I'm asking where it's appropriate to enable this new functionality
-> > by default.  It certainly should be enabled on arm64 (there's new
-> > designs) and riscv (there's new designs). It still ought to be enabled
-> > on arm32 because we otherwise lack a easy way to say "new" arm32 (say
-> > i.MX7) and not "old" arm32 (say i.MX23). What is the point of enabling
-> > this on PowerPC for example? The active users there are (generally)
-> > supporting legacy hardware and I have no idea how much they want to
-> > change their boot process, once bootstd supports flash for example.
-> > There's similar questions for everything else under arch/ as well.
->
-> To me this is in fact two different questions.
->
-> 1. For PowerPC, m68k, MIPS, I suppose we can just disable BOOTSTD and wai=
-t for them to go away, if you are saying that they are behind on migrations=
- will never catch up
->
-> 2. As to the default, I believe BOOTSTD should be on by default, if we in=
-tend to remove the distro scripts and support things that are not EFI
+These functions can be static as they are referenced only in this file.
+Make them static. No functional change.
 
-I'd agree with Simon on 2. Boards that have never been upgraded to
-distro boot or standard boot usually have an internal envs script in
-include/configs/xxx.h that boots the board the legacy way. Even if
-bootstd is enabled by default, it won't hurt those.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Hai Pham <hai.pham.ud@renesas.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Mario Six <mario.six@gdsys.cc>
+Cc: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/net/ravb.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-All the best ,
-Tony
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 231764e60b5..7286ad19598 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -560,12 +560,12 @@ static int ravb_remove(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-int ravb_bb_init(struct bb_miiphy_bus *bus)
++static int ravb_bb_init(struct bb_miiphy_bus *bus)
+ {
+ 	return 0;
+ }
+ 
+-int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
++static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
+ {
+ 	struct ravb_priv *eth = bus->priv;
+ 
+@@ -574,7 +574,7 @@ int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
+ 	return 0;
+ }
+ 
+-int ravb_bb_mdio_tristate(struct bb_miiphy_bus *bus)
++static int ravb_bb_mdio_tristate(struct bb_miiphy_bus *bus)
+ {
+ 	struct ravb_priv *eth = bus->priv;
+ 
+@@ -583,7 +583,7 @@ int ravb_bb_mdio_tristate(struct bb_miiphy_bus *bus)
+ 	return 0;
+ }
+ 
+-int ravb_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
++static int ravb_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
+ {
+ 	struct ravb_priv *eth = bus->priv;
+ 
+@@ -595,7 +595,7 @@ int ravb_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
+ 	return 0;
+ }
+ 
+-int ravb_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
++static int ravb_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
+ {
+ 	struct ravb_priv *eth = bus->priv;
+ 
+@@ -604,7 +604,7 @@ int ravb_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
+ 	return 0;
+ }
+ 
+-int ravb_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
++static int ravb_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
+ {
+ 	struct ravb_priv *eth = bus->priv;
+ 
+@@ -616,7 +616,7 @@ int ravb_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
+ 	return 0;
+ }
+ 
+-int ravb_bb_delay(struct bb_miiphy_bus *bus)
++static int ravb_bb_delay(struct bb_miiphy_bus *bus)
+ {
+ 	udelay(10);
+ 
+-- 
+2.45.2
 
->
-> Regards,
-> Simon
