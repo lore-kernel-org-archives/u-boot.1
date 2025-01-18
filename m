@@ -4,85 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16173C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:34:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28478C02185
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 04:35:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A74F80657;
-	Sat, 18 Jan 2025 05:34:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AA3FF80657;
+	Sat, 18 Jan 2025 05:35:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BOzy3l89";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fj5JXMqq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4EBC8070C; Sat, 18 Jan 2025 05:33:59 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 08DBD8070C; Sat, 18 Jan 2025 05:35:16 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 995988036F
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:33:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4B4A8036F
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 05:35:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d647d5df90so4688678a12.2
- for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 20:33:57 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-aa6a92f863cso517454766b.1
+ for <u-boot@lists.denx.de>; Fri, 17 Jan 2025 20:35:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737174837; x=1737779637; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737174913; x=1737779713; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ESJZwf+BQGUuOXeuqbYGGZ0hs//YYnKCNjYToscc4L4=;
- b=BOzy3l89U3iyqn0k8K83SYBWulyRn2/nBMAqxemyGdvPuvBmJ5YZOrv+NNwdXh9WnE
- kz6yNPteUHPuBW2uYkglytq/1LeEdzv3gQEOzmGia8kucangetvB03rhQBJpW9wQJ15A
- b6CyKySXXpTAjVXN12DyWJjelqt9txBGW+5Lo=
+ bh=L1Eqabw6437JHFHJ6kYdeldHcQ4XEdsUJfUWc3v/l0Q=;
+ b=Fj5JXMqqXD+4UXwYW3H2+AI5wcySP9dh6C0Oe0St+yJtowr7Wgi4Zm9oVsDkMxrqFW
+ mN1vaBMNZgqvd7RGu8DKH0B/gSEFALk709285+7MiW/oqC3ZjWO6/8BPHAlfKJmAsAlS
+ Fix+TBzZlSGrcCC4XyCaxbUSCKYmQ3Ua34ZEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737174837; x=1737779637;
+ d=1e100.net; s=20230601; t=1737174913; x=1737779713;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ESJZwf+BQGUuOXeuqbYGGZ0hs//YYnKCNjYToscc4L4=;
- b=wkkXoLs3z0CpIiwiRPvC0lOCq/AWWxTZQVE2cHLEut5WLMvY1s4EQgGna4Cvqf/N6b
- tOrMuPTP183RR7PloTFh1tU9lp0WXzrKBKb3q+4QJGmZE/rRFOYeZfr4rNN6GuUQ2N4n
- YuZpXtzUYIrbJPtTU7L6BTKU0uxyQ3IGlk2PrUwoXrprTPUJ4xYU/4djhy6Qge0uEDa1
- n7UEVWWrQQyz5EMSbtbTAco5T4C5Q12UhExvfezcu5mW0JALSHZeeaW8JwrXS1vO91nE
- LAANV3jEanHOJFhTiDYlf2h0UFV/e7jYBNnW2oQj1ztxZhBzML0CLr1CtBTF8UMm0JaF
- 4Uvw==
-X-Gm-Message-State: AOJu0Yw+XmhWWfWboZixEZX/G1GgT4OEvcFsAweHQuhOR9h1wWyfSjuL
- xpU10Y/rGUZF/KlUPToWi0aI1UiqP9XI5sgOeQ3WUTHA9xbROXnfQTkl7A8xx8kcMb0hzEwfOX8
- 8yknpSxu/YJ67TkANPT0gDoD2BU4YamOpPgQt
-X-Gm-Gg: ASbGncuJPdc6P4wSOsayiV1ri1VMwAadJpxuBwY7qPQl+WJ4SNCD8XAhkSl6Zk/v2a6
- qGJWlQYOlStymtZPVMkgLtKGiVm5ASvl69gIftPb8C57cy9uG1vBvj82ZmfnhhYcjJF0EBAu+L5
- oG591YkNmA
-X-Google-Smtp-Source: AGHT+IFb1ZsMLh0t932O0Eb9IKBK+Kdl2YmBH+UzpTRVNpIAjeYJMwG9mYTjJMusVh8rtiHwOIPomJMswJArRtxZHwo=
-X-Received: by 2002:a17:907:7d9e:b0:ab2:eb1a:9479 with SMTP id
- a640c23a62f3a-ab38b0b7efemr516542866b.2.1737174836899; Fri, 17 Jan 2025
- 20:33:56 -0800 (PST)
+ bh=L1Eqabw6437JHFHJ6kYdeldHcQ4XEdsUJfUWc3v/l0Q=;
+ b=lWjXNatiD9V8saNvI/Lr86E029jlRABfAIUKpykmsGEw7IfFKRwlo7biG8ZY4A1N2f
+ R+fK1MgdkubexWw8jkyWLjGgEt8omglNu4K4Veqzo8msWrtKFHe6v0MbbShSG7QNnDRZ
+ pNKtjfrxc5s7Kgj7cc6/ji6s96INC0SCQhMROQ6+AuW//4vLtVL8omgeVqe2NwL66l6T
+ sY7wLNWS1+QgSRcGXQI33KI4vx0hnVL+h3yTwo3fJuEWvQ2EhcI5HD69/yfkZjwxw+lW
+ u7jTBybAFhq9preqDPq6+G9R9ndjUnO1fgRLFlAjMSbWI5j7JvcZPYttfD+MdIffwwbb
+ bbGQ==
+X-Gm-Message-State: AOJu0YylfpyLiEdVxai5dJ1pEqyNA03tED/+MpbtNWWIY0SuYWbs1KX8
+ Km9AACv6ONoWG/3uh3VxYtmQnWTGRjMe4EvEtL1ldzYlCCm9khyQ/nX1Zfs8wPv/oNj/6ruYWT/
+ FoF4H5wsnCrEhYONjh/faiFlq9WpvIo4qxOhoCsZ5Ei1zTZQ=
+X-Gm-Gg: ASbGnct2OcuKrKAGOcr1do0a8c5jVCyMJzMXVeldbM00CeG4tCIiaVY0TpAiZK6OOvZ
+ OxM0M3cjDLBUIcRCJJi6QCknVJQ218n+IAedGTFQ1hhHRu2WTaYw9lJC71jRIpaInqa884exfRN
+ xGOPT5AMJZ
+X-Google-Smtp-Source: AGHT+IG/dlmqHpWJu2hxVQo/gYyODfTuRS3ad7FjJrDLIjjTHVEzg0oi0JPlF8U6PeuWyOob3jOVfixZg/VzRGMBBso=
+X-Received: by 2002:a17:907:7b9c:b0:aae:ce4c:ca40 with SMTP id
+ a640c23a62f3a-ab38b2e737cmr508957566b.32.1737174912808; Fri, 17 Jan 2025
+ 20:35:12 -0800 (PST)
 MIME-Version: 1.0
-References: <20250116012723.2820301-1-sjg@chromium.org>
- <20250117000026.GO3476@bill-the-cat>
-In-Reply-To: <20250117000026.GO3476@bill-the-cat>
+References: <20250106144755.3054780-1-sjg@chromium.org>
+ <20250106144755.3054780-5-sjg@chromium.org>
+ <CAC_iWjK2Arj5EkA8AsQh_BFGQoby5tNwf=GVpwSBaW8nBnQ_Yg@mail.gmail.com>
+In-Reply-To: <CAC_iWjK2Arj5EkA8AsQh_BFGQoby5tNwf=GVpwSBaW8nBnQ_Yg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Jan 2025 20:33:35 -0800
-X-Gm-Features: AbW1kvZFGrAD3q2fjoGBJ6CtnEqWlJVziV6P7ptK8qL73Yg01WQvblwod9V2zug
-Message-ID: <CAFLszTgmgb-sNDO4kx4DzM=Uoq2VrOww3QHQ8i0e9vBcttRKSw@mail.gmail.com>
-Subject: Re: [PATCH v2 00/22] vbe: Series part F
-To: Tom Rini <trini@konsulko.com>
+Date: Fri, 17 Jan 2025 20:35:01 -0800
+X-Gm-Features: AbW1kvYBGpVABBlXJPLPs8Yuvr0w_a0DLjVSdskXzYpyt-cFoKt5IGPGJDmRzRQ
+Message-ID: <CAFLszTgDWbt9cM43XGPU4Ew9HxmPf1peEEP5Bw+cxHwV_EWjqw@mail.gmail.com>
+Subject: Re: [PATCH 4/8] efi_loader: Correct bounce-buffer setup
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Gary Bisson <bisson.gary@gmail.com>, Greg Malysa <greg.malysa@timesys.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Lukas Funke <lukas.funke@weidmueller.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Trevor Woerner <twoerner@gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -101,48 +90,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Thu, 16 Jan 2025 at 17:00, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 17 Jan 2025 at 03:34, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 >
-> On Wed, Jan 15, 2025 at 06:27:01PM -0700, Simon Glass wrote:
+> Hi Simon,
 >
-> > This includes various patches towards implementing the VBE abrec
-> > bootmeth in U-Boot. It mostly focuses on introducing a relocating
-> > SPL-loader so that VBE can run in the limited amount of SRAM available
-> > on many devices.
-> >
-> > Another minor new feature is support in VBE for specifying the image
-> > phase when loading from a FIT. This allows a single FIT to include
-> > images for several boot phases, thus simplifying image-creation.
-> >
-> > One lingering niggle in this series is that it has a different code path
-> > for sandbox, since it does not support the relocating jump. It should be
-> > possible to resolve this with additional work, but I have not attempted
-> > this so far.
-> >
-> > For v2, I have split the first patch into 5 pieces, to make it easier to
-> > see the code-size impact, plus added a few tweaks to reduce code size.
->
-> Overall, size wise this looks better than v1, so I'm generally happy
-> enough. That said:
->
-> [snip]
-> >  boot/vbe_common.c      | 375 +++++++++++++++++++++++++++++++++++++++++
-> >  boot/vbe_common.h      | 137 +++++++++++++++
-> >  boot/vbe_simple.c      |  98 ++---------
-> >  boot/vbe_simple.h      |  16 +-
-> >  boot/vbe_simple_fw.c   | 207 +++++++++--------------
->
-> The size growth indeed comes from the compiler/linker not having as much
-> insight as it used to (except for when LTO is enabled). Perhaps once we
-> have more device types available it'll be clearer to see some way to
-> better re-organize things for savings again. Thanks!
+> Is this patch for -master of your tree?
 
-We need a clear idea of what data needs to be checked and what is
-considered trusted. One idea would be to have some extra checks which can
-be disabled to save code size. That is something which could help across
-U-Boot.
+Yes, but I haven't applied it yet. The updated bootflow_efi() test ([1]
+which this is part of) is throwing up problems with how testing is done. We
+cannot today reinit EFI so only get to run one test which does an EFI boot.
+I'd like to improve that at some point.
+
+The address/pointer tidy-up was rejected as well, I think by you, but
+perhaps Heinrich?
+
+>
+> On Mon, 6 Jan 2025 at 16:48, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > This should set the bounce buffer to a pointer, not an address. Fix it.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  lib/efi_loader/efi_memory.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > index 2e197e94edd..9374f77d3b7 100644
+> > --- a/lib/efi_loader/efi_memory.c
+> > +++ b/lib/efi_loader/efi_memory.c
+> > @@ -837,11 +837,11 @@ int efi_memory_init(void)
+> >         uint64_t efi_bounce_buffer_addr = 0xffffffff;
+> >
+> >         if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
+EFI_BOOT_SERVICES_DATA,
+> > -                              (64 * 1024 * 1024) >> EFI_PAGE_SHIFT,
+> > +                              SZ_64M >> EFI_PAGE_SHIFT,
+> >                                &efi_bounce_buffer_addr) != EFI_SUCCESS)
+> >                 return -1;
+> >
+> > -       efi_bounce_buffer = (void*)(uintptr_t)efi_bounce_buffer_addr;
+> > +       efi_bounce_buffer = map_sysmem(efi_bounce_buffer_addr, SZ_64M);
+>
+> map_sysmem does *exactly* the same thing so you need to adjust your
+> commit message.
+>
+> Does this solve any sandbox crashes?
+
+No, sandbox doesn't test this feature yet, but the new code is more
+correct. Whenever you see an address, use map_sysmem() to turn it into a
+pointer.
+
+>
+> /Ilias
+> >  #endif
+> >
+> >         return 0;
+> > --
+> > 2.34.1
+> >
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=439021
+[2] https://patchwork.ozlabs.org/project/uboot/list/?series=436241
