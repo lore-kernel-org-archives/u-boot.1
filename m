@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A521C02185
-	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 07:08:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA8BAC02187
+	for <u-boot@archiver.kernel.org>; Sat, 18 Jan 2025 07:09:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 011A08073D;
-	Sat, 18 Jan 2025 08:08:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86F768073D;
+	Sat, 18 Jan 2025 08:09:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HWyj11oz";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="I0bXAzuP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nH4K2SsD";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="eMrhbvK1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B317080755; Sat, 18 Jan 2025 08:08:13 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 9ECCA80758; Sat, 18 Jan 2025 08:09:48 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93A9F8070C
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:08:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C6E78070C
+ for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 08:09:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -32,54 +32,55 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YZnkL4Fffz9shn;
- Sat, 18 Jan 2025 08:08:10 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YZnm961cBz9spF;
+ Sat, 18 Jan 2025 08:09:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737184090;
+ s=mail20150812; t=1737184185;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=atim8joYjJbUzlqz9VdYacpet7AgmvW+HymxvCnoPiE=;
- b=HWyj11ozeCTHH/T58y0/tI0asYizdXeORW7dHZYndh9kUnDkzEcjWwel7hxYZ+sO0nkkid
- trxDiMCaiu5DdSmJR3XP+Mz23pIIP+3EI/sgKRG2IePuQ1tg6l9wV1Hm0xDAEQEgEYVBaW
- wvco0hZrLyhoeM0RWSQ1ClyVlT8bDdewmGSEx2MCuE01U5kyjch4zZLXLv2joTN3/6pLMc
- NDlKb+q9b5bJ8RbwLCmKPMh5R9d7pPGsJrR3sjdS2KNheh4W4FsNK1J9r657gDtJdnRSBJ
- h0G66TlOE095I+YbLY8hT6Ni3tN7XS8J8BLci5ucr5Eul63AEtPu4xTguJdACw==
-Message-ID: <f498abff-d8e1-4da8-a612-f2c6c5ad5681@mailbox.org>
+ bh=VS68rxd6terQZmhot82uvJ4YoBhYbpFo6bEdftC//C8=;
+ b=nH4K2SsD+AdXJrmAWVDNrfc7KF+eFWki++zCQO0J5z/RVCFCE3ljYUYE+w76qeUa996Gmy
+ Xs1g2l69S11tt/NFAGDc6NMY8tjwwzNKrgmM4ruGDbDfgafX8pprxXntL+buAfxxCFnIGZ
+ NlZ3wyChtbhSPzMSkBFWHDAQXEApMjRPwI21ISRm1b6t4lOMrKyZze4mZ4wrEMUtQ0RM7k
+ s6iLd/WqrrutbQAdQTOOyj9OIoICC/LIZFHcp2dcUTaiCvozNPrsBGKumAo6V5KAyyyC8A
+ k29QgPxEhCSpr81BqaRp0uOXgpGLks+0dLAHpqL43i41zTLN+w1N2dXz/+y+fA==
+Message-ID: <c9a4e41b-c79f-499b-bd3f-b963d0cb19d3@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737184088;
+ s=mail20150812; t=1737184183;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=atim8joYjJbUzlqz9VdYacpet7AgmvW+HymxvCnoPiE=;
- b=I0bXAzuPngJ5oie62ZXaeoaTkl5ZvzHPdYBNpwDeoK5j6SfJXHOnNak7OU2D3QwlWiqjjS
- jB2Ncqvr45c7jrduO9rrEpyPvGkR/MAGoFsvDOVFa64rFklbPMsld8a/FDz2NCs8aZ8yCb
- Vm0xsmPlvqGFV5K4f32rCdKscTtNYRuBmFvTx8Oa8V6lBp4aqphU/epJ1suYraF8xPWAot
- zAhiTtcS1Kc3btbyoh14cMO6yfrp3r2Flq0JkV3Es7afnyvCgGSg+5xUplN73IA1I6Rmi5
- wSwlRaBo609LqDIo8kPsHwZ4madkF6Kgkv79fJxEm0msMGo1m+zFAYzsSurngQ==
-Date: Sat, 18 Jan 2025 08:08:05 +0100
+ bh=VS68rxd6terQZmhot82uvJ4YoBhYbpFo6bEdftC//C8=;
+ b=eMrhbvK1cu+4z6piyeuEz9B4Px5wTpS+3XDLXlI/cm5KkVgX5mZVzb3uceDKuqHSdWoiVW
+ AhJV1hnRvKdgr8g4CbbGszfnrqI1FJNWph+gh9RZ5d77PQ01zd/9L4x4uXECcPZdy8Te33
+ BLgqC+mF0+ylVIctrATTIkZTMItRGAec7lvP79pD8o5HWYT3q86kMMUVq6GtVdex3sFHCe
+ fQORjY7ukKudGcXzXKc540rmx2D/llpLU/RKthfqVad+dTYL3rfb6dSPquk1XQYR4Dcb0o
+ NyNsfcqxSt7zy6ujBtauWcwy0oKCY3vO9HwDqyGIR8j2RreZJyw977TCl7jFvA==
+Date: Sat, 18 Jan 2025 07:59:28 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] Makefile: Make sure all linker input objects exist
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Bryan Brattlof <bb@ti.com>, Greg Malysa <greg.malysa@timesys.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ian Roberts <ian.roberts@timesys.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250112223252.179123-1-marek.vasut+renesas@mailbox.org>
- <c2dc2745-5288-4182-a25a-561b96126cce@cherry.de>
+Subject: Re: [PATCH 09/14] net: ravb: Support up to two instances
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
+ <9bd496f2-7765-4067-bbc6-36b355107af3@mailbox.org>
+ <a7d6a116-704c-4d48-a018-ce1da4fedee5@bp.renesas.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <c2dc2745-5288-4182-a25a-561b96126cce@cherry.de>
+In-Reply-To: <a7d6a116-704c-4d48-a018-ce1da4fedee5@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 49c6d1c9f9b846d151d
-X-MBO-RS-META: fobt4no78zp9dnwmqb7stxg9n597qqda
-X-Rspamd-Queue-Id: 4YZnkL4Fffz9shn
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: b26e55a225a623ab6bc
+X-MBO-RS-META: yn4y9335389sbbmzdnefow9miuexmsd8
+X-Rspamd-Queue-Id: 4YZnm961cBz9spF
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,64 +97,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/15/25 11:38 AM, Quentin Schulz wrote:
-> Hi Marek,
-
-Hi,
-
-> On 1/12/25 11:32 PM, Marek Vasut wrote:
->> In case the build system builds a directory with empty Makefile,
->> one which does not contain any obj-y entries, the build fails to
->> link due to missing built-in.o .
+On 10/28/24 10:50 AM, Paul Barker wrote:
+> On 27/10/2024 16:25, Marek Vasut wrote:
+>> On 10/24/24 5:24 PM, Paul Barker wrote:
+>>> Several Renesas SoCs in the RZ/G2L family have two Ethernet interfaces.
+>>> To support this second interface, we extend the bb_miiphy_buses[] array
+>>> and keep track of the current bus index in ravb_of_to_plat().
+>>>
+>>> Support for an arbitrary number of instances is not implemented - it is
+>>> expected that bb_miiphy_buses will be replaced with a proper device
+>>> model/uclass implementation before that is needed.
+>>>
+>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> ---
+>>>    drivers/net/ravb.c | 28 ++++++++++++++++++++++++----
+>>>    1 file changed, 24 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+>>> index f1401d2f6ed2..9b33ce929618 100644
+>>> --- a/drivers/net/ravb.c
+>>> +++ b/drivers/net/ravb.c
+>>> @@ -11,6 +11,7 @@
+>>>    #include <clk.h>
+>>>    #include <cpu_func.h>
+>>>    #include <dm.h>
+>>> +#include <dm/device_compat.h>
+>>>    #include <errno.h>
+>>>    #include <log.h>
+>>>    #include <miiphy.h>
+>>> @@ -494,6 +495,7 @@ static int ravb_probe(struct udevice *dev)
+>>>    {
+>>>    	struct eth_pdata *pdata = dev_get_plat(dev);
+>>>    	struct ravb_priv *eth = dev_get_priv(dev);
+>>> +	struct bb_miiphy_bus *phybus;
+>>>    	struct mii_dev *mdiodev;
+>>>    	void __iomem *iobase;
+>>>    	int ret;
+>>> @@ -513,7 +515,8 @@ static int ravb_probe(struct udevice *dev)
+>>>    
+>>>    	mdiodev->read = bb_miiphy_read;
+>>>    	mdiodev->write = bb_miiphy_write;
+>>> -	bb_miiphy_buses[0].priv = eth;
+>>> +	phybus = (struct bb_miiphy_bus *)pdata->priv_pdata;
+>>> +	phybus->priv = eth;
+>>>    	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
+>>>    
+>>>    	ret = mdio_register(mdiodev);
+>>> @@ -625,7 +628,17 @@ int ravb_bb_delay(struct bb_miiphy_bus *bus)
+>>>    
+>>>    struct bb_miiphy_bus bb_miiphy_buses[] = {
+>>>    	{
+>>> -		.name		= "ravb",
+>>> +		.name		= "ravb0",
+>>> +		.init		= ravb_bb_init,
+>>> +		.mdio_active	= ravb_bb_mdio_active,
+>>> +		.mdio_tristate	= ravb_bb_mdio_tristate,
+>>> +		.set_mdio	= ravb_bb_set_mdio,
+>>> +		.get_mdio	= ravb_bb_get_mdio,
+>>> +		.set_mdc	= ravb_bb_set_mdc,
+>>> +		.delay		= ravb_bb_delay,
+>>> +	},
+>>> +	{
+>>> +		.name		= "ravb1",
+>>>    		.init		= ravb_bb_init,
+>>>    		.mdio_active	= ravb_bb_mdio_active,
+>>>    		.mdio_tristate	= ravb_bb_mdio_tristate,
+>>> @@ -646,10 +659,16 @@ static const struct eth_ops ravb_ops = {
+>>>    	.write_hwaddr		= ravb_write_hwaddr,
+>>>    };
+>>>    
+>>> +static int bb_miiphy_index;
+>>> +
+>>>    int ravb_of_to_plat(struct udevice *dev)
+>>>    {
+>>>    	struct eth_pdata *pdata = dev_get_plat(dev);
+>>> -	const fdt32_t *cell;
+>>> +
+>>> +	if (bb_miiphy_index >= bb_miiphy_buses_num) {
+>>> +		dev_err(dev, "ravb driver supports only 1 or 2 devices!\n");
+>> Hmmmm, I really do not like this, can we make this dynamic ?
 >>
->> This happens because of this part of scripts/Makefile.build
->>   81 ifneq ($(strip $(obj-y) $(obj-m) $(obj-) $(subdir-m) $(lib- 
->> target)),)
->>   82 builtin-target := $(obj)/built-in.o
->>   83 endif
->> which does not assign builtin-target in case obj-y is empty. The
->> built-in target is then not built at all, and built-in.o is not
->> generated by this part of scripts/Makefile.build
->>   325 ifdef builtin-target
->>   326 quiet_cmd_link_o_target = AR      $@
->>   327 # If the list of objects to link is empty, just create an empty 
->> built-in.o
->>   ...
->>   335 targets += $(builtin-target)
->>   336 endif # builtin-target
->> This is the correct behavior.
->>
->> The final link however expects the built-in.o to exist in every directory
->> included in the build, even in those where the aforementioned code 
->> skipped
->> generation of built-in.o . Make sure the built-in.o does exist for every
->> directory used in final link simply by doing touch on every built-in.o 
->> used
->> for the link, which will create empty built-in.o in case any built- 
->> in.o is
->> missing.
->>
->> A possible alternative fix is the always define the builtin-target
->> and always generate built-in.o .
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> Unless you want to take a look at this yourself, I can add it into my todo ?
 > 
-> I tested this with the following diff:
-
-[..]
-
-> which allows me to use HAVE_VENDOR_COMMON_LIB mechanism with an empty 
-> Makefile for TPL/SPL build stage, so:
+> I think the real solution here would be to separate the bb_miiphy
+> operations from the bus instance, so we would have something like:
 > 
-> Tested-by: Quentin Schulz <quentin.schulz@cherry.de>
-
-Thank you
-
-> Looking forward to being able to use HAVE_VENDOR_COMMON_LIB!
+>      struct bb_miiphy_bus {
+>          struct bb_miiphy_ops *ops;
+>          void *priv;
+>      };
 > 
-> Though I could actually always include the file and just ifdef 
-> CONFIG_XPL_BUILD in common.o, but let's see where this patch goes first :)
-If the intent is to use an empty Makefile (with or without ifdeferry) in 
-any directory pulled into the build, to mitigate the missing built-in.o 
-problem, that also won't work without this patch, because empty Makefile 
-itself won't lead to generation of the built-in.o .
+>      struct bb_miiphy_ops {
+>          int (*init)(struct bb_miiphy_bus *bus);
+>          int (*mdio_active)(struct bb_miiphy_bus *bus);
+>          int (*mdio_tristate)(struct bb_miiphy_bus *bus);
+>          int (*set_mdio)(struct bb_miiphy_bus *bus, int v);
+>          int (*get_mdio)(struct bb_miiphy_bus *bus, int *v);
+>          int (*set_mdc)(struct bb_miiphy_bus *bus, int v);
+>          int (*delay)(struct bb_miiphy_bus *bus);
+>      };
+> 
+>      int bb_miiphy_bus_register(const char *name,
+>                                 struct bb_miiphy_ops *ops,
+> 			       void *priv);
+> 
+> Where drivers will call `bb_miiphy_bus_register()` from the probe
+> function, it will create a `struct bb_miiphy_bus` instance and a
+> `struct mii_dev` instance then call `mdio_register()`. The driver can
+> then support an arbitrary number of MDIO busses from a single constant
+> `struct bb_miiphy_ops` instance.
+> 
+> The bb_miiphy_getbus() function should be dropped from miiphy.c.
+> Instead, the priv pointer in the `struct mii_dev` instance can point to
+> the appropriate `struct bb_miiphy_bus` instance.
+> 
+> It looks like all users of CONFIG_BITBANGMII also set
+> CONFIG_BITBANGMII_MULTI, and there don't seem to be any targets that
+> define the macros documented in README.bitbangMII (lines 15-22). So, we
+> can drop the non-BITBANGMII_MULTI code from miiphybb.c and simplify
+> things a lot.
+> 
+> That's non-trivial but it's not a huge set of changes, maybe something
+> we could target for v2024.04?
+Patches posted somewhat inline with what you suggested:
+
+https://patchwork.ozlabs.org/project/uboot/patch/20250118061304.124807-1-marek.vasut+renesas@mailbox.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20250118061445.124932-1-marek.vasut+renesas@mailbox.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20250118061558.124963-1-marek.vasut+renesas@mailbox.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20250118061629.125005-1-marek.vasut+renesas@mailbox.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20250118063458.137258-1-marek.vasut+renesas@mailbox.org/
+https://patchwork.ozlabs.org/project/uboot/patch/20250118065402.172253-1-marek.vasut+renesas@mailbox.org/
