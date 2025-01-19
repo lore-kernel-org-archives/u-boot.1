@@ -4,62 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5078C02187
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jan 2025 20:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0501EC02187
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jan 2025 20:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16FCD800CF;
-	Sun, 19 Jan 2025 21:07:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
+	by phobos.denx.de (Postfix) with ESMTP id 76BD3800CF;
+	Sun, 19 Jan 2025 21:08:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="o2jMfCpy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J3jOyq6K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD556801CF; Sun, 19 Jan 2025 21:07:03 +0100 (CET)
-Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD4FC801CF; Sun, 19 Jan 2025 21:08:19 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB73D80085
- for <u-boot@lists.denx.de>; Sun, 19 Jan 2025 21:07:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B477E80085
+ for <u-boot+nodisclaimer@lists.denx.de>; Sun, 19 Jan 2025 21:08:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=riseup.net
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danct12@riseup.net
-Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx0.riseup.net (Postfix) with ESMTPS id 4YbkyV2cN0z9wq5;
- Sun, 19 Jan 2025 20:06:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1737317218; bh=goOUn0xKh9gigGO7GunYiBoEPQe1pzK0EhGHPY8aH1M=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=o2jMfCpyx3BjK4zVofPzzj/P+3BQPMkvFOJNDc9DPo1HUDqrsHfunkTbgaUFK8wJq
- PNRJE1sm3TLi37uFHs43HlOq5t7/n++8bdTTxqAhz+hBfJK2fimSTrrEu8RY+ysFs4
- PSDlaKwVzHjddBy8zqSnVBo1T5Zn/Jig3ad82PCs=
-X-Riseup-User-ID: A8825B9C8E261D4939C43F4099D1FD1536E0EEA9D2D2ECD6D02A6E07D9466400
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4YbkyQ0ZRxzJrZn;
- Sun, 19 Jan 2025 20:06:53 +0000 (UTC)
-From: Dang Huynh <danct12@riseup.net>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Ondrej Jirman <megi@xff.cz>, Dragan Simic <dsimic@manjaro.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 10/10] configs: pinetab2-rk3566: Enable video and USB
- keyboard
-Date: Sun, 19 Jan 2025 20:06:44 +0000
-Message-ID: <6474453.DvuYhMxLoT@melttower>
-In-Reply-To: <46543de3-e368-42d2-a42a-031f14b31d54@kwiboo.se>
-References: <20250116-vop2-pt2-v1-0-c9d646b53930@riseup.net>
- <20250116-vop2-pt2-v1-10-c9d646b53930@riseup.net>
- <46543de3-e368-42d2-a42a-031f14b31d54@kwiboo.se>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7be6fdeee35so197991785a.1
+ for <u-boot+nodisclaimer@lists.denx.de>; Sun, 19 Jan 2025 12:08:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737317296; x=1737922096; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7qFAfo+B14BtHJQc+ZHq1WlpBmzK3nwZevybGzgrIE8=;
+ b=J3jOyq6KXdn5NpfddtHVbFGvatI1OGLM1xsBhzJOEs3RhPx75ieXP2lO7RbrDUrZGW
+ f/obhaeewOxmBfRGVJc99RxWSGMrzJzAHlQQz/AE7GXvu9039tlQmGFumLrd7B35sw4O
+ l50D/seUQJS0eO5hsAupSbmrL0HlbHYnf5EkA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737317296; x=1737922096;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7qFAfo+B14BtHJQc+ZHq1WlpBmzK3nwZevybGzgrIE8=;
+ b=G6+lwxovZ4N9EAU6H4wdcjHXjql2oH8RV40NRU58xJ8yAq9u5r3SZ3hgX3dfDqoOou
+ Ke4CKZ6qBpSbNO5jTyW7rtddoo8yPztzD3NF5RmvX8ykHbzEgAQ/h5AXzo6h2/O6wdD1
+ l3HK8jNw+/lJ98jKsiBAOBduQf5HLdsx30yR424sdWQv62E16XEmTHpmBI+GWGFO+jkj
+ CpT7B0mhuCUKDTNBuJ0oa2BBNIA+RQgaOQtH7/tB4Fo8zwWD0Zt87tITzpjJGPY5uyXs
+ WdwM9FHRLcoanCerVRXbai/+BU7fAk2cXhgTB/cIXVgfp5J6xdF78qZIjKeaDn14Eid9
+ ZCnQ==
+X-Gm-Message-State: AOJu0YzpxJBdf3GM8cfRyXBQyOtSDoeX37x1laC28S69PjJ2EVm6WApj
+ ty+XwTsir7imZeNjvS3v6jPAen+8GETlY34i3SQ33pzTGq8hwAKSmd35oOvl9ho=
+X-Gm-Gg: ASbGncsMur5pKI+VIxkNh79oQp4dVh1BoZ/gi95DRZTSPTlMOnGoq+nqtHrk1xdppVt
+ j20jhR5JqiW7m5CDnPEPjdNgrn/FLSUzOST0W65RfX3VBDcFNNjj3fCHm3iOKP6xFqpcyLHDbxf
+ C3JnQZ88XOKmLPDnU5j1EHSH9+siRtPdd3TuJrNl1y75RQTcAOrRDwVBg+5xfZe7aFu5d10elhq
+ cYa24aBiSKjp9pF36awViE4xyLtDIns7XXd8DLfrf7lWDIb85J4tVJc3W6EtpSnyg==
+X-Google-Smtp-Source: AGHT+IE6u4HCVe/7st/tEyyW7sTTfYUy8EOrFOJQC5c65VSytgrZCDv3GYWIsJzgHDaN70k9roeNCQ==
+X-Received: by 2002:a05:620a:472b:b0:7b6:d632:37cf with SMTP id
+ af79cd13be357-7be631e714cmr1746378185a.3.1737317296673; 
+ Sun, 19 Jan 2025 12:08:16 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be6147f46fsm357354185a.35.2025.01.19.12.08.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Jan 2025 12:08:15 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: sjg+nodisclaimer@chromium.org, raymond.mao+nodisclaimer@linaro.org, 
+ Philippe Reynes <philippe.reynes@softathome.com>
+Cc: u-boot+nodisclaimer@lists.denx.de
+In-Reply-To: <20241219130554.49825-1-philippe.reynes@softathome.com>
+References: <20241219130554.49825-1-philippe.reynes@softathome.com>
+Subject: Re: [PATCH v7 0/9] add the support of sha256_hmac and sha256_hkdf
+Message-Id: <173731729476.2667992.1360295520121065824.b4-ty@konsulko.com>
+Date: Sun, 19 Jan 2025 14:08:14 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,30 +93,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+On Thu, 19 Dec 2024 14:05:45 +0100, Philippe Reynes wrote:
 
-On Sunday, January 19, 2025 2:08:37=E2=80=AFPM UTC Jonas Karlman wrote:
-> Hi Dang,
->=20
-> On 2025-01-16 10:15, Dang Huynh wrote:
-> > +CONFIG_CLK_CCF=3Dy
-> > +CONFIG_CLK_COMPOSITE_CCF=3Dy
->=20
-> Is CCF and COMPOSITE_CCF needed?
-Yes, it's required to turn on and set video port clock. COMPOSITE_CCF=20
-shouldn't be needed.
+> This serie adds the support of sha256_hmac and sha256_hkdf.
+> A first version was sent several months ago just before the
+> integration of mbedtls. This new version is based on mbedtls.
+> 
+> The first patch of this serie add the support of hkdf
+> using mbedtls.
+> 
+> [...]
 
->=20
-> > +CONFIG_VIDEO_DT_SIMPLEFB=3Dy
->=20
-> I do not see a simple-framebuffer compatible, is VIDEO_DT_SIMPLEFB
-> needed?
-It shoudln't be needed, whoops.
+Applied to u-boot/master, thanks!
 
->=20
-> Regards,
-> Jonas
->
-
+-- 
+Tom
 
 
