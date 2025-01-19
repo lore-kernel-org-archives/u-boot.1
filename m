@@ -4,88 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D32C02185
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jan 2025 00:22:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DCF3C02185
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jan 2025 01:05:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFA88800CF;
-	Sun, 19 Jan 2025 01:22:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A347800CF;
+	Sun, 19 Jan 2025 02:05:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AYWRWR3E";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="uV/KgDQY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4310880141; Sun, 19 Jan 2025 01:22:42 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D425C80141; Sun, 19 Jan 2025 02:05:10 +0100 (CET)
+Received: from out162-62-57-252.mail.qq.com (out162-62-57-252.mail.qq.com
+ [162.62.57.252])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13308800B6
- for <u-boot@lists.denx.de>; Sun, 19 Jan 2025 01:22:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62BAC800B6
+ for <u-boot@lists.denx.de>; Sun, 19 Jan 2025 02:05:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=anarsoul@gmail.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-2aa179a8791so2966390fac.1
- for <u-boot@lists.denx.de>; Sat, 18 Jan 2025 16:22:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737246159; x=1737850959; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ze3Fozo54dnrXzweL/qGgs6GjlL+DqY9p+0RPxGiTFo=;
- b=AYWRWR3E16nRarJ4g9sT/V3U50W/5UCP2v8jJu6mDzIv5LCQGTzWWNAx2Clm5fg6vr
- tRxLZAbBAn2d9C2RSiEDFHPOxBOX8e+eKaaEgwIKCkN03Qn+ARj2PMA/hrQTWpw7rS6z
- yt9K8OI94OEEUkwKM4MUuSNoeDx6FawQVkRKsck7649d9ubmbWLn7qKm8z1VDKlJ5Op7
- JdFrujwOeNoAKjLlrfHiBR3Ggt9PmCBFgaA8tlRFgJJ42c1RtmCh2piO0/kD3+AIsAsx
- v1a6sJJo3Ay+2DUZ4Np9inhu69ChG5loMABco4cid5XxSjeJgDHkliNWQGOnlAEAR/4u
- K9YA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737246159; x=1737850959;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ze3Fozo54dnrXzweL/qGgs6GjlL+DqY9p+0RPxGiTFo=;
- b=IdhZUiauITSvM9d7q9c7767cxiOnVh3l/X1CZJCiuaPvoorpSiIXDkU+VkaTpQujmE
- +K6YXm5OK0wnJ/NCxQOpV6tFWmSryrKXcnin3fvLD1st2O7SQMpreJpsVgRkXydgGJ9E
- wDGaw3VBbs/uj5MnSzWu1M3kdaYyATa1NUc9hBepzOK+jHoSEDfwWciVqokOMozfVhon
- uQ+RfStkEyztuhjg4uFBcS+IMlFD8kf330m62Rov4CLpUlJWyDoMW45BEOHUk9+6Oqii
- VuWPCa2Ehwk++ql3hIaR1IbkAkeY8NI9+lh5YlwL6K1S1ve5Y/f2EIc/jkgzZaxlhQt0
- l67w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXCR5BBOQojGxM+QaJ8yw9lz06NCv+RdB5DcqyMFG1f6EiB5ZV9uLyDMYl7SndthTf099htFTE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzB5L0bVRlf0qzbQ6ZbuaCd+pSU4LdYjxABbrhzUMZYXEuBLDsN
- rY4vuxovINc5oKRShbaxutTKKv77Vi4nyBEbHaTBuaAgHLuzLEe3lIvaJqOIvwSkzHpGV0Zd9M2
- IdYOSUbxNly+tW149uZUMaS3OSmM/dsmY
-X-Gm-Gg: ASbGncs2jUjSucGq4p7xcwLopi9ENejhtN27TYB6Qd7Q1I7d/ttt0+JP5bwo9/TQUEG
- b3dSbuxQGzgqCjQCOl7yTKZZMc5MBZGo3gfV2bEC9O9twvq4iFBy1KIC3+fWPPljDUQ==
-X-Google-Smtp-Source: AGHT+IGzF6tR1aTlY5757CW8zfYWTDx+r8Dss7j4eG8YVijjfCmcFAydopIpYF1XTJcRYM9TuolBiCjqGy5d74ags4g=
-X-Received: by 2002:a05:6870:391f:b0:29e:65ed:5c70 with SMTP id
- 586e51a60fabf-2b1c0de7181mr5071983fac.30.1737246158799; Sat, 18 Jan 2025
- 16:22:38 -0800 (PST)
+ spf=pass smtp.mailfrom=1425075683@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1737248702; bh=dtvUIGbZxDR6wq08GMigTVNfZQPCKC6202SjqpdqzcA=;
+ h=From:To:Cc:Subject:Date;
+ b=uV/KgDQYqDwFvdOYvLdPsAwiicI5B+T3FJ1Liw8PwB68sA5htPOldOKrbAz0M53To
+ MU/BG+L22NAGSBkS1IwandH/kW80X/fkps+NTQl/e6ltMo3U8+7xEWlZD9XMv5AL4f
+ 8US/ZNHN3B/hlWXj7TSSq+1bxfSEA/YcA4AAVJE4=
+Received: from ubuntu.localdomain ([183.253.34.159])
+ by newxmesmtplogicsvrszgpuc5-0.qq.com (NewEsmtp) with SMTP
+ id 140A12DD; Sun, 19 Jan 2025 09:05:00 +0800
+X-QQ-mid: xmsmtpt1737248700tsl2deonw
+Message-ID: <tencent_410F4F8FDC201D1B50F008D01066D0A4A006@qq.com>
+X-QQ-XMAILINFO: NvH2zBBgt3uTXRHeDs6IGameo//Eti/Hi8RtH6+e37j9ZgFSLFppUa1Ff2H50U
+ 3HdeaZU1SYJFuo44VpvK6lhJiuVnkqCVS3KxJWDOL9EQAvGU2iuSo1sn8nybJPBEYHezQSW5FJHW
+ 8zrK9cSIrkORIUpZoHCECd1lScURWWJsooyiwXXf8UjztGvZCk4w6Zy0EfNgrmCJ1rnYxD00kGxI
+ 43Ledk7uqeJ4g+gbUX9oGov+uVxl5/lbZ6uGyhmuxWMmujPql9yVK3B5dhxQH1KXJpvoLfF1Nj78
+ NyQVRJy7e97ZIZHLv++ZQhPMu655dH0rye0rIpZVq4ABdKMk/+LTnsbL/+evKsKTvl/1XgmMG4Lf
+ 9dOOYsB7Hx5cO8UBj26c6WP1yVr0XuyVzWNnMX3MrHwndZ0mG2ECPKw1JkPxqsDhVlVb7eXIYY9a
+ 3+8VOtyvqc42jy0Ouk21nfOuj34nor4pG3ixXIuVv4tDMX2LjKnA67ZWL7buFJ/Cg+aZVvL3swRO
+ VvESyTSMdLOeMQ05r9ISmeekqpRVupCJvITRQMWnbZo6sZn1Ibu7HqPgtGakA4oYbxNHm5j09mxp
+ U5aVPsqoXR2r9AixfNC2eH44x/FcF3RsqpIsDgdIj+VObNj76XcNPVjtVw55AvHqoRvRwhG+fSBa
+ 0LDj8JfyLnQQpfs06tkUWKM0bg/hFj4QWLom6NrUIUvJBbyK+FxmAPO6zXKGbGgDWVZzUb0Yx0DN
+ sPMGwU4uv14r0vQ8LVxoJToGtMOciobyiKS1Lcj8cahQdSQo1hZwpdmmcAOcukNJLbcgBLzhb+vW
+ MhrptefH/zDhydoqzKYotvF35WBKNFKsv5C9JPup7sb9FyyJqXnk6Yg4IKz/WSSbHBNy/2OuYx2f
+ KCmvQf4o1q8WTrda6t6zK3Nm6jzFsYDWbYt7zGH4RVJpbhnsFnovEOjMKZsWlPWr7zWdnWqC/NZy
+ dC7LDAER4=
+X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+From: 1425075683@qq.com
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+ =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+ Liya Huang <1425075683@qq.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] arm: Remove redundant loading of image copy start offse
+Date: Sun, 19 Jan 2025 09:04:58 +0800
+X-OQ-MSGID: <20250119010458.31536-1-1425075683@qq.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20250114052548.763611-1-anarsoul@gmail.com>
- <CAJs94EbAfQ8Ht6tiX_V=wcVP7cADzuAGzJSLn4KZnVPXN_0XDg@mail.gmail.com>
-In-Reply-To: <CAJs94EbAfQ8Ht6tiX_V=wcVP7cADzuAGzJSLn4KZnVPXN_0XDg@mail.gmail.com>
-From: Vasily Khoruzhick <anarsoul@gmail.com>
-Date: Sat, 18 Jan 2025 16:22:12 -0800
-X-Gm-Features: AbW1kvY9-oGk1iXbhDFMt_Zz8nIRJgUJntsMBYgmF-YeC5x8DsYthJYM576o0Sk
-Message-ID: <CA+E=qVf0hACH2QV2o+-jJhSgL0rPpgL-tH0HDef+C=a39FQarA@mail.gmail.com>
-Subject: Re: [PATCH 1/3] clk: rockchip: rk3328: use HDMIPHY PLL as a clock
- parent for VOP_DCLK
-To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Anatolij Gustschin <agust@denx.de>, Dragan Simic <dsimic@manjaro.org>,
- Chen-Yu Tsai <wens@csie.org>, 
- Christopher Obbard <chris.obbard@collabora.com>, Jagan Teki <jagan@edgeble.ai>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,12 +79,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jan 18, 2025 at 4:53=E2=80=AFAM Matwey V. Kornilov
-<matwey.kornilov@gmail.com> wrote:
+From: Liya Huang <1425075683@qq.com>
 
-> Both UART-console and HDMI-console works with this patcheset on my Rock64=
- board.
->
-> Tested-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
+Because the beginning is already computed
 
-Thanks for testing!
+Signed-off-by: Liya Huang <1425075683@qq.com>
+---
+
+Changes in v2:
+- Due to an error, the patch was resubmitted, leaving the code unchanged
+- Sorry for the trouble; Due to the lack of understanding of the process,
+the previous patch information was Reviewed-by. Please refer to this patch
+
+ arch/arm/lib/relocate.S | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/arch/arm/lib/relocate.S b/arch/arm/lib/relocate.S
+index 345e282e3e..bffadfecba 100644
+--- a/arch/arm/lib/relocate.S
++++ b/arch/arm/lib/relocate.S
+@@ -83,8 +83,6 @@ relocate_base:
+ 	add	r1, r3			/* r1 <- Run &__image_copy_start */
+ 	subs	r4, r0, r1		/* r4 <- Run to copy offset      */
+ 	beq	relocate_done		/* skip relocation               */
+-	ldr	r1, _image_copy_start_ofs
+-	add	r1, r3			/* r1 <- Run &__image_copy_start */
+ 	ldr	r2, _image_copy_end_ofs
+ 	add	r2, r3			/* r2 <- Run &__image_copy_end   */
+ copy_loop:
+-- 
+2.25.1
+
