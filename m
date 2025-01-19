@@ -4,55 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB423C02183
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jan 2025 09:25:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A169C02183
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jan 2025 10:22:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42DF180141;
-	Sun, 19 Jan 2025 10:25:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 78D7F80141;
+	Sun, 19 Jan 2025 11:22:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="abTc+sgk";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Hm8lwZ+Q";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RykVj0ix";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CA7C801CF; Sun, 19 Jan 2025 10:25:23 +0100 (CET)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
- by phobos.denx.de (Postfix) with ESMTP id 5A110800CF
- for <u-boot@lists.denx.de>; Sun, 19 Jan 2025 10:25:19 +0100 (CET)
+ id C5021801F5; Sun, 19 Jan 2025 11:22:11 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8254F800CF
+ for <u-boot@lists.denx.de>; Sun, 19 Jan 2025 11:22:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=oxd6inc4S6kpFq2ht3+u5r6V2pVsOmEoaBf/cwv27mU=; b=a
- bTc+sgkZREFR26ePZaFf9QvNCKlhs3ogFQ6P0vmMqGz15mUNW/pSDAA51AXSLojY
- R/hiS5cXlGudnyqXZ2Ew7VkI6v75L9hSlu66JTzZWFbxt7wVoLLXwtwswLqW8B7j
- 1DSRdSORANwQwTBV9dWC0vrbI5+N/XrBbFPaT1JRtI=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by
- ajax-webmail-wmsvr-40-141 (Coremail) ; Sun, 19 Jan 2025 17:25:07 +0800
- (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Sun, 19 Jan 2025 17:25:07 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Quentin Schulz" <quentin.schulz@cherry.de>
-Cc: kever.yang@rock-chips.com, u-boot@lists.denx.de,
- "Dragan Simic" <dsimic@manjaro.org>, "Jonas Karlman" <jonas@kwiboo.se>
-Subject: Re:Re: [PATCH] doc: coolpi: Fix the defconfig name
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20240801(9da12a7b)
- Copyright (c) 2002-2025 www.mailtech.cn 163com
-In-Reply-To: <0b88a0e0-626c-4550-b59c-d118290d2e96@cherry.de>
-References: <20250113105617.2403788-1-andyshrk@163.com>
- <0b88a0e0-626c-4550-b59c-d118290d2e96@cherry.de>
-X-NTES-SC: AL_Qu2YBf6ct08r4SWaY+kfmkcVgOw9UcO5v/Qk3oZXOJF8jCrr+CUnVkFMJFbsweeONhCLrheYTj1O48h1bZN6b5Mb+rGYaiWsLYzfUyqSHKsd4Q==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YbTzj1YGvz9sWS;
+ Sun, 19 Jan 2025 11:22:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737282129;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=gIvJyuCoUNyfxLsWKVtfm9CBtTgeE2QcVIMFPA4I43A=;
+ b=Hm8lwZ+Q1dFiyi81PW+Xjqjxi7zPOTRsWYtg6T2ASgOviDRBM4eXjZgz12wQgzgjRjRVgC
+ DKma1RQfnQB9+qeR0DMk0mUDd1s9ISSFOlciBoaDy7UPw65WKbVsWDh/aDCYsSbTUZ6Zi5
+ QBeEflLFo10EqHj4m35h/7Xcx89nkRLo0Z9b9fNfwK8S5+7SlQpKgwVXFgd5JakzlVHz93
+ 98xMd6FnGVe8Hes2o4WXTtVQZmFoUt0LaYi8Yk0jWQ+zKOj8Z6/IIxCwnyIJ8h8tFmvFce
+ /yxVccSyafzG+kzkh/ixThUT+gtR11zxYZdErvgYAl0+gbAw5JlkDpHKmrfi6A==
+Message-ID: <77adf4a5-44ae-4593-80c4-863de53c4272@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737282127;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=gIvJyuCoUNyfxLsWKVtfm9CBtTgeE2QcVIMFPA4I43A=;
+ b=RykVj0ix5jAwu2ZYIRlnXrtqsLTfJyJ5qSlfBBwZ32k7cRdanewt8G3tKVNkSmhmwwmRPe
+ a/bJCZjaH/JG+/Q9IiOFboi6IzDmy8NcAimpvYQMTtlBX5/wAbc0A0k4sNisRNDZZjDkd5
+ H28AZ5sDMEy073zxnbkwYBCn9yZdLRTC2XIXSxh4TdSs5nBFx17cXiaSFUSx3B1a3zMJ1n
+ qVjidzIiE/DYX4c62f3+b84FD92mLq1OpLzdEVg9nRR0LTbX2EhbZ+Z3ruYjCcViGzbPTS
+ 56MyXDqxB35FZYxw+gZYxOXEv4t0xKIw0P27qskxLbXOUmDoqiJchzQnXc2EpQ==
+Date: Sun, 19 Jan 2025 11:22:05 +0100
 MIME-Version: 1.0
-Message-ID: <42f75b94.18f0.1947de1574f.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: jSgvCgD33wHzxIxnF15aAA--.10218W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiqADZXmeMvjtCrQACss
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Subject: Re: [PATCH v2 2/4] net: phy: ksz90x1: Handle ksz9131 LED errata
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
+ <20241120094903.94-2-paul.barker.ct@bp.renesas.com>
+ <3cc475db-8546-4855-991c-5e678bef0fef@cherry.de>
+ <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
+ <413c1e5d-8e8a-4d12-9e50-bc22816a89f1@bp.renesas.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <413c1e5d-8e8a-4d12-9e50-bc22816a89f1@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: czkrdrkafbk65aogzj3upcc3edm3ggcg
+X-MBO-RS-ID: 3763f5e560681235bc5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,28 +95,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CkhpIFF1ZW50aW4sCgpBdCAyMDI1LTAxLTE1IDE3OjI5OjEwLCAiUXVlbnRpbiBTY2h1bHoiIDxx
-dWVudGluLnNjaHVsekBjaGVycnkuZGU+IHdyb3RlOgo+SGkgQW5keSwKPgo+T24gMS8xMy8yNSAx
-MTo1NiBBTSwgQW5keSBZYW4gd3JvdGU6Cj4+IFRoZSBkZWZjb25maWcgbmFtZSBzaG91bGQgYmU6
-IGNvb2xwaS1jbTUtZ2VuYm9vay1yazM1ODhfZGVmY29uZmlnCj4+IAo+PiBTaWduZWQtb2ZmLWJ5
-OiBBbmR5IFlhbiA8YW5keXNocmtAMTYzLmNvbT4KPgo+UmV2aWV3ZWQtYnk6IFF1ZW50aW4gU2No
-dWx6IDxxdWVudGluLnNjaHVsekBjaGVycnkuZGU+CgpGaXJzdCwgIHRoYW5rcyBmb3IgeW91ciBy
-ZXZpZXcuCgo+Cj4+IC0tLQo+PiAKPj4gICBkb2MvYm9hcmQvY29vbHBpL2dlbmJvb2tfY201X3Jr
-MzU4OC5yc3QgfCAyICstCj4KPldoYXQgYWJvdXQgcmVuYW1pbmcgZXZlcnkgZmlsZSB0aGF0IGFy
-ZSBpbmNvbnNpc3RlbnQgaW4gbmFtaW5nPwo+Cj5ib2FyZC9jb29scGkvZ2VuYm9va19jbTVfcmsz
-NTg4LyB0byBib2FyZC9jb29scGkvY201X2dlbmJvb2tfcmszNTg4Lwo+ZG9jL2JvYXJkL2Nvb2xw
-aS9nZW5ib29rX2NtNV9yazM1ODgucnN0IHRvIAo+ZG9jL2JvYXJkL2Nvb2xwaS9jbTVfZ2VuYm9v
-a19yazM1ODgucnN0Cj5pbmNsdWRlL2NvbmZpZ3MvZ2VuYm9vay1jbTUtcmszNTg4LmggdG8gaW5j
-bHVkZS9jb25maWdzL2NtNS1nZW5ib29rLXJrMzU4OC5oCj4KPklmIHdlIGRvIHRoaXMgY2hhbmdl
-LCB3ZSBhbHNvIG5lZWQgdG8gY2hhbmdlIGEgZmV3IHZhcmlhYmxlcyBpbiAKPktjb25maWcvZGVm
-Y29uZmlnLiBJZiB3ZSBkbyB0aGlzIGNoYW5nZSwgaXQgbmVlZHMgdG8gYmUgZG9uZSBpbiBhIAo+
-c2VwYXJhdGUgcGF0Y2ggdGhvdWdoIQoKUGxlYXNlIGNoZWNrIHRoZSByZXZpZXcgcmVjb3JkcyB3
-aGVuIEkgZmlyc3Qgc3VibWl0dGVkIHRoZSBwYXRjaCBmb3IgdGhpcyBib2FyZCdzIHN1cHBvcnRb
-MF1bMV0sCgpBcyBmb3IgbXlzZWxmLCBJIGNhbiBhY2NlcHQgYm90aCBuYW1pbmcgY29udmVudGlv
-bnMuIEhvd2V2ZXIsIGRpZmZlcmVudCByZXZpZXdlciAgc2VlbSB0byBoYXZlIGRpZmZlcmVudApu
-YW1laW5nIHJ1bGVzLiAKClswXWh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3UtYm9vdC8yMDI0MDgx
-MTEwMDI1NS4xNjY0MDk1LTEtYW5keXNocmtAMTYzLmNvbS8KWzFdaHR0cHM6Ly9sb3JlLmtlcm5l
-bC5vcmcvdS1ib290L2UyNTFhYjhjLWYzZDItNDg5ZS1hM2M4LWM3MTU0ZTk2YzJlNEBrd2lib28u
-c2UvCj4KPldoYXQgZG8geW91IHRoaW5rPwoKQW55d2F5LCBJIHRoaW5rIHRoaXMgcGF0Y2ggc2hv
-dWxkIGJlIG1lcmdlZCBmaXJzdCB0byBhdm9pZCBtaXNsZWFkaW5nIG90aGVycyB3aG8gd2FudCB0
-byBwcmFjdGljZSBvbiB0aGVpciBvd24uCgo+Cj5DaGVlcnMsCj5RdWVudGluCg==
+On 12/5/24 7:58 PM, Paul Barker wrote:
+> Hi Marek, Quentin,
+> 
+> On 01/12/2024 18:57, Marek Vasut wrote:
+>> On 11/25/24 6:23 PM, Quentin Schulz wrote:
+>>
+>> [...]
+>>
+>>>> @@ -446,6 +474,10 @@ static int ksz9131_config(struct phy_device *phydev)
+>>>>                return ret;
+>>>>        }
+>>>> +    ret = ksz9131_led_errata(phydev);
+>>>> +    if (ret < 0)
+>>>> +        return ret;
+>>>> +
+>>>
+>>> This seems to work but is happening a bit late.
+>>>
+>>> Indeed, I need something to call the network stack for this to be
+>>> happening. Meaning until I e.g. run `dhcp` in the CLI, the LED is still
+>>> following the bad behavior.
+>>>
+>>> I assume we cannot use the probe() callback for writing to registers?
+>> I'm afraid there is an inconsistency between U-Boot MAC drivers and when
+>> they configure the PHY. This is well visible on MX8MP, which has both
+>> FEC and EQoS/DWMAC MACs and they behave differently in this aspect. The
+>> question is, whether it makes sense to initialize the PHY before the MAC
+>> has been used, probably no, because that brings up hardware and adds to
+>> boot time. But at least aligning the behavior of the various MAC drivers
+>> would be nice.
+> 
+> Is there anything we can do in this driver to fix this?
+> 
+> Or should we merge this as-is and improve the MAC drivers later?
+I'd say merge it for 2025.04 , since this is an errata fix, but it would 
+also be able to clean up the MAC driver mess eventually.
