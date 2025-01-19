@@ -4,47 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1473AC02187
-	for <u-boot@archiver.kernel.org>; Sun, 19 Jan 2025 22:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 444FAC02187
+	for <u-boot@archiver.kernel.org>; Sun, 19 Jan 2025 23:35:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C1A780085;
-	Sun, 19 Jan 2025 23:27:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id C0F98801F5;
+	Mon, 20 Jan 2025 00:35:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="IGE3m7pL";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FE9C801CF; Sun, 19 Jan 2025 23:27:07 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 36CC28007D
- for <u-boot@lists.denx.de>; Sun, 19 Jan 2025 23:27:05 +0100 (CET)
+ id 7FF3B80586; Mon, 20 Jan 2025 00:35:46 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F2C780085
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 00:35:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EDB771063;
- Sun, 19 Jan 2025 14:27:32 -0800 (PST)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 256EC3F5A1;
- Sun, 19 Jan 2025 14:27:03 -0800 (PST)
-Date: Sun, 19 Jan 2025 22:25:30 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini
- <trini@konsulko.com>, Cody Eksal <masterr3c0rd@epochal.quest>, Simon Glass
- <sjg@chromium.org>, linux-sunxi@lists.linux.dev, Parthiban
- <parthiban@linumiz.com>
-Subject: Re: [PATCH 2/8] sunxi: pmic_bus: support alternative I2C address
-Message-ID: <20250119222530.1fd97018@minigeek.lan>
-In-Reply-To: <2352334.ElGaqSPkdT@jernej-laptop>
-References: <20250117014537.22513-1-andre.przywara@arm.com>
- <20250117014537.22513-3-andre.przywara@arm.com>
- <2352334.ElGaqSPkdT@jernej-laptop>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=5378=UM=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1737329742;
+ bh=pvNVjwCLaNyqXn1Byng+IS4XtvFq3fGGSxg/+Alizrk=;
+ b=IGE3m7pLJm/OTdCC5XwpRCG8pinp+ShgYlcqW4lIYAEgjC9X4HlclzJkvwoEGLhIanr/K3Erm
+ 1qI9UP3VTcTdaBod7ziCmnJxOFrDl8SkAPamPoepAk96JboxmY1M3mWLWCABTnC9N3vt/dh4uyK
+ 80covomUsEyuoctv5675V39sdIET9XkH8KT/+w7/r6BiFU5Rbl5O7jlYp1TH/ExBg2FphfcYZlX
+ eBIKd6+kOVSCab6cJ+rHS2wXS1qwmheXfjHFfgmGaa5BJ8B+5VHrZfu5MTX3/xeOTzmONd8ep/d
+ VwTvqecsNkyUE8XRAdbD2NVaASfzu1vveP8fdm8dL6bA==
+X-Forward-Email-ID: 678d8c4367596a90a5561ed8
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <33caeb3b-2945-49ee-8756-8cf8aec1c632@kwiboo.se>
+Date: Mon, 20 Jan 2025 00:35:26 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
+To: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ferass El Hafidi <funderscore@postmarketos.org>, u-boot@lists.denx.de
+References: <20240127162922.284598-1-jonas@kwiboo.se>
+ <CGME20240403000039epcas1p46afc0540b893679113e0683d87227ca8@epcas1p4.samsung.com>
+ <d7a2b5ef-ceb5-4f8f-b2d0-fcd6f2d6df1c@samsung.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <d7a2b5ef-ceb5-4f8f-b2d0-fcd6f2d6df1c@samsung.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,65 +75,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 Jan 2025 08:21:31 +0100
-Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
+Hi,
 
-Hi Jernej,
+On 2024-04-03 02:00, Jaehoon Chung wrote:
+> Hi,
+> 
+> On 1/28/24 01:29, Jonas Karlman wrote:
+>> The alignment hole caused by cmdidx in struct mmc_cmd cause strange
+>> issues together with the peephole2 optimization on Amlogic SoCs.
+>> Following was observed while working on SPL support for Amlogic SoCs.
+>>
+>> sd_get_capabilities() normally issue a CMD55 followed by a CMD51.
+>> However, on at least Amlogic S905 (Cortex-A53) and S905X3 (Cortex-A55),
+>> CMD55 was instead followed by CMD8 (and a few reties) in SPL.
+> 
+> I read your RFC "https://patchwork.ozlabs.org/patch/1841495/
+> 
+> First, I will retry to reproduce your case with other compiler. 
+> After that, I will inform again about this patch.
 
-many thanks for the review and your opinion.
+Gentle ping, this patch has been on list for almost a year now.
 
-> Dne petek, 17. januar 2025 ob 02:45:31 Srednjeevropski standardni =C4=8Da=
-s je Andre Przywara napisal(a):
-> > Some of the X-Power AXP PMICs can be ordered with an alternative I2C
-> > address, for instance an AXP717 could be shipped with address 0x34 or
-> > with address 0x35.
-> > The datasheets for the AXP717 and AXP803 list two possible addresses,
-> > and they are always consecutive. For DM (DT) based drivers this is no
-> > problem, but the Allwinner SPL code relies on a hardcoded address.
-> >=20
-> > Add a Kconfig variable that will add "1" to the existing address if it
-> > is set.
-> > This enables to use the AXP717 as used on boards with the new Allwinner
-> > A523 chip.
-> >=20
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com> =20
->=20
-> This works until some board vendor start mixing one or another address
-> PMIC. Note that BSP boot0 does address autodetection, so it's not entirely
-> out of the question. Anyway, let's hope we don't see anything like that.
+Have you had any time to reproduce this or can this be merged as-is?
 
-I looked at the datasheets for all supported PMICs, and they either
-state one or two supported addresses, in the latter case both
-consecutive. Autodetection sounds nice, but also unnecessary: we surely
-know what address it is for a certain board? And with those A523 boards
-having two PMICs, autodetection might become sketchy, as we don't know
-for sure which PMIC we got?
+For some reason only Amlogic seem to be affected by this issue.
 
-But that got me thinking: what about putting the I2C address in Kconfig
-directly, with defaults depending on the PMIC type?
+Regards,
+Jonas
 
-config AXP_I2C_ADDR
-	hex "AXP PMIC I2C address"
-	depends on ARCH_SUNXI && !SUNXI_NO_PMIC
-	default 0x36 if AXP305_POWER
-	....
-
-That's should work seamlessly for all supported PMICs, and we just need
-one line for the Avaota, same as with this patch here.
-
-What do you think?
-
-Cheers,
-Andre
-
-
-
->=20
-> Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
->=20
-> Best regards,
-> Jernej
->=20
->=20
->=20
+> 
+> Best Regards,
+> Jaehoon Chung
+> 
+>>
+>> Code from the call site:
+>>
+>>   cmd.cmdidx = SD_CMD_APP_SEND_SCR; // 51
+>>   ...
+>>   data.blocksize = 8;
+>>   ...
+>>   err = mmc_send_cmd_retry(mmc, &cmd, &data, 3);
+>>
+>> Running the code with MMC_TRACE enabled shows:
+>>
+>> CMD_SEND:55
+>>                 ARG                      0x50480000
+>>                 MMC_RSP_R1,5,6,7         0x00000920
+>> CMD_SEND:8
+>>                 ARG                      0x00000000
+>>                 RET                      -110
+>>
+>> Removing the alignment hole by changing cmdidx from ushort to uint or
+>> building with -fno-peephole2 flag seem to resolve this issue.
+>>
+>> CMD_SEND:55
+>>                 ARG                      0x50480000
+>>                 MMC_RSP_R1,5,6,7         0x00000920
+>> CMD_SEND:51
+>>                 ARG                      0x00000000
+>>                 MMC_RSP_R1,5,6,7         0x00000920
+>>
+>> Same issue was observed building U-Boot with gcc 8 - 13.
+>>
+>> Remove this alignment hole by changing cmdidx from ushort to uint.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> Changes in v2:
+>> - Drop use of -fno-peephole2 flag
+>>
+>> Link to RFC: https://patchwork.ozlabs.org/patch/1841495/
+>> ---
+>>  include/mmc.h | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/include/mmc.h b/include/mmc.h
+>> index 1022db3ffa7c..031ea0fb3545 100644
+>> --- a/include/mmc.h
+>> +++ b/include/mmc.h
+>> @@ -413,7 +413,7 @@ struct mmc_cid {
+>>  };
+>>  
+>>  struct mmc_cmd {
+>> -	ushort cmdidx;
+>> +	uint cmdidx;
+>>  	uint resp_type;
+>>  	uint cmdarg;
+>>  	uint response[4];
+> 
 
