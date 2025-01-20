@@ -4,66 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE06EC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 10:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E95C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 10:51:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28F9A80077;
-	Mon, 20 Jan 2025 11:34:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id EE9EE805C5;
+	Mon, 20 Jan 2025 11:51:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WoYteiRa";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AD2E801CF; Mon, 20 Jan 2025 11:34:31 +0100 (CET)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [217.70.183.200])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2CBF80017
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 11:34:28 +0100 (CET)
+ id 665BC801CF; Mon, 20 Jan 2025 11:51:08 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 45A0C80077
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 11:51:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 8DDF020008;
- Mon, 20 Jan 2025 10:34:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1737369268;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LmiI/XaKxikuMSU35UpPUSvxr3hvvk/AA4QAHHGZthE=;
- b=WoYteiRa2uQDNc8IAgBflxZgbZDnpBtvDTt7xTMKYpAGAupDirVOvXVj0jkMBaRAC/vv3Y
- yDy6nz9DWYtupSHSBH3BpWCoSgx/oNOpYqdrwWSVQS97Ll4RkRKi3w6how3S4TzrM4Vapd
- DkWtrsQYdLT1/vGgdP4HKxaJ4DG9huQU09+yPylYCNU5wHs/16/hfZ6Z3ASQVbIgEU+lg/
- 4qp+AfUEMikp2vqxruLNr62IHpvv2A/C01ibC+gF1pNOk6aVFl0ZyvnIxdkwiJfmgBFxPU
- MtdWY+W9iZ79IDIXcuXuEet/D9/2WLmLTXDa6D627fhjkAKLPqalh+bJ2P5LuA==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,  Jaehoon Chung <jh80.chung@samsung.com>,
- Lukasz Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>,  Fabio Estevm <festevam@gmail.com>,
- Peng Fan <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>,  Thomas
- Petazzoni <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
- <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
- <michael@amarulasolutions.com>,  Dario Binacchi
- <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
- Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v3 05/13] power-domain: Add refcounting
-In-Reply-To: <CAFLszTinomkmj=gaKbX5WBPMsbr_3nxt45sQjXqKJ5q1rxcKwQ@mail.gmail.com>
- (Simon Glass's message of "Wed, 15 Jan 2025 06:19:29 -0700")
-References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
- <20250110-ge-mainline-display-support-v3-5-d2c0acea6feb@bootlin.com>
- <CAFLszTinomkmj=gaKbX5WBPMsbr_3nxt45sQjXqKJ5q1rxcKwQ@mail.gmail.com>
-User-Agent: mu4e 1.12.7; emacs 29.4
-Date: Mon, 20 Jan 2025 11:34:27 +0100
-Message-ID: <87a5blu630.fsf@bootlin.com>
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 07D4E106F;
+ Mon, 20 Jan 2025 02:51:34 -0800 (PST)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DC8B63F740;
+ Mon, 20 Jan 2025 02:51:02 -0800 (PST)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Anton Antonov <Anton.Antonov@arm.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
+Subject: [PATCH v3 0/5] Add pmem node for preserving distro ISO's
+Date: Mon, 20 Jan 2025 16:20:40 +0530
+Message-Id: <20250120105045.1281262-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,44 +55,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
 
->>  int power_domain_on(struct power_domain *power_domain)
->>  {
+When installing a distro via EFI HTTP boot some OS installers expect
+the .iso image to be preserved and treat it as a "CDROM" to install
+packages.
 
-...
+This is problematic in EFI, since U-Boot mounts the image, starts the
+installer, and eventually calls ExitBootServices. At that point the
+image U-Boot mounted disappears. Some distros don't care and download
+the missing packages from a web archive, while others halt the
+installation complaining they can't find certain packages.
 
->> +       if (priv->on_count++ > 0)
->> +               return 0;
->
-> -EALREADY
+If the firmware uses ACPI, this is supported by using NFIT which
+provides NVDIMM ramdisks to the OS and preserves the image.
+We don't have anything in place for Device Trees though. Since DT
+supports persistent memory nodes (pmem) use those and preserve the
+.iso for installers.
 
-...
+The issue can be reproduced by attempting an EFI HTTP boot with Ubuntu
+live server ISO, or a Rocky Linux ISO. The installation would fail
+with the failure to locate certain packages.
 
->>  int power_domain_off(struct power_domain *power_domain)
->>  {
+The earlier version had aligned the addition of pmem nodes with the
+EFI HTTP boot feature. This has been changed, based on a review
+comment from Heinrich to instead be done by looping through the memory
+based blkmamp devices.
 
-...
+Changes since V2:
+* Fix a checkpatch error for putting a blank line after a function
+* Use blkmap device based scanning for adding the pmem nodes
 
->> +       if (priv->on_count-- > 1)
->> +               return 0;
->
-> -EBUSY
->
-> See how the regulator uclass does it.
 
-I really does not understand why we would like to do that.
 
-It is perfectly normal operation to call power_domain_on/off() on the
-same power domain several times in a row and there is no reason to
-return an error code. It is quite the opposite, the main reason for
-power domains is to act like shared regulators. Se while a regulator has
-one user and doing the same action on it several times does not make
-much sense and can be reported, that is not how power domains have been
-thought about in the first place.
+Ilias Apalodimas (2):
+  efi_loader: add a function to remove memory from the EFI map
+  efi_loader: preserve installer images in pmem
 
-Hence, I do not agree with returning error codes in these situations,
-they are misleading and they would have to be ignored anyway.
+Masahisa Kojima (1):
+  fdt: add support for adding pmem nodes
 
-Thanks,
-Miqu=C3=A8l
+Sughosh Ganu (2):
+  blkmap: store type of blkmap device in corresponding structure
+  blkmap: add pmem nodes for blkmap mem mapping devices
+
+ boot/fdt_support.c            |  40 ++++++++++++-
+ boot/image-fdt.c              |   9 +++
+ cmd/blkmap.c                  |  16 ++++--
+ drivers/block/blkmap.c        |  90 +++--------------------------
+ drivers/block/blkmap_helper.c |  47 +++++++++++++++-
+ include/blkmap.h              | 103 +++++++++++++++++++++++++++++++++-
+ include/efi_loader.h          |  11 ++--
+ include/fdt_support.h         |  13 +++++
+ lib/efi_loader/efi_bootmgr.c  |  22 ++++++--
+ lib/efi_loader/efi_memory.c   |  51 ++++++++++++-----
+ lib/lmb.c                     |   4 +-
+ test/dm/blkmap.c              |  16 +++---
+ 12 files changed, 302 insertions(+), 120 deletions(-)
+
+-- 
+2.34.1
+
+
