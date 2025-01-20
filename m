@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60139C02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 13:45:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED2BC02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 13:46:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB80B801CF;
-	Mon, 20 Jan 2025 14:45:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86F81801CF;
+	Mon, 20 Jan 2025 14:46:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g7/+25Lc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hnbD3NaO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC814805C5; Mon, 20 Jan 2025 14:45:38 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 753B6805C5; Mon, 20 Jan 2025 14:46:38 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B33A380077
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 14:45:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6159180077
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 14:46:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-30167f4c1e3so41026451fa.3
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 05:45:36 -0800 (PST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-53ff1f7caaeso4892561e87.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 05:46:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737380736; x=1737985536; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737380796; x=1737985596; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3V5EItMD1m/REiyvUDGoI3i3bZSl6jlfAPWQ9ZUTbtg=;
- b=g7/+25LcwOPncVYDeYb+nluVw7OO9sS373+zzyI/wgRus3b5oSlEtQ2B161qcafv3M
- WEKFvJtW0OhOjqtqk72HBYF792ftLMG8GzO0xhEYj1FXXKWtY69GrmygO97mKVz38a9s
- k4yXz8pZ6wKbJwGY/ZG8D8ZOigANpkp5TqRkTSA7S0gi0fLpvgkxYrRKOUJWtPeTj4d+
- HKi7W21zAZC6zczm21Vx3guLsoTUmB0AtcYz2M6ARz5fC4sOSNwdjhOmZyeczUQGxaiu
- 5ADWhP+lgJ3bY1BfHB5OJiBkajCl5N/FqHCMR1/P/vGtW0i3y/kmMFhDMi8vSP09omvU
- 79OQ==
+ bh=tu3AFiXh/b3fr+KVFiDsSkq4NwR0M4i/nuTi8XntMfU=;
+ b=hnbD3NaOrqTvzP+qPvP/BA03Dv4c9TJaVjS0uLkdJbUpS31oA5dLlPLWv9ooFRBaAj
+ BrhU4e5UKGqiYolsR468oj7GC4IJnnWUWdByoHV+oRbR26n0SkYpq7QHYSs+qIh+edKn
+ 4+1BGcgURux/NIJhh9EPQpmqbAyi/Yh6KzmZDZ/3asi9Scj1FX0NFMnqaFs0VW2uLQDF
+ ipYEQAy+z0vkGhpzDmSvqdylOLQRfyS9RtCOD67/tx54+I2m8UOeNLbUIaVw5bZUOWet
+ ubwcTlkvySOvDzkoNHQkJZ0KvUz/2isCAArx62fbosWzloQWsNUM6/36H58FDwVPanuD
+ +4Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737380736; x=1737985536;
+ d=1e100.net; s=20230601; t=1737380796; x=1737985596;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3V5EItMD1m/REiyvUDGoI3i3bZSl6jlfAPWQ9ZUTbtg=;
- b=O9AEaN1N9tewAB1BPWXMJ85UA2xhI+2ByERzEp1oU5KGqBGrVxnQWHlNJgMK91wmbp
- 7cnxNg6XEROopSLVpoReQSDUvDycKqivUrAT59XXddzxj41JGa+tknslaOelptoskXer
- kvbSO1WG0TMsE7PnOG+i+yxlxBKQCQpWnQkzBX6T/oEBEpNfgcSfkcDpc93DO6+fSO+9
- ycyAe54jOLUjU1i6OZxNoiRKMrYYW53F4cakNaZvPPklrEPhyHL10VXPiZY5IEOWf+xX
- o7SWyqTdk8G0ek+l09naslk5DWZo4O15xFkU98XvrBDyaNs3RM4uyaBUOS9ha0Yv6XrM
- RObQ==
-X-Gm-Message-State: AOJu0YwEuVD9SaOxPrIHaX0U5NK3/4WIo6PXM1u1gVBlx+cP86GRI82B
- vnn4VOZdx/bgGEOocOJeSoRPWJSQm3dEt4QVO0yqN6YPodUX76Ik4DsaLh6N4NLpi6OsJT2lFWZ
- 3NikK4b3QR6rJFADLm+ETXL2pPIoOyA==
-X-Gm-Gg: ASbGnct2/E9CzseSdHgl8LmrEiq/gIvubfEw5MO3tE5mOjwcE29gQQJ0VcE+Vbn8l3d
- LgqUIVPmiiLBJFIHybxsYv/v62xzNffBPWJCXRSM7x85uHVthr7GkJL/1x5oxmvhtFH0LJbr7oI
- tspxj0CWI=
-X-Google-Smtp-Source: AGHT+IFINk8dV7hXDTdmatuI3Gf8kSrtiIDPVAG/DrwaNMfcfN5W7918NFvZwZQJLXf3pGVqqbdrXrgLtSbCY1mbgkk=
-X-Received: by 2002:a2e:bcc1:0:b0:2fc:9622:794b with SMTP id
- 38308e7fff4ca-3072cb66415mr53439181fa.24.1737380735801; Mon, 20 Jan 2025
- 05:45:35 -0800 (PST)
+ bh=tu3AFiXh/b3fr+KVFiDsSkq4NwR0M4i/nuTi8XntMfU=;
+ b=vTIxDcdM5WrWg5D4aJr3l9F7P7ILKfGPbtnwQvT2ElihGgXPRVUJ4OXHwflfB4+HUy
+ WAt5clkXsQucknm3qfaSb0pCl6rO0WQEgjz6ofb0ovZppM6fz/UYFFiv6RffmOY0y21c
+ wQTV2EEE+OfGm68+oyS+9tjnBMtbOA/Jkk8TLnps3yQn49015Uq0oLMdf4Uw9EkR+Esc
+ sxj8z0du34CxrePiaMCkLK0XSPcxYYuWDhZStx3sNzwK3mumnY6EVq/nQmocfJZt63MW
+ vgPje6eZ2IB1kqQDTeY6sWC1X4qn+iryJgJ33MAzZ3UEmvdKbXvINXFaRReCPCXLtSIm
+ 8sTQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWx3Uofp/3hloIwygFD0bZpPUbFUsBwS1eYKzFnis75OpINqFYcH+6aIt7KFbLkTT0W349EICU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxQE5yrD/USaMYpyi1rcekf0AA+k2425/DpeGH5n+TZ1sVNy0sQ
+ CrYwegqCNcsrNe5uSXgdc4Dq3gGANjRRFiMGd9zWfRnBpAKEdNfIJHjMGO0UBlxlxrXluIx1ImM
+ DYDEA7lGnyxf/tI7jWvSA2JBqclU=
+X-Gm-Gg: ASbGncvwTzejz9tYOtFLfyhCmxlEE3z7XGM3+B0fE5Nxk99wHAJ96m6o+L4Z3F7+FXF
+ 5kvvSDcJWmgBL4h0+uPi2+R68ifN2ZyaT3E4v37Uwv8PWuUMW8VUaQR1SnXC4phESAalSkLkrSV
+ Pwm5fcJPM=
+X-Google-Smtp-Source: AGHT+IGiImTwNlOXZiPh0eq0SQyse3zcGV6uNshZgfQ5QGtb0JMjrsSwbNDOlvLjD+jQkr6/crbruycanewM4Ur2g3o=
+X-Received: by 2002:a05:6512:3084:b0:542:2137:3a31 with SMTP id
+ 2adb3069b0e04-5439c24126amr3913418e87.21.1737380795305; Mon, 20 Jan 2025
+ 05:46:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20250116040449.306098-1-marex@denx.de>
-In-Reply-To: <20250116040449.306098-1-marex@denx.de>
+References: <20250117015642.2373824-1-festevam@gmail.com>
+In-Reply-To: <20250117015642.2373824-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 20 Jan 2025 10:45:24 -0300
-X-Gm-Features: AbW1kvZIthYl4RNsXOaZ5k-d4dX1eikwL6uitJt1yBKivA8qpFJntEO3F6x_cjc
-Message-ID: <CAOMZO5BV7G6Z5Ko2-ag9GRtjfeswsvq0w7+Ko=pJjN2rCcRVKw@mail.gmail.com>
-Subject: Re: [PATCH 01/13] net: fsl_enetc: Introduce enetc_is_ls1028a()
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Markus Gothe <markus.gothe@genexis.eu>, Peng Fan <peng.fan@nxp.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Robert Marko <robert.marko@sartura.hr>, 
- Romain Naour <romain.naour@smile.fr>, Simon Glass <sjg@chromium.org>, 
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- Ye Li <ye.li@nxp.com>
+Date: Mon, 20 Jan 2025 10:46:23 -0300
+X-Gm-Features: AbW1kvYSCI6KtWsBZvzwGFQZ6smXx1q7yERbe0s6gUm-FPpXOFfaD46vLVjAVUg
+Message-ID: <CAOMZO5Cu20HAgUsCP8Gb6MG4LtMs0z+8G16M3-oGWW4FcpEt+A@mail.gmail.com>
+Subject: Re: [PATCH v2] imx8m: Guard binman nodes with CONFIG_OPTEE
+To: trini@konsulko.com
+Cc: uboot-imx@nxp.com, peng.fan@nxp.com, y.moog@phytec.de, 
+ u-boot@lists.denx.de, marex@denx.de, tharvey@gateworks.com, 
+ Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,13 +95,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 16, 2025 at 1:05=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+On Thu, Jan 16, 2025 at 10:57=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 >
-> Introduce accurate test for LS1028A compatibility based both on
-> IS_ENABLED(CONFIG_ARCH_LS1028A) and PCI vendor ID. This is done
-> in preparation for adding ENETCv4 support, which has a different
-> PCI vendor ID.
+> From: Fabio Estevam <festevam@denx.de>
+>> Guard binman nodes with CONFIG_OPTEE to fix the following error
+> when building without optee support:
 >
-> Signed-off-by: Marek Vasut <marex@denx.de>
+>   BINMAN  .binman_stamp
+> Image 'image' has faked external blobs and is non-functional: tee.bin
+>
+> Image 'image' is missing optional external blobs but is still functional:=
+ tee-os
+>
+> /binman/section/fit/images/tee/tee-os (tee.bin):
+>    See the documentation for your board. You may need to build Open Porta=
+ble
+>    Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to/t=
+ee.bin
+>
+> Some images are invalid
+> make: *** [Makefile:1135: .binman_stamp] Error 103
+>
+> While at it, only pass tee to the loadables lines when CONFIG_OPTEE is
+> defined.
+>
+> Reported-by: Tim Harvey <tharvey@gateworks.com>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 
-Series applied, thanks.
+Applied, thanks.
