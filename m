@@ -4,57 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E3ADC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 23:26:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6CA3C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 23:45:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9D21807A8;
-	Tue, 21 Jan 2025 00:25:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 114AD805C5;
+	Tue, 21 Jan 2025 00:45:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="RsO2PeXk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BMJN/h4N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3186D801F5; Mon, 20 Jan 2025 20:43:27 +0100 (CET)
-Received: from mail-10626.protonmail.ch (mail-10626.protonmail.ch
- [79.135.106.26])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 02A52805C5; Tue, 21 Jan 2025 00:45:07 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18004800C2
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 20:43:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67C2B800CF
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 00:45:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1737402203; x=1737661403;
- bh=xpFVjuzTJzaspz19albYcWw/JpyrkHze+FSX8jUt5SM=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=RsO2PeXksZB5s0Rwtnx36M0XCGXR6fiN/I0HZZpAZEkxNba6w11f0ApJXeO9jN92w
- XPm9T6/8xLX1q7DJxvVQ9x5NQIcjMhVy21AU33h2WanDL9ADZo3ASiTofCUCwvLbFR
- /ek2lYmG0SjcJujpWI3iOXKrfu4ZEbNF2WkaH8VoNCwqGOybmmPFkb+141x4jDZPdS
- Y7HCmZ76xkLodYOjOlcVoYahUIuhmBMsR6EJZEy4d/6gpM2o8pcGL8i37+Nb4ukHiB
- mm3awzCo9Q2LAn+OT4H4wtZdu9wYV0/Be6QprmuvbYaeUsLlobqBklKG7AgUrTfIuP
- N21bSq3N5JpWg==
-Date: Mon, 20 Jan 2025 19:43:17 +0000
-To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Matthias Brugger <mbrugger@suse.com>
-From: Sam Day <me@samcday.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH 2/2] mach-snapdragon: support parsing memory info from
- external FDT
-Message-ID: <20250120-qcom-parse-memory-updates-v1-2-54a7f0550cff@samcday.com>
-In-Reply-To: <20250120-qcom-parse-memory-updates-v1-0-54a7f0550cff@samcday.com>
-References: <20250120-qcom-parse-memory-updates-v1-0-54a7f0550cff@samcday.com>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 1d93a1c64b4da5e338d506db4994e7a155c5a378
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7b7041273ddso402048285a.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 15:45:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737416703; x=1738021503; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fRVEnkOSZaNmPxhzd9Jp4mdOHLGZYIBeldf5WjAwNK0=;
+ b=BMJN/h4NcrpPUcGXJqOL8rEn7Yw/IwGSMpFHLAzUju0EwXl0lDjopwqa3yb8Qbv+4N
+ eB3NUskBsZQEi5vvnr6H+wV1KQEuMquLcFkgKUABDEPlgeXFRLyxvlsoqXEIPB1ij1gx
+ 9+j9PJM0686Ni1D7YCn1zMbJV4afuYslKNjfo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737416703; x=1738021503;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fRVEnkOSZaNmPxhzd9Jp4mdOHLGZYIBeldf5WjAwNK0=;
+ b=raZ5Ehhe/QY7VIkZ2SS3IfeiZrskbDXqJ5VidkRpiQWrdgKOSfB0aUCWVJUKth+9xd
+ u3Y7GwR+GxrU9tSDln5psWEBc+rh6Dq8Y92fyx7nJXx/BADmNhRcJO54SNu1hmn9Emv1
+ aSw57zOxiWEnP3iJQIEMI9xUunWp7i5RJBHU8TyaVmVa/Q5xkhmwEm0gM98AY2tXxAEg
+ 4cj7vaNVSVnX8M6L4AUMcNznFLDvl/8HAWC8Cn/wBl90/MF+Y0/oYIycTk7jBEB62ZAo
+ e2Upfy4j50HaX0m6odz812kJQzt7ukKaXlqmIMK8FvFIgkizUxpw6BmzejAgjzSScUIf
+ Gazw==
+X-Gm-Message-State: AOJu0YyhCvmjjiCgDOyGzucf2ew5R1QHMKsdkwTQ4Y73CKVUSBBJ2e/r
+ 8DiAM1rL/wmsnyXXP5pm60Lq/yiu5yQ2MsDU85vIn/v976IT6zsD2bLVOeBAVdA=
+X-Gm-Gg: ASbGncufPQpn31zuNIoevFJ81w4QRiiBmxiOBsuokWTpdTF2rTIom0V0UPlgZg8Obv1
+ OZ2UtrM1nHkDwuF75TvpcUUi4ln1obEETgtEl9HHkUmoow6jmMTi3fb+lOOXk5Y6r8hOZVCXK7J
+ tUJ2+Z3CNMZ3DtJLppoDlhh6zNUhn44OCYcWAMn1S1htxayXeMvMKQ4ghnRsQE7MmOHbfuJ6y7y
+ XsQj/K8L0XreZ2jGPlCihrw2G5ksGCmMmeGf+12IJK7wXhwzPRFQ48OZsi5v7WqL/8=
+X-Google-Smtp-Source: AGHT+IHpwJafh/Dlj/4bAy1mmsZQnW7JXDSopHRw5lPmkWl4Es2f44cw93ncmLGCri08UkMf3EFCTA==
+X-Received: by 2002:a05:620a:404f:b0:7b6:6b52:8bb1 with SMTP id
+ af79cd13be357-7be63215c8fmr2367784085a.14.1737416703073; 
+ Mon, 20 Jan 2025 15:45:03 -0800 (PST)
+Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be614d9adbsm496177985a.87.2025.01.20.15.44.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jan 2025 15:45:02 -0800 (PST)
+Date: Mon, 20 Jan 2025 17:44:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ion Agorria <ion@agorria.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH v3 00/46] pxe: Support read_all() for extlinux and PXE
+Message-ID: <20250120234457.GG3476@bill-the-cat>
+References: <20241206023626.2456858-1-sjg@chromium.org>
+ <20250116232840.GN3476@bill-the-cat>
+ <CAFLszTjnCA0gHQLAZQsX6k7z_qsVVrQ0Zwquw3411LAz=WdukA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 21 Jan 2025 00:25:40 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="26M42XUs2xtcMj3d"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjnCA0gHQLAZQsX6k7z_qsVVrQ0Zwquw3411LAz=WdukA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,166 +119,402 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Prior to this commit, board_fdt_blob_setup would decide which FDT to
-use, either the external one from the previous bootloader, or the
-internal one that was compiled into the binary.
 
-This commit expands that behaviour a bit further, and introduces a
-(default-enabled) option to always parse the /memory node from the
-external FDT (if it's present and valid), even if we're going to
-continue the boot with an internal one.
+--26M42XUs2xtcMj3d
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The rationale here is that many (all?) of the upstream DTs for the
-msm8916 + sdm845 (and likely others) socs do not fully specify the /memory
-node(s), since it's typically expected that the bootloader has selected
-one of these from an Android boot.img and then filled in the memory
-info.
+On Mon, Jan 20, 2025 at 12:20:06PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 16 Jan 2025 at 16:28, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Dec 05, 2024 at 07:35:39PM -0700, Simon Glass wrote:
+> >
+> > > This series implements read_all() so that it is possible to read all =
+the
+> > > files relating to a bootflow, make adjustments and then boot.
+> > >
+> > > Unfortunately quite a few things stand in the way, so this series
+> > > finishes off several pending items: zboot without CONFIG_CMDLINE,
+> > > required support in pxe_utils and the differing code in the extlinux =
+and
+> > > PXE bootmeths. There is very little new code, but quite a lot of
+> > > refactoring.
+> > >
+> > > The bootm, booti and bootz commands have all been refactored previous=
+ly,
+> > > so that they can operate without needing CONFIG_CMDLINE to be enabled.
+> > > At the, time, zboot was left alone, since it is x86-specific and a bit
+> > > more trouble.
+> > >
+> > > However it turns out that the booti support doesn't work with compres=
+sed
+> > > booti images, so this series resolved that problem too.
+> > >
+> > > This series adds a programatic API for zboot and uses the forthcoming
+> > > bootstd 'image list' to collect information from an extlinux file. It=
+ is
+> > > therefore possible to parse the file, load the resulting images and t=
+hen
+> > > examine/adjust the resulting bootflow, before booting.
+> > >
+> > > The addition of options to extlinux resulted in the PXE and extlinux
+> > > bootmeth having slightly different features. This is tidied up in this
+> > > series, with common functions for both. This allows the same features
+> > > (loading images as a separate step) to be provided for PXE.
+> >
+> > To sync up with what I said on IRC, this breaks
+> > test/py/tests/test_net_boot.py likely due to changes in the output.
+>=20
+> I am taking a look at this, but I'm really not sure how to set up
+> test_net_pxe_boot_config test
+>=20
+> I have this in my py/ellesmere/u_boot_boardenv_rpi_3_32b.py file:
+>=20
+> env__pxe_boot_test_skip =3D False
+> env__net_pxe_bootable_file =3D {
+>     'fn': 'default.boot',
+>     'addr': 0x10000000,
+>     # 'size': 74,
+>     'timeout': 50000,
+>     'pattern': 'Linux',
+>     'valid_label': '1',
+>     'invalid_label': '2',
+>     'exp_str_invalid': 'Skipping install for failure retrieving',
+>     'local_label': '3',
+>     'exp_str_local': 'missing environment variable: localcmd',
+>     'empty_label': '4',
+>     'exp_str_empty': 'No kernel given, skipping boot',
+>     'check_type': 'boot_error',
+>     'check_pattern': 'ERROR',
+> }
+>=20
+> This is what I see when running test_net_pxe_boot_config :
+>=20
+> test/py/tests/test_net_boot.py +u-boot-test-reset rpi_3_32b rpi3
+> {lab mode}
+> Building U-Boot in pytest-source dir for rpi_3_32b
+> Bootstrapping U-Boot from dir /tmp/b/rpi_3_32b
+> Writing U-Boot using method rpi3
+> cat: /sys/class/block/sdz1/size: No such file or directory
+> cat: /sys/class/block/sdz1/size: No such file or directory
+>=20
+> {lab ready in 10.4s: U-Boot 2025.01-rc6-00508-gd6da3dbaef57-dirty (Jan
+> 20 2025 - 12:11:05 -0700)}
+> skip False
+> U-Boot> setenv autoload no
+> U-Boot> U-Boot> dhcp
+> Waiting for Ethernet connection... done.
+> BOOTP broadcast 1
+> DHCP client bound to address 192.168.4.50 (4 ms)
+> U-Boot> U-Boot> echo $bootfile
+>=20
+> U-Boot> U-Boot> setenv pxefile_addr_r 10000000
+> U-Boot> U-Boot> pxe get
+> missing environment variable: pxeuuid
+> Retrieving file: pxelinux.cfg/01-b8-27-eb-b4-f9-f2
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/01-b8-27-eb-b4-f9-f2'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/C0A80432
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/C0A80432'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/C0A8043
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/C0A8043'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/C0A804
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/C0A804'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/C0A80
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/C0A80'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/C0A8
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/C0A8'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/C0A
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/C0A'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/C0
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/C0'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/C
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/C'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/default-arm-bcm283x-rpi
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/default-arm-bcm283x-rpi'.
+> Load address: 0x10000000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Retrieving file: pxelinux.cfg/default-arm-bcm283x
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/default-arm-bcm283x'.
+> Load address: 0x10000000
+> Loading: ##################################################  64 Bytes
+> 4.9 KiB/s
+> done
+> Bytes transferred =3D 64 (40 hex)
+> Config file '<NULL>' found
+> U-Boot> U-Boot> pxe boot 10000000
+> Retrieving file: pxelinux.cfg/default-arm
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/default-arm'.
+> Load address: 0x10000044
+> Loading: ##################################################  349 Bytes
+> 30.3 KiB/s
+> done
+> Bytes transferred =3D 349 (15d hex)
+> Retrieving file: pxelinux.cfg/default
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/default'.
+> Load address: 0x100001a4
+> Loading: ##################################################  108 Bytes
+> 9.8 KiB/s
+> done
+> Bytes transferred =3D 108 (6c hex)
+> Linux boot selections
+> 1: Boot kernel
+> 2: Invalid boot
+> 3: Local boot
+> 4: Empty boot
+> Enter choice: 3
+> 3: Local boot
+> missing environment variable: localcmd
+> U-Boot> pxe boot 10000000
+> Retrieving file: pxelinux.cfg/default-arm
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/default-arm'.
+> Load address: 0x10000044
+> Loading: ##################################################  349 Bytes
+> 19.5 KiB/s
+> done
+> Bytes transferred =3D 349 (15d hex)
+> Retrieving file: pxelinux.cfg/default
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'pxelinux.cfg/default'.
+> Load address: 0x100001a4
+> Loading: ##################################################  108 Bytes
+> 9.8 KiB/s
+> done
+> Bytes transferred =3D 108 (6c hex)
+> Linux boot selections
+> 1: Boot kernel
+> 2: Invalid boot
+> 3: Local boot
+> 4: Empty boot
+> Enter choice: 4
+> 4: Empty boot
+> No kernel given, skipping boot
+> 1: Boot kernel
+> Retrieving file: Image
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'Image'.
+> Load address: 0x80000
+> Loading: ##################################################  6 Bytes
+> 0 Bytes/s
+> done
+> Bytes transferred =3D 6 (6 hex)
+> Retrieving file: rootfs.cpio.gz.u-boot
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'rootfs.cpio.gz.u-boot'.
+> Load address: 0x2700000
+> Loading: ##################################################  30.6 MiB
+> 995.1 KiB/s
+> done
+> Bytes transferred =3D 32123014 (1ea2886 hex)
+> Retrieving file: system.dtb
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'system.dtb'.
+> Load address: 0x2600000
+> Loading: ##################################################  11 Bytes
+> 1000 Bytes/s
+> done
+> Bytes transferred =3D 11 (b hex)
+> zimage: Bad magic!
+> 2: Invalid boot
+> Retrieving file: kernels/install.bin
+> Waiting for Ethernet connection... done.
+> Using smsc95xx_eth device
+> TFTP from server 192.168.4.1; our IP address is 192.168.4.50
+> Filename 'kernels/install.bin'.
+> Load address: 0x80000
+> Loading: *
+> TFTP error: 'File not found' (1)
+> Not retrying...
+> Skipping install for failure retrieving kernel
+> 3: Local boot
+> missing environment variable: localcmd
+> U-Boot> F
+>=20
+> Do you have a passing run I could compare against, and/or a boardenv
+> file that works?
 
-Caleb's original explanation in the commit that introduced
-qcom_parse_memory was dropped into a comment above that function, since
-this part of the early initialization is getting quite nuanced. We don't
-want uninitiated folks to see that code and run away screaming or give
-away all their possessions and move to a monastery or something.
+I didn't test this on 32bit ARM, only 64bit. For Pi 3:
 
-Signed-off-by: Sam Day <me@samcday.com>
----
- arch/arm/mach-snapdragon/Kconfig | 13 +++++++++
- arch/arm/mach-snapdragon/board.c | 57 +++++++++++++++++++++++++++---------=
-----
- 2 files changed, 52 insertions(+), 18 deletions(-)
+env__net_uses_usb =3D True
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kc=
-onfig
-index 976c0e35fcef29bafecbbd6ea04459de852df275..0feb65a916459160a4da9947a6d=
-7224930d507b4 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -45,4 +45,17 @@ config SYS_CONFIG_NAME
- =09  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h heade=
-r
- =09  will be used for board configuration.
-=20
-+config SYS_MEMORY_FROM_EXTERNAL_FDT
-+=09bool "Always parse /memory from external device tree, if it's provided"
-+=09default y
-+=09help
-+=09  When booting with an internal DT, we'll always use that since it's
-+=09  expected to be more accurate + up-to-date than whatever the previous
-+=09  bootloader hands us.
-+
-+=09  The notable exception here is the /memory node. With this config opti=
-on
-+=09  enabled, we'll initialize memory based on the information provided in=
- the
-+=09  external DT from the previous bootloader, even if we use the internal=
- DT
-+=09  for everything else.
-+
- endif
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/bo=
-ard.c
-index 2ef936aab757c7045729a2dd91944f4f9bff917e..f637bce18546fb3a9fe389e07f4=
-57346ad5f95c8 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -88,6 +88,29 @@ int dram_init_banksize(void)
- =09return 0;
- }
-=20
-+/**
-+ * The generic memory parsing code in U-Boot lacks a few things that we
-+ * need on Qualcomm:
-+ *
-+ * 1. It sets gd->ram_size and gd->ram_base to represent a single memory b=
-lock
-+ * 2. setup_dest_addr() later relocates U-Boot to ram_base + ram_size, the=
- end
-+ *    of that first memory block.
-+ *
-+ * This results in all memory beyond U-Boot being unusable in Linux when b=
-ooting
-+ * with EFI.
-+ *
-+ * Since the ranges in the memory node may be out of order, the only way f=
-or us
-+ * to correctly determine the relocation address for U-Boot is to parse al=
-l
-+ * memory regions and find the highest valid address.
-+ *
-+ * We can't use fdtdec_setup_memory_banksize() since it stores the result =
-in
-+ * gd->bd, which is not yet allocated.
-+ *
-+ * This function requires a pointer to the specific FDT that we should par=
-se
-+ * for its /memory block. This is because when SYS_MEMORY_FROM_EXTERNAL_FD=
-T is
-+ * enabled, we might be looking at the FDT provided by the previous bootlo=
-ader,
-+ * rather than our internal (gd->fdt_blob) one.
-+ */
- static void qcom_parse_memory(const void *fdt)
- {
- =09int offset;
-@@ -153,13 +176,13 @@ static void show_psci_version(void)
-  */
- int board_fdt_blob_setup(void **fdtp)
- {
--=09struct fdt_header *fdt;
-+=09struct fdt_header *external_fdt, *internal_fdt;
- =09bool internal_valid, external_valid;
--=09int ret =3D 0;
-=20
--=09fdt =3D (struct fdt_header *)get_prev_bl_fdt_addr();
--=09external_valid =3D fdt && !fdt_check_header(fdt);
--=09internal_valid =3D !fdt_check_header(*fdtp);
-+=09internal_fdt =3D (struct fdt_header *)*fdtp;
-+=09external_fdt =3D (struct fdt_header *)get_prev_bl_fdt_addr();
-+=09external_valid =3D external_fdt && !fdt_check_header(external_fdt);
-+=09internal_valid =3D !fdt_check_header(internal_fdt);
-=20
- =09/*
- =09 * There is no point returning an error here, U-Boot can't do anything =
-useful in this situation.
-@@ -167,24 +190,22 @@ int board_fdt_blob_setup(void **fdtp)
- =09 */
- =09if (!internal_valid && !external_valid)
- =09=09panic("Internal FDT is invalid and no external FDT was provided! (fd=
-t=3D%#llx)\n",
--=09=09      (phys_addr_t)fdt);
-+=09=09      (phys_addr_t)external_fdt);
-+
-+=09if (IS_ENABLED(CONFIG_SYS_MEMORY_FROM_EXTERNAL_FDT) && external_valid)
-+=09=09/* Explicitly use the external FDT to configure memory */
-+=09=09qcom_parse_memory(external_fdt);
-+=09else
-+=09=09qcom_parse_memory(internal_fdt);
-=20
- =09if (internal_valid) {
- =09=09debug("Using built in FDT\n");
--=09=09ret =3D -EEXIST;
--=09} else {
--=09=09debug("Using external FDT\n");
--=09=09/* So we can use it before returning */
--=09=09*fdtp =3D fdt;
-+=09=09return -EEXIST;
- =09}
-=20
--=09/*
--=09 * Parse the /memory node while we're here,
--=09 * this makes it easy to do other things early.
--=09 */
--=09qcom_parse_memory(*fdtp);
--
--=09return ret;
-+=09debug("Using external FDT\n");
-+=09*fdtp =3D external_fdt;
-+=09return 0;
- }
-=20
- void reset_cpu(void)
+env__net_dhcp_server =3D True
+
+env__tftp_boot_test_skip =3D False
+
+env__net_tftp_bootable_file =3D {
+    'fn': 'v6.6/image.fit.nocomp',
+    'addr': 0x00200000,
+    'size': 85984256,
+    'crc32': '754c839a',
+    'pattern': 'Linux',
+    'config': 'conf-852',
+}
+
+# Details regarding a file that may be read from a TFTP server. This variab=
+le
+# may be omitted or set to None if PXE testing is not possible or desired.
+env__net_pxe_bootable_file =3D {
+    'fn': 'default',
+    'addr': 0x00200000,
+    'size': 64,
+    'timeout': 50000,
+    'pattern': 'Linux',
+    'valid_label': '1',
+    'invalid_label': '2',
+    'exp_str_invalid': 'Skipping install for failure retrieving',
+    'local_label': '3',
+    'exp_str_local': 'missing environment variable: localcmd',
+    'empty_label': '4',
+    'exp_str_empty': 'No kernel given, skipping boot',
+}
+
+# False or omitted if a PXE boot test should be tested.
+# If PXE boot testing is not possible or desired, set this variable to True.
+# For example: If pxe configuration file is not proper to boot
+env__pxe_boot_test_skip =3D False
+
+And:
+$ cat /srv/tftp/pxelinux.cfg/default
+label Linux
+    menu label Boot kernel
+    kernel Image
+    fdt system.dtb
+    initrd rootfs.cpio.gz.u-boot
+$ cat /srv/tftp/pxelinux.cfg/default-arm
+menu title Linux boot selections
+menu include pxelinux.cfg/default
+
+label install
+    menu label Invalid boot
+    kernel kernels/install.bin
+    append console=3DttyAMA0,38400 debug earlyprintk
+    initrd initrds/uzInitrdDebInstall
+
+label local
+    menu label Local boot
+    append root=3D/dev/sdb1
+    localboot 1
+
+label boot
+    menu label Empty boot
+$ cat /srv/tftp/pxelinux.cfg/01-b8-27-eb-fc-64-a6
+menu include pxelinux.cfg/default-arm
+timeout 50
+
+default Linux
+
+And kernels/install.bin, etc, do not exist. Only v6.6/image.fit.nocomp
+exists.=20
 
 --=20
-2.47.1
+Tom
 
+--26M42XUs2xtcMj3d
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeO3+4ACgkQFHw5/5Y0
+tyw++gv/Z5k+E70gQh63acs/Okd7CkEtJf0RaZzQlSa2igqNX1JxK45377iPktzI
+jrqyrqBwXYkKjRBWe1yWccNTYq4fM0vl49PIRQp2No2YbS57Tywy2uvMHkanuMx3
+oEnjtkns5eXX3Z+6fh1PcAzRhHV/r+P4G6cB7pGOTES6suvaN9SZKAy0OFWlHujU
+IeOS/ejyppnw5J98rcET6YmAUS3A/EhXR0BUpMMsz72A6hnWsI42NuO5qD1GUfqo
+ytPKj3ooiKAZYjTvST3GyeBHUzK6RfMYvy6X05KAazk4dPbK2Zlr+s983YpTmSMG
+Eaiod6kVAENZMUrKVwpxraz1R0Cls0ZlkDElBf995LxtsKP0CbnaFTOu7SCSFWXK
+jyATT1df8I+nslebpU/7+KnsfvMsM1buwX0XVyN7fbIEmU3wm5S47TPUzEnjs0Sd
+nlTKAJaP4yFV/kXrs845LYfHVjFtHt8XkotBrw928Dl4qvCNYJ4fhdD8gnlRQUIQ
+u4K/l/tW
+=bjhi
+-----END PGP SIGNATURE-----
+
+--26M42XUs2xtcMj3d--
