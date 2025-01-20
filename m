@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FFDFC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 10:13:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE06EC02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 10:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0B2F80077;
-	Mon, 20 Jan 2025 11:13:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 28F9A80077;
+	Mon, 20 Jan 2025 11:34:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="FMbyrkik";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WoYteiRa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC191801CF; Mon, 20 Jan 2025 11:13:23 +0100 (CET)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3AD2E801CF; Mon, 20 Jan 2025 11:34:31 +0100 (CET)
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
+ [217.70.183.200])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B62E180017
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 11:13:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4104214833FE; Mon, 20 Jan 2025 11:13:18 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1737368000;
+ by phobos.denx.de (Postfix) with ESMTPS id F2CBF80017
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 11:34:28 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 8DDF020008;
+ Mon, 20 Jan 2025 10:34:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1737369268;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=gulxb2nKl3rOvITQL9GAbPj7ESfCEumkOzdkTzm9uGg=;
- b=FMbyrkik69VmoqtcTgdnsZnO1HK9EcKPIya0ls3ukxynW214pBT96srwn5QY+mqESgjKFq
- mwXUnJC+bBYnYV2vQ78EX8MLDwNiMW5gyCwrsfjL1Z/WIZcAm1X3DIWm/+2bZUke8SwUeB
- y2IUgJsQVeFqFqQa2KiMTYjxpBNEZz4Bnf1sYUw3JNonxCKXCF+nEN6ImFOxthfsNuyItu
- uH1ogezmrlps952mZdYxah+/wX1v87lYdDS8CKHyW8Ec87GxA6R9dQNN69wudQrc8jyqtN
- X5uek3Iyc0o1uPt2MVIlfjisZYUnwZRGao1DNAsngicjcCZnf+X7bB6/22p15Q==
-Date: Mon, 20 Jan 2025 11:13:17 +0100
-From: Alexander Dahl <ada@thorsis.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>
-Subject: Re: [PATCH v4 05/15] lmb: notify of any changes to the LMB memory map
-Message-ID: <20250120-shine-extended-134d3ccac85f@thorsis.com>
-Mail-Followup-To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>,
- Mark Kettenis <kettenis@openbsd.org>
-References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
- <20241015153717.401371-6-sughosh.ganu@linaro.org>
- <20250117-molecular-quicksand-e80bf947313e@thorsis.com>
- <CADg8p97Q70PnsXd=GtTLncg8B8LMTN7bda4YXxb+VDnCU4HL4Q@mail.gmail.com>
+ bh=LmiI/XaKxikuMSU35UpPUSvxr3hvvk/AA4QAHHGZthE=;
+ b=WoYteiRa2uQDNc8IAgBflxZgbZDnpBtvDTt7xTMKYpAGAupDirVOvXVj0jkMBaRAC/vv3Y
+ yDy6nz9DWYtupSHSBH3BpWCoSgx/oNOpYqdrwWSVQS97Ll4RkRKi3w6how3S4TzrM4Vapd
+ DkWtrsQYdLT1/vGgdP4HKxaJ4DG9huQU09+yPylYCNU5wHs/16/hfZ6Z3ASQVbIgEU+lg/
+ 4qp+AfUEMikp2vqxruLNr62IHpvv2A/C01ibC+gF1pNOk6aVFl0ZyvnIxdkwiJfmgBFxPU
+ MtdWY+W9iZ79IDIXcuXuEet/D9/2WLmLTXDa6D627fhjkAKLPqalh+bJ2P5LuA==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,  Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,  Fabio Estevm <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>,  Thomas
+ Petazzoni <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
+ <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v3 05/13] power-domain: Add refcounting
+In-Reply-To: <CAFLszTinomkmj=gaKbX5WBPMsbr_3nxt45sQjXqKJ5q1rxcKwQ@mail.gmail.com>
+ (Simon Glass's message of "Wed, 15 Jan 2025 06:19:29 -0700")
+References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
+ <20250110-ge-mainline-display-support-v3-5-d2c0acea6feb@bootlin.com>
+ <CAFLszTinomkmj=gaKbX5WBPMsbr_3nxt45sQjXqKJ5q1rxcKwQ@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Mon, 20 Jan 2025 11:34:27 +0100
+Message-ID: <87a5blu630.fsf@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CADg8p97Q70PnsXd=GtTLncg8B8LMTN7bda4YXxb+VDnCU4HL4Q@mail.gmail.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,70 +80,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Hello Simon,
 
-Am Mon, Jan 20, 2025 at 02:40:38PM +0530 schrieb Sughosh Ganu:
-> On Fri, 17 Jan 2025 at 16:40, Alexander Dahl <ada@thorsis.com> wrote:
+>>  int power_domain_on(struct power_domain *power_domain)
+>>  {
 
-[…]
+...
 
-> > This changeset breaks build with CONFIG_CC_OPTIMIZE_FOR_DEBUG=y for
-> > me.  In a usual non-debug build, everything is fine.  However in a
-> > debug build now I get this error:
-> >
-> >       UPD     include/generated/timestamp_autogenerated.h
-> >       GEN     Makefile
-> >       Using /mnt/data/adahl/src/u-boot as source for U-Boot
-> >       CC      common/version.o
-> >       AR      common/built-in.o
-> >       LD      u-boot
-> >     arm-v5te-linux-gnueabi-ld.bfd: lib/lmb.o: in function `lmb_map_update_notify':
-> >     /mnt/data/adahl/src/u-boot/lib/lmb.c:458: undefined reference to `efi_add_memory_map_pg'
-> 
-> Can you share the details of the toolchain that you are using, where
-> can I download it from. And the target that you build which shows this
-> up. Thanks.
+>> +       if (priv->on_count++ > 0)
+>> +               return 0;
+>
+> -EALREADY
 
-Although I'm actually building with ptxdist and
-OSELAS.Toolchain-2023.07.1/arm-v5te-linux-gnueabi for a custom board,
-you should be able to reproduce the behaviour easily with buildman on
-master when building for boards sam9x60ek or sam9x60_curiosity like
-this:
+...
 
-    buildman -o ~/build/u-boot/buildman -e -a CC_OPTIMIZE_FOR_DEBUG sam9x60
+>>  int power_domain_off(struct power_domain *power_domain)
+>>  {
 
-My output when running the above is this:
+...
 
-    % buildman -o ~/build/u-boot/buildman -e -a CC_OPTIMIZE_FOR_DEBUG sam9x60
-    Building current source for 5 boards (5 threads, 4 jobs per thread)
-           arm:  +   sam9x60_curiosity_mmc1
-    +arm-linux-gnueabi-ld.bfd: lib/lmb.o: in function `lmb_map_update_notify':
-    +lib/lmb.c:458: undefined reference to `efi_add_memory_map_pg'
-    +make[1]: *** [Makefile:1824: u-boot] Fehler 1
-    +make: *** [Makefile:177: sub-make] Error 2
-           arm:  +   sam9x60_curiosity_mmc
-    +arm-linux-gnueabi-ld.bfd: lib/lmb.o: in function `lmb_map_update_notify':
-    +lib/lmb.c:458: undefined reference to `efi_add_memory_map_pg'
-    +make[1]: *** [Makefile:1824: u-boot] Fehler 1
-    +make: *** [Makefile:177: sub-make] Error 2
-           arm:  +   sam9x60ek_mmc
-    +arm-linux-gnueabi-ld.bfd: lib/lmb.o: in function `lmb_map_update_notify':
-    +lib/lmb.c:458: undefined reference to `efi_add_memory_map_pg'
-    +make[1]: *** [Makefile:1824: u-boot] Fehler 1
-    +make: *** [Makefile:177: sub-make] Error 2
-           arm:  +   sam9x60ek_qspiflash
-    +arm-linux-gnueabi-ld.bfd: lib/lmb.o: in function `lmb_map_update_notify':
-    +lib/lmb.c:458: undefined reference to `efi_add_memory_map_pg'
-    +make[1]: *** [Makefile:1824: u-boot] Fehler 1
-    +make: *** [Makefile:177: sub-make] Error 2
-           arm:  +   sam9x60ek_nandflash
-    +arm-linux-gnueabi-ld.bfd: lib/lmb.o: in function `lmb_map_update_notify':
-    +lib/lmb.c:458: undefined reference to `efi_add_memory_map_pg'
-    +make[1]: *** [Makefile:1824: u-boot] Fehler 1
-    +make: *** [Makefile:177: sub-make] Error 2
-        0    0    5 /5              0:00:40  : sam9x60ek_nandflash
-    Completed: 5 total built, 5 newly), duration 0:00:22, rate 0.23
+>> +       if (priv->on_count-- > 1)
+>> +               return 0;
+>
+> -EBUSY
+>
+> See how the regulator uclass does it.
 
-Greets
-Alex
+I really does not understand why we would like to do that.
 
+It is perfectly normal operation to call power_domain_on/off() on the
+same power domain several times in a row and there is no reason to
+return an error code. It is quite the opposite, the main reason for
+power domains is to act like shared regulators. Se while a regulator has
+one user and doing the same action on it several times does not make
+much sense and can be reported, that is not how power domains have been
+thought about in the first place.
+
+Hence, I do not agree with returning error codes in these situations,
+they are misleading and they would have to be ignored anyway.
+
+Thanks,
+Miqu=C3=A8l
