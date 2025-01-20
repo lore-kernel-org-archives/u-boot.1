@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D5EC02185
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 08:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69B0EC02185
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 08:06:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1AA1807B9;
-	Mon, 20 Jan 2025 09:05:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 55336801CF;
+	Mon, 20 Jan 2025 09:05:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="s+eWlkgL";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="xEMuK+ol";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C08C780725; Mon, 20 Jan 2025 09:05:17 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id CF69C80077; Mon, 20 Jan 2025 09:05:43 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C091280725
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 09:05:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8423480725
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 09:05:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=3115eb01bc=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50K5NqSR018570;
- Mon, 20 Jan 2025 09:05:08 +0100
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50K7pTQA013038;
+ Mon, 20 Jan 2025 09:05:36 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- S3go9EjNv14sgE44bj2lpQM0b0e2qSokFbbEIm9jAPc=; b=s+eWlkgLOlXKw7jq
- iqnKTxqtHv+kyFgAUZtO+ZwqiI+tieJ1eoBpMdWKHzdOe9pjBeKGSE/DjpgZU+N6
- eoFR0ojLXMf4jSE5CrY3gfj4NdWembzQQidj2RnZL95A67m5jG3H9hOykrRlkWo/
- D44uz1TA45xcC0i/GSgdEwEdC/J2RtBpLyFRSS1+g4T/4kHHrBMkJHCVv58EXSGc
- 8Ewy95XgrbIGJ/63/84WZv/Dde7AWTNfS2Mn5KkSgTmzhwFOif5GievCe0U1qCN6
- Bwi7EyHWpmGtTlboEV5u+cEAQXEtonM94+UlfyhPB3hDlnXGaqzbL/biBqycdRwC
- csg9tQ==
+ CAcIFsuDVJ4/54Bs1NH+wZXBRBud4wXGZm/D2WjP95U=; b=xEMuK+olibMx4lgy
+ wbpN8UFH3QnrGUOGOBTKFwLgX+dz55/pFJl83YUq58fJPWmziblXfeuOuByMIc/V
+ 9/gVBRZXU3hdVRiecfnF0osJXCKu+oXfgoH/pj2hAivQgLWms/c2PmFFbwxQ+Dhx
+ 15yfckSTzHj9UvKXcWyKsYD7/Z1rt+tQUH6haJH8aT9kTEwfac2BGaUM6bQhvXoI
+ nU2Jbz2N06A0S31TJfGSmodzuELP0qpAIagPe5iuo6nhyGK7GP3ks03RF+x316rX
+ RTsto5TuDSPPb9wHAtn07WVp1DjAu7LoiykaCP0Tdps/skIDbjfbzDoThVnpF8+R
+ E7eGxw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 448pr3b9w4-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 449jfb0245-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 20 Jan 2025 09:05:08 +0100 (CET)
+ Mon, 20 Jan 2025 09:05:36 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 852F740065;
- Mon, 20 Jan 2025 09:03:58 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E676F40073;
+ Mon, 20 Jan 2025 09:04:13 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4DD73270D62;
- Mon, 20 Jan 2025 09:01:23 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DD5DB270F05;
+ Mon, 20 Jan 2025 09:01:24 +0100 (CET)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Mon, 20 Jan
- 2025 09:01:23 +0100
+ 2025 09:01:24 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 1/9] ARM: dts: sti: Add fixed clock for ehci and ohci nodes
- in stih410-b2260.dtsi
-Date: Mon, 20 Jan 2025 09:01:12 +0100
-Message-ID: <20250120080120.51657-2-patrice.chotard@foss.st.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Jan Kiszka
+ <jan.kiszka@siemens.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 3/9] usb: dwc3-generic: Reorder include
+Date: Mon, 20 Jan 2025 09:01:14 +0100
+Message-ID: <20250120080120.51657-4-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250120080120.51657-1-patrice.chotard@foss.st.com>
 References: <20250120080120.51657-1-patrice.chotard@foss.st.com>
@@ -91,70 +92,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On STi platforms, all clocks are enabled by BOOTROM, so CONFIG_CLK is
-not set as no clock driver for STI exists.
+Reorder include following rules available here :
+https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
 
-As ehci-generic and ohci-generic drivers are used on platforms where
-CONFIG_CLK is set, clk_get_bulk() returns-ENOSYS in case of
-stih410-b2260.
-To avoid this error, add fixed clocks for ehci and ohci nodes for
-stih410-b2260 to fix the following errors:
-
-Bus usb@9a03c00: ohci_generic usb@9a03c00: Failed to get clocks (ret=-19)
-Port not available.
-Bus usb@9a03e00: ehci_generic usb@9a03e00: Failed to get clocks (ret=-19)
-Port not available.
-Bus usb@9a83c00: ohci_generic usb@9a83c00: Failed to get clocks (ret=-19)
-Port not available.
-Bus usb@9a83e00: ehci_generic usb@9a83e00: Failed to get clocks (ret=-19)
-Port not available.
-scanning bus dwc3@9900000 for devices... 1 USB Device(s) found
-       scanning usb for storage devices... 0 Storage Device(s) found
+Remove useless include files.
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Marek Vasut <marex@denx.de>
+
 ---
 
-(no changes since v1)
+Changes in v3:
+  - Update comment by adding "Remove useless include files"
 
- arch/arm/dts/stih410-b2260-u-boot.dtsi | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Changes in v2:
+  - remove useless include files
 
-diff --git a/arch/arm/dts/stih410-b2260-u-boot.dtsi b/arch/arm/dts/stih410-b2260-u-boot.dtsi
-index 3b080ac7a1b..e9d7ec92281 100644
---- a/arch/arm/dts/stih410-b2260-u-boot.dtsi
-+++ b/arch/arm/dts/stih410-b2260-u-boot.dtsi
-@@ -14,20 +14,30 @@
- 			};
- 		};
+ drivers/usb/dwc3/dwc3-generic.c | 20 ++++----------------
+ 1 file changed, 4 insertions(+), 16 deletions(-)
+
+diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+index 2ab41cbae45..bc7d2d4234b 100644
+--- a/drivers/usb/dwc3/dwc3-generic.c
++++ b/drivers/usb/dwc3/dwc3-generic.c
+@@ -7,29 +7,17 @@
+  * Based on dwc3-omap.c.
+  */
  
-+		clk_usb: clk-usb {
-+			compatible = "fixed-clock";
-+			#clock-cells = <0>;
-+			clock-frequency = <100000000>;
-+		};
-+
- 		ohci0: usb@9a03c00 {
- 			compatible = "generic-ohci";
-+			clocks = <&clk_usb>;
- 		};
+-#include <cpu_func.h>
+-#include <log.h>
+ #include <dm.h>
+-#include <dm/device-internal.h>
++#include <reset.h>
++#include <asm/gpio.h>
+ #include <dm/lists.h>
+-#include <dwc3-uboot.h>
+-#include <generic-phy.h>
+-#include <linux/bitops.h>
+ #include <linux/delay.h>
+-#include <linux/printk.h>
+-#include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+-#include <malloc.h>
+ #include <power/regulator.h>
+-#include <usb.h>
+-#include "core.h"
+-#include "gadget.h"
+-#include <reset.h>
+-#include <clk.h>
+ #include <usb/xhci.h>
+-#include <asm/gpio.h>
+-
++#include "core.h"
+ #include "dwc3-generic.h"
++#include "gadget.h"
  
- 		ehci0: usb@9a03e00 {
- 			compatible = "generic-ehci";
-+			clocks = <&clk_usb>;
- 		};
- 
- 		ohci1: usb@9a83c00 {
- 			compatible = "generic-ohci";
-+			clocks = <&clk_usb>;
- 		};
- 
- 		ehci1: usb@9a83e00 {
- 			compatible = "generic-ehci";
-+			clocks = <&clk_usb>;
- 		};
- 	};
- };
+ struct dwc3_generic_plat {
+ 	fdt_addr_t base;
 -- 
 2.25.1
 
