@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F17AC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 13:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E408C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 13:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 934C880711;
-	Mon, 20 Jan 2025 14:51:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 07B38807B4;
+	Mon, 20 Jan 2025 14:51:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fdh2O6rX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OJADGw5F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D86780077; Mon, 20 Jan 2025 14:51:30 +0100 (CET)
-Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
- [IPv6:2a00:1450:4864:20::342])
+ id 66F76807B1; Mon, 20 Jan 2025 14:51:36 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7B7880711
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 14:51:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43FDE80077
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 14:51:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x342.google.com with SMTP id
- 5b1f17b1804b1-43635796b48so28631025e9.0
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 05:51:27 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4361b0ec57aso46306775e9.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 05:51:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737381087; x=1737985887; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1737381093; x=1737985893; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GzhjAzMbTZvG8bAr8x1apDG0k9gCCm9wC0hx41ahrxM=;
- b=Fdh2O6rXzSdlGy+4Qm32ikYqx0OBLqZ0l1tGY6u7XQxclROsEfrPPHHi+RBAlS/Fb6
- zvpRh4LmtSQj2HJUG/yRb2CfpSvfd5ABw5UdcMIngITfGMIWN6f1RwLLtOeZtQx99VKO
- D5SKO0SCW+Opz9J8Eko6EJaiX3GFKrMaY7KQC1XEuGsvS8xKCX8CQKw/V8D5sOq8lQdV
- 74DGuZtcVvMvZbaXVyTBsAXXmA8Mx2lswGD7TnSR9qOE/uUxJSFBGRh62wiO36frH1OW
- v6uxjtLF2kCC9B1BHX/STDVzpv7V6XyzBl8hYhFi/mruD1BM0q+7Qqf69EQVguXDY0LO
- SFCw==
+ bh=BqWBxBeSBN85uoyU0epbXFnDKcvIpLM2onBGrSfc4vg=;
+ b=OJADGw5FK9X5kpdqruELnASaoUoXXGucTwClZza51BcCEAHEudLikf03OC7ry6/dGa
+ 8e4wbWNn8O0QMRbjAQc7Pv5tRjYnZm/FcnfmRGwWMh3dJGWSQWNpIvkSazM1xUnSZY/p
+ rhHw53eTaj5OIwcStiGq7SEJCIGZ71yuVWrQfDq6YNEuZYZn/RBdPyvlP6piaPA6P8Y5
+ VhawRzmDZOQyZOEdDz4lvqXQkJCY9AMctgULGvvGLN7VoF5qsi+pzFr9i3MeKXu5KdMb
+ 7m0rDBSWWwp6ESLffR/Y8p9PZMaNHTU2H7lflXbg+8rBwS3tOm46t4qhYDXunNh9CRNN
+ ZYbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737381087; x=1737985887;
+ d=1e100.net; s=20230601; t=1737381093; x=1737985893;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GzhjAzMbTZvG8bAr8x1apDG0k9gCCm9wC0hx41ahrxM=;
- b=lqjuGmTtizEWlGkSMDBsx4WFeXigHUiANRAr3YuD9vq+5USwtG1WE33S4Pp+VzF4dU
- dWRT9SBN7T6fHU7XHCSQHOPxe9OnfaDfa4fInqOOig9efQqtNEVll4I450bk8qwMnQte
- ZQ+fOV3fUBAREQfKSBSXdeWh6LeqpwQyk46uoW1dsbBah0fzAIFwpvsFhF0L091UmHrc
- 8m2xiuKcVWS8Ir3QztDwlIJXYPHMryXTOfqZPNIe+NuIQNx4lcPrIrxk4741ld+dco2I
- WP17CC6lI5uw3wLbjoRJyW3u7OMuJUrDWQRb1STYo5h55hiOtum5ydpMHxQg/nnEP0Y8
- /Nyw==
-X-Gm-Message-State: AOJu0YwL5c9U2CIG/TDdMYjasSEGdNvLVyudzsnrBI1KVbI6kDTL9PHm
- oGhXCm+vZb13TiMid5yNpcib7HbAgus8pcs5VhU42IcTlQawrChkOlzm13s/hZsgjS7gFKdlV3F
- RfqfiOpLp
-X-Gm-Gg: ASbGncs3V3OyWsoAZKFnyDzEOyw/4dkKrFGrVNYyQNC8hlB2uuVRjMvsu2kfTXafPnv
- fEwfCM5PwwmCe5dpntDb9DG7LCqHo8XMyOJXUn/9cnlapeX5NDGuRedJ8C+L4GS6pXyJu9Yw52e
- 1QDiiN9WQChkMpa1PEXxbvIP3XxnjYITDJ1A0Bl1BsZ++a9yE5yKcyGY5BRs4IBpRu5/C0xFMKN
- r3c5Di+zR7BF6TbabgfRYgCCHQMOKPX/5sCrezNwnIhjtlqQRV/vgaMYeqWYEyFAlK2LQktiBRS
- +Zw=
-X-Google-Smtp-Source: AGHT+IGPAsTd2Jb4VM+svSwbYQjUTQzp8bFeW/I46/x84coSDHSAlcLWbYfoHlywgHzMUlekKxC4EA==
-X-Received: by 2002:a05:600c:4e0c:b0:436:e69a:7341 with SMTP id
- 5b1f17b1804b1-438918b966emr114436745e9.3.1737381086741; 
- Mon, 20 Jan 2025 05:51:26 -0800 (PST)
+ bh=BqWBxBeSBN85uoyU0epbXFnDKcvIpLM2onBGrSfc4vg=;
+ b=fgjRl0wLN9JAEN7JVu91OCyT1CV1CG81Clh3UVHh4/9NYrNDUdq/yfzJ6fesfWuQoC
+ rJT8llFgIUpDkNiUF3AN7W88AXn+qNYheVUnm2D/uupSlta7+CFMViF90pJauLqcGJsU
+ 3Y1ezyKwbFWpJYHjC8prQ8fYwjciJ4s7DNa3/vLccZVO9rj67X5XF76chk3aZUh96sxo
+ 79/erOPEx8972i+JJKky/6BLu++XUTGxcXefEWqwfj11vkOzKjaJJrD+DZ4IOfWcON5p
+ GXsCKU63nZAeQRcm425XoeCb1mxZT9C6jPPFPucTVtHL8gVuN0W8BzXyTyUSb5YFSCFc
+ Jatg==
+X-Gm-Message-State: AOJu0YyqRrkSEyjuMgS2tYEWZifQLNUT3Is73F+oumUmXEFzYSkEg/fp
+ mL0+aorZv3kV+JBXn5mrg+GgqAVQ1SoxHk9X+M7p3LdoTrY/G+ajcxm62wjUyF5IqaIbuYo8Qgi
+ u8RexeA==
+X-Gm-Gg: ASbGncthxSf2AGEjePyfAODxVnXqJB3WmWQgWhoYuGlnDonFIQswepFert794HfuHMZ
+ F/M0penY67norH41vQbV53MjtIZjY+45wTtp14n7hGQpYcs6vP+w7Ij+A7I+SjEx1b8pLtAVlmt
+ sM0bFJmY/XQTuzNm+V7MNOxYFlQ413r98cCt+9aiadC9jfaq+Z3cpP6OU0d8a/YfS64piF3nlMR
+ njjYFdOE2rfIDDHWAIS4ufHSPAdczzv69yqqwPL+QvcJqPcOeuNLRHXra/r7TZoTdzm9Tsjq2wf
+ i6A=
+X-Google-Smtp-Source: AGHT+IEUiACUdmUIoDKqe4TPVQg4CmLbBWcP1WyGCla6cXY9R8tv9lMtzniMJqS14mtZfUllFHDm1g==
+X-Received: by 2002:a05:600c:1986:b0:434:feb1:adbb with SMTP id
+ 5b1f17b1804b1-4389143a662mr125641515e9.31.1737381092029; 
+ Mon, 20 Jan 2025 05:51:32 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:9ae8:b2a8:a305:f9b4])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-437c0f026c0sm108202225e9.0.2025.01.20.05.51.26
+ 5b1f17b1804b1-437c0f026c0sm108202225e9.0.2025.01.20.05.51.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 05:51:26 -0800 (PST)
+ Mon, 20 Jan 2025 05:51:31 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Raymond Mao <raymond.mao@linaro.org>
-Subject: [RFC PATCH 1/2] Introduce coroutines framework
-Date: Mon, 20 Jan 2025 14:50:43 +0100
-Message-ID: <e17799b6938d4afe08b80fc20b70f4d3a81db848.1737380886.git.jerome.forissier@linaro.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [RFC PATCH 2/2] efi_loader: optimize efi_init_obj_list() with
+ coroutines
+Date: Mon, 20 Jan 2025 14:50:44 +0100
+Message-ID: <6749768f2c4780365e238b0ea84d5bcc496a7b8e.1737380886.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1737380886.git.jerome.forissier@linaro.org>
 References: <cover.1737380886.git.jerome.forissier@linaro.org>
@@ -105,552 +101,240 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds the COROUTINES Kconfig symbol which introduces a new internal API
-for coroutines support. As explained in the Kconfig file, this is meant
-to provide some kind of cooperative multi-tasking with the goal to
-improve performance by overlapping lengthy operations.
+When COROUTINES is enabled, schedule efi_disks_register() and
+efi_tcg2_register() as two coroutines in efi_init_obj_list() instead of
+invoking them sequentially. The voluntary yield point is introduced
+inside udelay() which is called frequently as a result of each function
+polling the hardware. This allows the two coroutines to make progress
+simultaneously and reduce the wall clock time required by
+efi_init_obj_list().
 
-The API as well as the implementation is very much inspired from libaco
-[1]. The reference implementation is simplified to remove all things
-not needed in U-Boot, the coding style is updated, and the aco_ prefix
-is replaced by co_.
+Tested on Kria KV260 with a microSD card inserted with the "printenv
+-e" command. With COROUTINES disabled, efi_init_obj_list() completes in
+2821 ms on average (2825, 2822, 2817). With COROUTINES enabled, it
+takes 2265 ms (2262, 2260, 2272). That is a reduction of 556 ms which
+is not bad at all considering that measured separately,
+efi_tcg2_register() takes ~825 ms and efi_disks_register() needs ~600
+ms, so assuming they would overlap perfectly one can expect a 600 ms
+improvement at best.
 
-I believe the stack handling could be simplified: the stack of the main
-coroutine could probably probably be used by the secondary coroutines
-instead of allocating a new stack dynamically.
-
-Only i386, x86_64 and aarch64 are supported at the moment. Other
-architectures need to provide a _co_switch() function in assembly.
-
-Only aarch64 has been tested.
-
-[1] https://github.com/hnes/libaco/
+The code size penalty for this improvement is 1340 bytes.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- arch/arm/cpu/armv8/Makefile     |   1 +
- arch/arm/cpu/armv8/co_switch.S  |  35 +++++++
- arch/x86/cpu/i386/Makefile      |   1 +
- arch/x86/cpu/i386/co_switch.S   |  26 +++++
- arch/x86/cpu/x86_64/Makefile    |   2 +
- arch/x86/cpu/x86_64/co_switch.S |  26 +++++
- include/coroutines.h            | 151 +++++++++++++++++++++++++++
- lib/Kconfig                     |  10 ++
- lib/Makefile                    |   2 +
- lib/coroutines.c                | 176 ++++++++++++++++++++++++++++++++
- 10 files changed, 430 insertions(+)
- create mode 100644 arch/arm/cpu/armv8/co_switch.S
- create mode 100644 arch/x86/cpu/i386/co_switch.S
- create mode 100644 arch/x86/cpu/x86_64/co_switch.S
- create mode 100644 include/coroutines.h
- create mode 100644 lib/coroutines.c
+ lib/efi_loader/efi_setup.c | 113 +++++++++++++++++++++++++++++++++++--
+ lib/time.c                 |  14 ++++-
+ 2 files changed, 122 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
-index 2e71ff2dc97..6d07b6aa9f9 100644
---- a/arch/arm/cpu/armv8/Makefile
-+++ b/arch/arm/cpu/armv8/Makefile
-@@ -46,3 +46,4 @@ obj-$(CONFIG_TARGET_BCMNS3) += bcmns3/
- obj-$(CONFIG_XEN) += xen/
- obj-$(CONFIG_ARMV8_CE_SHA1) += sha1_ce_glue.o sha1_ce_core.o
- obj-$(CONFIG_ARMV8_CE_SHA256) += sha256_ce_glue.o sha256_ce_core.o
-+obj-$(CONFIG_COROUTINES) += co_switch.o
-diff --git a/arch/arm/cpu/armv8/co_switch.S b/arch/arm/cpu/armv8/co_switch.S
-new file mode 100644
-index 00000000000..2fa6c52935a
---- /dev/null
-+++ b/arch/arm/cpu/armv8/co_switch.S
-@@ -0,0 +1,35 @@
-+/* void _co_switch(struct uco *from_co, struct uco *to_co); */
-+.text
-+.globl _co_switch
-+.type  _co_switch, @function
-+_co_switch:
-+    // x0: from_co
-+    // x1: to_co
-+    // from_co and to_co layout: { pc, sp, x19-x29 }
-+
-+    // Save context to from_co (x0)
-+    // AAPCS64 says "A subroutine invocation must preserve the contents of the
-+    // registers r19-r29 and SP"
-+    adr x2, 1f  // pc we should use to resume after this function
-+    mov x3, sp
-+    stp x2, x3, [x0, #0]  // pc, sp
-+    stp x19, x20, [x0, #16]
-+    stp x21, x22, [x0, #32]
-+    stp x23, x24, [x0, #48]
-+    stp x25, x26, [x0, #64]
-+    stp x27, x28, [x0, #80]
-+    stp x29, x30, [x0, #96]
-+
-+    // Load new context from to_co (x1)
-+    ldp x2, x3, [x1, #0]  // pc, sp
-+    ldp x19, x20, [x1, #16]
-+    ldp x21, x22, [x1, #32]
-+    ldp x23, x24, [x1, #48]
-+    ldp x25, x26, [x1, #64]
-+    ldp x27, x28, [x1, #80]
-+    ldp x29, x30, [x1, #96]
-+    mov sp, x3
-+    br x2
-+
-+1:  // Return to the caller
-+    ret
-diff --git a/arch/x86/cpu/i386/Makefile b/arch/x86/cpu/i386/Makefile
-index 18e152074a7..7066904a41e 100644
---- a/arch/x86/cpu/i386/Makefile
-+++ b/arch/x86/cpu/i386/Makefile
-@@ -9,3 +9,4 @@ ifndef CONFIG_TPL_BUILD
- obj-y += interrupt.o
- endif
- obj-y += setjmp.o
-+obj-$(CONFIG_COROUTINES) += co_switch.o
-diff --git a/arch/x86/cpu/i386/co_switch.S b/arch/x86/cpu/i386/co_switch.S
-new file mode 100644
-index 00000000000..ec4d2d778f7
---- /dev/null
-+++ b/arch/x86/cpu/i386/co_switch.S
-@@ -0,0 +1,26 @@
-+/* void _co_switch(struct uco *from_co, struct uco *to_co); */
-+.text
-+.globl _co_switch
-+.type  _co_switch, @function
-+.intel_syntax noprefix
-+_co_switch:
-+    mov     eax,DWORD PTR [esp+0x4]     // from_co
-+    mov     edx,DWORD PTR [esp]         // retaddr
-+    lea     ecx,[esp+0x4]               // esp
-+    mov     DWORD PTR [eax+0x8],ebp     //<ebp
-+    mov     DWORD PTR [eax+0x4],ecx     //<esp
-+    mov     DWORD PTR [eax+0x0],edx     //<retaddr
-+    mov     DWORD PTR [eax+0xc],edi     //<edi
-+    mov     ecx,DWORD PTR [esp+0x8]     // to_co
-+    mov     DWORD PTR [eax+0x10],esi    //<esi
-+    mov     DWORD PTR [eax+0x14],ebx    //<ebx
-+    mov     edx,DWORD PTR [ecx+0x4]     //>esp
-+    mov     ebp,DWORD PTR [ecx+0x8]     //>ebp
-+    mov     eax,DWORD PTR [ecx+0x0]     //>retaddr
-+    mov     edi,DWORD PTR [ecx+0xc]     //>edi
-+    mov     esi,DWORD PTR [ecx+0x10]    //>esi
-+    mov     ebx,DWORD PTR [ecx+0x14]    //>ebx
-+    xor     ecx,ecx
-+    mov     esp,edx
-+    xor     edx,edx
-+    jmp     eax
-diff --git a/arch/x86/cpu/x86_64/Makefile b/arch/x86/cpu/x86_64/Makefile
-index e929563b2c1..862f522242c 100644
---- a/arch/x86/cpu/x86_64/Makefile
-+++ b/arch/x86/cpu/x86_64/Makefile
-@@ -8,3 +8,5 @@ obj-y += cpu.o interrupts.o setjmp.o
- ifndef CONFIG_EFI
- obj-y += misc.o
- endif
-+
-+obj-$(CONFIG_COUROUTINES) += co_switch.o
-diff --git a/arch/x86/cpu/x86_64/co_switch.S b/arch/x86/cpu/x86_64/co_switch.S
-new file mode 100644
-index 00000000000..ec928f2d1f7
---- /dev/null
-+++ b/arch/x86/cpu/x86_64/co_switch.S
-@@ -0,0 +1,26 @@
-+/* void _co_switch(struct uco *from_co, struct uco *to_co); */
-+.text
-+.globl _co_switch
-+.type  _co_switch, @function
-+.intel_syntax noprefix
-+_co_switch:
-+    mov     rdx,QWORD PTR [rsp]      // retaddr
-+    lea     rcx,[rsp+0x8]            // rsp
-+    mov     QWORD PTR [rdi+0x0], r12
-+    mov     QWORD PTR [rdi+0x8], r13
-+    mov     QWORD PTR [rdi+0x10],r14
-+    mov     QWORD PTR [rdi+0x18],r15
-+    mov     QWORD PTR [rdi+0x20],rdx // retaddr
-+    mov     QWORD PTR [rdi+0x28],rcx // rsp
-+    mov     QWORD PTR [rdi+0x30],rbx
-+    mov     QWORD PTR [rdi+0x38],rbp
-+    mov     r12,QWORD PTR [rsi+0x0]
-+    mov     r13,QWORD PTR [rsi+0x8]
-+    mov     r14,QWORD PTR [rsi+0x10]
-+    mov     r15,QWORD PTR [rsi+0x18]
-+    mov     rax,QWORD PTR [rsi+0x20] // retaddr
-+    mov     rcx,QWORD PTR [rsi+0x28] // rsp
-+    mov     rbx,QWORD PTR [rsi+0x30]
-+    mov     rbp,QWORD PTR [rsi+0x38]
-+    mov     rsp,rcx
-+    jmp     rax
-diff --git a/include/coroutines.h b/include/coroutines.h
-new file mode 100644
-index 00000000000..2e2fb1170a3
---- /dev/null
-+++ b/include/coroutines.h
-@@ -0,0 +1,151 @@
-+/* SPDX-License-Identifier: Apache-2.0 */
-+/*
-+ * Copyright 2018 Sen Han <00hnes@gmail.com>
-+ * Copyright 2025 Linaro Limited
-+ */
-+
-+#ifndef _COROUTINES_H_
-+#define _COROUTINES_H_
-+
-+#ifndef CONFIG_COROUTINES
-+
-+static inline void co_yield(void) {}
-+static inline void co_exit(void) {}
-+
-+#else
-+
-+#ifdef __UBOOT__
-+#include <log.h>
-+#else
-+#include <assert.h>
-+#endif
-+#include <limits.h>
-+#include <stdbool.h>
-+#include <stdint.h>
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <time.h>
-+
-+#ifdef __i386__
-+#define UCO_REG_IDX_RETADDR 0
-+#define UCO_REG_IDX_SP 1
-+#define UCO_REG_IDX_BP 2
-+#elif __x86_64__
-+#define UCO_REG_IDX_RETADDR 4
-+#define UCO_REG_IDX_SP 5
-+#define UCO_REG_IDX_BP 7
-+#elif __aarch64__
-+#define UCO_REG_IDX_RETADDR 0
-+#define UCO_REG_IDX_SP 1
-+#else
-+#error Architecture no supported
-+#endif
-+
-+struct co_save_stack {
-+    void*  ptr;
-+    size_t sz;
-+    size_t valid_sz;
-+    size_t max_cpsz; /* max copy size in bytes */
-+};
-+
-+struct co_stack {
-+    void *ptr;
-+    size_t sz;
-+    void *align_highptr;
-+    void *align_retptr;
-+    size_t align_validsz;
-+    size_t align_limit;
-+    struct co *owner;
-+    void *real_ptr;
-+    size_t real_sz;
-+};
-+
-+struct co {
-+    /*
-+     * CPU registers state (callee-savec plus SP, PC)
-+     */
-+#ifdef __i386__
-+        void*  reg[6];
-+#elif __x86_64__
-+        void*  reg[8];
-+#elif __aarch64__
-+	void *reg[14];  // pc, sp, x19-x29, x30 (lr)
-+#endif
-+	struct co *main_co;
-+	void *arg;
-+	bool done;
-+
-+	void (*fp)(void);
-+
-+	struct co_save_stack save_stack;
-+	struct co_stack *stack;
-+};
-+
-+#if defined(__i386__) || defined(__x86_64__)
-+#define UCO_THREAD __thread
-+#else
-+#define UCO_THREAD
-+#endif
-+
-+extern UCO_THREAD struct co *current_co;
-+
-+static inline struct co *co_get_co(void)
-+{
-+	return current_co;
-+}
-+
-+static inline void *co_get_arg(void)
-+{
-+	return co_get_co()->arg;
-+}
-+
-+struct co_stack *co_stack_new(size_t sz);
-+
-+void co_stack_destroy(struct co_stack *s);
-+
-+struct co *co_create(struct co *main_co,
-+		     struct co_stack *stack,
-+		     size_t save_stack_sz, void (*fp)(void),
-+		     void *arg);
-+
-+void co_resume(struct co *resume_co);
-+
-+void co_destroy(struct co *co);
-+
-+void *_co_switch(struct co *from_co, struct co *to_co);
-+
-+static inline void _co_yield_to_main_co(struct co *yield_co)
-+{
-+    assert(yield_co);
-+    assert(yield_co->main_co);
-+    _co_switch(yield_co, yield_co->main_co);
-+}
-+
-+static inline void co_yield(void)
-+{
-+	if (current_co)
-+		_co_yield_to_main_co(current_co);
-+}
-+
-+static inline bool co_is_main_co(struct co *co)
-+{
-+	return !co->main_co;
-+}
-+
-+static inline void co_exit(void)
-+{
-+	struct co *co = co_get_co();
-+
-+	if (!co)
-+		return;
-+	co->done = true;
-+	assert(co->stack->owner == co);
-+	co->stack->owner = NULL;
-+	co->stack->align_validsz = 0;
-+	_co_yield_to_main_co(co);
-+	assert(false);
-+}
-+
-+#endif /* CONFIG_COROUTINES */
-+#endif /* _COROUTINES_H_ */
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 8f1a96d98c4..b6c1380b927 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1226,6 +1226,16 @@ config PHANDLE_CHECK_SEQ
- 	  enable this config option to distinguish them using
- 	  phandles in fdtdec_get_alias_seq() function.
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index aa59bc7779d..94160f4bd86 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -7,10 +7,12 @@
  
-+config COROUTINES
-+	bool "Enable coroutine support"
-+	help
-+	  Coroutines allow to implement a simple form of cooperative
-+	  multi-tasking. The main thread of execution registers one or
-+	  more functions as coroutine entry points, then it schedules one
-+	  of them. At any point the scheduled coroutine may yield, that is,
-+	  suspend its execution and return back to the main thread. At this
-+	  point another coroutine may be scheduled and so on until all the
-+	  registered coroutines are done.
- endmenu
+ #define LOG_CATEGORY LOGC_EFI
  
- source "lib/fwu_updates/Kconfig"
-diff --git a/lib/Makefile b/lib/Makefile
-index 5cb3278d2ef..7b809151f5a 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -159,6 +159,8 @@ obj-$(CONFIG_LIB_ELF) += elf.o
- 
- obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += semihosting.o
- 
-+obj-$(CONFIG_COROUTINES) += coroutines.o
-+
- #
- # Build a fast OID lookup registry from include/linux/oid_registry.h
- #
-diff --git a/lib/coroutines.c b/lib/coroutines.c
-new file mode 100644
-index 00000000000..b23c2004a06
---- /dev/null
-+++ b/lib/coroutines.c
-@@ -0,0 +1,176 @@
-+// SPDX-License-Identifier: Apache-2.0
-+
-+// Copyright 2018 Sen Han <00hnes@gmail.com>
-+// Copyright 2025 Linaro Limited
-+
 +#include <coroutines.h>
-+#include <stdio.h>
-+#include <stdint.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
+ #include <log.h>
+ #include <asm-generic/unaligned.h>
++#include <stdlib.h>
+ 
+ #define OBJ_LIST_NOT_INITIALIZED 1
+ 
+@@ -208,6 +210,46 @@ out:
+ 	return -1;
+ }
+ 
++#if CONFIG_IS_ENABLED(COROUTINES)
 +
-+
-+/* Current co-routine */
-+UCO_THREAD struct co *current_co;
-+
-+struct co_stack *co_stack_new(size_t sz)
++static void efi_disks_register_co(void)
 +{
-+	struct co_stack *p = calloc(1, sizeof(*p));
-+	uintptr_t u_p;
++	efi_status_t ret;
 +
-+	if (!p)
-+		return NULL;
++	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
++		goto out;
 +
-+	if (sz < 4096)
-+		sz = 4096;
++	/*
++	 * Probe block devices to find the ESP.
++	 * efi_disks_register() must be called before efi_init_variables().
++	 */
++	ret = efi_disks_register();
++	if (ret != EFI_SUCCESS)
++		efi_obj_list_initialized = ret;
++out:
++	co_exit();
++}
 +
-+	p->sz = sz;
-+	p->ptr = malloc(sz);
-+	if (!p->ptr) {
-+		free(p);
-+		return NULL;
++static void efi_tcg2_register_co(void)
++{
++	efi_status_t ret = EFI_SUCCESS;
++
++	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
++		goto out;
++
++	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
++		ret = efi_tcg2_register();
++		if (ret != EFI_SUCCESS)
++			efi_obj_list_initialized = ret;
 +	}
-+
-+	p->owner = NULL;
-+	u_p = (uintptr_t)(p->sz - (sizeof(void*) << 1) + (uintptr_t)p->ptr);
-+	u_p = (u_p >> 4) << 4;
-+	p->align_highptr = (void*)u_p;
-+	p->align_retptr  = (void*)(u_p - sizeof(void*));
-+	assert(p->sz > (16 + (sizeof(void*) << 1) + sizeof(void*)));
-+	p->align_limit = p->sz - 16 - (sizeof(void*) << 1);
-+
-+	return p;
++out:
++	co_exit();
 +}
 +
-+void co_stack_destroy(struct co_stack *s){
-+	if (!s)
-+		return;
-+	free(s->ptr);
-+	free(s);
-+}
++extern int udelay_yield;
 +
-+struct co *co_create(struct co *main_co,
-+		     struct co_stack *stack,
-+		     size_t save_stack_sz,
-+		     void (*fp)(void), void *arg)
-+{
-+	struct co *p = malloc(sizeof(*p));
-+	assert(p);
-+	memset(p, 0, sizeof(*p));
++#endif /* COROUTINES */
 +
-+	if (main_co) {
-+		assert(stack);
-+		p->stack = stack;
-+#ifdef __i386__
-+		// POSIX.1-2008 (IEEE Std 1003.1-2008) - General Information - Data Types - Pointer Types
-+		// http://pubs.opengroup.org/onlinepubs/9699919799.2008edition/functions/V2_chap02.html#tag_15_12_03
-+		p->reg[UCO_REG_IDX_RETADDR] = (void*)fp;
-+		// push retaddr
-+		p->reg[UCO_REG_IDX_SP] = p->stack->align_retptr;
-+#elif  __x86_64__
-+		p->reg[UCO_REG_IDX_RETADDR] = (void*)fp;
-+		p->reg[UCO_REG_IDX_SP] = p->stack->align_retptr;
-+#elif __aarch64__
-+		p->reg[UCO_REG_IDX_RETADDR] = (void *)fp;
-+		// FIXME setting to align_retptr causes a crash
-+		p->reg[UCO_REG_IDX_SP] = p->stack->align_highptr;
+ /**
+  * efi_init_obj_list() - Initialize and populate EFI object list
+  *
+@@ -216,6 +258,12 @@ out:
+ efi_status_t efi_init_obj_list(void)
+ {
+ 	efi_status_t ret = EFI_SUCCESS;
++#if CONFIG_IS_ENABLED(COROUTINES)
++	struct co_stack *stk = NULL;
++	struct co *main_co = NULL;
++	struct co *co1 = NULL;
++	struct co *co2 = NULL;
 +#endif
-+		p->main_co = main_co;
-+		p->arg = arg;
-+		p->fp = fp;
-+		if (!save_stack_sz)
-+			save_stack_sz = 64;
-+		p->save_stack.ptr = malloc(save_stack_sz);
-+		assert(p->save_stack.ptr);
-+		p->save_stack.sz = save_stack_sz;
-+		p->save_stack.valid_sz = 0;
-+	} else {
-+		p->main_co = NULL;
-+		p->arg = arg;
-+		p->fp = fp;
-+		p->stack = NULL;
-+		p->save_stack.ptr = NULL;
+ 
+ 	/* Initialize once only */
+ 	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
+@@ -224,6 +272,53 @@ efi_status_t efi_init_obj_list(void)
+ 	/* Set up console modes */
+ 	efi_setup_console_size();
+ 
++#if CONFIG_IS_ENABLED(COROUTINES)
++	main_co = co_create(NULL, NULL, 0, NULL, NULL);
++	if (!main_co) {
++		ret = EFI_OUT_OF_RESOURCES;
++		goto out;
 +	}
-+	return p;
-+}
 +
-+static void grab_stack(struct co *resume_co)
-+{
-+	struct co *owner_co = resume_co->stack->owner;
++	stk = co_stack_new(8192);
++	if (!stk) {
++		ret = EFI_OUT_OF_RESOURCES;
++		goto out;
++	}
 +
-+	if (owner_co) {
-+		assert(owner_co->stack == resume_co->stack);
-+		assert((uintptr_t)(owner_co->stack->align_retptr) >=
-+		       (uintptr_t)(owner_co->reg[UCO_REG_IDX_SP]));
-+		assert((uintptr_t)owner_co->stack->align_highptr -
-+				(uintptr_t)owner_co->stack->align_limit
-+			<= (uintptr_t)owner_co->reg[UCO_REG_IDX_SP]);
-+		owner_co->save_stack.valid_sz =
-+			(uintptr_t)owner_co->stack->align_retptr -
-+			(uintptr_t)owner_co->reg[UCO_REG_IDX_SP];
-+		if (owner_co->save_stack.sz < owner_co->save_stack.valid_sz) {
-+			free(owner_co->save_stack.ptr);
-+			owner_co->save_stack.ptr = NULL;
++	co1 = co_create(main_co, stk, 0, efi_disks_register_co, NULL);
++	if (!co1) {
++		ret = EFI_OUT_OF_RESOURCES;
++		goto out;
++	}
++
++	co2 = co_create(main_co, stk, 0, efi_tcg2_register_co, NULL);
++	if (!co2) {
++		ret = EFI_OUT_OF_RESOURCES;
++		goto out;
++	}
++
++	udelay_yield = 0xCAFEDECA;
++	do {
++		if (!co1->done)
++			co_resume(co1);
++		if (!co2->done)
++			co_resume(co2);
++	} while (!(co1->done && co2->done));
++	udelay_yield = 0;
++
++	co_stack_destroy(stk);
++	co_destroy(main_co);
++	co_destroy(co1);
++	co_destroy(co2);
++	stk = NULL;
++	main_co = co1 = co2 = NULL;
++
++	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED) {
++		/* Some kind of error was saved by a coroutine */
++		ret = efi_obj_list_initialized;
++		goto out;
++	}
++#else
+ 	/*
+ 	 * Probe block devices to find the ESP.
+ 	 * efi_disks_register() must be called before efi_init_variables().
+@@ -232,6 +327,13 @@ efi_status_t efi_init_obj_list(void)
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
+ 
++	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
++		ret = efi_tcg2_register();
++		if (ret != EFI_SUCCESS)
++			efi_obj_list_initialized = ret;
++	}
++#endif
++
+ 	/* Initialize variable services */
+ 	ret = efi_init_variables();
+ 	if (ret != EFI_SUCCESS)
+@@ -272,10 +374,6 @@ efi_status_t efi_init_obj_list(void)
+ 	}
+ 
+ 	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
+-		ret = efi_tcg2_register();
+-		if (ret != EFI_SUCCESS)
+-			goto out;
+-
+ 		ret = efi_tcg2_do_initial_measurement();
+ 		if (ret == EFI_SECURITY_VIOLATION)
+ 			goto out;
+@@ -350,6 +448,13 @@ efi_status_t efi_init_obj_list(void)
+ 	    !IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK_EARLY))
+ 		ret = efi_launch_capsules();
+ out:
++#if CONFIG_IS_ENABLED(COROUTINES)
++	co_stack_destroy(stk);
++	co_destroy(main_co);
++	co_destroy(co1);
++	co_destroy(co2);
+ 	efi_obj_list_initialized = ret;
++#endif
++
+ 	return ret;
+ }
+diff --git a/lib/time.c b/lib/time.c
+index d88edafb196..c11288102fe 100644
+--- a/lib/time.c
++++ b/lib/time.c
+@@ -17,6 +17,7 @@
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <linux/delay.h>
++#include <coroutines.h>
+ 
+ #ifndef CFG_WD_PERIOD
+ # define CFG_WD_PERIOD	(10 * 1000 * 1000)	/* 10 seconds default */
+@@ -190,6 +191,8 @@ void __weak __udelay(unsigned long usec)
+ 
+ /* ------------------------------------------------------------------------- */
+ 
++int udelay_yield;
++
+ void udelay(unsigned long usec)
+ {
+ 	ulong kv;
+@@ -197,7 +200,16 @@ void udelay(unsigned long usec)
+ 	do {
+ 		schedule();
+ 		kv = usec > CFG_WD_PERIOD ? CFG_WD_PERIOD : usec;
+-		__udelay(kv);
++		if (CONFIG_IS_ENABLED(COROUTINES) &&
++		    udelay_yield == 0xCAFEDECA) {
++			ulong t0 = timer_get_us();
 +			do {
-+				owner_co->save_stack.sz <<= 1;
-+				assert(owner_co->save_stack.sz > 0);
-+			} while (owner_co->save_stack.sz <
-+				 owner_co->save_stack.valid_sz);
-+			owner_co->save_stack.ptr =
-+				malloc(owner_co->save_stack.sz);
-+			assert(owner_co->save_stack.ptr);
++				co_yield();
++				__udelay(10);
++			} while (timer_get_us() < t0 + kv);
++		} else {
++			__udelay(kv);
 +		}
-+		if (owner_co->save_stack.valid_sz > 0)
-+			memcpy(owner_co->save_stack.ptr,
-+			       owner_co->reg[UCO_REG_IDX_SP],
-+			       owner_co->save_stack.valid_sz);
-+		if (owner_co->save_stack.valid_sz >
-+		    owner_co->save_stack.max_cpsz)
-+			owner_co->save_stack.max_cpsz =
-+				owner_co->save_stack.valid_sz;
-+		owner_co->stack->owner = NULL;
-+		owner_co->stack->align_validsz = 0;
-+	}
-+	assert(!resume_co->stack->owner);
-+	assert(resume_co->save_stack.valid_sz <=
-+	       resume_co->stack->align_limit - sizeof(void *));
-+	if (resume_co->save_stack.valid_sz > 0)
-+		memcpy((void*)
-+		       (uintptr_t)(resume_co->stack->align_retptr) -
-+				resume_co->save_stack.valid_sz,
-+		       resume_co->save_stack.ptr,
-+		       resume_co->save_stack.valid_sz);
-+	if (resume_co->save_stack.valid_sz > resume_co->save_stack.max_cpsz)
-+		resume_co->save_stack.max_cpsz = resume_co->save_stack.valid_sz;
-+	resume_co->stack->align_validsz =
-+		resume_co->save_stack.valid_sz + sizeof(void *);
-+	resume_co->stack->owner = resume_co;
-+}
-+
-+void co_resume(struct co *resume_co)
-+{
-+	assert(resume_co && resume_co->main_co && !resume_co->done);
-+
-+	if (resume_co->stack->owner != resume_co)
-+		grab_stack(resume_co);
-+
-+	current_co = resume_co;
-+	_co_switch(resume_co->main_co, resume_co);
-+	current_co = resume_co->main_co;
-+}
-+
-+void co_destroy(struct co *co){
-+	if (!co)
-+		return;
-+
-+	if(co_is_main_co(co)){
-+		free(co);
-+		current_co = NULL;
-+	} else {
-+		if(co->stack->owner == co){
-+			co->stack->owner = NULL;
-+			co->stack->align_validsz = 0;
-+		}
-+		free(co->save_stack.ptr);
-+		co->save_stack.ptr = NULL;
-+		free(co);
-+	}
-+}
+ 		usec -= kv;
+ 	} while(usec);
+ }
 -- 
 2.43.0
 
