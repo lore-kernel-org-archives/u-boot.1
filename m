@@ -4,93 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 021CAC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26EE7C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:53:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7067C807A8;
-	Mon, 20 Jan 2025 22:36:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=waldekranz.com
+	by phobos.denx.de (Postfix) with ESMTP id 9E03D80758;
+	Mon, 20 Jan 2025 22:53:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=waldekranz-com.20230601.gappssmtp.com header.i=@waldekranz-com.20230601.gappssmtp.com header.b="NnF+lW4q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ShBlymzG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50803807B4; Mon, 20 Jan 2025 22:36:45 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id EA1788032B; Mon, 20 Jan 2025 22:53:51 +0100 (CET)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA2738077F
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:36:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=waldekranz.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9642C8032B
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:53:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tobias@waldekranz.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5401d3ea5a1so4663435e87.3
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:36:42 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-3ce4b009465so13257675ab.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:53:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=waldekranz-com.20230601.gappssmtp.com; s=20230601; t=1737409002; x=1738013802;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=uTGO1ui+dsOTej7Vp+Y6fjOBDaIUW15hHKjm2y01UP8=;
- b=NnF+lW4qmXYHBp0BrBKYpkw98JhdOcKHDX9U6XkJRV/RxnOMrWB8LqyyAJA51KzMR2
- g2/Sg0fiL7Y8b6hXSBOmD7gBqZelKxtaqApQFARHmJuc1PRGus3a79oJhNGpuzZPWxIZ
- SrhoFCSswjW9qbc0G0EhFSnY4u6vBb6vysPkjRUYFFag+rxBDLlUalwcKSaAtmobUvRj
- 1Mye/x7mi4crEukSxBsyYmSDBZ76dq+Kn09cGTMIjghxTWTX2BiatebApKP+Jgb5/3US
- iWfwMZ/Q0gM6OHUp2ZLbQh7ulsTHUBJdnZzA8IQOd+apaFrvBjdQaP9V6KLH6YrF7DyA
- o8/w==
+ d=chromium.org; s=google; t=1737410028; x=1738014828; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pjzFXpGZBvYD9+QYUPpY5D9DcDf2jgdmfiWwp4xfpPI=;
+ b=ShBlymzGW2uhAQio7bDs6Vs2qJnPcswUouzy+Surl66bJRo8Q3Bw3IRg4mb1iuVbr/
+ Hgju0543VkzYFMWRKfa7hg8AI/aevcTC2ZURDcSzth8zVrSY+koS21/c8gaIMhfaFidM
+ CpyywG8XmliDLnR17dm02smA6XeY2i2GDT/JQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737409002; x=1738013802;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uTGO1ui+dsOTej7Vp+Y6fjOBDaIUW15hHKjm2y01UP8=;
- b=IeozDD6qrYFjXDCXdW0RF1vMluCNE7WS8zzvKRVtVG7hipL9CuM4UmN8Gy2Xhxhk3T
- JMQuKvLyJQ57LN0lF0Szs3q2HFjeknn9do7qD8wm/KRlYU9Mop2lYTic0znIcSeKLWNN
- eJnCTlR/g4QMlBPornSHdGBb7ceAGbcEksOgKETEMD57ywRaMGKo2Gh5a8gEeeyow/os
- rK0CeWHNd4yrXEQXGksG6biIZkRwYe1nC32ckV9Hm6JUupPVVTnw/52hIKK+i9n0Dxr7
- MkRh7CKnGHXiEWyyphDH4VXYGseOEzGk9ayKOSohe3bX5N9jICsSNNqe30VcTiwCPZPK
- DvMw==
-X-Gm-Message-State: AOJu0YxTgCTdWZwCRzZudfXyG0Iswx9Fnx5Ve1spFTf338FlAOrJxVP0
- aGJPqJS9JNogZTjxu0wdBKKlxOCSII3ecGYrlvcUOz94z70KFCo71JHeTZzo/5s=
-X-Gm-Gg: ASbGncsauoCjd5p67I65JUaKyGMNTHXpw6KLFsAKLv7eZVIEKFwDMs3VtjU6tShuOOh
- Jp6LUzsusE4isNfkGzW5DzEY52KgRsFVGwBFJw4WyYekrpetX+fnSSJYCmnA/H6Dx0TnlksyGms
- ad6S2j+7ELqoLI+/xwj1xh5wGj3zFSAevQSnGV1Oug0KX2/8Dst/+VGkpXcjqYwYspYmbEN7WMI
- eR5w9eMvWrs+Q2b41H/pJzWEt+ixxl+s2+ViFOs4XKfySiCyeYNeGYCMvoh4IeMLzN0NXtdWgLB
- FaGQi9+EZEmn7csaGwqvc2P2cIs=
-X-Google-Smtp-Source: AGHT+IH48yauQulWiFDa5WpbzxrkVx47f+LyyQ+k0kKUJd2dlywTMDMqgeBd5RD45moatKW/w5LwKw==
-X-Received: by 2002:a05:6512:3e03:b0:53d:e5c0:b9bc with SMTP id
- 2adb3069b0e04-5439c28743bmr5274771e87.50.1737409001580; 
- Mon, 20 Jan 2025 13:36:41 -0800 (PST)
-Received: from wkz-x13 (h-176-10-159-15.NA.cust.bahnhof.se. [176.10.159.15])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5439af07437sm1517414e87.25.2025.01.20.13.36.39
+ d=1e100.net; s=20230601; t=1737410028; x=1738014828;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pjzFXpGZBvYD9+QYUPpY5D9DcDf2jgdmfiWwp4xfpPI=;
+ b=FLOzDr9fhgHFK2WrVy0i02qKrwOBEcm+3CE/SGBa2qj1msVti8+QyMIufNHy2woawF
+ 0S3nESP73DniujhAwqATu4yoxhKxwODX4zICuvDYqVMXlggFr36aqU8GZlU8DfZTd/ro
+ MG3QtdEtnWDbe2fZrXefIf+X2ouwK84wxz3bF47xtvMu5r/HIm7K6JIqFSdJt6SJsAOI
+ eEm9DXyqDn1wQjM8/jPUqivJaIXhzn1q/k3Rf329Xs3OnFZYNHlVTvB1sRCS5QwcuGnj
+ hsqzz8woydj61oF26CkO1qfEtRIqNK0PDIS2skR6lvxHZhiGoX9nyDD476rn7xBrU/Cp
+ SRzw==
+X-Gm-Message-State: AOJu0YyLP6FWy56W9s9F9/gJOLP/pM656g+nD3DAsaq9pRhZVOtL+Y+a
+ 8tNCDnL9kDyKCDS9ri53igDlkU73QIK8JqRSLTNR+uUWUWpfMGhlBDJVe61UwuS7kFYJ9S2V/Rw
+ =
+X-Gm-Gg: ASbGncs2EXRyZYT5rzAIfyWP45VYnuq5Zu/zgJ3/vAueL2ow33n5UCiOm8/jNlQMjhI
+ 3qbPFN4xEjI9xG1NOwf9anxwANnn8z4tDF54No7H4jywfp+UTXojNA9N9XACLy2rSn6VS1QxUjW
+ ZcIthbtBIVJJ9N53O2tht4yABiZeVrP0M2zsbyI/9KfoF3DH6ELka/92BtTsO7mlnXib5n0YOiP
+ Cl89k1Bg35ST5U9YXjdbIvXDWZWzIFkxWEqHTER2bn7BZRRlBHTrUn7bLbp5tXKuKqAyI8M0Qp6
+ m7N1zoIaw+9zJCPv8qmCsjcx4T5RqZs=
+X-Google-Smtp-Source: AGHT+IFXLbfWnOtZ3JbBn/bXLrQxxq/fjAk3ZkPkIV7zPG3a1ibOM/ZrIpkesZ5fWO1lFJJO4z9wIA==
+X-Received: by 2002:a05:6e02:310c:b0:3ce:61a3:8647 with SMTP id
+ e9e14a558f8ab-3cf74419cefmr106697055ab.11.1737410027737; 
+ Mon, 20 Jan 2025 13:53:47 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.53.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:36:39 -0800 (PST)
-From: Tobias Waldekranz <tobias@waldekranz.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Anton Antonov <Anton.Antonov@arm.com>, Bin
- Meng <bmeng@tinylab.org>
-Subject: Re: [PATCH v3 4/5] blkmap: store type of blkmap device in
- corresponding structure
-In-Reply-To: <CADg8p95HGYytdP+_PrZThW_g56GJWA=UXW5yUmaO9NWXDmHoUA@mail.gmail.com>
-References: <20250120105045.1281262-1-sughosh.ganu@linaro.org>
- <20250120105045.1281262-5-sughosh.ganu@linaro.org>
- <877c6p7juk.fsf@waldekranz.com>
- <CADg8p96jX0eDKpxTuBLKS5vx=UJ=QLeBxnmfroUFYZ8VJWv1Pg@mail.gmail.com>
- <874j1t7dsw.fsf@waldekranz.com>
- <CADg8p9421OsmGMRfHCYqfeDJFN6+NFoc42tD5BSnGW69cYc49g@mail.gmail.com>
- <871pwx78yz.fsf@waldekranz.com>
- <CADg8p95HGYytdP+_PrZThW_g56GJWA=UXW5yUmaO9NWXDmHoUA@mail.gmail.com>
-Date: Mon, 20 Jan 2025 22:36:39 +0100
-Message-ID: <87y0z55frs.fsf@waldekranz.com>
+ Mon, 20 Jan 2025 13:53:47 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Gendin <agendin@matrox.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Bryan Brattlof <bb@ti.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julius Lehmann <lehmanju@devpi.de>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Massimiliano Minella <massimiliano.minella@se.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Ravi Minnikanti <rminnikanti@marvell.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 00/28] test: Complete the suite migration
+Date: Mon, 20 Jan 2025 14:53:00 -0700
+Message-ID: <20250120215340.617194-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,189 +110,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On tis, jan 21, 2025 at 00:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> On Mon, 20 Jan 2025 at 21:50, Tobias Waldekranz <tobias@waldekranz.com> w=
-rote:
->>
->> On m=C3=A5n, jan 20, 2025 at 21:10, Sughosh Ganu <sughosh.ganu@linaro.or=
-g> wrote:
->> > On Mon, 20 Jan 2025 at 20:06, Tobias Waldekranz <tobias@waldekranz.com=
-> wrote:
->> >>
->> >> On m=C3=A5n, jan 20, 2025 at 19:30, Sughosh Ganu <sughosh.ganu@linaro=
-.org> wrote:
->> >> > On Mon, 20 Jan 2025 at 17:55, Tobias Waldekranz <tobias@waldekranz.=
-com> wrote:
->> >> >>
->> >> >> On m=C3=A5n, jan 20, 2025 at 16:20, Sughosh Ganu <sughosh.ganu@lin=
-aro.org> wrote:
->> >> >> > Add information about the type of blkmap device in the blkmap
->> >> >> > structure. Currently, the blkmap device is used for mapping to e=
-ither
->> >> >> > a memory based block device, or another block device (linear
->> >> >> > mapping). Put information in the blkmap structure to identify if=
- it is
->> >> >> > associated with a memory or linear mapped device. Which can then=
- be
->> >> >> > used to take specific action based on the type of blkmap device.
->> >> >>
->> >> >> Is this restriction really necessary? Why should it not be possibl=
-e to
->> >> >> setup a block map like this:
->> >> >>
->> >> >>  myblkmap:
->> >> >> .--------.      .-----.
->> >> >> | slice0 +------> RAM |
->> >> >> :--------:      '-----'     .-------.
->> >> >> | slice1 +------------------> eMMC0 |
->> >> >> :--------:      .-------.   '-------'
->> >> >> | slice2 +------> eMMC1 |
->> >> >> '........'      '-------'
->> >> >>
->> >> >> Linux's "device mapper", after which blkmaps are modeled, works in=
- this
->> >> >> way.  I.e. a blkmap is just a collection of slices, and it is up t=
-o each
->> >> >> slice how its data is provided, meaning that the user is free to c=
-ompose
->> >> >> their virtual block device in whatever way they need.
->> >> >
->> >> > The blkmap structure, the way it is designed, is pointing to the
->> >> > underlying block device. How can a single blkmap then be associated
->> >>
->> >> The `struct udevice *blk` from `struct blkmap` is a reference to the
->> >> block device which represents the block map itself ("myblkmap" in the
->> >> picture above), not any lower device.
->> >
->> > Okay. I got confused with the comment associated with that member,
->> > which says, "Underlying block device". This I interpreted to be the
->> > block device that is associated with the blkmap structure.
->>
->> Yeah I agree that it could be made clearer :)
->>
->> >>
->> >> > with slices of different types? Would that not contravene with the
->> >> > idea of a block device associating with a blkmap?
->> >>
->> >> For slices which are linear mappings (and are thus backed by some oth=
-er
->> >> underlying block device), their reference to that lower device ("eMMC=
-0"
->> >> and "eMMC1" above) is stored in the `struct udevice *blk` member of
->> >> `struct blkmap_linear`.
->> >
->> > Okay. But then, the computation of the blocksize seems to be happening
->> > at the blkmap device level, which again implies having the same set of
->> > slices associated with the blkmap. Any reason why the blksize is not
->> > taken from the block device associated with that slice? That would
->> > make it clear that the slice mapping type is independent from the
->> > parent blkmap device.
->>
->> In the original series, only linear mappings to devices which used block
->> sizes of 512 was supported, precisely because otherwise you need to do
->> proper translation to work in all cases.
->>
->> I tried to argue this point on the list back then:
->> https://lore.kernel.org/u-boot/875y3wohrt.fsf@waldekranz.com/
->> but I did not get my point across and the restriction was lifted anyway.
->>
->> >>
->> >> Slices which are backed by memory does not have any reference to a lo=
-wer
->> >> device, but merely a pointer to the start of the mapping - `void *add=
-r`
->> >> in `struct blkmap_mem`.
->> >>
->> >> The overarching idea is that the block map does not have to know
->> >> anything about the implementation of how any individual slice chooses=
- to
->> >> provide its data.  It only knows about their sizes and offsets.  Based
->> >> on that information, it simply routes incoming read/write requests to
->> >> the correct slice.
->> >
->> > Okay. I think, for my solution, I will just need to move type
->> > identification to the slice, instead of the blkmap device.
->> >
->> >>
->> >> >>
->> >> >> Looking at the pmem patch that follows this one, I am not able to =
-find
->> >> >> anything that would motivate restricting the functionality either.
->> >> >
->> >> > The subsequent patch is adding the persistent memory node to the
->> >> > device-tree. The pmem node that is to be added is the memory mapped
->> >> > blkmap device. The logic does check for the type of the blkmap devi=
-ce
->> >> > and then proceeds to add the pmem node only for the memory mapped
->> >> > blkmaps.
->> >>
->> >> Sorry I am confused.  Why do you need a block map device to add the p=
-mem
->> >> node to the device tree?
->> >
->> > This is needed to include the RAM based block device information in
->> > the device-tree as pmem node. The OS installer then uses this pmem
->> > device as the block device which contains the installation packages,
->> > and proceeds with the OS installation.
->>
->> But even if the user has not setup a blkmap, don't you want to inject
->> the pmem node in the DT anyway?  All you need is the size and offset of
->> the blob right?  Is that not available from `image_setup_libfdt()`?
->
-> Not sure if I am getting your point. The image_setup_libfdt() function
-> is fixing up the devicetree before it gets passed on to the OS. In my
-> subsequent patch, the image_setup_libfdt() is calling the blkmap
-> helper function (added in that patch) to check for any memory mapped
-> blkmap devices, and add corresponding pmem nodes for those. The
-> current case where this is happening in U-Boot is as part of
-> EFI_HTTP_BOOT, where if an ISO or an img file has been obtained over
-> the network, it gets mounted as a blkmap device, and that gets
-> notified to the OS. So, if this happens to be an install image, the
-> kernel knows about it through the pmem node in the DT.
+This series completes the removal of test commands for suites. With this
+it is possible to declare a suite (including init and uninit functions)
+without needing to write a command.
 
-Alright, but then it seems like the implementation of EFI_HTTP_BOOT is
-the one with enough context to known when to add the pmem node, no?
-Could it not use the event subsystem to register a fixup?  I.e. when it
-creates the block map, it also ought to know that the image must be
-protected.  I imagine something like (pseudo code, but you get the
-idea):
-
-+struct efi_pmem {
-+    void *base;
-+    size_t size;
-+}
-+
-+efi_add_pmem(void *_pmem, struct event *event)
-+{
-+    const struct event_ft_fixup *fixup =3D &event->data.ft_fixup;
-+    struct efi_pmem pmem =3D _pmem;
-+
-+    fdt_fixup_pmem_region(fixup->tree, pmem->addr, pmem->size);
-+    free(pmem);
-+}
-
- efi_http_boot()
- {
-     ...
-     bm =3D blkmap_ramdisk_create(imgbase, imgsize);
-+    if (needs_protection) {
-+        struct efi_pmem *pmem =3D xmalloc(sizeof(*pmem));
-+        pmem->base =3D imgbase;
-+        pmem->size =3D imgsize;
-+        event_register("efi_add_pmem", EVT_FT_FIXUP, efi_add_pmem, pmem);
-+    }
-    ...
- }
+It also adds timing for test suites, so we can keep track of how long
+things take.
 
 
-> If you are referring to a scenario where the memory based block device
-> does not get set up as a blkmap device, that will anyways require
-> explicit intervention of the user to add the pmem node, because
-> otherwise there is no way to find out existence of such a device. This
-> can then be done through an explicit command. But the EFI_HTTP_BOOT
-> use-case does require scanning for the memory base blkmap devices.
+Simon Glass (28):
+  test: Fix a stray asterisk in ut_run_list()
+  test: Add up the number of tests manually
+  test: Keep track of suite duration
+  test: Show the average time per test
+  test: Leave out the prefix when printing test names
+  test: Support an init/uninit functions for test suites
+  test: Tweak FDT-overlay tests
+  test: Move env-test rule into test/
+  test: Move optee-test rule into test/
+  test: Move fdt-overlay-test rule into test/
+  test: Make all tests depend on UNIT_TEST
+  test: Move fdt_overlay init into a function
+  test: Update fdt_overlay test to use fdtdec functions
+  test: Update fdt_overlay to do init from tests
+  test: Drop the function for running fdt_overlay tests
+  test: Update bootstd to do init from tests
+  test: Drop the function for running bootstd tests
+  test: Update optee to do init and uninit from tests
+  test: Split optee tests into three functions
+  test: Drop the function for running optee tests
+  test: Rename optee test-file
+  test: Drop support for test commands
+  test: Make cmd_ut_category() static
+  test: Drop suites.h
+  test: Allow running a selection of suites
+  test: Move code out of cmd_ut_category()
+  test: Do flag-processing in the correct place
+  test: Update documentation
 
-With the approach above, I think we could get out of marking every
-configured blkmap as reserved (which might not be what the user wants),
-and instead let the creator of the device decide on whether this is
-needed or not.
+ Makefile                                      |   3 -
+ doc/develop/tests_writing.rst                 |  52 ++--
+ doc/usage/cmd/ut.rst                          | 145 ++++++++---
+ drivers/timer/sandbox_timer.c                 |   5 +
+ include/test/fdt_overlay.h                    |  19 ++
+ include/test/optee.h                          |   4 +-
+ include/test/overlay.h                        |  15 --
+ include/test/suites.h                         |  43 ----
+ include/test/test.h                           |  28 ++
+ include/time.h                                |  15 +-
+ test/Kconfig                                  |  23 +-
+ test/Makefile                                 |   3 +
+ test/boot/bootdev.c                           |   1 -
+ test/boot/bootflow.c                          |   1 -
+ test/boot/bootm.c                             |   1 -
+ test/boot/bootmeth.c                          |   1 -
+ test/boot/bootstd_common.c                    |  29 +--
+ test/boot/bootstd_common.h                    |  10 +-
+ test/boot/expo.c                              |   1 -
+ test/boot/image.c                             |   1 -
+ test/boot/measurement.c                       |   1 -
+ test/boot/upl.c                               |   1 -
+ test/boot/vbe_simple.c                        |   4 -
+ test/cmd/addrmap.c                            |   1 -
+ test/cmd/bdinfo.c                             |   1 -
+ test/cmd/exit.c                               |   1 -
+ test/cmd/fdt.c                                |   1 -
+ test/cmd/font.c                               |   1 -
+ test/cmd/loadm.c                              |   1 -
+ test/cmd/mbr.c                                |   1 -
+ test/cmd/pci_mps.c                            |   1 -
+ test/cmd/seama.c                              |   1 -
+ test/cmd/setexpr.c                            |   1 -
+ test/cmd_ut.c                                 | 243 ++++++++++--------
+ test/common/bloblist.c                        |   1 -
+ test/dm/Kconfig                               |   2 +-
+ test/env/Kconfig                              |   1 -
+ test/env/cmd_ut_env.c                         |   1 -
+ test/{overlay => fdt_overlay}/Kconfig         |   4 +-
+ test/{overlay => fdt_overlay}/Makefile        |   2 +-
+ .../cmd_ut_fdt_overlay.c}                     | 221 +++++++---------
+ .../test-fdt-base.dts                         |   0
+ .../test-fdt-overlay-stacked.dtso             |   0
+ .../test-fdt-overlay.dtso                     |   0
+ test/log/cont_test.c                          |   1 -
+ test/log/nolog_test.c                         |   1 -
+ test/log/pr_cont_test.c                       |   1 -
+ test/log/syslog_test.c                        |   1 -
+ test/log/syslog_test_ndebug.c                 |   1 -
+ test/optee/Kconfig                            |   2 +-
+ test/optee/Makefile                           |   2 +-
+ test/optee/{cmd_ut_optee.c => optee.c}        | 105 +++++---
+ test/py/tests/test_suite.py                   |  34 ++-
+ test/test-main.c                              |  41 ++-
+ 54 files changed, 587 insertions(+), 493 deletions(-)
+ create mode 100644 include/test/fdt_overlay.h
+ delete mode 100644 include/test/overlay.h
+ delete mode 100644 include/test/suites.h
+ rename test/{overlay => fdt_overlay}/Kconfig (81%)
+ rename test/{overlay => fdt_overlay}/Makefile (89%)
+ rename test/{overlay/cmd_ut_overlay.c => fdt_overlay/cmd_ut_fdt_overlay.c} (56%)
+ rename test/{overlay => fdt_overlay}/test-fdt-base.dts (100%)
+ rename test/{overlay => fdt_overlay}/test-fdt-overlay-stacked.dtso (100%)
+ rename test/{overlay => fdt_overlay}/test-fdt-overlay.dtso (100%)
+ rename test/optee/{cmd_ut_optee.c => optee.c} (70%)
+
+-- 
+2.43.0
+
