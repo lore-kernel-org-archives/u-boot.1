@@ -4,49 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79823C02182
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 23:25:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23341C02182
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 23:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 371A180759;
+	by phobos.denx.de (Postfix) with ESMTP id 884398077F;
 	Tue, 21 Jan 2025 00:25:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="HCjW7d0h";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="aGplxZ9Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F582805C5; Mon, 20 Jan 2025 20:43:17 +0100 (CET)
-Received: from mail-4018.proton.ch (mail-4018.proton.ch [185.70.40.18])
+ id EC475800C2; Mon, 20 Jan 2025 20:43:18 +0100 (CET)
+Received: from mail-4022.proton.ch (mail-4022.proton.ch [185.70.40.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3918800C2
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 20:43:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E57AA801F5
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 20:43:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1737402193; x=1737661393;
- bh=yFrvn4uUcAhTPGnhvnCsSg278RcSgRDkFaEsPTteqSQ=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
- List-Unsubscribe:List-Unsubscribe-Post;
- b=HCjW7d0hwPEts7E2SDXGWIWj6ALRKT28eIONoPdj5VMkJTQuhHtfprePftk8BQbl1
- 6GIOwJZL5O4nUA9yDZc331+LMyCIppxae0J8/HvnX7oB5QrBHXp6TeFlM0AWQ9j0Gn
- rSwqtlvo55zD5SCmqIHr3xoivpVRXfHJG7suBuQB15vHS8KRFDBBEbeoglJaBvRIf8
- C65cF0+mSaZhIzyHXPLEsIaS3zh2Uo1RjXxEu38TQEZCF0kLTXHKSJENM20H8bTLsE
- yfR+dRhvJVIHJAXsyBTM+D1K4x/K9/V7yXDFoqezFvpihHngwu38wglh9fwdSF1Ad/
- juqmkn3eGj+3A==
-Date: Mon, 20 Jan 2025 19:43:07 +0000
+ s=protonmail3; t=1737402196; x=1737661396;
+ bh=BYwJtdYixR6z5TOdJokIDrGm7stkdsrc2Y/rrjWJcWI=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=aGplxZ9ZIGuuDbK8IrerML4VU/VnB8yIijHPPuwUvu63DvSlHMtBXpGWlUraFvMuW
+ yYzzOx9qVJee0nOBPtyOwuY2/GY9SyeEnR7s0oascy3YIyo7TiJy/+GOml04QOmH1Z
+ sBCtroUso5u32o49GWUa44663Zz2Yk1Je6j8zlrjBFrLp0NMf2Oou8r+LgPiWTEEpt
+ SEFkUijDMu/8Vt2TI4DjoHKZOzztj7HWDhLRaxezueFrURV6u6TOjS/FGAOBEsqGhW
+ klwq6aq4m+cWaJQFSv6bSdh2OsiKtRHIQ9SlZ1287m4H4QztsWybv6IQvZ/ZJD7vRZ
+ pvIdbziQ+wkFA==
+Date: Mon, 20 Jan 2025 19:43:13 +0000
 To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
  Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
  Matthias Brugger <mbrugger@suse.com>
 From: Sam Day <me@samcday.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH 0/2] mach-snapdragon: Fix and improve /memory parsing
-Message-ID: <20250120-qcom-parse-memory-updates-v1-0-54a7f0550cff@samcday.com>
+Subject: [PATCH 1/2] mach-snapdragon: pass fdt to qcom_parse_memory
+Message-ID: <20250120-qcom-parse-memory-updates-v1-1-54a7f0550cff@samcday.com>
+In-Reply-To: <20250120-qcom-parse-memory-updates-v1-0-54a7f0550cff@samcday.com>
+References: <20250120-qcom-parse-memory-updates-v1-0-54a7f0550cff@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 79986b1cd9ad2b522e911619dd6c812552a2c28f
+X-Pm-Message-ID: 225cdbde7600f817dad83d1b4ec239993c70b050
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -67,45 +69,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The first commit in this series is a fix for qcom_parse_memory, which is
-currently broken on master (since fc37a73e6679). It's an alternative to
-the patch Caleb proposed a couple of days ago
-(20250117102734.3725009-2-caleb.connolly@linaro.org). This approach
-results in a smaller diff, and also makes it possible to do the thing
-introduced in the second commit.
+commit fc37a73e6679 ("fdt: Swap the signature for
+board_fdt_blob_setup()") introduced a subtle change to the Snapdragon
+implementation, removing the assignment to gd->fdt_blob partway through
+the function.
 
-The second commit introduces the ability to boot with an internal DT
-that lacks a fully specified /memory node, instead obtaining that
-information from the FDT supplied by the previous bootloader.
+This breaks qcom_parse_memory() which was also called during
+board_fdt_blob_setup().
 
-The first commit should ideally land even if the second one needs more
-rounds before it's ready. I opted to submit both commits together as one
-series because, as noted earlier, the way the fix is done introduces
-functionality that the second commit relies on (specifically: passing
-the pointer of the specific FDT to parse for its /memory node).
+The underlying issue here is that qcom_parse_memory is using the of_ api
+to traverse a devicetree, which relies on the fdt_blob in global data.
 
-I've tested both these commits together on an msm8916 device and an
-sdm845 device. The msm8916 device booted with an internal DT that relies
-on /memory in the external FDT to properly function. The sdm845 device
-booted with an entirely external FDT. So I reckon I hit all the various
-code paths in both qcom_parse_memory and board_fdt_blob_setup.
+Rather than relying on this subtle behaviour, explicitly pass the FDT
+that should be consulted for a /memory node.
 
+Using the OF API is typically preferable because it's easier to read,
+but using the lower level fdt_ methods instead here doesn't add too much
+complexity, I think.
+
+Finally, a minor tweak was made to board_fdt_blob_setup to use the
+passed fdt blob pointer instead of gd->fdt_blob, which removes the last
+of the references to global data in this area.
+
+Fixes: fc37a73e6679 (fdt: Swap the signature for board_fdt_blob_setup())
 Signed-off-by: Sam Day <me@samcday.com>
 ---
-Sam Day (2):
-      mach-snapdragon: pass fdt to qcom_parse_memory
-      mach-snapdragon: support parsing memory info from external FDT
+ arch/arm/mach-snapdragon/board.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
- arch/arm/mach-snapdragon/Kconfig | 13 ++++++++
- arch/arm/mach-snapdragon/board.c | 68 ++++++++++++++++++++++++++----------=
-----
- 2 files changed, 58 insertions(+), 23 deletions(-)
----
-base-commit: 639cd409987acf173eaffebe7876968b42fd7c32
-change-id: 20250120-qcom-parse-memory-updates-96ffe248cdf1
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/bo=
+ard.c
+index f1319df4314783622bb5f4f2410d1d4fd28a1c83..2ef936aab757c7045729a2dd919=
+44f4f9bff917e 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -88,20 +88,21 @@ int dram_init_banksize(void)
+ =09return 0;
+ }
+=20
+-static void qcom_parse_memory(void)
++static void qcom_parse_memory(const void *fdt)
+ {
+-=09ofnode node;
++=09int offset;
+ =09const fdt64_t *memory;
+ =09int memsize;
+ =09phys_addr_t ram_end =3D 0;
+ =09int i, j, banks;
+=20
+-=09node =3D ofnode_path("/memory");
+-=09if (!ofnode_valid(node)) {
++=09offset =3D fdt_path_offset(fdt, "/memory");
++=09if (offset < 0) {
+ =09=09log_err("No memory node found in device tree!\n");
+ =09=09return;
+ =09}
+-=09memory =3D ofnode_read_prop(node, "reg", &memsize);
++
++=09memory =3D fdt_getprop(fdt, offset, "reg", &memsize);
+ =09if (!memory) {
+ =09=09log_err("No memory configuration was provided by the previous bootlo=
+ader!\n");
+ =09=09return;
+@@ -158,7 +159,7 @@ int board_fdt_blob_setup(void **fdtp)
+=20
+ =09fdt =3D (struct fdt_header *)get_prev_bl_fdt_addr();
+ =09external_valid =3D fdt && !fdt_check_header(fdt);
+-=09internal_valid =3D !fdt_check_header(gd->fdt_blob);
++=09internal_valid =3D !fdt_check_header(*fdtp);
+=20
+ =09/*
+ =09 * There is no point returning an error here, U-Boot can't do anything =
+useful in this situation.
+@@ -181,7 +182,7 @@ int board_fdt_blob_setup(void **fdtp)
+ =09 * Parse the /memory node while we're here,
+ =09 * this makes it easy to do other things early.
+ =09 */
+-=09qcom_parse_memory();
++=09qcom_parse_memory(*fdtp);
+=20
+ =09return ret;
+ }
 
-Best regards,
 --=20
-Sam Day <me@samcday.com>
+2.47.1
 
 
