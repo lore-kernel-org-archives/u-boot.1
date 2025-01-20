@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64D86C02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327D0C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:55:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79B72807D9;
-	Mon, 20 Jan 2025 22:54:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C983C80815;
+	Mon, 20 Jan 2025 22:54:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YH5YuntS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bhjy5zdk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9213F807EC; Mon, 20 Jan 2025 22:54:09 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id C1CA3807D9; Mon, 20 Jan 2025 22:54:10 +0100 (CET)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DE3C807F1
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:54:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 977C7807E5
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:54:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-844e9b83aaaso422609839f.3
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:54:06 -0800 (PST)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-3ce85e37887so50244785ab.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:54:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737410044; x=1738014844; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737410046; x=1738014846; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V7ao0bEf8eDEejBcn1+OJH9PSYtG+AfA/EcNhQXLuIA=;
- b=YH5YuntSpjiNgeK9klqYWr39sWb0hZzxxvLRK+hXDk2rZefxNx3peRs5ItFKB4TCk1
- 9K3hVSPhOxmkC16T8QOZduREFg3RoK++K9Xo9lyD3NNIdc1HN2teoMdFjH0dg1+BXxOQ
- +21nPU1gXdeyL31ioHCwI0ckYlz0coVR0IyLU=
+ bh=2EDtNef9SbXt4CfoHyWV9IDtji8nsuwJD5xm00M44kk=;
+ b=bhjy5zdkPrPhXUo92UZVWL429wdnV0XI1lt0TOrnQ7tWEZSb2tI6z72z0t6KpDK4+v
+ Ec+F6nlrr9IayjXwdZzfCmbZfTHgOsVosmbSI97bioNLRA3wz6/tyHjFF4jwwO5pI3sj
+ dt15NYlTwAr4vEF9+Hq5RzBIqA8vbot9gcAhM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737410044; x=1738014844;
+ d=1e100.net; s=20230601; t=1737410046; x=1738014846;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V7ao0bEf8eDEejBcn1+OJH9PSYtG+AfA/EcNhQXLuIA=;
- b=mwCZXdMsGAiDjcOxEGzpmhZeo7RfyJNUvkedagxpj4oObJ3lq9VQMmqjcrhxMH3ANR
- GN9OngLu4gKvVFhz6PzEzATX1qBSEgGsWFZGWj0AdGx7Uj42btHOWoGyoNFr/6UZMbVR
- uooydZylUteF85zpOtCu0eKE2x8ak17rOyrWJuBfFI2+GI6FNAwYg6u/lbmHnen+RkxM
- lzl3U6NtT/rEvGEFsfKF7wu5Z0m3OC8AxJpvvxVj3tPL+eVAXSrg6bZgzeLQlZd3NTiR
- CoL+rZAZ/1oZG00gDlw7p8yEkWs+7p4qWutKq5vcIn3Gr6IL6eE9sljmFutgSp0r2g8R
- 9ccw==
-X-Gm-Message-State: AOJu0YyR8bDx79dPmqiJuJq9pJsVCduEVOmD+Uzu15UQkooqozngFB0F
- s7fUW4P6dwh2tOlv4AwsOoqu9ySU5Ari4bTvUvTCF5u3SbKKj0ADAPD6FuH/2gG6kIp08kHLrto
+ bh=2EDtNef9SbXt4CfoHyWV9IDtji8nsuwJD5xm00M44kk=;
+ b=uGNFTJXMBRboijRil3sfZ7nYNTL2GWN6i1PgMqF3PFhpKy9Gf0js8QzDk2oQhF+Mfm
+ LtGgBrs4cYXCByvdYWpQ82nMn+S2LewkJI3gz8T9x8z+Ws+ru8SU6PmF9Iobc+06KxDB
+ B7ApPmqQ5LpIC/k/whj4XR3cdfSacd/RBWdDwvFx9RqgJ38KlyWQIegE5+6n2Gdu2izT
+ tX7caO9WNS+8cupV5NZVqMtuFUQAOJDFHYhpmVsrEO4L38CGXGtMIHzr2vDQi63thxri
+ 3kIS9NYrdLbFOD1STIaZwfHAWV2F2dkNerb6Xahfw3Uj/CRsjIuAneFHwFBRQ74GV5x1
+ wOZg==
+X-Gm-Message-State: AOJu0YzU8jn/NaOnvCKoMlp2VL0WyB9BevxLpzn/8uPuyV0C+8mY9/2x
+ cyVPbBecBpeXi30QhxIxRHx390N2ylcxPT05BJb7c6ZlarXc64jDr1pnL1jR1kbSdspSxAMsXmE
  =
-X-Gm-Gg: ASbGncvMpXAlZk4L42URYqYeNdmF7KPkHrfUpCpBN8hpA6pOAwZ8JdTVoHKCiF6/72g
- Jz3x9Tudphj6NAQjGXCH5x0+qwYG5kuGWhEFFkS0IpfAX8JNxt3ZLS/U8nhsj5SkjEVLq+CzVEh
- l3RaPjrQSjOUyu6jWCyfsI1QLYKWJK6RdVr7FfHabqwBkpm7tMo8JQFBBLCmJYX2CUtOzxdn0zB
- zX182jKeXUHAHhzxpKy9I/W4SaWMWIUvncon4uyas8YWPuVNBEL1xbrfHWuaBob3J3msjuGoYI6
- u4WnrN4KdijLcGGYclDMsF7Yso9/OlM=
-X-Google-Smtp-Source: AGHT+IFSD+pZ7xhON0ugK23tfF7bnZ9kWd6li6kHsW/cclMWurKN0Rbvt1A0ueW52WptYKx3elUIuA==
-X-Received: by 2002:a05:6602:751a:b0:843:ec18:82e2 with SMTP id
- ca18e2360f4ac-851b623f79bmr1264790039f.8.1737410044401; 
- Mon, 20 Jan 2025 13:54:04 -0800 (PST)
+X-Gm-Gg: ASbGncuV1TIxaErrm8hlSluvU14Lp5n57X2ym7VJWzonp5HeFioGQuu0zGm8HH2ee7j
+ 1zRwM6oP+osuvl/UVToq209npvq2WgoW7ULC0wchBtH8VdMjR6/F9GJKqeu32JmFv9nKLwjQDe8
+ X+/BXU78iIRzL+GOozjlPKsd9u8HpkbbiCxAMXkx8QOyMkhMiRu2SLelq9r8ba/B29yIT2T/yXd
+ aqOO5Ufysc50t2It4Hd25OaK1vUD8BuHyhesVuk+4VhVQUFicL/dlLPymOPB9/t5LOmmLXCxfi6
+ fxcgdv7z8xDPZazM6+ugTrjOxCtrGM4=
+X-Google-Smtp-Source: AGHT+IFOnkAhdt+UqckwQBGRxnCKQlO7fvRcMXMqjJtwqC6E3zXq2BFlqHSnoc+ldejfa7XkDnrHDw==
+X-Received: by 2002:a92:c26b:0:b0:3a7:d792:d6c4 with SMTP id
+ e9e14a558f8ab-3cf744beabemr143077785ab.21.1737410046441; 
+ Mon, 20 Jan 2025 13:54:06 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.54.02
+ 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.54.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:54:03 -0800 (PST)
+ Mon, 20 Jan 2025 13:54:04 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bryan Brattlof <bb@ti.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/28] test: Move optee-test rule into test/
-Date: Mon, 20 Jan 2025 14:53:09 -0700
-Message-ID: <20250120215340.617194-10-sjg@chromium.org>
+Subject: [PATCH 10/28] test: Move fdt-overlay-test rule into test/
+Date: Mon, 20 Jan 2025 14:53:10 -0700
+Message-ID: <20250120215340.617194-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250120215340.617194-1-sjg@chromium.org>
 References: <20250120215340.617194-1-sjg@chromium.org>
@@ -96,7 +96,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 The Makefile rules for tests should be within test/Makefile so move the
-'optee' rule over.
+'fdt-overlay' rule over.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -106,29 +106,29 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
  2 files changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index c86e289718b..5d1b3d0f217 100644
+index 5d1b3d0f217..655359d254a 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -893,7 +893,6 @@ ifdef CONFIG_POST
  libs-y += post/
  endif
  libs-$(CONFIG_$(PHASE_)UNIT_TEST) += test/
--libs-$(CONFIG_UT_OPTEE) += test/optee/
- libs-$(CONFIG_UT_FDT_OVERLAY) += test/fdt_overlay/
+-libs-$(CONFIG_UT_FDT_OVERLAY) += test/fdt_overlay/
  
  libs-y += $(if $(wildcard $(srctree)/board/$(BOARDDIR)/Makefile),board/$(BOARDDIR)/)
+ 
 diff --git a/test/Makefile b/test/Makefile
-index 17716ef384a..5ef8c379cb2 100644
+index 5ef8c379cb2..99d4797d968 100644
 --- a/test/Makefile
 +++ b/test/Makefile
-@@ -14,6 +14,7 @@ endif
- ifneq ($(CONFIG_HUSH_PARSER),)
- obj-$(CONFIG_$(XPL_)CMDLINE) += hush/
- endif
-+obj-$(CONFIG_UT_OPTEE) += optee/
- obj-y += ut.o
- 
- ifeq ($(CONFIG_XPL_BUILD),)
+@@ -21,6 +21,7 @@ ifeq ($(CONFIG_XPL_BUILD),)
+ obj-y += boot/
+ obj-$(CONFIG_UNIT_TEST) += common/
+ obj-$(CONFIG_UT_ENV) += env/
++obj-$(CONFIG_UT_FDT_OVERLAY) += fdt_overlay/
+ obj-y += log/
+ else
+ obj-$(CONFIG_SPL_UT_LOAD) += image/
 -- 
 2.43.0
 
