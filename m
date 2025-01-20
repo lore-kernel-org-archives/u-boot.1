@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 468AAC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:56:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43059C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:56:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F35C8081A;
-	Mon, 20 Jan 2025 22:54:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8154E80758;
+	Mon, 20 Jan 2025 22:54:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="inCMYLY8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LFVhj28e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 112A180771; Mon, 20 Jan 2025 22:54:24 +0100 (CET)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id 2E09C8081A; Mon, 20 Jan 2025 22:54:26 +0100 (CET)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAF33807C4
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:54:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66BEA8091A
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:54:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-3a8146a8ddaso12736755ab.1
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:54:21 -0800 (PST)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3a9caa3726fso14328135ab.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:54:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737410059; x=1738014859; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737410061; x=1738014861; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SqfAeNEw1wcOybaRwG+McSp4Rj9oXkbsB/fC3wgbr0I=;
- b=inCMYLY8hEeOWB5RBjCIw5cXRx07Qz/XnDuqXAVNURC5Ue7mP7Jzf9/hhQBpfEtIDy
- pjhCuqm3ngwFCDafeB6+bbpJgixsBG7e5S+10gRpAjTjvt19oacUUE8OVtIpPLaNAPOf
- yemGMebz0Zf1LgnGsdN9dp12EvLPg+/T0KS/E=
+ bh=KtfxNGXbYOLkmHm1Pwot8wpDrrpMGO+KVId3EuAMYw8=;
+ b=LFVhj28eVRa/4Xle7rzSmwAAc5Voq/lVFN1vGQPRSONHmT7hXwPPrs0eu/KATWCTVY
+ /ExZgV4uHwtkzNnixCSOskjku/UTPKtzYDCoiDqu/MpWuJQgdTwjT/YH0GAaHbtNUlsG
+ jEWqSIu3OvLd47S25bJyNvMzictzxUI6JY24I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737410059; x=1738014859;
+ d=1e100.net; s=20230601; t=1737410061; x=1738014861;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SqfAeNEw1wcOybaRwG+McSp4Rj9oXkbsB/fC3wgbr0I=;
- b=mDQ4f3CdgQCo8IP3vb1HfF8vjzZ49q9VTeMz/VR2US7HQno8FXvCLqccR7Rx47vtHS
- K2INpuMZ3M9GiXFNk7psdyd7D3FlNgHYSv5rfllGnU0Hsoct2phO00I6sshAHYo3HQuI
- ajK0gTf68gAz7b1gQfj3BXChTh87SKxJYDqgWLTLAemBpTbolJj1ELoXFZ5kHMiCAZ9U
- KUCqZVQfbHQcSqVlhoQOrzpbvSg103nXqXYWGCec2IV6q4fKjRXCyRghZeSeU65no8H2
- GmR95qxj+pfB4fLi7ujQgYDhYjdQD5NDM+OUO3/wPEN7byV3dO5S80f/IEDbFpW1upp0
- aRqg==
-X-Gm-Message-State: AOJu0Yx2NFPfbWKxLy01zcdXsQ8S5zR1ByZ9TRxS3iBZLZK2X1Td5UNC
- mBs+n4Tz3xnb+xaJC8hcaBBPafoCwKiYxgp2UTnezUEuanYM4hWzkXT4dQteOoqXVmKq2MgOtgU
+ bh=KtfxNGXbYOLkmHm1Pwot8wpDrrpMGO+KVId3EuAMYw8=;
+ b=Nc/osG7OrSOR2MwhOy1a/xF7z0WSH1I4gPT/xXFfP+hbjD1P8upD46GIoPrwFxd5lb
+ 8YcHu4vFUfQgtP5GGc6gSFjsyp6xGUuH3SDNzRrl95Bd6FBAisxUN6YcvwkTYbC8upZq
+ sVDlzvADGRCHgzEFPxkdac0TgvJqglOtKOGMqe/QBPAxQtAOljgJzPCtkMBlXKQjO8gQ
+ 8eQBp3XWweAWDyolix2xn1PEAEyBBcmqthfzqUH8LWexOKYNdPBf6WmhW3Gj/ao+RgLJ
+ vmxU56WJuEyiPVVA93t4QjVn38ivJT232hKhqBHT+ephqya2DyK2hq1vaYdNX9m8S6U2
+ lqow==
+X-Gm-Message-State: AOJu0Yxjp/7O8rHFt7yUsdELrVGNcFHxmj/LndKjGpXZdBfAkfdaYnMt
+ wybqjJoV+z0s36wzVjinScNUFoZNjdjYezB5OnTNl1aBh87k9E30Qqv1vMJ96CNS1YvcLFjfXq4
  =
-X-Gm-Gg: ASbGncuumc/w6t7xySK5GjuORdPvAZDTgjVRQAZLtK24gjtz9zHuvwvFkoakNHRzWMM
- Fxw81CZYR5p1Qen13J3fiTz2wtrf9cIoVmGFWPRs1wnnkXdjzRkc5MWNZyERwU0ZE48Xnd56Y1A
- b/Wqk3OptCh7IbYswI8Pv+5nJjTfccpU5tq5Qr4cifJcPDv7KRP10QXgRkIka/lfWT3gSRMrTEK
- dIvcnjdSKV9ZTBOqQdi10fVCDS3wFky6zCFqQdJN/imT2bdo25dbYZ6eekJNu90ygoEO2NJMa5F
- ef8621t4uguATIrba55vvMoILPqQGd0=
-X-Google-Smtp-Source: AGHT+IHEtvaJ545wgqZgaTxCWqBtpBmrAUELRx+qdmhJNqnG4MRF6iNk517r92k2LLEa4A+ID+x8rA==
-X-Received: by 2002:a05:6e02:20e7:b0:3ce:7fc3:9f76 with SMTP id
- e9e14a558f8ab-3cf743eae5amr108538305ab.6.1737410059489; 
- Mon, 20 Jan 2025 13:54:19 -0800 (PST)
+X-Gm-Gg: ASbGncupSM46S1YoYA2dtUH23uP+Y3jsj3joNbqWiuDNqvZMInoSTJcDkJi0EVTcIHE
+ S+JDoEWPDkDAG/BzcUV8WSLfrogrJzQEQK8PaBvfO5ybOR9kOezkXeoO2D4hHusKuJ3IcfWuxBP
+ pm3gFGnSsZBj2RKXRHapgNHexmvdqwyB8ZOUMFBzEsbuqB8b0a99vbb/y58NFMcPABQPrb80Ege
+ tqCt6kscTy4WMD0GQdK2a0mYEZLrPFnpY5oiwz1G6fekpXSVv8a4nL0oSynAiOMejHYuF9cX7Y1
+ FIdgvhzos7gPW+JUppcWhw7WmEp/wm0=
+X-Google-Smtp-Source: AGHT+IE7ZY1aH2DpMsQzBOF1gGFGsaKMK0C/J/C3Qsy3qHtj7yKeuNA8+DLSf5IKE5VxAddWmzuqKw==
+X-Received: by 2002:a92:dc0e:0:b0:3ce:7a51:c08c with SMTP id
+ e9e14a558f8ab-3ce84962b43mr170798515ab.2.1737410061642; 
+ Mon, 20 Jan 2025 13:54:21 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.54.17
+ 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.54.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:54:17 -0800 (PST)
+ Mon, 20 Jan 2025 13:54:20 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Dan Carpenter <dan.carpenter@linaro.org>,
+Cc: Simon Glass <sjg@chromium.org>, Jens Wiklander <jens.wiklander@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 17/28] test: Drop the function for running bootstd tests
-Date: Mon, 20 Jan 2025 14:53:17 -0700
-Message-ID: <20250120215340.617194-18-sjg@chromium.org>
+Subject: [PATCH 18/28] test: Update optee to do init and uninit from tests
+Date: Mon, 20 Jan 2025 14:53:18 -0700
+Message-ID: <20250120215340.617194-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250120215340.617194-1-sjg@chromium.org>
 References: <20250120215340.617194-1-sjg@chromium.org>
@@ -94,62 +94,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the new suite-runner to run these tests instead.
+Rather than having an init function and then running the tests, create a
+test-init function to do it. This will allow us to get rid of the
+command function.
+
+Fix the comment abotu 'environment' while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/suites.h      |  2 --
- test/boot/bootstd_common.c | 10 ----------
- test/cmd_ut.c              |  4 +---
- 3 files changed, 1 insertion(+), 15 deletions(-)
+ include/test/optee.h      |  4 ++-
+ test/optee/cmd_ut_optee.c | 55 +++++++++++++++++++++++++--------------
+ 2 files changed, 38 insertions(+), 21 deletions(-)
 
-diff --git a/include/test/suites.h b/include/test/suites.h
-index 78f5cdb4bdf..692633dcaa4 100644
---- a/include/test/suites.h
-+++ b/include/test/suites.h
-@@ -34,8 +34,6 @@ int cmd_ut_category(struct unit_test_state *uts, const char *name,
- 		    const char *prefix, struct unit_test *tests, int n_ents,
- 		    int argc, char *const argv[]);
+diff --git a/include/test/optee.h b/include/test/optee.h
+index f4255b39ee3..0a548a59e83 100644
+--- a/include/test/optee.h
++++ b/include/test/optee.h
+@@ -8,7 +8,9 @@
  
--int do_ut_bootstd(struct unit_test_state *uts, struct cmd_tbl *cmdtp, int flag,
--		  int argc, char *const argv[]);
- int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ #include <test/test.h>
  
- #endif /* __TEST_SUITES_H__ */
-diff --git a/test/boot/bootstd_common.c b/test/boot/bootstd_common.c
-index e28cae7f374..6a84810983c 100644
---- a/test/boot/bootstd_common.c
-+++ b/test/boot/bootstd_common.c
-@@ -100,13 +100,3 @@ void bootstd_reset_usb(void)
+-/* Declare a new environment test */
++/* Declare a new optee test */
+ #define OPTEE_TEST(_name, _flags)	UNIT_TEST(_name, _flags, optee)
++#define OPTEE_TEST_INIT(_name, _flags)	UNIT_TEST_INIT(_name, _flags, optee)
++#define OPTEE_TEST_UNINIT(_name, _flags) UNIT_TEST_UNINIT(_name, _flags, optee)
+ 
+ #endif /* __TEST_OPTEE_H__ */
+diff --git a/test/optee/cmd_ut_optee.c b/test/optee/cmd_ut_optee.c
+index fc6674764f9..792de304c15 100644
+--- a/test/optee/cmd_ut_optee.c
++++ b/test/optee/cmd_ut_optee.c
+@@ -26,6 +26,41 @@ extern u32 __dtb_test_optee_no_optee_begin;
+ static void *fdt;
+ static bool expect_success;
+ 
++static int optee_test_init(struct unit_test_state *uts)
++{
++	void *fdt_optee = &__dtb_test_optee_optee_begin;
++	void *fdt_no_optee = &__dtb_test_optee_no_optee_begin;
++	void *fdt_base = &__dtb_test_optee_base_begin;
++	int ret = -ENOMEM;
++
++	ut_assertok(fdt_check_header(fdt_base));
++	ut_assertok(fdt_check_header(fdt_optee));
++	ut_assertok(fdt_check_header(fdt_no_optee));
++
++	fdt = malloc(FDT_COPY_SIZE);
++	if (!fdt)
++		return ret;
++
++	/*
++	 * Resize the FDT to 4k so that we have room to operate on
++	 *
++	 * (and relocate it since the memory might be mapped
++	 * read-only)
++	 */
++	ut_assertok(fdt_open_into(fdt_base, fdt, FDT_COPY_SIZE));
++
++	return 0;
++}
++OPTEE_TEST_INIT(optee_test_init, 0);
++
++static int optee_test_uninit(struct unit_test_state *uts)
++{
++	free(fdt);
++
++	return 0;
++}
++OPTEE_TEST_UNINIT(optee_test_uninit, 0);
++
+ static int optee_fdt_firmware(struct unit_test_state *uts)
  {
- 	usb_started = false;
- }
+ 	const void *prop;
+@@ -101,26 +136,6 @@ int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	void *fdt_base = &__dtb_test_optee_base_begin;
+ 	int ret = -ENOMEM;
+ 
+-	uts = calloc(1, sizeof(*uts));
+-	if (!uts)
+-		return -ENOMEM;
 -
--int do_ut_bootstd(struct unit_test_state *uts, struct cmd_tbl *cmdtp, int flag,
--		  int argc, char *const argv[])
--{
--	struct unit_test *tests = UNIT_TEST_SUITE_START(bootstd);
--	const int n_ents = UNIT_TEST_SUITE_COUNT(bootstd);
+-	ut_assertok(fdt_check_header(fdt_base));
+-	ut_assertok(fdt_check_header(fdt_optee));
+-	ut_assertok(fdt_check_header(fdt_no_optee));
 -
--	return cmd_ut_category(uts, "bootstd", "bootstd_",
--			       tests, n_ents, argc, argv);
--}
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index c4a42ee2e20..1885c78be41 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -125,9 +125,7 @@ static struct suite suites[] = {
- 	SUITE(bdinfo, "bdinfo (board info) command"),
- 	SUITE(bloblist, "bloblist implementation"),
- 	SUITE(bootm, "bootm command"),
--#ifdef CONFIG_UT_BOOTSTD
--	SUITE_CMD(bootstd, do_ut_bootstd, "standard boot implementation"),
--#endif
-+	SUITE(bootstd, "standard boot implementation"),
- 	SUITE(cmd, "various commands"),
- 	SUITE(common, "tests for common/ directory"),
- 	SUITE(dm, "driver model"),
+-	fdt = malloc(FDT_COPY_SIZE);
+-	if (!fdt)
+-		return ret;
+-
+-	/*
+-	 * Resize the FDT to 4k so that we have room to operate on
+-	 *
+-	 * (and relocate it since the memory might be mapped
+-	 * read-only)
+-	 */
+-	ut_assertok(fdt_open_into(fdt_base, fdt, FDT_COPY_SIZE));
+-
+ 	/*
+ 	 * (1) Try to copy optee nodes from empty dt.
+ 	 * This should still run successfully.
 -- 
 2.43.0
 
