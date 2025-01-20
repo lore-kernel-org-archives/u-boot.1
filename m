@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C308C02182
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:32:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 389B1C02182
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:32:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A453180BB0;
-	Mon, 20 Jan 2025 22:27:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 032D280BA6;
+	Mon, 20 Jan 2025 22:27:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N8UarJBj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NExGf7ia";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A1CD80BB0; Mon, 20 Jan 2025 22:27:42 +0100 (CET)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id 7503A80BA3; Mon, 20 Jan 2025 22:27:44 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A89180B9E
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:27:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D09780BAF
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:27:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-844ee15d6f4so399097339f.1
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:27:40 -0800 (PST)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3a8f1c97ef1so16525175ab.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:27:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737408458; x=1738013258; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737408460; x=1738013260; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y+czy/1vKHRWDd15qDGkJGk6ZPV79WiceX63MgJD9to=;
- b=N8UarJBjTYQNY3jp3+CWPS/2UG1GirqDwKw1DelYNzlBzfF6ZpIOztPtFKIczOjao2
- 3LCGwbzfHlIwLnO7gVqrmnyAOQ5z4bdHhOV5cy9dZd3bVrDXUUgO7tivvhhSEdjfiC9F
- Dvs7mVC1UJJo64k5+8xrhu4KYqJFcpOQsOSn4=
+ bh=VorXgMg84Nf17xE9/9HcdqYB0sPbI2mi7AO5UtKlRrw=;
+ b=NExGf7iaCYvPKm5z37Mq73+xnbNgGnQeRpk632aBSmO+U6stN4rwxw/XIsDuc4U3D9
+ tsGD/GYoMWK5sdNqXxhZMzyD9hH2OJWYtARLQTdYy9DAI2qWIrV/W3gyWXPHl9OZrvtc
+ OGHfCok9SK6yLnk5Yymzw0N78heXqFu7bu0CQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737408458; x=1738013258;
+ d=1e100.net; s=20230601; t=1737408460; x=1738013260;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y+czy/1vKHRWDd15qDGkJGk6ZPV79WiceX63MgJD9to=;
- b=D/8sZaYMkpT5meSgxXY7ybOuAb+rYEpx5nYrCv5rZy0/5f7Iz0sZcT4vQdx3bMSqzX
- zoMD20Zusiv0Kktp/TV6ptzAvtboPjj36ArLscdzMJI34UAlGgcu1lv+VS+n4wuCjleI
- iIphl71KU6pz5dPFJvuKxlS52qMtZTR9nL/5zDEqmm9HjL2A/kQ7Cvx1P78D2Eg+WRQt
- syJrBv422UUruWLr71h6eCSoRCnlNe62Qcz7inoYiMc319M64s1rWLqtnbxoIZxUG5FI
- yQNk/re2iP52kqm3yUNEEORXxyxvTWokywEvdXS4o5zP1zmKLmhMQSRnfe6532Wsgju0
- Zjvg==
-X-Gm-Message-State: AOJu0YwlWG2vnh0CtybEn/EIjpkC9nLpDSvX/aG2oOlmwD53bqjKiPMV
- MEC5DkP1CsxQ+e1t38YyEcj1oB6F8JG9KYvVoPzTuMok5LsHxQvp/T1QcPcO/af4njQvswEpuqY
+ bh=VorXgMg84Nf17xE9/9HcdqYB0sPbI2mi7AO5UtKlRrw=;
+ b=deQf+Z3Rn0fOt6S67pn3SJlwxlJQ4rA8x2LJykLWVghRbxgPuR0m81ip1MluDf7vyn
+ +O2MMWZ9N/hgNRN3Gk1PiWTo6jOjvY3tR2LGzkI8kIzgfx/ERJwdvW2IZldKziOvqbkG
+ G5qpumzBYgQTeUtik6/esvNpVHkddJjiAkJwESR2FBN6iqOgPYiHjBY7N5+W3kFk51NY
+ pFH9MXWYHZHrn/6i+hsJCK4wu5FOCnt2xTnV2SS+5msKPNO3XnifBPXqYTo8YZ8X+Yfg
+ NBw7lCea3voQboyRjTV/Jg6nMbaW8DtudDxoFUJ4TvzV3VwT3okGL+AlwMTfbCjo2jvU
+ Gk8Q==
+X-Gm-Message-State: AOJu0YyT7b8iNpiFKB24EHEqmSZa725NMHDgDwxj4y07Md66qJIqpRi9
+ fV9SS8FrB367EmyhdIIQ9xldQjAphmRDzR1LwPn3RX8v86KJJJAH6rQWW9Isb5Yxgu9grxNgAL8
  =
-X-Gm-Gg: ASbGncuSB5BQHJdBeDX67Xoo4kYQIBy5bIuaYUU0DZnBn7+Nl2Xf/r4FuvRWMKwYA8q
- vi0rhQS/1rwzqt97lvQJwNUxh+dVAEFjlsWEo5h+YWlJ/+osgVvZsLi/Kr25a8FhhcipJeuL+4h
- lsnUbWKmE5UPTm5E63sw5gdyitS0ycNeA2el573g79M6Hd6XrUg2VUHQanInb63Aqspe++9T+aQ
- V6NIfJyf4+7mi/WkGWxMvKUFCPYe8sixkugTgt/zy9xaoGMpYyclFxYJ3yiORt1prrgeZheXwXk
- Pcloyg1dZvuQpfIXbuPc7IRAVe8OdmI=
-X-Google-Smtp-Source: AGHT+IHLoDk6aF4lgow7ExrXA6SRQTOACBYNaX/Mwj2b03As7xIn0/zZOSdw3QzZJ/yDBvP4j5Rn4Q==
-X-Received: by 2002:a05:6602:36cc:b0:849:c82e:c084 with SMTP id
- ca18e2360f4ac-851b6192ea6mr1237016939f.6.1737408458339; 
- Mon, 20 Jan 2025 13:27:38 -0800 (PST)
+X-Gm-Gg: ASbGnct+1z2N2RQqsq/t5UsI5bItxkG2c9ghBxe1Re+zRsrQEamsrJL26bokp3xYfHO
+ iVFEYB2A9ZL470sUlICxSURmLw2m3PicKdIfcBja6tjKBExBwseaGzYHcXfJ6WEu54BIvPKkJjQ
+ gfauZU3PZEvDs3CqjCbeiFKJM/SvxgYDvzxbvO+mjbIG+Y+aVhMMyBGIwCWZPniE/qE5R0aKinR
+ DmAFHa2jQzvZOuuAgtN0V75+5lUkNzogzPa5B5I0w90EHWX6s9q66fs4lLJ8c+db+W95tRHIrp0
+ frW4hxQ1E6I3yQo8Ek1qHIoHCTgBVB8=
+X-Google-Smtp-Source: AGHT+IFNJZLVpeI6xYDehtfzgSwHiQvdUhW6+twwSp7faev8bu5AjcIl41t3/fYH9tRZoO/m3y4mUw==
+X-Received: by 2002:a05:6e02:1aa8:b0:3ce:8898:af17 with SMTP id
+ e9e14a558f8ab-3cf743ab512mr120949485ab.4.1737408459920; 
+ Mon, 20 Jan 2025 13:27:39 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.27.37
+ 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.27.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:27:37 -0800 (PST)
+ Mon, 20 Jan 2025 13:27:38 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>,
+Cc: Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Richard Weinberger <richard@nod.at>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 39/44] test: Move stat-printing into its own function
-Date: Mon, 20 Jan 2025 14:26:01 -0700
-Message-ID: <20250120212613.516664-40-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 40/44] test: Record and show the totals for all test runs
+Date: Mon, 20 Jan 2025 14:26:02 -0700
+Message-ID: <20250120212613.516664-41-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250120212613.516664-1-sjg@chromium.org>
 References: <20250120212613.516664-1-sjg@chromium.org>
@@ -98,151 +95,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a function to show the stats, so we can decide when to print it.
-
-This slightly adjusts the output, so that any 'test not found' message
-appears on its own line after all other output.
-
-The 'failures' message now appears in lower case so update pytest
-accordingly.
+With 'ut all' multiple test suites are run. Add a way to collect totals
+and show them at the end.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Adjust ut_report() to take a run-count
+- Add missing comment for 'total'
 
- arch/sandbox/cpu/spl.c    |  1 +
- include/test/ut.h         |  8 ++++++++
- test/py/tests/test_spl.py |  2 +-
- test/py/tests/test_upl.py |  2 +-
- test/py/tests/test_ut.py  |  2 +-
- test/py/tests/test_vbe.py |  2 +-
- test/py/tests/test_vpl.py |  2 +-
- test/test-main.c          | 18 +++++++++++++-----
- 8 files changed, 27 insertions(+), 10 deletions(-)
+ include/test/test.h | 4 ++++
+ test/cmd_ut.c       | 1 +
+ test/test-main.c    | 7 +++++++
+ 3 files changed, 12 insertions(+)
 
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index 0ad23e4ba95..ecc03785463 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -153,6 +153,7 @@ void spl_board_init(void)
- 		ut_init_state(&uts);
- 		ret = ut_run_list(&uts, "spl", NULL, tests, count,
- 				  state->select_unittests, 1, false, NULL);
-+		ut_report(&uts.cur, 1);
- 		ut_uninit_state(&uts);
- 		/* continue execution into U-Boot */
+diff --git a/include/test/test.h b/include/test/test.h
+index f7087ab4eea..bac43c81d63 100644
+--- a/include/test/test.h
++++ b/include/test/test.h
+@@ -27,6 +27,8 @@ struct ut_stats {
+  * struct unit_test_state - Entire state of test system
+  *
+  * @cur: Statistics for the current run
++ * @total: Statistics for all test runs
++ * @run_count: Number of times ut_run_list() has been called
+  * @start: Store the starting mallinfo when doing leak test
+  * @of_live: true to use livetree if available, false to use flattree
+  * @of_root: Record of the livetree root node (used for setting up tests)
+@@ -48,6 +50,8 @@ struct ut_stats {
+  */
+ struct unit_test_state {
+ 	struct ut_stats cur;
++	struct ut_stats total;
++	int run_count;
+ 	struct mallinfo start;
+ 	struct device_node *of_root;
+ 	bool of_live;
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 80df954694f..0b8bfe603b9 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -206,6 +206,7 @@ static int do_ut_all(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
+ 				any_fail = retval;
+ 		}
  	}
-diff --git a/include/test/ut.h b/include/test/ut.h
-index a51defc3b90..be5502e03a1 100644
---- a/include/test/ut.h
-+++ b/include/test/ut.h
-@@ -530,4 +530,12 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
- 		const char *select_name, int runs_per_test, bool force_run,
- 		const char *test_insert);
++	ut_report(&uts->total, uts->run_count);
  
-+/**
-+ * ut_report() - Report stats on a test run
-+ *
-+ * @stats: Stats to show
-+ * @run_count: Number of suites that were run
-+ */
-+void ut_report(struct ut_stats *stats, int run_count);
-+
- #endif
-diff --git a/test/py/tests/test_spl.py b/test/py/tests/test_spl.py
-index 42e4c4342b2..474f430a344 100644
---- a/test/py/tests/test_spl.py
-+++ b/test/py/tests/test_spl.py
-@@ -36,7 +36,7 @@ def test_spl(u_boot_console, ut_spl_subtest):
-         cons = u_boot_console
-         cons.restart_uboot_with_flags(['-u', '-k', ut_spl_subtest.split()[1]])
-         output = cons.get_spawn_output().replace('\r', '')
--        assert 'Failures: 0' in output
-+        assert 'failures: 0' in output
-     finally:
-         # Restart afterward in case a non-SPL test is run next. This should not
-         # happen since SPL tests are run in their own invocation of test.py, but
-diff --git a/test/py/tests/test_upl.py b/test/py/tests/test_upl.py
-index 3164bda6b71..d94359d8b9b 100644
---- a/test/py/tests/test_upl.py
-+++ b/test/py/tests/test_upl.py
-@@ -35,4 +35,4 @@ def test_upl_handoff(u_boot_console):
- 
-     # Check the FIT offsets look correct
-     output = cons.run_command('ut upl -f upl_test_info_norun')
--    assert 'Failures: 0' in output
-+    assert 'failures: 0' in output
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index cacf11f7c0a..d2d8ce10755 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -607,4 +607,4 @@ def test_ut(u_boot_console, ut_subtest):
-         assert 'Unknown command \'quux\' - try \'help\'' in output
-     else:
-         output = u_boot_console.run_command('ut ' + ut_subtest)
--    assert output.endswith('Failures: 0')
-+    assert output.endswith('failures: 0')
-diff --git a/test/py/tests/test_vbe.py b/test/py/tests/test_vbe.py
-index 50b6c1cd911..861df3f8266 100644
---- a/test/py/tests/test_vbe.py
-+++ b/test/py/tests/test_vbe.py
-@@ -117,4 +117,4 @@ def test_vbe(u_boot_console):
-     with cons.log.section('Kernel load'):
-         output = cons.run_command_list(cmd.splitlines())
- 
--    assert 'Failures: 0' in output[-1]
-+    assert 'failures: 0' in output[-1]
-diff --git a/test/py/tests/test_vpl.py b/test/py/tests/test_vpl.py
-index 4af578b9173..8c472ca7a92 100644
---- a/test/py/tests/test_vpl.py
-+++ b/test/py/tests/test_vpl.py
-@@ -26,7 +26,7 @@ def test_vpl(u_boot_console, ut_vpl_subtest):
-         cons = u_boot_console
-         cons.restart_uboot_with_flags(['-u', '-k', ut_vpl_subtest.split()[1]])
-         output = cons.get_spawn_output().replace('\r', '')
--        assert 'Failures: 0' in output
-+        assert 'failures: 0' in output
-     finally:
-         # Restart afterward in case a non-VPL test is run next. This should not
-         # happen since VPL tests are run in their own invocation of test.py, but
+ 	return any_fail;
+ }
 diff --git a/test/test-main.c b/test/test-main.c
-index e36bc37d29e..d02ab791b5a 100644
+index d02ab791b5a..22b9b46d9cd 100644
 --- a/test/test-main.c
 +++ b/test/test-main.c
-@@ -673,6 +673,18 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- 	return uts->cur.fail_count ? -EBADF : 0;
- }
+@@ -694,6 +694,8 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
+ 	bool has_dm_tests = false;
+ 	int ret;
  
-+void ut_report(struct ut_stats *stats, int run_count)
-+{
-+	if (run_count > 1)
-+		printf("Suites run: %d, total tests", run_count);
-+	else
-+		printf("Tests");
-+	printf(" run: %d, ", stats->test_count);
-+	if (stats->skip_count)
-+		printf("skipped: %d, ", stats->skip_count);
-+	printf("failures: %d\n", stats->fail_count);
-+}
++	memset(&uts->cur, '\0', sizeof(struct ut_stats));
 +
- int ut_run_list(struct unit_test_state *uts, const char *category,
- 		const char *prefix, struct unit_test *tests, int count,
- 		const char *select_name, int runs_per_test, bool force_run,
-@@ -718,13 +730,9 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
- 	if (has_dm_tests)
- 		dm_test_restore(uts->of_root);
- 
--	printf("Tests run: %d, ", uts->cur.test_count);
--	if (uts->cur.skip_count)
--		printf("Skipped: %d, ", uts->cur.skip_count);
-+	ut_report(&uts->cur, 1);
+ 	if (!CONFIG_IS_ENABLED(OF_PLATDATA) &&
+ 	    ut_list_has_dm_tests(tests, count, prefix, select_name)) {
+ 		has_dm_tests = true;
+@@ -734,5 +736,10 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
  	if (ret == -ENOENT)
  		printf("Test '%s' not found\n", select_name);
--	else
--		printf("Failures: %d\n", uts->cur.fail_count);
  
++	uts->total.skip_count += uts->cur.skip_count;
++	uts->total.fail_count += uts->cur.fail_count;
++	uts->total.test_count += uts->cur.test_count;
++	uts->run_count++;
++
  	return ret;
  }
 -- 
