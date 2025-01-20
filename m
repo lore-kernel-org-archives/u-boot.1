@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 872F7C02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:54:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58918C02182
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:54:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3142807D6;
-	Mon, 20 Jan 2025 22:53:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EFE1D80759;
+	Mon, 20 Jan 2025 22:53:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Qj5XNpqy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fj7KNy2u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52508807D6; Mon, 20 Jan 2025 22:53:57 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 06B9B807E4; Mon, 20 Jan 2025 22:53:59 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11E958077F
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:53:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCEB7807B1
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:53:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-851c4f1fb18so96381439f.2
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:53:55 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-844bff5ba1dso385866039f.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:53:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737410033; x=1738014833; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737410035; x=1738014835; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ls5qP9HJZvwzIlMTrs/o0ynO/0w49hMobSjQIL5sHO0=;
- b=Qj5XNpqyE7mU7zdoabQzAcNSxMp3Wtl7XSznud6PhFY5rODtgl7caJM3J8nVPC/1lQ
- iUk5DzA3Skv3Qlh+yrfM5zofLP20y5yV0gAMlkC2hHtS1FoY++9N/XnqS0XT7fbBcBeO
- fXwDUAZC3GTIJll77Qg2Nwj/5Z2I/ZEiuqorA=
+ bh=7BExsgQF9qFhsqVD5h4Qd++x8X2pAXaz73ezO5/QHK0=;
+ b=Fj7KNy2usUmCvawTzgL7po8GiaeutIScc/57n5uqkd7ZOhb4a7WQnJjWyti4vRBz9L
+ 5nlH1ccJ1p3juL7o3jmnEYAbXStXcP3c3b9NQW1Mz0DNaLNDDH6ifSO0qtDOh86NTl7B
+ sag0fHyUZt+vETwBLJv8lrkAnRiNhq2hl8VCw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737410033; x=1738014833;
+ d=1e100.net; s=20230601; t=1737410035; x=1738014835;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ls5qP9HJZvwzIlMTrs/o0ynO/0w49hMobSjQIL5sHO0=;
- b=RDkBSFQwdEMf/JpITwaRp51KVumEb8yhXPV5v0OEaadNr0xvUbaOWXrbmPolZnyfts
- 5RkCflTnG+SRlVhRldYjSYnm4l/m0+ZrVAlp4B5kRk1kxbFYRH7rd7TmwrBK0yKAalcA
- ZBJGTO07m9iEv2sJoUv+vZ1mPpH0DewNseshiUVZ7Y7FJCvpioI3v1JccWqX9Lj9Ao3V
- 7Q6G1FQAJkdVbaTPVtmGJVK0oGjpjaGQZBRFoAkzkjPvH+2NSwAdkmEEyCo0M4/AmZZ9
- rh2/x7c2RQPxxq6/37tX28jq3uAVK/95TPy38EW+yi4OfiU3uJWnk/Xq+36nQTeeFt7p
- bVug==
-X-Gm-Message-State: AOJu0YyFuH83mTX7J4kSGgvVjuaGqV2y5jUCDuIROKBymmJ1MD/uOu0q
- MJO7NySSOBxFrPohmL7As487etqg+SfuEvoVoCneiCK0lae0fRfszfMc3bonoBbRq8wT8Fq+xjs
+ bh=7BExsgQF9qFhsqVD5h4Qd++x8X2pAXaz73ezO5/QHK0=;
+ b=D4kpnvXcAG2HrEC/8vP9bOyAlcwP/nFut8BABjHdDNFD1Uk0AQJ+UT96RyTH37XYus
+ oPUMYIooj0n1+nIEiI9yKv+pP15lqok7CxpF4L4dwygbh1k7k9WemVWxGuSYWZANzAWp
+ +N+2GngLUFZlY15UKzw1bsqn/qnRmEgEJHp/pZxKiNOLU12bXlVwUuolZpTLwp8p64tL
+ Lkh/k68BzA01bFAC/Bt7srr1FbhtEVrYQziIVuEAJhBP4TN/6N6L5hdW1IppvID6u7bs
+ qFGNLvQe786qGhdjNPsvkWKh3t4G979zGWOk2LNjLTJBsNN5zKZK7poeGNXriyrC7ZG1
+ rtrQ==
+X-Gm-Message-State: AOJu0Yw6K1I/vappqUptTjt/HzG9LXj/76U7Exjdx9G2WBRX0uhXJgmD
+ nPay9opt9moRJ7SWtkU/wRQ8wos2whcd+vHX78BnR/aoTJVxBNIy6Yk11MbuxwNMt75kyVIvXUQ
  =
-X-Gm-Gg: ASbGncs7par85dDm4oh57bOKvwRM51vg4wPD4i0yOQihG8Yqn9+KL99FXdBbjQCdTvN
- 0EL6jNLRYAR0sreLSpv3uRYxiQQFwIVMzgPOYrSZXXMLQ1IXVnsibwy42W3IORKk4kmvG7+QR7K
- FlGtg8+ydcxsJc5PY2iIuL1oDy+r7WpEGwiww19+x3gkZayfxmzQ+Ukz5AYEZTHQTOiS9bh3hhq
- dj8JO7uCF0OCGE85nze5fz7rklbWSJC7gb9EphdxsBTMKrzw6xHUqKGobrLPO8eqbo3lAKKLbrq
- m72mx8A2XBmYhXtFF0kRWwMaqTy7YnA=
-X-Google-Smtp-Source: AGHT+IFKrgD0ly7tXsGItLkGOQ9TFxlSg5sIgyy3vx0e1DANtIL4HAJVDlnXqarYv7olMaV8S2Eb8Q==
-X-Received: by 2002:a05:6602:2b8a:b0:844:bd90:d45c with SMTP id
- ca18e2360f4ac-851b65227a0mr1151124939f.13.1737410033196; 
- Mon, 20 Jan 2025 13:53:53 -0800 (PST)
+X-Gm-Gg: ASbGncva1unRQhITdE7fZ3EFi+b/M9dX1IRHH3cbMKHWSzBjjTyYN5pb+vgpcmBiYQq
+ T/OpNK0XW5b2M5qI1pQ9Eck7LKfmqCQ5WGROdyGfSlr93yN0FN7/X1PI9T/UV1/ve0TLo8PK8dc
+ iYHWx0HllapvVsem7G++melM6yPK1Dmo9YF/uhHlPm5BBXpmcH58fkaxxS4zM9V75zXXB3KSWoM
+ EdwniPkddGUG/Y5irO33oaYGxEDEtS8oIaSGfnefWvT7gCUsjagOqX4KNk7718Wjw0bA/kDQJ5t
+ GCvJ53MKaNbqaZE7M9Px6rKvrt9RgVY=
+X-Google-Smtp-Source: AGHT+IHhLfuNMpnbMhR5830/Yc1ZuQ9qVjt2mSfF8+olY19W4rQ/YyVszAHNZ1B6bkKYIyWCgqNBqw==
+X-Received: by 2002:a05:6602:4886:b0:84c:e8ce:b531 with SMTP id
+ ca18e2360f4ac-851b6546252mr1278753739f.14.1737410035017; 
+ Mon, 20 Jan 2025 13:53:55 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.53.51
+ 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.53.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:53:52 -0800 (PST)
+ Mon, 20 Jan 2025 13:53:53 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 03/28] test: Keep track of suite duration
-Date: Mon, 20 Jan 2025 14:53:03 -0700
-Message-ID: <20250120215340.617194-4-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 04/28] test: Show the average time per test
+Date: Mon, 20 Jan 2025 14:53:04 -0700
+Message-ID: <20250120215340.617194-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250120215340.617194-1-sjg@chromium.org>
 References: <20250120215340.617194-1-sjg@chromium.org>
@@ -95,170 +95,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Show the time taken by each test suite with 'ut all' and the total time
-for all suites.
+Show the average duration of a test, so we can keep track of how it is
+trending. Report the suite with the longest average test to encourage
+people to improve it.
 
-Take care to remove any sandbox time-offset from the values.
+Add a function to update the stats based on the results from a single
+suite and another to show the summary information.
 
-Fix the comment-format on timer_test_add_offset() while we are here.
+Make this optional, since sandbox's SPL tests do not have a timer driver
+and people may want to print results without times.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/timer/sandbox_timer.c |  5 +++++
- include/test/test.h           |  4 ++++
- include/time.h                | 15 ++++++++++++++-
- test/Kconfig                  |  9 +++++++++
- test/test-main.c              | 17 ++++++++++++++++-
- 5 files changed, 48 insertions(+), 2 deletions(-)
+ include/test/test.h |  4 ++++
+ test/cmd_ut.c       | 32 ++++++++++++++++++++++++++++++++
+ test/test-main.c    | 10 +++++++---
+ 3 files changed, 43 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/timer/sandbox_timer.c b/drivers/timer/sandbox_timer.c
-index e8b54a02965..c1baf3c69ec 100644
---- a/drivers/timer/sandbox_timer.c
-+++ b/drivers/timer/sandbox_timer.c
-@@ -18,6 +18,11 @@ void timer_test_add_offset(unsigned long offset)
- 	sandbox_timer_offset += offset;
- }
- 
-+ulong timer_test_get_offset(void)
-+{
-+	return sandbox_timer_offset;
-+};
-+
- u64 notrace timer_early_get_count(void)
- {
- 	return os_get_nsec() / 1000 + sandbox_timer_offset * 1000;
 diff --git a/include/test/test.h b/include/test/test.h
-index bac43c81d63..25c7712d160 100644
+index 25c7712d160..877fda8d5aa 100644
 --- a/include/test/test.h
 +++ b/include/test/test.h
-@@ -16,11 +16,15 @@
-  * @skip_count: Number of tests that were skipped
-  * @test_count: Number of tests run. If a test is run muiltiple times, only one
-  *	is counted
-+ * @start: Timer value when test started
-+ * @duration_ms: Suite duration in milliseconds
-  */
- struct ut_stats {
- 	int fail_count;
- 	int skip_count;
- 	int test_count;
-+	ulong start;
-+	ulong duration_ms;
- };
+@@ -33,6 +33,8 @@ struct ut_stats {
+  * @cur: Statistics for the current run
+  * @total: Statistics for all test runs
+  * @run_count: Number of times ut_run_list() has been called
++ * @worst: Sute which had the first per-text run time
++ * @worst_ms: Time taken by that test
+  * @start: Store the starting mallinfo when doing leak test
+  * @of_live: true to use livetree if available, false to use flattree
+  * @of_root: Record of the livetree root node (used for setting up tests)
+@@ -56,6 +58,8 @@ struct unit_test_state {
+ 	struct ut_stats cur;
+ 	struct ut_stats total;
+ 	int run_count;
++	const struct suite *worst;
++	int worst_ms;
+ 	struct mallinfo start;
+ 	struct device_node *of_root;
+ 	bool of_live;
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index cc30c517c51..c96277d89a1 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -192,6 +192,36 @@ static int run_suite(struct unit_test_state *uts, struct suite *ste,
+ 	return ret;
+ }
  
- /*
-diff --git a/include/time.h b/include/time.h
-index 3b2ba091247..f5b86bf70fe 100644
---- a/include/time.h
-+++ b/include/time.h
-@@ -28,7 +28,7 @@ uint64_t get_timer_us(uint64_t base);
-  */
- unsigned long get_timer_us_long(unsigned long base);
- 
--/*
-+/**
-  * timer_test_add_offset()
-  *
-  * Allow tests to add to the time reported through lib/time.c functions
-@@ -36,6 +36,19 @@ unsigned long get_timer_us_long(unsigned long base);
-  */
- void timer_test_add_offset(unsigned long offset);
- 
-+#ifdef CONFIG_SANDBOX
-+/**
-+ * timer_test_get_offset()
-+ *
-+ * Get the total offset currently being added the time
-+ *
-+ * Return:: number of milliseconds the system time has been advanced
-+ */
-+ulong timer_test_get_offset(void);
-+#else
-+static inline ulong timer_test_get_offset(void) { return 0; }
-+#endif
++static void show_stats(struct unit_test_state *uts)
++{
++	if (uts->run_count < 2)
++		return;
 +
- /**
-  * usec_to_tick() - convert microseconds to clock ticks
-  *
-diff --git a/test/Kconfig b/test/Kconfig
-index 558a9cd49b4..1c8e3d16300 100644
---- a/test/Kconfig
-+++ b/test/Kconfig
-@@ -20,6 +20,15 @@ config SPL_UNIT_TEST
- 	  of-platdata and SPL handover. To run these tests with the sandbox_spl
- 	  board, use the -u (unit test) option.
- 
-+config UNIT_TEST_DURATION
-+	bool "Report unit-test duration"
-+	depends on UNIT_TEST
-+	default y
-+	help
-+	  Enable this short the time taken by each test suite. This is reported
-+	  after the suite runs, alongside the pass/fail results. In addition,
-+	  an overall total is reported if multiple suites are run.
++	ut_report(&uts->total, uts->run_count);
++	if (CONFIG_IS_ENABLED(UNIT_TEST_DURATION) &&
++	    uts->total.test_count && uts->worst) {
++		ulong avg = uts->total.duration_ms / uts->total.test_count;
 +
- config UT_LIB
- 	bool "Unit tests for library functions"
- 	depends on UNIT_TEST
++		printf("Average test time: %ld ms, worst case '%s' took %d ms\n",
++		       avg, uts->worst->name, uts->worst_ms);
++	}
++}
++
++static void update_stats(struct unit_test_state *uts, const struct suite *ste)
++{
++	if (CONFIG_IS_ENABLED(UNIT_TEST_DURATION) && uts->cur.test_count) {
++		ulong avg;
++
++		avg = uts->cur.duration_ms ?
++			uts->cur.duration_ms /
++			uts->cur.test_count : 0;
++		if (avg > uts->worst_ms) {
++			uts->worst_ms = avg;
++			uts->worst = ste;
++		}
++	}
++}
++
+ static int do_ut_all(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
+ 		     int flag, int argc, char *const argv[])
+ {
+@@ -208,6 +238,7 @@ static int do_ut_all(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
+ 			retval = run_suite(uts, ste, cmdtp, flag, 1, argv);
+ 			if (!any_fail)
+ 				any_fail = retval;
++			update_stats(uts, ste);
+ 		}
+ 	}
+ 	ut_report(&uts->total, uts->run_count);
+@@ -306,6 +337,7 @@ static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 
+ 		ret = run_suite(&uts, ste, cmdtp, flag, argc, argv);
+ 	}
++	show_stats(&uts);
+ 	if (ret)
+ 		return ret;
+ 	ut_uninit_state(&uts);
 diff --git a/test/test-main.c b/test/test-main.c
-index 815f54bebd5..1d821a3fe72 100644
+index 1d821a3fe72..597afa25f77 100644
 --- a/test/test-main.c
 +++ b/test/test-main.c
-@@ -14,6 +14,7 @@
- #include <net.h>
- #include <of_live.h>
- #include <os.h>
-+#include <spl.h>
- #include <usb.h>
- #include <dm/ofnode.h>
- #include <dm/root.h>
-@@ -680,6 +681,8 @@ void ut_report(struct ut_stats *stats, int run_count)
+@@ -677,12 +677,16 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
+ void ut_report(struct ut_stats *stats, int run_count)
+ {
+ 	if (run_count > 1)
+-		printf("Suites run: %d, total tests", run_count);
++		printf("Total tests");
  	else
  		printf("Tests");
  	printf(" run: %d, ", stats->test_count);
-+	if (stats)
-+		printf("%ld ms, ", stats->duration_ms);
+-	if (stats)
+-		printf("%ld ms, ", stats->duration_ms);
++	if (stats && stats->test_count) {
++		ulong dur = stats->duration_ms;
++
++		printf("%ld ms, average: %ld ms, ", dur,
++		       dur ? dur / stats->test_count : 0);
++	}
  	if (stats->skip_count)
  		printf("skipped: %d, ", stats->skip_count);
  	printf("failures: %d\n", stats->fail_count);
-@@ -692,9 +695,15 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
- {
- 	;
- 	bool has_dm_tests = false;
-+	ulong start_offset = 0;
-+	ulong test_offset = 0;
- 	int ret;
- 
- 	memset(&uts->cur, '\0', sizeof(struct ut_stats));
-+	if (CONFIG_IS_ENABLED(UNIT_TEST_DURATION)) {
-+		uts->cur.start = get_timer(0);
-+		start_offset = timer_test_get_offset();
-+	}
- 
- 	if (!CONFIG_IS_ENABLED(OF_PLATDATA) &&
- 	    ut_list_has_dm_tests(tests, count, prefix, select_name)) {
-@@ -732,13 +741,19 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
- 	if (has_dm_tests)
- 		dm_test_restore(uts->of_root);
- 
--	ut_report(&uts->cur, 1);
- 	if (ret == -ENOENT)
- 		printf("Test '%s' not found\n", select_name);
-+	if (CONFIG_IS_ENABLED(UNIT_TEST_DURATION)) {
-+		test_offset = timer_test_get_offset() - start_offset;
-+
-+		uts->cur.duration_ms = get_timer(uts->cur.start) - test_offset;
-+	}
-+	ut_report(&uts->cur, 1);
- 
- 	uts->total.skip_count += uts->cur.skip_count;
- 	uts->total.fail_count += uts->cur.fail_count;
- 	uts->total.test_count += uts->cur.test_count;
-+	uts->total.duration_ms += uts->cur.duration_ms;
- 	uts->run_count++;
- 
- 	return ret;
 -- 
 2.43.0
 
