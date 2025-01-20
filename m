@@ -4,56 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D770C02185
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 07:15:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C30C02185
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 07:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3627805CD;
-	Mon, 20 Jan 2025 08:15:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
+	by phobos.denx.de (Postfix) with ESMTP id A3636800B6;
+	Mon, 20 Jan 2025 08:22:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D6682805CD; Mon, 20 Jan 2025 08:15:32 +0100 (CET)
-Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39107806DC
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 08:15:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gentoo.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
-Received: from localhost (unknown [116.227.99.159])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- (Authenticated sender: dlan)
- by smtp.gentoo.org (Postfix) with ESMTPSA id 58E0F335DC7;
- Mon, 20 Jan 2025 07:15:25 +0000 (UTC)
-Date: Mon, 20 Jan 2025 07:15:14 +0000
-From: Yixun Lan <dlan@gentoo.org>
-To: Huan Zhou <me@per1cycle.org>
-Cc: u-boot@lists.denx.de, Ben Dooks <ben.dooks@codethink.co.uk>,
- Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
- Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
- Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
- Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>,
- Huan Zhou <pericycle.cc@gmail.com>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Padmarao Begari <padmarao.begari@amd.com>
-Subject: Re: [PATCH v4] riscv: spacemit: k1: probe dram size during boot phase.
-Message-ID: <20250120071514-GYA25753@gentoo>
-References: <20250120-get-dram-size-v4-1-e74103e36d6b@per1cycle.org>
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="sY9yG0Qw";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C84CD801CF; Mon, 20 Jan 2025 08:22:45 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AA5780077
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 08:22:43 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=3115eb01bc=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50JK4ZVj027503;
+ Mon, 20 Jan 2025 08:22:35 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ urTjR4HeQI9PA6E0yBARBFQbLoO6zUFQW9Gy2m+dg/U=; b=sY9yG0QwduTMHsfR
+ yB+oZAM7BDAXzXHW/Jz//drQ6Sbvn7yt2Zkwt3sR7C1swo8HTkAKlFe1IozOuGmX
+ LSkeLKNc41ETN2WOCKFNLdioa9uFvkku9iLxDRXnDiu/iAtAScHSbr0go7aQub8I
+ /0YWAWK2sqIvFYhfJ3C+q2N0r56E5E+izvSeS3Klhf6LzjJujraBOTnyT3Vu/frK
+ 3ehPFCynUb+Jvxf1PXQN4USUeqExJHNMyaG8TnzEZwq1YjEAFx0C4PvWqIzbAdYL
+ kKowfyXAQ9Etb7PBmFU9998/Zz5F59QlFRm23gsljc35mkD1MBoHsDOwyt/+6S3T
+ MtmX7w==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 448pr3b4q6-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 20 Jan 2025 08:22:35 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5E67C4002D;
+ Mon, 20 Jan 2025 08:21:25 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0E9F7273AFC;
+ Mon, 20 Jan 2025 08:20:53 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Mon, 20 Jan
+ 2025 08:20:52 +0100
+Message-ID: <61342a4d-5790-43a5-a5ca-7ee340edc23b@foss.st.com>
+Date: Mon, 20 Jan 2025 08:20:51 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250120-get-dram-size-v4-1-e74103e36d6b@per1cycle.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/9] usb: dwc3-generic: Reorder include
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Jan Kiszka
+ <jan.kiszka@siemens.com>, Neil Armstrong <neil.armstrong@linaro.org>, Tom
+ Rini <trini@konsulko.com>
+References: <20250116081738.2511223-1-patrice.chotard@foss.st.com>
+ <20250116081738.2511223-4-patrice.chotard@foss.st.com>
+ <877c6v83ts.fsf@baylibre.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <877c6v83ts.fsf@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-20_01,2025-01-16_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,115 +94,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Huan:
-
-On 10:22 Mon 20 Jan     , Huan Zhou wrote:
-> Implement functionality to probe and calculate the DRAM size
-> during the boot phase for the RISC-V spacemit K1 platform.
-                              we use 'SpacemiT', to be consistent
-> 
-> Tested-by: Marcel Ziswiler <marcel@ziswiler.com> # BPI-F3 16G
-> Signed-off-by: Huan Zhou <me@per1cycle.org>
-> ---
-> This patch introduce improvement for get dram size on spacemit k1 platform,
-> retrieving the dram size dynamically.
-> Have tested on Licheepi LPI3A 8G[1].
-> 
-> Links:
-> [1] https://gist.github.com/per1cycle/e4eab66ebb6f83fe5118e823367fce28 .
-> 
-> Changes in v4:
-> - shorten the commit message.
-> - More proper way for `map_format_size` -> `ddr_map_size`
-> - Link to v3: https://lore.kernel.org/r/20250114-get-dram-size-v3-1-83d5f88154d4@per1cycle.org
-> 
-> Changes in v3:
-> - Remove the inline attr in arch/riscv/cpu/k1/dram.c map_format_size().
-> - Add detailed commit message.
-> - Link to v2: https://lore.kernel.org/r/20250114-get-dram-size-v2-1-aba5a281ea28@per1cycle.org
-> 
-> Changes in v2:
-> - Fix bracker and return type in map_format_size() function.
-> - Add test log in the cover letter..
-> - Link to v1: https://lore.kernel.org/r/20250108-get-dram-size-v1-1-4bae32ecf756@per1cycle.org
-> ---
->  arch/riscv/cpu/k1/dram.c | 40 ++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 38 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/riscv/cpu/k1/dram.c b/arch/riscv/cpu/k1/dram.c
-> index c477c15cbfb19f0e3a0ee72985b602f5bda352d7..0f73cf9b8c962c277ba797145579ed864e06ab81 100644
-> --- a/arch/riscv/cpu/k1/dram.c
-> +++ b/arch/riscv/cpu/k1/dram.c
-> @@ -4,17 +4,53 @@
->   */
->  
->  #include <asm/global_data.h>
-> +#include <asm/io.h>
->  #include <config.h>
-> +#include <bitfield.h>
->  #include <fdt_support.h>
->  #include <linux/sizes.h>
->  
-> +#define DDR_BASE 0xC0000000
->  DECLARE_GLOBAL_DATA_PTR;
->  
-> +static phys_size_t ddr_map_size(u32 val)
-> +{
-> +	u32 tmp;
-> +
-> +	if (!(val & 0x1))
-> +		return 0;
-> +
-> +	tmp = bitfield_extract(val, 16, 5);
-> +	switch (tmp) {
-> +	case 0xd:
-> +		return 512;
-> +	case 0xe:
-> +		return 1024;
-> +	case 0xf:
-> +		return 2048;
-> +	case 0x10:
-> +		return 4096;
-> +	case 0x11:
-> +		return 8192;
-> +	default:
-> +		pr_info("Invalid DRAM density %x\n", val);
-> +		return 0;
-> +	}
-> +}
-> +
-> +phys_size_t ddr_get_density(void)
-> +{
-> +	phys_size_t cs0_size = map_format_size(readl((void *)DDR_BASE + 0x200));
-> +	phys_size_t cs1_size = map_format_size(readl((void *)DDR_BASE + 0x208));
-patch wasn't even compiling tested? although this fixed in v5
-
-> +	phys_size_t ddr_size = cs0_size + cs1_size;
-> +
-> +	return ddr_size;
-> +}
-> +
->  int dram_init(void)
->  {
->  	gd->ram_base = CFG_SYS_SDRAM_BASE;
-> -	/* TODO get ram size from ddr controller */
-> -	gd->ram_size = SZ_4G;
-> +	gd->ram_size = ddr_get_density() * SZ_1M;
->  	return 0;
->  }
->  
-> 
-> ---
-any way, please always make sure your patch tested well before 
-sending out to public mailing list, including compiling and run time test..
-
-also, please wait a few days before sending new version,
-give some time for poeple to comment.
-
-for title of this email (first line commit message), please drop full stop
 
 
--- 
-Yixun Lan (dlan)
-Gentoo Linux Developer
-GPG Key ID AABEFD55
+On 1/16/25 11:12, Mattijs Korpershoek wrote:
+> Hi Patrice,
+> 
+> Thank you for the patch.
+> 
+> On jeu., janv. 16, 2025 at 09:17, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
+> 
+>> Reorder include following rules available here :
+>> https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
+> 
+> Nitpick: we don't state in the commit message that we also removed the
+> unused includes.
+> A sentence like: "While at it, also remove the unused includes" would be
+> nice to have.
+> 
+> If you need to send v3 for other reasons than this comment, please
+> consider adding it.
+
+Yes, i will update the comment
+Thanks
+
+Patrice
+
+> 
+> In case, this is a nitpick, so:
+> 
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> 
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Marek Vasut <marex@denx.de>
+>>
+>> ---
+>>
+>> Changes in v2:
+>>   - remove useless include files
+>>
+>>  drivers/usb/dwc3/dwc3-generic.c | 20 ++++----------------
+>>  1 file changed, 4 insertions(+), 16 deletions(-)
+>>
+>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+>> index 2ab41cbae45..bc7d2d4234b 100644
+>> --- a/drivers/usb/dwc3/dwc3-generic.c
+>> +++ b/drivers/usb/dwc3/dwc3-generic.c
+>> @@ -7,29 +7,17 @@
+>>   * Based on dwc3-omap.c.
+>>   */
+>>  
+>> -#include <cpu_func.h>
+>> -#include <log.h>
+>>  #include <dm.h>
+>> -#include <dm/device-internal.h>
+>> +#include <reset.h>
+>> +#include <asm/gpio.h>
+>>  #include <dm/lists.h>
+>> -#include <dwc3-uboot.h>
+>> -#include <generic-phy.h>
+>> -#include <linux/bitops.h>
+>>  #include <linux/delay.h>
+>> -#include <linux/printk.h>
+>> -#include <linux/usb/ch9.h>
+>>  #include <linux/usb/gadget.h>
+>> -#include <malloc.h>
+>>  #include <power/regulator.h>
+>> -#include <usb.h>
+>> -#include "core.h"
+>> -#include "gadget.h"
+>> -#include <reset.h>
+>> -#include <clk.h>
+>>  #include <usb/xhci.h>
+>> -#include <asm/gpio.h>
+>> -
+>> +#include "core.h"
+>>  #include "dwc3-generic.h"
+>> +#include "gadget.h"
+>>  
+>>  struct dwc3_generic_plat {
+>>  	fdt_addr_t base;
+>> -- 
+>> 2.25.1
