@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5191C02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 19:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E24C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 19:20:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 615F08032B;
-	Mon, 20 Jan 2025 20:20:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B8F5480780;
+	Mon, 20 Jan 2025 20:20:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oVpb1bt5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UBWOk8Ev";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05AAA806F8; Mon, 20 Jan 2025 20:20:42 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 9A74B8077F; Mon, 20 Jan 2025 20:20:46 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04D76800C2
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 20:20:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9A9180717
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 20:20:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ab633d9582aso93978066b.1
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 11:20:40 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-aa6a92f863cso901594266b.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 11:20:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737400839; x=1738005639; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9OkIISAHOr3DZvwJ0coxD4gf5mKOHzo2htoKxNgRDPs=;
- b=oVpb1bt5ZhrMMgXukLxEZvN5/9G1KljaMCzjwZIOgIQPCFqubC/520xflJi080Ia+q
- SvDAH89R5bF6OIWgPeFGJjv0tu93n02f8XyP04Z4rwygnDjxgWkVJaUq2H4QawNDGP5/
- yOpO5NeR6HXM198O1RCE0ttN436y0E7XiHqZQ=
+ d=chromium.org; s=google; t=1737400843; x=1738005643; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=heyLE2wwrNyu4Ee6tIygptWDi2jfc01b3JimUd1hW/k=;
+ b=UBWOk8EvVB03lY5WkwTz6hQ4L3cEafwQ2eAIMJyJlvTXxRv4AngQv+JOusL9mRgC2R
+ gqucRa2VFc28GRULWFXaQPoEfvfqUpL6Upu6fFwmbnelyOsc8sS1L2XeolvKwmCc1Fi2
+ 8f9MVtu2euZF2MayNUB9LJFKL4BLd9wKY3P2E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737400839; x=1738005639;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9OkIISAHOr3DZvwJ0coxD4gf5mKOHzo2htoKxNgRDPs=;
- b=Ee1RrIu85i94wrpikX9uKIeUM+jcbXuu8KqpYM66NNrRxrV0CWmyPnHzfB2RYChTEU
- JO0r8bmLLfsIQPGxnOOKkx2x3XZpiCEehfOdhLoReUdZefvX4wfemfUksDLm0+dDIo+N
- F1Z5+aYKI4xf32hkZwyRt3jDLeNCSm8VX8sA68yA9xRTccpHFsck6cWdbWbJPlEwCC1m
- gNvp/8+oQrecr+u0TMjvbr7HVzeMLalP0OCSf2g1TBsVHWMBeR/oiFkYduXHEGJeUbi1
- Qm2ewY+bMfzoCCM/Jd5gi4MGvYwcXQ97BeNvxoImBxxlYAoPUDx5Uzff+N4uo+cZz868
- C3XA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVpqONkUR2rUfpzD26XaaqYhzLF4U4a9ff+T6HEQz3zF4lR18FyEkQGZats6Cby8SNN2Zmtf5s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1IsGDl29NuP9FTU3u8PnmPKuOIb6scfk1sjgqpF8WbhutNCoV
- 8WCf5y4WgI5YoUIMd9haAE8xTbTnSuhoZSrHUz7E3A+osyHDnpeAZxnwrwsekaWM8iP56Hwqy1o
- jQLSYhTA1eQKrcOQ2T5eb0GdYO7ePdsTOu8TCQEqJGjcRrlI=
-X-Gm-Gg: ASbGnctE1D5jsP6vpDn9Wyj1gc0+gBXpZ/yhVMkM//4Z+mm90dvJ+1B/MhBiQao0/c7
- T21KXRXg0izZksKBzAnkKY29/HNkVo9opwS9RkxEGvwXAr3ZtIgaY
-X-Google-Smtp-Source: AGHT+IEbxbipiRYcg8DQ527sOhxqkqp8LkCpGZfQ1vyTeKRzolkBty5UKm/AB40wXkMNn/1F95rfKPE1RBIdt2PGP38=
-X-Received: by 2002:a17:906:6a17:b0:aa6:b473:8500 with SMTP id
- a640c23a62f3a-ab38b44e059mr1213852166b.42.1737400839399; Mon, 20 Jan 2025
- 11:20:39 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737400843; x=1738005643;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=heyLE2wwrNyu4Ee6tIygptWDi2jfc01b3JimUd1hW/k=;
+ b=tsTI8wO39H4oWzHFuzidMZ7WDnjNH02evW43BgV6BvSR5yB8Cjk7qyPkrEykE5R5d5
+ 6A79y97GKZ8proa5+LuIKDYKAJnCONTEL50iwa2iAe6bSIix06/G66acYfWY5B5DTunw
+ ikF6M/iXp2gXHmdOV+RiCmUq6lzS2GJOTIOLzwoAxec8TmRXLWwlZZk7t8rRlgdngQcZ
+ BgX+wCOwz0YGKOnq8I6aAREdh5JCNXY9e9kNirPT210ZxX1TZPuz+/SsU6VdkHRJOGIv
+ mI3jOOEp9ec+vV59w68AA/UfCs4arzoQT0/d9seCUurTN0DuBMx18Db9Qv6VgYkKmNCo
+ eEHw==
+X-Gm-Message-State: AOJu0Yy0o8vKv0eAAqdF5MwBRilTG5cw00HzzfkbDI+79lERBCxogsZ+
+ F4AIHN6dWvVwFf2yIC5CtnczIw1wlZL48DnFy8eveUEJL4+SxLIAJNy3vtCp5G1O+FVjqZJh62r
+ cWSjmorDY/G+o4n9k8PM2IGcuv59uFnNCKOisUb5gCOLO1Sg=
+X-Gm-Gg: ASbGnctnsoGWsxff4Khe+kHiGzv79z/egbNvUhHLNiv6kICJI1Ou9nkIaQMz/wXK8ho
+ OLeGn2ovCPLdPnJvVsNWDmFRTdvsE98+Xr39nG+4qRmkIrccLzg1i
+X-Google-Smtp-Source: AGHT+IHltjz5WG++tLZU7DRgEelyDG8yXhM+57IRiLO0dK/KGXS51qq7VYYRJQuZZ2qbqCJhddfrKf3JExbeZ++spVA=
+X-Received: by 2002:a17:907:7fab:b0:aaf:87e5:4eac with SMTP id
+ a640c23a62f3a-ab38b4aa1bbmr1462386066b.54.1737400842752; Mon, 20 Jan 2025
+ 11:20:42 -0800 (PST)
 MIME-Version: 1.0
-References: <tencent_78F00D5010A6F5A48D0F464FC0E026DB5906@qq.com>
- <20250118164038.GY3476@bill-the-cat>
-In-Reply-To: <20250118164038.GY3476@bill-the-cat>
+References: <CAFLszTgrJvFZyh452SOLpWnZSLA_cK6VgFjXNEMzkOrjQe9Hng@mail.gmail.com>
+In-Reply-To: <CAFLszTgrJvFZyh452SOLpWnZSLA_cK6VgFjXNEMzkOrjQe9Hng@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Jan 2025 12:20:26 -0700
-X-Gm-Features: AbW1kvZE7RyGz3dLwWEdmnJUGzZE-k-CMWqIi8ux9kUdorsdOdwYMrV7U9ZNnVM
-Message-ID: <CAFLszThRJ7Jxez4qW=_7ZP2100pmk-Q2W4W=tr-uV=zpQj_aCA@mail.gmail.com>
-Subject: Re: [PATCH v1] arm: Remove redundant loading of image copy start offse
-To: Tom Rini <trini@konsulko.com>
-Cc: 1425075683@qq.com, u-boot@lists.denx.de,
- =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
+Date: Mon, 20 Jan 2025 12:20:29 -0700
+X-Gm-Features: AbW1kvZQP54jZNxg0smq4Qa5oysBDVA-ShHOpR_t2A40haJu_JxLF4PhqR58D6k
+Message-ID: <CAFLszTh-_YEkEtYvFDduZJkpJ9KVVJCbHZtY=9vfdGz_byLAQQ@mail.gmail.com>
+Subject: Re: OP-TEE test suite
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heiko Stuebner <heiko.stuebner@cherry.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,43 +86,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Liya,
++Patrick Delaunay <patrick.delaunay@foss.st.com> too
 
-On Sat, 18 Jan 2025 at 09:40, Tom Rini <trini@konsulko.com> wrote:
+
+On Mon, 13 Jan 2025 at 12:01, Simon Glass <sjg@chromium.org> wrote:
 >
-> On Sat, Jan 18, 2025 at 11:39:18AM +0800, 1425075683@qq.com wrote:
+> Hi Heiko, Jen,
 >
-> > From: Liya Huang <1425075683@qq.com>
-> >
-> > Remove redundant loading of image copy start offset.
-> > Because the beginning is already computed
-> >
-> > Reviewed-by: Pali Roh=C3=A1r <pali@kernel.org>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > Signed-off-by: Liya Huang <1425075683@qq.com>
-> > ---
-> >
-> > Changes in v1:
-> > - Due to an error, the patch was resubmitted, leaving the code unchange=
-d
-> >
-> >  arch/arm/lib/relocate.S | 2 --
-> >  1 file changed, 2 deletions(-)
+> I noticed recently that the unit tests for OP-TEE are not build for
+> sandbox (or in fact any board). The code seems to have gone out of
+> date and doesn't build.
 >
-> I don't understand what you're doing. Please stop posting patches that
-> have "Reviewed-by" tags on them without pointing to other evidence that
-> the person in question supplied that tag somewhere else in public.
-> Thanks.
-
-Just to explain that a bit more, when you send a patch it normally
-should just have your 'Signed-off-by:' line. Then, other people reply
-to your patch with 'Reviewed-by name <email>' tags and these get
-collected by patchwork.
-
-If you then send a new version (say v2), you can collect the tags from
-v1 and add them to you patch. But until then you should not add your
-own 'Reviewed-by' tags since it suggests that others have already
-reviewed the patch, when they haven't :-)
-
-Regards,
-Simon
+> Do you think you could take a look?
+>
+> Regards,
+> Simon
