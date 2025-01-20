@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 389B1C02182
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:32:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 995C3C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:32:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 032D280BA6;
-	Mon, 20 Jan 2025 22:27:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5193080BAB;
+	Mon, 20 Jan 2025 22:27:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NExGf7ia";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GD16h2tQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7503A80BA3; Mon, 20 Jan 2025 22:27:44 +0100 (CET)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 2061580BAB; Mon, 20 Jan 2025 22:27:46 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D09780BAF
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:27:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4CB080BA4
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:27:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3a8f1c97ef1so16525175ab.2
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:27:42 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-844eb33827eso147585139f.2
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:27:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737408460; x=1738013260; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737408462; x=1738013262; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VorXgMg84Nf17xE9/9HcdqYB0sPbI2mi7AO5UtKlRrw=;
- b=NExGf7iaCYvPKm5z37Mq73+xnbNgGnQeRpk632aBSmO+U6stN4rwxw/XIsDuc4U3D9
- tsGD/GYoMWK5sdNqXxhZMzyD9hH2OJWYtARLQTdYy9DAI2qWIrV/W3gyWXPHl9OZrvtc
- OGHfCok9SK6yLnk5Yymzw0N78heXqFu7bu0CQ=
+ bh=GtNYYbm/QlopIlPsWbOyQCrLep0pitK0nEl3X9+/ExM=;
+ b=GD16h2tQkmXhwTc1UNLXGIv5m+P9WaeuGWUagu/AXUnuzvaV8QH5lLrPeBDRCxDzj9
+ vUNi3EDUQnd6VOjeJjbD550Nnb7KIMzWZrfH5cvUAKiM5WB+98yreN5MIjhgu+m72bpm
+ /8qC9s/jvva7CFQ/7Bw6DvHeUjkQCkjJzLm3w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737408460; x=1738013260;
+ d=1e100.net; s=20230601; t=1737408462; x=1738013262;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VorXgMg84Nf17xE9/9HcdqYB0sPbI2mi7AO5UtKlRrw=;
- b=deQf+Z3Rn0fOt6S67pn3SJlwxlJQ4rA8x2LJykLWVghRbxgPuR0m81ip1MluDf7vyn
- +O2MMWZ9N/hgNRN3Gk1PiWTo6jOjvY3tR2LGzkI8kIzgfx/ERJwdvW2IZldKziOvqbkG
- G5qpumzBYgQTeUtik6/esvNpVHkddJjiAkJwESR2FBN6iqOgPYiHjBY7N5+W3kFk51NY
- pFH9MXWYHZHrn/6i+hsJCK4wu5FOCnt2xTnV2SS+5msKPNO3XnifBPXqYTo8YZ8X+Yfg
- NBw7lCea3voQboyRjTV/Jg6nMbaW8DtudDxoFUJ4TvzV3VwT3okGL+AlwMTfbCjo2jvU
- Gk8Q==
-X-Gm-Message-State: AOJu0YyT7b8iNpiFKB24EHEqmSZa725NMHDgDwxj4y07Md66qJIqpRi9
- fV9SS8FrB367EmyhdIIQ9xldQjAphmRDzR1LwPn3RX8v86KJJJAH6rQWW9Isb5Yxgu9grxNgAL8
+ bh=GtNYYbm/QlopIlPsWbOyQCrLep0pitK0nEl3X9+/ExM=;
+ b=R0fGnQY2vxavXJr1lEQVmiDgnGOMRgZb5NlcAd0+feSPYlf3Rfq9+qvxmKn5RGL72t
+ 3YMNdwSzvYkwUXZpQAIJbfWdW2I6lGlq1h3i6XTqUZNCgVFTEMbQWvbdDJHatrOmgQu1
+ ya04dlrxIEFRaC5ulH57MfWT6HYyvq1ep2UiP8jiINkYovXJfJwZhEjgBdbIb/DXOWZk
+ Ry1yd3UO47CyipnqKI49PVNx5PWCeLRAI5bGLI6VpWcCM1m7MjDppOihksQc0P832BvM
+ KnSJcvC/MmsQwQ0Qety/VxgS1viK0xqsNHueOjloSUqxVoZCgFzsajjL4TnaspTTX5JD
+ ZEOA==
+X-Gm-Message-State: AOJu0YzMkh43Kf0ueAKy0bWk00+10wZgIeypg1FeqYHyc/G4ReYI6sa5
+ xmUqRcs/9U6RG872Uc2dbeP5i8/mYo+byOtDuvlW5edkir50VcvStYJtl/U+mf4IYAW1CWJ3dmw
  =
-X-Gm-Gg: ASbGnct+1z2N2RQqsq/t5UsI5bItxkG2c9ghBxe1Re+zRsrQEamsrJL26bokp3xYfHO
- iVFEYB2A9ZL470sUlICxSURmLw2m3PicKdIfcBja6tjKBExBwseaGzYHcXfJ6WEu54BIvPKkJjQ
- gfauZU3PZEvDs3CqjCbeiFKJM/SvxgYDvzxbvO+mjbIG+Y+aVhMMyBGIwCWZPniE/qE5R0aKinR
- DmAFHa2jQzvZOuuAgtN0V75+5lUkNzogzPa5B5I0w90EHWX6s9q66fs4lLJ8c+db+W95tRHIrp0
- frW4hxQ1E6I3yQo8Ek1qHIoHCTgBVB8=
-X-Google-Smtp-Source: AGHT+IFNJZLVpeI6xYDehtfzgSwHiQvdUhW6+twwSp7faev8bu5AjcIl41t3/fYH9tRZoO/m3y4mUw==
-X-Received: by 2002:a05:6e02:1aa8:b0:3ce:8898:af17 with SMTP id
- e9e14a558f8ab-3cf743ab512mr120949485ab.4.1737408459920; 
- Mon, 20 Jan 2025 13:27:39 -0800 (PST)
+X-Gm-Gg: ASbGnctdCc4L7s4p+bYB7lamkA51vjmjNoCNUJTjNmChbOzYQT5V9DM4UjNGpeba7/W
+ UukEPr3aG3ZNLVayKy94j2IxhLnDc1ObHVrILdOquZTkYFZdUPeCx3kNJWBx6xYQQhU7pmjR0Pt
+ Y75/oeutXB01QT1VOYA3vpIIKBiOaajMTXnIXk3NrdJ52IYiYUDGmo11EN0nvY0gXBnlxgsgTqP
+ OkDGz+ECHt8DbGpiuYI6m34BDfuTeij+LB1cwoGeD25g5PI4CYtonUGTCfiaCXY6YL3Bt6zcLMc
+ U5BTkHaCC8l480kj5fb/Yjb8X6Kmntk=
+X-Google-Smtp-Source: AGHT+IENogScdez0DTK5Uafx/5ZNcfmzmVzy+L/MBGpkaTKKweKbbD0Q7A1mMrTXp7rVeerEz4k33A==
+X-Received: by 2002:a05:6602:4a0e:b0:843:e667:f198 with SMTP id
+ ca18e2360f4ac-851b616d44amr1089585439f.2.1737408462115; 
+ Mon, 20 Jan 2025 13:27:42 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.27.38
+ 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.27.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:27:38 -0800 (PST)
+ Mon, 20 Jan 2025 13:27:40 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 40/44] test: Record and show the totals for all test runs
-Date: Mon, 20 Jan 2025 14:26:02 -0700
-Message-ID: <20250120212613.516664-41-sjg@chromium.org>
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 41/44] test: Sort the test suites
+Date: Mon, 20 Jan 2025 14:26:03 -0700
+Message-ID: <20250120212613.516664-42-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250120212613.516664-1-sjg@chromium.org>
 References: <20250120212613.516664-1-sjg@chromium.org>
@@ -95,78 +94,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With 'ut all' multiple test suites are run. Add a way to collect totals
-and show them at the end.
+Put the suites in order by name, for easier code-maintenance. This also
+helps find test results for a particular swuit in the 'ut all' output.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Add missing comment for 'total'
+(no changes since v1)
 
- include/test/test.h | 4 ++++
- test/cmd_ut.c       | 1 +
- test/test-main.c    | 7 +++++++
- 3 files changed, 12 insertions(+)
+ test/cmd_ut.c | 40 ++++++++++++++++++++--------------------
+ 1 file changed, 20 insertions(+), 20 deletions(-)
 
-diff --git a/include/test/test.h b/include/test/test.h
-index f7087ab4eea..bac43c81d63 100644
---- a/include/test/test.h
-+++ b/include/test/test.h
-@@ -27,6 +27,8 @@ struct ut_stats {
-  * struct unit_test_state - Entire state of test system
-  *
-  * @cur: Statistics for the current run
-+ * @total: Statistics for all test runs
-+ * @run_count: Number of times ut_run_list() has been called
-  * @start: Store the starting mallinfo when doing leak test
-  * @of_live: true to use livetree if available, false to use flattree
-  * @of_root: Record of the livetree root node (used for setting up tests)
-@@ -48,6 +50,8 @@ struct ut_stats {
-  */
- struct unit_test_state {
- 	struct ut_stats cur;
-+	struct ut_stats total;
-+	int run_count;
- 	struct mallinfo start;
- 	struct device_node *of_root;
- 	bool of_live;
 diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 80df954694f..0b8bfe603b9 100644
+index 0b8bfe603b9..2e5519b55f9 100644
 --- a/test/cmd_ut.c
 +++ b/test/cmd_ut.c
-@@ -206,6 +206,7 @@ static int do_ut_all(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
- 				any_fail = retval;
- 		}
+@@ -90,7 +90,10 @@ int cmd_ut_category(struct unit_test_state *uts, const char *name,
+ 	NULL, \
  	}
-+	ut_report(&uts->total, uts->run_count);
  
- 	return any_fail;
- }
-diff --git a/test/test-main.c b/test/test-main.c
-index d02ab791b5a..22b9b46d9cd 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -694,6 +694,8 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
- 	bool has_dm_tests = false;
- 	int ret;
++SUITE_DECL(addrmap);
+ SUITE_DECL(bdinfo);
++SUITE_DECL(bloblist);
++SUITE_DECL(bootm);
+ SUITE_DECL(bootstd);
+ SUITE_DECL(cmd);
+ SUITE_DECL(common);
+@@ -99,25 +102,25 @@ SUITE_DECL(env);
+ SUITE_DECL(exit);
+ SUITE_DECL(fdt);
+ SUITE_DECL(font);
+-SUITE_DECL(optee);
+-SUITE_DECL(overlay);
++SUITE_DECL(hush);
+ SUITE_DECL(lib);
++SUITE_DECL(loadm);
+ SUITE_DECL(log);
+ SUITE_DECL(mbr);
+-SUITE_DECL(mem);
+-SUITE_DECL(setexpr);
+ SUITE_DECL(measurement);
+-SUITE_DECL(bloblist);
+-SUITE_DECL(bootm);
+-SUITE_DECL(addrmap);
+-SUITE_DECL(hush);
+-SUITE_DECL(loadm);
++SUITE_DECL(mem);
++SUITE_DECL(optee);
++SUITE_DECL(overlay);
+ SUITE_DECL(pci_mps);
+ SUITE_DECL(seama);
++SUITE_DECL(setexpr);
+ SUITE_DECL(upl);
  
-+	memset(&uts->cur, '\0', sizeof(struct ut_stats));
-+
- 	if (!CONFIG_IS_ENABLED(OF_PLATDATA) &&
- 	    ut_list_has_dm_tests(tests, count, prefix, select_name)) {
- 		has_dm_tests = true;
-@@ -734,5 +736,10 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
- 	if (ret == -ENOENT)
- 		printf("Test '%s' not found\n", select_name);
+ static struct suite suites[] = {
++	SUITE(addrmap),
+ 	SUITE(bdinfo),
++	SUITE(bloblist),
++	SUITE(bootm),
+ #ifdef CONFIG_UT_BOOTSTD
+ 	SUITE_CMD(bootstd, do_ut_bootstd),
+ #endif
+@@ -128,25 +131,22 @@ static struct suite suites[] = {
+ 	SUITE(exit),
+ 	SUITE(fdt),
+ 	SUITE(font),
++	SUITE(hush),
++	SUITE(lib),
++	SUITE(loadm),
++	SUITE(log),
++	SUITE(mbr),
++	SUITE(measurement),
++	SUITE(mem),
+ #ifdef CONFIG_UT_OPTEE
+ 	SUITE_CMD(optee, do_ut_optee),
+ #endif
+ #ifdef CONFIG_UT_OVERLAY
+ 	SUITE_CMD(overlay, do_ut_overlay),
+ #endif
+-	SUITE(lib),
+-	SUITE(log),
+-	SUITE(mbr),
+-	SUITE(mem),
+-	SUITE(setexpr),
+-	SUITE(measurement),
+-	SUITE(bloblist),
+-	SUITE(bootm),
+-	SUITE(addrmap),
+-	SUITE(hush),
+-	SUITE(loadm),
+ 	SUITE(pci_mps),
+ 	SUITE(seama),
++	SUITE(setexpr),
+ 	SUITE(upl),
+ };
  
-+	uts->total.skip_count += uts->cur.skip_count;
-+	uts->total.fail_count += uts->cur.fail_count;
-+	uts->total.test_count += uts->cur.test_count;
-+	uts->run_count++;
-+
- 	return ret;
- }
 -- 
 2.43.0
 
