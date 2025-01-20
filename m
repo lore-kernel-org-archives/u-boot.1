@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA88DC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 14:02:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785B7C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 14:36:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 675AF805C5;
-	Mon, 20 Jan 2025 15:02:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DC93080077;
+	Mon, 20 Jan 2025 15:36:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=waldekranz.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iexeFEPd";
+	dkim=pass (2048-bit key; unprotected) header.d=waldekranz-com.20230601.gappssmtp.com header.i=@waldekranz-com.20230601.gappssmtp.com header.b="OzDjYY6B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89DDA806DC; Mon, 20 Jan 2025 15:02:34 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 53C2A800C2; Mon, 20 Jan 2025 15:36:22 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6EAB801CF
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 15:02:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11DCE80017
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 15:36:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=waldekranz.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7b6c3629816so231954885a.1
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 06:02:31 -0800 (PST)
+ spf=pass smtp.mailfrom=tobias@waldekranz.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5401e6efffcso5015987e87.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 06:36:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737381751; x=1737986551; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bOkTeLkUmIuM55kidFSsBRif8TsbUpWA0xE/yIBUuKw=;
- b=iexeFEPdTJpVOizHAz3oM0+iEEMJ6tfj3dFFzBw8kpJcNnHxYmEUc1FZQCDk9C/wYi
- FKqsavOZ3aF0rceh7zqTWLm8lKIkDyi9ERHosW+UPXbORjmKNU7fksRBrazhDcTCoo8u
- ZCNvKivROdCET1WOpIvQgawDadhvEJGiFNVDTRDpHI7+WvC97mB7qFl554URTnU1hOpI
- MYJAgzqeA82yvENHxoUKLdm+iuLovTJBmxnwo3owYChTjDGvqKrQ+jiPset5hOtThy5j
- IF9fj9clu7FXAhoyq263WukmEALVSqY1Wy5oHZAcYqQpjFc5UdsiZgN8lg1DSr83chYJ
- XjvQ==
+ d=waldekranz-com.20230601.gappssmtp.com; s=20230601; t=1737383779; x=1737988579;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=tAmBa1F2ZvYDGAc+H35KzH6GMMuuyjmdsp5VHUuK8Ew=;
+ b=OzDjYY6BhS4uU8n6Ln98a1z8joHMe0uR17elHENpB6ucWULnX5EgpZX0vgPKW5/vZF
+ 04KAWz7zF+l7Jb2KVdnFmqOHtUbfAwV7mfw86D611g5mlJJ4tN2pHayNGMukqBK7TO18
+ oELe/HB2ZQQLPFqKkIezU3Mk+xGkoVdRmTCtTYqxyrrkV898X6DZVXR/vbrHYZgE04Un
+ f0C6XjSAMagcpB+D4oTM1iEyTEGhf4s0uw3CQ0u/jNSySiGUXnNZtDsL2bghE5hY+YnE
+ /aSqLxp8LtDNV8zy7hnwVBQhmjrGUR8fctnfmFENLaXqKdvLKoZQTa0T3/OhMvWg+VgM
+ xDbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737381751; x=1737986551;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bOkTeLkUmIuM55kidFSsBRif8TsbUpWA0xE/yIBUuKw=;
- b=CQl4qlqmVmALRtyQM3UeBYV8M8lMANrQPGJz9FQwymG/rAj795SMDhFAT+RWSwdV0x
- h3ICT16lm0kTlH1xKILZHa/xdocgXWaphO6rGNMxYID91C334OjYEHEw5aU+EaT1zx/f
- CWRRAVDXozZw09JqE/1rsNR0CP/XPQEIifVmLVnyV0gAnUghCjCfxm7PjlZOS4zuhNAt
- PTrbi9hCvIFE4vS9xXKlb29S7FZl51mnwb4pV/EUD9vPxmwZvMZp5kblpnMacbmNV7pQ
- PGtJP/0euRwLhwjvcRI9fIYZMq3GZe4NcIWEgG+GY69k042zT3NN+jhR8aKC3RmBO+2n
- G2Zw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXAwPm/5/lofwK7mp7rJ0iLdyIJ+KOij97PCYV/6WXw0wVlfNSoarbbxADqrOBtPryQjHHsVlY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2N2tSC0W3zpZ8VC309C/Bd1GwP2tfxBMpvaq4CcSzx9+HIY6F
- 0zA+0aox8qnjp3V9GUwAhXqETvohYpaJuOejOO0Y/+K0DkzCW6a95Az9qfT7Kao3uVGAKbr9rE4
- t8LSeQ73jQnrhbm6wGYSIQH/ZqvZ5Poob5sjybQ==
-X-Gm-Gg: ASbGnct6v081fjvaI2gsdzh8t6Ym2OQiOe/CGtYW1Yw24cP5B9LIkFULkTBsJbHMk2s
- k+6rjzi3ReYDSRzgXhD/XEl2aAOP98Q2raUUPy23rrI+pprNPxuvB
-X-Google-Smtp-Source: AGHT+IGyniwQy2S+Qtj3f6pJkC/dMuEIe25mqYYKieJRicntRJvCh+4f5k34XUlI1b16laJfQIwfRrvm7UsAGnul0vw=
-X-Received: by 2002:a05:620a:2551:b0:7b6:cb07:24bc with SMTP id
- af79cd13be357-7be63251a00mr2500603685a.48.1737381750505; Mon, 20 Jan 2025
- 06:02:30 -0800 (PST)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1737383779; x=1737988579;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tAmBa1F2ZvYDGAc+H35KzH6GMMuuyjmdsp5VHUuK8Ew=;
+ b=uao6LyDahdXnUdtm6jxBRKzQAf97jAyrOyj7c8DyTW0qRxM07ZoCyMqEHTKdlQSdov
+ KLunYo1T0nUg8EdW6dzVeoSZNWg5oS/xMeiceH+FsySvsxlDaFZ7Fmsj4MjPocSMG3X4
+ vPAd9xUxdc6TOj2o2Zo3UWtB6ek4xMe7gkEa+lOPPc54n68Y9dmKJPi4HTRMfKYNaA+J
+ 20er/nBUrnbE1vJK2pnDz3UtxxEZoXPNS7I4THJv2ZoxAA5jtGr43I+PfsLXhQqGUz6U
+ mRaSHoM8+GqGP0k0vVpOArnUSyTNw6bZ0liL7Wn9uKBRJjzzroXlvBDfQ32m3FFv3wuU
+ pHrg==
+X-Gm-Message-State: AOJu0YwqGLmehSf+AKYBAeEqdGkujJhxRXhSscV64lzNmoW91PNVhcUx
+ K5GjF53ZKP4Kq+gZcuzM5KCel19y+wnitKyxLSxXtShwjQGzojg7IT+TFLI03vk=
+X-Gm-Gg: ASbGncvcMCsgxI0lqOOtAEUt3ufwyB6VjkCzV0E7qZ/eab3/j93iNpZspZKdFSH2Pc2
+ kAIUI9vdOL96PZV2nNm00X65s3xh+zKGmK9lZlS+N15YsKJWMOx3cpxCibpWGzLZc2KsDH0rCkc
+ JdzqIkColSgGLxIfeGesYxoXB/uNQX8Vs8RHRZUHEx9ob3jVjU9zzPazO3hBgb+ZwVxcWTjqg5D
+ bOxHRwn5AU/YbHfpYeFl/dedIamQxKy6defHmzbVpfh65MKoKr2jd4xbzQ9LfQCL61Ce2CPlqNN
+ 353QnQXtHPxu5m3SAjGzpAwb
+X-Google-Smtp-Source: AGHT+IHbxCtuDsmKtPxeXRROxbdbCTDNB3nM6h7NLAy/ZW1Qf2yPpxs/pbfjTnQ/lem2RT3UM4nU1g==
+X-Received: by 2002:ac2:5dce:0:b0:543:9a5c:1914 with SMTP id
+ 2adb3069b0e04-5439c22d87amr3955722e87.4.1737383779118; 
+ Mon, 20 Jan 2025 06:36:19 -0800 (PST)
+Received: from wkz-x13 (h-79-136-22-50.NA.cust.bahnhof.se. [79.136.22.50])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5439af790cbsm1341695e87.250.2025.01.20.06.36.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jan 2025 06:36:17 -0800 (PST)
+From: Tobias Waldekranz <tobias@waldekranz.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Anton Antonov <Anton.Antonov@arm.com>, Bin
+ Meng <bmeng@tinylab.org>
+Subject: Re: [PATCH v3 4/5] blkmap: store type of blkmap device in
+ corresponding structure
+In-Reply-To: <CADg8p96jX0eDKpxTuBLKS5vx=UJ=QLeBxnmfroUFYZ8VJWv1Pg@mail.gmail.com>
 References: <20250120105045.1281262-1-sughosh.ganu@linaro.org>
- <20250120105045.1281262-2-sughosh.ganu@linaro.org>
- <67f57223-2c0d-414b-9e8c-138fdc57d92a@gmx.de>
-In-Reply-To: <67f57223-2c0d-414b-9e8c-138fdc57d92a@gmx.de>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 20 Jan 2025 19:32:18 +0530
-X-Gm-Features: AbW1kvYNPyC_I7Cagji2mrDoiWLYrIfNvchW6GDSjuV8Bo6l_EirhB_A2y442eE
-Message-ID: <CADg8p979JG5QVQi_Qc7520xHvkmcr7PpJq6kHJ8qN204sL7uoQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/5] fdt: add support for adding pmem nodes
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Anton Antonov <Anton.Antonov@arm.com>, 
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <20250120105045.1281262-5-sughosh.ganu@linaro.org>
+ <877c6p7juk.fsf@waldekranz.com>
+ <CADg8p96jX0eDKpxTuBLKS5vx=UJ=QLeBxnmfroUFYZ8VJWv1Pg@mail.gmail.com>
+Date: Mon, 20 Jan 2025 15:36:15 +0100
+Message-ID: <874j1t7dsw.fsf@waldekranz.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,159 +103,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 20 Jan 2025 at 18:01, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On m=C3=A5n, jan 20, 2025 at 19:30, Sughosh Ganu <sughosh.ganu@linaro.org> =
+wrote:
+> On Mon, 20 Jan 2025 at 17:55, Tobias Waldekranz <tobias@waldekranz.com> w=
+rote:
+>>
+>> On m=C3=A5n, jan 20, 2025 at 16:20, Sughosh Ganu <sughosh.ganu@linaro.or=
+g> wrote:
+>> > Add information about the type of blkmap device in the blkmap
+>> > structure. Currently, the blkmap device is used for mapping to either
+>> > a memory based block device, or another block device (linear
+>> > mapping). Put information in the blkmap structure to identify if it is
+>> > associated with a memory or linear mapped device. Which can then be
+>> > used to take specific action based on the type of blkmap device.
+>>
+>> Is this restriction really necessary? Why should it not be possible to
+>> setup a block map like this:
+>>
+>>  myblkmap:
+>> .--------.      .-----.
+>> | slice0 +------> RAM |
+>> :--------:      '-----'     .-------.
+>> | slice1 +------------------> eMMC0 |
+>> :--------:      .-------.   '-------'
+>> | slice2 +------> eMMC1 |
+>> '........'      '-------'
+>>
+>> Linux's "device mapper", after which blkmaps are modeled, works in this
+>> way.  I.e. a blkmap is just a collection of slices, and it is up to each
+>> slice how its data is provided, meaning that the user is free to compose
+>> their virtual block device in whatever way they need.
 >
-> On 20.01.25 11:50, Sughosh Ganu wrote:
-> > From: Masahisa Kojima <kojima.masahisa@socionext.com>
-> >
-> > One of the problems OS installers face, when running in EFI, is that
-> > the mounted ISO after calling ExitBootServices goes away. For some
-> > distros this is a problem since they rely on finding some core packages
-> > before continuing the installation. Distros have works around this --
-> > e.g Fedora has a special kernel command line parameter called
-> > inst.stage2 [0].
-> >
-> > ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
-> > don't have anything in place for DTs. Linux and device trees have support
-> > for persistent memory devices. So add a function that can inject a pmem
-> > node in a DT, so we can use it when launhing OS installers with EFI.
->
-> We also have ACPI support in U-Boot. In a future patch series I guess we
-> could add the generation of said ACPI tables.
->
-> >
-> > [0]
-> > https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/installation_guide/chap-anaconda-boot-options#sect-boot-options-installer
-> >
-> > Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V2:
-> > * Fix a checkpatch error by putting a blank line after a function
-> >
-> >   boot/fdt_support.c    | 40 +++++++++++++++++++++++++++++++++++++++-
-> >   include/fdt_support.h | 13 +++++++++++++
-> >   2 files changed, 52 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> > index 49efeec3681..613685b80eb 100644
-> > --- a/boot/fdt_support.c
-> > +++ b/boot/fdt_support.c
-> > @@ -18,6 +18,7 @@
-> >   #include <dm/ofnode.h>
-> >   #include <linux/ctype.h>
-> >   #include <linux/types.h>
-> > +#include <linux/sizes.h>
-> >   #include <asm/global_data.h>
-> >   #include <asm/unaligned.h>
-> >   #include <linux/libfdt.h>
-> > @@ -464,7 +465,6 @@ void do_fixup_by_compat_u32(void *fdt, const char *compat,
-> >       do_fixup_by_compat(fdt, compat, prop, &tmp, 4, create);
-> >   }
-> >
-> > -#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY>   /*
-> >    * fdt_pack_reg - pack address and size array into the "reg"-suitable stream
-> >    */
-> > @@ -493,6 +493,7 @@ static int fdt_pack_reg(const void *fdt, void *buf, u64 *address, u64 *size,
-> >       return p - (char *)buf;
-> >   }
-> >
-> > +#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
->
-> Do we need this #ifdef at all? We tend to leave it to the linker to
-> eliminate functions.
+> The blkmap structure, the way it is designed, is pointing to the
+> underlying block device. How can a single blkmap then be associated
 
-This patch was authored by Kojima-san. I will have to check if we need
-to keep the ifdef.
+The `struct udevice *blk` from `struct blkmap` is a reference to the
+block device which represents the block map itself ("myblkmap" in the
+picture above), not any lower device.
 
->
-> >   #if CONFIG_NR_DRAM_BANKS > 4
-> >   #define MEMORY_BANKS_MAX CONFIG_NR_DRAM_BANKS
-> >   #else
-> > @@ -2222,3 +2223,40 @@ int fdt_valid(struct fdt_header **blobp)
-> >       }
-> >       return 1;
-> >   }
-> > +
-> > +int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size)
-> > +{
-> > +     u64 pmem_start[2] = { 0 };
-> > +     u64 pmem_size[2] = { 0 };
-> > +     char pmem_node[32] = {0};
-> > +     int nodeoffset, len;
-> > +     int err;
-> > +     u8 tmp[4 * 16]; /* Up to 64-bit address + 64-bit size */
-> > +
-> > +     if (!IS_ALIGNED(addr, SZ_2M) || !IS_ALIGNED(addr + size, SZ_2M)) {
-> > +             printf("Start and end address needs at 2MB alignment\n");
->
-> Nits:
->
-> %s/needs at 2MB alignment/must be 2 MiB aligned/
+> with slices of different types? Would that not contravene with the
+> idea of a block device associating with a blkmap?
 
-Will change
+For slices which are linear mappings (and are thus backed by some other
+underlying block device), their reference to that lower device ("eMMC0"
+and "eMMC1" above) is stored in the `struct udevice *blk` member of
+`struct blkmap_linear`.
 
->
-> > +             return -1;
-> > +     }
-> > +     snprintf(pmem_node, sizeof(pmem_node), "pmem@%lx", addr);
-> > +     nodeoffset = fdt_find_or_add_subnode(blob, 0, pmem_node);
-> > +     if (nodeoffset < 0)
-> > +             return nodeoffset;
-> > +
-> > +     err = fdt_setprop_string(blob, nodeoffset, "compatible", "pmem-region");
-> > +     if (err)
-> > +             return err;
-> > +     err = fdt_setprop_empty(blob, nodeoffset, "volatile");
-> > +     if (err)
-> > +             return err;
-> > +     pmem_start[0] = addr;
-> > +     pmem_size[0] = size;
-> > +     len = fdt_pack_reg(blob, tmp, pmem_start, pmem_size, 1);
-> > +     err = fdt_setprop(blob, nodeoffset, "reg", tmp, len);
-> > +     if (err < 0) {
-> > +             printf("WARNING: could not set pmem %s %s.\n", "reg",
-> > +                    fdt_strerror(err));
-> > +             return err;
-> > +     }
-> > +
-> > +     return 0;
-> > +}
-> > diff --git a/include/fdt_support.h b/include/fdt_support.h
-> > index f0ad2e6b365..aea24df828f 100644
-> > --- a/include/fdt_support.h
-> > +++ b/include/fdt_support.h
-> > @@ -507,4 +507,17 @@ void fdt_fixup_pstore(void *blob);
-> >    */
-> >   int fdt_kaslrseed(void *blob, bool overwrite);
-> >
-> > +/**
-> > + * fdt_fixup_pmem_region() - add a pmem node on the device tree
-> > + *
-> > + * This functions injects a pmem node to the device tree. Usually
-> > + * used with EFI installers to preserve installer images
->
-> If I understand the code correctly, the function adds or updates a pmem
-> device-tree node for the given start address.
+Slices which are backed by memory does not have any reference to a lower
+device, but merely a pointer to the start of the mapping - `void *addr`
+in `struct blkmap_mem`.
 
-Will reword the comment.
+The overarching idea is that the block map does not have to know
+anything about the implementation of how any individual slice chooses to
+provide its data.  It only knows about their sizes and offsets.  Based
+on that information, it simply routes incoming read/write requests to
+the correct slice.
 
--sughosh
+>>
+>> Looking at the pmem patch that follows this one, I am not able to find
+>> anything that would motivate restricting the functionality either.
+>
+> The subsequent patch is adding the persistent memory node to the
+> device-tree. The pmem node that is to be added is the memory mapped
+> blkmap device. The logic does check for the type of the blkmap device
+> and then proceeds to add the pmem node only for the memory mapped
+> blkmaps.
 
->
-> Otherwise looks good to me.
->
-> Best regards
->
-> Heinrich
->
-> > + *
-> > + * @blob:    device tree provided by caller
-> > + * @addr:    start address of the pmem node
-> > + * @size:    size of the memory of the pmem node
-> > + * Return:   0 on success or < 0 on failure
-> > + */
-> > +int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size);
-> > +
-> >   #endif /* ifndef __FDT_SUPPORT_H */
->
+Sorry I am confused.  Why do you need a block map device to add the pmem
+node to the device tree?
