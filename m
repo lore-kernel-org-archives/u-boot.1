@@ -4,80 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4498C02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:33:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 021CAC02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:36:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49B4780C67;
-	Mon, 20 Jan 2025 22:27:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7067C807A8;
+	Mon, 20 Jan 2025 22:36:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=waldekranz.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AbkI7ceK";
+	dkim=pass (2048-bit key; unprotected) header.d=waldekranz-com.20230601.gappssmtp.com header.i=@waldekranz-com.20230601.gappssmtp.com header.b="NnF+lW4q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B37C680A4F; Mon, 20 Jan 2025 22:27:50 +0100 (CET)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 50803807B4; Mon, 20 Jan 2025 22:36:45 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C91E801CF
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:27:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA2738077F
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:36:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=waldekranz.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3a9c9f2a569so36864295ab.0
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:27:48 -0800 (PST)
+ spf=pass smtp.mailfrom=tobias@waldekranz.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5401d3ea5a1so4663435e87.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:36:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737408467; x=1738013267; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E+lUUP02bC08bvTKgUHyp2FQtADX1knbSRPzqEexp3s=;
- b=AbkI7ceK61LCrqN9p3BPbgyrO5u1r5601q4bphvnbBu1/y0VlePT28E47eMB20si4l
- g82AclNEbechmSAuKPLytfBYGnS5MOJkvBhMnkeAjWEtJPIICzMQNGGsDLx6piwWBoIn
- GiOls8SyoMrhAOEn8LDJUos6GjiKwPJkQlZ8U=
+ d=waldekranz-com.20230601.gappssmtp.com; s=20230601; t=1737409002; x=1738013802;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=uTGO1ui+dsOTej7Vp+Y6fjOBDaIUW15hHKjm2y01UP8=;
+ b=NnF+lW4qmXYHBp0BrBKYpkw98JhdOcKHDX9U6XkJRV/RxnOMrWB8LqyyAJA51KzMR2
+ g2/Sg0fiL7Y8b6hXSBOmD7gBqZelKxtaqApQFARHmJuc1PRGus3a79oJhNGpuzZPWxIZ
+ SrhoFCSswjW9qbc0G0EhFSnY4u6vBb6vysPkjRUYFFag+rxBDLlUalwcKSaAtmobUvRj
+ 1Mye/x7mi4crEukSxBsyYmSDBZ76dq+Kn09cGTMIjghxTWTX2BiatebApKP+Jgb5/3US
+ iWfwMZ/Q0gM6OHUp2ZLbQh7ulsTHUBJdnZzA8IQOd+apaFrvBjdQaP9V6KLH6YrF7DyA
+ o8/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737408467; x=1738013267;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1737409002; x=1738013802;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E+lUUP02bC08bvTKgUHyp2FQtADX1knbSRPzqEexp3s=;
- b=HyWFLxbQgMFZ08V9gGn3gLTtw72QRd+/MFmhcnj3kgMgPEnfRXLOQdH25Z2NrdCgTy
- Co/ONEyiTSmixwXo9T0k26HrT2DsVwPBh1gkDi1Vmwn1A2Z3H/O8uL0COYMs4sWcn68X
- 4a6HyqM55HYJ7cWMLd/8tVHhclWLVhP7FhNwNfoJHeEla7wuSm2G9hw9pk2iW3fhtzyl
- Bq0KsCDJ4i+dnzAmWmw2YHKu9kBnADnqCf2PlnHBBjSbDktBGhnFHMBt5CMdaIj2SVGN
- yNjIqQFLEYU6qkkaXOt1ouwqoiCBBTwClPzib8zlIzkbFtkL3Z44/XOXViEh51bvNlS6
- pX5A==
-X-Gm-Message-State: AOJu0YxbyCKbdvUhwIv3u78cJYwTomzDlIBNpsOtoz66Ys5rpkw6lQjm
- /cU/b3V2Ou9oD5o2qgSlvV+tv3P+5DD4pKEILFAnzJAVP4Eqb4a+5tz0qP7ljT7K78IXHX9nTXM
- =
-X-Gm-Gg: ASbGncupQ4OWKaUZYCa1uBHXOlmRkHnp8P6J+vuirROtLWCCrnLs3uXKQfidoAkv3TF
- p3XJBry81eamON3xGV+5tSnie8vmSyxNu2u9siP24zXUSpk69tpzOvwDDOC+V4DrZuOgoDfjyau
- NtA9/azZBXWR6uEV64P3Xbc5WqO5Zw06WqVEH7xuluvhCidG/cGmcwpOiD1NWjb1l/QOB5US//L
- KG87EIigFs5ZQ0HuAeZfPl2QRDjkJYeZk1WKkq41K5Hy3d/LMDwT6Dmn1RV6XYjmUlomIvHaTn9
- dwliWNVWPMqx8DHRn+NdFptrYFe/hPk=
-X-Google-Smtp-Source: AGHT+IEnpfpoTmmHJeMMYNx7of6FA+S7GbphsLHIZtLMrhHtZV0HtTuo/+qlPWAmZRmzUq3oxSjtlg==
-X-Received: by 2002:a05:6e02:388b:b0:3a7:e83c:2d08 with SMTP id
- e9e14a558f8ab-3cf744b5b00mr151517175ab.22.1737408466757; 
- Mon, 20 Jan 2025 13:27:46 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.27.45
+ bh=uTGO1ui+dsOTej7Vp+Y6fjOBDaIUW15hHKjm2y01UP8=;
+ b=IeozDD6qrYFjXDCXdW0RF1vMluCNE7WS8zzvKRVtVG7hipL9CuM4UmN8Gy2Xhxhk3T
+ JMQuKvLyJQ57LN0lF0Szs3q2HFjeknn9do7qD8wm/KRlYU9Mop2lYTic0znIcSeKLWNN
+ eJnCTlR/g4QMlBPornSHdGBb7ceAGbcEksOgKETEMD57ywRaMGKo2Gh5a8gEeeyow/os
+ rK0CeWHNd4yrXEQXGksG6biIZkRwYe1nC32ckV9Hm6JUupPVVTnw/52hIKK+i9n0Dxr7
+ MkRh7CKnGHXiEWyyphDH4VXYGseOEzGk9ayKOSohe3bX5N9jICsSNNqe30VcTiwCPZPK
+ DvMw==
+X-Gm-Message-State: AOJu0YxTgCTdWZwCRzZudfXyG0Iswx9Fnx5Ve1spFTf338FlAOrJxVP0
+ aGJPqJS9JNogZTjxu0wdBKKlxOCSII3ecGYrlvcUOz94z70KFCo71JHeTZzo/5s=
+X-Gm-Gg: ASbGncsauoCjd5p67I65JUaKyGMNTHXpw6KLFsAKLv7eZVIEKFwDMs3VtjU6tShuOOh
+ Jp6LUzsusE4isNfkGzW5DzEY52KgRsFVGwBFJw4WyYekrpetX+fnSSJYCmnA/H6Dx0TnlksyGms
+ ad6S2j+7ELqoLI+/xwj1xh5wGj3zFSAevQSnGV1Oug0KX2/8Dst/+VGkpXcjqYwYspYmbEN7WMI
+ eR5w9eMvWrs+Q2b41H/pJzWEt+ixxl+s2+ViFOs4XKfySiCyeYNeGYCMvoh4IeMLzN0NXtdWgLB
+ FaGQi9+EZEmn7csaGwqvc2P2cIs=
+X-Google-Smtp-Source: AGHT+IH48yauQulWiFDa5WpbzxrkVx47f+LyyQ+k0kKUJd2dlywTMDMqgeBd5RD45moatKW/w5LwKw==
+X-Received: by 2002:a05:6512:3e03:b0:53d:e5c0:b9bc with SMTP id
+ 2adb3069b0e04-5439c28743bmr5274771e87.50.1737409001580; 
+ Mon, 20 Jan 2025 13:36:41 -0800 (PST)
+Received: from wkz-x13 (h-176-10-159-15.NA.cust.bahnhof.se. [176.10.159.15])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5439af07437sm1517414e87.25.2025.01.20.13.36.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:27:45 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 44/44] doc: Update ut documentation
-Date: Mon, 20 Jan 2025 14:26:06 -0700
-Message-ID: <20250120212613.516664-45-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250120212613.516664-1-sjg@chromium.org>
-References: <20250120212613.516664-1-sjg@chromium.org>
+ Mon, 20 Jan 2025 13:36:39 -0800 (PST)
+From: Tobias Waldekranz <tobias@waldekranz.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Anton Antonov <Anton.Antonov@arm.com>, Bin
+ Meng <bmeng@tinylab.org>
+Subject: Re: [PATCH v3 4/5] blkmap: store type of blkmap device in
+ corresponding structure
+In-Reply-To: <CADg8p95HGYytdP+_PrZThW_g56GJWA=UXW5yUmaO9NWXDmHoUA@mail.gmail.com>
+References: <20250120105045.1281262-1-sughosh.ganu@linaro.org>
+ <20250120105045.1281262-5-sughosh.ganu@linaro.org>
+ <877c6p7juk.fsf@waldekranz.com>
+ <CADg8p96jX0eDKpxTuBLKS5vx=UJ=QLeBxnmfroUFYZ8VJWv1Pg@mail.gmail.com>
+ <874j1t7dsw.fsf@waldekranz.com>
+ <CADg8p9421OsmGMRfHCYqfeDJFN6+NFoc42tD5BSnGW69cYc49g@mail.gmail.com>
+ <871pwx78yz.fsf@waldekranz.com>
+ <CADg8p95HGYytdP+_PrZThW_g56GJWA=UXW5yUmaO9NWXDmHoUA@mail.gmail.com>
+Date: Mon, 20 Jan 2025 22:36:39 +0100
+Message-ID: <87y0z55frs.fsf@waldekranz.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,124 +107,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update documentation for the 'ut' command, since it has changed a
-little.
+On tis, jan 21, 2025 at 00:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> On Mon, 20 Jan 2025 at 21:50, Tobias Waldekranz <tobias@waldekranz.com> w=
+rote:
+>>
+>> On m=C3=A5n, jan 20, 2025 at 21:10, Sughosh Ganu <sughosh.ganu@linaro.or=
+g> wrote:
+>> > On Mon, 20 Jan 2025 at 20:06, Tobias Waldekranz <tobias@waldekranz.com=
+> wrote:
+>> >>
+>> >> On m=C3=A5n, jan 20, 2025 at 19:30, Sughosh Ganu <sughosh.ganu@linaro=
+.org> wrote:
+>> >> > On Mon, 20 Jan 2025 at 17:55, Tobias Waldekranz <tobias@waldekranz.=
+com> wrote:
+>> >> >>
+>> >> >> On m=C3=A5n, jan 20, 2025 at 16:20, Sughosh Ganu <sughosh.ganu@lin=
+aro.org> wrote:
+>> >> >> > Add information about the type of blkmap device in the blkmap
+>> >> >> > structure. Currently, the blkmap device is used for mapping to e=
+ither
+>> >> >> > a memory based block device, or another block device (linear
+>> >> >> > mapping). Put information in the blkmap structure to identify if=
+ it is
+>> >> >> > associated with a memory or linear mapped device. Which can then=
+ be
+>> >> >> > used to take specific action based on the type of blkmap device.
+>> >> >>
+>> >> >> Is this restriction really necessary? Why should it not be possibl=
+e to
+>> >> >> setup a block map like this:
+>> >> >>
+>> >> >>  myblkmap:
+>> >> >> .--------.      .-----.
+>> >> >> | slice0 +------> RAM |
+>> >> >> :--------:      '-----'     .-------.
+>> >> >> | slice1 +------------------> eMMC0 |
+>> >> >> :--------:      .-------.   '-------'
+>> >> >> | slice2 +------> eMMC1 |
+>> >> >> '........'      '-------'
+>> >> >>
+>> >> >> Linux's "device mapper", after which blkmaps are modeled, works in=
+ this
+>> >> >> way.  I.e. a blkmap is just a collection of slices, and it is up t=
+o each
+>> >> >> slice how its data is provided, meaning that the user is free to c=
+ompose
+>> >> >> their virtual block device in whatever way they need.
+>> >> >
+>> >> > The blkmap structure, the way it is designed, is pointing to the
+>> >> > underlying block device. How can a single blkmap then be associated
+>> >>
+>> >> The `struct udevice *blk` from `struct blkmap` is a reference to the
+>> >> block device which represents the block map itself ("myblkmap" in the
+>> >> picture above), not any lower device.
+>> >
+>> > Okay. I got confused with the comment associated with that member,
+>> > which says, "Underlying block device". This I interpreted to be the
+>> > block device that is associated with the blkmap structure.
+>>
+>> Yeah I agree that it could be made clearer :)
+>>
+>> >>
+>> >> > with slices of different types? Would that not contravene with the
+>> >> > idea of a block device associating with a blkmap?
+>> >>
+>> >> For slices which are linear mappings (and are thus backed by some oth=
+er
+>> >> underlying block device), their reference to that lower device ("eMMC=
+0"
+>> >> and "eMMC1" above) is stored in the `struct udevice *blk` member of
+>> >> `struct blkmap_linear`.
+>> >
+>> > Okay. But then, the computation of the blocksize seems to be happening
+>> > at the blkmap device level, which again implies having the same set of
+>> > slices associated with the blkmap. Any reason why the blksize is not
+>> > taken from the block device associated with that slice? That would
+>> > make it clear that the slice mapping type is independent from the
+>> > parent blkmap device.
+>>
+>> In the original series, only linear mappings to devices which used block
+>> sizes of 512 was supported, precisely because otherwise you need to do
+>> proper translation to work in all cases.
+>>
+>> I tried to argue this point on the list back then:
+>> https://lore.kernel.org/u-boot/875y3wohrt.fsf@waldekranz.com/
+>> but I did not get my point across and the restriction was lifted anyway.
+>>
+>> >>
+>> >> Slices which are backed by memory does not have any reference to a lo=
+wer
+>> >> device, but merely a pointer to the start of the mapping - `void *add=
+r`
+>> >> in `struct blkmap_mem`.
+>> >>
+>> >> The overarching idea is that the block map does not have to know
+>> >> anything about the implementation of how any individual slice chooses=
+ to
+>> >> provide its data.  It only knows about their sizes and offsets.  Based
+>> >> on that information, it simply routes incoming read/write requests to
+>> >> the correct slice.
+>> >
+>> > Okay. I think, for my solution, I will just need to move type
+>> > identification to the slice, instead of the blkmap device.
+>> >
+>> >>
+>> >> >>
+>> >> >> Looking at the pmem patch that follows this one, I am not able to =
+find
+>> >> >> anything that would motivate restricting the functionality either.
+>> >> >
+>> >> > The subsequent patch is adding the persistent memory node to the
+>> >> > device-tree. The pmem node that is to be added is the memory mapped
+>> >> > blkmap device. The logic does check for the type of the blkmap devi=
+ce
+>> >> > and then proceeds to add the pmem node only for the memory mapped
+>> >> > blkmaps.
+>> >>
+>> >> Sorry I am confused.  Why do you need a block map device to add the p=
+mem
+>> >> node to the device tree?
+>> >
+>> > This is needed to include the RAM based block device information in
+>> > the device-tree as pmem node. The OS installer then uses this pmem
+>> > device as the block device which contains the installation packages,
+>> > and proceeds with the OS installation.
+>>
+>> But even if the user has not setup a blkmap, don't you want to inject
+>> the pmem node in the DT anyway?  All you need is the size and offset of
+>> the blob right?  Is that not available from `image_setup_libfdt()`?
+>
+> Not sure if I am getting your point. The image_setup_libfdt() function
+> is fixing up the devicetree before it gets passed on to the OS. In my
+> subsequent patch, the image_setup_libfdt() is calling the blkmap
+> helper function (added in that patch) to check for any memory mapped
+> blkmap devices, and add corresponding pmem nodes for those. The
+> current case where this is happening in U-Boot is as part of
+> EFI_HTTP_BOOT, where if an ISO or an img file has been obtained over
+> the network, it gets mounted as a blkmap device, and that gets
+> notified to the OS. So, if this happens to be an install image, the
+> kernel knows about it through the pmem node in the DT.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Alright, but then it seems like the implementation of EFI_HTTP_BOOT is
+the one with enough context to known when to add the pmem node, no?
+Could it not use the event subsystem to register a fixup?  I.e. when it
+creates the block map, it also ought to know that the image must be
+protected.  I imagine something like (pseudo code, but you get the
+idea):
 
-Changes in v2:
-- Add new patch to update ut documentation
-- Drop patch to disable test_suite.py
-
- doc/usage/cmd/ut.rst | 74 +++++++++++++++++++++++---------------------
- 1 file changed, 38 insertions(+), 36 deletions(-)
-
-diff --git a/doc/usage/cmd/ut.rst b/doc/usage/cmd/ut.rst
-index afeafa824d6..e794922c806 100644
---- a/doc/usage/cmd/ut.rst
-+++ b/doc/usage/cmd/ut.rst
-@@ -11,7 +11,7 @@ Synopsis
- 
- ::
- 
--    ut [-r<runs>] [-f] [-I<n>:<one_test>] [<suite> [<test>]]
-+    ut [-r<runs>] [-fs] [-I<n>:<one_test>] [<suite> [<test>]]
- 
-        <runs>      Number of times to run each test
-        -f          Force 'manual' tests to run as well
-@@ -30,7 +30,7 @@ includes a near-complete set of emulators, no code-size limits, many CONFIG
- options enabled and runs easily in CI without needing QEMU. It is also possible
- to run some tests on real boards.
- 
--For a list of available test suites, type `ut` by itself.
-+For a list of available test suites, type `ut info -s`.
- 
- Each test is normally run once, although those marked with `UTF_DM` are
- run with livetree and flattree where possible. To run a test more than once,
-@@ -56,36 +56,44 @@ write unit tests.
- Example
- -------
- 
-+Show information about tests::
++struct efi_pmem {
++    void *base;
++    size_t size;
++}
 +
-+    => ut info
-+    Test suites: 23
-+    Total tests: 833
++efi_add_pmem(void *_pmem, struct event *event)
++{
++    const struct event_ft_fixup *fixup =3D &event->data.ft_fixup;
++    struct efi_pmem pmem =3D _pmem;
 +
- List available unit-test suites::
- 
--    => ut
--    ut - unit tests
--
--    Usage:
--    ut [-r] [-f] [<suite>] - run unit tests
--    -r<runs>   Number of times to run each test
--    -f         Force 'manual' tests to run as well
--    <suite>    Test suite to run, or all
--
--    Suites:
--    all - execute all enabled tests
--    addrmap - very basic test of addrmap command
--    bloblist - bloblist implementation
--    bootstd - standard boot implementation
--    compression - compressors and bootm decompression
--    dm - driver model
--    env - environment
--    fdt - fdt command
--    loadm - loadm command parameters and loading memory blob
--    lib - library functions
--    log - logging functions
--    mem - memory-related commands
--    overlay - device tree overlays
--    print  - printing things to the console
--    setexpr - setexpr command
--    str - basic test of string functions
--    time - very basic test of time functions
--    unicode - Unicode functions
-+    => ut info -s
-+    Test suites: 23
-+    Total tests: 833
-+
-+    Tests  Suite         Purpose
-+    -----  ------------  -------------------------
-+        1  addrmap       very basic test of addrmap command
-+        4  bdinfo        bdinfo (board info) command
-+       14  bloblist      bloblist implementation
-+        7  bootm         bootm command
-+       66  bootstd       standard boot implementation
-+        2  cmd           various commands
-+       14  common        tests for common/ directory
-+       502 dm            driver model
-+        6  env           environment
-+        1  exit          shell exit and variables
-+       19  fdt           fdt command
-+       10  fdt_overlay   device tree overlays
-+        1  font          font command
-+       20  hush          hush behaviour
-+      115  lib           library functions
-+        2  loadm         loadm command parameters and loading memory blob
-+       18  log           logging functions
-+        1  mbr           mbr command
-+        1  measurement   TPM-based measured boot
-+       13  mem           memory-related commands
-+        1  pci_mps       PCI Express Maximum Payload Size
-+       11  setexpr       setexpr command
-+        4  upl           Universal payload support
-+
- 
- Run one of the suites::
- 
-@@ -112,9 +120,3 @@ Run just a single test in a suite::
-     => ut bloblist bloblist_test_grow
-     Test: bloblist_test_grow: bloblist.c
-     Failures: 0
--
--Show information about tests::
--
--    => ut info
--    Test suites: 21
--    Total tests: 642
--- 
-2.43.0
++    fdt_fixup_pmem_region(fixup->tree, pmem->addr, pmem->size);
++    free(pmem);
++}
 
+ efi_http_boot()
+ {
+     ...
+     bm =3D blkmap_ramdisk_create(imgbase, imgsize);
++    if (needs_protection) {
++        struct efi_pmem *pmem =3D xmalloc(sizeof(*pmem));
++        pmem->base =3D imgbase;
++        pmem->size =3D imgsize;
++        event_register("efi_add_pmem", EVT_FT_FIXUP, efi_add_pmem, pmem);
++    }
+    ...
+ }
+
+
+> If you are referring to a scenario where the memory based block device
+> does not get set up as a blkmap device, that will anyways require
+> explicit intervention of the user to add the pmem node, because
+> otherwise there is no way to find out existence of such a device. This
+> can then be done through an explicit command. But the EFI_HTTP_BOOT
+> use-case does require scanning for the memory base blkmap devices.
+
+With the approach above, I think we could get out of marking every
+configured blkmap as reserved (which might not be what the user wants),
+and instead let the creator of the device decide on whether this is
+needed or not.
