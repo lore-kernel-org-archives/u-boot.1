@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9DFBC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 13:47:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47720C02182
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 13:48:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56F6A801CF;
-	Mon, 20 Jan 2025 14:47:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D0CD3801CF;
+	Mon, 20 Jan 2025 14:48:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lwxcsa0j";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S/W5ejNu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49D1A80711; Mon, 20 Jan 2025 14:47:21 +0100 (CET)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 7B82980711; Mon, 20 Jan 2025 14:48:07 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B15680077
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 14:47:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7717780077
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 14:48:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-304d760f118so37985341fa.0
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 05:47:19 -0800 (PST)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-303548a9361so36356481fa.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 05:48:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737380838; x=1737985638; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737380884; x=1737985684; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RKZyRdRaODKVZ/QOeIvPa3On5YDgP43nWJ0DMOHzTk4=;
- b=lwxcsa0jyDOZycv0ANAc9Sn13CgIXC4TqI/8B5HfY7JL3S9y2UhxD8G887pTaViLpm
- YyKkzgkvOUVximJ11N2ezLjZQ/XLpszmktHVOye81dooCgJzN9oI4vsj0kUXjn8QajCG
- hpCVK56OLCloUkiOC+7nKwY/pTvjZkfufgW62FdoJBELZI7evsRF9zNrZHq9aJDoJ+m1
- NqXrR6vxockt94gwBw7ufpcCZtFI/flATP92iDfL2yxNnfwlV+I+aRh14hH9PsQwBinD
- j+IlwOxjLfKaQBOwZ9NBc6LrpV9pG2viyiryAtakvK5bgiTH7+oBTRY837YpmUCSjzOF
- RSHA==
+ bh=0k2w4Q42Hv7E65ocNGS8dLWd09l+QqTtkN/Bxx6mNYc=;
+ b=S/W5ejNuqTtACWzK9Fz3WmXgl3RLv03/4eVb1tXzvkahm+J271Oro2aTFViOigmuKf
+ ZVVTTVT3bh29Ynv9EjZQ7LRCDHKywnfdQHBWpxpCht/vNYrVWzOlPaQNJUQbvqfBDRw1
+ Kxp0ER0/puUWvdhl67f4IcORkXxR+5Qko8T8jEXC9R8ALpC6WfFWVtSko83uSVAw6KDO
+ RTnSm7ce56AMIQ/PaHj8WEUFBWVYp/i1y8UoOGq1AcnluvINAo+VnUHyYIotWQ1v4aIa
+ /CWdS0n+aIggIMFrrPESAJNbRd8/p6apqb49PIyhSzX4mrur6cSY0xb8nAfwmou12EGO
+ nWbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737380838; x=1737985638;
+ d=1e100.net; s=20230601; t=1737380884; x=1737985684;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RKZyRdRaODKVZ/QOeIvPa3On5YDgP43nWJ0DMOHzTk4=;
- b=oDrGJrOfqa204ktgTvBwc8Y8YxcLGIoQZ4bPTr7Pjy5bn7e/Qwbes3piXpJFIgL4vq
- MyWyywYriGS4Qy85qN3wljVkDkzSaLLZxo4dNTA58jB1qKD5Y1BTzmnn6MkcOmqd0fxf
- 8PH5IQsRJGyvvDYUpSZzPcOlcc/SO+ih74a4EW1gmfwMFifDhxTSy2XTeHlr5NobbYQv
- BOg2IxQmppfMulME+Uism35M21kugR6biMBEMpPWwwuMn64DDpVj0V7Q/EZ7wH8fc45U
- NRyNrTiloJlAheIccxsvvoK7gDlCYikNP/nAL94IWlOWqxt/Tx0DVrgiO+GoDZP3Yi+F
- Ol5w==
-X-Gm-Message-State: AOJu0Yzyg+FRKJN8V+THgTSQnU5Cxgu6W11naVfEpNRn3kaqwYDY7oPM
- EnpXYmxkLwwVUykyUVQUj4BhBiEKC2PtB828HPbw9MyOREYCofcASavcwh+uOqscQPyhDo268IP
- 4Wp+jA8g5kVqp2AED++IWFTttOp4=
-X-Gm-Gg: ASbGnct5HJExeZrjQzU1ihYLSY5eZgEE57h7nrx/dTdshb0mF118Ndh+b3Z/pKHyUAi
- O0xa/neiHUhV3MFpBg3GQZCjA6z58NQkMI0XTPwMhzo5wAgnSNHH1oEpl2QdyJzYBMYeQOejx6e
- S3X8QV+Bg=
-X-Google-Smtp-Source: AGHT+IHHwoMjmPkU8gbmha5GXy4QISOq3htMECDYi27CmXnRSTG28eVY6Q9/QzOQ9jv+mVlw8tMTfRVy8gUGKXGpyuk=
-X-Received: by 2002:a2e:a9a6:0:b0:300:324e:3504 with SMTP id
- 38308e7fff4ca-3072cb665camr49235201fa.27.1737380838405; Mon, 20 Jan 2025
- 05:47:18 -0800 (PST)
+ bh=0k2w4Q42Hv7E65ocNGS8dLWd09l+QqTtkN/Bxx6mNYc=;
+ b=vK4PzZ2CvamfDMQNlFCmc9sb6RfU5TR/CKyIhZD7q13nrRky4xMVBkN6MY3mczi4zt
+ Y5lf/CT+35XFZ4f7NTL6oGO53MZEN1HJeOv9JqWuYbgpsb3QBKD/XND+JTQ2UiObI5T6
+ QwZZ+ryVocukaZthPz7XJQw2a9FFwFUI1F0X4b54uyodmUr978FV5KBakID/tY9UZs+M
+ 47v5DEsaAsrpFbCVa6nnEkX39EztUaNTuWP2weD8MKfo1c9lsmMNakinbDICq702Nug+
+ ryw+mXGn/9fTGBUvaQkzEse85FtjwVz21WeD9SQyKhPqapLAUc2YQ9gGTHS3o6XMN3mD
+ C15Q==
+X-Gm-Message-State: AOJu0YyKJ6dF/T83hmVj1WgnnbwAshc3lWG6m95VDOn53/hZRbzhN6Km
+ /0E7D1pLLVEgXmc0pFzuTnn5KamXtW1R/q+U6xOeTh+TGsLsdqpztehUTHQiOK68DeuX4RUypgh
+ +lgVaYsWtZ8oItx2X4ywawg9kQ+s=
+X-Gm-Gg: ASbGncv3JcgH7LILmVbwPeYZ7z3vC0jr++zbjd73lNLuJlZMMKJ0zdkv2GIQjKYVUsc
+ EKMoU5l/LdO4B1BOftsRttZeAy3P9UxgPgfhTKkBiKzxeO8JxIuxCnxsdFj6N/b+jLpcLpzUVJQ
+ XCEfct/Oc=
+X-Google-Smtp-Source: AGHT+IFTQa2mlvQHQCSq/N+OKEZ82hbh47L53LECH5gb2FJB6yc333dqfPhjKEaOYepT/gTqia3PoioYSxyykP80zGg=
+X-Received: by 2002:a2e:be1a:0:b0:302:189f:ea58 with SMTP id
+ 38308e7fff4ca-3072cb13467mr47572181fa.27.1737380884397; Mon, 20 Jan 2025
+ 05:48:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20250117030048.3874426-1-Mr.Bossman075@gmail.com>
-In-Reply-To: <20250117030048.3874426-1-Mr.Bossman075@gmail.com>
+References: <20250117132013.123064-1-l.anderweit@phytec.de>
+In-Reply-To: <20250117132013.123064-1-l.anderweit@phytec.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 20 Jan 2025 10:47:06 -0300
-X-Gm-Features: AbW1kvYDAu8rcmepWUibnszjEKe5IwjTms9aCSujBMtGJzclutdch04y_c8e3F0
-Message-ID: <CAOMZO5Bc0ZXeV4aOqO-GdpBZ-o1fWNy=kHiCNEtZcZWvnM71EA@mail.gmail.com>
-Subject: Re: [PATCH] pinctrl: imx: Fix NULL dereference in imx_pinctrl_probe()
-To: Jesse Taube <mr.bossman075@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 20 Jan 2025 10:47:52 -0300
+X-Gm-Features: AbW1kvY-mbaR0xeDMvYYNHrLdm264S45dOn0fCzewQev6hARmw1bEGbIjlbdgfI
+Message-ID: <CAOMZO5CXrUfn=EH2zD4yoLtC--Hv5THbdHUfOFpuiq-RG2WLVg@mail.gmail.com>
+Subject: Re: [PATCH] phycore-imx8mp: Enable CAAM in spl
+To: Leonard Anderweit <l.anderweit@phytec.de>
+Cc: u-boot@lists.denx.de, Teresa Remmet <t.remmet@phytec.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Benjamin Hahn <B.Hahn@phytec.de>, Yannic Moog <y.moog@phytec.de>,
+ Wadim Egorov <w.egorov@phytec.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,15 +95,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 17, 2025 at 12:01=E2=80=AFAM Jesse Taube <mr.bossman075@gmail.c=
-om> wrote:
+On Fri, Jan 17, 2025 at 10:20=E2=80=AFAM Leonard Anderweit
+<l.anderweit@phytec.de> wrote:
 >
-> When converting to ofnode `ofnode_read_u32` was accedentally used to
-> replace `fdtdec_get_int` instead of `ofnode_read_u32_default`.
-> Use `ofnode_read_u32_default` to fix this.
+> Enable CAAM in spl.
 >
-> Fixes: 59382d2 ("pinctrl: imx: Convert to use livetree API for fdt access=
-")
-> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
 
 Applied, thanks.
