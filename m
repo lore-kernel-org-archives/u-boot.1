@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 055E1C02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4498C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:33:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBF7180A4F;
-	Mon, 20 Jan 2025 22:27:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 49B4780C67;
+	Mon, 20 Jan 2025 22:27:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eum2uDzM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AbkI7ceK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AF8080A38; Mon, 20 Jan 2025 22:27:49 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id B37C680A4F; Mon, 20 Jan 2025 22:27:50 +0100 (CET)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1187680818
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:27:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C91E801CF
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:27:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-851c4f1fb18so95507439f.2
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:27:47 -0800 (PST)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-3a9c9f2a569so36864295ab.0
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:27:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737408465; x=1738013265; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737408467; x=1738013267; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7OwbvGyQXuLlGymHD5TDYu/CsJHOpu2ZgRQ/p3Kcspg=;
- b=eum2uDzMr8CbDsb5dwXdZOCpvoQur4cV+3GSE4bNKe7pLB6P3sPQmX61znpdFjE90S
- y2Y24O8KBjAyUoA7aPd+Cm6VSdEH/l5weJn0iwW/V6C0cfG4tbrP4pRdLqxflsR+oygQ
- YrDtGImAJqOezOtHTk25hED0Y8jpT4cszBQpw=
+ bh=E+lUUP02bC08bvTKgUHyp2FQtADX1knbSRPzqEexp3s=;
+ b=AbkI7ceK61LCrqN9p3BPbgyrO5u1r5601q4bphvnbBu1/y0VlePT28E47eMB20si4l
+ g82AclNEbechmSAuKPLytfBYGnS5MOJkvBhMnkeAjWEtJPIICzMQNGGsDLx6piwWBoIn
+ GiOls8SyoMrhAOEn8LDJUos6GjiKwPJkQlZ8U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737408465; x=1738013265;
+ d=1e100.net; s=20230601; t=1737408467; x=1738013267;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7OwbvGyQXuLlGymHD5TDYu/CsJHOpu2ZgRQ/p3Kcspg=;
- b=jhu8J81jtDAiSfeyc3USKcqLRBEeOStnaMroLzb2hYefbNOW2iksEDFWUiX9ZhFGe1
- xxmxkZCdphd3tTLUddZzpv5gBk6GYQi9xjn+Gc86S2WLipyCWGKJhaWK5bX9YzQi4AWr
- 4pt6zTkIKtxbYx0upP1czus+Y5a+tFtjaHZYR2H6VgMTpv3DFlpyLnZIWbOHF/sKkX5V
- 9OpdflQYg7NRUCIU8SCq1yCMiqGY7P8T6SeUxAZlJClg0+meD97GmhhjjUk7PraZUiVJ
- ZBkskd8J5SERkTV+1d87XXmrMsZzsJa8AVWtkjDINkFVddudaf1gDWNkumDqiarNar1P
- dLiQ==
-X-Gm-Message-State: AOJu0YwCZWa5amUqv+Lx3KIPSfiB/4X6AK1T2RedQLXkQKJ8N+EWBuYm
- HSjob7Zd3dmdDdNlqxivbeQN91QmqC5MEsmsElYX3OnythitvFEsHTZrb6GFuD3Q3AMevkMBfUw
+ bh=E+lUUP02bC08bvTKgUHyp2FQtADX1knbSRPzqEexp3s=;
+ b=HyWFLxbQgMFZ08V9gGn3gLTtw72QRd+/MFmhcnj3kgMgPEnfRXLOQdH25Z2NrdCgTy
+ Co/ONEyiTSmixwXo9T0k26HrT2DsVwPBh1gkDi1Vmwn1A2Z3H/O8uL0COYMs4sWcn68X
+ 4a6HyqM55HYJ7cWMLd/8tVHhclWLVhP7FhNwNfoJHeEla7wuSm2G9hw9pk2iW3fhtzyl
+ Bq0KsCDJ4i+dnzAmWmw2YHKu9kBnADnqCf2PlnHBBjSbDktBGhnFHMBt5CMdaIj2SVGN
+ yNjIqQFLEYU6qkkaXOt1ouwqoiCBBTwClPzib8zlIzkbFtkL3Z44/XOXViEh51bvNlS6
+ pX5A==
+X-Gm-Message-State: AOJu0YxbyCKbdvUhwIv3u78cJYwTomzDlIBNpsOtoz66Ys5rpkw6lQjm
+ /cU/b3V2Ou9oD5o2qgSlvV+tv3P+5DD4pKEILFAnzJAVP4Eqb4a+5tz0qP7ljT7K78IXHX9nTXM
  =
-X-Gm-Gg: ASbGncuhHVEbYHGc29C+Rhnv73wTfGzCoM+6l7An8aaGe+rKpvelLE7kwnPE3/S0fHW
- e/Az8DAgYIdP4VJXZ8+5SxnK3IMdt5MS2P8tZldh29Nh9Exr/f+NPyjymDjz6kh+uu+Y8oJPX3Q
- oKB19LjB+N4vvJaEm6du8V0VVs/hzlp91BgkZCWLtQA7hscESMHfxFeWX/6xJy8niBcniSdhNsr
- WlUyfpdL3+WQC6Z0PmbTZGSngMHu7Qmn/j2UKp+Lzl5QYbP97yFcR7DJUS0t8AhWF9h14rXjAV8
- Zt9vdEU+n5HlObbqPM0MRk0kwpb6XMQ=
-X-Google-Smtp-Source: AGHT+IFc9RK5sVqDgghFvT3edJQVwcGaw+2yJBT7/NWE9HOIev2U1KqEIuI3keWVaeigUfiDKJ0b4A==
-X-Received: by 2002:a05:6e02:148f:b0:3cf:6c4f:396f with SMTP id
- e9e14a558f8ab-3cf7447c7cfmr113805295ab.15.1737408465258; 
- Mon, 20 Jan 2025 13:27:45 -0800 (PST)
+X-Gm-Gg: ASbGncupQ4OWKaUZYCa1uBHXOlmRkHnp8P6J+vuirROtLWCCrnLs3uXKQfidoAkv3TF
+ p3XJBry81eamON3xGV+5tSnie8vmSyxNu2u9siP24zXUSpk69tpzOvwDDOC+V4DrZuOgoDfjyau
+ NtA9/azZBXWR6uEV64P3Xbc5WqO5Zw06WqVEH7xuluvhCidG/cGmcwpOiD1NWjb1l/QOB5US//L
+ KG87EIigFs5ZQ0HuAeZfPl2QRDjkJYeZk1WKkq41K5Hy3d/LMDwT6Dmn1RV6XYjmUlomIvHaTn9
+ dwliWNVWPMqx8DHRn+NdFptrYFe/hPk=
+X-Google-Smtp-Source: AGHT+IEnpfpoTmmHJeMMYNx7of6FA+S7GbphsLHIZtLMrhHtZV0HtTuo/+qlPWAmZRmzUq3oxSjtlg==
+X-Received: by 2002:a05:6e02:388b:b0:3a7:e83c:2d08 with SMTP id
+ e9e14a558f8ab-3cf744b5b00mr151517175ab.22.1737408466757; 
+ Mon, 20 Jan 2025 13:27:46 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.27.43
+ 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.27.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:27:44 -0800 (PST)
+ Mon, 20 Jan 2025 13:27:45 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 43/44] test: Move help into the suite declaration
-Date: Mon, 20 Jan 2025 14:26:05 -0700
-Message-ID: <20250120212613.516664-44-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 44/44] doc: Update ut documentation
+Date: Mon, 20 Jan 2025 14:26:06 -0700
+Message-ID: <20250120212613.516664-45-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250120212613.516664-1-sjg@chromium.org>
 References: <20250120212613.516664-1-sjg@chromium.org>
@@ -94,214 +94,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than having the help in the longhelp, put it in the suite info
-so 'ut info -s' can show it. This is tidier, particular due to the
-removal of #ifdefs
-
-This means that the help text is present in the image (although not
-displayed with 'ut info -s') so the image-size increases. But with
-UNIT_TEST enabled, we expect large images so this doesn't seem
-important.
+Update documentation for the 'ut' command, since it has changed a
+little.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Add new patch to update ut documentation
+- Drop patch to disable test_suite.py
 
- test/cmd_ut.c | 123 ++++++++++++++++----------------------------------
- 1 file changed, 38 insertions(+), 85 deletions(-)
+ doc/usage/cmd/ut.rst | 74 +++++++++++++++++++++++---------------------
+ 1 file changed, 38 insertions(+), 36 deletions(-)
 
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 2e5519b55f9..fbfdaaae0b5 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -21,12 +21,14 @@
-  * @start: First test in suite
-  * @end: End test in suite (points to the first test in the next suite)
-  * @cmd: Command to use to run the suite
-+ * @help: Help-string to show for this suite
-  */
- struct suite {
- 	const char *name;
- 	struct unit_test *start;
- 	struct unit_test *end;
- 	ut_cmd_func cmd;
-+	const char *help;
- };
+diff --git a/doc/usage/cmd/ut.rst b/doc/usage/cmd/ut.rst
+index afeafa824d6..e794922c806 100644
+--- a/doc/usage/cmd/ut.rst
++++ b/doc/usage/cmd/ut.rst
+@@ -11,7 +11,7 @@ Synopsis
  
- static int do_ut_all(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
-@@ -75,19 +77,21 @@ int cmd_ut_category(struct unit_test_state *uts, const char *name,
- 	ll_end_decl(suite_end_ ## _name, struct unit_test, ut_ ## _name)
+ ::
  
- /* declare a test suite which uses a subcommand to run */
--#define SUITE_CMD(_name, _cmd_func) { \
-+#define SUITE_CMD(_name, _cmd_func, _help) { \
- 	#_name, \
- 	suite_start_ ## _name, \
- 	suite_end_ ## _name, \
- 	_cmd_func, \
-+	_help, \
- 	}
+-    ut [-r<runs>] [-f] [-I<n>:<one_test>] [<suite> [<test>]]
++    ut [-r<runs>] [-fs] [-I<n>:<one_test>] [<suite> [<test>]]
  
- /* declare a test suite which can be run directly without a subcommand */
--#define SUITE(_name) { \
-+#define SUITE(_name, _help) { \
- 	#_name, \
- 	suite_start_ ## _name, \
- 	suite_end_ ## _name, \
- 	NULL, \
-+	_help, \
- 	}
+        <runs>      Number of times to run each test
+        -f          Force 'manual' tests to run as well
+@@ -30,7 +30,7 @@ includes a near-complete set of emulators, no code-size limits, many CONFIG
+ options enabled and runs easily in CI without needing QEMU. It is also possible
+ to run some tests on real boards.
  
- SUITE_DECL(addrmap);
-@@ -117,37 +121,37 @@ SUITE_DECL(setexpr);
- SUITE_DECL(upl);
+-For a list of available test suites, type `ut` by itself.
++For a list of available test suites, type `ut info -s`.
  
- static struct suite suites[] = {
--	SUITE(addrmap),
--	SUITE(bdinfo),
--	SUITE(bloblist),
--	SUITE(bootm),
-+	SUITE(addrmap, "very basic test of addrmap command"),
-+	SUITE(bdinfo, "bdinfo (board info) command"),
-+	SUITE(bloblist, "bloblist implementation"),
-+	SUITE(bootm, "bootm command"),
- #ifdef CONFIG_UT_BOOTSTD
--	SUITE_CMD(bootstd, do_ut_bootstd),
-+	SUITE_CMD(bootstd, do_ut_bootstd, "standard boot implementation"),
- #endif
--	SUITE(cmd),
--	SUITE(common),
--	SUITE(dm),
--	SUITE(env),
--	SUITE(exit),
--	SUITE(fdt),
--	SUITE(font),
--	SUITE(hush),
--	SUITE(lib),
--	SUITE(loadm),
--	SUITE(log),
--	SUITE(mbr),
--	SUITE(measurement),
--	SUITE(mem),
-+	SUITE(cmd, "various commands"),
-+	SUITE(common, "tests for common/ directory"),
-+	SUITE(dm, "driver model"),
-+	SUITE(env, "environment"),
-+	SUITE(exit, "shell exit and variables"),
-+	SUITE(fdt, "fdt command"),
-+	SUITE(font, "font command"),
-+	SUITE(hush, "hush behaviour"),
-+	SUITE(lib, "library functions"),
-+	SUITE(loadm, "loadm command parameters and loading memory blob"),
-+	SUITE(log, "logging functions"),
-+	SUITE(mbr, "mbr command"),
-+	SUITE(measurement, "TPM-based measured boot"),
-+	SUITE(mem, "memory-related commands"),
- #ifdef CONFIG_UT_OPTEE
--	SUITE_CMD(optee, do_ut_optee),
-+	SUITE_CMD(optee, do_ut_optee, "OP-TEE"),
- #endif
- #ifdef CONFIG_UT_OVERLAY
--	SUITE_CMD(overlay, do_ut_overlay),
-+	SUITE_CMD(overlay, do_ut_overlay, "device tree overlays"),
- #endif
--	SUITE(pci_mps),
--	SUITE(seama),
--	SUITE(setexpr),
--	SUITE(upl),
-+	SUITE(pci_mps, "PCI Express Maximum Payload Size"),
-+	SUITE(seama, "seama command parameters loading and decoding"),
-+	SUITE(setexpr, "setexpr command"),
-+	SUITE(upl, "Universal payload support"),
- };
+ Each test is normally run once, although those marked with `UTF_DM` are
+ run with livetree and flattree where possible. To run a test more than once,
+@@ -56,36 +56,44 @@ write unit tests.
+ Example
+ -------
  
- /**
-@@ -231,16 +235,19 @@ static int do_ut_info(struct cmd_tbl *cmdtp, int flag, int argc,
- 	if (flags && !strcmp("-s", flags)) {
- 		int i;
++Show information about tests::
++
++    => ut info
++    Test suites: 23
++    Total tests: 833
++
+ List available unit-test suites::
  
--		puts("\nTests  Suite\n");
--		puts("-----  -----\n");
-+		puts("\nTests  Suite         Purpose");
-+		puts("\n-----  ------------  -------------------------\n");
- 		for (i = 0; i < ARRAY_SIZE(suites); i++) {
- 			struct suite *ste = &suites[i];
- 			long n_ent = ste->end - ste->start;
+-    => ut
+-    ut - unit tests
+-
+-    Usage:
+-    ut [-r] [-f] [<suite>] - run unit tests
+-    -r<runs>   Number of times to run each test
+-    -f         Force 'manual' tests to run as well
+-    <suite>    Test suite to run, or all
+-
+-    Suites:
+-    all - execute all enabled tests
+-    addrmap - very basic test of addrmap command
+-    bloblist - bloblist implementation
+-    bootstd - standard boot implementation
+-    compression - compressors and bootm decompression
+-    dm - driver model
+-    env - environment
+-    fdt - fdt command
+-    loadm - loadm command parameters and loading memory blob
+-    lib - library functions
+-    log - logging functions
+-    mem - memory-related commands
+-    overlay - device tree overlays
+-    print  - printing things to the console
+-    setexpr - setexpr command
+-    str - basic test of string functions
+-    time - very basic test of time functions
+-    unicode - Unicode functions
++    => ut info -s
++    Test suites: 23
++    Total tests: 833
++
++    Tests  Suite         Purpose
++    -----  ------------  -------------------------
++        1  addrmap       very basic test of addrmap command
++        4  bdinfo        bdinfo (board info) command
++       14  bloblist      bloblist implementation
++        7  bootm         bootm command
++       66  bootstd       standard boot implementation
++        2  cmd           various commands
++       14  common        tests for common/ directory
++       502 dm            driver model
++        6  env           environment
++        1  exit          shell exit and variables
++       19  fdt           fdt command
++       10  fdt_overlay   device tree overlays
++        1  font          font command
++       20  hush          hush behaviour
++      115  lib           library functions
++        2  loadm         loadm command parameters and loading memory blob
++       18  log           logging functions
++        1  mbr           mbr command
++        1  measurement   TPM-based measured boot
++       13  mem           memory-related commands
++        1  pci_mps       PCI Express Maximum Payload Size
++       11  setexpr       setexpr command
++        4  upl           Universal payload support
++
  
- 			if (n_ent)
--				printf("%5ld  %s\n", n_ent, ste->name);
-+				printf("%5ld", n_ent);
- 			else if (ste->cmd)
--				printf("%5s  %s\n", "?", ste->name);
-+				printf("%5s", "?");
-+			else  /* suite is not present */
-+				continue;
-+			printf("  %-13.13s %s\n", ste->name, ste->help);
- 		}
- 	}
+ Run one of the suites::
  
-@@ -309,60 +316,6 @@ U_BOOT_LONGHELP(ut,
- 	"\nOptions for <suite>:"
- 	"\nall - execute all enabled tests"
- 	"\ninfo [-s] - show info about tests [and suites]"
--#ifdef CONFIG_CMD_ADDRMAP
--	"\naddrmap - very basic test of addrmap command"
--#endif
--#ifdef CONFIG_CMD_BDI
--	"\nbdinfo - bdinfo command"
--#endif
--#ifdef CONFIG_SANDBOX
--	"\nbloblist - bloblist implementation"
--#endif
--#ifdef CONFIG_BOOTSTD
--	"\nbootstd - standard boot implementation"
--#endif
--#ifdef CONFIG_CMDLINE
--	"\ncmd - test various commands"
--#endif
--	"\ncommon   - tests for common/ directory"
--#ifdef CONFIG_UT_DM
--	"\ndm - driver model"
--#endif
--#ifdef CONFIG_UT_ENV
--	"\nenv - environment"
--#endif
--#ifdef CONFIG_CMD_FDT
--	"\nfdt - fdt command"
--#endif
--#ifdef CONFIG_CONSOLE_TRUETYPE
--	"\nfont - font command"
--#endif
--#if CONFIG_IS_ENABLED(HUSH_PARSER)
--	"\nhush - Test hush behavior"
--#endif
--#ifdef CONFIG_CMD_LOADM
--	"\nloadm - loadm command parameters and loading memory blob"
--#endif
--#ifdef CONFIG_UT_LIB
--	"\nlib - library functions"
--#endif
--#ifdef CONFIG_UT_LOG
--	"\nlog - logging functions"
--#endif
--	"\nmem - memory-related commands"
--#ifdef CONFIG_UT_OPTEE
--	"\noptee - test OP-TEE"
--#endif
--#ifdef CONFIG_UT_OVERLAY
--	"\noverlay - device tree overlays"
--#endif
--#ifdef CONFIG_CMD_PCI_MPS
--	"\npci_mps - PCI Express Maximum Payload Size"
--#endif
--	"\nsetexpr - setexpr command"
--#ifdef CONFIG_CMD_SEAMA
--	"\nseama - seama command parameters loading and decoding"
--#endif
- 	);
- 
- U_BOOT_CMD(
+@@ -112,9 +120,3 @@ Run just a single test in a suite::
+     => ut bloblist bloblist_test_grow
+     Test: bloblist_test_grow: bloblist.c
+     Failures: 0
+-
+-Show information about tests::
+-
+-    => ut info
+-    Test suites: 21
+-    Total tests: 642
 -- 
 2.43.0
 
