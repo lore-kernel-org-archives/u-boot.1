@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D38CC02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:55:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D885C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:55:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76F14807EE;
-	Mon, 20 Jan 2025 22:54:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7BB8807DD;
+	Mon, 20 Jan 2025 22:54:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KGOmj92E";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kBOb2+iM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FE1E8082D; Mon, 20 Jan 2025 22:54:14 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id BFD7E8082D; Mon, 20 Jan 2025 22:54:16 +0100 (CET)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34D9080771
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:54:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 715FB8082A
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:54:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-844e9b8b0b9so395169739f.0
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:54:12 -0800 (PST)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3ce7a33ea70so18259835ab.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:54:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737410050; x=1738014850; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737410052; x=1738014852; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dzYttPDtL4GoVICW3W9I+OcmB3ANq5iAs76otxgKSrk=;
- b=KGOmj92EJEixDnPcsSf/u5um2cPrhLyLrP0XA+dDX1WZDbCCkXeM9LUOjHBh2SKir6
- tfgKbMRCTs46QaeWODaWi5/2IKE/5hE1z6pgJyWHXucpTwEqKyotdyy6rqnC64KHH8z1
- S/Cx7aBvo4wnihwSPG7DqIV3N4sF7gZi6hnkE=
+ bh=84/EzPoM9uJG/rMrsN8r0IHITwFwOGdYkGsfQpB/QhI=;
+ b=kBOb2+iMFSTvn5/P2Ev7P7wBxAoWMl6Pp2UiiqinJHKfKF+xDCtbPXge1i/Visr8+V
+ B6H04+8kjCt1lF0Px/WV3frY82crGeEQUonwcGSCb/Rg9T2GUK56ZEnMFxgCQ/quXOK5
+ QmVFn2b9PXRPS3+GkK4nCif55C2lJ4nF5i7tk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737410050; x=1738014850;
+ d=1e100.net; s=20230601; t=1737410052; x=1738014852;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dzYttPDtL4GoVICW3W9I+OcmB3ANq5iAs76otxgKSrk=;
- b=sYM9v+YTGrkaoBpSm0OCBsHeRgPKjfUUcpwZXiZ1oXP0B3qsUbI+2gRXhJ2BVXp67p
- VVG5iA4/6Ry/UsA84XJ5vJqOXungSjyQ9LKFBqIL4w3gw0PUgSmExo3IglvkjNjuysqY
- o52r6QFaSwFLJfeZppZtckZbxPU/OTpRpNvsqr4g31+WlalyTclZN0r+9VkHLpqudSkb
- qhud4rRtfcoIyhJjFH3ckij46AeKyZiNJBPl6nONuYtP8Y16dvn4HRcA5l+QdL1uSEda
- m6YTlr/cjKSmYZld5NhF1fO8EUo+zhntEZWXzMnbakMzUtsjw2c0v1zdpZmDDC1kT82b
- r+FQ==
-X-Gm-Message-State: AOJu0Yx8QYYG9ZOB0K3ue0OteNjoI0kzl4vuRTANRae83tBtw9hZi5NP
- UlDZQd84CxAJbYrlP75hZT8i15thOHKXvbVXadkXJCXJfLRwK7I/Dh/iBf7EQ+FW8b9FADQs1pY
+ bh=84/EzPoM9uJG/rMrsN8r0IHITwFwOGdYkGsfQpB/QhI=;
+ b=HCJ1rl/ww1jAbc4/DgEBfozJcdULhl1/JNO2snWi4K/mDzKzinY8MjfMyu3+LCbzUZ
+ ry0eU00YOxRLTZbP+ha8KgU5lladNppvJ5lDi80eFRmueMisbQR0uRbvPgRWcFxoDC1h
+ AhK5bhew9YC2+euejqRNqGCpkfN3yYL5jVnHyVCVN7Gas3jEeNKHTYuih4HMDBJ/6cgf
+ 7Fp+AQW1iazRTYTYIKcaGXD+kAGTgjjsmq7OrtEmWxMd1o/Ggx37IWq2LjZ61h5RC8kd
+ UzIwiHAx+8XXD5QEVQjeyt9resUwImjabdRRZyzFTdqjGCAUDTVI2FsVaRDdiYjxOQtc
+ mk2A==
+X-Gm-Message-State: AOJu0Yw9GDpDAqh5aLs7+N/2Bp46WXk06FhxFB7Orlksk36UVTpLKBkq
+ wusRZuKgJYPKjkFX8Iu5+tOxvIGqO3TchPXl+vPedl08oPxng+7EaWZcukerTi7EcXJ2unjyCwc
  =
-X-Gm-Gg: ASbGnctVfmWgWxx2zIKMHdCxArvDMf9wpmo/t9GlTjwWwn203K7aOkds4MTsbuHeS1U
- HYqXt5WIlW1G4r6YVTppdtGDjrKNEUfhdXS7I5N3yn7RtGUqyfcjZwF9SDJAdY1U7H+kipocimz
- jf55TceHjIFCIA+/Y5SG0HYL6B0iHcYeV8SXuPHcU2KcfxVMjHpBK6wkMSYYhlwXbiDKRRbrXsL
- 0KekzlrDyZmqXZubK5O7kbN6NVnoll8lnoo1JI91SSLRNzVcfKMlzZ6Q7zBCic4WOM6t4YTXfm8
- VYA7PEHLArV+Le1acMnK53ncQ2nrLhI=
-X-Google-Smtp-Source: AGHT+IHhBNJbx6WEE5z/T8vklaHt9WcbVxjWnRV0Tu1/9eWA9g07ebSVAFskUjtEnQM/lzz+mJtm6A==
-X-Received: by 2002:a05:6e02:13a8:b0:3ce:7cf3:27be with SMTP id
- e9e14a558f8ab-3cf743e096amr124328535ab.4.1737410050447; 
- Mon, 20 Jan 2025 13:54:10 -0800 (PST)
+X-Gm-Gg: ASbGncv/0D7QtxS3CP+rMT6Gc37YM1BPl9tkNStTaqcVHn3fB2wuIEq4CGO74iIPrcp
+ 36Eh0blqoBkZnqWXLRAavrE86asB19hafIlCkGZw5uYV+tkvIaMpukoLO8Mqzk/wY9tRoAf6wyI
+ 1sgubaxGmuXL3/D2UsaZTD7lKie1ZuLw+ETppZgSsy4MRPUeoIwDN0yv/Lr8UC+PG2ZJJQ4DSAW
+ qUMKfICjZd/xpo2Zc6YRHORqrRoDWj+CMLO7GPwsdZ20nSSJBC6Q0/bMln2V8KnvcZMoe647OGD
+ YEEY5mqc13gDzyrTLiWyFqqdWKabJZI=
+X-Google-Smtp-Source: AGHT+IEI0iZZt0elx4jS0L/mRpiILFC/DHvF1FHXc2d9CfUQlmHadziAo/asS4/+uZfW1qpum2kAgQ==
+X-Received: by 2002:a05:6e02:9f:b0:3ce:7bbd:971c with SMTP id
+ e9e14a558f8ab-3cf74496441mr126965705ab.15.1737410052068; 
+ Mon, 20 Jan 2025 13:54:12 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.54.08
+ 8926c6da1cb9f-4ea7568067csm2809650173.129.2025.01.20.13.54.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:54:09 -0800 (PST)
+ Mon, 20 Jan 2025 13:54:10 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 12/28] test: Move fdt_overlay init into a function
-Date: Mon, 20 Jan 2025 14:53:12 -0700
-Message-ID: <20250120215340.617194-13-sjg@chromium.org>
+Subject: [PATCH 13/28] test: Update fdt_overlay test to use fdtdec functions
+Date: Mon, 20 Jan 2025 14:53:13 -0700
+Message-ID: <20250120215340.617194-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250120215340.617194-1-sjg@chromium.org>
 References: <20250120215340.617194-1-sjg@chromium.org>
@@ -95,151 +95,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the init code into a separate function since it is quite large.
-Adjust it to use unit-test functions which have become available since
-the test was written.
+Use the helpers provided for this purpose, rather than different ones in
+this particular test.
+
+Leave fdt_getprop_str() alone as it seems to have more value.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/fdt_overlay/cmd_ut_fdt_overlay.c | 113 +++++++++++++-------------
- 1 file changed, 57 insertions(+), 56 deletions(-)
+ test/fdt_overlay/cmd_ut_fdt_overlay.c | 73 ++++++++-------------------
+ 1 file changed, 22 insertions(+), 51 deletions(-)
 
 diff --git a/test/fdt_overlay/cmd_ut_fdt_overlay.c b/test/fdt_overlay/cmd_ut_fdt_overlay.c
-index 9fe18b60aca..e4ed7de850c 100644
+index e4ed7de850c..ac8a3b2be23 100644
 --- a/test/fdt_overlay/cmd_ut_fdt_overlay.c
 +++ b/test/fdt_overlay/cmd_ut_fdt_overlay.c
-@@ -26,6 +26,61 @@ extern u32 __dtbo_test_fdt_overlay_stacked_begin;
+@@ -6,6 +6,7 @@
  
- static void *fdt;
+ #include <command.h>
+ #include <errno.h>
++#include <fdtdec.h>
+ #include <fdt_support.h>
+ #include <image.h>
+ #include <log.h>
+@@ -81,33 +82,6 @@ static int fdt_overlay_init(struct unit_test_state *uts)
+ 	return 0;
+ }
  
-+static int fdt_overlay_init(struct unit_test_state *uts)
-+{
-+	void *fdt_base = &__dtb_test_fdt_base_begin;
-+	void *fdt_overlay = &__dtbo_test_fdt_overlay_begin;
-+	void *fdt_overlay_stacked = &__dtbo_test_fdt_overlay_stacked_begin;
-+	void *fdt_overlay_copy, *fdt_overlay_stacked_copy;
-+
-+	ut_assertok(fdt_check_header(fdt_base));
-+	ut_assertok(fdt_check_header(fdt_overlay));
-+
-+	fdt = malloc(FDT_COPY_SIZE);
-+	fdt_overlay_copy = malloc(FDT_COPY_SIZE);
-+	fdt_overlay_stacked_copy = malloc(FDT_COPY_SIZE);
-+	ut_assertnonnull(fdt);
-+	ut_assertnonnull(fdt_overlay_copy);
-+	ut_assertnonnull(fdt_overlay_stacked_copy);
-+
-+	/*
-+	 * Resize the FDT to 4k so that we have room to operate on
-+	 *
-+	 * (and relocate it since the memory might be mapped
-+	 * read-only)
-+	 */
-+	ut_assertok(fdt_open_into(fdt_base, fdt, FDT_COPY_SIZE));
-+
-+	/*
-+	 * Resize the overlay to 4k so that we have room to operate on
-+	 *
-+	 * (and relocate it since the memory might be mapped
-+	 * read-only)
-+	 */
-+	ut_assertok(fdt_open_into(fdt_overlay, fdt_overlay_copy,
-+				  FDT_COPY_SIZE));
-+
-+	/*
-+	 * Resize the stacked overlay to 4k so that we have room to operate on
-+	 *
-+	 * (and relocate it since the memory might be mapped
-+	 * read-only)
-+	 */
-+	ut_assertok(fdt_open_into(fdt_overlay_stacked, fdt_overlay_stacked_copy,
-+				  FDT_COPY_SIZE));
-+
-+	/* Apply the overlay */
-+	ut_assertok(fdt_overlay_apply(fdt, fdt_overlay_copy));
-+
-+	/* Apply the stacked overlay */
-+	ut_assertok(fdt_overlay_apply(fdt, fdt_overlay_stacked_copy));
-+
-+	free(fdt_overlay_stacked_copy);
-+	free(fdt_overlay_copy);
-+
-+	return 0;
-+}
-+
- static int ut_fdt_getprop_u32_by_index(void *fdt, const char *path,
- 				    const char *name, int index,
- 				    u32 *out)
-@@ -215,67 +270,13 @@ int do_ut_fdt_overlay(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
+-static int ut_fdt_getprop_u32_by_index(void *fdt, const char *path,
+-				    const char *name, int index,
+-				    u32 *out)
+-{
+-	const fdt32_t *val;
+-	int node_off;
+-	int len;
+-
+-	node_off = fdt_path_offset(fdt, path);
+-	if (node_off < 0)
+-		return node_off;
+-
+-	val = fdt_getprop(fdt, node_off, name, &len);
+-	if (!val || (len < (sizeof(uint32_t) * (index + 1))))
+-		return -FDT_ERR_NOTFOUND;
+-
+-	*out = fdt32_to_cpu(*(val + index));
+-
+-	return 0;
+-}
+-
+-static int ut_fdt_getprop_u32(void *fdt, const char *path, const char *name,
+-			   u32 *out)
+-{
+-	return ut_fdt_getprop_u32_by_index(fdt, path, name, 0, out);
+-}
+-
+ static int fdt_getprop_str(void *fdt, const char *path, const char *name,
+ 			   const char **out)
  {
- 	struct unit_test *tests = UNIT_TEST_SUITE_START(fdt_overlay);
- 	const int n_ents = UNIT_TEST_SUITE_COUNT(fdt_overlay);
--	void *fdt_base = &__dtb_test_fdt_base_begin;
--	void *fdt_overlay = &__dtbo_test_fdt_overlay_begin;
--	void *fdt_overlay_stacked = &__dtbo_test_fdt_overlay_stacked_begin;
--	void *fdt_overlay_copy, *fdt_overlay_stacked_copy;
- 	int ret = -ENOMEM;
+@@ -125,11 +99,12 @@ static int fdt_getprop_str(void *fdt, const char *path, const char *name,
  
--	ut_assertok(fdt_check_header(fdt_base));
--	ut_assertok(fdt_check_header(fdt_overlay));
--
--	fdt = malloc(FDT_COPY_SIZE);
--	if (!fdt)
--		goto err1;
--
--	fdt_overlay_copy = malloc(FDT_COPY_SIZE);
--	if (!fdt_overlay_copy)
--		goto err2;
--
--	fdt_overlay_stacked_copy = malloc(FDT_COPY_SIZE);
--	if (!fdt_overlay_stacked_copy)
--		goto err3;
--
--	/*
--	 * Resize the FDT to 4k so that we have room to operate on
--	 *
--	 * (and relocate it since the memory might be mapped
--	 * read-only)
--	 */
--	ut_assertok(fdt_open_into(fdt_base, fdt, FDT_COPY_SIZE));
--
--	/*
--	 * Resize the overlay to 4k so that we have room to operate on
--	 *
--	 * (and relocate it since the memory might be mapped
--	 * read-only)
--	 */
--	ut_assertok(fdt_open_into(fdt_overlay, fdt_overlay_copy,
--				  FDT_COPY_SIZE));
--
--	/*
--	 * Resize the stacked overlay to 4k so that we have room to operate on
--	 *
--	 * (and relocate it since the memory might be mapped
--	 * read-only)
--	 */
--	ut_assertok(fdt_open_into(fdt_overlay_stacked, fdt_overlay_stacked_copy,
--				  FDT_COPY_SIZE));
--
--	/* Apply the overlay */
--	ut_assertok(fdt_overlay_apply(fdt, fdt_overlay_copy));
--
--	/* Apply the stacked overlay */
--	ut_assertok(fdt_overlay_apply(fdt, fdt_overlay_stacked_copy));
--
-+	ut_assertok(fdt_overlay_init(uts));
- 	ret = cmd_ut_category(uts, "fdt_overlay", "fdt_overlay_test_", tests,
- 			      n_ents, argc, argv);
+ static int fdt_overlay_test_change_int_property(struct unit_test_state *uts)
+ {
+-	u32 val = 0;
++	int off;
  
--	free(fdt_overlay_stacked_copy);
--err3:
--	free(fdt_overlay_copy);
--err2:
- 	free(fdt);
--err1:
+-	ut_assertok(ut_fdt_getprop_u32(fdt, "/test-node", "test-int-property",
+-				    &val));
+-	ut_asserteq(43, val);
++	off = fdt_path_offset(fdt, "/test-node");
++	ut_assert(off >= 0);
 +
- 	return ret;
++	ut_asserteq(43, fdtdec_get_uint(fdt, off, "test-int-property", 0));
+ 
+ 	return CMD_RET_SUCCESS;
+ }
+@@ -202,7 +177,7 @@ FDT_OVERLAY_TEST(fdt_overlay_test_add_subnode_property, 0);
+ static int fdt_overlay_test_local_phandle(struct unit_test_state *uts)
+ {
+ 	uint32_t local_phandle;
+-	u32 val = 0;
++	u32 val[2];
+ 	int off;
+ 
+ 	off = fdt_path_offset(fdt, "/new-local-node");
+@@ -211,13 +186,10 @@ static int fdt_overlay_test_local_phandle(struct unit_test_state *uts)
+ 	local_phandle = fdt_get_phandle(fdt, off);
+ 	ut_assert(local_phandle);
+ 
+-	ut_assertok(ut_fdt_getprop_u32_by_index(fdt, "/", "test-several-phandle",
+-					     0, &val));
+-	ut_asserteq(local_phandle, val);
+-
+-	ut_assertok(ut_fdt_getprop_u32_by_index(fdt, "/", "test-several-phandle",
+-					     1, &val));
+-	ut_asserteq(local_phandle, val);
++	ut_assertok(fdtdec_get_int_array(fdt, 0, "test-several-phandle", val,
++					 ARRAY_SIZE(val)));
++	ut_asserteq(local_phandle, val[0]);
++	ut_asserteq(local_phandle, val[1]);
+ 
+ 	return CMD_RET_SUCCESS;
+ }
+@@ -226,7 +198,7 @@ FDT_OVERLAY_TEST(fdt_overlay_test_local_phandle, 0);
+ static int fdt_overlay_test_local_phandles(struct unit_test_state *uts)
+ {
+ 	uint32_t local_phandle, test_phandle;
+-	u32 val = 0;
++	u32 val[2];
+ 	int off;
+ 
+ 	off = fdt_path_offset(fdt, "/new-local-node");
+@@ -241,13 +213,10 @@ static int fdt_overlay_test_local_phandles(struct unit_test_state *uts)
+ 	test_phandle = fdt_get_phandle(fdt, off);
+ 	ut_assert(test_phandle);
+ 
+-	ut_assertok(ut_fdt_getprop_u32_by_index(fdt, "/", "test-phandle", 0,
+-					     &val));
+-	ut_asserteq(test_phandle, val);
+-
+-	ut_assertok(ut_fdt_getprop_u32_by_index(fdt, "/", "test-phandle", 1,
+-					     &val));
+-	ut_asserteq(local_phandle, val);
++	ut_assertok(fdtdec_get_int_array(fdt, 0, "test-phandle", val,
++					 ARRAY_SIZE(val)));
++	ut_asserteq(test_phandle, val[0]);
++	ut_asserteq(local_phandle, val[1]);
+ 
+ 	return CMD_RET_SUCCESS;
+ }
+@@ -255,11 +224,13 @@ FDT_OVERLAY_TEST(fdt_overlay_test_local_phandles, 0);
+ 
+ static int fdt_overlay_test_stacked(struct unit_test_state *uts)
+ {
+-	u32 val = 0;
++	int off;
++
++	off = fdt_path_offset(fdt, "/new-local-node");
++	ut_assert(off > 0);
+ 
+-	ut_assertok(ut_fdt_getprop_u32(fdt, "/new-local-node",
+-				       "stacked-test-int-property", &val));
+-	ut_asserteq(43, val);
++	ut_asserteq(43,
++		    fdtdec_get_uint(fdt, off, "stacked-test-int-property", 0));
+ 
+ 	return CMD_RET_SUCCESS;
  }
 -- 
 2.43.0
