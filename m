@@ -4,49 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 538FEC02181
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 00:06:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89BC6C02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 00:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F57B8032B;
-	Tue, 21 Jan 2025 01:06:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id CE9AB805C5;
+	Tue, 21 Jan 2025 01:06:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1737418003;
+	bh=HIz/q7Y0c4Hp+4qHOqIADS15TfrWWxIjMhr3fs4VySs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=HnXk1hs/CKktPu6uo43DRiTR9t5dnlWiM+XmkgaUYWplmEEmGkW+EqqREzZugQerd
+	 KcD7Jz2rtJ3u3gVDczntgKvFk8xbdnUPZhHdhDJ/B34asF8KuIIXMPlmliAT/4buNv
+	 3rRwM7NfVmW4SDhNUgYY5sRgE/kwllC4GniW8h0SyQ3kmzrvgBYahzTSXgw7yOxABt
+	 hQjjyslxnz4t7KkPGf2UsFhaP90pqZ8K9sh95prxTPyhlhEKb/jMwhc9GL4Xl5oLGs
+	 yRMNMvkqZyMk5lYciuSd6Gkn9CDhtDGlZNfMPwLxrYCAiKDKU77KJLrwA1jb2/q5cB
+	 WLbnRdi167BQw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C7D0800C2; Tue, 21 Jan 2025 01:06:40 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A1964800C2
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 01:06:37 +0100 (CET)
+ id C0E4780763; Tue, 21 Jan 2025 01:06:42 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 16EF7805C5
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 01:06:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 36449106F;
- Mon, 20 Jan 2025 16:07:05 -0800 (PST)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6AA2B3F5A1;
- Mon, 20 Jan 2025 16:06:35 -0800 (PST)
-Date: Tue, 21 Jan 2025 00:05:08 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>,
- u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini
- <trini@konsulko.com>, Cody Eksal <masterr3c0rd@epochal.quest>,
- linux-sunxi@lists.linux.dev, Parthiban <parthiban@linumiz.com>
-Subject: Re: [PATCH 2/8] sunxi: pmic_bus: support alternative I2C address
-Message-ID: <20250121000508.22db819a@minigeek.lan>
-In-Reply-To: <CAFLszTjDq4E05Q_esYA2tAGOYdhgbRp3B38gAsF0hX44Nf-34A@mail.gmail.com>
-References: <20250117014537.22513-1-andre.przywara@arm.com>
- <2352334.ElGaqSPkdT@jernej-laptop>
- <20250119222530.1fd97018@minigeek.lan>
- <4622391.LvFx2qVVIh@jernej-laptop>
- <CAFLszTjDq4E05Q_esYA2tAGOYdhgbRp3B38gAsF0hX44Nf-34A@mail.gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Bl12i/SU"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id DDE13108A6AFB; Tue, 21 Jan 2025 01:06:37 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1737417999;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HIz/q7Y0c4Hp+4qHOqIADS15TfrWWxIjMhr3fs4VySs=;
+ b=Bl12i/SUl07BjOShOTEaQYSXIIMaxvjNdGjiCHfgi2odHs/LXff2k9U16n2P6Q1otaY4Bu
+ uM0X5/hofBZAdl4KqFFOvgMBvYl/FZVOZKSqzfVFmAuyJ4lAPS2lVl7G5N9DXky7YCNpe9
+ A6q7t/leXdewITjP8MJAe1Dp/Rzk5wg06g/RzVnNKzst5QJlMhry3VczoA4htUK9j+lnSY
+ MSFh+ltXEnIKvFYc+A0Jocj5INjSRfXNFhf1OyX80FiFE6GaHM8MF9xNfVfm2OUjfHMvJs
+ +xCGB+ATrdoQR2BbWVPR8AINKR28jLbp2/ZHva4Z4O+QDL1SskBQHA1w6mDrsQ==
+Message-ID: <709f0a6b-32d1-4e18-915a-dfb3f87fb9a6@denx.de>
+Date: Tue, 21 Jan 2025 00:55:35 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC v2] image: apply FDTOs on FDT image node without a
+ load property
+To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
+ Heiko Stuebner <heiko@sntech.de>
+References: <20250116-extlinux-relocate-dtb-when-dtbo-v2-1-d011582c2b7e@cherry.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250116-extlinux-relocate-dtb-when-dtbo-v2-1-d011582c2b7e@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,102 +83,423 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 20 Jan 2025 12:21:28 -0700
-Simon Glass <sjg@chromium.org> wrote:
+On 1/16/25 12:46 PM, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> A FIT image which is NOT using -E when created by mkimage - that is with
+> image data within the FIT - will fail to apply FDTO if the base FDT
+> image node does not specify a load property (which points to an address
+> in DRAM). This is because we check that the FDT address we want to apply
+> overlay to (i.e. modify and likely increase in size) is not inside the
+> FIT and give up otherwise. This is assumed necessary because we may then
+> overwrite other data when applying in-place.
+> 
+> However, we can do better than giving up: relocating the FDT in another
+> place in DRAM where it's safe to increase its size and apply FDTOs.
+> 
+> While at it, do not discriminate anymore on whether the data is within
+> the FIT data address space - that is FIT images created with mkimage -E
+> - as that still may be susceptible to unintended data overwrites as
+> mkimage -E simply concatenates all blobs after the FIT. If the FDT blob
+> isn't the last, it'll result in overwriting later blobs when resizing.
+> 
+> The side effect is that the load property in the FIT is only
+> temporarily used to load the FDT but then relocated right before we
+> start applying overlays.
+> 
+> Suggested-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+> This actually forces the base FDT to always be relocated whenever FDTO
+> are expected to be applied, regardless of the presence of the load
+> property in the base FDT image node.
+> 
+> Tested with extlinux with:
+> - conf node with multiple fdt entries (scenario A)
+> - conf node with base fdt + conf node with fdto (stored in fdt property)
+>    (scenario B)
+> - conf node with multiple fdt entries with base fdt with load property
+>    (scenario C)
+> - conf node with base fdt + conf node with fdto (stored in fdt property)
+>    with base fdt with load property (scenario D)
+> 
+> """fit.its
+> /dts-v1/;
+> 
+> / {
+> 	description = "Kernel fitImage for Jaguar";
+> 	#address-cells = <1>;
+> 
+> 	images {
+> 		kernel-1 {
+> 			description = "Linux kernel";
+> 			data = /incbin/("arch/arm64/boot/Image.gz");
+> 			type = "kernel";
+> 			arch = "arm64";
+> 			os = "linux";
+> 			compression = "gzip";
+> 			load = <0x06000000>;
+> 			entry = <0x06000000>;
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 		fdt-rk3588-jaguar.dtb {
+> 			description = "Flattened Device Tree blob";
+> 			data = /incbin/("arch/arm64/boot/dts/rockchip/rk3588-jaguar.dtb");
+> 			type = "flat_dt";
+> 			arch = "arm64";
+> 			compression = "none";
+> 
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 		fdt-rk3588-jaguar.dtb-load {
+> 			description = "Flattened Device Tree blob";
+> 			data = /incbin/("arch/arm64/boot/dts/rockchip/rk3588-jaguar.dtb");
+> 			type = "flat_dt";
+> 			arch = "arm64";
+> 			compression = "none";
+> 			load = <0x12000000>;
+> 
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 		fdt-rk3588-jaguar-pre-ict-tester.dtbo {
+> 			description = "Flattened Device Tree blob";
+> 			data = /incbin/("arch/arm64/boot/dts/rockchip/rk3588-jaguar-pre-ict-tester.dtbo");
+> 			type = "flat_dt";
+> 			arch = "arm64";
+> 			compression = "none";
+> 
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 	};
+> 
+> 	configurations {
+> 		default = "conf-rk3588-jaguar.dtb";
+> 		conf-rk3588-jaguar.dtb {
+> 			description = "1 Linux kernel, FDT blob";
+> 			kernel = "kernel-1";
+> 			fdt = "fdt-rk3588-jaguar.dtb";
+> 
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 
+> 		conf-rk3588-jaguar.dtb-and-dtbo {
+> 			description = "1 Linux kernel, FDT blob";
+> 			kernel = "kernel-1";
+> 			fdt = "fdt-rk3588-jaguar.dtb", "fdt-rk3588-jaguar-pre-ict-tester.dtbo";
+> 
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 
+> 		conf-rk3588-jaguar.dtb-load {
+> 			description = "1 Linux kernel, FDT blob";
+> 			kernel = "kernel-1";
+> 			fdt = "fdt-rk3588-jaguar.dtb-load";
+> 
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 
+> 		conf-rk3588-jaguar.dtb-load-and-dtbo {
+> 			description = "1 Linux kernel, FDT blob";
+> 			kernel = "kernel-1";
+> 			fdt = "fdt-rk3588-jaguar.dtb-load", "fdt-rk3588-jaguar-pre-ict-tester.dtbo";
+> 
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 
+> 		conf-rk3588-jaguar-pre-ict-tester.dtbo {
+> 			description = "0 FDT blob";
+> 
+> 			fdt = "fdt-rk3588-jaguar-pre-ict-tester.dtbo";
+> 
+> 			hash-1 {
+> 				algo = "sha256";
+> 			};
+> 		};
+> 	};
+> };
+> """
+> 
+> """extlinux.conf (scenario A)
+> LABEL rk3588-jaguar
+> LINUX /boot/fit#conf-rk3588-jaguar.dtb-and-dtbo
+> APPEND root=PARTLABEL=debos-rootfs rw rootwait net.ifnames=0
+> """
+> 
+> Log:
+> """
+> 
+>     Using 'conf-rk3588-jaguar.dtb-and-dtbo' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'kernel-1' kernel subimage
+>       Description:  Linux kernel
+>       Type:         Kernel Image
+>       Compression:  gzip compressed
+>       Data Start:   0x020000cc
+>       Data Size:    11862415 Bytes = 11.3 MiB
+>       Architecture: AArch64
+>       OS:           Linux
+>       Load Address: 0x06000000
+>       Entry Point:  0x06000000
+>       Hash algo:    sha256
+>       Hash value:   51a2b828aec49d9ede09a2de2cd05226def258dedcc8e4c4098fa2ba38fb9690
+>     Verifying Hash Integrity ... sha256+ OK
+> 
+>     Using 'conf-rk3588-jaguar.dtb-and-dtbo' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'fdt-rk3588-jaguar.dtb' fdt subimage
+>       Description:  Flattened Device Tree blob
+>       Type:         Flat Device Tree
+>       Compression:  uncompressed
+>       Data Start:   0x02b50370
+>       Data Size:    168750 Bytes = 164.8 KiB
+>       Architecture: AArch64
+>       Hash algo:    sha256
+>       Hash value:   96213ce3930a5f926b27c90671ca779fc327e2e62c2135f7ed7d8b6dd659b973
+>     Verifying Hash Integrity ... sha256+ OK
+>     Loading Device Tree to 00000000ece9d000, end 00000000ecec9fff ... OK
+> Working FDT set to ece9d000
+> 
+>     Trying 'fdt-rk3588-jaguar-pre-ict-tester.dtbo' fdt subimage
+>       Description:  Flattened Device Tree blob
+>       Type:         Flat Device Tree
+>       Compression:  uncompressed
+>       Data Start:   0x02ba2bb4
+>       Data Size:    2753 Bytes = 2.7 KiB
+>       Architecture: AArch64
+>       Hash algo:    sha256
+>       Hash value:   e5eb1fe225d03b04e9bb27c04fe3278f294b48c6ab6757292c9650f6d3ce9f34
+>     Verifying Hash Integrity ... sha256+ OK
+>     Booting using the fdt blob at 0xece9d000
+> Working FDT set to ece9d000
+>     Uncompressing Kernel Image to 6000000
+>     Loading Device Tree to 00000000ece70000, end 00000000ece9c62d ... OK
+> Working FDT set to ece70000
+> """
+> 
+> """extlinux.conf (scenario B)
+> LABEL rk3588-jaguar
+> LINUX /boot/fit#conf-rk3588-jaguar.dtb-load-and-dtbo
+> APPEND root=PARTLABEL=debos-rootfs rw rootwait net.ifnames=0
+> """
+> 
+> Log:
+> """
+> 
+>     Using 'conf-rk3588-jaguar.dtb-load-and-dtbo' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'kernel-1' kernel subimage
+>       Description:  Linux kernel
+>       Type:         Kernel Image
+>       Compression:  gzip compressed
+>       Data Start:   0x020000cc
+>       Data Size:    11862415 Bytes = 11.3 MiB
+>       Architecture: AArch64
+>       OS:           Linux
+>       Load Address: 0x06000000
+>       Entry Point:  0x06000000
+>       Hash algo:    sha256
+>       Hash value:   51a2b828aec49d9ede09a2de2cd05226def258dedcc8e4c4098fa2ba38fb9690
+>     Verifying Hash Integrity ... sha256+ OK
+> 
+>     Using 'conf-rk3588-jaguar.dtb-load-and-dtbo' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'fdt-rk3588-jaguar.dtb-load' fdt subimage
+>       Description:  Flattened Device Tree blob
+>       Type:         Flat Device Tree
+>       Compression:  uncompressed
+>       Data Start:   0x02b79784
+>       Data Size:    168750 Bytes = 164.8 KiB
+>       Architecture: AArch64
+>       Load Address: 0x12000000
+>       Hash algo:    sha256
+>       Hash value:   96213ce3930a5f926b27c90671ca779fc327e2e62c2135f7ed7d8b6dd659b973
+>     Verifying Hash Integrity ... sha256+ OK
+>     Loading fdt from 0x02b79784 to 0x12000000
+>     Loading Device Tree to 00000000ece9d000, end 00000000ecec9fff ... OK
+> Working FDT set to ece9d000
+> 
+>     Trying 'fdt-rk3588-jaguar-pre-ict-tester.dtbo' fdt subimage
+>       Description:  Flattened Device Tree blob
+>       Type:         Flat Device Tree
+>       Compression:  uncompressed
+>       Data Start:   0x02ba2bb4
+>       Data Size:    2753 Bytes = 2.7 KiB
+>       Architecture: AArch64
+>       Hash algo:    sha256
+>       Hash value:   e5eb1fe225d03b04e9bb27c04fe3278f294b48c6ab6757292c9650f6d3ce9f34
+>     Verifying Hash Integrity ... sha256+ OK
+>     Booting using the fdt blob at 0xece9d000
+> Working FDT set to ece9d000
+>     Uncompressing Kernel Image to 6000000
+>     Loading Device Tree to 00000000ece70000, end 00000000ece9c62d ... OK
+> Working FDT set to ece70000
+> """
+> 
+> """extlinux.conf (scenario C)
+> LABEL rk3588-jaguar
+> LINUX /boot/fit#conf-rk3588-jaguar.dtb#conf-rk3588-jaguar-pre-ict-tester.dtbo
+> APPEND root=PARTLABEL=debos-rootfs rw rootwait net.ifnames=0
+> """
+> 
+> Log:
+> """
+> 
+>     Using 'conf-rk3588-jaguar.dtb' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'kernel-1' kernel subimage
+>       Description:  Linux kernel
+>       Type:         Kernel Image
+>       Compression:  gzip compressed
+>       Data Start:   0x020000cc
+>       Data Size:    11862415 Bytes = 11.3 MiB
+>       Architecture: AArch64
+>       OS:           Linux
+>       Load Address: 0x06000000
+>       Entry Point:  0x06000000
+>       Hash algo:    sha256
+>       Hash value:   51a2b828aec49d9ede09a2de2cd05226def258dedcc8e4c4098fa2ba38fb9690
+>     Verifying Hash Integrity ... sha256+ OK
+> 
+>     Using 'conf-rk3588-jaguar.dtb' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'fdt-rk3588-jaguar.dtb' fdt subimage
+>       Description:  Flattened Device Tree blob
+>       Type:         Flat Device Tree
+>       Compression:  uncompressed
+>       Data Start:   0x02b50370
+>       Data Size:    168750 Bytes = 164.8 KiB
+>       Architecture: AArch64
+>       Hash algo:    sha256
+>       Hash value:   96213ce3930a5f926b27c90671ca779fc327e2e62c2135f7ed7d8b6dd659b973
+>     Verifying Hash Integrity ... sha256+ OK
+>     Loading Device Tree to 00000000ece9d000, end 00000000ecec9fff ... OK
+> Working FDT set to ece9d000
+> 
+>     Using 'conf-rk3588-jaguar-pre-ict-tester.dtbo' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'fdt-rk3588-jaguar-pre-ict-tester.dtbo' fdt subimage
+>       Description:  Flattened Device Tree blob
+>       Type:         Flat Device Tree
+>       Compression:  uncompressed
+>       Data Start:   0x02ba2bb4
+>       Data Size:    2753 Bytes = 2.7 KiB
+>       Architecture: AArch64
+>       Hash algo:    sha256
+>       Hash value:   e5eb1fe225d03b04e9bb27c04fe3278f294b48c6ab6757292c9650f6d3ce9f34
+>     Verifying Hash Integrity ... sha256+ OK
+>     Booting using the fdt blob at 0xece9d000
+> Working FDT set to ece9d000
+>     Uncompressing Kernel Image to 6000000
+>     Loading Device Tree to 00000000ece70000, end 00000000ece9c62d ... OK
+> Working FDT set to ece70000
+> """
+> 
+> """extlinux.conf (scenario D)
+> LABEL rk3588-jaguar
+> LINUX /boot/fit#conf-rk3588-jaguar.dtb-load#conf-rk3588-jaguar-pre-ict-tester.dtbo
+> APPEND root=PARTLABEL=debos-rootfs rw rootwait net.ifnames=0
+> """
+> 
+> Log:
+> """
+> 
+>     Using 'conf-rk3588-jaguar.dtb-load' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'kernel-1' kernel subimage
+>       Description:  Linux kernel
+>       Type:         Kernel Image
+>       Compression:  gzip compressed
+>       Data Start:   0x020000cc
+>       Data Size:    11862415 Bytes = 11.3 MiB
+>       Architecture: AArch64
+>       OS:           Linux
+>       Load Address: 0x06000000
+>       Entry Point:  0x06000000
+>       Hash algo:    sha256
+>       Hash value:   51a2b828aec49d9ede09a2de2cd05226def258dedcc8e4c4098fa2ba38fb9690
+>     Verifying Hash Integrity ... sha256+ OK
+> 
+>     Using 'conf-rk3588-jaguar.dtb-load' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'fdt-rk3588-jaguar.dtb-load' fdt subimage
+>       Description:  Flattened Device Tree blob
+>       Type:         Flat Device Tree
+>       Compression:  uncompressed
+>       Data Start:   0x02b79784
+>       Data Size:    168750 Bytes = 164.8 KiB
+>       Architecture: AArch64
+>       Load Address: 0x12000000
+>       Hash algo:    sha256
+>       Hash value:   96213ce3930a5f926b27c90671ca779fc327e2e62c2135f7ed7d8b6dd659b973
+>     Verifying Hash Integrity ... sha256+ OK
+>     Loading fdt from 0x02b79784 to 0x12000000
+>     Loading Device Tree to 00000000ece9d000, end 00000000ecec9fff ... OK
+> Working FDT set to ece9d000
+> 
+>     Using 'conf-rk3588-jaguar-pre-ict-tester.dtbo' configuration
+>     Verifying Hash Integrity ... OK
+>     Trying 'fdt-rk3588-jaguar-pre-ict-tester.dtbo' fdt subimage
+>       Description:  Flattened Device Tree blob
+>       Type:         Flat Device Tree
+>       Compression:  uncompressed
+>       Data Start:   0x02ba2bb4
+>       Data Size:    2753 Bytes = 2.7 KiB
+>       Architecture: AArch64
+>       Hash algo:    sha256
+>       Hash value:   e5eb1fe225d03b04e9bb27c04fe3278f294b48c6ab6757292c9650f6d3ce9f34
+>     Verifying Hash Integrity ... sha256+ OK
+>     Booting using the fdt blob at 0xece9d000
+> Working FDT set to ece9d000
+>     Uncompressing Kernel Image to 6000000
+>     Loading Device Tree to 00000000ece70000, end 00000000ece9c62d ... OK
+> Working FDT set to ece70000
+> """
+> 
+> Cc: Heiko Stuebner <heiko@sntech.de>
+> ---
+> Changes in v2:
+> - Indiscriminately relocate, regardless of location of FDT to be on the
+>    safe side wrt data overlap/overwrite,
+> - print return value of boot_relocate_fdt when it fails,
+> - Link to v1: https://lore.kernel.org/r/20241219-extlinux-relocate-dtb-when-dtbo-v1-1-fe5eeb8fd4f1@cherry.de
+> ---
+>   boot/image-fit.c | 17 +++++++++--------
+>   1 file changed, 9 insertions(+), 8 deletions(-)
+> 
+> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> index db7fb61bca948e42a4136b9ceb263a53362ad3f8..f3df8e2393559596f5100ea54a7ede77407713ac 100644
+> --- a/boot/image-fit.c
+> +++ b/boot/image-fit.c
+> @@ -2348,10 +2348,10 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>   	char *next_config = NULL;
+>   	ulong load, len;
+>   #ifdef CONFIG_OF_LIBFDT_OVERLAY
+> -	ulong image_start, image_end;
+>   	ulong ovload, ovlen, ovcopylen;
+>   	const char *uconfig;
+>   	const char *uname;
+> +	char *of_flat_tree;
 
-Hi Simon,
+Can this be void * instead ?
 
-> On Mon, 20 Jan 2025 at 09:42, Jernej =C5=A0krabec <jernej.skrabec@gmail.c=
-om> wrote:
-> >
-> > Dne nedelja, 19. januar 2025 ob 23:25:30 Srednjeevropski standardni =C4=
-=8Das je Andre Przywara napisal(a): =20
-> > > On Sat, 18 Jan 2025 08:21:31 +0100
-> > > Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
-> > >
-> > > Hi Jernej,
-> > >
-> > > many thanks for the review and your opinion.
-> > > =20
-> > > > Dne petek, 17. januar 2025 ob 02:45:31 Srednjeevropski standardni =
-=C4=8Das je Andre Przywara napisal(a): =20
-> > > > > Some of the X-Power AXP PMICs can be ordered with an alternative =
-I2C
-> > > > > address, for instance an AXP717 could be shipped with address 0x3=
-4 or
-> > > > > with address 0x35.
-> > > > > The datasheets for the AXP717 and AXP803 list two possible addres=
-ses,
-> > > > > and they are always consecutive. For DM (DT) based drivers this i=
-s no
-> > > > > problem, but the Allwinner SPL code relies on a hardcoded address.
-> > > > >
-> > > > > Add a Kconfig variable that will add "1" to the existing address =
-if it
-> > > > > is set.
-> > > > > This enables to use the AXP717 as used on boards with the new All=
-winner
-> > > > > A523 chip.
-> > > > >
-> > > > > Signed-off-by: Andre Przywara <andre.przywara@arm.com> =20
-> > > >
-> > > > This works until some board vendor start mixing one or another addr=
-ess
-> > > > PMIC. Note that BSP boot0 does address autodetection, so it's not e=
-ntirely
-> > > > out of the question. Anyway, let's hope we don't see anything like =
-that. =20
-> > >
-> > > I looked at the datasheets for all supported PMICs, and they either
-> > > state one or two supported addresses, in the latter case both
-> > > consecutive. Autodetection sounds nice, but also unnecessary: we sure=
-ly
-> > > know what address it is for a certain board? And with those A523 boar=
-ds
-> > > having two PMICs, autodetection might become sketchy, as we don't know
-> > > for sure which PMIC we got? =20
-> >
-> > Speaking for T527 BSP boot0 - they check version register to make sure =
-that
-> > correct PMIC is installed.
-> > =20
-> > >
-> > > But that got me thinking: what about putting the I2C address in Kconf=
-ig
-> > > directly, with defaults depending on the PMIC type?
-> > >
-> > > config AXP_I2C_ADDR
-> > >       hex "AXP PMIC I2C address"
-> > >       depends on ARCH_SUNXI && !SUNXI_NO_PMIC
-> > >       default 0x36 if AXP305_POWER
-> > >       ....
-> > >
-> > > That's should work seamlessly for all supported PMICs, and we just ne=
-ed
-> > > one line for the Avaota, same as with this patch here.
-> > >
-> > > What do you think? =20
-> >
-> > Yeah, looks more universal and avoids code changes in pmic_bus.c when
-> > adding support for new AXP PMIC, which is very nice indeed. =20
->=20
-> Shouldn't this be in the devicetree?
+Aside from that:
 
-It is, and the DM based I2C driver used in U-Boot proper does this
-properly, and works fine. But this here is for the SPL, where we don't
-have DT support. We need just minimal support to adjust the regulator
-for the DRAMs. So far there is one fixed address used by each PMIC, so
-this is simply hardcoded, based on which PMIC is selected. The patch I
-am now proposing (snippet above) just moves that hardcoding into
-Kconfig.
+Reviewed-by: Marek Vasut <marex@denx.de>
 
-Cheers,
-Andre
-
-
-
-> [..]
-> Regards,
-> Simon
->=20
-
+Thanks !
