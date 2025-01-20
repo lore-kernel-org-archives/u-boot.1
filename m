@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F48C02181
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 12:32:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36A34C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 12:36:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5AA7800B6;
-	Mon, 20 Jan 2025 13:32:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8626E800B6;
+	Mon, 20 Jan 2025 13:36:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="rWE5RceC";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="W/kQgw6U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2F9B805C5; Mon, 20 Jan 2025 13:31:59 +0100 (CET)
+ id C37AE805C5; Mon, 20 Jan 2025 13:36:52 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CBE180077
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:31:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F6F780077
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:36:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1737376305; x=1737981105; i=xypron.glpk@gmx.de;
- bh=PGkP63tvGbs/9ENEOqgJGTQMXguUEdN21uwZzyEl1b4=;
+ s=s31663417; t=1737376602; x=1737981402; i=xypron.glpk@gmx.de;
+ bh=ifBYmHcj/JpJfqIEmpIPhHWC6MiLEAVClpLSH5lUWAc=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=rWE5RceCw6DUrkraDEFl0KQaI8xHQTEm1R8xiDNqEIasAdOdYAOACCJk5KSb+FVG
- 0T5JKKTrpqjhFoI6eoSeG03u3Gl5ePdG6Uj/uahji09f58bImr4qfv6fumWDcoA8K
- xc6PTH1ngM902OlWIRXr2IJArFZSXJkuqPd/OiLTQrKg/Vza64LubpdMcZEkBU/11
- deBLM6+6wKO9CPPJSoC7CsTLOBi9TdYumVzYaRK5xdjO+7bkK824FU0b0SGFjfqWN
- 3jexvyEBR8whtb8gOszvu6f+QKzNYP/aqD2ZHwmaka+e0/n1Ab5jUDBNwjSN/P9Vi
- iU3yfJSume4QvBnjkQ==
+ b=W/kQgw6URPsnIPdQ4FI/FJ0cUqeGtNfSfWWnl9HGarZuT4+5q9ZIj+0kGuzm4ZdY
+ 3M1xQZosnHDadEZ77b7AsfRkbemDk6S7pM2n+5LeXo/A3y26V5fM5wOcO6w4gd6Mt
+ urh388Z6hHICjFT82GhTlj/OXwQ1sTin17nnow+C4RH4UWefzgBaIBPa3ojOrhc36
+ pEU+D4EPjC/vB0S5e2HpbqEB5HxD2SVufLvgM6k96Q8Ypeqe7iFZDhnV1r5Sowuf8
+ p72bIke7KIkXZuPaRHPg58Sg68gFf/I6YKMtMVvUOCDTZf+Yomd00vhzIYcMlNkMz
+ 4QwCaSrz7BwtnSQz8g==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N4hvb-1tPmli0zCB-010NTF; Mon, 20
- Jan 2025 13:31:45 +0100
-Message-ID: <67f57223-2c0d-414b-9e8c-138fdc57d92a@gmx.de>
-Date: Mon, 20 Jan 2025 13:31:39 +0100
+Received: from [192.168.103.102] ([46.114.108.173]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1McH9Y-1sxVWo0zVM-00btMj; Mon, 20
+ Jan 2025 13:36:42 +0100
+Message-ID: <a0c7303b-5969-4b05-9213-7dfdce31ed80@gmx.de>
+Date: Mon, 20 Jan 2025 13:36:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/5] fdt: add support for adding pmem nodes
+Subject: Re: [PATCH v3 2/5] efi_loader: add a function to remove memory from
+ the EFI map
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+ u-boot@lists.denx.de
 References: <20250120105045.1281262-1-sughosh.ganu@linaro.org>
- <20250120105045.1281262-2-sughosh.ganu@linaro.org>
+ <20250120105045.1281262-3-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250120105045.1281262-2-sughosh.ganu@linaro.org>
+In-Reply-To: <20250120105045.1281262-3-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:V4l33T6t34Naap0o63AAMAIxCadIgt2Nn8RQFgkRPkcTQTw3PUH
- Qa66BpXRM9CyyYhQB9E84nUjVccFdYR6kXnfLP6+w9nvEecOGWsIaod6FYz2o+6oYru7zHC
- zwUO4KZJLYGZcZKTAv2bG293nkek81ZsSJTvpvg0QulbPrduDALSs/iJ+r2jXJVRoRYUoUt
- k5+RZkS05ph60FNgn+/jw==
-UI-OutboundReport: notjunk:1;M01:P0:P5bvvsWnS34=;NLEHzf524qdVYPnTlUhCQ2dgUS4
- /onUHWDjXXaoo7kTZsAwgIScKqklqyBmZ1IKnQRsHUyWBuWUEn3ou3aYaeOWry6AX4ij0GnJ6
- Ik5yXNPEHcLOvGkUGp361Z9lw5JLHain1xFS9XaRG2eBIIYGTsiOmzdpxdjVn1tj74xgDVjTg
- BSNRz8qJP6TRCrf9sErRDIcmnLoT+obtw7/LUpbj6C2Z7IsHTDwSIcSNYoLkbXtWZP3AV7bYI
- vuvp7spJKRKoDSvaFWx3rzKoWdOEkDqY83yvNe2i1CKOVySZRCWnJbPEZirXrvUI/2hoGHSsz
- srqnFEedIA4QudY972S/lIBsyrw9S5NeUVljApelKOJIxi5BLFSdu55Tvx7JpJwCtoAc8MMG0
- xWFeZl4CjTpgDrC92P13W/CKLWKmnJdCqmNl1dT8aymF+3d0bM3alZKjTOxcjQinHrEv1Mmd8
- bN0IOyCJNWhIFyZBHk9yCBYxYVjf8E4eysUdUl5fkgSDZWGkG7UwS0b4XdokOKtHCTGjlXF9I
- 0ougu2bg2jjER6aViH4URx5wtXQnBllulYlPrpVwKyX6xHABH8gZFkfUD8ZzZRuC4eezvGdAt
- pqML4Ga7Hd62iJm/4tiksvnNeZpT9Cqzkz8pUrYDyV+1ieNi7n7SMnwfcRn3Kny1Sb1i+bJgI
- q38xd2xf2Jo0Wk7QcBzHnmAFNAGVzGZhTlOdIeKY9bwEozX4OZAMAzVzW/ooeFtDjBuHP3fDw
- rKHeeinJsEAhjf4vL8BO6KsPgeF9ArPV+c2kV9g3j9skn1egWlRRbIRuUNdQfekZtu6hCZ+Nn
- DlbNAMRIlFysC6UYuHhvwk45yD3rkKJ8nSlm1AJN7TH0bfhs6/rDacXaJSosxFGBglq7PY1q7
- 5C633QceBPUTOM498baF7XhsrYMtAjaHse9SUPMekGevBJiLCQDpFpRc5nB2ayH+REJ3VEhvy
- Gddvs6r8c6tA/7s2VxHvPJIjzOOvCvZABcxt+pUfVEko2+9tkGhXUpT/3zGbjkD/nFqduEJNi
- AckKs60qBOFI5nxn3o/LsJjlj/zxarcB8E/sCxDgo1Sr1KTYYYn4ay3qRtPnQBLMHvfgL75oh
- O3NAfi7aZFXnftzz4duj3gbInFgU2WaBxVftfA9qs/6b4fkqdSdwaQ6xplj1P7eiRps9Mb3wP
- JlVTTHezu+PhNMgCzab5WAVQpCgliEP+eUc88H6MbSA==
+X-Provags-ID: V03:K1:7KQsHu6YapbZ94wbtd4ewog5+BKRgmvMrLhmN0byFkq8x8GTl/m
+ o4hZrixEHpPrcUhTe/Y3j9nwzXxUtDGXzYyhfbMVApAToi3JZGyDmY8L98cVLfk375FozMJ
+ XqYHzNCGRZUyrBhpWwad46k/T7P/KgNzNekLm6z/Jh+Iujv8uQ7zFPwywBm83UmyKUA5Gq0
+ 88QBdvKUlONwJZMszLSWg==
+UI-OutboundReport: notjunk:1;M01:P0:Y2puHBbyH6E=;QD8QaoKLpPNtM36meMwoDVxh+fJ
+ 6V3dpGadqBjGGy86WUKo0AdrruXk17eBymcnHWhs0rzjBdNjHH+rWvspBiaKPhw7FR4NXMDne
+ ATvsZ63Oi7v/mAD7PQvZjNCUHommRwn4jfeMRJNxZ0/PIMR/h7sybkKqUoa1x36oWts0h2vDF
+ /tsW7ZlEc97plV2bHdau1hRjFaYdtXWil920KzkfnI5bjjRRzJgrN4AbHi4AG+ywHC7UvdVhu
+ 7aqiZRwJSXGiN+YdZoc6NotrFsOxyWQPzKklgJe+PSh6+qXjFaKvTxWCovDpl1HXGh6WuKXrN
+ NDRB5h5AwDhGUz9O8KaaEzA6pHXHtDLxhAFRTV5/xmli8d8cIuRUH3P+bpLdNCs5+ges4OeLO
+ 7ZFlpMr/SkO9VF/HOnmA7Z7mwhQ+8cnzRQwX2/CEtwHgWo187uklWf2KtK8pxvhCVbwfNkcgt
+ fZFZx656LCArXJOGgkc1w1KMIDCkQyZR7hPXjawSsNTeqjL80cT2HDvD5U9uiLoBHYljLONJf
+ Hl1De0EWAiD6HvDefsgT3xgYItTcBG19WjtHgETCYbioNwRO8dCbrJMNoOUyinIw5rk1ctESD
+ MrnrbLLZG30fC9KmJpkKl6Urmf9MU4g/EQbzHeZeBPD+JHBVXlEZiR2h/ZJkhegFarKCKOyl4
+ QZfX9rWQ6JOPnfIisqUJeBCG2mOwyGCJ6UB9ZnORwSWhYhwxkuAOcl4XTAWrpqhlQMVc3idcO
+ E9LnPBwEdHuyh2dhKThEXsQt2e5baO0ixEzYqwG8/DVV11H1E+c9zf7rw4oh50WWYCFtXwjZf
+ dLbTloVOUWh2+wKWA2tqxxZuUxpuYszVzqfPwDq171K6LOVnSYrVKen6JkaY/jBT47fcb2EGE
+ GvOi3rJ5gWuIX3QZZXmwDroqM86B7DnV4SZeAbf+LCkPYDMyTi8G77G3GQx0zJtyn9PF3+YIJ
+ KPMD/OZNG247wZ2hYd/I3tHnnEsq/FsD++hNy7I1cXjTzE2dgIDXDdmhKrseET5F+5Vs7LT+r
+ JcSQbwRrsuhS1+q/wbJNMOhWWBlVR8ZfwDFYCsmMSGq6NzOPOj5DDZU5fwe4qTTIslLrzcLJj
+ EWMPV5sE763D3v3zxrgjPy+DdzPJhotWGhj66YTU22QsJEzGPhGCg7XRm35IKp4GQqsxKA+mX
+ 7QPprLZ6BNjOOwa0FnmaojcNeR13IC9IQxAk+I8VnEg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,150 +101,204 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 20.01.25 11:50, Sughosh Ganu wrote:
-> From: Masahisa Kojima <kojima.masahisa@socionext.com>
+> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> One of the problems OS installers face, when running in EFI, is that
-> the mounted ISO after calling ExitBootServices goes away. For some
-> distros this is a problem since they rely on finding some core packages
-> before continuing the installation. Distros have works around this --
-> e.g Fedora has a special kernel command line parameter called
-> inst.stage2 [0].
+> With upcoming changes supporting pmem nodes, we need to remove the
+> pmem area from the EFI memory map. Add a function to do that.
 >
-> ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
-> don't have anything in place for DTs. Linux and device trees have suppor=
-t
-> for persistent memory devices. So add a function that can inject a pmem
-> node in a DT, so we can use it when launhing OS installers with EFI.
-
-We also have ACPI support in U-Boot. In a future patch series I guess we
-could add the generation of said ACPI tables.
-
->
-> [0]
-> https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html=
-/installation_guide/chap-anaconda-boot-options#sect-boot-options-installer
->
-> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
-> Changes since V2:
-> * Fix a checkpatch error by putting a blank line after a function
+> Changes since V2: None
 >
->   boot/fdt_support.c    | 40 +++++++++++++++++++++++++++++++++++++++-
->   include/fdt_support.h | 13 +++++++++++++
->   2 files changed, 52 insertions(+), 1 deletion(-)
+>   include/efi_loader.h        | 11 +++++---
+>   lib/efi_loader/efi_memory.c | 51 +++++++++++++++++++++++++++----------
+>   lib/lmb.c                   |  4 +--
+>   3 files changed, 47 insertions(+), 19 deletions(-)
 >
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 49efeec3681..613685b80eb 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -18,6 +18,7 @@
->   #include <dm/ofnode.h>
->   #include <linux/ctype.h>
->   #include <linux/types.h>
-> +#include <linux/sizes.h>
->   #include <asm/global_data.h>
->   #include <asm/unaligned.h>
->   #include <linux/libfdt.h>
-> @@ -464,7 +465,6 @@ void do_fixup_by_compat_u32(void *fdt, const char *c=
-ompat,
->   	do_fixup_by_compat(fdt, compat, prop, &tmp, 4, create);
->   }
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 0d858c1e12e..944794e1637 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -831,7 +831,7 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_=
+map_size,
+>   efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
 >
-> -#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY>   /*
->    * fdt_pack_reg - pack address and size array into the "reg"-suitable =
-stream
+>   /**
+> - * efi_add_memory_map_pg() - add pages to the memory map
+> + * efi_update_memory_map() - update the memory map by adding/removing p=
+ages
+>    *
+>    * @start:			start address, must be a multiple of
+>    *				EFI_PAGE_SIZE
+> @@ -839,11 +839,14 @@ efi_status_t efi_add_memory_map(u64 start, u64 siz=
+e, int memory_type);
+>    * @memory_type:		type of memory added
+>    * @overlap_conventional:	region may only overlap free(conventional)
+>    *				memory
+> + * @remove:			remove memory map
+>    * Return:			status code
 >    */
-> @@ -493,6 +493,7 @@ static int fdt_pack_reg(const void *fdt, void *buf, =
-u64 *address, u64 *size,
->   	return p - (char *)buf;
+> -efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> -				   int memory_type,
+> -				   bool overlap_conventional);
+> +efi_status_t efi_update_memory_map(u64 start, u64 pages, int memory_typ=
+e,
+> +				   bool overlap_conventional, bool remove);
+> +
+> +/* Remove memory from the EFI memory map */
+> +efi_status_t efi_remove_memory_map(u64 start, u64 size, int memory_type=
+);
+>
+>   /* Called by board init to initialize the EFI drivers */
+>   efi_status_t efi_driver_init(void);
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 1212772471e..2362995abf6 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -258,7 +258,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *ma=
+p,
 >   }
 >
-> +#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
-
-Do we need this #ifdef at all? We tend to leave it to the linker to
-eliminate functions.
-
->   #if CONFIG_NR_DRAM_BANKS > 4
->   #define MEMORY_BANKS_MAX CONFIG_NR_DRAM_BANKS
->   #else
-> @@ -2222,3 +2223,40 @@ int fdt_valid(struct fdt_header **blobp)
+>   /**
+> - * efi_add_memory_map_pg() - add pages to the memory map
+> + * efi_update_memory_map() - update the memory map by adding/removing p=
+ages
+>    *
+>    * @start:			start address, must be a multiple of
+>    *				EFI_PAGE_SIZE
+> @@ -266,11 +266,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *=
+map,
+>    * @memory_type:		type of memory added
+>    * @overlap_conventional:	region may only overlap free(conventional)
+>    *				memory
+> + * @remove:			remove memory map
+>    * Return:			status code
+>    */
+> -efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> -				   int memory_type,
+> -				   bool overlap_conventional)
+> +efi_status_t efi_update_memory_map(u64 start, u64 pages, int memory_typ=
+e,
+> +				   bool overlap_conventional, bool remove)
+>   {
+>   	struct efi_mem_list *lmem;
+>   	struct efi_mem_list *newlist;
+> @@ -278,9 +278,9 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pa=
+ges,
+>   	uint64_t carved_pages =3D 0;
+>   	struct efi_event *evt;
+>
+> -	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
+> +	EFI_PRINT("%s: 0x%llx 0x%llx %d %s %s\n", __func__,
+>   		  start, pages, memory_type, overlap_conventional ?
+> -		  "yes" : "no");
+> +		  "yes" : "no", remove ? "remove" : "add");
+>
+>   	if (memory_type >=3D EFI_MAX_MEMORY_TYPE)
+>   		return EFI_INVALID_PARAMETER;
+> @@ -363,7 +363,10 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 p=
+ages,
 >   	}
->   	return 1;
->   }
-> +
-> +int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size)
-> +{
-> +	u64 pmem_start[2] =3D { 0 };
-> +	u64 pmem_size[2] =3D { 0 };
-> +	char pmem_node[32] =3D {0};
-> +	int nodeoffset, len;
-> +	int err;
-> +	u8 tmp[4 * 16]; /* Up to 64-bit address + 64-bit size */
-> +
-> +	if (!IS_ALIGNED(addr, SZ_2M) || !IS_ALIGNED(addr + size, SZ_2M)) {
-> +		printf("Start and end address needs at 2MB alignment\n");
-
-Nits:
-
-%s/needs at 2MB alignment/must be 2 MiB aligned/
-
-> +		return -1;
-> +	}
-> +	snprintf(pmem_node, sizeof(pmem_node), "pmem@%lx", addr);
-> +	nodeoffset =3D fdt_find_or_add_subnode(blob, 0, pmem_node);
-> +	if (nodeoffset < 0)
-> +		return nodeoffset;
-> +
-> +	err =3D fdt_setprop_string(blob, nodeoffset, "compatible", "pmem-regio=
-n");
-> +	if (err)
-> +		return err;
-> +	err =3D fdt_setprop_empty(blob, nodeoffset, "volatile");
-> +	if (err)
-> +		return err;
-> +	pmem_start[0] =3D addr;
-> +	pmem_size[0] =3D size;
-> +	len =3D fdt_pack_reg(blob, tmp, pmem_start, pmem_size, 1);
-> +	err =3D fdt_setprop(blob, nodeoffset, "reg", tmp, len);
-> +	if (err < 0) {
-> +		printf("WARNING: could not set pmem %s %s.\n", "reg",
-> +		       fdt_strerror(err));
-> +		return err;
-> +	}
-> +
-> +	return 0;
-> +}
-> diff --git a/include/fdt_support.h b/include/fdt_support.h
-> index f0ad2e6b365..aea24df828f 100644
-> --- a/include/fdt_support.h
-> +++ b/include/fdt_support.h
-> @@ -507,4 +507,17 @@ void fdt_fixup_pstore(void *blob);
->    */
->   int fdt_kaslrseed(void *blob, bool overwrite);
 >
-> +/**
-> + * fdt_fixup_pmem_region() - add a pmem node on the device tree
-> + *
-> + * This functions injects a pmem node to the device tree. Usually
-> + * used with EFI installers to preserve installer images
-
-If I understand the code correctly, the function adds or updates a pmem
-device-tree node for the given start address.
-
-Otherwise looks good to me.
-
-Best regards
-
-Heinrich
-
-> + *
-> + * @blob:	device tree provided by caller
-> + * @addr:	start address of the pmem node
-> + * @size:	size of the memory of the pmem node
-> + * Return:	0 on success or < 0 on failure
-> + */
-> +int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size);
+>   	/* Add our new map */
+> -        list_add_tail(&newlist->link, &efi_mem);
+> +	if (!remove)
+> +		list_add_tail(&newlist->link, &efi_mem);
+> +	else
+> +		free(newlist);
+>
+>   	/* And make sure memory is listed in descending order */
+>   	efi_mem_sort();
+> @@ -400,7 +403,29 @@ efi_status_t efi_add_memory_map(u64 start, u64 size=
+, int memory_type)
+>   	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
+>   	start &=3D ~EFI_PAGE_MASK;
+>
+> -	return efi_add_memory_map_pg(start, pages, memory_type, false);
+> +	return efi_update_memory_map(start, pages, memory_type, false, false);
+> +}
 > +
->   #endif /* ifndef __FDT_SUPPORT_H */
+> +/**
+> + * efi_remove_memory_map() - remove memory area to the memory map
+> + *
+> + * @start:		start address of the memory area
+> + * @size:		length in bytes of the memory area
+> + * @memory_type:	type of memory removed
+> + *
+> + * Return:		status code
+> + *
+> + * This function automatically aligns the start and size of the memory =
+area
+> + * to EFI_PAGE_SIZE.
+> + */
+> +efi_status_t efi_remove_memory_map(u64 start, u64 size, int memory_type=
+)
+> +{
+> +	u64 pages;
+> +
+> +	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
+> +	start &=3D ~EFI_PAGE_MASK;
+> +
+> +	return efi_update_memory_map(start, pages, memory_type, false, true);
+>   }
+>
+>   /**
+> @@ -501,7 +526,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
+pe type,
+>
+>   	efi_addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
+>   	/* Reserve that map in our memory maps */
+> -	ret =3D efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
+> +	ret =3D efi_update_memory_map(efi_addr, pages, memory_type, true, fals=
+e);
+>   	if (ret !=3D EFI_SUCCESS) {
+>   		/* Map would overlap, bail out */
+>   		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
+> @@ -822,8 +847,8 @@ static void add_u_boot_and_runtime(void)
+>   		       uboot_stack_size) & ~EFI_PAGE_MASK;
+>   	uboot_pages =3D ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+>   		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+> -	efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE=
+,
+> -			      false);
+> +	efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE=
+,
+> +			      false, false);
+>   #if defined(__aarch64__)
+>   	/*
+>   	 * Runtime Services must be 64KiB aligned according to the
+> @@ -841,8 +866,8 @@ static void add_u_boot_and_runtime(void)
+>   	runtime_end =3D (uintptr_t)__efi_runtime_stop;
+>   	runtime_end =3D (runtime_end + runtime_mask) & ~runtime_mask;
+>   	runtime_pages =3D (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+> -	efi_add_memory_map_pg(runtime_start, runtime_pages,
+> -			      EFI_RUNTIME_SERVICES_CODE, false);
+> +	efi_update_memory_map(runtime_start, runtime_pages,
+> +			      EFI_RUNTIME_SERVICES_CODE, false, false);
+>   }
+>
+>   int efi_memory_init(void)
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 7ca44591e1d..d5aea1ed8fe 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -455,11 +455,11 @@ static int lmb_map_update_notify(phys_addr_t addr,=
+ phys_size_t size, u8 op,
+>   	pages =3D efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
+>   	efi_addr &=3D ~EFI_PAGE_MASK;
+>
+> -	status =3D efi_add_memory_map_pg(efi_addr, pages,
+> +	status =3D efi_update_memory_map(efi_addr, pages,
+>   				       op =3D=3D MAP_OP_RESERVE ?
+>   				       EFI_BOOT_SERVICES_DATA :
+>   				       EFI_CONVENTIONAL_MEMORY,
+> -				       false);
+> +				       false, false);
+>   	if (status !=3D EFI_SUCCESS) {
+>   		log_err("%s: LMB Map notify failure %lu\n", __func__,
+>   			status & ~EFI_ERROR_MASK);
 
