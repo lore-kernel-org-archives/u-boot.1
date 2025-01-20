@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C297C02182
-	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:28:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FAF2C02181
+	for <u-boot@archiver.kernel.org>; Mon, 20 Jan 2025 21:29:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50D3D8083E;
+	by phobos.denx.de (Postfix) with ESMTP id A81EA80882;
 	Mon, 20 Jan 2025 22:27:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E9OffR8J";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KA/FZdLr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85CA680717; Mon, 20 Jan 2025 22:26:59 +0100 (CET)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 566C280818; Mon, 20 Jan 2025 22:27:01 +0100 (CET)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 543A080820
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:26:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B6ED800C2
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 22:26:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3ce85545983so17415615ab.0
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:26:57 -0800 (PST)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-3ce7f6fdd2aso40039655ab.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 13:26:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737408415; x=1738013215; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737408417; x=1738013217; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ow42Mg4YNry9kZ9G47LxoCapthoLjMzriIesomFjUDI=;
- b=E9OffR8JUYBAT7LVZR/4DaSF8dGSDKcAgASU2fZbXGqwiq3cF2eJKtJuS35gqfhNJ8
- BX8yj20/ExNX4SR1J+HhV1pi0y5Q5QQbBW8KiTRMg210QG0cwVuuG4ppwFDx/GXl8Ip0
- rAoRQ1r/udgjphaxbLvNY74eaaft637crFDmc=
+ bh=xKi1UFnNzx2bFKyg4M8Yx0z0h2HyOKTqI5B925/7Juc=;
+ b=KA/FZdLrvQK2G02RIx/HS/Z6MTOeb9UZBzKSN8dhIwXt9XtnFeJK6Cc1qWDnDELPF6
+ aRtMqUJ+MmqL+QQ7BqY76koqEJXNWf0sadKQ6aGKqdj/qnlHajNOZEctpUxk9HfKOU+X
+ CKA7dSu77WiSpGaeDciPPzdqIhslDjEQpTdV0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737408415; x=1738013215;
+ d=1e100.net; s=20230601; t=1737408417; x=1738013217;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ow42Mg4YNry9kZ9G47LxoCapthoLjMzriIesomFjUDI=;
- b=f64menS0esyb0IUTGj8zvaJM82OJ7g3VLXBEPRHe9Pcx68abQAvYm7nbnwoQm6ytSU
- DrlzV4B+BtKKFCsJaPLGNVIyL/GyAgumFyGwZ4QZYFoflsvV8iLnT/HmrJnpQC8pfJiN
- qmfzouBHuF1jPX4NzFVusfANjlrzaTSJvQ8wicVUB52rFe59i/OVDSOVqhZ585iOq5WU
- wul/JNYI4xIhsU9PDs62Jw4ByFwimJYr+Js3/NfPYT+30iDUjgYdrxeROCm9h9dJxl8c
- 2EWpMpxIv15lnGA597jT3/B+fMcKeWCA3eeACZ0vStPAxWFNID+DrkBnTVFCXgD89myx
- BqwA==
-X-Gm-Message-State: AOJu0Yw2qhLQSOWdAA3YPfqoqnY4m9QRLL+jSM5HdIeBHzhttbDcxd0Q
- GJYVfQBl+3CXBpOXy6NZ7hXoaHECM31Y7mhvVG6MT8JQq+qrjKx5eU3ToPjV6Sw7LYRqe2Wmh+o
+ bh=xKi1UFnNzx2bFKyg4M8Yx0z0h2HyOKTqI5B925/7Juc=;
+ b=Ugqtp4wjyEqUf6FwOJat5CvVCmGoNDpmMmsYJYuwXdceZPROIelJOr2Pr+hIGZln+K
+ NdfMtpL02kIBKEfmCCkhAjD4WWtab0eDr6LCbL4s+uXTlcWv3iHuWDX+23hDPo93Khtr
+ BqBtmelAEiQzmDhOIEF47fLtcbEyxw5V6eDKyk7BBoplgfLjjqasIY7JA0xVt/I5A6e+
+ SO0Z0DyXLk+TV0J+tjSQo1gp3waOVr7V7tBl9lp6ylg+7zRr7Oup9G5grEY12WA/MvXB
+ vwPXiQyx+dqSGy73AGqq50zaostFU8vmPh7neP1H3bHooRcXy5NX+DmiY/ylXOCPxLBb
+ taMg==
+X-Gm-Message-State: AOJu0YwdOKPPKu1XsPyxpd2UWr/X4XrixZR2exww2bdsLQ57YRNZNWT4
+ O5rVTFSqYpOgU3BA6lGM/KDYqs84Lqo0/0S/+gugLruL+SfKBOc6rKOohSlamvRTGbmZ3VQwN3k
  =
-X-Gm-Gg: ASbGncsPQLRYUfmq1mcqMGzxka9snoCDcPUT7gxrvZHTAsdkbpl04MVVi8hl20CCeWB
- UZW+TbWeY3ru4cYq+fKjQEQj8vwkwv28mOaDJk8nAOauVwE1bpz2FpWfr00orn/s6cFxZiAPWQT
- eluzd8y0PWvx8DWpjPbqCkeOOYPLzUoOIXjkPtJ+lHNsosIRCLrROkycZa6DFawsSoEWnzwQVGY
- Gt/o3g3ak7x5h56DeQWP4on2eNhmZkZje1ROCKMgrmrlVmPiPFSOGIvBDZ0oHsQbdU/iik55XIM
- nvqQ6rHjhn/40z7qv/UIwtIPd8HmlKU=
-X-Google-Smtp-Source: AGHT+IG73kITUfo7JBeohqYazreNLbtGoKI4Jl3RcKn+QFydY2M90EZTINuxSMxMS/3BlLWnyKPBvw==
-X-Received: by 2002:a92:c98e:0:b0:3ce:3541:d80f with SMTP id
- e9e14a558f8ab-3ce8485cc3bmr172095745ab.0.1737408415564; 
- Mon, 20 Jan 2025 13:26:55 -0800 (PST)
+X-Gm-Gg: ASbGncvH6P1XMFi1WM9cGBkjXOrHNd/sLBtt+G23K1nAi6JbKz8CYtivHJp4FnyrMUM
+ SNv89GveAxA2OD/KaId/QyKDv6C3CnM2zbCg0iSo2vCb1PCA9udNNQnYBlWv3LirQi0jXywPxya
+ nvr02/EgSKd+ErKSK3Sp4/EieVSMdUhoYcIAJ54WK2Co9EY2o4S3ua8mA9M33D+F90VMq8+Czsm
+ njgEp6mmTw2NqemoAaVsLLVsE457tZc9CLzr5qTciOt6l1/AfTkkf6egSJ4WNnv27uWJl41ADK8
+ iq/VV3IEEa6aUIKZ6jfms/0mucHbFNQ=
+X-Google-Smtp-Source: AGHT+IGzvlTNCflBsO0mXwjH/QMvNFATOHqCXMdSaZBhqrEXS681WepJhKpdjfenqR8UIKcqPfWH3g==
+X-Received: by 2002:a05:6e02:1686:b0:3a7:4826:b057 with SMTP id
+ e9e14a558f8ab-3cf744b4338mr136327735ab.21.1737408417347; 
+ Mon, 20 Jan 2025 13:26:57 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.26.53
+ 8926c6da1cb9f-4ea75440a24sm2847693173.33.2025.01.20.13.26.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 13:26:54 -0800 (PST)
+ Mon, 20 Jan 2025 13:26:56 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 15/44] test: Drop the function for running dm tests
-Date: Mon, 20 Jan 2025 14:25:37 -0700
-Message-ID: <20250120212613.516664-16-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Ravi Minnikanti <rminnikanti@marvell.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 16/44] test: Drop the function for running env tests
+Date: Mon, 20 Jan 2025 14:25:38 -0700
+Message-ID: <20250120212613.516664-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250120212613.516664-1-sjg@chromium.org>
 References: <20250120212613.516664-1-sjg@chromium.org>
@@ -102,71 +103,59 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 
 (no changes since v1)
 
- include/test/suites.h |  1 -
- test/cmd_ut.c         |  2 +-
- test/dm/Makefile      |  2 --
- test/dm/test-dm.c     | 15 ---------------
- 4 files changed, 1 insertion(+), 19 deletions(-)
- delete mode 100644 test/dm/test-dm.c
+ include/test/suites.h | 1 -
+ test/cmd_ut.c         | 2 +-
+ test/env/cmd_ut_env.c | 9 ---------
+ 3 files changed, 1 insertion(+), 11 deletions(-)
 
 diff --git a/include/test/suites.h b/include/test/suites.h
-index d6c0061ff87..414613c593e 100644
+index 414613c593e..b78436fe2b2 100644
 --- a/include/test/suites.h
 +++ b/include/test/suites.h
 @@ -37,7 +37,6 @@ int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc,
  		  char *const argv[]);
  int do_ut_bloblist(struct cmd_tbl *cmdtp, int flag, int argc,
  		   char *const argv[]);
--int do_ut_dm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+-int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
  int do_ut_exit(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
  int do_ut_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_font(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
 diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 1fda67abd95..a0905ec54b7 100644
+index a0905ec54b7..155b187ad4b 100644
 --- a/test/cmd_ut.c
 +++ b/test/cmd_ut.c
-@@ -133,7 +133,7 @@ static struct suite suites[] = {
- #endif
- 	SUITE(common),
- #if defined(CONFIG_UT_DM)
--	SUITE_CMD(dm, do_ut_dm),
-+	SUITE(dm),
+@@ -136,7 +136,7 @@ static struct suite suites[] = {
+ 	SUITE(dm),
  #endif
  #if defined(CONFIG_UT_ENV)
- 	SUITE_CMD(env, do_ut_env),
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index bcb52ef1067..e44f3d89e77 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -3,8 +3,6 @@
- # Copyright (c) 2013 Google, Inc
- # Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
+-	SUITE_CMD(env, do_ut_env),
++	SUITE(env),
+ #endif
+ 	SUITE_CMD(exit, do_ut_exit),
+ #ifdef CONFIG_CMD_FDT
+diff --git a/test/env/cmd_ut_env.c b/test/env/cmd_ut_env.c
+index 332139bb803..81d1bb2f80d 100644
+--- a/test/env/cmd_ut_env.c
++++ b/test/env/cmd_ut_env.c
+@@ -4,7 +4,6 @@
+  * Joe Hershberger, National Instruments, joe.hershberger@ni.com
+  */
  
--obj-$(CONFIG_UT_DM) += test-dm.o
+-#include <command.h>
+ #include <test/env.h>
+ #include <test/suites.h>
+ #include <test/ut.h>
+@@ -74,11 +73,3 @@ static int env_test_env_cmd(struct unit_test_state *uts)
+ 	return 0;
+ }
+ ENV_TEST(env_test_env_cmd, UTF_CONSOLE);
 -
- # Tests for particular subsystems - when enabling driver model for a new
- # subsystem you must add sandbox tests here.
- ifeq ($(CONFIG_XPL_BUILD),y)
-diff --git a/test/dm/test-dm.c b/test/dm/test-dm.c
-deleted file mode 100644
-index 8f83110163a..00000000000
---- a/test/dm/test-dm.c
-+++ /dev/null
-@@ -1,15 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (c) 2013 Google, Inc
-- */
--
--#include <test/suites.h>
--#include <test/test.h>
--
--int do_ut_dm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 -{
--	struct unit_test *tests = UNIT_TEST_SUITE_START(dm);
--	const int n_ents = UNIT_TEST_SUITE_COUNT(dm);
+-	struct unit_test *tests = UNIT_TEST_SUITE_START(env);
+-	const int n_ents = UNIT_TEST_SUITE_COUNT(env);
 -
--	return cmd_ut_category("dm", "dm_test_", tests, n_ents, argc, argv);
+-	return cmd_ut_category("env", "env_test_", tests, n_ents, argc, argv);
 -}
 -- 
 2.43.0
