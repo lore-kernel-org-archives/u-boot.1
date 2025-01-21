@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46EB6C02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 14:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F76C02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 14:41:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74F37801F5;
-	Tue, 21 Jan 2025 15:38:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E7450801F5;
+	Tue, 21 Jan 2025 15:41:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C892F80326; Tue, 21 Jan 2025 15:38:52 +0100 (CET)
+ id 6A82980326; Tue, 21 Jan 2025 15:41:02 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 107FD801CF
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 15:38:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 10828801CF
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 15:40:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: yXg3FrkIT1+lYyoOQEyltg==
-X-CSE-MsgGUID: YsARCygkRR+aYmVmF2iCtg==
+X-CSE-ConnectionGUID: kmbvMwFLS1WHOJe4W7QuMg==
+X-CSE-MsgGUID: PkqEAAVHQY2MRSeHJrkWeg==
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 21 Jan 2025 23:38:46 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 21 Jan 2025 23:40:58 +0900
 Received: from [10.24.0.69] (unknown [10.24.0.69])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 79110429A781;
- Tue, 21 Jan 2025 23:38:30 +0900 (JST)
-Message-ID: <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
-Date: Tue, 21 Jan 2025 14:38:29 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id AC3D8404CCE6;
+ Tue, 21 Jan 2025 23:40:54 +0900 (JST)
+Message-ID: <dafdbcbc-b0a3-4ba8-be54-7b0013406068@bp.renesas.com>
+Date: Tue, 21 Jan 2025 14:40:53 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
+Subject: Re: [PATCH 02/17] net: miiphybb: Introduce
+ bb_miiphy_free()/bb_miiphy_free() wrappers
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Christian Marangi <ansuelsmth@gmail.com>,
@@ -45,11 +46,12 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>
 References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
+ <20250118065402.172253-2-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250118065402.172253-2-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------xFlbJzBzBC78ByAMSutrFLmP"
+ boundary="------------WaldzENal4fRmV0iAr1QfqLl"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,8 +69,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------xFlbJzBzBC78ByAMSutrFLmP
-Content-Type: multipart/mixed; boundary="------------80sWzrAipvbPLMSWsh4ZPH4x";
+--------------WaldzENal4fRmV0iAr1QfqLl
+Content-Type: multipart/mixed; boundary="------------tOXZFoXWWirilJ2jnDsmow70";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -81,86 +83,33 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Message-ID: <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
-Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
+Message-ID: <dafdbcbc-b0a3-4ba8-be54-7b0013406068@bp.renesas.com>
+Subject: Re: [PATCH 02/17] net: miiphybb: Introduce
+ bb_miiphy_free()/bb_miiphy_free() wrappers
 References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
+ <20250118065402.172253-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250118065402.172253-2-marek.vasut+renesas@mailbox.org>
 
---------------80sWzrAipvbPLMSWsh4ZPH4x
-Content-Type: multipart/mixed; boundary="------------l76hoG88Kd43x06Z3AQBfwBz"
+--------------tOXZFoXWWirilJ2jnDsmow70
+Content-Type: multipart/mixed; boundary="------------Xowmv4RX56509XKeIXtChPIx"
 
---------------l76hoG88Kd43x06Z3AQBfwBz
+--------------Xowmv4RX56509XKeIXtChPIx
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 18/01/2025 06:53, Marek Vasut wrote:
-> Introduce mdio_init() split off from mdio_alloc(), which is used
-> to initialize already allocated struct mii_dev.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Introduce bb_miiphy_free()/bb_miiphy_free() wrappers to allocate and fr=
+ee
 
-Replying here for the whole patch series...
+This should be bb_miiphy_alloc()/bb_miiphy_free().
 
-I like where we get to at the end of this series, but I don't like the
-intermediate state where the bb_miiphy_buses arrays still exist but are
-unused. I also think we should introduce a new ops struct so we're not
-duplicating function pointers in each instance of struct bb_miiphy_bus.
-
-I would prefer the following order of changes, let me know if you think
-this would be cleaner:
-
-1) Introduce mdio_init().
-
-2) Add mii member to struct bb_miiphy_bus.
-
-3) Modify each driver to use the mii member of the appropriate struct
-   bb_miiphy_bus instance, calling mdio_init() instead of mdio_alloc().
-   At this point we're still using the instances in the statically
-   allocated bb_miiphy_buses array.
-
-4) Use container_of() in bb_miiphy_getbus().
-
-5) Drop global names bb_miiphy_buses and bb_miiphy_buses_num as these
-   should no longer be used. The bb_miiphy_buses arrays can be static in
-   each driver and at this point the miiphy code should not care whether
-   the arrays are statically or dynamically allocated.
-
-6) Drop name member of struct bb_miiphy_bus now that it is unused.
-
-7) arm: mvebu: a38x: Call bb_miiphy init directly in driver probe.
-
-8) Drop bb_miiphy_init() and .init callbacks.
-
-9) Move function pointers to a new ops struct so we're not duplicating
-   them in each instance of struct bb_miiphy_bus:
-
-	struct bb_miiphy_ops {
-		int (*mdio_active)(struct bb_miiphy_bus *bus);
-		int (*mdio_tristate)(struct bb_miiphy_bus *bus);
-		int (*set_mdio)(struct bb_miiphy_bus *bus, int v);
-		int (*get_mdio)(struct bb_miiphy_bus *bus, int *v);
-		int (*set_mdc)(struct bb_miiphy_bus *bus, int v);
-		int (*delay)(struct bb_miiphy_bus *bus);
-	};
-
-	struct bb_miiphy_bus {
-		struct bb_miiphy_ops *ops;
-		struct mii_dev mii;
-		void *priv;
-	};
-
-10) Introduce bb_miiphy_alloc()/bb_miiphy_free().
-
-11) Convert each driver from a static array of struct bb_miiphy_bus
-    instances to dynamically allocated instances, for each driver
-    removing the static array in the same commit that dynamic allocation
-    is added.
+Same for the commit title.
 
 Thanks,
 
 --=20
 Paul Barker
---------------l76hoG88Kd43x06Z3AQBfwBz
+--------------Xowmv4RX56509XKeIXtChPIx
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -224,21 +173,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------l76hoG88Kd43x06Z3AQBfwBz--
+--------------Xowmv4RX56509XKeIXtChPIx--
 
---------------80sWzrAipvbPLMSWsh4ZPH4x--
+--------------tOXZFoXWWirilJ2jnDsmow70--
 
---------------xFlbJzBzBC78ByAMSutrFLmP
+--------------WaldzENal4fRmV0iAr1QfqLl
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ4+xZQUDAAAAAAAKCRDbaV4Vf/JGvXPs
-AP4oAHdmemImR2hHvEQ4dWyq9G7sy6aNDAo8HqlTpoNKJAEAiADlUFHJhVWoirPxxu8SSTq63lov
-FQy+SRfdaew9JwU=
-=8ilt
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ4+x9QUDAAAAAAAKCRDbaV4Vf/JGvS67
+AP4zy5wqXWaViz6EOPstMJVSkB0N8ipUtO1yooyxSB4rmwD+I5HS7ie2zQ/1VXaNO1aRaXa41Fak
+OQPYlh6f1bm3yQU=
+=ARGU
 -----END PGP SIGNATURE-----
 
---------------xFlbJzBzBC78ByAMSutrFLmP--
+--------------WaldzENal4fRmV0iAr1QfqLl--
