@@ -4,54 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F76C02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 14:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BBF1C02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 15:39:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7450801F5;
-	Tue, 21 Jan 2025 15:41:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 72C1D801FB;
+	Tue, 21 Jan 2025 16:39:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A82980326; Tue, 21 Jan 2025 15:41:02 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 10828801CF
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 15:40:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: kmbvMwFLS1WHOJe4W7QuMg==
-X-CSE-MsgGUID: PkqEAAVHQY2MRSeHJrkWeg==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 21 Jan 2025 23:40:58 +0900
-Received: from [10.24.0.69] (unknown [10.24.0.69])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id AC3D8404CCE6;
- Tue, 21 Jan 2025 23:40:54 +0900 (JST)
-Message-ID: <dafdbcbc-b0a3-4ba8-be54-7b0013406068@bp.renesas.com>
-Date: Tue, 21 Jan 2025 14:40:53 +0000
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="a9huT5FP";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="p5ijgv8H";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 52592801F5; Tue, 21 Jan 2025 16:39:02 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BCF080283
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 16:38:59 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YcrwK5nwFz9sb9;
+ Tue, 21 Jan 2025 16:38:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737473937;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=QP6cyzNqWyI5XQ0XkWkrY9YOlWAQ9zlFyjFvXOssbyU=;
+ b=a9huT5FP61wMOL4WKqgwHEJ0jEDcjvT8lCXIB9mdOhQF3b8iTGoX/Q/FCaAkZW3hl2NolP
+ 0bsaWv8pxOfehXqQR7vdjvIp5EeUAoL1CiMCInWJ33wtYHkRYE7hJe0V5UtiE3MSnq3wEI
+ sWX87B/lRrxbguoKRe3WHemnflY0URttPQa6iwTB/xNAQSXazCQCgjhEb4TPm9CnAZCwfz
+ jrPyXS+mI2DEzfu0OILtJds8EMJwuJtlCNecWAV/ZN61WvaN0U4udzO1yxQXNvXeF87mQY
+ cTiMq39AI5n6mdpRTcG5E8msdtmUuO6E3ZlZTyGuhYBF2D9Jl2iMunhWhPNK+Q==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737473935;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=QP6cyzNqWyI5XQ0XkWkrY9YOlWAQ9zlFyjFvXOssbyU=;
+ b=p5ijgv8HDJcqJXcyal7THgEWAy8N4V58TICk0rHF1xuuiHIBmwZ/yC19FAQPPcHW67E6j9
+ EX/O1IDnUKuqitza50HKrKnNWnHNmoKHg0LN9hICD5xonkqeXrt0E/N8jNdbiryTWWQHZL
+ rT4qvLPe+hHyHslhJfYdqwdg4ic7nmtyS2YYdLfDbVhT2HaAJHTygtoaNmY+PU2/Eos7mY
+ TRdycTW8UTyuj7k8dlcoeZrHVEeZ/vG17dJ5ld+uI8toeOOgFT1GKbYsCARldBEcIKgcjF
+ Ocz3h41JcEVRxS3GmO6Hdk97wJDcu9NyVZlOJZD6SIjwOJ2PWAlCyYkf/ZTIJw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Anurag Dutta <a-dutta@ti.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hiago De Franco <hiago.franco@toradex.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] treewide: Replace Maximumm with Maximum in Kconfig symbol
+ description
+Date: Tue, 21 Jan 2025 16:36:11 +0100
+Message-ID: <20250121153836.83878-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/17] net: miiphybb: Introduce
- bb_miiphy_free()/bb_miiphy_free() wrappers
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
- <20250118065402.172253-2-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250118065402.172253-2-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------WaldzENal4fRmV0iAr1QfqLl"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 57e2951c22fac7d7692
+X-MBO-RS-META: 4zhdqa6anu1u4ai5gnmcq6ho99hazrxn
+X-Rspamd-Queue-Id: 4YcrwK5nwFz9sb9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,126 +94,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------WaldzENal4fRmV0iAr1QfqLl
-Content-Type: multipart/mixed; boundary="------------tOXZFoXWWirilJ2jnDsmow70";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Message-ID: <dafdbcbc-b0a3-4ba8-be54-7b0013406068@bp.renesas.com>
-Subject: Re: [PATCH 02/17] net: miiphybb: Introduce
- bb_miiphy_free()/bb_miiphy_free() wrappers
-References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
- <20250118065402.172253-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250118065402.172253-2-marek.vasut+renesas@mailbox.org>
+Replace Maximumm with Maximum in Kconfig symbol description, fix a typo.
+No functional change.
 
---------------tOXZFoXWWirilJ2jnDsmow70
-Content-Type: multipart/mixed; boundary="------------Xowmv4RX56509XKeIXtChPIx"
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Anurag Dutta <a-dutta@ti.com>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Hiago De Franco <hiago.franco@toradex.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/block/Kconfig | 2 +-
+ drivers/mtd/Kconfig   | 2 +-
+ env/Kconfig           | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
---------------Xowmv4RX56509XKeIXtChPIx
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+diff --git a/drivers/block/Kconfig b/drivers/block/Kconfig
+index cc75bad02b8..750b0bd2082 100644
+--- a/drivers/block/Kconfig
++++ b/drivers/block/Kconfig
+@@ -147,7 +147,7 @@ config IDE
+ if IDE
+ 
+ config SYS_IDE_MAXBUS
+-	hex "Maximumm number of IDE buses"
++	hex "Maximum number of IDE buses"
+ 	default 2
+ 	help
+ 	  This is the number of IDE buses provided by the board. Each one
+diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
+index 185e8346213..2b7f5e5ed7b 100644
+--- a/drivers/mtd/Kconfig
++++ b/drivers/mtd/Kconfig
+@@ -216,7 +216,7 @@ config STM32_FLASH
+ 	 STM32 MCU.
+ 
+ config SYS_MAX_FLASH_SECT
+-	int "Maximumm number of sectors on a flash chip"
++	int "Maximum number of sectors on a flash chip"
+ 	depends on MTD_NOR_FLASH || FLASH_CFI_DRIVER
+ 	default 512
+ 
+diff --git a/env/Kconfig b/env/Kconfig
+index aaf0b1fe9ac..4438f0b392c 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -60,7 +60,7 @@ config ENV_MIN_ENTRIES
+ 	  to store the environment settings.
+ 
+ config ENV_MAX_ENTRIES
+-	int "Maximumm number of entries in the environment hashtable"
++	int "Maximum number of entries in the environment hashtable"
+ 	default 512
+ 	help
+ 	  Maximum number of entries in the hash table that is used internally
+-- 
+2.45.2
 
-On 18/01/2025 06:53, Marek Vasut wrote:
-> Introduce bb_miiphy_free()/bb_miiphy_free() wrappers to allocate and fr=
-ee
-
-This should be bb_miiphy_alloc()/bb_miiphy_free().
-
-Same for the commit title.
-
-Thanks,
-
---=20
-Paul Barker
---------------Xowmv4RX56509XKeIXtChPIx
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------Xowmv4RX56509XKeIXtChPIx--
-
---------------tOXZFoXWWirilJ2jnDsmow70--
-
---------------WaldzENal4fRmV0iAr1QfqLl
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ4+x9QUDAAAAAAAKCRDbaV4Vf/JGvS67
-AP4zy5wqXWaViz6EOPstMJVSkB0N8ipUtO1yooyxSB4rmwD+I5HS7ie2zQ/1VXaNO1aRaXa41Fak
-OQPYlh6f1bm3yQU=
-=ARGU
------END PGP SIGNATURE-----
-
---------------WaldzENal4fRmV0iAr1QfqLl--
