@@ -4,85 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 835E2C02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 14:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46EB6C02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 14:38:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD4A4801F5;
-	Tue, 21 Jan 2025 15:09:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 74F37801F5;
+	Tue, 21 Jan 2025 15:38:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X/ENXswQ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4795B80326; Tue, 21 Jan 2025 15:09:28 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DC5B801CF
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 15:09:26 +0100 (CET)
+ id C892F80326; Tue, 21 Jan 2025 15:38:52 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 107FD801CF
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 15:38:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53f22fd6832so5965396e87.1
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 06:09:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737468565; x=1738073365; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0f5LIRtI8lE0I3ck6MQDuqfIBtneIytlW8SPUiAz038=;
- b=X/ENXswQ7ZgK41TVAAWjdTBRV7aO4+KD8aqu6ncwdXJCe5G0wTGwYb5U1kDde4c8E3
- whEj2HB2UtcLZvwk7MWKMloRAjUu5keVNf0Hk8FU+FVbJf1GqAjMRkhgJy7fhmqGcpZJ
- CavEfShXT0EvRUKQvlVHSnaHv8vcnfYJoEWqXxG/T6B9MXGgaG46lJtq7Q9c8en5nupe
- zVU7x+cB1zOjwb8YvAJSGpFAj3W5ywyZrIqHDBS3jyUNXCdc3l29X2Ty7iSQjgzy/Eqg
- 4ywZQ14EKis092O9VGDAHaBUg58vQvDVsdfUauocno0k+gApoghm3yJC1bq7aoBMfkvA
- VUmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737468565; x=1738073365;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0f5LIRtI8lE0I3ck6MQDuqfIBtneIytlW8SPUiAz038=;
- b=vC9yA1DOObB9KyiOXP/31ppWHcDOcQafVAc0domxZKu31WtwQfwLeOwctEdCpnwPHI
- q/WZYlfxtJcMBuvl4UbErHzxnhmsIYN5Jh99mHSDsxAFXF74XnnLvMIaHJ6jVc+bR8P+
- Tk3NVGv18RZfYfd4HhryWpdloDL8tqesQXT9kvTxIuLbCLncJZf5txjWJWMaL4AakJ/2
- a2xtXXa1iV+hytxpGZZ7zybbXPPWzTQd8kvIVxhGyvvX0LwoNKL50arI/WAZscRxgLd9
- R68zI+2iamCawzCfyFc7LfIMLgyiy52rwFwBm9Hz7rL5NOthbrwy9hEZQuod3pOocy0B
- 5yOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvTscMqyqA0P9jgtQdN7SOr7KwQhI5Nuo96A5Np2WLSefQe30xB8DBMjp0zTAWIEMp6SLQJuc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWUhcmUQhjleQlkL+FFSSnAycqBe+KKVw1ZCWRcWJ7krxmeVv4
- hlU/Az1/0dunqE5aebtE4kEgDUJVjyBTmckiHEJg3wJ1j3uOLxioDBNjLdinSfr4yjo3ZL7pDde
- +Ms6pjCuH/13OByolx1v6ZBX1DtM=
-X-Gm-Gg: ASbGnct9ci+/VriUlVKP0TWbTG0d33uH2oczk8MWwLtv9Cm3PEZSyGD8dPeLE88okPI
- ENc0Nk0+ngYYGZolaIZUk4EH/Rv5X6qACxTYrb2TmrUpR2BNlVYb+isfiN3qhLqAXCJvpQF1ldR
- 0SNXmLrWo=
-X-Google-Smtp-Source: AGHT+IEl8olHS3AakyjI0mY2grLClN36y3UMDhUKH2hf4HuNZrEv4erXsI4PFXb9uEC/TvHlpAbUW0srMbG3/NlTGIU=
-X-Received: by 2002:a05:6512:10d0:b0:53f:a8c0:22a7 with SMTP id
- 2adb3069b0e04-5439c282546mr6089411e87.38.1737468564777; Tue, 21 Jan 2025
- 06:09:24 -0800 (PST)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: yXg3FrkIT1+lYyoOQEyltg==
+X-CSE-MsgGUID: YsARCygkRR+aYmVmF2iCtg==
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 21 Jan 2025 23:38:46 +0900
+Received: from [10.24.0.69] (unknown [10.24.0.69])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 79110429A781;
+ Tue, 21 Jan 2025 23:38:30 +0900 (JST)
+Message-ID: <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
+Date: Tue, 21 Jan 2025 14:38:29 +0000
 MIME-Version: 1.0
-References: <20250117015642.2373824-1-festevam@gmail.com>
- <efbbd217c00ec775fb7c2a7a0da18a4b5ee0e39a.camel@phytec.de>
-In-Reply-To: <efbbd217c00ec775fb7c2a7a0da18a4b5ee0e39a.camel@phytec.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 21 Jan 2025 11:09:13 -0300
-X-Gm-Features: AbW1kvZmFJeLr6LDhOO4zrPM39uost7RlkvhUK_uXHRlUyvRnLH3ITdyhcTJLv4
-Message-ID: <CAOMZO5C0yDQr1QJ3RPOa_=O7=hgtR1_9GQdYCoomjuTUB7SyRA@mail.gmail.com>
-Subject: Re: [PATCH v2] imx8m: Guard binman nodes with CONFIG_OPTEE
-To: Yannic Moog <Y.Moog@phytec.de>
-Cc: "trini@konsulko.com" <trini@konsulko.com>,
- "peng.fan@nxp.com" <peng.fan@nxp.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>, 
- "tharvey@gateworks.com" <tharvey@gateworks.com>,
- "marex@denx.de" <marex@denx.de>, "festevam@denx.de" <festevam@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------xFlbJzBzBC78ByAMSutrFLmP"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,23 +66,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yannic,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------xFlbJzBzBC78ByAMSutrFLmP
+Content-Type: multipart/mixed; boundary="------------80sWzrAipvbPLMSWsh4ZPH4x";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Message-ID: <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
+Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
+References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
 
-On Fri, Jan 17, 2025 at 5:24=E2=80=AFAM Yannic Moog <Y.Moog@phytec.de> wrot=
-e:
+--------------80sWzrAipvbPLMSWsh4ZPH4x
+Content-Type: multipart/mixed; boundary="------------l76hoG88Kd43x06Z3AQBfwBz"
 
-> I have a question:
-> Since tee.bin is marked as optional, we still get the same behaviour when=
- OPTEE is set but no
-> tee.bin is supplied.
-> What do you suggest to do to remedy this?
->
-> We could remove the optional. Given that we guard it with CONFIG_OPTEE it=
- makes sense that the tee
-> binary must then be supplied and should no longer be considered optional.
+--------------l76hoG88Kd43x06Z3AQBfwBz
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Yes, this makes sense.
+On 18/01/2025 06:53, Marek Vasut wrote:
+> Introduce mdio_init() split off from mdio_alloc(), which is used
+> to initialize already allocated struct mii_dev.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Would you mind sending a patch?
+Replying here for the whole patch series...
 
-Thanks
+I like where we get to at the end of this series, but I don't like the
+intermediate state where the bb_miiphy_buses arrays still exist but are
+unused. I also think we should introduce a new ops struct so we're not
+duplicating function pointers in each instance of struct bb_miiphy_bus.
+
+I would prefer the following order of changes, let me know if you think
+this would be cleaner:
+
+1) Introduce mdio_init().
+
+2) Add mii member to struct bb_miiphy_bus.
+
+3) Modify each driver to use the mii member of the appropriate struct
+   bb_miiphy_bus instance, calling mdio_init() instead of mdio_alloc().
+   At this point we're still using the instances in the statically
+   allocated bb_miiphy_buses array.
+
+4) Use container_of() in bb_miiphy_getbus().
+
+5) Drop global names bb_miiphy_buses and bb_miiphy_buses_num as these
+   should no longer be used. The bb_miiphy_buses arrays can be static in
+   each driver and at this point the miiphy code should not care whether
+   the arrays are statically or dynamically allocated.
+
+6) Drop name member of struct bb_miiphy_bus now that it is unused.
+
+7) arm: mvebu: a38x: Call bb_miiphy init directly in driver probe.
+
+8) Drop bb_miiphy_init() and .init callbacks.
+
+9) Move function pointers to a new ops struct so we're not duplicating
+   them in each instance of struct bb_miiphy_bus:
+
+	struct bb_miiphy_ops {
+		int (*mdio_active)(struct bb_miiphy_bus *bus);
+		int (*mdio_tristate)(struct bb_miiphy_bus *bus);
+		int (*set_mdio)(struct bb_miiphy_bus *bus, int v);
+		int (*get_mdio)(struct bb_miiphy_bus *bus, int *v);
+		int (*set_mdc)(struct bb_miiphy_bus *bus, int v);
+		int (*delay)(struct bb_miiphy_bus *bus);
+	};
+
+	struct bb_miiphy_bus {
+		struct bb_miiphy_ops *ops;
+		struct mii_dev mii;
+		void *priv;
+	};
+
+10) Introduce bb_miiphy_alloc()/bb_miiphy_free().
+
+11) Convert each driver from a static array of struct bb_miiphy_bus
+    instances to dynamically allocated instances, for each driver
+    removing the static array in the same commit that dynamic allocation
+    is added.
+
+Thanks,
+
+--=20
+Paul Barker
+--------------l76hoG88Kd43x06Z3AQBfwBz
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsFNBGS4BNsBEADEc28TO+aryCgRIuhxWAviuJl+f2TcZ1JeeaMzRLgSXKuXzkiI
+g6JIVfNvThjwJaBmb7+/5+D7kDLJuutu9MFfOzTS0QOQWppwIPgbfktvMvwwsq3m
+7e9Qb+S1LVeV0/ldZfuzgzAzHFDwmzryfIyt2JEbsBsGTq/QE+7hvLAe8R9xofIn
+z6/IndiiTYhNCNf06nFPR4Y5ZDZPGb9aw5Jisqh+OSxtc0BFHDSV8/35yWM/JLQ1
+Ja8AOHw1kP9KO+iE9rHMt0+7lH3mN1GBabxH26EdgFfPShsi14qmziLOuUlGLuwO
+ApIYqvdtCs+zlMA8PsiJIMuxizZ6qCLur3r2b+/YXoJjuFDcax9M+Pr0D7rZX0Hk
+6PW3dtvDQHfspwLY0FIlXbbtCfCqGLe47VaS7lvG0XeMlo3dUEsf707Q2h0+G1tm
+wyeuWSPEzZQq/KI7JIFlxr3N/3VCdGa9qVf/40QF0BXPfJdcwTEzmPlYetRgA11W
+bglw8DxWBv24a2gWeUkwBWFScR3QV4FAwVjmlCqrkw9dy/JtrFf4pwDoqSFUcofB
+95u6qlz/PC+ho9uvUo5uIwJyz3J5BIgfkMAPYcHNZZ5QrpI3mdwf66im1TOKKTuf
+3Sz/GKc14qAIQhxuUWrgAKTexBJYJmzDT0Mj4ISjlr9K6VXrQwTuj2zC4QARAQAB
+zStQYXVsIEJhcmtlciA8cGF1bC5iYXJrZXIuY3RAYnAucmVuZXNhcy5jb20+wsGU
+BBMBCgA+FiEE9KKf333+FIzPGaxOJ/SzRZ8AIlcFAmS4BNsCGwEFCQPCZwAFCwkI
+BwIGFQoJCAsCBBYCAwECHgECF4AACgkQJ/SzRZ8AIlfxaQ/8CM36qjfad7eBfwja
+cI1LlH1NwbSJ239rE0X7hU/5yra72egr3T5AUuYTt9ECNQ8Ld03BYhbC6hPki5rb
+OlFM2hEPUQYeohcJ4Na5iIFpTxoIuC49Hp2ce6ikvt9Hc4O2FAntabg+9hE8WA4f
+QWW+Qo5ve5OJ0sGylzu0mRZ2I3mTaDsxuDkXOICF5ggSdjT+rcd/pRVOugImjpZv
+/jzSgUfKV2wcZ8vVK0616K21tyPiRjYtDQjJAKff8gBY6ZvP5REPl+fYNvZm1y4l
+hsVupGHL3aV+BKooMsKRZIMTiKJCIy6YFKHOcgWFG62cuRrFDf4r54MJuUGzyeoF
+1XNFzbe1ySoRfU/HrEuBNqC+1CEBiduumh89BitfDNh6ecWVLw24fjsF1Ke6vYpU
+lK9/yGLV26lXYEN4uEJ9i6PjgJ+Q8fubizCVXVDPxmWSZIoJg8EspZ+Max03Lk3e
+flWQ0E3l6/VHmsFgkvqhjNlzFRrj/k86IKdOi0FOd0xtKh1p34rQ8S/4uUN9XCVj
+KtmyLfQgqPVEC6MKv7yFbextPoDUrFAzEgi4OBdqDJjPbdU9wUjONxuWJRrzRFcr
+nTIG7oC4dae0p1rs5uTlaSIKpB2yulaJLKjnNstAj9G9Evf4SE2PKH4l4Jlo/Hu1
+wOUqmCLRo3vFbn7xvfr1u0Z+oMTOOARkuAhwEgorBgEEAZdVAQUBAQdAcuNbK3VT
+WrRYypisnnzLAguqvKX3Vc1OpNE4f8pOcgMDAQgHwsF2BBgBCgAgFiEE9KKf333+
+FIzPGaxOJ/SzRZ8AIlcFAmS4CHACGwwACgkQJ/SzRZ8AIlc90BAAr0hmx8XU9KCj
+g4nJqfavlmKUZetoX5RB9g3hkpDlvjdQZX6lenw3yUzPj53eoiDKzsM03Tak/KFU
+FXGeq7UtPOfXMyIh5UZVdHQRxC4sIBMLKumBfC7LM6XeSegtaGEX8vSzjQICIbaI
+roF2qVUOTMGal2mvcYEvmObC08bUZuMd4nxLnHGiej2t85+9F3Y7GAKsA25EXbbm
+ziUg8IVXw3TojPNrNoQ3if2Z9NfKBhv0/s7x/3WhhIzOht+rAyZaaW+31btDrX4+
+Y1XLAzg9DAfuqkL6knHDMd9tEuK6m2xCOAeZazXaNeOTjQ/XqCHmZ+691VhmAHCI
+7Z7EBPh++TjEqn4ZH+4KPn6XD52+ruWXGbJP29zc+3bwQ+ZADfUaL3ADj69ySxzm
+bO24USHBAg+BhZAZMBkbkygbTen/umT6tBxG91krqbKlDdc8mhGonBN6i+nz8qv1
+6MdC5P1rDbo834rxNLvoFMSLCcpjoafiprl9qk0wQLq48WGphs9DX7V75ZAU5Lt6
+yA+je8i799EZJsVlB933Gpj688H4csaZqEMBjq7vMvI+a5MnLCGcjwRhsUfogpRb
+AWTx9ddVau4MJgEHzB7UU/VFyP2vku7XPj6mgSfSHyNVf2hqxwISQ8eZLoyxauOD
+Y61QMX6YFL170ylToSFjH627h6TzlUDOMwRkuAiAFgkrBgEEAdpHDwEBB0Bibkmu
+Sf7yECzrkBmjD6VGWNVxTdiqb2RuAfGFY9RjRsLB7QQYAQoAIBYhBPSin999/hSM
+zxmsTif0s0WfACJXBQJkuAiAAhsCAIEJECf0s0WfACJXdiAEGRYIAB0WIQSiu8gv
+1Xr0fIw/aoLbaV4Vf/JGvQUCZLgIgAAKCRDbaV4Vf/JGvZP9AQCwV06n3DZvuce3
+/BtzG5zqUuf6Kp2Esgr2FrD4fKVbogD/ZHpXfi9ELdH/JTSVyujaTqhuxQ5B7UzV
+CUIb1qbg1APIEA/+IaLJIBySehy8dHDZQXit/XQYeROQLTT9PvyM35rZVMGH6VG8
+Zb23BPCJ3N0ISOtVdG402lSP0ilP/zSyQAbJN6F0o2tiPd558lPerFd/KpbCIp8N
+kYaLlHWIDiN2AE3c6sfCiCPMtXOR7HCeQapGQBS/IMh1qYHffuzuEy7tbrMvjdra
+VN9Rqtp7PSuRTbO3jAhm0Oe4lDCAK4zyZfjwiZGxnj9s1dyEbxYB2GhTOgkiX/96
+Nw+m/ShaKqTM7o3pNUEs9J3oHeGZFCCaZBv97ctqrYhnNB4kzCxAaZ6K9HAAmcKe
+WT2q4JdYzwB6vEeHnvxl7M0Dj9pUTMujW77Qh5IkUQLYZ2XQYnKAV2WI90B0R1p9
+bXP+jqqkaNCrxKHV1tYOB6037CziGcZmiDneiTlM765MTLJLlHNqlXxDCzRwEazU
+y9dNzITjVT0qhc6th8/vqN9dqvQaAGa13u86Gbv4XPYdE+5MXPM/fTgkKaPBYcIV
+QMvLfoZxyaTk4nzNbBxwwEEHrvTcWDdWxGNtkWRZw0+U5JpXCOi9kBCtFrJ701UG
+UFs56zWndQUS/2xDyGk8GObGBSRLCwsXsKsF6hSX5aKXHyrAAxEUEscRaAmzd6O3
+ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------l76hoG88Kd43x06Z3AQBfwBz--
+
+--------------80sWzrAipvbPLMSWsh4ZPH4x--
+
+--------------xFlbJzBzBC78ByAMSutrFLmP
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ4+xZQUDAAAAAAAKCRDbaV4Vf/JGvXPs
+AP4oAHdmemImR2hHvEQ4dWyq9G7sy6aNDAo8HqlTpoNKJAEAiADlUFHJhVWoirPxxu8SSTq63lov
+FQy+SRfdaew9JwU=
+=8ilt
+-----END PGP SIGNATURE-----
+
+--------------xFlbJzBzBC78ByAMSutrFLmP--
