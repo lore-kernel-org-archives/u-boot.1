@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8CEC02181
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 02:38:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD95AC02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 02:38:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8901800CF;
-	Tue, 21 Jan 2025 03:38:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D3D280758;
+	Tue, 21 Jan 2025 03:38:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="Oafbsjhg";
+	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="atA03MBy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56798801CF; Tue, 21 Jan 2025 03:38:26 +0100 (CET)
+ id 519CB80759; Tue, 21 Jan 2025 03:38:42 +0100 (CET)
 Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
- [IPv6:2001:df5:b000:5::4])
+ [202.36.163.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D0F6800C2
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 03:38:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB6B180326
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 03:38:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=alliedtelesis.co.nz
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,51 +30,54 @@ Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (Client did not present a certificate)
- by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 9E3672C0D7A;
- Tue, 21 Jan 2025 15:38:16 +1300 (NZDT)
+ by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id BC75C2C0DBB;
+ Tue, 21 Jan 2025 15:38:36 +1300 (NZDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
- s=mail181024; t=1737427096;
- bh=rjWRLcY8z+0VasZD26eeo4zqXOHDZxKtqSsyl3D87zI=;
+ s=mail181024; t=1737427116;
+ bh=euFlyJ4ELUMnmprlbV6zr9QMG3XcVq9M6QuJIh6pi1U=;
  h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=OafbsjhgBE+0OgDqp6vdAoawLb03TdDA/h/TBLOpQ0b1en+KKvuf3qJSMdP9nNmqF
- vkd6/ji6FKCR6ER0E926PBrYRyHUXkenlWEE8o8yWG6969FzdXxhOPFTRCbP1mDX03
- iamCxNMjkIu7Y/sSDRAfjEB9fByeVmvKDBUhxySNZxrFbmQOTaP+XjwKTEW411SC57
- 26RQh68jQZnwSRHyo/hseLG6T9xlRdFog7rjc1j45UoYEmE38VnT8gqETrL6qzWlVc
- rdzFdv8jnThoK01NWnNjhInbR7uLlk4VPNU/4mDGj+qoxROndxZ4sxr9n5trZOaq2t
- 2p22Bt2U5UB3g==
+ b=atA03MByqGpKzAcRsvFIG6CYJMsku6fM+FWOmaJTd6S1oLRxNiDeUm2dbJZuClAhC
+ s90FkrIh+Is4o5O7ZJwcAxFKcueRK6rD89iI4IN4Jup+tITSztrtMaAM54/C1CnmDr
+ tOKHlWJvYMYEmGtFRRIkdRdYZW2uWL5gKS0BzeLCgLWWC3QE1fJ8xudTWmHcWb9KRM
+ KSpAnO+gC0j/JD7GkSJbgcxg5N6BsBro4wB+A7vdANkUfcTyPwyfgdGIPoVYKtKjQG
+ rkWzo7K70IBuhUcXzePBA6tQ3wti++XNsSvLgzHbWKeGeHzNWxAGza877zmeyMZKuv
+ mpgQI4oPi4l8A==
 Received: from svr-chch-ex2.atlnz.lc (Not Verified[2001:df5:b000:bc8::76]) by
  svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
- id <B678f08980000>; Tue, 21 Jan 2025 15:38:16 +1300
+ id <B678f08ac0000>; Tue, 21 Jan 2025 15:38:36 +1300
 Received: from svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8::76) by
  svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8::76) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Tue, 21 Jan 2025 15:38:16 +1300
+ 15.2.1544.11; Tue, 21 Jan 2025 15:38:36 +1300
 Received: from svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567]) by
  svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567%15]) with mapi id
- 15.02.1544.011; Tue, 21 Jan 2025 15:38:16 +1300
+ 15.02.1544.011; Tue, 21 Jan 2025 15:38:36 +1300
 From: Chris Packham <Chris.Packham@alliedtelesis.co.nz>
 To: Mark Tomlinson <Mark.Tomlinson@alliedtelesis.co.nz>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: Chris Packham <judge.packham@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 1/2] drivers: rtc: max313xx: Fix setting years 2100-2199
-Thread-Topic: [PATCH 1/2] drivers: rtc: max313xx: Fix setting years 2100-2199
-Thread-Index: AQHba62GOhZ5ci2X+E+xJmBI7OSJZQ==
-Date: Tue, 21 Jan 2025 02:38:16 +0000
-Message-ID: <8ff6dd62-63af-49bf-9529-a966d6e9837a@alliedtelesis.co.nz>
+Subject: Re: [PATCH 2/2] drivers: rtc: max313xx: Ensure correct date is read
+ after setting
+Thread-Topic: [PATCH 2/2] drivers: rtc: max313xx: Ensure correct date is read
+ after setting
+Thread-Index: AQHba62S2u1uZxXljk2k1AJOnESYqw==
+Date: Tue, 21 Jan 2025 02:38:36 +0000
+Message-ID: <34272d64-aa8b-40ca-ab06-65afe3423037@alliedtelesis.co.nz>
 References: <20250120015941.1849667-1-mark.tomlinson@alliedtelesis.co.nz>
-In-Reply-To: <20250120015941.1849667-1-mark.tomlinson@alliedtelesis.co.nz>
+ <20250120015941.1849667-2-mark.tomlinson@alliedtelesis.co.nz>
+In-Reply-To: <20250120015941.1849667-2-mark.tomlinson@alliedtelesis.co.nz>
 Accept-Language: en-NZ, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [10.33.22.30]
 Content-Type: text/plain; charset="utf-8"
-Content-ID: <851D75B2828206499FF5A26038E79722@atlnz.lc>
+Content-ID: <75558BB2F7ABAA4CAD1241D8A8609749@atlnz.lc>
 Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-SEG-SpamProfiler-Analysis: v=2.4 cv=BNQQr0QG c=1 sm=1 tr=0 ts=678f0898
+X-SEG-SpamProfiler-Analysis: v=2.4 cv=BNQQr0QG c=1 sm=1 tr=0 ts=678f08ac
  a=Xf/6aR1Nyvzi7BryhOrcLQ==:117 a=xqWC_Br6kY4A:10 a=75chYTbOgJ0A:10
- a=IkcTkHD0fZMA:10 a=VdSt8ZQiCzkA:10 a=pGLkceISAAAA:8 a=pSk1HE5lBlezLuTHFRMA:9
+ a=IkcTkHD0fZMA:10 a=VdSt8ZQiCzkA:10 a=pGLkceISAAAA:8 a=3FyghA0lbrn3jub3NLwA:9
  a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=kkB4UJddPxAZW7rNxBJ9:22
 X-SEG-SpamProfiler-Score: 0
 X-BeenThere: u-boot@lists.denx.de
@@ -93,21 +96,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UmVwbHlpbmcgZnJvbSBteSB3b3JrIGVtYWlsIGJlY2F1c2UgZ21haWwgc2VlbXMgdG8gYmUgZGlz
-Y2FyZGluZyBtZXNzYWdlcw0KDQpPbiAyMC8wMS8yMDI1IDE0OjU5LCBNYXJrIFRvbWxpbnNvbiB3
-cm90ZToNCj4gQW4gaW52YWxpZCBjYWxjdWxhdGlvbiBtYWRlIHNldHRpbmcgeWVhcnMgMjEwMC0y
-MTk5IGltcG9zc2libGUuDQo+DQo+IFNpZ25lZC1vZmYtYnk6IE1hcmsgVG9tbGluc29uIDxtYXJr
-LnRvbWxpbnNvbkBhbGxpZWR0ZWxlc2lzLmNvLm56Pg0KPiBDYzogQ2hyaXMgUGFja2hhbSA8anVk
-Z2UucGFja2hhbUBnbWFpbC5jb20+DQpSZXZpZXdlZC1ieTogQ2hyaXMgUGFja2hhbSA8anVkZ2Uu
-cGFja2hhbUBnbWFpbC5jb20+DQo+IC0tLQ0KPiAgIGRyaXZlcnMvcnRjL21heDMxM3h4LmMgfCAy
-ICstDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+
-DQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3J0Yy9tYXgzMTN4eC5jIGIvZHJpdmVycy9ydGMvbWF4
-MzEzeHguYw0KPiBpbmRleCA2MDQwMDIzNWRkMC4uY2NmZDZiNmQwZTIgMTAwNjQ0DQo+IC0tLSBh
-L2RyaXZlcnMvcnRjL21heDMxM3h4LmMNCj4gKysrIGIvZHJpdmVycy9ydGMvbWF4MzEzeHguYw0K
-PiBAQCAtMjg1LDcgKzI4NSw3IEBAIHN0YXRpYyBpbnQgbWF4MzEzeHhfc2V0X3RpbWUoc3RydWN0
-IHVkZXZpY2UgKmRldiwgY29uc3Qgc3RydWN0IHJ0Y190aW1lICp0KQ0KPiAgIAlyZWdzWzVdID0g
-YmluMmJjZCh0LT50bV9tb24pOw0KPiAgIAlyZWdzWzZdID0gYmluMmJjZCgodC0+dG1feWVhciAt
-IDIwMDApICUgMTAwKTsNCj4gICANCj4gLQlpZiAoKHQtPnRtX3llYXIgLSAyMDAwKSA+PSAyMDAp
-DQo+ICsJaWYgKHQtPnRtX3llYXIgPj0gMjEwMCkNCj4gICAJCXJlZ3NbNV0gfD0gRklFTERfUFJF
-UChNQVgzMTNYWF9NT05USF9DRU5UVVJZLCAxKTsNCj4gICANCj4gICAJcmV0ID0gZG1faTJjX3dy
-aXRlKGRldiwgcnRjLT5jaGlwLT5zZWNfcmVnLCByZWdzLCA3KTs=
+DQpPbiAyMC8wMS8yMDI1IDE0OjU5LCBNYXJrIFRvbWxpbnNvbiB3cm90ZToNCj4gV2hlbiBzZXR0
+aW5nIHRoZSB0aW1lIG9uIHRoZSBNQVgzMTM0MywgdGhlIHRpbWUgaXMgbm90IHVwZGF0ZWQNCj4g
+Zm9yIG9uZSBzZWNvbmQsIGFuZCByZWFkaW5nIHRoZSB0aW1lIGluIHRoaXMgaW50ZXJ2YWwgd2ls
+bCBnaXZlDQo+IHRoZSBvbGQgdGltZS4gV2FpdCBvbmUgc2Vjb25kIGFmdGVyIHdyaXRpbmcgc28g
+dGhhdCB0aGUgZGF0ZQ0KPiBjb21tYW5kIHdpbGwgc2hvdyB0aGUgY29ycmVjdCB0aW1lIHdoZW4g
+c2V0dGluZyB0aGUgY2xvY2suDQo+DQo+IFNpZ25lZC1vZmYtYnk6IE1hcmsgVG9tbGluc29uIDxt
+YXJrLnRvbWxpbnNvbkBhbGxpZWR0ZWxlc2lzLmNvLm56Pg0KPiBDYzogQ2hyaXMgUGFja2hhbSA8
+anVkZ2UucGFja2hhbUBnbWFpbC5jb20+DQpSZXZpZXdlZC1ieTogQ2hyaXMgUGFja2hhbSA8anVk
+Z2UucGFja2hhbUBnbWFpbC5jb20+DQo+IC0tLQ0KPiAgIGRyaXZlcnMvcnRjL21heDMxM3h4LmMg
+fCA1ICsrKysrDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygrKQ0KPg0KPiBkaWZm
+IC0tZ2l0IGEvZHJpdmVycy9ydGMvbWF4MzEzeHguYyBiL2RyaXZlcnMvcnRjL21heDMxM3h4LmMN
+Cj4gaW5kZXggY2NmZDZiNmQwZTIuLjJjYjNmMjQ1MDQxIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJz
+L3J0Yy9tYXgzMTN4eC5jDQo+ICsrKyBiL2RyaXZlcnMvcnRjL21heDMxM3h4LmMNCj4gQEAgLTMw
+Nyw2ICszMDcsMTEgQEAgc3RhdGljIGludCBtYXgzMTN4eF9zZXRfdGltZShzdHJ1Y3QgdWRldmlj
+ZSAqZGV2LCBjb25zdCBzdHJ1Y3QgcnRjX3RpbWUgKnQpDQo+ICAgCQlpZiAocmV0KQ0KPiAgIAkJ
+CXJldHVybiByZXQ7DQo+ICAgDQo+ICsJCWJyZWFrOw0KPiArCWNhc2UgSURfTUFYMzEzNDM6DQo+
+ICsJCS8qIFRpbWUgaXMgbm90IHVwZGF0ZWQgZm9yIDEgc2Vjb25kIGFmdGVyIHdyaXRpbmcgKi8N
+Cj4gKwkJLyogU2xlZXAgaGVyZSBzbyB0aGUgZGF0ZSBjb21tYW5kIHNob3dzIHRoZSBuZXcgdGlt
+ZSAqLw0KPiArCQltZGVsYXkoMTAwMCk7DQo+ICAgCQlicmVhazsNCj4gICAJZGVmYXVsdDoNCj4g
+ICAJCWJyZWFrOw==
