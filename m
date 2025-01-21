@@ -4,95 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96965C02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 13:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36A98C02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 13:42:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0E95805C5;
-	Tue, 21 Jan 2025 14:15:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E05E801F5;
+	Tue, 21 Jan 2025 14:42:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jko/a6Jv";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ukVjTPRN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EBDB80763; Tue, 21 Jan 2025 14:15:43 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7133C80326; Tue, 21 Jan 2025 14:42:06 +0100 (CET)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on20620.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2406::620])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23A8580326
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 14:15:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BBF35801CF
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 14:42:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-385e1fcb0e1so3002867f8f.2
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 05:15:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737465340; x=1738070140; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=E4NYAFTUiWyHZZ5rCoJoch9dCceAc44D/MbJpiVMmas=;
- b=Jko/a6JvUD1Qx6mo1HGVKZndaC+64O53t4uUJEj2ovJODMn4g6qCi7hzE4UZzV8EfI
- ofmJT42ELuqZX9cWhiVyB9gYiU8lNVCaMmwHytxq/RBnMF5RXObIBNBTQ3N5tHXupFUL
- enOq/JG7bWWIemq/Qumwa/3WQ7OfujuYdZDd44zYh2VYwwQe2VDcGH7KxYknbqMTagk+
- L0VUDxMGE+ckhMPfMFt3zpYHL+WFXBYnVfJ+oeqt7Cb6GwJJQIX1ruW++bYZ28V7GpNs
- sxsGQH3fIH32TkWBslomMrteKq1sI2HeAZZ1vCtfKMAM5rI7cuWxJ3d7tV1uh2UXV3o2
- 8gew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737465340; x=1738070140;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=E4NYAFTUiWyHZZ5rCoJoch9dCceAc44D/MbJpiVMmas=;
- b=ds9eWFdujgQR3UO42beql0lLDu1RDKLbcV+WpCjhgo8e7Fi5/8JY6ykND9NqTncLti
- 8hxrvd7d0lGeDXF3q8tc/NBBKm9suR3SpnqtarkKDMmHrvpZF/PopjrmUc88D0d6JSJ0
- eYR8Ps6IbHvQxZbIlfkqP8Z0+xt3lAzFcrovChPhj8YlolYK1fvWnRDWEOxnFsW6o+2E
- VWex+LiRJCNNThNLNOVlGpQSdbottL6Dz/zz/LmlIj4oE5shTTDwND4XqsZc8MCxVPpO
- LOfiZ8YFOMgiW4oVOPS6s0vQjFM5z53O67ijv/0VWwRgLhdmEO+fRquZvpL02WvTjVnH
- CA7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4eWGYd+aDsEUqIk3YH2tFuLLrp9r/exqrMc4ih8W9aZnroexrnbOr948lAWRsjCwHgxobF3w=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxi7KLSJG2dWnHInJ7AtOhz2WCKn/WTMW/7NbadF46mEba+Pq5M
- Xcn6QzuoCFjslbUGHqVTR+TLnkFuQqxmyyE0K/oKOHxaphUQ3v+sAYwu8HrxHKinv9A/v7rZELO
- jolrTnQ==
-X-Gm-Gg: ASbGncvq2QS8sKQPhN4ktPQvBqL+PexME1CpZ+cVSN2n7Y3hs7vjCyNkUFpdp5qe16w
- K5ywn9i2k1TSLUSENJs3pc2tIIkuzYTdzLAHJ75/Zah3hO8JKwkjaz+RPFGbJrWlAdtfpQiUoJ7
- 7xmM4fNf/jgII7756oWYjhh4i1JURgbAp4Z4NrvYWjowXveKzmNakyegS6lloM+mAZHQyn4IA5I
- KbKqIz2ctglGoZoqhsdzl1VlRsNIM2DmXNIX020dXPZ6cCJMsOxNQvrDftlXBph9kL+vU43mcER
- sO4vZ08=
-X-Google-Smtp-Source: AGHT+IHbdHUylEOClDxhg1hh3xDP60hs//7Lg9b9v4AZ4SQ0RtnMqNG1OC+li8SkwMta764535LN1A==
-X-Received: by 2002:adf:f048:0:b0:385:edd1:2245 with SMTP id
- ffacd0b85a97d-38bf5675819mr11104524f8f.30.1737465340578; 
- Tue, 21 Jan 2025 05:15:40 -0800 (PST)
-Received: from [192.168.7.95] ([212.114.21.58])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38bf327556dsm13320214f8f.71.2025.01.21.05.15.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jan 2025 05:15:40 -0800 (PST)
-Message-ID: <13765dd9-c958-47f6-8076-f10b93561cca@linaro.org>
-Date: Tue, 21 Jan 2025 14:15:39 +0100
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XMzP3XN0mDbII4odbjl7QG8whRwxK8eWTes01HcBCxNXZ1KTxNxpoke6NAegoyF94RyQlEMJkS2UVWVRB8Nzs4enqkwncjqvQmgCoKPMR6PYKgpJeAZYZVXaVOTuASK+Th+S+zz1FvMfbctQz05GuJ19SJBv3BcyjRoqIAXx4AhWBckyIypzHceDWxOaCoKDHi7zFX1w6Y2c7Nbc9kYImmOF1BF8LjjYAl65TFeHdEjEFR2/Zzb5oiRpP/KEG03CNk62f0wJ7zQjQ+bM/o6Z/8GoMx1P5wYcHKdEoW0glzK5o5/q79rzKcUNdYtCooZpMxSIIj5wTwPaYRQT7t9aKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lnXRXP/it27t4D3k94WYeSB9q+h6zWYic/QFomYpa4w=;
+ b=x4whgwTuEp9O6nPXGbg38dIFykb9tOuRQvZZlcMDAbgJ1PEEWElOucPDNhDXU4UeIq9UWC/nyINO+XRI2LiGNzXlOVo2hrrJDZ2P1Oz9H+C9XfPbjBvdX02U3mQUP82mxCzMCAMAxzxB1yaw5cJWuPjvWrDYNCrb3U4kw9AftEdeKPt882lDH4k7fRYC5URjViWZjbmAB7Cf784uCsdqhw7EAoWpdruxdfJSumSPLtV1scsWJloD9l+yvt+vLkyJ3Tv2jJFSciaqJN6SkX/6f5e/VfF/IidL4jVxSQEWcnB9/qsNOpZBcJedczl5En3leb77wRPF4NCuO2Zhv54DAQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lnXRXP/it27t4D3k94WYeSB9q+h6zWYic/QFomYpa4w=;
+ b=ukVjTPRNk5C9fZyS2wS3rN68ugF+oAaDbO/deUWnLznFBcdqXThHD/P0O/MPrYRmFsJE1MWMQkTbooQ85fa4Sy5WkaGPlsA7oXrE9U/TuAFl3o8MXG80u7dFNvXQEYiJ5nlVImpCyzTrkZQncJlnD5MmGHpGtJIhXeHOUZQ5Oqk=
+Received: from MW2PR16CA0028.namprd16.prod.outlook.com (2603:10b6:907::41) by
+ PH7PR12MB6418.namprd12.prod.outlook.com (2603:10b6:510:1fe::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.21; Tue, 21 Jan
+ 2025 13:42:00 +0000
+Received: from MWH0EPF000971E7.namprd02.prod.outlook.com
+ (2603:10b6:907:0:cafe::24) by MW2PR16CA0028.outlook.office365.com
+ (2603:10b6:907::41) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8356.20 via Frontend Transport; Tue,
+ 21 Jan 2025 13:41:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ MWH0EPF000971E7.mail.protection.outlook.com (10.167.243.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8377.8 via Frontend Transport; Tue, 21 Jan 2025 13:41:59 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 21 Jan
+ 2025 07:41:55 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Manikanta Guntupalli <manikanta.guntupalli@amd.com>, Tejas Bhumkar
+ <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>, Vishal Sagar
+ <vishal.sagar@amd.com>
+Subject: [PATCH] arm64: zynqmp: Describe ethernet controllers via aliases on
+ SOM
+Date: Tue, 21 Jan 2025 14:41:49 +0100
+Message-ID: <6d360e71a0530d201578e27a6997dbd472772e39.1737466907.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/2] Introduce coroutines framework
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Raymond Mao <raymond.mao@linaro.org>
-References: <cover.1737380886.git.jerome.forissier@linaro.org>
- <e17799b6938d4afe08b80fc20b70f4d3a81db848.1737380886.git.jerome.forissier@linaro.org>
- <24dc7f4c-62bb-46e4-b7d7-6c3aa472c36f@amd.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <24dc7f4c-62bb-46e4-b7d7-6c3aa472c36f@amd.com>
-Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2970; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=UYnzbJibf5OE0Ea2jni7XMKkJl4qA9YKxEvOhQb5nf8=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvT+JQq9qY9Fn+9mfOeQKVukkP7IWHDT/S+sk4ocJ0lEu
+ OecZj7XEcvCIMjEICumyCJtc+XM3soZU4QvHpaDmcPKBDKEgYtTACYy8xPDXMFjlw//l5r97MR6
+ p0/fc5Mumc1lq2KYwztlj0mh9dpn/6tlLJjzHx/TfjMvEQA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000971E7:EE_|PH7PR12MB6418:EE_
+X-MS-Office365-Filtering-Correlation-Id: 79992109-1173-4bc5-b517-08dd3a216124
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KEOYWIWJYCW9N9Ty2whQHgF1ltmu5fxBznX8osa6erGHyk3ewarVaybBc1Cp?=
+ =?us-ascii?Q?v6y9vFbI620B8KmC3cyJ0OGzp81y7hElzXfo/IzcbKcgVmcFliidwuHA74pG?=
+ =?us-ascii?Q?m3szHNYVG5TAstAujcRABI4YkFi1J8cAhc3coUjoECITF6OYcfW1fscG+mgO?=
+ =?us-ascii?Q?P2NhOgvJk0HMjB35iRwaWEk7SW3Gc1QY/mFEUupRhcC8QKxl63dMVolyVvI+?=
+ =?us-ascii?Q?9MMRy5MDnLhbLuy5IHpbD/lzlMRTu6DG7WhVzksLEzluqPuKU77fNY7ItRHr?=
+ =?us-ascii?Q?wLzWulZAkk+9r5HB3vCebwlJ7ZKLT7NHWiB/TJMyHMPOZvnM/58pZIzuT3M0?=
+ =?us-ascii?Q?IbPPQXhddSoFgyhZGATpn8YrO8GacYoutGzt/hnoODPCldhVkoeCvqjK5cHG?=
+ =?us-ascii?Q?H0S9E1mpV6ipyny/e3tQI+231f1oFlG8jRAfAa2HgbUxeMXtLRfupKMg599i?=
+ =?us-ascii?Q?4QmDng+eooSzbB1BaYCT8jIRscRSMknVOYK/eNIAUPWXRfb5mdQTcQ0Wirur?=
+ =?us-ascii?Q?3T0KJHJkL0F4TqBgUb7A9xq5n7U2iYGJRWhYUEO7IJ1o+mQSp2W58JqjTmV3?=
+ =?us-ascii?Q?Yyzi/3PKRqWnT+/tJFE4mNFpPMDA7wHXqfw907Yma30pewMV5LEgjpZuf23I?=
+ =?us-ascii?Q?w2BwXZczebrfzUmTVXtjozJJSkr4BbyDhz5OP6qsHCPEbt64/MkXaOyjy/fr?=
+ =?us-ascii?Q?16urmmCmihmfiyPWmJOt0Kza6RTpMokm8kgAazJHoVsQlVbTIjzw+3rxdfG/?=
+ =?us-ascii?Q?l4sX11FTqJhhRwQxY/up+Z6gq+eTWBS3Fv01ZO4G9HvfEC4frwYB+1wh9o4d?=
+ =?us-ascii?Q?F5CyD+a04lcT3UaUL6YAfy+rIsv9ObUtxb2RvN3nt/unbXDXKg1AfiJlhR5/?=
+ =?us-ascii?Q?vYXpwj3e1y0+B3poBD9zv2Zh+NQDdPaMta2860LQ3ZiTZ9wAhcLqQJQkz5um?=
+ =?us-ascii?Q?kbWkd14aNqtMn+pYVwNMmYTbxM2MQgI8+zsORsrB/x1QfgLBgaloT6Vfv/sl?=
+ =?us-ascii?Q?Ygb525GEsh6w/wxett43UZ671JqIed6kh24qZnAQMAfnoPKAPxKZoqjJHula?=
+ =?us-ascii?Q?XoDFF+BpuPHLutsg8CRqEkbojZfuilk2h1VrdNWGtoKvq6H40u8Qo71prNom?=
+ =?us-ascii?Q?USvPtogFvL0liLIojL0cim8Cid7Xdhe6gg6jGyVnEAu0IPnjSvbAUOkQBenw?=
+ =?us-ascii?Q?USXHh6wq31AKAuY81KCFB/j8T1dAvUkaw2qqujjfWErycyCkWVF3RHAO+QU5?=
+ =?us-ascii?Q?x9sunLw3oHp+NBOn4+ciNEMiyPHcLsqaapItbZWFudHYPO/k4kspQTTEiyt5?=
+ =?us-ascii?Q?J897eLbAGq9arD3cEABgC+80cC2enJgURvHUbJqEfwpZZ7NOKvcRRY6hyh+2?=
+ =?us-ascii?Q?cr82swasTzblpDfzTS5ASdxBnDjx6FfH1pil1b6+jHr1fpz+/PURa26r12tp?=
+ =?us-ascii?Q?f7EykMEiW0l+KWDlnW74damBnqUxgnRtDuzXs0IJjmwkPoL/zCissg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2025 13:41:59.2730 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 79992109-1173-4bc5-b517-08dd3a216124
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E7.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6418
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,92 +153,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Add ethernet aliases to CC (Carrier card) description to create a
+connection which is used by fdt_fixup_ethernet() for updating
+local-mac-address in DT.
+On Kria SOM MAC address is read from i2c eeprom at start and based on it
+environment variables are created. Without creating aliases U-Boot is not
+able to inject local-mac-address DT property and OS won't get the same MAC
+address unless another i2c read is happening in OS.
+Also aliases are using string not phandle that's why full path has to be
+provided but that shouldn't be a big issue because location of ethernet
+controller is fixed.
 
-On 1/21/25 12:44, Michal Simek wrote:
-> 
-> 
-> On 1/20/25 14:50, Jerome Forissier wrote:
->> Adds the COROUTINES Kconfig symbol which introduces a new internal API
->> for coroutines support. As explained in the Kconfig file, this is meant
->> to provide some kind of cooperative multi-tasking with the goal to
->> improve performance by overlapping lengthy operations.
->>
->> The API as well as the implementation is very much inspired from libaco
->> [1]. The reference implementation is simplified to remove all things
->> not needed in U-Boot, the coding style is updated, and the aco_ prefix
->> is replaced by co_.
->>
->> I believe the stack handling could be simplified: the stack of the main
->> coroutine could probably probably be used by the secondary coroutines
->> instead of allocating a new stack dynamically.
->>
->> Only i386, x86_64 and aarch64 are supported at the moment. Other
->> architectures need to provide a _co_switch() function in assembly.
->>
->> Only aarch64 has been tested.
-> 
-> I can't see the reason why to keep x86 around if it is not tested.
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-OK, I'll drop x86 in v2.
+ arch/arm/dts/zynqmp-sck-kd-g-revA.dtso | 4 ++++
+ arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 5 +++++
+ arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 4 ++++
+ arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 4 ++++
+ 4 files changed, 17 insertions(+)
+
+diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+index d56e863ce1c5..02be5e1e8686 100644
+--- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+@@ -22,6 +22,10 @@
+ 		     "xlnx,zynqmp-sk-kd240", "xlnx,zynqmp";
+ 	model = "ZynqMP KD240 revA/B/1";
  
-> Licenses should be cleared for all files.
-
-I will add "SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later"
-to the coroutines C implementation (include/coroutines.h and
-lib/coroutines.c) since it originates from libaco which is Apache-2.0
-then was modified by me for U-Boot. I will add GPL-2.0-or-later to
-arch/arm/cpu/armv8/co_switch.S since it is a new file written by me.
-
-
-> Also I think this mostly should target full u-boot and not really TPL/SPL as of today.
-
-I agree, but why do you think it targets xPL? efi_init_obj_list() is
-called as a result of "printenv -e" in the main U-Boot for example.
-I mentioned in the cover letter that I think coroutines could be
-beneficial in other places too.
-
-> 
-> I have applied this patch to measure time difference on kv260 and kd240 and pretty much the time is the same.
-> 
-> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> index 94160f4bd86c..18d2260b8c11 100644
-> --- a/lib/efi_loader/efi_setup.c
-> +++ b/lib/efi_loader/efi_setup.c
-> @@ -258,6 +258,7 @@ extern int udelay_yield;
->  efi_status_t efi_init_obj_list(void)
->  {
->         efi_status_t ret = EFI_SUCCESS;
-> +       ulong t0, t1;
->  #if CONFIG_IS_ENABLED(COROUTINES)
->         struct co_stack *stk = NULL;
->         struct co *main_co = NULL;
-> @@ -272,6 +273,7 @@ efi_status_t efi_init_obj_list(void)
->         /* Set up console modes */
->         efi_setup_console_size();
-> 
-> +       t0 = timer_get_us();
->  #if CONFIG_IS_ENABLED(COROUTINES)
->         main_co = co_create(NULL, NULL, 0, NULL, NULL);
->         if (!main_co) {
-> @@ -333,6 +335,9 @@ efi_status_t efi_init_obj_list(void)
->                         efi_obj_list_initialized = ret;
->         }
->  #endif
-> +       t1 = timer_get_us();
-> +
-> +       printf("time counted %ld\n", t1 - t0);
-> 
->         /* Initialize variable services */
->         ret = efi_init_variables();
-> 
-> Please correct me if you have measured it differently.
-
-That's fine. Do you have a SD card inserted in your board?
-If not, the efi_disks_register() call is very quick and
-therefore it makes little difference if it's run
-sequentially or in parallel with efi_tcg2_register().
-
-Thanks,
++	aliases {
++		ethernet0 = "/axi/ethernet@ff0c0000"; /* &gem1 */
++	};
++
+ 	ina260-u3 {
+ 		compatible = "iio-hwmon";
+ 		io-channels = <&u3 0>, <&u3 1>, <&u3 2>;
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+index 9d0c0c2885df..fbacfa984d76 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+@@ -20,6 +20,11 @@
+ 		     "xlnx,zynqmp-sk-kr260", "xlnx,zynqmp";
+ 	model = "ZynqMP KR260 revA";
+ 
++	aliases {
++		ethernet0 = "/axi/ethernet@ff0b0000"; /* &gem0 */
++		ethernet1 = "/axi/ethernet@ff0c0000"; /* &gem1 */
++	};
++
+ 	ina260-u14 {
+ 		compatible = "iio-hwmon";
+ 		io-channels = <&u14 0>, <&u14 1>, <&u14 2>;
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+index a98a888d1385..3c36eb52e968 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+@@ -28,6 +28,10 @@
+ 		     "xlnx,zynqmp-sk-kv260", "xlnx,zynqmp";
+ 	model = "ZynqMP KV260 revA";
+ 
++	aliases {
++		ethernet0 = "/axi/ethernet@ff0e0000"; /* &gem3 */
++	};
++
+ 	ina260-u14 {
+ 		compatible = "iio-hwmon";
+ 		io-channels = <&u14 0>, <&u14 1>, <&u14 2>;
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+index 7490efea98bd..078d98e8ff34 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+@@ -23,6 +23,10 @@
+ 		     "xlnx,zynqmp-sk-kv260", "xlnx,zynqmp";
+ 	model = "ZynqMP KV260 revB";
+ 
++	aliases {
++		ethernet0 = "/axi/ethernet@ff0e0000"; /* &gem3 */
++	};
++
+ 	ina260-u14 {
+ 		compatible = "iio-hwmon";
+ 		io-channels = <&u14 0>, <&u14 1>, <&u14 2>;
 -- 
-Jerome
+2.43.0
+
