@@ -4,58 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A64CAC02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 17:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55BAC02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 17:34:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEE97801FB;
-	Tue, 21 Jan 2025 18:05:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 2ECE3801FB;
+	Tue, 21 Jan 2025 18:34:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="YPC9wknd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VRfjwnOC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1FDD80283; Tue, 21 Jan 2025 18:05:51 +0100 (CET)
-Received: from out-176.mta0.migadu.com (out-176.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b0])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB4718076E; Tue, 21 Jan 2025 18:34:15 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFBDD801F5
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 18:05:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id BE9EC801F5
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 18:34:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-Mime-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1737479143;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Hkn2pQwaeqbEW+5u7qKYoEdl9Kut6DIs8spOkTtfTu4=;
- b=YPC9wknd8eNjqZfzACzMDa3f4rhOXvLf3Ip4Wu8IatTHCCjoGmi8HvyeujFWSKoplOf8m4
- hdKDSwl0NCtgXRuiiKi/W8wk27EqdQHbl7ySIVgDdNlsRVXqxU0EeCJ7copcLMDqIXNX3w
- IqnQKQPWbVQIj56CSn6y28qML8nNwPDxd0/4ey1+j+OuiiRNhTU+hEFP0e5iQ1M7XTpdjj
- 2fgtxi6UjQPk8gasZHOhTGHFq2gi/R3QpkYyOz1nBcZO9jHAAMdmIxCmjwHtwvTEBKodkK
- 6ALK3JcKgvh5Lxt7wpF0wNWbs0LaeKmcMlo/gw+QAc6rVT627zM9hoKpehCt9A==
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 21 Jan 2025 17:05:14 +0000
-Message-Id: <D77WXXXKK4CI.1LZZHRJQ98C3V@postmarketos.org>
-Subject: Re: [PATCH v2] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: "Ferass El Hafidi" <funderscore@postmarketos.org>
-Cc: "Simon Glass" <sjg@chromium.org>, <u-boot@lists.denx.de>
-To: "Jonas Karlman" <jonas@kwiboo.se>, "Jaehoon Chung"
- <jh80.chung@samsung.com>, "Tom Rini" <trini@konsulko.com>
-References: <20240127162922.284598-1-jonas@kwiboo.se>
- <CGME20240403000039epcas1p46afc0540b893679113e0683d87227ca8@epcas1p4.samsung.com>
- <d7a2b5ef-ceb5-4f8f-b2d0-fcd6f2d6df1c@samsung.com>
- <33caeb3b-2945-49ee-8756-8cf8aec1c632@kwiboo.se>
-In-Reply-To: <33caeb3b-2945-49ee-8756-8cf8aec1c632@kwiboo.se>
-X-Migadu-Flow: FLOW_OUT
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7be3f230436so545309885a.3
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 09:34:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737480852; x=1738085652; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YucFiXD3U0kkKzEkTUseb9IIWiIoh2+UsYFE1GWr2Kw=;
+ b=VRfjwnOCOWpeXE5he1D8IzB+d9ZQMnppHTE8xZOgQCWzw7gfPh2HsAEsweSlC9Aic9
+ LxXWImxIKILGoFPF78SPogOTIYuaUMka1YnHaliB8hUDr4ohIk7isGShKeHS1brHbzHT
+ XRdr2Y5mTC/K1DG3Tw8kvtxY31CJPpO4Hrj8A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737480852; x=1738085652;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YucFiXD3U0kkKzEkTUseb9IIWiIoh2+UsYFE1GWr2Kw=;
+ b=hGZmjV/aYvfwY4CLRJYja4GUhOQOUu6yONIqSdqjoFClp+4fSOd+pRug4gRV6iJknC
+ 08+LE8V+yFA0bto8aljM4eHRpdttTF5dtd+ptZIwefFdKM/o4qoYTmxnd9VwRtHAQ9ra
+ jh8WhCmuf/9AVYBbt/Dm24VAvzlsWuEdBvGrjn2kPHgoHqf4FlLl1K8f/Ogb5PQnqLXj
+ bKqPUXRHGTTYCkqy8CLZoqA4WWTOfl1p42F5L36fxIlqj2evc9QxnFpgmz5dILHeHK3z
+ aH2yveczZmZrGo28P6mR9u8o674jURrucqkruHaxA27QREqcsNbo8ehWMJDjx8dTHevg
+ J2bg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV/SD+qRLYUdZWbN5/E3Ot+pDMLn3AzjsfJsIGvs+38qqmVq5OFCaqQOWCJuZZBJdfmJq8YDxY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyPrO2iUgEZXZzMJBiylrRxlPxWfkzcVYxbQUVXRfX0ImsXbCBs
+ TbzKdR+8ENDxqMJSL+D69p9tl5/dnCQwlvdQEzH1yHue5TDr7gZxQ3MJz5Dp5Ls=
+X-Gm-Gg: ASbGncsX8S7Ww30krK38L4dMLL88oSCnZvHGm2Ujhp6rB2qb/d/XeWgizkqZewewgfS
+ v6t9PUV7ZQq4qYc/pKSqdClhRDPXLYkGC6LZSD86kj0oI+sdxzubCNrltEaGT4JYmBprnThyBlm
+ AapSSDsXNU9UMSZ+1SUGOJfA94HEIuK8HgB+KYIz0lfhbGD6GmXxUWREEcyj0QyDOBlH0FZFTKi
+ RzYzGX/TN8/Hu80YUKqr+PuYkf8Rna8DPaNuuLuut8ii1zjqC4oi/x2n78iZTd8ow==
+X-Google-Smtp-Source: AGHT+IHLWHgH+mLnM51ncO9rcz1t4ISOqFey3R982xb+kAsPBn1mO6wdXNS15HzakLzMrCFYWCtUHA==
+X-Received: by 2002:a05:620a:d8a:b0:7a3:5004:43dc with SMTP id
+ af79cd13be357-7be63278ea6mr3143522785a.40.1737480852584; 
+ Tue, 21 Jan 2025 09:34:12 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be614746f7sm578462085a.9.2025.01.21.09.34.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Jan 2025 09:34:12 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de
+In-Reply-To: <20241220003759.89252-1-heinrich.schuchardt@canonical.com>
+References: <20241220003759.89252-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] acpi: don't fill FADT, MADT if CONFIG_QFW_ACPI=y
+Message-Id: <173748085140.2982616.2467615183465362432.b4-ty@konsulko.com>
+Date: Tue, 21 Jan 2025 11:34:11 -0600
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,57 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun Jan 19, 2025 at 11:35 PM UTC, Jonas Karlman wrote:
-> <...>
-> On 2024-04-03 02:00, Jaehoon Chung wrote:
-> <...>
-> > On 1/28/24 01:29, Jonas Karlman wrote:
-> >> The alignment hole caused by cmdidx in struct mmc_cmd cause strange
-> >> issues together with the peephole2 optimization on Amlogic SoCs.
-> >> Following was observed while working on SPL support for Amlogic SoCs.
-> >>
-> >> sd_get_capabilities() normally issue a CMD55 followed by a CMD51.
-> >> However, on at least Amlogic S905 (Cortex-A53) and S905X3 (Cortex-A55)=
-,
-> >> CMD55 was instead followed by CMD8 (and a few reties) in SPL.
-> >=20
-> > I read your RFC "https://patchwork.ozlabs.org/patch/1841495/
-> >=20
-> > First, I will retry to reproduce your case with other compiler.=20
-> > After that, I will inform again about this patch.
->
-> Gentle ping, this patch has been on list for almost a year now.
->
-> Have you had any time to reproduce this or can this be merged as-is?
->
-> For some reason only Amlogic seem to be affected by this issue.
+On Fri, 20 Dec 2024 01:37:59 +0100, Heinrich Schuchardt wrote:
 
-It is somewhat reproducible with gcc 14 on Amlogic S905X (Libre Computer
-lepotato), except instead of CMD55 followed by CMD8, I get CMD0 followed
-by CMD8 directly:
+> When using the ACPI tables supplied by QEMU, we don't need to build the
+> FADT and MADT tables in U-Boot.
+> 
+> This patch avoids a build failure
+> 
+>     make qemu-riscv64_smode_defconfig acpi.config
+> 
+> [...]
 
-[...]
-<debug_uart>
+Applied to u-boot/master, thanks!
 
-U-Boot SPL 2025.01-00633-gf79293cffe53 (Jan 19 2025 - 14:59:34 +0000)
-Trying to boot from MMC1
-CMD_SEND:0
-                ARG                      0x00000000
-                MMC_RSP_NONE
-CMD_SEND:8
-                ARG                      0x000001aa
-                MMC_RSP_R1,5,6,7         0x000001aa=20
-CMD_SEND:0
-                ARG                      0x00000000
-                RET                      -110
-CMD_SEND:0
-                ARG                      0x00000000
-                MMC_RSP_NONE
-CMD_SEND:0
-                ARG                      0x00000000
-                RET                      -110
-Card did not respond to voltage select! : -110
-[...]
+-- 
+Tom
 
-And the board refuses to boot afterwards.  Changing cmdidx type to uint=20
-fixes my issue as well.
+
