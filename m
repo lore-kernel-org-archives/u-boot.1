@@ -4,82 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C23ACC02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 01:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B7F1C02181
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 01:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F41B8800CF;
-	Tue, 21 Jan 2025 02:05:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C44DE800CF;
+	Tue, 21 Jan 2025 02:08:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jqpf7/tZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFEF4801CF; Tue, 21 Jan 2025 02:05:55 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 286EC800C2
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 02:05:53 +0100 (CET)
+ id 2DF3E801CF; Tue, 21 Jan 2025 02:08:19 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 695D7800C2
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 02:08:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b6c3629816so268114385a.1
- for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 17:05:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737421552; x=1738026352; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cGz5jTsO+0QZ2U6HfQqXKtRQYuP+xAZb2WvrmaGRUr0=;
- b=jqpf7/tZZh1mqxH+TRnP444c+9HvVoSvEQ5jhJgGtX7j2Lr4qeJNSRLmVTrY1jDasA
- Ltl3ZVrULlEC9kzUKHNglILdPNOR1HRWnBNr83GyLkVtRa/x3j7DwHE1VZ+t3n176adf
- 8RUEzu2gW5K5b0QvjVLC3BouPGcLhylzpOKlI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737421552; x=1738026352;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cGz5jTsO+0QZ2U6HfQqXKtRQYuP+xAZb2WvrmaGRUr0=;
- b=EWaYxPL0RikdiD/EV4PPvHnx51i4TpqA3YAPSvAuVMS0jrIVBJ6XMyFUWRX74C3E7c
- XEGzXYy0ec6iZLMqVdJfA17WY72MKNph26TTX8QkZRqu94EgCTHdKKG//bGyz+kFXmSc
- 9UfMzLtLwJ1j9JJ5Bpk3G4rJcA2JoKVdwnQqDRrX3eDi7JbOx9y2tbmmPYj1bjk7FH1A
- SeKsgLQvZcxUsiD6Ty8Ql7quPXwnDgHYXHDYBBmgHq8ZzJhpjns2Fc4BxSFsjrN8iZix
- TVi2zCLBA/Zp32R6Oo0wCny4KS/XEkLVPba2ZQ2ar8lJdz/qDz/o9cbz9oe9kNEFcx16
- x+Gg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKyCPiQpJ01PkbFE+btz5gorNiVPx9roDJ9JeKpluJK2uBCygeSf7+nV4elonXsyofWhzbt8c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+z0IBCzLrJCWOIAgBRsSUz96P6QcBX5ISeuUWL99oSgsweJF/
- FaILA81M/dV76Ydp8MPSap3hqDOpwRu3Oc27ztP3YdHjAurRfQbq7wsoqHst73A=
-X-Gm-Gg: ASbGncs3Ys3XLCxqUfKveGnNSDLPJrEI7MOMsDZDzEqdoYptEWzVEkMVIcAeVGI19ez
- WFjOwxdseSTwwPGV5ehJs8QguC6gHM7Um0qwq+/CjtQ+HdzceFPa6TmiW9Fs5xRObehx0jqGbXE
- MO3fsK/kb00U/JYOfWsI036r/fSJdU0hhXzY9afqIHHunZz1HLMaIhPcw6SCCHL3GC1wDIXsBKt
- r2Gd0P7VGRJtE2tesbUFCvwNMKIMAj5cOJdFAVbpjqALda/fGTu9I1lMSpeT7M6mWk=
-X-Google-Smtp-Source: AGHT+IFqzUIGx7m64prNMg3ZOBrHZqv6lUHGhP84+ZXKOOkO2Nt6FBHn4v/DZyWqxq3wepp7SiCdmQ==
-X-Received: by 2002:a05:620a:2551:b0:7b6:cb07:24bc with SMTP id
- af79cd13be357-7be63251a00mr2892592685a.48.1737421552056; 
- Mon, 20 Jan 2025 17:05:52 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be614ef236sm503516185a.108.2025.01.20.17.05.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jan 2025 17:05:50 -0800 (PST)
-Date: Mon, 20 Jan 2025 19:05:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] net: use strnstr() for lwip_strnstr()
-Message-ID: <20250121010547.GA2881802@bill-the-cat>
-References: <20250103232118.711135-1-heinrich.schuchardt@canonical.com>
- <20250103232118.711135-4-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3B849106F;
+ Mon, 20 Jan 2025 17:08:44 -0800 (PST)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 663DD3F740;
+ Mon, 20 Jan 2025 17:08:14 -0800 (PST)
+Date: Tue, 21 Jan 2025 01:06:43 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+Cc: Hans de Goede <hdegoede@redhat.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, Samuel Holland
+ <samuel@sholland.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon
+ Glass <sjg@chromium.org>, u-boot@lists.denx.de, Chen-Yu Tsai
+ <wens@csie.org>, Marco Mattiolo <marco.mattiolo@hotmail.it>
+Subject: Re: [PATCH] sunxi: pinephone: detect existed magnetometer and fixup
+ dtb
+Message-ID: <20250121010643.2bd916f4@minigeek.lan>
+In-Reply-To: <20241113222848.103032-1-andrej.skvortzov@gmail.com>
+References: <20241113222848.103032-1-andrej.skvortzov@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+4C0QZNmxjfpsgWV"
-Content-Disposition: inline
-In-Reply-To: <20250103232118.711135-4-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,63 +60,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 14 Nov 2024 01:28:48 +0300
+Andrey Skvortsov <andrej.skvortzov@gmail.com> wrote:
 
---+4C0QZNmxjfpsgWV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Andrey,
 
-On Sat, Jan 04, 2025 at 12:21:18AM +0100, Heinrich Schuchardt wrote:
+thanks for sending the patch and addressing this issue!
 
-> Using strstr() instead of strnstr() creates a security concern.
->=20
-> Fixes: 1c41a7afaa15 ("net: lwip: build lwIP")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+I wish board vendors would include a simple detectable revision
+encoding, like three GPIOs each pulled either to GND or VCC, to make
+detecting a board revision easier, but here we go ...
+
+> In newer 1.2 PinePhone board revisions LIS3MDL magnetometer was replaced by
+> AF8133J. They use the same PB1 pin in different modes.
+> 
+> LIS3MDL uses it as an gpio input to handle interrupt.
+> AF8133J uses it as an gpio output as a reset signal.
+> 
+> It wasn't possible at runtime to enable both device tree
+> nodes and detect supported sensor at probe time.
+> 
+> AF8133J has reset pin (PB1) connected to the SoC. By default AF8133J
+> is in a reset state and don't respond to probe request on I2C
+> bus. Extra code would be needed to handle reset signal. Therefore this
+> code uses LIS3MDL magnetometer instead of AF8133J.
+> 
+> Introducing new dts 1.2b with AF8133J sensor would require probing in
+> SPL. That would lead to pulling in into SPL I2C controller driver,
+> RSB controller driver, introducing new AXP803 driver to power-up
+> sensors for probe. It's working, but SPL is pretty size-constrained on
+> A64 and doesn't have much space. Therefore fdt fixup is done in U-Boot
+> proper without introducing new board revision and new dts.
+
+That's completely fine, I like this solution better. First: the less
+code we have in the SPL the better. And secondly: Yes, there is some
+natural DT selection in the SPL, courtesy of the FIT image, but it's
+quite wasteful, since we carry multiple almost identical DT copies.
+
+So doing this kind of patching in U-Boot proper is the better solution
+- as long as U-Boot doesn't depend on the patch (as in eMMC vs. SPI).
+ 
+> Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+I took the freedom to improve the formatting/line breaks a bit.
+
+Queued for the next PR.
+
+Cheers,
+Andre
+
+> Link: https://lore.kernel.org/all/20240908214718.36316-1-andrej.skvortzov@gmail.com/
+> Link: https://lists.denx.de/pipermail/u-boot/2024-February/545700.html
 > ---
->  lib/lwip/u-boot/arch/cc.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/lib/lwip/u-boot/arch/cc.h b/lib/lwip/u-boot/arch/cc.h
-> index de138846358..6104c296f6f 100644
-> --- a/lib/lwip/u-boot/arch/cc.h
-> +++ b/lib/lwip/u-boot/arch/cc.h
-> @@ -34,7 +34,7 @@
->  	       x, __LINE__, __FILE__); } while (0)
-> =20
->  #define atoi(str) (int)dectoul(str, NULL)
-> -#define lwip_strnstr(a, b, c)  strstr(a, b)
-> +#define lwip_strnstr(a, b, c)  strnstr(a, b, c)
-> =20
->  #define LWIP_ERR_T int
->  #define LWIP_CONST_CAST(target_type, val) ((target_type)((uintptr_t)val))
+> 
+> This patch was discussed previously as RFC. [1]
+> All relevant kernel device-tree changes are merged. [2]
+> 
+> 1. https://lists.denx.de/pipermail/u-boot/2024-February/545700.html
+> 2. https://lore.kernel.org/all/20240908214718.36316-1-andrej.skvortzov@gmail.com/
+> 
+> 
+> board/sunxi/board.c         | 23 +++++++++++++++++++++++
+>  configs/pinephone_defconfig |  1 +
+>  2 files changed, 24 insertions(+)
+> 
+> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> index 824c322a0dc..703081b403f 100644
+> --- a/board/sunxi/board.c
+> +++ b/board/sunxi/board.c
+> @@ -14,6 +14,7 @@
+>  #include <dm.h>
+>  #include <env.h>
+>  #include <hang.h>
+> +#include <i2c.h>
+>  #include <image.h>
+>  #include <init.h>
+>  #include <log.h>
+> @@ -876,6 +877,27 @@ static void bluetooth_dt_fixup(void *blob)
+>  			   "local-bd-address", bdaddr, ETH_ALEN, 1);
+>  }
+>  
+> +#define PINEPHONE_LIS3MDL_I2C_ADDR	0x1E
+> +#define PINEPHONE_LIS3MDL_I2C_BUS	1 /* I2C1 */
+> +
+> +static	void board_dt_fixup(void *blob)
+> +{
+> +	struct udevice *bus, *dev;
+> +
+> +	if (IS_ENABLED(CONFIG_PINEPHONE_DT_SELECTION) &&
+> +	    !fdt_node_check_compatible(blob, 0, "pine64,pinephone-1.2")) {
+> +		if (!uclass_get_device_by_seq(UCLASS_I2C, PINEPHONE_LIS3MDL_I2C_BUS, &bus)) {
+> +			dm_i2c_probe(bus, PINEPHONE_LIS3MDL_I2C_ADDR, 0, &dev);
+> +			fdt_set_status_by_compatible(
+> +				blob, "st,lis3mdl-magn",
+> +				dev ? FDT_STATUS_OKAY  : FDT_STATUS_DISABLED);
+> +			fdt_set_status_by_compatible(
+> +				blob, "voltafield,af8133j",
+> +				dev ? FDT_STATUS_DISABLED : FDT_STATUS_OKAY);
+> +		}
+> +	}
+> +}
+> +
+>  int ft_board_setup(void *blob, struct bd_info *bd)
+>  {
+>  	int __maybe_unused r;
+> @@ -889,6 +911,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>  	fdt_fixup_ethernet(blob);
+>  
+>  	bluetooth_dt_fixup(blob);
+> +	board_dt_fixup(blob);
+>  
+>  #ifdef CONFIG_VIDEO_DT_SIMPLEFB
+>  	r = sunxi_simplefb_setup(blob);
+> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+> index 9d39204a439..0f9ab0c4662 100644
+> --- a/configs/pinephone_defconfig
+> +++ b/configs/pinephone_defconfig
+> @@ -11,6 +11,7 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+>  CONFIG_PINEPHONE_DT_SELECTION=y
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
+> +CONFIG_SYS_I2C_MVTWSI=y
+>  CONFIG_LED_STATUS=y
+>  CONFIG_LED_STATUS_GPIO=y
+>  CONFIG_LED_STATUS0=y
 
-This leads to:
-https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10370&view=3Dl=
-ogs&j=3D45c0c132-56cd-504a-56c7-1b8a534aa92b&t=3Df95d3367-9db2-5f2a-d3ed-89=
-01d714dd66
-as a failure, that I only end up seeing in Azure (I didn't track down if
-there's some good reason we don't see this in Gitlab).
-
---=20
-Tom
-
---+4C0QZNmxjfpsgWV
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeO8ucACgkQFHw5/5Y0
-tyzLKgv+N8tyOTvavSle5d3xGFVMSY84iT62ID7eXa/ZjFwlKMPOvOLJ4PcU1ej/
-MI3hcdLsQIrBYzcgPKVAPJG9AOG/ZCTlCSVm5Vx2Ex/MIY84Rz4R4Uk/vpJ+dP7k
-x4vXdCdcnDyB1MTb6uEqUtCNkR2IfkLLayQl4K6N2JcVHnaFf7wjoFI8nxiidoZi
-lLthcikckUpRQoPa9jss9fo0jPFyT9uPrlbHlfpnigcLPHLgBHuz/GS9JWb83Cvt
-BNMqHAthwokE3t9nWx5TN7aCIyeSvURv6pWFWQjgfeSTMPW2mQ1MlUGb1ApwbEmI
-mrozgWoQcNwvc8eqvfa0aDIvECk8WS+kmNPlF4aS7XjmArY93KW5zcaQPN45AbG8
-5g+ZhivdI+vs5wt6V0awCLIu+78iDyv+7L6TngYr6QNx4WSN1rcslDxBBjaWJ0W8
-Su2tMlm6lOCHTdfIsM4qDmCdqfGu5XSlduKeP9A36mn1m1cq1O33sM1hJgH0Mtad
-I2wl4jQI
-=/8eh
------END PGP SIGNATURE-----
-
---+4C0QZNmxjfpsgWV--
