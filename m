@@ -4,69 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC930C02181
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 00:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C23ACC02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 01:05:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26ACD807B4;
-	Tue, 21 Jan 2025 01:06:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id F41B8800CF;
+	Tue, 21 Jan 2025 02:05:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737418006;
-	bh=6lU8fo8ZK3Fesx76Uh28BjYX9vHw2AHjG8xdYIoXYCE=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TAY9s2lG4nEL6sxNqqxn4x4GbThqgvw3vUOpXre+O9dZAeVnwlBspWdYcUy5UmuJ+
-	 mf9fVeZoy9jD0QCQxkVtrA4p2CUBcS1Kv+nrbvbjGXcWcXo2yw0jpZpNolR2nHrLK1
-	 KJeZfifkc+/ooiBlcCy+hKIGLGq0h5Uj6x0x24QmtUxRljKpGgb44cUq4sxUlk5mk/
-	 FPtrA79q3GQg6PpVwlm0x6qarYgc2/kT5itwG6MJ4umZOGmJeMR1YEOftMiEmZNGcF
-	 iSgWNjaOdLUsofU215iqjaSPhEbANWN16ThsRk7BY+iZNo1nP2V8EFe/TZ6xtDb2rc
-	 9KrVKBCFpkazA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 844828077F; Tue, 21 Jan 2025 01:06:44 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87F8280759
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 01:06:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Kfp+cIno"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CA15E108A88CD; Tue, 21 Jan 2025 01:06:39 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737418001;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6lU8fo8ZK3Fesx76Uh28BjYX9vHw2AHjG8xdYIoXYCE=;
- b=Kfp+cInoLPjotbU40hIl0P0DFRRL9f0DP06u5RXikeZafZCZ4Bv3aKpX7aop7lR+rHPEAI
- l2K5shIWLNdXSILUiT6NZ41pazXRbBxtuWahEaDaNCjtgeMO1EEj2cmySMG4ZK5RjvY18R
- 8mE88EtBhFSvOGT6xEtg6R7RtFJ7kOa0ftpGGlr35qsg0oKBbDgZdi9XCGv3iqh2ieQveY
- iw7uNROEuUbtkuO8Qb/hGYe8RRAGAolvtjIXdEXeMWMrpxXgrysWLdN7y2WIMgdCEhipfO
- MQWFLeAVmHv2MMyPKxpCrqySkRk8aFS7Ya/s8RDmWxEZXDyOUM5jxbhirJzNsQ==
-Message-ID: <d39646fd-9c3f-4e5d-8d2b-e3d17feed604@denx.de>
-Date: Tue, 21 Jan 2025 00:58:27 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jqpf7/tZ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CFEF4801CF; Tue, 21 Jan 2025 02:05:55 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 286EC800C2
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 02:05:53 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b6c3629816so268114385a.1
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 17:05:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737421552; x=1738026352; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=cGz5jTsO+0QZ2U6HfQqXKtRQYuP+xAZb2WvrmaGRUr0=;
+ b=jqpf7/tZZh1mqxH+TRnP444c+9HvVoSvEQ5jhJgGtX7j2Lr4qeJNSRLmVTrY1jDasA
+ Ltl3ZVrULlEC9kzUKHNglILdPNOR1HRWnBNr83GyLkVtRa/x3j7DwHE1VZ+t3n176adf
+ 8RUEzu2gW5K5b0QvjVLC3BouPGcLhylzpOKlI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737421552; x=1738026352;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cGz5jTsO+0QZ2U6HfQqXKtRQYuP+xAZb2WvrmaGRUr0=;
+ b=EWaYxPL0RikdiD/EV4PPvHnx51i4TpqA3YAPSvAuVMS0jrIVBJ6XMyFUWRX74C3E7c
+ XEGzXYy0ec6iZLMqVdJfA17WY72MKNph26TTX8QkZRqu94EgCTHdKKG//bGyz+kFXmSc
+ 9UfMzLtLwJ1j9JJ5Bpk3G4rJcA2JoKVdwnQqDRrX3eDi7JbOx9y2tbmmPYj1bjk7FH1A
+ SeKsgLQvZcxUsiD6Ty8Ql7quPXwnDgHYXHDYBBmgHq8ZzJhpjns2Fc4BxSFsjrN8iZix
+ TVi2zCLBA/Zp32R6Oo0wCny4KS/XEkLVPba2ZQ2ar8lJdz/qDz/o9cbz9oe9kNEFcx16
+ x+Gg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKyCPiQpJ01PkbFE+btz5gorNiVPx9roDJ9JeKpluJK2uBCygeSf7+nV4elonXsyofWhzbt8c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+z0IBCzLrJCWOIAgBRsSUz96P6QcBX5ISeuUWL99oSgsweJF/
+ FaILA81M/dV76Ydp8MPSap3hqDOpwRu3Oc27ztP3YdHjAurRfQbq7wsoqHst73A=
+X-Gm-Gg: ASbGncs3Ys3XLCxqUfKveGnNSDLPJrEI7MOMsDZDzEqdoYptEWzVEkMVIcAeVGI19ez
+ WFjOwxdseSTwwPGV5ehJs8QguC6gHM7Um0qwq+/CjtQ+HdzceFPa6TmiW9Fs5xRObehx0jqGbXE
+ MO3fsK/kb00U/JYOfWsI036r/fSJdU0hhXzY9afqIHHunZz1HLMaIhPcw6SCCHL3GC1wDIXsBKt
+ r2Gd0P7VGRJtE2tesbUFCvwNMKIMAj5cOJdFAVbpjqALda/fGTu9I1lMSpeT7M6mWk=
+X-Google-Smtp-Source: AGHT+IFqzUIGx7m64prNMg3ZOBrHZqv6lUHGhP84+ZXKOOkO2Nt6FBHn4v/DZyWqxq3wepp7SiCdmQ==
+X-Received: by 2002:a05:620a:2551:b0:7b6:cb07:24bc with SMTP id
+ af79cd13be357-7be63251a00mr2892592685a.48.1737421552056; 
+ Mon, 20 Jan 2025 17:05:52 -0800 (PST)
+Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be614ef236sm503516185a.108.2025.01.20.17.05.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jan 2025 17:05:50 -0800 (PST)
+Date: Mon, 20 Jan 2025 19:05:47 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 3/3] net: use strnstr() for lwip_strnstr()
+Message-ID: <20250121010547.GA2881802@bill-the-cat>
+References: <20250103232118.711135-1-heinrich.schuchardt@canonical.com>
+ <20250103232118.711135-4-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: dwc3: core: Fix timeout check
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>, ni@konsulko.com,
- caleb.connolly@linaro.org, neil.armstrong@linaro.org, u-boot@lists.denx.de
-References: <20250115062044.3834433-1-quic_varada@quicinc.com>
- <87frlj85qu.fsf@baylibre.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <87frlj85qu.fsf@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+4C0QZNmxjfpsgWV"
+Content-Disposition: inline
+In-Reply-To: <20250103232118.711135-4-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,38 +96,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/16/25 10:31 AM, Mattijs Korpershoek wrote:
-> Hi Varadarajan,
-> 
-> Thank you for the patch.
-> 
-> On mer., janv. 15, 2025 at 11:50, Varadarajan Narayanan <quic_varada@quicinc.com> wrote:
-> 
->> dwc3_core_init loops 'timeout' times to check if the IP block is out
->> of reset using 'while (timeout--)'. If there is some issue and
->> the block doesn't come out of reset, the loop will run till
->> 'timeout' becomes zero and the post decrement operator would set
->> timeout to 0xffffffff. Though the IP block is not out reset, the
->> subsequent if check 'if !timeout' would fail as timeout is not
->> equal to zero and the function proceeds with the initialization.
->>
->> Use poll API instead to resolve this.
->>
->> Tested-By: Varadarajan Narayanan <quic_varada@quicinc.com>
-> 
-> s/Tested-By/Tested-by
-> 
-> See ./scripts/checkpatch.pl:
-> 
-> λ ~/work/upstream/src/u-boot/ varadarajan/dwc3-timeout ./scripts/checkpatch.pl --u-boot --git HEAD^..HEAD
-> WARNING: 'Tested-by:' is the preferred signature form
-> #16:
-> Tested-By: Varadarajan Narayanan <quic_varada@quicinc.com>
-> 
-> total: 0 errors, 1 warnings, 0 checks, 33 lines checked
-> 
->> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> 
-> I think Marek can fix-up that when he applies, but if you send a v3 to
-> correct this, feel free to add:
-TB by author is a bit odd, so I dropped both TBs and kept RBs only.
+
+--+4C0QZNmxjfpsgWV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Jan 04, 2025 at 12:21:18AM +0100, Heinrich Schuchardt wrote:
+
+> Using strstr() instead of strnstr() creates a security concern.
+>=20
+> Fixes: 1c41a7afaa15 ("net: lwip: build lwIP")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  lib/lwip/u-boot/arch/cc.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/lib/lwip/u-boot/arch/cc.h b/lib/lwip/u-boot/arch/cc.h
+> index de138846358..6104c296f6f 100644
+> --- a/lib/lwip/u-boot/arch/cc.h
+> +++ b/lib/lwip/u-boot/arch/cc.h
+> @@ -34,7 +34,7 @@
+>  	       x, __LINE__, __FILE__); } while (0)
+> =20
+>  #define atoi(str) (int)dectoul(str, NULL)
+> -#define lwip_strnstr(a, b, c)  strstr(a, b)
+> +#define lwip_strnstr(a, b, c)  strnstr(a, b, c)
+> =20
+>  #define LWIP_ERR_T int
+>  #define LWIP_CONST_CAST(target_type, val) ((target_type)((uintptr_t)val))
+
+This leads to:
+https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10370&view=3Dl=
+ogs&j=3D45c0c132-56cd-504a-56c7-1b8a534aa92b&t=3Df95d3367-9db2-5f2a-d3ed-89=
+01d714dd66
+as a failure, that I only end up seeing in Azure (I didn't track down if
+there's some good reason we don't see this in Gitlab).
+
+--=20
+Tom
+
+--+4C0QZNmxjfpsgWV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeO8ucACgkQFHw5/5Y0
+tyzLKgv+N8tyOTvavSle5d3xGFVMSY84iT62ID7eXa/ZjFwlKMPOvOLJ4PcU1ej/
+MI3hcdLsQIrBYzcgPKVAPJG9AOG/ZCTlCSVm5Vx2Ex/MIY84Rz4R4Uk/vpJ+dP7k
+x4vXdCdcnDyB1MTb6uEqUtCNkR2IfkLLayQl4K6N2JcVHnaFf7wjoFI8nxiidoZi
+lLthcikckUpRQoPa9jss9fo0jPFyT9uPrlbHlfpnigcLPHLgBHuz/GS9JWb83Cvt
+BNMqHAthwokE3t9nWx5TN7aCIyeSvURv6pWFWQjgfeSTMPW2mQ1MlUGb1ApwbEmI
+mrozgWoQcNwvc8eqvfa0aDIvECk8WS+kmNPlF4aS7XjmArY93KW5zcaQPN45AbG8
+5g+ZhivdI+vs5wt6V0awCLIu+78iDyv+7L6TngYr6QNx4WSN1rcslDxBBjaWJ0W8
+Su2tMlm6lOCHTdfIsM4qDmCdqfGu5XSlduKeP9A36mn1m1cq1O33sM1hJgH0Mtad
+I2wl4jQI
+=/8eh
+-----END PGP SIGNATURE-----
+
+--+4C0QZNmxjfpsgWV--
