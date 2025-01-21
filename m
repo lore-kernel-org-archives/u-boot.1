@@ -4,92 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A84BC02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 12:00:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B92EC02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 12:02:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8406180326;
-	Tue, 21 Jan 2025 13:00:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6EE5E80326;
+	Tue, 21 Jan 2025 13:02:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U4jfIJGS";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1737460973;
+	bh=c3I4gy6nqAXY9VMAhkhJNvCktl6lWwv+k9smUjhxODY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=uyvGoDx3ta2t2/vOSD/0NKMnnvLd7RvodvpbLHYMwuznyfTesy/43XKISWnGyFii3
+	 erqGwVipRyuJC9xcMWITLApnt8Kp2BSdBOLu1PGsE2w1P4eEhQUlgGcpRtnthP+JZv
+	 tmggTOedrhRvJY26lx6wwLc9eWV7ZsnJcfqisefCd2lJFP8ouWeX+2xsM2zSMnF3Dg
+	 4bZPKPLBWIAJIVPmwY06S5ss6p9XzIjFu7au1/S6/Kv6TyecF3F7pqayVdAdbn1STK
+	 +AkMfoM7uBiv3qn9JXyLPOJbR8pFLzhzAcd8wfGLolecOOngVDYwSgA7lT5GSbjKNW
+	 8GfCrtq6zfsqw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B161805C5; Tue, 21 Jan 2025 13:00:20 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 135F7805C5; Tue, 21 Jan 2025 13:02:52 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66250801F5
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 13:00:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED94D801F5
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 13:02:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5d9f0a6adb4so11275062a12.1
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 04:00:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737460817; x=1738065617; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=f9d9tVRM0lFLBr1zd3VMMXTxA4STEBjPP9d+5WU/9Lw=;
- b=U4jfIJGSA+0ix6HPAAIrKKFRPRxADf3PcCdKEUGxTHDSIh7AjhStCD3KJ871QRuuSO
- Y4df1cLQzvq7uSqyJIdiY9YixBZkb8Mg8Arx2Gme+oHbyP/Kcf/9+T/cx+hXgGFj7FB/
- 8QR7RQI7BentzfPcK/PZ9voaEkCsMspdiRWLBp4fXziOJqhVJsilLHRJknumUIH3Aiez
- tDmoG1GqTMprHpamP/2U6lIsD4zxlZvNQeCYIPD/N+JA+yllmpExH/94Y7e97bsS9H+j
- gihwfJP1Ck9ze8MQt5WOOWWHs8vgkl8XUZeLIWO/wql9KkEv54RBTDBnK6jfy+H5GxMZ
- 7LpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737460817; x=1738065617;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=f9d9tVRM0lFLBr1zd3VMMXTxA4STEBjPP9d+5WU/9Lw=;
- b=tos5FjcwwRO/vSsulb4e0Cb2Y8AU291Uv4e6Ionw7I2x+LtSibXXQtkd67tfAs7wT+
- +IbD3Q/DphvHJblA6W4Rv26K4F89viwLgLn1Sd8WuSP28lBpCVEce/Il4OkCaOHYC7JD
- m4woKYIn0opZTk+q62KBGRlF7DC5MjGrzwMn3bMdOdaj9H3eqT5M/oEDLZuZX1nbOnWt
- 7uZrQ7pzAh8d79k0WBIQUnGPUje/4rLmIKAti+5iSu/HRZe+IzxVY1GuaIsEkCtAXvqp
- uaKn6kz78RODbqXlJNeKsJFWpUVtxcKFMWZ1rkfjPMFElxKLFeyVSu1F0uJh/HTVSbfh
- R07Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU3cKyMK40JZ6AfakAIeubiFnrrh0rv8lLBTjj/zDo8kviVyNZYh+h5SdnpjjmbIAbLOSQvcvg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0DP3v/kLtYg0Lu56/TEMdInZ1hka6k9Ji9CdHZDHTtuHSBwCT
- V8T/QF1Objimh3jI6fEBlyulRmqwafipNExXwL27hESkvrPzrPMgHE6/F4/irBc=
-X-Gm-Gg: ASbGncu2g0fqlgdh3UUoB2dw2JsfaW/b6r5aVLGxBdxGjv05s5BvJ/PtZdlTMrJm9xW
- +qRa6aom78QjFmusPnHKt8tfGIRGr4xV6O1/dLeYHtxN0627huZvqQHa1NGTU4+s4IMPH0lUj1N
- 4VuZkkc69fEKYno764SLxKgILr2HJoqttxSGzZvhGHoL14JmZyVrh/9cNpwRwmQytfiJiiFwwf0
- a/a0AaSwj3cU5g02jBqnz9YBD4zM4IkCQSuMj3/In0bKl+P4YrObxW4cazgkGUsRuNfYTmmGg9I
- B5E/0yyw56BAsYp9wWs0Ltfl6jSlQWQdvRAEUK5dO/VjihBsLkxb
-X-Google-Smtp-Source: AGHT+IGjNoMHDLbv0oixwKkTowlov1Gbn2at7xqK4mBs70F7UNXFa94v4Hq6RCrgj0HBLf8JXJsPCw==
-X-Received: by 2002:a17:907:7e91:b0:ab2:ea29:b6 with SMTP id
- a640c23a62f3a-ab38b37cf5amr1613095866b.35.1737460816744; 
- Tue, 21 Jan 2025 04:00:16 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab384c61276sm753055066b.13.2025.01.21.04.00.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jan 2025 04:00:15 -0800 (PST)
-Message-ID: <a33678e1-b4e2-43e2-b6de-55618bbb8579@linaro.org>
-Date: Tue, 21 Jan 2025 13:00:15 +0100
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="aWh3OH5R"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E55F9104811E3; Tue, 21 Jan 2025 13:02:47 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1737460969;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=c3I4gy6nqAXY9VMAhkhJNvCktl6lWwv+k9smUjhxODY=;
+ b=aWh3OH5Rurr1crG0jSfcrXNdBi4zUUc8flp7dlDoILQYwTNSLRIKI0Muw4dnEpyDs24s3W
+ m2FOW6rjQrIQdPWL83girydfcrx8m29dmwyd5Qgdkel1BWqiWKthHCoUeicSP3t6FYvpAr
+ LFNGO6C6flFe5Sl0k9EUulKolGW4RDzTGiu00flY3mjfHQiXGOO0iwckEAR0iGRb2xZfHF
+ qHliQsFdlaTsEP2PCtEzAqAucOyjNQZ6rbEpLFMueHuUYaTRJo+pmgqsVE3YioJvxNSgZr
+ G3qmhdZfrxn7VudnCydEqdnQ68RanwHbd1l3v2KRRwNtOBMH8x4kEo59vtL2dg==
+Message-ID: <dd236435-ddf6-4638-be7f-25e6a08d37fd@denx.de>
+Date: Tue, 21 Jan 2025 10:46:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] drivers: remove bogus DM_FLAG_PROBE_AFTER_BIND flags
+Subject: Re: [PATCH RFC v2] image: apply FDTOs on FDT image node without a
+ load property
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
+References: <20250116-extlinux-relocate-dtb-when-dtbo-v2-1-d011582c2b7e@cherry.de>
+ <709f0a6b-32d1-4e18-915a-dfb3f87fb9a6@denx.de>
+ <64da6cae-2d63-4c8e-99b3-d19870c0cbee@cherry.de>
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20250117-clarify-probe-after-bind-v1-0-273f046ce5dd@linaro.org>
- <20250117-clarify-probe-after-bind-v1-2-273f046ce5dd@linaro.org>
- <CAFLszTi_=S9m54DvKdjdNXf=zOhgg6tog8kcQ+dxjkjQ8BoP4Q@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTi_=S9m54DvKdjdNXf=zOhgg6tog8kcQ+dxjkjQ8BoP4Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <64da6cae-2d63-4c8e-99b3-d19870c0cbee@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,65 +85,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/21/25 9:25 AM, Quentin Schulz wrote:
 
+[...]
 
-On 18/01/2025 05:32, Simon Glass wrote:
-> On Fri, 17 Jan 2025 at 00:29, Caleb Connolly <caleb.connolly@linaro.org
-> <mailto:caleb.connolly@linaro.org>> wrote:
+>>> --- a/boot/image-fit.c
+>>> +++ b/boot/image-fit.c
+>>> @@ -2348,10 +2348,10 @@ int boot_get_fdt_fit(struct bootm_headers 
+>>> *images, ulong addr,
+>>>       char *next_config = NULL;
+>>>       ulong load, len;
+>>>   #ifdef CONFIG_OF_LIBFDT_OVERLAY
+>>> -    ulong image_start, image_end;
+>>>       ulong ovload, ovlen, ovcopylen;
+>>>       const char *uconfig;
+>>>       const char *uname;
+>>> +    char *of_flat_tree;
 >>
->> Some drivers set DM_FLAG_PROBE_AFTER_BIND, this does nothing since it's
->> only every applied on a per-device basis.
->>
->> Remove the flags.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org
-> <mailto:caleb.connolly@linaro.org>>
->> ---
->>  drivers/mailbox/zynqmp-ipi.c  | 1 -
->>  drivers/watchdog/da9063-wdt.c | 1 -
->>  2 files changed, 2 deletions(-)
->>
->> diff --git a/drivers/mailbox/zynqmp-ipi.c b/drivers/mailbox/zynqmp-ipi.c
->> index 713d93a200c4..851aa737c03e 100644
->> --- a/drivers/mailbox/zynqmp-ipi.c
->> +++ b/drivers/mailbox/zynqmp-ipi.c
->> @@ -269,6 +269,5 @@ U_BOOT_DRIVER(zynqmp_ipi) = {
->>         .name = "zynqmp_ipi",
->>         .id = UCLASS_NOP,
->>         .of_match = zynqmp_ipi_ids,
->>         .probe = zynqmp_ipi_probe,
->> -       .flags = DM_FLAG_PROBE_AFTER_BIND,
->>  };
->> diff --git a/drivers/watchdog/da9063-wdt.c b/drivers/watchdog/da9063-wdt.c
->> index b7216b578630..ec9bc0330114 100644
->> --- a/drivers/watchdog/da9063-wdt.c
->> +++ b/drivers/watchdog/da9063-wdt.c
->> @@ -144,6 +144,5 @@ U_BOOT_DRIVER(da9063_wdt) = {
->>         .name = "da9063-wdt",
->>         .id = UCLASS_WDT,
->>         .of_match = da9063_wdt_ids,
->>         .ops = &da9063_wdt_ops,
->> -       .flags = DM_FLAG_PROBE_AFTER_BIND,
->>  };
->>
->> --
->> 2.48.0
+>> Can this be void * instead ?
 >>
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
-> 
-> It is actually a bit unclear, since the comments for struct driver
-> mention DM_FLAG_... for the flags.
+> The compiler seems happy with that. FWIW, map_sysmem() returns a void*, 
+> and boot_relocate_fdt() expects a char** and we anyway cast it to a 
+> ulong later.
 
-Yep, some of the flags (most even?) can be applied to drivers and there
-is no proper distinction between which apply to drivers and which to
-devices.
+Indeed, that's what struck me.
 
-DRIVER_FLAG_... and DEV_FLAG_... or something maybe better, something to
-revisit in the future for sure.
-
-Thx for the review
-
--- 
-// Caleb (they/them)
-
+> The question I have is why? What does this bring? Maybe there's 
+> something I can learn here :)
+Nothing much, except for type opaqueness. The ideal fix would be to 
+align the types, but that would be a huge undertaking and I cannot ask 
+that of you as a prerequisite for this one fix.
