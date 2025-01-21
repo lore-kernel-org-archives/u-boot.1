@@ -4,71 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B92EC02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 12:02:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A63D6C02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 12:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EE5E80326;
-	Tue, 21 Jan 2025 13:02:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id F1D9480326;
+	Tue, 21 Jan 2025 13:04:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737460973;
-	bh=c3I4gy6nqAXY9VMAhkhJNvCktl6lWwv+k9smUjhxODY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=uyvGoDx3ta2t2/vOSD/0NKMnnvLd7RvodvpbLHYMwuznyfTesy/43XKISWnGyFii3
-	 erqGwVipRyuJC9xcMWITLApnt8Kp2BSdBOLu1PGsE2w1P4eEhQUlgGcpRtnthP+JZv
-	 tmggTOedrhRvJY26lx6wwLc9eWV7ZsnJcfqisefCd2lJFP8ouWeX+2xsM2zSMnF3Dg
-	 4bZPKPLBWIAJIVPmwY06S5ss6p9XzIjFu7au1/S6/Kv6TyecF3F7pqayVdAdbn1STK
-	 +AkMfoM7uBiv3qn9JXyLPOJbR8pFLzhzAcd8wfGLolecOOngVDYwSgA7lT5GSbjKNW
-	 8GfCrtq6zfsqw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 135F7805C5; Tue, 21 Jan 2025 13:02:52 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED94D801F5
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 13:02:49 +0100 (CET)
+ id EBD2E805C5; Tue, 21 Jan 2025 13:04:02 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 29293801F5
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 13:03:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="aWh3OH5R"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E55F9104811E3; Tue, 21 Jan 2025 13:02:47 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737460969;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=c3I4gy6nqAXY9VMAhkhJNvCktl6lWwv+k9smUjhxODY=;
- b=aWh3OH5Rurr1crG0jSfcrXNdBi4zUUc8flp7dlDoILQYwTNSLRIKI0Muw4dnEpyDs24s3W
- m2FOW6rjQrIQdPWL83girydfcrx8m29dmwyd5Qgdkel1BWqiWKthHCoUeicSP3t6FYvpAr
- LFNGO6C6flFe5Sl0k9EUulKolGW4RDzTGiu00flY3mjfHQiXGOO0iwckEAR0iGRb2xZfHF
- qHliQsFdlaTsEP2PCtEzAqAucOyjNQZ6rbEpLFMueHuUYaTRJo+pmgqsVE3YioJvxNSgZr
- G3qmhdZfrxn7VudnCydEqdnQ68RanwHbd1l3v2KRRwNtOBMH8x4kEo59vtL2dg==
-Message-ID: <dd236435-ddf6-4638-be7f-25e6a08d37fd@denx.de>
-Date: Tue, 21 Jan 2025 10:46:57 +0100
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: fpAqUGzRRhiII1tVjCxCOg==
+X-CSE-MsgGUID: norscokoRVqw6tr24IMdRQ==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 21 Jan 2025 21:03:57 +0900
+Received: from [10.24.0.69] (unknown [10.24.0.69])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id A6680401EFDC;
+ Tue, 21 Jan 2025 21:03:42 +0900 (JST)
+Message-ID: <c150ffbb-57a6-4aae-bfb0-1c680f13e816@bp.renesas.com>
+Date: Tue, 21 Jan 2025 12:03:41 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC v2] image: apply FDTOs on FDT image node without a
- load property
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
-References: <20250116-extlinux-relocate-dtb-when-dtbo-v2-1-d011582c2b7e@cherry.de>
- <709f0a6b-32d1-4e18-915a-dfb3f87fb9a6@denx.de>
- <64da6cae-2d63-4c8e-99b3-d19870c0cbee@cherry.de>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <64da6cae-2d63-4c8e-99b3-d19870c0cbee@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Subject: Re: [PATCH] net: miiphybb: Convert ifdef DEBUG to debug()
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------YjglK7l8mAOkYMSQV2phLwnM"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,34 +64,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/21/25 9:25 AM, Quentin Schulz wrote:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------YjglK7l8mAOkYMSQV2phLwnM
+Content-Type: multipart/mixed; boundary="------------0LAWzZZkhn82n4eHBnW9Ty3i";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Message-ID: <c150ffbb-57a6-4aae-bfb0-1c680f13e816@bp.renesas.com>
+Subject: Re: [PATCH] net: miiphybb: Convert ifdef DEBUG to debug()
+References: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
 
-[...]
+--------------0LAWzZZkhn82n4eHBnW9Ty3i
+Content-Type: multipart/mixed; boundary="------------ydc3jEtuqAm083XmfovyuweT"
 
->>> --- a/boot/image-fit.c
->>> +++ b/boot/image-fit.c
->>> @@ -2348,10 +2348,10 @@ int boot_get_fdt_fit(struct bootm_headers 
->>> *images, ulong addr,
->>>       char *next_config = NULL;
->>>       ulong load, len;
->>>   #ifdef CONFIG_OF_LIBFDT_OVERLAY
->>> -    ulong image_start, image_end;
->>>       ulong ovload, ovlen, ovcopylen;
->>>       const char *uconfig;
->>>       const char *uname;
->>> +    char *of_flat_tree;
->>
->> Can this be void * instead ?
->>
-> 
-> The compiler seems happy with that. FWIW, map_sysmem() returns a void*, 
-> and boot_relocate_fdt() expects a char** and we anyway cast it to a 
-> ulong later.
+--------------ydc3jEtuqAm083XmfovyuweT
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Indeed, that's what struck me.
+On 18/01/2025 06:16, Marek Vasut wrote:
+> Replace ifdeffery with plain debug() function call. No functional chang=
+e.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Adam Ford <aford173@gmail.com>
+> Cc: Hai Pham <hai.pham.ud@renesas.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Mario Six <mario.six@gdsys.cc>
+> Cc: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  drivers/net/phy/miiphybb.c | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+>=20
+> diff --git a/drivers/net/phy/miiphybb.c b/drivers/net/phy/miiphybb.c
+> index 171c1719b5b..5497b838225 100644
+> --- a/drivers/net/phy/miiphybb.c
+> +++ b/drivers/net/phy/miiphybb.c
+> @@ -183,9 +183,7 @@ int bb_miiphy_read(struct mii_dev *miidev, int addr=
+, int devad, int reg)
+>  	bus->set_mdc(bus, 1);
+>  	bus->delay(bus);
+> =20
+> -#ifdef DEBUG
+> -	printf("miiphy_read(0x%x) @ 0x%x =3D 0x%04x\n", reg, addr, rdreg);
+> -#endif
+> +	debug("miiphy_read(0x%x) @ 0x%x =3D 0x%04x\n", reg, addr, rdreg);
+> =20
+>  	return rdreg;
+>  }
 
-> The question I have is why? What does this bring? Maybe there's 
-> something I can learn here :)
-Nothing much, except for type opaqueness. The ideal fix would be to 
-align the types, but that would be a huge undertaking and I cannot ask 
-that of you as a prerequisite for this one fix.
+While we're here, can we include the bus name in the output to avoid
+confusion when we have multiple buses? Maybe something like:
+
+    debug("miiphy_read(0x%x) @ %s:0x%x =3D 0x%04x\n", reg, bus->name, add=
+r, rdreg);
+
+Thanks,
+
+--=20
+Paul Barker
+--------------ydc3jEtuqAm083XmfovyuweT
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsFNBGS4BNsBEADEc28TO+aryCgRIuhxWAviuJl+f2TcZ1JeeaMzRLgSXKuXzkiI
+g6JIVfNvThjwJaBmb7+/5+D7kDLJuutu9MFfOzTS0QOQWppwIPgbfktvMvwwsq3m
+7e9Qb+S1LVeV0/ldZfuzgzAzHFDwmzryfIyt2JEbsBsGTq/QE+7hvLAe8R9xofIn
+z6/IndiiTYhNCNf06nFPR4Y5ZDZPGb9aw5Jisqh+OSxtc0BFHDSV8/35yWM/JLQ1
+Ja8AOHw1kP9KO+iE9rHMt0+7lH3mN1GBabxH26EdgFfPShsi14qmziLOuUlGLuwO
+ApIYqvdtCs+zlMA8PsiJIMuxizZ6qCLur3r2b+/YXoJjuFDcax9M+Pr0D7rZX0Hk
+6PW3dtvDQHfspwLY0FIlXbbtCfCqGLe47VaS7lvG0XeMlo3dUEsf707Q2h0+G1tm
+wyeuWSPEzZQq/KI7JIFlxr3N/3VCdGa9qVf/40QF0BXPfJdcwTEzmPlYetRgA11W
+bglw8DxWBv24a2gWeUkwBWFScR3QV4FAwVjmlCqrkw9dy/JtrFf4pwDoqSFUcofB
+95u6qlz/PC+ho9uvUo5uIwJyz3J5BIgfkMAPYcHNZZ5QrpI3mdwf66im1TOKKTuf
+3Sz/GKc14qAIQhxuUWrgAKTexBJYJmzDT0Mj4ISjlr9K6VXrQwTuj2zC4QARAQAB
+zStQYXVsIEJhcmtlciA8cGF1bC5iYXJrZXIuY3RAYnAucmVuZXNhcy5jb20+wsGU
+BBMBCgA+FiEE9KKf333+FIzPGaxOJ/SzRZ8AIlcFAmS4BNsCGwEFCQPCZwAFCwkI
+BwIGFQoJCAsCBBYCAwECHgECF4AACgkQJ/SzRZ8AIlfxaQ/8CM36qjfad7eBfwja
+cI1LlH1NwbSJ239rE0X7hU/5yra72egr3T5AUuYTt9ECNQ8Ld03BYhbC6hPki5rb
+OlFM2hEPUQYeohcJ4Na5iIFpTxoIuC49Hp2ce6ikvt9Hc4O2FAntabg+9hE8WA4f
+QWW+Qo5ve5OJ0sGylzu0mRZ2I3mTaDsxuDkXOICF5ggSdjT+rcd/pRVOugImjpZv
+/jzSgUfKV2wcZ8vVK0616K21tyPiRjYtDQjJAKff8gBY6ZvP5REPl+fYNvZm1y4l
+hsVupGHL3aV+BKooMsKRZIMTiKJCIy6YFKHOcgWFG62cuRrFDf4r54MJuUGzyeoF
+1XNFzbe1ySoRfU/HrEuBNqC+1CEBiduumh89BitfDNh6ecWVLw24fjsF1Ke6vYpU
+lK9/yGLV26lXYEN4uEJ9i6PjgJ+Q8fubizCVXVDPxmWSZIoJg8EspZ+Max03Lk3e
+flWQ0E3l6/VHmsFgkvqhjNlzFRrj/k86IKdOi0FOd0xtKh1p34rQ8S/4uUN9XCVj
+KtmyLfQgqPVEC6MKv7yFbextPoDUrFAzEgi4OBdqDJjPbdU9wUjONxuWJRrzRFcr
+nTIG7oC4dae0p1rs5uTlaSIKpB2yulaJLKjnNstAj9G9Evf4SE2PKH4l4Jlo/Hu1
+wOUqmCLRo3vFbn7xvfr1u0Z+oMTOOARkuAhwEgorBgEEAZdVAQUBAQdAcuNbK3VT
+WrRYypisnnzLAguqvKX3Vc1OpNE4f8pOcgMDAQgHwsF2BBgBCgAgFiEE9KKf333+
+FIzPGaxOJ/SzRZ8AIlcFAmS4CHACGwwACgkQJ/SzRZ8AIlc90BAAr0hmx8XU9KCj
+g4nJqfavlmKUZetoX5RB9g3hkpDlvjdQZX6lenw3yUzPj53eoiDKzsM03Tak/KFU
+FXGeq7UtPOfXMyIh5UZVdHQRxC4sIBMLKumBfC7LM6XeSegtaGEX8vSzjQICIbaI
+roF2qVUOTMGal2mvcYEvmObC08bUZuMd4nxLnHGiej2t85+9F3Y7GAKsA25EXbbm
+ziUg8IVXw3TojPNrNoQ3if2Z9NfKBhv0/s7x/3WhhIzOht+rAyZaaW+31btDrX4+
+Y1XLAzg9DAfuqkL6knHDMd9tEuK6m2xCOAeZazXaNeOTjQ/XqCHmZ+691VhmAHCI
+7Z7EBPh++TjEqn4ZH+4KPn6XD52+ruWXGbJP29zc+3bwQ+ZADfUaL3ADj69ySxzm
+bO24USHBAg+BhZAZMBkbkygbTen/umT6tBxG91krqbKlDdc8mhGonBN6i+nz8qv1
+6MdC5P1rDbo834rxNLvoFMSLCcpjoafiprl9qk0wQLq48WGphs9DX7V75ZAU5Lt6
+yA+je8i799EZJsVlB933Gpj688H4csaZqEMBjq7vMvI+a5MnLCGcjwRhsUfogpRb
+AWTx9ddVau4MJgEHzB7UU/VFyP2vku7XPj6mgSfSHyNVf2hqxwISQ8eZLoyxauOD
+Y61QMX6YFL170ylToSFjH627h6TzlUDOMwRkuAiAFgkrBgEEAdpHDwEBB0Bibkmu
+Sf7yECzrkBmjD6VGWNVxTdiqb2RuAfGFY9RjRsLB7QQYAQoAIBYhBPSin999/hSM
+zxmsTif0s0WfACJXBQJkuAiAAhsCAIEJECf0s0WfACJXdiAEGRYIAB0WIQSiu8gv
+1Xr0fIw/aoLbaV4Vf/JGvQUCZLgIgAAKCRDbaV4Vf/JGvZP9AQCwV06n3DZvuce3
+/BtzG5zqUuf6Kp2Esgr2FrD4fKVbogD/ZHpXfi9ELdH/JTSVyujaTqhuxQ5B7UzV
+CUIb1qbg1APIEA/+IaLJIBySehy8dHDZQXit/XQYeROQLTT9PvyM35rZVMGH6VG8
+Zb23BPCJ3N0ISOtVdG402lSP0ilP/zSyQAbJN6F0o2tiPd558lPerFd/KpbCIp8N
+kYaLlHWIDiN2AE3c6sfCiCPMtXOR7HCeQapGQBS/IMh1qYHffuzuEy7tbrMvjdra
+VN9Rqtp7PSuRTbO3jAhm0Oe4lDCAK4zyZfjwiZGxnj9s1dyEbxYB2GhTOgkiX/96
+Nw+m/ShaKqTM7o3pNUEs9J3oHeGZFCCaZBv97ctqrYhnNB4kzCxAaZ6K9HAAmcKe
+WT2q4JdYzwB6vEeHnvxl7M0Dj9pUTMujW77Qh5IkUQLYZ2XQYnKAV2WI90B0R1p9
+bXP+jqqkaNCrxKHV1tYOB6037CziGcZmiDneiTlM765MTLJLlHNqlXxDCzRwEazU
+y9dNzITjVT0qhc6th8/vqN9dqvQaAGa13u86Gbv4XPYdE+5MXPM/fTgkKaPBYcIV
+QMvLfoZxyaTk4nzNbBxwwEEHrvTcWDdWxGNtkWRZw0+U5JpXCOi9kBCtFrJ701UG
+UFs56zWndQUS/2xDyGk8GObGBSRLCwsXsKsF6hSX5aKXHyrAAxEUEscRaAmzd6O3
+ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------ydc3jEtuqAm083XmfovyuweT--
+
+--------------0LAWzZZkhn82n4eHBnW9Ty3i--
+
+--------------YjglK7l8mAOkYMSQV2phLwnM
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ4+NHQUDAAAAAAAKCRDbaV4Vf/JGvYFQ
+AQDS/sXGNVERp1iubtr5tIACSy3hUpuDbv8MITmOsgZ6ZQEA33x5aoMOYZJIWURa70KUr8VCkUzP
+dT2GiShfn8CnlAM=
+=EW5F
+-----END PGP SIGNATURE-----
+
+--------------YjglK7l8mAOkYMSQV2phLwnM--
