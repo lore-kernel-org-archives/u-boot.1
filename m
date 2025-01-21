@@ -4,50 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 194B1C02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 11:56:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A84BC02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 12:00:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EBBD80326;
-	Tue, 21 Jan 2025 12:56:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 8406180326;
+	Tue, 21 Jan 2025 13:00:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BFDF5805C5; Tue, 21 Jan 2025 12:56:36 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id F253C801F5
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 12:56:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: nxYLkjPMSiGG9uUoJORP/w==
-X-CSE-MsgGUID: qGBa2Vi4Sxml+QeputdkKA==
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 21 Jan 2025 20:56:32 +0900
-Received: from [10.24.0.69] (unknown [10.24.0.69])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id B0B17400A655;
- Tue, 21 Jan 2025 20:56:28 +0900 (JST)
-Message-ID: <04253048-71ca-43a4-8917-798d8ce027af@bp.renesas.com>
-Date: Tue, 21 Jan 2025 11:56:27 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U4jfIJGS";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0B161805C5; Tue, 21 Jan 2025 13:00:20 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 66250801F5
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 13:00:17 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5d9f0a6adb4so11275062a12.1
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 04:00:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737460817; x=1738065617; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=f9d9tVRM0lFLBr1zd3VMMXTxA4STEBjPP9d+5WU/9Lw=;
+ b=U4jfIJGSA+0ix6HPAAIrKKFRPRxADf3PcCdKEUGxTHDSIh7AjhStCD3KJ871QRuuSO
+ Y4df1cLQzvq7uSqyJIdiY9YixBZkb8Mg8Arx2Gme+oHbyP/Kcf/9+T/cx+hXgGFj7FB/
+ 8QR7RQI7BentzfPcK/PZ9voaEkCsMspdiRWLBp4fXziOJqhVJsilLHRJknumUIH3Aiez
+ tDmoG1GqTMprHpamP/2U6lIsD4zxlZvNQeCYIPD/N+JA+yllmpExH/94Y7e97bsS9H+j
+ gihwfJP1Ck9ze8MQt5WOOWWHs8vgkl8XUZeLIWO/wql9KkEv54RBTDBnK6jfy+H5GxMZ
+ 7LpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737460817; x=1738065617;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=f9d9tVRM0lFLBr1zd3VMMXTxA4STEBjPP9d+5WU/9Lw=;
+ b=tos5FjcwwRO/vSsulb4e0Cb2Y8AU291Uv4e6Ionw7I2x+LtSibXXQtkd67tfAs7wT+
+ +IbD3Q/DphvHJblA6W4Rv26K4F89viwLgLn1Sd8WuSP28lBpCVEce/Il4OkCaOHYC7JD
+ m4woKYIn0opZTk+q62KBGRlF7DC5MjGrzwMn3bMdOdaj9H3eqT5M/oEDLZuZX1nbOnWt
+ 7uZrQ7pzAh8d79k0WBIQUnGPUje/4rLmIKAti+5iSu/HRZe+IzxVY1GuaIsEkCtAXvqp
+ uaKn6kz78RODbqXlJNeKsJFWpUVtxcKFMWZ1rkfjPMFElxKLFeyVSu1F0uJh/HTVSbfh
+ R07Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU3cKyMK40JZ6AfakAIeubiFnrrh0rv8lLBTjj/zDo8kviVyNZYh+h5SdnpjjmbIAbLOSQvcvg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0DP3v/kLtYg0Lu56/TEMdInZ1hka6k9Ji9CdHZDHTtuHSBwCT
+ V8T/QF1Objimh3jI6fEBlyulRmqwafipNExXwL27hESkvrPzrPMgHE6/F4/irBc=
+X-Gm-Gg: ASbGncu2g0fqlgdh3UUoB2dw2JsfaW/b6r5aVLGxBdxGjv05s5BvJ/PtZdlTMrJm9xW
+ +qRa6aom78QjFmusPnHKt8tfGIRGr4xV6O1/dLeYHtxN0627huZvqQHa1NGTU4+s4IMPH0lUj1N
+ 4VuZkkc69fEKYno764SLxKgILr2HJoqttxSGzZvhGHoL14JmZyVrh/9cNpwRwmQytfiJiiFwwf0
+ a/a0AaSwj3cU5g02jBqnz9YBD4zM4IkCQSuMj3/In0bKl+P4YrObxW4cazgkGUsRuNfYTmmGg9I
+ B5E/0yyw56BAsYp9wWs0Ltfl6jSlQWQdvRAEUK5dO/VjihBsLkxb
+X-Google-Smtp-Source: AGHT+IGjNoMHDLbv0oixwKkTowlov1Gbn2at7xqK4mBs70F7UNXFa94v4Hq6RCrgj0HBLf8JXJsPCw==
+X-Received: by 2002:a17:907:7e91:b0:ab2:ea29:b6 with SMTP id
+ a640c23a62f3a-ab38b37cf5amr1613095866b.35.1737460816744; 
+ Tue, 21 Jan 2025 04:00:16 -0800 (PST)
+Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab384c61276sm753055066b.13.2025.01.21.04.00.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Jan 2025 04:00:15 -0800 (PST)
+Message-ID: <a33678e1-b4e2-43e2-b6de-55618bbb8579@linaro.org>
+Date: Tue, 21 Jan 2025 13:00:15 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: miiphybb: Fix short name length
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
+Subject: Re: [PATCH 2/2] drivers: remove bogus DM_FLAG_PROBE_AFTER_BIND flags
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250118061558.124963-1-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250118061558.124963-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------81L8jNBn4yJ2QvUKulFc4hI0"
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20250117-clarify-probe-after-bind-v1-0-273f046ce5dd@linaro.org>
+ <20250117-clarify-probe-after-bind-v1-2-273f046ce5dd@linaro.org>
+ <CAFLszTi_=S9m54DvKdjdNXf=zOhgg6tog8kcQ+dxjkjQ8BoP4Q@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFLszTi_=S9m54DvKdjdNXf=zOhgg6tog8kcQ+dxjkjQ8BoP4Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,131 +106,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------81L8jNBn4yJ2QvUKulFc4hI0
-Content-Type: multipart/mixed; boundary="------------glZsH80HwrDSlv3gcE1smMYD";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <04253048-71ca-43a4-8917-798d8ce027af@bp.renesas.com>
-Subject: Re: [PATCH] net: miiphybb: Fix short name length
-References: <20250118061558.124963-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250118061558.124963-1-marek.vasut+renesas@mailbox.org>
 
---------------glZsH80HwrDSlv3gcE1smMYD
-Content-Type: multipart/mixed; boundary="------------FjUbpHDZEv3j89WAy721Dwyz"
 
---------------FjUbpHDZEv3j89WAy721Dwyz
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On 18/01/2025 05:32, Simon Glass wrote:
+> On Fri, 17 Jan 2025 at 00:29, Caleb Connolly <caleb.connolly@linaro.org
+> <mailto:caleb.connolly@linaro.org>> wrote:
+>>
+>> Some drivers set DM_FLAG_PROBE_AFTER_BIND, this does nothing since it's
+>> only every applied on a per-device basis.
+>>
+>> Remove the flags.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org
+> <mailto:caleb.connolly@linaro.org>>
+>> ---
+>>  drivers/mailbox/zynqmp-ipi.c  | 1 -
+>>  drivers/watchdog/da9063-wdt.c | 1 -
+>>  2 files changed, 2 deletions(-)
+>>
+>> diff --git a/drivers/mailbox/zynqmp-ipi.c b/drivers/mailbox/zynqmp-ipi.c
+>> index 713d93a200c4..851aa737c03e 100644
+>> --- a/drivers/mailbox/zynqmp-ipi.c
+>> +++ b/drivers/mailbox/zynqmp-ipi.c
+>> @@ -269,6 +269,5 @@ U_BOOT_DRIVER(zynqmp_ipi) = {
+>>         .name = "zynqmp_ipi",
+>>         .id = UCLASS_NOP,
+>>         .of_match = zynqmp_ipi_ids,
+>>         .probe = zynqmp_ipi_probe,
+>> -       .flags = DM_FLAG_PROBE_AFTER_BIND,
+>>  };
+>> diff --git a/drivers/watchdog/da9063-wdt.c b/drivers/watchdog/da9063-wdt.c
+>> index b7216b578630..ec9bc0330114 100644
+>> --- a/drivers/watchdog/da9063-wdt.c
+>> +++ b/drivers/watchdog/da9063-wdt.c
+>> @@ -144,6 +144,5 @@ U_BOOT_DRIVER(da9063_wdt) = {
+>>         .name = "da9063-wdt",
+>>         .id = UCLASS_WDT,
+>>         .of_match = da9063_wdt_ids,
+>>         .ops = &da9063_wdt_ops,
+>> -       .flags = DM_FLAG_PROBE_AFTER_BIND,
+>>  };
+>>
+>> --
+>> 2.48.0
+>>
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
+> 
+> It is actually a bit unclear, since the comments for struct driver
+> mention DM_FLAG_... for the flags.
 
-On 18/01/2025 06:15, Marek Vasut wrote:
-> Multiple drivers copy MDIO name into struct bb_miiphy_bus name, but
-> these two name fields have different length, the bb_miiphy_bus one
-> is 16 bytes, the source one is 32 bytes. Make sure these two lengths
-> are always synchronized, use MDIO_NAME_LEN for both.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Yep, some of the flags (most even?) can be applied to drivers and there
+is no proper distinction between which apply to drivers and which to
+devices.
 
-I would prefer something like the following so that it's clear which
-source struct we're referring to:
+DRIVER_FLAG_... and DEV_FLAG_... or something maybe better, something to
+revisit in the future for sure.
 
-    Multiple drivers copy the MDIO instance name from struct mii_phy to
-    struct bb_miiphy_bus, but the name field in these two structs have
-    different lengths...
+Thx for the review
 
-With that changed,
+-- 
+// Caleb (they/them)
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-
---=20
-Paul Barker
---------------FjUbpHDZEv3j89WAy721Dwyz
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------FjUbpHDZEv3j89WAy721Dwyz--
-
---------------glZsH80HwrDSlv3gcE1smMYD--
-
---------------81L8jNBn4yJ2QvUKulFc4hI0
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ4+LawUDAAAAAAAKCRDbaV4Vf/JGvdz6
-AQD4bV1BgeKOdFfkbGtrB+289xPzCLpQygt/bgCEyirTMwEAnbePkN90wyKExczR1AhEM5FlBUXm
-CWKR3aDDTvqLswA=
-=T3m7
------END PGP SIGNATURE-----
-
---------------81L8jNBn4yJ2QvUKulFc4hI0--
