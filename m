@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 238E1C02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 11:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 194B1C02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 11:56:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E4F680326;
-	Tue, 21 Jan 2025 12:48:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2EBBD80326;
+	Tue, 21 Jan 2025 12:56:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5D92805C5; Tue, 21 Jan 2025 12:48:35 +0100 (CET)
+ id BFDF5805C5; Tue, 21 Jan 2025 12:56:36 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 42C64801F5
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 12:48:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id F253C801F5
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 12:56:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: i5/Hn2oETLyH30V0RCQ9nw==
-X-CSE-MsgGUID: lsF22AezSSKdZmhwZi7k2g==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 21 Jan 2025 20:48:29 +0900
+X-CSE-ConnectionGUID: nxYLkjPMSiGG9uUoJORP/w==
+X-CSE-MsgGUID: qGBa2Vi4Sxml+QeputdkKA==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 21 Jan 2025 20:56:32 +0900
 Received: from [10.24.0.69] (unknown [10.24.0.69])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 16E45427BFF2;
- Tue, 21 Jan 2025 20:48:25 +0900 (JST)
-Message-ID: <89ac7fdf-e245-48b7-8271-895501df0904@bp.renesas.com>
-Date: Tue, 21 Jan 2025 11:48:24 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id B0B17400A655;
+ Tue, 21 Jan 2025 20:56:28 +0900 (JST)
+Message-ID: <04253048-71ca-43a4-8917-798d8ce027af@bp.renesas.com>
+Date: Tue, 21 Jan 2025 11:56:27 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: ravb: Staticize bb_miiphy functions
+Subject: Re: [PATCH] net: miiphybb: Fix short name length
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
@@ -42,12 +42,12 @@ Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
  Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250118061304.124807-1-marek.vasut+renesas@mailbox.org>
+References: <20250118061558.124963-1-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250118061304.124807-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250118061558.124963-1-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------EXVCv5GQfTvn6VvXqdU3wfTu"
+ boundary="------------81L8jNBn4yJ2QvUKulFc4hI0"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,8 +65,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------EXVCv5GQfTvn6VvXqdU3wfTu
-Content-Type: multipart/mixed; boundary="------------r0rDBoedtdL4iTrYg4ihvMPR";
+--------------81L8jNBn4yJ2QvUKulFc4hI0
+Content-Type: multipart/mixed; boundary="------------glZsH80HwrDSlv3gcE1smMYD";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -77,30 +77,40 @@ Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
  Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <89ac7fdf-e245-48b7-8271-895501df0904@bp.renesas.com>
-Subject: Re: [PATCH] net: ravb: Staticize bb_miiphy functions
-References: <20250118061304.124807-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250118061304.124807-1-marek.vasut+renesas@mailbox.org>
+Message-ID: <04253048-71ca-43a4-8917-798d8ce027af@bp.renesas.com>
+Subject: Re: [PATCH] net: miiphybb: Fix short name length
+References: <20250118061558.124963-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250118061558.124963-1-marek.vasut+renesas@mailbox.org>
 
---------------r0rDBoedtdL4iTrYg4ihvMPR
-Content-Type: multipart/mixed; boundary="------------36JA8BWXG0Ug58HxiEp0hEqs"
+--------------glZsH80HwrDSlv3gcE1smMYD
+Content-Type: multipart/mixed; boundary="------------FjUbpHDZEv3j89WAy721Dwyz"
 
---------------36JA8BWXG0Ug58HxiEp0hEqs
+--------------FjUbpHDZEv3j89WAy721Dwyz
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 18/01/2025 06:12, Marek Vasut wrote:
-> These functions can be static as they are referenced only in this file.=
-
-> Make them static. No functional change.
+On 18/01/2025 06:15, Marek Vasut wrote:
+> Multiple drivers copy MDIO name into struct bb_miiphy_bus name, but
+> these two name fields have different length, the bb_miiphy_bus one
+> is 16 bytes, the source one is 32 bytes. Make sure these two lengths
+> are always synchronized, use MDIO_NAME_LEN for both.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+I would prefer something like the following so that it's clear which
+source struct we're referring to:
+
+    Multiple drivers copy the MDIO instance name from struct mii_phy to
+    struct bb_miiphy_bus, but the name field in these two structs have
+    different lengths...
+
+With that changed,
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------36JA8BWXG0Ug58HxiEp0hEqs
+--------------FjUbpHDZEv3j89WAy721Dwyz
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -164,21 +174,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------36JA8BWXG0Ug58HxiEp0hEqs--
+--------------FjUbpHDZEv3j89WAy721Dwyz--
 
---------------r0rDBoedtdL4iTrYg4ihvMPR--
+--------------glZsH80HwrDSlv3gcE1smMYD--
 
---------------EXVCv5GQfTvn6VvXqdU3wfTu
+--------------81L8jNBn4yJ2QvUKulFc4hI0
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ4+JiAUDAAAAAAAKCRDbaV4Vf/JGve7S
-AQCG0UIR0TY+DLtpjaCF7ucP8hfGUg81gH5WkLGfLwFNyQEA5q8EOnPPJKrxw44e57z68e9yrV+6
-g17cuiXOJ9P2xQg=
-=7h3T
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ4+LawUDAAAAAAAKCRDbaV4Vf/JGvdz6
+AQD4bV1BgeKOdFfkbGtrB+289xPzCLpQygt/bgCEyirTMwEAnbePkN90wyKExczR1AhEM5FlBUXm
+CWKR3aDDTvqLswA=
+=T3m7
 -----END PGP SIGNATURE-----
 
---------------EXVCv5GQfTvn6VvXqdU3wfTu--
+--------------81L8jNBn4yJ2QvUKulFc4hI0--
