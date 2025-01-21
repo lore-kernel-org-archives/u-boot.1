@@ -4,81 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5D7C02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 16:11:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E8EBC02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 16:22:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC30080283;
-	Tue, 21 Jan 2025 17:11:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EA1680283;
+	Tue, 21 Jan 2025 17:22:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cSi8EQV8";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="Q0ANXBXb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AC4B80326; Tue, 21 Jan 2025 17:11:08 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DD6B2801F5; Tue, 21 Jan 2025 17:22:22 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 616F9801F5
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 17:11:05 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6d8edad9932so42755606d6.0
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 08:11:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737475864; x=1738080664; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dU6oIW/boJNZUjHYkziQxUGTi5VbqFUaK9oTMjACQYg=;
- b=cSi8EQV8lWb0zsjdY8Rd1RtlmAOqqJt/W0nxe5cPWphMOcuLVm4wvPnlhRXe40vwWp
- 9Vxt90K+gRj3vjsr4LooUAUyYv14Amy9CGzVBRZqV+llS2U/nCJ8uHD6KwcD/3Dk2oFB
- 8EPNfLdbC1+6iNqJDHQ0jYCqJ2FckEpL2vaQw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737475864; x=1738080664;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dU6oIW/boJNZUjHYkziQxUGTi5VbqFUaK9oTMjACQYg=;
- b=C9HHX1npeeVLOdcqd3wwqt3WcVPdZ+Xeo+8mbRgOdEj6ZMWspAlJROJdqQQB6LML8Q
- 7wzAvh0/2owV3+yx02getrHV+whnt7n81QekYuwA7pWYzSY6z8ymoBt/sFuQ1x/qt8Jy
- k18zTpH3yDz3yuA90dpKKIDunCsoIcxUdYy+6XuTYDB8LbxZHLdCTKVA8ImDI2JLWtf1
- VL7dsTDKJDEYn/v5wLDox7mhN7aMQm3fgatDoptFdp2We9O1YnP93ZohlF6Au6qImVMQ
- 8w7FXZqBs/lHEXMsT9Nu1aV57EmphE1WJD5C4lBUnWahlAIORWNtTIVxSPSDCCDa5gNK
- H/nw==
-X-Gm-Message-State: AOJu0Yw1u/Ov7yFCwux0tUWWdX08hAQLKwFhygddEpH3d/Nk0L+RxWBe
- jAvHRv9C9kG3Bj0oZNIDQXsIeB8kJvbtCSg3fHDHuuot9Q35uYrPIGr20lrKz5k=
-X-Gm-Gg: ASbGnculoxSEfe/M3CsrdKdEad5wnFlTY6+t0toRMEytQfH6r2AIJGMKecSUuXCD+rb
- n74zeyAVxWrwn8Tqr3n1DD2JUhtkY0ANUfc8N01l5s0vHFt0OvGyAVPPd3gGk8OUp6QqL1OCcEj
- dG/SAOjJlRYxiJy3KxEKVnp+EHNl3ASDioE02x3LV5DnfsFJBZBiwQWFLXCy7NrO4BfqXSUevX8
- VxUF2bHC18LOGWs9BXtOGo2usOKaV9SoRCh/oy9OGXszL2+MyF103GcA04XL25+sCk=
-X-Google-Smtp-Source: AGHT+IHCtJdfO3PHO2euM9Gnk0Sx2v1N/4ymauCjsiOYPAX0lU8/2kcSnd1N0N38xcxrrUKvkee0Sg==
-X-Received: by 2002:a05:6214:230a:b0:6e1:7b35:a0d5 with SMTP id
- 6a1803df08f44-6e1b216fddemr308500496d6.7.1737475864227; 
- Tue, 21 Jan 2025 08:11:04 -0800 (PST)
-Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e1030e4absm55553251cf.43.2025.01.21.08.11.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Jan 2025 08:11:03 -0800 (PST)
-Date: Tue, 21 Jan 2025 10:11:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v4 0/2] Static initcalls
-Message-ID: <20250121161100.GI3476@bill-the-cat>
-References: <cover.1736174204.git.jerome.forissier@linaro.org>
- <20250117214621.GA2503843@bill-the-cat>
- <d81651a4-f849-4d4b-9e6a-d8fe277b3d03@linaro.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 675D580326
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 17:22:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 325E9148471A; Tue, 21 Jan 2025 17:22:16 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1737476539;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=2zssWcWKDsaCN9iaF+GVDFaxfZgTAY61Tr0+m7lvtTM=;
+ b=Q0ANXBXbBEN6T9r/kXMGXkUxqYoqDDm/cCfAaTZFY+pZU16gjTNAbuESo464IIzxu5ikQh
+ t2hWHLdrbAtKPmhfxucGXSthI1COxHukUSRhnvTEtnLjciFfbwJyWN8HrVWoaSw30bgpZn
+ 2G3KU/n2CPSTaPHc8es9iiD/PO4paBnUW4D1w5f3T7RTqgIXEddaEdS2jaAahg3fnk0QkE
+ zy5SATZK/EvOo43iYdFGkeMSEZn0s0KRFxSoaLYOAhgLyizVgz9JQ/dqRmyIysIuMoaA1c
+ IUuO0OEhFcdZE2EldeXG0+pHRCIvv/bZ/FRUIp3jdaVhNPD7zlUzMgerkJaOZg==
+From: Alexander Dahl <ada@thorsis.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ u-boot@lists.denx.de (open list)
+Subject: [PATCH] fpga: Avoid ignored-qualifiers warning
+Date: Tue, 21 Jan 2025 17:22:12 +0100
+Message-Id: <20250121162213.1477506-1-ada@thorsis.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kq3n70QNR//ncZCr"
-Content-Disposition: inline
-In-Reply-To: <d81651a4-f849-4d4b-9e6a-d8fe277b3d03@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,73 +65,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Fixes annoying warnings of the following type when built with W=1 (for
+each file including fpga.h):
 
---kq3n70QNR//ncZCr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+      CC      drivers/fpga/fpga.o
+    In file included from /mnt/data/adahl/src/u-boot/include/xilinx.h:7,
+                     from /mnt/data/adahl/src/u-boot/drivers/fpga/fpga.c:10:
+    /mnt/data/adahl/src/u-boot/include/fpga.h:61:1: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+       61 | const fpga_desc *const fpga_get_desc(int devnum);
+          | ^~~~~
+    /mnt/data/adahl/src/u-boot/include/fpga.h:81:1: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+       81 | const fpga_desc *const fpga_validate(int devnum, const void *buf,
+          | ^~~~~
+    /mnt/data/adahl/src/u-boot/drivers/fpga/fpga.c:36:1: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+       36 | const fpga_desc *const fpga_get_desc(int devnum)
+          | ^~~~~
+    /mnt/data/adahl/src/u-boot/drivers/fpga/fpga.c:53:1: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+       53 | const fpga_desc *const fpga_validate(int devnum, const void *buf,
+          | ^~~~~
 
-On Tue, Jan 21, 2025 at 05:05:58PM +0100, Jerome Forissier wrote:
->=20
->=20
-> On 1/17/25 22:46, Tom Rini wrote:
-> > On Mon, Jan 06, 2025 at 03:40:12PM +0100, Jerome Forissier wrote:
-> >=20
-> >> This series replaces the dynamic initcalls (with function pointers) wi=
-th
-> >> static calls, and gets rid of initcall_run_list(), init_sequence_f,
-> >> init_sequence_f_r and init_sequence_r. This makes the code simpler and=
- the
-> >> binary slighlty smaller: -2281 bytes/-0.21 % with LTO enabled and -510
-> >> bytes/-0.05 % with LTO disabled (xilinx_zynqmp_kria_defconfig).
-> >>
-> >> Execution time doesn't seem to change noticeably. There is no impact on
-> >> the SPL.
-> >=20
-> > This fails in CI unfortunately:
-> > https://source.denx.de/u-boot/u-boot/-/pipelines/24241
->=20
-> I found the problem. It was a silly mistake :-/
->=20
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 74ebbdc7de9..21a8b97d1bc 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -717,7 +717,7 @@ static void initcall_run_r(void)
->  #endif
-> 	INITCALL_EVT(EVT_SETTINGS_R);
-> 	WATCHDOG_RESET();
-> -#if CONFIG_IS_ENABLED(PCI_INIT_R) && CONFIG_IS_ENABLED(SYS_EARLY_PCI_INI=
-T)
-> +#if CONFIG_IS_ENABLED(PCI_INIT_R) && !CONFIG_IS_ENABLED(SYS_EARLY_PCI_IN=
-IT)
-> 	/*
-> 	 * Do pci configuration
-> 	 */
->=20
-> Shall I sent a v5?
+Do some type and cast cleanup on that fpga_desc type file at it.
 
-Yes please, and push it through CI first ;)
+Link: https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wignored-qualifiers
+Signed-off-by: Alexander Dahl <ada@thorsis.com>
+---
+ drivers/fpga/fpga.c | 14 +++++++-------
+ include/fpga.h      |  6 +++---
+ 2 files changed, 10 insertions(+), 10 deletions(-)
 
---=20
-Tom
+diff --git a/drivers/fpga/fpga.c b/drivers/fpga/fpga.c
+index 1f6782537de..f88267e01b6 100644
+--- a/drivers/fpga/fpga.c
++++ b/drivers/fpga/fpga.c
+@@ -33,9 +33,9 @@ static void fpga_no_sup(char *fn, char *msg)
+ /* fpga_get_desc
+  *	map a device number to a descriptor
+  */
+-const fpga_desc *const fpga_get_desc(int devnum)
++const fpga_desc *fpga_get_desc(int devnum)
+ {
+-	fpga_desc *desc = (fpga_desc *)NULL;
++	const fpga_desc *desc = NULL;
+ 
+ 	if ((devnum >= 0) && (devnum < next_desc)) {
+ 		desc = &desc_table[devnum];
+@@ -50,8 +50,8 @@ const fpga_desc *const fpga_get_desc(int devnum)
+  * fpga_validate
+  *	generic parameter checking code
+  */
+-const fpga_desc *const fpga_validate(int devnum, const void *buf,
+-				     size_t bsize, char *fn)
++const fpga_desc *fpga_validate(int devnum, const void *buf,
++			       size_t bsize, char *fn)
+ {
+ 	const fpga_desc *desc = fpga_get_desc(devnum);
+ 
+@@ -60,7 +60,7 @@ const fpga_desc *const fpga_validate(int devnum, const void *buf,
+ 
+ 	if (!buf) {
+ 		printf("%s: Null buffer.\n", fn);
+-		return (fpga_desc * const)NULL;
++		return NULL;
+ 	}
+ 	return desc;
+ }
+@@ -72,7 +72,7 @@ const fpga_desc *const fpga_validate(int devnum, const void *buf,
+ static int fpga_dev_info(int devnum)
+ {
+ 	int ret_val = FPGA_FAIL; /* assume failure */
+-	const fpga_desc * const desc = fpga_get_desc(devnum);
++	const fpga_desc *desc = fpga_get_desc(devnum);
+ 
+ 	if (desc) {
+ 		debug("%s: Device Descriptor @ 0x%p\n",
+@@ -374,7 +374,7 @@ int fpga_info(int devnum)
+ #if CONFIG_IS_ENABLED(FPGA_LOAD_SECURE)
+ int fpga_compatible2flag(int devnum, const char *compatible)
+ {
+-	const fpga_desc * const desc = fpga_get_desc(devnum);
++	const fpga_desc *desc = fpga_get_desc(devnum);
+ 
+ 	if (!desc)
+ 		return 0;
+diff --git a/include/fpga.h b/include/fpga.h
+index 44f2755a3f1..4cc44164b2f 100644
+--- a/include/fpga.h
++++ b/include/fpga.h
+@@ -58,7 +58,7 @@ typedef enum {
+ void fpga_init(void);
+ int fpga_add(fpga_type devtype, void *desc);
+ int fpga_count(void);
+-const fpga_desc *const fpga_get_desc(int devnum);
++const fpga_desc *fpga_get_desc(int devnum);
+ int fpga_is_partial_data(int devnum, size_t img_len);
+ #if CONFIG_IS_ENABLED(FPGA)
+ int fpga_load(int devnum, const void *buf, size_t bsize,
+@@ -78,8 +78,8 @@ int fpga_loadbitstream(int devnum, char *fpgadata, size_t size,
+ 		       bitstream_type bstype);
+ int fpga_dump(int devnum, const void *buf, size_t bsize);
+ int fpga_info(int devnum);
+-const fpga_desc *const fpga_validate(int devnum, const void *buf,
+-				     size_t bsize, char *fn);
++const fpga_desc *fpga_validate(int devnum, const void *buf,
++			       size_t bsize, char *fn);
+ int fpga_compatible2flag(int devnum, const char *compatible);
+ 
+ #endif	/* _FPGA_H_ */
 
---kq3n70QNR//ncZCr
-Content-Type: application/pgp-signature; name="signature.asc"
+base-commit: 5d5ce5f25708077e354a5627ec92b643145992cc
+-- 
+2.39.5
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmePxw0ACgkQFHw5/5Y0
-tyzYAwv+MofCoayBjPFnPLAkOYFc5nYvn73QIIHTGuFotIfHNme7DhIWPQuDhEcZ
-OndqnjAfNZaRRlE0uQrH9n6XzRe+SHaLHJL1q6lZBtLPqyAIIw31BtUaFc90da8p
-cfG5sfLSq5pJrwoDWUvh0xGQJXVouAs41dwstr/cxtoL4i5BqHhfAosDnwuWS9mY
-z9zs+iW6LkDEzub1f6nakbFnp51bE9gO7tr7OEfqJeLw6MtcH3FUKzux4n6MX4oG
-GRNYBzMbexIfNJimu2CN/DgUoK2rKQxyjLXybMXwfx6dLNseBhOasUophO+6u/jS
-5Ihz0XhddwNrdmda79MD0+vCpnBZyTG1zJPSledm7GT0kEkR3aZxolAC6gRt6fOH
-FKEE3HIl4sa+7GxX2LQSy+ZJ8x2fkO5vDL/iJJoiUyW55t6pKkdiaTmhMuF25Uaa
-NEk8y/4ZEURlmaJGH/LFtv5YEGSCR77o7NqpXd8GSKeg4AaEx6svjGi4+GErQiW5
-Khhb9gq2
-=1uAx
------END PGP SIGNATURE-----
-
---kq3n70QNR//ncZCr--
