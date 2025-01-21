@@ -4,136 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 492EBC02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 12:25:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 354F9C02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 12:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4F4180326;
-	Tue, 21 Jan 2025 13:25:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 9EC3880326;
+	Tue, 21 Jan 2025 13:33:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="CvnrBCS3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dnX2gtB4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32A38805C5; Tue, 21 Jan 2025 13:25:19 +0100 (CET)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20604.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::604])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 67E44805C5; Tue, 21 Jan 2025 13:33:35 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADE7E801F5
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 13:25:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ED43801F5
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 13:33:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hwIJvsLSnfuzpsefVlwODtadVoYEKzO+V+b89h8C3tXIG+ta+xh1YihyBhPqfECwm6ByvrVYu8/+gJ9typyB7vYFXrxk2yhGpRSPkletk1oqxbDJB1NPT8LzTZriYLTOEUQEWlFG185jj20NNOzNrQoz2AysoK3VzLX7AiuJyjvanNxpAG8PjHSUYEGSAdic1+cvHnks9x1jPlT3AUgPuQzDJwCQoZjHqwSpCskKLfaIKSGNQD2dBDE6d7UiSfPO7X9VeazUpxkP7XhuD6j2VFZyqwBNBGqKho4lhun+OLMiR9lETeqo7MGyg4Efd+9iEQQao2snA1U1C9v7vBV4yA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bMdC0mPYIE3ecRSuekfThxs82lXBhqKmfD9EvKqfGIg=;
- b=mZwglsHJE43mZTTV6HmO9fCBy0Po6J27xprhF2l9Q3PJJyuLQhzk8js3tdIAaPZpZBK/Yid9qTjdYVqarZMfLDxmniociqSptiwDDKWusOiIkZyRxP6FOUBgsFheJdo4dqQ/ae2Mb5x+CWtypUt1tb+EfGrPsdSO3LzOKmguFB1j9sFwGyY0By5lNq4tDny0t0sxI55lXoQVhWiHQIZ8tkRf0jehzjW6k4t7MX+lIOFwUiIDlkXi08RZMgHgQfDFDe1qze2TENmwTQ3lmz8uuJSD21IISipxy/xsAS30K1UKTAGBGBZc7kApXBdXMdoCNehDbjKNzK5texRHNWn+nQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bMdC0mPYIE3ecRSuekfThxs82lXBhqKmfD9EvKqfGIg=;
- b=CvnrBCS343HHCMLPJryH3Cl3nBBJytTS3V0tu8Bkk6rnQHyt85AHT+RgTvGVfwPFPZCjUCRFMdjvOUX5Woe9HwbbgskV7hksqzKNaULP2kPmw2mqN0+HAYZFn8RVXzi7VgUp4nTAk3WpMVFg2EF7Ifgw295NjYMsbvnwKrErOtU=
-Received: from SJ0PR03CA0374.namprd03.prod.outlook.com (2603:10b6:a03:3a1::19)
- by CY8PR12MB7516.namprd12.prod.outlook.com (2603:10b6:930:94::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.22; Tue, 21 Jan
- 2025 12:25:13 +0000
-Received: from MWH0EPF000989E9.namprd02.prod.outlook.com
- (2603:10b6:a03:3a1:cafe::85) by SJ0PR03CA0374.outlook.office365.com
- (2603:10b6:a03:3a1::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8356.20 via Frontend Transport; Tue,
- 21 Jan 2025 12:25:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MWH0EPF000989E9.mail.protection.outlook.com (10.167.241.136) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8377.8 via Frontend Transport; Tue, 21 Jan 2025 12:25:12 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 21 Jan
- 2025 06:25:09 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Prasad Kummari <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: zynqmp: enable u-boot itb generation via binman if SPL
- is enabled
-Date: Tue, 21 Jan 2025 13:24:59 +0100
-Message-ID: <7cba738ae36dacf7d1b0cfbaf13e0c9b3a0df225.1737462296.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-aa67ac42819so782069966b.0
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 04:33:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737462812; x=1738067612; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WgQcXFUa2gqIWMPBih+nCAmCA/3kLnNEuPbSitKmy9I=;
+ b=dnX2gtB4RCjxxxtoJvz70HgEfR+i6mPFDGm3MjrRjRrGJJ2zf/jLT8SzA26XK13dez
+ 9rXMkq+awW9eHIIy1s+uwd5Ke1vhnOg9DcOR4xx6NVuWQs9Tj7nF6W9ERhYLDW8LjpTA
+ vv2LYIkCp8R8AQ5gb9WfHuSWcxeVYD+asMZ2cFLhuIvgZ2UgdSDpIyM7DkzY8lgtZoso
+ IYy3zlNGMy89wqX8fh/Ezx01fJQwAZtMZYd372I4aoghBZSs+DMmcQ+aeqqzbSsCs+iE
+ UkpYJRsRb+UVmBrqGtQB3zxvT/n8JzVtTsDU1FOcnd+osM3H7tE6Z3qt+r0ll/rliePL
+ EHeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737462812; x=1738067612;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WgQcXFUa2gqIWMPBih+nCAmCA/3kLnNEuPbSitKmy9I=;
+ b=Z4cWf/p2SnICQDI6M5DwIkye6Fhbgs5CPo0q9ot0RzEXaQtpFS4MloHlLt3wv/9YuJ
+ Nbj2hm+KbZlX6gr9JyTO7i+KRpE5CcnxxzcSp2D+UHNOcfnbLYL3dbLy+/OflVVu8M8c
+ PBCtgK2FxRZ2Yq2PFKhGmAOrAp/DY+nRxlrIFLcML6LziBMOKgH9vnJh1iWApUHNLPOH
+ aq7CIJfhvyoNE7oSTRmQBylRCXKL2eSrtncIuIYOC+f51bFYiAyNE0h8xjezZVQ9Ue+L
+ 9cw7mZvx7nue020QsGzzg0hXJ5X2Jewf9hz6grEep6cfX2aP/tps4qBDapiE/0MQsIas
+ C3VA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/9DafVpzUXi0JHdk9vZxQown0x/dCPDa9iG0J9xQ5jKBt1s7wX4vjkJ7dDApOwugPKIcEPn0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy06Ydac8hZn3Km8CFYNTQnBSGu+s3kMH/yNMxsBfnXyQ3AFu/c
+ cvy+2x8VthG+90B5ZW/y+0WhQQBrsdBjPa6Hs25NoY7NBDMsDub44xQ0sUkzXLQ=
+X-Gm-Gg: ASbGncsGaTPU8vraPqRhRy+zEoIP1CaBwnr1UgjKCgFuMkoicBAhO6AuWAjKIMrDlHL
+ BOEKtN00Gp38Lb/BSf1yOwj+lNRkmSNIz2NMtyuM2NZCafmBMsXKHvhyOVDA/pAPjfL/0XidoqN
+ Fbz/IgXDkSVPALsKThtSss/8ZhbWIeIBP6wnurjFTeRTiltxdjJpiV/DTij0ijBm91ACPbEayBM
+ oZX1c5exp1EndQvxnUk1pGCdnZMtaVZ9WuzLcot6UPGm9t4TXxAq1jYa/6IZTaSm2tdp4F3KCVX
+ gCUGSWqLeuH43Q043ilDkVcLqRMy75GNqcaNko5SVqChIW3bWtDx
+X-Google-Smtp-Source: AGHT+IEfJuafDhV+6WG2Jhrn+NvCZBim6WtB2IzyVzndPH1b+6QxxQGZeOJgJZSzakEY5MephnmUpA==
+X-Received: by 2002:a17:907:60d2:b0:aa6:82ea:69d6 with SMTP id
+ a640c23a62f3a-ab38b10cfbfmr1500043766b.18.1737462812284; 
+ Tue, 21 Jan 2025 04:33:32 -0800 (PST)
+Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab384fcd91asm735398666b.167.2025.01.21.04.33.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Jan 2025 04:33:31 -0800 (PST)
+Message-ID: <25dee2fd-e021-46cd-bff5-c0ae989a6c08@linaro.org>
+Date: Tue, 21 Jan 2025 13:33:30 +0100
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1858; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=dt9cAiShwyo5IFNE8a7JJEI6N0ojB9yeiO6a5dD3sUQ=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvT+SXKzdH/uvJ+nccTwyb19O0VX3J3qVDzvpt77NLfyK
- Me1qxgedcSyMAgyMciKKbJI21w5s7dyxhThi4flYOawMoEMYeDiFICJbE9gmF877bCbLAs/78s3
- s1vUpO+HF5b95mKYxWS8z03hksbtH7c+xChH9Tw+trnEGQA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000989E9:EE_|CY8PR12MB7516:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5575fc6e-8ae3-4436-95a3-08dd3a16a70d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?kMdK6p1X+ELaVFErqLD8EJcQQQxUNdS7CWo8VJgW3rXcgOV3+kqh7c2HNM8P?=
- =?us-ascii?Q?ZDbkyitREiSyQzhnBoKPg4z0yloszX3iY1Ao3F4Yk7BF7jREfAKRur93fO2L?=
- =?us-ascii?Q?r4aWAHN0wjYLpZppRqpDhD15SILxyoAE8JxysQ22CawHwjds7pr9PXASbsDy?=
- =?us-ascii?Q?pM+s/Tk9ddXNepWQDuMH1XKVCBT+NlIQg4xoNLV2aGmXJ3RxuT+9qpsuW+4j?=
- =?us-ascii?Q?XIJSgGGInz4GqO+cy5DVMa5DBvbnfWfIAHSQ+/LNVsnLrry25cu6/kIFLyck?=
- =?us-ascii?Q?6VA7XiM416GmcXHkSMONe1HMeV294i/fa53J2G5yF0Kj3j+dWE8CYNV4W5IP?=
- =?us-ascii?Q?PQhKI/lk6nFXxjp9GfTPMWuH1sNuExjx6/XGzv3Tz51j6cPickZKZC/pSWaA?=
- =?us-ascii?Q?SUO/iLCynF5BkIWGxdDG/evrxNd5YZ8+K4g6ir7GfAs1lejQYazPPAbYTX0A?=
- =?us-ascii?Q?KyAXDQnD26yAOw2whSs2SaFG3IEsQgq1rjIXlRQbGcgSEGiB7Thfhg6Dg+L/?=
- =?us-ascii?Q?aobhQztkWZ8RnL5FBlvGMWR1B7Jxc5qBfZNff6mRjTz/l5j8cau91IV3F2i2?=
- =?us-ascii?Q?uiRoh4gRg+ipMCuX3gWmG0dR5T3l9wh2kXgpH2gofcyMfvA2J+VLq5HdGLi6?=
- =?us-ascii?Q?YIEbeZwApFf1idRPlVTWspADIrOv6OeaUgweIcB+TwhrIrsWA4Gmgmo86MPc?=
- =?us-ascii?Q?wnZRy5NXag/CEiW3rq+85nui0/OVJOirTLYp9qp3xn/AfPR86QcX8yPnumOb?=
- =?us-ascii?Q?bDTUUwB1EK3I8yacyJ4yXgkcrln/HjcKyBDdXmHUGbwJhsc13X3kSFl6TW3N?=
- =?us-ascii?Q?h7URF9hnv658kHsrFKWXlmeiB0wXCaV4XRx7i83KztvSct7DiW/fFSZ9wl8P?=
- =?us-ascii?Q?Vi/Qejgz1dinlUGCzooOgCCYPbwo65woOpOXgQKv69ZtXiXg60vf29i8a/Pc?=
- =?us-ascii?Q?WoKt3V9oXE9S2pXudNc16opojLn5a/MR6mPckrk43zhLrVpGlUdLZUm89bXX?=
- =?us-ascii?Q?IUddOCXvMI8aKiITROlPKZGLd7owWr8xrym8GIhHH5uU1rLA/mAgOM4RKb71?=
- =?us-ascii?Q?92urIvL/2qlwQkXLnWq3tNd2QwjvqGny3ChhxbSGlVhb7Eo/unoRxcE13F1V?=
- =?us-ascii?Q?nJQDHfwAAbJIDwzgPk+Q2K+Z4AVKBMiTA4U8bv2zjszmDUfRhWe0TzoQHT0H?=
- =?us-ascii?Q?/SxhEN3kj6BaKVdAVekvVSjue3sT/meRJmr9UED3AFuNJg3n2BsmWriQ1+B4?=
- =?us-ascii?Q?hRFS8LFVXUsuwnJvBKZuNL8h071LF6X1cka1PLU91jRdEaBeMhUB2UOUS8mz?=
- =?us-ascii?Q?OaVEtMxNkbdeox7Az2KFHMv95HecEaFRWOyfuvjDsZtTDLApFxG7N7CmlZUO?=
- =?us-ascii?Q?uP5Tsh5ais5zr0MysJSzOZ5dvhHk0OEkdzIr5GUUPLKq8hWF+hRQxwr/Gdnb?=
- =?us-ascii?Q?EQwHvN+BFo6FNSGLE6PZElHBD5RVJOls7Qci7dbxWb0Nik5MfV1Yxg=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2025 12:25:12.1761 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5575fc6e-8ae3-4436-95a3-08dd3a16a70d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989E9.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7516
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] mach-snapdragon: support parsing memory info from
+ external FDT
+Content-Language: en-US
+To: Sam Day <me@samcday.com>, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Matthias Brugger <mbrugger@suse.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250120-qcom-parse-memory-updates-v1-0-54a7f0550cff@samcday.com>
+ <20250120-qcom-parse-memory-updates-v1-2-54a7f0550cff@samcday.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250120-qcom-parse-memory-updates-v1-2-54a7f0550cff@samcday.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,70 +107,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Prasad Kummari <prasad.kummari@amd.com>
 
-Output images are generated via Binman only if SPL is enabled, as
-there is no consumer for them otherwise. An #ifdef check ensures that
-when SPL is enabled, Binman generates the U-Boot ITB. If SPL is disabled,
-ITB generation is skipped since the ITB format is supported only by SPL.
-Without SPL, generating such an image is unnecessary, as it would not be
-used
 
-The second reason is that when a DTB is passed, the current logic cannot
-handle it without an additional step in U-Boot to parse an appended FIT
-image and enable board-specific code to select the correct DTB config.
-The MULTI_DTB_FIT configuration should be used if support for multiple
-DTBs is required, but SPL is not being used.
+On 20/01/2025 20:43, Sam Day wrote:
+> Prior to this commit, board_fdt_blob_setup would decide which FDT to
+> use, either the external one from the previous bootloader, or the
+> internal one that was compiled into the binary.
+> 
+> This commit expands that behaviour a bit further, and introduces a
+> (default-enabled) option to always parse the /memory node from the
+> external FDT (if it's present and valid), even if we're going to
+> continue the boot with an internal one.
+> 
+> The rationale here is that many (all?) of the upstream DTs for the
+> msm8916 + sdm845 (and likely others) socs do not fully specify the /memory
+> node(s), since it's typically expected that the bootloader has selected
+> one of these from an Android boot.img and then filled in the memory
+> info.
+> 
+> Caleb's original explanation in the commit that introduced
+> qcom_parse_memory was dropped into a comment above that function, since
+> this part of the early initialization is getting quite nuanced. We don't
+> want uninitiated folks to see that code and run away screaming or give
+> away all their possessions and move to a monastery or something.
 
-Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+Maaaybe this last sentence isn't super necessary :P
+> 
+> Signed-off-by: Sam Day <me@samcday.com>
+> ---
+>  arch/arm/mach-snapdragon/Kconfig | 13 +++++++++
+>  arch/arm/mach-snapdragon/board.c | 57 +++++++++++++++++++++++++++-------------
+>  2 files changed, 52 insertions(+), 18 deletions(-)
+> 
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index 976c0e35fcef29bafecbbd6ea04459de852df275..0feb65a916459160a4da9947a6d7224930d507b4 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -45,4 +45,17 @@ config SYS_CONFIG_NAME
+>  	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+>  	  will be used for board configuration.
+>  
+> +config SYS_MEMORY_FROM_EXTERNAL_FDT
+> +	bool "Always parse /memory from external device tree, if it's provided"
+> +	default y
+> +	help
+> +	  When booting with an internal DT, we'll always use that since it's
+> +	  expected to be more accurate + up-to-date than whatever the previous
+> +	  bootloader hands us.
+> +
+> +	  The notable exception here is the /memory node. With this config option
+> +	  enabled, we'll initialize memory based on the information provided in the
+> +	  external DT from the previous bootloader, even if we use the internal DT
+> +	  for everything else.
 
- arch/arm/dts/zynqmp-binman-som.dts | 3 +++
- arch/arm/dts/zynqmp-binman.dts     | 2 ++
- 2 files changed, 5 insertions(+)
+I definitely understand why you made this a config option, but I think
+we can make this make sense at runtime (admittedly with a little bit of
+complexity).
 
-diff --git a/arch/arm/dts/zynqmp-binman-som.dts b/arch/arm/dts/zynqmp-binman-som.dts
-index 3d9d8476c98e..3ffa06f0c04f 100644
---- a/arch/arm/dts/zynqmp-binman-som.dts
-+++ b/arch/arm/dts/zynqmp-binman-som.dts
-@@ -13,6 +13,8 @@
- / {
- 	binman: binman {
- 		multiple-images;
-+
-+#ifdef CONFIG_SPL
- 		fit-dtb.blob {
- 			filename = "fit-dtb.blob";
- 			pad-byte = <0>;
-@@ -220,6 +222,7 @@
- 			fdtmap {
- 			};
- 		};
-+#endif
- #endif
- 	};
- };
-diff --git a/arch/arm/dts/zynqmp-binman.dts b/arch/arm/dts/zynqmp-binman.dts
-index 675f6bf51ebd..bf3335a3e539 100644
---- a/arch/arm/dts/zynqmp-binman.dts
-+++ b/arch/arm/dts/zynqmp-binman.dts
-@@ -14,6 +14,7 @@
- 	binman: binman {
- 		multiple-images;
- 
-+#ifdef CONFIG_SPL
- 		/* u-boot.itb generation in a static way */
- 		itb {
- 			filename = "u-boot.itb";
-@@ -201,6 +202,7 @@
- 			fdtmap {
- 			};
- 		};
-+#endif
- #endif
- 	};
- };
+What if we adjust qcom_parse_memory() to return an int, 0 on success and
+-ENODATA IFF (If and only if) the memory node has only a single entry
+with a size of 0.
+
+Then we can call it first with the internal fdt, if it returns -ENODATA
+and we have a valid external fdt then we can try that next.
+
+This way, your usecase with the msm8916 device will still work as
+expected (since it will gracefully fall back to the external fdt), but
+if for some reason we have a device where there needs to be an external
+fdt but we want to override the memory map we can still do so.
+
+I think we can live with the small overhead here and optimise it in the
+future if that becomes desirable, and avoid introducing a
+device-specific config option.
+> +
+>  endif
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 2ef936aab757c7045729a2dd91944f4f9bff917e..f637bce18546fb3a9fe389e07f457346ad5f95c8 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -88,6 +88,29 @@ int dram_init_banksize(void)
+>  	return 0;
+>  }
+>  
+> +/**
+> + * The generic memory parsing code in U-Boot lacks a few things that we
+> + * need on Qualcomm:
+> + *
+> + * 1. It sets gd->ram_size and gd->ram_base to represent a single memory block
+> + * 2. setup_dest_addr() later relocates U-Boot to ram_base + ram_size, the end
+> + *    of that first memory block.
+> + *
+> + * This results in all memory beyond U-Boot being unusable in Linux when booting
+> + * with EFI.
+> + *
+> + * Since the ranges in the memory node may be out of order, the only way for us
+> + * to correctly determine the relocation address for U-Boot is to parse all
+> + * memory regions and find the highest valid address.
+> + *
+> + * We can't use fdtdec_setup_memory_banksize() since it stores the result in
+> + * gd->bd, which is not yet allocated.
+
+Thanks for adding this!
+
+Kind regards,
+> + *
+> + * This function requires a pointer to the specific FDT that we should parse
+> + * for its /memory block. This is because when SYS_MEMORY_FROM_EXTERNAL_FDT is
+> + * enabled, we might be looking at the FDT provided by the previous bootloader,
+> + * rather than our internal (gd->fdt_blob) one.
+> + */
+>  static void qcom_parse_memory(const void *fdt)
+>  {
+>  	int offset;
+> @@ -153,13 +176,13 @@ static void show_psci_version(void)
+>   */
+>  int board_fdt_blob_setup(void **fdtp)
+>  {
+> -	struct fdt_header *fdt;
+> +	struct fdt_header *external_fdt, *internal_fdt;
+>  	bool internal_valid, external_valid;
+> -	int ret = 0;
+>  
+> -	fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
+> -	external_valid = fdt && !fdt_check_header(fdt);
+> -	internal_valid = !fdt_check_header(*fdtp);
+> +	internal_fdt = (struct fdt_header *)*fdtp;
+> +	external_fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
+> +	external_valid = external_fdt && !fdt_check_header(external_fdt);
+> +	internal_valid = !fdt_check_header(internal_fdt);
+>  
+>  	/*
+>  	 * There is no point returning an error here, U-Boot can't do anything useful in this situation.
+> @@ -167,24 +190,22 @@ int board_fdt_blob_setup(void **fdtp)
+>  	 */
+>  	if (!internal_valid && !external_valid)
+>  		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%#llx)\n",
+> -		      (phys_addr_t)fdt);
+> +		      (phys_addr_t)external_fdt);
+> +
+> +	if (IS_ENABLED(CONFIG_SYS_MEMORY_FROM_EXTERNAL_FDT) && external_valid)
+> +		/* Explicitly use the external FDT to configure memory */
+> +		qcom_parse_memory(external_fdt);
+> +	else
+> +		qcom_parse_memory(internal_fdt);
+>  
+>  	if (internal_valid) {
+>  		debug("Using built in FDT\n");
+> -		ret = -EEXIST;
+> -	} else {
+> -		debug("Using external FDT\n");
+> -		/* So we can use it before returning */
+> -		*fdtp = fdt;
+> +		return -EEXIST;
+>  	}
+>  
+> -	/*
+> -	 * Parse the /memory node while we're here,
+> -	 * this makes it easy to do other things early.
+> -	 */
+> -	qcom_parse_memory(*fdtp);
+> -
+> -	return ret;
+> +	debug("Using external FDT\n");
+> +	*fdtp = external_fdt;
+> +	return 0;
+>  }
+>  
+>  void reset_cpu(void)
+> 
+
 -- 
-2.43.0
+// Caleb (they/them)
 
