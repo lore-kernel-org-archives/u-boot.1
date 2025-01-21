@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD95AC02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 02:38:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 189AFC02182
+	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 04:49:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D3D280758;
-	Tue, 21 Jan 2025 03:38:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
+	by phobos.denx.de (Postfix) with ESMTP id 36434801F5;
+	Tue, 21 Jan 2025 05:49:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="atA03MBy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hCQC2CEi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 519CB80759; Tue, 21 Jan 2025 03:38:42 +0100 (CET)
-Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
- [202.36.163.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CAE11801F5; Tue, 21 Jan 2025 05:49:31 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB6B180326
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 03:38:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=alliedtelesis.co.nz
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Chris.Packham@alliedtelesis.co.nz
-Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id BC75C2C0DBB;
- Tue, 21 Jan 2025 15:38:36 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
- s=mail181024; t=1737427116;
- bh=euFlyJ4ELUMnmprlbV6zr9QMG3XcVq9M6QuJIh6pi1U=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=atA03MByqGpKzAcRsvFIG6CYJMsku6fM+FWOmaJTd6S1oLRxNiDeUm2dbJZuClAhC
- s90FkrIh+Is4o5O7ZJwcAxFKcueRK6rD89iI4IN4Jup+tITSztrtMaAM54/C1CnmDr
- tOKHlWJvYMYEmGtFRRIkdRdYZW2uWL5gKS0BzeLCgLWWC3QE1fJ8xudTWmHcWb9KRM
- KSpAnO+gC0j/JD7GkSJbgcxg5N6BsBro4wB+A7vdANkUfcTyPwyfgdGIPoVYKtKjQG
- rkWzo7K70IBuhUcXzePBA6tQ3wti++XNsSvLgzHbWKeGeHzNWxAGza877zmeyMZKuv
- mpgQI4oPi4l8A==
-Received: from svr-chch-ex2.atlnz.lc (Not Verified[2001:df5:b000:bc8::76]) by
- svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
- id <B678f08ac0000>; Tue, 21 Jan 2025 15:38:36 +1300
-Received: from svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8::76) by
- svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8::76) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Tue, 21 Jan 2025 15:38:36 +1300
-Received: from svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567]) by
- svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567%15]) with mapi id
- 15.02.1544.011; Tue, 21 Jan 2025 15:38:36 +1300
-From: Chris Packham <Chris.Packham@alliedtelesis.co.nz>
-To: Mark Tomlinson <Mark.Tomlinson@alliedtelesis.co.nz>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Chris Packham <judge.packham@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 2/2] drivers: rtc: max313xx: Ensure correct date is read
- after setting
-Thread-Topic: [PATCH 2/2] drivers: rtc: max313xx: Ensure correct date is read
- after setting
-Thread-Index: AQHba62S2u1uZxXljk2k1AJOnESYqw==
-Date: Tue, 21 Jan 2025 02:38:36 +0000
-Message-ID: <34272d64-aa8b-40ca-ab06-65afe3423037@alliedtelesis.co.nz>
-References: <20250120015941.1849667-1-mark.tomlinson@alliedtelesis.co.nz>
- <20250120015941.1849667-2-mark.tomlinson@alliedtelesis.co.nz>
-In-Reply-To: <20250120015941.1849667-2-mark.tomlinson@alliedtelesis.co.nz>
-Accept-Language: en-NZ, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.33.22.30]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <75558BB2F7ABAA4CAD1241D8A8609749@atlnz.lc>
-Content-Transfer-Encoding: base64
+ by phobos.denx.de (Postfix) with ESMTPS id 89530800CF
+ for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 05:49:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7b6edb82f85so699031785a.3
+ for <u-boot@lists.denx.de>; Mon, 20 Jan 2025 20:49:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737434968; x=1738039768; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=7VIXpRNOCtWGYA8F13JKjXQJlR7f7dzBpAu+0UaLhlA=;
+ b=hCQC2CEi1AohoZt2SqvyOIVu2WdjNfuQEh15wJ5Iw48Ivsm+OD4NCzVSt+A/qPWDnk
+ xYbM7yBtZR+z/xhYQBzbXWiN6vDcWweqBtQO+r3EWv3v0d4GTdMpTR0UUGqWxBSKNFKS
+ 58QAo6yvPsU7PCYN8hx+2Ypzoq91SrC9Q3cCA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737434968; x=1738039768;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7VIXpRNOCtWGYA8F13JKjXQJlR7f7dzBpAu+0UaLhlA=;
+ b=Z4r7hLg0k00lVJIPqKeJZvjucCG9yPORMHakNT6YoBu3OUtt0jtXb74O7FQSOzhXYj
+ BY98cdOK9arjddXoE9VSjihzQqo8UnvI4Bhs2C/bpdGrB0o4usfn81UUzf2XD9ftp2A1
+ Kqrb7iT68aY9E4UHutkTC2C3FgS4fXeOKiKHFSg0xccDwWSWd1oojq+aCGH3iDNVXNLu
+ wkO5zTrMaj6Q4UDfbki58mtoBS0AskvR5oQYqfOjMiv0T6LEcCfggC/UPoDdZ+DRjWti
+ cw5KIkMHaLFvmcwK3Ve36R0/TWK0eWPF8eEACjs/wkuA9GLqN5DS+WJwJ1mbu3YFVm1S
+ 1pEA==
+X-Gm-Message-State: AOJu0YySrJFj3uIiRG0Mm0fCnZOAB1BSDUorGJvry6E5ZQqiVIxZjaPG
+ HjR54wFHDMHRUuna94S3u+x9R+dmXRxByFuI2gw8yKzSdv5eVk2iWAFWcLq1fSF5gYvrT2th9hy
+ e
+X-Gm-Gg: ASbGnct0J62JQM14W0aWo+Q4mR6YRq/XHrND6SMyqRzdFpgSAjr6m8h2Aobsza+6gFk
+ 1rzLqjznsPTd21A71mPY+OVr84L/HRITqloOP2s+cFSmwKalcb/DGgjltPMk9u9T+gayWdGAIPN
+ 115KrFN7fkh6nWGDkfQTe2KSU3BCHxVo1fTym/2Aou/4MbZRYMW0l4OvIzt5Ak+Nm66yGAZOZci
+ cky/+ZNp52Mo7G55hbLUa8PgrLEh4w439NFXhOFiXsknngy0+O8A7pf9ylp8MmkVQ==
+X-Google-Smtp-Source: AGHT+IFQec5DYDK4EU0V9Xi1+gY7zXV9uGMxO3fIzrgG/EcYz+y08lzmcRL0VSMab/B74tgQO1FnuA==
+X-Received: by 2002:a05:620a:17a5:b0:7bd:bafc:32a8 with SMTP id
+ af79cd13be357-7be6320234emr2272533085a.24.1737434968422; 
+ Mon, 20 Jan 2025 20:49:28 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be61487e0bsm520090885a.59.2025.01.20.20.49.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jan 2025 20:49:27 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250115012322.215243-1-trini@konsulko.com>
+References: <20241220222612.1757884-1-trini@konsulko.com>
+ <20250115012322.215243-1-trini@konsulko.com>
+Subject: Re: [PATCHv2 0/6] Rework the BLK symbol usage in Kconfig
+Message-Id: <173743496658.2923241.16951608849619908447.b4-ty@konsulko.com>
+Date: Mon, 20 Jan 2025 22:49:26 -0600
 MIME-Version: 1.0
-X-SEG-SpamProfiler-Analysis: v=2.4 cv=BNQQr0QG c=1 sm=1 tr=0 ts=678f08ac
- a=Xf/6aR1Nyvzi7BryhOrcLQ==:117 a=xqWC_Br6kY4A:10 a=75chYTbOgJ0A:10
- a=IkcTkHD0fZMA:10 a=VdSt8ZQiCzkA:10 a=pGLkceISAAAA:8 a=3FyghA0lbrn3jub3NLwA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=kkB4UJddPxAZW7rNxBJ9:22
-X-SEG-SpamProfiler-Score: 0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,23 +92,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DQpPbiAyMC8wMS8yMDI1IDE0OjU5LCBNYXJrIFRvbWxpbnNvbiB3cm90ZToNCj4gV2hlbiBzZXR0
-aW5nIHRoZSB0aW1lIG9uIHRoZSBNQVgzMTM0MywgdGhlIHRpbWUgaXMgbm90IHVwZGF0ZWQNCj4g
-Zm9yIG9uZSBzZWNvbmQsIGFuZCByZWFkaW5nIHRoZSB0aW1lIGluIHRoaXMgaW50ZXJ2YWwgd2ls
-bCBnaXZlDQo+IHRoZSBvbGQgdGltZS4gV2FpdCBvbmUgc2Vjb25kIGFmdGVyIHdyaXRpbmcgc28g
-dGhhdCB0aGUgZGF0ZQ0KPiBjb21tYW5kIHdpbGwgc2hvdyB0aGUgY29ycmVjdCB0aW1lIHdoZW4g
-c2V0dGluZyB0aGUgY2xvY2suDQo+DQo+IFNpZ25lZC1vZmYtYnk6IE1hcmsgVG9tbGluc29uIDxt
-YXJrLnRvbWxpbnNvbkBhbGxpZWR0ZWxlc2lzLmNvLm56Pg0KPiBDYzogQ2hyaXMgUGFja2hhbSA8
-anVkZ2UucGFja2hhbUBnbWFpbC5jb20+DQpSZXZpZXdlZC1ieTogQ2hyaXMgUGFja2hhbSA8anVk
-Z2UucGFja2hhbUBnbWFpbC5jb20+DQo+IC0tLQ0KPiAgIGRyaXZlcnMvcnRjL21heDMxM3h4LmMg
-fCA1ICsrKysrDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygrKQ0KPg0KPiBkaWZm
-IC0tZ2l0IGEvZHJpdmVycy9ydGMvbWF4MzEzeHguYyBiL2RyaXZlcnMvcnRjL21heDMxM3h4LmMN
-Cj4gaW5kZXggY2NmZDZiNmQwZTIuLjJjYjNmMjQ1MDQxIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJz
-L3J0Yy9tYXgzMTN4eC5jDQo+ICsrKyBiL2RyaXZlcnMvcnRjL21heDMxM3h4LmMNCj4gQEAgLTMw
-Nyw2ICszMDcsMTEgQEAgc3RhdGljIGludCBtYXgzMTN4eF9zZXRfdGltZShzdHJ1Y3QgdWRldmlj
-ZSAqZGV2LCBjb25zdCBzdHJ1Y3QgcnRjX3RpbWUgKnQpDQo+ICAgCQlpZiAocmV0KQ0KPiAgIAkJ
-CXJldHVybiByZXQ7DQo+ICAgDQo+ICsJCWJyZWFrOw0KPiArCWNhc2UgSURfTUFYMzEzNDM6DQo+
-ICsJCS8qIFRpbWUgaXMgbm90IHVwZGF0ZWQgZm9yIDEgc2Vjb25kIGFmdGVyIHdyaXRpbmcgKi8N
-Cj4gKwkJLyogU2xlZXAgaGVyZSBzbyB0aGUgZGF0ZSBjb21tYW5kIHNob3dzIHRoZSBuZXcgdGlt
-ZSAqLw0KPiArCQltZGVsYXkoMTAwMCk7DQo+ICAgCQlicmVhazsNCj4gICAJZGVmYXVsdDoNCj4g
-ICAJCWJyZWFrOw==
+On Tue, 14 Jan 2025 19:22:07 -0600, Tom Rini wrote:
+
+> Hey all,
+> 
+> One problem we have today is how the BLK symbol is set and used in
+> Kconfig files. Part of the challenge is that we use it as a gating
+> symbol for "we have a block device" and also for "enable block device
+> library code". What this series does is move to always use "select BLK"
+> by block drivers (a few were and a few others had it the inverse) and
+> then "depends on BLK" for functionality that needs a block device
+> present. The end result of this series is that a number of platforms
+> which had disabled EFI_LOADER now don't ask for it (they have no block
+> device) and espresso7420 has a regression about MMC support fixed. With
+> v2 of this I've picked up the review tags from v1 and also reworded the
+> body of the commit in the first patch.
+> 
+> [...]
+
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
+
