@@ -4,92 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E47AC02182
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 15:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D19A7C02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 15:43:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BA8A807EC;
-	Wed, 22 Jan 2025 16:34:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3D40280805;
+	Wed, 22 Jan 2025 16:43:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i5PYDvl9";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="oRGLgmkQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 689D880805; Wed, 22 Jan 2025 16:34:18 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 41ACD80824; Wed, 22 Jan 2025 16:43:09 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A159807E9
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 16:34:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9DDC807EC
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 16:43:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5d41848901bso2213037a12.0
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 07:34:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737560055; x=1738164855; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DI+IQpbl30II+lJrHDIqfNS950U8Zz8eUfH2MvMVjLs=;
- b=i5PYDvl9lmUW+Ws4n6019H7eg7M+vygHmQUJYsdohffIn+w0V2y4cONQ3xjxN+raqM
- Q8b69iG0V0frsiZDci6kwXG12tKivBmLC2ylIHXY8qQoVUfGm/A8fqTZF+ahUOgbCAPO
- JHSgsuAUSMjZ1fL0XiV0jxehr0grrRbjyUO+JoYx0sqPjpIHN21+OnoLHfDDWlQKFpBX
- HGNoWp8W4IgXDI+bA3GVYKVHqB+SewR7n+Yd09Bw/EjcbNqSZPcYHKpA+/30Ffz6KeJA
- z0qTuuB0QdaNIGi1a0YBlGjGVSbipwFs0vzVqrIV/Gn9kM2l8B30u5RGS30HO4G127wh
- 1gfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737560055; x=1738164855;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DI+IQpbl30II+lJrHDIqfNS950U8Zz8eUfH2MvMVjLs=;
- b=Ff48OFedTgRVVb/dpkf9h0KGzYEZfPhXVIFOK9NG92HGlEr/seqSg86WQc2RZNsSE/
- BJy0E+rmj47J70x5wWaPd12SM2E/k0cMP4LszrrFX3+/ia/Qs6viQoNOzKAMe+ZCHhdv
- Y8qYe2va0HvPnP8DkFihpcohafvd+1+vnZYoc/Zfd20+SIxKl23v5lDr2D1FPzengBv0
- TWYaMKwbExpC9XjeFTUE/etvjnMKekge216UwYmwHjx8JpSvBQIU/2nue1fFYayU1gC6
- /KQnN6iI2bI5KzoM79xm2R6EnrMjXSS1LeANTXPgJIU/MoE48M22bQdL1CvEc/JZah3z
- IuTQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlriV5lvLPadvIChgF574GvyoUD4yMJMsVp1LZPkF2dqIaqIwyZyV0oWV+LYgahTb5diBTEMg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHA3J6vKseOYwY/u0b5lJ2Af3DaYbhHwZG7CZYIryo4m6IgEVH
- TB4szNYa1QIxyzmDJhuJCKUP9uGR05cwDi9moyBjj6J7GeU3GYI9DkkpjXH46Zs=
-X-Gm-Gg: ASbGncv9ZpMwrPwSGeF7TtM8sGEWv7bJ/oUwSTOtrudCxvOsxR0EVRSkupQcvt4dRqt
- fMOTryllWNztpaxsz9C2Z1ST4HYkmaSy0jwfwSdGopYN/B6WyvKw1Yc/8FKuSlHXkg6ndjumQAF
- OMFSXYYh59YagrFYjXbR31nTXxw3pchsPKCkP3Y50h7oaK9vaVqoeCJ3UOm4CBrWIcesL91UymN
- ipKoicotR1AmchSyCirvsHhart1a70Vg/Z5hg5sWSojYyZMqUnzgaYv+2RY5TgyZYYsdIRgp48U
- lZ0hLDioQJ/bI3w2cU42/XSMgGO3wlkLqoHcYC9fB3+eKjuK50HX
-X-Google-Smtp-Source: AGHT+IGC6PhDELu/d9Z0hvpWd01YhtCA48ftOBjGMKR3On/r+rBPiwFF6YOIj135/0sjgWXIg9YHNw==
-X-Received: by 2002:a50:9f26:0:b0:5db:68bd:ab71 with SMTP id
- 4fb4d7f45d1cf-5db68bdaef2mr17495275a12.7.1737560055514; 
- Wed, 22 Jan 2025 07:34:15 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5db73edccd4sm8810077a12.77.2025.01.22.07.34.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jan 2025 07:34:14 -0800 (PST)
-Message-ID: <dfa6e9cc-5d29-453a-8cbe-6154104814bf@linaro.org>
-Date: Wed, 22 Jan 2025 16:34:13 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wIiQyxlc0WeFBUekMKiVJFcTvfpiOtqOHztstrPNWMdYUsvTX1+snU4c6GI4TzrFEaDbcaulU3n+1QC9Vqi5KfAb0wXpJYHEP+W5nTS+gABsAwKv1zwpPXBNAHTqjFXCsucn8sS3svbMI4W/SdTvYpIptZRuHt7huLvi8v50mWqYD6hKUCbY7ti7wx7qe1415rc4+spsDpcM8S2MmEIipaQQUGjsvWP4eJCxuvYyYo14iGirfKEhSVAips6EHKd/4wuAEclQ0JR+2+xnjeM2s3AvYZBDjvWesDg2Bkx1MU6Tq+bVuFwMan2l3f44kfOMEW4oQmvi1zj8nOcYb6rkvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FO+Zl8g82tU7scvwAZ9uJDu/WYBLSmsiwZwA5hjIAZM=;
+ b=TMAJmxmDiaiPQxAKXFMKRd345eAeiRTIwCpE6YpFPGMFTtaF7R5kD6qo0pndnvCE6HY3A31XrH39xby8aLPSToPSVpa1aZRw0OTISlcTQQsSm5UPXEbQqUUM20QU2PGw1YmDy9qU5VuWR+U6iIHyRwMKIpp09DpBfus+QszsWYb48fLACFnU+SqWfXb3/H7/KfRrDMW1040+r/lxnoSnWxfnz8+ODioDAkaemsVf3+EaPIxryLwsV/z5hfoNc0RMFoqJ8jV3tAB8Mq1+t2VM2TnNxL0O0hhsUE2dLgjR1TA8e+aoOlX4GGhAEzXUT5UspkZMYed8PpChCRIa2Uj4PQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FO+Zl8g82tU7scvwAZ9uJDu/WYBLSmsiwZwA5hjIAZM=;
+ b=oRGLgmkQUSkGY57OaNd/ClLuCrKucmh1sEQ0YTGcSd3krW3JdyfLGHSWHMTo0uy3uABFGRN7Rmq2592oj/HOOnyqW2TSNXS8STYC6/ja47SLhcqnXyMb7Sqm/tEc1mLsUAUqMmVWROEhl8idEdVJ4zlVr3Dsm65eaEjCwkjX8k8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by VI0PR04MB10461.eurprd04.prod.outlook.com (2603:10a6:800:216::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.21; Wed, 22 Jan
+ 2025 15:43:03 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8356.020; Wed, 22 Jan 2025
+ 15:43:03 +0000
+Message-ID: <ec967669-a715-4f16-854a-958607df13b8@cherry.de>
+Date: Wed, 22 Jan 2025 16:43:02 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/6] clk/qcom: add initial clock driver for qcs9100
+Subject: Re: [PATCH v3] image: apply FDTOs on FDT image node without a load
+ property
+To: Marek Vasut <marex@denx.de>, Quentin Schulz <foss+uboot@0leil.net>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
+References: <20250122-extlinux-relocate-dtb-when-dtbo-v3-1-46bef4eac720@cherry.de>
+ <ee42f531-0084-467e-86e5-3c16a8c90cb4@cherry.de>
+ <d973c75a-5b54-42aa-b68f-dcf45f8b3144@denx.de>
 Content-Language: en-US
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
- seanga2@gmail.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- Volodymyr_Babchuk@epam.com, lehmanju@devpi.de, bhupesh.linux@gmail.com,
- konradybcio@kernel.org, quic_tengfan@quicinc.com, andersson@kernel.org,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250110050817.3819282-1-quic_varada@quicinc.com>
- <20250110050817.3819282-4-quic_varada@quicinc.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250110050817.3819282-4-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <d973c75a-5b54-42aa-b68f-dcf45f8b3144@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0158.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b3::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI0PR04MB10461:EE_
+X-MS-Office365-Filtering-Correlation-Id: b8403898-7b58-4b92-3160-08dd3afb752a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QlhSL051UUkxV0g0Tmthc2pzbHFWVFVFSlZIc0RnK0xkYTlXUDArZlVCNVF2?=
+ =?utf-8?B?OCtWN3VITkpHaWNWU29oWlRFSUtMN1V1eXVwWWQxZkU2RXN5RkJXWXBHRURE?=
+ =?utf-8?B?czhOUUM0NVBmUlVkTllEczRBaXVzdjhSdVI0VnFMZkd4ay9RblArem4yUXJT?=
+ =?utf-8?B?OHJaZkk0bTQyU1UwOTJ6UFhzeU1GdWhydnlmejVWMUMrWm9Rbm1tQkVOMEVr?=
+ =?utf-8?B?c1pET1hwb2orZXp6MzFpc1EvYlF0cyttUFBGY2Q2VzBobXI2V2gydkxjUHNJ?=
+ =?utf-8?B?dzUyeVVENzdQT3hPRzJuVElYTEZ5ZlIzdnFGdSt3Rk5GcVBDUURwbmprUW9M?=
+ =?utf-8?B?dDZvWUMzbm1TcklDczF2aFVGTFVsa3JYUEUyWGM5anRSSEgwY3NxNlcvQU1B?=
+ =?utf-8?B?THJ1SVZhL3cwVHJPeXVSaTRIK1gwZlhVSGU0b3ZWbko0a0RCTGlOZzA3azV6?=
+ =?utf-8?B?Mnk1MFRWM0xhb0JaTk14QVBBUEJoUXlsakRLVnAxWUFwalBHc2NabHl5aUNK?=
+ =?utf-8?B?cEF5emtKZlZUbXhoTVhSVW9XOUpOS0ZrRUgyV3luSEtvS0l4WHVnYkJybTNB?=
+ =?utf-8?B?QWdlVnpIcjhoNFFoSDhmdld5WWtjaXRHNXQvSnl5eEhxdVQrSjFxd1ZiMVF4?=
+ =?utf-8?B?aFVVaXJreUs1aWtrU3hmRUVHbWkvUHdGQkxneldsUGh0NHdzbDlLT0VXOWJt?=
+ =?utf-8?B?aFpRSys3UjlUclBBcElSaGtjRmtQSjhLUkV3NnBDSjRCLzZqb2JQZmdkblNa?=
+ =?utf-8?B?TFJIR1JSWmdEeGo1blp2NEFkZmxPa01xWFRDYm5EZ1lueXovWVJRZVZ1R29j?=
+ =?utf-8?B?QTROYS9pKzVlNjE4U2FvVStuVVJveS9LRi85YUpqYWdqVWtXclZ6am9qQy9p?=
+ =?utf-8?B?T0UyWUFWRERzbUs0TUVhLy81TzloRzBhSGw0Zm0yZDNqdXNMQU5kZkdXRWI0?=
+ =?utf-8?B?T0xnVG5DUktwNk1sNnQ5Z1d4dHdNOGJLTUMwNDNKV2JzeE1wZjhkWGQ3VnQ4?=
+ =?utf-8?B?R1NLdkYrVU9HQ0IvWlkxRDYwQStVR2xWbTVaSkVOcDRmNTFnV2xaRWw1VmYy?=
+ =?utf-8?B?UCs1dzhvclZ0R1VZR29LSDJMclJ6ZTczNXkzelE5ZkxLdkVSSTRsblJtZWtK?=
+ =?utf-8?B?YlBRRHA3UE8zMjdTR1dkUnhvR09pY2NJY1B4RzUzNTZpNm1KMEY2NEZHL0Ux?=
+ =?utf-8?B?alRPWjNxT2pUVDRZYzRhM0tQRUY1cUh2TXNnQVlhVnFONVoxZmkrQ3BOMm10?=
+ =?utf-8?B?SHFRNFVsZVczdmtBS3NoN0xXR1dqZktiL3lJV2h5WWtYVFFyZ05RL3hFdHNa?=
+ =?utf-8?B?REtldFJSR0hzZHFKbFkwOVRuVTZIUFhBZE9Yd0YwTldKZWxxeFhjcEprYUF0?=
+ =?utf-8?B?REhCL3NvU2ZZckx3SDlBTlRUZDE0STRmWWx6d2FpK1JWd1pCMVo5MWdOZzVR?=
+ =?utf-8?B?Smt3bStNc05BSzlMczV6d0R2QkpkY2hXQW9sdEVsNFFrTTU0Vk1TV2VjN1Qz?=
+ =?utf-8?B?eVNxazJPZWJzWkpXakltRDNiYlZ6Y0RWSkJXL1psZ25RK21xWVVHdzJVb1dE?=
+ =?utf-8?B?YlAvOWlrS2ZOTjM5WnJDOEtFWWJpOXROY0h0clVWV0RkVkhzT2Nna0dPd2pX?=
+ =?utf-8?B?SmFSNFhJKzllTC9zYTBvWnlpdUpGK1FOaDk5NThrVGhkTGRSMDM5bEVBSS9W?=
+ =?utf-8?B?eUZ3MytXVTQ0ZWZHYXh4dlhtMHJ3SlNGc3BIQjg0cWgrK21ZUDU5Q010Z2Qv?=
+ =?utf-8?B?MzBDTW9va0JrbDNCL01lc2N5VlV1SUZJSGQvbm45b2g2WUFpMFJrclkzOGZv?=
+ =?utf-8?B?TTBKRmhPNGZwR3lXZTluMitFb3djbDBXUWlmN3ZyeW1yUjB0UnJmeGZZRDFH?=
+ =?utf-8?Q?ZjNp7QtRx2/ii?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d1dzSnIxZkpGU3poMS83YXg4S1dCcFQ0bWVPa1lCWCthUmpMbi9ZbDdveXk4?=
+ =?utf-8?B?bzVWSjdyVEhIbVBka0JCOTl5SjBDampETWlGb3lodlNnQTZlazcxN21BYktY?=
+ =?utf-8?B?YTVaUzhqWElQL1c1M0hqR0hNU1JNd2ZsWDlXbUlpVlNMb2pUeDNobUxuOVhq?=
+ =?utf-8?B?SEJWUUp0d0htSzMzYWh0K3NobndnVkFyQlZuNTZ5QmMrajJMTGkxYktCK0o1?=
+ =?utf-8?B?SGxwTW0rcjByaGhhSXI4VXlMU2FBdnRsTnByR2Zxbkd6dkdIcDVQeGtVRHdx?=
+ =?utf-8?B?dkpST3gvMHVqZzNYMklIb1RMYTVsOEFJZFJ0dys4RCt5cFRxMEFoVG5DQzQy?=
+ =?utf-8?B?UDVGbERVRmZqVktIclhDYzliampvQTQ0Nk9OWENHTGdWZmY1cytDU0UrMmlX?=
+ =?utf-8?B?SW5WRGtraklNTmdpaVh0cEVSZTdSMzQ5U2VUUmRxdFNpOG5oZzdKM1VlYjRC?=
+ =?utf-8?B?N2lTT3c3bm95TC9UQ2c5OGtYTTVESjVJTlpJd1ZPYXNyWGpBZVhYU1hWUUVz?=
+ =?utf-8?B?QVZUQjVqWHpyM3R4YWxKc0Frb1FMQ21wVTVDNmZsc2VXeFNnUHE3VlpZVjk0?=
+ =?utf-8?B?UUdETVZzcURuOTVVdTZ0UHZxWHVlU2FQUk4yb2J2VUhpSTFoL2U5WmtFUjRD?=
+ =?utf-8?B?SG1rYjlvMHhKbURKcE9CbFRzVzhhS3l3YnFaampSS0loVWcrQVY4SGpDblB6?=
+ =?utf-8?B?SWJqUGRobkk2cnhMU0R1UGp4a1F5VWV4aThxYWFQMFpXWk9Rd2cySnlERDFi?=
+ =?utf-8?B?ME85RCt0ZDJkd3l6a05adkdxNFlnL2k0TFlrUUxoTHVLRjEwUHBNZmkzeGlo?=
+ =?utf-8?B?czQvQkkyL3VyUlJxL290dkhGdStUdno4ZTdwSVhKS0pZQ0liN3NGQlgzQVpQ?=
+ =?utf-8?B?UURUeTE2ckd3d2J1bWxBc3BrbXJyZFZHUlJqNkgxUXpUTkp6RkJkU1I4ZWNP?=
+ =?utf-8?B?K0s4alR2UGl2YkpTM3Q3T2Mxc0VEblhiUHMzTlRaU1F5UXBqZlBVd0tBM0dG?=
+ =?utf-8?B?U2c1SkJOUG1GRTBWUE5ybmRUeWVJYUswSkp5Q0NvdnFUUzNlcUtJSy8yRjVN?=
+ =?utf-8?B?SzBZTkVzVkgwWUhhS0JBQzhWMjhzVkMvamlGb3QydnNvNE1CQ2RXcXdiSktP?=
+ =?utf-8?B?QWtqb3FzWmc2dkJveDM5K2M2cGVzbHNvaTVadEdZUHJ1cW1Rangyckh4Vk5Z?=
+ =?utf-8?B?ZTdxaVNQSjRxOEN0OGtPS29QSmJiR2g0dHdUWnFlVE5VVHFzc09QeEJhaHR5?=
+ =?utf-8?B?MCtCakpid3JjYU5DWUtrb1RvSjJyTmhoVXpMYTlQTFBSRHpOL2k0TGR2alRJ?=
+ =?utf-8?B?Q09Kck1IcU4rcDVQWUZ2RCtHNWIxWXY3K0c5OHcyekJ2QzBrSjk1WW81SVhZ?=
+ =?utf-8?B?MUNEeGxXWjlxMVgyRHk2Wk1qVzRkdlp2T2h2a29ER2hPNU91VUNQajFzZ0I0?=
+ =?utf-8?B?MG9RZHpzaVgvb2VyNnRwMU5SL21PWFVRSzlDYkF6YTlvMVhkQ3dNbFc1cEVt?=
+ =?utf-8?B?ZEZzRTFQRlJIcEtsU1F4YUNWLys2YVRpb1lDUmJMeWRHSlR5em1ZU1VpOUUy?=
+ =?utf-8?B?dFJRd1JIeVJmN0RKTVF2VU9aZGlvbVIvNjN6dWs5L2NEajF4VEI3L0ZnVXpn?=
+ =?utf-8?B?aGw2UTlpenlVcnk3M2lyQ2Nlb0p1QTBteXFObkIzWUtjdExoUmp5bS92MEdX?=
+ =?utf-8?B?Sk9qSkc5QWZyd1plOE4rLytrdlk1aVFTZGYzUjJyckcvRjd0VVc1aTdVaDZL?=
+ =?utf-8?B?OUxySWdLNWtnaG5mQ1A3d3R3WjNwaTlMWXNBL0gyTjRzOVBLekphRGU3Q2F2?=
+ =?utf-8?B?MGVtWHhWS0VkRzFqWGJTUGtOMUJjc0hWa0R4MGgzalYvYW40N01CeXJxTTd3?=
+ =?utf-8?B?VzJiNUxPZWpicC9HckhSUkduYks2Z1JwZVBVeGRpK01UM1dlUGZwcGR3QzVL?=
+ =?utf-8?B?amt0bUhaKzVMeThlNm84eGcza21BRWFIYlNVd2toWFVacWhIWHlFOEdmVlFl?=
+ =?utf-8?B?MHpBSEdnRHkwZEZTY2tCVFdDVEpaWnRHK0VhMVFuOTFPZFpCaTBBcHdidDRZ?=
+ =?utf-8?B?L2lQNzQzTWVFS2R1YTdTekF1bDFVZVRscEpiQnA5VXV3eWdHbERpWXlJRFZB?=
+ =?utf-8?B?ektreWV4TnRUb0ozTUFIVEJpeCtNanFTTFBZQ05LeTJIcG1WRGpMcFNienR5?=
+ =?utf-8?B?eHc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: b8403898-7b58-4b92-3160-08dd3afb752a
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2025 15:43:03.4236 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NZn8yv4kws6giFKi6jb6Af9M24U5SoZeMitTSJI+XJJLxgd0kGpWv6pOyocuFW0HhQHSeDfZZGwKK+crj/I+QUG3OoGQriTfgycdisOYuQM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10461
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,209 +177,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
 
-
-On 10/01/2025 06:08, Varadarajan Narayanan wrote:
-> Add initial set of clocks and resets for enabling U-Boot on QCS9100
-> based Ride platforms.
+On 1/22/25 3:32 PM, Marek Vasut wrote:
+> On 1/22/25 3:21 PM, Quentin Schulz wrote:
 > 
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-
-Just a small nit: please keep the Kconfig and Makefile in alphabetical
-order.
-
-Additionally, use tabs for indentation in Kconfig files.
-
-No need to respin, I'll fix it while applying.
-
-Kind regards,
-> ---
-> v2: Add 'Reviewed-by: Neil Armstrong'
-> ---
->  drivers/clk/qcom/Kconfig         |   8 ++
->  drivers/clk/qcom/Makefile        |   1 +
->  drivers/clk/qcom/clock-sa8775p.c | 142 +++++++++++++++++++++++++++++++
->  3 files changed, 151 insertions(+)
->  create mode 100644 drivers/clk/qcom/clock-sa8775p.c
+> [...]
 > 
-> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-> index d76fca5dba..ad5797ab85 100644
-> --- a/drivers/clk/qcom/Kconfig
-> +++ b/drivers/clk/qcom/Kconfig
-> @@ -103,6 +103,14 @@ config CLK_QCOM_SC7280
->  	  on the Snapdragon SC7280 SoC. This driver supports the clocks
->  	  and resets exposed by the GCC hardware block.
->  
-> +config CLK_QCOM_SA8775P
-> +        bool "Qualcomm SA8775 GCC"
-> +        select CLK_QCOM
-> +        help
-> +          Say Y here to enable support for the Global Clock Controller
-> +          on the Snapdragon SA8775 SoC. This driver supports the clocks
-> +          and resets exposed by the GCC hardware block.
-> +
->  endmenu
->  
->  endif
-> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-> index ab33f1c5fa..01b541af32 100644
-> --- a/drivers/clk/qcom/Makefile
-> +++ b/drivers/clk/qcom/Makefile
-> @@ -15,3 +15,4 @@ obj-$(CONFIG_CLK_QCOM_SM8150) += clock-sm8150.o
->  obj-$(CONFIG_CLK_QCOM_SM8250) += clock-sm8250.o
->  obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
->  obj-$(CONFIG_CLK_QCOM_SM8650) += clock-sm8650.o
-> +obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
-> diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
-> new file mode 100644
-> index 0000000000..e31f24ed4f
-> --- /dev/null
-> +++ b/drivers/clk/qcom/clock-sa8775p.c
-> @@ -0,0 +1,142 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Clock drivers for Qualcomm sa8775p
-> + *
-> + * (C) Copyright 2024 Linaro Ltd.
-> + */
-> +
-> +#include <linux/types.h>
-> +#include <clk-uclass.h>
-> +#include <dm.h>
-> +#include <linux/delay.h>
-> +#include <asm/io.h>
-> +#include <linux/bug.h>
-> +#include <linux/bitops.h>
-> +#include <dt-bindings/clock/qcom,sa8775p-gcc.h>
-> +#include "clock-qcom.h"
-> +
-> +#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf038
-> +#define USB30_PRIM_MASTER_CLK_CMD_RCGR 0xf020
-> +
-> +static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	if (clk->id < priv->data->num_clks)
-> +		debug("%s: %s, requested rate=%ld\n", __func__,
-> +		      priv->data->clks[clk->id].name, rate);
-> +
-> +	switch (clk->id) {
-> +	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
-> +		WARN(rate != 19200000, "Unexpected rate for USB30_PRIM_MOCK_UTMI_CLK: %lu\n", rate);
-> +		clk_rcg_set_rate(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
-> +		return rate;
-> +	case GCC_USB30_PRIM_MASTER_CLK:
-> +		WARN(rate != 200000000, "Unexpected rate for USB30_PRIM_MASTER_CLK: %lu\n", rate);
-> +		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
-> +				     1, 0, 0, CFG_CLK_SRC_GPLL0_ODD, 8);
-> +		clk_rcg_set_rate(priv->base, 0xf064, 0, 0);
-> +		return rate;
-> +	default:
-> +		return 0;
-> +	}
-> +}
-> +
-> +static const struct gate_clk sa8775p_clks[] = {
-> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0x1b088, 1),
-> +	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK, 0x1b018, 1),
-> +	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK, 0x1b084, 1),
-> +	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0x1b020, 1),
-> +	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0x1b024, 1),
-> +	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0x1b05c, 1),
-> +	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0x1b060, 1),
-> +};
-> +
-> +static int sa8775p_enable(struct clk *clk)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	if (priv->data->num_clks < clk->id) {
-> +		debug("%s: unknown clk id %lu\n", __func__, clk->id);
-> +		return 0;
-> +	}
-> +
-> +	debug("%s: clk %ld: %s\n", __func__, clk->id, sa8775p_clks[clk->id].name);
-> +
-> +	switch (clk->id) {
-> +	case GCC_AGGRE_USB3_PRIM_AXI_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB30_PRIM_MASTER_CLK);
-> +		fallthrough;
-> +	case GCC_USB30_PRIM_MASTER_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
-> +		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
-> +		break;
-> +	}
-> +
-> +	qcom_gate_clk_en(priv, clk->id);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct qcom_reset_map sa8775p_gcc_resets[] = {
-> +	[GCC_CAMERA_BCR] = { 0x32000 },
-> +	[GCC_DISPLAY1_BCR] = { 0xC7000 },
-> +	[GCC_DISPLAY_BCR] = { 0x33000 },
-> +	[GCC_EMAC0_BCR] = { 0xB6000 },
-> +	[GCC_EMAC1_BCR] = { 0xB4000 },
-> +	[GCC_GPU_BCR] = { 0x7D000 },
-> +	[GCC_MMSS_BCR] = { 0x17000 },
-> +	[GCC_PCIE_0_BCR] = { 0xa9000 },
-> +	[GCC_PCIE_0_LINK_DOWN_BCR] = { 0xBF000 },
-> +	[GCC_PCIE_0_NOCSR_COM_PHY_BCR] = { 0xBF008 },
-> +	[GCC_PCIE_0_PHY_BCR] = { 0xAD144 },
-> +	[GCC_PCIE_0_PHY_NOCSR_COM_PHY_BCR] = { 0xBF00C },
-> +	[GCC_PCIE_1_BCR] = { 0x77000 },
-> +	[GCC_PCIE_1_LINK_DOWN_BCR] = { 0xAE084 },
-> +	[GCC_PCIE_1_NOCSR_COM_PHY_BCR] = { 0xAE090 },
-> +	[GCC_PCIE_1_PHY_BCR] = { 0xAE08C },
-> +	[GCC_PCIE_1_PHY_NOCSR_COM_PHY_BCR] = { 0xAE094 },
-> +	[GCC_PDM_BCR] = { 0x3F000 },
-> +	[GCC_QUPV3_WRAPPER_0_BCR] = { 0x23000 },
-> +	[GCC_QUPV3_WRAPPER_1_BCR] = { 0x24000 },
-> +	[GCC_QUPV3_WRAPPER_2_BCR] = { 0x2A000 },
-> +	[GCC_QUPV3_WRAPPER_3_BCR] = { 0xC4000 },
-> +	[GCC_SDCC1_BCR] = { 0x20000 },
-> +	[GCC_TSCSS_BCR] = { 0x21000 },
-> +	[GCC_UFS_CARD_BCR] = { 0x81000 },
-> +	[GCC_UFS_PHY_BCR] = { 0x83000 },
-> +};
-> +
-> +static const struct qcom_power_map sa8775p_gdscs[] = {
-> +	[UFS_PHY_GDSC] = { 0x83004 },
-> +	[USB30_PRIM_GDSC] = { 0x1B004 },
-> +};
-> +
-> +static struct msm_clk_data sa8775_gcc_data = {
-> +	.resets = sa8775p_gcc_resets,
-> +	.num_resets = ARRAY_SIZE(sa8775p_gcc_resets),
-> +	.clks = sa8775p_clks,
-> +	.num_clks = ARRAY_SIZE(sa8775p_clks),
-> +
-> +	.power_domains = sa8775p_gdscs,
-> +	.num_power_domains = ARRAY_SIZE(sa8775p_gdscs),
-> +
-> +	.enable = sa8775p_enable,
-> +	.set_rate = sa8775p_set_rate,
-> +};
-> +
-> +static const struct udevice_id gcc_sa8775p_of_match[] = {
-> +	{
-> +		.compatible = "qcom,sa8775p-gcc",
-> +		.data = (ulong)&sa8775_gcc_data,
-> +	},
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_sa8775p) = {
-> +	.name		= "gcc_sa8775p",
-> +	.id		= UCLASS_NOP,
-> +	.of_match	= gcc_sa8775p_of_match,
-> +	.bind		= qcom_cc_bind,
-> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
+>>> @@ -2395,17 +2395,18 @@ int boot_get_fdt_fit(struct bootm_headers 
+>>> *images, ulong addr,
+>>>       /* we need to apply overlays */
+>>>   #ifdef CONFIG_OF_LIBFDT_OVERLAY
+>>> -    image_start = addr;
+>>> -    image_end = addr + fit_get_size(fit);
+>>> -    /* verify that relocation took place by load address not being 
+>>> in fit */
+>>> -    if (load >= image_start && load < image_end) {
+>>> -        /* check is simplified; fit load checks for overlaps */
+>>> -        printf("Overlayed FDT requires relocation\n");
+>>> +    /* Relocate FDT so resizing does not overwrite other data in 
+>>> FIT. */
+>>> +    of_flat_tree = map_sysmem(load, len);
+>>> +    len = ALIGN(fdt_totalsize(load), SZ_4K);
+>>> +    err = boot_relocate_fdt(&of_flat_tree, &len);
+>>
+>> My bad, I mistakenly "compile-tested" this with a defconfig that 
+>> doesn't enable CONFIG_OF_LIBFDT_OVERLAY so this was never built.
+>>
+>> The compiler is actually not happy about that, it wants it cast to 
+>> (char **).
+>>
+>> @Marek, what do you prefer? We go back to having of_flat_tree a char* 
+>> or do the cast in boot_relocate_fdt?
+> What about -- go back and add a code comment ?
+> 
 
--- 
-// Caleb (they/them)
+Not entirely sure to understand the kind of comment you'd like to see there?
 
+Would something like:
+
+// of_flat_tree is storing the void * returned by map_sysmem, then
+// its address is passed to boot_relocate_fdt which expects a char **
+// and it is then cast into a ulong. Setting its type to void * would
+// require to cast its address to char ** when passing it to
+// boot_relocate_fdt. Instead, let's be lazy and use void *.
+
+work for you?
+
+Cheers,
+Quentin
