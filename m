@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC5C4C02182
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 17:10:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38B4AC02182
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 17:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96A2880BAD;
-	Wed, 22 Jan 2025 18:09:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E28A380ADE;
+	Wed, 22 Jan 2025 18:09:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mJO/Y3ev";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AL5i+/tP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E52B480B98; Wed, 22 Jan 2025 18:09:33 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id E899580BB1; Wed, 22 Jan 2025 18:09:35 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C71C680C66
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 18:09:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 936C680A09
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 18:09:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-21644aca3a0so162856325ad.3
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:09:30 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-216395e151bso398595ad.0
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:09:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737565769; x=1738170569; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737565772; x=1738170572; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=G8kCEQ5pfv467usN9FL/TP0QNh9f2BbA2fWq3JZPvvY=;
- b=mJO/Y3evYqrSNzNihp9NeMdEcZF1SGNdUlfgx4fu9+x5TDto/775PrFnmNG0S7twWm
- v+vxxpDfuqZGDPNalz0iNp8lZtH8wC/TT/9VrA0iTF9bcI7nY42a+SHcyJaDmhjsPkgd
- j9u6MBZUO7d/gPG27xluFrnI6WJE7xlXFhmT0MSpw8NkMHqtGulVQyCe7UIGCArccDwu
- HSq3SPaJwaxKmcCeQFcQLxk1y/2yqVXTGzPVlfjM4sa5OMGfKNm1zWDuZNI6YaLVXx5K
- uWjbIsMUTw0o5fUcHvTuyr7uLrkLcczBZaB6oyNSLSVmTFJihoW4NzsXkK1O05jsw6JT
- hEow==
+ bh=DdhsDSS4BYjmWfQLYGfOeY0VkD+5cK30MrbqqAAWLOs=;
+ b=AL5i+/tPaiAt0R/TTTvp+fGUXSCpTpsFi+pdNpVOa91MIq+QQr7Qo89bc1RFUHeyUO
+ QthyZi2nMtylbSFOIaYxbX0S/W1j7w6yUIXoQ9tubNyioAFIlj0MZ+xUJECpAfocu4FB
+ wQi1Yl8+GTe5R7fPZj9RovMaO+r9bcrLXCKG0lLjT1CaVEefWxXGYVekuod/ZzJYwE9S
+ o50WYCk8+y+MbqOK/rL27zYVxnlmx+o4B402AtxFJQe9X//2UfbN3X4IUTzUtG13yyFR
+ nJQEzke/FR6uziyo1ZO7J0o4azFIU0CVvr2JUM7P7L2MjaC7s1kIl2dy7d3nQ+MWU3lu
+ FadQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737565769; x=1738170569;
+ d=1e100.net; s=20230601; t=1737565772; x=1738170572;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=G8kCEQ5pfv467usN9FL/TP0QNh9f2BbA2fWq3JZPvvY=;
- b=oLdjqCi3U4U7Zgz9DiBPYAmqG9oWfRPY0HYp6Q/LIE/AT0v1aax98boMio+QKMHQEG
- 82leUG+3szvEHm40buoHbk8qBR+LQrudg4HaQ/E8k53Zk5L5M/jxuorUNcOa8NbFB/s2
- n9C9x3/jUxcYx6zf7A6DJPymwjQDthjwMX4gDjh7lTuYIX7Qv+7Tym5BKIhSf4El0yX6
- lssYLnWKS1IQN04dn4xm4KBC9e2TVoUbBq5R33DktnQEB6CYamKOAAaF5I6SZfrY0/ey
- 6UHFrTbPBiSfUcC+UADVcdg5IQRbkiQHQbCqsTpvWDRvSDyQfPhYn19r1D61Dq78dmwp
- 6Ehg==
-X-Gm-Message-State: AOJu0YxJgbHnxmMnlG2aKiowF3i2/SRED/zQ/3RfttuGLUxxDp588239
- +iIuojn9l7flgIUUU3htBtuPT7O6OSZ/73qK6guQJRmAKcaLTDkcXYJJ99tU
-X-Gm-Gg: ASbGncunagizbG/zxRI49gXsk4Li42d+al/22AFG+Sw/zufk+8Ns8PT5A727x97QrGq
- aAsKI7uG+Dvl0XhF7GQQbdDwbyZQuVH6hr1v371lLn1i5HltQf0vZcDYUhHEXIz2G0ed2+rZUTu
- v4sOjZubreyJGEz/+ja3xZtqDcL36el+XoSSzRKpWsRe5t8fP3OxVzWhQU3KjNDgcErHOP3Wegg
- nAX+jEnHbcxEobSBzQFcoM3tIbFByheFiUIJ3CDpC/3bGnAl/Ll+jlrdZ9Fvr8ObZcCElSeQaAm
- pg==
-X-Google-Smtp-Source: AGHT+IFxBzr62H86ew9BzfORhtFfafZM+m5MGtKIyVSz5VIKYwLsralrSJcmaXeyEezTaSfvY99Dgw==
-X-Received: by 2002:a17:902:e801:b0:216:1543:196c with SMTP id
- d9443c01a7336-21c35567c37mr325727805ad.27.1737565769114; 
- Wed, 22 Jan 2025 09:09:29 -0800 (PST)
+ bh=DdhsDSS4BYjmWfQLYGfOeY0VkD+5cK30MrbqqAAWLOs=;
+ b=Um4c5DKHmigtkiBbCXTjWomZzkniq6/EUzMhEKWnC6TdDGaXpJ8FEMe4Qs6iF4/435
+ ws2vrvwMP36ti6FtsNpkwWU0EkFF5Yr1W7Z7jg2Wq5/Jl/fKLxSaI0J3r7caWtAnEsys
+ aR1bry2X48uxKVY98m02OjiCIGb9mxz1tizJzh2aLGEERqr61r5Q6hquWdHPL0TvW1zK
+ Zg80NDWwler0DYbGjQxJT/8p9X6aM42PTkwABw4inYrMiymRfxshHDHiZFqYMCZD5QWx
+ 8Cheks+TakwEykA6xU7OYo/AxYLJ8YIbx+T2RICWBKzpMh7Wh6eNkqnN1Qwdf2x+ZpdM
+ JeoQ==
+X-Gm-Message-State: AOJu0Yw+RTPQrnsunSnozm3o9aQ6xGUIQJ+XufgA/RMbgkTaWqE9Xi7X
+ pXz85J8QVd/oiQDZ9F7dz2w1smi1ZCiIoViDUwHiHoZkLJYNB44we1jMvBTY
+X-Gm-Gg: ASbGnctu4lQ8gHOr7G82ZvmYb7nFW/0FcH3/FvdSsObhVny/SnhXFyDzO4VfZHNFewh
+ J8Rc3Ksf69dcc8GreC6ufaykjfOs87PuK+yqKaoA2flEQyIRhbL4nUCaFI9Uq6ouAtyHHQMvimv
+ JN43kjGTrZvN508u6k2/JJboqJFjIl7i0nLeBhV9tQBUu1IKWX2K70+O0BC2zhu8Yz+U2KIz6ud
+ N9CRcN4jirv2vxSVR9GTCl7S6FqzNaQ4poOUtBirxBaQE+SQkCfpda6Zp1m8/FKwroJDUpqj/k8
+ vg==
+X-Google-Smtp-Source: AGHT+IG3h0VcxnPGTXtfp7brqBgi8qoP37SaI267I0Yz+ycYSJ9jVPb+MlXrnXWbaAEGFxHraoep2w==
+X-Received: by 2002:a17:903:2c5:b0:215:7287:67bb with SMTP id
+ d9443c01a7336-21d99236461mr1215075ad.0.1737565772005; 
+ Wed, 22 Jan 2025 09:09:32 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21c2d4028cbsm98095225ad.227.2025.01.22.09.09.26
+ d9443c01a7336-21c2d4028cbsm98095225ad.227.2025.01.22.09.09.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jan 2025 09:09:28 -0800 (PST)
+ Wed, 22 Jan 2025 09:09:31 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
  sjg@chromium.org, Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 07/21] efi_driver: efi_net: Add EFI network device driver
-Date: Wed, 22 Jan 2025 14:08:44 -0300
-Message-ID: <20250122170858.961359-8-adriano.cordova@canonical.com>
+Subject: [PATCH 08/21] efi_loader: efi_net: Reuse efi_net_obj's
+Date: Wed, 22 Jan 2025 14:08:45 -0300
+Message-ID: <20250122170858.961359-9-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250122170858.961359-1-adriano.cordova@canonical.com>
 References: <20250122170858.961359-1-adriano.cordova@canonical.com>
@@ -98,528 +98,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Register the U-boot ethernet udevices in the EFI network stack
-as efi_net_obj as they get probed, and unregister them when the
-udevice gets removed
+When an efi_net_obj gets unregistered, save it and try to recycle it
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- include/efi_loader.h            |  10 +-
- lib/efi_driver/Makefile         |   1 +
- lib/efi_driver/efi_net_device.c |  86 +++++++++++
- lib/efi_driver/efi_uclass.c     |   2 +-
- lib/efi_loader/efi_net.c        | 261 +++++++++++++++++++++++++-------
- lib/efi_loader/efi_setup.c      |   4 +-
- 6 files changed, 302 insertions(+), 62 deletions(-)
- create mode 100644 lib/efi_driver/efi_net_device.c
+ lib/efi_loader/efi_net.c | 81 +++++++++++++++++++++-------------------
+ 1 file changed, 42 insertions(+), 39 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 0d6b01fcfc..09a9f75e19 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -634,9 +634,13 @@ int efi_disk_create_partitions(efi_handle_t parent, struct blk_desc *desc,
- 			       const char *pdevname);
- /* Called by bootefi to make GOP (graphical) interface available */
- efi_status_t efi_gop_register(void);
--/* Called by bootefi to make the network interface available */
--efi_status_t efi_net_register(struct udevice *dev);
--efi_status_t efi_net_do_start(struct udevice *dev);
-+/* Called to register an EFI network device */
-+int efi_net_register(void *ctx, struct event *event);
-+/* Called to unregister an EFI network device */
-+int efi_net_unregister(void *ctx, struct event *event);
-+/* Called to initialized registered network devices */
-+efi_status_t efi_net_init(void);
-+efi_status_t efi_net_do_start(void);
- /* Called by efi_net_register to make the ip4 config2 protocol available */
- efi_status_t efi_ipconfig_register(const efi_handle_t handle,
- 				   struct efi_ip4_config2_protocol *ip4config);
-diff --git a/lib/efi_driver/Makefile b/lib/efi_driver/Makefile
-index 0da20fe91d..08489064c7 100644
---- a/lib/efi_driver/Makefile
-+++ b/lib/efi_driver/Makefile
-@@ -9,4 +9,5 @@ obj-y += efi_uclass.o
- ifeq ($(CONFIG_PARTITIONS),y)
- obj-y += efi_block_device.o
- endif
-+obj-$(CONFIG_NETDEVICES) += efi_net_device.o
- obj-$(CONFIG_SYSRESET_SBI) += efi_reset_riscv.o
-diff --git a/lib/efi_driver/efi_net_device.c b/lib/efi_driver/efi_net_device.c
-new file mode 100644
-index 0000000000..64a443d074
---- /dev/null
-+++ b/lib/efi_driver/efi_net_device.c
-@@ -0,0 +1,86 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ *  EFI network driver
-+ *
-+ */
-+
-+#include <dm.h>
-+#include <efi_driver.h>
-+#include <malloc.h>
-+#include <dm/device-internal.h>
-+#include <dm/root.h>
-+#include <dm/tag.h>
-+#include <dm/uclass-internal.h>
-+
-+/**
-+ * efi_net_bind_drv() - TODO
-+ *
-+ * @this:	driver binding protocol
-+ * @handle:	handle
-+ * @interface:	block io protocol
-+ * Return:	status code
-+ */
-+static efi_status_t efi_net_bind_drv(
-+			struct efi_driver_binding_extended_protocol *this,
-+			efi_handle_t handle, void *interface)
-+{
-+	EFI_PRINT("%s: handle %p, interface %p\n", __func__, handle, interface);
-+
-+	return EFI_UNSUPPORTED;
-+}
-+
-+/**
-+ * efi_net_init_drv() - initialize network device driver
-+ *
-+ * @this:	extended driver binding protocol
-+ * Return:	status code
-+ */
-+static efi_status_t
-+efi_net_init_drv(struct efi_driver_binding_extended_protocol *this)
-+{
-+	int ret;
-+	struct udevice *dev;
-+	struct event event;
-+
-+	for (uclass_find_first_device(UCLASS_ETH, &dev); dev;
-+	     uclass_find_next_device(&dev)) {
-+		if (dev_get_flags(dev) & DM_FLAG_ACTIVATED) {
-+			memcpy(&event.data, &dev, sizeof(dev));
-+			ret = efi_net_register(NULL, &event);
-+			if (ret) {
-+				log_err("Failed registering %s in EFI net\n", dev->name);
-+				return EFI_OUT_OF_RESOURCES;
+diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+index 20d2c3a5f6..6bae5a5cd7 100644
+--- a/lib/efi_loader/efi_net.c
++++ b/lib/efi_loader/efi_net.c
+@@ -1152,29 +1152,35 @@ static int efi_netobj_init(struct efi_net_obj *netobj)
+ 	}
+ 
+ 	/* Allocate an aligned transmit buffer */
+-	transmit_buffer = calloc(1, PKTSIZE_ALIGN + PKTALIGN);
+-	if (!transmit_buffer)
+-		goto out_of_resources;
+-	transmit_buffer = (void *)ALIGN((uintptr_t)transmit_buffer, PKTALIGN);
+-	netobj->transmit_buffer = transmit_buffer;
++	if (!netobj->transmit_buffer) {
++		transmit_buffer = calloc(1, PKTSIZE_ALIGN + PKTALIGN);
++		if (!transmit_buffer)
++			goto out_of_resources;
++		transmit_buffer = (void *)ALIGN((uintptr_t)transmit_buffer, PKTALIGN);
++		netobj->transmit_buffer = transmit_buffer;
++	}
+ 
+ 	/* Allocate a number of receive buffers */
+-	receive_buffer = calloc(ETH_PACKETS_BATCH_RECV,
+-				sizeof(*receive_buffer));
+-	if (!receive_buffer)
+-		goto out_of_resources;
+-	for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++) {
+-		receive_buffer[i] = malloc(PKTSIZE_ALIGN);
+-		if (!receive_buffer[i])
++	if (!netobj->receive_buffer) {
++		receive_buffer = calloc(ETH_PACKETS_BATCH_RECV,
++					sizeof(*receive_buffer));
++		if (!receive_buffer)
+ 			goto out_of_resources;
++		for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++) {
++			receive_buffer[i] = malloc(PKTSIZE_ALIGN);
++			if (!receive_buffer[i])
++				goto out_of_resources;
++		}
++		netobj->receive_buffer = receive_buffer;
+ 	}
+-	netobj->receive_buffer = receive_buffer;
+ 
+-	receive_lengths = calloc(ETH_PACKETS_BATCH_RECV,
+-				 sizeof(*receive_lengths));
+-	if (!receive_lengths)
+-		goto out_of_resources;
+-	netobj->receive_lengths = receive_lengths;
++	if (!netobj->receive_lengths) {
++		receive_lengths = calloc(ETH_PACKETS_BATCH_RECV,
++					 sizeof(*receive_lengths));
++		if (!receive_lengths)
++			goto out_of_resources;
++		netobj->receive_lengths = receive_lengths;
++	}
+ 
+ 	/* Hook net up to the device list */
+ 	efi_add_handle(&netobj->header);
+@@ -1291,12 +1297,6 @@ failure_to_add_protocol:
+ 	printf("ERROR: Failure to add protocol\n");
+ 	return -1;
+ out_of_resources:
+-	free(transmit_buffer);
+-	if (receive_buffer)
+-		for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++)
+-			free(receive_buffer[i]);
+-	free(receive_buffer);
+-	free(receive_lengths);
+ 	printf("ERROR: Out of memory\n");
+ 	return -1;
+ }
+@@ -1357,22 +1357,35 @@ int efi_net_register(void *ctx, struct event *event)
+ 
+ 	// Find a slot for this efi_net_obj
+ 	seq_num = -1;
++	// Try to recycle
+ 	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
+-		if (!net_objs[i]) {
++		if (net_objs[i] && !net_objs[i]->dev) {
+ 			seq_num = i;
+ 			break;
+ 		}
+ 	}
++	if (seq_num < 0) {
++		for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
++			if (!net_objs[i]) {
++				seq_num = i;
++				break;
 +			}
 +		}
 +	}
-+
-+	ret = event_register("efi_net register", EVT_DM_POST_PROBE,
-+			     efi_net_register, this);
-+	if (ret) {
-+		log_err("Event registration for efi_net register failed\n");
-+		return EFI_OUT_OF_RESOURCES;
-+	}
-+
-+	ret = event_register("efi_net unregister", EVT_DM_PRE_REMOVE,
-+			     efi_net_unregister, this);
-+	if (ret) {
-+		log_err("Event registration for efi_net unregister failed\n");
-+		return EFI_OUT_OF_RESOURCES;
-+	}
-+
-+	return EFI_SUCCESS;
-+}
-+
-+/* EFI driver operators */
-+static const struct efi_driver_ops driver_ops = {
-+	.protocol	= &efi_net_guid,
-+	.init		= efi_net_init_drv,
-+	.bind		= efi_net_bind_drv,
-+};
-+
-+/* Identify as EFI driver */
-+U_BOOT_DRIVER(efi_net) = {
-+	.name		= "efi_net",
-+	.id		= UCLASS_EFI_LOADER,
-+	.ops		= &driver_ops,
-+};
-diff --git a/lib/efi_driver/efi_uclass.c b/lib/efi_driver/efi_uclass.c
-index e1e28df20b..6553141f4e 100644
---- a/lib/efi_driver/efi_uclass.c
-+++ b/lib/efi_driver/efi_uclass.c
-@@ -74,7 +74,7 @@ static efi_status_t EFIAPI efi_uc_supported(
- 	 * U-Boot internal devices install protocols interfaces without calling
- 	 * ConnectController(). Hence we should not bind an extra driver.
- 	 */
--	if (controller_handle->dev) {
-+	if (controller_handle->dev && bp->ops->protocol != &efi_net_guid) {
- 		ret = EFI_UNSUPPORTED;
- 		goto out;
- 	}
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index da0dabd383..20d2c3a5f6 100644
---- a/lib/efi_loader/efi_net.c
-+++ b/lib/efi_loader/efi_net.c
-@@ -859,6 +859,11 @@ static void EFIAPI efi_network_timer_notify(struct efi_event *event,
- 	nt = efi_netobj_from_snp(this);
- 	curr_efi_net_obj = nt->efi_seq_num;
+ 	if (seq_num < 0)
+ 		return -1;
  
-+	// The following only happens if the net obj was removed but the event
-+	// was not successfully removed.
-+	if (!net_objs[curr_efi_net_obj] || !efi_netobj_is_active(nt))
-+		goto out;
-+
- 	if (!nt->rx_packet_num) {
- 		eth_set_dev(nt->dev);
- 		env_set("ethact", eth_get_name());
-@@ -1054,28 +1059,18 @@ static struct efi_device_path *efi_netobj_get_dp(struct efi_net_obj *netobj)
- }
- 
- /**
-- * efi_net_do_start() - start the efi network stack
-+ * efi_netobj_start() - start an efi net device
-  *
-- * This gets called from do_bootefi_exec() each time a payload gets executed.
-  *
-- * @dev:	net udevice
-+ * @netobj:	efi_net_obj
-  * Return:	status code
-  */
--efi_status_t efi_net_do_start(struct udevice *dev)
-+efi_status_t efi_netobj_start(struct efi_net_obj *netobj)
- {
- 	efi_status_t r = EFI_SUCCESS;
--	struct efi_net_obj *netobj;
- 	struct efi_device_path *net_dp;
- 	int i;
- 
--	netobj = NULL;
--	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
--		if (net_objs[i] && net_objs[i]->dev == dev) {
--			netobj = net_objs[i];
--			break;
--		}
--	}
--
- 	if (!efi_netobj_is_active(netobj))
- 		return r;
- 
-@@ -1103,57 +1098,59 @@ set_addr:
- 	 * but the PXE protocol is not yet implmenented, so we add this in the meantime.
- 	 */
- 	efi_net_get_addr((struct efi_ipv4_address *)&netobj->pxe_mode.station_ip,
--			 (struct efi_ipv4_address *)&netobj->pxe_mode.subnet_mask, NULL, dev);
-+			 (struct efi_ipv4_address *)&netobj->pxe_mode.subnet_mask,
-+			  NULL, netobj->dev);
- #endif
- 
--	return r;
-+	return 0;
-+}
-+
-+/**
-+ * efi_net_do_start() - start the efi network stack
-+ *
-+ * This gets called from do_bootefi_exec() each time a payload gets executed.
-+ *
-+ * Return:	status code
-+ */
-+efi_status_t efi_net_do_start(void)
-+{
-+	int i, r;
-+
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i]) {
-+			r = efi_netobj_start(net_objs[i]);
-+			if (r)
-+				return EFI_DEVICE_ERROR;
-+		}
-+	}
-+
-+	return EFI_SUCCESS;
- }
- 
- /**
-- * efi_net_register() - register the simple network protocol
-+ * efi_netobj_init() - initialize an efi_net_obj
-  *
-- * This gets called from do_bootefi_exec().
-- * @dev:	net udevice
-+ * @netobj:	efi net object
-+ * Return:	0 on success, negative on error
-  */
--efi_status_t efi_net_register(struct udevice *dev)
-+static int efi_netobj_init(struct efi_net_obj *netobj)
- {
- 	efi_status_t r;
--	int seq_num;
--	struct efi_net_obj *netobj;
-+	struct udevice *dev;
- 	void *transmit_buffer;
- 	uchar **receive_buffer;
- 	size_t *receive_lengths;
- 	int i, j;
- 
-+	if (!netobj || efi_netobj_is_active(netobj))
-+		return 0;
-+
-+	dev = netobj->dev;
- 	if (!dev) {
- 		/* No network device active, don't expose any */
--		return EFI_SUCCESS;
--	}
--
--	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
--		if (net_objs[i] && net_objs[i]->dev == dev) {
--			// Do not register duplicate devices
--			return EFI_SUCCESS;
--		}
-+		return 0;
- 	}
- 
--	seq_num = -1;
--	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
--		if (!net_objs[i]) {
--			seq_num = i;
--			break;
--		}
--	}
--	if (seq_num < 0)
--		return EFI_OUT_OF_RESOURCES;
--
--	/* We only expose the "active" network device, so one is enough */
 -	netobj = calloc(1, sizeof(*netobj));
--	if (!netobj)
--		goto out_of_resources;
--
--	netobj->dev = dev;
--
- 	/* Allocate an aligned transmit buffer */
- 	transmit_buffer = calloc(1, PKTSIZE_ALIGN + PKTALIGN);
- 	if (!transmit_buffer)
-@@ -1252,7 +1249,7 @@ efi_status_t efi_net_register(struct udevice *dev)
- 			     &netobj->wait_for_packet);
- 	if (r != EFI_SUCCESS) {
- 		printf("ERROR: Failed to register network event\n");
--		return r;
-+		return -1;
- 	}
++	if (!net_objs[seq_num]) {
++		netobj = calloc(1, sizeof(*netobj));
++		net_objs[seq_num] = netobj;
++	} else {
++		netobj = net_objs[seq_num];
++	}
+ 	if (!netobj)
+ 		goto out_of_resources;
  
- 	/*
-@@ -1268,13 +1265,13 @@ efi_status_t efi_net_register(struct udevice *dev)
- 			     &netobj->network_timer_event);
- 	if (r != EFI_SUCCESS) {
- 		printf("ERROR: Failed to register network event\n");
--		return r;
-+		return -1;
- 	}
- 	/* Network is time critical, create event in every timer cycle */
- 	r = efi_set_timer(netobj->network_timer_event, EFI_TIMER_PERIODIC, 0);
- 	if (r != EFI_SUCCESS) {
- 		printf("ERROR: Failed to set network timer\n");
--		return r;
-+		return -1;
- 	}
- 
- #if IS_ENABLED(CONFIG_EFI_IP4_CONFIG2_PROTOCOL)
-@@ -1288,15 +1285,12 @@ efi_status_t efi_net_register(struct udevice *dev)
- 	if (r != EFI_SUCCESS)
- 		goto failure_to_add_protocol;
- #endif
--	netobj->efi_seq_num = seq_num;
+ 	netobj->dev = dev;
+ 	netobj->efi_seq_num = seq_num;
 -	net_objs[seq_num] = netobj;
--	return EFI_SUCCESS;
-+	printf("efi_net init device number %d\n", netobj->efi_seq_num);
-+	return 0;
- failure_to_add_protocol:
- 	printf("ERROR: Failure to add protocol\n");
--	return r;
-+	return -1;
+ 	printf("efi_net registered device number %d\n", netobj->efi_seq_num);
+ 	return 0;
  out_of_resources:
--	free(netobj);
--	netobj = NULL;
- 	free(transmit_buffer);
- 	if (receive_buffer)
- 		for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++)
-@@ -1304,7 +1298,162 @@ out_of_resources:
- 	free(receive_buffer);
- 	free(receive_lengths);
- 	printf("ERROR: Out of memory\n");
--	return EFI_OUT_OF_RESOURCES;
-+	return -1;
-+}
-+
-+/**
-+ * efi_net_init() - initialize registered efi objects
-+ *
-+ * Return:	status code
-+ */
-+efi_status_t efi_net_init(void)
-+{
-+	int i, r;
-+
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i]) {
-+			r = efi_netobj_init(net_objs[i]);
-+			if (r)
-+				return EFI_DEVICE_ERROR;
-+		}
-+	}
-+
-+	return EFI_SUCCESS;
-+}
-+
-+/**
-+ * efi_net_register() - register a net device
-+ *
-+ * This function is called when the device is probed
-+ *
-+ * @ctx:	context set at registration time
-+ * @event:	event
-+ * Return:	0 on success, negative on error
-+ */
-+int efi_net_register(void *ctx, struct event *event)
-+{
-+	struct udevice *dev;
-+	int seq_num;
-+	enum uclass_id id;
-+	struct efi_net_obj *netobj;
-+	int i;
-+
-+	dev = event->data.dm.dev;
-+	if (!dev) {
-+		/* No network device active, don't expose any */
-+		return 0;
-+	}
-+
-+	id = device_get_uclass_id(dev);
-+	if (id != UCLASS_ETH)
-+		return 0;
-+
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && net_objs[i]->dev == dev) {
-+			// Do not register duplicate devices
-+			return 0;
-+		}
-+	}
-+
-+	// Find a slot for this efi_net_obj
-+	seq_num = -1;
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (!net_objs[i]) {
-+			seq_num = i;
-+			break;
-+		}
-+	}
-+	if (seq_num < 0)
-+		return -1;
-+
-+	netobj = calloc(1, sizeof(*netobj));
-+	if (!netobj)
-+		goto out_of_resources;
-+
-+	netobj->dev = dev;
-+	netobj->efi_seq_num = seq_num;
-+	net_objs[seq_num] = netobj;
-+	printf("efi_net registered device number %d\n", netobj->efi_seq_num);
-+	return 0;
-+out_of_resources:
-+	printf("ERROR: Out of memory\n");
-+	return -1;
-+}
-+
-+/**
-+ * efi_net_unregister() - unregister a net device
-+ *
-+ *
-+ * @ctx:	context set at registration time
-+ * @event:	event
-+ * Return:	0 on success, negative on error
-+ */
-+int efi_net_unregister(void *ctx, struct event *event)
-+{
-+	efi_status_t ret = EFI_SUCCESS;
-+	struct udevice *dev;
-+	enum uclass_id id;
-+	struct efi_net_obj *netobj;
-+	struct efi_handler *phandler;
-+	void *interface;
-+	int i;
-+
-+	dev = event->data.dm.dev;
-+	if (!dev) {
-+		/* No network device active, don't expose any */
-+		return 0;
-+	}
-+
-+	id = device_get_uclass_id(dev);
-+	if (id != UCLASS_ETH)
-+		return 0;
-+
-+	netobj = NULL;
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && net_objs[i]->dev == dev) {
-+			netobj = net_objs[i];
-+			break;
-+		}
-+	}
-+
-+	if (!netobj)
-+		return 0;
-+
-+	// Remove from the list
-+	net_objs[i] = NULL;
-+
-+	if (efi_netobj_is_active(netobj)) {
-+		free(netobj->transmit_buffer);
-+		if (netobj->receive_buffer)
-+			for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++)
-+				free(netobj->receive_buffer[i]);
-+		free(netobj->receive_buffer);
-+		free(netobj->receive_lengths);
-+
-+		ret = EFI_CALL(efi_close_event(netobj->wait_for_packet));
-+		if (ret != EFI_SUCCESS)
-+			return -1;
-+
-+		ret = EFI_CALL(efi_close_event(netobj->network_timer_event));
-+		if (ret != EFI_SUCCESS)
-+			return -1;
-+
-+		phandler = NULL;
-+		efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler);
-+		if (phandler && phandler->protocol_interface)
-+			interface = phandler->protocol_interface;
-+
-+		ret = efi_delete_handle(&netobj->header);
-+		if (ret != EFI_SUCCESS)
-+			return -1;
-+
-+		efi_free_pool(interface);
-+	}
-+
-+	// Free the efi_net_obj
-+	free(netobj);
-+
-+	return 0;
- }
+@@ -1419,17 +1432,10 @@ int efi_net_unregister(void *ctx, struct event *event)
+ 	if (!netobj)
+ 		return 0;
  
- /**
-diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index 48f91da5df..e6ef76bcca 100644
---- a/lib/efi_loader/efi_setup.c
-+++ b/lib/efi_loader/efi_setup.c
-@@ -220,7 +220,7 @@ static efi_status_t efi_start_obj_list(void)
- 	efi_status_t ret = EFI_SUCCESS;
+-	// Remove from the list
+-	net_objs[i] = NULL;
++	// Mark as free in the list
++	netobj->dev = NULL;
  
- 	if (IS_ENABLED(CONFIG_NETDEVICES))
--		ret = efi_net_do_start(eth_get_dev());
-+		ret = efi_net_do_start();
- 
- 	return ret;
- }
-@@ -337,7 +337,7 @@ efi_status_t efi_init_obj_list(void)
- 			goto out;
- 	}
- 	if (IS_ENABLED(CONFIG_NETDEVICES)) {
--		ret = efi_net_register(eth_get_dev());
-+		ret = efi_net_init();
+ 	if (efi_netobj_is_active(netobj)) {
+-		free(netobj->transmit_buffer);
+-		if (netobj->receive_buffer)
+-			for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++)
+-				free(netobj->receive_buffer[i]);
+-		free(netobj->receive_buffer);
+-		free(netobj->receive_lengths);
+-
+ 		ret = EFI_CALL(efi_close_event(netobj->wait_for_packet));
  		if (ret != EFI_SUCCESS)
- 			goto out;
+ 			return -1;
+@@ -1450,9 +1456,6 @@ int efi_net_unregister(void *ctx, struct event *event)
+ 		efi_free_pool(interface);
  	}
+ 
+-	// Free the efi_net_obj
+-	free(netobj);
+-
+ 	return 0;
+ }
+ 
 -- 
 2.43.0
 
