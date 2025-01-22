@@ -4,81 +4,183 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66E5EC02182
-	for <u-boot@archiver.kernel.org>; Tue, 21 Jan 2025 21:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C16C0218B
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 02:51:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B867801FB;
-	Tue, 21 Jan 2025 22:48:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C212A801FB;
+	Wed, 22 Jan 2025 03:51:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zcHoHj0+";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="ERuuC4gL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D8B580283; Tue, 21 Jan 2025 22:48:18 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3542B80283; Wed, 22 Jan 2025 03:51:09 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAADB801F5
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 22:48:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E5E9801F5
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 03:51:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e46c6547266so8943192276.3
- for <u-boot@lists.denx.de>; Tue, 21 Jan 2025 13:48:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737496094; x=1738100894; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gtJOsYe3JhaUOU7zeXRD0B1v6Xns7MO915vru6XETSI=;
- b=zcHoHj0+KgH4yZ0cg47zFOZy9Gf8DCO0V53Pc4QPgtQdqrgrArQK4NnyJszkScTUX+
- NpVTQvHxaOsD4M2rIjK5nLY0vw3R7II2nsg9wDf98udWzl/BL8hwSHUswunj4OUg7QNR
- bYnTgS21aZfOXjP8csEKZ2KveBRx05mIC9tPQ3Coq3lEQEzDsDUQ2jvwuUSmlZC4/Vt0
- 8sUxUxWYrxyOcOpp7ESRruyXIB3OhcVGli1sQsyACXCO3h3ZPd7vaTVubRxKhCxF57Qb
- rJXiQ7/Vvxrzw1QMb+ya11UYqaiImt4MxKrWX7AyPSSeLo2r4Rvqg6g72H+J8sbYFTCm
- NdzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737496094; x=1738100894;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gtJOsYe3JhaUOU7zeXRD0B1v6Xns7MO915vru6XETSI=;
- b=nbvW/oy7kLTslkER6sZ3iUHF0Khqr+kNqlGSKqStfK6P/xTBeBSUXoR12pY2tDHqS4
- ClrZNU/dXEweywxb6rXiZ400fhLpjBICRZeHpv1aMqkicYFv3qAWOcs2sTcQwyfxEubz
- /bpPFt7p8STSQ4AmNtzMLc3GOjpTZGFSBHZxxiYt0Qx/3Lf2RvT5TgAgGGMA758ge7bG
- cE549DGjHk8xyAjQaCYOZAGBjr+e8ifvkLiBJTEKRY/F6hgTl9hDybCLqmnVFcJjzviD
- OcQqu7jSpOaAQHyxt5hq7UVcZVT4FLAe5BemKVYS2g5wt3aisLdmXb77Eysei7Bx6XlQ
- WXQw==
-X-Gm-Message-State: AOJu0Ywj//4pszOYDN0wwG24elxyRqjW2KwmoaHBkH1ilDIqgs5ytgKS
- T3X0YnmL1jRSzmV7EZamCrmrEoCbaEOuJW8h9YR2uhzbOBImRzHgRBIi8H1Doqx+yVmiwO+RsuQ
- aWQbW255SE/AGOXhttoKey9HLYqXr4E0Vpn4EZg==
-X-Gm-Gg: ASbGnct7UDYvP7RQobUu+XAY6+ywNM+sumvXSZydq5JX7nzEljZkc1cJ4Qv7Rir8Vny
- UKn3+VBiiAIJpIGc1Sn+v2HWIeDY7ckzDfWpyLuOGbR7JAWsh4Mw=
-X-Google-Smtp-Source: AGHT+IG2zWZyn0L66Vn5+6T50ETY9HZ1dYvBd5Yt+woV3+H9x6BCLSH+dFaoSriA1E4BU/9NBHfh6GLh+tGBKyC1e7Y=
-X-Received: by 2002:a05:6902:2502:b0:e57:fc0a:fae8 with SMTP id
- 3f1490d57ef6-e57fc0afc93mr4180472276.42.1737496094439; Tue, 21 Jan 2025
- 13:48:14 -0800 (PST)
+ spf=pass smtp.mailfrom=tien.fong.chee@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1737514266; x=1769050266;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=Th2kNanS/gzjjKH/U2ohEECybwhmFP0fWc/I3a0cLcc=;
+ b=ERuuC4gLs6YHTpxf58KyaBtU0t40ZEssdTBVNGQQDsOH3MiW9afwzgfq
+ fKN7a7dvIGH6h8YSJRtJ11lyZb9YfyXMA4ngNUh2XfiEEoPmoxw7oxNTh
+ sZ8UMyPSYILBbRNOB65TEYSZKAvkHQWoHwU8KnkOJOrJUomPlgZOt1VYm
+ bvYJLJHyOGVp+4ADVNB9hTsDckrcv9KDPaVg9QyZ/hXIHeIW8TFKx7InW
+ aqAdlehKpUJ7pomQi4/BY29jXWNnq0H0cnbEMZtv8gwmmf+IsE6teVl35
+ +GK46wjUbgDyprglyoa+yXPuAixzD6rZRcb2VEXpA7KcPm7/+YofVYYwU Q==;
+X-CSE-ConnectionGUID: 5uqLgV7RSAm3cvHoAsPZQw==
+X-CSE-MsgGUID: EQrfsUFoRGSx1+9P7SM73A==
+X-IronPort-AV: E=McAfee;i="6700,10204,11322"; a="25560459"
+X-IronPort-AV: E=Sophos;i="6.13,223,1732608000"; d="scan'208";a="25560459"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Jan 2025 18:51:03 -0800
+X-CSE-ConnectionGUID: Lq1tK1JxT4aihWYkDTXrjw==
+X-CSE-MsgGUID: KY8/KTA/SlyHgTJ4jl03jA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.13,223,1732608000"; d="scan'208";a="112000051"
+Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
+ by fmviesa004.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
+ 21 Jan 2025 18:51:01 -0800
+Received: from orsmsx603.amr.corp.intel.com (10.22.229.16) by
+ ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44; Tue, 21 Jan 2025 18:50:52 -0800
+Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
+ orsmsx603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44 via Frontend Transport; Tue, 21 Jan 2025 18:50:52 -0800
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (104.47.57.169)
+ by edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.44; Tue, 21 Jan 2025 18:50:50 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sC30GFNmZ+mxcyMO9RdLwu+5vLAk293eKgnqZxpwzjCzdi8wDLhRc+o4M71hpm5hOm15JRdSsDk4QkkA9KZx6Gl2iSHE9vV9QEF0iJRwTcwQvgys3woUbYQ3Xdc4fHmVum7dWt/NUUDln/rLTs4cUb/euKdUs2p1k6nieloSDohDcqTExrHzX/mpq3Aye07TNb5eh5CQmWE3PbqG0CX6Jiv7etC78C7mSa29jUrUgpkAMiBuQ8X2gCk1ePAD6CzNXSsalk5AzbsRIk5aCeV6SoBr0tzZZfrUyIACPI0RiSkBuisVNlIPfGP8+1UClIOTx+2hTij73eM7rLyPf7kk8A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xiYT7gtxGCo4Gi6np11AEqycbT+iiDmSp5FK2IKoL2k=;
+ b=XrZboln7wEINwdgi3D3qvVUXfUsGG1lo/TVeFkYN5kl2BzFzb78e548dJu3hSEre2LeJ6jnykqo9MLOBF1mwqjzkVJLDhuvHBXZ3HEPIQ7QZi+TTLQ6kvF2iOT7byp9yq8k78wfEl6D2Fjoqpd/xr+pc7ufeSbc7cX2XgjTcFyBOy5+uDtRo6OTZyh2rzryLDJM6yNwQ7pfCZfPlyUQbnPxI73S7D1ET2CpFFk9bvn4j0x4FFCkPR5p5PsoT/XBHVqTI5LuWHYoXj7xATJ0P5Ka54R9E1xUmtOOGgdn6uXhCu74w770AJsLk9R7lM29tFHVlpDsUK3RwAyzIO3k8ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from DM8PR11MB5592.namprd11.prod.outlook.com (2603:10b6:8:35::6) by
+ LV8PR11MB8485.namprd11.prod.outlook.com (2603:10b6:408:1e6::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.20; Wed, 22 Jan
+ 2025 02:50:21 +0000
+Received: from DM8PR11MB5592.namprd11.prod.outlook.com
+ ([fe80::eaaf:292e:8706:bdfe]) by DM8PR11MB5592.namprd11.prod.outlook.com
+ ([fe80::eaaf:292e:8706:bdfe%4]) with mapi id 15.20.8356.014; Wed, 22 Jan 2025
+ 02:50:21 +0000
+From: "Chee, Tien Fong" <tien.fong.chee@intel.com>
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, "Alif
+ Zakuan Yuslaimi" <alif.zakuan.yuslaimi@altera.com>, Simon Glass
+ <sjg@chromium.org>
+Subject: RE: [PATCH v1] arch: arm: mach-socfpga: Mailbox buffer and SDM
+ doorbell improvement
+Thread-Topic: [PATCH v1] arch: arm: mach-socfpga: Mailbox buffer and SDM
+ doorbell improvement
+Thread-Index: AQHbbHRX/aFyltOnbU6NaOBBYUftgLMiF0QA
+Date: Wed, 22 Jan 2025 02:50:21 +0000
+Message-ID: <DM8PR11MB55922DA9F926D687B1403B37D2E12@DM8PR11MB5592.namprd11.prod.outlook.com>
+References: <20250122022102.31186-1-alif.zakuan.yuslaimi@intel.com>
+In-Reply-To: <20250122022102.31186-1-alif.zakuan.yuslaimi@intel.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM8PR11MB5592:EE_|LV8PR11MB8485:EE_
+x-ms-office365-filtering-correlation-id: 24f1b180-381c-4bbb-a303-08dd3a8f8346
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|7053199007|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?b9gKYuKTmI7U5v/J95PRRLBx/e1mtbHtcHnJsJznxCLWU+3o/iKDGGt6CVeb?=
+ =?us-ascii?Q?Tqe66YYDepzhbMTqdS9ga2oUZAR9suK0C5/SFUgiN3ImJAZne1qSkwcuYwJs?=
+ =?us-ascii?Q?O1naK1tA6msb9GrEPjtdM9IoQmpBz1+Mwu2LcRgZcY78h2NYYLKokAIGlWM9?=
+ =?us-ascii?Q?xbV4fm4x71hNAwy93vLaYM4EYXtFL0/Pg4o8yED5t3zFUgj1o/WKmUPpdqPx?=
+ =?us-ascii?Q?SoqbNtqjw1pqDWuBn+wZYCjyWjKW43HAvefFa6e+TJzmlSKepNgxVuLE4ay3?=
+ =?us-ascii?Q?P7AlZoD0gra6DxfQ5s4CeSwN0BDix+T/ql6XDgXXCp5TGu5si6t8h/LdLw21?=
+ =?us-ascii?Q?m21HDjVLZ5P7SCo1rOqMA+1mMml2Dx5dIfGsjH8TSAo/+IZy06lOSp6PqwwY?=
+ =?us-ascii?Q?fXqRK6AzggcihBwG8dEFTd9yu9QPV7SMbqoTlSNLWl3AzpJFKgwUlOozRm1t?=
+ =?us-ascii?Q?TyOllgWbzKmqC15L2ueCgRks6LtNUmngn+E72RycMcta4gSWfX7rdnCCM4J0?=
+ =?us-ascii?Q?dm/sfrVzSHlG6VXLfYNX7d5xqHS5POazgbJmfjDhkY7K0b6enGDSRFg5UDzw?=
+ =?us-ascii?Q?iI21XbWwyNH/vTi9/GSx16Q6scLGltkgP+8zU/y0FcfOQEzYlVbwlrcc82m3?=
+ =?us-ascii?Q?nShugmb0X3IgYG0S3oZ2ukInKs60usGCOzzDuMxFNVW2zCaNoDjWMdeDq4Gv?=
+ =?us-ascii?Q?R/mfKLP+3UaYDHmt3D7AAEUbNIP55GwT3V7tLh9A9/ZQqdkMzFDNg8tHh9qT?=
+ =?us-ascii?Q?EnDxMysZpNajW8l4GuFf3iWm7xENgVihOfwUKwmsKTYSlrRUrnFANZWx6wnh?=
+ =?us-ascii?Q?5Stjn3B1SDQcrJ1Ybh4j+nMe7GndrjY7bWeeHnplT/9ZitbumoDG0V8WnraO?=
+ =?us-ascii?Q?huox7w/EmNbOxhuKOpT4rC9myNxNKRDrWUBnYXUBNjdcLgMOS9wbrebaPni5?=
+ =?us-ascii?Q?vqC4y3bliQXv0vjw5egHR7MBqNL9kc2e2c0RaorndQ4xAQSV8iwRdYpnB0V5?=
+ =?us-ascii?Q?3+nguJkkF7jLdQIX1RL/C45+JP9v5zC9hJPdIXpHr3ny3zwnI0KotyFRvlb0?=
+ =?us-ascii?Q?tTNjkc8045Fv1gQdMm1JzIi/lu3HocNPvPWL1XYFktcvqn0vK8QUZPRK7wVA?=
+ =?us-ascii?Q?2CmhOUwrPCEWy9lF+CJ318P10d4mXxzXb4izmDyt9lti61LroFmXAhdjLJL7?=
+ =?us-ascii?Q?4TiFjqQ1vn9G1PZVBXgtxMYoesFAsj5S+OpFZErBXVGYOX7iSSd4e4dj2v49?=
+ =?us-ascii?Q?+HQIzfzE8uZanPjqqBJelU9OqbOKrmHzYk5Iu0C6r+Sa6Tzo/qUctPR78qsu?=
+ =?us-ascii?Q?kKKPDxPY51rfoDjy+QJvRtw8ySHGRAO9Aqm0O8dwjzIlhk6URVBLSifpywxU?=
+ =?us-ascii?Q?cpsNh3Ke55YtcVH1AChLsbIwzMGp6JZRPxZTOpi8VjbIgvtAibZzviGaE65h?=
+ =?us-ascii?Q?aDV83epZ4TPE0vPoSBhRcXfYbXjmdgFD?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM8PR11MB5592.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007)(38070700018); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?T9ZkUUTXJLBJcugGPWzzpD304ChqdqRvY9ZsZJstUB9EsaTVffG+Cu3zRuYP?=
+ =?us-ascii?Q?B/9JL/b91Ljy2at3iv4Py8bMz905y7oOx55fECRGpIxnVtf6Hz3wx7gSMOTi?=
+ =?us-ascii?Q?WrFuV2kl+BdSzso82RhUqWZm9QH5HwXR6LzPQQMDNl+ml76FuuBoXuLxCnqk?=
+ =?us-ascii?Q?6yPIVrHUuR2YCt3hyfHYbHbpGFrH+1BSFbEva1z7AbHECvkdHjPf25a4NQHD?=
+ =?us-ascii?Q?Vr4ba+l+n/kdbdgVeld6EoE9gXZMdHEbPG3jzTP60AK33h2tknGDJvRPtB3/?=
+ =?us-ascii?Q?IzXNd+quTi1tOWtAxLe7m1W4yyLroxd0SBuZli300sa4ikblHCkkKR6qb+WC?=
+ =?us-ascii?Q?MkRnqS16p1hAplSbCvn5F0mWbkmfHuRO7PIX/Z/j33X0UuenTeggovie8rwm?=
+ =?us-ascii?Q?tU8NnyA+v5C/k3+CqTisbPSfVOQtMNNsm0Rn0QNqvqxCmk99VC4BJ9OL/bk/?=
+ =?us-ascii?Q?3mwp0gQDJY+027CrPoTWULCn2CbdeCymDtoZuAVIkzjwq82AaWN6Uahn6Wfk?=
+ =?us-ascii?Q?1L8zG1c4Kc13rqee79YGdwtknmx/R1qCnTp8mKtTtXa8oWG96dhwwihTTAoJ?=
+ =?us-ascii?Q?wReQs0ozdTjTIrsch+F9OKxCyZWLtTQak9gYp31xOJiCDDsepOttkF/4eyvt?=
+ =?us-ascii?Q?FfphDa38iH1OnAhEAJG7vswBn6tmDKxreb+H9hA70UHQJIVfNL3TCkP9m6QG?=
+ =?us-ascii?Q?/3QzAzk/BXqT8cRXLEiJcNnJz65i8GEgVjOhn8AaKyKBRzSaa41HyEJDVG4Z?=
+ =?us-ascii?Q?PKq1bBYMV4r+I1ymY3k5fQp9lqhLAPfcpLY5nIollRqTF9q1p+wHDYFlFu9q?=
+ =?us-ascii?Q?+HfIbSHRZAE1aZWq0lvYOAXgyD1Ixho1ABADX7G8yuBxDFsecGUVGDIJGk21?=
+ =?us-ascii?Q?PCSE8BzLPccw0BF+FJ1+e1WBClRp3CnJ9gm76JcBYhzoKT34m9k9PQFNlXfr?=
+ =?us-ascii?Q?i7Df8zOkgFG5OSSXI64Orw7UId81ms6SeCTTG8TFnUddtWaLfbuZ8izYYp0n?=
+ =?us-ascii?Q?3j38iVXWuQ2GlD70ZuQg24E7apBs8XpW45QVuvWLYxCBx+fXGwN3C6EMBg2u?=
+ =?us-ascii?Q?h1zfBFA8Vz+oeBFCJw+ur0whGcY7am6diOCLmXIsdZo7DuVYEQvE8hfbZ2VJ?=
+ =?us-ascii?Q?nUgoWG35H6zIsGE7tfi2FfAaV5FA0QstRxDCUkKRmWjdaQBypxR7WFqMCglU?=
+ =?us-ascii?Q?9Slym6QzVZFLr0tcYPUouOhFqkp5784kZa9zv0iUvXLcElNVj/GeJnNA8BtW?=
+ =?us-ascii?Q?YvUtbRoJSVTGbVjrgomV/BOYw8BsDJjuy0/k/NIpN865Ob0Y3vEEP4a0nMrF?=
+ =?us-ascii?Q?CpK/i1oPCxdENmTf2/nKRiHEhWCl8cAzZQ5p7QOIjhYD4++SJnqBkxOq3lnB?=
+ =?us-ascii?Q?kM12qjLKjX0zkabNRI+Asb4GzuSm60CfsrFh9O/Fv/zMa41aeqFyN1E+fq1b?=
+ =?us-ascii?Q?acfsLJUc7MP6Bvsr9zdczFPYQw3QUEFRmqR5HzzirPXpIDtFy1X6oa8n8EZi?=
+ =?us-ascii?Q?Evo7oVJv/Eaa/Eu4LQrpC3LmYHFur2DR9aJUNOyEj4XISKcKFdw1W/893msr?=
+ =?us-ascii?Q?lkr2jUxyuAlzipwKTMRy6CWLtxVRx48M9xOlBMbV?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20250120105045.1281262-1-sughosh.ganu@linaro.org>
- <20250120105045.1281262-5-sughosh.ganu@linaro.org>
- <CAC_iWjJT3MW0UXGS-84C_ZDuj-mQau3nrO9tAPsbGehpXLm6bQ@mail.gmail.com>
- <CADg8p947wYiKfpcjOkufCvhH2Cz2+U3iPECG777v+kptum9b9A@mail.gmail.com>
-In-Reply-To: <CADg8p947wYiKfpcjOkufCvhH2Cz2+U3iPECG777v+kptum9b9A@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 21 Jan 2025 23:47:38 +0200
-X-Gm-Features: AbW1kvYF7Vfpnvomp4j3p6t58ZyOWn3OICbcT8GjQBMnoULsWIYPosNcwAGIT4Y
-Message-ID: <CAC_iWj+t-itBuUKERXOBJWx3p8-2EUypAXS-aHuCmKtnnVGoTg@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] blkmap: store type of blkmap device in
- corresponding structure
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM8PR11MB5592.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 24f1b180-381c-4bbb-a303-08dd3a8f8346
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Jan 2025 02:50:21.3371 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jfjdfyRdA5yLvkDDCJcd3dJ6DMSwDf2frVvh55cOVLXD+wkGOnXkjJc59DAkoF9na7C3RuvkNVEb1omF8STV2PCYXf+Q+Y5vK4qYt/nJh5I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR11MB8485
+X-OriginatorOrg: intel.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,274 +197,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Jan 2025 at 18:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> On Tue, 21 Jan 2025 at 21:25, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Sughosh
-> >
-> > On Mon, 20 Jan 2025 at 12:51, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > Add information about the type of blkmap device in the blkmap
-> > > structure. Currently, the blkmap device is used for mapping to either
-> > > a memory based block device, or another block device (linear
-> > > mapping). Put information in the blkmap structure to identify if it is
-> > > associated with a memory or linear mapped device. Which can then be
-> > > used to take specific action based on the type of blkmap device.
-> >
-> > I haven't followed up all the discussions yet, but I do have a question.
-> > Are blkmap devices now unconditionally added in a pmem node? (if they
-> > are backed by memory)
->
-> Yes, all memory backed blkmap devices are being added as pmem nodes.
 
-Alright, I don't think we want that. We want a boolean to the mapping
-function, that cmd tools can conditionally set. Not all cases want to
-preserve memory for the OS. The EFI part can set that flag to true.
+-----Original Message-----
+From: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@intel.com>=20
+Sent: Wednesday, January 22, 2025 10:21 AM
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt <simon.k.r.goldschmidt@g=
+mail.com>; Chee, Tien Fong <tien.fong.chee@intel.com>; Tom Rini <trini@kons=
+ulko.com>; Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>; Simon Gl=
+ass <sjg@chromium.org>
+Subject: [PATCH v1] arch: arm: mach-socfpga: Mailbox buffer and SDM doorbel=
+l improvement
 
-I need to do some more testing, but a quick test in QEMU had this:
-vda: vda1
-nd_pmem namespace0.0: unable to guarantee persistence of writes
-nd_pmem namespace0.0: could not reserve region [mem 0x40200000-0x547fffff]
-nd_pmem namespace0.0: probe with driver nd_pmem failed with error -16
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-AFAICT the kernel behaves differently depending on its config and the
-only reliable way to make this work, is to remove the mapping from the
-EFI memory map. But that further complicates things because we can't
-have the blkmap functions randomly call EFI functions....
+The current write and notify SDM to read mechanism has a flaw where SDM is =
+not notified enough to be able to read all the data in the buffer.
 
-Regards
-/Ilias
->
-> -sughosh
->
-> >
-> > Thanks
-> > /Ilias
-> >
-> > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > ---
-> > > Changes since V2: New patch
-> > >
-> > >  cmd/blkmap.c                  | 16 ++++++++++++----
-> > >  drivers/block/blkmap.c        | 10 +++++++++-
-> > >  drivers/block/blkmap_helper.c |  2 +-
-> > >  include/blkmap.h              | 12 +++++++++++-
-> > >  test/dm/blkmap.c              | 16 ++++++++--------
-> > >  5 files changed, 41 insertions(+), 15 deletions(-)
-> > >
-> > > diff --git a/cmd/blkmap.c b/cmd/blkmap.c
-> > > index 164f80f1387..1bf0747ab16 100644
-> > > --- a/cmd/blkmap.c
-> > > +++ b/cmd/blkmap.c
-> > > @@ -119,15 +119,23 @@ static int do_blkmap_map(struct cmd_tbl *cmdtp, int flag,
-> > >  static int do_blkmap_create(struct cmd_tbl *cmdtp, int flag,
-> > >                             int argc, char *const argv[])
-> > >  {
-> > > +       enum blkmap_type type;
-> > >         const char *label;
-> > >         int err;
-> > >
-> > > -       if (argc != 2)
-> > > +       if (argc != 3)
-> > >                 return CMD_RET_USAGE;
-> > >
-> > >         label = argv[1];
-> > >
-> > > -       err = blkmap_create(label, NULL);
-> > > +       if (!strcmp(argv[2], "linear"))
-> > > +               type = BLKMAP_LINEAR;
-> > > +       else if (!strcmp(argv[2], "mem"))
-> > > +               type = BLKMAP_MEM;
-> > > +       else
-> > > +               return CMD_RET_USAGE;
-> > > +
-> > > +       err = blkmap_create(label, NULL, type);
-> > >         if (err) {
-> > >                 printf("Unable to create \"%s\": %d\n", label, err);
-> > >                 return CMD_RET_FAILURE;
-> > > @@ -218,7 +226,7 @@ U_BOOT_CMD_WITH_SUBCMDS(
-> > >         "blkmap read <addr> <blk#> <cnt>\n"
-> > >         "blkmap write <addr> <blk#> <cnt>\n"
-> > >         "blkmap get <label> dev [<var>] - store device number in variable\n"
-> > > -       "blkmap create <label> - create device\n"
-> > > +       "blkmap create <label> <type> - create device(linear/mem)\n"
-> > >         "blkmap destroy <label> - destroy device\n"
-> > >         "blkmap map <label> <blk#> <cnt> linear <interface> <dev> <blk#> - device mapping\n"
-> > >         "blkmap map <label> <blk#> <cnt> mem <addr> - memory mapping\n",
-> > > @@ -228,6 +236,6 @@ U_BOOT_CMD_WITH_SUBCMDS(
-> > >         U_BOOT_SUBCMD_MKENT(read, 5, 1, do_blkmap_common),
-> > >         U_BOOT_SUBCMD_MKENT(write, 5, 1, do_blkmap_common),
-> > >         U_BOOT_SUBCMD_MKENT(get, 5, 1, do_blkmap_get),
-> > > -       U_BOOT_SUBCMD_MKENT(create, 2, 1, do_blkmap_create),
-> > > +       U_BOOT_SUBCMD_MKENT(create, 3, 1, do_blkmap_create),
-> > >         U_BOOT_SUBCMD_MKENT(destroy, 2, 1, do_blkmap_destroy),
-> > >         U_BOOT_SUBCMD_MKENT(map, 32, 1, do_blkmap_map));
-> > > diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-> > > index 34eed1380dc..a817345b6bc 100644
-> > > --- a/drivers/block/blkmap.c
-> > > +++ b/drivers/block/blkmap.c
-> > > @@ -153,6 +153,9 @@ int blkmap_map_linear(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
-> > >         struct blk_desc *bd, *lbd;
-> > >         int err;
-> > >
-> > > +       if (bm->type != BLKMAP_LINEAR)
-> > > +               return log_msg_ret("Invalid blkmap type", -EINVAL);
-> > > +
-> > >         bd = dev_get_uclass_plat(bm->blk);
-> > >         lbd = dev_get_uclass_plat(lblk);
-> > >         if (lbd->blksz != bd->blksz) {
-> > > @@ -240,6 +243,9 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
-> > >         struct blkmap_mem *bmm;
-> > >         int err;
-> > >
-> > > +       if (bm->type != BLKMAP_MEM)
-> > > +               return log_msg_ret("Invalid blkmap type", -EINVAL);
-> > > +
-> > >         bmm = malloc(sizeof(*bmm));
-> > >         if (!bmm)
-> > >                 return -ENOMEM;
-> > > @@ -435,7 +441,8 @@ struct udevice *blkmap_from_label(const char *label)
-> > >         return NULL;
-> > >  }
-> > >
-> > > -int blkmap_create(const char *label, struct udevice **devp)
-> > > +int blkmap_create(const char *label, struct udevice **devp,
-> > > +                 enum blkmap_type type)
-> > >  {
-> > >         char *hname, *hlabel;
-> > >         struct udevice *dev;
-> > > @@ -472,6 +479,7 @@ int blkmap_create(const char *label, struct udevice **devp)
-> > >         device_set_name_alloced(dev);
-> > >         bm = dev_get_plat(dev);
-> > >         bm->label = hlabel;
-> > > +       bm->type = type;
-> > >
-> > >         if (devp)
-> > >                 *devp = dev;
-> > > diff --git a/drivers/block/blkmap_helper.c b/drivers/block/blkmap_helper.c
-> > > index bfba14110d2..56cbe57d4aa 100644
-> > > --- a/drivers/block/blkmap_helper.c
-> > > +++ b/drivers/block/blkmap_helper.c
-> > > @@ -19,7 +19,7 @@ int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
-> > >         struct blk_desc *desc;
-> > >         struct udevice *bm_dev;
-> > >
-> > > -       ret = blkmap_create(label, &bm_dev);
-> > > +       ret = blkmap_create(label, &bm_dev, BLKMAP_MEM);
-> > >         if (ret) {
-> > >                 log_err("failed to create blkmap\n");
-> > >                 return ret;
-> > > diff --git a/include/blkmap.h b/include/blkmap.h
-> > > index d53095437fa..21169c30af1 100644
-> > > --- a/include/blkmap.h
-> > > +++ b/include/blkmap.h
-> > > @@ -9,6 +9,12 @@
-> > >
-> > >  #include <dm/lists.h>
-> > >
-> > > +/* Type of blkmap device, Linear or Memory */
-> > > +enum blkmap_type {
-> > > +       BLKMAP_LINEAR = 1,
-> > > +       BLKMAP_MEM,
-> > > +};
-> > > +
-> > >  /**
-> > >   * struct blkmap - Block map
-> > >   *
-> > > @@ -16,11 +22,13 @@
-> > >   *
-> > >   * @label: Human readable name of this blkmap
-> > >   * @blk: Underlying block device
-> > > + * @type: Type of blkmap device
-> > >   * @slices: List of slices associated with this blkmap
-> > >   */
-> > >  struct blkmap {
-> > >         char *label;
-> > >         struct udevice *blk;
-> > > +       enum blkmap_type type;
-> > >         struct list_head slices;
-> > >  };
-> > >
-> > > @@ -78,9 +86,11 @@ struct udevice *blkmap_from_label(const char *label);
-> > >   *
-> > >   * @label: Label of the new blkmap
-> > >   * @devp: If not NULL, updated with the address of the resulting device
-> > > + * @type: Type of blkmap device to create
-> > >   * Returns: 0 on success, negative error code on failure
-> > >   */
-> > > -int blkmap_create(const char *label, struct udevice **devp);
-> > > +int blkmap_create(const char *label, struct udevice **devp,
-> > > +                 enum blkmap_type type);
-> > >
-> > >  /**
-> > >   * blkmap_destroy() - Destroy blkmap
-> > > diff --git a/test/dm/blkmap.c b/test/dm/blkmap.c
-> > > index a6a0b4d4e20..06816cb4b54 100644
-> > > --- a/test/dm/blkmap.c
-> > > +++ b/test/dm/blkmap.c
-> > > @@ -56,7 +56,7 @@ static int dm_test_blkmap_read(struct unit_test_state *uts)
-> > >         struct udevice *dev, *blk;
-> > >         const struct mapping *m;
-> > >
-> > > -       ut_assertok(blkmap_create("rdtest", &dev));
-> > > +       ut_assertok(blkmap_create("rdtest", &dev, BLKMAP_MEM));
-> > >         ut_assertok(blk_get_from_parent(dev, &blk));
-> > >
-> > >         /* Generate an ordered and an unordered pattern in memory */
-> > > @@ -85,7 +85,7 @@ static int dm_test_blkmap_write(struct unit_test_state *uts)
-> > >         struct udevice *dev, *blk;
-> > >         const struct mapping *m;
-> > >
-> > > -       ut_assertok(blkmap_create("wrtest", &dev));
-> > > +       ut_assertok(blkmap_create("wrtest", &dev, BLKMAP_MEM));
-> > >         ut_assertok(blk_get_from_parent(dev, &blk));
-> > >
-> > >         /* Generate an ordered and an unordered pattern in memory */
-> > > @@ -114,7 +114,7 @@ static int dm_test_blkmap_slicing(struct unit_test_state *uts)
-> > >  {
-> > >         struct udevice *dev;
-> > >
-> > > -       ut_assertok(blkmap_create("slicetest", &dev));
-> > > +       ut_assertok(blkmap_create("slicetest", &dev, BLKMAP_MEM));
-> > >
-> > >         ut_assertok(blkmap_map_mem(dev, 8, 8, NULL));
-> > >
-> > > @@ -140,19 +140,19 @@ static int dm_test_blkmap_creation(struct unit_test_state *uts)
-> > >  {
-> > >         struct udevice *first, *second;
-> > >
-> > > -       ut_assertok(blkmap_create("first", &first));
-> > > +       ut_assertok(blkmap_create("first", &first, BLKMAP_LINEAR));
-> > >
-> > >         /* Can't have two "first"s */
-> > > -       ut_asserteq(-EBUSY, blkmap_create("first", &second));
-> > > +       ut_asserteq(-EBUSY, blkmap_create("first", &second, BLKMAP_LINEAR));
-> > >
-> > >         /* But "second" should be fine */
-> > > -       ut_assertok(blkmap_create("second", &second));
-> > > +       ut_assertok(blkmap_create("second", &second, BLKMAP_LINEAR));
-> > >
-> > >         /* Once "first" is destroyed, we should be able to create it
-> > >          * again
-> > >          */
-> > >         ut_assertok(blkmap_destroy(first));
-> > > -       ut_assertok(blkmap_create("first", &first));
-> > > +       ut_assertok(blkmap_create("first", &first, BLKMAP_LINEAR));
-> > >
-> > >         ut_assertok(blkmap_destroy(first));
-> > >         ut_assertok(blkmap_destroy(second));
-> > > @@ -168,7 +168,7 @@ static int dm_test_cmd_blkmap(struct unit_test_state *uts)
-> > >         ut_assertok(run_command("blkmap info", 0));
-> > >         ut_assert_console_end();
-> > >
-> > > -       ut_assertok(run_command("blkmap create ramdisk", 0));
-> > > +       ut_assertok(run_command("blkmap create ramdisk mem", 0));
-> > >         ut_assert_nextline("Created \"ramdisk\"");
-> > >         ut_assert_console_end();
-> > >
-> > > --
-> > > 2.34.1
-> > >
+This is caused by SDM doorbell will only be sent out once the command buffe=
+r overflow check is satisfied. If the command buffer does not reach overflo=
+w status, no SDM doorbell will be sent out, which may cause a timeout as th=
+e mailbox driver will be waiting for the SDM to read the buffer to empty ev=
+en though SDM is not notified to do so.
+
+The solution is to remove the command buffer overflow check and set the SDM=
+ doorbell to always trigger at the end of the command buffer.
+
+This will ensure that the SDM is able to read all of the data.
+
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+---
+ arch/arm/mach-socfpga/mailbox_s10.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
+
+diff --git a/arch/arm/mach-socfpga/mailbox_s10.c b/arch/arm/mach-socfpga/ma=
+ilbox_s10.c
+index 2b4f26040fe..b69bd3e47ec 100644
+--- a/arch/arm/mach-socfpga/mailbox_s10.c
++++ b/arch/arm/mach-socfpga/mailbox_s10.c
+@@ -88,6 +88,8 @@ static __always_inline int mbox_write_cmd_buffer(u32 *cin=
+, u32 data,
+ 			MBOX_WRITE_CMD_BUF(data, (*cin)++);
+ 			*cin %=3D MBOX_CMD_BUFFER_SIZE;
+ 			MBOX_WRITEL(*cin, MBOX_CIN);
++			if (is_cmdbuf_overflow)
++				*is_cmdbuf_overflow =3D 0;
+ 			break;
+ 		}
+ 		timeout--;
+@@ -96,10 +98,6 @@ static __always_inline int mbox_write_cmd_buffer(u32 *ci=
+n, u32 data,
+ 	if (!timeout)
+ 		return -ETIMEDOUT;
+=20
+-	/* Wait for the SDM to drain the FIFO command buffer */
+-	if (is_cmdbuf_overflow && *is_cmdbuf_overflow)
+-		return mbox_wait_for_cmdbuf_empty(*cin);
+-
+ 	return 0;
+ }
+=20
+@@ -125,13 +123,11 @@ static __always_inline int mbox_fill_cmd_circular_buf=
+f(u32 header, u32 len,
+ 			return ret;
+ 	}
+=20
+-	/* If SDM doorbell is not triggered after the last data is
+-	 * written into mailbox FIFO command buffer, trigger the
+-	 * SDM doorbell again to ensure SDM able to read the remaining
+-	 * data.
++	/*
++	 * Always trigger the SDM doorbell at the end to ensure SDM able to read
++	 * the remaining data.
+ 	 */
+-	if (!is_cmdbuf_overflow)
+-		MBOX_WRITEL(1, MBOX_DOORBELL_TO_SDM);
++	MBOX_WRITEL(1, MBOX_DOORBELL_TO_SDM);
+=20
+ 	return 0;
+ }
+--
+2.25.1
+
+Reviewed-by: Tien Fong Chee <tien.fong.chee@intel.com>
+
+Best regards,
+Tien Fong
