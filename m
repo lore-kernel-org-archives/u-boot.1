@@ -4,58 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5C96C02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 15:17:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DFD2C02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 15:19:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 392DC807E9;
-	Wed, 22 Jan 2025 16:17:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BB7B2807E9;
+	Wed, 22 Jan 2025 16:19:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737559042;
-	bh=RFtO4hCH+fTLZz+anawc9p1CZdr2ZFoPO8GyA+5UNcM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yuFbIG9LHHaxyYEejktdd9MflWvw+UFFmDEd5Y72TjzqHYfIWZ8zoVE/2rdLL8JgH
-	 6ioTejM1Y0GF0bvc1+7/JEshoaPYffbI6IHmBLKKB0I8RBxHTcsKK5TUg2WSG1M+BS
-	 2v3vDE1S0J5s+8gBIoWh7ZVdVyd7zje5k9cXBHVdEEA2Z4qskSnP5fVqUtiKuTjmKj
-	 aaahXQg/yrlLmCvpCOZ1ji4A9jO/7DImUsKQS6Xun7NhVIBz4LoS8reM0aeL5FNyg2
-	 Mu+uiF9knATahjEcsDf4yehSvmSNxNRkBUrCb9B2FVF+5GUCePF/anthocHLUrz2At
-	 nIEmeQxBin1Pw==
+	s=phobos-20191101; t=1737559179;
+	bh=hxvt8H4T3kpHlVK7RX77/VCCO90RQN4fkGYXdhP8Cnc=;
+	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=qj4ZPhcN/x9lkCkXzFbeIAStbthEygNnGB8rkuw4mWkBm6scd0H8oOEeNV3Q6Xha3
+	 8dQgPOD1pEMMJz6IkjgkEfFFFUFppAo0u9HTkhM3HbNl28cWRvIV8PeKZdo0mEFxHf
+	 jdM+O7UMJmafS1dsbNZWwfVkKLUomAE/1cJS6BL7FKNZLWQVsYSJgdcHedk0u4+rdm
+	 8ec+hnW3ln+HbK3mYavIBZ7PApfJbg/QVzCW+cIpJfJuoCwCaMoXUFP2idPJ0m9uRm
+	 Wj9GllPyOGRMTyGYzKzYVovZ44no8CjXan+OP5vRRFF8O9N7YBg8VzXLE/JiPaY63N
+	 Xcu+cflkhBKMw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E77E080817; Wed, 22 Jan 2025 16:17:20 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id 6FC5A807F9; Wed, 22 Jan 2025 16:19:39 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08173807D6
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 16:17:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D58A807D6
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 16:19:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4YdSNr5q6Dz9smk;
- Wed, 22 Jan 2025 16:17:16 +0100 (CET)
-Message-ID: <cf0bbbe1-7a0c-4af0-8334-e4126c6c71a8@denx.de>
-Date: Wed, 22 Jan 2025 16:17:15 +0100
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4YdSRV5L8wz9smk;
+ Wed, 22 Jan 2025 16:19:34 +0100 (CET)
+Message-ID: <93c0d02b-889a-4dc3-8fab-677b1c4fc6be@denx.de>
+Date: Wed, 22 Jan 2025 16:19:34 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/2] cyclic: Fix typo in struct cyclic_info description
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Devarsh Thakkar <devarsht@ti.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20250114132814.1250117-1-patrice.chotard@foss.st.com>
- <20250114132814.1250117-2-patrice.chotard@foss.st.com>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250114132814.1250117-2-patrice.chotard@foss.st.com>
+Subject: Please pull u-boot-watchdog/master
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4YdSRV5L8wz9smk
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,45 +65,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.01.25 14:28, Patrice Chotard wrote:
-> Replace delay_ns by delay_us which is the field name used into
-> struct cyclic_info.
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> ---
-> 
-> Changes in v2:
->    _ Update the comment which still references "ns"
+Hi Tom,
 
-Applied to u-boot-watchdog/master
+please pull the following watchdog related patches:
+
+----------------------------------------------------------------
+- cyclic: Fix rollover every 72 min on 32 bits platforms (Patrice)
+----------------------------------------------------------------
+
+Here the Azure build, without any issues:
+
+https://dev.azure.com/sr0718/u-boot/_build/results?buildId=381&view=results
 
 Thanks,
 Stefan
 
-> 
->   include/cyclic.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/include/cyclic.h b/include/cyclic.h
-> index c6c463d68e9..df8b725e3d0 100644
-> --- a/include/cyclic.h
-> +++ b/include/cyclic.h
-> @@ -20,7 +20,7 @@
->    *
->    * @func: Function to call periodically
->    * @name: Name of the cyclic function, e.g. shown in the commands
-> - * @delay_ns: Delay is ns after which this function shall get executed
-> + * @delay_us: Delay is us after which this function shall get executed
->    * @start_time_us: Start time in us, when this function started its execution
->    * @cpu_time_us: Total CPU time of this function
->    * @run_cnt: Counter of executions occurances
+The following changes since commit 82d262ae162d859d3b0bbcd40a9464e890b009da:
 
-Viele Grüße,
-Stefan Roese
+   Merge patch series "MediaTek MT7629 OF_UPSTREAM migration (v2)" 
+(2025-01-21 09:29:05 -0600)
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+are available in the Git repository at:
+
+   git@source.denx.de:u-boot/custodians/u-boot-watchdog.git
+
+for you to fetch changes up to fb30f75655cdd1bf838827a8461b3434c07b1a62:
+
+   cyclic: Fix typo in struct cyclic_info description (2025-01-22 
+10:22:34 +0100)
+
+----------------------------------------------------------------
+Patrice Chotard (2):
+       cyclic: Fix rollover every 72 min on 32 bits platforms
+       cyclic: Fix typo in struct cyclic_info description
+
+  common/cyclic.c  | 6 +++---
+  include/cyclic.h | 2 +-
+  2 files changed, 4 insertions(+), 4 deletions(-)
 
