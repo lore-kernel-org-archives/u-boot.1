@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7980AC02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 08:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2ACC02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 09:00:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B712F803B5;
-	Wed, 22 Jan 2025 09:55:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 95EFC803B5;
+	Wed, 22 Jan 2025 10:00:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="fxrSlrl+";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="j4i4BhcS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6884D80586; Wed, 22 Jan 2025 09:55:42 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5435880586; Wed, 22 Jan 2025 10:00:56 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F028780283
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:55:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE31880283
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 10:00:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-388cae9eb9fso3719996f8f.3
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 00:55:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1737536139; x=1738140939;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=dGWwsG/XzfO7NwnbGT0Xp/2hNB+Hmy5CfDuT7KyqAsg=;
- b=fxrSlrl+56Nc+9SKS1iypexOU7Du8ZPNlmonPTcwDc6NvyK/aMT7hrEU973P2ejCCA
- e6ralhw4vq2Dse2PQeUFSBe7ylwrHOuXH4J5flVP3hNZo53VnW5H5pc9RdA+YPSF4qVH
- eTWjuwfQ1mKoPKBvOQnofQrXbWqzVwzRTL6Sg7U50O8I31/PfubfI3P8RNlaxR4Ac4IR
- CMS+xqtuQnqnTxIIj81x4seEDnlgciLskZyIyx2xoOC8PkTOktK2IVcRUmxJDUNXVhS+
- Gf8wg4ESDVQyDyNfn+8aXwxpLdJHZiJKvoPcBELaVngxofJOLa8xpSDwCHeHfKz3mUek
- u2hA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737536139; x=1738140939;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dGWwsG/XzfO7NwnbGT0Xp/2hNB+Hmy5CfDuT7KyqAsg=;
- b=IVkLi/MX8VTY4P8G4ejlaB4vVE3gegk5lOem2QdLc26J6q350zHAlmm/15TRw1xvhT
- jBEASV+dWvaYmZD1FTWa7ZaIew17yj8jONhvARQOl9MjZuq6QzLNg8os7HcEmc7ZN73J
- 79A360MLQWC/Rs26SVEydO5jjYgXrcvtNJ92kDkxnqTpcfVm6Q+qtjr1p3UyYccXpsGf
- sAz08xeECEqzRvVA9M6IlY3f5SXW5Ov7rUH8TxcWGJiuWj3inok8zgP7jyyissJLOI6z
- 1Lmx+yhEoyuk8U/AiKnMXaWiHrurNzPjSFpegMcKwj1dWv71OD3cQ3HltZxJv2KIvau1
- +1jQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNZEkkLfCKM6rcSUjoBMOcgySNGCsjss1W2ef9yu0/eLqsGJ/IgTACyF1NsTiymbOvSJ13BdA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw9x/TDIwBGkCzFd/PSf7snFDtiOIKzrXyuUtLbLSIriRd4MvHr
- e3U2sLijYzN10ImtbMegISMF0AUvrzQ4Lr5pssq+dm0hagnMKwYsFUnBGyGCfV4=
-X-Gm-Gg: ASbGncuuV7Pn4iKbGtlvH6iFX+QIflzYUztptuwom8LQ/pXbMQHBmdG/FicEaQSIuBb
- e1vXGOHfJSrgnAUWyZqlZNcN/KWiHOFwKOXk4pwsOHCBN8K8VCPeZGNvsrH9njaSu3mpLCeqqus
- BviqSt/MtvyPruV+ILpWCHNhfmeCD/o5MIfXXS990F8l9lqTM8A0oUh+dTNiTHIQQJbb8C/GAIz
- WVnEMIvGwsoqo6qNMnPRTvgguo7mXduAYc9vLdp85bPYP5kpBdw9yEWTiFAJCuKhYAgr5TuSe+E
- Gx24oDkLIOotmg==
-X-Google-Smtp-Source: AGHT+IGf+XpOR0ZbaZev6nXAj7CaAHOfSzCQAOtoktCgm9+mNyNk0LsnDcb0CBxR6sd+zK9ywhmYiw==
-X-Received: by 2002:a5d:6d86:0:b0:38a:8e2e:9fcc with SMTP id
- ffacd0b85a97d-38bf57befa9mr19968016f8f.45.1737536139214; 
- Wed, 22 Jan 2025 00:55:39 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38bf3222bebsm15834308f8f.30.2025.01.22.00.55.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jan 2025 00:55:38 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, Jan Kiszka
- <jan.kiszka@siemens.com>, Neil Armstrong <neil.armstrong@linaro.org>, Tom
- Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 3/9] usb: dwc3-generic: Reorder include
-In-Reply-To: <20250120080120.51657-4-patrice.chotard@foss.st.com>
-References: <20250120080120.51657-1-patrice.chotard@foss.st.com>
- <20250120080120.51657-4-patrice.chotard@foss.st.com>
-Date: Wed, 22 Jan 2025 09:55:37 +0100
-Message-ID: <874j1rkz1y.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1737536452; x=1738141252; i=xypron.glpk@gmx.de;
+ bh=uU1e0rPUNGWFHEeuICla2P+gGydS8tcI67+fmOVaje0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=j4i4BhcSAyGqZHpQPEPuGvE26vaf+ub24LgQrlOmvGzEIpq0rGYarNxnDsmKTqys
+ af9+/vNkIaJzsk6C0Hvvh5DMD4P7BR98dUn0hltLkLiZQodz2tYazkDOC4fxbv9os
+ r3jtoi5otghHA1M/3qCeL1PKbvzIUyn9dhS7460UoBijjjp2FbM34Khv/AjVE8Ho6
+ /zAAe71GXqseoCHluPKKVZRbYGeHirxwJMpGydxfZ0KQxeHqwop9HPDKEVKT1rQr4
+ m4CJpB4i4Q2keml5tJ1nguBqQziOyuZJ6Bu7hGfFCKNat3MF9ceP3TsvIQNeutdcL
+ T9QLD8wRHqrmVXWCiA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLR1f-1tt0vX13HX-00Vnig; Wed, 22
+ Jan 2025 10:00:52 +0100
+Message-ID: <14244381-2773-4265-82db-972f6ca684b8@gmx.de>
+Date: Wed, 22 Jan 2025 10:00:51 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] fs: fat: update parent dirs metadata on rename
+To: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250122053232.17365-1-gabriel.dalimonte@gmail.com>
+ <20250122053232.17365-5-gabriel.dalimonte@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250122053232.17365-5-gabriel.dalimonte@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:DUxpyRhPhlRE2ZpZIRQimSH7foO3XzkXwD6Jh3Jb0h5Dxb39Ua5
+ DS5erAnigVNtKGeVQOciyp5YjTUo3Yw1qjHKmNfcK8mGHNkPkj5RVGlGKklOWCdV/QAu+mM
+ YCEOxONB0zqKd+uorkNoOOuVwK/n+TFCLvB5ImACLCz6JcoCZFSnwi9vmnVOHwTD5XU/cwG
+ zQbmFXiECl/5wfFGG8LjQ==
+UI-OutboundReport: notjunk:1;M01:P0:8Vu1xoYHFZE=;EY8OMOR641Ak8z/ivJ+w2UA9xV0
+ YdjNjIongk2Ja9fFO+ps1rNSis/JoSEWP08IT5VKVOyGywU/HnNL51WBDjX9OFtGOvOyj24zf
+ 5ZefhoCXc+tt3kGpIuTFOeXJgYGjV/1yxO1+8xO6govJP2i9pzFvyWuy2RbpZA4tkjPbRRvPa
+ E7ACUdmrgeaH0WFmbWz30bte/a+zTI413KgZDfBtagu7epBVQqcuCKYQb44gcFnTrQIxWTJbB
+ s2kEYZtSjDME++Y/pe6M23LQcxLoTQxhfRJJN5AqVTnaEvAUWDsRhtK+T9zKAzCGTLoO9lbwe
+ p/GRWRNrtdIy7t42RlX2SFoyM/Bwza9FXO30wFBjvd09FEqNrgLErErMDsgYztykLV7oOODGY
+ Ew4jqKL/PLrvaprHtwgLgjvFqM8RhENxFTDVwX0beXbKIKjLhA6lgLby7GJ8dgrUSzWXElpGm
+ 5eYiOw4dBCxqCd1hFy5tawDgv2+F2WWRZKOPPT2y0IkxGjxNeNKPRRgtZIsCLXyyZStPv+ME4
+ +ktJwco92YbkBNujFPS9IChMql4Qctx8ejnOQMDHwwvG/LjMzMjB4Pi/8dtTk/ChUTkuXSgb9
+ vJrTZKhpHQojuOLOxw7+IMpRG0fL++1mIOpWdnQ6R6/Xg34DxWXp2jLrBVDxgIzp+aHGoEPsT
+ wt/E0PsltthmfBIJ0BgNpLnl92F1pzU/vy5TJWye5obzcYNUfTGGsegC5bKYPeSMnFkUAHS3h
+ jigbkuJvVa/QA4DsFie9DpKIeVU48EklmOKBXfX28j+D+wO0x3YM90U1Jof+vCTxuyZh3zCht
+ OBqedQb0Jb/1cxELk1wppPmWIBecGmYrQZ/CB3+QqaRtvOVa4oGhunAfvCaLgQrF1vWCvg8hf
+ bohx7o5RAr8QIiJWDWaG8UrSj3+MA8ljlCcZlVbgmkjvrVbfe4lxqtRxiJpHmGJ20yeKprltF
+ 8KnsiJfI0+Rao9BtCAfb39C5vfv9jxEONZ+YHHYFsVCz5PIdcE16vgZK0OBfbz3jj8+H6SDQU
+ R5EdTWZs0dIEwQMaWC14qiowy+PrwUUuOQjVjjNQvLUK4Pyr0qXuzz5WozWT1suXHAwnPtjf8
+ qLCslYjRhw2BGufR4ZQ3wbt49wM61108YgyFN5LjpVTDXAcBOyD6JlgG32w7OSoL572Hcizkm
+ 7VtVTFS6dUgOhn8hOCL0rXbkYDNus+m5EVvYbI/LTgQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,71 +96,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice,
+On 22.01.25 06:32, Gabriel Dalimonte wrote:
+> None of the existing fat code appears to update parent dir properties
+> however, the POSIX specification for rename() mentions that the
+> last modified timestamp should be updated. In addition, I believe
+> the ATTR_ARCH attribute should also be reset on the parent directories
+> as the content of those directories has changed.
 
-Thank you for the patch.
+Could you, please, provide a link to the referenced specification.
 
-On lun., janv. 20, 2025 at 09:01, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
+E.g. https://pubs.opengroup.org/onlinepubs/9799919799/functions/rename.htm=
+l
 
-> Reorder include following rules available here :
-> https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
+Here I find:
+"Upon successful completion, rename() shall mark for update the last
+data modification and last file status change timestamps of the parent
+directory of each file."
+
+Does this mean that if we move a directory we would have to update the
+fields of all moved non-empty sub-directories?
+
+On many boards we don't have a real time clock. Should we skip updating
+if we have no RTC?
+
+If we want to update parent directories, we should do this for file
+creation, too. The update function could be called in the function where
+we create directory entries.
+
+Best regards
+
+Heinrich
+
 >
-> Remove useless include files.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Marek Vasut <marex@denx.de>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
->
+> Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
 > ---
 >
-> Changes in v3:
->   - Update comment by adding "Remove useless include files"
+>   fs/fat/fat_write.c | 42 ++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 42 insertions(+)
 >
-> Changes in v2:
->   - remove useless include files
+> diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
+> index f9f7051e30..2559e38d5b 100644
+> --- a/fs/fat/fat_write.c
+> +++ b/fs/fat/fat_write.c
+> @@ -1912,6 +1912,42 @@ exit:
+>   	return ret;
+>   }
 >
->  drivers/usb/dwc3/dwc3-generic.c | 20 ++++----------------
->  1 file changed, 4 insertions(+), 16 deletions(-)
+> +/**
+> + * update_parent_dir_props - updates the modified time and resets the a=
+rchive
+> + * attribute for the parent directory
+> + *
+> + * @itr:	iterator positioned anywhere in a directory whose parent shoul=
+d be
+> + *	updated
+> + * @Return:	0 for success
+> + */
+> +static int update_parent_dir_props(fat_itr *itr)
+> +{
+> +	int ret =3D 0;
+> +	__u32 target_clust =3D itr->start_clust;
+> +	/* For START macro */
+> +	fsdata *mydata =3D itr->fsdata;
+> +
+> +	if (!itr->is_root) {
+> +		ret =3D fat_itr_parent(itr);
+> +		if (ret)
+> +			return ret;
+> +
+> +		while (fat_itr_next(itr)) {
+> +			if (START(itr->dent) =3D=3D target_clust)
+> +				goto update;
+> +		}
+> +
+> +		/* dent not found */
+> +		return -EIO;
+> +update:
+> +		dentry_set_time(itr->dent);
+> +		itr->dent->attr |=3D ATTR_ARCH;
+> +		ret =3D flush_dir(itr);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+>   /**
+>    * fat_rename - rename/move a file or directory
+>    *
+> @@ -2086,7 +2122,12 @@ int fat_rename(const char *old_path, const char *=
+new_path)
+>   		ret =3D flush_dir(new_itr);
+>   		if (ret)
+>   			goto exit;
+> +		/* restore directory location to update parent props below */
+> +		fat_itr_child(new_itr, new_itr);
+>   	}
+> +	ret =3D update_parent_dir_props(new_itr);
+> +	if (ret)
+> +		goto exit;
 >
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index 2ab41cbae45..bc7d2d4234b 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -7,29 +7,17 @@
->   * Based on dwc3-omap.c.
->   */
->  
-> -#include <cpu_func.h>
-> -#include <log.h>
->  #include <dm.h>
-> -#include <dm/device-internal.h>
-> +#include <reset.h>
-> +#include <asm/gpio.h>
->  #include <dm/lists.h>
-> -#include <dwc3-uboot.h>
-> -#include <generic-phy.h>
-> -#include <linux/bitops.h>
->  #include <linux/delay.h>
-> -#include <linux/printk.h>
-> -#include <linux/usb/ch9.h>
->  #include <linux/usb/gadget.h>
-> -#include <malloc.h>
->  #include <power/regulator.h>
-> -#include <usb.h>
-> -#include "core.h"
-> -#include "gadget.h"
-> -#include <reset.h>
-> -#include <clk.h>
->  #include <usb/xhci.h>
-> -#include <asm/gpio.h>
-> -
-> +#include "core.h"
->  #include "dwc3-generic.h"
-> +#include "gadget.h"
->  
->  struct dwc3_generic_plat {
->  	fdt_addr_t base;
-> -- 
-> 2.25.1
+>   	/* refresh old in case write happened to the same block. */
+>   	ret =3D fat_move_to_cluster(old_itr, old_itr->dent_clust);
+> @@ -2097,6 +2138,7 @@ int fat_rename(const char *old_path, const char *n=
+ew_path)
+>   	if (ret)
+>   		goto exit;
+>
+> +	ret =3D update_parent_dir_props(old_itr);
+>   exit:
+>   	free(new_datablock.fatbuf);
+>   	free(old_datablock.fatbuf);
+
