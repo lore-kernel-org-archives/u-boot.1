@@ -4,149 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E9AC02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 09:28:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCB87C02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 09:40:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3974E80815;
-	Wed, 22 Jan 2025 10:28:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=vaisala.com
+	by phobos.denx.de (Postfix) with ESMTP id 1AF6F80763;
+	Wed, 22 Jan 2025 10:40:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=vaisala.com header.i=@vaisala.com header.b="tkNYjPOA";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="Jqh/bWSX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD53280283; Wed, 22 Jan 2025 10:28:24 +0100 (CET)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on20731.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260c::731])
+ id 15BFE8078B; Wed, 22 Jan 2025 10:40:23 +0100 (CET)
+Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBF4F807E9
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 10:28:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 922F480586
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 10:40:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=vaisala.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Tapio.Reijonen@vaisala.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u/8LlW+pRdzYv3xoBstimT1UFASJ5oddlIPn+iSNeAv7o+oNZZoNnvyi38HKiQ2OGTBuchB9TNhHWdwKuq9kg378uPar4P71d74MMX5493+Bk2QtlYUcuPQZ2lCA6zQ1E3Eg2QxBx0BRcxDsXVXSZ5cbdqQbozfrfxdgYlj0oMlY3VClSNb93ARYyYBL5yazJCJ65L+AdmuAqbr/4nAHoJN2Vr/yul7sf5HKPLFH+eI//dOP1gnMzFHMmy66KFSrqyzvHxj6AZcJMadxDS3kk3RYQ1eRrnmpQblTP+JmxKhIOEmcpzaEoNHEcxh1F/GVSCX0LXQdQaKBOIU7uBGTaw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VzI0oc7mT2v9P+qH38EOw/HiwkBq5jZ0QcZ2aCT2SJM=;
- b=DmPvG0qtB4M8QD27+6YUPrwFY2skDgjlxqtCZDRUv95mqO9TXUQTwxWqxm/TTQxZ2/lpEj/EJn7fls8r7Qm2K+lx49SRUUQ8Vpv+jx/1DqGRvxPEVQ0ctdaDLQ+NP7zzWLeEPspkeqj5vxKrmoTZ2dWVssWNSe+RMSP73JmXpORjOys8NTw5i9I7n0Wwl6WsubTyE1agkcGqM/RyqTeD7DMr76mm+joI/1cTXZbWD2N/8zyMR5KMcjEIq/mrReFJ/1ANXOU0By9HAho14mvTqi3gcXvw7kKi4KpnK9mA4Wig4pj4hzdfaFTWq3ux/NUgLmbDNgiKESFus9ypHT1wxw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VzI0oc7mT2v9P+qH38EOw/HiwkBq5jZ0QcZ2aCT2SJM=;
- b=tkNYjPOAZvD3ZS+1l65hfjG7VCop/h7OA6WF6NeS185Qz3FRSe8b5TFLNu5fT0qc7uoyPz2IO0YTrjr5BtibveSrdEvG84VWYk4WNUHtfr7JBLcSE9zQVjMbJhasyTwtdhmOgpS4NNqLiN3kJqLpZICYvFDCt6xGIlfwjFkhdYXDv6Tz7YK2nr8TueO4sD+ZNsxaU9j54kuFFeq0y4f/fpEuKKQuR7pyppOl+BHhc0nbS2LIGql2GXrYjcQHtSsBBLf5hVZsocSHt7pOau/BvIk0lXjxe7ykDubvXeCvimlxV0HhGrWBXv+AvNacdHzwz9NVi305xwdoCcccBcEgCg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vaisala.com;
-Received: from GVXPR06MB9065.eurprd06.prod.outlook.com (2603:10a6:150:11f::17)
- by PAWPR06MB8691.eurprd06.prod.outlook.com (2603:10a6:102:387::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.17; Wed, 22 Jan
- 2025 09:28:21 +0000
-Received: from GVXPR06MB9065.eurprd06.prod.outlook.com
- ([fe80::7675:1098:3208:53e7]) by GVXPR06MB9065.eurprd06.prod.outlook.com
- ([fe80::7675:1098:3208:53e7%5]) with mapi id 15.20.8356.020; Wed, 22 Jan 2025
- 09:28:21 +0000
-From: Tapio Reijonen <tapio.reijonen@vaisala.com>
-To: u-boot@lists.denx.de
-Cc: Tapio Reijonen <tapio.reijonen@vaisala.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Michal Simek <michal.simek@amd.com>, Ramon Fried <rfried.dev@gmail.com>,
- T Karthik Reddy <t.karthik.reddy@xilinx.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/2] net: phy: gmii2rgmii: Add support for phy ethernet id
- configuration
-Date: Wed, 22 Jan 2025 09:22:50 +0000
-Message-Id: <20250122092250.722356-3-tapio.reijonen@vaisala.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250122092250.722356-1-tapio.reijonen@vaisala.com>
-References: <20250122092250.722356-1-tapio.reijonen@vaisala.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: GV3P280CA0048.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:150:9::29) To GVXPR06MB9065.eurprd06.prod.outlook.com
- (2603:10a6:150:11f::17)
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1737538819; x=1737798019;
+ bh=20fCpt2S1X1ZFLOYR4p6YTNVFn44uoSk3L5aOtx6KOE=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=Jqh/bWSXuen1spEj/AnoheL8evsf7LlN96mlJynpQHSZOqd8bNuqCrUQOxuSWUhke
+ sxlHf4ejgEBOAeTDsXV4GLblDxtpWsRJdEth4jujP1UVtpzq+N4YtLKDGdBKRsRv8y
+ 1hsIFoCF+GE6kqColik4Yhs5grSSpu3Mh7kZhR6l9ARM+mwaxkKHYjcvZtfnhZnhZz
+ BLoXllI/vti7wY07/VrskqXa+FdtRzvFh1gT9pDLZV9whbBahQK/Yrmgxi+LcJ755U
+ TUbwex11t39K3UPV1CuuNSElwb1uTAMeeQVyVG4pNVLekTmICjCAsf7p/7vOPR+BJt
+ T1oAuimtk4fdA==
+Date: Wed, 22 Jan 2025 09:40:13 +0000
+To: Caleb Connolly <caleb.connolly@linaro.org>
+From: Sam Day <me@samcday.com>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] mach-snapdragon: support parsing memory info from
+ external FDT
+Message-ID: <4AZbBPh-iJwmB_GK_Kb53AqyKzVBlzPfqxtZ1SvqIN9Cat3w-M3tnoy__QzT7j-ukaHB4Tb9Qz7fV6WsiEmfmooL7j-9YDVAwxHSdRik5Ck=@samcday.com>
+In-Reply-To: <25dee2fd-e021-46cd-bff5-c0ae989a6c08@linaro.org>
+References: <20250120-qcom-parse-memory-updates-v1-0-54a7f0550cff@samcday.com>
+ <20250120-qcom-parse-memory-updates-v1-2-54a7f0550cff@samcday.com>
+ <25dee2fd-e021-46cd-bff5-c0ae989a6c08@linaro.org>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 27ce1d0a5b60be7d9e2e5871e641613bdba36a34
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR06MB9065:EE_|PAWPR06MB8691:EE_
-X-MS-Office365-Filtering-Correlation-Id: 389b25e8-9b1f-4943-eb89-08dd3ac71cdf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YBWm4EYc3pE+atChdeDBzi/V5utMD81nm5efr9XuYeKFhvF3wm5o6nAIJqAk?=
- =?us-ascii?Q?fC06qACe3sBB06koEbNXHoNiGp/jQACA9AZAm2GBdwO1+z9ONFV0AzJTgBbF?=
- =?us-ascii?Q?4ma9F+ZcvsMb/jWrvxiHTozvyubSDgafiL/EZ1qd2C9jdHq8GZNvDztALqk0?=
- =?us-ascii?Q?I2pyj72nw+fuNYDgiWzEVXCyA3t1NI9YRHNieSjLHzn4C82n+scMc2Wj4KgP?=
- =?us-ascii?Q?Gtlu7MrSCk98sQcPSoguFrDhjoj2i7FNgN5qCsHZNqCAK0hVDoMcZ8nD+nxg?=
- =?us-ascii?Q?8qsvA1Xoh/P90XzHs0Ynh/O/NtCPEemJY8eZCM7AjanRCQaSCBbYOwVnXGSA?=
- =?us-ascii?Q?pt3sM9kgcBtzS2Bug4HsW5h88JPRBVAGFOoJrh3R66AubiYl0ZVD7LUmYIiL?=
- =?us-ascii?Q?7l8oZlBptntKpE01pPiLK7CVDAUxEID/b3TVUAOkks5p7bW/9YmJ1jIKY5X3?=
- =?us-ascii?Q?shO3Aevi9JWOrLM+S6SuqjK5wUW3EtGaC+OJd+tmI+NP1/ancdUReGARFg6w?=
- =?us-ascii?Q?+EA3bgQPMR0TCEdO9pRPh1NnL5i7zQssMbHn0ZIR5pqhcbLUcvYu9Nbc7hFP?=
- =?us-ascii?Q?2iP0OvUNCa4kA7TVsj+M6N+t1K6ezHDoKn769DT/mojziOApOLpr1JrL9GQ7?=
- =?us-ascii?Q?MvAiVLMx/CCS8umEo+BzC/vsvDcWkMrvZofeEeQ7TlwqEvxw2YWOiiFxoybs?=
- =?us-ascii?Q?IRU5EF5JWftBtajDt8syuQQS496RaSzyqWplG2cDdzwGfw6nAUzCSKu19Jnm?=
- =?us-ascii?Q?U3nBhz0jm9o9Axsv91rtE01svUHBwh3+jvarIYPMS1hqV/0pJ+VgIhICJNPS?=
- =?us-ascii?Q?C+RHkx0uQDAODbdJoJM9JvBgRh3rKiieLzIHTZLx+dKN3If4JCp/vwYM9NLd?=
- =?us-ascii?Q?USK2R6gWkmF7uqeRxN8bQYYJ07zJCT41ivsRICt2wCt85wtKj9yKnAq6Yo1F?=
- =?us-ascii?Q?+gwa0gUCPD5QgT6i/1tMW7Etx+uq3njyXSRUJDS5GHHxxvOOv1199FRcr5oP?=
- =?us-ascii?Q?rCVDJdrdcdfdRVh8U+v7FxnpQ7lvr7iRMZMviw/hvAEH2yXTJUYrXzNkblwH?=
- =?us-ascii?Q?RTlgmLa2d0iklvTB/t7D147GKYmCH810L6RlJIN6xETw3+nCd6MdDK5W03/w?=
- =?us-ascii?Q?liDmzdTnRtbxVIWO6Ke3Vc5fwmqkG+QE16tB/sVFRUv5qh19Yfc8tktpsxXo?=
- =?us-ascii?Q?gJPtn06YgTw1l27PcFpw0OpGzWbkksf/YuYemxXkxpguFFK1Jn0+GAC5NcWn?=
- =?us-ascii?Q?Io5Qvp+hH0hICZz0LgH/1NG9RI89tnRyqlScFsNejtcpmANEUCblYrqmPKJ7?=
- =?us-ascii?Q?mchVmYjnFIsAUKzRCVMyqwUG9b0bxGwCUVkMO97jlWIM3/His87OU2cdbvy1?=
- =?us-ascii?Q?VuD9ldJdPFncRgpOul6BVbO9FSJxrb4yA5zQF8YcmXuqZb6qI4E2akfiPdQ1?=
- =?us-ascii?Q?VxZ/cXB2mVjLfm3QO2u4Ne9HRm8AGeqM?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR06MB9065.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?i3P51TAqnEB7oKDQJLF4MzlU70ktiCsfYZvWNofeKGgI8bStJyaT+nTVVn33?=
- =?us-ascii?Q?0x10fhtJHQBGimQC8kKWZluawu+elvo47kvdK0/gy6tMcnEFM5IPMTKbQUA8?=
- =?us-ascii?Q?3JaKZ+1ZcRCYnEtQJ8RMbxVTm7PxphMFa+GPFv0N40aazqpZnG1EeeICj3km?=
- =?us-ascii?Q?PFuEMXuStbUsXxrjsZNLat2NreNUXQCCMtRrltd1/WsJTuJdAzWh/TcPaeHU?=
- =?us-ascii?Q?KhLz1eqNh9YkQ89IQ8xLBAESpe2RhzZLQO8VVsS0cAAP6K11jawVj0PZ+FQM?=
- =?us-ascii?Q?sYaC5imoTiO0DP3sAA+m5nkyfl+Upxol9fpjTmo5Qt2A+/to8RpVE+WsSwHd?=
- =?us-ascii?Q?wlLJ5GUsDeQu/8jPyXrRUs+7wu5yIxn5Y5jce0sVxPRL3msFBR4+MZginfGZ?=
- =?us-ascii?Q?3tFevIaG/nqyJWXkvm7387i5E/IWIL98Wha7DiRHNGlysIbE/1U5IMAJYSQ8?=
- =?us-ascii?Q?MqRIheyxjAF1FCS73ENVC+0cPJhWMzXs/arswEdRqeioO2TN5LbIdqYOucns?=
- =?us-ascii?Q?Uz7/ej/vbKeH8hB3mg0w4BFvMkfKmyc4WmmeZGRQP5RIeulBeE7sJTIVBR0i?=
- =?us-ascii?Q?hnYfuaM/tbCH922YMf8E//oEQ+UtHQ6E2D1eBLtJw7My/YriMgSlCbssq/im?=
- =?us-ascii?Q?VDGAbBo03fu+PBLBnAgFkJOvrZMOg+yXThm3PnY6uYYq7AyaNSTeOWgUQHdf?=
- =?us-ascii?Q?OIC5hBEGrTI/msmtjif+sxvmEDr3br6VIJsFCJNHEDI9YypX0xUbCFeaq/TP?=
- =?us-ascii?Q?lRLtW3B0aLkwCzBVkIecx3kWOFaQxj+tQh83R+jRav81JGIA5X9WEpqhQj5z?=
- =?us-ascii?Q?OYcOhwoIgacpNsgHIu5TvQRuaC95MTPJHTCzmbVhyFJeIxKL5qMEwzH7CEan?=
- =?us-ascii?Q?zQ4WAaF8RcQPfLAY1kV+DmmIrpsr9yvsVr7KxYktTZ2OMayT+5wRIqAGK6mf?=
- =?us-ascii?Q?DM2tzHA+Ir9cWylimy3sW32O5fYMAtfABrKILlHm0GoPxhQqfAoblCzGwc3I?=
- =?us-ascii?Q?/uNu5Gt9/yd0YfCjAN8PABpnMqZIpHKeWQueiJaXezjzeaduOA1TgfT3f4eU?=
- =?us-ascii?Q?dqjJBoYcpfax4GYeFWFVRN0kCdOVp3pddpBCZ638PZd3AE3W2NLyBzE73na9?=
- =?us-ascii?Q?WvOH0V6nk1fck+SDmcFh70+tfA7CmMceZ/9ClgGt7kHlMPWd1FZ6qXEwuf5+?=
- =?us-ascii?Q?SVP1/hLKhp2PNOXpIgxeMr6VP5Zp0My7IYZOOHPQDnPXFbFcDc3xTJhreXSO?=
- =?us-ascii?Q?LT2fFd9+itreV2yu4oCoEviEjls0/kjtba8y8KgE11OLoDJpDQryEbxxJrd5?=
- =?us-ascii?Q?egtvK7CMxnoitmW98Iw8K5vgcnqJFJAYgSKmJMG68r8iOxd6i5q27YNe42If?=
- =?us-ascii?Q?mSp3cs3iO9b5CVOCPz4lCoAYrqQNXRdCvhN9BdqpMZbbJWcgMVnqslBaaGxf?=
- =?us-ascii?Q?EFV5i/cbuhRFtAQnSg4jEumwDCId9VnDowEHNh2lrAmcTnyjatNVnwdU2iNY?=
- =?us-ascii?Q?qBe6DBeZGWFjIYocNdo6JVD/8TU+lnTTV/VGB02/aZN/2Igs+7MQE1VA0m27?=
- =?us-ascii?Q?1pzIbV/nCJiWlAr/cmAZmLNWA3MVmUzbXmI3tfk7j0DPtYFfFDyJJJ17D6UP?=
- =?us-ascii?Q?5g=3D=3D?=
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 389b25e8-9b1f-4943-eb89-08dd3ac71cdf
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR06MB9065.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2025 09:28:21.5036 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9EuXKbkh4sPzqVLMU8bv4zvygUYJg+6zGnrNRRypBB9cy+X9JACjCi6WndQZ/LRcNm3NN9LIir5yoeDEVszr4OWAqP4Gjd9MuhLH9Xg6b2M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR06MB8691
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,51 +72,224 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When Kconfig PHY_ETHERNET_ID is set, create external PHY using via
-ethernet-phy-id driver to support using strapping resistors
-of the external PHY.
+'Ello Caleb,
 
-Fixes: a744a284e354 ("net: phy: Add support for ethernet-phy-id with gpio reset")
-Signed-off-by: Tapio Reijonen <tapio.reijonen@vaisala.com>
----
+On Tuesday, 21 January 2025 at 13:33, Caleb Connolly <caleb.connolly@linaro=
+.org> wrote:
+>=20
+> On 20/01/2025 20:43, Sam Day wrote:
+>=20
+> > Prior to this commit, board_fdt_blob_setup would decide which FDT to
+> > use, either the external one from the previous bootloader, or the
+> > internal one that was compiled into the binary.
+> >=20
+> > This commit expands that behaviour a bit further, and introduces a
+> > (default-enabled) option to always parse the /memory node from the
+> > external FDT (if it's present and valid), even if we're going to
+> > continue the boot with an internal one.
+> >=20
+> > The rationale here is that many (all?) of the upstream DTs for the
+> > msm8916 + sdm845 (and likely others) socs do not fully specify the /mem=
+ory
+> > node(s), since it's typically expected that the bootloader has selected
+> > one of these from an Android boot.img and then filled in the memory
+> > info.
+> >=20
+> > Caleb's original explanation in the commit that introduced
+> > qcom_parse_memory was dropped into a comment above that function, since
+> > this part of the early initialization is getting quite nuanced. We don'=
+t
+> > want uninitiated folks to see that code and run away screaming or give
+> > away all their possessions and move to a monastery or something.
+>=20
+>=20
+> Maaaybe this last sentence isn't super necessary :P
 
-Changes in v2:
-  - Fixing inside 80 chars per line
+No, I suppose not. We wouldn't want folks reading that last sentence to
+experience an existential crisis, smear themselves in mud and run through
+a supermarket completely naked. So I've removed it from the v2 patch :)
 
----
- drivers/net/phy/xilinx_gmii2rgmii.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+>=20
+> > Signed-off-by: Sam Day me@samcday.com
+> > ---
+> > arch/arm/mach-snapdragon/Kconfig | 13 +++++++++
+> > arch/arm/mach-snapdragon/board.c | 57 +++++++++++++++++++++++++++------=
+-------
+> > 2 files changed, 52 insertions(+), 18 deletions(-)
+> >=20
+> > diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdrago=
+n/Kconfig
+> > index 976c0e35fcef29bafecbbd6ea04459de852df275..0feb65a916459160a4da994=
+7a6d7224930d507b4 100644
+> > --- a/arch/arm/mach-snapdragon/Kconfig
+> > +++ b/arch/arm/mach-snapdragon/Kconfig
+> > @@ -45,4 +45,17 @@ config SYS_CONFIG_NAME
+> > Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+> > will be used for board configuration.
+> >=20
+> > +config SYS_MEMORY_FROM_EXTERNAL_FDT
+> > + bool "Always parse /memory from external device tree, if it's provide=
+d"
+> > + default y
+> > + help
+> > + When booting with an internal DT, we'll always use that since it's
+> > + expected to be more accurate + up-to-date than whatever the previous
+> > + bootloader hands us.
+> > +
+> > + The notable exception here is the /memory node. With this config opti=
+on
+> > + enabled, we'll initialize memory based on the information provided in=
+ the
+> > + external DT from the previous bootloader, even if we use the internal=
+ DT
+> > + for everything else.
+>=20
+>=20
+> I definitely understand why you made this a config option, but I think
+> we can make this make sense at runtime (admittedly with a little bit of
+> complexity).
+>=20
+> What if we adjust qcom_parse_memory() to return an int, 0 on success and
+> -ENODATA IFF (If and only if) the memory node has only a single entry
+> with a size of 0.
+>=20
+> Then we can call it first with the internal fdt, if it returns -ENODATA
+> and we have a valid external fdt then we can try that next.
+>=20
+> This way, your usecase with the msm8916 device will still work as
+> expected (since it will gracefully fall back to the external fdt), but
+> if for some reason we have a device where there needs to be an external
+> fdt but we want to override the memory map we can still do so.
+>=20
+> I think we can live with the small overhead here and optimise it in the
+> future if that becomes desirable, and avoid introducing a
+> device-specific config option.
 
-diff --git a/drivers/net/phy/xilinx_gmii2rgmii.c b/drivers/net/phy/xilinx_gmii2rgmii.c
-index e44b7b75bd58..d860f4c37856 100644
---- a/drivers/net/phy/xilinx_gmii2rgmii.c
-+++ b/drivers/net/phy/xilinx_gmii2rgmii.c
-@@ -18,7 +18,7 @@ DECLARE_GLOBAL_DATA_PTR;
- static int xilinxgmiitorgmii_config(struct phy_device *phydev)
- {
- 	ofnode node = phy_get_ofnode(phydev);
--	struct phy_device *ext_phydev;
-+	struct phy_device *ext_phydev = NULL;
- 	struct ofnode_phandle_args phandle;
- 	int ext_phyaddr = -1;
- 	int ret;
-@@ -40,8 +40,14 @@ static int xilinxgmiitorgmii_config(struct phy_device *phydev)
- 		return ret;
- 
- 	ext_phyaddr = ofnode_read_u32_default(phandle.node, "reg", -1);
--	ext_phydev = phy_find_by_mask(phydev->bus,
--				      1 << ext_phyaddr);
-+
-+	if (IS_ENABLED(CONFIG_PHY_ETHERNET_ID))
-+		ext_phydev = phy_connect_phy_id(phydev->bus, phydev->dev,
-+						ext_phyaddr);
-+
-+	if (!ext_phydev)
-+		ext_phydev = phy_find_by_mask(phydev->bus,
-+					      1 << ext_phyaddr);
- 	if (!ext_phydev) {
- 		printf("%s, No external phy device found\n", __func__);
- 		return -EINVAL;
--- 
-2.39.5
+Thanks for the suggestion, I like that approach and agree that the overhead
+introduced should be minimal, whilst giving us maximum compatibility across
+the myriad ways a boot might take place.
 
+I've already implemented and tested the requested changes in v2, which shou=
+ld
+hit the list shortly.
+
+Cheers,
+Sam
+
+>=20
+> > +
+> > endif
+> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdrago=
+n/board.c
+> > index 2ef936aab757c7045729a2dd91944f4f9bff917e..f637bce18546fb3a9fe389e=
+07f457346ad5f95c8 100644
+> > --- a/arch/arm/mach-snapdragon/board.c
+> > +++ b/arch/arm/mach-snapdragon/board.c
+> > @@ -88,6 +88,29 @@ int dram_init_banksize(void)
+> > return 0;
+> > }
+> >=20
+> > +/**
+> > + * The generic memory parsing code in U-Boot lacks a few things that w=
+e
+> > + * need on Qualcomm:
+> > + *
+> > + * 1. It sets gd->ram_size and gd->ram_base to represent a single memo=
+ry block
+> > + * 2. setup_dest_addr() later relocates U-Boot to ram_base + ram_size,=
+ the end
+> > + * of that first memory block.
+> > + *
+> > + * This results in all memory beyond U-Boot being unusable in Linux wh=
+en booting
+> > + * with EFI.
+> > + *
+> > + * Since the ranges in the memory node may be out of order, the only w=
+ay for us
+> > + * to correctly determine the relocation address for U-Boot is to pars=
+e all
+> > + * memory regions and find the highest valid address.
+> > + *
+> > + * We can't use fdtdec_setup_memory_banksize() since it stores the res=
+ult in
+> > + * gd->bd, which is not yet allocated.
+>=20
+>=20
+> Thanks for adding this!
+>=20
+> Kind regards,
+>=20
+> > + *
+> > + * This function requires a pointer to the specific FDT that we should=
+ parse
+> > + * for its /memory block. This is because when SYS_MEMORY_FROM_EXTERNA=
+L_FDT is
+> > + * enabled, we might be looking at the FDT provided by the previous bo=
+otloader,
+> > + * rather than our internal (gd->fdt_blob) one.
+> > + */
+> > static void qcom_parse_memory(const void *fdt)
+> > {
+> > int offset;
+> > @@ -153,13 +176,13 @@ static void show_psci_version(void)
+> > */
+> > int board_fdt_blob_setup(void **fdtp)
+> > {
+> > - struct fdt_header *fdt;
+> > + struct fdt_header *external_fdt, *internal_fdt;
+> > bool internal_valid, external_valid;
+> > - int ret =3D 0;
+> >=20
+> > - fdt =3D (struct fdt_header *)get_prev_bl_fdt_addr();
+> > - external_valid =3D fdt && !fdt_check_header(fdt);
+> > - internal_valid =3D !fdt_check_header(*fdtp);
+> > + internal_fdt =3D (struct fdt_header *)*fdtp;
+> > + external_fdt =3D (struct fdt_header *)get_prev_bl_fdt_addr();
+> > + external_valid =3D external_fdt && !fdt_check_header(external_fdt);
+> > + internal_valid =3D !fdt_check_header(internal_fdt);
+> >=20
+> > /*
+> > * There is no point returning an error here, U-Boot can't do anything u=
+seful in this situation.
+> > @@ -167,24 +190,22 @@ int board_fdt_blob_setup(void **fdtp)
+> > /
+> > if (!internal_valid && !external_valid)
+> > panic("Internal FDT is invalid and no external FDT was provided! (fdt=
+=3D%#llx)\n",
+> > - (phys_addr_t)fdt);
+> > + (phys_addr_t)external_fdt);
+> > +
+> > + if (IS_ENABLED(CONFIG_SYS_MEMORY_FROM_EXTERNAL_FDT) && external_valid=
+)
+> > + / Explicitly use the external FDT to configure memory */
+> > + qcom_parse_memory(external_fdt);
+> > + else
+> > + qcom_parse_memory(internal_fdt);
+> >=20
+> > if (internal_valid) {
+> > debug("Using built in FDT\n");
+> > - ret =3D -EEXIST;
+> > - } else {
+> > - debug("Using external FDT\n");
+> > - /* So we can use it before returning */
+> > - *fdtp =3D fdt;
+> > + return -EEXIST;
+> > }
+> >=20
+> > - /*
+> > - * Parse the /memory node while we're here,
+> > - * this makes it easy to do other things early.
+> > - */
+> > - qcom_parse_memory(*fdtp);
+> > -
+> > - return ret;
+> > + debug("Using external FDT\n");
+> > + *fdtp =3D external_fdt;
+> > + return 0;
+> > }
+> >=20
+> > void reset_cpu(void)
+>=20
+>=20
+> --
+> // Caleb (they/them)
