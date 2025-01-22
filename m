@@ -4,82 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2ACC02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 09:00:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95A86C02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 09:02:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95EFC803B5;
-	Wed, 22 Jan 2025 10:00:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 18158803B5;
+	Wed, 22 Jan 2025 10:02:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="j4i4BhcS";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tIn5BMfj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5435880586; Wed, 22 Jan 2025 10:00:56 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 513F280586; Wed, 22 Jan 2025 10:02:35 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE31880283
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 10:00:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BE0480283
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 10:02:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1737536452; x=1738141252; i=xypron.glpk@gmx.de;
- bh=uU1e0rPUNGWFHEeuICla2P+gGydS8tcI67+fmOVaje0=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=j4i4BhcSAyGqZHpQPEPuGvE26vaf+ub24LgQrlOmvGzEIpq0rGYarNxnDsmKTqys
- af9+/vNkIaJzsk6C0Hvvh5DMD4P7BR98dUn0hltLkLiZQodz2tYazkDOC4fxbv9os
- r3jtoi5otghHA1M/3qCeL1PKbvzIUyn9dhS7460UoBijjjp2FbM34Khv/AjVE8Ho6
- /zAAe71GXqseoCHluPKKVZRbYGeHirxwJMpGydxfZ0KQxeHqwop9HPDKEVKT1rQr4
- m4CJpB4i4Q2keml5tJ1nguBqQziOyuZJ6Bu7hGfFCKNat3MF9ceP3TsvIQNeutdcL
- T9QLD8wRHqrmVXWCiA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLR1f-1tt0vX13HX-00Vnig; Wed, 22
- Jan 2025 10:00:52 +0100
-Message-ID: <14244381-2773-4265-82db-972f6ca684b8@gmx.de>
-Date: Wed, 22 Jan 2025 10:00:51 +0100
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-385e1fcb0e1so3518534f8f.2
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 01:02:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1737536552; x=1738141352;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pQq1+exsL0QSrKEq3NmrePMQ0o5wAO1KhXaH/Ripk+g=;
+ b=tIn5BMfjeYU1l+IBS6Uil1sf9TexkGp6U8xDCcfx27vD8bTgQ/RrAs/qusIaPdgchB
+ 7aJnTEkzh7+efbM61QOAUSnxjyT5IEhJMDEc0A8bUE7KXMRpzqh4KKH90FnZVsTDqO4F
+ /KTHD0Ju+UpC/Nms/LcPUCPaURXAfW+YkS9TVfnoO3vyjJEY/KR+mgBf1zktsPfRaN/N
+ CPFPETI/Eat2xhZqN9RCALFNghzS1bAPlBLScfYI1PMlFfZRPRaT67hdSPBAAEhlnGYd
+ C3k8QTZm9N2UmmKxf6olVCYkCOKK2WJv8Yir/giiEh68B6t8ObPHUzv2zTG96LAUSBHf
+ 4Kjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737536552; x=1738141352;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pQq1+exsL0QSrKEq3NmrePMQ0o5wAO1KhXaH/Ripk+g=;
+ b=cpbw4YytrI2UX4EFuWGmU8HjoMfp5WpuHnO56mmQxIrqPQLa5rMIRa4UQxZrshmtLS
+ XXim6BUQKNdmQ8bXL89Dno6pb/tktrvdxTkTYnX88f6vJAu79rWRHjfFxXZSYC2kfRUM
+ FejdLG6YlUqDEQ09JLIrYnLne9HXbcIvLa0VR9hZEePlaFUKyHTGG4Vb/GL1U4tntmyn
+ jT0v9Dz7O64QqgZk0lFOcIvEjADCT0z14tfQIbo7gUvxpDYXIU0ddmmEgpAHCZuyFJVM
+ ykoRc7FeFl5W9ckNq9plKZ3VZ+ak9Bid8ZhWqU4FCYAVIHZ0Q8nHcE85DRp9RYcSRc1l
+ NXJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV9rdX8t/80eqMVOXDTif+EyJSPkyfoavC+6UtFIvddZfb3YkFFlrtMCbd3OsWuJ6LGwnx/vfk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwX4ZPh5REhBxaYPty+e6tZSrb9959o2W6YtqDxVpOZQn9uL2d5
+ N01gioVBjghkCFcRPbP2jS2HWCEPVST9DoFKypHil37IKQAkhaQ1RlVmWnx1K/k=
+X-Gm-Gg: ASbGncuH+rwI5mAEemlV6DGg7Eo9bK8U2TzvXFJs1WzqdBXYfc4E6Vk5lhZUiYBgeLn
+ xppSnHV1zktwcycZunu4aMk4eidgtTkAVpMl22A4Cy7y7Bz4aLtFW1q9SuLcoQTRl7rz+UPHyaC
+ aCOR2kPSefpXxcg/kQOu5PjMpOs2VfpivA0cZtR/5/1YLKboHQ+YjxbZhV3MS3//vdmHJKbaWpt
+ 4CYiS5S5r8HNzKgj3cJqRDRSkJImFparVsBSucEgQkFIua0cgTin1g8qee7hu9tHu+y59GNSbs4
+ xaI=
+X-Google-Smtp-Source: AGHT+IHsU15VnyOi+30uigh1aSt8FTfoj3oPVrVig3dg6hyc3uxfjFRE0jX2QPtJi7NWA4U4StPgow==
+X-Received: by 2002:a5d:4303:0:b0:385:f892:c8fe with SMTP id
+ ffacd0b85a97d-38bf566b62dmr15833681f8f.21.1737536552411; 
+ Wed, 22 Jan 2025 01:02:32 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38bf3221baasm15846309f8f.35.2025.01.22.01.02.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jan 2025 01:02:31 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+Cc: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, Sjoerd
+ Simons <sjoerd@collabora.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v3 4/9] usb: dwc3-generic: Add STih407 support
+In-Reply-To: <20250120080120.51657-5-patrice.chotard@foss.st.com>
+References: <20250120080120.51657-1-patrice.chotard@foss.st.com>
+ <20250120080120.51657-5-patrice.chotard@foss.st.com>
+Date: Wed, 22 Jan 2025 10:02:31 +0100
+Message-ID: <871pwvkyqg.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] fs: fat: update parent dirs metadata on rename
-To: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250122053232.17365-1-gabriel.dalimonte@gmail.com>
- <20250122053232.17365-5-gabriel.dalimonte@gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250122053232.17365-5-gabriel.dalimonte@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:DUxpyRhPhlRE2ZpZIRQimSH7foO3XzkXwD6Jh3Jb0h5Dxb39Ua5
- DS5erAnigVNtKGeVQOciyp5YjTUo3Yw1qjHKmNfcK8mGHNkPkj5RVGlGKklOWCdV/QAu+mM
- YCEOxONB0zqKd+uorkNoOOuVwK/n+TFCLvB5ImACLCz6JcoCZFSnwi9vmnVOHwTD5XU/cwG
- zQbmFXiECl/5wfFGG8LjQ==
-UI-OutboundReport: notjunk:1;M01:P0:8Vu1xoYHFZE=;EY8OMOR641Ak8z/ivJ+w2UA9xV0
- YdjNjIongk2Ja9fFO+ps1rNSis/JoSEWP08IT5VKVOyGywU/HnNL51WBDjX9OFtGOvOyj24zf
- 5ZefhoCXc+tt3kGpIuTFOeXJgYGjV/1yxO1+8xO6govJP2i9pzFvyWuy2RbpZA4tkjPbRRvPa
- E7ACUdmrgeaH0WFmbWz30bte/a+zTI413KgZDfBtagu7epBVQqcuCKYQb44gcFnTrQIxWTJbB
- s2kEYZtSjDME++Y/pe6M23LQcxLoTQxhfRJJN5AqVTnaEvAUWDsRhtK+T9zKAzCGTLoO9lbwe
- p/GRWRNrtdIy7t42RlX2SFoyM/Bwza9FXO30wFBjvd09FEqNrgLErErMDsgYztykLV7oOODGY
- Ew4jqKL/PLrvaprHtwgLgjvFqM8RhENxFTDVwX0beXbKIKjLhA6lgLby7GJ8dgrUSzWXElpGm
- 5eYiOw4dBCxqCd1hFy5tawDgv2+F2WWRZKOPPT2y0IkxGjxNeNKPRRgtZIsCLXyyZStPv+ME4
- +ktJwco92YbkBNujFPS9IChMql4Qctx8ejnOQMDHwwvG/LjMzMjB4Pi/8dtTk/ChUTkuXSgb9
- vJrTZKhpHQojuOLOxw7+IMpRG0fL++1mIOpWdnQ6R6/Xg34DxWXp2jLrBVDxgIzp+aHGoEPsT
- wt/E0PsltthmfBIJ0BgNpLnl92F1pzU/vy5TJWye5obzcYNUfTGGsegC5bKYPeSMnFkUAHS3h
- jigbkuJvVa/QA4DsFie9DpKIeVU48EklmOKBXfX28j+D+wO0x3YM90U1Jof+vCTxuyZh3zCht
- OBqedQb0Jb/1cxELk1wppPmWIBecGmYrQZ/CB3+QqaRtvOVa4oGhunAfvCaLgQrF1vWCvg8hf
- bohx7o5RAr8QIiJWDWaG8UrSj3+MA8ljlCcZlVbgmkjvrVbfe4lxqtRxiJpHmGJ20yeKprltF
- 8KnsiJfI0+Rao9BtCAfb39C5vfv9jxEONZ+YHHYFsVCz5PIdcE16vgZK0OBfbz3jj8+H6SDQU
- R5EdTWZs0dIEwQMaWC14qiowy+PrwUUuOQjVjjNQvLUK4Pyr0qXuzz5WozWT1suXHAwnPtjf8
- qLCslYjRhw2BGufR4ZQ3wbt49wM61108YgyFN5LjpVTDXAcBOyD6JlgG32w7OSoL572Hcizkm
- 7VtVTFS6dUgOhn8hOCL0rXbkYDNus+m5EVvYbI/LTgQ==
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,114 +105,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22.01.25 06:32, Gabriel Dalimonte wrote:
-> None of the existing fat code appears to update parent dir properties
-> however, the POSIX specification for rename() mentions that the
-> last modified timestamp should be updated. In addition, I believe
-> the ATTR_ARCH attribute should also be reset on the parent directories
-> as the content of those directories has changed.
+Hi Patrice,
 
-Could you, please, provide a link to the referenced specification.
+Thank you for the patch.
 
-E.g. https://pubs.opengroup.org/onlinepubs/9799919799/functions/rename.htm=
-l
+On lun., janv. 20, 2025 at 09:01, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
 
-Here I find:
-"Upon successful completion, rename() shall mark for update the last
-data modification and last file status change timestamps of the parent
-directory of each file."
-
-Does this mean that if we move a directory we would have to update the
-fields of all moved non-empty sub-directories?
-
-On many boards we don't have a real time clock. Should we skip updating
-if we have no RTC?
-
-If we want to update parent directories, we should do this for file
-creation, too. The update function could be called in the function where
-we create directory entries.
-
-Best regards
-
-Heinrich
-
+> Add STi glue logic to manage the DWC3 HC on STiH407
+> SoC family. It configures the internal glue logic and
+> syscfg registers.
 >
-> Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Marek Vasut <marex@denx.de>
+>
 > ---
 >
->   fs/fat/fat_write.c | 42 ++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 42 insertions(+)
+> Changes in v3:
+>   - Replace debug() by dev_err()
+>   - check return value of syscon_regmap_lookup_by_phandle()
 >
-> diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-> index f9f7051e30..2559e38d5b 100644
-> --- a/fs/fat/fat_write.c
-> +++ b/fs/fat/fat_write.c
-> @@ -1912,6 +1912,42 @@ exit:
->   	return ret;
->   }
+> Changes in v2:
+>   - add dwc3-sti.c DWC3 wrapper as done for dwc3-am62.c
 >
-> +/**
-> + * update_parent_dir_props - updates the modified time and resets the a=
-rchive
-> + * attribute for the parent directory
+>  MAINTAINERS                         |   1 +
+>  drivers/usb/dwc3/Kconfig            |   6 ++
+>  drivers/usb/dwc3/Makefile           |   1 +
+>  drivers/usb/dwc3/dwc3-generic-sti.c | 132 ++++++++++++++++++++++++++++
+>  4 files changed, 140 insertions(+)
+>  create mode 100644 drivers/usb/dwc3/dwc3-generic-sti.c
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 8c6c0c2a4bc..5d7e251e601 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -656,6 +656,7 @@ F:	drivers/mmc/sti_sdhci.c
+>  F:	drivers/reset/sti-reset.c
+>  F:	drivers/serial/serial_sti_asc.c
+>  F:	drivers/sysreset/sysreset_sti.c
+> +F:	drivers/usb/host/dwc3-sti.c
+>  F:	drivers/timer/arm_global_timer.c
+>  F:	drivers/usb/host/dwc3-sti-glue.c
+>  F:	include/dwc3-sti-glue.h
+> diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
+> index 0100723a68b..7d58ae65fb6 100644
+> --- a/drivers/usb/dwc3/Kconfig
+> +++ b/drivers/usb/dwc3/Kconfig
+> @@ -87,6 +87,12 @@ config USB_DWC3_LAYERSCAPE
+>  	  Host and Peripheral operation modes are supported. OTG is not
+>  	  supported.
+>  
+> +config USB_DWC3_STI
+> +	bool "STi USB wrapper"
+> +	depends on DM_USB && USB_DWC3_GENERIC && SYSCON
+> +	help
+> +	  Select this for STi Platforms.
+
+The improvements done in v3 based on the comments from v2 look good to me.
+However, checkpatch seems unhappy about this:
+
+$ ./scripts/checkpatch.pl --git --u-boot --git master..HEAD
+
+--------------------------------------------------------------
+Commit 2a4d2432f669 ("usb: dwc3-generic: Add STih407 support")
+--------------------------------------------------------------
+WARNING: please write a paragraph that describes the config symbol fully
+#42: FILE: drivers/usb/dwc3/Kconfig:90:
++config USB_DWC3_STI
+
+Can't we reuse the help description from 'config USB_XHCI_STI' ?
+I'm sorry I missed this before.
+
+With that addressed, please add:
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> +
+>  menu "PHY Subsystem"
+>  
+>  config USB_DWC3_PHY_OMAP
+> diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
+> index a085c9d4628..985206eafe4 100644
+> --- a/drivers/usb/dwc3/Makefile
+> +++ b/drivers/usb/dwc3/Makefile
+> @@ -15,3 +15,4 @@ obj-$(CONFIG_USB_DWC3_UNIPHIER)		+= dwc3-uniphier.o
+>  obj-$(CONFIG_USB_DWC3_LAYERSCAPE)	+= dwc3-layerscape.o
+>  obj-$(CONFIG_USB_DWC3_PHY_OMAP)		+= ti_usb_phy.o
+>  obj-$(CONFIG_USB_DWC3_PHY_SAMSUNG)	+= samsung_usb_phy.o
+> +obj-$(CONFIG_USB_DWC3_STI)		+= dwc3-generic-sti.o
+> diff --git a/drivers/usb/dwc3/dwc3-generic-sti.c b/drivers/usb/dwc3/dwc3-generic-sti.c
+> new file mode 100644
+> index 00000000000..2ff640cede4
+> --- /dev/null
+> +++ b/drivers/usb/dwc3/dwc3-generic-sti.c
+> @@ -0,0 +1,132 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+> +/*
+> + * STi specific glue layer for DWC3
 > + *
-> + * @itr:	iterator positioned anywhere in a directory whose parent shoul=
-d be
-> + *	updated
-> + * @Return:	0 for success
+> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
 > + */
-> +static int update_parent_dir_props(fat_itr *itr)
+> +
+> +#include <reset.h>
+> +#include <regmap.h>
+> +#include <syscon.h>
+> +#include <asm/io.h>
+> +#include <dm/device.h>
+> +#include <dm/device_compat.h>
+> +#include <dm/read.h>
+> +#include <linux/usb/otg.h>
+> +#include "dwc3-generic.h"
+> +
+> +/* glue registers */
+> +#define CLKRST_CTRL		0x00
+> +#define AUX_CLK_EN		BIT(0)
+> +#define SW_PIPEW_RESET_N	BIT(4)
+> +#define EXT_CFG_RESET_N		BIT(8)
+> +
+> +#define XHCI_REVISION		BIT(12)
+> +
+> +#define USB2_VBUS_MNGMNT_SEL1	0x2C
+> +#define USB2_VBUS_UTMIOTG	0x1
+> +
+> +#define SEL_OVERRIDE_VBUSVALID(n)	((n) << 0)
+> +#define SEL_OVERRIDE_POWERPRESENT(n)	((n) << 4)
+> +#define SEL_OVERRIDE_BVALID(n)		((n) << 8)
+> +
+> +/* Static DRD configuration */
+> +#define USB3_CONTROL_MASK		0xf77
+> +
+> +#define USB3_DEVICE_NOT_HOST		BIT(0)
+> +#define USB3_FORCE_VBUSVALID		BIT(1)
+> +#define USB3_DELAY_VBUSVALID		BIT(2)
+> +#define USB3_SEL_FORCE_OPMODE		BIT(4)
+> +#define USB3_FORCE_OPMODE(n)		((n) << 5)
+> +#define USB3_SEL_FORCE_DPPULLDOWN2	BIT(8)
+> +#define USB3_FORCE_DPPULLDOWN2		BIT(9)
+> +#define USB3_SEL_FORCE_DMPULLDOWN2	BIT(10)
+> +#define USB3_FORCE_DMPULLDOWN2		BIT(11)
+> +
+> +static void dwc3_stih407_glue_configure(struct udevice *dev, int index,
+> +					enum usb_dr_mode mode)
 > +{
-> +	int ret =3D 0;
-> +	__u32 target_clust =3D itr->start_clust;
-> +	/* For START macro */
-> +	fsdata *mydata =3D itr->fsdata;
+> +	struct dwc3_glue_data *glue = dev_get_plat(dev);
+> +	struct regmap *regmap;
+> +	ulong syscfg_base;
+> +	ulong syscfg_offset;
+> +	ulong glue_base;
+> +	int ret;
 > +
-> +	if (!itr->is_root) {
-> +		ret =3D fat_itr_parent(itr);
-> +		if (ret)
-> +			return ret;
-> +
-> +		while (fat_itr_next(itr)) {
-> +			if (START(itr->dent) =3D=3D target_clust)
-> +				goto update;
-> +		}
-> +
-> +		/* dent not found */
-> +		return -EIO;
-> +update:
-> +		dentry_set_time(itr->dent);
-> +		itr->dent->attr |=3D ATTR_ARCH;
-> +		ret =3D flush_dir(itr);
+> +	/* deassert both powerdown and softreset */
+> +	ret = reset_deassert_bulk(&glue->resets);
+> +	if (ret) {
+> +		dev_err(dev, "reset_deassert_bulk error: %d\n", ret);
+> +		return;
 > +	}
 > +
-> +	return ret;
-> +}
+> +	regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscfg");
+> +	if (IS_ERR(regmap)) {
+> +		dev_err(dev, "unable to get st,syscfg, dev %s\n", dev->name);
+> +		return;
+> +	}
 > +
->   /**
->    * fat_rename - rename/move a file or directory
->    *
-> @@ -2086,7 +2122,12 @@ int fat_rename(const char *old_path, const char *=
-new_path)
->   		ret =3D flush_dir(new_itr);
->   		if (ret)
->   			goto exit;
-> +		/* restore directory location to update parent props below */
-> +		fat_itr_child(new_itr, new_itr);
->   	}
-> +	ret =3D update_parent_dir_props(new_itr);
-> +	if (ret)
-> +		goto exit;
->
->   	/* refresh old in case write happened to the same block. */
->   	ret =3D fat_move_to_cluster(old_itr, old_itr->dent_clust);
-> @@ -2097,6 +2138,7 @@ int fat_rename(const char *old_path, const char *n=
-ew_path)
->   	if (ret)
->   		goto exit;
->
-> +	ret =3D update_parent_dir_props(old_itr);
->   exit:
->   	free(new_datablock.fatbuf);
->   	free(old_datablock.fatbuf);
-
+> +	syscfg_base = regmap->ranges[0].start;
+> +	glue_base = dev_read_addr_index(dev, 0);
+> +	syscfg_offset = dev_read_addr_index(dev, 1);
+> +
+> +	clrbits_le32(syscfg_base + syscfg_offset, USB3_CONTROL_MASK);
+> +
+> +	/* glue drd init */
+> +	switch (mode) {
+> +	case USB_DR_MODE_PERIPHERAL:
+> +		clrbits_le32(syscfg_base + syscfg_offset,
+> +			     USB3_DELAY_VBUSVALID | USB3_SEL_FORCE_OPMODE |
+> +			     USB3_FORCE_OPMODE(0x3) | USB3_SEL_FORCE_DPPULLDOWN2 |
+> +			     USB3_FORCE_DPPULLDOWN2 | USB3_SEL_FORCE_DMPULLDOWN2 |
+> +			     USB3_FORCE_DMPULLDOWN2);
+> +
+> +		setbits_le32(syscfg_base + syscfg_offset,
+> +			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID);
+> +		break;
+> +
+> +	case USB_DR_MODE_HOST:
+> +		clrbits_le32(syscfg_base + syscfg_offset,
+> +			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID |
+> +			     USB3_SEL_FORCE_OPMODE | USB3_FORCE_OPMODE(0x3) |
+> +			     USB3_SEL_FORCE_DPPULLDOWN2 | USB3_FORCE_DPPULLDOWN2 |
+> +			     USB3_SEL_FORCE_DMPULLDOWN2 | USB3_FORCE_DMPULLDOWN2);
+> +
+> +		setbits_le32(syscfg_base + syscfg_offset, USB3_DELAY_VBUSVALID);
+> +		break;
+> +
+> +	default:
+> +		dev_err(dev, "Unsupported mode of operation %d\n", mode);
+> +		return;
+> +	}
+> +
+> +	/* glue init */
+> +	setbits_le32(glue_base + CLKRST_CTRL, AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION);
+> +	clrbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
+> +
+> +	/* configure mux for vbus, powerpresent and bvalid signals */
+> +	setbits_le32(glue_base + USB2_VBUS_MNGMNT_SEL1,
+> +		     SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
+> +		     SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
+> +		     SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG));
+> +	setbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
+> +};
+> +
+> +struct dwc3_glue_ops stih407_ops = {
+> +	.glue_configure = dwc3_stih407_glue_configure,
+> +};
+> +
+> +static const struct udevice_id dwc3_sti_match[] = {
+> +	{ .compatible = "st,stih407-dwc3", .data = (ulong)&stih407_ops},
+> +	{ /* sentinel */ }
+> +};
+> +
+> +U_BOOT_DRIVER(dwc3_sti_wrapper) = {
+> +	.name = "dwc3-sti",
+> +	.id = UCLASS_SIMPLE_BUS,
+> +	.of_match = dwc3_sti_match,
+> +	.bind = dwc3_glue_bind,
+> +	.probe = dwc3_glue_probe,
+> +	.remove = dwc3_glue_remove,
+> +	.plat_auto = sizeof(struct dwc3_glue_data),
+> +};
+> -- 
+> 2.25.1
