@@ -4,91 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95A86C02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 09:02:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF8A1C02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 09:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18158803B5;
-	Wed, 22 Jan 2025 10:02:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id F3C2B80586;
+	Wed, 22 Jan 2025 10:18:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tIn5BMfj";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="j3/yFIfA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 513F280586; Wed, 22 Jan 2025 10:02:35 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C2A4180763; Wed, 22 Jan 2025 10:18:39 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BE0480283
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 10:02:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98A6680283
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 10:18:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-385e1fcb0e1so3518534f8f.2
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 01:02:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1737536552; x=1738141352;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=pQq1+exsL0QSrKEq3NmrePMQ0o5wAO1KhXaH/Ripk+g=;
- b=tIn5BMfjeYU1l+IBS6Uil1sf9TexkGp6U8xDCcfx27vD8bTgQ/RrAs/qusIaPdgchB
- 7aJnTEkzh7+efbM61QOAUSnxjyT5IEhJMDEc0A8bUE7KXMRpzqh4KKH90FnZVsTDqO4F
- /KTHD0Ju+UpC/Nms/LcPUCPaURXAfW+YkS9TVfnoO3vyjJEY/KR+mgBf1zktsPfRaN/N
- CPFPETI/Eat2xhZqN9RCALFNghzS1bAPlBLScfYI1PMlFfZRPRaT67hdSPBAAEhlnGYd
- C3k8QTZm9N2UmmKxf6olVCYkCOKK2WJv8Yir/giiEh68B6t8ObPHUzv2zTG96LAUSBHf
- 4Kjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737536552; x=1738141352;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pQq1+exsL0QSrKEq3NmrePMQ0o5wAO1KhXaH/Ripk+g=;
- b=cpbw4YytrI2UX4EFuWGmU8HjoMfp5WpuHnO56mmQxIrqPQLa5rMIRa4UQxZrshmtLS
- XXim6BUQKNdmQ8bXL89Dno6pb/tktrvdxTkTYnX88f6vJAu79rWRHjfFxXZSYC2kfRUM
- FejdLG6YlUqDEQ09JLIrYnLne9HXbcIvLa0VR9hZEePlaFUKyHTGG4Vb/GL1U4tntmyn
- jT0v9Dz7O64QqgZk0lFOcIvEjADCT0z14tfQIbo7gUvxpDYXIU0ddmmEgpAHCZuyFJVM
- ykoRc7FeFl5W9ckNq9plKZ3VZ+ak9Bid8ZhWqU4FCYAVIHZ0Q8nHcE85DRp9RYcSRc1l
- NXJA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV9rdX8t/80eqMVOXDTif+EyJSPkyfoavC+6UtFIvddZfb3YkFFlrtMCbd3OsWuJ6LGwnx/vfk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwX4ZPh5REhBxaYPty+e6tZSrb9959o2W6YtqDxVpOZQn9uL2d5
- N01gioVBjghkCFcRPbP2jS2HWCEPVST9DoFKypHil37IKQAkhaQ1RlVmWnx1K/k=
-X-Gm-Gg: ASbGncuH+rwI5mAEemlV6DGg7Eo9bK8U2TzvXFJs1WzqdBXYfc4E6Vk5lhZUiYBgeLn
- xppSnHV1zktwcycZunu4aMk4eidgtTkAVpMl22A4Cy7y7Bz4aLtFW1q9SuLcoQTRl7rz+UPHyaC
- aCOR2kPSefpXxcg/kQOu5PjMpOs2VfpivA0cZtR/5/1YLKboHQ+YjxbZhV3MS3//vdmHJKbaWpt
- 4CYiS5S5r8HNzKgj3cJqRDRSkJImFparVsBSucEgQkFIua0cgTin1g8qee7hu9tHu+y59GNSbs4
- xaI=
-X-Google-Smtp-Source: AGHT+IHsU15VnyOi+30uigh1aSt8FTfoj3oPVrVig3dg6hyc3uxfjFRE0jX2QPtJi7NWA4U4StPgow==
-X-Received: by 2002:a5d:4303:0:b0:385:f892:c8fe with SMTP id
- ffacd0b85a97d-38bf566b62dmr15833681f8f.21.1737536552411; 
- Wed, 22 Jan 2025 01:02:32 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38bf3221baasm15846309f8f.35.2025.01.22.01.02.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jan 2025 01:02:31 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Robert Marko <robert.marko@sartura.hr>, Sam Protsenko
- <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, Sjoerd
- Simons <sjoerd@collabora.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 4/9] usb: dwc3-generic: Add STih407 support
-In-Reply-To: <20250120080120.51657-5-patrice.chotard@foss.st.com>
-References: <20250120080120.51657-1-patrice.chotard@foss.st.com>
- <20250120080120.51657-5-patrice.chotard@foss.st.com>
-Date: Wed, 22 Jan 2025 10:02:31 +0100
-Message-ID: <871pwvkyqg.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1737537514; x=1738142314; i=xypron.glpk@gmx.de;
+ bh=xKNjhr4FhLqR+qh2dGtEPN0BYWbfU2N/tc3EyR050wI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:From:To:
+ Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ cc:content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=j3/yFIfA7Lw6XPLvO/Uh+CQ01oxOf3JhGV2tvXR5TcSC3lqdAd/VinyM7OCdssm9
+ XH/LaXYf2d07OwQf3MvMPy/zBnj3yNexWhj07kdan5GzpOyQqSmM52Ye2rEeZ7xLz
+ n2jI/ZGYThntx7aL/bZCC4OUJYetN3YaCiUASEkbjGq0/SqbT7hsyg3VJdpj9AcTH
+ gk+m06xIOoK4R923ldUXuGdsg7KIp7JiBzHoGWyqYKqPUNT9UVWR+miPBSNDXCe+W
+ p3nMHpCqN2UGB+mFx/ufJzeIqjGjE0GJk80MHjbyDhFjhsgXxdyGmDqZbMpJn7ae7
+ TbZZ7UrBVJRY/5dsXg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MmUHp-1tAETD2ya9-00jGVs; Wed, 22
+ Jan 2025 10:18:34 +0100
+Message-ID: <648d934e-17fc-4f6d-9cb7-574e0144af8f@gmx.de>
+Date: Wed, 22 Jan 2025 10:18:34 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] fs: add rename infrastructure
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250122053232.17365-1-gabriel.dalimonte@gmail.com>
+ <20250122053232.17365-3-gabriel.dalimonte@gmail.com>
+ <4a2a96b2-dc0e-4cd2-96c5-399d96f2b5fb@gmx.de>
+Content-Language: en-US
+In-Reply-To: <4a2a96b2-dc0e-4cd2-96c5-399d96f2b5fb@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:a6qXTdPUh/BiZuWP5VNEa/KFj2BMxU11O9s97l397CnT4uqoMls
+ wWDj6jEwCN6txTM8x1taNjbzSziOGejO6ANyBFsDwQewkYM1Zonfwgc0vQR/gx3Krnqawba
+ blfH1+XI8rwfLWGw+NRFm2a2JZCUIY6lZkI/SqpIrkQRbnWcP1QrylBXA3KvF9UzBOvyAjo
+ rVaHzmht6p3UVEW641lZg==
+UI-OutboundReport: notjunk:1;M01:P0:i5w2YPVpuRI=;+7QvPV+xjg+ThyWg7pOX2U5itS4
+ w75fx0K8ASmifmjQ2GxM2xMoY209Qs1o4vqn4TgW5qBfUbclSu8WITcw+XCSblnX3X5KQbDug
+ w+OyZMYFedB3lTp+eXQr/l/04bbIwxTZxPN6/OuJghWglJyEnLl2RzC7umlIp1iBCs0VbBmia
+ MomijjPvaH+36NRLIPx+R/AzMcVggDYxr6onZD7OFmprLaNRDjz56kflb9osr+dhr4LVPmeCj
+ 9fzzKQHHDkJC/q6vF48kH/WqEIcn3I+CvHVq6F2EBGCy0UzKQQEybSbfYWU6XvpcfsmicWyXl
+ pGZvHwb1GkSkDvoT5zo28g6TLi0bLNizs8xqxim9KRZ/lGuF8bzDeiOZVXzLDFKw8T2o6yaLn
+ mcTPhlYkJI8Fur8GZJiVugzNjR+IUhk9DmdhUMQN0bY5RtMR4RFOHqzomoBS9Y9kEcw5Fs10w
+ /84Hgw74xaYc6Sj86z0P3eH10tVmxUbck1E33Dj8KfGAIT/Uevuj2lmELbdho9paGT9WANhp4
+ 6+AZ6WCYaEYPqW7tSIebnBaofTzNZbKnHGauelNU+etStaIQOVa9umAPoK+6hzQKHvYFvZHAV
+ 4AZPHuG+Ii7hCzBh0MAMOY35fekl92WygVfmcjKLV8jQ/pXd0T6PJ2zc6IuZJT80FcAiq81di
+ rpIwyLK2KJrNaxEKTuiZunX4wS5UD+rUjPVHDC8zzP+jE2+jcTL1LtBIR8ASrX0Pq/Q4yLsOJ
+ aV95zEEtbudz1T2DbeGd+5+NdPr1F0BB7IAikWWQNIKIDS0W0aEiDL4DJu/QwAOOVTOmmAry8
+ xntg1BoqAzyC8YuOszmVWpQMlzcJVl4QaxqOo3mxpz43Q2ImYj3J/o3d2IsNRWeieKuLoN0hO
+ EOk9lPCYbHPFT3/HBx10yPE2KcJZxaFDrHzmE8hfQs8qg+K+gT3rn01lgTDdYyBjqqodnyg1e
+ 8gvi65jMFhjXp9cu0Fwwku5HVqL+ipOT2zw4Y0TDoVwe8uupL46IRMw/yX/Hm1zLtdYjahh/H
+ iGOfRf5ThKU79EDbS5AAggdvMZKiFpSJO8HdgyBV8gcP5Nj/rpsljoxVzJQszEzFi6ZnlbJPE
+ 0MMtAgSocsuPjvx4ZjwMjoKi972IezgORmiflSUIaGWbse3XBWBFeaTlh0C8U9yYigIv1S70W
+ +l1mBQB/7GiCbSe28knBCil/HBoAEqKv1IvjrvIxKFA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,230 +98,279 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice,
-
-Thank you for the patch.
-
-On lun., janv. 20, 2025 at 09:01, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
-
-> Add STi glue logic to manage the DWC3 HC on STiH407
-> SoC family. It configures the internal glue logic and
-> syscfg registers.
+On 22.01.25 09:10, Heinrich Schuchardt wrote:
+> On 22.01.25 06:32, Gabriel Dalimonte wrote:
+>> Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
+>> ---
 >
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Marek Vasut <marex@denx.de>
+> Please, add a commit message.
 >
-> ---
+>>
+>> =C2=A0 fs/fs.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 47 +++++++++++++++++++++=
+++++++++++++++++++++++++++
+>> =C2=A0 include/fs.h | 13 +++++++++++++
+>> =C2=A0 2 files changed, 60 insertions(+)
+>>
+>> diff --git a/fs/fs.c b/fs/fs.c
+>> index 99ddcc5e37..160a43c957 100644
+>> --- a/fs/fs.c
+>> +++ b/fs/fs.c
+>> @@ -143,6 +143,12 @@ static inline int fs_mkdir_unsupported(const char
+>> *dirname)
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -1;
+>> =C2=A0 }
+>>
+>> +static inline int fs_rename_unsupported(const char *old_path,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 const char *new_path)
+>> +{
+>> +=C2=A0=C2=A0=C2=A0 return -1;
+>> +}
+>> +
+>> =C2=A0 struct fstype_info {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int fstype;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 char *name;
+>> @@ -183,6 +189,7 @@ struct fstype_info {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int (*unlink)(const char *filename);
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int (*mkdir)(const char *dirname);
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int (*ln)(const char *filename, const ch=
+ar *target);
+>> +=C2=A0=C2=A0=C2=A0 int (*rename)(const char *old_path, const char *new=
+_path);
+>> =C2=A0 };
+>>
+>> =C2=A0 static struct fstype_info fstypes[] =3D {
+>> @@ -206,6 +213,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> =C2=A0 #endif
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .uuid =3D fat_uu=
+id,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .opendir =3D fat=
+_opendir,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .readdir =3D fat=
+_readdir,
+>> @@ -238,6 +246,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .closedir =3D ex=
+t4fs_closedir,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 },
+>> =C2=A0 #endif
+>> =C2=A0 #if IS_ENABLED(CONFIG_SANDBOX) && !IS_ENABLED(CONFIG_XPL_BUILD)
+>> @@ -257,6 +266,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .ln =3D fs_ln_un=
+supported,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 },
+>> =C2=A0 #endif
+>> =C2=A0 #if CONFIG_IS_ENABLED(SEMIHOSTING)
+>> @@ -276,6 +286,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .ln =3D fs_ln_un=
+supported,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 },
+>> =C2=A0 #endif
+>> =C2=A0 #ifndef CONFIG_XPL_BUILD
+>> @@ -296,6 +307,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .ln =3D fs_ln_un=
+supported,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 },
+>> =C2=A0 #endif
+>> =C2=A0 #endif
+>> @@ -317,6 +329,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .ln =3D fs_ln_un=
+supported,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 },
+>> =C2=A0 #endif
+>> =C2=A0 #endif
+>> @@ -339,6 +352,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .ln =3D fs_ln_un=
+supported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 },
+>> =C2=A0 #endif
+>> =C2=A0 #if IS_ENABLED(CONFIG_FS_EROFS)
+>> @@ -360,6 +374,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .ln =3D fs_ln_un=
+supported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 },
+>> =C2=A0 #endif
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 {
+>> @@ -378,6 +393,7 @@ static struct fstype_info fstypes[] =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .unlink =3D fs_u=
+nlink_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .mkdir =3D fs_mk=
+dir_unsupported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .ln =3D fs_ln_un=
+supported,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .rename =3D fs_rename_unsup=
+ported,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 },
+>> =C2=A0 };
+>>
+>> @@ -713,6 +729,22 @@ int fs_ln(const char *fname, const char *target)
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
+>> =C2=A0 }
+>>
+>> +int fs_rename(const char *old_path, const char *new_path)
+>> +{
+>> +=C2=A0=C2=A0=C2=A0 struct fstype_info *info =3D fs_get_info(fs_type);
+>> +=C2=A0=C2=A0=C2=A0 int ret;
+>> +
+>> +=C2=A0=C2=A0=C2=A0 ret =3D info->rename(old_path, new_path);
+>> +
+>> +=C2=A0=C2=A0=C2=A0 if (ret < 0) {
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 log_err("** Unable to renam=
+e %s -> %s **\n", old_path,
+>> new_path);
 >
-> Changes in v3:
->   - Replace debug() by dev_err()
->   - check return value of syscon_regmap_lookup_by_phandle()
+> We should not write messages by default. This will may lead to output
+> layout in EFI applications looking wrong.
 >
-> Changes in v2:
->   - add dwc3-sti.c DWC3 wrapper as done for dwc3-am62.c
+> log_debug() would be adequate.
 >
->  MAINTAINERS                         |   1 +
->  drivers/usb/dwc3/Kconfig            |   6 ++
->  drivers/usb/dwc3/Makefile           |   1 +
->  drivers/usb/dwc3/dwc3-generic-sti.c | 132 ++++++++++++++++++++++++++++
->  4 files changed, 140 insertions(+)
->  create mode 100644 drivers/usb/dwc3/dwc3-generic-sti.c
+> We don't need the "** " first characters.
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 8c6c0c2a4bc..5d7e251e601 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -656,6 +656,7 @@ F:	drivers/mmc/sti_sdhci.c
->  F:	drivers/reset/sti-reset.c
->  F:	drivers/serial/serial_sti_asc.c
->  F:	drivers/sysreset/sysreset_sti.c
-> +F:	drivers/usb/host/dwc3-sti.c
->  F:	drivers/timer/arm_global_timer.c
->  F:	drivers/usb/host/dwc3-sti-glue.c
->  F:	include/dwc3-sti-glue.h
-> diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
-> index 0100723a68b..7d58ae65fb6 100644
-> --- a/drivers/usb/dwc3/Kconfig
-> +++ b/drivers/usb/dwc3/Kconfig
-> @@ -87,6 +87,12 @@ config USB_DWC3_LAYERSCAPE
->  	  Host and Peripheral operation modes are supported. OTG is not
->  	  supported.
->  
-> +config USB_DWC3_STI
-> +	bool "STi USB wrapper"
-> +	depends on DM_USB && USB_DWC3_GENERIC && SYSCON
-> +	help
-> +	  Select this for STi Platforms.
+> Otherwise the patch looks good to me.
+>
+> Best regards
+>
+> Heinrich
+>
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret =3D -1;
+>> +=C2=A0=C2=A0=C2=A0 }
+>> +=C2=A0=C2=A0=C2=A0 fs_close();
+>> +
+>> +=C2=A0=C2=A0=C2=A0 return ret;
+>> +}
+>> +
+>> =C2=A0 int do_size(struct cmd_tbl *cmdtp, int flag, int argc, char *con=
+st
+>> argv[],
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int fstype)
+>> =C2=A0 {
+>> @@ -975,6 +1007,21 @@ int do_ln(struct cmd_tbl *cmdtp, int flag, int
+>> argc, char *const argv[],
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 0;
+>> =C2=A0 }
+>>
+>> +int do_rename(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+>> argv[],
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int fstype)
+>> +{
+>> +=C2=A0=C2=A0=C2=A0 if (argc !=3D 5)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return CMD_RET_USAGE;
+>> +
+>> +=C2=A0=C2=A0=C2=A0 if (fs_set_blk_dev(argv[1], argv[2], fstype))
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 1;
+>> +
+>> +=C2=A0=C2=A0=C2=A0 if (fs_rename(argv[3], argv[4]))
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 1;
+>> +
+>> +=C2=A0=C2=A0=C2=A0 return 0;
+>> +}
+>> +
+>> =C2=A0 int do_fs_types(struct cmd_tbl *cmdtp, int flag, int argc, char =
+*
+>> const argv[])
+>> =C2=A0 {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct fstype_info *drv =3D fstypes;
+>> diff --git a/include/fs.h b/include/fs.h
+>> index 2474880385..24b121f55d 100644
+>> --- a/include/fs.h
+>> +++ b/include/fs.h
+>> @@ -270,6 +270,17 @@ int fs_unlink(const char *filename);
+>> =C2=A0=C2=A0 */
+>> =C2=A0 int fs_mkdir(const char *filename);
+>>
+>> +/**
+>> + * fs_rename - rename a file or directory
 
-The improvements done in v3 based on the comments from v2 look good to me.
-However, checkpatch seems unhappy about this:
+Shouldn't this function be called fs_move() and allow moving a file from
+one directory to another?
 
-$ ./scripts/checkpatch.pl --git --u-boot --git master..HEAD
+>> + *
+>> + * @old_path: existing path of the file/directory to rename
+>> + * @new_path: new path of the file/directory. If this points to an
+>> existing
+>> + * file or empty directory, the existing file/directory will be
+>> unlinked.
 
---------------------------------------------------------------
-Commit 2a4d2432f669 ("usb: dwc3-generic: Add STih407 support")
---------------------------------------------------------------
-WARNING: please write a paragraph that describes the config symbol fully
-#42: FILE: drivers/usb/dwc3/Kconfig:90:
-+config USB_DWC3_STI
+What happens if the directory is non-empty?
 
-Can't we reuse the help description from 'config USB_XHCI_STI' ?
-I'm sorry I missed this before.
+I would prefer a real move function that copies the old file to the
+pre-existing target directory.
 
-With that addressed, please add:
+Best regards
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Heinrich
 
-> +
->  menu "PHY Subsystem"
->  
->  config USB_DWC3_PHY_OMAP
-> diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
-> index a085c9d4628..985206eafe4 100644
-> --- a/drivers/usb/dwc3/Makefile
-> +++ b/drivers/usb/dwc3/Makefile
-> @@ -15,3 +15,4 @@ obj-$(CONFIG_USB_DWC3_UNIPHIER)		+= dwc3-uniphier.o
->  obj-$(CONFIG_USB_DWC3_LAYERSCAPE)	+= dwc3-layerscape.o
->  obj-$(CONFIG_USB_DWC3_PHY_OMAP)		+= ti_usb_phy.o
->  obj-$(CONFIG_USB_DWC3_PHY_SAMSUNG)	+= samsung_usb_phy.o
-> +obj-$(CONFIG_USB_DWC3_STI)		+= dwc3-generic-sti.o
-> diff --git a/drivers/usb/dwc3/dwc3-generic-sti.c b/drivers/usb/dwc3/dwc3-generic-sti.c
-> new file mode 100644
-> index 00000000000..2ff640cede4
-> --- /dev/null
-> +++ b/drivers/usb/dwc3/dwc3-generic-sti.c
-> @@ -0,0 +1,132 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * STi specific glue layer for DWC3
-> + *
-> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
-> + */
-> +
-> +#include <reset.h>
-> +#include <regmap.h>
-> +#include <syscon.h>
-> +#include <asm/io.h>
-> +#include <dm/device.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/read.h>
-> +#include <linux/usb/otg.h>
-> +#include "dwc3-generic.h"
-> +
-> +/* glue registers */
-> +#define CLKRST_CTRL		0x00
-> +#define AUX_CLK_EN		BIT(0)
-> +#define SW_PIPEW_RESET_N	BIT(4)
-> +#define EXT_CFG_RESET_N		BIT(8)
-> +
-> +#define XHCI_REVISION		BIT(12)
-> +
-> +#define USB2_VBUS_MNGMNT_SEL1	0x2C
-> +#define USB2_VBUS_UTMIOTG	0x1
-> +
-> +#define SEL_OVERRIDE_VBUSVALID(n)	((n) << 0)
-> +#define SEL_OVERRIDE_POWERPRESENT(n)	((n) << 4)
-> +#define SEL_OVERRIDE_BVALID(n)		((n) << 8)
-> +
-> +/* Static DRD configuration */
-> +#define USB3_CONTROL_MASK		0xf77
-> +
-> +#define USB3_DEVICE_NOT_HOST		BIT(0)
-> +#define USB3_FORCE_VBUSVALID		BIT(1)
-> +#define USB3_DELAY_VBUSVALID		BIT(2)
-> +#define USB3_SEL_FORCE_OPMODE		BIT(4)
-> +#define USB3_FORCE_OPMODE(n)		((n) << 5)
-> +#define USB3_SEL_FORCE_DPPULLDOWN2	BIT(8)
-> +#define USB3_FORCE_DPPULLDOWN2		BIT(9)
-> +#define USB3_SEL_FORCE_DMPULLDOWN2	BIT(10)
-> +#define USB3_FORCE_DMPULLDOWN2		BIT(11)
-> +
-> +static void dwc3_stih407_glue_configure(struct udevice *dev, int index,
-> +					enum usb_dr_mode mode)
-> +{
-> +	struct dwc3_glue_data *glue = dev_get_plat(dev);
-> +	struct regmap *regmap;
-> +	ulong syscfg_base;
-> +	ulong syscfg_offset;
-> +	ulong glue_base;
-> +	int ret;
-> +
-> +	/* deassert both powerdown and softreset */
-> +	ret = reset_deassert_bulk(&glue->resets);
-> +	if (ret) {
-> +		dev_err(dev, "reset_deassert_bulk error: %d\n", ret);
-> +		return;
-> +	}
-> +
-> +	regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscfg");
-> +	if (IS_ERR(regmap)) {
-> +		dev_err(dev, "unable to get st,syscfg, dev %s\n", dev->name);
-> +		return;
-> +	}
-> +
-> +	syscfg_base = regmap->ranges[0].start;
-> +	glue_base = dev_read_addr_index(dev, 0);
-> +	syscfg_offset = dev_read_addr_index(dev, 1);
-> +
-> +	clrbits_le32(syscfg_base + syscfg_offset, USB3_CONTROL_MASK);
-> +
-> +	/* glue drd init */
-> +	switch (mode) {
-> +	case USB_DR_MODE_PERIPHERAL:
-> +		clrbits_le32(syscfg_base + syscfg_offset,
-> +			     USB3_DELAY_VBUSVALID | USB3_SEL_FORCE_OPMODE |
-> +			     USB3_FORCE_OPMODE(0x3) | USB3_SEL_FORCE_DPPULLDOWN2 |
-> +			     USB3_FORCE_DPPULLDOWN2 | USB3_SEL_FORCE_DMPULLDOWN2 |
-> +			     USB3_FORCE_DMPULLDOWN2);
-> +
-> +		setbits_le32(syscfg_base + syscfg_offset,
-> +			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID);
-> +		break;
-> +
-> +	case USB_DR_MODE_HOST:
-> +		clrbits_le32(syscfg_base + syscfg_offset,
-> +			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID |
-> +			     USB3_SEL_FORCE_OPMODE | USB3_FORCE_OPMODE(0x3) |
-> +			     USB3_SEL_FORCE_DPPULLDOWN2 | USB3_FORCE_DPPULLDOWN2 |
-> +			     USB3_SEL_FORCE_DMPULLDOWN2 | USB3_FORCE_DMPULLDOWN2);
-> +
-> +		setbits_le32(syscfg_base + syscfg_offset, USB3_DELAY_VBUSVALID);
-> +		break;
-> +
-> +	default:
-> +		dev_err(dev, "Unsupported mode of operation %d\n", mode);
-> +		return;
-> +	}
-> +
-> +	/* glue init */
-> +	setbits_le32(glue_base + CLKRST_CTRL, AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION);
-> +	clrbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
-> +
-> +	/* configure mux for vbus, powerpresent and bvalid signals */
-> +	setbits_le32(glue_base + USB2_VBUS_MNGMNT_SEL1,
-> +		     SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
-> +		     SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
-> +		     SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG));
-> +	setbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
-> +};
-> +
-> +struct dwc3_glue_ops stih407_ops = {
-> +	.glue_configure = dwc3_stih407_glue_configure,
-> +};
-> +
-> +static const struct udevice_id dwc3_sti_match[] = {
-> +	{ .compatible = "st,stih407-dwc3", .data = (ulong)&stih407_ops},
-> +	{ /* sentinel */ }
-> +};
-> +
-> +U_BOOT_DRIVER(dwc3_sti_wrapper) = {
-> +	.name = "dwc3-sti",
-> +	.id = UCLASS_SIMPLE_BUS,
-> +	.of_match = dwc3_sti_match,
-> +	.bind = dwc3_glue_bind,
-> +	.probe = dwc3_glue_probe,
-> +	.remove = dwc3_glue_remove,
-> +	.plat_auto = sizeof(struct dwc3_glue_data),
-> +};
-> -- 
-> 2.25.1
+>> + *
+>> + * Return: 0 on success, -1 on error conditions
+>> + */
+>> +int fs_rename(const char *old_path, const char *new_path);
+>> +
+>> =C2=A0 /*
+>> =C2=A0=C2=A0 * Common implementation for various filesystem commands, o=
+ptionally
+>> limited
+>> =C2=A0=C2=A0 * to a specific filesystem type via the fstype parameter.
+>> @@ -290,6 +301,8 @@ int do_mkdir(struct cmd_tbl *cmdtp, int flag, int
+>> argc, char *const argv[],
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int fstype=
+);
+>> =C2=A0 int do_ln(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+>> argv[],
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int fstype);
+>> +int do_rename(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+>> argv[],
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int fstype);
+>>
+>> =C2=A0 /*
+>> =C2=A0=C2=A0 * Determine the UUID of the specified filesystem and print=
+ it.
+>> Optionally it is
+>
+
