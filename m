@@ -4,69 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B45DC02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 14:32:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2DBC02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 15:03:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80ED68083F;
-	Wed, 22 Jan 2025 15:32:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 833D38078B;
+	Wed, 22 Jan 2025 16:03:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737556363;
-	bh=xbFn8DttEcbPGsEva0TKqXoMTx10/J0P1axmI0el3O8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=XtFws107jJA1i5umoKey7wbx1Hvs1E/WJWmL8Uez5FwYx79MBPqo2uBdCt2QZedcz
-	 ZgoUYdcEgLLCZzqZz2x/Vej7chYr5UJBctswUIHWRu3zBYokR8pTmKPq5pV0I1h+Zi
-	 J30KloibOPNueiAoiIBGquQFVKa8XN27eXPQxvDJ3+SeBixsrzPI8o1jrkDyk64h0C
-	 ZOPTEpGe/L84L9Uygf53ii8/4kQkGtTDvXsXBksjWoi4NPe1v2+RT/O2AxIKVavTLY
-	 blQSS8y5IEfyXpObGJSzvqwTgcvKruirRXO/6o9Lpr522wIDdoQWyLVSeAB1ulneyO
-	 Ai5A9rgLKlRRg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6732880843; Wed, 22 Jan 2025 15:32:42 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DE198083E
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 15:32:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="SCpQpqoV"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 716D91048B8EB; Wed, 22 Jan 2025 15:32:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737556359;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xbFn8DttEcbPGsEva0TKqXoMTx10/J0P1axmI0el3O8=;
- b=SCpQpqoVJ28+wHBeeBweP4wLnhDvlta+hcYOF+4fr4nfPVJYNuwSePDHvX5NRRkG2o8G6H
- A7laMi7j4YKH0NcQp4leL8f2tvhgb935jq2DAJL+xh21t9vTAezSX/aqRw3GzXWhcZc1Wk
- oyetSDtA+sOnW/xtUdc/GAoU0RDPqZ0D0touecNUlpSWr/FuxVpB1PPJ+1wU3CGwY7KJiV
- oOJFpJxbLFRzdGQpO//l123rZDbi7kMR1/dkBpTQUV2BSqrqTblzJ8qnlrt4mMleNDGXw/
- Y8GFOxjsA3gHM6+oe4fvCjn41HCCOjbM5msWVTvceekjWAAa+6w/NqjjACXVEg==
-Message-ID: <d973c75a-5b54-42aa-b68f-dcf45f8b3144@denx.de>
-Date: Wed, 22 Jan 2025 15:32:37 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jk5FaL84";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1C6E980812; Wed, 22 Jan 2025 16:03:07 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BB26480763
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 16:03:04 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f28a4fccso10862890a12.2
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 07:03:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737558184; x=1738162984; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ehnRpAXquS9xhsD6lJP9lE4qllrXdqpurU30qAl0viE=;
+ b=jk5FaL84mMTK3dAVipfTrze+IiJB+csGIxRulqjeCOSM/i3CWtJNGs1iNzQZjX325n
+ FQtwllCDgsSPP3Uy5YE+LsStLTHCBRRG/pTSBZ0kAdZvnrQfwJHfPlVxk9CJhRPj0AUS
+ KhN0A7CQu0Wj2t1DzOtGDVRNPQ6k+P3TIyq5NxdJ+0TH4hVk3/ao8vAbMVcth8vGMh9A
+ sm4uQY+vmFlNL7qorXS/UuG06A1u7Bao0x7TsGBVSVhfYYHK7by/u6ZbnrevO5OJ/pOw
+ bHUPjfuqWkyZr7+VaLuM8HmIPyOySB+NGNbl1KXetPU6ro03jxIM/G0LOyrJUQEvRDK8
+ ePAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737558184; x=1738162984;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ehnRpAXquS9xhsD6lJP9lE4qllrXdqpurU30qAl0viE=;
+ b=CTA1j/QqnNdVM9JOMxYPVA1N3AXlaH/y9N7ZNGn8qmMSTuXe2FBmoZNM8Fjuwwhts7
+ icSZlETspxnAPxFEJXWg6fqbNyQ7/rUccgAcsEMpkKgcstwoQAnCEPWaPXeLNMLSjSl/
+ IvSdv+YEuTcXIpdxVbXxxYIwMZKp6eFVCPCu1GqOYQ+2MUbGmMu8mSKl4zkyNpIooWaN
+ 5DCZNmZxF3axRL2pFvDcVbSBkY4U8MEhL7NUry044ISngcgUvpdWG+Xe3/o9brsYbpWH
+ 7MM5dy5N2KefvtaNw5jTroyXVh2bTG6ShkO9v4uGJ+wGNO3mFV0GZ0OITtFpma96ZFFZ
+ FH5w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX8jKhwW1/OC9NwR9UaO+sE+WE2qax6J+LutJZSk1A4tk19q3yy3KvyP+XUa1vnVG6WC7o8ZlI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxAfLL6KDy6rNaRpSZSra1xx6/VhKWUYA81flPEcoeDdmm4uD2+
+ B9rlPxmF9lTMTVFxc6B5v4/p7S09D9DPKeUUbC0fjwjSIZvXgf51QSNS69youcE=
+X-Gm-Gg: ASbGncuW6Yl8BSTzOzXeTIbqQ2huL1Tt9JvZaKHoIaTdZOMHz3/oabkse907yVAofLO
+ JXwkOj+Y9c2/1OCNBCMhb+inaxahyxsFCryZ7avtVBXJ0i+qV4AY+sqMKQXGUcxfTwisL0BkKEq
+ enT4Q8ilshlS2dVokOEveIez0HqBZpPZyiwnHhFgvs/nDbj5+dvlpfBbnUoVaE+AOGUIVJpXjRp
+ gZiBopjDn+OGAXUmMkhjq795RdTUKPpjOlI0rT/il0ShV8wRynhiKeQnFBy4gv//PTescpLx/C4
+ SaEMGJrWDmWP
+X-Google-Smtp-Source: AGHT+IHb1xAODS7smhKT/lhY+w02ci775nDMjNO9dxJMtGpx0k/psF9I0EgDGS4q+9Fv6tMQRgxhfw==
+X-Received: by 2002:a17:906:cf85:b0:ab6:36fd:1c8f with SMTP id
+ a640c23a62f3a-ab636fd22c0mr900971266b.39.1737558184004; 
+ Wed, 22 Jan 2025 07:03:04 -0800 (PST)
+Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ab384f223fesm930214166b.105.2025.01.22.07.03.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jan 2025 07:03:03 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH 0/2] Snapdragon SC7280 pinctrl
+Date: Wed, 22 Jan 2025 16:02:50 +0100
+Message-Id: <20250122-pinctrl-sc7280-v1-0-8bdba72e6366@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] image: apply FDTOs on FDT image node without a load
- property
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>
-References: <20250122-extlinux-relocate-dtb-when-dtbo-v3-1-46bef4eac720@cherry.de>
- <ee42f531-0084-467e-86e5-3c16a8c90cb4@cherry.de>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <ee42f531-0084-467e-86e5-3c16a8c90cb4@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJoIkWcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDQyMj3YLMvOSSohzd4mRzIwsD3cQUS4PkxKRES0MTUyWgpoKi1LTMCrC
+ B0bG1tQB8PLqfYAAAAA==
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: Markus Bauer <Markus.Bauer2@tria-technologies.com>, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=614;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=Yshr0fOJ9DLOZZmJfaptO31d+puJlPybKvrAhW0cnlQ=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhvSJHMs4dywJ0717d7euxf+6TS8P5k/qMVSY/FXmy8Yrz
+ /e8szk2oaOUhUGQg0FWTJFF/MQyy6a1l+01ti+4ADOHlQlkCAMXpwBcxJHhn/aGVWYv7mlcv3Ve
+ YoLwYb3oKZOfL076sNhrS0fkE/1gxR6G/xXmumq5Itc9fmhcv7rOZo/o4Tn7RNYyzdHLOzTh/LK
+ /zLEA
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,36 +112,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/22/25 3:21 PM, Quentin Schulz wrote:
+Introduce and enable pinctrl support for SC7280 and QCM6490, similarly
+to other platforms.
 
-[...]
+This was missed during RB3 Gen 2 bringup.
 
->> @@ -2395,17 +2395,18 @@ int boot_get_fdt_fit(struct bootm_headers 
->> *images, ulong addr,
->>       /* we need to apply overlays */
->>   #ifdef CONFIG_OF_LIBFDT_OVERLAY
->> -    image_start = addr;
->> -    image_end = addr + fit_get_size(fit);
->> -    /* verify that relocation took place by load address not being in 
->> fit */
->> -    if (load >= image_start && load < image_end) {
->> -        /* check is simplified; fit load checks for overlaps */
->> -        printf("Overlayed FDT requires relocation\n");
->> +    /* Relocate FDT so resizing does not overwrite other data in FIT. */
->> +    of_flat_tree = map_sysmem(load, len);
->> +    len = ALIGN(fdt_totalsize(load), SZ_4K);
->> +    err = boot_relocate_fdt(&of_flat_tree, &len);
-> 
-> My bad, I mistakenly "compile-tested" this with a defconfig that doesn't 
-> enable CONFIG_OF_LIBFDT_OVERLAY so this was never built.
-> 
-> The compiler is actually not happy about that, it wants it cast to (char 
-> **).
-> 
-> @Marek, what do you prefer? We go back to having of_flat_tree a char* or 
-> do the cast in boot_relocate_fdt?
-What about -- go back and add a code comment ?
+---
+Caleb Connolly (2):
+      pinctrl: qcom: add sc7280 pinctrl driver
+      qcom_defconfig: enable PINCTRL_QCOM_SC7280
 
-btw. please try and clip the response using [...] so you won't be 
-quoting a wall of useless text each time. The actual response is then 
-hard to find in it.
+ configs/qcom_defconfig                |   1 +
+ drivers/pinctrl/qcom/Kconfig          |   7 +++
+ drivers/pinctrl/qcom/Makefile         |   1 +
+ drivers/pinctrl/qcom/pinctrl-sc7280.c | 106 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 115 insertions(+)
+---
+base-commit: 639cd409987acf173eaffebe7876968b42fd7c32
+
+// Caleb (they/them)
+
