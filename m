@@ -4,205 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4CF6C02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 12:02:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5156C02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 12:12:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7D6780586;
-	Wed, 22 Jan 2025 13:02:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FAF7803B5;
+	Wed, 22 Jan 2025 13:12:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="fuz/NB++";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1737547932;
+	bh=AugM6kqyG2L15PPxC3jpwD38AlOs5SYuIBI2pkI+EzY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=yAzqsjHKmkRsVDrfI7LwEnX0kUNEcONKyQcZbLvIgHNLj5oSWX75r0uEHZ5tHEjzw
+	 Jer8O5qBMpPdh464OzB3ag3kTzhOubkvH2WdrdKmDLE7tCU1NbAJraXgnJyMkiZ2Es
+	 QrY6Iiex+1lL2eR7b+ZPRNa32RKHOtv+XHPjJLysTVW3qqgY53mXYndmhJi0T6grsg
+	 HcMSMRQ6tyvUJwTUyNehpzfbzqlTtuhTf1vL+U3U79dpUVP7ZWA+1niuwJGCuQhOdx
+	 zKREqc2TEz7+ja4pGs1tg9Nc2K18dH0LwRxWgS6JKPbXRYn7F1BrbrNfzI03zq8rKA
+	 2/MuTtxwoF9QQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C31680763; Wed, 22 Jan 2025 13:02:48 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::62e])
+ id 88DE780586; Wed, 22 Jan 2025 13:12:11 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2B5D803B5
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 13:02:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B52F4801FB
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 13:12:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SHsJRSyao+x2K4olwa1ccA2l74Ysq1ZICAABFWi34v8KB3pnep2Z1sgLYTbh6ZEOPafPL365xveTFQB/GzM0RjesKiLeN0mzs0+53rrQJqJ3GmA1uujE39oS1NvS3m9eLKLatEah7OypL2q0gncL5h9Kep5UxnYUrotAgfOY9lMwVSv0oZHvDg0QO276S6yvw29EpuiMlzlm4a14kOcw+a4ZbgqJXn5lykqZvkqf4OYiZqK1qjwhRA/7yxCC11N14Hap/boRQg+E8IVuEk5Ys/GLwmcUC8uIaHKt68I8WdyK2qUV9+87hTgBcOmXE2x9ZT+5IMs0a3iWNEUTsiJ37Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SGfzJBsl7+d4IwHO6B/Li7HVpY2JjK59lyp02SuZZPY=;
- b=HuYAagcnciM21PBv/ulNY0yCOYGiSEiIBalVvoBgfpkqGdNOyzN5kpIb8xVT3XOttElDuEPR2vJUoW0GHN4j2jSVH/XlwXr37G6xU90uRvnkwseFxB6GYEZapMdZHfJUlppLp8BnPEYbDB8RBRETwBZk9pUE7uJ62WG5SbVAZsFANUBl5x4Ie1V1BrjObiP8auOT7Ds9of2DgZTos8PV+CqWRrDyvymS3gZTATf7JMIHiGmUktnguAj08/DNWNr41qaLcpbhMNPwdrz2j1uH5dHPIwBYezh2vd7qEBLGdmNkwu+9eCoEvRhmUQL6Euw/gLYVuDF/wK2m+6foIgkr5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SGfzJBsl7+d4IwHO6B/Li7HVpY2JjK59lyp02SuZZPY=;
- b=fuz/NB++vBIVzF1G6+xSdor9CMfhxF9DWwrTqNSmESMI/aElpEmHZ3kNLkIDn4CysClelHa9F6pJcEWihfop4c42HrslJzmKVvVUNyd+wYGpQapqT3pnv7ojGB5Zno90y5mRJMawRbYPLtCpSR4eVEzAfOJpYQPrwDFG3Zdcrew=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by LV2PR12MB5725.namprd12.prod.outlook.com (2603:10b6:408:14c::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8356.20; Wed, 22 Jan
- 2025 12:02:42 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8356.020; Wed, 22 Jan 2025
- 12:02:41 +0000
-Message-ID: <85830fd6-e28d-41fe-9061-42c60bf41b9c@amd.com>
-Date: Wed, 22 Jan 2025 13:02:30 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] Clarify DM_FLAG_PROBE_AFTER_BIND behaviour
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>
-Cc: Marek Vasut <marex@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20250117-clarify-probe-after-bind-v1-0-273f046ce5dd@linaro.org>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20250117-clarify-probe-after-bind-v1-0-273f046ce5dd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0114.eurprd09.prod.outlook.com
- (2603:10a6:803:78::37) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="KyxtNdhF"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 5B846100ECBC3; Wed, 22 Jan 2025 13:12:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1737547927;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=AugM6kqyG2L15PPxC3jpwD38AlOs5SYuIBI2pkI+EzY=;
+ b=KyxtNdhF5szmAqty5oqpeygZyRxGn0vBrpC6P/lCMRzd08bOgEYRxdTm0Q+9fHNiXvWtgT
+ /TVIVDfmC+jAHdwPRFPYvx4zwXz3I1KDJWKuXSy6RgOr8/QQwTrAEBxEVgtieCFVYDJifI
+ 0pLjCpNFIeS2eXFepocIbHu93Qpqze7IfcMJjjPzj7LyT2QeV1h453vfBXd1++u4xZBHV6
+ echpTmZIfXiFpJ8LEuw1P+sspASJSefxVnyo5gBP4G/I4UXHn5Bx1suLY5xfGUeIsf8xzI
+ AMzpqJI+OPrzIqiEOxSXpTR9Gu+t1RGxGUVfOC+yorvcbfJrQ0x54WnXttbqmg==
+From: Heiko Schocher <hs@denx.de>
+To: u-boot@lists.denx.de
+Cc: Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] led: add function naming option from linux
+Date: Wed, 22 Jan 2025 13:12:01 +0100
+Message-Id: <20250122121201.55597-1-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|LV2PR12MB5725:EE_
-X-MS-Office365-Filtering-Correlation-Id: 97886321-563f-444b-15aa-08dd3adcac54
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MFYramcrVEZmWDhrQjlodEFnTlQyZVlvSVNYSUlMYTJNK3gybmdLVDBJVndJ?=
- =?utf-8?B?dlhjbXczNHFnZUdjWXBDRFc3bGRubW11T2hMQkE2ZjJqVUg5b3VtZ1BrSTVu?=
- =?utf-8?B?VkNBL0ZyVXlFM1AraVNsZ1BWUVhCVzFGeTFhR0pVc1FkYURhNnM2dFBIR1pN?=
- =?utf-8?B?ODU4bGRqUXl0Z01oZDhzeFdqWUViM0h0a3YwMm9qVEtrdEN4NzR1R0ZMZkFQ?=
- =?utf-8?B?UDlrSVpEaFdNQ2QweU5Ubm1kKzVSbkRIRXlPSVBRajlRalJlelh0M2xkNEt1?=
- =?utf-8?B?dTVCdXJUS2gyNnZ0YWM0cXcramtNSURleFhPYkdkcVpQZDlmL3lnaHBGNzBz?=
- =?utf-8?B?TzFTSnk3aWYzYkZvTjBWVnFZeWYxbE1tNXFFczJMd1VkcDN4R3VRM2Ewd2Mv?=
- =?utf-8?B?QXFoTjA0VWFIcnMvaWN5ZGN1RVJFcnd5Qi9LZlExZXBJb1p6bGU1OUZUaHd6?=
- =?utf-8?B?Z2dYakg5M2hTQ3RQaHgyWGlXY1Z3bHdySTVsZGljNkthS0tua3dlRElxV2ZG?=
- =?utf-8?B?MWFBQk5Sam1Wb1VhempEZ2t4NFNYcEY3cEptc0hQN24zeGxNRW00MDd6VTJp?=
- =?utf-8?B?eHFMQTk4eDZFdGNIZlZpQU1BYlh6aXFUejVVeHlMajhPTnlLWU92aGdCU2Ri?=
- =?utf-8?B?Tngzd05ETE5odWw2MzNRNzYvK0xzd3VhVG9UUEFSZDBmSnUyU01BM2lFaG5V?=
- =?utf-8?B?ek1DQXRETHl2K25ScnlrMTQ5REI0czlPY2I1UG5kemJSRWlzZVhDMEVtQ3Vv?=
- =?utf-8?B?ZitEVU00M0ZEU00zVWlmZXJCdERVNkdhenZRa0t1cytXTDd5YVJtb1NMMzNo?=
- =?utf-8?B?VFplYWc1M2w2dEx2Z1ViclNQcHhvL2xKODlkSGlMd3gydzFRUWorbnVRcldS?=
- =?utf-8?B?OGdQVEgwN21UYWd5TnR0eHpPcVFVUXlza0xuMjMzRTRQYWZOSEtLRkhSSEVh?=
- =?utf-8?B?WDVWOTJOZXo0SVhDZFQ1Q0VjaFgrbDhreHBDa20wQWdMek5pdXFLMktJWUNs?=
- =?utf-8?B?Q1F2YlBmK0ZRenlKUXY1bnVjQUZyZEV1K2gxQUdGWGRJRk01dnRNWStIRXFm?=
- =?utf-8?B?ejh5aFZBU2FqN2FzNzB4QVBvazNwSzFUWE5yekRRaFVSUnRSczh0N1FtZDBP?=
- =?utf-8?B?UkFoWHh4bGQzZWg1THlYQUdrdHJiS3dtUDZXV01GVVFhZlo2K1hIaTNRK3pk?=
- =?utf-8?B?V09RYmpCN1ZzVFdyMVc4bmNiR1pGbmFHbGNROWlGYldtZUZrc2QxcWJnUWFV?=
- =?utf-8?B?UUtkWUhHQTR0WS95ZkhycHhidis1SUNhQkhxdy9VbkRFN2hkVEIwWHh3Z0pS?=
- =?utf-8?B?SDcwcVJoNlJwanFyZzhQd2ZnMjdPSnJPeittZWFwUktzMm5HQnJtbG9IYXZH?=
- =?utf-8?B?c0Z4bDY5OHUzdWwwUjJBK1NRYnAxSXVhN1NLeVFWcWsyRFhBYnZidmYvQzB2?=
- =?utf-8?B?bkJqMml0aXFWdHdPQVVUbEJiRHdNZFNlY1pNeStmTy9yNFJKNVlYVVRadEZM?=
- =?utf-8?B?azhLTk5aOVQ2RFF2Y2Y5ekhhN0RZRHA0RE9LczBXdnhZSlMzbFVDU0ltcVVr?=
- =?utf-8?B?TDBBWEFGTTRCSGdUOUZZZXRBenZIYU9GSHhreDQzVU1ESjUranZPNG5LeHNY?=
- =?utf-8?B?TzgwK2g5SjNtZ0J2dGVxbEdVd25kNEM5TE12cWNYcjFpNjVZTC9rVnhCd1Bt?=
- =?utf-8?B?QlJxVFdmczRhNmpuVHB3NGJXbUdTYWlXSlNmTGFJYU8xeW90eVJST25ZREY1?=
- =?utf-8?B?SldUZUY2bElpV3lrb2NOcmZQeFEydFRSL25NNkhLeUl5bkFoaURrVHU2bVBz?=
- =?utf-8?B?Qi84U2ZQbjRhSWtsUzNxUXI4aXhOWmFCZDd6djZGTi9vRCtkcjVEL1dqU0JY?=
- =?utf-8?Q?2RMcaWRqSDN86?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Qlk4b1FTNjY5YXpVbExUZVp2cEVFcWMwQmZsMzF2MHNzQ1FnUnYwd0hiVWhZ?=
- =?utf-8?B?bS9CZUh5cThqdHhvc1paVDJPSE1pa1h6OWpLUUZlN0FMWVJjY1RIVWRTa0w1?=
- =?utf-8?B?T0RYTTdIQUtFNUt3SXdQV0I2eUF5eEk1MkFaKzdPK2k5Q0RTdzl3RU9nUk1j?=
- =?utf-8?B?ZWJEU0ZpT3NxSDhDSEV6OHZ4VE9QUVBBd1J6YjZnWURjbkpsbU5uVTh1R21X?=
- =?utf-8?B?WHdlbVFMT3F4YmkzcUwvL0VzUHlrZkZ0MjZIUmdxK0w1MmJSZk10ZzFSanl0?=
- =?utf-8?B?bjlFa09sZnRrK09ONE5VaDd1cjNoR25aSWJDR1libXB1L0Q2U1hKYndjS0NK?=
- =?utf-8?B?SlFqTmsvRmgrNUQrV3l5WndBL2U0U0hxZ28wYi96T2FsRVAzQWR0MG16T1RU?=
- =?utf-8?B?ZGdseTFZNjZZRnI4UmsrZE5wRUdtc3ZxZ2dGUC84SE5sN0tPTU9SdWtDdmpr?=
- =?utf-8?B?TmNmc1M5NGdRNkdkZ1h0WVBDUWh4ZjlJdjBQTDRESzRmTElhQUJXVWgrNmM3?=
- =?utf-8?B?eTJPL1dUL0xiSDBRb0cwOXNqcVQvdFpvc0FVQXJETS9zRVNxdEc3MzhSOEQ3?=
- =?utf-8?B?c1Mway9GWm9ETTdPbDdQcWVHNENSU3QzT00yaXZPTllwMlFTNGN5QkpyM2xw?=
- =?utf-8?B?SzZMSllxZmJSZ2hTYy93VnV0UktpdnI2dGdoRElJbnJYcndiS0lKb1ZUMXlC?=
- =?utf-8?B?UDJqeGtDeW8wb3ZWMVBCbWFIalFMSEtNay9qZmZPV3dHYitBWWlCdTBMSmNi?=
- =?utf-8?B?THE2K01FWTdKQnpLNHo0dHBWd04zVzdzOGhYWm9RcTNlK2NxamVwSFFFdUJh?=
- =?utf-8?B?Y1A3MU05WWRvSnMxU2RYZThwOHoxcFFFVVlPbzdvd0J1QURWbUIzNGNOTHF4?=
- =?utf-8?B?aVZHUUpSUlVTQWtUazU5bE5yRFlHRlcxeGhoU3pSNGdQYkZtbzZybTlwOS90?=
- =?utf-8?B?OWhKZ0FsWHNjK2xxM2VVU1E1RmtoODVrSFVmaUJ4aFRqV3VyNURlS2ZpQ1Vz?=
- =?utf-8?B?V0t2Y0lYVHY1YkVDd0hLakhQTHNmdGxMelNPaWp5R1UvdGNqZ1ZEZFdLTDdW?=
- =?utf-8?B?UDhsdXluV3pZTVM2UE1HNDV5TzRxNTV5YWg0UjdXcW8rdjc5M2R4VGFZYlpW?=
- =?utf-8?B?a2p3ZDEyMDZsVktNajM4cVl4ZDNFTHcvVlJvTlRySjJvam1QT05tOG45TWhT?=
- =?utf-8?B?dm1aZTZwR3E1ZkdHTVE3eGFZZlRWV3Q0STdGRkdsM3EyMDZpZEV4M2dSWVhX?=
- =?utf-8?B?bUVkeFVlUUkxMG16N2VQbGNLenplandGLzZYNjdia00yOGsrU2hHaTRmalRC?=
- =?utf-8?B?N2NhN3drZ00zNmZtMi9vTjZRMW1rVU15L1QrMGt4dC9PSnhlK1IrWk13ZDJh?=
- =?utf-8?B?ZHVOcHdnbnpnKzc3eDVBeFhlVEJnQTl6MHViV2JMRXRTZDBtR3VLbFB6QTNw?=
- =?utf-8?B?TWlOVUZsRGhkalRKbGEySElmMWYxdnVheCt2bVpmOGRMbnl4a1B1RXlDdVVL?=
- =?utf-8?B?c1lvazhnQVRRTU9ZMUZrdFpHa04vU0JKc0tjalRJT25EbXFDTCtUb0RuTE43?=
- =?utf-8?B?aFRENzVNUzVjWVpscGNsVmVYb2ZZQWc0R3lvQ21jZ0Mwb0F6Tm1abmpEc25a?=
- =?utf-8?B?K21PQW5FRnVNNlZJZSt1OFZqaW5rRnJreTUxTkorU2k2T1QreHJWRU8wWW1F?=
- =?utf-8?B?YlQ2M00ybXRjTTFsZ3RZRk5FT3FkV1lBeklnUEZrZlcxRVpwQld1eVVObTNM?=
- =?utf-8?B?T3I0anc5VytIYXNWTXBka01yOERwWDJRdytSUHBsSmdTY2R4a1FMYjlYU1VT?=
- =?utf-8?B?RTJocy9MYkEyZU43Mk80MDZDa3ZONm9Mc2wyM2RuVXRmNHRTbXJMTVk4MnJ2?=
- =?utf-8?B?cWtEaitZRDVaS0xvaW9SQ0ZyMHNTVkgvMUVaWGVDekJ5T0RFQ2lCK2RTSlBi?=
- =?utf-8?B?MXB4dCtVYWtyL0M2RVNpdkhsaUVjOWNJS1NhWWl1K0RzMXNTL1d2Z2JQOUE2?=
- =?utf-8?B?L0FiYjBscklITnJSdkk1OWJBZzJhajExb2o4eldUUWtJSUwzQUE4YXF3QkdZ?=
- =?utf-8?B?cjJCdW1hTncySENuS0twOUxjdFoxZWpBcGNEUTNSaFloUC94S1JreEEzVEoz?=
- =?utf-8?Q?14HKS/cArCL3Y8cl+kyQJUSCt?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 97886321-563f-444b-15aa-08dd3adcac54
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2025 12:02:41.7404 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Q4vHIM3iNx6Ee5jAVRXfCqVx7JEB+bFHUms9WxI0+z/MVzmtM8PK1Q4jcYrcLc/G
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5725
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -219,39 +81,524 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+in linux we have the option to create the name of a led
+optionally through the following properties:
+
+- function
+- color
+- function-enumerator
+
+This patch adds support for parsing this properties if there
+is no label property.
+
+To be as close as possible to linux import the following files
+from it:
+
+include/dt-bindings/leds/common.h
+include/linux/uapi/linux/uleds.h
+
+base commit was:
+commit: b8f52214c61a ("Merge tag 'audit-pr-20241205' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/audit")
+
+The led name is created in led_post_bind() and we need some
+storage place for it. Currently this patch prevents to use
+malloc() instead it stores the name in new member :
+
+        char name[LED_MAX_NAME_SIZE];
+
+of struct led_uc_plat. While at it append led tests for the
+new feature.
+
+Signed-off-by: Heiko Schocher <hs@denx.de>
+---
+as we introduce a new element in struct led_uc_priv, may we should add
+this functionality through a new Kconfig option? (Which also would make
+this optional and save some bytes for boards who do not need this...)
+
+Ignored a lot of checkpatch warnigs for file include/dt-bindings/leds/common.h
+
+WARNING: Block comments use * on subsequent lines
++/*   Obsolete equivalents: "tpacpi::thinklight" (IBM/Lenovo Thinkpads),
++     "lp5523:kb{1,2,3,4,5,6}" (Nokia N900) */
+WARNING: Block comments use a trailing */ on a separate line
++     "lp5523:kb{1,2,3,4,5,6}" (Nokia N900) */
+WARNING: Block comments use * on subsequent lines
++/* System LEDs, usually found on system body.
++   platform::mute (etc) is sometimes seen, :mute would be better */
+WARNING: Block comments use a trailing */ on a separate line
++   platform::mute (etc) is sometimes seen, :mute would be better */
+WARNING: Block comments use * on subsequent lines
++/*   Used RGB notification LEDs common on phones.
++     Obsolete equivalents: "status-led:{red,green,blue}" (Motorola Droid 4),
+WARNING: Block comments use a trailing */ on a separate line
++     "lp5523:{r,g,b}" (Nokia N900) */
+
+as it is copied from linux
+
+commit: b8f52214c61a ("Merge tag 'audit-pr-20241205' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/audit")
+
+Azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=164&view=results
 
 
-On 1/17/25 08:28, Caleb Connolly wrote:
-> In Simons series reworking autoprobe[1], a discussion came up about
-> DM_FLAG_PROBE_AFTER_BIND, specifically that it wasn't very clear where
-> this flag should be used.
-> 
-> This series implements my suggestions made there to clarify the use of
-> this flag, and fixup the two driver which erroneously apply it to their
-> driver struct (this does nothing).
-> 
-> [1]: https://lore.kernel.org/u-boot/20241120153642.861633-1-sjg@chromium.org/
-> 
-> ---
-> Caleb Connolly (2):
->        dm: clarify DM_FLAG_PROBE_AFTER_BIND behaviour
->        drivers: remove bogus DM_FLAG_PROBE_AFTER_BIND flags
-> 
->   doc/develop/driver-model/design.rst | 6 ++++--
->   drivers/mailbox/zynqmp-ipi.c        | 1 -
->   drivers/watchdog/da9063-wdt.c       | 1 -
->   include/dm/device.h                 | 5 ++++-
->   4 files changed, 8 insertions(+), 5 deletions(-)
-> ---
-> base-commit: e3f716fa2d58aadf53928475ee7e88eb41cb8031
-> 
-> // Caleb (they/them)
-> 
+Changes in v2:
+- remove unused name variable in function led_get_label()
+- rebased patch to current HEAD
+  82d262ae162 ("Merge patch series "MediaTek MT7629 OF_UPSTREAM migration (v2)"")
 
-We can't se any issue on our HW when this is applied.
+ arch/sandbox/dts/test.dts                |  37 +++++++-
+ doc/device-tree-bindings/leds/common.txt |  28 ++++++
+ drivers/led/led-uclass.c                 |  70 +++++++++++++-
+ include/dt-bindings/leds/common.h        | 114 +++++++++++++++++++++++
+ include/led.h                            |   2 +
+ include/linux/uapi/linux/uleds.h         |  25 +++++
+ test/dm/led.c                            |  22 ++++-
+ test/dm/ofnode.c                         |   2 +-
+ 8 files changed, 293 insertions(+), 7 deletions(-)
+ create mode 100644 include/dt-bindings/leds/common.h
+ create mode 100644 include/linux/uapi/linux/uleds.h
 
-That's why
-Acked-by: Michal Simek <michal.simek@amd.com>
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index ae52b375ccb..b8f3012873e 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -13,6 +13,7 @@
+ #include <dt-bindings/gpio/gpio.h>
+ #include <dt-bindings/gpio/sandbox-gpio.h>
+ #include <dt-bindings/input/input.h>
++#include <dt-bindings/leds/common.h>
+ #include <dt-bindings/pinctrl/sandbox-pinmux.h>
+ #include <dt-bindings/mux/mux.h>
+ 
+@@ -820,7 +821,7 @@
+ 			gpio-controller;
+ 			#gpio-cells = <1>;
+ 			gpio-bank-name = "a";
+-			sandbox,gpio-count = <20>;
++			sandbox,gpio-count = <25>;
+ 			hog_input_active_low {
+ 				gpio-hog;
+ 				input;
+@@ -1010,6 +1011,40 @@
+ 			/* label intentionally omitted */
+ 			default-state = "off";
+ 		};
++
++		led-20 {
++			gpios = <&gpio_a 20 0>;
++			/* label intentionally omitted */
++			function = LED_FUNCTION_STATUS;
++			color = <LED_COLOR_ID_RED>;
++			function-enumerator = <20>;
++		};
++
++		led-21 {
++			gpios = <&gpio_a 21 0>;
++			/* label intentionally omitted */
++			function = LED_FUNCTION_STATUS;
++			color = <LED_COLOR_ID_GREEN>;
++		};
++
++		led-22 {
++			gpios = <&gpio_a 22 0>;
++			/* label intentionally omitted */
++			function = LED_FUNCTION_STATUS;
++		};
++
++		led-23 {
++			gpios = <&gpio_a 23 0>;
++			/* label intentionally omitted */
++			color = <LED_COLOR_ID_GREEN>;
++		};
++
++		led-24 {
++			gpios = <&gpio_a 24 0>;
++			label = "sandbox:function";
++			function = LED_FUNCTION_STATUS;
++			color = <LED_COLOR_ID_GREEN>;
++		};
+ 	};
+ 
+ 	wdt-gpio-toggle {
+diff --git a/doc/device-tree-bindings/leds/common.txt b/doc/device-tree-bindings/leds/common.txt
+index 2d88816dd55..10b2cd84113 100644
+--- a/doc/device-tree-bindings/leds/common.txt
++++ b/doc/device-tree-bindings/leds/common.txt
+@@ -4,6 +4,21 @@ Optional properties for child nodes:
+ - label : The label for this LED.  If omitted, the label is
+   taken from the node name (excluding the unit address).
+ 
++- function:
++  LED function. Use one of the LED_FUNCTION_* prefixed definitions
++  from the header include/dt-bindings/leds/common.h. If there is no
++  matching LED_FUNCTION available, add a new one.
++
++- color:
++  Color of the LED. Use one of the LED_COLOR_ID_* prefixed definitions from
++  the header include/dt-bindings/leds/common.h. If there is no matching
++  LED_COLOR_ID available, add a new one.
++
++- function-enumerator:
++  optional
++    Integer to be used when more than one instance of the same function is
++    needed, differing only with an ordinal number.
++
+ - linux,default-trigger :  This parameter, if present, is a
+     string defining the trigger assigned to the LED.  Current triggers are:
+      "backlight" - LED will act as a back-light, controlled by the framebuffer
+@@ -21,3 +36,16 @@ system-status {
+ 	linux,default-trigger = "heartbeat";
+ 	...
+ };
++
++led-0 {
++	function = LED_FUNCTION_STATUS;
++	color = <LED_COLOR_ID_RED>;
++	function-enumerator = <20>;
++	...
++};
++
++led-1 {
++	function = LED_FUNCTION_STATUS;
++	color = <LED_COLOR_ID_YELLOW>;
++	...
++};
+diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+index 760750568c0..27ef890ed0a 100644
+--- a/drivers/led/led-uclass.c
++++ b/drivers/led/led-uclass.c
+@@ -13,6 +13,25 @@
+ #include <dm/lists.h>
+ #include <dm/root.h>
+ #include <dm/uclass-internal.h>
++#include <dt-bindings/leds/common.h>
++
++static const char * const led_colors[LED_COLOR_ID_MAX] = {
++	[LED_COLOR_ID_WHITE] = "white",
++	[LED_COLOR_ID_RED] = "red",
++	[LED_COLOR_ID_GREEN] = "green",
++	[LED_COLOR_ID_BLUE] = "blue",
++	[LED_COLOR_ID_AMBER] = "amber",
++	[LED_COLOR_ID_VIOLET] = "violet",
++	[LED_COLOR_ID_YELLOW] = "yellow",
++	[LED_COLOR_ID_IR] = "ir",
++	[LED_COLOR_ID_MULTI] = "multicolor",
++	[LED_COLOR_ID_RGB] = "rgb",
++	[LED_COLOR_ID_PURPLE] = "purple",
++	[LED_COLOR_ID_ORANGE] = "orange",
++	[LED_COLOR_ID_PINK] = "pink",
++	[LED_COLOR_ID_CYAN] = "cyan",
++	[LED_COLOR_ID_LIME] = "lime",
++};
+ 
+ int led_bind_generic(struct udevice *parent, const char *driver_name)
+ {
+@@ -232,11 +251,54 @@ int led_activity_blink(void)
+ #endif
+ #endif
+ 
+-static const char *led_get_label(ofnode node)
++static const char *led_get_function_name(struct udevice *dev)
++{
++	struct led_uc_plat *uc_plat;
++	const char *func;
++	u32 color;
++	u32 enumerator;
++	int ret;
++	int cp;
++
++	if (!dev)
++		return NULL;
++
++	uc_plat = dev_get_uclass_plat(dev);
++	if (!uc_plat)
++		return NULL;
++
++	if (uc_plat->label)
++		return uc_plat->label;
++
++	/* Now try to detect function label name */
++	func = dev_read_string(dev, "function");
++	cp = dev_read_u32(dev, "color", &color);
++	if (cp == 0 || func) {
++		ret = dev_read_u32(dev, "function-enumerator", &enumerator);
++		if (!ret) {
++			snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
++				 "%s:%s-%d",
++				 cp ? "" : led_colors[color],
++				 func ? func : "", enumerator);
++		} else {
++			snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
++				 "%s:%s",
++				 cp ? "" : led_colors[color],
++				 func ? func : "");
++		}
++		uc_plat->label = uc_plat->name;
++	}
++
++	return uc_plat->label;
++}
++
++static const char *led_get_label(struct udevice *dev, ofnode node)
+ {
+ 	const char *label;
+ 
+ 	label = ofnode_read_string(node, "label");
++	if (!label)
++		label = led_get_function_name(dev);
+ 	if (!label && !ofnode_read_string(node, "compatible"))
+ 		label = ofnode_get_name(node);
+ 
+@@ -249,7 +311,7 @@ static int led_post_bind(struct udevice *dev)
+ 	const char *default_state;
+ 
+ 	if (!uc_plat->label)
+-		uc_plat->label = led_get_label(dev_ofnode(dev));
++		uc_plat->label = led_get_label(dev, dev_ofnode(dev));
+ 
+ 	uc_plat->default_state = LEDST_COUNT;
+ 
+@@ -314,14 +376,14 @@ static int led_init(struct uclass *uc)
+ #ifdef CONFIG_LED_BOOT
+ 	ret = ofnode_options_get_by_phandle("boot-led", &led_node);
+ 	if (!ret)
+-		priv->boot_led_label = led_get_label(led_node);
++		priv->boot_led_label = led_get_label(NULL, led_node);
+ 	priv->boot_led_period = ofnode_options_read_int("boot-led-period-ms", 250);
+ #endif
+ 
+ #ifdef CONFIG_LED_ACTIVITY
+ 	ret = ofnode_options_get_by_phandle("activity-led", &led_node);
+ 	if (!ret)
+-		priv->activity_led_label = led_get_label(led_node);
++		priv->activity_led_label = led_get_label(NULL, led_node);
+ 	priv->activity_led_period = ofnode_options_read_int("activity-led-period-ms",
+ 							    250);
+ #endif
+diff --git a/include/dt-bindings/leds/common.h b/include/dt-bindings/leds/common.h
+new file mode 100644
+index 00000000000..4f017bea012
+--- /dev/null
++++ b/include/dt-bindings/leds/common.h
+@@ -0,0 +1,114 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * This header provides macros for the common LEDs device tree bindings.
++ *
++ * Copyright (C) 2015, Samsung Electronics Co., Ltd.
++ * Author: Jacek Anaszewski <j.anaszewski@samsung.com>
++ *
++ * Copyright (C) 2019 Jacek Anaszewski <jacek.anaszewski@gmail.com>
++ * Copyright (C) 2020 Pavel Machek <pavel@ucw.cz>
++ */
++
++#ifndef __DT_BINDINGS_LEDS_H
++#define __DT_BINDINGS_LEDS_H
++
++/* External trigger type */
++#define LEDS_TRIG_TYPE_EDGE	0
++#define LEDS_TRIG_TYPE_LEVEL	1
++
++/* Boost modes */
++#define LEDS_BOOST_OFF		0
++#define LEDS_BOOST_ADAPTIVE	1
++#define LEDS_BOOST_FIXED	2
++
++/* Standard LED colors */
++#define LED_COLOR_ID_WHITE	0
++#define LED_COLOR_ID_RED	1
++#define LED_COLOR_ID_GREEN	2
++#define LED_COLOR_ID_BLUE	3
++#define LED_COLOR_ID_AMBER	4
++#define LED_COLOR_ID_VIOLET	5
++#define LED_COLOR_ID_YELLOW	6
++#define LED_COLOR_ID_IR		7
++#define LED_COLOR_ID_MULTI	8	/* For multicolor LEDs */
++#define LED_COLOR_ID_RGB	9	/* For multicolor LEDs that can do arbitrary color,
++					   so this would include RGBW and similar */
++#define LED_COLOR_ID_PURPLE	10
++#define LED_COLOR_ID_ORANGE	11
++#define LED_COLOR_ID_PINK	12
++#define LED_COLOR_ID_CYAN	13
++#define LED_COLOR_ID_LIME	14
++#define LED_COLOR_ID_MAX	15
++
++/* Standard LED functions */
++/* Keyboard LEDs, usually it would be input4::capslock etc. */
++/*   Obsolete equivalent: "shift-key-light" */
++#define LED_FUNCTION_CAPSLOCK "capslock"
++#define LED_FUNCTION_SCROLLLOCK "scrolllock"
++#define LED_FUNCTION_NUMLOCK "numlock"
++#define LED_FUNCTION_FNLOCK "fnlock"
++/*   Obsolete equivalents: "tpacpi::thinklight" (IBM/Lenovo Thinkpads),
++     "lp5523:kb{1,2,3,4,5,6}" (Nokia N900) */
++#define LED_FUNCTION_KBD_BACKLIGHT "kbd_backlight"
++
++/* System LEDs, usually found on system body.
++   platform::mute (etc) is sometimes seen, :mute would be better */
++#define LED_FUNCTION_POWER "power"
++#define LED_FUNCTION_DISK "disk"
++
++/*   Obsolete: "platform:*:charging" (allwinner sun50i) */
++#define LED_FUNCTION_CHARGING "charging"
++/*   Used RGB notification LEDs common on phones.
++     Obsolete equivalents: "status-led:{red,green,blue}" (Motorola Droid 4),
++     "lp5523:{r,g,b}" (Nokia N900) */
++#define LED_FUNCTION_STATUS "status"
++
++#define LED_FUNCTION_MICMUTE "micmute"
++#define LED_FUNCTION_MUTE "mute"
++
++/* Used for player LEDs as found on game controllers from e.g. Nintendo, Sony. */
++#define LED_FUNCTION_PLAYER1 "player-1"
++#define LED_FUNCTION_PLAYER2 "player-2"
++#define LED_FUNCTION_PLAYER3 "player-3"
++#define LED_FUNCTION_PLAYER4 "player-4"
++#define LED_FUNCTION_PLAYER5 "player-5"
++
++/* Miscelleaus functions. Use functions above if you can. */
++#define LED_FUNCTION_ACTIVITY "activity"
++#define LED_FUNCTION_ALARM "alarm"
++#define LED_FUNCTION_BACKLIGHT "backlight"
++#define LED_FUNCTION_BLUETOOTH "bluetooth"
++#define LED_FUNCTION_BOOT "boot"
++#define LED_FUNCTION_CPU "cpu"
++#define LED_FUNCTION_DEBUG "debug"
++#define LED_FUNCTION_DISK_ACTIVITY "disk-activity"
++#define LED_FUNCTION_DISK_ERR "disk-err"
++#define LED_FUNCTION_DISK_READ "disk-read"
++#define LED_FUNCTION_DISK_WRITE "disk-write"
++#define LED_FUNCTION_FAULT "fault"
++#define LED_FUNCTION_FLASH "flash"
++#define LED_FUNCTION_HEARTBEAT "heartbeat"
++#define LED_FUNCTION_INDICATOR "indicator"
++#define LED_FUNCTION_LAN "lan"
++#define LED_FUNCTION_MAIL "mail"
++#define LED_FUNCTION_MOBILE "mobile"
++#define LED_FUNCTION_MTD "mtd"
++#define LED_FUNCTION_PANIC "panic"
++#define LED_FUNCTION_PROGRAMMING "programming"
++#define LED_FUNCTION_RX "rx"
++#define LED_FUNCTION_SD "sd"
++#define LED_FUNCTION_SPEED_LAN "speed-lan"
++#define LED_FUNCTION_SPEED_WAN "speed-wan"
++#define LED_FUNCTION_STANDBY "standby"
++#define LED_FUNCTION_TORCH "torch"
++#define LED_FUNCTION_TX "tx"
++#define LED_FUNCTION_USB "usb"
++#define LED_FUNCTION_WAN "wan"
++#define LED_FUNCTION_WAN_ONLINE "wan-online"
++#define LED_FUNCTION_WLAN "wlan"
++#define LED_FUNCTION_WLAN_2GHZ "wlan-2ghz"
++#define LED_FUNCTION_WLAN_5GHZ "wlan-5ghz"
++#define LED_FUNCTION_WLAN_6GHZ "wlan-6ghz"
++#define LED_FUNCTION_WPS "wps"
++
++#endif /* __DT_BINDINGS_LEDS_H */
+diff --git a/include/led.h b/include/led.h
+index 64247cd3a70..ba42a5f69d2 100644
+--- a/include/led.h
++++ b/include/led.h
+@@ -10,6 +10,7 @@
+ #include <stdbool.h>
+ #include <cyclic.h>
+ #include <dm/ofnode.h>
++#include <linux/uapi/linux/uleds.h>
+ 
+ /**
+  * DOC: Overview
+@@ -86,6 +87,7 @@ struct led_sw_blink {
+ struct led_uc_plat {
+ 	const char *label;
+ 	enum led_state_t default_state;
++	char name[LED_MAX_NAME_SIZE];
+ #ifdef CONFIG_LED_SW_BLINK
+ 	struct led_sw_blink *sw_blink;
+ #endif
+diff --git a/include/linux/uapi/linux/uleds.h b/include/linux/uapi/linux/uleds.h
+new file mode 100644
+index 00000000000..4d32a39965f
+--- /dev/null
++++ b/include/linux/uapi/linux/uleds.h
+@@ -0,0 +1,25 @@
++/* SPDX-License-Identifier: GPL-2.0+ WITH Linux-syscall-note */
++/*
++ * Userspace driver support for the LED subsystem
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++#ifndef _UAPI__ULEDS_H_
++#define _UAPI__ULEDS_H_
++
++#define LED_MAX_NAME_SIZE	64
++
++struct uleds_user_dev {
++	char name[LED_MAX_NAME_SIZE];
++	int max_brightness;
++};
++
++#endif /* _UAPI__ULEDS_H_ */
+diff --git a/test/dm/led.c b/test/dm/led.c
+index e5b86326c3a..36652c2833a 100644
+--- a/test/dm/led.c
++++ b/test/dm/led.c
+@@ -20,7 +20,12 @@ static int dm_test_led_base(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_LED, 1, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_LED, 2, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_LED, 3, &dev));
+-	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_LED, 4, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 4, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 5, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 6, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 7, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 8, &dev));
++	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_LED, 9, &dev));
+ 
+ 	return 0;
+ }
+@@ -110,6 +115,21 @@ static int dm_test_led_label(struct unit_test_state *uts)
+ 
+ 	ut_asserteq(-ENODEV, led_get_by_label("sandbox:blue", &dev));
+ 
++	/* Test if function, color and function-enumerator naming works */
++	ut_assertok(led_get_by_label("red:status-20", &dev));
++
++	/* Test if function, color naming works */
++	ut_assertok(led_get_by_label("green:status", &dev));
++
++	/* Test if function, without color naming works */
++	ut_assertok(led_get_by_label(":status", &dev));
++
++	/* Test if color without function naming works */
++	ut_assertok(led_get_by_label("green:", &dev));
++
++	/* Test if function, color naming is ignored if label is found */
++	ut_assertok(led_get_by_label("sandbox:function", &dev));
++
+ 	return 0;
+ }
+ DM_TEST(dm_test_led_label, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index f16b643fa3f..72f4e80f637 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -1580,7 +1580,7 @@ static int dm_test_ofnode_delete(struct unit_test_state *uts)
+ 	ut_assert(!ofnode_valid(node));
+ 	ut_assert(!ofnode_valid(ofnode_path("/leds/default_on")));
+ 
+-	ut_asserteq(2, ofnode_get_child_count(ofnode_path("/leds")));
++	ut_asserteq(7, ofnode_get_child_count(ofnode_path("/leds")));
+ 
+ 	return 0;
+ }
+-- 
+2.20.1
 
-Thanks,
-Michal
