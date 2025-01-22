@@ -4,93 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D390DC0218D
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 15:49:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AE08C02182
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 15:53:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E58180824;
-	Wed, 22 Jan 2025 16:49:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E415380805;
+	Wed, 22 Jan 2025 16:53:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xIwEKfDl";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E336808A2; Wed, 22 Jan 2025 16:49:30 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6E08B80817; Wed, 22 Jan 2025 16:53:28 +0100 (CET)
+Received: from smtp-42ac.mail.infomaniak.ch (smtp-42ac.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::42ac])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93B9C80805
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 16:49:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3F3F807EC
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 16:53:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5dc0522475eso278726a12.1
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 07:49:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737560967; x=1738165767; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=K8o2fEi8qWEbnmDF5QwD5o6LqNmwhdr3E1SIcgmU5l8=;
- b=xIwEKfDlx2umIFj4xk18xhL2xgSdWEHMwOsWspMzXS6vs353Fc8/HvrkGLV1q4MAoO
- RrK6uXYPi5jXo78vNQ+L7VLdGOzDSrvHhMiULG0MuiYH6OUnfZwEWoTalQB/j94qh4Ng
- cZNeHEc61b2ccAsz74jIwq0vDDAhcCFTmKuJbr268aEZgdvAZkV8Sv3cBCfgfINR2DCr
- VMyKruREfH2RNTId7hqEAQ/ijt3zovrYtHV9bYm88BZ7ZlCR/9rKG0K59AUdwXX1Od1N
- chXZpzgXcdEHB5Gwx+eahRE5J9MytO4WFaL2r+6vTpikOFT/1l7VvYEhk8DhBcaxbApk
- lMIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737560967; x=1738165767;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=K8o2fEi8qWEbnmDF5QwD5o6LqNmwhdr3E1SIcgmU5l8=;
- b=Q9VTJIeCTIpcc/bpWI0TN7JajQq+5PYZtzfVSMHKMNA67JUhG+rTihi8Bs5+45ifPj
- n8qw7dDv/UPkaTbstJPpKsTYw33kTIYAtyainOUruCBGHvaG1UCmv7xrLn9SzaT5ahyD
- iosXfEn5P0EpC44UNmyZmL8P+J/HzeV3876zxPi6RSySvAzqP/kCUxfmL/YzzTTAdgY4
- I8X3HjZrvTQxZucKRIHQ/UEG9TPaCFlJg+KL3d7016219ZNse1ApRSU7f9X5ow0NF+Zv
- Gp08EN7NuKfMJNF31LSYLbElMqISGVu17JPVKf0IkBGsDRDqtpMWySBZhVoJ0pWnudMm
- PBlA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUyLIggCEM3ieEao9+pZLfRjVqWHHTqe6Cl4XrQU007R42DCR5UVZDPVnUUb6FlbtCf8es6QDU=@lists.denx.de
-X-Gm-Message-State: AOJu0YykDFIcF2jmoUiMpZWOI0o0KS/Jjg1lYy3sbLdaAZ9FN+uyWAzq
- RjKGpR6vKPLUN8rWKfTYMPx/eOkVvCTw+crUjOnf2oHvP6Z6OpYUvzdsProYGlE=
-X-Gm-Gg: ASbGnctgBQE1vofVB5fOEE9L53O9wi37k8ktky0IYe/I75+gBhhRfPv8oYt8KtbAFXk
- UNpQvKzqbffx4UpopRUQmyrEG/j/grR/YI+kjndPvU/w0U0Ur0NIWdA4ir0RmUHmrqREp8U72jb
- k8Gk/EN09cwOZ16sXNeBM+VJIuRxOwQ1QldMM8Dw0531MsyxH6dNoiwAg9AGdNYdwRGuQVPfuTW
- bPvw79qmP5tI4cEgd64X7oMARchpboNqanBnBv8SAiASMrxUeC6MmEIeYnWKHBzjqc2bUmBtkDs
- ipwFbk24JimXFyootJAdr0TKdPlbPlkMoL2zV5M/EIEWDlBdQ9xY
-X-Google-Smtp-Source: AGHT+IFT2Trv+GMRtsPkanjHx2t+wzjbK2myz7U3hAOrrIfbVtA2Yk+DBKt3rh5mFukQRcl0QZ8Dmg==
-X-Received: by 2002:a05:6402:3551:b0:5d1:1f1:a283 with SMTP id
- 4fb4d7f45d1cf-5db7d2dc3f1mr20508435a12.4.1737560966919; 
- Wed, 22 Jan 2025 07:49:26 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5db73edccd4sm8827056a12.77.2025.01.22.07.49.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jan 2025 07:49:26 -0800 (PST)
-Message-ID: <32349f10-2fe1-4522-8794-cf512b140038@linaro.org>
-Date: Wed, 22 Jan 2025 16:49:25 +0100
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246b])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YdTBY0R2CzTSR;
+ Wed, 22 Jan 2025 16:53:25 +0100 (CET)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4YdTBX3Mwkzfyt; Wed, 22 Jan 2025 16:53:24 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Wed, 22 Jan 2025 16:53:15 +0100
+Subject: [PATCH v4] image: apply FDTOs on FDT image node without a load
+ property
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] mach-snapdragon: support parsing memory info from
- external FDT
-Content-Language: en-US
-To: Sam Day <me@samcday.com>, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Matthias Brugger <mbrugger@suse.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250122-qcom-parse-memory-updates-v2-0-98dfcac821d7@samcday.com>
- <20250122-qcom-parse-memory-updates-v2-2-98dfcac821d7@samcday.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250122-qcom-parse-memory-updates-v2-2-98dfcac821d7@samcday.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20250122-extlinux-relocate-dtb-when-dtbo-v4-1-573d6d568309@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAGoUkWcC/43NzQ6CMBAE4FcxPVtDl/KjJ9/DeKDtVJoQMAURQ
+ nh3C4kJ8YK3nc3km4m18A4tuxwm5tG71jV1CPJ4YLos6ge4MyEzikgKEmeOoatc/Rq4R9XoogM
+ 3neLvEvVyNFzqLIlTm+eRIhaUp4d1w7pwu4dcurZr/LgO9mL5/m/3ggtukQAqt0ZacdUlvB9PB
+ myxe/p6SSREuu9R8EyoJjlpUhl+vXjjEe17cfBkqmAlCp1RtPXmef4A0ifMcG4BAAA=
+X-Change-ID: 20241219-extlinux-relocate-dtb-when-dtbo-4c7536f880b2
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Marek Vasut <marex@denx.de>, Heiko Stuebner <heiko@sntech.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,200 +63,470 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Thanks for re-spinning this, one small issue below but otherwise LGTM.
+A FIT image which is NOT using -E when created by mkimage - that is with
+image data within the FIT - will fail to apply FDTO if the base FDT
+image node does not specify a load property (which points to an address
+in DRAM). This is because we check that the FDT address we want to apply
+overlay to (i.e. modify and likely increase in size) is not inside the
+FIT and give up otherwise. This is assumed necessary because we may then
+overwrite other data when applying in-place.
 
-I'm picking up your first patch, so you only need to re-send this one.
+However, we can do better than giving up: relocating the FDT in another
+place in DRAM where it's safe to increase its size and apply FDTOs.
 
-On 22/01/2025 11:27, Sam Day wrote:
-> qcom_parse_memory is updated to return a -ENODATA error if the passed
-> FDT does not contain a /memory node, or that node is incomplete (size=0)
-> 
-> board_fdt_blob_setup first tries to call qcom_parse_memory with the
-> internal FDT (if present+valid). If that fails, it tries again with the
-> external FDT (again, if present+valid).
-> 
-> When booting with an internal FDT from upstream, it's likely that this
-> change results in a slight performance hit, since virtually all upstream
-> qcom DTs lack a fully specified memory node. The impact should be
-> negligible, though.
-> 
-> qcom_parse_memory was given a detailed docstring adapted from Caleb's
-> original commit message that introduced the function.
-> 
-> Signed-off-by: Sam Day <me@samcday.com>
-> ---
->  arch/arm/mach-snapdragon/board.c | 93 +++++++++++++++++++++++++++-------------
->  1 file changed, 63 insertions(+), 30 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 2ef936aab757c7045729a2dd91944f4f9bff917e..ad3bc4b1a998049cd10e3d3fa032009347d77314 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -88,7 +88,29 @@ int dram_init_banksize(void)
->  	return 0;
->  }
->  
-> -static void qcom_parse_memory(const void *fdt)
-> +/**
-> + * The generic memory parsing code in U-Boot lacks a few things that we
-> + * need on Qualcomm:
-> + *
-> + * 1. It sets gd->ram_size and gd->ram_base to represent a single memory block
-> + * 2. setup_dest_addr() later relocates U-Boot to ram_base + ram_size, the end
-> + *    of that first memory block.
-> + *
-> + * This results in all memory beyond U-Boot being unusable in Linux when booting
-> + * with EFI.
-> + *
-> + * Since the ranges in the memory node may be out of order, the only way for us
-> + * to correctly determine the relocation address for U-Boot is to parse all
-> + * memory regions and find the highest valid address.
-> + *
-> + * We can't use fdtdec_setup_memory_banksize() since it stores the result in
-> + * gd->bd, which is not yet allocated.
-> + *
-> + * @fdt: FDT blob to parse /memory node from
-> + *
-> + * Return: 0 on success or -ENODATA if /memory node is missing or incomplete
-> + */
-> +static int qcom_parse_memory(const void *fdt)
->  {
->  	int offset;
->  	const fdt64_t *memory;
-> @@ -97,16 +119,12 @@ static void qcom_parse_memory(const void *fdt)
->  	int i, j, banks;
->  
->  	offset = fdt_path_offset(fdt, "/memory");
-> -	if (offset < 0) {
-> -		log_err("No memory node found in device tree!\n");
-> -		return;
-> -	}
-> +	if (offset < 0)
-> +		return -ENODATA;
->  
->  	memory = fdt_getprop(fdt, offset, "reg", &memsize);
-> -	if (!memory) {
-> -		log_err("No memory configuration was provided by the previous bootloader!\n");
-> -		return;
-> -	}
-> +	if (!memory)
-> +		return -ENODATA;
->  
->  	banks = min(memsize / (2 * sizeof(u64)), (ulong)CONFIG_NR_DRAM_BANKS);
->  
-> @@ -119,7 +137,6 @@ static void qcom_parse_memory(const void *fdt)
->  	for (i = 0, j = 0; i < banks * 2; i += 2, j++) {
->  		prevbl_ddr_banks[j].start = get_unaligned_be64(&memory[i]);
->  		prevbl_ddr_banks[j].size = get_unaligned_be64(&memory[i + 1]);
-> -		/* SM8650 boards sometimes have empty regions! */
->  		if (!prevbl_ddr_banks[j].size) {
->  			j--;
->  			continue;
-> @@ -127,13 +144,16 @@ static void qcom_parse_memory(const void *fdt)
->  		ram_end = max(ram_end, prevbl_ddr_banks[j].start + prevbl_ddr_banks[j].size);
->  	}
->  
-> +	if (!j)
-> +		return -ENODATA;
+While at it, do not discriminate anymore on whether the data is within
+the FIT data address space - that is FIT images created with mkimage -E
+- as that still may be susceptible to unintended data overwrites as
+mkimage -E simply concatenates all blobs after the FIT. If the FDT blob
+isn't the last, it'll result in overwriting later blobs when resizing.
 
-I think this should be
-	if (!banks || !prevbl_ddr_banks[0].size)
+The side effect is that the load property in the FIT is only
+temporarily used to load the FDT but then relocated right before we
+start applying overlays.
 
-That way it will properly detect the typical case where the source dts
-has a single entry with a 0 size.
+Suggested-by: Marek Vasut <marex@denx.de>
+Reviewed-by: Marek Vasut <marex@denx.de>
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+This actually forces the base FDT to always be relocated whenever FDTO
+are expected to be applied, regardless of the presence of the load
+property in the base FDT image node.
 
-With that change:
+Tested with extlinux with:
+- conf node with multiple fdt entries (scenario A)
+- conf node with base fdt + conf node with fdto (stored in fdt property)
+  (scenario B)
+- conf node with multiple fdt entries with base fdt with load property
+  (scenario C)
+- conf node with base fdt + conf node with fdto (stored in fdt property)
+  with base fdt with load property (scenario D)
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+"""fit.its
+/dts-v1/;
 
-Kind regards,
-> +
->  	/* Sort our RAM banks -_- */
->  	qsort(prevbl_ddr_banks, banks, sizeof(prevbl_ddr_banks[0]), ddr_bank_cmp);
->  
->  	gd->ram_base = prevbl_ddr_banks[0].start;
->  	gd->ram_size = ram_end - gd->ram_base;
-> -	debug("ram_base = %#011lx, ram_size = %#011llx, ram_end = %#011llx\n",
-> -	      gd->ram_base, gd->ram_size, ram_end);
-> +
-> +	return 0;
->  }
->  
->  static void show_psci_version(void)
-> @@ -153,13 +173,14 @@ static void show_psci_version(void)
->   */
->  int board_fdt_blob_setup(void **fdtp)
->  {
-> -	struct fdt_header *fdt;
-> +	struct fdt_header *external_fdt, *internal_fdt;
->  	bool internal_valid, external_valid;
-> -	int ret = 0;
-> +	int ret = -ENODATA;
->  
-> -	fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
-> -	external_valid = fdt && !fdt_check_header(fdt);
-> -	internal_valid = !fdt_check_header(*fdtp);
-> +	internal_fdt = (struct fdt_header *)*fdtp;
-> +	external_fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
-> +	external_valid = external_fdt && !fdt_check_header(external_fdt);
-> +	internal_valid = !fdt_check_header(internal_fdt);
->  
->  	/*
->  	 * There is no point returning an error here, U-Boot can't do anything useful in this situation.
-> @@ -167,24 +188,36 @@ int board_fdt_blob_setup(void **fdtp)
->  	 */
->  	if (!internal_valid && !external_valid)
->  		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%#llx)\n",
-> -		      (phys_addr_t)fdt);
-> +		      (phys_addr_t)external_fdt);
-> +
-> +	/* Prefer memory information from internal DT if it's present */
-> +	if (internal_valid)
-> +		ret = qcom_parse_memory(internal_fdt);
-> +
-> +	if (ret < 0 && external_valid) {
-> +		/* No internal FDT or it lacks a proper /memory node.
-> +		 * The previous bootloader handed us something, let's try that.
-> +		 */
-> +		if (internal_valid)
-> +			debug("No memory info in internal FDT, falling back to external\n");
-> +
-> +		ret = qcom_parse_memory(external_fdt);
-> +	}
-> +
-> +	if (ret < 0)
-> +		panic("No valid memory ranges found!\n");
-> +
-> +	debug("ram_base = %#011lx, ram_size = %#011llx\n",
-> +	      gd->ram_base, gd->ram_size);
->  
->  	if (internal_valid) {
->  		debug("Using built in FDT\n");
-> -		ret = -EEXIST;
-> -	} else {
-> -		debug("Using external FDT\n");
-> -		/* So we can use it before returning */
-> -		*fdtp = fdt;
-> +		return -EEXIST;
->  	}
->  
-> -	/*
-> -	 * Parse the /memory node while we're here,
-> -	 * this makes it easy to do other things early.
-> -	 */
-> -	qcom_parse_memory(*fdtp);
-> -
-> -	return ret;
-> +	debug("Using external FDT\n");
-> +	*fdtp = external_fdt;
-> +	return 0;
->  }
->  
->  void reset_cpu(void)
-> 
+/ {
+	description = "Kernel fitImage for Jaguar";
+	#address-cells = <1>;
 
+	images {
+		kernel-1 {
+			description = "Linux kernel";
+			data = /incbin/("arch/arm64/boot/Image.gz");
+			type = "kernel";
+			arch = "arm64";
+			os = "linux";
+			compression = "gzip";
+			load = <0x06000000>;
+			entry = <0x06000000>;
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		fdt-rk3588-jaguar.dtb {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("arch/arm64/boot/dts/rockchip/rk3588-jaguar.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		fdt-rk3588-jaguar.dtb-load {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("arch/arm64/boot/dts/rockchip/rk3588-jaguar.dtb");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			load = <0x12000000>;
+
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		fdt-rk3588-jaguar-pre-ict-tester.dtbo {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("arch/arm64/boot/dts/rockchip/rk3588-jaguar-pre-ict-tester.dtbo");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+	};
+
+	configurations {
+		default = "conf-rk3588-jaguar.dtb";
+		conf-rk3588-jaguar.dtb {
+			description = "1 Linux kernel, FDT blob";
+			kernel = "kernel-1";
+			fdt = "fdt-rk3588-jaguar.dtb";
+
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+
+		conf-rk3588-jaguar.dtb-and-dtbo {
+			description = "1 Linux kernel, FDT blob";
+			kernel = "kernel-1";
+			fdt = "fdt-rk3588-jaguar.dtb", "fdt-rk3588-jaguar-pre-ict-tester.dtbo";
+
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+
+		conf-rk3588-jaguar.dtb-load {
+			description = "1 Linux kernel, FDT blob";
+			kernel = "kernel-1";
+			fdt = "fdt-rk3588-jaguar.dtb-load";
+
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+
+		conf-rk3588-jaguar.dtb-load-and-dtbo {
+			description = "1 Linux kernel, FDT blob";
+			kernel = "kernel-1";
+			fdt = "fdt-rk3588-jaguar.dtb-load", "fdt-rk3588-jaguar-pre-ict-tester.dtbo";
+
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+
+		conf-rk3588-jaguar-pre-ict-tester.dtbo {
+			description = "0 FDT blob";
+
+			fdt = "fdt-rk3588-jaguar-pre-ict-tester.dtbo";
+
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+	};
+};
+"""
+
+"""extlinux.conf (scenario A)
+LABEL rk3588-jaguar
+LINUX /boot/fit#conf-rk3588-jaguar.dtb-and-dtbo
+APPEND root=PARTLABEL=debos-rootfs rw rootwait net.ifnames=0
+"""
+
+Log:
+"""
+
+   Using 'conf-rk3588-jaguar.dtb-and-dtbo' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'kernel-1' kernel subimage
+     Description:  Linux kernel
+     Type:         Kernel Image
+     Compression:  gzip compressed
+     Data Start:   0x020000cc
+     Data Size:    11862415 Bytes = 11.3 MiB
+     Architecture: AArch64
+     OS:           Linux
+     Load Address: 0x06000000
+     Entry Point:  0x06000000
+     Hash algo:    sha256
+     Hash value:   51a2b828aec49d9ede09a2de2cd05226def258dedcc8e4c4098fa2ba38fb9690
+   Verifying Hash Integrity ... sha256+ OK
+
+   Using 'conf-rk3588-jaguar.dtb-and-dtbo' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'fdt-rk3588-jaguar.dtb' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x02b50370
+     Data Size:    168750 Bytes = 164.8 KiB
+     Architecture: AArch64
+     Hash algo:    sha256
+     Hash value:   96213ce3930a5f926b27c90671ca779fc327e2e62c2135f7ed7d8b6dd659b973
+   Verifying Hash Integrity ... sha256+ OK
+   Loading Device Tree to 00000000ece9d000, end 00000000ecec9fff ... OK
+Working FDT set to ece9d000
+
+   Trying 'fdt-rk3588-jaguar-pre-ict-tester.dtbo' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x02ba2bb4
+     Data Size:    2753 Bytes = 2.7 KiB
+     Architecture: AArch64
+     Hash algo:    sha256
+     Hash value:   e5eb1fe225d03b04e9bb27c04fe3278f294b48c6ab6757292c9650f6d3ce9f34
+   Verifying Hash Integrity ... sha256+ OK
+   Booting using the fdt blob at 0xece9d000
+Working FDT set to ece9d000
+   Uncompressing Kernel Image to 6000000
+   Loading Device Tree to 00000000ece70000, end 00000000ece9c62d ... OK
+Working FDT set to ece70000
+"""
+
+"""extlinux.conf (scenario B)
+LABEL rk3588-jaguar
+LINUX /boot/fit#conf-rk3588-jaguar.dtb-load-and-dtbo
+APPEND root=PARTLABEL=debos-rootfs rw rootwait net.ifnames=0
+"""
+
+Log:
+"""
+
+   Using 'conf-rk3588-jaguar.dtb-load-and-dtbo' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'kernel-1' kernel subimage
+     Description:  Linux kernel
+     Type:         Kernel Image
+     Compression:  gzip compressed
+     Data Start:   0x020000cc
+     Data Size:    11862415 Bytes = 11.3 MiB
+     Architecture: AArch64
+     OS:           Linux
+     Load Address: 0x06000000
+     Entry Point:  0x06000000
+     Hash algo:    sha256
+     Hash value:   51a2b828aec49d9ede09a2de2cd05226def258dedcc8e4c4098fa2ba38fb9690
+   Verifying Hash Integrity ... sha256+ OK
+
+   Using 'conf-rk3588-jaguar.dtb-load-and-dtbo' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'fdt-rk3588-jaguar.dtb-load' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x02b79784
+     Data Size:    168750 Bytes = 164.8 KiB
+     Architecture: AArch64
+     Load Address: 0x12000000
+     Hash algo:    sha256
+     Hash value:   96213ce3930a5f926b27c90671ca779fc327e2e62c2135f7ed7d8b6dd659b973
+   Verifying Hash Integrity ... sha256+ OK
+   Loading fdt from 0x02b79784 to 0x12000000
+   Loading Device Tree to 00000000ece9d000, end 00000000ecec9fff ... OK
+Working FDT set to ece9d000
+
+   Trying 'fdt-rk3588-jaguar-pre-ict-tester.dtbo' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x02ba2bb4
+     Data Size:    2753 Bytes = 2.7 KiB
+     Architecture: AArch64
+     Hash algo:    sha256
+     Hash value:   e5eb1fe225d03b04e9bb27c04fe3278f294b48c6ab6757292c9650f6d3ce9f34
+   Verifying Hash Integrity ... sha256+ OK
+   Booting using the fdt blob at 0xece9d000
+Working FDT set to ece9d000
+   Uncompressing Kernel Image to 6000000
+   Loading Device Tree to 00000000ece70000, end 00000000ece9c62d ... OK
+Working FDT set to ece70000
+"""
+
+"""extlinux.conf (scenario C)
+LABEL rk3588-jaguar
+LINUX /boot/fit#conf-rk3588-jaguar.dtb#conf-rk3588-jaguar-pre-ict-tester.dtbo
+APPEND root=PARTLABEL=debos-rootfs rw rootwait net.ifnames=0
+"""
+
+Log:
+"""
+
+   Using 'conf-rk3588-jaguar.dtb' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'kernel-1' kernel subimage
+     Description:  Linux kernel
+     Type:         Kernel Image
+     Compression:  gzip compressed
+     Data Start:   0x020000cc
+     Data Size:    11862415 Bytes = 11.3 MiB
+     Architecture: AArch64
+     OS:           Linux
+     Load Address: 0x06000000
+     Entry Point:  0x06000000
+     Hash algo:    sha256
+     Hash value:   51a2b828aec49d9ede09a2de2cd05226def258dedcc8e4c4098fa2ba38fb9690
+   Verifying Hash Integrity ... sha256+ OK
+
+   Using 'conf-rk3588-jaguar.dtb' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'fdt-rk3588-jaguar.dtb' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x02b50370
+     Data Size:    168750 Bytes = 164.8 KiB
+     Architecture: AArch64
+     Hash algo:    sha256
+     Hash value:   96213ce3930a5f926b27c90671ca779fc327e2e62c2135f7ed7d8b6dd659b973
+   Verifying Hash Integrity ... sha256+ OK
+   Loading Device Tree to 00000000ece9d000, end 00000000ecec9fff ... OK
+Working FDT set to ece9d000
+
+   Using 'conf-rk3588-jaguar-pre-ict-tester.dtbo' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'fdt-rk3588-jaguar-pre-ict-tester.dtbo' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x02ba2bb4
+     Data Size:    2753 Bytes = 2.7 KiB
+     Architecture: AArch64
+     Hash algo:    sha256
+     Hash value:   e5eb1fe225d03b04e9bb27c04fe3278f294b48c6ab6757292c9650f6d3ce9f34
+   Verifying Hash Integrity ... sha256+ OK
+   Booting using the fdt blob at 0xece9d000
+Working FDT set to ece9d000
+   Uncompressing Kernel Image to 6000000
+   Loading Device Tree to 00000000ece70000, end 00000000ece9c62d ... OK
+Working FDT set to ece70000
+"""
+
+"""extlinux.conf (scenario D)
+LABEL rk3588-jaguar
+LINUX /boot/fit#conf-rk3588-jaguar.dtb-load#conf-rk3588-jaguar-pre-ict-tester.dtbo
+APPEND root=PARTLABEL=debos-rootfs rw rootwait net.ifnames=0
+"""
+
+Log:
+"""
+
+   Using 'conf-rk3588-jaguar.dtb-load' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'kernel-1' kernel subimage
+     Description:  Linux kernel
+     Type:         Kernel Image
+     Compression:  gzip compressed
+     Data Start:   0x020000cc
+     Data Size:    11862415 Bytes = 11.3 MiB
+     Architecture: AArch64
+     OS:           Linux
+     Load Address: 0x06000000
+     Entry Point:  0x06000000
+     Hash algo:    sha256
+     Hash value:   51a2b828aec49d9ede09a2de2cd05226def258dedcc8e4c4098fa2ba38fb9690
+   Verifying Hash Integrity ... sha256+ OK
+
+   Using 'conf-rk3588-jaguar.dtb-load' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'fdt-rk3588-jaguar.dtb-load' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x02b79784
+     Data Size:    168750 Bytes = 164.8 KiB
+     Architecture: AArch64
+     Load Address: 0x12000000
+     Hash algo:    sha256
+     Hash value:   96213ce3930a5f926b27c90671ca779fc327e2e62c2135f7ed7d8b6dd659b973
+   Verifying Hash Integrity ... sha256+ OK
+   Loading fdt from 0x02b79784 to 0x12000000
+   Loading Device Tree to 00000000ece9d000, end 00000000ecec9fff ... OK
+Working FDT set to ece9d000
+
+   Using 'conf-rk3588-jaguar-pre-ict-tester.dtbo' configuration
+   Verifying Hash Integrity ... OK
+   Trying 'fdt-rk3588-jaguar-pre-ict-tester.dtbo' fdt subimage
+     Description:  Flattened Device Tree blob
+     Type:         Flat Device Tree
+     Compression:  uncompressed
+     Data Start:   0x02ba2bb4
+     Data Size:    2753 Bytes = 2.7 KiB
+     Architecture: AArch64
+     Hash algo:    sha256
+     Hash value:   e5eb1fe225d03b04e9bb27c04fe3278f294b48c6ab6757292c9650f6d3ce9f34
+   Verifying Hash Integrity ... sha256+ OK
+   Booting using the fdt blob at 0xece9d000
+Working FDT set to ece9d000
+   Uncompressing Kernel Image to 6000000
+   Loading Device Tree to 00000000ece70000, end 00000000ece9c62d ... OK
+Working FDT set to ece70000
+"""
+
+Cc: Heiko Stuebner <heiko@sntech.de>
+---
+Changes in v4:
+- of_flat_tree type changed to char* from void*, as v3 wouldn't compile,
+- add comment explaining why char * for of_flat_tree
+- Link to v3: https://lore.kernel.org/r/20250122-extlinux-relocate-dtb-when-dtbo-v3-1-46bef4eac720@cherry.de
+
+Changes in v3:
+- of_flat_tree type changed from char* to void*,
+- added Marek's Rb trailer,
+- Link to v2: https://lore.kernel.org/r/20250116-extlinux-relocate-dtb-when-dtbo-v2-1-d011582c2b7e@cherry.de
+
+Changes in v2:
+- Indiscriminately relocate, regardless of location of FDT to be on the
+  safe side wrt data overlap/overwrite,
+- print return value of boot_relocate_fdt when it fails,
+- Link to v1: https://lore.kernel.org/r/20241219-extlinux-relocate-dtb-when-dtbo-v1-1-fe5eeb8fd4f1@cherry.de
+---
+ boot/image-fit.c | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
+
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index db7fb61bca948e42a4136b9ceb263a53362ad3f8..8ebe54fd663fc4cf09a0f744160b63554c787ff4 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2348,10 +2348,17 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	char *next_config = NULL;
+ 	ulong load, len;
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
+-	ulong image_start, image_end;
+ 	ulong ovload, ovlen, ovcopylen;
+ 	const char *uconfig;
+ 	const char *uname;
++	/*
++	 * of_flat_tree is storing the void * returned by map_sysmem, then its
++	 * address is passed to boot_relocate_fdt which expects a char ** and it
++	 * is then cast into a ulong. Setting its type to void * would require
++	 * to cast its address to char ** when passing it to boot_relocate_fdt.
++	 * Instead, let's be lazy and use void *.
++	 */
++	char *of_flat_tree;
+ 	void *base, *ov, *ovcopy = NULL;
+ 	int i, err, noffset, ov_noffset;
+ #endif
+@@ -2395,17 +2402,18 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	/* we need to apply overlays */
+ 
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
+-	image_start = addr;
+-	image_end = addr + fit_get_size(fit);
+-	/* verify that relocation took place by load address not being in fit */
+-	if (load >= image_start && load < image_end) {
+-		/* check is simplified; fit load checks for overlaps */
+-		printf("Overlayed FDT requires relocation\n");
++	/* Relocate FDT so resizing does not overwrite other data in FIT. */
++	of_flat_tree = map_sysmem(load, len);
++	len = ALIGN(fdt_totalsize(load), SZ_4K);
++	err = boot_relocate_fdt(&of_flat_tree, &len);
++	if (err) {
++		printf("Required FDT relocation for applying DTOs failed: %d\n",
++		       err);
+ 		fdt_noffset = -EBADF;
+ 		goto out;
+ 	}
+ 
+-	base = map_sysmem(load, len);
++	load = (ulong)of_flat_tree;
+ 
+ 	/* apply extra configs in FIT first, followed by args */
+ 	for (i = 1; ; i++) {
+
+---
+base-commit: 82d262ae162d859d3b0bbcd40a9464e890b009da
+change-id: 20241219-extlinux-relocate-dtb-when-dtbo-4c7536f880b2
+
+Best regards,
 -- 
-// Caleb (they/them)
+Quentin Schulz <quentin.schulz@cherry.de>
 
