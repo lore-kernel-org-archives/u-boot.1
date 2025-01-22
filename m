@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F0E6C02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 17:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61002C02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 17:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C610809D4;
-	Wed, 22 Jan 2025 18:21:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA68680A09;
+	Wed, 22 Jan 2025 18:22:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X3Sfa/x0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uTYerOH2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B154D80A09; Wed, 22 Jan 2025 18:21:11 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 8A7AF80A30; Wed, 22 Jan 2025 18:22:16 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B35B809D2
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 18:21:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D057809D4
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 18:22:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7b6f7d7e128so108200685a.1
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:21:09 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6d89a727a19so11862926d6.0
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:22:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737566468; x=1738171268; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737566533; x=1738171333; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/uECq/wrZ5blI9tIriWhtvilzCgGmXvoRVaPCnzR7+E=;
- b=X3Sfa/x0Q2rtmlmz80g3uQQ2qFc/yBC2/JL5QfROsg4CqPx+FfUkVY76aSyL1KbB5n
- r9zmCG7h/2z8ffCr7iDZPbzey4SKTk31FjpMNe8Khy5w84nAs2rejusaVaTalmwsfchN
- wf7P8uZEIeAwXUf4Jtbn1B3CCPd1Ll52Ay/28=
+ bh=9yKofRoGqdO/nUSXZazXvLQcEbu7UfFrB1jf0TzE3X8=;
+ b=uTYerOH2Wri9AgdWwP+6wpH9GlXk2DPXL234hGDWenyvkhOu9aKH5vgcBqBLOrIuFS
+ mw/3SeP6IyDKzTDQRAFKt2kuXXD0ZIz0onSZeiJ4lAgDW7mq9rg6ly/zh4NU4nSZ362Y
+ kG9Ot6ilroWGGHLNxz/9CKe3RVAbf/u7WDT6Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737566468; x=1738171268;
+ d=1e100.net; s=20230601; t=1737566533; x=1738171333;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/uECq/wrZ5blI9tIriWhtvilzCgGmXvoRVaPCnzR7+E=;
- b=umoAPPpFqODia7I9yxDga2g0GQ+rvf70jODdPmSG1P9vIPzYa2WiNGntETVPEVTlC4
- tz7KU7zBattgsvHsLgOfjZQ4utxgIgIOXuIGZO9t2b/60iIN+7kL8uSWsHagm0jJspRf
- gLaMBxGRuX1dE9B3bB51T8V5hKum2O9LshFMgrFJwhhY+gL85N/N4+eHF493S4rrlN5N
- YQhgODL/bsiCwCgF5/cVI5LjDfeBPdeLseabRmJhlPN6jRpYSKaG0ieKTGrFfFfZW9WW
- nFYFe5sXqKJwWbVhRayKrhQem8D3TEZhgbnYSoF6ANIt1E1k5+MVWc2PNBZc9MCRPpsv
- FAiw==
+ bh=9yKofRoGqdO/nUSXZazXvLQcEbu7UfFrB1jf0TzE3X8=;
+ b=j/Ju6zwp3QC+ognUK8WgAVJn/v9YDbPuDLdfyCZnuFlgv5u3GaA3AC0NNb4/6HhN3L
+ JvqsUKV6NdNG/U6kOSS3CjWIBeT4eGfkkud41aZic0swq92TKddWLImcyLeiw4OvvOFV
+ c7EuD2NTLq1YfUh+uosEqThKU2ymEUJc2zMeGQPVvyP5n1e+kPOKrGLGft/7C4YatXB3
+ 9bXPO2s7J3whohf6mu7E66mGmyoY5UILowaEtw+mt2eNqVy85+bBlbTmnUvn67hjjSRd
+ v9JHgE1+0MvGUTVUXGgyBwRCwY+pnYUwbouP24OxCLs9B/ej7kjDEdd3713M7V6Kncd7
+ Dmrg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUuQGd8eSNqRZ7MUGRacq9DwdElqkNAbkbUK9PbaeGNrAppxD/i+NgEAPyrlk88gzhUoGK1IFA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzs4F6T0zmnHag0YzPMmyBmhczoUqLG9b25CxzkdzT/Qx1rqQFK
- jZr1PiAfZLh+iE47vOZhFB13Bme5QDDDKCPR0GyAuapEo+2WcZZVSnkgMqv1uB4=
-X-Gm-Gg: ASbGncuMlxIa/7eO/NkLOL4yh1ezWiDkbu8IRoUM66EqssIMzdZnU2Smpvd/R3t6xiX
- TmTJlHTYPAgSt5TJbHWipiqMC9XofXKP905sto5UQwveOdJdtTjeRaBBqbUiG+2dYvz5lvDK7i1
- 4HbHUUh00aVbSFcYtfyinRmxFLaVaP8kIGkh/0/ntW584XovemkP41BNpANwrzNygtTd9Ny+xil
- zYY1UOvNfw/4NuRjaDj5xWTjHq0rApZ4D2LaKxKI51y5nBBTslhrVVS3K1zFE/Nd8c=
-X-Google-Smtp-Source: AGHT+IG2/TweTRYDmImwpsPTkTEIDCvxIICB42Ewg0+LevF5qSF0n02JXh9Lr/ANLy9sbs0IaXz4OA==
-X-Received: by 2002:a05:620a:24ce:b0:7b1:4a2a:9ae0 with SMTP id
- af79cd13be357-7be931ac872mr15888185a.9.1737566467958; 
- Wed, 22 Jan 2025 09:21:07 -0800 (PST)
+ AJvYcCUmHaDOYqqiV6VjRNpar3GHf7jzdYIAFH8zOniQf2HAVZKlgRT9YuZOVxnwaJ2MG+wjSCS4C+w=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhH9IFE9WwXcVP1bwamRR99wtl7KUbelm5RX1z4Hz/SdiGmXW3
+ nfW9LA02w8RgW6bhyL015WXggBzzDfIIjzw7Q68DUPZ0MI8Ott4X+f4cWBtr6zM=
+X-Gm-Gg: ASbGncsijaI0TxBt/XA9i/ZIRAURZlA47IUYirCzNYr2kDxYmVk35eNEIoKeg8GSjtl
+ Ys+Y+wOnBxRtDSpLYm8ax7s+7CLyI2mnQyNkkua9/hyzgMCEJ8BvePQnrqZDIgFBlbPB3HeTbc1
+ dFbwGsUGyYYydOATeS7doiqKDm12R2MqEDoemw7/dsQ1SeA/bIAdAg7qGmclSa/KTMjIKEd4KJt
+ G1PLmYFiDsAyTQCZ0VMuLScS2cOvZFWgalAlRB+ccVwTwcr03rwY9b50cbetEzt39I=
+X-Google-Smtp-Source: AGHT+IH5P8suntTs0eipr2FSJxTnCP6r9jYMdMORtUW4SEudTqEelsk3H8OsWnKu9wKEKnAv2V0Tvg==
+X-Received: by 2002:ad4:5cc7:0:b0:6d8:99cf:d2d0 with SMTP id
+ 6a1803df08f44-6e1f9fd7877mr1378946d6.19.1737566533001; 
+ Wed, 22 Jan 2025 09:22:13 -0800 (PST)
 Received: from bill-the-cat ([187.144.16.9]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be61487328sm681017185a.58.2025.01.22.09.21.05
+ 6a1803df08f44-6e1afbf5e2dsm63243336d6.21.2025.01.22.09.22.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jan 2025 09:21:06 -0800 (PST)
-Date: Wed, 22 Jan 2025 11:21:03 -0600
+ Wed, 22 Jan 2025 09:22:12 -0800 (PST)
+Date: Wed, 22 Jan 2025 11:22:09 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Harrison Mutai <harrison.mutai@arm.com>
-Cc: nd@arm.com, andre.przywara@arm.com, manish.pandey2@arm.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 3/4] bloblist: add support for CONFIG_BLOBLIST_PASSAGE
-Message-ID: <20250122172103.GA52306@bill-the-cat>
-References: <20250115135209.13946-1-harrison.mutai@arm.com>
- <20250115135209.13946-4-harrison.mutai@arm.com>
+To: Harsha Vardhan V M <h-vm@ti.com>
+Cc: sjg@chromium.org, angus@akkea.ca, u-boot@lists.denx.de, vigneshr@ti.com,
+ kamlesh@ti.com, d-gole@ti.com, k-malarvizhi@ti.com,
+ a-parmar1@ti.com, khasim@ti.com
+Subject: Re: [EXTERNAL] Re: Proposal for a New Command to U-Boot Fuse
+ Programming
+Message-ID: <20250122172209.GN3476@bill-the-cat>
+References: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
+ <20250106222314.GF3476@bill-the-cat>
+ <5e166f95-681a-8a96-0d8c-033c36d47d5a@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gPN7oRAIqLj3HQEp"
+ protocol="application/pgp-signature"; boundary="2E08uc5nt12ko5/k"
 Content-Disposition: inline
-In-Reply-To: <20250115135209.13946-4-harrison.mutai@arm.com>
+In-Reply-To: <5e166f95-681a-8a96-0d8c-033c36d47d5a@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,48 +100,165 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---gPN7oRAIqLj3HQEp
-Content-Type: text/plain; charset=us-ascii
+--2E08uc5nt12ko5/k
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 15, 2025 at 01:52:06PM +0000, Harrison Mutai wrote:
-
-> When the configuration option CONFIG_BLOBLIST_PASSAGE is selected, the
-> bloblist present in the incoming standard passage is utilised in-place.
-> There is no need to specify the size of the bloblist as the system
-> automatically detects it using the header information.
+On Fri, Jan 10, 2025 at 11:12:47AM +0530, Harsha Vardhan V M wrote:
 >=20
-> Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
-> ---
->  common/Kconfig    | 8 +++++++-
->  common/bloblist.c | 5 ++++-
->  2 files changed, 11 insertions(+), 2 deletions(-)
+>=20
+> On 07/01/25 03:53, Tom Rini wrote:
+> > On Mon, Jan 06, 2025 at 12:06:25PM +0530, Harsha Vardhan V M wrote:
+> >=20
+> > > I would like to propose a new command for U-Boot's fuse programming
+> > > functionality to address the challenges posed by the current implemen=
+tation.
+> > > While the existing fuse prog command works well for programming indiv=
+idual
+> > > fuse values, it becomes cumbersome especially when dealing with large=
+-scale
+> > > programming requirements.
+> > >=20
+> > > Current Command: fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
+> > >=20
+> > > This command programs one or more fuse words starting from a specific=
+ <bank>
+> > > and <word> with the hex values given as input.
+> > >=20
+> > > While functional, it lacks the efficiency and robustness needed for
+> > > programming a significant number of fuses or handling structured fuse
+> > > configuration data. Repeatedly specifying values for each fuse bank a=
+nd word
+> > > is not only time-consuming but also prone to errors during manual inp=
+ut or
+> > > scripting. This approach does not leverage the ability to process
+> > > pre-structured data in memory. For users with complex programming nee=
+ds, the
+> > > current method becomes an obstacle rather than a tool.
+> > >=20
+> > > Proposed Command: fuse writebuff
+> >=20
+> > It would be good to provide some documentation links to the fuses that
+> > you're wanting to deal with. What we have now works on a number of
+> > diverse SoCs, even if for some cases it might be best to write a
+> > script that's run rather than copy/paste things live. Any sort of new
+> > mechanism needs to get feedback from users at other semiconductor
+> > vendors to make sure it's generic enough for everyones needs. Thanks.
+> >=20
+>=20
+> Hi Tom and Simon,
+>=20
+> The buffer is not a text file. It is a structure in memory. The buffer is
+> structured to contain all necessary information for the fuse programming
+> process. This can include metadata, fuse programming data etc. The exact
+> structure of the buffer can determined by the command_id, which provides
+> flexibility for supporting different use cases. The memory buffer is
+> typically prepared in user-space code or a script and loaded in memory
+> before invoking the fuse writebuff command. It is not stored as a text fi=
+le
+> or any other file format, as the command operates directly on memory
+> addresses.
+>=20
+> Example of a buffer:
+>=20
+> struct fuse_buffer {
+>     struct fuse_mpkh smpkh;
+>     struct fuse_msv msv;
+>     struct fuse_key_cnt key_cnt;
+>     u8 buffer_hash[64];
+> };
+>=20
+> This fuse_buffer struct will be loaded in memory containing all the
+> necessary information for fuse programming.
+>=20
+> struct fuse_mpkh {
+>     u8 mpkh[64]; // public key hash
+>     u8 bch[8];
+>     u32 attributes; // read-protect, write-protect, override, active flag
+>     u32 reserved[2];
+> };
+> struct fuse_msv {
+>     u32 msv_with_bch; //model specific value
+>     u32 attributes;
+>     u32 reserved[2];
+> };
+> struct fuse_key_cnt {
+>     u32 key_cnt; //key count
+>     u32 attributes;
+>     u32 reserved[2];
+> };
+>=20
+> -> eFUSE layout is abstract and isn't public as its programming and layout
+> itself is security sensitive (it has authentication and decryption keys
+> etc). So, fuse prog doesn't work as there is no "banks/offset" here.
+> -> Platform Security Core running Secure SW exposes APIs through which th=
+ese
+> Keys and its attributes can be programmed. Whole content maybe encrypted =
+for
+> enhanced security on unsecure factory floor.
+> -> There is a definite order in which these fields needs to be programmed.
+>=20
+> Its possible to break the struct into 32bit values and send them across b=
+ut
+> we would end up with ~30 odd fuse prog cmds which is inefficient and error
+> prone.
+> It would be hard on secure core to also ensure correctness of operations
+> against all sorts of silly errors (such of accidentally skipping a word or
+> mess up ordering) which can render Silicon unusable.
+>=20
+> So passing a opaque pointer with a command_id to Secure core is all that
+> fuse cmd needs to do which is what writebuff supports.
+>=20
+> This can be extended to any vendor; It's just an opaque pointer handoff. I
+> see at least one other vendor do it in custom way:
+> arch/arm/mach-imx/cmd_dek.c which could benefit from this new cmd fuse
+> writebuff.
+>=20
+> Here=E2=80=99s how the fuse writebuff command works in a typical flow:
+> 1. Buffer Preparation: Vendors or developers create a complete buffer (e.=
+g.,
+> key.bin) containing all fuse programming data using vendor-specific scrip=
+ts
+> or tools and copied to SD card.
+> 2. The buffer is loaded into memory using commands like:
+> fatload mmc 1 0x80000000 key.bin
+> 3. The fuse writebuff command passes the memory address (0x80000000) and
+> command_id to the secure core:
+> fuse writebuff <command_id> 0x80000000
+> 4. The secure core receives the memory address as a pointer and validates,
+> interprets it based on the command_id and then programs the fuses.
 
-This leads to failure to boot on qemu-arm-sbsa as seen in CI:
-https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10392&view=3Dl=
-ogs&j=3Dac5e904b-a30c-5e1d-9570-462b8181c990&t=3D863544fb-ed04-5d34-fdac-10=
-f5bbb057bd&l=3D423
+To summarize what we talked about on a call, I would like to see either:
+1) Work with arch/arm/mach-imx/cmd_dek.c and use that as the base of
+some new generic command that deals with SoC-specific fuse
+configurations that are handled via security processor.
+OR
+2) Create a new command (that should be in cmd/ti/) for handling the K3
+fuses, if we cannot make something abstract enough to handle this
+concept on multiple vendors while having any sort of useful code re-use.
+
+Thanks!
 
 --=20
 Tom
 
---gPN7oRAIqLj3HQEp
+--2E08uc5nt12ko5/k
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeRKPgACgkQFHw5/5Y0
-tyyCSQwAoFbFlii/iAEDPdd3uj9uP/+JYDJGgXY80zrt8SniGKuZ0xwByKI25F5L
-us/94ajfq9O1BreB/cFLNW3CBBMiQACNRF5i1CknIH93Hin41Z4RiaJQupNU/wmt
-D0AupLD7bqMdNYdzVnPb88Nrzuxre6Cr5UynL/BdThrTtQoM8PurSQOevlNxaXfD
-nFOa2kk5FjYoYiuEQDzpo5c3yUf+ZZa+rBTzYqQzynio0yy2MsmMkatCUO9JB6JP
-M/EVtUP0ZqyvHJ+wDFpDVlrZRL6iMgDcsx32eD4/KSaqzqZJUkbkBao0OdYejr3/
-+hu7xT2Mg13Jg9YaUmX2mLBUOVFOLw3BdeMkuTXrqfJcFyc/bzIQeBkflxr3FPcz
-RiWfZR4zeNSG4B5lHTKISNv034l75chmIaWDIYyTGMCmWnEsefAmY2rpYW9m1DmR
-fxN8ZD9gA9jr5sAQjGdFhedjcEdx+6Hr4iVze/35N8XAu9GJ84DFukKSoRewKISW
-qzOGojh+
-=fP2O
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeRKUEACgkQFHw5/5Y0
+tyyoDwwApqDryqfre0RBdW+EJnDBlBzzP+rqzwX+8a2HvZ5hlhFKUASDij0tIbw6
+9AiRR89+JVoe6o+/7GatphXfQ2Xqt/f4lURNVaYVCl03jK7KO2ieFBxTBpPJtCdp
+YnHfIxsTTZnTlhAp5b7dST5n6Jt3vXHlBQUCRbZzuqf48KYilUqiNmjkJ7LtiaPT
+a9MS0GtEzNA7KEWvcWVVRq5yuiGkqIoaSEEb1Bsr/w10JO1vvnfZ0hgYd/uku3tv
+tJ+6QZ8lJ24x+XRrfPMgPhMmyUQKRwwAgw3rhuhwEHsuWX1FSH0hhaVM4tOY93ds
+rqlO0rSOz0mzi0lLxOfVaIUOmurA3X/VybsCyfSlXrr5NujZQ690JIT0eZRQg6cY
+odueKQcgHtwCAWnsLso3ALBwZqMAWiGPHB89O3ff11R78I1FKnfxKSn7yzrQO+gR
+JX/Za3D5SuUj0hWFVN03DID9lRC82E7wSmljmCZqCrI4fQ52XFJGINSALLi35kD5
+3WuEdhYm
+=+SI+
 -----END PGP SIGNATURE-----
 
---gPN7oRAIqLj3HQEp--
+--2E08uc5nt12ko5/k--
