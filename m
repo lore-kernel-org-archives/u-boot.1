@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E540C0218C
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 08:53:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7980AC02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 08:55:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B72A803B5;
-	Wed, 22 Jan 2025 09:53:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B712F803B5;
+	Wed, 22 Jan 2025 09:55:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YSSfDD3J";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="fxrSlrl+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EDEF80586; Wed, 22 Jan 2025 09:53:56 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E9E380283
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:53:53 +0100 (CET)
+ id 6884D80586; Wed, 22 Jan 2025 09:55:42 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F028780283
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:55:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50M8rfmY984721
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 22 Jan 2025 02:53:41 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1737536021;
- bh=v3/DkFx6WVjq/o62rAQBGJ3YoLZnESa4AAB098SYX1c=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=YSSfDD3JivSFf1wFicSLX2yEu3utIWw+lmld41dfn0FozRXchcC6PRSIuNXSFmZT+
- SNB3l5uTXU50ePNu7pLQsw7u8oVqiAZqKk3lCAbRDrPrsWCOln5t9q8wHuS4bvpQTd
- E4UxKwRhy31QdVMUo4yiVPYrp5IIms+6u4hVS6UA=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50M8rffc010989
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 Jan 2025 02:53:41 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- Jan 2025 02:53:40 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 Jan 2025 02:53:40 -0600
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50M8rXCt023887;
- Wed, 22 Jan 2025 02:53:34 -0600
-Message-ID: <73bcc845-d35b-4f3a-9529-41310cfe5707@ti.com>
-Date: Wed, 22 Jan 2025 14:23:31 +0530
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-388cae9eb9fso3719996f8f.3
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 00:55:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1737536139; x=1738140939;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dGWwsG/XzfO7NwnbGT0Xp/2hNB+Hmy5CfDuT7KyqAsg=;
+ b=fxrSlrl+56Nc+9SKS1iypexOU7Du8ZPNlmonPTcwDc6NvyK/aMT7hrEU973P2ejCCA
+ e6ralhw4vq2Dse2PQeUFSBe7ylwrHOuXH4J5flVP3hNZo53VnW5H5pc9RdA+YPSF4qVH
+ eTWjuwfQ1mKoPKBvOQnofQrXbWqzVwzRTL6Sg7U50O8I31/PfubfI3P8RNlaxR4Ac4IR
+ CMS+xqtuQnqnTxIIj81x4seEDnlgciLskZyIyx2xoOC8PkTOktK2IVcRUmxJDUNXVhS+
+ Gf8wg4ESDVQyDyNfn+8aXwxpLdJHZiJKvoPcBELaVngxofJOLa8xpSDwCHeHfKz3mUek
+ u2hA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737536139; x=1738140939;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=dGWwsG/XzfO7NwnbGT0Xp/2hNB+Hmy5CfDuT7KyqAsg=;
+ b=IVkLi/MX8VTY4P8G4ejlaB4vVE3gegk5lOem2QdLc26J6q350zHAlmm/15TRw1xvhT
+ jBEASV+dWvaYmZD1FTWa7ZaIew17yj8jONhvARQOl9MjZuq6QzLNg8os7HcEmc7ZN73J
+ 79A360MLQWC/Rs26SVEydO5jjYgXrcvtNJ92kDkxnqTpcfVm6Q+qtjr1p3UyYccXpsGf
+ sAz08xeECEqzRvVA9M6IlY3f5SXW5Ov7rUH8TxcWGJiuWj3inok8zgP7jyyissJLOI6z
+ 1Lmx+yhEoyuk8U/AiKnMXaWiHrurNzPjSFpegMcKwj1dWv71OD3cQ3HltZxJv2KIvau1
+ +1jQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVNZEkkLfCKM6rcSUjoBMOcgySNGCsjss1W2ef9yu0/eLqsGJ/IgTACyF1NsTiymbOvSJ13BdA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9x/TDIwBGkCzFd/PSf7snFDtiOIKzrXyuUtLbLSIriRd4MvHr
+ e3U2sLijYzN10ImtbMegISMF0AUvrzQ4Lr5pssq+dm0hagnMKwYsFUnBGyGCfV4=
+X-Gm-Gg: ASbGncuuV7Pn4iKbGtlvH6iFX+QIflzYUztptuwom8LQ/pXbMQHBmdG/FicEaQSIuBb
+ e1vXGOHfJSrgnAUWyZqlZNcN/KWiHOFwKOXk4pwsOHCBN8K8VCPeZGNvsrH9njaSu3mpLCeqqus
+ BviqSt/MtvyPruV+ILpWCHNhfmeCD/o5MIfXXS990F8l9lqTM8A0oUh+dTNiTHIQQJbb8C/GAIz
+ WVnEMIvGwsoqo6qNMnPRTvgguo7mXduAYc9vLdp85bPYP5kpBdw9yEWTiFAJCuKhYAgr5TuSe+E
+ Gx24oDkLIOotmg==
+X-Google-Smtp-Source: AGHT+IGf+XpOR0ZbaZev6nXAj7CaAHOfSzCQAOtoktCgm9+mNyNk0LsnDcb0CBxR6sd+zK9ywhmYiw==
+X-Received: by 2002:a5d:6d86:0:b0:38a:8e2e:9fcc with SMTP id
+ ffacd0b85a97d-38bf57befa9mr19968016f8f.45.1737536139214; 
+ Wed, 22 Jan 2025 00:55:39 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38bf3222bebsm15834308f8f.30.2025.01.22.00.55.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jan 2025 00:55:38 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+Cc: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Jan Kiszka
+ <jan.kiszka@siemens.com>, Neil Armstrong <neil.armstrong@linaro.org>, Tom
+ Rini <trini@konsulko.com>
+Subject: Re: [PATCH v3 3/9] usb: dwc3-generic: Reorder include
+In-Reply-To: <20250120080120.51657-4-patrice.chotard@foss.st.com>
+References: <20250120080120.51657-1-patrice.chotard@foss.st.com>
+ <20250120080120.51657-4-patrice.chotard@foss.st.com>
+Date: Wed, 22 Jan 2025 09:55:37 +0100
+Message-ID: <874j1rkz1y.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/13] arm: mach-k3: j721s2_init: Probe AM65 CPSW NUSS for
- R5/A72 SPL
-To: Roger Quadros <rogerq@kernel.org>, AKASHI Takahiro
- <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Nishanth Menon <nm@ti.com>, Hari Nagalla
- <hnagalla@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, "Andreas
- Dannenberg" <dannenberg@ti.com>, Simon Glass <sjg@chromium.org>, "Jayesh
- Choudhary" <j-choudhary@ti.com>, Aniket Limaye <a-limaye@ti.com>, "Aradhya
- Bhatia" <a-bhatia1@ti.com>, Neha Malcom Francis <n-francis@ti.com>, "Andrew
- Davis" <afd@ti.com>, Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: <srk@ti.com>, <s-vadapalli@ti.com>, <danishanwar@ti.com>,
- <u-boot@lists.denx.de>
-References: <20250107093840.2211381-1-c-vankar@ti.com>
- <20250107093840.2211381-5-c-vankar@ti.com>
- <d2c8cde1-891f-470a-abd9-598847a9078f@kernel.org>
-Content-Language: en-US
-From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <d2c8cde1-891f-470a-abd9-598847a9078f@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,82 +102,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Patrice,
 
+Thank you for the patch.
 
-On 07/01/25 20:03, Roger Quadros wrote:
-> 
-> 
-> On 07/01/2025 11:38, Chintan Vankar wrote:
->> To support Ethernet boot on AM68-SK, probe AM65 CPSW NUSS driver in
->> board_init_f().
->>
->> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->> ---
->>   arch/arm/mach-k3/j721s2/j721s2_init.c | 10 ++++++++++
->>   1 file changed, 10 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
->> index 6ce3eb87efb..7208bee5785 100644
->> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
->> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
->> @@ -329,6 +329,16 @@ void board_init_f(ulong dummy)
->>   
->>   	setup_qos();
->>   
->> +	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
->> +	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
->> +		struct udevice *cpswdev;
->> +
->> +		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
->> +						  &cpswdev);
->> +		if (ret)
->> +			printf("Failed to probe am65_cpsw_nuss driver..\n");
->> +	}
->> +
-> 
-> This looks like a hack. Please find out why the Ethernet driver is not being
-> probed when SPL tries to load image over net.
-> 
+On lun., janv. 20, 2025 at 09:01, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
 
-Hello Roger,
-
-The driver is defined as UCLASS_MISC which should be probed explicitly,
-I have discussed the same with Nishanth in following thread:
-https://lore.kernel.org/all/ee1d16fd-b99b-4b07-97bb-a896e179157a@ti.com/
-
-> We have the following defined at the am65-cpsw-nuss driver.
-> 
-> U_BOOT_DRIVER(am65_cpsw_nuss) = {
->          .name   = "am65_cpsw_nuss",
->          .id     = UCLASS_MISC,
->          .of_match = am65_cpsw_nuss_ids,
->          .probe  = am65_cpsw_probe_nuss,
->          .priv_auto = sizeof(struct am65_cpsw_common),
-> };
-> 
-> U_BOOT_DRIVER(am65_cpsw_nuss_port) = {
->          .name   = "am65_cpsw_nuss_port",
->          .id     = UCLASS_ETH,
->          .probe  = am65_cpsw_port_probe,
->          .ops    = &am65_cpsw_ops,
->          .priv_auto      = sizeof(struct am65_cpsw_priv),
->          .plat_auto      = sizeof(struct eth_pdata),
->          .flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_OS_PREPARE,
-> };
-> 
-> It looks like am65_cpsw_probe_nuss() is not being invoked for you.
-> 
-> Can you please check if am65_cpsw_port_probe() was invoked?
-> If yes but am65_cpsw_probe_nuss() was not then we need to fix the
-> DM hierarchy for AM65_CPSW?
+> Reorder include following rules available here :
+> https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
 >
-None of the probe function is getting invoked here, since we need
-Ethernet functionality here we need to probe function in board_init_f().
-We have discussed the same at here:
-https://lore.kernel.org/r/d68c8045-116a-49c0-9e74-d6a366e6f008@kernel.org/#t
+> Remove useless include files.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Marek Vasut <marex@denx.de>
 
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
->>   	if (IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_AVS0)) {
->>   		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
->>   						  &dev);
-> 
+>
+> ---
+>
+> Changes in v3:
+>   - Update comment by adding "Remove useless include files"
+>
+> Changes in v2:
+>   - remove useless include files
+>
+>  drivers/usb/dwc3/dwc3-generic.c | 20 ++++----------------
+>  1 file changed, 4 insertions(+), 16 deletions(-)
+>
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+> index 2ab41cbae45..bc7d2d4234b 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -7,29 +7,17 @@
+>   * Based on dwc3-omap.c.
+>   */
+>  
+> -#include <cpu_func.h>
+> -#include <log.h>
+>  #include <dm.h>
+> -#include <dm/device-internal.h>
+> +#include <reset.h>
+> +#include <asm/gpio.h>
+>  #include <dm/lists.h>
+> -#include <dwc3-uboot.h>
+> -#include <generic-phy.h>
+> -#include <linux/bitops.h>
+>  #include <linux/delay.h>
+> -#include <linux/printk.h>
+> -#include <linux/usb/ch9.h>
+>  #include <linux/usb/gadget.h>
+> -#include <malloc.h>
+>  #include <power/regulator.h>
+> -#include <usb.h>
+> -#include "core.h"
+> -#include "gadget.h"
+> -#include <reset.h>
+> -#include <clk.h>
+>  #include <usb/xhci.h>
+> -#include <asm/gpio.h>
+> -
+> +#include "core.h"
+>  #include "dwc3-generic.h"
+> +#include "gadget.h"
+>  
+>  struct dwc3_generic_plat {
+>  	fdt_addr_t base;
+> -- 
+> 2.25.1
