@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DE8C0218C
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 13:20:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11F8FC02181
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 13:22:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7022E807D6;
-	Wed, 22 Jan 2025 14:20:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 546BD807D6;
+	Wed, 22 Jan 2025 14:22:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qZcYhXPV";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Z7le5evh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EEFF80805; Wed, 22 Jan 2025 14:19:59 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 39978801FB; Wed, 22 Jan 2025 03:21:25 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0099803B5
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 14:19:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E737B8001F
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 03:21:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-540218726d5so6713089e87.2
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 05:19:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737551996; x=1738156796; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KMGleCqh4gHjYkh6KvZgd4E/7K1OyFDOlqjKirbrsLY=;
- b=qZcYhXPVdhDVsAU9Uy6QY6JJ53vg1eW5VILMMa13N66K2qBQUOf8xJtevomYCKRHxQ
- o/53ikKAYNLQuPhEJyo3WDzR+vhS3fKOWzigCVCiy1xhmChAeo1Y3gTghpWENFQEz6Gq
- A/QxNUTjt87PLrFfDAEdyr6HKnNPGqaLkk46mPU0zX/VehIpWm0bEn6+D4gHvPf0+5ng
- ruCwZNy2u6SMkDI8oS7NvQ4RoSVjrRz0S4zHY1gDLxTfNjlYMV+Ujo/tif1MDIM7nD7c
- 8yaWUYIB4URTM42Y6Ja+ip7I5Gu6EAMIaK4fCeOY0yb/NHK5ml8PfLfwIoMTIYIv6Y1F
- 3QLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737551996; x=1738156796;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KMGleCqh4gHjYkh6KvZgd4E/7K1OyFDOlqjKirbrsLY=;
- b=Pqb/oiCTHrYEbazMdI3mnXf08Sp4053zr27vtYsVsYuLQk/sSwwu7D7gWV28Ap1/Ef
- 0yuMNpzMigLQL/eu3kGN1w/D5OQf94fUHPVi1LMJte/2lAC2CX37i8Q+9rN3zJlSNq4m
- DbCTdOzc/5fCDLejOVcEU89CvDx2Tiy+8zlBrKIOUNypYCxbU2SF0cx+7DIp2jIM9HB6
- ZD/XS/CgQL8ixOSTztH6mMz/F2YPByxgo0CHvvDJcXwsINSHltmCboYT0m562XI2X4ck
- TH+YX+u7D4bUnj0wtBhy1rgpX49+1CnybPG5T7Y7VxFEjVEHty0dnG8LkxedbAeyqqs7
- u9CQ==
-X-Gm-Message-State: AOJu0YzwuX595kts2jgmIkNe+JUgEaa7HfjkNmyYfz6YFNDij3fPhCE/
- QnT0naqyObBSrO+9n4r22Hj2CDxAemn5k548UiB1z3zmrTSJZUFHWsdcY4Vj32J6VuXkhv/yNeQ
- PRMAcZ7n05EmRs/x83KlcAMIe05++KncnU+3XPw==
-X-Gm-Gg: ASbGncuMyFbBk1iBKU+yLwW/ALz+LQZOVKiCv2pw5f5Mx2dXDs8gM4wKiXcIUt6n00D
- 4gZHIZ+lKm2ZN3VWm2fucxFy3f/ewl3bV3pDneiXg/o+GQkjhoQ==
-X-Google-Smtp-Source: AGHT+IENFaDXGf6B9BJBB8McSR4fmbNDueJGOu9WTcmZXLmrgldHRKz8LCDEybqGX7vO80lsRAIuifvjAG+myIgAft8=
-X-Received: by 2002:ac2:4896:0:b0:542:2991:9407 with SMTP id
- 2adb3069b0e04-5439c246316mr6900977e87.15.1737551995772; Wed, 22 Jan 2025
- 05:19:55 -0800 (PST)
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1737512482; x=1769048482;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=jYbHR07V7ceSfq9d2Kv3m6nMA02V5KCK/6gC7YYhTjk=;
+ b=Z7le5evhB0weOrQ7CIF5+Q+eagePq/p7OP81GVjyS3myzVpqghe7QC1v
+ 2KOLGuGho8bBhArISQOdMKCWKGMtRSQuVm6hwMQLwzK27tsfrRsmjm0oc
+ lpTuWZVfEzAefo615G2m/lz6OT1lEl7htGej5m97Iw2wsf1AiMRimWeAs
+ 4DZwHi40W9D3Q7KEVkMC4xMjgXx1zHReePvZfN8yGeWGrFpRf6t9RHKJQ
+ eByzUDhqaD7YwfnkV0Pgbr3ep+okwyjvAYhArxvQjP/Tns4mfipAM/hAp
+ 138EiBh6tzFFdywvX6moh6J7qwM8EIi/aNLlt9IdHZjeMLlrAOGJXpW+R w==;
+X-CSE-ConnectionGUID: q69VxAdSSx2mc5CPPVZ+rQ==
+X-CSE-MsgGUID: dE1XfT/bTR+7ISjzWalOIQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11322"; a="41627528"
+X-IronPort-AV: E=Sophos;i="6.13,223,1732608000"; d="scan'208";a="41627528"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+ by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Jan 2025 18:21:20 -0800
+X-CSE-ConnectionGUID: Oh/xHRXlTumhQXAXyd0qYQ==
+X-CSE-MsgGUID: qcXfdGe+SDiotQnZ1dS7rA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.13,223,1732608000"; d="scan'208";a="137818314"
+Received: from apgcp0d540114.png.altera.com ([10.244.77.36])
+ by orviesa002.jf.intel.com with ESMTP; 21 Jan 2025 18:21:17 -0800
+From: alif.zakuan.yuslaimi@intel.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, Tom Rini <trini@konsulko.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v1] arch: arm: mach-socfpga: Mailbox buffer and SDM doorbell
+ improvement
+Date: Wed, 22 Jan 2025 10:21:02 +0800
+Message-Id: <20250122022102.31186-1-alif.zakuan.yuslaimi@intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20250120212613.516664-1-sjg@chromium.org>
- <20250120212613.516664-33-sjg@chromium.org>
-In-Reply-To: <20250120212613.516664-33-sjg@chromium.org>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Wed, 22 Jan 2025 14:19:44 +0100
-X-Gm-Features: AbW1kvbJ7_99vIUOlATzKx3lk4DcmvWyucEvCJnxYgHVp7AgYSgatatfuxnZj-w
-Message-ID: <CACRpkdZfELUuupNRCPpW42pPG3sZgcvezvScFn=t-qMvdHMjHg@mail.gmail.com>
-Subject: Re: [PATCH v2 32/44] test: Drop the function for running seama tests
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 22 Jan 2025 14:22:36 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,17 +81,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 20, 2025 at 10:27=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-> Use the new suite-runner to run these tests instead.
->
-> It is not clear that these actually work, since they are not enabled on
-> sandbox for some reason.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+The current write and notify SDM to read mechanism has a flaw where
+SDM is not notified enough to be able to read all the data in the buffer.
 
-Acked-by: Linus Walleij <linus.walleij@linaro.org>
+This is caused by SDM doorbell will only be sent out once the command
+buffer overflow check is satisfied. If the command buffer does not reach
+overflow status, no SDM doorbell will be sent out, which may cause a
+timeout as the mailbox driver will be waiting for the SDM to read the
+buffer to empty even though SDM is not notified to do so.
 
-Yours,
-Linus Walleij
+The solution is to remove the command buffer overflow check
+and set the SDM doorbell to always trigger at the end of the command
+buffer.
+
+This will ensure that the SDM is able to read all of the data.
+
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+---
+ arch/arm/mach-socfpga/mailbox_s10.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
+
+diff --git a/arch/arm/mach-socfpga/mailbox_s10.c b/arch/arm/mach-socfpga/mailbox_s10.c
+index 2b4f26040fe..b69bd3e47ec 100644
+--- a/arch/arm/mach-socfpga/mailbox_s10.c
++++ b/arch/arm/mach-socfpga/mailbox_s10.c
+@@ -88,6 +88,8 @@ static __always_inline int mbox_write_cmd_buffer(u32 *cin, u32 data,
+ 			MBOX_WRITE_CMD_BUF(data, (*cin)++);
+ 			*cin %= MBOX_CMD_BUFFER_SIZE;
+ 			MBOX_WRITEL(*cin, MBOX_CIN);
++			if (is_cmdbuf_overflow)
++				*is_cmdbuf_overflow = 0;
+ 			break;
+ 		}
+ 		timeout--;
+@@ -96,10 +98,6 @@ static __always_inline int mbox_write_cmd_buffer(u32 *cin, u32 data,
+ 	if (!timeout)
+ 		return -ETIMEDOUT;
+ 
+-	/* Wait for the SDM to drain the FIFO command buffer */
+-	if (is_cmdbuf_overflow && *is_cmdbuf_overflow)
+-		return mbox_wait_for_cmdbuf_empty(*cin);
+-
+ 	return 0;
+ }
+ 
+@@ -125,13 +123,11 @@ static __always_inline int mbox_fill_cmd_circular_buff(u32 header, u32 len,
+ 			return ret;
+ 	}
+ 
+-	/* If SDM doorbell is not triggered after the last data is
+-	 * written into mailbox FIFO command buffer, trigger the
+-	 * SDM doorbell again to ensure SDM able to read the remaining
+-	 * data.
++	/*
++	 * Always trigger the SDM doorbell at the end to ensure SDM able to read
++	 * the remaining data.
+ 	 */
+-	if (!is_cmdbuf_overflow)
+-		MBOX_WRITEL(1, MBOX_DOORBELL_TO_SDM);
++	MBOX_WRITEL(1, MBOX_DOORBELL_TO_SDM);
+ 
+ 	return 0;
+ }
+-- 
+2.25.1
+
