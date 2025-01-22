@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4633DC02181
-	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 17:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD76CC02182
+	for <u-boot@archiver.kernel.org>; Wed, 22 Jan 2025 17:11:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 538C180A09;
-	Wed, 22 Jan 2025 18:09:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A7196809D4;
+	Wed, 22 Jan 2025 18:09:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZMr1qncb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Un/AFYfM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DD5980C68; Wed, 22 Jan 2025 18:09:46 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id BB5F680C75; Wed, 22 Jan 2025 18:09:48 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B97A680977
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 18:09:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5926680977
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 18:09:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-21680814d42so117745605ad.2
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:09:43 -0800 (PST)
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-21628b3fe7dso127324685ad.3
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 09:09:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737565782; x=1738170582; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737565785; x=1738170585; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TFbeeLnsq+ldk1iAM8no+jJb/uuqXRXiqt2rNhjDhQ0=;
- b=ZMr1qncbG4i/wJz/3rLRVLne13cBOZXG0C5u3GxuxooUJCCtQaGx+/8JsHxFO/EGHu
- xG4tt6zCrFybBKT0YsYIq5A35hsFq4tXtd7Tfl/dDndZWIytnC7O8i+Bie2wYFIDwFUz
- cN7ysUG+Y9g4ASItJoAfRd8cnASL2oEFHt+yVjUbM2p5X0KVf19nOjNIYL7w+qHnrbVD
- 2BETP9fPOIKeQzYp3tqOiMS9uey6xbP1D0SFIsYWNN0FX+irELIPvRgdrmDggYGbcwQq
- BFyGGbM0uol0x9wxFnc/yZlz10y9CeILJb//ExbwbvS1882nJQsnGWT5InyUaF5QxfzN
- Z/QQ==
+ bh=mk4Tb7YLio9vrlBXjCOT7TgkuMTu5uPsMZ3bfSscZ9c=;
+ b=Un/AFYfMdhvZgma1aSOCvW0WQO8QpLF87oCgaUbPEO55SS803EeM7t3dYhOgJphKx9
+ +KKPB5rY1TstNyTDGGhl+WPWmUzABWlFzpW+9uHwoYWYHOduVIQz54FTGjTjLbKY7l1a
+ AwlhxQEZZid9w14VcbOU8xqKx4BewAmyK3skaFQW8Zwkg8tXId+jVx7dzV2hz3hETihM
+ GY3zq3wpXCZnp+ZGatnvxSF5a/MQi5aqPtqaT//RqJZSt1zFRFkd2wEb0VFJS+od+uh8
+ qKfxDV6+6UkxVd35Y+4+6ToUeimU5/kEU1rTjdbbaMsm8OYwfyC6qAfvbFCP2S6uXnH2
+ 642g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737565782; x=1738170582;
+ d=1e100.net; s=20230601; t=1737565785; x=1738170585;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TFbeeLnsq+ldk1iAM8no+jJb/uuqXRXiqt2rNhjDhQ0=;
- b=KtksAE9iuiZJprW49u+WdxabnnC7S9WjelKEEHG3KLgJbx3ayecn/5dZMTzuku68eR
- KNXU7bny2Q1d6tqGyCKLlG5PaZw9sQLp78nb1RwBwHtzQqFJ5L6Ab2ac16nO+hntH0T0
- gAoCmsEYDID/uPLqmUhVv9gFiio/T5FzS/0RX/Pt4FUIiYCucKED2Q9rWT+AM7V4JXMI
- bk2I18lvMoyG4sC+4Aamy6dPlV+4K5U/Y4/TxAyOsoN17ZliOZc7t1AREKSArFbX6+1u
- 2hYRomJ2DjGtd6u6Uo8j9k6KHZp/78z8uN+A6mf/zXMTHN6I/aAwtm5kDwINHMF6w2za
- 0HOg==
-X-Gm-Message-State: AOJu0YyiPPiS+OoC4mgsZUWUCrugySGtOgoGIMSYzLCr7kHZHKopJOSb
- u5+o8Zc2qOcXrk2bGHkb8b/HFMZGxZHIk/NVquOmJctpAU9Vet3mUBW9yNe4
-X-Gm-Gg: ASbGncta2fIgv5YSTkXN5XMOIRgaYURU7Ib+pGlMLP8qyw1nltuwLK0hV22lUnyMiJr
- mCH499r3vr0c7k56w8lvkiJPuz49TolMjwWhZTmXkNJLPhRrKQtg0uUEhw0kUAh8qMWqebmH1J6
- Yr3vmyfqZnNXsC7N4sQp3qiDtD+opeEfo1OF2mqbljdUJ7111dZEkOtnbxbfX80TDOSBzL9zRsg
- YQ73+tyJBRlsXXmsLHJCs/HGkd5Ph6tnrf1xH077XaDwYY/6R9j9mZmOgRfG2PARjwQsboEiavB
- Nw==
-X-Google-Smtp-Source: AGHT+IHP5Ie61vteQWOGgmiZYy/3mlbE3olC0Ep8NMKb9h5KqzOeQKW1hWK3ErPaGESyv1elZqTwHA==
-X-Received: by 2002:a17:903:32c1:b0:21b:d126:6d30 with SMTP id
- d9443c01a7336-21c355c433amr304479555ad.33.1737565782213; 
- Wed, 22 Jan 2025 09:09:42 -0800 (PST)
+ bh=mk4Tb7YLio9vrlBXjCOT7TgkuMTu5uPsMZ3bfSscZ9c=;
+ b=wBdC9ZcIkTeMckD/Hws/nW1XAJ+tvffO4Hy2ZVT9gULk2QIUN7isIKQYw36Vr8JF/+
+ PwtGPcrkMKwSIfpfRP/vN9MaWZ5DMiX+Nn+Ftu4AoL80k+LTYeXytqYgB95gO/bOszQJ
+ +Z5JIUBb7pvZQCfavGOu8DU2m0KLpyNd2VidM2YW6HzteGvthH91KcvG9WPCKn4jLP78
+ PbPC/rv/bNDvNQtFk1JLgHNLLE9WGwUKALxydyrEaXNBtTsfMe46CRKD/mC/yTTsUJgr
+ +7ccEQPaAX0Slo+9aOXIQficJ0tIwSs4FE5UwWqjWzgsJH/XIj/wpvLykBEoDkslXOSx
+ E7cQ==
+X-Gm-Message-State: AOJu0Yyfue0iiixUadGtL9lrILzKgwKNGVvCUvho5lTGDSphByGjCn/s
+ YxiAqf4dm0fqafRDVCCSmRBMi9akXBqcF05kjXidf4c6iTfBZrcUiCHPQ1Ui
+X-Gm-Gg: ASbGncuI8/oGb0QXyLETtQoWFHfvA9g/Aw/2tgPOVsdLN8rQR+7xVbQC0DjtxkBQ+Ci
+ W9n2Qc0npjmFGnmJLZ76nZdsEKNklKC91OfqF7FGzx5fvuSEPXkOHPw0IdYs0KM9ltJ7RRYdkWj
+ 0ma4GuLxVfMZ+Td4YXi2amnZCFbmIjhuC2sYBBBTXHFu6MI78W2zWcHE1v/rUB8IncEkN0mq16E
+ IhbBXK0KysS2/KNUhoSAE9JhFqmyFkiRNSrBktSUvJfHtk5bQRusjHIob2P8ql/U6Iawvq0QXY8
+ Ug==
+X-Google-Smtp-Source: AGHT+IG++yfdGjfGUp7qk4jFToIpVQJQzJGu5D0HcabX4YQ2PtHTt7yNaqRG7zByK1yx173OholSVA==
+X-Received: by 2002:a17:902:d511:b0:215:75ca:6a0 with SMTP id
+ d9443c01a7336-21c3555b09emr382617315ad.29.1737565784772; 
+ Wed, 22 Jan 2025 09:09:44 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21c2d4028cbsm98095225ad.227.2025.01.22.09.09.39
+ d9443c01a7336-21c2d4028cbsm98095225ad.227.2025.01.22.09.09.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jan 2025 09:09:41 -0800 (PST)
+ Wed, 22 Jan 2025 09:09:44 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
  sjg@chromium.org, Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 12/21] eth_uclass: Add eth_create_device to create a net
- udevice
-Date: Wed, 22 Jan 2025 14:08:49 -0300
-Message-ID: <20250122170858.961359-13-adriano.cordova@canonical.com>
+Subject: [PATCH 13/21] efi_driver: efi_net: UCLASS_ETH "efi_netdev" U-Boot
+ driver
+Date: Wed, 22 Jan 2025 14:08:50 -0300
+Message-ID: <20250122170858.961359-14-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250122170858.961359-1-adriano.cordova@canonical.com>
 References: <20250122170858.961359-1-adriano.cordova@canonical.com>
@@ -99,81 +99,236 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Create an ETH_UCLASS udevice and bind it to a driver
+UCLASS_ETH "efi_netdev" U-Boot driver. This driver can control a
+handle with a simple_network_protocol installed and working.
+See efi_netdev_create.
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- include/net-common.h |  2 ++
- net/eth-uclass.c     | 32 ++++++++++++++++++++++++++++++++
- 2 files changed, 34 insertions(+)
+ include/efi_loader.h            |  13 +++
+ lib/efi_driver/efi_net_device.c | 159 ++++++++++++++++++++++++++++++++
+ 2 files changed, 172 insertions(+)
 
-diff --git a/include/net-common.h b/include/net-common.h
-index 1d507b13b0..ba343af4c6 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -203,6 +203,8 @@ int eth_receive(void *packet, int length); /* Receive a packet*/
- extern void (*push_packet)(void *packet, int length);
- #endif
- int eth_rx(void);			/* Check for received packets */
-+int eth_create_device(struct udevice *parent, const char *drv_name,
-+		      const char *name, struct udevice **devp);
- 
- /**
-  * reset_phy() - Reset the Ethernet PHY
-diff --git a/net/eth-uclass.c b/net/eth-uclass.c
-index 5555f82f23..952df419b7 100644
---- a/net/eth-uclass.c
-+++ b/net/eth-uclass.c
-@@ -12,10 +12,12 @@
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 93f223389a..3bb95cfeb9 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -634,6 +634,18 @@ int efi_disk_create_partitions(efi_handle_t parent, struct blk_desc *desc,
+ 			       const char *pdevname);
+ /* Called by bootefi to make GOP (graphical) interface available */
+ efi_status_t efi_gop_register(void);
++
++/**
++ * struct efi_netdev_plat - attributes of a network device
++ *
++ * @handle:	handle of the controller on which this driver is installed
++ * @snp:		simple network protocol proxied by this driver
++ */
++struct efi_netdev_plat {
++	efi_handle_t handle;
++	struct efi_simple_network *snp;
++	void *buffer;
++};
+ /* Called to register an EFI network device */
+ int efi_net_register(void *ctx, struct event *event);
+ /* Called to unregister an EFI network device */
+@@ -647,6 +659,7 @@ efi_status_t efi_ipconfig_register(const efi_handle_t handle,
+ /* Called by efi_net_register to make the http protocol available */
+ efi_status_t efi_http_register(const efi_handle_t handle,
+ 			       struct efi_service_binding_protocol *http_service_binding);
++
+ /* Called by bootefi to make the watchdog available */
+ efi_status_t efi_watchdog_register(void);
+ efi_status_t efi_initrd_register(void);
+diff --git a/lib/efi_driver/efi_net_device.c b/lib/efi_driver/efi_net_device.c
+index 298eded265..af51b1f855 100644
+--- a/lib/efi_driver/efi_net_device.c
++++ b/lib/efi_driver/efi_net_device.c
+@@ -7,11 +7,146 @@
  #include <dm.h>
- #include <env.h>
- #include <log.h>
-+#include <malloc.h>
- #include <net.h>
- #include <nvmem.h>
- #include <asm/global_data.h>
+ #include <efi_driver.h>
+ #include <malloc.h>
++#include <net.h>
  #include <dm/device-internal.h>
-+#include <dm/lists.h>
+ #include <dm/root.h>
+ #include <dm/tag.h>
  #include <dm/uclass-internal.h>
- #include <net/pcap.h>
- #include "eth_internal.h"
-@@ -528,6 +530,36 @@ int eth_initialize(void)
- 	return num_devices;
- }
  
-+int eth_create_device(struct udevice *parent, const char *drv_name,
-+		      const char *name, struct udevice **devp)
++#define DEFAULT_EFI_NET_BUFFER_SIZE 1024
++
++int efi_net_start(struct udevice *dev)
 +{
-+	char temp[40], *str;
-+	int devnum;
-+	struct uclass *uc;
-+	int ret;
++	struct efi_netdev_plat *plat;
++	efi_status_t ret;
 +
-+	ret = uclass_get(UCLASS_ETH, &uc);
-+	if (ret)
++	plat = dev_get_plat(dev);
++	if (!plat || !plat->snp)
 +		return -1;
 +
-+	devnum = uclass_find_next_free_seq(uc);
-+	if (devnum < 0)
++	ret = plat->snp->start(plat->snp);
++	if (ret != EFI_SUCCESS)
 +		return -1;
-+
-+	snprintf(temp, sizeof(temp), "%s_eth%d", name, devnum);
-+	temp[sizeof(temp) - 1] = '\0';
-+	str = strdup(temp);
-+
-+	ret = device_bind_driver(parent, drv_name, str, devp);
-+	if (ret) {
-+		free(str);
-+		return ret;
-+	}
-+	device_set_name_alloced(*devp);
++	ret = plat->snp->initialize(plat->snp, 0, 0);
++	if (ret != EFI_SUCCESS)
++		return -1;
 +
 +	return 0;
 +}
 +
- static int eth_post_bind(struct udevice *dev)
++int efi_net_send(struct udevice *dev, void *packet, int length)
++{
++	struct efi_netdev_plat *plat;
++	efi_status_t ret;
++
++	plat = dev_get_plat(dev);
++	if (!plat || !plat->snp)
++		return -1;
++
++	ret = plat->snp->transmit(plat->snp, 0, length, packet, NULL, NULL, NULL);
++	if (ret != EFI_SUCCESS)
++		return -1;
++
++	return 0;
++}
++
++int efi_net_recv(struct udevice *dev, int flags, uchar **packetp)
++{
++	struct efi_netdev_plat *plat;
++	efi_status_t ret;
++	size_t buffer_size;
++
++	plat = dev_get_plat(dev);
++	if (!plat || !plat->snp)
++		return -1;
++
++	if (plat->buffer)
++		free(plat->buffer);
++
++	buffer_size = DEFAULT_EFI_NET_BUFFER_SIZE;
++	plat->buffer = calloc(1, buffer_size);
++	ret = plat->snp->receive(plat->snp, NULL, &buffer_size, plat->buffer,
++				 NULL, NULL, NULL);
++
++	if (ret == EFI_BUFFER_TOO_SMALL) {
++		free(plat->buffer);
++		plat->buffer = calloc(1, buffer_size);
++		ret = plat->snp->receive(plat->snp, NULL, &buffer_size, plat->buffer,
++					 NULL, NULL, NULL);
++	}
++
++	if (ret != EFI_SUCCESS || ret != EFI_NOT_READY)
++		return -1;
++
++	*packetp = plat->buffer;
++	return buffer_size;
++}
++
++void efi_net_stop(struct udevice *dev)
++{
++	struct efi_netdev_plat *plat;
++
++	plat = dev_get_plat(dev);
++	if (!plat || !plat->snp)
++		return;
++
++	plat->snp->stop(plat->snp);
++}
++
++/**
++ * efi_netdev_create() - create a net udevice for a handle
++ *
++ * @handle:	handle
++ * @interface:	simple network protocol
++ * Return:	status code
++ */
++static efi_status_t
++efi_netdev_create(efi_handle_t handle, void *interface)
++{
++	struct udevice *dev = NULL, *parent = dm_root();
++	efi_status_t ret;
++	char *name;
++	struct efi_netdev_plat *plat;
++	static int devnum;
++
++	name = calloc(1, 18); /* strlen("efinet#2147483648") + 1 */
++	if (!name)
++		return EFI_OUT_OF_RESOURCES;
++	sprintf(name, "efinet#%d", devnum);
++	devnum++;
++
++	/* Create driver model udevice for the EFI block io device */
++	if (eth_create_device(parent, "efi_netdev", name, &dev)) {
++		ret = EFI_OUT_OF_RESOURCES;
++		free(name);
++		goto err;
++	}
++
++	plat = dev_get_plat(dev);
++	plat->handle = handle;
++	plat->snp = interface;
++
++	if (efi_link_dev(handle, dev)) {
++		ret = EFI_OUT_OF_RESOURCES;
++		goto err;
++	}
++
++	if (device_probe(dev)) {
++		ret = EFI_DEVICE_ERROR;
++		goto err;
++	}
++	EFI_PRINT("%s: net udevice '%s' created\n", __func__, dev->name);
++
++	return EFI_SUCCESS;
++
++err:
++	efi_unlink_dev(handle);
++	if (dev)
++		device_unbind(dev);
++
++	return ret;
++}
++
+ /**
+  * efi_net_bind_drv() - TODO
+  *
+@@ -26,6 +161,14 @@ static efi_status_t efi_net_bind_drv(
  {
- 	struct eth_uclass_priv *priv = uclass_get_priv(dev->uclass);
+ 	EFI_PRINT("%s: handle %p, interface %p\n", __func__, handle, interface);
+ 
++	efi_status_t ret;
++
++	if (!handle->dev) {
++		ret = efi_netdev_create(handle, interface);
++		if (ret != EFI_SUCCESS)
++			return ret;
++	}
++
+ 	return EFI_SUCCESS;
+ }
+ 
+@@ -71,6 +214,22 @@ efi_net_init_drv(struct efi_driver_binding_extended_protocol *this)
+ 	return EFI_SUCCESS;
+ }
+ 
++/* Net device driver operators */
++static const struct eth_ops efi_eth_ops = {
++	.start	= efi_net_start,
++	.send	= efi_net_send,
++	.recv	= efi_net_recv,
++	.stop	= efi_net_stop,
++};
++
++/* Identify as net device driver */
++U_BOOT_DRIVER(efi_netdev) = {
++	.name		= "efi_netdev",
++	.id		= UCLASS_ETH,
++	.ops		= &efi_eth_ops,
++	.plat_auto	= sizeof(struct efi_netdev_plat),
++};
++
+ /* EFI driver operators */
+ static const struct efi_driver_ops driver_ops = {
+ 	.protocol	= &efi_net_guid,
 -- 
 2.43.0
 
