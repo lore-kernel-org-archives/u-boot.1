@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FDF2C02181
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 02:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8AC9C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 06:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E4A2801B0;
-	Thu, 23 Jan 2025 03:47:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E689080214;
+	Thu, 23 Jan 2025 07:20:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="reIac+4G";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P6SJiw0a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34C4B80214; Thu, 23 Jan 2025 03:47:02 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1E7F580243; Thu, 23 Jan 2025 07:20:08 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01B2380137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 03:46:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95C7980137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 07:20:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 216EB3F291
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 02:46:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1737600419;
- bh=rD0DrG0urD8NUuCtnjwiBYrNmurV1gVPG7mM5b68IVg=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=reIac+4GLLXr3AXesj/XLmQM9LDhlg0/tgSaCswuZDJ8SGLAdV/As5dS2Qi34gm8G
- o+tehKpVycHq6I1yWewumaCkk1Z4lFPq8MBSrYWodFPbcV96tSTwVixx9ZUrAmH2uc
- rVXBaIQMrKxFUa6hV5ulQvSi2wU2P5LunR8XxWxPZK9REEEg76+OuFIMUX0yqURTo6
- d+dXY+98xVGO0FadpIWaPjpo0h6O29aO5SrgPQBZZ2tZ642Bizc3aKI22Rz4p0c9Xn
- dI1pKqnEnlSWj2NuzTFbc3GE9Fmwm1oOCLv9lVRr7PKGIt4jCTCxlXVSs/HFPFBuLg
- KGwJhKjQX2qng==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43651b1ba8aso2307015e9.1
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 18:46:59 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-e3978c00a5aso854232276.1
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 22:20:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737613204; x=1738218004; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PuxRUI0Cl9aU8eA6ASFQ+w/wjGu1+eOmtV7vCrsNrwQ=;
+ b=P6SJiw0aQGEesQT/LSwbPvgO0BFxGRXCMFrEjDjHYDFXP7IJbRwO3X7n4lS8fImU/r
+ l3I24F2bDeL0aBMajkFsLElg51r+lPYqVFEtbCMkKWuF6PtVw699cWbqE8KzqxTEOdrY
+ YCg8QKZVm+zQ7SesGji4z09i/PokhlbvavNzbR7lJgh+4OCRfFalP2KAM5PRppQa8N9V
+ x0ZjAlqywZYeH9BN5Qmi9lgrahVsh5hYBkvZjtRMHbBg5ds6m1crdC3afHbBJsTbUoGV
+ IvzpWHdeJLBbu+pXsCbGLQPYYkqRu2EYb3maOlap017/pUJs+j3ogHQ3zvQ9btekCZ3w
+ T2Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737600418; x=1738205218;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1737613204; x=1738218004;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rD0DrG0urD8NUuCtnjwiBYrNmurV1gVPG7mM5b68IVg=;
- b=fBTSrsp2YXx0Kz2wjDNFQuY2iJVOwwFjki2F7Dr4pFQKPqTWHcgbQrHTmhKLDiqF8k
- QIsmVdZ+x9NhUm3+4cWIA3AsUMF+2p9Z9GMjr5OgcEJR13yaQOf1nMFZH958xmygXmhJ
- eiy5+wLkiKvJtEkpbtDtccbJbGfzKkJzR6PBl6HolEH12FNM+l7Tc1Jj+c7e/8TVqC4s
- qqpCp+/dD3zSBpqPi4WYMweEwLAtyuhMa1f35IOLQLlT8mqUvvf28FOsxPwSVmnXIj+S
- LNVgQcnzoJWO8fnS9FwQHWhE4X6y8raDt0XvnUFF5G5sCJ0JoN1ARsgERM2HPWMma87Q
- M6jg==
-X-Gm-Message-State: AOJu0YyxcAMLW8Qgv3kXaGvosuP9o/E3SDMP0deycJFuyWOOKkF3f0MB
- T8/BTa+ukMR2S42mVIlDq5GxVDDDrZbteSrYqMXNcOd9+3mK7+ngjKK29NcxbIRsofHCNoIX7rX
- ha1zuX24kbU8v2CcVBKLmI289UxScgKpCqzF6LrnA0914VKkLvYi07iEQjSosb1UCffk=
-X-Gm-Gg: ASbGnctThvS28yuKvDnyjsfCsN3MqQMd+zp/IoE2LOzifww9Ivx4ZVqXQNCBhaZzxWJ
- wHqAO3Y2Z4UZ/RB5NbQKsJSSHg9ezdOtko2vrH0MnPEJe1fs/XCDK/tsy0qzwXWxO0hJJK8zz+h
- aozgwZLIze95f6DgMlgSEmojv/KcYUFXUoZYNqv92bCtepCsSqo1uFx9fZ0jRI5haufj4iOOQHj
- MI5nI7csPdIxB7s46ULuJ41sc2AQYxoLc1c1fIDaHYMEPlQh4Iy0gtB5nZWQg9O7Hg0UxG8Lm8t
- jbUhYNp4EEFTI1IPKL+vp/C5cjw=
-X-Received: by 2002:a05:600c:4c86:b0:436:6ddf:7a27 with SMTP id
- 5b1f17b1804b1-4389141c412mr208978605e9.23.1737600418547; 
- Wed, 22 Jan 2025 18:46:58 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFLu4XKjX580cq5UVdYMIifX/Xem2vZsEWK2AqXslFWlZcfvzL3P/1sLDkcZK0yV3VMV4Ro/w==
-X-Received: by 2002:a05:600c:4c86:b0:436:6ddf:7a27 with SMTP id
- 5b1f17b1804b1-4389141c412mr208978525e9.23.1737600418238; 
- Wed, 22 Jan 2025 18:46:58 -0800 (PST)
-Received: from localhost.localdomain ([2a02:3035:6e0:4a90:399:6f76:8248:d5ea])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438b31ae155sm44919675e9.20.2025.01.22.18.46.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jan 2025 18:46:57 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>,
-	Leo <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] doc: describe creating a pflash file for
- qemu-system-riscv64
-Date: Thu, 23 Jan 2025 03:46:51 +0100
-Message-ID: <20250123024651.74987-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
+ bh=PuxRUI0Cl9aU8eA6ASFQ+w/wjGu1+eOmtV7vCrsNrwQ=;
+ b=hCY9KTx0xdFJ4n5Cye7jUTyKCA1/qI02hxlcsuzbrktPK+r21Y724EtwC3Mj0ya4Yf
+ 206/eSJAe+YI/6mNbjIyC5RyX4S4tql5my9MNwzkOG/lrF0V03GIs7AF4RGQflizjNnT
+ nXwDYH2WRyl9J0Lpmx2IJUUS9IumuCYphdbd2aT46NI9vmAoJH0RpRNDxkdRF/k7c58V
+ hCZceO5xRtvB058vi+Ets2MvPECrsa40SRg3x6gFhMTj9eCu9lI32NH/Hu/BEWPbDntr
+ P9ySCQOjYRtnj7d2oZ7kPTFL/sQ3lTwA+G2Hy0lcQD1AYWvHP9nF+9ue7PnuHrU/xVAR
+ fttw==
+X-Gm-Message-State: AOJu0YzYeV+L4PSOc7OANSrK7WK/5fhZlwga/rSHp9VlSGNyUpEewN9h
+ qT9r/ZhEO7wpLNwU1MJkicsnpVhmCzXPOCnXCoIjCvZ22q17evLA/rqG4oxkmeW8BGx3xvB5KMy
+ E1lV56FHHTb5EaLE5sL9ybawQwSalPBPdGbEDLQ==
+X-Gm-Gg: ASbGncuH1XSFYs/6pIWMaeHD2Vt6Rx07ZmzCWHLIcdLPmK91AfR8lVETFwZengIdlJp
+ 73gqDGerA2jD05YsqgURZWrgDG7XNoC3aq4WArsAbdB4u5R8NmkZjeGJ8r5v4DQ==
+X-Google-Smtp-Source: AGHT+IGV/GPqBrk8DCyoijvTH4tC/C96I646jzKGTAaLRdLGxiEC82XShUSrA9To+6q56aZGuNx6quKYaBeDAVCqoMs=
+X-Received: by 2002:a05:6902:2e01:b0:e58:141d:b6d3 with SMTP id
+ 3f1490d57ef6-e58141db753mr4203698276.16.1737613204411; Wed, 22 Jan 2025
+ 22:20:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250117164032.88942-1-raymond.mao@linaro.org>
+ <20250117164032.88942-6-raymond.mao@linaro.org>
+In-Reply-To: <20250117164032.88942-6-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 23 Jan 2025 08:19:28 +0200
+X-Gm-Features: AbW1kvbtNPW_LSHb8uB3Mf7CwyUDvXtkIIL_l2xhtsunIJDzw-ZmxZeDP8HgsZI
+Message-ID: <CAC_iWj+qYcZgTtN8KAH99aCMH4Es=hmagw76r1oDM9yVAmsqpQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] tpm: PCR allocate during PCR extend to disable the
+ unsupported algorithms
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Tim Harvey <tharvey@gateworks.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,42 +96,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot can be executed in place from a flash device.
-Describe how this can be emulated on RISC-V QEMU.
+On Fri, 17 Jan 2025 at 18:41, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> During PCR extend process, if any unsupported algorithms are active,
+> try to use PCR allocate to inactivate them.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> changes in v2
+> - None.
+>
+>  lib/tpm-v2.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> index 0e497b2c2a..4995ddc9af 100644
+> --- a/lib/tpm-v2.c
+> +++ b/lib/tpm-v2.c
+> @@ -344,7 +344,10 @@ u32 tpm2_pcr_extend(struct udevice *dev, u32 index, u32 algorithm,
+>
+>         if (!tpm2_check_active_banks(dev)) {
+>                 log_err("Cannot extend PCRs if all the TPM enabled algorithms are not supported\n");
+> -               return -EINVAL;
+> +
+> +               ret = tpm2_pcr_allocate(dev, 0);
+> +               if (ret)
+> +                       return -EINVAL;
+>         }
+>         /*
+>          * Fill the command structure starting from the first buffer:
+> --
+> 2.25.1
+>
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- doc/board/emulation/qemu-riscv.rst | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
-
-diff --git a/doc/board/emulation/qemu-riscv.rst b/doc/board/emulation/qemu-riscv.rst
-index 8388e13d96d..cf2f893b723 100644
---- a/doc/board/emulation/qemu-riscv.rst
-+++ b/doc/board/emulation/qemu-riscv.rst
-@@ -42,6 +42,23 @@ use the configurations qemu-riscv32_smode_defconfig and
- qemu-riscv64_smode_defconfig instead. Note that U-Boot running in supervisor
- mode requires a supervisor binary interface (SBI), such as RISC-V OpenSBI.
- 
-+To create a U-Boot binary that can be utilized with a pflash device in QEMU
-+apply these addtional settings to qemu-riscv64_smode_defconfig:
-+
-+::
-+
-+    CONFIG_TEXT_BASE=0x20000000
-+    CONFIG_XIP=y
-+    # CONFIG_AVAILABLE_HARTS is not set
-+    CONFIG_SYS_MONITOR_BASE=0x80200000
-+
-+Truncate the resulting u-boot.bin to 32 MiB. Add the following to your
-+qemu-system-riscv64 command:
-+
-+.. code-block:: bash
-+
-+    -drive if=pflash,format=raw,unit=0,file=u-boot.bin
-+
- Running U-Boot
- --------------
- The minimal QEMU command line to get U-Boot up and running is:
--- 
-2.47.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
