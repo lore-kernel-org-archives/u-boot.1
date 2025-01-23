@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 135BDC0218B
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:50:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689F5C0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:50:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 534B980780;
+	by phobos.denx.de (Postfix) with ESMTP id A850780821;
 	Thu, 23 Jan 2025 23:49:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="gt/zMnJn";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="h2EP3K0Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E9F6808AF; Thu, 23 Jan 2025 23:49:39 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ id 33CDD80934; Thu, 23 Jan 2025 23:49:40 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9590807E0
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:49:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C364807E5
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:49:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1737672575; bh=Js4seoDWHHxErk8PInxd0ZsFke+/gAbASiwFT/3CKwU=;
- b=gt/zMnJnliBGiZo7chuakNH58TQCbjczsCGqgb7G9EPDkoiZKtyTxWx9GjFgUIageSuuNjlBu
- qSZrZoQXx90GQM8hAOc7wRHp3rIr6LVawwCLZpxEYhsYbTmOI7JdBMPUz4nTVCTvhKi+XsPoM1p
- R112t4xU2sH3c50qJWU84/eLgGbLVCtVNUBA8u5tUf3d3Od3UzGO4IhDAKaau6rRzS0trFjhDvV
- TeRZFTHXGcEhKGKC4KFi5rvQBmO8Idp0t96fjiTduXRWTHgXNYaBeJOc9iMirY9AS4LULwFAc8J
- Gv5lr2AFZ970OaOvjhUJLnB19rmh4VlbkHV/fFeFoRhQ==
-X-Forward-Email-ID: 6792c77af07771e5c89e01cf
+ t=1737672575; bh=PBYAOd3KLfOVHgLj8LVJo1RyGcV6/q0bfnPfWdJ3wCM=;
+ b=h2EP3K0QDKj41Rjz+3RT51CNgDAwcOeltXBA0Etc0+EjpwKBvSPInU1vBm9keCm/IVVEYF703
+ idTszrPZVLaOvM/xf96J5HfG9GenkeKfuQDwOFvVkImYH4ku5dq1lEZ6aHWAp8N9gkAsuF47iME
+ VVYIT+qXdcdRCW0CMh55NV33/Xk7EzrbmuQCQwqU7ExEevqNemouj6YRiXvyiIPRSNXuloOhnIS
+ sZV0Aqfqn80C49jRR7gg4/RE5FCTcIuQUHVxts0vXH3dgfmxBYquLz68I8xXeenCWSFLkaYiMe2
+ 1qfrJqRx5X2a0x33wsgY5qjU15p+LzoR3FMfeDts7Afw==
+X-Forward-Email-ID: 6792c77df07771e5c89e01de
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
+ 149.28.215.223
 X-Forward-Email-Version: 0.4.40
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -47,9 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 12/13] board: rockchip: Add minimal generic RK3528 board
-Date: Thu, 23 Jan 2025 22:48:24 +0000
-Message-ID: <20250123224844.3104592-13-jonas@kwiboo.se>
+Subject: [PATCH 13/13] board: rockchip: Add Radxa E20C
+Date: Thu, 23 Jan 2025 22:48:25 +0000
+Message-ID: <20250123224844.3104592-14-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250123224844.3104592-1-jonas@kwiboo.se>
 References: <20250123224844.3104592-1-jonas@kwiboo.se>
@@ -71,28 +71,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a minimal generic RK3528 board that only have eMMC and SDMMC
-enabled. This defconfig can be used to boot from eMMC or SD-card on most
-RK3528 boards that follow reference board design.
+The Radxa E20C is an ultra-compact network computer with a RK3528A SoC
+that offers a wide range of networking capabilities.
+
+Features tested on a Radxa E20C v1.104:
+- SD-card boot
+- eMMC boot
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3528-generic-u-boot.dtsi   | 31 ++++++++++++++++++
- arch/arm/dts/rk3528-generic.dts           | 20 ++++++++++++
- arch/arm/mach-rockchip/rk3528/MAINTAINERS |  5 +++
- configs/generic-rk3528_defconfig          | 39 +++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst           | 12 +++++++
- 5 files changed, 107 insertions(+)
- create mode 100644 arch/arm/dts/rk3528-generic-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3528-generic.dts
- create mode 100644 arch/arm/mach-rockchip/rk3528/MAINTAINERS
- create mode 100644 configs/generic-rk3528_defconfig
+ arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi | 31 +++++++++++++++++++
+ arch/arm/mach-rockchip/rk3528/MAINTAINERS  |  6 ++++
+ configs/radxa-e20c-rk3528_defconfig        | 35 ++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst            |  1 +
+ 4 files changed, 73 insertions(+)
+ create mode 100644 arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+ create mode 100644 configs/radxa-e20c-rk3528_defconfig
 
-diff --git a/arch/arm/dts/rk3528-generic-u-boot.dtsi b/arch/arm/dts/rk3528-generic-u-boot.dtsi
+diff --git a/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi b/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
 new file mode 100644
 index 000000000000..b6578830ca38
 --- /dev/null
-+++ b/arch/arm/dts/rk3528-generic-u-boot.dtsi
++++ b/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
 @@ -0,0 +1,31 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
@@ -125,61 +125,37 @@ index 000000000000..b6578830ca38
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&uart0m0_xfer>;
 +};
-diff --git a/arch/arm/dts/rk3528-generic.dts b/arch/arm/dts/rk3528-generic.dts
-new file mode 100644
-index 000000000000..14615bc16bfe
---- /dev/null
-+++ b/arch/arm/dts/rk3528-generic.dts
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Minimal generic DT for RK3528 with eMMC and SD-card enabled
-+ */
-+
-+/dts-v1/;
-+#include "rk3528.dtsi"
-+
-+/ {
-+	model = "Generic RK3528";
-+	compatible = "rockchip,rk3528";
-+
-+	chosen {
-+		stdout-path = "serial0:1500000n8";
-+	};
-+};
-+
-+&uart0 {
-+	status = "okay";
-+};
 diff --git a/arch/arm/mach-rockchip/rk3528/MAINTAINERS b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-new file mode 100644
-index 000000000000..cfdc92d770c1
---- /dev/null
+index cfdc92d770c1..f343f71cf7f6 100644
+--- a/arch/arm/mach-rockchip/rk3528/MAINTAINERS
 +++ b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-@@ -0,0 +1,5 @@
-+GENERIC-RK3528
+@@ -3,3 +3,9 @@ M:	Jonas Karlman <jonas@kwiboo.se>
+ S:	Maintained
+ F:	arch/arm/dts/rk3528-generic*
+ F:	configs/generic-rk3528_defconfig
++
++RADXA-E20C
 +M:	Jonas Karlman <jonas@kwiboo.se>
 +S:	Maintained
-+F:	arch/arm/dts/rk3528-generic*
-+F:	configs/generic-rk3528_defconfig
-diff --git a/configs/generic-rk3528_defconfig b/configs/generic-rk3528_defconfig
++F:	arch/arm/dts/rk3528-radxa-e20c*
++F:	configs/radxa-e20c-rk3528_defconfig
+diff --git a/configs/radxa-e20c-rk3528_defconfig b/configs/radxa-e20c-rk3528_defconfig
 new file mode 100644
-index 000000000000..4ae7dabf1ada
+index 000000000000..9183c2f2e472
 --- /dev/null
-+++ b/configs/generic-rk3528_defconfig
-@@ -0,0 +1,39 @@
++++ b/configs/radxa-e20c-rk3528_defconfig
+@@ -0,0 +1,35 @@
 +CONFIG_ARM=y
 +CONFIG_SKIP_LOWLEVEL_INIT=y
 +CONFIG_COUNTER_FREQUENCY=24000000
 +CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rk3528-generic"
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-radxa-e20c"
 +CONFIG_ROCKCHIP_RK3528=y
 +CONFIG_SYS_LOAD_ADDR=0xc00800
 +CONFIG_DEBUG_UART_BASE=0xFF9F0000
 +CONFIG_DEBUG_UART_CLOCK=24000000
 +CONFIG_DEBUG_UART=y
-+# CONFIG_BOOTMETH_VBE is not set
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3528-generic.dtb"
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3528-radxa-e20c.dtb"
 +# CONFIG_DISPLAY_CPUINFO is not set
 +CONFIG_SPL_MAX_SIZE=0x40000
 +CONFIG_SPL_PAD_TO=0x7f8000
@@ -191,10 +167,7 @@ index 000000000000..4ae7dabf1ada
 +# CONFIG_CMD_SETEXPR is not set
 +CONFIG_CMD_RNG=y
 +# CONFIG_SPL_DOS_PARTITION is not set
-+# CONFIG_OF_UPSTREAM is not set
 +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_NO_NET=y
-+# CONFIG_ADC is not set
 +CONFIG_ROCKCHIP_GPIO=y
 +CONFIG_SUPPORT_EMMC_RPMB=y
 +CONFIG_MMC_DW=y
@@ -208,35 +181,17 @@ index 000000000000..4ae7dabf1ada
 +CONFIG_SYSRESET_PSCI=y
 +CONFIG_ERRNO_STR=y
 diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 1407080f1f4f..dcbb335bca28 100644
+index dcbb335bca28..b992e6c8b6ce 100644
 --- a/doc/board/rockchip/rockchip.rst
 +++ b/doc/board/rockchip/rockchip.rst
-@@ -97,6 +97,9 @@ List of mainline supported Rockchip boards:
-      - Rockchip Evb-RK3399 (evb_rk3399)
-      - Theobroma Systems RK3399-Q7 SoM - Puma (puma_rk3399)
+@@ -99,6 +99,7 @@ List of mainline supported Rockchip boards:
  
-+* rk3528
-+     - Generic RK3528 (generic-rk3528)
-+
+ * rk3528
+      - Generic RK3528 (generic-rk3528)
++     - Radxa E20C (radxa-e20c-rk3528)
+ 
  * rk3566
       - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
-      - FriendlyElec NanoPi R3S (nanopi-r3s-rk3566)
-@@ -258,6 +261,15 @@ To build rk3399 boards:
-         make evb-rk3399_defconfig
-         make CROSS_COMPILE=aarch64-linux-gnu-
- 
-+To build rk3528 boards:
-+
-+.. code-block:: bash
-+
-+        export BL31=../rkbin/bin/rk35/rk3528_bl31_v1.18.elf
-+        export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3528_ddr_1056MHz_v1.10.bin
-+        make generic-rk3528_defconfig
-+        make CROSS_COMPILE=aarch64-linux-gnu-
-+
- To build rk3568 boards:
- 
- .. code-block:: bash
 -- 
 2.48.1
 
