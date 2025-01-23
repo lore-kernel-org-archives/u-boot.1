@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D9FC02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:23:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80686C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:32:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DA11801B0;
-	Thu, 23 Jan 2025 15:23:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 01DCB80214;
+	Thu, 23 Jan 2025 15:32:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="HwU23qsy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hLGr+pgL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E6AE80214; Thu, 23 Jan 2025 15:23:41 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id DF67680243; Thu, 23 Jan 2025 15:32:47 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24C9780137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:23:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B44E880137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:32:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43624b2d453so10258245e9.2
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:23:39 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6dd01781b56so12378416d6.0
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:32:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1737642218; x=1738247018;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l/XOw0vThPs3ZVeofbJ3AYttcvik5p7h81biqVQG9J8=;
- b=HwU23qsywD878S0xRN63fT8V/uPdoKdjFlH28tb97DF151/wUEUIRg0I7JVVbKuXM5
- R1kN6MpdVVxp/6EfPWCbdYZYjhu9dAHeSO1RlRqKE1ynq0aX6zyIOn3EgAM3W6fUWoU5
- nsPiBB5CleGrDcH/U/hlLmoWHVZU4lyv64Ewyff65kyGP0yzp/r0X/gf0LQrXVLgJ52f
- hnGKxca9phbzqnQu922T742vq38LLyVc9paXb1890STYZq8e7Xwic/tpbXMAPAYf2QZs
- DQv0n5EG9s8ullRbayJY3iiYQtnS9G+5nQK5Dy3sY5gQW9LAHEtNC8Mkpp2fWB6CjQTd
- /tNw==
+ d=konsulko.com; s=google; t=1737642764; x=1738247564; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4sMxdoUairB4fiTddfZ8U2Y+XBugnkE+hux3BDTGExo=;
+ b=hLGr+pgLbq+mTyCyBBHnhxCYMtCQ55nX9mScwJKYaarLfST9f/qlZEi85S/fWr3Eb4
+ hBYdfnKvliwmkVqBlGmHjIWbHAuLVT/znWzV97iNx6Iw1WfMjbWDK+XAiKVclKpBDsoy
+ wcAffePzp7b6A8ldIIElkIp6EbB7vv9gsP1Nc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737642218; x=1738247018;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l/XOw0vThPs3ZVeofbJ3AYttcvik5p7h81biqVQG9J8=;
- b=cmehXYxhz9hGrDc7OXZKGegUXddCad+yt7BLrepxRJUCUpd23TGJsQpOAcC7gaQQGP
- Inci9e32cIswqfD7DfIMKeJ6In651CZ7DRNYjqnZ0NA60uAxN4NGcdICbKcpYa608LSl
- 5I9WYVENOPFoydWLQRhrjIjdANUZw9CSO9RGI6HhA1K6uyA0e87Oo3J811RwSHjbSHqm
- 7BJdDXJzTe6jLi4zw1wUuv9Qey/9Ln1qJtieNX7BPI5Vcs8XHBjI0/qSkWHhId8fVPEL
- L6cCW95kdZwXA+pk0qKJwbKGIQIk84DiiiFZvxn/Kn2bfGJ4+ztf1lNk8XGsMJLTBmi1
- 9pKA==
-X-Gm-Message-State: AOJu0Yz+DrUWvb3KrW/jdvjEXvO/CJciMqtJ8YwqwOxAUgiXgcDZ4JIU
- hddEUF5zG7tXL7S8a47UOu5bNWtDl926pwHcoTgkQTy/qiGQSI7L08IVU08Iw7c=
-X-Gm-Gg: ASbGncuKlv3icoGJLVCf90nEF3NNSIn7CXROniyGEXs0Pq1llnmxtDxzw6Rki/Y5kMA
- erlUbF+Vm4FVBgewFC7UBsIZpqz3kT/JviHhdKKEvbsTsJG2DvgkkI1c6GqTyvLwt2jS3fjBz87
- ARMoJBMOiaHOCLA2CJOOHt5wamzE+a49p5L+VvRqDyIf5AmThJCTAlcsNS3NJtCiQmJHavORsx7
- s+T749AYZBzi7LYfBnLdF+6NHJkxfsxxg2F8FeQ35xjDdER8oAicDqBQzaOkgZfrE8odd01IDEy
- Wmld7/jdwMDBYLDn
-X-Google-Smtp-Source: AGHT+IHKIrPJsgVqqUDnvflMKEgzu8qqvQ8YUBrLvJCS3PP0BQV/tnEAELQidEV1fDbZcU15kE7Z1Q==
-X-Received: by 2002:a05:600c:3b0f:b0:436:e86e:e4ab with SMTP id
- 5b1f17b1804b1-4389146e66cmr276566015e9.30.1737642218539; 
- Thu, 23 Jan 2025 06:23:38 -0800 (PST)
-Received: from [192.168.2.169] ([82.66.159.240])
+ d=1e100.net; s=20230601; t=1737642764; x=1738247564;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4sMxdoUairB4fiTddfZ8U2Y+XBugnkE+hux3BDTGExo=;
+ b=pmq5mg6hUXbDlGlKXVzzSuz+qp8cY/mdhJ2SgLvTn2Y4j+uDzic4hnaBFBMYN3HC5S
+ ioMqHTEaxiFnAtE2EF+w2RCc10j0NVSxl/feg6MsjM7s3qKO2Zhf0W70cfIwHcD/Dq+B
+ E4r7hQLTJV0dpRT0x3N/M0iMbaK7X2AkaZpThcjVJLvf8fPHuj4m4cI3my6BXRD+sj8E
+ 0DbZkbsdyfGNxVkys0JFDo1Bd20jaTQkfdqcnru7sDkpfAuKapCxTiQZp6df51/mWkzR
+ GAkRdG9TEakyrlWsgHa1DDFY5yL8OW+bIRqis4ToFyftWCtCzN2C9VICFwnhlXr2Si0A
+ c4Mg==
+X-Gm-Message-State: AOJu0Ywwrd2YkwvAxIHAD+3JrG5Bk2whziXIw9WGnpaoczWj2DLVsLWQ
+ 0zM7pM6zjweXPtsbYrRlGj7mr3ysyroUNMx7cAx7w8U3od7ECmmw+eyAD6ZW+vM71pZ6JMjGBmd
+ P
+X-Gm-Gg: ASbGncvgZFpf5I32lE/cOQyzM4kmMS2eqxA+rLeYQfRmm9N2kBJQEMkvbZXEo9wbDQY
+ 9iKVt0XXS971xuz1qvpqe0V4mbZrScInJ+bfHv1N/+soGmD0PjKcxvTAfju2Yx0+Mu47P9MqvJo
+ bX/xqLT9ZSglPwO3BK6fuRuAx2Z5DWIAHk9BCwdTD57pWcu52QW+ilcqwUOc3zPAdT1hruZ4UTA
+ LVABZ4YBlrUGL2U7aI1ZtRj2RmFZtkeGLeQ+awXI7emGrPKwHUqPNbq27dlBjjP0ZU9AnOU9v1V
+ No0Q
+X-Google-Smtp-Source: AGHT+IHt20QIHyhMEt+exyPhpDZ6yW8aN4OINXW/fJBbsmcXbVOJ/OJRV540W9a39SVkN8rUR9I3NQ==
+X-Received: by 2002:a05:6214:2b09:b0:6e1:a45a:f8d4 with SMTP id
+ 6a1803df08f44-6e1b21693c0mr365162266d6.7.1737642764544; 
+ Thu, 23 Jan 2025 06:32:44 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438b31c8ac5sm65841925e9.39.2025.01.23.06.23.37
+ 6a1803df08f44-6e1afcf6cc9sm71427796d6.120.2025.01.23.06.32.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2025 06:23:38 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Julien Masson <jmasson@baylibre.com>, 
- Guillaume La Roque <glaroque@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
+ Thu, 23 Jan 2025 06:32:43 -0800 (PST)
+Date: Thu, 23 Jan 2025 08:32:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Maks Mishin <maks.mishinfz@gmail.com>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250108-avb-disable-verif-v2-0-ba7d3b0d5b6a@baylibre.com>
-References: <20250108-avb-disable-verif-v2-0-ba7d3b0d5b6a@baylibre.com>
-Subject: Re: [PATCH v2 0/2] bootstd: android: Allow booting with AVB
- failures when unlocked
-Message-Id: <173764221748.269330.5680881718967065925.b4-ty@baylibre.com>
-Date: Thu, 23 Jan 2025 15:23:37 +0100
+Subject: Re: [PATCH] tools: check result of lseek
+Message-ID: <20250123143241.GF60249@bill-the-cat>
+References: <20250122161505.74348-1-maks.mishinFZ@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9O2pr7nqdj/uadru"
+Content-Disposition: inline
+In-Reply-To: <20250122161505.74348-1-maks.mishinFZ@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,27 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Wed, 08 Jan 2025 15:38:40 +0100, Mattijs Korpershoek wrote:
-> Android Verified Boot (AVB) [1] protects Android systems by providing a
-> root of trust in the vbmeta partition.
-> 
-> On unlocked devices, system developers might want to disable the root
-> of trust to reflash only some partitions.
-> 
-> This is officially supported in the Android bootflow [2] but is not
-> properly implemented in the Android bootmeth.
-> For development purposes
-> 
-> [...]
+--9O2pr7nqdj/uadru
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+On Wed, Jan 22, 2025 at 07:15:04PM +0300, Maks Mishin wrote:
 
-[1/2] bootstd: android: Add missing NULL in the avb partition list
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/ae58cd7b39207175c8696d7bf38321b1a4c9957a
-[2/2] bootstd: android: Allow boot with AVB failures when unlocked
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/6745cbed6edc06fae7fbc4b360e39c3963d57b13
+> Return value of function 'lseek', called at pblimage.c:211,
+> is not checked, but it is usually checked for this function.
+>=20
+> This trigger was found using the Svace static analyzer.
+>=20
+> Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
 
---
-Mattijs
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--9O2pr7nqdj/uadru
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeSUwUACgkQFHw5/5Y0
+tyz/fQv9HDeeNz8Y04ZzaavSEb4Z4cOsWQyT/FCeEiCId6N1NTiI6+qP27Qc32Pf
+X0z45iw5x8AR6G1van+UGVOkUGROMTlwfZnRKICKhO4gfdE77m1Yno++ECsPdxI9
+1rnCfsGki+lyAJSBFrjQHIDDcWZjidQEKLojhy5LhIBOwpt8V5jm0jETmUyUsKgD
+HupagBMo8nv2eDDCo0CT+uwtF/I7hXZa4X88i795W8aMQUEPVcDxOg7fDTzNMuP3
+mPhUZhwu6Dgrpx0fOgfM8TGUs3ZLA92P7djjtSvKPJNPOpzeX7jr5wqAu4Dj2NAw
+M+uK+jILJZKAa6O7wlzxLZ4++ErLHIqj5714PjPk4/Ghn053F6bxzVDwm6SgqFNX
+qVPG+f4tsM3WOtJPrvwIXLc/fbc6mI4nRS9GOh9zTGj2/PqxljW/ECL3J+JbpnNb
+szGM/AzAiL1qeE5XL9k0qA/HCZeyRpqWKivXmA7PaS0MXOIa/tT/SCG14/b4FAAR
+2xBCjF+q
+=91Wy
+-----END PGP SIGNATURE-----
+
+--9O2pr7nqdj/uadru--
