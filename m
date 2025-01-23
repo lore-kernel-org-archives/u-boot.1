@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60786C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E00CFC0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:07:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C17C98076E;
-	Thu, 23 Jan 2025 23:07:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 16D0D807A8;
+	Thu, 23 Jan 2025 23:07:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gpw1qbj1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EIa7aCMF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D4A3806DC; Thu, 23 Jan 2025 23:07:38 +0100 (CET)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 00940803B5; Thu, 23 Jan 2025 23:07:39 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39BA780087
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:07:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BBE9803B5
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:07:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5fa2685c5c0so617967eaf.3
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 14:07:35 -0800 (PST)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-71e2764aa46so893652a34.2
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 14:07:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737670053; x=1738274853; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JOFogTAFrt1VyD3x0NoYEjIS1S12YG/Pp9Ic1zjwwJM=;
- b=gpw1qbj1pNgR90NHvWpoIi3zeI6RV+WG6G6CbiKVaiRFltA3J4l2FdCdtDv2jvGV42
- qW9wOTCotBbUv82RH+JJK48Tttmaw/JrkKi8KAI+nUIyTEP749IDRbZ7y5fsB6JV6i3v
- GDECvbPMRRqJrPY0toPlBzgBtTwtrmj5TKkfA=
+ d=chromium.org; s=google; t=1737670055; x=1738274855; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8JV+I4k+zVX6Qkg8nAZO+YxIM+sDBHjd/vvWptXHygY=;
+ b=EIa7aCMFeIkfm03QXVYmBfOi1/A5cx3xi5Q8z8oS9KpE6KErJ1aqdCXjJxnbSTblpl
+ wLsI1TYb1iMUW5grmPym2L15eeAgpWe9ah9HiynHEE0vuYyJ7tVy99mDiRpct70TbVvG
+ hZwOJC2YoRBPykVgaPNHriGTylbuXJ2sumx4I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737670053; x=1738274853;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JOFogTAFrt1VyD3x0NoYEjIS1S12YG/Pp9Ic1zjwwJM=;
- b=TD+1ejZH+KPOiQs0PFLP0nMWLK1WzXLrjJ6dsarep6dYx+xW6/fyrrX4/Ka1owsKlH
- DEZbSE0cAGndVDynjLopc0K/keUHolcXI9PB9vkQMDcyaBiffWDJT/OTv8cIbDPjlo9D
- ZXCBNvA8wj80iHv6eR3jhmo9ag42ssZN4kEBP/Kq8kDvfi43+r9CZf3/OPogR0CjqGII
- TrwBLTQIkAk4PPo3wG3YP4wV5rc6Zhaw3TGONQ7lQU4Nw9vQ63rAOZdupS7B3a2FNnfp
- fJl2J6NP0KoshV3SygRjbYDM9+NqiLZ3w8Oqqdgy0F1qU9qEk0b3fBnZJ5bcDInCgbQ7
- rnKQ==
-X-Gm-Message-State: AOJu0Yzz9C9J52L+9pJrWSPASI+v9PTULabOA3hd/plE3dzucMuObI0i
- LJ41vMwy2YSTFdyENkhIVugpDjYduehQ431QnItrSDUgzAUjJoemsGz92v8EyplQqqqCfF7O6fk
+ d=1e100.net; s=20230601; t=1737670055; x=1738274855;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8JV+I4k+zVX6Qkg8nAZO+YxIM+sDBHjd/vvWptXHygY=;
+ b=cih3hNhbk9irbiocGcpJL3XcDG12x+MpfPr8BBvHi6bOWD2lRiAm/04WYqbljjH37c
+ 7RWD7tCNMAjDfVLJsGBN0t1j9MQu9IAX9teAvWdzxvtSVdRBh/TpabUYaT8/c3dhR+d9
+ nlfCsb90iNoAoXbyvme2XTdOQy+95YoonqmBh+iynXaTaIP+Cy0E138/tYrOGglT+cWp
+ u8JuokXIAhrpge5N7J8SH1HBFuFzyzlmWaIcZ/zfuJMb8Scw/6HxStT7snMJL5WE2/mV
+ aswBt3b4PO2i3xDKPyIF5yDdPBzbPAAetoR8zeRbIhfzgpC+lHZjbRCkcmTtT+c3/U/s
+ awhw==
+X-Gm-Message-State: AOJu0Yz/uhLTuDLYPknnZyPm/jk12QK18TvSsDosUPoDoVp0vkZPEwmq
+ Invu0JJGvvN0tOcK1dTGMDowVtS9ce364LZfnAp0qlbwWmtNmpXumcY5aea3qoOQ+9SyV2D3qKQ
  =
-X-Gm-Gg: ASbGncuYESox0VQk0TrpwaADxpn8cnqjv80Ht+wDNWl6iB9mRN9FoC2BQQPWjt9ZsBt
- 4h4oHjN7rR4HmYRdZf95NIVNf07OWRVeUWNe1DsDpgV9STHhw4pMHU/3/rzBRn0SmUWRnj/Xh8/
- xSV+35vW+5QuBFA1PuIj7MRiaHTVPWtjjhQC/IadeC030pdf1TAamz9iJmiyli1onta4q4HzCJB
- EPaLiL+OH451fPxfwIwHE2lHm38sy08aFNldsN2lLYY2qdhmTURN1Rb9djFQIYQFyP0o2Moyny/
- Ow1xYrLERP+YBNomPss4b1XPEFao4a3lJBbadupvCw==
-X-Google-Smtp-Source: AGHT+IGmz83WIWUvqUauCJy5B+L8fLO39+z2AwbfZcGyFl256Q0UIJfvIXRnGW23cVFtXKYQwqUpcA==
-X-Received: by 2002:a05:6820:3097:b0:5fa:73ed:de8 with SMTP id
- 006d021491bc7-5fa73ed1293mr6358415eaf.6.1737670053401; 
- Thu, 23 Jan 2025 14:07:33 -0800 (PST)
+X-Gm-Gg: ASbGncs8dEcux5qCRiH8RzQuQ1NDjuFMrJeXMlWe/uusIwnj/9I/8vVcIgWUd358QTU
+ 8m51b2xkNS995R2RIMKm2EIe6nSd2gjGx/2qDGQs+ijNS5ugxK8wXUqLdhNWWuSlqcYETyW0A3J
+ B4r1yAiuN85YsoQXkFX2cfRvU0+93EY6s4k5h77DCay1jwGoZTdDcBWS4fX/HjD3BHECx7hG/yT
+ s9nNAxxqfEZDUMRRONMV9nIDQaGwyG49RhJ01vU8qqwB3upapuEJ0tfj/mcieWwtTlN8UldVg5C
+ fqc0VZd94AqB5d6uIWZRNxShF/uiprY+jt0gQT9Xlg==
+X-Google-Smtp-Source: AGHT+IHKuRGDGALMCBl+xejhA9C3KhiphasDPNUIM5QB8Yy0aLuqBw87WhBKmLTe2NFgvno30k3pLw==
+X-Received: by 2002:a05:6830:6015:b0:717:d558:ca70 with SMTP id
+ 46e09a7af769-7249da70faemr17473404a34.7.1737670055041; 
+ Thu, 23 Jan 2025 14:07:35 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-724ecda47bbsm143136a34.2.2025.01.23.14.07.29
+ 46e09a7af769-724ecda47bbsm143136a34.2.2025.01.23.14.07.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2025 14:07:31 -0800 (PST)
+ Thu, 23 Jan 2025 14:07:34 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Moritz Fischer <moritzf@google.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v5 0/5] efi: Start to chip away at the EFI workaround
-Date: Thu, 23 Jan 2025 15:07:19 -0700
-Message-ID: <20250123220726.412396-1-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Moritz Fischer <moritzf@google.com>
+Subject: [PATCH v5 1/5] efi_loader: Update efi_run_image() to accept image and
+ device path
+Date: Thu, 23 Jan 2025 15:07:20 -0700
+Message-ID: <20250123220726.412396-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250123220726.412396-1-sjg@chromium.org>
+References: <20250123220726.412396-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,48 +97,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present there is a function, efi_set_bootdev(), which is used in
-various places to tell the EFI loader which device a file came from.
+Provide these globals as parameters to this function, on the way to
+making it possible to start an image without relying on the globals.
 
-With bootstd, this information is available in the bootflow.
-
-This little series provides a way for bootstd to provide the bootflow to
-the EFI loader, so that it is able to select the correct paths.
-
-For now only the EFI bootmeth is updated.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 
 Changes in v5:
 - Rename the parameters
 - Drop the image->image_ptr rename
-- Rename _efi_binary_run() to efi_binary_run_dp()
-- Rebase on earlier changes
-- Rebase on earlier change
-
-Changes in v3:
-- Rename efi_binary_run_() to _efi_binary_run()
-- Add new patch to support PXE booting
-- Rebase on Tom's tree (i.e. without the pointers/addresses series)
-  https://patchwork.ozlabs.org/project/uboot/list/?series=436241
 
 Changes in v2:
 - Adjust argument ordering for efi_run_image()
-- Use efi_loader tag instead of efi
-- Drop unnecessary path removal
-- Fix 'require' typo
-- Move calculation of dev-name into a separate function
 
-Simon Glass (5):
-  efi_loader: Update efi_run_image() to accept image and device path
-  efi_loader: Add a version of efi_binary_run() with more parameters
-  efi_loader: Move the fallback code from efi_run_image()
-  efi_loader: Pass in the required parameters from EFI bootmeth
-  bootmeth_efi: Support PXE booting
+ lib/efi_loader/efi_bootbin.c | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
- boot/bootmeth_efi.c          |  64 +-----------
- include/efi_loader.h         |  10 ++
- lib/efi_loader/efi_bootbin.c | 189 +++++++++++++++++++++++++++--------
- 3 files changed, 160 insertions(+), 103 deletions(-)
-
+diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+index 428991df88f..71591dd54b9 100644
+--- a/lib/efi_loader/efi_bootbin.c
++++ b/lib/efi_loader/efi_bootbin.c
+@@ -157,9 +157,13 @@ void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
+  *
+  * @source_buffer:	memory address of the UEFI image
+  * @source_size:	size of the UEFI image
++ * @dp_dev:		EFI device-path
++ * @dp_img:		EFI image-path
+  * Return:		status code
+  */
+-static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
++static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
++				  struct efi_device_path *dp_dev,
++				  struct efi_device_path *dp_img)
+ {
+ 	efi_handle_t mem_handle = NULL, handle;
+ 	struct efi_device_path *file_path = NULL;
+@@ -167,7 +171,7 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
+ 	efi_status_t ret;
+ 	u16 *load_options;
+ 
+-	if (!bootefi_device_path || !bootefi_image_path) {
++	if (!dp_img || !dp_img) {
+ 		log_debug("Not loaded from disk\n");
+ 		/*
+ 		 * Special case for efi payload not loaded from disk,
+@@ -188,9 +192,8 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
+ 			goto out;
+ 		msg_path = file_path;
+ 	} else {
+-		file_path = efi_dp_concat(bootefi_device_path,
+-					  bootefi_image_path, 0);
+-		msg_path = bootefi_image_path;
++		file_path = efi_dp_concat(dp_img, dp_img, 0);
++		msg_path = dp_img;
+ 		log_debug("Loaded from disk\n");
+ 	}
+ 
+@@ -252,5 +255,6 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+ 
+-	return efi_run_image(image, size);
++	return efi_run_image(image, size, bootefi_device_path,
++			     bootefi_image_path);
+ }
 -- 
 2.43.0
 
