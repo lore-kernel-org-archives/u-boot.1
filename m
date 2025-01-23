@@ -4,89 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3777DC02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2E16C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:43:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC527806C9;
-	Thu, 23 Jan 2025 15:42:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 63290806C9;
+	Thu, 23 Jan 2025 15:43:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tO1brF66";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="yAXFt5ds";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43693806C9; Thu, 23 Jan 2025 15:42:12 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4611C80711; Thu, 23 Jan 2025 15:43:04 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5A04801B0
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:42:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E84E8801B0
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:43:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6d8f75b31bfso10797706d6.3
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:42:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737643329; x=1738248129; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ch5cHBvOCP0AARep2xS1DSduaU1erRK1GAGW/NBcNGs=;
- b=tO1brF66I6tfdUq8LsS2YHfRN7ACtF1HHKv0EoC3JTmYraZ7PejA8ZipsphsGrh5w6
- NUWh55/NjJwkKAIjOwpxSBYoVTe6+J7A0BCO7Dmmzft30SADpe0cjm5r3Z8qkVX7Y8Wb
- zDwrAZlH93qhu8k3apwro+v0OnT0JB5mXwdMM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737643329; x=1738248129;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ch5cHBvOCP0AARep2xS1DSduaU1erRK1GAGW/NBcNGs=;
- b=E/qsXtJo4Zi88WCktSIDqMRROwfBZBkj5fsPwfY/WlEA64qkN9a8Nhwc+0FFarGbCw
- UyXrEchv7eS6ed1aYhiJcNW70lxrPL4qzDmNt3DZ3/gleu5vu5xlQnhWYPU+1OfyJciH
- S1jTV7PgDcOpXDLecmTPP0Z090uvrK5x65AxmkEofGWmu2t6g/31n5Kcjc4dwEgLubfX
- ItuRJVde0wUazjkWt5DeOjAltLo8UTTUh4inTIVt+6QuUSBiwLRL+S0ROESuxM2VrOp1
- q6X69vNrfs6ul67DeuUJWblVJB3WSM5q5gTwSCgZAKKpiI86mvozYMeoVwYgn2ux/Pri
- j+uQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXj6J+x9yG+uwLEILJHttLkJChUQWBkIf07o4DaMLKLVFxxFJK07Cw4hyJLRAj3EhEUaq7qJkc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzohWuger8VAK0Dx6GKpuZ+fTDE9i4W/jTu0CeLDktn0INVOSBp
- HOnvyS4WUlDXewICiEkL4gyIm98VZAQZeF6+hVHjWgxkBDpawGnFTkB7/CLu/xA=
-X-Gm-Gg: ASbGncsajOOWABXWn0WQLXZATOfRzOc76nMCqYuUtXeGVOMb5DfYnPx3IXRW45NZx8I
- d56YGs4W88bntdPBgtuhy5klNKzfDDRPBenPxIer/B00J8uQj4NRxKru4tEIAp8XINyIy0JF+1A
- EQ7CN1kz2DgeBb68urAlV3suYHMT+PKuslv7Wxg2IZqNJoe9fNxhg68YeGufYLeh/HPM2L1z+6A
- 09fliQlgEZvlwntMm6Yz8FnuHUO4qbE0rA113zJCQBzY2jm4lsocfPJbfLEotAq6T9QwefJNl8D
- LDU7
-X-Google-Smtp-Source: AGHT+IFqEIglplLQpbl06F54/K1kIm9zCYL8aa/kKd01xiIWR3wD75Bu9RWHdoxWm5WTfl/MOIK4WQ==
-X-Received: by 2002:ad4:5dcd:0:b0:6da:dc79:a3d2 with SMTP id
- 6a1803df08f44-6e1b2171505mr410336916d6.5.1737643328807; 
- Thu, 23 Jan 2025 06:42:08 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e1afcd39cesm71296056d6.82.2025.01.23.06.42.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2025 06:42:08 -0800 (PST)
-Date: Thu, 23 Jan 2025 08:42:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
- joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
- EFI netdevices
-Message-ID: <20250123144205.GJ60249@bill-the-cat>
-References: <20250122170858.961359-1-adriano.cordova@canonical.com>
- <20250122170858.961359-20-adriano.cordova@canonical.com>
- <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=3118deafe3=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50NDY7JG014217;
+ Thu, 23 Jan 2025 15:42:47 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 6Wt1z3FgVy99qokaPC9d7Lk7QIqHakpaVaA6MHZxAj8=; b=yAXFt5dsDnOKocxe
+ Y1UPB4F5r2DuTsvJs4S3ro9a+zW9tZe286CdMxGslmki0DMOs76a3nWP8yVsDr6A
+ J3SUphrwKezxtrPP6yrRZr3UcuG+2w7+GVrUgJrTwJvs+IiyBAt6DA/btq2/4+Xy
+ OAviab3rt56zrYr9PJ4obLXyBUYfbjQrSJk74n82eqS8JQclkhKDdqj8ZrufkKPo
+ 5V9RhWy5U5ucI8HwZIlFf0xaNpkyqy1/Izkj4yZYCU2FXEC3ccALYRJ0H8NYhpr3
+ YAFWdEAENNiu9OXsULP+YNPOlNplOo/Q94NZK4WkG26otpelgpOIJDBrlMnERl+w
+ X1wlug==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44bcdq2rx7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 23 Jan 2025 15:42:46 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9D8F240045;
+ Thu, 23 Jan 2025 15:41:14 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A28032BAFD0;
+ Thu, 23 Jan 2025 15:40:19 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Thu, 23 Jan
+ 2025 15:40:18 +0100
+Message-ID: <305899c1-4ac0-4fba-8ead-cc3a5a896a6c@foss.st.com>
+Date: Thu, 23 Jan 2025 15:40:18 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sY4mXXApPiUN8aeC"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/9] usb: dwc3-generic: Add STih407 support
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, Sjoerd Simons
+ <sjoerd@collabora.com>, Tom Rini <trini@konsulko.com>
+References: <20250120080120.51657-1-patrice.chotard@foss.st.com>
+ <20250120080120.51657-5-patrice.chotard@foss.st.com>
+ <871pwvkyqg.fsf@baylibre.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <871pwvkyqg.fsf@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-23_06,2025-01-23_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,98 +98,237 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---sY4mXXApPiUN8aeC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 23, 2025 at 07:37:26AM -0700, Simon Glass wrote:
-> Hi Adriano,
->=20
-> On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail.com> wrote:
-> >
-> > check that the number of ethernet udevices matches the number of simple
-> > network protocols
-> >
-> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > ---
-> >  test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
-> >  1 file changed, 21 insertions(+)
-> >
-> > diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/test_ef=
-i_selftest.py
-> > index 310d8ed294..af9992a6f7 100644
-> > --- a/test/py/tests/test_efi_selftest.py
-> > +++ b/test/py/tests/test_efi_selftest.py
-> > @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
-> >      if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key'=
-]):
-> >          raise Exception('Failures occurred during the EFI selftest')
-> >      u_boot_console.restart_uboot()
-> > +
-> > +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
-> > +@pytest.mark.buildconfigspec('cmd_dm')
-> > +def test_efi_selftest_count_netdevices(u_boot_console):
-> > +    """Test the EFI net device driver
-> > +
-> > +    u_boot_console -- U-Boot console
-> > +
-> > +    This function counts the number of ETH_UCLASS probed udevices
-> > +    calls the EFI net device selftest to check that the EFI driver
-> > +    sees the same.
-> > +    """
-> > +    u_boot_console.restart_uboot()
->=20
-> We should avoid restarting U-Boot in a test unless there is a strong
-> need. It makes things a lot slower!
+On 1/22/25 10:02, Mattijs Korpershoek wrote:
+> Hi Patrice,
+> 
+> Thank you for the patch.
+> 
+> On lun., janv. 20, 2025 at 09:01, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
+> 
+>> Add STi glue logic to manage the DWC3 HC on STiH407
+>> SoC family. It configures the internal glue logic and
+>> syscfg registers.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Marek Vasut <marex@denx.de>
+>>
+>> ---
+>>
+>> Changes in v3:
+>>   - Replace debug() by dev_err()
+>>   - check return value of syscon_regmap_lookup_by_phandle()
+>>
+>> Changes in v2:
+>>   - add dwc3-sti.c DWC3 wrapper as done for dwc3-am62.c
+>>
+>>  MAINTAINERS                         |   1 +
+>>  drivers/usb/dwc3/Kconfig            |   6 ++
+>>  drivers/usb/dwc3/Makefile           |   1 +
+>>  drivers/usb/dwc3/dwc3-generic-sti.c | 132 ++++++++++++++++++++++++++++
+>>  4 files changed, 140 insertions(+)
+>>  create mode 100644 drivers/usb/dwc3/dwc3-generic-sti.c
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 8c6c0c2a4bc..5d7e251e601 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -656,6 +656,7 @@ F:	drivers/mmc/sti_sdhci.c
+>>  F:	drivers/reset/sti-reset.c
+>>  F:	drivers/serial/serial_sti_asc.c
+>>  F:	drivers/sysreset/sysreset_sti.c
+>> +F:	drivers/usb/host/dwc3-sti.c
+>>  F:	drivers/timer/arm_global_timer.c
+>>  F:	drivers/usb/host/dwc3-sti-glue.c
+>>  F:	include/dwc3-sti-glue.h
+>> diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
+>> index 0100723a68b..7d58ae65fb6 100644
+>> --- a/drivers/usb/dwc3/Kconfig
+>> +++ b/drivers/usb/dwc3/Kconfig
+>> @@ -87,6 +87,12 @@ config USB_DWC3_LAYERSCAPE
+>>  	  Host and Peripheral operation modes are supported. OTG is not
+>>  	  supported.
+>>  
+>> +config USB_DWC3_STI
+>> +	bool "STi USB wrapper"
+>> +	depends on DM_USB && USB_DWC3_GENERIC && SYSCON
+>> +	help
+>> +	  Select this for STi Platforms.
+> 
+> The improvements done in v3 based on the comments from v2 look good to me.
+> However, checkpatch seems unhappy about this:
+> 
+> $ ./scripts/checkpatch.pl --git --u-boot --git master..HEAD
+> 
+> --------------------------------------------------------------
+> Commit 2a4d2432f669 ("usb: dwc3-generic: Add STih407 support")
+> --------------------------------------------------------------
+> WARNING: please write a paragraph that describes the config symbol fully
+> #42: FILE: drivers/usb/dwc3/Kconfig:90:
+> +config USB_DWC3_STI
+> 
+> Can't we reuse the help description from 'config USB_XHCI_STI' ?
+> I'm sorry I missed this before.
 
-Yes, if we can not reboot here that would be good.
+Ah yes, will update it
 
-> > +    response =3D u_boot_console.run_command('dm tree')
-> > +    lines =3D response.splitlines()[2:]
-> > +    ethernet_count =3D sum(1 for line in lines if line.strip().startsw=
-ith('ethernet') and '[ + ]' in line)
->=20
-> This test should be written in C, e.g:
->=20
-> struct udevice *dev;
-> int count;
-> uclass_foreach_dev(dev, UCLASS_ETH)
->     if (device_active(dev))
->          count++;
->=20
-> > +
-> > +    u_boot_console.run_command(cmd=3D'setenv efi_selftest netdevices')
-> > +    u_boot_console.run_command('bootefi selftest', wait_for_prompt=3DF=
-alse)
-> > +    if u_boot_console.p.expect([f'Detected {ethernet_count} active EFI=
- net devices']):
-> > +        raise Exception('Failures occurred during the EFI selftest')
->=20
-> Again, this should be written in C and use run_command().
+Patrice
 
-No, if these are written in python already, we can leave them in python.
-C is bad for strings.
-
---=20
-Tom
-
---sY4mXXApPiUN8aeC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeSVT0ACgkQFHw5/5Y0
-tyy5lQwAqXKRH0u+QJ/XI77R64dX4J2IzP9LEWP8MxwkzSwguXhzCXxU8H3fQxQU
-2XEap0mWnOulFHRSMm3vjHA5CeD92glSR2GUWkT8c0C8RDLL4a8Ug8V1u/t+m3fx
-IOWS/pQ4yBvwfq8sZcmyd0x6RUN6/vx5ERsN3Ii8OCVXYXJ7mjqtaEkP5VZLmkme
-3WbQzYCOla+TDkdSA8+pPCbA/VzwBDZ6q4KzXfn5KzrVKVdhR+cVF8mnuoN3XrsJ
-MgnYRJpjV6Fl8sOGyiQV0Q73IHvjmobWZgkPD58/cAQzqT3rOYTG9W0AiQKD7CNz
-Pbb3SmsPjDRqZbV7v4w6Dzt/5Lbm5XGR6E2z/oJvwNN282xFCvC2LvvtEe0hlfys
-TwT3WeqNVG6biH9hLALcAhqkVEUyPs0y1y12aqWRew461aM1l+RvZMcSdJHqxV6m
-LykM8J6AjIO5m0EzVWXxO389oT6F1nSMu1Gn7jRYyA11fO7Df7TjGTJKAbzI0VIH
-o3T2dWO0
-=tTTa
------END PGP SIGNATURE-----
-
---sY4mXXApPiUN8aeC--
+> 
+> With that addressed, please add:
+> 
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> 
+>> +
+>>  menu "PHY Subsystem"
+>>  
+>>  config USB_DWC3_PHY_OMAP
+>> diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
+>> index a085c9d4628..985206eafe4 100644
+>> --- a/drivers/usb/dwc3/Makefile
+>> +++ b/drivers/usb/dwc3/Makefile
+>> @@ -15,3 +15,4 @@ obj-$(CONFIG_USB_DWC3_UNIPHIER)		+= dwc3-uniphier.o
+>>  obj-$(CONFIG_USB_DWC3_LAYERSCAPE)	+= dwc3-layerscape.o
+>>  obj-$(CONFIG_USB_DWC3_PHY_OMAP)		+= ti_usb_phy.o
+>>  obj-$(CONFIG_USB_DWC3_PHY_SAMSUNG)	+= samsung_usb_phy.o
+>> +obj-$(CONFIG_USB_DWC3_STI)		+= dwc3-generic-sti.o
+>> diff --git a/drivers/usb/dwc3/dwc3-generic-sti.c b/drivers/usb/dwc3/dwc3-generic-sti.c
+>> new file mode 100644
+>> index 00000000000..2ff640cede4
+>> --- /dev/null
+>> +++ b/drivers/usb/dwc3/dwc3-generic-sti.c
+>> @@ -0,0 +1,132 @@
+>> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+>> +/*
+>> + * STi specific glue layer for DWC3
+>> + *
+>> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
+>> + */
+>> +
+>> +#include <reset.h>
+>> +#include <regmap.h>
+>> +#include <syscon.h>
+>> +#include <asm/io.h>
+>> +#include <dm/device.h>
+>> +#include <dm/device_compat.h>
+>> +#include <dm/read.h>
+>> +#include <linux/usb/otg.h>
+>> +#include "dwc3-generic.h"
+>> +
+>> +/* glue registers */
+>> +#define CLKRST_CTRL		0x00
+>> +#define AUX_CLK_EN		BIT(0)
+>> +#define SW_PIPEW_RESET_N	BIT(4)
+>> +#define EXT_CFG_RESET_N		BIT(8)
+>> +
+>> +#define XHCI_REVISION		BIT(12)
+>> +
+>> +#define USB2_VBUS_MNGMNT_SEL1	0x2C
+>> +#define USB2_VBUS_UTMIOTG	0x1
+>> +
+>> +#define SEL_OVERRIDE_VBUSVALID(n)	((n) << 0)
+>> +#define SEL_OVERRIDE_POWERPRESENT(n)	((n) << 4)
+>> +#define SEL_OVERRIDE_BVALID(n)		((n) << 8)
+>> +
+>> +/* Static DRD configuration */
+>> +#define USB3_CONTROL_MASK		0xf77
+>> +
+>> +#define USB3_DEVICE_NOT_HOST		BIT(0)
+>> +#define USB3_FORCE_VBUSVALID		BIT(1)
+>> +#define USB3_DELAY_VBUSVALID		BIT(2)
+>> +#define USB3_SEL_FORCE_OPMODE		BIT(4)
+>> +#define USB3_FORCE_OPMODE(n)		((n) << 5)
+>> +#define USB3_SEL_FORCE_DPPULLDOWN2	BIT(8)
+>> +#define USB3_FORCE_DPPULLDOWN2		BIT(9)
+>> +#define USB3_SEL_FORCE_DMPULLDOWN2	BIT(10)
+>> +#define USB3_FORCE_DMPULLDOWN2		BIT(11)
+>> +
+>> +static void dwc3_stih407_glue_configure(struct udevice *dev, int index,
+>> +					enum usb_dr_mode mode)
+>> +{
+>> +	struct dwc3_glue_data *glue = dev_get_plat(dev);
+>> +	struct regmap *regmap;
+>> +	ulong syscfg_base;
+>> +	ulong syscfg_offset;
+>> +	ulong glue_base;
+>> +	int ret;
+>> +
+>> +	/* deassert both powerdown and softreset */
+>> +	ret = reset_deassert_bulk(&glue->resets);
+>> +	if (ret) {
+>> +		dev_err(dev, "reset_deassert_bulk error: %d\n", ret);
+>> +		return;
+>> +	}
+>> +
+>> +	regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscfg");
+>> +	if (IS_ERR(regmap)) {
+>> +		dev_err(dev, "unable to get st,syscfg, dev %s\n", dev->name);
+>> +		return;
+>> +	}
+>> +
+>> +	syscfg_base = regmap->ranges[0].start;
+>> +	glue_base = dev_read_addr_index(dev, 0);
+>> +	syscfg_offset = dev_read_addr_index(dev, 1);
+>> +
+>> +	clrbits_le32(syscfg_base + syscfg_offset, USB3_CONTROL_MASK);
+>> +
+>> +	/* glue drd init */
+>> +	switch (mode) {
+>> +	case USB_DR_MODE_PERIPHERAL:
+>> +		clrbits_le32(syscfg_base + syscfg_offset,
+>> +			     USB3_DELAY_VBUSVALID | USB3_SEL_FORCE_OPMODE |
+>> +			     USB3_FORCE_OPMODE(0x3) | USB3_SEL_FORCE_DPPULLDOWN2 |
+>> +			     USB3_FORCE_DPPULLDOWN2 | USB3_SEL_FORCE_DMPULLDOWN2 |
+>> +			     USB3_FORCE_DMPULLDOWN2);
+>> +
+>> +		setbits_le32(syscfg_base + syscfg_offset,
+>> +			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID);
+>> +		break;
+>> +
+>> +	case USB_DR_MODE_HOST:
+>> +		clrbits_le32(syscfg_base + syscfg_offset,
+>> +			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID |
+>> +			     USB3_SEL_FORCE_OPMODE | USB3_FORCE_OPMODE(0x3) |
+>> +			     USB3_SEL_FORCE_DPPULLDOWN2 | USB3_FORCE_DPPULLDOWN2 |
+>> +			     USB3_SEL_FORCE_DMPULLDOWN2 | USB3_FORCE_DMPULLDOWN2);
+>> +
+>> +		setbits_le32(syscfg_base + syscfg_offset, USB3_DELAY_VBUSVALID);
+>> +		break;
+>> +
+>> +	default:
+>> +		dev_err(dev, "Unsupported mode of operation %d\n", mode);
+>> +		return;
+>> +	}
+>> +
+>> +	/* glue init */
+>> +	setbits_le32(glue_base + CLKRST_CTRL, AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION);
+>> +	clrbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
+>> +
+>> +	/* configure mux for vbus, powerpresent and bvalid signals */
+>> +	setbits_le32(glue_base + USB2_VBUS_MNGMNT_SEL1,
+>> +		     SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
+>> +		     SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
+>> +		     SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG));
+>> +	setbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
+>> +};
+>> +
+>> +struct dwc3_glue_ops stih407_ops = {
+>> +	.glue_configure = dwc3_stih407_glue_configure,
+>> +};
+>> +
+>> +static const struct udevice_id dwc3_sti_match[] = {
+>> +	{ .compatible = "st,stih407-dwc3", .data = (ulong)&stih407_ops},
+>> +	{ /* sentinel */ }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(dwc3_sti_wrapper) = {
+>> +	.name = "dwc3-sti",
+>> +	.id = UCLASS_SIMPLE_BUS,
+>> +	.of_match = dwc3_sti_match,
+>> +	.bind = dwc3_glue_bind,
+>> +	.probe = dwc3_glue_probe,
+>> +	.remove = dwc3_glue_remove,
+>> +	.plat_auto = sizeof(struct dwc3_glue_data),
+>> +};
+>> -- 
+>> 2.25.1
