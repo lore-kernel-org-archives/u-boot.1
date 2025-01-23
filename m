@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76870C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:38:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8CA2C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:38:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F236980780;
-	Thu, 23 Jan 2025 15:38:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B20D807F1;
+	Thu, 23 Jan 2025 15:38:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nqzDaQDa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C8xopJi1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AF9380137; Thu, 23 Jan 2025 15:38:43 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id B681380137; Thu, 23 Jan 2025 15:38:46 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0AF7807E5
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:38:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 93486807CD
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:38:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d3e6f6cf69so1692716a12.1
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:38:38 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-aa6a92f863cso201760066b.1
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:38:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737643118; x=1738247918; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737643124; x=1738247924; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G0vigkmi68IBiZUCV1IGKf0vxOq6DUZkEobi1GJ2OpM=;
- b=nqzDaQDaRErFuLCD0SgkQGPcUuTPa7o4bfUONZuY0H/QzoCnNS1Qv9wRjUqrarVLPj
- kVfwDmMktgNUpMV9egfvnM6iq8wbCF38QKf0wByvbbZd0UerYeJiPaBm27PvFYB5b4vw
- 1qcgh6fpfXVghjof1qIjxMe36NPUg/9w3WnpM=
+ bh=UN+yv5NeAzuwSZOp5leRff0P3xN21p9rMcjqWiHC9rM=;
+ b=C8xopJi1tpWrAlKevSr91DrDNRvQyATQ2s64c3nIC995S8/8rMLTtgm45Ws/xx9Ua9
+ 5snmfFiVXOu8SzTV0UDlM2blyU+rdCXshIx41a8k/Je9WliGrSim/nOqLdAn6VNc6IOX
+ Hz+befP7oFN3FwCu6RWwLGNtE4WAwTS2DWW14=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737643118; x=1738247918;
+ d=1e100.net; s=20230601; t=1737643124; x=1738247924;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=G0vigkmi68IBiZUCV1IGKf0vxOq6DUZkEobi1GJ2OpM=;
- b=Vpr4t2UqOPK8hM4+himDcJTtEcTB/hydc+mRlIQSRP+X2kLUCVPGEtHAmA9sAGrBpR
- +Rpu9nfhbF5bd5dfteXyw8GhCsM4Mm4zfADEBDbQxmEEWHcbaqIVX5MlFR3yxKh6xOor
- Zmkw7AwaRzygeZnv2uUheW4x/nVTdR2KU3aiSInfYWAX6qdAkgNMM1PAqU99oP5+OtwY
- SWFQCRQfkK8nn7n867nt/07jPLc7PbkGFp6/vSvSZNSoZS+k/qXMnPBPEtYZQ40kNoWN
- YNYeqGCHz4SQJENR5Buki46mAeTZwCW7XJcarQ74No/R16NNlVVNQzGgzZF93asw8FyT
- eDBA==
-X-Gm-Message-State: AOJu0YzUQ6IHPIPjdvYUoxVN0r8n9Cb03vef1OJav/LN/Gj5S8JLxGZQ
- 7vHdNka0KQjygXeHwPye4yw8Uf3bptW3N/A62M7TXrOcSk3m176kMKp0EF/VS8BODnTby3ja0Jg
- 4jdDmKcUeJZephhCFNZH7VUgGz0xMdFD4MgtQN/wmLAxFT6M=
-X-Gm-Gg: ASbGncuqUwO1S0UOb5022G0NiVKxPjbYB6SgXo0ZkKUkOWGIGZTx49lJ4rOVoPfHQMF
- h3WrCdCFkp+RZ/hrA+7hT8ZRwhCSxvuiBGYsgkQYCmpsBMgYmdnNusTY5Z0Z0p20=
-X-Google-Smtp-Source: AGHT+IEKzF7u/c/3+NKbFvsQt1NFsCkFn0wTdPeO/napAUTonpbziuUTy0Xnl+lh+hxDWHdb1SGhy3sRL1+cAesn7bQ=
-X-Received: by 2002:a17:907:2d2a:b0:ab3:ed0:cda with SMTP id
- a640c23a62f3a-ab38b191674mr2495718866b.9.1737643118376; Thu, 23 Jan 2025
- 06:38:38 -0800 (PST)
+ bh=UN+yv5NeAzuwSZOp5leRff0P3xN21p9rMcjqWiHC9rM=;
+ b=rf09zPP35Vhek26buqWCxiMp6hakZK5LlckhRZ0SppvaCQkGGJHgfKmHQFfmZR+v+J
+ z790zaVacVLBXAmwUmr+kG7boNN3EvHIl0Iq+gH+MX+ARI5ZnW/VDVreDSIYC1WOVRfX
+ Tn5YWoUcb7JqAGFdRqX178HGPMIt8MHWVvjfGHPIK1l9iRrxGxOpcVWXIQjz/CLFYLnP
+ ZPK1ate53cJya1dvnnVoSDXnbkDEyOu4D++aotoeBOSYs1mD3hTvkFYMBouUXAj8GWvt
+ 8xR1AKn5uBghAUjeEpcsLCv/MYt7ox4PW3U0RGWKD/OcC/l2OhPoRt9TL9/VA9+IV1ls
+ Nu8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXxqvH/Kh/uyFoBCA+PeAhOm61zIP/cnXzmLH0ZRVNCOpPrJgjWN3Hqh+e3ctYhSrKowY713Sg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyGcRU3rGa+QEfxGZHfGE/VU4/hzhLgsf0LXFl2hf+wJ6bi2oBm
+ uP/Aeu28GEYnbMPBUvn22qmkKZNZ8NU3d9T2FfddIOub7U595J75wsJKhfBvcpg436RArark5Dw
+ H/hAi04twOBIXvOPE5uEvIIJPDTNLxb5sA5NY
+X-Gm-Gg: ASbGnctYDXRHNUS0I+QUTut1FmGyItdQT+RgAT+Rr3PmgNaX2k587clrsWidfsh5Kub
+ wGwe2ZqBi3GSVptLXYkb0SkAofCsNqhZ5d4YECyktTcMJIxn8qlzFs5Yq6amXZs4=
+X-Google-Smtp-Source: AGHT+IFevob2Zr0wVOChpntb/YDDklskt6YC4KfkY8RjEoq8wwL6+EDuvgztcA35mgk5P9RMmLpH+Ck/m7ycfodN1uA=
+X-Received: by 2002:a17:907:3e94:b0:ab3:77ad:e5da with SMTP id
+ a640c23a62f3a-ab38b2e72d4mr2068882066b.28.1737643123982; Thu, 23 Jan 2025
+ 06:38:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20250120215340.617194-1-sjg@chromium.org>
- <20250122172449.GP3476@bill-the-cat>
-In-Reply-To: <20250122172449.GP3476@bill-the-cat>
+References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
+ <20250110-ge-mainline-display-support-v3-5-d2c0acea6feb@bootlin.com>
+ <CAFLszTinomkmj=gaKbX5WBPMsbr_3nxt45sQjXqKJ5q1rxcKwQ@mail.gmail.com>
+ <87a5blu630.fsf@bootlin.com>
+ <CAFLszThX2ULHHA1DOA-essfVJ_Fw=BgsR391iDT=bO+6j=UGwg@mail.gmail.com>
+ <87frlcr2dt.fsf@bootlin.com>
+In-Reply-To: <87frlcr2dt.fsf@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 23 Jan 2025 07:38:24 -0700
-X-Gm-Features: AbW1kvaGvf6_W45Kj9ZGdWLyJpY8FsyYes2eTpcFzvz8q1M8f2wotufScmhc3Yk
-Message-ID: <CAFLszTi0n45THjqvt9GfDfTJxr0aAB1+r0M8EzAhGdoV4eYr3w@mail.gmail.com>
-Subject: Re: [PATCH 00/28] test: Complete the suite migration
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Gendin <agendin@matrox.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Bryan Brattlof <bb@ti.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Julius Lehmann <lehmanju@devpi.de>, Linus Walleij <linus.walleij@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Massimiliano Minella <massimiliano.minella@se.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Rasmus Villemoes <ravi@prevas.dk>, Ravi Minnikanti <rminnikanti@marvell.com>, 
- Raymond Mao <raymond.mao@linaro.org>,
- Stephen Carlson <stcarlso@linux.microsoft.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 23 Jan 2025 07:38:32 -0700
+X-Gm-Features: AbW1kvaM4DsiTppN79LhBzKoA6LrSsXNmBQrGeqOrlPCjtVL27cYZBWX-37ih_E
+Message-ID: <CAFLszThgbakRhLTC3T04uV6W+MbXENyVvhT4Bvam4ymmUqBf2Q@mail.gmail.com>
+Subject: Re: [PATCH v3 05/13] power-domain: Add refcounting
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, 
+ Fabio Estevm <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
+ Ian Ray <ian.ray@gehealthcare.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,31 +100,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Miquel,
 
-On Wed, 22 Jan 2025 at 10:24, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 21 Jan 2025 at 01:34, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
 >
-> On Mon, Jan 20, 2025 at 02:53:00PM -0700, Simon Glass wrote:
+> Hi Simon,
 >
-> > This series completes the removal of test commands for suites. With this
-> > it is possible to declare a suite (including init and uninit functions)
-> > without needing to write a command.
+> On 20/01/2025 at 12:21:04 -07, Simon Glass <sjg@chromium.org> wrote:
+>
+> > Hi Miquel,
 > >
-> > It also adds timing for test suites, so we can keep track of how long
-> > things take.
+> > On Mon, 20 Jan 2025 at 03:34, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
+> >>
+> >> Hello Simon,
+> >>
+> >> >>  int power_domain_on(struct power_domain *power_domain)
+> >> >>  {
+> >>
+> >> ...
+> >>
+> >> >> +       if (priv->on_count++ > 0)
+> >> >> +               return 0;
+> >> >
+> >> > -EALREADY
+> >>
+> >> ...
+> >>
+> >> >>  int power_domain_off(struct power_domain *power_domain)
+> >> >>  {
+> >>
+> >> ...
+> >>
+> >> >> +       if (priv->on_count-- > 1)
+> >> >> +               return 0;
+> >> >
+> >> > -EBUSY
+> >> >
+> >> > See how the regulator uclass does it.
+> >>
+> >> I really does not understand why we would like to do that.
+> >>
+> >> It is perfectly normal operation to call power_domain_on/off() on the
+> >> same power domain several times in a row and there is no reason to
+> >> return an error code. It is quite the opposite, the main reason for
+> >> power domains is to act like shared regulators. Se while a regulator has
+> >> one user and doing the same action on it several times does not make
+> >> much sense and can be reported, that is not how power domains have been
+> >> thought about in the first place.
+> >
+> > I am not aware of any difference between these two subsystems.
 >
-> This causes ut_dm_dm_test_cmd_mux_list to fail now:
-> https://source.denx.de/u-boot/u-boot/-/jobs/1001470
+> Actually you're right on this point, the regulator API works like the
+> pmdomain one. I had a look: it always returns 0, no matter the state of
+> the regulator after the operation (as long as there is no error of
+> course).
 
-Yes, I saw that as well, but i figured it was unrelated. There's
-definitely something odd going on in the tests :-( Have you seen any
-other such random failures?
+You can see dm_test_power_regulator_set_enable_if_allowed() for a test
+that relates to this.
 
 >
-> There was a trivial rebase needed for one patch, but the rest of the
-> series looks otherwise fine.
+> > If we
+> > want a power domain to actually turn off, how many times do we need to
+> > call power_domain_off()?
+>
+> We do not? It is why I add refcounting, if a power domain has 2
+> consumers, each consumer says whether it needs the power domain to be on
+> or off and the core will handle, but in no case they should force it's
+> state.
 
-OK, ta.
+This is a bootloader, so we do sometimes need to force something off, or on.
+
+>
+> > The function silently does nothing in many
+> > cases, so it is not deterministic.
+>
+> It is fully deterministic, as long as consumers call power_on/off
+> evenly (and this is already what we request in U-Boot).
+
+But I foresee people setting up power domains in board code, not
+drivers. My concern is that this is hiding the real state.
+
+>
+> > In the case where we *actually*
+> > want to turn the power domain off, we are at a loss as to what code to
+> > write.
+> >
+> >> Hence, I do not agree with returning error codes in these situations,
+> >> they are misleading and they would have to be ignored anyway.
+> >>
+> >
+> > How about creating a power_domain_off_if_allowed() or
+> > power_domain_soft_off/on() or power_domain_req_off (for request)?
+>
+> The power domain logic has a hardware reality in many SoCs but is also a
+> software concept that is shared with Linux. Changing the semantics in
+> U-Boot would be very misleading and if my understanding is correct, this
+> approach would be new.
+
+Yes this is quite a strong argument. Can you point me to the
+equivalent API in Linux? I see pm_domain but not the same as U-Boot
+
+>
+> If you really want a way to track the state of the power domain,
+> however, I can maybe add a helper returning its state, ie:
+>
+>          bool power_domain_is_on(domain)
+>
+> Would that work?
+
+Not really. We should have an API which returns -EALREADY or -EBUSY
+based on the ref counts.
+
+But yes, we can change the naming, so that this 'deterministic' ones
+have a different name, with the current names used for your
+ref-counting one. Then the ref-counting one is a thin layer on top of
+the deterministic one.
 
 Regards,
 Simon
