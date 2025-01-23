@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DAC7C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 07:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7EB3C0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 07:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FE7080214;
-	Thu, 23 Jan 2025 08:37:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9827780586;
+	Thu, 23 Jan 2025 08:37:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="SrL0gW3p";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="JdYH7jvP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09DCD803B5; Thu, 23 Jan 2025 08:37:28 +0100 (CET)
+ id 65CC980137; Thu, 23 Jan 2025 08:37:28 +0100 (CET)
 Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02E8280137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 08:37:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 702B680243
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 08:37:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0C89B148A171; Thu, 23 Jan 2025 08:37:19 +0100 (CET)
+ with ESMTPSA id A14A31487435; Thu, 23 Jan 2025 08:37:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
  t=1737617845;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=uNcLj9RWeQKj/6zQkqNsp1tH6oXrQS9CzOZP0P9D8Qg=;
- b=SrL0gW3pub3VmTjPtMdoLi3lMYY88FLbAShkUr5slBJb2X6lFYlh7hsvA5+g5CwWHd2S9I
- UiwDQPmCd7REt0CY/9CELZc9sgwcl0GUH+LaojmgfnSuq17Yi1oY/7cAsrQlF+FQtHEa9R
- ov05cH21DU0T2exvVLqhzzKm+b1pFs+EZDPF05Ede/5O3tLfd5zypM72MvTSiK75iLWkV/
- yEid2wTY38+qBLnRLiKeFpz+7MtRGD97pjicqortEU7KRvNklGSg6sg8FhHAdV+Yi4PSK5
- H3HbAW3VAXcREYoZrsXzdN09Z3JMr5peUj5DqGg9Iwe62w9pKGFN/znsbDlsjQ==
+ bh=RRnoLHKv9F6uz8dRJH31F9qGnrnr6MByZZA8xYqjm/4=;
+ b=JdYH7jvPiG132COENQA/P8vjqEwxMeQy9ajB52UJuUgxXzkAdYQzTs0+jIyDs7jppuFWAR
+ tqotKlwRkkUdcokri5vsedZeqEUoJ9PZlmnCNHWJqJL1VgOkLC+HyT0mUBFoKuiI4+TcbF
+ pfx57W0hHuX7b3J1ZEQhT7OlN49JBaqplCkTV8c17Fhx8Yd+sb/d1822SLaHCMopplg452
+ /atsJUFtVrIZ0JPgGctScj6+cWe5dPoThuoWtdnS9Ux7HcT4BXBgm7NWFfsMD9MKhteWO6
+ 1yRfsCKGWoOeCAF1Ypq5KE95zfMwcUr4FhdZZSFv3eMOxsyPKdD7fz963F375g==
 From: Alexander Dahl <ada@thorsis.com>
 To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>,
+Cc: Tom Rini <trini@konsulko.com>, John Watts <contact@jookia.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- John Watts <contact@jookia.org>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
  Kongyang Liu <seashell11234455@gmail.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de (open list)
-Subject: [PATCH 1/2] spi: ca_sflash: Remove redundant dependency
-Date: Thu, 23 Jan 2025 08:37:12 +0100
-Message-Id: <20250123073713.2988293-2-ada@thorsis.com>
+Subject: [PATCH 2/2] spi: atmel-quadspi: Depend on SPI_MEM
+Date: Thu, 23 Jan 2025 08:37:13 +0100
+Message-Id: <20250123073713.2988293-3-ada@thorsis.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250123073713.2988293-1-ada@thorsis.com>
 References: <20250123073713.2988293-1-ada@thorsis.com>
@@ -72,7 +72,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is inside of an 'if DM_SPI' block, and thus always true.
+Most other spi-mem drivers also depend on SPI_MEM.  Fixes this build
+error:
+
+    arm-v5te-linux-gnueabi-ld.bfd: drivers/spi/atmel-quadspi.o: in function `atmel_qspi_supports_op':
+    /mnt/data/adahl/src/u-boot/drivers/spi/atmel-quadspi.c:460: undefined reference to `spi_mem_default_supports_op'
+    make[1]: *** [/mnt/data/adahl/src/u-boot/Makefile:1821: u-boot] Error 1
 
 Signed-off-by: Alexander Dahl <ada@thorsis.com>
 ---
@@ -80,18 +85,18 @@ Signed-off-by: Alexander Dahl <ada@thorsis.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index 96ea033082b..6555142a41e 100644
+index 6555142a41e..a916b711ba8 100644
 --- a/drivers/spi/Kconfig
 +++ b/drivers/spi/Kconfig
-@@ -135,7 +135,7 @@ config BCMSTB_SPI
+@@ -85,7 +85,7 @@ config ATH79_SPI
  
- config CORTINA_SFLASH
- 	bool "Cortina-Access Serial Flash controller driver"
--	depends on DM_SPI && SPI_MEM
-+	depends on SPI_MEM
+ config ATMEL_QSPI
+ 	bool "Atmel Quad SPI Controller"
+-	depends on ARCH_AT91
++	depends on ARCH_AT91 && SPI_MEM
  	help
- 	  Enable the Cortina-Access Serial Flash controller driver. This driver
- 	  can be used to access the SPI NOR/NAND flash on platforms embedding this
+ 	  Enable the Atmel Quad SPI controller in master mode. This driver
+ 	  does not support generic SPI. The implementation supports only the
 -- 
 2.39.5
 
