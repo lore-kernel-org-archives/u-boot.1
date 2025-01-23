@@ -4,70 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1936CC02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:38:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76870C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:38:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DC0F801B0;
-	Thu, 23 Jan 2025 15:38:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F236980780;
+	Thu, 23 Jan 2025 15:38:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K2IczYiL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nqzDaQDa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10CDD801B0; Thu, 23 Jan 2025 15:38:35 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 3AF9380137; Thu, 23 Jan 2025 15:38:43 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AEBF80137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:38:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F0AF7807E5
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:38:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aa679ad4265so431345866b.0
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:38:33 -0800 (PST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3e6f6cf69so1692716a12.1
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:38:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737643112; x=1738247912; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737643118; x=1738247918; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xbrTppVMPxBu0HXxbLuaYeugMnGH1hJCJqP3jXLmdDA=;
- b=K2IczYiLOw38PFCwSQb7THqY2HDvWyNBOX43L7ycuGMPpsA1pV+R1dTRH9vrXlFmnY
- ba+HaF1H2OMQDzwz9Zny1ZcJKTt1vdimi5XOoNLYu8ZKIhvK1t7ExbUun4y6tisHypkA
- BdnwsvMtLkt3T7LwHqtbEEkdue+YdAL2XWF5A=
+ bh=G0vigkmi68IBiZUCV1IGKf0vxOq6DUZkEobi1GJ2OpM=;
+ b=nqzDaQDaRErFuLCD0SgkQGPcUuTPa7o4bfUONZuY0H/QzoCnNS1Qv9wRjUqrarVLPj
+ kVfwDmMktgNUpMV9egfvnM6iq8wbCF38QKf0wByvbbZd0UerYeJiPaBm27PvFYB5b4vw
+ 1qcgh6fpfXVghjof1qIjxMe36NPUg/9w3WnpM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737643112; x=1738247912;
+ d=1e100.net; s=20230601; t=1737643118; x=1738247918;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xbrTppVMPxBu0HXxbLuaYeugMnGH1hJCJqP3jXLmdDA=;
- b=EAbGOYE6avTZUm4H1/Fj51kqOpxLVBxh7M/YazOoyQqhHOAFxkyxDPsQUPG5h60KpM
- yybP7qmoSPH1wtTu4DLDolMdrJl8Wb0u7rCTT0TY2lDqos4jFyMUXE2D7PzO6y/9+Te7
- F8i2On1fukrh6Mp5txGKGa/NGOPIhF3Lww1H7UtxWIQxIjyi0uMj4VEeJviTUWc84SsX
- SzSgnS78B9monweljdY5MXhG+1B0ze69nKUw0phUtYrgKuHMRhkSmr+WH4jsHDCLTOQL
- fu3DsYTFPxtxWOOX23DUPtafen4Ma4f+j3/a/LFDm9EVk2rnvWuzRUlybn+LKTqfqou3
- SenA==
-X-Gm-Message-State: AOJu0YweIv0k44QBdHDAMgp29vB5ieZlr/M+m5Xswen+EvLciccM37cM
- jcEuZxobwHS/9qXsyxdKv/GQHG3cydvdiyJiy1QhgYVPmn11KqCDS7ItmHzpj8Ijas89tO+vji1
- aaX1TqNXZCwnHuRofqpZ/Fh/mZ5q8BBZqqAfx
-X-Gm-Gg: ASbGncvoyvY91MHnCv+8p9stLnDUjwOYsU6S1b1mSCw81ZeCCsVmUqtieW093xSBN/Z
- ZoMruMQsLiBtzWSq2tHhjuRFCg6SNGU6RXPS6nb/rT2033tudCuygZ66v7k3o6Ow=
-X-Google-Smtp-Source: AGHT+IE+ZJ17I6SShrwPYIR36wasuoOgEbr1X7ehSPWJiJY6b/xjoH3mcQqp08JVzSTGL6F4cSqO0QdSjDpEOtqb20g=
-X-Received: by 2002:a17:907:961f:b0:aa5:53d4:8876 with SMTP id
- a640c23a62f3a-ab662a63bf3mr309614366b.20.1737643110976; Thu, 23 Jan 2025
- 06:38:30 -0800 (PST)
+ bh=G0vigkmi68IBiZUCV1IGKf0vxOq6DUZkEobi1GJ2OpM=;
+ b=Vpr4t2UqOPK8hM4+himDcJTtEcTB/hydc+mRlIQSRP+X2kLUCVPGEtHAmA9sAGrBpR
+ +Rpu9nfhbF5bd5dfteXyw8GhCsM4Mm4zfADEBDbQxmEEWHcbaqIVX5MlFR3yxKh6xOor
+ Zmkw7AwaRzygeZnv2uUheW4x/nVTdR2KU3aiSInfYWAX6qdAkgNMM1PAqU99oP5+OtwY
+ SWFQCRQfkK8nn7n867nt/07jPLc7PbkGFp6/vSvSZNSoZS+k/qXMnPBPEtYZQ40kNoWN
+ YNYeqGCHz4SQJENR5Buki46mAeTZwCW7XJcarQ74No/R16NNlVVNQzGgzZF93asw8FyT
+ eDBA==
+X-Gm-Message-State: AOJu0YzUQ6IHPIPjdvYUoxVN0r8n9Cb03vef1OJav/LN/Gj5S8JLxGZQ
+ 7vHdNka0KQjygXeHwPye4yw8Uf3bptW3N/A62M7TXrOcSk3m176kMKp0EF/VS8BODnTby3ja0Jg
+ 4jdDmKcUeJZephhCFNZH7VUgGz0xMdFD4MgtQN/wmLAxFT6M=
+X-Gm-Gg: ASbGncuqUwO1S0UOb5022G0NiVKxPjbYB6SgXo0ZkKUkOWGIGZTx49lJ4rOVoPfHQMF
+ h3WrCdCFkp+RZ/hrA+7hT8ZRwhCSxvuiBGYsgkQYCmpsBMgYmdnNusTY5Z0Z0p20=
+X-Google-Smtp-Source: AGHT+IEKzF7u/c/3+NKbFvsQt1NFsCkFn0wTdPeO/napAUTonpbziuUTy0Xnl+lh+hxDWHdb1SGhy3sRL1+cAesn7bQ=
+X-Received: by 2002:a17:907:2d2a:b0:ab3:ed0:cda with SMTP id
+ a640c23a62f3a-ab38b191674mr2495718866b.9.1737643118376; Thu, 23 Jan 2025
+ 06:38:38 -0800 (PST)
 MIME-Version: 1.0
-References: <tencent_410F4F8FDC201D1B50F008D01066D0A4A006@qq.com>
-In-Reply-To: <tencent_410F4F8FDC201D1B50F008D01066D0A4A006@qq.com>
+References: <20250120215340.617194-1-sjg@chromium.org>
+ <20250122172449.GP3476@bill-the-cat>
+In-Reply-To: <20250122172449.GP3476@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 23 Jan 2025 07:38:18 -0700
-X-Gm-Features: AbW1kvZAud4z6jjgP1nPfD427KqfAp3n9BSgenmXUFJQawsMcc7jxw-utOuPDMA
-Message-ID: <CAFLszTiZf7nwTX5cECz1JkVFG_s6dDK0d750sGFOFP1LQpG0jQ@mail.gmail.com>
-Subject: Re: [PATCH v2] arm: Remove redundant loading of image copy start offse
-To: 1425075683@qq.com
-Cc: u-boot@lists.denx.de, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, 
- Tom Rini <trini@konsulko.com>
+Date: Thu, 23 Jan 2025 07:38:24 -0700
+X-Gm-Features: AbW1kvaGvf6_W45Kj9ZGdWLyJpY8FsyYes2eTpcFzvz8q1M8f2wotufScmhc3Yk
+Message-ID: <CAFLszTi0n45THjqvt9GfDfTJxr0aAB1+r0M8EzAhGdoV4eYr3w@mail.gmail.com>
+Subject: Re: [PATCH 00/28] test: Complete the suite migration
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Bryan Brattlof <bb@ti.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Julius Lehmann <lehmanju@devpi.de>, Linus Walleij <linus.walleij@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Massimiliano Minella <massimiliano.minella@se.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Ravi Minnikanti <rminnikanti@marvell.com>, 
+ Raymond Mao <raymond.mao@linaro.org>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Tim Harvey <tharvey@gateworks.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,40 +104,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 Jan 2025 at 18:05, <1425075683@qq.com> wrote:
->
-> From: Liya Huang <1425075683@qq.com>
->
-> Because the beginning is already computed
->
-> Signed-off-by: Liya Huang <1425075683@qq.com>
-> ---
->
-> Changes in v2:
-> - Due to an error, the patch was resubmitted, leaving the code unchanged
-> - Sorry for the trouble; Due to the lack of understanding of the process,
-> the previous patch information was Reviewed-by. Please refer to this patch
->
->  arch/arm/lib/relocate.S | 2 --
->  1 file changed, 2 deletions(-)
->
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
-> diff --git a/arch/arm/lib/relocate.S b/arch/arm/lib/relocate.S
-> index 345e282e3e..bffadfecba 100644
-> --- a/arch/arm/lib/relocate.S
-> +++ b/arch/arm/lib/relocate.S
-> @@ -83,8 +83,6 @@ relocate_base:
->         add     r1, r3                  /* r1 <- Run &__image_copy_start */
->         subs    r4, r0, r1              /* r4 <- Run to copy offset      */
->         beq     relocate_done           /* skip relocation               */
-> -       ldr     r1, _image_copy_start_ofs
-> -       add     r1, r3                  /* r1 <- Run &__image_copy_start */
->         ldr     r2, _image_copy_end_ofs
->         add     r2, r3                  /* r2 <- Run &__image_copy_end   */
->  copy_loop:
-> --
-> 2.25.1
+On Wed, 22 Jan 2025 at 10:24, Tom Rini <trini@konsulko.com> wrote:
 >
+> On Mon, Jan 20, 2025 at 02:53:00PM -0700, Simon Glass wrote:
+>
+> > This series completes the removal of test commands for suites. With this
+> > it is possible to declare a suite (including init and uninit functions)
+> > without needing to write a command.
+> >
+> > It also adds timing for test suites, so we can keep track of how long
+> > things take.
+>
+> This causes ut_dm_dm_test_cmd_mux_list to fail now:
+> https://source.denx.de/u-boot/u-boot/-/jobs/1001470
+
+Yes, I saw that as well, but i figured it was unrelated. There's
+definitely something odd going on in the tests :-( Have you seen any
+other such random failures?
+
+>
+> There was a trivial rebase needed for one patch, but the rest of the
+> series looks otherwise fine.
+
+OK, ta.
+
+Regards,
+Simon
