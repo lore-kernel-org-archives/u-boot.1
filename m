@@ -4,60 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EF8DC02181
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 01:08:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5C75C02181
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 01:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDF5A803B5;
-	Thu, 23 Jan 2025 02:08:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 57D868076E;
+	Thu, 23 Jan 2025 02:08:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NNlyEAU+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="E1k4znip";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC66580762; Thu, 23 Jan 2025 02:08:03 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 061A780137; Thu, 23 Jan 2025 02:08:04 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9781E80137
+ by phobos.denx.de (Postfix) with ESMTPS id E3647803B5
  for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 02:08:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50N17x0U1109005
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50N17xXg281283
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Wed, 22 Jan 2025 19:07:59 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1737594479;
- bh=qBcHeD4Bu56RaRaqzf0SfKXPwZmM79mL5qrUueCFeWU=;
- h=From:To:CC:Subject:Date;
- b=NNlyEAU+uo1buwe2E4NNiJw4YKrMti/5GojYCeooHQLtHaxxnMVJBoaTq+LtlgkVq
- +YUE00sXxBK7D38+kB49b4w9hIpWK8/X8o/BHJlA0dYSYkbaKcnXiZbSsqwAD0CBbh
- nOeuzCNkKWB825d+PK+n5yZulLM+W///7/Tkp2yY=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50N17xmd064220
+ bh=uOHzMJcv9Elkh+lP9gXx5axRVVljZa6Lswjp0xkAQP4=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=E1k4znipzDo7zqXMpNm0Xky6rmNQZnEVx7/rpjNnMMCQ6ePxBt/zovSMW1xRYicD0
+ xhaMCCnwhu7/PPiqie/9/jYjyvhJd5dVgH78zDglg6bRrvG2pvBOH45S88OUa0TTFT
+ 0jI5jwfFxnZU/vccybU/ng3A7Pka9qgkzOI13AJk=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50N17xtB064012
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Wed, 22 Jan 2025 19:07:59 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
  Jan 2025 19:07:59 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 22 Jan 2025 19:07:59 -0600
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50N17xaP066772;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50N17xaT066772;
  Wed, 22 Jan 2025 19:07:59 -0600
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Vignesh Raghavendra <vigneshr@ti.com>, Hari Nagalla <hnagalla@ti.com>,
  Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH 0/4] Introduce K3 remoteproc driver for M4 subsystem
-Date: Wed, 22 Jan 2025 19:07:55 -0600
-Message-ID: <20250123010759.810799-1-jm@ti.com>
+Subject: [PATCH 4/4] configs: am64x_evm_a53_defconfig: Enable R5F and M4
+ remote proc support
+Date: Wed, 22 Jan 2025 19:07:59 -0600
+Message-ID: <20250123010759.810799-5-jm@ti.com>
 X-Mailer: git-send-email 2.48.0
+In-Reply-To: <20250123010759.810799-1-jm@ti.com>
+References: <20250123010759.810799-1-jm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -78,35 +81,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some K3 devices like am62x and am64x have a M4 processor in the MCU
-voltage domain. This patch series introduces remoteproc M4 driver which
-will be used to load firmware into and start the M4 remote core.
+From: Hari Nagalla <hnagalla@ti.com>
 
-This series also adds support for R5F cores on am64x SoCs in patch 2/4,
-sets up environment to load FW in remote cores in patch 3/4, and enables
-config options for R5F and M4 remoteproc support in patch 4/4.
+Add support for R5F and M4 remoteproc drivers.
 
-This patch series was tested on am64x EVM using commands:
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+---
+ configs/am64x_evm_a53_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-=> setenv dorprocboot 1
-=> run boot_rprocs
-
-Hari Nagalla (4):
-  remoteproc: k3-m4: Introduce K3 remote proc driver for M4 subsystem
-  remoteproc: k3-r5: Add support for R5F cores on AM64x SoCs
-  env: ti: am64x: set rproc_fw_binaries
-  configs: am64x_evm_a53_defconfig: Enable R5F and M4 remote proc
-    support
-
- board/ti/am64x/am64x.env             |   6 +
- configs/am64x_evm_a53_defconfig      |   2 +
- drivers/remoteproc/Kconfig           |  10 +
- drivers/remoteproc/Makefile          |   1 +
- drivers/remoteproc/ti_k3_m4_rproc.c  | 411 +++++++++++++++++++++++++++
- drivers/remoteproc/ti_k3_r5f_rproc.c |   2 +
- 6 files changed, 432 insertions(+)
- create mode 100644 drivers/remoteproc/ti_k3_m4_rproc.c
-
+diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+index e6e3e018da6..4630c424775 100644
+--- a/configs/am64x_evm_a53_defconfig
++++ b/configs/am64x_evm_a53_defconfig
+@@ -152,6 +152,8 @@ CONFIG_K3_SYSTEM_CONTROLLER=y
+ CONFIG_REMOTEPROC_TI_K3_ARM64=y
+ CONFIG_REMOTEPROC_TI_PRU=y
+ CONFIG_CMD_REMOTEPROC=y
++CONFIG_REMOTEPROC_TI_K3_R5F=y
++CONFIG_REMOTEPROC_TI_K3_M4F=y
+ CONFIG_RESET_TI_SCI=y
+ CONFIG_DM_RTC=y
+ CONFIG_RTC_EMULATION=y
 -- 
 2.48.0
 
