@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2982C0218B
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32CBAC0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DADE80763;
-	Thu, 23 Jan 2025 15:37:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 81CD5807B3;
+	Thu, 23 Jan 2025 15:37:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="luL1h+Pn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nefgi133";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B976807E0; Thu, 23 Jan 2025 15:37:41 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id A509480137; Thu, 23 Jan 2025 15:37:46 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 593BF807B3
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:37:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9912F807B4
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:37:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5d88c355e0dso2038073a12.0
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:37:39 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ab2bb0822a4so199029266b.3
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:37:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737643059; x=1738247859; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737643064; x=1738247864; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hBEDj0hGvnb3fRu8braKoCcp++LCszzSWX3aXgnYwsg=;
- b=luL1h+Pn7VQDmtQ4BXw+p5xcZmlyAxz6K2DKWkdYOnOOil32vHbZ7uj9Qqe4W3U1MP
- rLizMOTKJnnngt8Cm1CjyTZM/AzlYonVlqwhZyJzsBD6D2MvNFOOt/fw06c4wMRogAVV
- YVJTFqeqhlTx2ylYcgyz6D1la5e3IZcBCd6u0=
+ bh=yVAN5yaGsOxUcQlChYHwWrKhPwuSIM1LCJ7tu3ioN3I=;
+ b=Nefgi133w7xeFqjWiWug8GKwhTvZwOH12ysRpE7DT/8B+brTmucrlzvFfDz78bxQna
+ wYf0GXQolYBECDxnydCxx+E3rYpN2NZU5JRCiHrT+3sdmyIemnwq/Iji3EKQ/i8EaS5B
+ gFFK/mFmo4LX1utOXw45LVzlriHPys0DZmh1Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737643059; x=1738247859;
+ d=1e100.net; s=20230601; t=1737643064; x=1738247864;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hBEDj0hGvnb3fRu8braKoCcp++LCszzSWX3aXgnYwsg=;
- b=QrH6eZksQVOo5l0t8tLoBUneBOphWX2vm85Wg+n7z30Z5Jc6QTbN9vgVy4SM7mfRDM
- yaLIizRELBnr+DLgT7RCvKce5BA1fl9GOxohxA2R4zGULSI24InNTQJNixgZH7ZGsjgA
- yslInXEfrQ9KiJVG4tDOeOaxwcJDticwMI+twDTwhU7RKTQu/LH+eup8JmdraZ7JziSM
- wPbcD292ShOb6dP9K9KImCd/58uaYZc1jMzDbtepIFfI+2LXskHMNqhJiUB3CXKSynuY
- MuRrMKxfqezhXV58ThJMJN0ycbxF0jf3hErJGkYlDf2/rZBy7kjLo2Z3r+rANBgHSzlF
- JkfA==
-X-Gm-Message-State: AOJu0YwAeaRhOfai8tBvtVHyXgy5xGOh+sWalZnh7lnpfjkBhDWCvQKB
- jzIBjmfVpx+Usxv23DktoAsFEsTzSyvbZi0IUak+szKJcIp5sH64r6L0WzE1CnFrRy2rNmUwUrg
- vIgqVZo1HuTsPc4wBzJOCDz/moOI95IWr/snT
-X-Gm-Gg: ASbGncvpovRypg0Vdc31oSyhk66/S4Cjjmq7jp+kh+il1d5j3wiIp4yPDsNhv+313Lb
- 8owfnMQikerjaUoZYONkP2E85NDCLoZiBEvGDi60fwEtt3cURvgt01SuYgTnMZIZ+h81yGr/dCQ
- ==
-X-Google-Smtp-Source: AGHT+IGLaoYffVX3shTzXlJYVsOQ/oFGM5IdIszd3cbCC9cnEoLYE8w1QBvQ/SZDmryLRT3itRXqC0gxT8lvFv4m/eg=
-X-Received: by 2002:a17:907:3e1c:b0:aa6:4494:e354 with SMTP id
- a640c23a62f3a-ab38b42e5f5mr2304964866b.42.1737643058758; Thu, 23 Jan 2025
- 06:37:38 -0800 (PST)
+ bh=yVAN5yaGsOxUcQlChYHwWrKhPwuSIM1LCJ7tu3ioN3I=;
+ b=haCRAA0WN8RHLrItfFPG3WWKoXURKeroWNg5D+uBLHIN30W/QJXVkbE25j9ws5BK07
+ gjuwo01RK5Zk77pcoWeHoDNKSM7j2Ynpe4nXr7uaFKzNsLFh/Zmbjryrm02DKFrflckQ
+ 9/Ivi0bNMnBue1G+uI2TmozU3o7VVpZwdOnYU/PY7BUuATpSAmoffb4qhwicevYpYWak
+ LfZ2NSU1+vhdQpT11Jrq27SJTomsFs6IFTRWvaZPcKg2iAmOq0reF2rLqxviN5u2iZWa
+ pDmllhsKUpEBXH7cfDeCEt8fDZZ0KEWRIr97s/dr7arJ1yug6z63oburU3nm9BzEX3kJ
+ okpw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVIf9wsVbv0sBRTPqeGIW1eJiXjDvPcw7R+0f5WgYLx6ZvQLySTuNcgighvoEmHcaS+XmjIjvs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbhbgB3qrDQrGARoFj35m+oai/2EGhslg0SbgbfBE6nBGwNu4D
+ YfKNfSxPZnfnsLiMDdu8V3ANzcUAOQEZEv4ehMMLzkXJzPNoVBeLXIdBewFpVb41Nfckvxkh/tl
+ +L353IQXZpftcB1zXRkwjZ7/YimaioxmcNkvA
+X-Gm-Gg: ASbGncuOQdLBtfaZ63yFNru0AmbecLIgXIVafZpidX6iPkKYndRF6p4pws98ixOpFpf
+ Xcc8SBP6pd/m3XAykZLhmNyQYcUaD0oR5dr1NtNId6hxOZF2/J6OA9j1KcwiLVGA=
+X-Google-Smtp-Source: AGHT+IGDtcpVUDkRd+Lc4v54Q+bTwMUQLDnV0rtmAhzE8wDokkTSG/Wjm9A35vdN9UroDoixQf2KwRUlscwt5F2cer4=
+X-Received: by 2002:a17:907:6ea6:b0:aac:1e96:e7d2 with SMTP id
+ a640c23a62f3a-ab38b3d708amr2651336266b.54.1737643063980; Thu, 23 Jan 2025
+ 06:37:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20250122170858.961359-1-adriano.cordova@canonical.com>
- <20250122170858.961359-20-adriano.cordova@canonical.com>
-In-Reply-To: <20250122170858.961359-20-adriano.cordova@canonical.com>
+References: <20250117102734.3725009-2-caleb.connolly@linaro.org>
+In-Reply-To: <20250117102734.3725009-2-caleb.connolly@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 23 Jan 2025 07:37:26 -0700
-X-Gm-Features: AbW1kvazQudqOSqse_LjgGDjXYJL2EPN_9o49-3_PDL4PF0zRkaMF0ubR3DnhKE
-Message-ID: <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
-Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
- EFI netdevices
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- jerome.forissier@linaro.org, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
- trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
+Date: Thu, 23 Jan 2025 07:37:30 -0700
+X-Gm-Features: AbW1kvbRYxUjNp0U2zrNdAkzhh_jbh9x8W9RJXN_Ao9iG7qUdcckbbsUPc1oJys
+Message-ID: <CAFLszThD3VCJC_2X_Z0DYBiEgtR_AfvMx11f-tUAvEuYmDU9eg@mail.gmail.com>
+Subject: Re: [PATCH] mach-snapdragon: fix board_fdt_blob_setup()
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,62 +91,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Adriano,
+Hi Caleb,
 
-On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail.com> wrote:
+On Fri, 17 Jan 2025 at 03:29, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> check that the number of ethernet udevices matches the number of simple
-> network protocols
+> In fc37a73e6679 (fdt: Swap the signature for board_fdt_blob_setup())
+> there was a subtle change to the Snapdragon implementation, removing the
+> assignment to gd->fdt_blob partway through the function.
 >
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> This breaks qcom_parse_memory() which was also called during
+> board_fdt_blob_setup().
+>
+> Since this was a strange (and seemingly unnecessary choice), take the
+> chance to move this to the more typical dram_init() phase so that we
+> don't depend on gd->fdt_blob being correct until after
+> board_fdt_blob_setup() has finished.
+>
+> Fixes: fc37a73e6679 (fdt: Swap the signature for board_fdt_blob_setup())
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
+>  arch/arm/mach-snapdragon/board.c | 67 +++++++++++++++-----------------
+>  1 file changed, 31 insertions(+), 36 deletions(-)
 >
-> diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/test_efi_selftest.py
-> index 310d8ed294..af9992a6f7 100644
-> --- a/test/py/tests/test_efi_selftest.py
-> +++ b/test/py/tests/test_efi_selftest.py
-> @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
->      if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key']):
->          raise Exception('Failures occurred during the EFI selftest')
->      u_boot_console.restart_uboot()
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index f1319df43147..fbb3d6e588e3 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -45,17 +45,8 @@ static struct {
+>         phys_addr_t start;
+>         phys_size_t size;
+>  } prevbl_ddr_banks[CONFIG_NR_DRAM_BANKS] __section(".data") = { 0 };
+>
+> -int dram_init(void)
+> -{
+> -       /*
+> -        * gd->ram_base / ram_size have been setup already
+> -        * in qcom_parse_memory().
+> -        */
+> -       return 0;
+> -}
+> -
+>  static int ddr_bank_cmp(const void *v1, const void *v2)
+>  {
+>         const struct {
+>                 phys_addr_t start;
+> @@ -69,42 +60,22 @@ static int ddr_bank_cmp(const void *v1, const void *v2)
+>
+>         return (res1->start >> 24) - (res2->start >> 24);
+>  }
+>
+> -/* This has to be done post-relocation since gd->bd isn't preserved */
+> -static void qcom_configure_bi_dram(void)
+> -{
+> -       int i;
+> -
+> -       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> -               gd->bd->bi_dram[i].start = prevbl_ddr_banks[i].start;
+> -               gd->bd->bi_dram[i].size = prevbl_ddr_banks[i].size;
+> -       }
+> -}
+> -
+> -int dram_init_banksize(void)
+> -{
+> -       qcom_configure_bi_dram();
+> -
+> -       return 0;
+> -}
+> -
+>  static void qcom_parse_memory(void)
+>  {
+>         ofnode node;
+> -       const fdt64_t *memory;
+> +       const fdt64_t *memory = NULL;
+>         int memsize;
+>         phys_addr_t ram_end = 0;
+>         int i, j, banks;
+>
+>         node = ofnode_path("/memory");
+> -       if (!ofnode_valid(node)) {
+> -               log_err("No memory node found in device tree!\n");
+> -               return;
+> -       }
+> -       memory = ofnode_read_prop(node, "reg", &memsize);
+> -       if (!memory) {
+> -               log_err("No memory configuration was provided by the previous bootloader!\n");
+> +       if (ofnode_valid(node))
+> +               memory = ofnode_read_prop(node, "reg", &memsize);
 > +
-> +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
-> +@pytest.mark.buildconfigspec('cmd_dm')
-> +def test_efi_selftest_count_netdevices(u_boot_console):
-> +    """Test the EFI net device driver
+> +       if (!memory || !ofnode_valid(node)) {
+> +               panic("No memory configuration was provided by the previous bootloader!\n");
+>                 return;
+>         }
+>
+>         banks = min(memsize / (2 * sizeof(u64)), (ulong)CONFIG_NR_DRAM_BANKS);
+> @@ -134,8 +105,32 @@ static void qcom_parse_memory(void)
+>         debug("ram_base = %#011lx, ram_size = %#011llx, ram_end = %#011llx\n",
+>               gd->ram_base, gd->ram_size, ram_end);
+>  }
+>
+> +int dram_init(void)
+> +{
+> +       qcom_parse_memory();
+> +       return 0;
+> +}
 > +
-> +    u_boot_console -- U-Boot console
+> +/* This has to be done post-relocation since gd->bd isn't preserved */
+> +static void qcom_configure_bi_dram(void)
+> +{
+> +       int i;
 > +
-> +    This function counts the number of ETH_UCLASS probed udevices
-> +    calls the EFI net device selftest to check that the EFI driver
-> +    sees the same.
-> +    """
-> +    u_boot_console.restart_uboot()
-
-We should avoid restarting U-Boot in a test unless there is a strong
-need. It makes things a lot slower!
-
-> +    response = u_boot_console.run_command('dm tree')
-> +    lines = response.splitlines()[2:]
-> +    ethernet_count = sum(1 for line in lines if line.strip().startswith('ethernet') and '[ + ]' in line)
-
-This test should be written in C, e.g:
-
-struct udevice *dev;
-int count;
-uclass_foreach_dev(dev, UCLASS_ETH)
-    if (device_active(dev))
-         count++;
-
+> +       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> +               gd->bd->bi_dram[i].start = prevbl_ddr_banks[i].start;
+> +               gd->bd->bi_dram[i].size = prevbl_ddr_banks[i].size;
+> +       }
+> +}
 > +
-> +    u_boot_console.run_command(cmd='setenv efi_selftest netdevices')
-> +    u_boot_console.run_command('bootefi selftest', wait_for_prompt=False)
-> +    if u_boot_console.p.expect([f'Detected {ethernet_count} active EFI net devices']):
-> +        raise Exception('Failures occurred during the EFI selftest')
+> +int dram_init_banksize(void)
+> +{
+> +       qcom_configure_bi_dram();
+> +
+> +       return 0;
+> +}
+> +
+>  static void show_psci_version(void)
+>  {
+>         struct arm_smccc_res res;
+>
+> @@ -173,9 +168,9 @@ int board_fdt_blob_setup(void **fdtp)
+>                 ret = -EEXIST;
+>         } else {
+>                 debug("Using external FDT\n");
+>                 /* So we can use it before returning */
+> -               *fdtp = fdt;
+> +               gd->fdt_blob = *fdtp = fdt;
 
-Again, this should be written in C and use run_command().
+Can you avoid assigning to gd->fdt_blob here? The intent is that this
+is done by the caller.
+
+>         }
+>
+>         /*
+>          * Parse the /memory node while we're here,
+> --
+> 2.48.0
+>
+
+I notice this is rejected in patchwork, but I don't see any discussion
+as to why?
 
 Regards,
 Simon
