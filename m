@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD9BC02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 15:55:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF04CC0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 16:11:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 508CA801B0;
-	Thu, 23 Jan 2025 16:55:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F3A4801B0;
+	Thu, 23 Jan 2025 17:11:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rGYNVGGQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oYhbLc/Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3112D80214; Thu, 23 Jan 2025 16:55:02 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 7F9F180214; Thu, 23 Jan 2025 17:11:46 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD26380137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 16:54:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 314CA80137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 17:11:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e3983426f80so1710954276.1
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 07:54:59 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3ce8a6bc715so6925585ab.2
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 08:11:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737647698; x=1738252498; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DFOBMk3zz32iIKWiSVmIg7GiKDD47DN9vQfeYSyVRsQ=;
- b=rGYNVGGQE5CXGZmox8OlV4hr+oQqVAh2xH/XTPZLKMJQQq8w+iMrl454fUXdBv7tj3
- Es2CS26HzxQAU5C11A/dcwhz5myKVUHCcEfTPDEE22/3KchIA9AZDAjJ6aFqFdPNFMCo
- VA283c09iCg4MA42djC31lJxQKBRrdDEM2SqkE2re/yoPPohAvZipqmuOvaGiCdjeqr3
- Dqes4p+Zd/jzsvWRa47HbuMiujDzPNVHzrLo+vMVGSDEbVdQOEyfoeV15UmhFig1AchP
- 4nWR8dwxzHRmPGp4iBgE0Ref/ne2NzcEd0ZZT0FpXxuhe01sDZsUm9JgLcqDpOPOrdDX
- vJLQ==
+ d=chromium.org; s=google; t=1737648702; x=1738253502; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XDEep4kXdRTRYba+AD87z9iF6vPS54f8r97fJBFUZYA=;
+ b=oYhbLc/QWZIlfTHMQqGlcakRUokf9++pmpIPIeEmXM0d9uV16Qt2ZqUlcc2r0di+bq
+ YFMfDB47Izm789tejLhbPckuhC4WdeOWG0EG7htoDgzhaPH4pbhEMkQpobBUXThzLijE
+ CDx3XHzhh+wIfJzCQgp21KEFlQBFuxnXLZJak=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737647698; x=1738252498;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1737648702; x=1738253502;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DFOBMk3zz32iIKWiSVmIg7GiKDD47DN9vQfeYSyVRsQ=;
- b=JUii2F3mEa1Y17bHjfJlZRss3M4e3JfFgpQ6+mtA86GUE7rkVQDU8EHrZZ8UR/FB55
- Uszo5T19b2iG5ZeAwJ3zwpyzBLtfkNm1+DyBPWKzfz5i8x+IcwTvcLOag6//xIARnXCs
- UwP7YawhkcdTfR5gkezyyveJEvy0RB0WIhtTOwC2RgnnOTnG3wSov4Ei0ZK69dhhe8t0
- lLN+Qq37Y27rToxkwKB/qjY5ogDQENcLxcS4eIiaDyiD3eCWH5khdZRs334g5alYihFh
- Pjh6yvb9kEMgrw7GfFLvBle3m3AAgwgt2oiZaXJ2MjWMHIiwBydwRqM3UdMyUSI6FKz/
- CnTw==
-X-Gm-Message-State: AOJu0Yx8fk2TOaPhH6i1eiBXB8fnuUe/RnE4OeUSb5H8Rbe+kCfHMBOA
- OwjkjclbBD926DA9UKLAnYG0TPo2bV4DrZAcb2b69PcwuhhHVtYxYiyfInfiQWBmQFh4yKaFD2G
- zT6ByTK8fgtXTZoKyi4UzCjlpLNhFXht6nQWv5A==
-X-Gm-Gg: ASbGnct8BmgUxtd8p7jzh4yOLX/dmPWCZaP/auOPCYHoTeinFH4E9JdNf3t7Mo7aUnn
- c2hoG/aTZobhFjczBXOsWdodi7KT/ubVfVL2Z/1kmDRqxEHSsthEfOfs/eFGpropbljiwkPoF
-X-Google-Smtp-Source: AGHT+IGocvwbTc/ZN3seFhsOj3/ijS5titsyR3Upw+ff3fz/O+vh7IyeJtlpgj/h8UcLzRYD64PxvO/bsCBfScK9CNo=
-X-Received: by 2002:a25:69cf:0:b0:e58:5cf:bc52 with SMTP id
- 3f1490d57ef6-e5805cfbe89mr6168944276.9.1737647698608; Thu, 23 Jan 2025
- 07:54:58 -0800 (PST)
+ bh=XDEep4kXdRTRYba+AD87z9iF6vPS54f8r97fJBFUZYA=;
+ b=QPreT+gOdxR+LPJX7oEensrtFNv2uhQWMz+APXHlinewDPojKl1jWe5sWYjuOi3vzH
+ uHJKy6dbDEdiFj57ZII3GR8bPny7dpEiNnrpjBFV1K7JzQNFdIm4vLRV/syyo90tMHVQ
+ UdoCmAmCKQ4Ou6R/VDUQRVYeBZAOsAZYBSpSmEModIbEeRH6o4qcQo6x71iDBxa8vzhF
+ slzfAXwHiXyY6uuPNdUCh1ryAFVFC3wZYfUltuYtBbq2Lg8dxrhjlYTgQGNtd96GUN1a
+ +Pm4nDbRCQOCZ6DmIQFUJoQPT1RQtI+4F3OesQPDkdp/p4vdybei7Jsb01CepoQElg15
+ 0xPw==
+X-Gm-Message-State: AOJu0YzzxU4HiuZlV5KWoODU/Y1ZWKM5SUsOaVnStgwmnxXmUwe2ac6I
+ MO1+rG7i4iH14q8EfdB+a3hdCgqAwZ/LBmXJTVDoUJdQ9soOBbOCNEyCcUP4vobdADtGqXdJAtY
+ =
+X-Gm-Gg: ASbGncuvJbkm+rMiPjKkND0QGWapXyXEVWKJzN4WKgepvl3K2cQlBkF9PTQ6AiXg7+t
+ VMQNWafPkzSTxFusiO6BcmHn/J5Do2ChzEjHJPioWjzIHYCTWKoqOv+F3rLq8WsKc8L6ml6VsEH
+ uOFYHf8NuSYnSrhHsit6pjAq4ljUd0VB05M7wO/9wM4g0fEH0GVii0vvN8hRHILPhV2NMoJJ4XK
+ AweU+XBCEAGXAF4mdQCy3RL0s8SWUULwFxo0Sc/q3VWlTiVbAwGmOPWnLaMsX4L4R02FqCM9qag
+ GB4BLuZ8acDG+wZUCHcwO/RzjmiiOvF2wMHVPHsokg==
+X-Google-Smtp-Source: AGHT+IEbKoantFxvDzHe/vjf9sRiT1Nxhpdanhmljf7YQObnTMPDxZ0TG8CRMIwtb9Oa/ikBmkZzWA==
+X-Received: by 2002:a05:6e02:1989:b0:3cf:b3cf:5334 with SMTP id
+ e9e14a558f8ab-3cfb3cf53f0mr65645645ab.9.1737648702264; 
+ Thu, 23 Jan 2025 08:11:42 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3cfc744bc44sm179985ab.40.2025.01.23.08.11.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Jan 2025 08:11:40 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH v4 45/46] pxe_utils: Refactor to separate reading from booting
+Date: Thu, 23 Jan 2025 09:11:06 -0700
+Message-ID: <20250123161114.84071-46-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250117163545.88627-1-raymond.mao@linaro.org>
- <20250117163545.88627-3-raymond.mao@linaro.org>
- <CAC_iWjJ0JO8sB4Q5Gc_5LBByaVmiz6D0sgWjFggqCd9xEX2RLg@mail.gmail.com>
- <CAEfUkUKOqF=yOjqxKszQwY3q_3JOq4jPpRWw0oy19gTheMbL9A@mail.gmail.com>
-In-Reply-To: <CAEfUkUKOqF=yOjqxKszQwY3q_3JOq4jPpRWw0oy19gTheMbL9A@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 23 Jan 2025 17:54:22 +0200
-X-Gm-Features: AbW1kvZmZ522M07-ZcZ_XYzDK1J9rBe4Jfy9fvg9IKZ2WpmpH853RZmvieLpKeA
-Message-ID: <CAC_iWjKKjUgjf5kFmbS6dh717r0F5BNw+h05etgZR7hqdikZwQ@mail.gmail.com>
-Subject: Re: [PATCH v6 3/3] tpm: get tpm event log from bloblist
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Levi Yun <yeoreum.yun@arm.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Eddie James <eajames@linux.ibm.com>, Tim Harvey <tharvey@gateworks.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,162 +93,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 23 Jan 2025 at 17:51, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Ilias,
->
-> On Thu, 23 Jan 2025 at 02:00, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
->>
->> Hi Raymond
->>
->> On Fri, 17 Jan 2025 at 18:36, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >
->> > Get tpm event log from bloblist instead of FDT when bloblist is
->> > enabled and valid from previous boot stage.
->> >
->> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> > ---
->> > Changes in v2
->> > - Remove patch dependency.
->> > - Remove the fallback to FDT when BLOBLIST is selected.
->> > Changes in v3
->> > - Malloc an 8KB buffer when user eventlog buffer does not exist.
->> > Changes in v4
->> > - Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
->> > Changes in v5
->> > - Replace TPM2_EVENT_LOG_SIZE with CONFIG_TPM2_EVENT_LOG_SIZE.
->> > - Add an inline TODO comment.
->> > Changes in v6
->> > - Remove the malloc and keep the buffer pointed by "sml" for the fallback
->> >   as it is the right place for linux to discover the eventlog.
->> >
->> >  lib/tpm_tcg2.c | 58 +++++++++++++++++++++++++++++++++-----------------
->> >  1 file changed, 38 insertions(+), 20 deletions(-)
->> >
->> > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
->> > index 4134d93a35..6425bf143a 100644
->> > --- a/lib/tpm_tcg2.c
->> > +++ b/lib/tpm_tcg2.c
->> > @@ -5,6 +5,7 @@
->> >
->> >  #include <dm.h>
->> >  #include <dm/of_access.h>
->> > +#include <malloc.h>
->>
->> This is probably a leftover from your V2
->>
->
-> Yes, I will remove it.
->
->>
->> >  #include <tpm_api.h>
->> >  #include <tpm-common.h>
->> >  #include <tpm-v2.h>
->> > @@ -19,6 +20,7 @@
->> >  #include <linux/unaligned/generic.h>
->> >  #include <linux/unaligned/le_byteshift.h>
->> >  #include "tpm-utils.h"
->> > +#include <bloblist.h>
->> >
->> >  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
->> >                       u32 *bank_num)
->> > @@ -672,21 +674,40 @@ void tcg2_measurement_term(struct udevice *dev, struct tcg2_event_log *elog,
->> >
->> >  __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
->> >  {
->> > -       const __be32 *addr_prop;
->> > -       const __be32 *size_prop;
->> > +       const __be32 *addr_prop = NULL;
->> > +       const __be32 *size_prop = NULL;
->> >         int asize;
->> >         int ssize;
->> > +       struct ofnode_phandle_args args;
->> > +       phys_addr_t a;
->> > +       fdt_size_t s;
->> >
->> >         *addr = NULL;
->> >         *size = 0;
->> >
->> > -       addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
->> > -       if (!addr_prop)
->> > -               addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
->> > +       *addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
->> > +       if (*addr && *size)
->>
->> Don't we need map_physmem here as well?
->>
->
-> I don't think so. Unlike the ones from dt, bloblist_get_blob() returns a virtual address.
+It is useful to be able to select a bootflow and read its images,
+without actually doing the boot. This allows adjusting the bootargs, for
+example.
 
-It can if it runs on sandbox.
+Provide support for this in the pxe_utils module, by adding a 'probe'
+method which selects a label and saves its settings, so it can be booted
+later, if desired.
 
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
->
-> Regards,
-> Raymond
->
->>
->> Thanks
->> /Ilias
->> > +               return 0;
->> >
->> > -       size_prop = dev_read_prop(dev, "tpm_event_log_size", &ssize);
->> > -       if (!size_prop)
->> > +       /*
->> > +        * TODO:
->> > +        * Replace BLOBLIST with a new kconfig for handoff all components
->> > +        * (fdt, tpm event log, etc...) from previous boot stage via bloblist
->> > +        * mandatorily following Firmware Handoff spec.
->> > +        */
->> > +       if (!CONFIG_IS_ENABLED(BLOBLIST)) {
->> > +               addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
->> > +               size_prop = dev_read_prop(dev, "tpm_event_log_size", &ssize);
->> > +       }
->> > +
->> > +       /*
->> > +        * If no eventlog was observed, a sml buffer is required for the kernel
->> > +        * to discover the eventlog.
->> > +        */
->> > +       if (!addr_prop || !size_prop) {
->> > +               addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
->> >                 size_prop = dev_read_prop(dev, "linux,sml-size", &ssize);
->> > +       }
->> >
->> >         if (addr_prop && size_prop) {
->> >                 u64 a = of_read_number(addr_prop, asize / sizeof(__be32));
->> > @@ -694,22 +715,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
->> >
->> >                 *addr = map_physmem(a, s, MAP_NOCACHE);
->> >                 *size = (u32)s;
->> > -       } else {
->> > -               struct ofnode_phandle_args args;
->> > -               phys_addr_t a;
->> > -               fdt_size_t s;
->> >
->> > -               if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
->> > -                                              0, &args))
->> > -                       return -ENODEV;
->> > +               return 0;
->> > +       }
->> > +
->> > +       if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
->> > +               return -ENODEV;
->> >
->> > -               a = ofnode_get_addr_size(args.node, "reg", &s);
->> > -               if (a == FDT_ADDR_T_NONE)
->> > -                       return -ENOMEM;
->> > +       a = ofnode_get_addr_size(args.node, "reg", &s);
->> > +       if (a == FDT_ADDR_T_NONE)
->> > +               return -ENOMEM;
->> >
->> > -               *addr = map_physmem(a, s, MAP_NOCACHE);
->> > -               *size = (u32)s;
->> > -       }
->> > +       *addr = map_physmem(a, s, MAP_NOCACHE);
->> > +       *size = (u32)s;
->> >
->> >         return 0;
->> >  }
->> > --
->> > 2.25.1
->> >
+Changes in v4:
+- Fix the force-prompt logic to leave the flag alone unless forced
+
+ boot/pxe_utils.c    | 71 ++++++++++++++++++++++++++++++++++++++++++---
+ include/pxe_utils.h | 41 ++++++++++++++++++++++++++
+ 2 files changed, 108 insertions(+), 4 deletions(-)
+
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index 71347b19119..16608c6ebc8 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -802,8 +802,31 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 	if (ctx->bflow)
+ 		ctx->bflow->fdt_addr = hextoul(conf_fdt, NULL);
+ 
+-	if (ctx->no_boot)
++	if (IS_ENABLED(CONFIG_BOOTSTD_FULL) && ctx->no_boot) {
++		ctx->label = label;
++		ctx->kernel_addr = strdup(kernel_addr);
++		if (initrd_addr_str) {
++			ctx->initrd_addr_str = strdup(initrd_addr_str);
++			ctx->initrd_filesize = strdup(initrd_filesize);
++			ctx->initrd_str = strdup(initrd_str);
++		}
++		ctx->conf_fdt = strdup(conf_fdt);
++		log_debug("Saving label '%s':\n", label->name);
++		log_debug("- kernel_addr '%s' conf_fdt '%s'\n",
++			  ctx->kernel_addr, ctx->conf_fdt);
++		if (initrd_addr_str) {
++			log_debug("- initrd addr '%s' filesize '%s' str '%s'\n",
++				  ctx->initrd_addr_str, ctx->initrd_filesize,
++				  ctx->initrd_str);
++		}
++		if (!ctx->kernel_addr || !ctx->conf_fdt ||
++		    (initrd_addr_str && (!ctx->initrd_addr_str ||
++		     !ctx->initrd_filesize || !ctx->initrd_str))) {
++			printf("malloc fail (saving label)\n");
++			return 1;
++		}
+ 		return 0;
++	}
+ 
+ 	label_run_boot(ctx, label, kernel_addr, initrd_addr_str,
+ 		       initrd_filesize, initrd_str, conf_fdt);
+@@ -1695,18 +1718,30 @@ void pxe_destroy_ctx(struct pxe_context *ctx)
+ 	free(ctx->bootdir);
+ }
+ 
+-int pxe_process(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt)
++struct pxe_menu *pxe_prepare(struct pxe_context *ctx, ulong pxefile_addr_r,
++			     bool prompt)
+ {
+ 	struct pxe_menu *cfg;
+ 
+ 	cfg = parse_pxefile(ctx, pxefile_addr_r);
+ 	if (!cfg) {
+ 		printf("Error parsing config file\n");
+-		return 1;
++		return NULL;
+ 	}
+ 
+ 	if (prompt)
+-		cfg->prompt = 1;
++		cfg->prompt = prompt;
++
++	return cfg;
++}
++
++int pxe_process(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt)
++{
++	struct pxe_menu *cfg;
++
++	cfg = pxe_prepare(ctx, pxefile_addr_r, prompt);
++	if (!cfg)
++		return 1;
+ 
+ 	handle_pxe_menu(ctx, cfg);
+ 
+@@ -1714,3 +1749,31 @@ int pxe_process(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt)
+ 
+ 	return 0;
+ }
++
++int pxe_probe(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt)
++{
++	ctx->cfg = pxe_prepare(ctx, pxefile_addr_r, prompt);
++	if (!ctx->cfg)
++		return -EINVAL;
++	ctx->no_boot = true;
++
++	handle_pxe_menu(ctx, ctx->cfg);
++
++	return 0;
++}
++
++int pxe_do_boot(struct pxe_context *ctx)
++{
++	int ret;
++
++	if (!ctx->label)
++		return log_msg_ret("pxb", -ENOENT);
++
++	ret = label_run_boot(ctx, ctx->label, ctx->kernel_addr,
++			     ctx->initrd_addr_str, ctx->initrd_filesize,
++			     ctx->initrd_str, ctx->conf_fdt);
++	if (ret)
++		return log_msg_ret("lrb", ret);
++
++	return 0;
++}
+diff --git a/include/pxe_utils.h b/include/pxe_utils.h
+index beadd221475..6425e349d19 100644
+--- a/include/pxe_utils.h
++++ b/include/pxe_utils.h
+@@ -111,6 +111,16 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
+  *	"default" option as default
+  * @no_boot: Stop show of actually booting and just return
+  * @bflow: Bootflow being booted, or NULL if none (must be valid if @no_boot)
++ * @cfg: PXE menu (NULL if not yet probed)
++ *
++ * The following are only used when probing for a label
++ * @label: Label to process
++ * @kernel_addr: String containing kernel address (cannot be NULL)
++ * @initrd_addr_str: String containing initaddr address (NULL if none)
++ * @initrd_filesize: String containing initrd size (only used if
++ *	@initrd_addr_str)
++ * @initrd_str: initrd string to process (only used if @initrd_addr_str)
++ * @conf_fdt: string containing the FDT address
+  */
+ struct pxe_context {
+ 	/**
+@@ -133,6 +143,15 @@ struct pxe_context {
+ 	bool use_fallback;
+ 	bool no_boot;
+ 	struct bootflow *bflow;
++	struct pxe_menu *cfg;
++
++	/* information on the selected label to boot */
++	struct pxe_label *label;
++	char *kernel_addr;
++	char *initrd_addr_str;
++	char *initrd_filesize;
++	char *initrd_str;
++	char *conf_fdt;
+ };
+ 
+ /**
+@@ -283,4 +302,26 @@ int pxe_get_file_size(ulong *sizep);
+  */
+ int pxe_get(ulong pxefile_addr_r, char **bootdirp, ulong *sizep, bool use_ipv6);
+ 
++/**
++ * pxe_probe() - Process a PXE file to find the label to boot
++ *
++ * This fills in the label, etc. fields in @ctx, assuming it funds something to
++ * boot. Then pxe_do_boot() can be called to boot it.
++ *
++ * @ctx: PXE context created with pxe_setup_ctx()
++ * @pxefile_addr_r: Address to load file
++ * @prompt: Force a prompt for the user
++ * Return: 0 if OK, -ve on error
++ */
++int pxe_probe(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt);
++
++/**
++ * pxe_do_boot() - Boot the selected label
++ *
++ * This boots the label discovered by pxe_probe()
++ *
++ * Return: Does not return, on success, otherwise returns a -ve error code
++ */
++int pxe_do_boot(struct pxe_context *ctx);
++
+ #endif /* __PXE_UTILS_H */
+-- 
+2.43.0
+
