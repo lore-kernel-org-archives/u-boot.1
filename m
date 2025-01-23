@@ -4,71 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D14C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 19:04:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2A1C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 21:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46CC980214;
-	Thu, 23 Jan 2025 20:04:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A4A580214;
+	Thu, 23 Jan 2025 22:49:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aM3L4VLm";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="K3HefVF1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92AF080243; Thu, 23 Jan 2025 20:04:18 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1625F80243; Thu, 23 Jan 2025 22:49:12 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D35EB80137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 20:04:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B11780087
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 22:49:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=flobro30101@gmail.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3eb8accbde3so1274944b6e.0
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 11:04:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737659054; x=1738263854; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=gQ0cVokRhmiQtwCBJgjN3L7bymM5f07yokZLFrIOMuQ=;
- b=aM3L4VLmrXyTa7ew1n2KmFtU1HNLLNAlTNteeSWrzLr6DmjfL0TdSV+KgUAs5Jjoy8
- JhSvqz4yCnKDSYIRapt9U07+kkEWM4xP/NmpGUcM/lfVUobIGxY9eorOUxd8rdYy+Ma8
- XaUhNAY+8c3qHxtWzVdyWLcAcSoOU/P0Rabisx26N3d7XLXxHqSOT4mDgftJDCMyrUzA
- AX7fspWnwtW8GHutKPPejj/6pF6Ow9ELN/0h1tCIWUxA0lxFNjbqt7eMW9OVanEhBrdx
- AOk20opjLU/x3kZPvJo/hFoh79kX9eI8eVgLzmdMakyNMVcbcnDSBW+K9sVKHYmuyeY8
- zNSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737659054; x=1738263854;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=gQ0cVokRhmiQtwCBJgjN3L7bymM5f07yokZLFrIOMuQ=;
- b=D88myAJ5gGeOMROZlKZ7T9a7RuUlk89bWZXoKuhyqVleMpe5cStNTg2pb0VsniZ7sU
- i9yFQYrpwjGZKdM6EjJspQX4fhxnHUdUNEd+K7LoJJPCZocIUiHRSDx5Gzcm80oQPTLo
- h9A6lS54Egb2qcjwD9j0Jw/5K8rXPhHD5dORwe/u9IjbL7As3Itt7MYTXp4XHfdqJQDI
- ynKqHi7Tw8ReZew/judi/Pv9WGcxFfmduj2471I0jMi5PJS5B9je7hXiKP+19knzmZaj
- W8Q8TUD3PAVSVhndDSIh9sf2zIxBeX3y5vss8AbW5cX4LRN8gpIFhJY86wLd0tRhQwLd
- Dk2g==
-X-Gm-Message-State: AOJu0YxACiUA3NKMQNzUgiquklZZkXyqidFV9c/9nB8l7Muapx/J+uRi
- czJ0SEKz/k+HASWNA6X5e78nxzcV8JRFgG6v30pMD3fyuzm43ylKT1MKjyMziWO5+vWsVZ/4U1S
- k1Uqhb6DhM/rfHNaHBtYloKfD4yTMZQ==
-X-Gm-Gg: ASbGncvt4QRKuKVF0vmawGLK93w5nP6pJFQ+qjLJ9Fsw+c9Sue/1L7dIgxw14YvHpVM
- 3eyyemQFOsbTrTeEE2DClLCXF20EUnEICSU9XOaOJMIl1QJ9Vb/w+QgujXJZ9mq3IGs21PEeJHZ
- E5qrlEkcVshKcU299P
-X-Google-Smtp-Source: AGHT+IHMlHTgf/MvvzbM5FTZhLoYEsYgVt4QwD+ZncyXvBiacFWhWe3/AIaklsR5k1giemo6FyV46n/WhIP6QssEXQA=
-X-Received: by 2002:a05:6808:1b87:b0:3e7:bd4e:5b98 with SMTP id
- 5614622812f47-3f1e4a77e4cmr2900444b6e.0.1737659054172; Thu, 23 Jan 2025
- 11:04:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=331d=UQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1737668947;
+ bh=UimDi1/PhjVqv300D8Ywt7sYHVuJncNdnZaZIWTb658=;
+ b=K3HefVF14l7BtpFvGNMBN/FKmDO1aD4S4cH/fmeHaRB+zhxUqqPpXY5FiykEGHNcY32l5C+iK
+ yRF6iTMx7k76V32toQspSD0FW3HAud74nQ3G3tAJ0hbeaFphZc6ZbgdSGwr0gTfoyGmdsZkiwtB
+ PRhrrfdsRXWfIiuPNvibJRkrK8KJbKIzkNpDR9qI3o1SSIaM3RJwNKQ5VPKiA65XgFnwmLSsdsk
+ AWyYNl+zQkrrk4vi7IGZbHllS/m22UQ7jsjCgjplykLpdxdm60A8jTFV9TpNB5sZbxD7r8C/zzh
+ yFU18NVWk8qZlA5TDKAp74y6SevFYNgyre/hapTAcjsw==
+X-Forward-Email-ID: 6792b94a558c5134dca368fd
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
+ Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+Subject: [PATCH] mmc: sdhci: Fix possible Synchronous Abort using PIO mode
+Date: Thu, 23 Jan 2025 21:48:48 +0000
+Message-ID: <20250123214850.3085559-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-From: Floyd Brown <flobro30101@gmail.com>
-Date: Thu, 23 Jan 2025 14:04:03 -0500
-X-Gm-Features: AWEUYZkdSTAQ8VwVXCBleShZSqLKy6Uf5NrrPy0B-3VluZB5Bo8VO5AdrqKshtU
-Message-ID: <CAKiD1a9bH=0N3KZP6Hzbvznhueqb-Oob_zvtGky+g-EEix2+gg@mail.gmail.com>
-Subject: mkenvimage CRC does not match the CRC of fw_setenv
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,13 +69,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When I run the same file against both utilities, they do not produce
-the same CRC.
+When MMC_SDHCI_SDMA=y or MMC_SDHCI_ADMA=y and PIO mode is used
+dma_unmap_single() is called on an unmapped address, 0x0. This may
+result in a Synchronous Abort:
 
-The CRC of fw_setenv matches what uboot has when the environment is
-created inside the image.
+  ## Checking hash(es) for Image atf-1 ... sha256+ OK
+  CMD_SEND:16
+                  ARG                      0x00000200
+                  MMC_RSP_R1,5,6,7         0x00000900
+  CMD_SEND:18
+                  ARG                      0x00004005
+  "Synchronous Abort" handler, esr 0x96000147
+  elr: 00000000400015bc lr : 0000000040012b4c
+  x 0: 0000000000008000 x 1: 0000000000092600
+  x 2: 0000000000000040 x 3: 000000000000003f
+  x 4: 0000000000000030 x 5: 0000000000000001
+  x 6: 0000000000000001 x 7: 0000000000000000
+  x 8: 000000000000000a x 9: 0000000000000090
+  x10: 0000000043dffc68 x11: 0000000043c00440
+  x12: 0000000043c00440 x13: ffffffffbfe00000
+  x14: 000000000000031c x15: 0000000240000000
+  x16: 000000004001145c x17: 0000000000000032
+  x18: 0000000043dffef0 x19: 0000000043c00000
+  x20: 0000000043dffbc8 x21: 0000000000000000
+  x22: 00000000000f3d95 x23: 0000000000000002
+  x24: 0000000000000493 x25: 0000000000092600
+  x26: 0000000000000001 x27: 0000000000000001
+  x28: 0000000000000008 x29: 0000000043dffab0
 
-Is this a known issue? If so, I am sorry to bring it up (but maybe
-remove mkenvimage...)
+  Code: d2800082 9ac32042 d1000443 8a230000 (d5087620)
+  Resetting CPU ...
 
-Thanks
+  resetting ...
+
+Fix this by only dma_unmap_single() when DMA mode is used and
+sdhci_prepare_dma() has been called to map host->start_addr.
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ drivers/mmc/sdhci.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+index 4833b5158c79..dc7f0724a7b6 100644
+--- a/drivers/mmc/sdhci.c
++++ b/drivers/mmc/sdhci.c
+@@ -177,8 +177,10 @@ static int sdhci_transfer_data(struct sdhci_host *host, struct mmc_data *data)
+ 	} while (!(stat & SDHCI_INT_DATA_END));
+ 
+ #if (CONFIG_IS_ENABLED(MMC_SDHCI_SDMA) || CONFIG_IS_ENABLED(MMC_SDHCI_ADMA))
+-	dma_unmap_single(host->start_addr, data->blocks * data->blocksize,
+-			 mmc_get_dma_dir(data));
++	if (host->flags & USE_DMA) {
++		dma_unmap_single(host->start_addr, data->blocks * data->blocksize,
++				 mmc_get_dma_dir(data));
++	}
+ #endif
+ 
+ 	return 0;
+-- 
+2.48.1
+
