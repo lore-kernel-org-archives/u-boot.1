@@ -4,57 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689F5C0218B
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:50:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2109C0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 23:14:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A850780821;
-	Thu, 23 Jan 2025 23:49:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 29D2580780;
+	Fri, 24 Jan 2025 00:14:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="h2EP3K0Q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mOtIPRRP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33CDD80934; Thu, 23 Jan 2025 23:49:40 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E58DE8076E; Fri, 24 Jan 2025 00:14:06 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C364807E5
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:49:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5AAD803B5
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 00:14:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=331d=UQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1737672575; bh=PBYAOd3KLfOVHgLj8LVJo1RyGcV6/q0bfnPfWdJ3wCM=;
- b=h2EP3K0QDKj41Rjz+3RT51CNgDAwcOeltXBA0Etc0+EjpwKBvSPInU1vBm9keCm/IVVEYF703
- idTszrPZVLaOvM/xf96J5HfG9GenkeKfuQDwOFvVkImYH4ku5dq1lEZ6aHWAp8N9gkAsuF47iME
- VVYIT+qXdcdRCW0CMh55NV33/Xk7EzrbmuQCQwqU7ExEevqNemouj6YRiXvyiIPRSNXuloOhnIS
- sZV0Aqfqn80C49jRR7gg4/RE5FCTcIuQUHVxts0vXH3dgfmxBYquLz68I8xXeenCWSFLkaYiMe2
- 1qfrJqRx5X2a0x33wsgY5qjU15p+LzoR3FMfeDts7Afw==
-X-Forward-Email-ID: 6792c77df07771e5c89e01de
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH 13/13] board: rockchip: Add Radxa E20C
-Date: Thu, 23 Jan 2025 22:48:25 +0000
-Message-ID: <20250123224844.3104592-14-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250123224844.3104592-1-jonas@kwiboo.se>
-References: <20250123224844.3104592-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-46e28597955so14142971cf.0
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:14:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737674043; x=1738278843; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nVTJ92/L2ETtgRoalxa67ZHtZkPrfv2/HOM3XSD04P4=;
+ b=mOtIPRRPo55bByof3UyXl6VNKDKqvJPAC/ht3eS7qh8plnb6uLphVfr4tb/SF0iQZs
+ lmkM5mtmvjc9ZJ+EqiYkSUnwbDVoRr8UNnZdCfo/wpJ8170U9eVGmwmXtGu9NlzxorJW
+ J9RYHRnAJoYLuvgmxkseN9fMNVC+poxLC2K1E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737674043; x=1738278843;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nVTJ92/L2ETtgRoalxa67ZHtZkPrfv2/HOM3XSD04P4=;
+ b=mYDiIofqDiMock2BGAplEigdDDmtTpFlWbhLHQUliyYBzX5hSmkXFZNpce+lcTSWrL
+ hrq+gTfo6AXm1JC5XDVY9WoivaoViPl3v+q6nM3Z4X72/1uMAGnNSZNeAUqD6T9LebtT
+ l2k7izb+JUL6nORcX/l3+LoITYGgh2lfwlhG5h5C41hlnwuH20VV+Wv8UslpeMFJ2yWS
+ Da4MWGF1aRPTCYXBrV8CCO0dj/kPNyk5poofhx/3vH28ir3IGgNAxmC+salSwZhaceQS
+ 4zw/ustwxVhiIsFmXAO4PcWqfupoacNCC/cgmO1YJvUvGS7nMGwJqPdrlEpX9q0SRjGo
+ PZ5Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZgjCre1ecTwfwGjIibdjlgzgQwoyZuKJk6qVHDMJDf7qy3Vcqnj7tdLbFwrgTUEJCzr20Z/s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9emDUzzElY+V8sRkgS/3Mn1yoEFrthVtadsgRlh4cwrXG4nnf
+ eGCWThyUhxkiCQ5qwJMrnCsfmS6Lt/Z/W37y7GiO+dY/sL/A+AwRGJmtJnTCTAo=
+X-Gm-Gg: ASbGncsTgzoB3zuer8zh2cpCKLvGwKytfWFuMguFfIBidsT4LXMhgh9zncApy5AKKbN
+ 2If48WP5qUSjzfX8xZgOuX/aPfog/Lcr+SGtvWmcQY7ApBiRUpzmeg05FuG9iYGegOGJw6F0tp6
+ AP6OcaX5gmqmwwRliKDEffQ74sc3Cky5bifIG2vyOlHLN5AKN86Ceg8me/wg/7jX81TDVPeXnVK
+ 0uEceS2Fjl9uqWzeACrgiSu7vP+Z4e5JilMFHfKMvWitZFyLr3gGjcXdiIg6xj9f47QBg+bWEzP
+ JnU=
+X-Google-Smtp-Source: AGHT+IGbFq+BCixh/CgGMt+3GazPSMwhKc0B57MJibbtNX4K9H5MxPwUABTAThqUKqad/Z1Y46gg9g==
+X-Received: by 2002:a05:622a:1446:b0:46d:d2b7:4bb5 with SMTP id
+ d75a77b69052e-46e12a96f34mr438184881cf.28.1737674043594; 
+ Thu, 23 Jan 2025 15:14:03 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46e66b89811sm3753441cf.77.2025.01.23.15.14.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Jan 2025 15:14:03 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Simon Glass <sjg@chromium.org>, 
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de, 
+ linux-sunxi@lists.linux.dev
+In-Reply-To: <20250123013620.23914-1-andre.przywara@arm.com>
+References: <20250123013620.23914-1-andre.przywara@arm.com>
+Subject: Re: Pull request: u-boot-sunxi/master for 2025.04
+Message-Id: <173767404231.3025404.12787101956021701262.b4-ty@konsulko.com>
+Date: Thu, 23 Jan 2025 17:14:02 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,127 +98,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Radxa E20C is an ultra-compact network computer with a RK3528A SoC
-that offers a wide range of networking capabilities.
+On Thu, 23 Jan 2025 01:36:20 +0000, Andre Przywara wrote:
 
-Features tested on a Radxa E20C v1.104:
-- SD-card boot
-- eMMC boot
+> please pull sunxi changes for this cycle:
+> 
+> Following the move of the H616 family to OF_UPSTREAM in the last cycle,
+> now some older SoCs with identical DTs follow the lead: the F1C100s, A10,
+> A10s, A13. The remaining SoCs suffer from that IRQ cells incompatiblity,
+> breaking support for Linux < v5.13, so I am holding their move back still.
+> 
+> Otherwise we get proper support for the PinePhone v1.2, and PSTORE support
+> for all revisions of that device.
+> 
+> [...]
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi | 31 +++++++++++++++++++
- arch/arm/mach-rockchip/rk3528/MAINTAINERS  |  6 ++++
- configs/radxa-e20c-rk3528_defconfig        | 35 ++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst            |  1 +
- 4 files changed, 73 insertions(+)
- create mode 100644 arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
- create mode 100644 configs/radxa-e20c-rk3528_defconfig
+Merged into u-boot/master, thanks!
 
-diff --git a/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi b/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
-new file mode 100644
-index 000000000000..b6578830ca38
---- /dev/null
-+++ b/arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
-@@ -0,0 +1,31 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3528-u-boot.dtsi"
-+
-+&sdhci {
-+	bus-width = <8>;
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+	no-sd;
-+	no-sdio;
-+	non-removable;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&emmc_bus8>, <&emmc_clk>, <&emmc_cmd>, <&emmc_strb>;
-+	status = "okay";
-+};
-+
-+&sdmmc {
-+	bus-width = <4>;
-+	cap-sd-highspeed;
-+	disable-wp;
-+	no-mmc;
-+	no-sdio;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&sdmmc_bus4>, <&sdmmc_clk>, <&sdmmc_cmd>, <&sdmmc_det>;
-+	status = "okay";
-+};
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0m0_xfer>;
-+};
-diff --git a/arch/arm/mach-rockchip/rk3528/MAINTAINERS b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-index cfdc92d770c1..f343f71cf7f6 100644
---- a/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-+++ b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-@@ -3,3 +3,9 @@ M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	arch/arm/dts/rk3528-generic*
- F:	configs/generic-rk3528_defconfig
-+
-+RADXA-E20C
-+M:	Jonas Karlman <jonas@kwiboo.se>
-+S:	Maintained
-+F:	arch/arm/dts/rk3528-radxa-e20c*
-+F:	configs/radxa-e20c-rk3528_defconfig
-diff --git a/configs/radxa-e20c-rk3528_defconfig b/configs/radxa-e20c-rk3528_defconfig
-new file mode 100644
-index 000000000000..9183c2f2e472
---- /dev/null
-+++ b/configs/radxa-e20c-rk3528_defconfig
-@@ -0,0 +1,35 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-radxa-e20c"
-+CONFIG_ROCKCHIP_RK3528=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0xFF9F0000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3528-radxa-e20c.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MISC=y
-+CONFIG_CMD_MMC=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_RNG=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index dcbb335bca28..b992e6c8b6ce 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -99,6 +99,7 @@ List of mainline supported Rockchip boards:
- 
- * rk3528
-      - Generic RK3528 (generic-rk3528)
-+     - Radxa E20C (radxa-e20c-rk3528)
- 
- * rk3566
-      - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
 -- 
-2.48.1
+Tom
+
 
