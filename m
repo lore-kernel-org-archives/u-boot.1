@@ -4,122 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 507D6C0218B
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 18:42:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D14C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 19:04:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADD7C80243;
-	Thu, 23 Jan 2025 19:42:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 46CC980214;
+	Thu, 23 Jan 2025 20:04:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jYjJ2kYr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aM3L4VLm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5158680214; Thu, 23 Jan 2025 18:17:17 +0100 (CET)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id 92AF080243; Thu, 23 Jan 2025 20:04:18 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18DD280137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 18:17:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D35EB80137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 20:04:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-46c7855df10so18222951cf.3
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 09:17:15 -0800 (PST)
+ spf=pass smtp.mailfrom=flobro30101@gmail.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3eb8accbde3so1274944b6e.0
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 11:04:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737652634; x=1738257434; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Qe13KPQhioQeHld+CYpcZTovt5JvXGs5eh5IkNRHs/k=;
- b=jYjJ2kYrIODnaeUqnpSEHWyx6CZePHYNcSYQaO69jgwdOSDA0CfvL/XEBd5lriBQ/9
- pDN/YozsNWWQRQBeh8CQRtOrfthMCJIvpcMum3v1jXY5lBm66p9MZCiCgucrUpTHPF9G
- 66taYE+RN0CWU1wqEeExgRUFDdaPpZmlGjW5I=
+ d=gmail.com; s=20230601; t=1737659054; x=1738263854; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=gQ0cVokRhmiQtwCBJgjN3L7bymM5f07yokZLFrIOMuQ=;
+ b=aM3L4VLmrXyTa7ew1n2KmFtU1HNLLNAlTNteeSWrzLr6DmjfL0TdSV+KgUAs5Jjoy8
+ JhSvqz4yCnKDSYIRapt9U07+kkEWM4xP/NmpGUcM/lfVUobIGxY9eorOUxd8rdYy+Ma8
+ XaUhNAY+8c3qHxtWzVdyWLcAcSoOU/P0Rabisx26N3d7XLXxHqSOT4mDgftJDCMyrUzA
+ AX7fspWnwtW8GHutKPPejj/6pF6Ow9ELN/0h1tCIWUxA0lxFNjbqt7eMW9OVanEhBrdx
+ AOk20opjLU/x3kZPvJo/hFoh79kX9eI8eVgLzmdMakyNMVcbcnDSBW+K9sVKHYmuyeY8
+ zNSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737652634; x=1738257434;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Qe13KPQhioQeHld+CYpcZTovt5JvXGs5eh5IkNRHs/k=;
- b=UVXIiLILpa7qoHNroRBPaxaqtLWrpS151q+NKjWKt9gfopxNkFAwhw5OWxguU8PfwW
- Wh/X+dWsqFXRHaRnpEGdtnNL81kVkhe9pAgMD0rQCQomWYaxyPdSfKvkgi9M2coG/etA
- +RBPn0g4eLQS6up2BVfzDkiM75rrJKaE9NhemBAPSQcOZOx7OYgnJoHx5rHNZy9ntMzY
- 2mxfzdM9AW2Oh2BP+BwiAoAD+ywQrEbBmAvl4ulRKyXGgDnL+K0N4gec9DQ+kmUaOwhN
- 6QvM3Rgvf18t6K6J8BW90Wl8ypQEVolqDm31L1XC784U7lH3a2GwACfqGTj9+g+4XUU/
- Acnw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXk8cZ5flEbef1rIHs9COkeFf1xueeOyrh735YTiEF/YlNafsi+RJ2qwxLHA9VzWoDy7C69QN0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxNR2dmtuTcldwbGQHfMeKza1r29yYv7ciRcOLle9zSgBuIY0ii
- LsEhpoyoqF1ahYEmu90Gudx5rk2ron80IaqCTMy83yrHqd/KGMoqKpKUaIylAtY=
-X-Gm-Gg: ASbGncu4lN7TmBZnibZBXcdyxmnHtc8EKTGu3z64oHd8fLqrfBvtivj+r0IlMWcA642
- xGe0vGk35b4NC6bPCsgsj7Vz0QjQdda2eXP/6KgXs+uZArA9dxo5mACRHvjIm6rC+sxbEmhejuA
- a5F2SjOsctcUOBjq2t33sHnGlareY7Xlt3dKzIV8LJT4AKbVnFeWvWJNeWFVIax1y0BfkrmGYeb
- zw84M1TB1Zt6HJufPhyV+W2llP3oz2pCrQjeAbWDWW78LrlEgwihgO4It/+9eXX6bbbfxIo+XXY
- 9cPR
-X-Google-Smtp-Source: AGHT+IH+Rd91Pj/oc9O7yWVzyYZb9GmMC0qLjSM5B+t2OjYnAvHM/PVmOHZOM58WIVRGbwcqfhLinA==
-X-Received: by 2002:a05:622a:38b:b0:46c:7646:4a1e with SMTP id
- d75a77b69052e-46e12a62966mr438527051cf.13.1737652633877; 
- Thu, 23 Jan 2025 09:17:13 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e6689d9e1sm906211cf.35.2025.01.23.09.17.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2025 09:17:13 -0800 (PST)
-Date: Thu, 23 Jan 2025 11:17:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dragan Simic <dsimic@manjaro.org>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>,
- Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
- Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Thomas =?iso-8859-1?Q?Wei=DFschuh?= <thomas.weissschuh@linutronix.de>,
- Tim Harvey <tharvey@gateworks.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v3 00/19] bootstd: Support recording images
-Message-ID: <20250123171708.GN60249@bill-the-cat>
-References: <CAFLszTgFdNrRev+7n6j+NqCM+em_p-ONAc=+sztoYaP50HUivw@mail.gmail.com>
- <20250115212439.GD3476@bill-the-cat>
- <CAFLszTiSSq-+cSxVgxLJ8atAAjjxRP2AEQmXMbrf+c3FOepnFQ@mail.gmail.com>
- <20250115233157.GE3476@bill-the-cat>
- <CAFLszTga3RD95M2ujLfuXQor39sfcQrEUe3hwRKABiWx04PiZg@mail.gmail.com>
- <20250116172159.GH3476@bill-the-cat>
- <CAFLszTigN+s1T0hjJXnkE4ucYafHCtabPFHh=gCFpro2WrLnpg@mail.gmail.com>
- <CAJaLiFw3j1FTT25mNd_5Pk-UTCaNL=R2GmK0+m_VoCc7Yc2PRQ@mail.gmail.com>
- <20250118144132.GW3476@bill-the-cat>
- <CAFLszTi_5s9L9zYz-EZpdM9YVdV7TdhrnxPm9K8VeZEa0tHpag@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1737659054; x=1738263854;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=gQ0cVokRhmiQtwCBJgjN3L7bymM5f07yokZLFrIOMuQ=;
+ b=D88myAJ5gGeOMROZlKZ7T9a7RuUlk89bWZXoKuhyqVleMpe5cStNTg2pb0VsniZ7sU
+ i9yFQYrpwjGZKdM6EjJspQX4fhxnHUdUNEd+K7LoJJPCZocIUiHRSDx5Gzcm80oQPTLo
+ h9A6lS54Egb2qcjwD9j0Jw/5K8rXPhHD5dORwe/u9IjbL7As3Itt7MYTXp4XHfdqJQDI
+ ynKqHi7Tw8ReZew/judi/Pv9WGcxFfmduj2471I0jMi5PJS5B9je7hXiKP+19knzmZaj
+ W8Q8TUD3PAVSVhndDSIh9sf2zIxBeX3y5vss8AbW5cX4LRN8gpIFhJY86wLd0tRhQwLd
+ Dk2g==
+X-Gm-Message-State: AOJu0YxACiUA3NKMQNzUgiquklZZkXyqidFV9c/9nB8l7Muapx/J+uRi
+ czJ0SEKz/k+HASWNA6X5e78nxzcV8JRFgG6v30pMD3fyuzm43ylKT1MKjyMziWO5+vWsVZ/4U1S
+ k1Uqhb6DhM/rfHNaHBtYloKfD4yTMZQ==
+X-Gm-Gg: ASbGncvt4QRKuKVF0vmawGLK93w5nP6pJFQ+qjLJ9Fsw+c9Sue/1L7dIgxw14YvHpVM
+ 3eyyemQFOsbTrTeEE2DClLCXF20EUnEICSU9XOaOJMIl1QJ9Vb/w+QgujXJZ9mq3IGs21PEeJHZ
+ E5qrlEkcVshKcU299P
+X-Google-Smtp-Source: AGHT+IHMlHTgf/MvvzbM5FTZhLoYEsYgVt4QwD+ZncyXvBiacFWhWe3/AIaklsR5k1giemo6FyV46n/WhIP6QssEXQA=
+X-Received: by 2002:a05:6808:1b87:b0:3e7:bd4e:5b98 with SMTP id
+ 5614622812f47-3f1e4a77e4cmr2900444b6e.0.1737659054172; Thu, 23 Jan 2025
+ 11:04:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qmotElmfbC+rg5Ve"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTi_5s9L9zYz-EZpdM9YVdV7TdhrnxPm9K8VeZEa0tHpag@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Thu, 23 Jan 2025 19:42:05 +0100
+From: Floyd Brown <flobro30101@gmail.com>
+Date: Thu, 23 Jan 2025 14:04:03 -0500
+X-Gm-Features: AWEUYZkdSTAQ8VwVXCBleShZSqLKy6Uf5NrrPy0B-3VluZB5Bo8VO5AdrqKshtU
+Message-ID: <CAKiD1a9bH=0N3KZP6Hzbvznhueqb-Oob_zvtGky+g-EEix2+gg@mail.gmail.com>
+Subject: mkenvimage CRC does not match the CRC of fw_setenv
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,95 +85,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When I run the same file against both utilities, they do not produce
+the same CRC.
 
---qmotElmfbC+rg5Ve
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The CRC of fw_setenv matches what uboot has when the environment is
+created inside the image.
 
-On Thu, Jan 23, 2025 at 07:38:04AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sat, 18 Jan 2025 at 07:41, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Jan 17, 2025 at 09:49:43PM -0800, Tony Dinh wrote:
-> > > On Fri, Jan 17, 2025 at 8:32=E2=80=AFPM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 16 Jan 2025 at 10:22, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Jan 16, 2025 at 08:52:38AM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Wed, 15 Jan 2025 at 16:32, Tom Rini <trini@konsulko.com> wro=
-te:
-> > > > > [snip]
-> > > > > > > I'm referring to the whole bootmeth/bootflow/etc thing. Is th=
-is going to
-> > > > > > > be put to use by anyone / anywhere on PowerPC? M68K? MIPS? 32=
-bit ARM is
-> > > > > > > a harder question there, which is also where this particular =
-overflow
-> > > > > > > was.
-> > > > > >
-> > > > > > I'm still not sure what you are saying. Are you wanting to disa=
-ble
-> > > > > > bootstd by default / go back to distro scripts / force everyone=
- to use
-> > > > > > EFI_LOADER / ?
-> > > > >
-> > > > > Yes, I'm asking where it's appropriate to enable this new functio=
-nality
-> > > > > by default.  It certainly should be enabled on arm64 (there's new
-> > > > > designs) and riscv (there's new designs). It still ought to be en=
-abled
-> > > > > on arm32 because we otherwise lack a easy way to say "new" arm32 =
-(say
-> > > > > i.MX7) and not "old" arm32 (say i.MX23). What is the point of ena=
-bling
-> > > > > this on PowerPC for example? The active users there are (generall=
-y)
-> > > > > supporting legacy hardware and I have no idea how much they want =
-to
-> > > > > change their boot process, once bootstd supports flash for exampl=
-e.
-> > > > > There's similar questions for everything else under arch/ as well.
-> > > >
-> > > > To me this is in fact two different questions.
-> > > >
-> > > > 1. For PowerPC, m68k, MIPS, I suppose we can just disable BOOTSTD a=
-nd wait for them to go away, if you are saying that they are behind on migr=
-ations will never catch up
-> >
-> > On what migrations? A board that has a boot command is not some legacy
-> > non-migrated case. That's a valid regular use case.
->=20
-> I'm referring to a board that uses distro scripts.
+Is this a known issue? If so, I am sorry to bring it up (but maybe
+remove mkenvimage...)
 
-OK. Just FYI, "distro scripts" weren't a thing outside of ARM (and maybe
-RISC-V, and just turris_1x_sdcard on PPC?).
-
---=20
-Tom
-
---qmotElmfbC+rg5Ve
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeSeZQACgkQFHw5/5Y0
-tyzbXwv/VdGmXMDo35ExjCoyuQCsuONIGIeS8/HlXQ+kfVnR6ezzb70ueAZ17ZJ8
-GwAeOhNtraqHJc3w6gMub+5Qvy3duM67YarcvQ/+MlHMNhEpgIC1rMWy4owjeBDJ
-IMYPF0e5YK3eAoGoFNQFI0mX8YJ1E1A3UrYmFLmWa8HW1ftUMoHn23v3NIg1EXlN
-hiXXKwQh2Eq0bbwu3SRFVPTnBO+oLNVQfOErA8JwL5loFZEcGkKCsAIPVQGZmK5F
-xCzolDUCurlvCnxXRgHh9pvlfO5jcZ+bmLiPQUvIDgkWk/BPNiGfI4uLh8fTIkkd
-+8erfT1Iqihms2AdUvcH32BFRigDTe0GpF5ZEVycsqCwcWNAZglpuKJ8Cij0VsXJ
-bgiBVtI+YRmzEZt3/UULvP8j5iyEoHpri/KBxd6NxP0Tyqmhry08XT+zzE7feEOP
-SyySj17R+W25OTU4KGkWJqJAxgtjm+8X8Vv+k3MUT2gJ9T83clyh7br8gArrAd1J
-3u/g6F+r
-=Wrif
------END PGP SIGNATURE-----
-
---qmotElmfbC+rg5Ve--
+Thanks
