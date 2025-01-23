@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A48C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:37:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2982C0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:37:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C763E80214;
-	Thu, 23 Jan 2025 15:37:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2DADE80763;
+	Thu, 23 Jan 2025 15:37:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eP4FNH5V";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="luL1h+Pn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69AD480780; Thu, 23 Jan 2025 15:37:36 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 5B976807E0; Thu, 23 Jan 2025 15:37:41 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D9A380137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:37:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 593BF807B3
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:37:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d96944401dso1797254a12.0
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:37:34 -0800 (PST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5d88c355e0dso2038073a12.0
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 06:37:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737643054; x=1738247854; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737643059; x=1738247859; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Wc0Pq0joo0Cvr2QjJTLD1TVKUTi9gQrmbS7MftB/LWs=;
- b=eP4FNH5VVWBijmRRn4unJ266RwgHuE8bCYEsXMWeYDWLKgkbkr8zL5KLGK5FVGEGsO
- yTKXtpb1orxULVBscNqRmTHh/NPgolvFkQmTHfg8LpSyTPDqk5aT8jPLgLQbE5fpX2qd
- 6jYTo9xT5bc3s9WZEW0OvmSdGxgUTTnGQeYcg=
+ bh=hBEDj0hGvnb3fRu8braKoCcp++LCszzSWX3aXgnYwsg=;
+ b=luL1h+Pn7VQDmtQ4BXw+p5xcZmlyAxz6K2DKWkdYOnOOil32vHbZ7uj9Qqe4W3U1MP
+ rLizMOTKJnnngt8Cm1CjyTZM/AzlYonVlqwhZyJzsBD6D2MvNFOOt/fw06c4wMRogAVV
+ YVJTFqeqhlTx2ylYcgyz6D1la5e3IZcBCd6u0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737643054; x=1738247854;
+ d=1e100.net; s=20230601; t=1737643059; x=1738247859;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Wc0Pq0joo0Cvr2QjJTLD1TVKUTi9gQrmbS7MftB/LWs=;
- b=tgyVzv0xHGLMx09LkHcPqJZciHX6wfxEw7zTX8nks2CW3CQ2eMq1wPqUUHwuZsK9o1
- C58KUij36v+PCXTmsiCaa8F1P1YfkB1OeBHPU2LJmtMBg7pyrV1yeRVMINxxTVRS6sGL
- lueSSEJMj/Qmxqtltlk/1yuOSJbYmTmTdS27tP7mESLl/r5D7a0J99WSRF9m3bVKC/8z
- tWEhvpjFng4HZpoGvYE7g9SJr0nLqquLHqVJHTx7XCTnOMlRmmKK463hAO37NFWxqPAi
- b40QRHw6xKRx33g9w51C0FNgFlGDIPU0b2BQzP5r+B6JCmnGrMxDTAb29dewLkLYPChK
- CS/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX8hxM6QUC73Uppuvv97bHJnUnee4fAP7BlCmvVyb8ElbrXiso3kwj/Q4xof3DoEccZItI/yxc=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywtsk5Kz8lRvHthiLmuGCcwH39jBFdSxuwzI6Hs8pcMb8QK91Cl
- K1bNfI0T5XLDT4AAUX9SWx/lQhxpkyrWPJrDHqjEUXc3drx7SJzoJW2z+vPw9i0hFfAVNK29mmV
- i/g7cxtYopfELNjn5MkOHqycjGrYYCidirSQ6
-X-Gm-Gg: ASbGncv3kLKSDs011YbZfbvlaX+ehvH3niVs5peewxT5nOSNd2wJrJGFUG/XF2YeFaA
- Y4I71pWwMtVp3P/u5Vh7YDh+f+Nhspr0Rbz/edZn9DJFQ3sztKDZbxX7Wg8WYND0=
-X-Google-Smtp-Source: AGHT+IGhmuHmkrhk5+ytj25gDLXY/iET/uzmMC2Lspe1yPhRhnei0wrfIBUHegnJPgZZ1ePvO62YucASw1SdXOKnCPY=
-X-Received: by 2002:a17:906:7315:b0:aa6:6c46:7ca1 with SMTP id
- a640c23a62f3a-ab38b0b807amr2644250166b.10.1737643052376; Thu, 23 Jan 2025
- 06:37:32 -0800 (PST)
+ bh=hBEDj0hGvnb3fRu8braKoCcp++LCszzSWX3aXgnYwsg=;
+ b=QrH6eZksQVOo5l0t8tLoBUneBOphWX2vm85Wg+n7z30Z5Jc6QTbN9vgVy4SM7mfRDM
+ yaLIizRELBnr+DLgT7RCvKce5BA1fl9GOxohxA2R4zGULSI24InNTQJNixgZH7ZGsjgA
+ yslInXEfrQ9KiJVG4tDOeOaxwcJDticwMI+twDTwhU7RKTQu/LH+eup8JmdraZ7JziSM
+ wPbcD292ShOb6dP9K9KImCd/58uaYZc1jMzDbtepIFfI+2LXskHMNqhJiUB3CXKSynuY
+ MuRrMKxfqezhXV58ThJMJN0ycbxF0jf3hErJGkYlDf2/rZBy7kjLo2Z3r+rANBgHSzlF
+ JkfA==
+X-Gm-Message-State: AOJu0YwAeaRhOfai8tBvtVHyXgy5xGOh+sWalZnh7lnpfjkBhDWCvQKB
+ jzIBjmfVpx+Usxv23DktoAsFEsTzSyvbZi0IUak+szKJcIp5sH64r6L0WzE1CnFrRy2rNmUwUrg
+ vIgqVZo1HuTsPc4wBzJOCDz/moOI95IWr/snT
+X-Gm-Gg: ASbGncvpovRypg0Vdc31oSyhk66/S4Cjjmq7jp+kh+il1d5j3wiIp4yPDsNhv+313Lb
+ 8owfnMQikerjaUoZYONkP2E85NDCLoZiBEvGDi60fwEtt3cURvgt01SuYgTnMZIZ+h81yGr/dCQ
+ ==
+X-Google-Smtp-Source: AGHT+IGLaoYffVX3shTzXlJYVsOQ/oFGM5IdIszd3cbCC9cnEoLYE8w1QBvQ/SZDmryLRT3itRXqC0gxT8lvFv4m/eg=
+X-Received: by 2002:a17:907:3e1c:b0:aa6:4494:e354 with SMTP id
+ a640c23a62f3a-ab38b42e5f5mr2304964866b.42.1737643058758; Thu, 23 Jan 2025
+ 06:37:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20250117-clarify-probe-after-bind-v1-0-273f046ce5dd@linaro.org>
- <20250117-clarify-probe-after-bind-v1-2-273f046ce5dd@linaro.org>
- <CAFLszTi_=S9m54DvKdjdNXf=zOhgg6tog8kcQ+dxjkjQ8BoP4Q@mail.gmail.com>
- <a33678e1-b4e2-43e2-b6de-55618bbb8579@linaro.org>
-In-Reply-To: <a33678e1-b4e2-43e2-b6de-55618bbb8579@linaro.org>
+References: <20250122170858.961359-1-adriano.cordova@canonical.com>
+ <20250122170858.961359-20-adriano.cordova@canonical.com>
+In-Reply-To: <20250122170858.961359-20-adriano.cordova@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 23 Jan 2025 07:37:20 -0700
-X-Gm-Features: AbW1kvZN6ey29GbtEBi9_R6KOGDYJ4I6wMJEfk7D4go1VWXEHVOpLB6y20MY9UM
-Message-ID: <CAFLszThLEUsPmxUkQnGNAtojya6E82iGuwfPLLyTCfRXbszoJg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] drivers: remove bogus DM_FLAG_PROBE_AFTER_BIND flags
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, 
- Marek Vasut <marex@denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 23 Jan 2025 07:37:26 -0700
+X-Gm-Features: AbW1kvazQudqOSqse_LjgGDjXYJL2EPN_9o49-3_PDL4PF0zRkaMF0ubR3DnhKE
+Message-ID: <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
+Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
+ EFI netdevices
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ jerome.forissier@linaro.org, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
+ trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,79 +89,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Adriano,
 
-On Tue, 21 Jan 2025 at 05:00, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail.com> wrote:
 >
+> check that the number of ethernet udevices matches the number of simple
+> network protocols
 >
+> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> ---
+>  test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
 >
-> On 18/01/2025 05:32, Simon Glass wrote:
-> > On Fri, 17 Jan 2025 at 00:29, Caleb Connolly <caleb.connolly@linaro.org
-> > <mailto:caleb.connolly@linaro.org>> wrote:
-> >>
-> >> Some drivers set DM_FLAG_PROBE_AFTER_BIND, this does nothing since it's
-> >> only every applied on a per-device basis.
-> >>
-> >> Remove the flags.
-> >>
-> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org
-> > <mailto:caleb.connolly@linaro.org>>
-> >> ---
-> >>  drivers/mailbox/zynqmp-ipi.c  | 1 -
-> >>  drivers/watchdog/da9063-wdt.c | 1 -
-> >>  2 files changed, 2 deletions(-)
-> >>
-> >> diff --git a/drivers/mailbox/zynqmp-ipi.c b/drivers/mailbox/zynqmp-ipi.c
-> >> index 713d93a200c4..851aa737c03e 100644
-> >> --- a/drivers/mailbox/zynqmp-ipi.c
-> >> +++ b/drivers/mailbox/zynqmp-ipi.c
-> >> @@ -269,6 +269,5 @@ U_BOOT_DRIVER(zynqmp_ipi) = {
-> >>         .name = "zynqmp_ipi",
-> >>         .id = UCLASS_NOP,
-> >>         .of_match = zynqmp_ipi_ids,
-> >>         .probe = zynqmp_ipi_probe,
-> >> -       .flags = DM_FLAG_PROBE_AFTER_BIND,
-> >>  };
-> >> diff --git a/drivers/watchdog/da9063-wdt.c b/drivers/watchdog/da9063-wdt.c
-> >> index b7216b578630..ec9bc0330114 100644
-> >> --- a/drivers/watchdog/da9063-wdt.c
-> >> +++ b/drivers/watchdog/da9063-wdt.c
-> >> @@ -144,6 +144,5 @@ U_BOOT_DRIVER(da9063_wdt) = {
-> >>         .name = "da9063-wdt",
-> >>         .id = UCLASS_WDT,
-> >>         .of_match = da9063_wdt_ids,
-> >>         .ops = &da9063_wdt_ops,
-> >> -       .flags = DM_FLAG_PROBE_AFTER_BIND,
-> >>  };
-> >>
-> >> --
-> >> 2.48.0
-> >>
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.org>>
-> >
-> > It is actually a bit unclear, since the comments for struct driver
-> > mention DM_FLAG_... for the flags.
->
-> Yep, some of the flags (most even?) can be applied to drivers and there
-> is no proper distinction between which apply to drivers and which to
-> devices.
+> diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/test_efi_selftest.py
+> index 310d8ed294..af9992a6f7 100644
+> --- a/test/py/tests/test_efi_selftest.py
+> +++ b/test/py/tests/test_efi_selftest.py
+> @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
+>      if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key']):
+>          raise Exception('Failures occurred during the EFI selftest')
+>      u_boot_console.restart_uboot()
+> +
+> +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
+> +@pytest.mark.buildconfigspec('cmd_dm')
+> +def test_efi_selftest_count_netdevices(u_boot_console):
+> +    """Test the EFI net device driver
+> +
+> +    u_boot_console -- U-Boot console
+> +
+> +    This function counts the number of ETH_UCLASS probed udevices
+> +    calls the EFI net device selftest to check that the EFI driver
+> +    sees the same.
+> +    """
+> +    u_boot_console.restart_uboot()
 
-I would rather have one set of flags if we can.
+We should avoid restarting U-Boot in a test unless there is a strong
+need. It makes things a lot slower!
 
-There are flags which only affect binding so perhaps they should be at
-the start of the enum, with flags which only affect the device after
-that.
+> +    response = u_boot_console.run_command('dm tree')
+> +    lines = response.splitlines()[2:]
+> +    ethernet_count = sum(1 for line in lines if line.strip().startswith('ethernet') and '[ + ]' in line)
 
-But the original reason for not setting a flag like
-DM_FLAG_PROBE_AFTER_BIND in the driver was that the driver wanted to
-control whether to set it in the device.
+This test should be written in C, e.g:
 
->
-> DRIVER_FLAG_... and DEV_FLAG_... or something maybe better, something to
-> revisit in the future for sure.
->
-> Thx for the review
+struct udevice *dev;
+int count;
+uclass_foreach_dev(dev, UCLASS_ETH)
+    if (device_active(dev))
+         count++;
+
+> +
+> +    u_boot_console.run_command(cmd='setenv efi_selftest netdevices')
+> +    u_boot_console.run_command('bootefi selftest', wait_for_prompt=False)
+> +    if u_boot_console.p.expect([f'Detected {ethernet_count} active EFI net devices']):
+> +        raise Exception('Failures occurred during the EFI selftest')
+
+Again, this should be written in C and use run_command().
 
 Regards,
-SImon
+Simon
