@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A45F0C0218C
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:51:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3299EC02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:52:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 386C780243;
-	Thu, 23 Jan 2025 15:51:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D93780243;
+	Thu, 23 Jan 2025 15:52:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="SNc1rKz3";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="oNPRfx0w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A615806DC; Thu, 23 Jan 2025 15:51:48 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id E3445806C9; Thu, 23 Jan 2025 15:52:31 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4568880214
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:51:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD83E80214
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:52:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=3118deafe3=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50NC1Cpr020449;
- Thu, 23 Jan 2025 15:51:30 +0100
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50NDPE1Q026857;
+ Thu, 23 Jan 2025 15:50:40 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=sqCn0wj39hRsEubDYeIbRZ
- h57SvGaHWcXdqRJpF9SyI=; b=SNc1rKz3P7Y08ivxnREfxgqyw+B5u/xAKhZNh1
- 7C0nJRVWC1UV29Lam42QsfKn6LRBfpVJnc+xPw+AO+Ny3STDibpCuDrBiuyaE0nG
- CR/x/dNGfdVJIb/iSsWWxXGXLw92DkWL2VX6X4gcM5bizKbG5KgToGevaTREs23b
- WpdEj0+N8ZtjIxX8kxBGF7/ZlMQzs6UoWwfdY17yEiyY6p1a1I+ozupnrqceErys
- nZvS1dtfx9Qjr2Xo3fxi9xdNp/OKUQVq/j+85umQVEbjV85JIw9vboR3lllqeNRA
- PIprrB8RWlu8+b0WgDF2jGPplMKZGzOuOTVRFQNPv07KOOsw==
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ U+VkcrUcUGte5AngUxgQQXKjT0r8bKnAzp+bSUXkzNM=; b=oNPRfx0wo7/jzySy
+ X6x+iu/+hi3+W87h8j65lPDc8MKhqH1KAvl50iOE19XpT2m8g9qSP9fiFoYxITZ/
+ n+Mor9yI1LqlKMSgKHcE39xccTa4jcOqQghEQNEpU/wNtV+npFg5YNVwEJpzTIhs
+ wSNpJkPCWmmxfebdjVM/2WMtOA2989P+xwUbM/pLGZ9LfNcz+GcLzH9HgpsmfdgI
+ nbhHRCGvpQesDNnj8232W5kvnsSdLoplUflKKIFNPPJtGAS6nshov3YjbHusS/NX
+ 5migmbpe52YdNaqWpNdu2Z7TP5GVwXWed+b6Gp6unrjhhPEYB4J0RrM4+9g/Hbuv
+ S2qKog==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44bapu31y7-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44bpmv09nk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 23 Jan 2025 15:51:30 +0100 (CET)
+ Thu, 23 Jan 2025 15:50:40 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D16E040044;
- Thu, 23 Jan 2025 15:49:39 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2B9CA4004A;
+ Thu, 23 Jan 2025 15:49:16 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8EB8A2B9C09;
- Thu, 23 Jan 2025 15:47:21 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D47E72BAFBE;
+ Thu, 23 Jan 2025 15:47:24 +0100 (CET)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Thu, 23 Jan
- 2025 15:47:21 +0100
+ 2025 15:47:24 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Fabio Estevam <festevam@gmail.com>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>, Jan Kiszka
- <jan.kiszka@siemens.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marex@denx.de>, Mathieu Othacehe <othacehe@gnu.org>, Mattijs
- Korpershoek <mkorpershoek@baylibre.com>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Patrick Rudolph
- <patrick.rudolph@9elements.com>, Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, Oliver Gaskell
+ <Oliver.Gaskell@analog.com>, Robert Marko <robert.marko@sartura.hr>, Sam
+ Protsenko <semen.protsenko@linaro.org>,
  Simon Glass <sjg@chromium.org>, Sjoerd Simons <sjoerd@collabora.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 0/9] Restore USB and add UMS support for STiH407-B2260
-Date: Thu, 23 Jan 2025 15:47:09 +0100
-Message-ID: <20250123144718.1139824-1-patrice.chotard@foss.st.com>
+Subject: [PATCH v4 4/9] usb: dwc3-generic: Add STih407 support
+Date: Thu, 23 Jan 2025 15:47:13 +0100
+Message-ID: <20250123144718.1139824-5-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250123144718.1139824-1-patrice.chotard@foss.st.com>
+References: <20250123144718.1139824-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -97,56 +97,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add STi glue logic to manage the DWC3 HC on STiH407
+SoC family. It configures the internal glue logic and
+syscfg registers.
 
-This series is :
- _ restoring USB on STiH410-B2260 which hasn't been
-   tested since a while.
- _ migrating STi DWC3 glue from proprietary driver to
-   dwc3-generic driver.
- _ adding UMS support for STiH410-B2260.
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Marek Vasut <marex@denx.de>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
+---
 
 Changes in v4:
   - Update Kconfig description
 
 Changes in v3:
-  - Update comment by adding "Remove useless include files"
   - Replace debug() by dev_err()
   - check return value of syscon_regmap_lookup_by_phandle()
 
 Changes in v2:
-  - remove useless include files
   - add dwc3-sti.c DWC3 wrapper as done for dwc3-am62.c
 
-Patrice Chotard (9):
-  ARM: dts: sti: Add fixed clock for ehci and ohci nodes in
-    stih410-b2260.dtsi
-  configs: stih410-b2260: Enable DM_REGULATOR flag
-  usb: dwc3-generic: Reorder include
-  usb: dwc3-generic: Add STih407 support
-  configs: stih410-b2260: Enable USB_DWC3_GENERIC and USB_DWC3_STI flags
-  usb: dwc3: Remove dwc3 glue driver support for STi
-  configs: stih410-b2260: Enable DM_USB_GADGET flag
-  board: stih410-b2260: Remove board_usb_init/cleanup()
-  configs: stih410-b2260: Enable CMD_USB_MASS_STORAGE flag
-
- MAINTAINERS                            |   3 +-
- arch/arm/dts/stih410-b2260-u-boot.dtsi |  10 +
- board/st/stih410-b2260/board.c         |  30 ---
- configs/stih410-b2260_defconfig        |   5 +
- drivers/usb/dwc3/Kconfig               |   8 +
- drivers/usb/dwc3/Makefile              |   1 +
- drivers/usb/dwc3/dwc3-generic-sti.c    | 132 +++++++++++++
- drivers/usb/dwc3/dwc3-generic.c        |  20 +-
- drivers/usb/host/Kconfig               |   9 -
- drivers/usb/host/Makefile              |   1 -
- drivers/usb/host/dwc3-sti-glue.c       | 253 -------------------------
- include/dwc3-sti-glue.h                |  41 ----
- 12 files changed, 161 insertions(+), 352 deletions(-)
+ MAINTAINERS                         |   1 +
+ drivers/usb/dwc3/Kconfig            |   8 ++
+ drivers/usb/dwc3/Makefile           |   1 +
+ drivers/usb/dwc3/dwc3-generic-sti.c | 132 ++++++++++++++++++++++++++++
+ 4 files changed, 142 insertions(+)
  create mode 100644 drivers/usb/dwc3/dwc3-generic-sti.c
- delete mode 100644 drivers/usb/host/dwc3-sti-glue.c
- delete mode 100644 include/dwc3-sti-glue.h
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 8c6c0c2a4bc..5d7e251e601 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -656,6 +656,7 @@ F:	drivers/mmc/sti_sdhci.c
+ F:	drivers/reset/sti-reset.c
+ F:	drivers/serial/serial_sti_asc.c
+ F:	drivers/sysreset/sysreset_sti.c
++F:	drivers/usb/host/dwc3-sti.c
+ F:	drivers/timer/arm_global_timer.c
+ F:	drivers/usb/host/dwc3-sti-glue.c
+ F:	include/dwc3-sti-glue.h
+diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
+index 0100723a68b..682a6910655 100644
+--- a/drivers/usb/dwc3/Kconfig
++++ b/drivers/usb/dwc3/Kconfig
+@@ -87,6 +87,14 @@ config USB_DWC3_LAYERSCAPE
+ 	  Host and Peripheral operation modes are supported. OTG is not
+ 	  supported.
+ 
++config USB_DWC3_STI
++	bool "STi USB wrapper"
++	depends on DM_USB && USB_DWC3_GENERIC && SYSCON
++	help
++	  Enables support for the on-chip xHCI controller on STMicroelectronics
++	  STiH407 family SoCs. This is a driver for the dwc3 to provide the
++	  glue logic to configure the controller.
++
+ menu "PHY Subsystem"
+ 
+ config USB_DWC3_PHY_OMAP
+diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
+index a085c9d4628..985206eafe4 100644
+--- a/drivers/usb/dwc3/Makefile
++++ b/drivers/usb/dwc3/Makefile
+@@ -15,3 +15,4 @@ obj-$(CONFIG_USB_DWC3_UNIPHIER)		+= dwc3-uniphier.o
+ obj-$(CONFIG_USB_DWC3_LAYERSCAPE)	+= dwc3-layerscape.o
+ obj-$(CONFIG_USB_DWC3_PHY_OMAP)		+= ti_usb_phy.o
+ obj-$(CONFIG_USB_DWC3_PHY_SAMSUNG)	+= samsung_usb_phy.o
++obj-$(CONFIG_USB_DWC3_STI)		+= dwc3-generic-sti.o
+diff --git a/drivers/usb/dwc3/dwc3-generic-sti.c b/drivers/usb/dwc3/dwc3-generic-sti.c
+new file mode 100644
+index 00000000000..2ff640cede4
+--- /dev/null
++++ b/drivers/usb/dwc3/dwc3-generic-sti.c
+@@ -0,0 +1,132 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * STi specific glue layer for DWC3
++ *
++ * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
++ */
++
++#include <reset.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <asm/io.h>
++#include <dm/device.h>
++#include <dm/device_compat.h>
++#include <dm/read.h>
++#include <linux/usb/otg.h>
++#include "dwc3-generic.h"
++
++/* glue registers */
++#define CLKRST_CTRL		0x00
++#define AUX_CLK_EN		BIT(0)
++#define SW_PIPEW_RESET_N	BIT(4)
++#define EXT_CFG_RESET_N		BIT(8)
++
++#define XHCI_REVISION		BIT(12)
++
++#define USB2_VBUS_MNGMNT_SEL1	0x2C
++#define USB2_VBUS_UTMIOTG	0x1
++
++#define SEL_OVERRIDE_VBUSVALID(n)	((n) << 0)
++#define SEL_OVERRIDE_POWERPRESENT(n)	((n) << 4)
++#define SEL_OVERRIDE_BVALID(n)		((n) << 8)
++
++/* Static DRD configuration */
++#define USB3_CONTROL_MASK		0xf77
++
++#define USB3_DEVICE_NOT_HOST		BIT(0)
++#define USB3_FORCE_VBUSVALID		BIT(1)
++#define USB3_DELAY_VBUSVALID		BIT(2)
++#define USB3_SEL_FORCE_OPMODE		BIT(4)
++#define USB3_FORCE_OPMODE(n)		((n) << 5)
++#define USB3_SEL_FORCE_DPPULLDOWN2	BIT(8)
++#define USB3_FORCE_DPPULLDOWN2		BIT(9)
++#define USB3_SEL_FORCE_DMPULLDOWN2	BIT(10)
++#define USB3_FORCE_DMPULLDOWN2		BIT(11)
++
++static void dwc3_stih407_glue_configure(struct udevice *dev, int index,
++					enum usb_dr_mode mode)
++{
++	struct dwc3_glue_data *glue = dev_get_plat(dev);
++	struct regmap *regmap;
++	ulong syscfg_base;
++	ulong syscfg_offset;
++	ulong glue_base;
++	int ret;
++
++	/* deassert both powerdown and softreset */
++	ret = reset_deassert_bulk(&glue->resets);
++	if (ret) {
++		dev_err(dev, "reset_deassert_bulk error: %d\n", ret);
++		return;
++	}
++
++	regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscfg");
++	if (IS_ERR(regmap)) {
++		dev_err(dev, "unable to get st,syscfg, dev %s\n", dev->name);
++		return;
++	}
++
++	syscfg_base = regmap->ranges[0].start;
++	glue_base = dev_read_addr_index(dev, 0);
++	syscfg_offset = dev_read_addr_index(dev, 1);
++
++	clrbits_le32(syscfg_base + syscfg_offset, USB3_CONTROL_MASK);
++
++	/* glue drd init */
++	switch (mode) {
++	case USB_DR_MODE_PERIPHERAL:
++		clrbits_le32(syscfg_base + syscfg_offset,
++			     USB3_DELAY_VBUSVALID | USB3_SEL_FORCE_OPMODE |
++			     USB3_FORCE_OPMODE(0x3) | USB3_SEL_FORCE_DPPULLDOWN2 |
++			     USB3_FORCE_DPPULLDOWN2 | USB3_SEL_FORCE_DMPULLDOWN2 |
++			     USB3_FORCE_DMPULLDOWN2);
++
++		setbits_le32(syscfg_base + syscfg_offset,
++			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID);
++		break;
++
++	case USB_DR_MODE_HOST:
++		clrbits_le32(syscfg_base + syscfg_offset,
++			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID |
++			     USB3_SEL_FORCE_OPMODE | USB3_FORCE_OPMODE(0x3) |
++			     USB3_SEL_FORCE_DPPULLDOWN2 | USB3_FORCE_DPPULLDOWN2 |
++			     USB3_SEL_FORCE_DMPULLDOWN2 | USB3_FORCE_DMPULLDOWN2);
++
++		setbits_le32(syscfg_base + syscfg_offset, USB3_DELAY_VBUSVALID);
++		break;
++
++	default:
++		dev_err(dev, "Unsupported mode of operation %d\n", mode);
++		return;
++	}
++
++	/* glue init */
++	setbits_le32(glue_base + CLKRST_CTRL, AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION);
++	clrbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
++
++	/* configure mux for vbus, powerpresent and bvalid signals */
++	setbits_le32(glue_base + USB2_VBUS_MNGMNT_SEL1,
++		     SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
++		     SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
++		     SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG));
++	setbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
++};
++
++struct dwc3_glue_ops stih407_ops = {
++	.glue_configure = dwc3_stih407_glue_configure,
++};
++
++static const struct udevice_id dwc3_sti_match[] = {
++	{ .compatible = "st,stih407-dwc3", .data = (ulong)&stih407_ops},
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(dwc3_sti_wrapper) = {
++	.name = "dwc3-sti",
++	.id = UCLASS_SIMPLE_BUS,
++	.of_match = dwc3_sti_match,
++	.bind = dwc3_glue_bind,
++	.probe = dwc3_glue_probe,
++	.remove = dwc3_glue_remove,
++	.plat_auto = sizeof(struct dwc3_glue_data),
++};
 -- 
 2.25.1
 
