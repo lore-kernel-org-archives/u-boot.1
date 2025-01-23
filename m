@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46CE2C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 06:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA83EC02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 07:01:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B53EF80243;
-	Thu, 23 Jan 2025 07:31:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF54F801B0;
+	Thu, 23 Jan 2025 08:01:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yyhwqp0m";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yPopKld8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF46680275; Thu, 23 Jan 2025 07:31:52 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id DC27980214; Thu, 23 Jan 2025 08:00:59 +0100 (CET)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55AB480214
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 07:31:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84BE780137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 08:00:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e39779a268bso940880276.1
- for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 22:31:50 -0800 (PST)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-e549b0f8d57so933630276.3
+ for <u-boot@lists.denx.de>; Wed, 22 Jan 2025 23:00:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737613909; x=1738218709; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1737615656; x=1738220456; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QZU+ynMaE0Xe8D1GUqX+dHhvOwOdIR84EGAMYXLcQ+E=;
- b=yyhwqp0mbIE/S0HtZS//I53j18qVZwRv85D4JzFxtoeHwhqQHoOCGJ3TPNqda2uwcv
- i1sE0QkaCbLdyGkkGo48NAXcdVq+z1ocpHZ3WMGB+Tui5qAM8yr895SIIHIhROY8eMpf
- I+oViZWzWXMdyuv5QkcM4UvJohPvHcQ/PYfcpBlytW0UCNdyw1ISumGmLr+BUWFtCxl7
- v38v7+BZVgPcDJ7E4TdMNPrSxdSYgjAM5gzbFL7ulXTMWbYr2yFg8xhN7X0l6/Tqs9iW
- Gt/CSLLZ4qv69+zl0PQdOgeMohHHaEo+SATeorqOFfufdcDTTpNd2gkuQl8OIx5t3zFD
- q1dw==
+ bh=+dgFCDGK7bpjis+8rEGIwkzUX5vO0Me2pB4HRgUBFR8=;
+ b=yPopKld8baGWtE7udmgFJ6Kp2iQz/SxlfLDOw1Cg3PaqNd8OpsJeLyI6yhQiOnZcip
+ UMwyAt++4HaksRUJMxDcW3hJ7ZM0uYK3FI5/tgSyfZeof5UuXbGGla9D4kC+waBfwh0w
+ eMrUtalYlaQbRF49/z3WQ7m5KWiA31vdMQBelVMxilmck+/M3NL7PQmOGu6D7oNopxfo
+ dj8adAl7mY485XNPxLCNL9o2spdsshcmsAF9XKeUTgcgww9BIGsFmn7/Vd0gQoJ0Q4Qr
+ ypf/rhY8H0rlVjtZTYzT/SMPb2xaQcr3r+EjOxUoEwxIi1fkVEs4irUonqsc+SzMeD9E
+ ldtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737613909; x=1738218709;
+ d=1e100.net; s=20230601; t=1737615656; x=1738220456;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QZU+ynMaE0Xe8D1GUqX+dHhvOwOdIR84EGAMYXLcQ+E=;
- b=A4sY28muqC6lad1HM+BWpolQ3p6xOq2QuaHPx5Zwq4M2vlwU4rns/r7kkLZ/QtOqtn
- eyUJK3SoWL0AaVn/OWxI4cD8a2TvevAZhYBdtFHQzrrX0/V6qdKMrVXDRtYTktOiB0hg
- +hBozRW4LKDTRIydlC5grf+pjq09J7/ywsud/4rUaCU+gRXOUKT4MqAl1jycy3awWA5J
- UK0Ji3Zqoa7NNLUcBim8sK3+8iNh+gjxJO+ERFpar99/CXHYpGZDBErb/TN6/aR+WtDA
- pRdJjSprVUK7EQCCPdCzIYF59UfZY/cU7sY+k3oUv4c3Gi5iMKDh1gX4YVR65X+o3Qs1
- AJjQ==
-X-Gm-Message-State: AOJu0Yw3wVB+a1CHs2aidPkrFJ73Ffhl8fi9O5fdXJNvUpEDkLqQPLtW
- GSrX+xCSQmS4A+YJl3EcvvVCsngZt9avBeqJH9dY9z0BsxPdP7dtqvVyV7cyhA6+MKy4YM+i3jA
- dXSmZTzw7IAJRzXp7c/ngmQBR55W+kFoh52cO9Q==
-X-Gm-Gg: ASbGnctsVS6Lyjmdcarx0GiqMa3Wb/c2wpWPGinzgzNHTlLsuL/+AzOy343BzfHdkDk
- UdYGkrT6dvp/19auKu1MOsfmMOg4CwOfd9v1vkQ5gC0i3hLA8ArVThevcIyD1Vw==
-X-Google-Smtp-Source: AGHT+IHg4ge3QWfRg8p/1VFD75rCiaSjeX65puy0xfV7/Iy/lsfBzgbPzU90BrM2vOBxrm5GCaBwLUFOQ5DHXIvanac=
-X-Received: by 2002:a05:6902:2ec7:b0:e57:37f8:d554 with SMTP id
- 3f1490d57ef6-e58257ce0eamr2009870276.8.1737613897066; Wed, 22 Jan 2025
- 22:31:37 -0800 (PST)
+ bh=+dgFCDGK7bpjis+8rEGIwkzUX5vO0Me2pB4HRgUBFR8=;
+ b=l8Qv/bQPd4vvmCSdBgkZG7scYrTiwF6Y16ZYp2zECCDMqyYwCCE8o3bwbgsu+NVlpR
+ mSz7Cd9vpu5S9jlBGdiMlunV9FMUZESRYY/NFsPGSljUIQ2/uF9bmCwQaBs3L+iyugGS
+ G0lhMde0m1IEqGP3LMxOiBPoKCwzJbVmJGxjMkiurDX7yn26aQaPJ/cqykfeTmdAj/7J
+ AAQslgnwz3dvDwUk9UN40wAqWWzZcf7LvF6+S97JR9fFrxY9mc2k/JZu/KgG1Q19Car9
+ uy2IO+9zPTMgK6NwptjML9BVFVBN0W1tCv2nCW8CrRKptPqq2J8c8dasv735If0A5O6D
+ OVdw==
+X-Gm-Message-State: AOJu0Yz6A9NXm3qBSCzpDFHEnkjWeQvN26A9Idol0OS9PGXeLz4plTBQ
+ 1Nbf72dkIzH5fGGH4oGeFtZUBHqpPVhgkHrbtuDeOej+cp11oPKrSajtwkhvUKXHnyo+mx6pQDk
+ 9pTm67uGJJ2rjfjdco9GKEQn5xcJe922Rukip0g==
+X-Gm-Gg: ASbGncsMNkS1AJ0xCmyNw8GzZeOp21p7fK9dbaU8gOqNuyhjv1wgasS/EmSAPLZdPBH
+ CINEwavOjbc3dZ4HC6pnSc22gSF8OxCgAL1xMxIeN2io2X+TPl1p2UUj2XEy8BA==
+X-Google-Smtp-Source: AGHT+IFz6OF321KgRDEpbg1+K8+XtfJk5Q4ipvvWRpHqcrPMsAf2RUnpSCNVxyNUgFduq8RTmdrC/RGQ2Kw19AO9axo=
+X-Received: by 2002:a25:5889:0:b0:e57:d438:be50 with SMTP id
+ 3f1490d57ef6-e57d438bf30mr10298168276.2.1737615656135; Wed, 22 Jan 2025
+ 23:00:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20250117164032.88942-1-raymond.mao@linaro.org>
- <20250117164032.88942-4-raymond.mao@linaro.org>
-In-Reply-To: <20250117164032.88942-4-raymond.mao@linaro.org>
+References: <20250117163545.88627-1-raymond.mao@linaro.org>
+ <20250117163545.88627-3-raymond.mao@linaro.org>
+In-Reply-To: <20250117163545.88627-3-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 23 Jan 2025 08:31:01 +0200
-X-Gm-Features: AbW1kvbY675FdENQpgu9yvD0JT_dMNUR9BXeiwYhzLgFnh5Khxt3JlWrVWuO_jM
-Message-ID: <CAC_iWjL4xtW55Js1=QnwbQxmTeKZwePHcy7ZL-4rYA_CcVJpDw@mail.gmail.com>
-Subject: Re: [PATCH v2 3/6] tpm: add wrapper and helper APIs for PCR allocate
+Date: Thu, 23 Jan 2025 09:00:19 +0200
+X-Gm-Features: AbW1kvas3iwZcX4jTOnqxI7YLJaC4bxQPhmSpq40ZYJc-EOtjUVp7j0RaPWoXbI
+Message-ID: <CAC_iWjJ0JO8sB4Q5Gc_5LBByaVmiz6D0sgWjFggqCd9xEX2RLg@mail.gmail.com>
+Subject: Re: [PATCH v6 3/3] tpm: get tpm event log from bloblist
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Tim Harvey <tharvey@gateworks.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Michal Simek <michal.simek@amd.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Levi Yun <yeoreum.yun@arm.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Eddie James <eajames@linux.ibm.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,240 +98,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Hi Raymond
 
-
-On Fri, 17 Jan 2025 at 18:40, Raymond Mao <raymond.mao@linaro.org> wrote:
+On Fri, 17 Jan 2025 at 18:36, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Add PCR allocate wrapper APIs for using in tcg2 protocol.
-> The wrapper proceeds a PCR allocate command, followed by a
-> shutdown command.
-> A system boot is required after two commands since TPM device needs
-> a HW reset to activate the new algorithms config.
-> Also, a helper function is included to determine the new bank mask
-> for PCR allocation by combining the status of current active,
-> supported and eventlog bank masks.
-> A new kconfig is created. PCR allocate and system reboot only
-> happens when the kconfig is selected, otherwise just exit with
-> errors.
+> Get tpm event log from bloblist instead of FDT when bloblist is
+> enabled and valid from previous boot stage.
 >
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
-> changes in v2
-> - Rename the newly added APIs.
+> Changes in v2
+> - Remove patch dependency.
+> - Remove the fallback to FDT when BLOBLIST is selected.
+> Changes in v3
+> - Malloc an 8KB buffer when user eventlog buffer does not exist.
+> Changes in v4
+> - Replace the default eventlog size with TPM2_EVENT_LOG_SIZE.
+> Changes in v5
+> - Replace TPM2_EVENT_LOG_SIZE with CONFIG_TPM2_EVENT_LOG_SIZE.
+> - Add an inline TODO comment.
+> Changes in v6
+> - Remove the malloc and keep the buffer pointed by "sml" for the fallback
+>   as it is the right place for linux to discover the eventlog.
 >
->  include/tpm-v2.h |  22 +++++++++
->  lib/Kconfig      |  12 +++++
->  lib/tpm-v2.c     | 121 +++++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 155 insertions(+)
+>  lib/tpm_tcg2.c | 58 +++++++++++++++++++++++++++++++++-----------------
+>  1 file changed, 38 insertions(+), 20 deletions(-)
 >
-> diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-> index af3158f6e4..58085c9c59 100644
-> --- a/include/tpm-v2.h
-> +++ b/include/tpm-v2.h
-> @@ -703,6 +703,19 @@ u32 tpm2_report_state(struct udevice *dev, uint vendor_cmd, uint vendor_subcmd,
->  u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
->                           uint vendor_subcmd);
+> diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+> index 4134d93a35..6425bf143a 100644
+> --- a/lib/tpm_tcg2.c
+> +++ b/lib/tpm_tcg2.c
+> @@ -5,6 +5,7 @@
 >
-> +/**
-> + * tpm2_set_algorithm_mask - Set the bitmask of algorithms based on the
-> + *                          active/supported banks and the one from
-> + *                          eventlog.
-> + *
-> + * @dev                TPM device
-> + * @log_active Active algorithm bitmask
-> + * @mask       Bitmask to set
-> + *
-> + * Return: zero on success, negative errno otherwise
-> + */
-> +int tpm2_set_algorithm_mask(struct udevice *dev, u32 log_active, u32 *mask);
+>  #include <dm.h>
+>  #include <dm/of_access.h>
+> +#include <malloc.h>
 
-This isn't a set right? This is getting the pcr banks we need to
-configure later on.
-The previous version had this as 'tpm2_pcr_allocate_get_mask' which
-was a bit less confusing. But on that version, I asked to rename it to
-tpm2_scan_masks(). Since the function is trying to cross-check the
-available banks and the ones sent in the EventLog.
-Can you rename it to that? Or perhaps tpm2_is_mask_allowed()?
+This is probably a leftover from your V2
+
+>  #include <tpm_api.h>
+>  #include <tpm-common.h>
+>  #include <tpm-v2.h>
+> @@ -19,6 +20,7 @@
+>  #include <linux/unaligned/generic.h>
+>  #include <linux/unaligned/le_byteshift.h>
+>  #include "tpm-utils.h"
+> +#include <bloblist.h>
+>
+>  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_bank, u32 *active_bank,
+>                       u32 *bank_num)
+> @@ -672,21 +674,40 @@ void tcg2_measurement_term(struct udevice *dev, struct tcg2_event_log *elog,
+>
+>  __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
+>  {
+> -       const __be32 *addr_prop;
+> -       const __be32 *size_prop;
+> +       const __be32 *addr_prop = NULL;
+> +       const __be32 *size_prop = NULL;
+>         int asize;
+>         int ssize;
+> +       struct ofnode_phandle_args args;
+> +       phys_addr_t a;
+> +       fdt_size_t s;
+>
+>         *addr = NULL;
+>         *size = 0;
+>
+> -       addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
+> -       if (!addr_prop)
+> -               addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
+> +       *addr = bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
+> +       if (*addr && *size)
+
+Don't we need map_physmem here as well?
 
 Thanks
 /Ilias
-
+> +               return 0;
+>
+> -       size_prop = dev_read_prop(dev, "tpm_event_log_size", &ssize);
+> -       if (!size_prop)
+> +       /*
+> +        * TODO:
+> +        * Replace BLOBLIST with a new kconfig for handoff all components
+> +        * (fdt, tpm event log, etc...) from previous boot stage via bloblist
+> +        * mandatorily following Firmware Handoff spec.
+> +        */
+> +       if (!CONFIG_IS_ENABLED(BLOBLIST)) {
+> +               addr_prop = dev_read_prop(dev, "tpm_event_log_addr", &asize);
+> +               size_prop = dev_read_prop(dev, "tpm_event_log_size", &ssize);
+> +       }
 > +
->  /**
->   * tpm2_pcr_config_algo() - Allocate the active PCRs. Requires reboot
->   *
-> @@ -730,6 +743,15 @@ u32 tpm2_pcr_config_algo(struct udevice *dev, u32 algo_mask,
->  u32 tpm2_send_pcr_allocate(struct udevice *dev, const char *pw,
->                            const ssize_t pw_sz, struct tpml_pcr_selection *pcr,
->                            u32 pcr_len);
-> +/**
-> + * tpm2_activate_banks() - Activate PCR banks
-> + *
-> + * @param dev   TPM device
-> + * @log_active Bitmask of eventlog algorithms
-> + *
-> + * Return: code of the operation
-> + */
-> +int tpm2_activate_banks(struct udevice *dev, u32 log_active);
+> +       /*
+> +        * If no eventlog was observed, a sml buffer is required for the kernel
+> +        * to discover the eventlog.
+> +        */
+> +       if (!addr_prop || !size_prop) {
+> +               addr_prop = dev_read_prop(dev, "linux,sml-base", &asize);
+>                 size_prop = dev_read_prop(dev, "linux,sml-size", &ssize);
+> +       }
 >
->  /**
->   * tpm2_auto_start() - start up the TPM and perform selftests.
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index baeb615626..0732333849 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -514,6 +514,18 @@ config VPL_TPM
->           for the low-level TPM interface, but only one TPM is supported at
->           a time by the TPM library.
+>         if (addr_prop && size_prop) {
+>                 u64 a = of_read_number(addr_prop, asize / sizeof(__be32));
+> @@ -694,22 +715,19 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
 >
-> +config TPM_PCR_ALLOCATE
-> +       bool "Re-configurate TPM algorithms in run-time (PCR allocate)"
-> +       depends on TPM_V2 && (MEASURED_BOOT || EFI_TCG2_PROTOCOL)
-> +       help
-> +         This enables a detection for the dismatches of algorithms among TPM
-> +         device, eventlog from previous boot stage and U-Boot support.
-> +         A PCR allocate command will be sent to reconfigurate the TPM device
-> +         in run-time to make sure algorithms in TPM device, eventlog and
-> +         U-Boot are aligned with each other.
-> +         A system reboot will be proceeded after then to activate the new
-> +         algorithms.
+>                 *addr = map_physmem(a, s, MAP_NOCACHE);
+>                 *size = (u32)s;
+> -       } else {
+> -               struct ofnode_phandle_args args;
+> -               phys_addr_t a;
+> -               fdt_size_t s;
+>
+> -               if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
+> -                                              0, &args))
+> -                       return -ENODEV;
+> +               return 0;
+> +       }
 > +
->  endmenu
+> +       if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args))
+> +               return -ENODEV;
 >
->  menu "Android Verified Boot"
-> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index 045b5dd9eb..0e497b2c2a 100644
-> --- a/lib/tpm-v2.c
-> +++ b/lib/tpm-v2.c
-> @@ -44,6 +44,127 @@ static int tpm2_update_active_banks(struct udevice *dev)
+> -               a = ofnode_get_addr_size(args.node, "reg", &s);
+> -               if (a == FDT_ADDR_T_NONE)
+> -                       return -ENOMEM;
+> +       a = ofnode_get_addr_size(args.node, "reg", &s);
+> +       if (a == FDT_ADDR_T_NONE)
+> +               return -ENOMEM;
+>
+> -               *addr = map_physmem(a, s, MAP_NOCACHE);
+> -               *size = (u32)s;
+> -       }
+> +       *addr = map_physmem(a, s, MAP_NOCACHE);
+> +       *size = (u32)s;
+>
 >         return 0;
 >  }
->
-> +static void tpm2_print_selected_algorithm_name(u32 selected)
-> +{
-> +       size_t i;
-> +       const char *str;
-> +
-> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-> +               const struct digest_info *algo = &hash_algo_list[i];
-> +
-> +               if (!(selected & algo->hash_mask))
-> +                       continue;
-> +
-> +               str = tpm2_algorithm_name(algo->hash_alg);
-> +               if (str)
-> +                       log_info("%s\n", str);
-> +       }
-> +}
-> +
-> +int tpm2_set_algorithm_mask(struct udevice *dev, u32 log_active, u32 *mask)
-> +{
-> +       struct tpml_pcr_selection pcrs;
-> +       u32 active = 0;
-> +       u32 supported = 0;
-> +       int rc, i;
-> +
-> +       *mask = 0;
-> +
-> +       rc = tpm2_get_pcr_info(dev, &pcrs);
-> +       if (rc)
-> +               return rc;
-> +
-> +       for (i = 0; i < pcrs.count; i++) {
-> +               struct tpms_pcr_selection *sel = &pcrs.selection[i];
-> +               size_t j;
-> +               u32 hash_mask = 0;
-> +
-> +               for (j = 0; j < ARRAY_SIZE(hash_algo_list); j++) {
-> +                       if (hash_algo_list[j].hash_alg == sel->hash)
-> +                               hash_mask = hash_algo_list[j].hash_mask;
-> +               }
-> +
-> +               if (tpm2_algorithm_supported(sel->hash))
-> +                       supported |= hash_mask;
-> +
-> +               if (tpm2_is_active_bank(sel))
-> +                       active |= hash_mask;
-> +       }
-> +
-> +       /* All eventlog algorithm(s) must be supported */
-> +       if (log_active & ~supported) {
-> +               log_err("EventLog contains U-Boot unsupported algorithm(s)\n");
-> +               tpm2_print_selected_algorithm_name(log_active & ~supported);
-> +               rc = -1;
-> +       }
-> +       if (log_active && active & ~log_active) {
-> +               log_warning("TPM active algorithm(s) not exist in eventlog\n");
-> +               tpm2_print_selected_algorithm_name(active & ~log_active);
-> +               *mask = log_active;
-> +       }
-> +
-> +       /* Any active algorithm(s) which are not supported must be removed */
-> +       if (active & ~supported) {
-> +               log_warning("TPM active algorithm(s) unsupported by u-boot\n");
-> +               tpm2_print_selected_algorithm_name(active & ~supported);
-> +               if (*mask)
-> +                       *mask = active & supported & *mask;
-> +               else
-> +                       *mask = active & supported;
-> +       }
-> +
-> +       return rc;
-> +}
-> +
-> +static int tpm2_pcr_allocate(struct udevice *dev, u32 algo_mask)
-> +{
-> +       struct tpml_pcr_selection pcr = { 0 };
-> +       u32 pcr_len = 0;
-> +       int rc;
-> +
-> +       rc = tpm2_get_pcr_info(dev, &pcr);
-> +       if (rc)
-> +               return rc;
-> +
-> +       rc = tpm2_pcr_config_algo(dev, algo_mask, &pcr, &pcr_len);
-> +       if (rc)
-> +               return rc;
-> +
-> +       /* Assume no password */
-> +       rc = tpm2_send_pcr_allocate(dev, NULL, 0, &pcr, pcr_len);
-> +       if (rc)
-> +               return rc;
-> +
-> +       /* Send TPM2_Shutdown, assume mode = TPM2_SU_CLEAR */
-> +       return tpm2_startup(dev, false, TPM2_SU_CLEAR);
-> +}
-> +
-> +int tpm2_activate_banks(struct udevice *dev, u32 log_active)
-> +{
-> +       u32 algo_mask = 0;
-> +       int rc;
-> +
-> +       rc = tpm2_set_algorithm_mask(dev, log_active, &algo_mask);
-> +       if (rc)
-> +               return rc;
-> +
-> +       if (algo_mask) {
-> +               if (!IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE))
-> +                       return -1;
-> +
-> +               rc = tpm2_pcr_allocate(dev, algo_mask);
-> +               if (rc)
-> +                       return rc;
-> +
-> +               log_info("PCR allocate done, shutdown TPM and reboot\n");
-> +               do_reset(NULL, 0, 0, NULL);
-> +               log_err("reset does not work!\n");
-> +               return -1;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
->  u32 tpm2_startup(struct udevice *dev, bool bon, enum tpm2_startup_types mode)
->  {
->         int op = bon ? TPM2_CC_STARTUP : TPM2_CC_SHUTDOWN;
 > --
 > 2.25.1
 >
