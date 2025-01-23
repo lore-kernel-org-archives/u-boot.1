@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22174C0218B
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 12:12:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 155CEC0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 12:13:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C53E8076E;
+	by phobos.denx.de (Postfix) with ESMTP id EC5D3807E9;
 	Thu, 23 Jan 2025 13:12:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="poeNatM5";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="FSARefmB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95458807E1; Thu, 23 Jan 2025 13:12:27 +0100 (CET)
+ id 9C1AE80780; Thu, 23 Jan 2025 13:12:27 +0100 (CET)
 Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50B7080780
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 13:12:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D20A280711
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 13:12:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C31F2148A1E6; Thu, 23 Jan 2025 13:12:23 +0100 (CET)
+ with ESMTPSA id 39A72148A1E2; Thu, 23 Jan 2025 13:12:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
  t=1737634343;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1iP4CYGo1A8G+RymVe/oldA3jK+7fpnEmzW4jIx2NCE=;
- b=poeNatM57KuNVUxhxmoGAN9qVmHIvhZSSHi2zcMGzuI93JIIOJV+gFDScYigrkW26Soa6+
- wLIyOAw5WmSw4Vue9DXeNLsM8ie/jPZoDx0tQ1jPkVzbJ3M5iVZCZ2y6UlwwbA9mO1w1/k
- IO7GswyvxMjuIVtLZCieaKaBk3DTHQdMKKPs3qoexFpWHUOZbTYAlCNUT1e4ZzbMaxtdwG
- mtvXJPbWeE5kuTPoQbmdsOyjlIhEObvfp5icj5JzzfjS9Dnf9iO7136NyV+H/NV0dFJXL5
- nje/rznZjUlDn04aVzX8LoyR4f4unsnPlFwMnZmUZnyW7KHwXHzg7QbQcr4Zqg==
+ bh=h29FSw4cLBsZrbmONKPmNdhxgXS41fN9jDWB2hALiSU=;
+ b=FSARefmBskSz1+38MBmYe2MaugssiPjekZK/GhF1Fjtjcea+gr24eXOtzUqF6KMMuPwqT+
+ bCzUFZOSV0WZL3n03nAMTQXy134tddt7CMvX1nDhg8Xng2IYIFul/5zQf8oj5JJjBKVyCD
+ vyxjtwCPrBFzIh0gdc2U4kivNdNs6jdMFzHALkHmp47BjOzjftSWsBXDSxnbu8XSUjj3GD
+ g+RjU8O4vT9dLJy1OS6LZkNszVCTb2ncAn0MGubTxic63NxnRouImjQ4QH0dNGgGUTOBym
+ TtE9+avVFZ6e1WnXmx1GlsHzcTHRL2c1tXKD4Xkz/JASbyk4DU3kBsnFv/TXvw==
 From: Alexander Dahl <ada@thorsis.com>
 To: Tudor Ambarus <tudor.ambarus@microchip.com>,
  Eugen Hristev <eugen.hristev@microchip.com>,
  Jagan Teki <jagan@amarulasolutions.com>
 Cc: Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
- u-boot@lists.denx.de
-Subject: [PATCH 4/7] spi: atmel-quadspi: Remove default mode setting at probe
- time
-Date: Thu, 23 Jan 2025 13:12:12 +0100
-Message-Id: <20250123121215.21001-5-ada@thorsis.com>
+ u-boot@lists.denx.de, Yoshitaka Ikeda <ikeda@nskint.co.jp>
+Subject: [PATCH 2/7] spi: atmel-quadspi: Port collected fixes from Linux v5.10
+ and v5.15
+Date: Thu, 23 Jan 2025 13:12:10 +0100
+Message-Id: <20250123121215.21001-3-ada@thorsis.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250123121215.21001-1-ada@thorsis.com>
 References: <20250123121215.21001-1-ada@thorsis.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
@@ -71,34 +72,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Serial Memory Mode (SMM) is enabled with atmel_qspi_set_cfg() on
-each invocation of atmel_qspi_exec_op().  Setting SMM through
-atmel_qspi_init() at probe time is redundant.
+Port changes from a 4 piece patch series from Linux kernel v5.10, merged
+with v5.10-rc1-83-gc732b7567d869 ("Merge series "spi: atmel-quadspi: Fix
+AHB memory accesses" from Tudor Ambarus …").
 
-Removing the SMM setting at probe time should therefore 1) be safe to do
-and 2) allows for setting it to a different value in a future
-implementation of .xfer() which needs to disable SMM.
+Port the single fix v5.15-rc1-14-g09134c5322df9 ("spi: Fixed division by
+zero warning").
 
+Reduces differences between linux and u-boot driver.
+
+Cc: Tudor Ambarus <tudor.ambarus@microchip.com>
+Cc: Yoshitaka Ikeda <ikeda@nskint.co.jp>
 Signed-off-by: Alexander Dahl <ada@thorsis.com>
 ---
- drivers/spi/atmel-quadspi.c | 5 -----
- 1 file changed, 5 deletions(-)
+ drivers/spi/atmel-quadspi.c | 27 ++++++++++++++-------------
+ 1 file changed, 14 insertions(+), 13 deletions(-)
 
 diff --git a/drivers/spi/atmel-quadspi.c b/drivers/spi/atmel-quadspi.c
-index 9e596b7448c..467f29c01ca 100644
+index 3efb661803b..ea045acab65 100644
 --- a/drivers/spi/atmel-quadspi.c
 +++ b/drivers/spi/atmel-quadspi.c
-@@ -1052,11 +1052,6 @@ static int atmel_qspi_init(struct atmel_qspi *aq)
- 	/* Reset the QSPI controller */
- 	atmel_qspi_write(QSPI_CR_SWRST, aq, QSPI_CR);
+@@ -474,7 +474,7 @@ static int atmel_qspi_set_cfg(struct atmel_qspi *aq,
+ 		return mode;
+ 	ifr |= atmel_qspi_modes[mode].config;
  
--	/* Set the QSPI controller by default in Serial Memory Mode */
--	ret = atmel_qspi_set_serial_memory_mode(aq);
--	if (ret < 0)
--		return ret;
+-	if (op->dummy.buswidth && op->dummy.nbytes)
++	if (op->dummy.nbytes)
+ 		dummy_cycles = op->dummy.nbytes * 8 / op->dummy.buswidth;
+ 
+ 	/*
+@@ -529,10 +529,14 @@ static int atmel_qspi_set_cfg(struct atmel_qspi *aq,
+ 	if (dummy_cycles)
+ 		ifr |= QSPI_IFR_NBDUM(dummy_cycles);
+ 
+-	/* Set data enable */
+-	if (op->data.nbytes)
++	/* Set data enable and data transfer type. */
++	if (op->data.nbytes) {
+ 		ifr |= QSPI_IFR_DATAEN;
+ 
++		if (op->addr.nbytes)
++			ifr |= QSPI_IFR_TFRTYP_MEM;
++	}
++
+ 	/*
+ 	 * If the QSPI controller is set in regular SPI mode, set it in
+ 	 * Serial Memory Mode (SMM).
+@@ -545,27 +549,24 @@ static int atmel_qspi_set_cfg(struct atmel_qspi *aq,
+ 	/* Clear pending interrupts */
+ 	(void)atmel_qspi_read(aq, QSPI_SR);
+ 
+-	if (aq->caps->has_ricr) {
+-		if (!op->addr.nbytes && op->data.dir == SPI_MEM_DATA_IN)
+-			ifr |= QSPI_IFR_APBTFRTYP_READ;
 -
- 	/* Enable the QSPI controller */
- 	atmel_qspi_write(QSPI_CR_QSPIEN, aq, QSPI_CR);
+-		/* Set QSPI Instruction Frame registers */
++	/* Set QSPI Instruction Frame registers. */
++	if (op->addr.nbytes && !op->data.nbytes)
+ 		atmel_qspi_write(iar, aq, QSPI_IAR);
++
++	if (aq->caps->has_ricr) {
+ 		if (op->data.dir == SPI_MEM_DATA_IN)
+ 			atmel_qspi_write(icr, aq, QSPI_RICR);
+ 		else
+ 			atmel_qspi_write(icr, aq, QSPI_WICR);
+-		atmel_qspi_write(ifr, aq, QSPI_IFR);
+ 	} else {
+-		if (op->data.dir == SPI_MEM_DATA_OUT)
++		if (op->data.nbytes && op->data.dir == SPI_MEM_DATA_OUT)
+ 			ifr |= QSPI_IFR_SAMA5D2_WRITE_TRSFR;
+ 
+-		/* Set QSPI Instruction Frame registers */
+-		atmel_qspi_write(iar, aq, QSPI_IAR);
+ 		atmel_qspi_write(icr, aq, QSPI_ICR);
+-		atmel_qspi_write(ifr, aq, QSPI_IFR);
+ 	}
+ 
++	atmel_qspi_write(ifr, aq, QSPI_IFR);
++
+ 	return 0;
+ }
  
 -- 
 2.39.5
