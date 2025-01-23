@@ -4,81 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F40C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:08:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DEB6C0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:49:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55ACB807CD;
-	Thu, 23 Jan 2025 23:07:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9753B80243;
+	Thu, 23 Jan 2025 23:49:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XOnmkbvG";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="MCckHi4+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EABE780087; Thu, 23 Jan 2025 23:07:48 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 43454806DC; Thu, 23 Jan 2025 23:48:58 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FD71803B5
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:07:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BAA8B80137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:48:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-71fbb0d035dso757746a34.2
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 14:07:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737670064; x=1738274864; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1C6lIQAuRGV+2U4SJqarGMlGXoIcsOLs0ZGJw0I6Dn0=;
- b=XOnmkbvGCr5jev+ThmkVAR9WQHFqKMCjZ+9X4SMgctuD3fNZCZV/mUsSKta5XszFWW
- XigMklASz3YvhOBljeFZAy1BnbxpTQWRujLB9vjurr8c2VlioDkXCUixUHLqJHm34e49
- 1dgvqI7PGNfzZkYp+08bFY/qQTaO3+BSjjF9I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737670064; x=1738274864;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1C6lIQAuRGV+2U4SJqarGMlGXoIcsOLs0ZGJw0I6Dn0=;
- b=IpqIzcq58xTtuDpQ9zZnY39I5t6XPwCV9JeI982JT9tdO8a/Lzf3vt/lXqNU94CLdF
- xgEwzNN1xgM+6hmc2ZTzyEipa4dkMgQjoDayO4xgXitSxojMUZWp7hNJUuDqImTLpnk+
- JzvKc3VLN8ZpUHWFzQDv7vltvHgecj5qZZfEamv/MlEvx5ICokmX2bNy1oBeQoi2gLWD
- cvQPvm6Lg0+4NbWU1gS4HojTH1Fm7caf9R80ElUz5Ca1KVlnbEe63h7wAwB6MFEbuTlk
- iJKZxqi81XctaVnmwfy18GDHxDz6eeEhfAbINRJu+HV8tr5JXpY4sD2yCqbCZnM19sAh
- elog==
-X-Gm-Message-State: AOJu0YzVlDqUrElTRxWzKR4pybUdlz040pF8XhwpmCa1YGCjMop1kz27
- rLOazgRGkejsTTzjYF9SUw+sifCO3pzugSlDEtERTHtoE7tQjEK4hFoRuz2OPjxLe6XAXfPKj3M
- =
-X-Gm-Gg: ASbGncuJ+VW0+ZL+43erGZYQNZUaxVz0e+zViT9cryHSpLZsYtVDXQdX+KoIeiapktG
- W5knJ92un929xLcQARFYyvoUvhkiDhSYtbmso9Mb2vrkY4N1NDZK4Vp78J6MmPEfvhimr9/DvuC
- 0KWY371/v/VE8UMkm740M2n4EHF67AzAYIqICVamyF2DzyZ/89poHAqRrv1ByzgvfAdwBKlwuvF
- O4vtXjbC3gdGoENTDODBGpF4aMaBnDaz5EAk+OWEuDT4d8DYpq7YO6PbSjks2mMK3ArxP4Pb5tN
- jLM+In4osTwNhoOjAH4RzBxEJ6F8WbWhOqjRctBYqA==
-X-Google-Smtp-Source: AGHT+IF7qj3Zwst57NbZD8HBYwVDVQH8OlD2QoPkJaA1LlexyDGh0RK+98X2QPUAF9tr2nJAGpcvUA==
-X-Received: by 2002:a05:6830:3c0e:b0:71d:f762:7f97 with SMTP id
- 46e09a7af769-7249dafb615mr16364100a34.17.1737670064643; 
- Thu, 23 Jan 2025 14:07:44 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-724ecda47bbsm143136a34.2.2025.01.23.14.07.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2025 14:07:43 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Moritz Fischer <moritzf@google.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v5 5/5] bootmeth_efi: Support PXE booting
-Date: Thu, 23 Jan 2025 15:07:24 -0700
-Message-ID: <20250123220726.412396-6-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250123220726.412396-1-sjg@chromium.org>
-References: <20250123220726.412396-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=331d=UQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1737672533;
+ bh=5XZ8E4msbtkV2d8dlotnF9uKKxqm0StDGKXDWzjtyJ0=;
+ b=MCckHi4+mVzw1Ki/rvDaJ19O/ma/gUrK84Ot3R4RtN1665/oDi4DmUwl4YPrhzHN8XUeCQLb3
+ Zm+bKV3e5XWSI9VoRALZKKD3Uns5tK6Uzr6SbNfyV2p8jm0tUcaSJsGHWOakiOzpD0OjRJxBt5b
+ IiOP63bTc5ROtRGpaCZBdUbqjkUDkUa96hnBYcWzUkfGer97XuH5F2X3M0PmLNB65cEvMTngMNr
+ cfK26KAdYRlkXNrLZ8+c2acxQbWIX11UTE8KzUyygzTw6Gh8XmbkCPGafPdyEljUXE0wGOEEYwN
+ gJOIkCj8oz3RmRYQgghCnfLOmgS7fFietPUTz2QcyyeQ==
+X-Forward-Email-ID: 6792c751f07771e5c89e0104
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 00/13] rockchip: Add initial support for RK3528
+Date: Thu, 23 Jan 2025 22:48:12 +0000
+Message-ID: <20250123224844.3104592-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,86 +69,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Finish off the implementation so it is possible to boot an EFI app over
-a network.
+This series add initial support for the Rockchip RK3528 SoC.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Clk, pinctrl and rng drivers have been imported from vendor U-Boot with
+minor adjustments and fixes.
 
-(no changes since v3)
+Upstream DT for RK3528 is at a very basic state at the moment and this
+series instead add a few missing nodes to -u-boot.dtsi files to have
+a bootable system.
 
-Changes in v3:
-- Add new patch to support PXE booting
-- Rebase on Tom's tree (i.e. without the pointers/addresses series)
-  https://patchwork.ozlabs.org/project/uboot/list/?series=436241
+Features tested on a ArmSoM Sige1:
+- SD-card boot
+- eMMC boot
 
- boot/bootmeth_efi.c          | 15 +--------------
- lib/efi_loader/efi_bootbin.c |  5 ++++-
- 2 files changed, 5 insertions(+), 15 deletions(-)
+Features tested on a Radxa E20C v1.104:
+- SD-card boot
+- eMMC boot
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index b745ba8bd4b..0c9b4c3d59d 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -210,6 +210,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (size <= 0)
- 		return log_msg_ret("sz", -EINVAL);
- 	bflow->size = size;
-+	bflow->buf = map_sysmem(addr, size);
- 
- 	/* bootfile should be setup by dhcp */
- 	bootfile_name = env_get("bootfile");
-@@ -219,10 +220,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!bflow->fname)
- 		return log_msg_ret("fi0", -ENOMEM);
- 
--	/* do the hideous EFI hack */
--	efi_set_bootdev("Net", "", bflow->fname, map_sysmem(addr, 0),
--			bflow->size);
--
- 	/* read the DT file also */
- 	fdt_addr_str = env_get("fdt_addr_r");
- 	if (!fdt_addr_str)
-@@ -296,16 +293,6 @@ static int distro_efi_boot(struct udevice *dev, struct bootflow *bflow)
- 		if (bflow->flags & ~BOOTFLOWF_USE_BUILTIN_FDT)
- 			fdt = bflow->fdt_addr;
- 
--	} else {
--		/*
--		 * This doesn't actually work for network devices:
--		 *
--		 * do_bootefi_image() No UEFI binary known at 0x02080000
--		 *
--		 * But this is the same behaviour for distro boot, so it can be
--		 * fixed here.
--		 */
--		fdt = env_get_hex("fdt_addr_r", 0);
- 	}
- 
- 	if (efi_bootflow_run(bflow))
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index efc2ca36c0f..f015d7946b4 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -302,6 +302,9 @@ static const char *calc_dev_name(struct bootflow *bflow)
- 	media_dev = dev_get_parent(bflow->dev);
- 
- 	if (!bflow->blk) {
-+		if (device_get_uclass_id(media_dev) == UCLASS_ETH)
-+			return "Net";
-+
- 		log_err("Cannot boot EFI app on media '%s'\n",
- 			dev_get_uclass_name(media_dev));
- 
-@@ -342,7 +345,7 @@ efi_status_t efi_bootflow_run(struct bootflow *bflow)
- 	ret = calculate_paths(dev_name, devnum_str, bflow->fname, &device,
- 			      &image);
- 	if (ret)
--		return ret;
-+		return EFI_UNSUPPORTED;
- 
- 	if (bflow->flags & BOOTFLOWF_USE_BUILTIN_FDT) {
- 		log_debug("Booting with built-in fdt\n");
+Features tested on a Radxa ROCK 2A v1.202:
+- SD-card boot
+
+Boot log on a ArmSoM Sige1:
+
+  DDR 44ec2e0a51 huan.he 24/07/12-14:38:48,fwver: v1.10
+  [...]
+  out
+  
+  U-Boot SPL 2025.01 (Jan 23 2025 - 20:16:33 +0000)
+  Trying to boot from MMC1
+  ## Checking hash(es) for config config-1 ... OK
+  ## Checking hash(es) for Image atf-1 ... sha256+ OK
+  ## Checking hash(es) for Image u-boot ... sha256+ OK
+  ## Checking hash(es) for Image fdt-1 ... sha256+ OK
+  ## Checking hash(es) for Image atf-2 ... sha256+ OK
+  ## Checking hash(es) for Image atf-3 ... sha256+ OK
+  INFO:    Preloader serial: 0
+  NOTICE:  BL31: v2.3():v2.3-857-g059b3c586:derrick.huang, fwver: v1.18
+  NOTICE:  BL31: Built : 17:43:24, Nov 18 2024
+  INFO:    rk_otp_init finish!
+  INFO:    ARM GICv2 driver initialized
+  INFO:    nonboot_cpus_off: clst_st=0xc0e, core_st=0xe1e0 boot_cpu=0
+  INFO:    dfs DDR fsp_param[0].freq_mhz= 1056MHz
+  INFO:    dfs DDR fsp_param[1].freq_mhz= 324MHz
+  INFO:    dfs DDR fsp_param[2].freq_mhz= 528MHz
+  INFO:    dfs DDR fsp_param[3].freq_mhz= 780MHz
+  INFO:    idle_st=0x0, pd_st=0x0
+  INFO:    Using opteed sec cpu_context!
+  INFO:    boot cpu mask: 1
+  INFO:    rk_otp_init finish!
+  INFO:    RK3528 SoC (0x101)
+  INFO:    BL31: Initializing runtime services
+  WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+  ERROR:   Error initializing runtime service opteed_fast
+  INFO:    BL31: Preparing for EL3 exit to normal world
+  INFO:    Entry point address = 0x200000
+  INFO:    SPSR = 0x3c9
+  
+  
+  U-Boot 2025.01 (Jan 23 2025 - 20:16:33 +0000)
+  
+  Model: Generic RK3528
+  SoC:   RK3528A
+  DRAM:  2 GiB
+  Core:  98 devices, 20 uclasses, devicetree: separate
+  MMC:   mmc@ffbf0000: 0, mmc@ffc30000: 1
+  Loading Environment from nowhere... OK
+  In:    serial@ff9f0000
+  Out:   serial@ff9f0000
+  Err:   serial@ff9f0000
+  Hit any key to stop autoboot:  0
+  =>
+
+This series depends on the pending merge of devicetree-rebasing
+v6.13-dts tag.
+
+Jonas Karlman (8):
+  arch: arm: rockchip: Add initial support for RK3528
+  ram: rockchip: Add basic support for RK3528
+  mmc: rockchip_sdhci: Extend variant configuration
+  mmc: rockchip_sdhci: Add initial support for RK3528
+  mmc: rockchip_sdhci: Gate clock for glitch free phase switching
+  arm: dts: rockchip: Add rk3528-u-boot.dtsi
+  board: rockchip: Add minimal generic RK3528 board
+  board: rockchip: Add Radxa E20C
+
+Joseph Chen (2):
+  clk: rockchip: Add support for RK3528
+  arm: dts: rockchip: Add rk3528-pinctrl.dtsi
+
+Lin Jinhan (1):
+  rng: rockchip: Add support for rkrng variant
+
+Steven Liu (1):
+  pinctrl: rockchip: Add support for RK3528
+
+Yifeng Zhao (1):
+  rockchip: mkimage: Add support for RK3528
+
+ arch/arm/dts/rk3528-generic-u-boot.dtsi       |   31 +
+ arch/arm/dts/rk3528-generic.dts               |   20 +
+ arch/arm/dts/rk3528-pinctrl.dtsi              | 1397 +++++++++++++
+ arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi    |   31 +
+ arch/arm/dts/rk3528-u-boot.dtsi               |  249 +++
+ arch/arm/include/asm/arch-rk3528/boot0.h      |    9 +
+ arch/arm/include/asm/arch-rk3528/gpio.h       |    9 +
+ arch/arm/include/asm/arch-rockchip/clock.h    |    7 +
+ .../include/asm/arch-rockchip/cru_rk3528.h    |  388 ++++
+ arch/arm/mach-rockchip/Kconfig                |   50 +
+ arch/arm/mach-rockchip/Makefile               |    1 +
+ arch/arm/mach-rockchip/rk3528/Kconfig         |   15 +
+ arch/arm/mach-rockchip/rk3528/MAINTAINERS     |   11 +
+ arch/arm/mach-rockchip/rk3528/Makefile        |    5 +
+ arch/arm/mach-rockchip/rk3528/clk_rk3528.c    |   16 +
+ arch/arm/mach-rockchip/rk3528/rk3528.c        |  104 +
+ arch/arm/mach-rockchip/rk3528/syscon_rk3528.c |   19 +
+ arch/arm/mach-rockchip/sdram.c                |    3 +-
+ configs/generic-rk3528_defconfig              |   39 +
+ configs/radxa-e20c-rk3528_defconfig           |   35 +
+ doc/board/rockchip/rockchip.rst               |   13 +
+ drivers/clk/rockchip/Makefile                 |    1 +
+ drivers/clk/rockchip/clk_pll.c                |   23 +-
+ drivers/clk/rockchip/clk_rk3528.c             | 1744 +++++++++++++++++
+ drivers/mmc/rockchip_sdhci.c                  |   39 +-
+ drivers/pinctrl/rockchip/Makefile             |    1 +
+ drivers/pinctrl/rockchip/pinctrl-rk3528.c     |  292 +++
+ drivers/ram/rockchip/Makefile                 |    1 +
+ drivers/ram/rockchip/sdram_rk3528.c           |   33 +
+ drivers/rng/rockchip_rng.c                    |   73 +
+ include/configs/rk3528_common.h               |   42 +
+ include/dt-bindings/clock/rk3528-cru.h        |  751 +++++++
+ tools/rkcommon.c                              |    1 +
+ 33 files changed, 5443 insertions(+), 10 deletions(-)
+ create mode 100644 arch/arm/dts/rk3528-generic-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3528-generic.dts
+ create mode 100644 arch/arm/dts/rk3528-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/rk3528-radxa-e20c-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3528-u-boot.dtsi
+ create mode 100644 arch/arm/include/asm/arch-rk3528/boot0.h
+ create mode 100644 arch/arm/include/asm/arch-rk3528/gpio.h
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3528.h
+ create mode 100644 arch/arm/mach-rockchip/rk3528/Kconfig
+ create mode 100644 arch/arm/mach-rockchip/rk3528/MAINTAINERS
+ create mode 100644 arch/arm/mach-rockchip/rk3528/Makefile
+ create mode 100644 arch/arm/mach-rockchip/rk3528/clk_rk3528.c
+ create mode 100644 arch/arm/mach-rockchip/rk3528/rk3528.c
+ create mode 100644 arch/arm/mach-rockchip/rk3528/syscon_rk3528.c
+ create mode 100644 configs/generic-rk3528_defconfig
+ create mode 100644 configs/radxa-e20c-rk3528_defconfig
+ create mode 100644 drivers/clk/rockchip/clk_rk3528.c
+ create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3528.c
+ create mode 100644 drivers/ram/rockchip/sdram_rk3528.c
+ create mode 100644 include/configs/rk3528_common.h
+ create mode 100644 include/dt-bindings/clock/rk3528-cru.h
+
 -- 
-2.43.0
+2.48.1
 
