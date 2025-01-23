@@ -4,66 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41115C0218E
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 01:08:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A246C02181
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 01:37:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C331B807EE;
-	Thu, 23 Jan 2025 02:08:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CEA1480214;
+	Thu, 23 Jan 2025 02:37:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xQIz6DVF";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92C90801B0; Thu, 23 Jan 2025 02:08:06 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E04AC80283
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 02:08:01 +0100 (CET)
+ id 4FEFC80243; Thu, 23 Jan 2025 02:37:56 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 70DA9801B0
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 02:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50N17x21281277
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 22 Jan 2025 19:07:59 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1737594479;
- bh=2gU5XNPLFBj1NOR/HDiZ8MIy0aa5TNMPT2SpmxbUFYM=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=xQIz6DVFayqJC8yFKM3pb5OWunif+A5hVcMlHoLWOX9uYeh0Vq7/JBotxQhm9wmcC
- 5viKiDPcJJbDqgyIB9G18INJZYsKqjVOHSyxXkCOXExWYgkkHkGJUtkoq1NKm86hek
- OCwMvRsNLeRfrVRVkmQV1Sj6i2b0smp37eoakHwI=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50N17xPf092309;
- Wed, 22 Jan 2025 19:07:59 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- Jan 2025 19:07:59 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 Jan 2025 19:07:59 -0600
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50N17xaQ066772;
- Wed, 22 Jan 2025 19:07:59 -0600
-From: Judith Mendez <jm@ti.com>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2FA141063;
+ Wed, 22 Jan 2025 17:38:21 -0800 (PST)
+Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
+ [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A90463F66E;
+ Wed, 22 Jan 2025 17:37:51 -0800 (PST)
+From: Andre Przywara <andre.przywara@arm.com>
 To: Tom Rini <trini@konsulko.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH 1/4] remoteproc: k3-m4: Introduce K3 remote proc driver for M4
- subsystem
-Date: Wed, 22 Jan 2025 19:07:56 -0600
-Message-ID: <20250123010759.810799-2-jm@ti.com>
-X-Mailer: git-send-email 2.48.0
-In-Reply-To: <20250123010759.810799-1-jm@ti.com>
-References: <20250123010759.810799-1-jm@ti.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Pull request: u-boot-sunxi/master for 2025.04
+Date: Thu, 23 Jan 2025 01:36:20 +0000
+Message-ID: <20250123013620.23914-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,474 +55,210 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hari Nagalla <hnagalla@ti.com>
+Hi Tom,
 
-Some K3 devices like AM64, AM62 devices have a M4 processor in MCU
-voltage domain.
+please pull sunxi changes for this cycle:
 
-Add a remote proc driver to support this subsystem to be able to load
-and boot the M4 core.
+Following the move of the H616 family to OF_UPSTREAM in the last cycle,
+now some older SoCs with identical DTs follow the lead: the F1C100s, A10,
+A10s, A13. The remaining SoCs suffer from that IRQ cells incompatiblity,
+breaking support for Linux < v5.13, so I am holding their move back still.
 
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-[Judith: Fixed comments explaining local resets]
-Signed-off-by: Judith Mendez <jm@ti.com>
----
- drivers/remoteproc/Kconfig          |  10 +
- drivers/remoteproc/Makefile         |   1 +
- drivers/remoteproc/ti_k3_m4_rproc.c | 411 ++++++++++++++++++++++++++++
- 3 files changed, 422 insertions(+)
- create mode 100644 drivers/remoteproc/ti_k3_m4_rproc.c
+Otherwise we get proper support for the PinePhone v1.2, and PSTORE support
+for all revisions of that device.
 
-diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-index 2790b168b19..e579c4e8371 100644
---- a/drivers/remoteproc/Kconfig
-+++ b/drivers/remoteproc/Kconfig
-@@ -80,6 +80,16 @@ config REMOTEPROC_TI_K3_R5F
- 	  on various TI K3 family of SoCs through the remote processor
- 	  framework.
- 
-+config REMOTEPROC_TI_K3_M4F
-+	bool "TI K3 M4F remoteproc support"
-+	select REMOTEPROC
-+	depends on ARCH_K3
-+	depends on TI_SCI_PROTOCOL
-+	help
-+	  Say y here to support TI's M4F remote processor subsystems
-+	  on various TI K3 family of SoCs through the remote processor
-+	  framework.
-+
- config REMOTEPROC_TI_POWER
- 	bool "Support for TI Power processor"
- 	select REMOTEPROC
-diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
-index 3a092b7660e..f81e5009c5e 100644
---- a/drivers/remoteproc/Makefile
-+++ b/drivers/remoteproc/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_REMOTEPROC_SANDBOX) += sandbox_testproc.o
- obj-$(CONFIG_REMOTEPROC_STM32_COPRO) += stm32_copro.o
- obj-$(CONFIG_REMOTEPROC_TI_K3_ARM64) += ti_k3_arm64_rproc.o
- obj-$(CONFIG_REMOTEPROC_TI_K3_DSP) += ti_k3_dsp_rproc.o
-+obj-$(CONFIG_REMOTEPROC_TI_K3_M4F) += ti_k3_m4_rproc.o
- obj-$(CONFIG_REMOTEPROC_TI_K3_R5F) += ti_k3_r5f_rproc.o
- obj-$(CONFIG_REMOTEPROC_TI_POWER) += ti_power_proc.o
- obj-$(CONFIG_REMOTEPROC_TI_PRU) += pru_rproc.o
-diff --git a/drivers/remoteproc/ti_k3_m4_rproc.c b/drivers/remoteproc/ti_k3_m4_rproc.c
-new file mode 100644
-index 00000000000..5a5ae2fa81d
---- /dev/null
-+++ b/drivers/remoteproc/ti_k3_m4_rproc.c
-@@ -0,0 +1,411 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Texas Instruments' K3 M4 Remoteproc driver
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
-+ *	Hari Nagalla <hnagalla@ti.com>
-+ */
-+
-+#include <dm.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <remoteproc.h>
-+#include <errno.h>
-+#include <clk.h>
-+#include <reset.h>
-+#include <asm/io.h>
-+#include <power-domain.h>
-+#include <dm/device_compat.h>
-+#include <linux/err.h>
-+#include <linux/sizes.h>
-+#include <linux/soc/ti/ti_sci_protocol.h>
-+#include "ti_sci_proc.h"
-+
-+/**
-+ * struct k3_m4_mem - internal memory structure
-+ * @cpu_addr: MPU virtual address of the memory region
-+ * @bus_addr: Bus address used to access the memory region
-+ * @dev_addr: Device address from remoteproc view
-+ * @size: Size of the memory region
-+ */
-+struct k3_m4_mem {
-+	void __iomem *cpu_addr;
-+	phys_addr_t bus_addr;
-+	phys_addr_t dev_addr;
-+	size_t size;
-+};
-+
-+/**
-+ * struct k3_m4_mem_data - memory definitions for m4 remote core
-+ * @name: name for this memory entry
-+ * @dev_addr: device address for the memory entry
-+ */
-+struct k3_m4_mem_data {
-+	const char *name;
-+	const u32 dev_addr;
-+};
-+
-+/**
-+ * struct k3_m4_boot_data - internal data structure used for boot
-+ * @boot_align_addr: Boot vector address alignment granularity
-+ * @uses_lreset: Flag to denote the need for local reset management
-+ */
-+struct k3_m4_boot_data {
-+	u32 boot_align_addr;
-+	bool uses_lreset;
-+};
-+
-+/**
-+ * struct k3_m4_privdata - Structure representing Remote processor data.
-+ * @m4_rst:		m4 rproc reset control data
-+ * @tsp:		Pointer to TISCI proc contrl handle
-+ * @data:		Pointer to DSP specific boot data structure
-+ * @mem:		Array of available memories
-+ * @num_mem:		Number of available memories
-+ */
-+struct k3_m4_privdata {
-+	struct reset_ctl m4_rst;
-+	struct ti_sci_proc tsp;
-+	struct k3_m4_boot_data *data;
-+	struct k3_m4_mem *mem;
-+	int num_mems;
-+};
-+
-+/*
-+ * The M4 cores have a local reset that affects only the CPU, and a
-+ * generic module reset that powers on the device and allows the M4 internal
-+ * memories to be accessed while the local reset is asserted. This function is
-+ * used to release the global reset on M4F to allow loading into the M4F
-+ * internal RAMs. This helper function is invoked in k3_m4_load() before any
-+ * actual firmware loading and is undone only in k3_m4_stop(). The local reset
-+ * cannot be released on M4 cores until after the firmware images are loaded.
-+ */
-+static int k3_m4_prepare(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	struct k3_m4_boot_data *data = m4->data;
-+	int ret;
-+
-+	if (!data->uses_lreset)
-+		return 0;
-+
-+	ret = ti_sci_proc_power_domain_on(&m4->tsp);
-+	if (ret)
-+		dev_err(dev, "cannot enable internal RAM loading, ret = %d\n",
-+			ret);
-+
-+	return ret;
-+}
-+
-+/*
-+ * This function is the counterpart to k3_m4_prepare() and is used to assert
-+ * the global reset on M4 cores. This completes the second step of powering
-+ * down the M4 cores. The cores themselves are halted through the local reset
-+ * in first step. This function is invoked in k3_m4_stop() after the local
-+ * reset is asserted.
-+ */
-+static int k3_m4_unprepare(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	struct k3_m4_boot_data *data = m4->data;
-+
-+	if (!data->uses_lreset)
-+		return 0;
-+
-+	return ti_sci_proc_power_domain_off(&m4->tsp);
-+}
-+
-+/**
-+ * k3_m4_load() - Load up the Remote processor image
-+ * @dev:	rproc device pointer
-+ * @addr:	Address at which image is available
-+ * @size:	size of the image
-+ *
-+ * Return: 0 if all goes good, else appropriate error message.
-+ */
-+static int k3_m4_load(struct udevice *dev, ulong addr, ulong size)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	void *image_addr = (void *)addr;
-+	int ret;
-+
-+	ret = ti_sci_proc_request(&m4->tsp);
-+	if (ret)
-+		return ret;
-+
-+	ret = k3_m4_prepare(dev);
-+	if (ret) {
-+		dev_err(dev, "Prepare failed for core %d\n",
-+			m4->tsp.proc_id);
-+		goto proc_release;
-+	}
-+
-+	ti_secure_image_post_process(&image_addr, &size);
-+
-+	ret = rproc_elf_load_image(dev, addr, size);
-+	if (ret < 0) {
-+		dev_err(dev, "Loading elf failed %d\n", ret);
-+		goto unprepare;
-+	}
-+
-+unprepare:
-+	if (ret)
-+		k3_m4_unprepare(dev);
-+proc_release:
-+	ti_sci_proc_release(&m4->tsp);
-+	return ret;
-+}
-+
-+/**
-+ * k3_m4_start() - Start the remote processor
-+ * @dev:	rproc device pointer
-+ *
-+ * Return: 0 if all went ok, else return appropriate error
-+ */
-+static int k3_m4_start(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	struct k3_m4_boot_data *data = m4->data;
-+	int ret;
-+
-+	ret = ti_sci_proc_request(&m4->tsp);
-+	if (ret)
-+		return ret;
-+
-+	if (!data->uses_lreset) {
-+		ret = ti_sci_proc_power_domain_on(&m4->tsp);
-+		if (ret)
-+			goto proc_release;
-+	}
-+
-+	ret = reset_deassert(&m4->m4_rst);
-+	if (ret) {
-+		if (!data->uses_lreset)
-+			ti_sci_proc_power_domain_off(&m4->tsp);
-+	}
-+
-+proc_release:
-+	ti_sci_proc_release(&m4->tsp);
-+
-+	return ret;
-+}
-+
-+static int k3_m4_stop(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+
-+	ti_sci_proc_request(&m4->tsp);
-+	reset_assert(&m4->m4_rst);
-+	ti_sci_proc_power_domain_off(&m4->tsp);
-+	ti_sci_proc_release(&m4->tsp);
-+
-+	return 0;
-+}
-+
-+/**
-+ * k3_m4_init() - Initialize the remote processor
-+ * @dev:	rproc device pointer
-+ *
-+ * Return: 0 if all went ok, else return appropriate error
-+ */
-+static int k3_m4_init(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static int k3_m4_reset(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static void *k3_m4_da_to_va(struct udevice *dev, ulong da, ulong len)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	phys_addr_t bus_addr, dev_addr;
-+	void __iomem *va = NULL;
-+	size_t size;
-+	u32 offset;
-+	int i;
-+
-+	if (len <= 0)
-+		return NULL;
-+
-+	for (i = 0; i < m4->num_mems; i++) {
-+		bus_addr = m4->mem[i].bus_addr;
-+		dev_addr = m4->mem[i].dev_addr;
-+		size = m4->mem[i].size;
-+
-+		if (da >= dev_addr && ((da + len) <= (dev_addr + size))) {
-+			offset = da - dev_addr;
-+			va = m4->mem[i].cpu_addr + offset;
-+			return (__force void *)va;
-+		}
-+
-+		if (da >= bus_addr && (da + len) <= (bus_addr + size)) {
-+			offset = da - bus_addr;
-+			va = m4->mem[i].cpu_addr + offset;
-+			return (__force void *)va;
-+		}
-+	}
-+
-+	/* Assume it is DDR region and return da */
-+	return map_physmem(da, len, MAP_NOCACHE);
-+}
-+
-+static const struct dm_rproc_ops k3_m4_ops = {
-+	.init = k3_m4_init,
-+	.load = k3_m4_load,
-+	.start = k3_m4_start,
-+	.stop = k3_m4_stop,
-+	.reset = k3_m4_reset,
-+	.device_to_virt = k3_m4_da_to_va,
-+};
-+
-+static int ti_sci_proc_of_to_priv(struct udevice *dev, struct ti_sci_proc *tsp)
-+{
-+	u32 ids[2];
-+	int ret;
-+
-+	tsp->sci = ti_sci_get_by_phandle(dev, "ti,sci");
-+	if (IS_ERR(tsp->sci)) {
-+		dev_err(dev, "ti_sci get failed: %ld\n", PTR_ERR(tsp->sci));
-+		return PTR_ERR(tsp->sci);
-+	}
-+
-+	ret = dev_read_u32_array(dev, "ti,sci-proc-ids", ids, 2);
-+	if (ret) {
-+		dev_err(dev, "Proc IDs not populated %d\n", ret);
-+		return ret;
-+	}
-+
-+	tsp->ops = &tsp->sci->ops.proc_ops;
-+	tsp->proc_id = ids[0];
-+	tsp->host_id = ids[1];
-+	tsp->dev_id = dev_read_u32_default(dev, "ti,sci-dev-id",
-+					   TI_SCI_RESOURCE_NULL);
-+	if (tsp->dev_id == TI_SCI_RESOURCE_NULL) {
-+		dev_err(dev, "Device ID not populated %d\n", ret);
-+		return -ENODEV;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct k3_m4_mem_data am6_m4_mems[] = {
-+	{ .name = "iram", .dev_addr = 0x0 },
-+	{ .name = "dram", .dev_addr = 0x30000 },
-+};
-+
-+static int k3_m4_of_get_memories(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	int i;
-+
-+	m4->num_mems = ARRAY_SIZE(am6_m4_mems);
-+	m4->mem = calloc(m4->num_mems, sizeof(*m4->mem));
-+	if (!m4->mem)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < m4->num_mems; i++) {
-+		m4->mem[i].bus_addr = dev_read_addr_size_name(dev,
-+							      am6_m4_mems[i].name,
-+					  (fdt_addr_t *)&m4->mem[i].size);
-+		if (m4->mem[i].bus_addr == FDT_ADDR_T_NONE) {
-+			dev_err(dev, "%s bus address not found\n",
-+				am6_m4_mems[i].name);
-+			return -EINVAL;
-+		}
-+		m4->mem[i].cpu_addr = map_physmem(m4->mem[i].bus_addr,
-+						  m4->mem[i].size,
-+						  MAP_NOCACHE);
-+		m4->mem[i].dev_addr = am6_m4_mems[i].dev_addr;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * k3_of_to_priv() - generate private data from device tree
-+ * @dev:	corresponding k3 m4 processor device
-+ * @m4:		pointer to driver specific private data
-+ *
-+ * Return: 0 if all goes good, else appropriate error message.
-+ */
-+static int k3_m4_of_to_priv(struct udevice *dev, struct k3_m4_privdata *m4)
-+{
-+	int ret;
-+
-+	ret = reset_get_by_index(dev, 0, &m4->m4_rst);
-+	if (ret) {
-+		dev_err(dev, "reset_get() failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = ti_sci_proc_of_to_priv(dev, &m4->tsp);
-+	if (ret)
-+		return ret;
-+
-+	ret =  k3_m4_of_get_memories(dev);
-+	if (ret)
-+		return ret;
-+
-+	m4->data = (struct k3_m4_boot_data *)dev_get_driver_data(dev);
-+
-+	return 0;
-+}
-+
-+/**
-+ * k3_m4_probe() - Basic probe
-+ * @dev:	corresponding k3 remote processor device
-+ *
-+ * Return: 0 if all goes good, else appropriate error message.
-+ */
-+static int k3_m4_probe(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4;
-+	int ret;
-+
-+	m4 = dev_get_priv(dev);
-+	ret = k3_m4_of_to_priv(dev, m4);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * The M4 local resets are deasserted by default on Power-On-Reset.
-+	 * Assert the local resets to ensure the M4s don't execute bogus code
-+	 * in .load() callback when the module reset is released to support
-+	 * internal memory loading. This is needed for M4 cores.
-+	 */
-+	reset_assert(&m4->m4_rst);
-+
-+	return 0;
-+}
-+
-+static int k3_m4_remove(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+
-+	free(m4->mem);
-+
-+	return 0;
-+}
-+
-+static const struct k3_m4_boot_data m4_data = {
-+	.boot_align_addr = SZ_1K,
-+	.uses_lreset = true,
-+};
-+
-+static const struct udevice_id k3_m4_ids[] = {
-+	{ .compatible = "ti,am64-m4fss", .data = (ulong)&m4_data, },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(k3_m4) = {
-+	.name = "k3_m4",
-+	.of_match = k3_m4_ids,
-+	.id = UCLASS_REMOTEPROC,
-+	.ops = &k3_m4_ops,
-+	.probe = k3_m4_probe,
-+	.remove = k3_m4_remove,
-+	.priv_auto = sizeof(struct k3_m4_privdata),
-+};
--- 
-2.48.0
+This is rounded up by a PMIC related fix for some A80 boards, and two
+cleanup patches that are preparations for two new SoCs families, being
+worked on as we speak. But they have to wait for the next cycle.
 
+Gitlab CI passed, and I booted that briefly on some boards.
+
+Thanks,
+Andre
+
+===========================================================
+The following changes since commit 2eed5a1ff36217372e19f7513bd07077fc76718a:
+
+  Merge https://source.denx.de/u-boot/custodians/u-boot-snapdragon (2025-01-22 11:23:35 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+
+for you to fetch changes up to 73cbb3baa6ae26dc8693feb449f48a535292e7e5:
+
+  sunxi: switch Allwinner A10s/A13 boards to OF_UPSTREAM (2025-01-22 22:49:15 +0000)
+
+----------------------------------------------------------------
+Andre Przywara (6):
+      sunxi: clock: improve grouping of default clock register values
+      sunxi: H616: DRAM: rename Kconfig parameters to be more generic
+      power: pmic: sunxi: guard DCDC5 separately
+      suniv: switch Allwinner F1Cx00 boards to OF_UPSTREAM
+      sunxi: switch Allwinner A10 boards to OF_UPSTREAM
+      sunxi: switch Allwinner A10s/A13 boards to OF_UPSTREAM
+
+Andrey Skvortsov (2):
+      sunxi: defconfig: Add pstore support for pinephone
+      sunxi: pinephone: detect existed magnetometer and fixup dtb
+
+ arch/arm/dts/Makefile                             |   48 +-
+ arch/arm/dts/sun4i-a10-a1000.dts                  |  255 -----
+ arch/arm/dts/sun4i-a10-ba10-tvbox.dts             |  151 ---
+ arch/arm/dts/sun4i-a10-chuwi-v7-cw0825.dts        |  159 ---
+ arch/arm/dts/sun4i-a10-cubieboard.dts             |  255 -----
+ arch/arm/dts/sun4i-a10-dserve-dsrv9703c.dts       |  218 ----
+ arch/arm/dts/sun4i-a10-gemei-g9.dts               |  192 ----
+ arch/arm/dts/sun4i-a10-hackberry.dts              |  140 ---
+ arch/arm/dts/sun4i-a10-hyundai-a7hd.dts           |  115 --
+ arch/arm/dts/sun4i-a10-inet1.dts                  |  229 ----
+ arch/arm/dts/sun4i-a10-inet97fv2.dts              |  203 ----
+ arch/arm/dts/sun4i-a10-inet9f-rev03.dts           |  357 ------
+ arch/arm/dts/sun4i-a10-itead-iteaduino-plus.dts   |  126 --
+ arch/arm/dts/sun4i-a10-jesurun-q5.dts             |  181 ---
+ arch/arm/dts/sun4i-a10-marsboard.dts              |  182 ---
+ arch/arm/dts/sun4i-a10-mini-xplus.dts             |  144 ---
+ arch/arm/dts/sun4i-a10-mk802.dts                  |  144 ---
+ arch/arm/dts/sun4i-a10-mk802ii.dts                |  111 --
+ arch/arm/dts/sun4i-a10-olinuxino-lime.dts         |  225 ----
+ arch/arm/dts/sun4i-a10-pcduino.dts                |  200 ----
+ arch/arm/dts/sun4i-a10-pcduino2.dts               |   67 --
+ arch/arm/dts/sun4i-a10-pov-protab2-ips9.dts       |  206 ----
+ arch/arm/dts/sun4i-a10-topwise-a721.dts           |  242 ----
+ arch/arm/dts/sun4i-a10.dtsi                       | 1271 ---------------------
+ arch/arm/dts/sun5i-a10s-auxtek-t003.dts           |  137 ---
+ arch/arm/dts/sun5i-a10s-auxtek-t004.dts           |  149 ---
+ arch/arm/dts/sun5i-a10s-mk802.dts                 |  127 --
+ arch/arm/dts/sun5i-a10s-olinuxino-micro.dts       |  272 -----
+ arch/arm/dts/sun5i-a10s-r7-tv-dongle.dts          |  118 --
+ arch/arm/dts/sun5i-a10s-wobo-i5.dts               |  195 ----
+ arch/arm/dts/sun5i-a10s.dtsi                      |  173 ---
+ arch/arm/dts/sun5i-a13-difrnce-dit4350.dts        |   50 -
+ arch/arm/dts/sun5i-a13-empire-electronix-d709.dts |  190 ---
+ arch/arm/dts/sun5i-a13-empire-electronix-m712.dts |   51 -
+ arch/arm/dts/sun5i-a13-hsg-h702.dts               |  182 ---
+ arch/arm/dts/sun5i-a13-inet-98v-rev2.dts          |   50 -
+ arch/arm/dts/sun5i-a13-licheepi-one.dts           |  214 ----
+ arch/arm/dts/sun5i-a13-olinuxino-micro.dts        |  141 ---
+ arch/arm/dts/sun5i-a13-olinuxino.dts              |  247 ----
+ arch/arm/dts/sun5i-a13-pocketbook-touch-lux-3.dts |  258 -----
+ arch/arm/dts/sun5i-a13-q8-tablet.dts              |   80 --
+ arch/arm/dts/sun5i-a13-utoo-p66.dts               |  116 --
+ arch/arm/dts/sun5i-a13.dtsi                       |  118 --
+ arch/arm/dts/sun5i-gr8-chip-pro.dts               |  238 ----
+ arch/arm/dts/sun5i-gr8-evb.dts                    |  333 ------
+ arch/arm/dts/sun5i-gr8.dtsi                       |  126 --
+ arch/arm/dts/sun5i-r8-chip.dts                    |  282 -----
+ arch/arm/dts/sun5i-r8.dtsi                        |   47 -
+ arch/arm/dts/sun5i-reference-design-tablet.dtsi   |  194 ----
+ arch/arm/dts/sun5i.dtsi                           |  819 -------------
+ arch/arm/dts/suniv-f1c100s-licheepi-nano.dts      |   73 --
+ arch/arm/dts/suniv-f1c100s.dtsi                   |  330 ------
+ arch/arm/dts/suniv-f1c200s-lctech-pi.dts          |   76 --
+ arch/arm/dts/suniv-f1c200s-popstick-v1.1.dts      |   81 --
+ arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h |   18 +-
+ arch/arm/mach-sunxi/Kconfig                       |   61 +-
+ arch/arm/mach-sunxi/dram_sun50i_h616.c            |   26 +-
+ board/sunxi/board.c                               |   27 +-
+ configs/A10-OLinuXino-Lime_defconfig              |    2 +-
+ configs/A10s-OLinuXino-M_defconfig                |    2 +-
+ configs/A13-OLinuXinoM_defconfig                  |    2 +-
+ configs/A13-OLinuXino_defconfig                   |    2 +-
+ configs/Ampe_A76_defconfig                        |    1 +
+ configs/Auxtek-T003_defconfig                     |    2 +-
+ configs/Auxtek-T004_defconfig                     |    2 +-
+ configs/CHIP_defconfig                            |    2 +-
+ configs/CHIP_pro_defconfig                        |    2 +-
+ configs/Chuwi_V7_CW0825_defconfig                 |    2 +-
+ configs/Cubieboard_defconfig                      |    2 +-
+ configs/Empire_electronix_d709_defconfig          |    2 +-
+ configs/Empire_electronix_m712_defconfig          |    2 +-
+ configs/Hyundai_A7HD_defconfig                    |    2 +-
+ configs/Linksprite_pcDuino_defconfig              |    2 +-
+ configs/Marsboard_A10_defconfig                   |    2 +-
+ configs/Mele_A1000_defconfig                      |    2 +-
+ configs/Mini-X_defconfig                          |    2 +-
+ configs/UTOO_P66_defconfig                        |    2 +-
+ configs/Wobo_i5_defconfig                         |    2 +-
+ configs/anbernic_rg35xx_h700_defconfig            |   20 +-
+ configs/ba10_tv_box_defconfig                     |    2 +-
+ configs/difrnce_dit4350_defconfig                 |    2 +-
+ configs/dserve_dsrv9703c_defconfig                |    2 +-
+ configs/iNet_3F_defconfig                         |    1 +
+ configs/iNet_3W_defconfig                         |    1 +
+ configs/iNet_86VS_defconfig                       |    1 +
+ configs/inet1_defconfig                           |    2 +-
+ configs/inet97fv2_defconfig                       |    2 +-
+ configs/inet98v_rev2_defconfig                    |    2 +-
+ configs/inet9f_rev03_defconfig                    |    2 +-
+ configs/jesurun_q5_defconfig                      |    2 +-
+ configs/lctech_pi_f1c200s_defconfig               |    2 +-
+ configs/licheepi_nano_defconfig                   |    2 +-
+ configs/mk802_a10s_defconfig                      |    2 +-
+ configs/mk802_defconfig                           |    2 +-
+ configs/mk802ii_defconfig                         |    2 +-
+ configs/orangepi_zero2_defconfig                  |    8 +-
+ configs/orangepi_zero2w_defconfig                 |   16 +-
+ configs/orangepi_zero3_defconfig                  |   16 +-
+ configs/pinephone_defconfig                       |    3 +
+ configs/pov_protab2_ips9_defconfig                |    2 +-
+ configs/q8_a13_tablet_defconfig                   |    2 +-
+ configs/r7-tv-dongle_defconfig                    |    2 +-
+ configs/sunxi_Gemei_G9_defconfig                  |    2 +-
+ configs/tanix_tx1_defconfig                       |   16 +-
+ configs/transpeed-8k618-t_defconfig               |   14 +-
+ configs/x96_mate_defconfig                        |   14 +-
+ 106 files changed, 172 insertions(+), 11031 deletions(-)
+ delete mode 100644 arch/arm/dts/sun4i-a10-a1000.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-ba10-tvbox.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-chuwi-v7-cw0825.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-cubieboard.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-dserve-dsrv9703c.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-gemei-g9.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-hackberry.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-hyundai-a7hd.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-inet1.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-inet97fv2.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-inet9f-rev03.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-itead-iteaduino-plus.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-jesurun-q5.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-marsboard.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-mini-xplus.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-mk802.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-mk802ii.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-olinuxino-lime.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-pcduino.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-pcduino2.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-pov-protab2-ips9.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10-topwise-a721.dts
+ delete mode 100644 arch/arm/dts/sun4i-a10.dtsi
+ delete mode 100644 arch/arm/dts/sun5i-a10s-auxtek-t003.dts
+ delete mode 100644 arch/arm/dts/sun5i-a10s-auxtek-t004.dts
+ delete mode 100644 arch/arm/dts/sun5i-a10s-mk802.dts
+ delete mode 100644 arch/arm/dts/sun5i-a10s-olinuxino-micro.dts
+ delete mode 100644 arch/arm/dts/sun5i-a10s-r7-tv-dongle.dts
+ delete mode 100644 arch/arm/dts/sun5i-a10s-wobo-i5.dts
+ delete mode 100644 arch/arm/dts/sun5i-a10s.dtsi
+ delete mode 100644 arch/arm/dts/sun5i-a13-difrnce-dit4350.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-empire-electronix-d709.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-empire-electronix-m712.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-hsg-h702.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-inet-98v-rev2.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-licheepi-one.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-olinuxino-micro.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-olinuxino.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-pocketbook-touch-lux-3.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-q8-tablet.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13-utoo-p66.dts
+ delete mode 100644 arch/arm/dts/sun5i-a13.dtsi
+ delete mode 100644 arch/arm/dts/sun5i-gr8-chip-pro.dts
+ delete mode 100644 arch/arm/dts/sun5i-gr8-evb.dts
+ delete mode 100644 arch/arm/dts/sun5i-gr8.dtsi
+ delete mode 100644 arch/arm/dts/sun5i-r8-chip.dts
+ delete mode 100644 arch/arm/dts/sun5i-r8.dtsi
+ delete mode 100644 arch/arm/dts/sun5i-reference-design-tablet.dtsi
+ delete mode 100644 arch/arm/dts/sun5i.dtsi
+ delete mode 100644 arch/arm/dts/suniv-f1c100s-licheepi-nano.dts
+ delete mode 100644 arch/arm/dts/suniv-f1c100s.dtsi
+ delete mode 100644 arch/arm/dts/suniv-f1c200s-lctech-pi.dts
+ delete mode 100644 arch/arm/dts/suniv-f1c200s-popstick-v1.1.dts
