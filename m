@@ -4,66 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B09C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 11:49:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B423C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 12:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59866801B0;
-	Thu, 23 Jan 2025 12:49:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id F002B801B0;
+	Thu, 23 Jan 2025 13:04:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737632956;
-	bh=YAr+jIGdlFlqdgrLOTMQye09Nb/6qMBKs+xRTQC6Kx8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Qfc7vrRF/muL10SJpIYey1hHj1gptLw7+7oMahMfRIzhe5Z3tgGdkTC8FssIoG3l8
-	 Wkz8X/fMWN4gGhw/8BQcyOAio90YNnva4/krDCiusXgKDskO/u8hGo7QutilsUUtk4
-	 yIcCqCq7AdBNHYWQEMHYIQQ+F6/5sa6ihff7Lt5kYxQ73PqzvO41gngBJVStOXwH9d
-	 Kn7SgrLVygTVJxWNUuPJwB28Viqam/wI7SV9K4qR44LM2SjgYKg9NV42wPQjLYVY08
-	 qR0/4WnU9kNdMfw57txDiGBDcURsnm5kz8L12J5g7xWrE9kDoDot0PtQIam1jFFMu0
-	 y//tx5w/R07gg==
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="G3mRRFjW";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C55BB80214; Thu, 23 Jan 2025 12:49:15 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 1E29580275; Thu, 23 Jan 2025 13:04:30 +0100 (CET)
+Received: from mail-10626.protonmail.ch (mail-10626.protonmail.ch
+ [79.135.106.26])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36F7880137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 12:49:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F49F80137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 13:04:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="KmHMP6O2"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id AD41710408F83; Thu, 23 Jan 2025 12:49:09 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737632951;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=YAr+jIGdlFlqdgrLOTMQye09Nb/6qMBKs+xRTQC6Kx8=;
- b=KmHMP6O2ZhHLAPhsxI3dTlhApt3fzbMY0I6Dx9dcrIK/H6hNV/isJyZk8V7uuyc1Uv+UNi
- nL9r7OErEQ/XWdeNJymVriQd/tO1rAXINzoogLgFVVZLoEoUwuD7ACBoLxQofNEekdajVt
- Sgu8+oyCLgNk/Q31EHQ2NmzjLOrJ4NtLXI60mELCB4bRojyh6dys1Hn4eTXxLA4yfeWqH8
- 1NKjDbzX6AAsrfrQ0STsN4Al6rkLyaVb13Dt6M3YTyHoDuJin7stnODcK/wyHdtnlkvc4r
- c4Md7NGB185YML26t+lNLd/HviqcQ7hCMz50POPoM+c4V1tG8TPoaifMmjPjVQ==
-From: Heiko Schocher <hs@denx.de>
-To: u-boot@lists.denx.de
-Cc: Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3] led: add function naming option from linux
-Date: Thu, 23 Jan 2025 12:49:06 +0100
-Message-Id: <20250123114906.80724-1-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1737633866; x=1737893066;
+ bh=rOapxeM00zVqunIHAyQ4vafgOLg9SUfCAcmcOxdw7tI=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=G3mRRFjWow/sgirGlkrfE9vvDqoS4GJn6T7XaNDBHq45yT3yMIAP1ix/+HC09uKyz
+ nda2kB9WW4PnH/z3VnFTs7mVhSmRx/0DU/jzWxxZWMkE199BpPaxbhTwdrzWxjsHHs
+ lFOUd+IN8wK/aYtrVs5t21sFq+DpQ2jmL+i1g1hP6WstyQ3Pt8bZVhSBJ2luxsF51z
+ 27sqwGR5C1Yamflq2MNUYD7mVKNQseGe8c16OmdLbItJbvOVaRT79FgtnVnm0J3cns
+ N85r7F8+dlNEfr58jhrDqTpN5AAHByKFHmU07A0bV/CPJrZVHTiDuump7cFa1z9nvs
+ rrLu0RESvOkhw==
+Date: Thu, 23 Jan 2025 12:04:21 +0000
+To: Caleb Connolly <caleb.connolly@linaro.org>
+From: Sam Day <me@samcday.com>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/2] mach-snapdragon: support parsing memory info from
+ external FDT
+Message-ID: <ZgSzoWyj5pgV9OpxPplPkLG-ib65T7ecq7kZHRD36T3f27Xd1rQspwu_rQLjh1U4GWMCSEkRWyszwz7oZnOIKlTNQyWUPXWKIQpYOWNZg9M=@samcday.com>
+In-Reply-To: <32349f10-2fe1-4522-8794-cf512b140038@linaro.org>
+References: <20250122-qcom-parse-memory-updates-v2-0-98dfcac821d7@samcday.com>
+ <20250122-qcom-parse-memory-updates-v2-2-98dfcac821d7@samcday.com>
+ <32349f10-2fe1-4522-8794-cf512b140038@linaro.org>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: bd5acc09bf294988eadaf41f9890f73b0e5f1603
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,361 +73,253 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-in linux we have the option to create the name of a led
-optionally through the following properties:
+Hey Caleb,
 
-- function
-- color
-- function-enumerator
+On Wednesday, 22 January 2025 at 16:49, Caleb Connolly <caleb.connolly@lina=
+ro.org> wrote:
+>=20
+> Hi Sam,
+>=20
+> Thanks for re-spinning this, one small issue below but otherwise LGTM.
+>=20
+> I'm picking up your first patch, so you only need to re-send this one.
+>=20
+> On 22/01/2025 11:27, Sam Day wrote:
+>=20
+> > qcom_parse_memory is updated to return a -ENODATA error if the passed
+> > FDT does not contain a /memory node, or that node is incomplete (size=
+=3D0)
+> >=20
+> > board_fdt_blob_setup first tries to call qcom_parse_memory with the
+> > internal FDT (if present+valid). If that fails, it tries again with the
+> > external FDT (again, if present+valid).
+> >=20
+> > When booting with an internal FDT from upstream, it's likely that this
+> > change results in a slight performance hit, since virtually all upstrea=
+m
+> > qcom DTs lack a fully specified memory node. The impact should be
+> > negligible, though.
+> >=20
+> > qcom_parse_memory was given a detailed docstring adapted from Caleb's
+> > original commit message that introduced the function.
+> >=20
+> > Signed-off-by: Sam Day me@samcday.com
+> > ---
+> > arch/arm/mach-snapdragon/board.c | 93 +++++++++++++++++++++++++++------=
+-------
+> > 1 file changed, 63 insertions(+), 30 deletions(-)
+> >=20
+> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdrago=
+n/board.c
+> > index 2ef936aab757c7045729a2dd91944f4f9bff917e..ad3bc4b1a998049cd10e3d3=
+fa032009347d77314 100644
+> > --- a/arch/arm/mach-snapdragon/board.c
+> > +++ b/arch/arm/mach-snapdragon/board.c
+> > @@ -88,7 +88,29 @@ int dram_init_banksize(void)
+> > return 0;
+> > }
+> >=20
+> > -static void qcom_parse_memory(const void fdt)
+> > +/*
+> > + * The generic memory parsing code in U-Boot lacks a few things that w=
+e
+> > + * need on Qualcomm:
+> > + *
+> > + * 1. It sets gd->ram_size and gd->ram_base to represent a single memo=
+ry block
+> > + * 2. setup_dest_addr() later relocates U-Boot to ram_base + ram_size,=
+ the end
+> > + * of that first memory block.
+> > + *
+> > + * This results in all memory beyond U-Boot being unusable in Linux wh=
+en booting
+> > + * with EFI.
+> > + *
+> > + * Since the ranges in the memory node may be out of order, the only w=
+ay for us
+> > + * to correctly determine the relocation address for U-Boot is to pars=
+e all
+> > + * memory regions and find the highest valid address.
+> > + *
+> > + * We can't use fdtdec_setup_memory_banksize() since it stores the res=
+ult in
+> > + * gd->bd, which is not yet allocated.
+> > + *
+> > + * @fdt: FDT blob to parse /memory node from
+> > + *
+> > + * Return: 0 on success or -ENODATA if /memory node is missing or inco=
+mplete
+> > + */
+> > +static int qcom_parse_memory(const void *fdt)
+> > {
+> > int offset;
+> > const fdt64_t *memory;
+> > @@ -97,16 +119,12 @@ static void qcom_parse_memory(const void *fdt)
+> > int i, j, banks;
+> >=20
+> > offset =3D fdt_path_offset(fdt, "/memory");
+> > - if (offset < 0) {
+> > - log_err("No memory node found in device tree!\n");
+> > - return;
+> > - }
+> > + if (offset < 0)
+> > + return -ENODATA;
+> >=20
+> > memory =3D fdt_getprop(fdt, offset, "reg", &memsize);
+> > - if (!memory) {
+> > - log_err("No memory configuration was provided by the previous bootloa=
+der!\n");
+> > - return;
+> > - }
+> > + if (!memory)
+> > + return -ENODATA;
+> >=20
+> > banks =3D min(memsize / (2 * sizeof(u64)), (ulong)CONFIG_NR_DRAM_BANKS)=
+;
+> >=20
+> > @@ -119,7 +137,6 @@ static void qcom_parse_memory(const void fdt)
+> > for (i =3D 0, j =3D 0; i < banks * 2; i +=3D 2, j++) {
+> > prevbl_ddr_banks[j].start =3D get_unaligned_be64(&memory[i]);
+> > prevbl_ddr_banks[j].size =3D get_unaligned_be64(&memory[i + 1]);
+> > - / SM8650 boards sometimes have empty regions! */
+> > if (!prevbl_ddr_banks[j].size) {
+> > j--;
+> > continue;
+> > @@ -127,13 +144,16 @@ static void qcom_parse_memory(const void *fdt)
+> > ram_end =3D max(ram_end, prevbl_ddr_banks[j].start + prevbl_ddr_banks[j=
+].size);
+> > }
+> >=20
+> > + if (!j)
+> > + return -ENODATA;
+>=20
+>=20
+> I think this should be
+> if (!banks || !prevbl_ddr_banks[0].size)
+>=20
+> That way it will properly detect the typical case where the source dts
+> has a single entry with a 0 size.
 
-This patch adds support for parsing this properties if there
-is no label property.
+Hmm, I did test this on my samsung-a5, booting with an internal FDT with a =
+zero
+size memory node and it worked okay. If there's only one node, then j gets
+incremented in the single run of the previous loop, and then decremented be=
+cause
+the size =3D=3D 0, thus exiting the loop with j=3D=3D0, which is being chec=
+ked here.
 
-To be as close as possible to linux import the following files
-from it:
+Hmm, I did test this on my samsung-a5, booting an internal FDT with a zero
+size memory node and it worked okay. If there's only one node, then j gets
+incremented in the single run of the previous loop, and then decremented be=
+cause
+size =3D=3D 0, thus exiting the loop with j=3D=3D0, which is being checked =
+here.
 
-include/dt-bindings/leds/common.h
-include/linux/uapi/linux/uleds.h
+But, your suggestion is more readable and semantically correct, as well as =
+being
+more robust against the inevitable future refactorings of this method ;) I'=
+ll
+submit v3 with just this patch in a mo'.
 
-base commit was:
-commit: b8f52214c61a ("Merge tag 'audit-pr-20241205' of git://git.kernel.org/pub/scm/linux/kernel/git/pcmoore/audit")
+Cheers,
+-Sam
 
-The led name is created in led_post_bind() and we need some
-storage place for it. Currently this patch prevents to use
-malloc() instead it stores the name in new member :
-
-        char name[LED_MAX_NAME_SIZE];
-
-of struct led_uc_plat. While at it append led tests for the
-new feature.
-
-Signed-off-by: Heiko Schocher <hs@denx.de>
----
-as we introduce a new element in struct led_uc_priv, may we should add
-this functionality through a new Kconfig option? (Which also would make
-this optional and save some bytes for boards who do not need this...)
-
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=165&view=results
-
-
-Changes in v3:
-- work in comment from Tom:
-  remove new file include/dt-bindings/leds/common.h in this patch
-  as it is already in dts/upstream/include/dt-bindings/leds/common.h
-  and so the checkpatch warnings from this file are gone!
-  Thanks! Good catch!
-  remove file include/linux/uapi/linux/uleds.h and
-  as we only need one define from it, add this define
-  in include/led.h
-
-Changes in v2:
-- remove unused name variable in function led_get_label()
-- rebased patch to current HEAD
-  82d262ae162 ("Merge patch series "MediaTek MT7629 OF_UPSTREAM migration (v2)"")
-
- arch/sandbox/dts/test.dts                | 37 ++++++++++++-
- doc/device-tree-bindings/leds/common.txt | 28 ++++++++++
- drivers/led/led-uclass.c                 | 70 ++++++++++++++++++++++--
- include/led.h                            |  6 ++
- test/dm/led.c                            | 22 +++++++-
- test/dm/ofnode.c                         |  2 +-
- 6 files changed, 158 insertions(+), 7 deletions(-)
-
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index ae52b375ccb..b8f3012873e 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -13,6 +13,7 @@
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/gpio/sandbox-gpio.h>
- #include <dt-bindings/input/input.h>
-+#include <dt-bindings/leds/common.h>
- #include <dt-bindings/pinctrl/sandbox-pinmux.h>
- #include <dt-bindings/mux/mux.h>
- 
-@@ -820,7 +821,7 @@
- 			gpio-controller;
- 			#gpio-cells = <1>;
- 			gpio-bank-name = "a";
--			sandbox,gpio-count = <20>;
-+			sandbox,gpio-count = <25>;
- 			hog_input_active_low {
- 				gpio-hog;
- 				input;
-@@ -1010,6 +1011,40 @@
- 			/* label intentionally omitted */
- 			default-state = "off";
- 		};
-+
-+		led-20 {
-+			gpios = <&gpio_a 20 0>;
-+			/* label intentionally omitted */
-+			function = LED_FUNCTION_STATUS;
-+			color = <LED_COLOR_ID_RED>;
-+			function-enumerator = <20>;
-+		};
-+
-+		led-21 {
-+			gpios = <&gpio_a 21 0>;
-+			/* label intentionally omitted */
-+			function = LED_FUNCTION_STATUS;
-+			color = <LED_COLOR_ID_GREEN>;
-+		};
-+
-+		led-22 {
-+			gpios = <&gpio_a 22 0>;
-+			/* label intentionally omitted */
-+			function = LED_FUNCTION_STATUS;
-+		};
-+
-+		led-23 {
-+			gpios = <&gpio_a 23 0>;
-+			/* label intentionally omitted */
-+			color = <LED_COLOR_ID_GREEN>;
-+		};
-+
-+		led-24 {
-+			gpios = <&gpio_a 24 0>;
-+			label = "sandbox:function";
-+			function = LED_FUNCTION_STATUS;
-+			color = <LED_COLOR_ID_GREEN>;
-+		};
- 	};
- 
- 	wdt-gpio-toggle {
-diff --git a/doc/device-tree-bindings/leds/common.txt b/doc/device-tree-bindings/leds/common.txt
-index 2d88816dd55..10b2cd84113 100644
---- a/doc/device-tree-bindings/leds/common.txt
-+++ b/doc/device-tree-bindings/leds/common.txt
-@@ -4,6 +4,21 @@ Optional properties for child nodes:
- - label : The label for this LED.  If omitted, the label is
-   taken from the node name (excluding the unit address).
- 
-+- function:
-+  LED function. Use one of the LED_FUNCTION_* prefixed definitions
-+  from the header include/dt-bindings/leds/common.h. If there is no
-+  matching LED_FUNCTION available, add a new one.
-+
-+- color:
-+  Color of the LED. Use one of the LED_COLOR_ID_* prefixed definitions from
-+  the header include/dt-bindings/leds/common.h. If there is no matching
-+  LED_COLOR_ID available, add a new one.
-+
-+- function-enumerator:
-+  optional
-+    Integer to be used when more than one instance of the same function is
-+    needed, differing only with an ordinal number.
-+
- - linux,default-trigger :  This parameter, if present, is a
-     string defining the trigger assigned to the LED.  Current triggers are:
-      "backlight" - LED will act as a back-light, controlled by the framebuffer
-@@ -21,3 +36,16 @@ system-status {
- 	linux,default-trigger = "heartbeat";
- 	...
- };
-+
-+led-0 {
-+	function = LED_FUNCTION_STATUS;
-+	color = <LED_COLOR_ID_RED>;
-+	function-enumerator = <20>;
-+	...
-+};
-+
-+led-1 {
-+	function = LED_FUNCTION_STATUS;
-+	color = <LED_COLOR_ID_YELLOW>;
-+	...
-+};
-diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-index 760750568c0..27ef890ed0a 100644
---- a/drivers/led/led-uclass.c
-+++ b/drivers/led/led-uclass.c
-@@ -13,6 +13,25 @@
- #include <dm/lists.h>
- #include <dm/root.h>
- #include <dm/uclass-internal.h>
-+#include <dt-bindings/leds/common.h>
-+
-+static const char * const led_colors[LED_COLOR_ID_MAX] = {
-+	[LED_COLOR_ID_WHITE] = "white",
-+	[LED_COLOR_ID_RED] = "red",
-+	[LED_COLOR_ID_GREEN] = "green",
-+	[LED_COLOR_ID_BLUE] = "blue",
-+	[LED_COLOR_ID_AMBER] = "amber",
-+	[LED_COLOR_ID_VIOLET] = "violet",
-+	[LED_COLOR_ID_YELLOW] = "yellow",
-+	[LED_COLOR_ID_IR] = "ir",
-+	[LED_COLOR_ID_MULTI] = "multicolor",
-+	[LED_COLOR_ID_RGB] = "rgb",
-+	[LED_COLOR_ID_PURPLE] = "purple",
-+	[LED_COLOR_ID_ORANGE] = "orange",
-+	[LED_COLOR_ID_PINK] = "pink",
-+	[LED_COLOR_ID_CYAN] = "cyan",
-+	[LED_COLOR_ID_LIME] = "lime",
-+};
- 
- int led_bind_generic(struct udevice *parent, const char *driver_name)
- {
-@@ -232,11 +251,54 @@ int led_activity_blink(void)
- #endif
- #endif
- 
--static const char *led_get_label(ofnode node)
-+static const char *led_get_function_name(struct udevice *dev)
-+{
-+	struct led_uc_plat *uc_plat;
-+	const char *func;
-+	u32 color;
-+	u32 enumerator;
-+	int ret;
-+	int cp;
-+
-+	if (!dev)
-+		return NULL;
-+
-+	uc_plat = dev_get_uclass_plat(dev);
-+	if (!uc_plat)
-+		return NULL;
-+
-+	if (uc_plat->label)
-+		return uc_plat->label;
-+
-+	/* Now try to detect function label name */
-+	func = dev_read_string(dev, "function");
-+	cp = dev_read_u32(dev, "color", &color);
-+	if (cp == 0 || func) {
-+		ret = dev_read_u32(dev, "function-enumerator", &enumerator);
-+		if (!ret) {
-+			snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-+				 "%s:%s-%d",
-+				 cp ? "" : led_colors[color],
-+				 func ? func : "", enumerator);
-+		} else {
-+			snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-+				 "%s:%s",
-+				 cp ? "" : led_colors[color],
-+				 func ? func : "");
-+		}
-+		uc_plat->label = uc_plat->name;
-+	}
-+
-+	return uc_plat->label;
-+}
-+
-+static const char *led_get_label(struct udevice *dev, ofnode node)
- {
- 	const char *label;
- 
- 	label = ofnode_read_string(node, "label");
-+	if (!label)
-+		label = led_get_function_name(dev);
- 	if (!label && !ofnode_read_string(node, "compatible"))
- 		label = ofnode_get_name(node);
- 
-@@ -249,7 +311,7 @@ static int led_post_bind(struct udevice *dev)
- 	const char *default_state;
- 
- 	if (!uc_plat->label)
--		uc_plat->label = led_get_label(dev_ofnode(dev));
-+		uc_plat->label = led_get_label(dev, dev_ofnode(dev));
- 
- 	uc_plat->default_state = LEDST_COUNT;
- 
-@@ -314,14 +376,14 @@ static int led_init(struct uclass *uc)
- #ifdef CONFIG_LED_BOOT
- 	ret = ofnode_options_get_by_phandle("boot-led", &led_node);
- 	if (!ret)
--		priv->boot_led_label = led_get_label(led_node);
-+		priv->boot_led_label = led_get_label(NULL, led_node);
- 	priv->boot_led_period = ofnode_options_read_int("boot-led-period-ms", 250);
- #endif
- 
- #ifdef CONFIG_LED_ACTIVITY
- 	ret = ofnode_options_get_by_phandle("activity-led", &led_node);
- 	if (!ret)
--		priv->activity_led_label = led_get_label(led_node);
-+		priv->activity_led_label = led_get_label(NULL, led_node);
- 	priv->activity_led_period = ofnode_options_read_int("activity-led-period-ms",
- 							    250);
- #endif
-diff --git a/include/led.h b/include/led.h
-index 64247cd3a70..a67db7af38d 100644
---- a/include/led.h
-+++ b/include/led.h
-@@ -53,6 +53,11 @@
- 
- struct udevice;
- 
-+/*
-+ * value imported from linux:include/linux/uapi/linux/uleds.h
-+ */
-+#define LED_MAX_NAME_SIZE      64
-+
- enum led_state_t {
- 	LEDST_OFF = 0,
- 	LEDST_ON = 1,
-@@ -86,6 +91,7 @@ struct led_sw_blink {
- struct led_uc_plat {
- 	const char *label;
- 	enum led_state_t default_state;
-+	char name[LED_MAX_NAME_SIZE];
- #ifdef CONFIG_LED_SW_BLINK
- 	struct led_sw_blink *sw_blink;
- #endif
-diff --git a/test/dm/led.c b/test/dm/led.c
-index e5b86326c3a..36652c2833a 100644
---- a/test/dm/led.c
-+++ b/test/dm/led.c
-@@ -20,7 +20,12 @@ static int dm_test_led_base(struct unit_test_state *uts)
- 	ut_assertok(uclass_get_device(UCLASS_LED, 1, &dev));
- 	ut_assertok(uclass_get_device(UCLASS_LED, 2, &dev));
- 	ut_assertok(uclass_get_device(UCLASS_LED, 3, &dev));
--	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_LED, 4, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 4, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 5, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 6, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 7, &dev));
-+	ut_assertok(uclass_get_device(UCLASS_LED, 8, &dev));
-+	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_LED, 9, &dev));
- 
- 	return 0;
- }
-@@ -110,6 +115,21 @@ static int dm_test_led_label(struct unit_test_state *uts)
- 
- 	ut_asserteq(-ENODEV, led_get_by_label("sandbox:blue", &dev));
- 
-+	/* Test if function, color and function-enumerator naming works */
-+	ut_assertok(led_get_by_label("red:status-20", &dev));
-+
-+	/* Test if function, color naming works */
-+	ut_assertok(led_get_by_label("green:status", &dev));
-+
-+	/* Test if function, without color naming works */
-+	ut_assertok(led_get_by_label(":status", &dev));
-+
-+	/* Test if color without function naming works */
-+	ut_assertok(led_get_by_label("green:", &dev));
-+
-+	/* Test if function, color naming is ignored if label is found */
-+	ut_assertok(led_get_by_label("sandbox:function", &dev));
-+
- 	return 0;
- }
- DM_TEST(dm_test_led_label, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index f16b643fa3f..72f4e80f637 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -1580,7 +1580,7 @@ static int dm_test_ofnode_delete(struct unit_test_state *uts)
- 	ut_assert(!ofnode_valid(node));
- 	ut_assert(!ofnode_valid(ofnode_path("/leds/default_on")));
- 
--	ut_asserteq(2, ofnode_get_child_count(ofnode_path("/leds")));
-+	ut_asserteq(7, ofnode_get_child_count(ofnode_path("/leds")));
- 
- 	return 0;
- }
--- 
-2.20.1
-
+>=20
+> With that change:
+>=20
+> Reviewed-by: Caleb Connolly caleb.connolly@linaro.org
+>=20
+>=20
+> Kind regards,
+>=20
+> > +
+> > /* Sort our RAM banks -_- */
+> > qsort(prevbl_ddr_banks, banks, sizeof(prevbl_ddr_banks[0]), ddr_bank_cm=
+p);
+> >=20
+> > gd->ram_base =3D prevbl_ddr_banks[0].start;
+> > gd->ram_size =3D ram_end - gd->ram_base;
+> > - debug("ram_base =3D %#011lx, ram_size =3D %#011llx, ram_end =3D %#011=
+llx\n",
+> > - gd->ram_base, gd->ram_size, ram_end);
+> > +
+> > + return 0;
+> > }
+> >=20
+> > static void show_psci_version(void)
+> > @@ -153,13 +173,14 @@ static void show_psci_version(void)
+> > */
+> > int board_fdt_blob_setup(void **fdtp)
+> > {
+> > - struct fdt_header *fdt;
+> > + struct fdt_header *external_fdt, *internal_fdt;
+> > bool internal_valid, external_valid;
+> > - int ret =3D 0;
+> > + int ret =3D -ENODATA;
+> >=20
+> > - fdt =3D (struct fdt_header *)get_prev_bl_fdt_addr();
+> > - external_valid =3D fdt && !fdt_check_header(fdt);
+> > - internal_valid =3D !fdt_check_header(*fdtp);
+> > + internal_fdt =3D (struct fdt_header *)*fdtp;
+> > + external_fdt =3D (struct fdt_header *)get_prev_bl_fdt_addr();
+> > + external_valid =3D external_fdt && !fdt_check_header(external_fdt);
+> > + internal_valid =3D !fdt_check_header(internal_fdt);
+> >=20
+> > /*
+> > * There is no point returning an error here, U-Boot can't do anything u=
+seful in this situation.
+> > @@ -167,24 +188,36 @@ int board_fdt_blob_setup(void **fdtp)
+> > /
+> > if (!internal_valid && !external_valid)
+> > panic("Internal FDT is invalid and no external FDT was provided! (fdt=
+=3D%#llx)\n",
+> > - (phys_addr_t)fdt);
+> > + (phys_addr_t)external_fdt);
+> > +
+> > + / Prefer memory information from internal DT if it's present /
+> > + if (internal_valid)
+> > + ret =3D qcom_parse_memory(internal_fdt);
+> > +
+> > + if (ret < 0 && external_valid) {
+> > + / No internal FDT or it lacks a proper /memory node.
+> > + * The previous bootloader handed us something, let's try that.
+> > + */
+> > + if (internal_valid)
+> > + debug("No memory info in internal FDT, falling back to external\n");
+> > +
+> > + ret =3D qcom_parse_memory(external_fdt);
+> > + }
+> > +
+> > + if (ret < 0)
+> > + panic("No valid memory ranges found!\n");
+> > +
+> > + debug("ram_base =3D %#011lx, ram_size =3D %#011llx\n",
+> > + gd->ram_base, gd->ram_size);
+> >=20
+> > if (internal_valid) {
+> > debug("Using built in FDT\n");
+> > - ret =3D -EEXIST;
+> > - } else {
+> > - debug("Using external FDT\n");
+> > - /* So we can use it before returning */
+> > - *fdtp =3D fdt;
+> > + return -EEXIST;
+> > }
+> >=20
+> > - /*
+> > - * Parse the /memory node while we're here,
+> > - * this makes it easy to do other things early.
+> > - */
+> > - qcom_parse_memory(*fdtp);
+> > -
+> > - return ret;
+> > + debug("Using external FDT\n");
+> > + *fdtp =3D external_fdt;
+> > + return 0;
+> > }
+> >=20
+> > void reset_cpu(void)
+>=20
+>=20
+> --
+> // Caleb (they/them)
