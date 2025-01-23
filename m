@@ -4,64 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 350E2C02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 08:37:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A25C02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 08:55:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67E7E801B0;
-	Thu, 23 Jan 2025 09:37:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BA835801B0;
+	Thu, 23 Jan 2025 09:54:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="D2/mPZzW";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="Mo3V1RI2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F5C280214; Thu, 23 Jan 2025 09:37:09 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2022D80137
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 09:37:05 +0100 (CET)
+ id B5E6880214; Thu, 23 Jan 2025 09:54:57 +0100 (CET)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 182C080137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 09:54:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50N8b45C1170275
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 23 Jan 2025 02:37:04 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1737621424;
- bh=Phhxrb6s0c72yCD5X/i5wWrBRycytZigy/EC2VoXux4=;
- h=From:To:CC:Subject:Date;
- b=D2/mPZzWfuTv5RUTe3IvRO5/UNalQlsuEuako0d3vwze5e9HlFsUL/sW0NfrD/XuI
- WnLRyuEdomtpfaUKYNRVDQ1Fe+PqfQaJi00xADXjDIy68mLQYTCxgWd5Xap+AZmS8r
- 4PStvyMvlxCQM41teZxYhq+Z23E4atkopDblHEiI=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50N8b4wc091991;
- Thu, 23 Jan 2025 02:37:04 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
- Jan 2025 02:37:03 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 23 Jan 2025 02:37:03 -0600
-Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
- [172.24.227.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50N8b1Ha026676;
- Thu, 23 Jan 2025 02:37:01 -0600
-From: Santhosh Kumar K <s-k6@ti.com>
-To: <trini@konsulko.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>, <bb@ti.com>
-CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <s-k6@ti.com>
-Subject: [PATCH] ram: k3-ddrss: Set SDRAM_IDX using device private data,
- ddr_ram_size
-Date: Thu, 23 Jan 2025 14:06:26 +0530
-Message-ID: <20250123083626.1035262-1-s-k6@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: b28db2eed96711efbd192953cf12861f-20250123
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=DzUS3aZHr7e/B3vJP55xyJ1mW4wI14EOW1cMj89Fp5g=; 
+ b=Mo3V1RI2fWymzbP3dDsT0f/luqdKlYpjfigT8wBqf6i+ITzCoIn3U2jTtf+iPT/kO8PdMnDAL+e+jFe+lRmboI849p+9L/n7h7ZqIs27xqykpgJQn8NzCYsODUmxmhk0XJo6b+BSOP/V7YJupercVHYngrJ/OUSQe3R4qVa/D+k=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.46, REQID:5971e128-98fb-406a-977a-56500d18d1e7, IP:0,
+ U
+ RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+ N:release,TS:-25
+X-CID-META: VersionHash:60aa074, CLOUDID:b360943d-da39-4471-8a46-23da908abe46,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:-3,IP:ni
+ l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
+ :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0
+X-CID-BAS: 0,_,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: b28db2eed96711efbd192953cf12861f-20250123
+Received: from mtkmbs13n2.mediatek.inc [(172.21.101.108)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1326927512; Thu, 23 Jan 2025 16:54:47 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.28; Thu, 23 Jan 2025 16:54:45 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1258.28 via Frontend Transport; Thu, 23 Jan 2025 16:54:45 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH 0/5] Add support for MediaTek MT7987 SoC
+Date: Thu, 23 Jan 2025 16:54:42 +0800
+Message-ID: <cover.1737621362.git.weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,87 +83,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SDRAM_IDX in DDRSS_V2A_CTL_REG describes the number of address bits
-minus 16 that are used to determine the mask used to detect memory
-rollover and prevent aliasing and false coherency issues.
+This patch series add support for MediaTek MT7987 SoC with its reference
+boards and related drivers.
 
-Set SDRAM_IDX using the device private data, ddr_ram_size for K3 family
-of SoCs.
+This patch series add basic boot support on eMMC/SD/SPI-NOR/SPI-NAND for these
+boards. The clock, pinctrl drivers and the SoC initializaton code are also
+included.
 
-Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
----
+Weijie Gao (5):
+  clk: mediatek: add clock driver support for MediaTek MT7987 SoC
+  pinctrl: mediatek: add pinctrl driver for MT7987 SoC
+  mmc: mediatek: add support for MediaTek MT7987 SoCs
+  arm: mediatek: add support for MediaTek MT7987 SoC
+  board: mediatek: add MT7987 reference boards
 
-Tested on AM64x, AM62Ax, AM62Px.
-Logs: https://gist.github.com/santhosh21/6dcdeb9a118c13732f858a1baca7dc4c
+ arch/arm/dts/mt7987-emmc.dtsi                 |  50 ++
+ arch/arm/dts/mt7987-netsys-u-boot.dtsi        |  51 ++
+ arch/arm/dts/mt7987-pinctrl-u-boot.dtsi       | 146 +++
+ arch/arm/dts/mt7987-pinctrl.dtsi              | 200 +++++
+ arch/arm/dts/mt7987-sd.dtsi                   |  37 +
+ arch/arm/dts/mt7987.dtsi                      | 808 +++++++++++++++++
+ arch/arm/dts/mt7987a-emmc-rfb-u-boot.dtsi     |  61 ++
+ arch/arm/dts/mt7987a-emmc-rfb.dts             |  37 +
+ arch/arm/dts/mt7987a-rfb-u-boot.dtsi          |  71 ++
+ arch/arm/dts/mt7987a-rfb.dts                  |  34 +
+ arch/arm/dts/mt7987a-sd-rfb-u-boot.dtsi       |  59 ++
+ arch/arm/dts/mt7987a-sd-rfb.dts               |  37 +
+ arch/arm/dts/mt7987a-u-boot.dtsi              |  66 ++
+ arch/arm/dts/mt7987a.dtsi                     |  96 ++
+ arch/arm/mach-mediatek/Kconfig                |  19 +-
+ arch/arm/mach-mediatek/Makefile               |   2 +
+ arch/arm/mach-mediatek/mt7987/Makefile        |   4 +
+ arch/arm/mach-mediatek/mt7987/init.c          |  62 ++
+ arch/arm/mach-mediatek/mt7987/lowlevel_init.S |  30 +
+ arch/arm/mach-mediatek/tzcfg.c                | 242 +++++
+ board/mediatek/mt7987/MAINTAINERS             |   8 +
+ board/mediatek/mt7987/Makefile                |   3 +
+ board/mediatek/mt7987/mt7987_rfb.c            |  10 +
+ configs/mt7987_emmc_rfb_defconfig             |  91 ++
+ configs/mt7987_rfb_defconfig                  |  87 ++
+ configs/mt7987_sd_rfb_defconfig               |  91 ++
+ drivers/clk/mediatek/Makefile                 |   1 +
+ drivers/clk/mediatek/clk-mt7987.c             | 848 ++++++++++++++++++
+ drivers/mmc/mtk-sd.c                          |  21 +-
+ drivers/pinctrl/mediatek/Kconfig              |   4 +
+ drivers/pinctrl/mediatek/Makefile             |   1 +
+ drivers/pinctrl/mediatek/pinctrl-mt7987.c     | 736 +++++++++++++++
+ include/configs/mt7987.h                      |  14 +
+ .../dt-bindings/clock/mediatek,mt7987-clk.h   | 206 +++++
+ 34 files changed, 4230 insertions(+), 3 deletions(-)
+ create mode 100644 arch/arm/dts/mt7987-emmc.dtsi
+ create mode 100644 arch/arm/dts/mt7987-netsys-u-boot.dtsi
+ create mode 100644 arch/arm/dts/mt7987-pinctrl-u-boot.dtsi
+ create mode 100644 arch/arm/dts/mt7987-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/mt7987-sd.dtsi
+ create mode 100644 arch/arm/dts/mt7987.dtsi
+ create mode 100644 arch/arm/dts/mt7987a-emmc-rfb-u-boot.dtsi
+ create mode 100644 arch/arm/dts/mt7987a-emmc-rfb.dts
+ create mode 100644 arch/arm/dts/mt7987a-rfb-u-boot.dtsi
+ create mode 100644 arch/arm/dts/mt7987a-rfb.dts
+ create mode 100644 arch/arm/dts/mt7987a-sd-rfb-u-boot.dtsi
+ create mode 100644 arch/arm/dts/mt7987a-sd-rfb.dts
+ create mode 100644 arch/arm/dts/mt7987a-u-boot.dtsi
+ create mode 100644 arch/arm/dts/mt7987a.dtsi
+ create mode 100644 arch/arm/mach-mediatek/mt7987/Makefile
+ create mode 100644 arch/arm/mach-mediatek/mt7987/init.c
+ create mode 100644 arch/arm/mach-mediatek/mt7987/lowlevel_init.S
+ create mode 100644 arch/arm/mach-mediatek/tzcfg.c
+ create mode 100644 board/mediatek/mt7987/MAINTAINERS
+ create mode 100644 board/mediatek/mt7987/Makefile
+ create mode 100644 board/mediatek/mt7987/mt7987_rfb.c
+ create mode 100644 configs/mt7987_emmc_rfb_defconfig
+ create mode 100644 configs/mt7987_rfb_defconfig
+ create mode 100644 configs/mt7987_sd_rfb_defconfig
+ create mode 100644 drivers/clk/mediatek/clk-mt7987.c
+ create mode 100644 drivers/pinctrl/mediatek/pinctrl-mt7987.c
+ create mode 100644 include/configs/mt7987.h
+ create mode 100644 include/dt-bindings/clock/mediatek,mt7987-clk.h
 
----
- drivers/ram/k3-ddrss/k3-ddrss.c | 32 +++++++++++++++++++++++++-------
- 1 file changed, 25 insertions(+), 7 deletions(-)
-
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index 05ea61bbfe9a..ff87faf6a224 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -33,6 +33,12 @@
- #define DDRSS_V2A_CTL_REG			0x0020
- #define DDRSS_ECC_CTRL_REG			0x0120
- 
-+#define DDRSS_V2A_CTL_REG_SDRAM_IDX_CALC(x)	((ilog2(x) - 16) << 5)
-+#define DDRSS_V2A_CTL_REG_SDRAM_IDX_MASK	(~(0x1F << 0x5))
-+#define DDRSS_V2A_CTL_REG_REGION_IDX_MASK	(~(0X1F))
-+#define DDRSS_V2A_CTL_REG_REGION_IDX_DEFAULT	0xF
-+
-+#define DDRSS_ECC_CTRL_REG_DEFAULT		0x0
- #define DDRSS_ECC_CTRL_REG_ECC_EN		BIT(0)
- #define DDRSS_ECC_CTRL_REG_RMW_EN		BIT(1)
- #define DDRSS_ECC_CTRL_REG_ECC_CK		BIT(2)
-@@ -711,6 +717,22 @@ static void k3_ddrss_ddr_bank_base_size_calc(struct k3_ddrss_desc *ddrss)
- 		ddrss->ddr_ram_size += ddrss->ddr_bank_size[bank];
- }
- 
-+static void k3_ddrss_ddr_reg_init(struct k3_ddrss_desc *ddrss)
-+{
-+	u32 v2a_ctl_reg, sdram_idx;
-+
-+	sdram_idx = DDRSS_V2A_CTL_REG_SDRAM_IDX_CALC(ddrss->ddr_ram_size);
-+	v2a_ctl_reg = readl(ddrss->ddrss_ss_cfg + DDRSS_V2A_CTL_REG);
-+	v2a_ctl_reg = (v2a_ctl_reg & DDRSS_V2A_CTL_REG_SDRAM_IDX_MASK) | sdram_idx;
-+
-+	if (IS_ENABLED(CONFIG_SOC_K3_AM642))
-+		v2a_ctl_reg = (v2a_ctl_reg & DDRSS_V2A_CTL_REG_REGION_IDX_MASK) |
-+			      DDRSS_V2A_CTL_REG_REGION_IDX_DEFAULT;
-+
-+	writel(v2a_ctl_reg, ddrss->ddrss_ss_cfg + DDRSS_V2A_CTL_REG);
-+	writel(DDRSS_ECC_CTRL_REG_DEFAULT, ddrss->ddrss_ss_cfg + DDRSS_ECC_CTRL_REG);
-+}
-+
- static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct k3_ddrss_desc *ddrss)
- {
- 	fdtdec_setup_mem_size_base_lowest();
-@@ -769,11 +791,9 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
--#ifdef CONFIG_K3_AM64_DDRSS
--	/* AM64x supports only up to 2 GB SDRAM */
--	writel(0x000001EF, ddrss->ddrss_ss_cfg + DDRSS_V2A_CTL_REG);
--	writel(0x0, ddrss->ddrss_ss_cfg + DDRSS_ECC_CTRL_REG);
--#endif
-+	k3_ddrss_ddr_bank_base_size_calc(ddrss);
-+
-+	k3_ddrss_ddr_reg_init(ddrss);
- 
- 	ddrss->driverdt = lpddr4_getinstance();
- 
-@@ -787,8 +807,6 @@ static int k3_ddrss_probe(struct udevice *dev)
- 
- 	k3_lpddr4_start(ddrss);
- 
--	k3_ddrss_ddr_bank_base_size_calc(ddrss);
--
- 	if (IS_ENABLED(CONFIG_K3_INLINE_ECC)) {
- 		if (!ddrss->ddrss_ss_cfg) {
- 			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
 -- 
 2.34.1
 
