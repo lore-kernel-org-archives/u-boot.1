@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7291CC0218C
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:50:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDFEC02182
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 22:50:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EDF280815;
-	Thu, 23 Jan 2025 23:49:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A9B308083C;
+	Thu, 23 Jan 2025 23:49:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="z1lgdeqP";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="F0sb6RLg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8459980780; Thu, 23 Jan 2025 23:49:25 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 7E8CD80780; Thu, 23 Jan 2025 23:49:30 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A57B8083F
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:49:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2611F80821
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 23:49:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1737672561; bh=69Ig7uT1z9vSa9yNvTdQJB1CsDfQnI5GW/M+GtF+RJ0=;
- b=z1lgdeqPT4zlSaFyuXZrfz4kEy1i0eAQwy9o7Z+olitAl+yNmp9VOmgyfq9pX/C/p8iuOnMHH
- n7LqDQ312aPmuieY9mKguzUYAaG6yijaufFxoJi1wH7Q1DrB47S/moi8EBSqfQYo33RRnzmNp0D
- kx89Pfdb2YjI25uZpU+Yd66UPuej5vQaf/r/0yVYEK/eD+qalzDvif/qBmNtv4pta9DnPQIE1y/
- 2D8/5BIfZ2GFG8wNKiSRJpRkaymEQkXSp/tKnMYMR8g4SSIU6ScsrRYDMtschWqVoib7c7PeCkB
- 1A6WvOURnhC+xajtDrCwHtDHoLoEuNdVWgASdN8KuMXg==
-X-Forward-Email-ID: 6792c76df07771e5c89e0191
+ t=1737672566; bh=fIdcjH4LT64lXJ9dEo3nuTPXGwQyBkeNfbhzM9VYVrY=;
+ b=F0sb6RLgzGrQ0+v6hwx0duTKjRI5zYzySWuBJcRLoxjiy/ioCtcBM9GXJmsCH3RENqL6Zlvtd
+ Ir6kk5sZyTF4JsgSFLZkdvIdj4L9R0mlCjvNFB3LnDAqnNQ6Z7dU4k1mcDz3z5yAO4YGDqOcK/N
+ hSAxEokkqCoUFv+wjvxD3NDj2Mc0C1Jn2jWGzSMJ/fhsE4TS0zM2gusfL58pkR/0XefPQy4OPDC
+ WeUcgVmJIZPENwx6kKFkN0M/59jD2w0GRJxW1wz60YhY9mrjt7SnvtEH0CF7ikSVqWKY1Mw/xza
+ +6jechoDAims0gjpfKd8an6vnB/mv7xNs3MEizjHzEDQ==
+X-Forward-Email-ID: 6792c770f07771e5c89e01a0
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 207.246.76.47
 X-Forward-Email-Version: 0.4.40
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -45,13 +45,13 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 08/13] mmc: rockchip_sdhci: Gate clock for glitch free phase
- switching
-Date: Thu, 23 Jan 2025 22:48:20 +0000
-Message-ID: <20250123224844.3104592-9-jonas@kwiboo.se>
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
+ Lin Jinhan <troy.lin@rock-chips.com>
+Subject: [PATCH 09/13] rng: rockchip: Add support for rkrng variant
+Date: Thu, 23 Jan 2025 22:48:21 +0000
+Message-ID: <20250123224844.3104592-10-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250123224844.3104592-1-jonas@kwiboo.se>
 References: <20250123224844.3104592-1-jonas@kwiboo.se>
@@ -73,57 +73,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable clock stopping to gate clock during phase code change to ensure
-glitch free phase switching in auto-tuning circuit. Fixes HS200 mode
-on RK3528.
+From: Lin Jinhan <troy.lin@rock-chips.com>
 
-POST_CHANGE_DLY
-Time taken for phase switching and stable clock output.
-- Less than 4-cycle latency
+Add support for rkrng variant, used by e.g. RK3528 and RK3576.
 
-PRE_CHANGE_DLY
-Maximum Latency specification between transmit clock and receive clock.
-- Less than 4-cycle latency
+Imported from vendor U-Boot linux-6.1-stan-rkr5 tag with minor
+adjustments for mainline.
 
-TUNE_CLK_STOP_EN
-Clock stopping control for Tuning and auto-tuning circuit. When enabled,
-clock gate control output is pulled low before changing phase select
-codes. This effectively stops the receive clock. Changing phase code
-when clocks are stopped ensures glitch free phase switching.
-- Clocks stopped during phase code change
-
+Signed-off-by: Lin Jinhan <troy.lin@rock-chips.com>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/mmc/rockchip_sdhci.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/rng/rockchip_rng.c | 73 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 73 insertions(+)
 
-diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-index 2c54b8a942da..c0f986784366 100644
---- a/drivers/mmc/rockchip_sdhci.c
-+++ b/drivers/mmc/rockchip_sdhci.c
-@@ -50,6 +50,10 @@
- #define DWCMSHC_EMMC_EMMC_CTRL		0x52c
- #define DWCMSHC_CARD_IS_EMMC		BIT(0)
- #define DWCMSHC_ENHANCED_STROBE		BIT(8)
-+#define DWCMSHC_EMMC_AT_CTRL		0x540
-+#define EMMC_AT_CTRL_TUNE_CLK_STOP_EN	BIT(16)
-+#define EMMC_AT_CTRL_PRE_CHANGE_DLY	17
-+#define EMMC_AT_CTRL_POST_CHANGE_DLY	19
- #define DWCMSHC_EMMC_DLL_CTRL		0x800
- #define DWCMSHC_EMMC_DLL_CTRL_RESET	BIT(1)
- #define DWCMSHC_EMMC_DLL_RXCLK		0x804
-@@ -326,6 +330,11 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
- 		udelay(1);
- 		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
+diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
+index 2426648fbd57..0e3b95b5540e 100644
+--- a/drivers/rng/rockchip_rng.c
++++ b/drivers/rng/rockchip_rng.c
+@@ -70,6 +70,27 @@
+ #define TRNG_v1_VERSION_CODE			0x46BC
+ /* end of TRNG V1 register define */
  
-+		extra = 0x3 << EMMC_AT_CTRL_POST_CHANGE_DLY |
-+			0x3 << EMMC_AT_CTRL_PRE_CHANGE_DLY |
-+			EMMC_AT_CTRL_TUNE_CLK_STOP_EN;
-+		sdhci_writel(host, extra, DWCMSHC_EMMC_AT_CTRL);
++/* start of RKRNG register define */
++#define RKRNG_CTRL				0x0010
++#define RKRNG_CTRL_INST_REQ			BIT(0)
++#define RKRNG_CTRL_RESEED_REQ			BIT(1)
++#define RKRNG_CTRL_TEST_REQ			BIT(2)
++#define RKRNG_CTRL_SW_DRNG_REQ			BIT(3)
++#define RKRNG_CTRL_SW_TRNG_REQ			BIT(4)
 +
- 		/* Init DLL settings */
- 		extra = DWCMSHC_EMMC_DLL_START_DEFAULT << DWCMSHC_EMMC_DLL_START_POINT |
- 			DWCMSHC_EMMC_DLL_INC_VALUE << DWCMSHC_EMMC_DLL_INC |
++#define RKRNG_STATE				0x0014
++#define RKRNG_STATE_INST_ACK			BIT(0)
++#define RKRNG_STATE_RESEED_ACK			BIT(1)
++#define RKRNG_STATE_TEST_ACK			BIT(2)
++#define RKRNG_STATE_SW_DRNG_ACK			BIT(3)
++#define RKRNG_STATE_SW_TRNG_ACK			BIT(4)
++
++/* DRNG_DATA_0 ~ DNG_DATA_7 */
++#define RKRNG_DRNG_DATA_0			0x0070
++#define RKRNG_DRNG_DATA_7			0x008C
++
++/* end of RKRNG register define */
++
+ #define RK_RNG_TIME_OUT	50000  /* max 50ms */
+ 
+ #define trng_write(pdata, pos, val)	writel(val, (pdata)->base + (pos))
+@@ -228,6 +249,49 @@ exit:
+ 	return retval;
+ }
+ 
++static int rkrng_init(struct udevice *dev)
++{
++	struct rk_rng_plat *pdata = dev_get_priv(dev);
++	u32 reg = 0;
++
++	rk_clrreg(pdata->base + RKRNG_CTRL, 0xffff);
++
++	reg = trng_read(pdata, RKRNG_STATE);
++	trng_write(pdata, RKRNG_STATE, reg);
++
++	return 0;
++}
++
++static int rkrng_rng_read(struct udevice *dev, void *data, size_t len)
++{
++	struct rk_rng_plat *pdata = dev_get_priv(dev);
++	u32 reg = 0;
++	int retval;
++
++	if (len > RK_HW_RNG_MAX)
++		return -EINVAL;
++
++	reg = RKRNG_CTRL_SW_DRNG_REQ;
++
++	rk_clrsetreg(pdata->base + RKRNG_CTRL, 0xffff, reg);
++
++	retval = readl_poll_timeout(pdata->base + RKRNG_STATE, reg,
++				    (reg & RKRNG_STATE_SW_DRNG_ACK),
++				    RK_RNG_TIME_OUT);
++	if (retval)
++		goto exit;
++
++	trng_write(pdata, RKRNG_STATE, reg);
++
++	rk_rng_read_regs(pdata->base + RKRNG_DRNG_DATA_0, data, len);
++
++exit:
++	/* close TRNG */
++	rk_clrreg(pdata->base + RKRNG_CTRL, 0xffff);
++
++	return retval;
++}
++
+ static int rockchip_rng_read(struct udevice *dev, void *data, size_t len)
+ {
+ 	unsigned char *buf = data;
+@@ -295,6 +359,11 @@ static const struct rk_rng_soc_data rk_trngv1_soc_data = {
+ 	.rk_rng_read = rk_trngv1_rng_read,
+ };
+ 
++static const struct rk_rng_soc_data rkrng_soc_data = {
++	.rk_rng_init = rkrng_init,
++	.rk_rng_read = rkrng_rng_read,
++};
++
+ static const struct dm_rng_ops rockchip_rng_ops = {
+ 	.read = rockchip_rng_read,
+ };
+@@ -320,6 +389,10 @@ static const struct udevice_id rockchip_rng_match[] = {
+ 		.compatible = "rockchip,trngv1",
+ 		.data = (ulong)&rk_trngv1_soc_data,
+ 	},
++	{
++		.compatible = "rockchip,rkrng",
++		.data = (ulong)&rkrng_soc_data,
++	},
+ 	{},
+ };
+ 
 -- 
 2.48.1
 
