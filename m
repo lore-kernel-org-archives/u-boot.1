@@ -4,83 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3299EC02182
-	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 14:52:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCEFFC0218B
+	for <u-boot@archiver.kernel.org>; Thu, 23 Jan 2025 15:16:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D93780243;
-	Thu, 23 Jan 2025 15:52:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 25722801B0;
+	Thu, 23 Jan 2025 16:16:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="oNPRfx0w";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="rjGSgIok";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3445806C9; Thu, 23 Jan 2025 15:52:31 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0AEA880214; Thu, 23 Jan 2025 16:16:09 +0100 (CET)
+Received: from mail-4018.proton.ch (mail-4018.proton.ch [185.70.40.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD83E80214
- for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 15:52:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B39380137
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 16:16:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=3118deafe3=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50NDPE1Q026857;
- Thu, 23 Jan 2025 15:50:40 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- U+VkcrUcUGte5AngUxgQQXKjT0r8bKnAzp+bSUXkzNM=; b=oNPRfx0wo7/jzySy
- X6x+iu/+hi3+W87h8j65lPDc8MKhqH1KAvl50iOE19XpT2m8g9qSP9fiFoYxITZ/
- n+Mor9yI1LqlKMSgKHcE39xccTa4jcOqQghEQNEpU/wNtV+npFg5YNVwEJpzTIhs
- wSNpJkPCWmmxfebdjVM/2WMtOA2989P+xwUbM/pLGZ9LfNcz+GcLzH9HgpsmfdgI
- nbhHRCGvpQesDNnj8232W5kvnsSdLoplUflKKIFNPPJtGAS6nshov3YjbHusS/NX
- 5migmbpe52YdNaqWpNdu2Z7TP5GVwXWed+b6Gp6unrjhhPEYB4J0RrM4+9g/Hbuv
- S2qKog==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44bpmv09nk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 23 Jan 2025 15:50:40 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2B9CA4004A;
- Thu, 23 Jan 2025 15:49:16 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D47E72BAFBE;
- Thu, 23 Jan 2025 15:47:24 +0100 (CET)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Thu, 23 Jan
- 2025 15:47:24 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Caleb Connolly
- <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, Oliver Gaskell
- <Oliver.Gaskell@analog.com>, Robert Marko <robert.marko@sartura.hr>, Sam
- Protsenko <semen.protsenko@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sjoerd Simons <sjoerd@collabora.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 4/9] usb: dwc3-generic: Add STih407 support
-Date: Thu, 23 Jan 2025 15:47:13 +0100
-Message-ID: <20250123144718.1139824-5-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250123144718.1139824-1-patrice.chotard@foss.st.com>
-References: <20250123144718.1139824-1-patrice.chotard@foss.st.com>
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1737645365; x=1737904565;
+ bh=Jd9QKIx1qAlkiu1xUlBQvAgjwCBTJbdDlqB1WQk9GkI=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=rjGSgIokSEhWGdKZI2JK8iAuKd3FJkm1NlGwfa5jQ1Bdi+zDk8n+c5PQPPgPje7R7
+ 1Kex/7b3MHj0yuBCp5yJ1qiOiZmTGy87BkrVaCL2rOlQQ9LzRKOVE2DL+c71JzwYA4
+ yaMkUxzzC/NhtN0EXRsy0q0y50VJoLxa0DgSCOoctyIKTzGh/2xwWgipulwuFi1hCU
+ ib9m3oHpv5SUj2mQxquKndh8eLwMuhqgHyhXS65zz0KHM80ltZDmU2KfFT+m5cT80Z
+ hU3XsT5dTJHvG6MKgnmU+vaWEKuyMj7cmry9+DW7yj1MzfbiBgf3MhvUugEOzOfqBJ
+ XazxBqnfONxBg==
+Date: Thu, 23 Jan 2025 15:16:01 +0000
+To: Simon Glass <sjg@chromium.org>
+From: Sam Day <me@samcday.com>
+Cc: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/2] mach-snapdragon: pass fdt to qcom_parse_memory
+Message-ID: <1VNKkmL9nHfNP7DNQi9hMlzPAlGefQBJpZXl0ogjmz2jhXDdK1BoIPoWgrvaDp2YkhmfyxT-gicM7qXjQkLu68GL-JjiKP3wHFU_pJM_1Ho=@samcday.com>
+In-Reply-To: <CAFLszTjcgo3z=4rSxZt7b8Gojy+YvnPBxP=09mrZDB6GJgjQnA@mail.gmail.com>
+References: <20250122-qcom-parse-memory-updates-v2-0-98dfcac821d7@samcday.com>
+ <20250122-qcom-parse-memory-updates-v2-1-98dfcac821d7@samcday.com>
+ <CAFLszTjcgo3z=4rSxZt7b8Gojy+YvnPBxP=09mrZDB6GJgjQnA@mail.gmail.com>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 5cdd3a93b5203b523158942b9360b2d0a37b71c2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SAFCAS1NODE2.st.com (10.75.90.13) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-23_06,2025-01-23_01,2024-11-22_01
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,211 +71,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add STi glue logic to manage the DWC3 HC on STiH407
-SoC family. It configures the internal glue logic and
-syscfg registers.
+Salutations Simon,
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Marek Vasut <marex@denx.de>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+On Thursday, 23 January 2025 at 15:37, Simon Glass <sjg@chromium.org> wrote=
+:
+>=20
+> Hi Sam,
+>=20
+> On Wed, 22 Jan 2025 at 03:27, Sam Day me@samcday.com wrote:
+>=20
+> > commit fc37a73e6679 ("fdt: Swap the signature for
+> > board_fdt_blob_setup()") introduced a subtle change to the Snapdragon
+> > implementation, removing the assignment to gd->fdt_blob partway through
+> > the function.
+> >=20
+> > This breaks qcom_parse_memory() which was also called during
+> > board_fdt_blob_setup().
+> >=20
+> > The underlying issue here is that qcom_parse_memory is using the of_ ap=
+i
+> > to traverse a devicetree, which relies on the fdt_blob in global data.
+> >=20
+> > Rather than relying on this subtle behaviour, explicitly pass the FDT
+> > that should be consulted for a /memory node.
+> >=20
+> > Using the OF API is typically preferable because it's easier to read,
+> > but using the lower level fdt_ methods instead here doesn't add too muc=
+h
+> > complexity, I think.
+> >=20
+> > Finally, a minor tweak was made to board_fdt_blob_setup to use the
+> > passed fdt blob pointer instead of gd->fdt_blob, which removes the last
+> > of the references to global data in this area.
+> >=20
+> > Fixes: fc37a73e6679 (fdt: Swap the signature for board_fdt_blob_setup()=
+)
+> > Reviewed-by: Caleb Connolly caleb.connolly@linaro.org
+> > Signed-off-by: Sam Day me@samcday.com
+> > ---
+> > arch/arm/mach-snapdragon/board.c | 15 ++++++++-------
+> > 1 file changed, 8 insertions(+), 7 deletions(-)
+>=20
+>=20
+> Reviewed-by: Simon Glass sjg@chromium.org
+>=20
+>=20
+> But I'm looking forward to some form of Caleb's patch landing too[1].
 
----
+Hm, this patch was intended to be a replacement for the one you linked. It'=
+s
+already been pulled into upstream/master. Was there something specific in t=
+hat
+patch that you still want to see land?
 
-Changes in v4:
-  - Update Kconfig description
+I saw your comments there today and AFAICT this patch already addressed the
+desire to stop mutating gd->fdt_blob from board_fdt_blob_setup. That was
+necessary in Caleb's patch because qcom_parse_memory was using of_ API meth=
+ods
+to scoop out /memory node info. This patch opted instead to use fdt_ and op=
+erate
+on the provided *fdtp directly.
 
-Changes in v3:
-  - Replace debug() by dev_err()
-  - check return value of syscon_regmap_lookup_by_phandle()
+Regards,
+-Sam
 
-Changes in v2:
-  - add dwc3-sti.c DWC3 wrapper as done for dwc3-am62.c
 
- MAINTAINERS                         |   1 +
- drivers/usb/dwc3/Kconfig            |   8 ++
- drivers/usb/dwc3/Makefile           |   1 +
- drivers/usb/dwc3/dwc3-generic-sti.c | 132 ++++++++++++++++++++++++++++
- 4 files changed, 142 insertions(+)
- create mode 100644 drivers/usb/dwc3/dwc3-generic-sti.c
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8c6c0c2a4bc..5d7e251e601 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -656,6 +656,7 @@ F:	drivers/mmc/sti_sdhci.c
- F:	drivers/reset/sti-reset.c
- F:	drivers/serial/serial_sti_asc.c
- F:	drivers/sysreset/sysreset_sti.c
-+F:	drivers/usb/host/dwc3-sti.c
- F:	drivers/timer/arm_global_timer.c
- F:	drivers/usb/host/dwc3-sti-glue.c
- F:	include/dwc3-sti-glue.h
-diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
-index 0100723a68b..682a6910655 100644
---- a/drivers/usb/dwc3/Kconfig
-+++ b/drivers/usb/dwc3/Kconfig
-@@ -87,6 +87,14 @@ config USB_DWC3_LAYERSCAPE
- 	  Host and Peripheral operation modes are supported. OTG is not
- 	  supported.
- 
-+config USB_DWC3_STI
-+	bool "STi USB wrapper"
-+	depends on DM_USB && USB_DWC3_GENERIC && SYSCON
-+	help
-+	  Enables support for the on-chip xHCI controller on STMicroelectronics
-+	  STiH407 family SoCs. This is a driver for the dwc3 to provide the
-+	  glue logic to configure the controller.
-+
- menu "PHY Subsystem"
- 
- config USB_DWC3_PHY_OMAP
-diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
-index a085c9d4628..985206eafe4 100644
---- a/drivers/usb/dwc3/Makefile
-+++ b/drivers/usb/dwc3/Makefile
-@@ -15,3 +15,4 @@ obj-$(CONFIG_USB_DWC3_UNIPHIER)		+= dwc3-uniphier.o
- obj-$(CONFIG_USB_DWC3_LAYERSCAPE)	+= dwc3-layerscape.o
- obj-$(CONFIG_USB_DWC3_PHY_OMAP)		+= ti_usb_phy.o
- obj-$(CONFIG_USB_DWC3_PHY_SAMSUNG)	+= samsung_usb_phy.o
-+obj-$(CONFIG_USB_DWC3_STI)		+= dwc3-generic-sti.o
-diff --git a/drivers/usb/dwc3/dwc3-generic-sti.c b/drivers/usb/dwc3/dwc3-generic-sti.c
-new file mode 100644
-index 00000000000..2ff640cede4
---- /dev/null
-+++ b/drivers/usb/dwc3/dwc3-generic-sti.c
-@@ -0,0 +1,132 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+/*
-+ * STi specific glue layer for DWC3
-+ *
-+ * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
-+ */
-+
-+#include <reset.h>
-+#include <regmap.h>
-+#include <syscon.h>
-+#include <asm/io.h>
-+#include <dm/device.h>
-+#include <dm/device_compat.h>
-+#include <dm/read.h>
-+#include <linux/usb/otg.h>
-+#include "dwc3-generic.h"
-+
-+/* glue registers */
-+#define CLKRST_CTRL		0x00
-+#define AUX_CLK_EN		BIT(0)
-+#define SW_PIPEW_RESET_N	BIT(4)
-+#define EXT_CFG_RESET_N		BIT(8)
-+
-+#define XHCI_REVISION		BIT(12)
-+
-+#define USB2_VBUS_MNGMNT_SEL1	0x2C
-+#define USB2_VBUS_UTMIOTG	0x1
-+
-+#define SEL_OVERRIDE_VBUSVALID(n)	((n) << 0)
-+#define SEL_OVERRIDE_POWERPRESENT(n)	((n) << 4)
-+#define SEL_OVERRIDE_BVALID(n)		((n) << 8)
-+
-+/* Static DRD configuration */
-+#define USB3_CONTROL_MASK		0xf77
-+
-+#define USB3_DEVICE_NOT_HOST		BIT(0)
-+#define USB3_FORCE_VBUSVALID		BIT(1)
-+#define USB3_DELAY_VBUSVALID		BIT(2)
-+#define USB3_SEL_FORCE_OPMODE		BIT(4)
-+#define USB3_FORCE_OPMODE(n)		((n) << 5)
-+#define USB3_SEL_FORCE_DPPULLDOWN2	BIT(8)
-+#define USB3_FORCE_DPPULLDOWN2		BIT(9)
-+#define USB3_SEL_FORCE_DMPULLDOWN2	BIT(10)
-+#define USB3_FORCE_DMPULLDOWN2		BIT(11)
-+
-+static void dwc3_stih407_glue_configure(struct udevice *dev, int index,
-+					enum usb_dr_mode mode)
-+{
-+	struct dwc3_glue_data *glue = dev_get_plat(dev);
-+	struct regmap *regmap;
-+	ulong syscfg_base;
-+	ulong syscfg_offset;
-+	ulong glue_base;
-+	int ret;
-+
-+	/* deassert both powerdown and softreset */
-+	ret = reset_deassert_bulk(&glue->resets);
-+	if (ret) {
-+		dev_err(dev, "reset_deassert_bulk error: %d\n", ret);
-+		return;
-+	}
-+
-+	regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscfg");
-+	if (IS_ERR(regmap)) {
-+		dev_err(dev, "unable to get st,syscfg, dev %s\n", dev->name);
-+		return;
-+	}
-+
-+	syscfg_base = regmap->ranges[0].start;
-+	glue_base = dev_read_addr_index(dev, 0);
-+	syscfg_offset = dev_read_addr_index(dev, 1);
-+
-+	clrbits_le32(syscfg_base + syscfg_offset, USB3_CONTROL_MASK);
-+
-+	/* glue drd init */
-+	switch (mode) {
-+	case USB_DR_MODE_PERIPHERAL:
-+		clrbits_le32(syscfg_base + syscfg_offset,
-+			     USB3_DELAY_VBUSVALID | USB3_SEL_FORCE_OPMODE |
-+			     USB3_FORCE_OPMODE(0x3) | USB3_SEL_FORCE_DPPULLDOWN2 |
-+			     USB3_FORCE_DPPULLDOWN2 | USB3_SEL_FORCE_DMPULLDOWN2 |
-+			     USB3_FORCE_DMPULLDOWN2);
-+
-+		setbits_le32(syscfg_base + syscfg_offset,
-+			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID);
-+		break;
-+
-+	case USB_DR_MODE_HOST:
-+		clrbits_le32(syscfg_base + syscfg_offset,
-+			     USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID |
-+			     USB3_SEL_FORCE_OPMODE | USB3_FORCE_OPMODE(0x3) |
-+			     USB3_SEL_FORCE_DPPULLDOWN2 | USB3_FORCE_DPPULLDOWN2 |
-+			     USB3_SEL_FORCE_DMPULLDOWN2 | USB3_FORCE_DMPULLDOWN2);
-+
-+		setbits_le32(syscfg_base + syscfg_offset, USB3_DELAY_VBUSVALID);
-+		break;
-+
-+	default:
-+		dev_err(dev, "Unsupported mode of operation %d\n", mode);
-+		return;
-+	}
-+
-+	/* glue init */
-+	setbits_le32(glue_base + CLKRST_CTRL, AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION);
-+	clrbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
-+
-+	/* configure mux for vbus, powerpresent and bvalid signals */
-+	setbits_le32(glue_base + USB2_VBUS_MNGMNT_SEL1,
-+		     SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
-+		     SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
-+		     SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG));
-+	setbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
-+};
-+
-+struct dwc3_glue_ops stih407_ops = {
-+	.glue_configure = dwc3_stih407_glue_configure,
-+};
-+
-+static const struct udevice_id dwc3_sti_match[] = {
-+	{ .compatible = "st,stih407-dwc3", .data = (ulong)&stih407_ops},
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(dwc3_sti_wrapper) = {
-+	.name = "dwc3-sti",
-+	.id = UCLASS_SIMPLE_BUS,
-+	.of_match = dwc3_sti_match,
-+	.bind = dwc3_glue_bind,
-+	.probe = dwc3_glue_probe,
-+	.remove = dwc3_glue_remove,
-+	.plat_auto = sizeof(struct dwc3_glue_data),
-+};
--- 
-2.25.1
-
+>=20
+> Regards,
+> SImon
+>=20
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20250117102734.37250=
+09-2-caleb.connolly@linaro.org/
