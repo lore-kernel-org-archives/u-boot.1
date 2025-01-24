@@ -4,68 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 825EAC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 14:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48777C02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:15:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5348880BA6;
-	Fri, 24 Jan 2025 15:56:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 87F8D80A3E;
+	Fri, 24 Jan 2025 16:15:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737730562;
-	bh=A+KGo7bakI6orRYTFHT1Lf9D9dapXMlKuKj1m8MJhQ0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=AHryNXh3CxJTXAJCxmF5MNA4VL5Pr7airBp4i6dsD1SFL9LPwwj1frMYW9mqhdk6q
-	 sxYYSCYGMUsAF36RcgxK4r84I7qoKTo/4EjMOeOaYkzejD+ZoYVkC47j+Xw9qmYcAD
-	 m38Q7dA0ctxlPrCVjUXHX8VRbdKfRu0iLdXpTlivtQ3mTstackIJPO4OVGOWb1bVhI
-	 M/pZYhsfKJ11vrhMnfxzC5HBkbtKZmwLEOpclFmndgD0NXcJQ5WAlgjiu5ulkfyRap
-	 5Q2pilBtEhnlP3rhEATHoMgDnG5vtLz0XWbFGyWWmBllLQEjM3vJB/BUgeT0vqXasl
-	 NfK43AUITa5hw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 464FB807E4; Fri, 24 Jan 2025 15:55:59 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 358A480AE5
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 15:55:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="VPdiE2Gy"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 26CA810A396CE; Fri, 24 Jan 2025 15:55:55 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737730555;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=A+KGo7bakI6orRYTFHT1Lf9D9dapXMlKuKj1m8MJhQ0=;
- b=VPdiE2Gy/AmKd6SE0N2gkzUC8aWWIoztOWsTpGgIXwaD9mOiCziDjXqq2nW5UKMm4k7ked
- utmAd7gTcJ4FA10mEuEWrK66cb3SPS2y21FAfU6asPGp2UZyb3bUjUHOZPL2pILUDnmBif
- D49D/pYMxzdn3i190oDNa0u4kKvQqijAyxDMEB6MHPmofp7iXw0Nd7vzr4HWIj2eLbsiX7
- bANDPWTlheH+/ROLENu66HgeZKHN10uq+Yx3W42RhNNxSoUGd35McHwh6iGJIiuEJZP5bp
- u2x+HuXPfzNJPH26dypSvblQvA6L4ykBsSIN09M3RDvdkOUR4WmKHBdzO6Axmg==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 10/10] pinctrl: imx: Split MMIO accessors into
- pinctrl-imx-mmio.c
-Date: Fri, 24 Jan 2025 15:50:59 +0100
-Message-ID: <20250124145520.185414-10-marex@denx.de>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T1e+tJkR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 58C3280977; Fri, 24 Jan 2025 16:14:55 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C4D6480ADA
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:14:52 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eichest@gmail.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4361815b96cso15290595e9.1
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 07:14:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1737731692; x=1738336492; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PfCA6XrcFE3SI50VS7v7aCAeLoaCQVUNw1sOddRHE74=;
+ b=T1e+tJkRGok1YFgDS57Iiu+iS075XYqRuUUbwvxHAU1H2Dq1RYHtRsK3rtwJq3Y6R6
+ JnMw61cCU/75dxjUflqc2i1wIa87WRTSC5DcZ9z8qSFsjQKNY3hQ9n2vTSs5IvTGgWzO
+ xzIHMbNGeP9O6QsS3p8zsR+kUD8isRdl3KEt5mfABCM3peQTGcE0QxIOgL8FNgpq+quc
+ 19YrLRSm74aqYZnUP3i+W3jQpFkcMp/WJHtEXa+OnbJHDJ1eL2//TdS6YdNC8YGPKK3l
+ wIr8uC80TJJndKBSEr5ZmwWZuMYmZei5sOyR6HB5lP74BLh8c67HGXOCDTHlgypBtVaB
+ 2q8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737731692; x=1738336492;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PfCA6XrcFE3SI50VS7v7aCAeLoaCQVUNw1sOddRHE74=;
+ b=DYDF9WF6Iu6K7+WqGEjw6hIDYXka0OvbZiaax1NYGWoUU1qb0I8JphcpjrT3iDaP1A
+ xSRE5N0LNzP2IVYQOww2jlnTcRhACnkMh3n18O8qni8nKuV7fmq54nwI5f+1EtZfDsrB
+ 0Lc+DqPBqjgaq4k4FyS4EIhNXUm1qWgR7CAq3EmzhnlY2hvp32caIAR+/bFvccT/Y09/
+ l1pNbR5BXwnijz8t7qjbKrK6CH2F4pCGx0rMO8oFeG1kFIff6gIpZfLD1/JbWVjKXZie
+ 6m8gKSnjos6XoiY7Z6ak1POXTwOxH+HwTKE7M0ahg0Ygi/8m1XntfcgAV6DVF3wqn2W5
+ LRtw==
+X-Gm-Message-State: AOJu0YxRng6MCDtVUfNqg57tIhRFIH1VewMYGKlieZRPSVEwQ/pMzJfn
+ Yem00YMZ8vp1onBYriRbPcwBUJgnmr647zwsEPeShZCg1i6hBSHVZ65dVEVs
+X-Gm-Gg: ASbGncsaUGQGokT2mRarPP0UZDylCVNEIXhETc7svy3ahs57fez6IHViO87WcmhuqpG
+ FK1LGT2AAl4rOPfsU2N78StgZ+3hF2qmArBrOMyAe598B2aYRJB8hE4GiW6uln1zRQaam/RzcWm
+ dsA1JoXmy/R0P2Q759XTipNE9Ly30CtawPGmaiTbxVZJXEwVsIE2Tzi3Rr1QDiHlsyr9DjtA8sp
+ RNcrSF2fULmSe00Cz7sGoxc1rBBk1YFW/A9riHC7CiqrwSM9IL0oBGg6P5wknfS/Vju19VVx+rc
+ xt9e8Iu1
+X-Google-Smtp-Source: AGHT+IF1I6NkT3IR6XnLOrzkLDWLU3fv5gMWM5bXAfg+IHN5D8S9HLhYEhfT7tOe8N/r0yVCsC4+Gg==
+X-Received: by 2002:a05:6000:4025:b0:38a:36a5:ff81 with SMTP id
+ ffacd0b85a97d-38bf59e254bmr29399596f8f.40.1737731690533; 
+ Fri, 24 Jan 2025 07:14:50 -0800 (PST)
+Received: from eichest-laptop.lan ([2a02:168:af72:0:58db:611:d7b2:c596])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38c2a188915sm2932826f8f.41.2025.01.24.07.14.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Jan 2025 07:14:50 -0800 (PST)
+From: Stefan Eichenberger <eichest@gmail.com>
+To: francesco.dolcini@toradex.com, trini@konsulko.com,
+ stefan.eichenberger@toradex.com, emanuele.ghidoli@toradex.com,
+ joao.goncalves@toradex.com, vitor.soares@toradex.com,
+ igor.opaniuk@foundries.io, max.krummenacher@toradex.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1] toradex: tdx-cfg-block: fix switch to user partition
+Date: Fri, 24 Jan 2025 16:14:30 +0100
+Message-ID: <20250124151443.576075-1-eichest@gmail.com>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20250124145520.185414-1-marex@denx.de>
-References: <20250124145520.185414-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Fri, 24 Jan 2025 16:15:19 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,591 +97,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Split MMIO accessors into pinctrl-imx-mmio.c and build this
-file only if Kconfig symbol PINCTRL_IMX_MMIO is selected.
-Select PINCTRL_IMX_MMIO Kconfig symbol for all but pinctrl-imx8.c
-driver, which does not use the MMIO accessors. This reduces the
-amount of code compiled on platforms which do not use the code.
+From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 
-No functional change.
+The Toradex configuration block is stored in the first boot partition of
+the eMMC. After reading the configuration block, U-Boot switches back to
+the user partition. Currently, this operation always targets mmc device
+0, even when the configuration block is stored on mmc device 2.
 
-Signed-off-by: Marek Vasut <marex@denx.de>
+This patch addresses the issue by switching the mmc device set in
+CONFIG_TDX_CFG_BLOCK_DEV to the user partition, rather than using the
+hardcoded device 0.
+
+Fixes: a2777ecb9d11 ("toradex: config block handling")
+Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 ---
-Cc: Alice Guo <alice.guo@nxp.com>
-Cc: Jesse Taube <mr.bossman075@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Cc: Tim Harvey <tharvey@gateworks.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/pinctrl/nxp/Kconfig            |  22 ++-
- drivers/pinctrl/nxp/Makefile           |   1 +
- drivers/pinctrl/nxp/pinctrl-imx-mmio.c | 228 +++++++++++++++++++++++++
- drivers/pinctrl/nxp/pinctrl-imx.c      | 208 ----------------------
- 4 files changed, 242 insertions(+), 217 deletions(-)
- create mode 100644 drivers/pinctrl/nxp/pinctrl-imx-mmio.c
+ board/toradex/common/tdx-cfg-block.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/pinctrl/nxp/Kconfig b/drivers/pinctrl/nxp/Kconfig
-index e2fc121ae75..d13c5f2a6d5 100644
---- a/drivers/pinctrl/nxp/Kconfig
-+++ b/drivers/pinctrl/nxp/Kconfig
-@@ -1,11 +1,15 @@
- config PINCTRL_IMX
- 	bool
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index 3855e15b83b..b2149438b88 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -312,7 +312,7 @@ static int tdx_cfg_block_mmc_storage(u8 *config_block, int write)
  
-+config PINCTRL_IMX_MMIO
-+	bool
-+	select PINCTRL_IMX
-+
- config PINCTRL_IMX5
- 	bool "IMX5 pinctrl driver"
- 	depends on ARCH_MX5 && PINCTRL_FULL
- 	select DEVRES
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the imx5 pinctrl driver
+ out:
+ 	/* Switch back to regular eMMC user partition */
+-	blk_select_hwpart_devnum(UCLASS_MMC, 0, 0);
++	blk_select_hwpart_devnum(UCLASS_MMC, dev, 0);
  
-@@ -19,7 +23,7 @@ config PINCTRL_IMX6
- 	bool "IMX6 pinctrl driver"
- 	depends on ARCH_MX6 && PINCTRL_FULL
- 	select DEVRES
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the imx6 pinctrl driver
- 
-@@ -33,7 +37,7 @@ config PINCTRL_IMX7
- 	bool "IMX7 pinctrl driver"
- 	depends on ARCH_MX7 && PINCTRL_FULL
- 	select DEVRES
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the imx7 pinctrl driver
- 
-@@ -47,7 +51,7 @@ config PINCTRL_IMX7ULP
- 	bool "IMX7ULP pinctrl driver"
- 	depends on ARCH_MX7ULP && PINCTRL_FULL
- 	select DEVRES
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the imx7ulp pinctrl driver
- 
-@@ -61,7 +65,7 @@ config PINCTRL_IMX8ULP
- 	bool "IMX8ULP pinctrl driver"
- 	depends on ARCH_IMX8ULP && PINCTRL_FULL
- 	select DEVRES
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the imx8ulp pinctrl driver
- 
-@@ -88,7 +92,7 @@ config PINCTRL_IMX8
- config PINCTRL_IMX8M
- 	bool "IMX8M pinctrl driver"
- 	depends on ARCH_IMX8M && PINCTRL_FULL
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the imx8m pinctrl driver
- 
-@@ -101,7 +105,7 @@ config PINCTRL_IMX8M
- config PINCTRL_IMX93
- 	bool "IMX8M pinctrl driver"
- 	depends on ARCH_IMX9 && PINCTRL_FULL
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the imx8m pinctrl driver
- 
-@@ -125,7 +129,7 @@ config PINCTRL_IMXRT
- 	bool "IMXRT pinctrl driver"
- 	depends on ARCH_IMXRT && PINCTRL_FULL
- 	select DEVRES
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the imxrt pinctrl driver
- 
-@@ -139,7 +143,7 @@ config PINCTRL_VYBRID
- 	bool "Vybrid (vf610) pinctrl driver"
- 	depends on ARCH_VF610 && PINCTRL_FULL
- 	select DEVRES
--	select PINCTRL_IMX
-+	select PINCTRL_IMX_MMIO
- 	help
- 	  Say Y here to enable the Vybrid (vf610) pinctrl driver
- 
-diff --git a/drivers/pinctrl/nxp/Makefile b/drivers/pinctrl/nxp/Makefile
-index c82275a2e93..44e37c631e5 100644
---- a/drivers/pinctrl/nxp/Makefile
-+++ b/drivers/pinctrl/nxp/Makefile
-@@ -1,4 +1,5 @@
- obj-$(CONFIG_PINCTRL_IMX)		+= pinctrl-imx.o
-+obj-$(CONFIG_PINCTRL_IMX_MMIO)		+= pinctrl-imx-mmio.o
- obj-$(CONFIG_PINCTRL_IMX5)		+= pinctrl-imx5.o
- obj-$(CONFIG_PINCTRL_IMX6)		+= pinctrl-imx6.o
- obj-$(CONFIG_PINCTRL_IMX7)		+= pinctrl-imx7.o
-diff --git a/drivers/pinctrl/nxp/pinctrl-imx-mmio.c b/drivers/pinctrl/nxp/pinctrl-imx-mmio.c
-new file mode 100644
-index 00000000000..6ee108a0120
---- /dev/null
-+++ b/drivers/pinctrl/nxp/pinctrl-imx-mmio.c
-@@ -0,0 +1,228 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2016 Peng Fan <van.freenix@gmail.com>
-+ */
-+
-+#include <malloc.h>
-+#include <mapmem.h>
-+#include <asm/global_data.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
-+#include <linux/bitops.h>
-+#include <linux/io.h>
-+#include <linux/err.h>
-+#include <dm.h>
-+#include <dm/pinctrl.h>
-+
-+#include "pinctrl-imx.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int imx_pinctrl_set_state_mmio(struct udevice *dev, struct udevice *config)
-+{
-+	struct imx_pinctrl_priv *priv = dev_get_priv(dev);
-+	struct imx_pinctrl_soc_info *info = priv->info;
-+	u32 mux_shift = info->mux_mask ? ffs(info->mux_mask) - 1 : 0;
-+	u32 input_val, mux_mode, config_val;
-+	int mux_reg, conf_reg, input_reg;
-+	int npins, pin_size;
-+	int i, j = 0, ret;
-+	u32 *pin_data;
-+
-+	if (info->flags & SHARE_MUX_CONF_REG)
-+		pin_size = SHARE_FSL_PIN_SIZE;
-+	else
-+		pin_size = FSL_PIN_SIZE;
-+
-+	ret = imx_pinctrl_set_state_common(dev, config, pin_size,
-+					   &pin_data, &npins);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Refer to linux documentation for details:
-+	 * Documentation/devicetree/bindings/pinctrl/fsl,imx-pinctrl.txt
-+	 */
-+	for (i = 0; i < npins; i++) {
-+		mux_reg = pin_data[j++];
-+
-+		if (!(info->flags & ZERO_OFFSET_VALID) && !mux_reg)
-+			mux_reg = -1;
-+
-+		if (info->flags & SHARE_MUX_CONF_REG) {
-+			conf_reg = mux_reg;
-+		} else {
-+			conf_reg = pin_data[j++];
-+			if (!(info->flags & ZERO_OFFSET_VALID) &&
-+			    !conf_reg)
-+				conf_reg = -1;
-+		}
-+
-+		if ((mux_reg == -1) || (conf_reg == -1)) {
-+			dev_err(dev, "Error mux_reg or conf_reg\n");
-+			devm_kfree(dev, pin_data);
-+			return -EINVAL;
-+		}
-+
-+		input_reg = pin_data[j++];
-+		mux_mode = pin_data[j++];
-+		input_val = pin_data[j++];
-+		config_val = pin_data[j++];
-+
-+		dev_dbg(dev, "mux_reg 0x%x, conf_reg 0x%x, input_reg 0x%x, mux_mode 0x%x, input_val 0x%x, config_val 0x%x\n",
-+			mux_reg, conf_reg, input_reg, mux_mode,
-+			input_val, config_val);
-+
-+		if (config_val & IMX_PAD_SION)
-+			mux_mode |= IOMUXC_CONFIG_SION;
-+
-+		config_val &= ~IMX_PAD_SION;
-+
-+		/* Set Mux */
-+		if (info->flags & SHARE_MUX_CONF_REG) {
-+			clrsetbits_le32(info->base + mux_reg,
-+					info->mux_mask,
-+					mux_mode << mux_shift);
-+		} else {
-+			writel(mux_mode, info->base + mux_reg);
-+		}
-+
-+		dev_dbg(dev, "write mux: offset 0x%x val 0x%x\n",
-+			mux_reg, mux_mode);
-+
-+		/*
-+		 * Set select input
-+		 *
-+		 * If the select input value begins with 0xff,
-+		 * it's a quirky select input and the value should
-+		 * be interpreted as below.
-+		 *     31     23      15      7        0
-+		 *     | 0xff | shift | width | select |
-+		 * It's used to work around the problem that the
-+		 * select input for some pin is not implemented in
-+		 * the select input register but in some general
-+		 * purpose register. We encode the select input
-+		 * value, width and shift of the bit field into
-+		 * input_val cell of pin function ID in device tree,
-+		 * and then decode them here for setting up the select
-+		 * input bits in general purpose register.
-+		 */
-+
-+		if (input_val >> 24 == 0xff) {
-+			u32 val = input_val;
-+			u8 select = val & 0xff;
-+			u8 width = (val >> 8) & 0xff;
-+			u8 shift = (val >> 16) & 0xff;
-+			u32 mask = ((1 << width) - 1) << shift;
-+			/*
-+			 * The input_reg[i] here is actually some
-+			 * IOMUXC general purpose register, not
-+			 * regular select input register.
-+			 */
-+			val = readl(info->base + input_reg);
-+			val &= ~mask;
-+			val |= select << shift;
-+			writel(val, info->base + input_reg);
-+		} else if (input_reg) {
-+			/*
-+			 * Regular select input register can never be
-+			 * at offset 0, and we only print register
-+			 * value for regular case.
-+			 */
-+			if (info->input_sel_base)
-+				writel(input_val,
-+				       info->input_sel_base +
-+				       input_reg);
-+			else
-+				writel(input_val,
-+				       info->base + input_reg);
-+
-+			dev_dbg(dev, "select_input: offset 0x%x val 0x%x\n",
-+				input_reg, input_val);
-+		}
-+
-+		/* Set config */
-+		if (!(config_val & IMX_NO_PAD_CTL)) {
-+			if (info->flags & SHARE_MUX_CONF_REG) {
-+				clrsetbits_le32(info->base + conf_reg,
-+						~info->mux_mask,
-+						config_val);
-+			} else {
-+				writel(config_val,
-+				       info->base + conf_reg);
-+			}
-+
-+			dev_dbg(dev, "write config: offset 0x%x val 0x%x\n",
-+				conf_reg, config_val);
-+		}
-+	}
-+
-+	devm_kfree(dev, pin_data);
-+
-+	return 0;
-+}
-+
-+
-+int imx_pinctrl_probe_mmio(struct udevice *dev)
-+{
-+	struct imx_pinctrl_soc_info *info =
-+		(struct imx_pinctrl_soc_info *)dev_get_driver_data(dev);
-+	struct imx_pinctrl_priv *priv = dev_get_priv(dev);
-+	struct ofnode_phandle_args arg;
-+	ofnode node = dev_ofnode(dev);
-+	fdt_addr_t addr;
-+	fdt_size_t size;
-+	int ret;
-+
-+	ret = imx_pinctrl_probe_common(dev);
-+	if (ret)
-+		return ret;
-+
-+	addr = ofnode_get_addr_size_index(node, 0, &size);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	info->base = map_sysmem(addr, size);
-+	if (!info->base)
-+		return -ENOMEM;
-+	priv->info = info;
-+
-+	info->mux_mask = ofnode_read_u32_default(node, "fsl,mux_mask", 0);
-+	/*
-+	 * Refer to linux documentation for details:
-+	 * Documentation/devicetree/bindings/pinctrl/fsl,imx7d-pinctrl.txt
-+	 */
-+	if (ofnode_read_bool(node, "fsl,input-sel")) {
-+		ret = ofnode_parse_phandle_with_args(node, "fsl,input-sel",
-+						     NULL, 0, 0, &arg);
-+		if (ret) {
-+			dev_err(dev, "iomuxc fsl,input-sel property not found\n");
-+			return -EINVAL;
-+		}
-+
-+		addr = ofnode_get_addr_size(arg.node, "reg", &size);
-+		if (addr == FDT_ADDR_T_NONE)
-+			return -EINVAL;
-+
-+		info->input_sel_base = map_sysmem(addr, size);
-+		if (!info->input_sel_base)
-+			return -ENOMEM;
-+	}
-+
-+	dev_dbg(dev, "initialized IMX pinctrl driver\n");
-+
-+	return 0;
-+}
-+
-+int imx_pinctrl_remove_mmio(struct udevice *dev)
-+{
-+	struct imx_pinctrl_priv *priv = dev_get_priv(dev);
-+	struct imx_pinctrl_soc_info *info = priv->info;
-+
-+	if (info->input_sel_base)
-+		unmap_sysmem(info->input_sel_base);
-+	if (info->base)
-+		unmap_sysmem(info->base);
-+
-+	return 0;
-+}
-diff --git a/drivers/pinctrl/nxp/pinctrl-imx.c b/drivers/pinctrl/nxp/pinctrl-imx.c
-index 00637e7f54b..7d91ccfb26f 100644
---- a/drivers/pinctrl/nxp/pinctrl-imx.c
-+++ b/drivers/pinctrl/nxp/pinctrl-imx.c
-@@ -54,150 +54,6 @@ int imx_pinctrl_set_state_common(struct udevice *dev, struct udevice *config,
- 	return 0;
+ 	return ret;
  }
- 
--int imx_pinctrl_set_state_mmio(struct udevice *dev, struct udevice *config)
--{
--	struct imx_pinctrl_priv *priv = dev_get_priv(dev);
--	struct imx_pinctrl_soc_info *info = priv->info;
--	u32 mux_shift = info->mux_mask ? ffs(info->mux_mask) - 1 : 0;
--	u32 input_val, mux_mode, config_val;
--	int mux_reg, conf_reg, input_reg;
--	int npins, pin_size;
--	int i, j = 0, ret;
--	u32 *pin_data;
--
--	if (info->flags & SHARE_MUX_CONF_REG)
--		pin_size = SHARE_FSL_PIN_SIZE;
--	else
--		pin_size = FSL_PIN_SIZE;
--
--	ret = imx_pinctrl_set_state_common(dev, config, pin_size,
--					   &pin_data, &npins);
--	if (ret)
--		return ret;
--
--	/*
--	 * Refer to linux documentation for details:
--	 * Documentation/devicetree/bindings/pinctrl/fsl,imx-pinctrl.txt
--	 */
--	for (i = 0; i < npins; i++) {
--		mux_reg = pin_data[j++];
--
--		if (!(info->flags & ZERO_OFFSET_VALID) && !mux_reg)
--			mux_reg = -1;
--
--		if (info->flags & SHARE_MUX_CONF_REG) {
--			conf_reg = mux_reg;
--		} else {
--			conf_reg = pin_data[j++];
--			if (!(info->flags & ZERO_OFFSET_VALID) &&
--			    !conf_reg)
--				conf_reg = -1;
--		}
--
--		if ((mux_reg == -1) || (conf_reg == -1)) {
--			dev_err(dev, "Error mux_reg or conf_reg\n");
--			devm_kfree(dev, pin_data);
--			return -EINVAL;
--		}
--
--		input_reg = pin_data[j++];
--		mux_mode = pin_data[j++];
--		input_val = pin_data[j++];
--		config_val = pin_data[j++];
--
--		dev_dbg(dev, "mux_reg 0x%x, conf_reg 0x%x, input_reg 0x%x, mux_mode 0x%x, input_val 0x%x, config_val 0x%x\n",
--			mux_reg, conf_reg, input_reg, mux_mode,
--			input_val, config_val);
--
--		if (config_val & IMX_PAD_SION)
--			mux_mode |= IOMUXC_CONFIG_SION;
--
--		config_val &= ~IMX_PAD_SION;
--
--		/* Set Mux */
--		if (info->flags & SHARE_MUX_CONF_REG) {
--			clrsetbits_le32(info->base + mux_reg,
--					info->mux_mask,
--					mux_mode << mux_shift);
--		} else {
--			writel(mux_mode, info->base + mux_reg);
--		}
--
--		dev_dbg(dev, "write mux: offset 0x%x val 0x%x\n",
--			mux_reg, mux_mode);
--
--		/*
--		 * Set select input
--		 *
--		 * If the select input value begins with 0xff,
--		 * it's a quirky select input and the value should
--		 * be interpreted as below.
--		 *     31     23      15      7        0
--		 *     | 0xff | shift | width | select |
--		 * It's used to work around the problem that the
--		 * select input for some pin is not implemented in
--		 * the select input register but in some general
--		 * purpose register. We encode the select input
--		 * value, width and shift of the bit field into
--		 * input_val cell of pin function ID in device tree,
--		 * and then decode them here for setting up the select
--		 * input bits in general purpose register.
--		 */
--
--		if (input_val >> 24 == 0xff) {
--			u32 val = input_val;
--			u8 select = val & 0xff;
--			u8 width = (val >> 8) & 0xff;
--			u8 shift = (val >> 16) & 0xff;
--			u32 mask = ((1 << width) - 1) << shift;
--			/*
--			 * The input_reg[i] here is actually some
--			 * IOMUXC general purpose register, not
--			 * regular select input register.
--			 */
--			val = readl(info->base + input_reg);
--			val &= ~mask;
--			val |= select << shift;
--			writel(val, info->base + input_reg);
--		} else if (input_reg) {
--			/*
--			 * Regular select input register can never be
--			 * at offset 0, and we only print register
--			 * value for regular case.
--			 */
--			if (info->input_sel_base)
--				writel(input_val,
--				       info->input_sel_base +
--				       input_reg);
--			else
--				writel(input_val,
--				       info->base + input_reg);
--
--			dev_dbg(dev, "select_input: offset 0x%x val 0x%x\n",
--				input_reg, input_val);
--		}
--
--		/* Set config */
--		if (!(config_val & IMX_NO_PAD_CTL)) {
--			if (info->flags & SHARE_MUX_CONF_REG) {
--				clrsetbits_le32(info->base + conf_reg,
--						~info->mux_mask,
--						config_val);
--			} else {
--				writel(config_val,
--				       info->base + conf_reg);
--			}
--
--			dev_dbg(dev, "write config: offset 0x%x val 0x%x\n",
--				conf_reg, config_val);
--		}
--	}
--
--	devm_kfree(dev, pin_data);
--
--	return 0;
--}
--
- int imx_pinctrl_probe_common(struct udevice *dev)
- {
- 	struct imx_pinctrl_soc_info *info =
-@@ -214,67 +70,3 @@ int imx_pinctrl_probe_common(struct udevice *dev)
- 
- 	return 0;
- }
--
--int imx_pinctrl_probe_mmio(struct udevice *dev)
--{
--	struct imx_pinctrl_soc_info *info =
--		(struct imx_pinctrl_soc_info *)dev_get_driver_data(dev);
--	struct imx_pinctrl_priv *priv = dev_get_priv(dev);
--	struct ofnode_phandle_args arg;
--	ofnode node = dev_ofnode(dev);
--	fdt_addr_t addr;
--	fdt_size_t size;
--	int ret;
--
--	ret = imx_pinctrl_probe_common(dev);
--	if (ret)
--		return ret;
--
--	addr = ofnode_get_addr_size_index(node, 0, &size);
--	if (addr == FDT_ADDR_T_NONE)
--		return -EINVAL;
--
--	info->base = map_sysmem(addr, size);
--	if (!info->base)
--		return -ENOMEM;
--	priv->info = info;
--
--	info->mux_mask = ofnode_read_u32_default(node, "fsl,mux_mask", 0);
--	/*
--	 * Refer to linux documentation for details:
--	 * Documentation/devicetree/bindings/pinctrl/fsl,imx7d-pinctrl.txt
--	 */
--	if (ofnode_read_bool(node, "fsl,input-sel")) {
--		ret = ofnode_parse_phandle_with_args(node, "fsl,input-sel",
--						     NULL, 0, 0, &arg);
--		if (ret) {
--			dev_err(dev, "iomuxc fsl,input-sel property not found\n");
--			return -EINVAL;
--		}
--
--		addr = ofnode_get_addr_size(arg.node, "reg", &size);
--		if (addr == FDT_ADDR_T_NONE)
--			return -EINVAL;
--
--		info->input_sel_base = map_sysmem(addr, size);
--		if (!info->input_sel_base)
--			return -ENOMEM;
--	}
--
--	dev_dbg(dev, "initialized IMX pinctrl driver\n");
--
--	return 0;
--}
--
--int imx_pinctrl_remove_mmio(struct udevice *dev)
--{
--	struct imx_pinctrl_priv *priv = dev_get_priv(dev);
--	struct imx_pinctrl_soc_info *info = priv->info;
--
--	if (info->input_sel_base)
--		unmap_sysmem(info->input_sel_base);
--	if (info->base)
--		unmap_sysmem(info->base);
--
--	return 0;
--}
 -- 
 2.45.2
 
