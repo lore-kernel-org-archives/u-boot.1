@@ -4,75 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56293C02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 13:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCFA4C02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 14:14:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C3C6807E4;
-	Fri, 24 Jan 2025 14:39:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id EF5C8807FE;
+	Fri, 24 Jan 2025 15:14:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="HcJETa4F";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TiVT/sbc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC803807FE; Fri, 24 Jan 2025 14:39:21 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 37E9180977; Fri, 24 Jan 2025 15:14:11 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A13EC80780
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 14:39:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id ABE2F807E4
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 15:14:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2f43da61ba9so3008916a91.2
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 05:39:19 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6dfbc45355bso24415336d6.2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 06:14:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1737725958; x=1738330758;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LtpzB2nr10kCdDcVqdOFJWQVaieD7ZjcxSvlCml57/8=;
- b=HcJETa4FYC15t8wnuNYMlaq+zWSanZUu/iv6f6RLmw1L1xXuCaouI39ThWr55zQdCg
- tMyKO500X00P2mu/s/3to7ufiGJ4diUR+A99Me3qMA6gdt4L8kUriXaAGcNhz26FdGzo
- ZESkaQq77tBdDzC+cSOWKq/9Bwj6/UwqD1JMk=
+ d=konsulko.com; s=google; t=1737728047; x=1738332847; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FjbrNdw0U0ovxRgVfEUSSeMpf4h1vuvUYgnZoeVVsMg=;
+ b=TiVT/sbcjMBmPfOgXnH8LeZJ/lGP06yyIdogKYcrv4LUmhlWM4miUMnghL4oMuee54
+ RYhv6K2iEHIAMrWDZtYsuBANmb6mPiAu/o+GInNIdBbl7USY21TDE5xdirrEyrYgLxdV
+ j3aBBbeIyHhWlVY9H/kQl/O/SM2m8wgpIGP9k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737725958; x=1738330758;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LtpzB2nr10kCdDcVqdOFJWQVaieD7ZjcxSvlCml57/8=;
- b=nnw53SASYVxayxnm7rv5rKsHiBTHnS6X9ti+T91bgI/x94TqlOzXhSFufuF67PaPpC
- mjWlo+9qqmVrl1E4pNz4Ha5Xx15vOo/Lf8noyRv2zdW2jZPlRnu+zk2D23UpaqGqgaxu
- 6tmFuVyJM87fcbtNRnmoabfiy23jcma9yzC75YJ7Elp2S/Yw65KYaqeyUC3eCLtOphxC
- BC9GWfpXUq3KNqqu5Dr1FA29lgNRYabrxRxpNHjFJQnivhiqs1zsmfaaqaPQgWUEkam8
- vImj1iuAqgPK+v/ZK72f37lltuwOqPoB5LFrcHp2DqtK6F1pnVGlW/xNhYbVgHJ1qruy
- qLYQ==
-X-Gm-Message-State: AOJu0YzAniwOotJ/ALE5o50r4FzHXV2aGFCshf+BC7xGaVVj+7ueZwd5
- oN8tunV3aLDt+G2ma6wGQ99qlkNsfUo3fWfpfzN8+kgsHA/OqrQutxhFLbO80vFHBelcpJ44k/Q
- SyKFiG6KwEihv+a76j4Gv3fn9Q2Dd+pbfZpKO/A==
-X-Gm-Gg: ASbGncsKwYsZAqGZtUWS49Ol+baxxebWP0Zon3TPrLJ+gTz3vyttVIVp1Fqc8sNMCJE
- SjNORE7HNY13TUWu4hgqk74Z2uLDTN0Hvs2KijLKn3+sP8263+7p7ipqPMI0wYHDx6wwZ5dL+ev
- EG4tLEz4F1kHk1jrmAOOk=
-X-Google-Smtp-Source: AGHT+IEz+5wbUhLTO7UF6bg/J1LC2gIPd88tVFFDEKUqZ96EE2D3qCrpnPWFYWKyMyEkWCfpqnSQQLFPYuLU75o7Akc=
-X-Received: by 2002:a17:90b:5146:b0:2ee:c04a:4281 with SMTP id
- 98e67ed59e1d1-2f782c6579dmr38629395a91.6.1737725958096; Fri, 24 Jan 2025
- 05:39:18 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737728047; x=1738332847;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FjbrNdw0U0ovxRgVfEUSSeMpf4h1vuvUYgnZoeVVsMg=;
+ b=CPNskpbAdTo9tGK1hrkxFTtD2oYcSArczLFmhQ6Tm9dyHh6CNgKgoIUoz7JbiGvxyg
+ 4L4wrt75rlu/3UY8J0tP0Lt8VNLzv/Egq0E68h/0LR/3y0aB03wOJYHkwojlBhlTV1MF
+ 6+LSlua6eq+78W7p1XjCscvto8cfYTkPmso+b1VqPSzvt4NeGzzbWC2WVJWcSmaCbzTI
+ /6x7mAsycBwzUv9191G8qw/j7gE9TLSeCWASTVFkL9OScswN5irMyGUqSaxMCKG8woYa
+ 5HuNYG3xagMtwIi3dWj3RDc8eBxPBVrPAz1kE/XFxR9VO7dVZATRq+j6DBh/BEOmnvrM
+ cb9g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfxWOMv0Q/do8g48LXcRJLRxOu0zMweIWwxsaw1AWMflbOv+oBRh6Ms5CLct+fZUAxAtWVmQw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyusotZTdtuT3xwJIxupG4DszJ465wu8SbVtu5rIQ9+uhJuhPUO
+ PFXqMYPSd/aZmCvoQ/Sc356LOnqFVj9p9Ob9pLOyhk9JOsWCHehRnSYRi2Ln/MI=
+X-Gm-Gg: ASbGncuHpW5M41OcC7pfzVmtgdGrqhlhedF1ekpXBoVnGYpjKw3SjqeUSoEpRXKHWdg
+ ygWyPPxaAVhwALiLrxondIBGBB8EaTdfMdBHx22uP4BpZZS2HzpSE+FpUNz7wssK8X62j68qktU
+ p5S/3C0Vy9OOSlmGubww/a+c01RkSYpeOpA2oxOAKQi1cPqRLS9fGOLqt003ytmnFFxj6XNfaRl
+ tWlPibmX9MNuCK0FSKeyRxvEsrskmXXgLzHPJmjmudYEWHzkdUpjsZbnnnmZvIMhr2BmFoWNd6P
+ nhCg
+X-Google-Smtp-Source: AGHT+IFqxvT2dUsZcB+lYXlel0sOgft9KpSdztFrOosFUM5DBEBphNydUh70WVJpL4iX2tSAL6B6Pg==
+X-Received: by 2002:a05:6214:3d87:b0:6d8:b562:efd7 with SMTP id
+ 6a1803df08f44-6e1b2229dc0mr523768136d6.31.1737728047337; 
+ Fri, 24 Jan 2025 06:14:07 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e205ac400asm8774726d6.118.2025.01.24.06.14.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Jan 2025 06:14:06 -0800 (PST)
+Date: Fri, 24 Jan 2025 08:14:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Chee, Tien Fong" <tien.fong.chee@intel.com>, u-boot@lists.denx.de
+Cc: "Zamri, Muhammad Hazim Izzat" <muhammad.hazim.izzat.zamri@intel.com>,
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>,
+ "Ng, Boon Khai" <boon.khai.ng@intel.com>,
+ "rhs@riseup.net" <rhs@riseup.net>,
+ "Hea, Kok Kiang" <kok.kiang.hea@intel.com>
+Subject: Re: Pull request: SoCFPGA changes for u-boot-socfpga-next-20250124
+Message-ID: <20250124141403.GP60249@bill-the-cat>
+References: <DM8PR11MB5592EAEC1756EEA4C573E82ED2E32@DM8PR11MB5592.namprd11.prod.outlook.com>
 MIME-Version: 1.0
-References: <f3ee698c9d5b43bb3b7e2a3cffa1b1b3151c59b9.1737724676.git.michal.simek@amd.com>
-In-Reply-To: <f3ee698c9d5b43bb3b7e2a3cffa1b1b3151c59b9.1737724676.git.michal.simek@amd.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 24 Jan 2025 14:39:06 +0100
-X-Gm-Features: AWEUYZlgh0CFT1vIde_I2z9RpAuAQ-ki5H8hnTLM6ZN4pYmS9h0vNkal4NKJXI4
-Message-ID: <CAOf5uwnhGi_Rdm9jX3EX8U7+R6b9OTF_rAaarkgdC0HBHm2h8g@mail.gmail.com>
-Subject: Re: [PATCH] fs: ubifs: Remove unnecessary assignment
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LGY8nS5uKDMFlsSk"
+Content-Disposition: inline
+In-Reply-To: <DM8PR11MB5592EAEC1756EEA4C573E82ED2E32@DM8PR11MB5592.namprd11.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,68 +100,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 24, 2025 at 2:18=E2=80=AFPM Michal Simek <michal.simek@amd.com>=
- wrote:
->
-> Variable self assignment has been found by clang. But Linux kernel alread=
-y
-> fixed this problem by commit 2a068daf5742 ("ubifs: Remove unnecessary
-> assignment") and commit ae4c8081eb77 ("ubifs: remove unnecessary
-> assignment").
->
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
->
->  fs/ubifs/recovery.c | 1 -
->  fs/ubifs/scan.c     | 1 -
->  2 files changed, 2 deletions(-)
->
-> diff --git a/fs/ubifs/recovery.c b/fs/ubifs/recovery.c
-> index 6b6884fb2098..12c0575cc976 100644
-> --- a/fs/ubifs/recovery.c
-> +++ b/fs/ubifs/recovery.c
-> @@ -439,7 +439,6 @@ static void clean_buf(const struct ubifs_info *c, voi=
-d **buf, int lnum,
->  {
->         int empty_offs, pad_len;
->
-> -       lnum =3D lnum;
->         dbg_rcvry("cleaning corruption at %d:%d", lnum, *offs);
->
->         ubifs_assert(!(*offs & 7));
-> diff --git a/fs/ubifs/scan.c b/fs/ubifs/scan.c
-> index 7a6e46df5d90..2335e9e2d256 100644
-> --- a/fs/ubifs/scan.c
-> +++ b/fs/ubifs/scan.c
-> @@ -169,7 +169,6 @@ struct ubifs_scan_leb *ubifs_start_scan(const struct =
-ubifs_info *c, int lnum,
->  void ubifs_end_scan(const struct ubifs_info *c, struct ubifs_scan_leb *s=
-leb,
->                     int lnum, int offs)
->  {
-> -       lnum =3D lnum;
->         dbg_scan("stop scanning LEB %d at offset %d", lnum, offs);
->         ubifs_assert(offs % c->min_io_size =3D=3D 0);
->
 
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+--LGY8nS5uKDMFlsSk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Jan 24, 2025 at 03:32:21AM +0000, Chee, Tien Fong wrote:
 
+> Dear Tom,
+>=20
+> Please pull the SoCFPGA changes for next from u-boot-socfpga, containing:
+>=20
+>=20
+>   1.  Bug fixed for doorbell in secure device manager mailbox driver
+>   2.  Enhancement on SoCFPGA dwc_eth_xgmac driver
+>   3.  Enhancement on DW MAC driver
+>   4.  Improved the error message and status for SoC64 device FPGA configu=
+ration driver
+>   5.  Updated existing watchdog in system manager to support new SM device
+>=20
+> Best regards,
+> Tien Fong
+>=20
+> The following changes since commit 2eed5a1ff36217372e19f7513bd07077fc7671=
+8a:
+>=20
+>   Merge https://source.denx.de/u-boot/custodians/u-boot-snapdragon (2025-=
+01-22 11:23:35 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-socfpga.git tags/u-boot=
+-socfpga-next-20250124
+>=20
+> for you to fetch changes up to 60d96038d7ca9681e926a22789613a983ff9bf9a:
+>=20
+>   fpga: intel_sdm_mb: add support for query SDM config error and status (=
+2025-01-24 09:56:34 +0800)
+>=20
 
-> --
-> 2.43.0
->
+Applied to u-boot/master, thanks!
 
+--=20
+Tom
 
---
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+--LGY8nS5uKDMFlsSk
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeToCQACgkQFHw5/5Y0
+tywQwwv+MNa07AW7SpU0IuzqEJ6G7t+jNtqZOnRx0my6KjgyJTta+FAdcRQcmk3Z
+2lIQRmFZMCuez1ROxKMWE2YqKrEvr35u1qGrgUiLDeGye4/B1F2zSMtec7aQBEUa
+5TZNOId9CfWCp4cTD9eOg7YAFE2pcjypC2wvTaAEsa0/93Pey08MIzQfuyxi+nyQ
+dSy73SvSfun/4yb2KkBHu81jjnNAjV//xUn0HuZz1hkmT0SHVVM27LZAQxNhPpNw
+XCjZQhVvVFAg5lDKGlWWXL2c2b8LJ3fCpgeK+/ZqoUjuFu0l3sDdrEoStZVPhf0F
+plqB/8urDjOgTfjfYdZRTHdrj06hN+a21FM8b13TlwB+lQ4SW5Cm9StxEaCinIXK
+G32ryst72gEWc5QJpoxUwCjG5L92ZP7/svfWLEIma8A1V4ex2agyC5rZRQSI5CRR
+DbpLOFTueOCkLXUMJSJDlsM0piW+D5Hw0z+Efa948661VY0PoH9DmF3LZxEc6rLc
+lugSr7jM
+=6puW
+-----END PGP SIGNATURE-----
+
+--LGY8nS5uKDMFlsSk--
