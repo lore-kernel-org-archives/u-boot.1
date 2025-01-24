@@ -4,58 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 860D9C02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:25:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0B0CC02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:26:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D401680A46;
-	Fri, 24 Jan 2025 16:25:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 44AE680B9C;
+	Fri, 24 Jan 2025 16:26:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="TV8EPepz";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1737732368;
+	bh=VOiiy2EL9FuZTKaeZNDI+q7MYdMbEtl3Yz/21NBAvOk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=cge65Xz+f2s7G225QZzrzPJPA1gkSOSjwjmhlwtiAEwMrZbAgU/GRn4n2PL6aBunS
+	 uHUeUrjpMQKZ5VGtUzofWwPThWBEWTH772W/IxyZnacMsFV1OSeGumf2+Y3Xa7BTbV
+	 Lyb0NFZsTjTswCxFrnDVwka0ciO6N2J5Pa0xRCh+yw0MApkOHOEpkyRmje7PzImV6F
+	 HRXo5kvY2RyfYjOyzPENTOxaz6WcvbSbXi9Y8/PcprvCHMtSz/dlfn+tTqTWCqLRgE
+	 qdK51NJ2vI0+QapWKGXA6xxQLEARawDxpPnxAlEJJd18lnIwlNmbUBFxOby0XQlhEi
+	 kfKoBZQsc/9gA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCFA680ADE; Fri, 24 Jan 2025 16:25:20 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ id 5014180B9B; Fri, 24 Jan 2025 16:26:07 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F65A809D2
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:25:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DA3D809D2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:26:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from gaggiata.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
- [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 83FC21FEBE;
- Fri, 24 Jan 2025 16:25:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1737732317;
- bh=DtT0Z1FYbOSd8/RKs2/8e3FG5Q09JnAB0OvtiCIHA4M=;
- h=Received:From:To:Subject;
- b=TV8EPepzWVOMvxNTcgZCti8JfjA13qYgRG3wGx847c4YyEwGNYpXhux42U5XbtDoX
- 9EtfbID/GBjQTVmZEaNYqAgTGpMFBLyGS7d1S8z33EKsbRH8CqB8johnUa/aVMUE1m
- 5gQzwdXcJSJIBTrvgy9CN8FaKW2efJVWwqyQx6rBhICiwhip0IenCLubR/KtHsknF4
- vzCMbpMnLA7tVFs7ykK+h3etyMM4j3pGwoOE9hMBJNCKKc+W3Lhpb1Hgr02Jtd5LWq
- ac4s7sRD7zXhKrdz+oFPTC/8Juv7z5Q9A2zQq2gsDE6m8VuiSuIKcxBf97ynporfoh
- eAV5zOBpk1hPA==
-Received: by gaggiata.pivistrello.it (Postfix, from userid 1000)
- id 31C5D7F8C4; Fri, 24 Jan 2025 16:25:17 +0100 (CET)
-Date: Fri, 24 Jan 2025 16:25:17 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Stefan Eichenberger <eichest@gmail.com>
-Cc: francesco.dolcini@toradex.com, trini@konsulko.com,
- stefan.eichenberger@toradex.com, emanuele.ghidoli@toradex.com,
- joao.goncalves@toradex.com, vitor.soares@toradex.com,
- igor.opaniuk@foundries.io, max.krummenacher@toradex.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1] toradex: tdx-cfg-block: fix switch to user partition
-Message-ID: <Z5Ow3fFXZULEqZgf@gaggiata.pivistrello.it>
-References: <20250124151443.576075-1-eichest@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="hD1jeUZB"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 6BFAD1048EF44; Fri, 24 Jan 2025 16:25:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1737732364;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=VOiiy2EL9FuZTKaeZNDI+q7MYdMbEtl3Yz/21NBAvOk=;
+ b=hD1jeUZB9zUrRmLgo47aer5jW5T8VtUml97k7hYaXsLKRUQVRHAxfaBlxh613/nPDkT3DA
+ uZDuNKiSJ06GfdyyVZpvtAW4SH53YgTk6zIssUb52SxVH/3EbQmr68fTPef15hbrcGFvjv
+ hSwhDxm6AUulweTmq8QrZwmG9iuEoAx01bVNBQsJVvFtZndVEFldfLyfwhzlwCGNU2iH/3
+ QmHRqQ5TCXaS+gUifjdHMFuuwt5K6vGbuv5ug+0Ss8z+85Sr6sEA1MfsShYfdx608JSZEX
+ BUtAhDwyhlNQrdEuP0CTmvqzMkyQkcqJx9vonkCqBVscV6hnDzePkdptIzzeTg==
+Message-ID: <f9bfd3d8-dd30-4f4e-a73d-ab9082f832a8@denx.de>
+Date: Fri, 24 Jan 2025 11:35:30 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250124151443.576075-1-eichest@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] common: board: make initcalls static
+To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>
+References: <cover.1737709089.git.jerome.forissier@linaro.org>
+ <564c3f3b7f70c893b2c6b6dfc89a226b90d411de.1737709089.git.jerome.forissier@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <564c3f3b7f70c893b2c6b6dfc89a226b90d411de.1737709089.git.jerome.forissier@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,22 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 24, 2025 at 04:14:30PM +0100, Stefan Eichenberger wrote:
-> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-> 
-> The Toradex configuration block is stored in the first boot partition of
-> the eMMC. After reading the configuration block, U-Boot switches back to
-> the user partition. Currently, this operation always targets mmc device
-> 0, even when the configuration block is stored on mmc device 2.
-> 
-> This patch addresses the issue by switching the mmc device set in
-> CONFIG_TDX_CFG_BLOCK_DEV to the user partition, rather than using the
-> hardcoded device 0.
-> 
-> Fixes: a2777ecb9d11 ("toradex: config block handling")
-> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+On 1/24/25 10:10 AM, Jerome Forissier wrote:
+> +#define INITCALL(_call) \
+> +	do { \
+> +		if (_call()) { \
+> +			printf("%s(): initcall %s() failed\n", __func__, \
+> +			       #_call); \
+> +			hang(); \
+> +		} \
+> +	} while (0)
 
-Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
-
-Francesco
-
+Can this be turned into some static inline function too , so 
+typechecking would be retained ? Maybe the function can be passed in a 
+function pointer to call ?
