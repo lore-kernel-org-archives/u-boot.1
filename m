@@ -4,86 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A39CFC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 22:17:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F0AC0218B
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 22:26:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C81A380ADB;
-	Fri, 24 Jan 2025 23:17:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CFB4180ADB;
+	Fri, 24 Jan 2025 23:25:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z1AZhWTM";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="F4/LYBEv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D1580ADE; Fri, 24 Jan 2025 23:17:41 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 30DCA80ADE; Fri, 24 Jan 2025 23:25:58 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3D6A80A52
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 23:17:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E691880A52
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 23:25:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7be8f281714so258086485a.1
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 14:17:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737757058; x=1738361858; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vVruaZaoURaAQYcDnbUjBWjR1U2OCdmpKoRwYaX9fsU=;
- b=Z1AZhWTMqQwW/E8MnNJXwPToXSGINKBpSRZ7NIVw61oxSw19mmd9kncrj1wLs0bSU+
- k3Y1f5TIgXEDgqTHTXb77wRlGYNUmc22+lQCh/vQ/jFuTcrk3uL3ClGIjqtchfq/s+ip
- 9ktyKSHu3KB5zEAYmfpAsVlA3h6+2ua6OiVEM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737757058; x=1738361858;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vVruaZaoURaAQYcDnbUjBWjR1U2OCdmpKoRwYaX9fsU=;
- b=wiBpz57ZydMH0s2DvAVwsXeBQ3NOLcfeSOk4lvyo+fy8/HSkJZ3aRG2KBTyq32x1la
- 0yp98vCulYqMmY9jDjlLNjEyRdxmYjVDDWbPUjbBzBi1pOEuuQu3OOViSV30n9etjfnj
- cA6v9otP4TV0zyvwLkaf+DgYz5u529L0QT1onRq+nQLPUO90Z50K7ACJCVrWMDpqKO8s
- f1kqPBM/SlDTZTAxwFBgIsvZqH6f/Vquibk9lBgeQjJDgWCX/V9MzMUqmbtAGo4lbCyJ
- dZQwfexeWLnhjFzUd9k4EqVTYtmGsUjcg+y7iJm6MNONDLWa2PLGuYYJufHAWWPRa1+O
- iCIQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXuiSOqRRjVTusdzboluULBYqxALixuODkrW3utsJrC5BA04HWgM9mUSvo1OgyLFRv/jIw4O7k=@lists.denx.de
-X-Gm-Message-State: AOJu0YxQ+UUfBsBEl5BqV0qRacyQbV/YgnyZ5wWq/F3qCrp2qK42DkLY
- onjXeIJ6emCpzrer4Q6gwDPZ32PLAdwi21Yck0wg9zEj8s/gb9ZdkZfMb/mR9nk=
-X-Gm-Gg: ASbGncu1gNh25UaJPltQCubdiGPpXeMdMpGDY3vXtZrMrViklqy9R+ftLqG+XXKgUNg
- NIwVUD186YVdRPLEXHlkoWDTpw3ygNB9c0z6OutMI6/aEwCkUoMjEL9nXuHSJNw+SDP5PE4A98U
- fqiNWlTqt49BU9r4ylrH0TnoiWHyw8qtQyNakx/UOjA/42qs1uriBLNU2Xbnpl+CDgqqCAMRfai
- NFhIXAtJ3mqV09CEzuLsJlZ+wZTOiDzBtne67ATBK5l3E+nABXTlF70r2e0oM7ISVuxI8KLD9Up
- Pxqc
-X-Google-Smtp-Source: AGHT+IHbisY8mS7Y1a4ysqonlLX4aKXN/udKz1R53ZtaqGo8ydSGK9Ij7BsK4E7YtF0qW1b0JPV8hw==
-X-Received: by 2002:a05:620a:4001:b0:7be:39e7:a025 with SMTP id
- af79cd13be357-7be63249e37mr3608441285a.26.1737757057815; 
- Fri, 24 Jan 2025 14:17:37 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9ae7ec0asm138187085a.12.2025.01.24.14.17.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 14:17:36 -0800 (PST)
-Date: Fri, 24 Jan 2025 16:17:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- Ferass El Hafidi <funderscore@postmarketos.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
-Message-ID: <20250124221734.GY60249@bill-the-cat>
-References: <20240127162922.284598-1-jonas@kwiboo.se>
- <CGME20240403000039epcas1p46afc0540b893679113e0683d87227ca8@epcas1p4.samsung.com>
- <d7a2b5ef-ceb5-4f8f-b2d0-fcd6f2d6df1c@samsung.com>
- <33caeb3b-2945-49ee-8756-8cf8aec1c632@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=804b=UR=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1737757553;
+ bh=hnzzoGq4YKyIuIObSVEToBRrPpBeROAkRXWt8ookAEc=;
+ b=F4/LYBEv53HzJfuW2SnNCy2D35tTBnoGHr9VjahsuPlWa8jAy4hWurMjF0hGlyNtgctdN9U7a
+ /fG1rvIN3cxyLZveyZxn3togX10h/aDlzNof6YKx0eWtFtEW4Zk6/BJcSncB/I610iSnjIBukpb
+ Qu0rywad5d9eNzFEeZGl8RMrhWQJelK05baYPeISajrg0JqmtvhJsBslL8TE/AC2IaanRB7WWn7
+ Pd4azVDYmaC8NcNgeKgxo+cDsJzyYUXYNlqVZfgua5xq24BOTU1YlMNu5uua3JoSUgiantO/dCv
+ OBznJZcKTxgHSP0mxnP51OPHfKBXe7xAQ4EbwqshM1tg==
+X-Forward-Email-ID: 6794135d56e672fccc95038c
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <239f9417-1e56-4b15-b055-7326a28b4aed@kwiboo.se>
+Date: Fri, 24 Jan 2025 23:25:25 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="U5o8/US3NEmtepr4"
-Content-Disposition: inline
-In-Reply-To: <33caeb3b-2945-49ee-8756-8cf8aec1c632@kwiboo.se>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: rk3399: nanopi-r4s: Support v1.8 SD cards in SPL
+To: Justin Klaassen <justin@tidylabs.net>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, Chen-Yu Tsai <wens@csie.org>, 
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ Dragan Simic <dsimic@manjaro.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Keerthy <j-keerthy@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
+ =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ William Wu <william.wu@rock-chips.com>, Xiaobo Tian <peterwillcn@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20250124211922.41274-1-justin@tidylabs.net>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250124211922.41274-1-justin@tidylabs.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,63 +84,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Justin,
 
---U5o8/US3NEmtepr4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025-01-24 22:19, Justin Klaassen wrote:
+> The NanoPi R4S supports UHS-I (up to SDR104) SD cards, however using any
+> of these 1.8v modes results in a boot failure in SPL upon soft reboot.
+> 
+> On the R4S the SD card power cannot be cycled, so upon reboot the SD
+> card continues to operate at 1.8v but the GPIO is configured by default
+> at the 3.3v level.
 
-On Mon, Jan 20, 2025 at 12:35:26AM +0100, Jonas Karlman wrote:
-> Hi,
->=20
-> On 2024-04-03 02:00, Jaehoon Chung wrote:
-> > Hi,
-> >=20
-> > On 1/28/24 01:29, Jonas Karlman wrote:
-> >> The alignment hole caused by cmdidx in struct mmc_cmd cause strange
-> >> issues together with the peephole2 optimization on Amlogic SoCs.
-> >> Following was observed while working on SPL support for Amlogic SoCs.
-> >>
-> >> sd_get_capabilities() normally issue a CMD55 followed by a CMD51.
-> >> However, on at least Amlogic S905 (Cortex-A53) and S905X3 (Cortex-A55),
-> >> CMD55 was instead followed by CMD8 (and a few reties) in SPL.
-> >=20
-> > I read your RFC "https://patchwork.ozlabs.org/patch/1841495/
-> >=20
-> > First, I will retry to reproduce your case with other compiler.=20
-> > After that, I will inform again about this patch.
->=20
-> Gentle ping, this patch has been on list for almost a year now.
->=20
-> Have you had any time to reproduce this or can this be merged as-is?
->=20
-> For some reason only Amlogic seem to be affected by this issue.
+Sounds like similar/same issue [1] that I faced on Asus Tinker Board a
+few years ago :-)
 
-Poking around in Linux, it looks like this is equivalent to 'struct
-mmc_command' in include/linux/mmc/core.h and so this makes us
-equivalent.
+[1] https://patchwork.kernel.org/patch/10817217/
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+> 
+> This change enables the RK8XX regulators and Rockchip IO-domain drivers
+> in SPL, which reads the voltage level of the "vcc_sdio" regulator and
+> configures the GPIO for the appropriate level on boot. This allows the
+> MMC subsystem to operate successfully at the 1.8v level in SPL.
+> 
+> Signed-off-by: Justin Klaassen <justin@tidylabs.net>
+> ---
+> 
+>  arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 9 +++++++++
+>  configs/nanopi-r4s-rk3399_defconfig     | 7 +++++++
+>  drivers/misc/Kconfig                    | 8 ++++++++
+>  drivers/misc/rockchip-io-domain.c       | 7 ++++++-
+>  drivers/power/regulator/Kconfig         | 9 +++++++++
+>  drivers/power/regulator/rk8xx.c         | 2 +-
+>  6 files changed, 40 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
+> index 75736124996..146b62c2e7a 100644
+> --- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
+> @@ -23,4 +23,13 @@
+>  
+>  &vcc_sdio {
+>  	regulator-init-microvolt = <3000000>;
+> +	bootph-pre-ram;
+> +};
+> +
+> +&io_domains {
+> +	bootph-pre-ram;
+> +};
+> +
+> +&i2c0_xfer {
 
---=20
-Tom
+Please sort nodes in alphabetical order based on label.
 
---U5o8/US3NEmtepr4
-Content-Type: application/pgp-signature; name="signature.asc"
+These should probably be added to rk3399-nanopi-r4s-u-boot.dtsi since
+that is the only defconfig you enable relevant Kconfig options for.
 
------BEGIN PGP SIGNATURE-----
+> +	bootph-pre-ram;
+>  };
+> diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
+> index a6dafe3d9eb..905de05026f 100644
+> --- a/configs/nanopi-r4s-rk3399_defconfig
+> +++ b/configs/nanopi-r4s-rk3399_defconfig
+> @@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=0x3F8000
+>  CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-nanopi-r4s"
+>  CONFIG_DM_RESET=y
+>  CONFIG_ROCKCHIP_RK3399=y
+> +CONFIG_SPL_DRIVERS_MISC=y
+>  CONFIG_TARGET_EVB_RK3399=y
+>  CONFIG_SYS_LOAD_ADDR=0x800800
+>  CONFIG_DEBUG_UART_BASE=0xFF1A0000
+> @@ -18,6 +19,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+>  CONFIG_SPL_MAX_SIZE=0x40000
+>  CONFIG_SPL_PAD_TO=0x7f8000
+>  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_I2C=y
+> +CONFIG_SPL_POWER=y
+>  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>  CONFIG_TPL=y
+>  CONFIG_CMD_BOOTZ=y
+> @@ -33,6 +36,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>  CONFIG_ROCKCHIP_GPIO=y
+>  CONFIG_SYS_I2C_ROCKCHIP=y
+>  CONFIG_ROCKCHIP_IODOMAIN=y
+> +CONFIG_SPL_ROCKCHIP_IODOMAIN=y
+>  CONFIG_MMC_DW=y
+>  CONFIG_MMC_DW_ROCKCHIP=y
+>  CONFIG_MMC_SDHCI=y
+> @@ -45,8 +49,11 @@ CONFIG_GMAC_ROCKCHIP=y
+>  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>  CONFIG_PHY_ROCKCHIP_TYPEC=y
+>  CONFIG_PMIC_RK8XX=y
+> +CONFIG_SPL_PMIC_RK8XX=y
+> +CONFIG_SPL_DM_REGULATOR=y
+>  CONFIG_SPL_DM_REGULATOR_FIXED=y
+>  CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_SPL_REGULATOR_RK8XX=y
+>  CONFIG_PWM_ROCKCHIP=y
+>  CONFIG_RAM_ROCKCHIP_LPDDR4=y
+>  CONFIG_BAUDRATE=1500000
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index da84b35e804..ad935b81ae1 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -110,6 +110,14 @@ config ROCKCHIP_IODOMAIN
+>  	  for the IO-domain setting of the SoC to match the voltage supplied
+>  	  by the regulators.
+>  
+> +config SPL_ROCKCHIP_IODOMAIN
+> +	bool "Rockchip IO-domain driver support in SPL"
+> +	depends on SPL_MISC && ARCH_ROCKCHIP
+> +	help
+> +	  Enable support for IO-domains in Rockchip SoCs in SPL. It is necessary
+> +	  for the IO-domain setting of the SoC to match the voltage supplied
+> +	  by the regulators.
+> +
+>  config SIFIVE_OTP
+>  	bool "SiFive eMemory OTP driver"
+>  	depends on MISC
+> diff --git a/drivers/misc/rockchip-io-domain.c b/drivers/misc/rockchip-io-domain.c
+> index 025b6049a9f..d24d0781b08 100644
+> --- a/drivers/misc/rockchip-io-domain.c
+> +++ b/drivers/misc/rockchip-io-domain.c
+> @@ -5,6 +5,8 @@
+>   * Ported from linux drivers/soc/rockchip/io-domain.c
+>   */
+>  
+> +#define LOG_CATEGORY UCLASS_NOP
+> +
+>  #include <dm.h>
+>  #include <dm/device_compat.h>
+>  #include <regmap.h>
+> @@ -344,8 +346,10 @@ static int rockchip_iodomain_probe(struct udevice *dev)
+>  			continue;
+>  
+>  		ret = device_get_supply_regulator(dev, supply_name, &reg);
+> -		if (ret)
+> +		if (ret) {
+> +			log_debug("%s: Missing regulator for %s\n", __func__, supply_name);
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeUEXQACgkQFHw5/5Y0
-tyx8FAv/bFMKXlHtjb5U0tAaWml7kZDdPV672zElGwbaZDlrzFWr6g/BSffK217k
-MbJcfWUZ4ioxnWAgPJsD8NcIInR26e0UCaVumnuNd/8FS7Wi/Dv0Rq+7wNaKy+Kn
-RmSstUTc1GIV2BlaFO4Y/BsKuI1vo5EE4qf2vXcnJWWIS1M85w/Jcj2rzH8j3dU2
-Bw3v/JN5+vL3b7d4Rv+J12H/7V12oXm8kooHtPfiV8PbGmk5Klo0hUcbR1y+T4Ce
-S+0tqdChETQNk79Rm+3AAXBTOlf3Q/VxichpjQafBzAjw0P72UkxmzV/Vm8z5FgY
-vhM5gUcAst41IyEH2f/W2pBgdx6xOn6/2VDE7wDgLgXSP84dJFVxz+7WpoRNnHnS
-p+2reCGquMlECOz2Qg1YHY5WfT8RXibp3TU/jYdgTEUN81jFJf0wpZucs6NwiqTp
-2rhnL4Rh2fPizk2i1uyENpnLpEqjfMvP909FEdl9suNfOCYiRGcZpKc0ci/CtB5z
-WlENB4Nd
-=4JEB
------END PGP SIGNATURE-----
+log_debug() is already able to log function name with LOG=y and
+LOGF_FUNC=y, please drop __func__.
 
---U5o8/US3NEmtepr4--
+>  			continue;
+> +		}
+>  
+>  		ret = regulator_autoset(reg);
+>  		if (ret && ret != -EALREADY && ret != -EMEDIUMTYPE &&
+> @@ -353,6 +357,7 @@ static int rockchip_iodomain_probe(struct udevice *dev)
+>  			continue;
+>  
+>  		uV = regulator_get_value(reg);
+> +		log_debug("%s: %s = %dV\n", __func__, supply_name, uV);
+
+Same here.
+
+Also for consistency please use a verbose or minimalist log message,
+do not mix. This has a verbose 'Missing regulator' above and minimalist
+message here.
+
+>  		if (uV <= 0)
+>  			continue;
+>  
+> diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+> index 958f337c7e7..d873ca06a47 100644
+> --- a/drivers/power/regulator/Kconfig
+> +++ b/drivers/power/regulator/Kconfig
+> @@ -241,6 +241,15 @@ config REGULATOR_RK8XX
+>  	by the PMIC device. This driver is controlled by a device tree node
+>  	which includes voltage limits.
+>  
+> +config SPL_REGULATOR_RK8XX
+> +	bool "Enable driver for RK8XX regulators in SPL"
+> +	depends on SPL_DM_REGULATOR && SPL_PMIC_RK8XX
+> +	---help---
+
+Use help keyword without '---' and indent the help text.
+
+> +	Enable support for the regulator functions of the RK8XX PMIC in SPL. The
+> +	driver implements get/set api for the various BUCKS and LDOs supported
+> +	by the PMIC device. This driver is controlled by a device tree node
+> +	which includes voltage limits.
+> +
+>  config DM_REGULATOR_S2MPS11
+>  	bool "Enable driver for S2MPS11 regulator"
+>  	depends on DM_REGULATOR && PMIC_S2MPS11
+> diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
+> index 368675ebb9f..35615e96b1c 100644
+> --- a/drivers/power/regulator/rk8xx.c
+> +++ b/drivers/power/regulator/rk8xx.c
+> @@ -16,7 +16,7 @@
+>  #include <power/pmic.h>
+>  #include <power/regulator.h>
+>  
+> -#ifndef CONFIG_XPL_BUILD
+> +#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
+
+Please drop the whole ENABLE_DRIVER instead and use
+CONFIG_IS_ENABLED in its place.
+
+>  #define ENABLE_DRIVER
+>  #endif
+>  
+
+This should also be split up into multiple patches, possible:
+- io-domain debug logging
+- io-domain SPL Kconfig symbol
+- rk8xx.c + related Kconfig can possible go together
+- nanopi-r4s-u-boot.dtsi + defconfig can possible go together
+
+Regards,
+Jonas
