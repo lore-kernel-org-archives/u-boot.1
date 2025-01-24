@@ -4,95 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06C8DC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 16:00:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2420AC02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 16:09:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5ADDE80B9C;
-	Fri, 24 Jan 2025 17:00:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 9EB5880AE2;
+	Fri, 24 Jan 2025 17:09:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MC7ey23B";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 781F180BA4; Fri, 24 Jan 2025 17:00:34 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id D7FFE80A46; Fri, 24 Jan 2025 16:18:32 +0100 (CET)
+Received: from mx.skole.hr (mx2.hosting.skole.hr [161.53.165.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C8BC80B9A
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 17:00:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A42AF809D2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:18:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4FF583FB5B
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:00:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1737734429;
- bh=VaRWMwRBa4UfTeDkz3F+b/TwkYaN9Jm9mtaST/bOs8I=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=MC7ey23BAyTF7vs4EvXjvWjTHL1CpB8ULB8aeZaVPF7igRtN8RqJx9iWf6Z4LOdlZ
- Pi3o5Wq+38VlsHFiyaDhAsMISTnNDHrQ5miMlODo0x0N6WDBO8/SpOhyZhJvceRfF5
- P5U1Bk5cQGcCM3lG5PPi4mFJERyyElMcDP8hVPilggo+ddLlgum1+U/CsVbHc3fAqN
- PXSfdi1hQyovrsvy/FzIAwvT2rgiNtGedily4kU5J+yrLJfC+LuH5TQJfFmWq6VHjA
- U8+EYKMkfZIir4TjMnDtw94R1k8wcxdgSFX800jKEBcmMOBiEFRMN0Bro24wOUuY0A
- dVSnCUrUV1z5g==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-436723db6c4so15579805e9.3
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 08:00:29 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737734428; x=1738339228;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VaRWMwRBa4UfTeDkz3F+b/TwkYaN9Jm9mtaST/bOs8I=;
- b=GOYIo/Bc4E0KCYuxwMCjy3MICX24iG0HKaiMn972azAZcgc1apdZrVLFUZBLdLx58U
- iIVHJEafQ0d6XL4/ZbVSbU2sLBudzPaiiLXJUoPuV7MMEbzkCSkjf0RVzFkiYg6IUeVs
- 6fjH/zrZrv058RhPT5XGqKuUmVyFHGgvHKbj68SPo4ERIg6Jno+nnflzdkASIqCCy1cj
- L4sDucTYIjvRQggA59b+Wk2u3VHqZxwpP9KgwSop8AmeJSMj3oLJ5k9fYCLXiprkYecc
- +3sJnx/tGVReYe+Dk0c3kaf7VgF1GRUyrT1pNx9XKcbih0g9d4jRNRxsPfY7Vhm6xkcp
- o6tw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUjhpo5bASzCbVMpZ1PHB+gU8UtZnr0x9U0p0KoO5Tays+3U3+2T1Yl97+1bb1+MV5hS9+1omw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxWuxBrwQR5Lx3n/ZU0oHNHsVYaGxokgPeM3K4IYInCql1zvPlj
- ppo9G76l8r6OIdPAWYLakkl2mqS8Himevg4tC3j0fbBeEASMiKz96xOuQi8mAP7vpNM+DZOpAFj
- KBHSQDj73xt5zaWQMOWTatjb08FaH6wRJ9uqCwCmmp4z8Tgei4MILbW2RsBiMzNQQTFw=
-X-Gm-Gg: ASbGncvERcmdhFSd1vGjZztr3WbtXmdb/jh71NOWPthXoA5SgnuOnPutKFogdx8wBSH
- AgZ3puN+GvQWsWvy8u6k++V2XvoKOr9eIhNiiyrmYIz8u5u2XDXQ0cPKAUM0RpO69wwHv1Yrk04
- 0bKQJMAXXdSKscUa0EMMI5uDDCz8+qs+H3tUFX/yT0oamGLLW9z0mROBuUNal+5LewWhkCa/A49
- iegqyddAGekQUIs7kqm4t0d8kee4qoUq3xVyCZdDCRSCHNYNN+UmfieglicOtG/7GhzlLxO0fhn
- vIHx1HuGu9+wcWU3FfH0Uvr754rfgbMYPMABNlyiF5EetweW2XwcChwR6ZDLXKrRBuElvE2C
-X-Received: by 2002:a05:600c:6c06:b0:436:e8b4:36e7 with SMTP id
- 5b1f17b1804b1-438913cb191mr270562705e9.8.1737734427129; 
- Fri, 24 Jan 2025 08:00:27 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF8j87Xl8lXIcgfS/Rj9slyOuAr9UrIgExtCDvBmVK7zyJtxY5QoW94IDkUbQA+ELCI+9sftw==
-X-Received: by 2002:a05:600c:6c06:b0:436:e8b4:36e7 with SMTP id
- 5b1f17b1804b1-438913cb191mr270562475e9.8.1737734426763; 
- Fri, 24 Jan 2025 08:00:26 -0800 (PST)
-Received: from localhost.localdomain
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438b16ff659sm66507615e9.0.2025.01.24.08.00.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 08:00:24 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>,
-	Leo <ycliang@andestech.com>
-Cc: Conor Dooley <conor.dooley@microchip.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] cmd: sbi: add bhyve SBI implementation ID
-Date: Fri, 24 Jan 2025 17:00:14 +0100
-Message-ID: <20250124160014.158629-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
+ dmarc=none (p=none dis=none) header.from=skole.hr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
+Received: from mx2.hosting.skole.hr (localhost.localdomain [127.0.0.1])
+ by mx.skole.hr (mx.skole.hr) with ESMTP id 28B0A831D2;
+ Fri, 24 Jan 2025 16:18:30 +0100 (CET)
+From: Duje =?UTF-8?B?TWloYW5vdmnEhw==?= <duje.mihanovic@skole.hr>
+To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
+Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/3] arm: mmp: add initial support for PXA1908 SoC
+Date: Fri, 24 Jan 2025 16:17:51 +0100
+Message-ID: <2765541.mvXUDI8C0e@radijator>
+In-Reply-To: <7e92df3b-d37e-4ab3-b76b-b53391e593c1@denx.de>
+References: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
+ <20241231-coreprimevelte-v2-2-6a5445d92d11@skole.hr>
+ <7e92df3b-d37e-4ab3-b76b-b53391e593c1@denx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Autocrypt: addr=duje.mihanovic@skole.hr; keydata=
+ mDMEZokhzhYJKwYBBAHaRw8BAQdAWJZ0hsI/ytTqHGFV8x6tzd5sB596cTeeDB4CQsTf+wC0KER
+ 1amUgTWloYW5vdmnEhyA8ZHVqZUBkdWplbWloYW5vdmljLnh5ej6ImQQTFgoAQRYhBG3/QdYN8x
+ S1t2umMK0xk1JFj60DBQJmiSHOAhsDBQkJZgGABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAA
+ AoJEK0xk1JFj60D1GABAJVSorZdMOlrp/oQtCSH/G53NE56x/JHA8VX+ZQBd/H3AP4/EcUf6eef
+ DUxVMh2bdkmuQKsVZGgOGiXpMksrVntWBrQpRHVqZSBNaWhhbm92acSHIDxkdWplLm1paGFub3Z
+ pY0Bza29sZS5ocj6ImQQTFgoAQRYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSH/AhsDBQkJZg
+ GABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEK0xk1JFj60Dlw8A/i4lPOL7NaYoYePDq
+ l8MaJaR9qoUi+D+HtD3t0Koi7ztAQCdizXbuqP3AVNxy5Gpb1ozgp9Xqh2MRcNmJCHA1YhWAbg4
+ BGaJIc4SCisGAQQBl1UBBQEBB0DEc9JeA55OlZfWKgvmRgw6a/EpBQ8mDl6nQTBmnd1XHAMBCAe
+ IfgQYFgoAJhYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSHOAhsMBQkJZgGAAAoJEK0xk1JFj6
+ 0DG5MA/iuo4l2GDEZ1Zf+XaS//8FwdXDO9nHkfbV2MHjF4NZXwAQDroMzBdMcqVvc8GABFlTTgG
+ j7KrRDz2HwWNyF8ZeprAQ==
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
+X-Mailman-Approved-At: Fri, 24 Jan 2025 17:09:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,28 +69,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bhyve is the hypervisor used by FreeBSD.
+On Thursday 23 January 2025 13:25:11 Central European Standard Time Stefan 
+Roese wrote:
+> While building applied on top of latest version,
+> I get this error:
+> 
+> arch/arm/mach-mmp/board.c:55:7: error: conflicting types for
+> 'board_fdt_blob_setup'; have 'void *(int *)'
+>     55 | void *board_fdt_blob_setup(int *err)
+> 
+>        |       ^~~~~~~~~~~~~~~~~~~~
+> 
+> In file included from include/asm-generic/global_data.h:25,
+>                   from ./arch/arm/include/asm/global_data.h:113,
+>                   from include/init.h:24,
+>                   from arch/arm/mach-mmp/board.c:6:
+> include/fdtdec.h:1189:5: note: previous declaration of
+> 'board_fdt_blob_setup' with type 'int(void **)'
+>   1189 | int board_fdt_blob_setup(void **fdtp);
+> 
+>        |     ^~~~~~~~~~~~~~~~~~~~
+> 
+> make[1]: *** [scripts/Makefile.build:257: arch/arm/mach-mmp/board.o] Error 1
+> make: *** [Makefile:1918: arch/arm/mach-mmp] Error 2
+> 
+> Could you please have a look and resubmit a fixed version?
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	Fix typo in subject
----
- cmd/riscv/sbi.c | 1 +
- 1 file changed, 1 insertion(+)
+Yes, of course. I'll send v3 shortly.
 
-diff --git a/cmd/riscv/sbi.c b/cmd/riscv/sbi.c
-index 5ecf56781c1..b013c8c8d4e 100644
---- a/cmd/riscv/sbi.c
-+++ b/cmd/riscv/sbi.c
-@@ -30,6 +30,7 @@ static struct sbi_imp implementations[] = {
- 	{ 8, "PolarFire Hart Software Services" },
- 	{ 9, "coreboot" },
- 	{ 10, "oreboot" },
-+	{ 11, "bhyve" },
- };
- 
- static struct sbi_ext extensions[] = {
--- 
-2.47.1
+Regards,
+--
+Duje
+
+
 
