@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8669CC0218B
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388AAC02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:27:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA7FA80C6D;
-	Fri, 24 Jan 2025 16:26:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4977680CF4;
+	Fri, 24 Jan 2025 16:26:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737732386;
-	bh=JNiAinz9/8Ztu3CarykR7rfJb2rzAOt8j2EmEf+AORY=;
+	s=phobos-20191101; t=1737732391;
+	bh=ai+MHojJv4tcV3iMQsJBC0d2wva2lhu/lVWtGnuKgjc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Gr0GQ2bzcsGdm6HZi+W8JCdwGnxjC88pasHB4TIDKtdEIgUdJiG2I8393mwefwUah
-	 BD5QEUw6cyd6Y7R3ZyJb3Xoiym6MouEbbKFbC6HumPaVwOyDwk9WnzZLuvtvpkJNXy
-	 7COGKT869WkEgddotybyruBi9hFEmIy7rY1pRYJ7LH8ScpsOcYeVNSuKJMugNAPupI
-	 Us+CTBXGyoEIg6mtxXd6N9GVE4z6ScpTkU2cJh1wUj2wDkvQaTfZQmqPapQhbE/ElX
-	 OwRc+Nogda+Li3/EM+WBTLhmadu/uYCqgAsAxEBPmezii18ED5Eg0uaF3S8hJkJ8q+
-	 9chcYz8cxV5Iw==
+	b=j/c8SjZiD+SEYXG7MtqGdlzN+KF8KKWuNOQ63fINSSFgMqmZWdHQM2dhTp+oNto5b
+	 PVvOCoyxRhFupFeSmvsrdOQcri0YmPhjoi6kwxvXufgYQHx98XKOwTR8PG0J9U4JKO
+	 7MHQuptj60cJf8oAKuMTPu9Uwl+Me9/Wf23pjMHKLUsZkj14QDPHdxtOTOCaxnzP/5
+	 EvCFm9JVGk38JrbJf8WflyC7oTAsRZGsGxCe49NeJZhhoFy7ZWuU83jGS9E2IV1C34
+	 VITqkNQoZeTsu4Ho0DwvyZMlFmIl6FDmopLpF2F1uIBq5y5Q7XPp4jXnUPL4R8XNdK
+	 f8HcVsW/QylzA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC14880BAD; Fri, 24 Jan 2025 16:26:25 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id E8C8E80C75; Fri, 24 Jan 2025 16:26:27 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA64C809D2
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:26:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00743809D2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:26:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="ataC1HyI"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="WAKx/apv"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 661C1101D2388; Fri, 24 Jan 2025 16:26:21 +0100 (CET)
+ with ESMTPSA id 9FE47108860C0; Fri, 24 Jan 2025 16:26:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737732383;
+ t=1737732385;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JNiAinz9/8Ztu3CarykR7rfJb2rzAOt8j2EmEf+AORY=;
- b=ataC1HyIZnrgZ07CtVRtMGFXEIl5yfKd6DsCxIe5eXzGpF8puFBQiT3XSx+BF+4GtPazbI
- 68ZNjvoVIz1dXG/3eNg/3fLXUHEUKXlaeOEl4yEbRSfT4+LAxkWhCw2t2ZOVtSz+uNXeXu
- vf2oNtTo/2BG29ApPZYz7/5j+lCrsqmRj8caurSXVG+KFiSzClSJ94mpRuSNo641xavRFo
- 7jisPvjMIYX3KKIHeLdjLtgUkOmnBGD7OLLHElQNU8FqMRtqHmGgD3llHM2f/0WfP+xxb4
- 9R6g7R7nG4PuUymuYr/iopKLt2Hh/11Ju/KwnesWXCryzq/RnQonKMhBIhhBnw==
-Message-ID: <23affd75-93cc-4b72-8a34-6479b98e7a62@denx.de>
-Date: Fri, 24 Jan 2025 15:40:01 +0100
+ bh=ai+MHojJv4tcV3iMQsJBC0d2wva2lhu/lVWtGnuKgjc=;
+ b=WAKx/apvA47v3xu/l/sS3hOYGQxiWgZ0YqJoYyTtzTElFbdBmqv4gYgsAii+J/UixAWFxU
+ gyFmv2D17+tXkGxHmNoOp/+UxhgfbZsBMbUuRD9WGVXpUpF1q+f1Uq6JcgBELFhZOcMOuB
+ H+U8xuboQA6Iyn+4HJmQFftU5bi+ahwUxSo8CpRmreUAMt/hqpk0D851GCndiLccDY1ttL
+ fEI7x1QEfeigIMl+aI+P6o+sMRtNHbJ6iH/fBazb1oXYhghBCJnYLMP8WrIjns9xp0Tazj
+ dCL0qjV6Hd24++MiIqT8Ffppxvqm8R93xZwFxlLZ2LvJ/okpTBVHlyGa0oRRIA==
+Message-ID: <87a3b8aa-d97b-41c1-9a12-2c876244b81d@denx.de>
+Date: Fri, 24 Jan 2025 15:42:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 11/20] scmi: add the macro SCMI_MSG
+Subject: Re: [PATCH v4 13/20] spl: imx: use trampoline buffer to load images
+ to secure region
 To: Alice Guo <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>,
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: u-boot@lists.denx.de, tharvey@gateworks.com, Alice Guo
- <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
+ <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
 References: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
- <20250115-imx95-v1-11-93b28a514dea@oss.nxp.com>
+ <20250115-imx95-v1-13-93b28a514dea@oss.nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250115-imx95-v1-11-93b28a514dea@oss.nxp.com>
+In-Reply-To: <20250115-imx95-v1-13-93b28a514dea@oss.nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -86,41 +88,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/15/25 2:28 PM, Alice Guo wrote:
-> From: Peng Fan <peng.fan@nxp.com>
+On 1/15/25 2:29 PM, Alice Guo wrote:
+> From: Ye Li <ye.li@nxp.com>
 > 
-> This patch adds the macro SCMI_MSG for protocols that do not need
-> _in_array.
+> When SPL loading image to secure region, for example, ATF and tee to
+> DDR secure region. Because the USDHC controller is non-secure master,
+> it can't access this region and will cause loading issue.
 > 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Ye Li <ye.li@nxp.com>
-> ---
->   include/scmi_agent.h | 11 +++++++++++
->   1 file changed, 11 insertions(+)
-> 
-> diff --git a/include/scmi_agent.h b/include/scmi_agent.h
-> index 755986d6c424ccc881ac0943a88735cbcfacb001..5508a126a6dc504afa6d896c78c760b1af0d3deb 100644
-> --- a/include/scmi_agent.h
-> +++ b/include/scmi_agent.h
-> @@ -54,6 +54,17 @@ struct scmi_msg {
->   		.out_msg_sz = sizeof(_out_array),	\
->   	}
->   
-> +/* Helper macro to match a message on output array references */
-> +#define SCMI_MSG(_protocol, _message, _out_array)	\
-> +	(struct scmi_msg){				\
-> +		.protocol_id = (_protocol),		\
-> +		.message_id = (_message),		\
-> +		.in_msg = (uint8_t *)NULL,		\
+> So use a trampoline buffer in non-secure region, then use CPU to copy the
+> image from trampoline buffer to destination secure region.
+There is already common/bouncebuf.c , can you instead implement 
+something similar, which would behave as a generic bounce buffer, except 
+for the secure/nonsecure regions ?
 
-Is the cast needed ?
-
-> +		.in_msg_sz = 0,				\
-
-Is the explicit assignment of in_msg/in_msg_sz even needed at all ?
-
-> +		.out_msg = (uint8_t *)&(_out_array),	\
-> +		.out_msg_sz = sizeof(_out_array),	\
-> +	}
-[...]
+The region configuration could come from DT or maybe from firmware ?
