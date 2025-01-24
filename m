@@ -4,59 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388AAC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09BE9C0218B
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:27:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4977680CF4;
+	by phobos.denx.de (Postfix) with ESMTP id 9C2AD80E88;
 	Fri, 24 Jan 2025 16:26:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1737732391;
-	bh=ai+MHojJv4tcV3iMQsJBC0d2wva2lhu/lVWtGnuKgjc=;
+	bh=zxoj2/tEB93Rr19u6q1OuloxuBU/be0Fv4FZHTuxxec=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=j/c8SjZiD+SEYXG7MtqGdlzN+KF8KKWuNOQ63fINSSFgMqmZWdHQM2dhTp+oNto5b
-	 PVvOCoyxRhFupFeSmvsrdOQcri0YmPhjoi6kwxvXufgYQHx98XKOwTR8PG0J9U4JKO
-	 7MHQuptj60cJf8oAKuMTPu9Uwl+Me9/Wf23pjMHKLUsZkj14QDPHdxtOTOCaxnzP/5
-	 EvCFm9JVGk38JrbJf8WflyC7oTAsRZGsGxCe49NeJZhhoFy7ZWuU83jGS9E2IV1C34
-	 VITqkNQoZeTsu4Ho0DwvyZMlFmIl6FDmopLpF2F1uIBq5y5Q7XPp4jXnUPL4R8XNdK
-	 f8HcVsW/QylzA==
+	b=KQJ/DtAaON638bL8sEV16N9ZE+fevQ0G3sF/DwlReE7p+r0mnxXpOrk/MI3ppEUnP
+	 A3VeeCVGwlJN3MBGv/A/LgYn+xEEljD7dGqAp0le5UNMuqhFxK4auqm5FZDErPXlIo
+	 gbE0v7dwQqumPo7ZIUjPckBsb7v0U1QsznL1bXrdcL1R9tmU/B44Vev+6V5kAoGN/Q
+	 8htgEZEe9ZDj8n+gpbrSpzyRbveumL5vtWCa7lbrxX+1wCbaG4eb53rOgLxUEraLDU
+	 FSB7L3gX+pNp4A5gukAPLb4gsA6tZ/GdNrdzvfe/0/ONyYLUjUtdHzyWZ/khDBHWms
+	 h1YKL/jbz5lpg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8C8E80C75; Fri, 24 Jan 2025 16:26:27 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id E4A6E80BAD; Fri, 24 Jan 2025 16:26:29 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00743809D2
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:26:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF368809D2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:26:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="WAKx/apv"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="iXZvwF1k"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9FE47108860C0; Fri, 24 Jan 2025 16:26:23 +0100 (CET)
+ with ESMTPSA id BAF05108882D7; Fri, 24 Jan 2025 16:26:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737732385;
+ t=1737732387;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ai+MHojJv4tcV3iMQsJBC0d2wva2lhu/lVWtGnuKgjc=;
- b=WAKx/apvA47v3xu/l/sS3hOYGQxiWgZ0YqJoYyTtzTElFbdBmqv4gYgsAii+J/UixAWFxU
- gyFmv2D17+tXkGxHmNoOp/+UxhgfbZsBMbUuRD9WGVXpUpF1q+f1Uq6JcgBELFhZOcMOuB
- H+U8xuboQA6Iyn+4HJmQFftU5bi+ahwUxSo8CpRmreUAMt/hqpk0D851GCndiLccDY1ttL
- fEI7x1QEfeigIMl+aI+P6o+sMRtNHbJ6iH/fBazb1oXYhghBCJnYLMP8WrIjns9xp0Tazj
- dCL0qjV6Hd24++MiIqT8Ffppxvqm8R93xZwFxlLZ2LvJ/okpTBVHlyGa0oRRIA==
-Message-ID: <87a3b8aa-d97b-41c1-9a12-2c876244b81d@denx.de>
-Date: Fri, 24 Jan 2025 15:42:12 +0100
+ bh=zxoj2/tEB93Rr19u6q1OuloxuBU/be0Fv4FZHTuxxec=;
+ b=iXZvwF1kIzfN8AksoZ6xnG7UskqD+bSmPcpEPNG/A5bRR5hteGZoZ2z+q0k9AumrAjAxRv
+ 6Vhrp283slQdUDCakNQpqzklUDBr6AMDB3Xk+NY42Cb+n/X0xIejayolWckPBKNGw6uuzh
+ LmSc6lWgoBPmSWXeUxGAIQ+UwQVGIh0IrA9ec+IX/HjRA+RPY9MWPcn47hMpRkMAMhjH0g
+ lYgch+dbZCbWGi0+fCmNgpem3WB8hDyIJDzYtfNJDohnBGJBMiQ0aV60nUE/3YIlvr8mkd
+ ZLrLKpvWOzqdD8oOgOyylqw7rJ9FwLUmnrJVL5pCQlyca1V66PsWR9EhJ/Fwlw==
+Message-ID: <45677197-c3e6-4789-9f2a-17fa211aafa2@denx.de>
+Date: Fri, 24 Jan 2025 15:43:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 13/20] spl: imx: use trampoline buffer to load images
- to secure region
+Subject: Re: [PATCH v4 14/20] imx9: add i.MX95 Kconfig and Makefile
 To: Alice Guo <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>,
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
@@ -65,10 +63,10 @@ To: Alice Guo <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, tharvey@gateworks.com, Alice Guo
  <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
 References: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
- <20250115-imx95-v1-13-93b28a514dea@oss.nxp.com>
+ <20250115-imx95-v1-14-93b28a514dea@oss.nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250115-imx95-v1-13-93b28a514dea@oss.nxp.com>
+In-Reply-To: <20250115-imx95-v1-14-93b28a514dea@oss.nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -91,14 +89,30 @@ X-Virus-Status: Clean
 On 1/15/25 2:29 PM, Alice Guo wrote:
 > From: Ye Li <ye.li@nxp.com>
 > 
-> When SPL loading image to secure region, for example, ATF and tee to
-> DDR secure region. Because the USDHC controller is non-secure master,
-> it can't access this region and will cause loading issue.
+> This patch adds i.MX95 Kconfig and Makefile. i.MX95 uses SCMI.
 > 
-> So use a trampoline buffer in non-secure region, then use CPU to copy the
-> image from trampoline buffer to destination secure region.
-There is already common/bouncebuf.c , can you instead implement 
-something similar, which would behave as a generic bounce buffer, except 
-for the secure/nonsecure regions ?
-
-The region configuration could come from DT or maybe from firmware ?
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>   arch/arm/mach-imx/imx9/Kconfig  | 8 ++++++++
+>   arch/arm/mach-imx/imx9/Makefile | 9 +++++++--
+>   2 files changed, 15 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+> index 54c6b117fcff21be5c3800ebd1dc30f8ea12ac42..660529555e9b3d38a6fb70c77858bd9de7473461 100644
+> --- a/arch/arm/mach-imx/imx9/Kconfig
+> +++ b/arch/arm/mach-imx/imx9/Kconfig
+> @@ -21,6 +21,14 @@ config IMX91
+>   	select IMX9
+>   	select ARMV8_SPL_EXCEPTION_VECTORS
+>   
+> +config IMX95
+> +	bool
+> +	select IMX9
+> +	select ARMV8_SPL_EXCEPTION_VECTORS
+> +	select SCMI_FIRMWARE
+> +	select DM_MAILBOX
+> +	select SCMI_TRANSPORT_SMT_INTR
+> +	select SPL_IMX_CONTAINER_USE_TRAMPOLINE
+Keep the list sorted.
