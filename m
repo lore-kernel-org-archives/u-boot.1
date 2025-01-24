@@ -4,51 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BE8BC0218B
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 16:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59129C0218B
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 16:10:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F101780BAE;
-	Fri, 24 Jan 2025 17:09:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 517C580C68;
+	Fri, 24 Jan 2025 17:09:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7762B80ADC; Fri, 24 Jan 2025 16:48:52 +0100 (CET)
-Received: from mx.skole.hr (mx2.hosting.skole.hr [161.53.165.186])
+ id 00C5380AE3; Fri, 24 Jan 2025 16:49:37 +0100 (CET)
+Received: from mx.skole.hr (mx1.hosting.skole.hr [161.53.165.185])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0912880A52
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:48:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1756480ADB
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:49:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
-Received: from mx2.hosting.skole.hr (localhost.localdomain [127.0.0.1])
- by mx.skole.hr (mx.skole.hr) with ESMTP id 7934182A0E;
- Fri, 24 Jan 2025 16:48:49 +0100 (CET)
+Received: from mx1.hosting.skole.hr (localhost.localdomain [127.0.0.1])
+ by mx.skole.hr (mx.skole.hr) with ESMTP id 9DE2582150;
+ Fri, 24 Jan 2025 16:49:34 +0100 (CET)
 From: =?utf-8?q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
-Subject: [PATCH v3 0/3] Initial support for PXA1908 and samsung-coreprimevelte
-Date: Fri, 24 Jan 2025 16:47:47 +0100
-Message-Id: <20250124-coreprimevelte-v3-0-870dd251b1d1@skole.hr>
+Date: Fri, 24 Jan 2025 16:47:48 +0100
+Subject: [PATCH v3 1/3] serial: ns16550: Add Intel XScale support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIACO2k2cC/2XM0QqCMBTG8VeRXbfwHOcyr3qP6GJuxxyZk01GI
- b57UwikLr8P/r+ZBfKWAquzmXmKNlg3pFEcMqY7NdyJW5M2wxwFIEqunafR2ydF6ifioFEq3TZ
- lZRqWotFTa18beL2l3dkwOf/e/Ajr+6VOv1QEnnOlKxQFEQmSl/BwPR07z1Yp4q4u4K/GVEtVC
- lGaMxqAXb0sywd/01556QAAAA==
-X-Change-ID: 20241226-coreprimevelte-1c26acfb58db
+Message-Id: <20250124-coreprimevelte-v3-1-870dd251b1d1@skole.hr>
+References: <20250124-coreprimevelte-v3-0-870dd251b1d1@skole.hr>
+In-Reply-To: <20250124-coreprimevelte-v3-0-870dd251b1d1@skole.hr>
 To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
 Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht, 
  u-boot@lists.denx.de, 
  =?utf-8?q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2271;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=838;
  i=duje.mihanovic@skole.hr; s=20240706; h=from:subject:message-id;
- bh=3ZhFyiy2qRvtNbYuNRKLLIS1F/vV/T/+Pkg5sBFletI=;
- b=owGbwMvMwCW21nBykGv/WmbG02pJDOmTtxm5aDSYRqdx7nNgev2pIKDa2lveq6ChnXOWi61Fj
- 72lpVhHKQuDGBeDrJgiS+5/x2u8n0W2bs9eZgAzh5UJZAgDF6cATOTiCYb/eYUbKtN5PZkO/WLw
- Nf2UvUpPbpfAjSA1o9NCJv6T9K6tYmT4vuzrrVPzb+fG7d+Xqv1wQdCOj8W1G7oW+y38yuEfkLK
- GGQA=
+ bh=SIy9N2tKIkNlJiVltEPUT9jMbFMVHvBUDczLTwpXpqM=;
+ b=owGbwMvMwCW21nBykGv/WmbG02pJDOmTtxnN2b4rbEoA92qLrKXn7F5Iec3M/tPy4ObEmKpVM
+ TZH2XXedZSyMIhxMciKKbLk/ne8xvtZZOv27GUGMHNYmUCGMHBxCsBEzOIYGRquOab4TPDv1pRs
+ iltla25TUpTsavxA5f50kfhZZf3LfjD84T+03CD4zefLTIxhBUoiPh/WbzdInLXlosLEOmvjizp
+ /mQE=
 X-Developer-Key: i=duje.mihanovic@skole.hr; a=openpgp;
  fpr=6DFF41D60DF314B5B76BA630AD319352458FAD03
 X-Mailman-Approved-At: Fri, 24 Jan 2025 17:09:55 +0100
@@ -68,56 +65,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-This series adds initial support for Marvell's PXA1908 ARM64 SoC and
-Samsung's Galaxy Core Prime VE LTE, a smartphone based on said SoC.
-
-On this board, U-Boot is used as a secondary bootloader to work around
-certain quirks of the factory S-Boot.
+Add compatible string for the Intel XScale variant of the 16550. Needed
+to match upstream.
 
 Signed-off-by: Duje Mihanović <duje.mihanovic@skole.hr>
 ---
-Changes in v3:
-- Rebase on WIP/24Jan2025 and fix board_fdt_blob_setup() compile error it introduces
-- Link to v2: https://lore.kernel.org/r/20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr
+ drivers/serial/ns16550.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Changes in v2:
-- Drop arm,armv8 compatible from CPU nodes to match upstream
-- Add intel,xscale-uart compatible to NS16550 and use it in serial nodes to match upstream
-- Add include guards to include/configs/pxa1908.h
-- Disable CONFIG_DISPLAY_CPUINFO and CONFIG_CPU
-- Rebase on v2025.01-rc5
-- Link to v1: https://lore.kernel.org/r/20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr
+diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
+index 039da835f5f6cdd30080bd16e0b0da7be1619171..0e267d097c53524e63145747db619266984950d8 100644
+--- a/drivers/serial/ns16550.c
++++ b/drivers/serial/ns16550.c
+@@ -605,6 +605,7 @@ static const struct udevice_id ns16550_serial_ids[] = {
+ 	{ .compatible = "ingenic,jz4780-uart",	.data = PORT_JZ4780  },
+ 	{ .compatible = "nvidia,tegra20-uart",	.data = PORT_NS16550 },
+ 	{ .compatible = "snps,dw-apb-uart",	.data = PORT_NS16550 },
++	{ .compatible = "intel,xscale-uart",	.data = PORT_NS16550 },
+ 	{}
+ };
+ #endif /* OF_REAL */
 
----
-Duje Mihanović (3):
-      serial: ns16550: Add Intel XScale support
-      arm: mmp: add initial support for PXA1908 SoC
-      board: samsung: add initial support for coreprimevelte board
-
- MAINTAINERS                                     |   8 ++
- arch/arm/Kconfig                                |  11 +++
- arch/arm/Makefile                               |   1 +
- arch/arm/dts/Makefile                           |   2 +
- arch/arm/dts/pxa1908-samsung-coreprimevelte.dts |  74 +++++++++++++++++
- arch/arm/dts/pxa1908.dtsi                       | 106 ++++++++++++++++++++++++
- arch/arm/mach-mmp/Kconfig                       |  12 +++
- arch/arm/mach-mmp/Makefile                      |   1 +
- arch/arm/mach-mmp/board.c                       |  84 +++++++++++++++++++
- arch/arm/mach-mmp/mmu.c                         |  30 +++++++
- board/samsung/coreprimevelte/Kconfig            |  12 +++
- board/samsung/coreprimevelte/MAINTAINERS        |   6 ++
- configs/coreprimevelte_defconfig                |  18 ++++
- drivers/serial/ns16550.c                        |   1 +
- include/configs/pxa1908.h                       |  18 ++++
- 15 files changed, 384 insertions(+)
----
-base-commit: 8fcb7a883231ac573a2e3ee0a44dee07b463cbc3
-change-id: 20241226-coreprimevelte-1c26acfb58db
-
-Best regards,
 -- 
-Duje Mihanović <duje.mihanovic@skole.hr>
+2.48.1
 
 
