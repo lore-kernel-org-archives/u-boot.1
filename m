@@ -4,93 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C304CC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 18:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 512FBC02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 18:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4139880ADB;
-	Fri, 24 Jan 2025 19:56:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9E1ED80ADB;
+	Fri, 24 Jan 2025 19:57:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bdV3jC/O";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UMGu/9QN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 296B480ADC; Fri, 24 Jan 2025 19:56:51 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id D36F180ADC; Fri, 24 Jan 2025 19:57:42 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28E7C80A52
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 19:56:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 753F880A52
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 19:57:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5d7e3f1fc01so4894762a12.2
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 10:56:49 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aaec111762bso490505266b.2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 10:57:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737745009; x=1738349809; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737745060; x=1738349860; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RjyJ/RZnlcaliFpCU7Doqr0Xws3YKEao2bLSQDl5duk=;
- b=bdV3jC/OiYmD7yvoMZyvmq/eldfcZda10/LUtTK4F9F+IGozl4MRjnvZUq32Q2JK9C
- 1hJiV7zoDzntaZQXh9TRUaU2mduB8J84AGDfz9CiXr89jzLyf2Jgh6kOE+hZZMbdi5NL
- S5PDMZA+yNacHCAB1ZKUb/GDzlIZyjC4OxP6c=
+ bh=yGw+XiiUl4I1wRi8K3fA5LN/EAnC5t2jrKA8qvVWMKk=;
+ b=UMGu/9QNuZdnmUIXIFruh75WZpNff+4PT5qdVegH36es9hE8fv6iSk65qgXNcZVrpv
+ E6E1nhX3EEirElwdgfyXTZacrSbKJ3c/TZPeRQG+E/+5+nNHQOzLte9kO06vgHeVJFf5
+ 3/TjDSH/4Nb49Ma6nanW3nGfzrBnGj8i15Dg4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737745009; x=1738349809;
+ d=1e100.net; s=20230601; t=1737745060; x=1738349860;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RjyJ/RZnlcaliFpCU7Doqr0Xws3YKEao2bLSQDl5duk=;
- b=Z+OZst3seP8Z4NzdbLTvlVby3szRnlT9K2aiBSTH0yXXK9lR3GPc7B9p0VpTl6X92b
- ya2kUVST/PA9Naxo6olCumJng1TzdQqOmC33XmoZN+73HJ2SdcvpstjhJlU9sqqgbIAo
- zoct2XSnTX7REaKSkUAZ6Ewd+Utj8336s+rj0412TVy1Xg8Fv4tVeIL3zPnhDemkX0zR
- IJDjofzoVKcExjUP1y4CLoNtL3t7jftuu0DVGME6bVOzzOaGfRYfjnKPS66sfexlkdBQ
- jO76tTtdsbCZ1xMUlEWC5WjaxsEH4R/DsstcQmEiAiPoE474S8usiVLCd7eRfDFk0bQm
- S0ug==
-X-Gm-Message-State: AOJu0YzkfIPV8P6O5pKxIyTDU9pHEdu/pHM1pSExUJY2LOt5P3KiEprB
- fddqat0M0+4bIz8c+YC15IfT3/LWrsH5E/gFYH3s1a9haqQbCLyi//Oel311yJ+Pkt9H92/ktrv
- TLQb4MRruERg1Be+BH/mMnyAplqpuFcmhQo2R
-X-Gm-Gg: ASbGncvdmcaUhczGedTIlv7EiQJoRWYd9xDV7WXTGVKqkgrCtw/28aVXZuMLCHTEdQC
- yr4JouIbnLg4oVXxWxm6/iPgQIENElY/1bfKIz5vxirtVGtNkwB1aJh+bovsK6Iw=
-X-Google-Smtp-Source: AGHT+IG2dxbzWpa+399yozB24Ydc4q/VjyJLRg4POmS76Ll8CChMjo8wx6ncUozgS44kmsra6rjbmcE4s4lx6Qyltx8=
-X-Received: by 2002:a05:6402:348b:b0:5db:67a7:e75e with SMTP id
- 4fb4d7f45d1cf-5db7d2ec452mr29222771a12.5.1737745008663; Fri, 24 Jan 2025
- 10:56:48 -0800 (PST)
+ bh=yGw+XiiUl4I1wRi8K3fA5LN/EAnC5t2jrKA8qvVWMKk=;
+ b=V1CNVFIT1ACy/xZG7OyUv9WwoLDJbB4VO7OaCKeb18ja0KisbHwqymbqjeYUSPSYDM
+ 6d4X3VMI3LRI+SEEOIpFHemUurusYavZut0GlOjQnbUmJ30HQ0/PyGErNNAlQD4omUKt
+ iRxc6XgyLFuxqK4q+b/OJxJV+T+XJfwk36kYygLnV3NGMtZcXAxnd0jLFJ5ZQAomkX3n
+ ieYpm3W//JZE2LzkpUvIUdfYeEwEe4hR20NUJbxmsx3TLGqHKXrp6NbD0NPZIQqp8f2/
+ KEdtzHIAiUE2RWOsijtXN21v7lLGrrhgCUR7sVKCOlrZwNQm9172Ttq+xUKd/chssDII
+ lEcA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWtCQE7wvnl0EP7K9o3KzWKP2LYxEL1WmEvMR1/mzAmHeg5CQRDxf6HMeX7MYLmiMifX04HFqY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxKAwjdWQQsZC/KqvXg/RWcOo+iMNX8CkVRejs6Dgv7RTHQ9wi5
+ 729SuAZ+kQa3kTy/5AtID9CwG4c5taXQOFXwh1UR0TwlDAe9t5t+UitI9C0d5lDwr9ofhMVGFoe
+ J9jFAVkmZdQlho9CmNMFZD2Ngm3r9RHAeX8q1
+X-Gm-Gg: ASbGncvUC45+/+UR2N39wplorr+T5hMZxvtnl+znAfimf1f3pI/TLPyayOqDe9IbPmy
+ 0W9TO1DwTDNm42mNeZERdvTVMpHX6gNtXVKaAZJThWlPaiPWpav+8aK9r1phl0IA=
+X-Google-Smtp-Source: AGHT+IGaEDtt6HpT16u9XODqzikdpUKrm64cTdo/aFLcSxbogoi50o0CSmMSayq9v4coMekcI/4seio0v6sx0XFBJpI=
+X-Received: by 2002:a17:907:7f0d:b0:ab2:b5f1:568c with SMTP id
+ a640c23a62f3a-ab38b165e7dmr2901033966b.28.1737745059908; Fri, 24 Jan 2025
+ 10:57:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20250120212613.516664-1-sjg@chromium.org>
- <20250122172420.GO3476@bill-the-cat>
-In-Reply-To: <20250122172420.GO3476@bill-the-cat>
+References: <20250122170858.961359-1-adriano.cordova@canonical.com>
+ <20250122170858.961359-20-adriano.cordova@canonical.com>
+ <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
+ <20250123144205.GJ60249@bill-the-cat>
+In-Reply-To: <20250123144205.GJ60249@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 24 Jan 2025 11:56:36 -0700
-X-Gm-Features: AWEUYZmctS5B3in1hFUUwjjx6J4bJW6gRGJ7iT2lbIkSL8NFx4S6uwY8rat_1AI
-Message-ID: <CAFLszTg5vi8ioCB_YwNnUJefYGMU+Wu8Wmcp3QduECB_F5gBsg@mail.gmail.com>
-Subject: Re: [PATCH v2 00/44] test: Improvements to ut command and test-suite
- running
+Date: Fri, 24 Jan 2025 11:57:28 -0700
+X-Gm-Features: AWEUYZntMHgFd0Wasef35swvhLicO7SNDwicsdA33OHFK_ITt9HwmMUGB1_dMPo
+Message-ID: <CAFLszTgCXvxMY0MAyhsvuNFResmDtbahuk_2_QfYE5sUxNTTjQ@mail.gmail.com>
+Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
+ EFI netdevices
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Gendin <agendin@matrox.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ion Agorria <ion@agorria.com>, Jens Wiklander <jens.wiklander@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Julien Masson <jmasson@baylibre.com>, Linus Walleij <linus.walleij@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Massimiliano Minella <massimiliano.minella@se.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Rasmus Villemoes <ravi@prevas.dk>, 
- Ravi Minnikanti <rminnikanti@marvell.com>, Raymond Mao <raymond.mao@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- Stephen Carlson <stcarlso@linux.microsoft.com>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>
+Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
+ joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, jerome.forissier@linaro.org, xypron.glpk@gmx.de, 
+ ilias.apalodimas@linaro.org, Adriano Cordova <adriano.cordova@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,36 +95,86 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 22 Jan 2025 at 10:24, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 23 Jan 2025 at 07:42, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Jan 20, 2025 at 02:25:22PM -0700, Simon Glass wrote:
+> On Thu, Jan 23, 2025 at 07:37:26AM -0700, Simon Glass wrote:
+> > Hi Adriano,
+> >
+> > On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail.com> wrote:
+> > >
+> > > check that the number of ethernet udevices matches the number of simple
+> > > network protocols
+> > >
+> > > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> > > ---
+> > >  test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
+> > >  1 file changed, 21 insertions(+)
+> > >
+> > > diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/test_efi_selftest.py
+> > > index 310d8ed294..af9992a6f7 100644
+> > > --- a/test/py/tests/test_efi_selftest.py
+> > > +++ b/test/py/tests/test_efi_selftest.py
+> > > @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
+> > >      if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key']):
+> > >          raise Exception('Failures occurred during the EFI selftest')
+> > >      u_boot_console.restart_uboot()
+> > > +
+> > > +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
+> > > +@pytest.mark.buildconfigspec('cmd_dm')
+> > > +def test_efi_selftest_count_netdevices(u_boot_console):
+> > > +    """Test the EFI net device driver
+> > > +
+> > > +    u_boot_console -- U-Boot console
+> > > +
+> > > +    This function counts the number of ETH_UCLASS probed udevices
+> > > +    calls the EFI net device selftest to check that the EFI driver
+> > > +    sees the same.
+> > > +    """
+> > > +    u_boot_console.restart_uboot()
+> >
+> > We should avoid restarting U-Boot in a test unless there is a strong
+> > need. It makes things a lot slower!
 >
-> > The current method of running unit tests relies on subcommands of the
-> > ut command. Only the code in each subcommand knows how to find the tests
-> > related to that subcomand.
-> >
-> > This is not ideal and we now have quite a few subcommands which do
-> > nothing but locate the relevant tests in a linker list, then call a
-> > common function to run them.
-> >
-> > This series adds a list of test suites, so that these subcommands can be
-> > removed.
-> >
-> > An issue with 'ut all' is that it doesn't record how many tests failed
-> > overall, so it is necessary to examine copious amounts of output to look
-> > for failures. This series adds a new 'total' feature allow recording the
-> > total number of failed tests.
-> >
-> > To help with 'ut all' a new pytest is created which runs it (as well as
-> > 'ut info') and makes sure that all is well. Due to the 'ut all' failures
-> > this does not pass, so the test is disabled for now. It is here because
-> > it provides security against misnaming a test suite and causing it not
-> > to run.
+> Yes, if we can not reboot here that would be good.
 >
-> This is a size reduction when the tests are enabled (and so seen on a
-> few in-tree configs), nice work.
+> > > +    response = u_boot_console.run_command('dm tree')
+> > > +    lines = response.splitlines()[2:]
+> > > +    ethernet_count = sum(1 for line in lines if line.strip().startswith('ethernet') and '[ + ]' in line)
+> >
+> > This test should be written in C, e.g:
+> >
+> > struct udevice *dev;
+> > int count;
+> > uclass_foreach_dev(dev, UCLASS_ETH)
+> >     if (device_active(dev))
+> >          count++;
+> >
+> > > +
+> > > +    u_boot_console.run_command(cmd='setenv efi_selftest netdevices')
+> > > +    u_boot_console.run_command('bootefi selftest', wait_for_prompt=False)
+> > > +    if u_boot_console.p.expect([f'Detected {ethernet_count} active EFI net devices']):
+> > > +        raise Exception('Failures occurred during the EFI selftest')
+> >
+> > Again, this should be written in C and use run_command().
+>
+> No, if these are written in python already, we can leave them in python.
 
-Thanks.
+This is a new test. We should not be making things any worse.
+
+> C is bad for strings.
+
+ut_assert_skip_to_line("Detected %d active EFI net devices", count);
+
+For C tests we don't even need 'dm tree'.
+
+This matters. The C test is easier to understand and runs in a tiny
+fraction of the time. Our CI tests have been getting slower and slower
+and it is due to this kind of test. I went to the effort of writing
+this up carefully [1].
+
+So, NAK from me. Please use C tests where possible.
 
 Regards,
 Simon
+
+[1] https://docs.u-boot.org/en/latest/develop/tests_writing.html
