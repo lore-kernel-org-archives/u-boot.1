@@ -4,75 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1DFAC0218B
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 13:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 746D6C02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 13:02:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 746A0807FE;
+	by phobos.denx.de (Postfix) with ESMTP id E7888809D2;
 	Fri, 24 Jan 2025 14:01:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=studiofuga.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A1D0F807FE; Fri, 24 Jan 2025 07:05:58 +0100 (CET)
-Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71C29803B5
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 07:05:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=yt@radxa.com
-X-QQ-mid: bizesmtpip2t1737698729tn48m30
-X-QQ-Originating-IP: uMcjJVxhU5bm/dmG71KsBQODW69yN6rHUROohlmjNFY=
-Received: from [IPV6:240e:3b7:3243:720::3fc] ( [localhost])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Fri, 24 Jan 2025 14:05:28 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 15178379872724816623
-Message-ID: <8823CB36AD9BEA6D+3c5f1842-bbaf-4dfa-96a6-d6d53b61ed10@radxa.com>
-Date: Fri, 24 Jan 2025 14:05:28 +0800
+	dkim=pass (1024-bit key; unprotected) header.d=studiofuga.com header.i=@studiofuga.com header.b="msT6IgTB";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4FC09807FE; Fri, 24 Jan 2025 11:50:07 +0100 (CET)
+Received: from smtp-8fac.mail.infomaniak.ch (smtp-8fac.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::8fac])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A96678096D
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 11:50:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=studiofuga.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fuga@studiofuga.com
+Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
+ [10.4.36.108])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YfZMV1yFHzpGl;
+ Fri, 24 Jan 2025 11:49:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=studiofuga.com;
+ s=20220517; t=1737715798;
+ bh=Bvx2emooiGMSFZeuflRrUOa7YvGph5vm2dz9A2vFN98=;
+ h=Date:From:To:Subject:From;
+ b=msT6IgTBkKlgsw521I1i2p62iy6alQI9ba9iI87EdBhiTrvJMCOiBaBvBzUWWniLf
+ hLPmjDZvr8c8LGk86sZzgplZx7grKFUU1s0oP+7L8PC48+o1g+HgZ7C6QKczvUuLtK
+ YSqNQrxz4gFFdzf31ps2bMExgk7tBPrcEtnKQwuY=
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4YfZMT3547zY5k; Fri, 24 Jan 2025 11:49:57 +0100 (CET)
+Message-ID: <a70b19e6-4436-4fcf-bebd-b6877b66779e@studiofuga.com>
+Date: Fri, 24 Jan 2025 11:49:56 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Git commit failed with mbedtls/framework
-To: Tom Rini <trini@konsulko.com>
-Cc: Tony Dinh <mibodhi@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <CAJaLiFy2oo2fp-08qJni8srUn6RErgGgZs_A3GGPJuD0+=YsOw@mail.gmail.com>
- <CAEfUkUJOd03fc5VERRPY18LWMomEbYFRnkHSJcFLcdnPq4=8jA@mail.gmail.com>
- <CAJaLiFw134mzZk7TkJMgAppx11Xv3qZsbU-Y78XimX8jNbJtMA@mail.gmail.com>
- <CAEfUkUKp9wWhgBW2XFubhoccSGeU-CW3Y+FY+iJhfw7eVLZv_g@mail.gmail.com>
- <CAJaLiFzTjHWCw+ioPZv660yQ0XLM6+SMJh3NV=NYivbtE1Uf_Q@mail.gmail.com>
- <CAEfUkULhPuH15fDENXubhNPOQvbAjBv5f_yoeH7gjC4rhczxtA@mail.gmail.com>
- <20241118153742.GO3600562@bill-the-cat>
- <CAEfUkUJNOTCsh19VbKsHw9wWO1nn8o-OhRrAB46uhpKHO-Owsw@mail.gmail.com>
- <20241118164122.GQ3600562@bill-the-cat>
- <CAEfUkUJmSL8-XR6LUAKX=xW-mYQWNHzanRKvAVFaB2A9nA4W1A@mail.gmail.com>
- <20241118171811.GR3600562@bill-the-cat>
 Content-Language: en-US
-From: ZHANG Yuntian <yt@radxa.com>
-Organization: Radxa Computer (Shenzhen) Co., Ltd
-In-Reply-To: <20241118171811.GR3600562@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: Mom5ezI3X1cDL63Pt+0Wio1EP2o7nuq8uxtvOgMTCMHFRcCE1sLovxu4
- jJzSewwe4HcMFoCShY97c9IKwnf7fawtDgU285+62lwqtRqYh1+Dxz0zTuQlV4uMniO5jmG
- ZoWwGrlsyc0EfaTVkMVJ7x9DXfttxn5LB5wpXdfKhFbsaGcjF2Q3LDK5DaZXKULuh9tkzV0
- WZgoGGewai594xsQpcEZtMbJDLbsrzdkxiZxEc+Tj6gK3niCoNvnT3YknGXx/QVwCXL0uGY
- r0hjC+jW3+a/NPfVx5jhd9S6xcZVLff4si5Qpk+mAOR461WX9DD7baD8lZNRNfORzfnq4NO
- ktzGzna1uPLqE40ZRO5eCcU5hXmO/93Kg06YJWrt+xy6isHY0CUUBTc1oKASHzY9xlq+ETn
- 1Mq42AIpu7rxesQlCzmuYuPcsNv6Oo1iZ4uZjhGKLyaNJS2wAbgUjKxnUCjhWnGIuM49s2g
- HqrzLYoWvFjRKmVoK7YTDpaoYO1bajkrtopdNlor63ANnRbfel5JoeL/SaGyH4h9+S0V7u+
- RnhXek4z34deoAoZdNjzbXyfat+s90457p9Rka3Yy/KqithK4BEeSz0Er0BjD03Nk445wtA
- XbqiLChHQEvKTKMoM3doBaHathxyJ/3v9oJOGzjjNgS2LXKG/hhRdlhYXkB+XevZLjZ8gbq
- UBfeu8Cnn3Pf3FqoC84cuhy4VJcbT9jyrxuWrw4d1r0y8AYcWUvRCWY4LnOhFKBOYcM/UD2
- FQfY4Z1JwrnEDjPsuM3hXb9zY7hLRREPx0tMpq6dbXeSg7QkYmIkyy46PugP7swYmN3LHQ9
- 6LWMAuQ6J0hyoTYRgkUBxxHb4xnqWkSLl+WHa/iEUgAtQ1vXCWpi/ux1Jyjlf8yUbnhydsM
- wRjZEqbacU6VNGOmCO7YxuswgVjvWEHLevHb6ya1+kqlPxdSosKVVWkuBI6cHEDhldN6tmN
- SmDA=
-X-QQ-XMRINFO: NS+P29fieYNw95Bth2bWPxk=
-X-QQ-RECHKSPAM: 0
+From: Federico Fuga <fuga@studiofuga.com>
+Autocrypt: addr=fuga@studiofuga.com; keydata=
+ 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
+ 3Z10R+iQ3XwjCMCTFTN+4NBJ1U0=
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, Federico Fuga <fuga@studiofuga.com>,
+ Maxime Ripard <maxime@cerno.tech>, u-boot@lists.denx.de
+Subject: [PATCH] Fix fastboot handling of partitions when no slots are,
+ supported
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------b2Apn1rFJyTciMvh4wyooDY4"
+X-Infomaniak-Routing: alpha
 X-Mailman-Approved-At: Fri, 24 Jan 2025 14:01:57 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,246 +105,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------b2Apn1rFJyTciMvh4wyooDY4
+Content-Type: multipart/mixed; boundary="------------yvUXg2Ki4UTu9fUXjy4ypTH9";
+ protected-headers="v1"
+From: Federico Fuga <fuga@studiofuga.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, Federico Fuga <fuga@studiofuga.com>,
+ Maxime Ripard <maxime@cerno.tech>, u-boot@lists.denx.de
+Message-ID: <a70b19e6-4436-4fcf-bebd-b6877b66779e@studiofuga.com>
+Subject: [PATCH] Fix fastboot handling of partitions when no slots are,
+ supported
 
-On 2024/11/19 01:18, Tom Rini wrote:
-> On Mon, Nov 18, 2024 at 12:16:18PM -0500, Raymond Mao wrote:
->> Hi Tom,
->>
->> On Mon, 18 Nov 2024 at 11:41, Tom Rini <trini@konsulko.com> wrote:
->>
->>> On Mon, Nov 18, 2024 at 11:27:06AM -0500, Raymond Mao wrote:
->>>> Hi Tom,
->>>>
->>>> On Mon, 18 Nov 2024 at 10:37, Tom Rini <trini@konsulko.com> wrote:
->>>>
->>>>> On Mon, Nov 18, 2024 at 10:24:32AM -0500, Raymond Mao wrote:
->>>>>> Hi Tony,
->>>>>>
->>>>>> On Sat, 16 Nov 2024 at 02:39, Tony Dinh <mibodhi@gmail.com> wrote:
->>>>>>
->>>>>>> Hi Raymond,
->>>>>>>
->>>>>>> On Fri, Nov 15, 2024 at 1:55 PM Raymond Mao <
->>> raymond.mao@linaro.org>
->>>>>>> wrote:
->>>>>>>>
->>>>>>>> Hi Tony and Tom,
->>>>>>>>
->>>>>>>> On Fri, 15 Nov 2024 at 16:35, Tony Dinh <mibodhi@gmail.com>
->>> wrote:
->>>>>>>>>
->>>>>>>>> Hi Tom,
->>>>>>>>> Hi Raymond,
->>>>>>>>>
->>>>>>>>> On Fri, Nov 15, 2024 at 1:09 PM Raymond Mao <
->>> raymond.mao@linaro.org
->>>>>>
->>>>>>> wrote:
->>>>>>>>>>
->>>>>>>>>> Hi Tony
->>>>>>>>>>
->>>>>>>>>> On Fri, 15 Nov 2024 at 15:32, Tony Dinh <mibodhi@gmail.com>
->>>>> wrote:
->>>>>>>>>>>
->>>>>>>>>>> Hi Tom,
->>>>>>>>>>>
->>>>>>>>>>> On Fri, Nov 15, 2024 at 11:27 AM Tony Dinh <
->>> mibodhi@gmail.com>
->>>>>>> wrote:
->>>>>>>>>>>>
->>>>>>>>>>>> Hi Tom,
->>>>>>>>>>>>
->>>>>>>>>>>> On Fri, Nov 15, 2024 at 6:17 AM Tom Rini <
->>> trini@konsulko.com>
->>>>>>> wrote:
->>>>>>>>>>>>>
->>>>>>>>>>>>> On Thu, Nov 14, 2024 at 08:26:33PM -0800, Tony Dinh
->>> wrote:
->>>>>>>>>>>>>> Hi Tom,
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> I am on 2025.01-rc2, and I am trying to commit some
->>> files.
->>>>> The
->>>>>>> error
->>>>>>>>>>>>>> seems to indicate this framework directory might need
->>> some
->>>>>>>>>>>>>> modification. Did I miss something?
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> error: 'lib/mbedtls/external/mbedtls/framework' does
->>> not
->>>>> have
->>>>>>> a commit
->>>>>>>>>>>>>> checked out
->>>>>>>>>>>>>> fatal: updating files failed
->>>>>>>>>>>>>
->>>>>>>>>>>>> That's odd. You didn't happen to try out some of the
->>> previous
->>>>>>> lwIP
->>>>>>>>>>>>> iterations on that tree did you?
->>>>>>>>>>>>
->>>>>>>>>>>> No, I did not. The tree is clean with "make mrproper" and
->>> on
->>>>> the
->>>>>>>>>>>> master branch. I just did a git pull and worked on it.
->>>>>>>>>>>>
->>>>>>>>>>>> I went and looked at
->>> https://github.com/Mbed-TLS/mbedtls.git.
->>>>> The
->>>>>>>>>>>> framework directory is pointing to a specific commit.
->>>>>>>>>>>> framework @ 3867faa
->>>>>>>>>>>>
->>>>>>>>>>>> I'll stash and repeat it on another clean tree.
->>>>>>>>>>>
->>>>>>>>>>> I have the same commit error on a brand new tree.
->>>>>>>>>>>
->>>>>>>>>> I think you are talking about the test framework of MbedTLS's
->>>>>>> original testsuite,
->>>>>>>>>> am I right?
->>>>>>>>>> MbedTLS was ported into U-Boot as a git subtree and that
->>>>> framework is
->>>>>>> a git
->>>>>>>>>> submodule of original MbedTLS repo which was not included in
->>> the
->>>>>>> porting
->>>>>>>>>> of U-Boot since U-Boot has its own testsuite.
->>>>>>>>>
->>>>>>>>> Here is what I found.
->>>>>>>>>
->>>>>>>>> git clone https://github.com/u-boot/u-boot.git
->>> u-boot-master-test
->>>>>>>>> cd /usr/src/u-boot-master-test/
->>>>>>>>> patch -p1 <
->>>>> ../builds-u-boot-marvell/sheevaplug/sheevaplug_bootstd.patch
->>>>>>>>> git add .
->>>>>>>>> git commit . -m "arm: kirkwood: Enable bootstd and remove jffs2
->>> for
->>>>>>>>> Sheevaplug board" -e
->>>>>>>>>
->>>>>>>>> The git commit above gave out this error:
->>>>>>>>>
->>>>>>>>> error: 'lib/mbedtls/external/mbedtls/framework' does not have a
->>>>> commit
->>>>>>>>> checked out
->>>>>>>>> fatal: updating files failed
->>>>>>>>>
->>>>>>>>> So I tried to commit only the specific files, and it works OK.
->>>>>>>>>
->>>>>>>>> git commit configs/sheevaplug_defconfig
->>> include/configs/sheevaplug.h
->>>>>>>>> -m "arm: kirkwood: Enable bootstd and remove jffs2 for
->>> Sheevaplug
->>>>>>>>> board" -e
->>>>>>>>> [master 47de8cff2d] arm: kirkwood: Enable bootstd and remove
->>> jffs2
->>>>> for
->>>>>>>>> Sheevaplug board
->>>>>>>>>   2 files changed, 17 insertions(+), 19 deletions(-)
->>>>>>>>>
->>>>>>>>> I think it must be what Raymond said above. So perhaps during
->>> Tom's
->>>>> PR
->>>>>>>>> pull, the framework directory was created. But "git commit ."
->>> does
->>>>> not
->>>>>>>>> like the empty lib/mbedtls/external/mbedtls/framework directory.
->>>>>>>>>
->>>>>>>> Under the native MbedTLS git repo, by default it has a
->>> "framework"
->>>>>>> pointing to
->>>>>>>> its git submodule.
->>>>>>>> Maybe we should mark it in the gitignore.
->>>>>>>
->>>>>>> I've tried .gitignore but could not make it work (my Gitfu is
->>> pretty
->>>>>>> lousy). Can you suggest how that should be done?
->>>>>>>
->>>>>>> You can use the command without the '.' : git commit -m
->>> "<commit_msg>",
->>>>>> this
->>>>>> should work.
->>>>>>
->>>>>> @Tom Rini <trini@konsulko.com> Shall we remove both
->>>>>> "lib/mbedtls/external/mbedtls/.gitmodules" and
->>>>>> "lib/mbedtls/external/mbedtls/framework"? I can submit a patch if you
->>>>> agree.
->>>>>
->>>>> Can we do that and not make a problem for the next resync?
->>>>>
->>>>> Hmmm, no, this cannot be pulled back to the MbedTLS upstream so still a
->>>> problem
->>>> when resync.
->>>> Another option is to include that git submodule into the U-Boot project,
->>>> this needs
->>>> to revert the commit of introducing the library and redo the git subtree
->>>> after the
->>>> submodule is updated, but it does not seem to be a good choice as we
->>> don't
->>>> use
->>>> that test framework in U-Boot at all.
->>>> Right now I don't have a perfect solution, maybe we can accept using git
->>>> commit
->>>> without the '.'?
->>>
->>> Hmm. Maybe we just delete the .gitmodules / directory and it shouldn't
->>> be too hard to deal with on updates. I have to do some small fixups with
->>> the device tree ones anyhow sometimes.
->>>
->>> How about checking and deleting this in the subtree update script?
->> Then we can skip manually doing this each time.
->> I can make a patch for it if you feel fine.
-> 
-> Lets worry about that if it's a problem when we resync next.
+--------------yvUXg2Ki4UTu9fUXjy4ypTH9
+Content-Type: multipart/mixed; boundary="------------Lyvkwbm2zhZMRzx3J50kXaSL"
 
-I'm currently working with Jonas Karlman's Rockchip fork[1] which is 
-based on a416d9e680718de1c76c4196e1db77e3ca07662f. The fork is included 
-as a git submodule so we can provide distro packaging[2] that are 
-unrelated to U-Boot. We build our package with GitHub Action, and this 
-issue currently blocks us from checking out the code at all with the 
-following workflow snippet:
+--------------Lyvkwbm2zhZMRzx3J50kXaSL
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-       - name: Checkout
-         uses: actions/checkout@v4
-         with:
-           submodules: recursive
+VGhlIGZhc3Rib290IG1vZHVsZSBoYXMgYSBidWcgdGhhdCBwcmV2ZW50cyBzb21lIGNvbW1h
+bmQgdG8gd29yaw0KcHJvcGVybHkgb24gZGV2aWNlcyB0aGF0IGhhdmVuJ3QgYW4gQW5kcm9p
+ZC1saWtlIHBhcnRpdGlvbiBzY2hlbWUsIHRoYXQNCmlzLCBqdXN0IG9uZSBzcGwgYW5kIG9u
+ZSBrZXJuZWwgcGFydGl0aW9uLCBpbnN0ZWFkIG9mIHRoZSByZWR1bmRhbnQNCnNjaGVtZSB3
+aXRoIF9hIGFuZCBfYiBzbG90cy4NCg0KVGhpcyBpcyB0aGUgc2NoZW1hIG9mIG91ciBOQU5E
+IHN0b3JhZ2UgKGJvYXJkIGlzIGJhc2VkIG9uIGFuIEFsbFdpbm5lcg0KQTMzIHN1bnhpIGNo
+aXApOg0KDQo9PiBtdGRwYXJ0cw0KDQpkZXZpY2UgbmFuZDAgPDFjMDMwMDAubmFuZD4sICMg
+cGFydHMgPSA0DQogwqAjOiBuYW1lwqDCoMKgwqDCoMKgwqDCoCBzaXplwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBuZXQgc2l6ZcKgwqDCoMKgwqDCoMKgIG9mZnNldCBtYXNrX2ZsYWdzDQog
+wqAwOiBzcGzCoMKgwqDCoMKgwqDCoMKgwqAgMHgwMDAyMDAwMMKgwqDCoMKgwqAgMHgwMDAy
+MDAwMMKgwqDCoMKgwqAgMHgwMDAwMDAwMMKgwqDCoMKgwqAgMA0KIMKgMTogdWJvb3TCoMKg
+wqDCoMKgwqDCoCAweDAwMTAwMDAwwqDCoMKgwqDCoCAweDAwMTAwMDAwwqDCoMKgwqDCoCAw
+eDAwMDIwMDAwwqDCoMKgwqDCoCAwDQogwqAyOiBrZXJuZWwgwqDCoCDCoMKgIDB4MDA0MDAw
+MDDCoMKgwqDCoMKgIDB4MDA0MDAwMDDCoMKgwqDCoMKgIDB4MDAxMjAwMDDCoMKgwqDCoMKg
+IDANCiDCoDM6IHViacKgwqDCoMKgwqDCoMKgwqDCoCAweDA3YWUwMDAwwqDCoMKgwqDCoCAw
+eDA3OWUwMDAwICghKcKgIDB4MDA1MjAwMDDCoMKgwqDCoMKgIDANCg0KYWN0aXZlIHBhcnRp
+dGlvbjogbmFuZDAsMCAtIChzcGwpIDB4MDAwMjAwMDAgQCAweDAwMDAwMDAwDQoNClRoaXMg
+aGFwcGVucyB3aGVuIHdlIHRyeSB0byBlcmFzZSB0aGUgc3BsIHBhcnRpdGlvbiB1c2luZyBm
+YXN0Ym9vdDoNCg0KJCBmYXN0Ym9vdCBlcmFzZSBzcGwNCkVyYXNpbmcgJ3NwbF9hJ8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgRkFJTEVEIChyZW1vdGU6ICdpbnZhbGlkIE5BTkQg
+ZGV2aWNlJykNCmZhc3Rib290OiBlcnJvcjogQ29tbWFuZCBmYWlsZWQNCg0KVGhlIGVycm9y
+IG9jY3VycyBiZWNhdXNlIGdldHZhcnMgZmFpbHMgdG8gaGFuZGxlIHRoZSBlcnJvciByZXR1
+cm5lZCBieQ0KbmFuZCBsYXllciB3aGVuIGEgcGFydGl0aW9uIGNhbm5vdCBiZSBmb3VuZC4N
+Cg0KSW5kZWVkLCBnZXR2YXJfZ2V0X3BhcnRfaW5mbyByZXR1cm5zIHdoYXQgaXMgcmV0dXJu
+ZWQgYnkNCmZhc3Rib290X25hbmRfZ2V0X3BhcnRfaW5mbyAoMCBvbiBzdWNjZXNzLCAxIG9u
+IGZhaWx1cmUpIGJ1dCBpdCBzaG91bGQNCnJldHVybiAtRU5PREVWIG9yIC1FSU5WQUwgaW5z
+dGVhZC4gU2luY2UgdGhlIGNhdXNlIG9mIGZhaWx1cmUgaXMgbm90DQpyZXR1cm5lZCBieSB0
+aGUgbmFuZCBmdW5jdGlvbiwgSSBkZWNpZGVkIHRvIHJldHVybiAtRUlOVkFMIHRvIG1ha2Ug
+aXQNCnNpbXBsZS4NCg0KU2lnbmVkLW9mZi1ieTogRmVkZXJpY28gRnVnYSA8ZnVnYUBzdHVk
+aW9mdWdhLmNvbT4NCi0tLQ0KIMKgZHJpdmVycy9mYXN0Ym9vdC9mYl9nZXR2YXIuYyB8IDUg
+KysrKy0NCiDCoGRyaXZlcnMvZmFzdGJvb3QvZmJfbmFuZC5jwqDCoCB8IDIgKy0NCiDCoDIg
+ZmlsZXMgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KDQpkaWZm
+IC0tZ2l0IGEvZHJpdmVycy9mYXN0Ym9vdC9mYl9nZXR2YXIuYyBiL2RyaXZlcnMvZmFzdGJv
+b3QvZmJfZ2V0dmFyLmMNCmluZGV4IDkzY2JkNTk4ZTAuLmY1ZDhiMDMzMDEgMTAwNjQ0DQot
+LS0gYS9kcml2ZXJzL2Zhc3Rib290L2ZiX2dldHZhci5jDQorKysgYi9kcml2ZXJzL2Zhc3Ri
+b290L2ZiX2dldHZhci5jDQpAQCAtMTIxLDggKzEyMSwxMSBAQCBzdGF0aWMgaW50IGdldHZh
+cl9nZXRfcGFydF9pbmZvKGNvbnN0IGNoYXIgDQoqcGFydF9uYW1lLCBjaGFyICpyZXNwb25z
+ZSwNCiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgKnNpemUgPSBkaXNrX3BhcnQuc2l6ZSAq
+IGRpc2tfcGFydC5ibGtzejsNCiDCoMKgwqDCoCB9IGVsc2UgaWYgKElTX0VOQUJMRUQoQ09O
+RklHX0ZBU1RCT09UX0ZMQVNIX05BTkQpKSB7DQogwqDCoMKgwqDCoMKgwqDCoCByID0gZmFz
+dGJvb3RfbmFuZF9nZXRfcGFydF9pbmZvKHBhcnRfbmFtZSwgJnBhcnRfaW5mbywgcmVzcG9u
+c2UpOw0KLcKgwqDCoMKgwqDCoMKgIGlmIChyID49IDAgJiYgc2l6ZSkNCivCoMKgwqDCoMKg
+wqDCoCBpZiAociA9PSAwICYmIHNpemUpIHsNCiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+KnNpemUgPSBwYXJ0X2luZm8tPnNpemU7DQorwqDCoMKgwqDCoMKgwqAgfSBlbHNlIHsNCivC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHIgPSAtRUlOVkFMOw0KK8KgwqDCoMKgwqDCoMKgIH0N
+CiDCoMKgwqDCoCB9IGVsc2Ugew0KIMKgwqDCoMKgwqDCoMKgwqAgZmFzdGJvb3RfZmFpbCgi
+dGhpcyBzdG9yYWdlIGlzIG5vdCBzdXBwb3J0ZWQgaW4gYm9vdGxvYWRlciIsIA0KcmVzcG9u
+c2UpOw0KIMKgwqDCoMKgwqDCoMKgwqAgciA9IC1FTk9ERVY7DQpkaWZmIC0tZ2l0IGEvZHJp
+dmVycy9mYXN0Ym9vdC9mYl9uYW5kLmMgYi9kcml2ZXJzL2Zhc3Rib290L2ZiX25hbmQuYw0K
+aW5kZXggNWE1NTE0NDQ3OS4uM2VlMGY0MGVhOCAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZmFz
+dGJvb3QvZmJfbmFuZC5jDQorKysgYi9kcml2ZXJzL2Zhc3Rib290L2ZiX25hbmQuYw0KQEAg
+LTE0MSw3ICsxNDEsNyBAQCBzdGF0aWMgbGJhaW50X3QgZmJfbmFuZF9zcGFyc2VfcmVzZXJ2
+ZShzdHJ1Y3QgDQpzcGFyc2Vfc3RvcmFnZSAqaW5mbywNCiDCoCAqDQogwqAgKiBAcGFydF9u
+YW1lOiBOYW1lZCBkZXZpY2UgdG8gbG9va3VwDQogwqAgKiBAcGFydF9pbmZvOiBQb2ludGVy
+IHRvIHJldHVybmVkIHBhcnRfaW5mbyBwb2ludGVyDQotICogQHJlc3BvbnNlOiBQb2ludGVy
+IHRvIGZhc3Rib290IHJlc3BvbnNlIGJ1ZmZlcg0KKyAqIEByZXNwb25zZTogMCBvbiBzdWNj
+ZXNzLCAxIG90aGVyd2lzZQ0KIMKgICovDQogwqBpbnQgZmFzdGJvb3RfbmFuZF9nZXRfcGFy
+dF9pbmZvKGNvbnN0IGNoYXIgKnBhcnRfbmFtZSwNCiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBzdHJ1Y3QgcGFydF9pbmZvICoqcGFydF9pbmZvLCBjaGFyICpyZXNwb25z
+ZSkNCi0tIA0KMi40OC4xDQoNCg0K
+--------------Lyvkwbm2zhZMRzx3J50kXaSL
+Content-Type: application/pgp-keys; name="OpenPGP_0xEBBD37A93653C032.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xEBBD37A93653C032.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-Related error logs are here:
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-|> Fetching submodules
-   /usr/bin/git submodule sync --recursive
-   /usr/bin/git -c protocol.version=2 submodule update --init --force 
---recursive
-   Submodule 'src/rkbin' (https://github.com/rockchip-linux/rkbin.git) 
-registered for path 'src/rkbin'
-   Submodule 'src/u-boot' 
-(https://github.com/Kwiboo/u-boot-rockchip.git) registered for path 
-'src/u-boot'
-   Cloning into '/home/runner/work/u-boot-kwiboo/u-boot-kwiboo/src/rkbin'...
-   Cloning into 
-'/home/runner/work/u-boot-kwiboo/u-boot-kwiboo/src/u-boot'...
-   Submodule path 'src/rkbin': checked out 
-'0f8ac860f0479da56a1decae207ddc99e289f2e2'
-   Submodule path 'src/u-boot': checked out 
-'f3231571f4f9c3f72dcb6458aaa2de2462c605df'
-   Error: fatal: No url found for submodule path 
-'src/u-boot/lib/mbedtls/external/mbedtls/framework' in .gitmodules
-   Error: fatal: Failed to recurse into submodule path 'src/u-boot'
-   Error: The process '/usr/bin/git' failed with exit code 128
+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
+3Z10R+iQ3XwjCMCTFTN+4NBJ1U0=3D
+=3DgKDV
+-----END PGP PUBLIC KEY BLOCK-----
 
-This issue potentially breaks all projects who include the recent U-Boot 
-as a git submodule in their GitHub Workflow.
+--------------Lyvkwbm2zhZMRzx3J50kXaSL--
 
-1: https://github.com/Kwiboo/u-boot-rockchip/tree/rk3528-2025.04-wip
-2: https://github.com/radxa-pkg/u-boot-kwiboo/actions
+--------------yvUXg2Ki4UTu9fUXjy4ypTH9--
 
-> 
+--------------b2Apn1rFJyTciMvh4wyooDY4
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
--- 
-Best regards,
+-----BEGIN PGP SIGNATURE-----
 
-ZHANG, Yuntian
+wsD5BAABCAAjFiEEGznTeeLsJ7s9447T6703qTZTwDIFAmeTcFQFAwAAAAAACgkQ6703qTZTwDIG
+tgv/cTINdUUJLrr1wvG2OlRL/9L8P3KO1/se7hxA9m6HN24BoJxpzBrLlg85E8aG9v3/dsGnopZJ
+1ha+E8hm1lG0NMj5R3UBKMBAVldR7nH/v6vvP+ozzK3OdYS3wNpql3vJx6hGolSG5ADoxFoK0we6
+WRDVQEKR4x/fUgzpg7x39L1YJ+W8t1QdjCFo/T5Lc6FqLY0FcS8ol35Ow+57wQU1bhN/LLRDZEc/
+CA6sh6rU/ZjKEy1Fxb72JK/kGY+bfAr+/K0oO4i4vNSLolUloM5QNxV9vKwHKii+M3x+JYqj3yzR
+M67PjtjdkGP8bUQYLwskpxz9B1IsYOQ5saPQEBmXEHu6wm/AyPYLjMdDoRmv9VdoPFTysK/RRjL5
+Ih+jEofihtsnYs46OfTx7LoeX4nPXc0u+w+96EXDsSnEzthS3PO2mb4J+S5boKrsL4RYESkqc244
+TGOpXC2Z5D3s4If2rzz8oVLLG2ZwYn/lco8fr5VXZIs4rGBI/iyXQxv9WN+2
+=XvCQ
+-----END PGP SIGNATURE-----
 
-Operating System Developer
-Radxa Computer (Shenzhen) Co., Ltd
-Shenzhen, China
-
+--------------b2Apn1rFJyTciMvh4wyooDY4--
