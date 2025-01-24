@@ -4,79 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC25C0218B
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 22:29:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B1ABC02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 22:29:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3029580EC0;
-	Fri, 24 Jan 2025 23:28:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8329980C98;
+	Fri, 24 Jan 2025 23:28:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KVO99LzY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s1wHPgiM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1489B80C98; Fri, 24 Jan 2025 23:28:48 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id B865E80C7E; Fri, 24 Jan 2025 23:28:52 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEE7880C98
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 23:28:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C4C8180ECC
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 23:28:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6d8f75b31bfso26690216d6.3
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 14:28:45 -0800 (PST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b6f19a6c04so234429785a.0
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 14:28:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737757725; x=1738362525; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737757729; x=1738362529; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kj+E5xcJganCqSq9Zni8CoYp/9CBnRPdt/0YPxs0rfg=;
- b=KVO99LzY2ZA9/wkIdInGDZTXBCOgH6j9WfLHBe7vPjpabPnG+YIW5KGZoAluXW+nPx
- qeC0oKc/ils9KjC3b03G7DVyyP8PLhYVqzK7b+W+QVWWihlsVcCkGOsxiswHNVHE5+B+
- HQ7+59PyDvxOgzTMb4kVZj+E0jp/tEBK4c9bs=
+ bh=lA2c38BvalnD04ksOy4AP5e7qIYQxzN7sD11nS0bJsU=;
+ b=s1wHPgiM5JtTErsyekZUGXA6VYKxX9Cg6q2LGFpvBKolUJIV8rojPCnb2eGkUx58Z1
+ zJYjVnERHqep6fDXGB9G+GVG0kg910VuBCPsWhRwnX6ETP4T7ZBU3w6eob2QGDC73OUz
+ J+VHEv0rak8QTINPFXFUOgahBMux5WxULAEYk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737757725; x=1738362525;
+ d=1e100.net; s=20230601; t=1737757729; x=1738362529;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Kj+E5xcJganCqSq9Zni8CoYp/9CBnRPdt/0YPxs0rfg=;
- b=nH1pSdWJPgEsuNRF7bhc9dNVPeSTLlj2AS/D0oH8BrRXxIh1aFAMGm5WO+BRoFS0/O
- XUYhx0QWXqQxAw8FuF5rSevGS+gqYZgTfEIxyOFgIAHyqYb6ryFuRIMYWjpQToA0iAwJ
- mA3IyDSWBQCZMgCCgixdD8IpPzwsKisOleVahXFJ4COeZr2BfGJPrITYCm2gUuTdoPxk
- tsWtES0lzRgTuRHb8k9IP7NfR+7RbHYMkgy9TuvDHqfxrHdaK3kru6j3Wilj019G8ipb
- h3u7fYBva7pEIQQTVIeU0dQVfFfyXW8pQIU0QlD+Fr9W2iAyZzRLwZ2qGchkYEkydE01
- cCbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV25y+OhPrQE4EKn+CCo9bBSmttqNSag3kJ/I185yoePGnPWiO6wkgzaVSxecCivtb8Xudc3Cg=@lists.denx.de
-X-Gm-Message-State: AOJu0YytKhSG7Czuuw44Bx8kqZaxM97tAIFzsP11TK1iP3MN2w2fS1+q
- sUglGcZk2QDvJ4OWcGT7Sdq4x2f7KyuzzBMgMdeNUarUsOEPAKrGTliUrlV/AEI=
-X-Gm-Gg: ASbGnctF8uwG+m+/12vhUYlGv2n83iHN83rkm8y0gsomEZjBkoRnP9EyyQa4I0sPBCA
- 8H+3vLfVIUNoUIUXDJcTRc7YrfwKXtKfaOduyk5nDbgNJfnXZfiItSNTyBP5tMSmhdWFdZsCkDJ
- PAmcsXlP68Hajv9TQPmOGgP58PFu6364ldkE6E0t/ViaGaN7zwcqiegWYXwOCGYfstpW9uqMOIT
- jvlh/hxRF6E/xdzqha2crfdflXURCOXCoKxzINzSr/NcB9d375SWuImbaq2jAVmQ5NkcolqdGNd
- 558=
-X-Google-Smtp-Source: AGHT+IEvIaxGCO9jF2tLyRQ63+dwC22/2oZWunREHWyda3XLg3/mzZr6Slbq7PNua64+ESTCC+Tdpg==
-X-Received: by 2002:ad4:5c63:0:b0:6d8:7ed4:3367 with SMTP id
- 6a1803df08f44-6e1b218f0b9mr571798306d6.19.1737757724979; 
- Fri, 24 Jan 2025 14:28:44 -0800 (PST)
+ bh=lA2c38BvalnD04ksOy4AP5e7qIYQxzN7sD11nS0bJsU=;
+ b=XRN3e2HPU8KMOk1iTifcVmbMDfUGBHfoOY9TCvQyTEBbvBZlIE6y2LsHhDckzuDxuk
+ Y8QBZd4njD9BqAzR8wjD649RT1qautg37sY+3lSQLluukvdZ6YGWgEbpMYRxyDUGvP25
+ ckeG5RHMIdk3cqS2j5B3DeNaT8C5qu7dKX36XZ508M+C6yB3iY9O3SrlBg9GO4S0TNZ9
+ g0M9cZe7qmozQhCcE6I8/1/gMGN9CU/IFq31/+b9bjqSy54nKP7H9ZgPZ29nypLPZB5N
+ MV+6Omdn0AvsaVs11SnoOUUGcBeFqaBTPgsbl2V9gX75LURW3eUGvU+M4Bowoqp18zL+
+ 05HA==
+X-Gm-Message-State: AOJu0YzNAJa2aCj2p22AbWDSACjMY6Z1+UjsJP4wsi7J2UzFcOFYdUQN
+ ldmGfSTEkl6XTfl0hnkuGIB8AcYq31TrxWF7xF2YfV9CQKFMBv67IQqOU0Okh2I=
+X-Gm-Gg: ASbGnctVoxfSk+N9hUEk3VeuK/Oq5UfaHZD9ZvEH6jQUVj6F6mUoB83nrgRhpHqiOU4
+ 8GOaZnIePLSYYER5zT6Cgc6diSET/rMBxo4l8psePzTJUORo8L3hAMWS3Va0Qao5E7CJB5PN6zH
+ oPft+VdvZyGeLnOi/DNIiWm3a3z1jodNrFEnk6zLF5CGxWrW8LHmIDoxlm+Vis9vY7kNcVLssPx
+ Iiymvw+eXWnrbienHQHD0SAPs1G1dKBjNoQ7dSBEO9NxDASZg97/BpT385/ozNbNPUnrRULnlrc
+ 4dA=
+X-Google-Smtp-Source: AGHT+IGCxwwfT8cgOJA9vLc29fYQ70eh8I+sIIrv8Q0kw8Yzw/1VdYizTFRk2FnP/19A4dHHj/yaQw==
+X-Received: by 2002:a05:6214:588b:b0:6cd:ec00:205e with SMTP id
+ 6a1803df08f44-6e1b19e0831mr532031106d6.0.1737757728721; 
+ Fri, 24 Jan 2025 14:28:48 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e2052498d6sm12787946d6.47.2025.01.24.14.28.43
+ 6a1803df08f44-6e2052498d6sm12787946d6.47.2025.01.24.14.28.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 14:28:44 -0800 (PST)
+ Fri, 24 Jan 2025 14:28:48 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20250120082932.20620-1-heinrich.schuchardt@canonical.com>
-References: <20250120082932.20620-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH v2 1/1] test: str_ut.c depends on CONFIG_STRTO
-Message-Id: <173775772378.3136238.6082663348669064089.b4-ty@konsulko.com>
-Date: Fri, 24 Jan 2025 16:28:43 -0600
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Alexander Gendin <agendin@matrox.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>, 
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Linus Walleij <linus.walleij@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Massimiliano Minella <massimiliano.minella@se.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Ravi Minnikanti <rminnikanti@marvell.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
+ Stephen Carlson <stcarlso@linux.microsoft.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>
+In-Reply-To: <20250120212613.516664-1-sjg@chromium.org>
+References: <20250120212613.516664-1-sjg@chromium.org>
+Subject: Re: [PATCH v2 00/44] test: Improvements to ut command and
+ test-suite running
+Message-Id: <173775772518.3136238.8892169232211950805.b4-ty@konsulko.com>
+Date: Fri, 24 Jan 2025 16:28:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,12 +116,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 20 Jan 2025 09:29:32 +0100, Heinrich Schuchardt wrote:
+On Mon, 20 Jan 2025 14:25:22 -0700, Simon Glass wrote:
 
-> The string conversion functions are implemented in lib/strto.c which is
-> only compiled if CONFIG_STRTO=y.
+> The current method of running unit tests relies on subcommands of the
+> ut command. Only the code in each subcommand knows how to find the tests
+> related to that subcomand.
 > 
+> This is not ideal and we now have quite a few subcommands which do
+> nothing but locate the relevant tests in a linker list, then call a
+> common function to run them.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
