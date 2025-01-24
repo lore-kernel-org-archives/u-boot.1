@@ -4,69 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49C45C02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 21:41:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A39CFC02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 22:17:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7DB180C77;
-	Fri, 24 Jan 2025 22:41:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
+	by phobos.denx.de (Postfix) with ESMTP id C81A380ADB;
+	Fri, 24 Jan 2025 23:17:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="h3F5ccUD";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="46V9hugR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z1AZhWTM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37C9180ADB; Fri, 24 Jan 2025 22:19:41 +0100 (CET)
-Received: from sendmail.purelymail.com (sendmail.purelymail.com
- [34.202.193.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 77D1580ADE; Fri, 24 Jan 2025 23:17:41 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95B3180A45
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 22:19:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=tidylabs.net
+ by phobos.denx.de (Postfix) with ESMTPS id F3D6A80A52
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 23:17:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=justin@tidylabs.net
-DKIM-Signature: a=rsa-sha256;
- b=h3F5ccUDX4Wm7R4WfjZE69mA4PufMlHHrdB13ICQKKC9QfsIcZMHw/028ZuqXPeZaxOA305kJGG17kUF8zKjHODCwhdW6wi+VLxlptfM2P+vJ0vT5RoXzMJNNId9kwkx2QEcH7R3kkZb43/J9THrZyr4lspXiQb/3db80SZ+KNTVbsPV7DITelTW7OW2QyvMQNuLarEYHw91NDd1oz9EJaU1S6FMZKyayZuNNTIbJ7e4Sgt83GtBWAMZIFg0xD5avQ6GzKVdryyQipDlTIPtoyCe4MmkwY7ZyeT5fvdtek6bmXaBmHtJFCnitcfW+sti0ZEAPca97NKjGVz3wN0ibg==;
- s=purelymail3; d=tidylabs.net; v=1;
- bh=1HB7J0AedST39P7ijDFBP6Q6jZMdEAmVLNN2ALnduYU=;
- h=Received:From:To:Subject:Date; 
-DKIM-Signature: a=rsa-sha256;
- b=46V9hugR7xPahA61X70xoXjgGgCV3Q88mgvJnBDE85sSTBB0M5YfeFTMHr2YCM04XDTEkYiyllnfP/sadTrPYQxSD8PO8YK2h4usT2di9UKh2mRob5n5zuVg/LLOqaeKdZjLOycTLHN8fFUPWPey6DL12hzwGy7YO1/T/lQBYc2hm3zJVPUwrV57b89R06Kfsi9wS/HhlzVAZglT22TWBIIQhEvUIzIpUE03V9PXRUpQmaP5AU507liCYS20pGRbyKPpijzdRx+o+znjMHeXC/D37+L552AHHqcd2VN3GKeOBroL1c/Gngp/mmkarzS7gKoqWpr+J33C8uU7xUWB1w==;
- s=purelymail3; d=purelymail.com; v=1;
- bh=1HB7J0AedST39P7ijDFBP6Q6jZMdEAmVLNN2ALnduYU=;
- h=Feedback-ID:Received:From:To:Subject:Date; 
-Feedback-ID: 81901:11097:null:purelymail
-X-Pm-Original-To: u-boot@lists.denx.de
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -1146688194; 
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 24 Jan 2025 21:19:31 +0000 (UTC)
-From: Justin Klaassen <justin@tidylabs.net>
-To: u-boot@lists.denx.de
-Cc: Justin Klaassen <justin@tidylabs.net>,
- Caleb Connolly <caleb.connolly@linaro.org>, Chen-Yu Tsai <wens@csie.org>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Dragan Simic <dsimic@manjaro.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jonas Karlman <jonas@kwiboo.se>, Keerthy <j-keerthy@ti.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
- William Wu <william.wu@rock-chips.com>, Xiaobo Tian <peterwillcn@gmail.com>
-Subject: [PATCH] rockchip: rk3399: nanopi-r4s: Support v1.8 SD cards in SPL
-Date: Fri, 24 Jan 2025 21:19:15 +0000
-Message-ID: <20250124211922.41274-1-justin@tidylabs.net>
-X-Mailer: git-send-email 2.45.3
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7be8f281714so258086485a.1
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 14:17:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737757058; x=1738361858; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vVruaZaoURaAQYcDnbUjBWjR1U2OCdmpKoRwYaX9fsU=;
+ b=Z1AZhWTMqQwW/E8MnNJXwPToXSGINKBpSRZ7NIVw61oxSw19mmd9kncrj1wLs0bSU+
+ k3Y1f5TIgXEDgqTHTXb77wRlGYNUmc22+lQCh/vQ/jFuTcrk3uL3ClGIjqtchfq/s+ip
+ 9ktyKSHu3KB5zEAYmfpAsVlA3h6+2ua6OiVEM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737757058; x=1738361858;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vVruaZaoURaAQYcDnbUjBWjR1U2OCdmpKoRwYaX9fsU=;
+ b=wiBpz57ZydMH0s2DvAVwsXeBQ3NOLcfeSOk4lvyo+fy8/HSkJZ3aRG2KBTyq32x1la
+ 0yp98vCulYqMmY9jDjlLNjEyRdxmYjVDDWbPUjbBzBi1pOEuuQu3OOViSV30n9etjfnj
+ cA6v9otP4TV0zyvwLkaf+DgYz5u529L0QT1onRq+nQLPUO90Z50K7ACJCVrWMDpqKO8s
+ f1kqPBM/SlDTZTAxwFBgIsvZqH6f/Vquibk9lBgeQjJDgWCX/V9MzMUqmbtAGo4lbCyJ
+ dZQwfexeWLnhjFzUd9k4EqVTYtmGsUjcg+y7iJm6MNONDLWa2PLGuYYJufHAWWPRa1+O
+ iCIQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXuiSOqRRjVTusdzboluULBYqxALixuODkrW3utsJrC5BA04HWgM9mUSvo1OgyLFRv/jIw4O7k=@lists.denx.de
+X-Gm-Message-State: AOJu0YxQ+UUfBsBEl5BqV0qRacyQbV/YgnyZ5wWq/F3qCrp2qK42DkLY
+ onjXeIJ6emCpzrer4Q6gwDPZ32PLAdwi21Yck0wg9zEj8s/gb9ZdkZfMb/mR9nk=
+X-Gm-Gg: ASbGncu1gNh25UaJPltQCubdiGPpXeMdMpGDY3vXtZrMrViklqy9R+ftLqG+XXKgUNg
+ NIwVUD186YVdRPLEXHlkoWDTpw3ygNB9c0z6OutMI6/aEwCkUoMjEL9nXuHSJNw+SDP5PE4A98U
+ fqiNWlTqt49BU9r4ylrH0TnoiWHyw8qtQyNakx/UOjA/42qs1uriBLNU2Xbnpl+CDgqqCAMRfai
+ NFhIXAtJ3mqV09CEzuLsJlZ+wZTOiDzBtne67ATBK5l3E+nABXTlF70r2e0oM7ISVuxI8KLD9Up
+ Pxqc
+X-Google-Smtp-Source: AGHT+IHbisY8mS7Y1a4ysqonlLX4aKXN/udKz1R53ZtaqGo8ydSGK9Ij7BsK4E7YtF0qW1b0JPV8hw==
+X-Received: by 2002:a05:620a:4001:b0:7be:39e7:a025 with SMTP id
+ af79cd13be357-7be63249e37mr3608441285a.26.1737757057815; 
+ Fri, 24 Jan 2025 14:17:37 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be9ae7ec0asm138187085a.12.2025.01.24.14.17.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Jan 2025 14:17:36 -0800 (PST)
+Date: Fri, 24 Jan 2025 16:17:34 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Ferass El Hafidi <funderscore@postmarketos.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
+Message-ID: <20250124221734.GY60249@bill-the-cat>
+References: <20240127162922.284598-1-jonas@kwiboo.se>
+ <CGME20240403000039epcas1p46afc0540b893679113e0683d87227ca8@epcas1p4.samsung.com>
+ <d7a2b5ef-ceb5-4f8f-b2d0-fcd6f2d6df1c@samsung.com>
+ <33caeb3b-2945-49ee-8756-8cf8aec1c632@kwiboo.se>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
-Content-Type: text/plain; charset=UTF-8
-X-Mailman-Approved-At: Fri, 24 Jan 2025 22:41:08 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="U5o8/US3NEmtepr4"
+Content-Disposition: inline
+In-Reply-To: <33caeb3b-2945-49ee-8756-8cf8aec1c632@kwiboo.se>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,182 +100,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The NanoPi R4S supports UHS-I (up to SDR104) SD cards, however using any
-of these 1.8v modes results in a boot failure in SPL upon soft reboot.
 
-On the R4S the SD card power cannot be cycled, so upon reboot the SD
-card continues to operate at 1.8v but the GPIO is configured by default
-at the 3.3v level.
+--U5o8/US3NEmtepr4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This change enables the RK8XX regulators and Rockchip IO-domain drivers
-in SPL, which reads the voltage level of the "vcc_sdio" regulator and
-configures the GPIO for the appropriate level on boot. This allows the
-MMC subsystem to operate successfully at the 1.8v level in SPL.
+On Mon, Jan 20, 2025 at 12:35:26AM +0100, Jonas Karlman wrote:
+> Hi,
+>=20
+> On 2024-04-03 02:00, Jaehoon Chung wrote:
+> > Hi,
+> >=20
+> > On 1/28/24 01:29, Jonas Karlman wrote:
+> >> The alignment hole caused by cmdidx in struct mmc_cmd cause strange
+> >> issues together with the peephole2 optimization on Amlogic SoCs.
+> >> Following was observed while working on SPL support for Amlogic SoCs.
+> >>
+> >> sd_get_capabilities() normally issue a CMD55 followed by a CMD51.
+> >> However, on at least Amlogic S905 (Cortex-A53) and S905X3 (Cortex-A55),
+> >> CMD55 was instead followed by CMD8 (and a few reties) in SPL.
+> >=20
+> > I read your RFC "https://patchwork.ozlabs.org/patch/1841495/
+> >=20
+> > First, I will retry to reproduce your case with other compiler.=20
+> > After that, I will inform again about this patch.
+>=20
+> Gentle ping, this patch has been on list for almost a year now.
+>=20
+> Have you had any time to reproduce this or can this be merged as-is?
+>=20
+> For some reason only Amlogic seem to be affected by this issue.
 
-Signed-off-by: Justin Klaassen <justin@tidylabs.net>
----
+Poking around in Linux, it looks like this is equivalent to 'struct
+mmc_command' in include/linux/mmc/core.h and so this makes us
+equivalent.
 
- arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 9 +++++++++
- configs/nanopi-r4s-rk3399_defconfig     | 7 +++++++
- drivers/misc/Kconfig                    | 8 ++++++++
- drivers/misc/rockchip-io-domain.c       | 7 ++++++-
- drivers/power/regulator/Kconfig         | 9 +++++++++
- drivers/power/regulator/rk8xx.c         | 2 +-
- 6 files changed, 40 insertions(+), 2 deletions(-)
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi b/arch/arm/dts/rk3399-=
-nanopi4-u-boot.dtsi
-index 75736124996..146b62c2e7a 100644
---- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-@@ -23,4 +23,13 @@
-=20
- &vcc_sdio {
- =09regulator-init-microvolt =3D <3000000>;
-+=09bootph-pre-ram;
-+};
-+
-+&io_domains {
-+=09bootph-pre-ram;
-+};
-+
-+&i2c0_xfer {
-+=09bootph-pre-ram;
- };
-diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk339=
-9_defconfig
-index a6dafe3d9eb..905de05026f 100644
---- a/configs/nanopi-r4s-rk3399_defconfig
-+++ b/configs/nanopi-r4s-rk3399_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=3D0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-nanopi-r4s"
- CONFIG_DM_RESET=3Dy
- CONFIG_ROCKCHIP_RK3399=3Dy
-+CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_TARGET_EVB_RK3399=3Dy
- CONFIG_SYS_LOAD_ADDR=3D0x800800
- CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-@@ -18,6 +19,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
- CONFIG_SPL_MAX_SIZE=3D0x40000
- CONFIG_SPL_PAD_TO=3D0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_I2C=3Dy
-+CONFIG_SPL_POWER=3Dy
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
- CONFIG_TPL=3Dy
- CONFIG_CMD_BOOTZ=3Dy
-@@ -33,6 +36,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
- CONFIG_ROCKCHIP_GPIO=3Dy
- CONFIG_SYS_I2C_ROCKCHIP=3Dy
- CONFIG_ROCKCHIP_IODOMAIN=3Dy
-+CONFIG_SPL_ROCKCHIP_IODOMAIN=3Dy
- CONFIG_MMC_DW=3Dy
- CONFIG_MMC_DW_ROCKCHIP=3Dy
- CONFIG_MMC_SDHCI=3Dy
-@@ -45,8 +49,11 @@ CONFIG_GMAC_ROCKCHIP=3Dy
- CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
- CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
- CONFIG_PMIC_RK8XX=3Dy
-+CONFIG_SPL_PMIC_RK8XX=3Dy
-+CONFIG_SPL_DM_REGULATOR=3Dy
- CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
- CONFIG_REGULATOR_RK8XX=3Dy
-+CONFIG_SPL_REGULATOR_RK8XX=3Dy
- CONFIG_PWM_ROCKCHIP=3Dy
- CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
- CONFIG_BAUDRATE=3D1500000
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index da84b35e804..ad935b81ae1 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -110,6 +110,14 @@ config ROCKCHIP_IODOMAIN
- =09  for the IO-domain setting of the SoC to match the voltage supplied
- =09  by the regulators.
-=20
-+config SPL_ROCKCHIP_IODOMAIN
-+=09bool "Rockchip IO-domain driver support in SPL"
-+=09depends on SPL_MISC && ARCH_ROCKCHIP
-+=09help
-+=09  Enable support for IO-domains in Rockchip SoCs in SPL. It is necessar=
-y
-+=09  for the IO-domain setting of the SoC to match the voltage supplied
-+=09  by the regulators.
-+
- config SIFIVE_OTP
- =09bool "SiFive eMemory OTP driver"
- =09depends on MISC
-diff --git a/drivers/misc/rockchip-io-domain.c b/drivers/misc/rockchip-io-d=
-omain.c
-index 025b6049a9f..d24d0781b08 100644
---- a/drivers/misc/rockchip-io-domain.c
-+++ b/drivers/misc/rockchip-io-domain.c
-@@ -5,6 +5,8 @@
-  * Ported from linux drivers/soc/rockchip/io-domain.c
-  */
-=20
-+#define LOG_CATEGORY UCLASS_NOP
-+
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <regmap.h>
-@@ -344,8 +346,10 @@ static int rockchip_iodomain_probe(struct udevice *dev=
-)
- =09=09=09continue;
-=20
- =09=09ret =3D device_get_supply_regulator(dev, supply_name, &reg);
--=09=09if (ret)
-+=09=09if (ret) {
-+=09=09=09log_debug("%s: Missing regulator for %s\n", __func__, supply_name=
-);
- =09=09=09continue;
-+=09=09}
-=20
- =09=09ret =3D regulator_autoset(reg);
- =09=09if (ret && ret !=3D -EALREADY && ret !=3D -EMEDIUMTYPE &&
-@@ -353,6 +357,7 @@ static int rockchip_iodomain_probe(struct udevice *dev)
- =09=09=09continue;
-=20
- =09=09uV =3D regulator_get_value(reg);
-+=09=09log_debug("%s: %s =3D %dV\n", __func__, supply_name, uV);
- =09=09if (uV <=3D 0)
- =09=09=09continue;
-=20
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kcon=
-fig
-index 958f337c7e7..d873ca06a47 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -241,6 +241,15 @@ config REGULATOR_RK8XX
- =09by the PMIC device. This driver is controlled by a device tree node
- =09which includes voltage limits.
-=20
-+config SPL_REGULATOR_RK8XX
-+=09bool "Enable driver for RK8XX regulators in SPL"
-+=09depends on SPL_DM_REGULATOR && SPL_PMIC_RK8XX
-+=09---help---
-+=09Enable support for the regulator functions of the RK8XX PMIC in SPL. Th=
-e
-+=09driver implements get/set api for the various BUCKS and LDOs supported
-+=09by the PMIC device. This driver is controlled by a device tree node
-+=09which includes voltage limits.
-+
- config DM_REGULATOR_S2MPS11
- =09bool "Enable driver for S2MPS11 regulator"
- =09depends on DM_REGULATOR && PMIC_S2MPS11
-diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8x=
-x.c
-index 368675ebb9f..35615e96b1c 100644
---- a/drivers/power/regulator/rk8xx.c
-+++ b/drivers/power/regulator/rk8xx.c
-@@ -16,7 +16,7 @@
- #include <power/pmic.h>
- #include <power/regulator.h>
-=20
--#ifndef CONFIG_XPL_BUILD
-+#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
- #define ENABLE_DRIVER
- #endif
-=20
 --=20
-2.45.3
+Tom
 
+--U5o8/US3NEmtepr4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeUEXQACgkQFHw5/5Y0
+tyx8FAv/bFMKXlHtjb5U0tAaWml7kZDdPV672zElGwbaZDlrzFWr6g/BSffK217k
+MbJcfWUZ4ioxnWAgPJsD8NcIInR26e0UCaVumnuNd/8FS7Wi/Dv0Rq+7wNaKy+Kn
+RmSstUTc1GIV2BlaFO4Y/BsKuI1vo5EE4qf2vXcnJWWIS1M85w/Jcj2rzH8j3dU2
+Bw3v/JN5+vL3b7d4Rv+J12H/7V12oXm8kooHtPfiV8PbGmk5Klo0hUcbR1y+T4Ce
+S+0tqdChETQNk79Rm+3AAXBTOlf3Q/VxichpjQafBzAjw0P72UkxmzV/Vm8z5FgY
+vhM5gUcAst41IyEH2f/W2pBgdx6xOn6/2VDE7wDgLgXSP84dJFVxz+7WpoRNnHnS
+p+2reCGquMlECOz2Qg1YHY5WfT8RXibp3TU/jYdgTEUN81jFJf0wpZucs6NwiqTp
+2rhnL4Rh2fPizk2i1uyENpnLpEqjfMvP909FEdl9suNfOCYiRGcZpKc0ci/CtB5z
+WlENB4Nd
+=4JEB
+-----END PGP SIGNATURE-----
+
+--U5o8/US3NEmtepr4--
