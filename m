@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D22BAC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8669CC0218B
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90EFF80C59;
+	by phobos.denx.de (Postfix) with ESMTP id EA7FA80C6D;
 	Fri, 24 Jan 2025 16:26:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1737732386;
-	bh=wZaU/zNtvtTbanGJ+UD04mAyr0999NsN8ejB/i3Rfjk=;
+	bh=JNiAinz9/8Ztu3CarykR7rfJb2rzAOt8j2EmEf+AORY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=L7GBuO25qxSU5CGfO0mjvO7CX06Jx7TnArke15TCFesfgYGcRxUSXPHtHrnMioVMl
-	 DjCZm3Uj/8wHYTfrt756tsNi9ixYRZaONGBNL7qXrhN5fQN/+iMazCGVzpT5yH+fPJ
-	 pzeGsV2CT4LCNNgOjRQIHa2S2OLHiOx0Q3vHLHijpjj2kM4ww9SdXs6GYEiOWvoYWW
-	 8dTi7gGPw+vwSLc7XoNNBc/pgKT2psQOa/c5mMpjnfKpe/KNUN694kzJRdr2tHJPyK
-	 6MNM72RmR3lQPUEmeKIxvIqmIkLsSd3LF14McTmg3Loo9wMvqLG9nPJ/QyMDKvRjDy
-	 EapSNw/TyfaJQ==
+	b=Gr0GQ2bzcsGdm6HZi+W8JCdwGnxjC88pasHB4TIDKtdEIgUdJiG2I8393mwefwUah
+	 BD5QEUw6cyd6Y7R3ZyJb3Xoiym6MouEbbKFbC6HumPaVwOyDwk9WnzZLuvtvpkJNXy
+	 7COGKT869WkEgddotybyruBi9hFEmIy7rY1pRYJ7LH8ScpsOcYeVNSuKJMugNAPupI
+	 Us+CTBXGyoEIg6mtxXd6N9GVE4z6ScpTkU2cJh1wUj2wDkvQaTfZQmqPapQhbE/ElX
+	 OwRc+Nogda+Li3/EM+WBTLhmadu/uYCqgAsAxEBPmezii18ED5Eg0uaF3S8hJkJ8q+
+	 9chcYz8cxV5Iw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 545EC80C96; Fri, 24 Jan 2025 16:26:23 +0100 (CET)
+ id DC14880BAD; Fri, 24 Jan 2025 16:26:25 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F057C809D2
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:26:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA64C809D2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:26:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="XuWXN9oC"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="ataC1HyI"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C2837108873CC; Fri, 24 Jan 2025 16:26:18 +0100 (CET)
+ with ESMTPSA id 661C1101D2388; Fri, 24 Jan 2025 16:26:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737732380;
+ t=1737732383;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wZaU/zNtvtTbanGJ+UD04mAyr0999NsN8ejB/i3Rfjk=;
- b=XuWXN9oCqxVUBiPGBgG/CTAnj63GJewahGTtOoMIwF14BLvmrVwXwnx/zPj28YjrpXMLvT
- LXDw9168/rf0xb5mxCZAMasSSKi7TkebiRvoVrqu/DEuChlywfyoJC4aFMFDswJMOUgqRh
- p+ygjAwQNauFkKuMylBVEYq/98OweTClR76kmpT0ysaCysf4qFYBevMH6Xb+qDqOYsAa7p
- M7bfYtxdAC2ZDxguV9SyBFiIt+aG72gIFFDj4osHahjvutmbI+IuX1uRnmrez9LiOmLAKZ
- ubl6QdQ7GR4msDaEFTnfobhe78gRGOX4Pyc4Qs3HFspaNFLm24ojVeDs1ZJCHg==
-Message-ID: <05ef8aa9-fc2c-44c4-905d-13cf81b35d9b@denx.de>
-Date: Fri, 24 Jan 2025 15:38:27 +0100
+ bh=JNiAinz9/8Ztu3CarykR7rfJb2rzAOt8j2EmEf+AORY=;
+ b=ataC1HyIZnrgZ07CtVRtMGFXEIl5yfKd6DsCxIe5eXzGpF8puFBQiT3XSx+BF+4GtPazbI
+ 68ZNjvoVIz1dXG/3eNg/3fLXUHEUKXlaeOEl4yEbRSfT4+LAxkWhCw2t2ZOVtSz+uNXeXu
+ vf2oNtTo/2BG29ApPZYz7/5j+lCrsqmRj8caurSXVG+KFiSzClSJ94mpRuSNo641xavRFo
+ 7jisPvjMIYX3KKIHeLdjLtgUkOmnBGD7OLLHElQNU8FqMRtqHmGgD3llHM2f/0WfP+xxb4
+ 9R6g7R7nG4PuUymuYr/iopKLt2Hh/11Ju/KwnesWXCryzq/RnQonKMhBIhhBnw==
+Message-ID: <23affd75-93cc-4b72-8a34-6479b98e7a62@denx.de>
+Date: Fri, 24 Jan 2025 15:40:01 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 10/20] scmi_protocols: update struct
- scmi_base_discover_list_protocols_out
+Subject: Re: [PATCH v4 11/20] scmi: add the macro SCMI_MSG
 To: Alice Guo <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>,
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: u-boot@lists.denx.de, tharvey@gateworks.com, Alice Guo
- <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>
+ <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
 References: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
- <20250115-imx95-v1-10-93b28a514dea@oss.nxp.com>
+ <20250115-imx95-v1-11-93b28a514dea@oss.nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250115-imx95-v1-10-93b28a514dea@oss.nxp.com>
+In-Reply-To: <20250115-imx95-v1-11-93b28a514dea@oss.nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -88,92 +87,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 1/15/25 2:28 PM, Alice Guo wrote:
-> From: Ye Li <ye.li@nxp.com>
+> From: Peng Fan <peng.fan@nxp.com>
 > 
-> @protocols is an array of protocol identifiers that are implemented,
-> excluding the Base protocol. The number of elements of @protocols is
-> specified by callee-side. Currently, set it to 4 is enough for i.MX95.
-Can you please try something like this instead ? That should be 
-future-proof:
+> This patch adds the macro SCMI_MSG for protocols that do not need
+> _in_array.
+> 
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Ye Li <ye.li@nxp.com>
+> ---
+>   include/scmi_agent.h | 11 +++++++++++
+>   1 file changed, 11 insertions(+)
+> 
+> diff --git a/include/scmi_agent.h b/include/scmi_agent.h
+> index 755986d6c424ccc881ac0943a88735cbcfacb001..5508a126a6dc504afa6d896c78c760b1af0d3deb 100644
+> --- a/include/scmi_agent.h
+> +++ b/include/scmi_agent.h
+> @@ -54,6 +54,17 @@ struct scmi_msg {
+>   		.out_msg_sz = sizeof(_out_array),	\
+>   	}
+>   
+> +/* Helper macro to match a message on output array references */
+> +#define SCMI_MSG(_protocol, _message, _out_array)	\
+> +	(struct scmi_msg){				\
+> +		.protocol_id = (_protocol),		\
+> +		.message_id = (_message),		\
+> +		.in_msg = (uint8_t *)NULL,		\
 
-diff --git a/drivers/firmware/scmi/base.c b/drivers/firmware/scmi/base.c
-index f4e3974ff5b..92d278edfaf 100644
---- a/drivers/firmware/scmi/base.c
-+++ b/drivers/firmware/scmi/base.c
-@@ -258,17 +258,16 @@ static int 
-scmi_base_discover_impl_version_int(struct udevice *dev,
-  static int scmi_base_discover_list_protocols_int(struct udevice *dev,
-  						 u8 **protocols)
-  {
--	struct scmi_base_discover_list_protocols_out out;
-+	struct scmi_base_discover_list_protocols_out *out;
-  	int cur;
-  	struct scmi_msg msg = {
-  		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-  		.message_id = SCMI_BASE_DISCOVER_LIST_PROTOCOLS,
-  		.in_msg = (u8 *)&cur,
-  		.in_msg_sz = sizeof(cur),
--		.out_msg = (u8 *)&out,
--		.out_msg_sz = sizeof(out),
-  	};
-  	u32 num_agents, num_protocols;
-+	int size;
-  	u8 *buf;
-  	int i, ret;
+Is the cast needed ?
 
-@@ -276,29 +275,34 @@ static int 
-scmi_base_discover_list_protocols_int(struct udevice *dev,
-  	if (ret)
-  		return ret;
+> +		.in_msg_sz = 0,				\
 
--	buf = calloc(sizeof(u8), num_protocols);
--	if (!buf)
-+	size = sizeof(*out) + sizeof(u8) * num_protocols;
-+	out = calloc(1, size);
-+	if (!out)
-  		return -ENOMEM;
+Is the explicit assignment of in_msg/in_msg_sz even needed at all ?
 
-+	msg.out_msg = (u8 *)out;
-+	msg.out_msg_sz = size;
-+	buf = (u8 *)out->protocols;
-+
-  	cur = 0;
-  	do {
-  		ret = devm_scmi_process_msg(dev, &msg);
-  		if (ret)
-  			goto err;
--		if (out.status) {
--			ret = scmi_to_linux_errno(out.status);
-+		if (out->status) {
-+			ret = scmi_to_linux_errno(out->status);
-  			goto err;
-  		}
-
--		for (i = 0; i < out.num_protocols; i++, cur++)
--			buf[cur] = out.protocols[i / 4] >> ((i % 4) * 8);
-+		for (i = 0; i < out->num_protocols; i++, cur++)
-+			buf[cur] = out->protocols[i / 4] >> ((i % 4) * 8);
-  	} while (cur < num_protocols);
-
-  	*protocols = buf;
-
-  	return num_protocols;
-  err:
--	free(buf);
-+	free(out);
-
-  	return ret;
-  }
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index a51234eda5c..29a7fd85cc0 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -148,7 +148,7 @@ struct scmi_base_discover_impl_version_out {
-  struct scmi_base_discover_list_protocols_out {
-  	s32 status;
-  	u32 num_protocols;
--	u32 protocols[4];
-+	u32 protocols[];
-  };
-
-  /**
+> +		.out_msg = (uint8_t *)&(_out_array),	\
+> +		.out_msg_sz = sizeof(_out_array),	\
+> +	}
+[...]
