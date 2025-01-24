@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2420AC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 16:09:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BE8BC0218B
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 16:10:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EB5880AE2;
+	by phobos.denx.de (Postfix) with ESMTP id F101780BAE;
 	Fri, 24 Jan 2025 17:09:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7FFE80A46; Fri, 24 Jan 2025 16:18:32 +0100 (CET)
+ id 7762B80ADC; Fri, 24 Jan 2025 16:48:52 +0100 (CET)
 Received: from mx.skole.hr (mx2.hosting.skole.hr [161.53.165.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A42AF809D2
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:18:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0912880A52
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:48:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=skole.hr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=duje.mihanovic@skole.hr
 Received: from mx2.hosting.skole.hr (localhost.localdomain [127.0.0.1])
- by mx.skole.hr (mx.skole.hr) with ESMTP id 28B0A831D2;
- Fri, 24 Jan 2025 16:18:30 +0100 (CET)
-From: Duje =?UTF-8?B?TWloYW5vdmnEhw==?= <duje.mihanovic@skole.hr>
-To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
-Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/3] arm: mmp: add initial support for PXA1908 SoC
-Date: Fri, 24 Jan 2025 16:17:51 +0100
-Message-ID: <2765541.mvXUDI8C0e@radijator>
-In-Reply-To: <7e92df3b-d37e-4ab3-b76b-b53391e593c1@denx.de>
-References: <20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr>
- <20241231-coreprimevelte-v2-2-6a5445d92d11@skole.hr>
- <7e92df3b-d37e-4ab3-b76b-b53391e593c1@denx.de>
+ by mx.skole.hr (mx.skole.hr) with ESMTP id 7934182A0E;
+ Fri, 24 Jan 2025 16:48:49 +0100 (CET)
+From: =?utf-8?q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
+Subject: [PATCH v3 0/3] Initial support for PXA1908 and samsung-coreprimevelte
+Date: Fri, 24 Jan 2025 16:47:47 +0100
+Message-Id: <20250124-coreprimevelte-v3-0-870dd251b1d1@skole.hr>
 MIME-Version: 1.0
-Autocrypt: addr=duje.mihanovic@skole.hr; keydata=
- mDMEZokhzhYJKwYBBAHaRw8BAQdAWJZ0hsI/ytTqHGFV8x6tzd5sB596cTeeDB4CQsTf+wC0KER
- 1amUgTWloYW5vdmnEhyA8ZHVqZUBkdWplbWloYW5vdmljLnh5ej6ImQQTFgoAQRYhBG3/QdYN8x
- S1t2umMK0xk1JFj60DBQJmiSHOAhsDBQkJZgGABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAA
- AoJEK0xk1JFj60D1GABAJVSorZdMOlrp/oQtCSH/G53NE56x/JHA8VX+ZQBd/H3AP4/EcUf6eef
- DUxVMh2bdkmuQKsVZGgOGiXpMksrVntWBrQpRHVqZSBNaWhhbm92acSHIDxkdWplLm1paGFub3Z
- pY0Bza29sZS5ocj6ImQQTFgoAQRYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSH/AhsDBQkJZg
- GABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEK0xk1JFj60Dlw8A/i4lPOL7NaYoYePDq
- l8MaJaR9qoUi+D+HtD3t0Koi7ztAQCdizXbuqP3AVNxy5Gpb1ozgp9Xqh2MRcNmJCHA1YhWAbg4
- BGaJIc4SCisGAQQBl1UBBQEBB0DEc9JeA55OlZfWKgvmRgw6a/EpBQ8mDl6nQTBmnd1XHAMBCAe
- IfgQYFgoAJhYhBG3/QdYN8xS1t2umMK0xk1JFj60DBQJmiSHOAhsMBQkJZgGAAAoJEK0xk1JFj6
- 0DG5MA/iuo4l2GDEZ1Zf+XaS//8FwdXDO9nHkfbV2MHjF4NZXwAQDroMzBdMcqVvc8GABFlTTgG
- j7KrRDz2HwWNyF8ZeprAQ==
-Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIACO2k2cC/2XM0QqCMBTG8VeRXbfwHOcyr3qP6GJuxxyZk01GI
+ b57UwikLr8P/r+ZBfKWAquzmXmKNlg3pFEcMqY7NdyJW5M2wxwFIEqunafR2ydF6ifioFEq3TZ
+ lZRqWotFTa18beL2l3dkwOf/e/Ajr+6VOv1QEnnOlKxQFEQmSl/BwPR07z1Yp4q4u4K/GVEtVC
+ lGaMxqAXb0sywd/01556QAAAA==
+X-Change-ID: 20241226-coreprimevelte-1c26acfb58db
+To: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
+Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht, 
+ u-boot@lists.denx.de, 
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2271;
+ i=duje.mihanovic@skole.hr; s=20240706; h=from:subject:message-id;
+ bh=3ZhFyiy2qRvtNbYuNRKLLIS1F/vV/T/+Pkg5sBFletI=;
+ b=owGbwMvMwCW21nBykGv/WmbG02pJDOmTtxm5aDSYRqdx7nNgev2pIKDa2lveq6ChnXOWi61Fj
+ 72lpVhHKQuDGBeDrJgiS+5/x2u8n0W2bs9eZgAzh5UJZAgDF6cATOTiCYb/eYUbKtN5PZkO/WLw
+ Nf2UvUpPbpfAjSA1o9NCJv6T9K6tYmT4vuzrrVPzb+fG7d+Xqv1wQdCOj8W1G7oW+y38yuEfkLK
+ GGQA=
+X-Developer-Key: i=duje.mihanovic@skole.hr; a=openpgp;
+ fpr=6DFF41D60DF314B5B76BA630AD319352458FAD03
 X-Mailman-Approved-At: Fri, 24 Jan 2025 17:09:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -69,37 +68,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thursday 23 January 2025 13:25:11 Central European Standard Time Stefan 
-Roese wrote:
-> While building applied on top of latest version,
-> I get this error:
-> 
-> arch/arm/mach-mmp/board.c:55:7: error: conflicting types for
-> 'board_fdt_blob_setup'; have 'void *(int *)'
->     55 | void *board_fdt_blob_setup(int *err)
-> 
->        |       ^~~~~~~~~~~~~~~~~~~~
-> 
-> In file included from include/asm-generic/global_data.h:25,
->                   from ./arch/arm/include/asm/global_data.h:113,
->                   from include/init.h:24,
->                   from arch/arm/mach-mmp/board.c:6:
-> include/fdtdec.h:1189:5: note: previous declaration of
-> 'board_fdt_blob_setup' with type 'int(void **)'
->   1189 | int board_fdt_blob_setup(void **fdtp);
-> 
->        |     ^~~~~~~~~~~~~~~~~~~~
-> 
-> make[1]: *** [scripts/Makefile.build:257: arch/arm/mach-mmp/board.o] Error 1
-> make: *** [Makefile:1918: arch/arm/mach-mmp] Error 2
-> 
-> Could you please have a look and resubmit a fixed version?
+Hello,
 
-Yes, of course. I'll send v3 shortly.
+This series adds initial support for Marvell's PXA1908 ARM64 SoC and
+Samsung's Galaxy Core Prime VE LTE, a smartphone based on said SoC.
 
-Regards,
---
-Duje
+On this board, U-Boot is used as a secondary bootloader to work around
+certain quirks of the factory S-Boot.
 
+Signed-off-by: Duje Mihanović <duje.mihanovic@skole.hr>
+---
+Changes in v3:
+- Rebase on WIP/24Jan2025 and fix board_fdt_blob_setup() compile error it introduces
+- Link to v2: https://lore.kernel.org/r/20241231-coreprimevelte-v2-0-6a5445d92d11@skole.hr
+
+Changes in v2:
+- Drop arm,armv8 compatible from CPU nodes to match upstream
+- Add intel,xscale-uart compatible to NS16550 and use it in serial nodes to match upstream
+- Add include guards to include/configs/pxa1908.h
+- Disable CONFIG_DISPLAY_CPUINFO and CONFIG_CPU
+- Rebase on v2025.01-rc5
+- Link to v1: https://lore.kernel.org/r/20241227-coreprimevelte-v1-0-ac8243eee4e6@skole.hr
+
+---
+Duje Mihanović (3):
+      serial: ns16550: Add Intel XScale support
+      arm: mmp: add initial support for PXA1908 SoC
+      board: samsung: add initial support for coreprimevelte board
+
+ MAINTAINERS                                     |   8 ++
+ arch/arm/Kconfig                                |  11 +++
+ arch/arm/Makefile                               |   1 +
+ arch/arm/dts/Makefile                           |   2 +
+ arch/arm/dts/pxa1908-samsung-coreprimevelte.dts |  74 +++++++++++++++++
+ arch/arm/dts/pxa1908.dtsi                       | 106 ++++++++++++++++++++++++
+ arch/arm/mach-mmp/Kconfig                       |  12 +++
+ arch/arm/mach-mmp/Makefile                      |   1 +
+ arch/arm/mach-mmp/board.c                       |  84 +++++++++++++++++++
+ arch/arm/mach-mmp/mmu.c                         |  30 +++++++
+ board/samsung/coreprimevelte/Kconfig            |  12 +++
+ board/samsung/coreprimevelte/MAINTAINERS        |   6 ++
+ configs/coreprimevelte_defconfig                |  18 ++++
+ drivers/serial/ns16550.c                        |   1 +
+ include/configs/pxa1908.h                       |  18 ++++
+ 15 files changed, 384 insertions(+)
+---
+base-commit: 8fcb7a883231ac573a2e3ee0a44dee07b463cbc3
+change-id: 20241226-coreprimevelte-1c26acfb58db
+
+Best regards,
+-- 
+Duje Mihanović <duje.mihanovic@skole.hr>
 
 
