@@ -4,91 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A548C02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 19:17:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B4B2C02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 19:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E32780ADB;
-	Fri, 24 Jan 2025 20:17:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CD2F580BAE;
+	Fri, 24 Jan 2025 20:18:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P/D7i7U1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TVz3ouZF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00D9F80ADC; Fri, 24 Jan 2025 20:17:52 +0100 (CET)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 19DED80BB0; Fri, 24 Jan 2025 20:18:40 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DB0B80A52
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 20:17:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D061C80BA6
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 20:18:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-46788c32a69so32175401cf.2
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 11:17:49 -0800 (PST)
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-467a6781bc8so20114401cf.2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 11:18:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737746268; x=1738351068; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737746317; x=1738351117; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=a3+yOeong4sgqbg4NtQE7O4TgslT7+tGX23fNZL64y8=;
- b=P/D7i7U1QUJVAWnAfGrJlDciS/48fTFQ034xjRBD17wSPAxhWa773J8NA6r04c9kwp
- 8732SWoaUt7L8AiJ5y/qjZoo1LDPY2UVnPD5LuM1S48tt9Tl4MYZU/RXJDa/3YoUZKSC
- dEZHJ74rsPM39HzPQdNKRfxdrVIz0ZClx7znU=
+ bh=ElNsq2g5SyDNnCevDudDgcr8Zdy6kk7IFz/csTxfi10=;
+ b=TVz3ouZF28DhXG/8+lHPxbzfZsR13n1X8id1J7bCUGYXuMrMIMhchaSXb3MxBHLgT7
+ b+jev1IogXxPanP0MmayCDg8ZGGtHX9K5hGQUmhutNvWpPR/Z9nr6yqcVH1EWYLuYy+W
+ 4uUepXRB63rX8XiUkh8+69MUq9KW2LO6W1vMY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737746268; x=1738351068;
+ d=1e100.net; s=20230601; t=1737746317; x=1738351117;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a3+yOeong4sgqbg4NtQE7O4TgslT7+tGX23fNZL64y8=;
- b=UxI9iCaUqXwv4P1+omXgBeOqybayFahbdxRuffqJu5zH2aYO0F5wOq/LFheTSCHQGN
- dO0lN3W8Gg3jIFtLgrrftG/peRk9CK8/7iTde/AzMvkQxcnedHoMBrY1Wsd8RAY5+L0P
- bu7vKHbe/mFX9DG21JWLawnkquO7gHxx6twlrhdwmrUrgcQoHpKpTy5257TVS+2RLsuQ
- XLl52ABl4lqbl2nLRndmhgxVV3WHFcOWn+2rwGic/TsW3VT8dsi/Yef9OgSfQnnOjStr
- nBmw8BOLNdOHYD/f2e2ND0q18PqhVgnoTph+m/tJSMBSbdvdR5WEQxnXRMbbotDsCgEI
- frkw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVaJxzNJWphcaJVOtXAOJVeLVoIPubKrmszjLhufMakQZbG3bd7lpIcF4/+zNc1n1mybykPwrc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyT6YHC2sV41XJdye786+8V25/rs94/Nx3N7J9KTHQQB9RMBMW9
- QoAE+2yRKiAFfcEkXrkWsjgP9G2j1ipPNK6/Ao1jdzHjv9i1szpmPQxj2Mq8Hj2LfQb5xbE3lsI
- n
-X-Gm-Gg: ASbGnct6yzmkwqYE5hJTM/9UUixeWGQgMyGheh/F6+UP3JAYGCvIJiAB6VUTbVDQuto
- pDRh5VvbL1nKs5MehxS3JqiXZXmhRQBAvXjQXwxgfWZPzciF9t/PgiW1y5dWpKICzEMnKaH7XTj
- qk/ZkyhZ/y3K681YR/RtGV2PeysYcYBibV2YP0zFnXzImgaMBo7kZ1NALT8CTfDHDnJRy7J+0nJ
- MIVd7rIIMzwVJm56/8DCODbmMRjOSmVtNqLO05lbnWU6KGnzIrd0qZjo2dOVF1SLnOiw61JmGT0
- Kj28
-X-Google-Smtp-Source: AGHT+IE88hm9q9GiDoczZsU4z3Le0BbiDqyPBe7TePGbZjINBryhl5FjyooU8/AUd567tsBScn5o4Q==
-X-Received: by 2002:a05:622a:1314:b0:467:79b4:a103 with SMTP id
- d75a77b69052e-46e12bc61c8mr435182111cf.51.1737746268186; 
- Fri, 24 Jan 2025 11:17:48 -0800 (PST)
+ bh=ElNsq2g5SyDNnCevDudDgcr8Zdy6kk7IFz/csTxfi10=;
+ b=pKXAUAokrmIb7YKctSKcN4YBBhuE80DDWNGhDYHOzf4I5rUryuQtBwLx+QUjK/M1uH
+ HpkI6xe6xqge2mQ/2rYsqaXUKoSiJ/YMP2+LjGoxKArug+/38LcisZDFoAicp8v+siFV
+ 8U7x+qicNySqVB7IZnPnlopCXQzNjFizYzZnfSbl1QfOrjLMI2NrkBrxFAsVBIe13PKv
+ qFI9c2x4z0tvgguFk6EY/ppCrDXSpC/nZufp9e2y+2nN7euS0L9cXLIabcbOmmAiRJUs
+ C71LC+uO4zusXG7dYmgonBKBtBRhW22cPHQYo4JNBwVLRH8g1VwQJKUK3dKO70PB4Uyc
+ nF1w==
+X-Gm-Message-State: AOJu0YxrwX+GpFzwutnLVjwT/rofR68nZWWkY5eDNjIZ3Q49x2YMFi+1
+ jh7hAsB5PTPVJpZFUbt3QctV9T9L4inkhZ5rfSmtzTlqHm/cWNLKnbTQkj3mEtE=
+X-Gm-Gg: ASbGncu1cjFId6FvETiv6md0UCLhyHb6D5+wxhDZCypIzoyIiJCJLybAagGldm8YG3K
+ eVDbVDv8W0CN3lgW/W2jNPFLmz7W5DXN76aHSkAXlQReeEy9Z5Mt1IyfUrPA+GvSfwhsHoBFSEp
+ cH6kcW2LMzmQhmt77qwt4y9v6rdXofvxA0LfbMmiKxRecFrQRQZdkRI6oRZH/2WQljjAvpveFVd
+ Q/1ZN8/141etqVfJ6VZ+MTg/LZBsCTlOuKxTP9bwW15LoTvd1+ahdEyRW78gdCsqDPeibYU2+L+
+ Z793
+X-Google-Smtp-Source: AGHT+IH/9CS+1qCil5xpit52aOl89QCi+uFGdfZ16CXZcS+KvNsUp5qVOnNighehkB6jYRRCqtgZ1Q==
+X-Received: by 2002:ac8:7dd3:0:b0:467:597a:be4d with SMTP id
+ d75a77b69052e-46e12b37e10mr477109851cf.18.1737746316654; 
+ Fri, 24 Jan 2025 11:18:36 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e668636dasm12806551cf.8.2025.01.24.11.17.46
+ 6a1803df08f44-6e205136996sm11306146d6.12.2025.01.24.11.18.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 11:17:47 -0800 (PST)
-Date: Fri, 24 Jan 2025 13:17:44 -0600
+ Fri, 24 Jan 2025 11:18:35 -0800 (PST)
+Date: Fri, 24 Jan 2025 13:18:30 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
- joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
- EFI netdevices
-Message-ID: <20250124191744.GR60249@bill-the-cat>
-References: <20250122170858.961359-1-adriano.cordova@canonical.com>
- <20250122170858.961359-20-adriano.cordova@canonical.com>
- <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
- <20250123144205.GJ60249@bill-the-cat>
- <CAFLszTgCXvxMY0MAyhsvuNFResmDtbahuk_2_QfYE5sUxNTTjQ@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ion Agorria <ion@agorria.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH v3 00/46] pxe: Support read_all() for extlinux and PXE
+Message-ID: <20250124191830.GS60249@bill-the-cat>
+References: <20241206023626.2456858-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WNn4QZpa2H8QitPS"
+ protocol="application/pgp-signature"; boundary="eBF4ISVNXeQQVrpb"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTgCXvxMY0MAyhsvuNFResmDtbahuk_2_QfYE5sUxNTTjQ@mail.gmail.com>
+In-Reply-To: <20241206023626.2456858-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,132 +120,82 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---WNn4QZpa2H8QitPS
+--eBF4ISVNXeQQVrpb
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 24, 2025 at 11:57:28AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 23 Jan 2025 at 07:42, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Jan 23, 2025 at 07:37:26AM -0700, Simon Glass wrote:
-> > > Hi Adriano,
-> > >
-> > > On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail.com> wr=
-ote:
-> > > >
-> > > > check that the number of ethernet udevices matches the number of si=
-mple
-> > > > network protocols
-> > > >
-> > > > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > > > ---
-> > > >  test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
-> > > >  1 file changed, 21 insertions(+)
-> > > >
-> > > > diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/tes=
-t_efi_selftest.py
-> > > > index 310d8ed294..af9992a6f7 100644
-> > > > --- a/test/py/tests/test_efi_selftest.py
-> > > > +++ b/test/py/tests/test_efi_selftest.py
-> > > > @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
-> > > >      if u_boot_console.p.expect(['Summary: 0 failures', 'Press any =
-key']):
-> > > >          raise Exception('Failures occurred during the EFI selftest=
-')
-> > > >      u_boot_console.restart_uboot()
-> > > > +
-> > > > +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
-> > > > +@pytest.mark.buildconfigspec('cmd_dm')
-> > > > +def test_efi_selftest_count_netdevices(u_boot_console):
-> > > > +    """Test the EFI net device driver
-> > > > +
-> > > > +    u_boot_console -- U-Boot console
-> > > > +
-> > > > +    This function counts the number of ETH_UCLASS probed udevices
-> > > > +    calls the EFI net device selftest to check that the EFI driver
-> > > > +    sees the same.
-> > > > +    """
-> > > > +    u_boot_console.restart_uboot()
-> > >
-> > > We should avoid restarting U-Boot in a test unless there is a strong
-> > > need. It makes things a lot slower!
-> >
-> > Yes, if we can not reboot here that would be good.
-> >
-> > > > +    response =3D u_boot_console.run_command('dm tree')
-> > > > +    lines =3D response.splitlines()[2:]
-> > > > +    ethernet_count =3D sum(1 for line in lines if line.strip().sta=
-rtswith('ethernet') and '[ + ]' in line)
-> > >
-> > > This test should be written in C, e.g:
-> > >
-> > > struct udevice *dev;
-> > > int count;
-> > > uclass_foreach_dev(dev, UCLASS_ETH)
-> > >     if (device_active(dev))
-> > >          count++;
-> > >
-> > > > +
-> > > > +    u_boot_console.run_command(cmd=3D'setenv efi_selftest netdevic=
-es')
-> > > > +    u_boot_console.run_command('bootefi selftest', wait_for_prompt=
-=3DFalse)
-> > > > +    if u_boot_console.p.expect([f'Detected {ethernet_count} active=
- EFI net devices']):
-> > > > +        raise Exception('Failures occurred during the EFI selftest=
-')
-> > >
-> > > Again, this should be written in C and use run_command().
-> >
-> > No, if these are written in python already, we can leave them in python.
->=20
-> This is a new test. We should not be making things any worse.
->=20
-> > C is bad for strings.
->=20
-> ut_assert_skip_to_line("Detected %d active EFI net devices", count);
->=20
-> For C tests we don't even need 'dm tree'.
->=20
-> This matters. The C test is easier to understand and runs in a tiny
-> fraction of the time. Our CI tests have been getting slower and slower
-> and it is due to this kind of test. I went to the effort of writing
-> this up carefully [1].
->=20
-> So, NAK from me. Please use C tests where possible.
->=20
-> Regards,
-> Simon
->=20
-> [1] https://docs.u-boot.org/en/latest/develop/tests_writing.html
+On Thu, Dec 05, 2024 at 07:35:39PM -0700, Simon Glass wrote:
 
-I suppose re-doing these in C would be a good test to see if writing
-tests in C rather than Python is easier or not. But given that our C
-tests are also randomly failing (the hash md5 thing) that's not the
-strongest endorsement of them either.
+> This series implements read_all() so that it is possible to read all the
+> files relating to a bootflow, make adjustments and then boot.
+>=20
+> Unfortunately quite a few things stand in the way, so this series
+> finishes off several pending items: zboot without CONFIG_CMDLINE,
+> required support in pxe_utils and the differing code in the extlinux and
+> PXE bootmeths. There is very little new code, but quite a lot of
+> refactoring.
+>=20
+> The bootm, booti and bootz commands have all been refactored previously,
+> so that they can operate without needing CONFIG_CMDLINE to be enabled.
+> At the, time, zboot was left alone, since it is x86-specific and a bit
+> more trouble.
+>=20
+> However it turns out that the booti support doesn't work with compressed
+> booti images, so this series resolved that problem too.
+>=20
+> This series adds a programatic API for zboot and uses the forthcoming
+> bootstd 'image list' to collect information from an extlinux file. It is
+> therefore possible to parse the file, load the resulting images and then
+> examine/adjust the resulting bootflow, before booting.
+>=20
+> The addition of options to extlinux resulted in the PXE and extlinux
+> bootmeth having slightly different features. This is tidied up in this
+> series, with common functions for both. This allows the same features
+> (loading images as a separate step) to be provided for PXE.
+
+With v4 of 45/46, this fails with lwIP on Pi in the PXE tests now. You
+likely don't need more than CONFIG_NET_LWIP=3Dy being added but for
+completeness here's everything:
+CONFIG_UNIT_TEST=3Dy
+# CONFIG_CMD_EFIDEBUG is not set
+CONFIG_CMD_BOOTMENU=3Dy
+CONFIG_CMD_LOG=3Dy
+# CONFIG_CMD_BOOTEFI_SELFTEST is not set
+CONFIG_IPV6=3Dy
+CONFIG_IPV6_ROUTER_DISCOVERY=3Dy
+CONFIG_CMD_TFTPPUT=3Dy
+CONFIG_CMD_WGET=3Dy
+CONFIG_FIT=3Dy
+CONFIG_FIT_SIGNATURE=3Dy
+CONFIG_FIT_BEST_MATCH=3Dy
+CONFIG_SYS_BOOTM_LEN=3D0x4000000
+CONFIG_NET_LWIP=3Dy
+CONFIG_BOOTSTAGE_STASH_ADDR=3D0x02400000
+CONFIG_BOOTSTAGE=3Dy
+CONFIG_BOOTSTAGE_STASH=3Dy
+CONFIG_CMD_BOOTSTAGE=3Dy
+on top of rpi_3_defconfig.
 
 --=20
 Tom
 
---WNn4QZpa2H8QitPS
+--eBF4ISVNXeQQVrpb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeT51QACgkQFHw5/5Y0
-tyxZdgv/d8PNaecRXCB6UrQQt3B4zMcCTnu+QEs22B8UFOcc2Ss0smeS0LmmkAHK
-jCbQ2aw/wqO1R1dpIZ44gSHjRuK4vSeu14JVIZ0YMxp8gcsqbx+4AgJYTQ88gxKB
-fJbB+mW8IlKItetTZHLb1On3fCOu7Vo/g+1Zdui8gcaaWbvwebqKg7rsLsOkokjR
-FyU3DkuGWLDj2N+c+EoUWkBGcJO4ZDakuHi0G62xvP4DozTNeaOK9ipid9I7twKl
-ruzFJXSdrgyi+FZLk2kAIzzdI1jr/0Ef1qA1Gi/A3ScWKA7ZXpPSmDCapg8pUZkq
-VCaoRdawWemfhhyN7QRmIbXu/EzldZIEznlQxwXxWNACLkDgf81cYTd5qxLFX2Yy
-afceiZfqZH5JcCJFwFNCZ35mZNGOEs4uSgQ72iHkyxOI12C6CK9hc67sx85+/1fz
-2mHSUFUpvZwHB6ZpqHi+UTJRDGwOFOQyDHqbbKupPa3AQQDNJHXKDvVygUkQMg/E
-KocCh0K3
-=LDBh
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeT54YACgkQFHw5/5Y0
+tywrwAv+KOGYxv9gLSNdZ4fm9tbrbkaPEl3y/nV0kfb+eRivfhI8P6YPH32caKyE
+RtbczLwyo+r3TKwIHadppUAnUXOcNReXNviD8GfJji+pMjTh+hbskPsgC/t/bxyh
+Z+iAl4dm0ikbfeyVabWLoiC1o71ua/2ZhC5bLWq5IWh79cRjtBkHjat0/QYd7JfO
+3rzrsAAqJe6xwXOaiVcXf/5UQQd4aY2GD8z2ubw7A5sFr6kE90UmqYZ4b/xn349H
+6TGRit6E2TLjsqixlp3udFb1nvknODNGzKnj8fqOE3RsMfDVcPoWOFZ7ctbXgZQI
+n88N/2y7CfNXv1yaIyCKpoj35MAo6PBrHcQdSfyiNx8d6ZvwuBj4hrVhqH9pSHIz
+L3/TKCviqjEm1jlAXIdEKhel7xTfIveEDsrC7zk7O42StxU7gGKpJCY0F2ZxgRds
+/LAFUCW/wiQgYpasyCHcYA8TDW6wyc/gu199mUoULJQcAf0srK8uzwLzrOrJeMWR
+6rrqEl0P
+=aGOF
 -----END PGP SIGNATURE-----
 
---WNn4QZpa2H8QitPS--
+--eBF4ISVNXeQQVrpb--
