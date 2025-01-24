@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC17C02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 03:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AD5BC02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 04:36:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44DE480780;
-	Fri, 24 Jan 2025 04:52:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CB33807B4;
+	Fri, 24 Jan 2025 05:36:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qMaW8yLz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sn86Mu2D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6671807B4; Fri, 24 Jan 2025 04:52:30 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7C4E8076E
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 04:52:27 +0100 (CET)
+ id EE527807E4; Fri, 24 Jan 2025 05:36:20 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 70CEA80780
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 05:36:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50O3qLpX1288569
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 23 Jan 2025 21:52:21 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1737690741;
- bh=ngZ6JDzUv1y8XZscKIWinKhf8Wuo+giJN1cdvx6Bsf4=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=qMaW8yLzciGPhjAlPA+CTND4rrE8Ekedxc5TattYZBZpiuB1Sfl6MlBx3nEFSV07p
- KQ2gMvtcmnf+MTHyR5IXNSXcZcKJw/cwRXsU7EjDz/nAQrG/6SieksEHtB5mVj/REi
- EGB/4EAAbp6rH3SNcHrCg/DXPX1fvs/XNvlDRod0=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50O3qLvi016582
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 23 Jan 2025 21:52:21 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
- Jan 2025 21:52:21 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 23 Jan 2025 21:52:21 -0600
-Received: from [172.24.227.245] (uda0132425.dhcp.ti.com [172.24.227.245])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50O3qGET104417;
- Thu, 23 Jan 2025 21:52:17 -0600
-Message-ID: <cfd07651-98be-46c4-a273-392a8903277c@ti.com>
-Date: Fri, 24 Jan 2025 09:22:16 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-4678cce3d60so16713361cf.2
+ for <u-boot@lists.denx.de>; Thu, 23 Jan 2025 20:36:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737693376; x=1738298176; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0Qgj79ud76M9L2KGxJ7oH1tkNpfiOX5aoI45F2KUOLQ=;
+ b=Sn86Mu2DBTHwoTlK1hBu27mcA0XZmLPxIxGmhPlT+OhlO6ISELMAwTzr+TECKWF83M
+ rifrHbf2TsGnfZ+/DxR1anPeYreNmpk4tBhnbynRC9J4MOAMLyxMWK0XTlTwLtgQQpVU
+ pucQ8FtYrmZVxwFaxKXf5RbfRVp/TL8bYgGys=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737693376; x=1738298176;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0Qgj79ud76M9L2KGxJ7oH1tkNpfiOX5aoI45F2KUOLQ=;
+ b=MKHleIu/l7kwzXM7abqRcSN0kYQo8lDJlffgk/Ap6hEwkrfaGEB+wHpnITo/hdDYJv
+ wFhibCoW9kkGUDpMU1K8r9IxjewqJBlVsv0W6RGFQJ6GkRSCM8koN/iciE8lusz0f7pP
+ K13A0YyuunEjT9irrRbQuDX5dGd2OO01cvlBRFEAcfMQQrTA/H8XX78Mqq7+wYc7u2Bd
+ 4BOPTzlgBYHWTqHGk0zF1O/IZm+l+WpiNbTElimA1BSW4nwTWXrlXIbFSDdO/TrmJ0X/
+ wQmYs3uxOFAqVb9x40e4uoBFYFG3P3GZZ0Cs415pWQ10CTd0xrHtWURZg5gk3+emq4RU
+ L5Tg==
+X-Gm-Message-State: AOJu0Yxk12rV3x1L/yH8qh+r2Zh7pTvr6/SqZEX1EcpP95Q1x/KvNJW/
+ uMeP6b1B1oYVR1nMDV7qDiGYR5plKTSq1BWJGzNtw8ZNYucvFQc1Y0XtaHfOOYk=
+X-Gm-Gg: ASbGncuwh7LVd0r8dD0fiLi//mQL0pRRNRpEopPMzCjHb3gALX9bYaNE2bWPiGngZpY
+ MInjJwG3t3tCUMDazXAeldfUuAqq1ybJVKoRdMck0CIpj80WolfMtmyexnLGdf4irepOsO7AAFq
+ un5EJmFMlv6rFI8WuBJVZCmu2iNKasahjNKFb8olFcco+Cibexot3OsqB8+QSCQFUFNsBr1zONA
+ PtvAjtYtM0p8J58wbvRlklh4kYQZYkmT5L8GPSGDLlDOPz/XR/WqxU/n0Zv06b41bRZ7iIy6mJB
+ dJs=
+X-Google-Smtp-Source: AGHT+IHuMoF4UhQlpWSnAZ30Alp6ygVYZrGP9fl4BIeYJLVf15qclyW4qRRVY3/6A+NIhfmcQeyXGQ==
+X-Received: by 2002:a05:622a:1817:b0:467:b1b4:2b6 with SMTP id
+ d75a77b69052e-46e12b7bf21mr452345811cf.38.1737693376321; 
+ Thu, 23 Jan 2025 20:36:16 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46e6689d9e1sm6142461cf.35.2025.01.23.20.36.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Jan 2025 20:36:15 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: joe.hershberger@ni.com, rfried.dev@gmail.com, yschu@nuvoton.com, 
+ JJLIU0@nuvoton.com, Michael Chang <zhang971090220@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250117104540.1580343-1-zhang971090220@gmail.com>
+References: <20250117104540.1580343-1-zhang971090220@gmail.com>
+Subject: Re: [PATCH v4 0/3] Add bitbang feature for npcm8xx and driver
+Message-Id: <173769337403.3052421.13628973120955019438.b4-ty@konsulko.com>
+Date: Thu, 23 Jan 2025 22:36:14 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/13] arm: mach-k3: j721s2_init: Probe AM65 CPSW NUSS for
- R5/A72 SPL
-To: Roger Quadros <rogerq@kernel.org>, Chintan Vankar <c-vankar@ti.com>, Marek
- Vasut <marek.vasut+renesas@mailbox.org>, Nishanth Menon <nm@ti.com>, Simon
- Glass <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Bryan Brattlof <bb@ti.com>,
- Tom Rini <trini@konsulko.com>, Siddharth Vadapalli <s-vadapalli@ti.com>
-CC: <srk@ti.com>, <danishanwar@ti.com>, <u-boot@lists.denx.de>
-References: <20250107093840.2211381-1-c-vankar@ti.com>
- <20250107093840.2211381-5-c-vankar@ti.com>
- <d2c8cde1-891f-470a-abd9-598847a9078f@kernel.org>
- <73bcc845-d35b-4f3a-9529-41310cfe5707@ti.com>
- <8bf7f805-a7d5-4324-b939-319b5d12ba6d@kernel.org>
-From: Vignesh Raghavendra <vigneshr@ti.com>
-Content-Language: en-US
-In-Reply-To: <8bf7f805-a7d5-4324-b939-319b5d12ba6d@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,39 +94,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 17 Jan 2025 18:45:37 +0800, Michael Chang wrote:
 
+> I am resubmitting the patch titled "Add bitbang feature for npcm8xx
+> and driver" for review and inclusion in the upstream project.
+> 
+> 
+> Driver didn't support bitbang feature.
+> Add bb_miiphy_bus function for driver and open feature for npcm8xx
+> 
+> [...]
 
-On 23/01/25 15:10, Roger Quadros wrote:
->> Hello Roger,
->>
->> The driver is defined as UCLASS_MISC which should be probed explicitly,
-> The driver was originally built without UCLASS_MISC, but
-> 
-> commit 38922b1f4acc ("net: ti: am65-cpsw: Add support for multi port independent MAC mode")
-> 
-> Added UCLASS_MISC and states there that 
-> " Since top level driver is now UCLASS_MISC, board files would need to
->   instantiate this driver explicitly."
-> 
-> Not an elegant solution. So we need to fix something in the am65-cpuss driver.
-> 
-> Looking at drivers/net/mvpp2.c we can see a possible solution.
-> 1) don't define .probe for the parent driver (UCLASS_MISC). Instead define .bind
-> that will scan the device tree for ports and bind the port device and driver.
-> e.g. see mvpp2_base_bind()
-> 2) in port driver .probe (UCLASS_ETH), if parent has not been probed
-> then call the parent probe (am65_cpsw_probe_nuss) . Also set a flag so parent probe
-> only gets called once.
-> 3) update all board files no not explicitly probe the am65-cpsw UCLASS_MISC driver.
-> 
-> Siddharth / Vignesh do you see any issues with this solution?
-
-I like this idea. It may need bit more than moving probe to bind as
-there are some reg accesses which shouldn't ideally be done at bind
-phase. But should be feasible to drop them.
+Applied to u-boot/master, thanks!
 
 -- 
-Regards
-Vignesh
-https://ti.com/opensource
+Tom
+
 
