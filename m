@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1576FC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 22:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40045C0218B
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 22:28:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6682980C77;
-	Fri, 24 Jan 2025 23:28:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C331B80ADB;
+	Fri, 24 Jan 2025 23:28:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YxQT66Z7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L4l3WdCk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84B1F80ADE; Fri, 24 Jan 2025 23:28:44 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id D659280DF7; Fri, 24 Jan 2025 23:28:46 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53BD180A52
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 23:28:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF3CC80A52
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 23:28:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6dd43aa1558so23960956d6.0
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 14:28:42 -0800 (PST)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-467b955e288so27788481cf.1
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 14:28:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737757721; x=1738362521; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737757723; x=1738362523; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3r4wdlr5oy/7a1XyhBjOMe0Mn77H7KiuEJuJPu1J+M0=;
- b=YxQT66Z7WLxlUn3pbEogbw8spPxdZpjbrkm+ePGMYkh8qQLV7MC3QxCnXuOnuhm+86
- ysSU735sRiY8skjcg2tw/uPjUBV3xf2F6+qww4SWHoDAttTLqCnY4kBoSR2orG5oKKg6
- ZZKjY+GzBFD3EQG/wzWGjp7w5JGBJlYK4nqq8=
+ bh=7en7+ZzFgVQ5KVq2Yv1LWPTdlZQJIOlJZlCcvD/wuUQ=;
+ b=L4l3WdCk3C4rbpM/UI1ryNhqxnoK9S23G34+vfEqggYxT5J1v2u/JWiv5gawhEfW5d
+ NszNj16CwPGOvDhbr22wJ4f1rDO56ANDLM2ZIqbwMUPEJ/2F4hdmpPinPfOFGBM4gOCd
+ ot1KhG7HdKqp5She6pm0T+L1TI+b8dTxxABqU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737757721; x=1738362521;
+ d=1e100.net; s=20230601; t=1737757723; x=1738362523;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3r4wdlr5oy/7a1XyhBjOMe0Mn77H7KiuEJuJPu1J+M0=;
- b=T+ZPzvbBLnturJF29SG7eWOg2IeIfUifK7/WoSTpo+2Q/RLy3zM6d5nu+5CpPK6GQJ
- 2e58BxKCx/y+atuhiB2MJa/WyIOixe0orQgY2rRNklwBjM53E84Enh3YjJ7NTwnJGN8l
- Q+MMSV03+tFli6FOfXZNVBHMdP4ItH9fgGNDWT9FkIdMNfzH2blnd3XCzU8K3NUSBbG8
- 4UwHzl8jJ7+fM3dDdrPg/uRkympMByQ5p7Nw/nprIH4NkEfGInknpbziBsrctk+2DQfS
- ++wVM3NIuLwORGecGBxPyCGpJ3b6ddhrl1+WcBWjp2fJd25r43KbQsXZjKs9kxybymVl
- EOWQ==
-X-Gm-Message-State: AOJu0YyD0ZKlE7YRXOfTIdvL7fSvi6gmYJS/XkLiyBLlAlfAkGZSxcQo
- yQEUL934gY4AF9lKsNGA5v/5EABeXvLZ47PB4pi4ohLa3jyyPBGdRC4tb4C3wW4=
-X-Gm-Gg: ASbGnctzcGkk3LD5cKAEyyOhpXT6h5drGHlNyOF7Obl18x6EBU1fS0ASOfbJiOdycF7
- tRxEyABm5Wz+uFrrRyYhz4XqOHKFehEy0FQgHqqDJAA3X9IFzTrTaF9kcsdpuAkHXkLPzh4wT9L
- PqKih/T8IkRcqWD2VFnqm8+Bb50mNIJthJISs2VTn8qj4eBZet/V6RI+6osfsfVS1JB/izoiYXx
- SIGXAzJKwMkZgomxnHyjz0wx0aBLTMnYiSQerr7j0HsFXDzTaL9S5bpTXf9vbybRVd5JAQfjpC/
- B9o=
-X-Google-Smtp-Source: AGHT+IGg6ssbYrOeFNQwjsMeRpr+5s2WRK96GHCYuBNdIMm0oScb7MJ3fnroZ9pFm+hyzJjj9ChnBg==
-X-Received: by 2002:a05:6214:54c9:b0:6d8:916b:1caa with SMTP id
- 6a1803df08f44-6e1b21ef52fmr542996696d6.27.1737757721226; 
- Fri, 24 Jan 2025 14:28:41 -0800 (PST)
+ bh=7en7+ZzFgVQ5KVq2Yv1LWPTdlZQJIOlJZlCcvD/wuUQ=;
+ b=ix+iXetwC0hrxKzOXsaByaPanjs31ETZ7zECwJIltJtyYhhC1wIDV7v/ZBE4xALOdh
+ EJHaSELCCIe3snE9FBMymeYB32ddJSCuUPH5o1k2OVXQwjUA0h9jNusPLyp/u0C4L7f9
+ zRGAA6QbqsswNS3TpBl1/mpMonHFh/Nm/DCy814V8VVUXW5mc3AsAZjOb5cC19TLRyVB
+ K2BcFB/hGiXBKgoVvWKBdJ269kmxrtcOiWeZpdXJhrEdAzIuLCQyZ1T9+iXbigyu7xay
+ xG2T7RdrDSTsQnX3jPtmI+7F15TSynT6RvWOBS+tY0WFhAuXqrMsNiO2+wSDZgSb/MLy
+ eC7w==
+X-Gm-Message-State: AOJu0Yywf4c9FtKTEihH+e5tM8AO49PM2EmgvjLHM+bWNeNXJQO13/rh
+ qKuTqHPUa3dq0rvs9fV/LNtldZDcoCrVNevthe8FlXTS7GFdyyqHdEnE3KUNIFg=
+X-Gm-Gg: ASbGnctpDVT65ic/BbasEjBWryO1pYWjGWhY/jWx0dLfrRZIUMiO3wVHBUkWLGwCOzM
+ QpCMXQowhSATBAv5wL9QVoBnD8IO/oniFBRp0/Gxex1w2O1yOZrZ3hBiuIOV5z7wGA+m1fNei5u
+ BBPhJ0Q/6WpkbiQ2eaMdNiIfTkQHe9oNQ9t/gqxt6VU+/gV4ifD35rJd8jaSxw5dGZdF1g7xj8s
+ f061AQOZQh18KnlwZVXtnXCDnAn3dMv+5Gj+AEUda4X7F5Dvqb3lGxpkUq4jDQyIp9/2bK3D6WM
+ eAI=
+X-Google-Smtp-Source: AGHT+IE9Q/xwaqbBTMNp+K7hmj+917Lr2uuDUwK8dBM2+4h7S9kuaAhnLbee8Fi46ItLHHuq/aZuVQ==
+X-Received: by 2002:ac8:7f4b:0:b0:466:b382:a789 with SMTP id
+ d75a77b69052e-46e12a2d0a2mr499958521cf.4.1737757723609; 
+ Fri, 24 Jan 2025 14:28:43 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e2052498d6sm12787946d6.47.2025.01.24.14.28.39
+ 6a1803df08f44-6e2052498d6sm12787946d6.47.2025.01.24.14.28.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 14:28:40 -0800 (PST)
+ Fri, 24 Jan 2025 14:28:42 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Anurag Dutta <a-dutta@ti.com>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hiago De Franco <hiago.franco@toradex.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-In-Reply-To: <20250121153836.83878-1-marek.vasut+renesas@mailbox.org>
-References: <20250121153836.83878-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] treewide: Replace Maximumm with Maximum in Kconfig
- symbol description
-Message-Id: <173775771931.3136238.12379658221142813359.b4-ty@konsulko.com>
-Date: Fri, 24 Jan 2025 16:28:39 -0600
+To: u-boot@lists.denx.de, praneeth@ti.com, vigneshr@ti.com, u-kumar1@ti.com, 
+ d-gole@ti.com, Aashvij Shenai <a-shenai@ti.com>
+Cc: m-chawdhry@ti.com, kamlesh@ti.com
+In-Reply-To: <20250120085042.2767733-1-a-shenai@ti.com>
+References: <20250120085042.2767733-1-a-shenai@ti.com>
+Subject: Re: [PATCH] arm64: configs: Remove obsolete TI config
+Message-Id: <173775772140.3136238.10316540743046955867.b4-ty@konsulko.com>
+Date: Fri, 24 Jan 2025 16:28:41 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,12 +94,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Jan 2025 16:36:11 +0100, Marek Vasut wrote:
+On Mon, 20 Jan 2025 14:20:42 +0530, Aashvij Shenai wrote:
 
-> Replace Maximumm with Maximum in Kconfig symbol description, fix a typo.
-> No functional change.
+> This config is causing conflicts with how fdtfile variable is
+> initialized.
+> For K3 devices, CONFIG_DEFAULT_DEVICE_TREE= "ti/k3-<board>.dtb".
+> With CONFIG_TI_FDT_FOLDER_PATH also prefixing "ti", fdtfile is then
+> "ti/ti/k3-<board>.dtb". This variable is updated when fitImage is
+> booted and fails to boot due to the parsing error "ti/ti/".
 > 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
