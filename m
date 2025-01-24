@@ -4,83 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48777C02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:15:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38941C0218B
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 15:20:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87F8D80A3E;
-	Fri, 24 Jan 2025 16:15:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8DBB080A3E;
+	Fri, 24 Jan 2025 16:20:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T1e+tJkR";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="R4iJcNg/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58C3280977; Fri, 24 Jan 2025 16:14:55 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 535FC80A46; Fri, 24 Jan 2025 16:20:05 +0100 (CET)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::224])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4D6480ADA
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:14:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1B46809D2
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 16:20:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eichest@gmail.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4361815b96cso15290595e9.1
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 07:14:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737731692; x=1738336492; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=PfCA6XrcFE3SI50VS7v7aCAeLoaCQVUNw1sOddRHE74=;
- b=T1e+tJkRGok1YFgDS57Iiu+iS075XYqRuUUbwvxHAU1H2Dq1RYHtRsK3rtwJq3Y6R6
- JnMw61cCU/75dxjUflqc2i1wIa87WRTSC5DcZ9z8qSFsjQKNY3hQ9n2vTSs5IvTGgWzO
- xzIHMbNGeP9O6QsS3p8zsR+kUD8isRdl3KEt5mfABCM3peQTGcE0QxIOgL8FNgpq+quc
- 19YrLRSm74aqYZnUP3i+W3jQpFkcMp/WJHtEXa+OnbJHDJ1eL2//TdS6YdNC8YGPKK3l
- wIr8uC80TJJndKBSEr5ZmwWZuMYmZei5sOyR6HB5lP74BLh8c67HGXOCDTHlgypBtVaB
- 2q8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737731692; x=1738336492;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PfCA6XrcFE3SI50VS7v7aCAeLoaCQVUNw1sOddRHE74=;
- b=DYDF9WF6Iu6K7+WqGEjw6hIDYXka0OvbZiaax1NYGWoUU1qb0I8JphcpjrT3iDaP1A
- xSRE5N0LNzP2IVYQOww2jlnTcRhACnkMh3n18O8qni8nKuV7fmq54nwI5f+1EtZfDsrB
- 0Lc+DqPBqjgaq4k4FyS4EIhNXUm1qWgR7CAq3EmzhnlY2hvp32caIAR+/bFvccT/Y09/
- l1pNbR5BXwnijz8t7qjbKrK6CH2F4pCGx0rMO8oFeG1kFIff6gIpZfLD1/JbWVjKXZie
- 6m8gKSnjos6XoiY7Z6ak1POXTwOxH+HwTKE7M0ahg0Ygi/8m1XntfcgAV6DVF3wqn2W5
- LRtw==
-X-Gm-Message-State: AOJu0YxRng6MCDtVUfNqg57tIhRFIH1VewMYGKlieZRPSVEwQ/pMzJfn
- Yem00YMZ8vp1onBYriRbPcwBUJgnmr647zwsEPeShZCg1i6hBSHVZ65dVEVs
-X-Gm-Gg: ASbGncsaUGQGokT2mRarPP0UZDylCVNEIXhETc7svy3ahs57fez6IHViO87WcmhuqpG
- FK1LGT2AAl4rOPfsU2N78StgZ+3hF2qmArBrOMyAe598B2aYRJB8hE4GiW6uln1zRQaam/RzcWm
- dsA1JoXmy/R0P2Q759XTipNE9Ly30CtawPGmaiTbxVZJXEwVsIE2Tzi3Rr1QDiHlsyr9DjtA8sp
- RNcrSF2fULmSe00Cz7sGoxc1rBBk1YFW/A9riHC7CiqrwSM9IL0oBGg6P5wknfS/Vju19VVx+rc
- xt9e8Iu1
-X-Google-Smtp-Source: AGHT+IF1I6NkT3IR6XnLOrzkLDWLU3fv5gMWM5bXAfg+IHN5D8S9HLhYEhfT7tOe8N/r0yVCsC4+Gg==
-X-Received: by 2002:a05:6000:4025:b0:38a:36a5:ff81 with SMTP id
- ffacd0b85a97d-38bf59e254bmr29399596f8f.40.1737731690533; 
- Fri, 24 Jan 2025 07:14:50 -0800 (PST)
-Received: from eichest-laptop.lan ([2a02:168:af72:0:58db:611:d7b2:c596])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a188915sm2932826f8f.41.2025.01.24.07.14.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 07:14:50 -0800 (PST)
-From: Stefan Eichenberger <eichest@gmail.com>
-To: francesco.dolcini@toradex.com, trini@konsulko.com,
- stefan.eichenberger@toradex.com, emanuele.ghidoli@toradex.com,
- joao.goncalves@toradex.com, vitor.soares@toradex.com,
- igor.opaniuk@foundries.io, max.krummenacher@toradex.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1] toradex: tdx-cfg-block: fix switch to user partition
-Date: Fri, 24 Jan 2025 16:14:30 +0100
-Message-ID: <20250124151443.576075-1-eichest@gmail.com>
-X-Mailer: git-send-email 2.45.2
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 7507AE0005;
+ Fri, 24 Jan 2025 15:20:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1737732002;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1Pqlrjz3WIXBMQaaplSrD/wIAfd8ZObJ78NutyYUX/4=;
+ b=R4iJcNg/U939ax/ucXbUkUB0BWYqin0dVZvePUBL9GDuwacmSE80sO5i4Jo2DYFqqtmjdK
+ gQ0fUsYp1sUNS11Oqp8qKf5PuNU/l0P17K7AAijzGehW/+2uNfePKik6Y+wVf5Y2l4/X++
+ QnIwG5J/PFcSsaVEpGIkYv/PLBzyWVz6Im3UC8onj929/SVg6BDolwbXiR2i4l9RUjEN8m
+ L3vokzOsLvE9/LOLZAWex5jo1+FFy3nm187Et+wZRJ+SpufZj/moz3ZCHwJHjnvcJuFjg4
+ o4mKhji8vz6ZDLwocKF5Tvdbr/O41FdQdd2EnmxiASD94pE1ifKaeAamBnZkYg==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,  Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,  Fabio Estevm <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>,  Thomas
+ Petazzoni <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
+ <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v3 05/13] power-domain: Add refcounting
+In-Reply-To: <CAFLszThgbakRhLTC3T04uV6W+MbXENyVvhT4Bvam4ymmUqBf2Q@mail.gmail.com>
+ (Simon Glass's message of "Thu, 23 Jan 2025 07:38:32 -0700")
+References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
+ <20250110-ge-mainline-display-support-v3-5-d2c0acea6feb@bootlin.com>
+ <CAFLszTinomkmj=gaKbX5WBPMsbr_3nxt45sQjXqKJ5q1rxcKwQ@mail.gmail.com>
+ <87a5blu630.fsf@bootlin.com>
+ <CAFLszThX2ULHHA1DOA-essfVJ_Fw=BgsR391iDT=bO+6j=UGwg@mail.gmail.com>
+ <87frlcr2dt.fsf@bootlin.com>
+ <CAFLszThgbakRhLTC3T04uV6W+MbXENyVvhT4Bvam4ymmUqBf2Q@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Fri, 24 Jan 2025 16:20:00 +0100
+Message-ID: <87r04sfdcv.fsf@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 24 Jan 2025 16:15:19 +0100
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,36 +84,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+Hi Simon,
 
-The Toradex configuration block is stored in the first boot partition of
-the eMMC. After reading the configuration block, U-Boot switches back to
-the user partition. Currently, this operation always targets mmc device
-0, even when the configuration block is stored on mmc device 2.
+>> > If we
+>> > want a power domain to actually turn off, how many times do we need to
+>> > call power_domain_off()?
+>>
+>> We do not? It is why I add refcounting, if a power domain has 2
+>> consumers, each consumer says whether it needs the power domain to be on
+>> or off and the core will handle, but in no case they should force it's
+>> state.
+>
+> This is a bootloader, so we do sometimes need to force something off,
+> or on.
 
-This patch addresses the issue by switching the mmc device set in
-CONFIG_TDX_CFG_BLOCK_DEV to the user partition, rather than using the
-hardcoded device 0.
+This, I do understand.
 
-Fixes: a2777ecb9d11 ("toradex: config block handling")
-Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
----
- board/toradex/common/tdx-cfg-block.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+>> > The function silently does nothing in many
+>> > cases, so it is not deterministic.
+>>
+>> It is fully deterministic, as long as consumers call power_on/off
+>> evenly (and this is already what we request in U-Boot).
+>
+> But I foresee people setting up power domains in board code, not
+> drivers. My concern is that this is hiding the real state.
 
-diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
-index 3855e15b83b..b2149438b88 100644
---- a/board/toradex/common/tdx-cfg-block.c
-+++ b/board/toradex/common/tdx-cfg-block.c
-@@ -312,7 +312,7 @@ static int tdx_cfg_block_mmc_storage(u8 *config_block, int write)
- 
- out:
- 	/* Switch back to regular eMMC user partition */
--	blk_select_hwpart_devnum(UCLASS_MMC, 0, 0);
-+	blk_select_hwpart_devnum(UCLASS_MMC, dev, 0);
- 
- 	return ret;
- }
--- 
-2.45.2
+Setting up power domains in board code is drawback. It is legacy
+behaviour, people should switch to the device model (ie. using a proper
+DT description) and stop messing around with board files. It's been like
+5 years since U-Boot forced people to transition, I wouldn't feel bad if
+these boards were no longer behaving like expected (mind there are very
+little chances this will break anything, as the kernel is supposed to
+re-init these domains anyway).
 
+>> > In the case where we *actually*
+>> > want to turn the power domain off, we are at a loss as to what code to
+>> > write.
+>> >
+>> >> Hence, I do not agree with returning error codes in these situations,
+>> >> they are misleading and they would have to be ignored anyway.
+>> >>
+>> >
+>> > How about creating a power_domain_off_if_allowed() or
+>> > power_domain_soft_off/on() or power_domain_req_off (for request)?
+>>
+>> The power domain logic has a hardware reality in many SoCs but is also a
+>> software concept that is shared with Linux. Changing the semantics in
+>> U-Boot would be very misleading and if my understanding is correct, this
+>> approach would be new.
+>
+> Yes this is quite a strong argument. Can you point me to the
+> equivalent API in Linux? I see pm_domain but not the same as U-Boot
+
+Yes, pmdomain (former genpd if I get it correctly), how are they
+different? From my point of view it is the same. The same devices are
+supported. So why would we want the API to be different?
+
+>> If you really want a way to track the state of the power domain,
+>> however, I can maybe add a helper returning its state, ie:
+>>
+>>          bool power_domain_is_on(domain)
+>>
+>> Would that work?
+>
+> Not really. We should have an API which returns -EALREADY or -EBUSY
+> based on the ref counts. But yes, we can change the naming, so that
+> this 'deterministic' ones have a different name, with the current
+> names used for your ref-counting one. Then the ref-counting one is a
+> thin layer on top of the deterministic one.
+
+Honestly, I am not convinced, but I will anyway assume we need a way to
+force a domain off. There is no need to force a power domain on however,
+as after power_domain_on(), the power domain cannot be off (except error
+condition of course).
+
+So I'll add a helper to force power off. It will be called
+power_domain_off_force() and be preceded with a comment stating that
+this is not the standard approach, to guide people towards the
+refcounted helper instead.
+
+Would this address your request?
+
+Thanks,
+Miqu=C3=A8l
