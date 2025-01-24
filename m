@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCC11C02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 19:18:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D09C02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 19:21:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32D9E80C96;
-	Fri, 24 Jan 2025 20:18:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F33FC80BA6;
+	Fri, 24 Jan 2025 20:21:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TTCyPc/G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q1WIzcVC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EB7980C69; Fri, 24 Jan 2025 20:18:48 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 8CECC80BA6; Fri, 24 Jan 2025 20:21:03 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 394EC80E90
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 20:18:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 663AC80A52
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 20:21:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7b6e5ee6ac7so203852085a.0
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 11:18:45 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6dd1b895541so48764336d6.0
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 11:21:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737746324; x=1738351124; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737746460; x=1738351260; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=larncJrmdDYtLn3J8N2XzcLKASI13muOER96gZIgmqU=;
- b=TTCyPc/GKM8zibWwsHfgt69bIaGZa9CeJzlkLrphc8LIcEcHm+rVJczjIHFI/TjSbg
- DYVbwdVT7ULZtCAoOV+EMqcnwr01oITwAQ9CVc/PKz1vHXgeZqKXe6K3XLhcDZ7l6oSC
- Wl5Iu5g6Wg0JtMLTruTQBjrxAuJPwHePQw5SU=
+ bh=Viw2MgaAoNqtL53N1rI+dS0tF4yaA3QAAQ+uuzheWZg=;
+ b=q1WIzcVC593XgEojHgl0NcWLTYy/fk5Mk27QCerKTYcDDJwKFcJwEsknVe1Gtrc7k8
+ P8QFeCCWgaptUkfGHwgpZNFkmuMr1vUKXBwTk+dpdnTt4qXGMyBWtp2x9pJO3PeTnOhd
+ FzCJ66+tCq7C9cPqqfUfv0jJ8+ltmVf0/HrhI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737746324; x=1738351124;
+ d=1e100.net; s=20230601; t=1737746460; x=1738351260;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=larncJrmdDYtLn3J8N2XzcLKASI13muOER96gZIgmqU=;
- b=gTqG8SlO4+tq3sa7lsR2751GPZefq4ik1lFQmol89m3W6YjzV4U55Wi+s14nYuufMu
- gcMjJH2xaDgrASs+Q6o2qKFaw5amI40apZt7QRud0AuVm1pKh+Y/ojCFFQMPFwv6Kacc
- Df0Xe9FH2R80R81KSyA9yGBnJLnIU5bHfJqldUlaoskAK6LWv+5SCjCV53q1fINYIkpc
- NxKUqzh0QZBcxGSMSRlLsMBhFUrinvHcnT1CuD3EivNJv3+7O8H8y3Bf9HUHEwTvKckS
- KHSiRb7MLzFPAZ/2MuhGq/l0Eo5Mc8MvuEB+7PJ8K9KcrRqVR93jqR9L06dHniCS5coe
- N6DA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWFBIhJOzC/IA32qreNNL1CpKkhh8mQ7ssRNPH5OzZMYcgPugo5oWBB6XtwueBbNSKAhPoT/5Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPsclecLBypv7XtJXiWdQkObr66mx7v6mAyX3aY7xa/OHvYhjT
- S6FC+1ImWHvsagsHUBn15kWj8tuiFpIcNqs77h7MJ2KpQKrDAuix5OVk9PdwpwE=
-X-Gm-Gg: ASbGnctKIZRkyK4+IWmPQdJMkRCLe3s2NdKdBgy80LQut10biKn2ag5Jhoi9PfelkLy
- LRJ53Fq+tR3Vz1wFNcIQlbwbRZ12rX88ENBoshdVk4vsQHKs73N6lZxpubF2tjpjk10KOXbo3Eh
- z6IgRXQ4fTPsC9K70xSu0IyKFomcCGYjljEJO3xEBes5K92293V49a+yW/XQ0sITtSFqchSzJhz
- Y0q3pU8WIhrppIIsV0zy7odLfKbB470Nw7rmdhTuwuyE5Hz+Zr6x6BiAqGu/bkI8zWw0/5Gz7BS
- I+Rj
-X-Google-Smtp-Source: AGHT+IH43f/pZIaegaLciI15mmV5o0jgePPtvCAYRwKjbMl0dFV7r23atvSkOp0o178ngItWsTMljQ==
-X-Received: by 2002:a05:620a:4442:b0:7b6:d6dd:8826 with SMTP id
- af79cd13be357-7be63289dccmr5603599785a.55.1737746324082; 
- Fri, 24 Jan 2025 11:18:44 -0800 (PST)
+ bh=Viw2MgaAoNqtL53N1rI+dS0tF4yaA3QAAQ+uuzheWZg=;
+ b=GSJbBBk6MoM4zh+SOw0aR9TPwKQJrF4TLEOWy6St+xLpLaFOXONHD8tHWBflIyrXkl
+ 10+k1+NPU9kx67QRSArZ3+54SjHnt0Qowjib9U6K/zjQ1VEgRMqBepI2OlxLUeT0ujM5
+ WoGH/REeroOeLEgeeB2dkmKUxKfYLuWVv+fnPqXjm2WnWjFAVKyoNkvQEamzWwrTg+xf
+ o24G4D9paXiYVQ+WLbtQgqjDCdfUnS9COyIreOf3A/3k4RT2JKc9cKrkPIDFs2R1Omce
+ P9+FrygoUyuRPgKjQ6DHAdk0VMlUpaN9+TJ3VUYZ1ListMryryjqTVBcH0bviBqqD/ZJ
+ aSmQ==
+X-Gm-Message-State: AOJu0YzGQ8gmdziCwbh/U6x7PJVAYisxLqdIeEnh4z1BvuLLRzEEkCBm
+ LiKeSqlkEq8RZUD01V08JggsfkpZUAtdo13yInXtsfxElYB+aHI/dAJfMZhTxStwlrQmPtoYyIm
+ Z
+X-Gm-Gg: ASbGncvqAxUl1Uy1CJ4XsxfY0j02151kMYs4Qg3GUMS8+ASL73/UddKtQYKyEh/Q1qq
+ Vq/6fRGDeGjxl8e3GnKOThO7rFX8mzghs384wVqgmXgBuptPPsjBnCBVLwQr1RbAKmfj+ECZG/S
+ pmM2UZV0l2T9axKhaly9rRXdXh/8B+ZltRox0NxoK3lL6RPlVxearE9/xsv69frztwg9ETT7ijW
+ wyY7D+QnHzFgLFdMO+IEvxVq7PbARl6AYCVtqhJsjSNfpo3iQRAzvpOZbpa8Y2fkuhYQtZLzdn7
+ QW7F
+X-Google-Smtp-Source: AGHT+IFew2/M1t98KAN9Js0kJ8E5iuvgDhcQ8KNqS5hlWzvw+4TJbC2X88ib7wRkWe2NKnPxWXTOhQ==
+X-Received: by 2002:a05:6214:1c4a:b0:6dd:d513:6124 with SMTP id
+ 6a1803df08f44-6e1b220a540mr469608576d6.35.1737746459818; 
+ Fri, 24 Jan 2025 11:20:59 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9af0d1efsm122104885a.101.2025.01.24.11.18.42
+ 6a1803df08f44-6e2057a8fc9sm11256926d6.76.2025.01.24.11.20.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 11:18:43 -0800 (PST)
-Date: Fri, 24 Jan 2025 13:18:40 -0600
+ Fri, 24 Jan 2025 11:20:59 -0800 (PST)
+Date: Fri, 24 Jan 2025 13:20:56 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
-Subject: Re: [PATCH v3 0/5] Add pmem node for preserving distro ISO's
-Message-ID: <20250124191840.GT60249@bill-the-cat>
-References: <20250120105045.1281262-1-sughosh.ganu@linaro.org>
- <CAC_iWjJtjNE0-VJJT1+aCoaADDNYyy-niZSizo-Sn6898ArLHg@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
+Subject: Re: [PATCH] test/py: Add a report show test durations
+Message-ID: <20250124192056.GU60249@bill-the-cat>
+References: <20250124185605.372347-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CChDn/kKeqnGGPbN"
+ protocol="application/pgp-signature"; boundary="/ESv1knHy4XvKaaH"
 Content-Disposition: inline
-In-Reply-To: <CAC_iWjJtjNE0-VJJT1+aCoaADDNYyy-niZSizo-Sn6898ArLHg@mail.gmail.com>
+In-Reply-To: <20250124185605.372347-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,56 +97,69 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---CChDn/kKeqnGGPbN
+--/ESv1knHy4XvKaaH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 24, 2025 at 01:39:45PM +0200, Ilias Apalodimas wrote:
-> Heinrich, Tobias
->=20
-> There's a slight problem that I forgot when commenting v2.
->=20
-> Heinrich's idea of plugging this into blkmap is eventually the right
-> thing to do.
->=20
-> However, when I started coding this I only added the pmem memory as
-> 'reserved' in the DT hoping that would work.
-> Unfortunately, this depends on a kernel config option. I've managed to
-> track down the problem here[0], but I haven't found time to test it
-> properly and send it upstream.
-> So for this feature to work reliably we *need* to remove the memory
-> map we hand over to the OS.
->=20
-> Since using EFI memmap function into the blkmap code makes no sense,
-> can we perhaps merge v2 (or a variant of it), which only targets EFI,
-> with an explanation of *why* while I try to sort out the kernel issue?
->=20
->=20
-> [0] https://git.linaro.org/people/ilias.apalodimas/net-next.git/commit/?h=
-=3Dmain
+On Fri, Jan 24, 2025 at 11:56:04AM -0700, Simon Glass wrote:
 
-I think this is a reasonable path forward, FWIW.
+> Execution time varies widely with the existing tests. Provides a summary
+> of the time taken for each test, along with a histogram.
+>=20
+> Example:
+>=20
+>    Duration : Number of tests
+>    =3D=3D=3D=3D=3D=3D=3D=3D : =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>        <1ms :  1
+>        <8ms :  1
+>       <20ms : # 20
+>       <30ms : ######## 127
+>       <50ms : ######################################## 582
+>       <75ms : ####### 102
+>      <100ms : ## 39
+>      <200ms : ##### 86
+>      <300ms : # 29
+>      <500ms : ## 42
+>      <750ms : # 16
+>       <1.0s : # 15
+>       <2.0s : # 23
+>       <3.0s :  13
+>       <5.0s :  9
+>       <7.5s :  1
+>      <10.0s :  6
+>      <20.0s :  12
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  test/py/conftest.py | 77 +++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 77 insertions(+)
+
+Whitespace issues aside, we should probably not do this every time, just
+when requested.
 
 --=20
 Tom
 
---CChDn/kKeqnGGPbN
+--/ESv1knHy4XvKaaH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeT55AACgkQFHw5/5Y0
-tyz1BgwAluLaEVTqBwwxSEbfRvUafcvsDO6ETS2332goyOQsXGzqd6T82yr0Ux+i
-qELBFGx5SVaLvvVGXDXdG97fnM+Cn3aEbQqbOLrJ25+eferlTHT2qWxq8AITonSr
-y/8RC6Dv+0pJZesZcTPJIkkQ25muVZQ9d/5luHE4/6c8SKxta9/f+3H6dn4FNDg9
-wPs2jbC84cvI7Y789pFi/43iq/rfttwMJP4xrGucT87XY6FgaLOqGyfbnGktlbjK
-i+peUHBSH4gMj4DyGCraqmA0nsg3wTV59Bi7Hn/t4jdt3asHA6oGAC9ImAGsXSR9
-zM4FLOMh9OzpuG60WU9/PCS1INZ2nQk+Jjz3a3j9ULE5/yyKZi1bWu2JQ9Sw6TMO
-8WpuIzErSLhh4sLIYnf24wB0db+Aw2MYXmJpNr4sZbNQZkEYvaWH86nxhgGYgz85
-XkeiKPRomPzbeh0WWnwfOt6Yvp6YZrYYfj9N0iHJ9/6TmVDB3MyWnmns4RbKlyNp
-Lo8SruBm
-=hN7Y
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeT6BgACgkQFHw5/5Y0
+tyzJhgv+LDtnnlCAxBZMGmenbUSEmsugWelfdSZ566B8bFM+zA0mbK5Oj5XvUPoo
+hcw1+SKjrIVuuwGsT3IIkUOPJl72UYXPzoygIjgnlZM0EsbBH5bSvZhgPZ+pyuI7
+hDQ/Iph16Hqz27NOQfYLFyUmLUif6o5f6ishWAIAmF44NxXgK6sbV98cBjhdgkwG
+pWqUS+g9GYSXdSM2wQRYAuSm0n4vy7fe9F0IUV3AIO2L3/aMr5/80csWiI/6VI50
+PKvIU5ahqTCUR2Ocnpm49+uyhNPVtixd9AGwZqV57Hkq0oVeBeQtz6TcI8248hot
+tRNKsqnYVE1vrpXE6rq08n4hYhd0hdDGzNj1Z8Yuk8+slQGeGW/YAuYYg7FXHdnH
+SWS/hXEHcMhcg6Z+OwxbAkcvoNJNzHi8gQj098Hbqb6X5dOMBsYSQpx2ySPbYBJH
+qGDbcdcdys6PvBffsWUXlkZZKDomPRP6xpVMokx/N40KsNT/Cu6EBm9bl4fAFEfq
+I9DqqNJA
+=do0U
 -----END PGP SIGNATURE-----
 
---CChDn/kKeqnGGPbN--
+--/ESv1knHy4XvKaaH--
