@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBA2EC02181
-	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 19:30:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E55AC02181
+	for <u-boot@archiver.kernel.org>; Fri, 24 Jan 2025 19:43:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E62C080BA4;
-	Fri, 24 Jan 2025 20:30:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E6D3D80ADC;
+	Fri, 24 Jan 2025 20:43:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V1kLYXn/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WWZPmNAK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 701EF80BA6; Fri, 24 Jan 2025 20:30:04 +0100 (CET)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 5490680ADE; Fri, 24 Jan 2025 20:43:45 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9A2680ADC
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 20:30:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FD4B80ADB
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 20:43:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-467838e75ffso33689331cf.3
- for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 11:30:01 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5d41848901bso5014807a12.0
+ for <u-boot@lists.denx.de>; Fri, 24 Jan 2025 11:43:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737747000; x=1738351800; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tuMBcnT+RRdw0gDYCVVd+e7Cjpd+MvhkZ21aaHaoPQ0=;
- b=V1kLYXn/VVAnw+vH+cMBEv0CqYuGWRehPrdWvlqPt7FV4hCI/5C/xQRTKQD8K8L7SV
- j3Jl7yzA0qmE+6NMBls8U/NjKyOQr8o6JvMRNz5FppcrEUvgMeHU31BM5WiwOimxqd2Y
- WCzyHEBYkxngCBex8bH2u9wdbBBANBdwWSSSU=
+ d=chromium.org; s=google; t=1737747822; x=1738352622; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+vX9kilJJcE8GOTS2ufi0RCQSOQbaovATR1FYnt9lq0=;
+ b=WWZPmNAK9ivI6EY1CffPogb6kGsWliS6iMjFd3NsT9V/8bMUPL7+rgUncNnj/E+5o7
+ zCC2e0YbXUds+NDel3Wmsh5Xd/1NJolYSLgZhD5HtyMYgSnP2nrxBmLZbaMUcpfF6pBD
+ rKBcZj9zT96f8jKKc08Py0aGV/Kw9Gtd9Qzf0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737747000; x=1738351800;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tuMBcnT+RRdw0gDYCVVd+e7Cjpd+MvhkZ21aaHaoPQ0=;
- b=fDtlXOa113WkxQiykYMWvO6LQI8ejwMNith2RuvxKDcy+D+TVEEKEIqnR6HoDo7AMz
- LTElIBpBBOQXEHkb7xnDJofnQ7rBH+nzR4O8NhUMZjMZOGt8lALH0v7Mgx1au4sQ6mV0
- 1ivZNJSlugsn+r4hAUhUmobiTVchMe+9ZW+4NonIKz6DvrwNHks5gpR+e8R3wPzkVOi/
- POuuptYNj9wSfSsjSRk3x2HYtkOIhXnX/xqth+0InrZDWk3kPXsnVBI/u7laGwF/geIu
- Qn1QFoi0TKz9oMdJjo0/o3HMohFCPLhFZLH2sEHd0j/2m5thI1OUzk50f5/xR7oLN2ph
- xpow==
+ d=1e100.net; s=20230601; t=1737747822; x=1738352622;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+vX9kilJJcE8GOTS2ufi0RCQSOQbaovATR1FYnt9lq0=;
+ b=lj/S/q2rWA3uwGtylIdIad+UpyQm6AJQ4vtG3rAQYSgY0CNKZQ91NW1ZagvDb/s7pw
+ 21/k05UQKpUQM/WdUtG14zxlmsrTibn9w0Cvt6HgTr3eSVIAiDIKUL23+olNeaIafsQB
+ 3nafjZWelvRkVBzrwA/dCrs3OEwegvEA3WMa4nVUEbbxhZYkLVZ5KrUlc0h6ydwYylcr
+ z37HBtZoUp8za2Y7JUn983Y7mOLTxASTPPuIxmjsjcFISF05uF6S/tC7mApfvn19GljF
+ nPOT4vsxxm3V8f3XgFY//xldeBbbtXugunVQpFeiUlfOpxS0dbqM6/EePNqWHY7yDUMK
+ aSpg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmnpuZqmVJC1k/YEhR+jX6Saacy6uBJsN4oV6gIqh47Bl3orB297VTrBDLse8n7LERlXvCxkQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx9A6b0uB1j4Otj6kb+mkr9fC8Lp+xqU+2rGBgyduQkvkD4Viwt
- 4MfnGY6dWcncG/a4oMRo1BVBu0EwRJMiEkOVq80WGgeaxiJ+yqgF61tuPBYU6kE=
-X-Gm-Gg: ASbGncs5W3moOJyjF6LmfBifY5ayEKPEZP2SOI4lEGXUqgxfLP5ZkiA9VLKGW8fpsVL
- 2ZmtoY7dy2gf8tHvIEB7DDlOIWSygqFM7lWdvSXxIFG9wkztuNz+xpmcIVTSfqH5QsJKnET2Wy0
- lOYUUqZGUGXwoRsM+sWRrR2BWfPGT/HJRC1u6IaH+MSC2XhnG6LqgGaXhjC8CsspYbwcj6jg1xX
- GvT8CBFyZ3s2a5YOO3kyjXJaXYDj3B4Vd4M9gIJcCmry0fCkE+wO+DSSTBmpiherolFvXa2g08G
- kau8
-X-Google-Smtp-Source: AGHT+IE+AEi8EcCMnlIKvHesHuTN6j8RXTDqZrrV0HdNnlNMC+1teMIYVDYEUCIQl64vyIkD5bElJw==
-X-Received: by 2002:a05:6214:2261:b0:6d8:8667:c6c2 with SMTP id
- 6a1803df08f44-6e1b217e01dmr530335976d6.18.1737747000297; 
- Fri, 24 Jan 2025 11:30:00 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e2058c2164sm11283886d6.99.2025.01.24.11.29.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 11:29:59 -0800 (PST)
-Date: Fri, 24 Jan 2025 13:29:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Harsha Vardhan V M <h-vm@ti.com>
-Cc: sjg@chromium.org, angus@akkea.ca, u-boot@lists.denx.de, vigneshr@ti.com,
- kamlesh@ti.com, d-gole@ti.com, k-malarvizhi@ti.com,
- a-parmar1@ti.com, khasim@ti.com
-Subject: Re: [EXTERNAL] Re: Proposal for a New Command to U-Boot Fuse
- Programming
-Message-ID: <20250124192956.GV60249@bill-the-cat>
-References: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
- <20250106222314.GF3476@bill-the-cat>
- <5e166f95-681a-8a96-0d8c-033c36d47d5a@ti.com>
- <20250122172209.GN3476@bill-the-cat>
- <9cf9590b-e9ba-6d46-dd4d-80a71765e062@ti.com>
+ AJvYcCVDaVs/67ipUNvKHoPtYJSHwORDUVey+Wk8b/baGKzRa6YtkV6dNHsD+PCSA1kWSCLudsIanRo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyVspromqsLPfdLamj0iXOjnqmiLRA2MVD9GDMJc1HcDPT6Dk2I
+ 0kd12TvSlIE7oNa3UhOSfjQffUHzs0Cw0TbqsOXUgbZmEw+LxRQ2xB+R9Q3syS9sJ5ibPX3WqZA
+ PEcD0Nx8hDLyxCcvMVvtM+IAmEfFIknW5xX2X
+X-Gm-Gg: ASbGncu9g+ZH4ph82cCYFIwrPPYUl4O5RrekD5QqMJBnMAo7i4mevz2fPjJWbZcmaCj
+ rInh6pOH9FIUDTG8v2pmdREgZDKY9Cpf8vqGnefd+1W+Jr24pyD1hULCB1UHwmaw=
+X-Google-Smtp-Source: AGHT+IFltPCWoziTUlc6qBwbusLyOBHx31aRGu7cwPZNGy9gsywF24K3EFimNxIx8ee34P3alOC2mFComXG24ifX3oo=
+X-Received: by 2002:a05:6402:270b:b0:5d9:f3fb:fa45 with SMTP id
+ 4fb4d7f45d1cf-5dc07e39dbemr6941643a12.16.1737747821964; Fri, 24 Jan 2025
+ 11:43:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2dn9TeKLjkrrTxDF"
-Content-Disposition: inline
-In-Reply-To: <9cf9590b-e9ba-6d46-dd4d-80a71765e062@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250122170858.961359-1-adriano.cordova@canonical.com>
+ <20250122170858.961359-20-adriano.cordova@canonical.com>
+ <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
+ <20250123144205.GJ60249@bill-the-cat>
+ <CAFLszTgCXvxMY0MAyhsvuNFResmDtbahuk_2_QfYE5sUxNTTjQ@mail.gmail.com>
+ <20250124191744.GR60249@bill-the-cat>
+In-Reply-To: <20250124191744.GR60249@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 24 Jan 2025 12:43:29 -0700
+X-Gm-Features: AWEUYZmHcmVAfIp2fx8b1QNgGTr2sO8KSa15OBrw4wqwZL3wyVJDDkJ4TBdrqEQ
+Message-ID: <CAFLszThUU+Vut_vaaYQkEq_X9o3SRnZC7N1Fo11fMxSyzHioqg@mail.gmail.com>
+Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
+ EFI netdevices
+To: Tom Rini <trini@konsulko.com>
+Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
+ joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, jerome.forissier@linaro.org, xypron.glpk@gmx.de, 
+ ilias.apalodimas@linaro.org, Adriano Cordova <adriano.cordova@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,217 +95,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---2dn9TeKLjkrrTxDF
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 24 Jan 2025 at 12:17, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Jan 24, 2025 at 11:57:28AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Thu, 23 Jan 2025 at 07:42, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Jan 23, 2025 at 07:37:26AM -0700, Simon Glass wrote:
+> > > > Hi Adriano,
+> > > >
+> > > > On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail.com> wrote:
+> > > > >
+> > > > > check that the number of ethernet udevices matches the number of simple
+> > > > > network protocols
+> > > > >
+> > > > > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> > > > > ---
+> > > > >  test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
+> > > > >  1 file changed, 21 insertions(+)
+> > > > >
+> > > > > diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/test_efi_selftest.py
+> > > > > index 310d8ed294..af9992a6f7 100644
+> > > > > --- a/test/py/tests/test_efi_selftest.py
+> > > > > +++ b/test/py/tests/test_efi_selftest.py
+> > > > > @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
+> > > > >      if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key']):
+> > > > >          raise Exception('Failures occurred during the EFI selftest')
+> > > > >      u_boot_console.restart_uboot()
+> > > > > +
+> > > > > +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
+> > > > > +@pytest.mark.buildconfigspec('cmd_dm')
+> > > > > +def test_efi_selftest_count_netdevices(u_boot_console):
+> > > > > +    """Test the EFI net device driver
+> > > > > +
+> > > > > +    u_boot_console -- U-Boot console
+> > > > > +
+> > > > > +    This function counts the number of ETH_UCLASS probed udevices
+> > > > > +    calls the EFI net device selftest to check that the EFI driver
+> > > > > +    sees the same.
+> > > > > +    """
+> > > > > +    u_boot_console.restart_uboot()
+> > > >
+> > > > We should avoid restarting U-Boot in a test unless there is a strong
+> > > > need. It makes things a lot slower!
+> > >
+> > > Yes, if we can not reboot here that would be good.
+> > >
+> > > > > +    response = u_boot_console.run_command('dm tree')
+> > > > > +    lines = response.splitlines()[2:]
+> > > > > +    ethernet_count = sum(1 for line in lines if line.strip().startswith('ethernet') and '[ + ]' in line)
+> > > >
+> > > > This test should be written in C, e.g:
+> > > >
+> > > > struct udevice *dev;
+> > > > int count;
+> > > > uclass_foreach_dev(dev, UCLASS_ETH)
+> > > >     if (device_active(dev))
+> > > >          count++;
+> > > >
+> > > > > +
+> > > > > +    u_boot_console.run_command(cmd='setenv efi_selftest netdevices')
+> > > > > +    u_boot_console.run_command('bootefi selftest', wait_for_prompt=False)
+> > > > > +    if u_boot_console.p.expect([f'Detected {ethernet_count} active EFI net devices']):
+> > > > > +        raise Exception('Failures occurred during the EFI selftest')
+> > > >
+> > > > Again, this should be written in C and use run_command().
+> > >
+> > > No, if these are written in python already, we can leave them in python.
+> >
+> > This is a new test. We should not be making things any worse.
+> >
+> > > C is bad for strings.
+> >
+> > ut_assert_skip_to_line("Detected %d active EFI net devices", count);
+> >
+> > For C tests we don't even need 'dm tree'.
+> >
+> > This matters. The C test is easier to understand and runs in a tiny
+> > fraction of the time. Our CI tests have been getting slower and slower
+> > and it is due to this kind of test. I went to the effort of writing
+> > this up carefully [1].
+> >
+> > So, NAK from me. Please use C tests where possible.
+> >
+> > Regards,
+> > Simon
+> >
+> > [1] https://docs.u-boot.org/en/latest/develop/tests_writing.html
+>
+> I suppose re-doing these in C would be a good test to see if writing
+> tests in C rather than Python is easier or not.
 
-On Fri, Jan 24, 2025 at 02:31:15PM +0530, Harsha Vardhan V M wrote:
->=20
->=20
-> On 22/01/25 22:52, Tom Rini wrote:
-> > On Fri, Jan 10, 2025 at 11:12:47AM +0530, Harsha Vardhan V M wrote:
-> > >=20
-> > >=20
-> > > On 07/01/25 03:53, Tom Rini wrote:
-> > > > On Mon, Jan 06, 2025 at 12:06:25PM +0530, Harsha Vardhan V M wrote:
-> > > >=20
-> > > > > I would like to propose a new command for U-Boot's fuse programmi=
-ng
-> > > > > functionality to address the challenges posed by the current impl=
-ementation.
-> > > > > While the existing fuse prog command works well for programming i=
-ndividual
-> > > > > fuse values, it becomes cumbersome especially when dealing with l=
-arge-scale
-> > > > > programming requirements.
-> > > > >=20
-> > > > > Current Command: fuse prog [-y] <bank> <word> <hexval> [<hexval>.=
-=2E.]
-> > > > >=20
-> > > > > This command programs one or more fuse words starting from a spec=
-ific <bank>
-> > > > > and <word> with the hex values given as input.
-> > > > >=20
-> > > > > While functional, it lacks the efficiency and robustness needed f=
-or
-> > > > > programming a significant number of fuses or handling structured =
-fuse
-> > > > > configuration data. Repeatedly specifying values for each fuse ba=
-nk and word
-> > > > > is not only time-consuming but also prone to errors during manual=
- input or
-> > > > > scripting. This approach does not leverage the ability to process
-> > > > > pre-structured data in memory. For users with complex programming=
- needs, the
-> > > > > current method becomes an obstacle rather than a tool.
-> > > > >=20
-> > > > > Proposed Command: fuse writebuff
-> > > >=20
-> > > > It would be good to provide some documentation links to the fuses t=
-hat
-> > > > you're wanting to deal with. What we have now works on a number of
-> > > > diverse SoCs, even if for some cases it might be best to write a
-> > > > script that's run rather than copy/paste things live. Any sort of n=
-ew
-> > > > mechanism needs to get feedback from users at other semiconductor
-> > > > vendors to make sure it's generic enough for everyones needs. Thank=
-s.
-> > > >=20
-> > >=20
-> > > Hi Tom and Simon,
-> > >=20
-> > > The buffer is not a text file. It is a structure in memory. The buffe=
-r is
-> > > structured to contain all necessary information for the fuse programm=
-ing
-> > > process. This can include metadata, fuse programming data etc. The ex=
-act
-> > > structure of the buffer can determined by the command_id, which provi=
-des
-> > > flexibility for supporting different use cases. The memory buffer is
-> > > typically prepared in user-space code or a script and loaded in memory
-> > > before invoking the fuse writebuff command. It is not stored as a tex=
-t file
-> > > or any other file format, as the command operates directly on memory
-> > > addresses.
-> > >=20
-> > > Example of a buffer:
-> > >=20
-> > > struct fuse_buffer {
-> > >      struct fuse_mpkh smpkh;
-> > >      struct fuse_msv msv;
-> > >      struct fuse_key_cnt key_cnt;
-> > >      u8 buffer_hash[64];
-> > > };
-> > >=20
-> > > This fuse_buffer struct will be loaded in memory containing all the
-> > > necessary information for fuse programming.
-> > >=20
-> > > struct fuse_mpkh {
-> > >      u8 mpkh[64]; // public key hash
-> > >      u8 bch[8];
-> > >      u32 attributes; // read-protect, write-protect, override, active=
- flag
-> > >      u32 reserved[2];
-> > > };
-> > > struct fuse_msv {
-> > >      u32 msv_with_bch; //model specific value
-> > >      u32 attributes;
-> > >      u32 reserved[2];
-> > > };
-> > > struct fuse_key_cnt {
-> > >      u32 key_cnt; //key count
-> > >      u32 attributes;
-> > >      u32 reserved[2];
-> > > };
-> > >=20
-> > > -> eFUSE layout is abstract and isn't public as its programming and l=
-ayout
-> > > itself is security sensitive (it has authentication and decryption ke=
-ys
-> > > etc). So, fuse prog doesn't work as there is no "banks/offset" here.
-> > > -> Platform Security Core running Secure SW exposes APIs through whic=
-h these
-> > > Keys and its attributes can be programmed. Whole content maybe encryp=
-ted for
-> > > enhanced security on unsecure factory floor.
-> > > -> There is a definite order in which these fields needs to be progra=
-mmed.
-> > >=20
-> > > Its possible to break the struct into 32bit values and send them acro=
-ss but
-> > > we would end up with ~30 odd fuse prog cmds which is inefficient and =
-error
-> > > prone.
-> > > It would be hard on secure core to also ensure correctness of operati=
-ons
-> > > against all sorts of silly errors (such of accidentally skipping a wo=
-rd or
-> > > mess up ordering) which can render Silicon unusable.
-> > >=20
-> > > So passing a opaque pointer with a command_id to Secure core is all t=
-hat
-> > > fuse cmd needs to do which is what writebuff supports.
-> > >=20
-> > > This can be extended to any vendor; It's just an opaque pointer hando=
-ff. I
-> > > see at least one other vendor do it in custom way:
-> > > arch/arm/mach-imx/cmd_dek.c which could benefit from this new cmd fuse
-> > > writebuff.
-> > >=20
-> > > Here=E2=80=99s how the fuse writebuff command works in a typical flow:
-> > > 1. Buffer Preparation: Vendors or developers create a complete buffer=
- (e.g.,
-> > > key.bin) containing all fuse programming data using vendor-specific s=
-cripts
-> > > or tools and copied to SD card.
-> > > 2. The buffer is loaded into memory using commands like:
-> > > fatload mmc 1 0x80000000 key.bin
-> > > 3. The fuse writebuff command passes the memory address (0x80000000) =
-and
-> > > command_id to the secure core:
-> > > fuse writebuff <command_id> 0x80000000
-> > > 4. The secure core receives the memory address as a pointer and valid=
-ates,
-> > > interprets it based on the command_id and then programs the fuses.
-> >=20
-> > To summarize what we talked about on a call, I would like to see either:
-> > 1) Work with arch/arm/mach-imx/cmd_dek.c and use that as the base of
-> > some new generic command that deals with SoC-specific fuse
-> > configurations that are handled via security processor.
-> Hi Tom,
->=20
-> 1) I have looked at arch/arm/mach-imx/cmd_dek.c. The underlying
-> implementation data structure is very specific to the vendor and how iMX
-> devices are configured. The other vendors would also differ in their
-> structures and SoC-specific fuse configurations, so I don't see a way to =
-use
-> this cmd_dek.c as the base and then abstract, create a new command out of
-> it.
->=20
-> > OR
-> > 2) Create a new command (that should be in cmd/ti/) for handling the K3
-> > fuses, if we cannot make something abstract enough to handle this
-> > concept on multiple vendors while having any sort of useful code re-use.
->=20
-> 2) In this case, I would like to add the fuse writebuff command for TI=E2=
-=80=99s K3
-> architecture in cmd/ti/k3_fuse.c. And the command will look like
->=20
-> fuse writebuff <command_id> <addr>
->=20
-> However, I would still like to place the fuse writebuff command in
-> cmd/fuse.c as a generic interface because the parameters command_id and an
-> opaque pointer handoff provides a mechanism for the secure core to interp=
-ret
-> buffers differently based on vendor or use case.
+In this case it should be easy enough. Other tests are much easier to
+write in Python. Some are easier to write in C, if they need to check
+internal information.
 
-This I guess is my confusion. If we can't abstract cmd_dek.c and the
-underlying i.MX specific parts to be supported in "fuse writebuff ..."
-what is the non-K3 (or better still, non-TI) abstraction for what you're
-proposing?
+> But given that our C
+> tests are also randomly failing (the hash md5 thing) that's not the
+> strongest endorsement of them either.
 
---=20
-Tom
+Indeed. Hopefully this is just a problem with the test system in
+U-Boot, rather than a bug in the 'real' part of U-Boot.
 
---2dn9TeKLjkrrTxDF
-Content-Type: application/pgp-signature; name="signature.asc"
+Is it possible to bisect this problem?
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeT6jQACgkQFHw5/5Y0
-tywQDQv+K0Fv2nF60EX+5oCPW954Fe/KHJpIwZ28kcWnvRUZmq13KjTsTg9PJTPs
-Q3vw4sm3rFuRRSH+zxNW8JvAoKaqNj6sMJyLoR1mEe7iz71jmMfamSIuSN3wuOas
-Xvkwl2sB0E6krYx7ZR2AZtf9fNguMid+ifLrQ3U+y3a74NcYCn1GrX8ddDc2UkHz
-JhGlxsdrKWD5h5HaiJQm9PDTYJ+ul5YcHs1kjHU0Mbb5Tb/nBwSGUeH+YoPsDUHu
-hvayYb4n5UGNn/gcNnHw5geMEdHP/bajv1mH3h4xV847ajUA3Qpq1+HdZUrqJi7N
-MOsCYjZduYz+o5LoTTNkkYb+umCeoidYN4mxkbvDLtyG7D2RHeD4hGp+Pw7xjfm7
-YwTeZw/cthvfwR6GP14GMAUjZWwfDyCeUJbt064DU5IwMns/i3+CbhLKZV9lxizo
-S8Tp0TlzRqM16MJoegEWs71jepIansoI+eCk1Ja5kvLvDdbneSGP7vjQWxFX19oI
-b2dfppgU
-=9mzD
------END PGP SIGNATURE-----
-
---2dn9TeKLjkrrTxDF--
+Regards,
+Simon
