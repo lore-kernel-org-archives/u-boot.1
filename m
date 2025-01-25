@@ -4,107 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82BCAC0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 067E8C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 016FB80F10;
-	Sat, 25 Jan 2025 23:55:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 640A580EF4;
+	Sat, 25 Jan 2025 23:56:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rn15T3tE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jJpBK2XY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0792980F56; Sat, 25 Jan 2025 23:55:20 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id C166D80F10; Sat, 25 Jan 2025 23:56:16 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFB0780ECD
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:55:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B989080ECD
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:56:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7be6fdeee35so529579085a.1
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:55:17 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5db689a87cbso6535668a12.3
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:56:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737845717; x=1738450517; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cLz7wfgGrg58brlZhRHxzcq6FwbES2C6dgppw1rS6nI=;
- b=rn15T3tEF6takhhC5Ohiwj5rFQFbz8C/cFOuQL2NesD8SUwuopfKNbjdnlbysIjWhD
- AfLxOsChJyTRG7Ulj2JLGzqxTeOB0MqIJKExCCLXtQCGk1y2SHHVKV4L9i3PvV5Bc8Ox
- Fv/F4zySKD+Yp4cEdA/dQz9tF0eVks2wiGrdo=
+ d=chromium.org; s=google; t=1737845774; x=1738450574; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Xd4dvy1Y2oxWlJ7mfazYntAg6lP4ZRRtdhQ1KrhnpYo=;
+ b=jJpBK2XYXVD1XDky4+qERu+oxd9um30POWtsOfODr6uL1PJY3D9NDeW2GrddiPDoEt
+ EpoLKnnNOf77C+i/ntGqVXuxjWKydJf+B5ffZxKQsnwdQ6iOK/CioLyWGe3HSKLUnc95
+ E8XfRIsxczLQ4GqCUTc+gceZL9+hdSfXYUUSA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737845717; x=1738450517;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cLz7wfgGrg58brlZhRHxzcq6FwbES2C6dgppw1rS6nI=;
- b=Zzyx2zbcv7VLglFzIuN2aBwtEVA/FnJvRY6GT72oYgMp8LfCZovThyIoHx0A6WUS1u
- K8iB8LEaK8EKVcr4ANEqhUGHjz1SK4QDIkkSvpcvCWYzmj/7IYlROYvBWtLs93X6wOuU
- i+Z/LcAMJg0yF+qfAttOwIw6rUOByvuz0d2c+uYin5OvlXhTqm+XBtywmX2l8K3rENOT
- gDJTsfweoUM9biz9EVT8gAg5ExggWd+LHfl0D2ouMRO66OvQl2fLlXMHSSqczmNQkGva
- cagQwcARESJC2/IbdL6EaT0Q7uN0XrjATqzO7et51kxgq1wl24oatu3VOgfqFfJpZhAu
- d4gA==
-X-Gm-Message-State: AOJu0YxqvFA/YqCbI2PYrfWDJk+cw1fZDYwoKFGHsp/PlCJ7lHvj43WU
- mRw2theRaEVMpWuLZr/+QP9f7aHp1ZS0cpwvv5/0Q+hxs4chZw852/C/exIoxrY=
-X-Gm-Gg: ASbGncsUzqEYm38aGV5SMZ1uEud8/G6Oow7D/U/Cl/W2EGC0/ZZRBSXGF+nPFQ1hznx
- BJYQuo+sdv1ShooZAqbKw7ocSxnrQ0HTppWnZ2JhxNORPRkSX77Mx1fIFilmmYK2eMveo1m2l1Z
- RogNULBiB4bh5FDppBrO3OiYLf3UaQkC9FzDKezs9tbxT0IV+Ncc3GUy/fzxRBiiruBRvI2OkDa
- /MMbNLE3qc3Zfa7iEpsFVs0ZMWygQsqvt7iwRvHE0y40xdu6RhVUDoB9+dCPMGW4FmDN8+doz3Y
- 4yPf
-X-Google-Smtp-Source: AGHT+IFjxUUYhyY0u7Rb+/Ldt35RJKfxI03K0CFf8feVA0RUX1NDOpDfiGENEy2lVBTQqlHx8YtvSA==
-X-Received: by 2002:a05:620a:1a0e:b0:7be:3cd7:dd95 with SMTP id
- af79cd13be357-7be631e7260mr5089293885a.12.1737845716763; 
- Sat, 25 Jan 2025 14:55:16 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9ae8aa00sm235697185a.41.2025.01.25.14.55.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 14:55:15 -0800 (PST)
-Date: Sat, 25 Jan 2025 16:55:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Huang Jianan <jnhuang95@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joao Marcos Costa <jmcosta944@gmail.com>,
- Julien Masson <jmasson@baylibre.com>, Love Kumar <love.kumar@amd.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Richard Weinberger <richard@nod.at>, Roger Knecht <rknecht@pm.me>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sean Anderson <sean.anderson@seco.com>,
- Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Tim Harvey <tharvey@gateworks.com>, Weizhao Ouyang <o451686892@gmail.com>,
- William Zhang <william.zhang@broadcom.com>, linux-erofs@lists.ozlabs.org
-Subject: Re: [PATCH 1/4] test/py: Shorten u_boot_console
-Message-ID: <20250125225510.GJ60249@bill-the-cat>
-References: <20250125213150.1608395-1-sjg@chromium.org>
- <20250125213150.1608395-2-sjg@chromium.org>
- <20250125215055.GF60249@bill-the-cat>
- <CAFLszTjG0P0bdwziV4irtiU1JGNMwnoiLO9xhPxLQa9GZPVBtA@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1737845774; x=1738450574;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Xd4dvy1Y2oxWlJ7mfazYntAg6lP4ZRRtdhQ1KrhnpYo=;
+ b=QEHZvre2t3OUGf0BdJHEizKP3aR+X1/srK0NAMoT1unLw+oY3P5MJ7gCyKYULj9zGR
+ 2Eojsh79GP2JFKyh804MM/ye1eE5ZDN9GjgG7oESInJG6K5I4+z6nIs7Lc/xlji84cY4
+ qi4JlzlUt/jT5f9zVE6UekmheDP2Cf8XlX+NIUeBEiQVIxnzi3yT1tnlHyyu3zkZbGF1
+ UQ3YPRFpqrX7oa+Wt6RxaiBtHpzYIhvKJSRi6Xr4A3f2hx+wZkchKOewjQLYWsqhAP3M
+ mFESCGi9gPmnQnER/EjbM7iT2ngTGUC8OYnqGVJyAZPQ1Wr22m5+X9dDIVMOQ27gCc57
+ W0Qw==
+X-Gm-Message-State: AOJu0YwgQOu80D42nj3gtPQInA+Lr14/eWSpAlRhcqfCUWA6E3bCttzV
+ 9mnfyMkEbGN9zUylb07yTv3CbXOhT75HWj9Q3mQ4YZAQlfUZCcZrjrnYS6vwYz9bQXfMi2lBIKD
+ i60FhPoF+ATSZMeW8aDUbCLPuSxKFD6eLswDe
+X-Gm-Gg: ASbGnctmZHVCXaMzi7AFE9bjcpnoN8PuO/96LGSOFlX7dzL7tN5B7U1vNxxHDG7+eMk
+ XO07lwT/WMntIDfliO0M2RP9Q8SVxGM41dMqdDdpqv7PJksWytdtXsfspBoW7pVY=
+X-Google-Smtp-Source: AGHT+IEBwNfmKLqmDjez3f7siFJsZXtOEKLroi0SjBZr5f6dL2En3WDMPCzyxrKTKCWxrkCsNcCiQBQxBpEo9AUAeBI=
+X-Received: by 2002:a05:6402:26c6:b0:5dc:545:40a7 with SMTP id
+ 4fb4d7f45d1cf-5dc05454350mr12794957a12.12.1737845774216; Sat, 25 Jan 2025
+ 14:56:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="I79wL8RukflE6lL8"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjG0P0bdwziV4irtiU1JGNMwnoiLO9xhPxLQa9GZPVBtA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250125213150.1608395-1-sjg@chromium.org>
+ <20250125213150.1608395-5-sjg@chromium.org>
+ <20250125214443.GD60249@bill-the-cat>
+ <CAFLszTiqhKn4DF0CQg7egocvvVTu_NhC4BgGaOV6j8zbDXkoxw@mail.gmail.com>
+ <20250125225042.GH60249@bill-the-cat>
+In-Reply-To: <20250125225042.GH60249@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 25 Jan 2025 15:56:02 -0700
+X-Gm-Features: AWEUYZmjmWnjwIs776U7rxQ1fNtR26c_R6gNtAoxdpCG7Z5SnAXlRB6jQaVJx0c
+Message-ID: <CAFLszTgc4=gFuDuZrN0LYRrN28w6QZPQRWdvKSzn4rq27RyEUQ@mail.gmail.com>
+Subject: Re: [PATCH 4/4] test: Make net tests depend on CONFIG_CMD_NET
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Love Kumar <love.kumar@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,71 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---I79wL8RukflE6lL8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, Jan 25, 2025 at 03:42:00PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sat, 25 Jan 2025 at 14:51, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 25 Jan 2025 at 15:50, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, Jan 25, 2025 at 03:47:26PM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Sat, Jan 25, 2025 at 02:31:36PM -0700, Simon Glass wrote:
+> > On Sat, 25 Jan 2025 at 14:44, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sat, Jan 25, 2025 at 02:31:39PM -0700, Simon Glass wrote:
+> > > > This fails on samus_tpl as there is no 'net' command.
+> > > >
+> > > >    => net list
+> > > >    Unknown command 'net' - try 'help' !
+> > > >
+> > > > Fix it by adding a condition for the test.
+> > >
+> > > For this part,
+> > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > >
+> > > > Add a blank line to keep pylint happy.
+> > >
+> > > Can we silence that pylint? I don't look forward to the churn of adding
+> > > more blanks everywhere especially since imo it doesn't improve
+> > > readability either.
 > >
-> > > This fixture name is quite long and results in lots of verbose code.
-> > > We know this is U-Boot so the 'u_boot_' part is not necessary.
-> > >
-> > > But it is also a bit of a misnomer, since it provides access to all t=
-he
-> > > information available to tests. It is not just the console.
-> > >
-> > > It would be too confusing to use con as it would be confused with
-> > > config and it is probably too short.
-> > >
-> > > So shorten it to 'ubpy'.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > [snip]
-> > >  102 files changed, 2591 insertions(+), 2591 deletions(-)
+> > Yes, but we would want to do it globally. But it isn't really a good
+> > idea IMO. We are trying to use PEP8 which loads of tools expect...e.g.
+> > my IDE shows warnings in this case. It might be better to just fix the
+> > problems.
 > >
-> > First, I'm not sure I like "ubpy". I believe "u_boot_console" is because
-> > it's how we interact with the stdin/stdout of the running U-Boot. And
-> > indeed it provides more than that. But ubpy is too abstract and unclear,
-> > and looking at the diffstat, I don't know that big global rename is
-> > justified to save text space.
->=20
-> I actually get quite confused hunting around in the fixtures so I
-> suspect others do too. I would like to settle on some better names.
->=20
-> Yes, I don't like ubpy much, either. Your favourite AI suggests
-> 'fixture' or 'test_env', both I which I prefer. The only challenge is
-> that 'env' has various other meanings in U-Boot.
+> > As to readability, I'm on the fence...in practice it doesn't matter
+> > much as few non-trivial programs have a lot of top-level functions. I
+> > would rather keep the tool happy and use the Python style that people
+> > expect when coming into the project.
+>
+> Yes, we should do it globally. Can we not globally also tell tools the
+> deviations from PEP8? I remember back when people would argue about if
+> we should tell file editors what to expect for whitespace, etc :)
 
-Yes, until someone has a better suggestion than "ubpy", we should leave
-things alone. "fixture" has its own meaning within pytest and so that
-would also be confusing.
+I'm sure we can do anything. But why deviate? Is it just that you want
+to avoid churn, or do you actually not like this part of PEP8?
 
---=20
-Tom
-
---I79wL8RukflE6lL8
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVa84ACgkQFHw5/5Y0
-tyx4Vgv/VyPUb0LZfjt1/JjdS7LPbbMaQGclrNkfRnggtxWlbE02Q46+fkv5THOQ
-/KYpClFVhHppJkwVQ+ksGK+bZnTyAwRRAp4y7yn3fhv2c5LElD7nQHhL3LzE1D0b
-+7L5kgZ1SKO51eqP/5CefjpPmmzDLPMB/ikiMSontX+misKI9f8kOJAhLT886stm
-mRBGzIhS8oPCCGBSexgqpM+FAGyPXyRWaUI2jNnJsJX0tzRPIg+gtlhahz4PRkrK
-KCsonaXEVdUHCU4+9ScNENB5fLWFTtVwKaRybBas1LnlzyxhFipo58KT856aUHBq
-h+f2nAz05EXt/l5IBgxaZlrneHb/FzaEMGYTFKRUOwRfVjPuW6bhwT1CN/vO+4C2
-ENMF7IJd0gm2Ea3Nqv4YDQguTPaaNQoc1g/8x/qKRj/tmxFBGruqHtUk/LcveKHb
-zVSkcD0AX8GkTNTPJct5tVJAhcjoUHRTGtWY58YPnleVbrvWKAgXmnSXK10F/Tik
-UVymMluO
-=l3Is
------END PGP SIGNATURE-----
-
---I79wL8RukflE6lL8--
+Regards,
+Simon
