@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7DA1C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 19:59:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F694C0218D
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 19:59:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F3DF80EF6;
-	Sat, 25 Jan 2025 20:59:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B7A9F80F0B;
+	Sat, 25 Jan 2025 20:59:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="BbGcNpha";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="Wf8URrjH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D22380F0E; Sat, 25 Jan 2025 20:59:22 +0100 (CET)
-Received: from mail-4317.proton.ch (mail-4317.proton.ch [185.70.43.17])
+ id 74FED80EC0; Sat, 25 Jan 2025 20:59:31 +0100 (CET)
+Received: from mail-4018.proton.ch (mail-4018.proton.ch [185.70.40.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AA8280EF4
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 20:59:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C01B880EF4
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 20:59:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1737835158; x=1738094358;
- bh=8fRm48JdMTsOQ7slrKDVl4kYs2AIqMeG0qjxp1myXYw=;
+ s=protonmail3; t=1737835166; x=1738094366;
+ bh=51iehHOcX1WQcQTDRkJxafWBFbjxPzfUvDL8Y8OTTUA=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=BbGcNphalNTaw+YceqkkfOQQXuRkUh8amOLYcBahkdpypkUZSfB1rHK2tcZaj1iMt
- S6AWs+/MNT6oJLS+Eq7QpB1uDlJCFZj+cq8osFegfKlwPU7DNE5H21MqcLbwu1Hi/E
- +Y4xbRBuklnLQd+P+aGF6rToa6zUS8XSygFnDN/g6kGdeU5KXwHypxwybbNEYgzIzV
- z3yNRxnNs12e/1Jx8aHHKwwWTsi80vZ7nNmvK1yYroYQ7dGp2DBBXRninDYocM8IVd
- QAHtxoTfuyQo/rQ80+qMPLJbRsa1XGPabdzAAdgPLNZUiC6ZnupMO8inC0FunXtqe3
- h0y3RGiwgwLRg==
-Date: Sat, 25 Jan 2025 19:59:15 +0000
+ b=Wf8URrjHSVtl5yIRne3c51hPF2GR67odrUK4pXA/s/2LPPr16uhNQj0OMDXnyN4K1
+ KVBlORJVBrPWOtMEZDUJIZjjRVIxX16+Z2UKMF8KIto838IJ0uimjlg8BWknkcX/eb
+ n4TVWYNtBHbbGoK3ZOqFITV28XBF1gPhttnA16f7BQQ5r6GhfizpBgTdhiyNOTk0eg
+ 3EdeFxeowyFoOVgLHcuspurzVd7A7A0Lk5LAfxpZKOu3NOTRcf+K8A7eETYdKQbemt
+ DZUwXrJ6F3xKI9CwvG/qBPzc2dXyhbS1yKFG+8a5Hm9IBlINQIK/7vQnmOFoY2x2NN
+ WOfMuKuxyJUMA==
+Date: Sat, 25 Jan 2025 19:59:20 +0000
 To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
 From: Sam Day <me@samcday.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH 1/3] mach-snapdragon: use PSCI sysreset driver
-Message-ID: <20250125-msm8916-sysreset-v1-1-62073932ff0e@samcday.com>
+Subject: [PATCH 2/3] sysreset: qcom-pshold: remove ARCH_IPQ40XX dependency
+Message-ID: <20250125-msm8916-sysreset-v1-2-62073932ff0e@samcday.com>
 In-Reply-To: <20250125-msm8916-sysreset-v1-0-62073932ff0e@samcday.com>
 References: <20250125-msm8916-sysreset-v1-0-62073932ff0e@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 8689886fdd5da9cd692eee40cf0ad6b0fa89549b
+X-Pm-Message-ID: 3f85b92555a8b0de4c75d597da396eb9db3fb9cd
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -66,48 +66,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop the `board_reset` function from mach-snapdragon board code, and
-instead use the standard PSCI sysreset driver.
+Depending on ARCH_IPQ40XX is too restrictive, as this architecture is
+explicitly armv7. This driver is also used on msm8916 devices, which
+have cortex-a53 armv8 cores.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/mach-snapdragon/board.c | 5 -----
- configs/qcom_defconfig           | 2 ++
- 2 files changed, 2 insertions(+), 5 deletions(-)
+ drivers/sysreset/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/bo=
-ard.c
-index 2ef936aab757c7045729a2dd91944f4f9bff917e..eba98b73ae629671662ecc2b060=
-544a931718748 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -187,11 +187,6 @@ int board_fdt_blob_setup(void **fdtp)
- =09return ret;
- }
+diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+index 121194e4418f48012c28fa3a4d7da174d3359f54..475540ffac766a302d994372ac9=
+65d4d94dd4708 100644
+--- a/drivers/sysreset/Kconfig
++++ b/drivers/sysreset/Kconfig
+@@ -242,7 +242,6 @@ config SYSRESET_RAA215300
 =20
--void reset_cpu(void)
--{
--=09psci_system_reset();
--}
--
- /*
-  * Some Qualcomm boards require GPIO configuration when switching USB mode=
-s.
-  * Support setting this configuration via pinctrl state.
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index a4e7a21c31151103e4272147bc27eeddb11b41ed..d19be69190da4e2ddfbb60c4d44=
-ff793e804c523 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -119,6 +119,8 @@ CONFIG_QCOM_RPMH=3Dy
- CONFIG_SPMI_MSM=3Dy
- CONFIG_SYSINFO=3Dy
- CONFIG_SYSINFO_SMBIOS=3Dy
-+CONFIG_SYSRESET=3Dy
-+CONFIG_SYSRESET_PSCI=3Dy
- CONFIG_USB=3Dy
- CONFIG_USB_XHCI_HCD=3Dy
- CONFIG_USB_XHCI_DWC3=3Dy
+ config SYSRESET_QCOM_PSHOLD
+ =09bool "Support sysreset for Qualcomm SoCs via PSHOLD"
+-=09depends on ARCH_IPQ40XX
+ =09help
+ =09  Add support for the system reboot on Qualcomm SoCs via PSHOLD.
+=20
 
 --=20
 2.47.1
