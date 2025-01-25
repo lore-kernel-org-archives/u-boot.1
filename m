@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94BA3C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 17:14:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E54B2C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 17:14:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C047680EB5;
-	Sat, 25 Jan 2025 18:14:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 63E3480EF6;
+	Sat, 25 Jan 2025 18:14:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NB19y2mD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eViJFCUS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F9E980836; Sat, 25 Jan 2025 18:14:04 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id CFEEB80EFE; Sat, 25 Jan 2025 18:14:19 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1F8080ECD
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 18:14:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8477880ECD
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 18:14:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5dc052246e3so6420728a12.2
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 09:14:01 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5d7e3f1fc01so6315804a12.2
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 09:14:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737825241; x=1738430041; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737825257; x=1738430057; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=a1E5LyUmbBegtlNjee5noTkxH4ne/VkoRi4YTmLd/IA=;
- b=NB19y2mDWAOMv4zA8SVgeGEhTxE8ZSjh7Jts7obeyDi6BLez93G7z2pNeaCAIUwgN6
- 507xcLSGizM6KI4Ru476fuQFOpOdx+Zn0a56dxsbbjFNaLXQs0JkhkSVp9vcR1Zljyoz
- l9a+uISQHousRLhDHbHJ3z30hc+ptzojxxcUI=
+ bh=yduiMtwLOZ26C+yfk0kZq7+Xer5BjpYwbNBhu2VDdbM=;
+ b=eViJFCUSxohEc2Ant9d5t97JayMYld/7KXW1G2OgCLTaMBUpqN6ERUuajiDYDjKWb4
+ cJ6bNL8uOaBfTawuXlH2qdymEFWkCcgOvZrCrLRmN2LOGUyPs190TZ/j/niPGrsLCMS+
+ hS3RRCqkz+WD4do5X6u250zVsSfckstgn+Klk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737825241; x=1738430041;
+ d=1e100.net; s=20230601; t=1737825257; x=1738430057;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=a1E5LyUmbBegtlNjee5noTkxH4ne/VkoRi4YTmLd/IA=;
- b=QZvLcqbXa6n6i+5hS7t1QtyAzFfEX/kYyIAmIzfOUur/Ct0ek57dSo4KPCpw9KorFd
- V53PJ3OzMeq19ZaZIc1K/eJHZ72omG2X512adbrJFQc7bHmpYDJuO22PHZhZpHqIyett
- pWQwhfKUtCtqctD7a+gB0SEt4mgohuGUojdJ/HIcDjtfcuPUZLgXHM5hwh51k1Xa8KWP
- uE3yFoBDUBR8beWlImfmuANk6coM8SLg6l4dhjiocSgUBIJfq+v995EsC09qGA9YmTPG
- rlFyytEi3T1m1SGy8FptUbpdybt1VIUKlLatCbeorKStXS9eAQqJg/VgADsoKtAkwMSc
- 94sg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUxCm+QKiHhBoZezbgCXBN/VaohbEOihDiyHCeYe1qdcBUGkBNZ8ySAfJGRIX6d26TcnwI1cEM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwN+VAF9RIW3womxWYZowxCL+G+oRHeINufu7xEPVGZGp+OkeGh
- AKDhRB0IzXbnkQFpunjnxHPW/FeGPr8ijC1iqZ+1ro4+12o45aQyNmtPVOonAsI+holL8QU1Gaz
- 5FAx4S8L1v7G1PVdywcippWKGb3ZDvJiwoJVZ+OmoxtCTz6w=
-X-Gm-Gg: ASbGnct6PJFRvBogbAnUSaOcU8hW3MM8AddrnJ9xrPtJhuBCotVD0GAV1Cb5plmE+Bj
- +Z6EYsJOt30as5CJhn0F7zIhiPL5WM3RxJ4TmQTtQs/nrwzGmOzzK0s2S7rchH04=
-X-Google-Smtp-Source: AGHT+IF46Tdap5vSCdJtSBcIsU+fjJpc577+6lTxo4Uie0+GJKHwJT6XwJ96CQ47rHwHvva1dPSDsu7jAz46cmhfXYc=
-X-Received: by 2002:aa7:d858:0:b0:5db:e7eb:1b34 with SMTP id
- 4fb4d7f45d1cf-5dbe7eb1d19mr12162523a12.13.1737825241234; Sat, 25 Jan 2025
- 09:14:01 -0800 (PST)
+ bh=yduiMtwLOZ26C+yfk0kZq7+Xer5BjpYwbNBhu2VDdbM=;
+ b=cIsUWAgkp0xiwSH+GdUTkUVexMPR1FzN9jjOAB012Mh39dB+M4H4PCXZKDXGWo2bI2
+ 8FcBPMnVEs++pvHsVj483H6rHDvbcFfZUTz+bbQ6Z43dRjqlItr8kJbgR6zEcNHBZ0Zt
+ zIU+o0pIjOrBDlfLBVLG56w5pAdxKLIFSW92XsGUfmN6qGLA61tQ5yd5Ezo1qI/S24Km
+ I5ysbvLoP7uasVycUwu+P6U/yySCHZVHLwIw5NZklEXm8Y2I1zv/K562LIFd3XXVRD8z
+ uZ55zE3hASdbgVfbxi8Z7qldfqu/HJRg86FTJ08IrgtIWO4doRRbxt9/XW9hGKU39AzV
+ 3xlw==
+X-Gm-Message-State: AOJu0Yx5tTNWBHaJgVwaJ62Nj+gRA/IVV64d9Tt2+BPWw4cJwDx496Vo
+ O7WZYOBflC9G7nSIrHBAen5zc3elDIW69HjEesCjnwTLsTFBYHtfI3SPwn4MLkJYhIuah3Y7xTp
+ jq+VTzbemZzEaNmPvWqf7dmb55Y7Olgk3X1FO
+X-Gm-Gg: ASbGncv5kqiZOQV+7YYla0y4j7yUhbA/LVOB2E/5xE4iLlQD1T07c9jrRnlvuyQT6ca
+ l0WatyOJ7ky3+wt2EBCrTj8dzLuA3C4722GANkhCucr29eZh9vMGJ3TuECVl5dBEEKuufENXGew
+ ==
+X-Google-Smtp-Source: AGHT+IGu3k2O7kf9AkfVcOoAeQgBPyIrO9jvUdBrF1Aduc/w/Oqffdr+I/2qxyyP3Uk4ijvygmTig8soFSJVkWkSZ/U=
+X-Received: by 2002:a05:6402:51cd:b0:5d3:e4eb:8d1f with SMTP id
+ 4fb4d7f45d1cf-5db7d2fc8b0mr29834456a12.12.1737825256896; Sat, 25 Jan 2025
+ 09:14:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20250115200144.951530-1-raymond.mao@linaro.org>
- <20250115200144.951530-3-raymond.mao@linaro.org>
- <CAFLszTjYm8UBchOffiayzjbJrTsj0_HsV3qL6zwmAVQZSv++rg@mail.gmail.com>
- <CAC_iWjLM7dxJ8_gU0Fd13nfkY-_Z2ttsVM_rwNJ_dBoRQOF3wQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjLM7dxJ8_gU0Fd13nfkY-_Z2ttsVM_rwNJ_dBoRQOF3wQ@mail.gmail.com>
+References: <20250124185605.372347-1-sjg@chromium.org>
+ <20250124192056.GU60249@bill-the-cat>
+In-Reply-To: <20250124192056.GU60249@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 25 Jan 2025 10:13:49 -0700
-X-Gm-Features: AWEUYZm4VDifiCJhvU69K4ljBVyL-pBAyU1-pt4gK8wzaxNudyG2g0ny555AjDo
-Message-ID: <CAFLszTgX-p1TxPny4oGNWLPx_piEYh_7PkgrWUYNQsaFbEJ6zQ@mail.gmail.com>
-Subject: Re: [PATCH 2/6] tmp: add TPM2_PCR_Allocate command
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Tim Harvey <tharvey@gateworks.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Michal Simek <michal.simek@amd.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Sat, 25 Jan 2025 10:14:05 -0700
+X-Gm-Features: AWEUYZkThBvmmv0sAMOcGTdZ_Y1nVPd6OIEgBkPQLzMBFysHBSrZ5hsNc5y6bc4
+Message-ID: <CAFLszTjowGVr2R0=bz-h=sU0NHjP8CDaF04cfO1Kbh8d8F5nFA@mail.gmail.com>
+Subject: Re: [PATCH] test/py: Add a report show test durations
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stephen Warren <swarren@nvidia.com>, 
+ Stephen Warren <swarren@wwwdotorg.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,58 +88,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Wed, 22 Jan 2025 at 23:23, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Fri, 24 Jan 2025 at 12:21, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
+> On Fri, Jan 24, 2025 at 11:56:04AM -0700, Simon Glass wrote:
 >
-> On Sat, 18 Jan 2025 at 06:31, Simon Glass <sjg@chromium.org> wrote:
+> > Execution time varies widely with the existing tests. Provides a summary
+> > of the time taken for each test, along with a histogram.
 > >
-> > Hi Raymond,
+> > Example:
 > >
-> > On Wed, 15 Jan 2025 at 13:02, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > >
-> > > TPM2_PCR_Allocate command is required to re-configurate a TPM device
-> > > to enable or disable algorithms in run-time, thus this patch introduces
-> > > the implementation of PCR allocate APIs and adds related cmd functions
-> > > for testing.
-> > >
-> > > To test the feature, ensure that TPM is started up.
-> > > Run pcr_allocate command to turn on/off an algorithm, multiple calls
-> > > are supported and all changes will be cached:
-> > > `tpm2 pcr_allocate <algorithm_name> <on|off>`
-> > > Run startup command with argument 'off' to shutdown the TPM.
-> > > `tpm2 startup TPM2_SU_CLEAR off`
-> > > Reboot the board via `reset` to activate the changes.
+> >    Duration : Number of tests
+> >    ======== : ========================================
+> >        <1ms :  1
+> >        <8ms :  1
+> >       <20ms : # 20
+> >       <30ms : ######## 127
+> >       <50ms : ######################################## 582
+> >       <75ms : ####### 102
+> >      <100ms : ## 39
+> >      <200ms : ##### 86
+> >      <300ms : # 29
+> >      <500ms : ## 42
+> >      <750ms : # 16
+> >       <1.0s : # 15
+> >       <2.0s : # 23
+> >       <3.0s :  13
+> >       <5.0s :  9
+> >       <7.5s :  1
+> >      <10.0s :  6
+> >      <20.0s :  12
 > >
-> > It would be better to have an automated test.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > You could create one using the sandbox TPM, and you could add a pytest which can run on my lab (coral has a TPMv2).
+> >  test/py/conftest.py | 77 +++++++++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 77 insertions(+)
 >
-> The sandbox does not support PCR allocations and I don't personally
-> see the point writing device emulation code.
+> Whitespace issues aside,
 
-The point is that we can actually test this code by putting the
-emulated TPM into a known state before each step and make it easy to
-debug what is going wrong. The only way to do that on a board is with
-a cold restart (so the TPM is reset), if that is supported in the lab.
-I think the QEMU tests are useful; they are somewhere in the middle of
-the two extremes.
+Do you mean the blank lines? pylint wants those for top-level items.
 
-> The TPM subsystem definitely needs better testing and I've already
-> discussed this with Raymond.
+ we should probably not do this every time, just
+> when requested.
 
-Well, the TPM tests don't actually work at present, or at least the
-board I tried.
-
-> He will start sending tests later on.
-> We can test simple features on the sandbox, but whatever complex
-> features we need to test will take place in QEMU
-
-Instead, you should spend a little time upgrading the TPM emulation
-for the tests you need. It will pay dividends in future.
+I'd like to see it on each run, actually. It doesn't take any time to
+calculate and it lets us see where the time is going.
 
 Regards,
 Simon
