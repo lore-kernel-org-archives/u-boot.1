@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 913FBC0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:42:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA17CC0218D
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:42:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE1BE80ECD;
-	Sat, 25 Jan 2025 23:41:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2251580EF4;
+	Sat, 25 Jan 2025 23:42:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dPZbTAC5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hqSj2fqJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A4B180EF4; Sat, 25 Jan 2025 23:41:58 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id CC58A80F48; Sat, 25 Jan 2025 23:42:14 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 080AF80EC0
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:41:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CEA2580EC0
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:42:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d982de9547so6197103a12.2
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:41:55 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5da135d3162so5185644a12.3
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:42:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737844915; x=1738449715; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737844932; x=1738449732; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KCP0R/zokfBAKOiKeV2o8ZI1x+kCchgjAg7EGt68svk=;
- b=dPZbTAC591hm7cY3HTU1qyGSxlci49eBix01RneyrY0kT/0H1qRz73oXhPiXgeChgo
- dSpl0ikRQjiY46Qnz42Ov2PxytPpG7EwE27iZWZgIIN8dZUqpu+DgxSmQVQIZAZdJHoo
- Z2pdsOpC6Pnc/80J2rd0U+DUcLpHe2p8cB7mM=
+ bh=GxFzzrg2BQ5qQdc0TRL3eZ8awBuGyiVXkghGGlH8XjE=;
+ b=hqSj2fqJZX6/8M1uNVd5/k9U92kWMSekicqjrB6KHZSy0WY98JD+HmgCbX8XePL0zQ
+ iDNvO2Jybv0H6p4p9/wAXUFFANogtz6Kym4wBl03o0ibVP/94E5hdB09DcvfFj5YpslC
+ Bm++rxfK3VrPBB9IWr/1Mw8PMwOz6mmOOWp0o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737844915; x=1738449715;
+ d=1e100.net; s=20230601; t=1737844932; x=1738449732;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KCP0R/zokfBAKOiKeV2o8ZI1x+kCchgjAg7EGt68svk=;
- b=wtKs8ArOmTo+WqurZ7VRcC//YY/yo09s/DNiL48ni3T8qI/L+UtvufvbKEdQPnC5rt
- t0u/QwyrRExJKtGXZYS6pEqrAehyttugOieQ9kZBeTB3vwBoIA4l2pDbX1ZNmQRYvybc
- gGRxeMpVTi6jLit/QiYRPASsJnsFEiV9XQ1v9Pcq5GhIL0CLZmQ9cLHeb450YoBMC/mM
- 7x5oPEj8FvlU1rPpdyFoVSnugUYnY+W5F/zlJIj32auzMgSOyieqMzYmXxHTUDodZXxS
- vDOwq/8kHx3ZrWoyac3xC1N/qFbnezv2QFPDNTqJSIgh+zrzImgWXoxGRSUZySIKC7y+
- LObw==
-X-Gm-Message-State: AOJu0YxqsxRsNMFzd/Lwk76bFkhFACEIRZLCAYM1jIcUL9St6UBR4T4+
- fEela9WBVs/ZgFezNXal0x73Fl1LGTUOEgmVV5KrbxpCECE78/XQKYViSPz5i5trKHX3KpIu+Cx
- oPLvIFnAbx1wEntUbGWeq/WIasfpgx8DOCM4kZzjBOtFxMrE=
-X-Gm-Gg: ASbGncs27dVOZObqQc+3SnWpTbzbMlcqMGZWHduViHJ24yPY8yhAXpK2nlJ75SAVdqA
- cvJvjEUjS0RSb2wKT0TDqU61G1iz0RiwjUJH40YxM+N0PpJyc9TQdzFwNwhk0Um4=
-X-Google-Smtp-Source: AGHT+IGCdwkMydEYIc8bcTJU5YTPTrl/xe6F/NN8wFQWtB/3moFcpC0nGWT0gIa1u1PCoS87xQBKQ5Vq05tJUJiHvNw=
-X-Received: by 2002:a05:6402:358f:b0:5dc:1059:69e with SMTP id
- 4fb4d7f45d1cf-5dc105a60f9mr9308891a12.10.1737844915316; Sat, 25 Jan 2025
- 14:41:55 -0800 (PST)
+ bh=GxFzzrg2BQ5qQdc0TRL3eZ8awBuGyiVXkghGGlH8XjE=;
+ b=f/OoUQep0/BKBxCZ4tlLww/QVPk8PPq5g8Sq3/oQJ7B8pagR+alKpzx3nXqQPgw9MC
+ HQLBOS7IXYW/NktI4ATGGkofjdCA62W5n+Y5JTZJb+ODL6J1OFrY73Mdtf3Y6NasQ0jy
+ BN3J9/tEirRdW5UHhkWi/XKLvAmLrzaCVEQxsb29FnOgbAstk0blwPpRDQZCHG0FuuWn
+ FmBxJ0Qdoxv4Gf4SQsWkGaQY+STC3D9BBiW1HIO5hmgVAPexaaKnVJF0lTm/S/iht3il
+ IWYTkBgOZPB/2lNCf+5KJ06zLwP5xgstA0TEjEV2cwjnORfKGYNCCQQa9Lk6+/NyFwN9
+ +sPw==
+X-Gm-Message-State: AOJu0YyZctLe+0XdksTr0Qpj7jXTo8z91r2BN+flOKFHqifL4sXvQJK0
+ Y/E3THOTHihMOwE5HthKH0w23q/hfU0KQDpWjxJH6tYNBwU6vCjZstH5Ja0KJagKOTnltLBKEIa
+ JNxQrZn21bNk0AHOStPvO/FDbSidmffNSk84G
+X-Gm-Gg: ASbGncs8/XNkAN6B1z+dnDquk+DYNZ29AGn48rKjjM8EudVrZSGsM4PsqECUBoZgd8h
+ zdzcI8jRGcya4ffCmUWrnGvp+PaSuvyS19J2Q+b1/I+Qh0IVMPwe7dauYNmmwvZQ=
+X-Google-Smtp-Source: AGHT+IHq2b6ITll4yJBXu0vJijeOLOEJNE0zSYB4fW+9GhuBtP8venoWhQ9aCLK2BzsNCD2LBRkrw+6Gae2XDKW7/rk=
+X-Received: by 2002:a05:6402:2110:b0:5da:c38:b1cf with SMTP id
+ 4fb4d7f45d1cf-5db7d2dc135mr32336799a12.3.1737844932216; Sat, 25 Jan 2025
+ 14:42:12 -0800 (PST)
 MIME-Version: 1.0
 References: <20250125213150.1608395-1-sjg@chromium.org>
- <20250125213150.1608395-3-sjg@chromium.org>
- <20250125214613.GE60249@bill-the-cat>
-In-Reply-To: <20250125214613.GE60249@bill-the-cat>
+ <20250125213150.1608395-2-sjg@chromium.org>
+ <20250125215055.GF60249@bill-the-cat>
+In-Reply-To: <20250125215055.GF60249@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 25 Jan 2025 15:41:43 -0700
-X-Gm-Features: AWEUYZme6SsWzfwgJV7NhlDouv6zsKbv87HEPrHvQyfSPh8wbOv8-DPXG5wiNgw
-Message-ID: <CAFLszTgYPNxmiO=agM+MUp0da_6q3BBro74bWEnNbqeM-tT=bw@mail.gmail.com>
-Subject: Re: [PATCH 2/4] test: Drop u_boot_ prefix on test files
+Date: Sat, 25 Jan 2025 15:42:00 -0700
+X-Gm-Features: AWEUYZnS7_IeCWffdJA7OdJPnemnLo0CmhbjmJi1FSsyWJa7yXrZlsqk5b3j6fM
+Message-ID: <CAFLszTjG0P0bdwziV4irtiU1JGNMwnoiLO9xhPxLQa9GZPVBtA@mail.gmail.com>
+Subject: Re: [PATCH 1/4] test/py: Shorten u_boot_console
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Andrew Goodbody <andrew.goodbody@linaro.org>, 
@@ -74,16 +74,22 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Dmitry Rokosov <ddrokosov@salutedevices.com>, 
  Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, Love Kumar <love.kumar@amd.com>,
+ Huang Jianan <jnhuang95@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joao Marcos Costa <jmcosta944@gmail.com>, Julien Masson <jmasson@baylibre.com>,
+ Love Kumar <love.kumar@amd.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michal Simek <michal.simek@amd.com>, Padmarao Begari <padmarao.begari@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Richard Weinberger <richard@nod.at>, Sam Protsenko <semen.protsenko@linaro.org>,
- Tim Harvey <tharvey@gateworks.com>
+ Michal Simek <michal.simek@amd.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Richard Weinberger <richard@nod.at>,
+ Roger Knecht <rknecht@pm.me>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Sean Anderson <sean.anderson@seco.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Tim Harvey <tharvey@gateworks.com>, Weizhao Ouyang <o451686892@gmail.com>,
+ William Zhang <william.zhang@broadcom.com>, linux-erofs@lists.ozlabs.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,64 +109,37 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sat, 25 Jan 2025 at 14:46, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 25 Jan 2025 at 14:51, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, Jan 25, 2025 at 02:31:37PM -0700, Simon Glass wrote:
+> On Sat, Jan 25, 2025 at 02:31:36PM -0700, Simon Glass wrote:
 >
-> > We know this is U-Boot so the prefix serves no purpose other than to
-> > make things longer and harder to read. Drop it and rename the files.
+> > This fixture name is quite long and results in lots of verbose code.
+> > We know this is U-Boot so the 'u_boot_' part is not necessary.
+> >
+> > But it is also a bit of a misnomer, since it provides access to all the
+> > information available to tests. It is not just the console.
+> >
+> > It would be too confusing to use con as it would be confused with
+> > config and it is probably too short.
+> >
+> > So shorten it to 'ubpy'.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
->
-> This is a massive bit of churn and violating namespace best practices
-> when it seems like we really need:
 > [snip]
-> > diff --git a/test/py/tests/fit_util.py b/test/py/tests/fit_util.py
-> > index 16ff8c96c63..7aad4030be3 100644
-> > --- a/test/py/tests/fit_util.py
-> > +++ b/test/py/tests/fit_util.py
-> > @@ -5,7 +5,7 @@
-> >
-> >  import os
-> >
-> > -import u_boot_utils as util
-> > +import utils as util
-
-The real namespace is the one in site-packages, where you are supposed
-to put things in their own modules. The Python tools operate in a
-proper namespace, but so far the tests don't. They just use whatever
-directory the file is in. So, for example, we have:
-
-from tests import fs_helper
-
-where 'tests' is the subdir in test/py
-
-One option would be to move the pytests up a directory, with test.py
-in test/ and the other python files in test/u-boot and the tests in
-test/pytests or something like that.
-
-Then we would have:
-
-from tests import some_file (*)
-
-like we do in tools
-
-Also, I wouldn't call this 'massive' churn. Most files just have a
-line or two changed, with test.py and test_ut.py getting more.
-
+> >  102 files changed, 2591 insertions(+), 2591 deletions(-)
 >
-> A lot more of this type of namespace shortening which I believe is the
-> normal Python-way of solving this issue.
+> First, I'm not sure I like "ubpy". I believe "u_boot_console" is because
+> it's how we interact with the stdin/stdout of the running U-Boot. And
+> indeed it provides more than that. But ubpy is too abstract and unclear,
+> and looking at the diffstat, I don't know that big global rename is
+> justified to save text space.
 
-It doesn't really, since 'util' might conflict with something. When
-you have a set of related Python files, as with do in test/py it is
-better to use a namespace. But even then, I think we would want a
-shorter name.
+I actually get quite confused hunting around in the fixtures so I
+suspect others do too. I would like to settle on some better names.
+
+Yes, I don't like ubpy much, either. Your favourite AI suggests
+'fixture' or 'test_env', both I which I prefer. The only challenge is
+that 'env' has various other meanings in U-Boot.
 
 Regards,
 Simon
-
-* "tests" is safe, I believe, since no modules use it it, e.g. it is
-mentioned here:
-
-[1] https://docs.pytest.org/en/stable/explanation/goodpractices.html#tests-as-part-of-application-code
