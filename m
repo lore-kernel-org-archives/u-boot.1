@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B57DC0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 14:15:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B419C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 15:28:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A29780207;
-	Sat, 25 Jan 2025 15:15:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3525C80DF7;
+	Sat, 25 Jan 2025 16:28:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fDUCQ3FG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UO5kBH5i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D555D807FE; Sat, 25 Jan 2025 15:15:45 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id A99CA80EB5; Sat, 25 Jan 2025 16:27:59 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40B06801A0
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 15:15:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5628280C7E
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 16:27:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aa68b513abcso635621466b.0
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 06:15:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hackpascal@gmail.com
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2f43d17b0e3so5644578a91.0
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 07:27:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737814542; x=1738419342; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nZyub+ETQ7olukFILwkdZxz0QhL5c/lt9cZ4MuzoCO8=;
- b=fDUCQ3FGbn0CjQLNzuJabqL2nlVmfImxrr+nR7MBZJhW/vevKdLN40JrlW/viJw4+z
- tvKJdSjdUhvbP0Cj0MbfShvTwHJwfonuSDqIEae7CHzDaUJ6/F7CvSJ0MR1XVAoxeuEG
- cNkJfFhiQC/GIg6Sb+5l8UsFrQqva+GU5xob0=
+ d=gmail.com; s=20230601; t=1737818875; x=1738423675; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2btazznWkDTf1F6O574VwiCA72kFYe21np/gM+y5GsM=;
+ b=UO5kBH5imuwR8j85TaXeNFyHb5fzqEdI/CQEzCdT4EiVbTpEGHa3fOj/y0vz113kOr
+ 5c3eyDGOnnXPmlTlYp5BHthjwuPUApJ3ESEcv1bXmTsz67mzkqWvmxZvKU8rVbXhhuS+
+ UYEQb0sheFukjLb003URFtfk7FKboaacNkf7WRlxsKydyRNTiovptBTsZSxN02pWLIya
+ MA8sCPWEvrC9elSG9biQu6GEWeBCZ5cBKIKEJVnzea5RFljcJvl1T1kf+rvnYgYgsqJh
+ 5Qg1EdShPfGgFdOfKp6p+9tq/9JCz7snxHy8dxTGBs+3iIUNwCqUSTrLTXVHM3tC6z0Y
+ et5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737814542; x=1738419342;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1737818875; x=1738423675;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nZyub+ETQ7olukFILwkdZxz0QhL5c/lt9cZ4MuzoCO8=;
- b=Lo76UuXs2wdwMZGUoj4ImnuKXddPo4CxkubiJO+CdUvLEcEWV9pJ4+oKmcozf12PKu
- 39yh+m4+Z4HFT9U0dthWig+p7eNMnbSZZ/b0Q4j5dlVHtjhAyLOl1mJ1MUoZFn6hzZD5
- 0uhoFK+CGu2Hqu2CFNALYrUVLx1hi9ny1JdPWnOTucMuNkwbH6CIe7JDNuIB/JSbj/E0
- kiWuW5PuBDNfcA3Tif9BVQcupmsDUXMGeiny9dnYfWlPd50yoh4ysHUIoijcv0vcbgYp
- iT9BvVqTVNJE06LDF0SMrlHcPWxcbbH+gp9RG3eIcpNLNcvKe20IbujSjYoupnr0KX/m
- TrUA==
-X-Gm-Message-State: AOJu0YxUVYo4pE+SBBte9iH9rkDoZRaGGfU3ZcmSPb9RG57CDCL9uHOS
- tVKyWREcVzwTmzAlpA7i9G8yJhq2SN67W5jWjgl/AZ4SmHcOPaZui2RO25wMliysMI34CitTMyG
- ly3q0eA6upWnyebOfE9SPdrENr09zkfJKi9QQ
-X-Gm-Gg: ASbGnctbVVoHNBtuEOW2YO2k3xgCjJHAzFmGbQOoI4PDZSOGFXJ5Djq7zNVvjUylXzI
- 3vIMQKFZewze1ai8Liy+PnZFu7YV8S7l+qZ0BfeTFOAVskguURUx8rp9x35xbCDc=
-X-Google-Smtp-Source: AGHT+IFuXSDrJkJlhSE0HH83VwGItToAD6d8vtD2hWmMRPxTAKIlWLJ42gwCPAJDNxxrFTc36MD8um/qzsujxoSUgQo=
-X-Received: by 2002:a17:907:97cb:b0:aaf:c259:7f6 with SMTP id
- a640c23a62f3a-ab38b36bcf0mr3020440366b.45.1737814542434; Sat, 25 Jan 2025
- 06:15:42 -0800 (PST)
+ bh=2btazznWkDTf1F6O574VwiCA72kFYe21np/gM+y5GsM=;
+ b=AUJ0AcwThRdjlyNLaKCVhn+no0m2aHtsJ2n8io5nxRWjfVIIbbzViLRRiyxFbRyotd
+ qDeet9/EgNm6gXDPuUuQ7Ho15JmQs5SvSn1OVcP/Qp5boqKKqlWAoVm1sCycm+Z0xcsZ
+ A9+wELlrEC5ws80ha9bIi70B4uIFY0KyNxgDExwpMda0zcrfBVT/6qIrMMhb4zp2EgvQ
+ JJvd+IQjyjibSqr787UXvXs29lm5Kb5feFml0t+hM8j9+JMDJLB3ib1q3b/KhAae1vZY
+ BvRYHQDYQ8n3GuhT7lNrRihVJ6i1aHEzFk5dqDIWPJj1dVTrMk6e48iSmChBaT+iDeQl
+ ukow==
+X-Gm-Message-State: AOJu0YwrDNt+SvScOf2yxd2boY8sWIn0Ok0B592GZgLBBP9xMfM8C6pa
+ ZgrHUWAZY2SybMTuat1AuRDFYFOrTIWvOOahb3+DuuXCp6bXH6YVAXaG8so/BXY/Ow==
+X-Gm-Gg: ASbGncupqge86avo57NuJS8EbVbPFYvYiC17R3nW7iopucielS4aYD2S7fGR/kYxGnU
+ e/tCiNnImG0Aa8C6niUIpDCUwgyHDR0TnuEsm3Av8qe39wvK9xcTNPZQhTXSg/eByvpl26rljLr
+ WNuNLJrP6CodWNES0ZuZavyJxmYLuQVGxtpyowhlxebUnXgeCZye7YRviNnYYQVZQzRfDyUC08Z
+ Y2T13Y7c6WYVQehhRvaBif4ZUgVG9H5jjo+tVcZjDrJ+SBh2WAUmfO7+Fg8xcN90JteMuph30br
+ Lt9EtOtYKVzp54vxnTE=
+X-Google-Smtp-Source: AGHT+IEAq/ISl+sbUhMTeK8JbWf5ivj9xGBppthIUBJaEGp9bhmwn2igk9AActvDym5kguXynZm24A==
+X-Received: by 2002:a17:90b:5206:b0:2f5:63a:44f9 with SMTP id
+ 98e67ed59e1d1-2f782d4f189mr43244517a91.23.1737818875427; 
+ Sat, 25 Jan 2025 07:27:55 -0800 (PST)
+Received: from localhost.localdomain ([171.213.131.18])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2f80178e5a7sm3392912a91.2.2025.01.25.07.27.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Jan 2025 07:27:54 -0800 (PST)
+From: Weijie Gao <hackpascal@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Weijie Gao <hackpascal@gmail.com>
+Subject: [PATCH] miiphy: define mii_devs with LIST_HEAD()
+Date: Sat, 25 Jan 2025 23:26:32 +0800
+Message-Id: <20250125152632.26665-1-hackpascal@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250101195817.995321-1-sjg@chromium.org>
- <CAC_iWjKUdqGkAEXyz0LobkCgF_oX9dC1xCzz2qEWXbuOhkg=Kw@mail.gmail.com>
- <CAFLszTh3bnjisKqnDUvRCip2wdL0hJr+EM40+SbQ76h_zgg7Kg@mail.gmail.com>
- <CAFLszTiXHKdf_QUUsWpQpwv69HSGPNknkDW4JHgRUfT0r_G-aA@mail.gmail.com>
- <CAC_iWj+PwT2JmrWwrTsmHt_mGKDdhGUQgXKvzi3SCNCFxgJNRw@mail.gmail.com>
- <CAFLszThXtZjgavkzKhHbSXahONLqpT7yEYBH3bQ_1qzS=AUx+Q@mail.gmail.com>
- <CAC_iWjK5gOn4Ad=orCMhv4BY74U4E6AoOLR6rnYYHd9=-X7wEg@mail.gmail.com>
- <CAFLszThHFzKL=N=nKQGtTdZjkjY3nq85Yg+vzkBdODOcZOhoyw@mail.gmail.com>
- <CAC_iWjKRE-B1DRY=O17_QB6eQF67ifg=DyQnio8iMARNjBbMfQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjKRE-B1DRY=O17_QB6eQF67ifg=DyQnio8iMARNjBbMfQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 25 Jan 2025 07:15:31 -0700
-X-Gm-Features: AWEUYZm783xI8hkEsJ4cOJZ8GVoAW5hUvN3GcmodTskSEPexNUb0g4ixByZYrLA
-Message-ID: <CAFLszThSrJrDt40RFgpZEsP3rikzB8Y3vBCjwTs-m9kHDiC7xQ@mail.gmail.com>
-Subject: Re: [PATCH] bloblist: Drop BSD license
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,175 +94,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+When enabling net console and console multiplexing, a boot crash was
+observed using mtk_eth driver with stdin/stdout set to "serial,nc"
+in persistent environment:
 
-On Thu, 16 Jan 2025 at 11:32, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Wed, 15 Jan 2025 at 03:18, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Tue, 14 Jan 2025 at 12:34, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Tue, 14 Jan 2025 at 15:15, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Ilias,
-> > > >
-> > > > On Tue, 14 Jan 2025 at 01:40, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > On Fri, 10 Jan 2025 at 16:54, Simon Glass <sjg@chromium.org> wrote:
-> > > > > >
-> > > > > > Hi again Ilias,
-> > > > > >
-> > > > > > On Thu, 2 Jan 2025 at 18:41, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > >
-> > > > > > > Hi Ilias,
-> > > > > > >
-> > > > > > > On Fri, 3 Jan 2025 at 08:15, Ilias Apalodimas
-> > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Apologies for the formatting, replying on mobile.
-> > > > > > > >
-> > > > > > > > On Wed, Jan 1, 2025, 21:58 Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > >>
-> > > > > > > >> Linaro has decided to write their own version of bloblist from scratch,
-> > > > > > > >> so there is no point in having a non-GPL license on this file. Change
-> > > > > > > >> it, to better fit with the U-Boot project.
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Apart from the commit message being wrong, it's also intentionally provoking. There was no bloblist in TF-A.
-> > > > > > > >
-> > > > > > > > The TF-A code is implementing the firmware hand-off spec [0], which Linaro participated in the creation. The U-Boot implementation was adjusted to adhere to the same spec after the TF-A code was merged.
-> > > > > > >
-> > > > > > > The U-Boot series was [1], for reference. This was mostly about using
-> > > > > > > different tags and shrinking the headers. My clear understanding was
-> > > > > > > that we were going to try to have a single codebase, which is why I
-> > > > > > > changed the license.
-> > > > > > >
-> > > > > > > So, since you have a different view of events, why did Linaro write it
-> > > > > > > from scratch? Was it to avoid having U-Boot code in TF-A? Or was the
-> > > > > > > author just unaware of the original intention?
-> > > > >
-> > > > > I am not sure I am following 'from scratch'. Firmware handoff is a doc
-> > > > > describing a list. Raymond implemented it in U-Boot and TF-A.
-> > > >
-> > > > So in your mind, Raymond implemented it in U-Boot? Have you taken a
-> > > > look at 'git log' or 'git blame'?
-> > > >
-> > > > > The right way to do this is to move the firmware handoff code to a
-> > > > > library that can be used across projects.
-> > > >
-> > > > Not always. Probably not in this case. It has quite a bit of logic
-> > > > which depends on its environment. So I think it is better to have
-> > > > 'similar' code in several projects. Certainly, writing it from scratch
-> > > > (meaning not based on existing code) is not the best approach.
-> > > >
-> > > > >
-> > > > > > It isn't relevant for
-> > > > > > > the commit message, but if you can find out I would be interested.
-> > > > > >
-> > > > > > Just following up on this as I'm not sure of the status of this patch.
-> > > > > > Can you perhaps write your own commit message with your version of
-> > > > > > what Linaro has done?
-> > > > >
-> > > > > "The non-GPL license was inadvertently added, remove it". Raymond
-> > > > > wrote that code so I don't think he minds removing the extra license.
-> > > >
-> > > > Again, please check your assertion here. I for one am very surprised
-> > > > to hear that Raymond wrote the bloblist code :-)
-> > >
-> > > All of the patches carry his co-developed by or his signed off by. A
-> > > big portion of those are sent by you as well
-> >
-> > So here you are referring just to the patches which changed the header
-> > formats, not the original bloblist code.
->
-> I never said bloblist in any of my emails. I only mentioned the
-> firmware handoff.
+> CPU:   MediaTek MT7981
+> Model: OpenWrt One
+> DRAM:  1 GiB
+> Core:  35 devices, 15 uclasses, devicetree: separate
+> spi-nand: spi_nand spi_nand@0: Winbond SPI NAND was found.
+> spi-nand: spi_nand spi_nand@0: 128 MiB, block size: 128 KiB, page size: 2048, OOB size: 64
+> Loading Environment from UBI... SF: Detected w25q128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
+> mtd: partition "ubi" extends beyond the end of device "spi-nand0" -- size truncated to 0x7f00000
+> Read 126976 bytes from volume ubootenv to 000000007f7bf0c0
+> Read 126976 bytes from volume ubootenv2 to 000000007f7de100
+> OK
+> "Synchronous Abort" handler, esr 0x96000004, far 0xeafffffeea000018
+> elr: 0000000041e63cd4 lr : 0000000041e1b844 (reloc)
+> elr: 000000007ff9ecd4 lr : 000000007ff56844
+> x0 : eafffffeea000018 x1 : 000000007fb552e0
+> x2 : 00000000000000fe x3 : 0000000000000000
 
-Er, they are the same thing.
+The cause is that "serial,nc" forced the console subsystem to
+initialize the ethernet driver before ethernet subsystem
+initialization (console_init_r() is called before initr_net()).
 
-But I am relieved you didn't add a new common/firmware_ho.c into U-Boot
+During the mtk_eth driver initialization, mdio_register() will be
+called, and miiphy_get_dev_by_name() will then be called.
 
->
-> >
-> > >
-> > > >
-> > > > But it does help to explain why you objected to my commit message.
-> > >
-> > > The reason I object to the commit message is because it's
-> > > *intentionally* misleading.
-> > > The BSD-3 clause was added by you in 6c9e3d1fc0859 with the intention
-> > > of other projects using 'bloblist'.
-> >
-> > Yes, that's why I added the license, since I was led to believe that
-> > TF-A would use the U-Boot code with some modifications.
-> >
-> > >
-> > > The actual firmware handoff code was added much later in e266d2731145.
-> > > All of the patches in that series is co-developped by Raymond. Those
-> > > were added Wed Dec 27 while the TF-A patches were merged much much
-> > > earlier. commit 3ba2c15147c in TF-A was merged Tue Jul 25
-> >
-> > The original bloblist impl was in 2018:
-> >
-> > commit 9f407d4ef092c2ce7ab0f4f366aee252611dab3c
-> > Author: Simon Glass <sjg@chromium.org>
-> > Date:   Thu Nov 15 18:43:50 2018 -0700
-> >
-> >     Add core support for a bloblist to convey data from SPL
-> >
-> >     At present there is no standard way in U-Boot to pass information from SPL
-> >     to U-Boot proper. But sometimes SPL wants to convey information to U-Boot
-> >     that U-Boot cannot easily figure out. For example, if SPL sets up SDRAM
-> >     then it might want to pass the size of SDRAM, or the location of each
-> >     bank, to U-Boot proper.
-> >
-> >     Add a new 'bloblist' feature which provides this. A bloblist is set up in
-> >     the first phase of U-Boot that runs (i.e. TPL or SPL). The location of
-> >     this info may be in SRAM or CAR (x86 cache-as-RAM) or somewhere else.
-> >     ...
-> >
->
-> So the tl;dr is that when the firmware handoff code was added in TF-A,
-> there was no u-boot implementation. It all got added afterwards.
+The miiphy_get_dev_by_name() will check the list "mii_devs" to see
+if the passed device name exists. However the mii_devs is defined
+without initialization:
+> static struct list_head mii_devs;
+and the actual initialization is done in the following chain:
+initr_net -> eth_initialize -> eth_common_init -> miiphy_init
+Since initr_net() hasn't be called, iterating over the mii_devs
+will access to physical address 0 (mii_devs.next == NULL) and will
+cause the crash.
 
-No, sorry.
+The fix is to define mii_devs using:
+> static LIST_HEAD(mii_devs);
 
-> The way the development happened is that Raymond implemented the TF-A
-> code, and also plugged in the transfer mechanism so we use that info.
-> The fact that there was a similar implementation in U-Boot, which did
-> not adhere to the standard to begin with doesn't justify your commit
-> message.
+As the "current_mii" is defined as a static variable, it will
+always be NULL in board_r stage and initializing it will NULL is
+unnecessary. So the entire miiphy_init() can be remove.
 
-No, this is not correct either.
+Signed-off-by: Weijie Gao <hackpascal@gmail.com>
+---
+ common/miiphyutil.c | 12 +-----------
+ include/miiphy.h    |  2 --
+ net/eth_common.c    |  5 -----
+ 3 files changed, 1 insertion(+), 18 deletions(-)
 
-Firmware handoff started as an ARM effort. I influenced the design
-early on, suggesting that bloblist would be a good fit and it went
-that way and version 0.8 was the result. Then a work colleague pushed
-for halving the size of the headers by using smaller fields, so we did
-that and also renumbered the tags, to get 0.9. Then I did a U-Boot
-series to update bloblist to suit that[1]. Then Raymond picked it up,
-took it through several revisions and got it submitted to U-Boot.
+diff --git a/common/miiphyutil.c b/common/miiphyutil.c
+index 9b8744e5d8..6169ea884a 100644
+--- a/common/miiphyutil.c
++++ b/common/miiphyutil.c
+@@ -30,7 +30,7 @@
+ #define debug(fmt, args...)
+ #endif /* MII_DEBUG */
+ 
+-static struct list_head mii_devs;
++static LIST_HEAD(mii_devs);
+ static struct mii_dev *current_mii;
+ 
+ /*
+@@ -55,16 +55,6 @@ struct mii_dev *miiphy_get_dev_by_name(const char *devname)
+ 	return NULL;
+ }
+ 
+-/*****************************************************************************
+- *
+- * Initialize global data. Need to be called before any other miiphy routine.
+- */
+-void miiphy_init(void)
+-{
+-	INIT_LIST_HEAD(&mii_devs);
+-	current_mii = NULL;
+-}
+-
+ struct mii_dev *mdio_alloc(void)
+ {
+ 	struct mii_dev *bus;
+diff --git a/include/miiphy.h b/include/miiphy.h
+index 5abffd8fb6..8e4b58c734 100644
+--- a/include/miiphy.h
++++ b/include/miiphy.h
+@@ -33,8 +33,6 @@ int miiphy_is_1000base_x(const char *devname, unsigned char addr);
+ int miiphy_link(const char *devname, unsigned char addr);
+ #endif
+ 
+-void miiphy_init(void);
+-
+ int miiphy_set_current_dev(const char *devname);
+ const char *miiphy_get_current_dev(void);
+ struct mii_dev *mdio_get_current_dev(void);
+diff --git a/net/eth_common.c b/net/eth_common.c
+index 89b5bb3718..ba57d836b0 100644
+--- a/net/eth_common.c
++++ b/net/eth_common.c
+@@ -31,11 +31,6 @@ int eth_env_set_enetaddr_by_index(const char *base_name, int index,
+ void eth_common_init(void)
+ {
+ 	bootstage_mark(BOOTSTAGE_ID_NET_ETH_START);
+-#if CONFIG_IS_ENABLED(ETH)
+-#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) || defined(CONFIG_PHYLIB)
+-	miiphy_init();
+-#endif
+-#endif
+ }
+ 
+ int eth_mac_skip(int index)
+-- 
+2.34.1
 
-After that, we had the OF_BLOBLIST fiasco.
-
-> As I said we didn't decide to write a 'bloblist' we
-> implemented the spec in TF-A.
-
-Whatever you say here, the fact is that in TF-A the code was written
-from scratch, by which I mean not using the existing U-Boot code. That
-was not my expectation at the time.
-
-Regards,
-Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/cover/20230725213634.255345-1-sjg@chromium.org/
