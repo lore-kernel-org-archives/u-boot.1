@@ -4,76 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD48DC0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 12:29:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A80AC0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 12:56:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CA3680C77;
-	Sat, 25 Jan 2025 13:29:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C9D680C77;
+	Sat, 25 Jan 2025 13:56:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="H7tsnfCc";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PnG/kdft";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dxB3/Dum";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DtyOit2j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D9A380C7E; Sat, 25 Jan 2025 13:29:25 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id A11FB80C7E; Sat, 25 Jan 2025 13:56:32 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C4DF80836
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 13:29:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 91CE780836
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 13:56:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YgDWk1mLGz9snh;
- Sat, 25 Jan 2025 13:29:22 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YgF721Rb0z9sYX;
+ Sat, 25 Jan 2025 13:56:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737808162;
+ s=mail20150812; t=1737809790;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=PI8SwhJeIjdIprW1lSq3rJpOQrKtG/iSloESeEUKDnQ=;
- b=H7tsnfCcDfYpFkaVmImqJlSJmOAkXm7gzo3O6o1O1aAxAtqxctkqKCqOKfGG4bUENZzCMA
- PDz39FVXGegxnMzc8cCqx719kVwHQAbWcPXbrZsXKLws4bH5YkJG45Js3x120pFW8mFYnt
- Vc0//EzBOT2MDo3HkIRDuoUw7TgHx4mJ5DfFyBK4XXx/89xWuoa8keKrpfVDiVgHBjTp9t
- WCeowir57sDgEMDbP5v6do5l3lZ9t/c0XxjlTZAGxn3aiH8Ai1V2epCHM7j9z3dJ1Y2I0H
- QcHrowHbs4Lx2jO0mnbYmwoJWvCQdkinPPuqHMapmHtPwPAwRgAztnK+Mtl7mg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rTgldTSZfSYe9s5XlG4pDa5MvJftS9mqNDvBxOsA7Iw=;
+ b=dxB3/DumO+R78jxs7qVqQFKEgg3BOPga0glZH+C/pJgXU8EDMiZ4BA082i3bE/8/Lti3YG
+ SCnmvX3tL4UxhCvdM7nJe7TMnriw1q8uRR8OjqVzeAUNHJQ19a6qXO5JVULTQQ6ePi3YsF
+ myYfdxrKce36Hy9kJ/9YnBbUqAD2X5wsDxuCR1/9rAtnsi9MfwDnH08koaIzyBfnPRF2SD
+ /OFLQekUFSK3MNKKYf9TiPgtUjMGhSc3b5iJ2cK0xWVDYX8VSPANCw8LzoCcNZ+kg3xKf1
+ oidVWttRyQbHvnbbbEX40hoE8YvPw/EnpGsiRKFNEn2F3fVRvfdYSYVPdaosNg==
+Message-ID: <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737808160;
+ s=mail20150812; t=1737809788;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=PI8SwhJeIjdIprW1lSq3rJpOQrKtG/iSloESeEUKDnQ=;
- b=PnG/kdftQnBEJs/yjBIlmmnKiImlvY/PEU+CrzJzMSWTZqpIb8IMWfjy0gfyqqZFNFtEF9
- UHn7Kfng33myxN+TTNrU8F7yf1d0LKxh3SIzY4gJ2+1lFZluwcmEpXHi0D68zOLS6msvGr
- 7vN+eznSneJBi9OUJjDyH9F1akKkgPr74X8kqDX75aWisSmr9eiERYQUT+6GUptxT9td9F
- Vbuap2OHe3jeCPJ7MTZoxatb3sRoUltMb7Tu4kMKKEjiPhJp4X23g95DAy3+AGJETySFEG
- w7ZWlMpfKyHQ4j3uelLZUqk9J+0FQCA4Nj18cJa/TaS8Z3/whl/a3Fswz4CL7A==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rTgldTSZfSYe9s5XlG4pDa5MvJftS9mqNDvBxOsA7Iw=;
+ b=DtyOit2jcH5XnoxYllnCDRjDT1LY7yfW/DPpzgWrGaZp+VcLNHWI2qlzFvweGEh5oEtwvC
+ KNFLC6MEnYXQZKkEvotR9XrpUxBdhQFRDKt7irrqzQYo/5MdC9lCz4p+FR1rEKiNHPyCMl
+ xmVQWjOPUxynI/MijTYcmq4rO1vkhErbMXG52jTo4N67HRBzyi8NwGJeYGzRgS5IwZSc1X
+ +B6HR9LyrO3SpbvIfUwbGoVD7/huH5SH/ozBbVN0RMIq64/xN0o1pWKBi7pIBuVGdgxWE6
+ HgEkFsDwxTbyRgqZoaDhvsxsy2BDqUlJFAZm+UBjX+lP/EODngqA4D9ESfqn/g==
+Date: Sat, 25 Jan 2025 13:56:22 +0100
+MIME-Version: 1.0
+Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] net: miiphybb: Update debug() print
-Date: Sat, 25 Jan 2025 13:28:30 +0100
-Message-ID: <20250125122907.49962-1-marek.vasut+renesas@mailbox.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 43z4ct6ehgpwfmos6y7pzose7mpir5f1
-X-MBO-RS-ID: 8b386a0c6374a9f6df2
-X-Rspamd-Queue-Id: 4YgDWk1mLGz9snh
+ Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
+ <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 5bquibud8qtkckaoeocmchjjn69eyfss
+X-MBO-RS-ID: 96544d31bb00c641e68
+X-Rspamd-Queue-Id: 4YgF721Rb0z9sYX
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,42 +99,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the debug() print, use __func__ to always print matching
-function name, and also print bus name in case there are multiple
-busses.
+On 1/21/25 3:38 PM, Paul Barker wrote:
+> On 18/01/2025 06:53, Marek Vasut wrote:
+>> Introduce mdio_init() split off from mdio_alloc(), which is used
+>> to initialize already allocated struct mii_dev.
+>>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> 
+> Replying here for the whole patch series...
+> 
+> I like where we get to at the end of this series, but I don't like the
+> intermediate state where the bb_miiphy_buses arrays still exist but are
+> unused. I also think we should introduce a new ops struct so we're not
+> duplicating function pointers in each instance of struct bb_miiphy_bus.
+> 
+> I would prefer the following order of changes, let me know if you think
+> this would be cleaner:
+> 
+> 1) Introduce mdio_init().
+> 
+> 2) Add mii member to struct bb_miiphy_bus.
+> 
+> 3) Modify each driver to use the mii member of the appropriate struct
+>     bb_miiphy_bus instance, calling mdio_init() instead of mdio_alloc().
+>     At this point we're still using the instances in the statically
+>     allocated bb_miiphy_buses array.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Adam Ford <aford173@gmail.com>
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Mario Six <mario.six@gdsys.cc>
-Cc: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/net/phy/miiphybb.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Those instances might be rodata , so using them as read-write storage 
+does not necessarily work , does it ?
 
-diff --git a/drivers/net/phy/miiphybb.c b/drivers/net/phy/miiphybb.c
-index 5497b838225..9f5f9b12c9f 100644
---- a/drivers/net/phy/miiphybb.c
-+++ b/drivers/net/phy/miiphybb.c
-@@ -183,7 +183,7 @@ int bb_miiphy_read(struct mii_dev *miidev, int addr, int devad, int reg)
- 	bus->set_mdc(bus, 1);
- 	bus->delay(bus);
- 
--	debug("miiphy_read(0x%x) @ 0x%x = 0x%04x\n", reg, addr, rdreg);
-+	debug("%s[%s](0x%x) @ 0x%x = 0x%04x\n", __func__, miidev->name, reg, addr, rdreg);
- 
- 	return rdreg;
- }
 -- 
-2.45.2
-
+Best regards,
+Marek Vasut
