@@ -4,74 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E54B2C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 17:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C77EDC0218D
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 18:25:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63E3480EF6;
-	Sat, 25 Jan 2025 18:14:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id EBCB080EC0;
+	Sat, 25 Jan 2025 19:25:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eViJFCUS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J1h/1cD2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFEEB80EFE; Sat, 25 Jan 2025 18:14:19 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 9C40E80EEB; Sat, 25 Jan 2025 19:25:23 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8477880ECD
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 18:14:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 068A680836
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 19:25:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d7e3f1fc01so6315804a12.2
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 09:14:17 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-467a3f1e667so19407171cf.0
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 10:25:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737825257; x=1738430057; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yduiMtwLOZ26C+yfk0kZq7+Xer5BjpYwbNBhu2VDdbM=;
- b=eViJFCUSxohEc2Ant9d5t97JayMYld/7KXW1G2OgCLTaMBUpqN6ERUuajiDYDjKWb4
- cJ6bNL8uOaBfTawuXlH2qdymEFWkCcgOvZrCrLRmN2LOGUyPs190TZ/j/niPGrsLCMS+
- hS3RRCqkz+WD4do5X6u250zVsSfckstgn+Klk=
+ d=konsulko.com; s=google; t=1737829520; x=1738434320; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qnmdrBh5VqYg6l+szwFGQYOaSBPlLZXFh9hzvBvDLX0=;
+ b=J1h/1cD2VgZssV/kDysEVV7fGuZdcas0WUZMPIQ6TlW9Sykr8bpd/xzMS4FI4lxXq7
+ P01z0zjPquzz6PRuWcNIxiTp+ILEnPYSoPAh2Q38Xi2onBR5Yw458kbuXobVOI179sHN
+ e0ghzgb1UfrM97d0By7JW5tz89JImFmGDi5qo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737825257; x=1738430057;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yduiMtwLOZ26C+yfk0kZq7+Xer5BjpYwbNBhu2VDdbM=;
- b=cIsUWAgkp0xiwSH+GdUTkUVexMPR1FzN9jjOAB012Mh39dB+M4H4PCXZKDXGWo2bI2
- 8FcBPMnVEs++pvHsVj483H6rHDvbcFfZUTz+bbQ6Z43dRjqlItr8kJbgR6zEcNHBZ0Zt
- zIU+o0pIjOrBDlfLBVLG56w5pAdxKLIFSW92XsGUfmN6qGLA61tQ5yd5Ezo1qI/S24Km
- I5ysbvLoP7uasVycUwu+P6U/yySCHZVHLwIw5NZklEXm8Y2I1zv/K562LIFd3XXVRD8z
- uZ55zE3hASdbgVfbxi8Z7qldfqu/HJRg86FTJ08IrgtIWO4doRRbxt9/XW9hGKU39AzV
- 3xlw==
-X-Gm-Message-State: AOJu0Yx5tTNWBHaJgVwaJ62Nj+gRA/IVV64d9Tt2+BPWw4cJwDx496Vo
- O7WZYOBflC9G7nSIrHBAen5zc3elDIW69HjEesCjnwTLsTFBYHtfI3SPwn4MLkJYhIuah3Y7xTp
- jq+VTzbemZzEaNmPvWqf7dmb55Y7Olgk3X1FO
-X-Gm-Gg: ASbGncv5kqiZOQV+7YYla0y4j7yUhbA/LVOB2E/5xE4iLlQD1T07c9jrRnlvuyQT6ca
- l0WatyOJ7ky3+wt2EBCrTj8dzLuA3C4722GANkhCucr29eZh9vMGJ3TuECVl5dBEEKuufENXGew
- ==
-X-Google-Smtp-Source: AGHT+IGu3k2O7kf9AkfVcOoAeQgBPyIrO9jvUdBrF1Aduc/w/Oqffdr+I/2qxyyP3Uk4ijvygmTig8soFSJVkWkSZ/U=
-X-Received: by 2002:a05:6402:51cd:b0:5d3:e4eb:8d1f with SMTP id
- 4fb4d7f45d1cf-5db7d2fc8b0mr29834456a12.12.1737825256896; Sat, 25 Jan 2025
- 09:14:16 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737829520; x=1738434320;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qnmdrBh5VqYg6l+szwFGQYOaSBPlLZXFh9hzvBvDLX0=;
+ b=XrOgsacYSBwKD+5rkhVWGprO95cysbXm30eUWtgetR45MUQNMjqElP/jvQUaZj/p+n
+ de35T62wa7jH3O6VH87nZsTK4h0Qg6Dy1v6LWskI6EUfSw1q8Gb4g8zbef+qBfNLAvY7
+ Q2ATODATi+e9F50zOq7cj7A/j44Z5UCSKDCKofHYD8989gFGtJ3HJ2QEyVbZmmEfNUFB
+ KpFVN5f0jNm9ELQY+AD0aT2ow7KWWTjOSbIDnGzS5O4kgfXVEFAbZ1y4MZpohJNSS5Qe
+ aiLqikrhpzr91wjgMIOE5sXKPkxfa/8xDhlQNNGa6VBKReaiOWVEOTpIrYA2SjVKHBAe
+ v4vA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWd4hg1bCWsYxFmXu2yuqkaaWN5df9muQRSyoF0F7mhdSU1eRokai6iFaUE2cbqJEMu47cgJaY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+sHBWPxSY5raJsSbgG9F6UaT+/EvtfKRNmcjMvMGZGZgTDe5P
+ hzqAcS9wCIA21hGwHXacTwBaMgJXFmSkFaGZmvp49LYiNvr3EN8uAuVkOsNjDIg=
+X-Gm-Gg: ASbGncvRfQMrqNQTPvzDLIp5HxrD91Em2YTb8RxUyIFGao0aPXUwk7nYs4CCEFLCLuu
+ fG9k+g96mnz3ev2J4Y4OmArC/OALhDHhwxdZ7raWhFvYg617jv9hHdQ4CVqSTUYiaJqICjPdjbB
+ RfjCMlNpRiIzEJeyKHoJkGEHUSCzqYmXOQwtRXwbecQpaFsEDNrzbPpovVKuXHtfTfM3WZtd3bF
+ 2si8U743q68dClbemsbXE6vi7l0EXbA94is9puAVz9P8MlbyKS9mjN5rGfsYFIzLJg4z1ot7blw
+ gysO
+X-Google-Smtp-Source: AGHT+IFCuufjWHF/7D4GdVC3c8pvD7axn3+YE708FDEV51NQ1OCBB6uKoeXc8gY8qhNg6vtZSAOs6A==
+X-Received: by 2002:a05:6214:2483:b0:6d8:a188:369f with SMTP id
+ 6a1803df08f44-6e1b215a0aamr527697556d6.14.1737829519822; 
+ Sat, 25 Jan 2025 10:25:19 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e2058c2fd2sm19712596d6.108.2025.01.25.10.25.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Jan 2025 10:25:18 -0800 (PST)
+Date: Sat, 25 Jan 2025 12:25:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Alice Guo <alice.guo@nxp.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 01/10] pinctrl: imx: Push imx_pinctrl_ops into drivers
+ and staticize
+Message-ID: <20250125182515.GZ60249@bill-the-cat>
+References: <20250124145520.185414-1-marex@denx.de>
+ <CAOMZO5DTbaq+ArihsEE68YbD8S-v9ny2+Nc8XbXZ-JWRRTUFTw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250124185605.372347-1-sjg@chromium.org>
- <20250124192056.GU60249@bill-the-cat>
-In-Reply-To: <20250124192056.GU60249@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 25 Jan 2025 10:14:05 -0700
-X-Gm-Features: AWEUYZkThBvmmv0sAMOcGTdZ_Y1nVPd6OIEgBkPQLzMBFysHBSrZ5hsNc5y6bc4
-Message-ID: <CAFLszTjowGVr2R0=bz-h=sU0NHjP8CDaF04cfO1Kbh8d8F5nFA@mail.gmail.com>
-Subject: Re: [PATCH] test/py: Add a report show test durations
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UV2RYCp6v2u1MbbD"
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5DTbaq+ArihsEE68YbD8S-v9ny2+Nc8XbXZ-JWRRTUFTw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,53 +103,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Fri, 24 Jan 2025 at 12:21, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Jan 24, 2025 at 11:56:04AM -0700, Simon Glass wrote:
->
-> > Execution time varies widely with the existing tests. Provides a summary
-> > of the time taken for each test, along with a histogram.
+--UV2RYCp6v2u1MbbD
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Jan 25, 2025 at 12:53:10PM -0300, Fabio Estevam wrote:
+> Tom,
+>=20
+> On Fri, Jan 24, 2025 at 11:55=E2=80=AFAM Marek Vasut <marex@denx.de> wrot=
+e:
 > >
-> > Example:
-> >
-> >    Duration : Number of tests
-> >    ======== : ========================================
-> >        <1ms :  1
-> >        <8ms :  1
-> >       <20ms : # 20
-> >       <30ms : ######## 127
-> >       <50ms : ######################################## 582
-> >       <75ms : ####### 102
-> >      <100ms : ## 39
-> >      <200ms : ##### 86
-> >      <300ms : # 29
-> >      <500ms : ## 42
-> >      <750ms : # 16
-> >       <1.0s : # 15
-> >       <2.0s : # 23
-> >       <3.0s :  13
-> >       <5.0s :  9
-> >       <7.5s :  1
-> >      <10.0s :  6
-> >      <20.0s :  12
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  test/py/conftest.py | 77 +++++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 77 insertions(+)
->
-> Whitespace issues aside,
+> > Move imx_pinctrl_ops into drivers and staticize. This is preparatory
+> > patch for follow up pinctrl drivers which will not use this variant
+> > of imx_pinctrl_ops content. This should not change size, as most of
+> > the deployments compiled in one pinctrl driver anyway. No functional
+> > change.
+>=20
+> The u-boot-imx/master-next fails with this series applied:
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1005082
+>=20
+> This is unrelated to this series, though.
+>=20
+> Any ideas?
 
-Do you mean the blank lines? pylint wants those for top-level items.
+Yeah, sorry, hit retry a few times. I'd like to not have to disable that
+specific test, but I don't have any better ideas.
 
- we should probably not do this every time, just
-> when requested.
+--=20
+Tom
 
-I'd like to see it on each run, actually. It doesn't take any time to
-calculate and it lets us see where the time is going.
+--UV2RYCp6v2u1MbbD
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Regards,
-Simon
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVLIcACgkQFHw5/5Y0
+tyzWIAv/fAVjtJsWASXzkAwcVy8h7lQfQD1QtnvThzKrbbhVgfmsoOcyVzBAtt5r
+27bcS4WRoOFUmByd7itIxYJc8CMMEPQ8QvTTt0HuT546+FW1WxD2zrqh0kfAP8Es
+Xh4b01KGIc+K7dnwMWOaJBLeuTI3eX3TB4sIlXDe/s1Ov42N8Np+FqWcNeFqjRrJ
++tLN5LxmLk1l3WM5g5jK4SoUqB8J4XFQgjNlUvGIQ0inatMMgDYQQlM3G0seti9q
+zmanft8h7lxt7oc/+AfLz8aQfBYHJs1nKGGM9yM23ZF4VASHWr1Ze3SsLG1fbcDC
+hX+ZIeMSypqQ9kZE6G3uQzO05eGWFJmo7g3gSd2ui2leInDRPRqRQFrUq58ZRfAg
+ObzukpzWHYhlehCaHfS6OvgWQ+lNe1I+KRNc4QXDnYXif0OFhkXplBG9ESkBuCnb
+98UjbKwNlu284gWuB2WFMlwXmDrOCnFVxHV3d4tHZo0JkejG0+yDWvd7QkKFG6To
+M4lh4SQk
+=W83P
+-----END PGP SIGNATURE-----
+
+--UV2RYCp6v2u1MbbD--
