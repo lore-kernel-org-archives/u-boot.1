@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0703C02181
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 00:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C70DC0218B
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 06:16:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0EB080A52;
-	Sat, 25 Jan 2025 01:03:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B1EC80A45;
+	Sat, 25 Jan 2025 07:16:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1737763408;
-	bh=2eRclDA/JZpIqsfaqlxB9b7lHPLKpn9fh9W4g/dW2vg=;
+	s=phobos-20191101; t=1737785760;
+	bh=FtHexdXQlkn84eyUB545rLtz8TSYWxUM7qrssiv/4Kw=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=NtEWh1lu2WHut40bJi7LjbohcOG0/SH8Ze96oPCHlpKSLTsPbE956Auv/pJgxXOY1
-	 QAZ7EEbnhFieLOAMnXyUkXl/8ieLkrOIID/Mgkm8RIbaumYxoO1mFbz+Y0vOSP1TwF
-	 lnC2Whax6QmtLdqhYBz0RkK4xXbPXnu2T4QPHB5slHSjv651ZfUpgk3YqnPcX3PmyC
-	 QbM0E1EZLyBeuQhLMd/cZtZBG7/MjF6acNY3MHXMIpKM/OR/vvCCFKTHdScIGOv+gd
-	 dRDiY4rq0BMtm/+piWra+bSTDiBqz2UbKLjJkM77mbY2EMGYVetuwZQDVZRjSwFppI
-	 aJ3vfUGbAxtrA==
+	 Reply-To:From;
+	b=XQg3evzPyzjhMXFuUaXtGJxiH+urJ+4mLYMno7GkN2wj/+xKmGoEjiJbgXqQEGf/Y
+	 Gg50e+/E5E3asqjjE8D9ihRhVEV3YlI8zPUJLkE07dhCusPgmCZIzhhwwLTau9la98
+	 D/yvGWNaWfuStalxG0xux4w6M8nJRNkc/jOW1h8BB2Vn8wY0ONgOnYVA+iIvMhYp1B
+	 5c76z3QJtoEDU/3h4kZcT6hacz+CXFpkhQ6lA2ocffS97Rex34obMN1DVcIezXnaK3
+	 QH35XhGrUGKT7C0X8WCwwxVCruv4tPTWEFy3FcJ9lKnLq5oOEoeZSY1VbAIe+s+Y1i
+	 CvcoS6jMKUq0A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A418980ADB; Sat, 25 Jan 2025 01:03:27 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id B8B0A80ADB; Sat, 25 Jan 2025 07:15:58 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8462E80A45
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 01:03:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A7A780A3E
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 07:15:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="T00W/Uo3"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="I0G793wY"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 965721048EF60; Sat, 25 Jan 2025 01:03:18 +0100 (CET)
+ with ESMTPSA id 5E5721087DEDF; Sat, 25 Jan 2025 07:15:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1737763403;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ t=1737785754; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=2eRclDA/JZpIqsfaqlxB9b7lHPLKpn9fh9W4g/dW2vg=;
- b=T00W/Uo31QKqdCk7NtbuqXFqPYcLQKNtVjt2+9IX9JaIWaZHaeuoNDGoCYfL8bDJvVtcNz
- 51F92E0WoiTZQI2ZKhUK0uJEkMdBhgU4Ab+Pvo5xeTJGrz1y8p+NfA2KWKsfBvOPXFA7C6
- 96ZIlLUOQ/xazcXS2jYBCHwGCoHtSH53H8xNqinf4C9qdPrE2ILJpA2D5t61G2/KZhQmIe
- xoL6rrIIg7xHTu5hT+Xwv4WWLDO7Hg1ZJbAhXW1xRUilfOZ1/9q6XEKRnIp1PWkzdPgCsQ
- wGDFyYrBLyGngfioNNvgseOuDWM0nlnngeoeJfRCfUbzcvivW12EOwQkU97FyQ==
-Message-ID: <4c2a3f99-4af2-4c5c-ba63-9a90018b51bd@denx.de>
-Date: Sat, 25 Jan 2025 00:58:05 +0100
+ bh=FtHexdXQlkn84eyUB545rLtz8TSYWxUM7qrssiv/4Kw=;
+ b=I0G793wYIfAgG1+Yz6p2se/U7CfYH8BdY6BC8jnKp/YhBW/Shhm8iBjl5KgTkbE5gEZEs3
+ jccGvI56QMrwfZiv3R2X740htWNhBach9jbeVfdjdzFcfRhZMbJoFi/YLpx7TAWwVZK1de
+ 6+9BL+q8J4UxQkvh9lbb0HXPY+DwlL3kz8iYj0okWh7dJFZCC5SKoBhOsYSzYgajfpNtxf
+ 1sRDI7cR0fO4aInkL/6k4XaJSM0f6zNFpPwTLi1rPRh+ypjjNUWz7HQmpgGPlKamTJjYu1
+ JORpkFSa+wVrT7N9kY0ibYNTQaQqitiLthn5FduIJyOStKzbV+cTyg5Nra/L/A==
+Message-ID: <18a3d5e9-e630-d59e-e305-faba75c8f6d1@denx.de>
+Date: Sat, 25 Jan 2025 07:16:36 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] common: board: make initcalls static
-To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>
-References: <cover.1737709089.git.jerome.forissier@linaro.org>
- <564c3f3b7f70c893b2c6b6dfc89a226b90d411de.1737709089.git.jerome.forissier@linaro.org>
- <f9bfd3d8-dd30-4f4e-a73d-ab9082f832a8@denx.de>
- <38bb1c47-8001-4415-a421-ff1b501f0105@linaro.org>
- <77906c5f-3d67-4c43-9e22-c8ea74695146@denx.de>
- <bebd3427-2d20-43ad-b682-ed02858db546@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v3] led: add function naming option from linux
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <bebd3427-2d20-43ad-b682-ed02858db546@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Christian Marangi <ansuelsmth@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
+References: <20250123114906.80724-1-hs@denx.de>
+ <20250123143302.GI60249@bill-the-cat>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20250123143302.GI60249@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,69 +82,92 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/24/25 6:23 PM, Jerome Forissier wrote:
+Hello Tom,
+
+On 23.01.25 15:33, Tom Rini wrote:
+> On Thu, Jan 23, 2025 at 12:49:06PM +0100, Heiko Schocher wrote:
 > 
-> 
-> On 1/24/25 17:23, Marek Vasut wrote:
->> On 1/24/25 4:57 PM, Jerome Forissier wrote:
->>>
->>>
->>> On 1/24/25 11:35, Marek Vasut wrote:
->>>> On 1/24/25 10:10 AM, Jerome Forissier wrote:
->>>>> +#define INITCALL(_call) \
->>>>> +    do { \
->>>>> +        if (_call()) { \
->>>>> +            printf("%s(): initcall %s() failed\n", __func__, \
->>>>> +                   #_call); \
->>>>> +            hang(); \
->>>>> +        } \
->>>>> +    } while (0)
->>>>
->>>> Can this be turned into some static inline function too , so typechecking would be retained ? Maybe the function can be passed in a function pointer to call ?
->>>
->>>
->>> Doing the below totally kills the space gain (-160 bytes instead of -2281
->>> on zynqmp_kria_defconfig, with LTO).
+>> in linux we have the option to create the name of a led
+>> optionally through the following properties:
 >>
->> Does the compiler not inline the functions perhaps ?
-> 
-> It does. inline vs __always_inline makes no difference. The assembly
-> code is pretty difficult to understand in any case (macro or static
-> inline function). There are pieces of called functions all over the
-> place inside initcall_run_f() which is to be expected with LTO I
-> suppose.
-> 
+>> - function
+>> - color
+>> - function-enumerator
 >>
->>> And it prevents from printing the
->>> function name in case of error, which is nicer than an address
->>> (especially with relocation at play).
->> That function name can be passed in using __func__ as a parameter.
+>> This patch adds support for parsing this properties if there
+>> is no label property.
+>>
+>> To be as close as possible to linux import the following files
+>> from it:
+>>
+>> include/dt-bindings/leds/common.h
+>> include/linux/uapi/linux/uleds.h
+> [snip]
+>> ---
+>> as we introduce a new element in struct led_uc_priv, may we should add
+>> this functionality through a new Kconfig option? (Which also would make
+>> this optional and save some bytes for boards who do not need this...)
+> [snip]
+>>   arch/sandbox/dts/test.dts                | 37 ++++++++++++-
+>>   doc/device-tree-bindings/leds/common.txt | 28 ++++++++++
+>>   drivers/led/led-uclass.c                 | 70 ++++++++++++++++++++++--
+>>   include/led.h                            |  6 ++
+>>   test/dm/led.c                            | 22 +++++++-
+>>   test/dm/ofnode.c                         |  2 +-
+>>   6 files changed, 158 insertions(+), 7 deletions(-)
 > 
-> True. That being said, the type-checking argument does not seem
-> decisive here, and although I too prefer to use static inline
-> functions over macros when possible, it looks like we have no choice
-> in this case.
-Can you try this kind of thing (might need some tweaking):
+> Getting things out of order slightly, sorry. The commit message should
+> be updated a bit more still since we aren't copying files in. And we
+> should delete doc/device-tree-bindings/leds/common.txt in a pre-patch
+> because we have that from upstream now. As for size, how much is the
 
-"
-static void check_and_fail(int *ret) {
-   if (*ret) {
-     printf("failed\n");
-     hang();
-   }
-}
+removed! And updated commit message
 
-static inline void INITCALL(int (*_call)(void))
-{
-   int ret __attribute__((__cleanup__(check_and_fail))) = _call();
-}
-"
+> growth? You can use tools/qconfig.py -b, and then -f LED to find some
+> platforms to size compare before/after, and if you've not used buildman
+> for size checking before I've put my script up over at
+> https://source.denx.de/u-boot/u-boot-extras/-/raw/master/contrib/trini/u-boot-size-test.sh?ref_type=heads
+> now for easier sharing.
 
-(maybe it really is the passing of pointer to _call() function into the 
-INITCALL() function which confuses gcc into not inlining this right, but 
-let's find out)
+Thanks for the script!
+
+Here 2 examples:
+$ ./u-boot-size-test.sh capricorn_cxg3 --branch led-mainline
+[...]
+    aarch64: (for 1/1 boards) all +886.0 rodata +230.0 text +656.0
+             capricorn_cxg3 : all +886 rodata +230 text +656
+                u-boot: add: 1/0, grow: 1/0 bytes: 416/0 (416)
+                  function                                   old     new   delta
+                  led_post_bind                              220     516    +296
+                  led_colors                                   -     120    +120
+
+$ ./u-boot-size-test.sh aristainetos2c --branch led-mainline
+[...]
+01: Merge patch series "add the support of sha256_hmac and sha256_hkdf"
+40: led: add function naming option from linux
+        arm: (for 2/2 boards) all +557.0 bss +20.0 rodata +161.0 text +376.0
+             aristainetos2c : all +557 bss +20 rodata +161 text +376
+                u-boot: add: 1/0, grow: 1/0 bytes: 264/0 (264)
+                  function                                   old     new   delta
+                  led_post_bind                              128     332    +204
+                  led_colors                                   -      60     +60
+             aristainetos2ccslb: all +557 bss +20 rodata +161 text +376
+                u-boot: add: 1/0, grow: 1/0 bytes: 264/0 (264)
+                  function                                   old     new   delta
+                  led_post_bind                              128     332    +204
+                  led_colors                                   -      60     +60
+
+So, may not worth to add a Kconfig option here... or?
+
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
