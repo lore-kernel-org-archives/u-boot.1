@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E099BC0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 21:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37D87C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 21:44:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AFE080C91;
-	Sat, 25 Jan 2025 22:43:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B7CD580C91;
+	Sat, 25 Jan 2025 22:44:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sigVavXH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W+a4Xv4l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7E2880EC0; Sat, 25 Jan 2025 22:43:25 +0100 (CET)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 578C680EC0; Sat, 25 Jan 2025 22:44:50 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C39A80836
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 22:43:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C8A580836
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 22:44:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-467a3f1e667so19897931cf.0
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 13:43:23 -0800 (PST)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6dcd4f1aaccso51845006d6.2
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 13:44:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737841402; x=1738446202; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737841487; x=1738446287; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OqJZviWei3GUt8mWgguv30TgcfsllmqGPmifoMtWwuE=;
- b=sigVavXH7JNGXwzneq5ZoNTbR9AoR1rHnBTPic4CQGSCcKGfobUTRs2nIz+LAojzCc
- mqVYhNFo5sRPVAs8SskqMWhuFgFCjhDiU82txVUCDaITIQZ8hRB+Rx/6VtHQhIIf1nIh
- gF2j9FABMr3DwD7s6VvK2w11swhUJCkIn/3l8=
+ bh=VDRcdeHHZB2/pTQ0QhxWAQXWpLaVhlY2mzOjCROXhLo=;
+ b=W+a4Xv4l4drJ2SlRXs0Z6bVdMTUmwJw9t+6J9KJe62sgFiK/xY0i/plH7l3FnRcOPV
+ h6+Bb9sMq0AWRHNWUqGYTDV9Z6Qhf0W48D4JoGzL2zPP0AEIYVk/eWmvB1Spbr7BLwcL
+ IcDpCRt72N/yeieztn1iwVfZ3KCa+RRoa2PkY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737841402; x=1738446202;
+ d=1e100.net; s=20230601; t=1737841487; x=1738446287;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OqJZviWei3GUt8mWgguv30TgcfsllmqGPmifoMtWwuE=;
- b=jqbUSkOUMgkAgLKQGeuijHUHGQaI6ZgDWTtpqHEhzszqtkAwMPElxkKOLqqXxqoLoz
- L54AVT9++VmCWj8bW+QdQQ101ewQhIlFhQF6AlarmlM0r9uTudROwwaGp5PfrgNtLV7R
- G8b+hIvq+cP/Xnmwwmn+/pIp4V4KFBI3J6SZLf5Z9pOJq93L90EB4V/Ye+Uda9Aj7X5w
- 1TGLyuWDIhe2htF9zoMaGpNXoGJG1dZC9TbLwuCYgwzrPVU5gGO/LWp2pOv22+72obRH
- jUw2hb87u00lT4aBqhL/+JxZVhWCRUan+u3aK24rk/HH+1cx5+ju/NkDsh7xosvABi8t
- irpA==
-X-Gm-Message-State: AOJu0YyhiXvCaIHx3qSQr2azu3R34kckN7huBUcHfNwOSJ645sLBIRri
- Pc3mUQ/g85Q93jZJXC+eQRx/Q+sj7OGwLLEcHYjDbkk7JN+lSvldZEXTYkTsm4s=
-X-Gm-Gg: ASbGncvZETVsk9s56Z415Gy7Qm9yNeLpyjfsabN/SeteTTN/0lLPPISy7HsYUdS+6G4
- WhWVb0/pVJuDK6hZVRI74vxls615Fgo8wvP7hKlWICrL0AxwX6CYMsmrmD3NbKNdyQk+UlWNlY6
- BPFIAAAc6CRRVLY2KQXCL9hc9ZSs/vprspGP/8DweBXyFdIaQPBCBTEjwZLMrEVhWnBK2ONzGTK
- tYmiQXkrTDdlVeoJ1TMiQzSR79n24JHlWpCLBfxsJhWut7I0re+yBwDTo2yvdWZLDdw946uwV25
- 4clJPwDM+iIliZY=
-X-Google-Smtp-Source: AGHT+IGMdjhWhwLOSSYBnxiRwBcjfVJz21t7UlBYqZetvEpeBI+lFR8KGjW4YRfWw9dXyfVYoa/Gmw==
-X-Received: by 2002:ac8:5a88:0:b0:467:5da6:808f with SMTP id
- d75a77b69052e-46e12a940c6mr514356551cf.22.1737841402294; 
- Sat, 25 Jan 2025 13:43:22 -0800 (PST)
+ bh=VDRcdeHHZB2/pTQ0QhxWAQXWpLaVhlY2mzOjCROXhLo=;
+ b=j1124ssFKS+eS62Oob0Yxjp42yJCnINJTcODmh8dRixwGfVDPXa7adhTwt7Tyo6GMV
+ EQs2scPT7jmon+GA1nHJAFrNt0dyfTSWSMd0alT9ostjMsINuI1m8fsRqld9gaNNTZ+P
+ /nfIzj3c4GGh+HmmIIecSSPTe4FBZJUdrD4FPEihn9g6yn2AZVbj/EAFDgKYeWhi5d61
+ MrKItdXN1ZdaCnaONB4ZtIoNWFtFWPrmuIo50Kjoz+iKkY9P1/ghnDb8pMUqwjU+NSq4
+ oRANfSE+qUbH6pEPDOq7iUtgkvpEEZ8y/ht2CThh1VbCDJSWvoC2RtxBgyNegyARqgZ/
+ Iazg==
+X-Gm-Message-State: AOJu0Yx3IzLk3S4Wc4E0Elkn67W/8hg6Wa3/neQ3rxuOss2hMf42TQ6C
+ yXrCvlI/C6WrP6/1YeR1PX23Lx8s2fHjNT0VAnqVhrhnSrT4al89iZAFYNKkgrQ=
+X-Gm-Gg: ASbGncsAMOKUbt8HZwLhnPCeyAF35LbA6xQXtP8xsY6ZxmzPeJvokZaBVzI7DXevDY8
+ 1Gc48ULocycJakKMWtsD3cr5RRRePgQN2irTtSz57NfeeLTGdiYIxiD5DjJUpiPuhhiopuGfM6a
+ vXkvpeyvVsMte5HiRJx9GEgvbutestqkxOGuR5npOKxu5GqyC6maphyIRCSJm0Ykz62BUE0alFQ
+ RXj44QQk9s07SDxiwzKgduZwpz7TpZ7rmCctJz0ugpVH1eg5s7B7XzYbrZ/uFW19KmLHo/cR4RM
+ GOET
+X-Google-Smtp-Source: AGHT+IHeT/kZaXHyS3htdtG86iYb7gR2Zo1i0afCkpGkb5u5xf+sZqqpC1JNFdWiMfMY5czXSqeGTw==
+X-Received: by 2002:a05:6214:194f:b0:6d8:e0a0:a949 with SMTP id
+ 6a1803df08f44-6e1b220a44amr591444176d6.32.1737841487170; 
+ Sat, 25 Jan 2025 13:44:47 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e6689d058sm23513301cf.32.2025.01.25.13.43.20
+ 6a1803df08f44-6e205ac4967sm21397716d6.120.2025.01.25.13.44.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 13:43:21 -0800 (PST)
-Date: Sat, 25 Jan 2025 15:43:17 -0600
+ Sat, 25 Jan 2025 13:44:46 -0800 (PST)
+Date: Sat, 25 Jan 2025 15:44:43 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH 3/4] test/py: Show info about module-loading
-Message-ID: <20250125214317.GC60249@bill-the-cat>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Love Kumar <love.kumar@amd.com>
+Subject: Re: [PATCH 4/4] test: Make net tests depend on CONFIG_CMD_NET
+Message-ID: <20250125214443.GD60249@bill-the-cat>
 References: <20250125213150.1608395-1-sjg@chromium.org>
- <20250125213150.1608395-4-sjg@chromium.org>
+ <20250125213150.1608395-5-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ui1GPHiCtVaihFXI"
+ protocol="application/pgp-signature"; boundary="R3bAIz2sW2j7gko7"
 Content-Disposition: inline
-In-Reply-To: <20250125213150.1608395-4-sjg@chromium.org>
+In-Reply-To: <20250125213150.1608395-5-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,93 +96,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Ui1GPHiCtVaihFXI
+--R3bAIz2sW2j7gko7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 25, 2025 at 02:31:38PM -0700, Simon Glass wrote:
-> It is sometimes tricky to figure out what modules test.py is loading
-> when it starts up. The result can be a silent failure with no clue as to
-> what when wrong.
+On Sat, Jan 25, 2025 at 02:31:39PM -0700, Simon Glass wrote:
+> This fails on samus_tpl as there is no 'net' command.
 >=20
-> Add a section which lists the modules loaded as well as those not
-> found.
+>    =3D> net list
+>    Unknown command 'net' - try 'help' !
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  test/py/conftest.py | 33 ++++++++++++++++++++-------------
->  1 file changed, 20 insertions(+), 13 deletions(-)
->=20
-> diff --git a/test/py/conftest.py b/test/py/conftest.py
-> index 5096c20ed65..23435b7db3c 100644
-> --- a/test/py/conftest.py
-> +++ b/test/py/conftest.py
-> @@ -286,19 +286,26 @@ def pytest_configure(config):
->      ubconfig =3D ArbitraryAttributeContainer()
->      ubconfig.brd =3D dict()
->      ubconfig.env =3D dict()
-> -
-> -    modules =3D [
-> -        (ubconfig.brd, 'u_boot_board_' + board_type_filename),
-> -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
-> -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_' +
-> -            board_identity_filename),
-> -    ]
-> -    for (dict_to_fill, module_name) in modules:
-> -        try:
-> -            module =3D __import__(module_name)
-> -        except ImportError:
-> -            continue
-> -        dict_to_fill.update(module.__dict__)
-> +    not_found =3D []
-> +
-> +    with log.section('Loading lab modules', 'load_modules'):
-> +        modules =3D [
-> +            (ubconfig.brd, 'u_boot_board_' + board_type_filename),
-> +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
-> +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_=
-' +
-> +                board_identity_filename),
-> +        ]
-> +        for (dict_to_fill, module_name) in modules:
-> +            try:
-> +                module =3D __import__(module_name)
-> +            except ImportError:
-> +                not_found.append(module_name)
-> +                continue
-> +            dict_to_fill.update(module.__dict__)
-> +            log.info(f"Loaded {module}")
-> +
-> +        if not_found:
-> +            log.warning(f"Failed to find modules: {' '.join(not_found)}")
-> =20
->      ubconfig.buildconfig =3D dict()
+> Fix it by adding a condition for the test.
 
-We won't see this warning normally, only if some level of verbosity is
-used, yes? It's normal to not have both u_boot_boardenv files for
-example.
+For this part,
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+> Add a blank line to keep pylint happy.
+
+Can we silence that pylint? I don't look forward to the churn of adding
+more blanks everywhere especially since imo it doesn't improve
+readability either.
 
 --=20
 Tom
 
---Ui1GPHiCtVaihFXI
+--R3bAIz2sW2j7gko7
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVWvIACgkQFHw5/5Y0
-tyw2Rgv+Jryctc40tVSijrfgO+dxO6ZmmGeI7Y9vz9wddr4FTQJQ/HCfzw5kG31g
-EMTcfNbygEse7KVUbTpzc1C7uTuyYRcZlsF1T4MAokv94TmZftxG0enW/gNBsdiC
-hFZnUnrAngaxMsKAypt2FGQnRHPhIJufgqJNCSAWvkbfJ9e8IQf7u+M5V3bBnDVO
-GRJkpu0kCKudfNoKNh12S/my0RtAR8XpZmpSSHSqsKmQqhaII74COO8eDt35jjqZ
-LGXg9Rp6RfKLzsYDSoaeeCwVROaHmf0SI4zkdDC09Wri/fm1PO+shVvlqrmO3Dd4
-OlehuB13aSmzIIahNEp+K6l9NTba8CaRTRRW1H3FCo473CczL62KfGi76rvFO0Qa
-JlbRsGES67lF3BsyDaJTixNGGRNLrqvx/8/h8IFF8Jf93BIAjfd3pvsBnL7q0Y40
-u+uJPaFTRYp82Pfhi3jqK4llrsoXWEUypmBW2YrjFUcGP71et0Uav/WZvbVcSqlc
-bDJTv2fJ
-=wuVs
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVW0sACgkQFHw5/5Y0
+tyxuhgv/VR3gHfaXyaTVKOYsJ04TFH5lFQxATytTbav9/cTRmIyljFOexhIx3/F1
+JphbZg/lu55cU3owik8ZfVaijm6KzY3giYJkceB+Tumz/2nsL+KW7rGYSH/w+Peh
+D/T0gDabQxaGS54oUcOfy9qkbD/AEZOmELo0vXXKcsMoCIFn8FAUoQQsDo7YYVwI
+cwELdCu+zXgZBDumNXFADHkQRyjIbCNJRnHr24E1YbeALE35FjUg4UdQlBM91oqm
+XiAl64wsPsvEaJusLpRAW6iqNvAuSKjW26huCf1A6dH3cCCeYDIIfk9m+F3lanDo
+xGIpxc2aab/R4EopH7E+O0flrmCq9P+ZeiSDK6ACCgfEErZyAU2Xu08y5+kgF0E4
+9CfnzSIi2pOgpg9DzYnsTIzWghLnrpCanwnciQDy174AkVpcpv7MQs4BW0r21BYC
+41iUvaqkwL8Ic9MUU31JAbXQ+QfsmWAy28oEpSCVe35Bdyf9408x3fULrKH7zOtj
+RRvnRv6i
+=xGeN
 -----END PGP SIGNATURE-----
 
---Ui1GPHiCtVaihFXI--
+--R3bAIz2sW2j7gko7--
