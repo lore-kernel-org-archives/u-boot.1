@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A80AC0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 12:56:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE2CC0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 13:23:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C9D680C77;
-	Sat, 25 Jan 2025 13:56:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9B34F80C77;
+	Sat, 25 Jan 2025 14:23:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dxB3/Dum";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DtyOit2j";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SyPDfE8b";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="N4e65/Ww";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A11FB80C7E; Sat, 25 Jan 2025 13:56:32 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 6889580C7E; Sat, 25 Jan 2025 14:23:12 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91CE780836
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 13:56:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3331D80836
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:23:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YgF721Rb0z9sYX;
- Sat, 25 Jan 2025 13:56:30 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YgFjl5Lvtz9sGk;
+ Sat, 25 Jan 2025 14:23:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737809790;
+ s=mail20150812; t=1737811388;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rTgldTSZfSYe9s5XlG4pDa5MvJftS9mqNDvBxOsA7Iw=;
- b=dxB3/DumO+R78jxs7qVqQFKEgg3BOPga0glZH+C/pJgXU8EDMiZ4BA082i3bE/8/Lti3YG
- SCnmvX3tL4UxhCvdM7nJe7TMnriw1q8uRR8OjqVzeAUNHJQ19a6qXO5JVULTQQ6ePi3YsF
- myYfdxrKce36Hy9kJ/9YnBbUqAD2X5wsDxuCR1/9rAtnsi9MfwDnH08koaIzyBfnPRF2SD
- /OFLQekUFSK3MNKKYf9TiPgtUjMGhSc3b5iJ2cK0xWVDYX8VSPANCw8LzoCcNZ+kg3xKf1
- oidVWttRyQbHvnbbbEX40hoE8YvPw/EnpGsiRKFNEn2F3fVRvfdYSYVPdaosNg==
-Message-ID: <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
+ bh=/1fEckJ8OU2CAoeteAWASzYNl9LWHkp8ZLlCB9DfDb4=;
+ b=SyPDfE8bOjaaBwapHuVORFYVSIvnNvDMYAYM5+HpycqyHVdaSq3Qmr6ZyJJLVi/ZENYTev
+ sbKi5GilNMZDChCzVvwlhP+xPmD1CerQbY3Y3sLpzkl1gq7kaFEajcmy+sXAcfq9/+edTM
+ egjttU6dWaiaCo9zLwj/AZ59WZT8tbU5sDEE8zx9uusVtasOPt0NyB+ybgtKE8fndc+kDZ
+ Ohv7lTnOmG6zznfBwWk8Gi5LvAi3NVJo3z53+kQd/+gaOEDTXcHwRrHWafKpypxjLoVa/j
+ hE5p0FM1Bth1zskfAl2HlDKtpU1T3x+riWliJpTZZOk2NiMq6TPHQCryUvHNew==
+Message-ID: <f2192348-1c8b-4858-b138-e1a894dff92f@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737809788;
+ s=mail20150812; t=1737811385;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rTgldTSZfSYe9s5XlG4pDa5MvJftS9mqNDvBxOsA7Iw=;
- b=DtyOit2jcH5XnoxYllnCDRjDT1LY7yfW/DPpzgWrGaZp+VcLNHWI2qlzFvweGEh5oEtwvC
- KNFLC6MEnYXQZKkEvotR9XrpUxBdhQFRDKt7irrqzQYo/5MdC9lCz4p+FR1rEKiNHPyCMl
- xmVQWjOPUxynI/MijTYcmq4rO1vkhErbMXG52jTo4N67HRBzyi8NwGJeYGzRgS5IwZSc1X
- +B6HR9LyrO3SpbvIfUwbGoVD7/huH5SH/ozBbVN0RMIq64/xN0o1pWKBi7pIBuVGdgxWE6
- HgEkFsDwxTbyRgqZoaDhvsxsy2BDqUlJFAZm+UBjX+lP/EODngqA4D9ESfqn/g==
-Date: Sat, 25 Jan 2025 13:56:22 +0100
+ bh=/1fEckJ8OU2CAoeteAWASzYNl9LWHkp8ZLlCB9DfDb4=;
+ b=N4e65/WwQ+xhUZafX3b29cfTNGFou2tH7Gg41Jc4KKDklIM2y+D5urgTkuG1nXhpcwBrFl
+ 5KZnLUZV5oKbbISrQmgeV48luDPVsHOm0oBaSFlNuUcd1f9CA79na+bS4Wud0N+HKrduMy
+ jMyl9iwpcfdnEeM9KKTO2zxBY1kTOU4KYpkN5yMN06fz9pRLPzs+Q/Pm4apq7Sx2CBSOqW
+ pB/ARlmcegI9pT2lMsLdFIiQGIxGTCpvA6kYlqzGTiYuOvVkYjRdtm5htl1v3SfXvRkhRs
+ 7889LR82JOApZWqN0JlbmC9/czZwsclyJsPy8Io+yVEIyjt0i28Ssb0NKovYNw==
+Date: Sat, 25 Jan 2025 14:22:59 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+Subject: Re: [PATCH 1/8] cyclic: Prevent corruption of cyclic list on
+ reassignment
+To: Rasmus Villemoes <ravi@prevas.dk>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Aaron Williams <awilliams@marvell.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ronald Wahl
+ <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>
-References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
- <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
+References: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
+ <87cyghx2ru.fsf@prevas.dk>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
+In-Reply-To: <87cyghx2ru.fsf@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 5bquibud8qtkckaoeocmchjjn69eyfss
-X-MBO-RS-ID: 96544d31bb00c641e68
-X-Rspamd-Queue-Id: 4YgF721Rb0z9sYX
+X-MBO-RS-META: 1ca8sr131595ygi5s7zt6hgkwnr1j5er
+X-MBO-RS-ID: fbbc41933944702e721
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,35 +102,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/21/25 3:38 PM, Paul Barker wrote:
-> On 18/01/2025 06:53, Marek Vasut wrote:
->> Introduce mdio_init() split off from mdio_alloc(), which is used
->> to initialize already allocated struct mii_dev.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+On 1/20/25 10:17 AM, Rasmus Villemoes wrote:
+> On Sat, Jan 18 2025, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 > 
-> Replying here for the whole patch series...
+>> Make cyclic_register() return error code, 0 in case of success,
+>> -EALREADY in case the called attempts to re-register already
+>> registered struct cyclic_info. The re-registration would lead
+>> to corruption of gd->cyclic_list because the re-registration
+>> would memset() one of its nodes, prevent that. Unregister only
+>> initialized struct cyclic_info.
 > 
-> I like where we get to at the end of this series, but I don't like the
-> intermediate state where the bb_miiphy_buses arrays still exist but are
-> unused. I also think we should introduce a new ops struct so we're not
-> duplicating function pointers in each instance of struct bb_miiphy_bus.
-> 
-> I would prefer the following order of changes, let me know if you think
-> this would be cleaner:
-> 
-> 1) Introduce mdio_init().
-> 
-> 2) Add mii member to struct bb_miiphy_bus.
-> 
-> 3) Modify each driver to use the mii member of the appropriate struct
->     bb_miiphy_bus instance, calling mdio_init() instead of mdio_alloc().
->     At this point we're still using the instances in the statically
->     allocated bb_miiphy_buses array.
+> I had considered something like this, but I don't like it, because it
+> relies on the cyclic structure (or more likely whatever structure it is
+> embedded in) being initially zero-initialized.
 
-Those instances might be rodata , so using them as read-write storage 
-does not necessarily work , does it ?
+True
 
--- 
-Best regards,
-Marek Vasut
+> And if the caller doesn't
+> know whether the cyclic_info is already registered or not, he can't do a
+> memset() of it.
+
+This is what can happen right now, which is dangerous and what this 
+series attempts to address.
+
+> So my preference would be that we instead simply iterate the current
+> list to see if the struct cyclic_info is already registered that
+> way.
+
+That I can do, but it will be a bit slower.
+
+> Also, I think I'd prefer if double cyclic_register() is allowed and
+> always succeeds; this could be used to change the period of an already
+> registered instance, for example.
+
+This would be terribly overloaded interface, no, let's not do that.
+
+Better introduce a dedicated function for that kind of period adjustment.
+
+> Also, that avoids making the
+> interfaces fallible.
+> 
+> And cyclic_unregister() could similarly just check
+> whether the passed pointer is already on the list, and be a no-op in
+> case it's not. Those extra list traversals are not expensive (we're
+> traversing them thousands of times per second anyway in cyclic_run), and
+> I doubt one would ever has more than about 10 items on the list.
+> 
+> IOW, I'd suggest adding an internal
+> 
+> bool cyclic_is_registered(struct cyclic_info *info)
+> {
+>    struct cyclic_info *c;
+>    hlist_for_each(...) if (c == info) return true;
+
+I don't think this works, because that struct cyclic_info contains 
+.next_call member, which is updated over time, so this exact match would 
+not work as-is. I have something like this now:
+
+diff --git a/common/cyclic.c b/common/cyclic.c
+index 807a3d73f67..d721a21a575 100644
+--- a/common/cyclic.c
++++ b/common/cyclic.c
+@@ -27,11 +27,29 @@ struct hlist_head *cyclic_get_list(void)
+  	return (struct hlist_head *)&gd->cyclic_list;
+  }
+
++static int cyclic_already_registered(struct cyclic_info *cyclic)
++{
++	struct cyclic_info *cycliclst;
++	struct hlist_node *tmp;
++
++	/* Reassignment of function would corrupt cyclic list, exit */
++	hlist_for_each_entry_safe(cycliclst, tmp, cyclic_get_list(), list) {
++		if (cycliclst->func == cyclic->func &&
++		    cycliclst->name == cyclic->name && // or strcmp() ?
++		    cycliclst->delay_us == cyclic->delay_us &&
++		    cycliclst->start_time_us == cyclic->start_time_us)
++			return -EALREADY;	/* Match found */
++	}
++
++	/* Match not found */
++	return 0;
++}
++
+  int cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
+  		    uint64_t delay_us, const char *name)
+  {
+  	/* Reassignment of function would corrupt cyclic list, exit */
+-	if (cyclic->func)
++	if (!cyclic_already_registered(cyclic))
+  		return -EALREADY;
+
+  	memset(cyclic, 0, sizeof(*cyclic));
+@@ -49,7 +67,7 @@ int cyclic_register(struct cyclic_info *cyclic, 
+cyclic_func_t func,
+  void cyclic_unregister(struct cyclic_info *cyclic)
+  {
+  	/* Unregister only initialized struct cyclic_info */
+-	if (cyclic->func)
++	if (cyclic_already_registered(cyclic))
+  		hlist_del(&cyclic->list);
+  }
+
+[...]
+
+>>   void cyclic_unregister(struct cyclic_info *cyclic)
+>>   {
+>> -	hlist_del(&cyclic->list);
+>> +	/* Unregister only initialized struct cyclic_info */
+>> +	if (cyclic->func)
+>> +		hlist_del(&cyclic->list);
+>>   }
+> 
+> So this already shows how error prone this approach is. You are not
+> clearing cyclic->func, so if the caller subsequently tries to register
+> that struct again, he would get -EALREADY, while a subsequent unregister
+> could would lead to exactly the list corruption you want to avoid.
+
+I would expect the caller should clear the structure before attempting 
+to register it again. Shall we actually memset() the structure in 
+cyclic_unregister() too ?
+
+> And unless the caller immediately himself clears ->func, other code in
+> the client cannot rely on ->func being NULL or not as a proxy for
+> whether the struct is already registered (and the caller shouldn't do
+> either of those things, as the struct cyclic_info should be considered
+> opaque).
