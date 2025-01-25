@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76526C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 17:11:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C282AC0218D
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 17:11:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E425D80F10;
-	Sat, 25 Jan 2025 18:11:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 378F380EFB;
+	Sat, 25 Jan 2025 18:11:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oF7ZRYvm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HrmOhIsE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4897E80EFB; Sat, 25 Jan 2025 18:11:42 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 9A39480836; Sat, 25 Jan 2025 18:11:48 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33ED280ECD
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 18:11:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0DDD80836
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 18:11:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d3d0205bd5so4655925a12.3
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 09:11:40 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ab2aea81cd8so573914466b.2
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 09:11:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737825099; x=1738429899; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737825106; x=1738429906; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DZYrRDRUYCihgWhb0WTyDDfC3nsfZmCKXdpcih/bl2c=;
- b=oF7ZRYvm4Xv1aj8HjELhveBBf5ayf9pm74f4B1dki6ZbZn+X+xUZMnaOm/Jwgx6iMm
- UEdqOe+4Jt+mKWT2kvzt9NVb6gO3gvKMAtKfwq+JBC9w6/SoTW08TsWNaG2n7JyFMQu9
- 1f7vTn3fg4+R8/czvZR/c979D7eRvKwTLj4Kk=
+ bh=FgakT+Dt3EuNNry7juosRKDR6D9f61IG9MmzcbY2FlA=;
+ b=HrmOhIsEKRv32OU3JY7ipSGnFjOGPhICAxZ6EVwTeS3mIzyRJvFT3Kj2TCOUDmThzC
+ Y+ZavxKwGiyglYX17Xe4rtZJepw2kKrJd1HWRi2x1XCIXVM7hVZMjzTc/NCmIOtzQudn
+ fHnEmg445DSzbFdtGprYrNKmuKWdoWSkQL/QM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737825099; x=1738429899;
+ d=1e100.net; s=20230601; t=1737825106; x=1738429906;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DZYrRDRUYCihgWhb0WTyDDfC3nsfZmCKXdpcih/bl2c=;
- b=HWZoADmrssUDBdqm86X2qC4Ze3KnsvYs/cgG9U6iNpfydmpVcKNq2zMSRbiKmaVt/L
- 1RsMvXzNYlG5Syzl3uFex1NS3/8lPvcl7c30yYAHvPhQUunM/w5slsfWGZ7ynoQr9qni
- TO1/ZJ0rp25YZ36fd/raM1S7DNR7gLTK07RE9wN+3txcH3VpATLsQMHKYiMJXYAFwPJi
- jNyM8shTZyB++UmQAjtU1jl5ygz8pX9c5GNVMuCgbD9/voJdnggyAugoG52bXxdtOc0l
- x0Tf6i2msK1cpl/Z0wix8z1sq+QeAY7/14nQw/J9RDvXkdJL0O47Vd2MIGX8tc/dAbW+
- JT0A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVbGiLxioIpKiKxRKwJ3/o1DP0PpUAzaAgQfmqGkPG4906DIqbRBD3SHpzdPj02Auo4YPTgEKs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwG+PlCM5KTUULynccnuDtG2uCmrBZ3ZFOCllAHFMp7rmVFUus9
- WRkmZo1OJrlM46+PxihlcluJHTTSXpAJfS0nJDb9p1aCWYocf6yzuq4HR8JqXo68kmnnI0FV4pD
- hNLhLiB3Yuk0rhrHU/rDL7GuZJhStHxXGBt9YseQX6G9VzNs=
-X-Gm-Gg: ASbGncuZjYi7o2LoT60xGLusQ8w3KBJYTx0vhfE83vaJ3ojeno9IxjGxEKhsnhatyQ5
- 9J6mM+8hTXeHbVLO9TQx72+HQe/fSKgDac8sH/s7DIeCuEBwSKco3JtjnTcM/9OY=
-X-Google-Smtp-Source: AGHT+IHZjronj+30PS7jhOeqrwzKrmsOnSr3E5rkujZROL/VYZ7QBJLEi1gnlGSUef3Y1FV5Isz6SkAaMvlOdNI5lDE=
-X-Received: by 2002:a05:6402:2549:b0:5d9:84e8:6152 with SMTP id
- 4fb4d7f45d1cf-5db7db2e31emr29474396a12.32.1737825099211; Sat, 25 Jan 2025
- 09:11:39 -0800 (PST)
+ bh=FgakT+Dt3EuNNry7juosRKDR6D9f61IG9MmzcbY2FlA=;
+ b=ESQcHrs3UlAROUzyaaLlWQni619Ymm2R78gspt/crR9dH4QeQD2fJQTk+KnN53pKSK
+ KYl1uck8Is3BChLBnXoxmMBqsucqxB+PkqGbgFqx0BNAn/BdT3pQ5oOrtIjE3r6JNnZc
+ wPXofgw9f7wb8wCemJlEMqCXTdG2KKqyg1k5/wAI7OCEh0IrMm1KSf6BSkCUzaet/9Ji
+ MW5vN1DyF84raRhSHFseLHzR0TUt5WKOtIMYyE/5ugs/v0J911PWBxgDw9ZnNyv9lVFn
+ dQel1IFqEPXYhkAXY9cymEkT5ySe2UFEpU+qeQDpIsum1H5BJvNA4k2vnCr8xKL85cob
+ 2cUw==
+X-Gm-Message-State: AOJu0YwUwalLbuxA1m3HCl8908a/KrFuFM+rwEkaD7KxTsKBlXD/R9VX
+ KU9DpdxxwagMxKd0wyUQ7RW889mBQQ34oS/x9irlXzCfacRcVrQsV3OF5DkQsp9gW5KmmexHDA5
+ wxZAH+7TxA+PluLW9Lyx+AYwPnzUsbJm1cmL/5gkb+UZtc1Q=
+X-Gm-Gg: ASbGncsgXRCaW6tX34BwhVfiLQ+vP0QOPh/DCbRmhUlUNMV1OpKDJ+dy6p+vk16fX3t
+ vo0MDCPfZfHIoYQ1xwkYpzETD/ESEsrXl0uFCGJQCdhTUTDtiMlc2uperokakUT4=
+X-Google-Smtp-Source: AGHT+IEos6d6TBElBJy/KARvV/m43OuHIG325tcOEXukcQwYOGL03GdNGN0dr3I4PvB2NS97I7ypH00wd+okEmp00mc=
+X-Received: by 2002:a17:907:989:b0:aa6:a844:8791 with SMTP id
+ a640c23a62f3a-ab38b378d8fmr3245634766b.45.1737825106045; Sat, 25 Jan 2025
+ 09:11:46 -0800 (PST)
 MIME-Version: 1.0
-References: <VI1PR07MB9972394B8A364AC9A18495F6F7192@VI1PR07MB9972.eurprd07.prod.outlook.com>
- <VI1PR07MB9972E22550B1514AD604D399F7192@VI1PR07MB9972.eurprd07.prod.outlook.com>
- <VI1PR07MB9972D12CDEDF3ADFF7D81B2AF7E72@VI1PR07MB9972.eurprd07.prod.outlook.com>
- <878qr4wm5o.fsf@prevas.dk>
- <VI1PR07MB997209D177C705DD5371F0D6F7E12@VI1PR07MB9972.eurprd07.prod.outlook.com>
- <87v7u6v38k.fsf@prevas.dk>
-In-Reply-To: <87v7u6v38k.fsf@prevas.dk>
+References: <20250123161114.84071-46-sjg@chromium.org>
+ <20250123162834.GL60249@bill-the-cat>
+In-Reply-To: <20250123162834.GL60249@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 25 Jan 2025 10:11:25 -0700
-X-Gm-Features: AWEUYZkOLxoL4igeXlU9hTA5lYom-wlggnzemWjVG77M4BqGIEx3pW5Mv-OLJ-Y
-Message-ID: <CAFLszTjNX23b9-_7AYrrJ7uu9fYeEuReb+TEDy9SQYss66E1Rw@mail.gmail.com>
-Subject: Re: AW: secure boot, mkimage with external signing server
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: "Rosenschild, Klaus" <Klaus.Rosenschild@hilti.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Date: Sat, 25 Jan 2025 10:11:30 -0700
+X-Gm-Features: AWEUYZk0EhgyiQzbckwJEQnW3WZTPUMFHeazMo2_o3f3EFq4Tez1SngDuRkc3gM
+Message-ID: <CAFLszTgkgoLJSkQwMJg1YWTuNpjiMfWbvWu41miRVE6wdaFq9g@mail.gmail.com>
+Subject: Re: [PATCH v4 45/46] pxe_utils: Refactor to separate reading from
+ booting
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martyn Welch <martyn.welch@collabora.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,78 +89,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi Tom,
 
-On Wed, 22 Jan 2025 at 16:27, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On Thu, 23 Jan 2025 at 09:28, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Jan 22 2025, "Rosenschild, Klaus" <Klaus.Rosenschild@hilti.com> wrote:
->
-> > Hi Rasmus,
-> > thank you for pointing to this solution.
-> > I think this is the best way to do this.
+> On Thu, Jan 23, 2025 at 09:11:06AM -0700, Simon Glass wrote:
+> > It is useful to be able to select a bootflow and read its images,
+> > without actually doing the boot. This allows adjusting the bootargs, for
+> > example.
 > >
-> > However, our signing server is very well protected and making changes there is a long and complex process.
-> > Right now, it only provides the following two functions:
+> > Provide support for this in the pxe_utils module, by adding a 'probe'
+> > method which selects a label and saves its settings, so it can be booted
+> > later, if desired.
 > >
-> >   1.
-> > generation of a signature of a sha256 hash using the private key
-> >   2.
-> > providing the public key, the pure key, not the certificate
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > I found a workaround to determine the hash that mkimage uses to create the signature of the configuration without re-implementing the internal algorithm that mkimage uses:
+> > Changes in v4:
+> > - Fix the force-prompt logic to leave the flag alone unless forced
 > >
-> >   1.
-> > create a temporary rsa private and public key
-> >   2.
-> > run mkimage to create a FIT image with signature: mkimage -k keys-f fitImage-sign-orig.its -r fitImage-sign
-> >   3.
-> > extract the signature from the FIT image
-> >   4.
-> > re-generate the hash from the signature and the public key: openssl pkeyutl -verifyrecover -in signFile.hash.sign.bin -pubin -inkey ../keys/build.pub -asn1parse
-> >   5.
-> > now, I can send the hash to the signing server, get the correct signature back and re-enter it into the FIT image (e.g. via python libfdt)
-> >
+> >  boot/pxe_utils.c    | 71 ++++++++++++++++++++++++++++++++++++++++++---
+> >  include/pxe_utils.h | 41 ++++++++++++++++++++++++++
+> >  2 files changed, 108 insertions(+), 4 deletions(-)
 >
-> Urgh, it shouldn't be that complicated, and I would consider it quite
-> reasonable if mkimage could be instructed to emit the hash it actually
-> signs along with the signature.
+> In the future can you please use --in-reply-to so that patchwork and b4
+> will track this correctly? Thanks.
 
-Yes that sounds useful.
-
->
-> But, I do think you should be able to create a pkcs#11 module which
-> simply takes that sha256 as input from the higher layers and does
-> whatever it needs to do to talk to the server, getting the signature
-> back.
->
-> > However, there is now another problem. I also need to put the public key into the device tree file. So, I have to run a slightly different mkimage command (with  -K option):
-> > mkimage -k keys -f fitImage-sign-orig.its -r -K bcm2711-rpi-4-b.dtb fitImage-sign
-
-Note also that you don't need the original source. You can use the -F option.
-
-> >
-> > However, the -K options requires a certificate and not just the
-> > public.
->
-> Yeah, that is a fundamental design flaw of mkimage; one shouldn't need
-> to sign any image in order to get the public key data embedded in
-> u-boot's control dtb.
-
-It would be nice to have a way to generate an instructions file, which
-contains the hash to be signed, then a way to read the result file,
-loading the private/public keys in as needed. In other words, split
-the operations of mkgimag into two.
-
->
-> Fortunately, you can ignore what most tutorials tell you about that -K
-> option. There is a simple script in the u-boot repo, tools/key2dtsi.py,
-> which you can apply to just the public key, and you get a .dtsi fragment
-> that you can include when you build u-boot's control dtb. Either you can
-> use the CONFIG_DEVICE_TREE_INCLUDES mechanism for making sure that .dtsi
-> gets picked up during build, or you can simply copy-paste the contents
-> into your board's .dts file.
->
-> Rasmus
+OK will do.
 
 Regards,
 Simon
