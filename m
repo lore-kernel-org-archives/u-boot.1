@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 847E0C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:59:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4495C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 23:00:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0343E80EF4;
-	Sat, 25 Jan 2025 23:59:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 49C8E80EF4;
+	Sun, 26 Jan 2025 00:00:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Eue8plAj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZvSSPz2G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB4DF80F10; Sat, 25 Jan 2025 23:59:04 +0100 (CET)
+ id 2FD8E80F10; Sun, 26 Jan 2025 00:00:12 +0100 (CET)
 Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
  [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A33C080ECD
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:59:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7062580ECD
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 00:00:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5d3d143376dso4538877a12.3
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:59:02 -0800 (PST)
+ 4fb4d7f45d1cf-5d647d5df90so5378080a12.2
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 15:00:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737845942; x=1738450742; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737846007; x=1738450807; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FQDxLWZK0PSMqeIIXwAZknm+uppi6AqfqfZC2CcX9TY=;
- b=Eue8plAjnox9Beo4aAp49BuwHHqMtZOKYJN8wYxRByxk0oc7JFSY7BQQh49+7MqoeT
- rbN32eC6/2J07IMi+uPO3esiu6MCbjdyYhZqBjL8nOEzMtaHUqDMw31GMOVDDGYTt4iD
- 7/Ai0AI814fMzzevn7lM6tX5xiHQUNmnUrISQ=
+ bh=hEWzaW8vaq7Fdlx9eniOAhnJJHDhpYP1ZlnUVHBZGnk=;
+ b=ZvSSPz2GLJvx9cLOOR6OCfpzkPi+g+Boph9KIWtq8dnUqoPon4LnaMNyxRumRI9483
+ 2YbtkJucub6ihHhFMc/FkONebS1qtOMUr6r0CrrNXm1ia87u0ZHkI3BaMpHiK3x5t8SV
+ 7xsaE/7Uz1KB3ko+IvqeKB3f69jK+d10sDDlM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737845942; x=1738450742;
+ d=1e100.net; s=20230601; t=1737846007; x=1738450807;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FQDxLWZK0PSMqeIIXwAZknm+uppi6AqfqfZC2CcX9TY=;
- b=SnGUc+KV2E/Ix7A7bg4ino2RY5rotbK6G2kBDXIrrNLzHXrBERbEoEjdUqz+VKSH/K
- Mh9JHIBK2XRrLLzLe2eoPj5VRQ2mjLt7QpnwdDh8XIqjRZ2LApOCxHwoq4uEWSkkMujz
- Iq5eOhw3t3+IEQB1bbZNpDfaOkrns/7TALLwvHPTad1oiX8SVPoC8x8hTCuY7dE0USjw
- M1sqSS2/7q/H2+DQJJBTWBrD8gBXR2SwWXUwUXGEE76X90x+9Ml5WmMiZEArXc4NXgNn
- zGGQTVRouSwJFb9AZy6MNAhYSdt7JmxiChI0u7SzwDZrH2RRopKphSwzbR4nk7w7v4AQ
- jCxA==
-X-Gm-Message-State: AOJu0YxtNzQ7KkZL5uuH7mDxbnCviIyT3SvBeyJytiASZOCbxMt+L0Yt
- jFLHzUJNYB++qK30TqRxR/FmzoLo44rrUvdxT4dhVmZtBd3WWvrIv1TQsodf88pRTqoGiXATGGR
- HFmeqgvhTuN3pq8jKrMkPg2fORVwNo0zF0Sq/
-X-Gm-Gg: ASbGncvWrws1g6MQ9ypxttMd78cUYd12HB2+kiGmxu/P4wpOMf/TvTQ5zTEfUoOpvaO
- q8AWEHSvJRwhuwND5rbQZDIAIsWl+eP/IMwXTUVbwzoJxEyGIPsvlXvysUSkkkE4=
-X-Google-Smtp-Source: AGHT+IEaYBTqG2tAT1zhbmQwiTblASeuVykK2jZDd82x5SHbhBgiYyAqIptOczBScj9omt56ca2d93/LWrtWPLDabP0=
-X-Received: by 2002:a05:6402:520e:b0:5d1:2631:b88a with SMTP id
- 4fb4d7f45d1cf-5db7d3012d1mr36824478a12.17.1737845942038; Sat, 25 Jan 2025
- 14:59:02 -0800 (PST)
+ bh=hEWzaW8vaq7Fdlx9eniOAhnJJHDhpYP1ZlnUVHBZGnk=;
+ b=GLJn35pRqgJ4GbmdhILJDBLMpWmz5h/TX2ucoxsND5y+sFf4rcfdpqJz+blh+rBTmR
+ ncKt1Sr3A+sOfHO+aUXIYXHsI5T5dQWuUBL4QqXqDCrsr6p1DKjbWLUTN3teHiu/5zKI
+ nLDziiUdp2+ks6PRCnUCj8djL+5dzmwNUU9jO8PviU19Y/xnbCrf7sM0/O87ZyTN5333
+ XC3r8iklo2+lxX9Yap5jodY8sqzy7uU4fmctGoZe2UvTID33McJ4pgGnP8AXrVMLG3ii
+ qBkIuyezHHjJrMRUO4iKVyLG7SOxFv/a/F26Y9iCZXBSBQEIXytrqq3HMuLyLP0fBenl
+ FI8A==
+X-Gm-Message-State: AOJu0Yzcd/tSIsZGfcRNxbjrPeEYKE+rD/HgZkRa9TcYXyaggOq1crsf
+ 6KzK5RY8UjWb/36JElKm6AkgzFCLI6YQWHyj1mH7pqlg3V1Wa5e4CJRf0Mpxpfcy2slrbn67Ls6
+ K/ksfNj8Gbg+y2A24XvULQ/v/aLXesT//sLKx
+X-Gm-Gg: ASbGncsNxGO8PAvSgyxssmHHwXQQ9M+Cy6rFAHgz0ZKU+AB6KIgi35N6o3ru41w/gC0
+ OyfXnCXorJanJaxxVrG6zwDfWkOp+haUPmZvQhijhVnzzs8Ikle4HZyTIwVZ0jGA=
+X-Google-Smtp-Source: AGHT+IFTY5LAOYDC7c5sKEQpNozuUbgC7tPKaiCcDve314KH+gfBZ+5/LZNuAxOrppcxfR07X/FX6vD7514SkMf7j40=
+X-Received: by 2002:a50:9ec6:0:b0:5da:105b:86dd with SMTP id
+ 4fb4d7f45d1cf-5db7db2bf8amr23350078a12.29.1737846006895; Sat, 25 Jan 2025
+ 15:00:06 -0800 (PST)
 MIME-Version: 1.0
 References: <20250125213150.1608395-1-sjg@chromium.org>
- <20250125213150.1608395-2-sjg@chromium.org>
- <20250125215055.GF60249@bill-the-cat>
- <CAFLszTjG0P0bdwziV4irtiU1JGNMwnoiLO9xhPxLQa9GZPVBtA@mail.gmail.com>
- <20250125225510.GJ60249@bill-the-cat>
-In-Reply-To: <20250125225510.GJ60249@bill-the-cat>
+ <20250125213150.1608395-3-sjg@chromium.org>
+ <20250125214613.GE60249@bill-the-cat>
+ <CAFLszTgYPNxmiO=agM+MUp0da_6q3BBro74bWEnNbqeM-tT=bw@mail.gmail.com>
+ <20250125225756.GK60249@bill-the-cat>
+In-Reply-To: <20250125225756.GK60249@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 25 Jan 2025 15:58:50 -0700
-X-Gm-Features: AWEUYZlrr_7C4dsjCu1hmrc4ah4Gcb6lYpTZ6nWdgbFlVzkb5cx0K8afXcNI3t8
-Message-ID: <CAFLszTj7no1azG+Us4toZA00O79sZpr3qgtoD69UpQFVNjAhoQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] test/py: Shorten u_boot_console
+Date: Sat, 25 Jan 2025 15:59:54 -0700
+X-Gm-Features: AWEUYZkRWYGIQJjFrJ46mhbd9r69d9oMrW2Tbgv_BM2Emm3AZeuvCpzyhlYp7hI
+Message-ID: <CAFLszTj+w4opaXNj7B76eiXx4c0jZBoAGVkd-4amyEz2YaTjPw@mail.gmail.com>
+Subject: Re: [PATCH 2/4] test: Drop u_boot_ prefix on test files
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Andrew Goodbody <andrew.goodbody@linaro.org>, 
@@ -76,22 +76,16 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Dmitry Rokosov <ddrokosov@salutedevices.com>, 
  Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Huang Jianan <jnhuang95@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Jens Wiklander <jens.wiklander@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Joao Marcos Costa <jmcosta944@gmail.com>, Julien Masson <jmasson@baylibre.com>,
- Love Kumar <love.kumar@amd.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Love Kumar <love.kumar@amd.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michal Simek <michal.simek@amd.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Richard Weinberger <richard@nod.at>,
- Roger Knecht <rknecht@pm.me>, Sam Protsenko <semen.protsenko@linaro.org>,
- Sean Anderson <sean.anderson@seco.com>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Tim Harvey <tharvey@gateworks.com>, Weizhao Ouyang <o451686892@gmail.com>,
- William Zhang <william.zhang@broadcom.com>, linux-erofs@lists.ozlabs.org
+ Michal Simek <michal.simek@amd.com>, Padmarao Begari <padmarao.begari@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Richard Weinberger <richard@nod.at>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Tim Harvey <tharvey@gateworks.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,49 +105,71 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sat, 25 Jan 2025 at 15:55, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 25 Jan 2025 at 15:58, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, Jan 25, 2025 at 03:42:00PM -0700, Simon Glass wrote:
+> On Sat, Jan 25, 2025 at 03:41:43PM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Sat, 25 Jan 2025 at 14:51, Tom Rini <trini@konsulko.com> wrote:
+> > On Sat, 25 Jan 2025 at 14:46, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sat, Jan 25, 2025 at 02:31:36PM -0700, Simon Glass wrote:
+> > > On Sat, Jan 25, 2025 at 02:31:37PM -0700, Simon Glass wrote:
 > > >
-> > > > This fixture name is quite long and results in lots of verbose code.
-> > > > We know this is U-Boot so the 'u_boot_' part is not necessary.
-> > > >
-> > > > But it is also a bit of a misnomer, since it provides access to all the
-> > > > information available to tests. It is not just the console.
-> > > >
-> > > > It would be too confusing to use con as it would be confused with
-> > > > config and it is probably too short.
-> > > >
-> > > > So shorten it to 'ubpy'.
+> > > > We know this is U-Boot so the prefix serves no purpose other than to
+> > > > make things longer and harder to read. Drop it and rename the files.
 > > > >
 > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > [snip]
-> > > >  102 files changed, 2591 insertions(+), 2591 deletions(-)
 > > >
-> > > First, I'm not sure I like "ubpy". I believe "u_boot_console" is because
-> > > it's how we interact with the stdin/stdout of the running U-Boot. And
-> > > indeed it provides more than that. But ubpy is too abstract and unclear,
-> > > and looking at the diffstat, I don't know that big global rename is
-> > > justified to save text space.
+> > > This is a massive bit of churn and violating namespace best practices
+> > > when it seems like we really need:
+> > > [snip]
+> > > > diff --git a/test/py/tests/fit_util.py b/test/py/tests/fit_util.py
+> > > > index 16ff8c96c63..7aad4030be3 100644
+> > > > --- a/test/py/tests/fit_util.py
+> > > > +++ b/test/py/tests/fit_util.py
+> > > > @@ -5,7 +5,7 @@
+> > > >
+> > > >  import os
+> > > >
+> > > > -import u_boot_utils as util
+> > > > +import utils as util
 > >
-> > I actually get quite confused hunting around in the fixtures so I
-> > suspect others do too. I would like to settle on some better names.
+> > The real namespace is the one in site-packages, where you are supposed
+> > to put things in their own modules. The Python tools operate in a
+> > proper namespace, but so far the tests don't. They just use whatever
+> > directory the file is in. So, for example, we have:
 > >
-> > Yes, I don't like ubpy much, either. Your favourite AI suggests
-> > 'fixture' or 'test_env', both I which I prefer. The only challenge is
-> > that 'env' has various other meanings in U-Boot.
+> > from tests import fs_helper
+> >
+> > where 'tests' is the subdir in test/py
+> >
+> > One option would be to move the pytests up a directory, with test.py
+> > in test/ and the other python files in test/u-boot and the tests in
+> > test/pytests or something like that.
+> >
+> > Then we would have:
+> >
+> > from tests import some_file (*)
+> >
+> > like we do in tools
+> >
+> > Also, I wouldn't call this 'massive' churn. Most files just have a
+> > line or two changed, with test.py and test_ut.py getting more.
+> >
+> > >
+> > > A lot more of this type of namespace shortening which I believe is the
+> > > normal Python-way of solving this issue.
+> >
+> > It doesn't really, since 'util' might conflict with something. When
+> > you have a set of related Python files, as with do in test/py it is
+> > better to use a namespace. But even then, I think we would want a
+> > shorter name.
 >
-> Yes, until someone has a better suggestion than "ubpy", we should leave
-> things alone. "fixture" has its own meaning within pytest and so that
-> would also be confusing.
+> Yes, I suppose I'd rather see (and without the ubpy rename, one thing at
+> a time please!) moving files around such that we can then do more normal
+> "from foo import bar", and also avoid the silly thing of "import utils
+> at util" ;)
 
-Yes, ideas welcome. Arguably it is confusing that this one fixture
-provides a gateway to all the others.
+Yes, OK.
 
 Regards,
 Simon
