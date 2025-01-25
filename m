@@ -4,86 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 057EEC0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:53:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82BCAC0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:55:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 753E880F10;
-	Sat, 25 Jan 2025 23:53:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 016FB80F10;
+	Sat, 25 Jan 2025 23:55:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YHi1Bqr3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rn15T3tE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4248A80F56; Sat, 25 Jan 2025 23:53:39 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 0792980F56; Sat, 25 Jan 2025 23:55:20 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2CCB80ECD
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:53:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFB0780ECD
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:55:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b6e9317a2aso383917585a.0
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:53:36 -0800 (PST)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7be6fdeee35so529579085a.1
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:55:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737845616; x=1738450416; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737845717; x=1738450517; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BBfm85eNGQ0obdCl+eJ/NILCqmk98o9VvXA8altGTeg=;
- b=YHi1Bqr3TuDVT8RrkfPp6TrJPBV10l4SEVBN/MjhVtlRWqs9IQruAqqBWCnU7J39AR
- 2xGTdzqSLnd/LBsNqwgcQ60MlAxXIJxlb3eRQ2cRkMJFOxmiTjJLzAp1k/Lkc0RfeTOJ
- AgUxAAS7YbE6D6+HPzsKwwOrNku0PHsj2NFXI=
+ bh=cLz7wfgGrg58brlZhRHxzcq6FwbES2C6dgppw1rS6nI=;
+ b=rn15T3tEF6takhhC5Ohiwj5rFQFbz8C/cFOuQL2NesD8SUwuopfKNbjdnlbysIjWhD
+ AfLxOsChJyTRG7Ulj2JLGzqxTeOB0MqIJKExCCLXtQCGk1y2SHHVKV4L9i3PvV5Bc8Ox
+ Fv/F4zySKD+Yp4cEdA/dQz9tF0eVks2wiGrdo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737845616; x=1738450416;
+ d=1e100.net; s=20230601; t=1737845717; x=1738450517;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BBfm85eNGQ0obdCl+eJ/NILCqmk98o9VvXA8altGTeg=;
- b=UuFPE2Tr9DLpXv5G/NABTgtnRdM6PT5LfL+UWnm79a2+V3tq++iFsK5YCivoqLGhoJ
- 8VlfT22xNdAzhFQX+H+5RElgAUURGVPgGR4VpStzUxMSwICig0OcZG4H4q5jEoLVx/kA
- BpQsaR3o08Nz5d/Gnaql1jYD2PMGOH2akIu6fsueAi/I2tyY3Wj+T5FAT9NiwKbTe6tD
- smW+2RBDeYl8KlLX+jQO5OM+1/r+1K0qDSsK4ypo8LGPUUNwksJpr/NP+qk/raD4xgs9
- yTvfX3mVXOynXL6mf0mbYzSNTfkR9FdRfd8wTPeFooIewU2jMhoCy88zZJX32jVias5k
- 5Ihg==
-X-Gm-Message-State: AOJu0Yz1rHw7zglgxjAUw/FIA/n+GtkOaPa+NGImoJVekl7lwJfXIAgF
- m24mTWaGdtOUYcwmEnbJGTyqfJN8tY0mU45EsEk6ZSRFq0p8fphXeICvCj/GelQ=
-X-Gm-Gg: ASbGncvtYoBUKjU5o9/m1OS7FaBHAmDpsSYEeq0dorOoXhaS2zWe3VTBE1bhJK6Qz76
- 4qTuyrRt08EqhcMGmtDuUFMm1/Nj7r39v2j+cOIvppgpTOXI4PH70Bt1iJMhQI0NUey59L3LqBO
- /c/E4k/SullJhubkEY+bcLvqU0oLOFgIYwJDHk7y5T4Dsbf4o6DTlJTmgn7ShigDVxfBaAN1gLF
- CUpoJNUbsZpnM0rkZy2l3UJg8TBbeUId9K3Ikdref7rEI1/49SgX9gcNrGMhA/xpbCSwZfNyziV
- 45Pw
-X-Google-Smtp-Source: AGHT+IFaQICzSn+qrUgh6nl3AcJYy1D86rRnMGD0AQPH70mHinihFz8WPEJ1Dk5y9Cza2a7aayhukA==
-X-Received: by 2002:a05:620a:191f:b0:7b6:67e1:b4ff with SMTP id
- af79cd13be357-7be931ff9c8mr1994745885a.28.1737845615724; 
- Sat, 25 Jan 2025 14:53:35 -0800 (PST)
+ bh=cLz7wfgGrg58brlZhRHxzcq6FwbES2C6dgppw1rS6nI=;
+ b=Zzyx2zbcv7VLglFzIuN2aBwtEVA/FnJvRY6GT72oYgMp8LfCZovThyIoHx0A6WUS1u
+ K8iB8LEaK8EKVcr4ANEqhUGHjz1SK4QDIkkSvpcvCWYzmj/7IYlROYvBWtLs93X6wOuU
+ i+Z/LcAMJg0yF+qfAttOwIw6rUOByvuz0d2c+uYin5OvlXhTqm+XBtywmX2l8K3rENOT
+ gDJTsfweoUM9biz9EVT8gAg5ExggWd+LHfl0D2ouMRO66OvQl2fLlXMHSSqczmNQkGva
+ cagQwcARESJC2/IbdL6EaT0Q7uN0XrjATqzO7et51kxgq1wl24oatu3VOgfqFfJpZhAu
+ d4gA==
+X-Gm-Message-State: AOJu0YxqvFA/YqCbI2PYrfWDJk+cw1fZDYwoKFGHsp/PlCJ7lHvj43WU
+ mRw2theRaEVMpWuLZr/+QP9f7aHp1ZS0cpwvv5/0Q+hxs4chZw852/C/exIoxrY=
+X-Gm-Gg: ASbGncsUzqEYm38aGV5SMZ1uEud8/G6Oow7D/U/Cl/W2EGC0/ZZRBSXGF+nPFQ1hznx
+ BJYQuo+sdv1ShooZAqbKw7ocSxnrQ0HTppWnZ2JhxNORPRkSX77Mx1fIFilmmYK2eMveo1m2l1Z
+ RogNULBiB4bh5FDppBrO3OiYLf3UaQkC9FzDKezs9tbxT0IV+Ncc3GUy/fzxRBiiruBRvI2OkDa
+ /MMbNLE3qc3Zfa7iEpsFVs0ZMWygQsqvt7iwRvHE0y40xdu6RhVUDoB9+dCPMGW4FmDN8+doz3Y
+ 4yPf
+X-Google-Smtp-Source: AGHT+IFjxUUYhyY0u7Rb+/Ldt35RJKfxI03K0CFf8feVA0RUX1NDOpDfiGENEy2lVBTQqlHx8YtvSA==
+X-Received: by 2002:a05:620a:1a0e:b0:7be:3cd7:dd95 with SMTP id
+ af79cd13be357-7be631e7260mr5089293885a.12.1737845716763; 
+ Sat, 25 Jan 2025 14:55:16 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9ae8be35sm234926785a.46.2025.01.25.14.53.33
+ af79cd13be357-7be9ae8aa00sm235697185a.41.2025.01.25.14.55.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 14:53:34 -0800 (PST)
-Date: Sat, 25 Jan 2025 16:53:31 -0600
+ Sat, 25 Jan 2025 14:55:15 -0800 (PST)
+Date: Sat, 25 Jan 2025 16:55:10 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH] test/py: Add a report show test durations
-Message-ID: <20250125225331.GI60249@bill-the-cat>
-References: <20250124185605.372347-1-sjg@chromium.org>
- <20250124192056.GU60249@bill-the-cat>
- <CAFLszTjowGVr2R0=bz-h=sU0NHjP8CDaF04cfO1Kbh8d8F5nFA@mail.gmail.com>
- <20250125183025.GB60249@bill-the-cat>
- <CAFLszThbkdt_RqvDGr6nV4QvFG4u6z1uh7Yu=65es_ZA3_5tEQ@mail.gmail.com>
- <20250125220119.GG60249@bill-the-cat>
- <CAFLszTgw+u3rQ8N3vqB1bZ6RdOY_poJUO_WULQ-Q+q28S46FaA@mail.gmail.com>
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Huang Jianan <jnhuang95@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Julien Masson <jmasson@baylibre.com>, Love Kumar <love.kumar@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Richard Weinberger <richard@nod.at>, Roger Knecht <rknecht@pm.me>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Tim Harvey <tharvey@gateworks.com>, Weizhao Ouyang <o451686892@gmail.com>,
+ William Zhang <william.zhang@broadcom.com>, linux-erofs@lists.ozlabs.org
+Subject: Re: [PATCH 1/4] test/py: Shorten u_boot_console
+Message-ID: <20250125225510.GJ60249@bill-the-cat>
+References: <20250125213150.1608395-1-sjg@chromium.org>
+ <20250125213150.1608395-2-sjg@chromium.org>
+ <20250125215055.GF60249@bill-the-cat>
+ <CAFLszTjG0P0bdwziV4irtiU1JGNMwnoiLO9xhPxLQa9GZPVBtA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fDb+6lMB7/0QoR1n"
+ protocol="application/pgp-signature"; boundary="I79wL8RukflE6lL8"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTgw+u3rQ8N3vqB1bZ6RdOY_poJUO_WULQ-Q+q28S46FaA@mail.gmail.com>
+In-Reply-To: <CAFLszTjG0P0bdwziV4irtiU1JGNMwnoiLO9xhPxLQa9GZPVBtA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,175 +122,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fDb+6lMB7/0QoR1n
+--I79wL8RukflE6lL8
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 25, 2025 at 03:50:02PM -0700, Simon Glass wrote:
+On Sat, Jan 25, 2025 at 03:42:00PM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Sat, 25 Jan 2025 at 15:01, Tom Rini <trini@konsulko.com> wrote:
+> On Sat, 25 Jan 2025 at 14:51, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sat, Jan 25, 2025 at 02:36:52PM -0700, Simon Glass wrote:
-> > > Hi Tom,
+> > On Sat, Jan 25, 2025 at 02:31:36PM -0700, Simon Glass wrote:
+> >
+> > > This fixture name is quite long and results in lots of verbose code.
+> > > We know this is U-Boot so the 'u_boot_' part is not necessary.
 > > >
-> > > On Sat, 25 Jan 2025 at 11:30, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Jan 25, 2025 at 10:14:05AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 24 Jan 2025 at 12:21, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Fri, Jan 24, 2025 at 11:56:04AM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > Execution time varies widely with the existing tests. Provide=
-s a summary
-> > > > > > > of the time taken for each test, along with a histogram.
-> > > > > > >
-> > > > > > > Example:
-> > > > > > >
-> > > > > > >    Duration : Number of tests
-> > > > > > >    =3D=3D=3D=3D=3D=3D=3D=3D : =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> > > > > > >        <1ms :  1
-> > > > > > >        <8ms :  1
-> > > > > > >       <20ms : # 20
-> > > > > > >       <30ms : ######## 127
-> > > > > > >       <50ms : ######################################## 582
-> > > > > > >       <75ms : ####### 102
-> > > > > > >      <100ms : ## 39
-> > > > > > >      <200ms : ##### 86
-> > > > > > >      <300ms : # 29
-> > > > > > >      <500ms : ## 42
-> > > > > > >      <750ms : # 16
-> > > > > > >       <1.0s : # 15
-> > > > > > >       <2.0s : # 23
-> > > > > > >       <3.0s :  13
-> > > > > > >       <5.0s :  9
-> > > > > > >       <7.5s :  1
-> > > > > > >      <10.0s :  6
-> > > > > > >      <20.0s :  12
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > >  test/py/conftest.py | 77 +++++++++++++++++++++++++++++++++++=
-++++++++++
-> > > > > > >  1 file changed, 77 insertions(+)
-> > > > > >
-> > > > > > Whitespace issues aside,
-> > > > >
-> > > > > Do you mean the blank lines? pylint wants those for top-level ite=
-ms.
-> > > >
-> > > > That's weird but OK.
-> > > >
-> > > > >  we should probably not do this every time, just
-> > > > > > when requested.
-> > > > >
-> > > > > I'd like to see it on each run, actually. It doesn't take any tim=
-e to
-> > > > > calculate and it lets us see where the time is going.
-> > > >
-> > > > We already print the full time, and I think knowing what the tests =
-are
-> > > > that take so long, so that we can see if there's anything to do abo=
-ut
-> > > > it, would be more helpful. The general feedback about our pytests t=
-oday
-> > > > is they're already too verbose in the normal case.
+> > > But it is also a bit of a misnomer, since it provides access to all t=
+he
+> > > information available to tests. It is not just the console.
 > > >
-> > > This is what is shown in the full output (although with CI you have to
-> > > download the files to see it):
+> > > It would be too confusing to use con as it would be confused with
+> > > config and it is probably too short.
 > > >
-> > > [-] Section: Timing Report
+> > > So shorten it to 'ubpy'.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > [snip]
+> > >  102 files changed, 2591 insertions(+), 2591 deletions(-)
 > >
-> > This is handy as a one-off, and maybe hints at a few tests to look at
-> > more, but perhaps it's mostly "is what it is" tests (and not just the
-> > sleep test).
+> > First, I'm not sure I like "ubpy". I believe "u_boot_console" is because
+> > it's how we interact with the stdin/stdout of the running U-Boot. And
+> > indeed it provides more than that. But ubpy is too abstract and unclear,
+> > and looking at the diffstat, I don't know that big global rename is
+> > justified to save text space.
 >=20
-> Perhaps, but I would hope we could speed some of these up, or reduce
-> the number of variations.
-
-Looking at it, all I see is a sample that yes, we should see if there's
-some way to speed up output from U-Boot to python. None of the "long"
-tests look otherwise out of line for what they're doing.
-
-> > > TIME: SINCE-SECTION: 0:00:00.004227
-> > >
-> > > This is just the summary which is visible in CI:
-> > >
-> > > [-] Section: Timing Summary
-> > > TIME: NOW: 2025/01/25 14:28:57.730179
-> > > TIME: SINCE-PREV: 0:00:00.004234
-> > > TIME: SINCE-START: 0:02:00.307984
-> > > TIME: SINCE-SECTION: 0:00:00.000041
-> > > Duration : Number of tests
-> > > =3D=3D=3D=3D=3D=3D=3D=3D : =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-> > >     <4ms :  1
-> > >     <8ms :  1
-> > >    <10ms :  3
-> > >    <20ms : #### 47
-> > >    <30ms : ######################################## 377
-> > >    <40ms : ############################# 278
-> > >    <50ms : ####### 69
-> > >    <75ms : #### 47
-> > >   <100ms : # 18
-> > >   <200ms : ### 29
-> > >   <300ms : # 15
-> > >   <400ms : # 13
-> > >   <500ms :  8
-> > >   <750ms :  6
-> > >    <1.0s :  2
-> > >    <2.0s :  9
-> > >    <3.0s :  3
-> > >    <4.0s :  4
-> > >    <5.0s :  2
-> > >    <7.5s :  2
-> > >   <20.0s :  1
-> > >
-> > > So what do you think would make most sense?
-> >
-> > By default, neither of these, and only when requested. Looking over at
-> > one of your runs, no, I don't want to waste more output space. If you
-> > must do something, log it off to examine later and not add to the main
-> > output.
+> I actually get quite confused hunting around in the fixtures so I
+> suspect others do too. I would like to settle on some better names.
 >=20
-> OK, I'll just put it in my tree for now.
+> Yes, I don't like ubpy much, either. Your favourite AI suggests
+> 'fixture' or 'test_env', both I which I prefer. The only challenge is
+> that 'env' has various other meanings in U-Boot.
 
-Sigh.
-
-> BTW what do you mean by 'by default'? What other way of running would
-> there be? Are you thinking of a CI flag?
-
-I mean passing some flag to pytest, like you do what you want more
-verbose output, or less output. I don't see this as something that adds
-value to run every time.
+Yes, until someone has a better suggestion than "ubpy", we should leave
+things alone. "fixture" has its own meaning within pytest and so that
+would also be confusing.
 
 --=20
 Tom
 
---fDb+6lMB7/0QoR1n
+--I79wL8RukflE6lL8
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVa2sACgkQFHw5/5Y0
-tyyd7gv/fiPXbJqNIpeLVhUhBDNXMTA3IAUrVMTTR4F8XwAeM3osY3vQ4ruDoLLu
-7n/L6B1lkVVNaZfqTXMdbMijsoVGfNLBkVJWGZGbcjgg1b4eoSsMjxO7PkmqQQJQ
-FcUWmlZwb31Iw2exxC6ijCWQQbEmkLy2AgrGfYLu58jnE6UxUbbtwvxb6UQHmTz4
-osdabfXEcxvYXkTupjyboMAt9kfh7ZHREe+KLyC2Zw45MWYSuXcE9I9MaFrRZ+i4
-yxg8Vqu3e2RGwVOsC6uv5oOEeP3cUKNTNC/PAOBPpWvd8/hC7TkzRE5QhIk2ztRm
-ZU3/xkigAzzyumrtvPRcDsW9r9iQiE1wvu3r/7/QrMDgYUS9xYumKyGMo5kfaPJm
-qmefOp+p7O6Arg97NftpruguNalIAMC/eW0YyiXs1oiPP55+TznpfpoKj9+FA7wp
-SSJJH/9CkqMGjdSzKh97HS3ZTniFCUE2luvJeKpUlx0u5Uq8YZJw4iPiIhb+NPYD
-2LI89Ha3
-=P4OE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVa84ACgkQFHw5/5Y0
+tyx4Vgv/VyPUb0LZfjt1/JjdS7LPbbMaQGclrNkfRnggtxWlbE02Q46+fkv5THOQ
+/KYpClFVhHppJkwVQ+ksGK+bZnTyAwRRAp4y7yn3fhv2c5LElD7nQHhL3LzE1D0b
++7L5kgZ1SKO51eqP/5CefjpPmmzDLPMB/ikiMSontX+misKI9f8kOJAhLT886stm
+mRBGzIhS8oPCCGBSexgqpM+FAGyPXyRWaUI2jNnJsJX0tzRPIg+gtlhahz4PRkrK
+KCsonaXEVdUHCU4+9ScNENB5fLWFTtVwKaRybBas1LnlzyxhFipo58KT856aUHBq
+h+f2nAz05EXt/l5IBgxaZlrneHb/FzaEMGYTFKRUOwRfVjPuW6bhwT1CN/vO+4C2
+ENMF7IJd0gm2Ea3Nqv4YDQguTPaaNQoc1g/8x/qKRj/tmxFBGruqHtUk/LcveKHb
+zVSkcD0AX8GkTNTPJct5tVJAhcjoUHRTGtWY58YPnleVbrvWKAgXmnSXK10F/Tik
+UVymMluO
+=l3Is
 -----END PGP SIGNATURE-----
 
---fDb+6lMB7/0QoR1n--
+--I79wL8RukflE6lL8--
