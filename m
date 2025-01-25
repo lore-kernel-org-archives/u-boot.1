@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16894C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 13:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A624C0218D
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 13:24:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF3C580EEF;
-	Sat, 25 Jan 2025 14:24:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2C22B80EBD;
+	Sat, 25 Jan 2025 14:24:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yjJnM0L6";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="bQHIxJI5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="j1v6Ta/L";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mRNk0pHI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74FDB80C77; Sat, 25 Jan 2025 14:24:18 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 0E1F780C77; Sat, 25 Jan 2025 14:24:24 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7454080EB5
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:24:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2222280EE5
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:24:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,54 +30,57 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YgFl41GFhz9scM;
- Sat, 25 Jan 2025 14:24:16 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YgFl65j2qz9sdn;
+ Sat, 25 Jan 2025 14:24:18 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737811458;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4p5QFJC1PrWsc2/jrsRq7t0x/XiiGxX3sPa+E2raxtU=;
+ b=j1v6Ta/Lkl7pISeQIPa/avZ9NT96BTdlkUfMAdwGjE18q3gdokKkbU5X648UEw8IIsyQJx
+ ENgvLTKTDa9Srx3kk1SuDBGS3m61otrWp35Abks4Bo4tfNO1dXfycrtLk52lNKlL4bZ6J1
+ 9559fCVlc3oLsFg0lDR5M0i90sDZ7xtOUaaOVv1aFYMshD7LkRUHnGT6jS5FapIltgHou7
+ cwWHyRBARN873xxfcZnvfc4xXuskXcsFtMI1XRwztW66uOgccRzcDcaqNBkbyB9ZT5BlYw
+ fPVlHJMkHQ3qoORd6tm2ULTnB7HxdvoHwijYFN49wa9DAcaVxjiJCAJry8r1QA==
+Message-ID: <982868e8-0106-4e1d-812d-a5cd3e5534a2@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1737811456;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=t6UO0zBwEOJNU/1PK3iOhhSnLuGOZdv8NG8CVNSnBio=;
- b=yjJnM0L6JjA4XaiTJOQ5JebNmTMdZYZ2rSD4JrlJPrp1YAc4sX6sCIifkh9SDq2iY88b+H
- gbAmH2cKq07BbEFg45zzALvpsf2i1/tKJdaW29mNCxycx/BGlxFohbzQ5nvRWs2+lowKhJ
- vf1PAsQ8sI59QcFIZO086OUTG8l5o4Wi/jnb1zSe1GLHY8qbIG7nNIFvTkUzvwMpKFeb9+
- LGsJODqelXnuBNtlcdGsvkTimpqBM+HtwVKybQ4JHGhFX6oqEACnj6IpmhrCEeT5eznx76
- fWg/CCPQjiGTLh135qwRcRyiKJSFoAR22D97JH3Q3TXZF0vEYh1Tgp1DDpLjLQ==
-Message-ID: <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737811454;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=t6UO0zBwEOJNU/1PK3iOhhSnLuGOZdv8NG8CVNSnBio=;
- b=bQHIxJI53aeQrvCfMK35+IDUh1htSVa65hoS4DWee7l1aX0tVfmt1uySQj/+Q+Rc8uHh+i
- bKWqLlWIDVtS54ICsg9Lh1HNd/zjzMU17R+ngwh9C2K9FCVLNCKGKBDcwmF5M0IaJF0sae
- b9zKPF6ieph6qsBdRGTodYxf8+J8KfoVDr4VwHy/+rpMo6E2VeXd75j3Qws+W+ku3ct26E
- 9nOajfGefWYa5mRhlO6HIXzA7ZZumVDXEC04LShiwzNCLLMvP6Ue8KoXjAHXSdVlMaSmwe
- mqztfUyJOfFNQgCWARdmVn9c2bMMMemqSNzG6c0sIL91/E20oqvb73tTG4d7Pw==
-Date: Sat, 25 Jan 2025 13:30:33 +0100
+ bh=4p5QFJC1PrWsc2/jrsRq7t0x/XiiGxX3sPa+E2raxtU=;
+ b=mRNk0pHIvCZCgMOP0FAsOxRCNGkP/ehl4bUVKAN6KJyzTFN1WCwYyJn4HSPsNhDMM49cx4
+ W6y6h+uXqdg6Cm4B1l8IoPk4YRx9NkqnRec+RJ6L8GnXEhmTxKwarE4UfNYIveyB3rUXly
+ fpIvs71/Os21Z4WmR9PB+J4Uoc2COgiQ4mwDxUHgM8CiVjeUZmXHTZy0uc20Bgbqyu3BTl
+ JC0R/SP4FSWa29R3KWEg4+9TkgJNo/QXDw3Q4YUKbqiHQuhVSOmW4X00j0Mg060bbAyuYv
+ HoV2QLASGPqboAeoSSZS98PnFQmIS9QkZW12w4dNB+9BdA7mo6csSxiX2+FXTw==
+Date: Sat, 25 Jan 2025 13:34:14 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] net: miiphybb: Convert ifdef DEBUG to debug()
+Subject: Re: [PATCH 1/2] net: ravb: Drop empty init callback
+From: Marek Vasut <marek.vasut@mailbox.org>
 To: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
- <c150ffbb-57a6-4aae-bfb0-1c680f13e816@bp.renesas.com>
+ Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250118063458.137258-1-marek.vasut+renesas@mailbox.org>
+ <44f1d2e2-7da3-4682-9402-b9b51f1b4dff@bp.renesas.com>
+ <3f1613ff-7306-4f94-863a-a204617f3fb5@mailbox.org>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <c150ffbb-57a6-4aae-bfb0-1c680f13e816@bp.renesas.com>
+In-Reply-To: <3f1613ff-7306-4f94-863a-a204617f3fb5@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: wmtu5stkq41ahedoid8uog7kwztbxixj
-X-MBO-RS-ID: ff4ff7da4e88c698363
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: xkpjsi6gekpgz4ngoqpe5ubn1oxrqsad
+X-MBO-RS-ID: 9b9a92f9f761fca6dba
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,51 +97,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/21/25 1:03 PM, Paul Barker wrote:
-> On 18/01/2025 06:16, Marek Vasut wrote:
->> Replace ifdeffery with plain debug() function call. No functional change.
+On 1/21/25 1:15 PM, Marek Vasut wrote:
+> On 1/21/25 1:07 PM, Paul Barker wrote:
+>> On 18/01/2025 06:34, Marek Vasut wrote:
+>>> The init function does nothing, the bb_miiphy_init() already checks
+>>> whether the .init callback is assigned, and if not, skips calling it.
+>>> Remove the empty init function. The entire init callback will be
+>>> removed in follow up patches.
+>>>
+>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>> ---
+>>> Cc: Christian Marangi <ansuelsmth@gmail.com>
+>>> Cc: Evgeny Bachinin <EABachinin@salutedevices.com>
+>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+>>> Cc: Joe Hershberger <joe.hershberger@ni.com>
+>>> Cc: Mario Six <mario.six@gdsys.cc>
+>>> Cc: Michal Simek <michal.simek@amd.com>
+>>> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> Cc: Ramon Fried <rfried.dev@gmail.com>
+>>> Cc: Simon Glass <sjg@chromium.org>
+>>> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+>>> Cc: Tom Rini <trini@konsulko.com>
+>>> Cc: u-boot@lists.denx.de
+>>> ---
+>>>   drivers/net/ravb.c | 7 +------
+>>>   1 file changed, 1 insertion(+), 6 deletions(-)
+>>>
+>>> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+>>> index 7286ad19598..f9c27f0f370 100644
+>>> --- a/drivers/net/ravb.c
+>>> +++ b/drivers/net/ravb.c
+>>> @@ -560,11 +560,6 @@ static int ravb_remove(struct udevice *dev)
+>>>       return 0;
+>>>   }
+>>> -static int ravb_bb_init(struct bb_miiphy_bus *bus)
+>>> -{
+>>> -    return 0;
+>>> -}
+>>> -
+>>>   static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
+>>>   {
+>>>       struct ravb_priv *eth = bus->priv;
+>>> @@ -626,7 +621,7 @@ static int ravb_bb_delay(struct bb_miiphy_bus *bus)
+>>>   struct bb_miiphy_bus bb_miiphy_buses[] = {
+>>>       {
+>>>           .name        = "ravb",
+>>> -        .init        = ravb_bb_init,
+>>> +        .init        = NULL,
 >>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Adam Ford <aford173@gmail.com>
->> Cc: Hai Pham <hai.pham.ud@renesas.com>
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Cc: Jerome Forissier <jerome.forissier@linaro.org>
->> Cc: Joe Hershberger <joe.hershberger@ni.com>
->> Cc: Mario Six <mario.six@gdsys.cc>
->> Cc: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
->> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
->> Cc: Peter Robinson <pbrobinson@gmail.com>
->> Cc: Ramon Fried <rfried.dev@gmail.com>
->> Cc: Sumit Garg <sumit.garg@linaro.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->>   drivers/net/phy/miiphybb.c | 4 +---
->>   1 file changed, 1 insertion(+), 3 deletions(-)
->>
->> diff --git a/drivers/net/phy/miiphybb.c b/drivers/net/phy/miiphybb.c
->> index 171c1719b5b..5497b838225 100644
->> --- a/drivers/net/phy/miiphybb.c
->> +++ b/drivers/net/phy/miiphybb.c
->> @@ -183,9 +183,7 @@ int bb_miiphy_read(struct mii_dev *miidev, int addr, int devad, int reg)
->>   	bus->set_mdc(bus, 1);
->>   	bus->delay(bus);
->>   
->> -#ifdef DEBUG
->> -	printf("miiphy_read(0x%x) @ 0x%x = 0x%04x\n", reg, addr, rdreg);
->> -#endif
->> +	debug("miiphy_read(0x%x) @ 0x%x = 0x%04x\n", reg, addr, rdreg);
->>   
->>   	return rdreg;
->>   }
-> 
-> While we're here, can we include the bus name in the output to avoid
-> confusion when we have multiple buses? Maybe something like:
-> 
->      debug("miiphy_read(0x%x) @ %s:0x%x = 0x%04x\n", reg, bus->name, addr, rdreg);
-No, not in this patch, but please test:
+>> Do we need to explicitly set this to NULL? The field should be
+>> initialised to zero if we omit it.
+> I don't think it does, this is only a safety assignment until this .init 
+> callback gets fully removed in follow up series.
 
-[PATCH] net: miiphybb: Update debug() print
-
-Is it OK with you if I pick this patch for upcoming release ?
+I would like to pick these two patches for the upcoming release, is that 
+OK with you ?
