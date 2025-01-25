@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC94C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 23:01:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 955C9C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 23:02:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C745C80EF4;
-	Sun, 26 Jan 2025 00:01:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3383180F10;
+	Sun, 26 Jan 2025 00:02:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nWJDUxPl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c82+G/B1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B9FD80F10; Sun, 26 Jan 2025 00:01:06 +0100 (CET)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 777A680EF4; Sun, 26 Jan 2025 00:02:07 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE46F80EB5
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 00:01:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42FDB80F53
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 00:02:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-4679eacf25cso19563321cf.3
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 15:01:03 -0800 (PST)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6d8e773ad77so27972006d6.2
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 15:02:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737846063; x=1738450863; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737846124; x=1738450924; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=m4iIpC7wVHtqFaO9FoWRNCf0Bk54LMgO2Pok9FwWKlo=;
- b=nWJDUxPlGm0B1b/m0cRkAGN+maGCDHU7b71z7dmHaa1/KY82QHhXjFfSwIQPFOCerK
- UW2KhVZWfqFUl8aomWzjUxAOP+gBaSFC1IFjwDLlXpnv0nV2ARxHsySXWbo1dDT9Yaic
- YPx7d29MozJ2gK5j+tSVmojfwlsA6kkRJAOpY=
+ bh=aPqH/7nld7YwPB7Wb02EqlKcvgfChyH3ZmSgG2oXFUU=;
+ b=c82+G/B1l7uowZc0raPFXCPXebKso9EhWN0MwhBOqfiki5pexSBWGBKlCbUAsAIReN
+ 6BKARbtXdYfEHYtm/dILUnRrGzoDq9DuJRpSydHetR4AbhXm3yTIuozpXnPhj3oc29Dm
+ rVLJSMTzI8MERt23QtpN/SE+70UH1nU9Bw9I8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737846063; x=1738450863;
+ d=1e100.net; s=20230601; t=1737846124; x=1738450924;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m4iIpC7wVHtqFaO9FoWRNCf0Bk54LMgO2Pok9FwWKlo=;
- b=Fb3ZEMQAkIRET6FEmElYFntrZZEW+Sf2yi+9Dj3fEK/RAsbomq6wpu5aEoYdUQm3E6
- ZaYSbClsA0fvGWscR7Be32+ktAPw9LPhcnFSL8wzKhyyptTl2TvY2Ae9uX2sS02GbJ7b
- 6NSVP2JZKXllnHtx/lEc8Fd0aFHyI44bcbqTjFEwhhFzv5oTs03VxvhBSn5+R3u2wkwl
- Ym/++2aWrIqoLqAedw5xDrtP59m6cbBKVlD0kkurUA+EiV7F+FcdcMfFTOKAIKTxtKAt
- wq+G4ltXn7GN2+An5G03wyJO7hHOPxmau8CofwfAmE7GXwPCdaWOVOEe5Xeuv9Pniyac
- z6Og==
-X-Gm-Message-State: AOJu0YwHYKyHsH8+GTxVtJfUnWVsjy/GYCl7S36tDy3EaApm5lPm2jpn
- INfvA4LKaPKNyBRkMka2HD5uWYqtNExarI4ckuOuxUR0YKdHHqnwDyaJLsuRCT4=
-X-Gm-Gg: ASbGncsFJ6K6svaJF345DEyLyp25c5TED8lYukSOMJhuvp5VBjxBLe6tYkV9x4CuHxZ
- DLektMP9AfBlI15odHRZj5Za5a8i9Ngowz1xXOWAO4elbklrmMMeaJn3MnZ575WmDGXLbETWaH/
- g4Jnd7MjBpN0C9FwrfaT7zEVoCnrQjZ8nROJLZ6ALn/XiokOWpaBk+X8igLeyv3v8UxbgXk+N9f
- /Rrztg02bSyozqI3ghERxdM2bnTPIbo1mHTh45q9RKZuiEtY8RN5SHarBZAR1kXepkKZ9eWkchq
- MEnd
-X-Google-Smtp-Source: AGHT+IEW00KkcgJEg2vmUs+Tz8FtI/sr39w0OGgwXKBoJ9FSLTZHE/YP/kQBkwzPY62eufH4E49/qQ==
-X-Received: by 2002:a05:622a:1a25:b0:467:50d0:8866 with SMTP id
- d75a77b69052e-46e12a55b71mr453401851cf.19.1737846062733; 
- Sat, 25 Jan 2025 15:01:02 -0800 (PST)
+ bh=aPqH/7nld7YwPB7Wb02EqlKcvgfChyH3ZmSgG2oXFUU=;
+ b=qRSZ3Jkcg0/mwpKrpdh4F0OzvKJkHY/upxJmBZU5NnyRqY2o/5UjdpluRYwmpfQqAR
+ avmyqu5Z67/FE3rubsWt5EXpRX8OHEKTKrfFqYGus/5NoqXfsrUqiyCjgEoXiNH4QOig
+ UWy3H1fxlxhe7UohmJzj78PStYD1oKNIwXsqRaz4VQ2+YFQ2dcqFs1gawEsFB3TdHUpy
+ hXhVxNJk+T34qIPS+1oGCDmGyTFrVa8TnPCnUl9mJqwifXKbih7cXxU1vOFsaT7SMn8b
+ 2MxDb0bhxjL8ZhZcqpMKtDbsuNs1XPa4PJXtrOwjF/rxLs6AZXaO2CU/wLK2tqnALXxu
+ I/pQ==
+X-Gm-Message-State: AOJu0Yx6nR3R2KuGP1NST3RtZVsr0K8Utk1UhZbv0HG92lCrSmy/BbHy
+ zWDWCN/b8MweUPjn9nd0TpbGUifEMV0hW4ZUaIEu1DrNTBqsWGMEhne2CPvG878=
+X-Gm-Gg: ASbGncvpEJaEOQkL/y+aYIL7qtOxyURHGLNgSe5jSw+HOKsWjPGLn4xS17WvS/AGn4q
+ cPopfmFdFQYfRbGToUoSvSDlfL8ZV+n2zrgDoLFbTU8eXQN+le8PPKjUlMrWNL4DpE2SWyfXGaw
+ +pP5+yYew+7xTsSbUplxnxrIiBg4/ysPn6OVC4DB8cuupD6BgATTygm9viB2KM7ZInprX0W3+k2
+ E14VeYik/HyZaF3Hu6kijWRtR/DOXfqVDF55GdhAWjJJQhLlTdjAKcxdCDqc7A63QTQMyITfFUy
+ pMGvx2oobbkhC48=
+X-Google-Smtp-Source: AGHT+IG/hFHRL4HhmdZIaYjwcPXZu4xhH1A1Wk0fXaHEapcfy+sbSZ5wyN16IEYJpaH1uZQ1IAuq2Q==
+X-Received: by 2002:a05:6214:1306:b0:6cb:e648:863e with SMTP id
+ 6a1803df08f44-6e1b2235398mr518973076d6.43.1737846124040; 
+ Sat, 25 Jan 2025 15:02:04 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e6689d9cbsm24841621cf.41.2025.01.25.15.01.00
+ 6a1803df08f44-6e205ac44e4sm21197526d6.124.2025.01.25.15.02.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 15:01:01 -0800 (PST)
-Date: Sat, 25 Jan 2025 17:00:58 -0600
+ Sat, 25 Jan 2025 15:02:02 -0800 (PST)
+Date: Sat, 25 Jan 2025 17:02:00 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Love Kumar <love.kumar@amd.com>
-Subject: Re: [PATCH 4/4] test: Make net tests depend on CONFIG_CMD_NET
-Message-ID: <20250125230058.GL60249@bill-the-cat>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
+Subject: Re: [PATCH 3/4] test/py: Show info about module-loading
+Message-ID: <20250125230200.GM60249@bill-the-cat>
 References: <20250125213150.1608395-1-sjg@chromium.org>
- <20250125213150.1608395-5-sjg@chromium.org>
- <20250125214443.GD60249@bill-the-cat>
- <CAFLszTiqhKn4DF0CQg7egocvvVTu_NhC4BgGaOV6j8zbDXkoxw@mail.gmail.com>
- <20250125225042.GH60249@bill-the-cat>
- <CAFLszTgc4=gFuDuZrN0LYRrN28w6QZPQRWdvKSzn4rq27RyEUQ@mail.gmail.com>
+ <20250125213150.1608395-4-sjg@chromium.org>
+ <20250125214317.GC60249@bill-the-cat>
+ <CAFLszTg+ZFn55j31CZMisvjg-e25R+q57pW-Dt-6zFqjSVwwtw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Q1lel9kWH5/ldV/4"
+ protocol="application/pgp-signature"; boundary="mMKNHhC0WxJB8VAj"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTgc4=gFuDuZrN0LYRrN28w6QZPQRWdvKSzn4rq27RyEUQ@mail.gmail.com>
+In-Reply-To: <CAFLszTg+ZFn55j31CZMisvjg-e25R+q57pW-Dt-6zFqjSVwwtw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,82 +99,108 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Q1lel9kWH5/ldV/4
+--mMKNHhC0WxJB8VAj
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 25, 2025 at 03:56:02PM -0700, Simon Glass wrote:
+On Sat, Jan 25, 2025 at 04:00:05PM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Sat, 25 Jan 2025 at 15:50, Tom Rini <trini@konsulko.com> wrote:
+> On Sat, 25 Jan 2025 at 14:43, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sat, Jan 25, 2025 at 03:47:26PM -0700, Simon Glass wrote:
-> > > Hi Tom,
+> > On Sat, Jan 25, 2025 at 02:31:38PM -0700, Simon Glass wrote:
+> > > It is sometimes tricky to figure out what modules test.py is loading
+> > > when it starts up. The result can be a silent failure with no clue as=
+ to
+> > > what when wrong.
 > > >
-> > > On Sat, 25 Jan 2025 at 14:44, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Jan 25, 2025 at 02:31:39PM -0700, Simon Glass wrote:
-> > > > > This fails on samus_tpl as there is no 'net' command.
-> > > > >
-> > > > >    =3D> net list
-> > > > >    Unknown command 'net' - try 'help' !
-> > > > >
-> > > > > Fix it by adding a condition for the test.
-> > > >
-> > > > For this part,
-> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > >
-> > > > > Add a blank line to keep pylint happy.
-> > > >
-> > > > Can we silence that pylint? I don't look forward to the churn of ad=
-ding
-> > > > more blanks everywhere especially since imo it doesn't improve
-> > > > readability either.
+> > > Add a section which lists the modules loaded as well as those not
+> > > found.
 > > >
-> > > Yes, but we would want to do it globally. But it isn't really a good
-> > > idea IMO. We are trying to use PEP8 which loads of tools expect...e.g.
-> > > my IDE shows warnings in this case. It might be better to just fix the
-> > > problems.
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
 > > >
-> > > As to readability, I'm on the fence...in practice it doesn't matter
-> > > much as few non-trivial programs have a lot of top-level functions. I
-> > > would rather keep the tool happy and use the Python style that people
-> > > expect when coming into the project.
+> > >  test/py/conftest.py | 33 ++++++++++++++++++++-------------
+> > >  1 file changed, 20 insertions(+), 13 deletions(-)
+> > >
+> > > diff --git a/test/py/conftest.py b/test/py/conftest.py
+> > > index 5096c20ed65..23435b7db3c 100644
+> > > --- a/test/py/conftest.py
+> > > +++ b/test/py/conftest.py
+> > > @@ -286,19 +286,26 @@ def pytest_configure(config):
+> > >      ubconfig =3D ArbitraryAttributeContainer()
+> > >      ubconfig.brd =3D dict()
+> > >      ubconfig.env =3D dict()
+> > > -
+> > > -    modules =3D [
+> > > -        (ubconfig.brd, 'u_boot_board_' + board_type_filename),
+> > > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
+> > > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_=
+' +
+> > > -            board_identity_filename),
+> > > -    ]
+> > > -    for (dict_to_fill, module_name) in modules:
+> > > -        try:
+> > > -            module =3D __import__(module_name)
+> > > -        except ImportError:
+> > > -            continue
+> > > -        dict_to_fill.update(module.__dict__)
+> > > +    not_found =3D []
+> > > +
+> > > +    with log.section('Loading lab modules', 'load_modules'):
+> > > +        modules =3D [
+> > > +            (ubconfig.brd, 'u_boot_board_' + board_type_filename),
+> > > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
+> > > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename =
++ '_' +
+> > > +                board_identity_filename),
+> > > +        ]
+> > > +        for (dict_to_fill, module_name) in modules:
+> > > +            try:
+> > > +                module =3D __import__(module_name)
+> > > +            except ImportError:
+> > > +                not_found.append(module_name)
+> > > +                continue
+> > > +            dict_to_fill.update(module.__dict__)
+> > > +            log.info(f"Loaded {module}")
+> > > +
+> > > +        if not_found:
+> > > +            log.warning(f"Failed to find modules: {' '.join(not_foun=
+d)}")
+> > >
+> > >      ubconfig.buildconfig =3D dict()
 > >
-> > Yes, we should do it globally. Can we not globally also tell tools the
-> > deviations from PEP8? I remember back when people would argue about if
-> > we should tell file editors what to expect for whitespace, etc :)
+> > We won't see this warning normally, only if some level of verbosity is
+> > used, yes? It's normal to not have both u_boot_boardenv files for
+> > example.
 >=20
-> I'm sure we can do anything. But why deviate? Is it just that you want
-> to avoid churn, or do you actually not like this part of PEP8?
+> There is a '[-] Section: Loading lab modules' section so you only see
+> it if you open that.
+>=20
+> I feel that test.py is a bit cryptic at present.
 
-I think it looks bad (personal preference) and we have that in almost
-none of our tests I suspect so adding blank lines to make PEP8 happy
-rather than adding hopefully a line to a common file normal tooling
-reads seems the wrong direction. But I don't care enough to not apply it
-if someone else does it. I'll add missing blank lines when needed
-assuming the pylint CI job complains once it's done.
+I don't follow you, sorry. Open what where?
 
 --=20
 Tom
 
---Q1lel9kWH5/ldV/4
+--mMKNHhC0WxJB8VAj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVbSoACgkQFHw5/5Y0
-tyzb+Av/WRL6GU1rGOUxDDMAs2SSqd2tJZ80K4CmsdcTcsWkI9wa+HDbYIiQyHpi
-5NnGLSchPWXgkfWbDBbxJwG4lSM/cKQGfYtLbe7Q60I3Jr+aZAqxUcGoRUDqzHuu
-ZsBt9qZnSZQ66Tb3oa9Vbnu20DZz4g2DyPQxnpyBlQTRe0W4Tx1LwCCm4mu1nMkE
-4g2X6IRAVAuCsdFUGCQRaTrzgYABYr0x4D48kJAeuln0lAUKRFWXXcFdK3Rb6wdT
-A6e7NnznUFNFSwXDQUSKC8H6UdxWObJMgn9H9VT3C1F3KdCC+XZM2zm5sEwzAISt
-DALJXLRtTfvUj7WO0JDzCH0boiyjo+SAAyGtnzWZDZJYhpa0TFz6Y5RSNcJBDtCs
-6c5T5bYgXJ1miOJ284b0iMaadOFZ9ALH12Ajr0iphzvUu0o9fq2dDjjDnfFlohyO
-sz3ptTgHm6S9Hz3rOKLHYz5PUo6XIvC2xt4/9sQ1drBor3uloV4CguMSFHQdD49o
-hZTXMrwh
-=e25l
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVbWgACgkQFHw5/5Y0
+tyz2aAwApc6L9SlKQ3BWiG+RIoG+RV8/b4XXRpBoz77/p/EV1a2433EYwgu02yjW
+UVUdbg5jfXdYVzEC3c/1cqzCUB0n3Zucfl/k7XoBl2pioi0HAlSsNP9RmF9l0xQ/
+0JpFa4lpfXv5P0wG91uAyq5lo++hnxloummWjr4pnfYzhmmyul/weiNiClVx2OOp
+iB5XTAbzSlQWj9oCbX1iKv+CimUGOp7KY40Y2shHU6XeA+2bFANPGNDrChM1yVpv
+4s9WeQt5IxmGjzdkU32csGAnkkxiMMFIKgYdnUT56vh9z17Q104ENww0B69Kcavs
+3+AAp7sigeYRNccaK9rjp8vRJmeE5nOvyC4b5bo8MO7zqRH6IadRTiKuAp7pl+4N
+ep+b9PraKwXo/Hl0sUCVhP01+kTJ7tSzml9Fv3LpQNkZQSl3bLb95LqDIWIBSWP1
+w1DhJR7ZxxrH4slLXOT6lW/LjVBGy+RZjNtI0NE7D/KsYrhHh6k4AQmH20w5RRC4
+WtL7mXD7
+=Nd/6
 -----END PGP SIGNATURE-----
 
---Q1lel9kWH5/ldV/4--
+--mMKNHhC0WxJB8VAj--
