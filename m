@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B419C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 15:28:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13878C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 15:53:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3525C80DF7;
-	Sat, 25 Jan 2025 16:28:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6DAF880C7E;
+	Sat, 25 Jan 2025 16:53:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UO5kBH5i";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VlSP9apb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A99CA80EB5; Sat, 25 Jan 2025 16:27:59 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 6371980DF7; Sat, 25 Jan 2025 16:53:25 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5628280C7E
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 16:27:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 237F980017
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 16:53:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hackpascal@gmail.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2f43d17b0e3so5644578a91.0
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 07:27:57 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-30738a717ffso28661521fa.0
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 07:53:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737818875; x=1738423675; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2btazznWkDTf1F6O574VwiCA72kFYe21np/gM+y5GsM=;
- b=UO5kBH5imuwR8j85TaXeNFyHb5fzqEdI/CQEzCdT4EiVbTpEGHa3fOj/y0vz113kOr
- 5c3eyDGOnnXPmlTlYp5BHthjwuPUApJ3ESEcv1bXmTsz67mzkqWvmxZvKU8rVbXhhuS+
- UYEQb0sheFukjLb003URFtfk7FKboaacNkf7WRlxsKydyRNTiovptBTsZSxN02pWLIya
- MA8sCPWEvrC9elSG9biQu6GEWeBCZ5cBKIKEJVnzea5RFljcJvl1T1kf+rvnYgYgsqJh
- 5Qg1EdShPfGgFdOfKp6p+9tq/9JCz7snxHy8dxTGBs+3iIUNwCqUSTrLTXVHM3tC6z0Y
- et5Q==
+ d=gmail.com; s=20230601; t=1737820402; x=1738425202; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jHpmeVsmExt0RTdzvPLFWWa9NM05LFNTZzWujhFCAh8=;
+ b=VlSP9apb3rxFsRg7Vfty4465Nl+ddp69Czd2Iq+OTV6jDKLri6uw5Pb5IFZW2TIng6
+ lSILq+F40p6BPCbrUvYfULckM+/CY9Ehvdje6zOp0MpVx42c14wxyiD+N6eCGEZ54Ure
+ iFuiyElypMID19qtyHe97ZkVMTZsdDQAJNTNkXmPavorSy0eUcRAFRfjj3dQGqjzUuig
+ r4981NIUeOMsljTXgQKw5lKec8hRAQMnc3OelwDLZKi3iXTP47cOkzGesJQqvUqXD4pI
+ 96kxXpP+yH05/3ByvMHiMKKXR4jymp3668L5Ju8KFWWY7Mz4WjopqNPm0UJC5zfs1lIn
+ /nNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737818875; x=1738423675;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2btazznWkDTf1F6O574VwiCA72kFYe21np/gM+y5GsM=;
- b=AUJ0AcwThRdjlyNLaKCVhn+no0m2aHtsJ2n8io5nxRWjfVIIbbzViLRRiyxFbRyotd
- qDeet9/EgNm6gXDPuUuQ7Ho15JmQs5SvSn1OVcP/Qp5boqKKqlWAoVm1sCycm+Z0xcsZ
- A9+wELlrEC5ws80ha9bIi70B4uIFY0KyNxgDExwpMda0zcrfBVT/6qIrMMhb4zp2EgvQ
- JJvd+IQjyjibSqr787UXvXs29lm5Kb5feFml0t+hM8j9+JMDJLB3ib1q3b/KhAae1vZY
- BvRYHQDYQ8n3GuhT7lNrRihVJ6i1aHEzFk5dqDIWPJj1dVTrMk6e48iSmChBaT+iDeQl
- ukow==
-X-Gm-Message-State: AOJu0YwrDNt+SvScOf2yxd2boY8sWIn0Ok0B592GZgLBBP9xMfM8C6pa
- ZgrHUWAZY2SybMTuat1AuRDFYFOrTIWvOOahb3+DuuXCp6bXH6YVAXaG8so/BXY/Ow==
-X-Gm-Gg: ASbGncupqge86avo57NuJS8EbVbPFYvYiC17R3nW7iopucielS4aYD2S7fGR/kYxGnU
- e/tCiNnImG0Aa8C6niUIpDCUwgyHDR0TnuEsm3Av8qe39wvK9xcTNPZQhTXSg/eByvpl26rljLr
- WNuNLJrP6CodWNES0ZuZavyJxmYLuQVGxtpyowhlxebUnXgeCZye7YRviNnYYQVZQzRfDyUC08Z
- Y2T13Y7c6WYVQehhRvaBif4ZUgVG9H5jjo+tVcZjDrJ+SBh2WAUmfO7+Fg8xcN90JteMuph30br
- Lt9EtOtYKVzp54vxnTE=
-X-Google-Smtp-Source: AGHT+IEAq/ISl+sbUhMTeK8JbWf5ivj9xGBppthIUBJaEGp9bhmwn2igk9AActvDym5kguXynZm24A==
-X-Received: by 2002:a17:90b:5206:b0:2f5:63a:44f9 with SMTP id
- 98e67ed59e1d1-2f782d4f189mr43244517a91.23.1737818875427; 
- Sat, 25 Jan 2025 07:27:55 -0800 (PST)
-Received: from localhost.localdomain ([171.213.131.18])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f80178e5a7sm3392912a91.2.2025.01.25.07.27.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 07:27:54 -0800 (PST)
-From: Weijie Gao <hackpascal@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Weijie Gao <hackpascal@gmail.com>
-Subject: [PATCH] miiphy: define mii_devs with LIST_HEAD()
-Date: Sat, 25 Jan 2025 23:26:32 +0800
-Message-Id: <20250125152632.26665-1-hackpascal@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1737820402; x=1738425202;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jHpmeVsmExt0RTdzvPLFWWa9NM05LFNTZzWujhFCAh8=;
+ b=lJ7y9KzOb3eb42RYFQ+1Z6uR8/se1Sgips05CaHhr3bE4F4TkEw9cuDZIjzIZBuuV8
+ Kyg5y2J+YADCcwXOoLfgpS5ZQHK4wZJoFukXdA1+JFN5559lDHzUcM8cMImx5bVbyZ+I
+ dM5WHt7gk0htQzru4o4g+hqwBTWKeF/CJgXILFz8bElKFWq8XfRqeECCXR5ESzgV+4Xj
+ c11bIvEfu1eNBkfPs9Mn5JvgxCCYDRLl1PM3hkJy1+6n21qVjY7nrAyO9cKrorcuXzLh
+ uDj9HR3Ong4UnEdh1FOFyzU0yKyAS6nmbyygZAyg2Z9EWDwX0VCW43PfIlcIxZTLY8xK
+ xojw==
+X-Gm-Message-State: AOJu0Yz966AslcePZkH8vWfq5aleLbwVScurphcLmYuuPUXIsMsvOkwN
+ 5MzBWau8zsF5ccZ3SZLlG56KPLY+1vE2puTtfE77Nh7A3vEe8Kuanzano4uuBzBSrNtAQCFC1FN
+ 6DWTxM3HzCEgrEB+QwTjLZmxJ8Zs=
+X-Gm-Gg: ASbGncvTFtIc2XtHRPxb1ja4p3WkxP9fBFqKs6A91pthEaNnl6ulAfQ8gcXlUyewv2c
+ EqLvC61XyUtK7EkWijH0zXRqbRHblmdl6wlusIvLhH/4xmccSszx26carMCekYqsRRqBp9swMPI
+ VFt8RF47nUSmtpBYyN
+X-Google-Smtp-Source: AGHT+IHeNwjzc0W7aRakxbTuqveHU3wWSyeT4+RnbU8xXV5Bw7yk8T7XYtWqgSyb1NINnbb4f/ldL0D22dGk2JuwID4=
+X-Received: by 2002:ac2:434f:0:b0:540:c349:a80f with SMTP id
+ 2adb3069b0e04-5439c265cc4mr9181670e87.38.1737820402044; Sat, 25 Jan 2025
+ 07:53:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250124145520.185414-1-marex@denx.de>
+In-Reply-To: <20250124145520.185414-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 25 Jan 2025 12:53:10 -0300
+X-Gm-Features: AWEUYZmkR2uwNJkaOkXHVrl17qPw5Q01Kw8duqyBf19qTXx3JJdvHOPNEo4Mb0U
+Message-ID: <CAOMZO5DTbaq+ArihsEE68YbD8S-v9ny2+Nc8XbXZ-JWRRTUFTw@mail.gmail.com>
+Subject: Re: [PATCH 01/10] pinctrl: imx: Push imx_pinctrl_ops into drivers and
+ staticize
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,117 +95,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When enabling net console and console multiplexing, a boot crash was
-observed using mtk_eth driver with stdin/stdout set to "serial,nc"
-in persistent environment:
+Tom,
 
-> CPU:   MediaTek MT7981
-> Model: OpenWrt One
-> DRAM:  1 GiB
-> Core:  35 devices, 15 uclasses, devicetree: separate
-> spi-nand: spi_nand spi_nand@0: Winbond SPI NAND was found.
-> spi-nand: spi_nand spi_nand@0: 128 MiB, block size: 128 KiB, page size: 2048, OOB size: 64
-> Loading Environment from UBI... SF: Detected w25q128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
-> mtd: partition "ubi" extends beyond the end of device "spi-nand0" -- size truncated to 0x7f00000
-> Read 126976 bytes from volume ubootenv to 000000007f7bf0c0
-> Read 126976 bytes from volume ubootenv2 to 000000007f7de100
-> OK
-> "Synchronous Abort" handler, esr 0x96000004, far 0xeafffffeea000018
-> elr: 0000000041e63cd4 lr : 0000000041e1b844 (reloc)
-> elr: 000000007ff9ecd4 lr : 000000007ff56844
-> x0 : eafffffeea000018 x1 : 000000007fb552e0
-> x2 : 00000000000000fe x3 : 0000000000000000
+On Fri, Jan 24, 2025 at 11:55=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+>
+> Move imx_pinctrl_ops into drivers and staticize. This is preparatory
+> patch for follow up pinctrl drivers which will not use this variant
+> of imx_pinctrl_ops content. This should not change size, as most of
+> the deployments compiled in one pinctrl driver anyway. No functional
+> change.
 
-The cause is that "serial,nc" forced the console subsystem to
-initialize the ethernet driver before ethernet subsystem
-initialization (console_init_r() is called before initr_net()).
+The u-boot-imx/master-next fails with this series applied:
 
-During the mtk_eth driver initialization, mdio_register() will be
-called, and miiphy_get_dev_by_name() will then be called.
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1005082
 
-The miiphy_get_dev_by_name() will check the list "mii_devs" to see
-if the passed device name exists. However the mii_devs is defined
-without initialization:
-> static struct list_head mii_devs;
-and the actual initialization is done in the following chain:
-initr_net -> eth_initialize -> eth_common_init -> miiphy_init
-Since initr_net() hasn't be called, iterating over the mii_devs
-will access to physical address 0 (mii_devs.next == NULL) and will
-cause the crash.
+This is unrelated to this series, though.
 
-The fix is to define mii_devs using:
-> static LIST_HEAD(mii_devs);
-
-As the "current_mii" is defined as a static variable, it will
-always be NULL in board_r stage and initializing it will NULL is
-unnecessary. So the entire miiphy_init() can be remove.
-
-Signed-off-by: Weijie Gao <hackpascal@gmail.com>
----
- common/miiphyutil.c | 12 +-----------
- include/miiphy.h    |  2 --
- net/eth_common.c    |  5 -----
- 3 files changed, 1 insertion(+), 18 deletions(-)
-
-diff --git a/common/miiphyutil.c b/common/miiphyutil.c
-index 9b8744e5d8..6169ea884a 100644
---- a/common/miiphyutil.c
-+++ b/common/miiphyutil.c
-@@ -30,7 +30,7 @@
- #define debug(fmt, args...)
- #endif /* MII_DEBUG */
- 
--static struct list_head mii_devs;
-+static LIST_HEAD(mii_devs);
- static struct mii_dev *current_mii;
- 
- /*
-@@ -55,16 +55,6 @@ struct mii_dev *miiphy_get_dev_by_name(const char *devname)
- 	return NULL;
- }
- 
--/*****************************************************************************
-- *
-- * Initialize global data. Need to be called before any other miiphy routine.
-- */
--void miiphy_init(void)
--{
--	INIT_LIST_HEAD(&mii_devs);
--	current_mii = NULL;
--}
--
- struct mii_dev *mdio_alloc(void)
- {
- 	struct mii_dev *bus;
-diff --git a/include/miiphy.h b/include/miiphy.h
-index 5abffd8fb6..8e4b58c734 100644
---- a/include/miiphy.h
-+++ b/include/miiphy.h
-@@ -33,8 +33,6 @@ int miiphy_is_1000base_x(const char *devname, unsigned char addr);
- int miiphy_link(const char *devname, unsigned char addr);
- #endif
- 
--void miiphy_init(void);
--
- int miiphy_set_current_dev(const char *devname);
- const char *miiphy_get_current_dev(void);
- struct mii_dev *mdio_get_current_dev(void);
-diff --git a/net/eth_common.c b/net/eth_common.c
-index 89b5bb3718..ba57d836b0 100644
---- a/net/eth_common.c
-+++ b/net/eth_common.c
-@@ -31,11 +31,6 @@ int eth_env_set_enetaddr_by_index(const char *base_name, int index,
- void eth_common_init(void)
- {
- 	bootstage_mark(BOOTSTAGE_ID_NET_ETH_START);
--#if CONFIG_IS_ENABLED(ETH)
--#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) || defined(CONFIG_PHYLIB)
--	miiphy_init();
--#endif
--#endif
- }
- 
- int eth_mac_skip(int index)
--- 
-2.34.1
-
+Any ideas?
