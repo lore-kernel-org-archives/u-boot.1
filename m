@@ -4,81 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13878C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 15:53:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D54C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 16:36:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DAF880C7E;
-	Sat, 25 Jan 2025 16:53:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 264AA807FE;
+	Sat, 25 Jan 2025 17:36:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VlSP9apb";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1737823007;
+	bh=502zxP4RuD2dt9x7RXDLbFVx3fN/QAXyGiRwlVrxP4I=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qBuWuLD1/ZbkEll1Y4jEyyvK5QkVf17TQ+zBoSH4ugQ0CYm6oPidwP3qh/Xb4ZHx+
+	 /cYPgCodT4feOpWTw1tF3EibcusOLBU8l0uyn0Csh7vnXH88IbFMXZ7KN04S0fRjEb
+	 4mwzA5TiXy2yYVIMHOAu5R5bSNE8uxVu+0Yec0J3Ri5L1h8RlRuc7caj58PNS8bf9b
+	 jucgfY1iQwM/9bfyABbuhBjeKrqumaz+VQAgg7CMN0KQnyh2I3uS3NRGWMjcd85Bqk
+	 YTMYENYEzvLrda2f0+e8+FtLGfpAgUHB4g4CTtIRyQHzUx28gHcah6YA1k+PxCNcX2
+	 Xl4ebN3ze7h8A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6371980DF7; Sat, 25 Jan 2025 16:53:25 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 810FC80836; Sat, 25 Jan 2025 17:36:46 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 237F980017
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 16:53:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25CD88076E
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 17:36:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-30738a717ffso28661521fa.0
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 07:53:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737820402; x=1738425202; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jHpmeVsmExt0RTdzvPLFWWa9NM05LFNTZzWujhFCAh8=;
- b=VlSP9apb3rxFsRg7Vfty4465Nl+ddp69Czd2Iq+OTV6jDKLri6uw5Pb5IFZW2TIng6
- lSILq+F40p6BPCbrUvYfULckM+/CY9Ehvdje6zOp0MpVx42c14wxyiD+N6eCGEZ54Ure
- iFuiyElypMID19qtyHe97ZkVMTZsdDQAJNTNkXmPavorSy0eUcRAFRfjj3dQGqjzUuig
- r4981NIUeOMsljTXgQKw5lKec8hRAQMnc3OelwDLZKi3iXTP47cOkzGesJQqvUqXD4pI
- 96kxXpP+yH05/3ByvMHiMKKXR4jymp3668L5Ju8KFWWY7Mz4WjopqNPm0UJC5zfs1lIn
- /nNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737820402; x=1738425202;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jHpmeVsmExt0RTdzvPLFWWa9NM05LFNTZzWujhFCAh8=;
- b=lJ7y9KzOb3eb42RYFQ+1Z6uR8/se1Sgips05CaHhr3bE4F4TkEw9cuDZIjzIZBuuV8
- Kyg5y2J+YADCcwXOoLfgpS5ZQHK4wZJoFukXdA1+JFN5559lDHzUcM8cMImx5bVbyZ+I
- dM5WHt7gk0htQzru4o4g+hqwBTWKeF/CJgXILFz8bElKFWq8XfRqeECCXR5ESzgV+4Xj
- c11bIvEfu1eNBkfPs9Mn5JvgxCCYDRLl1PM3hkJy1+6n21qVjY7nrAyO9cKrorcuXzLh
- uDj9HR3Ong4UnEdh1FOFyzU0yKyAS6nmbyygZAyg2Z9EWDwX0VCW43PfIlcIxZTLY8xK
- xojw==
-X-Gm-Message-State: AOJu0Yz966AslcePZkH8vWfq5aleLbwVScurphcLmYuuPUXIsMsvOkwN
- 5MzBWau8zsF5ccZ3SZLlG56KPLY+1vE2puTtfE77Nh7A3vEe8Kuanzano4uuBzBSrNtAQCFC1FN
- 6DWTxM3HzCEgrEB+QwTjLZmxJ8Zs=
-X-Gm-Gg: ASbGncvTFtIc2XtHRPxb1ja4p3WkxP9fBFqKs6A91pthEaNnl6ulAfQ8gcXlUyewv2c
- EqLvC61XyUtK7EkWijH0zXRqbRHblmdl6wlusIvLhH/4xmccSszx26carMCekYqsRRqBp9swMPI
- VFt8RF47nUSmtpBYyN
-X-Google-Smtp-Source: AGHT+IHeNwjzc0W7aRakxbTuqveHU3wWSyeT4+RnbU8xXV5Bw7yk8T7XYtWqgSyb1NINnbb4f/ldL0D22dGk2JuwID4=
-X-Received: by 2002:ac2:434f:0:b0:540:c349:a80f with SMTP id
- 2adb3069b0e04-5439c265cc4mr9181670e87.38.1737820402044; Sat, 25 Jan 2025
- 07:53:22 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="EZroXv/q"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 89DAF101ECB00; Sat, 25 Jan 2025 17:36:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1737823002;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=502zxP4RuD2dt9x7RXDLbFVx3fN/QAXyGiRwlVrxP4I=;
+ b=EZroXv/qpTsY7McA9FAnR+4T7aRnCDGdpGcCto0/MvhM7YIqI/Hs2vlFVLS31gZjPC8J8p
+ fflv9rjbMsjsNkXh7PRRoUqDJ89fb+ln79jkRkR//J2wAcRmkwHMmfr0p1dv9bS8np8rAU
+ J+zZfKC9GXR48SvdP5NGRboLGzmNP4aWPp7sgrmyFwqehyUYjh8x4g8Z0RNxRACOJrhK3o
+ 8mgwhv6Qijy0g3q90Ruq6TDx1vsGHFIxKQZOzEWpFYDcWIkFhzSdeeyVSKNQ+7lBad/cpq
+ OwwbzC2YQNl6w2VI2dsm7YGyDntdRc+Z6UCpQuAZVhBlBVWk9bWW+VEhqfqHkg==
+Message-ID: <efaf3c1b-c3c7-44e2-9cee-c854cb67e74a@denx.de>
+Date: Sat, 25 Jan 2025 17:36:39 +0100
 MIME-Version: 1.0
-References: <20250124145520.185414-1-marex@denx.de>
-In-Reply-To: <20250124145520.185414-1-marex@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 25 Jan 2025 12:53:10 -0300
-X-Gm-Features: AWEUYZmkR2uwNJkaOkXHVrl17qPw5Q01Kw8duqyBf19qTXx3JJdvHOPNEo4Mb0U
-Message-ID: <CAOMZO5DTbaq+ArihsEE68YbD8S-v9ny2+Nc8XbXZ-JWRRTUFTw@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 01/10] pinctrl: imx: Push imx_pinctrl_ops into drivers and
  staticize
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+To: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20250124145520.185414-1-marex@denx.de>
+ <CAOMZO5DTbaq+ArihsEE68YbD8S-v9ny2+Nc8XbXZ-JWRRTUFTw@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAOMZO5DTbaq+ArihsEE68YbD8S-v9ny2+Nc8XbXZ-JWRRTUFTw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,20 +85,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom,
+On 1/25/25 4:53 PM, Fabio Estevam wrote:
+> Tom,
+> 
+> On Fri, Jan 24, 2025 at 11:55 AM Marek Vasut <marex@denx.de> wrote:
+>>
+>> Move imx_pinctrl_ops into drivers and staticize. This is preparatory
+>> patch for follow up pinctrl drivers which will not use this variant
+>> of imx_pinctrl_ops content. This should not change size, as most of
+>> the deployments compiled in one pinctrl driver anyway. No functional
+>> change.
+> 
+> The u-boot-imx/master-next fails with this series applied:
+> 
+> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1005082
+> 
+> This is unrelated to this series, though.
+> 
+> Any ideas?
 
-On Fri, Jan 24, 2025 at 11:55=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
->
-> Move imx_pinctrl_ops into drivers and staticize. This is preparatory
-> patch for follow up pinctrl drivers which will not use this variant
-> of imx_pinctrl_ops content. This should not change size, as most of
-> the deployments compiled in one pinctrl driver anyway. No functional
-> change.
+Does it always fail , i.e. did you try to rerun the pipeline ?
 
-The u-boot-imx/master-next fails with this series applied:
+Did you try to rebase on current u-boot/master , does it still fail ?
+
+The link I sent to Alice also has an associated build run, which does 
+pass, but admittedly that has one extra patch on top, which should have 
+no impact:
 
 https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1005082
-
-This is unrelated to this series, though.
-
-Any ideas?
