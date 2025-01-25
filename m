@@ -4,79 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF7B4C0218C
-	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:57:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F29C4C0218C
+	for <u-boot@archiver.kernel.org>; Sat, 25 Jan 2025 22:58:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CB5880EF4;
-	Sat, 25 Jan 2025 23:57:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8605D80EF4;
+	Sat, 25 Jan 2025 23:58:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gj2/Tuf6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VfXgTIvO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABCB080F10; Sat, 25 Jan 2025 23:57:28 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 7B61080F10; Sat, 25 Jan 2025 23:58:04 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9053A80ECD
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:57:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DBF180ECD
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 23:58:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5dbfab8a2b0so6406678a12.3
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:57:26 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-467a3c85e11so24047251cf.2
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 14:58:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737845846; x=1738450646; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=l4Oi5W7AWHXkm8rPVJya0d/7+oJK0URxgqtiZwqbsY4=;
- b=gj2/Tuf6xrIEG68Wl3A3RwNAto36GJRGBzP0Az2zLQhDNCpUcmOSdIIvUFjvCngLCf
- vPPAzgKvimDMLQnwbIIOy+tP9BAWtpOK6HIaLRf1xv+4YQEaSHqtH+oivP9EVfq1cMLH
- W5BQQWFcLCEuYHw6ZmHTuQGMVRf4cZk1nFHbc=
+ d=konsulko.com; s=google; t=1737845881; x=1738450681; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xG6pLucJtntzxF2wkeN0I7HTF6aQUi2yFcQVIXjqypk=;
+ b=VfXgTIvOsorp6YYLlkpu8sZWFelpebTCSvIIAvg+0WqE/WlZmELIEFMHAb1gQyGugk
+ GnE4T0qrc/5uF72UAstp3TWJm2ZNUxUkT2WgHEriWXjm9Rz4BcaQL90ConQtNK+x3Aiw
+ jSzZ/dpMItAgamM9q1f5oUBOsnt1IzZGSHgK4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737845846; x=1738450646;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=l4Oi5W7AWHXkm8rPVJya0d/7+oJK0URxgqtiZwqbsY4=;
- b=La+s+7orHQ4I+83e89sReI/piUhAF7rlVdgpCappYO/7E0aWRzled5PPplNKl0yOAa
- jRZxDbMD0thdoJ9pqNQeYjYAudUKx25UbbrZVsxKUQY7OvVsBdX7qxYln4Q1i13y+S1+
- srH1ZpbJotctOVtJY7RpwQ6s+xRZ2hYmvcPxQ/8qN7MuT67LjYUV+hiH8DhMlCOyVGwX
- /I3/fROLTHkO7fNkWAwdK0wkGUb7r0i7VWTNeALrE5VsiJzc/DaKKo+L8H+IMqR+bzIC
- ZVya9FovaG0JoGFEU+yI9M6By7SHAfcXm8zX45W4dRPAMfxBp0P6iIY4gC13sSEt+efC
- TZ4Q==
-X-Gm-Message-State: AOJu0YxkR+u63qYfHQ2oJSvDuVhnsVnavHYLAaaXTy3OqpC4nMlkaQJq
- Qpj5k6Vb/PQp6q0CWG6AA7k5JCOaiA3PGv4J8kgQe8WUhHQ76CIW44Yu1vg265v+svz3+WdPKQW
- D84SaYWS3C4dGkNJyM6ox7mXv+DT6GLDhR/WING0PPO3rrWw=
-X-Gm-Gg: ASbGnctGDWIbJdoV/J28Xh1dxfm6TsQqrxtqEYNZ2E9EQGdP1d7p9rttDudQJw8leZN
- 4Ha7Ix0xArdDVfgcPbsfqkbqUEraFIU0eM5ids/YcSvK2AYTzOokBTrghgFCUfJ8=
-X-Google-Smtp-Source: AGHT+IH5bw3TNev5/qsf6xH6EebvbP3owLeYH2YzTD4beXhZdwUaqPgy45kAHw0yYMqglaL3yRgPQlV7gJsqIYPoCe0=
-X-Received: by 2002:a17:906:478d:b0:ab2:b610:35fb with SMTP id
- a640c23a62f3a-ab38b191888mr3408678666b.3.1737845845962; Sat, 25 Jan 2025
- 14:57:25 -0800 (PST)
-MIME-Version: 1.0
-References: <20250124185605.372347-1-sjg@chromium.org>
- <20250124192056.GU60249@bill-the-cat>
- <CAFLszTjowGVr2R0=bz-h=sU0NHjP8CDaF04cfO1Kbh8d8F5nFA@mail.gmail.com>
- <20250125183025.GB60249@bill-the-cat>
- <CAFLszThbkdt_RqvDGr6nV4QvFG4u6z1uh7Yu=65es_ZA3_5tEQ@mail.gmail.com>
- <20250125220119.GG60249@bill-the-cat>
- <CAFLszTgw+u3rQ8N3vqB1bZ6RdOY_poJUO_WULQ-Q+q28S46FaA@mail.gmail.com>
- <20250125225331.GI60249@bill-the-cat>
-In-Reply-To: <20250125225331.GI60249@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 25 Jan 2025 15:57:14 -0700
-X-Gm-Features: AWEUYZnjk323zX2HJEs3HZqk8iHSFKvngZ9q3ENdFh_cOAr45738YmBGhKTQ2hQ
-Message-ID: <CAFLszTiiVcjt89cGg8SSHbM+PUQOq4_D17eLvfKZRvBxqP_5pQ@mail.gmail.com>
-Subject: Re: [PATCH] test/py: Add a report show test durations
-To: Tom Rini <trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1737845881; x=1738450681;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xG6pLucJtntzxF2wkeN0I7HTF6aQUi2yFcQVIXjqypk=;
+ b=CLUMyD/l2CdxhTgGP0wvWUq6jYrMLggyP3BzdYIUTXDjYdyXS4VNZRspdR1XE9Ogfq
+ /mBpo2l9mez64RuLM5qu8KTO7ibNucJjPCUaqd6ytYJDBlpLJCkRcvssu+Fc28dp/fWZ
+ jPXuLQanitqn9gwpwdkqhb9lmDmlS5FTB7CATJtDlIpVYhJ4k07URPNkEx0atpa6JOfU
+ tAJJ4DQnbHIwLq5c7ukE3BAEuHFyzITOZ/w7+PyzB10Ek6kaGRdbMuljaZXBNmoOOfF1
+ y60yWEaNKIBZidRt2QF3/LdrKsUSQjEFo0g59+RQ68oF3FrVDQf7axbiWTYqVQxCX6FX
+ uksg==
+X-Gm-Message-State: AOJu0Yy9AR72R4qKbokVRhNN18MAoC/C3oqHzLchaZnR4UZvPKFLnm5l
+ EarXxhMddZAmj8zvbHfGaUf4cWzEuA9DMhe1YHtpAHAWYM3XEzRQR+b0ioK2SSY=
+X-Gm-Gg: ASbGncs8u9r7bCCpy0LeGkUJiU0Mxf8UhDmAJY2crqLitqgVEzqhhFvyad6foBQEj0j
+ KGVUT3rIn6ir5pKfWLqNzyKCIkkZwUfuFyHyuHDH1cjf5g4gZItAKuj297JHkUE7MZXhDXA5ZXh
+ en0FVXRWrd8bbVMxaKa8skIfvo9P2XitTxKS2nqmI/dZ7GcivoO8YD7RsZ0G0Je+ev1ejL6JzJf
+ BE8sVewDgpTPndPFl5NeTOUmFSMOwYtY5VcvoGTzi70fD0lUyPCRMRzKCKoYV83JA5m7UZfy2DY
+ jE18
+X-Google-Smtp-Source: AGHT+IGwqNKYgxX9VK8VxFTNcTkDed1JSdqBV1w8hnhvCDPSIKQp/vGpC+JBLknpGzUMX3d8QR54oA==
+X-Received: by 2002:a05:622a:549:b0:467:86a9:f7d4 with SMTP id
+ d75a77b69052e-46e12a55d3dmr572404061cf.16.1737845880829; 
+ Sat, 25 Jan 2025 14:58:00 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46e66b690d0sm23943731cf.62.2025.01.25.14.57.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Jan 2025 14:58:00 -0800 (PST)
+Date: Sat, 25 Jan 2025 16:57:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>
-Content-Type: text/plain; charset="UTF-8"
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Love Kumar <love.kumar@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Richard Weinberger <richard@nod.at>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Tim Harvey <tharvey@gateworks.com>
+Subject: Re: [PATCH 2/4] test: Drop u_boot_ prefix on test files
+Message-ID: <20250125225756.GK60249@bill-the-cat>
+References: <20250125213150.1608395-1-sjg@chromium.org>
+ <20250125213150.1608395-3-sjg@chromium.org>
+ <20250125214613.GE60249@bill-the-cat>
+ <CAFLszTgYPNxmiO=agM+MUp0da_6q3BBro74bWEnNbqeM-tT=bw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tEvMUYK2ormvG5s9"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgYPNxmiO=agM+MUp0da_6q3BBro74bWEnNbqeM-tT=bw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,146 +113,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Sat, 25 Jan 2025 at 15:53, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Jan 25, 2025 at 03:50:02PM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sat, 25 Jan 2025 at 15:01, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Jan 25, 2025 at 02:36:52PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Sat, 25 Jan 2025 at 11:30, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sat, Jan 25, 2025 at 10:14:05AM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Fri, 24 Jan 2025 at 12:21, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Jan 24, 2025 at 11:56:04AM -0700, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > Execution time varies widely with the existing tests. Provides a summary
-> > > > > > > > of the time taken for each test, along with a histogram.
-> > > > > > > >
-> > > > > > > > Example:
-> > > > > > > >
-> > > > > > > >    Duration : Number of tests
-> > > > > > > >    ======== : ========================================
-> > > > > > > >        <1ms :  1
-> > > > > > > >        <8ms :  1
-> > > > > > > >       <20ms : # 20
-> > > > > > > >       <30ms : ######## 127
-> > > > > > > >       <50ms : ######################################## 582
-> > > > > > > >       <75ms : ####### 102
-> > > > > > > >      <100ms : ## 39
-> > > > > > > >      <200ms : ##### 86
-> > > > > > > >      <300ms : # 29
-> > > > > > > >      <500ms : ## 42
-> > > > > > > >      <750ms : # 16
-> > > > > > > >       <1.0s : # 15
-> > > > > > > >       <2.0s : # 23
-> > > > > > > >       <3.0s :  13
-> > > > > > > >       <5.0s :  9
-> > > > > > > >       <7.5s :  1
-> > > > > > > >      <10.0s :  6
-> > > > > > > >      <20.0s :  12
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > >  test/py/conftest.py | 77 +++++++++++++++++++++++++++++++++++++++++++++
-> > > > > > > >  1 file changed, 77 insertions(+)
-> > > > > > >
-> > > > > > > Whitespace issues aside,
-> > > > > >
-> > > > > > Do you mean the blank lines? pylint wants those for top-level items.
-> > > > >
-> > > > > That's weird but OK.
-> > > > >
-> > > > > >  we should probably not do this every time, just
-> > > > > > > when requested.
-> > > > > >
-> > > > > > I'd like to see it on each run, actually. It doesn't take any time to
-> > > > > > calculate and it lets us see where the time is going.
-> > > > >
-> > > > > We already print the full time, and I think knowing what the tests are
-> > > > > that take so long, so that we can see if there's anything to do about
-> > > > > it, would be more helpful. The general feedback about our pytests today
-> > > > > is they're already too verbose in the normal case.
-> > > >
-> > > > This is what is shown in the full output (although with CI you have to
-> > > > download the files to see it):
-> > > >
-> > > > [-] Section: Timing Report
-> > > [snip]
-> > >
-> > > This is handy as a one-off, and maybe hints at a few tests to look at
-> > > more, but perhaps it's mostly "is what it is" tests (and not just the
-> > > sleep test).
-> >
-> > Perhaps, but I would hope we could speed some of these up, or reduce
-> > the number of variations.
->
-> Looking at it, all I see is a sample that yes, we should see if there's
-> some way to speed up output from U-Boot to python. None of the "long"
-> tests look otherwise out of line for what they're doing.
->
-> > > > TIME: SINCE-SECTION: 0:00:00.004227
-> > > >
-> > > > This is just the summary which is visible in CI:
-> > > >
-> > > > [-] Section: Timing Summary
-> > > > TIME: NOW: 2025/01/25 14:28:57.730179
-> > > > TIME: SINCE-PREV: 0:00:00.004234
-> > > > TIME: SINCE-START: 0:02:00.307984
-> > > > TIME: SINCE-SECTION: 0:00:00.000041
-> > > > Duration : Number of tests
-> > > > ======== : ========================================
-> > > >     <4ms :  1
-> > > >     <8ms :  1
-> > > >    <10ms :  3
-> > > >    <20ms : #### 47
-> > > >    <30ms : ######################################## 377
-> > > >    <40ms : ############################# 278
-> > > >    <50ms : ####### 69
-> > > >    <75ms : #### 47
-> > > >   <100ms : # 18
-> > > >   <200ms : ### 29
-> > > >   <300ms : # 15
-> > > >   <400ms : # 13
-> > > >   <500ms :  8
-> > > >   <750ms :  6
-> > > >    <1.0s :  2
-> > > >    <2.0s :  9
-> > > >    <3.0s :  3
-> > > >    <4.0s :  4
-> > > >    <5.0s :  2
-> > > >    <7.5s :  2
-> > > >   <20.0s :  1
-> > > >
-> > > > So what do you think would make most sense?
-> > >
-> > > By default, neither of these, and only when requested. Looking over at
-> > > one of your runs, no, I don't want to waste more output space. If you
-> > > must do something, log it off to examine later and not add to the main
-> > > output.
-> >
-> > OK, I'll just put it in my tree for now.
->
-> Sigh.
->
-> > BTW what do you mean by 'by default'? What other way of running would
-> > there be? Are you thinking of a CI flag?
->
-> I mean passing some flag to pytest, like you do what you want more
-> verbose output, or less output. I don't see this as something that adds
-> value to run every time.
+--tEvMUYK2ormvG5s9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-OK, we could do that. But I really like seeing the info in gitlab.
-Perhaps we could have it appear just for the one 'sandbox' test?
+On Sat, Jan 25, 2025 at 03:41:43PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Sat, 25 Jan 2025 at 14:46, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sat, Jan 25, 2025 at 02:31:37PM -0700, Simon Glass wrote:
+> >
+> > > We know this is U-Boot so the prefix serves no purpose other than to
+> > > make things longer and harder to read. Drop it and rename the files.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > This is a massive bit of churn and violating namespace best practices
+> > when it seems like we really need:
+> > [snip]
+> > > diff --git a/test/py/tests/fit_util.py b/test/py/tests/fit_util.py
+> > > index 16ff8c96c63..7aad4030be3 100644
+> > > --- a/test/py/tests/fit_util.py
+> > > +++ b/test/py/tests/fit_util.py
+> > > @@ -5,7 +5,7 @@
+> > >
+> > >  import os
+> > >
+> > > -import u_boot_utils as util
+> > > +import utils as util
+>=20
+> The real namespace is the one in site-packages, where you are supposed
+> to put things in their own modules. The Python tools operate in a
+> proper namespace, but so far the tests don't. They just use whatever
+> directory the file is in. So, for example, we have:
+>=20
+> from tests import fs_helper
+>=20
+> where 'tests' is the subdir in test/py
+>=20
+> One option would be to move the pytests up a directory, with test.py
+> in test/ and the other python files in test/u-boot and the tests in
+> test/pytests or something like that.
+>=20
+> Then we would have:
+>=20
+> from tests import some_file (*)
+>=20
+> like we do in tools
+>=20
+> Also, I wouldn't call this 'massive' churn. Most files just have a
+> line or two changed, with test.py and test_ut.py getting more.
+>=20
+> >
+> > A lot more of this type of namespace shortening which I believe is the
+> > normal Python-way of solving this issue.
+>=20
+> It doesn't really, since 'util' might conflict with something. When
+> you have a set of related Python files, as with do in test/py it is
+> better to use a namespace. But even then, I think we would want a
+> shorter name.
 
-Regards,
-Simon
+Yes, I suppose I'd rather see (and without the ubpy rename, one thing at
+a time please!) moving files around such that we can then do more normal
+"from foo import bar", and also avoid the silly thing of "import utils
+at util" ;)
+
+--=20
+Tom
+
+--tEvMUYK2ormvG5s9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeVbHQACgkQFHw5/5Y0
+tyyArwv+J4FdcPX5dfnm+BVslYuFHIV+cBj93dxYqOjBIHn2ELrti3x/7k9sAl0u
+8BTrWv/RceBP91kHGC6QfoYVCo/cTqcLSM/W1gp1GEQNQso+TKP8J5KjzvJBtJCd
+KOQNOyg1qqRVgZsFNGNFVyP0ZBKfdt+sAg47sesLktznhjySxRRlssd4A3yYpVZA
+2i4aqhscE/B2p9CeJuwUbGVduY+AqOxPAf0I49NJiNQrR2hZHSJg7wGJvcxhQVh1
+Ju58w69Fh19IlNmVls94Ga6kVIyHZ1iALrDKC0hZ3EYKNvglUa1xpJPNcfuC0bCX
+++l9etqhe/QEqfGPUt5HOwQIpC3fmAUYcXJpn5ZVjjj3yCdPYOyCJMqQKmfKARa5
+vqZbXnMeEcWXZAYgkZe3UWyRh49tlqbbwCYZsbXlMJXG1TrA88cCs8DEjL7HPD0z
+MB4wvHcZ1zZUIpuQjfvkyDrdrWdgEMxIkIGhPt2oa7+6e58HDFwvYgSq3O2XCuEx
+lSLfjzKg
+=8cgD
+-----END PGP SIGNATURE-----
+
+--tEvMUYK2ormvG5s9--
