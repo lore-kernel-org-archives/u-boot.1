@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8EB7C0218D
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 989E0C0218D
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:46:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6477D80FF0;
-	Sun, 26 Jan 2025 19:44:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B11E080F10;
+	Sun, 26 Jan 2025 19:44:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wqr8gYjx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y44GahGE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0169380FC2; Sun, 26 Jan 2025 19:44:29 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 4CDC2810F1; Sun, 26 Jan 2025 19:44:31 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A861480FD1
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D6D980FCC
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-844e1eb50e2so100428439f.0
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:25 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-844e9b8b0b9so281293839f.0
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737917063; x=1738521863; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737917067; x=1738521867; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YD7/i2Ilf2SU6H/j/wdd1WkfJCi2iOm/ewdFOgV9YeE=;
- b=Wqr8gYjx2PQ+1wiTrBsgk8myks+9ZDBdSHwntvTA4tEuRxwEhVzJ0y+cIQ53V7DQgY
- Rpow0Xo32V0Q9U/0N9uOE3wS4BMNA2hvrPPLefWHzDD7Y2nPiH/4YMjhN2IZYBd9153f
- DJHMVz18uGNhNXBBTJaNLVM/vJhW3dr4aNHTw=
+ bh=fnMStaSPdZNYCoqavIc6/85feHfNQ7ioZLa75quRLnM=;
+ b=Y44GahGEwhU83ZWXWyk9N9yNh+AWBIzJCr+qoCYtYEWW0erPrQ3PbPWmDsyEtroD4E
+ ChUsxEJnQX58xZROvkbvBe210NGQ/ujEJpKDV9lrlr74+18uHVWThknrAYghp9HwVylT
+ eDl9DxKEMQ5TDr6G495sZI3q6CbkIWM1SZqn4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737917063; x=1738521863;
+ d=1e100.net; s=20230601; t=1737917067; x=1738521867;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YD7/i2Ilf2SU6H/j/wdd1WkfJCi2iOm/ewdFOgV9YeE=;
- b=ewCda5UyXV6EhA71++7HVK1DEf8JolUZUjLAtxVHRkelrjLASJ+Pv1IP4mezwrXM/W
- zr8fzPYZATyxsfUEhiQ/Z7NELnoK8vAvoK29RU9vwxH5+fPLZHRHSF/QiuCEAKzgI+bU
- ISula1LMoS8DpTlORod8VzR9CH94wxD+qesJruNt37DJuZea/jPm8t1MXXjJ9H5gNC2c
- rnyV+OfOUSsYa215vxMSV1C3YFj5RpPDZwMZPJ2GfcCJyc2BoA9h4wdfq/b7Tm1IqvWt
- b/YSKJr1KnLwi4a/8QLCH6/GzbYZ2nabrxklflDIVRGBVGWVsBCOsCHFH5u/zCHjPuiP
- JFwQ==
-X-Gm-Message-State: AOJu0Yz5Nfh3POlYYpilYYhj6m+w4cJfeKzxvtvFMIyOLZ4JXDHOM5pe
- lSkqZVx48aX8cgWTw3mngJqZVhQ7P6aQZc2EccB9nX9Y4UYYcrK9KBMAH1QKp7xz28KyltSDdXU
+ bh=fnMStaSPdZNYCoqavIc6/85feHfNQ7ioZLa75quRLnM=;
+ b=QEH2Xh4JMiWclCzT84AUWqo7eEYaMz3n61c3dNL9p19MkodECWkoqNtr49d2UXgLZY
+ zkG9UoHWOonl/kAQW+v4gCgslnvGrsCgC6Dw7raH5P65+dDuihduC7/ZoVod9ZDvXgwX
+ SAVkk4MbTBw7gx4/ypvPmeyeEC7cvstocnSm+OhNMHXlegDM0U6nBK7/natUUj69Vcm/
+ 8tsyOpSuS9Nem1w7sihyPqPQz6BSJ7c0Basfl5VuyFJWKVVKqg0wq++uT0wQnZ47jW/o
+ fM3LzrBKdjTQlJdQI1xWsdp2ZhWND1v3RTClmesuwkgFjjOUJWNBpKgwtihPOgY/skWq
+ 4S/A==
+X-Gm-Message-State: AOJu0Yy30jj4nxGYcI/x9UqYyQtE315mKlWuzRiWxdyQhenOBL0TbhPX
+ VnAK5G3iM+QOH0rftCFsiLibMwnleNq0ux/DidoyVn4RX9qFe6gm6liwKa4efjDKrALU2w5Rz04
  =
-X-Gm-Gg: ASbGnctvysmWv8wIRjMyw+Hn7ae5kKLv3b2EFPZgP06hdYYEU+04JtPzwjoNqGGLr9M
- t2fQB7TKRbpbsLnzC94GQWcyl1kj+3mi+QT27XJoqShyorMq/M33ietItqq0IUTnmGnX8d41s/Y
- +ukT2wApfcHU++vxb3gStCIoERO1lpTVOI2YBz59yeKQNQNj2XF+q/vh5Zl02pDYfsKpY1XZl+F
- 1eO/NruHscFadmmO1jQzOsEI7ZtnGkA+TyKSU/a6+EQCEBaxZ20FNPsdQjN10zQwds/5K/+AFOq
- slN9GKrfW9n8+7Rj7D+707xFvCp7r6p/KqKv299TF6lwgY+aQY3O
-X-Google-Smtp-Source: AGHT+IH23bxIyRuAejQq14yt6FV4IU1TWrNmnUvrWCW9JdjiMT0Imsvx/Ijzi4a0jIkeqQqsg9890Q==
-X-Received: by 2002:a05:6602:6c19:b0:844:c750:3d9d with SMTP id
- ca18e2360f4ac-851b618c3bamr3854451639f.4.1737917063455; 
- Sun, 26 Jan 2025 10:44:23 -0800 (PST)
+X-Gm-Gg: ASbGnct96agcaKVw73E9SmmVBRZvxSeXLHZ09AvYZQqCf6Webq+sFO5KZbXG4+sxkkJ
+ y3yP40QzaMbDvF9dFiCr4HxO0YBt4TuiuQNxV5c2cVb6QWdK9KGgX7HbvscRHYgZ00Up4yuR/9l
+ tVOpm27Bio/EaHfkMlvgnV2d6Q1dip2g9AcXUtGd5lpj3nvf3rJlkeO1XhhDV3Tm5vQg9ImLQDi
+ vZtrVCDJ/iE1gETnxpcjU/u1kCxhCQftwMBKCYSUqc/kcMLbNKLyn9hE93eEpkQf+NKmSAGAsy3
+ wMjXlrTJntleI4uH26h0MYe0LZvHbHM9/cKEteMZoQ==
+X-Google-Smtp-Source: AGHT+IEBMnN+w4Y7ucSudadAuR3771ZFw7UA41DotNjyfqnzMh0G8KbdRq/TngfluPQKGzrlmnQACA==
+X-Received: by 2002:a05:6602:6b07:b0:843:f220:fa3d with SMTP id
+ ca18e2360f4ac-851b624142emr3559866539f.7.1737917065748; 
+ Sun, 26 Jan 2025 10:44:25 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.20
+ 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jan 2025 10:44:21 -0800 (PST)
+ Sun, 26 Jan 2025 10:44:24 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 16/19] vbe: Provide VPL binman-symbols for the next phase
-Date: Sun, 26 Jan 2025 11:43:26 -0700
-Message-ID: <20250126184333.4058848-17-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 17/19] vbe: Tidy up a few comments
+Date: Sun, 26 Jan 2025 11:43:27 -0700
+Message-ID: <20250126184333.4058848-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250126184333.4058848-1-sjg@chromium.org>
 References: <20250126184333.4058848-1-sjg@chromium.org>
@@ -96,78 +94,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for moving from TPL->VPL->SPL so that the VPL build can fit
-properly into the boot flow.
-
-Use #ifdefs to avoid creating unwanted symbols which Binman would then
-try (and perhaps fail) to provide.
-
-Add debugging to indicate the next phase.
+Join the comment block for the fit_image_load() call back to where it
+should be. Also fix a debug statement.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/spl/spl.c | 26 ++++++++++++++++++++------
- 1 file changed, 20 insertions(+), 6 deletions(-)
+ boot/vbe_common.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 7cfbab06419..6b75910e243 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -50,8 +50,10 @@ u32 *boot_params_ptr = NULL;
+diff --git a/boot/vbe_common.c b/boot/vbe_common.c
+index 0d51fe762c3..009bbcd3e76 100644
+--- a/boot/vbe_common.c
++++ b/boot/vbe_common.c
+@@ -202,14 +202,6 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
+ 	phase = IS_ENABLED(CONFIG_TPL_BUILD) ? IH_PHASE_NONE :
+ 		IS_ENABLED(CONFIG_VPL_BUILD) ? IH_PHASE_SPL : IH_PHASE_U_BOOT;
  
- #if CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS)
- /* See spl.h for information about this */
-+#if defined(CONFIG_SPL_BUILD)
- binman_sym_declare(ulong, u_boot_any, image_pos);
- binman_sym_declare(ulong, u_boot_any, size);
-+#endif
+-	/*
+-	 * Load the image from the FIT. We ignore any load-address information
+-	 * so in practice this simply locates the image in the external-data
+-	 * region and returns its address and size. Since we only loaded the FIT
+-	 * itself, only a part of the image will be present, at best.
+-	 */
+-	fit_uname = NULL;
+-	fit_uname_config = NULL;
+ 	log_debug("loading FIT\n");
  
- #ifdef CONFIG_TPL
- binman_sym_declare(ulong, u_boot_spl_any, image_pos);
-@@ -179,9 +181,15 @@ ulong spl_get_image_pos(void)
- 	if (xpl_next_phase() == PHASE_VPL)
- 		return binman_sym(ulong, u_boot_vpl_any, image_pos);
- #endif
--	return xpl_next_phase() == PHASE_SPL ?
--		binman_sym(ulong, u_boot_spl_any, image_pos) :
--		binman_sym(ulong, u_boot_any, image_pos);
-+#if defined(CONFIG_TPL) && !defined(CONFIG_VPL)
-+	if (xpl_next_phase() == PHASE_SPL)
-+		return binman_sym(ulong, u_boot_spl_any, image_pos);
-+#endif
-+#if defined(CONFIG_SPL_BUILD)
-+	return binman_sym(ulong, u_boot_any, image_pos);
-+#endif
-+
-+	return BINMAN_SYM_MISSING;
- }
+ 	if (xpl_phase() == PHASE_SPL && !IS_ENABLED(CONFIG_SANDBOX)) {
+@@ -220,11 +212,19 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
+ 		log_debug("doing SPL from %s blksz %lx log2blksz %x area_offset %lx + fdt_size %lx\n",
+ 			  blk->name, desc->blksz, desc->log2blksz, area_offset, ALIGN(size, 4));
+ 		ret = spl_load_simple_fit(image, &info, area_offset, buf);
+-		log_debug("spl_load_abrec_fit() ret=%d\n", ret);
++		log_debug("spl_load_simple_fit() ret=%d\n", ret);
  
- ulong spl_get_image_size(void)
-@@ -263,14 +271,20 @@ void spl_set_header_raw_uboot(struct spl_image_info *spl_image)
- 	 */
- 	if (u_boot_pos && u_boot_pos != BINMAN_SYM_MISSING) {
- 		/* Binman does not support separated entry addresses */
--		spl_image->entry_point = u_boot_pos;
--		spl_image->load_addr = u_boot_pos;
-+		spl_image->entry_point = spl_get_image_text_base();
-+		spl_image->load_addr = spl_get_image_text_base();
-+		spl_image->size = spl_get_image_size();
-+		log_debug("Next load addr %lx\n", spl_image->load_addr);
- 	} else {
- 		spl_image->entry_point = CONFIG_SYS_UBOOT_START;
- 		spl_image->load_addr = CONFIG_TEXT_BASE;
-+		log_debug("Default load addr %x (u_boot_pos=%lx)\n",
-+			  CONFIG_TEXT_BASE, u_boot_pos);
+ 		return ret;
  	}
- 	spl_image->os = IH_OS_U_BOOT;
--	spl_image->name = "U-Boot";
-+	spl_image->name = xpl_name(xpl_next_phase());
-+	log_debug("Next phase: %s at %lx size %lx\n", spl_image->name,
-+		  spl_image->load_addr, (ulong)spl_image->size);
- }
  
- __weak int spl_parse_board_header(struct spl_image_info *spl_image,
++	/*
++	 * Load the image from the FIT. We ignore any load-address information
++	 * so in practice this simply locates the image in the external-data
++	 * region and returns its address and size. Since we only loaded the FIT
++	 * itself, only a part of the image will be present, at best.
++	 */
++	fit_uname = NULL;
++	fit_uname_config = NULL;
+ 	ret = fit_image_load(&images, addr, &fit_uname, &fit_uname_config,
+ 			     IH_ARCH_DEFAULT, image_ph(phase, IH_TYPE_FIRMWARE),
+ 			     BOOTSTAGE_ID_FIT_SPL_START, FIT_LOAD_IGNORED,
 -- 
 2.43.0
 
