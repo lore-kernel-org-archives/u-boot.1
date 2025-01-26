@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4BEFC02181
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 04:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466B4C02181
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 05:15:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7876807E4;
-	Sun, 26 Jan 2025 05:08:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
+	by phobos.denx.de (Postfix) with ESMTP id 4BDDA80F53;
+	Sun, 26 Jan 2025 06:15:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="PE9ty/P+";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="B49Fg8Yo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Hr0QnSSt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83BEC807FE; Sun, 26 Jan 2025 05:08:39 +0100 (CET)
-Received: from sendmail.purelymail.com (sendmail.purelymail.com
- [34.202.193.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 26DB880F58; Sun, 26 Jan 2025 05:34:51 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B3578076E
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 05:08:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=tidylabs.net
+ by phobos.denx.de (Postfix) with ESMTPS id 6EB2A807E4
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 05:34:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=justin@tidylabs.net
-DKIM-Signature: a=rsa-sha256;
- b=PE9ty/P+Yumk8C+qgyeYhZ5BIhHKEaeTzZRDboNrLpabi+G6TH//KEMOkhlm4viSELFkUhG4tv6n7uLQtypDhxcF97LPBtfPe/ET/LUgpxFvry4dPF0ehglP/kQOOTSFSm1mmg+JEF0tgMIaB9EwmMIFWwoCVJZtR6g2LiB2UepcFqcpzNN5Brhu0pZaaf+K5ewL2856fkN8JXmYtzWyahg0c/IJctlDSUasdilmnyPVlG9OP+s9qaEXxYSF+aExGYrKax7Tj54z7pt/sFtqc34p9En1Zh1uVajUklH1rH2Npn6jlVEuhDqFbEOqAcraxXLmWqhnHETn7vBHonDLGA==;
- s=purelymail3; d=tidylabs.net; v=1;
- bh=F3W+IYhXuqmGF6/ohGbel7qszlGjVYL6PRIPUlVGQuc=;
- h=Received:Received:Received:Received:From:Date:Subject:To; 
-DKIM-Signature: a=rsa-sha256;
- b=B49Fg8YotwMXQsTlbQLQBR4YC2r8qAXV5xrK1mAsgAUodmq6Ts3ycWeJmcAMFzFDT5C3EDcQ8cH4MniAXrvXpT9MZvh+pCTggswFMy75bV11RzLyRgWcBXFRKUK0f67WJxjdMkRt0q9PKntQFJ5dHIfd4cnYxyPAfyasiZsa/vv5v0Eal1yaQybVtSNqMHns9uhR57Sd3SMH2BrJLONS3hNLOoiN63gBRygCPmdcaQc9mI7IJrEqibmRXH17Av/22KVs5OiRTL62DIv3iqyth1YcHATM+CVoAxJfYRakpyrNs6LiZoRgMtSZhs2VaOzbM+6Qs2iuzC8KnA9EevI/kg==;
- s=purelymail3; d=purelymail.com; v=1;
- bh=F3W+IYhXuqmGF6/ohGbel7qszlGjVYL6PRIPUlVGQuc=;
- h=Feedback-ID:Received:Received:Received:Received:From:Date:Subject:To; 
-Feedback-ID: 81901:11097:null:purelymail
-X-Pm-Original-To: u-boot@lists.denx.de
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id 1043055276
- for <u-boot@lists.denx.de>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Sun, 26 Jan 2025 04:08:34 +0000 (UTC)
-Received: by mail-pj1-f41.google.com with SMTP id
- 98e67ed59e1d1-2ef8c012913so4553867a91.3
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 20:08:34 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=gabriel.dalimonte@gmail.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa679ad4265so880068166b.0
+ for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 20:34:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1737866088; x=1738470888; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vCWMhfq0DUAVZZQJc9l2Rv6XDIDhkYzCsNVx8Oj/OMU=;
+ b=Hr0QnSSt+FcDg2RyaDXC6djs0vVZHHWPBA2x7UqaI51rzNfL3Ih6eNM2udiGrFrCvW
+ uaHKjSy9om70dXjIEPrq+eTDeqBuShXuvTt3YQ9dD8fC1rINqZs6atP9smTEQSDSp8TQ
+ iqiq+MvOfREcLhDSJbm/xP/7YLAfVaILlFOFjuqyJTlTBqq3MrpO7rQQgVFvwpJgSKWE
+ GyGGouCpKeOdksTeCIOvbk6bKDhb/O0rVlg44Y78KRYnZdn1Eii/ez5qWYhxqW0Zf2Us
+ T9kIwrMUiQpFRrn4TBp9fLQp23iFOy8PL83xSwKBPun2bOSgKNs1Ax3QPjT6/ltyG89m
+ kpZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737866088; x=1738470888;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vCWMhfq0DUAVZZQJc9l2Rv6XDIDhkYzCsNVx8Oj/OMU=;
+ b=uKb5UXwEZZ/Bg6bT3oeVWpWTUZ2kXGkXVl/F6EKQ9MoxwjeDWUkpY9yOqqqOxSus1u
+ /28tne+NIVFnqmrSOKYCAsRRJZMmiZUuvT8R4sSL0nvorEeAHkA/k5pGlaaX1y7yig0c
+ ff0+/+f/r7f/anKBi1eiK5WQB0HffecspI4YISNbg/VSYtStPij718wk9uE5qkgDr9wc
+ zuVDsSb8Fc3cT2IBguv4znLVQuGKVx1ouoWjMsT+YCPQmdoYn2dcVP/ApqUxBNaRasaG
+ sH8k2rG9ZOkHeK19oa5eJAcyYNnLmr0MsZlVu8uesg1FwzZmag2JICPzNONgxiuRY8aH
+ LZQQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrM5M4Bn8n2HpCxzGgVCwyxGgksyhM0zTUst6scYdua8JdT4t4++bWkZmP3V+qAgtutoYZZS4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzGmSxZQfh/4GsbUWvcqoZtrENyJwUfKtZ9UFPcn2RTfxpsYFIe
- 32wt5lZjTKWyDTRYMGKAC58gJ+4p5yp8Jc8JeHcHTYCl1tI/mcxwsjH2sesTUpcgqmGpXYK+3jh
- 97yDrq46zlXy7LYS7ysFy4wVD3A0=
-X-Google-Smtp-Source: AGHT+IEF1hvzE3GtwdqRaQNwA4M/49xAN4XNToS9erzX+EnSnqrrLWv7U+A2Y3/vCWCU9O3EQwNrEgqVP7pAiMbCL1o=
-X-Received: by 2002:a17:90b:1f88:b0:2ee:db8a:2a01 with SMTP id
- 98e67ed59e1d1-2f782d5d838mr50990687a91.30.1737864513415; Sat, 25 Jan 2025
- 20:08:33 -0800 (PST)
-Received: from 1064022179695 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 26 Jan 2025 04:08:32 +0000
-Received: from 1064022179695 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 26 Jan 2025 04:08:28 +0000
-MIME-Version: 1.0 (Mimestream 1.5.0)
-References: <20250124211922.41274-1-justin@tidylabs.net>
- <239f9417-1e56-4b15-b055-7326a28b4aed@kwiboo.se>
-In-Reply-To: <239f9417-1e56-4b15-b055-7326a28b4aed@kwiboo.se>
-From: Justin Klaassen <justin@tidylabs.net>
-Date: Sun, 26 Jan 2025 04:08:32 +0000
-X-Gmail-Original-Message-ID: <CAK2wXt=qVHpmcgty+999EHnD=Wx7ocBm02-f_V537zoQAcKP2Q@mail.gmail.com>
-X-Gm-Features: AWEUYZnhFPxOB5HSZ8JKiXQml80EieEfMZ1NFV3dUwlMUkWbzTFy-H9UHR48ENs
-Message-ID: <CAK2wXt=qVHpmcgty+999EHnD=Wx7ocBm02-f_V537zoQAcKP2Q@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: rk3399: nanopi-r4s: Support v1.8 SD cards in SPL
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, Chen-Yu Tsai <wens@csie.org>, 
- Christopher Obbard <christopher.obbard@linaro.org>,
- Dragan Simic <dsimic@manjaro.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Keerthy <j-keerthy@ti.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, 
- Tom Rini <trini@konsulko.com>, William Wu <william.wu@rock-chips.com>, 
- Xiaobo Tian <peterwillcn@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+ AJvYcCVz7Bx55c4zCBBstgfKFa35lQAav+Ad19A+ueRF14nzLTjDYlYNQEFnbrEelwZlrwFI+LnOpMA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwhswTlXQZ0Ib4sUjN/wzsKraUkF3qmk5nNXJ13sFzEHpNxaTMe
+ 1cLi96gNQRiQoAJhMnNNgpcUJr7jKvwwjZTjLzjGL6+jZYv40xg8OaVJYF5daoPmzKpN3FpSw1z
+ qEUgV/3iVeHu8SxtACmyhDofCGCY=
+X-Gm-Gg: ASbGnctbFAMg5z7ijG4o0P4iwRoyr1DK7Xbi4K7MpqkN49H9zDI1utzX1gqlE5NuA11
+ qZvv0fMLpQn9q5MqB+so3WgKpnGUJ49tThbME68vyygP8bD4trKn9jvrupEGNrQAm1/QU2hgS
+X-Google-Smtp-Source: AGHT+IFz8x6xyVWT0+VxhPSyzedjZAWZfJzviIvhpSl6n8iRF5TT9lTND9vwEB/sJ8g6B1vvA4euY4If5H6u7xEFx8o=
+X-Received: by 2002:a17:907:7295:b0:aae:e52f:3d2b with SMTP id
+ a640c23a62f3a-ab662a3e764mr1276159566b.28.1737866087444; Sat, 25 Jan 2025
+ 20:34:47 -0800 (PST)
+MIME-Version: 1.0
+References: <20250122053232.17365-1-gabriel.dalimonte@gmail.com>
+ <20250122053232.17365-2-gabriel.dalimonte@gmail.com>
+ <5351D72E-5B9F-4161-9005-016A0910FB9D@gmx.de>
+In-Reply-To: <5351D72E-5B9F-4161-9005-016A0910FB9D@gmx.de>
+From: "Gabriel D'Alimonte" <gabriel.dalimonte@gmail.com>
+Date: Sat, 25 Jan 2025 23:34:37 -0500
+X-Gm-Features: AWEUYZkNlo5jsc9Us66B0KkTmWCpwLz4Gc2oII-9TprIRMId-DOEPGAEh4MjKRE
+Message-ID: <CAHc-7YtjRbSc76mzq5OShdT27wNpE3pN1U7s9PSCoNfhPpUeUA@mail.gmail.com>
+Subject: Re: [PATCH 1/6] fs: fat: factor out dentry link create/delete
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sun, 26 Jan 2025 06:15:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,409 +95,299 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- Hi Jonas,
+Hi!
 
-Thanks for the quick initial review.
+Thank you for the reviews and feedback.
 
-On Jan 24, 2025 at 14:25:25, Jonas Karlman <jonas@kwiboo.se> wrote:
-
-> Hi Justin,
+On Wed, Jan 22, 2025 at 2:08=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gm=
+x.de> wrote:
 >
-> On 2025-01-24 22:19, Justin Klaassen wrote:
+> Am 22. Januar 2025 06:32:26 MEZ schrieb Gabriel Dalimonte <gabriel.dalimo=
+nte@gmail.com>:
+> >Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
 >
-> The NanoPi R4S supports UHS-I (up to SDR104) SD cards, however using any
+> Hello Gabriel,
 >
-> of these 1.8v modes results in a boot failure in SPL upon soft reboot.
+>  Thank you for implementing this.
 >
->
-> On the R4S the SD card power cannot be cycled, so upon reboot the SD
->
-> card continues to operate at 1.8v but the GPIO is configured by default
->
-> at the 3.3v level.
+> Please, add a commit message to each patch.
 >
 >
-> Sounds like similar/same issue [1] that I faced on Asus Tinker Board a
-> few years ago :-)
+> >---
+> >
+> > fs/fat/fat_write.c | 122 ++++++++++++++++++++++++---------------------
+> > 1 file changed, 66 insertions(+), 56 deletions(-)
+> >
+> >diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
+> >index ea877ee917..b86e78abc0 100644
+> >--- a/fs/fat/fat_write.c
+> >+++ b/fs/fat/fat_write.c
+> >@@ -1215,6 +1215,44 @@ static void fill_dentry(fsdata *mydata, dir_entry=
+ *dentptr,
+> >       memcpy(&dentptr->nameext, shortname, SHORT_NAME_SIZE);
+> > }
+> >
+> >+/**
+> >+ * create_link() - inserts a directory entry for a cluster
 >
-> [1] https://patchwork.kernel.org/patch/10817217/
+> ... for a file or directory
 >
-
+> >+ *
+> >+ * @itr:      directory iterator
+> >+ * @basename: name of the new entry
 >
-> This change enables the RK8XX regulators and Rockchip IO-domain drivers
+> @basename: file name
 >
-> in SPL, which reads the voltage level of the "vcc_sdio" regulator and
+> >+ * @clust:    cluster number the new directory entry should point to
 >
-> configures the GPIO for the appropriate level on boot. This allows the
+> ... point to. Use 0 if no cluster is assigned yet.
 >
-> MMC subsystem to operate successfully at the 1.8v level in SPL.
+> >+ * @size:     file size
+> >+ * @attr:     file attributes
 >
+> Do we need to keep the creation timestamp when moving files? And only upd=
+ate the change timestamp?
 >
-> Signed-off-by: Justin Klaassen <justin@tidylabs.net>
+> Should the archive flag be set when moving files?
 >
-> ---
->
->
->  arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 9 +++++++++
->
->  configs/nanopi-r4s-rk3399_defconfig     | 7 +++++++
->
->  drivers/misc/Kconfig                    | 8 ++++++++
->
->  drivers/misc/rockchip-io-domain.c       | 7 ++++++-
->
->  drivers/power/regulator/Kconfig         | 9 +++++++++
->
->  drivers/power/regulator/rk8xx.c         | 2 +-
->
->  6 files changed, 40 insertions(+), 2 deletions(-)
->
->
-> diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-> b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
->
-> index 75736124996..146b62c2e7a 100644
->
-> --- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
->
-> +++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
->
-> @@ -23,4 +23,13 @@
->
->
->
->  &vcc_sdio {
->
->   regulator-init-microvolt = <3000000>;
->
-> + bootph-pre-ram;
->
-> +};
->
-> +
->
-> +&io_domains {
->
-> + bootph-pre-ram;
->
-> +};
->
-> +
->
-> +&i2c0_xfer {
->
->
-> Please sort nodes in alphabetical order based on label.
->
-> These should probably be added to rk3399-nanopi-r4s-u-boot.dtsi since
-> that is the only defconfig you enable relevant Kconfig options for.
+> What does EDK II or Linux in these cases?
 >
 
-I believe this same issue and fix applies to at least all the rk3399 boards
-using rk3399-nanopi4-u-boot.dtsi:
+On Linux (6.12) [1] it looks like the following happens with respect
+to timestamps:
+1. If new_path is not overwriting an existing file, the parent
+directory of new_path has its modification time updated. (via
+`vfat_add_entry` [2] )
+2. old_path's parent directory has access, and modification time
+updated via `vfat_remove_entries` [3] and `vfat_update_dir_metadata`
+[4].
+3. The moved file maintains its timestamps and does not update them.
 
-nanopc-t4-rk3399
-nanopi-m4-2gb-rk3399
-nanopi-m4-rk3399
-nanopi-m4b-rk3399
-nanopi-neo4-rk3399
-nanopi-r4s-rk3399
+EDK II (branch edk2-stable202411) [5] updates the last modification
+and last access times on the parent directories (via
+`FatRemoveDirEnt`/`FatCreateDirEnt` [9] -> `FatStoreDirEnt` [9] ->
+`FatAccessEntry` [9] -> `FatAccessOFile` [8] -- marking the files
+dirty). It updates the last modification and last access times (via
+FatOFileFlush [6] -- called on line 469 in [5]) while preserving the
+creation time on the moved file (via FatCloneDirEnt [7]). The
+implementation of `FatOFileFlush` results in timestamps being updated
+up the file tree to the root as `FatOFileFlush` calls `FatStoreDirEnt`
+marking the subsequent parent directories as dirty.
 
-I only have a R4S to test with, but I did verify that all of those boards
-have the same schematic and pin configuration for the sdmmc slot. Given
-this information do you prefer I keep this change scoped to the R4S for now
-or should I add the defconfig changes for those boards as well?
+Linux appears to not touch the ATTR_ARCH attribute on file moves and
+treats ATTR_ARCH and ATTR_DIR as mutually exclusive [10]. On the other
+hand, EDK II directly sets the archive bit on the file. The flush
+operation [6] will set it on each directory up to the root, from my
+understanding.
 
+Is there a preference on either implementation? Or are there
+constraints in U-Boot that make either of these timestamp and archive
+attribute implementations unsuitable to match?
 
-> + bootph-pre-ram;
+Thanks,
+Gabriel
+
+[1] https://elixir.bootlin.com/linux/v6.12.6/source/fs/fat/namei_vfat.c#L95=
+9-L996
+[2] https://elixir.bootlin.com/linux/v6.12.6/source/fs/fat/namei_vfat.c#L68=
+2
+[3] https://elixir.bootlin.com/linux/v6.12.6/source/fs/fat/dir.c#L1083
+[4] https://elixir.bootlin.com/linux/v6.12.6/source/fs/fat/namei_vfat.c#L92=
+4
+[5] https://github.com/tianocore/edk2/blob/0f3867fa6ef0553e26c42f7d71ff6bdb=
+98429742/FatPkg/EnhancedFatDxe/Info.c#L389-L442
+[6] https://github.com/tianocore/edk2/blob/0f3867fa6ef0553e26c42f7d71ff6bdb=
+98429742/FatPkg/EnhancedFatDxe/Flush.c#L245-L249
+[7] https://github.com/tianocore/edk2/blob/0f3867fa6ef0553e26c42f7d71ff6bdb=
+98429742/FatPkg/EnhancedFatDxe/DirectoryManage.c#L196-L220
+[8] https://github.com/tianocore/edk2/blob/0f3867fa6ef0553e26c42f7d71ff6bdb=
+98429742/FatPkg/EnhancedFatDxe/ReadWrite.c#L507-L510
+[9] https://github.com/tianocore/edk2/blob/0f3867fa6ef0553e26c42f7d71ff6bdb=
+98429742/FatPkg/EnhancedFatDxe/DirectoryManage.c
+[10] https://elixir.bootlin.com/linux/v6.12.6/source/fs/fat/namei_vfat.c#L6=
+43
+
+> Maybe you could describe these design considerations in the commit messag=
+e.
+>
+> Please, document which fields and flags are implicitly set in the functio=
+n description.
+>
+> >+ * Return:    0 for success
+> >+ */
+> >+static int create_link(fat_itr *itr, char *basename, __u32 clust, __u32=
+ size,
+> >+                     __u8 attr)
+> >+{
+> >+      char shortname[SHORT_NAME_SIZE];
+> >+      int ndent;
+> >+      int ret;
+> >+
+> >+      /* Check if long name is needed */
+> >+      ndent =3D set_name(itr, basename, shortname);
+> >+      if (ndent < 0)
+> >+              return ndent;
+> >+      ret =3D fat_find_empty_dentries(itr, ndent);
+> >+      if (ret)
+> >+              return ret;
+> >+      if (ndent > 1) {
+> >+              /* Set long name entries */
+> >+              ret =3D fill_dir_slot(itr, basename, shortname);
+> >+              if (ret)
+> >+                      return ret;
+> >+      }
+> >+
+> >+      /* Add attribute as archive */
+>
+> Could this be changed to
+> "Add archive attribute"?.
+>
+> >+      fill_dentry(itr->fsdata, itr->dent, shortname, clust, size,
+> >+                  attr | ATTR_ARCH);
+> >+
+> >+      return 0;
+> >+}
+> >+
+> > /**
+> >  * find_directory_entry() - find a directory entry by filename
+> >  *
+> >@@ -1420,35 +1458,15 @@ int file_fat_write_at(const char *filename, loff=
+_t pos, void *buffer,
+> >               /* Update change date */
+> >               dentry_set_time(retdent);
+> >       } else {
+> >-              /* Create a new file */
+> >-              char shortname[SHORT_NAME_SIZE];
+> >-              int ndent;
+> >-
+> >               if (pos) {
+> >                       /* No hole allowed */
+>
+> This is another deficiency of our FAT driver worth looking into in future=
+.
+>
+> Best regards
+>
+> Heinrich
+>
+> >                       ret =3D -EINVAL;
+> >                       goto exit;
+> >               }
+> >
+> >-              /* Check if long name is needed */
+> >-              ndent =3D set_name(itr, basename, shortname);
+> >-              if (ndent < 0) {
+> >-                      ret =3D ndent;
+> >-                      goto exit;
+> >-              }
+> >-              ret =3D fat_find_empty_dentries(itr, ndent);
+> >+              ret =3D create_link(itr, basename, 0, size, 0);
+> >               if (ret)
+> >                       goto exit;
+> >-              if (ndent > 1) {
+> >-                      /* Set long name entries */
+> >-                      ret =3D fill_dir_slot(itr, basename, shortname);
+> >-                      if (ret)
+> >-                              goto exit;
+> >-              }
+> >-
+> >-              /* Set short name entry */
+> >-              fill_dentry(itr->fsdata, itr->dent, shortname, 0, size,
+> >-                          ATTR_ARCH);
+> >
+> >               retdent =3D itr->dent;
+> >       }
+> >@@ -1564,6 +1582,31 @@ static int delete_long_name(fat_itr *itr)
+> >       return 0;
+> > }
+> >
+> >+/**
+> >+ * delete_dentry_link() - deletes a directory entry, but not the cluste=
+r chain
+> >+ * it points to
+> >+ *
+> >+ * @itr:      the first directory entry (if a longname) to remove
+> >+ * Return:    0 for success
+> >+ */
+> >+static int delete_dentry_link(fat_itr *itr)
+> >+{
+> >+      itr->dent =3D itr->dent_start;
+> >+      itr->remaining =3D itr->dent_rem;
+> >+      /* Delete long name */
+> >+      if ((itr->dent->attr & ATTR_VFAT) =3D=3D ATTR_VFAT &&
+> >+          (itr->dent->nameext.name[0] & LAST_LONG_ENTRY_MASK)) {
+> >+              int ret;
+> >+
+> >+              ret =3D delete_long_name(itr);
+> >+              if (ret)
+> >+                      return ret;
+> >+      }
+> >+      /* Delete short name */
+> >+      delete_single_dentry(itr);
+> >+      return flush_dir(itr);
+> >+}
+> >+
+> > /**
+> >  * delete_dentry_long() - remove directory entry
+> >  *
+> >@@ -1589,21 +1632,7 @@ static int delete_dentry_long(fat_itr *itr)
+> >               if (ret)
+> >                       return ret;
+> >       }
+> >-      itr->dent =3D itr->dent_start;
+> >-      itr->remaining =3D itr->dent_rem;
+> >-      dent =3D itr->dent_start;
+> >-      /* Delete long name */
+> >-      if ((dent->attr & ATTR_VFAT) =3D=3D ATTR_VFAT &&
+> >-          (dent->nameext.name[0] & LAST_LONG_ENTRY_MASK)) {
+> >-              int ret;
+> >-
+> >-              ret =3D delete_long_name(itr);
+> >-              if (ret)
+> >-                      return ret;
+> >-      }
+> >-      /* Delete short name */
+> >-      delete_single_dentry(itr);
+> >-      return flush_dir(itr);
+> >+      return delete_dentry_link(itr);
+> > }
+> >
+> > int fat_unlink(const char *filename)
+> >@@ -1725,9 +1754,6 @@ int fat_mkdir(const char *dirname)
+> >               ret =3D -EEXIST;
+> >               goto exit;
+> >       } else {
+> >-              char shortname[SHORT_NAME_SIZE];
+> >-              int ndent;
+> >-
+> >               if (itr->is_root) {
+> >                       /* root dir cannot have "." or ".." */
+> >                       if (!strcmp(l_dirname, ".") ||
+> >@@ -1737,25 +1763,9 @@ int fat_mkdir(const char *dirname)
+> >                       }
+> >               }
+> >
+> >-              /* Check if long name is needed */
+> >-              ndent =3D set_name(itr, basename, shortname);
+> >-              if (ndent < 0) {
+> >-                      ret =3D ndent;
+> >-                      goto exit;
+> >-              }
+> >-              ret =3D fat_find_empty_dentries(itr, ndent);
+> >+              ret =3D create_link(itr, basename, 0, 0, ATTR_DIR);
+> >               if (ret)
+> >                       goto exit;
+> >-              if (ndent > 1) {
+> >-                      /* Set long name entries */
+> >-                      ret =3D fill_dir_slot(itr, basename, shortname);
+> >-                      if (ret)
+> >-                              goto exit;
+> >-              }
+> >-
+> >-              /* Set attribute as archive for regular file */
+> >-              fill_dentry(itr->fsdata, itr->dent, shortname, 0, 0,
+> >-                          ATTR_DIR | ATTR_ARCH);
+> >
+> >               retdent =3D itr->dent;
+> >       }
 >
->  };
->
-> diff --git a/configs/nanopi-r4s-rk3399_defconfig
-> b/configs/nanopi-r4s-rk3399_defconfig
->
-> index a6dafe3d9eb..905de05026f 100644
->
-> --- a/configs/nanopi-r4s-rk3399_defconfig
->
-> +++ b/configs/nanopi-r4s-rk3399_defconfig
->
-> @@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=0x3F8000
->
->  CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-nanopi-r4s"
->
->  CONFIG_DM_RESET=y
->
->  CONFIG_ROCKCHIP_RK3399=y
->
-> +CONFIG_SPL_DRIVERS_MISC=y
->
->  CONFIG_TARGET_EVB_RK3399=y
->
->  CONFIG_SYS_LOAD_ADDR=0x800800
->
->  CONFIG_DEBUG_UART_BASE=0xFF1A0000
->
-> @@ -18,6 +19,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
->
->  CONFIG_SPL_MAX_SIZE=0x40000
->
->  CONFIG_SPL_PAD_TO=0x7f8000
->
->  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
->
-> +CONFIG_SPL_I2C=y
->
-> +CONFIG_SPL_POWER=y
->
->  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
->
->  CONFIG_TPL=y
->
->  CONFIG_CMD_BOOTZ=y
->
-> @@ -33,6 +36,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->
->  CONFIG_ROCKCHIP_GPIO=y
->
->  CONFIG_SYS_I2C_ROCKCHIP=y
->
->  CONFIG_ROCKCHIP_IODOMAIN=y
->
-> +CONFIG_SPL_ROCKCHIP_IODOMAIN=y
->
->  CONFIG_MMC_DW=y
->
->  CONFIG_MMC_DW_ROCKCHIP=y
->
->  CONFIG_MMC_SDHCI=y
->
-> @@ -45,8 +49,11 @@ CONFIG_GMAC_ROCKCHIP=y
->
->  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->
->  CONFIG_PHY_ROCKCHIP_TYPEC=y
->
->  CONFIG_PMIC_RK8XX=y
->
-> +CONFIG_SPL_PMIC_RK8XX=y
->
-> +CONFIG_SPL_DM_REGULATOR=y
->
->  CONFIG_SPL_DM_REGULATOR_FIXED=y
->
->  CONFIG_REGULATOR_RK8XX=y
->
-> +CONFIG_SPL_REGULATOR_RK8XX=y
->
->  CONFIG_PWM_ROCKCHIP=y
->
->  CONFIG_RAM_ROCKCHIP_LPDDR4=y
->
->  CONFIG_BAUDRATE=1500000
->
-> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
->
-> index da84b35e804..ad935b81ae1 100644
->
-> --- a/drivers/misc/Kconfig
->
-> +++ b/drivers/misc/Kconfig
->
-> @@ -110,6 +110,14 @@ config ROCKCHIP_IODOMAIN
->
->    for the IO-domain setting of the SoC to match the voltage supplied
->
->    by the regulators.
->
->
->
-> +config SPL_ROCKCHIP_IODOMAIN
->
-> + bool "Rockchip IO-domain driver support in SPL"
->
-> + depends on SPL_MISC && ARCH_ROCKCHIP
->
-> + help
->
-> +  Enable support for IO-domains in Rockchip SoCs in SPL. It is necessary
->
-> +  for the IO-domain setting of the SoC to match the voltage supplied
->
-> +  by the regulators.
->
-> +
->
->  config SIFIVE_OTP
->
->   bool "SiFive eMemory OTP driver"
->
->   depends on MISC
->
-> diff --git a/drivers/misc/rockchip-io-domain.c
-> b/drivers/misc/rockchip-io-domain.c
->
-> index 025b6049a9f..d24d0781b08 100644
->
-> --- a/drivers/misc/rockchip-io-domain.c
->
-> +++ b/drivers/misc/rockchip-io-domain.c
->
-> @@ -5,6 +5,8 @@
->
->   * Ported from linux drivers/soc/rockchip/io-domain.c
->
->   */
->
->
->
-> +#define LOG_CATEGORY UCLASS_NOP
->
-> +
->
->  #include <dm.h>
->
->  #include <dm/device_compat.h>
->
->  #include <regmap.h>
->
-> @@ -344,8 +346,10 @@ static int rockchip_iodomain_probe(struct udevice
-> *dev)
->
->   continue;
->
->
->
->   ret = device_get_supply_regulator(dev, supply_name, &reg);
->
-> - if (ret)
->
-> + if (ret) {
->
-> + log_debug("%s: Missing regulator for %s\n", __func__, supply_name);
->
->
-> log_debug() is already able to log function name with LOG=y and
-> LOGF_FUNC=y, please drop __func__.
->
->   continue;
->
-> + }
->
->
->
->   ret = regulator_autoset(reg);
->
->   if (ret && ret != -EALREADY && ret != -EMEDIUMTYPE &&
->
-> @@ -353,6 +357,7 @@ static int rockchip_iodomain_probe(struct udevice *dev)
->
->   continue;
->
->
->
->   uV = regulator_get_value(reg);
->
-> + log_debug("%s: %s = %dV\n", __func__, supply_name, uV);
->
->
-> Same here.
->
-> Also for consistency please use a verbose or minimalist log message,
-> do not mix. This has a verbose 'Missing regulator' above and minimalist
-> message here.
->
->   if (uV <= 0)
->
->   continue;
->
->
->
-> diff --git a/drivers/power/regulator/Kconfig
-> b/drivers/power/regulator/Kconfig
->
-> index 958f337c7e7..d873ca06a47 100644
->
-> --- a/drivers/power/regulator/Kconfig
->
-> +++ b/drivers/power/regulator/Kconfig
->
-> @@ -241,6 +241,15 @@ config REGULATOR_RK8XX
->
->   by the PMIC device. This driver is controlled by a device tree node
->
->   which includes voltage limits.
->
->
->
-> +config SPL_REGULATOR_RK8XX
->
-> + bool "Enable driver for RK8XX regulators in SPL"
->
-> + depends on SPL_DM_REGULATOR && SPL_PMIC_RK8XX
->
-> + ---help---
->
->
-> Use help keyword without '---' and indent the help text.
->
-> + Enable support for the regulator functions of the RK8XX PMIC in SPL. The
->
-> + driver implements get/set api for the various BUCKS and LDOs supported
->
-> + by the PMIC device. This driver is controlled by a device tree node
->
-> + which includes voltage limits.
->
-> +
->
->  config DM_REGULATOR_S2MPS11
->
->   bool "Enable driver for S2MPS11 regulator"
->
->   depends on DM_REGULATOR && PMIC_S2MPS11
->
-> diff --git a/drivers/power/regulator/rk8xx.c
-> b/drivers/power/regulator/rk8xx.c
->
-> index 368675ebb9f..35615e96b1c 100644
->
-> --- a/drivers/power/regulator/rk8xx.c
->
-> +++ b/drivers/power/regulator/rk8xx.c
->
-> @@ -16,7 +16,7 @@
->
->  #include <power/pmic.h>
->
->  #include <power/regulator.h>
->
->
->
-> -#ifndef CONFIG_XPL_BUILD
->
-> +#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
->
->
-> Please drop the whole ENABLE_DRIVER instead and use
-> CONFIG_IS_ENABLED in its place.
->
->  #define ENABLE_DRIVER
->
->  #endif
->
->
->
->
-> This should also be split up into multiple patches, possible:
-> - io-domain debug logging
-> - io-domain SPL Kconfig symbol
-> - rk8xx.c + related Kconfig can possible go together
-> - nanopi-r4s-u-boot.dtsi + defconfig can possible go together
->
-> Regards,
-> Jonas
->
->
-Best,
-Justin
