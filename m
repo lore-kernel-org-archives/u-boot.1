@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1A75C0218D
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:44:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9475C0218D
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:44:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1E6F80FB8;
-	Sun, 26 Jan 2025 19:44:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3039F80FBC;
+	Sun, 26 Jan 2025 19:44:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q6wqhNBj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X9u3F/vJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40BCF80F85; Sun, 26 Jan 2025 19:44:03 +0100 (CET)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id A891080FD6; Sun, 26 Jan 2025 19:44:05 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0181F80F53
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:43:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 630AB80F53
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-844e161a957so285847739f.0
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:43:54 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-844e1eb50e2so100423139f.0
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737917033; x=1738521833; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737917041; x=1738521841; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9PBh9z3vqQyp8S1MCDdRmO732NxGlfXEYkHXww3ypbU=;
- b=Q6wqhNBjIv3wxZYWM1+dlkru2Wlh4cnrokuYrvYY6+1vNeTdwlqXC+dlSyhcPsFaGu
- wHR0B6Z6Cmxo6gJsFMeNZZsnNTGSL4lCMA589HxI80y3IGnQg7dlyNXG4OiRUtulgBnG
- 0wOgZY1p3a6u0KXzD2N8Y+TMZ193DXe8K4+m0=
+ bh=fMOccdZCng0WR6b3bkxqOmM7WDva3c8AE3gzHhrLIAk=;
+ b=X9u3F/vJwZR7YvZduL6cKWLmb1TpwbKDqRawifuT0/OBAaTUuddkgl9ThutqkbEh7j
+ nqO4hASI068angW0YpTiptZuTrShf/8S/B19jnYhs5NMO6914Aa02fpNUOmVd3ggbVsX
+ OvA0jBwxiVdNAXAT9yBtIs1giRTiXBPf0nwc4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737917033; x=1738521833;
+ d=1e100.net; s=20230601; t=1737917041; x=1738521841;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9PBh9z3vqQyp8S1MCDdRmO732NxGlfXEYkHXww3ypbU=;
- b=Zfv1Ng5S0Y1J6dg646ZlUsxd3ZfbTpe9RdoXy8UizIUVqTEBO8laLukZReKirDkmcd
- WZfBGxHZuoHMblMwnHNhim3RBL6mCZku7IsTKlA69or4yJ50D04/Cl5sqTlZvGEYD358
- +SPGwGhMp4Dyo9alsdfskkGeY0yjWq6omLpVVYk60uKjwawMnk9xvEveS17VKaxvxqJY
- jiMAPonzgV9mE281OjwnWhih1GLuLLPLI8uvVS3P/+rjGarHMHZui85wNyhdl1qxxqmC
- YMCmYGu3vAlc0lDBBRaUV1itfZ2RTxYNDmEkei7bvCirpC+DoJJ18iOQ6ZpXDBAe8The
- 7jlw==
-X-Gm-Message-State: AOJu0Yw1DENGB8sTsfRN5tWnDRNdy3+p/TNyilM1YUNakpdgD4/OK5nG
- t+Q2JpEpmuoSBhdqdYc1ID396RQCn1SVcjCeARkjL3Hat/7I2lHGQ3Ds4NOZB7k8cPMF1d5xrXM
+ bh=fMOccdZCng0WR6b3bkxqOmM7WDva3c8AE3gzHhrLIAk=;
+ b=p2FQMIQbAB9OwJs384rtFFkoZOrCBdpfe7NvZYpKVvqJhz59yNuLsHHn7CJBmtc4hB
+ 5W+VQsf5m1nj6Ko5k29L6GP4oHRBIFlzcou1avZgRLAZjebn9rR5oOveid8StCCXyBiE
+ gxc+PKnGPXrpklI5FcczOXCpOA1Hh5o2v0OfTWR/f2Kmp5PUL65Eyuoa2ppAf8zZc2MB
+ xgSmO6KIMgJm9K32juy4TeX9PJNvSz+P1Np1O97VD7u9yap+mnbMmngF+4HpaMPMFaqi
+ QGgU0O4h0RqbDmXANVqbneBMz+a787DE3Wi3ISPdOfJ8PWHRKCCyriCi42PrQi9MnRBi
+ QVjQ==
+X-Gm-Message-State: AOJu0YyE9/5Kr9+oQ5F3qMnwQ8a52J6xlEOWG/Ld9W/KpWhWlMPlPhp2
+ 0d2tsNj0/EJXzxrJ5fvQ5CI/qVhp1/SzcRswpwtZLgvatlK+uQikvcjneAIgJxhcpzI6zcCX80I
  =
-X-Gm-Gg: ASbGncs0IFmuuYP+FhjIWsfTuyIfHejgm/Zf7epAb4ck2B9i/FLF/bCtspcyha83c9Q
- 29oBQbDQG6n/LsZyuBMeKo56D7QpBO9uTD9FBxYe7C953ejVkxcZc7gvYU9+zK9T6P6QnKfWFge
- 6OjP4IWkGdisFeuutzaQpwGdoirP9KwLBySoMqTg5MW03NkgRliO8SYQ/MdT3UWa4ujyRKfibGv
- ePqSCROqXS1UWTVnaRS2jJklkdoj0+RFhEZAfxm14GrefY081KYboVdznoX42jEhVf2GHt3fg6n
- EC1fmAysXUM5NOkU22aq2EkoBSMRyl+olBukmQe4dQ==
-X-Google-Smtp-Source: AGHT+IFnMsbVLwr8ztPsnFGyghtDfL9PKVDPjOXsb5WvDktGf4vQNzz7SBDjgt466FNmlmCJ43QOxw==
-X-Received: by 2002:a05:6602:1682:b0:84a:810c:cf43 with SMTP id
- ca18e2360f4ac-851b6515dd3mr3667687139f.9.1737917033178; 
- Sun, 26 Jan 2025 10:43:53 -0800 (PST)
+X-Gm-Gg: ASbGncsdOaHBbBeEu7/DGnQLlLKWuF+dLNG/ukMTfxN0vfuGYAfhs8Bo127RN39uk80
+ HARQfhdquszVUeClIpEHrUiqRzZ33t7CKr0CsIVkty9z8t7Y4p60joVOip5+4YG8Y0LRhsZhgP8
+ STmq0pYBlTmaDrDYzRFoIRX6MjA5LYzCc+hE80g0LSErx4ic8P/Wlz7M/CH+/2ZwkV8CKKfl6jS
+ YreGUMDbcYQH9k6Mb0LT2bJo/KzBsHUA40I59wM2oE1Ar6owg8LfAUK5dtKvuQrJcNNxj4O0kEj
+ V897G/q4hftGddVHOYz/OR6J9qe3IK4fO+A1HS8YYciZTZqeWpEa
+X-Google-Smtp-Source: AGHT+IFy79l5EQcjdrr5LLLHQKRGBkZV2dXZHrGM4O4F/T+NWUZ96P7do4DILE+ewHql3tHim5GK3w==
+X-Received: by 2002:a05:6602:4186:b0:807:f0fb:1192 with SMTP id
+ ca18e2360f4ac-851b6169a31mr3155724339f.1.1737917041424; 
+ Sun, 26 Jan 2025 10:44:01 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.43.50
+ 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.43.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jan 2025 10:43:51 -0800 (PST)
+ Sun, 26 Jan 2025 10:44:00 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jesse Taube <mr.bossman075@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH 04/19] lib: Allow crc16 code to be dropped
-Date: Sun, 26 Jan 2025 11:43:14 -0700
-Message-ID: <20250126184333.4058848-5-sjg@chromium.org>
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 07/19] spl: Support selecting images based on phase in simple
+ FIT
+Date: Sun, 26 Jan 2025 11:43:17 -0700
+Message-ID: <20250126184333.4058848-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250126184333.4058848-1-sjg@chromium.org>
 References: <20250126184333.4058848-1-sjg@chromium.org>
@@ -103,132 +95,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This code is not necessarily needed in VPL, even if SPL uses it, so
-adjust the rules to allow it to be dropped.
+At present the simple FIT-loader always loads images, ignoring whether
+they are intended for the next phase or not.
 
-Do the same for the hash API.
+VBE packages up several images in the same FIT, some destined for VPL
+and some for SPL. Add logic to check the phase before loading the
+image. Return -EPERM in that case and handle it gracefully.
+
+Fix a unnecessary re-computation of read_offset while here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/hash.c | 17 +++++++++++------
- lib/Kconfig   | 10 ++++++++++
- lib/Makefile  |  3 +--
- tools/Kconfig |  5 +++++
- 4 files changed, 27 insertions(+), 8 deletions(-)
+ common/spl/spl_fit.c | 34 +++++++++++++++++++++++++++-------
+ 1 file changed, 27 insertions(+), 7 deletions(-)
 
-diff --git a/common/hash.c b/common/hash.c
-index 8dd9da85768..0c45992d5c7 100644
---- a/common/hash.c
-+++ b/common/hash.c
-@@ -143,7 +143,8 @@ static int __maybe_unused hash_finish_sha512(struct hash_algo *algo, void *ctx,
- 	return 0;
- }
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index ac8462577ff..6c068a842d9 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -199,7 +199,9 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
+  *		the image gets loaded to the address pointed to by the
+  *		load_addr member in this struct, if load_addr is not 0
+  *
+- * Return:	0 on success or a negative error number.
++ * Return:	0 on success, -EPERM if this image is not the correct phase
++ * (for CONFIG_BOOTMETH_VBE_SIMPLE_FW), or another negative error number on
++ * other error.
+  */
+ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 			   const struct spl_fit_info *ctx, int node,
+@@ -218,6 +220,25 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 	const void *fit = ctx->fit;
+ 	bool external_data = false;
  
--static int hash_init_crc16_ccitt(struct hash_algo *algo, void **ctxp)
-+static int __maybe_unused hash_init_crc16_ccitt(struct hash_algo *algo,
-+						void **ctxp)
- {
- 	uint16_t *ctx = malloc(sizeof(uint16_t));
- 	*ctx = 0;
-@@ -151,16 +152,18 @@ static int hash_init_crc16_ccitt(struct hash_algo *algo, void **ctxp)
- 	return 0;
- }
- 
--static int hash_update_crc16_ccitt(struct hash_algo *algo, void *ctx,
--				   const void *buf, unsigned int size,
--				   int is_last)
-+static int __maybe_unused hash_update_crc16_ccitt(struct hash_algo *algo,
-+						  void *ctx, const void *buf,
-+						  unsigned int size,
-+						  int is_last)
- {
- 	*((uint16_t *)ctx) = crc16_ccitt(*((uint16_t *)ctx), buf, size);
- 	return 0;
- }
- 
--static int hash_finish_crc16_ccitt(struct hash_algo *algo, void *ctx,
--				   void *dest_buf, int size)
-+static int __maybe_unused hash_finish_crc16_ccitt(struct hash_algo *algo,
-+						  void *ctx, void *dest_buf,
-+						  int size)
- {
- 	if (size < algo->digest_size)
- 		return -1;
-@@ -295,6 +298,7 @@ static struct hash_algo hash_algo[] = {
- #endif
- 	},
- #endif
-+#if CONFIG_IS_ENABLED(CRC16)
- 	{
- 		.name		= "crc16-ccitt",
- 		.digest_size	= 2,
-@@ -304,6 +308,7 @@ static struct hash_algo hash_algo[] = {
- 		.hash_update	= hash_update_crc16_ccitt,
- 		.hash_finish	= hash_finish_crc16_ccitt,
- 	},
-+#endif
- #if CONFIG_IS_ENABLED(CRC8) && IS_ENABLED(CONFIG_HASH_CRC8)
- 	{
- 		.name		= "crc8",
-diff --git a/lib/Kconfig b/lib/Kconfig
-index c8ac99df78e..c228e4ca661 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -737,6 +737,16 @@ config VPL_CRC8
- 	  checksum with feedback to produce an 8-bit result. The code is small
- 	  and it does not require a lookup table (unlike CRC32).
- 
-+config CRC16
-+	bool "Support CRC16"
-+	default y
-+	help
-+	  Enables CRC16 support. This is normally required. Two algorithms are
-+	  provided:
++	log_debug("starting\n");
++	if (CONFIG_IS_ENABLED(BOOTMETH_VBE) &&
++	    xpl_get_phase(info) != IH_PHASE_NONE) {
++		enum image_phase_t phase;
++		int ret;
 +
-+	    - CCITT, with a polynomical x^16 + x^12 + x^5 + 1
-+	    - standard, with polynomial x^16 + x^15 + x^2 + 1 (0x8005)
++		ret = fit_image_get_phase(fit, node, &phase);
++		/* if the image is for any phase, let's use it */
++		if (ret == -ENOENT || phase == xpl_get_phase(info)) {
++			log_debug("found\n");
++		} else if (ret < 0) {
++			log_debug("err=%d\n", ret);
++			return ret;
++		} else {
++			log_debug("- phase mismatch, skipping this image\n");
++			return -EPERM;
++		}
++	}
 +
- config SPL_CRC16
- 	bool "Support CRC16 in SPL"
- 	depends on SPL
-diff --git a/lib/Makefile b/lib/Makefile
-index 31cfbb67aa0..3f0936b0a27 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -35,8 +35,6 @@ obj-$(CONFIG_CIRCBUF) += circbuf.o
- endif
+ 	if (IS_ENABLED(CONFIG_SPL_FPGA) ||
+ 	    (IS_ENABLED(CONFIG_SPL_OS_BOOT) && spl_decompression_enabled())) {
+ 		if (fit_image_get_type(fit, node, &type))
+@@ -278,10 +299,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 		log_debug("reading from offset %x / %lx size %lx to %p: ",
+ 			  offset, read_offset, size, src_ptr);
  
- obj-y += crc8.o
--obj-y += crc16.o
--obj-y += crc16-ccitt.o
- obj-$(CONFIG_ERRNO_STR) += errno_str.o
- obj-$(CONFIG_FIT) += fdtdec_common.o
- obj-$(CONFIG_TEST_FDTDEC) += fdtdec_test.o
-@@ -66,6 +64,7 @@ endif
+-		if (info->read(info,
+-			       fit_offset +
+-			       get_aligned_image_offset(info, offset), size,
+-			       src_ptr) < length)
++		if (info->read(info, read_offset, size, src_ptr) < length)
+ 			return -EIO;
  
- obj-$(CONFIG_$(PHASE_)CRC8) += crc8.o
- obj-$(CONFIG_$(PHASE_)CRC16) += crc16.o
-+obj-$(CONFIG_$(PHASE_)CRC16) += crc16-ccitt.o
+ 		debug("External data: dst=%p, offset=%x, size=%lx\n",
+@@ -456,7 +474,9 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ 			image_info.load_addr = (ulong)tmpbuffer;
+ 			ret = load_simple_fit(info, offset, ctx, node,
+ 					      &image_info);
+-			if (ret < 0)
++			if (ret == -EPERM)
++				continue;
++			else if (ret < 0)
+ 				break;
  
- obj-y += crypto/
+ 			/* Make room in FDT for changes from the overlay */
+@@ -817,7 +837,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
  
-diff --git a/tools/Kconfig b/tools/Kconfig
-index 5c75af48fe3..01ff0fcf748 100644
---- a/tools/Kconfig
-+++ b/tools/Kconfig
-@@ -9,6 +9,11 @@ config MKIMAGE_DTC_PATH
- 	  some cases the system dtc may not support all required features
- 	  and the path to a different version should be given here.
- 
-+config TOOLS_CRC16
-+	def_bool y
-+	help
-+	  Enable CRC32 support in the tools builds
-+
- config TOOLS_CRC32
- 	def_bool y
- 	help
+ 		image_info.load_addr = 0;
+ 		ret = load_simple_fit(info, offset, &ctx, node, &image_info);
+-		if (ret < 0) {
++		if (ret < 0 && ret != -EPERM) {
+ 			printf("%s: can't load image loadables index %d (ret = %d)\n",
+ 			       __func__, index, ret);
+ 			return ret;
 -- 
 2.43.0
 
