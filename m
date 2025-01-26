@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFA5C02181
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 05:15:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C58C02181
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 11:12:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F295B80F85;
-	Sun, 26 Jan 2025 06:15:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E01680EF4;
+	Sun, 26 Jan 2025 12:12:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y4+3pufh";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Jfc9q7jp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F5DA807E4; Sun, 26 Jan 2025 05:40:10 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DC21C80F10; Sun, 26 Jan 2025 12:12:18 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBA71807E4
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 05:40:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80CCF80275
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 12:12:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gabriel.dalimonte@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aa68b513abcso706812166b.0
- for <u-boot@lists.denx.de>; Sat, 25 Jan 2025 20:40:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737866407; x=1738471207; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8Bdx/SrLQ4FTD9e5tqo1MSb/bfWikMgnd0DEAAgVCKo=;
- b=Y4+3pufhpFFiF8NTL1lPqHfL5Lljs91qiS3OdsqowqU7ztRLGPiVv05DQ3LRnr4ABc
- mBhWr6IMtPraobdrwhXZ/67gEHcNQMjgOkF/Ug7KitePD/L66Zy/4FEPOFxdb9Subqcr
- KL63a7jF484MN4orsDLQWdRWUcR+YF17lI8JI2mhB9DRN4qPuhpo3rGmtzl/nTQX67ku
- ak4mJkK7vnUYz06g3F1F1kd9n1ddJq4gYOb4JTnEfOtzf7XEzTSzAsAThv5WaR501Pv6
- NvHkrtyimvi30ar55oa+ihw3FhrTlAlwOyAazU5Y5LnxC9F5qNDvthR79ToWWUm35gIk
- +5NQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737866407; x=1738471207;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8Bdx/SrLQ4FTD9e5tqo1MSb/bfWikMgnd0DEAAgVCKo=;
- b=A8JO3lkcKNcKnUi9Ms7pG3+dxRIHJCLYGW6X2EmiUJdcsxr1naamT37p4JkyiRNt/c
- JpmgK8cV1onJf+C1mRQ1R3yPmWsWMUUDAzf/NDOlufDe6Up/5ie0MEdCQJ6yqqhm/1Tn
- NnsSdwLKyKXaGai97fwkajWTUj800gDOXDnzUotCr5x+SFT+NFtEYj+wmS1w9qZ2XzSf
- lVN8KxMV/HxwHdbEzsgF2Ij3VZAn6/BdpX8i9nchpCka7p5qjQqugkzZlxXs7RpCOetg
- 3VJ+PGuDO5XNOOjIUD5F/izoNJOtGiIxFr64kOSwBO0ZOVygK8CQWPPLw5gTA3EdTcNf
- HcPg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVOU8feciWdWiaP5q1+igLbdmnB7nmy6fAAaMLQ6RTkhqxhOPRSHc/xy0S4jjmUqvlz2u8YdI4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyEM0hzDN44pXowpBg1gxanIZ+8zr+DpY9Ja4gtAR2/jSu2Chij
- 6PLHVADYuE2Y5KgiyZHGrBQqNIF/08IC3DAreacNrx+34Tjltv+rftktSUgnFKD0haWX6TUcpWq
- tD+6zRYGSRwSeHgoROi2yq2g4EHk=
-X-Gm-Gg: ASbGncus5FXFoUD9rsg0ZFSdUZHpNtGNKX56bfoHqTTyYoBT4kopt/s/B9nrh30hk3C
- 5CHlabHU9iLYK73TOdud6/SCAFbyb9dfRWdFFJOdNcECcAsgZ7UnxYo2d8oSbPw==
-X-Google-Smtp-Source: AGHT+IH1omdJn1C3fjTUt2qTSo+nfcoftxkZ1eqv54v8yLyBfntKfh5fezLhjVeiFi7Hc7NML34M1keO6wu3IIKnx9U=
-X-Received: by 2002:a17:907:706:b0:ab3:2b9a:4a5a with SMTP id
- a640c23a62f3a-ab38b3c6a1emr3875243766b.51.1737866406610; Sat, 25 Jan 2025
- 20:40:06 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1737889935; x=1738494735; i=xypron.glpk@gmx.de;
+ bh=v90KUR7mhw3c9nvMiUTCnFOc0dKoFbKJSKbtNCbXX+w=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=Jfc9q7jpPBQhisSm9Aelw9np0u3mAA9FOiWRhqJ/rF9NocPYp3+6iNKrr8QIhOhC
+ ZjZ70TAVXm0B+8VeVnXuEoN4vQcRyM1JSNh6cVdf3fOqlEw2kuRWdGURp4j8GFycX
+ oPBBq8BcsK9yAyZ9MDEblEE1TEH5YTwSsx6DRortJJs6Six2rO0vuiio4qyFfRzmk
+ ScCbPyMduN+CxBK3Lt3ly+TjihDvJJC9AfTDR48NIahRRmeOw69l0T2OZT+gd1Qy+
+ n4fnKspHlfG1dLWkQqhybk9273b7ZHS1+Bo9/Je8utZi4yZvxrel+bF4oKlenlWYI
+ E+VQcXr/XKFTS1gfHw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Ma20k-1twztr1tyO-00OCAM; Sun, 26
+ Jan 2025 12:12:15 +0100
+Message-ID: <45b8506e-d2be-4a7d-9e59-056933b62755@gmx.de>
+Date: Sun, 26 Jan 2025 12:12:11 +0100
 MIME-Version: 1.0
-References: <20250122053232.17365-1-gabriel.dalimonte@gmail.com>
- <20250122053232.17365-5-gabriel.dalimonte@gmail.com>
- <14244381-2773-4265-82db-972f6ca684b8@gmx.de>
-In-Reply-To: <14244381-2773-4265-82db-972f6ca684b8@gmx.de>
-From: "Gabriel D'Alimonte" <gabriel.dalimonte@gmail.com>
-Date: Sat, 25 Jan 2025 23:39:56 -0500
-X-Gm-Features: AWEUYZk5j_wdGMFebvxdG5xmFVdXEJ0FR-Wa6rIRPXnFTfiybWSLTFY6ufeM5D4
-Message-ID: <CAHc-7YusdbQj5YV1qPObAG7tZk3TNvttYfD8Xy2UafuZ5PLzsQ@mail.gmail.com>
-Subject: Re: [PATCH 4/6] fs: fat: update parent dirs metadata on rename
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-2025-04-rc1-2
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sun, 26 Jan 2025 06:15:16 +0100
+X-Provags-ID: V03:K1:SmxVAL7YLecPv31qFjvQQtB2/sQoNjTRDXL5p13pYCSlGJ7I0Q2
+ 8dd0Y8d3HKMH7y9qt+2iMGhvrRovoGCKS3K8wpRLpVynMOuKVLty3eATY5zNQRq7io3ohpB
+ XIo7weYhFt6eY3a9K5nBuu5pUhPq0TkG89WJVBs5hABcT0OOnRp2YY0hQaPB8JH1tZWQRS7
+ YrpuDbT1oT0FGzwJE8UOw==
+UI-OutboundReport: notjunk:1;M01:P0:Qs4kVgzxsRQ=;giQfRgtNgtysHNaQrX9r60qdKEB
+ v93403K7CkSt8gJbi2WNDrLbI5Ua4ImlVLZl2PZlq5HF6R/ZI76QjPvydVQZaXpI/12eH2nh0
+ 4GD6u+3/l7Bmh7NfZ6SKST3aK/Cm/8ZG3laENcrycw9Hx3DGpGPwpm+zUgkTS70/Da+JVHNOY
+ MkXP6mquqH7zxsQ3ko5amZiuIW4wJur2pxaQIydlaHduOIt+8upoHQAbXQ5T432AT2d4phOiB
+ mJ2x9TMx19WGKKVCbcu6HrDkyymTdRXI/vQ7KR+NSaiKVDxa0UclsnrFxLw+RUmzNe2OnfsW/
+ ic53LSw/qJDTqz55hfWiDWSTfNFX60hA1Hr/TWIzeBAFVlF2tIF+bX+MAz7XyPA7sh12VO1Tb
+ OtmE9WK1FRDKU+6ynBnNyDMsRpWYee5eiL7C71wrTKhp8f9SWtariICJCq7sQ2n9zklt2PX1p
+ 41jfTgJ19W+mPQRe2e0WjtXfIma4fmgpEOBmTpmUMTsizHQbfDysE4Wz7RYx5EXQnl7vqj3fM
+ lqRog7ZBjmw++9KeqsKqm0ESRoPAhibSOaCkt7oGKYMdmLkAegjQaLjaE/HPWD0vg14H1h8d5
+ 6TomX0asG2Ub0pis5ZEGzbT7ytMbQcY5Yd5F7rp7Fa/NDPi5sJGYBtv+LezV9wdwecbnpIeeL
+ j3vlcsuzy/X89sc+T7TXHo6ZEk3aH7rLC6lLXeAymlT25PkiItNM/7yBjmKFrHqHnTl744atg
+ rcYpqbeqTrYsvZ9CpI0D69wpiK6IfgkSQZKMYzwvSgdxM+S0EY/XmU23ynWztG/VfG04Kw6qR
+ VAkPFQp/JiVRe5rUTfd6cMETLEqWEgiT6qEpYFQo7nZnTCT3/HnlVpM4wp/PDcbJKXQqFS1Dk
+ GJWBC4rrF87taKQXD7hk9HJEXcpJj69gxhU+O8neB/ug8o2amPLmE/ptVreqrY4W0tG9XMsVx
+ l6bqMZpdvgC+D92wpzqyZTyrhddozP7wZ2khmS76tZLIXmWDBbYNcqxeAJkaRP5zSk6EgU0ns
+ KJdV9DZc4Zuae8+AkYNpCkOiMCLfQ6Armji9MdVs5dpzHKFfMeNzDmNibm4cRTTYUOWpwPCZ5
+ EMYdQFBtZXiI0kcK9je5w30Bnvjj/oRst8BNkgM3SNUgTN6Dae3ZLlCWushINJJe2FAYQnWDT
+ frEN2htYoSMRfkPkpa4JqfZnoi349oXqdYTL/U93lPg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,139 +93,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 22, 2025 at 4:00=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gm=
-x.de> wrote:
->
-> On 22.01.25 06:32, Gabriel Dalimonte wrote:
-> > None of the existing fat code appears to update parent dir properties
-> > however, the POSIX specification for rename() mentions that the
-> > last modified timestamp should be updated. In addition, I believe
-> > the ATTR_ARCH attribute should also be reset on the parent directories
-> > as the content of those directories has changed.
->
-> Could you, please, provide a link to the referenced specification.
->
-> E.g. https://pubs.opengroup.org/onlinepubs/9799919799/functions/rename.ht=
-ml
->
-> Here I find:
-> "Upon successful completion, rename() shall mark for update the last
-> data modification and last file status change timestamps of the parent
-> directory of each file."
+Dear Tom,
 
-That was the line I was referring to in the message. My apologies for
-not including a direct link in the commit message.
+The following changes since commit 292278d6828e6c8c6ae11bc8658586d1acc411d=
+4:
 
->
-> Does this mean that if we move a directory we would have to update the
-> fields of all moved non-empty sub-directories?
+   Merge patch series "gitlab: Fixes to get StarFive VisionFive2 into
+the sjg lab" (2025-01-25 16:28:27 -0600)
 
-I interpreted that to mean only the immediate parent directories of
-`old_path` and `new_path` are to be updated. With the rationale for
-updating the timestamp and archive attribute on the moved file coming
-from the application usage section stating:
-"Some implementations mark for update the last file status change
-timestamp of renamed files and some do not."
+are available in the Git repository at:
 
->
-> On many boards we don't have a real time clock. Should we skip updating
-> if we have no RTC?
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2025-04-rc1-2
 
-That is a good question. I think skipping timestamp updates in the
-absence of an RTC makes sense rather than having a timestamp jump
-backwards by (likely) several years.
+for you to fetch changes up to 21de624eb89c647a21b06a5b0f5b186838be1d17:
 
-Thanks,
+   bootmeth_efi: Support PXE booting (2025-01-26 11:06:57 +0100)
 
-Gabriel
+=2D---------------------------------------------------------------
+Pull request efi-2025-04-rc1-2
 
->
-> If we want to update parent directories, we should do this for file
-> creation, too. The update function could be called in the function where
-> we create directory entries.
->
-> Best regards
->
-> Heinrich
->
-> >
-> > Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
-> > ---
-> >
-> >   fs/fat/fat_write.c | 42 ++++++++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 42 insertions(+)
-> >
-> > diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-> > index f9f7051e30..2559e38d5b 100644
-> > --- a/fs/fat/fat_write.c
-> > +++ b/fs/fat/fat_write.c
-> > @@ -1912,6 +1912,42 @@ exit:
-> >       return ret;
-> >   }
-> >
-> > +/**
-> > + * update_parent_dir_props - updates the modified time and resets the =
-archive
-> > + * attribute for the parent directory
-> > + *
-> > + * @itr:     iterator positioned anywhere in a directory whose parent =
-should be
-> > + *   updated
-> > + * @Return:  0 for success
-> > + */
-> > +static int update_parent_dir_props(fat_itr *itr)
-> > +{
-> > +     int ret =3D 0;
-> > +     __u32 target_clust =3D itr->start_clust;
-> > +     /* For START macro */
-> > +     fsdata *mydata =3D itr->fsdata;
-> > +
-> > +     if (!itr->is_root) {
-> > +             ret =3D fat_itr_parent(itr);
-> > +             if (ret)
-> > +                     return ret;
-> > +
-> > +             while (fat_itr_next(itr)) {
-> > +                     if (START(itr->dent) =3D=3D target_clust)
-> > +                             goto update;
-> > +             }
-> > +
-> > +             /* dent not found */
-> > +             return -EIO;
-> > +update:
-> > +             dentry_set_time(itr->dent);
-> > +             itr->dent->attr |=3D ATTR_ARCH;
-> > +             ret =3D flush_dir(itr);
-> > +     }
-> > +
-> > +     return ret;
-> > +}
-> > +
-> >   /**
-> >    * fat_rename - rename/move a file or directory
-> >    *
-> > @@ -2086,7 +2122,12 @@ int fat_rename(const char *old_path, const char =
-*new_path)
-> >               ret =3D flush_dir(new_itr);
-> >               if (ret)
-> >                       goto exit;
-> > +             /* restore directory location to update parent props belo=
-w */
-> > +             fat_itr_child(new_itr, new_itr);
-> >       }
-> > +     ret =3D update_parent_dir_props(new_itr);
-> > +     if (ret)
-> > +             goto exit;
-> >
-> >       /* refresh old in case write happened to the same block. */
-> >       ret =3D fat_move_to_cluster(old_itr, old_itr->dent_clust);
-> > @@ -2097,6 +2138,7 @@ int fat_rename(const char *old_path, const char *=
-new_path)
-> >       if (ret)
-> >               goto exit;
-> >
-> > +     ret =3D update_parent_dir_props(old_itr);
-> >   exit:
-> >       free(new_datablock.fatbuf);
-> >       free(old_datablock.fatbuf);
->
+Documentation:
+
+* describe creating a pflash file for qemu-system-riscv64
+
+UEFI:
+
+* correct logging StartImage()
+* use LOGC_EFI consistently
+* reduce UEFI size if HAS_BOARD_SIZE_LIMIT=3Dy
+* Update efi_run_image() to accept image and device path
+* Add a version of efi_binary_run() with more parameters
+* Move the fallback code from efi_run_image()
+* Pass in the required parameters from EFI bootmeth
+* bootmeth_efi: Support PXE booting
+
+Other:
+
+* Enable log filtering by function name
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (7):
+       efi_loader: correct logging StartImage()
+       log: make log_has_file() static
+       log: enable filtering on functions
+       test/log: test function filters
+       efi_loader: use LOGC_EFI consistently
+       efi_loader: reduce UEFI size if HAS_BOARD_SIZE_LIMIT=3Dy
+       doc: describe creating a pflash file for qemu-system-riscv64
+
+Simon Glass (5):
+       efi_loader: Update efi_run_image() to accept image and device path
+       efi_loader: Add a version of efi_binary_run() with more parameters
+       efi_loader: Move the fallback code from efi_run_image()
+       efi_loader: Pass in the required parameters from EFI bootmeth
+       bootmeth_efi: Support PXE booting
+
+  boot/bootmeth_efi.c                        |  64 +---------
+  cmd/log.c                                  |  42 ++++---
+  common/log.c                               |  33 +++--
+  doc/board/emulation/qemu-riscv.rst         |  17 +++
+  include/efi_loader.h                       |  22 ++++
+  include/log.h                              |  19 +--
+  lib/efi_driver/efi_block_device.c          |   2 +
+  lib/efi_driver/efi_uclass.c                |   2 +
+  lib/efi_loader/Kconfig                     |   4 +-
+  lib/efi_loader/efi_acpi.c                  |   2 +
+  lib/efi_loader/efi_bootbin.c               | 188
+++++++++++++++++++++++-------
+  lib/efi_loader/efi_boottime.c              |   9 +-
+  lib/efi_loader/efi_conformance.c           |   2 +
+  lib/efi_loader/efi_device_path_to_text.c   |   2 +
+  lib/efi_loader/efi_device_path_utilities.c |   2 +
+  lib/efi_loader/efi_dt_fixup.c              |   2 +
+  lib/efi_loader/efi_esrt.c                  |   2 +
+  lib/efi_loader/efi_fdt.c                   |   2 +
+  lib/efi_loader/efi_file.c                  |   2 +
+  lib/efi_loader/efi_firmware.c              |   2 +
+  lib/efi_loader/efi_gop.c                   |   2 +
+  lib/efi_loader/efi_helper.c                |   1 +
+  lib/efi_loader/efi_hii.c                   |   2 +
+  lib/efi_loader/efi_hii_config.c            |   2 +
+  lib/efi_loader/efi_http.c                  |   2 +
+  lib/efi_loader/efi_ipconfig.c              |   2 +
+  lib/efi_loader/efi_load_initrd.c           |   1 +
+  lib/efi_loader/efi_net.c                   |   2 +
+  lib/efi_loader/efi_riscv.c                 |   1 +
+  lib/efi_loader/efi_root_node.c             |   2 +
+  lib/efi_loader/efi_runtime.c               |   2 +
+  lib/efi_loader/efi_signature.c             |   2 +
+  lib/efi_loader/efi_string.c                |   2 +
+  lib/efi_loader/efi_tcg2.c                  |   1 +
+  lib/efi_loader/efi_unicode_collation.c     |   2 +
+  lib/efi_loader/efi_var_common.c            |   2 +
+  lib/efi_loader/efi_var_mem.c               |   2 +
+  lib/efi_loader/efi_variable_tee.c          |   2 +
+  lib/efi_loader/efi_watchdog.c              |   2 +
+  test/log/log_filter.c                      |   1 -
+  test/log/log_test.c                        |  78 +++++++++---
+  41 files changed, 365 insertions(+), 168 deletions(-)
+
