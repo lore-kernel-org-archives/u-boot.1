@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 555C6C0218D
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:45:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CDD4C02181
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:45:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D489780FED;
-	Sun, 26 Jan 2025 19:44:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2439A80FB9;
+	Sun, 26 Jan 2025 19:44:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gV4dyb80";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nE06Kaix";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B5A480F96; Sun, 26 Jan 2025 19:44:10 +0100 (CET)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 1A22B80FF9; Sun, 26 Jan 2025 19:44:12 +0100 (CET)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72DF380FE2
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CD1C80FA8
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-3cf880d90bdso13686585ab.3
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:07 -0800 (PST)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-84a1ce51187so99295139f.1
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737917045; x=1738521845; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737917047; x=1738521847; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k3Olx3b/419yXnZuVpFTXwfbRbkp+VaxDQ3YKrLfGfI=;
- b=gV4dyb80XmNLhA4zQFBeSUKqP1l7Str6Uv4g4wyAhl1jcSjwnoiIB6+EaMU5EyKPYr
- VMmqGSouog01oM0HqjPo8jIxAmZF25srZTyRVyy304Nxce72cQTKfdR4e8eYgyE6xcB/
- 734Bd72ZYLkCQq8X7krWcGQ5JMGW/AJmyK0n0=
+ bh=XiNX0STw6l/CgSs9uXfRPIjrCrj+9H3/XZgVcDv+1QQ=;
+ b=nE06Kaix3K/r3ngaK2D37HsQvZkPuyQ0+3/1883dl8yDXwsaMb8y6wqW6I4uoboNTx
+ ayk2ZyOV9vBttijoQUkBJHfr5Devtefs2dSkYPTPgwz8HxoKTysNmjpA4/SL14UUZNuI
+ DLUfAuCDgqmHATrnr/Deyxj8ILB4NeSKTcf7k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737917046; x=1738521846;
+ d=1e100.net; s=20230601; t=1737917047; x=1738521847;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=k3Olx3b/419yXnZuVpFTXwfbRbkp+VaxDQ3YKrLfGfI=;
- b=bkhMyMDe/CbaAEvD+J4690mJXXB1J9TEwSMa2smrNGKIZg09KlvWtvmHPPjYBvm7Wm
- LsbYnRWUTKCrymcxxM5NyLYNWRXw/ns8qEdA9GecEHRm1+idBhxFKrrYnKXrCJ+z+6oR
- cvo17PMD4ST+k7nVyUzAXMHKKn1MCshFSZzbZ1LCz8DTm20Qmt1IBxJEJwo9DcP3YMI2
- xOXPe72UCZ5pR8fuRQGHgityyJTEfOQxEg+HR9hGuDQOS2Z+AgHV114lVsi3RoFOztkf
- 2YAP7B6xfVLQBNURFkZoHD660vb7tU6AJaVdP4soOwnA9Uu36pp1BL7h4foCJ9JsFxc6
- mRVQ==
-X-Gm-Message-State: AOJu0YxF1d2P0lsqgF6Ljz7Vt4wJRyjo4KlEerdwWZwHMfm40XOB/T+6
- guY14ld6VJQGwfTrpTnwn1g11Wslj2cbXGjP1OK4fQVlEt798F+yE/X3OVrr3KZDEmRZdRAM3yM
+ bh=XiNX0STw6l/CgSs9uXfRPIjrCrj+9H3/XZgVcDv+1QQ=;
+ b=SeMCYKG6G0obMZienU9GaZ8s2aGzBU0KoVfWa8qFkhohrSA8CS9huJ9acn6BNkveVr
+ vMk2QbiZ8XmYwRgNeIwWNBEwKr3D3LNPgNWyQGPFL8tht8K2n+/DsaqvEHZBXCEdTBR8
+ OrdSIb1Imtr9fGfmdL94T/NIzLravP3RELVJETlX7733uBwH/FLzU03RBeexFbrEuAbz
+ ZQPkkASLv0OVLB6lBDDrKodcgEmnMAqInMKOhm4MujPPoPUzuwfOk674ekee1/69eNaB
+ qN+CE99CfYSYo6+uyxS5nL1+gmj1qMobiIV+MTTu8NeXTb+uq8Mf2YIK9O/nwaXhVtKu
+ JtKQ==
+X-Gm-Message-State: AOJu0Yx6xmg7Qv0Ru1vVwopl69RJmGORME9OJpAS2KcSllIvMWDTzLR8
+ o7v2wGdvybrroQW43nFevX4/AzMoZK0GpXsx8f+Z4h3afL13Na1WWb9uRGE4RWcYHVQqMUuHDe4
  =
-X-Gm-Gg: ASbGncvJSgFg2jDSKAtOARnVNxof2uuQPJLgcBT0dnqpUj8pfF+yQ0hSyoBuHwZhhC7
- BmteBzwTaGx72l67a92jA3xW+1fhqgJSBfqkV7tLN3aHQZ+ibSdo4Ln3l5nDAY7xahIvI4L/j72
- IJlij7SsXUAPkLUZpU9exqdwrf37c4+iqY65LlRJIK9KDcQ9K9R7+aDr3clFEoUvi3clzChhezs
- JT5GdEBeUY0FZUgNHUhI57Hr6Edj+qjuyKGamF5aiLUVJAxSladHrVBUrGnC05CjmpdZZ+kbH0T
- LNKbGmuDVDi0bVkLhGTX6TU0pt5sF1FgVF/G0M+b4Q==
-X-Google-Smtp-Source: AGHT+IEX9k1UuzW9eLxD9GnlRRyqSowcP21/Zn0zQleTnZPA+tI7MdlEO3ycN3ZbFa5XMkkkDTbp+w==
-X-Received: by 2002:a05:6e02:1a67:b0:3a7:87f2:b010 with SMTP id
- e9e14a558f8ab-3cf743ab4fcmr284323435ab.5.1737917045689; 
- Sun, 26 Jan 2025 10:44:05 -0800 (PST)
+X-Gm-Gg: ASbGncvDEio9Z07wyLIIlR+7vWFli045u/LjzxPUPxMN/6J9z/F3WvXNf1mnnVOXrbH
+ d8jwWUD+DaIN/RUNbzxxE/dXp+a8t+F6WqNWyHbE9CNBZzbf8fcJcOh2GyOKoi2Q1wNWxccdxUk
+ VngGsqkNNuxh0xCUf4bOUCQOyeYPtdYKS00ysfq1lP6sbxh6t7QEYogC4KoQlV7wMZ4VL4cZa55
+ qTdxCk8sTueTbHDjpvWAzE0DuV5lBve279j1/mrNuQnvsVT3/7SXpnwVwKhEx0mN33KaN6+AmAT
+ +8o3UdEnBcZT2ZmVt1Ly2o9x10K5jESS3Aq5UI969u2nAM028Efh
+X-Google-Smtp-Source: AGHT+IHrgRmqzOG/qlNyrzzzCBT36NuzcjVECU5BCXl+iKpTwO9l7gUW8EKzfTQMe+z72T+44Nc0iw==
+X-Received: by 2002:a05:6602:6c11:b0:837:7f1a:40af with SMTP id
+ ca18e2360f4ac-851b6522d65mr3070133639f.14.1737917047399; 
+ Sun, 26 Jan 2025 10:44:07 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.04
+ 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jan 2025 10:44:04 -0800 (PST)
+ Sun, 26 Jan 2025 10:44:06 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Daniel Palmer <daniel@0x0f.com>,
- Franco Venturi <fventuri@comcast.net>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/19] spl: Allow spl_load() to be controlled in any xPL phase
-Date: Sun, 26 Jan 2025 11:43:19 -0700
-Message-ID: <20250126184333.4058848-10-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Matthew Garrett <mgarrett@aurora.tech>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 10/19] spl: Provide a way to mark code needed for relocation
+Date: Sun, 26 Jan 2025 11:43:20 -0700
+Message-ID: <20250126184333.4058848-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250126184333.4058848-1-sjg@chromium.org>
 References: <20250126184333.4058848-1-sjg@chromium.org>
@@ -95,52 +95,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some phases may wish to use full FIT-loading and others not, so allow
-this to be controlled.
-
-Add some debugging while we are here.
+Add a linker symbol which can be used to mark relocation code, so it can
+be collected by the linker and copied into a suitable place and executed
+when needed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/spl_load.h | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ include/asm-generic/sections.h | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/include/spl_load.h b/include/spl_load.h
-index 935f7d336f2..525e0c9e86c 100644
---- a/include/spl_load.h
-+++ b/include/spl_load.h
-@@ -20,13 +20,15 @@ static inline int _spl_load(struct spl_image_info *spl_image,
- 	ulong base_offset, image_offset, overhead;
- 	int read, ret;
+diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
+index 5b040d0acd0..90eba30b68d 100644
+--- a/include/asm-generic/sections.h
++++ b/include/asm-generic/sections.h
+@@ -67,6 +67,9 @@ extern char __text_start[];
+ /* This marks the text region which must be relocated */
+ extern char __image_copy_start[], __image_copy_end[];
  
-+	log_debug("\nloading hdr from %lx to %p\n", (ulong)offset, header);
- 	read = info->read(info, offset, ALIGN(sizeof(*header),
- 					      spl_get_bl_len(info)), header);
- 	if (read < (int)sizeof(*header))
- 		return -EIO;
++/* This marks the rcode region used for SPL relocation */
++extern char _rcode_start[], _rcode_end[];
++
+ extern char __bss_end[];
+ extern char __rel_dyn_start[], __rel_dyn_end[];
+ extern char _image_binary_end[];
+@@ -78,4 +81,17 @@ extern char __dtb[];
+  */
+ extern void _start(void);
  
- 	if (image_get_magic(header) == FDT_MAGIC) {
--		if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL)) {
-+		log_debug("Found FIT\n");
-+		if (CONFIG_IS_ENABLED(LOAD_FIT_FULL)) {
- 			void *buf;
- 
- 			/*
-@@ -48,9 +50,12 @@ static inline int _spl_load(struct spl_image_info *spl_image,
- 			return spl_parse_image_header(spl_image, bootdev, buf);
- 		}
- 
--		if (IS_ENABLED(CONFIG_SPL_LOAD_FIT))
-+		if (CONFIG_IS_ENABLED(LOAD_FIT)) {
-+			log_debug("Simple loading\n");
- 			return spl_load_simple_fit(spl_image, info, offset,
- 						   header);
-+		}
-+		log_debug("No FIT support\n");
- 	}
- 
- 	if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
++#ifndef USE_HOSTCC
++#if CONFIG_IS_ENABLED(RELOC_LOADER)
++#define __rcode __section(".text.rcode")
++#define __rdata __section(".text.rdata")
++#else
++#define __rcode
++#define __rdata
++#endif
++#else
++#define __rcode
++#define __rdata
++#endif
++
+ #endif /* _ASM_GENERIC_SECTIONS_H_ */
 -- 
 2.43.0
 
