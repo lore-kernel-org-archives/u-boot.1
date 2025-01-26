@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D45FAC0218D
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 555C6C0218D
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:45:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BEC180FDE;
+	by phobos.denx.de (Postfix) with ESMTP id D489780FED;
 	Sun, 26 Jan 2025 19:44:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NmIJ35+S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gV4dyb80";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4789A80FD2; Sun, 26 Jan 2025 19:44:10 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 4B5A480F96; Sun, 26 Jan 2025 19:44:10 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09FCD80FDC
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72DF380FE2
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3cfc8a2415fso8158145ab.2
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:05 -0800 (PST)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3cf880d90bdso13686585ab.3
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737917044; x=1738521844; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737917045; x=1738521845; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r2GnNt+dPJqqlefHZfEztVTc9ypslZro5cxN4kKjfxQ=;
- b=NmIJ35+SjqIhuMAQFxvC2Qi+PDpurkXjAJYilUlqVCnVSxNIlBVXnNT/kBp1FN0WWe
- twHEM07mHg3HvIOa3He1uPWOPWccGYiOR7D+JF4v3M4Qkny54vH3cXqwTT3ltFPXPg/P
- TnvPjXkoueyPah0sumaLDfsoEe5zpYXihaj0M=
+ bh=k3Olx3b/419yXnZuVpFTXwfbRbkp+VaxDQ3YKrLfGfI=;
+ b=gV4dyb80XmNLhA4zQFBeSUKqP1l7Str6Uv4g4wyAhl1jcSjwnoiIB6+EaMU5EyKPYr
+ VMmqGSouog01oM0HqjPo8jIxAmZF25srZTyRVyy304Nxce72cQTKfdR4e8eYgyE6xcB/
+ 734Bd72ZYLkCQq8X7krWcGQ5JMGW/AJmyK0n0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737917044; x=1738521844;
+ d=1e100.net; s=20230601; t=1737917046; x=1738521846;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r2GnNt+dPJqqlefHZfEztVTc9ypslZro5cxN4kKjfxQ=;
- b=JjeRIKVHFi5sOvfQoC0tgrxj4vlBhyrpQJs8ivuBDFEykRfM8DRRO9jBAs2H5IIKOh
- zBdU50cDer9quBZruUu1gDmqE4nbPFQIMHPjjIhvCa2kc8UJK3nxo1lPYavyAVuQt4fB
- WO88WkaUho0q4uSJ3iuIFIVZ6CGVMOZx5VSJxYPTJJFWyKNVZBqQDYco3WcgEb/4RWji
- QA1+m63gbSritHCkvm1/WmAQPPywkh8jb5t1eRqJapX6qpSjDovDpQ9GHO3Qba6hL2UG
- iU2j1g8Q6+s37cf4DvYzOi2XjZADv6sS4vVeVQF1bYcQxhjpLvWs3m1wLHmwH7vKeaPX
- rpYw==
-X-Gm-Message-State: AOJu0YysLk47OiIqunT30yffz8s45SHXM4W5wd15bSGai43816bGB2aX
- ztHxbO60ZlZbx4O5WFAQgIg+mn3PUQEvcAzRB5V5k8MvnUe9aK94A/TAVvfsjcc9Rd3bBHyq5RA
+ bh=k3Olx3b/419yXnZuVpFTXwfbRbkp+VaxDQ3YKrLfGfI=;
+ b=bkhMyMDe/CbaAEvD+J4690mJXXB1J9TEwSMa2smrNGKIZg09KlvWtvmHPPjYBvm7Wm
+ LsbYnRWUTKCrymcxxM5NyLYNWRXw/ns8qEdA9GecEHRm1+idBhxFKrrYnKXrCJ+z+6oR
+ cvo17PMD4ST+k7nVyUzAXMHKKn1MCshFSZzbZ1LCz8DTm20Qmt1IBxJEJwo9DcP3YMI2
+ xOXPe72UCZ5pR8fuRQGHgityyJTEfOQxEg+HR9hGuDQOS2Z+AgHV114lVsi3RoFOztkf
+ 2YAP7B6xfVLQBNURFkZoHD660vb7tU6AJaVdP4soOwnA9Uu36pp1BL7h4foCJ9JsFxc6
+ mRVQ==
+X-Gm-Message-State: AOJu0YxF1d2P0lsqgF6Ljz7Vt4wJRyjo4KlEerdwWZwHMfm40XOB/T+6
+ guY14ld6VJQGwfTrpTnwn1g11Wslj2cbXGjP1OK4fQVlEt798F+yE/X3OVrr3KZDEmRZdRAM3yM
  =
-X-Gm-Gg: ASbGncta8xDlvqiFaAwxkooCJFQza8oYvU+xiPtIoz6481zC5PclNM+vO35YgLu9WxA
- v5pkTP+1Nnu8V//eVfK9VMP0gVYASy03zhfHDwRYO+s+wtG0Aso/L9eU7vKew85AeI0qAsff5fB
- EHRZ9miA5pS0j2Eu9qXmzIC4QKJPwGZhAbg/kkKBL1RHjHGo3STQ39FhAN54Dhdg1jKqCRdoUvd
- OVMOW5AIcTj1IcehwBw0eu9NA7xIDPdhIs9w/FazN7pbNZQUA1EXjTwl+OasakfTNfxGxKZVGa1
- SRTQiDslIZP7XYkQYi4BluoeqAu5miqvyrcCvLkXww==
-X-Google-Smtp-Source: AGHT+IHHJDnxvU+IcgCzKh8vcO37FE62JzHTTpRNqTADl08UxO5DvHgnOpO6uAxutI6OEcUpLK4f8Q==
-X-Received: by 2002:a05:6e02:2161:b0:3ce:4b12:fa17 with SMTP id
- e9e14a558f8ab-3cf7449dae5mr311097855ab.19.1737917043799; 
- Sun, 26 Jan 2025 10:44:03 -0800 (PST)
+X-Gm-Gg: ASbGncvJSgFg2jDSKAtOARnVNxof2uuQPJLgcBT0dnqpUj8pfF+yQ0hSyoBuHwZhhC7
+ BmteBzwTaGx72l67a92jA3xW+1fhqgJSBfqkV7tLN3aHQZ+ibSdo4Ln3l5nDAY7xahIvI4L/j72
+ IJlij7SsXUAPkLUZpU9exqdwrf37c4+iqY65LlRJIK9KDcQ9K9R7+aDr3clFEoUvi3clzChhezs
+ JT5GdEBeUY0FZUgNHUhI57Hr6Edj+qjuyKGamF5aiLUVJAxSladHrVBUrGnC05CjmpdZZ+kbH0T
+ LNKbGmuDVDi0bVkLhGTX6TU0pt5sF1FgVF/G0M+b4Q==
+X-Google-Smtp-Source: AGHT+IEX9k1UuzW9eLxD9GnlRRyqSowcP21/Zn0zQleTnZPA+tI7MdlEO3ycN3ZbFa5XMkkkDTbp+w==
+X-Received: by 2002:a05:6e02:1a67:b0:3a7:87f2:b010 with SMTP id
+ e9e14a558f8ab-3cf743ab4fcmr284323435ab.5.1737917045689; 
+ Sun, 26 Jan 2025 10:44:05 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.01
+ 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jan 2025 10:44:02 -0800 (PST)
+ Sun, 26 Jan 2025 10:44:04 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 08/19] vbe: Support selecting images based on phase in FIT
-Date: Sun, 26 Jan 2025 11:43:18 -0700
-Message-ID: <20250126184333.4058848-9-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Daniel Palmer <daniel@0x0f.com>,
+ Franco Venturi <fventuri@comcast.net>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 09/19] spl: Allow spl_load() to be controlled in any xPL phase
+Date: Sun, 26 Jan 2025 11:43:19 -0700
+Message-ID: <20250126184333.4058848-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250126184333.4058848-1-sjg@chromium.org>
 References: <20250126184333.4058848-1-sjg@chromium.org>
@@ -95,91 +95,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With SPL we want to specify the phase of the image to be loaded. Add
-support for this.
+Some phases may wish to use full FIT-loading and others not, so allow
+this to be controlled.
 
-This is the implementation of a FIT feature added to the spec a few
-years ago and entails a small code-size increase, about 70 bytes on
-Thumb2.
+Add some debugging while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Link: https://docs.u-boot.org/en/latest/usage/fit/index.html
 ---
 
- boot/image-fit.c | 29 +++++++++++++++++++----------
- 1 file changed, 19 insertions(+), 10 deletions(-)
+ include/spl_load.h | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index db7fb61bca9..40335bc3345 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -1908,24 +1908,30 @@ int fit_conf_get_prop_node(const void *fit, int noffset, const char *prop_name,
- 	count = fit_conf_get_prop_node_count(fit, noffset, prop_name);
- 	if (count < 0)
- 		return count;
-+	log_debug("looking for %s (%s, image-count %d):\n", prop_name,
-+		  genimg_get_phase_name(image_ph_phase(sel_phase)), count);
+diff --git a/include/spl_load.h b/include/spl_load.h
+index 935f7d336f2..525e0c9e86c 100644
+--- a/include/spl_load.h
++++ b/include/spl_load.h
+@@ -20,13 +20,15 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+ 	ulong base_offset, image_offset, overhead;
+ 	int read, ret;
  
- 	/* check each image in the list */
- 	for (i = 0; i < count; i++) {
--		enum image_phase_t phase;
-+		enum image_phase_t phase = IH_PHASE_NONE;
- 		int ret, node;
++	log_debug("\nloading hdr from %lx to %p\n", (ulong)offset, header);
+ 	read = info->read(info, offset, ALIGN(sizeof(*header),
+ 					      spl_get_bl_len(info)), header);
+ 	if (read < (int)sizeof(*header))
+ 		return -EIO;
  
- 		node = fit_conf_get_prop_node_index(fit, noffset, prop_name, i);
- 		ret = fit_image_get_phase(fit, node, &phase);
-+		log_debug("- %s (%s): ", fdt_get_name(fit, node, NULL),
-+			  genimg_get_phase_name(phase));
+ 	if (image_get_magic(header) == FDT_MAGIC) {
+-		if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL)) {
++		log_debug("Found FIT\n");
++		if (CONFIG_IS_ENABLED(LOAD_FIT_FULL)) {
+ 			void *buf;
  
- 		/* if the image is for any phase, let's use it */
--		if (ret == -ENOENT)
-+		if (ret == -ENOENT || phase == sel_phase) {
-+			log_debug("found\n");
- 			return node;
--		else if (ret < 0)
-+		} else if (ret < 0) {
-+			log_debug("err=%d\n", ret);
- 			return ret;
--
--		if (phase == sel_phase)
--			return node;
+ 			/*
+@@ -48,9 +50,12 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+ 			return spl_parse_image_header(spl_image, bootdev, buf);
+ 		}
+ 
+-		if (IS_ENABLED(CONFIG_SPL_LOAD_FIT))
++		if (CONFIG_IS_ENABLED(LOAD_FIT)) {
++			log_debug("Simple loading\n");
+ 			return spl_load_simple_fit(spl_image, info, offset,
+ 						   header);
 +		}
-+		log_debug("no match\n");
++		log_debug("No FIT support\n");
  	}
-+	log_debug("- not found\n");
  
- 	return -ENOENT;
- }
-@@ -2013,13 +2019,15 @@ int fit_get_node_from_config(struct bootm_headers *images,
- }
- 
- /**
-- * fit_get_image_type_property() - get property name for IH_TYPE_...
-+ * fit_get_image_type_property() - get property name for sel_phase
-  *
-  * Return: the properly name where we expect to find the image in the
-  * config node
-  */
--static const char *fit_get_image_type_property(int type)
-+static const char *fit_get_image_type_property(int ph_type)
- {
-+	int type = image_ph_type(ph_type);
-+
- 	/*
- 	 * This is sort-of available in the uimage_type[] table in image.c
- 	 * but we don't have access to the short name, and "fdt" is different
-@@ -2071,8 +2079,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	fit_uname = fit_unamep ? *fit_unamep : NULL;
- 	fit_uname_config = fit_uname_configp ? *fit_uname_configp : NULL;
- 	fit_base_uname_config = NULL;
--	prop_name = fit_get_image_type_property(image_type);
--	printf("## Loading %s from FIT Image at %08lx ...\n", prop_name, addr);
-+	prop_name = fit_get_image_type_property(ph_type);
-+	printf("## Loading %s (%s) from FIT Image at %08lx ...\n",
-+	       prop_name, genimg_get_phase_name(image_ph_phase(ph_type)), addr);
- 
- 	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_FORMAT);
- 	ret = fit_check_format(fit, IMAGE_SIZE_INVAL);
+ 	if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
 -- 
 2.43.0
 
