@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CDD4C02181
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B4A2C02181
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:45:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2439A80FB9;
+	by phobos.denx.de (Postfix) with ESMTP id 7DB3680FFD;
 	Sun, 26 Jan 2025 19:44:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nE06Kaix";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FcC5/dC/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A22B80FF9; Sun, 26 Jan 2025 19:44:12 +0100 (CET)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 0391680F85; Sun, 26 Jan 2025 19:44:14 +0100 (CET)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CD1C80FA8
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31A9480FD8
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-84a1ce51187so99295139f.1
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:09 -0800 (PST)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3ce87d31480so10976025ab.2
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737917047; x=1738521847; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1737917049; x=1738521849; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XiNX0STw6l/CgSs9uXfRPIjrCrj+9H3/XZgVcDv+1QQ=;
- b=nE06Kaix3K/r3ngaK2D37HsQvZkPuyQ0+3/1883dl8yDXwsaMb8y6wqW6I4uoboNTx
- ayk2ZyOV9vBttijoQUkBJHfr5Devtefs2dSkYPTPgwz8HxoKTysNmjpA4/SL14UUZNuI
- DLUfAuCDgqmHATrnr/Deyxj8ILB4NeSKTcf7k=
+ bh=Sz/ZOT7ytDV4v/a4UL7/PrWJUf3vE5YjIJm4k7cpkzI=;
+ b=FcC5/dC/Vj888ri0iOR+hFcBF2FINyvBvyysn1t+VpqCUSZSNbMKl4lq/IhLwwUE35
+ /YZBifXYfBcduu/twkxLBHa1/mI620BXqiAuxJ1PHgr5g9fxhMphSLBshIJytqBm4+km
+ I2W03zLkhE1ooV22rtVb4Uy44jlD+p7njeYUA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737917047; x=1738521847;
+ d=1e100.net; s=20230601; t=1737917049; x=1738521849;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XiNX0STw6l/CgSs9uXfRPIjrCrj+9H3/XZgVcDv+1QQ=;
- b=SeMCYKG6G0obMZienU9GaZ8s2aGzBU0KoVfWa8qFkhohrSA8CS9huJ9acn6BNkveVr
- vMk2QbiZ8XmYwRgNeIwWNBEwKr3D3LNPgNWyQGPFL8tht8K2n+/DsaqvEHZBXCEdTBR8
- OrdSIb1Imtr9fGfmdL94T/NIzLravP3RELVJETlX7733uBwH/FLzU03RBeexFbrEuAbz
- ZQPkkASLv0OVLB6lBDDrKodcgEmnMAqInMKOhm4MujPPoPUzuwfOk674ekee1/69eNaB
- qN+CE99CfYSYo6+uyxS5nL1+gmj1qMobiIV+MTTu8NeXTb+uq8Mf2YIK9O/nwaXhVtKu
- JtKQ==
-X-Gm-Message-State: AOJu0Yx6xmg7Qv0Ru1vVwopl69RJmGORME9OJpAS2KcSllIvMWDTzLR8
- o7v2wGdvybrroQW43nFevX4/AzMoZK0GpXsx8f+Z4h3afL13Na1WWb9uRGE4RWcYHVQqMUuHDe4
+ bh=Sz/ZOT7ytDV4v/a4UL7/PrWJUf3vE5YjIJm4k7cpkzI=;
+ b=nwZoHRrAObvNr6FwPTWufDCXxAsTtGlz/zXa79v5PpizLAJhfYr1RO1JO2LQ6WSxLG
+ kwpK0k2edGJCOXCyo3dK/VlCvqUSbXHkieShzNZQlh+A023Ntdrf9rm7upL57cjJ/1u+
+ GW3jik2/I2M8zsCuuF7qEC1ki2sHraf/9NoIGPpH5GO8TPkm7R0eh3RdXM9Pwml2ZinI
+ FOl/5/q9YmumSPLnmHRc39KhA1zEn8/8brtViNY/6VO8ZBOIs1Kas6mM3PWwvSI9lOgp
+ 8QHczFBKAA48TCZJe4n2RBe2ZsYVWimN5tvNo12kZ5RG9FCr3parTQPbXyk9OYedJfjo
+ dAAQ==
+X-Gm-Message-State: AOJu0YxrxOm29J0OUqwd2+LjDTe2syfDjmYQcoxCXyIhdqgLLwNAsfjo
+ 7OGq3KwunR5m+QzZJ4obLrQsgY92BuWw5jTk+O8cIyJ2v6MxyYjR1KBKa6xBoT+56Wr3+TQrMdc
  =
-X-Gm-Gg: ASbGncvDEio9Z07wyLIIlR+7vWFli045u/LjzxPUPxMN/6J9z/F3WvXNf1mnnVOXrbH
- d8jwWUD+DaIN/RUNbzxxE/dXp+a8t+F6WqNWyHbE9CNBZzbf8fcJcOh2GyOKoi2Q1wNWxccdxUk
- VngGsqkNNuxh0xCUf4bOUCQOyeYPtdYKS00ysfq1lP6sbxh6t7QEYogC4KoQlV7wMZ4VL4cZa55
- qTdxCk8sTueTbHDjpvWAzE0DuV5lBve279j1/mrNuQnvsVT3/7SXpnwVwKhEx0mN33KaN6+AmAT
- +8o3UdEnBcZT2ZmVt1Ly2o9x10K5jESS3Aq5UI969u2nAM028Efh
-X-Google-Smtp-Source: AGHT+IHrgRmqzOG/qlNyrzzzCBT36NuzcjVECU5BCXl+iKpTwO9l7gUW8EKzfTQMe+z72T+44Nc0iw==
-X-Received: by 2002:a05:6602:6c11:b0:837:7f1a:40af with SMTP id
- ca18e2360f4ac-851b6522d65mr3070133639f.14.1737917047399; 
- Sun, 26 Jan 2025 10:44:07 -0800 (PST)
+X-Gm-Gg: ASbGncs6gLmjGZcZR+CGAVQjjKtyxNlfv2FpmU9kxkyianti9Pnjd6CvIBGL5dRKOCD
+ LYd6GVyn0Znibra1MDY1PacU3HWklOjuNijcdNHt3pg+2RoXjXzkRdSsdktZKekdPZqlZs8Dx31
+ GUmtMliwBLrPtiBHIXp4J90P8w97y3c0mrllRMgp085zko+NaB/PY2fXOPasC+VWEh3/5BAFoVr
+ n6ePZJZbNnpTW86lHH4KAxua0O48W9Jo8Wr0Jtr+WxJ48jbWmvxK9VMNAEfgmTMnu23nhVv8V6j
+ gguqW2sdL0feuSn3BFeNbtzpdA8yHqZl0YkAAMP3Pw==
+X-Google-Smtp-Source: AGHT+IEYie/9oLCI6jCqLTrXjju24rQft6zwjrRMMdEZ41OuiaDZBCHcmoSJ6ixx99c2o0UPh5iDyg==
+X-Received: by 2002:a05:6e02:138c:b0:3cf:cd3c:bdfd with SMTP id
+ e9e14a558f8ab-3cfcd3cbeabmr85711615ab.12.1737917048833; 
+ Sun, 26 Jan 2025 10:44:08 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.05
+ 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jan 2025 10:44:06 -0800 (PST)
+ Sun, 26 Jan 2025 10:44:08 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Matthew Garrett <mgarrett@aurora.tech>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 10/19] spl: Provide a way to mark code needed for relocation
-Date: Sun, 26 Jan 2025 11:43:20 -0700
-Message-ID: <20250126184333.4058848-11-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 11/19] lib: Mark crc8 as relocation code
+Date: Sun, 26 Jan 2025 11:43:21 -0700
+Message-ID: <20250126184333.4058848-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250126184333.4058848-1-sjg@chromium.org>
 References: <20250126184333.4058848-1-sjg@chromium.org>
@@ -95,48 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a linker symbol which can be used to mark relocation code, so it can
-be collected by the linker and copied into a suitable place and executed
-when needed.
+Mark the crc8 code as needed by relocation. This is used as a simple
+check against corruption of the code when copying.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/asm-generic/sections.h | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ lib/crc8.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
-index 5b040d0acd0..90eba30b68d 100644
---- a/include/asm-generic/sections.h
-+++ b/include/asm-generic/sections.h
-@@ -67,6 +67,9 @@ extern char __text_start[];
- /* This marks the text region which must be relocated */
- extern char __image_copy_start[], __image_copy_end[];
+diff --git a/lib/crc8.c b/lib/crc8.c
+index 811e19917b4..bbb229c3892 100644
+--- a/lib/crc8.c
++++ b/lib/crc8.c
+@@ -6,11 +6,12 @@
+ #ifdef USE_HOSTCC
+ #include <arpa/inet.h>
+ #endif
++#include <asm/sections.h>
+ #include <u-boot/crc.h>
  
-+/* This marks the rcode region used for SPL relocation */
-+extern char _rcode_start[], _rcode_end[];
-+
- extern char __bss_end[];
- extern char __rel_dyn_start[], __rel_dyn_end[];
- extern char _image_binary_end[];
-@@ -78,4 +81,17 @@ extern char __dtb[];
-  */
- extern void _start(void);
+ #define POLY	(0x1070U << 3)
  
-+#ifndef USE_HOSTCC
-+#if CONFIG_IS_ENABLED(RELOC_LOADER)
-+#define __rcode __section(".text.rcode")
-+#define __rdata __section(".text.rdata")
-+#else
-+#define __rcode
-+#define __rdata
-+#endif
-+#else
-+#define __rcode
-+#define __rdata
-+#endif
-+
- #endif /* _ASM_GENERIC_SECTIONS_H_ */
+-static unsigned char _crc8(unsigned short data)
++__rcode static unsigned char _crc8(unsigned short data)
+ {
+ 	int i;
+ 
+@@ -23,7 +24,7 @@ static unsigned char _crc8(unsigned short data)
+ 	return (unsigned char)(data >> 8);
+ }
+ 
+-unsigned int crc8(unsigned int crc, const unsigned char *vptr, int len)
++__rcode unsigned int crc8(unsigned int crc, const unsigned char *vptr, int len)
+ {
+ 	int i;
+ 
 -- 
 2.43.0
 
