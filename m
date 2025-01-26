@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA6CC02181
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 13:09:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35EADC0218D
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 13:09:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13A2480EF4;
-	Sun, 26 Jan 2025 14:09:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 5267C80F80;
+	Sun, 26 Jan 2025 14:09:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B7DAF80F56; Sun, 26 Jan 2025 08:14:25 +0100 (CET)
-Received: from smtpbgjp3.qq.com (smtpbgjp3.qq.com [54.92.39.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21DC780EEF
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 08:14:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=yt@radxa.com
-X-QQ-mid: bizesmtpip4t1737875628tq56f8j
-X-QQ-Originating-IP: dSuhspBrpZepodpOAK+WeLWRIOsvgKzp9S08+qmng+c=
-Received: from [IPV6:240e:3b7:3243:720::3fc] ( [localhost])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Sun, 26 Jan 2025 15:13:46 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 17878363596574148830
-Message-ID: <8B2016527B9BCFBA+ca2da5a3-e889-4191-b951-88656d1043ab@radxa.com>
-Date: Sun, 26 Jan 2025 15:13:46 +0800
+	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="gg47Cukh";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D1E6180F56; Sun, 26 Jan 2025 09:31:05 +0100 (CET)
+Received: from sender4-op-o16.zoho.com (sender4-op-o16.zoho.com
+ [136.143.188.16])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BBDD80EF4
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 09:31:00 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=pigmoral.tech
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
+ARC-Seal: i=1; a=rsa-sha256; t=1737880255; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=fw/Mizzs13VfLMw3RwhSyLvODZF3C9fQdZ6YPUM8/wusaWZUOxvTnnJo8Yw1X1liR4Nyhh8jXFAAOZZMu0goSDXsTU6xFnogmfBb9X+QvXcwg8hkHiu0h7JcWdWV+UWVzAB/WvzFSGqr8SFvjV+tgoq2wE1R80+EMvjUiEHH6QQ=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1737880255;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=v8O8eZqczQRrKl2+W6ldZQIcwr6hpblhUU/j/9JUISw=; 
+ b=XTyMzOr9TPyCWBEjUrqAHBIm3bFLy9R0pTl/9/TKb6cDwOb6peFKEGKT3lpgieJ/UCEsjexTda0Q3TtURZaVE4WE16mrE+z/K2mke3l/IJ63qxZifQcnItqEA8quneIy67zfFZh5O6cXwE6q+Ueut/xb1ycI6zJBsRpWJ4LbB+0=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=pigmoral.tech;
+ spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
+ dmarc=pass header.from=<junhui.liu@pigmoral.tech>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1737880255; 
+ s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
+ h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:To:To:Cc:Cc:Reply-To;
+ bh=v8O8eZqczQRrKl2+W6ldZQIcwr6hpblhUU/j/9JUISw=;
+ b=gg47CukhiQsgFnaAZ+gAVaiqadgT3UESnoGLx98vXBvEkeRusnDia4dyDNpJss/q
+ Yup6cfl5ETRy5UJ26npDBfDrjdMKDm1pjY7F652cRxlAM3xC+Vx3Ckc/AIvF3wkG/xA
+ E5/pOdTGZbsBc0COr9ThnOzT7vDN5pcE1hRkPDQ4=
+Received: by mx.zohomail.com with SMTPS id 1737880251793647.6973498776409;
+ Sun, 26 Jan 2025 00:30:51 -0800 (PST)
+From: Junhui Liu <junhui.liu@pigmoral.tech>
+Date: Sun, 26 Jan 2025 00:29:59 -0800
+Subject: [PATCH] usb: dwc2: Refactor register operations with clrsetbits macros
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Git commit failed with mbedtls/framework
-To: Tom Rini <trini@konsulko.com>
-Cc: Tony Dinh <mibodhi@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <CAJaLiFw134mzZk7TkJMgAppx11Xv3qZsbU-Y78XimX8jNbJtMA@mail.gmail.com>
- <CAEfUkUKp9wWhgBW2XFubhoccSGeU-CW3Y+FY+iJhfw7eVLZv_g@mail.gmail.com>
- <CAJaLiFzTjHWCw+ioPZv660yQ0XLM6+SMJh3NV=NYivbtE1Uf_Q@mail.gmail.com>
- <CAEfUkULhPuH15fDENXubhNPOQvbAjBv5f_yoeH7gjC4rhczxtA@mail.gmail.com>
- <20241118153742.GO3600562@bill-the-cat>
- <CAEfUkUJNOTCsh19VbKsHw9wWO1nn8o-OhRrAB46uhpKHO-Owsw@mail.gmail.com>
- <20241118164122.GQ3600562@bill-the-cat>
- <CAEfUkUJmSL8-XR6LUAKX=xW-mYQWNHzanRKvAVFaB2A9nA4W1A@mail.gmail.com>
- <20241118171811.GR3600562@bill-the-cat>
- <8823CB36AD9BEA6D+3c5f1842-bbaf-4dfa-96a6-d6d53b61ed10@radxa.com>
- <20250124182330.GQ60249@bill-the-cat>
-Content-Language: en-US
-From: ZHANG Yuntian <yt@radxa.com>
-Organization: Radxa Computer (Shenzhen) Co., Ltd
-In-Reply-To: <20250124182330.GQ60249@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: OOkRk9QS7mEBtNjWY+K0ez3aEdoGE5HE7TzbZTye7VqUvVPe49A5Ar+n
- 94eJKha8/mVuvS2WFU7g8mvzhT9QJjRk2+DQiKdkjRxjWmR3GdYR4up3tZg3KrEw6g9YMoO
- L+Ef6LkyPy7FXk/14pMhrYfZ0phy6dYtjSom7jz7G7qDc2SI42FWQFkCje3ISlVKeCL/oDg
- nEACtU07kxB49N4pYymhL6Uth4R854Z4dS4MQCf79Z+bxWR1nKQbRVqVizIj9Rwp9iQU7BX
- /pBNuKbMEou+AZk4TbiO/uVtbQjrZfVCX4XOz5zec8i0FQ3HexFhCcxlQNQbcOGYCYxhw/t
- v04d4LCHqGfDx83yYBKtO/xc1Uv/bSATv2O9NpxTGyX/FnZ9J973dtjRr37I9DKt4zx6Tig
- AGoA+Y7CnYBepzccOoHtKnLoXAHszulKC2qzGZB90RYSWo1CLN7aRcJMCF4rla1DBpJ0SN4
- 9NQjGzFZyilfLkMJoSIf1g6P+TZfZR0TFzp1gBgRiT8LI4oKiEyj1QrAGYhODluSZhikLbv
- Wt33oJDffiOsmHk7gUPBP5adWRoz6eQJF+kivc+H912v22m499tv2Y4l/LE/+S/8O3qo+RR
- 1CbPYoF8EqWOSM4A2Ez8M1a8pobHSnmdJ54VvkMthU4walxRpluaphMTvIp0WD6zNgx6n0U
- 5eCHCf/1Ml7vTKu/h+1rXvqua0ZmTHNCmRnfhqjHuwFuDw8/4hDXGIW5r+y+Iee+bHh6ZM4
- ZKqNEOgMWirzgChPleUgWPPQcN0fZHZXg3ahIOzAq1JqYG28zFkBxUlz7pW41GWT52kHXj9
- Iw3LQS6tS/zUzDoKSGPVxobVYBO+iUWUF0d9+yFSol06wh1S0aMk5okAHa0HH1r+tI348/X
- 1vpPNUyGZOeA9cXO12mEGvvyv5WBD/7XTcaW3fu5+kRKoqEPCUujycXC9tbXBmc+D4hLk11
- gPpUoQDiE8jqMzMYvg55Jim3XS8GbiFUKF/Q=
-X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
-X-QQ-RECHKSPAM: 0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250126-dwc2-clrsetbits-refactor-v1-1-68c27e1b6f84@pigmoral.tech>
+X-B4-Tracking: v=1; b=H4sIAIbylWcC/yWN2wqDMBBEf0X2uVtiqlZFSv+j+BCTjQa8NUltQ
+ fz3BvN4Zpg5OziyhhzUyQ6WNuPMMgdILwnIQcw9oVGBgTOes5TnqL6SoxytI98Z79CSFtIvFik
+ rc9VVN8WrAsJ8DY35ndevNrKl9ycYfAxhIufEaaiTJgpSFgWKNtwyZFiVd51pVeiy48/V9NNix
+ Xj1JIcHtMfxB+/H+E3AAAAA
+X-Change-ID: 20250125-dwc2-clrsetbits-refactor-e485db93d296
+To: Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Junhui Liu <junhui.liu@pigmoral.tech>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1737880246; l=13592;
+ i=junhui.liu@pigmoral.tech; s=20241030; h=from:subject:message-id;
+ bh=V59zANsizlXDcym+kjTLK7lSifPPN3FVj7mnOnS+6Hg=;
+ b=H1LXNIsWslGBeb5MsvFGYKj23uYG34f08GyWtOVm5lyHcMnbcyxuVd0VA/e1VioIB4YlSo5oF
+ BPlTHJnaMBlAi9a35KKdSoFzmlrAPn6qHXYI6j9VFdrX59vFtIV7M49
+X-Developer-Key: i=junhui.liu@pigmoral.tech; a=ed25519;
+ pk=ApYwI6KD3EjynMw61RqGa6c5BGbStQnKSrbNN+aQqT4=
+X-ZohoMailClient: External
 X-Mailman-Approved-At: Sun, 26 Jan 2025 14:09:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,255 +89,334 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Refactor DWC2 USB gadget driver to replace manual read-modify-write
+operations with `clrsetbits_le32`, `setbits_le32`, and `clrbits_le32`
+macros, which simplify the code and improve readability.
 
-On 2025/1/25 02:23, Tom Rini wrote:
-> On Fri, Jan 24, 2025 at 02:05:28PM +0800, ZHANG Yuntian wrote:
->> Hi Tom,
->>
->> On 2024/11/19 01:18, Tom Rini wrote:
->>> On Mon, Nov 18, 2024 at 12:16:18PM -0500, Raymond Mao wrote:
->>>> Hi Tom,
->>>>
->>>> On Mon, 18 Nov 2024 at 11:41, Tom Rini <trini@konsulko.com> wrote:
->>>>
->>>>> On Mon, Nov 18, 2024 at 11:27:06AM -0500, Raymond Mao wrote:
->>>>>> Hi Tom,
->>>>>>
->>>>>> On Mon, 18 Nov 2024 at 10:37, Tom Rini <trini@konsulko.com> wrote:
->>>>>>
->>>>>>> On Mon, Nov 18, 2024 at 10:24:32AM -0500, Raymond Mao wrote:
->>>>>>>> Hi Tony,
->>>>>>>>
->>>>>>>> On Sat, 16 Nov 2024 at 02:39, Tony Dinh <mibodhi@gmail.com> wrote:
->>>>>>>>
->>>>>>>>> Hi Raymond,
->>>>>>>>>
->>>>>>>>> On Fri, Nov 15, 2024 at 1:55 PM Raymond Mao <
->>>>> raymond.mao@linaro.org>
->>>>>>>>> wrote:
->>>>>>>>>>
->>>>>>>>>> Hi Tony and Tom,
->>>>>>>>>>
->>>>>>>>>> On Fri, 15 Nov 2024 at 16:35, Tony Dinh <mibodhi@gmail.com>
->>>>> wrote:
->>>>>>>>>>>
->>>>>>>>>>> Hi Tom,
->>>>>>>>>>> Hi Raymond,
->>>>>>>>>>>
->>>>>>>>>>> On Fri, Nov 15, 2024 at 1:09 PM Raymond Mao <
->>>>> raymond.mao@linaro.org
->>>>>>>>
->>>>>>>>> wrote:
->>>>>>>>>>>>
->>>>>>>>>>>> Hi Tony
->>>>>>>>>>>>
->>>>>>>>>>>> On Fri, 15 Nov 2024 at 15:32, Tony Dinh <mibodhi@gmail.com>
->>>>>>> wrote:
->>>>>>>>>>>>>
->>>>>>>>>>>>> Hi Tom,
->>>>>>>>>>>>>
->>>>>>>>>>>>> On Fri, Nov 15, 2024 at 11:27 AM Tony Dinh <
->>>>> mibodhi@gmail.com>
->>>>>>>>> wrote:
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> Hi Tom,
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> On Fri, Nov 15, 2024 at 6:17 AM Tom Rini <
->>>>> trini@konsulko.com>
->>>>>>>>> wrote:
->>>>>>>>>>>>>>>
->>>>>>>>>>>>>>> On Thu, Nov 14, 2024 at 08:26:33PM -0800, Tony Dinh
->>>>> wrote:
->>>>>>>>>>>>>>>> Hi Tom,
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> I am on 2025.01-rc2, and I am trying to commit some
->>>>> files.
->>>>>>> The
->>>>>>>>> error
->>>>>>>>>>>>>>>> seems to indicate this framework directory might need
->>>>> some
->>>>>>>>>>>>>>>> modification. Did I miss something?
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> error: 'lib/mbedtls/external/mbedtls/framework' does
->>>>> not
->>>>>>> have
->>>>>>>>> a commit
->>>>>>>>>>>>>>>> checked out
->>>>>>>>>>>>>>>> fatal: updating files failed
->>>>>>>>>>>>>>>
->>>>>>>>>>>>>>> That's odd. You didn't happen to try out some of the
->>>>> previous
->>>>>>>>> lwIP
->>>>>>>>>>>>>>> iterations on that tree did you?
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> No, I did not. The tree is clean with "make mrproper" and
->>>>> on
->>>>>>> the
->>>>>>>>>>>>>> master branch. I just did a git pull and worked on it.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> I went and looked at
->>>>> https://github.com/Mbed-TLS/mbedtls.git.
->>>>>>> The
->>>>>>>>>>>>>> framework directory is pointing to a specific commit.
->>>>>>>>>>>>>> framework @ 3867faa
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> I'll stash and repeat it on another clean tree.
->>>>>>>>>>>>>
->>>>>>>>>>>>> I have the same commit error on a brand new tree.
->>>>>>>>>>>>>
->>>>>>>>>>>> I think you are talking about the test framework of MbedTLS's
->>>>>>>>> original testsuite,
->>>>>>>>>>>> am I right?
->>>>>>>>>>>> MbedTLS was ported into U-Boot as a git subtree and that
->>>>>>> framework is
->>>>>>>>> a git
->>>>>>>>>>>> submodule of original MbedTLS repo which was not included in
->>>>> the
->>>>>>>>> porting
->>>>>>>>>>>> of U-Boot since U-Boot has its own testsuite.
->>>>>>>>>>>
->>>>>>>>>>> Here is what I found.
->>>>>>>>>>>
->>>>>>>>>>> git clone https://github.com/u-boot/u-boot.git
->>>>> u-boot-master-test
->>>>>>>>>>> cd /usr/src/u-boot-master-test/
->>>>>>>>>>> patch -p1 <
->>>>>>> ../builds-u-boot-marvell/sheevaplug/sheevaplug_bootstd.patch
->>>>>>>>>>> git add .
->>>>>>>>>>> git commit . -m "arm: kirkwood: Enable bootstd and remove jffs2
->>>>> for
->>>>>>>>>>> Sheevaplug board" -e
->>>>>>>>>>>
->>>>>>>>>>> The git commit above gave out this error:
->>>>>>>>>>>
->>>>>>>>>>> error: 'lib/mbedtls/external/mbedtls/framework' does not have a
->>>>>>> commit
->>>>>>>>>>> checked out
->>>>>>>>>>> fatal: updating files failed
->>>>>>>>>>>
->>>>>>>>>>> So I tried to commit only the specific files, and it works OK.
->>>>>>>>>>>
->>>>>>>>>>> git commit configs/sheevaplug_defconfig
->>>>> include/configs/sheevaplug.h
->>>>>>>>>>> -m "arm: kirkwood: Enable bootstd and remove jffs2 for
->>>>> Sheevaplug
->>>>>>>>>>> board" -e
->>>>>>>>>>> [master 47de8cff2d] arm: kirkwood: Enable bootstd and remove
->>>>> jffs2
->>>>>>> for
->>>>>>>>>>> Sheevaplug board
->>>>>>>>>>>    2 files changed, 17 insertions(+), 19 deletions(-)
->>>>>>>>>>>
->>>>>>>>>>> I think it must be what Raymond said above. So perhaps during
->>>>> Tom's
->>>>>>> PR
->>>>>>>>>>> pull, the framework directory was created. But "git commit ."
->>>>> does
->>>>>>> not
->>>>>>>>>>> like the empty lib/mbedtls/external/mbedtls/framework directory.
->>>>>>>>>>>
->>>>>>>>>> Under the native MbedTLS git repo, by default it has a
->>>>> "framework"
->>>>>>>>> pointing to
->>>>>>>>>> its git submodule.
->>>>>>>>>> Maybe we should mark it in the gitignore.
->>>>>>>>>
->>>>>>>>> I've tried .gitignore but could not make it work (my Gitfu is
->>>>> pretty
->>>>>>>>> lousy). Can you suggest how that should be done?
->>>>>>>>>
->>>>>>>>> You can use the command without the '.' : git commit -m
->>>>> "<commit_msg>",
->>>>>>>> this
->>>>>>>> should work.
->>>>>>>>
->>>>>>>> @Tom Rini <trini@konsulko.com> Shall we remove both
->>>>>>>> "lib/mbedtls/external/mbedtls/.gitmodules" and
->>>>>>>> "lib/mbedtls/external/mbedtls/framework"? I can submit a patch if you
->>>>>>> agree.
->>>>>>>
->>>>>>> Can we do that and not make a problem for the next resync?
->>>>>>>
->>>>>>> Hmmm, no, this cannot be pulled back to the MbedTLS upstream so still a
->>>>>> problem
->>>>>> when resync.
->>>>>> Another option is to include that git submodule into the U-Boot project,
->>>>>> this needs
->>>>>> to revert the commit of introducing the library and redo the git subtree
->>>>>> after the
->>>>>> submodule is updated, but it does not seem to be a good choice as we
->>>>> don't
->>>>>> use
->>>>>> that test framework in U-Boot at all.
->>>>>> Right now I don't have a perfect solution, maybe we can accept using git
->>>>>> commit
->>>>>> without the '.'?
->>>>>
->>>>> Hmm. Maybe we just delete the .gitmodules / directory and it shouldn't
->>>>> be too hard to deal with on updates. I have to do some small fixups with
->>>>> the device tree ones anyhow sometimes.
->>>>>
->>>>> How about checking and deleting this in the subtree update script?
->>>> Then we can skip manually doing this each time.
->>>> I can make a patch for it if you feel fine.
->>>
->>> Lets worry about that if it's a problem when we resync next.
->>
->> I'm currently working with Jonas Karlman's Rockchip fork[1] which is based
->> on a416d9e680718de1c76c4196e1db77e3ca07662f. The fork is included as a git
->> submodule so we can provide distro packaging[2] that are unrelated to
->> U-Boot. We build our package with GitHub Action, and this issue currently
->> blocks us from checking out the code at all with the following workflow
->> snippet:
->>
->>        - name: Checkout
->>          uses: actions/checkout@v4
->>          with:
->>            submodules: recursive
->>
->> Related error logs are here:
->>
->> |> Fetching submodules
->>    /usr/bin/git submodule sync --recursive
->>    /usr/bin/git -c protocol.version=2 submodule update --init --force
->> --recursive
->>    Submodule 'src/rkbin' (https://github.com/rockchip-linux/rkbin.git)
->> registered for path 'src/rkbin'
->>    Submodule 'src/u-boot' (https://github.com/Kwiboo/u-boot-rockchip.git)
->> registered for path 'src/u-boot'
->>    Cloning into '/home/runner/work/u-boot-kwiboo/u-boot-kwiboo/src/rkbin'...
->>    Cloning into '/home/runner/work/u-boot-kwiboo/u-boot-kwiboo/src/u-boot'...
->>    Submodule path 'src/rkbin': checked out
->> '0f8ac860f0479da56a1decae207ddc99e289f2e2'
->>    Submodule path 'src/u-boot': checked out
->> 'f3231571f4f9c3f72dcb6458aaa2de2462c605df'
->>    Error: fatal: No url found for submodule path
->> 'src/u-boot/lib/mbedtls/external/mbedtls/framework' in .gitmodules
->>    Error: fatal: Failed to recurse into submodule path 'src/u-boot'
->>    Error: The process '/usr/bin/git' failed with exit code 128
->>
->> This issue potentially breaks all projects who include the recent U-Boot as
->> a git submodule in their GitHub Workflow.
->>
->> 1: https://github.com/Kwiboo/u-boot-rockchip/tree/rk3528-2025.04-wip
->> 2: https://github.com/radxa-pkg/u-boot-kwiboo/actions
-> 
-> What if instead of "submodules: recursive" you use a run statement?
-> https://github.com/marketplace/actions/checkout-submodules
-> 
+Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
+---
+This patch is a supplement of patch series [1].
 
-We can certainly work around it in many different ways. But the point is 
-that U-Boot is currently a broken repository in regard to git submodule 
-operations, and require special treatments to integrate with existing 
-pipelines. This was not the case before.
+[1] https://lore.kernel.org/u-boot/20250110-dwc2-dev-v4-0-987f4fd6f8b2@pigmoral.tech
+---
+ drivers/usb/gadget/dwc2_udc_otg.c          | 16 ++------
+ drivers/usb/gadget/dwc2_udc_otg_phy.c      | 33 ++++++----------
+ drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 63 +++++++-----------------------
+ 3 files changed, 31 insertions(+), 81 deletions(-)
 
--- 
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index c3fdc81e9096bb216b63ff0ac672d216bed3f23d..40393141ca95b8947712a8996727391fe8742275 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -465,7 +465,6 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ {
+ 	/* 2. Soft-reset OTG Core and then unreset again. */
+ 	int i;
+-	unsigned int uTemp;
+ 	u32 dflt_gusbcfg;
+ 	u32 rx_fifo_sz, tx_fifo_sz, np_tx_fifo_sz;
+ 	u32 max_hw_ep;
+@@ -497,16 +496,12 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ 	writel(dflt_gusbcfg, &reg->global_regs.gusbcfg);
+ 
+ 	/* 3. Put the OTG device core in the disconnected state.*/
+-	uTemp = readl(&reg->device_regs.dctl);
+-	uTemp |= DCTL_SFTDISCON;
+-	writel(uTemp, &reg->device_regs.dctl);
++	setbits_le32(&reg->device_regs.dctl, DCTL_SFTDISCON);
+ 
+ 	udelay(20);
+ 
+ 	/* 4. Make the OTG device core exit from the disconnected state.*/
+-	uTemp = readl(&reg->device_regs.dctl);
+-	uTemp = uTemp & ~DCTL_SFTDISCON;
+-	writel(uTemp, &reg->device_regs.dctl);
++	clrbits_le32(&reg->device_regs.dctl, DCTL_SFTDISCON);
+ 
+ 	/* 5. Configure OTG Core to initial settings of device mode.*/
+ 	/* [][1: full speed(30Mhz) 0:high speed]*/
+@@ -592,7 +587,6 @@ static void reconfig_usbd(struct dwc2_udc *dev)
+ 
+ static void set_max_pktsize(struct dwc2_udc *dev, enum usb_device_speed speed)
+ {
+-	unsigned int ep_ctrl;
+ 	int i;
+ 
+ 	if (speed == USB_SPEED_HIGH) {
+@@ -612,12 +606,10 @@ static void set_max_pktsize(struct dwc2_udc *dev, enum usb_device_speed speed)
+ 		dev->ep[i].ep.maxpacket = ep_fifo_size;
+ 
+ 	/* EP0 - Control IN (64 bytes)*/
+-	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
+-	writel(ep_ctrl | (0 << 0), &reg->device_regs.in_endp[EP0_CON].diepctl);
++	setbits_le32(&reg->device_regs.in_endp[EP0_CON].diepctl, (0 << 0));
+ 
+ 	/* EP0 - Control OUT (64 bytes)*/
+-	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
+-	writel(ep_ctrl | (0 << 0), &reg->device_regs.out_endp[EP0_CON].doepctl);
++	setbits_le32(&reg->device_regs.out_endp[EP0_CON].doepctl, (0 << 0));
+ }
+ 
+ static int dwc2_ep_enable(struct usb_ep *_ep,
+diff --git a/drivers/usb/gadget/dwc2_udc_otg_phy.c b/drivers/usb/gadget/dwc2_udc_otg_phy.c
+index c7eea7b34421ad9bde86d42334852d2f21a133e8..e0ac5d142b0610461408754a59bfd2aa09848407 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg_phy.c
++++ b/drivers/usb/gadget/dwc2_udc_otg_phy.c
+@@ -48,29 +48,24 @@ void otg_phy_init(struct dwc2_udc *dev)
+ 	printf("USB PHY0 Enable\n");
+ 
+ 	/* Enable PHY */
+-	writel(readl(usb_phy_ctrl) | USB_PHY_CTRL_EN0, usb_phy_ctrl);
++	setbits_le32(usb_phy_ctrl, USB_PHY_CTRL_EN0);
+ 
+ 	if (dev->pdata->usb_flags == PHY0_SLEEP) /* C210 Universal */
+-		writel((readl(&phy->phypwr)
+-			&~(PHY_0_SLEEP | OTG_DISABLE_0 | ANALOG_PWRDOWN)
+-			&~FORCE_SUSPEND_0), &phy->phypwr);
++		clrbits_le32(&phy->phypwr, PHY_0_SLEEP | OTG_DISABLE_0 |
++					   ANALOG_PWRDOWN | FORCE_SUSPEND_0);
+ 	else /* C110 GONI */
+-		writel((readl(&phy->phypwr) &~(OTG_DISABLE_0 | ANALOG_PWRDOWN)
+-			&~FORCE_SUSPEND_0), &phy->phypwr);
++		clrbits_le32(&phy->phypwr, OTG_DISABLE_0 | ANALOG_PWRDOWN | FORCE_SUSPEND_0);
+ 
+ 	if (s5p_cpu_id == 0x4412)
+-		writel((readl(&phy->phyclk) & ~(EXYNOS4X12_ID_PULLUP0 |
+-			EXYNOS4X12_COMMON_ON_N0)) | EXYNOS4X12_CLK_SEL_24MHZ,
+-		       &phy->phyclk); /* PLL 24Mhz */
++		clrsetbits_le32(&phy->phyclk, EXYNOS4X12_ID_PULLUP0 | EXYNOS4X12_COMMON_ON_N0,
++				EXYNOS4X12_CLK_SEL_24MHZ); /* PLL 24Mhz */
+ 	else
+-		writel((readl(&phy->phyclk) & ~(ID_PULLUP0 | COMMON_ON_N0)) |
+-		       CLK_SEL_24MHZ, &phy->phyclk); /* PLL 24Mhz */
++		clrsetbits_le32(&phy->phyclk, ID_PULLUP0 | COMMON_ON_N0,
++				CLK_SEL_24MHZ); /* PLL 24Mhz */
+ 
+-	writel((readl(&phy->rstcon) &~(LINK_SW_RST | PHYLNK_SW_RST))
+-	       | PHY_SW_RST0, &phy->rstcon);
++	clrsetbits_le32(&phy->rstcon, LINK_SW_RST | PHYLNK_SW_RST, PHY_SW_RST0);
+ 	udelay(10);
+-	writel(readl(&phy->rstcon)
+-	       &~(PHY_SW_RST0 | LINK_SW_RST | PHYLNK_SW_RST), &phy->rstcon);
++	clrbits_le32(&phy->rstcon, PHY_SW_RST0 | LINK_SW_RST | PHYLNK_SW_RST);
+ 	udelay(10);
+ }
+ 
+@@ -86,13 +81,11 @@ void otg_phy_off(struct dwc2_udc *dev)
+ 	writel(readl(&phy->phypwr) &~PHY_SW_RST0, &phy->rstcon);
+ 	udelay(20);
+ 
+-	writel(readl(&phy->phypwr) | OTG_DISABLE_0 | ANALOG_PWRDOWN
+-	       | FORCE_SUSPEND_0, &phy->phypwr);
++	setbits_le32(&phy->phypwr, OTG_DISABLE_0 | ANALOG_PWRDOWN | FORCE_SUSPEND_0);
+ 
+-	writel(readl(usb_phy_ctrl) &~USB_PHY_CTRL_EN0, usb_phy_ctrl);
++	clrbits_le32(usb_phy_ctrl, USB_PHY_CTRL_EN0);
+ 
+-	writel((readl(&phy->phyclk) & ~(ID_PULLUP0 | COMMON_ON_N0)),
+-	      &phy->phyclk);
++	clrbits_le32(&phy->phyclk, ID_PULLUP0 | COMMON_ON_N0);
+ 
+ 	udelay(10000);
+ 
+diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+index 2be93592c423df7a9acea473b0e84e1f948999be..fca052b4556a7d2ae4fe516e39820611d7082e2f 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
++++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
+@@ -31,15 +31,11 @@ int clear_feature_flag;
+ 
+ static inline void dwc2_udc_ep0_zlp(struct dwc2_udc *dev)
+ {
+-	u32 ep_ctrl;
+-
+ 	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
+ 	       &reg->device_regs.in_endp[EP0_CON].diepdma);
+ 	writel(FIELD_PREP(DXEPTSIZ_PKTCNT_MASK, 1), &reg->device_regs.in_endp[EP0_CON].dieptsiz);
+ 
+-	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
+-	writel(ep_ctrl | DXEPCTL_EPENA | DXEPCTL_CNAK,
+-	       &reg->device_regs.in_endp[EP0_CON].diepctl);
++	setbits_le32(&reg->device_regs.in_endp[EP0_CON].diepctl, DXEPCTL_EPENA | DXEPCTL_CNAK);
+ 
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+ 		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+@@ -48,8 +44,6 @@ static inline void dwc2_udc_ep0_zlp(struct dwc2_udc *dev)
+ 
+ static void dwc2_udc_pre_setup(void)
+ {
+-	u32 ep_ctrl;
+-
+ 	debug_cond(DEBUG_IN_EP,
+ 		   "%s : Prepare Setup packets.\n", __func__);
+ 
+@@ -58,20 +52,16 @@ static void dwc2_udc_pre_setup(void)
+ 	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
+ 	       &reg->device_regs.out_endp[EP0_CON].doepdma);
+ 
+-	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
+-	writel(ep_ctrl | DXEPCTL_EPENA, &reg->device_regs.out_endp[EP0_CON].doepctl);
++	setbits_le32(&reg->device_regs.out_endp[EP0_CON].doepctl, DXEPCTL_EPENA);
+ 
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+ 		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+ 		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
+-
+ }
+ 
+ static inline void dwc2_ep0_complete_out(void)
+ {
+-	u32 ep_ctrl;
+-
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+ 		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+@@ -85,15 +75,12 @@ static inline void dwc2_ep0_complete_out(void)
+ 	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
+ 	       &reg->device_regs.out_endp[EP0_CON].doepdma);
+ 
+-	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
+-	writel(ep_ctrl | DXEPCTL_EPENA | DXEPCTL_CNAK,
+-	       &reg->device_regs.out_endp[EP0_CON].doepctl);
++	setbits_le32(&reg->device_regs.out_endp[EP0_CON].doepctl, DXEPCTL_EPENA | DXEPCTL_CNAK);
+ 
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
+ 		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
+ 	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
+ 		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
+-
+ }
+ 
+ static int setdma_rx(struct dwc2_ep *ep, struct dwc2_request *req)
+@@ -136,12 +123,11 @@ static int setdma_rx(struct dwc2_ep *ep, struct dwc2_request *req)
+ 		   readl(&reg->device_regs.out_endp[ep_num].doepctl),
+ 		   buf, pktcnt, length);
+ 	return 0;
+-
+ }
+ 
+ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
+ {
+-	u32 *buf, ctrl = 0;
++	u32 *buf;
+ 	u32 length, pktcnt;
+ 	u32 ep_num = ep_index(ep);
+ 
+@@ -171,16 +157,10 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
+ 	       FIELD_PREP(DXEPTSIZ_XFERSIZE_MASK, length),
+ 	       &reg->device_regs.in_endp[ep_num].dieptsiz);
+ 
+-	ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+-
+-	/* Write the FIFO number to be used for this endpoint */
+-	ctrl &= ~DXEPCTL_TXFNUM_MASK;
+-	ctrl |= FIELD_PREP(DXEPCTL_TXFNUM_MASK, ep->fifo_num);
+-
+-	/* Clear reserved (Next EP) bits */
+-	ctrl &= ~DXEPCTL_NEXTEP_MASK;
+-
+-	writel(DXEPCTL_EPENA | DXEPCTL_CNAK | ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
++	clrsetbits_le32(&reg->device_regs.in_endp[ep_num].diepctl,
++			DXEPCTL_TXFNUM_MASK | DXEPCTL_NEXTEP_MASK,
++			FIELD_PREP(DXEPCTL_TXFNUM_MASK, ep->fifo_num) |
++			DXEPCTL_EPENA | DXEPCTL_CNAK);
+ 
+ 	debug_cond(DEBUG_IN_EP,
+ 		"%s:EP%d TX DMA start : DIEPDMA0 = 0x%x,"
+@@ -766,9 +746,7 @@ static int dwc2_fifo_read(struct dwc2_ep *ep, void *cp, int max)
+  */
+ static void udc_set_address(struct dwc2_udc *dev, unsigned char address)
+ {
+-	u32 ctrl = readl(&reg->device_regs.dcfg);
+-
+-	writel(FIELD_PREP(DCFG_DEVADDR_MASK, address) | ctrl, &reg->device_regs.dcfg);
++	setbits_le32(&reg->device_regs.dcfg, FIELD_PREP(DCFG_DEVADDR_MASK, address));
+ 
+ 	dwc2_udc_ep0_zlp(dev);
+ 
+@@ -892,7 +870,6 @@ static int dwc2_udc_get_status(struct dwc2_udc *dev,
+ {
+ 	u8 ep_num = crq->wIndex & 0x3;
+ 	u16 g_status = 0;
+-	u32 ep_ctrl;
+ 
+ 	debug_cond(DEBUG_SETUP != 0,
+ 		   "%s: *** USB_REQ_GET_STATUS\n", __func__);
+@@ -940,9 +917,7 @@ static int dwc2_udc_get_status(struct dwc2_udc *dev,
+ 	writel(FIELD_PREP(DXEPTSIZ_PKTCNT_MASK, 1) | FIELD_PREP(DXEPTSIZ_XFERSIZE_MASK, 2),
+ 	       &reg->device_regs.in_endp[EP0_CON].dieptsiz);
+ 
+-	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
+-	writel(ep_ctrl | DXEPCTL_EPENA | DXEPCTL_CNAK,
+-	       &reg->device_regs.in_endp[EP0_CON].diepctl);
++	setbits_le32(&reg->device_regs.in_endp[EP0_CON].diepctl, DXEPCTL_EPENA | DXEPCTL_CNAK);
+ 	dev->ep0state = WAIT_FOR_NULL_COMPLETE;
+ 
+ 	return 0;
+@@ -951,21 +926,16 @@ static int dwc2_udc_get_status(struct dwc2_udc *dev,
+ static void dwc2_udc_set_nak(struct dwc2_ep *ep)
+ {
+ 	u8		ep_num;
+-	u32		ep_ctrl = 0;
+ 
+ 	ep_num = ep_index(ep);
+ 	debug("%s: ep_num = %d, ep_type = %d\n", __func__, ep_num, ep->ep_type);
+ 
+ 	if (ep_is_in(ep)) {
+-		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
+-		ep_ctrl |= DXEPCTL_SNAK;
+-		writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
++		setbits_le32(&reg->device_regs.in_endp[ep_num].diepctl, DXEPCTL_SNAK);
+ 		debug("%s: set NAK, DIEPCTL%d = 0x%x\n",
+ 			__func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
+ 	} else {
+-		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+-		ep_ctrl |= DXEPCTL_SNAK;
+-		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
++		setbits_le32(&reg->device_regs.out_endp[ep_num].doepctl, DXEPCTL_SNAK);
+ 		debug("%s: set NAK, DOEPCTL%d = 0x%x\n",
+ 		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
+ 	}
+@@ -995,12 +965,8 @@ static void dwc2_udc_ep_set_stall(struct dwc2_ep *ep)
+ 		      __func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
+ 
+ 	} else {
+-		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
+-
+ 		/* set the stall bit */
+-		ep_ctrl |= DXEPCTL_STALL;
+-
+-		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
++		setbits_le32(&reg->device_regs.out_endp[ep_num].doepctl, DXEPCTL_STALL);
+ 		debug("%s: set stall, DOEPCTL%d = 0x%x\n",
+ 		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
+ 	}
+@@ -1145,9 +1111,8 @@ static void dwc2_udc_ep_activate(struct dwc2_ep *ep)
+ 	}
+ 
+ 	/* Unmask EP Interrtupt */
+-	writel(readl(&reg->device_regs.daintmsk) | daintmsk, &reg->device_regs.daintmsk);
++	setbits_le32(&reg->device_regs.daintmsk, daintmsk);
+ 	debug("%s: DAINTMSK = 0x%x\n", __func__, readl(&reg->device_regs.daintmsk));
+-
+ }
+ 
+ static int dwc2_udc_clear_feature(struct usb_ep *_ep)
+
+---
+base-commit: 05051cfdf0ed6258a945ec181e36d14b7e450dbf
+change-id: 20250125-dwc2-clrsetbits-refactor-e485db93d296
+prerequisite-message-id: <20250110-dwc2-dev-v4-0-987f4fd6f8b2@pigmoral.tech>
+prerequisite-patch-id: f05fe7f02791b8f5f6e89e3768584622c49e2ed7
+prerequisite-patch-id: ba89fc49fb08beb94bc5c69c4b82e198a27c334d
+prerequisite-patch-id: bc3632796d0010d5711be9597c4222c23adbf9f7
+prerequisite-patch-id: b30e9c649999f42bc5c659bde5650e8aa2a33acd
+prerequisite-patch-id: d6623dbacae347c4c7e339a294c60402667a359b
+prerequisite-patch-id: 64e64d31939ea7f69818883fbafb8c1906b53ecb
+prerequisite-patch-id: 9de6c80cd2996924b8f94a33f3e2a3dd63f1f57b
+prerequisite-patch-id: e1752a8f249752de133bda41a387b3d147d60453
+
 Best regards,
-
-ZHANG, Yuntian
-
-Operating System Developer
-Radxa Computer (Shenzhen) Co., Ltd
-Shenzhen, China
+-- 
+Junhui Liu <junhui.liu@pigmoral.tech>
 
