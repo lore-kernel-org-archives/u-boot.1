@@ -4,87 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98DB5C02181
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 15:59:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6663C02181
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 15:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B075680F10;
-	Sun, 26 Jan 2025 16:59:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A4A380F84;
+	Sun, 26 Jan 2025 16:59:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hf8LpyEu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rw7MuRvG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18F7580F53; Sun, 26 Jan 2025 16:59:05 +0100 (CET)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id 5589B80F85; Sun, 26 Jan 2025 16:59:18 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73FD880EF4
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 16:59:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A58480F84
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 16:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7bcf32a6582so345298685a.1
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 07:59:02 -0800 (PST)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b8618be68bso362027885a.3
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 07:59:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1737907141; x=1738511941; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1737907154; x=1738511954; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZsMTFfk795rCMGK1yrPShVHNo8KhMv76YfikF9lldq8=;
- b=hf8LpyEuUAf4SQ7mMUmw9yQnecqlAMm+F7gmrq2x97ne34GoOpgujhAzHqzA9VpZIu
- DxICDhPclBaDPw/NYSV193VGQ7qUtLCGzL1S8s2RllULQV7ovecoza10H4oROA074YWp
- sx6gtyNx1WiVWhIrfOiTWsUakcwDHTF6T7fbg=
+ bh=WKlU3KGPMRb9Z4rBUiFU3BdGdqyJu5O31nb0Jdo5z5E=;
+ b=rw7MuRvG6JyB8KpZdiXcJiNWyx50JAiCR7Wgf9azEymv9Bt77LGBQBOIVs2QfaUbH3
+ vxcduAmMDjq8QjsUHCuBlU1Z7BXArXXe/Iu4cwSXbhqxQJbtKCB5ifxxvQ0eRArLRXzG
+ JgkELWkRzvPhsR2gI9/2aYmPR3fkwxtIZZW0Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737907141; x=1738511941;
+ d=1e100.net; s=20230601; t=1737907154; x=1738511954;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZsMTFfk795rCMGK1yrPShVHNo8KhMv76YfikF9lldq8=;
- b=psFve+PKoXCl4c/TUHtdXNsFpoCkxcKvwOWvyoowSkAugRjINM83unddjnc4rLAAPa
- RFaefG/ce1pCNewosplLiR0V0fSH1uwOi+Jrsy7g/atS38JIxEgElAVK2GDNzM4T3bLa
- 0ziWzvELZy0LBg85XwuauodNsqrKxTsIKW2oW6sOo95PbCRK47RJw+r1MTT9CFSU2LPH
- QnTIr2aALV7Ijpy6t7oJp4LW8z+TcZiRETRtaCUx0LC0OOyeEThpYfbiLZ78FFq9ej80
- 5OTviqy3EyQGSH3n2ahFc9YlA8wfztI7I89frZAaSPB1Em6LEKsN9XNwS+TKYq7MXokd
- kg6w==
+ bh=WKlU3KGPMRb9Z4rBUiFU3BdGdqyJu5O31nb0Jdo5z5E=;
+ b=fSmbQMLziOAhxuPVcoaSOzhCQXfr1tZWrcWiFsCaQ+30sn9/XqbnLNErmB0CcCoDxX
+ vCj6WmwD4q9nOXy8hV4bt+VERkBpR/JKrsTPJI5GVsGfkyJd0+g7a+Z1CN8SyjnYikNX
+ 35xDmmxNh83QVnlbFz0h/lH9pTp6/dxfml7HcieZfvxpnvs9+tcsf9OUu3Soao8PenTC
+ dC037umzKfhvrbyxT3qs3gucoUXmKQXoyzdUSOoYNqIhBXJRwL32t1RIT729/PvrzxEI
+ kxSVjJmFtstTYtBi4p+7+65l8ahYI9uYaE48agjBuSso0KiH9LaQYjwpVH4ct+U/yxVT
+ zA+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUXWfEn//UPHHBd0zY4W+cz3UY7k9Mh8LiaOAoMnzbZfxvA4R/oU0M/Qr3d37vH9Xqh65HeaE0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyrNTBtoYz/31dz5HPeTfrRTuUjQINpCEDvqdcgdKsAp58TJ9iT
- a/yrnWQLn8pIhs5YmQ+tSE+uEqxpUSFJZ4Aa9tJe8quEp6j2summqp3YeauyUwU=
-X-Gm-Gg: ASbGncsw0Ym53DHZasoEUQj8MJjYN+VS9nxBjYGhvJlmnSnjeMf+Ccmw/EOF3s30T5a
- w887ZdjCpNOBrQN92cgaiowLkDl4CsFAVtoBfgA5sdcCGaabreL2E6SC5NiGAMfyrVrJCqzN/Cf
- LTfOIbQpVhjhbkQmFJuI9BmxsvH3AlbMlsmdfOlZ0zHps4B3td623X6eVIiUbwivzIeVddW2LvR
- fB4dPBEREO+g1iq1Vjm8DPSu2MgZoujYwWgl3ROsuqkp11FMVoFOXdsucB1LvPC9g21bnpgVQwQ
- ee/T
-X-Google-Smtp-Source: AGHT+IGHaibBGm2Y1LrrOn/xUoU9Qgwv5Rs/DznkAT369Q0WXtA/GeLVNoMhArDEddVV5AQd6pPTxw==
-X-Received: by 2002:a05:620a:43a4:b0:7bc:ded5:888d with SMTP id
- af79cd13be357-7be63210578mr5973777185a.1.1737907141242; 
- Sun, 26 Jan 2025 07:59:01 -0800 (PST)
+ AJvYcCUhENKnhotHPZM8NrJC52t//VDcV+qsci27lbXeSIjD0tS6p+BWJ5rGV1+0RbDN8lsLXpO+Kt4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVCLnXtUH6MS7ooJWgXBbAi/MwpQN453EGR8U41njhMoZ3rEK9
+ 9x/HfVQt6jTYhT9A2tY1bPFepT9POuZlttDfuuvL6ec1ysKPgrP1FhzpN19yN74=
+X-Gm-Gg: ASbGncv6m/nU9D3xD0vazl/XFCZ4Om8GUtwEGwjrfHXrf3DBbs19GgozL+2XwvTi+5o
+ SizPqNTNM0D9SqpAeGx66uGTbBXCE1VJx1Or3/ljj57++7E5F8HgSHkQZZxy3NF2RtcVHJWhtMD
+ +MhoJJe+Vc8hrKyEL4t7QH12JchqcyRb14/lGDB791OCacQ8v6JJQiP/DH2GVoOQw2UV39D5F+n
+ hCqChK65Y+XgSqhxdZPPkjre3cQc7m2vk2eprfabNF1YqS3F7qqNEttzK8HIyKM1u9CvyiNh5PY
+ lYLo
+X-Google-Smtp-Source: AGHT+IHMh7oBBHlX8wEubrTsefLJqcXg7cBbPaEDM2CgnLeDemo7VNbqBR/FfdPqb3GSeo3yzojKXw==
+X-Received: by 2002:a05:622a:134c:b0:467:6c95:19de with SMTP id
+ d75a77b69052e-46e12a1e56amr632034291cf.11.1737907154244; 
+ Sun, 26 Jan 2025 07:59:14 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9ae7dd35sm298943085a.23.2025.01.26.07.58.58
+ d75a77b69052e-46e66b6aa9fsm30850661cf.49.2025.01.26.07.59.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jan 2025 07:58:59 -0800 (PST)
-Date: Sun, 26 Jan 2025 09:58:56 -0600
+ Sun, 26 Jan 2025 07:59:13 -0800 (PST)
+Date: Sun, 26 Jan 2025 09:59:09 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Adriano Cordova <adrianox@gmail.com>, joe.hershberger@ni.com,
- rfried.dev@gmail.com, jerome.forissier@linaro.org,
- ilias.apalodimas@linaro.org,
- Adriano Cordova <adriano.cordova@canonical.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/2] efi_loader: efi_net: let efi_net_set_dp properly
- update the device path
-Message-ID: <20250126155856.GS60249@bill-the-cat>
-References: <20241206171835.2403418-1-adriano.cordova@canonical.com>
- <20241206171835.2403418-3-adriano.cordova@canonical.com>
- <1839b1f7-b78c-450a-aa05-78858a4f2d45@gmx.de>
+To: ZHANG Yuntian <yt@radxa.com>
+Cc: Tony Dinh <mibodhi@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Git commit failed with mbedtls/framework
+Message-ID: <20250126155909.GA1233568@bill-the-cat>
+References: <CAJaLiFzTjHWCw+ioPZv660yQ0XLM6+SMJh3NV=NYivbtE1Uf_Q@mail.gmail.com>
+ <CAEfUkULhPuH15fDENXubhNPOQvbAjBv5f_yoeH7gjC4rhczxtA@mail.gmail.com>
+ <20241118153742.GO3600562@bill-the-cat>
+ <CAEfUkUJNOTCsh19VbKsHw9wWO1nn8o-OhRrAB46uhpKHO-Owsw@mail.gmail.com>
+ <20241118164122.GQ3600562@bill-the-cat>
+ <CAEfUkUJmSL8-XR6LUAKX=xW-mYQWNHzanRKvAVFaB2A9nA4W1A@mail.gmail.com>
+ <20241118171811.GR3600562@bill-the-cat>
+ <8823CB36AD9BEA6D+3c5f1842-bbaf-4dfa-96a6-d6d53b61ed10@radxa.com>
+ <20250124182330.GQ60249@bill-the-cat>
+ <8B2016527B9BCFBA+ca2da5a3-e889-4191-b951-88656d1043ab@radxa.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZkAbpg2MbU9kh5ip"
+ protocol="application/pgp-signature"; boundary="7YT+euLg359DPBGJ"
 Content-Disposition: inline
-In-Reply-To: <1839b1f7-b78c-450a-aa05-78858a4f2d45@gmx.de>
+In-Reply-To: <8B2016527B9BCFBA+ca2da5a3-e889-4191-b951-88656d1043ab@radxa.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,126 +107,330 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZkAbpg2MbU9kh5ip
-Content-Type: text/plain; charset=us-ascii
+--7YT+euLg359DPBGJ
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 04, 2025 at 12:05:24AM +0100, Heinrich Schuchardt wrote:
-> On 06.12.24 18:18, Adriano Cordova wrote:
-> > This commit fixes an use after free introduced in Commit e55a4acb54
-> > (" efi_loader: net: set EFI bootdevice device path to HTTP when loaded
-> > from wget"). The logic in efi_net_set_dp is reworked so that when the
-> > function is invoked it not only changes the value of the static variable
-> > net_dp (this is how the function was implemented in e55a4acb54) but also
-> > updates the protocol interface of the device path protocol in case efi
-> > has started.
-> >=20
-> > Fixes: e55a4acb54e8 ("efi_loader: net: set EFI bootdevice device path t=
-o HTTP when loaded from wget")
-> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > ---
-> > Changes in v2: use reinstall_protocol_interface() and new_net_dp in the=
- body of efi_net_set_dp()
-> >=20
-> >   lib/efi_loader/efi_net.c | 61 ++++++++++++++++++++++++++++++++++------
-> >   1 file changed, 52 insertions(+), 9 deletions(-)
-[snip]
-> > @@ -1055,18 +1058,58 @@ out_of_resources:
-> >    */
-> >   efi_status_t efi_net_set_dp(const char *dev, const char *server)
-> >   {
-> > -	efi_free_pool(net_dp);
-> > +	efi_status_t ret;
-> > +	struct efi_handler *phandler;
-> > +	struct efi_device_path *old_net_dp, *new_net_dp;
-> >=20
-> > -	net_dp =3D NULL;
-> > +	old_net_dp =3D net_dp;
-> > +	new_net_dp =3D NULL;
-> >   	if (!strcmp(dev, "Net"))
-> > -		net_dp =3D efi_dp_from_eth();
-> > +		new_net_dp =3D efi_dp_from_eth();
-> >   	else if (!strcmp(dev, "Http"))
-> > -		net_dp =3D efi_dp_from_http(server);
-> > +		new_net_dp =3D efi_dp_from_http(server);
-> >=20
-> > -	if (!net_dp)
-> > +	if (!new_net_dp) {
-> >   		return EFI_OUT_OF_RESOURCES;
-> > +	}
-> > +
-> > +	// If netobj is not started yet, end here.
-> > +	if (!netobj) {
-> > +		goto exit;
+On Sun, Jan 26, 2025 at 03:13:46PM +0800, ZHANG Yuntian wrote:
+> Hi Tom,
 >=20
-> This leads to a build failure with clang as you have not initialized
-> variable ret.
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/jobs/987832
->=20
-> > +	}
-> > +
-> > +	phandler =3D NULL;
-> > +	efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler=
-);
-> > +
-> > +	// If the device path protocol is not yet installed, install it
-> > +	if (!phandler)
-> > +		goto add;
-> > +
-> > +	// If it is already installed, try to update it
-> > +	ret =3D efi_reinstall_protocol_interface(&netobj->header, &efi_guid_d=
-evice_path,
-> > +					       old_net_dp, new_net_dp);
-> > +	if (ret !=3D EFI_SUCCESS)
-> > +		goto error;
-> > +
-> > +	net_dp =3D new_net_dp;
-> > +	efi_free_pool(old_net_dp);
+> On 2025/1/25 02:23, Tom Rini wrote:
+> > On Fri, Jan 24, 2025 at 02:05:28PM +0800, ZHANG Yuntian wrote:
+> > > Hi Tom,
+> > >=20
+> > > On 2024/11/19 01:18, Tom Rini wrote:
+> > > > On Mon, Nov 18, 2024 at 12:16:18PM -0500, Raymond Mao wrote:
+> > > > > Hi Tom,
+> > > > >=20
+> > > > > On Mon, 18 Nov 2024 at 11:41, Tom Rini <trini@konsulko.com> wrote:
+> > > > >=20
+> > > > > > On Mon, Nov 18, 2024 at 11:27:06AM -0500, Raymond Mao wrote:
+> > > > > > > Hi Tom,
+> > > > > > >=20
+> > > > > > > On Mon, 18 Nov 2024 at 10:37, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > >=20
+> > > > > > > > On Mon, Nov 18, 2024 at 10:24:32AM -0500, Raymond Mao wrote:
+> > > > > > > > > Hi Tony,
+> > > > > > > > >=20
+> > > > > > > > > On Sat, 16 Nov 2024 at 02:39, Tony Dinh <mibodhi@gmail.co=
+m> wrote:
+> > > > > > > > >=20
+> > > > > > > > > > Hi Raymond,
+> > > > > > > > > >=20
+> > > > > > > > > > On Fri, Nov 15, 2024 at 1:55=E2=80=AFPM Raymond Mao <
+> > > > > > raymond.mao@linaro.org>
+> > > > > > > > > > wrote:
+> > > > > > > > > > >=20
+> > > > > > > > > > > Hi Tony and Tom,
+> > > > > > > > > > >=20
+> > > > > > > > > > > On Fri, 15 Nov 2024 at 16:35, Tony Dinh <mibodhi@gmai=
+l.com>
+> > > > > > wrote:
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > Hi Raymond,
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > On Fri, Nov 15, 2024 at 1:09=E2=80=AFPM Raymond Mao=
+ <
+> > > > > > raymond.mao@linaro.org
+> > > > > > > > >=20
+> > > > > > > > > > wrote:
+> > > > > > > > > > > > >=20
+> > > > > > > > > > > > > Hi Tony
+> > > > > > > > > > > > >=20
+> > > > > > > > > > > > > On Fri, 15 Nov 2024 at 15:32, Tony Dinh <mibodhi@=
+gmail.com>
+> > > > > > > > wrote:
+> > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > On Fri, Nov 15, 2024 at 11:27=E2=80=AFAM Tony D=
+inh <
+> > > > > > mibodhi@gmail.com>
+> > > > > > > > > > wrote:
+> > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > On Fri, Nov 15, 2024 at 6:17=E2=80=AFAM Tom R=
+ini <
+> > > > > > trini@konsulko.com>
+> > > > > > > > > > wrote:
+> > > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > > On Thu, Nov 14, 2024 at 08:26:33PM -0800, T=
+ony Dinh
+> > > > > > wrote:
+> > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > > > I am on 2025.01-rc2, and I am trying to c=
+ommit some
+> > > > > > files.
+> > > > > > > > The
+> > > > > > > > > > error
+> > > > > > > > > > > > > > > > > seems to indicate this framework director=
+y might need
+> > > > > > some
+> > > > > > > > > > > > > > > > > modification. Did I miss something?
+> > > > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > > > error: 'lib/mbedtls/external/mbedtls/fram=
+ework' does
+> > > > > > not
+> > > > > > > > have
+> > > > > > > > > > a commit
+> > > > > > > > > > > > > > > > > checked out
+> > > > > > > > > > > > > > > > > fatal: updating files failed
+> > > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > > That's odd. You didn't happen to try out so=
+me of the
+> > > > > > previous
+> > > > > > > > > > lwIP
+> > > > > > > > > > > > > > > > iterations on that tree did you?
+> > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > No, I did not. The tree is clean with "make m=
+rproper" and
+> > > > > > on
+> > > > > > > > the
+> > > > > > > > > > > > > > > master branch. I just did a git pull and work=
+ed on it.
+> > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > I went and looked at
+> > > > > > https://github.com/Mbed-TLS/mbedtls.git.
+> > > > > > > > The
+> > > > > > > > > > > > > > > framework directory is pointing to a specific=
+ commit.
+> > > > > > > > > > > > > > > framework @ 3867faa
+> > > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > > I'll stash and repeat it on another clean tre=
+e.
+> > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > > I have the same commit error on a brand new tre=
+e.
+> > > > > > > > > > > > > >=20
+> > > > > > > > > > > > > I think you are talking about the test framework =
+of MbedTLS's
+> > > > > > > > > > original testsuite,
+> > > > > > > > > > > > > am I right?
+> > > > > > > > > > > > > MbedTLS was ported into U-Boot as a git subtree a=
+nd that
+> > > > > > > > framework is
+> > > > > > > > > > a git
+> > > > > > > > > > > > > submodule of original MbedTLS repo which was not =
+included in
+> > > > > > the
+> > > > > > > > > > porting
+> > > > > > > > > > > > > of U-Boot since U-Boot has its own testsuite.
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > Here is what I found.
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > git clone https://github.com/u-boot/u-boot.git
+> > > > > > u-boot-master-test
+> > > > > > > > > > > > cd /usr/src/u-boot-master-test/
+> > > > > > > > > > > > patch -p1 <
+> > > > > > > > ../builds-u-boot-marvell/sheevaplug/sheevaplug_bootstd.patch
+> > > > > > > > > > > > git add .
+> > > > > > > > > > > > git commit . -m "arm: kirkwood: Enable bootstd and =
+remove jffs2
+> > > > > > for
+> > > > > > > > > > > > Sheevaplug board" -e
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > The git commit above gave out this error:
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > error: 'lib/mbedtls/external/mbedtls/framework' doe=
+s not have a
+> > > > > > > > commit
+> > > > > > > > > > > > checked out
+> > > > > > > > > > > > fatal: updating files failed
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > So I tried to commit only the specific files, and i=
+t works OK.
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > git commit configs/sheevaplug_defconfig
+> > > > > > include/configs/sheevaplug.h
+> > > > > > > > > > > > -m "arm: kirkwood: Enable bootstd and remove jffs2 =
+for
+> > > > > > Sheevaplug
+> > > > > > > > > > > > board" -e
+> > > > > > > > > > > > [master 47de8cff2d] arm: kirkwood: Enable bootstd a=
+nd remove
+> > > > > > jffs2
+> > > > > > > > for
+> > > > > > > > > > > > Sheevaplug board
+> > > > > > > > > > > >    2 files changed, 17 insertions(+), 19 deletions(=
+-)
+> > > > > > > > > > > >=20
+> > > > > > > > > > > > I think it must be what Raymond said above. So perh=
+aps during
+> > > > > > Tom's
+> > > > > > > > PR
+> > > > > > > > > > > > pull, the framework directory was created. But "git=
+ commit ."
+> > > > > > does
+> > > > > > > > not
+> > > > > > > > > > > > like the empty lib/mbedtls/external/mbedtls/framewo=
+rk directory.
+> > > > > > > > > > > >=20
+> > > > > > > > > > > Under the native MbedTLS git repo, by default it has a
+> > > > > > "framework"
+> > > > > > > > > > pointing to
+> > > > > > > > > > > its git submodule.
+> > > > > > > > > > > Maybe we should mark it in the gitignore.
+> > > > > > > > > >=20
+> > > > > > > > > > I've tried .gitignore but could not make it work (my Gi=
+tfu is
+> > > > > > pretty
+> > > > > > > > > > lousy). Can you suggest how that should be done?
+> > > > > > > > > >=20
+> > > > > > > > > > You can use the command without the '.' : git commit -m
+> > > > > > "<commit_msg>",
+> > > > > > > > > this
+> > > > > > > > > should work.
+> > > > > > > > >=20
+> > > > > > > > > @Tom Rini <trini@konsulko.com> Shall we remove both
+> > > > > > > > > "lib/mbedtls/external/mbedtls/.gitmodules" and
+> > > > > > > > > "lib/mbedtls/external/mbedtls/framework"? I can submit a =
+patch if you
+> > > > > > > > agree.
+> > > > > > > >=20
+> > > > > > > > Can we do that and not make a problem for the next resync?
+> > > > > > > >=20
+> > > > > > > > Hmmm, no, this cannot be pulled back to the MbedTLS upstrea=
+m so still a
+> > > > > > > problem
+> > > > > > > when resync.
+> > > > > > > Another option is to include that git submodule into the U-Bo=
+ot project,
+> > > > > > > this needs
+> > > > > > > to revert the commit of introducing the library and redo the =
+git subtree
+> > > > > > > after the
+> > > > > > > submodule is updated, but it does not seem to be a good choic=
+e as we
+> > > > > > don't
+> > > > > > > use
+> > > > > > > that test framework in U-Boot at all.
+> > > > > > > Right now I don't have a perfect solution, maybe we can accep=
+t using git
+> > > > > > > commit
+> > > > > > > without the '.'?
+> > > > > >=20
+> > > > > > Hmm. Maybe we just delete the .gitmodules / directory and it sh=
+ouldn't
+> > > > > > be too hard to deal with on updates. I have to do some small fi=
+xups with
+> > > > > > the device tree ones anyhow sometimes.
+> > > > > >=20
+> > > > > > How about checking and deleting this in the subtree update scri=
+pt?
+> > > > > Then we can skip manually doing this each time.
+> > > > > I can make a patch for it if you feel fine.
+> > > >=20
+> > > > Lets worry about that if it's a problem when we resync next.
+> > >=20
+> > > I'm currently working with Jonas Karlman's Rockchip fork[1] which is =
+based
+> > > on a416d9e680718de1c76c4196e1db77e3ca07662f. The fork is included as =
+a git
+> > > submodule so we can provide distro packaging[2] that are unrelated to
+> > > U-Boot. We build our package with GitHub Action, and this issue curre=
+ntly
+> > > blocks us from checking out the code at all with the following workfl=
+ow
+> > > snippet:
+> > >=20
+> > >        - name: Checkout
+> > >          uses: actions/checkout@v4
+> > >          with:
+> > >            submodules: recursive
+> > >=20
+> > > Related error logs are here:
+> > >=20
+> > > |> Fetching submodules
+> > >    /usr/bin/git submodule sync --recursive
+> > >    /usr/bin/git -c protocol.version=3D2 submodule update --init --for=
+ce
+> > > --recursive
+> > >    Submodule 'src/rkbin' (https://github.com/rockchip-linux/rkbin.git)
+> > > registered for path 'src/rkbin'
+> > >    Submodule 'src/u-boot' (https://github.com/Kwiboo/u-boot-rockchip.=
+git)
+> > > registered for path 'src/u-boot'
+> > >    Cloning into '/home/runner/work/u-boot-kwiboo/u-boot-kwiboo/src/rk=
+bin'...
+> > >    Cloning into '/home/runner/work/u-boot-kwiboo/u-boot-kwiboo/src/u-=
+boot'...
+> > >    Submodule path 'src/rkbin': checked out
+> > > '0f8ac860f0479da56a1decae207ddc99e289f2e2'
+> > >    Submodule path 'src/u-boot': checked out
+> > > 'f3231571f4f9c3f72dcb6458aaa2de2462c605df'
+> > >    Error: fatal: No url found for submodule path
+> > > 'src/u-boot/lib/mbedtls/external/mbedtls/framework' in .gitmodules
+> > >    Error: fatal: Failed to recurse into submodule path 'src/u-boot'
+> > >    Error: The process '/usr/bin/git' failed with exit code 128
+> > >=20
+> > > This issue potentially breaks all projects who include the recent U-B=
+oot as
+> > > a git submodule in their GitHub Workflow.
+> > >=20
+> > > 1: https://github.com/Kwiboo/u-boot-rockchip/tree/rk3528-2025.04-wip
+> > > 2: https://github.com/radxa-pkg/u-boot-kwiboo/actions
 > >=20
-> >   	return EFI_SUCCESS;
-> > +add:
-> > +	ret =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> > +			       new_net_dp);
-> > +	if (ret !=3D EFI_SUCCESS)
-> > +		goto error;
-> > +exit:
-> > +	net_dp =3D new_net_dp;
+> > What if instead of "submodules: recursive" you use a run statement?
+> > https://github.com/marketplace/actions/checkout-submodules
+> >=20
 >=20
-> Why should we set net_dp if there is no net_obj?
+> We can certainly work around it in many different ways. But the point is
+> that U-Boot is currently a broken repository in regard to git submodule
+> operations, and require special treatments to integrate with existing
+> pipelines. This was not the case before.
 
-Because prior to this patch we set net_dp =3D NULL at the start of the
-function and with this patch nothing is updating net_dp until much later
-in the function.
+Unfortunately if I recall things correctly there's not a good way for us
+to solve the problem in our tree since bringing in the problematic
+submodule via subtree just grows our codebase with things we don't use.
 
-> Instead of jumping to exit, we can jump to error: with
->=20
-> ret =3D EFI_DEVICE_ERROR.
-
-I'm not entirely sure what you mean by that. But can you perhaps v3
-this? I still can't re-enable CONFIG_CMD_BOOTEFI_SELFTEST on any of my
-platforms due to this problem.
+Perhaps you could provide a patch to doc/build/source.rst with an
+example of how you're working around the problem so that it's easier for
+others when they run in to this problem? Thanks!
 
 --=20
 Tom
 
---ZkAbpg2MbU9kh5ip
+--7YT+euLg359DPBGJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeWW70ACgkQFHw5/5Y0
-tyzFqgwApLIeYoJYYjEb82pIS9usff3Tey/dmw9apyNsuO05u6PZg2f6Osnf1VsA
-o5joAbuV1PtwJs1Rc3LAEGiK8tX0jcE6t/hn18vJ8O/HX8mwCEBsdHRD/EnELseO
-MtHHC1BnosWs5VsLkhgARvHENEMDPUVnFwoJIzYCwvddocCoKRWgHyCKZfLswwz2
-wwsLDy5XBVUGfx+UKAZd9pvLOigB+VsnXjW0ygH/cinTfkefKLCVeC42xMnswKie
-TFz/0ovBL+LSPrZR6fDqOP/4qNsFLRM7asYtkkb5poYnxF0WBb8nF9p4/XNQHtGj
-Sr+6yB3+Ee+JuucYJFPk+XM1qLEB3NSNKku44QrPjEYJORSzaYIVQzUqKvTrwq+W
-uhkVFeJ/dnyGvk8dUr9+yMtKhkprCRkOa15HiSAsOJZV7Y1HflGCcaLXuiCPvkMW
-kGcUMIgSQ5gKL03h+2SjlzlKrYJ3ezatdr4QJsdBsUCfe7hQbh31XxKc904WWApj
-qmwe0eYU
-=mHvn
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeWW80ACgkQFHw5/5Y0
+tyxDdwv/cOY1gn775sJTi7UiXCF8rpZgyPV7dcsNZ+p40xsOV2nZHaILpPr9TFDH
+VqCLljhjte6Ig4Wz6evtZbmdEJCUd4YKGxxOvvWXyx/k6UAGfXYQ0luMRUvdcLWv
+cBtyUA/tWNr0l1Dpmk28N9APefJuXo9t1CX+o0SjeR9RuZq07sir/hwXQGf5+3rX
+p+kYLDBJOWLWkn8AHSdZO93Hc/KA9+VG+YAg6ZFbhkf4VUWUa6GMxl8tbBC0mN1s
+ZfeX1v2dp7G49Eh55WhVfv5mkjv52OU1g1wDoByEQCCDjrFRfz1CC8lF/48pws7i
+FQZT+QbwxIakk0cr19JsG4Zc+zGd3iJqLlKiNCLU8UHYfpISjEptJFJjC2ZwSFcF
+eZfTvOaXZwgO2mCmU0GOTMHnCUu5583Qp6z9x/K5Gws4Rqq5dmzfUcAP4iChxW5Q
+fekNsesrHD83Z+ib3VoewmO7eTf5r69iL/5Hbj+R/tmYIdGD5chJ0AEVXO/NaqOo
+0CD76m6G
+=Kz0a
 -----END PGP SIGNATURE-----
 
---ZkAbpg2MbU9kh5ip--
+--7YT+euLg359DPBGJ--
