@@ -4,87 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B59BEC0218D
-	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 18:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90293C0218D
+	for <u-boot@archiver.kernel.org>; Sun, 26 Jan 2025 21:50:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57F5E80FB1;
-	Sun, 26 Jan 2025 19:44:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AE0D280F98;
+	Sun, 26 Jan 2025 22:50:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZTCKZQHE";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Bbfk7cwN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB65880FD8; Sun, 26 Jan 2025 19:44:38 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4375280FAA; Sun, 26 Jan 2025 22:50:03 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::610])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 881C7810F6
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 19:44:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B0CE80F85
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 22:49:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-8521df70be6so219599839f.1
- for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 10:44:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737917073; x=1738521873; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m42KaAXREQdUlhYztBxm5+1Dl5fODjJWitEGWVc2knk=;
- b=ZTCKZQHEyTGfq9AefXbIEvh730Ny9cGux5TehnZqbjZkvukxxcY8MQc9iqMS7G7x1d
- mg4Rb2KK+QS72nlCcBa0dyOdMZNvkaVHxFqGhhpYl3LY3EvU0d4QLVE7pxje+AIWYnC2
- D6hdvc6AurqaSt06E/0+eHzi8GxAYomLz04Mw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737917073; x=1738521873;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m42KaAXREQdUlhYztBxm5+1Dl5fODjJWitEGWVc2knk=;
- b=w4waCKYpyTKpFFZhKcYJUTg/gs+Yoqo/56GnAUY4hRHAU2BHgdKxDP5qhkgjM8bXDS
- v/y08mbWFaSpwgmPj4lhDaHzfSupjMm8m/+RwrBZjlndJcZpfjIkfjU+Y83mmckcCBH0
- XgUYIxcHJCjnLcI/Ss18Vie2RvQigKGG62CDoxPZ2yQDynQlo8wiSLaQ/+lfKycVJnJY
- 2XXMYu1lvOBrbp8zoh4MM6YAou7cpuSNEfRYoAeRl+wYBncel7c9ABUUAchNQiJKy/nQ
- c29/acByRSxItEGaKSaNUwtTIwtBzP8lfCWwQ8k6s4xUgdZZXRu+OI4BD9V4DYgCz4BZ
- GKHQ==
-X-Gm-Message-State: AOJu0YxBeNRvvrPFL2Fyw/tGnu9cMAd1xfRyuoKKKSEmVBjWTtex4PDc
- UEDsXajcJvRb3f0XdPaRt/KbsYChMsDrlSTpeDn5ExkCCCTdf7dnyZqzchGB5Tz0DZ1Mn4NC+Nk
- =
-X-Gm-Gg: ASbGnctMgBwQ275r4Nt64xY4oVK7QNI2PF81qnTjZS65EQJRHMlQcCoFJi3IvirEl/T
- 6PjmXD3SzJ1dsToz0im5VtDnwXr7Mn3gBUtRgC+P7fKv+8IKDRILNAKUTFTceFpYdWKhWMpeOav
- BXaSTnNUb8Qv1mFx2/TPMRQc/lus+95DtT6fe6fXzdGihPoBJKyDKN9aBOpCTcerpe4bDf06AuI
- j6jmLJ/m/I58aaGulym3QVx47V3T0t9iMbcUqf2b6sdOlDB9KcEcWacxk3xxiFx1TjAJuiBTmNj
- y5l0VxgqzGjeSDhVpSvzlAryjVG9JcupGbvaI7Ct/A==
-X-Google-Smtp-Source: AGHT+IEM7BwkIn1fNahpN/ReFqVUlhG/nluI1I6DZlrEuqyqfMyZrKHSmCvsV762rN7z/4BYLD1cfA==
-X-Received: by 2002:a05:6e02:17cf:b0:3cf:b365:dcf8 with SMTP id
- e9e14a558f8ab-3cfb365f155mr200693745ab.21.1737917072538; 
- Sun, 26 Jan 2025 10:44:32 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ec1da317fesm2160641173.42.2025.01.26.10.44.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jan 2025 10:44:31 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Masson <jmasson@baylibre.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 19/19] vbe: Add an implementation of VBE-ABrec
-Date: Sun, 26 Jan 2025 11:43:29 -0700
-Message-ID: <20250126184333.4058848-20-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250126184333.4058848-1-sjg@chromium.org>
-References: <20250126184333.4058848-1-sjg@chromium.org>
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VrNQp1iZmp2oHfatUUD6Zgtf1Uhsw2WdVY+21N4Cf7GIRx4atRjW+5KZNzIgUJGsUu27ZE/C/KbVrzHtzYL9dbCHATkubrcyNqoafIt49AS1uqAie3apWET7xMmLwsQ7JMIjJj+Rb2gE5iZ06vHsE1d0FUXXge0Rbx57z18pkfANiKmCi64AZxRDriT2dzi5TMiTt6/PRaUY43bJgEDF8tExk1TnF5apK46nZiWkaHzCWF6rbPanrT1mKpjjUU77Mp2jUMrOdFJNwA3oAe1oX3lNPAVAGySGxLaXdWHCG24p78pAtbuiYxz0VkJpfQ3lhUXjWXVtrGKJdoQGsBxqbw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wFGbNHaCgMDeG/lplTC52E7CdKopZOJSNA1MU6Z0AXo=;
+ b=D2JWS5LuX8/sn6rZ8b3DNQp09aD+DNwERAgWCrbgWiXYbVS/xGapWdiYZhc9q2TjeqLZnT9welXg1b5VXEHpUP0BUB8DCaLbNOS9zwk1kXEThmn/NuuHb3zNO4gU/Ex/MAZ1cWOskdIIRpqb7X6+ZUgt/LN6qoylX2qElzDB2YREdK62pok5w9sdkkyKjKngZe/nHhJsTE8rWRqWSNc8z+c0mAncpHEztQkSAP+eCAe8Ss1w/bZEQp5l934yZSOkKOcBCPEJgMlQKUpaZHmFeXamBsTtSw1RYwS9SIWu9fdkQDYUHb/5ABNUHLFUmgiSg2bLMdkG59KAuXXQeqHXpw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wFGbNHaCgMDeG/lplTC52E7CdKopZOJSNA1MU6Z0AXo=;
+ b=Bbfk7cwNAPkxFaewoASbzVT/XodkQSn+cfFbffU+QoY3eKMGeSmzZi5oxgjhL/ZTzYT565Qpfe1FuGBBoDfKsfpEk+3k7wLvHd9CehLWDlRJvVK/EJ5j1onaTyNczYBgNnapuzwalq1yj1ph18ZS8RnhjCfaQZ/acYsktsfwDc8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
+ by GV1PR10MB5889.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:55::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.13; Sun, 26 Jan
+ 2025 21:49:54 +0000
+Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7e2c:5309:f792:ded4]) by DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7e2c:5309:f792:ded4%4]) with mapi id 15.20.8398.005; Sun, 26 Jan 2025
+ 21:49:54 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,  u-boot@lists.denx.de,
+ Aaron Williams <awilliams@marvell.com>,  Anatolij Gustschin
+ <agust@denx.de>,  Angelo Dureghello <angelo@kernel-space.org>,  Christian
+ Marangi <ansuelsmth@gmail.com>,  Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,  Jaehoon Chung
+ <jh80.chung@samsung.com>,  Michael Polyntsov
+ <michael.polyntsov@iopsys.eu>,  Michael Trimarchi
+ <michael@amarulasolutions.com>,  Nikhil M Jain <n-jain1@ti.com>,  Peng Fan
+ <peng.fan@nxp.com>,  Peter Robinson <pbrobinson@gmail.com>,  Ronald Wahl
+ <ronald.wahl@legrand.com>,  Simon Glass <sjg@chromium.org>,  Stefan Roese
+ <sr@denx.de>,  Tim Harvey <tharvey@gateworks.com>,  Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH 1/8] cyclic: Prevent corruption of cyclic list on
+ reassignment
+In-Reply-To: <f2192348-1c8b-4858-b138-e1a894dff92f@mailbox.org> (Marek Vasut's
+ message of "Sat, 25 Jan 2025 14:22:59 +0100")
+References: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
+ <87cyghx2ru.fsf@prevas.dk>
+ <f2192348-1c8b-4858-b138-e1a894dff92f@mailbox.org>
+Date: Sun, 26 Jan 2025 22:49:52 +0100
+Message-ID: <87r04putxb.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0091.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:9::29) To DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:41::17)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB7PR10MB2475:EE_|GV1PR10MB5889:EE_
+X-MS-Office365-Filtering-Correlation-Id: b3ea6bdb-472a-4758-3d18-08dd3e535e1d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|1800799024|7416014|376014|366016|7053199007|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BSu0Sp5u3pRcF20JVAhbW3/dT6B3EsNZIvH589lXhXM0VnW8QY7AJ3xmIDCT?=
+ =?us-ascii?Q?fiLIzw2+FM/oZ0qQ5FRniaUB29DOzMfKIEYYIuAr2NGathNCsp4WiFqZtVbC?=
+ =?us-ascii?Q?GB3GfRlzfQoTdd+j/FLSWemWuomueQXqH5uFCma/QnfDPE/jEx07wjYnd9k3?=
+ =?us-ascii?Q?rKSerIVHvHERdXQhaF81ZwXagYMzjZSVBpZqr1FmHmNFY/TWvFvqz5tqeXrS?=
+ =?us-ascii?Q?KjmRs8Dhf5isLhUL4kk/iLB4soPWTI+PpcvJXwq9/xTaMddxmlmRnNX88Y5Z?=
+ =?us-ascii?Q?ITUpj6KYlcPaiHrlM7e9Stm+V6XY6muRtetQxxnhx/LpOgqOBRHZaENsFmuI?=
+ =?us-ascii?Q?9DUBW422q7Iid5YWnnZQjIuN3YgOm7V6awZpwkof6mKemBVWJCQDPq3aYtSp?=
+ =?us-ascii?Q?HuEEAQPVPYP0b0tWJM/q/PQ0uvCSKfFsz8/97DmAjUNCabujb/jNddDa1P2W?=
+ =?us-ascii?Q?8Bfzq9qCrY1gRayMN5J2BiLYWUNflAN4+ELzHNywAGGvJeaORFh0eoGYpQ7v?=
+ =?us-ascii?Q?0NfOGI1kYwuN05PUCheDZR1xufGSlQJB4NQOf+XRNpx218hhYEY3UxrgKTA6?=
+ =?us-ascii?Q?3Ffh24VIP3/3r/nPyuFj3TPlUkXKaOnP+L5XSXYHJ6TRJmQ7dS/o44o4K1pj?=
+ =?us-ascii?Q?Tq2lRLrrsVKUc3R+yr+m+2Xf2MzBiuMhAa+gQpYgmBa44R5/MSgWjRr62L/T?=
+ =?us-ascii?Q?R4P6drlXBA9NymHnuP/AVcNgDMfSs4MftFHQK6tUb9mR7dcUkpqNg+Cpf3hX?=
+ =?us-ascii?Q?pZwzxsy2iFZUCWbqtu4yRVSo59/p9MYzjwqu4ekE5UQweHDWhHvATkbIRqhp?=
+ =?us-ascii?Q?VJeiJV129aLSZAI1QDxVN7GW36JpTL7m17OQmqb1UBEwJGOGqxXMOlvAROvt?=
+ =?us-ascii?Q?jZVXcaq5Z2WXxPpNdyljqHt1jLy46Fqf6MPBsWwRB5k2r2whRxjhhaFxyRyX?=
+ =?us-ascii?Q?/3Rxmz27l06sVwp41QvLwQwBGCH8mlJXkDf4N7EF5PmTq2tVbOiMdN4NP5lv?=
+ =?us-ascii?Q?BxXtdJH6LQrzS+wAwJdQSpLAdXe9/WOB6vL6OS7rRIOAuu9m9uX/LO+aPqsJ?=
+ =?us-ascii?Q?UqiPgFhyTCIfoW33tUOrLZa7nnMcOdJuP4Zsh/AgyMdxCd/+M1RerORA8ami?=
+ =?us-ascii?Q?QNX9+L7t5e8TuSTWlMCA07ERqbyT7SQtQVVwZpbVCbwQ6g1AYqY1gMz3NXGf?=
+ =?us-ascii?Q?Ph+hfyOhS/VY/344a2cvgRw2YNV4Si0sObNqtkDYACzBzm/KT002DLuRGyd/?=
+ =?us-ascii?Q?T6bNw5vpjK6eCpn2PLo37hffj6eoLLYdY/KVA/x3R7wFSAwR8lcLlI8cU6rg?=
+ =?us-ascii?Q?PYLsUc7rT2l7x4pRcJ8r3/7RJCnIxzhK23hHJWdOC+kT1TUPh1aC7hK7UL9W?=
+ =?us-ascii?Q?xu4XWRpDIGPU1CtcMBb8/gTpAXvhbHRQmtPjIOv2gTHbgSr+5I08FN6kMeCU?=
+ =?us-ascii?Q?ylJjxf5jA5LhR5uvQasoP0OTQlNcZ4N9?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(1800799024)(7416014)(376014)(366016)(7053199007)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?y/8FOJFoR1jj57lz+EdGr7WZSfCUFa63mW4OPZWqXg1/PMmc0iBd0DUKWQNP?=
+ =?us-ascii?Q?e+PIbbjHA/wU2Wpx4dsSwt7cS8fK3yLAMe02qefwXFzNpDFuVsQ+dhKNg+RB?=
+ =?us-ascii?Q?7uHCouu6zVxgO9lf9Htok6drQkzt4c/1K/2a/4KK5b0Rst0vSGyaOKfY4md+?=
+ =?us-ascii?Q?A+PbgDV6efvne2AjES3zqMECg1oVZkCof3TTFQsEFqMF+/PJNd6S9Ivbn2AM?=
+ =?us-ascii?Q?WySIOpVykuhwDpOA8l3T/IknWf5ILUuGSxLLYTY2M5JClnDdJ8COpwA8ovNJ?=
+ =?us-ascii?Q?wxbg9ZK9ppNYpcWSNKL+IjBnNTpY5eaYR3qMQMf1jXqedGDP3qekRarhsWTH?=
+ =?us-ascii?Q?z9QJroXxO7e33Jr8ILcvAN2Zxy6RGI3HQ6c2Eh638wNHUhyo5Pc4w/L8l4H9?=
+ =?us-ascii?Q?E7uIg/GJ88FveLFNwprKxTfGJKU1o6F6htax6bbO3TGoaqw4718HiILMmXNb?=
+ =?us-ascii?Q?yobKx3Ydg4q2e8oS+7avAgwlz0z6B/eLWcaBzOD3CXeAolLC6eoDyfMFoLle?=
+ =?us-ascii?Q?+Tou30E1YeVNrzZHTfyK9iQki4Z3nsKYsycGau9xhawfbTxNM6golep/O8LH?=
+ =?us-ascii?Q?g5XAXJoZ0gKv43cN6pczTjTx987NbnBUz/zfjl68YDImVrKzmHF6cYP4+e7O?=
+ =?us-ascii?Q?oaKbzZw3gKPBRqeKi42N0hiG4cX5wWBi5d0jl3BySN1fENttqVMZqCJsZ2kY?=
+ =?us-ascii?Q?eZErP3G7ZVEvrUfOMMXIDH13xkiRkUXJ+YD/2jVRakv21ntkR7smXPFWK8Mn?=
+ =?us-ascii?Q?mpioagj0Q1CmmvVCfHiQ83Ar63GJmFQ8puPbA06NaquNdX+7aZxiyOrNGhOU?=
+ =?us-ascii?Q?b0PJZ3aIcXd8p6fa/R5CZfwyQA3zKD5xeLrO5LZcDrgzaj/a2+cFYSy/RYWX?=
+ =?us-ascii?Q?4jh8IYYziHCJWbObCqOH57Rkejfr/vjiLn3T0CPgpxTlwEROFS2QR7dn4MQ9?=
+ =?us-ascii?Q?8ZnvCRQyN7iOI7dqWLi4lsPB74ToY8jjUzfw4nnDV/VfxLnFO5lgU62tlMet?=
+ =?us-ascii?Q?/U0qGjKzjva0YEeMDvEBJ6kMValEP9ajFvfkXlgMVtmwfQKmbAFsr+25WzyO?=
+ =?us-ascii?Q?mVDO1nzg9Ih2jXvdnQl4gN1iTThGTp2KlDZi6O52UMmsRWawxzGHUBBX+h5E?=
+ =?us-ascii?Q?NvwEFncpMU86QH7T9/Dg6WgqOUWex4xF1IwZ3Y9uHJWe+gWIoWVKnS4iU5Ch?=
+ =?us-ascii?Q?axfqtndGLB+rFglXsvNOa2wOHfLHXBCGce2xXZKN/qdyWAxZezbtujMjCX6o?=
+ =?us-ascii?Q?gDuvooV5sdEGe73XhF0IFidzXKg7ska8Ar3Tn0DShjGoWwM7LJW3/dbcrzvr?=
+ =?us-ascii?Q?iZd2HjRpPuvfBcJH4bsANLC0t7Pk+0zqckWfXvNXcQ1kzYHUsflOA0WO3nn7?=
+ =?us-ascii?Q?nnxkfkiM34EWBmgPLxqxhhuffEmZIpte8RKBx93gWP57Eh6CFQKupKUCul/3?=
+ =?us-ascii?Q?it0/ZbQD+diajWft5CtYVZ5ZbmgN8yuSkVmbMFj3N1XOayZ9/27nkh3A3ZLu?=
+ =?us-ascii?Q?HepCyTswPTcb4ugzBeZMjm9Jx0RtXwqoc4BwKlNF0yUIY6oAljM4CKdwSg3X?=
+ =?us-ascii?Q?nUOAH5EWlTxPMDQzpJYq9mhMM5dxo0ml6fjxM4gUYGlX8evD6pDHprYbi1k0?=
+ =?us-ascii?Q?Mg=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: b3ea6bdb-472a-4758-3d18-08dd3e535e1d
+X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2025 21:49:54.0911 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Bh3q9l4MNQ72/ioGCUQDsand/CL341JXdqRX9KWhwXki4Ny5fZItWHJnpvvQ9TJDuowdTGkj+5ypQiSsdgzv5HGFccOceFJ+uhMhFcueUvw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB5889
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,780 +172,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So far only VBE-simple is implemented in U-Boot. This supports a single
-image which can be updated in situ.
+On Sat, Jan 25 2025, Marek Vasut <marek.vasut@mailbox.org> wrote:
 
-It is often necessary to support two images (A and B) so that the board
-is not bricked if the update is interrupted or is bad.
+> On 1/20/25 10:17 AM, Rasmus Villemoes wrote:
+>> On Sat, Jan 18 2025, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+>> 
+>>> Make cyclic_register() return error code, 0 in case of success,
+>>> -EALREADY in case the called attempts to re-register already
+>>> registered struct cyclic_info. The re-registration would lead
+>>> to corruption of gd->cyclic_list because the re-registration
+>>> would memset() one of its nodes, prevent that. Unregister only
+>>> initialized struct cyclic_info.
+>> I had considered something like this, but I don't like it, because
+>> it
+>> relies on the cyclic structure (or more likely whatever structure it is
+>> embedded in) being initially zero-initialized.
+>
+> True
+>
+>> And if the caller doesn't
+>> know whether the cyclic_info is already registered or not, he can't do a
+>> memset() of it.
+>
+> This is what can happen right now, which is dangerous and what this
+> series attempts to address.
+>
+>> So my preference would be that we instead simply iterate the current
+>> list to see if the struct cyclic_info is already registered that
+>> way.
+>
+> That I can do, but it will be a bit slower.
+>
 
-In some cases, a non-updatable recovery image is desirable, so that the
-board can be returned to a known-good state in the event of a serious
-failure.
+Please. I tried to preempt those kinds of objections by pointing out
+that we already traverse the list thousands of times per second, and I
+highly doubt we'll ever have more than, say, 10 elements registered, so
+we're adding at most that many extra traversals, of a ridiculously short
+linked list.
 
-Introduce ABrec which provides these features. It supports three
-independent images and the logic to select the desired one on boot.
+>> Also, I think I'd prefer if double cyclic_register() is allowed and
+>> always succeeds; this could be used to change the period of an already
+>> registered instance, for example.
+>
+> This would be terribly overloaded interface, no, let's not do that.
 
-While we are here, fix a debug message to indicate the function it
-called. Provide a maintainers entry for VBE.
+I disagree.
 
-Note that fwupdated only supports VBE-simple so far, but supports for
-ABrec will appear in time.
+> Better introduce a dedicated function for that kind of period adjustment.
+>
+>> Also, that avoids making the
+>> interfaces fallible.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+And I believe that _this_ is an important property to get/preserve. 
 
- MAINTAINERS         |   7 ++
- boot/Kconfig        |  73 ++++++++++++
- boot/Makefile       |   4 +
- boot/vbe_abrec.c    |  83 +++++++++++++
- boot/vbe_abrec.h    | 115 ++++++++++++++++++
- boot/vbe_abrec_fw.c | 276 ++++++++++++++++++++++++++++++++++++++++++++
- boot/vbe_common.c   |   5 +
- boot/vbe_common.h   |  43 +++++++
- include/vbe.h       |  21 ++++
- 9 files changed, 627 insertions(+)
- create mode 100644 boot/vbe_abrec.c
- create mode 100644 boot/vbe_abrec.h
- create mode 100644 boot/vbe_abrec_fw.c
+>> And cyclic_unregister() could similarly just check
+>> whether the passed pointer is already on the list, and be a no-op in
+>> case it's not. Those extra list traversals are not expensive (we're
+>> traversing them thousands of times per second anyway in cyclic_run), and
+>> I doubt one would ever has more than about 10 items on the list.
+>> IOW, I'd suggest adding an internal
+>> bool cyclic_is_registered(struct cyclic_info *info)
+>> {
+>>    struct cyclic_info *c;
+>>    hlist_for_each(...) if (c == info) return true;
+>
+> I don't think this works, because that struct cyclic_info contains
+> .next_call member, which is updated over time, so this exact match
+> would not work as-is.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 9ba0c98cef2..d44233875df 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1802,6 +1802,13 @@ M:	Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
- S:	Maintained
- F:	test/lib/uuid.c
- 
-+VBE
-+M:	Simon Glass <sjg@chromium.org>
-+S:	Maintained
-+F:	boot/vbe*
-+F:	common/spl_reloc.c
-+F:	include/vbe.h
-+
- VIDEO
- M:	Anatolij Gustschin <agust@denx.de>
- S:	Maintained
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 73106f7a617..415d9fdfb80 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -740,6 +740,20 @@ config BOOTMETH_VBE_SIMPLE
- 	  firmware image in boot media such as MMC. It does not support any sort
- 	  of rollback, recovery or A/B boot.
- 
-+config BOOTMETH_VBE_ABREC
-+	bool "Bootdev support for VBE 'a/b/recovery' method"
-+	imply SPL_CRC8
-+	imply VPL_CRC8
-+	help
-+	  Enables support for VBE 'abrec' boot. This allows updating one of an
-+	  A or B firmware image in boot media such as MMC. The new firmware is
-+	  tried and if it boots, it is copied to the other image, so that both
-+	  A and B have the same version. If neither firmware image passes the
-+	  verification step, a recovery image is booted. This method will
-+	  eventually provide rollback protection as well.
-+
-+if BOOTMETH_VBE_SIMPLE
-+
- config BOOTMETH_VBE_SIMPLE_OS
- 	bool "Bootdev support for VBE 'simple' method OS phase"
- 	default y
-@@ -798,6 +812,65 @@ config TPL_BOOTMETH_VBE_SIMPLE_FW
- 
- endif # BOOTMETH_VBE_SIMPLE
- 
-+if BOOTMETH_VBE_ABREC
-+
-+config SPL_BOOTMETH_VBE_ABREC
-+	bool "Bootdev support for VBE 'abrec' method (SPL)"
-+	depends on SPL
-+	default y if VPL
-+	help
-+	  Enables support for VBE 'abrec' boot. The SPL part of this
-+	  implementation simply loads U-Boot from the image selected by the
-+	  VPL phase.
-+
-+config TPL_BOOTMETH_VBE_ABREC
-+	bool "Bootdev support for VBE 'abrec' method (TPL)"
-+	depends on TPL
-+	select TPL_FIT
-+	default y
-+	help
-+	  Enables support for VBE 'abrec' boot. The TPL part of this
-+	  implementation simply jumps to VPL after device init is completed.
-+
-+config VPL_BOOTMETH_VBE_ABREC
-+	bool "Bootdev support for VBE 'abrec' method (VPL)"
-+	depends on VPL
-+	default y
-+	help
-+	  Enables support for VBE 'abrec' boot. The VPL part of this
-+	  implementation selects which SPL to use (A, B or recovery) and then
-+	  boots into SPL.
-+
-+config SPL_BOOTMETH_VBE_ABREC_FW
-+	bool "Bootdev support for VBE 'abrec' method firmware phase (SPL)"
-+	depends on SPL
-+	default y if VPL
-+	help
-+	  Enables support for VBE 'abrec' boot. The SPL part of this
-+	  implementation simply loads U-Boot from the image selected by the
-+	  VPL phase.
-+
-+config TPL_BOOTMETH_VBE_ABREC_FW
-+	bool "Bootdev support for VBE 'abrec' method firmware phase (TPL)"
-+	depends on TPL
-+	default y if VPL
-+	help
-+	  Enables support for VBE 'abrec' boot. The TPL part of this
-+	  implementation simply jumps to VPL after device init is completed.
-+
-+config VPL_BOOTMETH_VBE_ABREC_FW
-+	bool "Bootdev support for VBE 'abrec' method firmware phase (VPL)"
-+	depends on VPL
-+	default y
-+	help
-+	  Enables support for VBE 'abrec' boot. The VPL part of this
-+	  implementation selects which SPL to use (A, B or recovery) and then
-+	  boots into SPL.
-+
-+endif # BOOTMETH_VBE_ABREC
-+
-+endif # BOOTMETH_VBE
-+
- config EXPO
- 	bool "Support for expos - groups of scenes displaying a UI"
- 	depends on VIDEO
-diff --git a/boot/Makefile b/boot/Makefile
-index 30529bac367..284ade3def0 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -71,3 +71,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_FW) += vbe_simple_fw.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
- 
- obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
-+
-+obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
-+obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
-+obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_OS) += vbe_abrec_os.o
-diff --git a/boot/vbe_abrec.c b/boot/vbe_abrec.c
-new file mode 100644
-index 00000000000..6d0f622262d
---- /dev/null
-+++ b/boot/vbe_abrec.c
-@@ -0,0 +1,83 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Verified Boot for Embedded (VBE) 'simple' method
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#define LOG_CATEGORY LOGC_BOOT
-+
-+#include <dm.h>
-+#include <memalign.h>
-+#include <mmc.h>
-+#include <dm/ofnode.h>
-+#include "vbe_abrec.h"
-+
-+int abrec_read_priv(ofnode node, struct abrec_priv *priv)
-+{
-+	memset(priv, '\0', sizeof(*priv));
-+	if (ofnode_read_u32(node, "area-start", &priv->area_start) ||
-+	    ofnode_read_u32(node, "area-size", &priv->area_size) ||
-+	    ofnode_read_u32(node, "version-offset", &priv->version_offset) ||
-+	    ofnode_read_u32(node, "version-size", &priv->version_size) ||
-+	    ofnode_read_u32(node, "state-offset", &priv->state_offset) ||
-+	    ofnode_read_u32(node, "state-size", &priv->state_size))
-+		return log_msg_ret("read", -EINVAL);
-+	ofnode_read_u32(node, "skip-offset", &priv->skip_offset);
-+	priv->storage = strdup(ofnode_read_string(node, "storage"));
-+	if (!priv->storage)
-+		return log_msg_ret("str", -EINVAL);
-+
-+	return 0;
-+}
-+
-+int abrec_read_nvdata(struct abrec_priv *priv, struct udevice *blk,
-+		      struct abrec_state *state)
-+{
-+	ALLOC_CACHE_ALIGN_BUFFER(u8, buf, MMC_MAX_BLOCK_LEN);
-+	const struct vbe_nvdata *nvd = (struct vbe_nvdata *)buf;
-+	uint flags;
-+	int ret;
-+
-+	ret = vbe_read_nvdata(blk, priv->area_start + priv->state_offset,
-+			      priv->state_size, buf);
-+	if (ret == -EPERM) {
-+		memset(buf, '\0', MMC_MAX_BLOCK_LEN);
-+		log_warning("Starting with empty state\n");
-+	} else if (ret) {
-+		return log_msg_ret("nv", ret);
-+	}
-+
-+	state->fw_vernum = nvd->fw_vernum;
-+	flags = nvd->flags;
-+	state->try_count = flags & VBEF_TRY_COUNT_MASK;
-+	state->try_b = flags & VBEF_TRY_B;
-+	state->recovery = flags & VBEF_RECOVERY;
-+	state->pick = (flags & VBEF_PICK_MASK) >> VBEF_PICK_SHIFT;
-+
-+	return 0;
-+}
-+
-+int abrec_read_state(struct udevice *dev, struct abrec_state *state)
-+{
-+	struct abrec_priv *priv = dev_get_priv(dev);
-+	struct udevice *blk;
-+	int ret;
-+
-+	ret = vbe_get_blk(priv->storage, &blk);
-+	if (ret)
-+		return log_msg_ret("blk", ret);
-+
-+	ret = vbe_read_version(blk, priv->area_start + priv->version_offset,
-+			       state->fw_version, MAX_VERSION_LEN);
-+	if (ret)
-+		return log_msg_ret("ver", ret);
-+	log_debug("version=%s\n", state->fw_version);
-+
-+	ret = abrec_read_nvdata(priv, blk, state);
-+	if (ret)
-+		return log_msg_ret("nvd", ret);
-+
-+	return 0;
-+}
-diff --git a/boot/vbe_abrec.h b/boot/vbe_abrec.h
-new file mode 100644
-index 00000000000..63c73297351
---- /dev/null
-+++ b/boot/vbe_abrec.h
-@@ -0,0 +1,115 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Verified Boot for Embedded (VBE) vbe-abrec common file
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#ifndef __VBE_ABREC_H
-+#define __VBE_ABREC_H
-+
-+#include <vbe.h>
-+#include <dm/ofnode_decl.h>
-+
-+#include "vbe_common.h"
-+
-+struct bootflow;
-+struct udevice;
-+
-+/**
-+ * struct abrec_priv - information read from the device tree
-+ *
-+ * @area_start: Start offset of the VBE area in the device, in bytes
-+ * @area_size: Total size of the VBE area
-+ * @skip_offset: Size of an initial part of the device to skip, when using
-+ *	area_start. This is effectively added to area_start to calculate the
-+ *	actual start position on the device
-+ * @state_offset: Offset from area_start of the VBE state, in bytes
-+ * @state_size: Size of the state information
-+ * @version_offset: Offset from from area_start of the VBE version info
-+ * @version_size: Size of the version info
-+ * @storage: Storage device to use, in the form <uclass><devnum>, e.g. "mmc1"
-+ */
-+struct abrec_priv {
-+	u32 area_start;
-+	u32 area_size;
-+	u32 skip_offset;
-+	u32 state_offset;
-+	u32 state_size;
-+	u32 version_offset;
-+	u32 version_size;
-+	const char *storage;
-+};
-+
-+/** struct abrec_state - state information read from media
-+ *
-+ * The state on the media is converted into this more code-friendly structure.
-+ *
-+ * @fw_version: Firmware version string
-+ * @fw_vernum: Firmware version number
-+ * @try_count: Number of times the B firmware has been tried
-+ * @try_b: true to try B firmware on the next boot
-+ * @recovery: true to enter recovery firmware on the next boot
-+ * @try_result: Result of trying to boot with the last firmware
-+ * @pick: Firmware which was chosen in this boot
-+ */
-+struct abrec_state {
-+	char fw_version[MAX_VERSION_LEN];
-+	u32 fw_vernum;
-+	u8 try_count;
-+	bool try_b;
-+	bool recovery;
-+	enum vbe_try_result try_result;
-+	enum vbe_pick_t pick;
-+};
-+
-+/**
-+ * abrec_read_fw_bootflow() - Read a bootflow for firmware
-+ *
-+ * Locates and loads the firmware image (FIT) needed for the next phase. The FIT
-+ * should ideally use external data, to reduce the amount of it that needs to be
-+ * read.
-+ *
-+ * @bdev: bootdev device containing the firmwre
-+ * @bflow: Place to put the created bootflow, on success
-+ * @return 0 if OK, -ve on error
-+ */
-+int abrec_read_bootflow_fw(struct udevice *dev, struct bootflow *bflow);
-+
-+/**
-+ * vbe_simple_read_state() - Read the VBE simple state information
-+ *
-+ * @dev: VBE bootmeth
-+ * @state: Place to put the state
-+ * @return 0 if OK, -ve on error
-+ */
-+int abrec_read_state(struct udevice *dev, struct abrec_state *state);
-+
-+/**
-+ * abrec_read_nvdata() - Read non-volatile data from a block device
-+ *
-+ * Reads the ABrec VBE nvdata from a device. This function reads a single block
-+ * from the device, so the nvdata cannot be larger than that.
-+ *
-+ * @blk: Device to read from
-+ * @offset: Offset to read, in bytes
-+ * @size: Number of bytes to read
-+ * @buf: Buffer to hold the data
-+ * Return: 0 if OK, -E2BIG if @size > block size, -EBADF if the offset is not
-+ * block-aligned, -EIO if an I/O error occurred, -EPERM if the header version is
-+ * incorrect, the header size is invalid or the data fails its CRC check
-+ */
-+int abrec_read_nvdata(struct abrec_priv *priv, struct udevice *blk,
-+		      struct abrec_state *state);
-+
-+/**
-+ * abrec_read_priv() - Read info from the devicetree
-+ *
-+ * @node: Node to read from
-+ * @priv: Information to fill in
-+ * Return 0 if OK, -EINVAL if something is wrong with the devicetree node
-+ */
-+int abrec_read_priv(ofnode node, struct abrec_priv *priv);
-+
-+#endif /* __VBE_ABREC_H */
-diff --git a/boot/vbe_abrec_fw.c b/boot/vbe_abrec_fw.c
-new file mode 100644
-index 00000000000..d52bd9ddff0
---- /dev/null
-+++ b/boot/vbe_abrec_fw.c
-@@ -0,0 +1,276 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Verified Boot for Embedded (VBE) loading firmware phases
-+ *
-+ * Copyright 2022 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#define LOG_CATEGORY LOGC_BOOT
-+
-+#include <binman_sym.h>
-+#include <bloblist.h>
-+#include <bootdev.h>
-+#include <bootflow.h>
-+#include <bootmeth.h>
-+#include <bootstage.h>
-+#include <display_options.h>
-+#include <dm.h>
-+#include <image.h>
-+#include <log.h>
-+#include <mapmem.h>
-+#include <memalign.h>
-+#include <mmc.h>
-+#include <spl.h>
-+#include <vbe.h>
-+#include <dm/device-internal.h>
-+#include "vbe_abrec.h"
-+#include "vbe_common.h"
-+
-+binman_sym_declare(ulong, spl_a, image_pos);
-+binman_sym_declare(ulong, spl_b, image_pos);
-+binman_sym_declare(ulong, spl_recovery, image_pos);
-+
-+binman_sym_declare(ulong, spl_a, size);
-+binman_sym_declare(ulong, spl_b, size);
-+binman_sym_declare(ulong, spl_recovery, size);
-+
-+binman_sym_declare(ulong, u_boot_a, image_pos);
-+binman_sym_declare(ulong, u_boot_b, image_pos);
-+binman_sym_declare(ulong, u_boot_recovery, image_pos);
-+
-+binman_sym_declare(ulong, u_boot_a, size);
-+binman_sym_declare(ulong, u_boot_b, size);
-+binman_sym_declare(ulong, u_boot_recovery, size);
-+
-+binman_sym_declare(ulong, vpl, image_pos);
-+binman_sym_declare(ulong, vpl, size);
-+
-+static const char *const pick_names[] = {"A", "B", "Recovery"};
-+
-+/**
-+ * abrec_read_bootflow_fw() - Create a bootflow for firmware
-+ *
-+ * Locates and loads the firmware image (FIT) needed for the next phase. The FIT
-+ * should ideally use external data, to reduce the amount of it that needs to be
-+ * read.
-+ *
-+ * @bdev: bootdev device containing the firmwre
-+ * @meth: VBE abrec bootmeth
-+ * @blow: Place to put the created bootflow, on success
-+ * @return 0 if OK, -ve on error
-+ */
-+int abrec_read_bootflow_fw(struct udevice *dev, struct bootflow *bflow)
-+{
-+	struct udevice *media = dev_get_parent(bflow->dev);
-+	struct udevice *meth = bflow->method;
-+	struct abrec_priv *priv = dev_get_priv(meth);
-+	ulong len, load_addr;
-+	struct udevice *blk;
-+	int ret;
-+
-+	log_debug("media=%s\n", media->name);
-+	ret = blk_get_from_parent(media, &blk);
-+	if (ret)
-+		return log_msg_ret("med", ret);
-+
-+	ret = vbe_read_fit(blk, priv->area_start + priv->skip_offset,
-+			   priv->area_size, NULL, &load_addr, &len, &bflow->name);
-+	if (ret)
-+		return log_msg_ret("vbe", ret);
-+
-+	/* set up the bootflow with the info we obtained */
-+	bflow->blk = blk;
-+	bflow->buf = map_sysmem(load_addr, len);
-+	bflow->size = len;
-+
-+	return 0;
-+}
-+
-+static int abrec_run_vpl(struct udevice *blk, struct spl_image_info *image,
-+			 struct vbe_handoff *handoff)
-+{
-+	uint flags, tries, prev_result;
-+	struct abrec_priv priv;
-+	struct abrec_state state;
-+	enum vbe_pick_t pick;
-+	uint try_count;
-+	ulong offset, size;
-+	ulong ub_offset, ub_size;
-+	ofnode node;
-+	int ret;
-+
-+	node = vbe_get_node();
-+	if (!ofnode_valid(node))
-+		return log_msg_ret("nod", -EINVAL);
-+
-+	ret = abrec_read_priv(node, &priv);
-+	if (ret)
-+		return log_msg_ret("pri", ret);
-+
-+	ret = abrec_read_nvdata(&priv, blk, &state);
-+	if (ret)
-+		return log_msg_ret("sta", ret);
-+
-+	prev_result = state.try_result;
-+	try_count = state.try_count;
-+
-+	if (state.recovery) {
-+		pick = VBEP_RECOVERY;
-+
-+	/* if we are trying B but ran out of tries, use A */
-+	} else if ((prev_result == VBETR_TRYING) && !tries) {
-+		pick = VBEP_A;
-+		state.try_result = VBETR_BAD;
-+
-+	/* if requested, try B */
-+	} else if (flags & VBEF_TRY_B) {
-+		pick = VBEP_B;
-+
-+		/* decrement the try count if not already zero */
-+		if (try_count)
-+			try_count--;
-+		state.try_result = VBETR_TRYING;
-+	} else {
-+		pick = VBEP_A;
-+	}
-+	state.try_count = try_count;
-+
-+	switch (pick) {
-+	case VBEP_A:
-+		offset = binman_sym(ulong, spl_a, image_pos);
-+		size = binman_sym(ulong, spl_a, size);
-+		ub_offset = binman_sym(ulong, u_boot_a, image_pos);
-+		ub_size = binman_sym(ulong, u_boot_a, size);
-+		break;
-+	case VBEP_B:
-+		offset = binman_sym(ulong, spl_b, image_pos);
-+		size = binman_sym(ulong, spl_b, size);
-+		ub_offset = binman_sym(ulong, u_boot_b, image_pos);
-+		ub_size = binman_sym(ulong, u_boot_b, size);
-+		break;
-+	case VBEP_RECOVERY:
-+		offset = binman_sym(ulong, spl_recovery, image_pos);
-+		size = binman_sym(ulong, spl_recovery, size);
-+		ub_offset = binman_sym(ulong, u_boot_recovery, image_pos);
-+		ub_size = binman_sym(ulong, u_boot_recovery, size);
-+		break;
-+	}
-+	log_debug("pick=%d, offset=%lx size=%lx\n", pick, offset, size);
-+	log_info("VBE: Firmware pick %s at %lx\n", pick_names[pick], offset);
-+
-+	ret = vbe_read_fit(blk, offset, size, image, NULL, NULL, NULL);
-+	if (ret)
-+		return log_msg_ret("vbe", ret);
-+	handoff->offset = ub_offset;
-+	handoff->size = ub_size;
-+	handoff->pick = pick;
-+	image->load_addr = spl_get_image_text_base();
-+	image->entry_point = image->load_addr;
-+
-+	return 0;
-+}
-+
-+static int abrec_run_spl(struct udevice *blk, struct spl_image_info *image,
-+			 struct vbe_handoff *handoff)
-+{
-+	int ret;
-+
-+	log_info("VBE: Firmware pick %s at %lx\n", pick_names[handoff->pick],
-+		 handoff->offset);
-+	ret = vbe_read_fit(blk, handoff->offset, handoff->size, image, NULL,
-+			   NULL, NULL);
-+	if (ret)
-+		return log_msg_ret("vbe", ret);
-+	image->load_addr = spl_get_image_text_base();
-+	image->entry_point = image->load_addr;
-+
-+	return 0;
-+}
-+
-+static int abrec_load_from_image(struct spl_image_info *image,
-+				 struct spl_boot_device *bootdev)
-+{
-+	struct vbe_handoff *handoff;
-+	int ret;
-+
-+	printf("load: %s\n", ofnode_read_string(ofnode_root(), "model"));
-+	if (xpl_phase() != PHASE_VPL && xpl_phase() != PHASE_SPL &&
-+	    xpl_phase() != PHASE_TPL)
-+		return -ENOENT;
-+
-+	ret = bloblist_ensure_size(BLOBLISTT_VBE, sizeof(struct vbe_handoff),
-+				   0, (void **)&handoff);
-+	if (ret)
-+		return log_msg_ret("ro", ret);
-+
-+	if (USE_BOOTMETH) {
-+		struct udevice *meth, *bdev;
-+		struct abrec_priv *priv;
-+		struct bootflow bflow;
-+
-+		vbe_find_first_device(&meth);
-+		if (!meth)
-+			return log_msg_ret("vd", -ENODEV);
-+		log_debug("vbe dev %s\n", meth->name);
-+		ret = device_probe(meth);
-+		if (ret)
-+			return log_msg_ret("probe", ret);
-+
-+		priv = dev_get_priv(meth);
-+		log_debug("abrec %s\n", priv->storage);
-+		ret = bootdev_find_by_label(priv->storage, &bdev, NULL);
-+		if (ret)
-+			return log_msg_ret("bd", ret);
-+		log_debug("bootdev %s\n", bdev->name);
-+
-+		bootflow_init(&bflow, bdev, meth);
-+		ret = bootmeth_read_bootflow(meth, &bflow);
-+		log_debug("\nfw ret=%d\n", ret);
-+		if (ret)
-+			return log_msg_ret("rd", ret);
-+
-+		/* jump to the image */
-+		image->flags = SPL_SANDBOXF_ARG_IS_BUF;
-+		image->arg = bflow.buf;
-+		image->size = bflow.size;
-+		log_debug("Image: %s at %p size %x\n", bflow.name, bflow.buf,
-+			  bflow.size);
-+
-+		/* this is not used from now on, so free it */
-+		bootflow_free(&bflow);
-+	} else {
-+		struct udevice *media;
-+		struct udevice *blk;
-+
-+		ret = uclass_get_device_by_seq(UCLASS_MMC, 1, &media);
-+		if (ret)
-+			return log_msg_ret("vdv", ret);
-+		ret = blk_get_from_parent(media, &blk);
-+		if (ret)
-+			return log_msg_ret("med", ret);
-+
-+		if (xpl_phase() == PHASE_TPL) {
-+			ulong offset, size;
-+
-+			offset = binman_sym(ulong, vpl, image_pos);
-+			size = binman_sym(ulong, vpl, size);
-+			log_debug("VPL at offset %lx size %lx\n", offset, size);
-+			ret = vbe_read_fit(blk, offset, size, image, NULL,
-+					   NULL, NULL);
-+			if (ret)
-+				return log_msg_ret("vbe", ret);
-+		} else if (xpl_phase() == PHASE_VPL) {
-+			ret = abrec_run_vpl(blk, image, handoff);
-+		} else {
-+			ret = abrec_run_spl(blk, image, handoff);
-+		}
-+	}
-+
-+	/* Record that VBE was used in this phase */
-+	handoff->phases |= 1 << xpl_phase();
-+
-+	return 0;
-+}
-+SPL_LOAD_IMAGE_METHOD("vbe_abrec", 5, BOOT_DEVICE_VBE,
-+		      abrec_load_from_image);
-diff --git a/boot/vbe_common.c b/boot/vbe_common.c
-index 801ab9da045..a86986d86e9 100644
---- a/boot/vbe_common.c
-+++ b/boot/vbe_common.c
-@@ -374,3 +374,8 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
- 
- 	return 0;
- }
-+
-+ofnode vbe_get_node(void)
-+{
-+	return ofnode_path("/bootstd/firmware0");
-+}
-diff --git a/boot/vbe_common.h b/boot/vbe_common.h
-index 84117815a19..493cbdc3694 100644
---- a/boot/vbe_common.h
-+++ b/boot/vbe_common.h
-@@ -9,6 +9,8 @@
- #ifndef __VBE_COMMON_H
- #define __VBE_COMMON_H
- 
-+#include <dm/ofnode_decl.h>
-+#include <linux/bitops.h>
- #include <linux/types.h>
- 
- struct spl_image_info;
-@@ -38,6 +40,40 @@ enum {
- 	NVD_HDR_VER_CUR		= 1,	/* current version */
- };
- 
-+/**
-+ * enum vbe_try_result - result of trying a firmware pick
-+ *
-+ * @VBETR_UNKNOWN: Unknown / invalid result
-+ * @VBETR_TRYING: Firmware pick is being tried
-+ * @VBETR_OK: Firmware pick is OK and can be used from now on
-+ * @VBETR_BAD: Firmware pick is bad and should be removed
-+ */
-+enum vbe_try_result {
-+	VBETR_UNKNOWN,
-+	VBETR_TRYING,
-+	VBETR_OK,
-+	VBETR_BAD,
-+};
-+
-+/**
-+ * enum vbe_flags - flags controlling operation
-+ *
-+ * @VBEF_TRY_COUNT_MASK: mask for the 'try count' value
-+ * @VBEF_TRY_B: Try the B slot
-+ * @VBEF_RECOVERY: Use recovery slot
-+ */
-+enum vbe_flags {
-+	VBEF_TRY_COUNT_MASK	= 0x3,
-+	VBEF_TRY_B		= BIT(2),
-+	VBEF_RECOVERY		= BIT(3),
-+
-+	VBEF_RESULT_SHIFT	= 4,
-+	VBEF_RESULT_MASK	= 3 << VBEF_RESULT_SHIFT,
-+
-+	VBEF_PICK_SHIFT		= 6,
-+	VBEF_PICK_MASK		= 3 << VBEF_PICK_SHIFT,
-+};
-+
- /**
-  * struct vbe_nvdata - basic storage format for non-volatile data
-  *
-@@ -134,4 +170,11 @@ int vbe_read_fit(struct udevice *blk, ulong area_offset, ulong area_size,
- 		 struct spl_image_info *image, ulong *load_addrp, ulong *lenp,
- 		 char **namep);
- 
-+/**
-+ * vbe_get_node() - Get the node containing the VBE settings
-+ *
-+ * Return: VBE node (typically "/bootstd/firmware0")
-+ */
-+ofnode vbe_get_node(void);
-+
- #endif /* __VBE_ABREC_H */
-diff --git a/include/vbe.h b/include/vbe.h
-index 56bff63362f..61bfa0e557d 100644
---- a/include/vbe.h
-+++ b/include/vbe.h
-@@ -10,6 +10,8 @@
- #ifndef __VBE_H
- #define __VBE_H
- 
-+#include <linux/types.h>
-+
- /**
-  * enum vbe_phase_t - current phase of VBE
-  *
-@@ -25,13 +27,32 @@ enum vbe_phase_t {
- 	VBE_PHASE_OS,
- };
- 
-+/**
-+ * enum vbe_pick_t - indicates which firmware is picked
-+ *
-+ * @VBEFT_A: Firmware A
-+ * @VBEFT_B: Firmware B
-+ * @VBEFT_RECOVERY: Recovery firmware
-+ */
-+enum vbe_pick_t {
-+	VBEP_A,
-+	VBEP_B,
-+	VBEP_RECOVERY,
-+};
-+
- /**
-  * struct vbe_handoff - information about VBE progress
-  *
-+ * @offset: Offset of the FIT to use for SPL onwards
-+ * @size: Size of the area containing the FIT
-  * @phases: Indicates which phases used the VBE bootmeth (1 << PHASE_...)
-+ * @pick: Indicates which firmware pick was used (enum vbe_pick_t)
-  */
- struct vbe_handoff {
-+	ulong offset;
-+	ulong size;
- 	u8 phases;
-+	u8 pick;
- };
- 
- /**
--- 
-2.43.0
+Huh? Of course it will. I'm not looking at that next_call member at all
+(that's not a pointer, that's just some future time stamp), I'm
+merely comparing the passed-in pointer to the elements already on the
+list.
 
+Yeah, my pseudo-code should probably have used hlist_for_each_entry()
+rather than hlist_for_each(), but that should be obvious from the type I
+used for the iterator variable.
+
+
+I have something like this now:
+>
+> diff --git a/common/cyclic.c b/common/cyclic.c
+> index 807a3d73f67..d721a21a575 100644
+> --- a/common/cyclic.c
+> +++ b/common/cyclic.c
+> @@ -27,11 +27,29 @@ struct hlist_head *cyclic_get_list(void)
+>  	return (struct hlist_head *)&gd->cyclic_list;
+>  }
+>
+> +static int cyclic_already_registered(struct cyclic_info *cyclic)
+> +{
+> +	struct cyclic_info *cycliclst;
+> +	struct hlist_node *tmp;
+> +
+> +	/* Reassignment of function would corrupt cyclic list, exit */
+> +	hlist_for_each_entry_safe(cycliclst, tmp, cyclic_get_list(), list) {
+> +		if (cycliclst->func == cyclic->func &&
+> +		    cycliclst->name == cyclic->name && // or strcmp() ?
+> +		    cycliclst->delay_us == cyclic->delay_us &&
+> +		    cycliclst->start_time_us == cyclic->start_time_us)
+> +			return -EALREADY;	/* Match found */
+> +	}
+> +
+
+Please no. Just compare the pointers; if they're the same, it's
+literally the same struct cyclic_info; if not, it's not. Why would you
+dereference the maybe-to-be-registered struct cyclic_info when you don't
+expect that to be in any kind of properly initialized state?
+
+> +	/* Match not found */
+> +	return 0;
+> +}
+> +
+>  int cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
+>  		    uint64_t delay_us, const char *name)
+>  {
+>  	/* Reassignment of function would corrupt cyclic list, exit */
+> -	if (cyclic->func)
+> +	if (!cyclic_already_registered(cyclic))
+>  		return -EALREADY;
+>
+>  	memset(cyclic, 0, sizeof(*cyclic));
+> @@ -49,7 +67,7 @@ int cyclic_register(struct cyclic_info *cyclic,
+> cyclic_func_t func,
+>  void cyclic_unregister(struct cyclic_info *cyclic)
+>  {
+>  	/* Unregister only initialized struct cyclic_info */
+> -	if (cyclic->func)
+> +	if (cyclic_already_registered(cyclic))
+>  		hlist_del(&cyclic->list);
+>  }
+>
+> [...]
+>
+>>>   void cyclic_unregister(struct cyclic_info *cyclic)
+>>>   {
+>>> -	hlist_del(&cyclic->list);
+>>> +	/* Unregister only initialized struct cyclic_info */
+>>> +	if (cyclic->func)
+>>> +		hlist_del(&cyclic->list);
+>>>   }
+>> So this already shows how error prone this approach is. You are not
+>> clearing cyclic->func, so if the caller subsequently tries to register
+>> that struct again, he would get -EALREADY, while a subsequent unregister
+>> could would lead to exactly the list corruption you want to avoid.
+>
+> I would expect the caller should clear the structure before attempting
+> to register it again. Shall we actually memset() the structure in
+> cyclic_unregister() too ?
+>
+
+This is what I tried to point out here:
+
+>> And unless the caller immediately himself clears ->func, other code in
+>> the client cannot rely on ->func being NULL or not as a proxy for
+>> whether the struct is already registered (and the caller shouldn't do
+>> either of those things, as the struct cyclic_info should be considered
+>> opaque).
+
+So, let's look at the mmc example. In mmc_deinit(), we do
+unregister. OK. Later, we might do mmc_init(). Now mmc_init() tries to
+figure out if its cyclic_info instance is already registered or
+not. There, mmc_init cannot possibly just zero-init the cyclic_info
+before the register, because it might be registered, and it can't not do
+the zeroing, because then the new registration might spuriously fail.
+
+So for that to work, the code that calls unregister and thus knows that
+it has been unregistered would have to immediately do the zero'ing. At
+which point it would much better if cyclic_unregister() did that
+zero'ing, instead of all callers having to remember that memset().
+
+Rasmus
