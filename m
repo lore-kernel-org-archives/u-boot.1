@@ -4,75 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D277C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:11:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF8B3C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:32:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0ADC811A6;
-	Mon, 27 Jan 2025 11:11:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 274D181119;
+	Mon, 27 Jan 2025 11:32:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="qermFhu5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MbbN9l57";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA90C811A6; Mon, 27 Jan 2025 11:11:38 +0100 (CET)
-Received: from xmbghk7.mail.qq.com (xmbghk7.mail.qq.com [43.163.128.50])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 887E08111F; Mon, 27 Jan 2025 11:32:29 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40BA880F10
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:11:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F37981115
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:32:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1737972692; bh=x3IVSiQB7t2zgmoV2PU0RMYuBS4eKLr1JbJj6xCl1mg=;
- h=From:To:Cc:Subject:Date;
- b=qermFhu5zbUDDkAvwyaSnxiMQwSsUkSU8kI0EGhVnO1Gdo86EE+r35T8mmX0y8u9o
- jtFOPXbzE9ytIy5xN6ZAG1xgNaXPO0OPbVLYD8T1P8HS8D9OtO7vCPifD+D2+kuOKb
- pe+kI0/CEVyy4/cLM+0Mb0kRp1nFDev0Xtx9zOb4=
-X-QQ-FEAT: oHWrrGTW1dCni6VLWI7Xi3lwP5c1dnPf
-X-QQ-SSF: 00000000000000F0000000000000
-X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
-X-QQ-XMAILINFO: NELchpK68q/35WEz1wBKa92f5Ot1FFeDZAfFnEYUe+laFp3uYerctAbdJj7v9u
- f4jxx1mYLak5tRXUCqRpXLQfJwGhHH6P7zNkGidCdAJvquZvvtK+BvoksZ0kN79F3D7KbR67pd4L5
- PWEK6//6LDPum86ghhQxGvYPr3JSHTHtcnW5hZxh0gcT+olE0+m882vvYp0A3QTQieWsOEwTc3QTI
- ZoZ36LFkpOjHL+BJ2OBEJlViVBS3fsI8MYijpoBobnSS+meuocOxmSa4tv5v54fZSBkvczm3o/j8o
- F6h5YlbftY80gDBvmLXG4S41iTbv6Fkr1tuOBAcgkdpxB2zgeTDtPP9RgEqUsSgImdlV4W95OiyNP
- a+SS4uEmOOekBNMxFTZ/b+nygjdd/3AV8ro42zBIMMTP7RUsOdBG5rBMIHgmgz8TacX1lUM+i49Mg
- /qfC60XB5DbhEBT4FSz8jwm8vMYE5hBRSnSu5DMEUTGbp9sNrGxjFOVKu5/6otCBwJz5DCN88qSlo
- Y6RbyqFKKI56y0aDwxmh1N9+078QibFPSzdrj73lISvSGoiUI4D8YmKmfsvHplqL/lN0yruUKaosS
- a1WVo7hUXzyqGeWU9IJxP/IfNZUJHAbDp92G5vpjQnkW1BZ+m5docUVHKSYTw6TniA3b4L+7QW/Zz
- pp4PM1l0jOafiYavffnRk3/OGmtALLNZ5u6FUbHNX2P/oCL+kMcCZMpccoLUkPLfhYbzuViYBv/ZR
- ZwSHWjsckQIuZLSNlyVGI0yo2dLEl5e/tSKkTHDgH41Erh6wasFSbQihD49dZ5u/9WfOw5tCK9rSQ
- gTSxxNuZUwCth2xPvWZjLZLyVOd9w8tOUzELfzCnVqLsWja4IAkWkWl7GRfzI4Y0QzWYAwoENUBf2
- EZXPc+gsAEe2bx7P/f791LUgejhAl842ziC20MhDhnDfLp2vP1uo/Y+WKbKPBKnk5SIDRSC92ap7J
- uI+2ayCMuR2jL5RNnMZT6NLVCoW6/1Wt1F6GjWDiG1SEvvjgmz9QobljYO0UvWFWpmdYqRewUFMFY
- rzaCX8JqqV+lXpYx5Ob9N5IfCoBkifYounwfS
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 255.144.14.160
-X-QQ-STYLE: 
-X-QQ-mid: webmail864t1737972691t7650557
-From: "=?gb18030?B?u8bA+9HH?=" <1425075683@qq.com>
-To: "=?gb18030?B?SGVpbnJpY2ggU2NodWNoYXJkdA==?="
- <heinrich.schuchardt@canonical.com>,
- "=?gb18030?B?dHJpbmk=?=" <trini@konsulko.com>
-Cc: "=?gb18030?B?dS1ib290?=" <u-boot@lists.denx.de>,
- "=?gb18030?B?SGVpbnJpY2ggU2NodWNoYXJkdA==?="
- <heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH] examples: fix building on arm32
-Mime-Version: 1.0
-Date: Mon, 27 Jan 2025 18:11:31 +0800
-X-Priority: 3
-Message-ID: <tencent_2F49391FB31E99414DB6E2E03EA0574CE407@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-386329da1d9so2144134f8f.1
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 02:32:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737973946; x=1738578746; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hSkfV4al2Y1AOuFpePi+ro1PcytQy284aVfla7MsSl0=;
+ b=MbbN9l57NpN29X44Ib9sr7Xk+8a94LVe8p3+Eolxq26DBvU8slcwv6uN5aaGk9Zrq9
+ TGXE2hQn67v/WwaQ32R4CtiZYaOolEgI+9YuqjJQzIIwBcB2SKOvMPi7owxNrd2ivoNq
+ SSA8p6F3dKrCH+hWA8P3Ayg2xCFhtXW0hRoMuydrU81lgQQ+ExNreF4YW4VsIIfrZ7KC
+ fkAe/baYStYTRlgPwjoYRx2rPlfR3svCu2ghtezp+gf+Mie8fiSDOWWKa7hK5I5ophHL
+ rrwcHse4VxLdFx2jkmY4egUUwRvD6RQ1TB5spfGMIMGQvNA9nfQTN1hk82+U/H7Ue0fb
+ CLDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737973946; x=1738578746;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hSkfV4al2Y1AOuFpePi+ro1PcytQy284aVfla7MsSl0=;
+ b=Jj+Awj2koCC9xn1LPtXFAn8b1yqgN3mRr58EYHgk1BT2h7DstBIPuUhBr/bkjyBfzq
+ 6OZPQU5gwUED6wgz4EpWy2QN+BGtEs3t/xXCQryA9Km08n4PGF6Qor+f0EGntmqdxNF/
+ tteCVpDunFpL8Mi4lSkNMniYjKg2OUBEHGGeM2EWTHalP8jnCVUd5R5N3Xgs8h6gm5Ua
+ fbQk0COujRiCmaVWTL+TTo7trY45OXD32vRWJftghD5EdNZlRzk8yzlsfojwOGodFOMM
+ mroDnTGMRM9sJjop2UzBOKQVS4t7DCsdLtTo0YUnXamK/zIbSI+eC5AqoBzDg5l/Vltw
+ d21A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUQESaEQOd7042jrBrjTqGzppPl3k8VKmvH2QXscXq24HURPG8a3lSMgOhmurvIvIjNchrKots=@lists.denx.de
+X-Gm-Message-State: AOJu0YzvXTJoGIJuYiFKFpnEVZwCRdNfHVAUUS/3Cuo/gcPv5azUy+I+
+ Vdt1uU9aiCt6NkIV+fHQ07sRQljxWtTdOmosAE1lhyNoKrIwQV1GPdjCXq7RUEg=
+X-Gm-Gg: ASbGnctbuE7Hkzljb+4IAzIBV9x9Nv8uTPf3ytdwMhbqWukekuz0uCF6+hPLhYXE0Hj
+ eAxRachsPxBT6HxyMNpONCfjXFNlzjZRCgBJtKWevePHzADH2zsio2AAyw91rjSfyE5k+k33hua
+ eaIEnlZzMQDA1FWz9gG8xYmRXnKBu65XeBvK2HeWk8tsJbO0rPlUXCMTBn26Mj6H97/oaFwTjJF
+ 3zPxZYr8b0FkjrzSM3Gj1llyNQToUbGjTCQGWPqTA6g24ZdUKTkriBgC1vqxBebIbblzvoSAfWx
+ Jv3M4oqYY4FTsZYfcgbTrqT1gEWDdnenAS5gzCgPAy5c6549pNgXOTD5WGz3
+X-Google-Smtp-Source: AGHT+IEClpw3OhtNlwG+wQ4D8+RuupB5oTX3a2mEnUbtHreOR/GA9kJ4wtVPOekln3QR+afwZYPbMQ==
+X-Received: by 2002:a05:6000:1863:b0:38a:8d32:274e with SMTP id
+ ffacd0b85a97d-38bf56551famr32724784f8f.5.1737973946473; 
+ Mon, 27 Jan 2025 02:32:26 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:cc93:6dd0:3ebd:6dc5?
+ ([2a01:e0a:3cb:7bb0:cc93:6dd0:3ebd:6dc5])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38c2a17d7a7sm10913235f8f.32.2025.01.27.02.32.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Jan 2025 02:32:26 -0800 (PST)
+Message-ID: <0ded07f8-3afd-4d26-b3de-cd94c9a57ff9@linaro.org>
+Date: Mon, 27 Jan 2025 11:32:25 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] common: board: make initcalls static
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>
+References: <cover.1737709089.git.jerome.forissier@linaro.org>
+ <564c3f3b7f70c893b2c6b6dfc89a226b90d411de.1737709089.git.jerome.forissier@linaro.org>
+ <f9bfd3d8-dd30-4f4e-a73d-ab9082f832a8@denx.de>
+ <38bb1c47-8001-4415-a421-ff1b501f0105@linaro.org>
+ <77906c5f-3d67-4c43-9e22-c8ea74695146@denx.de>
+ <bebd3427-2d20-43ad-b682-ed02858db546@linaro.org>
+ <4c2a3f99-4af2-4c5c-ba63-9a90018b51bd@denx.de>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <4c2a3f99-4af2-4c5c-ba63-9a90018b51bd@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,75 +114,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gSGVpbnJpY2gNCg0KDQpJIG1vZGlmaWVkIHRoZSBjb2RlIGZvciBhcm0zMiBhcmNo
-aXRlY3R1cmUuIFlvdSBtYXkgYmUgdXNpbmcgYW4gQVJNNjQgYXJjaGl0ZWN0dXJlLiBUYWtl
-IGEgbG9vayBhdCB0aGUgYXJjaGl0ZWN0dXJlIHVzZWQuDQoNCg0KdmVyc2lvbiBvZiBVLUJv
-b3QgKGNvbW1pdCBpbiBnaXQpOiANCiZuYnNwOyAmbmJzcDsgZDhhNzEwMGQ2NThlYjIwMWZh
-MGU5NTU2NjdmZGZmMjk4ZGIzMTk0NQ0KDQpvcGVyYXRpbmcgc3lzdGVtIGFuZCBhcmNoaXRl
-Y3R1cmU6DQombmJzcDsgJm5ic3A7IDUuMTUuMC0xMzAtZ2VuZXJpYyB4ODZfNjQNCg0KaW5z
-dGFsbGVkIHZlcnNpb24gb2YgZ2NjIGFuZCBiaW51dGlscw0KJm5ic3A7ICZuYnNwOyBnY2Mg
-dmVyc2lvbiA5LjQuMCAoVWJ1bnR1IDkuNC4wLTF1YnVudHUxfjIwLjA0LjMpDQombmJzcDsg
-Jm5ic3A7IEdOVSBsZCAoR05VIEJpbnV0aWxzIGZvciBVYnVudHUpIDIuMzQNCiZuYnNwOw0K
-dXNlZCBkZWZjb25maWcNCiZuYnNwOyAmbmJzcDsgc3RtMzJoNzUwLWFydC1waV9kZWZjb25m
-aWcNCnVzZWQgY29tbWFuZHMgZm9yIGJ1aWxkaW5nDQombmJzcDsgJm5ic3A7IG1ha2UgQ1JP
-U1NfQ09NUElMRT1hcm0tbm9uZS1lYWJpLSBBUkNIPWFybSBzdG0zMmg3NTAtYXJ0LXBpX2Rl
-ZmNvbmZpZw0KJm5ic3A7ICZuYnNwOyBtYWtlIENST1NTX0NPTVBJTEU9YXJtLW5vbmUtZWFi
-aS0gQVJDSD1hcm0gbWVudWNvbmZpZyAjIHRvIGFkZCBDT05GSUdfQVBJPXksIENPTkZJR19F
-WEFNUExFUz15DQombmJzcDsgJm5ic3A7IG1ha2UgQ1JPU1NfQ09NUElMRT1hcm0tbm9uZS1l
-YWJpLSBBUkNIPWFybSAtaiAxMg0KDQoNCmh0dHBzOi8vZGV2ZWxvcGVyLmFybS5jb20vZG9j
-dW1lbnRhdGlvbi9kZW4wMDEzL2QvQXBwbGljYXRpb24tQmluYXJ5LUludGVyZmFjZXMvUHJv
-Y2VkdXJlLUNhbGwtU3RhbmRhcmQNCmxpc3RzIElQLCBTUCwgUEMgYXMgYWxpYXNlcyBmb3Ig
-cmVnaXN0ZXJzIFIxMiwgUjEzLCBSMTUuDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KSSBoYXZlIHRyaWVkIHVzaW5n
-IFIxMiwgUjEzLCBSMTUgYW5kIHRoZSBlcnJvciBtZXNzYWdlIGlzIGFzIGZvbGxvd3M6DQom
-bmJzcDsgJm5ic3A7IGV4YW1wbGVzL2FwaS9jcnQwLlM6MzI6IEVycm9yOiBsbyByZWdpc3Rl
-ciByZXF1aXJlZCAtLSBgbGRyIHIxMiw9c2VhcmNoX2hpbnQnDQombmJzcDsgJm5ic3A7IGV4
-YW1wbGVzL2FwaS9jcnQwLlM6MzQ6IEVycm9yOiBsbyByZWdpc3RlciByZXF1aXJlZCAtLSBg
-c3RyIFIxMyxbcjEyXScNCiZuYnNwOyAmbmJzcDsgZXhhbXBsZXMvYXBpL2NydDAuUzo0MDog
-RXJyb3I6IGxvIHJlZ2lzdGVyIHJlcXVpcmVkIC0tIGBsZHIgcjEyLD1zeXNjYWxsX3B0cicN
-CiZuYnNwOyAmbmJzcDsgZXhhbXBsZXMvYXBpL2NydDAuUzo0MTogRXJyb3I6IGxvIHJlZ2lz
-dGVyIHJlcXVpcmVkIC0tIGBsZHIgcjE1LFtyMTJdJw0KDQoNCkFzIHRoZSBlcnJvciBtZXNz
-YWdlIHN1Z2dlc3RzLCB5b3UgbmVlZCB0byB1c2UgYSBsb3cgcmVnaXN0ZXIgKGxvIHJlZ2lz
-dGVyKSwgYW5kIHIxMiBhbmQgc2ltaWxhciByZWdpc3RlcnMgYmVsb25nIHRvIHRoZSBoaWdo
-IHJlZ2lzdGVyIChoaSByZWdpc3RlcikgY2F0ZWdvcnkuDQoNCg0KQmVzdCByZWdhcmRzDQoN
-CkxpWWENCi0tLS0tLS0tLS0tLS0tLS0tLSDUrcq808q8/iAtLS0tLS0tLS0tLS0tLS0tLS0N
-CreivP7IyzogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAiSGVpbnJpY2ggU2NodWNoYXJkdCIgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICA8aGVpbnJpY2guc2NodWNoYXJkdEBjYW5vbmljYWwuY29tJmd0
-OzsNCreiy83KsbzkOiZuYnNwOzIwMjXE6jHUwjI3yNUo0MfG2tK7KSDPws7nMjo0OQ0KytW8
-/sjLOiZuYnNwOyJUb20gUmluaSI8dHJpbmlAa29uc3Vsa28uY29tJmd0OzsNCrOty806Jm5i
-c3A7IrvGwPvRxyI8MTQyNTA3NTY4M0BxcS5jb20mZ3Q7OyJ1LWJvb3QiPHUtYm9vdEBsaXN0
-cy5kZW54LmRlJmd0OzsiSGVpbnJpY2ggU2NodWNoYXJkdCI8aGVpbnJpY2guc2NodWNoYXJk
-dEBjYW5vbmljYWwuY29tJmd0OzsNCtb3zOI6Jm5ic3A7W1BBVENIIDEvMV0gZXhhbXBsZXMv
-YXBpOiBpbXByb3ZlIGRldGVybWluYXRpb24gb2YgTE9BRF9BRERSDQoNCg0KDQpUaGUgY3Vy
-cmVudCBsb2FkIGFkZHJlc3MgZm9yIHRoZSAnZGVtbycgYmluYXJ5IGRvZXMgbm90IHdvcmsg
-Zm9yDQpxZW11X2FybV9kZWZjb25maWcuDQoNClRoZSBzdWl0YWJpbGl0eSBvZiBhbiBhZGRy
-ZXNzIHRvIGxvYWQgYW4gRUxGIGJpbmFyeSBhbmQgcnVuIGl0IGRvZXMNCm5vdCBvbmx5IGRl
-cGVuZCBvbiB0aGUgYXJjaGl0ZWN0dXJlIGJ1dCBhbHNvIG9uIHRoZSBtZW1vcnkgbGF5b3V0
-IG9mDQp0aGUgYm9hcmQuDQoNCk9uIG1vc3QgYm9hcmRzIHdlIGNhbiBhc3N1bWUgdGhhdCA4
-IE1pQiBvZiBtZW1vcnkgaXMgYXZhaWxhYmxlIGFib3ZlDQokbG9hZGFkZHIuIFNvICRsb2Fk
-YWRkciArIDB4NDAwMDAwIHNob3VsZCB3b3JrIHRoZXJlLg0KDQpTaWduZWQtb2ZmLWJ5OiBI
-ZWlucmljaCBTY2h1Y2hhcmR0IDxoZWlucmljaC5zY2h1Y2hhcmR0QGNhbm9uaWNhbC5jb20m
-Z3Q7DQotLS0NCiZuYnNwO2V4YW1wbGVzL2FwaS9NYWtlZmlsZSB8IDIzICsrKy0tLS0tLS0t
-LS0tLS0tLS0tLS0tDQombmJzcDsxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAy
-MCBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2V4YW1wbGVzL2FwaS9NYWtlZmlsZSBi
-L2V4YW1wbGVzL2FwaS9NYWtlZmlsZQ0KaW5kZXggNzIyYzdlNDU5MDQuLmJlOTdiODAxNWJk
-IDEwMDY0NA0KLS0tIGEvZXhhbXBsZXMvYXBpL01ha2VmaWxlDQorKysgYi9leGFtcGxlcy9h
-cGkvTWFrZWZpbGUNCkBAIC01LDI2ICs1LDkgQEANCiZuYnNwOyMgUHJvdmlkZSBzeW1ib2wg
-QVBJX0JVSUxEIHRvIHNpZ25hbCB0aGF0IHRoZSBBUEkgZXhhbXBsZSBpcyBiZWluZyBidWls
-dC4NCiZuYnNwO0tCVUlMRF9DUFBGTEFHUyArPSAtREFQSV9CVUlMRA0KJm5ic3A7DQotaWZl
-cSAoJChBUkNIKSxwb3dlcnBjKQ0KLUxPQURfQUREUiA9IDB4NDAwMDANCi1lbmRpZg0KLWlm
-ZXEgKCQoQVJDSCksYXJtKQ0KLWlmZGVmIENPTkZJR182NEJJVA0KLUxPQURfQUREUiA9IDB4
-NDA0MDAwMDANCi1lbHNlDQotTE9BRF9BRERSID0gMHgxMDAwMDAwDQotZW5kaWYNCi1lbmRp
-Zg0KLWlmZXEgKCQoQVJDSCksbWlwcykNCi1pZmRlZiBDT05GSUdfNjRCSVQNCi1MT0FEX0FE
-RFIgPSAweGZmZmZmZmZmODAyMDAwMDANCi1lbHNlDQotTE9BRF9BRERSID0gMHg4MDIwMDAw
-MA0KLWVuZGlmDQotZW5kaWYNCi1pZmVxICgkKEFSQ0gpLHJpc2N2KQ0KLUxPQURfQUREUiA9
-IDB4ODQwMDAwMDANCi1lbmRpZg0KKyMgRW52aXJvbm1lbnQgdmFyaWFibGUgbG9hZGFkZHIg
-aXMgc2V0IGZyb20gQ09ORklHX1NZU19MT0FEX0FERFIuDQorIyBSdW4gdGhlIGV4YW1wbGVz
-IDQgTWlCIGFib3ZlIHRoaXMgYWRkcmVzcy4NCitMT0FEX0FERFI6PSR7c2hlbGwgcHJpbnRm
-IDB4JVggJCQoKCAkKENPTkZJR19TWVNfTE9BRF9BRERSKSArIDB4NDAwMDAwICkpfQ0KJm5i
-c3A7DQombmJzcDsjIFJlc3VsdGluZyBFTEYgYW5kIGJpbmFyeSBleGVjdHVhYmxlcyB3aWxs
-IGJlIG5hbWVkIGRlbW8gYW5kIGRlbW8uYmluDQombmJzcDtleHRyYS15ID0gZGVtbw0KLS0g
-DQoyLjQ3LjE=
+
+
+On 1/25/25 00:58, Marek Vasut wrote:
+> On 1/24/25 6:23 PM, Jerome Forissier wrote:
+>>
+>>
+>> On 1/24/25 17:23, Marek Vasut wrote:
+>>> On 1/24/25 4:57 PM, Jerome Forissier wrote:
+>>>>
+>>>>
+>>>> On 1/24/25 11:35, Marek Vasut wrote:
+>>>>> On 1/24/25 10:10 AM, Jerome Forissier wrote:
+>>>>>> +#define INITCALL(_call) \
+>>>>>> +    do { \
+>>>>>> +        if (_call()) { \
+>>>>>> +            printf("%s(): initcall %s() failed\n", __func__, \
+>>>>>> +                   #_call); \
+>>>>>> +            hang(); \
+>>>>>> +        } \
+>>>>>> +    } while (0)
+>>>>>
+>>>>> Can this be turned into some static inline function too , so typechecking would be retained ? Maybe the function can be passed in a function pointer to call ?
+>>>>
+>>>>
+>>>> Doing the below totally kills the space gain (-160 bytes instead of -2281
+>>>> on zynqmp_kria_defconfig, with LTO).
+>>>
+>>> Does the compiler not inline the functions perhaps ?
+>>
+>> It does. inline vs __always_inline makes no difference. The assembly
+>> code is pretty difficult to understand in any case (macro or static
+>> inline function). There are pieces of called functions all over the
+>> place inside initcall_run_f() which is to be expected with LTO I
+>> suppose.
+>>
+>>>
+>>>> And it prevents from printing the
+>>>> function name in case of error, which is nicer than an address
+>>>> (especially with relocation at play).
+>>> That function name can be passed in using __func__ as a parameter.
+>>
+>> True. That being said, the type-checking argument does not seem
+>> decisive here, and although I too prefer to use static inline
+>> functions over macros when possible, it looks like we have no choice
+>> in this case.
+> Can you try this kind of thing (might need some tweaking):
+> 
+> "
+> static void check_and_fail(int *ret) {
+>   if (*ret) {
+>     printf("failed\n");
+>     hang();
+>   }
+> }
+> 
+> static inline void INITCALL(int (*_call)(void))
+> {
+>   int ret __attribute__((__cleanup__(check_and_fail))) = _call();
+> }
+> "
+> 
+> (maybe it really is the passing of pointer to _call() function into the INITCALL() function which confuses gcc into not inlining this right, but let's find out)
+
+It seems to be working as expected (size-wise). Comparing the macro
+version with yours, without LTO then with LTO:
+
+$ ../linux/scripts/bloat-o-meter /tmp/u-boot.macro /tmp/u-boot.inlinefn
+add/remove: 2/0 grow/shrink: 1/2 up/down: 1386/-1700 (-314)
+Function                                     old     new   delta
+initcall_run_f                                 -    1316   +1316
+check_and_fail.isra                            -      64     +64
+version_string                                70      76      +6
+board_init_r                                 836     664    -172
+board_init_f                                1572      44   -1528
+Total: Before=1121213, After=1120899, chg -0.03%
+
+$ ../linux/scripts/bloat-o-meter /tmp/u-boot.macro.lto /tmp/u-boot.inlinefn.lto
+add/remove: 5/3 grow/shrink: 2/3 up/down: 11418/-11072 (346)
+Function                                     old     new   delta
+initcall_run_r                                 -    7532   +7532
+initcall_run_f                                 -    3540   +3540
+add_to_list.lto_priv                           -     248    +248
+zynqmp_power                                   -      48     +48
+check_and_fail.isra                            -      32     +32
+__func__                                     975     987     +12
+version_string                                70      76      +6
+__func__.lto_priv                           3700    3688     -12
+zynqmp_power.lto_priv                         48       -     -48
+add_to_list                                  248       -    -248
+get_mem_top                                  568       -    -568
+board_init_f                                2880      56   -2824
+board_init_r                                7424      52   -7372
+Total: Before=1068190, After=1068536, chg +0.03%
+
+But note that the two are not equivalent since yours doesn't print
+the initcall name in case of failure.
+
+Regards,
+-- 
+Jerome
