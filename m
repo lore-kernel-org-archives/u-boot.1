@@ -4,78 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EA26C0218A
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFFE7C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:59:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 417978128D;
-	Mon, 27 Jan 2025 15:53:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 02BB68128D;
+	Mon, 27 Jan 2025 15:59:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DYEdOFDe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xa4ObS8O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A43D81292; Mon, 27 Jan 2025 15:53:05 +0100 (CET)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 017F881292; Mon, 27 Jan 2025 15:59:05 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD88F81276
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:53:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B93F81276
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:59:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-84ceaf2667aso319109639f.3
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 06:53:02 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-46901d01355so44955031cf.0
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 06:59:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1737989580; x=1738594380; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1737989941; x=1738594741; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cdr0CamspuuwadofgYHRopNk9O02JDwcbtvV3DXqJZg=;
- b=DYEdOFDeu1XjqzYDfXxHDF0+NNp9Uo5xN6aAo4cPaxhn98C3kjXw2tQ3XgFBfEv49X
- K+GU+NqScm3HIyNwZe2UYAtP9CcawpCn3LSJOltoh22ME9IvQoNjOr1aJQZuG5rU/FXb
- ws4HAVYt/aRMJYFfefjJW3ApSNIIifg9BfBxE=
+ bh=mP4euvezwmsyqunHHfWGRE5X4c17PJV84D/rOk5yiz8=;
+ b=xa4ObS8O7F2mIgVgJbs13FwZUfasERW1Y0WFbdDW3qT/cYpLMRMap5e9tz2iDr67Cn
+ p/3Munx8kxDvE6TteFhtr8cZf0v7DjPfuzb8TybICdds9uX9G/BCP2DeH4vFlqRWU43o
+ 5inUj5mPcEe0hncBfzr5LVrexWjO9fnPnuGoLV1KSzk/NU6SNX5MMJgWNq1yFh/QxMZb
+ XMRIS2zM6qWd4yV+DRCSHjzX6JsA+MSLQBUvnziREhFCAjxJNmDiRl62frkxxoP+61hO
+ pldCy2h36qXmOz80PXchzhflpkd0IuMc8CQ+y+Bcofn3flQqBH/Y1UXHhY4xbC7ITQF5
+ JXlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737989580; x=1738594380;
+ d=1e100.net; s=20230601; t=1737989941; x=1738594741;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cdr0CamspuuwadofgYHRopNk9O02JDwcbtvV3DXqJZg=;
- b=BgBJOUf8R6rHGEU5FUDdPPuhZa5LnH+21eyK5mtKMkZD2Bft5LXlvqXnVMBnB5wP3B
- aLDxcAc0A35AK2b13D7zmGeqLKeHBQQtXtC4yT5UDdz42j1mvyvI1P7iEFKintpT2L2u
- /x2MaJJi4vOOUyNb0P31hoZtwkPbUsgmRPxMtPBpObjox0+Djka7MY4KYrJHXH0Gqhhz
- WnJAzHXcI0lbJfujCaV3ER/0W7I3+LflEHex/abFzbCFwg0y6Xj5O7n8/GR8iSSJng4a
- GhNa0bVkLLN4zepWMiKJgcQiVl43qgZp4mH2bOSiB96WMndmlfwAATvDd2ZewxdigFQp
- 8q5Q==
-X-Gm-Message-State: AOJu0Yw2tKzYl4DQLvbBA6kCz8UmjMxYy2Qb0jL8aWBNbq5IcJWg++9M
- E64xvvovTWCZLaOpa/zDckX1ZG33dDQOSdJf3xropYREtlkGAXFpQpPvxqifrJ0RH++p5JP7WXU
- =
-X-Gm-Gg: ASbGnctrbgykBys8mngjXTVDW7YD5rL/trW0s1jBAX4mjElEHI/loEn0I/F1TaMsFOU
- tsEInI+zmn76zpyKx7T7Iir6cHbFfeMyq99QR+P3mC/MmqrvXQHmJn/k0NrH7E0JYnHGbspspAm
- LiKgBapzxsaLiOiLgiMZH3dw1wEahvi678h4B/9+9G81nLx7mIwq9DbKyHEibVekjiuRlCUzYHq
- 5YtuQ6khuPGNa3wXuZytFYBJYZPx26h9QAI7Hc5T/vugO6F3yOhDonsA7NSP5XEcdrlwMObTqre
- RdpwCV/YP5AkEuOZy3VvnNd+slRLMaEfTEDittBxvg==
-X-Google-Smtp-Source: AGHT+IHojgkv8IjAAY+YeJBd1FnRxSkzaYN5M3s64fjvOYCy/Fm0eaiMwWg9OJ4XrFtgBimpB0ttjA==
-X-Received: by 2002:a92:c248:0:b0:3ce:7cca:7c0d with SMTP id
- e9e14a558f8ab-3cf74424035mr389992075ab.12.1737989580298; 
- Mon, 27 Jan 2025 06:53:00 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3cfc7449c2esm26990735ab.31.2025.01.27.06.52.57
+ bh=mP4euvezwmsyqunHHfWGRE5X4c17PJV84D/rOk5yiz8=;
+ b=kyDLoA5EtIQCufNSTX+MM4b0QpQ9Qzqo+q1glUw8naLt52eO7T3Ui7lALSTweSK1Ir
+ B15ZXCrUlbzeq5mhgkmFwG45Ph6trbB7wrZu73tYPd0Ikoc7/QWXL1vEbWJpv4khtR7w
+ T2bjtpcXoiYA4zy3dGopK3NiRLy5tQiyjF9Vqyh5esZ2GxtjBMREcZyMWVuJcZrHBErF
+ YVp0bQvplqAvQuikcoqQzKuLu+yretWKEeFeY9MSlKWFBkppBTZ0xh/NitZSqf/Vx5dD
+ lmdo8LjPyjEItnLAa++p3MYoj2ImVG2Q89bfUtXVzYu+ubgjCwYrm8iNf/O03PBeubHv
+ fd7A==
+X-Gm-Message-State: AOJu0Yw5eGtB8ks0nxHZnOXwHAO2YQS1IG7uBzCaIuGfQ5+LipBNGQAF
+ gx7H7Ncwkg8Teg8ZM18KH/Ltoj+7T2I9ZJzHRbogz5Vxz6cFQyC+zasd3jTuEhgMJE7ILUDuhzf
+ AJcM=
+X-Gm-Gg: ASbGnctJXbQX6o0QT5E+awjqY0kx/q5Ekf1TT8isLP4EF/sDfAKrXp1bLLKBLowxzP5
+ yLcGifg/+ORZxrTQLhlp4pvVxq31gvQwAuBD1gzn1u8qGoRoXp+ktV4NzHYq896iHx+TmZ2wVuA
+ UajCcv+yoI1YS/5dRIlKVkV5xMwPeOu3PfpdDc5fA06r+et+JLBSpXdxVh8XlQhwn9D4vAQe4bk
+ Wv3HIjGRqrdEBzrN4fb2auYtrq2J9319M8mmVX/FYDpbkPUEE+1dAIv4V05ptT/dU2p0J5lA+dY
+ M9cAjHgKCAjk+zqyGdSxRbWeKXlL/DefA808t61HhfSQWIFUmsNDwafvNRRJzQxuSRAGIAZ7LsM
+ z+e8=
+X-Google-Smtp-Source: AGHT+IG9KeGM79kdX8G6+rkn+g7ywDtznBe37JZ+dXAWfajV125oclP9eXwbeFVDDtnNxvujs/ruJg==
+X-Received: by 2002:a05:6214:1c0b:b0:6e1:6c94:b5cd with SMTP id
+ 6a1803df08f44-6e1b2168e8emr605177766d6.2.1737989941019; 
+ Mon, 27 Jan 2025 06:59:01 -0800 (PST)
+Received: from ubuntu.localdomain
+ (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46e6689d9cbsm40945951cf.41.2025.01.27.06.58.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 06:52:58 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Mon, 27 Jan 2025 06:59:00 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: [PATCH v3] test/py: Add a report show test durations
-Date: Mon, 27 Jan 2025 07:52:54 -0700
-Message-ID: <20250127145256.1133143-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v3 0/6] Reconfigure TPM when active hash algorithms dismatch
+Date: Mon, 27 Jan 2025 06:58:45 -0800
+Message-Id: <20250127145855.645845-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,294 +103,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Execution time varies widely with the existing tests. Provides a way to
-produce a summary of the time taken for each test, along with a
-histogram.
+This patch set implements PCR allocate command to handle the algorithm
+dismatches among TPM device, eventlog from previous boot stage and what
+U-Boot supports.
 
-This is enabled with the --timing flag.
+It re-configurates TPM device if any active algorithms are not supported by
+U-Boot or does not exist in the eventlog passed in.
 
-Enable it for sandbox in CI.
+To re-configurate, a PCR allocate command will be sent with new algorithm
+configurations, followed by a shutdown command and a hardware reset to
+activate those new configurations.
 
-Example:
+If any of the algorithms from the eventlog does not supported by U-Boot or
+TPM device does not support all U-Boot algorithms, exit with error.
 
-   Duration : Number of tests
-   ======== : ========================================
-       <1ms :  1
-       <8ms :  1
-      <20ms : # 20
-      <30ms : ######## 127
-      <50ms : ######################################## 582
-      <75ms : ####### 102
-     <100ms : ## 39
-     <200ms : ##### 86
-     <300ms : # 29
-     <500ms : ## 42
-     <750ms : # 16
-      <1.0s : # 15
-      <2.0s : # 23
-      <3.0s :  13
-      <5.0s :  9
-      <7.5s :  1
-     <10.0s :  6
-     <20.0s :  12
+This new feature is under control by a new introduced kconfig
+TPM_PCR_ALLOCATE.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Raymond Mao (6):
+  tpm: add TPM2_Shutdown command
+  tpm: add TPM2_PCR_Allocate command
+  tpm: add wrapper and helper APIs for PCR allocate
+  tpm: add PCR allocate into the eventlog handling
+  tpm: PCR allocate during PCR extend to disable the unsupported
+    algorithms
+  board: qemu-arm: select TPM_PCR_ALLOCATE
 
-Changes in v3:
-- Name the var TEST_PY_EXTRA so we can use it to pass any args to test.py
+ cmd/tpm-v2.c                 | 128 ++++++++++++++++-
+ configs/qemu_arm64_defconfig |   1 +
+ include/tpm-v2.h             |  53 ++++++-
+ lib/Kconfig                  |  12 ++
+ lib/tpm-v2.c                 | 259 ++++++++++++++++++++++++++++++++++-
+ lib/tpm_api.c                |   4 +-
+ lib/tpm_tcg2.c               |  52 +++----
+ 7 files changed, 463 insertions(+), 46 deletions(-)
 
-Changes in v2:
-- Only show the report if the --timing flag is provided
-- Use --timing flag to show the report in CI for just the sandbox tests
-
- .azure-pipelines.yml       |  3 +-
- .gitlab-ci.yml             |  3 +-
- doc/develop/py_testing.rst | 33 +++++++++++++++
- test/py/conftest.py        | 87 ++++++++++++++++++++++++++++++++++++++
- 4 files changed, 124 insertions(+), 2 deletions(-)
-
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index df3f82074af..2bc2ca55b9a 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -295,7 +295,7 @@ stages:
-           export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:\${PATH}
-           export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci
-           # "\${var:+"-k \$var"}" expands to "" if \$var is empty, "-k \$var" if not
--          ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=\$(System.DefaultWorkingDirectory)/results.xml
-+          ./test/py/test.py -ra -o cache_dir="\$UBOOT_TRAVIS_BUILD_DIR"/.pytest_cache --bd \${TEST_PY_BD} \${TEST_PY_ID} \${TEST_PY_EXTRA} \${TEST_PY_TEST_SPEC:+"-k \${TEST_PY_TEST_SPEC}"} --build-dir "\$UBOOT_TRAVIS_BUILD_DIR" --report-dir "\$UBOOT_TRAVIS_BUILD_DIR" --junitxml=\$(System.DefaultWorkingDirectory)/results.xml
-           # the below corresponds to .gitlab-ci.yml "after_script"
-           rm -rf /tmp/uboot-test-hooks /tmp/venv
-           EOF
-@@ -318,6 +318,7 @@ stages:
-       matrix:
-         sandbox:
-           TEST_PY_BD: "sandbox"
-+          TEST_PY_EXTRA: "--timing"
-         sandbox_asan:
-           TEST_PY_BD: "sandbox"
-           OVERRIDE: "-a ASAN"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 88a078c83dc..07e8edae585 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -89,7 +89,7 @@ stages:
-     # "${var:+"-k $var"}" expands to "" if $var is empty, "-k $var" if not
-     - export PATH=/opt/qemu/bin:/tmp/uboot-test-hooks/bin:${PATH};
-       export PYTHONPATH=/tmp/uboot-test-hooks/py/travis-ci;
--      ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID}
-+      ./test/py/test.py -ra --bd ${TEST_PY_BD} ${TEST_PY_ID} ${TEST_PY_EXTRA}
-         ${TEST_PY_TEST_SPEC:+"-k ${TEST_PY_TEST_SPEC}"}
-         --build-dir "$UBOOT_TRAVIS_BUILD_DIR"
-         --junitxml=/tmp/${TEST_PY_BD}/results.xml
-@@ -273,6 +273,7 @@ Check packing of Python tools:
- sandbox test.py:
-   variables:
-     TEST_PY_BD: "sandbox"
-+    TEST_PY_EXTRA: "--timing"
-   <<: *buildman_and_testpy_dfn
- 
- sandbox with clang test.py:
-diff --git a/doc/develop/py_testing.rst b/doc/develop/py_testing.rst
-index 6ff78103409..b50473039be 100644
---- a/doc/develop/py_testing.rst
-+++ b/doc/develop/py_testing.rst
-@@ -246,6 +246,39 @@ Command-line options
-   sets the directory used to store persistent test data. This is test data that
-   may be re-used across test runs, such as file-system images.
- 
-+--timing
-+  shows a histogram of test duration, at the end of the run. The columns are:
-+
-+  Duration
-+      the duration-bucket that this test was in
-+
-+  Total
-+      total time of all tests in this bucket
-+
-+  Number of tests
-+      graph showing the number of tests in this bucket, with the actual number
-+      shown at the end
-+
-+  Example::
-+
-+    Duration :   Total  | Number of tests
-+    ======== : =======  |========================================
-+       <20ms :   418ms  |## 23
-+       <30ms :    9.1s  |######################################## 347
-+       <40ms :   10.0s  |################################# 294
-+       <50ms :    3.1s  |####### 69
-+       <75ms :    2.6s  |#### 43
-+      <100ms :    1.7s  |## 19
-+      <200ms :    3.0s  |## 22
-+      <300ms :    1.7s  | 7
-+      <400ms :   675ms  | 2
-+      <500ms :    2.2s  | 5
-+      <750ms :    8.3s  |# 13
-+       <1.0s :    1.6s  | 2
-+       <2.0s :    9.4s  | 7
-+       <3.0s :    2.4s  | 1
-+       <7.5s :    6.1s  | 1
-+
- `pytest` also implements a number of its own command-line options. Commonly used
- options are mentioned below. Please see `pytest` documentation for complete
- details. Execute `py.test --version` for a brief summary. Note that U-Boot's
-diff --git a/test/py/conftest.py b/test/py/conftest.py
-index 3bd333bfd24..31043a697e2 100644
---- a/test/py/conftest.py
-+++ b/test/py/conftest.py
-@@ -25,6 +25,7 @@ import re
- from _pytest.runner import runtestprotocol
- import subprocess
- import sys
-+import time
- from u_boot_spawn import BootFail, Timeout, Unexpected, handle_exception
- 
- # Globals: The HTML log file, and the connection to the U-Boot console.
-@@ -91,6 +92,9 @@ def pytest_addoption(parser):
-     parser.addoption('--role', help='U-Boot board role (for Labgrid-sjg)')
-     parser.addoption('--use-running-system', default=False, action='store_true',
-         help="Assume that U-Boot is ready and don't wait for a prompt")
-+    parser.addoption('--timing', default=False, action='store_true',
-+                     help='Show info on test timing')
-+
- 
- def run_build(config, source_dir, build_dir, board_type, log):
-     """run_build: Build U-Boot
-@@ -322,6 +326,7 @@ def pytest_configure(config):
-     ubconfig.use_running_system = config.getoption('use_running_system')
-     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
-     ubconfig.connection_ok = True
-+    ubconfig.timing = config.getoption('timing')
- 
-     env_vars = (
-         'board_type',
-@@ -516,6 +521,12 @@ tests_skipped = []
- tests_warning = []
- tests_passed = []
- 
-+# Duration of each test:
-+#    key (string): test name
-+#    value (float): duration in ms
-+test_durations = {}
-+
-+
- def pytest_itemcollected(item):
-     """pytest hook: Called once for each test found during collection.
- 
-@@ -531,6 +542,73 @@ def pytest_itemcollected(item):
- 
-     tests_not_run.append(item.name)
- 
-+
-+def show_timings():
-+    """Write timings for each test, along with a histogram"""
-+
-+    def get_time_delta(msecs):
-+        """Convert milliseconds into a user-friendly string"""
-+        if msecs >= 1000:
-+            return f'{msecs / 1000:.1f}s'
-+        else:
-+            return f'{msecs:.0f}ms'
-+
-+    def show_bar(key, msecs, value):
-+        """Show a single bar (line) of the histogram
-+
-+        Args:
-+            key (str): Key to write on the left
-+            value (int): Value to display, i.e. the relative length of the bar
-+        """
-+        if value:
-+            bar_length = int((value / max_count) * max_bar_length)
-+            print(f"{key:>8} : {get_time_delta(msecs):>7}  |{'#' * bar_length} {value}", file=buf)
-+
-+    # Create the buckets we will use, each has a count and a total time
-+    bucket = {}
-+    for power in range(5):
-+        for i in [1, 2, 3, 4, 5, 7.5]:
-+            bucket[i * 10 ** power] = {'count': 0, 'msecs': 0.0}
-+    max_dur = max(bucket.keys())
-+
-+    # Collect counts for each bucket; if outside the range, add to too_long
-+    # Also show a sorted list of test timings from longest to shortest
-+    too_long = 0
-+    too_long_msecs = 0.0
-+    max_count = 0
-+    with log.section('Timing Report', 'timing_report'):
-+        for name, dur in sorted(test_durations.items(), key=lambda kv: kv[1],
-+                                reverse=True):
-+            log.info(f'{get_time_delta(dur):>8}  {name}')
-+            greater = [k for k in bucket.keys() if dur <= k]
-+            if greater:
-+                buck = bucket[min(greater)]
-+                buck['count'] += 1
-+                max_count = max(max_count, buck['count'])
-+                buck['msecs'] += dur
-+            else:
-+                too_long += 1
-+                too_long_msecs += dur
-+
-+    # Set the maximum length of a histogram bar, in characters
-+    max_bar_length = 40
-+
-+    # Show a a summary with histogram
-+    buf = io.StringIO()
-+    with log.section('Timing Summary', 'timing_summary'):
-+        print('Duration :   Total  | Number of tests', file=buf)
-+        print(f'{"=" * 8} : {"=" * 7}  |{"=" * max_bar_length}', file=buf)
-+        for dur, buck in bucket.items():
-+            if buck['count']:
-+                label = get_time_delta(dur)
-+                show_bar(f'<{label}', buck['msecs'], buck['count'])
-+        if too_long:
-+            show_bar(f'>{get_time_delta(max_dur)}', too_long_msecs, too_long)
-+        log.info(buf.getvalue())
-+    if ubconfig.timing:
-+        print(buf.getvalue(), end='')
-+
-+
- def cleanup():
-     """Clean up all global state.
- 
-@@ -580,6 +658,7 @@ def cleanup():
-                 for test in tests_not_run:
-                     anchor = anchors.get(test, None)
-                     log.status_fail('... ' + test, anchor)
-+        show_timings()
-         log.close()
- atexit.register(cleanup)
- 
-@@ -713,7 +792,9 @@ def pytest_runtest_protocol(item, nextitem):
-     log.get_and_reset_warning()
-     ihook = item.ihook
-     ihook.pytest_runtest_logstart(nodeid=item.nodeid, location=item.location)
-+    start = time.monotonic()
-     reports = runtestprotocol(item, nextitem=nextitem)
-+    duration = round((time.monotonic() - start) * 1000, 1)
-     ihook.pytest_runtest_logfinish(nodeid=item.nodeid, location=item.location)
-     was_warning = log.get_and_reset_warning()
- 
-@@ -726,6 +807,7 @@ def pytest_runtest_protocol(item, nextitem):
-         start_test_section(item)
- 
-     failure_cleanup = False
-+    record_duration = True
-     if not was_warning:
-         test_list = tests_passed
-         msg = 'OK'
-@@ -756,6 +838,11 @@ def pytest_runtest_protocol(item, nextitem):
-             test_list = tests_skipped
-             msg = 'SKIPPED:\n' + str(report.longrepr)
-             msg_log = log.status_skipped
-+            record_duration = False
-+
-+    msg += f' {duration} ms'
-+    if record_duration:
-+        test_durations[item.name] = duration
- 
-     if failure_cleanup:
-         console.drain_console()
 -- 
-2.43.0
+2.25.1
 
