@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80E8CC02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:42:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2064EC0218A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:42:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E94F48129F;
-	Mon, 27 Jan 2025 14:41:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 48BB68142D;
+	Mon, 27 Jan 2025 14:41:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m+mpDvaa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lk6hl7e6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 703E38128B; Mon, 27 Jan 2025 14:41:20 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 660DF8128B; Mon, 27 Jan 2025 14:41:21 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66E3381221
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51AB081265
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-385e27c75f4so3914822f8f.2
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:18 -0800 (PST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-386329da1d9so2256730f8f.1
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737985278; x=1738590078; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737985279; x=1738590079; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=zo2bEjJmpT3dUZKU1ej6VFRJjLdawvYAYDBFsQYULY0=;
- b=m+mpDvaa94B/vsZw6j/5RzGuF36wrgROEeB7FApTrfTnvhQvxKkc185JirXXf6auPV
- Os4s+IKYzuohV3alzDqd0kbfFbXlGi82xPZhuKTYnuIzXBqwckPn+/S1NmX7JgQuPEqJ
- wKa0dR7dS9409T3BhTztsklSnlgjcCZxxUWvifjAKaQZ6RhFSFixTwn3Xlgk40gRRmwj
- h2nfxaf43S+CYd4MryZtBBYJMeO0bzbgqcSv99YCGFaJhwgB3UpxRPunD0Z6Z2DUj29U
- biUhiBQTjT47YO4Wn2mnkkjPOOniE55iQzR0RAnnIUMUoX4hoIlzQspm3msfzTwmMyLs
- C4Cg==
+ :reply-to; bh=5cMlDsQGmg58TbUVZ1JU14W7977ZPednDF6MDXte7ek=;
+ b=Lk6hl7e6jdJAQt5uUMafyixX0jYLexOmhrd+SWeaKGBN4vxeNZaLla6lAIVf7+734T
+ uy+qlWMfOObZI952w4jUJ3PNsuCCvOp3dtbKqycs2lL0Y3/HLZViyEUPgM9bOw6Ftl1S
+ 6ha1/GCvKo+HtIfrFvKBF/r+hIFGJI15PkLIjFI1Pkd4qXvolvdycHJyvekEuSB2HoeJ
+ YyHeuRxuaTGqo4V6aUwsWmQUxGBGu6ciO9v8QrZ3dAGcglQ1gLv0ECCiMBywD71szJx1
+ vpXeaAVmXq9of25/tv4zqRrkD3XuaxOJPSqA3mgLDItGHlgLcBLwixZ8KuRfSGh88+bW
+ 28rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737985278; x=1738590078;
+ d=1e100.net; s=20230601; t=1737985279; x=1738590079;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zo2bEjJmpT3dUZKU1ej6VFRJjLdawvYAYDBFsQYULY0=;
- b=Z14kCAkXyvg/VAPdtniq3tjRPwjquGtBHvtTGAbrZnyjFYwQlm6omagJtTjALUl7Ml
- EL6+R/rOm9MFO5FKYcdPQZCjMctiZTvNiHvY1U/86TcAMQcZoTmr+sM0UwW6bEqpU8aX
- 4jay7gIz7zNiO9cFZsrfL1EjT2Bqj3oITUOodm9afYLsd76NbpkWayquRrePmkinRyB+
- FlUqDO/akhHffldVQ3+jPhY0qkTRkL5M4bnw04HKRdnkVOoUiH7VHrjBdmtpPF2na36X
- rqUV829vdcWhlh5ouhSk3VEGreaddjZ/DFE8XIBEJmOVQzmxp2PpurAeZbffP5MQB41Z
- 8k6w==
+ bh=5cMlDsQGmg58TbUVZ1JU14W7977ZPednDF6MDXte7ek=;
+ b=RTe6mk9PrHzR+SLdp+IgDQ88hfS9cOBGJa+kcQEdCEGOB/gFHbF5BDMZl7ic8VKHhY
+ g6hicLoM5Sw6jekS24VJ1dpCpE2cEidDqkY8Cw173pCxCsS3NmDuNXmeZeCFzuywLnzs
+ fbCnShiLLB2I3FpzcE5csTNr5txZ6xRPT+lZT8n+LYOHaxcckvMx2vXXG00JC423NJ0X
+ 4wXblCBH4LHfCso2b6RAH45w5Gd+hBcX/xUSQs90pQ7qmbk+62zK0BLYbzKaRRyM43/9
+ eiHFrMNLCbzUhvRyhYGnINufN+AnO+biuiWzfF9vEOxSnanGhO5K3wcv5FjIF/eXiNQd
+ g7Rg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVlNL18IwOiOVcOr2CQ6KwiJjUn3dZR2c0d5E/772vbDQz+4MgLatBn7DdBKGkTAFtG0S+rXxY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0AFKilhIY0EypKEH/H8qWRMxlDqqpQCWlYyQ3YOdggvfcNJcY
- u61K3SPTt/72qvw2IBfRhoO7zEU4bfsebc1pfAesMDnZzToTUiBkYAn85A==
-X-Gm-Gg: ASbGncuF77MbCWBIecENq2cKcHMapQ1a3niI0T9l90K8NpEwge53A1HCMZQfYDVq74k
- PNQJpm+vGflqtrev16lYBVkv1a1P1H5SfkJR4FFzDB2qxWvGXsA8qTwpeCjw8NUF6DYtSAve35P
- vEwTGwjcN+APnaUQ/M9zORHWaSZuRH8mFhr9hc6gxLO7e1fQGMB1w2XujMlBraqotoVSZp2J+ag
- 2ZXUo8Ikqs3tOANoIXWMBdIme4IT473fQYwRAiIgpaMV0HuLflc7uGwEGGFNchkT8weiw/tE0XQ
- VCVGY6HUVSt3Ut0u8m425SuLBIZqh3vGtIDdJTENJO2UmSr/pTDFqeYh9Qrt
-X-Google-Smtp-Source: AGHT+IF4vmHTWldXM3YcycE53uOSwWmcUwxId34dLAxPB7vE3I0GMfZD3ZVBluumBsqBfC8jNtgasg==
-X-Received: by 2002:a05:6000:1fa4:b0:38a:888c:7df1 with SMTP id
- ffacd0b85a97d-38bf5677fb4mr40159702f8f.11.1737985277633; 
- Mon, 27 Jan 2025 05:41:17 -0800 (PST)
+ AJvYcCWFEdGr+mdaIrr8Zh4rl4Nen1pPV2UwsMt4jm/kXithHGnxIANtpA1WgNINFqBLmZifxjYjNds=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywp5HaU0O4Qnnzxdg8ahmjMRBEkddUbPxCCrRSoKYd8Fk475o/h
+ Ylmbs/yms5QwxGV+JL37ywTJ6bziwJQhhZczXXSg/RrN1PmOj/EF
+X-Gm-Gg: ASbGncsfDVUTnB18LvD3jfrn8pha7x+oYihrlCoZoIkzADkJ9cQgo85ca1HHMulYsPX
+ g9fz0towj1NZ5Mmwrg5kBXd0dotHM9v3Ppv2CF6Ssk6I7Lu8Z7/ZQ+7lnvHQbNA6J0Q95wRmFEr
+ JMK020ZMXo0S/du3HWfGi5yBisxBDnvcpgrdZ+RkpLVlHzm7+U+3T3h/8FfyzRktXK8ojhEVedp
+ agpboaMfL/gU/cD1Xpu9PVQzrH4WSM1AeJDPCSG5sGkiCXMXIlRwvcjnTiI8XGI3GDyiK+BZMJl
+ VkZRlI55iaX1lOvgJEeMU8IvfaO+ULjYYPdh3yXzGNVhgrgemg==
+X-Google-Smtp-Source: AGHT+IF6HRJP4hbrSxoWQnztbThhg9apiJskwVAqeQ0tO22QA8MJ5bajZW0X4m23EV8FtxCLjM0QUw==
+X-Received: by 2002:a5d:64e2:0:b0:38b:ef2b:422 with SMTP id
+ ffacd0b85a97d-38bf57a9615mr32878442f8f.36.1737985278650; 
+ Mon, 27 Jan 2025 05:41:18 -0800 (PST)
 Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
  [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.16
+ ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 05:41:17 -0800 (PST)
+ Mon, 27 Jan 2025 05:41:18 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  Weijie Gao <weijie.gao@mediatek.com>,
@@ -79,10 +79,9 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  "SkyLake.Huang" <skylake.huang@mediatek.com>,
  John Crispin <john@phrozen.org>, Dong Huang <dong.huang@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 6/8] mediatek: mt7981: move gpio-controller up and rename
- pinctrl to pio
-Date: Mon, 27 Jan 2025 14:40:43 +0100
-Message-ID: <20250127134046.26345-7-ansuelsmth@gmail.com>
+Subject: [PATCH 7/8] arm: dts: mediatek: add USB nodes for MT7981
+Date: Mon, 27 Jan 2025 14:40:44 +0100
+Message-ID: <20250127134046.26345-8-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250127134046.26345-1-ansuelsmth@gmail.com>
 References: <20250127134046.26345-1-ansuelsmth@gmail.com>
@@ -104,112 +103,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move gpio-controller up to pinctrl node and rename label to "pio" to
-match the label used in upstream kernel linux.
+From: John Crispin <john@phrozen.org>
 
-Update any DTS that reference the pinctrl to follow the new naming and
-structure.
+Add USB PHY nodes for MT7981. These are needed for USB support and also
+for PCIe support as the u3 PHY can also be used for PHY.
 
+Signed-off-by: John Crispin <john@phrozen.org>
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/dts/mt7981-emmc-rfb.dts | 4 ++--
- arch/arm/dts/mt7981-rfb.dts      | 4 ++--
- arch/arm/dts/mt7981-sd-rfb.dts   | 4 ++--
- arch/arm/dts/mt7981.dtsi         | 8 +++-----
- 4 files changed, 9 insertions(+), 11 deletions(-)
+ arch/arm/dts/mt7981.dtsi | 48 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
 
-diff --git a/arch/arm/dts/mt7981-emmc-rfb.dts b/arch/arm/dts/mt7981-emmc-rfb.dts
-index d6590f01cf8..67f178bc232 100644
---- a/arch/arm/dts/mt7981-emmc-rfb.dts
-+++ b/arch/arm/dts/mt7981-emmc-rfb.dts
-@@ -48,7 +48,7 @@
- 	mediatek,gmac-id = <0>;
- 	phy-mode = "2500base-x";
- 	mediatek,switch = "mt7531";
--	reset-gpios = <&gpio 39 GPIO_ACTIVE_HIGH>;
-+	reset-gpios = <&pio 39 GPIO_ACTIVE_HIGH>;
- 
- 	fixed-link {
- 		speed = <2500>;
-@@ -56,7 +56,7 @@
- 	};
- };
- 
--&pinctrl {
-+&pio {
- 	spic_pins: spi1-pins-func-1 {
- 		mux {
- 			function = "spi";
-diff --git a/arch/arm/dts/mt7981-rfb.dts b/arch/arm/dts/mt7981-rfb.dts
-index d6ebd6539c3..08e1b76b473 100644
---- a/arch/arm/dts/mt7981-rfb.dts
-+++ b/arch/arm/dts/mt7981-rfb.dts
-@@ -39,7 +39,7 @@
- 	mediatek,gmac-id = <0>;
- 	phy-mode = "2500base-x";
- 	mediatek,switch = "mt7531";
--	reset-gpios = <&gpio 39 GPIO_ACTIVE_HIGH>;
-+	reset-gpios = <&pio 39 GPIO_ACTIVE_HIGH>;
- 
- 	fixed-link {
- 		speed = <2500>;
-@@ -47,7 +47,7 @@
- 	};
- };
- 
--&pinctrl {
-+&pio {
- 	spi_flash_pins: spi0-pins-func-1 {
- 		mux {
- 			function = "flash";
-diff --git a/arch/arm/dts/mt7981-sd-rfb.dts b/arch/arm/dts/mt7981-sd-rfb.dts
-index 2adbc374725..2f43e65ac5b 100644
---- a/arch/arm/dts/mt7981-sd-rfb.dts
-+++ b/arch/arm/dts/mt7981-sd-rfb.dts
-@@ -48,7 +48,7 @@
- 	mediatek,gmac-id = <0>;
- 	phy-mode = "2500base-x";
- 	mediatek,switch = "mt7531";
--	reset-gpios = <&gpio 39 GPIO_ACTIVE_HIGH>;
-+	reset-gpios = <&pio 39 GPIO_ACTIVE_HIGH>;
- 
- 	fixed-link {
- 		speed = <2500>;
-@@ -56,7 +56,7 @@
- 	};
- };
- 
--&pinctrl {
-+&pio {
- 	spic_pins: spi1-pins-func-1 {
- 		mux {
- 			function = "spi";
 diff --git a/arch/arm/dts/mt7981.dtsi b/arch/arm/dts/mt7981.dtsi
-index 3c8b9ab0574..b2c4cd7b54a 100644
+index b2c4cd7b54a..2360c6bbdca 100644
 --- a/arch/arm/dts/mt7981.dtsi
 +++ b/arch/arm/dts/mt7981.dtsi
-@@ -106,7 +106,7 @@
- 		bootph-all;
+@@ -6,6 +6,7 @@
+ 
+ #include <dt-bindings/interrupt-controller/irq.h>
+ #include <dt-bindings/interrupt-controller/arm-gic.h>
++#include <dt-bindings/phy/phy.h>
+ #include <dt-bindings/clock/mt7981-clk.h>
+ #include <dt-bindings/reset/mt7629-reset.h>
+ #include <dt-bindings/pinctrl/mt65xx.h>
+@@ -315,4 +316,51 @@
+ 		status = "disabled";
  	};
  
--	pinctrl: pinctrl@11d00000 {
-+	pio: pinctrl@11d00000 {
- 		compatible = "mediatek,mt7981-pinctrl";
- 		reg = <0x11d00000 0x1000>,
- 		      <0x11c00000 0x1000>,
-@@ -120,10 +120,8 @@
- 		reg-names = "gpio", "iocfg_rt", "iocfg_rm",
- 			    "iocfg_rb", "iocfg_lb", "iocfg_bl",
- 			    "iocfg_tm", "iocfg_tl", "eint";
--		gpio: gpio-controller {
--			gpio-controller;
--			#gpio-cells = <2>;
--		};
-+		gpio-controller;
-+		#gpio-cells = <2>;
- 	};
- 
- 	pwm: pwm@10048000 {
++	xhci: xhci@11200000 {
++		compatible = "mediatek,mt7981-xhci",
++			     "mediatek,mtk-xhci";
++		reg = <0x11200000 0x2e00>,
++		      <0x11203e00 0x0100>;
++		reg-names = "mac", "ippc";
++		interrupts = <GIC_SPI 173 IRQ_TYPE_LEVEL_HIGH>;
++		phys = <&u2port0 PHY_TYPE_USB2>,
++		       <&u3port0 PHY_TYPE_USB3>;
++		clocks = <&infracfg CLK_INFRA_IUSB_SYS_CK>,
++			 <&infracfg CLK_INFRA_IUSB_CK>,
++			 <&infracfg CLK_INFRA_IUSB_133_CK>,
++			 <&infracfg CLK_INFRA_IUSB_66M_CK>,
++			 <&topckgen CLK_TOP_U2U3_XHCI_SEL>;
++		clock-names = "sys_ck",
++			      "ref_ck",
++			      "mcu_ck",
++			      "dma_ck",
++			      "xhci_ck";
++		mediatek,u3p-dis-msk = <0x1>;
++		status = "okay";
++	};
++
++	usbtphy: usb-phy@11e10000 {
++		compatible = "mediatek,mt7981",
++			     "mediatek,generic-tphy-v2";
++		#address-cells = <1>;
++		#size-cells = <1>;
++		status = "okay";
++
++		u2port0: usb-phy@11e10000 {
++			reg = <0x11e10000 0x700>;
++			clocks = <&topckgen CLK_TOP_USB_FRMCNT_SEL>;
++			clock-names = "ref";
++			#phy-cells = <1>;
++			status = "okay";
++		};
++
++		u3port0: usb-phy@11e10700 {
++			reg = <0x11e10700 0x900>;
++			clocks = <&topckgen CLK_TOP_USB3_PHY_SEL>;
++			clock-names = "ref";
++			#phy-cells = <1>;
++			mediatek,syscon-type = <&topmisc 0x218 0>;
++			status = "okay";
++		};
++	};
+ };
 -- 
 2.47.1
 
