@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC30C0218C
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 07:49:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9C2FC0218C
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 07:49:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEDB8810FC;
-	Mon, 27 Jan 2025 08:49:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4DCB0811AC;
+	Mon, 27 Jan 2025 08:49:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="jbpTv/gT";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="wRfMXwGL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6640280FF7; Mon, 27 Jan 2025 08:49:22 +0100 (CET)
-Received: from mail-40136.proton.ch (mail-40136.proton.ch [185.70.40.136])
+ id A8E4F80FC4; Mon, 27 Jan 2025 08:49:28 +0100 (CET)
+Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C1778111F
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:49:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B6F9180FF7
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:49:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1737964157; x=1738223357;
- bh=zc6XYyu5G9kCK4ZI7E9MIoEWCI63VL7i1L9u4zf4F1Q=;
+ s=protonmail3; t=1737964166; x=1738223366;
+ bh=VEP5MLlcSXw63SbVSNQhEGcswvlRjNHnrd/l4Jo2jns=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=jbpTv/gTKHUxMp2elSvu6k6kXNSwo/LqtGQxJrvxyp9T11Yv4TaggQi8XA6tRUflq
- 6wQNC+pQGwAcrh/lSgwyJkJN9e8DuL41d2TnT3XBHsSSTFSqs01fkxsfBzDYa1OWXa
- 0UWUHrJRxu630Ti7xcMQ8mQpzbqd3USlT+3SCWquYAQ4QiellCDHObWqQ2UDXIGdVc
- EG6PWewzKbadUVMma+vDmFp+lGsDKDfI4lHcHkeKMGDGkBhQKLU7TcQn11Alg9JjDX
- fdotKoDV8II/TmkNyNxydsHEpHOAP6+2X8FLZiJnt4xmS1m7zJqEsoUqg7BzHYLa+/
- tEIEmnAbx1cPw==
-Date: Mon, 27 Jan 2025 07:49:12 +0000
+ b=wRfMXwGLpN13ma6P6DajtBb69Q/a0AgNT0y2ysb4kZOZPY8ngnfYL8gNxT2qN6X8L
+ +wpAKUnl7YMse8HoyPGeh0BbB5SIt/yyNiAG/1arCTggzidlvtFi0cEzMjDpYFyFDL
+ 4cpSG30CCw5ChdhnCrQ8t4Jy2ggCaxU7wwN2hQt3DtBxl16J70fd3+bY+ASmbMs08j
+ /N9dWJ0TGl+6QEv1u0zK5JASo4cNLKiTQ9eP1r9NDe84nU0Vr5VmLTw3AyYDg2BjYS
+ UoE5mRj1U1FxtTg1ln84Udeq/w5RJpKnmB91lcop9VQ0rJTlfzyEeYzt2jEY+Z+wvV
+ LT4ImJZPNZ0eg==
+Date: Mon, 27 Jan 2025 07:49:20 +0000
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
@@ -45,12 +45,12 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 From: Sam Day <me@samcday.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH 3/4] clk/qcom: apq8016: improve clk_enable logging
-Message-ID: <20250127-msm-rng-fixes-v1-3-00f5d2284314@samcday.com>
+Subject: [PATCH 4/4] rng: msm: keep core clock disabled when PRNG not in use
+Message-ID: <20250127-msm-rng-fixes-v1-4-00f5d2284314@samcday.com>
 In-Reply-To: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
 References: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 115aa5f2f1fb48b307fd085de3f9334c2da32ba1
+X-Pm-Message-ID: 091d8121f6a52202684b1bdb37367fb83751717c
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -70,34 +70,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Properly warn when an unknown clock is requested to be enabled.
+This is how the kernel does it. APQ8016E TRM also states that this clock
+can be turned off when no random numbers are needed.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- drivers/clk/qcom/clock-apq8016.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/rng/msm_rng.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8=
-016.c
-index ff5e7ca6f02148427240b80fb08efdd356934cd5..7628e7f3ca299286ddeed7eabe4=
-b336e011704c5 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -140,12 +140,12 @@ static int apq8016_clk_enable(struct clk *clk)
- {
- =09struct msm_clk_priv *priv =3D dev_get_priv(clk->dev);
+diff --git a/drivers/rng/msm_rng.c b/drivers/rng/msm_rng.c
+index 01505509103f28f7c91dd47edb83c23359163c82..aab602c5ed0bfed8b7cb9593fe2=
+2a8cef8f0f61a 100644
+--- a/drivers/rng/msm_rng.c
++++ b/drivers/rng/msm_rng.c
+@@ -44,6 +44,11 @@ static int msm_rng_read(struct udevice *dev, void *data,=
+ size_t len)
+ =09u32 *retdata =3D data;
+ =09size_t maxsize;
+ =09u32 val;
++=09int ret;
++
++=09ret =3D clk_enable(&priv->clk);
++=09if (ret < 0)
++=09=09return ret;
 =20
--=09if (priv->data->num_clks < clk->id) {
-+=09if (priv->data->num_clks < clk->id || !apq8016_clks[clk->id].reg) {
- =09=09log_warning("%s: unknown clk id %lu\n", __func__, clk->id);
- =09=09return 0;
- =09}
+ =09/* calculate max size bytes to transfer back to caller */
+ =09maxsize =3D min_t(size_t, MAX_HW_FIFO_SIZE, len);
+@@ -66,6 +71,8 @@ static int msm_rng_read(struct udevice *dev, void *data, =
+size_t len)
+ =09=09=09break;
+ =09} while (currsize < maxsize);
 =20
--=09debug("%s: clk %s\n", __func__, apq8016_clks[clk->id].name);
-+=09debug("%s: enabling clock %s\n", __func__, apq8016_clks[clk->id].name);
- =09qcom_gate_clk_en(priv, clk->id);
-=20
++=09clk_disable(&priv->clk);
++
  =09return 0;
+ }
+=20
+@@ -118,7 +125,9 @@ static int msm_rng_probe(struct udevice *dev)
+ =09if (ret < 0)
+ =09=09return ret;
+=20
+-=09return msm_rng_enable(priv, 1);
++=09ret =3D msm_rng_enable(priv, 1);
++=09clk_disable(&priv->clk);
++=09return ret;
+ }
+=20
+ static int msm_rng_remove(struct udevice *dev)
 
 --=20
 2.47.1
