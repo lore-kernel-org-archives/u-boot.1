@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6490C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 11:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1317BC02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 12:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61D8C81119;
-	Mon, 27 Jan 2025 12:45:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 767D781119;
+	Mon, 27 Jan 2025 13:11:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y1NCFP3b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RyI3teZk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7356F8111F; Mon, 27 Jan 2025 12:45:35 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id EC8F38111F; Mon, 27 Jan 2025 13:11:42 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A155581115
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 12:45:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 49CF681115
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 13:11:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e54bd61e793so7047510276.2
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 03:45:32 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-21669fd5c7cso74917815ad.3
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 04:11:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737978331; x=1738583131; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cFPPFyo2YfEPcSvwn7e/CEZBaLf/HylkYkbQwA47zvU=;
- b=y1NCFP3bU54c7ASn6TEkMEJrdsJWIsffJR48Wd5MGcTFT0hogVFTjmOkp/OYEjPoOk
- 7mKle2u6IrEab+LzvPaFx8l0awenj1Bk6Xbgp1YElm3u3hHOJ+Gg51AHd05eEzb3mH57
- +39zDm5eM7Emnt2rVtZiVM+HYcQO0exdrpE8A6qaIyZ/55VNn9ND6cQBWLHQ/tnNYc9h
- CHDlmkvlMLcSt0LScIAKiAoCq+OLkflWIVgunzZ909OhnDd0+W0VV6+DLpevbl5TS8iM
- C0jd+oQtrON/pgN1ecJparaZHrScnuOj4qdIPCOHg19F6XUqk92tB7I+THH1lVnAVv3h
- 7+zA==
+ d=gmail.com; s=20230601; t=1737979899; x=1738584699; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aPlWLNyaIqAi3QU0qksVsNeTacSigRr9aFThzKr1e+s=;
+ b=RyI3teZkzWAGNGmi5QEjJ+KQupeybGYwKKatEfFpcK5xi72K9+C524v5nq+WogE59t
+ mAAUCqHbF3toWk/1hyyDPMWX/PD3+VN9yDejgJcmjGECWsGNV9wf210TRdxvmUYF1mRE
+ YFR2uWUc8i1Bn2nczKClVnawTclMmPD4dMiqfj6mhtlwKA0G0gB/6Z5vGZ6iUJwwqV4C
+ 6FfYavTEQBw1Wc8UxTZTuaJfmF4N9Bp7dBgAyAEDatw/YFZYDavckDKo3pjHGgEfOzRc
+ P8o+YavSQ2JVvf+YuZQneCGxWoLo2XAj4/idQpFPVttLjpIWwNKz0pCuv0aieCfIVZEv
+ Ieeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737978331; x=1738583131;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1737979899; x=1738584699;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cFPPFyo2YfEPcSvwn7e/CEZBaLf/HylkYkbQwA47zvU=;
- b=PZrGPqsyswZPijfgkhYdZecTg16fah7wOfW/D+HRpwSZsD9I+BkmGkSyGUKCUnn1cq
- QsU+quidrlSPppmM3dTRzoYMZMwInF0crc3S5F3zWx+HV2jyMS/l2fUkjCNOxwGzPpfB
- 3QznMbv6Nh7pg9a7l41NDmnchPGDl8kyu70VwLMZ0hu5U1cwxhmA7XhBEAH0BkRBqxGt
- ICPUCzrZbhmdhnrNY8MO3Mtwg5hePRg573jophEV5QEcpTmOlBZHpMzRlAlVJ/poFcfd
- +3EicDT6Ejs+aFx6mbiM76+qZn6DlKF8c1JCTrWHTMVssUO0Sr40WlLlaDj5eRD4tisg
- QSnA==
-X-Gm-Message-State: AOJu0Yw+aIf0IeB70jRkDLlMI4d2zTTmsmpNrAegYQR032Z6WIFUCxsk
- r9WdvAqqeyoO07a0kJOEb31wx69x4at2u3Y82b3LJI8PP6+vmJziQBX1i/7lsPqkFJdkswv5wKE
- hPWVXCop5mXyGLDW2Jgh+vzOIYP3qvjUNUYlFJg==
-X-Gm-Gg: ASbGncu9N0z7UnGehJi5KS+WpymmoNtx+6NpTTq2ktPeeYHRAl1nqm6AbpFjdEhViU7
- h2cO80jKDx1TWhlE+nCwv/yeweF2hh1pRG0qNMExNSQRWhDpucHVi/gd5thLtQIHZi+Ila2HX
-X-Google-Smtp-Source: AGHT+IGQEgi7wWwc9hFBJbHFfXCWYawKVUn+3kp3BS/lx8w1B6IlUkPHvsB5LUSANuPSsoAVYC4e/AlqS8gv8m3QxPE=
-X-Received: by 2002:a05:6902:1703:b0:e58:1556:2c18 with SMTP id
- 3f1490d57ef6-e5815562f6cmr15656381276.41.1737978331450; Mon, 27 Jan 2025
- 03:45:31 -0800 (PST)
+ bh=aPlWLNyaIqAi3QU0qksVsNeTacSigRr9aFThzKr1e+s=;
+ b=Vsh2IuEvxgeJNr4vLf0+7kFOZufnIjXBEHzf++yajcj1UsDubV/ktyGhogRul27C3Y
+ 49i/JZdk/CidltgQ0yTFpAqGA301JwCr7kozvCYkiR70XN7Jhjjc1C3vUa8DXlN8FGHB
+ Fcw2cLA2vmdonW4hJBPLr3iIMaAF+iILqPe8ioLVyQ6Zm+c7BtKe2houovhquDYrPuLn
+ 9PAzmAHlp+QCIgfZQ8KuDcd6GulsT9gniz+JLAfflfPV5x157+4cCCGMLw5WYFfYMefm
+ eY5kW7hNJvZoH5ZiDldFJW5YhN2vRpGrgof1YOh+QTLRR8R/h+6ECv34GPNRFzz8Fnnv
+ 7WvQ==
+X-Gm-Message-State: AOJu0YwOiXu1WGlvbBd0mFrmi/8h3aVgyZnuZunCG3PzdnRxTCl8j7jE
+ yZv8K8A04oDfA3TZsBOu3DWcjIKAu38H7jLER7Ct/dJyochn3kL3pVH7Uw==
+X-Gm-Gg: ASbGnct6wFZba5HJwrgrdIogTdzisSujCs3BeJ58AcEe1jbE7cQ1PSx9qIN+8qHQ2zg
+ OC7od5RbVcSEaNC3vEA03/0apPUTSTGqRCNVGENBwhAOXyUnNtshXlIljv9uuO2unm90v8ZPbA+
+ 73zKEa8IzMueeN/Cde2J3OWoK6kfQw7xm3bpmyVDgNRSSxt0T8UT9GBcDDAa23TOtxMr16v+KDt
+ c/ytDk6UU7v9DZywbVQ3TVM+Xn+CaAlFYEu/oew8JVRgch/qhhxnGC28AHvOjKTduMKi01Lx5p9
+ juPYgXRoUbIn5D3ZBt0=
+X-Google-Smtp-Source: AGHT+IFyOAoJANkHxhd7UVVJTcIUkFlBOb8IKbgobwol47KK8QLQHP7qMo3cjvbQe5ZV4IUapZOVJA==
+X-Received: by 2002:a17:902:ea0e:b0:216:6fb5:fd83 with SMTP id
+ d9443c01a7336-21c35563092mr180222635ad.29.1737979898615; 
+ Mon, 27 Jan 2025 04:11:38 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:eb9d:1fda:389d:6d4c])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21da3ea3b69sm61698825ad.61.2025.01.27.04.11.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jan 2025 04:11:37 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20250127
+Date: Mon, 27 Jan 2025 09:11:34 -0300
+Message-Id: <20250127121134.634412-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250120105045.1281262-1-sughosh.ganu@linaro.org>
- <CAC_iWjJtjNE0-VJJT1+aCoaADDNYyy-niZSizo-Sn6898ArLHg@mail.gmail.com>
- <CADg8p978OtFgkimMSsWyqk9pW5FgkBKdXFTKWf8UEtR=zb7U5Q@mail.gmail.com>
-In-Reply-To: <CADg8p978OtFgkimMSsWyqk9pW5FgkBKdXFTKWf8UEtR=zb7U5Q@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 Jan 2025 13:44:55 +0200
-X-Gm-Features: AWEUYZnzewac2bvd-M5aWINubJmzdoXOdol2lRmvHiVaUEImnRqn8UR2WJaUGVE
-Message-ID: <CAC_iWjKsYRqN2jK5DqGhJPMN77OthtkG9X8sT3fheLKur_Z23Q@mail.gmail.com>
-Subject: Re: [PATCH v3 0/5] Add pmem node for preserving distro ISO's
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,114 +93,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Tom,
 
-On Mon, 27 Jan 2025 at 08:47, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> On Fri, 24 Jan 2025 at 17:10, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Heinrich, Tobias
-> >
-> > There's a slight problem that I forgot when commenting v2.
-> >
-> > Heinrich's idea of plugging this into blkmap is eventually the right
-> > thing to do.
-> >
-> > However, when I started coding this I only added the pmem memory as
-> > 'reserved' in the DT hoping that would work.
-> > Unfortunately, this depends on a kernel config option. I've managed to
-> > track down the problem here[0], but I haven't found time to test it
-> > properly and send it upstream.
-> > So for this feature to work reliably we *need* to remove the memory
-> > map we hand over to the OS.
-> >
-> > Since using EFI memmap function into the blkmap code makes no sense,
-> > can we perhaps merge v2 (or a variant of it), which only targets EFI,
-> > with an explanation of *why* while I try to sort out the kernel issue?
->
-> If it has been decided to go with the approach taken in V2, I will
-> send an updated series which incorporates the other nits that Heinrich
-> had on the patches. Those were handled in this version.
+Please pull from u-boot-imx/master, thanks.
 
-Yea I think that's the sane thing we can do for now, since this
-depends on being able to remove the memory for the map we present to
-the OS.
+The following changes since commit 8162f35a108441b8d7a44ac9266c1a64dbf79fd5:
 
-Just don't limit it to http only.
+  Merge patch series "test: Improvements to ut command and test-suite running" (2025-01-24 14:35:37 -0600)
 
-Cheers
-/Ilias
->
-> -sughosh
->
-> >
-> >
-> > [0] https://git.linaro.org/people/ilias.apalodimas/net-next.git/commit/?h=main
-> >
-> > Thanks
-> > /Ilias
-> >
-> > On Mon, 20 Jan 2025 at 12:51, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > >
-> > > When installing a distro via EFI HTTP boot some OS installers expect
-> > > the .iso image to be preserved and treat it as a "CDROM" to install
-> > > packages.
-> > >
-> > > This is problematic in EFI, since U-Boot mounts the image, starts the
-> > > installer, and eventually calls ExitBootServices. At that point the
-> > > image U-Boot mounted disappears. Some distros don't care and download
-> > > the missing packages from a web archive, while others halt the
-> > > installation complaining they can't find certain packages.
-> > >
-> > > If the firmware uses ACPI, this is supported by using NFIT which
-> > > provides NVDIMM ramdisks to the OS and preserves the image.
-> > > We don't have anything in place for Device Trees though. Since DT
-> > > supports persistent memory nodes (pmem) use those and preserve the
-> > > .iso for installers.
-> > >
-> > > The issue can be reproduced by attempting an EFI HTTP boot with Ubuntu
-> > > live server ISO, or a Rocky Linux ISO. The installation would fail
-> > > with the failure to locate certain packages.
-> > >
-> > > The earlier version had aligned the addition of pmem nodes with the
-> > > EFI HTTP boot feature. This has been changed, based on a review
-> > > comment from Heinrich to instead be done by looping through the memory
-> > > based blkmamp devices.
-> > >
-> > > Changes since V2:
-> > > * Fix a checkpatch error for putting a blank line after a function
-> > > * Use blkmap device based scanning for adding the pmem nodes
-> > >
-> > >
-> > >
-> > > Ilias Apalodimas (2):
-> > >   efi_loader: add a function to remove memory from the EFI map
-> > >   efi_loader: preserve installer images in pmem
-> > >
-> > > Masahisa Kojima (1):
-> > >   fdt: add support for adding pmem nodes
-> > >
-> > > Sughosh Ganu (2):
-> > >   blkmap: store type of blkmap device in corresponding structure
-> > >   blkmap: add pmem nodes for blkmap mem mapping devices
-> > >
-> > >  boot/fdt_support.c            |  40 ++++++++++++-
-> > >  boot/image-fdt.c              |   9 +++
-> > >  cmd/blkmap.c                  |  16 ++++--
-> > >  drivers/block/blkmap.c        |  90 +++--------------------------
-> > >  drivers/block/blkmap_helper.c |  47 +++++++++++++++-
-> > >  include/blkmap.h              | 103 +++++++++++++++++++++++++++++++++-
-> > >  include/efi_loader.h          |  11 ++--
-> > >  include/fdt_support.h         |  13 +++++
-> > >  lib/efi_loader/efi_bootmgr.c  |  22 ++++++--
-> > >  lib/efi_loader/efi_memory.c   |  51 ++++++++++++-----
-> > >  lib/lmb.c                     |   4 +-
-> > >  test/dm/blkmap.c              |  16 +++---
-> > >  12 files changed, 302 insertions(+), 120 deletions(-)
-> > >
-> > > --
-> > > 2.34.1
-> > >
-> > >
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20250127
+
+for you to fetch changes up to 219b0488200633cda74ecc04cda2eb84443ab88d:
+
+  net: fsl_enetc: Enable optional ENETREF clock on i.MX95 (2025-01-27 00:27:54 -0300)
+
+u-boot-imx-master-20250127
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/24366
+
+- Refactor the imx pinctrl driver.
+- Enable optional ENETREF clock on i.MX95
+- Remove optional from tee-os entry on the i.MX8M u-boot devicetrees.
+----------------------------------------------------------------
+Marek Vasut (11):
+      pinctrl: imx: Push imx_pinctrl_ops into drivers and staticize
+      pinctrl: imx: Rename imx_pinctrl_ops to match drivers
+      pinctrl: imx: Drop .remove callback for SCU variant
+      pinctrl: imx: Inline struct imx_pinctrl_soc_info access into probe
+      pinctrl: imx: Split imx_pinctrl_probe() into common and mmio parts
+      pinctrl: imx: Rename imx_pinctrl_remove() to imx_pinctrl_remove_mmio()
+      pinctrl: imx: Split imx_pinctrl_set_state() into common and mmio parts
+      pinctrl: imx: Split imx_pinctrl_set_state_scu() from imx_pinctrl_set_state_mmio()
+      pinctrl: imx: Fold imx_pinctrl_set_state_scu() from pinctrl-imx8.c
+      pinctrl: imx: Split MMIO accessors into pinctrl-imx-mmio.c
+      net: fsl_enetc: Enable optional ENETREF clock on i.MX95
+
+Yannic Moog (1):
+      arm: dts: imx8m*-u-boot: remove optional from tee-os entry
+
+ arch/arm/dts/imx8mm-u-boot.dtsi        |   1 -
+ arch/arm/dts/imx8mn-u-boot.dtsi        |   1 -
+ arch/arm/dts/imx8mp-u-boot.dtsi        |   1 -
+ arch/arm/dts/imx8mq-u-boot.dtsi        |   1 -
+ drivers/net/fsl_enetc.c                |  23 +++-
+ drivers/pinctrl/nxp/Kconfig            |  22 ++--
+ drivers/pinctrl/nxp/Makefile           |   2 +-
+ drivers/pinctrl/nxp/pinctrl-imx-mmio.c | 228 +++++++++++++++++++++++++++++++++
+ drivers/pinctrl/nxp/pinctrl-imx.c      | 222 ++------------------------------
+ drivers/pinctrl/nxp/pinctrl-imx.h      |  20 +--
+ drivers/pinctrl/nxp/pinctrl-imx5.c     |  18 +--
+ drivers/pinctrl/nxp/pinctrl-imx6.c     |  18 +--
+ drivers/pinctrl/nxp/pinctrl-imx7.c     |  18 +--
+ drivers/pinctrl/nxp/pinctrl-imx7ulp.c  |  18 +--
+ drivers/pinctrl/nxp/pinctrl-imx8.c     |  86 +++++++++++--
+ drivers/pinctrl/nxp/pinctrl-imx8m.c    |  18 +--
+ drivers/pinctrl/nxp/pinctrl-imx8ulp.c  |  18 +--
+ drivers/pinctrl/nxp/pinctrl-imx93.c    |  18 +--
+ drivers/pinctrl/nxp/pinctrl-imxrt.c    |  18 +--
+ drivers/pinctrl/nxp/pinctrl-scu.c      |  70 ----------
+ drivers/pinctrl/nxp/pinctrl-vf610.c    |  18 +--
+ 21 files changed, 418 insertions(+), 421 deletions(-)
+ create mode 100644 drivers/pinctrl/nxp/pinctrl-imx-mmio.c
+ delete mode 100644 drivers/pinctrl/nxp/pinctrl-scu.c
