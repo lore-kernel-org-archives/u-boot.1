@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60AC1C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:41:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC25C0218A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:41:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D9BB8129B;
+	by phobos.denx.de (Postfix) with ESMTP id 95F4D812C3;
 	Mon, 27 Jan 2025 14:41:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QrU8GPnl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iVNmS6jQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7B5C8129B; Mon, 27 Jan 2025 14:41:15 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 5CAA38129B; Mon, 27 Jan 2025 14:41:16 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23ED381276
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54FB181221
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3863494591bso2479257f8f.1
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:13 -0800 (PST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-438a39e659cso28797105e9.2
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737985272; x=1738590072; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737985274; x=1738590074; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=IxIhgfwyyeT7zkb25nXAfAc9AuD0Q4fHOjI6gQ2fhPg=;
- b=QrU8GPnlJfREY82uyndUiwaU9wUHCIuryEDos/+7z91P6bJcYWDBhCsOcn/fscanhR
- 5Uf5G3Fv66lAE4BJ9Wqbths+GpDvRqFlFulYnrAcH4ACj7AlqTaTQE1C9q1dDWSWBW95
- ZgSMUJ1XDCwUi07/1dRdMhTrAZN5xBsi6ZxlwNWe4XmE67POlXf5w+th4GpJmj1QEhCV
- 1D5m1HEL/pCjxRY5ndCUSHKngYVD/sECF2Ro/JTiFPHk4ak9y4nqaxxbOOFaNx5m+eRS
- shgDMxFQIbcYIf64axjFI3Z6AevohlB8zO/r/J9udk5AYH4vWmq6AZBko7amGXN3TKFc
- Hccw==
+ :reply-to; bh=fhUvwSuFhgs/O8Fy9tYu9AMskoRbW7U2vOy0Yz086wE=;
+ b=iVNmS6jQ78SFRocSh7ywoi0DNylbgs753Qk2XtzKIUePz44OGvSS1sjoqcv2c0UC8B
+ L5nQZT3+CCXcjSSz020WXCN2P0DFSudC7rp/Fooq2/X3NE+yN7yKrVUax7rVqIrP+dQu
+ TVl1nBqdoEvYYAEIaTIWBy8d0xcUDtsNfCk3D0u/qlgDIF0MZOJbtXcdTvM9onnpT5Fv
+ OTZmyQno3xwGsb1xd+Xk7bqvw9tiSQ9s6GhqzF0+EJdGNExgVTxeQlWXvYeBimnHZya0
+ jplXhLtxLnVWEpLVXoKHRETTHMYNYYkT9G4chtXFpQPp/vIYtnuSIxFSJsgEkcpZQ+Hj
+ x7pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737985272; x=1738590072;
+ d=1e100.net; s=20230601; t=1737985274; x=1738590074;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IxIhgfwyyeT7zkb25nXAfAc9AuD0Q4fHOjI6gQ2fhPg=;
- b=punL05gdgBwYndiTvUx4Xe9Xa/sJeFowXkJ1X+9z//u3/Eyr5vnRwhuIn/ujnfSX2C
- 0vIxcY89Ethna/pyHYYfivW/elgPZrayptgNxF4SP1saBCop3jBrC9IDGgxYS1+rHYMG
- kJdX3jmZLFKGpOVSc4k9Z3kbD4yavcl2lxmvY86eT6Pp+7iTDGe1Ivxj6bwXmEtADXOh
- 98EWVsRbGVmGpdaeX0jFi8Z0bKAPwQ0QsdBOjCVJbGCxJNzsJfvSgsvHUCUk7k9yRD7z
- Dck9adDtMf28+W3YWbfvjlzE1gRzgVD4DPseh0thq0QE+r02k62TFvLiT9QknfNax5Qt
- eDFw==
+ bh=fhUvwSuFhgs/O8Fy9tYu9AMskoRbW7U2vOy0Yz086wE=;
+ b=uO2HyDcSyITyWCe0hVPPfTHhpi5SFFaBZeHD1P95ni8lXkPB1dyAn6qdT/4984Kpwp
+ NaBwBJQwN0clHL8j0x+Js+V+tIp05PrROfiBD4ghlug+v/gxmNPOhmj+3JNgHzh60xfN
+ z2gATNGreVpTFX08Ie6eESGGozxXJNc+3Wp0B3ds5U/u2M2Apru9AvagW6o5AonVCPDT
+ kar3RHXtuQfrHpqQrvl2VImUNee6sICPVFu4drtuip/4c2R0f+3/mrhNvvDpw2sBDpNK
+ uoUfD5fCUWYAJkXtgtpVS3/mvByyLrrwMax+eYYf2MvSKLgbEH9kwJKVh6s9D5kMWp0g
+ A0gg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUHB/6uMbmALFgbSvrg8OwB/N1B6d8wPNzMTUpRDgTnUywnxm6c3F1Pg7B3DXeUghM2Cp8wwmc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+zl4Qq6rD8bhVTjwFkVwyyGubo+78HMsJaLbGOZo4naxyZ2LZ
- QGAK0+CiWccFIerQ7Go18MZy1eE2akRxuvRptGspF6Xl2sIooOYT
-X-Gm-Gg: ASbGncuK87ob5ssOaNY1qG+Z5JkAwgcqDXRj7ygnbWJQIectoO60ri5rWNW09ZwF/B9
- uYgLI1UFpu1yHVHq0aITLt/YKpjwsTTzYhuqUTGVi2NgC/T6nxTXVPMWoBu/1Jd291+PV+7bZXN
- qRr9gQRbCUYbeh3cDsr3xezt3s9iiKtdalU9GmBORl979rEoh0MnnFGrSbH0+zNIbK9Maw82Scy
- ZSiRphZUdNMjifB+hg7uP3lKRtD21ZwPl/DjtJ1297gq2dczQkISzA7KLrcUbEHi+gaE/AUkE7N
- ynBFoYzufdAL/UJmxGHUpgh7Myfjb0Nr/zi64FjF3aSjFcWdZQ==
-X-Google-Smtp-Source: AGHT+IHuQFk8lSNdV1pgwSjl5lT2PtG4gPeDzAixs6yM5VzAgi+PJ4UR98J8pYNE0CrlNHOTj8IHgA==
-X-Received: by 2002:a5d:6505:0:b0:38a:88ac:ed10 with SMTP id
- ffacd0b85a97d-38bf5789edcmr32108197f8f.25.1737985272571; 
- Mon, 27 Jan 2025 05:41:12 -0800 (PST)
+ AJvYcCWp+AWUQ2ZCts9CnJGtKwI6mAYc5RiX6ubw7Z8rvNAonO/sV7gFkn0BJarf7hzWEO7QF7mxUGQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyvJj+Lhyd7ebFto3xfRQ6tszcuuxlHaNkE5im4q6AM9svf0Ak1
+ ZpJnv1OHv2ZAC+3x50LxnXK3JFpFortXmIWuS+BuXRHE3ZcrPqXk
+X-Gm-Gg: ASbGncuTXzDIWdDe33BY81irie3eFWinOPfnKWEt3xUx8WoGn4qIrNHW4mLTXBvUxai
+ i8hLtOl7Wmp2BmkBL8xBp3bzYMIxlNcNrHoZK1tZzo2ru1GzAt6cPsfoJiszW0gi7XpxU8PaJ8k
+ fEIAZFlvLF/gJ5sQXQ76ETLMXMFRZ+mGWj/8oQk7apdMndVQ7qCBqBlQefxhss3QmaLXFAeW10J
+ uZIl24p5fMre0Wrf5dACxkyJzC/SgZpra/kmJ+kzOkoRdamdsDQL1HW3i2AH0Lbnadf78rG3rrB
+ 8NVZ3+RTJY4yBvIhCAL3l8qonz0tBEiHWO161vo5Q3+YAz9ZvQ==
+X-Google-Smtp-Source: AGHT+IEbw72ijLEVDj12Uz9DQuW7+sq3EeEeAR7nF3BWGIL+R+13mHMUOSiZQmo40znkgas65gRA+w==
+X-Received: by 2002:a05:6000:186f:b0:385:e105:d884 with SMTP id
+ ffacd0b85a97d-38bf57b6095mr40835662f8f.46.1737985273594; 
+ Mon, 27 Jan 2025 05:41:13 -0800 (PST)
 Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
  [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.11
+ ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 05:41:12 -0800 (PST)
+ Mon, 27 Jan 2025 05:41:13 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  Weijie Gao <weijie.gao@mediatek.com>,
@@ -79,10 +79,10 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  "SkyLake.Huang" <skylake.huang@mediatek.com>,
  John Crispin <john@phrozen.org>, Dong Huang <dong.huang@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 1/8] pinctrl: mediatek: mt7981: rename reg-names to upstream
+Subject: [PATCH 2/8] pinctrl: mediatek: mt7986: rename reg-names to upstream
  linux format
-Date: Mon, 27 Jan 2025 14:40:38 +0100
-Message-ID: <20250127134046.26345-2-ansuelsmth@gmail.com>
+Date: Mon, 27 Jan 2025 14:40:39 +0100
+Message-ID: <20250127134046.26345-3-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250127134046.26345-1-ansuelsmth@gmail.com>
 References: <20250127134046.26345-1-ansuelsmth@gmail.com>
@@ -109,43 +109,26 @@ Rename reg-names to upstream linux format. Upstream linux drop the
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/dts/mt7981.dtsi                  | 6 +++---
- drivers/pinctrl/mediatek/pinctrl-mt7981.c | 5 +++--
- 2 files changed, 6 insertions(+), 5 deletions(-)
+ arch/arm/dts/mt7986.dtsi | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/mt7981.dtsi b/arch/arm/dts/mt7981.dtsi
-index 2844ab010de..3c8b9ab0574 100644
---- a/arch/arm/dts/mt7981.dtsi
-+++ b/arch/arm/dts/mt7981.dtsi
-@@ -117,9 +117,9 @@
+diff --git a/arch/arm/dts/mt7986.dtsi b/arch/arm/dts/mt7986.dtsi
+index f871f2394c5..64ce45a6530 100644
+--- a/arch/arm/dts/mt7986.dtsi
++++ b/arch/arm/dts/mt7986.dtsi
+@@ -132,9 +132,9 @@
  		      <0x11f00000 0x1000>,
  		      <0x11f10000 0x1000>,
  		      <0x1000b000 0x1000>;
--		reg-names = "gpio_base", "iocfg_rt_base", "iocfg_rm_base",
--			    "iocfg_rb_base", "iocfg_lb_base", "iocfg_bl_base",
--			    "iocfg_tm_base", "iocfg_tl_base", "eint";
-+		reg-names = "gpio", "iocfg_rt", "iocfg_rm",
-+			    "iocfg_rb", "iocfg_lb", "iocfg_bl",
-+			    "iocfg_tm", "iocfg_tl", "eint";
+-		reg-names = "gpio_base", "iocfg_rt_base", "iocfg_rb_base",
+-			    "iocfg_lt_base", "iocfg_lb_base", "iocfg_tr_base",
+-			    "iocfg_tl_base", "eint";
++		reg-names = "gpio", "iocfg_rt", "iocfg_rb",
++			    "iocfg_lt", "iocfg_lb", "iocfg_tr",
++			    "iocfg_tl", "eint";
  		gpio: gpio-controller {
  			gpio-controller;
  			#gpio-cells = <2>;
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mt7981.c b/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-index 047e37bc9cd..d1c8afd9252 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-+++ b/drivers/pinctrl/mediatek/pinctrl-mt7981.c
-@@ -1012,8 +1012,9 @@ static const struct mtk_function_desc mt7981_functions[] = {
- };
- 
- static const char *const mt7981_pinctrl_register_base_names[] = {
--	"gpio_base", "iocfg_rt_base", "iocfg_rm_base", "iocfg_rb_base",
--	"iocfg_lb_base", "iocfg_bl_base", "iocfg_tm_base", "iocfg_tl_base",
-+	"gpio", "iocfg_rt", "iocfg_rm", "iocfg_rb",
-+	"iocfg_lb", "iocfg_bl", "iocfg_tm", "iocfg_tl",
-+	"eint",
- };
- 
- static const struct mtk_pinctrl_soc mt7981_data = {
 -- 
 2.47.1
 
