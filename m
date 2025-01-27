@@ -4,71 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA115C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 22:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C250C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 22:39:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D56C812BB;
-	Mon, 27 Jan 2025 23:23:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6D77D812BB;
+	Mon, 27 Jan 2025 23:39:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738016595;
-	bh=qdFS7AT/dT+hrirgh61lDqTXHh2fI1Jm37/xFkEy3p4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kNGZQPbNGSuqi6LbCbHjMYqSTZdwcgwmEppetV8uAdrujm70TaxaVGDDmJSGALpVt
-	 IcwITNsjI2kCzr4s+F6cHB6p14FD8LeqMGUICX0mO+pqDFA6YzsHkekSUqel8RrWax
-	 waKdnPLPxZQMtH6hM7vqZA0eCip6ITowpD0bIG0nhReW7aZ5zO3/jxa4HEQ8tnyzi4
-	 8+NbpSgyLYwwxvbaH/nzgdZx89x16hBmJGgo8p5QJmU4TrJkrwmMkBH2x6tM1BxL2D
-	 1in0Y5iHG8NiUsOXiOXNha8inyNKmx34tjrpHZsSoGG019wVNfOQvHsMbbySCdSQrp
-	 NAE3PbamvjePw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B19A812C8; Mon, 27 Jan 2025 23:23:14 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6330D81265
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 23:23:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="e5S//gq2"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4B96E103802C2; Mon, 27 Jan 2025 23:23:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738016591;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qdFS7AT/dT+hrirgh61lDqTXHh2fI1Jm37/xFkEy3p4=;
- b=e5S//gq2QE7AsCnVBoDX2/LBLsQz8wir+ho3WgqVJV57XFkkvMdzlMjEwq1crJQyB33JRA
- Vsy+xrqV/FLgfuDN65LUumVpUWD/5QVzlkx0dxwQI+Bw5G47nEGtr1SNtCW/EzceE8Adv/
- JNVr488n3rHupqu4PdJhY/P56ZY0N8M1xI22RKlBFmTdZSqjV6HV0wUBjBF/Y8WTOz19kz
- j9Mg41SiF9MoUd9qe9hyPIX38HjYfIGTOvQXJ2RX3EpuwskRdl03UEG3c1sf4fHYY8AkSi
- oPycNQkVLPS6Wxbu/UoV695ihsjy6u1eTvkuiPyeO/rerx5oGsV0U3SAacInKg==
-Message-ID: <5f794a65-eab4-4dde-9b44-eec6c97ff335@denx.de>
-Date: Mon, 27 Jan 2025 23:23:09 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HTOzm8+/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 72C74812C8; Mon, 27 Jan 2025 23:39:42 +0100 (CET)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5074181265
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 23:39:40 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-4679d366adeso50710611cf.1
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:39:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738017579; x=1738622379; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=57dGAO52DOXo/PswlecUT572bL22qy9TgJmQCEy7Ivc=;
+ b=HTOzm8+/PBM4hVGS8st+jSVYTOqFc81CbXoD1b3JrWpJENHJWK7xQZt+yB7ttw6z1D
+ fT3lbLAgQleQS1g3zIdRW5eGmdUMUkogK1rQl5hQnA5zCSCif8OJ8vJyyokQ91azYh1P
+ YosKE4XhGa7yVgnZokY8nmQLz1kIHjeAAG95Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738017579; x=1738622379;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=57dGAO52DOXo/PswlecUT572bL22qy9TgJmQCEy7Ivc=;
+ b=N0O4olsGCbyFJEdvFW/V1LqQnboNfm1+gI7T1DWTZx6u9ZYYIyXRiMVcb/TE4QVFFS
+ FhM1SQNjjbS0+znW+3gfOCByW1OYhfq+8xL5KDXXQgVdZAxLJUI6SUiULXyJ7OCtL/UH
+ cSr/9ZpVwq8FKugZmP/StmKiA8gp0GAse3oOi21rjygszUS9L614g5jK8JMDKgYWqtFE
+ iIpX8Ao7CQOr3cIY8H7Am+nrVolCS+6tp7rvDwrOtiyr2iMGE74RdlEtmiKUi81mXb2A
+ tDR2Fd4Xx1ggDefbZvLhRlRaXka8Ssi3ZFz4R5P3cQDA5fKfzNhKZXYjr/vBwfMarQ4g
+ Ta2Q==
+X-Gm-Message-State: AOJu0YybVpB+AzjA30HVZTWPZzmafn/ncJV72Gi8kQ6re0n5ZEWTrccQ
+ ZlGhLTy9loLzjvqx5EciFa5UOkThwALJmtCEtTeVmBUBUiI1lBekbo168j/KHkfGZ9QlqyGsYyn
+ k
+X-Gm-Gg: ASbGncu1AQlJ35DrMbBrCUEO3eLphisyPgRiatzyczro2II1ZNI+BwFpkhQTbHuD0Do
+ 6wWKVARal4oeSD3Jee3kV32KQn+XEqN6fo2E5BJ12e6IqoqoDrWe2U14mlSJLXJoOiVnqVCZG2I
+ 7b7CsaUFYoOaafY2OjSsXV3rbpbKVELQeQd9qcPhk+lv6sRaCidG6NqwoWtmmEbYwr+xPut2lw9
+ HjxgiZttRZtNGoNgjOlvGLQ0gaPAp3qe9VopKfhd90fKChaxUg76LhCM9OoZX0gNXjG81vgC5D3
+ Xq8=
+X-Google-Smtp-Source: AGHT+IHWQet3wefgYuJ0mPzplL/hWkZsvWF/TKdW2eeT2eZ+ZjHDyYLgc4X+EqEO4I3mTOK8FhEULQ==
+X-Received: by 2002:ac8:7fd6:0:b0:46e:22f7:7a3d with SMTP id
+ d75a77b69052e-46fc497a332mr16244721cf.8.1738017579189; 
+ Mon, 27 Jan 2025 14:39:39 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46e6689d3eesm43582751cf.36.2025.01.27.14.39.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jan 2025 14:39:38 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: vigneshr@ti.com, u-kumar1@ti.com, bb@ti.com, 
+ Santhosh Kumar K <s-k6@ti.com>
+Cc: u-boot@lists.denx.de, n-francis@ti.com
+In-Reply-To: <20250123083626.1035262-1-s-k6@ti.com>
+References: <20250123083626.1035262-1-s-k6@ti.com>
+Subject: Re: [PATCH] ram: k3-ddrss: Set SDRAM_IDX using device private
+ data, ddr_ram_size
+Message-Id: <173801757726.1156504.6289835628753872428.b4-ty@konsulko.com>
+Date: Mon, 27 Jan 2025 16:39:37 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: Make what it takes for "usbkbd" to work in "stdin"
- clear
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: u-boot@lists.denx.de, Dang Huynh <danct12@riseup.net>,
- Piotr Zalewski <pZ010001011111@proton.me>
-References: <4079f51c0141711cb4cb27f7aeb050b1b1e17828.1737312317.git.dsimic@manjaro.org>
- <29df2235-79c5-4cd3-bd78-cf7c93552167@denx.de>
- <6e2b3f3cdfbed67122725d22055d8877@manjaro.org>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <6e2b3f3cdfbed67122725d22055d8877@manjaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,42 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/27/25 11:20 PM, Dragan Simic wrote:
-> Hello Marek,
-> 
-> On 2025-01-27 22:55, Marek Vasut wrote:
->> On 1/19/25 7:50 PM, Dragan Simic wrote:
->>> Selecting the CONFIG_SYS_CONSOLE_ENV_OVERWRITE option actually 
->>> prevents the
->>> CONFIG_USB_KEYBOARD option from working as expected, i.e. USB 
->>> keyboards end
->>> up not working as console inputs when "usbkbd" is properly specified 
->>> as part
->>> of the value of the "stdin" environment variable.  Describe this 
->>> clearly in
->>> the two relevant Kconfig files, to prevent any possible confusion.
->>>
->>> In more detail, the console_init_r() function ends up overwriting the 
->>> "stdin"
->>> environment variable so it contains only the devices available at 
->>> that point
->>> (which doesn't include "usbkbd"), while the "usb start" operation is 
->>> performed
->>> much later, at which point the probe_usb_keyboard() function cannot 
->>> assign any
->>> discovered USB keyboards to the console because "usbkbd" is no longer 
->>> present
->>> in the "stdin" environment variable.
->>
->> Wouldn't it be better to patch console_init_r() , check if "stdin"
->> variable contains 'usbkbd' and if so, start USB and register the
->> keyboard as stdin device at this point ? This is called after
->> relocation, so starting USB should be OK to do here. The behavior
->> should then be less confusing to users too.
-> 
-> Please correct me if I'm wrong, but isn't "usb start" deliberately
-> left to be executed as desired by the supported boards, or as part
-> of distroboot, i.e. in include/config_distro_bootcmd.h?
+On Thu, 23 Jan 2025 14:06:26 +0530, Santhosh Kumar K wrote:
 
-It is, but if the user needs USB keyboard as input device, shouldn't we 
-probe for that (which yes, will make the start up slower) ?
+> The SDRAM_IDX in DDRSS_V2A_CTL_REG describes the number of address bits
+> minus 16 that are used to determine the mask used to detect memory
+> rollover and prevent aliasing and false coherency issues.
+> 
+> Set SDRAM_IDX using the device private data, ddr_ram_size for K3 family
+> of SoCs.
+> 
+> [...]
+
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
+
