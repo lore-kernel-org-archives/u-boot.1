@@ -4,51 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A3EC0218A
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 23:03:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83EF7C0218A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 23:03:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4577A8186D;
-	Tue, 28 Jan 2025 00:03:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A12BF8197D;
+	Tue, 28 Jan 2025 00:03:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="Tj21xjCt";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="KYFNuR6z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C42C68186D; Tue, 28 Jan 2025 00:03:05 +0100 (CET)
-Received: from mail-10625.protonmail.ch (mail-10625.protonmail.ch
- [79.135.106.25])
+ id 3489C812BB; Tue, 28 Jan 2025 00:03:10 +0100 (CET)
+Received: from mail-4022.proton.ch (mail-4022.proton.ch [185.70.40.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7AD981974
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 00:03:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D5778192E
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 00:03:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1738018980; x=1738278180;
- bh=7qERrANn0BiDPpV31aSjs/0qt9YUAYSWY0EbDXOw3II=;
+ s=protonmail3; t=1738018987; x=1738278187;
+ bh=oL9q3o38kmr+8O80uLMhlGZU7Sv/x8FzruaBKtnpS+g=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=Tj21xjCt8P4jB2TMRspOEI3depMUZcZV1SHiei9uwpKYX9tNFCCF/QidnN8hn9O30
- 4n32ME9Hw6rej3GioiXFi4HZOosGA45x2Pi+1zSNVygwlHtBHIOfwZDJy9L6Xss4gj
- Hh27feZWVDE5HjukcHgE1ypLvxBrt4sRg2QtEGyFvIr6J4wBr/4oypN3/E30zDg5YZ
- O1d3qYcGHpMEiEtFouAZ+9XAnAfbKXGHA4al9g+DSMhBVPpcQIedo0xZSOXSacL2nq
- 8xthYmWNTrPD2xEQquMDsx9Vn9KonH85NUlYSAdpwvaEu5qi7bODCH8716TVJK8zSR
- uo+S6ob7/Bk1g==
-Date: Mon, 27 Jan 2025 23:02:53 +0000
+ b=KYFNuR6zjXfm/i4ZEkQvDdjzW72NKkD8NC9ag6CwoESkiizMLIOS2MnozV1B5pavR
+ uMHkXahhe8i7GzFc9VUL966TQ6E0cv6iDUbN1KkIDE/sGpUv06iCVXl3YvOM+qx2KA
+ UgIQVkunO3lQKG2DKS5O5yhKOU9lqJWfeUIBFdqAlYbKKvtjpsE7Bxm5rAmnbprnbU
+ H7no1/Iq+BJfq5YoOlkHQFIu7zj5x7mUMwG+4h1UrJsyx+zQwyyLCkp7SpkngL5iY9
+ XNAWw3M9PqWRtcoVWhwEQrDEeGyczSJSiACQQld3VdlfEYambUpuMKe8InHETR0ajc
+ 2KA8Sjqy+CRww==
+Date: Mon, 27 Jan 2025 23:03:01 +0000
 To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
  Mark Kettenis <mark.kettenis@xs4all.nl>
 From: Sam Day <me@samcday.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Sam Day <me@samcday.com>
-Subject: [PATCH 1/6] armv8: spin_table: Fix missing includes
-Message-ID: <20250128-msm8916-smp-support-v1-1-39587f18cf0c@samcday.com>
+Subject: [PATCH 2/6] armv8: spin_table: add hook for booting cores
+Message-ID: <20250128-msm8916-smp-support-v1-2-39587f18cf0c@samcday.com>
 In-Reply-To: <20250128-msm8916-smp-support-v1-0-39587f18cf0c@samcday.com>
 References: <20250128-msm8916-smp-support-v1-0-39587f18cf0c@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 3e904534a681feab702af92267c773f7f8b7c3a5
+X-Pm-Message-ID: 1e949d0445cc01ff61c40a6b904e0412e5bf5f2a
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -68,45 +67,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dropping the common.h header resulted in the spin table header missing
-asm/types.h and the source unit missing the errno.h includes.
+Introduce the weak symbol spin_table_boot_cpu, which is called by
+spin_table_update_dt during pre-boot FDT fixup phase for each CPU that
+has enable-method=3D"spin-table".
 
-Fixes: 7410cde67de ("arm: Remove <common.h> and add needed includes")
+This saves the board/arch code from needing to scan the DT looking for
+CPUs to boot, and also makes it easier to bring the secondary CPUs online
+as late as possible.
+
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/cpu/armv8/spin_table.c   | 1 +
- arch/arm/include/asm/spin_table.h | 2 ++
- 2 files changed, 3 insertions(+)
+ arch/arm/cpu/armv8/spin_table.c   | 9 +++++++++
+ arch/arm/include/asm/spin_table.h | 1 +
+ 2 files changed, 10 insertions(+)
 
 diff --git a/arch/arm/cpu/armv8/spin_table.c b/arch/arm/cpu/armv8/spin_tabl=
 e.c
-index 485294b88d0ac5516f58fb616ca59eebe30ef022..13b300f5c67a6dd257b2cb53350=
-a7b5bafa3db96 100644
+index 13b300f5c67a6dd257b2cb53350a7b5bafa3db96..f83ff456f26d41402b83f0e30a6=
+5f8fc48e42fbe 100644
 --- a/arch/arm/cpu/armv8/spin_table.c
 +++ b/arch/arm/cpu/armv8/spin_table.c
-@@ -6,6 +6,7 @@
-=20
- #include <linux/libfdt.h>
+@@ -8,6 +8,11 @@
  #include <asm/spin_table.h>
-+#include <errno.h>
+ #include <errno.h>
 =20
++int __weak spin_table_boot_cpu(void *fdt, int cpu_offset)
++{
++=09return 0;
++}
++
  int spin_table_update_dt(void *fdt)
  {
+ =09int cpus_offset, offset;
+@@ -45,6 +50,10 @@ int spin_table_update_dt(void *fdt)
+ =09=09if (!prop || strcmp(prop, "cpu"))
+ =09=09=09continue;
+=20
++=09=09ret =3D spin_table_boot_cpu(fdt, offset);
++=09=09if (ret)
++=09=09=09return ret;
++
+ =09=09ret =3D fdt_setprop_u64(fdt, offset, "cpu-release-addr",
+ =09=09=09=09(unsigned long)&spin_table_cpu_release_addr);
+ =09=09if (ret)
 diff --git a/arch/arm/include/asm/spin_table.h b/arch/arm/include/asm/spin_=
 table.h
-index dec18c6e5c1ba15c8f96ccae8e9bb5415c845a5b..8fc61237e07559f267e1da1fbc8=
-ee646ef08721f 100644
+index 8fc61237e07559f267e1da1fbc8ee646ef08721f..3c422046b830a7a81d7de806ff0=
+db92d346446d2 100644
 --- a/arch/arm/include/asm/spin_table.h
 +++ b/arch/arm/include/asm/spin_table.h
-@@ -3,6 +3,8 @@
- #ifndef __ASM_SPIN_TABLE_H__
- #define __ASM_SPIN_TABLE_H__
-=20
-+#include <asm/types.h>
-+
- extern u64 spin_table_cpu_release_addr;
- extern char spin_table_reserve_begin;
+@@ -10,5 +10,6 @@ extern char spin_table_reserve_begin;
  extern char spin_table_reserve_end;
+=20
+ int spin_table_update_dt(void *fdt);
++int spin_table_boot_cpu(void *fdt, int cpu_offset);
+=20
+ #endif /* __ASM_SPIN_TABLE_H__ */
 
 --=20
 2.47.1
