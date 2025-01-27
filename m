@@ -4,161 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D2BFC0218C
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 07:37:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 231EDC0218C
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 07:40:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C53C80FC4;
-	Mon, 27 Jan 2025 08:37:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 730BE80FC4;
+	Mon, 27 Jan 2025 08:40:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="dl062QiZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rjztX2jL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 613B580FF7; Mon, 27 Jan 2025 08:37:29 +0100 (CET)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20724.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::724])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D25A9800B2; Mon, 27 Jan 2025 08:40:56 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C249680F9E
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:37:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id AABFB80077
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:40:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NgYd9atZz8bxENVWeD8MiHdbIlt9loj+lIJMcy8xvlULt2rZMhm8oFu/6DMdCPbgIJ+I8XJllRjoMRYtsHPxoShKDUdjxetZKJ4XWW84V3kmI0BQwLSToVVlcNH1gFkjIqZ9dgoPK+hFQt0NHYLVu9Fpd3squxZQItf/ooUbLxReCFQYK3FRnqlTPwz2cnnhuXVDvycN+UDtUZ+h7tPAX6MoaesnirJ2lwXLizKdO4vZewtVD8VdO3s3hBDsFi0jmQ23QnIn+3fv0cpNlqyTg2LPnRFRf+lvjXejEHtXmz7hbfj7C2v27oNkgYEKErzy9SPz93bCSUWD93QHpjYDDw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zQFwElb4SkimhbmEY/rPy92LWEKY5XtTaqhIISEDo9g=;
- b=QCwBKRB2MbGayFq62t2IIxeZ5oFWgj5XSsvU/HwRew9K1NGiwCS673+hNDjDPIoVPd872IeBC93outYT60qPA2RYmjOncAzxRO769dpB6A+sOJmSHY1XgAAckEBf2jkM4EZGuCnEi30+H+18D6ROnEWWYbHLzYrUHFLJqtwn7eBnb2m7fpKaS1EjdfJKuYTP/pWrc1MWyDbMROLdUfxF0naY+YCAZwGD+fEK0GAne7CsTBn6JuyQvpEomshcXHITKnve7uDNBCZrYdl3/7K3Zl8qyO5H0BSigrbjrppIoWnKRtDZcP7u8qBH4TPumvJTp7wmJxFichHEOn+Ib/Vbrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
- dkim=pass header.d=phytec.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zQFwElb4SkimhbmEY/rPy92LWEKY5XtTaqhIISEDo9g=;
- b=dl062QiZlaQz4uNGvPIG0DfJyxntQTCfJktkL3GXqJPlypd0MIYRNvm4At2qw0F9w/i1qn4zbnS+RRq9c0Z2t0jrp/K5Ottx4Ir/CvWeuGVMGq4bsP6gIyiLvFW9sNvHvGUMJNCEkqHiYOvO40hDi5kcDF2UaMb12j48BaaB7RFtWy3g6T1MRFzv9d7rUomZQzHRRg1nZsx/h3wg8yTZ3p3aa+qqnXi9GelIaqj4k2wyw3HRi25EylrTvb0MI1UpnhRa7YRcKtlTf5ssAJp4GH3RI3xEt7smmlmfxvwjD2iNm/HZD5tZY1rL8anyU7WxxKQnsF6bCeranRYAYNLawA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
- by AM9P195MB1046.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:1f7::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.22; Mon, 27 Jan
- 2025 07:37:25 +0000
-Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- ([fe80::369c:a760:5bf9:8d4a%6]) with mapi id 15.20.8377.021; Mon, 27 Jan 2025
- 07:37:24 +0000
-Message-ID: <018775fc-c4c2-459a-a4c4-ec715b5740bf@phytec.de>
-Date: Mon, 27 Jan 2025 14:37:18 +0700
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] arch: arm: dts: phyboard-electra-uboot.dtsi: Add
- bootph props to i2c
-To: Dhruva Gole <d-gole@ti.com>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de, trini@konsulko.com,
- n-francis@ti.com, nmorrisson@phytec.com, d.schultz@phytec.de,
- sjg@chromium.org
-References: <20250127041612.985929-1-w.egorov@phytec.de>
- <20250127062201.yvjpnf3vf36c4mf2@lcpd911>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20250127062201.yvjpnf3vf36c4mf2@lcpd911>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: KL1PR0401CA0031.apcprd04.prod.outlook.com
- (2603:1096:820:e::18) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:4b3::21)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-38a8b35e168so2618730f8f.1
+ for <u-boot@lists.denx.de>; Sun, 26 Jan 2025 23:40:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737963654; x=1738568454; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5kfFmXpV0FKDzDOEfMtjE5EcE0bzpTSCGsSy7XWurLs=;
+ b=rjztX2jLZyVoSJZ93bCnEuVio2xhE2LMpxHWvO64ze9y3x8duPRhl0Nv/nbXTYbto/
+ qFeVtYV2QEUgyFguI5S/2QRGN1M0b7VzFPPYgwuiZlNHhp9kcnLH1mcMpQJz7CBLQw3w
+ lag0g737tk4vI6lXU+NBBP8q+hDFTp3hAY6R/q0Bef+cI80n5Qz9IdADe/kuXgWk2DFj
+ Rorv9w2Jxj16EV/BIjyYnxgGFF2RK8+hE3StQGP+FVQ2pdaqOywro5ahpX8HmGDT1qiz
+ Y7P5Cndafk0Y/uEx9rLlnk7M/eTdUy1LQCkN7CEoVgzHsFSjYxAxHuAmYmK4cymGegvl
+ Fo2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737963654; x=1738568454;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5kfFmXpV0FKDzDOEfMtjE5EcE0bzpTSCGsSy7XWurLs=;
+ b=rNWoY/uDiXTKOYSn142LMWtyXZsZK2HeKumpVwsdOCDhd1JVYVhWGmpeClI6YAP+sj
+ k5ElVmPD0FY/KT2BeEx51xySEnor+OoyDQroBdZcGNV68IHDiuqXarUZT/lbm4We1nBM
+ iUqeigU5LOt5+rg37Ar/9p0/nEJtIedOKGCBamaKV2N44KUCf1/1B4TgqzIbesdSAwU0
+ 4maKiGfZgkkPa13pbmyoOJMk7A1bsK8Q3h2f46uTPec/mvhziIu+0w0MZHLsPUozpfW2
+ u/mxUQXAhRLD766DfQJTdGKGGBogv//ELLlzSw5xMmV3bdzhozqlhzCSUzKvnZ4pAepM
+ jYtQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXycnPEKY2oOVSvuKDr/C9FYVMo8DZniKYyLtY8PAhlvJ/kZDOcGhfUYNLAzHbfaIL75lN9bqA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxsOb1uY83vdPy7vfYn26rmONtkmlmlc8rU6cDFkKrbvU1AROsa
+ uqtc4f7RdKARcc2nyU6CitlnTcB7Z3BsQAbSqKZ2HnCivdCprwss7KS316A1gjk=
+X-Gm-Gg: ASbGnct11vUaODJAOnBuwECcnTPocyZeI+Uzh6tldLUMDlsdU5OE8Pr4BP7LpQleCd9
+ xS2t8VhY5bPLbDPUQ1+rUNKCbmG2ZzBdlQe2lj3/dhW0sT8OJmq1Lzv+DAsHikrTA4Q/4IdUAp8
+ Uad1E94Zq3cLjDkaHMwqd3+l0rUIgVlP364Bdkml39hDJCw79ax2j4DoPauckhGXFzsdwXOjEQU
+ 8P97ePE7k28lmWv6gs159qDt2gUB8ISpBD8mFOUU4fHOWA14HIFkSFgfFGG6SlPF7e0rA8bG2Hg
+ ljMW/lTyyx3dqsaYR6ZTf3jQOXMx9VE2dxhHZonJ262EONS2DOOdsJEd1t1b
+X-Google-Smtp-Source: AGHT+IF/NEzUQhu2HTZPIOcRTIvfGMZTOnhc8td0HpVpScx8kIUpAD4VRrjMxe5Hfcd+sGNt32kODg==
+X-Received: by 2002:a5d:6d0b:0:b0:386:3d27:b4f0 with SMTP id
+ ffacd0b85a97d-38c2b783f66mr10632464f8f.14.1737963654131; 
+ Sun, 26 Jan 2025 23:40:54 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:cc93:6dd0:3ebd:6dc5?
+ ([2a01:e0a:3cb:7bb0:cc93:6dd0:3ebd:6dc5])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438bd573245sm121327285e9.33.2025.01.26.23.40.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 26 Jan 2025 23:40:53 -0800 (PST)
+Message-ID: <7d395163-86fb-4d97-9e1d-3db0a22670d1@linaro.org>
+Date: Mon, 27 Jan 2025 08:40:53 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|AM9P195MB1046:EE_
-X-MS-Office365-Filtering-Correlation-Id: f565086a-927e-4cf7-01e2-08dd3ea5711b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ekg2Z01lR2VkQmh3ejYzMitUbEQzeFBzemRaSkg4WVhhc2ZTZGVTK2V5SzBZ?=
- =?utf-8?B?S0l6dGJhNTdIM1gvUDB1K3NwMnB0eTdkaUZtaWNQTXhNb1NPZkFtc1I4SHE5?=
- =?utf-8?B?S1gyWEt2b2xIa1g4TFNGWGR1NTMwNUZESHEzOVVyajhVNDJCblhNcW5jZFd2?=
- =?utf-8?B?YnBBakNxK0Q4aHh1bXNrdWVxWS94YU5BR3k2emVMZko2VWNMMndZdmIwQjR5?=
- =?utf-8?B?WnFUcXlTdncvemFmMHEyS0Z2MW1pdFAreWQ4SU1MVjZ1eTk0Q3cxNE0vb1RS?=
- =?utf-8?B?Zk5BYmVzTFM4QzAwc2lXZUVyZVNxSGR4M0xhYzVPa2NQNkdSRGZWNm5zTm1x?=
- =?utf-8?B?RzBWWTlPMWkvZkhFQ0h3VGwxc3lHekpEUzlTeUp0NE9tWHlZNXRIaDFHMFlV?=
- =?utf-8?B?VkJNazQ0SVJ0VmhtK0pTVFNlRTdUY05HMmloK0hkNm5US0U1KzdYK0xUVHRE?=
- =?utf-8?B?aUt3QUhYSXhSZllydGFZc29pREtqK3Q0VlJTM0FDcDJwZWk4M2lYN1BYS1lJ?=
- =?utf-8?B?K2JXQ2htMmdaKzBRbEpVekticWx1bHZrSngvbysxTGtwclJzcFNiSmZxcTBu?=
- =?utf-8?B?ZE40SXo2UU9aaUY3KzBRdGIyQzBBcGtiUEtWdHBFQlI5bCtCL0JpRVp2bitW?=
- =?utf-8?B?SjJ6Z1FCVkVQRE9QT1ArMzBLZWRlQ2c3VFI5elNYdWZadlFIMENLMWNuQzJ4?=
- =?utf-8?B?cytQVGxhVzM3SUVOY2NxWTRUR1R3SzJKNmlmS20rb2ZFOUZrNzdMWlJaVG42?=
- =?utf-8?B?N0lFT0YzdC83dC9PTFBaMTFIQWw0SVNoTitTNGk5ZEhUbU1vbEJCYXBmOERL?=
- =?utf-8?B?Rkt1L0dOU05zdWNhT3BtM2t1YnhsbUJ0S3NXN3JuNmJhaE1nK09kUjA1Lzdo?=
- =?utf-8?B?eEpkWWhON2c0ZEFWa3BXczFPOHU4T0o3S1dmM0FBTkw1T3ZPbzJ4aE1ISno2?=
- =?utf-8?B?S0hNZCtmWFByWFdubE16TnljTWMvL05SVU0wVXNOSWpNdnFJOTJ3d1NtMUo3?=
- =?utf-8?B?WWhFSUNZRzF1b1JBRmNSN3FIMlBETHltRmZnUkNaOGYyODV0TlRtSWo3VlZG?=
- =?utf-8?B?RDJ5YkZnZHlzVzU1M0tzY0o4VVM1MWsvMXhnZHdETVVYZS84OERiMHpuT2hJ?=
- =?utf-8?B?VExsenRSTGl4Y0YycWlJQjVubHJEMjB0N3RaTXNrYmlVNG94OGZacU1Yd0Jm?=
- =?utf-8?B?aTh5R1NQQlRRY01wMUpNbFpEZzNKdEoyWEhrODVaYWhOc1owT0dmTzNOWUpo?=
- =?utf-8?B?OWNCVy9nYXRtSE1vSnFLb2c3b1JIRWZoUjUwSVV3VnVUQllNdUQyeElhVWpO?=
- =?utf-8?B?NE1veUdoOVZMR1BNM0EzV21pZmJjYTBOQVNBOXhoVzlpZUtTNFhzclNuVDVy?=
- =?utf-8?B?MG03UjVJT0JoQmJodHJVb3dqa3puWGhLRG5uNVU5bytad0RncWFiQWZpMHhh?=
- =?utf-8?B?L1p6dG1rb2dpakhtSEZOWm1JT0ZsZndhZVlvWWJQR09tQ001eVY5NU01SExj?=
- =?utf-8?B?ZW96T2xWeGI3MFY5VHNMTEowd01KQnoyMlJieWNGZGZwZnBVM1p2eUIyeEpZ?=
- =?utf-8?B?bmxxczNzTG5oS1IvWVBqZkJ0NTJXcmFJbUhRN2NBZDFkTmN6ZUdlS1c2bEls?=
- =?utf-8?B?ak9Tby85OWNDekFxQkVkV3Jmdlk1ZUE1Zng4TzFtSCthdU5MNFBEQm9oZTBl?=
- =?utf-8?B?OFp6Yk93VzZJaElkSkJIVCs4SGhwT05heDZzNTlzT2lmeEtyS3RhbVlNTVZN?=
- =?utf-8?B?MThpVis2Umh1VWxrcWxwdE9sWDcvSXZDaFJkYThHbVFpMit4cnVlL0JnV0tU?=
- =?utf-8?B?eTE1R0lKUE1MUTFnMkppZz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Um5hUk5YSUNyMFhya3I4d0tOS0ROdE9oMDBORS9ad0RNMHZFMmgxOGZZOWlk?=
- =?utf-8?B?NXorWlZiUFgzcDlFNU9GU0xSdzNkTUhqN1Q1UlhqK0NXVm41SXhQK0VkdmFF?=
- =?utf-8?B?WlVNc2ZOUVhzQTVtbCtPNmoySWdXNXRISW55eWFNUFJBZmdJek1Ob0xWQm15?=
- =?utf-8?B?NCtoK3l3aVg3LysxcitXcENyTTZWdGVRQkRkTTBCQ1BOcjBuUDNITjNpY0xi?=
- =?utf-8?B?dzE5b0dkL3FORUF1VEoxaHB5YkV1THFIUjQ1RWk4ZEg2SzlzdHNCOUNTd2dr?=
- =?utf-8?B?b2JDNkZydHJUMTcveWovcTRPSVAvRHEwWTBWMVNsRi9ZSmlGS2E1dmJlQm1j?=
- =?utf-8?B?cks5RW1WM1NqWlk0RTgrS1pnRHpmOVlVdmpyNFE2MW5WbXBxREZMUGFTSHM2?=
- =?utf-8?B?d0hSbHlYMTdDaTFJYjd2ZkVmR1BVODlEck1qNmhGaDVkYkFHTTF6cDNmSTRy?=
- =?utf-8?B?bk15clBvVU91Vk1IYThKTVVhM0JHdkp6UFQrek5KU2hUbnJTcjZjUHQ3VTRx?=
- =?utf-8?B?c2luUFMwMDhSTTd1bjdJeFA3UWFnc0prd3lXdWdRWVAyd1RRVHU0RU94RTJr?=
- =?utf-8?B?Mkhmekp2TmRxL3lkU1Q5bTdwRUhkZnNsVHNBQXVJNXpmdERmZi9lY0o4SFRl?=
- =?utf-8?B?QnM0OVc1UnM4ZldUNTdPdXY3RFhROW5YSVdzQXdFdXdXb3llWXNweTE4VmUr?=
- =?utf-8?B?WnBITWVCZmdXN2pLV2ZHWjhLWGJISzZVMVZPMDlkb1pSakMyenFOajJqNUtQ?=
- =?utf-8?B?eXgwWEU2bTRlRjJ2a2NvRFpzVVVEeGd0K2xQRzBiVkNQaERMSFhYMkVVc0dv?=
- =?utf-8?B?R3ZUeWlPUjBRQVBhQXZXdzR4cmIzREh1K1pBT0tzUEZ3cXo2Q05iL1VJdUVM?=
- =?utf-8?B?c3owblVRa1ZTQ3lSZmtHWWFkWnBTNnFrNngvWGNXbGd3WG90bklDNklMVFdj?=
- =?utf-8?B?NlpsSEJXcVZieUVLTVNnSUdLdUxaaGc4QXEzc0pvV3d5N1g1UTgrQzB3NHZH?=
- =?utf-8?B?bWt2MU1oWm1vKzBDbG9DdjA1aFV0MmozY3FxeSs2OHRydUlna3BOM0twZXNp?=
- =?utf-8?B?Nm9aUUpOckhKQjZnUzd2TEdNM0pkV3Nnc2JYa2VoUXhXdE5SZmJPNkF3ZnFj?=
- =?utf-8?B?blhHSzFNdnNvSkZFWVZ0Vk9UZ1pycUpMVWNZbks2Q1NsUTBSMFY4TVoxWXlT?=
- =?utf-8?B?Z0FWeCtlblI2KzlxamNCdis4RXBwKzVDazdRR25saWY1RGdqTEgwODU5QUhu?=
- =?utf-8?B?QlJxKy9QYmdqalVnY1hCY0dwd0lvaG8ycEVpQkhDWm92WHIvSUpKYnBQWWxV?=
- =?utf-8?B?ckdKS1JKK2tySzB4UG4zUHVMVVJPT3YxeFJ1RFdFTzMrekFnSkcrWTVkNWw1?=
- =?utf-8?B?enZudnhIYmpwY01wZ2R4MTJQc2ErVG1CcHBqNFVIcnV6SDV6T0F4dmdyU1pV?=
- =?utf-8?B?RmtYeHg0OXJXemdsY2JSSjJkNERqSzF5bUF3VjZPNVZqRFRGSFFDT05KYUVM?=
- =?utf-8?B?OWcrSFN3cmFwN0lWZGFCN3VEbEZvK0xSbDNZb3dqMFZBdVBRVjVTN2FPVmY2?=
- =?utf-8?B?ZUpwc1pORXRROFFNRDhURUpBaFMyZlhHem1JQXlwS01VUE43KzJWTko4cWFH?=
- =?utf-8?B?Kzg2KzJ4RDJGZFlpRUxnNUovNlYrNjVHclU2SGszNHlhTi9zZUJjcEFxZUFD?=
- =?utf-8?B?NWxrdlNQRzdUY251VGdVYVVNK1hEWWRZMFpUeVRTTlRCRUFvWk1DWW9XUHlV?=
- =?utf-8?B?aWx6SVNRc0VBeWl6ZnpUZHdtTXpxR0VwVnlZRm5ob2JwUXpacy8vNUg3TTYv?=
- =?utf-8?B?M01mT0lpNkp5OTVXQVNpUURZWFhET0ptS3gzelJnSWg5VUVLMDB6a1VzeWJH?=
- =?utf-8?B?T0lQbWFQQkVPUUhhZFE2blJMUVI0aTRVeVk1bnQ0N3h2U2h5MzZVa2lTa1hW?=
- =?utf-8?B?SCtJdDVnR3hIcExCT2hQWFhCdlhVZDhtNzd6enZSM0d2OHFwWncyWkVEOTV0?=
- =?utf-8?B?UW1HSjdGRzJZR3pRenc5dWpUUzhPa1hnem5FdmNWVHhGVkNpajNJbGVGeWZl?=
- =?utf-8?B?aC9tMDErZkdwYzVlU1ZGYms3MmgyTkFIbXBSdS8vVldJazZUbktIelRidi9F?=
- =?utf-8?Q?lT1QGTRQbDORNa2CFAR8kyWpi?=
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: f565086a-927e-4cf7-01e2-08dd3ea5711b
-X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2025 07:37:24.7742 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CXPH4YAFJBEO8VE9uRziw257mF3u6wmTgSCoAwRKEUxycg1bHbRkwfdtGaGViZPg+UIwZVp1lDenC1qqShkwbQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9P195MB1046
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] test/cmd/wget.c: Fix loadaddr rewrite
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>
+References: <20250126235728.500853-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250126235728.500853-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,55 +103,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dhruva,
 
-Am 27.01.25 um 13:22 schrieb Dhruva Gole:
-> Hi Wadim,
+
+On 1/27/25 00:57, Marek Vasut wrote:
+> The $loadaddr variable is a hexadecimal value, not a string, it must be
+> assigned using env_set_hex(). This may break follow up tests, like the
+> dm_test_cmd_hash_md5 in CI. To avoid any interference with other tests,
+> set $wgetaddr variable which is specific to this test and use it in the
+> test.
 > 
-> On Jan 27, 2025 at 05:16:10 +0100, Wadim Egorov wrote:
->> Add bootph-all properties to I2C0 nodes to ensure the bus and EEPROM
->> are accessible across all stages. This enables reading the SoM
->> configuration at any point during the boot process.
->>
->> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
->> ---
->>   arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi | 8 ++++++++
->>   1 file changed, 8 insertions(+)
->>
->> diff --git a/arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi b/arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi
->> index 8f3c3a185ae..c68a48678a2 100644
->> --- a/arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi
->> @@ -72,6 +72,14 @@
->>   	bootph-all;
->>   };
->>   
->> +&main_i2c0 {
->> +	bootph-all;
->> +};
->> +
->> +&main_i2c0_pins_default {
->> +	bootph-all;
->> +};
->> +
+> Fixes: 20f641987f83 ("test/cmd/wget.c: move net_test_wget() to the cmd test suite")
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  test/cmd/wget.c | 8 +++-----
+>  1 file changed, 3 insertions(+), 5 deletions(-)
 > 
-> Can we not add the bootph-all property in the kernel DT nodes for this?
+> diff --git a/test/cmd/wget.c b/test/cmd/wget.c
+> index b020d20ad70..445750660c2 100644
+> --- a/test/cmd/wget.c
+> +++ b/test/cmd/wget.c
+> @@ -217,28 +217,26 @@ static int net_test_wget(struct unit_test_state *uts)
+>  {
+>  	char *prev_ethact = env_get("ethact");
+>  	char *prev_ethrotate = env_get("ethrotate");
+> -	char *prev_loadaddr = env_get("loadaddr");
+>  
+>  	sandbox_eth_set_tx_handler(0, sb_http_handler);
+>  	sandbox_eth_set_priv(0, uts);
+>  
+>  	env_set("ethact", "eth@10002000");
+>  	env_set("ethrotate", "no");
+> -	env_set("loadaddr", "0x20000");
+> -	ut_assertok(run_command("wget ${loadaddr} 1.1.2.2:/index.html", 0));
+> +	env_set("wgetaddr", "0x20000");
+> +	ut_assertok(run_command("wget ${wgetaddr} 1.1.2.2:/index.html", 0));
+>  	ut_assert_nextline_empty();
+>  	ut_assert_nextline("Packets received 5, Transfer Successful");
+>  	ut_assert_nextline("Bytes transferred = 29 (1d hex)");
+>  
+>  	sandbox_eth_set_tx_handler(0, NULL);
+>  
+> -	run_command("md5sum ${loadaddr} ${filesize}", 0);
+> +	run_command("md5sum ${wgetaddr} ${filesize}", 0);
+>  	ut_assert_nextline("md5 for 00020000 ... 0002001c ==> 847d5e7320a27462e90bc1ed75eb8cd8");
+>  	ut_assert_console_end();
+>  
+>  	env_set("ethact", prev_ethact);
+>  	env_set("ethrotate", prev_ethrotate);
+> -	env_set("loadaddr", prev_loadaddr);
+>  
+>  	return 0;
+>  }
 
-Yes, adding bootph-props to the Kernel device tree is on my todo.
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-> Also, I don't see main_i2c0 in the kernel DTS file for this[1] platform. Is
-> there a particular reason to not put it there?
-
-It is defined in the som.dtsi file
-
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/ti/k3-am64-phycore-som.dtsi#n264
-
-Regards,
-Wadim
-
-> 
-> [1]
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/ti/k3-am642-phyboard-electra-rdk.dts
-> 
-> 
-
+Thanks,
+-- 
+Jerome
