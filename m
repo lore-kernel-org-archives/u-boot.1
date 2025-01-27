@@ -4,47 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6E3C0218A
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 22:06:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58777C0218C
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 22:21:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 010E1812C8;
-	Mon, 27 Jan 2025 23:06:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+	by phobos.denx.de (Postfix) with ESMTP id AAE0A812BB;
+	Mon, 27 Jan 2025 23:21:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="l8jK0C1h";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="Z1jKutRp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEA5381727; Mon, 27 Jan 2025 23:06:18 +0100 (CET)
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 7250A812BB
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 23:06:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linux.microsoft.com
+ id 488A1812C8; Mon, 27 Jan 2025 23:21:03 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FB5881265
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 23:21:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
-Received: from LAPTOP-HS0II3UH.corp.microsoft.com (unknown [167.220.26.7])
- by linux.microsoft.com (Postfix) with ESMTPSA id 6E64D203716C;
- Mon, 27 Jan 2025 14:06:15 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 6E64D203716C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1738015575;
- bh=TvSbca1Kcb8XR25oBXMjWn5KgDTqLUMRfGmfYFBByxU=;
- h=From:To:Cc:Subject:Date:From;
- b=l8jK0C1h2uy/0+2StOdJoVHx5TB0WYP/0fzyLOL3CW65bzhVDPj6GXrwR3GQU92An
- FUnejYmfXyhdok/4zcRrChwoju6ZUyZP91WQcgF+SvOktuHtx7Bm8OANbqVnnL/Fyc
- zsQPbo9msPtfIuI9bDF1qpfnx/m5ZEeULGrG3uls=
-From: seanedmond@linux.microsoft.com
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com,
-	rfried.dev@gmail.com,
-	trini@konsulko.com
-Subject: [PATCH] net: dhcp6: Send DHCPv6 using multicast MAC
-Date: Mon, 27 Jan 2025 14:06:13 -0800
-Message-Id: <20250127220613.11518-1-seanedmond@linux.microsoft.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1738016460;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=a4HK3pP10KcecU+toKvcfH4MBfdItCfgaFtm5RxAUe4=;
+ b=Z1jKutRpyiYhQGAAzgQr88Di5hiuKMNdZs0FdROn2ImBccWeowCeXTuQ8O9kQlvLzv8sh0
+ mG7c5F8T56SCtd163a8/+f3fi4XjxsRAdruEBztZeMrNlhtCfrFVw5S772+AwPLEY5Ze0z
+ 0PxVVuqIj4jTpNTEPFYXJOYNQI3GbcEzU1pDGS0AHwCtDirEYx5uW91lKQlVQxrzt0a17a
+ EjMWBGhj3/tjLB5sIaWIDHE27QykCfGGwgxJ/IKkHgN9g7gjDuphCyxAdmt0hO7pJjfV/l
+ 2EgMGOkgDE0sIZvIRogPnvKZAeQm1cB8zpnZX4kE3VtutT0RxMa0fVKYM2UkRQ==
+Date: Mon, 27 Jan 2025 23:20:58 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Dang Huynh <danct12@riseup.net>, Piotr Zalewski
+ <pZ010001011111@proton.me>
+Subject: Re: [PATCH] usb: Make what it takes for "usbkbd" to work in "stdin"
+ clear
+In-Reply-To: <29df2235-79c5-4cd3-bd78-cf7c93552167@denx.de>
+References: <4079f51c0141711cb4cb27f7aeb050b1b1e17828.1737312317.git.dsimic@manjaro.org>
+ <29df2235-79c5-4cd3-bd78-cf7c93552167@denx.de>
+Message-ID: <6e2b3f3cdfbed67122725d22055d8877@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,89 +71,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sean Edmond <seanedmond@microsoft.com>
+Hello Marek,
 
-In IPv6, the broadcast MAC address is not used.  Instead, it should use
-the multicast address (see RFC RFC2464).
+On 2025-01-27 22:55, Marek Vasut wrote:
+> On 1/19/25 7:50 PM, Dragan Simic wrote:
+>> Selecting the CONFIG_SYS_CONSOLE_ENV_OVERWRITE option actually 
+>> prevents the
+>> CONFIG_USB_KEYBOARD option from working as expected, i.e. USB 
+>> keyboards end
+>> up not working as console inputs when "usbkbd" is properly specified 
+>> as part
+>> of the value of the "stdin" environment variable.  Describe this 
+>> clearly in
+>> the two relevant Kconfig files, to prevent any possible confusion.
+>> 
+>> In more detail, the console_init_r() function ends up overwriting the 
+>> "stdin"
+>> environment variable so it contains only the devices available at that 
+>> point
+>> (which doesn't include "usbkbd"), while the "usb start" operation is 
+>> performed
+>> much later, at which point the probe_usb_keyboard() function cannot 
+>> assign any
+>> discovered USB keyboards to the console because "usbkbd" is no longer 
+>> present
+>> in the "stdin" environment variable.
+> 
+> Wouldn't it be better to patch console_init_r() , check if "stdin"
+> variable contains 'usbkbd' and if so, start USB and register the
+> keyboard as stdin device at this point ? This is called after
+> relocation, so starting USB should be OK to do here. The behavior
+> should then be less confusing to users too.
 
-Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
----
- net/dhcpv6.c | 12 ++++++------
- net/dhcpv6.h |  8 +++++++-
- 2 files changed, 13 insertions(+), 7 deletions(-)
-
-diff --git a/net/dhcpv6.c b/net/dhcpv6.c
-index 54619ee6983..984a64a4ff3 100644
---- a/net/dhcpv6.c
-+++ b/net/dhcpv6.c
-@@ -29,6 +29,10 @@
- int updated_sol_max_rt_ms = SOL_MAX_RT_MS;
- /* state machine parameters/variables */
- struct dhcp6_sm_params sm_params;
-+/* DHCPv6 all server IP6 address */
-+const struct in6_addr dhcp_mcast_ip6 = DHCP6_MULTICAST_ADDR;
-+/* IPv6 multicast ethernet address */
-+const u8 net_dhcp6_mcast_ethaddr[6] = IPV6_ALL_NODE_ETH_ADDR(dhcp_mcast_ip6);
- 
- static void dhcp6_state_machine(bool timeout, uchar *rx_pkt, unsigned int len);
- 
-@@ -171,7 +175,6 @@ static int dhcp6_add_option(int option_id, uchar *pkt)
-  */
- static void dhcp6_send_solicit_packet(void)
- {
--	struct in6_addr dhcp_bcast_ip6;
- 	int len = 0;
- 	uchar *pkt;
- 	uchar *dhcp_pkt_start_ptr;
-@@ -200,9 +203,8 @@ static void dhcp6_send_solicit_packet(void)
- 	len = pkt - dhcp_pkt_start_ptr;
- 
- 	/* send UDP packet to DHCP6 multicast address */
--	string_to_ip6(DHCP6_MULTICAST_ADDR, sizeof(DHCP6_MULTICAST_ADDR), &dhcp_bcast_ip6);
- 	net_set_udp_handler(dhcp6_handler);
--	net_send_udp_packet6((uchar *)net_bcast_ethaddr, &dhcp_bcast_ip6,
-+	net_send_udp_packet6((uchar *)net_dhcp6_mcast_ethaddr, (struct in6_addr *)&dhcp_mcast_ip6,
- 			     PORT_DHCP6_S, PORT_DHCP6_C, len);
- }
- 
-@@ -218,7 +220,6 @@ static void dhcp6_send_solicit_packet(void)
-  */
- static void dhcp6_send_request_packet(void)
- {
--	struct in6_addr dhcp_bcast_ip6;
- 	int len = 0;
- 	uchar *pkt;
- 	uchar *dhcp_pkt_start_ptr;
-@@ -252,9 +253,8 @@ static void dhcp6_send_request_packet(void)
- 	len = pkt - dhcp_pkt_start_ptr;
- 
- 	/* send UDP packet to DHCP6 multicast address */
--	string_to_ip6(DHCP6_MULTICAST_ADDR, strlen(DHCP6_MULTICAST_ADDR), &dhcp_bcast_ip6);
- 	net_set_udp_handler(dhcp6_handler);
--	net_send_udp_packet6((uchar *)net_bcast_ethaddr, &dhcp_bcast_ip6,
-+	net_send_udp_packet6((uchar *)net_dhcp6_mcast_ethaddr, (struct in6_addr *)&dhcp_mcast_ip6,
- 			     PORT_DHCP6_S, PORT_DHCP6_C, len);
- }
- 
-diff --git a/net/dhcpv6.h b/net/dhcpv6.h
-index 65c8e4c71d3..d41a3c30615 100644
---- a/net/dhcpv6.h
-+++ b/net/dhcpv6.h
-@@ -40,7 +40,13 @@
- /* vendor-class-data to send in vendor clas option */
- #define DHCP6_VCI_STRING	"U-Boot"
- 
--#define DHCP6_MULTICAST_ADDR	"ff02::1:2"	/* DHCP multicast address */
-+/*
-+ * All-DHCPv6 server multicast address
-+ */
-+#define DHCP6_MULTICAST_ADDR { { { 0xFF, 0x02, 0x00, 0x00, \
-+								   0x00, 0x00, 0x00, 0x00, \
-+								   0x00, 0x00, 0x00, 0x00, \
-+								   0x00, 0x01, 0x00, 0x02 } } }
- 
- /* DHCP6 States supported */
- enum dhcp6_state {
--- 
-2.34.1
-
+Please correct me if I'm wrong, but isn't "usb start" deliberately
+left to be executed as desired by the supported boards, or as part
+of distroboot, i.e. in include/config_distro_bootcmd.h?
