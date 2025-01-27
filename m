@@ -4,77 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 606F3C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 22:40:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E464DC02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 22:42:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6D018187B;
-	Mon, 27 Jan 2025 23:40:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7EC5D81877;
+	Mon, 27 Jan 2025 23:42:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nUuENe1g";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="RXbOOrzs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DEE981878; Mon, 27 Jan 2025 23:40:29 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B2AFA81879; Mon, 27 Jan 2025 23:42:06 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DD3D812BB
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 23:40:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A5BF812BB
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 23:42:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7b6f1be1daeso543198885a.0
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:40:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738017625; x=1738622425; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JMXaecYd1iPgFRmsGKi02slPYGj6S7xT4uGUQqpKPUY=;
- b=nUuENe1gaq4sYHrPj4Gw7mV2HUdsViLL8/s48PtCVXIYGFPKsjRsacINwMNpLArbF1
- 3I/niuzXADnykLuw0azBrV37qwFhY1MmhSNgTwM5If2afDQ3BDkAwW9iDpW9LMVSt/dC
- KNarJ1aw5M1JVKVqTb/DHFovKPCM5XsC7/89k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738017625; x=1738622425;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JMXaecYd1iPgFRmsGKi02slPYGj6S7xT4uGUQqpKPUY=;
- b=gWm/zdYe6xiWYz6O0116J1NtXnDDyb+H9dxUMH1PRXhfrWM7AsEgzb+BFtAYNHKu+w
- HEGMZxtx+Qkdg27MKC/kzklIGOpVnirlPBLWh3KlkVP85Osyg7k3ZPTkmfpX6lEpkdZ2
- GWldB/XI9RSoZEFw9qja9x6a44v7HuIKCnZ4aA4LFwHGtSB3w30FKAyMvlpm+wcOUqtp
- fgPHhfKbOvzVhl3emlTf/u8/NP+6fDe0O2gC6jiIofxXIHGDkvCGAxk0A3h6fhLVzTv0
- 3ucj4F2TXEqkoFS5k5XfLaGmXIl4zmyMe7tbcvlyGpRAAvviWXJcjsadchoMfJVpoImY
- CVRg==
-X-Gm-Message-State: AOJu0YxlJbpnjEClDsog7vMG6BT6kKbKw3QL1EmSv0cb8iKn+/9eO1WK
- XCPwc34yv24oJvmUbPdvzPn2BRAkJ61o5MFbvOGswNaS96p7qd2twOY0VBVbERu6JT1J4ZMvsV1
- H
-X-Gm-Gg: ASbGnct4ja7SsrSJ0qKDcjKqtTipZPiTr8SxuRvRm0uFOF9cBX1rJVtyYIh7HXgXiCD
- Kr9BqdmLKA1jICrpRdlMc0rf5EqHWoBUFv/iO692Ix0KFBRO7YjAPClWaGnx9enxMgum46fb6W2
- YWk6O/R2kkuwD170gapt8g0SuKhJ+m5AMhok9CcE4A0ZZf0U7Gltkc5NC2SSxSmwRWQS6dK86I0
- TWoDkAWI/VEnAEHBrqI7TGcHDGt2oZEbCDGb3VxSmHCd4eweFisPRwxLDXtDpagBuLZQsKsl+XW
- jxmm
-X-Google-Smtp-Source: AGHT+IGUxQmq/G7C9dqYRVrZVEKtIwrYUajAVJf4/kWZSSHa7+DIuyH5fsGy1d/i0/Ca/v/Gfubxjw==
-X-Received: by 2002:a05:620a:4107:b0:7af:cf07:905b with SMTP id
- af79cd13be357-7be631e521dmr5801041585a.2.1738017625212; 
- Mon, 27 Jan 2025 14:40:25 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9ae97569sm435133785a.50.2025.01.27.14.40.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 14:40:24 -0800 (PST)
-Date: Mon, 27 Jan 2025 16:40:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2025.04-rc1 released
-Message-ID: <20250127224021.GH1233568@bill-the-cat>
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VQt5nlCgQ6IjMLgF"
-Content-Disposition: inline
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1738017724;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CtsLvFV5RnsnxTiZjnUxGdjooYAyXA3uIo67mcoFZOA=;
+ b=RXbOOrzs9aow2VPXbFnYwJsTr1tha4bfwUbTx2fIey9qL4CDfyCuZgnk3dGxDAIDKyw6Iy
+ 7Yj5P03En5Uvtdmzd5xhDBuuF2vwN2BBwM6+IlUPHIpsY3DbgcYJTPTcMp5zCPiwoqUk+h
+ iXlLr/y6Gg0G3yqnvD2LzedbfM9ECybzw4JZokBq3PGhXfO0I2IU6VYjc4C+Fbgb8imc6w
+ 6oP79lmvM/D/q+pM4EmmLLz8w38m0OWeKpTX7Qb6EdcpsjY0rcNNunVWigLGzvmdlRvTk3
+ TlHdNyEW+8zYIJNe8kSeUrFy3Tf/A5idDzggh8m0pbPYNUGWXKtijxzGD/0jzA==
+Date: Mon, 27 Jan 2025 23:42:03 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Dang Huynh <danct12@riseup.net>, Piotr Zalewski
+ <pZ010001011111@proton.me>
+Subject: Re: [PATCH] usb: Make what it takes for "usbkbd" to work in "stdin"
+ clear
+In-Reply-To: <5f794a65-eab4-4dde-9b44-eec6c97ff335@denx.de>
+References: <4079f51c0141711cb4cb27f7aeb050b1b1e17828.1737312317.git.dsimic@manjaro.org>
+ <29df2235-79c5-4cd3-bd78-cf7c93552167@denx.de>
+ <6e2b3f3cdfbed67122725d22055d8877@manjaro.org>
+ <5f794a65-eab4-4dde-9b44-eec6c97ff335@denx.de>
+Message-ID: <828c2c778a42fb2bad8d2318b24956bd@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,59 +73,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2025-01-27 23:23, Marek Vasut wrote:
+> On 1/27/25 11:20 PM, Dragan Simic wrote:
+>> On 2025-01-27 22:55, Marek Vasut wrote:
+>>> On 1/19/25 7:50 PM, Dragan Simic wrote:
+>>>> Selecting the CONFIG_SYS_CONSOLE_ENV_OVERWRITE option actually 
+>>>> prevents the
+>>>> CONFIG_USB_KEYBOARD option from working as expected, i.e. USB 
+>>>> keyboards end
+>>>> up not working as console inputs when "usbkbd" is properly specified 
+>>>> as part
+>>>> of the value of the "stdin" environment variable.  Describe this 
+>>>> clearly in
+>>>> the two relevant Kconfig files, to prevent any possible confusion.
+>>>> 
+>>>> In more detail, the console_init_r() function ends up overwriting 
+>>>> the "stdin"
+>>>> environment variable so it contains only the devices available at 
+>>>> that point
+>>>> (which doesn't include "usbkbd"), while the "usb start" operation is 
+>>>> performed
+>>>> much later, at which point the probe_usb_keyboard() function cannot 
+>>>> assign any
+>>>> discovered USB keyboards to the console because "usbkbd" is no 
+>>>> longer present
+>>>> in the "stdin" environment variable.
+>>> 
+>>> Wouldn't it be better to patch console_init_r() , check if "stdin"
+>>> variable contains 'usbkbd' and if so, start USB and register the
+>>> keyboard as stdin device at this point ? This is called after
+>>> relocation, so starting USB should be OK to do here. The behavior
+>>> should then be less confusing to users too.
+>> 
+>> Please correct me if I'm wrong, but isn't "usb start" deliberately
+>> left to be executed as desired by the supported boards, or as part
+>> of distroboot, i.e. in include/config_distro_bootcmd.h?
+> 
+> It is, but if the user needs USB keyboard as input device, shouldn't
+> we probe for that (which yes, will make the start up slower) ?
 
---VQt5nlCgQ6IjMLgF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I agree that the way the whole thing works now, with or without this
+patch, leaves a fair amount of room for confusion.  That's exactly
+how I felt while writing this patch -- I was confused a bit about
+the possible outcomes of different combinations of the configuration
+options.  Though, I also felt that the way it works now also makes
+the whole thing as flexible as possible, so the users can choose
+whatever configuration they want, even the broken one.
 
-Hey all,
+I'm also afraid that, effectively, starting USB forcedly at that
+point may cause some unforeseen issues or regressions.
 
-It's release day and so here's v2025.04-rc1. For a -rc1, I think we're
-in fine enough shape. The next window won't open until after -rc2 so if
-you have some outstanding patches that you think should be merged to
-mainline for v2025.04 please speak up (or for custodians, send a pull
-request).
+It also crossed my mind that perhaps a good solution would be to
+automatically deselect SYS_CONSOLE_ENV_OVERWRITE when the user
+selects USB_KEYBOARD, because that's needed for USB keyboards to
+actually work.  That should also have lower potential for causing
+some issues or regressions.
 
-As I mentioned elsewhere, I've scheduled a video call tomorrow at 9am
--0600 and the calendar link is:
-https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DN280N2=
-tlcXE3aDVtbjlicnNkcm82YnA1bDAgODliZTdiODEzMTM2YmVjMDZhODNkZTRkYTU5NzQ1ZjBhY=
-mQxMWMxYjgzNjA2MWFlMDZjMWM3ZGJjZDE4ZGY0MUBn&tmsrc=3D89be7b813136bec06a83de4=
-da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.calendar.google.com
-and I also send the meeting invite via Google to the mailing list. I
-plan to do these regularly, post release and depending on reception the
-time can be adjusted or perhaps duplicate meetings held.
-
-In terms of a changelog,=20
-git log --merges v2025.01..v2025.04-rc1
-As always, more details in pull requests (or the tags referenced by
-them) will result in more details here.
-
-I continue to plan to do an rc release every two weeks and the final
-release will be 07 April 2025.
-
-Thanks all!
-
---=20
-Tom
-
---VQt5nlCgQ6IjMLgF
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeYC1UACgkQFHw5/5Y0
-tyzjMgv9GlVSFVLGSi77bDx/2RHZ1TBeSZmm38VvAAuxKcsD7fCLPvyD9ZywF0hq
-6WzBAcM1Cgiv/jXMNCAe8ehYIYCaugmpsTpqw0suCTo3x5NbiQMMmDDNgWcdH+y/
-gTGzSGJWHv8mj00V9flTmNDZ5C6dXpeE1ovgu7Euv8BN/52YHfn1wkrE7ycDyRD1
-z++ZnAIaTN5SW8hvkHcpD6UZyWgENOy1QXiIPa1pmqdryHhdCHg6D/FcD0a6CJNZ
-NkUSXmYOjiObdtgUMuz8VbHcBeLgkX3FxiT/6lECSBwIPadXq9z2yg6zuINrdkjR
-BgZNTR23tYaw16m9a7RKlLU/HJhbLRE6jTmMiTtq/iC5B1TAGWj9ogKbyihwar22
-009LKWLNzi0qrBdhHBoDBhkA9UAxeqzQ4vjCs18F5fuIixFzOG2Yrfgvb5u6UxuG
-eaI+cuq3feiA2KyHlhGX/DIGVvvTY/Ug+udtR0E+OzIidZvspVI2DWqYahgJ74lt
-Zlt5KQbK
-=kGTb
------END PGP SIGNATURE-----
-
---VQt5nlCgQ6IjMLgF--
+Maybe another good option would be to modify the console_init_r()
+function to simply leave "usbkbd" in the environment variables when
+USB_KEYBOARD is selected, so the "usb start" executed later can
+actually make USB keyboards work?  I think such an approach should
+have the lowest potential for causing some issues or regressions,
+while it would pretty much eliminate any confusion.
