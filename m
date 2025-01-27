@@ -4,89 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA68C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:49:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE85EC02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:50:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F059A8128D;
-	Mon, 27 Jan 2025 15:49:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A87581292;
+	Mon, 27 Jan 2025 15:50:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x1Io96Cz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ReL5gn6i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0927D81292; Mon, 27 Jan 2025 15:49:53 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id D112B8141A; Mon, 27 Jan 2025 15:50:05 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97B2C81276
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:49:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86F0E81292
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:49:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7b6edb82f85so671615385a.3
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 06:49:50 -0800 (PST)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7b6fc3e9e4aso393595485a.2
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 06:49:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737989389; x=1738594189; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FAMSE0MLO28CCn61m/rq0uAq643eMoW5RLziCxWo4b0=;
- b=x1Io96CzA3aGjoTExtoGuBC9JvjibLg3OaOJqddHjDcZwccK+EkPcCFfKCA8sy7XWd
- oviO1grv4nxJTt2ZnRKAlfFAcsuUHonSHqs2SGuy/Ab3rFENQRHUswO+n1GalM9sxD6K
- JYsumUNNzpDIAorx+PKXOl3AVF2qoD0A8DGT5x+8DExKkPZJ55ppeejpetrT8HvV0SIB
- jwE+YgS9FWI6J/haZ4A6CVZvmpXF7e0iN6CVT83lqVAIkTRL3nLFrvbMNcucIgiz5nev
- AKW0+pf+OPhgSbUrjYehPvk0hv8LXhFkiihFBmA2sjyk/zKyGyhnmLyE2L/LAelVBH3U
- 4kvQ==
+ d=linaro.org; s=google; t=1737989397; x=1738594197; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3/+/hiPNESX5pbr6Q0lwfjHVeUAXAR3pfjnhLAJhtIA=;
+ b=ReL5gn6i3/mzCPUF2P2Xg4Q8iEQ1a9fjFPYgwiOGvsvIDbKzg85al7h9C9hmM4PClS
+ oLd8eTHkAWt86D++mTbqynUgxdijGglxdMqwFDn7Dr/iNiF33cArwpXnY3FrFQsyNHvb
+ GpLXjwRWzrAcKTkGINEssmT8LjgMx8dW1qRBynHxUxVk5dGV1e8pbumWj7eNFGygC1IP
+ z8gQ2+QOzq7xjHEc/YYD3jsUxklOVyuTfnvY+8n5lTaYmj6/lOaCcKXedgO83UiflgAK
+ FryGdT8kR88m06q1f6+ljzSIJBV7F91S4iKLfZtKLmvWgsjVqNV2FUA6tmUagB1Ny+/0
+ FVHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737989389; x=1738594189;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FAMSE0MLO28CCn61m/rq0uAq643eMoW5RLziCxWo4b0=;
- b=H/YFPRZ7K9/T+OrDwRujTlsIK3N23OTOQyTULdfvrglf166pgTEGwk7Zopcm8Qis7A
- 1bUCyggEZT/9qy3mmMipaf1rCs2Ai+CTnwlme+UhN7lleglwkNHZ099A4xdxnFI0HrnJ
- wpps2+adm7RJeCL0E6kaC7CEQFLDDARs2nqStPs7innZN41IQ6M/cej6sycOJR4/6xtd
- qdGcyi4JByuL/BIQ6WX8XmVlOzrSrNhJb/cF3So/uzot5VC1ayZ5UopOS65gbffGh/V9
- dECzcXHH5OGwptQ9fSBmDERMCEQkXb+/OfvCKDyfZXS4BNPOpGYiXQ2hG1jUKO+OvnPt
- DG2w==
-X-Gm-Message-State: AOJu0YxywxIe2oGtr4t0VVaXC0ymIfmXz4MIa2qxcGLxtQAUIkc5PP2F
- b6syv7ewVuGtWyP1fV/0Y3ItO0Qu4jLkZpRdQsOU5teU8eozjucOor1L9JVG2Pz2Yp11DV3+uaz
- KUuM=
-X-Gm-Gg: ASbGnctj8lvUOoyaTp/Jif3/LIPEOpFiAjuqnjfG9hjBbFX9qFzFNWOXRKgAkgVyC5B
- wP24UOq0Sjf66NgTW4xwXYz8KHfnlA3rWOvlP6bYCuyUHPSSIYqfXWWowMxvbiOF42++cRm1DLb
- Ut+9vTLpatwvJzSjsJ8SqXMpKs7ZNKs4z1xRX3RGQCPSg0F/MpdYDXcZGOtvmk4CQEzhPQS1yEp
- dSHs5r4WfudkruT0bYuErapyvAEngeGC0mhvyIkYZ5JPDIKD0thKUnJWq3ivghFjFMLEI7pXc7Z
- wuqB0+izXmEmu73+du0RssK2qibw8pr2H47vJnoMyQzGTzy/ux71EMnYn+0HyClc9W/QP+PfVhs
- NuXg=
-X-Google-Smtp-Source: AGHT+IFi7egkl5VuMh6eHXQVw42Qj+JqHmC/cgfcq7D6YFdoRCrGpFfVJg+PLMFDFWXaR6u43aJ2yw==
-X-Received: by 2002:a05:620a:15b:b0:7be:7f67:3475 with SMTP id
- af79cd13be357-7be7f6734e2mr3600353885a.50.1737989389202; 
- Mon, 27 Jan 2025 06:49:49 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737989397; x=1738594197;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3/+/hiPNESX5pbr6Q0lwfjHVeUAXAR3pfjnhLAJhtIA=;
+ b=N32P3k6NMeJ39sj/1voDEfRWnn9p7k9DAzj9AyEV4EmyBWy3X3hicw0YB2WL6aXYJO
+ BgSVUjmv9W0+pxDEnk5Hh4eMLCuV5rt48o0Sbkw5cTuqdCFHAehqO9Yw46dbQJl+cJuN
+ l0nm/6we0B0+NIlvRuZ4f3a+T+2Zbxp7ixWyYYvUKDJtuXJL0vQgxpiv2i5qF4an01qw
+ TCHS0odJps+tTGG2XuDnzUYyBC/9FdvznD+5aEWN9U5+cAHJYdnLUhC/UrfELrf5NGAB
+ Ow2/H2oGr3Rru793desEtAue7k4ED9MsYo09Q28fZ/NNkJXoFCMu8lY9xn3Tonl98o/L
+ 80Yw==
+X-Gm-Message-State: AOJu0YzOQSid6+V9icci1lK3H/ZfyNYXljaax0uYdL7V6hhcOQy0EYRe
+ pc9FqgGF5IRm0xBikJRenvGyZ0nPyHl3KZi3tR8Ul+zClGrWaYKKTJ8RWVyitG/btIa9SzJJfQi
+ uMUc=
+X-Gm-Gg: ASbGnctZDcJluhqXsPqBf4yHixe5uT7jq3XXfTy9w2ciCKFzgZcybx7YbweDZO9Rg88
+ HzFFplUxuFNbGggyE6H3EPo0qnNiHhebxxnCd/eZSbOCcSoI/TOCmyHi23dEazDalZxisUSLZjW
+ 23pe45KioT8WOAmnfpLqwoYEsjn1y1CepK80ZGLFqGjZcZMcHqb3bNZQ2/EOww2xNfXfM5EB7fD
+ vQdrpqjwT2NYyVurJfVKdOD2o30aoV5glFvCQOr9RyrR6gHtMLZz3AaxaF4dckCcYUlcLq+8vpT
+ beULB2nvlipFRxjyuAx4hBVXP45IylZaT8IFkdosSxTexvisS+YbaD1j8LHUPGoA6p9Q/J9hbZY
+ WjUA=
+X-Google-Smtp-Source: AGHT+IE3x6wdwzccAaMSP7cXN+/NQchlbjl1BKfFkb0+q4LlGjjOz9EA153WaNywt/+g+kJM5HmmTA==
+X-Received: by 2002:a05:620a:2627:b0:7b6:d1e1:a22e with SMTP id
+ af79cd13be357-7be63248078mr5831158385a.29.1737989396801; 
+ Mon, 27 Jan 2025 06:49:56 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9aeedc7esm397345985a.70.2025.01.27.06.49.47
+ af79cd13be357-7be9aeedc7esm397345985a.70.2025.01.27.06.49.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 06:49:48 -0800 (PST)
+ Mon, 27 Jan 2025 06:49:56 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+Cc: Raymond Mao <raymond.mao@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Levi Yun <yeoreum.yun@arm.com>,
+ Simon Glass <sjg@chromium.org>, Levi Yun <yeoreum.yun@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Eddie James <eajames@linux.ibm.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v7 1/3] bloblist: add api to get blob with size
-Date: Mon, 27 Jan 2025 06:49:34 -0800
-Message-Id: <20250127144941.645544-1-raymond.mao@linaro.org>
+ Tim Harvey <tharvey@gateworks.com>, Eddie James <eajames@linux.ibm.com>
+Subject: [PATCH v7 2/3] tcg2: decouple eventlog size from efi
+Date: Mon, 27 Jan 2025 06:49:35 -0800
+Message-Id: <20250127144941.645544-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250127144941.645544-1-raymond.mao@linaro.org>
+References: <20250127144941.645544-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,125 +108,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-bloblist_find function only returns the pointer of blob data,
-which is fine for those self-describing data like FDT.
-But as a common scenario, an interface is needed to retrieve both
-the pointer and the size of the blob data.
-
-Add a few ut test cases for the new api.
+Move default eventlog size from efi to tpm for using in both
+efi and measured boot.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
-Changes in v2
-- Rename function argument.
-- Add ut tests.
-Changes in v3
-- None.
-Changes in v4
-- None.
 Changes in v5
-- None.
+- Move eventlog size kconfig from EFI to TPM2, so that it can be used by
+  both EFI and MEASURED_BOOT.
 Changes in v6
 - None.
 Changes in v7
 - None.
 
- common/bloblist.c      | 17 +++++++++++++++--
- include/bloblist.h     | 18 ++++++++++++++++++
- test/common/bloblist.c |  4 ++++
- 3 files changed, 37 insertions(+), 2 deletions(-)
+ doc/usage/measured_boot.rst |  1 -
+ drivers/tpm/Kconfig         |  9 +++++++++
+ include/efi_tcg2.h          |  2 --
+ lib/efi_loader/Kconfig      |  9 ---------
+ lib/efi_loader/efi_tcg2.c   | 15 ++++++++-------
+ 5 files changed, 17 insertions(+), 19 deletions(-)
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 110bb9dc44..ab48a3cdb9 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
- }
+diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
+index 05c439e9ac..488dd546f1 100644
+--- a/doc/usage/measured_boot.rst
++++ b/doc/usage/measured_boot.rst
+@@ -24,7 +24,6 @@ Requirements
  
- void *bloblist_find(uint tag, int size)
-+{
-+	void *blob = NULL;
-+	int blob_size;
-+
-+	blob = bloblist_get_blob(tag, &blob_size);
-+
-+	if (size && size != blob_size)
-+		return NULL;
-+
-+	return blob;
-+}
-+
-+void *bloblist_get_blob(uint tag, int *sizep)
- {
- 	struct bloblist_rec *rec;
+ * A hardware TPM 2.0 supported by an enabled U-Boot driver
+ * CONFIG_EFI_TCG2_PROTOCOL=y
+-* CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE=y
+ * optional CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB=y will measure the loaded DTB
+   in PCR 1
  
- 	rec = bloblist_findrec(tag);
- 	if (!rec)
- 		return NULL;
--	if (size && size != rec->size)
--		return NULL;
+diff --git a/drivers/tpm/Kconfig b/drivers/tpm/Kconfig
+index d59102d9a6..01bc686d36 100644
+--- a/drivers/tpm/Kconfig
++++ b/drivers/tpm/Kconfig
+@@ -209,6 +209,15 @@ config TPM2_MMIO
+ 	  to the device using the standard TPM Interface Specification (TIS)
+ 	  protocol.
+ 
++config TPM2_EVENT_LOG_SIZE
++	int "EventLog size"
++	depends on TPM_V2
++	default 65536
++	help
++	  Define the size of the EventLog. Note that this is going to be
++	  allocated twice. One for the eventlog it self and one for the
++	  configuration table that is required from the TCG2 spec
 +
-+	*sizep = rec->size;
+ endif # TPM_V2
  
- 	return (void *)rec + rec_hdr_size(rec);
- }
-diff --git a/include/bloblist.h b/include/bloblist.h
-index f999391f74..52ba0ddcf8 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -250,6 +250,24 @@ static inline void *bloblist_check_magic(ulong addr)
- 	return ptr;
- }
+ endmenu
+diff --git a/include/efi_tcg2.h b/include/efi_tcg2.h
+index 8dfb1bc952..7ed8880991 100644
+--- a/include/efi_tcg2.h
++++ b/include/efi_tcg2.h
+@@ -28,8 +28,6 @@
+ #define EFI_TCG2_MAX_PCR_INDEX 23
+ #define EFI_TCG2_FINAL_EVENTS_TABLE_VERSION 1
  
-+#if CONFIG_IS_ENABLED(BLOBLIST)
-+/**
-+ * bloblist_get_blob() - Find a blob and get the size of it
-+ *
-+ * Searches the bloblist and returns the blob with the matching tag
-+ *
-+ * @tag:	Tag to search for (enum bloblist_tag_t)
-+ * @sizep:	Size of the blob found
-+ * Return: pointer to bloblist if found, or NULL if not found
-+ */
-+void *bloblist_get_blob(uint tag, int *sizep);
-+#else
-+static inline void *bloblist_get_blob(uint tag, int *sizep)
-+{
-+	return NULL;
-+}
-+#endif
-+
- /**
-  * bloblist_find() - Find a blob
-  *
-diff --git a/test/common/bloblist.c b/test/common/bloblist.c
-index 4bca62110a..324127596f 100644
---- a/test/common/bloblist.c
-+++ b/test/common/bloblist.c
-@@ -98,10 +98,12 @@ static int bloblist_test_blob(struct unit_test_state *uts)
- 	struct bloblist_hdr *hdr;
- 	struct bloblist_rec *rec, *rec2;
- 	char *data;
-+	int size = 0;
+-#define TPM2_EVENT_LOG_SIZE CONFIG_EFI_TCG2_PROTOCOL_EVENTLOG_SIZE
+-
+ typedef u32 efi_tcg_event_log_bitmap;
+ typedef u32 efi_tcg_event_log_format;
+ typedef u32 efi_tcg_event_algorithm_bitmap;
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index c46ffe3a9d..d703e901ed 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -437,15 +437,6 @@ config EFI_TCG2_PROTOCOL
+ 	  Provide a EFI_TCG2_PROTOCOL implementation using the TPM hardware
+ 	  of the platform.
  
- 	/* At the start there should be no records */
- 	hdr = clear_bloblist();
- 	ut_assertnull(bloblist_find(TEST_TAG, TEST_BLOBLIST_SIZE));
-+	ut_assertnull(bloblist_get_blob(TEST_TAG, &size));
- 	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
- 	ut_asserteq(sizeof(struct bloblist_hdr), bloblist_get_size());
- 	ut_asserteq(TEST_BLOBLIST_SIZE, bloblist_get_total_size());
-@@ -114,6 +116,8 @@ static int bloblist_test_blob(struct unit_test_state *uts)
- 	ut_asserteq_addr(rec + 1, data);
- 	data = bloblist_find(TEST_TAG, TEST_SIZE);
- 	ut_asserteq_addr(rec + 1, data);
-+	ut_asserteq_addr(bloblist_get_blob(TEST_TAG, &size), data);
-+	ut_asserteq(size, TEST_SIZE);
+-config EFI_TCG2_PROTOCOL_EVENTLOG_SIZE
+-	int "EFI_TCG2_PROTOCOL EventLog size"
+-	depends on EFI_TCG2_PROTOCOL
+-	default 65536
+-	help
+-		Define the size of the EventLog for EFI_TCG2_PROTOCOL. Note that
+-		this is going to be allocated twice. One for the eventlog it self
+-		and one for the configuration table that is required from the spec
+-
+ config EFI_TCG2_PROTOCOL_MEASURE_DTB
+ 	bool "Measure DTB with EFI_TCG2_PROTOCOL"
+ 	depends on EFI_TCG2_PROTOCOL
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index a15c73162e..6dba8b1406 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -111,7 +111,7 @@ static efi_status_t tcg2_agile_log_append(u32 pcr_index, u32 event_type,
+ 	/* if ExitBootServices hasn't been called update the normal log */
+ 	if (!event_log.ebs_called) {
+ 		if (event_log.truncated ||
+-		    event_log.pos + event_size > TPM2_EVENT_LOG_SIZE) {
++		    event_log.pos + event_size > CONFIG_TPM2_EVENT_LOG_SIZE) {
+ 			event_log.truncated = true;
+ 			return EFI_VOLUME_FULL;
+ 		}
+@@ -124,7 +124,7 @@ static efi_status_t tcg2_agile_log_append(u32 pcr_index, u32 event_type,
+ 		return ret;
  
- 	/* Check the data is zeroed */
- 	ut_assertok(check_zero(data, TEST_SIZE));
+ 	/* if GetEventLog has been called update FinalEventLog as well */
+-	if (event_log.final_pos + event_size > TPM2_EVENT_LOG_SIZE)
++	if (event_log.final_pos + event_size > CONFIG_TPM2_EVENT_LOG_SIZE)
+ 		return EFI_VOLUME_FULL;
+ 
+ 	log = (void *)((uintptr_t)event_log.final_buffer + event_log.final_pos);
+@@ -822,12 +822,12 @@ static efi_status_t create_final_event(void)
+ 	 * EFI_TCG2_GET_EVENT_LOGS need to be stored in an instance of an
+ 	 * EFI_CONFIGURATION_TABLE
+ 	 */
+-	ret = efi_allocate_pool(EFI_ACPI_MEMORY_NVS, TPM2_EVENT_LOG_SIZE,
++	ret = efi_allocate_pool(EFI_ACPI_MEMORY_NVS, CONFIG_TPM2_EVENT_LOG_SIZE,
+ 				&event_log.final_buffer);
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
+ 
+-	memset(event_log.final_buffer, 0xff, TPM2_EVENT_LOG_SIZE);
++	memset(event_log.final_buffer, 0xff, CONFIG_TPM2_EVENT_LOG_SIZE);
+ 	final_event = event_log.final_buffer;
+ 	final_event->number_of_events = 0;
+ 	final_event->version = EFI_TCG2_FINAL_EVENTS_TABLE_VERSION;
+@@ -913,7 +913,8 @@ static efi_status_t efi_init_event_log(void)
+ 	if (tcg2_platform_get_tpm2(&dev))
+ 		return EFI_DEVICE_ERROR;
+ 
+-	ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA, TPM2_EVENT_LOG_SIZE,
++	ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA,
++				CONFIG_TPM2_EVENT_LOG_SIZE,
+ 				(void **)&event_log.buffer);
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+@@ -922,7 +923,7 @@ static efi_status_t efi_init_event_log(void)
+ 	 * initialize log area as 0xff so the OS can easily figure out the
+ 	 * last log entry
+ 	 */
+-	memset(event_log.buffer, 0xff, TPM2_EVENT_LOG_SIZE);
++	memset(event_log.buffer, 0xff, CONFIG_TPM2_EVENT_LOG_SIZE);
+ 
+ 	/*
+ 	 * The log header is defined to be in SHA1 event log entry format.
+@@ -939,7 +940,7 @@ static efi_status_t efi_init_event_log(void)
+ 	 * platforms can use different ways to do so.
+ 	 */
+ 	elog.log = event_log.buffer;
+-	elog.log_size = TPM2_EVENT_LOG_SIZE;
++	elog.log_size = CONFIG_TPM2_EVENT_LOG_SIZE;
+ 	rc = tcg2_log_prepare_buffer(dev, &elog, false);
+ 	if (rc) {
+ 		ret = (rc == -ENOBUFS) ? EFI_BUFFER_TOO_SMALL : EFI_DEVICE_ERROR;
 -- 
 2.25.1
 
