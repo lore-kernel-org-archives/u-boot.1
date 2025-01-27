@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B171C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 11:30:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE529C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 11:45:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFF8D81119;
-	Mon, 27 Jan 2025 12:30:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 029C781119;
+	Mon, 27 Jan 2025 12:45:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="AR2YXasj";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TVUSBkev";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="et9/BnzM";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PWxMNKO1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 892AF81119; Mon, 27 Jan 2025 12:30:56 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 11C6B8111F; Mon, 27 Jan 2025 12:45:00 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3477680087
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 12:30:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 178A981115
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 12:44:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YhR7K67fTz9sZZ;
- Mon, 27 Jan 2025 12:30:53 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YhRRY3r5qz9sRn;
+ Mon, 27 Jan 2025 12:44:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737977453;
+ s=mail20150812; t=1737978297;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=KBafmWqF85S3aWAByn4Mgg2HqQcXadR3ZA2JrtWr8Wk=;
- b=AR2YXasjtMyr9/9nFpSfCqnh7hFUGFGCPYCkdEDVKWDfWp7A/AK/KufFSdtHO7F0IU/rLG
- IA2tY6eMB28qWTDz5gCBEqGTawFCJ3EChF2TFSjbnvUtojVux21P/57P87RauIHfAFoLbJ
- YLPE9NnqSGD/mRWwieqV6ROB1Ev323YRu3oDM1oybQ3m63v8+PJyLMcLY8z4YjMrcNOV61
- iiqBSZ4Cs6bG5Z3UFyEUodPvFI4DEtLUd6hnQRDMX4kk6++h5CqC6oYC7r8XcXanIUskZO
- 9FdaPqFK2DEUwVf8orV9R8JWa6BoAeCXDc3ihpOkSu/ut3V9CFi/N3uEvIfuVg==
-Message-ID: <c025e008-48ee-41c0-ae47-2d348058a635@mailbox.org>
+ bh=oS6gGgPBSH/dYs1qhK8rsYbPjRGj3Iw+lGgJfQzTG1Q=;
+ b=et9/BnzMCD02T3g8YWcUrQdMRYHAgYOEYZQIjKitpY26+4f/50yURK3kBvGgpiNNPWm37m
+ UuooT+IWK92QfvocQHSCuiGqw3kYDvWcAhNXDyhCRKnT5VYz+QQQoFy0jupYbpYZe72fyS
+ 5TPMDfCSBDm3sjMGNVpnDbJpe/rzIdQ0JBk+LqjD75BCXB8hah5cAkYMJqDUHSHKTBTBPw
+ HTNrwkwDCgHHsX5+zUdqlC+9GFPa09Ki8PfcPmvZidftoS0rr4BFMp7tI0IP7X4mmzvYSv
+ xZAsKRKHFSqGwUeUXBMiEoA1L6gExvUAGcw9OJFQA9uaisEdUUGMAvSXzgjarA==
+Message-ID: <e09dbf26-1cd8-41af-bac7-c14957f42108@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1737977451;
+ s=mail20150812; t=1737978295;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=KBafmWqF85S3aWAByn4Mgg2HqQcXadR3ZA2JrtWr8Wk=;
- b=TVUSBkev1FWEqFcs5ikO9XUl3ml0Tq5MGNN8hq0zGrc8KIWOhM8OewbIGRTWbnLvo2samM
- MD1LFetBMkeYemx06l+iGi0K2Dh7wRe/9WHwW07KC7I2NiryQs3WLORgxpZCOJA5MW5BQN
- AZan/SfONsEVqJi/B0AuysMqvM0KHa0KUw3VynLUVohratAZWA3GEbcWJDRq71wq5Qcwto
- a2tA29Y2VFOh3uAOW4M7vAKS7cd6S4gMsLFoqJPK5AISD+TirSJtJfCf3b5OXhT5S9q+MH
- zwaHGZaK5YbiyPRg53crSl03ImkhMwiBja8ZDjr1gcnSNzoMIczBlz6AjIQWVg==
-Date: Mon, 27 Jan 2025 12:30:47 +0100
+ bh=oS6gGgPBSH/dYs1qhK8rsYbPjRGj3Iw+lGgJfQzTG1Q=;
+ b=PWxMNKO1/azRdmtpGUt9kzZ2+/2a0omJl0PVzxe2bQ5ZzWFDKJEmwIHgSu/ydOuhMYtrNM
+ jBBhal445wjC34XMvND6d1a0z3ekLNeIquCaZNV9SSjHCF67UPAWLMT0GC5lx7DQ8eOMqY
+ BQGNHIAiEhw1hnO85vpYNjaZyUndHjvQ7MkRjKVHQolMkH5SHDROygpvt25HVqR+mjJmnM
+ FqTVG8NDj5Z1od2gz9vmvD4cmN9ZGP/6NdX4UE6+s2lhxCO4gOpd/juRsKLa/NRwJlz+Ti
+ XAbN18BPWQ3ok6dj/DhwVeSDaB0YJX4hXsLvnBgk8swK6+ycotQGaxk1toGKhg==
+Date: Mon, 27 Jan 2025 12:44:50 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+Subject: Re: [PATCH 1/8] cyclic: Prevent corruption of cyclic list on
+ reassignment
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Aaron Williams <awilliams@marvell.com>, Anatolij Gustschin <agust@denx.de>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ronald Wahl
+ <ronald.wahl@legrand.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>
-References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
- <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
- <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
- <dc02c0b8-55d3-49d7-8aae-012bad61b183@bp.renesas.com>
+References: <20250118040130.74921-1-marek.vasut+renesas@mailbox.org>
+ <87cyghx2ru.fsf@prevas.dk> <f2192348-1c8b-4858-b138-e1a894dff92f@mailbox.org>
+ <87r04putxb.fsf@prevas.dk>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <dc02c0b8-55d3-49d7-8aae-012bad61b183@bp.renesas.com>
+In-Reply-To: <87r04putxb.fsf@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 7dbkrrxf964f7efrwn46yejp6h6pu8u3
-X-MBO-RS-ID: d5a43c6654b9e6e1176
-X-Rspamd-Queue-Id: 4YhR7K67fTz9sZZ
+X-MBO-RS-META: 8gf463idit78yys7t1o71fp3bhddu849
+X-MBO-RS-ID: 9c772055a65ac336cf4
+X-Rspamd-Queue-Id: 4YhRRY3r5qz9sRn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,41 +103,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/27/25 11:32 AM, Paul Barker wrote:
-> Hi Marek,
-> 
-> On 25/01/2025 12:56, Marek Vasut wrote:
->> On 1/21/25 3:38 PM, Paul Barker wrote:
->>> On 18/01/2025 06:53, Marek Vasut wrote:
->>>> Introduce mdio_init() split off from mdio_alloc(), which is used
->>>> to initialize already allocated struct mii_dev.
->>>>
->>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>
->>> Replying here for the whole patch series...
->>>
->>> I like where we get to at the end of this series, but I don't like the
->>> intermediate state where the bb_miiphy_buses arrays still exist but are
->>> unused. I also think we should introduce a new ops struct so we're not
->>> duplicating function pointers in each instance of struct bb_miiphy_bus.
->>>
->>> I would prefer the following order of changes, let me know if you think
->>> this would be cleaner:
->>>
->>> 1) Introduce mdio_init().
->>>
->>> 2) Add mii member to struct bb_miiphy_bus.
->>>
->>> 3) Modify each driver to use the mii member of the appropriate struct
->>>      bb_miiphy_bus instance, calling mdio_init() instead of mdio_alloc().
->>>      At this point we're still using the instances in the statically
->>>      allocated bb_miiphy_buses array.
+On 1/26/25 10:49 PM, Rasmus Villemoes wrote:
+
+[...]
+
+>>> Also, I think I'd prefer if double cyclic_register() is allowed and
+>>> always succeeds; this could be used to change the period of an already
+>>> registered instance, for example.
 >>
->> Those instances might be rodata , so using them as read-write storage
->> does not necessarily work , does it ?
+>> This would be terribly overloaded interface, no, let's not do that.
 > 
-> None of the instances in the current U-Boot code are marked as const,
-> and the name field is already modified at runtime by each driver. So I
-> don't think we need to worry about them being rodata.
-Can the compiler not decide to place the structure into rodata if it is 
-never written ?
+> I disagree.
+
+Can you please elaborate on that ?
+
+>> Better introduce a dedicated function for that kind of period adjustment.
+>>
+>>> Also, that avoids making the
+>>> interfaces fallible.
+> 
+> And I believe that _this_ is an important property to get/preserve.
+
+What exactly does this mean in this case ?
+
+[...]
+
+I'll see what I can come up with in V2 for the rest.
