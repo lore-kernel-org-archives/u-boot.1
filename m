@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98E89C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 11:21:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B171C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 11:30:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A32381119;
-	Mon, 27 Jan 2025 12:21:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id EFF8D81119;
+	Mon, 27 Jan 2025 12:30:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jiAotCn4";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="AR2YXasj";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TVUSBkev";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD6F08111F; Mon, 27 Jan 2025 12:21:21 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 892AF81119; Mon, 27 Jan 2025 12:30:56 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57E7D81115
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 12:21:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3477680087
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 12:30:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1737976875; x=1738581675; i=xypron.glpk@gmx.de;
- bh=ULwVG4HaEVArVH88LIknOPrDC20ANleP4KEKHrTJ6hQ=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=jiAotCn4EulgHMTARZTMCaEzVe8nndgJiXePI5yNDyw/3+AVbFuuPUtfvSOJu8GR
- hiwo6WV6oPBNTWymBiEAFPRJYm1ARkiCNi28vRiJ/Frttw4obBYXt3oD4osrg+c90
- TfJViBp9MCOwlodQO08oFdBnFhHl4TtwYfwfJAxdg9SsPxdsmKs9bOXjgY/CWPgpV
- A1Ij46qiRHijGfA4EjfjPseR4ADty1dEUUA0ETzbesdcgJArN2aeH/ab61HpP+yzl
- rPyw4rCMQ5IldZ75J03t7/hACm/KqFUzRi3ULbs93wRs2cxPMwOM3xUQO+3k3zi7a
- VTGFSr8FqTo9hvXywg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([46.114.105.151]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1McYCb-1t47t806IP-00q54g; Mon, 27
- Jan 2025 12:21:15 +0100
-Message-ID: <a8fb34b4-58a1-4de2-bf18-63acf8657259@gmx.de>
-Date: Mon, 27 Jan 2025 12:21:10 +0100
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YhR7K67fTz9sZZ;
+ Mon, 27 Jan 2025 12:30:53 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737977453;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=KBafmWqF85S3aWAByn4Mgg2HqQcXadR3ZA2JrtWr8Wk=;
+ b=AR2YXasjtMyr9/9nFpSfCqnh7hFUGFGCPYCkdEDVKWDfWp7A/AK/KufFSdtHO7F0IU/rLG
+ IA2tY6eMB28qWTDz5gCBEqGTawFCJ3EChF2TFSjbnvUtojVux21P/57P87RauIHfAFoLbJ
+ YLPE9NnqSGD/mRWwieqV6ROB1Ev323YRu3oDM1oybQ3m63v8+PJyLMcLY8z4YjMrcNOV61
+ iiqBSZ4Cs6bG5Z3UFyEUodPvFI4DEtLUd6hnQRDMX4kk6++h5CqC6oYC7r8XcXanIUskZO
+ 9FdaPqFK2DEUwVf8orV9R8JWa6BoAeCXDc3ihpOkSu/ut3V9CFi/N3uEvIfuVg==
+Message-ID: <c025e008-48ee-41c0-ae47-2d348058a635@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1737977451;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=KBafmWqF85S3aWAByn4Mgg2HqQcXadR3ZA2JrtWr8Wk=;
+ b=TVUSBkev1FWEqFcs5ikO9XUl3ml0Tq5MGNN8hq0zGrc8KIWOhM8OewbIGRTWbnLvo2samM
+ MD1LFetBMkeYemx06l+iGi0K2Dh7wRe/9WHwW07KC7I2NiryQs3WLORgxpZCOJA5MW5BQN
+ AZan/SfONsEVqJi/B0AuysMqvM0KHa0KUw3VynLUVohratAZWA3GEbcWJDRq71wq5Qcwto
+ a2tA29Y2VFOh3uAOW4M7vAKS7cd6S4gMsLFoqJPK5AISD+TirSJtJfCf3b5OXhT5S9q+MH
+ zwaHGZaK5YbiyPRg53crSl03ImkhMwiBja8ZDjr1gcnSNzoMIczBlz6AjIQWVg==
+Date: Mon, 27 Jan 2025 12:30:47 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?B?UmU6IOWbnuWkje+8mltQQVRDSCAxLzFdIGV4YW1wbGVzL2FwaTogaW1w?=
- =?UTF-8?Q?rove_determination_of_LOAD=5FADDR?=
-To: =?UTF-8?B?6buE5Yip5Lqa?= <1425075683@qq.com>
-Cc: u-boot <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-References: <20250127064936.43539-1-heinrich.schuchardt@canonical.com>
- <tencent_F40E3EB2650593002161864C46F8BCF4D00A@qq.com>
+Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
+ <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
+ <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
+ <dc02c0b8-55d3-49d7-8aae-012bad61b183@bp.renesas.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <tencent_F40E3EB2650593002161864C46F8BCF4D00A@qq.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <dc02c0b8-55d3-49d7-8aae-012bad61b183@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:grvn2yMytMAeJbdRVrbagfSzirfcsVeCMp0BRwTE9QuBqNb6OfJ
- xGUPNHXFlWRuJ6QicaSRHSuem68kJ6Cv1pVsYdP8PsU1VGV0MplyRXfWFzgANSrI8iAAh5P
- Shn2A228GtT93Xf0BE0ruJOLNHJ+E7Ym8xljFaCOLLy7Hue4o69ZuGOAih9ST8TUSjRuiA4
- Tu9++O1Al5V5Gklpp1esA==
-UI-OutboundReport: notjunk:1;M01:P0:cQ9xMur03P4=;FeEys8YR8q303Pv+/r3R6/W63ZT
- F7JSweEDkBEY5TS0a8wg9BRBP+VbwFUdOYlIs/hB5ku3rta8c5Bmg2wAQkEOMsi1MuTUhEiLv
- 9AJKeyU61gfY8P7b0CyWkMEVYCdDc8GNe+cBBEZbSfDT/qdczpPggujOHjphVNvo4jqHai8zg
- Y/4bFxNEeCBclV/Ft7FbhOpw3EFOpLKd2yfLazK5DF85vuuvDpD1w9xWQ4ElkZ7Hd6zG1nMJD
- ++LKltwLnTsMqgPoV5rZGgh1EDXwhSKDlUU7/fJlXV69BsSmXfi0sYl2RCJpnTfQjR2l+6qfb
- 3MPyUbm71QVHVyKBRDh6xt5PXC7TxwPBdCBSVxZt/V5m2LRCTpxVF5IM1ZWLDJvdaelRo7U7n
- HZCnF06r7GeMAq3dkjQvz0ovX0MhlSIkWn9NlxiaDRoNIf+8r9MOpPbmqj4qL4W0xwkWsd+lJ
- YSSqT0/YcLieSJRVKLlv77ux3Q2Q+umiMscsFTfyYELvDIFgzaTkP61vrVPx1hRDRNi23DV4i
- Yj028NZRAUii4kp/eT7HB19/07Fg6RjLkJ7YwHC2Mf/1Npus8e2nbXisf0cxRkGCg2Qi/hhlx
- ukEZqGRDqXkJMaXu3nyRmHeDkI4qlC3b+PxIRB3pyZ1jq3zKtuECOeaDlX2KNwnLLxUqbmIIA
- tdsijajFxXuLXNHFAXNi6szgulM9DJt2gGLm35URzSEvw73ia9mEGVboAiMjy8yVE6GVSSYd4
- jP35+gvrnLiLjG9rDzmehuumoVYogytzNWBUuISKyUIV6hMVtW5Jn8CtJlpJ9AEMcFoCOcbQR
- um8pLielUOSfNAoOtRfyPeHnax0ayy1iJQMH55tWTUyqEBNTFyqJHXTDa3mcICCNHWimmfhYX
- BUiQlmKLnbyCMCTHMx/KVz8W4MyPUbBLQsxhrpYkcAzx+GGQ4iZHxkkOoO3CZfcTLuWy083Vu
- 8efYiQZ1pmyQ1YohJkJU2dINJCZ1qj52SdjXrg53MFt24Rd7BxEnXTpE4XM0y0sqGfCDZihh9
- 4cmFrsaRd9HwQ5zyjxxKjiQCk1t96K1PfCQ3RnOTWANKGauPZIqV5F0zLtMT7sBXQ6bKREjHC
- W1+PqdSQthBGKvzZfN+73KjXIrOXRSSZT4VL40EQmK7Ue+xWVYXqkq/4RFAqzGQwuC/OCTQRn
- T9QOkYRit7oFBFEemJnf1GTfbOY7w4dGF+ipWMjs5cw==
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 7dbkrrxf964f7efrwn46yejp6h6pu8u3
+X-MBO-RS-ID: d5a43c6654b9e6e1176
+X-Rspamd-Queue-Id: 4YhR7K67fTz9sZZ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,74 +99,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27.01.25 11:09, =E9=BB=84=E5=88=A9=E4=BA=9A wrote:
-> Hello=C2=A0Heinrich
->
-> I modified the code for arm32 architecture. You may be using an ARM64
-> architecture. Take a look at the architecture used.
->
-> version of U-Boot (commit in git):
->  =C2=A0 =C2=A0 d8a7100d658eb201fa0e955667fdff298db31945
->
-> operating system and architecture:
->  =C2=A0 =C2=A0 5.15.0-130-generic x86_64
->
-> installed version of gcc and binutils
->  =C2=A0 =C2=A0=C2=A0gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.3)
->  =C2=A0 =C2=A0 GNU ld (GNU Binutils for Ubuntu) 2.34
->
-> used defconfig
->  =C2=A0 =C2=A0=C2=A0stm32h750-art-pi_defconfig
-> used commands for building
->  =C2=A0 =C2=A0=C2=A0make CROSS_COMPILE=3Darm-none-eabi- ARCH=3Darm stm32=
-h750-art-pi_defconfig
->  =C2=A0 =C2=A0 make CROSS_COMPILE=3Darm-none-eabi- ARCH=3Darm menuconfig=
- # to add
-
-Hello LiYa,
-
-That additional information helps.
-
-The stm32h uses the ARMv7-M architecture. With that architecture the
-compilation problem is reproducible. Could you, please, add this
-information to your commit message.
-
-It would be preferable not to use registers that may be needed for
-argument passing in future. Please, choose local variable registers R4-R11=
-.
-
-Environment variable ARCH is not used by U-Boot. You can safely remove
-it from your command line.
-
-Best regards
-
-Heinrich
-
-> CONFIG_API=3Dy, CONFIG_EXAMPLES=3Dy
->  =C2=A0 =C2=A0=C2=A0make CROSS_COMPILE=3Darm-none-eabi- ARCH=3Darm -j 12
->
-> https://developer.arm.com/documentation/den0013/d/Application-Binary-
-> Interfaces/Procedure-Call-Standard <https://developer.arm.com/
-> documentation/den0013/d/Application-Binary-Interfaces/Procedure-Call-
-> Standard>
-> lists IP, SP, PC as aliases for registers R12, R13, R15.
-> ------------------------------------------------------------
-> I have tried using R12, R13, R15 and the error message is as follows:
->  =C2=A0 =C2=A0=C2=A0examples/api/crt0.S:32: Error: lo register required =
--- `ldr
-> r12,=3Dsearch_hint'
->  =C2=A0 =C2=A0 examples/api/crt0.S:34: Error: lo register required -- `s=
-tr R13,[r12]'
->  =C2=A0 =C2=A0 examples/api/crt0.S:40: Error: lo register required -- `l=
-dr
-> r12,=3Dsyscall_ptr'
->  =C2=A0 =C2=A0 examples/api/crt0.S:41: Error: lo register required -- `l=
-dr r15,[r12]'
->
-> As the error message suggests, you need to use a low register (lo
-> register), and r12 and similar registers belong to the high register (hi
-> register) category.
->
-> Best regards
->
-> LiYa
+On 1/27/25 11:32 AM, Paul Barker wrote:
+> Hi Marek,
+> 
+> On 25/01/2025 12:56, Marek Vasut wrote:
+>> On 1/21/25 3:38 PM, Paul Barker wrote:
+>>> On 18/01/2025 06:53, Marek Vasut wrote:
+>>>> Introduce mdio_init() split off from mdio_alloc(), which is used
+>>>> to initialize already allocated struct mii_dev.
+>>>>
+>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>
+>>> Replying here for the whole patch series...
+>>>
+>>> I like where we get to at the end of this series, but I don't like the
+>>> intermediate state where the bb_miiphy_buses arrays still exist but are
+>>> unused. I also think we should introduce a new ops struct so we're not
+>>> duplicating function pointers in each instance of struct bb_miiphy_bus.
+>>>
+>>> I would prefer the following order of changes, let me know if you think
+>>> this would be cleaner:
+>>>
+>>> 1) Introduce mdio_init().
+>>>
+>>> 2) Add mii member to struct bb_miiphy_bus.
+>>>
+>>> 3) Modify each driver to use the mii member of the appropriate struct
+>>>      bb_miiphy_bus instance, calling mdio_init() instead of mdio_alloc().
+>>>      At this point we're still using the instances in the statically
+>>>      allocated bb_miiphy_buses array.
+>>
+>> Those instances might be rodata , so using them as read-write storage
+>> does not necessarily work , does it ?
+> 
+> None of the instances in the current U-Boot code are marked as const,
+> and the name field is already modified at runtime by each driver. So I
+> don't think we need to worry about them being rodata.
+Can the compiler not decide to place the structure into rodata if it is 
+never written ?
