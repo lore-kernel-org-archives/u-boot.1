@@ -4,50 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19E67C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:49:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA68C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:49:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E7CD8128D;
-	Mon, 27 Jan 2025 15:49:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id F059A8128D;
+	Mon, 27 Jan 2025 15:49:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="DjQ58o/E";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x1Io96Cz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A6D981292; Mon, 27 Jan 2025 15:49:05 +0100 (CET)
-Received: from mail-4018.proton.ch (mail-4018.proton.ch [185.70.40.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0927D81292; Mon, 27 Jan 2025 15:49:53 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C36E81276
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:49:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97B2C81276
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:49:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1737989341; x=1738248541;
- bh=5jfEI7Kavxh4hSoxuvkG/j+hDq30yKv6MgdIfxzAbtc=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
- List-Unsubscribe:List-Unsubscribe-Post;
- b=DjQ58o/EW3KqRBNgMUBJy96SZJ99Yo0F5GOWS7j5pBQs9bvI4YV9c6km/g3fYx5b7
- sszDvQM9sRV8TlLFab++oI4YQzejm0niB9MrlNv5o3mczF1jnh7OTSSPFlZvouhK0Q
- lwjkMT7LERrwUCL070tZH5IbWhxdubagXB4NbB17Fn+uMiCxI4HlaXgLQaENpxEcXi
- vPFReogGD49A7QhBduTa/mzB5opMbtKF1T/lAI5GkcMpy/mZBDWkHvBkBGS30XeODO
- J3XfyKA1hiRLfeZItjWwDTpeVYBPw/67hBcAlhddcyjWKwpQYUshQCXZQC72Cr8sTw
- +G5vSUVOpvYQQ==
-Date: Mon, 27 Jan 2025 14:48:55 +0000
-To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-From: Sam Day <me@samcday.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH] mach-snapdragon: handle platforms without PSCI support
-Message-ID: <20250127-qcom-handle-absent-psci-v1-1-e762f2db938c@samcday.com>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 20eacb95d5396e408d43f5243d3cf842e02b2dea
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b6edb82f85so671615385a.3
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 06:49:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737989389; x=1738594189; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=FAMSE0MLO28CCn61m/rq0uAq643eMoW5RLziCxWo4b0=;
+ b=x1Io96CzA3aGjoTExtoGuBC9JvjibLg3OaOJqddHjDcZwccK+EkPcCFfKCA8sy7XWd
+ oviO1grv4nxJTt2ZnRKAlfFAcsuUHonSHqs2SGuy/Ab3rFENQRHUswO+n1GalM9sxD6K
+ JYsumUNNzpDIAorx+PKXOl3AVF2qoD0A8DGT5x+8DExKkPZJ55ppeejpetrT8HvV0SIB
+ jwE+YgS9FWI6J/haZ4A6CVZvmpXF7e0iN6CVT83lqVAIkTRL3nLFrvbMNcucIgiz5nev
+ AKW0+pf+OPhgSbUrjYehPvk0hv8LXhFkiihFBmA2sjyk/zKyGyhnmLyE2L/LAelVBH3U
+ 4kvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737989389; x=1738594189;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FAMSE0MLO28CCn61m/rq0uAq643eMoW5RLziCxWo4b0=;
+ b=H/YFPRZ7K9/T+OrDwRujTlsIK3N23OTOQyTULdfvrglf166pgTEGwk7Zopcm8Qis7A
+ 1bUCyggEZT/9qy3mmMipaf1rCs2Ai+CTnwlme+UhN7lleglwkNHZ099A4xdxnFI0HrnJ
+ wpps2+adm7RJeCL0E6kaC7CEQFLDDARs2nqStPs7innZN41IQ6M/cej6sycOJR4/6xtd
+ qdGcyi4JByuL/BIQ6WX8XmVlOzrSrNhJb/cF3So/uzot5VC1ayZ5UopOS65gbffGh/V9
+ dECzcXHH5OGwptQ9fSBmDERMCEQkXb+/OfvCKDyfZXS4BNPOpGYiXQ2hG1jUKO+OvnPt
+ DG2w==
+X-Gm-Message-State: AOJu0YxywxIe2oGtr4t0VVaXC0ymIfmXz4MIa2qxcGLxtQAUIkc5PP2F
+ b6syv7ewVuGtWyP1fV/0Y3ItO0Qu4jLkZpRdQsOU5teU8eozjucOor1L9JVG2Pz2Yp11DV3+uaz
+ KUuM=
+X-Gm-Gg: ASbGnctj8lvUOoyaTp/Jif3/LIPEOpFiAjuqnjfG9hjBbFX9qFzFNWOXRKgAkgVyC5B
+ wP24UOq0Sjf66NgTW4xwXYz8KHfnlA3rWOvlP6bYCuyUHPSSIYqfXWWowMxvbiOF42++cRm1DLb
+ Ut+9vTLpatwvJzSjsJ8SqXMpKs7ZNKs4z1xRX3RGQCPSg0F/MpdYDXcZGOtvmk4CQEzhPQS1yEp
+ dSHs5r4WfudkruT0bYuErapyvAEngeGC0mhvyIkYZ5JPDIKD0thKUnJWq3ivghFjFMLEI7pXc7Z
+ wuqB0+izXmEmu73+du0RssK2qibw8pr2H47vJnoMyQzGTzy/ux71EMnYn+0HyClc9W/QP+PfVhs
+ NuXg=
+X-Google-Smtp-Source: AGHT+IFi7egkl5VuMh6eHXQVw42Qj+JqHmC/cgfcq7D6YFdoRCrGpFfVJg+PLMFDFWXaR6u43aJ2yw==
+X-Received: by 2002:a05:620a:15b:b0:7be:7f67:3475 with SMTP id
+ af79cd13be357-7be7f6734e2mr3600353885a.50.1737989389202; 
+ Mon, 27 Jan 2025 06:49:49 -0800 (PST)
+Received: from ubuntu.localdomain
+ (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be9aeedc7esm397345985a.70.2025.01.27.06.49.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jan 2025 06:49:48 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Eddie James <eajames@linux.ibm.com>, Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v7 1/3] bloblist: add api to get blob with size
+Date: Mon, 27 Jan 2025 06:49:34 -0800
+Message-Id: <20250127144941.645544-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,114 +105,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most MSM8916 devices shipped without PSCI support. The history is quite
-nuanced (a good overview can be found in [1]), but the end result is
-that the upstream DTs for this SoC pretend that PSCI exists, and it's
-expected that the bootloader handles the case where it doesn't. This is
-codified by the de-facto bootloader for MSM8916 devices, lk2nd [2].
+bloblist_find function only returns the pointer of blob data,
+which is fine for those self-describing data like FDT.
+But as a common scenario, an interface is needed to retrieve both
+the pointer and the size of the blob data.
 
-So we handle it here by deleting the /psci node if we detect the absence
-of PSCI. We need to do this early to ensure sysreset works correctly,
-since the PSCI firmware driver is PRE_RELOC and binds the PSCI sysreset
-driver.
+Add a few ut test cases for the new api.
 
-Additionally, show_psci_version is updated to check that PSCI exists.
-Currently this banner outputs "PSCI: 65535.65535" on devices without
-PSCI support, which isn't very useful :)
-
-[1]: https://github.com/msm8916-mainline/linux/issues/388
-[2]: https://github.com/msm8916-mainline/lk2nd/blob/8183ea2/lk2nd/smp/spin-=
-table/spin-table.c#L237
-
-Signed-off-by: Sam Day <me@samcday.com>
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/mach-snapdragon/board.c | 43 ++++++++++++++++++++++++++++++++++++=
-----
- 1 file changed, 39 insertions(+), 4 deletions(-)
+Changes in v2
+- Rename function argument.
+- Add ut tests.
+Changes in v3
+- None.
+Changes in v4
+- None.
+Changes in v5
+- None.
+Changes in v6
+- None.
+Changes in v7
+- None.
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/bo=
-ard.c
-index e87551784b8d7afb4186533d43b8bddacba9faec..75b9cf1a8a1b3383665eb2d4e67=
-25efe59718de0 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -162,11 +162,42 @@ static void show_psci_version(void)
-=20
- =09arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
-=20
-+=09/* Some older SoCs like MSM8916 don't always support PSCI */
-+=09if ((int)res.a0 =3D=3D PSCI_RET_NOT_SUPPORTED)
-+=09=09return;
-+
- =09debug("PSCI:  v%ld.%ld\n",
- =09      PSCI_VERSION_MAJOR(res.a0),
- =09      PSCI_VERSION_MINOR(res.a0));
+ common/bloblist.c      | 17 +++++++++++++++--
+ include/bloblist.h     | 18 ++++++++++++++++++
+ test/common/bloblist.c |  4 ++++
+ 3 files changed, 37 insertions(+), 2 deletions(-)
+
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 110bb9dc44..ab48a3cdb9 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
  }
-=20
-+/**
-+ * Most MSM8916 devices in the wild shipped without PSCI support, but the
-+ * upstream DTs pretend that PSCI exists. If that situation is detected he=
-re,
-+ * the /psci node is deleted. This is done very early to ensure the PSCI
-+ * firmware driver doesn't bind (which then binds a sysreset driver that w=
-on't
-+ * work).
-+ */
-+static void qcom_psci_fixup(void *fdt)
+ 
+ void *bloblist_find(uint tag, int size)
 +{
-+=09int offset, ret;
-+=09struct arm_smccc_res res;
++	void *blob = NULL;
++	int blob_size;
 +
-+=09arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
++	blob = bloblist_get_blob(tag, &blob_size);
 +
-+=09if ((int)res.a0 !=3D PSCI_RET_NOT_SUPPORTED)
-+=09=09return;
++	if (size && size != blob_size)
++		return NULL;
 +
-+=09offset =3D fdt_path_offset(fdt, "/psci");
-+=09if (offset < 0)
-+=09=09return;
-+
-+=09debug("Found /psci DT node on device with no PSCI. Deleting.\n");
-+=09ret =3D fdt_del_node(fdt, offset);
-+=09if (ret)
-+=09=09log_err("Failed to delete /psci node: %d\n", ret);
++	return blob;
 +}
 +
- /* We support booting U-Boot with an internal DT when running as a first-s=
-tage bootloader
-  * or for supporting quirky devices where it's easier to leave the downstr=
-eam DT in place
-  * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
-@@ -212,12 +243,16 @@ int board_fdt_blob_setup(void **fdtp)
-=20
- =09if (internal_valid) {
- =09=09debug("Using built in FDT\n");
--=09=09return -EEXIST;
-+=09=09ret =3D -EEXIST;
-+=09} else {
-+=09=09debug("Using external FDT\n");
-+=09=09*fdtp =3D external_fdt;
-+=09=09ret =3D 0;
- =09}
-=20
--=09debug("Using external FDT\n");
--=09*fdtp =3D external_fdt;
--=09return 0;
-+=09qcom_psci_fixup(*fdtp);
++void *bloblist_get_blob(uint tag, int *sizep)
+ {
+ 	struct bloblist_rec *rec;
+ 
+ 	rec = bloblist_findrec(tag);
+ 	if (!rec)
+ 		return NULL;
+-	if (size && size != rec->size)
+-		return NULL;
 +
-+=09return ret;
++	*sizep = rec->size;
+ 
+ 	return (void *)rec + rec_hdr_size(rec);
  }
-=20
- void reset_cpu(void)
-
----
-base-commit: 2eed5a1ff36217372e19f7513bd07077fc76718a
-change-id: 20250127-qcom-handle-absent-psci-6e8e8af7bcd7
-prerequisite-change-id: 20250120-qcom-parse-memory-updates-96ffe248cdf1:v3
-prerequisite-patch-id: 65448b5a93120d2117c1361035afc9bd911d005f
-
-Best regards,
---=20
-Sam Day <me@samcday.com>
-
+diff --git a/include/bloblist.h b/include/bloblist.h
+index f999391f74..52ba0ddcf8 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -250,6 +250,24 @@ static inline void *bloblist_check_magic(ulong addr)
+ 	return ptr;
+ }
+ 
++#if CONFIG_IS_ENABLED(BLOBLIST)
++/**
++ * bloblist_get_blob() - Find a blob and get the size of it
++ *
++ * Searches the bloblist and returns the blob with the matching tag
++ *
++ * @tag:	Tag to search for (enum bloblist_tag_t)
++ * @sizep:	Size of the blob found
++ * Return: pointer to bloblist if found, or NULL if not found
++ */
++void *bloblist_get_blob(uint tag, int *sizep);
++#else
++static inline void *bloblist_get_blob(uint tag, int *sizep)
++{
++	return NULL;
++}
++#endif
++
+ /**
+  * bloblist_find() - Find a blob
+  *
+diff --git a/test/common/bloblist.c b/test/common/bloblist.c
+index 4bca62110a..324127596f 100644
+--- a/test/common/bloblist.c
++++ b/test/common/bloblist.c
+@@ -98,10 +98,12 @@ static int bloblist_test_blob(struct unit_test_state *uts)
+ 	struct bloblist_hdr *hdr;
+ 	struct bloblist_rec *rec, *rec2;
+ 	char *data;
++	int size = 0;
+ 
+ 	/* At the start there should be no records */
+ 	hdr = clear_bloblist();
+ 	ut_assertnull(bloblist_find(TEST_TAG, TEST_BLOBLIST_SIZE));
++	ut_assertnull(bloblist_get_blob(TEST_TAG, &size));
+ 	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
+ 	ut_asserteq(sizeof(struct bloblist_hdr), bloblist_get_size());
+ 	ut_asserteq(TEST_BLOBLIST_SIZE, bloblist_get_total_size());
+@@ -114,6 +116,8 @@ static int bloblist_test_blob(struct unit_test_state *uts)
+ 	ut_asserteq_addr(rec + 1, data);
+ 	data = bloblist_find(TEST_TAG, TEST_SIZE);
+ 	ut_asserteq_addr(rec + 1, data);
++	ut_asserteq_addr(bloblist_get_blob(TEST_TAG, &size), data);
++	ut_asserteq(size, TEST_SIZE);
+ 
+ 	/* Check the data is zeroed */
+ 	ut_assertok(check_zero(data, TEST_SIZE));
+-- 
+2.25.1
 
