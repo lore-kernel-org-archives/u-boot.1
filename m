@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFFE7C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:59:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13377C0218A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:59:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02BB68128D;
-	Mon, 27 Jan 2025 15:59:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 734A181292;
+	Mon, 27 Jan 2025 15:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xa4ObS8O";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g1E7sCHo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 017F881292; Mon, 27 Jan 2025 15:59:05 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id 367B081292; Mon, 27 Jan 2025 15:59:14 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B93F81276
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:59:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D2705814BD
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:59:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-46901d01355so44955031cf.0
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 06:59:02 -0800 (PST)
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-4678cd314b6so45263791cf.3
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 06:59:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737989941; x=1738594741; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mP4euvezwmsyqunHHfWGRE5X4c17PJV84D/rOk5yiz8=;
- b=xa4ObS8O7F2mIgVgJbs13FwZUfasERW1Y0WFbdDW3qT/cYpLMRMap5e9tz2iDr67Cn
- p/3Munx8kxDvE6TteFhtr8cZf0v7DjPfuzb8TybICdds9uX9G/BCP2DeH4vFlqRWU43o
- 5inUj5mPcEe0hncBfzr5LVrexWjO9fnPnuGoLV1KSzk/NU6SNX5MMJgWNq1yFh/QxMZb
- XMRIS2zM6qWd4yV+DRCSHjzX6JsA+MSLQBUvnziREhFCAjxJNmDiRl62frkxxoP+61hO
- pldCy2h36qXmOz80PXchzhflpkd0IuMc8CQ+y+Bcofn3flQqBH/Y1UXHhY4xbC7ITQF5
- JXlA==
+ d=linaro.org; s=google; t=1737989948; x=1738594748; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dZng9lrou7xmo0zuCpuHnnU9JilGEVpUEOTQfkrdw5o=;
+ b=g1E7sCHou2PH4C9cHgmesfZm+W+D5ZwofPYUBEV3sz0lKUBPY6jNHkuibeYsx9M7Ie
+ d6UXZFI1x7BtqTr6NbaSnKTxB//Sy9/95o0G5BMojNnVKknK4S25RLHYI+kXCmUGB8GU
+ 4gmqv7k6EXKE6fyedyY34f8ftV5q+3smApXbTqyLjIyRZNqiGGGfMk5rpHzvYHAP/35J
+ oxP0DxrFB6axfC7hfMNOcpjYYy0Kv26in4ZO8JtcKEl7NwpT04wgt/3Pdj0zoDwE3/Dx
+ FTFR3JYI58Y7VCd9WjG4aqd/P7uIj2UF5g0DczApKl+BVcJ9R9fCmVr31XZBuCjC7iJJ
+ iOtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737989941; x=1738594741;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mP4euvezwmsyqunHHfWGRE5X4c17PJV84D/rOk5yiz8=;
- b=kyDLoA5EtIQCufNSTX+MM4b0QpQ9Qzqo+q1glUw8naLt52eO7T3Ui7lALSTweSK1Ir
- B15ZXCrUlbzeq5mhgkmFwG45Ph6trbB7wrZu73tYPd0Ikoc7/QWXL1vEbWJpv4khtR7w
- T2bjtpcXoiYA4zy3dGopK3NiRLy5tQiyjF9Vqyh5esZ2GxtjBMREcZyMWVuJcZrHBErF
- YVp0bQvplqAvQuikcoqQzKuLu+yretWKEeFeY9MSlKWFBkppBTZ0xh/NitZSqf/Vx5dD
- lmdo8LjPyjEItnLAa++p3MYoj2ImVG2Q89bfUtXVzYu+ubgjCwYrm8iNf/O03PBeubHv
- fd7A==
-X-Gm-Message-State: AOJu0Yw5eGtB8ks0nxHZnOXwHAO2YQS1IG7uBzCaIuGfQ5+LipBNGQAF
- gx7H7Ncwkg8Teg8ZM18KH/Ltoj+7T2I9ZJzHRbogz5Vxz6cFQyC+zasd3jTuEhgMJE7ILUDuhzf
- AJcM=
-X-Gm-Gg: ASbGnctJXbQX6o0QT5E+awjqY0kx/q5Ekf1TT8isLP4EF/sDfAKrXp1bLLKBLowxzP5
- yLcGifg/+ORZxrTQLhlp4pvVxq31gvQwAuBD1gzn1u8qGoRoXp+ktV4NzHYq896iHx+TmZ2wVuA
- UajCcv+yoI1YS/5dRIlKVkV5xMwPeOu3PfpdDc5fA06r+et+JLBSpXdxVh8XlQhwn9D4vAQe4bk
- Wv3HIjGRqrdEBzrN4fb2auYtrq2J9319M8mmVX/FYDpbkPUEE+1dAIv4V05ptT/dU2p0J5lA+dY
- M9cAjHgKCAjk+zqyGdSxRbWeKXlL/DefA808t61HhfSQWIFUmsNDwafvNRRJzQxuSRAGIAZ7LsM
- z+e8=
-X-Google-Smtp-Source: AGHT+IG9KeGM79kdX8G6+rkn+g7ywDtznBe37JZ+dXAWfajV125oclP9eXwbeFVDDtnNxvujs/ruJg==
-X-Received: by 2002:a05:6214:1c0b:b0:6e1:6c94:b5cd with SMTP id
- 6a1803df08f44-6e1b2168e8emr605177766d6.2.1737989941019; 
- Mon, 27 Jan 2025 06:59:01 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737989948; x=1738594748;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dZng9lrou7xmo0zuCpuHnnU9JilGEVpUEOTQfkrdw5o=;
+ b=cYPwI87eSQNjVuH4XtSq9PTmncMupoNo1lzu/5Bq3Xbnntf2lFWUHDaLP8lefFcnqi
+ h2yqnrAnUUBTWm1vR6fFTl/1IGpj2E71mOWP7GePq+PIf69T+WyxA4qOAalIvOIWaQ7t
+ Y+xymncn7BoxhRonhuuHWmZvTKIc9QHwtzjwdeA/hOBoImtAUG8/th/nyjxMoSTgHlQW
+ lvUPwt3oC/7bW91f1hBBH8qQec13eMt8AdJx7XQnAmJAOKh1Znay+wezUg0K95L3OJzc
+ f5kKqthNU3NvVNFNqH/g55puoVEI0mQSX9C1uSBwnnO9r9XwUHHbsTAsqGexBifCf0Un
+ cBQA==
+X-Gm-Message-State: AOJu0YyoCqNByu5Y5xp/F5Fl5/2xoo3OiGd9MgTkCsweWNmtiprGA9f8
+ c3uS3ibVfhOhZ8637DPaSnPSJeruAKb/ubLSIlovDS8JkGTcUAz5icDHamnEiopFMzb9ulKKRwS
+ bX0I=
+X-Gm-Gg: ASbGncugCxVEZ9bSYeq7KAWX7AnGXEI5tqYyA7cKcnX0C0Q9Dfjczl44B3X3sswcoOL
+ oqyok2q4VtMWb2amFiATzihPI6IigkBkejnQ2FMArfKDo0DiJDW9KE64Pgf2aEFrMwfv+sTTPcE
+ HfGr8mQEJ3XIcHvFTusUbRHg42OQdC3JkXRBKQvof01+EOw+TuFpWt4oat7Ovy/zcQFgfMVI5+c
+ es+AByZA9sxyB2fsuzEjs1P5A7r9RiZu86RdmG/Y+ZVvazB15zwAuHIs+tlEb6rSFKjiB1TrLBK
+ UPCi2LxF3EF6CmwVuPJf6w2ulXsoEon71V6ugTavXP7GtK0mGmn9fZnPD5T2HdnusVX4DqmBiOp
+ Y7lo=
+X-Google-Smtp-Source: AGHT+IHqpmm/fWvfIMexiuRqyyU+rR2AW9btf2/KYFh6A2LwWL2MxV6oas38DvseQwj7sPlkfZBSyw==
+X-Received: by 2002:ac8:5d90:0:b0:466:a3d2:ae44 with SMTP id
+ d75a77b69052e-46e12ad608emr660531071cf.2.1737989948337; 
+ Mon, 27 Jan 2025 06:59:08 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e6689d9cbsm40945951cf.41.2025.01.27.06.58.59
+ d75a77b69052e-46e6689d9cbsm40945951cf.41.2025.01.27.06.59.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 06:59:00 -0800 (PST)
+ Mon, 27 Jan 2025 06:59:07 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>,
@@ -78,13 +79,16 @@ Cc: Raymond Mao <raymond.mao@linaro.org>,
  Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Tim Harvey <tharvey@gateworks.com>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v3 0/6] Reconfigure TPM when active hash algorithms dismatch
-Date: Mon, 27 Jan 2025 06:58:45 -0800
-Message-Id: <20250127145855.645845-1-raymond.mao@linaro.org>
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: [PATCH v3 1/6] tpm: add TPM2_Shutdown command
+Date: Mon, 27 Jan 2025 06:58:46 -0800
+Message-Id: <20250127145855.645845-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250127145855.645845-1-raymond.mao@linaro.org>
+References: <20250127145855.645845-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,41 +107,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch set implements PCR allocate command to handle the algorithm
-dismatches among TPM device, eventlog from previous boot stage and what
-U-Boot supports.
+TPM2_shutdown command is sharing same structure and logics with
+TPM2_startup, thus this patch extends the existing startup APIs and
+cmd functions to support shutdown instead of created new ones.
 
-It re-configurates TPM device if any active algorithms are not supported by
-U-Boot or does not exist in the eventlog passed in.
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+changes in v2
+- None.
+changes in v3
+- None.
 
-To re-configurate, a PCR allocate command will be sent with new algorithm
-configurations, followed by a shutdown command and a hardware reset to
-activate those new configurations.
+ cmd/tpm-v2.c     | 14 +++++++++++---
+ include/tpm-v2.h |  3 ++-
+ lib/tpm-v2.c     |  9 +++++----
+ lib/tpm_api.c    |  4 ++--
+ 4 files changed, 20 insertions(+), 10 deletions(-)
 
-If any of the algorithms from the eventlog does not supported by U-Boot or
-TPM device does not support all U-Boot algorithms, exit with error.
-
-This new feature is under control by a new introduced kconfig
-TPM_PCR_ALLOCATE.
-
-Raymond Mao (6):
-  tpm: add TPM2_Shutdown command
-  tpm: add TPM2_PCR_Allocate command
-  tpm: add wrapper and helper APIs for PCR allocate
-  tpm: add PCR allocate into the eventlog handling
-  tpm: PCR allocate during PCR extend to disable the unsupported
-    algorithms
-  board: qemu-arm: select TPM_PCR_ALLOCATE
-
- cmd/tpm-v2.c                 | 128 ++++++++++++++++-
- configs/qemu_arm64_defconfig |   1 +
- include/tpm-v2.h             |  53 ++++++-
- lib/Kconfig                  |  12 ++
- lib/tpm-v2.c                 | 259 ++++++++++++++++++++++++++++++++++-
- lib/tpm_api.c                |   4 +-
- lib/tpm_tcg2.c               |  52 +++----
- 7 files changed, 463 insertions(+), 46 deletions(-)
-
+diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
+index 8517833f86..a6d57ee7c4 100644
+--- a/cmd/tpm-v2.c
++++ b/cmd/tpm-v2.c
+@@ -18,11 +18,14 @@ static int do_tpm2_startup(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	enum tpm2_startup_types mode;
+ 	struct udevice *dev;
+ 	int ret;
++	bool bon = true;
+ 
+ 	ret = get_tpm(&dev);
+ 	if (ret)
+ 		return ret;
+-	if (argc != 2)
++
++	/* argv[2] is optional to perform a TPM2_CC_SHUTDOWN */
++	if (argc > 3 || (argc == 3 && strcasecmp("off", argv[2])))
+ 		return CMD_RET_USAGE;
+ 
+ 	if (!strcasecmp("TPM2_SU_CLEAR", argv[1])) {
+@@ -34,7 +37,10 @@ static int do_tpm2_startup(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		return CMD_RET_FAILURE;
+ 	}
+ 
+-	return report_return_code(tpm2_startup(dev, mode));
++	if (argv[2])
++		bon = false;
++
++	return report_return_code(tpm2_startup(dev, bon, mode));
+ }
+ 
+ static int do_tpm2_self_test(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -420,11 +426,13 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
+ "    Initialize the software stack. Always the first command to issue.\n"
+ "    'tpm startup' is the only acceptable command after a 'tpm init' has been\n"
+ "    issued\n"
+-"startup <mode>\n"
++"startup <mode> [<op>]\n"
+ "    Issue a TPM2_Startup command.\n"
+ "    <mode> is one of:\n"
+ "        * TPM2_SU_CLEAR (reset state)\n"
+ "        * TPM2_SU_STATE (preserved state)\n"
++"    <op>:\n"
++"        * off - To shutdown the TPM\n"
+ "self_test <type>\n"
+ "    Test the TPM capabilities.\n"
+ "    <type> is one of:\n"
+diff --git a/include/tpm-v2.h b/include/tpm-v2.h
+index 65681464b3..f66a8e1bf4 100644
+--- a/include/tpm-v2.h
++++ b/include/tpm-v2.h
+@@ -230,6 +230,7 @@ enum tpm2_command_codes {
+ 	TPM2_CC_PCR_READ	= 0x017E,
+ 	TPM2_CC_PCR_EXTEND	= 0x0182,
+ 	TPM2_CC_PCR_SETAUTHVAL	= 0x0183,
++	TPM2_CC_SHUTDOWN	= 0x0145,
+ };
+ 
+ /**
+@@ -430,7 +431,7 @@ enum {
+  *
+  * Return: code of the operation
+  */
+-u32 tpm2_startup(struct udevice *dev, enum tpm2_startup_types mode);
++u32 tpm2_startup(struct udevice *dev, bool onoff, enum tpm2_startup_types mode);
+ 
+ /**
+  * Issue a TPM2_SelfTest command.
+diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+index bc750b7ca1..3946ac2dbb 100644
+--- a/lib/tpm-v2.c
++++ b/lib/tpm-v2.c
+@@ -44,12 +44,13 @@ static int tpm2_update_active_banks(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-u32 tpm2_startup(struct udevice *dev, enum tpm2_startup_types mode)
++u32 tpm2_startup(struct udevice *dev, bool bon, enum tpm2_startup_types mode)
+ {
++	int op = bon ? TPM2_CC_STARTUP : TPM2_CC_SHUTDOWN;
+ 	const u8 command_v2[12] = {
+ 		tpm_u16(TPM2_ST_NO_SESSIONS),
+ 		tpm_u32(12),
+-		tpm_u32(TPM2_CC_STARTUP),
++		tpm_u32(op),
+ 		tpm_u16(mode),
+ 	};
+ 	int ret;
+@@ -59,7 +60,7 @@ u32 tpm2_startup(struct udevice *dev, enum tpm2_startup_types mode)
+ 	 * but will return RC_INITIALIZE otherwise.
+ 	 */
+ 	ret = tpm_sendrecv_command(dev, command_v2, NULL, NULL);
+-	if (ret && ret != TPM2_RC_INITIALIZE)
++	if ((ret && ret != TPM2_RC_INITIALIZE) || !bon)
+ 		return ret;
+ 
+ 	return tpm2_update_active_banks(dev);
+@@ -84,7 +85,7 @@ u32 tpm2_auto_start(struct udevice *dev)
+ 	rc = tpm2_self_test(dev, TPMI_YES);
+ 
+ 	if (rc == TPM2_RC_INITIALIZE) {
+-		rc = tpm2_startup(dev, TPM2_SU_CLEAR);
++		rc = tpm2_startup(dev, true, TPM2_SU_CLEAR);
+ 		if (rc)
+ 			return rc;
+ 
+diff --git a/lib/tpm_api.c b/lib/tpm_api.c
+index 39a5121e30..576d601e5f 100644
+--- a/lib/tpm_api.c
++++ b/lib/tpm_api.c
+@@ -28,7 +28,7 @@ u32 tpm_startup(struct udevice *dev, enum tpm_startup_type mode)
+ 		case TPM_ST_DEACTIVATED:
+ 			return -EINVAL;
+ 		}
+-		return tpm2_startup(dev, type);
++		return tpm2_startup(dev, true, type);
+ 	} else {
+ 		return -ENOSYS;
+ 	}
+@@ -60,7 +60,7 @@ u32 tpm_resume(struct udevice *dev)
+ 	if (tpm_is_v1(dev))
+ 		return tpm1_startup(dev, TPM_ST_STATE);
+ 	else if (tpm_is_v2(dev))
+-		return tpm2_startup(dev, TPM2_SU_STATE);
++		return tpm2_startup(dev, true, TPM2_SU_STATE);
+ 	else
+ 		return -ENOSYS;
+ }
 -- 
 2.25.1
 
