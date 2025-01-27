@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C638C0218F
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 07:49:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3A13C0218F
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 07:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29C5A81101;
-	Mon, 27 Jan 2025 08:49:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8878781111;
+	Mon, 27 Jan 2025 08:49:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="b+7mVNFy";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="FTYN3VDE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8292A81109; Mon, 27 Jan 2025 08:49:04 +0100 (CET)
-Received: from mail-4317.proton.ch (mail-4317.proton.ch [185.70.43.17])
+ id 356FE81109; Mon, 27 Jan 2025 08:49:11 +0100 (CET)
+Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FAFE810FC
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:49:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 405EC80FC4
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:49:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1737964141; x=1738223341;
- bh=+raOPA36eHRHX9519+++xAWYMRb2hoe4AlwM3cU35yE=;
+ s=protonmail3; t=1737964148; x=1738223348;
+ bh=quWTHSBgxz2DPruEPCQXa4AxgjsrM7w4463jq6dokcQ=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=b+7mVNFyRryKzVTe7NCAkDLCIqJg4QZFTtnDAh/6jCytEqN+J9XvS9RJR9UTQwnM7
- mhtoWi/HfrKJbARHt8Ci8E2YK3PFg37snDbGhHQ6O5MY9p0eq1twLBhqMxuRvG6hM3
- Ufho1vLMQ3Jnjpp6fryTXNTDcF3LaqACbtBTROSdsNtdXkGYucC/JfHOlAIEQXLNLw
- 1wXvpE9dEO/bVYnNN8nVVSnme1DankgePiC+7NrHbPUl6pS+WRkBHbNMwFx2Xb26kd
- AClakA7QRiPB087sdxnC8l+3OH6o0VjywPmFWH7kftBACovVGp272Fwj5j4LrQaxgy
- ip+0Epq+M+Ykg==
-Date: Mon, 27 Jan 2025 07:48:54 +0000
+ b=FTYN3VDEIMXEvuAMOZL03WZIVEkygeVuQhDY864alH7e26f2Q1mtfC4hiD9Ix6+pG
+ AQhQW1FQpbcrja9n2J7h8syJC5+vaYd9hjj60aI2E7wasO0M/W7hV4uPgYISIGDlrO
+ M5tAOeRR5AkmRBtD7LV3un9fMROopeklvNs4vqEu6gC/mQl3d4wDIHCsmbZa5CkSUo
+ eDXFw9MOPC2BiCR/XPpSIx/ktqlJGmsPspec+AZhbAXum5l/MJAEzmz8Ac1GHGuzHK
+ +P8Z8KIQkiDDmILrkCdXmhwloIZ/fl8Tdo0VOo3Ri1472v3h4OIjeY+wgt7eYrXs5X
+ +nk7h1At2avEw==
+Date: Mon, 27 Jan 2025 07:49:03 +0000
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
@@ -45,12 +45,12 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 From: Sam Day <me@samcday.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH 1/4] clk/qcom: apq8016: add PRNG_AHB_CLK
-Message-ID: <20250127-msm-rng-fixes-v1-1-00f5d2284314@samcday.com>
+Subject: [PATCH 2/4] rng: msm: don't enable PRNG if it's already enabled
+Message-ID: <20250127-msm-rng-fixes-v1-2-00f5d2284314@samcday.com>
 In-Reply-To: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
 References: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: f18ee8d05614f8748a875e32bf4c545f59f27a23
+X-Pm-Message-ID: 80bd7a36a0243d60f236f2e229d7126b67e02730
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -70,33 +70,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This clock needs to be enabled for the msm-rng driver to work on
-MSM8916, otherwise accessing the PRNG register block causes a data
-abort.
+msm_rng_enable is supposed to skip writing to LFSR_CFG + CONFIG
+registers in the PRNG_ block if PRNG_CONFIG_HW_ENABLE is already set.
+The logic to test for this was inverted.
 
+Without this fix, the driver was causing SError aborts on my MSM8916
+device. Stephan Gerhold suggested this was probably because TZ has
+marked this as a protected register, since it would also be using it for
+RNG.
+
+Fixes: 033ec636fcb ("rng: Add Qualcomm MSM PRNG driver")
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- drivers/clk/qcom/clock-apq8016.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ drivers/rng/msm_rng.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8=
-016.c
-index b5def55dbc2ac671130624dec56592288a0ceb3d..ff5e7ca6f02148427240b80fb08=
-efdd356934cd5 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -54,8 +54,9 @@ static struct vote_clk gcc_blsp1_ahb_clk =3D {
- };
-=20
- static const struct gate_clk apq8016_clks[] =3D {
--=09GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, 0x00000001),
--=09GATE_CLK(GCC_USB_HS_SYSTEM_CLK,=090x41004, 0x00000001),
-+=09GATE_CLK(GCC_PRNG_AHB_CLK,=090x45004, BIT(8)),
-+=09GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, BIT(0)),
-+=09GATE_CLK(GCC_USB_HS_SYSTEM_CLK,=090x41004, BIT(0)),
- };
-=20
- /* SDHCI */
+diff --git a/drivers/rng/msm_rng.c b/drivers/rng/msm_rng.c
+index f790d3b60f99bfc04ecd9acdd21405a8c38c257a..01505509103f28f7c91dd47edb8=
+3c23359163c82 100644
+--- a/drivers/rng/msm_rng.c
++++ b/drivers/rng/msm_rng.c
+@@ -76,7 +76,7 @@ static int msm_rng_enable(struct msm_rng_priv *priv, int =
+enable)
+ =09if (enable) {
+ =09=09/* Enable PRNG only if it is not already enabled */
+ =09=09val =3D readl_relaxed(priv->base + PRNG_CONFIG);
+-=09=09if (val & PRNG_CONFIG_HW_ENABLE) {
++=09=09if (!(val & PRNG_CONFIG_HW_ENABLE)) {
+ =09=09=09val =3D readl_relaxed(priv->base + PRNG_LFSR_CFG);
+ =09=09=09val &=3D ~PRNG_LFSR_CFG_MASK;
+ =09=09=09val |=3D PRNG_LFSR_CFG_CLOCKS;
 
 --=20
 2.47.1
