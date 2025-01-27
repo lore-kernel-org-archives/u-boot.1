@@ -4,56 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD702C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 17:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE4DC02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 17:11:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00F2681292;
-	Mon, 27 Jan 2025 18:00:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E7A481292;
+	Mon, 27 Jan 2025 18:11:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="O6RsOb+W";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="bzQpF8mZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06CDF812BB; Mon, 27 Jan 2025 18:00:37 +0100 (CET)
-Received: from mail-10626.protonmail.ch (mail-10626.protonmail.ch
- [79.135.106.26])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 794F5812BB; Mon, 27 Jan 2025 18:11:13 +0100 (CET)
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
+ [217.70.183.195])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DE918128B
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 18:00:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A5178128B
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 18:11:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1737997233; x=1738256433;
- bh=3HFGJ2boMcNJ5GdGaVxWTzXb0WE5c3QBKvWSnWyMSsk=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=O6RsOb+WVx88QvrbskdptuWYMg8xYIL0E3R9pE2mQAdL44NRm0t5OvO/UZdun9GnE
- 21fsqxK+u0Jyz13r5CriE/I4lnEOrMLuVz35PlsEYe/cOPfTR3hb5ahlznuzQfByBh
- ip9iVDTplZ+wWzsMGsE7DW8ShFs9RVF7TlLfIz1raRIdk7Y5EeXKQJlxmBluUZtY4j
- 2DhdCwL1gTkKBaq5+U0eYpFwtaNpnJFarJjaqAZS7MiJnIbttMTPgMGsdxZTYt+7QS
- PazMLH/cPolujPWniD/YRwtf/hdeHKJFaWO+kCOfiSQ5UaS/yWqvY7/G1E0icY4FwN
- iJbsSEiuiXrTg==
-Date: Mon, 27 Jan 2025 17:00:26 +0000
-To: Sam Day <me@samcday.com>
-From: Sam Day <me@samcday.com>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, trini@konsulko.com,
- caleb.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@linaro.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH] mach-snapdragon: handle platforms without PSCI support
-Message-ID: <i8bHrDGFWqgv7Se1W1-TcbDixixmVwJRGAEYWAn0liWIGZ8YdTkAjqIlFxbS1zKUhYbD7lgKdeGAR9dwmVoTL74cyO3W0vHkTeplyCQvdiU=@samcday.com>
-In-Reply-To: <GSFboJvxfcEJj0TdjwY0sIuTkclILyTp9XRiI-uOgoAGSNDniyQUKZel7Dis7sw_ElD6SHRwsmFovnH7UiTWX8fey2KjItW-r6yBfVIabss=@samcday.com>
-References: <20250127-qcom-handle-absent-psci-v1-1-e762f2db938c@samcday.com>
- <87sep4i57r.fsf@bloch.sibelius.xs4all.nl>
- <GSFboJvxfcEJj0TdjwY0sIuTkclILyTp9XRiI-uOgoAGSNDniyQUKZel7Dis7sw_ElD6SHRwsmFovnH7UiTWX8fey2KjItW-r6yBfVIabss=@samcday.com>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 544c05ed323f4676d8851432efff9a583632735d
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 22C8D60004;
+ Mon, 27 Jan 2025 17:11:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1737997870;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=FLtKVHz8a0LTCrot7PA33X52wwwx4PWVQDBYaXaX5SY=;
+ b=bzQpF8mZwcb6gThBiw63bRj+TM9Rx7vsL5j26JyCKtr7y7yFBFuki6IX9hJBj5E0fMzUz2
+ BMlcnSex3NMxI1vnGxFRw+J3v+/s1CDvVEAx+OF2gAA69QT1aHIvoRK774wlWxzXUZIn5v
+ nhP8WbnJPpPF/TDyWsfkZdJU5MMsE0ccpHWZVE9aYU/jZuyl3+FDNnsc1bzlwOInGoYBqr
+ Z6Gzf29Bu79hzv2L9j0wu4czYzoZD82V7ntZ7rgsphtGN6m05ASqpoCu36BoY4f6ggC98r
+ VwA2lixdlQTWEds0CoPudD/7IDZd97PJhGHG2U3bP8kpECNzxAiL8Gm0zD79SA==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,  Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,  Fabio Estevm <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>,  Thomas
+ Petazzoni <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
+ <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v3 05/13] power-domain: Add refcounting
+In-Reply-To: <CAFLszTgjNa3xugV5w1qtgK4MxsHyzCHUPZJqri8RQFDfYiEBEw@mail.gmail.com>
+ (Simon Glass's message of "Sat, 25 Jan 2025 10:11:22 -0700")
+References: <20250110-ge-mainline-display-support-v3-0-d2c0acea6feb@bootlin.com>
+ <20250110-ge-mainline-display-support-v3-5-d2c0acea6feb@bootlin.com>
+ <CAFLszTinomkmj=gaKbX5WBPMsbr_3nxt45sQjXqKJ5q1rxcKwQ@mail.gmail.com>
+ <87a5blu630.fsf@bootlin.com>
+ <CAFLszThX2ULHHA1DOA-essfVJ_Fw=BgsR391iDT=bO+6j=UGwg@mail.gmail.com>
+ <87frlcr2dt.fsf@bootlin.com>
+ <CAFLszThgbakRhLTC3T04uV6W+MbXENyVvhT4Bvam4ymmUqBf2Q@mail.gmail.com>
+ <87r04sfdcv.fsf@bootlin.com>
+ <CAFLszTgjNa3xugV5w1qtgK4MxsHyzCHUPZJqri8RQFDfYiEBEw@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Mon, 27 Jan 2025 18:11:08 +0100
+Message-ID: <87h65k5gib.fsf@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,186 +86,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark,
+Hi Simon,
 
-On Monday, 27 January 2025 at 17:51, Sam Day <me@samcday.com> wrote:
+On 25/01/2025 at 10:11:22 -07, Simon Glass <sjg@chromium.org> wrote:
 
->=20
->=20
-> Hello Mark,
->=20
-> On Monday, 27 January 2025 at 17:36, Mark Kettenis mark.kettenis@xs4all.n=
-l wrote:
->=20
-> > > Date: Mon, 27 Jan 2025 14:48:55 +0000
-> >=20
-> > > From: Sam Day me@samcday.com
-> >=20
-> > Hi Sam,
-> >=20
-> > > Most MSM8916 devices shipped without PSCI support. The history is qui=
-te
-> > > nuanced (a good overview can be found in 1), but the end result is
-> > > that the upstream DTs for this SoC pretend that PSCI exists, and it's
-> > > expected that the bootloader handles the case where it doesn't. This =
-is
-> > > codified by the de-facto bootloader for MSM8916 devices, lk2nd 2.
-> > >=20
-> > > So we handle it here by deleting the /psci node if we detect the abse=
-nce
-> > > of PSCI. We need to do this early to ensure sysreset works correctly,
-> > > since the PSCI firmware driver is PRE_RELOC and binds the PSCI sysres=
-et
-> > > driver.
-> >=20
-> > But deleting the /psci node isn't enough is it? At least on systems
-> > with more than a single core the OS will need a way to spin up the
-> > additonal cores. So you'll need to modify the CPU nodes as well and
-> > change the "enable-method" property to "spin-table" and add the
-> > necessary infrastructure for that.
->=20
->=20
-> Yes, you're absolutely right. I'm preparing to submit a patch series that
-> does exactly that. The spin-table setup bits already exists in U-Boot, th=
-e
-> MSM8916 specific bits (qcom-scm SMC call + poking APCS registers) will be
-> the bulk of the work I submit later tonight.
->=20
-> I opted to submit this patch alone without that work for a few reasons:
->=20
-> * I've already submitted some patches to enable sysreset support for
-> MSM8916 [1] and with this patch, sysreset will then work properly on
-> this platform.
-> * As it currently stands, the secondary cores can't be booted on this
-> platform, regardless of whether the /psci node exists or not. Deleting
-> the psci node doesn't make matters any worse when booting on devices
-> that have no PSCI implementation.
-> * The SMP bring-up code is a lot meatier (I had to pull in a bunch of qco=
-m
-> SCM calling code from the kernel) and might need a few rounds before it
-> can land.
-> * U-Boot can be experimentally chained from lk2nd (which itself is chaine=
-d
-> from aboot, which itself is chained from ... well, you get the idea!),
-> and so in that case the SMP spin-table setup + DT patching has already
-> happened in that previous bootloader. But that BL only disables the
-> /psci node, which doesn't prevent the U-Boot PSCI firmware driver from
-> binding and causing the (non-functional) PSCI sysreset driver to also be
-> bound.
-> * And so considering the previous points, my hope is that this modest
-> patch will land in time for v2025.04 release and make U-Boot a bit more
-> functional on (non-PSCI) MSM8916 devices.
->=20
-> [1]: https://patchwork.ozlabs.org/project/uboot/list/?series=3D441769
+> Hi Miquel,
+>
+> On Fri, 24 Jan 2025 at 08:20, Miquel Raynal <miquel.raynal@bootlin.com> w=
+rote:
+>>
+>> Hi Simon,
+>>
+>> >> > If we
+>> >> > want a power domain to actually turn off, how many times do we need=
+ to
+>> >> > call power_domain_off()?
+>> >>
+>> >> We do not? It is why I add refcounting, if a power domain has 2
+>> >> consumers, each consumer says whether it needs the power domain to be=
+ on
+>> >> or off and the core will handle, but in no case they should force it's
+>> >> state.
+>> >
+>> > This is a bootloader, so we do sometimes need to force something off,
+>> > or on.
+>>
+>> This, I do understand.
+>>
+>> >> > The function silently does nothing in many
+>> >> > cases, so it is not deterministic.
+>> >>
+>> >> It is fully deterministic, as long as consumers call power_on/off
+>> >> evenly (and this is already what we request in U-Boot).
+>> >
+>> > But I foresee people setting up power domains in board code, not
+>> > drivers. My concern is that this is hiding the real state.
+>>
+>> Setting up power domains in board code is drawback. It is legacy
+>> behaviour, people should switch to the device model (ie. using a proper
+>> DT description) and stop messing around with board files. It's been like
+>> 5 years since U-Boot forced people to transition, I wouldn't feel bad if
+>> these boards were no longer behaving like expected (mind there are very
+>> little chances this will break anything, as the kernel is supposed to
+>> re-init these domains anyway).
+>
+> While I agree with you, the message is not fully landing, certainly
+> not in SPL where there are code-size constraints.
 
-Uh, disregard bullet point 4, I don't know why I thought that a disabled
-DT node would still be bound. The rest of the points still hopefully make
-sense, though :)
+I don't think the SPL is a problem here? I consider broken a board file
+with one main function calling enable() twice on the same domain and
+disable() only once. Although I am fine implementing a "force power
+off", I still consider this is not a correct approach.
 
-Cheers,
--Sam
+>> >> > In the case where we *actually*
+>> >> > want to turn the power domain off, we are at a loss as to what code=
+ to
+>> >> > write.
+>> >> >
+>> >> >> Hence, I do not agree with returning error codes in these situatio=
+ns,
+>> >> >> they are misleading and they would have to be ignored anyway.
+>> >> >>
+>> >> >
+>> >> > How about creating a power_domain_off_if_allowed() or
+>> >> > power_domain_soft_off/on() or power_domain_req_off (for request)?
+>> >>
+>> >> The power domain logic has a hardware reality in many SoCs but is als=
+o a
+>> >> software concept that is shared with Linux. Changing the semantics in
+>> >> U-Boot would be very misleading and if my understanding is correct, t=
+his
+>> >> approach would be new.
+>> >
+>> > Yes this is quite a strong argument. Can you point me to the
+>> > equivalent API in Linux? I see pm_domain but not the same as U-Boot
+>>
+>> Yes, pmdomain (former genpd if I get it correctly), how are they
+>> different? From my point of view it is the same. The same devices are
+>> supported. So why would we want the API to be different?
+>
+> But can you please point me to the API? I am seeing struct
+> generic_pm_domain, which is uncommented, so it isn't clear what the
+> power_off() and power_on() functions actually do. Perhaps they work
+> differently from what you think?
 
->=20
-> Warm Regards,
-> -Sam
->=20
-> > > Additionally, show_psci_version is updated to check that PSCI exists.
-> > > Currently this banner outputs "PSCI: 65535.65535" on devices without
-> > > PSCI support, which isn't very useful :)
-> > >=20
-> > > Signed-off-by: Sam Day me@samcday.com
-> > > ---
-> > > arch/arm/mach-snapdragon/board.c | 43 +++++++++++++++++++++++++++++++=
-+++++----
-> > > 1 file changed, 39 insertions(+), 4 deletions(-)
-> > >=20
-> > > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdra=
-gon/board.c
-> > > index e87551784b8d7afb4186533d43b8bddacba9faec..75b9cf1a8a1b3383665eb=
-2d4e6725efe59718de0 100644
-> > > --- a/arch/arm/mach-snapdragon/board.c
-> > > +++ b/arch/arm/mach-snapdragon/board.c
-> > > @@ -162,11 +162,42 @@ static void show_psci_version(void)
-> > >=20
-> > > arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res=
-);
-> > >=20
-> > > + /* Some older SoCs like MSM8916 don't always support PSCI */
-> > > + if ((int)res.a0 =3D=3D PSCI_RET_NOT_SUPPORTED)
-> > > + return;
-> > > +
-> > > debug("PSCI: v%ld.%ld\n",
-> > > PSCI_VERSION_MAJOR(res.a0),
-> > > PSCI_VERSION_MINOR(res.a0));
-> > > }
-> > >=20
-> > > +/**
-> > > + * Most MSM8916 devices in the wild shipped without PSCI support, bu=
-t the
-> > > + * upstream DTs pretend that PSCI exists. If that situation is detec=
-ted here,
-> > > + * the /psci node is deleted. This is done very early to ensure the =
-PSCI
-> > > + * firmware driver doesn't bind (which then binds a sysreset driver =
-that won't
-> > > + * work).
-> > > + */
-> > > +static void qcom_psci_fixup(void fdt)
-> > > +{
-> > > + int offset, ret;
-> > > + struct arm_smccc_res res;
-> > > +
-> > > + arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &r=
-es);
-> > > +
-> > > + if ((int)res.a0 !=3D PSCI_RET_NOT_SUPPORTED)
-> > > + return;
-> > > +
-> > > + offset =3D fdt_path_offset(fdt, "/psci");
-> > > + if (offset < 0)
-> > > + return;
-> > > +
-> > > + debug("Found /psci DT node on device with no PSCI. Deleting.\n");
-> > > + ret =3D fdt_del_node(fdt, offset);
-> > > + if (ret)
-> > > + log_err("Failed to delete /psci node: %d\n", ret);
-> > > +}
-> > > +
-> > > / We support booting U-Boot with an internal DT when running as a fir=
-st-stage bootloader
-> > > * or for supporting quirky devices where it's easier to leave the dow=
-nstream DT in place
-> > > * to improve ABL compatibility. Otherwise, we use the DT provided by =
-ABL.
-> > > @@ -212,12 +243,16 @@ int board_fdt_blob_setup(void **fdtp)
-> > >=20
-> > > if (internal_valid) {
-> > > debug("Using built in FDT\n");
-> > > - return -EEXIST;
-> > > + ret =3D -EEXIST;
-> > > + } else {
-> > > + debug("Using external FDT\n");
-> > > + *fdtp =3D external_fdt;
-> > > + ret =3D 0;
-> > > }
-> > >=20
-> > > - debug("Using external FDT\n");
-> > > - *fdtp =3D external_fdt;
-> > > - return 0;
-> > > + qcom_psci_fixup(*fdtp);
-> > > +
-> > > + return ret;
-> > > }
-> > >=20
-> > > void reset_cpu(void)
-> > >=20
-> > > ---
-> > > base-commit: 2eed5a1ff36217372e19f7513bd07077fc76718a
-> > > change-id: 20250127-qcom-handle-absent-psci-6e8e8af7bcd7
-> > > prerequisite-change-id: 20250120-qcom-parse-memory-updates-96ffe248cd=
-f1:v3
-> > > prerequisite-patch-id: 65448b5a93120d2117c1361035afc9bd911d005f
-> > >=20
-> > > Best regards,
-> > > --
-> > > Sam Day me@samcday.com
+->power_on() and ->power_off() perform a state transition, like you
+would expect. But these callbacks are not supposed to be called
+directly, they are typically called in the genpd_power_on/off() helpers
+(through _genpd_power_on/off()), see below.
+
+>> >> If you really want a way to track the state of the power domain,
+>> >> however, I can maybe add a helper returning its state, ie:
+>> >>
+>> >>          bool power_domain_is_on(domain)
+>> >>
+>> >> Would that work?
+>> >
+>> > Not really. We should have an API which returns -EALREADY or -EBUSY
+>> > based on the ref counts.
+
+In Linux, we do not return -EALREADY if the refcount of a power domain
+indicates it is already on when powering up:
+https://elixir.bootlin.com/linux/v6.12.6/source/drivers/pmdomain/core.c#L922
+
+However, while we do return -EBUSY when turning it off if there are children
+still enabled,
+(https://elixir.bootlin.com/linux/v6.12.6/source/drivers/pmdomain/core.c#L8=
+48)
+this function is not exposed and there is not a single caller that
+actually checks the return code. As a matter of fact, disabling the
+power domains is mostly done asynchronously anyway in a work queue that
+is supposed to "try" disabling the unused domains:
+https://elixir.bootlin.com/linux/v6.12.6/source/drivers/pmdomain/core.c#L28=
+90
+So in the end, consumers just do not care about the final status of the
+domain, and they are unaware of it.
+
+Please note that most of the handling of the domains is abstracted
+through Runtime PM handling where, again, the return value is never
+forwarded to the device drivers.
+
+>> > But yes, we can change the naming, so that
+>> > this 'deterministic' ones have a different name, with the current
+>> > names used for your ref-counting one. Then the ref-counting one is a
+>> > thin layer on top of the deterministic one.
+>>
+>> Honestly, I am not convinced, but I will anyway assume we need a way to
+>> force a domain off. There is no need to force a power domain on however,
+>> as after power_domain_on(), the power domain cannot be off (except error
+>> condition of course).
+>>
+>> So I'll add a helper to force power off. It will be called
+>> power_domain_off_force() and be preceded with a comment stating that
+>> this is not the standard approach, to guide people towards the
+>> refcounted helper instead.
+>>
+>> Would this address your request?
+>
+> I believe it would be better to have a 'low-level' function which
+> handles the refcounting and returns  -EALREADY or -EBUSY if it does
+> nothing, with your 'Linux' functions sitting above that. You can put
+> any comment you like on the low-level function.
+>
+> The idea of 'forcing' something just seems odd to me. I imagine people
+> would call that just to be sure :-)
+
+I am okay having two levels, one returning statuses and the other one
+hiding them. After some time if nobody complained nor used the low-level
+one, we can certainly merge them. So I would propose something like:
+
+int power_domain_on_low_level()
+{
+        //refcount handling, power_on() if needed
+}
+
+static inline int power_domain_on(pd) {
+        int ret =3D power_domain_on_low_level(pd);
+        if (ret =3D=3D -EBUSY || ret =3D=3D -EALREADY)
+                ret =3D 0;
+        return ret;
+}
+
+Would that work for you?
+
+Thanks,
+Miqu=C3=A8l
