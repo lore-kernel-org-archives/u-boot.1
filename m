@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2064EC0218A
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B011C0218A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:42:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48BB68142D;
-	Mon, 27 Jan 2025 14:41:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 99B8281244;
+	Mon, 27 Jan 2025 14:41:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lk6hl7e6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dPdE99qJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 660DF8128B; Mon, 27 Jan 2025 14:41:21 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 6192E814B6; Mon, 27 Jan 2025 14:41:23 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51AB081265
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 402C881436
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-386329da1d9so2256730f8f.1
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:19 -0800 (PST)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-385dece873cso2406291f8f.0
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737985279; x=1738590079; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1737985280; x=1738590080; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5cMlDsQGmg58TbUVZ1JU14W7977ZPednDF6MDXte7ek=;
- b=Lk6hl7e6jdJAQt5uUMafyixX0jYLexOmhrd+SWeaKGBN4vxeNZaLla6lAIVf7+734T
- uy+qlWMfOObZI952w4jUJ3PNsuCCvOp3dtbKqycs2lL0Y3/HLZViyEUPgM9bOw6Ftl1S
- 6ha1/GCvKo+HtIfrFvKBF/r+hIFGJI15PkLIjFI1Pkd4qXvolvdycHJyvekEuSB2HoeJ
- YyHeuRxuaTGqo4V6aUwsWmQUxGBGu6ciO9v8QrZ3dAGcglQ1gLv0ECCiMBywD71szJx1
- vpXeaAVmXq9of25/tv4zqRrkD3XuaxOJPSqA3mgLDItGHlgLcBLwixZ8KuRfSGh88+bW
- 28rQ==
+ :reply-to; bh=9pLdgKnHhFn0QhpDykbz3iP4SyGOd4kziT4e2fr4g7o=;
+ b=dPdE99qJQhufFKplEW7mqv+RKrFR0FlsZf8ZVUn0qVj0ByVRA4QpsNMmWSfJAnZYFO
+ wLYqqLYkxIkG1D2KUfUTytiVweeUCGoafsVdeccMGYDfNSWyaPKC50pdqsW2thioxOAu
+ n9tfVQd/PSBY/2RIj3klSnZ5VdMPy/NSLDuNCmumcyVSzMkNB7rEf/1q21GGI41dQH15
+ AClqG06LJHINC0v+vJ5B5MaHMyo3OnDqfc4UGoLMYMrsT3bRWQHl8qJeO7qOilfwvJ4b
+ 5ly/RMa1v126YJfXRP6LkiFgEh/Sh3MZ4M9++BrIX1Cj240mqWswetKVV91OHWr1YGc7
+ L3mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737985279; x=1738590079;
+ d=1e100.net; s=20230601; t=1737985280; x=1738590080;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5cMlDsQGmg58TbUVZ1JU14W7977ZPednDF6MDXte7ek=;
- b=RTe6mk9PrHzR+SLdp+IgDQ88hfS9cOBGJa+kcQEdCEGOB/gFHbF5BDMZl7ic8VKHhY
- g6hicLoM5Sw6jekS24VJ1dpCpE2cEidDqkY8Cw173pCxCsS3NmDuNXmeZeCFzuywLnzs
- fbCnShiLLB2I3FpzcE5csTNr5txZ6xRPT+lZT8n+LYOHaxcckvMx2vXXG00JC423NJ0X
- 4wXblCBH4LHfCso2b6RAH45w5Gd+hBcX/xUSQs90pQ7qmbk+62zK0BLYbzKaRRyM43/9
- eiHFrMNLCbzUhvRyhYGnINufN+AnO+biuiWzfF9vEOxSnanGhO5K3wcv5FjIF/eXiNQd
- g7Rg==
+ bh=9pLdgKnHhFn0QhpDykbz3iP4SyGOd4kziT4e2fr4g7o=;
+ b=wnyUXWv+juO5b/iBmLwepyUDxLPsNPO0tlspILXexVuFpam+wa/YwL9k7Z0AXrseN7
+ x9yFfRNr+KsO62M1rMhvbpls+7dHL3FsN7zyTqbT8A97kPGdQPSKqn7o3btLsiusko2m
+ u/H4sUWbBxAfjigodikZYVjils8kxsK2kcozYg7Www+WYa9EcYNR1CTXU/3o8nd4FjC1
+ BtHMSHpGAQWI+DM685pPDWjZ4XYRRpxQaeuwCQY0xyoA3d/2ifwcdthknhp9U5FZN0VE
+ NuPT1uclM0m8MHJaX4l79l+Qeam/qNygLSqfhry/mCRbhy3vR8wl/nbaa89Q5FH23X4k
+ pVUw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWFEdGr+mdaIrr8Zh4rl4Nen1pPV2UwsMt4jm/kXithHGnxIANtpA1WgNINFqBLmZifxjYjNds=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywp5HaU0O4Qnnzxdg8ahmjMRBEkddUbPxCCrRSoKYd8Fk475o/h
- Ylmbs/yms5QwxGV+JL37ywTJ6bziwJQhhZczXXSg/RrN1PmOj/EF
-X-Gm-Gg: ASbGncsfDVUTnB18LvD3jfrn8pha7x+oYihrlCoZoIkzADkJ9cQgo85ca1HHMulYsPX
- g9fz0towj1NZ5Mmwrg5kBXd0dotHM9v3Ppv2CF6Ssk6I7Lu8Z7/ZQ+7lnvHQbNA6J0Q95wRmFEr
- JMK020ZMXo0S/du3HWfGi5yBisxBDnvcpgrdZ+RkpLVlHzm7+U+3T3h/8FfyzRktXK8ojhEVedp
- agpboaMfL/gU/cD1Xpu9PVQzrH4WSM1AeJDPCSG5sGkiCXMXIlRwvcjnTiI8XGI3GDyiK+BZMJl
- VkZRlI55iaX1lOvgJEeMU8IvfaO+ULjYYPdh3yXzGNVhgrgemg==
-X-Google-Smtp-Source: AGHT+IF6HRJP4hbrSxoWQnztbThhg9apiJskwVAqeQ0tO22QA8MJ5bajZW0X4m23EV8FtxCLjM0QUw==
-X-Received: by 2002:a5d:64e2:0:b0:38b:ef2b:422 with SMTP id
- ffacd0b85a97d-38bf57a9615mr32878442f8f.36.1737985278650; 
- Mon, 27 Jan 2025 05:41:18 -0800 (PST)
+ AJvYcCXczcp1JbGDhzC9dxIk+sUNDLm4MdxhnTbqEl0IUI1sKd3GljZT4JN7sYq+PLLjWx1tiuRxm2Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YzE0ormBeK+KOhFnMyUCzYlFor504BErVMQH+E1RLNMv7gRUJbu
+ Zr0XS0jDCxXfBXebqikEBakLYhRQ6uNd3lgd5iTfm7bdKe2K8ntU
+X-Gm-Gg: ASbGncsqaoO+s8QFApYdSDC4OXakiu+5fm+q7yxCPjGLwGllVF2TzwyGhC4qm94r6cw
+ vcWDCd6yGWjzbJSTBgna4UkzTcvrflyblpl2SqtgzmkMxwRWiQVO8WcPVdVqayQjDMQUyRGbFhZ
+ AemlhIC7Bygw4/36X6R7qBcHlhjHuB1TmAqTslhsQjF40NGYvxzyqb+gSYN8Be8cp/Thq3/A61q
+ OSKTNM2e1PXq3ne2K7TZO7wefaJE1VArpiYaGBiUUQaH8F1ggQhuRfmDsyvq+hH2l5cL9BDjKhJ
+ iyEyOIUd4LbUVowqj65JWHygVCfz185Qa+bD6n6R01xccGtIUw==
+X-Google-Smtp-Source: AGHT+IHRkpFCurJGg05y4+L0SNl9aYKSEDP7rRWDgLMvFXPieGUY2vNGh20Va5esE9iaDlkP+qwe2w==
+X-Received: by 2002:a05:6000:104d:b0:386:3803:bbd5 with SMTP id
+ ffacd0b85a97d-38bf57c901bmr29994619f8f.45.1737985279673; 
+ Mon, 27 Jan 2025 05:41:19 -0800 (PST)
 Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
  [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.17
+ ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 05:41:18 -0800 (PST)
+ Mon, 27 Jan 2025 05:41:19 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  Weijie Gao <weijie.gao@mediatek.com>,
@@ -79,9 +79,9 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  "SkyLake.Huang" <skylake.huang@mediatek.com>,
  John Crispin <john@phrozen.org>, Dong Huang <dong.huang@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 7/8] arm: dts: mediatek: add USB nodes for MT7981
-Date: Mon, 27 Jan 2025 14:40:44 +0100
-Message-ID: <20250127134046.26345-8-ansuelsmth@gmail.com>
+Subject: [PATCH 8/8] arm: dts: mediatek: add PCIe node for MT7981
+Date: Mon, 27 Jan 2025 14:40:45 +0100
+Message-ID: <20250127134046.26345-9-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250127134046.26345-1-ansuelsmth@gmail.com>
 References: <20250127134046.26345-1-ansuelsmth@gmail.com>
@@ -103,81 +103,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: John Crispin <john@phrozen.org>
+Add PCIe node for MT7981 with all the required properties to make PCIe
+work.
 
-Add USB PHY nodes for MT7981. These are needed for USB support and also
-for PCIe support as the u3 PHY can also be used for PHY.
-
-Signed-off-by: John Crispin <john@phrozen.org>
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/dts/mt7981.dtsi | 48 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
+ arch/arm/dts/mt7981.dtsi | 35 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
 
 diff --git a/arch/arm/dts/mt7981.dtsi b/arch/arm/dts/mt7981.dtsi
-index b2c4cd7b54a..2360c6bbdca 100644
+index 2360c6bbdca..5b4cadc22f7 100644
 --- a/arch/arm/dts/mt7981.dtsi
 +++ b/arch/arm/dts/mt7981.dtsi
-@@ -6,6 +6,7 @@
- 
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/phy/phy.h>
- #include <dt-bindings/clock/mt7981-clk.h>
- #include <dt-bindings/reset/mt7629-reset.h>
- #include <dt-bindings/pinctrl/mt65xx.h>
-@@ -315,4 +316,51 @@
- 		status = "disabled";
+@@ -339,6 +339,41 @@
+ 		status = "okay";
  	};
  
-+	xhci: xhci@11200000 {
-+		compatible = "mediatek,mt7981-xhci",
-+			     "mediatek,mtk-xhci";
-+		reg = <0x11200000 0x2e00>,
-+		      <0x11203e00 0x0100>;
-+		reg-names = "mac", "ippc";
-+		interrupts = <GIC_SPI 173 IRQ_TYPE_LEVEL_HIGH>;
-+		phys = <&u2port0 PHY_TYPE_USB2>,
-+		       <&u3port0 PHY_TYPE_USB3>;
-+		clocks = <&infracfg CLK_INFRA_IUSB_SYS_CK>,
-+			 <&infracfg CLK_INFRA_IUSB_CK>,
-+			 <&infracfg CLK_INFRA_IUSB_133_CK>,
-+			 <&infracfg CLK_INFRA_IUSB_66M_CK>,
-+			 <&topckgen CLK_TOP_U2U3_XHCI_SEL>;
-+		clock-names = "sys_ck",
-+			      "ref_ck",
-+			      "mcu_ck",
-+			      "dma_ck",
-+			      "xhci_ck";
-+		mediatek,u3p-dis-msk = <0x1>;
-+		status = "okay";
-+	};
++	pcie: pcie@11280000 {
++		compatible = "mediatek,mt8192-pcie";
++		device_type = "pci";
++		reg = <0x11280000 0x4000>;
++		reg-names = "pcie-mac";
++		#address-cells = <3>;
++		#size-cells = <2>;
++		interrupts = <GIC_SPI 168 IRQ_TYPE_LEVEL_HIGH>;
++		clocks = <&infracfg CLK_INFRA_IPCIE_CK>,
++				<&infracfg CLK_INFRA_IPCIE_PIPE_CK>,
++				<&infracfg CLK_INFRA_IPCIER_CK>,
++				<&infracfg CLK_INFRA_IPCIEB_CK>;
++		clock-names = "pl_250m", "tl_26m", "peri_26m", "top_133m";
++		phys = <&u3port0 PHY_TYPE_PCIE>;
++		phy-names = "pcie-phy";
++		bus-range = <0x00 0xff>;
++		ranges = <0x82000000 0 0x20000000 0x20000000 0 0x10000000>;
 +
-+	usbtphy: usb-phy@11e10000 {
-+		compatible = "mediatek,mt7981",
-+			     "mediatek,generic-tphy-v2";
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		status = "okay";
++		#interrupt-cells = <1>;
 +
-+		u2port0: usb-phy@11e10000 {
-+			reg = <0x11e10000 0x700>;
-+			clocks = <&topckgen CLK_TOP_USB_FRMCNT_SEL>;
-+			clock-names = "ref";
-+			#phy-cells = <1>;
-+			status = "okay";
-+		};
++		interrupt-map-mask = <0 0 0 7>;
++		interrupt-map = <0 0 0 1 &pcie_intc 0>,
++			<0 0 0 2 &pcie_intc 1>,
++			<0 0 0 3 &pcie_intc 2>,
++			<0 0 0 4 &pcie_intc 3>;
 +
-+		u3port0: usb-phy@11e10700 {
-+			reg = <0x11e10700 0x900>;
-+			clocks = <&topckgen CLK_TOP_USB3_PHY_SEL>;
-+			clock-names = "ref";
-+			#phy-cells = <1>;
-+			mediatek,syscon-type = <&topmisc 0x218 0>;
-+			status = "okay";
++		status = "disabled";
++
++		pcie_intc: interrupt-controller {
++			interrupt-controller;
++			#interrupt-cells = <1>;
++			#address-cells = <0>;
 +		};
 +	};
- };
++
+ 	usbtphy: usb-phy@11e10000 {
+ 		compatible = "mediatek,mt7981",
+ 			     "mediatek,generic-tphy-v2";
 -- 
 2.47.1
 
