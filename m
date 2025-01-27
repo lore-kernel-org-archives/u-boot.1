@@ -4,89 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A82C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 18:59:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F0CC02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 19:24:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B108581671;
-	Mon, 27 Jan 2025 19:59:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 175CA812C8;
+	Mon, 27 Jan 2025 20:24:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=axiado.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Adse+ldn";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=axiado.com header.i=@axiado.com header.b="bnWZbdld";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B26BD8169E; Mon, 27 Jan 2025 19:59:36 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1230D81671; Mon, 27 Jan 2025 20:24:12 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2072d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::72d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D69F812C8
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 19:59:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA0498129B
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 20:24:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=axiado.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=knaerzche@gmail.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-436ce2ab251so31569915e9.1
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 10:59:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738004374; x=1738609174; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=b9GmKjz3bkxCrPJO3s4Rd0HU9MvXNA0JHla6f3ZEzSM=;
- b=Adse+ldnYgjbu0VjmdaSjaaH9F3t97x4rgFfR5YCkGQe6uD8It+hQx2BvAR/tuiYHb
- t5DpYyZAOcqvnF0NGm6FHZZl6monqEFyY8foxXSFxy8Q3UOKwxOX/ks1IJ4yoGtF+0m7
- w0IvOVM1qz9XTkK3C0y3hHiwxwjQLZoRG3FF16vueEwR8GcB//x2V10OVBUusbKVDZJ0
- FXhbJY4dwXjAQuFDeF+v7ac1Ghmt5WHWU/2VBCyh0dHO7ShwBy7bkCWmPjt1U/lxAOza
- du4t32WRSSqMeOomA/m+7z9sCppvM2lAKYkOk1+yFKGeEFAJX69Iak4uXO2TPyxOyQWw
- e1zQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738004374; x=1738609174;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=b9GmKjz3bkxCrPJO3s4Rd0HU9MvXNA0JHla6f3ZEzSM=;
- b=iFju7Q/3QBGem4IibqJXcucw/h3Yf0i03vgLcCSGZ/vX7U7MFoG4rZeXdsKhMrRV33
- c6j2RodKiwp0DdQiX8wk1SBTYpuBP+9L84g+SGmt/E+4c/5xx9aNZ6QijCdlW8WnqYDr
- mW1KBYivlk4EvoOZ0fC2fzbKjVQ01crkSEjYObwIqx9zm2GECAN6c60h0X9D30qBZss7
- A3sLktJPJ7I3ScnFY4q66olDpZeUk1CVDwarsvCDR6k1dtTZI5j83zL0kJwiu8cE2wi5
- mgkXJlzEiDKO7as6MWYB61wdXKoh9YQeYF2EwyWEifRQAac9kU0p0XbnDHtohEY6/wmi
- N/Qg==
-X-Gm-Message-State: AOJu0YwUoh0GtbxTVUwoxipLRAwMNRpFHRvOaybQBJs9tQmM9MSuUQbU
- piCZjWOqJgF41PwLCBH1MrDDMT06mQFETsERyhKTBbTYccf9gbg=
-X-Gm-Gg: ASbGnctH9vb5tdKThk2mQWLwKgwdq4W+Qlv/LQ1YS4NNTXuBWUUiH6a0nqy7OfwapLV
- HWXKzJJVVPteF7CP9VEUud7rNO4iZYUUbZJ1W+aGJsC0FLQOULunkUPOtOodvfHDRyoPhxVdPmv
- LjJivid3UXiI1O94J1ffVnNzh9EQtFoeWCMLJ/bpNuRVykkL50ejdlxQqEpnA4vFnSb6KFxmSPG
- YdyuvG/dfSqA79+kaaascwq7DIDUPEgW1LASw6UGgDj30TKAIem4obif7aTZLctcKSKeqFFBer0
- 7x65e6/I1K5Y+ukSAH1z31wC1hlVrSXxEtG1LGNmqWKQ7qxUmIo=
-X-Google-Smtp-Source: AGHT+IEk8I9rcBeWuGO1EPFi6FM35d8tYUfoygE1RrHVVl/p2OQ/vBQtI+nKdBDr06rT8KbykEpceA==
-X-Received: by 2002:a05:600c:1987:b0:434:a7b6:10e9 with SMTP id
- 5b1f17b1804b1-438913e2fa9mr409910285e9.17.1738004373493; 
- Mon, 27 Jan 2025 10:59:33 -0800 (PST)
-Received: from ?IPV6:2a02:810b:f13:8500:ef9b:15f0:7162:3734?
- ([2a02:810b:f13:8500:ef9b:15f0:7162:3734])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd4d2c0esm140182005e9.33.2025.01.27.10.59.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jan 2025 10:59:33 -0800 (PST)
-Message-ID: <4e6629cf-9685-4b91-800e-82a9df30d5e3@gmail.com>
-Date: Mon, 27 Jan 2025 19:59:31 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] rockchip: Improve ARMv7 support for
- ROCKCHIP_COMMON_STACK_ADDR
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250126234838.561065-1-jonas@kwiboo.se>
- <20250126234838.561065-3-jonas@kwiboo.se>
+ spf=pass smtp.mailfrom=sfranco@axiado.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aHAZVzICi3VuZGo2W/bk9+p099wyoEHlyJU4oeZ/ijgNYyw3mhGtxZOgLT+bdRDcdD2jX1zwAVhYayMbz7zr26iXLaBGJpVtCwD4CMMQj1IRl+OLYtWwzs2JfjG2ik1vVdAb/3ZyhAcdesRWwkxSpric676JapWh9ZT216sBfJjTD/1JhBzK3Nd5EW3qM8drTlkvqQPPM/wPKKhcm5TYJunEUT/y7vzDX3pwl+65nbqoxdv0SU3OblTCvGMcFe+kzwvUoWqj+4ZHGhj6SQV7NPAyurbAkijrPVTIeJq3fOz5z119JIeMn2Is/VJOQiMf5GC46Qu4ZHWrqL0QNFFC0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hwf3YAb8bShaLE9qrX0dVirAK4OX9C7LND7R2Xr+fm0=;
+ b=HQrkCeQ2UbfjhKSPAtzigGywCMTaWM9aYj6F1y7MYDPI0IWGeGpk9Fn4zeZ5TcTNImetO4EFKzw4ZB0bFBzG+jCDEOvDWGYT0qwEta56JXT3vBhHIh1xB9ObI2oQOnzG1Xzjy02WlvXyHj2i4OVdMLgoWYvJKm3g3zQzRq89JAcxoWXvM/Et0yh3PSoWbktsDLx5oq0aXDvw4kiLuYG/ge7eBlO6P0iTBks18JJ9JKR09qfGSkIxubo31YMpJmb8NF183sTtXqxyH3CcLmQVrWZkP6A0fdyq+wLDUbbwkGNgAJvjsxQ5/fNxIIoU+7/vNOiVS5KRaV4ADPgVR2DfeQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=axiado.com; dmarc=pass action=none header.from=axiado.com;
+ dkim=pass header.d=axiado.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axiado.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hwf3YAb8bShaLE9qrX0dVirAK4OX9C7LND7R2Xr+fm0=;
+ b=bnWZbdldarABr/ELCtpzAvuKxY1C9KMajQ91Im0VXGp4tzQ3TUaZYtObDPtQQiCrdsDrz6XO/s58Fkyl0zK8C2LJIaCfol3dfH5770JRmsZ7CSqSIl3ieiD0nMeptC81llTyei8LETvmWh9e2eQFmWgy1GstwXJ0K78NromG8N/+6iRmitragsk2YAmz1dUwQmoG0FeoTwVngzVPSFZsoevI3yYpT7uF2/dfPza134w8x47I98OlxxQi+eWl4iAyi2kgSMOC+fJR4NcNsMx0sxEUe+k+n8QEvDVmIyI7YaCAJpaJPqhLI7qIthsbkOk0g2uXvUibyJ1HcYrsbIAo+Q==
+Received: from CH0PR18MB5484.namprd18.prod.outlook.com (2603:10b6:610:192::9)
+ by CH3PR18MB5953.namprd18.prod.outlook.com (2603:10b6:610:1e3::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.21; Mon, 27 Jan
+ 2025 19:24:07 +0000
+Received: from CH0PR18MB5484.namprd18.prod.outlook.com
+ ([fe80::7cce:7612:74c2:f7d2]) by CH0PR18MB5484.namprd18.prod.outlook.com
+ ([fe80::7cce:7612:74c2:f7d2%4]) with mapi id 15.20.8377.021; Mon, 27 Jan 2025
+ 19:24:07 +0000
+From: Scott Franco <sfranco@axiado.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Current u-boot crashes on sandbox build
+Thread-Topic: Current u-boot crashes on sandbox build
+Thread-Index: AQHbcPBZMhG8P6S6NEu7tvkmtyvvgQ==
+Date: Mon, 27 Jan 2025 19:24:07 +0000
+Message-ID: <CH0PR18MB5484C3C43C708D756817728ACBEC2@CH0PR18MB5484.namprd18.prod.outlook.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Alex Bee <knaerzche@gmail.com>
-In-Reply-To: <20250126234838.561065-3-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=axiado.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CH0PR18MB5484:EE_|CH3PR18MB5953:EE_
+x-ms-office365-filtering-correlation-id: a43ab6f0-2891-482d-7a5f-08dd3f082b31
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|8096899003|38070700018; 
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?YLxpM2sNOMKH+nP5oapfuUp/XrpEaYjZ0sUg/XCAhHDu6UDmkBEOfKK4v3?=
+ =?iso-8859-1?Q?j6K1ueV5e2fyV6wBMAcpWcmBYBqrphh47K4/RwzpwUjULn1QWKcr+2sj1G?=
+ =?iso-8859-1?Q?NDpxZU/fyebGfVZyjAehuZfAoYuwSy4aY3mz/uWb2W4DseqW53hUanm6pq?=
+ =?iso-8859-1?Q?1xFVHXeOl7uRxOMMw8SbJlBbe49dNPddeHe1n7a6MbBZeWG8hWDx96WsMa?=
+ =?iso-8859-1?Q?tjGxTbOlVKPh6sK6RfKzFW+0hX5D5jb74YpFZw3d5ZkUQd7cZV7STv8Zht?=
+ =?iso-8859-1?Q?GwRexvhCFNYe/nsNlhMm4+dYmKZjKtfwozwYBHfxrxoiGxYc3GPNrTtcWA?=
+ =?iso-8859-1?Q?OkV/z/9B60ib7LO2ZxkhuwnsSUxj726CbkAY+HGdjj382nWssCZKeVRa0Q?=
+ =?iso-8859-1?Q?rZaR4qBVQJuehXShajvxUUUjmKcE3KlpFtvP8+a9cIesvRDuAmKlxxsp2O?=
+ =?iso-8859-1?Q?UZqnTvP7TjV3Rr/g/0iJFZoQcX2UAFvnvcnSHTNB/J0OwbWnzBI4htGmtM?=
+ =?iso-8859-1?Q?w3tgugtmzoHXIByRDW/JT3SIjuMA+Wr9hSlyGugjgukDBuV/+VDL/hR+Kd?=
+ =?iso-8859-1?Q?WyfujmFUVRzB1X2+tVqzVpcdZNVNN658gQG2kwMEkMjhFnsGppEeG0b/Xr?=
+ =?iso-8859-1?Q?Vnmeh554F4iF/S576zTNqc+yk2ebQXnrbJSh4eFQWA55tHzVeIG7UOfIaT?=
+ =?iso-8859-1?Q?luHCD1JlvRdkM7zw+j0wFNLAn4BOvaMTKgb6qTinBnkhMQjS/Q16hAIt0D?=
+ =?iso-8859-1?Q?wDsSrhHsWgPFvBkKebdORbCzxYkSYVGgl+s5G3GdwNJ8PtQFCxpFk6TVI0?=
+ =?iso-8859-1?Q?prTd45ZUTSShO2q1mQyHTI/X6DbaeNPR25Xz1p0uVYWs12vt+lEl3rUHsH?=
+ =?iso-8859-1?Q?aN1iKOJh/iuuwaHHWDz7xlU5txBaq7TVFgCMz9wpD0POiEWW/S9FqcWyLp?=
+ =?iso-8859-1?Q?cNzAjrGgpVAoRdqittJcWViMD9QCMG67jxRQ7T4E1UFFkPERujibEtk2Ek?=
+ =?iso-8859-1?Q?vMsEKZZMy2F+Z1ge5sq0wKnEOQ/VDcgGR8W1Kb/oWNd7P69rsy61r182cm?=
+ =?iso-8859-1?Q?3FBza3sFvlIsqzmUDKOfOVC1NdD/iO2Tk+UApWRY83JlBYyRx1HE0Pcol6?=
+ =?iso-8859-1?Q?UKegAzGILg5zyaObWdbfzZ+51Z4WE+whkqCxGy/v1ivymO5sj5Q1KN3ZEx?=
+ =?iso-8859-1?Q?sG6Pv+CoLxtvGQdcPI3jcxyW8cUTRGZvgnumlS5PRqMLFywIwDw7tUAAmD?=
+ =?iso-8859-1?Q?WwpQ4nH1wAB7oTllFXf3ITmCHrq9ndnjz8IzsqLkidetNLnF/KziA+4IfF?=
+ =?iso-8859-1?Q?S/v08NAOAHFnPYi72TdRn2Cry3/gUJL/XcX7mKGYkP6LEgNNfrJviinUwB?=
+ =?iso-8859-1?Q?nGiEGRs0F/ee3uMUaOrAkDY70I2HMDLEGyf18Pp9Jn6KfDlcn+QaUPInyj?=
+ =?iso-8859-1?Q?9ZsD9FMg/ajgwZnCJrLHVsgiOCSwUtWpcxNVSOjFgqKNGQytxQAUnXDZT4?=
+ =?iso-8859-1?Q?9EwhUoyMEe9GBwKe+k7Xh7?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH0PR18MB5484.namprd18.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(8096899003)(38070700018); DIR:OUT;
+ SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?Q9rnceimp4fQRgAhmwOlpG/OdSut1VqHq+87w3d5ZVgF+ShctBtlF4dDat?=
+ =?iso-8859-1?Q?IeElb3ABUe8kpgf3SdawmZbK4JgiEcCaNPraeKSkwa4G3ZEALG1+exy61Y?=
+ =?iso-8859-1?Q?Lsj+lqJ5ZrXbLmH/PHAFzcG56HWHsORsLcRPrPZtrPuvLhZlwLkye0Z1IT?=
+ =?iso-8859-1?Q?tgXbnd/q/X6g/2mm6Cw0DTV6siaYbn3urY+FE41vds7owJnhUrotAlii7d?=
+ =?iso-8859-1?Q?WSlXIuH9Z71T73A+luGWEmL6kJfL5wQTdsWMrZwFNMXtjkUP+SBnqv5ER5?=
+ =?iso-8859-1?Q?QH5oy/SIg+ZAfrFwtcYK7mQHB1sYV5qr+rVDlBczlZZttTJ9SRX9ua+Ao/?=
+ =?iso-8859-1?Q?6PCeOpTw5H1++4ZXhMWjwyFP6f7bX3Bcn8us/nbnogKzZztOcqp254BAzT?=
+ =?iso-8859-1?Q?FmBkk0hRiNiEVRhlz5cMwhSBCIgbtdUD4FF2e9FM8+AND7mPWbsnGiWNgm?=
+ =?iso-8859-1?Q?ijajfmLtEBWjn0vjLxTAGb0jYlBxVuh5k1IKz6pIEtgp4L78GVVhlTQBp+?=
+ =?iso-8859-1?Q?pDt8J/xtbNRFeUO+4PQ0LoXxXVVVgPHZZxZSQxqUc0+cbxum5ALbQBtKBN?=
+ =?iso-8859-1?Q?C9ag2mKZ00x7OpjNKfUTgKY+X7wKNBCUrRro9W01tiBJnJ39Kh0AH0wnwk?=
+ =?iso-8859-1?Q?wgb9AIWWAYJFKpx9VQ2Fd7mfUhXHWt8RfrLmf8cECZmrjGMgG25tj2Qw91?=
+ =?iso-8859-1?Q?nrvQszCwlQzg5gHz92aKu1vBOGmxYLQulhyL96cyxwJ6YHve6NhwNpreFt?=
+ =?iso-8859-1?Q?Q44Drv7qoBDMxGkuhoQMGcx/ITzPONh7vcgLNwmVYTN9HZqF9lqEeSScMy?=
+ =?iso-8859-1?Q?SgzplYTzcHc47xQuzs6YqWYiQQurXZl6EQ4j+xOKcSk4kOhxYl+vRg74zC?=
+ =?iso-8859-1?Q?CzbrcZuERbihbj15M1i89acy7MKMGxhfriNQvsFYwjuINgFgGq2U5mNzfZ?=
+ =?iso-8859-1?Q?Nije3k6Zz3hTEhN9VqdJ25uET5KzvZLEwPmG3sFFtZbWCX6KYak6zXUjyX?=
+ =?iso-8859-1?Q?C2aDunBbYN5ybU9Dko6rDPMQq8rNyuSoPU1QJH/cFjsRkHQoOACoLL6SPr?=
+ =?iso-8859-1?Q?Bkq/aWc5ava+w2SzpT7bmXyUjDxYXSD9FtvTnb5ik4LAv0569Q+n/JUG7q?=
+ =?iso-8859-1?Q?yeZ67M8MBuSvFRngEimiy39xqPFHjCEZaIe9tBuppl5j9qDb27JZb6udcV?=
+ =?iso-8859-1?Q?tht4Oxi+lFNayJJFkK0AkQtEteOI/L2vbVCcGjEhzBBu0rFiaxnCwhRVUe?=
+ =?iso-8859-1?Q?Vk1K12UQ2RC6NF7nCYOk58PK7MnQgUQKUE2xza6FBVH/cPtvqeP17ZT/c2?=
+ =?iso-8859-1?Q?al8y71VLnOjN3kOPK8ndxtf2Di61jKsnbiFc9E4VcLcleJSTeOxH/BAxUZ?=
+ =?iso-8859-1?Q?aqW8G/KII8VSc9qajYlw6SgGXV8lpGWA1JyLnkxoJzSURfrmQ7h+BlJMKq?=
+ =?iso-8859-1?Q?Kh4JmfMv3/Z9SZh4thGCy2OiGViXbtjjOZUyIzMgvQXEDOZOaWa4XwMH+r?=
+ =?iso-8859-1?Q?Ft+Dzt4MFyIYwjtrSFs8CAMiJgXCfLS7qkiR8XUGHXDIR6kvcXHdjQe8Dp?=
+ =?iso-8859-1?Q?cpY9f/zd/j6Gy0Z004T4e2DjlhmIMwoQC7RcDTJnVa7YNx6Mmn5G6jgKvm?=
+ =?iso-8859-1?Q?RlIALhQtIbOb8=3D?=
+MIME-Version: 1.0
+X-OriginatorOrg: axiado.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CH0PR18MB5484.namprd18.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a43ab6f0-2891-482d-7a5f-08dd3f082b31
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Jan 2025 19:24:07.3182 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: ff2db17c-4338-408e-9036-2dee8e3e17d7
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: V+ARB1oFRmg+WrFsL4M7PahOEBESwII4BZ81TchQPfdwnN1YzwIafi7lMyHh4VCdyu8mmOrErWausojSxHXKSA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR18MB5953
+X-Mailman-Approved-At: Mon, 27 Jan 2025 20:24:43 +0100
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,98 +162,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+scott-franco@scott-franco-ThinkPad-P15-Gen-2i:~/projects/u-boot$ ./u-boot
+Bloblist at b000 not found (err=3D-2)
 
-thanks for working on this.  Please see one comment below.
 
-Am 27.01.25 um 00:48 schrieb Jonas Karlman:
-> A few Rockchip ARMv7 SoCs use 0x60000000 as DRAM base address instead of
-> the more common 0x0 DRAM base address used on AArch64 SoCs.
->
-> Add default options that should work for these ARMv7 SoCs. Same offsets
-> as before are used, just below 64 MiB. Hex values have also been padded
-> to improve alignment.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
->   arch/arm/mach-rockchip/Kconfig | 35 +++++++++++++++++++++++-----------
->   1 file changed, 24 insertions(+), 11 deletions(-)
->
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 5aa9e0f1af3b..da20d3233fe3 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -637,40 +637,53 @@ source "arch/arm/mach-rockchip/rv1126/Kconfig"
->   if ROCKCHIP_COMMON_STACK_ADDR && SPL_SHARES_INIT_SP_ADDR
->   
->   config CUSTOM_SYS_INIT_SP_ADDR
-> -	default 0x3f00000
-> +	default 0x63f00000 if SPL_TEXT_BASE = 0x60000000
-> +	default 0x03f00000 if SPL_TEXT_BASE = 0x00000000
->   
->   config SYS_MALLOC_F_LEN
-> -	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
-> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
-> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->   
->   config SPL_SYS_MALLOC_F_LEN
-> -	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
-> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
-> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->   
->   config TPL_SYS_MALLOC_F_LEN
-> -	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
-> +	default 0x0800 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
-> +	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->   
->   config TEXT_BASE
-> -	default 0x00200000 if ARM64
-> +	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
-> +	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
->   
->   config SPL_TEXT_BASE
-> -	default 0x0 if ARM64
-> +	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
-> +			      ROCKCHIP_RK3128 || ROCKCHIP_RK3188 || \
+U-Boot 2024.10 (Jan 24 2025 - 17:24:46 -0800)
 
-I'm not sure if adding RK3036 and RK3188 is correct at this point. Both use
-SPL (without TPL) currently for DRAM initialization and thus need their
-CFG_IRAM_BASE as SPL_TEXT_BASE.
+DRAM:  256 MiB
+Core:  28 devices, 14 uclasses, devicetree: board
+NAND:  0 MiB
+MMC:
+Loading Environment from nowhere... OK
+Warning: device tree node '/config/environment' not found
+In:    serial
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Net:   No ethernet found.
 
-Regards,
+Hit any key to stop autoboot:  0
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  Name                      Filenam=
+e
+---  -----------  ------  --------  ----  ------------------------  -------=
+---------
+Scanning global bootmeth 'efi_mgr':
+No EFI system partition
+No EFI system partition
+Failed to persist EFI variables
+Missing TPMv2 device for EFI_TCG_PROTOCOL
+Missing RNG device for EFI_RNG_PROTOCOL
+Hunting with: simple_bus
+Found 2 extension board(s).
+Hunting with: mmc
+Hunting with: nvme
+Hunting with: qfw
+Hunting with: scsi
+scanning bus for devices...
+Hunting with: spi_flash
+Hunting with: virtio
+Scanning bootdev 'qfw_sandbox.bootdev':
+Segmentation fault (core dumped)
 
-Alex
+Host details:
 
-> +			      ROCKCHIP_RK322X || ROCKCHIP_RV1108
-> +	default 0x00000000
->   
->   config SPL_HAS_BSS_LINKER_SECTION
->   	default y if ARM64
->   
->   config SPL_BSS_START_ADDR
-> -	default 0x3f80000
-> +	default 0x63f80000 if SPL_TEXT_BASE = 0x60000000
-> +	default 0x03f80000 if SPL_TEXT_BASE = 0x00000000
->   
->   config SPL_BSS_MAX_SIZE
-> -	default 0x8000 if SPL_BSS_START_ADDR = 0x3f80000
-> +	default 0x8000 if SPL_BSS_START_ADDR = 0x63f80000
-> +	default 0x8000 if SPL_BSS_START_ADDR = 0x03f80000
->   
->   config SPL_STACK_R
-> -	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
-> +	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
-> +	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->   
->   config SPL_STACK_R_ADDR
-> -	default 0x3e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
-> +	default 0x63e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
-> +	default 0x03e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->   
->   config SPL_STACK_R_MALLOC_SIMPLE_LEN
-> -	default 0x200000 if SPL_STACK_R_ADDR = 0x3e00000
-> +	default 0x200000 if SPL_STACK_R_ADDR = 0x63e00000
-> +	default 0x200000 if SPL_STACK_R_ADDR = 0x03e00000
->   
->   endif
->   endif
+Ubuntu 24.04 LTS
+scott-franco-ThinkPad-P15-Gen-2i
+
+Build:
+
+
+make sandbox_defconfig
+
+The failure was seen on release versions back until v2024.01, which worked.
+
+Thanks!
+
+Scott Franco
+Axiado Corp.
+
+
