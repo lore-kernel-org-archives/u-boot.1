@@ -4,89 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B011C0218A
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:42:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07CACC02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 14:22:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99B8281244;
-	Mon, 27 Jan 2025 14:41:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3853F8128D;
+	Mon, 27 Jan 2025 15:22:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dPdE99qJ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pQJZIcAu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6192E814B6; Mon, 27 Jan 2025 14:41:23 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 402C881436
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:20 +0100 (CET)
+ id 1AF1F812C3; Mon, 27 Jan 2025 15:22:26 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AF4A811E1
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 15:22:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-385dece873cso2406291f8f.0
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1737985280; x=1738590080; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9pLdgKnHhFn0QhpDykbz3iP4SyGOd4kziT4e2fr4g7o=;
- b=dPdE99qJQhufFKplEW7mqv+RKrFR0FlsZf8ZVUn0qVj0ByVRA4QpsNMmWSfJAnZYFO
- wLYqqLYkxIkG1D2KUfUTytiVweeUCGoafsVdeccMGYDfNSWyaPKC50pdqsW2thioxOAu
- n9tfVQd/PSBY/2RIj3klSnZ5VdMPy/NSLDuNCmumcyVSzMkNB7rEf/1q21GGI41dQH15
- AClqG06LJHINC0v+vJ5B5MaHMyo3OnDqfc4UGoLMYMrsT3bRWQHl8qJeO7qOilfwvJ4b
- 5ly/RMa1v126YJfXRP6LkiFgEh/Sh3MZ4M9++BrIX1Cj240mqWswetKVV91OHWr1YGc7
- L3mg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737985280; x=1738590080;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9pLdgKnHhFn0QhpDykbz3iP4SyGOd4kziT4e2fr4g7o=;
- b=wnyUXWv+juO5b/iBmLwepyUDxLPsNPO0tlspILXexVuFpam+wa/YwL9k7Z0AXrseN7
- x9yFfRNr+KsO62M1rMhvbpls+7dHL3FsN7zyTqbT8A97kPGdQPSKqn7o3btLsiusko2m
- u/H4sUWbBxAfjigodikZYVjils8kxsK2kcozYg7Www+WYa9EcYNR1CTXU/3o8nd4FjC1
- BtHMSHpGAQWI+DM685pPDWjZ4XYRRpxQaeuwCQY0xyoA3d/2ifwcdthknhp9U5FZN0VE
- NuPT1uclM0m8MHJaX4l79l+Qeam/qNygLSqfhry/mCRbhy3vR8wl/nbaa89Q5FH23X4k
- pVUw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXczcp1JbGDhzC9dxIk+sUNDLm4MdxhnTbqEl0IUI1sKd3GljZT4JN7sYq+PLLjWx1tiuRxm2Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YzE0ormBeK+KOhFnMyUCzYlFor504BErVMQH+E1RLNMv7gRUJbu
- Zr0XS0jDCxXfBXebqikEBakLYhRQ6uNd3lgd5iTfm7bdKe2K8ntU
-X-Gm-Gg: ASbGncsqaoO+s8QFApYdSDC4OXakiu+5fm+q7yxCPjGLwGllVF2TzwyGhC4qm94r6cw
- vcWDCd6yGWjzbJSTBgna4UkzTcvrflyblpl2SqtgzmkMxwRWiQVO8WcPVdVqayQjDMQUyRGbFhZ
- AemlhIC7Bygw4/36X6R7qBcHlhjHuB1TmAqTslhsQjF40NGYvxzyqb+gSYN8Be8cp/Thq3/A61q
- OSKTNM2e1PXq3ne2K7TZO7wefaJE1VArpiYaGBiUUQaH8F1ggQhuRfmDsyvq+hH2l5cL9BDjKhJ
- iyEyOIUd4LbUVowqj65JWHygVCfz185Qa+bD6n6R01xccGtIUw==
-X-Google-Smtp-Source: AGHT+IHRkpFCurJGg05y4+L0SNl9aYKSEDP7rRWDgLMvFXPieGUY2vNGh20Va5esE9iaDlkP+qwe2w==
-X-Received: by 2002:a05:6000:104d:b0:386:3803:bbd5 with SMTP id
- ffacd0b85a97d-38bf57c901bmr29994619f8f.45.1737985279673; 
- Mon, 27 Jan 2025 05:41:19 -0800 (PST)
-Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
- [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 05:41:19 -0800 (PST)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Sam Shih <sam.shih@mediatek.com>, Christian Marangi <ansuelsmth@gmail.com>,
- "SkyLake.Huang" <skylake.huang@mediatek.com>,
- John Crispin <john@phrozen.org>, Dong Huang <dong.huang@mediatek.com>,
- u-boot@lists.denx.de
-Subject: [PATCH 8/8] arm: dts: mediatek: add PCIe node for MT7981
-Date: Mon, 27 Jan 2025 14:40:45 +0100
-Message-ID: <20250127134046.26345-9-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250127134046.26345-1-ansuelsmth@gmail.com>
-References: <20250127134046.26345-1-ansuelsmth@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50REML0I1802106
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 27 Jan 2025 08:22:21 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1737987741;
+ bh=AOdrJ5kjT0FImBIg1MWTz6Mn251kgV9fwIMcD0pyIjY=;
+ h=From:To:CC:Subject:Date;
+ b=pQJZIcAuVEDCrmul6JDlLuainCaax6XyoizbGdFpdq0p2dxS8syNUQSpvhafIZlLh
+ GU5hdbYnY0FEAABvxPjvLQWUq+GU2qzVF8B3YKV1tunlFOKNIpZtZVFZmX7fcx36po
+ iEl8uK0Lchlfv9ogdjzCWKm0Rw6hWkuK7jJmM5XQ=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50REML1o065561
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 27 Jan 2025 08:22:21 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
+ Jan 2025 08:22:20 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 27 Jan 2025 08:22:21 -0600
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50REMHf6071075;
+ Mon, 27 Jan 2025 08:22:18 -0600
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <bb@ti.com>, <w.egorov@phytec.de>, <s-k6@ti.com>,
+ <marek.vasut+renesas@mailbox.org>, <sabiya.d@ti.com>
+CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH 0/8] ram: k3-ddrss: Support partial inline ECC
+Date: Mon, 27 Jan 2025 19:52:09 +0530
+Message-ID: <20250127142217.1757300-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,60 +80,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add PCIe node for MT7981 with all the required properties to make PCIe
-work.
+Currently, the inline ECC implementation enables inline ECC across the
+entire DDR space. However this is not always required and a more common
+ask is to have only a portion of the DDR protected as enabling ECC
+impacts read/write performance metrics.
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- arch/arm/dts/mt7981.dtsi | 35 +++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+This series aims to modify the logic to firstly support partial inline
+ECC in its' most basic form which works for single controllers. Then it
+introduces an algorithm to support multi DDR controllers where
+interleaving plays a role. Since interleaving is handled by the MSMC, it
+only makes sense to have the MSMC decide the inline ECC ranges for each
+DDR.
 
-diff --git a/arch/arm/dts/mt7981.dtsi b/arch/arm/dts/mt7981.dtsi
-index 2360c6bbdca..5b4cadc22f7 100644
---- a/arch/arm/dts/mt7981.dtsi
-+++ b/arch/arm/dts/mt7981.dtsi
-@@ -339,6 +339,41 @@
- 		status = "okay";
- 	};
- 
-+	pcie: pcie@11280000 {
-+		compatible = "mediatek,mt8192-pcie";
-+		device_type = "pci";
-+		reg = <0x11280000 0x4000>;
-+		reg-names = "pcie-mac";
-+		#address-cells = <3>;
-+		#size-cells = <2>;
-+		interrupts = <GIC_SPI 168 IRQ_TYPE_LEVEL_HIGH>;
-+		clocks = <&infracfg CLK_INFRA_IPCIE_CK>,
-+				<&infracfg CLK_INFRA_IPCIE_PIPE_CK>,
-+				<&infracfg CLK_INFRA_IPCIER_CK>,
-+				<&infracfg CLK_INFRA_IPCIEB_CK>;
-+		clock-names = "pl_250m", "tl_26m", "peri_26m", "top_133m";
-+		phys = <&u3port0 PHY_TYPE_PCIE>;
-+		phy-names = "pcie-phy";
-+		bus-range = <0x00 0xff>;
-+		ranges = <0x82000000 0 0x20000000 0x20000000 0 0x10000000>;
-+
-+		#interrupt-cells = <1>;
-+
-+		interrupt-map-mask = <0 0 0 7>;
-+		interrupt-map = <0 0 0 1 &pcie_intc 0>,
-+			<0 0 0 2 &pcie_intc 1>,
-+			<0 0 0 3 &pcie_intc 2>,
-+			<0 0 0 4 &pcie_intc 3>;
-+
-+		status = "disabled";
-+
-+		pcie_intc: interrupt-controller {
-+			interrupt-controller;
-+			#interrupt-cells = <1>;
-+			#address-cells = <0>;
-+		};
-+	};
-+
- 	usbtphy: usb-phy@11e10000 {
- 		compatible = "mediatek,mt7981",
- 			     "mediatek,generic-tphy-v2";
+WIP: A commandline test case patch for verifying the correct behaviour
+of inline ECC including partial case. Will add the patch in v2, for now
+repeated boot tests on the affected platforms as well as internal
+memtester runs stand as testing.
+
+Boot logs (J721S2): https://gist.github.com/nehamalcom/e5a76bece133c1ec716e2ed94d60ce74
+
+Neha Malcom Francis (8):
+  k3-ddr.c: Remove unwanted header files
+  ram: k3-ddrss: Use DDR address instead of system address for
+    ecc_regions
+  ram: k3-ddrss: Add comment about ecc_reserved_space
+  ram: k3-ddrss: Add support for a partial inline ECC region
+  ram: k3-ddrss: Add CONFIG_K3_MULTI_DDR
+  ram: k3-ddrss: Add support for number of controllers under MSMC
+  ram: k3-ddrss: Add support for MSMC calculation of DDR inline ECC
+    regions
+  ram: k3-ddrss: Add support for partial inline ECC in multi-DDR systems
+
+ arch/arm/mach-k3/k3-ddr.c       |   1 -
+ board/ti/common/k3-ddr.c        |   1 -
+ drivers/ram/Kconfig             |  10 ++
+ drivers/ram/k3-ddrss/k3-ddrss.c | 227 ++++++++++++++++++++++++++++++--
+ 4 files changed, 226 insertions(+), 13 deletions(-)
+
 -- 
-2.47.1
+2.34.1
 
