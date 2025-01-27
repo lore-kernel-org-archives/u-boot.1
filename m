@@ -4,73 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 946B1C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 21:58:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6E3C0218A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 22:06:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2C8E81877;
-	Mon, 27 Jan 2025 22:58:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 010E1812C8;
+	Mon, 27 Jan 2025 23:06:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738015119;
-	bh=UxMLCc5RLQv2UBnTtGOlP0o23bL143mDObva94Y0Nbs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=HGzo37OrVtW1nRMXPaIjfUoV46UkedRvi8+9GkbFnWNcPqLk1TzeV65cwpoGPr03C
-	 yQBkKpbuGKFEBWPp1hdzMs3nOTpd9QTGv6MuYcHyiY3z59l6AAkSV4y/zFgVBcOb93
-	 Glh7kDavhND/DQja9t2hGdgjAwI64dgn/n0tOIhcdhITkZ2bEbbY4kszya+gdaRbUm
-	 JV8Y8hGkAwiagpZzuMtwHvS/nfowdzUpHNwDXoF8CK4M6ugg62tf+1zw/URy5qDBUp
-	 SNzLFhQ+l0iJAqeP5cx2CZfhg8WybIn7LFRqK55ceDtK0C42cvIxmw/VTP7Orbl1C/
-	 yNBsPH39ycYjA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 91EA8812BB; Mon, 27 Jan 2025 22:58:38 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7E40812BB
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 22:58:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="N3JqmH2y"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1E01C103802C1; Mon, 27 Jan 2025 22:58:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738015115;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=UxMLCc5RLQv2UBnTtGOlP0o23bL143mDObva94Y0Nbs=;
- b=N3JqmH2yKgdtCIi5077T2a4RcYKVmAKm1BcFyRAyt+xKLgWL95LmiQ3MwXpcWpPXsMyGIL
- ZfaccNm6STwXoB+ivrp1hkvY2EnEn55e1msVxl54QS/acxJR5vdJarHd9g1A7rs9oeXtNT
- nsCezlLcbhuQl7iARpLj9dUMytWwrBju5eyQw/KQmby6y37yED9f9KtQSwq/uW94BGS0mo
- oIH+epduheLdJveeS23TYzlmNOP4jCIafTXoEAnexI5RD+xODIg46/a+VufDpL+aDYsitX
- D8KpXL+G19OKTvlfkuX9cethhKmZDKz7nGUqhG64Ms+5nTXmeBsYpsKYY6/6qA==
-Message-ID: <c0f1fb8b-6948-4a9a-814a-2b864fe56f7b@denx.de>
-Date: Mon, 27 Jan 2025 22:57:44 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="l8jK0C1h";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BEA5381727; Mon, 27 Jan 2025 23:06:18 +0100 (CET)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id 7250A812BB
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 23:06:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
+Received: from LAPTOP-HS0II3UH.corp.microsoft.com (unknown [167.220.26.7])
+ by linux.microsoft.com (Postfix) with ESMTPSA id 6E64D203716C;
+ Mon, 27 Jan 2025 14:06:15 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 6E64D203716C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1738015575;
+ bh=TvSbca1Kcb8XR25oBXMjWn5KgDTqLUMRfGmfYFBByxU=;
+ h=From:To:Cc:Subject:Date:From;
+ b=l8jK0C1h2uy/0+2StOdJoVHx5TB0WYP/0fzyLOL3CW65bzhVDPj6GXrwR3GQU92An
+ FUnejYmfXyhdok/4zcRrChwoju6ZUyZP91WQcgF+SvOktuHtx7Bm8OANbqVnnL/Fyc
+ zsQPbo9msPtfIuI9bDF1qpfnx/m5ZEeULGrG3uls=
+From: seanedmond@linux.microsoft.com
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com,
+	rfried.dev@gmail.com,
+	trini@konsulko.com
+Subject: [PATCH] net: dhcp6: Send DHCPv6 using multicast MAC
+Date: Mon, 27 Jan 2025 14:06:13 -0800
+Message-Id: <20250127220613.11518-1-seanedmond@linux.microsoft.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 5/8] usb: cdns: starfive: Add cdns USB driver
-To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>
-References: <20250123010112.78924-1-minda.chen@starfivetech.com>
- <20250123010112.78924-6-minda.chen@starfivetech.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250123010112.78924-6-minda.chen@starfivetech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,26 +61,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/23/25 2:01 AM, Minda Chen wrote:
-> Add Starfive cdns USB3 wrapper driver.
+From: Sean Edmond <seanedmond@microsoft.com>
 
-Please replace 'cdns' with Cadence .
+In IPv6, the broadcast MAC address is not used.  Instead, it should use
+the multicast address (see RFC RFC2464).
 
-[...]
+Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+---
+ net/dhcpv6.c | 12 ++++++------
+ net/dhcpv6.h |  8 +++++++-
+ 2 files changed, 13 insertions(+), 7 deletions(-)
 
-> +#include <asm/io.h>
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/bitops.h>
-> +#include <linux/usb/otg.h>
-> +#include <reset.h>
-> +#include <regmap.h>
-> +#include <syscon.h>
-> +#include <malloc.h>
+diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+index 54619ee6983..984a64a4ff3 100644
+--- a/net/dhcpv6.c
++++ b/net/dhcpv6.c
+@@ -29,6 +29,10 @@
+ int updated_sol_max_rt_ms = SOL_MAX_RT_MS;
+ /* state machine parameters/variables */
+ struct dhcp6_sm_params sm_params;
++/* DHCPv6 all server IP6 address */
++const struct in6_addr dhcp_mcast_ip6 = DHCP6_MULTICAST_ADDR;
++/* IPv6 multicast ethernet address */
++const u8 net_dhcp6_mcast_ethaddr[6] = IPV6_ALL_NODE_ETH_ADDR(dhcp_mcast_ip6);
+ 
+ static void dhcp6_state_machine(bool timeout, uchar *rx_pkt, unsigned int len);
+ 
+@@ -171,7 +175,6 @@ static int dhcp6_add_option(int option_id, uchar *pkt)
+  */
+ static void dhcp6_send_solicit_packet(void)
+ {
+-	struct in6_addr dhcp_bcast_ip6;
+ 	int len = 0;
+ 	uchar *pkt;
+ 	uchar *dhcp_pkt_start_ptr;
+@@ -200,9 +203,8 @@ static void dhcp6_send_solicit_packet(void)
+ 	len = pkt - dhcp_pkt_start_ptr;
+ 
+ 	/* send UDP packet to DHCP6 multicast address */
+-	string_to_ip6(DHCP6_MULTICAST_ADDR, sizeof(DHCP6_MULTICAST_ADDR), &dhcp_bcast_ip6);
+ 	net_set_udp_handler(dhcp6_handler);
+-	net_send_udp_packet6((uchar *)net_bcast_ethaddr, &dhcp_bcast_ip6,
++	net_send_udp_packet6((uchar *)net_dhcp6_mcast_ethaddr, (struct in6_addr *)&dhcp_mcast_ip6,
+ 			     PORT_DHCP6_S, PORT_DHCP6_C, len);
+ }
+ 
+@@ -218,7 +220,6 @@ static void dhcp6_send_solicit_packet(void)
+  */
+ static void dhcp6_send_request_packet(void)
+ {
+-	struct in6_addr dhcp_bcast_ip6;
+ 	int len = 0;
+ 	uchar *pkt;
+ 	uchar *dhcp_pkt_start_ptr;
+@@ -252,9 +253,8 @@ static void dhcp6_send_request_packet(void)
+ 	len = pkt - dhcp_pkt_start_ptr;
+ 
+ 	/* send UDP packet to DHCP6 multicast address */
+-	string_to_ip6(DHCP6_MULTICAST_ADDR, strlen(DHCP6_MULTICAST_ADDR), &dhcp_bcast_ip6);
+ 	net_set_udp_handler(dhcp6_handler);
+-	net_send_udp_packet6((uchar *)net_bcast_ethaddr, &dhcp_bcast_ip6,
++	net_send_udp_packet6((uchar *)net_dhcp6_mcast_ethaddr, (struct in6_addr *)&dhcp_mcast_ip6,
+ 			     PORT_DHCP6_S, PORT_DHCP6_C, len);
+ }
+ 
+diff --git a/net/dhcpv6.h b/net/dhcpv6.h
+index 65c8e4c71d3..d41a3c30615 100644
+--- a/net/dhcpv6.h
++++ b/net/dhcpv6.h
+@@ -40,7 +40,13 @@
+ /* vendor-class-data to send in vendor clas option */
+ #define DHCP6_VCI_STRING	"U-Boot"
+ 
+-#define DHCP6_MULTICAST_ADDR	"ff02::1:2"	/* DHCP multicast address */
++/*
++ * All-DHCPv6 server multicast address
++ */
++#define DHCP6_MULTICAST_ADDR { { { 0xFF, 0x02, 0x00, 0x00, \
++								   0x00, 0x00, 0x00, 0x00, \
++								   0x00, 0x00, 0x00, 0x00, \
++								   0x00, 0x01, 0x00, 0x02 } } }
+ 
+ /* DHCP6 States supported */
+ enum dhcp6_state {
+-- 
+2.34.1
 
-Please keep the list sorted.
-
-With that fixed:
-
-Reviewed-by: Marek Vasut <marex@denx.de>
