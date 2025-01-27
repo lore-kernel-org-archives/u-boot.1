@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB644C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56587C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:10:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61041807E4;
-	Mon, 27 Jan 2025 11:09:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id C4A29811A7;
+	Mon, 27 Jan 2025 11:10:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="wo1kKR4o";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="XUP25XZw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F19B80FF7; Mon, 27 Jan 2025 11:09:47 +0100 (CET)
-Received: from out203-205-221-240.mail.qq.com (out203-205-221-240.mail.qq.com
- [203.205.221.240])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6029D811A6; Mon, 27 Jan 2025 11:10:22 +0100 (CET)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 073078076E
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:09:42 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1737972574; bh=v7mueFNrR16nJfcM/fhqbMoGyGtV2rsLbbVb33caUbI=;
- h=In-Reply-To:References:From:To:Cc:Subject:Date;
- b=wo1kKR4okKZWcmf3f/d5wMgbc40hC7IZ/uSqOZLuYDGWwov1GFq09VsIdhoxVd3Nj
- N78kBEQ/1D2/dVjo4xaE5kknY8+LCH5n58WCyK1X/YX3WzhKbIbFrhF1TE77r7SagW
- +k1LYPmoyV8HPVeCNomvCQy5VnGxgU6wWdZqA/ew=
-X-QQ-FEAT: oHWrrGTW1dCni6VLWI7Xi3lwP5c1dnPf
-X-QQ-SSF: 00000000000000F0000000000000
-X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
-X-QQ-XMAILINFO: NfABDCW8p0TjfqWNS4+cuEPDzxePAuMFm1YAnDkCZrhgnO5YyiyL+uXqVFGzVX
- avQEh35fi4ExlRAPWcsH4blj815BEqZHR6yh7CW7YTHRswQtZoR/B31HjqiDDTLYA66WJLuPkPoQZ
- LRjEe227/H/YkHaNQPGePrRVNi81kAiM2QzAwTTQr3XO1ZiuIdu1vh9e6IQkNniquBMEwbarSb3wN
- eIBLl9W7E7twkqiPnC1eSf86GDnzgCGmt+0PxEvyHL3I7JpZEKotU/4Tji+clUb7y3MG8blOYqRNO
- PVNDheDMv/RPwITdiGZ72oEHhEme7nCXePWsWspzB37p7EDWC/WBIZAXmgvqaZsXTyIsG83YeNs/I
- t91f6MLOEvFjRW7LDoSOEP4dXKTV102NUVFVOnTOLU//Ne6DHIciRg6othfz7tUWBn1cu0OOOXtge
- gPXdyw6dQDNY1cRBoMyNMhVYNQy2UC/1Y+qzhFc792GTH5jXtDUBAWRCNWW2kOf/Fo0JI8SP2Yerd
- yaEs2YkZvjlyryoizrcWsrUL3mqSrU1igeygIe+aPGRuCdx7xqVbJMoGtqFTjec8g4wmUhWbpeimW
- f+zIhqS4BCbS8eexzg/U3T4taNV3IYmM3RFCFUgTmmubVCbam2W6//jf5K4y3GlL879U1RQeTrhBg
- 7XQQ5JdArVeq25GEKyPXFHctGgen7VQxzHqYgm2ujWt2oLiRVafkcz3YrrEvFq99Y8XpMY36vuON/
- oGQQISvr6ZsCnNbBSTCYsKon1xeygJ365SrSD71bPqgGVA/9Ccze9yQ/FNhsMwDuSUSr950qpCIDi
- Sf0KnOlZy4XklVWRLl67a4OkyRp3c1ENh2ZaIuPCYDz07rVkLNN3/EXGILJWqri4q7SJE3gcl+3s+
- 4cPWuVtrqYCR2kKjIxfdB+UEVWHZI0B9QL4PHla4+QjYlcLruUwkwnEG1Td19UAbbdIvGCVfSHva9
- D8YF3NW2hNSbElQMQyZUbM9WKZVD1TPjVn2s1Cmyl1mXUtgnpFUG2pv8Uwy7PSJ47mm8J21g==
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 255.144.14.160
-In-Reply-To: <20250127064936.43539-1-heinrich.schuchardt@canonical.com>
-References: <20250127064936.43539-1-heinrich.schuchardt@canonical.com>
-X-QQ-STYLE: 
-X-QQ-mid: webmail864t1737972573t1995656
-From: "=?gb18030?B?u8bA+9HH?=" <1425075683@qq.com>
-To: "=?gb18030?B?SGVpbnJpY2ggU2NodWNoYXJkdA==?="
- <heinrich.schuchardt@canonical.com>,
- "=?gb18030?B?VG9tIFJpbmk=?=" <trini@konsulko.com>
-Cc: "=?gb18030?B?dS1ib290?=" <u-boot@lists.denx.de>,
- "=?gb18030?B?SGVpbnJpY2ggU2NodWNoYXJkdA==?="
- <heinrich.schuchardt@canonical.com>
-Subject: =?gb18030?B?u9i4tKO6W1BBVENIIDEvMV0gZXhhbXBsZXMvYXBp?=
- =?gb18030?B?OiBpbXByb3ZlIGRldGVybWluYXRpb24gb2YgTE9B?=
- =?gb18030?B?RF9BRERS?=
-Mime-Version: 1.0
-Date: Mon, 27 Jan 2025 18:09:33 +0800
-X-Priority: 3
-Message-ID: <tencent_F40E3EB2650593002161864C46F8BCF4D00A@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ by phobos.denx.de (Postfix) with ESMTPS id EAA5F80FF7
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:10:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1152fbf31=Manikandan.M@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1737972620; x=1769508620;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=OiRGm5f256EVN0SjMAialkO7JagwpX0SEhi83gAGXFc=;
+ b=XUP25XZwg/fTyEP4EDMM7Fjne9bd8ck8nwCqi3WKgwSVZmo0ymwZxIhQ
+ Q2W0qlmBto5uAnBltj1PeMwKP1CvGw5mvwXjghdeRyI003bUmTBeeV5wQ
+ nUAz7sFEAThjAtDpDVkSkBa17iMrBePSmiB7E0XTclxrzFf8Onid08cPE
+ LjKiWvX8boNyfUr45ZbVsX8UlX0b5+w1Q3PMFhRAkp0AlPu7AF1iTMd5C
+ ustnSk4kTrIGATUXo197t7zZ28Ed5EWnVWY9g1ERKNEEhulI0uja5UMrK
+ 94TVvRs/BWypBZdgyMWLHOhXFo0If7hvGr0lh0JCgB/c26lenMsOMdel1 A==;
+X-CSE-ConnectionGUID: mWwd5UYvQK6ftQELQTXH+Q==
+X-CSE-MsgGUID: m+MeOcNGTI+Z4YmW7bk/9g==
+X-IronPort-AV: E=Sophos;i="6.13,238,1732604400"; d="scan'208";a="204473296"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 27 Jan 2025 03:10:18 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Mon, 27 Jan 2025 03:09:40 -0700
+Received: from che-lt-i67131.microchip.com (10.10.85.11) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Mon, 27 Jan 2025 03:09:37 -0700
+From: Manikandan Muralidharan <manikandan.m@microchip.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>, <pbrobinson@gmail.com>,
+ <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH 1/7] ARM: dts: at91: sam9x60: Add AIC node
+Date: Mon, 27 Jan 2025 15:39:24 +0530
+Message-ID: <20250127100930.108377-2-manikandan.m@microchip.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250127100930.108377-1-manikandan.m@microchip.com>
+References: <20250127100930.108377-1-manikandan.m@microchip.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,76 +81,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8mbmJzcDtIZWlucmljaA0KDQoNCkkgbW9kaWZpZWQgdGhlIGNvZGUgZm9yIGFybTMy
-IGFyY2hpdGVjdHVyZS4gWW91IG1heSBiZSB1c2luZyBhbiBBUk02NCBhcmNoaXRlY3R1cmUu
-IFRha2UgYSBsb29rIGF0IHRoZSBhcmNoaXRlY3R1cmUgdXNlZC4NCg0KDQp2ZXJzaW9uIG9m
-IFUtQm9vdCAoY29tbWl0IGluIGdpdCk6Jm5ic3A7DQombmJzcDsgJm5ic3A7IGQ4YTcxMDBk
-NjU4ZWIyMDFmYTBlOTU1NjY3ZmRmZjI5OGRiMzE5NDUNCg0Kb3BlcmF0aW5nIHN5c3RlbSBh
-bmQgYXJjaGl0ZWN0dXJlOg0KJm5ic3A7ICZuYnNwOyA1LjE1LjAtMTMwLWdlbmVyaWMgeDg2
-XzY0DQoNCmluc3RhbGxlZCB2ZXJzaW9uIG9mIGdjYyBhbmQgYmludXRpbHMNCiZuYnNwOyAm
-bmJzcDsmbmJzcDtnY2MgdmVyc2lvbiA5LjQuMCAoVWJ1bnR1IDkuNC4wLTF1YnVudHUxfjIw
-LjA0LjMpDQombmJzcDsgJm5ic3A7IEdOVSBsZCAoR05VIEJpbnV0aWxzIGZvciBVYnVudHUp
-IDIuMzQNCiZuYnNwOw0KdXNlZCBkZWZjb25maWcNCiZuYnNwOyAmbmJzcDsmbmJzcDtzdG0z
-Mmg3NTAtYXJ0LXBpX2RlZmNvbmZpZw0KdXNlZCBjb21tYW5kcyBmb3IgYnVpbGRpbmcNCiZu
-YnNwOyAmbmJzcDsmbmJzcDttYWtlIENST1NTX0NPTVBJTEU9YXJtLW5vbmUtZWFiaS0gQVJD
-SD1hcm0gc3RtMzJoNzUwLWFydC1waV9kZWZjb25maWcNCiZuYnNwOyAmbmJzcDsgbWFrZSBD
-Uk9TU19DT01QSUxFPWFybS1ub25lLWVhYmktIEFSQ0g9YXJtIG1lbnVjb25maWcmbmJzcDsj
-IHRvIGFkZCBDT05GSUdfQVBJPXksIENPTkZJR19FWEFNUExFUz15DQombmJzcDsgJm5ic3A7
-Jm5ic3A7bWFrZSBDUk9TU19DT01QSUxFPWFybS1ub25lLWVhYmktIEFSQ0g9YXJtIC1qIDEy
-DQoNCg0KaHR0cHM6Ly9kZXZlbG9wZXIuYXJtLmNvbS9kb2N1bWVudGF0aW9uL2RlbjAwMTMv
-ZC9BcHBsaWNhdGlvbi1CaW5hcnktSW50ZXJmYWNlcy9Qcm9jZWR1cmUtQ2FsbC1TdGFuZGFy
-ZA0KbGlzdHMgSVAsIFNQLCBQQyBhcyBhbGlhc2VzIGZvciByZWdpc3RlcnMgUjEyLCBSMTMs
-IFIxNS4NCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0KDQpJIGhhdmUgdHJpZWQgdXNpbmcgUjEyLCBSMTMsIFIxNSBhbmQg
-dGhlIGVycm9yIG1lc3NhZ2UgaXMgYXMgZm9sbG93czoNCiZuYnNwOyAmbmJzcDsmbmJzcDtl
-eGFtcGxlcy9hcGkvY3J0MC5TOjMyOiBFcnJvcjogbG8gcmVnaXN0ZXIgcmVxdWlyZWQgLS0g
-YGxkciByMTIsPXNlYXJjaF9oaW50Jw0KJm5ic3A7ICZuYnNwOyBleGFtcGxlcy9hcGkvY3J0
-MC5TOjM0OiBFcnJvcjogbG8gcmVnaXN0ZXIgcmVxdWlyZWQgLS0gYHN0ciBSMTMsW3IxMl0n
-DQombmJzcDsgJm5ic3A7IGV4YW1wbGVzL2FwaS9jcnQwLlM6NDA6IEVycm9yOiBsbyByZWdp
-c3RlciByZXF1aXJlZCAtLSBgbGRyIHIxMiw9c3lzY2FsbF9wdHInDQombmJzcDsgJm5ic3A7
-IGV4YW1wbGVzL2FwaS9jcnQwLlM6NDE6IEVycm9yOiBsbyByZWdpc3RlciByZXF1aXJlZCAt
-LSBgbGRyIHIxNSxbcjEyXScNCg0KDQpBcyB0aGUgZXJyb3IgbWVzc2FnZSBzdWdnZXN0cywg
-eW91IG5lZWQgdG8gdXNlIGEgbG93IHJlZ2lzdGVyIChsbyByZWdpc3RlciksIGFuZCByMTIg
-YW5kIHNpbWlsYXIgcmVnaXN0ZXJzIGJlbG9uZyB0byB0aGUgaGlnaCByZWdpc3RlciAoaGkg
-cmVnaXN0ZXIpIGNhdGVnb3J5Lg0KDQoNCkJlc3QgcmVnYXJkcw0KDQpMaVlhDQotLS0tLS0t
-LS0tLS0tLS0tLS0mbmJzcDvUrcq808q8/iZuYnNwOy0tLS0tLS0tLS0tLS0tLS0tLQ0Kt6K8
-/sjLOiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICJIZWlucmljaCBTY2h1Y2hhcmR0IiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIDxoZWlucmljaC5zY2h1Y2hhcmR0QGNhbm9uaWNhbC5jb20mZ3Q7Ow0K
-t6LLzcqxvOQ6Jm5ic3A7MjAyNcTqMdTCMjfI1SjQx8ba0rspIM/CzucyOjQ5DQrK1bz+yMs6
-Jm5ic3A7IlRvbSBSaW5pIjx0cmluaUBrb25zdWxrby5jb20mZ3Q7Ow0Ks63LzTombmJzcDsi
-u8bA+9HHIjwxNDI1MDc1NjgzQHFxLmNvbSZndDs7InUtYm9vdCI8dS1ib290QGxpc3RzLmRl
-bnguZGUmZ3Q7OyJIZWlucmljaCBTY2h1Y2hhcmR0IjxoZWlucmljaC5zY2h1Y2hhcmR0QGNh
-bm9uaWNhbC5jb20mZ3Q7Ow0K1vfM4jombmJzcDtbUEFUQ0ggMS8xXSBleGFtcGxlcy9hcGk6
-IGltcHJvdmUgZGV0ZXJtaW5hdGlvbiBvZiBMT0FEX0FERFINCg0KDQoNClRoZSBjdXJyZW50
-IGxvYWQgYWRkcmVzcyBmb3IgdGhlICdkZW1vJyBiaW5hcnkgZG9lcyBub3Qgd29yayBmb3IN
-CnFlbXVfYXJtX2RlZmNvbmZpZy4NCg0KVGhlIHN1aXRhYmlsaXR5IG9mIGFuIGFkZHJlc3Mg
-dG8gbG9hZCBhbiBFTEYgYmluYXJ5IGFuZCBydW4gaXQgZG9lcw0Kbm90IG9ubHkgZGVwZW5k
-IG9uIHRoZSBhcmNoaXRlY3R1cmUgYnV0IGFsc28gb24gdGhlIG1lbW9yeSBsYXlvdXQgb2YN
-CnRoZSBib2FyZC4NCg0KT24gbW9zdCBib2FyZHMgd2UgY2FuIGFzc3VtZSB0aGF0IDggTWlC
-IG9mIG1lbW9yeSBpcyBhdmFpbGFibGUgYWJvdmUNCiRsb2FkYWRkci4gU28gJGxvYWRhZGRy
-ICsgMHg0MDAwMDAgc2hvdWxkIHdvcmsgdGhlcmUuDQoNClNpZ25lZC1vZmYtYnk6IEhlaW5y
-aWNoIFNjaHVjaGFyZHQgPGhlaW5yaWNoLnNjaHVjaGFyZHRAY2Fub25pY2FsLmNvbSZndDsN
-Ci0tLQ0KJm5ic3A7ZXhhbXBsZXMvYXBpL01ha2VmaWxlIHwgMjMgKysrLS0tLS0tLS0tLS0t
-LS0tLS0tLS0NCiZuYnNwOzEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDIwIGRl
-bGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvZXhhbXBsZXMvYXBpL01ha2VmaWxlIGIvZXhh
-bXBsZXMvYXBpL01ha2VmaWxlDQppbmRleCA3MjJjN2U0NTkwNC4uYmU5N2I4MDE1YmQgMTAw
-NjQ0DQotLS0gYS9leGFtcGxlcy9hcGkvTWFrZWZpbGUNCisrKyBiL2V4YW1wbGVzL2FwaS9N
-YWtlZmlsZQ0KQEAgLTUsMjYgKzUsOSBAQA0KJm5ic3A7IyBQcm92aWRlIHN5bWJvbCBBUElf
-QlVJTEQgdG8gc2lnbmFsIHRoYXQgdGhlIEFQSSBleGFtcGxlIGlzIGJlaW5nIGJ1aWx0Lg0K
-Jm5ic3A7S0JVSUxEX0NQUEZMQUdTICs9IC1EQVBJX0JVSUxEDQombmJzcDsNCi1pZmVxICgk
-KEFSQ0gpLHBvd2VycGMpDQotTE9BRF9BRERSID0gMHg0MDAwMA0KLWVuZGlmDQotaWZlcSAo
-JChBUkNIKSxhcm0pDQotaWZkZWYgQ09ORklHXzY0QklUDQotTE9BRF9BRERSID0gMHg0MDQw
-MDAwMA0KLWVsc2UNCi1MT0FEX0FERFIgPSAweDEwMDAwMDANCi1lbmRpZg0KLWVuZGlmDQot
-aWZlcSAoJChBUkNIKSxtaXBzKQ0KLWlmZGVmIENPTkZJR182NEJJVA0KLUxPQURfQUREUiA9
-IDB4ZmZmZmZmZmY4MDIwMDAwMA0KLWVsc2UNCi1MT0FEX0FERFIgPSAweDgwMjAwMDAwDQot
-ZW5kaWYNCi1lbmRpZg0KLWlmZXEgKCQoQVJDSCkscmlzY3YpDQotTE9BRF9BRERSID0gMHg4
-NDAwMDAwMA0KLWVuZGlmDQorIyBFbnZpcm9ubWVudCB2YXJpYWJsZSBsb2FkYWRkciBpcyBz
-ZXQgZnJvbSBDT05GSUdfU1lTX0xPQURfQUREUi4NCisjIFJ1biB0aGUgZXhhbXBsZXMgNCBN
-aUIgYWJvdmUgdGhpcyBhZGRyZXNzLg0KK0xPQURfQUREUjo9JHtzaGVsbCBwcmludGYgMHgl
-WCAkJCgoICQoQ09ORklHX1NZU19MT0FEX0FERFIpICsgMHg0MDAwMDAgKSl9DQombmJzcDsN
-CiZuYnNwOyMgUmVzdWx0aW5nIEVMRiBhbmQgYmluYXJ5IGV4ZWN0dWFibGVzIHdpbGwgYmUg
-bmFtZWQgZGVtbyBhbmQgZGVtby5iaW4NCiZuYnNwO2V4dHJhLXkgPSBkZW1vDQotLSANCjIu
-NDcuMQ==
+Add Advanced Interrupt Controller node and define it as interrupt
+parent in sam9x60 SoC DT.
+
+Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+---
+ arch/arm/dts/sam9x60.dtsi | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+index 3b684fc63d5..fdc3ad0fdcb 100644
+--- a/arch/arm/dts/sam9x60.dtsi
++++ b/arch/arm/dts/sam9x60.dtsi
+@@ -17,6 +17,7 @@
+ /{
+ 	model = "Microchip SAM9X60 SoC";
+ 	compatible = "microchip,sam9x60";
++	interrupt-parent = <&aic>;
+ 
+ 	aliases {
+ 		serial0 = &dbgu;
+@@ -199,6 +200,14 @@
+ 				reg = <0xffffea00 0x100>;
+ 			};
+ 
++			aic: interrupt-controller@fffff100 {
++				compatible = "microchip,sam9x60-aic";
++				reg = <0xfffff100 0x100>;
++				#interrupt-cells = <3>;
++				interrupt-controller;
++				atmel,external-irqs = <31>;
++			};
++
+ 			dbgu: serial@fffff200 {
+ 				compatible = "atmel,at91sam9260-dbgu", "atmel,at91sam9260-usart";
+ 				reg = <0xfffff200 0x200>;
+-- 
+2.25.1
+
