@@ -4,55 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81317C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:32:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECA6CC02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:52:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EEDC811F7;
-	Mon, 27 Jan 2025 11:32:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 512B381119;
+	Mon, 27 Jan 2025 11:52:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1191B811CA; Mon, 27 Jan 2025 11:32:34 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 38EE781196
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:32:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: s7DHnoQQR265UxBiBLZZDQ==
-X-CSE-MsgGUID: 3fMZGePdTsyU6MQ0O1uKcw==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 27 Jan 2025 19:32:27 +0900
-Received: from [10.24.1.191] (unknown [10.24.1.191])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 7D80341E9502;
- Mon, 27 Jan 2025 19:32:14 +0900 (JST)
-Message-ID: <dc02c0b8-55d3-49d7-8aae-012bad61b183@bp.renesas.com>
-Date: Mon, 27 Jan 2025 10:32:13 +0000
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p54/UyjU";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 22CA28111F; Mon, 27 Jan 2025 11:52:50 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3403981115
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:52:45 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-vm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50RAqeww967298
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 27 Jan 2025 04:52:40 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1737975160;
+ bh=KRsGJJneXCGzfOkOwReaqzMI277i955UDM/gi/UOeV8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=p54/UyjUpA7Dl084tpwLAu5KItC+wzHnzVjQ1tUBXmzWHf9Yw/QxyLyhZt6N78ESh
+ trerBgKCHURa622FR+b2Q6tnJk/o/GFnjZKwSkOYIH6Jgsy8u/lCd2zxJNMz54dyaf
+ 1t4zazM3bW8MNamflKtGxrvAkmXm9HjlQ1ETsptY=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50RAqePa070169
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 27 Jan 2025 04:52:40 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
+ Jan 2025 04:52:40 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 27 Jan 2025 04:52:40 -0600
+Received: from [10.24.69.179] ([10.24.69.179])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50RAqbGN092223;
+ Mon, 27 Jan 2025 04:52:37 -0600
+Message-ID: <7be0605f-b986-ca34-4b83-7338329afac4@ti.com>
+Date: Mon, 27 Jan 2025 16:22:36 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
- <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
- <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------0JwmNyJo4B4HHOUT0YlKi14r"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [EXTERNAL] Re: Proposal for a New Command to U-Boot Fuse
+ Programming
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+CC: <sjg@chromium.org>, <angus@akkea.ca>, <u-boot@lists.denx.de>,
+ <vigneshr@ti.com>, <kamlesh@ti.com>, <d-gole@ti.com>,
+ <k-malarvizhi@ti.com>, <a-parmar1@ti.com>, <khasim@ti.com>
+References: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
+ <20250106222314.GF3476@bill-the-cat>
+ <5e166f95-681a-8a96-0d8c-033c36d47d5a@ti.com>
+ <20250122172209.GN3476@bill-the-cat>
+ <9cf9590b-e9ba-6d46-dd4d-80a71765e062@ti.com>
+ <20250124192956.GV60249@bill-the-cat>
+From: Harsha Vardhan V M <h-vm@ti.com>
+In-Reply-To: <20250124192956.GV60249@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,161 +89,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------0JwmNyJo4B4HHOUT0YlKi14r
-Content-Type: multipart/mixed; boundary="------------qQo1xdoF1q9DpFiXvd90qJvZ";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Message-ID: <dc02c0b8-55d3-49d7-8aae-012bad61b183@bp.renesas.com>
-Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
-References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
- <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
- <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
-In-Reply-To: <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
 
---------------qQo1xdoF1q9DpFiXvd90qJvZ
-Content-Type: multipart/mixed; boundary="------------cqqgNUOqm6nEwAeE39q4ijVa"
 
---------------cqqgNUOqm6nEwAeE39q4ijVa
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Hi Marek,
-
-On 25/01/2025 12:56, Marek Vasut wrote:
-> On 1/21/25 3:38 PM, Paul Barker wrote:
->> On 18/01/2025 06:53, Marek Vasut wrote:
->>> Introduce mdio_init() split off from mdio_alloc(), which is used
->>> to initialize already allocated struct mii_dev.
+On 25/01/25 00:59, Tom Rini wrote:
+> On Fri, Jan 24, 2025 at 02:31:15PM +0530, Harsha Vardhan V M wrote:
+>>
+>>
+>> On 22/01/25 22:52, Tom Rini wrote:
+>>> On Fri, Jan 10, 2025 at 11:12:47AM +0530, Harsha Vardhan V M wrote:
+>>>>
+>>>>
+>>>> On 07/01/25 03:53, Tom Rini wrote:
+>>>>> On Mon, Jan 06, 2025 at 12:06:25PM +0530, Harsha Vardhan V M wrote:
+>>>>>
+>>>>>> I would like to propose a new command for U-Boot's fuse programming
+>>>>>> functionality to address the challenges posed by the current implementation.
+>>>>>> While the existing fuse prog command works well for programming individual
+>>>>>> fuse values, it becomes cumbersome especially when dealing with large-scale
+>>>>>> programming requirements.
+>>>>>>
+>>>>>> Current Command: fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
+>>>>>>
+>>>>>> This command programs one or more fuse words starting from a specific <bank>
+>>>>>> and <word> with the hex values given as input.
+>>>>>>
+>>>>>> While functional, it lacks the efficiency and robustness needed for
+>>>>>> programming a significant number of fuses or handling structured fuse
+>>>>>> configuration data. Repeatedly specifying values for each fuse bank and word
+>>>>>> is not only time-consuming but also prone to errors during manual input or
+>>>>>> scripting. This approach does not leverage the ability to process
+>>>>>> pre-structured data in memory. For users with complex programming needs, the
+>>>>>> current method becomes an obstacle rather than a tool.
+>>>>>>
+>>>>>> Proposed Command: fuse writebuff
+>>>>>
+>>>>> It would be good to provide some documentation links to the fuses that
+>>>>> you're wanting to deal with. What we have now works on a number of
+>>>>> diverse SoCs, even if for some cases it might be best to write a
+>>>>> script that's run rather than copy/paste things live. Any sort of new
+>>>>> mechanism needs to get feedback from users at other semiconductor
+>>>>> vendors to make sure it's generic enough for everyones needs. Thanks.
+>>>>>
+>>>>
+>>>> Hi Tom and Simon,
+>>>>
+>>>> The buffer is not a text file. It is a structure in memory. The buffer is
+>>>> structured to contain all necessary information for the fuse programming
+>>>> process. This can include metadata, fuse programming data etc. The exact
+>>>> structure of the buffer can determined by the command_id, which provides
+>>>> flexibility for supporting different use cases. The memory buffer is
+>>>> typically prepared in user-space code or a script and loaded in memory
+>>>> before invoking the fuse writebuff command. It is not stored as a text file
+>>>> or any other file format, as the command operates directly on memory
+>>>> addresses.
+>>>>
+>>>> Example of a buffer:
+>>>>
+>>>> struct fuse_buffer {
+>>>>       struct fuse_mpkh smpkh;
+>>>>       struct fuse_msv msv;
+>>>>       struct fuse_key_cnt key_cnt;
+>>>>       u8 buffer_hash[64];
+>>>> };
+>>>>
+>>>> This fuse_buffer struct will be loaded in memory containing all the
+>>>> necessary information for fuse programming.
+>>>>
+>>>> struct fuse_mpkh {
+>>>>       u8 mpkh[64]; // public key hash
+>>>>       u8 bch[8];
+>>>>       u32 attributes; // read-protect, write-protect, override, active flag
+>>>>       u32 reserved[2];
+>>>> };
+>>>> struct fuse_msv {
+>>>>       u32 msv_with_bch; //model specific value
+>>>>       u32 attributes;
+>>>>       u32 reserved[2];
+>>>> };
+>>>> struct fuse_key_cnt {
+>>>>       u32 key_cnt; //key count
+>>>>       u32 attributes;
+>>>>       u32 reserved[2];
+>>>> };
+>>>>
+>>>> -> eFUSE layout is abstract and isn't public as its programming and layout
+>>>> itself is security sensitive (it has authentication and decryption keys
+>>>> etc). So, fuse prog doesn't work as there is no "banks/offset" here.
+>>>> -> Platform Security Core running Secure SW exposes APIs through which these
+>>>> Keys and its attributes can be programmed. Whole content maybe encrypted for
+>>>> enhanced security on unsecure factory floor.
+>>>> -> There is a definite order in which these fields needs to be programmed.
+>>>>
+>>>> Its possible to break the struct into 32bit values and send them across but
+>>>> we would end up with ~30 odd fuse prog cmds which is inefficient and error
+>>>> prone.
+>>>> It would be hard on secure core to also ensure correctness of operations
+>>>> against all sorts of silly errors (such of accidentally skipping a word or
+>>>> mess up ordering) which can render Silicon unusable.
+>>>>
+>>>> So passing a opaque pointer with a command_id to Secure core is all that
+>>>> fuse cmd needs to do which is what writebuff supports.
+>>>>
+>>>> This can be extended to any vendor; It's just an opaque pointer handoff. I
+>>>> see at least one other vendor do it in custom way:
+>>>> arch/arm/mach-imx/cmd_dek.c which could benefit from this new cmd fuse
+>>>> writebuff.
+>>>>
+>>>> Here’s how the fuse writebuff command works in a typical flow:
+>>>> 1. Buffer Preparation: Vendors or developers create a complete buffer (e.g.,
+>>>> key.bin) containing all fuse programming data using vendor-specific scripts
+>>>> or tools and copied to SD card.
+>>>> 2. The buffer is loaded into memory using commands like:
+>>>> fatload mmc 1 0x80000000 key.bin
+>>>> 3. The fuse writebuff command passes the memory address (0x80000000) and
+>>>> command_id to the secure core:
+>>>> fuse writebuff <command_id> 0x80000000
+>>>> 4. The secure core receives the memory address as a pointer and validates,
+>>>> interprets it based on the command_id and then programs the fuses.
 >>>
->>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>> To summarize what we talked about on a call, I would like to see either:
+>>> 1) Work with arch/arm/mach-imx/cmd_dek.c and use that as the base of
+>>> some new generic command that deals with SoC-specific fuse
+>>> configurations that are handled via security processor.
+>> Hi Tom,
 >>
->> Replying here for the whole patch series...
+>> 1) I have looked at arch/arm/mach-imx/cmd_dek.c. The underlying
+>> implementation data structure is very specific to the vendor and how iMX
+>> devices are configured. The other vendors would also differ in their
+>> structures and SoC-specific fuse configurations, so I don't see a way to use
+>> this cmd_dek.c as the base and then abstract, create a new command out of
+>> it.
 >>
->> I like where we get to at the end of this series, but I don't like the=
+>>> OR
+>>> 2) Create a new command (that should be in cmd/ti/) for handling the K3
+>>> fuses, if we cannot make something abstract enough to handle this
+>>> concept on multiple vendors while having any sort of useful code re-use.
+>>
+>> 2) In this case, I would like to add the fuse writebuff command for TI’s K3
+>> architecture in cmd/ti/k3_fuse.c. And the command will look like
+>>
+>> fuse writebuff <command_id> <addr>
+>>
+>> However, I would still like to place the fuse writebuff command in
+>> cmd/fuse.c as a generic interface because the parameters command_id and an
+>> opaque pointer handoff provides a mechanism for the secure core to interpret
+>> buffers differently based on vendor or use case.
+> 
+> This I guess is my confusion. If we can't abstract cmd_dek.c and the
+> underlying i.MX specific parts to be supported in "fuse writebuff ..."
+> what is the non-K3 (or better still, non-TI) abstraction for what you're
+> proposing?
+> 
+Hi Tom,
+There are two types of fuse programming flows;
+a) Where the fuse layout is known to U-Boot -> fuse cmd options support 
+this flow today
+b) Where fuse cmd is abstracted from U-Boot -> needs a co-processor to 
+proxy the programming
 
->> intermediate state where the bb_miiphy_buses arrays still exist but ar=
-e
->> unused. I also think we should introduce a new ops struct so we're not=
+For b) the fuse layout is virtualized via a "vendor-specific" structure 
+which is generated offline (typically with GUI tools) and then loaded to 
+memory from a file on SD card . This pointer would then be relayed to Co 
+processor as a IPC call...
 
->> duplicating function pointers in each instance of struct bb_miiphy_bus=
-=2E
->>
->> I would prefer the following order of changes, let me know if you thin=
-k
->> this would be cleaner:
->>
->> 1) Introduce mdio_init().
->>
->> 2) Add mii member to struct bb_miiphy_bus.
->>
->> 3) Modify each driver to use the mii member of the appropriate struct
->>     bb_miiphy_bus instance, calling mdio_init() instead of mdio_alloc(=
-).
->>     At this point we're still using the instances in the statically
->>     allocated bb_miiphy_buses array.
->=20
-> Those instances might be rodata , so using them as read-write storage=20
-> does not necessarily work , does it ?
+So, whats common b/w cmd_dek.c and TI's fuse cmd -> loading opaque 
+struct to memory and then passing it to Secure co-processor along with 
+one or more command identifiers which will serve as hint for such secure 
+co-processor.
+"fuse writebuff" tries to abstract essentially this: take a cmd_id and 
+file pointer from fuse cmd and pass to it Vendor specific backend. I 
+know its not a lot but frontend tools used to flash the devices can 
+still make the most of it with simple vendor neutral abstractions than 
+needing to know custom command for each vendor.
 
-None of the instances in the current U-Boot code are marked as const,
-and the name field is already modified at runtime by each driver. So I
-don't think we need to worry about them being rodata.
+What cannot be abstracted is:
+a) struct of the file,
+b) common definition of command Id
+c) IPC mechanisms
+
+Unfortunately all the above 3 are tightly coupled to co-processor on the 
+other end which most likely is immutable for most SoCs...
 
 Thanks,
-
---=20
-Paul Barker
---------------cqqgNUOqm6nEwAeE39q4ijVa
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------cqqgNUOqm6nEwAeE39q4ijVa--
-
---------------qQo1xdoF1q9DpFiXvd90qJvZ--
-
---------------0JwmNyJo4B4HHOUT0YlKi14r
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ5dgrgUDAAAAAAAKCRDbaV4Vf/JGvcKa
-AQCni4Qpl9lqRHq7sQB67QJXbgvPDLudnM4eZ9WkzBKOogEAt27nk/2ZNJV/RT7BqqP6aOdFsi2e
-WjRUPdSLlkZxpgc=
-=OcqW
------END PGP SIGNATURE-----
-
---------------0JwmNyJo4B4HHOUT0YlKi14r--
+Harsha
