@@ -4,65 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2DFCC0218C
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 16:25:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14BA6C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 16:28:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C8F6812BB;
-	Mon, 27 Jan 2025 17:25:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5845C81292;
+	Mon, 27 Jan 2025 17:28:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fmW5yKCw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EC8djeQz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D195C81292; Mon, 27 Jan 2025 17:25:19 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2307812C8
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 17:25:15 +0100 (CET)
+ id E8BDE81417; Mon, 27 Jan 2025 17:03:58 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DFB7281292
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 17:03:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50RGPEe71820470
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 27 Jan 2025 10:25:14 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1737995114;
- bh=2Okgj87j0RC6E8shnY3OLSrIYEgLDpU/Aqr1+OzvZyo=;
- h=From:To:CC:Subject:Date;
- b=fmW5yKCwXkMM3SM/oSyVIxJiM2RytNhaP6iKK+ucywissOCuX+d41u2dbvbLqlDkd
- bwHRlWUpICDYaGr5tlovQyTWR6ZCk0QM0U9+DbG6jyukCuTQdQ8uBpM83VGAcbvMK8
- WEsnF0fjkoAIsbDPfJ/I8xoypYzQMUuYASjuhgQY=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50RGPDgL010763
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 27 Jan 2025 10:25:13 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
- Jan 2025 10:25:13 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 27 Jan 2025 10:25:13 -0600
-Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.104])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50RGPA3m086944; 
- Mon, 27 Jan 2025 10:25:10 -0600
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <trini@konsulko.com>, <a-limaye@ti.com>, <n-francis@ti.com>,
- <a-dutta@ti.com>, <vaishnav@ti.com>, <p-mantena@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH] configs: j7200_evm_a72_defconfig: Re-enable CONFIG_MUX_MMIO
-Date: Mon, 27 Jan 2025 21:53:33 +0530
-Message-ID: <20250127162509.965644-1-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-5401b7f7141so4125699e87.1
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:03:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1737993836; x=1738598636; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fQUXt6ZrJEglfv7S1MQenB5YG6nqB/C3HhxyzNqF/P8=;
+ b=EC8djeQzMPmS+618aeyWKzPJc+zgUpefi4b4MGZBjk3Adcs3qQrGboWWSiM4Qlbmnv
+ hC9L+hODcDoj6Lics6aOwSohgWZpnemSO8f7c0DPpoXm45VDu55DteLRREfywiFw07dF
+ iw/6035FBgZQwJhhZtmTRV5g4Oh3Mz9CPVzGGRdAlO2unmZm283RaXcF9jMhBptm4Fu+
+ i6HXtYQCndMdMsWbKg8vP7fW06a+xxnT9qtyWUfDqPeabeKErUZA2qYpGtHC1Kw3xta7
+ CtFE93DXIzvqZ7g38X3O5a2Er0pxaNhF05lby+GsZbjhGv73kvGHPlKcEeVptocWnQGl
+ qN/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737993836; x=1738598636;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fQUXt6ZrJEglfv7S1MQenB5YG6nqB/C3HhxyzNqF/P8=;
+ b=QCRF1BNmGLrHoa2yanMmOEbIHULvZ3HnjxK2ZnZamMUZepI07yr9LdCjHPa89R1NFG
+ +CX98huwHM7MriFG2MMd1vNTWt4BBENpabQtf8e3+zikt9m+knqzy7xZCk6CIrH8xZ+k
+ MZefiwnFlL2VRmuuzOdFi5HjZ2fxTpjnw1PvYRS/DCtqfrC0hWhX8ub7Ec+cs9PFEBYn
+ I4Q+VU22JYbzPYDlOzckYfqVL9fASHlj8HXHhXBfCquRS1DGg+bMet/vkl8jUQNuuGiw
+ cIN9X+OXDnR99q+r/16VEVVavek/T1whQvUuuKsbmHTGwOeX0UsInoZzn1HXmlVHIyMN
+ 5jFw==
+X-Gm-Message-State: AOJu0Ywn6PsPnxN0nM7TM9Chmkr4Pw8SpoNYusX9yQmafYRf0y4Bxp5s
+ /4Y9DUwnF16t5eknbsKLITeVB+OJH1uASHvKDTwwXnr/WZPhrpaDEm9WSA==
+X-Gm-Gg: ASbGncveSPVbLx9OGjxaq8qL+tSf28mk8jNP06DbGS5lLMB4Fvq3eZDpO70y5NBYWZg
+ At26+kdkjf/KBFb3w/5ckdkCZxdU+aTqxIzmN2eJuUdPWmvumspb7eTb9PepoF0fb7ZFqylxxiN
+ UtE83r+/YEQxwUIuGRMIB6Mi/AH/q5LJ+5HNAZqUlzKI1iNsf+41Wjwmm+Fc/TIUHj+uH7wsMZ7
+ rfotfsj45+sUF2RE2LcV1v0xf2ztWUg2nBW48ykSRVYAjID6n57QaOjKzv40hCDWImODktGXgiY
+ tawtIR4yR8HN
+X-Google-Smtp-Source: AGHT+IGqOYuC1wERl/uWE4rKn/LtrzzXFiI0kxVJZO5q0N3hQNht7PjriXu+SOXFF4OzUdhoaV2kYw==
+X-Received: by 2002:a05:6512:aca:b0:53e:3804:57ae with SMTP id
+ 2adb3069b0e04-5439c27dfaemr15443636e87.51.1737993835506; 
+ Mon, 27 Jan 2025 08:03:55 -0800 (PST)
+Received: from dev.rasu.local ([212.22.67.162])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-543c82289b1sm1351337e87.4.2025.01.27.08.03.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jan 2025 08:03:53 -0800 (PST)
+From: Maks Mishin <maks.mishinfz@gmail.com>
+X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Maks Mishin <maks.mishinFZ@gmail.com>
+Subject: [PATCH] common: fix incorrect comparison
+Date: Mon, 27 Jan 2025 19:03:50 +0300
+Message-Id: <20250127160350.312832-1-maks.mishinFZ@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Mon, 27 Jan 2025 17:28:40 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,46 +95,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit under Fixes which claimed to enable configs for Hyperflash, changed
-"CONFIG_MUX_MMIO=y" to "CONFIG_SPL_MUX_MMIO=y" in j7200_evm_a72_defconfig.
-As a result, PCIe functionality in U-Boot prior was broken, since the PCIe
-driver depends on the SERDES Lane Muxing to be setup for PCIe, which is
-done by the drivers/mux/mmio.c driver.
+The variable n, which is of type size_t and cannot have negative values, 
+is checked for a negative value in dlmalloc.c:2107.
 
-Fix this by re-enabling CONFIG_MUX_MMIO.
-
-Fixes: 038f6faea9f0 ("configs: j7200_evm_*_defconfig: Add configs for Hyperflash boot")
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
 ---
+ common/dlmalloc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Hello,
-
-This patch is based on commit
-d8a7100d658 Subtree merge tag 'v6.13-dts' of dts repo [1] into dts/upstream
-of the Master branch of U-Boot.
-
-Logs verifying PCIe functionality by enumerating an NVMe SSD at U-Boot with
-this patch applied:
-https://gist.github.com/Siddharth-Vadapalli-at-TI/12c245ad0b5db83c6dacf56a329f5009
-
-Regards,
-Siddharth.
-
- configs/j7200_evm_a72_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index e1ef6e86d49..ac5b10ba149 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -144,6 +144,7 @@ CONFIG_SPI_FLASH_S28HX_T=y
- # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
- CONFIG_SPI_FLASH_MTD=y
- CONFIG_MULTIPLEXER=y
-+CONFIG_MUX_MMIO=y
- CONFIG_PHY_TI_DP83869=y
- CONFIG_PHY_FIXED=y
- CONFIG_TI_AM65_CPSW_NUSS=y
+diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+index cc4d3a0a02..a4182a8dd6 100644
+--- a/common/dlmalloc.c
++++ b/common/dlmalloc.c
+@@ -2104,7 +2104,7 @@ Void_t* cALLOc_impl(n, elem_size) size_t n; size_t elem_size;
+ #endif
+   Void_t* mem = mALLOc_impl (sz);
+ 
+-  if ((long)n < 0) return NULL;
++  if ((long)n <= 0) return NULL;
+ 
+   if (mem == NULL)
+     return NULL;
 -- 
-2.43.0
+2.34.1
 
