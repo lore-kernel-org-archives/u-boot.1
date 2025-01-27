@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82BE9C02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 277C1C0218C
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:10:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 357238111F;
-	Mon, 27 Jan 2025 11:10:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F0C6811DF;
+	Mon, 27 Jan 2025 11:10:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="yGUW9AsN";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="tuGK3k/G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43871811C1; Mon, 27 Jan 2025 11:10:23 +0100 (CET)
+ id 709028118A; Mon, 27 Jan 2025 11:10:24 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3D278118A
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:10:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0574F81191
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:10:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=1152fbf31=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1737972620; x=1769508620;
+ t=1737972622; x=1769508622;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=ZTqQiQN2KYOjeiMG5obyzds9UwVau1zDwic+bTqEy6s=;
- b=yGUW9AsNfo2MM7jk7kF0TLVtofk8oFJmUIMH6F6hSC0AfSf5xW1CsZL4
- tupxswhwy4FoI2mCIUfNnaPvtL3/hheJkchb+9h/3H7VzvBRSsRjLdjh/
- FIsfWSFQJvb5uWdwZNxbAyUQvT5rvsCWPIbP8S768Zk0Mtl6LILvlGAB/
- 7cYNnpoDeP8+g3EKXotfcvWG0+18Rqo7EaDFKDCuMR2ilKFx0zrkd3Z/Q
- CClebfoQupoWLd/RrGl3TyhmqQKqcRvFBhfJhZ2hA+d/9GP1HrH3JCpEk
- MOYHbziBPq5QndAniLL5Rlmt/tesXVrpLnyLRwIQGa4aJUMLTBSSW17/k A==;
+ bh=HXKcdSHbq3K3tUs1hFatMYyRxQwoaEDv8DLyfCeUdRY=;
+ b=tuGK3k/G1fc4SjgYLdvblaRsxvvQF9N27yIl68D17Eu5vQDPRD6HUunR
+ M9lm32Vf0MYOEGoiu+EebAVT2yRt1k3sLTZy3RI0Ta2fsxq/u/LOL6gTo
+ SMNC5W6+4zjfMd3LBO/alQ/LENM6KuxtoMnlo+tEO+w42aZV2varSQwsg
+ VRly0g+OzxJFJNayBojujfn5gxnIgKUCgYs2uobMtYqRrLvIXSL87AjUi
+ ZagWshjI4eMP7a+4+Y1TJfiksAxd39Co8yppEKo3v2yMcXMYK56YEBbMr
+ Br6cspYpO0bugDyOnL8IUzrBF1OF6vE2eoLgGVGYUVqY/aohf/pzv+S+D Q==;
 X-CSE-ConnectionGUID: mWwd5UYvQK6ftQELQTXH+Q==
-X-CSE-MsgGUID: g2ArbnmhSru8zISizUtVkQ==
-X-IronPort-AV: E=Sophos;i="6.13,238,1732604400"; d="scan'208";a="204473297"
+X-CSE-MsgGUID: y5V01xEgTIWIHhMaTqWoGQ==
+X-IronPort-AV: E=Sophos;i="6.13,238,1732604400"; d="scan'208";a="204473300"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
@@ -48,19 +48,18 @@ Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
 Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Mon, 27 Jan 2025 03:09:44 -0700
+ 15.1.2507.35; Mon, 27 Jan 2025 03:09:50 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Mon, 27 Jan 2025 03:09:41 -0700
+ 15.1.2507.35 via Frontend Transport; Mon, 27 Jan 2025 03:09:48 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, <pbrobinson@gmail.com>,
  <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-CC: <manikandan.m@microchip.com>, Balamanikandan Gunasundar
- <balamanikandan.gunasundar@microchip.com>
-Subject: [PATCH 2/7] ARM: dts: at91: sam9x60: Define pinctrl node with its
- label
-Date: Mon, 27 Jan 2025 15:39:25 +0530
-Message-ID: <20250127100930.108377-3-manikandan.m@microchip.com>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH 4/7] ARM: dts: at91: sam9x60: Add missing pinctrl node
+ properties
+Date: Mon, 27 Jan 2025 15:39:27 +0530
+Message-ID: <20250127100930.108377-5-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250127100930.108377-1-manikandan.m@microchip.com>
 References: <20250127100930.108377-1-manikandan.m@microchip.com>
@@ -83,176 +82,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+Add the missing properties for the pinctrl node and for its
+corresponding GPIO bank nodes to align with the Linux DT.
 
-Define the pinctrl nodes with its label and sort its child node
-alphabetically to align wit the Linux DT.Without this change
-those pinctrl nodes are grouped under an additional 'pinctrl' child node
-that is not identified by the pinctrl driver when the GPIO banks
-are made as child nodes of pinctrl node.
-
-Signed-off-by: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
 Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- arch/arm/dts/sam9x60ek.dts | 138 ++++++++++++++++++-------------------
- 1 file changed, 69 insertions(+), 69 deletions(-)
+ arch/arm/dts/sam9x60.dtsi | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/sam9x60ek.dts b/arch/arm/dts/sam9x60ek.dts
-index 74016f5e288..d8d7ad38b2b 100644
---- a/arch/arm/dts/sam9x60ek.dts
-+++ b/arch/arm/dts/sam9x60ek.dts
-@@ -78,75 +78,6 @@
- 					};
- 				};
+diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+index 47b65d0ef56..a45e346d4ab 100644
+--- a/arch/arm/dts/sam9x60.dtsi
++++ b/arch/arm/dts/sam9x60.dtsi
+@@ -212,43 +212,64 @@
+ 			pinctrl: pinctrl@fffff400 {
+ 				#address-cells = <1>;
+ 				#size-cells = <1>;
+-				compatible = "microchip,sam9x60-pinctrl", "simple-bus";
++				compatible = "microchip,sam9x60-pinctrl", "atmel,at91sam9x5-pinctrl", "atmel,at91rm9200-pinctrl", "simple-bus";
+ 				ranges = <0xfffff400 0xfffff400 0x800>;
+ 				reg = <0xfffff400 0x200		/* pioA */
+ 				       0xfffff600 0x200		/* pioB */
+ 				       0xfffff800 0x200		/* pioC */
+ 				       0xfffffa00 0x200>;	/* pioD */
++
++				/* mux-mask corresponding to sam9x60 SoC in TFBGA228L package */
++				atmel,mux-mask = <
++						  /*     A       B       C       */
++						  0xffffffff 0xffe03fff 0xef00019d       /* pioA */
++						  0x03ffffff 0x02fc7e7f 0x00780000       /* pioB */
++						  0xffffffff 0xffffffff 0xf83fffff       /* pioC */
++						  0x003fffff 0x003f8000 0x00000000       /* pioD */
++						  >;
  			};
--
--			pinctrl {
--				nand {
--					pinctrl_nand_oe_we: nand-oe-we-0 {
--						atmel,pins =
--							<AT91_PIOD 0 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 1 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
--					};
--
--					pinctrl_nand_rb: nand-rb-0 {
--						atmel,pins =
--							<AT91_PIOD 5 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
--					};
--
--					pinctrl_nand_cs: nand-cs-0 {
--						atmel,pins =
--							<AT91_PIOD 4 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
--					};
--				};
--
--				ebi {
--					pinctrl_ebi_data_0_7: ebi-data-lsb-0 {
--						atmel,pins =
--							<AT91_PIOD 6 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 7 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 8 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 9 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 10 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 11 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 12 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 13 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
--					};
--
--					pinctrl_ebi_addr_nand: ebi-addr-0 {
--						atmel,pins =
--							<AT91_PIOD 2 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
--							 AT91_PIOD 3 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
--					};
--				};
--
--				pinctrl_qspi: qspi {
--					atmel,pins =
--						<AT91_PIOB 19 AT91_PERIPH_A AT91_PINCTRL_NONE
--						 AT91_PIOB 20 AT91_PERIPH_A AT91_PINCTRL_NONE
--						 AT91_PIOB 21 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
--						 AT91_PIOB 22 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
--						 AT91_PIOB 23 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
--						 AT91_PIOB 24 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
--				};
--
--				pinctrl_flx0: flx0_default {
--					atmel,pins =
--						<AT91_PIOA 0 AT91_PERIPH_A AT91_PINCTRL_NONE
--						 AT91_PIOA 1 AT91_PERIPH_A AT91_PINCTRL_NONE>;
--				};
--
--				pinctrl_onewire_tm_default: onewire_tm_default {
--					atmel,pins =
--						<AT91_PIOD 14 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
--				};
--
--				usb1 {
--					pinctrl_usb_default: usb_default {
--						atmel,pins = <AT91_PIOD 15 AT91_PERIPH_GPIO AT91_PINCTRL_NONE
--								AT91_PIOD 16 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
--					};
--				};
--
--			};
- 		};
- 	};
- };
-@@ -221,6 +152,75 @@
- 	status = "okay";
- };
  
-+&pinctrl {
-+	/* shared pinctrl settings */
-+	ebi {
-+		pinctrl_ebi_data_0_7: ebi-data-lsb-0 {
-+			atmel,pins =
-+				<AT91_PIOD 6 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 7 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 8 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 9 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 10 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 11 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 12 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 13 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-+		};
-+
-+		pinctrl_ebi_addr_nand: ebi-addr-0 {
-+			atmel,pins =
-+				<AT91_PIOD 2 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 3 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-+		};
-+	};
-+
-+	nand {
-+		pinctrl_nand_oe_we: nand-oe-we-0 {
-+			atmel,pins =
-+				<AT91_PIOD 0 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-+				 AT91_PIOD 1 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-+		};
-+
-+		pinctrl_nand_rb: nand-rb-0 {
-+			atmel,pins =
-+				<AT91_PIOD 5 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-+		};
-+
-+		pinctrl_nand_cs: nand-cs-0 {
-+			atmel,pins =
-+				<AT91_PIOD 4 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-+		};
-+	};
-+
-+	pinctrl_flx0: flx0_default {
-+		atmel,pins =
-+			<AT91_PIOA 0 AT91_PERIPH_A AT91_PINCTRL_NONE
-+			 AT91_PIOA 1 AT91_PERIPH_A AT91_PINCTRL_NONE>;
-+		};
-+
-+	pinctrl_onewire_tm_default: onewire_tm_default {
-+		atmel,pins =
-+			<AT91_PIOD 14 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-+	};
-+
-+	pinctrl_qspi: qspi {
-+		atmel,pins =
-+			<AT91_PIOB 19 AT91_PERIPH_A AT91_PINCTRL_NONE
-+			 AT91_PIOB 20 AT91_PERIPH_A AT91_PINCTRL_NONE
-+			 AT91_PIOB 21 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-+			 AT91_PIOB 22 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-+			 AT91_PIOB 23 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-+			 AT91_PIOB 24 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
-+	};
-+
-+	usb1 {
-+		pinctrl_usb_default: usb_default {
-+			atmel,pins = <AT91_PIOD 15 AT91_PERIPH_GPIO AT91_PINCTRL_NONE
-+				      AT91_PIOD 16 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
-+		};
-+	};
-+};
-+
- &usb1 {
- 	num-ports = <3>;
- 	atmel,vbus-gpio = <0
+ 			pioA: gpio@fffff400 {
+ 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
+ 				reg = <0xfffff400 0x200>;
++				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
+ 				#gpio-cells = <2>;
+ 				gpio-controller;
++				interrupt-controller;
++				#interrupt-cells = <2>;
+ 				clocks = <&pmc PMC_TYPE_PERIPHERAL 2>;
+ 			};
+ 
+ 			pioB: gpio@fffff600 {
+ 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
+ 				reg = <0xfffff600 0x200>;
++				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
+ 				#gpio-cells = <2>;
+ 				gpio-controller;
++				interrupt-controller;
++				#interrupt-cells = <2>;
+ 				clocks = <&pmc PMC_TYPE_PERIPHERAL 3>;
+ 			};
+ 
+ 			pioC: gpio@fffff800 {
+ 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
+ 				reg = <0xfffff800 0x200>;
++				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
+ 				#gpio-cells = <2>;
+ 				gpio-controller;
++				interrupt-controller;
++				#interrupt-cells = <2>;
+ 				clocks = <&pmc PMC_TYPE_PERIPHERAL 4>;
+ 			};
+ 
+ 			pioD: gpio@fffffa00 {
+ 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
+ 				reg = <0xfffffa00 0x200>;
++				interrupts = <44 IRQ_TYPE_LEVEL_HIGH 1>;
+ 				#gpio-cells = <2>;
+ 				gpio-controller;
++				interrupt-controller;
++				#interrupt-cells = <2>;
+ 				clocks = <&pmc PMC_TYPE_PERIPHERAL 44>;
+ 			};
+ 
 -- 
 2.25.1
 
