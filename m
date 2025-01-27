@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC25C0218A
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:41:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B7B8C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 13:41:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95F4D812C3;
+	by phobos.denx.de (Postfix) with ESMTP id E6B4D8141A;
 	Mon, 27 Jan 2025 14:41:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iVNmS6jQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NDZvutL1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CAA38129B; Mon, 27 Jan 2025 14:41:16 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 3E1458129B; Mon, 27 Jan 2025 14:41:17 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54FB181221
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E70681265
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 14:41:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-438a39e659cso28797105e9.2
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:14 -0800 (PST)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4363dc916ceso34466955e9.0
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 05:41:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1737985274; x=1738590074; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=fhUvwSuFhgs/O8Fy9tYu9AMskoRbW7U2vOy0Yz086wE=;
- b=iVNmS6jQ78SFRocSh7ywoi0DNylbgs753Qk2XtzKIUePz44OGvSS1sjoqcv2c0UC8B
- L5nQZT3+CCXcjSSz020WXCN2P0DFSudC7rp/Fooq2/X3NE+yN7yKrVUax7rVqIrP+dQu
- TVl1nBqdoEvYYAEIaTIWBy8d0xcUDtsNfCk3D0u/qlgDIF0MZOJbtXcdTvM9onnpT5Fv
- OTZmyQno3xwGsb1xd+Xk7bqvw9tiSQ9s6GhqzF0+EJdGNExgVTxeQlWXvYeBimnHZya0
- jplXhLtxLnVWEpLVXoKHRETTHMYNYYkT9G4chtXFpQPp/vIYtnuSIxFSJsgEkcpZQ+Hj
- x7pQ==
+ :reply-to; bh=Ft1jUex3OX1rjN4NzcaLRGcDbORy+tvfnlr1PviY/04=;
+ b=NDZvutL1wzb2wQxN7TcoEh+OqgLSDE37v4bQB1DCu7F2rRl3v8ZGfz4nXIwdbG2BOo
+ jxxklT4+weFawKdUfCVEqnAfTbuyN/1td78feoc70uUrAmcUJLQAuDql1+4ZBrzpHQJm
+ XXKVY9/MSoLeNNMlcLvmTgwduEdVbzDiaIEVcmCy2ufbHSjVe6yfxLZl2w7m5mcO0hlz
+ 3/OhxFuwwgZx8KiR2n1kNGMJk6hvpslj/ErH6Sb0TN8kvkyFAukio9sPvx9IbwqT8cSL
+ SZVLEs7GpJVTbHaLHvrOrrr3IdjZmdZF+yxHv0y2UxrLD6ytqZygZT4NclWwkA0TJAM1
+ SNQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1737985274; x=1738590074;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fhUvwSuFhgs/O8Fy9tYu9AMskoRbW7U2vOy0Yz086wE=;
- b=uO2HyDcSyITyWCe0hVPPfTHhpi5SFFaBZeHD1P95ni8lXkPB1dyAn6qdT/4984Kpwp
- NaBwBJQwN0clHL8j0x+Js+V+tIp05PrROfiBD4ghlug+v/gxmNPOhmj+3JNgHzh60xfN
- z2gATNGreVpTFX08Ie6eESGGozxXJNc+3Wp0B3ds5U/u2M2Apru9AvagW6o5AonVCPDT
- kar3RHXtuQfrHpqQrvl2VImUNee6sICPVFu4drtuip/4c2R0f+3/mrhNvvDpw2sBDpNK
- uoUfD5fCUWYAJkXtgtpVS3/mvByyLrrwMax+eYYf2MvSKLgbEH9kwJKVh6s9D5kMWp0g
- A0gg==
+ bh=Ft1jUex3OX1rjN4NzcaLRGcDbORy+tvfnlr1PviY/04=;
+ b=q01nTVFY26BBqIN6ikg+aKXdZiy2oVHV0EnVCfcUYpbNTmUuezBQCJ/hqaH5ApRGCH
+ WBGLtFYyFbjxTtK9vG+q0Hio16T+v/b5RwEUhzRQxJYbZ7G7tvsP7FvUCNbY+XmyyPfR
+ Sxjhm792aB2OR2uSJySeUBroBCpHQPwQfh2UfIcEkMTVm3HpJnTzeVLMbudYuGdDHjy0
+ p9+mXe40AhgMx9U+/0oeYlhOaoX1kBLEvzRNbqRjyBUfWNZzcJnjqZyYhrrpkIH7iMO7
+ MEIUJH4sNgiXbob8oZQBKMXMpKMqARfDU3ePxWRd7/Hc9S+mG0NAFErFZ484yVjC8DFd
+ V/IA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWp+AWUQ2ZCts9CnJGtKwI6mAYc5RiX6ubw7Z8rvNAonO/sV7gFkn0BJarf7hzWEO7QF7mxUGQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyvJj+Lhyd7ebFto3xfRQ6tszcuuxlHaNkE5im4q6AM9svf0Ak1
- ZpJnv1OHv2ZAC+3x50LxnXK3JFpFortXmIWuS+BuXRHE3ZcrPqXk
-X-Gm-Gg: ASbGncuTXzDIWdDe33BY81irie3eFWinOPfnKWEt3xUx8WoGn4qIrNHW4mLTXBvUxai
- i8hLtOl7Wmp2BmkBL8xBp3bzYMIxlNcNrHoZK1tZzo2ru1GzAt6cPsfoJiszW0gi7XpxU8PaJ8k
- fEIAZFlvLF/gJ5sQXQ76ETLMXMFRZ+mGWj/8oQk7apdMndVQ7qCBqBlQefxhss3QmaLXFAeW10J
- uZIl24p5fMre0Wrf5dACxkyJzC/SgZpra/kmJ+kzOkoRdamdsDQL1HW3i2AH0Lbnadf78rG3rrB
- 8NVZ3+RTJY4yBvIhCAL3l8qonz0tBEiHWO161vo5Q3+YAz9ZvQ==
-X-Google-Smtp-Source: AGHT+IEbw72ijLEVDj12Uz9DQuW7+sq3EeEeAR7nF3BWGIL+R+13mHMUOSiZQmo40znkgas65gRA+w==
-X-Received: by 2002:a05:6000:186f:b0:385:e105:d884 with SMTP id
- ffacd0b85a97d-38bf57b6095mr40835662f8f.46.1737985273594; 
- Mon, 27 Jan 2025 05:41:13 -0800 (PST)
+ AJvYcCUztpk946dIPjxT326FiYcyIJ4wVhC2CWMzlL+l4ouCymybyY4RIAvu2UnXIyKXGsPuom+fcLc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1fDLky3gbcSUjwurMFfy8huWZq1bJRJhYnMqfGj2lFiqw4cY9
+ ERg6IEvEPQAOi9/kTXq4GwFuGlTaZ9pxRdPcgjAyMS/WRMXh4qyf
+X-Gm-Gg: ASbGnctrogjbrz/MLaif8UzclkyNBvPbVGoM9AjZjvGTixdq02DJWi6W9MRNTh8mtUb
+ ZpioaaKiCsU2Q3LdlJEpttNyVtZQPfgSPL0aLYHjuvGi5my17pG73fTjzC9/i0pTFnb+KC6D2+f
+ 496NFZ53Sl7Gtl1r9Ig8etz+bubT5mVmGkZnEgUbP1ePA6/WdUPMvg2DgUgOcFg2bEn79ng9hIU
+ QBdljWFYECzj8ZUDwMmBCD21fMDRHsS6043YUWEZdKYF3Tqaa0dwH/ma8Q+PC5GGGWGtvjycn03
+ DGm19pcurtCwGs0YGWytzAJe05XFpd8I9nnxYbwxubs30IcI4w==
+X-Google-Smtp-Source: AGHT+IFlcdrn7P1MAqElbF//Yz0MSCx3J9252DdTuOvtY31iQ5bqVie5ZOu1fn99TniSW9Eq+k7/8A==
+X-Received: by 2002:a5d:48cc:0:b0:38a:9ffb:ff02 with SMTP id
+ ffacd0b85a97d-38c2226c2b7mr13329287f8f.12.1737985274533; 
+ Mon, 27 Jan 2025 05:41:14 -0800 (PST)
 Received: from localhost.localdomain (93-34-91-161.ip49.fastwebnet.it.
  [93.34.91.161]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.12
+ ffacd0b85a97d-38c2a1c4199sm10873900f8f.89.2025.01.27.05.41.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 05:41:13 -0800 (PST)
+ Mon, 27 Jan 2025 05:41:14 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  Weijie Gao <weijie.gao@mediatek.com>,
@@ -79,10 +79,10 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  "SkyLake.Huang" <skylake.huang@mediatek.com>,
  John Crispin <john@phrozen.org>, Dong Huang <dong.huang@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 2/8] pinctrl: mediatek: mt7986: rename reg-names to upstream
- linux format
-Date: Mon, 27 Jan 2025 14:40:39 +0100
-Message-ID: <20250127134046.26345-3-ansuelsmth@gmail.com>
+Subject: [PATCH 3/8] mediatek: mt7986: move gpio-controller up and rename
+ pinctrl to pio
+Date: Mon, 27 Jan 2025 14:40:40 +0100
+Message-ID: <20250127134046.26345-4-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250127134046.26345-1-ansuelsmth@gmail.com>
 References: <20250127134046.26345-1-ansuelsmth@gmail.com>
@@ -104,31 +104,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename reg-names to upstream linux format. Upstream linux drop the
-"_base". To make use of upstream DTSI, align to the upstream naming.
+Move gpio-controller up to pinctrl node and rename label to "pio" to
+match the label used in upstream kernel linux.
+
+Update any DTS that reference the pinctrl to follow the new naming and
+structure.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/dts/mt7986.dtsi | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ arch/arm/dts/mt7986.dtsi           |  8 +++-----
+ arch/arm/dts/mt7986a-bpi-r3-sd.dts | 12 ++++++------
+ arch/arm/dts/mt7986a-rfb.dts       |  4 ++--
+ arch/arm/dts/mt7986a-sd-rfb.dts    |  4 ++--
+ arch/arm/dts/mt7986b-rfb.dts       |  4 ++--
+ arch/arm/dts/mt7986b-sd-rfb.dts    |  4 ++--
+ 6 files changed, 17 insertions(+), 19 deletions(-)
 
 diff --git a/arch/arm/dts/mt7986.dtsi b/arch/arm/dts/mt7986.dtsi
-index f871f2394c5..64ce45a6530 100644
+index 64ce45a6530..b2c57098a5e 100644
 --- a/arch/arm/dts/mt7986.dtsi
 +++ b/arch/arm/dts/mt7986.dtsi
-@@ -132,9 +132,9 @@
- 		      <0x11f00000 0x1000>,
- 		      <0x11f10000 0x1000>,
- 		      <0x1000b000 0x1000>;
--		reg-names = "gpio_base", "iocfg_rt_base", "iocfg_rb_base",
--			    "iocfg_lt_base", "iocfg_lb_base", "iocfg_tr_base",
--			    "iocfg_tl_base", "eint";
-+		reg-names = "gpio", "iocfg_rt", "iocfg_rb",
-+			    "iocfg_lt", "iocfg_lb", "iocfg_tr",
-+			    "iocfg_tl", "eint";
- 		gpio: gpio-controller {
- 			gpio-controller;
- 			#gpio-cells = <2>;
+@@ -122,7 +122,7 @@
+ 		#clock-cells = <1>;
+ 	};
+ 
+-	pinctrl: pinctrl@1001f000 {
++	pio: pinctrl@1001f000 {
+ 		compatible = "mediatek,mt7986-pinctrl";
+ 		reg = <0x1001f000 0x1000>,
+ 		      <0x11c30000 0x1000>,
+@@ -135,10 +135,8 @@
+ 		reg-names = "gpio", "iocfg_rt", "iocfg_rb",
+ 			    "iocfg_lt", "iocfg_lb", "iocfg_tr",
+ 			    "iocfg_tl", "eint";
+-		gpio: gpio-controller {
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-		};
++		gpio-controller;
++		#gpio-cells = <2>;
+ 	};
+ 
+ 	pwm: pwm@10048000 {
+diff --git a/arch/arm/dts/mt7986a-bpi-r3-sd.dts b/arch/arm/dts/mt7986a-bpi-r3-sd.dts
+index c156a813634..e01ae4c3dc7 100644
+--- a/arch/arm/dts/mt7986a-bpi-r3-sd.dts
++++ b/arch/arm/dts/mt7986a-bpi-r3-sd.dts
+@@ -38,12 +38,12 @@
+ 
+ 		factory {
+ 			label = "reset";
+-			gpios = <&gpio 9 GPIO_ACTIVE_LOW>;
++			gpios = <&pio 9 GPIO_ACTIVE_LOW>;
+ 		};
+ 
+ 		wps {
+ 			label = "wps";
+-			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
++			gpios = <&pio 10 GPIO_ACTIVE_LOW>;
+ 		};
+ 	};
+ 
+@@ -52,12 +52,12 @@
+ 
+ 		led_status_green: green {
+ 			label = "green:status";
+-			gpios = <&gpio 69 GPIO_ACTIVE_HIGH>;
++			gpios = <&pio 69 GPIO_ACTIVE_HIGH>;
+ 		};
+ 
+ 		led_status_blue: blue {
+ 			label = "blue:status";
+-			gpios = <&gpio 86 GPIO_ACTIVE_HIGH>;
++			gpios = <&pio 86 GPIO_ACTIVE_HIGH>;
+ 		};
+ 	};
+ 
+@@ -78,7 +78,7 @@
+ 	mediatek,gmac-id = <0>;
+ 	phy-mode = "2500base-x";
+ 	mediatek,switch = "mt7531";
+-	reset-gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
++	reset-gpios = <&pio 5 GPIO_ACTIVE_HIGH>;
+ 
+ 	fixed-link {
+ 		speed = <2500>;
+@@ -86,7 +86,7 @@
+ 	};
+ };
+ 
+-&pinctrl {
++&pio {
+ 	spic_pins: spi1-pins-func-1 {
+ 		mux {
+ 			function = "spi";
+diff --git a/arch/arm/dts/mt7986a-rfb.dts b/arch/arm/dts/mt7986a-rfb.dts
+index 67d14a99dae..d4bbb23204a 100644
+--- a/arch/arm/dts/mt7986a-rfb.dts
++++ b/arch/arm/dts/mt7986a-rfb.dts
+@@ -57,7 +57,7 @@
+ 	mediatek,gmac-id = <0>;
+ 	phy-mode = "2500base-x";
+ 	mediatek,switch = "mt7531";
+-	reset-gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
++	reset-gpios = <&pio 5 GPIO_ACTIVE_HIGH>;
+ 
+ 	fixed-link {
+ 		speed = <2500>;
+@@ -65,7 +65,7 @@
+ 	};
+ };
+ 
+-&pinctrl {
++&pio {
+ 	spi_flash_pins: spi0-pins-func-1 {
+ 		mux {
+ 			function = "flash";
+diff --git a/arch/arm/dts/mt7986a-sd-rfb.dts b/arch/arm/dts/mt7986a-sd-rfb.dts
+index 4f8fa70ec99..11823e05bda 100644
+--- a/arch/arm/dts/mt7986a-sd-rfb.dts
++++ b/arch/arm/dts/mt7986a-sd-rfb.dts
+@@ -49,7 +49,7 @@
+ 	mediatek,gmac-id = <0>;
+ 	phy-mode = "2500base-x";
+ 	mediatek,switch = "mt7531";
+-	reset-gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
++	reset-gpios = <&pio 5 GPIO_ACTIVE_HIGH>;
+ 
+ 	fixed-link {
+ 		speed = <2500>;
+@@ -57,7 +57,7 @@
+ 	};
+ };
+ 
+-&pinctrl {
++&pio {
+ 	spi_flash_pins: spi0-pins-func-1 {
+ 		mux {
+ 			function = "flash";
+diff --git a/arch/arm/dts/mt7986b-rfb.dts b/arch/arm/dts/mt7986b-rfb.dts
+index f98b04ab140..0a731fe87fd 100644
+--- a/arch/arm/dts/mt7986b-rfb.dts
++++ b/arch/arm/dts/mt7986b-rfb.dts
+@@ -48,7 +48,7 @@
+ 	mediatek,gmac-id = <0>;
+ 	phy-mode = "2500base-x";
+ 	mediatek,switch = "mt7531";
+-	reset-gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
++	reset-gpios = <&pio 5 GPIO_ACTIVE_HIGH>;
+ 
+ 	fixed-link {
+ 		speed = <2500>;
+@@ -56,7 +56,7 @@
+ 	};
+ };
+ 
+-&pinctrl {
++&pio {
+ 	spi_flash_pins: spi0-pins-func-1 {
+ 		mux {
+ 			function = "flash";
+diff --git a/arch/arm/dts/mt7986b-sd-rfb.dts b/arch/arm/dts/mt7986b-sd-rfb.dts
+index ec80a2fb710..e5fb4d73e70 100644
+--- a/arch/arm/dts/mt7986b-sd-rfb.dts
++++ b/arch/arm/dts/mt7986b-sd-rfb.dts
+@@ -49,7 +49,7 @@
+ 	mediatek,gmac-id = <0>;
+ 	phy-mode = "2500base-x";
+ 	mediatek,switch = "mt7531";
+-	reset-gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
++	reset-gpios = <&pio 5 GPIO_ACTIVE_HIGH>;
+ 
+ 	fixed-link {
+ 		speed = <2500>;
+@@ -57,7 +57,7 @@
+ 	};
+ };
+ 
+-&pinctrl {
++&pio {
+ 	spi_flash_pins: spi0-pins-func-1 {
+ 		mux {
+ 			function = "flash";
 -- 
 2.47.1
 
