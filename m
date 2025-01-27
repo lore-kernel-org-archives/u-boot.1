@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25BADC02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 18:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A82C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 18:59:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9284181703;
-	Mon, 27 Jan 2025 19:47:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B108581671;
+	Mon, 27 Jan 2025 19:59:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WcbdaI5y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Adse+ldn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84A208129B; Mon, 27 Jan 2025 19:47:06 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id B26BD8169E; Mon, 27 Jan 2025 19:59:36 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66195812C8
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 19:47:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D69F812C8
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 19:59:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6d92cd1e811so50898346d6.1
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 10:47:04 -0800 (PST)
+ spf=pass smtp.mailfrom=knaerzche@gmail.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-436ce2ab251so31569915e9.1
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 10:59:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738003623; x=1738608423; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PWedrECfpHswe8HWCHMQtQ7IkoeK/j3W1A/fu1hJk4I=;
- b=WcbdaI5yORTTlHZfSJ4Ln2zX4ZeH2YovRQPyiDTAZULmAFhdQmbrGhgM1wce/z9wWS
- /rC3A0h9Rfn973EHLT6DRbb6LHYK1aHxGj85HQdl406d3/HbEdbfOdxB8XY6uVKcpkEc
- gVCkjP3ahYpV/AWufU+FWKAqFidjwVSFZXlBc=
+ d=gmail.com; s=20230601; t=1738004374; x=1738609174; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=b9GmKjz3bkxCrPJO3s4Rd0HU9MvXNA0JHla6f3ZEzSM=;
+ b=Adse+ldnYgjbu0VjmdaSjaaH9F3t97x4rgFfR5YCkGQe6uD8It+hQx2BvAR/tuiYHb
+ t5DpYyZAOcqvnF0NGm6FHZZl6monqEFyY8foxXSFxy8Q3UOKwxOX/ks1IJ4yoGtF+0m7
+ w0IvOVM1qz9XTkK3C0y3hHiwxwjQLZoRG3FF16vueEwR8GcB//x2V10OVBUusbKVDZJ0
+ FXhbJY4dwXjAQuFDeF+v7ac1Ghmt5WHWU/2VBCyh0dHO7ShwBy7bkCWmPjt1U/lxAOza
+ du4t32WRSSqMeOomA/m+7z9sCppvM2lAKYkOk1+yFKGeEFAJX69Iak4uXO2TPyxOyQWw
+ e1zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738003623; x=1738608423;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PWedrECfpHswe8HWCHMQtQ7IkoeK/j3W1A/fu1hJk4I=;
- b=Kfih6poMu/Bd+vN2TBsEmFeLHDSQPikQqgxPH9p1rpRrWe3j3FwoFX16p8QUxuT7AH
- BnnAyoN0Icd+9vU5wprJkmiwa62Rffnsnzbo1T1lGkFG+sWVUnjD4vtUd/xAqYeJ3LsL
- PA1PUMQ4evBgFXEmeWjG4oULMKz6okuhqnnZ6uH7Uv53YUb/KNhXUgrZ/RxxWtBIupSH
- q4leQqPtCx2JQyVG/pjd0VH1C1QvFnmUXPy4cj14It93KitjnWUJJYs+ZVHsLPe7q7Da
- sMLGCHHxGr5DGQynp6y4LQoPaH9OdDkp7weNaVkV5caDSPrjSfA3gp9PoKtG0mA2HyT0
- 2Siw==
-X-Gm-Message-State: AOJu0YwY22YQVorH5lOMpYINCYMXRXWT/xRJcjyzk7HsBr5IRFLPoYLw
- 7kGazMpkuJWTuCdUyK+/9WlSNEgscwuX+xf/3+Yiw6B9AM8AbWCzc8tTuaNyE3DOWvTyf4U2K/F
- f
-X-Gm-Gg: ASbGncvG9SD4in8d1cl7bIecErcSFqdXxccaDyep5H/UyxsJLCQ/QGRulQE9Utf0ja9
- fZzK36OosIOMkERUuCDoPVvHR8sjWsa9bvlrasBTW7i2/ehrPkCz15RxoA9FzYfCauyNMlhiTuM
- Nj4JBhsCHYDyBF5sLHvA0ghCE31jEkkxE9lmwizzTbH0MsWYUmvxpgAjHrWD1tgZWmHpQcahWol
- TBgwtXArfPejIl1IbqXZNXrOL5k85/9BvnxV8zUkFm9f93Z/+DxzLbGBRukmNc6hYrFutNhEzhp
- DTk=
-X-Google-Smtp-Source: AGHT+IEnh1UaiPNurK1SEW8Puerm11TOQ9doX/hGKvL6ARmvPeudVv8sqxtXS4f7/MEHOu+fEAxHRg==
-X-Received: by 2002:a05:6214:1d23:b0:6d4:287d:b8d9 with SMTP id
- 6a1803df08f44-6e2366da82amr5942076d6.2.1738003623325; 
- Mon, 27 Jan 2025 10:47:03 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e2057a87bdsm36937886d6.77.2025.01.27.10.47.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 10:47:02 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250127121134.634412-1-festevam@gmail.com>
-References: <20250127121134.634412-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20250127
-Message-Id: <173800362241.1649283.6197158781638064432.b4-ty@konsulko.com>
-Date: Mon, 27 Jan 2025 12:47:02 -0600
+ d=1e100.net; s=20230601; t=1738004374; x=1738609174;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=b9GmKjz3bkxCrPJO3s4Rd0HU9MvXNA0JHla6f3ZEzSM=;
+ b=iFju7Q/3QBGem4IibqJXcucw/h3Yf0i03vgLcCSGZ/vX7U7MFoG4rZeXdsKhMrRV33
+ c6j2RodKiwp0DdQiX8wk1SBTYpuBP+9L84g+SGmt/E+4c/5xx9aNZ6QijCdlW8WnqYDr
+ mW1KBYivlk4EvoOZ0fC2fzbKjVQ01crkSEjYObwIqx9zm2GECAN6c60h0X9D30qBZss7
+ A3sLktJPJ7I3ScnFY4q66olDpZeUk1CVDwarsvCDR6k1dtTZI5j83zL0kJwiu8cE2wi5
+ mgkXJlzEiDKO7as6MWYB61wdXKoh9YQeYF2EwyWEifRQAac9kU0p0XbnDHtohEY6/wmi
+ N/Qg==
+X-Gm-Message-State: AOJu0YwUoh0GtbxTVUwoxipLRAwMNRpFHRvOaybQBJs9tQmM9MSuUQbU
+ piCZjWOqJgF41PwLCBH1MrDDMT06mQFETsERyhKTBbTYccf9gbg=
+X-Gm-Gg: ASbGnctH9vb5tdKThk2mQWLwKgwdq4W+Qlv/LQ1YS4NNTXuBWUUiH6a0nqy7OfwapLV
+ HWXKzJJVVPteF7CP9VEUud7rNO4iZYUUbZJ1W+aGJsC0FLQOULunkUPOtOodvfHDRyoPhxVdPmv
+ LjJivid3UXiI1O94J1ffVnNzh9EQtFoeWCMLJ/bpNuRVykkL50ejdlxQqEpnA4vFnSb6KFxmSPG
+ YdyuvG/dfSqA79+kaaascwq7DIDUPEgW1LASw6UGgDj30TKAIem4obif7aTZLctcKSKeqFFBer0
+ 7x65e6/I1K5Y+ukSAH1z31wC1hlVrSXxEtG1LGNmqWKQ7qxUmIo=
+X-Google-Smtp-Source: AGHT+IEk8I9rcBeWuGO1EPFi6FM35d8tYUfoygE1RrHVVl/p2OQ/vBQtI+nKdBDr06rT8KbykEpceA==
+X-Received: by 2002:a05:600c:1987:b0:434:a7b6:10e9 with SMTP id
+ 5b1f17b1804b1-438913e2fa9mr409910285e9.17.1738004373493; 
+ Mon, 27 Jan 2025 10:59:33 -0800 (PST)
+Received: from ?IPV6:2a02:810b:f13:8500:ef9b:15f0:7162:3734?
+ ([2a02:810b:f13:8500:ef9b:15f0:7162:3734])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438bd4d2c0esm140182005e9.33.2025.01.27.10.59.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Jan 2025 10:59:33 -0800 (PST)
+Message-ID: <4e6629cf-9685-4b91-800e-82a9df30d5e3@gmail.com>
+Date: Mon, 27 Jan 2025 19:59:31 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] rockchip: Improve ARMv7 support for
+ ROCKCHIP_COMMON_STACK_ADDR
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250126234838.561065-1-jonas@kwiboo.se>
+ <20250126234838.561065-3-jonas@kwiboo.se>
+Content-Language: en-US
+From: Alex Bee <knaerzche@gmail.com>
+In-Reply-To: <20250126234838.561065-3-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,21 +103,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 Jan 2025 09:11:34 -0300, Fabio Estevam wrote:
+Hi Jonas,
 
-> Please pull from u-boot-imx/master, thanks.
-> 
-> The following changes since commit 8162f35a108441b8d7a44ac9266c1a64dbf79fd5:
-> 
->   Merge patch series "test: Improvements to ut command and test-suite running" (2025-01-24 14:35:37 -0600)
-> 
-> are available in the Git repository at:
-> 
-> [...]
+thanks for working on this.  Please see one comment below.
 
-Merged into u-boot/master, thanks!
+Am 27.01.25 um 00:48 schrieb Jonas Karlman:
+> A few Rockchip ARMv7 SoCs use 0x60000000 as DRAM base address instead of
+> the more common 0x0 DRAM base address used on AArch64 SoCs.
+>
+> Add default options that should work for these ARMv7 SoCs. Same offsets
+> as before are used, just below 64 MiB. Hex values have also been padded
+> to improve alignment.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+>   arch/arm/mach-rockchip/Kconfig | 35 +++++++++++++++++++++++-----------
+>   1 file changed, 24 insertions(+), 11 deletions(-)
+>
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index 5aa9e0f1af3b..da20d3233fe3 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -637,40 +637,53 @@ source "arch/arm/mach-rockchip/rv1126/Kconfig"
+>   if ROCKCHIP_COMMON_STACK_ADDR && SPL_SHARES_INIT_SP_ADDR
+>   
+>   config CUSTOM_SYS_INIT_SP_ADDR
+> -	default 0x3f00000
+> +	default 0x63f00000 if SPL_TEXT_BASE = 0x60000000
+> +	default 0x03f00000 if SPL_TEXT_BASE = 0x00000000
+>   
+>   config SYS_MALLOC_F_LEN
+> -	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>   
+>   config SPL_SYS_MALLOC_F_LEN
+> -	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>   
+>   config TPL_SYS_MALLOC_F_LEN
+> -	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+> +	default 0x0800 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+> +	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>   
+>   config TEXT_BASE
+> -	default 0x00200000 if ARM64
+> +	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
+> +	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
+>   
+>   config SPL_TEXT_BASE
+> -	default 0x0 if ARM64
+> +	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
+> +			      ROCKCHIP_RK3128 || ROCKCHIP_RK3188 || \
 
--- 
-Tom
+I'm not sure if adding RK3036 and RK3188 is correct at this point. Both use
+SPL (without TPL) currently for DRAM initialization and thus need their
+CFG_IRAM_BASE as SPL_TEXT_BASE.
 
+Regards,
 
+Alex
+
+> +			      ROCKCHIP_RK322X || ROCKCHIP_RV1108
+> +	default 0x00000000
+>   
+>   config SPL_HAS_BSS_LINKER_SECTION
+>   	default y if ARM64
+>   
+>   config SPL_BSS_START_ADDR
+> -	default 0x3f80000
+> +	default 0x63f80000 if SPL_TEXT_BASE = 0x60000000
+> +	default 0x03f80000 if SPL_TEXT_BASE = 0x00000000
+>   
+>   config SPL_BSS_MAX_SIZE
+> -	default 0x8000 if SPL_BSS_START_ADDR = 0x3f80000
+> +	default 0x8000 if SPL_BSS_START_ADDR = 0x63f80000
+> +	default 0x8000 if SPL_BSS_START_ADDR = 0x03f80000
+>   
+>   config SPL_STACK_R
+> -	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+> +	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+> +	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>   
+>   config SPL_STACK_R_ADDR
+> -	default 0x3e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+> +	default 0x63e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+> +	default 0x03e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>   
+>   config SPL_STACK_R_MALLOC_SIMPLE_LEN
+> -	default 0x200000 if SPL_STACK_R_ADDR = 0x3e00000
+> +	default 0x200000 if SPL_STACK_R_ADDR = 0x63e00000
+> +	default 0x200000 if SPL_STACK_R_ADDR = 0x03e00000
+>   
+>   endif
+>   endif
