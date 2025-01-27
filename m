@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F5B8C0218C
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 07:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C638C0218F
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 07:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B80BB80FF7;
-	Mon, 27 Jan 2025 08:48:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 29C5A81101;
+	Mon, 27 Jan 2025 08:49:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="tLxk7pqm";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="b+7mVNFy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42051810FC; Mon, 27 Jan 2025 08:48:55 +0100 (CET)
-Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
+ id 8292A81109; Mon, 27 Jan 2025 08:49:04 +0100 (CET)
+Received: from mail-4317.proton.ch (mail-4317.proton.ch [185.70.43.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E088780FC4
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:48:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FAFE810FC
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 08:49:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1737964131; x=1738223331;
- bh=nv8DzlBVltsO4qe41eyvtEyo3pVB+ny0fvYs1soafgk=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
- List-Unsubscribe:List-Unsubscribe-Post;
- b=tLxk7pqmb7Fg92BEeCFsJLZQmNX4AMToOkPJ1MTBnGupHO1tmXNJmbsMfQOwpCj3e
- fGwnE1P5j19lHcr1KU0IeqCpxax6JJmvnnab3E8iBEwa8TLp6sc797hrp6MmkVV/Jt
- jAucbsFPc6vHCTp8Zi6hoYwv2VlmyRcyIC+zWTKmuHu6Rs1nUfA/KrOKgt18hPtxVs
- 2BoNb7Eto4ZQtBdIG93WjX3fk2TpQVyH9lhcdvvveo6atTZgC8sLvSESZqc4gKy/6R
- HhxGaTeK79oQl1hZGAGDzE/NPzVVqol0tuFTS0bi2aLMgAUMH9Glcnyt7W5jTl9imm
- 6LyuC5kdWV7UQ==
-Date: Mon, 27 Jan 2025 07:48:45 +0000
+ s=protonmail3; t=1737964141; x=1738223341;
+ bh=+raOPA36eHRHX9519+++xAWYMRb2hoe4AlwM3cU35yE=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=b+7mVNFyRryKzVTe7NCAkDLCIqJg4QZFTtnDAh/6jCytEqN+J9XvS9RJR9UTQwnM7
+ mhtoWi/HfrKJbARHt8Ci8E2YK3PFg37snDbGhHQ6O5MY9p0eq1twLBhqMxuRvG6hM3
+ Ufho1vLMQ3Jnjpp6fryTXNTDcF3LaqACbtBTROSdsNtdXkGYucC/JfHOlAIEQXLNLw
+ 1wXvpE9dEO/bVYnNN8nVVSnme1DankgePiC+7NrHbPUl6pS+WRkBHbNMwFx2Xb26kd
+ AClakA7QRiPB087sdxnC8l+3OH6o0VjywPmFWH7kftBACovVGp272Fwj5j4LrQaxgy
+ ip+0Epq+M+Ykg==
+Date: Mon, 27 Jan 2025 07:48:54 +0000
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
@@ -45,10 +45,12 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 From: Sam Day <me@samcday.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>
-Subject: [PATCH 0/4] rng: msm: fixes for MSM8916
-Message-ID: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
+Subject: [PATCH 1/4] clk/qcom: apq8016: add PRNG_AHB_CLK
+Message-ID: <20250127-msm-rng-fixes-v1-1-00f5d2284314@samcday.com>
+In-Reply-To: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
+References: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 814504299c6992d1fa0b31198a695ddfaef9e947
+X-Pm-Message-ID: f18ee8d05614f8748a875e32bf4c545f59f27a23
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -68,40 +70,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The msm-rng driver is currently broken on MSM8916.
-
-The first issue is that the core clock isn't defined and thus not being
-enabled before registers in the PRNG block are accessed.
-
-The second issue is that the enable method is only initializing the PRNG
-registers if the block is *already* initialized. This would have likely
-caused issues elsewhere once the driver was in more active use, but the
-problems on MSM8916 are immediate: trying to modify the state of LFSR_CFG
-causes SErrors, presumably because this register is protected by TZ.
-
-I also included a couple of extra patches while I'm in the neighborhood.
-One is to improve the logging in apq8016 clk_enable (which would have
-better surfaced the first issue). The other changes msm-rng driver slightly
-to only enable its core clock when it's needed (similar to how the kernel
-does it).
+This clock needs to be enabled for the msm-rng driver to work on
+MSM8916, otherwise accessing the PRNG register block causes a data
+abort.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
-Sam Day (4):
-      clk/qcom: apq8016: add PRNG_AHB_CLK
-      rng: msm: don't enable PRNG if it's already enabled
-      clk/qcom: apq8016: improve clk_enable logging
-      rng: msm: keep core clock disabled when PRNG not in use
+ drivers/clk/qcom/clock-apq8016.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
- drivers/clk/qcom/clock-apq8016.c |  9 +++++----
- drivers/rng/msm_rng.c            | 13 +++++++++++--
- 2 files changed, 16 insertions(+), 6 deletions(-)
----
-base-commit: 8a2a71a4eec7afdca6377ee46b1ed7e78ec692c9
-change-id: 20250126-msm-rng-fixes-f5a722a9492c
+diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8=
+016.c
+index b5def55dbc2ac671130624dec56592288a0ceb3d..ff5e7ca6f02148427240b80fb08=
+efdd356934cd5 100644
+--- a/drivers/clk/qcom/clock-apq8016.c
++++ b/drivers/clk/qcom/clock-apq8016.c
+@@ -54,8 +54,9 @@ static struct vote_clk gcc_blsp1_ahb_clk =3D {
+ };
+=20
+ static const struct gate_clk apq8016_clks[] =3D {
+-=09GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, 0x00000001),
+-=09GATE_CLK(GCC_USB_HS_SYSTEM_CLK,=090x41004, 0x00000001),
++=09GATE_CLK(GCC_PRNG_AHB_CLK,=090x45004, BIT(8)),
++=09GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, BIT(0)),
++=09GATE_CLK(GCC_USB_HS_SYSTEM_CLK,=090x41004, BIT(0)),
+ };
+=20
+ /* SDHCI */
 
-Best regards,
 --=20
-Sam Day <me@samcday.com>
+2.47.1
 
 
