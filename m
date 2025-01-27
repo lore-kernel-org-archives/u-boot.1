@@ -4,68 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B88BC0218A
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:11:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D277C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:11:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5950081253;
-	Mon, 27 Jan 2025 11:11:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id C0ADC811A6;
+	Mon, 27 Jan 2025 11:11:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="LZ+qpsRp";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="qermFhu5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB220811AC; Mon, 27 Jan 2025 11:11:17 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AA90C811A6; Mon, 27 Jan 2025 11:11:38 +0100 (CET)
+Received: from xmbghk7.mail.qq.com (xmbghk7.mail.qq.com [43.163.128.50])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5748080F10
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:11:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=1152fbf31=Manikandan.M@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1737972674; x=1769508674;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=XicVawSXZcpkjIQuSGsszC55G7xkx3z3i/wmPJnmQlA=;
- b=LZ+qpsRpo7YuPhBVxb4MHPZLkE9o+YYRQdSKarlApgJA6AANYV8aqBWR
- 9zjU7gvgbj1MPOByy0U/1mFIyAdy+qI7xY7HdcD6vxHvgSeKEuYwt/add
- WhH41X9+EcHdI7nrnmXAaAuwvrIWHEFUcUY9odUrTG1xDaaH1/VqHyQSX
- yXeF+LRUZJIuh/F455pp2b8t4D+UB57nRgrzX71/fMaE4Rn6w64DvCFIH
- N0RHtZu7tum8CZX8YdF93VVS+Zla4BIWj+lU/KmUThkbqKyNK7DGGG29r
- TwD0hrokbQZ83y6ubBrOQvjHFncLc5xFcWLNMTtCYvs7QVHqkav8FwOmv g==;
-X-CSE-ConnectionGUID: lfy9YgwjSKWpGg9eBvgZGg==
-X-CSE-MsgGUID: c7T1FpQnS8KvleNqXCQI6g==
-X-IronPort-AV: E=Sophos;i="6.13,238,1732604400"; d="scan'208";a="40916051"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 27 Jan 2025 03:11:12 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Mon, 27 Jan 2025 03:09:59 -0700
-Received: from che-lt-i67131.microchip.com (10.10.85.11) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Mon, 27 Jan 2025 03:09:57 -0700
-From: Manikandan Muralidharan <manikandan.m@microchip.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>, <pbrobinson@gmail.com>,
- <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-CC: <manikandan.m@microchip.com>, Charan Pedumuru
- <charan.pedumuru@microchip.com>
-Subject: [PATCH 7/7] ARM: dts: at91: Align pinctrl node with Linux Devicetree
-Date: Mon, 27 Jan 2025 15:39:30 +0530
-Message-ID: <20250127100930.108377-8-manikandan.m@microchip.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250127100930.108377-1-manikandan.m@microchip.com>
-References: <20250127100930.108377-1-manikandan.m@microchip.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+ by phobos.denx.de (Postfix) with ESMTPS id 40BA880F10
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:11:34 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=1425075683@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1737972692; bh=x3IVSiQB7t2zgmoV2PU0RMYuBS4eKLr1JbJj6xCl1mg=;
+ h=From:To:Cc:Subject:Date;
+ b=qermFhu5zbUDDkAvwyaSnxiMQwSsUkSU8kI0EGhVnO1Gdo86EE+r35T8mmX0y8u9o
+ jtFOPXbzE9ytIy5xN6ZAG1xgNaXPO0OPbVLYD8T1P8HS8D9OtO7vCPifD+D2+kuOKb
+ pe+kI0/CEVyy4/cLM+0Mb0kRp1nFDev0Xtx9zOb4=
+X-QQ-FEAT: oHWrrGTW1dCni6VLWI7Xi3lwP5c1dnPf
+X-QQ-SSF: 00000000000000F0000000000000
+X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
+X-QQ-XMAILINFO: NELchpK68q/35WEz1wBKa92f5Ot1FFeDZAfFnEYUe+laFp3uYerctAbdJj7v9u
+ f4jxx1mYLak5tRXUCqRpXLQfJwGhHH6P7zNkGidCdAJvquZvvtK+BvoksZ0kN79F3D7KbR67pd4L5
+ PWEK6//6LDPum86ghhQxGvYPr3JSHTHtcnW5hZxh0gcT+olE0+m882vvYp0A3QTQieWsOEwTc3QTI
+ ZoZ36LFkpOjHL+BJ2OBEJlViVBS3fsI8MYijpoBobnSS+meuocOxmSa4tv5v54fZSBkvczm3o/j8o
+ F6h5YlbftY80gDBvmLXG4S41iTbv6Fkr1tuOBAcgkdpxB2zgeTDtPP9RgEqUsSgImdlV4W95OiyNP
+ a+SS4uEmOOekBNMxFTZ/b+nygjdd/3AV8ro42zBIMMTP7RUsOdBG5rBMIHgmgz8TacX1lUM+i49Mg
+ /qfC60XB5DbhEBT4FSz8jwm8vMYE5hBRSnSu5DMEUTGbp9sNrGxjFOVKu5/6otCBwJz5DCN88qSlo
+ Y6RbyqFKKI56y0aDwxmh1N9+078QibFPSzdrj73lISvSGoiUI4D8YmKmfsvHplqL/lN0yruUKaosS
+ a1WVo7hUXzyqGeWU9IJxP/IfNZUJHAbDp92G5vpjQnkW1BZ+m5docUVHKSYTw6TniA3b4L+7QW/Zz
+ pp4PM1l0jOafiYavffnRk3/OGmtALLNZ5u6FUbHNX2P/oCL+kMcCZMpccoLUkPLfhYbzuViYBv/ZR
+ ZwSHWjsckQIuZLSNlyVGI0yo2dLEl5e/tSKkTHDgH41Erh6wasFSbQihD49dZ5u/9WfOw5tCK9rSQ
+ gTSxxNuZUwCth2xPvWZjLZLyVOd9w8tOUzELfzCnVqLsWja4IAkWkWl7GRfzI4Y0QzWYAwoENUBf2
+ EZXPc+gsAEe2bx7P/f791LUgejhAl842ziC20MhDhnDfLp2vP1uo/Y+WKbKPBKnk5SIDRSC92ap7J
+ uI+2ayCMuR2jL5RNnMZT6NLVCoW6/1Wt1F6GjWDiG1SEvvjgmz9QobljYO0UvWFWpmdYqRewUFMFY
+ rzaCX8JqqV+lXpYx5Ob9N5IfCoBkifYounwfS
+X-HAS-ATTACH: no
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 255.144.14.160
+X-QQ-STYLE: 
+X-QQ-mid: webmail864t1737972691t7650557
+From: "=?gb18030?B?u8bA+9HH?=" <1425075683@qq.com>
+To: "=?gb18030?B?SGVpbnJpY2ggU2NodWNoYXJkdA==?="
+ <heinrich.schuchardt@canonical.com>,
+ "=?gb18030?B?dHJpbmk=?=" <trini@konsulko.com>
+Cc: "=?gb18030?B?dS1ib290?=" <u-boot@lists.denx.de>,
+ "=?gb18030?B?SGVpbnJpY2ggU2NodWNoYXJkdA==?="
+ <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH] examples: fix building on arm32
+Mime-Version: 1.0
+Date: Mon, 27 Jan 2025 18:11:31 +0800
+X-Priority: 3
+Message-ID: <tencent_2F49391FB31E99414DB6E2E03EA0574CE407@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+Content-Type: text/plain;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,1221 +89,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The GPIO banks are added as sub nodes or child nodes under the
-pinctrl node (as per Linux ABI) and the reg property which points
-to an array of controllers physical base address is removed
-to align with the Linux devicetree.
-
-Signed-off-by: Charan Pedumuru <charan.pedumuru@microchip.com>
-Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
----
- arch/arm/dts/at91sam9260.dtsi |  76 +++++++++++-----------
- arch/arm/dts/at91sam9261.dtsi |  77 +++++++++++-----------
- arch/arm/dts/at91sam9263.dtsi | 117 ++++++++++++++++-----------------
- arch/arm/dts/at91sam9g45.dtsi | 106 ++++++++++++++----------------
- arch/arm/dts/at91sam9n12.dtsi |  93 +++++++++++++--------------
- arch/arm/dts/at91sam9rl.dtsi  |  93 +++++++++++++--------------
- arch/arm/dts/at91sam9x5.dtsi  |  90 ++++++++++++--------------
- arch/arm/dts/sam9x60.dtsi     |  90 +++++++++++++-------------
- arch/arm/dts/sama5d3.dtsi     | 116 ++++++++++++++++-----------------
- arch/arm/dts/sama5d4.dtsi     | 118 ++++++++++++++++------------------
- 10 files changed, 462 insertions(+), 514 deletions(-)
-
-diff --git a/arch/arm/dts/at91sam9260.dtsi b/arch/arm/dts/at91sam9260.dtsi
-index 4ea4202737c..8d496205523 100644
---- a/arch/arm/dts/at91sam9260.dtsi
-+++ b/arch/arm/dts/at91sam9260.dtsi
-@@ -401,51 +401,11 @@
- 				clock-names = "t0_clk", "t1_clk", "t2_clk", "slow_clk";
- 			};
- 
--			pioA: gpio@fffff400 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioA_clk>;
--				bootph-all;
--			};
--
--			pioB: gpio@fffff600 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioB_clk>;
--				bootph-all;
--			};
--
--			pioC: gpio@fffff800 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x200>;
--				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioC_clk>;
--				bootph-all;
--			};
--
- 			pinctrl: pinctrl@fffff400 {
- 				#address-cells = <1>;
- 				#size-cells = <1>;
- 				compatible = "atmel,at91rm9200-pinctrl", "simple-bus";
- 				ranges = <0xfffff400 0xfffff400 0x600>;
--				reg = <0xfffff400 0x200		/* pioA */
--				       0xfffff600 0x200		/* pioB */
--				       0xfffff800 0x200		/* pioC */
--				      >;
- 
- 				atmel,mux-mask = <
- 				      /*    A         B     */
-@@ -767,6 +727,42 @@
- 						atmel,pins = <AT91_PIOB 19 AT91_PERIPH_B AT91_PINCTRL_NONE>;
- 					};
- 				};
-+
-+				pioA: gpio@fffff400 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioA_clk>;
-+					bootph-all;
-+				};
-+
-+				pioB: gpio@fffff600 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioB_clk>;
-+					bootph-all;
-+				};
-+
-+				pioC: gpio@fffff800 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x200>;
-+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioC_clk>;
-+					bootph-all;
-+				};
- 			};
- 
- 			dbgu: serial@fffff200 {
-diff --git a/arch/arm/dts/at91sam9261.dtsi b/arch/arm/dts/at91sam9261.dtsi
-index 804340e75d9..65e0e4f0de0 100644
---- a/arch/arm/dts/at91sam9261.dtsi
-+++ b/arch/arm/dts/at91sam9261.dtsi
-@@ -286,51 +286,12 @@
- 				status = "disabled";
- 			};
- 
--			pioA: gpio@fffff400 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioA_clk>;
--				bootph-all;
--			};
--
--			pioB: gpio@fffff600 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioB_clk>;
--				bootph-all;
--			};
--
--			pioC: gpio@fffff800 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x200>;
--				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioC_clk>;
--				bootph-all;
--			};
--
- 			pinctrl@fffff400 {
- 				#address-cells = <1>;
- 				#size-cells = <1>;
- 				compatible = "atmel,at91rm9200-pinctrl", "simple-bus";
- 				ranges = <0xfffff400 0xfffff400 0x600>;
--				reg = <0xfffff400 0x200		/* pioA */
--				       0xfffff600 0x200		/* pioB */
--				       0xfffff800 0x200		/* pioC */
--				      >;
-+
- 				atmel,mux-mask =
- 				      /*    A         B     */
- 				      <0xffffffff 0xfffffff7>,  /* pioA */
-@@ -573,6 +534,42 @@
- 							<AT91_PIOB 28 AT91_PERIPH_B AT91_PINCTRL_NONE>;
- 					};
- 				};
-+
-+				pioA: gpio@fffff400 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioA_clk>;
-+					bootph-all;
-+				};
-+
-+				pioB: gpio@fffff600 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioB_clk>;
-+					bootph-all;
-+				};
-+
-+				pioC: gpio@fffff800 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x200>;
-+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioC_clk>;
-+					bootph-all;
-+				};
- 			};
- 
- 			pmc: pmc@fffffc00 {
-diff --git a/arch/arm/dts/at91sam9263.dtsi b/arch/arm/dts/at91sam9263.dtsi
-index 98cdd8ebcca..55b79667564 100644
---- a/arch/arm/dts/at91sam9263.dtsi
-+++ b/arch/arm/dts/at91sam9263.dtsi
-@@ -404,12 +404,6 @@
- 				#size-cells = <1>;
- 				compatible = "atmel,at91rm9200-pinctrl", "simple-bus";
- 				ranges = <0xfffff200 0xfffff200 0xa00>;
--				reg = <0xfffff200 0x200
--				       0xfffff400 0x200
--				       0xfffff600 0x200
--				       0xfffff800 0x200
--				       0xfffffa00 0x200
--				      >;
- 
- 				atmel,mux-mask = <
- 				      /*    A         B     */
-@@ -719,66 +713,65 @@
- 					};
- 				};
- 
--			};
--
--			pioA: gpio@fffff200 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff200 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioA_clk>;
--				bootph-all;
--			};
-+				pioA: gpio@fffff200 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff200 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioA_clk>;
-+					bootph-all;
-+				};
- 
--			pioB: gpio@fffff400 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioB_clk>;
--				bootph-all;
--			};
-+				pioB: gpio@fffff400 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioB_clk>;
-+					bootph-all;
-+				};
- 
--			pioC: gpio@fffff600 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x200>;
--				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioCDE_clk>;
--				bootph-all;
--			};
-+				pioC: gpio@fffff600 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x200>;
-+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioCDE_clk>;
-+					bootph-all;
-+				};
- 
--			pioD: gpio@fffff800 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x200>;
--				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioCDE_clk>;
--				bootph-all;
--			};
-+				pioD: gpio@fffff800 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x200>;
-+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioCDE_clk>;
-+					bootph-all;
-+				};
- 
--			pioE: gpio@fffffa00 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffffa00 0x200>;
--				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioCDE_clk>;
--				bootph-all;
-+				pioE: gpio@fffffa00 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffffa00 0x200>;
-+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioCDE_clk>;
-+					bootph-all;
-+				};
- 			};
- 
- 			dbgu: serial@ffffee00 {
-diff --git a/arch/arm/dts/at91sam9g45.dtsi b/arch/arm/dts/at91sam9g45.dtsi
-index d0bcd797359..63a061354e4 100644
---- a/arch/arm/dts/at91sam9g45.dtsi
-+++ b/arch/arm/dts/at91sam9g45.dtsi
-@@ -435,12 +435,6 @@
- 				#size-cells = <1>;
- 				compatible = "atmel,at91rm9200-pinctrl", "simple-bus";
- 				ranges = <0xfffff200 0xfffff200 0xa00>;
--				reg = <0xfffff200 0x200
--				       0xfffff400 0x200
--				       0xfffff600 0x200
--				       0xfffff800 0x200
--				       0xfffffa00 0x200
--				      >;
- 				bootph-all;
- 
- 				atmel,mux-mask = <
-@@ -854,61 +848,61 @@
- 							 AT91_PIOE 30 AT91_PERIPH_A AT91_PINCTRL_NONE>;	/* PE30 periph A */
- 					};
- 				};
--			};
- 
--			pioA: gpio@fffff200 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff200 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioA_clk>;
--			};
-+				pioA: gpio@fffff200 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff200 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioA_clk>;
-+				};
- 
--			pioB: gpio@fffff400 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioB_clk>;
--			};
-+				pioB: gpio@fffff400 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioB_clk>;
-+				};
- 
--			pioC: gpio@fffff600 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x200>;
--				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioC_clk>;
--			};
-+				pioC: gpio@fffff600 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x200>;
-+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioC_clk>;
-+				};
- 
--			pioD: gpio@fffff800 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x200>;
--				interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioDE_clk>;
--			};
-+				pioD: gpio@fffff800 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x200>;
-+					interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioDE_clk>;
-+				};
- 
--			pioE: gpio@fffffa00 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffffa00 0x200>;
--				interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioDE_clk>;
-+				pioE: gpio@fffffa00 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffffa00 0x200>;
-+					interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioDE_clk>;
-+				};
- 			};
- 
- 			dbgu: serial@ffffee00 {
-diff --git a/arch/arm/dts/at91sam9n12.dtsi b/arch/arm/dts/at91sam9n12.dtsi
-index cb3a0370b86..84089837013 100644
---- a/arch/arm/dts/at91sam9n12.dtsi
-+++ b/arch/arm/dts/at91sam9n12.dtsi
-@@ -492,11 +492,6 @@
- 				#size-cells = <1>;
- 				compatible = "atmel,at91sam9x5-pinctrl", "atmel,at91rm9200-pinctrl", "simple-bus";
- 				ranges = <0xfffff400 0xfffff400 0x800>;
--				reg = <0xfffff400 0x200
--				       0xfffff600 0x200
--				       0xfffff800 0x200
--				       0xfffffa00 0x200
--				      >;
- 
- 				atmel,mux-mask = <
- 				      /*    A         B          C     */
-@@ -795,54 +790,54 @@
- 						atmel,pins = <AT91_PIOC 13 AT91_PERIPH_C AT91_PINCTRL_NONE>;
- 					};
- 				};
--			};
- 
--			pioA: gpio@fffff400 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioAB_clk>;
--				bootph-all;
--			};
-+				pioA: gpio@fffff400 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioAB_clk>;
-+					bootph-all;
-+				};
- 
--			pioB: gpio@fffff600 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioAB_clk>;
--				bootph-all;
--			};
-+				pioB: gpio@fffff600 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioAB_clk>;
-+					bootph-all;
-+				};
- 
--			pioC: gpio@fffff800 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioCD_clk>;
--				bootph-all;
--			};
-+				pioC: gpio@fffff800 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioCD_clk>;
-+					bootph-all;
-+				};
- 
--			pioD: gpio@fffffa00 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffffa00 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioCD_clk>;
--				bootph-all;
-+				pioD: gpio@fffffa00 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffffa00 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioCD_clk>;
-+					bootph-all;
-+				};
- 			};
- 
- 			dbgu: serial@fffff200 {
-diff --git a/arch/arm/dts/at91sam9rl.dtsi b/arch/arm/dts/at91sam9rl.dtsi
-index b855c8fe0fe..3b99de21058 100644
---- a/arch/arm/dts/at91sam9rl.dtsi
-+++ b/arch/arm/dts/at91sam9rl.dtsi
-@@ -386,11 +386,6 @@
- 				#size-cells = <1>;
- 				compatible = "atmel,at91rm9200-pinctrl", "simple-bus";
- 				ranges = <0xfffff400 0xfffff400 0x800>;
--				reg = <0xfffff400 0x200
--				       0xfffff600 0x200
--				       0xfffff800 0x200
--				       0xfffffa00 0x200
--				      >;
- 
- 				atmel,mux-mask =
- 					/*    A         B     */
-@@ -768,54 +763,54 @@
- 							<AT91_PIOA 20 AT91_PERIPH_B AT91_PINCTRL_NONE>;
- 					};
- 				};
--			};
- 
--			pioA: gpio@fffff400 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioA_clk>;
--				bootph-all;
--			};
-+				pioA: gpio@fffff400 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioA_clk>;
-+					bootph-all;
-+				};
- 
--			pioB: gpio@fffff600 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioB_clk>;
--				bootph-all;
--			};
-+				pioB: gpio@fffff600 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioB_clk>;
-+					bootph-all;
-+				};
- 
--			pioC: gpio@fffff800 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x200>;
--				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioC_clk>;
--				bootph-all;
--			};
-+				pioC: gpio@fffff800 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x200>;
-+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioC_clk>;
-+					bootph-all;
-+				};
- 
--			pioD: gpio@fffffa00 {
--				compatible = "atmel,at91rm9200-gpio";
--				reg = <0xfffffa00 0x200>;
--				interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioD_clk>;
--				bootph-all;
-+				pioD: gpio@fffffa00 {
-+					compatible = "atmel,at91rm9200-gpio";
-+					reg = <0xfffffa00 0x200>;
-+					interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioD_clk>;
-+					bootph-all;
-+				};
- 			};
- 
- 			pmc: pmc@fffffc00 {
-diff --git a/arch/arm/dts/at91sam9x5.dtsi b/arch/arm/dts/at91sam9x5.dtsi
-index 5fca9b13c27..4c6d8b9bb65 100644
---- a/arch/arm/dts/at91sam9x5.dtsi
-+++ b/arch/arm/dts/at91sam9x5.dtsi
-@@ -461,14 +461,8 @@
- 				#size-cells = <1>;
- 				compatible = "atmel,at91sam9x5-pinctrl", "atmel,at91rm9200-pinctrl", "simple-bus";
- 				ranges = <0xfffff400 0xfffff400 0x800>;
--				reg = <0xfffff400 0x200		/* pioA */
--				       0xfffff600 0x200		/* pioB */
--				       0xfffff800 0x200		/* pioC */
--				       0xfffffa00 0x200		/* pioD */
--				       >;
- 				bootph-all;
- 
--
- 				/* shared pinctrl settings */
- 				dbgu {
- 					bootph-all;
-@@ -831,52 +825,52 @@
- 						atmel,pins = <AT91_PIOC 13 AT91_PERIPH_C AT91_PINCTRL_NONE>;
- 					};
- 				};
--			};
- 
--			pioA: gpio@fffff400 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioAB_clk>;
--			};
-+				pioA: gpio@fffff400 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioAB_clk>;
-+				};
- 
--			pioB: gpio@fffff600 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				#gpio-lines = <19>;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioAB_clk>;
--			};
-+				pioB: gpio@fffff600 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					#gpio-lines = <19>;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioAB_clk>;
-+				};
- 
--			pioC: gpio@fffff800 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioCD_clk>;
--			};
-+				pioC: gpio@fffff800 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioCD_clk>;
-+				};
- 
--			pioD: gpio@fffffa00 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffffa00 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				#gpio-lines = <22>;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioCD_clk>;
-+				pioD: gpio@fffffa00 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffffa00 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					#gpio-lines = <22>;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioCD_clk>;
-+				};
- 			};
- 
- 			ssc0: ssc@f0010000 {
-diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
-index a45e346d4ab..9a20ecd2593 100644
---- a/arch/arm/dts/sam9x60.dtsi
-+++ b/arch/arm/dts/sam9x60.dtsi
-@@ -214,10 +214,6 @@
- 				#size-cells = <1>;
- 				compatible = "microchip,sam9x60-pinctrl", "atmel,at91sam9x5-pinctrl", "atmel,at91rm9200-pinctrl", "simple-bus";
- 				ranges = <0xfffff400 0xfffff400 0x800>;
--				reg = <0xfffff400 0x200		/* pioA */
--				       0xfffff600 0x200		/* pioB */
--				       0xfffff800 0x200		/* pioC */
--				       0xfffffa00 0x200>;	/* pioD */
- 
- 				/* mux-mask corresponding to sam9x60 SoC in TFBGA228L package */
- 				atmel,mux-mask = <
-@@ -227,50 +223,50 @@
- 						  0xffffffff 0xffffffff 0xf83fffff       /* pioC */
- 						  0x003fffff 0x003f8000 0x00000000       /* pioD */
- 						  >;
--			};
--
--			pioA: gpio@fffff400 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x200>;
--				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pmc PMC_TYPE_PERIPHERAL 2>;
--			};
- 
--			pioB: gpio@fffff600 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x200>;
--				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pmc PMC_TYPE_PERIPHERAL 3>;
--			};
--
--			pioC: gpio@fffff800 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x200>;
--				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pmc PMC_TYPE_PERIPHERAL 4>;
--			};
--
--			pioD: gpio@fffffa00 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffffa00 0x200>;
--				interrupts = <44 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pmc PMC_TYPE_PERIPHERAL 44>;
-+				pioA: gpio@fffff400 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x200>;
-+					interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pmc PMC_TYPE_PERIPHERAL 2>;
-+				};
-+
-+				pioB: gpio@fffff600 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x200>;
-+					interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pmc PMC_TYPE_PERIPHERAL 3>;
-+				};
-+
-+				pioC: gpio@fffff800 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x200>;
-+					interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pmc PMC_TYPE_PERIPHERAL 4>;
-+				};
-+
-+				pioD: gpio@fffffa00 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffffa00 0x200>;
-+					interrupts = <44 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pmc PMC_TYPE_PERIPHERAL 44>;
-+				};
- 			};
- 
- 			pmc: pmc@fffffc00 {
-diff --git a/arch/arm/dts/sama5d3.dtsi b/arch/arm/dts/sama5d3.dtsi
-index 4c03a302ec7..10d6e74586d 100644
---- a/arch/arm/dts/sama5d3.dtsi
-+++ b/arch/arm/dts/sama5d3.dtsi
-@@ -492,12 +492,6 @@
- 					0xffffffff 0xc001c0e0 0x0001c1e0	/* pioD */
- 					0xffffffff 0xbf9f8000 0x18000000	/* pioE */
- 					>;
--				reg = <0xfffff200 0x100		/* pioA */
--				       0xfffff400 0x100		/* pioB */
--				       0xfffff600 0x100		/* pioC */
--				       0xfffff800 0x100		/* pioD */
--				       0xfffffa00 0x100		/* pioE */
--				       >;
- 
- 				/* shared pinctrl settings */
- 				adc0 {
-@@ -873,66 +867,66 @@
- 							 AT91_PIOE 17 AT91_PERIPH_B AT91_PINCTRL_NONE>;	/* PE17 periph B, conflicts with A17 */
- 					};
- 				};
--			};
- 
--			pioA: gpio@fffff200 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff200 0x100>;
--				interrupts = <6 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioA_clk>;
--				bootph-all;
--			};
-+				pioA: gpio@fffff200 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff200 0x100>;
-+					interrupts = <6 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioA_clk>;
-+					bootph-all;
-+				};
- 
--			pioB: gpio@fffff400 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff400 0x100>;
--				interrupts = <7 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioB_clk>;
--				bootph-all;
--			};
-+				pioB: gpio@fffff400 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff400 0x100>;
-+					interrupts = <7 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioB_clk>;
-+					bootph-all;
-+				};
- 
--			pioC: gpio@fffff600 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff600 0x100>;
--				interrupts = <8 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioC_clk>;
--				bootph-all;
--			};
-+				pioC: gpio@fffff600 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff600 0x100>;
-+					interrupts = <8 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioC_clk>;
-+					bootph-all;
-+				};
- 
--			pioD: gpio@fffff800 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffff800 0x100>;
--				interrupts = <9 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioD_clk>;
--				bootph-all;
--			};
-+				pioD: gpio@fffff800 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffff800 0x100>;
-+					interrupts = <9 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioD_clk>;
-+					bootph-all;
-+				};
- 
--			pioE: gpio@fffffa00 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfffffa00 0x100>;
--				interrupts = <10 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioE_clk>;
--				bootph-all;
-+				pioE: gpio@fffffa00 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfffffa00 0x100>;
-+					interrupts = <10 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioE_clk>;
-+					bootph-all;
-+				};
- 			};
- 
- 			pmc: pmc@fffffc00 {
-diff --git a/arch/arm/dts/sama5d4.dtsi b/arch/arm/dts/sama5d4.dtsi
-index 5e2c9a1db2f..482cf03e61b 100644
---- a/arch/arm/dts/sama5d4.dtsi
-+++ b/arch/arm/dts/sama5d4.dtsi
-@@ -1361,62 +1361,6 @@
- 				status = "disabled";
- 			};
- 
--			pioA: gpio@fc06a000 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfc06a000 0x100>;
--				interrupts = <23 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioA_clk>;
--			};
--
--			pioB: gpio@fc06b000 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfc06b000 0x100>;
--				interrupts = <24 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioB_clk>;
--			};
--
--			pioC: gpio@fc06c000 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfc06c000 0x100>;
--				interrupts = <25 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioC_clk>;
--				bootph-all;
--			};
--
--			pioD: gpio@fc068000 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfc068000 0x100>;
--				interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioD_clk>;
--			};
--
--			pioE: gpio@fc06d000 {
--				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
--				reg = <0xfc06d000 0x100>;
--				interrupts = <26 IRQ_TYPE_LEVEL_HIGH 1>;
--				#gpio-cells = <2>;
--				gpio-controller;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				clocks = <&pioE_clk>;
--			};
--
- 			pinctrl@fc06a000 {
- 				bootph-all;
- 				#address-cells = <1>;
-@@ -1433,12 +1377,62 @@
- 					0x0003ff00 0x8002a800 0x00000000	/* pioD */
- 					0xffffffff 0x7fffffff 0x76fff1bf	/* pioE */
- 					>;
--				reg = < 0xfc06a000 0x100
--					0xfc06b000 0x100
--					0xfc06c000 0x100
--					0xfc068000 0x100
--					0xfc06d000 0x100
--					>;
-+
-+				pioA: gpio@fc06a000 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfc06a000 0x100>;
-+					interrupts = <23 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioA_clk>;
-+				};
-+
-+				pioB: gpio@fc06b000 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfc06b000 0x100>;
-+					interrupts = <24 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioB_clk>;
-+				};
-+
-+				pioC: gpio@fc06c000 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfc06c000 0x100>;
-+					interrupts = <25 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioC_clk>;
-+					bootph-all;
-+				};
-+
-+				pioD: gpio@fc068000 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfc068000 0x100>;
-+					interrupts = <5 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioD_clk>;
-+				};
-+
-+				pioE: gpio@fc06d000 {
-+					compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
-+					reg = <0xfc06d000 0x100>;
-+					interrupts = <26 IRQ_TYPE_LEVEL_HIGH 1>;
-+					#gpio-cells = <2>;
-+					gpio-controller;
-+					interrupt-controller;
-+					#interrupt-cells = <2>;
-+					clocks = <&pioE_clk>;
-+				};
- 
- 				/* pinctrl pin settings */
- 				adc0 {
--- 
-2.25.1
-
+SGVsbG8gSGVpbnJpY2gNCg0KDQpJIG1vZGlmaWVkIHRoZSBjb2RlIGZvciBhcm0zMiBhcmNo
+aXRlY3R1cmUuIFlvdSBtYXkgYmUgdXNpbmcgYW4gQVJNNjQgYXJjaGl0ZWN0dXJlLiBUYWtl
+IGEgbG9vayBhdCB0aGUgYXJjaGl0ZWN0dXJlIHVzZWQuDQoNCg0KdmVyc2lvbiBvZiBVLUJv
+b3QgKGNvbW1pdCBpbiBnaXQpOiANCiZuYnNwOyAmbmJzcDsgZDhhNzEwMGQ2NThlYjIwMWZh
+MGU5NTU2NjdmZGZmMjk4ZGIzMTk0NQ0KDQpvcGVyYXRpbmcgc3lzdGVtIGFuZCBhcmNoaXRl
+Y3R1cmU6DQombmJzcDsgJm5ic3A7IDUuMTUuMC0xMzAtZ2VuZXJpYyB4ODZfNjQNCg0KaW5z
+dGFsbGVkIHZlcnNpb24gb2YgZ2NjIGFuZCBiaW51dGlscw0KJm5ic3A7ICZuYnNwOyBnY2Mg
+dmVyc2lvbiA5LjQuMCAoVWJ1bnR1IDkuNC4wLTF1YnVudHUxfjIwLjA0LjMpDQombmJzcDsg
+Jm5ic3A7IEdOVSBsZCAoR05VIEJpbnV0aWxzIGZvciBVYnVudHUpIDIuMzQNCiZuYnNwOw0K
+dXNlZCBkZWZjb25maWcNCiZuYnNwOyAmbmJzcDsgc3RtMzJoNzUwLWFydC1waV9kZWZjb25m
+aWcNCnVzZWQgY29tbWFuZHMgZm9yIGJ1aWxkaW5nDQombmJzcDsgJm5ic3A7IG1ha2UgQ1JP
+U1NfQ09NUElMRT1hcm0tbm9uZS1lYWJpLSBBUkNIPWFybSBzdG0zMmg3NTAtYXJ0LXBpX2Rl
+ZmNvbmZpZw0KJm5ic3A7ICZuYnNwOyBtYWtlIENST1NTX0NPTVBJTEU9YXJtLW5vbmUtZWFi
+aS0gQVJDSD1hcm0gbWVudWNvbmZpZyAjIHRvIGFkZCBDT05GSUdfQVBJPXksIENPTkZJR19F
+WEFNUExFUz15DQombmJzcDsgJm5ic3A7IG1ha2UgQ1JPU1NfQ09NUElMRT1hcm0tbm9uZS1l
+YWJpLSBBUkNIPWFybSAtaiAxMg0KDQoNCmh0dHBzOi8vZGV2ZWxvcGVyLmFybS5jb20vZG9j
+dW1lbnRhdGlvbi9kZW4wMDEzL2QvQXBwbGljYXRpb24tQmluYXJ5LUludGVyZmFjZXMvUHJv
+Y2VkdXJlLUNhbGwtU3RhbmRhcmQNCmxpc3RzIElQLCBTUCwgUEMgYXMgYWxpYXNlcyBmb3Ig
+cmVnaXN0ZXJzIFIxMiwgUjEzLCBSMTUuDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KSSBoYXZlIHRyaWVkIHVzaW5n
+IFIxMiwgUjEzLCBSMTUgYW5kIHRoZSBlcnJvciBtZXNzYWdlIGlzIGFzIGZvbGxvd3M6DQom
+bmJzcDsgJm5ic3A7IGV4YW1wbGVzL2FwaS9jcnQwLlM6MzI6IEVycm9yOiBsbyByZWdpc3Rl
+ciByZXF1aXJlZCAtLSBgbGRyIHIxMiw9c2VhcmNoX2hpbnQnDQombmJzcDsgJm5ic3A7IGV4
+YW1wbGVzL2FwaS9jcnQwLlM6MzQ6IEVycm9yOiBsbyByZWdpc3RlciByZXF1aXJlZCAtLSBg
+c3RyIFIxMyxbcjEyXScNCiZuYnNwOyAmbmJzcDsgZXhhbXBsZXMvYXBpL2NydDAuUzo0MDog
+RXJyb3I6IGxvIHJlZ2lzdGVyIHJlcXVpcmVkIC0tIGBsZHIgcjEyLD1zeXNjYWxsX3B0cicN
+CiZuYnNwOyAmbmJzcDsgZXhhbXBsZXMvYXBpL2NydDAuUzo0MTogRXJyb3I6IGxvIHJlZ2lz
+dGVyIHJlcXVpcmVkIC0tIGBsZHIgcjE1LFtyMTJdJw0KDQoNCkFzIHRoZSBlcnJvciBtZXNz
+YWdlIHN1Z2dlc3RzLCB5b3UgbmVlZCB0byB1c2UgYSBsb3cgcmVnaXN0ZXIgKGxvIHJlZ2lz
+dGVyKSwgYW5kIHIxMiBhbmQgc2ltaWxhciByZWdpc3RlcnMgYmVsb25nIHRvIHRoZSBoaWdo
+IHJlZ2lzdGVyIChoaSByZWdpc3RlcikgY2F0ZWdvcnkuDQoNCg0KQmVzdCByZWdhcmRzDQoN
+CkxpWWENCi0tLS0tLS0tLS0tLS0tLS0tLSDUrcq808q8/iAtLS0tLS0tLS0tLS0tLS0tLS0N
+CreivP7IyzogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAiSGVpbnJpY2ggU2NodWNoYXJkdCIgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICA8aGVpbnJpY2guc2NodWNoYXJkdEBjYW5vbmljYWwuY29tJmd0
+OzsNCreiy83KsbzkOiZuYnNwOzIwMjXE6jHUwjI3yNUo0MfG2tK7KSDPws7nMjo0OQ0KytW8
+/sjLOiZuYnNwOyJUb20gUmluaSI8dHJpbmlAa29uc3Vsa28uY29tJmd0OzsNCrOty806Jm5i
+c3A7IrvGwPvRxyI8MTQyNTA3NTY4M0BxcS5jb20mZ3Q7OyJ1LWJvb3QiPHUtYm9vdEBsaXN0
+cy5kZW54LmRlJmd0OzsiSGVpbnJpY2ggU2NodWNoYXJkdCI8aGVpbnJpY2guc2NodWNoYXJk
+dEBjYW5vbmljYWwuY29tJmd0OzsNCtb3zOI6Jm5ic3A7W1BBVENIIDEvMV0gZXhhbXBsZXMv
+YXBpOiBpbXByb3ZlIGRldGVybWluYXRpb24gb2YgTE9BRF9BRERSDQoNCg0KDQpUaGUgY3Vy
+cmVudCBsb2FkIGFkZHJlc3MgZm9yIHRoZSAnZGVtbycgYmluYXJ5IGRvZXMgbm90IHdvcmsg
+Zm9yDQpxZW11X2FybV9kZWZjb25maWcuDQoNClRoZSBzdWl0YWJpbGl0eSBvZiBhbiBhZGRy
+ZXNzIHRvIGxvYWQgYW4gRUxGIGJpbmFyeSBhbmQgcnVuIGl0IGRvZXMNCm5vdCBvbmx5IGRl
+cGVuZCBvbiB0aGUgYXJjaGl0ZWN0dXJlIGJ1dCBhbHNvIG9uIHRoZSBtZW1vcnkgbGF5b3V0
+IG9mDQp0aGUgYm9hcmQuDQoNCk9uIG1vc3QgYm9hcmRzIHdlIGNhbiBhc3N1bWUgdGhhdCA4
+IE1pQiBvZiBtZW1vcnkgaXMgYXZhaWxhYmxlIGFib3ZlDQokbG9hZGFkZHIuIFNvICRsb2Fk
+YWRkciArIDB4NDAwMDAwIHNob3VsZCB3b3JrIHRoZXJlLg0KDQpTaWduZWQtb2ZmLWJ5OiBI
+ZWlucmljaCBTY2h1Y2hhcmR0IDxoZWlucmljaC5zY2h1Y2hhcmR0QGNhbm9uaWNhbC5jb20m
+Z3Q7DQotLS0NCiZuYnNwO2V4YW1wbGVzL2FwaS9NYWtlZmlsZSB8IDIzICsrKy0tLS0tLS0t
+LS0tLS0tLS0tLS0tDQombmJzcDsxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAy
+MCBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2V4YW1wbGVzL2FwaS9NYWtlZmlsZSBi
+L2V4YW1wbGVzL2FwaS9NYWtlZmlsZQ0KaW5kZXggNzIyYzdlNDU5MDQuLmJlOTdiODAxNWJk
+IDEwMDY0NA0KLS0tIGEvZXhhbXBsZXMvYXBpL01ha2VmaWxlDQorKysgYi9leGFtcGxlcy9h
+cGkvTWFrZWZpbGUNCkBAIC01LDI2ICs1LDkgQEANCiZuYnNwOyMgUHJvdmlkZSBzeW1ib2wg
+QVBJX0JVSUxEIHRvIHNpZ25hbCB0aGF0IHRoZSBBUEkgZXhhbXBsZSBpcyBiZWluZyBidWls
+dC4NCiZuYnNwO0tCVUlMRF9DUFBGTEFHUyArPSAtREFQSV9CVUlMRA0KJm5ic3A7DQotaWZl
+cSAoJChBUkNIKSxwb3dlcnBjKQ0KLUxPQURfQUREUiA9IDB4NDAwMDANCi1lbmRpZg0KLWlm
+ZXEgKCQoQVJDSCksYXJtKQ0KLWlmZGVmIENPTkZJR182NEJJVA0KLUxPQURfQUREUiA9IDB4
+NDA0MDAwMDANCi1lbHNlDQotTE9BRF9BRERSID0gMHgxMDAwMDAwDQotZW5kaWYNCi1lbmRp
+Zg0KLWlmZXEgKCQoQVJDSCksbWlwcykNCi1pZmRlZiBDT05GSUdfNjRCSVQNCi1MT0FEX0FE
+RFIgPSAweGZmZmZmZmZmODAyMDAwMDANCi1lbHNlDQotTE9BRF9BRERSID0gMHg4MDIwMDAw
+MA0KLWVuZGlmDQotZW5kaWYNCi1pZmVxICgkKEFSQ0gpLHJpc2N2KQ0KLUxPQURfQUREUiA9
+IDB4ODQwMDAwMDANCi1lbmRpZg0KKyMgRW52aXJvbm1lbnQgdmFyaWFibGUgbG9hZGFkZHIg
+aXMgc2V0IGZyb20gQ09ORklHX1NZU19MT0FEX0FERFIuDQorIyBSdW4gdGhlIGV4YW1wbGVz
+IDQgTWlCIGFib3ZlIHRoaXMgYWRkcmVzcy4NCitMT0FEX0FERFI6PSR7c2hlbGwgcHJpbnRm
+IDB4JVggJCQoKCAkKENPTkZJR19TWVNfTE9BRF9BRERSKSArIDB4NDAwMDAwICkpfQ0KJm5i
+c3A7DQombmJzcDsjIFJlc3VsdGluZyBFTEYgYW5kIGJpbmFyeSBleGVjdHVhYmxlcyB3aWxs
+IGJlIG5hbWVkIGRlbW8gYW5kIGRlbW8uYmluDQombmJzcDtleHRyYS15ID0gZGVtbw0KLS0g
+DQoyLjQ3LjE=
