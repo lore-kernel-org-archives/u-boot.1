@@ -4,75 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECA6CC02188
-	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 10:52:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD160C02188
+	for <u-boot@archiver.kernel.org>; Mon, 27 Jan 2025 11:12:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 512B381119;
-	Mon, 27 Jan 2025 11:52:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 09FAA81119;
+	Mon, 27 Jan 2025 12:11:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p54/UyjU";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Tt0xffdj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22CA28111F; Mon, 27 Jan 2025 11:52:50 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3403981115
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 11:52:45 +0100 (CET)
+ id 9CCCA8111F; Mon, 27 Jan 2025 12:11:58 +0100 (CET)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2062d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::62d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E570B81115
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 12:11:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-vm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50RAqeww967298
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 27 Jan 2025 04:52:40 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1737975160;
- bh=KRsGJJneXCGzfOkOwReaqzMI277i955UDM/gi/UOeV8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=p54/UyjUpA7Dl084tpwLAu5KItC+wzHnzVjQ1tUBXmzWHf9Yw/QxyLyhZt6N78ESh
- trerBgKCHURa622FR+b2Q6tnJk/o/GFnjZKwSkOYIH6Jgsy8u/lCd2zxJNMz54dyaf
- 1t4zazM3bW8MNamflKtGxrvAkmXm9HjlQ1ETsptY=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50RAqePa070169
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 27 Jan 2025 04:52:40 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
- Jan 2025 04:52:40 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 27 Jan 2025 04:52:40 -0600
-Received: from [10.24.69.179] ([10.24.69.179])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50RAqbGN092223;
- Mon, 27 Jan 2025 04:52:37 -0600
-Message-ID: <7be0605f-b986-ca34-4b83-7338329afac4@ti.com>
-Date: Mon, 27 Jan 2025 16:22:36 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vlhEKL7IrP0+SOElV7jxwEpjBRoCu4V4bLcgRZqt7kU82/a0JU/Dbc6HZ2wCAMjPJT0LLWb2McxFSELj10wSdrXwzoFX95wqRn0G/eg+w8KOKJEgjsxl8eMFSDJwdMgAlz/NGiS2U8hcM9kBRWhLu5t1nniqbUs5toulHrVagfRPMwLWsbx75zLCECueeZBK+FsF1UKzP5hfTFSkbvN2fuo2sgRnk9k9o2D7eJbQO/gi4g1bxCeOJBhH+aEuJOiDJUkowd73NtwKmIMJwMqsCUs1osHlCQ04AZ861bcK9wJKPmhd4qKzpC9CF8YZDg3PQ7aNZFsP32MJJ7rDgGYx8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=w9JhwQMOWo73gNPTHHNljDVxvhRUw/hEwazPxAftxI4=;
+ b=H3bHZKoM8Twpzl3qbJyloySQ50bN73Xl0fwm6aHMSs95e7gYgmK1vxhV3HK+4m44WT/kW4IWLZo/+v2WduPnHR4ENCo1tx8Xsy+G3JlHJU7zrvdBbgnEo5jz5k+AcRMQ7IL9WKgw263ilWNvY+2wqii3/9vcOTSM1n74iMCRQ3QVuh2P1+vtxXBSDk1l4wDT+Qx/9iLyYyAUb1VkO94lXQYe2ttXDjhaKTdGxW/4AQXpnRW7G2SjZe08KaTB8BOAnUNd+8ysBFCNPr+PmJVYF1+eNBN/sZS22F2y7FtB9rfZtrPNLXiyasM6s1YhbjrPvAFPWmS/9q+oGUdHalkNiA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=w9JhwQMOWo73gNPTHHNljDVxvhRUw/hEwazPxAftxI4=;
+ b=Tt0xffdjKrQSmdXM4enxFZmmwVnsnHjIJnVz6hApmPPJRXOZKBDOIu6+GVDFTQ5gog3A8onr3sQmkBZR83aAF1Gb+P5Xqn7j0ILzRP9IFpspEFNsHRvN5gU0SCrrvjUdzsXiZtY8eCrthPe4N7yPXylS7oijg/+A+zlB9EvfTNA=
+Received: from MN2PR15CA0021.namprd15.prod.outlook.com (2603:10b6:208:1b4::34)
+ by PH7PR12MB7453.namprd12.prod.outlook.com (2603:10b6:510:20a::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.21; Mon, 27 Jan
+ 2025 11:11:48 +0000
+Received: from BN3PEPF0000B373.namprd21.prod.outlook.com
+ (2603:10b6:208:1b4:cafe::fb) by MN2PR15CA0021.outlook.office365.com
+ (2603:10b6:208:1b4::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8356.22 via Frontend Transport; Mon,
+ 27 Jan 2025 11:11:47 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN3PEPF0000B373.mail.protection.outlook.com (10.167.243.170) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8398.0 via Frontend Transport; Mon, 27 Jan 2025 11:11:47 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 27 Jan
+ 2025 05:11:44 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Prasad Kummari <prasad.kummari@amd.com>,
+ Srinivas Goud <srinivas.goud@amd.com>, T Karthik Reddy
+ <t.karthik.reddy@xilinx.com>, Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
+ Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v2] xilinx: Enable meminfo command with mapping
+Date: Mon, 27 Jan 2025 12:11:38 +0100
+Message-ID: <b7f9f5e18e16a945277d4b8cfde5a7f057e77676.1737976295.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [EXTERNAL] Re: Proposal for a New Command to U-Boot Fuse
- Programming
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-CC: <sjg@chromium.org>, <angus@akkea.ca>, <u-boot@lists.denx.de>,
- <vigneshr@ti.com>, <kamlesh@ti.com>, <d-gole@ti.com>,
- <k-malarvizhi@ti.com>, <a-parmar1@ti.com>, <khasim@ti.com>
-References: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
- <20250106222314.GF3476@bill-the-cat>
- <5e166f95-681a-8a96-0d8c-033c36d47d5a@ti.com>
- <20250122172209.GN3476@bill-the-cat>
- <9cf9590b-e9ba-6d46-dd4d-80a71765e062@ti.com>
- <20250124192956.GV60249@bill-the-cat>
-From: Harsha Vardhan V M <h-vm@ti.com>
-In-Reply-To: <20250124192956.GV60249@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3749; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=A7Oxbpn0F1rzE7GxF5JeYOs/FlHutuStyzZ+VH6+wM8=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvTpmW+yD5s/8vA7fehZ9AulSxy2oe8C669XqU+T8j5/4
+ /r/n9vndsSyMAgyMciKKbJI21w5s7dyxhThi4flYOawMoEMYeDiFICJTDzBMD8ju21RyTmtne2X
+ Pv7+uU7FdIZz0C2GBdOMNWe/Ld/+ZNMV+RmLTFmXrszyyAcA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B373:EE_|PH7PR12MB7453:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0e31b38a-7815-4ecc-4e64-08dd3ec36428
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?SwgqsXqZ6CVPY7MuqzJecqHKJ1ZbDpE+r4EOTjxg9IdwZ1IoxK+0RHAl7uR9?=
+ =?us-ascii?Q?s74rTz1dzowFRKcMEOc6Kf40w4D6qepgYfi+WSN16gfIi32cO1kTy4KAAxx/?=
+ =?us-ascii?Q?fS7I55krBi/R86bCFBhDRrFc+ZIJUQEiDGXvnkQKliJ/8hei8HH4KYOqhvK5?=
+ =?us-ascii?Q?uWA/z1QDsaiVTiDDJr4SZcPMEMWBtzrSA7uv3KJPqrN2gCdkcg69rdDaMXek?=
+ =?us-ascii?Q?QkyGUWsqiGxEg/yeXUjBvZgJf612DRCjVq4GCGu0tWet5ctuOcm3HH5z5K2b?=
+ =?us-ascii?Q?/nH+B+sHXK9nU6UkydebAqwYz/Ah0YKFdBF+C0I9yw4Sf30LdaHb54QuVFqw?=
+ =?us-ascii?Q?xirtV/fO3ptr59r+8XXveSVxnz9Y4dQb+XbJuMr+k2QXcnlDkQ7gvWXaKHVA?=
+ =?us-ascii?Q?mdfvalad7p0lXZ6+mvk0dbOnp/pAnfkrLCYo8j/FsEsQakEo+e1pGNnS3zHS?=
+ =?us-ascii?Q?TumoZSuUvGALL8UgLNJO1o2IeMr+NsHX4UI4yCMMpq0J3t6ivnsyXdg0v8ZM?=
+ =?us-ascii?Q?ug73ThmTgSxogup7nhtQAHWFc/rIU2SQhnr8JgWPAxxQDKVwPoIF2BXbC2GP?=
+ =?us-ascii?Q?TrYE97P3yTf0+4fX3pSm/KMuEhWBqVeIEpU7tuYyLmfSyNZPGFzOoCMEPb5n?=
+ =?us-ascii?Q?rZGu8jeNVovriRAhach9TBQbA9TB666q83kAnMcLw0lHEHrSXdu12uNU7AJD?=
+ =?us-ascii?Q?/tvV2KxAtXKlhvQHoOCxtkxGHz57WdVnr70D+2kcC7C2Vq20a2PJzq20sG/P?=
+ =?us-ascii?Q?0H1r2wiETqPzZvR1bp90WhlJd3j2R1VyD/Icn8JqlCIo8fb15DrHyTU+5M31?=
+ =?us-ascii?Q?uuKZtzLKnFOk6nRSLRAdZSh+70zJ4cUjrZUMApU9jQr7zOYQ/58LQCSVfuiG?=
+ =?us-ascii?Q?bYpiaRFTHZ7J+meBVumvp7G9xXmcRsAvblvEVRM9FKgDDutxdsqv3Ak6NnW7?=
+ =?us-ascii?Q?ieKK9qGI+A5yovheucEG/RmciHT6qISB/dtzr9cq0VwJpssEwUjoRxrKBnqn?=
+ =?us-ascii?Q?xrh7s9t7vztlHARVmSpW+YR/6D+pVQJvP1VC+1+NEkldkC4TgbCbs3KY921N?=
+ =?us-ascii?Q?HTabbuW16Su1rdAlLC/mcefVtPz4bMCvwLqSt9QkmGs6qfn0uY0gDtKFk2jg?=
+ =?us-ascii?Q?0OCo2Q4u/4VwPCBhLEH3yBkSfCT41HSZhn1Mgn8S1HLbe5gw0r/hu8nNKsD9?=
+ =?us-ascii?Q?ongZImzK1zDY7bVU4t6l1FIJQwp3sTCnxQspkvx1+or+3HHbilOL2npHiv+Y?=
+ =?us-ascii?Q?GAdOrRGA3U5EBSX8YV0EUx6Gzojx3PPIBjUd3fCCO40XBRBC0VMa4JvHCL3A?=
+ =?us-ascii?Q?Dk+PSqqMHaBq3ln/3B5UP7r4k4LmXrCQdClEi1MnqUwU72Z+45xOhw+9KtMu?=
+ =?us-ascii?Q?pG0f8Axko1/59/2d9hFjp9bAB7I2otn22gbyxZMwrkp5u7TFhirU8F0wxS41?=
+ =?us-ascii?Q?cVAYLB6tmWvvEHrF5AB2wKYzALMc5U6gRvwIoq3QQpa18ewR7huTlJb49IHd?=
+ =?us-ascii?Q?3igDFCd4rMkAMxg=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:es; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2025 11:11:47.5761 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e31b38a-7815-4ecc-4e64-08dd3ec36428
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B373.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7453
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,186 +155,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable meminfo command to be able to see where things are mapped.
 
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-On 25/01/25 00:59, Tom Rini wrote:
-> On Fri, Jan 24, 2025 at 02:31:15PM +0530, Harsha Vardhan V M wrote:
->>
->>
->> On 22/01/25 22:52, Tom Rini wrote:
->>> On Fri, Jan 10, 2025 at 11:12:47AM +0530, Harsha Vardhan V M wrote:
->>>>
->>>>
->>>> On 07/01/25 03:53, Tom Rini wrote:
->>>>> On Mon, Jan 06, 2025 at 12:06:25PM +0530, Harsha Vardhan V M wrote:
->>>>>
->>>>>> I would like to propose a new command for U-Boot's fuse programming
->>>>>> functionality to address the challenges posed by the current implementation.
->>>>>> While the existing fuse prog command works well for programming individual
->>>>>> fuse values, it becomes cumbersome especially when dealing with large-scale
->>>>>> programming requirements.
->>>>>>
->>>>>> Current Command: fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
->>>>>>
->>>>>> This command programs one or more fuse words starting from a specific <bank>
->>>>>> and <word> with the hex values given as input.
->>>>>>
->>>>>> While functional, it lacks the efficiency and robustness needed for
->>>>>> programming a significant number of fuses or handling structured fuse
->>>>>> configuration data. Repeatedly specifying values for each fuse bank and word
->>>>>> is not only time-consuming but also prone to errors during manual input or
->>>>>> scripting. This approach does not leverage the ability to process
->>>>>> pre-structured data in memory. For users with complex programming needs, the
->>>>>> current method becomes an obstacle rather than a tool.
->>>>>>
->>>>>> Proposed Command: fuse writebuff
->>>>>
->>>>> It would be good to provide some documentation links to the fuses that
->>>>> you're wanting to deal with. What we have now works on a number of
->>>>> diverse SoCs, even if for some cases it might be best to write a
->>>>> script that's run rather than copy/paste things live. Any sort of new
->>>>> mechanism needs to get feedback from users at other semiconductor
->>>>> vendors to make sure it's generic enough for everyones needs. Thanks.
->>>>>
->>>>
->>>> Hi Tom and Simon,
->>>>
->>>> The buffer is not a text file. It is a structure in memory. The buffer is
->>>> structured to contain all necessary information for the fuse programming
->>>> process. This can include metadata, fuse programming data etc. The exact
->>>> structure of the buffer can determined by the command_id, which provides
->>>> flexibility for supporting different use cases. The memory buffer is
->>>> typically prepared in user-space code or a script and loaded in memory
->>>> before invoking the fuse writebuff command. It is not stored as a text file
->>>> or any other file format, as the command operates directly on memory
->>>> addresses.
->>>>
->>>> Example of a buffer:
->>>>
->>>> struct fuse_buffer {
->>>>       struct fuse_mpkh smpkh;
->>>>       struct fuse_msv msv;
->>>>       struct fuse_key_cnt key_cnt;
->>>>       u8 buffer_hash[64];
->>>> };
->>>>
->>>> This fuse_buffer struct will be loaded in memory containing all the
->>>> necessary information for fuse programming.
->>>>
->>>> struct fuse_mpkh {
->>>>       u8 mpkh[64]; // public key hash
->>>>       u8 bch[8];
->>>>       u32 attributes; // read-protect, write-protect, override, active flag
->>>>       u32 reserved[2];
->>>> };
->>>> struct fuse_msv {
->>>>       u32 msv_with_bch; //model specific value
->>>>       u32 attributes;
->>>>       u32 reserved[2];
->>>> };
->>>> struct fuse_key_cnt {
->>>>       u32 key_cnt; //key count
->>>>       u32 attributes;
->>>>       u32 reserved[2];
->>>> };
->>>>
->>>> -> eFUSE layout is abstract and isn't public as its programming and layout
->>>> itself is security sensitive (it has authentication and decryption keys
->>>> etc). So, fuse prog doesn't work as there is no "banks/offset" here.
->>>> -> Platform Security Core running Secure SW exposes APIs through which these
->>>> Keys and its attributes can be programmed. Whole content maybe encrypted for
->>>> enhanced security on unsecure factory floor.
->>>> -> There is a definite order in which these fields needs to be programmed.
->>>>
->>>> Its possible to break the struct into 32bit values and send them across but
->>>> we would end up with ~30 odd fuse prog cmds which is inefficient and error
->>>> prone.
->>>> It would be hard on secure core to also ensure correctness of operations
->>>> against all sorts of silly errors (such of accidentally skipping a word or
->>>> mess up ordering) which can render Silicon unusable.
->>>>
->>>> So passing a opaque pointer with a command_id to Secure core is all that
->>>> fuse cmd needs to do which is what writebuff supports.
->>>>
->>>> This can be extended to any vendor; It's just an opaque pointer handoff. I
->>>> see at least one other vendor do it in custom way:
->>>> arch/arm/mach-imx/cmd_dek.c which could benefit from this new cmd fuse
->>>> writebuff.
->>>>
->>>> Here’s how the fuse writebuff command works in a typical flow:
->>>> 1. Buffer Preparation: Vendors or developers create a complete buffer (e.g.,
->>>> key.bin) containing all fuse programming data using vendor-specific scripts
->>>> or tools and copied to SD card.
->>>> 2. The buffer is loaded into memory using commands like:
->>>> fatload mmc 1 0x80000000 key.bin
->>>> 3. The fuse writebuff command passes the memory address (0x80000000) and
->>>> command_id to the secure core:
->>>> fuse writebuff <command_id> 0x80000000
->>>> 4. The secure core receives the memory address as a pointer and validates,
->>>> interprets it based on the command_id and then programs the fuses.
->>>
->>> To summarize what we talked about on a call, I would like to see either:
->>> 1) Work with arch/arm/mach-imx/cmd_dek.c and use that as the base of
->>> some new generic command that deals with SoC-specific fuse
->>> configurations that are handled via security processor.
->> Hi Tom,
->>
->> 1) I have looked at arch/arm/mach-imx/cmd_dek.c. The underlying
->> implementation data structure is very specific to the vendor and how iMX
->> devices are configured. The other vendors would also differ in their
->> structures and SoC-specific fuse configurations, so I don't see a way to use
->> this cmd_dek.c as the base and then abstract, create a new command out of
->> it.
->>
->>> OR
->>> 2) Create a new command (that should be in cmd/ti/) for handling the K3
->>> fuses, if we cannot make something abstract enough to handle this
->>> concept on multiple vendors while having any sort of useful code re-use.
->>
->> 2) In this case, I would like to add the fuse writebuff command for TI’s K3
->> architecture in cmd/ti/k3_fuse.c. And the command will look like
->>
->> fuse writebuff <command_id> <addr>
->>
->> However, I would still like to place the fuse writebuff command in
->> cmd/fuse.c as a generic interface because the parameters command_id and an
->> opaque pointer handoff provides a mechanism for the secure core to interpret
->> buffers differently based on vendor or use case.
-> 
-> This I guess is my confusion. If we can't abstract cmd_dek.c and the
-> underlying i.MX specific parts to be supported in "fuse writebuff ..."
-> what is the non-K3 (or better still, non-TI) abstraction for what you're
-> proposing?
-> 
-Hi Tom,
-There are two types of fuse programming flows;
-a) Where the fuse layout is known to U-Boot -> fuse cmd options support 
-this flow today
-b) Where fuse cmd is abstracted from U-Boot -> needs a co-processor to 
-proxy the programming
+Changes in v2:
+- Also cover Kria
 
-For b) the fuse layout is virtualized via a "vendor-specific" structure 
-which is generated offline (typically with GUI tools) and then loaded to 
-memory from a file on SD card . This pointer would then be relayed to Co 
-processor as a IPC call...
+ configs/amd_versal2_virt_defconfig       | 2 ++
+ configs/microblaze-generic_defconfig     | 2 ++
+ configs/xilinx_versal_net_virt_defconfig | 2 ++
+ configs/xilinx_versal_virt_defconfig     | 2 ++
+ configs/xilinx_zynq_virt_defconfig       | 2 ++
+ configs/xilinx_zynqmp_kria_defconfig     | 2 ++
+ configs/xilinx_zynqmp_virt_defconfig     | 2 ++
+ 7 files changed, 14 insertions(+)
 
-So, whats common b/w cmd_dek.c and TI's fuse cmd -> loading opaque 
-struct to memory and then passing it to Secure co-processor along with 
-one or more command identifiers which will serve as hint for such secure 
-co-processor.
-"fuse writebuff" tries to abstract essentially this: take a cmd_id and 
-file pointer from fuse cmd and pass to it Vendor specific backend. I 
-know its not a lot but frontend tools used to flash the devices can 
-still make the most of it with simple vendor neutral abstractions than 
-needing to know custom command for each vendor.
+diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+index 22dad1b7076b..a7d8b035a714 100644
+--- a/configs/amd_versal2_virt_defconfig
++++ b/configs/amd_versal2_virt_defconfig
+@@ -30,6 +30,8 @@ CONFIG_SYS_PROMPT="versal2> "
+ CONFIG_CMD_BOOTMENU=y
+ CONFIG_CMD_GREPENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_SYS_ALT_MEMTEST=y
+ CONFIG_CMD_SHA1SUM=y
+diff --git a/configs/microblaze-generic_defconfig b/configs/microblaze-generic_defconfig
+index 2e618d81544d..87756cb26df5 100644
+--- a/configs/microblaze-generic_defconfig
++++ b/configs/microblaze-generic_defconfig
+@@ -42,6 +42,8 @@ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_SPL=y
+ CONFIG_CMD_ASKENV=y
+ CONFIG_CMD_GREPENV=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_SAVES=y
+ CONFIG_BOOTP_BOOTFILESIZE=y
+diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
+index b40f7b7f8556..081ad424a9aa 100644
+--- a/configs/xilinx_versal_net_virt_defconfig
++++ b/configs/xilinx_versal_net_virt_defconfig
+@@ -32,6 +32,8 @@ CONFIG_CMD_SMBIOS=y
+ CONFIG_CMD_BOOTMENU=y
+ CONFIG_CMD_GREPENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_SYS_ALT_MEMTEST=y
+ CONFIG_CMD_SHA1SUM=y
+diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
+index ccbd33ee1cf7..dd6e3ca34660 100644
+--- a/configs/xilinx_versal_virt_defconfig
++++ b/configs/xilinx_versal_virt_defconfig
+@@ -38,6 +38,8 @@ CONFIG_CMD_SMBIOS=y
+ CONFIG_CMD_BOOTMENU=y
+ CONFIG_CMD_GREPENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_SYS_ALT_MEMTEST=y
+ CONFIG_CMD_SHA1SUM=y
+diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
+index ed3d10194857..c2422c5b4dcf 100644
+--- a/configs/xilinx_zynq_virt_defconfig
++++ b/configs/xilinx_zynq_virt_defconfig
+@@ -56,6 +56,8 @@ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_THOR_DOWNLOAD=y
+ CONFIG_THOR_RESET_OFF=y
+ CONFIG_CMD_GREPENV=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_SYS_ALT_MEMTEST=y
+ CONFIG_CMD_DFU=y
+diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+index a68bd522f90a..ce44148dc0bc 100644
+--- a/configs/xilinx_zynqmp_kria_defconfig
++++ b/configs/xilinx_zynqmp_kria_defconfig
+@@ -63,6 +63,8 @@ CONFIG_CMD_SMBIOS=y
+ CONFIG_CMD_BOOTMENU=y
+ CONFIG_CMD_GREPENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_SYS_ALT_MEMTEST=y
+ CONFIG_CMD_SHA1SUM=y
+diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+index b13079cdf707..05ead1a41b4d 100644
+--- a/configs/xilinx_zynqmp_virt_defconfig
++++ b/configs/xilinx_zynqmp_virt_defconfig
+@@ -63,6 +63,8 @@ CONFIG_CMD_THOR_DOWNLOAD=y
+ CONFIG_THOR_RESET_OFF=y
+ CONFIG_CMD_GREPENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_SYS_ALT_MEMTEST=y
+ CONFIG_CMD_SHA1SUM=y
+-- 
+2.43.0
 
-What cannot be abstracted is:
-a) struct of the file,
-b) common definition of command Id
-c) IPC mechanisms
-
-Unfortunately all the above 3 are tightly coupled to co-processor on the 
-other end which most likely is immutable for most SoCs...
-
-Thanks,
-Harsha
