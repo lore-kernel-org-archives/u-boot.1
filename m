@@ -4,80 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF2A1C02188
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 00:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B95DC02188
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 01:26:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E51A81875;
-	Tue, 28 Jan 2025 01:30:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C992C8187B;
+	Tue, 28 Jan 2025 02:26:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WNHI+Kyu";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="SlbWWCS/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 711BB8187B; Tue, 28 Jan 2025 01:30:20 +0100 (CET)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 213FC8191C; Tue, 28 Jan 2025 02:26:47 +0100 (CET)
+Received: from out162-62-57-252.mail.qq.com (out162-62-57-252.mail.qq.com
+ [162.62.57.252])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBDA381870
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 01:30:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D0C681875
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 02:26:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michaelsunn101@gmail.com
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3cda56e1dffso14992365ab.1
- for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 16:30:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738024216; x=1738629016; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zamSqw6MoVug5NQ4G++iOUyja4wz6nFach+US7B+rL8=;
- b=WNHI+KyuiZojwm5z9OMu9k3EYbg2CcRWhop6AterPqlViJCX1UVgjTKhZjsegc9DkB
- Aau6jkwL4GFTqWXItb2+VyMVdO4HM+v1REdghEfh/aEkgYvB1arcqYqyih5VbWyJ2oM/
- A96zcxQk+mpQxBUf2KZMt4dA+1akkqMFW/pEUiHsYM4NnULu/VABT9L6S/QtnMiXmJfG
- 5fCeLCsNp9kYpIOk3uqJ+1XB6wPDsjeBB3kz0kGYHnSlVNL9QZLp389KxL6a4ZcMR9yZ
- KVAAGaTGSPiq9yUvsGZVjir2dup6W/OvjHWIIdj4JjzTbP5gVWPUfwJ8u5w3DYWABYH8
- zj8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738024216; x=1738629016;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zamSqw6MoVug5NQ4G++iOUyja4wz6nFach+US7B+rL8=;
- b=F7ZiXWs+gGM9LfjjdT0aE3ysl/Hk7QUJkD7OJGrgO/qjq1WFeIWW14EMyvsrxoWVCw
- HYlaxpwIIWYLizkNWwaERO/pnHOemXDPAR134V9aUXWQ1sLyL92lgS14weJW7PaMxV1B
- VzzIdjHX/LFDmVwiwDiY5KRlIQQNHyqEfrgbJ56e3iO2ueNYvIHHBw3vwg82XUp5kA0E
- siPraFOuSYD7A/ny/D4RAqJmLYUWYO+nIspTjkKpEXasw4q/yMStUmFIYtr3Yy/zeQRU
- IUc165LibGXOpK3rTyxRJuuihbWldoKJmVmnLH3czRvEjFjB6HV9voaNG2wYAmVgPa1b
- uEuA==
-X-Gm-Message-State: AOJu0Yx3WrAkxX9fQNCBwgesPVy+CvSj36yYheSbKH6kGM+7cj6NzCPm
- s7sLP+QTMTqPbWaBS4OzKALPlUJtBi0TLclVdBoJTMyait9KmGE3rWoAuB0=
-X-Gm-Gg: ASbGncsBuHpuAykpFmWbu68sRJ/cGNmOHwRUWlTQZMNcvrXQVgm+rhb7ba8DsONw/tT
- ev8By9VQhH5v8opd+aT2UsFQDGj2FZaCpd2jEvq/Z5DzYN28ZAEDFfV9gEVcWoflTpZsqsIOL6C
- Ye2d+v3QZtj0EbyHWHFnzCvCAO3+hD9L30bwCMgj7DIIaNUSu85ih5KDqFMEdkdPoBbUdF0sobn
- la+tmvmRaQhzufSusUwl0HMAMpgycUa0GIWAlSbqqwNB3K1MK5dObOo4h00hrO72RTDnvjWsWwE
- 3hwDARa4RPNNJv9k96e5EhLIZVt+a2Sv
-X-Google-Smtp-Source: AGHT+IGVBfPRXVeQipxqq62CTYh/BwjEZIxRtmt+RZc4G59kzOqP7fJZDmAblnr/79p3jvRDq+CI5w==
-X-Received: by 2002:a92:cd89:0:b0:3cf:c743:3750 with SMTP id
- e9e14a558f8ab-3cfc7433868mr149542645ab.2.1738024215993; 
- Mon, 27 Jan 2025 16:30:15 -0800 (PST)
-Received: from valinor-2.taildfe5c2.ts.net
- ([2604:2b40:2185:31:7b1b:4ebd:7d46:b4bd])
- by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3cfc740f5bfsm28820565ab.8.2025.01.27.16.30.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jan 2025 16:30:15 -0800 (PST)
-From: Michael Ferolito <michaelsunn101@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Michael Ferolito <michaelsunn101@gmail.com>, Marek Vasut <marex@denx.de>,
- Heiko Schocher <hs@denx.de>, Kyungmin Park <kyungmin.park@samsung.com>
-Subject: [PATCH v2] USB: Fix NULLPTR dereference when serial# is unset
-Date: Mon, 27 Jan 2025 18:30:10 -0600
-Message-ID: <20250128003010.971175-1-michaelsunn101@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ spf=pass smtp.mailfrom=1425075683@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1738027600; bh=liph+TvqfYbZe35sV65yWOlzOc8PJnkLTUd08SQz0ew=;
+ h=From:To:Cc:Subject:Date;
+ b=SlbWWCS/3OZ+qOELw1f8aaTogjueX8c7Ql5BQuc8fC1+iHv4u9D1aSToG2r1GtY+d
+ cbFE4ccdiXzn0GbcBydj80lsVsFW+GhoO2Dm3++MvU4gb6zs2ZYeyVG8SukVErBgBx
+ rIovGjUZ5V7rBT4a39eNPdnuX8HuPLPCCFS9XeoY=
+Received: from ubuntu.localdomain ([112.51.40.31])
+ by newxmesmtplogicsvrszc16-0.qq.com (NewEsmtp) with SMTP
+ id 353892F2; Tue, 28 Jan 2025 09:13:19 +0800
+X-QQ-mid: xmsmtpt1738026799t5uhdogww
+Message-ID: <tencent_11A7276C90990D36D80B2816D36292D24705@qq.com>
+X-QQ-XMAILINFO: OUycJhUUya+/YrUSWxwE7tXAZFIVYJ1Wl4UlaNRUZWx/9wBNcB++GktkIIEt6C
+ kdrgkj2YjDzEP8vF2k98b1wFHxyigW5ykFupw+VutUoAjpgOLA2sP3IoSDBfGJcGQdwnnlUvC9PH
+ BRm6rc1V8nuQYLOD8b8bJ3XuE122+JMxNNlEod1vbRDAJV+yl+y79HZDDJgqv0R8e3vpoUBKHBg/
+ mH/BubcpcqOkB8VL70AhRfk6czWamdkCNEi1qh/1+s1HVXhzRogvnBr0G0kgN6MrIPcXHL7wyqsr
+ Vb5Tr71j+QCc1K6a7v9q1+S2MZ6xCgkB2YUMP8xH1n8vX/2rmyUrE3pZvXMMyUg9PpEECeIeNU8Y
+ 2y10tfWD5nq+fMV+wlLmRKsTzHN8VATW8f+19zhk/jd6uqm5W4D+YbpCni6g5d+wm9gjMHD5NDSa
+ GV21tn8BjkU3Wp4bD1anlUITRJdMu9cHARo0C7W3dj357hOG00reXfgZMQ9XiobUskkJMqReuWtC
+ 9+he5+F6ZNkyK+c4UqwDuqXu+UUGFBXb2DshGUIvNrCy5yt5vu0+ZbRk0e67utf7jdWUEpoKoPRt
+ mNIF7pLzNK3GZL8wwEX9HdE6rm1OSUxyrkeMI2PxoavwIdKtjU2DiJrYO8cCxxtrEJG41kBqy4nu
+ c10xjqan4DXUavHVxtjUeNdXDjO8oHdRfD8HFNtddFrkBF00OyD7giYej81GJpIKiQLHccJ/nhSd
+ FbkgvooJ3vVx15UZiRW9g0ZRNNi72qqjCl4B1xwQwbdXqzh/KbTAXP2C690E89DMeYsSyNaYm81N
+ GUlSg2pPvR7+PKxiSwpGIyNd7TACnmSxsXNGMiRsKwQTh6Xoe73AHru8Rnf8o2NbMtnbS5sepLsr
+ rkNK+/9LYMvdTLKCl1fF93asB3KU98fydDGVZvn8i4HZUDxtOV8N9E7n68QtGgzURBhZMafuwSJ4
+ ckRmRTR7NCrraERVk7I2mMIOtwvlmT
+X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+From: 1425075683@qq.com
+To: Liya Huang <1425075683@qq.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ "Brunham, Kalen" <kalen.brunham@intel.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v1] examples: fix building on arm32
+Date: Tue, 28 Jan 2025 09:13:16 +0800
+X-OQ-MSGID: <20250128011316.126067-1-1425075683@qq.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,36 +80,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current behaviour of this function will dereference a null pointer
-if the serial# environment variable is unset. This was discovered on a
-board where U-Boot did not have access to the first 256MB of ram,
-resulting in a board crash.
-In the event that U-Boot has full access to memory, it will still read
-from address 0, which is probably not optimal.
-This simple check is enough to fix it
+From: Liya Huang <1425075683@qq.com>
 
-Signed-off-by: Michael Ferolito <michaelsunn101@gmail.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Heiko Schocher <hs@denx.de>
-Cc: Kyungmin Park <kyungmin.park@samsung.com>
+Refer to the commit a3c101a61348 ("examples: fix building on arm64")
+fix for arm32. crt0.S does not even build with:
+    operating system and architecture:
+        5.15.0-130-generic x86_64
+    installed version of gcc and binutils:
+        gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.3)
+    GNU ld (GNU Binutils for Ubuntu) 2.34
+    used defconfig:
+        stm32h750-art-pi_defconfig
+    used commands for building:
+        export CROSS_COMPILE=arm-none-eabi- ARCH=arm
+        make stm32h750-art-pi_defconfig
+        make menuconfig # to add
+        make
+    examples/api/crt0.S: Assembler messages:
+    examples/api/crt0.S:32: Error: lo register required -- `ldr ip,=search_hint'
+    examples/api/crt0.S:33: Error: lo register required -- `str sp,[ip]'
+    examples/api/crt0.S:39: Error: lo register required -- `ldr ip,=syscall_ptr'
+    examples/api/crt0.S:40: Error: lo register required -- `ldr pc,[ip]'
+    make[2]: *** [scripts/Makefile.build:292：examples/api/crt0.o] Error 1
+
+Use valid register names and instructions.
+
+Signed-off-by: Liya Huang <1425075683@qq.com>
 ---
- drivers/usb/gadget/g_dnl.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/usb/gadget/g_dnl.c b/drivers/usb/gadget/g_dnl.c
-index 631969b340..f2540eb6de 100644
---- a/drivers/usb/gadget/g_dnl.c
-+++ b/drivers/usb/gadget/g_dnl.c
-@@ -207,7 +207,8 @@ void g_dnl_clear_detach(void)
- static int on_serialno(const char *name, const char *value, enum env_op op,
- 		int flags)
- {
--	g_dnl_set_serialnumber((char *)value);
-+	if (value)
-+		g_dnl_set_serialnumber((char *)value);
- 	return 0;
- }
- U_BOOT_ENV_CALLBACK(serialno, on_serialno);
+Changes in v1:
+- Change to use R4 to R11 instead of parameter passing registers
+
+ examples/api/crt0.S | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/examples/api/crt0.S b/examples/api/crt0.S
+index d2a97557817..6899ebf8ac2 100644
+--- a/examples/api/crt0.S
++++ b/examples/api/crt0.S
+@@ -29,15 +29,17 @@ syscall:
+ 	.text
+ 	.globl _start
+ _start:
+-	ldr	ip, =search_hint
+-	str	sp, [ip]
++	ldr	r4, =search_hint
++	mov	r5, sp
++	str	r5, [r4]
+ 	b	main
+ 
+ 
+ 	.globl syscall
+ syscall:
+-	ldr	ip, =syscall_ptr
+-	ldr	pc, [ip]
++	ldr	r4, =syscall_ptr
++	ldr	r4, [r4]
++	bx	r4
+ 
+ #elif defined(CONFIG_ARM64)
+ 
 -- 
-2.48.1
+2.25.1
 
