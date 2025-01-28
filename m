@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59052C0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 23:02:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BCFBC0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 23:29:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8D4D81870;
-	Wed, 29 Jan 2025 00:02:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A4D7680EF4;
+	Wed, 29 Jan 2025 00:29:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b6W8cUWI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lYACdObB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAB3481870; Wed, 29 Jan 2025 00:02:29 +0100 (CET)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 64AF380F98; Wed, 29 Jan 2025 00:29:54 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BC5F811E1
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 00:02:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28D10808B6
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 00:29:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-467b74a1754so84072251cf.1
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:02:27 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b98a2e3b3eso335837685a.2
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:29:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738105346; x=1738710146; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uDsnhYUwLxNPNtg2TOMUy8mBJ0g+UlVjPV86Vj0LgAQ=;
- b=b6W8cUWIiwkTGL2K9lcR5wifpgkQC1g1U7BVn+p7ayUCOU/SQKefaO4NWMbMhx55Pk
- Y2DoD2mDVXXpWQgeOh+wKX8Nq40F3Qqhel0iffXDfOkQKWt0EYBfaRICnm2h7dKWIKOR
- ZqcgOwg4cpRsUEg3041nvHqxFsCRb+i0+cOMY=
+ d=konsulko.com; s=google; t=1738106991; x=1738711791; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=efO2tj+kddzaFHCvDsS6tYbaqISIP9h2C926I+Jm5+w=;
+ b=lYACdObB1wVaWI1v6aw9ZJGop7mvcTzlSJwSMr8rtSPgcQE1lulLeudEWdqk4sQmWJ
+ 15k2wgfo0lg+kbxXhj3vjhMm1aHJ2T4amKta/F+WVHYJz1b9ymeQGcto8iFhxWCJHvk0
+ 4nzAKE8Ug95m6Gb1cMjVMyKMVDIgIBGP9kGPk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738105346; x=1738710146;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uDsnhYUwLxNPNtg2TOMUy8mBJ0g+UlVjPV86Vj0LgAQ=;
- b=KVE0Jj9i8GqjvXeNUlZOECjxbpnK24EZ+gzNOCf+qVXaCXEM4+GSOVg9agpPq9W3vO
- 85BHywRCiH7eGtqAgJ26D2U+wOSRM8A9dZx8NKT5+cLZXYzonnOfLVM5sdSBIGPYEteA
- LK2X2InkGcSq9aHRazagfSdz6+UUSCYnkcTUqNfVIH0OTT1OsxbQeGTEXmg1aAvxQuQQ
- agnbT5TK2iJWmQEzAsOII865D/AVhD0hUJkIfWAQJ17WVPxn09LS1tw5DRFmdf17PLa9
- pQs1g2xpU+O5v5H6keYMOCb0azvZEVIIFi1ELMe3+i2z9TW1nYbCUEkbFbbk072oP2pf
- MUsg==
-X-Gm-Message-State: AOJu0Yybv4E0QXuanLs1KdJ0awXYpKJKScH/91DvTa8o8jJvlXkfL/xY
- U85Wl8WL5titSYDE8I6fM4y+Trska3c0hgaULTn3QmNWVtYNoHloy3i6Qc2uigg5FO4c55KLt7Y
- 7
-X-Gm-Gg: ASbGncuLAvOX0XfyoV7BuHmBv29aEO7WgRJGgwpDi61zk5V3rX8r+8pxfc0mCCH0pJj
- rMwtOQnByQoeOTUK41hhIHIQKP/4+PY9at/nRR6yrJfuKwzGqXOE97uP6dKjQrVhcmnWKeM0lLx
- mNUR9x06Rh/bkp05yVJtBbY3qC7Mxn4Uhzbb+pNwxJAIutlK9BPNFEU8CsQQUHLkbKdyOlwke8a
- YgkZZ99hxqFT8krkJMRfmq7NqV9Uk6kh3YMyFHx4Ho9wS/AIboVqGtQ9VEVSllh1AW7qejGVXrd
- kwJngYwtRjXC4e0=
-X-Google-Smtp-Source: AGHT+IHn/ggc5C8Z6jXctWNeq9Kj9FEperSH9f6amhEUN0sOhs03+ltWLbkKZjky2ukk0+WGCIh1bw==
-X-Received: by 2002:a05:622a:14cb:b0:463:eef:bab4 with SMTP id
- d75a77b69052e-46fd0accc23mr14093561cf.26.1738105346076; 
- Tue, 28 Jan 2025 15:02:26 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
+ d=1e100.net; s=20230601; t=1738106991; x=1738711791;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=efO2tj+kddzaFHCvDsS6tYbaqISIP9h2C926I+Jm5+w=;
+ b=mpkV2KlxFH4RGVYdLY9GfxAfKpfDNRuczV0cQ9pSg65rdlzK7bEtoAvY74okC4zKfu
+ XIj3KIy3B+HZNhk819T9nIFK0biC5RXWB6ceKUVTcHbs0W9R0PKzj+KTYo22mS1DDZC0
+ 8s6r9ajnA6dxblv/Lb5jsRrJmCGp0EN4e9cX97k2KekKIvsED1RZGEMZEi0YP1cdJ0KO
+ PjB0MX4tlYoUx4rXWQjMs6eDAW4+WmPdGl1srCFTzTFkpGTJmuVnfCsAqlawiT2tGzNX
+ ZPRZJ5vx5acgSyoPtZEITtKLA5xmXwe0Y/PB9jg+M+G/AxDH/ut/9//tWJ6pL2zdRHaD
+ KHgQ==
+X-Gm-Message-State: AOJu0Yw6tnL7JOk2pAZNVlS8mE6FwvgO8SyStQfHTZTKb9gb2Tc3Qq8I
+ fYuX8YfhG/I0r8w/KQzM/1nZi3ZwbVjxKmRCzD1S6x7E87kC+HaV0sqG2B3jgpenCgWt8YyKOpQ
+ V
+X-Gm-Gg: ASbGncscDZOAmGMxTf2voig1jsEO9sv+pscea82bZABx6RV3+qDvYHXS22vvE+ZpoVF
+ S07RmTskvLeIhf3HS7+TpZMErAeXBb8uCufKA5fGFhScysj7cGh51y5j5HPQJY5satmmwyO95VC
+ 2bmTtO3GqF7n/2IjNsBdgN18lPxKOFr9AJ5xRJhVm63V2skXQWLdu3f4LEGTG7AoyUi9aig8Ll1
+ T624jT4AzcdAL/XqVOo7bI0iFZrdHXCX4mHtYe7OXpPpsvGvjLlFivNsXAeL9RW1d4KlT2wxwFv
+ SX5NWRHck9v24L0XtQ==
+X-Google-Smtp-Source: AGHT+IF5tShsH5JJCgPz/CEv3y6Ki6mBXzcDxK71HD98ZI+b7eqyWWAwxMa7W7aeO2Og9vw03wguRQ==
+X-Received: by 2002:a05:620a:d85:b0:7b6:dddb:b88 with SMTP id
+ af79cd13be357-7bffcd906a3mr114387985a.38.1738106991014; 
+ Tue, 28 Jan 2025 15:29:51 -0800 (PST)
+Received: from bill-the-cat.. ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e66b67dd5sm55974531cf.51.2025.01.28.15.02.24
+ af79cd13be357-7be9af0d39csm561813785a.102.2025.01.28.15.29.50
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 15:02:24 -0800 (PST)
-Date: Tue, 28 Jan 2025 17:02:22 -0600
+ Tue, 28 Jan 2025 15:29:50 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Stefan Roese <sr@denx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-marvell/master
-Message-ID: <20250128230222.GT1233568@bill-the-cat>
-References: <e26044f3-dd59-4d06-b2d4-e9c9d0cf936f@denx.de>
+To: u-boot@lists.denx.de
+Subject: [PATCH] GitLab: Run sandbox on fast amd64 and fast arm64 hosts
+Date: Tue, 28 Jan 2025 17:29:48 -0600
+Message-ID: <20250128232948.2064724-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8x+JKTDamJA4ACA4"
-Content-Disposition: inline
-In-Reply-To: <e26044f3-dd59-4d06-b2d4-e9c9d0cf936f@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,77 +90,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Now that we can run sandbox on arm64 hosts, have these jobs run on both
+the fast arm64 and amd64 hosts to catch any issues.
 
---8x+JKTDamJA4ACA4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .gitlab-ci.yml | 24 ++++++++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
 
-On Tue, Jan 28, 2025 at 01:57:40PM +0100, Stefan Roese wrote:
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 74dc05d58a70..f5f466f129b3 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -230,30 +230,46 @@ Check packing of Python tools:
+ 
+ # Test sandbox with test.py
+ sandbox test.py:
++  parallel:
++    matrix:
++      - HOST: "fast arm64"
++      - HOST: "fast amd64"
+   tags:
+-    - ${DEFAULT_AMD64_TAG}
++    - ${HOST}
+   variables:
+     TEST_PY_BD: "sandbox"
+   <<: *buildman_and_testpy_dfn
+ 
+ sandbox with clang test.py:
++  parallel:
++    matrix:
++      - HOST: "fast arm64"
++      - HOST: "fast amd64"
+   tags:
+-    - ${DEFAULT_AMD64_TAG}
++    - ${HOST}
+   variables:
+     TEST_PY_BD: "sandbox"
+     OVERRIDE: "-O clang-17"
+   <<: *buildman_and_testpy_dfn
+ 
+ sandbox64 test.py:
++  parallel:
++    matrix:
++      - HOST: "fast arm64"
++      - HOST: "fast amd64"
+   tags:
+-    - ${DEFAULT_AMD64_TAG}
++    - ${HOST}
+   variables:
+     TEST_PY_BD: "sandbox64"
+   <<: *buildman_and_testpy_dfn
+ 
+ sandbox64 with clang test.py:
++  parallel:
++    matrix:
++      - HOST: "fast arm64"
++      - HOST: "fast amd64"
+   tags:
+-    - ${DEFAULT_AMD64_TAG}
++    - ${HOST}
+   variables:
+     TEST_PY_BD: "sandbox64"
+     OVERRIDE: "-O clang-17"
+-- 
+2.43.0
 
-> Hi Tom,
->=20
-> please pull this next batch of mostly Marvell related patches:
->=20
-> ----------------------------------------------------------------
-> - kirkwood: Enable bootstd and other modernization for OpenRD boards (Ton=
-y)
-> - board: solidrun: clearfog: enable ddr odt0 on write for both chip-select
-> (Josua)
-> - configs: mvebu_espressobin_ultra-88f3720_defconfig: enable full bootflow
-> functionality (Ben)
-> - Initial support for PXA1908 and samsung-coreprimevelte (Duje)
-> ----------------------------------------------------------------
->=20
-> Here the Azure build, without any issues:
->=20
-> https://dev.azure.com/sr0718/u-boot/_build/results?buildId=3D389&view=3Dr=
-esults
->=20
-> Thanks,
-> Stefan
->=20
-> The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c0=
-47:
->=20
->   Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-marvell.git
-
-FYI, if you do something like this in your .git/config:
-[remote "origin"]
-        fetch =3D +refs/heads/*:refs/remotes/origin/*
-	url =3D https://source.denx.de/u-boot/custodians/u-boot-marvell.git
-	pushurl =3D git@source.denx.de:u-boot/custodians/u-boot-marvell.git
-
-then the resulting pull-request email will be in the form that "b4 pr"
-will see and grab. And if you put the notes in the tag I won't have to
-copy/paste them in (and you can amend the tag with the CI link :)).
-Thanks!
-
-Applied to u-boot/master.
-
---=20
-Tom
-
---8x+JKTDamJA4ACA4
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeZYfsACgkQFHw5/5Y0
-tyyPdwv+MkiPVq6xBqCkHTuFC3EvG5macUe0nsmlHtfEBIhHX6l8i5F0GPUIggds
-0yRIEgovS8WHoEKFaXa2lKpsDCY+4g7a/pBByDPfzldFbwM4XPDkjzdXvjmZ/9UA
-mVtneKZQXH7YXLor/PNQieQQLX/4VccwPoVTZy7SPYkZxac3bFMs0rNr09XCLl0L
-X4lQr22LjIzXEMEVndnVY1ufjFcf86kgcE6N6peUHk6AGcgoQ0yLH1jiUhPJr159
-vDzcvp90gBU0fsnSHEQBqEGCntKGrJ55gJRdskfxTtzcS++A1yISbkQISf1ngba2
-jigA1CyxcaBGof9fRW5hKhAF7LQ9qhF6t/BjyMyQ/UIeLR4va3vIiz8zYuXyJYUh
-AKeZJlWEVhtjPj6pTW13FhtNbvngvybNOQzM38uKzm08YJtM8TDKZCWqh/ExCkQW
-Eu8VZZJUgpVIdYL4hKZlR7mWu4qYxShTutqkiUSNIF9a5TDDAgD+6hfA7Sgjyw/r
-FDx3xl0g
-=lHZI
------END PGP SIGNATURE-----
-
---8x+JKTDamJA4ACA4--
