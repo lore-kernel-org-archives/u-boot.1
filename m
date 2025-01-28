@@ -4,67 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD57FC0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 21:39:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86FDCC0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 21:39:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B7F581DD3;
-	Tue, 28 Jan 2025 22:39:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6D45F81E8C;
+	Tue, 28 Jan 2025 22:39:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="mhgAdQaK";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="vFhmeyOY";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="pdtto6bE";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="rekCCOP6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 100D381DFA; Tue, 28 Jan 2025 22:39:20 +0100 (CET)
+ id 844E581EC9; Tue, 28 Jan 2025 22:39:24 +0100 (CET)
 Received: from sendmail.purelymail.com (sendmail.purelymail.com
  [34.202.193.197])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3225981D27
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 22:39:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 59AD481ECA
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 22:39:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=tidylabs.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=justin@tidylabs.net
 DKIM-Signature: a=rsa-sha256;
- b=mhgAdQaKSYXNBAjLNFSotWNZ9E6/7r3sxYWRn42zxaY1kJpsJyGW1Nr2lZU0lXLsilr5w9gLTs0NtIito6mZVWefffvJr1bsXtfXkWiAqilLSfYwS5hO2lsXYiB7savS/Ki6j7SQemP+CXIVfX995JXAnGxaAznzk1OYHVYHaOzntYDv6wBQstmPF4e8uMYCADv5X2FqlOs5qW2e2By2e06odgggi4/Kfqa20Gcd44qWd7cesupLA6vTHkqJPJFvAOsktjpM2lLXq2Mq6s1Osvt/FUoXjDQkE+rUc3dks0QLnHIAPFHMIzOXHhnYCQjN7ITItaYD5omJ78WCw/q4aw==;
+ b=pdtto6bEejLjIbyWHRMVR5f18C6HmQiwcmPTvVaTmMDl5ncGPMQ/V37FtCPS5lRQ2h1X4qOlglf1ZRuOipSO78jedgfEKFv6LG/JT6gucc/DoGFOmOgD4lBIcmdrGMRhdrkiFZluphpoPuCsqsZTGGyWbhkThYH/HN9VHsCumdGMJueUVf/ECvDhuFtIO0jIbxfPuLwS5jMQmvtBCb+4LXiKZmaiphEc9hDNDa2zor+zGqtCjeBOWIoQ84G/1CZ531OVrBmaJHaLuggy+A952OQJzbaNX+axwQ5wo5PUKEyCTnIENiNbH2L9vAihi5fkLgxo5nNwREQWm+vriLlOEg==;
  s=purelymail1; d=tidylabs.net; v=1;
- bh=IiFpccbwmYiQD2t9k4G3nnUirtziBoE6tq0Ym9lVpvk=;
+ bh=uWeE0E+vvpN6nx9/+bSsnULbD2sbITjIZ7Kk8uiA234=;
  h=Received:From:To:Subject:Date; 
 DKIM-Signature: a=rsa-sha256;
- b=vFhmeyOYOY7roVgMhV2eyJBBTma6KJyzOlsSwmLljiBsMmiiKp7j2rsInz4GULykZ9x6CHgcDTvAEIROHuxkTTBtU/JiBE5To07YZC353gOozBdO6FoDOZQ7+pk4K+/Nxf0x9jBYqjwGH6qSfBBC6PkAEsgdQt6PyzOqAIa02Yg6yLs58Sn8ACrpD8HsY5VjCebTRIcoq9jYfkS6jgQYxIEDi+oQDihXrldlfV2J9jxl6tPMhrEcNtQlN80Flxfgl+fI9323bAxxHxA74AMNVGsX8Y7ORB+an+SPv53gvSwbR4JqrKcTzVB29Ia1MHwtyxJgSY3fB4i+9d2MsxrE7w==;
+ b=rekCCOP6p025Wc2q0MYQ0YQ/j1TTbyu6ACUxpZXXz9QaGXopAUbbfHQnEaqTbHQr5a4qmIv9eXaD6zcB8jBAdEQPZgrGTbaHqRor6vchQWBJrJZb31M1g1zxYqtCEDv579EaOeVCIPCqZtxyE55BMpkG8SRVw/Yi39O/BeC2By8jvk8XoQlD8xkr/xJpYgiCqMZKz/23j0w8/vw2S9xD2J+/Idv5ob+XQyyOEE1jYZMT6fGx45wKKDKKQBoeowhZadDlpF7R0kl9Xgis+BM/SusL0S2HOW6fXBh40QjezLKAwwZU3RBD3PkU2uLA6JIYDAT75hk6pdUAbLj5o1zHBQ==;
  s=purelymail1; d=purelymail.com; v=1;
- bh=IiFpccbwmYiQD2t9k4G3nnUirtziBoE6tq0Ym9lVpvk=;
+ bh=uWeE0E+vvpN6nx9/+bSsnULbD2sbITjIZ7Kk8uiA234=;
  h=Feedback-ID:Received:From:To:Subject:Date; 
 Feedback-ID: 81901:11097:null:purelymail
 X-Pm-Original-To: u-boot@lists.denx.de
 Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -499528210; 
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 28 Jan 2025 21:39:14 +0000 (UTC)
+ Tue, 28 Jan 2025 21:39:20 +0000 (UTC)
 From: Justin Klaassen <justin@tidylabs.net>
 To: u-boot@lists.denx.de
-Cc: Justin Klaassen <justin@tidylabs.net>, Alexandre Vicenzi <linux@alxd.me>,
- Caleb Connolly <caleb.connolly@linaro.org>, Chen-Yu Tsai <wens@csie.org>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
- Keerthy <j-keerthy@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
+Cc: Justin Klaassen <justin@tidylabs.net>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
- Wan Yee Lau <wan.yee.lau@intel.com>,
- William Wu <william.wu@rock-chips.com>, Xiaobo Tian <peterwillcn@gmail.com>
-Subject: [PATCH v2 0/5] rockchip: rk3399: rk3399-nanopi-4: Fix SD power
- initialization in SPL
-Date: Tue, 28 Jan 2025 21:37:32 +0000
-Message-ID: <20250128213852.465664-1-justin@tidylabs.net>
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/5] rockchip: io-domain: Add debug logging for regulators
+ during probe
+Date: Tue, 28 Jan 2025 21:37:33 +0000
+Message-ID: <20250128213852.465664-2-justin@tidylabs.net>
 X-Mailer: git-send-email 2.45.3
+In-Reply-To: <20250128213852.465664-1-justin@tidylabs.net>
+References: <20250128213852.465664-1-justin@tidylabs.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
@@ -85,47 +77,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Log the value of the regulators during initialization of the IO-domain
+driver to aid in debugging GPIO voltage configuration problems.
 
-The NanoPi RK3399 boards support UHS-I (up to SDR104) SD cards, however
-using any of these 1.8v modes results in a boot failure in SPL upon soft
-reboot.
-
-The issue is that the "vcc_sdio" regulator is left at 1.8v on reboot and
-the corresponding GPIO defaults to 3.3v. This prevents the SD card from
-being reinitialized and read successfully.
-
-This change series resolves this issue by allowing the proper
-initialization and control of the "vcc3v0_sd" (vmmc-supply) and
-"vcc_sdio" (vqmmc-supply) regulators and corresponding GPIO in SPL.
+Signed-off-by: Justin Klaassen <justin@tidylabs.net>
+---
 
 Changes in v2:
 - Made added IO-domain driver logs verbose and consistent
-- Added separate patch for added CONFIG_SPL_ROCKCHIP_IODOMAIN Kconfig
-- Added separate patch for added CONFIG_SPL_REGULATOR_RK8XX Kconfig
-- Added patch to remove device-tree properties that conflicted with MMC dri=
-ver initialization
-- Added defconfig changes for all NanoPi RK3399 boards
 
-Justin Klaassen (5):
-  rockchip: io-domain: Add debug logging for regulators during probe
-  rockchip: io-domain: Add CONFIG_SPL_ROCKCHIP_IODOMAIN
-  regulator: rk8xx: Add CONFIG_SPL_REGULATOR_RK8XX
-  rockchip: rk3399-nanopi-4: Allow MMC driver to control SD regulators
-  rockchip: rk3399-nanopi-4: Enable IO-domain driver in SPL
+ drivers/misc/rockchip-io-domain.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
- arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 12 ++++++++++++
- configs/nanopc-t4-rk3399_defconfig      |  7 +++++++
- configs/nanopi-m4-2gb-rk3399_defconfig  |  7 +++++++
- configs/nanopi-m4-rk3399_defconfig      |  7 +++++++
- configs/nanopi-m4b-rk3399_defconfig     |  7 +++++++
- configs/nanopi-neo4-rk3399_defconfig    |  7 +++++++
- configs/nanopi-r4s-rk3399_defconfig     |  7 +++++++
- drivers/misc/Kconfig                    |  8 ++++++++
- drivers/misc/rockchip-io-domain.c       |  7 ++++++-
- drivers/power/regulator/Kconfig         |  9 +++++++++
- drivers/power/regulator/rk8xx.c         |  8 ++------
- 11 files changed, 79 insertions(+), 7 deletions(-)
-
+diff --git a/drivers/misc/rockchip-io-domain.c b/drivers/misc/rockchip-io-d=
+omain.c
+index 025b6049a9f..fdefc9c5fe3 100644
+--- a/drivers/misc/rockchip-io-domain.c
++++ b/drivers/misc/rockchip-io-domain.c
+@@ -5,6 +5,8 @@
+  * Ported from linux drivers/soc/rockchip/io-domain.c
+  */
+=20
++#define LOG_CATEGORY UCLASS_NOP
++
+ #include <dm.h>
+ #include <dm/device_compat.h>
+ #include <regmap.h>
+@@ -344,8 +346,10 @@ static int rockchip_iodomain_probe(struct udevice *dev=
+)
+ =09=09=09continue;
+=20
+ =09=09ret =3D device_get_supply_regulator(dev, supply_name, &reg);
+-=09=09if (ret)
++=09=09if (ret) {
++=09=09=09log_debug("%s: Regulator not found\n", supply_name);
+ =09=09=09continue;
++=09=09}
+=20
+ =09=09ret =3D regulator_autoset(reg);
+ =09=09if (ret && ret !=3D -EALREADY && ret !=3D -EMEDIUMTYPE &&
+@@ -353,6 +357,7 @@ static int rockchip_iodomain_probe(struct udevice *dev)
+ =09=09=09continue;
+=20
+ =09=09uV =3D regulator_get_value(reg);
++=09=09log_debug("%s: Regulator %s at %d uV\n", supply_name, reg->name, uV)=
+;
+ =09=09if (uV <=3D 0)
+ =09=09=09continue;
+=20
 --=20
 2.45.3
 
