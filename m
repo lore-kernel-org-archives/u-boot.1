@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50A0DC0218D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 23:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59052C0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 23:02:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C56681244;
-	Wed, 29 Jan 2025 00:02:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C8D4D81870;
+	Wed, 29 Jan 2025 00:02:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DzjtsYC1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b6W8cUWI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A48A781727; Wed, 29 Jan 2025 00:02:11 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id AAB3481870; Wed, 29 Jan 2025 00:02:29 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EC08811E1
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 00:02:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BC5F811E1
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 00:02:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6d92e457230so60475876d6.1
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:02:08 -0800 (PST)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-467b74a1754so84072251cf.1
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:02:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738105328; x=1738710128; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=6zxmRzM1h97Z4uB0FGqxOQd08eHUK0H85xuW7aLKF80=;
- b=DzjtsYC11WRCkxDPJNyfk/GCZ9oVLY/SXlrOi+bsxC3MfZIruT6XSLPp8KHPvIZjYd
- 30+c+5YgMo71Tf54SQcbE1SsPi/TH02H/xUQ41TSjO/whRig86PbBe5vAR8sqPctdN+0
- ejN/fKrqd4imYDwnYo527wuyY1V0kMFosDQoU=
+ d=konsulko.com; s=google; t=1738105346; x=1738710146; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uDsnhYUwLxNPNtg2TOMUy8mBJ0g+UlVjPV86Vj0LgAQ=;
+ b=b6W8cUWIiwkTGL2K9lcR5wifpgkQC1g1U7BVn+p7ayUCOU/SQKefaO4NWMbMhx55Pk
+ Y2DoD2mDVXXpWQgeOh+wKX8Nq40F3Qqhel0iffXDfOkQKWt0EYBfaRICnm2h7dKWIKOR
+ ZqcgOwg4cpRsUEg3041nvHqxFsCRb+i0+cOMY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738105328; x=1738710128;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6zxmRzM1h97Z4uB0FGqxOQd08eHUK0H85xuW7aLKF80=;
- b=tQFbUkaOCaIlW1/cHoIebTChf/VBRU9c55U03rMXg9WxiPe9U/i6D5tTq9A6PlGF/1
- HtzFspf7PKIXlPOPM8Zr98ZdttdGvhuC6hApcVS+N0dhefsTjpkZ8eBIsGzGDX4f4S9Z
- PFxoLCzkFN8sdySwqEXaIAHUY3Kb36SrnDWiO9DzHgqJnGBoJIvfMHHeQQ43upF16I04
- G0uBwwk0+3xy74tFdRXEsnbQKjXnOj7FXdI3bxC/XCXTcvcbxMWmt840M/CqpUrRcGru
- ATJncvyk61+6t1T3cvV80Jkqij1JR8g19hNWJFMrkNKQi49UBj4rEIdRo1+UQON4arQF
- nCsg==
-X-Gm-Message-State: AOJu0YxWp3dAvaqfLFA1vpVEp3Yet2XOSYIJ9sIWC/X5pSY3S4fYwA/b
- XwYSRJYTxHxyJ386YkacMsovHzHuYEgC0CZ9r+rpLAutbbO3qeQEn3SyBeM8wC80GOgy/lqSzc1
- a
-X-Gm-Gg: ASbGncs3qV38KzB9Q3Rny+2cdZqWWgZJbIJETg3SOWKdLlWHOR+9u7qp/KYeIzfbpOI
- gzthkwq7HRoI7GHuEu9Kfl7wTgOC56onvAh20Y9aj9znoSBfRmWha8pWgzp8nwupMy0X5KkSFxb
- UEBFNOfjjtu4rYZ46jnMvcttMmip3a2ZI9ZXOd1VBkvePG/AUpUx+03RkI2fRevzmMCMCWtpB0i
- Nk1WWg/bpTumYDcpmgw1WDgKg0H7Yv5GoRfBdR4PVqZGRQhTMPRGhyhfV+Q6MQVWtqDNdAli4nl
- 7d51x5WPBn6SWQPRTQ==
-X-Google-Smtp-Source: AGHT+IFmzeWI95LBUCYsucB3/BsGMtr6ATzU9bGTroMRrWPr4XMh3YMEFECPQPbKT77OiSsFSbUO3Q==
-X-Received: by 2002:a05:6214:19c4:b0:6d8:8b9d:1502 with SMTP id
- 6a1803df08f44-6e243c648b9mr13135606d6.30.1738105327914; 
- Tue, 28 Jan 2025 15:02:07 -0800 (PST)
-Received: from bill-the-cat.. ([189.177.145.20])
+ d=1e100.net; s=20230601; t=1738105346; x=1738710146;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uDsnhYUwLxNPNtg2TOMUy8mBJ0g+UlVjPV86Vj0LgAQ=;
+ b=KVE0Jj9i8GqjvXeNUlZOECjxbpnK24EZ+gzNOCf+qVXaCXEM4+GSOVg9agpPq9W3vO
+ 85BHywRCiH7eGtqAgJ26D2U+wOSRM8A9dZx8NKT5+cLZXYzonnOfLVM5sdSBIGPYEteA
+ LK2X2InkGcSq9aHRazagfSdz6+UUSCYnkcTUqNfVIH0OTT1OsxbQeGTEXmg1aAvxQuQQ
+ agnbT5TK2iJWmQEzAsOII865D/AVhD0hUJkIfWAQJ17WVPxn09LS1tw5DRFmdf17PLa9
+ pQs1g2xpU+O5v5H6keYMOCb0azvZEVIIFi1ELMe3+i2z9TW1nYbCUEkbFbbk072oP2pf
+ MUsg==
+X-Gm-Message-State: AOJu0Yybv4E0QXuanLs1KdJ0awXYpKJKScH/91DvTa8o8jJvlXkfL/xY
+ U85Wl8WL5titSYDE8I6fM4y+Trska3c0hgaULTn3QmNWVtYNoHloy3i6Qc2uigg5FO4c55KLt7Y
+ 7
+X-Gm-Gg: ASbGncuLAvOX0XfyoV7BuHmBv29aEO7WgRJGgwpDi61zk5V3rX8r+8pxfc0mCCH0pJj
+ rMwtOQnByQoeOTUK41hhIHIQKP/4+PY9at/nRR6yrJfuKwzGqXOE97uP6dKjQrVhcmnWKeM0lLx
+ mNUR9x06Rh/bkp05yVJtBbY3qC7Mxn4Uhzbb+pNwxJAIutlK9BPNFEU8CsQQUHLkbKdyOlwke8a
+ YgkZZ99hxqFT8krkJMRfmq7NqV9Uk6kh3YMyFHx4Ho9wS/AIboVqGtQ9VEVSllh1AW7qejGVXrd
+ kwJngYwtRjXC4e0=
+X-Google-Smtp-Source: AGHT+IHn/ggc5C8Z6jXctWNeq9Kj9FEperSH9f6amhEUN0sOhs03+ltWLbkKZjky2ukk0+WGCIh1bw==
+X-Received: by 2002:a05:622a:14cb:b0:463:eef:bab4 with SMTP id
+ d75a77b69052e-46fd0accc23mr14093561cf.26.1738105346076; 
+ Tue, 28 Jan 2025 15:02:26 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e2058c1e64sm49898476d6.96.2025.01.28.15.02.06
- for <u-boot@lists.denx.de>
+ d75a77b69052e-46e66b67dd5sm55974531cf.51.2025.01.28.15.02.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 15:02:07 -0800 (PST)
+ Tue, 28 Jan 2025 15:02:24 -0800 (PST)
+Date: Tue, 28 Jan 2025 17:02:22 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] Dockerfile: Update to gcc-14.2.0 and clang-18
-Date: Tue, 28 Jan 2025 17:02:05 -0600
-Message-ID: <20250128230205.2062703-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: Stefan Roese <sr@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-marvell/master
+Message-ID: <20250128230222.GT1233568@bill-the-cat>
+References: <e26044f3-dd59-4d06-b2d4-e9c9d0cf936f@denx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8x+JKTDamJA4ACA4"
+Content-Disposition: inline
+In-Reply-To: <e26044f3-dd59-4d06-b2d4-e9c9d0cf936f@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,123 +95,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Outside of changing versions here the other visible change is that we
-tell grub that riscv64 does not have "large model" support. Without this
-change the resulting mkimage is non-functional. This is known upstream
-already.
 
-Link: https://savannah.gnu.org/bugs/?65909
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- .azure-pipelines.yml    | 8 ++++----
- .gitlab-ci.yml          | 6 +++---
- tools/docker/Dockerfile | 8 ++++----
- 3 files changed, 11 insertions(+), 11 deletions(-)
+--8x+JKTDamJA4ACA4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index ba351b9802d1..4d3a5800beb3 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -2,7 +2,7 @@ variables:
-   windows_vm: windows-2022
-   ubuntu_vm: ubuntu-24.04
-   macos_vm: macOS-14
--  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
-+  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20240911.1-28Jan2025
-   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
-   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
-   # since our $(ci_runner_image) user is not root.
-@@ -324,16 +324,16 @@ stages:
-           TEST_PY_TEST_SPEC: "version"
-         sandbox_clang:
-           TEST_PY_BD: "sandbox"
--          OVERRIDE: "-O clang-17"
-+          OVERRIDE: "-O clang-18"
-         sandbox_clang_asan:
-           TEST_PY_BD: "sandbox"
--          OVERRIDE: "-O clang-17 -a ASAN"
-+          OVERRIDE: "-O clang-18 -a ASAN"
-           TEST_PY_TEST_SPEC: "version"
-         sandbox64:
-           TEST_PY_BD: "sandbox64"
-         sandbox64_clang:
-           TEST_PY_BD: "sandbox64"
--          OVERRIDE: "-O clang-17"
-+          OVERRIDE: "-O clang-18"
-         sandbox_spl:
-           TEST_PY_BD: "sandbox_spl"
-           TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_spl"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 74dc05d58a70..c3c38e24fd1d 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -20,7 +20,7 @@ workflow:
- 
- # Grab our configured image.  The source for this is found
- # in the u-boot tree at tools/docker/Dockerfile
--image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
-+image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-28Jan2025
- 
- # We run some tests in different order, to catch some failures quicker.
- stages:
-@@ -241,7 +241,7 @@ sandbox with clang test.py:
-     - ${DEFAULT_AMD64_TAG}
-   variables:
-     TEST_PY_BD: "sandbox"
--    OVERRIDE: "-O clang-17"
-+    OVERRIDE: "-O clang-18"
-   <<: *buildman_and_testpy_dfn
- 
- sandbox64 test.py:
-@@ -256,7 +256,7 @@ sandbox64 with clang test.py:
-     - ${DEFAULT_AMD64_TAG}
-   variables:
-     TEST_PY_BD: "sandbox64"
--    OVERRIDE: "-O clang-17"
-+    OVERRIDE: "-O clang-18"
-   <<: *buildman_and_testpy_dfn
- 
- sandbox_spl test.py:
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index d2848ab85f35..b72ed357fa36 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -23,7 +23,7 @@ ENV ARCHS="aarch64 arc i386 m68k mips microblaze nios2 powerpc riscv64 riscv32 s
- ENV MIRROR=https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin
- 
- # Toolchain version
--ENV TCVER=13.2.0
-+ENV TCVER=14.2.0
- 
- RUN echo "Building on $BUILDPLATFORM, for target $TARGETPLATFORM"
- 
-@@ -32,7 +32,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-     --mount=type=cache,target=/var/lib/apt,sharing=locked \
-     apt-get update && apt-get install -y gnupg2 wget xz-utils
- RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
--RUN echo deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main | tee /etc/apt/sources.list.d/llvm.list
-+RUN echo deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main | tee /etc/apt/sources.list.d/llvm.list
- 
- # Create a list of URLs to process, then pass them into a 'while read' loop
- RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then HOSTARCH=x86_64; else HOSTARCH=arm64; fi; ( \
-@@ -65,7 +65,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
- 	bison \
- 	build-essential \
- 	cgpt \
--	clang-17 \
-+	clang-18 \
- 	coreutils \
- 	cpio \
- 	curl \
-@@ -182,7 +182,7 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
- 	search search_fs_file search_fs_uuid search_label serial sleep test \
- 	true && \
- 	make clean && \
--	./configure --target=riscv64 --with-platform=efi \
-+	grub_cv_cc_mcmodel=no ./configure --target=riscv64 --with-platform=efi \
- 	CC=gcc \
- 	TARGET_CC=/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-gcc \
- 	TARGET_OBJCOPY=/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-objcopy \
--- 
-2.43.0
+On Tue, Jan 28, 2025 at 01:57:40PM +0100, Stefan Roese wrote:
 
+> Hi Tom,
+>=20
+> please pull this next batch of mostly Marvell related patches:
+>=20
+> ----------------------------------------------------------------
+> - kirkwood: Enable bootstd and other modernization for OpenRD boards (Ton=
+y)
+> - board: solidrun: clearfog: enable ddr odt0 on write for both chip-select
+> (Josua)
+> - configs: mvebu_espressobin_ultra-88f3720_defconfig: enable full bootflow
+> functionality (Ben)
+> - Initial support for PXA1908 and samsung-coreprimevelte (Duje)
+> ----------------------------------------------------------------
+>=20
+> Here the Azure build, without any issues:
+>=20
+> https://dev.azure.com/sr0718/u-boot/_build/results?buildId=3D389&view=3Dr=
+esults
+>=20
+> Thanks,
+> Stefan
+>=20
+> The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c0=
+47:
+>=20
+>   Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-marvell.git
+
+FYI, if you do something like this in your .git/config:
+[remote "origin"]
+        fetch =3D +refs/heads/*:refs/remotes/origin/*
+	url =3D https://source.denx.de/u-boot/custodians/u-boot-marvell.git
+	pushurl =3D git@source.denx.de:u-boot/custodians/u-boot-marvell.git
+
+then the resulting pull-request email will be in the form that "b4 pr"
+will see and grab. And if you put the notes in the tag I won't have to
+copy/paste them in (and you can amend the tag with the CI link :)).
+Thanks!
+
+Applied to u-boot/master.
+
+--=20
+Tom
+
+--8x+JKTDamJA4ACA4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeZYfsACgkQFHw5/5Y0
+tyyPdwv+MkiPVq6xBqCkHTuFC3EvG5macUe0nsmlHtfEBIhHX6l8i5F0GPUIggds
+0yRIEgovS8WHoEKFaXa2lKpsDCY+4g7a/pBByDPfzldFbwM4XPDkjzdXvjmZ/9UA
+mVtneKZQXH7YXLor/PNQieQQLX/4VccwPoVTZy7SPYkZxac3bFMs0rNr09XCLl0L
+X4lQr22LjIzXEMEVndnVY1ufjFcf86kgcE6N6peUHk6AGcgoQ0yLH1jiUhPJr159
+vDzcvp90gBU0fsnSHEQBqEGCntKGrJ55gJRdskfxTtzcS++A1yISbkQISf1ngba2
+jigA1CyxcaBGof9fRW5hKhAF7LQ9qhF6t/BjyMyQ/UIeLR4va3vIiz8zYuXyJYUh
+AKeZJlWEVhtjPj6pTW13FhtNbvngvybNOQzM38uKzm08YJtM8TDKZCWqh/ExCkQW
+Eu8VZZJUgpVIdYL4hKZlR7mWu4qYxShTutqkiUSNIF9a5TDDAgD+6hfA7Sgjyw/r
+FDx3xl0g
+=lHZI
+-----END PGP SIGNATURE-----
+
+--8x+JKTDamJA4ACA4--
