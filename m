@@ -4,34 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80BE8C0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 09:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB381C02191
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 09:11:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAAC481BC0;
-	Tue, 28 Jan 2025 10:10:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=studiofuga.com
+	by phobos.denx.de (Postfix) with ESMTP id 7F24781B4B;
+	Tue, 28 Jan 2025 10:11:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E7F2381CC5; Tue, 28 Jan 2025 10:10:31 +0100 (CET)
-Received: from localhost (unknown [151.82.255.30])
- by phobos.denx.de (Postfix) with ESMTP id EF97C8197D
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:10:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=studiofuga.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=happycactus@localhost
-Received: by localhost (Postfix, from userid 1000)
- id 629C0DC532A; Tue, 28 Jan 2025 10:10:29 +0100 (CET)
-From: Federico Fuga <fuga@studiofuga.com>
-To: u-boot@lists.denx.de
-Cc: Federico Fuga <fuga@studiofuga.com>
-Subject: [PATCH] Fix fastboot handling of partitions when no slots are
- supported
-Date: Tue, 28 Jan 2025 10:09:58 +0100
-Message-ID: <20250128090958.400146-1-fuga@studiofuga.com>
-X-Mailer: git-send-email 2.48.1
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="kRVWEKUQ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5F83381BC0; Tue, 28 Jan 2025 10:11:16 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 550258197D
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:11:14 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43635796b48so34044155e9.0
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 01:11:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738055474; x=1738660274;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nfnPXD1Qg+P4zdn2zi1ewTYkttu0IaiEMp446GaYfTA=;
+ b=kRVWEKUQpAcV2B8mg1vDPKjkHl89Qaqth+x5JgJjnyke8ivku9taw4RWl2QJll0vXU
+ b1n+lQGMo5oNvp+2TmDdJdgDboPHOieq9dn6X5/812KOu8HaoEXFkbuFJv+9HLo4vRxn
+ Nw1vRLD7+le6TChoEqZjlQbuTC3frczyk+lCXWUZ7Qx4PtqT3RW+egG+XE40vZlY7M40
+ 3srUs5kUdJcHibZCKq3kDZbT2u9v8m0r1aTLUDS3RXe3gRZr/jtRLexm9HB7Vrp1pZNn
+ 3beG2vFnXqyIhD6JU5aAHSjYDyVos2cu7Uu4iEMiN5yaZysR3W3O+hc1QF2V+rquU0UH
+ UkTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738055474; x=1738660274;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nfnPXD1Qg+P4zdn2zi1ewTYkttu0IaiEMp446GaYfTA=;
+ b=TWNXmd0upkTdeAVwED/XTiF6xpr76lEOiixoHZem1fq/9Uz8a8z39OqDchMZplXNdj
+ gi6VBvLeB1XHu0OMuQ79CbnU7DjeI2kvNLWig99hqm0o7S5ylSdniIwiYL242tufMjoV
+ Nyz3uCR/4oHMnW7d+09GTBgLdoQbWCiws7EBGNzb86XJ+OFUK8+/uyjHaqyOT+nqPFQb
+ KUnFl7+St7j2fX0QFkV8/bpK8XRH2Gav9ym7DfC13MIUFuHEDZzBbjRwCNfZbrpH7SoB
+ f9vUdor13BOctQKrZFamCMpvNHpqsB/ppo9dNX5YQfX7kbS0zVKBqQS+2B7+QsORtn8s
+ OZpw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXhmOuHq+BqbLXm0weUzR8VIysqGxHByPMUArjDzJEoMlv3kcqjZVMhJgmiSXV0M4HWNQ0sF58=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGy1Ua23iB6AUbz8XRDAIZLY7Y76DGf7NcgIAinxv2H3Oamct/
+ hOz0L+PD6o3gaqvTlQJQSHxKIfdIjGvdKu01PkGycaiB9BVuZtfkVJWf9XUolgc=
+X-Gm-Gg: ASbGncuOBLFA+tJmvmP29qvE+1W7gqsLG9UfmYk+VyMsBxt0wm2bsv0bDm5+DAFqaYs
+ lFdez7/g/sFn3sRXqp2xGdkq6gyHj+BfOZP0OEGAZH53zfx9WVvQ/n6IXuGN+TY5moQzUU1k9yj
+ PO85q9EyG7CnWqOh0qGNdZsY+ctJj5tFH74xEWJa87XyIOPId2ujaIL+0eYudxNWU3mnOEFE5QW
+ 3LSkFvvuQ5WPZ0uGSQVRQYMQ8l/kEEM1cHWeQr2gJQV2bbaszBHbJRPLgsofEsh+PI4sNAA2SAu
+ Aq6Tj7I/4M5qvuaMVLB+TRfotBKPPNz2mWU=
+X-Google-Smtp-Source: AGHT+IHeCW++aMLoBbi42bx7ukcmEsi6XGt2fbt4TV2dqppoc9vfz9fVJkUrm7s7XbzMkdebWHr0Xw==
+X-Received: by 2002:a05:600c:a012:b0:434:9e17:190c with SMTP id
+ 5b1f17b1804b1-438d57c2f7emr18369115e9.0.1738055473770; 
+ Tue, 28 Jan 2025 01:11:13 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438bd501c2dsm159918065e9.13.2025.01.28.01.11.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Jan 2025 01:11:13 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, Michael Ferolito
+ <michaelsunn101@gmail.com>, u-boot@lists.denx.de
+Cc: Heiko Schocher <hs@denx.de>, Kyungmin Park <kyungmin.park@samsung.com>
+Subject: Re: [PATCH v2] USB: Fix NULLPTR dereference when serial# is unset
+In-Reply-To: <2f367a3a-659b-4fe5-be34-e270ee941866@denx.de>
+References: <20250128003010.971175-1-michaelsunn101@gmail.com>
+ <2f367a3a-659b-4fe5-be34-e270ee941866@denx.de>
+Date: Tue, 28 Jan 2025 10:11:12 +0100
+Message-ID: <87wmefqp5b.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -48,76 +98,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The fastboot module has a bug that prevents some command to work
-properly on devices that haven't an Android-like partition scheme, that
-is, just one spl and one kernel partition, instead of the redundant
-scheme with _a and _b slots.
+Hi Michael,
 
-This is the schema of our NAND storage (board is based on an AllWinner
-A33 sunxi chip):
+Thank you for the patch.
 
-=> mtdparts
+On mar., janv. 28, 2025 at 02:49, Marek Vasut <marex@denx.de> wrote:
 
-device nand0 <1c03000.nand>, # parts = 4
- #: name         size            net size        offset          mask_flags
- 0: spl          0x00020000      0x00020000      0x00000000      0
- 1: uboot        0x00100000      0x00100000      0x00020000      0
- 2: kernel_a     0x00400000      0x00400000      0x00120000      0
- 3: ubi          0x07ae0000      0x079e0000 (!)  0x00520000      0
+> On 1/28/25 1:30 AM, Michael Ferolito wrote:
+>> The current behaviour of this function will dereference a null pointer
+>> if the serial# environment variable is unset. This was discovered on a
+>> board where U-Boot did not have access to the first 256MB of ram,
+>> resulting in a board crash.
+>> In the event that U-Boot has full access to memory, it will still read
+>> from address 0, which is probably not optimal.
+>> This simple check is enough to fix it
+>> 
+>> Signed-off-by: Michael Ferolito <michaelsunn101@gmail.com>
+>> Cc: Marek Vasut <marex@denx.de>
+>> Cc: Heiko Schocher <hs@denx.de>
+>> Cc: Kyungmin Park <kyungmin.park@samsung.com>
+> The subject tag is "usb: gadget: g_dnl:" instead of "USB:" , with that 
+> fixed:
+>
+> Reviewed-by: Marek Vasut <marex@denx.de>
 
-active partition: nand0,0 - (spl) 0x00020000 @ 0x00000000
+Agreed with Marek on this. Please add:
 
-This happens when we try to erase the spl partition using fastboot:
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-$ fastboot erase spl
-Erasing 'spl_a'               FAILED (remote: 'invalid NAND device')
-fastboot: error: Command failed
+As well.
 
-The error occurs because getvars fails to handle the error returned by
-nand layer when a partition cannot be found.
+Marek, since this is gadget, can this go through my tree?
+In that case, Michael, I can fix up the subject when applying (to avoid
+you sending a v2)
 
-Indeed, getvar_get_part_info returns what is returned by
-fastboot_nand_get_part_info (0 on success, 1 on failure) but it should
-return -ENODEV or -EINVAL instead. Since the cause of failure is not
-returned by the nand function, I decided to return -EINVAL to make it
-simple.
+Let me know if that works.
 
-Signed-off-by: Federico Fuga <fuga@studiofuga.com>
----
- drivers/fastboot/fb_getvar.c | 5 ++++-
- drivers/fastboot/fb_nand.c   | 2 +-
- 2 files changed, 5 insertions(+), 2 deletions(-)
+Thanks,
+Mattijs
 
-diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-index 9c2ce65a4e..816ed8a621 100644
---- a/drivers/fastboot/fb_getvar.c
-+++ b/drivers/fastboot/fb_getvar.c
-@@ -121,8 +121,11 @@ static int getvar_get_part_info(const char *part_name, char *response,
- 			*size = disk_part.size * disk_part.blksz;
- 	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND)) {
- 		r = fastboot_nand_get_part_info(part_name, &part_info, response);
--		if (r >= 0 && size)
-+		if (r == 0 && size) {
- 			*size = part_info->size;
-+		} else {
-+			r = -EINVAL;
-+		}
- 	} else {
- 		fastboot_fail("this storage is not supported in bootloader", response);
- 		r = -ENODEV;
-diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
-index afc64fd528..9e2f7c0189 100644
---- a/drivers/fastboot/fb_nand.c
-+++ b/drivers/fastboot/fb_nand.c
-@@ -151,7 +151,7 @@ static lbaint_t fb_nand_sparse_reserve(struct sparse_storage *info,
-  *
-  * @part_name: Named device to lookup
-  * @part_info: Pointer to returned part_info pointer
-- * @response: Pointer to fastboot response buffer
-+ * @response: 0 on success, 1 otherwise
-  */
- int fastboot_nand_get_part_info(const char *part_name,
- 				struct part_info **part_info, char *response)
--- 
-2.48.1
 
+>
+> Thanks
