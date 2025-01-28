@@ -4,91 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31CC7C0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 13:54:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B9ACC0218D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 14:04:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B864281DCD;
-	Tue, 28 Jan 2025 14:54:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 73CA081DB4;
+	Tue, 28 Jan 2025 15:04:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xMDVD5/r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KWZGSp+x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 429AF81DCF; Tue, 28 Jan 2025 14:54:04 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 0F97D81DCD; Tue, 28 Jan 2025 15:04:46 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01B8581DB4
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 14:54:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3624281B4B
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:04:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4362f61757fso59996315e9.2
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 05:54:01 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43635796b48so36423265e9.0
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 06:04:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738072441; x=1738677241; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sfFLnqtrtjxD7UP8FQYlERzsgSsyK/LwppcipKGVeec=;
- b=xMDVD5/rlqq8ao9/pnwtGJ3tF9v2kYthGPeg9VxHsa/NYbgo3xYRWuQYlZ7MrvLz0C
- MBpIzE3r0oCetyP7grlgKVy5WcBKcmenw/RAz3aCW5eW1Tg0fGJWHUz2rACWy4PoedXB
- zov0bWbtZfQ8qMcg4GkYmDS4XBHesmw5+P/THzrCsyO0ECxd56XtDbPKufxX1O4I//sH
- Y4AfNuQujEfv2JRlfaTDOFlccMHi8bG7J+B2lqeGzTYVPBafIH37aH8zbSXuHuUf/U/k
- fitt2mZXQDxZF1PHaUtjJu51MfG/qZgYDUPWXxeKFRqfAtKpDJaLW2sD0YBruh5lJ2Oh
- Cn1w==
+ d=chromium.org; s=google; t=1738073082; x=1738677882; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=p+Nole4VCjJl0RLWiO3h83oEjrLGhvcnH9P6R/eHv2g=;
+ b=KWZGSp+xQrMsCzV8ziZRbgrQwwQU/Aahdc5LoYDoigT2KdZNCEldsjsQ9DFif9IKwr
+ xs2/rJZ/3+cAoiURKeTowjF81ZeE+qu2+rZ5a/hjtUR4EKZl2A9dGFwAc2xdRDl0OAD4
+ LKBMGHVnhTXudjChg421zAC72kSORi5zVqcEU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738072441; x=1738677241;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sfFLnqtrtjxD7UP8FQYlERzsgSsyK/LwppcipKGVeec=;
- b=ldXVqrZoEATTyaUN2AC6Tgh8PFRX2WdHDf7qRwRgnSkx2miJnUgZr2FAzadSPaznjI
- JyQ04qXRgqS7WR/4iH/f4AWyAkM/i6J1tjTQbmdi+A9z4xc94WmQQWD4RxWnUr+sybGr
- pKQxPfGVpJc208SkO/1uEqmB3U5NbZGN0AwxvAYrUSjIXeFtgbBAt6GXNuWA4GMvK8e2
- A3/me7QrNqxMDmkBuZ+W/zuBb2VvngxClxHo9dtkF//t+pJkupxkSODxxgeAYE5pHXRC
- st1PdQgCKYtbBvcMt2Pr++l2eD904llVnW6m/ac0++GJ5+8qLJLQHMvlgiNMdaVrKCnU
- bh8g==
-X-Gm-Message-State: AOJu0YyZtyO5JlTl2jQdvOFjnzrMRDpMjU/lw5Z5nbceMD7tBLw5tmzu
- 0PobhLmOLULUZEdJparN2wClqTPvFfo7UcYeL5AMh1sfYlbHNNjs4UVt2pl30D3NMTiGQldsC8F
- pL8dicA==
-X-Gm-Gg: ASbGnctvDDYZkUiRgfwyvNI4GUTgjXDoXrAvqeGMVIvrToCyhMyc/diltI/QyDlwV4N
- GxgBK1hK3UjnXeKYxDGPSqCyom+2GRUjpmzs/My3I7GMjvSHLzXN7tvu6A/N8W6Db0IgjceJeto
- 87qLGlx3b29ktKBsCfa3w84lc/xwddSjAUvpHmNj1rcFdYfiby2ZNTN6dw24LOH7YR/sVQ6oVZt
- RbyxmULvfvnck2C98byRaNd2zeDU84C6ri7CJffA+gTkwFTv0Vfrz8tY4n5J/d5pTlosuaJbzHC
- 5yABfcnGNpRFExLSTbCSEKs8Fg==
-X-Google-Smtp-Source: AGHT+IEaxE2kCq4blkrfV9knTfz3MvXjhC+P3AtkuLuzUc/N4yRvr5vyTYF75vvAK+B/duFkanchvA==
-X-Received: by 2002:a05:600c:4713:b0:436:9227:915 with SMTP id
- 5b1f17b1804b1-438913caa3cmr349094495e9.9.1738072441312; 
- Tue, 28 Jan 2025 05:54:01 -0800 (PST)
-Received: from [10.100.0.2] ([45.84.137.213]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd485695sm168555055e9.14.2025.01.28.05.54.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jan 2025 05:54:01 -0800 (PST)
-Message-ID: <f5237f0f-c66c-4d20-b11c-af77d49460a5@linaro.org>
-Date: Tue, 28 Jan 2025 14:53:58 +0100
+ d=1e100.net; s=20230601; t=1738073082; x=1738677882;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=p+Nole4VCjJl0RLWiO3h83oEjrLGhvcnH9P6R/eHv2g=;
+ b=aaTHEjBFaFJ7r2ZK8U+0WQz5e6G7NApks6J/1NhA8/bnXQWvGijwSmlGD1sVKPu1AE
+ jWmd4Mq430ODjDpu/edz6jW50XKCTUulV99hmS+qQhV22IUAWjy3SynUgvLejdWqNOCy
+ CnpQZbHcf5Zhx9iFj/hgNiyQRCnTjjxEIGOiuQ6b77vfHyFPEngZ4cJACboNRYmsd9WC
+ Uc/Vf9zBfkVP+JyRVlBfAfHjOPDpbVWJdpf/C1/tXIypc2MeVs0nQZ/Nj9WFf4dqQyYf
+ 4G4nKiHUk0A8V8AC3vkwDv2Gq9lUhwjWE6E3/SuidJzCFfmVqAYxmbu7TWaXMQROqafN
+ +/AA==
+X-Gm-Message-State: AOJu0YyFBRyzdxA45HhE4ifWb1EGqA547C4J1H6lz7w7uL97EK5cULTH
+ icA2MRZI13HKKNUWRstZZ7DUrQwfthz2oxft7YibI/9TFSB1p0bUH2/0Xsi5/aGPlddPaO7rGc+
+ 96Rsms29jnw1lDsXL0W+8nw99U+ek7r/zApuyD5B7drM8RfM=
+X-Gm-Gg: ASbGnctAQVcMFJ4DqTorcz0+qWObPISW0K6F9kXa6bwhmdZ0HwmUlXdU7IOEKnP9B2W
+ NuGPvjS45O7txMd6quWm3Ka8XEliZw9ynGnQNilpKN9F6HC3XAUcfRC4QP9c0aQZJ/409SPKgPe
+ PiZPSdo/d6
+X-Google-Smtp-Source: AGHT+IGFjC8axxJQe+Xcd/n0jcFatYMMv1OHKSmqLWyoKPEY7o/sZ7AsdrQoXGT/4PZROr0IYGWHe4tEUFr+1BUmQs4=
+X-Received: by 2002:a17:907:3f15:b0:ab3:66f6:1370 with SMTP id
+ a640c23a62f3a-ab6bbac9ed0mr390704466b.15.1738073063993; Tue, 28 Jan 2025
+ 06:04:23 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 3/3] usb: scan multiple buses simultaneously with
- coroutines
-To: Michal Simek <monstr@monstr.eu>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Dragan Simic <dsimic@manjaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>
 References: <cover.1738059345.git.jerome.forissier@linaro.org>
- <58d6721203ea81b9c20f162ef40f79bc73243a42.1738059345.git.jerome.forissier@linaro.org>
- <CAHTX3d+-oy8h=Y1u5iQz-O5fSAEqaKezd3_sTwajgoWedWX9UQ@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAHTX3d+-oy8h=Y1u5iQz-O5fSAEqaKezd3_sTwajgoWedWX9UQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <cover.1738059345.git.jerome.forissier@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 28 Jan 2025 07:04:12 -0700
+X-Gm-Features: AWEUYZnQe3gJ3s7pgiRUoLvnj78SsR1OavjfTSWSEns6ft_EACGp_TDgv52sliM
+Message-ID: <CAFLszTj4ktct=SCNNQhZ-dyjwMTJPi46Jj7GeM=o4KJgC1A76g@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 0/3] Coroutines
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,301 +85,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jerome,
 
+On Tue, 28 Jan 2025 at 03:20, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> This series introduces a simple coroutines framework and uses it to
+> speed up the efi_init_obj_list() function. It is just an example to
+> trigger discussions; hopefully other places in U-Boot can benefit from
+> a similar treatment. Suggestions are welcome.
+>
+> I came up with this idea after analyzing some profiling data (ftrace)
+> taken during the execution of the "printenv -e" command on a Kria KV260
+> board. When the command is first invoked, efi_init_obj_list() is called
+> which takes a significant amount of time (2.872 seconds). This time can
+> be split into 0.570 s for efi_disks_register(), 0.811 s for
+> efi_tcg2_register() and 1.418 s for efi_tcg2_do_initial_measurement().
+> All the other child functions are much quicker. Another interesting
+> observation is that a large part of the time is actually spent waiting
+> in __udelay(). More precisely:
+> - For efi_disks_register(): 421 ms / 570 ms = 73.8 % spent in __udelay()
+> - For efi_tcg2_register(): 805 ms / 811 ms = 99.1 % spent in __udelay()
+> - For efi_tcg2_do_initial_measurement(): 1395.025 ms / 1418.372 ms =
+>   98.3 % spent in __udelay()
+>
+> Given the above data, it is reasonable to think that a nice speedup
+> could be obtained if these functions could somehow be run in parallel.
+> efi_tcg2_do_initial_measurement() unfortunately needs to be excluded
+> because it depends on the first two. But efi_disks_register() and
+> efi_tcg2_register() are clearly independant and are therefore good
+> candidates for concurrent execution.
+>
+> So, I considered two options:
+>
+> - Spin up a secondary core to take care of one function while the other
+> one runs on the main core
+> - Introduce some kind of software scheduling
+>
+> I quickly ruled out the first one for several reasons: initializing a
+> secondary core is typically quite hardware-specific, it would not scale
+> well if more functions than available cores would need to be run in
+> parallel, it would make debugging harder etc.
 
-On 1/28/25 12:58, Michal Simek wrote:
-> Hi,
-> 
-> út 28. 1. 2025 v 11:20 odesílatel Jerome Forissier
-> <jerome.forissier@linaro.org> napsal:
->>
->> Use the coroutines framework to scan USB buses in parallel for better
->> performance. Tested on arm64 QEMU on a somewhat contrived example
->> (4 USB buses, each with one audio device, one keyboard, one mouse and
->> one tablet).
->>
->> $ make qemu_arm64_defconfig
->> $ make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
->> $ qemu-system-aarch64 -M virt -nographic -cpu max -bios u-boot.bin \
->>     $(for i in {1..4}; do echo -device qemu-xhci,id=xhci$i \
->>         -device\ usb-{audio,kbd,mouse,tablet},bus=xhci$i.0; \
->>     done)
->>
->> The time spent in usb_init() is reported on the console and shows a
->> significant improvement with COROUTINES enabled.
->>
->> ** Without COROUTINES
->>
->>  Bus xhci_pci: Register 8001040 NbrPorts 8
->>  Starting the controller
->>  USB XHCI 1.00
->>  Bus xhci_pci: Register 8001040 NbrPorts 8
->>  Starting the controller
->>  USB XHCI 1.00
->>  Bus xhci_pci: Register 8001040 NbrPorts 8
->>  Starting the controller
->>  USB XHCI 1.00
->>  Bus xhci_pci: Register 8001040 NbrPorts 8
->>  Starting the controller
->>  USB XHCI 1.00
->>  scanning bus xhci_pci for devices... 6 USB Device(s) found
->>  scanning bus xhci_pci for devices... 6 USB Device(s) found
->>  scanning bus xhci_pci for devices... 6 USB Device(s) found
->>  scanning bus xhci_pci for devices... 6 USB Device(s) found
->>  USB: 4 bus(es) scanned in 5873 ms
->>
->> ** With COROUTINES
->>
->>  Bus xhci_pci: Register 8001040 NbrPorts 8
->>  Starting the controller
->>  USB XHCI 1.00
->>  Bus xhci_pci: Register 8001040 NbrPorts 8
->>  Starting the controller
->>  USB XHCI 1.00
->>  Bus xhci_pci: Register 8001040 NbrPorts 8
->>  Starting the controller
->>  USB XHCI 1.00
->>  Bus xhci_pci: Register 8001040 NbrPorts 8
->>  Starting the controller
->>  USB XHCI 1.00
->>  Scanning 4 USB bus(es)... done
->>  Bus xhci_pci: 6 USB device(s) found
->>  Bus xhci_pci: 6 USB device(s) found
->>  Bus xhci_pci: 6 USB device(s) found
->>  Bus xhci_pci: 6 USB device(s) found
->>  USB: 4 bus(es) scanned in 2213 ms
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>  drivers/usb/host/usb-uclass.c | 152 +++++++++++++++++++++++++++++++++-
->>  1 file changed, 149 insertions(+), 3 deletions(-)
->>
->> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
->> index bfec303e7af..3104efe7f9e 100644
->> --- a/drivers/usb/host/usb-uclass.c
->> +++ b/drivers/usb/host/usb-uclass.c
->> @@ -9,6 +9,7 @@
->>  #define LOG_CATEGORY UCLASS_USB
->>
->>  #include <bootdev.h>
->> +#include <coroutines.h>
->>  #include <dm.h>
->>  #include <errno.h>
->>  #include <log.h>
->> @@ -18,6 +19,8 @@
->>  #include <dm/lists.h>
->>  #include <dm/uclass-internal.h>
->>
->> +#include <time.h>
->> +
->>  static bool asynch_allowed;
->>
->>  struct usb_uclass_priv {
->> @@ -221,6 +224,40 @@ int usb_stop(void)
->>         return err;
->>  }
->>
->> +static int nbus;
->> +
->> +#if CONFIG_IS_ENABLED(COROUTINES)
->> +static void usb_scan_bus(struct udevice *bus, bool recurse)
->> +{
->> +       struct usb_bus_priv *priv;
->> +       struct udevice *dev;
->> +       int ret;
->> +
->> +       priv = dev_get_uclass_priv(bus);
->> +
->> +       assert(recurse);        /* TODO: Support non-recusive */
->> +
->> +       debug("\n");
->> +       ret = usb_scan_device(bus, 0, USB_SPEED_FULL, &dev);
->> +       if (ret)
->> +               printf("Scanning bus %s failed, error %d\n", bus->name, ret);
->> +}
->> +
->> +static void usb_report_devices(struct uclass *uc)
->> +{
->> +       struct usb_bus_priv *priv;
->> +       struct udevice *bus;
->> +
->> +       uclass_foreach_dev(bus, uc) {
->> +               priv = dev_get_uclass_priv(bus);
->> +               printf("Bus %s: ", bus->name);
->> +               if (priv->next_addr == 0)
->> +                       printf("No USB device found\n");
->> +               else
->> +                       printf("%d USB device(s) found\n", priv->next_addr);
->> +       }
->> +}
->> +#else
->>  static void usb_scan_bus(struct udevice *bus, bool recurse)
->>  {
->>         struct usb_bus_priv *priv;
->> @@ -240,7 +277,81 @@ static void usb_scan_bus(struct udevice *bus, bool recurse)
->>                 printf("No USB Device found\n");
->>         else
->>                 printf("%d USB Device(s) found\n", priv->next_addr);
->> +       nbus++;
->>  }
->> +#endif
->> +
->> +#if CONFIG_IS_ENABLED(COROUTINES)
->> +extern int udelay_yield;
->> +
->> +static void usb_scan_bus_co(void)
->> +{
->> +       usb_scan_bus((struct udevice *)co_get_arg(), true);
->> +       co_exit();
->> +}
->> +
->> +static struct co_stack *stk;
->> +static struct co *main_co;
->> +static struct co **co;
->> +static int co_sz = 8;
->> +
->> +static int add_usb_scan_bus_co(struct udevice *bus)
->> +{
->> +       if (!co) {
->> +               co = malloc(co_sz * sizeof(*co));
->> +               if (!co)
->> +                       return -ENOMEM;
->> +       }
->> +       if (nbus == co_sz) {
->> +               struct co **nco;
->> +
->> +               co_sz *= 2;
->> +               nco = realloc(co, co_sz * sizeof(*co));
->> +               if (!nco)
->> +                       return -ENOMEM;
->> +               co = nco;
->> +       }
->> +       if (!main_co) {
->> +               main_co = co_create(NULL, NULL, 0, NULL, NULL);
->> +               if (!main_co)
->> +                       return -ENOMEM;
->> +       }
->> +       if (!stk) {
->> +               stk = co_stack_new(32768);
->> +               if (!stk)
->> +                       return -ENOMEM;
->> +       }
->> +       co[nbus] = co_create(main_co, stk, 0, usb_scan_bus_co, bus);
->> +       if (!co[nbus])
->> +               return -ENOMEM;
->> +       nbus++;
->> +       return 0;
->> +}
->> +
->> +static void usb_scan_cleanup(void)
->> +{
->> +       int i;
->> +
->> +       for (i = 0; i < nbus; i++) {
->> +               co_destroy(co[i]);
->> +               co[i] = NULL;
->> +       }
->> +       nbus = 0;
->> +       co_destroy(main_co);
->> +       main_co = NULL;
->> +       co_stack_destroy(stk);
->> +       stk = NULL;
->> +}
->> +#else
->> +static int add_usb_scan_bus_co(struct udevice *bus)
->> +{
->> +       return 0;
->> +}
->> +
->> +static void usb_scan_cleanup(void)
->> +{
->> +}
->> +#endif
->>
->>  static void remove_inactive_children(struct uclass *uc, struct udevice *bus)
->>  {
->> @@ -289,6 +400,7 @@ static int usb_probe_companion(struct udevice *bus)
->>
->>  int usb_init(void)
->>  {
->> +       unsigned long t0 = timer_get_us();
->>         int controllers_initialized = 0;
->>         struct usb_uclass_priv *uc_priv;
->>         struct usb_bus_priv *priv;
->> @@ -355,10 +467,40 @@ int usb_init(void)
->>                         continue;
->>
->>                 priv = dev_get_uclass_priv(bus);
->> -               if (!priv->companion)
->> -                       usb_scan_bus(bus, true);
->> +               if (!priv->companion) {
->> +                       if (CONFIG_IS_ENABLED(COROUTINES)) {
->> +                               ret = add_usb_scan_bus_co(bus);
->> +                               if (ret)
->> +                                       goto out;
->> +                       } else {
->> +                               usb_scan_bus(bus, true);
->> +                       }
->> +               }
->>         }
->>
->> +#if CONFIG_IS_ENABLED(COROUTINES)
->> +       {
->> +               bool done;
->> +               int i;
->> +
->> +               printf("Scanning %d USB bus(es)... ", nbus);
->> +               udelay_yield = 0xCAFEDECA;
->> +               do {
->> +                       done = true;
->> +                       for (i = 0; i < nbus; i++) {
->> +                               if (!co[i]->done) {
->> +                                       done = false;
->> +                                       co_resume(co[i]);
->> +                               }
->> +                       }
->> +               } while (!done);
->> +               udelay_yield = 0;
->> +               printf("done\n");
->> +
->> +               usb_report_devices(uc);
->> +       }
->> +#endif
->> +
->>         /*
->>          * Now that the primary controllers have been scanned and have handed
->>          * over any devices they do not understand to their companions, scan
->> @@ -388,7 +530,11 @@ int usb_init(void)
->>         /* if we were not able to find at least one working bus, bail out */
->>         if (controllers_initialized == 0)
->>                 printf("No USB controllers found\n");
->> -
->> +out:
->> +       if (nbus)
->> +               printf("USB: %d bus(es) scanned in %ld ms\n", nbus,
->> +                      (timer_get_us() - t0) / 1000);
->> +       usb_scan_cleanup();
->>         return usb_started ? 0 : -ENOENT;
->>  }
->>
->> --
->> 2.43.0
->>
-> 
-> I have tested it on kr260 which is using 2 usb interfaces and there is
-> an issue with usb hub initialization.
-> That board has two hubs connected over i2c and only one of them is
-> initialized over i2c.
-> It means there is some work which needs to happen and likely some
-> locking should be in place.
+Yes this is fairly brittle IMO. Aide: Years ago I did a prototype of
+using a second core to speed up loading from MMC. It turned out that
+just 'kicking' the mmc controller at the start was enough to speed
+things up. I suspect that these days the controllers are faster and
+there is less of a delay getting going.
 
-Hmmmm... I was kind of expecting that :-/ Do you think the kv260 has a
-similar problem? If so I can use mine to troubleshoot.
+> Software scheduling however can be accomplished quite easily, especially
+> since we don't need to consider preemptive multitasking. Coroutines [1]
+> for example can perfectly do the job. They provide a way to save and
+> restore the execution context (registers and stack). Here is how it
+> look like:
+>
+> static void do_some_work(int v)
+> {
+>         int i;
+>
+>         for (i = 0; i < 5; i++) {
+>                 printf("%d", v);
+>                 /* Save context and resume main thread */
+>                 co_yield();
+>         }
+> }
+>
+> static void co1(void *arg)
+> {
+>         do_some_work(1);
+>         /* Mark coroutine as "done" and resume main thread */
+>         co_exit();
+> }
+>
+> static void co2(void *arg)
+> {
+>         do_some_work(2);
+>         co_exit();
+> }
+>
+> void main_thread(void)
+> {
+>         struct co *co1, *co2;
+>
+>         co1 = co_create(co1, ...);
+>         co2 = co_create(co2, ...);
+>
+>         do {
+>                 printf("A");
+>                 if (!co1->done) {
+>                         /* Invoke or resume first coroutine */
+>                         co_resume(co1);
+>                 }
+>                 printf("B");
+>                 if (!cor21->done) {
+>                         /* Invoke or resume second coroutine */
+>                         co_resume(co2);
+>                 }
+>         } while (!(co1->done && co2->done));
+>
+>         /* At this point, co1 and co2 have both called co_exit() */
+> }
+>
+> The above example would print: A1B2A1B2A1B2A1B2A1B2.
+>
+> - The first commit introduces the coroutine framework, loosely based on
+> libaco [2]. The code was simplified and reformatted to better suit
+> U-Boot.
+> - The second commit modifies efi_init_obj_list() in order to turn
+> efi_disks_register() and efi_tcg2_register() into coroutines when
+> COROUTINES in enabled. On a KV260 board with a SD card inserted, this
+> saves about .6 second (2.2 s instead of 2.8 s).
+> - The third commit applies coroutines to usb_init(), which can
+> significantly reduce the time it takes to scan multiple buses. Tested
+> on arm64 QEMU with 4 XHCI buses: the USB scan takes  2.2 s instead of
+> 5.8 s.
+>
+> [1] https://en.wikipedia.org/wiki/Coroutine
+> [2] https://github.com/hnes/libaco/
+>
+> Changes in v2
+>
+> - Remove x86 and x86_64 arch code since it is untested
+> - Add missing SPDX license tag to arch/arm/cpu/armv8/co_switch.S
+> - Change Apache-2.0 SPDX license tag to "Apache-2.0 OR GPL-2.0-or-later"
+> - Apply coroutines to the USB bus scan in usb_init()
+> Jerome Forissier (3):
+>   Introduce coroutines framework
+>   efi_loader: optimize efi_init_obj_list() with coroutines
+>   usb: scan multiple buses simultaneously with coroutines
+>
+>  arch/arm/cpu/armv8/Makefile    |   1 +
+>  arch/arm/cpu/armv8/co_switch.S |  36 +++++++
+>  drivers/usb/host/usb-uclass.c  | 152 +++++++++++++++++++++++++++++-
+>  include/coroutines.h           | 130 ++++++++++++++++++++++++++
+>  lib/Kconfig                    |  10 ++
+>  lib/Makefile                   |   2 +
+>  lib/coroutines.c               | 165 +++++++++++++++++++++++++++++++++
+>  lib/efi_loader/efi_setup.c     | 113 +++++++++++++++++++++-
+>  lib/time.c                     |  14 ++-
+>  9 files changed, 615 insertions(+), 8 deletions(-)
+>  create mode 100644 arch/arm/cpu/armv8/co_switch.S
+>  create mode 100644 include/coroutines.h
+>  create mode 100644 lib/coroutines.c
+>
+> --
+> 2.43.0
+>
 
-Thanks,
--- 
-Jerome
+Another idea would be to use the cyclic framework.
 
-> Thanks,
-> Michal
-> 
+To use cyclic for USB, we would need a struct that holds the state of
+the USB scanning. This is likely just a few index variables. The nice
+thing about cyclic is that we are a bit more in control of what is
+going on and we know at any point what state things are in. We have a
+way of aborting when we want to. Arguably many of the high-level
+functions in U-Boot should be written as:
+
+int do_more(struct my_state *state)
+
+and just go until they run out of things to immediately do*
+
+It would collect the state for each subsystem in one place.
+
+The other nice thing is that we can progress the boot with multiple
+subsystems at the same time, with less risk of strange behaviour (I
+suspect?). In other words, start USB scanning 'in the background'
+while continuing to allow the user to type stuff at the cmdline.
+
+I believe that we would very quickly want to get progress info from
+the operation, but it's hard to be sure when it is safe to read it, if
+the coroutines are doing their own thing on their own time with
+limited visibility from the 'main' process.
+
+You can see this sort of API with libfdt (fdt_first/next_subnode()),
+driver model (uclass_first/next_device() and bootstd
+(bootflow_scan_first/next()).
+
+If we are going to have coroutines, then we should have sandbox
+support, at least. How does it look inside the debugger?
+
+Regards,
+Simon
+
+* BTW, with EFI, do the disks and TPM actually all need to be probed
+right at the start? I'm not quite convinced that anyone has seriously
+looked at this.
