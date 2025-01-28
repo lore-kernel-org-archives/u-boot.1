@@ -4,54 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F312C0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 12:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9AE7C0218D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 12:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D011B81DCD;
-	Tue, 28 Jan 2025 13:55:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 48C5A81DB4;
+	Tue, 28 Jan 2025 13:56:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738068929;
-	bh=fczNAlLdgAxbfufReqqH1JIJ5GK1ybzjGbzIzYm/4Cg=;
+	s=phobos-20191101; t=1738068965;
+	bh=YjMlq7Ina5GBx771Kt5cKG4MTEhBit5ubdx89cT2cEQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=da+JVS/kOZPWY+vHYMP4+vyC7XIPbiSHnzkGkULRYa359ckfJ0uec92ex2aW8iKjP
-	 eCXfv7J3/Gj1E7iVeWbo4aXqfklpjmzkxwm77JJTW9tvRDy+oEWp9MkSVzdVPWR9Os
-	 sl/9vGkck5Iqn/wFon2CpF+9OuQFIDDxPb5OLo3Q52UzyWjGFNvzuX5za0ECwAC3ij
-	 Y/WwzQ6IyddTQCb76R3rAYZIFFUsS3zcCQ/EAt4RdDIvmeGYiHBF8ABZMsmWosej+F
-	 SIxuwsxv6CwUQbWnf0w0Ng5TE6BIpyKdUV4uQmUyvqc+bYV/LLQWvsaF9Ji/s6Pnls
-	 oSz2yZE1lCM3w==
+	b=ZkZpfXMUWJ9K3GApV0sCWf0z/qns4sR62G5zOGsPqsnR1SqVsAZqpBDQoBvf9+jDS
+	 ayYieHSSEmUDi8HFxEw99gMRBp7Q5QBhyZS8y/+VCl2qUpuTEB8ql0iaEKhsE3BL1i
+	 L/SWn7HQA4SiDtGTBaaLjT/nIaN4AB+AF7PAlYBeltFKKUNzeCkDBv6GaaN5HApiTb
+	 KkhwIY6JaIS5xGBvxcCTq22QZ4N7x0+7QQ7GwUCzHfGi3a0bVvjkTL36i0/HxrE2WH
+	 MZE6sw1sqJQSII46WeWe7q3VnmN2i4EzsTHaFgbgXvt0CIkriADDBZXYqptDVWeMXU
+	 YVaFd/KcggFZQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E477481DCF; Tue, 28 Jan 2025 13:55:28 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id 07C7481DCD; Tue, 28 Jan 2025 13:56:05 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8DFB81DB4
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 13:55:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11B6C81951
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 13:56:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Yj4yN1Q7nz9sdR;
- Tue, 28 Jan 2025 13:55:24 +0100 (CET)
-Message-ID: <66de2061-3d21-4aaf-afda-58193b7cee02@denx.de>
-Date: Tue, 28 Jan 2025 13:55:23 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Yj4z46H6lz9t1K;
+ Tue, 28 Jan 2025 13:56:00 +0100 (CET)
+Message-ID: <98144645-8105-46b0-a9e3-b32625c34fe9@denx.de>
+Date: Tue, 28 Jan 2025 13:55:59 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] board: solidrun: clearfog: enable ddr odt0 on write for
- both chip-select
-To: Josua Mayer <josua@solid-run.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20241127-a388-sr-som-odt-v1-1-ad51f46a6e9a@solid-run.com>
+Subject: Re: [PATCH] configs: mvebu_espressobin_ultra-88f3720_defconfig:
+ enable full bootflow functionality
+To: bschnei@gmail.com
+Cc: Ben Schneider <ben@bens.haus>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ u-boot@lists.denx.de
+References: <20241206211015.9640-1-ben@bens.haus>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241127-a388-sr-som-odt-v1-1-ad51f46a6e9a@solid-run.com>
+In-Reply-To: <20241206211015.9640-1-ben@bens.haus>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4Yj4z46H6lz9t1K
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,19 +74,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27.11.24 13:32, Josua Mayer wrote:
-> Enabling ODT is required to suppress reflection of the data signal on
-> DDR write operation. SolidRun Armada 388 SoM only connects M_ODT[0] even
-> when both chip-select are used.
+On 06.12.24 22:09, bschnei@gmail.com wrote:
+> From: Ben Schneider <ben@bens.haus>
 > 
-> Enable ODT[0] for both chip-select during write only.
+> This appliance has multiple devices from which it can boot. Enable full
+> bootflow functionality so users can choose a non-default boot device.
 > 
-> Original work by Baruch Siach [1] and Chris Packham [2].
-> 
-> [1] https://github.com/SolidRun/u-boot-armada38x/commit/aba763a611e69fbcc4e229659da9d84f16b39814
-> [2] https://github.com/SolidRun/u-boot-armada38x/commit/dbaf09590df9add19e738d2de03c0f2d0d8f5433
-> 
-> Signed-off-by: Josua Mayer <josua@solid-run.com>
+> Signed-off-by: Ben Schneider <ben@bens.haus>
 
 Applied to u-boot-marvell/master
 
@@ -88,28 +88,22 @@ Thanks,
 Stefan
 
 > ---
->   board/solidrun/clearfog/clearfog.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/board/solidrun/clearfog/clearfog.c b/board/solidrun/clearfog/clearfog.c
-> index 2dbd071abd9f29cee97fb813a67d0190a620bd32..67b60d2e7b43331383b6a01b13693b29b21129be 100644
-> --- a/board/solidrun/clearfog/clearfog.c
-> +++ b/board/solidrun/clearfog/clearfog.c
-> @@ -161,7 +161,7 @@ static struct mv_ddr_topology_map board_topology_map = {
->   	{0},				/* timing parameters */
->   	{ {0} },			/* electrical configuration */
->   	{0,},				/* electrical parameters */
-> -	0,				/* ODT configuration */
-> +	0x30000,			/* ODT configuration */
->   	0x3,				/* clock enable mask */
->   };
->   
+>   configs/mvebu_espressobin_ultra-88f3720_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> ---
-> base-commit: 3881c6b90350b0b04085ad46ef64989b43967eef
-> change-id: 20241127-a388-sr-som-odt-89f8dd6b6410
-> 
-> Best regards,
+> diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> index aa9026acc3..6f1a66f5f1 100644
+> --- a/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> +++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> @@ -16,6 +16,7 @@ CONFIG_SYS_LOAD_ADDR=0x6000000
+>   CONFIG_PCI=y
+>   CONFIG_AHCI=y
+>   # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> +CONFIG_BOOTSTD_FULL=y
+>   CONFIG_DISTRO_DEFAULTS=y
+>   CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_USE_PREBOOT=y
 
 Viele Grüße,
 Stefan Roese
