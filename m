@@ -4,91 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FACCC0218D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 22:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1F52C0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 22:22:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC49481E76;
-	Tue, 28 Jan 2025 23:16:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 215A080EEF;
+	Tue, 28 Jan 2025 23:22:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q6EQ9p0y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c7Aqe8gp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9376081E8C; Tue, 28 Jan 2025 23:16:08 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id 8D71C812BB; Tue, 28 Jan 2025 23:22:40 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 220F781D27
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 23:16:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3B7E807B3
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 23:22:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7b6e9317a2aso12653685a.0
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 14:16:06 -0800 (PST)
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7bcf32a6582so560089985a.1
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 14:22:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738102565; x=1738707365; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738102956; x=1738707756; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ym0vBBU7asEo+xJDkYfzS71MPwXagXS/hrCAx1+41QU=;
- b=Q6EQ9p0y/dScx0TB6A/rY9xOEAYCpUdCRkr+Gs5TzvOAXA3xVYqeJ9vVxoZU5xpeYo
- 9TYr3B4F/93/86J+d+r98b2eS6momTNfhKlfrnW9PK8ndSNeaaVl5Ff1NPhscqrcMZwF
- WbdzOSLLnL0FX1UrZdim2v7hTxeFXAsQKIiuE=
+ bh=Eieay1SafOse+2EOhPCJN+DUUkSmT3VV/EN7kuu86g8=;
+ b=c7Aqe8gp1K1ggDXuYmMXl4RWgSrPGvT9jfmFxnhx3sqCoyPGDcdKsLsM0E4YKsqQ/n
+ YsolmFr1B5T/wfDNnoP6zCnC27tC/dIuTZGpZgdf0rX57k3OQYQL+3gen9lw7i29MSAg
+ 9XfGr7HfS8C6N8Yms0Z6NifcNJ/hxbBqRJ/fw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738102565; x=1738707365;
+ d=1e100.net; s=20230601; t=1738102956; x=1738707756;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ym0vBBU7asEo+xJDkYfzS71MPwXagXS/hrCAx1+41QU=;
- b=NjWpqkyJjfo+c6kSVGCDycyGBo6FI83q8NVG2lyj6PMwHdvEMhQtc1LlQtCcFgD4Ow
- ZI/NJvOfuzjKj0oxg4zUKzmzrq3aoF6P8LQ/+qejJBXmlYFo4lLIFjB617BjhCTYeF5j
- Vt/9klxEGI/xy73Afc+JJecggSA9NIhiA8QhygX4oSn9HCovZvu5KJscEVgfJd4E4uVm
- SYL0Lx+zb+xT9w+DrDc6/hw8EVkZWBVwnZBlj0xMmoAKJUxvZzX/YJYTRavIGzvzf37h
- +O5W0Gjw8JzAbDOc6S6dwUBu40n4dcFyTd//fybPeezklSk/VBkpBTrw5yLBqcyojrTo
- nzMQ==
+ bh=Eieay1SafOse+2EOhPCJN+DUUkSmT3VV/EN7kuu86g8=;
+ b=VRuAKTv3Kt8XG/C/RIT33l1jfu988L7FTbm0iKfKIjPTvFn+oQdz2Am3Pzvz2vvOvD
+ HCuKyDEHnzF5OapCDKP50K0n3tn9yov4j+Fo3hr9NBEojvNh53C1Rv9UKgpN/NgzAAcz
+ lx0/tU3tCVh7Wja/+vdPbGaALwHrDfShgPA/s9zGMnqMTCJm1IzFQzfNnVxU+Iowv2d4
+ LsJ+FH6AQ+CANEqFjnAJMSkrXoDyO8/6FC/nsaZfFQy0Hsc+Ea7Io+JD4qe3/MRWLqTc
+ mK8vbbX+4HH1q+NcGKVV6XLlDsb3HCZ4Lpv9F5pS8P+XRIDgCrcc7OA/mWdZf8iaWpGg
+ r12A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWO3C0txYrFqBEOeRMI2cJea8Kt334i2zYpKTNuMwy5CkveOj+K7+fyPc7Mojw3/3VTRIVt8u0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmHI/WzNNKY7oOYzOmHUsYQ1GUQJxy6UXKJ9+BWg0dLBOKXMjG
- IRKgWbZxljM3XfplghvXhmAsn/APhexzm/2AzBhJDNEJ5Rm3kTw75vHkXkrjfw4=
-X-Gm-Gg: ASbGncvOK5wBU30dyOOfemFhDq02WzF4BPeu4gs7NRz9YmnAC++b6pEtyFOqwjK6vCU
- pVZM8Oiv5KUOoAVmYICz0v08ZXJn100DsV162vaATfHFiamWRekDJsu3Bs9vkwMNBGTc+l2ffBF
- OYLV9RWIVT6FhZyLl+6P3BynSOMyrIEjYVA/vz7eVwL8ljtWrd/6LGlB4UOIw4RmqcMy/VWFTdh
- 3dyAq0Wg3byKks/cTYnTHkNWcE8kK8nPpsBQR4tzWa+gvK0vSl5YhSxErW0tJ4PL003Mp1ERWT5
- /d6KfTKzxd0GT9U=
-X-Google-Smtp-Source: AGHT+IH8x5bCpXwC4Gj5M70sCOxk6ud+OoI420FAhN8v6Ekl3Rw4ujpNnjvEvFknQfxcs3qPiDQiew==
-X-Received: by 2002:a05:620a:2726:b0:7a9:abdf:f517 with SMTP id
- af79cd13be357-7bff402e337mr813717085a.25.1738102564906; 
- Tue, 28 Jan 2025 14:16:04 -0800 (PST)
+ AJvYcCUa1XHgalRs3OCQbHcF+WwUf69wmgxmoPtNoxH/LlkRJ5PC5U0UeahpRY3xMLpWUaQJDTsIVRk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxTxx9swWyw0knhmOo6XJk3zPmsDrnr/u/CBmRFY1saPA5kREFx
+ OOtj+sTNZ0fJX7jglTgUuLw6RftPjPuZY9vWfmVEL5WALVhVX7ekxGucxvovKb8=
+X-Gm-Gg: ASbGncs0EpNCKl7Rv+beL5OZPuWWk+VQ5jJs7OFRPwyXfY8Q9Gos35uVNz2zp4YXRNF
+ xytumK8YLTBkisuK3xNQbk4b53CXcK3307uQ5ylRD71a+yFoB04imBY4bfbqT6N8eFGzTbQqDpR
+ /1gRZSP+Jxyhc1rE+SR0aE/VlOIReCr3a8c0F5+IObymVC+O9/TnjZFwrQIdrkt1V9iwWKVtEh9
+ fUcEEMW/Z/Qn4yFtvPgILVdMbjrTTX5eM1D9vC5MVGbSQV8iqiQNzjZIR+leF7m6HaYg1s4nGMI
+ Agn301G0mzRPHno=
+X-Google-Smtp-Source: AGHT+IGG1y7ZuI53pky5wsCGVzhy9tGn3k1VWKeM3QJvDzgf/NfFNrgrYHp/f9cGIZkkl/SGV8HSiw==
+X-Received: by 2002:a05:620a:3190:b0:7b6:d6cb:8b99 with SMTP id
+ af79cd13be357-7bffcc3ce05mr88494285a.0.1738102956461; 
+ Tue, 28 Jan 2025 14:22:36 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9aeedbfcsm557667785a.81.2025.01.28.14.16.01
+ af79cd13be357-7be9ae7ece0sm562169685a.8.2025.01.28.14.22.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 14:16:03 -0800 (PST)
-Date: Tue, 28 Jan 2025 16:15:59 -0600
+ Tue, 28 Jan 2025 14:22:35 -0800 (PST)
+Date: Tue, 28 Jan 2025 16:22:32 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: eugen.hristev@microchip.com, u-boot@lists.denx.de, sjg@chromium.org,
- xypron.glpk@gmx.de, michal.simek@amd.com,
- daniel.schwierzeck@gmail.com, marex@denx.de, alpernebiyasak@gmail.com
-Subject: Re: [PATCH] lds: align u-boot-nodtb with 8 bytes boundary
-Message-ID: <20250128221559.GR1233568@bill-the-cat>
-References: <20221215115825.827111-1-eugen.hristev@microchip.com>
- <87edsx4qzy.fsf@bloch.sibelius.xs4all.nl>
- <20221221215637.GA3787616@bill-the-cat>
- <87len02xan.fsf@bloch.sibelius.xs4all.nl>
- <20221221230910.GC3787616@bill-the-cat>
- <87k02k2vku.fsf@bloch.sibelius.xs4all.nl>
- <20221221234412.GE3787616@bill-the-cat>
- <Z5kJyl354DO7uKCR@kitsune.suse.cz>
+To: Harsha Vardhan V M <h-vm@ti.com>
+Cc: sjg@chromium.org, angus@akkea.ca, u-boot@lists.denx.de, vigneshr@ti.com,
+ kamlesh@ti.com, d-gole@ti.com, k-malarvizhi@ti.com,
+ a-parmar1@ti.com, khasim@ti.com
+Subject: Re: [EXTERNAL] Re: Proposal for a New Command to U-Boot Fuse
+ Programming
+Message-ID: <20250128222232.GS1233568@bill-the-cat>
+References: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
+ <20250106222314.GF3476@bill-the-cat>
+ <5e166f95-681a-8a96-0d8c-033c36d47d5a@ti.com>
+ <20250122172209.GN3476@bill-the-cat>
+ <9cf9590b-e9ba-6d46-dd4d-80a71765e062@ti.com>
+ <20250124192956.GV60249@bill-the-cat>
+ <7be0605f-b986-ca34-4b83-7338329afac4@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JqqHSjZdGMPRHZXM"
+ protocol="application/pgp-signature"; boundary="0efruAi/E/giCnp9"
 Content-Disposition: inline
-In-Reply-To: <Z5kJyl354DO7uKCR@kitsune.suse.cz>
+In-Reply-To: <7be0605f-b986-ca34-4b83-7338329afac4@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,191 +106,275 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---JqqHSjZdGMPRHZXM
-Content-Type: text/plain; charset=iso-8859-1
+--0efruAi/E/giCnp9
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 28, 2025 at 05:46:02PM +0100, Michal Such=E1nek wrote:
-> Hello,
+On Mon, Jan 27, 2025 at 04:22:36PM +0530, Harsha Vardhan V M wrote:
 >=20
-> On Wed, Dec 21, 2022 at 06:44:12PM -0500, Tom Rini wrote:
-> > On Thu, Dec 22, 2022 at 12:20:01AM +0100, Mark Kettenis wrote:
-> > > > Date: Wed, 21 Dec 2022 18:09:10 -0500
-> > > > From: Tom Rini <trini@konsulko.com>
-> > > >=20
-> > > > On Wed, Dec 21, 2022 at 11:42:56PM +0100, Mark Kettenis wrote:
-> > > > > > Date: Wed, 21 Dec 2022 16:56:37 -0500
-> > > > > > From: Tom Rini <trini@konsulko.com>
-> > > > > >=20
-> > > > > > On Sat, Dec 17, 2022 at 11:14:41PM +0100, Mark Kettenis wrote:
-> > > > > > > > From: Eugen Hristev <eugen.hristev@microchip.com>
-> > > > > > > > Date: Thu, 15 Dec 2022 13:58:25 +0200
-> > > > > > > >=20
-> > > > > > > > Newer DTC require that the DTB start address is aligned at =
-8 bytes.
-> > > > > > > > In the u-boot.bin case, the u-boot-nodtb.bin is concatenate=
-d with the
-> > > > > > > > DTB, but there is no alignment/padding to the next 8byte al=
-igned address.
-> > > > > > > > This causes the board to fail booting, because the FDT will=
- claim
-> > > > > > > > that the DTB inside u-boot.bin is not a valid DTB, it will =
-fail with
-> > > > > > > > -FDT_ERR_ALIGNMENT.
-> > > > > > > > To solve this, have the u-boot binary `_end` aligned with 8=
- bytes.
-> > > > > > > > The objcopy in the Makefile will create the u-boot-nodtb.bi=
-n and it has to
-> > > > > > > > be truncated to 8 bytes to correspond to the u-boot.map fil=
-e which will
-> > > > > > > > have the `_end` aligned to 8 bytes.
-> > > > > > > > The lds files which use devicetrees have been changed to al=
-ign the `_end`
-> > > > > > > > tag with 8 bytes.
-> > > > > > > >=20
-> > > > > > > > This patch is also a prerequisite to have the possibility t=
-o update the
-> > > > > > > > dtc inside u-boot to newer versions (1.6.1+)
-> > > > > > > >=20
-> > > > > > > > Signed-off-by: Eugen Hristev <eugen.hristev@microchip.com>
-> > > > > > > > ---
-> > > > > > > > Hi,
-> > > > > > > >=20
-> > > > > > > > I could not test all affected boards, it's an impossible ta=
-sk.
-> > > > > > > > I tried this on at91 boards which I have, and ran the CI on=
- denx.
-> > > > > > > > I cannot guarantee that no other boards are affected, so th=
-is patch is a bit
-> > > > > > > > of an RFC.
-> > > > > > > > If the u-boot-nodtb.bin does not have the size equal with t=
-he corresponding
-> > > > > > > > one in u-boot.map, the binary_size_check will fail at build=
- time with
-> > > > > > > > something like this:
-> > > > > > > >=20
-> > > > > > > > u-boot.map shows a binary size of 502684
-> > > > > > > > but u-boot-nodtb.bin shows 502688
-> > > > > > > >=20
-> > > > > > > > Thanks,
-> > > > > > > > Eugen
-> > > > > > > >=20
-> > > > > > > >  Makefile                                    | 2 ++
-> > > > > > > >  arch/arm/cpu/armv8/u-boot.lds               | 4 ++--
-> > > > > > > >  arch/arm/cpu/u-boot-spl.lds                 | 1 +
-> > > > > > > >  arch/arm/cpu/u-boot.lds                     | 1 +
-> > > > > > > >  arch/arm/lib/elf_arm_efi.lds                | 5 +++++
-> > > > > > > >  arch/arm/mach-at91/arm926ejs/u-boot-spl.lds | 2 +-
-> > > > > > > >  arch/arm/mach-at91/armv7/u-boot-spl.lds     | 2 +-
-> > > > > > > >  arch/arm/mach-zynq/u-boot-spl.lds           | 2 +-
-> > > > > > > >  arch/mips/cpu/u-boot.lds                    | 2 +-
-> > > > > > > >  arch/sandbox/cpu/u-boot.lds                 | 6 ++++++
-> > > > > > > >  arch/sh/cpu/u-boot.lds                      | 2 ++
-> > > > > > > >  board/ti/am335x/u-boot.lds                  | 1 +
-> > > > > > > >  tools/binman/test/u_boot_binman_embed.lds   | 2 +-
-> > > > > > > >  13 files changed, 25 insertions(+), 7 deletions(-)
-> > > > > > > >=20
-> > > > > > > > diff --git a/Makefile b/Makefile
-> > > > > > > > index 9d84f96481..b4d387bcce 100644
-> > > > > > > > --- a/Makefile
-> > > > > > > > +++ b/Makefile
-> > > > > > > > @@ -1317,6 +1317,8 @@ endif
-> > > > > > > > =20
-> > > > > > > >  u-boot-nodtb.bin: u-boot FORCE
-> > > > > > > >  	$(call if_changed,objcopy_uboot)
-> > > > > > > > +# Make sure the size is 8 byte-aligned.
-> > > > > > > > +	@truncate -s %8 $@
-> > > > > > >=20
-> > > > > > > $ truncate
-> > > > > > > ksh: truncate: not found
-> > > > > > >=20
-> > > > > > > In other words: truncate(1) isn't a standard UNIX utility and=
- not
-> > > > > > > present on OpenBSD for example.  It isn't part of POSIX and t=
-herefore
-> > > > > > > its usage is unportable.
-> > > > > > >=20
-> > > > > > > Please find a different solution.
-> > > > > >=20
-> > > > > > Ah yes. Can this perhaps be done with dd? A bit of looking arou=
-nd
-> > > > > > suggests that this might be a portable way to truncate a file t=
-o say 512
-> > > > > > bytes:
-> > > > > > dd if=3D/dev/urandom of=3Dtestfile bs=3D1 count=3D500
-> > > > > > dd if=3D/dev/null of=3Dtestfile bs=3D1 count=3D512
-> > > > > >=20
-> > > > > > And then hexdump or whatever to see that the last 12 bytes are =
-zero. Can
-> > > > > > you please test this on OpenBSD?  We'll need some shell work to=
- get
-> > > > > > current byte size and make it 8-byte aligned, but that should be
-> > > > > > portable at least.  Thanks!
-> > > > >=20
-> > > > > Hi Tom,
-> > > > >=20
-> > > > > That results on a file with zero bytes on OpenBSD... but also on
-> > > > > Linux.  Did you intend to write something different?  I can't
-> > > > > immediately come up with a way to do this with dd(1).
-> > > >=20
-> > > > Ah, I typod that, sorry!  I meant (and just re-checked):
-> > > > dd if=3D/dev/urandom of=3Dtestfile bs=3D1 count=3D500
-> > > > dd if=3D/dev/null of=3Dtestfile bs=3D1 seek=3D512
-> > > >=20
-> > > > Which here does:
-> > > > $ dd if=3D/dev/urandom of=3Dtestfile bs=3D1 count=3D500
-> > > > 500+0 records in
-> > > > 500+0 records out
-> > > > 500 bytes copied, 0.00641125 s, 78.0 kB/s
-> > > > $ dd if=3D/dev/null of=3Dtestfile bs=3D1 seek=3D512
-> > > > 0+0 records in
-> > > > 0+0 records out
-> > > > 0 bytes copied, 0.000358246 s, 0.0 kB/s
-> > > > $ ls -l testfile
-> > > > -rw-rw-r-- 1 trini trini 512 Dec 21 18:07 testfile
-> > > > $ hexdump testfile | tail -n2
-> > > > 00001f0 8cdd 300e 0000 0000 0000 0000 0000 0000
-> > > > 0000200
+>=20
+> On 25/01/25 00:59, Tom Rini wrote:
+> > On Fri, Jan 24, 2025 at 02:31:15PM +0530, Harsha Vardhan V M wrote:
 > > >=20
-> > > That works here as well.
+> > >=20
+> > > On 22/01/25 22:52, Tom Rini wrote:
+> > > > On Fri, Jan 10, 2025 at 11:12:47AM +0530, Harsha Vardhan V M wrote:
+> > > > >=20
+> > > > >=20
+> > > > > On 07/01/25 03:53, Tom Rini wrote:
+> > > > > > On Mon, Jan 06, 2025 at 12:06:25PM +0530, Harsha Vardhan V M wr=
+ote:
+> > > > > >=20
+> > > > > > > I would like to propose a new command for U-Boot's fuse progr=
+amming
+> > > > > > > functionality to address the challenges posed by the current =
+implementation.
+> > > > > > > While the existing fuse prog command works well for programmi=
+ng individual
+> > > > > > > fuse values, it becomes cumbersome especially when dealing wi=
+th large-scale
+> > > > > > > programming requirements.
+> > > > > > >=20
+> > > > > > > Current Command: fuse prog [-y] <bank> <word> <hexval> [<hexv=
+al>...]
+> > > > > > >=20
+> > > > > > > This command programs one or more fuse words starting from a =
+specific <bank>
+> > > > > > > and <word> with the hex values given as input.
+> > > > > > >=20
+> > > > > > > While functional, it lacks the efficiency and robustness need=
+ed for
+> > > > > > > programming a significant number of fuses or handling structu=
+red fuse
+> > > > > > > configuration data. Repeatedly specifying values for each fus=
+e bank and word
+> > > > > > > is not only time-consuming but also prone to errors during ma=
+nual input or
+> > > > > > > scripting. This approach does not leverage the ability to pro=
+cess
+> > > > > > > pre-structured data in memory. For users with complex program=
+ming needs, the
+> > > > > > > current method becomes an obstacle rather than a tool.
+> > > > > > >=20
+> > > > > > > Proposed Command: fuse writebuff
+> > > > > >=20
+> > > > > > It would be good to provide some documentation links to the fus=
+es that
+> > > > > > you're wanting to deal with. What we have now works on a number=
+ of
+> > > > > > diverse SoCs, even if for some cases it might be best to write a
+> > > > > > script that's run rather than copy/paste things live. Any sort =
+of new
+> > > > > > mechanism needs to get feedback from users at other semiconduct=
+or
+> > > > > > vendors to make sure it's generic enough for everyones needs. T=
+hanks.
+> > > > > >=20
+> > > > >=20
+> > > > > Hi Tom and Simon,
+> > > > >=20
+> > > > > The buffer is not a text file. It is a structure in memory. The b=
+uffer is
+> > > > > structured to contain all necessary information for the fuse prog=
+ramming
+> > > > > process. This can include metadata, fuse programming data etc. Th=
+e exact
+> > > > > structure of the buffer can determined by the command_id, which p=
+rovides
+> > > > > flexibility for supporting different use cases. The memory buffer=
+ is
+> > > > > typically prepared in user-space code or a script and loaded in m=
+emory
+> > > > > before invoking the fuse writebuff command. It is not stored as a=
+ text file
+> > > > > or any other file format, as the command operates directly on mem=
+ory
+> > > > > addresses.
+> > > > >=20
+> > > > > Example of a buffer:
+> > > > >=20
+> > > > > struct fuse_buffer {
+> > > > >       struct fuse_mpkh smpkh;
+> > > > >       struct fuse_msv msv;
+> > > > >       struct fuse_key_cnt key_cnt;
+> > > > >       u8 buffer_hash[64];
+> > > > > };
+> > > > >=20
+> > > > > This fuse_buffer struct will be loaded in memory containing all t=
+he
+> > > > > necessary information for fuse programming.
+> > > > >=20
+> > > > > struct fuse_mpkh {
+> > > > >       u8 mpkh[64]; // public key hash
+> > > > >       u8 bch[8];
+> > > > >       u32 attributes; // read-protect, write-protect, override, a=
+ctive flag
+> > > > >       u32 reserved[2];
+> > > > > };
+> > > > > struct fuse_msv {
+> > > > >       u32 msv_with_bch; //model specific value
+> > > > >       u32 attributes;
+> > > > >       u32 reserved[2];
+> > > > > };
+> > > > > struct fuse_key_cnt {
+> > > > >       u32 key_cnt; //key count
+> > > > >       u32 attributes;
+> > > > >       u32 reserved[2];
+> > > > > };
+> > > > >=20
+> > > > > -> eFUSE layout is abstract and isn't public as its programming a=
+nd layout
+> > > > > itself is security sensitive (it has authentication and decryptio=
+n keys
+> > > > > etc). So, fuse prog doesn't work as there is no "banks/offset" he=
+re.
+> > > > > -> Platform Security Core running Secure SW exposes APIs through =
+which these
+> > > > > Keys and its attributes can be programmed. Whole content maybe en=
+crypted for
+> > > > > enhanced security on unsecure factory floor.
+> > > > > -> There is a definite order in which these fields needs to be pr=
+ogrammed.
+> > > > >=20
+> > > > > Its possible to break the struct into 32bit values and send them =
+across but
+> > > > > we would end up with ~30 odd fuse prog cmds which is inefficient =
+and error
+> > > > > prone.
+> > > > > It would be hard on secure core to also ensure correctness of ope=
+rations
+> > > > > against all sorts of silly errors (such of accidentally skipping =
+a word or
+> > > > > mess up ordering) which can render Silicon unusable.
+> > > > >=20
+> > > > > So passing a opaque pointer with a command_id to Secure core is a=
+ll that
+> > > > > fuse cmd needs to do which is what writebuff supports.
+> > > > >=20
+> > > > > This can be extended to any vendor; It's just an opaque pointer h=
+andoff. I
+> > > > > see at least one other vendor do it in custom way:
+> > > > > arch/arm/mach-imx/cmd_dek.c which could benefit from this new cmd=
+ fuse
+> > > > > writebuff.
+> > > > >=20
+> > > > > Here=E2=80=99s how the fuse writebuff command works in a typical =
+flow:
+> > > > > 1. Buffer Preparation: Vendors or developers create a complete bu=
+ffer (e.g.,
+> > > > > key.bin) containing all fuse programming data using vendor-specif=
+ic scripts
+> > > > > or tools and copied to SD card.
+> > > > > 2. The buffer is loaded into memory using commands like:
+> > > > > fatload mmc 1 0x80000000 key.bin
+> > > > > 3. The fuse writebuff command passes the memory address (0x800000=
+00) and
+> > > > > command_id to the secure core:
+> > > > > fuse writebuff <command_id> 0x80000000
+> > > > > 4. The secure core receives the memory address as a pointer and v=
+alidates,
+> > > > > interprets it based on the command_id and then programs the fuses.
+> > > >=20
+> > > > To summarize what we talked about on a call, I would like to see ei=
+ther:
+> > > > 1) Work with arch/arm/mach-imx/cmd_dek.c and use that as the base of
+> > > > some new generic command that deals with SoC-specific fuse
+> > > > configurations that are handled via security processor.
+> > > Hi Tom,
+> > >=20
+> > > 1) I have looked at arch/arm/mach-imx/cmd_dek.c. The underlying
+> > > implementation data structure is very specific to the vendor and how =
+iMX
+> > > devices are configured. The other vendors would also differ in their
+> > > structures and SoC-specific fuse configurations, so I don't see a way=
+ to use
+> > > this cmd_dek.c as the base and then abstract, create a new command ou=
+t of
+> > > it.
+> > >=20
+> > > > OR
+> > > > 2) Create a new command (that should be in cmd/ti/) for handling th=
+e K3
+> > > > fuses, if we cannot make something abstract enough to handle this
+> > > > concept on multiple vendors while having any sort of useful code re=
+-use.
+> > >=20
+> > > 2) In this case, I would like to add the fuse writebuff command for T=
+I=E2=80=99s K3
+> > > architecture in cmd/ti/k3_fuse.c. And the command will look like
+> > >=20
+> > > fuse writebuff <command_id> <addr>
+> > >=20
+> > > However, I would still like to place the fuse writebuff command in
+> > > cmd/fuse.c as a generic interface because the parameters command_id a=
+nd an
+> > > opaque pointer handoff provides a mechanism for the secure core to in=
+terpret
+> > > buffers differently based on vendor or use case.
 > >=20
-> > Great, thanks!
+> > This I guess is my confusion. If we can't abstract cmd_dek.c and the
+> > underlying i.MX specific parts to be supported in "fuse writebuff ..."
+> > what is the non-K3 (or better still, non-TI) abstraction for what you're
+> > proposing?
+> >=20
+> Hi Tom,
+> There are two types of fuse programming flows;
+> a) Where the fuse layout is known to U-Boot -> fuse cmd options support t=
+his
+> flow today
+> b) Where fuse cmd is abstracted from U-Boot -> needs a co-processor to pr=
+oxy
+> the programming
 >=20
-> dd also has also has the conv=3Dsync option, at least on Linux:
+> For b) the fuse layout is virtualized via a "vendor-specific" structure
+> which is generated offline (typically with GUI tools) and then loaded to
+> memory from a file on SD card . This pointer would then be relayed to Co
+> processor as a IPC call...
 >=20
-> dd if=3D/dev/urandom bs=3D1 count=3D20 of=3Dtestfile
+> So, whats common b/w cmd_dek.c and TI's fuse cmd -> loading opaque struct=
+ to
+> memory and then passing it to Secure co-processor along with one or more
+> command identifiers which will serve as hint for such secure co-processor.
+> "fuse writebuff" tries to abstract essentially this: take a cmd_id and fi=
+le
+> pointer from fuse cmd and pass to it Vendor specific backend. I know its =
+not
+> a lot but frontend tools used to flash the devices can still make the most
+> of it with simple vendor neutral abstractions than needing to know custom
+> command for each vendor.
 >=20
-> dd if=3Dtestfile bs=3D8 conv=3Dsync of=3Dtestfile_pad
+> What cannot be abstracted is:
+> a) struct of the file,
+> b) common definition of command Id
+> c) IPC mechanisms
+>=20
+> Unfortunately all the above 3 are tightly coupled to co-processor on the
+> other end which most likely is immutable for most SoCs...
 
-I spun up a test FreeBSD instance and this also worked as expected. Mark
-can you confirm OpenBSD also works as expected here? It would be good to
-fix this long running problem. Thanks!
-
->=20
-> Thanks
->=20
-> Michal
+So what I'm missing is why we can't have "fusebuf" as the top level
+command, or "fuse writebuf <vendor> <address>" and then yes, leave the
+vendor specific parts to each vendor to implement?=20
 
 --=20
 Tom
 
---JqqHSjZdGMPRHZXM
+--0efruAi/E/giCnp9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeZVxsACgkQFHw5/5Y0
-tywXeQv9H3lfrl/WA4746KoAypWE0660d6MJjqbqzOJ5EpH2I7bHFozy/adklDcp
-dYaOQuIpKgpuT9/quc8YFiwngf35lROG4/x3sfrjA53ZNaiS0eRIcl3pXipR4KmF
-8ILh5mK8vc6+Kad5M7/KJkDGBGKjQr1MkDqnTNuicxo+fXr1GiKG6awn4gsXOF1Z
-6DmdVTOLRmZ2rmOqL9RSD+30g3PiQElIYEU6175NXbTmXOHYeanE+lkQ21mLoAom
-aexoVllTfTPKA1sGOGlQ1OV2oyAB1vsIu37Q6z1dlOBwn4BqzprW21Cml+s8ucPq
-xX50Y4WjKDZ8RHCUNVLuhhHYhSJlieOCaEJzrUfeO47s9xvOd3PTbSOnon8FssXh
-S7W9xdUrdOAL09ctBjMjjXredDPbhHqHfOzOFE7VdbttGWktVHWkdp1nHEHGUc/s
-psal0k99HH6WEa8JZ5f0pnUVZ4P+OkjTCtU0THlUHdS0zCHs05+D9ncrqx1E7MKA
-8d7G8NV4
-=ayPY
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeZWKgACgkQFHw5/5Y0
+tyxqdwv/dbT8CoZA3dC7oOfzNRMYWey4g8+UXgg3dydjCMWLSzRW0IIcIaYC1ru8
+ypE/GWjAtK0mqqxYqhvvE9+2gvAA4Z2FRSQ5ijSUlmlEXWbxuewQ+6L1FHogMgm8
+hXhzXLJv7k1ilTw3G5tBZVz23YtpK0W/q7+oZSOM8JJJcl6hsRoWPenx+AIgD5BF
+DmORZPxW6VQngle4bFL42OZizInLZZX19dIvEKSbLD28QJuXWTyUS6A6LOsP+QH8
+vmDLQ0mi0oFeTjt3x/laX0CNZ/8sQMtyVlU4UJUsPaY5tk5Z9vUd7621Cua22wIO
+1X8Sp+YRND/dBaJgYBeF0Fm7FsJwcJd+aIZmnKE/74YhCHx9pcgPOFA3oHsD+EG9
+FLElOtgp/hY+Mrvsn9jAuvHeqM7g7BdF/xzCc3pPjrkWR5DptRmvmxO0YEiRZyFZ
+u8alhErN0trNUldtcthEZxNItTcKPoF4kydBJXX9FSyA70qw9o1IwsiH7VtpgVl9
+UmW+CBmY
+=kU4D
 -----END PGP SIGNATURE-----
 
---JqqHSjZdGMPRHZXM--
+--0efruAi/E/giCnp9--
