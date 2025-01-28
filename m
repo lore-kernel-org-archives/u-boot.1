@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B95DC02188
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 01:26:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A090C02188
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 01:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C992C8187B;
-	Tue, 28 Jan 2025 02:26:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id AAAC881951;
+	Tue, 28 Jan 2025 02:50:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="SlbWWCS/";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1738029003;
+	bh=Be3GLMnn9ZV+ePEa+CY15N9rDzioCVss4hXlvaFZVj8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=wLJzHTFLc4LtoqgdtHNW2SoH783VPgcl/f3hvhknRyGwR7mwMrIGWVPVOx/kaE9UJ
+	 Wnl6J4ZK2L/YY8Lgqp+q72RHp1ngDLlpGFby7aSUhSCv+YHlFehkVpqbj5BIXZv28p
+	 /wh6TE7SwNKzEld90DVyMdI4cRSyeRGWWXGA0P1c1O/puWUn5HnASpAfMZuKUG52dd
+	 e39dWDbXJMRdDJFHyZTKScatHvTjdXAH6c2wWxX1IV4JeD7ayP1zlNcQR8oXIoFiD5
+	 mZ+EZ6eASpK7koaXMQitjEopQhy202MNT9J00vmNIUvvbyd7Fd1BRtI3DixSTa5+28
+	 LWS72Dg1cof6w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 213FC8191C; Tue, 28 Jan 2025 02:26:47 +0100 (CET)
-Received: from out162-62-57-252.mail.qq.com (out162-62-57-252.mail.qq.com
- [162.62.57.252])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DCE808191C; Tue, 28 Jan 2025 02:50:02 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D0C681875
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 02:26:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B732F81111
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 02:50:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1738027600; bh=liph+TvqfYbZe35sV65yWOlzOc8PJnkLTUd08SQz0ew=;
- h=From:To:Cc:Subject:Date;
- b=SlbWWCS/3OZ+qOELw1f8aaTogjueX8c7Ql5BQuc8fC1+iHv4u9D1aSToG2r1GtY+d
- cbFE4ccdiXzn0GbcBydj80lsVsFW+GhoO2Dm3++MvU4gb6zs2ZYeyVG8SukVErBgBx
- rIovGjUZ5V7rBT4a39eNPdnuX8HuPLPCCFS9XeoY=
-Received: from ubuntu.localdomain ([112.51.40.31])
- by newxmesmtplogicsvrszc16-0.qq.com (NewEsmtp) with SMTP
- id 353892F2; Tue, 28 Jan 2025 09:13:19 +0800
-X-QQ-mid: xmsmtpt1738026799t5uhdogww
-Message-ID: <tencent_11A7276C90990D36D80B2816D36292D24705@qq.com>
-X-QQ-XMAILINFO: OUycJhUUya+/YrUSWxwE7tXAZFIVYJ1Wl4UlaNRUZWx/9wBNcB++GktkIIEt6C
- kdrgkj2YjDzEP8vF2k98b1wFHxyigW5ykFupw+VutUoAjpgOLA2sP3IoSDBfGJcGQdwnnlUvC9PH
- BRm6rc1V8nuQYLOD8b8bJ3XuE122+JMxNNlEod1vbRDAJV+yl+y79HZDDJgqv0R8e3vpoUBKHBg/
- mH/BubcpcqOkB8VL70AhRfk6czWamdkCNEi1qh/1+s1HVXhzRogvnBr0G0kgN6MrIPcXHL7wyqsr
- Vb5Tr71j+QCc1K6a7v9q1+S2MZ6xCgkB2YUMP8xH1n8vX/2rmyUrE3pZvXMMyUg9PpEECeIeNU8Y
- 2y10tfWD5nq+fMV+wlLmRKsTzHN8VATW8f+19zhk/jd6uqm5W4D+YbpCni6g5d+wm9gjMHD5NDSa
- GV21tn8BjkU3Wp4bD1anlUITRJdMu9cHARo0C7W3dj357hOG00reXfgZMQ9XiobUskkJMqReuWtC
- 9+he5+F6ZNkyK+c4UqwDuqXu+UUGFBXb2DshGUIvNrCy5yt5vu0+ZbRk0e67utf7jdWUEpoKoPRt
- mNIF7pLzNK3GZL8wwEX9HdE6rm1OSUxyrkeMI2PxoavwIdKtjU2DiJrYO8cCxxtrEJG41kBqy4nu
- c10xjqan4DXUavHVxtjUeNdXDjO8oHdRfD8HFNtddFrkBF00OyD7giYej81GJpIKiQLHccJ/nhSd
- FbkgvooJ3vVx15UZiRW9g0ZRNNi72qqjCl4B1xwQwbdXqzh/KbTAXP2C690E89DMeYsSyNaYm81N
- GUlSg2pPvR7+PKxiSwpGIyNd7TACnmSxsXNGMiRsKwQTh6Xoe73AHru8Rnf8o2NbMtnbS5sepLsr
- rkNK+/9LYMvdTLKCl1fF93asB3KU98fydDGVZvn8i4HZUDxtOV8N9E7n68QtGgzURBhZMafuwSJ4
- ckRmRTR7NCrraERVk7I2mMIOtwvlmT
-X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
-From: 1425075683@qq.com
-To: Liya Huang <1425075683@qq.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "Brunham, Kalen" <kalen.brunham@intel.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v1] examples: fix building on arm32
-Date: Tue, 28 Jan 2025 09:13:16 +0800
-X-OQ-MSGID: <20250128011316.126067-1-1425075683@qq.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="OV21ROXU"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 8DD6F103802C0; Tue, 28 Jan 2025 02:49:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1738028999;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Be3GLMnn9ZV+ePEa+CY15N9rDzioCVss4hXlvaFZVj8=;
+ b=OV21ROXUKo2nnwEeVCVyErzFH5byiRmXDWCUrTMla8g4+eLUR5BHvbAeINWr+waSK/bk9w
+ 0+nb3CoaCVBwWLGDjG6Rh+IzCMyxTAdeXnq67lL/MvJZ26CJMIVKD8AV18Xo4c31IbtYN4
+ kjOzgEvkifcVUOlE4nNl7CZT6bz1hJKAOBCJK9MQecs10Rw2SUF927f+RSIjhNr44qLa1+
+ lFmBl2KUy1Ai27cQVegllpQUi8zDy7nQ7b466kBZl3BVZfDhXUjozsP1RcFZ+/XnxgFhca
+ dFZugqUT6Z0NCm6L5C/g10j4QPFM2n4tPCWhSZldhrfKnQ5lwrFAUE7Tb5LbNQ==
+Message-ID: <ce6b56d4-454e-4247-93c4-caa00ab52925@denx.de>
+Date: Tue, 28 Jan 2025 02:47:59 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: Make what it takes for "usbkbd" to work in "stdin"
+ clear
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: u-boot@lists.denx.de, Dang Huynh <danct12@riseup.net>,
+ Piotr Zalewski <pZ010001011111@proton.me>
+References: <4079f51c0141711cb4cb27f7aeb050b1b1e17828.1737312317.git.dsimic@manjaro.org>
+ <29df2235-79c5-4cd3-bd78-cf7c93552167@denx.de>
+ <6e2b3f3cdfbed67122725d22055d8877@manjaro.org>
+ <5f794a65-eab4-4dde-9b44-eec6c97ff335@denx.de>
+ <828c2c778a42fb2bad8d2318b24956bd@manjaro.org>
+ <8628a4ca-ca32-4f07-889f-0df66d6dee59@denx.de>
+ <34164148c3973297ab7eda29bf292846@manjaro.org>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <34164148c3973297ab7eda29bf292846@manjaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,66 +89,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Liya Huang <1425075683@qq.com>
+On 1/28/25 12:22 AM, Dragan Simic wrote:
 
-Refer to the commit a3c101a61348 ("examples: fix building on arm64")
-fix for arm32. crt0.S does not even build with:
-    operating system and architecture:
-        5.15.0-130-generic x86_64
-    installed version of gcc and binutils:
-        gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.3)
-    GNU ld (GNU Binutils for Ubuntu) 2.34
-    used defconfig:
-        stm32h750-art-pi_defconfig
-    used commands for building:
-        export CROSS_COMPILE=arm-none-eabi- ARCH=arm
-        make stm32h750-art-pi_defconfig
-        make menuconfig # to add
-        make
-    examples/api/crt0.S: Assembler messages:
-    examples/api/crt0.S:32: Error: lo register required -- `ldr ip,=search_hint'
-    examples/api/crt0.S:33: Error: lo register required -- `str sp,[ip]'
-    examples/api/crt0.S:39: Error: lo register required -- `ldr ip,=syscall_ptr'
-    examples/api/crt0.S:40: Error: lo register required -- `ldr pc,[ip]'
-    make[2]: *** [scripts/Makefile.build:292：examples/api/crt0.o] Error 1
+[...]
 
-Use valid register names and instructions.
+>>> Maybe another good option would be to modify the console_init_r()
+>>> function to simply leave "usbkbd" in the environment variables when
+>>> USB_KEYBOARD is selected, so the "usb start" executed later can
+>>> actually make USB keyboards work?  I think such an approach should
+>>> have the lowest potential for causing some issues or regressions,
+>>> while it would pretty much eliminate any confusion.
+>>
+>> Yes, this looks like the best option, because if 'usbkbd' is in
+>> 'stdin' environment variable, the user likely expects the USB keyboard
+>> will show up later, but it is not available this early yet and
+>> removing it from stdin variable would be unhelpful.
+>>
+>> Please also update SYS_CONSOLE_ENV_OVERWRITE Kconfig symbol
+>> description to reflect this change .
+> 
+> I'm glad that you like it, I'll move forward with that approach.
+> 
+> I was also thinking about making sure that "usbkbd" gets removed
+> from the "stdin" environment variable if there are actually no USB
+> keyboards detected during the "usb start", but that would actually
+> be wrong, because a USB keyboard should be detected after being
+> plugged in (in interactive mode, of course) after "usb start" is
+> executed, followed by executing "usb reset" on the UART console.
 
-Signed-off-by: Liya Huang <1425075683@qq.com>
----
+That would also be problematic in case the keyboard would not be 
+detected on first 'usb start' run, but it would be detected afterward, 
+on the next 'usb start/reset' run.
 
-Changes in v1:
-- Change to use R4 to R11 instead of parameter passing registers
-
- examples/api/crt0.S | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
-
-diff --git a/examples/api/crt0.S b/examples/api/crt0.S
-index d2a97557817..6899ebf8ac2 100644
---- a/examples/api/crt0.S
-+++ b/examples/api/crt0.S
-@@ -29,15 +29,17 @@ syscall:
- 	.text
- 	.globl _start
- _start:
--	ldr	ip, =search_hint
--	str	sp, [ip]
-+	ldr	r4, =search_hint
-+	mov	r5, sp
-+	str	r5, [r4]
- 	b	main
- 
- 
- 	.globl syscall
- syscall:
--	ldr	ip, =syscall_ptr
--	ldr	pc, [ip]
-+	ldr	r4, =syscall_ptr
-+	ldr	r4, [r4]
-+	bx	r4
- 
- #elif defined(CONFIG_ARM64)
- 
--- 
-2.25.1
-
+Thanks
