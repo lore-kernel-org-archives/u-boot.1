@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F268C02191
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 09:56:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE1FC0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 10:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B180F81B4B;
-	Tue, 28 Jan 2025 10:56:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id F047A81D6A;
+	Tue, 28 Jan 2025 11:20:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dCM8yG6q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hPWUGWGj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7E9F81BC0; Tue, 28 Jan 2025 10:56:13 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4A99A81D67; Tue, 28 Jan 2025 11:20:08 +0100 (CET)
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38B63819B1
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:56:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id BAE92819B1
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 11:20:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 30C6DA40A7F;
- Tue, 28 Jan 2025 09:54:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9616C4CED3;
- Tue, 28 Jan 2025 09:56:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1738058169;
- bh=BlLquUosWS+pgJXuNVTSFRM8kx9eWcRQXl/X9c8YhCs=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=dCM8yG6qZd6mfhRfy4JMQ35glHcwyb+AsORwwNeyn5ILZNw23TSKLACDr51Xc43Ez
- 8GIM0d9zJ3W8Bs0Gm2SBqT0UuH8N4T1OUoT5mEfjy80WK15wJtdJGxcdxNnfC9iCx6
- tC8v9OkhGsD00kiNraJ4421Ko/iCR5jICukFRsIDSVTat8obs0eKr2rn63xdTwgZ8V
- kX57MaLw/pz0Cf8ZJmZNwVApfCwn2pgPYQaOKQ58IHZbWRj/TkqkGa3yhxz31Fr621
- th+51d8Gc3wCGqnLjC8vIYeEhIC3EnlGPdbZlgTqOfecd0OEI3FXXRAbUR7FmBLGOh
- zHJul0dNuyLOw==
-Message-ID: <87ef4af8-6086-4091-b7f2-bf7b81941ff4@kernel.org>
-Date: Tue, 28 Jan 2025 11:56:00 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x344.google.com with SMTP id
+ 5b1f17b1804b1-43624b2d453so59518075e9.2
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 02:20:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738059605; x=1738664405; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rUrgf3lxJSTo0DJpV41maSi1L7zCKB+pMrNF7qyWqqw=;
+ b=hPWUGWGjrp0yblwHC6pebCXhVqxXnMNxUBXOpSIkQmHEAhMw2rtynHOeqJ/emepouR
+ WdciWft7GsqgqrJQS+MXx25F01qJKd/TdXfjIA7Lb3Cd8pL+/Z5YCx16PexaWjnW5Vg0
+ ijhBjAfdHmmc+PnZANHGmIdhA7HjgAuUZgSvB0mkxWrfl2IrMhPg9+UnP+oY2psBNG5/
+ 209sKP2eGkHnhKWlLUca3zHGateazrMlrLkDUelZo/Rtvcb1SBzCa83vW4ieGR2R4wpO
+ lCXpZ6qmka8oOv9nxBKTPHCuEdQmV59OZ7nK2vz/vw5XOs4NYWdL48BuNflECFihENQI
+ CuAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738059605; x=1738664405;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rUrgf3lxJSTo0DJpV41maSi1L7zCKB+pMrNF7qyWqqw=;
+ b=jkB6ckHZWOdtJOe6/e62WoN93lZFycrUAmD2hUW8tPIPZd9U62b4l2M42jwmqEjMFR
+ WntZ0HNVhPzDhSOq4jz1U55Vke4x2IGOs0DglFIs/D9rSDAcH2rcHzkLMg+VR+GdiB3c
+ EmtaRaasMGTdZyqCxVhnFSeEyCRTej4omH+9Sa9uC/wixWOxAWaIQnsTc30N5FVTAIgO
+ kExneRs9TxBzOUB41tiSLcaH4NJrdfZaEOd8MWfBKsgoAe58Q057nPrMbC9VLdWBfhCf
+ GDTUuGCbIbyl+D5WEE4pX1CSOnsw0pCbta6fxjj93uyC1NmFvmu1j0JJlH8ZtcY0yfc+
+ iocw==
+X-Gm-Message-State: AOJu0YxgttRZdSiTKPPTU9Prsnj4FxOduWpxOudiF3pI+/y6O8rNg5KX
+ 633SZVMIX2EWbGYKkB/udddaBDPg8mYORd7+6KyB0jhud+2Z9dwfxFtibuaiUXdjBJCbkYPT4A1
+ uXG3yLTfs
+X-Gm-Gg: ASbGncscBs75dMyqwOSTWBrFevV1hIK8SJ850R7bBblW+bpqBp7jGgp618C4htGcFEr
+ 7QOWPUc69Sdc8yWqwaof/I4A+JTg04OT7934IpnRtpMUjb5+WX6eIxmJT2P8GeLYdtX92vh/1iX
+ vSYUiV4x2B8ddTEe0XSifz1+hjE379iOaAUQTkTpr/9AKMeSrv+/2vTW4b8y2x/3DweZMF20PvQ
+ LOxhPtXrvSFRm5VyC8G3w5r+vOhc1mcpmPDTQiJsmH7noL4ZHVnlpjeOm5gblFhqe7NsIYlxdCm
+ MKT/OS6zVSzPM+588i25Xps=
+X-Google-Smtp-Source: AGHT+IFDq0BD8e/Sw9SOEp78nato6x9McP7Ogn9tL382LB0eAxsGZeC3AEJnY+2wlYuGPPqUJTed9g==
+X-Received: by 2002:a05:600c:3d96:b0:434:a26c:8291 with SMTP id
+ 5b1f17b1804b1-4389143b5dbmr393008455e9.24.1738059603867; 
+ Tue, 28 Jan 2025 02:20:03 -0800 (PST)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:45e:43e2:ed61:42fe])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438bd4b9977sm164651245e9.25.2025.01.28.02.20.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Jan 2025 02:20:03 -0800 (PST)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [RFC PATCH v2 0/3] Coroutines
+Date: Tue, 28 Jan 2025 11:19:14 +0100
+Message-ID: <cover.1738059345.git.jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/13] arm: mach-k3: j721s2_init: Probe AM65 CPSW NUSS for
- R5/A72 SPL
-To: Chintan Vankar <c-vankar@ti.com>, AKASHI Takahiro
- <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Nishanth Menon <nm@ti.com>,
- Hari Nagalla <hnagalla@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Andreas Dannenberg <dannenberg@ti.com>, Simon Glass <sjg@chromium.org>,
- Jayesh Choudhary <j-choudhary@ti.com>, Aniket Limaye <a-limaye@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Andrew Davis <afd@ti.com>, Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Tom Rini <trini@konsulko.com>, Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: srk@ti.com, danishanwar@ti.com, u-boot@lists.denx.de
-References: <20250107093840.2211381-1-c-vankar@ti.com>
- <20250107093840.2211381-5-c-vankar@ti.com>
- <d2c8cde1-891f-470a-abd9-598847a9078f@kernel.org>
- <73bcc845-d35b-4f3a-9529-41310cfe5707@ti.com>
- <8bf7f805-a7d5-4324-b939-319b5d12ba6d@kernel.org>
- <2ded45c3-f452-42b5-ae67-a1a14e3138ef@ti.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <2ded45c3-f452-42b5-ae67-a1a14e3138ef@ti.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,140 +95,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series introduces a simple coroutines framework and uses it to
+speed up the efi_init_obj_list() function. It is just an example to
+trigger discussions; hopefully other places in U-Boot can benefit from
+a similar treatment. Suggestions are welcome.
 
+I came up with this idea after analyzing some profiling data (ftrace)
+taken during the execution of the "printenv -e" command on a Kria KV260
+board. When the command is first invoked, efi_init_obj_list() is called
+which takes a significant amount of time (2.872 seconds). This time can
+be split into 0.570 s for efi_disks_register(), 0.811 s for
+efi_tcg2_register() and 1.418 s for efi_tcg2_do_initial_measurement().
+All the other child functions are much quicker. Another interesting
+observation is that a large part of the time is actually spent waiting
+in __udelay(). More precisely:
+- For efi_disks_register(): 421 ms / 570 ms = 73.8 % spent in __udelay()
+- For efi_tcg2_register(): 805 ms / 811 ms = 99.1 % spent in __udelay()
+- For efi_tcg2_do_initial_measurement(): 1395.025 ms / 1418.372 ms =
+  98.3 % spent in __udelay()
 
-On 28/01/2025 06:09, Chintan Vankar wrote:
-> 
-> 
-> On 23/01/25 15:10, Roger Quadros wrote:
->> +Vignesh & Siddharth
->>
->> On 22/01/2025 10:53, Chintan Vankar wrote:
->>>
->>>
->>> On 07/01/25 20:03, Roger Quadros wrote:
->>>>
->>>>
->>>> On 07/01/2025 11:38, Chintan Vankar wrote:
->>>>> To support Ethernet boot on AM68-SK, probe AM65 CPSW NUSS driver in
->>>>> board_init_f().
->>>>>
->>>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->>>>> ---
->>>>>    arch/arm/mach-k3/j721s2/j721s2_init.c | 10 ++++++++++
->>>>>    1 file changed, 10 insertions(+)
->>>>>
->>>>> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
->>>>> index 6ce3eb87efb..7208bee5785 100644
->>>>> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
->>>>> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
->>>>> @@ -329,6 +329,16 @@ void board_init_f(ulong dummy)
->>>>>          setup_qos();
->>>>>    +    if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
->>>>> +        spl_boot_device() == BOOT_DEVICE_ETHERNET) {
->>>>> +        struct udevice *cpswdev;
->>>>> +
->>>>> +        ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
->>>>> +                          &cpswdev);
->>>>> +        if (ret)
->>>>> +            printf("Failed to probe am65_cpsw_nuss driver..\n");
->>>>> +    }
->>>>> +
->>>>
->>>> This looks like a hack. Please find out why the Ethernet driver is not being
->>>> probed when SPL tries to load image over net.
->>>>
->>>
->>> Hello Roger,
->>>
->>> The driver is defined as UCLASS_MISC which should be probed explicitly,
->>
->> The driver was originally built without UCLASS_MISC, but
->>
->> commit 38922b1f4acc ("net: ti: am65-cpsw: Add support for multi port independent MAC mode")
->>
->> Added UCLASS_MISC and states there that
->> " Since top level driver is now UCLASS_MISC, board files would need to
->>    instantiate this driver explicitly."
->>
->> Not an elegant solution. So we need to fix something in the am65-cpuss driver.
->>
->> Looking at drivers/net/mvpp2.c we can see a possible solution.
->> 1) don't define .probe for the parent driver (UCLASS_MISC). Instead define .bind
->> that will scan the device tree for ports and bind the port device and driver.
->> e.g. see mvpp2_base_bind()
->> 2) in port driver .probe (UCLASS_ETH), if parent has not been probed
->> then call the parent probe (am65_cpsw_probe_nuss) . Also set a flag so parent probe
->> only gets called once.
->> 3) update all board files no not explicitly probe the am65-cpsw UCLASS_MISC driver.
->>
->> Siddharth / Vignesh do you see any issues with this solution?
->>
-> 
-> Hello Roger, I have tried to understand your approach, I will work on
-> that. But for now, is it possible to merge the seris with the existing
-> approach ?
+Given the above data, it is reasonable to think that a nice speedup
+could be obtained if these functions could somehow be run in parallel.
+efi_tcg2_do_initial_measurement() unfortunately needs to be excluded
+because it depends on the first two. But efi_disks_register() and
+efi_tcg2_register() are clearly independant and are therefore good
+candidates for concurrent execution.
 
-Hi Chintan,
+So, I considered two options:
 
-I'm afraid that if we allow this for one board it will set a wrong example
-for others.
-It is a very simple solution and shouldn't take much time. In case you are
-stuck me or Siddharth could help. Thanks!
+- Spin up a secondary core to take care of one function while the other
+one runs on the main core
+- Introduce some kind of software scheduling
 
-> 
->>> I have discussed the same with Nishanth in following thread:
->>> https://lore.kernel.org/all/ee1d16fd-b99b-4b07-97bb-a896e179157a@ti.com/
->>>
->>>> We have the following defined at the am65-cpsw-nuss driver.
->>>>
->>>> U_BOOT_DRIVER(am65_cpsw_nuss) = {
->>>>           .name   = "am65_cpsw_nuss",
->>>>           .id     = UCLASS_MISC,
->>>>           .of_match = am65_cpsw_nuss_ids,
->>>>           .probe  = am65_cpsw_probe_nuss,
->>>>           .priv_auto = sizeof(struct am65_cpsw_common),
->>>> };
->>>>
->>>> U_BOOT_DRIVER(am65_cpsw_nuss_port) = {
->>>>           .name   = "am65_cpsw_nuss_port",
->>>>           .id     = UCLASS_ETH,
->>>>           .probe  = am65_cpsw_port_probe,
->>>>           .ops    = &am65_cpsw_ops,
->>>>           .priv_auto      = sizeof(struct am65_cpsw_priv),
->>>>           .plat_auto      = sizeof(struct eth_pdata),
->>>>           .flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_OS_PREPARE,
->>>> };
->>>>
->>>> It looks like am65_cpsw_probe_nuss() is not being invoked for you.
->>>>
->>>> Can you please check if am65_cpsw_port_probe() was invoked?
->>>> If yes but am65_cpsw_probe_nuss() was not then we need to fix the
->>>> DM hierarchy for AM65_CPSW?
->>>>
->>> None of the probe function is getting invoked here, since we need
->>
->> That is strange. am65_cpsw_probe_nuss() should be called at least for
->> port 0 since it is defined as UCLASS_ETH.
->>
-> 
-> am65_cpsw_probe_nuss() is defined as UCLASS_MISC and not UCLASS_ETH, it
-> will get invoked if declared as UCLASS_ETH, as per your suggestion above
-> it will need driver changes to invoke the probe function without being
-> called explicitly and work properly.
-> 
->>> Ethernet functionality here we need to probe function in board_init_f().
->>> We have discussed the same at here:
->>> https://lore.kernel.org/r/d68c8045-116a-49c0-9e74-d6a366e6f008@kernel.org/#t
->>>
->>>
->>>>>        if (IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_AVS0)) {
->>>>>            ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
->>>>>                              &dev);
->>>>
->>
+I quickly ruled out the first one for several reasons: initializing a
+secondary core is typically quite hardware-specific, it would not scale
+well if more functions than available cores would need to be run in
+parallel, it would make debugging harder etc.
+Software scheduling however can be accomplished quite easily, especially
+since we don't need to consider preemptive multitasking. Coroutines [1]
+for example can perfectly do the job. They provide a way to save and
+restore the execution context (registers and stack). Here is how it
+look like:
+
+static void do_some_work(int v)
+{
+	int i;
+
+	for (i = 0; i < 5; i++) {
+		printf("%d", v);
+		/* Save context and resume main thread */
+		co_yield();
+	}
+}
+
+static void co1(void *arg)
+{
+	do_some_work(1);
+	/* Mark coroutine as "done" and resume main thread */
+	co_exit();
+}
+
+static void co2(void *arg)
+{
+	do_some_work(2);
+	co_exit();
+}
+
+void main_thread(void)
+{
+	struct co *co1, *co2;
+
+	co1 = co_create(co1, ...);
+	co2 = co_create(co2, ...);
+
+	do {
+		printf("A");
+		if (!co1->done) {
+			/* Invoke or resume first coroutine */
+			co_resume(co1);
+		}
+		printf("B");
+		if (!cor21->done) {
+			/* Invoke or resume second coroutine */
+			co_resume(co2);
+		}
+	} while (!(co1->done && co2->done));
+
+	/* At this point, co1 and co2 have both called co_exit() */
+}
+
+The above example would print: A1B2A1B2A1B2A1B2A1B2.
+
+- The first commit introduces the coroutine framework, loosely based on
+libaco [2]. The code was simplified and reformatted to better suit
+U-Boot.
+- The second commit modifies efi_init_obj_list() in order to turn
+efi_disks_register() and efi_tcg2_register() into coroutines when
+COROUTINES in enabled. On a KV260 board with a SD card inserted, this
+saves about .6 second (2.2 s instead of 2.8 s).
+- The third commit applies coroutines to usb_init(), which can
+significantly reduce the time it takes to scan multiple buses. Tested
+on arm64 QEMU with 4 XHCI buses: the USB scan takes  2.2 s instead of
+5.8 s.
+
+[1] https://en.wikipedia.org/wiki/Coroutine
+[2] https://github.com/hnes/libaco/
+
+Changes in v2
+
+- Remove x86 and x86_64 arch code since it is untested
+- Add missing SPDX license tag to arch/arm/cpu/armv8/co_switch.S
+- Change Apache-2.0 SPDX license tag to "Apache-2.0 OR GPL-2.0-or-later"
+- Apply coroutines to the USB bus scan in usb_init()
+Jerome Forissier (3):
+  Introduce coroutines framework
+  efi_loader: optimize efi_init_obj_list() with coroutines
+  usb: scan multiple buses simultaneously with coroutines
+
+ arch/arm/cpu/armv8/Makefile    |   1 +
+ arch/arm/cpu/armv8/co_switch.S |  36 +++++++
+ drivers/usb/host/usb-uclass.c  | 152 +++++++++++++++++++++++++++++-
+ include/coroutines.h           | 130 ++++++++++++++++++++++++++
+ lib/Kconfig                    |  10 ++
+ lib/Makefile                   |   2 +
+ lib/coroutines.c               | 165 +++++++++++++++++++++++++++++++++
+ lib/efi_loader/efi_setup.c     | 113 +++++++++++++++++++++-
+ lib/time.c                     |  14 ++-
+ 9 files changed, 615 insertions(+), 8 deletions(-)
+ create mode 100644 arch/arm/cpu/armv8/co_switch.S
+ create mode 100644 include/coroutines.h
+ create mode 100644 lib/coroutines.c
 
 -- 
-cheers,
--roger
+2.43.0
 
