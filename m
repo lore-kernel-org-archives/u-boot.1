@@ -4,86 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C2CC0218D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 04:10:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A0B6C0218D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 05:02:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD74981951;
-	Tue, 28 Jan 2025 05:10:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F14381727;
+	Tue, 28 Jan 2025 06:02:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o1LSQvKW";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Cs1TiHCk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82F8C8197D; Tue, 28 Jan 2025 05:10:07 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92DB68187B
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 05:10:04 +0100 (CET)
+ id 5AB798186D; Tue, 28 Jan 2025 06:02:17 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20730.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::730])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 312DB812BB
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 06:02:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50S49okp1903387
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 27 Jan 2025 22:09:50 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738037390;
- bh=JtoFoFyPxaadvTZpmArZ3ksUzPJFW4f5gu+vWX6otLc=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=o1LSQvKWdkavx859CWhOYYvvKfTkALxJqORn8bkdZbBI6+Wn7JOZMJKy1L+u3nKZC
- AauABmAaXzy8q3fxqo01cWuU3vN4KjFv3aEaQHk6mLmmdAQMpbRt86/xXHODANNmgI
- HxC0jHsWeBtlT9Xrq9KwQK9TXuaEjs5VJ+3/Yotc=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50S49onJ002095
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 27 Jan 2025 22:09:50 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
- Jan 2025 22:09:49 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 27 Jan 2025 22:09:49 -0600
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50S49gD8044257;
- Mon, 27 Jan 2025 22:09:43 -0600
-Message-ID: <2ded45c3-f452-42b5-ae67-a1a14e3138ef@ti.com>
-Date: Tue, 28 Jan 2025 09:39:41 +0530
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NnIoVRKAL7DqU9/P0Kd6MPK0T0iWg3yWfEASLCo63C4kHs0Kzsb4zRGBjk7meUZdyOcDVhk792ncMpFNL3vBUj3tw+GWVMjMr0AYqPEzE1om5YWucvgzJkRQOajgdIZBOnsy2r5OSDYA5SKA8Q/QsRUz5ma4RPv1iWGa4jQwZArdxlIEoBJgJ6eKji+eJIwDolNO24GqnlqjzvRwozNE980gblZsuPFDtyOFCcc6VCIQFgPxELibnNTbi4dwfd+Y3wBzLtHtdV9ZgdHccL8l0lSuCORefQIYr0y7JPPBNAiTJCks2BqExFLyy9jXA77qVymIgNLdzWpi1FPvg+/wRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=d0AheNeK0mN17Xz6LWsi37pNcpqQhOuvVPAAlq71wKU=;
+ b=Znuvn7WgGhu6xy/N4uok7lJeRb/cUz+vvmOEn3ex1DsPwSCpo3SeWPeZc+B1lBQ80/LQlrjIo37HEJRga63rfqBik0JUzrSC0YGXHAYRFHy2OJSv4bFcD0DjLN+aOamjzepBLe0SlXuL3LkH5GXus+gDB2Iz/aKpaFAgoh0MhiM6CYRvaT9248z2yhpW9e8615aeDEa8LcLjres7WRb7tmdWQt0jVZYLsbGaPgGzUfPtyj/BiZEUP4hcJNC9MouopXW46pFTtZnKfmTU+dnckrUcgydoUBTk+pDWnpkVMJUs7EAHbAY6Vi7FiVMJfGCjCv21o/Nwc7ik3I9NbKT7Fw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=d0AheNeK0mN17Xz6LWsi37pNcpqQhOuvVPAAlq71wKU=;
+ b=Cs1TiHCkPOu01VTcJbfY7s8gTLzxMr/tOXcKhxnegIxkA/DHHYX/YKfpoY9iR+Z7Rnsh3pqcjNPqLbvyqo7yGEYdJsg6xqzkQ9Ap0br7B85+xO04PlI5Bbj7Ul1cDmpq65JYyz3gMjNEcutQ0nAqRW4t6OhitNBDLTCxRE8EixXLBhlS+wkFgnVOFG7BjaXkeoknj+11qeQWon3G4ZdjNDqllZjz2mXsOsT4W2x3LVwo5J5bMcNfkf/4eQ2gc8HFgChTqd7SXatHDwKBZowonAW36P7VHBdmYGaeiF4KUIfPhItfsOyPUs1SAvtXLHVTKYMdOcZ8Xf2FlSNKI3syGQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by PAWP195MB2350.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:366::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.21; Tue, 28 Jan
+ 2025 05:02:13 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a%6]) with mapi id 15.20.8377.021; Tue, 28 Jan 2025
+ 05:02:13 +0000
+Message-ID: <e9ef023d-0e23-45ab-952d-248514bb2bf4@phytec.de>
+Date: Tue, 28 Jan 2025 12:02:05 +0700
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/13] arm: mach-k3: j721s2_init: Probe AM65 CPSW NUSS for
- R5/A72 SPL
-To: Roger Quadros <rogerq@kernel.org>, AKASHI Takahiro
- <akashi.tkhro@gmail.com>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Nishanth Menon <nm@ti.com>, Hari Nagalla
- <hnagalla@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, "Andreas
- Dannenberg" <dannenberg@ti.com>, Simon Glass <sjg@chromium.org>, "Jayesh
- Choudhary" <j-choudhary@ti.com>, Aniket Limaye <a-limaye@ti.com>, "Aradhya
- Bhatia" <a-bhatia1@ti.com>, Neha Malcom Francis <n-francis@ti.com>, "Andrew
- Davis" <afd@ti.com>, Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini
- <trini@konsulko.com>, Siddharth Vadapalli <s-vadapalli@ti.com>
-CC: <srk@ti.com>, <danishanwar@ti.com>, <u-boot@lists.denx.de>
-References: <20250107093840.2211381-1-c-vankar@ti.com>
- <20250107093840.2211381-5-c-vankar@ti.com>
- <d2c8cde1-891f-470a-abd9-598847a9078f@kernel.org>
- <73bcc845-d35b-4f3a-9529-41310cfe5707@ti.com>
- <8bf7f805-a7d5-4324-b939-319b5d12ba6d@kernel.org>
+Subject: Re: [PATCH 1/8] k3-ddr.c: Remove unwanted header files
+To: Neha Malcom Francis <n-francis@ti.com>, trini@konsulko.com, bb@ti.com,
+ s-k6@ti.com, marek.vasut+renesas@mailbox.org, sabiya.d@ti.com
+Cc: u-kumar1@ti.com, u-boot@lists.denx.de
+References: <20250127142217.1757300-1-n-francis@ti.com>
+ <20250127142217.1757300-2-n-francis@ti.com>
 Content-Language: en-US
-From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <8bf7f805-a7d5-4324-b939-319b5d12ba6d@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20250127142217.1757300-2-n-francis@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: KL1PR02CA0017.apcprd02.prod.outlook.com
+ (2603:1096:820:c::22) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|PAWP195MB2350:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5d74c4d6-634e-475a-07a9-08dd3f58ed74
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WDYzdlpSME96TG9RNkoxTkx6ZjhrQVV4cmMxOFZnZmU3dFlzMUFJUU1xV3RU?=
+ =?utf-8?B?U09rT2t2SnNOcjJXdldHazVQczJzR0xjbEp2WnNEOEhtWkdGeGloMTNzUXJ5?=
+ =?utf-8?B?c0xsN1FOYkhxd0VGcFZYQWpxQ1lJcUFTSjBxM1pkY3B1djFHRy9ZSUdyQkNu?=
+ =?utf-8?B?aHltaU52Z3dNa001bEowbnVPaEJaYmFQQlNIRDNMaTdwazV3WHlBVnBELzA4?=
+ =?utf-8?B?dHAxdVg0WFZmbzhTRTJyOFlmNGxYVnJZY2pkZ1ZDNlF3eGtDbERaSHE5SkFs?=
+ =?utf-8?B?Qm1iMGRMcklSbGlRa3l4bWMwNkk0cGpvNXZ0ZENJWXRqSFFnQlNSOTg0azZS?=
+ =?utf-8?B?NzRybkpDNmtxWldvemFycjRLODhIalkySHB6VFRreGdwWEhrZUhFVGlkemNE?=
+ =?utf-8?B?a0lqeHpBQStrWGhDNkQ4d3FOOGVKMDlFL2M4MkVoUlE4cnZ2eTBBN05lNlQz?=
+ =?utf-8?B?KzNOMlpVV1lpRzhjVU1wYWZHMTFHWHZ3WHFuK1BhUEN3UTBONURpeUMyRldM?=
+ =?utf-8?B?MGVVQ2RSUE03WHlLRldoUVQ0QjlYanpRUVpMaXJzRUxNdVRZeTRsaEhzbUI0?=
+ =?utf-8?B?emF4ekUxSWNPU1lkTVBzRmp1QzVkWTFiRUxWRTNmcldxSVhXcFNzaE16ZWV1?=
+ =?utf-8?B?aGJBT2doRHo4WnNTZnNTVXkyVWM1dkUxOExVY2NUcHBNcU44OHFqOW9UdW5K?=
+ =?utf-8?B?aGZ5UlJ2QjRRdUVPVGk3bGZkWDJmMHF6bkRjR0VrWUJ5a2h6T3kxUjJLY0k3?=
+ =?utf-8?B?N1pUTjFUcnN2Zzhxb1pzbVA1eit1NzZScWdHZVFvSGxHNjFvZjluU3Q3RUs2?=
+ =?utf-8?B?QXdYS0VJL2NEeXNjUzJnbW5zTkxTOEU2Q2tGT0ZkcTRrNGJOWVVMdC94bnNT?=
+ =?utf-8?B?aUxLZ1FmQmNucGV6T2daNEdOOWxGWFFscDRqZkZxN3RRMDZ6ZmtuV2t5dG9M?=
+ =?utf-8?B?OEQzaSs4b1NEOVZWRUlEWE9vUVE3RkZwd203QUlvSnQ3cG9UNUp0RlZmN0ht?=
+ =?utf-8?B?am10WXdkbzVvNWVFOE1wWXB2U3FOcFhudnNKTnh5UjNlZWcweGRoWFErNDIz?=
+ =?utf-8?B?K0kwME9peU9zdWQ1V29JVFplY2psMnRqQWx5NS9jZlhLaVRyOWExeCtETHJE?=
+ =?utf-8?B?eUtBVlJHamRheHl2ZENuQTN5NEZnZWZac3N2RGY3a1lnMmltbnVSLzJ0RElB?=
+ =?utf-8?B?VUMzam5RMkw2TmpvNnZwbGNNWnlyRUdhSEN2cHBhbnBsWVBtdXBXZjgyVzM3?=
+ =?utf-8?B?aHRveVZDMExPbEliSXQwNnlVZFRLYnJYMlNLUS9WSmw5aU9tZTZxdWFncnQy?=
+ =?utf-8?B?c0JUZU5rSU1WTThjMUpuUktOc3hZTHVSR21jaHlPalE5eW5mQ1dJckZ3Z05M?=
+ =?utf-8?B?aXYvTWJRYVBJZkwwQ3lVNEZOazZ3YlpxNDNCRG5mMEJiV2dpY1J0T2hSd2o4?=
+ =?utf-8?B?R2RiaDZtYTdlWllkTUp3cm9sWVY3aERwamZUaVRaN09ucXJyZnBNQmwvUllY?=
+ =?utf-8?B?SElydTZTbnVyeXdxd0d0bTNJVXBaaDIzVzc1SVpkcFVnRCthVElYQ05sWStP?=
+ =?utf-8?B?VEw5RDU3MnVBMDRYd2lkc1A2TTRPZTNZVk9VSW9zS01LaDd2UFlMblRHc2xF?=
+ =?utf-8?B?cDdodjNWT0hicnhQZzVmQkVISHNsbzF6Y0VNcDdDYWluWjBrem42c0t1WFJj?=
+ =?utf-8?B?MEU1T0g4bUxoRWVQeDhoa05aVzY4YjhMOUwyWGpIU08yaVhoY2lWK1g3Y3ZL?=
+ =?utf-8?B?ZVBhaHhicFkxSllzQXhTSjg0WUJxTEdqSlhEWjBEaitGakFEd3R6Uzd2bHNk?=
+ =?utf-8?B?MjhsbGRvZ0F5Qk00cFJqVFVzazJsVlZUc2RuOWlJcG9xT040UkRjVVlNb0s3?=
+ =?utf-8?Q?GwK9s89AdBYi+?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z2R1RGlaN1EvbmUyNzFpUEhIVkJldWpVNHk5TmpSd1c1M3FJZ0RkbnpiOXpo?=
+ =?utf-8?B?Z0FqeHhWR283WksxQWJsSlBYRU9lc2NIYlBQeEo5Ti9YZjRVMXZaWDZEcy9J?=
+ =?utf-8?B?TEVRR2hpdXRHQ28zUjRzb1RsTGZDK2lPTXMyZmN5dW1rTVR1c2xvbTZPRndR?=
+ =?utf-8?B?RzBwc2lKM0JOalhWdjQ5M3dKRXRmTWtBZVEvcjhaK28xeFVsbG1ORWpwamwz?=
+ =?utf-8?B?S2xVV1BIYjRQeW52T0FWT2xuenRlVS9oVmQvb2VhejNIazd6Qi82VUhYVjhF?=
+ =?utf-8?B?RVY2eDVjWm9WWkpBaXlqZ0V3Rks1K3dKSExSRW1mZGhWU1hvMGthb2RyVDVM?=
+ =?utf-8?B?eDhlMHQ0bFF5elpKMFIvYmtodFp1UFBJT0Z2VnJKb2JQQS9UN2pBd29MWW55?=
+ =?utf-8?B?TFlYRkFCRkhXZXNkaTNjeGp1a2Y4OGVFaDNlNkNNanZGUnpka2tWNnVWSnRE?=
+ =?utf-8?B?Zmc5bTJORXdWOEZoMWc0T0l4YnFXbmRKc3JzZElja0t4OVBWRy85UG50V2JH?=
+ =?utf-8?B?ejZmdGFmUjJYTFdNakpPdGRvV2VBbG40aUJPeldBWmZERWp4djZPbk50L0t5?=
+ =?utf-8?B?ZzBiOTFhemhReTFxYlJocjRERUwrT0ROVW44RkpZRXNrMU1uUnpEaWV1cDlo?=
+ =?utf-8?B?VDZGWjJlNXJjT2FSWHBwYStSUG1UKy9oWmRZMnIrOW80ZGx6MWRiN1ljM2g4?=
+ =?utf-8?B?NGtlNTdNMXgybXN6VkdnK2ZoSzd5Nk0weTFBN3VNUFhSb1BYNjJIRHNUNUNR?=
+ =?utf-8?B?RDlEeVZvRE1XZjNGQ1VLY1BzL0RyM0swZXo2WGt0ZHBNL09jOHhlODNkVTRM?=
+ =?utf-8?B?Vjc2ZHdPNVFsY2liZVVGaitOLzBTdm1oamdncHpYTDBBV2hRVStCT1JBUnVG?=
+ =?utf-8?B?ZERVaSt5bExMeU1ZamZhYlNrWlA1L0JhZjVYZlhJRUpLSWp4R0hnanA1MU9C?=
+ =?utf-8?B?UjNaU3RIUXBmWVFIUlp4YzBtQmhsWmEvd1BXZXFmRlY5Vld1TkZ6eDRCSHpH?=
+ =?utf-8?B?b2hrRk04U1FRTGhLaEozeFpycmc4SmdXV2dydDRqL1JDNUJWQTZZSkxKa2hE?=
+ =?utf-8?B?ZXBXbDZWSGdDTzNValBRcXFrd215c2laVi9PQ2xqRVllQmJxS093b3R5RW5S?=
+ =?utf-8?B?dVZnRHVoOEZoZWZqekRERnF6M3VQc1lFVGtkRGY5OC9oaWd0VCsvM0tSUi9a?=
+ =?utf-8?B?YmJpQWFOYzdBbUdLSzl0TEtrUjZ3ZnFqakJ1bEw5VkthOFVCSXZ2LzYyUGxt?=
+ =?utf-8?B?ZGtSdktKWnFGSWdBcWRqVDY4V21VRUxkQStqTlR4NGZhNGdSUW56Vjl6cnR2?=
+ =?utf-8?B?eS8vS0YrTkltK1dIQ2YxSy9JYUhwWHpNSlNlQ2U1WDFBMXVNdzNpRHVxY2pX?=
+ =?utf-8?B?aUxqajk4ZkhrVVlHODVCM281NytVaTE0bUg2eFh5Z2hrZ21pcFkvSVI2dEZF?=
+ =?utf-8?B?dGd0bndkTVl0dWRYOXhUeVZYRTRtbEREajFhWkJqVi9OekdwZXlQTnNlamd2?=
+ =?utf-8?B?bGpjVDg3anZjVllCOVlBYXRMNm1LRWs5VGJnU1NJd3BtSnVZUGxKS2JJZGxU?=
+ =?utf-8?B?ak82NE5ZeHBNVC85MlJlV1M3ZWE5T2hPTGk3Tk9maWtidkxORVhRZVc2Y3JH?=
+ =?utf-8?B?TUFvTjA4b0Z5ZE5nZDJ5QUpFai9jem9SdmRoV1dRcjRBaWVxZFZpL3UzaW1o?=
+ =?utf-8?B?cFlDR0N3ajl0VmhVbXlqQ1ZINm9CQ1FucUluZVhiaytwcTkxblJzd2pxTzBX?=
+ =?utf-8?B?Nkc0dUVwS0cvN0YyMmxVZlhQeHlzcnNCR0NSZXIvMnBkSE5ES2QzK01INFRn?=
+ =?utf-8?B?TGJ5RlZsZ3IrVFROWjN6ZFptdW91VTczTmsrTkZITFRtZDZGMXJuU2hBWGww?=
+ =?utf-8?B?QjZZajErdHFOeWhyMGM0V0tkZUxDZnF6OVVNeG42cTQ3bXgwT2xNdW1Db3pi?=
+ =?utf-8?B?Zi9TZ3hROE9wYnlOZHY1cmthZ0JEcVBCYkVQRzZ4RUJMQ1Z0UElOTWZmKzMz?=
+ =?utf-8?B?TGpvMXFabE93YmJOMXVOMEZXV25TcUorMXRnM2RFMzBrdEtvM0dsempBejdR?=
+ =?utf-8?B?NytBYzlvQWEzdGlZSzJuWmpnY2NTQXlFK3FWN2VzL3ZZNWZMK1hLK21Bdjh2?=
+ =?utf-8?Q?XpCv01dnLbvm0tGI9GVekgqp3?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5d74c4d6-634e-475a-07a9-08dd3f58ed74
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2025 05:02:13.2777 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1sn/l65AcCrMomyZ4ezQ3MiDLQXM7GGZxDMoXGR4d+BLYYsjKF3CP418v8jJF0mbXXXgO2rAuWS+tMv38YHUNA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWP195MB2350
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,124 +174,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Neha,
 
+Am 27.01.25 um 21:22 schrieb Neha Malcom Francis:
+> This header file is not in use in these arch/board specific files,
+> remove them.
+> 
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>   arch/arm/mach-k3/k3-ddr.c | 1 -
+>   board/ti/common/k3-ddr.c  | 1 -
+>   2 files changed, 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-k3/k3-ddr.c b/arch/arm/mach-k3/k3-ddr.c
+> index 6e3e60cdc86..026381490da 100644
+> --- a/arch/arm/mach-k3/k3-ddr.c
+> +++ b/arch/arm/mach-k3/k3-ddr.c
+> @@ -5,7 +5,6 @@
+>   
+>   #include <fdt_support.h>
+>   #include <dm/uclass.h>
+> -#include <k3-ddrss.h>
 
-On 23/01/25 15:10, Roger Quadros wrote:
-> +Vignesh & Siddharth
-> 
-> On 22/01/2025 10:53, Chintan Vankar wrote:
->>
->>
->> On 07/01/25 20:03, Roger Quadros wrote:
->>>
->>>
->>> On 07/01/2025 11:38, Chintan Vankar wrote:
->>>> To support Ethernet boot on AM68-SK, probe AM65 CPSW NUSS driver in
->>>> board_init_f().
->>>>
->>>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->>>> ---
->>>>    arch/arm/mach-k3/j721s2/j721s2_init.c | 10 ++++++++++
->>>>    1 file changed, 10 insertions(+)
->>>>
->>>> diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
->>>> index 6ce3eb87efb..7208bee5785 100644
->>>> --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
->>>> +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
->>>> @@ -329,6 +329,16 @@ void board_init_f(ulong dummy)
->>>>          setup_qos();
->>>>    +    if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
->>>> +        spl_boot_device() == BOOT_DEVICE_ETHERNET) {
->>>> +        struct udevice *cpswdev;
->>>> +
->>>> +        ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
->>>> +                          &cpswdev);
->>>> +        if (ret)
->>>> +            printf("Failed to probe am65_cpsw_nuss driver..\n");
->>>> +    }
->>>> +
->>>
->>> This looks like a hack. Please find out why the Ethernet driver is not being
->>> probed when SPL tries to load image over net.
->>>
->>
->> Hello Roger,
->>
->> The driver is defined as UCLASS_MISC which should be probed explicitly,
-> 
-> The driver was originally built without UCLASS_MISC, but
-> 
-> commit 38922b1f4acc ("net: ti: am65-cpsw: Add support for multi port independent MAC mode")
-> 
-> Added UCLASS_MISC and states there that
-> " Since top level driver is now UCLASS_MISC, board files would need to
->    instantiate this driver explicitly."
-> 
-> Not an elegant solution. So we need to fix something in the am65-cpuss driver.
-> 
-> Looking at drivers/net/mvpp2.c we can see a possible solution.
-> 1) don't define .probe for the parent driver (UCLASS_MISC). Instead define .bind
-> that will scan the device tree for ports and bind the port device and driver.
-> e.g. see mvpp2_base_bind()
-> 2) in port driver .probe (UCLASS_ETH), if parent has not been probed
-> then call the parent probe (am65_cpsw_probe_nuss) . Also set a flag so parent probe
-> only gets called once.
-> 3) update all board files no not explicitly probe the am65-cpsw UCLASS_MISC driver.
-> 
-> Siddharth / Vignesh do you see any issues with this solution?
-> 
+k3_ddrss_ddr_fdt_fixup() is still used here and the compiler gives us a 
+implicit declaration warning.
 
-Hello Roger, I have tried to understand your approach, I will work on
-that. But for now, is it possible to merge the seris with the existing
-approach ?
+Regards,
+Wadim
 
->> I have discussed the same with Nishanth in following thread:
->> https://lore.kernel.org/all/ee1d16fd-b99b-4b07-97bb-a896e179157a@ti.com/
->>
->>> We have the following defined at the am65-cpsw-nuss driver.
->>>
->>> U_BOOT_DRIVER(am65_cpsw_nuss) = {
->>>           .name   = "am65_cpsw_nuss",
->>>           .id     = UCLASS_MISC,
->>>           .of_match = am65_cpsw_nuss_ids,
->>>           .probe  = am65_cpsw_probe_nuss,
->>>           .priv_auto = sizeof(struct am65_cpsw_common),
->>> };
->>>
->>> U_BOOT_DRIVER(am65_cpsw_nuss_port) = {
->>>           .name   = "am65_cpsw_nuss_port",
->>>           .id     = UCLASS_ETH,
->>>           .probe  = am65_cpsw_port_probe,
->>>           .ops    = &am65_cpsw_ops,
->>>           .priv_auto      = sizeof(struct am65_cpsw_priv),
->>>           .plat_auto      = sizeof(struct eth_pdata),
->>>           .flags = DM_FLAG_ALLOC_PRIV_DMA | DM_FLAG_OS_PREPARE,
->>> };
->>>
->>> It looks like am65_cpsw_probe_nuss() is not being invoked for you.
->>>
->>> Can you please check if am65_cpsw_port_probe() was invoked?
->>> If yes but am65_cpsw_probe_nuss() was not then we need to fix the
->>> DM hierarchy for AM65_CPSW?
->>>
->> None of the probe function is getting invoked here, since we need
-> 
-> That is strange. am65_cpsw_probe_nuss() should be called at least for
-> port 0 since it is defined as UCLASS_ETH.
-> 
-
-am65_cpsw_probe_nuss() is defined as UCLASS_MISC and not UCLASS_ETH, it
-will get invoked if declared as UCLASS_ETH, as per your suggestion above
-it will need driver changes to invoke the probe function without being
-called explicitly and work properly.
-
->> Ethernet functionality here we need to probe function in board_init_f().
->> We have discussed the same at here:
->> https://lore.kernel.org/r/d68c8045-116a-49c0-9e74-d6a366e6f008@kernel.org/#t
->>
->>
->>>>        if (IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_AVS0)) {
->>>>            ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
->>>>                              &dev);
->>>
-> 
