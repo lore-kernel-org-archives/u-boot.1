@@ -4,50 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29C99C0218D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 13:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D496FC0218D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 13:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0C4F81E5A;
-	Tue, 28 Jan 2025 14:52:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A0E081E92;
+	Tue, 28 Jan 2025 14:53:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738072379;
-	bh=Dc7NgyiFjmviNFxfV27WVDCHAl6sLCFhaY6pNxvjfJQ=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=QJL5IR0nA/Cnq+kiKcuhQsZfrZPhWd2RohNnLcqoDfZMBVa4oSO2UGWoBhH6s1+mZ
-	 o6V9a3cqKW13ksS1BNz6kkyiOEn2cJ2iN872sVPqV0DN7iJLfJMPArgNAuLNTkV23z
-	 5JPn53pPfNlyoHMfmdI269038kHJ0oXfvRqObXf4x4rS0Dnmzg/h3MiuBiVgBI4k4W
-	 eGaBTP8bYYA4XhqTdhc8I1Tvo8z3GTRw11gDjyd0xpWh5R+03ctYLINIWf8obdm3pa
-	 F9S1VJs/ZQkib4jbJ+Ma2fhRBbPUaXo6eZ1ZW9q1vLpUBTdO9emh/TEp5WSAfm6Rjh
-	 ICqMGH3dd8tNw==
+	s=phobos-20191101; t=1738072384;
+	bh=Mj0vcpwn5slbDPEbtvIYzsj+BknJHl2uD7/vxXzCM8g=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DC+DHIvgJiaZyRjn+vOSYHGP7HYdvpFh7pT18PLMgFtTmEoLAmaSjeMQcC3udV1M8
+	 A2WP4jUD4w+qrTpTsYho9IjGqCWFkQHjdEL0XFDmWdc1P0CM0cL5PTM7xWkw8h65TX
+	 B8QkCmCx1JR3whQ3y+QZSOmEw8G5Xoma3dVYJm1GxNrj6KA5XQpktGFdsSNGueWWMW
+	 S9h5nuDYuxYDbJfPWUZg1wA2e98mqg4dLc+KYlRtIqW7nqwq7RghOPgxCAlb+b9RAe
+	 KCy2/jOo0psdX/PkVZpCrg+PWqxrmY5dbXCk8pWqCAwcyyk2+RJ4AR4QrlzYVGhK53
+	 tjra7lM0cHZsA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CE2081DCD; Tue, 28 Jan 2025 14:52:58 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 2FB3281E8C; Tue, 28 Jan 2025 14:53:03 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FEC881DB4
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 14:52:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F1DE81E1F
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 14:52:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="XuqrO4LT"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="S9B+Ofx1"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1048710382D08; Tue, 28 Jan 2025 14:52:51 +0100 (CET)
+ with ESMTPSA id 956FC10382D0E; Tue, 28 Jan 2025 14:52:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738072374;
+ t=1738072376;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Dc7NgyiFjmviNFxfV27WVDCHAl6sLCFhaY6pNxvjfJQ=;
- b=XuqrO4LTc2WmYBWLQpfkd7XfciI77dGVdlHkZQmi719wlQXTAslOjaZ6e5/BYSo13AMqWd
- MJGu+kNzWu/KUF6drLCnYlaCi4gtNy0R3R2spMrt4XwqvRZrgtxRly+lCIb/xI9wcs5YJy
- 45sI6AdAbw8O9JkZr+rfZqipk4rpFu5KBqxlsibkz7FE6tn/qTN+Z71tWdaV+WWXzAEiq7
- BXhCmLEVnpe6h4oHKf0hV4c+za7pmFyzWUEaGoiez6oRBNv2DFiGtWid7MEDvqTydwhsww
- WhSpsbg//GmOQNLk7AxPQKckR17Oc+imgwcTVGXYQsSnnG7gFuiCXWjhIY3Q8w==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Mj0vcpwn5slbDPEbtvIYzsj+BknJHl2uD7/vxXzCM8g=;
+ b=S9B+Ofx1nB5gUAXM8ivC2G3D9O+xfmPk4kiHYD1wcr961GU/e3vgo3FcR6jOA04lb5iK1Q
+ ca2o75Z9LrQca7ndNkdHM+xzGABCBtDSWiEwMRHToFlBvlnbRRbdezR4RPhx/KkuV+rRdp
+ VPUG1nYdHmOfH3AvyKtaDyjMRA9/ExgTBMAo3qgenuamJZDQg/WgAiffrA/LDBlg37Z4tK
+ 9mi9Uj0v5XQR3Jz/igloZBxndjkLZssI0B4SYyo0AlgvlLYd/SN4SUNdBBaWQwjQtzJdJu
+ ntjvC3APgSNeS4tg5ZFRcDkWdSAmp7yMfyL9yn7WocrB1SuKc7fRIekUiAmHYQ==
 From: Heiko Schocher <hs@denx.de>
 To: u-boot@lists.denx.de
 Cc: Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
@@ -58,10 +61,12 @@ Cc: Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 0/2] led: add function naming option from linux
-Date: Tue, 28 Jan 2025 14:52:44 +0100
-Message-Id: <20250128135246.74838-1-hs@denx.de>
+Subject: [PATCH v4 2/2] led: add function naming option from linux
+Date: Tue, 28 Jan 2025 14:52:46 +0100
+Message-Id: <20250128135246.74838-3-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20250128135246.74838-1-hs@denx.de>
+References: <20250128135246.74838-1-hs@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -88,26 +93,22 @@ optionally through the following properties:
 - color
 - function-enumerator
 
-This series adds support for parsing this properties if there
+This patch adds support for parsing this properties if there
 is no label property.
 
-patch 1 is new in this series since v4, which deletes
-the file doc/device-tree-bindings/leds/common.txt
-as Tom suggested.
+The led name is created in led_post_bind() and we need some
+storage place for it. Currently this patch prevents to use
+malloc() instead it stores the name in new member :
 
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=168&view=results
+        char name[LED_MAX_NAME_SIZE];
 
-shows an error:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=168&view=logs&j=c680f105-64bc-5146-6f22-9781d9f94790&t=9b6dc287-5896-5328-71bc-12fc1ca8ea8d
+of struct led_uc_plat. While at it append led tests for the
+new feature.
 
-for sandbox64_clang ... sandbox64 target works!
-The error has nothing ToDo with this patchseries,
-as it is in dm_test_cmd_hash_md5, which tests content
-from source files, this series do not touch.
+Signed-off-by: Heiko Schocher <hs@denx.de>
+---
 
 Changes in v4:
-- new in version 4
 - remove ./doc/device-tree-bindings/leds/common.txt in
   seperate patch as this is now already in
   ./dts/upstream/Bindings/leds/common.txt
@@ -154,19 +155,264 @@ Changes in v2:
 - rebased patch to current HEAD
   82d262ae162 ("Merge patch series "MediaTek MT7629 OF_UPSTREAM migration (v2)"")
 
-Heiko Schocher (2):
-  doc: remove redundant leds bindings
-  led: add function naming option from linux
+ arch/sandbox/dts/test.dts | 37 ++++++++++++++++++++-
+ drivers/led/led-uclass.c  | 70 ++++++++++++++++++++++++++++++++++++---
+ include/led.h             |  6 ++++
+ test/dm/led.c             | 22 +++++++++++-
+ test/dm/ofnode.c          |  2 +-
+ 5 files changed, 130 insertions(+), 7 deletions(-)
 
- arch/sandbox/dts/test.dts                | 37 ++++++++++++-
- doc/device-tree-bindings/leds/common.txt | 23 --------
- drivers/led/led-uclass.c                 | 70 ++++++++++++++++++++++--
- include/led.h                            |  6 ++
- test/dm/led.c                            | 22 +++++++-
- test/dm/ofnode.c                         |  2 +-
- 6 files changed, 130 insertions(+), 30 deletions(-)
- delete mode 100644 doc/device-tree-bindings/leds/common.txt
-
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index ae52b375ccb..b8f3012873e 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -13,6 +13,7 @@
+ #include <dt-bindings/gpio/gpio.h>
+ #include <dt-bindings/gpio/sandbox-gpio.h>
+ #include <dt-bindings/input/input.h>
++#include <dt-bindings/leds/common.h>
+ #include <dt-bindings/pinctrl/sandbox-pinmux.h>
+ #include <dt-bindings/mux/mux.h>
+ 
+@@ -820,7 +821,7 @@
+ 			gpio-controller;
+ 			#gpio-cells = <1>;
+ 			gpio-bank-name = "a";
+-			sandbox,gpio-count = <20>;
++			sandbox,gpio-count = <25>;
+ 			hog_input_active_low {
+ 				gpio-hog;
+ 				input;
+@@ -1010,6 +1011,40 @@
+ 			/* label intentionally omitted */
+ 			default-state = "off";
+ 		};
++
++		led-20 {
++			gpios = <&gpio_a 20 0>;
++			/* label intentionally omitted */
++			function = LED_FUNCTION_STATUS;
++			color = <LED_COLOR_ID_RED>;
++			function-enumerator = <20>;
++		};
++
++		led-21 {
++			gpios = <&gpio_a 21 0>;
++			/* label intentionally omitted */
++			function = LED_FUNCTION_STATUS;
++			color = <LED_COLOR_ID_GREEN>;
++		};
++
++		led-22 {
++			gpios = <&gpio_a 22 0>;
++			/* label intentionally omitted */
++			function = LED_FUNCTION_STATUS;
++		};
++
++		led-23 {
++			gpios = <&gpio_a 23 0>;
++			/* label intentionally omitted */
++			color = <LED_COLOR_ID_GREEN>;
++		};
++
++		led-24 {
++			gpios = <&gpio_a 24 0>;
++			label = "sandbox:function";
++			function = LED_FUNCTION_STATUS;
++			color = <LED_COLOR_ID_GREEN>;
++		};
+ 	};
+ 
+ 	wdt-gpio-toggle {
+diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+index 760750568c0..27ef890ed0a 100644
+--- a/drivers/led/led-uclass.c
++++ b/drivers/led/led-uclass.c
+@@ -13,6 +13,25 @@
+ #include <dm/lists.h>
+ #include <dm/root.h>
+ #include <dm/uclass-internal.h>
++#include <dt-bindings/leds/common.h>
++
++static const char * const led_colors[LED_COLOR_ID_MAX] = {
++	[LED_COLOR_ID_WHITE] = "white",
++	[LED_COLOR_ID_RED] = "red",
++	[LED_COLOR_ID_GREEN] = "green",
++	[LED_COLOR_ID_BLUE] = "blue",
++	[LED_COLOR_ID_AMBER] = "amber",
++	[LED_COLOR_ID_VIOLET] = "violet",
++	[LED_COLOR_ID_YELLOW] = "yellow",
++	[LED_COLOR_ID_IR] = "ir",
++	[LED_COLOR_ID_MULTI] = "multicolor",
++	[LED_COLOR_ID_RGB] = "rgb",
++	[LED_COLOR_ID_PURPLE] = "purple",
++	[LED_COLOR_ID_ORANGE] = "orange",
++	[LED_COLOR_ID_PINK] = "pink",
++	[LED_COLOR_ID_CYAN] = "cyan",
++	[LED_COLOR_ID_LIME] = "lime",
++};
+ 
+ int led_bind_generic(struct udevice *parent, const char *driver_name)
+ {
+@@ -232,11 +251,54 @@ int led_activity_blink(void)
+ #endif
+ #endif
+ 
+-static const char *led_get_label(ofnode node)
++static const char *led_get_function_name(struct udevice *dev)
++{
++	struct led_uc_plat *uc_plat;
++	const char *func;
++	u32 color;
++	u32 enumerator;
++	int ret;
++	int cp;
++
++	if (!dev)
++		return NULL;
++
++	uc_plat = dev_get_uclass_plat(dev);
++	if (!uc_plat)
++		return NULL;
++
++	if (uc_plat->label)
++		return uc_plat->label;
++
++	/* Now try to detect function label name */
++	func = dev_read_string(dev, "function");
++	cp = dev_read_u32(dev, "color", &color);
++	if (cp == 0 || func) {
++		ret = dev_read_u32(dev, "function-enumerator", &enumerator);
++		if (!ret) {
++			snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
++				 "%s:%s-%d",
++				 cp ? "" : led_colors[color],
++				 func ? func : "", enumerator);
++		} else {
++			snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
++				 "%s:%s",
++				 cp ? "" : led_colors[color],
++				 func ? func : "");
++		}
++		uc_plat->label = uc_plat->name;
++	}
++
++	return uc_plat->label;
++}
++
++static const char *led_get_label(struct udevice *dev, ofnode node)
+ {
+ 	const char *label;
+ 
+ 	label = ofnode_read_string(node, "label");
++	if (!label)
++		label = led_get_function_name(dev);
+ 	if (!label && !ofnode_read_string(node, "compatible"))
+ 		label = ofnode_get_name(node);
+ 
+@@ -249,7 +311,7 @@ static int led_post_bind(struct udevice *dev)
+ 	const char *default_state;
+ 
+ 	if (!uc_plat->label)
+-		uc_plat->label = led_get_label(dev_ofnode(dev));
++		uc_plat->label = led_get_label(dev, dev_ofnode(dev));
+ 
+ 	uc_plat->default_state = LEDST_COUNT;
+ 
+@@ -314,14 +376,14 @@ static int led_init(struct uclass *uc)
+ #ifdef CONFIG_LED_BOOT
+ 	ret = ofnode_options_get_by_phandle("boot-led", &led_node);
+ 	if (!ret)
+-		priv->boot_led_label = led_get_label(led_node);
++		priv->boot_led_label = led_get_label(NULL, led_node);
+ 	priv->boot_led_period = ofnode_options_read_int("boot-led-period-ms", 250);
+ #endif
+ 
+ #ifdef CONFIG_LED_ACTIVITY
+ 	ret = ofnode_options_get_by_phandle("activity-led", &led_node);
+ 	if (!ret)
+-		priv->activity_led_label = led_get_label(led_node);
++		priv->activity_led_label = led_get_label(NULL, led_node);
+ 	priv->activity_led_period = ofnode_options_read_int("activity-led-period-ms",
+ 							    250);
+ #endif
+diff --git a/include/led.h b/include/led.h
+index 64247cd3a70..a67db7af38d 100644
+--- a/include/led.h
++++ b/include/led.h
+@@ -53,6 +53,11 @@
+ 
+ struct udevice;
+ 
++/*
++ * value imported from linux:include/linux/uapi/linux/uleds.h
++ */
++#define LED_MAX_NAME_SIZE      64
++
+ enum led_state_t {
+ 	LEDST_OFF = 0,
+ 	LEDST_ON = 1,
+@@ -86,6 +91,7 @@ struct led_sw_blink {
+ struct led_uc_plat {
+ 	const char *label;
+ 	enum led_state_t default_state;
++	char name[LED_MAX_NAME_SIZE];
+ #ifdef CONFIG_LED_SW_BLINK
+ 	struct led_sw_blink *sw_blink;
+ #endif
+diff --git a/test/dm/led.c b/test/dm/led.c
+index e5b86326c3a..36652c2833a 100644
+--- a/test/dm/led.c
++++ b/test/dm/led.c
+@@ -20,7 +20,12 @@ static int dm_test_led_base(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_LED, 1, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_LED, 2, &dev));
+ 	ut_assertok(uclass_get_device(UCLASS_LED, 3, &dev));
+-	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_LED, 4, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 4, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 5, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 6, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 7, &dev));
++	ut_assertok(uclass_get_device(UCLASS_LED, 8, &dev));
++	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_LED, 9, &dev));
+ 
+ 	return 0;
+ }
+@@ -110,6 +115,21 @@ static int dm_test_led_label(struct unit_test_state *uts)
+ 
+ 	ut_asserteq(-ENODEV, led_get_by_label("sandbox:blue", &dev));
+ 
++	/* Test if function, color and function-enumerator naming works */
++	ut_assertok(led_get_by_label("red:status-20", &dev));
++
++	/* Test if function, color naming works */
++	ut_assertok(led_get_by_label("green:status", &dev));
++
++	/* Test if function, without color naming works */
++	ut_assertok(led_get_by_label(":status", &dev));
++
++	/* Test if color without function naming works */
++	ut_assertok(led_get_by_label("green:", &dev));
++
++	/* Test if function, color naming is ignored if label is found */
++	ut_assertok(led_get_by_label("sandbox:function", &dev));
++
+ 	return 0;
+ }
+ DM_TEST(dm_test_led_label, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index 4a23a3ca38c..cc8b444ff9a 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -1599,7 +1599,7 @@ static int dm_test_ofnode_delete(struct unit_test_state *uts)
+ 	ut_assert(!ofnode_valid(node));
+ 	ut_assert(!ofnode_valid(ofnode_path("/leds/default_on")));
+ 
+-	ut_asserteq(2, ofnode_get_child_count(ofnode_path("/leds")));
++	ut_asserteq(7, ofnode_get_child_count(ofnode_path("/leds")));
+ 
+ 	return 0;
+ }
 -- 
 2.20.1
 
