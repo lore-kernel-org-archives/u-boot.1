@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45637C0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 21:36:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD57FC0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 21:39:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D65281DD3;
-	Tue, 28 Jan 2025 22:36:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0B7F581DD3;
+	Tue, 28 Jan 2025 22:39:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738100213;
-	bh=h8BmdtnQXV6eCD0wjPDstqjBIsJH4fxT/xFxQjGpBR0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bWRJuEt6pGYc9HknSjKyuKhZiyqNJlA8rgdTxSM3GEcFVUs7vU7r7IbSsXzMK5bg4
-	 oEVpexAWMYGKvCfYPJUusueYt5YHdPLUZET+4QBWbDNklrya2Jk7XfPkHTDCmLFojq
-	 SC2bZA/yyb3vprPVCKYIf90wLzENbDtGA3lTAzc8VK2nhr4QPrlH7Ko3kvI9AwEfFu
-	 9getZf7zQi6gwDMbaRNhhL/+ifKBmZLxzTUxliYdMk6q9fdPudBNi6n5GFkE+tHGyZ
-	 93vwCsph9AKe6f7LKAS10yFxiG80x+G7dk+zZG2kLmOGzypTT6p3Hqbffs3gJyBx8v
-	 hZ6GxBBhaI7DA==
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="mhgAdQaK";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="vFhmeyOY";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31B1181DFA; Tue, 28 Jan 2025 22:36:52 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 100D381DFA; Tue, 28 Jan 2025 22:39:20 +0100 (CET)
+Received: from sendmail.purelymail.com (sendmail.purelymail.com
+ [34.202.193.197])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23F6481D27
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 22:36:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3225981D27
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 22:39:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=tidylabs.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="CIhLYX/w"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CA6D110382D08; Tue, 28 Jan 2025 22:36:47 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738100209;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=h8BmdtnQXV6eCD0wjPDstqjBIsJH4fxT/xFxQjGpBR0=;
- b=CIhLYX/wk8DFNAF+8Hu0xE0SywY1QnRMWOK73V2K0ogLcvi5LWqGtUvfkfLUaRJ2bdjcw+
- 6X+wdIRfDpYKZL+Y4n5pveAgIgKBYmX0MHvD70Tfx4R4KaBi/EenBb/0j4QptRgyPG29HF
- TqqFyeGhbvkA7V3ErbG+BPFQT4UVGZ+PTnra+jxwe6Pk+Jh444K8dpFYFN0SnovzX2MPqW
- Ub5AdCMQcWAXmO45IMEER9WeByBkif2kGLraRYuPJjjxQYkETyY5FEbFgb/VyVlPdHOzeC
- yoRzGu29hhm0Z8jbXGQnyGBNQokP0UIkivnqmBh63k/bPCKTuP5PSDUXbyo7TQ==
-Message-ID: <84a3ccfc-3d35-4018-9978-2c320f00e33c@denx.de>
-Date: Tue, 28 Jan 2025 22:36:46 +0100
+ spf=pass smtp.mailfrom=justin@tidylabs.net
+DKIM-Signature: a=rsa-sha256;
+ b=mhgAdQaKSYXNBAjLNFSotWNZ9E6/7r3sxYWRn42zxaY1kJpsJyGW1Nr2lZU0lXLsilr5w9gLTs0NtIito6mZVWefffvJr1bsXtfXkWiAqilLSfYwS5hO2lsXYiB7savS/Ki6j7SQemP+CXIVfX995JXAnGxaAznzk1OYHVYHaOzntYDv6wBQstmPF4e8uMYCADv5X2FqlOs5qW2e2By2e06odgggi4/Kfqa20Gcd44qWd7cesupLA6vTHkqJPJFvAOsktjpM2lLXq2Mq6s1Osvt/FUoXjDQkE+rUc3dks0QLnHIAPFHMIzOXHhnYCQjN7ITItaYD5omJ78WCw/q4aw==;
+ s=purelymail1; d=tidylabs.net; v=1;
+ bh=IiFpccbwmYiQD2t9k4G3nnUirtziBoE6tq0Ym9lVpvk=;
+ h=Received:From:To:Subject:Date; 
+DKIM-Signature: a=rsa-sha256;
+ b=vFhmeyOYOY7roVgMhV2eyJBBTma6KJyzOlsSwmLljiBsMmiiKp7j2rsInz4GULykZ9x6CHgcDTvAEIROHuxkTTBtU/JiBE5To07YZC353gOozBdO6FoDOZQ7+pk4K+/Nxf0x9jBYqjwGH6qSfBBC6PkAEsgdQt6PyzOqAIa02Yg6yLs58Sn8ACrpD8HsY5VjCebTRIcoq9jYfkS6jgQYxIEDi+oQDihXrldlfV2J9jxl6tPMhrEcNtQlN80Flxfgl+fI9323bAxxHxA74AMNVGsX8Y7ORB+an+SPv53gvSwbR4JqrKcTzVB29Ia1MHwtyxJgSY3fB4i+9d2MsxrE7w==;
+ s=purelymail1; d=purelymail.com; v=1;
+ bh=IiFpccbwmYiQD2t9k4G3nnUirtziBoE6tq0Ym9lVpvk=;
+ h=Feedback-ID:Received:From:To:Subject:Date; 
+Feedback-ID: 81901:11097:null:purelymail
+X-Pm-Original-To: u-boot@lists.denx.de
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -499528210; 
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 28 Jan 2025 21:39:14 +0000 (UTC)
+From: Justin Klaassen <justin@tidylabs.net>
+To: u-boot@lists.denx.de
+Cc: Justin Klaassen <justin@tidylabs.net>, Alexandre Vicenzi <linux@alxd.me>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Chen-Yu Tsai <wens@csie.org>,
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Keerthy <j-keerthy@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>,
+ William Wu <william.wu@rock-chips.com>, Xiaobo Tian <peterwillcn@gmail.com>
+Subject: [PATCH v2 0/5] rockchip: rk3399: rk3399-nanopi-4: Fix SD power
+ initialization in SPL
+Date: Tue, 28 Jan 2025 21:37:32 +0000
+Message-ID: <20250128213852.465664-1-justin@tidylabs.net>
+X-Mailer: git-send-email 2.45.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 3/3] usb: scan multiple buses simultaneously with
- coroutines
-To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Dragan Simic <dsimic@manjaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>
-References: <cover.1738059345.git.jerome.forissier@linaro.org>
- <58d6721203ea81b9c20f162ef40f79bc73243a42.1738059345.git.jerome.forissier@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <58d6721203ea81b9c20f162ef40f79bc73243a42.1738059345.git.jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
+Content-Type: text/plain; charset=UTF-8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,24 +85,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/28/25 11:19 AM, Jerome Forissier wrote:
-> Use the coroutines framework to scan USB buses in parallel for better
-> performance. Tested on arm64 QEMU on a somewhat contrived example
-> (4 USB buses, each with one audio device, one keyboard, one mouse and
-> one tablet).
-> 
-> $ make qemu_arm64_defconfig
-> $ make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
-> $ qemu-system-aarch64 -M virt -nographic -cpu max -bios u-boot.bin \
->      $(for i in {1..4}; do echo -device qemu-xhci,id=xhci$i \
->          -device\ usb-{audio,kbd,mouse,tablet},bus=xhci$i.0; \
->      done)
-> 
-> The time spent in usb_init() is reported on the console and shows a
-> significant improvement with COROUTINES enabled.
-Have you considered using the cyclic framework ( cyclic_register() and 
-co. ) to fully offload USB operations away from the main thread, i.e. to 
-make the U-Boot shell and e.g. 'usb start' run fully in parallel ? That 
-could then be extended to block transfers, which could run in 
-background, and ... we would also get a concept of shell pipes to move 
-data around like we do in Linux.
+
+The NanoPi RK3399 boards support UHS-I (up to SDR104) SD cards, however
+using any of these 1.8v modes results in a boot failure in SPL upon soft
+reboot.
+
+The issue is that the "vcc_sdio" regulator is left at 1.8v on reboot and
+the corresponding GPIO defaults to 3.3v. This prevents the SD card from
+being reinitialized and read successfully.
+
+This change series resolves this issue by allowing the proper
+initialization and control of the "vcc3v0_sd" (vmmc-supply) and
+"vcc_sdio" (vqmmc-supply) regulators and corresponding GPIO in SPL.
+
+Changes in v2:
+- Made added IO-domain driver logs verbose and consistent
+- Added separate patch for added CONFIG_SPL_ROCKCHIP_IODOMAIN Kconfig
+- Added separate patch for added CONFIG_SPL_REGULATOR_RK8XX Kconfig
+- Added patch to remove device-tree properties that conflicted with MMC dri=
+ver initialization
+- Added defconfig changes for all NanoPi RK3399 boards
+
+Justin Klaassen (5):
+  rockchip: io-domain: Add debug logging for regulators during probe
+  rockchip: io-domain: Add CONFIG_SPL_ROCKCHIP_IODOMAIN
+  regulator: rk8xx: Add CONFIG_SPL_REGULATOR_RK8XX
+  rockchip: rk3399-nanopi-4: Allow MMC driver to control SD regulators
+  rockchip: rk3399-nanopi-4: Enable IO-domain driver in SPL
+
+ arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 12 ++++++++++++
+ configs/nanopc-t4-rk3399_defconfig      |  7 +++++++
+ configs/nanopi-m4-2gb-rk3399_defconfig  |  7 +++++++
+ configs/nanopi-m4-rk3399_defconfig      |  7 +++++++
+ configs/nanopi-m4b-rk3399_defconfig     |  7 +++++++
+ configs/nanopi-neo4-rk3399_defconfig    |  7 +++++++
+ configs/nanopi-r4s-rk3399_defconfig     |  7 +++++++
+ drivers/misc/Kconfig                    |  8 ++++++++
+ drivers/misc/rockchip-io-domain.c       |  7 ++++++-
+ drivers/power/regulator/Kconfig         |  9 +++++++++
+ drivers/power/regulator/rk8xx.c         |  8 ++------
+ 11 files changed, 79 insertions(+), 7 deletions(-)
+
+--=20
+2.45.3
+
