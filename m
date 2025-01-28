@@ -4,89 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB8CC0218D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 11:14:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB1CC0218D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 11:18:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3FE681DCF;
-	Tue, 28 Jan 2025 12:14:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6733D81BEE;
+	Tue, 28 Jan 2025 12:18:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IgzObjRP";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="X063vjsi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0159181D6C; Tue, 28 Jan 2025 12:14:16 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6152381D42; Tue, 28 Jan 2025 12:18:48 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 663DA81DE3
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 12:14:13 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-38633b5dbcfso6147340f8f.2
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 03:14:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738062853; x=1738667653; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7k9PIsX6FDXkg8DCTARI7Hqa09WoB755fuXDVewuBaM=;
- b=IgzObjRP6esvR0MqyeB7n2zusOcMQrmWFVc5toHIspt7eTxDir8/v36X6W9ejHZIO2
- i5mcJqgg1huyx2+PBtmBmfCp0SIUW5bb2ZE/Q8gbrUz6ENGlAk8EUmtnZ77SdRkpve5M
- /2a6Z5H3hhQRgefqgHtwjCTusKf0U4CluXmc4H/2tyRmS3DDrXp3t+zqp6OihOTk2EEB
- WEMl2fXIOEpD6PnwiW31OUWHoESCjKEqk0uzu6jIpv2v3AKq///eInTgzBAo5NL4hXjb
- 0sjLIjAlbddhWHcJFbWkjC5BrRzRdHAVOIsW7V9cgMBuIcffsq6EzHO/hW7qLh01Bqtl
- Pxsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738062853; x=1738667653;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7k9PIsX6FDXkg8DCTARI7Hqa09WoB755fuXDVewuBaM=;
- b=Cj+N8azS0t4S5Jsws+KwH/fMcmSgjnXxdYpiqmKNUzJmmxbiKxkOLLpW8nZ3lMM9Lj
- M//oxUudIW3tEonjulmmTEWLloWteVpu/FjypommbdvWa3V5Og25ARb03vMAOVGizz0Q
- 07ZxiM8thhtZyEoGqQuZYXDWAJF4ADs8Pm8hOijBbbtoulYPbaNWfuzrqBIibVHBJmY1
- TzDijIqEauGFsQkftuJWnsV44XDelMRSQsoS5uce1HXaDdf5Wul/zpPq3pOl9vDQhe2o
- NRLkL5Om8XPtmQR+poQzZb6vO8MpmgQ8OZScmO2iQTt+ybQk5NT4gDEH2KcoRvfx4nEX
- v7vA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU2eA70p/+kA77rtMJOIomOmDBRencgILxO+VpOsblmYkAVjvdwH9vx8de98L7mzulEzpMoVzU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzjCX1Uoyx5/hj2geyO6+i0MvbyNnLb78g51SMhNWwHWS9JjHql
- vHLXTuhi4SjlFp5x8c00iFfotaDBaJaVU1qwUpfHnh4XR6Dlm/L+gcdNAWTvamo=
-X-Gm-Gg: ASbGncsMG0gwfzl5ndAT0EkzlOQuaazkV3OHQH7dINJgXtnHqc/g9E8BDqfWYXZzZjY
- x1zYKOObSPBeSNCY/zlmbMroKvACYXiXoYgJQ49ZZEMMlrwrXtjgz8Oand9u9Xv7P23y+BDkR8A
- 83KuusIL8TKX/CJPK6hQoX19cGh7rh6UlB+K9YxxpRUgW9bWIR6E1HU1+GfFLjAUNZTxmTBHMXB
- x8FtubtAU8wLNm7fGf/TGIolgxl/oHeGr7FyOdfAWYVdDd9Y1IW4flxrI+KkwgAvO5YZTpAfFZ4
- fQRH/UFwD0npzx2qnFkhuy0=
-X-Google-Smtp-Source: AGHT+IGpL+GYazUOYPijicnPj62aEoDtkDU2uXUrmkpnq0vWTgcvQllihak9QZUcv0kHHVJ3XFdQMw==
-X-Received: by 2002:a5d:47a3:0:b0:382:3959:f429 with SMTP id
- ffacd0b85a97d-38bf5649664mr40919977f8f.5.1738062852878; 
- Tue, 28 Jan 2025 03:14:12 -0800 (PST)
-Received: from [192.168.0.24] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1bb0besm14042298f8f.79.2025.01.28.03.14.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Jan 2025 03:14:12 -0800 (PST)
-Message-ID: <a4e76b9f-8dcc-49f5-bcc7-e823080ef285@linaro.org>
-Date: Tue, 28 Jan 2025 13:14:12 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 1BE9B81B4B
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 12:18:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+fuga.studiofuga.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8A16C5C5A8C;
+ Tue, 28 Jan 2025 11:18:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5D1CCC4CED3;
+ Tue, 28 Jan 2025 11:18:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1738063124;
+ bh=Uqt2kxSNqDv6BD+W0UtzqzAvW3XrEFA0I1NGLTZ3n5U=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=X063vjsi6IvEP4V5ZooLAzPmpWvxoViijsTd2m/yo1Uj2F+l7CKuCEEomc5kF6akA
+ fHMQBI5wTAcz7BuCkNx2oWhbtLVu6Jmc/ewq2Qtn6jafMNfNooubSqolRNJL17T7IG
+ H+O/M560Ccrm4Oftjenqt6KWBFJ0ELS13rRo5DdtiBgNrPy9JoV3YN20WBG5t+GA9f
+ O1xXMquhTIBaUnM+5NDk3adfM+4kXpgZC0+yOAyCPGL4E8QD3CoOtX2vQQvzjhzE5B
+ YY9PTdNIqgrV0hNgWZuBVHQMSEdjqE7w/qLxTbP8o+9m42yf+/HeEC/XpCVEc+CYo4
+ +vNo5TmM4mrZQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 52322C0218D;
+ Tue, 28 Jan 2025 11:18:44 +0000 (UTC)
+From: Federico Fuga via B4 Relay <devnull+fuga.studiofuga.com@kernel.org>
+Date: Tue, 28 Jan 2025 12:18:37 +0100
+Subject: [PATCH] Fix fastboot handling of partitions when no slots are
+ supported
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] ARM: dts: at91: sam9x60: Define pinctrl node with its
- label
-To: Manikandan Muralidharan <manikandan.m@microchip.com>,
- pbrobinson@gmail.com, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
-References: <20250127100930.108377-1-manikandan.m@microchip.com>
- <20250127100930.108377-3-manikandan.m@microchip.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250127100930.108377-3-manikandan.m@microchip.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20250128-fastboot_slot_fix-v1-1-1a4688936662@studiofuga.com>
+X-B4-Tracking: v=1; b=H4sIAAy9mGcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDQyML3bTE4pKk/PyS+OIcIJGWWaFrZmlkamhqbpZimZSkBNRXUJQKFAa
+ bGR1bWwsAkAvxoGMAAAA=
+X-Change-ID: 20250128-fastboot_slot_fix-69251576d9bb
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Federico Fuga <fuga@studiofuga.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3127;
+ i=fuga@studiofuga.com; h=from:subject:message-id;
+ bh=TKOjlYcOT6aH74HSyiAsmNFDbwha6KERQuHNXYuuMWg=;
+ b=owGbwMvMwCWWHKr8a5mpjg3jabUkhvQZe4WOzZW80y9XezsuOSdl1urHn2zYErJedK8zNdvdM
+ 8/IZlFiRykLgxgXg6yYIsucl8/OZH3LPvtRd70WzBxWJpAhDFycAjCRN5cZ/gemTPScIO3qNf2n
+ 45nDu4wvJhaeWTh3eljedM5TvYYb52xl+MNRfJbZW8IkedsZieUyTprOhWWnHpYa65nUNm7ov2O
+ 8ixkA
+X-Developer-Key: i=fuga@studiofuga.com; a=openpgp;
+ fpr=9CE9E6CC6AF66BCDF12DAF2A635523FAA6352C3C
+X-Endpoint-Received: by B4 Relay for fuga@studiofuga.com/default with
+ auth_id=333
+X-Original-From: Federico Fuga <fuga@studiofuga.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,192 +84,91 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: fuga@studiofuga.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Federico Fuga <fuga@studiofuga.com>
 
+The fastboot module has a bug that prevents some command to work
+properly on devices that haven't an Android-like partition scheme, that
+is, just one spl and one kernel partition, instead of the redundant
+scheme with _a and _b slots.
 
-On 1/27/25 12:09, Manikandan Muralidharan wrote:
-> From: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
-> 
-> Define the pinctrl nodes with its label and sort its child node
-> alphabetically to align wit the Linux DT.Without this change
+This is the schema of our NAND storage (board is based on an AllWinner
+A33 sunxi chip):
 
-Typo: wit
+=> mtdparts
 
-> those pinctrl nodes are grouped under an additional 'pinctrl' child node
-> that is not identified by the pinctrl driver when the GPIO banks
-> are made as child nodes of pinctrl node.
+device nand0 <1c03000.nand>, # parts = 4
+ #: name         size            net size        offset          mask_flags
+ 0: spl          0x00020000      0x00020000      0x00000000      0
+ 1: uboot        0x00100000      0x00100000      0x00020000      0
+ 2: kernel_a     0x00400000      0x00400000      0x00120000      0
+ 3: ubi          0x07ae0000      0x079e0000 (!)  0x00520000      0
 
-Please align them as they are aligned in Linux, or, patch Linux DT first.
+active partition: nand0,0 - (spl) 0x00020000 @ 0x00000000
 
+This happens when we try to erase the spl partition using fastboot:
 
-> 
-> Signed-off-by: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
-> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
-> ---
->  arch/arm/dts/sam9x60ek.dts | 138 ++++++++++++++++++-------------------
->  1 file changed, 69 insertions(+), 69 deletions(-)
-> 
-> diff --git a/arch/arm/dts/sam9x60ek.dts b/arch/arm/dts/sam9x60ek.dts
-> index 74016f5e288..d8d7ad38b2b 100644
-> --- a/arch/arm/dts/sam9x60ek.dts
-> +++ b/arch/arm/dts/sam9x60ek.dts
-> @@ -78,75 +78,6 @@
->  					};
->  				};
->  			};
-> -
-> -			pinctrl {
-> -				nand {
-> -					pinctrl_nand_oe_we: nand-oe-we-0 {
-> -						atmel,pins =
-> -							<AT91_PIOD 0 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 1 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-> -					};
-> -
-> -					pinctrl_nand_rb: nand-rb-0 {
-> -						atmel,pins =
-> -							<AT91_PIOD 5 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-> -					};
-> -
-> -					pinctrl_nand_cs: nand-cs-0 {
-> -						atmel,pins =
-> -							<AT91_PIOD 4 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-> -					};
-> -				};
-> -
-> -				ebi {
-> -					pinctrl_ebi_data_0_7: ebi-data-lsb-0 {
-> -						atmel,pins =
-> -							<AT91_PIOD 6 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 7 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 8 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 9 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 10 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 11 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 12 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 13 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-> -					};
-> -
-> -					pinctrl_ebi_addr_nand: ebi-addr-0 {
-> -						atmel,pins =
-> -							<AT91_PIOD 2 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> -							 AT91_PIOD 3 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-> -					};
-> -				};
-> -
-> -				pinctrl_qspi: qspi {
-> -					atmel,pins =
-> -						<AT91_PIOB 19 AT91_PERIPH_A AT91_PINCTRL_NONE
-> -						 AT91_PIOB 20 AT91_PERIPH_A AT91_PINCTRL_NONE
-> -						 AT91_PIOB 21 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-> -						 AT91_PIOB 22 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-> -						 AT91_PIOB 23 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-> -						 AT91_PIOB 24 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
-> -				};
-> -
-> -				pinctrl_flx0: flx0_default {
-> -					atmel,pins =
-> -						<AT91_PIOA 0 AT91_PERIPH_A AT91_PINCTRL_NONE
-> -						 AT91_PIOA 1 AT91_PERIPH_A AT91_PINCTRL_NONE>;
-> -				};
-> -
-> -				pinctrl_onewire_tm_default: onewire_tm_default {
-> -					atmel,pins =
-> -						<AT91_PIOD 14 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-> -				};
-> -
-> -				usb1 {
-> -					pinctrl_usb_default: usb_default {
-> -						atmel,pins = <AT91_PIOD 15 AT91_PERIPH_GPIO AT91_PINCTRL_NONE
-> -								AT91_PIOD 16 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
-> -					};
-> -				};
-> -
-> -			};
->  		};
->  	};
->  };
-> @@ -221,6 +152,75 @@
->  	status = "okay";
->  };
->  
-> +&pinctrl {
-> +	/* shared pinctrl settings */
-> +	ebi {
-> +		pinctrl_ebi_data_0_7: ebi-data-lsb-0 {
-> +			atmel,pins =
-> +				<AT91_PIOD 6 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 7 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 8 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 9 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 10 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 11 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 12 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 13 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-> +		};
-> +
-> +		pinctrl_ebi_addr_nand: ebi-addr-0 {
-> +			atmel,pins =
-> +				<AT91_PIOD 2 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 3 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-> +		};
-> +	};
-> +
-> +	nand {
-> +		pinctrl_nand_oe_we: nand-oe-we-0 {
-> +			atmel,pins =
-> +				<AT91_PIOD 0 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
-> +				 AT91_PIOD 1 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
-> +		};
-> +
-> +		pinctrl_nand_rb: nand-rb-0 {
-> +			atmel,pins =
-> +				<AT91_PIOD 5 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-> +		};
-> +
-> +		pinctrl_nand_cs: nand-cs-0 {
-> +			atmel,pins =
-> +				<AT91_PIOD 4 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-> +		};
-> +	};
+$ fastboot erase spl
+Erasing 'spl_a'               FAILED (remote: 'invalid NAND device')
+fastboot: error: Command failed
 
-I see in Linux nand is before ebi or am I wrong ?
+The error occurs because getvars fails to handle the error returned by
+nand layer when a partition cannot be found.
 
-> +
-> +	pinctrl_flx0: flx0_default {
-> +		atmel,pins =
-> +			<AT91_PIOA 0 AT91_PERIPH_A AT91_PINCTRL_NONE
-> +			 AT91_PIOA 1 AT91_PERIPH_A AT91_PINCTRL_NONE>;
-> +		};
-> +
-> +	pinctrl_onewire_tm_default: onewire_tm_default {
-> +		atmel,pins =
-> +			<AT91_PIOD 14 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
-> +	};
-> +
-> +	pinctrl_qspi: qspi {
-> +		atmel,pins =
-> +			<AT91_PIOB 19 AT91_PERIPH_A AT91_PINCTRL_NONE
-> +			 AT91_PIOB 20 AT91_PERIPH_A AT91_PINCTRL_NONE
-> +			 AT91_PIOB 21 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-> +			 AT91_PIOB 22 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-> +			 AT91_PIOB 23 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
-> +			 AT91_PIOB 24 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
-> +	};
-> +
-> +	usb1 {
-> +		pinctrl_usb_default: usb_default {
-> +			atmel,pins = <AT91_PIOD 15 AT91_PERIPH_GPIO AT91_PINCTRL_NONE
-> +				      AT91_PIOD 16 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
-> +		};
-> +	};
-> +};
-> +
->  &usb1 {
->  	num-ports = <3>;
->  	atmel,vbus-gpio = <0
+Indeed, getvar_get_part_info returns what is returned by
+fastboot_nand_get_part_info (0 on success, 1 on failure) but it should
+return -ENODEV or -EINVAL instead. Since the cause of failure is not
+returned by the nand function, I decided to return -EINVAL to make it
+simple.
+
+Signed-off-by: Federico Fuga <fuga@studiofuga.com>
+---
+ drivers/fastboot/fb_getvar.c | 5 ++++-
+ drivers/fastboot/fb_nand.c   | 2 +-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+index 9c2ce65a4e5bce0da6b18aa1b2818f7db556c528..816ed8a6213b5c1f0948a813c6f6a865a4b47ba8 100644
+--- a/drivers/fastboot/fb_getvar.c
++++ b/drivers/fastboot/fb_getvar.c
+@@ -121,8 +121,11 @@ static int getvar_get_part_info(const char *part_name, char *response,
+ 			*size = disk_part.size * disk_part.blksz;
+ 	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND)) {
+ 		r = fastboot_nand_get_part_info(part_name, &part_info, response);
+-		if (r >= 0 && size)
++		if (r == 0 && size) {
+ 			*size = part_info->size;
++		} else {
++			r = -EINVAL;
++		}
+ 	} else {
+ 		fastboot_fail("this storage is not supported in bootloader", response);
+ 		r = -ENODEV;
+diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
+index afc64fd5280717ae4041ed70268ccc01cfbb0496..9e2f7c01895785a4409eb67ea48abd02a6a6da26 100644
+--- a/drivers/fastboot/fb_nand.c
++++ b/drivers/fastboot/fb_nand.c
+@@ -151,7 +151,7 @@ static lbaint_t fb_nand_sparse_reserve(struct sparse_storage *info,
+  *
+  * @part_name: Named device to lookup
+  * @part_info: Pointer to returned part_info pointer
+- * @response: Pointer to fastboot response buffer
++ * @response: 0 on success, 1 otherwise
+  */
+ int fastboot_nand_get_part_info(const char *part_name,
+ 				struct part_info **part_info, char *response)
+
+---
+base-commit: a517796cfa5d8f4ca2f0c11c78c24a08a102c047
+change-id: 20250128-fastboot_slot_fix-69251576d9bb
+
+Best regards,
+-- 
+Federico Fuga <fuga@studiofuga.com>
+
 
