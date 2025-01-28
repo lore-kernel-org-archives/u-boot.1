@@ -4,64 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4DDCC0218D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 13:51:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D85C0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 13:53:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19FBF81DCD;
-	Tue, 28 Jan 2025 14:51:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 8451781DCD;
+	Tue, 28 Jan 2025 14:52:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="KbkG+HzL";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1738072379;
+	bh=yJjR7U40zH5dz0KnWoLFPHv5T8ShsbyNjJVViW81Sbc=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=wXqK98tWlQ+VVseqdILiFEU/5BOriM5rf3jSf7C2jsULqgj+0hmxj9SLzr1TdDJ4B
+	 lsEtr4V+SpUy21GVmANn3bJtrx3wB7JtcnEGLaKBYLpIRJ6tSd9+SlqIejO3AubTD6
+	 O5sg1PUYTgyhZaTsv407YWm37U05S4uFKt3ytYfYkFTr0uaKhHJq8DcBh/rGttInaH
+	 +9lUiDPyw+yRfPnKFU9vVW95hgq0Ia81Sk01xBrMQmrTos2cdaJOKt00nkzFrtTlsC
+	 +hjxaf5kqxvzRHFG64rB+SHyl5fDAeoNw5G/9EfBTW8rfPriiqjy8iF0QRalIUlhcZ
+	 4uXYserJa3pyQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 252DA81DCF; Tue, 28 Jan 2025 14:51:08 +0100 (CET)
-Received: from out162-62-57-137.mail.qq.com (out162-62-57-137.mail.qq.com
- [162.62.57.137])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B83BC81E3E; Tue, 28 Jan 2025 14:52:57 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A99C81DB4
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 14:51:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDF9081DCD
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 14:52:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1738071956; bh=cYruGSd+4NMx/WD8s0AWMp7i5EXMZWn8E2MJyzGeQs0=;
- h=From:To:Cc:Subject:Date;
- b=KbkG+HzLT73qoC1bgVEVkO8kbnJz1RRGCJugLlsf+3KZKx0r7UMAYEu3qSy032beh
- WtUWuNB3rH7tpoXpi2oBMCa6XZQu89HD04Hw5WEpOS5c60RLE/IeDdlKQLuKICFpsa
- YQDxfKqY0oYNlOKslbrisu99Os9IVQtrx5uNSt/s=
-Received: from ubuntu.localdomain ([112.51.40.31])
- by newxmesmtplogicsvrszb16-1.qq.com (NewEsmtp) with SMTP
- id B769A03B; Tue, 28 Jan 2025 21:45:54 +0800
-X-QQ-mid: xmsmtpt1738071954tumjqld6p
-Message-ID: <tencent_991CA024CC85C92C1FAD9EF4413A36AD6007@qq.com>
-X-QQ-XMAILINFO: NkHKfw09D6j8/7E4bBh9ve8mzx6/mtOn1Ay0I3DNq5zhy4pU8jZuiOP3e/TRHk
- Ts8UUrRnCQtI5g4XFLrG9yEJQAVc5816diUj4rDXzvQnMleYg0bTItpHoD4lr6SPtAFolWg9JlqK
- 8FEIk2DQypGEyHNKqI/Z8Oy5/KtqPHbZ8uMsaFz8WbvqFgcW7qcJC5ArmHhfAEXDTIuzJtsNKy/b
- yy98wtDPWJdWOgIO6PkiOKN/F6CCSNVKi53BqvtYCX6+yUxY68WUNgvijxncfvDFyameeCP1QY+a
- tiFFJdpkQmXEy6LVl4SZqvPHjLzWE1/ja1/A67WYuPv2EioPQWc9PtLfLmeGgjtFwplNUdfaotB2
- OpXG7CczXprJASLaSmRO/rl4O4sij0kt8kAMqsDxTrzMvw7iwQIFCn7ZnpabWW1DYsPCwtildlvq
- rcyK0O7l49U27HTJh9IAIHFR54ADU6YbsjJN7A39UvpqcLmcaTW53jtp83ZR9RlS5AIDqtsmeS1w
- OEeE9JQyNbeg8enOjr67H8+tqe5qcRmZ0HkW8jamw9W6lJWrJGqE7lUG1dRPBem6I0mKZ74BWXB8
- FpTCohbBfjPQBwsBO7qxsAE+QdwPEFRzm5kJ3ng1Ma+9Q083wqQQ67sOyYDZxxSdU4eR/CNBlS8G
- is5Wu6BKIBfRjpeoYSIUOMKkD8qr4Dq85HRr+BPGBAdP47oMOFVn6I7H1CW9x04idYq1PCmNDya5
- 3Sa8U71A0/A0VkXVJ1z4rI+qSC5wQt2u5utugBgfZ3I0iwRB0bixukJxWrv6qucYndcXB+pygSUT
- fadM+yMJoqRhYSrmk4BELEsy3/QebbQyftH5JrNK2CQ1x8clxtQQRJqICwqTYFeI1R84MRTgIFXF
- OJHFQk53f4Q00EPrHtR37y+hJ1GEu3oG+LV8/M/l3Z4RulZOhv7fZBADt8bsq+c9DadKULq0q5SH
- aCKTpV+3EKn+5t5a0WbVO7VGDU8xMHjq2vYx4blH9ulM0tPda2KqXNBZ6/kEfofVoyKnpy5Jg=
-X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
-From: 1425075683@qq.com
-To: Liya Huang <1425075683@qq.com>
-Cc: Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH] arm: Other boards should not show this option in menuconfig
-Date: Tue, 28 Jan 2025 21:45:52 +0800
-X-OQ-MSGID: <20250128134552.197665-1-1425075683@qq.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="dOb/Gnd/"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id C159010382D0D; Tue, 28 Jan 2025 14:52:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1738072375;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=yJjR7U40zH5dz0KnWoLFPHv5T8ShsbyNjJVViW81Sbc=;
+ b=dOb/Gnd/ckFmiFLCJn937oh/wrFFa5HM6gNMk+oX1Urq3qK6t8XcQa9X+NgXCCGxBIlU5C
+ 4xb23O1iVzo2ZZJAYbqSizy88B6iW+aUySDdLZrPMT+AKmNXaZsBuZWZFzgMrHxHLiTbLf
+ r7j5Dk7jl/EUoL5k9TIJ6wYNjHAEAT9VffKJqQLPLbAiy02BBDkm8M+MIFHPPGgsuPu5o5
+ 5KFm5TGvrOw3OiviMeJnl1irl1b9Jlt1Tt46XwJ6Btr8wsI3sFk5JTqipxagZUPxume4yd
+ ySJSf8cixI6inzy26jQ2iNuINavKul6cbwfezBi+rbOCPUEXMBddsnWsMzrGQQ==
+From: Heiko Schocher <hs@denx.de>
+To: u-boot@lists.denx.de
+Cc: Heiko Schocher <hs@denx.de>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 1/2] doc: remove redundant leds bindings
+Date: Tue, 28 Jan 2025 14:52:45 +0100
+Message-Id: <20250128135246.74838-2-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20250128135246.74838-1-hs@denx.de>
+References: <20250128135246.74838-1-hs@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,34 +80,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Liya Huang <1425075683@qq.com>
+remove file doc/device-tree-bindings/leds/common.txt
+as we have this now already in
+dts/upstream/include/dt-bindings/leds/common.h
+which is imported from linux.
 
-When I was using STM32 board,
-this option appeared in menuconfig and caused me trouble.
-I found that arch/arm/mach-imx/imx8/Kconfig
-already excludes using if endif.
-I don't know why other boards are displayed.
-I used the following command:
-    export CROSS_COMPILE=arm-none-eabi- ARCH=arm
-    make stm32h750-art-pi_defconfig
-    make menuconfig
+Signed-off-by: Heiko Schocher <hs@denx.de>
 
-Signed-off-by: Liya Huang <1425075683@qq.com>
 ---
 
- board/siemens/common/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v4:
+- new in version 4
 
-diff --git a/board/siemens/common/Kconfig b/board/siemens/common/Kconfig
-index 4ae12b1c973..800eb8dd1c1 100644
---- a/board/siemens/common/Kconfig
-+++ b/board/siemens/common/Kconfig
-@@ -3,4 +3,5 @@ config FACTORYSET
- 
- config DDR_SI_TEST
- 	bool "DDR signal integrity test implementations"
-+	depends on ARCH_IMX8
- 	default y
+ doc/device-tree-bindings/leds/common.txt | 23 -----------------------
+ 1 file changed, 23 deletions(-)
+ delete mode 100644 doc/device-tree-bindings/leds/common.txt
+
+diff --git a/doc/device-tree-bindings/leds/common.txt b/doc/device-tree-bindings/leds/common.txt
+deleted file mode 100644
+index 2d88816dd55..00000000000
+--- a/doc/device-tree-bindings/leds/common.txt
++++ /dev/null
+@@ -1,23 +0,0 @@
+-Common leds properties.
+-
+-Optional properties for child nodes:
+-- label : The label for this LED.  If omitted, the label is
+-  taken from the node name (excluding the unit address).
+-
+-- linux,default-trigger :  This parameter, if present, is a
+-    string defining the trigger assigned to the LED.  Current triggers are:
+-     "backlight" - LED will act as a back-light, controlled by the framebuffer
+-		   system
+-     "default-on" - LED will turn on (but for leds-gpio see "default-state"
+-		    property in Documentation/devicetree/bindings/gpio/led.txt)
+-     "heartbeat" - LED "double" flashes at a load average based rate
+-     "ide-disk" - LED indicates disk activity
+-     "timer" - LED flashes at a fixed, configurable rate
+-
+-Examples:
+-
+-system-status {
+-	label = "Status";
+-	linux,default-trigger = "heartbeat";
+-	...
+-};
 -- 
-2.25.1
+2.20.1
 
