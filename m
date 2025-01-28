@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FA8C0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 10:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B73F7C0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 10:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A330081DA8;
-	Tue, 28 Jan 2025 11:20:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0529481DD6;
+	Tue, 28 Jan 2025 11:20:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vehJIa2e";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VxieloCJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74B3F81D42; Tue, 28 Jan 2025 11:20:10 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id C228281D42; Tue, 28 Jan 2025 11:20:10 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6A0781D5A
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 11:20:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90274819B1
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 11:20:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43690d4605dso36335555e9.0
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 02:20:07 -0800 (PST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-436326dcb1cso36326345e9.0
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 02:20:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738059607; x=1738664407; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738059608; x=1738664408; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BqWBxBeSBN85uoyU0epbXFnDKcvIpLM2onBGrSfc4vg=;
- b=vehJIa2eEzlk1fnQMCYu+iQhmYQH9Je4igXoDWQAXZ4n2gOunoZaGQphO8FoG10UWu
- Ngj91iDbINccGT0rnxO/5NEQOlitd5maXaCGi1sg7HWuRvYtp386g2eJKYQXK5Gfyffa
- rftnMLSaNJFVMgtvYWO1RH4o2Tw9m4mwQMyEBHvMIhTyovHy9wi3HOCqYo9RrBnNGs91
- PMGD45QYftjW0fBOodFdz7XRif/Aa0abwf9dPPMjtNVc8JQ58ntW57BzcYU0CWoDPxov
- GT7TSlmGVsfwz4sdR2aRVU8WzgS8KNCgFwfUDQrnrg1MoE0jFzLfjvxWr7h+O5F/wM1x
- tVnA==
+ bh=fASuFHKqVp07Z9xdr3bFH4y39Xbm1J0R9QOhNN8bHWA=;
+ b=VxieloCJZb/C4ggcZsamG7FUXZPcTgxe332erDvCR31p4KaXk2ZpMUnn75GiOk2rGI
+ j9XT1aBa1zMrMPN9qAosv6zX5QkN0z/xaTIlEAGFBbxbj9GipDDNLvz5peFDZJwFq53w
+ f3OupLq05vksv2pi7vKFaHtennxOVLiw8jUoazQt+cufzcuj5SsoXsvffuhs7QBoR8Fb
+ tiWslBiRWrFIV0VkWtj+1j/1YYl7m6UvQoOzAaeYzK+q/JHQfcV5tNeaByVJRjKA4OIV
+ mcDNR20sF5ga9jzsPzN4RBNhPvLJGvE7niBzVIqUZP1oOGiFRfAesvB4DioTSVrflxCZ
+ 5l2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738059607; x=1738664407;
+ d=1e100.net; s=20230601; t=1738059608; x=1738664408;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BqWBxBeSBN85uoyU0epbXFnDKcvIpLM2onBGrSfc4vg=;
- b=OTltHAG10kVeifjZ+Swb09KCmXQpjUXWAASX9eUpMpgyoyO7QryJVJgJjF9Sk2KrKW
- uD+FmsEDetZkdfPTiPCygXauwiEa6DRA+2VaIImzDNcwVGqIHLJnAeki5NOcnvHI5/1x
- JREYIKrPtRhOVt/nXjrp4w43ggeS1EhMbtgquSUNUjAhInF4L4C44SZuc8wCBnwdnYWO
- NVYiLdRIhKu2EVqxCBQAOpzu1QkCEHH6ELET2qfk0YHU2CeL1ImWnwFhH9arHacIPOEZ
- uS6o4D1PRABXQcOIyf+KXtcg5om1eQI4PfrcAhIX1Jpdfe2vb3dSGLRxQGYMs3zsSRH7
- SVrQ==
-X-Gm-Message-State: AOJu0YzHQEiY/yepSnSPEFyPkq0EzIw1F3vQMXcRhcRi7G+P0Sjjm2jh
- Xx6crlBTlqYClEoEOSCTgtn1ar/jX+mtgXl9CJN/nd8BdZHg7qypmSR/TdQT0pOhrnXPQgSUOTV
- 40/TX6Q==
-X-Gm-Gg: ASbGncsSdJZjHbFJUDmsnYY+LkE982zskDHvqJln3U25VE7HEWY47sOo9QQBdbyiUIy
- idOpQP1gCBIMm+/kTpeoeDjeMJ0pUIuaWqMfC49EcgxZR5ULFQFLlGxWQMfyMZ/oXqrXuaO5q9t
- VqZd3Mx2na3ASCVz9Ob351vbjO0J61jqLIVc1b4jZxoRYDW9dwCJr7UBUGpgBXo9/8JVldQ8UBq
- 66z8Knfi2Ch8VW9rZP8MQ/faOtWJVRbLE3LV3sguYlnTDUbU8UuZCgdw452MPl0Mj9236jyfIvk
- xQWA17nSbmTAk9s43Pt2ZVow2/vjqqwYAQ==
-X-Google-Smtp-Source: AGHT+IGACiwijhxUeIJNRHrYLgKaffT/tX4+z1apZtRX9F7bSqlcrTEI4tFTKkORwjiW+cvDanPlDA==
-X-Received: by 2002:a05:600c:3149:b0:436:5fc9:30ba with SMTP id
- 5b1f17b1804b1-43891441f57mr423818165e9.29.1738059606927; 
- Tue, 28 Jan 2025 02:20:06 -0800 (PST)
+ bh=fASuFHKqVp07Z9xdr3bFH4y39Xbm1J0R9QOhNN8bHWA=;
+ b=dsFHjASSf5G+WmhyIERh5Ma/ZA6gpwaIrlTj4+dyF4onKl7Snm9L8ZTKLdNkplo3lz
+ DsMF1nT6jfftoOvB3vm1L6mNBqZZispSCqCoAIn1rh3dFmCVvXEZSV0Olv/k5VfS+oci
+ iGED7VgUCshGLZX19FATakGOoVXOeilBHvP4T16WB1kycwalGe78K3EZ06gbihFwSCJd
+ hPS0mZTnVNSFo+6zOdvb0WcLI7naEdMR28PZ6GA54/szKeBWj0xOL7mLsjvwNXjzrWFg
+ IuEUYTu2BPZGF7HvWvrWiXDQzawFwb5+G6c5ojUXraO0KIop9PKTRgcJTlNOO1d/1chL
+ +RTg==
+X-Gm-Message-State: AOJu0YzFvxkqQy74CCOplLX8/VYzE9DduuWHuwmzxUM8soD260qLB7yX
+ yI6AdOFRsAiH3lkZ7NzcljxstBG3tFElM9uT3r4qQBYdRH1F2Iy6hmZ+pZ4KJPlkem3G9sNOAdZ
+ EZTepLg==
+X-Gm-Gg: ASbGncvM1P193CWo3+HY2ia5ZlB4u5vECS4gUUSpiywBwAM+E9Pz1DNgRg4Pe88sTQZ
+ 3ikGz32Y48AHLw9OCZIGXQbdCZWWTXp+i+PTVgjURoTWglE7+/34GjGtCqOBtJTq6m/wVAQTI2+
+ y+mvkWaaeg+fldATHpl+HikpksIU+ZMlGDOpJ/JvE+jr2eiWszsiPJGB8b3dD7HuacmRSxLem9O
+ MTIuJk69FWmNvrAKaK7krLeVIEtbZgt0VEqYCwtI+RLmO/ihSpteum3eO9kwSfSbvPjv4yQmIgU
+ kghx1SzmHJn85AqWhgBYrS8=
+X-Google-Smtp-Source: AGHT+IEqPAYJWLKB/FZyZwQt2EI14MOvYFtsCjaIxhK6vK6vStjWQT6kVy7kv/tlsVwe8r5d2SyIHQ==
+X-Received: by 2002:a05:600c:1d07:b0:436:488f:50a with SMTP id
+ 5b1f17b1804b1-438913ef4b7mr417542515e9.17.1738059607762; 
+ Tue, 28 Jan 2025 02:20:07 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:45e:43e2:ed61:42fe])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd4b9977sm164651245e9.25.2025.01.28.02.20.06
+ 5b1f17b1804b1-438bd4b9977sm164651245e9.25.2025.01.28.02.20.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 02:20:06 -0800 (PST)
+ Tue, 28 Jan 2025 02:20:07 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [RFC PATCH v2 2/3] efi_loader: optimize efi_init_obj_list() with
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [RFC PATCH v2 3/3] usb: scan multiple buses simultaneously with
  coroutines
-Date: Tue, 28 Jan 2025 11:19:16 +0100
-Message-ID: <d4c18cf76488004c55af633ec87ac0c12550d399.1738059345.git.jerome.forissier@linaro.org>
+Date: Tue, 28 Jan 2025 11:19:17 +0100
+Message-ID: <58d6721203ea81b9c20f162ef40f79bc73243a42.1738059345.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1738059345.git.jerome.forissier@linaro.org>
 References: <cover.1738059345.git.jerome.forissier@linaro.org>
@@ -101,240 +104,275 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When COROUTINES is enabled, schedule efi_disks_register() and
-efi_tcg2_register() as two coroutines in efi_init_obj_list() instead of
-invoking them sequentially. The voluntary yield point is introduced
-inside udelay() which is called frequently as a result of each function
-polling the hardware. This allows the two coroutines to make progress
-simultaneously and reduce the wall clock time required by
-efi_init_obj_list().
+Use the coroutines framework to scan USB buses in parallel for better
+performance. Tested on arm64 QEMU on a somewhat contrived example
+(4 USB buses, each with one audio device, one keyboard, one mouse and
+one tablet).
 
-Tested on Kria KV260 with a microSD card inserted with the "printenv
--e" command. With COROUTINES disabled, efi_init_obj_list() completes in
-2821 ms on average (2825, 2822, 2817). With COROUTINES enabled, it
-takes 2265 ms (2262, 2260, 2272). That is a reduction of 556 ms which
-is not bad at all considering that measured separately,
-efi_tcg2_register() takes ~825 ms and efi_disks_register() needs ~600
-ms, so assuming they would overlap perfectly one can expect a 600 ms
-improvement at best.
+$ make qemu_arm64_defconfig
+$ make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
+$ qemu-system-aarch64 -M virt -nographic -cpu max -bios u-boot.bin \
+    $(for i in {1..4}; do echo -device qemu-xhci,id=xhci$i \
+        -device\ usb-{audio,kbd,mouse,tablet},bus=xhci$i.0; \
+    done)
 
-The code size penalty for this improvement is 1340 bytes.
+The time spent in usb_init() is reported on the console and shows a
+significant improvement with COROUTINES enabled.
+
+** Without COROUTINES
+
+ Bus xhci_pci: Register 8001040 NbrPorts 8
+ Starting the controller
+ USB XHCI 1.00
+ Bus xhci_pci: Register 8001040 NbrPorts 8
+ Starting the controller
+ USB XHCI 1.00
+ Bus xhci_pci: Register 8001040 NbrPorts 8
+ Starting the controller
+ USB XHCI 1.00
+ Bus xhci_pci: Register 8001040 NbrPorts 8
+ Starting the controller
+ USB XHCI 1.00
+ scanning bus xhci_pci for devices... 6 USB Device(s) found
+ scanning bus xhci_pci for devices... 6 USB Device(s) found
+ scanning bus xhci_pci for devices... 6 USB Device(s) found
+ scanning bus xhci_pci for devices... 6 USB Device(s) found
+ USB: 4 bus(es) scanned in 5873 ms
+
+** With COROUTINES
+
+ Bus xhci_pci: Register 8001040 NbrPorts 8
+ Starting the controller
+ USB XHCI 1.00
+ Bus xhci_pci: Register 8001040 NbrPorts 8
+ Starting the controller
+ USB XHCI 1.00
+ Bus xhci_pci: Register 8001040 NbrPorts 8
+ Starting the controller
+ USB XHCI 1.00
+ Bus xhci_pci: Register 8001040 NbrPorts 8
+ Starting the controller
+ USB XHCI 1.00
+ Scanning 4 USB bus(es)... done
+ Bus xhci_pci: 6 USB device(s) found
+ Bus xhci_pci: 6 USB device(s) found
+ Bus xhci_pci: 6 USB device(s) found
+ Bus xhci_pci: 6 USB device(s) found
+ USB: 4 bus(es) scanned in 2213 ms
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- lib/efi_loader/efi_setup.c | 113 +++++++++++++++++++++++++++++++++++--
- lib/time.c                 |  14 ++++-
- 2 files changed, 122 insertions(+), 5 deletions(-)
+ drivers/usb/host/usb-uclass.c | 152 +++++++++++++++++++++++++++++++++-
+ 1 file changed, 149 insertions(+), 3 deletions(-)
 
-diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index aa59bc7779d..94160f4bd86 100644
---- a/lib/efi_loader/efi_setup.c
-+++ b/lib/efi_loader/efi_setup.c
-@@ -7,10 +7,12 @@
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index bfec303e7af..3104efe7f9e 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -9,6 +9,7 @@
+ #define LOG_CATEGORY UCLASS_USB
  
- #define LOG_CATEGORY LOGC_EFI
- 
+ #include <bootdev.h>
 +#include <coroutines.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
+ #include <dm.h>
+ #include <errno.h>
  #include <log.h>
- #include <asm-generic/unaligned.h>
-+#include <stdlib.h>
+@@ -18,6 +19,8 @@
+ #include <dm/lists.h>
+ #include <dm/uclass-internal.h>
  
- #define OBJ_LIST_NOT_INITIALIZED 1
++#include <time.h>
++
+ static bool asynch_allowed;
  
-@@ -208,6 +210,46 @@ out:
- 	return -1;
+ struct usb_uclass_priv {
+@@ -221,6 +224,40 @@ int usb_stop(void)
+ 	return err;
  }
  
++static int nbus;
++
 +#if CONFIG_IS_ENABLED(COROUTINES)
-+
-+static void efi_disks_register_co(void)
++static void usb_scan_bus(struct udevice *bus, bool recurse)
 +{
-+	efi_status_t ret;
++	struct usb_bus_priv *priv;
++	struct udevice *dev;
++	int ret;
 +
-+	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
-+		goto out;
++	priv = dev_get_uclass_priv(bus);
 +
-+	/*
-+	 * Probe block devices to find the ESP.
-+	 * efi_disks_register() must be called before efi_init_variables().
-+	 */
-+	ret = efi_disks_register();
-+	if (ret != EFI_SUCCESS)
-+		efi_obj_list_initialized = ret;
-+out:
-+	co_exit();
++	assert(recurse);	/* TODO: Support non-recusive */
++
++	debug("\n");
++	ret = usb_scan_device(bus, 0, USB_SPEED_FULL, &dev);
++	if (ret)
++		printf("Scanning bus %s failed, error %d\n", bus->name, ret);
 +}
 +
-+static void efi_tcg2_register_co(void)
++static void usb_report_devices(struct uclass *uc)
 +{
-+	efi_status_t ret = EFI_SUCCESS;
++	struct usb_bus_priv *priv;
++	struct udevice *bus;
 +
-+	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
-+		goto out;
-+
-+	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
-+		ret = efi_tcg2_register();
-+		if (ret != EFI_SUCCESS)
-+			efi_obj_list_initialized = ret;
++	uclass_foreach_dev(bus, uc) {
++		priv = dev_get_uclass_priv(bus);
++		printf("Bus %s: ", bus->name);
++		if (priv->next_addr == 0)
++			printf("No USB device found\n");
++		else
++			printf("%d USB device(s) found\n", priv->next_addr);
 +	}
-+out:
-+	co_exit();
 +}
++#else
+ static void usb_scan_bus(struct udevice *bus, bool recurse)
+ {
+ 	struct usb_bus_priv *priv;
+@@ -240,7 +277,81 @@ static void usb_scan_bus(struct udevice *bus, bool recurse)
+ 		printf("No USB Device found\n");
+ 	else
+ 		printf("%d USB Device(s) found\n", priv->next_addr);
++	nbus++;
+ }
++#endif
 +
++#if CONFIG_IS_ENABLED(COROUTINES)
 +extern int udelay_yield;
 +
-+#endif /* COROUTINES */
++static void usb_scan_bus_co(void)
++{
++	usb_scan_bus((struct udevice *)co_get_arg(), true);
++	co_exit();
++}
 +
- /**
-  * efi_init_obj_list() - Initialize and populate EFI object list
-  *
-@@ -216,6 +258,12 @@ out:
- efi_status_t efi_init_obj_list(void)
- {
- 	efi_status_t ret = EFI_SUCCESS;
-+#if CONFIG_IS_ENABLED(COROUTINES)
-+	struct co_stack *stk = NULL;
-+	struct co *main_co = NULL;
-+	struct co *co1 = NULL;
-+	struct co *co2 = NULL;
-+#endif
- 
- 	/* Initialize once only */
- 	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
-@@ -224,6 +272,53 @@ efi_status_t efi_init_obj_list(void)
- 	/* Set up console modes */
- 	efi_setup_console_size();
- 
-+#if CONFIG_IS_ENABLED(COROUTINES)
-+	main_co = co_create(NULL, NULL, 0, NULL, NULL);
++static struct co_stack *stk;
++static struct co *main_co;
++static struct co **co;
++static int co_sz = 8;
++
++static int add_usb_scan_bus_co(struct udevice *bus)
++{
++	if (!co) {
++		co = malloc(co_sz * sizeof(*co));
++		if (!co)
++			return -ENOMEM;
++	}
++	if (nbus == co_sz) {
++		struct co **nco;
++
++		co_sz *= 2;
++		nco = realloc(co, co_sz * sizeof(*co));
++		if (!nco)
++			return -ENOMEM;
++		co = nco;
++	}
 +	if (!main_co) {
-+		ret = EFI_OUT_OF_RESOURCES;
-+		goto out;
++		main_co = co_create(NULL, NULL, 0, NULL, NULL);
++		if (!main_co)
++			return -ENOMEM;
 +	}
-+
-+	stk = co_stack_new(8192);
 +	if (!stk) {
-+		ret = EFI_OUT_OF_RESOURCES;
-+		goto out;
++		stk = co_stack_new(32768);
++		if (!stk)
++			return -ENOMEM;
 +	}
++	co[nbus] = co_create(main_co, stk, 0, usb_scan_bus_co, bus);
++	if (!co[nbus])
++		return -ENOMEM;
++	nbus++;
++	return 0;
++}
 +
-+	co1 = co_create(main_co, stk, 0, efi_disks_register_co, NULL);
-+	if (!co1) {
-+		ret = EFI_OUT_OF_RESOURCES;
-+		goto out;
++static void usb_scan_cleanup(void)
++{
++	int i;
++
++	for (i = 0; i < nbus; i++) {
++		co_destroy(co[i]);
++		co[i] = NULL;
 +	}
-+
-+	co2 = co_create(main_co, stk, 0, efi_tcg2_register_co, NULL);
-+	if (!co2) {
-+		ret = EFI_OUT_OF_RESOURCES;
-+		goto out;
-+	}
-+
-+	udelay_yield = 0xCAFEDECA;
-+	do {
-+		if (!co1->done)
-+			co_resume(co1);
-+		if (!co2->done)
-+			co_resume(co2);
-+	} while (!(co1->done && co2->done));
-+	udelay_yield = 0;
-+
-+	co_stack_destroy(stk);
++	nbus = 0;
 +	co_destroy(main_co);
-+	co_destroy(co1);
-+	co_destroy(co2);
++	main_co = NULL;
++	co_stack_destroy(stk);
 +	stk = NULL;
-+	main_co = co1 = co2 = NULL;
-+
-+	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED) {
-+		/* Some kind of error was saved by a coroutine */
-+		ret = efi_obj_list_initialized;
-+		goto out;
-+	}
++}
 +#else
- 	/*
- 	 * Probe block devices to find the ESP.
- 	 * efi_disks_register() must be called before efi_init_variables().
-@@ -232,6 +327,13 @@ efi_status_t efi_init_obj_list(void)
- 	if (ret != EFI_SUCCESS)
- 		goto out;
- 
-+	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
-+		ret = efi_tcg2_register();
-+		if (ret != EFI_SUCCESS)
-+			efi_obj_list_initialized = ret;
-+	}
-+#endif
++static int add_usb_scan_bus_co(struct udevice *bus)
++{
++	return 0;
++}
 +
- 	/* Initialize variable services */
- 	ret = efi_init_variables();
- 	if (ret != EFI_SUCCESS)
-@@ -272,10 +374,6 @@ efi_status_t efi_init_obj_list(void)
++static void usb_scan_cleanup(void)
++{
++}
++#endif
+ 
+ static void remove_inactive_children(struct uclass *uc, struct udevice *bus)
+ {
+@@ -289,6 +400,7 @@ static int usb_probe_companion(struct udevice *bus)
+ 
+ int usb_init(void)
+ {
++	unsigned long t0 = timer_get_us();
+ 	int controllers_initialized = 0;
+ 	struct usb_uclass_priv *uc_priv;
+ 	struct usb_bus_priv *priv;
+@@ -355,10 +467,40 @@ int usb_init(void)
+ 			continue;
+ 
+ 		priv = dev_get_uclass_priv(bus);
+-		if (!priv->companion)
+-			usb_scan_bus(bus, true);
++		if (!priv->companion) {
++			if (CONFIG_IS_ENABLED(COROUTINES)) {
++				ret = add_usb_scan_bus_co(bus);
++				if (ret)
++					goto out;
++			} else {
++				usb_scan_bus(bus, true);
++			}
++		}
  	}
  
- 	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL)) {
--		ret = efi_tcg2_register();
--		if (ret != EFI_SUCCESS)
--			goto out;
--
- 		ret = efi_tcg2_do_initial_measurement();
- 		if (ret == EFI_SECURITY_VIOLATION)
- 			goto out;
-@@ -350,6 +448,13 @@ efi_status_t efi_init_obj_list(void)
- 	    !IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK_EARLY))
- 		ret = efi_launch_capsules();
- out:
 +#if CONFIG_IS_ENABLED(COROUTINES)
-+	co_stack_destroy(stk);
-+	co_destroy(main_co);
-+	co_destroy(co1);
-+	co_destroy(co2);
- 	efi_obj_list_initialized = ret;
++	{
++		bool done;
++		int i;
++
++		printf("Scanning %d USB bus(es)... ", nbus);
++		udelay_yield = 0xCAFEDECA;
++		do {
++			done = true;
++			for (i = 0; i < nbus; i++) {
++				if (!co[i]->done) {
++					done = false;
++					co_resume(co[i]);
++				}
++			}
++		} while (!done);
++		udelay_yield = 0;
++		printf("done\n");
++
++		usb_report_devices(uc);
++	}
 +#endif
 +
- 	return ret;
+ 	/*
+ 	 * Now that the primary controllers have been scanned and have handed
+ 	 * over any devices they do not understand to their companions, scan
+@@ -388,7 +530,11 @@ int usb_init(void)
+ 	/* if we were not able to find at least one working bus, bail out */
+ 	if (controllers_initialized == 0)
+ 		printf("No USB controllers found\n");
+-
++out:
++	if (nbus)
++		printf("USB: %d bus(es) scanned in %ld ms\n", nbus,
++		       (timer_get_us() - t0) / 1000);
++	usb_scan_cleanup();
+ 	return usb_started ? 0 : -ENOENT;
  }
-diff --git a/lib/time.c b/lib/time.c
-index d88edafb196..c11288102fe 100644
---- a/lib/time.c
-+++ b/lib/time.c
-@@ -17,6 +17,7 @@
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <linux/delay.h>
-+#include <coroutines.h>
  
- #ifndef CFG_WD_PERIOD
- # define CFG_WD_PERIOD	(10 * 1000 * 1000)	/* 10 seconds default */
-@@ -190,6 +191,8 @@ void __weak __udelay(unsigned long usec)
- 
- /* ------------------------------------------------------------------------- */
- 
-+int udelay_yield;
-+
- void udelay(unsigned long usec)
- {
- 	ulong kv;
-@@ -197,7 +200,16 @@ void udelay(unsigned long usec)
- 	do {
- 		schedule();
- 		kv = usec > CFG_WD_PERIOD ? CFG_WD_PERIOD : usec;
--		__udelay(kv);
-+		if (CONFIG_IS_ENABLED(COROUTINES) &&
-+		    udelay_yield == 0xCAFEDECA) {
-+			ulong t0 = timer_get_us();
-+			do {
-+				co_yield();
-+				__udelay(10);
-+			} while (timer_get_us() < t0 + kv);
-+		} else {
-+			__udelay(kv);
-+		}
- 		usec -= kv;
- 	} while(usec);
- }
 -- 
 2.43.0
 
