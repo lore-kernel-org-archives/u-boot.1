@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 354C2C0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 09:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57BBEC0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 09:40:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9779881B4B;
-	Tue, 28 Jan 2025 10:27:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=studiofuga.com
+	by phobos.denx.de (Postfix) with ESMTP id C73E681B4B;
+	Tue, 28 Jan 2025 10:40:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=studiofuga.com header.i=@studiofuga.com header.b="NJyLG6tf";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="y2F/RVmT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6B9781BC0; Tue, 28 Jan 2025 10:27:29 +0100 (CET)
-Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
- [83.166.143.173])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6DA2581BC0; Tue, 28 Jan 2025 10:40:06 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABEA7819B1
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:27:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=studiofuga.com
+ by phobos.denx.de (Postfix) with ESMTPS id 56FC8819B1
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:40:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fuga@studiofuga.com
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Yj0LR2RjSzFxM
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:27:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=studiofuga.com;
- s=20220517; t=1738056447;
- bh=UTWjL2sgULnnSguKS0NYHclwTNCQ+nLwNVNzTWB7uHo=;
- h=Date:To:From:Subject:From;
- b=NJyLG6tf3VZFkPV3F01dVkqn5akkPS0ClNfcGzOxcfTu3BeJOK1WycRBkHPcs1vJk
- dBVhU1ltbJvmD4sySWDgb65WltGiBPC6lUuh8OaUYqzQ1upJ0WZYFqcUTsKBaexQCl
- e3XjK3L7wvyCB+SWEmbJnz73P2Wkfg/YD0I/CBP8=
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Yj0LQ6CQnzB4R
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:27:26 +0100 (CET)
-Message-ID: <906b4d88-39c6-4e85-b9b1-62527a87d640@studiofuga.com>
-Date: Tue, 28 Jan 2025 10:27:26 +0100
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-38be3bfb045so4259839f8f.0
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 01:40:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738057201; x=1738662001;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XJsXYEz8EhfTr6dDIbRXyalVLvLtmdGoDIEaI+YeU8Y=;
+ b=y2F/RVmTtl/E+OMYO8Xg/AQPqN9SWaHw+2G5iYEeOwuld7XWWPKtaHvtq/thwbeYPh
+ QgPgbcMOjbHezXs8G8kRlFUt6naOqWYpBhJGAq6wAJF38rEWqvyoA/PkmkgyFhVRYX59
+ /66h5hO2/IkmX3PSeGinAVDrg1wP9gglImidAFKNMXtdVfbjr1h+zeLbhczG/O8segc4
+ ZqPptA08lOuKWlD25s5I/7X52ixHKODYt1YdwpnJz122AWZH6PWao0zt8Ez0ClKerQh1
+ WliE6bPZbUf9QtZRYvInjAvp637Vl9DVV+D4SQQlTgRVE+yL1WfAGRExgUYWb0NDveiQ
+ XPdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738057201; x=1738662001;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XJsXYEz8EhfTr6dDIbRXyalVLvLtmdGoDIEaI+YeU8Y=;
+ b=EfZTiCWYlMiUgm0fqAyixkg5C8plckqbRDaNWbuDqwbdfLJWQhjHQchTf3EcF5M6QI
+ R8yrlFw4NEx97994naFYqxO6c+Ck4dsLro6rZo56N7uA5eN+pkhPlP3xwG5GXog5/nKi
+ MffsoIItFqHqn6GKre01n5g+k3SXjM+aaiHJ8MxGvnYl6VmTbS5SDsDed107yOpx06YI
+ a/wpSXrt2yr5DqXw/7neXFSoZ1+vajxa33Vle9UA3CVQn0de7JhQLPnNSwpzagySYKSv
+ bzgNxuy5OYMc1ieqveArQ3IGvg6KrjXrhnpx4zWZVeEwArQ9x6s9RaJh8U8+jB8xz4v+
+ 4irA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEC0qK5V5rLkSq89/zt/pj2bkyYZb1Yu3fQrR0Jq2KuLO5uulschfac8n9rnx6cBqgTkBCRbg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyto2HQHOVowvoujAjDjrplIX5Pl/Yc3c5mpRrgh5qop3rgYVsJ
+ HC3Y8gRVYbFeHJV9h4Y+1RitNAhPaROVCsHLbtxvn7WuhA9JCzYLiOD9ePOuyOc=
+X-Gm-Gg: ASbGncudfQwQIp+5Xo+CRiYWjcN2qTT47w3wQSuF4S1bo0W3tU4csJyjNPkKjJYWweJ
+ Jir2fBxpBO4/Fe4uBrPft6o8uPdQ1Jim2stdBCd4Md6zXpflfobOwPHQTQ1sggZGowbw1K9z931
+ bwe/PpwH4kDz6HjsAF8n+ECmRwULiHY6H90z54PfdVK+6BV/Twxap9yc6yjpc7Fg3+Ll1Bw087/
+ jMP7EQAb3sU+E7s8Qdm8LLq8zfT9UCEYJ8ZLzrxGCCu150tVOQHLCnvtimfNqvuMpiYLH8fJX2x
+ OYa6O7guyNnKd/CuFklbXtQT
+X-Google-Smtp-Source: AGHT+IHMqqCIkFEYbigNMuLOfEEdgvbOa59wuQOMJDB0L5EJe8kc+Q0mbrzUvSKnEzQsx1kk7S1vcw==
+X-Received: by 2002:a05:6000:1f8e:b0:386:4a16:dadb with SMTP id
+ ffacd0b85a97d-38c49a271famr2194350f8f.11.1738057200880; 
+ Tue, 28 Jan 2025 01:40:00 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38c2a1bb0d4sm13926973f8f.69.2025.01.28.01.40.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Jan 2025 01:40:00 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: hs@denx.de, Marek Vasut <marex@denx.de>, Michael Ferolito
+ <michaelsunn101@gmail.com>, u-boot@lists.denx.de
+Cc: Kyungmin Park <kyungmin.park@samsung.com>
+Subject: Re: [PATCH v2] USB: Fix NULLPTR dereference when serial# is unset
+In-Reply-To: <c502e02c-cb64-f0f5-82d0-9e8277fb956d@denx.de>
+References: <20250128003010.971175-1-michaelsunn101@gmail.com>
+ <2f367a3a-659b-4fe5-be34-e270ee941866@denx.de>
+ <87wmefqp5b.fsf@baylibre.com>
+ <c502e02c-cb64-f0f5-82d0-9e8277fb956d@denx.de>
+Date: Tue, 28 Jan 2025 10:39:59 +0100
+Message-ID: <87r04nqntc.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: u-boot@lists.denx.de
-From: Federico Fuga <fuga@studiofuga.com>
-Subject: [PATCH][V2] Fix fastboot handling of partitions when no slots are
- supported
-Autocrypt: addr=fuga@studiofuga.com; keydata=
- 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
- 3Z10R+iQ3XwjCMCTFTN+4NBJ1U0=
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,80 +100,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The fastboot module has a bug that prevents some command to work
-properly on devices that haven't an Android-like partition scheme, that
-is, just one spl and one kernel partition, instead of the redundant
-scheme with _a and _b slots.
+Hi Heiko,
 
-This is the schema of our NAND storage (board is based on an AllWinner
-A33 sunxi chip):
+On mar., janv. 28, 2025 at 10:17, Heiko Schocher <hs@denx.de> wrote:
 
-=> mtdparts
+> Hello Mattijs,
+>
+> On 28.01.25 10:11, Mattijs Korpershoek wrote:
+>> Hi Michael,
+>> 
+>> Thank you for the patch.
+>> 
+>> On mar., janv. 28, 2025 at 02:49, Marek Vasut <marex@denx.de> wrote:
+>> 
+>>> On 1/28/25 1:30 AM, Michael Ferolito wrote:
+>>>> The current behaviour of this function will dereference a null pointer
+>>>> if the serial# environment variable is unset. This was discovered on a
+>>>> board where U-Boot did not have access to the first 256MB of ram,
+>>>> resulting in a board crash.
+>>>> In the event that U-Boot has full access to memory, it will still read
+>>>> from address 0, which is probably not optimal.
+>>>> This simple check is enough to fix it
+>>>>
+>>>> Signed-off-by: Michael Ferolito <michaelsunn101@gmail.com>
+>>>> Cc: Marek Vasut <marex@denx.de>
+>>>> Cc: Heiko Schocher <hs@denx.de>
+>>>> Cc: Kyungmin Park <kyungmin.park@samsung.com>
+>>> The subject tag is "usb: gadget: g_dnl:" instead of "USB:" , with that
+>>> fixed:
+>>>
+>>> Reviewed-by: Marek Vasut <marex@denx.de>
+>> 
+>> Agreed with Marek on this. Please add:
+>> 
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> 
+>> As well.
+>> 
+>> Marek, since this is gadget, can this go through my tree?
+>> In that case, Michael, I can fix up the subject when applying (to avoid
+>> you sending a v2)
+>
+> There is already a v4, see:
+>
+> https://lists.denx.de/pipermail/u-boot/2025-January/578746.html
 
-device nand0 <1c03000.nand>, # parts = 4
-  #: name         size            net size        offset mask_flags
-  0: spl          0x00020000      0x00020000      0x00000000      0
-  1: uboot        0x00100000      0x00100000      0x00020000      0
-  2: kernel_a     0x00400000      0x00400000      0x00120000      0
-  3: ubi          0x07ae0000      0x079e0000 (!)  0x00520000      0
+Indeed. Seems I'm a bit slow today :)
 
-active partition: nand0,0 - (spl) 0x00020000 @ 0x00000000
+Thanks for sharing the link.
 
-This happens when we try to erase the spl partition using fastboot:
-
-$ fastboot erase spl
-Erasing 'spl_a'               FAILED (remote: 'invalid NAND device')
-fastboot: error: Command failed
-
-The error occurs because getvars fails to handle the error returned by
-nand layer when a partition cannot be found.
-
-Indeed, getvar_get_part_info returns what is returned by
-fastboot_nand_get_part_info (0 on success, 1 on failure) but it should
-return -ENODEV or -EINVAL instead. Since the cause of failure is not
-returned by the nand function, I decided to return -EINVAL to make it
-simple.
-
-Signed-off-by: Federico Fuga <fuga@studiofuga.com>
----
-  drivers/fastboot/fb_getvar.c | 5 ++++-
-  drivers/fastboot/fb_nand.c   | 2 +-
-  2 files changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-index 9c2ce65a4e..816ed8a621 100644
---- a/drivers/fastboot/fb_getvar.c
-+++ b/drivers/fastboot/fb_getvar.c
-@@ -121,8 +121,11 @@ static int getvar_get_part_info(const char 
-*part_name, char *response,
-              *size = disk_part.size * disk_part.blksz;
-      } else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND)) {
-          r = fastboot_nand_get_part_info(part_name, &part_info, response);
--        if (r >= 0 && size)
-+        if (r == 0 && size) {
-              *size = part_info->size;
-+        } else {
-+            r = -EINVAL;
-+        }
-      } else {
-          fastboot_fail("this storage is not supported in bootloader", 
-response);
-          r = -ENODEV;
-diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
-index afc64fd528..9e2f7c0189 100644
---- a/drivers/fastboot/fb_nand.c
-+++ b/drivers/fastboot/fb_nand.c
-@@ -151,7 +151,7 @@ static lbaint_t fb_nand_sparse_reserve(struct 
-sparse_storage *info,
-   *
-   * @part_name: Named device to lookup
-   * @part_info: Pointer to returned part_info pointer
-- * @response: Pointer to fastboot response buffer
-+ * @response: 0 on success, 1 otherwise
-   */
-  int fastboot_nand_get_part_info(const char *part_name,
-                  struct part_info **part_info, char *response)
--- 
-2.48.1
-
-
+>
+> bye,
+> Heiko
+> -- 
+> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
