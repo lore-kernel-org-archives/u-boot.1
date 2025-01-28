@@ -4,71 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B9ACC0218D
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 14:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E93C0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 14:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73CA081DB4;
-	Tue, 28 Jan 2025 15:04:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C84CD81DCD;
+	Tue, 28 Jan 2025 15:05:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KWZGSp+x";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nVAeO+KR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F97D81DCD; Tue, 28 Jan 2025 15:04:46 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 5F57481E13; Tue, 28 Jan 2025 15:05:03 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3624281B4B
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:04:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00B8B81B4B
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:05:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43635796b48so36423265e9.0
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 06:04:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6d888fc8300so27900376d6.3
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 06:05:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738073082; x=1738677882; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=p+Nole4VCjJl0RLWiO3h83oEjrLGhvcnH9P6R/eHv2g=;
- b=KWZGSp+xQrMsCzV8ziZRbgrQwwQU/Aahdc5LoYDoigT2KdZNCEldsjsQ9DFif9IKwr
- xs2/rJZ/3+cAoiURKeTowjF81ZeE+qu2+rZ5a/hjtUR4EKZl2A9dGFwAc2xdRDl0OAD4
- LKBMGHVnhTXudjChg421zAC72kSORi5zVqcEU=
+ d=konsulko.com; s=google; t=1738073100; x=1738677900; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=X4aiJa4H4KPhWN+0Nt/T9kaO4Vq/xTNa/i/pa7ganhU=;
+ b=nVAeO+KRT2eCaLSPMfxsHnoMUB1BJDgo/t8njsJBRPS5dcWp0Cy0L1Yhsu31cAoCKV
+ F1zKv3yLqVJZrCMupafvwKG5R46cNvFm3r47nLPSjsLCAZvBXdHHvJ7IATcfFLoK9RZX
+ +Yhh49xPdIWl3D8eO6Sk5Imw51uA5+a+h4sSg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738073082; x=1738677882;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=p+Nole4VCjJl0RLWiO3h83oEjrLGhvcnH9P6R/eHv2g=;
- b=aaTHEjBFaFJ7r2ZK8U+0WQz5e6G7NApks6J/1NhA8/bnXQWvGijwSmlGD1sVKPu1AE
- jWmd4Mq430ODjDpu/edz6jW50XKCTUulV99hmS+qQhV22IUAWjy3SynUgvLejdWqNOCy
- CnpQZbHcf5Zhx9iFj/hgNiyQRCnTjjxEIGOiuQ6b77vfHyFPEngZ4cJACboNRYmsd9WC
- Uc/Vf9zBfkVP+JyRVlBfAfHjOPDpbVWJdpf/C1/tXIypc2MeVs0nQZ/Nj9WFf4dqQyYf
- 4G4nKiHUk0A8V8AC3vkwDv2Gq9lUhwjWE6E3/SuidJzCFfmVqAYxmbu7TWaXMQROqafN
- +/AA==
-X-Gm-Message-State: AOJu0YyFBRyzdxA45HhE4ifWb1EGqA547C4J1H6lz7w7uL97EK5cULTH
- icA2MRZI13HKKNUWRstZZ7DUrQwfthz2oxft7YibI/9TFSB1p0bUH2/0Xsi5/aGPlddPaO7rGc+
- 96Rsms29jnw1lDsXL0W+8nw99U+ek7r/zApuyD5B7drM8RfM=
-X-Gm-Gg: ASbGnctAQVcMFJ4DqTorcz0+qWObPISW0K6F9kXa6bwhmdZ0HwmUlXdU7IOEKnP9B2W
- NuGPvjS45O7txMd6quWm3Ka8XEliZw9ynGnQNilpKN9F6HC3XAUcfRC4QP9c0aQZJ/409SPKgPe
- PiZPSdo/d6
-X-Google-Smtp-Source: AGHT+IGFjC8axxJQe+Xcd/n0jcFatYMMv1OHKSmqLWyoKPEY7o/sZ7AsdrQoXGT/4PZROr0IYGWHe4tEUFr+1BUmQs4=
-X-Received: by 2002:a17:907:3f15:b0:ab3:66f6:1370 with SMTP id
- a640c23a62f3a-ab6bbac9ed0mr390704466b.15.1738073063993; Tue, 28 Jan 2025
- 06:04:23 -0800 (PST)
+ d=1e100.net; s=20230601; t=1738073100; x=1738677900;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=X4aiJa4H4KPhWN+0Nt/T9kaO4Vq/xTNa/i/pa7ganhU=;
+ b=TW6gZQU5Pv/f0pcXJKHfk+QpXC+S3hCiBpwSkXeBr2RBbhDkVkWq6o5aR82i5y79Oi
+ nvKsV0sSi35qTD5Lm88X8XgYOZdY3uqPNYXidlfpE73QMX3yIsvvHGiTg1hdBqw29Dic
+ WzqePmNaClO8a7HyC9UwAc6W+r1cP0A4v1TpBomGZlNCyYvRLwCn+lW7nXfPCGBYkHWo
+ 3ALJYNX4qwXXONk0Ob3q/ihh+2MYCRmZXW/fTGVOR32IcoRq/WhF8yYlo+eoZSnfkdEq
+ WEQwLaV3hJBAiWoC/H6OkXMkwJg3YUyFLDMJ7c+hV4VVFBmZBJRC+ljt6O2NpJvMEaKi
+ Yz7A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXqbsY8MysA1JalrjfXXOJKIHLvbno/OAY9+qla7h9L7wNIu/eFivNJeUcw8NX6mo5lvOJL6/A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwIPmUvOEGsIb5VNWwYpRbB6oAgxPerCoG6auDs12EMciPVq7XH
+ WYw0pPmOb3qPklDsColKQzbnQuhkYnyyZono5j6ImPcbOgreyMpwx60MQiQoV24=
+X-Gm-Gg: ASbGnctkfv6kli0UY+4H6bCcgDkoolJ862Myj6T6M521rrr1D/DOeEMFVNmFxx0pu/Q
+ hyIX6TMYlS3D+yQOpTmCzHuNyt6WUapxvLRUvN8yPc066FhwSotDXWR1QHz0xYvC8WTXBTC3Eal
+ yTzlq3uz3RRSjcjsF55Z/QdedxdbhnspyDgdvimi+v6JuXO2TJKbaqT+1mEPQCUksWuYF1BDXNw
+ 3oH2FHdl03ukjgIhZ0B/L6xQtBueeHXmxy5NY2ICEoZA2E6PYe7J/9XMwu433GxIlU1fMNb7fWK
+ CdRzwUU4rK8UAsE=
+X-Google-Smtp-Source: AGHT+IGGdGKaXkEYnsuVUz1fZ4+A5U6OX/EavV5CTiAZC1UXShzR4ELP0DkMclxY8yA65VJHXFE7Cg==
+X-Received: by 2002:a05:6214:dcb:b0:6d4:254f:1c8e with SMTP id
+ 6a1803df08f44-6e1b21e2a5bmr721843706d6.37.1738073099805; 
+ Tue, 28 Jan 2025 06:04:59 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e20514efb3sm45345706d6.32.2025.01.28.06.04.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Jan 2025 06:04:59 -0800 (PST)
+Date: Tue, 28 Jan 2025 08:04:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Subject: Re: dtc: "syntax error" linked to &{label/subnode} syntax
+Message-ID: <20250128140456.GJ1233568@bill-the-cat>
+References: <8b798c6e-60a3-4ef3-8ce6-a747e072807a@foss.st.com>
+ <CAFLszTj3O64xvA9buAfMf2RRRjwF5SjoOje+_1pWCT3QgV4Akg@mail.gmail.com>
+ <62ed68c3-a029-4bf9-8918-39d5aa5d8b6b@foss.st.com>
+ <95ab524e-c532-4eb5-a65f-a1d1c1b190a2@foss.st.com>
+ <20250115144428.GZ3476@bill-the-cat>
+ <329ceffc-c5b6-4f3e-81dd-03b1d4b7b9a7@foss.st.com>
 MIME-Version: 1.0
-References: <cover.1738059345.git.jerome.forissier@linaro.org>
-In-Reply-To: <cover.1738059345.git.jerome.forissier@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Jan 2025 07:04:12 -0700
-X-Gm-Features: AWEUYZnQe3gJ3s7pgiRUoLvnj78SsR1OavjfTSWSEns6ft_EACGp_TDgv52sliM
-Message-ID: <CAFLszTj4ktct=SCNNQhZ-dyjwMTJPi46Jj7GeM=o4KJgC1A76g@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 0/3] Coroutines
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="u8aXWoFu6MOUBOvO"
+Content-Disposition: inline
+In-Reply-To: <329ceffc-c5b6-4f3e-81dd-03b1d4b7b9a7@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,188 +102,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
 
-On Tue, 28 Jan 2025 at 03:20, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> This series introduces a simple coroutines framework and uses it to
-> speed up the efi_init_obj_list() function. It is just an example to
-> trigger discussions; hopefully other places in U-Boot can benefit from
-> a similar treatment. Suggestions are welcome.
->
-> I came up with this idea after analyzing some profiling data (ftrace)
-> taken during the execution of the "printenv -e" command on a Kria KV260
-> board. When the command is first invoked, efi_init_obj_list() is called
-> which takes a significant amount of time (2.872 seconds). This time can
-> be split into 0.570 s for efi_disks_register(), 0.811 s for
-> efi_tcg2_register() and 1.418 s for efi_tcg2_do_initial_measurement().
-> All the other child functions are much quicker. Another interesting
-> observation is that a large part of the time is actually spent waiting
-> in __udelay(). More precisely:
-> - For efi_disks_register(): 421 ms / 570 ms = 73.8 % spent in __udelay()
-> - For efi_tcg2_register(): 805 ms / 811 ms = 99.1 % spent in __udelay()
-> - For efi_tcg2_do_initial_measurement(): 1395.025 ms / 1418.372 ms =
->   98.3 % spent in __udelay()
->
-> Given the above data, it is reasonable to think that a nice speedup
-> could be obtained if these functions could somehow be run in parallel.
-> efi_tcg2_do_initial_measurement() unfortunately needs to be excluded
-> because it depends on the first two. But efi_disks_register() and
-> efi_tcg2_register() are clearly independant and are therefore good
-> candidates for concurrent execution.
->
-> So, I considered two options:
->
-> - Spin up a secondary core to take care of one function while the other
-> one runs on the main core
-> - Introduce some kind of software scheduling
->
-> I quickly ruled out the first one for several reasons: initializing a
-> secondary core is typically quite hardware-specific, it would not scale
-> well if more functions than available cores would need to be run in
-> parallel, it would make debugging harder etc.
+--u8aXWoFu6MOUBOvO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes this is fairly brittle IMO. Aide: Years ago I did a prototype of
-using a second core to speed up loading from MMC. It turned out that
-just 'kicking' the mmc controller at the start was enough to speed
-things up. I suspect that these days the controllers are faster and
-there is less of a delay getting going.
+On Tue, Jan 28, 2025 at 08:47:37AM +0100, Patrice CHOTARD wrote:
+>=20
+>=20
+> On 1/15/25 15:44, Tom Rini wrote:
+> > On Wed, Jan 15, 2025 at 03:39:20PM +0100, Patrice CHOTARD wrote:
+> >>
+> >>
+> >> On 1/15/25 15:24, Patrice CHOTARD wrote:
+> >>>
+> >>>
+> >>> On 1/15/25 14:19, Simon Glass wrote:
+> >>>> Hi Patrice,
+> >>>>
+> >>>> On Wed, 15 Jan 2025 at 03:19, Patrice CHOTARD
+> >>>> <patrice.chotard@foss.st.com> wrote:
+> >>>>>
+> >>>>> Hi
+> >>>>>
+> >>>>> I am currently converting STM32MP platforms to OF_UPSTREAM.
+> >>>>> As we use same binary for several boards, flags CONFIG_OF_UPSTREAM_=
+BUILD_VENDOR=3Dy
+> >>>>> and CONFIG_OF_UPSTREAM_VENDOR=3D"st" are set.
+> >>>>>
+> >>>>> So all dts/upstream/src/arm/st/* dts files are compiled.
+> >>>>>
+> >>>>> I am facing an issue with dts/upstream/src/arm/st/stm32mp151a-prtt1=
+* and
+> >>>>> dts/upstream/src/arm/st/stm32mp15*-mec*.* files.
+> >>>>>
+> >>>>> To be more precise, these files are using a syntax which follows th=
+is
+> >>>>> format &{label/subnode} to override some nodes.
+> >>>>>
+> >>>>> This leads to DTC error:
+> >>>>>
+> >>>>>  AR      drivers/usb/gadget/built-in.o
+> >>>>>   LD      u-boot
+> >>>>>   OBJCOPY u-boot.srec
+> >>>>>   OBJCOPY u-boot-nodtb.bin
+> >>>>>   SYM     u-boot.sym
+> >>>>>   DTC     dts/upstream/src/arm/st/stm32mp157c-dhcom-picoitx.dtb
+> >>>>>   DTC     dts/upstream/src/arm/st/stm32h750i-art-pi.dtb
+> >>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-microgea-stm32mp1-mic=
+rodev2.0-of7.dtb
+> >>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-iot-box.dtb
+> >>>>>   DTC     dts/upstream/src/arm/st/stm32746g-eval.dtb
+> >>>>>   DTC     dts/upstream/src/arm/st/stm32mp151c-mecio1r0.dtb
+> >>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-dhcor-avenger96.dtb
+> >>>>>   DTC     dts/upstream/src/arm/st/ste-nomadik-s8815.dtb
+> >>>>> Error: ../dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi:338.1-2=
+ syntax error
+> >>>>> FATAL ERROR: Unable to parse input tree
+> >>>>>
+> >>>>>
+> >>>>> At line 338 in dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi we=
+ got :
+> >>>>>
+> >>>>> &{qspi_bk1_pins_a/pins} {
+> >>>>>         pinmux =3D <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
+> >>>>>                  <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
+> >>>>>                  <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
+> >>>>>                  <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
+> >>>>>         /delete-property/ bias-disable;
+> >>>>>         bias-pull-up;
+> >>>>> };
+> >>>>>
+> >>>>> If i update it as following , the DTC compilation is OK :
+> >>>>>
+> >>>>> &qspi_bk1_pins_a {
+> >>>>>         pins {
+> >>>>>                 pinmux =3D <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK=
+1_IO0 */
+> >>>>>                          <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_=
+IO1 */
+> >>>>>                          <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_I=
+O2 */
+> >>>>>                          <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_I=
+O3 */
+> >>>>>                 /delete-property/ bias-disable;
+> >>>>>                 bias-pull-up;
+> >>>>>         };
+> >>>>> };
+> >>>>>
+> >>>>> On kernel side, the DTC compilation is ok, but not on U-Boot side. =
+I am not able to understand the difference.
+> >>>>>
+> >>>>
+> >>>> Could it be that the kernel dtc is newer?
+> >>>
+> >>> I have tested with dtc Version: DTC 1.7.0-gbcd02b52 which is the same=
+ dtc version than kernel tag next-20250114
+> >>
+> >> I mean, it's ok with newer version of dtc : DTC 1.7.0-gbcd02b52.
+> >=20
+> > Ah, so, sigh, we need to update DTC. I stopped my last upgrade there
+> > because other changes it made grew the binary size for everyone and
+> > didn't get back to it. I guess another attempt is in order.
+> >=20
+>=20
+> Hi Tom
+>=20
+> Do you know when you will be able to provide a DTC update in master or ne=
+xt branch ?
 
-> Software scheduling however can be accomplished quite easily, especially
-> since we don't need to consider preemptive multitasking. Coroutines [1]
-> for example can perfectly do the job. They provide a way to save and
-> restore the execution context (registers and stack). Here is how it
-> look like:
->
-> static void do_some_work(int v)
-> {
->         int i;
->
->         for (i = 0; i < 5; i++) {
->                 printf("%d", v);
->                 /* Save context and resume main thread */
->                 co_yield();
->         }
-> }
->
-> static void co1(void *arg)
-> {
->         do_some_work(1);
->         /* Mark coroutine as "done" and resume main thread */
->         co_exit();
-> }
->
-> static void co2(void *arg)
-> {
->         do_some_work(2);
->         co_exit();
-> }
->
-> void main_thread(void)
-> {
->         struct co *co1, *co2;
->
->         co1 = co_create(co1, ...);
->         co2 = co_create(co2, ...);
->
->         do {
->                 printf("A");
->                 if (!co1->done) {
->                         /* Invoke or resume first coroutine */
->                         co_resume(co1);
->                 }
->                 printf("B");
->                 if (!cor21->done) {
->                         /* Invoke or resume second coroutine */
->                         co_resume(co2);
->                 }
->         } while (!(co1->done && co2->done));
->
->         /* At this point, co1 and co2 have both called co_exit() */
-> }
->
-> The above example would print: A1B2A1B2A1B2A1B2A1B2.
->
-> - The first commit introduces the coroutine framework, loosely based on
-> libaco [2]. The code was simplified and reformatted to better suit
-> U-Boot.
-> - The second commit modifies efi_init_obj_list() in order to turn
-> efi_disks_register() and efi_tcg2_register() into coroutines when
-> COROUTINES in enabled. On a KV260 board with a SD card inserted, this
-> saves about .6 second (2.2 s instead of 2.8 s).
-> - The third commit applies coroutines to usb_init(), which can
-> significantly reduce the time it takes to scan multiple buses. Tested
-> on arm64 QEMU with 4 XHCI buses: the USB scan takes  2.2 s instead of
-> 5.8 s.
->
-> [1] https://en.wikipedia.org/wiki/Coroutine
-> [2] https://github.com/hnes/libaco/
->
-> Changes in v2
->
-> - Remove x86 and x86_64 arch code since it is untested
-> - Add missing SPDX license tag to arch/arm/cpu/armv8/co_switch.S
-> - Change Apache-2.0 SPDX license tag to "Apache-2.0 OR GPL-2.0-or-later"
-> - Apply coroutines to the USB bus scan in usb_init()
-> Jerome Forissier (3):
->   Introduce coroutines framework
->   efi_loader: optimize efi_init_obj_list() with coroutines
->   usb: scan multiple buses simultaneously with coroutines
->
->  arch/arm/cpu/armv8/Makefile    |   1 +
->  arch/arm/cpu/armv8/co_switch.S |  36 +++++++
->  drivers/usb/host/usb-uclass.c  | 152 +++++++++++++++++++++++++++++-
->  include/coroutines.h           | 130 ++++++++++++++++++++++++++
->  lib/Kconfig                    |  10 ++
->  lib/Makefile                   |   2 +
->  lib/coroutines.c               | 165 +++++++++++++++++++++++++++++++++
->  lib/efi_loader/efi_setup.c     | 113 +++++++++++++++++++++-
->  lib/time.c                     |  14 ++-
->  9 files changed, 615 insertions(+), 8 deletions(-)
->  create mode 100644 arch/arm/cpu/armv8/co_switch.S
->  create mode 100644 include/coroutines.h
->  create mode 100644 lib/coroutines.c
->
-> --
-> 2.43.0
->
+Unfortunately trying to update resync-dtc-v1.6.0-31-gcbca977ea121-v5 to
+be on top of current (the first step to moving to 1.7.0 or 1.7.1)
+produced some test failures that don't exist when using the host dtc.
+Can you confirm if dtc 1.7.0 is new enough for this syntax? We might
+just need to change to building pylibfdt and not dtc as well (as having
+pylibfdt come via system python or pipx is differently tricky it seems).
 
-Another idea would be to use the cyclic framework.
+--=20
+Tom
 
-To use cyclic for USB, we would need a struct that holds the state of
-the USB scanning. This is likely just a few index variables. The nice
-thing about cyclic is that we are a bit more in control of what is
-going on and we know at any point what state things are in. We have a
-way of aborting when we want to. Arguably many of the high-level
-functions in U-Boot should be written as:
+--u8aXWoFu6MOUBOvO
+Content-Type: application/pgp-signature; name="signature.asc"
 
-int do_more(struct my_state *state)
+-----BEGIN PGP SIGNATURE-----
 
-and just go until they run out of things to immediately do*
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeY5AQACgkQFHw5/5Y0
+tyx8IAv6A3eh7ZtVVyy2HEUg+lesnVFnbf3AkytgOxbltX/2QEk9YOIusZY8QFRr
+enOuYTkQlX5MzgrywLmWARgdT/Y9cwOK5zTS1DIfD6XA44b3EXIcA0FerH9J4r36
+cqCscQoAXHkA+aWfqLWszq7NpKWFgSO63r9mw2E+c8v5vFJY+oMLJ+jThXuZNGmQ
+86q611q2BcQ3FQczw0oRy5TYGokxmgdY6hKGbhTNpGh+edgB7Il1CvKxFAD+VSJT
+xBSe2UBDO/rrbpa5+z2h7ahCWp5fXjfvaHVKzuuqACBcSFI8gBe811a6/Kn+D2lE
+c6sOX7AEv5IUq3Eqey/UXvWGNgAoBImbeaVDfBmhY4KFttaKrUEfpQyaIyPQdbJV
+owzDgU692DAmLMcT1rq8b6SyVDw1OdBKDZPvpyudos51TT9P+G/pe/FCFZ8t3TD5
+DL4Has/rWaKCpHsjPokeSi0NAhKWTOrfjGAmUqk154MRIzPtvXRLTxQUxtXz4uvn
++pP4XGWK
+=DRw5
+-----END PGP SIGNATURE-----
 
-It would collect the state for each subsystem in one place.
-
-The other nice thing is that we can progress the boot with multiple
-subsystems at the same time, with less risk of strange behaviour (I
-suspect?). In other words, start USB scanning 'in the background'
-while continuing to allow the user to type stuff at the cmdline.
-
-I believe that we would very quickly want to get progress info from
-the operation, but it's hard to be sure when it is safe to read it, if
-the coroutines are doing their own thing on their own time with
-limited visibility from the 'main' process.
-
-You can see this sort of API with libfdt (fdt_first/next_subnode()),
-driver model (uclass_first/next_device() and bootstd
-(bootflow_scan_first/next()).
-
-If we are going to have coroutines, then we should have sandbox
-support, at least. How does it look inside the debugger?
-
-Regards,
-Simon
-
-* BTW, with EFI, do the disks and TPM actually all need to be probed
-right at the start? I'm not quite convinced that anyone has seriously
-looked at this.
+--u8aXWoFu6MOUBOvO--
