@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 636A7C0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 14:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F34EC0218D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 14:13:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B853481DCD;
-	Tue, 28 Jan 2025 15:12:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1BD0B81DFA;
+	Tue, 28 Jan 2025 15:13:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N/ADETz8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rEjUzh2H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A768A81DCF; Tue, 28 Jan 2025 15:12:49 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 571D681E5B; Tue, 28 Jan 2025 15:13:12 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BA4581DB4
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:12:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 335A381DB4
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 15:13:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6dd5c544813so59126426d6.1
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 06:12:47 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6d8e8445219so49797996d6.0
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 06:13:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738073566; x=1738678366; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738073589; x=1738678389; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gT7KGaRP74ai0OdpYVq2Q7H+izZG+QKnEHhb6ZDt9tU=;
- b=N/ADETz8OujrtXZO7vRIZ0CxEd5VgGkH5ADApUXh4tySUzk3uIuJOIW7/za8lJ6Ojy
- RikpCRPbJNf0G2kFFR6QcJqZw16PYVglYWBWr6xag5lrPxH+ND84dEz9rYIFW/D/i99u
- vSYzTYUD1zgQh+1tjQnY3bSRce/EeJJIJ+jUI=
+ bh=CJEAYNfrDuigyHFHp0FV3WXdP6RYRjSX86+Z+JcwbMU=;
+ b=rEjUzh2H5fo6I0jlGj3SyCU3S8o/FDxDZZS9g/orAKavFbIQsicb7jtUYwCdW6Js6A
+ SpGOEO+GT+MQpVp+femNosdNj4vkIA/BRh74EqbU6qZZu+Dsh1N1KsOFuPLfJV/69esv
+ BrbSiXDd6kEbQM4Oqp1+6pVuy34kuXimtFRxU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738073566; x=1738678366;
+ d=1e100.net; s=20230601; t=1738073589; x=1738678389;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gT7KGaRP74ai0OdpYVq2Q7H+izZG+QKnEHhb6ZDt9tU=;
- b=AYto0PA77b0hdZcKhLquD23LWMIDxQsCBta6QD3EHpECbmeF/kP7ujapY4eyobWgrd
- c9kccYrJfrBWFt5jrFGOfCTp5dc+7Al1MRPdv4wy9ICdduM19/PcKyNHNu9EabOLddig
- sV6UcfLhEkr0M+obxCnw72UIgs1RW3NyzQNH0bnSCeyfr3nGvUEZ8UDotex3k2FuLm0j
- YwvElfhcDXY25osIFpsA+mDdxZOnsleiDpzQL5lJ8Uiqh4tA3iM7e7oSnap8mUEwivD9
- rLgdojiAEjbZSThZ/EGHpHQniCLITQADVScxkxeVoKSK8bQXAtQXgZ2M5LzIkv62vnFr
- tZ/A==
+ bh=CJEAYNfrDuigyHFHp0FV3WXdP6RYRjSX86+Z+JcwbMU=;
+ b=eN9w+pJMOkDjNzJ9/m53JTBmVVgLx+cu9lys6ADICtYMYCP4jCNKm0gNBw7CZQvfrd
+ oAM7zbqEwX0SsPjXRr7SO4TWqyY7u4Gq9RF7JPHVVsLRnVNRPN51tfzSNulWPtwBNa/U
+ ZT2zOz02fdO8o5UoXF87aKeDAzHuS00lFnfNqeGMGSuSlBTKXIh+ge64ycbZ5f45uvo7
+ My7aa6Y2hMIFTKBO30TDMtkTAnu23JJMZgQmFHHMB/rThuu5Xwwgcz96h46spVJezKh/
+ ZjJnk79I0/C44PQbLOLEbveYTo6IQh7ZNWRt2wj8jvjTGhJHXaOUkdTAXio8uCPIFOVe
+ qMAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV/za4gscZGEwDoyr3DTMDINZ3d+tSIHkpQhkfCAuSCrk3ydc5MToouL2VfHuWsSQ99EdvTZTs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzXgvl93mCeSB0yxSotzl7hyPRBStNZIzYtTGd9d7THOz4g6vHT
- XkLtNndgvazKLVVqtz/CxEwEq7tO45HtoZYHysNo9HqMws4kQzlSx0YSdIdCLFs=
-X-Gm-Gg: ASbGncsvGJzcSuL6HlDE5wCaJ+Tr3TXhlEU365jpXPsTmJEGIpDvUwYLYun0sAkZnaC
- yaIwHxW6Jkt15DfAOohGN5AJetNojGmxVV3rTkeo7Nj3XXAlw0a3hl6c/dWlkvMzD9Ms1BSbs0R
- 6AG64t9ELdkMjvowU0mqpkcJ2+UNW8WDtpRTFhDb/1+ny5SzjYsA0CBF1qyHGZGtEQvb/fflkUv
- X2fTLyFADYmrvUZuZnxUA79diWt0kLIHRrfn+SPpVPrf5bRiziHJvZ+MxwYh4w3IM/ebLoM7FE6
- nd2SCV2+SWmTIQmGQThE3t69oA==
-X-Google-Smtp-Source: AGHT+IFp4TdLb9wcPdeH4LCRkk6HEC4SpwstaVAZjoy3QsEbHoYEqpC6ZcHZyP/ZH2SBtF0RZNcoOg==
-X-Received: by 2002:a05:6214:1310:b0:6d8:9bbe:392d with SMTP id
- 6a1803df08f44-6e1b217141amr476500226d6.6.1738073566274; 
- Tue, 28 Jan 2025 06:12:46 -0800 (PST)
+ AJvYcCWvapdmY+m/PHsbkifK7fTV0+NidRq7W17VtB7HIQw+b0VvSUKa8SmoIOzdTKsqY6T0lbyNJmQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWMvE/WPc5t56sTtjIgrCtATLqd8PMJqXw0m5brnoJ5ghf2okn
+ KCOUUXNkxedEMsr6lFJKF0+MTTsgwlJa50TxEkDKtWPc2KdwKRXdrrShXtn2sDQ=
+X-Gm-Gg: ASbGncsmYAQsFkLQfCc741p22knoXM3gODFMxDThy1Y2tjwWunSsI0nYHTNG+naBB1X
+ ID43ASGBl+WMh1oCVz3A/LAziLFw2e3vbwpM8x5cy+n53K5NaxaX1lAYbzICGmDsDVZGoqCFUN9
+ f6y6xepCgnmx+rKGiwPnNNqfc4DinoEMa6UnQ8cwCqN8zaoKQDZbT7s0sAEYl0JIR7SHSmw2iBA
+ /4rDX+CIMycmbKhAAD18kXOOi7t5Rb7En/n3RXpbCCtstqAoSJCXlgu2QF9d+92/Y+fJk+pRfd7
+ 6qTxNIYSDczNUHw=
+X-Google-Smtp-Source: AGHT+IHrZ4JgzkaRrUvHn4a++qmVpgN1tDaZFkgqs5Z79MWAlmHxP+Haewo3t0kqenv1VhFx86jHJA==
+X-Received: by 2002:a05:6214:5b8a:b0:6d8:8416:9c54 with SMTP id
+ 6a1803df08f44-6e1b217d47fmr719260226d6.16.1738073588956; 
+ Tue, 28 Jan 2025 06:13:08 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e2051369basm45315256d6.17.2025.01.28.06.12.44
+ 6a1803df08f44-6e2051369e7sm45693506d6.11.2025.01.28.06.13.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 06:12:45 -0800 (PST)
-Date: Tue, 28 Jan 2025 08:12:42 -0600
+ Tue, 28 Jan 2025 06:13:08 -0800 (PST)
+Date: Tue, 28 Jan 2025 08:13:05 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Sam Day <me@samcday.com>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
@@ -75,15 +75,15 @@ Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>,
  Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
-Subject: Re: [PATCH 1/6] armv8: spin_table: Fix missing includes
-Message-ID: <20250128141242.GL1233568@bill-the-cat>
+Subject: Re: [PATCH 2/6] armv8: spin_table: add hook for booting cores
+Message-ID: <20250128141305.GM1233568@bill-the-cat>
 References: <20250128-msm8916-smp-support-v1-0-39587f18cf0c@samcday.com>
- <20250128-msm8916-smp-support-v1-1-39587f18cf0c@samcday.com>
+ <20250128-msm8916-smp-support-v1-2-39587f18cf0c@samcday.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="i1LpufOhjPjuSYX+"
+ protocol="application/pgp-signature"; boundary="Ktb5PgUxqrBOOXoH"
 Content-Disposition: inline
-In-Reply-To: <20250128-msm8916-smp-support-v1-1-39587f18cf0c@samcday.com>
+In-Reply-To: <20250128-msm8916-smp-support-v1-2-39587f18cf0c@samcday.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,17 +102,21 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---i1LpufOhjPjuSYX+
+--Ktb5PgUxqrBOOXoH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 27, 2025 at 11:02:53PM +0000, Sam Day wrote:
+:n Mon, Jan 27, 2025 at 11:03:01PM +0000, Sam Day wrote:
+> Introduce the weak symbol spin_table_boot_cpu, which is called by
 
-> Dropping the common.h header resulted in the spin table header missing
-> asm/types.h and the source unit missing the errno.h includes.
+> spin_table_update_dt during pre-boot FDT fixup phase for each CPU that
+> has enable-method=3D"spin-table".
 >=20
-> Fixes: 7410cde67de ("arm: Remove <common.h> and add needed includes")
+> This saves the board/arch code from needing to scan the DT looking for
+> CPUs to boot, and also makes it easier to bring the secondary CPUs online
+> as late as possible.
+>=20
 > Signed-off-by: Sam Day <me@samcday.com>
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
@@ -120,22 +124,22 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---i1LpufOhjPjuSYX+
+--Ktb5PgUxqrBOOXoH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeY5doACgkQFHw5/5Y0
-tywR0QwAm8B1Bie96i2ibVegQXy3rDu4ckw0anWi2rCh+6PGMR1N/Z9/JqWb5KqD
-nilNVZTf5rDvpSY3a5HmS8UsqHDat34KnxaIf7kfmQvpjJ5h9QJOVPAR1ZNGaSWf
-DFQe/di77PG0lYGTHSdzF/QAunFhb7cDDaWwSis1YG16Y0mllKoWwlKnT1hnPN2U
-2ZJJXqCG0cQwPsD0C3hIqDHseyXdg3n7Q4mtN3t1rkIixVNne9lqxshERWx+TdVX
-zJ6je35kvPEEYw+Tk8gqspSCG973pQtW5oonkRbH9W/GXUYNMP7cCp6xxsK7Aapi
-F6KiUXuvLTAaD+Qjk2L7ewim86ycRV2i3hxRBf0Jv/X5qfQT1/Ekjqg+PeXxGLc7
-WzxdkpsAl9JFwrbemM/Ji2olPDwGWVFdTpwO05i2XlMnzXQALNZts/59/5LATcxX
-TL72WWIXMWw6EqwbVYCwoGDd0qiDlHqtOaYWVNQ0RFArOE7WPojB5hWv8iA+6omi
-jAlmsYCl
-=bpUj
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeY5fEACgkQFHw5/5Y0
+tyxFigv/Toyc75Y/OE8QllHo3LrG2ezczdwyNw9atuOWESMU4TJqyypUjETuQmhd
+yAb9FHqdfaRMAt/tQLXdmnVbqqgfslN6+PWaGZNbB1ZIyjhN1jXLiMSZqKxt3wiF
+Gur0YM5lKWBRxcXJYrzE9txJZjRA/1QQ6JipGRZjMxd6Ig9/78atwxUrkyX86JgQ
+QTlOItW9YS6A8BnxHkQ8ZdUEi1GhRyBAiJKLdEwMSwhGf1jFGVVHAVFtLVlLpmIt
+KWvFY5nRau7DGicniGVtIKiJvTxxS9BL7Q7NQmS0d4YR4ntUlIHxty6z3QJ43WM0
+uXxifGib8UJrs62dW2oRMGbTdubQyW7MOhU6qEqsYfEg8MRAWrTAF0Qju8+nw/LM
+I/gbbguLwnLI/aZZu1s5rIWhSISPGuYQXnGmxXOeLjLUtlRYYEvFfGg6zFtEmTkM
+hlQP2M/opbIsOj7rE0TBzt0Y7QelrHdvGKyb48hVnsyIAShzYNMWTQBhSmCcygq5
+jQbA/bn8
+=SXQj
 -----END PGP SIGNATURE-----
 
---i1LpufOhjPjuSYX+--
+--Ktb5PgUxqrBOOXoH--
