@@ -4,57 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BAAEC02190
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 08:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C6C5C0218D
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 08:03:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ED0181B4B;
-	Tue, 28 Jan 2025 09:03:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0102681B4B;
+	Tue, 28 Jan 2025 09:03:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738051381;
-	bh=XT/+uCHAJKEAQUYq6vJKxJvzLvKikhe2viDHUvt89a0=;
+	s=phobos-20191101; t=1738051405;
+	bh=yoMN/G32tpk0AfnDauRdxTPPUPkSkZKRSJ85vvhVCHY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Sh6195jmxCZTeyCP+U1wO8vF9UfANG1wXcvsco923Z8ZDF2G6sVe+umEy71/KQKxV
-	 mbIDquvcgOZ66MnPoC0Jo1k4WK364CKEUtn83UdQMepo6aAyjgVZwv0D1L+atFTA/9
-	 CraVdtV3m6hcbXa31gdhS7CN53FyHDNb4f9+IyEFtbNCNOBphViYbhF+iH/h+bCjnd
-	 Y0BU5cGY61n8VqCFbxtVRyMGWmS1+n+ISzXmPwT1PP+ArMdA79N2nlBIKqpLIGfexe
-	 bXojIBN9BbvTT1GhioRccyC9YhXh4etWqPCHDa+2KSvHy5VOgZc6MJ5T7UQSdecuT/
-	 C2hrC4kppiOIg==
+	b=yZ01sGQILGOcFw5Mcj+WSkW6FsQ/S5vJWfr9WkxWvVCYsvq/GvUaivbkeWXy7hhnD
+	 x/a/wfjW4ZT8IFYZQoUbNwWYgDY+MHoHy5UR+Jz3ZP82b4b9tabDM54YGpGXz7jKjs
+	 +TJcPjxkrkCMNLX2XBvP333ms+oUIeY3JuShix1qqF17Q8lnI2xnNxHsFV5vFUD0L4
+	 2LoI+y0CBtabs8vLLmcwethMs8pt3QpCySdG79SwbsnT4fSVG0axQwrkDHpyiWGLnr
+	 bmxediox1XqRjfAgohi+OjMu7abr7wsetJ+lS+1x3x9PG9yJWeGRfDxkRyVrvMATE2
+	 7TCeBJFY4oWnQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E87D281C84; Tue, 28 Jan 2025 09:03:00 +0100 (CET)
+ id B0E7381CC5; Tue, 28 Jan 2025 09:03:23 +0100 (CET)
 Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
  [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E3938197D
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 09:02:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DDDD819B1
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 09:03:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4YhySv6DLYz9sW5;
- Tue, 28 Jan 2025 09:02:55 +0100 (CET)
-Message-ID: <0e4cf75e-2711-4b6f-93cc-1e8621499550@denx.de>
-Date: Tue, 28 Jan 2025 09:02:54 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4YhyTM2Xthz9sW5;
+ Tue, 28 Jan 2025 09:03:19 +0100 (CET)
+Message-ID: <cf399fb3-869b-40c1-a2f2-d82126760fe4@denx.de>
+Date: Tue, 28 Jan 2025 09:03:17 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 2/3] arm: mmp: add initial support for PXA1908 SoC
+Subject: Re: [PATCH v3 3/3] board: samsung: add initial support for
+ coreprimevelte board
 To: =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
  Tom Rini <trini@konsulko.com>
 Cc: Karel Balej <balejk@matfyz.cz>, ~postmarketos/upstreaming@lists.sr.ht,
  u-boot@lists.denx.de
 References: <20250124-coreprimevelte-v3-0-870dd251b1d1@skole.hr>
- <20250124-coreprimevelte-v3-2-870dd251b1d1@skole.hr>
+ <20250124-coreprimevelte-v3-3-870dd251b1d1@skole.hr>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250124-coreprimevelte-v3-2-870dd251b1d1@skole.hr>
+In-Reply-To: <20250124-coreprimevelte-v3-3-870dd251b1d1@skole.hr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4YhyTM2Xthz9sW5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,8 +75,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 24.01.25 16:47, Duje Mihanović wrote:
-> Add initial support for Marvell PXA1908. The SoC has 4 Cortex-A53 cores,
-> a GC7000UL GPU and a variety of peripheral controllers.
+> Samsung Galaxy Core Prime VE LTE is an entry-level PXA1908-based
+> smartphone. It has 1GB of DRAM, 8GB eMMC and USB connectivity.
 > 
 > Signed-off-by: Duje Mihanović <duje.mihanovic@skole.hr>
 
@@ -83,358 +86,178 @@ Thanks,
 Stefan
 
 > ---
->   MAINTAINERS                |   8 ++++
->   arch/arm/Kconfig           |  11 +++++
->   arch/arm/Makefile          |   1 +
->   arch/arm/dts/pxa1908.dtsi  | 106 +++++++++++++++++++++++++++++++++++++++++++++
->   arch/arm/mach-mmp/Kconfig  |   6 +++
->   arch/arm/mach-mmp/Makefile |   1 +
->   arch/arm/mach-mmp/board.c  |  84 +++++++++++++++++++++++++++++++++++
->   arch/arm/mach-mmp/mmu.c    |  30 +++++++++++++
->   include/configs/pxa1908.h  |  18 ++++++++
->   9 files changed, 265 insertions(+)
+>   arch/arm/dts/Makefile                           |  2 +
+>   arch/arm/dts/pxa1908-samsung-coreprimevelte.dts | 74 +++++++++++++++++++++++++
+>   arch/arm/mach-mmp/Kconfig                       |  6 ++
+>   board/samsung/coreprimevelte/Kconfig            | 12 ++++
+>   board/samsung/coreprimevelte/MAINTAINERS        |  6 ++
+>   configs/coreprimevelte_defconfig                | 18 ++++++
+>   6 files changed, 118 insertions(+)
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index dc8e048dde491c81fea568793d409ced6c5073dd..247f525847e73c6791cba816c00708044086b149 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -386,6 +386,14 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-marvell.git
->   F:	drivers/pci/pci-aardvark.c
->   F:	drivers/pci/pci_mvebu.c
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index b7df72453ac45636f3c69e854721144ab821bf62..0bf3697bdbe0813ed84cf45aeac4bf138d1944fb 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -1226,6 +1226,8 @@ dtb-$(CONFIG_ARCH_QEMU) += qemu-arm.dtb qemu-arm64.dtb
+>   dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
+>   				corstone1000-fvp.dtb
 >   
-> +ARM MARVELL PXA1908
-> +M:	Duje Mihanović <duje.mihanovic@skole.hr>
-> +S:	Maintained
-> +T:	git git://git.dujemihanovic.xyz/u-boot.git
-> +F:	arch/arm/dts/pxa1908*
-> +F:	arch/arm/mach-mmp/
-> +F:	include/configs/pxa1908.h
+> +dtb-$(CONFIG_TARGET_COREPRIMEVELTE) += pxa1908-samsung-coreprimevelte.dtb
 > +
->   ARM MARVELL SERIAL DRIVERS
->   M:	Pali Rohár <pali@kernel.org>
->   M:	Stefan Roese <sr@denx.de>
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 314916527c9e5ef3b4cf8388511dbd224aaac512..f504d7d07601e2e275888bc179748a7ff9593a00 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -842,6 +842,15 @@ config ARCH_MEDIATEK
->   	  Support for the MediaTek SoCs family developed by MediaTek Inc.
->   	  Please refer to doc/README.mediatek for more information.
+>   include $(srctree)/scripts/Makefile.dts
 >   
-> +config ARCH_MMP
-> +	bool "Marvell MMP"
-> +	select ARM64
-> +	select DM
-> +	select DM_SERIAL
-> +	select OF_CONTROL
-> +	select SAVE_PREV_BL_FDT_ADDR
-> +	select SAVE_PREV_BL_INITRAMFS_START_ADDR
-> +
->   config ARCH_LPC32XX
->   	bool "NXP LPC32xx platform"
->   	select CPU_ARM926EJS
-> @@ -2310,6 +2319,8 @@ source "arch/arm/mach-meson/Kconfig"
->   
->   source "arch/arm/mach-mediatek/Kconfig"
->   
-> +source "arch/arm/mach-mmp/Kconfig"
-> +
->   source "arch/arm/mach-qemu/Kconfig"
->   
->   source "arch/arm/mach-rockchip/Kconfig"
-> diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-> index cb87a68475406890713ad356024ee16b53ae464e..7334e79965f1f4701cf1d2aed13ccb24d2138507 100644
-> --- a/arch/arm/Makefile
-> +++ b/arch/arm/Makefile
-> @@ -69,6 +69,7 @@ machine-$(CONFIG_ARCH_KIRKWOOD)		+= kirkwood
->   machine-$(CONFIG_ARCH_LPC32XX)		+= lpc32xx
->   machine-$(CONFIG_ARCH_MEDIATEK)		+= mediatek
->   machine-$(CONFIG_ARCH_MESON)		+= meson
-> +machine-$(CONFIG_ARCH_MMP)		+= mmp
->   machine-$(CONFIG_ARCH_MVEBU)		+= mvebu
->   machine-$(CONFIG_ARCH_NEXELL)		+= nexell
->   machine-$(CONFIG_ARCH_NPCM)             += npcm
-> diff --git a/arch/arm/dts/pxa1908.dtsi b/arch/arm/dts/pxa1908.dtsi
+>   # Add any required device tree compiler flags here
+> diff --git a/arch/arm/dts/pxa1908-samsung-coreprimevelte.dts b/arch/arm/dts/pxa1908-samsung-coreprimevelte.dts
 > new file mode 100644
-> index 0000000000000000000000000000000000000000..e8ec2606c2515ee2031004ab3102fec37b7d4b87
+> index 0000000000000000000000000000000000000000..588e39e92650f9217e02bb332dcdcd5f74cc7fce
 > --- /dev/null
-> +++ b/arch/arm/dts/pxa1908.dtsi
-> @@ -0,0 +1,106 @@
+> +++ b/arch/arm/dts/pxa1908-samsung-coreprimevelte.dts
+> @@ -0,0 +1,74 @@
 > +// SPDX-License-Identifier: GPL-2.0-only
-> +/dts-v1/;
-> +
-> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +#include "pxa1908.dtsi"
 > +
 > +/ {
-> +	model = "Marvell Armada PXA1908";
-> +	compatible = "marvell,pxa1908";
-> +	#address-cells = <2>;
-> +	#size-cells = <2>;
-> +	interrupt-parent = <&gic>;
+> +	pxa,rev-id = <3928 2>;
+> +	model = "Samsung Galaxy Core Prime VE LTE";
+> +	compatible = "samsung,coreprimevelte", "marvell,pxa1908";
 > +
-> +	cpus {
-> +		#address-cells = <2>;
-> +		#size-cells = <0>;
-> +
-> +		cpu0: cpu@0 {
-> +			device_type = "cpu";
-> +			compatible = "arm,cortex-a53";
-> +			reg = <0 0>;
-> +			enable-method = "psci";
-> +		};
-> +
-> +		cpu1: cpu@1 {
-> +			device_type = "cpu";
-> +			compatible = "arm,cortex-a53";
-> +			reg = <0 1>;
-> +			enable-method = "psci";
-> +		};
-> +
-> +		cpu2: cpu@2 {
-> +			device_type = "cpu";
-> +			compatible = "arm,cortex-a53";
-> +			reg = <0 2>;
-> +			enable-method = "psci";
-> +		};
-> +
-> +		cpu3: cpu@3 {
-> +			device_type = "cpu";
-> +			compatible = "arm,cortex-a53";
-> +			reg = <0 3>;
-> +			enable-method = "psci";
-> +		};
+> +	aliases {
+> +		serial0 = &uart0;
 > +	};
 > +
-> +	psci {
-> +		compatible = "arm,psci-0.2";
-> +		method = "smc";
-> +	};
-> +
-> +	timer {
-> +		compatible = "arm,armv8-timer";
-> +		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>,
-> +			<GIC_PPI 14 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>,
-> +			<GIC_PPI 11 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>,
-> +			<GIC_PPI 10 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>;
-> +	};
-> +
-> +	soc {
-> +		compatible = "simple-bus";
+> +	chosen {
 > +		#address-cells = <2>;
 > +		#size-cells = <2>;
 > +		ranges;
 > +
-> +		gic: interrupt-controller@d1df9000 {
-> +			compatible = "arm,gic-400";
-> +			reg = <0 0xd1df9000 0 0x1000>,
-> +				<0 0xd1dfa000 0 0x2000>,
-> +				/* The subsequent registers are guesses. */
-> +				<0 0xd1dfc000 0 0x2000>,
-> +				<0 0xd1dfe000 0 0x2000>;
-> +			interrupts = <GIC_PPI 9 (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_LOW)>;
-> +			interrupt-controller;
-> +			#interrupt-cells = <3>;
+> +		stdout-path = "serial0:115200n8";
+> +
+> +		/* S-Boot places the initramfs here */
+> +		linux,initrd-start = <0x4d70000>;
+> +		linux,initrd-end = <0x5000000>;
+> +
+> +		fb0: framebuffer@17177000 {
+> +			compatible = "simple-framebuffer";
+> +			reg = <0 0x17177000 0 (480 * 800 * 4)>;
+> +			width = <480>;
+> +			height = <800>;
+> +			stride = <(480 * 4)>;
+> +			format = "a8r8g8b8";
+> +		};
+> +	};
+> +
+> +	memory {
+> +		device_type = "memory";
+> +		reg = <0 0x1000000 0 0x3f000000>;
+> +	};
+> +
+> +	reserved-memory {
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
+> +		ranges;
+> +
+> +		framebuffer@17000000 {
+> +			reg = <0 0x17000000 0 0x1800000>;
+> +			no-map;
 > +		};
 > +
-> +		apb@d4000000 {
-> +			compatible = "simple-bus";
-> +			reg = <0 0xd4000000 0 0x200000>;
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +			ranges = <0 0 0xd4000000 0x200000>;
+> +		gpu@9000000 {
+> +			reg = <0 0x9000000 0 0x1000000>;
+> +		};
 > +
-> +			uart0: serial@17000 {
-> +				compatible = "mrvl,mmp-uart", "intel,xscale-uart";
-> +				reg = <0x17000 0x1000>;
-> +				clock-frequency = <14745600>;
-> +				reg-shift = <2>;
-> +			};
+> +		/* Communications processor, aka modem */
+> +		cp@5000000 {
+> +			reg = <0 0x5000000 0 0x3000000>;
+> +		};
 > +
-> +			uart1: serial@18000 {
-> +				compatible = "mrvl,mmp-uart", "intel,xscale-uart";
-> +				reg = <0x18000 0x1000>;
-> +				clock-frequency = <14745600>;
-> +				reg-shift = <2>;
-> +			};
+> +		cm3@a000000 {
+> +			reg = <0 0xa000000 0 0x80000>;
+> +		};
 > +
-> +			uart2: serial@36000 {
-> +				compatible = "mrvl,mmp-uart", "intel,xscale-uart";
-> +				reg = <0x36000 0x1000>;
-> +				clock-frequency = <117000000>;
-> +				reg-shift = <2>;
-> +			};
+> +		seclog@8000000 {
+> +			reg = <0 0x8000000 0 0x100000>;
+> +		};
+> +
+> +		ramoops@8100000 {
+> +			compatible = "ramoops";
+> +			reg = <0 0x8100000 0 0x40000>;
+> +			record-size = <0x8000>;
+> +			console-size = <0x20000>;
+> +			max-reason = <5>;
 > +		};
 > +	};
 > +};
 > diff --git a/arch/arm/mach-mmp/Kconfig b/arch/arm/mach-mmp/Kconfig
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..b9438c6facb2e7f29f608bc72e97657d97a0d7dc
-> --- /dev/null
+> index b9438c6facb2e7f29f608bc72e97657d97a0d7dc..889f127fe82b8110e16c8fdef2908842e1635ebb 100644
+> --- a/arch/arm/mach-mmp/Kconfig
 > +++ b/arch/arm/mach-mmp/Kconfig
-> @@ -0,0 +1,6 @@
-> +if ARCH_MMP
+> @@ -1,6 +1,12 @@
+>   if ARCH_MMP
+>   
+> +config TARGET_COREPRIMEVELTE
+> +	bool "Support coreprimevelte"
+> +	select LINUX_KERNEL_IMAGE_HEADER
 > +
-> +config LNX_KRNL_IMG_TEXT_OFFSET_BASE
-> +	default TEXT_BASE
+>   config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+>   	default TEXT_BASE
+>   
+> +source "board/samsung/coreprimevelte/Kconfig"
+> +
+>   endif
+> diff --git a/board/samsung/coreprimevelte/Kconfig b/board/samsung/coreprimevelte/Kconfig
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..78a803796054ae9c43374eabebc14361d8561211
+> --- /dev/null
+> +++ b/board/samsung/coreprimevelte/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_COREPRIMEVELTE
+> +
+> +config SYS_BOARD
+> +	default "coreprimevelte"
+> +
+> +config SYS_VENDOR
+> +	default "samsung"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "pxa1908"
 > +
 > +endif
-> diff --git a/arch/arm/mach-mmp/Makefile b/arch/arm/mach-mmp/Makefile
+> diff --git a/board/samsung/coreprimevelte/MAINTAINERS b/board/samsung/coreprimevelte/MAINTAINERS
 > new file mode 100644
-> index 0000000000000000000000000000000000000000..99beaed05c2493b55610f1012383755015c62958
+> index 0000000000000000000000000000000000000000..0902117e8b3dc9da782e61728ad9b10ee077229c
 > --- /dev/null
-> +++ b/arch/arm/mach-mmp/Makefile
-> @@ -0,0 +1 @@
-> +obj-y += board.o mmu.o
-> diff --git a/arch/arm/mach-mmp/board.c b/arch/arm/mach-mmp/board.c
+> +++ b/board/samsung/coreprimevelte/MAINTAINERS
+> @@ -0,0 +1,6 @@
+> +Samsung Galaxy Core Prime VE LTE support
+> +M:	Duje Mihanović <duje.mihanovic@skole.hr>
+> +S:	Maintained
+> +T:	git git://git.dujemihanovic.xyz/u-boot.git
+> +F:	board/samsung/coreprimevelte/
+> +F:	configs/coreprimevelte_defconfig
+> diff --git a/configs/coreprimevelte_defconfig b/configs/coreprimevelte_defconfig
 > new file mode 100644
-> index 0000000000000000000000000000000000000000..3384e5377a7e0f0f379d58d18a3147fd2b8c62ae
+> index 0000000000000000000000000000000000000000..05116669200b3f1393518c8f9d1d0d5b9f90db6f
 > --- /dev/null
-> +++ b/arch/arm/mach-mmp/board.c
-> @@ -0,0 +1,84 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2024
-> + * Duje Mihanović <duje.mihanovic@skole.hr>
-> + */
-> +#include <errno.h>
-> +#include <init.h>
-> +#include <fdt_support.h>
-> +#include <asm/io.h>
-> +#include <asm/global_data.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +/* Timer constants */
-> +#define APBC_COUNTER_CLK_SEL	0xd4015064
-> +#define COUNTER_BASE		0xd4101000
-> +#define COUNTER_EN		BIT(0)
-> +#define COUNTER_HALT_ON_DEBUG	BIT(1)
-> +
-> +int timer_init(void)
-> +{
-> +	u32 tmp = readl(APBC_COUNTER_CLK_SEL);
-> +
-> +	if ((tmp >> 16) != 0x319)
-> +		return -1;
-> +
-> +	/* Set timer frequency to 26MHz */
-> +	writel(tmp | 1, APBC_COUNTER_CLK_SEL);
-> +	writel(COUNTER_EN | COUNTER_HALT_ON_DEBUG, COUNTER_BASE);
-> +
-> +	gd->arch.timer_rate_hz = 26000000;
-> +
-> +	return 0;
-> +}
-> +
-> +int board_init(void)
-> +{
-> +	return 0;
-> +}
-> +
-> +int dram_init(void)
-> +{
-> +	if (fdtdec_setup_mem_size_base() != 0)
-> +		puts("fdtdec_setup_mem_size_base() has failed\n");
-> +
-> +	return 0;
-> +}
-> +
-> +#ifndef CONFIG_SYSRESET
-> +void reset_cpu(void)
-> +{
-> +}
-> +#endif
-> +
-> +/* Stolen from arch/arm/mach-snapdragon/board.c */
-> +int board_fdt_blob_setup(void **fdtp)
-> +{
-> +	struct fdt_header *fdt;
-> +	bool internal_valid, external_valid;
-> +	int ret = 0;
-> +
-> +	fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
-> +	external_valid = fdt && !fdt_check_header(fdt);
-> +	internal_valid = !fdt_check_header(*fdtp);
-> +
-> +	/*
-> +	 * There is no point returning an error here, U-Boot can't do anything useful in this situation.
-> +	 * Bail out while we can still print a useful error message.
-> +	 */
-> +	if (!internal_valid && !external_valid)
-> +		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%#llx)\n",
-> +		      (phys_addr_t)fdt);
-> +
-> +	if (internal_valid) {
-> +		debug("Using built in FDT\n");
-> +		ret = -EEXIST;
-> +	} else {
-> +		debug("Using external FDT\n");
-> +		/* So we can use it before returning */
-> +		*fdtp = fdt;
-> +	}
-> +
-> +	return ret;
-> +}
-> diff --git a/arch/arm/mach-mmp/mmu.c b/arch/arm/mach-mmp/mmu.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..ad2f1e3d994ba21bc63d05f3b33586d0bfffe702
-> --- /dev/null
-> +++ b/arch/arm/mach-mmp/mmu.c
-> @@ -0,0 +1,30 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2024
-> + * Duje Mihanović <duje.mihanovic@skole.hr>
-> + */
-> +#include <asm/armv8/mmu.h>
-> +#include <linux/sizes.h>
-> +
-> +static struct mm_region pxa1908_mem_map[] = {
-> +	{
-> +		.virt = 0x0UL,
-> +		.phys = 0x0UL,
-> +		.size = 2UL * SZ_1G,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +			 PTE_BLOCK_INNER_SHARE
-> +	},
-> +	{
-> +		.virt = 0x80000000UL,
-> +		.phys = 0x80000000UL,
-> +		.size = 2UL * SZ_1G,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +			 PTE_BLOCK_INNER_SHARE |
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +	},
-> +	{
-> +		0,
-> +	}
-> +};
-> +
-> +struct mm_region *mem_map = pxa1908_mem_map;
-> diff --git a/include/configs/pxa1908.h b/include/configs/pxa1908.h
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..b0d6cdfeb760e215ff4a0e75d3d071c3a58ff82e
-> --- /dev/null
-> +++ b/include/configs/pxa1908.h
+> +++ b/configs/coreprimevelte_defconfig
 > @@ -0,0 +1,18 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2024
-> + * Duje Mihanović <duje.mihanovic@skole.hr>
-> + */
-> +
-> +#ifndef __PXA1908_H
-> +#define __PXA1908_H
-> +
-> +#define CFG_SYS_SDRAM_BASE	0x1000000
-> +#define CFG_SYS_INIT_RAM_ADDR	0x10000000
-> +#define CFG_SYS_INIT_RAM_SIZE	0x4000
-> +#define CFG_SYS_NS16550_IER	0x40
-> +#define CFG_SYS_BAUDRATE_TABLE	{ 115200, 230400, 460800, 921600 }
-> +#define CFG_EXTRA_ENV_SETTINGS \
-> +	"bootcmd=bootm $prevbl_initrd_start_addr\0"
-> +
-> +#endif
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=26000000
+> +CONFIG_ARCH_CPU_INIT=y
+> +CONFIG_ARCH_MMP=y
+> +CONFIG_TEXT_BASE=0x1000000
+> +CONFIG_NR_DRAM_BANKS=2
+> +CONFIG_DEFAULT_DEVICE_TREE="pxa1908-samsung-coreprimevelte"
+> +CONFIG_TARGET_COREPRIMEVELTE=y
+> +CONFIG_SYS_LOAD_ADDR=0x1000000
+> +CONFIG_ARMV8_PSCI=y
+> +CONFIG_FIT=y
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_HUSH_PARSER=y
+> +CONFIG_CMD_DM=y
+> +CONFIG_OF_BOARD=y
+> +CONFIG_SYS_NS16550=y
+> +CONFIG_SYS_NS16550_MEM32=y
 > 
 
 Viele Grüße,
