@@ -4,82 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07CBAC0218A
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 09:00:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EAB5C0218A
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 09:07:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34ADC81B4B;
-	Tue, 28 Jan 2025 10:00:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9125581BC0;
+	Tue, 28 Jan 2025 10:07:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=studiofuga.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="fT9l7JB/";
+	dkim=pass (1024-bit key; unprotected) header.d=studiofuga.com header.i=@studiofuga.com header.b="pa6iEZoD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28DC481BC0; Tue, 28 Jan 2025 10:00:35 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C74C81CC5; Tue, 28 Jan 2025 10:07:48 +0100 (CET)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [83.166.143.169])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 801A68197D
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:00:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EAA78197D
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 10:07:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=studiofuga.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-38a8b35e168so3433290f8f.1
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 01:00:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738054832; x=1738659632;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=S/yU+MyqmTs/DVen/K7mFOJ1zuA3EB/QU24oIL8hgHI=;
- b=fT9l7JB/UUj95Md4q4okthNVo61nQnXu9M0+lLf2IX9Y/2gi8f4y0+QGCELPo4iVAk
- ITMBL942P59bgeN7XkU2okE9SL50SB7NQ89kLf51kiiw9uJi9lwGhHUrjunuOmGum3nU
- Ht4Fh3ETw8Y6NX+ME0cvmWuJRpskNoFvCqfAZkkz7Ha7Rkk6mV0wG4b6Pf1k4yhPr2EF
- gdvF7hbYdZMeqL/5IVImwQXRL4cIjvirSOqs3ho9z4Rqd2+T89adV4jKocM3pkkayfxS
- ku5KlZvhb4yQ55pJDcGGxg6iaM7xnUwmSLfwqlc0XgrHSW6i/c4U2Ybn2CurAcrIvr0v
- F9uw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738054832; x=1738659632;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=S/yU+MyqmTs/DVen/K7mFOJ1zuA3EB/QU24oIL8hgHI=;
- b=hMuB3tQ0DdYrM4f8klh/a5eZhwpCmk2ZUmwHbPBVniyGZGCrhUlnbd2wGtgWZcQU97
- 5BmdeY5SwlhcWBMqQyX9GyK7vOe2853HKPSu803YQSKVXFgm08Oy8wDrvRCm3Gd7bUBR
- i4/lV7y4NsbErinMDxvrWOJkqp5VPr7cPiin+x3xPZkhzZQZ3PszS8q/kogi3LSy8cpe
- Ws5JBsWwJ2jT1Zc/EVwltXclrZOyt38o8JHImb4rTYAioAUK4q5ftcQGvrdTYbxiu5kB
- VyJY9Wmkt3Mn2q+wUpAklTluFjlIfW4w94F1W540RvQRq9iwoa3YYwEah2gzOTaOoorD
- h2yg==
-X-Gm-Message-State: AOJu0YyjqUK8C+cpKJB3yqH+gfWYfk6GolcCommfWQV5QtJymw7zSrgw
- WuQF9dRhMF1N3IC/DiqDOHOtwsR71VJLAy7f06xdPiR8osNsLKhnMdF9IexrwQo=
-X-Gm-Gg: ASbGncvQv1nBTyEYsNwGhwoK21bM24O5q/Lv+/e0qqP1mBCacQAdcanwPdLtG1oFogV
- 36RbzdaLHoMIEkwkkBPXy8JfeajkQE1iy7n2jmfn4RcMlUJWKNgh0n9mPH6DkmvRqdJER1TDq4L
- PVQiVJVXBQemm/7L/d2L3IFBhP0VEsNonD+W7NaCez5ibD+mQCCjkykQJnDcS2nUDWwhbpbbNQa
- 0SoV8UvfoK4c50CMrTvTKcNV8BHL+RwDKnNvzxjn+PI+vGlH4qJRsRDLJb9+1DL3bfdPX0kgWfh
- 1kjCTLLeEouT20GxiP1eN448
-X-Google-Smtp-Source: AGHT+IHQT9wvFFIi0sS1VKg7iVFPjhcjWJdzmiUa6mQ8tPscjAF0mqYGF4ImsTpR+7qD5bLqKmEFeA==
-X-Received: by 2002:a5d:6d84:0:b0:38b:ee18:dd46 with SMTP id
- ffacd0b85a97d-38c49a52891mr2194099f8f.20.1738054831773; 
- Tue, 28 Jan 2025 01:00:31 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c4e49sm13710655f8f.98.2025.01.28.01.00.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jan 2025 01:00:31 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Junhui Liu <junhui.liu@pigmoral.tech>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Junhui Liu <junhui.liu@pigmoral.tech>
-Subject: Re: [PATCH] usb: dwc2: Refactor register operations with clrsetbits
- macros
-In-Reply-To: <20250126-dwc2-clrsetbits-refactor-v1-1-68c27e1b6f84@pigmoral.tech>
-References: <20250126-dwc2-clrsetbits-refactor-v1-1-68c27e1b6f84@pigmoral.tech>
-Date: Tue, 28 Jan 2025 10:00:30 +0100
-Message-ID: <871pwns47l.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=fuga@studiofuga.com
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Yhzvj1kj3z1ms;
+ Tue, 28 Jan 2025 10:07:45 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=studiofuga.com;
+ s=20220517; t=1738055265;
+ bh=rL10CnC/KER8lFK8DnqrJNFmDPD/gLLRAn8DkhrxuJQ=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=pa6iEZoDvH0e3jUMNyYkpXboeIgOpsBwmUsUMWNunuoxmdq5gscvxKVYHNmHq00c/
+ NKkE8olDIKvRsNHLwWlZ3JtSSSp2weDmA0HW8V0BzzguIePE7AeCTt6XkFF4Acpu7/
+ T2ni2gLfIbT7yftYOLyeBJmedeIpgcI4lqyGwKVk=
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Yhzvh1yFtz54v; Tue, 28 Jan 2025 10:07:44 +0100 (CET)
+Message-ID: <a4e474b8-2bc2-4c73-8532-5891af424445@studiofuga.com>
+Date: Tue, 28 Jan 2025 10:07:43 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Fix fastboot handling of partitions when no slots are,
+ supported
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, Maxime Ripard <maxime@cerno.tech>,
+ u-boot@lists.denx.de
+References: <a70b19e6-4436-4fcf-bebd-b6877b66779e@studiofuga.com>
+ <874j1js4yb.fsf@baylibre.com>
+Content-Language: en-US
+From: Federico Fuga <fuga@studiofuga.com>
+Autocrypt: addr=fuga@studiofuga.com; keydata=
+ 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
+ 3Z10R+iQ3XwjCMCTFTN+4NBJ1U0=
+In-Reply-To: <874j1js4yb.fsf@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,342 +106,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Junhui,
+Hi Mattijs,
+sorry, my bad: I exported from the wrong branch, as I was working on the 
+latest release, not from main.
 
-Thank you for the patch.
+Resending it.
+Sorry for the mistake.
 
-On dim., janv. 26, 2025 at 00:29, Junhui Liu <junhui.liu@pigmoral.tech> wrote:
 
-> Refactor DWC2 USB gadget driver to replace manual read-modify-write
-> operations with `clrsetbits_le32`, `setbits_le32`, and `clrbits_le32`
-> macros, which simplify the code and improve readability.
+Federico
+
+
+
+
+On 28/01/25 09:44, Mattijs Korpershoek wrote:
+> Hi Federico,
 >
-> Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
+> Thank you for the patch.
+>
+> On ven., janv. 24, 2025 at 11:49, Federico Fuga <fuga@studiofuga.com> wrote:
+>
+>> The fastboot module has a bug that prevents some command to work
+>> properly on devices that haven't an Android-like partition scheme, that
+>> is, just one spl and one kernel partition, instead of the redundant
+>> scheme with _a and _b slots.
+>>
+>> This is the schema of our NAND storage (board is based on an AllWinner
+>> A33 sunxi chip):
+>>
+>> => mtdparts
+>>
+>> device nand0 <1c03000.nand>, # parts = 4
+>>    #: name         size            net size        offset mask_flags
+>>    0: spl          0x00020000      0x00020000      0x00000000      0
+>>    1: uboot        0x00100000      0x00100000      0x00020000      0
+>>    2: kernel       0x00400000      0x00400000      0x00120000      0
+>>    3: ubi          0x07ae0000      0x079e0000 (!)  0x00520000      0
+>>
+>> active partition: nand0,0 - (spl) 0x00020000 @ 0x00000000
+>>
+>> This happens when we try to erase the spl partition using fastboot:
+>>
+>> $ fastboot erase spl
+>> Erasing 'spl_a'               FAILED (remote: 'invalid NAND device')
+>> fastboot: error: Command failed
+>>
+>> The error occurs because getvars fails to handle the error returned by
+>> nand layer when a partition cannot be found.
+>>
+>> Indeed, getvar_get_part_info returns what is returned by
+>> fastboot_nand_get_part_info (0 on success, 1 on failure) but it should
+>> return -ENODEV or -EINVAL instead. Since the cause of failure is not
+>> returned by the nand function, I decided to return -EINVAL to make it
+>> simple.
+>>
+>> Signed-off-by: Federico Fuga <fuga@studiofuga.com>
+> Unfortunately, I'm unable to apply this. I've tried using b4 and via git am.
+>
+> $ b4 shazam -s -l --check a70b19e6-4436-4fcf-bebd-b6877b66779e@studiofuga.com
+>
+> Grabbing thread from lore.kernel.org/all/a70b19e6-4436-4fcf-bebd-b6877b66779e@studiofuga.com/t.mbox.gz
+> Checking for newer revisions
+> Grabbing search results from lore.kernel.org
+> Analyzing 2 messages in the thread
+> Assuming new revision: v2 ([PATCH] Fix fastboot handling of partitions when no slots are, supported)
+> Analyzing 0 code-review messages
+> Will use the latest revision: v2
+> You can pick other revisions using the -vN flag
+> Checking attestation on all messages, may take a moment...
 > ---
-> This patch is a supplement of patch series [1].
+>    [PATCH] Fix fastboot handling of partitions when no slots are, supported
+>      + Link: https://lore.kernel.org/r/add4f6ac-3dd5-4707-a40c-a41191e62912@studiofuga.com
+>      + Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Traceback (most recent call last):
+>    File "/mnt/work/upstream/b4/src/b4/command.py", line 435, in <module>
+>      cmd()
+>      ~~~^^
+>    File "/mnt/work/upstream/b4/src/b4/command.py", line 417, in cmd
+>      cmdargs.func(cmdargs)
 >
-> [1] https://lore.kernel.org/u-boot/20250110-dwc2-dev-v4-0-987f4fd6f8b2@pigmoral.tech
-> ---
->  drivers/usb/gadget/dwc2_udc_otg.c          | 16 ++------
->  drivers/usb/gadget/dwc2_udc_otg_phy.c      | 33 ++++++----------
->  drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 63 +++++++-----------------------
->  3 files changed, 31 insertions(+), 81 deletions(-)
 >
-> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-> index c3fdc81e9096bb216b63ff0ac672d216bed3f23d..40393141ca95b8947712a8996727391fe8742275 100644
-> --- a/drivers/usb/gadget/dwc2_udc_otg.c
-> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
-> @@ -465,7 +465,6 @@ static void reconfig_usbd(struct dwc2_udc *dev)
->  {
->  	/* 2. Soft-reset OTG Core and then unreset again. */
->  	int i;
-> -	unsigned int uTemp;
->  	u32 dflt_gusbcfg;
->  	u32 rx_fifo_sz, tx_fifo_sz, np_tx_fifo_sz;
->  	u32 max_hw_ep;
-> @@ -497,16 +496,12 @@ static void reconfig_usbd(struct dwc2_udc *dev)
->  	writel(dflt_gusbcfg, &reg->global_regs.gusbcfg);
->  
->  	/* 3. Put the OTG device core in the disconnected state.*/
-> -	uTemp = readl(&reg->device_regs.dctl);
-> -	uTemp |= DCTL_SFTDISCON;
-> -	writel(uTemp, &reg->device_regs.dctl);
-> +	setbits_le32(&reg->device_regs.dctl, DCTL_SFTDISCON);
->  
->  	udelay(20);
->  
->  	/* 4. Make the OTG device core exit from the disconnected state.*/
-> -	uTemp = readl(&reg->device_regs.dctl);
-> -	uTemp = uTemp & ~DCTL_SFTDISCON;
-> -	writel(uTemp, &reg->device_regs.dctl);
-> +	clrbits_le32(&reg->device_regs.dctl, DCTL_SFTDISCON);
->  
->  	/* 5. Configure OTG Core to initial settings of device mode.*/
->  	/* [][1: full speed(30Mhz) 0:high speed]*/
-> @@ -592,7 +587,6 @@ static void reconfig_usbd(struct dwc2_udc *dev)
->  
->  static void set_max_pktsize(struct dwc2_udc *dev, enum usb_device_speed speed)
->  {
-> -	unsigned int ep_ctrl;
->  	int i;
->  
->  	if (speed == USB_SPEED_HIGH) {
-> @@ -612,12 +606,10 @@ static void set_max_pktsize(struct dwc2_udc *dev, enum usb_device_speed speed)
->  		dev->ep[i].ep.maxpacket = ep_fifo_size;
->  
->  	/* EP0 - Control IN (64 bytes)*/
-> -	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
-> -	writel(ep_ctrl | (0 << 0), &reg->device_regs.in_endp[EP0_CON].diepctl);
-> +	setbits_le32(&reg->device_regs.in_endp[EP0_CON].diepctl, (0 << 0));
->  
->  	/* EP0 - Control OUT (64 bytes)*/
-> -	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
-> -	writel(ep_ctrl | (0 << 0), &reg->device_regs.out_endp[EP0_CON].doepctl);
-> +	setbits_le32(&reg->device_regs.out_endp[EP0_CON].doepctl, (0 << 0));
->  }
->  
->  static int dwc2_ep_enable(struct usb_ep *_ep,
-> diff --git a/drivers/usb/gadget/dwc2_udc_otg_phy.c b/drivers/usb/gadget/dwc2_udc_otg_phy.c
-> index c7eea7b34421ad9bde86d42334852d2f21a133e8..e0ac5d142b0610461408754a59bfd2aa09848407 100644
-> --- a/drivers/usb/gadget/dwc2_udc_otg_phy.c
-> +++ b/drivers/usb/gadget/dwc2_udc_otg_phy.c
-> @@ -48,29 +48,24 @@ void otg_phy_init(struct dwc2_udc *dev)
->  	printf("USB PHY0 Enable\n");
->  
->  	/* Enable PHY */
-> -	writel(readl(usb_phy_ctrl) | USB_PHY_CTRL_EN0, usb_phy_ctrl);
-> +	setbits_le32(usb_phy_ctrl, USB_PHY_CTRL_EN0);
->  
->  	if (dev->pdata->usb_flags == PHY0_SLEEP) /* C210 Universal */
-> -		writel((readl(&phy->phypwr)
-> -			&~(PHY_0_SLEEP | OTG_DISABLE_0 | ANALOG_PWRDOWN)
-> -			&~FORCE_SUSPEND_0), &phy->phypwr);
-> +		clrbits_le32(&phy->phypwr, PHY_0_SLEEP | OTG_DISABLE_0 |
-> +					   ANALOG_PWRDOWN | FORCE_SUSPEND_0);
->  	else /* C110 GONI */
-> -		writel((readl(&phy->phypwr) &~(OTG_DISABLE_0 | ANALOG_PWRDOWN)
-> -			&~FORCE_SUSPEND_0), &phy->phypwr);
-> +		clrbits_le32(&phy->phypwr, OTG_DISABLE_0 | ANALOG_PWRDOWN | FORCE_SUSPEND_0);
->  
->  	if (s5p_cpu_id == 0x4412)
-> -		writel((readl(&phy->phyclk) & ~(EXYNOS4X12_ID_PULLUP0 |
-> -			EXYNOS4X12_COMMON_ON_N0)) | EXYNOS4X12_CLK_SEL_24MHZ,
-> -		       &phy->phyclk); /* PLL 24Mhz */
-> +		clrsetbits_le32(&phy->phyclk, EXYNOS4X12_ID_PULLUP0 | EXYNOS4X12_COMMON_ON_N0,
-> +				EXYNOS4X12_CLK_SEL_24MHZ); /* PLL 24Mhz */
->  	else
-> -		writel((readl(&phy->phyclk) & ~(ID_PULLUP0 | COMMON_ON_N0)) |
-> -		       CLK_SEL_24MHZ, &phy->phyclk); /* PLL 24Mhz */
-> +		clrsetbits_le32(&phy->phyclk, ID_PULLUP0 | COMMON_ON_N0,
-> +				CLK_SEL_24MHZ); /* PLL 24Mhz */
->  
-> -	writel((readl(&phy->rstcon) &~(LINK_SW_RST | PHYLNK_SW_RST))
-> -	       | PHY_SW_RST0, &phy->rstcon);
-> +	clrsetbits_le32(&phy->rstcon, LINK_SW_RST | PHYLNK_SW_RST, PHY_SW_RST0);
->  	udelay(10);
-> -	writel(readl(&phy->rstcon)
-> -	       &~(PHY_SW_RST0 | LINK_SW_RST | PHYLNK_SW_RST), &phy->rstcon);
-> +	clrbits_le32(&phy->rstcon, PHY_SW_RST0 | LINK_SW_RST | PHYLNK_SW_RST);
->  	udelay(10);
->  }
->  
-> @@ -86,13 +81,11 @@ void otg_phy_off(struct dwc2_udc *dev)
->  	writel(readl(&phy->phypwr) &~PHY_SW_RST0, &phy->rstcon);
->  	udelay(20);
->  
-> -	writel(readl(&phy->phypwr) | OTG_DISABLE_0 | ANALOG_PWRDOWN
-> -	       | FORCE_SUSPEND_0, &phy->phypwr);
-> +	setbits_le32(&phy->phypwr, OTG_DISABLE_0 | ANALOG_PWRDOWN | FORCE_SUSPEND_0);
->  
-> -	writel(readl(usb_phy_ctrl) &~USB_PHY_CTRL_EN0, usb_phy_ctrl);
-> +	clrbits_le32(usb_phy_ctrl, USB_PHY_CTRL_EN0);
->  
-> -	writel((readl(&phy->phyclk) & ~(ID_PULLUP0 | COMMON_ON_N0)),
-> -	      &phy->phyclk);
-> +	clrbits_le32(&phy->phyclk, ID_PULLUP0 | COMMON_ON_N0);
->  
->  	udelay(10000);
->  
-> diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-> index 2be93592c423df7a9acea473b0e84e1f948999be..fca052b4556a7d2ae4fe516e39820611d7082e2f 100644
-> --- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-> +++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-> @@ -31,15 +31,11 @@ int clear_feature_flag;
->  
->  static inline void dwc2_udc_ep0_zlp(struct dwc2_udc *dev)
->  {
-> -	u32 ep_ctrl;
-> -
->  	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
->  	       &reg->device_regs.in_endp[EP0_CON].diepdma);
->  	writel(FIELD_PREP(DXEPTSIZ_PKTCNT_MASK, 1), &reg->device_regs.in_endp[EP0_CON].dieptsiz);
->  
-> -	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
-> -	writel(ep_ctrl | DXEPCTL_EPENA | DXEPCTL_CNAK,
-> -	       &reg->device_regs.in_endp[EP0_CON].diepctl);
-> +	setbits_le32(&reg->device_regs.in_endp[EP0_CON].diepctl, DXEPCTL_EPENA | DXEPCTL_CNAK);
->  
->  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
->  		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
-> @@ -48,8 +44,6 @@ static inline void dwc2_udc_ep0_zlp(struct dwc2_udc *dev)
->  
->  static void dwc2_udc_pre_setup(void)
->  {
-> -	u32 ep_ctrl;
-> -
->  	debug_cond(DEBUG_IN_EP,
->  		   "%s : Prepare Setup packets.\n", __func__);
->  
-> @@ -58,20 +52,16 @@ static void dwc2_udc_pre_setup(void)
->  	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
->  	       &reg->device_regs.out_endp[EP0_CON].doepdma);
->  
-> -	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
-> -	writel(ep_ctrl | DXEPCTL_EPENA, &reg->device_regs.out_endp[EP0_CON].doepctl);
-> +	setbits_le32(&reg->device_regs.out_endp[EP0_CON].doepctl, DXEPCTL_EPENA);
->  
->  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
->  		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
->  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
->  		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
-> -
->  }
->  
->  static inline void dwc2_ep0_complete_out(void)
->  {
-> -	u32 ep_ctrl;
-> -
->  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
->  		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
->  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
-> @@ -85,15 +75,12 @@ static inline void dwc2_ep0_complete_out(void)
->  	writel(phys_to_bus((unsigned long)usb_ctrl_dma_addr),
->  	       &reg->device_regs.out_endp[EP0_CON].doepdma);
->  
-> -	ep_ctrl = readl(&reg->device_regs.out_endp[EP0_CON].doepctl);
-> -	writel(ep_ctrl | DXEPCTL_EPENA | DXEPCTL_CNAK,
-> -	       &reg->device_regs.out_endp[EP0_CON].doepctl);
-> +	setbits_le32(&reg->device_regs.out_endp[EP0_CON].doepctl, DXEPCTL_EPENA | DXEPCTL_CNAK);
->  
->  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DIEPCTL0 = 0x%x\n",
->  		__func__, readl(&reg->device_regs.in_endp[EP0_CON].diepctl));
->  	debug_cond(DEBUG_EP0 != 0, "%s:EP0 ZLP DOEPCTL0 = 0x%x\n",
->  		__func__, readl(&reg->device_regs.out_endp[EP0_CON].doepctl));
-> -
->  }
->  
->  static int setdma_rx(struct dwc2_ep *ep, struct dwc2_request *req)
-> @@ -136,12 +123,11 @@ static int setdma_rx(struct dwc2_ep *ep, struct dwc2_request *req)
->  		   readl(&reg->device_regs.out_endp[ep_num].doepctl),
->  		   buf, pktcnt, length);
->  	return 0;
-> -
->  }
->  
->  static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
->  {
-> -	u32 *buf, ctrl = 0;
-> +	u32 *buf;
->  	u32 length, pktcnt;
->  	u32 ep_num = ep_index(ep);
->  
-> @@ -171,16 +157,10 @@ static int setdma_tx(struct dwc2_ep *ep, struct dwc2_request *req)
->  	       FIELD_PREP(DXEPTSIZ_XFERSIZE_MASK, length),
->  	       &reg->device_regs.in_endp[ep_num].dieptsiz);
->  
-> -	ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
-> -
-> -	/* Write the FIFO number to be used for this endpoint */
-> -	ctrl &= ~DXEPCTL_TXFNUM_MASK;
-> -	ctrl |= FIELD_PREP(DXEPCTL_TXFNUM_MASK, ep->fifo_num);
-> -
-> -	/* Clear reserved (Next EP) bits */
-> -	ctrl &= ~DXEPCTL_NEXTEP_MASK;
-> -
-> -	writel(DXEPCTL_EPENA | DXEPCTL_CNAK | ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
-> +	clrsetbits_le32(&reg->device_regs.in_endp[ep_num].diepctl,
-> +			DXEPCTL_TXFNUM_MASK | DXEPCTL_NEXTEP_MASK,
-> +			FIELD_PREP(DXEPCTL_TXFNUM_MASK, ep->fifo_num) |
-> +			DXEPCTL_EPENA | DXEPCTL_CNAK);
->  
->  	debug_cond(DEBUG_IN_EP,
->  		"%s:EP%d TX DMA start : DIEPDMA0 = 0x%x,"
-> @@ -766,9 +746,7 @@ static int dwc2_fifo_read(struct dwc2_ep *ep, void *cp, int max)
->   */
->  static void udc_set_address(struct dwc2_udc *dev, unsigned char address)
->  {
-> -	u32 ctrl = readl(&reg->device_regs.dcfg);
-> -
-> -	writel(FIELD_PREP(DCFG_DEVADDR_MASK, address) | ctrl, &reg->device_regs.dcfg);
-> +	setbits_le32(&reg->device_regs.dcfg, FIELD_PREP(DCFG_DEVADDR_MASK, address));
->  
->  	dwc2_udc_ep0_zlp(dev);
->  
-> @@ -892,7 +870,6 @@ static int dwc2_udc_get_status(struct dwc2_udc *dev,
->  {
->  	u8 ep_num = crq->wIndex & 0x3;
->  	u16 g_status = 0;
-> -	u32 ep_ctrl;
->  
->  	debug_cond(DEBUG_SETUP != 0,
->  		   "%s: *** USB_REQ_GET_STATUS\n", __func__);
-> @@ -940,9 +917,7 @@ static int dwc2_udc_get_status(struct dwc2_udc *dev,
->  	writel(FIELD_PREP(DXEPTSIZ_PKTCNT_MASK, 1) | FIELD_PREP(DXEPTSIZ_XFERSIZE_MASK, 2),
->  	       &reg->device_regs.in_endp[EP0_CON].dieptsiz);
->  
-> -	ep_ctrl = readl(&reg->device_regs.in_endp[EP0_CON].diepctl);
-> -	writel(ep_ctrl | DXEPCTL_EPENA | DXEPCTL_CNAK,
-> -	       &reg->device_regs.in_endp[EP0_CON].diepctl);
-> +	setbits_le32(&reg->device_regs.in_endp[EP0_CON].diepctl, DXEPCTL_EPENA | DXEPCTL_CNAK);
->  	dev->ep0state = WAIT_FOR_NULL_COMPLETE;
->  
->  	return 0;
-> @@ -951,21 +926,16 @@ static int dwc2_udc_get_status(struct dwc2_udc *dev,
->  static void dwc2_udc_set_nak(struct dwc2_ep *ep)
->  {
->  	u8		ep_num;
-> -	u32		ep_ctrl = 0;
->  
->  	ep_num = ep_index(ep);
->  	debug("%s: ep_num = %d, ep_type = %d\n", __func__, ep_num, ep->ep_type);
->  
->  	if (ep_is_in(ep)) {
-> -		ep_ctrl = readl(&reg->device_regs.in_endp[ep_num].diepctl);
-> -		ep_ctrl |= DXEPCTL_SNAK;
-> -		writel(ep_ctrl, &reg->device_regs.in_endp[ep_num].diepctl);
-> +		setbits_le32(&reg->device_regs.in_endp[ep_num].diepctl, DXEPCTL_SNAK);
->  		debug("%s: set NAK, DIEPCTL%d = 0x%x\n",
->  			__func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
->  	} else {
-> -		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
-> -		ep_ctrl |= DXEPCTL_SNAK;
-> -		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
-> +		setbits_le32(&reg->device_regs.out_endp[ep_num].doepctl, DXEPCTL_SNAK);
->  		debug("%s: set NAK, DOEPCTL%d = 0x%x\n",
->  		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
->  	}
-> @@ -995,12 +965,8 @@ static void dwc2_udc_ep_set_stall(struct dwc2_ep *ep)
->  		      __func__, ep_num, readl(&reg->device_regs.in_endp[ep_num].diepctl));
->  
->  	} else {
-> -		ep_ctrl = readl(&reg->device_regs.out_endp[ep_num].doepctl);
-> -
->  		/* set the stall bit */
-> -		ep_ctrl |= DXEPCTL_STALL;
-> -
-> -		writel(ep_ctrl, &reg->device_regs.out_endp[ep_num].doepctl);
-> +		setbits_le32(&reg->device_regs.out_endp[ep_num].doepctl, DXEPCTL_STALL);
->  		debug("%s: set stall, DOEPCTL%d = 0x%x\n",
->  		      __func__, ep_num, readl(&reg->device_regs.out_endp[ep_num].doepctl));
->  	}
-> @@ -1145,9 +1111,8 @@ static void dwc2_udc_ep_activate(struct dwc2_ep *ep)
->  	}
->  
->  	/* Unmask EP Interrtupt */
-> -	writel(readl(&reg->device_regs.daintmsk) | daintmsk, &reg->device_regs.daintmsk);
-> +	setbits_le32(&reg->device_regs.daintmsk, daintmsk);
->  	debug("%s: DAINTMSK = 0x%x\n", __func__, readl(&reg->device_regs.daintmsk));
-> -
->  }
->  
->  static int dwc2_udc_clear_feature(struct usb_ep *_ep)
+> Downloading the thread from this patchwork link (clicking on "mbox"):
+> https://patchwork.ozlabs.org/project/uboot/patch/a70b19e6-4436-4fcf-bebd-b6877b66779e@studiofuga.com/
 >
-> ---
-> base-commit: 05051cfdf0ed6258a945ec181e36d14b7e450dbf
-> change-id: 20250125-dwc2-clrsetbits-refactor-e485db93d296
-> prerequisite-message-id: <20250110-dwc2-dev-v4-0-987f4fd6f8b2@pigmoral.tech>
-> prerequisite-patch-id: f05fe7f02791b8f5f6e89e3768584622c49e2ed7
-> prerequisite-patch-id: ba89fc49fb08beb94bc5c69c4b82e198a27c334d
-> prerequisite-patch-id: bc3632796d0010d5711be9597c4222c23adbf9f7
-> prerequisite-patch-id: b30e9c649999f42bc5c659bde5650e8aa2a33acd
-> prerequisite-patch-id: d6623dbacae347c4c7e339a294c60402667a359b
-> prerequisite-patch-id: 64e64d31939ea7f69818883fbafb8c1906b53ecb
-> prerequisite-patch-id: 9de6c80cd2996924b8f94a33f3e2a3dd63f1f57b
-> prerequisite-patch-id: e1752a8f249752de133bda41a387b3d147d60453
+> $ git am Fix-fastboot-handling-of-partitions-when-no-slots-are-supported.patch
+> Applying: Fix fastboot handling of partitions when no slots are, supported
+> error: corrupt patch at line 13
+> error: could not build fake ancestor
+> Patch failed at 0001 Fix fastboot handling of partitions when no slots are, supported
+> hint: Use 'git am --show-current-patch=diff' to see the failed patch
+> hint: When you have resolved this problem, run "git am --continue".
+> hint: If you prefer to skip this patch, run "git am --skip" instead.
+> hint: To restore the original branch and stop patching, run "git am --abort".
+> hint: Disable this message with "git config advice.mergeConflict false"
 >
-> Best regards,
-> -- 
-> Junhui Liu <junhui.liu@pigmoral.tech>
+> Can you please confirm that you are able to apply it yourself?
+> Maybe the email client is misconfigured somehow?
+>
+> I've also tried to apply the one that has been send yesterday
+> (https://patchwork.ozlabs.org/project/uboot/patch/add4f6ac-3dd5-4707-a40c-a41191e62912@studiofuga.com/)
+> but I'm encountering the same problem.
+>
+>> ---
+>>    drivers/fastboot/fb_getvar.c | 5 ++++-
+>>    drivers/fastboot/fb_nand.c   | 2 +-
+>>    2 files changed, 5 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+>> index 93cbd598e0..f5d8b03301 100644
+>> --- a/drivers/fastboot/fb_getvar.c
+>> +++ b/drivers/fastboot/fb_getvar.c
+>> @@ -121,8 +121,11 @@ static int getvar_get_part_info(const char
+>> *part_name, char *response,
+>>                *size = disk_part.size * disk_part.blksz;
+>>        } else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND)) {
+>>            r = fastboot_nand_get_part_info(part_name, &part_info, response);
+>> -        if (r >= 0 && size)
+>> +        if (r == 0 && size) {
+>>                *size = part_info->size;
+>> +        } else {
+>> +            r = -EINVAL;
+>> +        }
+>>        } else {
+>>            fastboot_fail("this storage is not supported in bootloader",
+>> response);
+>>            r = -ENODEV;
+>> diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
+>> index 5a55144479..3ee0f40ea8 100644
+>> --- a/drivers/fastboot/fb_nand.c
+>> +++ b/drivers/fastboot/fb_nand.c
+>> @@ -141,7 +141,7 @@ static lbaint_t fb_nand_sparse_reserve(struct
+>> sparse_storage *info,
+>>     *
+>>     * @part_name: Named device to lookup
+>>     * @part_info: Pointer to returned part_info pointer
+>> - * @response: Pointer to fastboot response buffer
+>> + * @response: 0 on success, 1 otherwise
+>>     */
+>>    int fastboot_nand_get_part_info(const char *part_name,
+>>                    struct part_info **part_info, char *response)
+>> -- 
+>> 2.48.1
