@@ -4,67 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB291C02188
-	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 01:50:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F03FDC02188
+	for <u-boot@archiver.kernel.org>; Tue, 28 Jan 2025 02:21:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1415E81875;
-	Tue, 28 Jan 2025 02:50:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2986081875;
+	Tue, 28 Jan 2025 03:21:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738029007;
-	bh=jP9MwNnOE3Jf56Iyz2LV/7044ppKaKI6jPAy90IU9bg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Rkhp7iWKLQyXe8lJ7WXPF2/O3PbOjqMsW9cCya6zbI8VS1XMpPvodxaR1klJN0zxu
-	 s+zZGg+e+7UPgxmVWTI3RxWzyIl83kIII/t2T7F7KVE30STO4JiHTdFO8ROHwhevoz
-	 6F5ME9+wZAVSYV4VA6fY2QKWBgA4iGnsOHvZgVIRuLuPZ7s+vQ2RrHDTMexjIPzks2
-	 RwueXySgU/svUMpt6PXsjyl9L/cqwe60Q9dOCE+FTupJc/Z7OmSA/nE+HNqNlPxxyF
-	 5X/VqIJUlT1QNdx3BlPrqkfvrimyVoqv2+BhOnTOX631yR2fWtBd9glrgsZA60r0p2
-	 HjIWnUScGym7w==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8170E819B1; Tue, 28 Jan 2025 02:50:05 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10B6481111
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 02:50:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="QS725GLA"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A46C0103802C1; Tue, 28 Jan 2025 02:50:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738029002;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jP9MwNnOE3Jf56Iyz2LV/7044ppKaKI6jPAy90IU9bg=;
- b=QS725GLAbukr/gW1Pf+tf3Z13WJWquioCPEhaM82Dpo3iZMc2Poxr2c66MC5K6t7z3KG3s
- 24EQivUEt160vXk6/7qoneyRofoe+g0pc7WbfSNVhsmOiR88tfFTExKKwr1XBLspM74ivh
- u34lzp3kFGoXMdWbUTxJpia4ZjuH2kNnTO0ptKaL9p5tWdjxxPiY9FEFP5a169HzyURp3S
- Uw/AhSrETpiW4rr/TqwR2OOvLXZJ0a1x4al8oS3d+s3N7nusULoMws7/rBHTa0Z+yUxRrI
- BFVjkg6F1k04LEkmAPPGxbLznguXA/sRUN8hyaUc06P7Z5gYRi2r0hYqIqFvlA==
-Message-ID: <2f367a3a-659b-4fe5-be34-e270ee941866@denx.de>
-Date: Tue, 28 Jan 2025 02:49:23 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EUZAQ0ge";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C918A81951; Tue, 28 Jan 2025 03:21:48 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5470C81870
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 03:21:46 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-4678664e22fso45330821cf.2
+ for <u-boot@lists.denx.de>; Mon, 27 Jan 2025 18:21:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738030905; x=1738635705; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QT4DDXTa4kdEFNCeQ61jUg8pXp9q/lYDvMy1VxTvOQ4=;
+ b=EUZAQ0geDJbdE1SDCoimbNilYqf1VqR6GWA9DYCAVrlJJK/6F+V4n+xanjL3+XF85f
+ P/wlB1Un8OHRoLneaMdF/gHDIwLXEagPrv32a690ek7TwQ1xCIUEFQhSJp5uM1ifdRUl
+ ziIv1zgXlDX0YGfyPq8Mgm3C5s7p7FVDhn79I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738030905; x=1738635705;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QT4DDXTa4kdEFNCeQ61jUg8pXp9q/lYDvMy1VxTvOQ4=;
+ b=HzXBpbOrD8p34KwTiQLOG5cOE5SwbqEoXw2QfbU1/fvXaNwefoUf7LOph4jb2wDmc/
+ MNqLdV2SPqQxiFc/xjLgeUVIWg5VZsJLjezPLRz+94vEV1lOahdm3GA6DFBf50iIRPRm
+ rxGA2cBamOW8lhbk3Sc56bgrd05cOO2e0cSBBMOyziH/fDNW3P8+lDrV48AhpxyW4DyM
+ OdBIIwd/25y5FT+lg0Y1S7jdZxHWP1m34Fkgn7wzgqDRGWLyLxpeHPj1p+rbKrFcSiL9
+ CXlte0S2crwmDLD7ATdTUr+wE+0+xMW4HDDbs1HGUN9rWHNnOsWJ78/dU5Dmg6rFVdbC
+ wmBg==
+X-Gm-Message-State: AOJu0Yzc+Na7paL/9qxX3qqThgUBzqf3KpZ6yGMI3n8jSPfMGoc/n209
+ ltiRrTz0SrVvf9OFWz5o2V5520g2i80lzA9lULllocZS+FJRMMz0O4bH1Pd04TWHnIQBP1th3cW
+ M
+X-Gm-Gg: ASbGncsNJL8StRK2vR4T7rADeMzxI8IzRN7MtOnqnTJ3yJ4JJi1WXBZZOAiex4cYQ+t
+ mm7dRD8Goxdr2O9pcCl9ZJS4seLkLwIXPbuucI3Zivm0jm3ruoyJH16q8G4rbvkyL18NlFUkXAB
+ CGqEL1wkAJ5mxsMZ34q1AnfsZn+snTPqf/xL9IsPFfixokVChDIo+RFeRMD8xezcG7w+Gew4ATq
+ Y7aODWWslI+rQ6BjGH/4yRYMKO66+UuzXtgMaT96pMwtgii3Ith0+IzDsFb6n4YTPCXtRaNPwd5
+ t0goJiA9AHQvSOg=
+X-Google-Smtp-Source: AGHT+IGvzXui71sur6sxrVDY98V4t9mqKScQs5iLqMqx4t7WghkRmhQMSGL83OBHfCP4vwBdtb3tXg==
+X-Received: by 2002:a05:622a:181e:b0:46c:a0dc:efb1 with SMTP id
+ d75a77b69052e-46e12b683ebmr651246581cf.34.1738030905108; 
+ Mon, 27 Jan 2025 18:21:45 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-46e66b85f1esm45407271cf.78.2025.01.27.18.21.43
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jan 2025 18:21:44 -0800 (PST)
+Date: Mon, 27 Jan 2025 20:21:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: Re: [ANN] U-Boot v2025.04-rc1 released
+Message-ID: <20250128022141.GI1233568@bill-the-cat>
+References: <20250127224021.GH1233568@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] USB: Fix NULLPTR dereference when serial# is unset
-To: Michael Ferolito <michaelsunn101@gmail.com>, u-boot@lists.denx.de,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Heiko Schocher <hs@denx.de>, Kyungmin Park <kyungmin.park@samsung.com>
-References: <20250128003010.971175-1-michaelsunn101@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250128003010.971175-1-michaelsunn101@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="V+w9CD7s+gxB2GYK"
+Content-Disposition: inline
+In-Reply-To: <20250127224021.GH1233568@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,22 +95,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/28/25 1:30 AM, Michael Ferolito wrote:
-> The current behaviour of this function will dereference a null pointer
-> if the serial# environment variable is unset. This was discovered on a
-> board where U-Boot did not have access to the first 256MB of ram,
-> resulting in a board crash.
-> In the event that U-Boot has full access to memory, it will still read
-> from address 0, which is probably not optimal.
-> This simple check is enough to fix it
-> 
-> Signed-off-by: Michael Ferolito <michaelsunn101@gmail.com>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Heiko Schocher <hs@denx.de>
-> Cc: Kyungmin Park <kyungmin.park@samsung.com>
-The subject tag is "usb: gadget: g_dnl:" instead of "USB:" , with that 
-fixed:
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+--V+w9CD7s+gxB2GYK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks
+On Mon, Jan 27, 2025 at 04:40:21PM -0600, Tom Rini wrote:
+
+> Hey all,
+>=20
+> It's release day and so here's v2025.04-rc1. For a -rc1, I think we're
+> in fine enough shape. The next window won't open until after -rc2 so if
+> you have some outstanding patches that you think should be merged to
+> mainline for v2025.04 please speak up (or for custodians, send a pull
+> request).
+>=20
+> As I mentioned elsewhere, I've scheduled a video call tomorrow at 9am
+> -0600 and the calendar link is:
+> https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DN280=
+N2tlcXE3aDVtbjlicnNkcm82YnA1bDAgODliZTdiODEzMTM2YmVjMDZhODNkZTRkYTU5NzQ1ZjB=
+hYmQxMWMxYjgzNjA2MWFlMDZjMWM3ZGJjZDE4ZGY0MUBn&tmsrc=3D89be7b813136bec06a83d=
+e4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.calendar.google.com
+> and I also send the meeting invite via Google to the mailing list. I
+> plan to do these regularly, post release and depending on reception the
+> time can be adjusted or perhaps duplicate meetings held.
+>=20
+> In terms of a changelog,=20
+> git log --merges v2025.01..v2025.04-rc1
+> As always, more details in pull requests (or the tags referenced by
+> them) will result in more details here.
+>=20
+> I continue to plan to do an rc release every two weeks and the final
+> release will be 07 April 2025.
+
+I ran coverity scan, but I'm not sending the report as it's a new
+version and so found 134 "new" issues including in code that wasn't
+changed. If you have access already I would encourage you to look at the
+areas of code you have an interest in for any new defects.
+
+--=20
+Tom
+
+--V+w9CD7s+gxB2GYK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeYPzIACgkQFHw5/5Y0
+tyypbwv5AQTuyxSCJ8Amq4tBOPl+ypovkZKiEBSsrZ6CFfNWc5verdMMMCM8Emma
+7p6J92PTRwnRcmxBlj7fXclhMYsO10wmGQ3Pgv5kaZKvCO0hCXxb6T+xjGgNVIfS
+jEvghlfy3A+Kc0VJ3NMF3/v7BnyFpOJEObCUmbAPTCE6/9HOA8adZY103IiCTTsq
+MAPnw5IeJrrnPAYSTYLXjCIwn4G5kbgqTiwVwRhEae+y0xn4KhbgkOEf1bmQSSgl
+mL4F5Ybq18gN9QiH9UW3Xj9w4y+wvRUy08pw1rR/tToxTcyuX4ob0SXNasC9VsB3
+YAXGpSfylSZNExyWIF2jUcg5dfqD9Zmzbc6hewIBwAxV+TR+w1ZsKGhh7rRnqHo0
+KvcBL47SFHzFCdkVSltKBniZhbSiImQu25XrOVD10JVVyh1JvtMUzzjvVNDd7x3t
+sqzjKG4gizklPdMYbwaJLFYPYwMmZqkzQW92LxFcull8vcfQqO7E/2QAxur9LK4c
+gIIn8MGS
+=rQfZ
+-----END PGP SIGNATURE-----
+
+--V+w9CD7s+gxB2GYK--
