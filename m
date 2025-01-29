@@ -4,65 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6AAC0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 09:39:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49107C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 10:21:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 909348083C;
-	Wed, 29 Jan 2025 10:39:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BC01980824;
+	Wed, 29 Jan 2025 11:21:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CK1Svo71";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KoNYhkmi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20C798083C; Wed, 29 Jan 2025 10:39:55 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F387807FE
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 10:39:51 +0100 (CET)
+ id 6BAEA80824; Wed, 29 Jan 2025 11:21:12 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 641F9807E1
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 11:21:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50T9dn3S1295037
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 29 Jan 2025 03:39:49 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738143589;
- bh=6mrmoAKPI7nOiCn96xvH6kOqkB07Lytv0tY0/FeLNX4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=CK1Svo711MDJ+WMQJrc/AoxXSeBTAPeZ5X5NODnLyIifk2thcoCZOgyR5UJLKemDW
- RMAH+nZREkh4cUffqTBtBLBYTGKbgI/zmiitnpxDomkyuqSkyj12CYIPlLtcP3sMaL
- FQ4rsW6k8N0LxSIwZ0BNHpGRr5u/CKXwF7LE1wOc=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50T9dnAd052196;
- Wed, 29 Jan 2025 03:39:49 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
- Jan 2025 03:39:49 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 29 Jan 2025 03:39:49 -0600
-Received: from localhost (lcpd911.dhcp.ti.com [172.24.227.226])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50T9dmhC036861;
- Wed, 29 Jan 2025 03:39:48 -0600
-Date: Wed, 29 Jan 2025 15:09:47 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Aashvij Shenai <a-shenai@ti.com>
-CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
- <kamlesh@ti.com>
-Subject: Re: [PATCH] arm64: configs: Remove SYS_BOOTM_LEN for TI devices
-Message-ID: <20250129093947.hbsmskjwbqauli33@lcpd911>
-References: <20250129073608.1549374-1-a-shenai@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-436ce2ab251so44183285e9.1
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 02:21:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738146069; x=1738750869; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WAS2gVOGqreKuVsFAsUb7ms0bWCdZ342D1YtgyxX4mQ=;
+ b=KoNYhkmi7WIEIgrRe499a+QWte0yjpq6Vq2Njedv6nHi4G/MrNxFn2cnpyYA6Dr2C/
+ q5HTXy7jkC7a0XDTyzvvV6UKT8+ufFTWl2pkmI6S3Qv0lZKUIcI6EbP0H0CrKTG+TdJ2
+ rCwE4TQJmTLJCGkKtvkqAy8eW3PjkBKzXYnnZkjFSfqC8grOfmfj+jUt8IZNSR7KTrSY
+ NNaajQj29g1aVlVLQP9MHx6xvILBMlL6pLAXOjGoMJGhvpPNE4BhnICpnVHAuKjtfUC5
+ +dzqEfySRZ8IkomUBpHNEo+Y3AKaTwPcdnoAuiKMdqfYCE+WC8d+P2mbeZ53DfrZ0I/T
+ U4Sg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738146069; x=1738750869;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WAS2gVOGqreKuVsFAsUb7ms0bWCdZ342D1YtgyxX4mQ=;
+ b=CsJ7nL1u/hJknWU01F6swL0CyK27lhTOZiqm7JZyUIYZ75yGVnH4wfjtPtmVXgSXGc
+ U+v3jRHALbP6rZP1UsMeWiqsPZO6EENadvJ8vqR19xkliprplqAttMyPtOPyrSSRYGGs
+ oy0aaDoT8rqMMFHKls1XrlXHd3usYq5rgIDkbwx2zttI6ngnWuiGUNx/SnYGQz+VDKjG
+ 16rTGBPMDjmSeF0U+lGpRh/gksJ/t+sCyZaT4WErhIIhT8G8KnKcLZ4GjTOL+Dpjc6AW
+ FcL6Kl2uK63gmKe/7L1cMiSsQx2XFJEY4Z4zAcP5+ITeURVinQcyZ4OZF6pR+JcQU+8F
+ Sg/g==
+X-Gm-Message-State: AOJu0Yxcbj9WVVa8/zFwv2XSMr32vYENq9O4X6PRw/rDwV2SYmfMfACI
+ d53WEGve7s1vrz6PURdT1rwzlxuydqbZeXfdmmBPfgqP0QDyBcAfxwf9KI55f3WvLCDw+6yntb1
+ /
+X-Gm-Gg: ASbGnctcAZZZvOyLFDOc4v18F59IUXH4wvezFrZ82mjNNT9cvqhMFrsXnLXTKcISPGd
+ a1207YUj2h67N320GnbPwzut0viseCy3bxSuooYJSCb//2VgJ2Cnpm3u/rwJigMulvNeEPrwgFj
+ CLnaznTgagUYdM7g3gp7fNi0biPoa7y9/Rp9+4oD16gWSX5uAXmZFZVOhcrJysXPVm93e3M9HOZ
+ BlAM/AujoyF6VJuNDJeZgqodFw1ZuUoXBnkWO58KzzmFNbhXAa1e8xvex6i2r9V+7ASiph2t/3Z
+ 05sX1ez05nw6hJa/bOvkKnIGZtQ3rMcXR0w3/GsylCqSWf28V4pGfYhkYNCf8euvHn+p
+X-Google-Smtp-Source: AGHT+IHQ3eJT+tm8cI4c2Kx/jijbJcy+s6eaGr/Xn76ZkAkxj7yzouEufPGDgGAna6eYOGDuCGzlAw==
+X-Received: by 2002:a05:6000:1849:b0:385:dea3:6059 with SMTP id
+ ffacd0b85a97d-38c52097553mr2098853f8f.49.1738146068718; 
+ Wed, 29 Jan 2025 02:21:08 -0800 (PST)
+Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
+ [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438dcc32f6bsm17295095e9.26.2025.01.29.02.21.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jan 2025 02:21:08 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: ilias.apalodimas@linaro.org,
+	raymond.mao@linaro.org
+Subject: Pull request for tpm-master-28012025
+Date: Wed, 29 Jan 2025 12:21:02 +0200
+Message-ID: <20250129102102.1844476-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250129073608.1549374-1-a-shenai@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,132 +96,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aashvij,
+The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c047:
 
-On Jan 29, 2025 at 13:06:08 +0530, Aashvij Shenai wrote:
-> AM62x BOOTM_LEN is too small to contain OS images. Removing this sets the
-> size to a default 0x4000000 (for all arm64 devices).
-> 
-> It is unnecessary to specifically call the default size for the other
-> configs.
-> 
-> Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
-> Signed-off-by: Aashvij Shenai <a-shenai@ti.com>
-> ---
+  Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
 
-$subject doesn't tell if it's an upstream patch that you want review on
-or if it's for ti-u-boot. So not getting the full context of what this
-patch is aimed toward.
+are available in the Git repository at:
 
-One other tip - use --base parameter while generating the patch file to
-include the commit SHA on which your patch is based on.
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-28012025
 
-Otherwise, LGTM
+for you to fetch changes up to 8895ff8ae2186b53b4a073966ef16b09c12a69b8:
 
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
+  tpm: get tpm event log from bloblist (2025-01-28 09:09:32 +0200)
 
-> 
-> Reference patch: https://lore.kernel.org/u-boot/20240708-remove-bootm-len-v1-1-2a537061426c@ti.com/
-> 
-> ---
->  configs/am62x_beagleplay_a53_defconfig | 1 -
->  configs/am62x_evm_a53_defconfig        | 1 -
->  configs/am65x_evm_r5_defconfig         | 1 -
->  configs/am65x_evm_r5_usbdfu_defconfig  | 1 -
->  configs/am65x_evm_r5_usbmsc_defconfig  | 1 -
->  configs/j721e_evm_r5_defconfig         | 1 -
->  configs/j721s2_evm_r5_defconfig        | 1 -
->  7 files changed, 7 deletions(-)
-> 
-> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-> index af54f9670a7..a8a73166597 100644
-> --- a/configs/am62x_beagleplay_a53_defconfig
-> +++ b/configs/am62x_beagleplay_a53_defconfig
-> @@ -30,7 +30,6 @@ CONFIG_SPL_LIBDISK_SUPPORT=y
->  CONFIG_SPL_LOAD_FIT=y
->  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
->  CONFIG_BOOTSTD_FULL=y
-> -CONFIG_SYS_BOOTM_LEN=0x800000
->  CONFIG_AUTOBOOT_KEYED=y
->  CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
->  CONFIG_AUTOBOOT_DELAY_STR="d"
-> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
-> index 000f412d4b8..a915ef428b0 100644
-> --- a/configs/am62x_evm_a53_defconfig
-> +++ b/configs/am62x_evm_a53_defconfig
-> @@ -33,7 +33,6 @@ CONFIG_SPL_SPI=y
->  CONFIG_SPL_LOAD_FIT=y
->  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
->  CONFIG_BOOTSTD_FULL=y
-> -CONFIG_SYS_BOOTM_LEN=0x800000
->  CONFIG_BOOTCOMMAND="run findfdt; run envboot; bootflow scan -lb"
->  CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SPL_MAX_SIZE=0x58000
-> diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
-> index 4bd5e8f63ff..289c41c3eb5 100644
-> --- a/configs/am65x_evm_r5_defconfig
-> +++ b/configs/am65x_evm_r5_defconfig
-> @@ -24,7 +24,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->  CONFIG_SPL_BSS_START_ADDR=0x41c7effc
->  CONFIG_SPL_BSS_MAX_SIZE=0xc00
->  CONFIG_SPL_STACK_R=y
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_SPL_SIZE_LIMIT=0x7ec00
->  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x2000
->  CONFIG_SPL_FS_FAT=y
-> diff --git a/configs/am65x_evm_r5_usbdfu_defconfig b/configs/am65x_evm_r5_usbdfu_defconfig
-> index ae57007d898..0b5eaeb363d 100644
-> --- a/configs/am65x_evm_r5_usbdfu_defconfig
-> +++ b/configs/am65x_evm_r5_usbdfu_defconfig
-> @@ -22,7 +22,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->  CONFIG_SPL_BSS_START_ADDR=0x41c7effc
->  CONFIG_SPL_BSS_MAX_SIZE=0xc00
->  CONFIG_SPL_STACK_R=y
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_SPL_SIZE_LIMIT=0x7ec00
->  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x2000
->  CONFIG_SPL_LIBDISK_SUPPORT=y
-> diff --git a/configs/am65x_evm_r5_usbmsc_defconfig b/configs/am65x_evm_r5_usbmsc_defconfig
-> index 3aa17eb77f0..ef2ff411172 100644
-> --- a/configs/am65x_evm_r5_usbmsc_defconfig
-> +++ b/configs/am65x_evm_r5_usbmsc_defconfig
-> @@ -22,7 +22,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->  CONFIG_SPL_BSS_START_ADDR=0x41c7effc
->  CONFIG_SPL_BSS_MAX_SIZE=0xc00
->  CONFIG_SPL_STACK_R=y
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_SPL_SIZE_LIMIT=0x7ec00
->  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x2000
->  CONFIG_SPL_FS_FAT=y
-> diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
-> index 9d767d7cdad..702fe90b902 100644
-> --- a/configs/j721e_evm_r5_defconfig
-> +++ b/configs/j721e_evm_r5_defconfig
-> @@ -26,7 +26,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->  CONFIG_SPL_BSS_START_ADDR=0x41cf59f0
->  CONFIG_SPL_BSS_MAX_SIZE=0xa000
->  CONFIG_SPL_STACK_R=y
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_SPL_SIZE_LIMIT=0xf59f0
->  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x4000
->  CONFIG_SPL_FS_FAT=y
-> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-> index 23ae991e2f6..7ec9af8bc48 100644
-> --- a/configs/j721s2_evm_r5_defconfig
-> +++ b/configs/j721s2_evm_r5_defconfig
-> @@ -26,7 +26,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->  CONFIG_SPL_BSS_START_ADDR=0x41c76000
->  CONFIG_SPL_BSS_MAX_SIZE=0xa000
->  CONFIG_SPL_STACK_R=y
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_SPL_SIZE_LIMIT=0x80000
->  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x4000
->  CONFIG_SPL_FS_FAT=y
-> -- 
-> 2.34.1
-> 
+The CI https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/24375
+didn't show any errors
 
--- 
-Best regards,
-Dhruva Gole
-Texas Instruments Incorporated
+Please pull
+/Ilias
+----------------------------------------------------------------
+We have use cases where a previous stage boot loader doesn't have any
+TPM drivers. Instead of extending the hardware PCRs it produces an
+EventLog that U-Boot later replays on the hardware.
+
+The only real example we have is TF-A, which produces the EventLog using
+hashing algorithms created at compile time. This creates a problem to the
+TPM since measurements need to extend all active PCR banks. Up to now
+we were exiting refusing the extend measurements.
+
+TPMs can be instructed to change their active PCR banks, as long as the
+device resets immediately after a reconfiguration. U-Boot can now scan
+the active TPM PCR banks, the ones U-Boot was compiled to support and the
+ones present in an EventLog. It the reconfigures the TPM on the fly with
+the correct algorithms.
+
+On top of that it's adding code to retrieve the EventLog from a Transfer List
+entry instead of a DT entry (if present).
+----------------------------------------------------------------
+
+Raymond Mao (9):
+      tpm: add TPM2_Shutdown command
+      tpm: add TPM2_PCR_Allocate command
+      tpm: add wrapper and helper APIs for PCR allocate
+      tpm: add PCR allocate into the eventlog handling
+      tpm: PCR allocate during PCR extend to disable the unsupported algorithms
+      board: qemu-arm: select TPM_PCR_ALLOCATE
+      bloblist: add api to get blob with size
+      tcg2: decouple eventlog size from efi
+      tpm: get tpm event log from bloblist
+
+ cmd/tpm-v2.c                 | 128 ++++++++++++++++++++-
+ common/bloblist.c            |  17 ++-
+ configs/qemu_arm64_defconfig |   1 +
+ doc/usage/measured_boot.rst  |   1 -
+ drivers/tpm/Kconfig          |   9 ++
+ include/bloblist.h           |  18 +++
+ include/efi_tcg2.h           |   2 -
+ include/tpm-v2.h             |  53 ++++++++-
+ lib/Kconfig                  |  12 ++
+ lib/efi_loader/Kconfig       |   9 --
+ lib/efi_loader/efi_tcg2.c    |  15 +--
+ lib/tpm-v2.c                 | 259 ++++++++++++++++++++++++++++++++++++++++++-
+ lib/tpm_api.c                |   4 +-
+ lib/tpm_tcg2.c               | 111 ++++++++++---------
+ test/common/bloblist.c       |   4 +
+ 15 files changed, 556 insertions(+), 87 deletions(-)
