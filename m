@@ -4,61 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86AC8C0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 05:42:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7220C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 06:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E15480EB5;
-	Wed, 29 Jan 2025 06:42:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19EDC80EEF;
+	Wed, 29 Jan 2025 07:02:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738129340;
-	bh=sxqyuzrNJaawmEbSVlZ9Aw9kdxkrBId24eK+xgSAw6s=;
-	h=Date:To:From:Subject:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=TymVMRF/yOZ6pSnH6Pe2htmp8/aZTmpgCFHQd3Oej6puusZjr3pM3nias26ViENq4
-	 cEzFcoCUx//tkdZNeD/3lLSVUFeBYW+oJiKi5xmyvjRcpKrMTNY/aZ0u62pO2MN7r5
-	 azBk7IzimnBS+2+dKVRHh4OIKlFE33r7fZVzLNWvQkrCXwfg+HETXV9DDwhb3NWS7L
-	 mp4gUbRVdAE7Kl0QrZTMnb3Uw4X3NJqJrS1kzP/bnYX4znz9Am95KCTZebZX6fJUi4
-	 SoZ8pw7AQGhceYoMgD2c3EpLRmlAhwvLZKW8SpznaFROqbAZnDa0FmB63rZcbTnjHn
-	 8/FRD/ikXbY1w==
+	s=phobos-20191101; t=1738130542;
+	bh=T2QulzQrtUcmZZGPmSwU3xoI56sXMQWye6USnIewlio=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=z1sLGdaXOLYjOecM9tczSJZpVDKaL48Jnbh5JWcMqLHNMmQF5CfD9aSBBGn6LcgMR
+	 YghPDHwgertlw6S0iRJ3bmmj6CXr/h5C/gcGG7M/Ko4WywRl1jzmc3ex7h73NdcFzT
+	 99xi83bRfrFykqUxK8JLHCWiAKyE9YiIa6lmWIlN5Z/NtrikoA6IGyN2zd7sD9V/eq
+	 imevCjmQtXEW/qPkZh3MJYnKZjD3KtwbDY4vE9ncwlvLPrDOdM2uNjpdvuazvK5088
+	 vL204c9e8B/WmyImj9cv93IKOhWHpnalB2+GW5KzzokvckU9sCPKgJ1Egwe1+meK1e
+	 ARF8ydKb4Ko6g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F9BC80EEF; Wed, 29 Jan 2025 06:42:19 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id CAC6880F10; Wed, 29 Jan 2025 07:02:20 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0474B80885
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 06:42:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE56580EB5
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 07:02:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="LgM4bAVy"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="BI5HyKTJ"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5A05C10382D08; Wed, 29 Jan 2025 06:42:06 +0100 (CET)
+ with ESMTPSA id 7732810382D08; Wed, 29 Jan 2025 07:02:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738129335; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ t=1738130537; h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type: content-transfer-encoding:content-transfer-encoding;
- bh=sxqyuzrNJaawmEbSVlZ9Aw9kdxkrBId24eK+xgSAw6s=;
- b=LgM4bAVyX2fxw7IMwDshIivk10lETqHSsucFDvYiZSLtSp3XEzN9GQ4w7Qvz1+Gdz/ZfIJ
- denUAPpIIoAQ2Tj57f2scyvWx+9QcxlLL6ksRI/rR6sJUvDpGUvesgQjf7FxERKk9YGTC2
- BczFtTypq1kKsWQL8IRqyfhQBaN06jD7e1E5IZyuQQv0TKKRL9zRBA7dpQsvLvBCzbn1Tk
- d2TT1qsPyPT3j7iSa1idnrsXRMxOfQ2H2lVDgGJ47Gn+3BKJr4kMBQ6i7VQ19T8xJFdh9D
- gFbQ0TZEeOoYFOLBnMYgruX4aanYCpDK89h/IctjOZPFxUJHUjRCUs8YxPz4Zg==
-Message-ID: <4cc734a9-3e96-fb51-20a9-e82245227a20@denx.de>
-Date: Wed, 29 Jan 2025 06:42:33 +0100
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=T2QulzQrtUcmZZGPmSwU3xoI56sXMQWye6USnIewlio=;
+ b=BI5HyKTJkpMuLgEnRd9zeRzKjKCf+tOx9qvGInN+WwzhPgV2kNFIAUdYE3JgMjr8ypk+Su
+ F8QtT0ZU2bt78b9fxGCUps5ooNTVk+Uh7Ny5jsK9LCanY8NNQBD99g4p+Px9aIotA4PZrB
+ WTLU/tQ4KdKFPigALUC8RE3vI6mAA64dHipcG84vcJxF0qi7IY1NTDbA7pKdTJS4FAhWrm
+ piyk6CbQennlmp9Njk7PNT3qH+QlOHbGeW60z1zZD3g7c2+NsZW0Z1LTCUnCyUg0TdRWLb
+ 2XX4SMiaK+Fpon/jwBj1levdJ+pIf/qIuOFC7WO6F5gvMpZUcZBOzCfAt9o7jA==
+Message-ID: <d7b9d79e-223c-8b66-989e-39bedae91c1f@denx.de>
+Date: Wed, 29 Jan 2025 07:02:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
+Subject: Re: [PATCH] arm: Other boards should not show this option in
+ menuconfig
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
+To: 1425075683@qq.com
+Cc: Enrico Leto <enrico.leto@siemens.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <tencent_991CA024CC85C92C1FAD9EF4413A36AD6007@qq.com>
 From: Heiko Schocher <hs@denx.de>
-Subject: Please pull u-boot-ubi master
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Michal Simek <michal.simek@amd.com>
+In-Reply-To: <tencent_991CA024CC85C92C1FAD9EF4413A36AD6007@qq.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -79,39 +84,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+Hello,
 
-please pull from u-boot-ubi one ubi fix from Michal for v2025.01-rc2
+On 28.01.25 14:45, 1425075683@qq.com wrote:
+> From: Liya Huang <1425075683@qq.com>
+> 
+> When I was using STM32 board,
+> this option appeared in menuconfig and caused me trouble.
+> I found that arch/arm/mach-imx/imx8/Kconfig
+> already excludes using if endif.
+> I don't know why other boards are displayed.
+> I used the following command:
+>      export CROSS_COMPILE=arm-none-eabi- ARCH=arm
+>      make stm32h750-art-pi_defconfig
+>      make menuconfig
+> 
+> Signed-off-by: Liya Huang <1425075683@qq.com>
+> ---
+> 
+>   board/siemens/common/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/board/siemens/common/Kconfig b/board/siemens/common/Kconfig
+> index 4ae12b1c973..800eb8dd1c1 100644
+> --- a/board/siemens/common/Kconfig
+> +++ b/board/siemens/common/Kconfig
+> @@ -3,4 +3,5 @@ config FACTORYSET
+>   
+>   config DDR_SI_TEST
+>   	bool "DDR signal integrity test implementations"
+> +	depends on ARCH_IMX8
+>   	default y
 
-The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c047:
+I think we can even more restrict this to
 
-   Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-ubi.git tags/ubifixes-for-2025.01-rc2
-
-for you to fetch changes up to 14e02d6c6180f85114cc0a90469e010a5d68b2ee:
-
-   fs: ubifs: Remove unnecessary assignment (2025-01-28 06:44:18 +0100)
-
-----------------------------------------------------------------
-ubi changes for v2025.01-rc2
-
-- ubifs: Remove unnecessary assignment
-   from Michal Simek
-
-----------------------------------------------------------------
-Michal Simek (1):
-       fs: ubifs: Remove unnecessary assignment
-
-  fs/ubifs/recovery.c | 1 -
-  fs/ubifs/scan.c     | 1 -
-  2 files changed, 2 deletions(-)
-
-Azure build is fine:
-
-https://dev.azure.com/hs0298/hs/_build/results?buildId=169&view=results
+TARGET_CAPRICORN
 
 Thanks!
 
