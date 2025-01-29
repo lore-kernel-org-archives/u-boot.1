@@ -4,80 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F9CFC0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 05:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2048DC0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 05:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9197E80EB5;
-	Wed, 29 Jan 2025 06:31:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 75C6880EB5;
+	Wed, 29 Jan 2025 06:39:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RJkCXDVo";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1738129167;
+	bh=QB13J0ybSrRQ9FzWjsidLnk9y47RSgkxFBsdRTfCsFQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=Get01YOnWoSc1MIrwcyq/nK6/U04HIuT0YX4n1wvR91EKl5NGMpGpIcGSMJIbVVJq
+	 LcIUcaLRd53KKDXIPHWBbFm2G/Y1jdUQMf+P9mkmNiMWa/BkcB/V8OdhL6Q0egSCdL
+	 KaZBkaYo9kmjC2bZNSjW0eAaLbovJw91W6iN/vRgeHH0LOgtbr0uNTFH1XHPRrVx+I
+	 gVX4HIktVETe3nO5b8ZAUcilKn9LxE2eeDM+L9Cob9tSJXwZnwVAXA6oxlGSIxsgvi
+	 pRIvT45LFiYY9gelUlWamC3y/pIh0PTq+yx4RidOIo/TCTvfDSYmnBzdTWJ0DFUZNQ
+	 Vij1Epyq31IGQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92B2380EEF; Wed, 29 Jan 2025 06:31:52 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B80A280F10; Wed, 29 Jan 2025 06:39:25 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03DE68082A
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 06:31:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9901080885
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 06:39:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michaelsunn101@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2f833af7a09so1639335a91.2
- for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 21:31:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738128708; x=1738733508; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dR4KYQCHqA1KPlMuBcOVo6odryCVctNPXqvZuL44/58=;
- b=RJkCXDVoFKQT8tRYBlq5Ejh1cQ0rsl4hgQb4/dG0MhfdOVYCBxN1QixCIw1LZgrueR
- FJwZjgG60ytcDYQUuHvuQ1zCoPdH2O9sJmnn+UNNSXVMy2C5WtCtWK2R0T8ajWHdCZMu
- ZgS0jy7gPY4F8wfJJjc2nEUPhsrcA3Eiya+nZmtVeAtT2aPg9W1YLpqqimSmiCd54tmT
- qy6Aa3eHZtZNqLiiUfKp7ntCt08gdG+rQfxMsLmtjBvG3mh3ZzpVabOl+s/OHgM90kXo
- Iro0x9gxU2pEt6OKPS1/TOlbopqoLpGxSiPKGAGEO8qkxxc1n1ViDlxs6sFJN272slGx
- xO1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738128708; x=1738733508;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dR4KYQCHqA1KPlMuBcOVo6odryCVctNPXqvZuL44/58=;
- b=QT41CKZIDIv6RbA+geFyGwP/nfnqR9lnfQ7+GJUi/XA/82yXOmWmbuyPE6spamge/V
- Y40vOnSYjKoZVPlutdmxBDLCDxV+/r5WXfRGr4Us2xOKjc4N+2FZaaASGJoSFhQQ0hpq
- vK3JdtKO816SoSNqE+XwvTXlIQ1QZ6TPd47+45ZSLfNBblOw11ecKsAi+Y0tbGGcoFay
- bpeepcZzZruadffAeK1ZjvmOHRi1HiWjnEvEcqQqOPiytsD8HuEHWoPnxdE5WZfQRpC1
- vgbRJbk7WqWGTDutuCDXKbWkmgEEvz3JowQBl3EHOAoxMlTC2TwvBDceysKYOL+rmMt5
- TlPw==
-X-Gm-Message-State: AOJu0YyVkGdVFYNCcHSyNC64JwbxsKCmEOKKUecEW6d0EnmLPxzVYKa+
- IQ0Rz7OrD12QOIRtiFlqYI2lhVwbOXzPrSnEKxJILh25kZNA4erYuQAgldspKCplAlKWp/d9A6C
- mxGTOb0G6Ww3o3j3cryg4YhuAvw==
-X-Gm-Gg: ASbGncvS2k8kyFxTPrVIXESEssnAuRjtzSRPElBtVlePEm0ID7y/QDuKwTZtzGdOu4+
- SI4lPT5WLZLKcQntYlFJL6zN0k1oJSbp+DKYTKSSz09EIFRaMaKYjGtsJj1bEUdKcIRz9OSmwPo
- 1dLTXOy/C/EjyhB+1/3ZNq1ekAiiA=
-X-Google-Smtp-Source: AGHT+IEcsb8Y+4sCzzCWSfdg1wjZA/pmdJy04owh9mb/G8Qdyoe8PS0DT5TBIcuZpgSz46JRV0/rHbKmDeNdfOCKCcU=
-X-Received: by 2002:a05:6a00:3a01:b0:725:9cc4:2354 with SMTP id
- d2e1a72fcca58-72fd0be1847mr2645418b3a.10.1738128708242; Tue, 28 Jan 2025
- 21:31:48 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="VV6Vwjm3"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 8EED910382D08; Wed, 29 Jan 2025 06:39:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1738129162; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QB13J0ybSrRQ9FzWjsidLnk9y47RSgkxFBsdRTfCsFQ=;
+ b=VV6Vwjm3bZWY/13EOvPJ5CxTIjkBBrd0OlBYBELaVvFm7pJux1sSQWRrPfSJ7il09UURxP
+ UoSyrYcMQX4Ia/u06XOrZrcER9/APoCyVPP+AJxKYT24FAStpufQ7k2bB7oCNCIRgN4Vt+
+ n8q+YB20BmxmBzqU/oWud3UtYMMXhx7R83c8cVITRYR+GMG5t+5ChJkiJa34wZc3Ald6HU
+ yYd3Xm85A73xQb8UYDjUT0EA99U6sxdc99PA2hCweGv6GFawNk/dXcref+GzyyJ5lKsuEC
+ jfHHHAREWXvitnz/z7FhT0ViGFhP/zndP4/yFLSMRbYXrZCyvlaFOQsQOpNJsg==
+Message-ID: <837c4fc1-4e13-afac-46b0-99717f4d1211@denx.de>
+Date: Wed, 29 Jan 2025 06:38:56 +0100
 MIME-Version: 1.0
-References: <20250128030945.1219589-1-michaelsunn101@gmail.com>
- <87o6zrqns9.fsf@baylibre.com>
-In-Reply-To: <87o6zrqns9.fsf@baylibre.com>
-From: Michael <michaelsunn101@gmail.com>
-Date: Tue, 28 Jan 2025 23:31:37 -0600
-X-Gm-Features: AWEUYZnYUtz6zuu2TXTCJdyziL1sPLD37LXLGlKO6aGW1pzCf-RqqYSU12AYvCM
-Message-ID: <CAH40Y2gE1+EJcDgdny_Ed85pycF-0GaFATCXxRHNww9L2DLeFw@mail.gmail.com>
-Subject: Re: [PATCH v4] usb: gadget: g_dnl: Fix NULLPTR dereference when
- serial# is unset
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
- Heiko Schocher <hs@denx.de>, Kyungmin Park <kyungmin.park@samsung.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] fs: ubifs: Remove unnecessary assignment
+Content-Language: en-US
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
+Cc: Tom Rini <trini@konsulko.com>
+References: <f3ee698c9d5b43bb3b7e2a3cffa1b1b3151c59b9.1737724676.git.michal.simek@amd.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <f3ee698c9d5b43bb3b7e2a3cffa1b1b3151c59b9.1737724676.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,57 +77,34 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Are there any other action items I should take care of?
+Hello Michal,
 
+On 24.01.25 14:17, Michal Simek wrote:
+> Variable self assignment has been found by clang. But Linux kernel already
+> fixed this problem by commit 2a068daf5742 ("ubifs: Remove unnecessary
+> assignment") and commit ae4c8081eb77 ("ubifs: remove unnecessary
+> assignment").
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+> 
+>   fs/ubifs/recovery.c | 1 -
+>   fs/ubifs/scan.c     | 1 -
+>   2 files changed, 2 deletions(-)
 
-On Tue, Jan 28, 2025 at 3:40=E2=80=AFAM Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
->
-> Hi Michael,
->
-> Thank you for the patch.
->
-> On lun., janv. 27, 2025 at 21:09, Michael Ferolito <michaelsunn101@gmail.=
-com> wrote:
->
-> > The current behaviour of this function will dereference a null pointer
-> > if the serial# environment variable is unset. This was discovered on a
-> > board where U-Boot did not have access to the first 256MB of ram,
-> > resulting in a board crash.
-> > In the event that U-Boot has full access to memory, it will still read
-> > from address 0, which is probably not optimal.
-> > This simple check is enough to fix it
-> >
-> > Signed-off-by: Michael Ferolito <michaelsunn101@gmail.com>
-> > Cc: Marek Vasut <marex@denx.de>
-> > Cc: Heiko Schocher <hs@denx.de>
-> > Cc: Kyungmin Park <kyungmin.park@samsung.com>
->
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->
-> > ---
-> >  drivers/usb/gadget/g_dnl.c | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/usb/gadget/g_dnl.c b/drivers/usb/gadget/g_dnl.c
-> > index 631969b340..f2540eb6de 100644
-> > --- a/drivers/usb/gadget/g_dnl.c
-> > +++ b/drivers/usb/gadget/g_dnl.c
-> > @@ -207,7 +207,8 @@ void g_dnl_clear_detach(void)
-> >  static int on_serialno(const char *name, const char *value, enum env_o=
-p op,
-> >               int flags)
-> >  {
-> > -     g_dnl_set_serialnumber((char *)value);
-> > +     if (value)
-> > +             g_dnl_set_serialnumber((char *)value);
-> >       return 0;
-> >  }
-> >  U_BOOT_ENV_CALLBACK(serialno, on_serialno);
-> > --
-> > 2.48.1
+Applied to u-boot-ubi master
+
+Thanks!
+
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
