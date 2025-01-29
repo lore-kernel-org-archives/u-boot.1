@@ -4,86 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3D51C0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 09:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6AAC0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 09:39:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB63E8082D;
-	Wed, 29 Jan 2025 10:27:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 909348083C;
+	Wed, 29 Jan 2025 10:39:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="J1pgltls";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CK1Svo71";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC79280107; Wed, 29 Jan 2025 10:27:34 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC19A80107
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 10:27:30 +0100 (CET)
+ id 20C798083C; Wed, 29 Jan 2025 10:39:55 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F387807FE
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 10:39:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43624b2d453so72867775e9.2
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 01:27:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738142850; x=1738747650;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lSOVOyHvXiMzxtJGo+qlCyg9IYRAezdr3qRj/JHJkM8=;
- b=J1pgltlsQ55+Qn5nPkb+6vbxP02vN2q+FuE04wF5gaxQ7Pv+Y+AiRTFPF7Fo9ZX+fW
- 1lOdNRWy5bf5YcEpzHgtzkCgvn23cL8Y5hXlLEZx5BFdjn99Z5BgFfONcfNboE7YVc7n
- oazLp/vIEUykl3MnR2O2zYVt/ogXksZLUWTSUBvpQplhNJ+94tPbitNBuHQf19wKPGpZ
- WkBuNmXNymSC7jGWz8mc+DvshrnIqVWPWsrULonzcBfNvmWr+IC3+7YlHrGevwLOvAvs
- aw2l/s805dRPNpy6B8B+FYpw+3yghARXBk2Y+4YhYhsswJTfPeFSnreuC6mIQNTSiaNb
- XhgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738142850; x=1738747650;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lSOVOyHvXiMzxtJGo+qlCyg9IYRAezdr3qRj/JHJkM8=;
- b=Z0fyIpC9VuW3h8RbEnCxVFFrfQHwtiyPF0uqyopXr5m3QhP0EfvXF/sSWHels6c5x0
- Jzr3yo7cqDJw3eGB0Xu7R9+fVJ3WrYvnPzJ7GdKUdRKHFAO1vMxJGOr2jIlXJ/mAGulG
- Aw8V0equIzjQp3XwVeb7XcedpLlD7MYQOapGHqJYSotEudwVmtcSwa5vVhB+JYgCg+tI
- H0iN5O7Uaw6oRsnS/w28uIlxPHbQEaq3W8f/xJBbsgQkt4dWMwx4NL/Wh/Zl6rA/khtS
- ybRBx4+afNQzO3Fi7q2q6c/Bx8+J0PRwvIEicjSVxH+1gaoexcDEum3FZBQZQFMmCoDK
- XAGA==
-X-Gm-Message-State: AOJu0YweyVyjOD6r1zhG5+DhjqEywfkKKDjgAar5wWD8JsTB+/Syz6OM
- TVg8XqQhhzk+A1YYj2in41+1IdiGpOWImHSL1BD1AZjykf8mueMDqOBf6OrLY64=
-X-Gm-Gg: ASbGncsq5lQpwlGQndudg5WyqtIL2xiKEGgjcToAe2lIT7xs9rgoR/YhigOTGXZwJIf
- 5cbElOyXzFQeDgz8wjKXHyc5/xntxIecZrhDdIotHOcqoWfCv20xoN4FMv6MxYjtQpy0uiIuey3
- J61nxI2W1gaLyt56p3rlsiHDOPWtuRm33Py+NZ1svT77b6nSRhu/l96RfEer25Lju0zxLwv9seV
- YAj4xX8g2k8sQKG02KQex59gEG+GulyDr/1+2+fILW506uZyGy+p1ftcLk4duvU7avzbYm78KhJ
- iLcO8DDqHxvOnj7hffGQp3WKOSUSHcLzDn4=
-X-Google-Smtp-Source: AGHT+IF6VOgnSMcGs4pnmJSzjR1Oy8+cIswBWwncOfBWKd0Uc3lbtwcMJjNwN86JWeAmfMe/LIf7Og==
-X-Received: by 2002:a05:600c:b8c:b0:434:a04d:1670 with SMTP id
- 5b1f17b1804b1-438dc34ba8fmr20668985e9.0.1738142850369; 
- Wed, 29 Jan 2025 01:27:30 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438dcc23bf7sm15869045e9.9.2025.01.29.01.27.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jan 2025 01:27:29 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Michael <michaelsunn101@gmail.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, Heiko Schocher
- <hs@denx.de>, Kyungmin Park <kyungmin.park@samsung.com>
-Subject: Re: [PATCH v4] usb: gadget: g_dnl: Fix NULLPTR dereference when
- serial# is unset
-In-Reply-To: <CAH40Y2gE1+EJcDgdny_Ed85pycF-0GaFATCXxRHNww9L2DLeFw@mail.gmail.com>
-References: <20250128030945.1219589-1-michaelsunn101@gmail.com>
- <87o6zrqns9.fsf@baylibre.com>
- <CAH40Y2gE1+EJcDgdny_Ed85pycF-0GaFATCXxRHNww9L2DLeFw@mail.gmail.com>
-Date: Wed, 29 Jan 2025 10:27:29 +0100
-Message-ID: <87ikpyq8am.fsf@baylibre.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50T9dn3S1295037
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Wed, 29 Jan 2025 03:39:49 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738143589;
+ bh=6mrmoAKPI7nOiCn96xvH6kOqkB07Lytv0tY0/FeLNX4=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=CK1Svo711MDJ+WMQJrc/AoxXSeBTAPeZ5X5NODnLyIifk2thcoCZOgyR5UJLKemDW
+ RMAH+nZREkh4cUffqTBtBLBYTGKbgI/zmiitnpxDomkyuqSkyj12CYIPlLtcP3sMaL
+ FQ4rsW6k8N0LxSIwZ0BNHpGRr5u/CKXwF7LE1wOc=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50T9dnAd052196;
+ Wed, 29 Jan 2025 03:39:49 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
+ Jan 2025 03:39:49 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 29 Jan 2025 03:39:49 -0600
+Received: from localhost (lcpd911.dhcp.ti.com [172.24.227.226])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50T9dmhC036861;
+ Wed, 29 Jan 2025 03:39:48 -0600
+Date: Wed, 29 Jan 2025 15:09:47 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Aashvij Shenai <a-shenai@ti.com>
+CC: <u-boot@lists.denx.de>, <praneeth@ti.com>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
+ <kamlesh@ti.com>
+Subject: Re: [PATCH] arm64: configs: Remove SYS_BOOTM_LEN for TI devices
+Message-ID: <20250129093947.hbsmskjwbqauli33@lcpd911>
+References: <20250129073608.1549374-1-a-shenai@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250129073608.1549374-1-a-shenai@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,83 +79,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+Hi Aashvij,
 
-On mar., janv. 28, 2025 at 23:31, Michael <michaelsunn101@gmail.com> wrote:
+On Jan 29, 2025 at 13:06:08 +0530, Aashvij Shenai wrote:
+> AM62x BOOTM_LEN is too small to contain OS images. Removing this sets the
+> size to a default 0x4000000 (for all arm64 devices).
+> 
+> It is unnecessary to specifically call the default size for the other
+> configs.
+> 
+> Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
+> Signed-off-by: Aashvij Shenai <a-shenai@ti.com>
+> ---
 
-> Are there any other action items I should take care of?
+$subject doesn't tell if it's an upstream patch that you want review on
+or if it's for ti-u-boot. So not getting the full context of what this
+patch is aimed toward.
 
-TLDR: no.
+One other tip - use --base parameter while generating the patch file to
+include the commit SHA on which your patch is based on.
 
-Details below:
-Not at the moment. Usually we give the community some time to review.
-This time depends on the custodian(maintainer) responsible for taking in th=
-e patch.
+Otherwise, LGTM
 
-Since I'm responsible for fastboot, I usually give between 1 and 2 weeks
-before I apply the changes to my tree: https://source.denx.de/u-boot/custod=
-ians/u-boot-dfu
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-When the change is applied, CI will test your patch. If something fails,
-I might reach out to you again to help troubleshooting.
+> 
+> Reference patch: https://lore.kernel.org/u-boot/20240708-remove-bootm-len-v1-1-2a537061426c@ti.com/
+> 
+> ---
+>  configs/am62x_beagleplay_a53_defconfig | 1 -
+>  configs/am62x_evm_a53_defconfig        | 1 -
+>  configs/am65x_evm_r5_defconfig         | 1 -
+>  configs/am65x_evm_r5_usbdfu_defconfig  | 1 -
+>  configs/am65x_evm_r5_usbmsc_defconfig  | 1 -
+>  configs/j721e_evm_r5_defconfig         | 1 -
+>  configs/j721s2_evm_r5_defconfig        | 1 -
+>  7 files changed, 7 deletions(-)
+> 
+> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+> index af54f9670a7..a8a73166597 100644
+> --- a/configs/am62x_beagleplay_a53_defconfig
+> +++ b/configs/am62x_beagleplay_a53_defconfig
+> @@ -30,7 +30,6 @@ CONFIG_SPL_LIBDISK_SUPPORT=y
+>  CONFIG_SPL_LOAD_FIT=y
+>  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+>  CONFIG_BOOTSTD_FULL=y
+> -CONFIG_SYS_BOOTM_LEN=0x800000
+>  CONFIG_AUTOBOOT_KEYED=y
+>  CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
+>  CONFIG_AUTOBOOT_DELAY_STR="d"
+> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+> index 000f412d4b8..a915ef428b0 100644
+> --- a/configs/am62x_evm_a53_defconfig
+> +++ b/configs/am62x_evm_a53_defconfig
+> @@ -33,7 +33,6 @@ CONFIG_SPL_SPI=y
+>  CONFIG_SPL_LOAD_FIT=y
+>  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+>  CONFIG_BOOTSTD_FULL=y
+> -CONFIG_SYS_BOOTM_LEN=0x800000
+>  CONFIG_BOOTCOMMAND="run findfdt; run envboot; bootflow scan -lb"
+>  CONFIG_BOARD_LATE_INIT=y
+>  CONFIG_SPL_MAX_SIZE=0x58000
+> diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
+> index 4bd5e8f63ff..289c41c3eb5 100644
+> --- a/configs/am65x_evm_r5_defconfig
+> +++ b/configs/am65x_evm_r5_defconfig
+> @@ -24,7 +24,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>  CONFIG_SPL_BSS_START_ADDR=0x41c7effc
+>  CONFIG_SPL_BSS_MAX_SIZE=0xc00
+>  CONFIG_SPL_STACK_R=y
+> -CONFIG_SYS_BOOTM_LEN=0x4000000
+>  CONFIG_SPL_SIZE_LIMIT=0x7ec00
+>  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x2000
+>  CONFIG_SPL_FS_FAT=y
+> diff --git a/configs/am65x_evm_r5_usbdfu_defconfig b/configs/am65x_evm_r5_usbdfu_defconfig
+> index ae57007d898..0b5eaeb363d 100644
+> --- a/configs/am65x_evm_r5_usbdfu_defconfig
+> +++ b/configs/am65x_evm_r5_usbdfu_defconfig
+> @@ -22,7 +22,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>  CONFIG_SPL_BSS_START_ADDR=0x41c7effc
+>  CONFIG_SPL_BSS_MAX_SIZE=0xc00
+>  CONFIG_SPL_STACK_R=y
+> -CONFIG_SYS_BOOTM_LEN=0x4000000
+>  CONFIG_SPL_SIZE_LIMIT=0x7ec00
+>  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x2000
+>  CONFIG_SPL_LIBDISK_SUPPORT=y
+> diff --git a/configs/am65x_evm_r5_usbmsc_defconfig b/configs/am65x_evm_r5_usbmsc_defconfig
+> index 3aa17eb77f0..ef2ff411172 100644
+> --- a/configs/am65x_evm_r5_usbmsc_defconfig
+> +++ b/configs/am65x_evm_r5_usbmsc_defconfig
+> @@ -22,7 +22,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>  CONFIG_SPL_BSS_START_ADDR=0x41c7effc
+>  CONFIG_SPL_BSS_MAX_SIZE=0xc00
+>  CONFIG_SPL_STACK_R=y
+> -CONFIG_SYS_BOOTM_LEN=0x4000000
+>  CONFIG_SPL_SIZE_LIMIT=0x7ec00
+>  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x2000
+>  CONFIG_SPL_FS_FAT=y
+> diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
+> index 9d767d7cdad..702fe90b902 100644
+> --- a/configs/j721e_evm_r5_defconfig
+> +++ b/configs/j721e_evm_r5_defconfig
+> @@ -26,7 +26,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>  CONFIG_SPL_BSS_START_ADDR=0x41cf59f0
+>  CONFIG_SPL_BSS_MAX_SIZE=0xa000
+>  CONFIG_SPL_STACK_R=y
+> -CONFIG_SYS_BOOTM_LEN=0x4000000
+>  CONFIG_SPL_SIZE_LIMIT=0xf59f0
+>  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x4000
+>  CONFIG_SPL_FS_FAT=y
+> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+> index 23ae991e2f6..7ec9af8bc48 100644
+> --- a/configs/j721s2_evm_r5_defconfig
+> +++ b/configs/j721s2_evm_r5_defconfig
+> @@ -26,7 +26,6 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>  CONFIG_SPL_BSS_START_ADDR=0x41c76000
+>  CONFIG_SPL_BSS_MAX_SIZE=0xa000
+>  CONFIG_SPL_STACK_R=y
+> -CONFIG_SYS_BOOTM_LEN=0x4000000
+>  CONFIG_SPL_SIZE_LIMIT=0x80000
+>  CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x4000
+>  CONFIG_SPL_FS_FAT=y
+> -- 
+> 2.34.1
+> 
 
-If it passes, I will later on send a pull request to Tom with this patch
-included.
-Once Tom accepts the pull request, this change will be merged into
-master.
-
-More details on the process here:
-https://docs.u-boot.org/en/latest/develop/process.html#work-flow-of-a-custo=
-dian
-
-Hope that clarifies things a bit, and thank you for contributing!
-Mattijs
-
->
->
-> On Tue, Jan 28, 2025 at 3:40=E2=80=AFAM Mattijs Korpershoek
-> <mkorpershoek@baylibre.com> wrote:
->>
->> Hi Michael,
->>
->> Thank you for the patch.
->>
->> On lun., janv. 27, 2025 at 21:09, Michael Ferolito <michaelsunn101@gmail=
-.com> wrote:
->>
->> > The current behaviour of this function will dereference a null pointer
->> > if the serial# environment variable is unset. This was discovered on a
->> > board where U-Boot did not have access to the first 256MB of ram,
->> > resulting in a board crash.
->> > In the event that U-Boot has full access to memory, it will still read
->> > from address 0, which is probably not optimal.
->> > This simple check is enough to fix it
->> >
->> > Signed-off-by: Michael Ferolito <michaelsunn101@gmail.com>
->> > Cc: Marek Vasut <marex@denx.de>
->> > Cc: Heiko Schocher <hs@denx.de>
->> > Cc: Kyungmin Park <kyungmin.park@samsung.com>
->>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->>
->> > ---
->> >  drivers/usb/gadget/g_dnl.c | 3 ++-
->> >  1 file changed, 2 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/drivers/usb/gadget/g_dnl.c b/drivers/usb/gadget/g_dnl.c
->> > index 631969b340..f2540eb6de 100644
->> > --- a/drivers/usb/gadget/g_dnl.c
->> > +++ b/drivers/usb/gadget/g_dnl.c
->> > @@ -207,7 +207,8 @@ void g_dnl_clear_detach(void)
->> >  static int on_serialno(const char *name, const char *value, enum env_=
-op op,
->> >               int flags)
->> >  {
->> > -     g_dnl_set_serialnumber((char *)value);
->> > +     if (value)
->> > +             g_dnl_set_serialnumber((char *)value);
->> >       return 0;
->> >  }
->> >  U_BOOT_ENV_CALLBACK(serialno, on_serialno);
->> > --
->> > 2.48.1
+-- 
+Best regards,
+Dhruva Gole
+Texas Instruments Incorporated
