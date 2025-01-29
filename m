@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A59D5C02192
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 17:06:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35576C02192
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 17:06:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 266A480BA3;
-	Wed, 29 Jan 2025 18:05:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7FF5280BB1;
+	Wed, 29 Jan 2025 18:05:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DqUKg8bx";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="W1C64U8n";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bJoRl3xv";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="yNLKfGJe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5258E80C99; Wed, 29 Jan 2025 18:05:47 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 9DACC80C58; Wed, 29 Jan 2025 18:05:48 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D32E80A09
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 18:05:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A29780C6E
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 18:05:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,33 +31,33 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YjpSm3Fvsz9sb6;
- Wed, 29 Jan 2025 18:05:44 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YjpSp36Mvz9t00;
+ Wed, 29 Jan 2025 18:05:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1738170346;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=i78twG4dGPt6t/v2xRoWgmIxP55m5rKY6mKpb3MGhxc=;
+ b=bJoRl3xv4sSv1WxwAtxkLfbKhqafIFtmhBV0xIZFPWa9CaXtORbCiR0lIeXLPZhQv38h+O
+ fp28KG+i+MariQHmBaF7k1YYDVK2SXO2FTX/h6KKf7qmQEPXidObGodOOZDTsr7YXTIgFn
+ Vf1drjqu4TV6p3XQmmbT1ZGeOPUjfBHLrJ2vpRdFU40m8s3nQ6oGGoa/luzWQ73F86aZpW
+ apvoAdT3qzFXyiV82RIOOB6Dpo2rltXQqDg8OuzCaja/zGogqVlvpX+LGyFGB2GVHzdqNt
+ MI0Zakx3H1+92S+E6J0YFq3wvGwupGnFfkO+Uy7re2z0cis6fvmyvJjoz3FN3A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1738170344;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tolwMxkzc3SX1slxHXSiZ8w8B/A6/XQ4c1vyCLdeg0o=;
- b=DqUKg8bxMkUMy6HpZNWMKFxa3OKyGUrLesrQo9K9xpUiiGfh38oYeHSitYQRsmAyxLjUvw
- SrwG9l3gZFhZE2zowk8BxKTtd0B0W1KbFmW9IGTmNHpS2NH7rkeYgepmfRqWa4LG1iTIyX
- B8PhCh8N17IzuyKNAAjD+u23uJ9vHybjv9QornR00nvBMWOjPYLI3E5jOeL5+nXIR6J5pp
- A5tqsBpjGRPDEc9+H6wAnmur78ThD9M9TKsnA/B12el+cpql2/2vTJbd+RgIrb83Jvb/lj
- NizYwiX0Kgy4dGtC2FkkjBtbOjdwC57UFa6JXIl2P7BSJtwlP3UPYAWWeCTVOw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1738170342;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=tolwMxkzc3SX1slxHXSiZ8w8B/A6/XQ4c1vyCLdeg0o=;
- b=W1C64U8nukG2DfDtU9YDqNqTgpyy29W/kWYyEo0SfZTPi2qy/v9bdWK/FJdSwsX3IgvH1G
- sQqcIqwXMgbKSPTgzntY4+0qQgkcNJ+irHIJaK+3y4TwUImqcykw5VSk8KIXEcfAO3Xe8n
- mEJuGmlPb2hCjYaNZ2tV/CR8o6tdFDSwdbCDGsHNVqCyzaE8rPJ/40W1D23XcmSB0BVFHQ
- qw5icd5mr2+To41qgt9XwFBtSg+tH3xdHKNlqH0YbzuLHzefe7wq132KF8Z+8g2GP16T1O
- aTlrhXYm1EKan7Tf+yHlcvlntAY88w6KF7STJ5lURXuqqoVHn414p81cfb94wg==
+ bh=i78twG4dGPt6t/v2xRoWgmIxP55m5rKY6mKpb3MGhxc=;
+ b=yNLKfGJeXeOfcK60RYPOADUf3OqKiB1VbRNeHEHW7AgJXJHeq8RJsHoEyEtflL3qwYJWPm
+ sBytoRn6h53YarX47rjMKm0TIFRFt5XS84zcguyoya2CIhVyAjwutTHb5/tz6/ZULAE6So
+ 8lbBauezDfMmkl5aWuGMZv7HY5JZXAoe7Ijz1vZpoSs4V9qse2jJ9pWqSffxilKM/7YcLC
+ l7mBKj3nxZlJZ1z0Ccnm9llLQfTR2khuaNxgq7nwtVSKUUiicwi2rHV849JX+rwZ/KGLbQ
+ hPwPw0xC7KqqrXMyUcaqlHDQ8xDEIlJG/K/VjJ7yu3ZtKMn2AKs79DIf5eBNVA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
@@ -64,16 +65,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 5/9] arm64: renesas: Drop unused code and clean up headers
- on R-Car D3 Draak
-Date: Wed, 29 Jan 2025 18:04:30 +0100
-Message-ID: <20250129170514.82118-5-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v3 6/9] arm64: renesas: Drop unused code and clean up headers
+ on Salvator-X boards
+Date: Wed, 29 Jan 2025 18:04:31 +0100
+Message-ID: <20250129170514.82118-6-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250129170514.82118-1-marek.vasut+renesas@mailbox.org>
 References: <20250129170514.82118-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 79f49df01478a173d73
-X-MBO-RS-META: dofizarpfob1d6433m3ty7cnqbnntra9
+X-MBO-RS-ID: b7312d49cbda4c2d3ba
+X-MBO-RS-META: bjqqdqmuh558au9k5kkyt9e4o8586kh9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,19 +109,19 @@ Cc: u-boot@lists.denx.de
 V2: No change
 V3: No change
 ---
- board/renesas/draak/draak.c | 32 +++-----------------------------
- 1 file changed, 3 insertions(+), 29 deletions(-)
+ board/renesas/salvator-x/salvator-x.c | 38 +++------------------------
+ 1 file changed, 4 insertions(+), 34 deletions(-)
 
-diff --git a/board/renesas/draak/draak.c b/board/renesas/draak/draak.c
-index a51bf65674f..85213497ce4 100644
---- a/board/renesas/draak/draak.c
-+++ b/board/renesas/draak/draak.c
-@@ -6,43 +6,17 @@
-  * Copyright (C) 2017 Marek Vasut <marek.vasut+renesas@gmail.com>
+diff --git a/board/renesas/salvator-x/salvator-x.c b/board/renesas/salvator-x/salvator-x.c
+index 2c8860bcee4..60f8b94e54a 100644
+--- a/board/renesas/salvator-x/salvator-x.c
++++ b/board/renesas/salvator-x/salvator-x.c
+@@ -7,41 +7,18 @@
+  * Copyright (C) 2015 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
   */
  
 -#include <cpu_func.h>
--#include <hang.h>
+-#include <image.h>
 -#include <init.h>
 -#include <malloc.h>
 -#include <netdev.h>
@@ -142,11 +143,10 @@ index a51bf65674f..85213497ce4 100644
 -
 -DECLARE_GLOBAL_DATA_PTR;
 -
--#define GSX_MSTP112		BIT(12)	/* 3DG */
--#define SCIF2_MSTP310		BIT(10)	/* SCIF2 */
 -#define DVFS_MSTP926		BIT(26)
 -#define HSUSB_MSTP704		BIT(4)	/* HSUSB */
 +#include <asm/arch/renesas.h>
++#include <init.h>
  
  int board_early_init_f(void)
  {
@@ -162,6 +162,20 @@ index a51bf65674f..85213497ce4 100644
  /* HSUSB block registers */
  #define HSUSB_REG_LPSTS			0xE6590102
  #define HSUSB_REG_LPSTS_SUSPM_NORMAL	BIT(14)
+@@ -65,13 +42,6 @@ int board_init(void)
+ 	return 0;
+ }
+ 
+-#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY) && defined(CONFIG_SYS_I2C_SH)
+-void reset_cpu(void)
+-{
+-	i2c_reg_write(CONFIG_SYS_I2C_POWERIC_ADDR, 0x20, 0x80);
+-}
+-#endif
+-
+ #ifdef CONFIG_MULTI_DTB_FIT
+ int board_fit_config_name_match(const char *name)
+ {
 -- 
 2.45.2
 
