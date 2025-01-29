@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10171C0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 12:42:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F4ADC0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 12:42:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25DE081DFA;
+	by phobos.denx.de (Postfix) with ESMTP id 6D4F281EEF;
 	Wed, 29 Jan 2025 13:42:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AB748197D; Wed, 29 Jan 2025 13:42:34 +0100 (CET)
-Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::bc0a])
+ id 6427E81DD3; Wed, 29 Jan 2025 13:42:35 +0100 (CET)
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::42ae])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 047A48092B
+ by phobos.denx.de (Postfix) with ESMTPS id BC59180ECD
  for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 13:42:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,18 +25,18 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Yjhd3427pz2tc;
- Wed, 29 Jan 2025 13:42:31 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Yjhd432GWz37h;
+ Wed, 29 Jan 2025 13:42:32 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Yjhd250brzT5d; Wed, 29 Jan 2025 13:42:30 +0100 (CET)
+ id 4Yjhd34ScvzSl6; Wed, 29 Jan 2025 13:42:31 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 29 Jan 2025 13:42:20 +0100
-Subject: [PATCH 01/14] pinctrl: rockchip: remove unused base_pin bank
+Date: Wed, 29 Jan 2025 13:42:21 +0100
+Subject: [PATCH 02/14] pinctrl: rockchip: remove unused nr_pins controller
  member
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250129-rockchip-pinctrl-const-v1-1-450ccdadfa7e@cherry.de>
+Message-Id: <20250129-rockchip-pinctrl-const-v1-2-450ccdadfa7e@cherry.de>
 References: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
 In-Reply-To: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
@@ -65,47 +65,84 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Each bank has a base_pin member that is only set in the core and never
-used, so it can be removed.
+Each controller has an nr_pins member that is set either through the
+rockchip_pin_ctrl struct or from the core (or both).
+
+This is an issue because on RK3568, RK3588 and RV1126, the struct is
+const, this means it shouldn't be modified at all. This will trigger a
+CPU abort once we enforce the read-only at the MMU level in a few
+releases, therefore let's remove this useless (and broken, and soon
+breaking) code.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
+ drivers/pinctrl/rockchip/pinctrl-rk3568.c        | 1 -
+ drivers/pinctrl/rockchip/pinctrl-rk3588.c        | 1 -
  drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 1 -
- drivers/pinctrl/rockchip/pinctrl-rockchip.h      | 2 --
- 2 files changed, 3 deletions(-)
+ drivers/pinctrl/rockchip/pinctrl-rockchip.h      | 1 -
+ drivers/pinctrl/rockchip/pinctrl-rv1126.c        | 1 -
+ 5 files changed, 5 deletions(-)
 
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3568.c b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+index 5deedc648a41950461b6a468e4852fa0a5384207..c8a91b8bb6e925e0f2e7d6cd09f8a06a58be60dd 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rk3568.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+@@ -345,7 +345,6 @@ static struct rockchip_pin_bank rk3568_pin_banks[] = {
+ static const struct rockchip_pin_ctrl rk3568_pin_ctrl = {
+ 	.pin_banks		= rk3568_pin_banks,
+ 	.nr_banks		= ARRAY_SIZE(rk3568_pin_banks),
+-	.nr_pins		= 160,
+ 	.grf_mux_offset		= 0x0,
+ 	.pmu_mux_offset		= 0x0,
+ 	.iomux_routes		= rk3568_mux_route_data,
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3588.c b/drivers/pinctrl/rockchip/pinctrl-rk3588.c
+index 98ababc7c90700c4b27359fc3625519f20437306..fd8e617b9108c7314b8fdd4bbe1dfae71f1b6449 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rk3588.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rk3588.c
+@@ -324,7 +324,6 @@ static struct rockchip_pin_bank rk3588_pin_banks[] = {
+ static const struct rockchip_pin_ctrl rk3588_pin_ctrl = {
+ 	.pin_banks		= rk3588_pin_banks,
+ 	.nr_banks		= ARRAY_SIZE(rk3588_pin_banks),
+-	.nr_pins		= 160,
+ 	.set_mux		= rk3588_set_mux,
+ 	.set_pull		= rk3588_set_pull,
+ 	.set_drive		= rk3588_set_drive,
 diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-index d449d07d32e74d1dec1978b1405bec94887908a2..7369fe12b961290742f6ba24fb32b768531f56f9 100644
+index 7369fe12b961290742f6ba24fb32b768531f56f9..b87aed709d62d1e85d0d199c2d6c92aeaec67487 100644
 --- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
 +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
 @@ -543,7 +543,6 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
  		int bank_pins = 0;
  
  		bank->priv = priv;
--		bank->pin_base = ctrl->nr_pins;
- 		ctrl->nr_pins += bank->nr_pins;
+-		ctrl->nr_pins += bank->nr_pins;
  
  		/* calculate iomux and drv offsets */
+ 		for (j = 0; j < 4; j++) {
 diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip.h b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
-index df7bc684d29fae4ec650d1e14fe88b35b03244ac..ebd008eede24af32c123634a57f50c0294e76842 100644
+index ebd008eede24af32c123634a57f50c0294e76842..2910bbb570d8736487b8cb6c9f87f3e164858b5b 100644
 --- a/drivers/pinctrl/rockchip/pinctrl-rockchip.h
 +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
-@@ -262,7 +262,6 @@ struct rockchip_drv {
- 
- /**
-  * @priv: common pinctrl private basedata
-- * @pin_base: first pin number
-  * @nr_pins: number of pins in this bank
-  * @name: name of the bank
-  * @bank_num: number of the bank, to account for holes
-@@ -274,7 +273,6 @@ struct rockchip_drv {
-  */
- struct rockchip_pin_bank {
- 	struct rockchip_pinctrl_priv	*priv;
--	u32				pin_base;
- 	u8				nr_pins;
- 	char				*name;
- 	u8				bank_num;
+@@ -498,7 +498,6 @@ struct rockchip_mux_route_data {
+ struct rockchip_pin_ctrl {
+ 	struct rockchip_pin_bank	*pin_banks;
+ 	u32				nr_banks;
+-	u32				nr_pins;
+ 	int				grf_mux_offset;
+ 	int				pmu_mux_offset;
+ 	int				grf_drv_offset;
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1126.c b/drivers/pinctrl/rockchip/pinctrl-rv1126.c
+index efa2408b204b421ad1c5a36b039d8c07c5b7237e..3878a5420dcc98f591e4eefadd78a2fe98b61c7e 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rv1126.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rv1126.c
+@@ -381,7 +381,6 @@ static struct rockchip_pin_bank rv1126_pin_banks[] = {
+ static const struct rockchip_pin_ctrl rv1126_pin_ctrl = {
+ 	.pin_banks		= rv1126_pin_banks,
+ 	.nr_banks		= ARRAY_SIZE(rv1126_pin_banks),
+-	.nr_pins		= 130,
+ 	.grf_mux_offset		= 0x10004, /* mux offset from GPIO0_D0 */
+ 	.pmu_mux_offset		= 0x0,
+ 	.iomux_routes		= rv1126_mux_route_data,
 
 -- 
 2.48.1
