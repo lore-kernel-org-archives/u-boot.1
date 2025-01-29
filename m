@@ -4,60 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4352C0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 23:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA48C02190
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 23:44:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0710F80BB0;
+	by phobos.denx.de (Postfix) with ESMTP id 5369480C93;
 	Thu, 30 Jan 2025 00:44:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y2WPxtFI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SKPpRhRq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A43CD80C85; Thu, 30 Jan 2025 00:44:07 +0100 (CET)
+ id A83C780B9B; Thu, 30 Jan 2025 00:44:07 +0100 (CET)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 690AD80B9B
+ by phobos.denx.de (Postfix) with ESMTPS id 6B22580BB0
  for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 00:44:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50TNi3L11397827
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50TNi3TL1397831
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Wed, 29 Jan 2025 17:44:03 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1738194243;
- bh=83Ob7lqdBkuCL1hyEx6tIMylKlZ4Q6QkDch71mdvUS4=;
- h=From:To:CC:Subject:Date;
- b=y2WPxtFI8xpPwSV/K4gV8544vd28Kl1HBy0mVBMJjoyXSjQV2YPMT70uW+FlohGHW
- 8aGpNrZiv/9gfpykM0GLUdWuiKon3ErbUmt4hMa/vFl0bs4S1Omxu/C4xHsEomIGSv
- E2n6tJ8mYgqjd33fyeh60pkiWt/zPWmTu4si7cfY=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50TNi3s6018736
+ bh=JIhFy3TvL+UP0MuvT5SCQZmc/57pbYxSYUDssJZSWf8=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=SKPpRhRqtc2myPsqmlbHJvWDDmJbZ5+4FliluNYCn3dlfXx+0r228gcuYmHHC80I1
+ aCV+rHwEVmGKuspgE1Z6a/lZl+FfURTcUrvPWZdAiBCLVNvTBrijWeXVCr2eca9z7j
+ rMxhpg8FMTxAgawAt806j7/o+nWj/hSP8UiFa6Sw=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50TNi3Ms026988
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Wed, 29 Jan 2025 17:44:03 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
  Jan 2025 17:44:03 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 29 Jan 2025 17:44:03 -0600
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50TNi3fc023664;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50TNi3fe023664;
  Wed, 29 Jan 2025 17:44:03 -0600
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Santhosh Kumar K <s-k6@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
  <u-boot@lists.denx.de>, Judith Mendez <jm@ti.com>
-Subject: [PATCH 0/2] Enable MCU ESM reset
-Date: Wed, 29 Jan 2025 17:44:01 -0600
-Message-ID: <20250129234403.574766-1-jm@ti.com>
+Subject: [PATCH 2/2] configs: am62*_evm_r5: Enable ESM and MISC configs
+Date: Wed, 29 Jan 2025 17:44:03 -0600
+Message-ID: <20250129234403.574766-3-jm@ti.com>
 X-Mailer: git-send-email 2.48.0
+In-Reply-To: <20250129234403.574766-1-jm@ti.com>
+References: <20250129234403.574766-1-jm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -78,25 +80,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series enables ESM reset configuration in board_init_f
-for am62x and am62px devices.
+From: Santhosh Kumar K <s-k6@ti.com>
 
-This is necessary in order for error events to reset the system.
+Enable CONFIG_SPL_DRIVERS_MISC, CONFIG_SPL_MISC, CONFIG_ESM_K3
+to probe the Main ESM and MCU ESM nodes.
 
-This patches are tested using watchdog to reset the system via ESM.
+Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+Signed-off-by: Judith Mendez <jm@ti.com>
+---
+ configs/am62ax_evm_r5_defconfig | 3 +++
+ configs/am62px_evm_r5_defconfig | 3 +++
+ 2 files changed, 6 insertions(+)
 
-Santhosh Kumar K (2):
-  arm: mach-k3: am62*_init: Probe ESM nodes
-  configs: am62*_evm_r5: Enable ESM and MISC configs
-
- arch/arm/mach-k3/am62ax/am62a7_init.c | 26 ++++++++++++++++++++++++++
- arch/arm/mach-k3/am62px/am62p5_init.c | 26 ++++++++++++++++++++++++++
- configs/am62ax_evm_r5_defconfig       |  3 +++
- configs/am62px_evm_r5_defconfig       |  3 +++
- 4 files changed, 58 insertions(+)
-
-
-base-commit: d6da3dbaef57fc1d319b6b552efa009e2489d7d9
+diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
+index 274cd20e1c1..85a821eee51 100644
+--- a/configs/am62ax_evm_r5_defconfig
++++ b/configs/am62ax_evm_r5_defconfig
+@@ -13,6 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE="k3-am62a7-r5-sk"
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x7145
+ CONFIG_SPL_TEXT_BASE=0x43c00000
+@@ -83,6 +84,8 @@ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_OMAP24XX=y
+ CONFIG_DM_MAILBOX=y
+ CONFIG_K3_SEC_PROXY=y
++CONFIG_SPL_MISC=y
++CONFIG_ESM_K3=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_SPL_MMC_SDHCI_ADMA=y
+diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
+index 9df90e05d36..71e49b11650 100644
+--- a/configs/am62px_evm_r5_defconfig
++++ b/configs/am62px_evm_r5_defconfig
+@@ -15,6 +15,7 @@ CONFIG_DEFAULT_DEVICE_TREE="k3-am62p5-r5-sk"
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_TEXT_BASE=0x43c00000
+@@ -88,6 +89,8 @@ CONFIG_SYS_I2C_OMAP24XX=y
+ CONFIG_DM_MAILBOX=y
+ CONFIG_K3_QOS=y
+ CONFIG_K3_SEC_PROXY=y
++CONFIG_SPL_MISC=y
++CONFIG_ESM_K3=y
+ CONFIG_MMC_HS400_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ADMA=y
 -- 
 2.48.0
 
