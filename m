@@ -4,58 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 162E7C02190
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 22:37:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39820C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 22:52:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB43380C85;
-	Wed, 29 Jan 2025 23:37:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7C6C980AE5;
+	Wed, 29 Jan 2025 23:52:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="T86Mo5o9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KK/ROpW8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B5E080AE5; Wed, 29 Jan 2025 23:37:11 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E106C81EEF
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:37:08 +0100 (CET)
+ id 567CE80C99; Wed, 29 Jan 2025 23:52:38 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 51500807DC
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:52:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=e4db=UW=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1738190227; bh=YRwoQu/NI1tLn6cZ7Tx97f0/zKgLtIH7H59u6fRODrg=;
- b=T86Mo5o9qGLdWlwBE2RylgYABdPVgDls+2vhs/c+rBLTYu01apaCBaOIiaeyJZ4yksYODJiLZ
- nW7rULEK1qETtAXMFeD4utIur2e/9Y95COrIC88SpeD9KQcffv3pDjsZzGP5M4AB77LNiuxww0h
- 148HM7X6jedlxWI4EjboPZ6mOpxBbwW+Yfz6YeCsxC/UAt0MZBXm61d29TdQ+iYXiLBJPMY9sqw
- +uyc3uSq36+EjEYgx3iIj6MewZ6lDHcffWXVZCTCiJrH+V+8Zz15ZkOa6s4eoGn+hH415ikffLT
- Zph3hLAWhWRUVxPdVPQqWKD6LwFyxvNbiC7Rb0Iy94lw==
-X-Forward-Email-ID: 679aad903590a80aa97f8e56
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 6/6] rockchip: mkimage: Add option for image load address and
- flag
-Date: Wed, 29 Jan 2025 22:36:32 +0000
-Message-ID: <20250129223641.1888833-7-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250129223641.1888833-1-jonas@kwiboo.se>
-References: <20250129223641.1888833-1-jonas@kwiboo.se>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50TMqYjs1392299
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 29 Jan 2025 16:52:34 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738191154;
+ bh=LCw7q4gXTdFCD2HNglQ1gPO+bThsLt3xKsZ60o4r/WE=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=KK/ROpW8jl0qLw3FUGF4BuNiQ7sZlyeyNBvRY3qJ9UwKAkp5eHVKfTL9I744IQACd
+ 3kqX6snOb9b7cvygBkBFBhqmWQh/xo16e4vKoHvutfjn27XobQiIqwl412xB8NF2TV
+ 4jKev+48Csu37f8RM/xVMach03oyeWEf/eSchgb4=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50TMqYV9021501
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 29 Jan 2025 16:52:34 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
+ Jan 2025 16:52:34 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 29 Jan 2025 16:52:34 -0600
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50TMqXBJ125009;
+ Wed, 29 Jan 2025 16:52:34 -0600
+From: Judith Mendez <jm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Vignesh Raghavendra <vigneshr@ti.com>, Hari Nagalla <hnagalla@ti.com>,
+ Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, Daniel Schultz
+ <d.schultz@phytec.de>, Judith Mendez <jm@ti.com>
+Subject: [PATCH v2 3/4] env: ti: am64x: set rproc_fw_binaries
+Date: Wed, 29 Jan 2025 16:52:32 -0600
+Message-ID: <20250129225233.467139-4-jm@ti.com>
+X-Mailer: git-send-email 2.48.0
+In-Reply-To: <20250129225233.467139-1-jm@ti.com>
+References: <20250129225233.467139-1-jm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,51 +81,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The v2 image format supports defining a load address and flag for each
-embedded image.
+From: Hari Nagalla <hnagalla@ti.com>
 
-Add initial support for writing the image load address and flag to the
-v2 image format header.
+Set remote proc FW binaries for u-boot loading of remote cores.
 
-This may later be used for RK3576 to embed a minimal initial image that
-if required to fix booting from SD-card due to a BootROM issue.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 ---
- tools/rkcommon.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ board/ti/am64x/am64x.env | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-index 4ff48e81a636..952b76297dd9 100644
---- a/tools/rkcommon.c
-+++ b/tools/rkcommon.c
-@@ -150,12 +150,16 @@ static struct spl_info spl_infos[] = {
-  *
-  * @file:	image file path
-  * @size:	aligned size of image in bytes
-+ * @address:	image load address
-+ * @flag:	no use
-  */
+diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
+index 8ad805a613c..43e557b8ec7 100644
+--- a/board/ti/am64x/am64x.env
++++ b/board/ti/am64x/am64x.env
+@@ -2,6 +2,10 @@
+ #include <env/ti/mmc.env>
+ #include <env/ti/k3_dfu.env>
  
- struct spl_params {
- 	struct {
- 		char *file;
- 		uint32_t size;
-+		uint32_t address;
-+		uint32_t flag;
- 	} images[4];
- };
++#if CONFIG_CMD_REMOTEPROC
++#include <env/ti/k3_rproc.env>
++#endif
++
+ name_kern=Image
+ console=ttyS2,115200n8
+ args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000 ${mtdparts}
+@@ -14,6 +18,8 @@ bootpart=1:2
+ bootdir=/boot
+ rd_spec=-
  
-@@ -366,7 +370,8 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
- 		image_sector_count = spl_params.images[i].size / RK_BLK_SIZE;
- 		hdr->images[i].offset = cpu_to_le16(sector_offset);
- 		hdr->images[i].size = cpu_to_le16(image_sector_count);
--		hdr->images[i].address = 0xFFFFFFFF;
-+		hdr->images[i].address = spl_params.images[i].address ?: 0xFFFFFFFF;
-+		hdr->images[i].flag = spl_params.images[i].flag;
- 		hdr->images[i].counter = cpu_to_le32(i + 1);
- 		image_ptr = buf + sector_offset * RK_BLK_SIZE;
- 		do_sha256_hash(image_ptr, spl_params.images[i].size,
++rproc_fw_binaries= 0 /lib/firmware/am64-mcu-m4f0_0-fw 1 /lib/firmware/am64-main-r5f0_0-fw 2 /lib/firmware/am64-main-r5f0_1-fw 3 /lib/firmware/am64-main-r5f1_0-fw 4 /lib/firmware/am64-main-r5f1_1-fw
++
+ args_usb=run finduuid;setenv bootargs console=${console}
+ 	${optargs}
+ 	root=PARTUUID=${uuid} rw
 -- 
-2.48.1
+2.48.0
 
