@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26DDC0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 12:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6527C02190
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 12:43:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5BCD8081E;
-	Wed, 29 Jan 2025 13:42:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B15E81F74;
+	Wed, 29 Jan 2025 13:42:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0088381F74; Wed, 29 Jan 2025 13:42:38 +0100 (CET)
-Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
- [83.166.143.170])
+ id 0BEA081DD3; Wed, 29 Jan 2025 13:42:39 +0100 (CET)
+Received: from smtp-1908.mail.infomaniak.ch (smtp-1908.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::1908])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0449E8081A
+ by phobos.denx.de (Postfix) with ESMTPS id E5DF881F44
  for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 13:42:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,17 +25,17 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown
  [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Yjhd75vhkzwq;
- Wed, 29 Jan 2025 13:42:35 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Yjhd84DQsz3Ty;
+ Wed, 29 Jan 2025 13:42:36 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Yjhd70dTJzQrt; Wed, 29 Jan 2025 13:42:35 +0100 (CET)
+ id 4Yjhd7695ZzTHX; Wed, 29 Jan 2025 13:42:35 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 29 Jan 2025 13:42:25 +0100
-Subject: [PATCH 06/14] pinctrl: rockchip: constify rockchip_pin_ctrl for RK3128
+Date: Wed, 29 Jan 2025 13:42:26 +0100
+Subject: [PATCH 07/14] pinctrl: rockchip: constify rockchip_pin_ctrl for RK3188
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250129-rockchip-pinctrl-const-v1-6-450ccdadfa7e@cherry.de>
+Message-Id: <20250129-rockchip-pinctrl-const-v1-7-450ccdadfa7e@cherry.de>
 References: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
 In-Reply-To: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
@@ -69,22 +69,22 @@ make that struct const.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- drivers/pinctrl/rockchip/pinctrl-rk3128.c | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3188.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3128.c b/drivers/pinctrl/rockchip/pinctrl-rk3128.c
-index d00fc3da8b234667a86d0afea10e47b700cb1e00..9f9c358694ac615f78011b196c22e1b597771c97 100644
---- a/drivers/pinctrl/rockchip/pinctrl-rk3128.c
-+++ b/drivers/pinctrl/rockchip/pinctrl-rk3128.c
-@@ -171,7 +171,7 @@ static struct rockchip_pin_bank rk3128_pin_banks[] = {
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3188.c b/drivers/pinctrl/rockchip/pinctrl-rk3188.c
+index 83db51f66ae43c713a3f80a5442d1f8467a918e9..3a93db5622d70b85dafeea54e064d6df3551f35d 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rk3188.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rk3188.c
+@@ -105,7 +105,7 @@ static struct rockchip_pin_bank rk3188_pin_banks[] = {
  	PIN_BANK(3, 32, "gpio3"),
  };
  
--static struct rockchip_pin_ctrl rk3128_pin_ctrl = {
-+static const struct rockchip_pin_ctrl rk3128_pin_ctrl = {
- 	.pin_banks		= rk3128_pin_banks,
- 	.nr_banks		= ARRAY_SIZE(rk3128_pin_banks),
- 	.grf_mux_offset		= 0xa8,
+-static struct rockchip_pin_ctrl rk3188_pin_ctrl = {
++static const struct rockchip_pin_ctrl rk3188_pin_ctrl = {
+ 	.pin_banks		= rk3188_pin_banks,
+ 	.nr_banks		= ARRAY_SIZE(rk3188_pin_banks),
+ 	.grf_mux_offset		= 0x60,
 
 -- 
 2.48.1
