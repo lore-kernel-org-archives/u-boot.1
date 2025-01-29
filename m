@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 492DCC02192
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 16:34:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9253C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 16:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 150B080B9B;
-	Wed, 29 Jan 2025 17:34:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 55FEE8083F;
+	Wed, 29 Jan 2025 17:42:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Md5tMrD+";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NjIxIAVO";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="oWifY90L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C800680821; Wed, 29 Jan 2025 17:34:09 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EE45080843; Wed, 29 Jan 2025 17:42:28 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D9FA80821
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 17:34:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2DF08082A
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 17:42:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6d8f99cb0d9so59637096d6.0
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 08:34:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738168446; x=1738773246; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=i0mUqKo5/LeAOyyW3nEZdCbfaXLIxo/DF8/QJqP3n7E=;
- b=Md5tMrD+P6TIp4Um5U9ZcNjM6cVQIA+DO8ReQNGzlpybHbOMiBQhY5ccN/EQH21ylj
- 5fHy6Dz/KEDGaRY8Y1rfc69UVJ0lShhv3vl1yW7f/+5lmadOkzcGfP0MkM++KXUsuDVa
- MeoKMz6rhOJcePGlbhRWldmsRET2yUOh+OjGE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738168446; x=1738773246;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=i0mUqKo5/LeAOyyW3nEZdCbfaXLIxo/DF8/QJqP3n7E=;
- b=Pd8VAnAgB+En+/veCzyA6BY40gtwv5sStycdfJq/Aw2L+NRApwWviTk3SNpwiqFtda
- wdSfJZNcUTkAilTaLsm6DMNON6fHsfypd06ACkuagYtZEJk//cDEQNAumKUA/JSKc0Ac
- 2E3JJ3/rDR6nEKHn/eZZZNG4nXZiBE6k0mzLcE1l5nw9z+i2ylb2OUceQ7fNSr19I59W
- 4o3boTEj8+8+LkgJRCk/u4zJoGjhkgtHsFepPydsY+sIEHeVjnU8pLlpb1tql3wsc6+Z
- 2fnOrX13B3n1XGaA1u7o1atG0CgzNR6903YgbsoWi8jkKyRbtbdq3XxyLyeTN/CYTqZb
- 6dgg==
-X-Gm-Message-State: AOJu0Yw/OC8wH5DAYMA6M8I3PA6ueJ/pIwOAeKlESj6aCOJWquUW+l1x
- LORQLQKDJ7JjRIjIApaDdNnsi2EocANfFA0ZEao1ANIAbhm0DAriJ98iZF1p/JM=
-X-Gm-Gg: ASbGncuRKYS5PMADWGnmhzQpu5ykiQXVHxJDOxVE8269c0dQq0tcB9X9+br1cbJkiUV
- WvyYhYGUHuHbrcOx8KXZC7hyqxP9YgqxOsIs1cq/dpwOW0rSmOpG7fxGeTxNx2OfDpqY9t//T2r
- QSSfiFtVdNxjcgzHRnx4auzdckd+4oUj3OawK+r8iYJ/hlPliQ0iK1xkfxBHLLb3qgPIkToYRhQ
- JymRHB/sCavdb+Y/7Tk9/NOdwCJwIHzTggjORnBhGpU3P8ForzWJ4B4LSTCTvygX/V6O5GcTtCg
- Dr4bDZitkPyKKA==
-X-Google-Smtp-Source: AGHT+IHU7nhiu/3snUVF67xZTFrp+x0ShL1jfaxpOUyqIg1/bbYLtfCrEjTYaZ/2zRARAyHdA6uowg==
-X-Received: by 2002:a05:6214:1c86:b0:6d8:9124:8799 with SMTP id
- 6a1803df08f44-6e243b8f605mr56287876d6.5.1738168446181; 
- Wed, 29 Jan 2025 08:34:06 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e2058c2b76sm56636996d6.107.2025.01.29.08.34.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jan 2025 08:34:05 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: raymond.mao@linaro.org
-In-Reply-To: <20250129102102.1844476-1-ilias.apalodimas@linaro.org>
-References: <20250129102102.1844476-1-ilias.apalodimas@linaro.org>
-Subject: Re: Pull request for tpm-master-28012025
-Message-Id: <173816844516.2140900.3625948826462989126.b4-ty@konsulko.com>
-Date: Wed, 29 Jan 2025 10:34:05 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Yjnxs5bQHz9t1G;
+ Wed, 29 Jan 2025 17:42:25 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1738168945;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tuKwzkzgxSgklAEhXbT/Ze9kdUf8N+CsimWH5nTPPsg=;
+ b=NjIxIAVOeiCixF7HRy66fhRm+I7Tq2VN1ASyt89ZbBzpkiQP26kiW0pKcHpUln26Qo1VmA
+ Rw+6YI5b4wXAceLlH9hGWGdkT5ZBakg9Y9rE4oAWydMX7gFn5etghzPJOQEvEa8GMbKxrL
+ fHxyzj3bWVakZVwX4dbfFCjqaBpKiO2PJCOLaV9gEf0oYhWsgIvHVWE4uLO44LZTPyTkSM
+ VJyGMrZNi2axy11/q0HOMdAIHP77fq0g4018RI3KXuh2psB7lQj+JHeQV59O4/sWK0Fdu/
+ rbFEym/XAMq7mkFuFl016ZLXsjyy//re3QPYaxUGu2Ap2/pqCHygpWgopEvANQ==
+Message-ID: <cb34f827-0c8f-41a4-849f-52c8ba85bd1b@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1738168943;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tuKwzkzgxSgklAEhXbT/Ze9kdUf8N+CsimWH5nTPPsg=;
+ b=oWifY90LHnA/1GJghe3+BveMmYf9jKc2AWkvN7ZLq52EqgO9GNdNdG9KGGm6UDHNsAzI83
+ W9edMbGTdPphDL9wXgSLrJoJ/V2lgEQ/TY5UwtxpdRtsIxcZCNOya2AzayLYHaYvgKSxa+
+ pHSDB+LlMBMQDY+Nm5Mvc7WXfea+zhRvtuvo5mBF6jE8mMIJYdx4SK7AhAzo2HEZ6sKwuT
+ crxFN7kzp4zRu3R2h71kPk8vMMSFapjZASNPMoAiDJB4ShYcsG/eB/VbHP/Q/f3bVm1jkV
+ zZx3e4TOY72KpkfR5PdMi1CLkHHvRHWpcMCPVdpR9hpyaM/9xRqZtEKB9P1oUg==
+Date: Wed, 29 Jan 2025 17:42:20 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Subject: Re: [PATCH v2 2/8] ARM: renesas: Simplify board Makefiles
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250118111621.362188-1-marek.vasut+renesas@mailbox.org>
+ <20250118111621.362188-2-marek.vasut+renesas@mailbox.org>
+ <3bf8432b-619c-4834-8d0c-c91f45a8f167@cherry.de>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <3bf8432b-619c-4834-8d0c-c91f45a8f167@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 4j6mbx4dnmi5ksztwzftiqodhhfa5noe
+X-MBO-RS-ID: f1762023657c700b5b8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,21 +94,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 29 Jan 2025 12:21:02 +0200, Ilias Apalodimas wrote:
+On 1/29/25 3:54 PM, Quentin Schulz wrote:
+> Hi Marek,
 
-> The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c047:
-> 
->   Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-28012025
-> 
-> [...]
+Hi,
 
-Merged into u-boot/master, thanks!
+> On 1/18/25 12:15 PM, Marek Vasut wrote:
+>> Introduce board/renesas/common/Makefile and remove the multiple
+>> duplicate copies of obj := ../common/*.o from board Makefiles.
+>> Let the build system include the common Makefile using the
+>> HAVE_VENDOR_COMMON_LIB and build the common objects that are
+>> shared by all the boards that way. No functional change intended.
+>>
+>> Some of the remaining board files which include board specific
+>> settings have been updated to use obj-y += to avoid rewriting
+>> the board obj-y target and avoid dropping object files from the
+>> build.
+>>
+>> The board/renesas/common/Makefile is now also used when building
+>> RZG2L targets which also set CONFIG_RCAR_64 symbol and 32bit R-Car
+>> Gen2 targets, however, this common code is specific to 64bit R-Car
+>> only. Inhibit the build of this common code for RZG2L using extra
+>> ifndef CONFIG_RZG2L and do not include any code for R-Car Gen2 so
+>> far.
+
+[...]
+
+>> -ifdef CONFIG_XPL_BUILD
+>> -obj-y    := ../common/gen3-spl.o
+>> -else
+>> -obj-y    := ../common/gen4-common.o ../common/common.o
+>> -endif
+> 
+> Was this a mistake on Falcon? It used to use the gen3-spl while being a 
+> gen4?
+
+Falcon is V3U which is something between the two generations, but the 
+SPL is not even being built, so the whole SPL part can be removed.
+
+[...]
 
 -- 
-Tom
-
-
+Best regards,
+Marek Vasut
