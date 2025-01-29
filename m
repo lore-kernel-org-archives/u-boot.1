@@ -4,67 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B067C0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 04:51:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F9CFC0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 05:31:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8979680824;
-	Wed, 29 Jan 2025 05:51:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9197E80EB5;
+	Wed, 29 Jan 2025 06:31:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HH+E5TgJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RJkCXDVo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93B018082A; Wed, 29 Jan 2025 05:51:27 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC689807F9
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 05:51:24 +0100 (CET)
+ id 92B2380EEF; Wed, 29 Jan 2025 06:31:52 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 03DE68082A
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 06:31:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50T4pMmv1300400
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 28 Jan 2025 22:51:22 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738126282;
- bh=rK7cdo9njgYU37T0HTBs8mvymSNa7hS+LvExdOMmvVo=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=HH+E5TgJxJ1Hm5cBZI0VvGe9aOdfNGo2FplemcGexZ/Tm1Peb0V08g3KJ4mquMmmu
- paodbik/ejsZoJw9fLioisc/IySgSdOzzArbnX2I0xTVxIarc/FUSE3P82hTox+AnI
- 89jwKXbcJeBTaoQtAc+LUO4f4nGAW3UJwILf/c4U=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50T4pMHI043789
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 28 Jan 2025 22:51:22 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
- Jan 2025 22:51:22 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 28 Jan 2025 22:51:22 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.104])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50T4pLem088881;
- Tue, 28 Jan 2025 22:51:21 -0600
-Date: Wed, 29 Jan 2025 10:21:20 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <trini@konsulko.com>, <a-limaye@ti.com>, <n-francis@ti.com>,
- <a-dutta@ti.com>, <vaishnav.a@ti.com>, <p-mantena@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: Re: [PATCH] configs: j7200_evm_a72_defconfig: Re-enable
- CONFIG_MUX_MMIO
-Message-ID: <3eekfmver7uoabxjgekopsgrj6cxrla2p7hssrd5qcdid36dum@mkbe35osme7x>
-References: <20250127162509.965644-1-s-vadapalli@ti.com>
+ spf=pass smtp.mailfrom=michaelsunn101@gmail.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2f833af7a09so1639335a91.2
+ for <u-boot@lists.denx.de>; Tue, 28 Jan 2025 21:31:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1738128708; x=1738733508; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dR4KYQCHqA1KPlMuBcOVo6odryCVctNPXqvZuL44/58=;
+ b=RJkCXDVoFKQT8tRYBlq5Ejh1cQ0rsl4hgQb4/dG0MhfdOVYCBxN1QixCIw1LZgrueR
+ FJwZjgG60ytcDYQUuHvuQ1zCoPdH2O9sJmnn+UNNSXVMy2C5WtCtWK2R0T8ajWHdCZMu
+ ZgS0jy7gPY4F8wfJJjc2nEUPhsrcA3Eiya+nZmtVeAtT2aPg9W1YLpqqimSmiCd54tmT
+ qy6Aa3eHZtZNqLiiUfKp7ntCt08gdG+rQfxMsLmtjBvG3mh3ZzpVabOl+s/OHgM90kXo
+ Iro0x9gxU2pEt6OKPS1/TOlbopqoLpGxSiPKGAGEO8qkxxc1n1ViDlxs6sFJN272slGx
+ xO1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738128708; x=1738733508;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dR4KYQCHqA1KPlMuBcOVo6odryCVctNPXqvZuL44/58=;
+ b=QT41CKZIDIv6RbA+geFyGwP/nfnqR9lnfQ7+GJUi/XA/82yXOmWmbuyPE6spamge/V
+ Y40vOnSYjKoZVPlutdmxBDLCDxV+/r5WXfRGr4Us2xOKjc4N+2FZaaASGJoSFhQQ0hpq
+ vK3JdtKO816SoSNqE+XwvTXlIQ1QZ6TPd47+45ZSLfNBblOw11ecKsAi+Y0tbGGcoFay
+ bpeepcZzZruadffAeK1ZjvmOHRi1HiWjnEvEcqQqOPiytsD8HuEHWoPnxdE5WZfQRpC1
+ vgbRJbk7WqWGTDutuCDXKbWkmgEEvz3JowQBl3EHOAoxMlTC2TwvBDceysKYOL+rmMt5
+ TlPw==
+X-Gm-Message-State: AOJu0YyVkGdVFYNCcHSyNC64JwbxsKCmEOKKUecEW6d0EnmLPxzVYKa+
+ IQ0Rz7OrD12QOIRtiFlqYI2lhVwbOXzPrSnEKxJILh25kZNA4erYuQAgldspKCplAlKWp/d9A6C
+ mxGTOb0G6Ww3o3j3cryg4YhuAvw==
+X-Gm-Gg: ASbGncvS2k8kyFxTPrVIXESEssnAuRjtzSRPElBtVlePEm0ID7y/QDuKwTZtzGdOu4+
+ SI4lPT5WLZLKcQntYlFJL6zN0k1oJSbp+DKYTKSSz09EIFRaMaKYjGtsJj1bEUdKcIRz9OSmwPo
+ 1dLTXOy/C/EjyhB+1/3ZNq1ekAiiA=
+X-Google-Smtp-Source: AGHT+IEcsb8Y+4sCzzCWSfdg1wjZA/pmdJy04owh9mb/G8Qdyoe8PS0DT5TBIcuZpgSz46JRV0/rHbKmDeNdfOCKCcU=
+X-Received: by 2002:a05:6a00:3a01:b0:725:9cc4:2354 with SMTP id
+ d2e1a72fcca58-72fd0be1847mr2645418b3a.10.1738128708242; Tue, 28 Jan 2025
+ 21:31:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250127162509.965644-1-s-vadapalli@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250128030945.1219589-1-michaelsunn101@gmail.com>
+ <87o6zrqns9.fsf@baylibre.com>
+In-Reply-To: <87o6zrqns9.fsf@baylibre.com>
+From: Michael <michaelsunn101@gmail.com>
+Date: Tue, 28 Jan 2025 23:31:37 -0600
+X-Gm-Features: AWEUYZnYUtz6zuu2TXTCJdyziL1sPLD37LXLGlKO6aGW1pzCf-RqqYSU12AYvCM
+Message-ID: <CAH40Y2gE1+EJcDgdny_Ed85pycF-0GaFATCXxRHNww9L2DLeFw@mail.gmail.com>
+Subject: Re: [PATCH v4] usb: gadget: g_dnl: Fix NULLPTR dereference when
+ serial# is unset
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
+ Heiko Schocher <hs@denx.de>, Kyungmin Park <kyungmin.park@samsung.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,50 +94,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 27, 2025 at 09:53:33PM +0530, Siddharth Vadapalli wrote:
+Are there any other action items I should take care of?
 
-+Vaishnav. I had accidentally sent the patch to the wrong email address.
 
-> Commit under Fixes which claimed to enable configs for Hyperflash, changed
-> "CONFIG_MUX_MMIO=y" to "CONFIG_SPL_MUX_MMIO=y" in j7200_evm_a72_defconfig.
-> As a result, PCIe functionality in U-Boot prior was broken, since the PCIe
-> driver depends on the SERDES Lane Muxing to be setup for PCIe, which is
-> done by the drivers/mux/mmio.c driver.
-> 
-> Fix this by re-enabling CONFIG_MUX_MMIO.
-> 
-> Fixes: 038f6faea9f0 ("configs: j7200_evm_*_defconfig: Add configs for Hyperflash boot")
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> ---
-> 
-> Hello,
-> 
-> This patch is based on commit
-> d8a7100d658 Subtree merge tag 'v6.13-dts' of dts repo [1] into dts/upstream
-> of the Master branch of U-Boot.
-> 
-> Logs verifying PCIe functionality by enumerating an NVMe SSD at U-Boot with
-> this patch applied:
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/12c245ad0b5db83c6dacf56a329f5009
-> 
-> Regards,
-> Siddharth.
-> 
->  configs/j7200_evm_a72_defconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-> index e1ef6e86d49..ac5b10ba149 100644
-> --- a/configs/j7200_evm_a72_defconfig
-> +++ b/configs/j7200_evm_a72_defconfig
-> @@ -144,6 +144,7 @@ CONFIG_SPI_FLASH_S28HX_T=y
->  # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
->  CONFIG_SPI_FLASH_MTD=y
->  CONFIG_MULTIPLEXER=y
-> +CONFIG_MUX_MMIO=y
->  CONFIG_PHY_TI_DP83869=y
->  CONFIG_PHY_FIXED=y
->  CONFIG_TI_AM65_CPSW_NUSS=y
-> -- 
-> 2.43.0
-> 
+On Tue, Jan 28, 2025 at 3:40=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> Hi Michael,
+>
+> Thank you for the patch.
+>
+> On lun., janv. 27, 2025 at 21:09, Michael Ferolito <michaelsunn101@gmail.=
+com> wrote:
+>
+> > The current behaviour of this function will dereference a null pointer
+> > if the serial# environment variable is unset. This was discovered on a
+> > board where U-Boot did not have access to the first 256MB of ram,
+> > resulting in a board crash.
+> > In the event that U-Boot has full access to memory, it will still read
+> > from address 0, which is probably not optimal.
+> > This simple check is enough to fix it
+> >
+> > Signed-off-by: Michael Ferolito <michaelsunn101@gmail.com>
+> > Cc: Marek Vasut <marex@denx.de>
+> > Cc: Heiko Schocher <hs@denx.de>
+> > Cc: Kyungmin Park <kyungmin.park@samsung.com>
+>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
+> > ---
+> >  drivers/usb/gadget/g_dnl.c | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/usb/gadget/g_dnl.c b/drivers/usb/gadget/g_dnl.c
+> > index 631969b340..f2540eb6de 100644
+> > --- a/drivers/usb/gadget/g_dnl.c
+> > +++ b/drivers/usb/gadget/g_dnl.c
+> > @@ -207,7 +207,8 @@ void g_dnl_clear_detach(void)
+> >  static int on_serialno(const char *name, const char *value, enum env_o=
+p op,
+> >               int flags)
+> >  {
+> > -     g_dnl_set_serialnumber((char *)value);
+> > +     if (value)
+> > +             g_dnl_set_serialnumber((char *)value);
+> >       return 0;
+> >  }
+> >  U_BOOT_ENV_CALLBACK(serialno, on_serialno);
+> > --
+> > 2.48.1
