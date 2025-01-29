@@ -4,72 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A94F0C02193
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 08:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3D51C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 09:27:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3AB28082A;
-	Wed, 29 Jan 2025 09:50:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id CB63E8082D;
+	Wed, 29 Jan 2025 10:27:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Z0TSHxOD";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="J1pgltls";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50CA080834; Wed, 29 Jan 2025 09:50:08 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DC79280107; Wed, 29 Jan 2025 10:27:34 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 100B580821
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 09:50:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC19A80107
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 10:27:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 0883829b-de1e-11ef-9de5-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 0883829b-de1e-11ef-9de5-00505699b430;
- Wed, 29 Jan 2025 09:50:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=content-type:mime-version:subject:to:from:message-id:date;
- bh=g7STYjVl6uonFaEfDSmXiA1D5iurAXcXFecchZ5Wruw=;
- b=Z0TSHxODwLtmqamHQzy3olYQdR21Jum2kWUmyYr9j1EDj7ujLWHeNolJZ9Flzo4e8bhVdSQylsOW3
- nBrJrV7zLrjaJJq2cjQdrcsR23MpgwGGwoZjRNVIyNOxZK3HTLgWUClNc6M4Cl52W2NA0PvxWz3T+h
- YY3E6FNp1AbgWDq+jXLtBv2ItZkD49QV+UaASnZucgYtOrF8xfDLtxW/1KexcZLVzajf+TQWKoWH9g
- MbCk+/RAGsAyVhUtF91hnGHuOKZdw0//SiumuvtESXZSZtbikbsqYv8FrYlBqf761AFgeLmeDTQsT1
- kF5qPO3LD2TxwKDBuwCmbXGNN57o0pw==
-X-KPN-MID: 33|qtoelbdiXF7Xv4WH2KzcVDq1wtxCyLCfq65Q51LKRyuLX8MGE5eQHy1zds6cH6A
- 6DJjmB4V+5CtaGx0NJSwsGFbA4URbXL3qaMct0ven3jA=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|XKjlXn2PWWhjXT5w+LjE5zCjqbzR2VTYBtD5L1//lB8i2yugI3yf2aViywCMs74
- GH8EycAfeHL1LY84/7IyOBA==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 08c24fd9-de1e-11ef-9797-005056998788;
- Wed, 29 Jan 2025 09:50:05 +0100 (CET)
-Date: Wed, 29 Jan 2025 09:50:04 +0100
-Message-Id: <87h65ihumb.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Tom Rini <trini@konsulko.com>
-Cc: msuchanek@suse.de, eugen.hristev@microchip.com,
- u-boot@lists.denx.de, sjg@chromium.org, xypron.glpk@gmx.de,
- michal.simek@amd.com, daniel.schwierzeck@gmail.com,
- marex@denx.de, alpernebiyasak@gmail.com
-In-Reply-To: <20250128221559.GR1233568@bill-the-cat> (message from Tom Rini on
- Tue, 28 Jan 2025 16:15:59 -0600)
-Subject: Re: [PATCH] lds: align u-boot-nodtb with 8 bytes boundary
-References: <20221215115825.827111-1-eugen.hristev@microchip.com>
- <87edsx4qzy.fsf@bloch.sibelius.xs4all.nl>
- <20221221215637.GA3787616@bill-the-cat>
- <87len02xan.fsf@bloch.sibelius.xs4all.nl>
- <20221221230910.GC3787616@bill-the-cat>
- <87k02k2vku.fsf@bloch.sibelius.xs4all.nl>
- <20221221234412.GE3787616@bill-the-cat>
- <Z5kJyl354DO7uKCR@kitsune.suse.cz> <20250128221559.GR1233568@bill-the-cat>
-MIME-version: 1.0
-Content-type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: 8bit
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43624b2d453so72867775e9.2
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 01:27:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738142850; x=1738747650;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=lSOVOyHvXiMzxtJGo+qlCyg9IYRAezdr3qRj/JHJkM8=;
+ b=J1pgltlsQ55+Qn5nPkb+6vbxP02vN2q+FuE04wF5gaxQ7Pv+Y+AiRTFPF7Fo9ZX+fW
+ 1lOdNRWy5bf5YcEpzHgtzkCgvn23cL8Y5hXlLEZx5BFdjn99Z5BgFfONcfNboE7YVc7n
+ oazLp/vIEUykl3MnR2O2zYVt/ogXksZLUWTSUBvpQplhNJ+94tPbitNBuHQf19wKPGpZ
+ WkBuNmXNymSC7jGWz8mc+DvshrnIqVWPWsrULonzcBfNvmWr+IC3+7YlHrGevwLOvAvs
+ aw2l/s805dRPNpy6B8B+FYpw+3yghARXBk2Y+4YhYhsswJTfPeFSnreuC6mIQNTSiaNb
+ XhgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738142850; x=1738747650;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lSOVOyHvXiMzxtJGo+qlCyg9IYRAezdr3qRj/JHJkM8=;
+ b=Z0fyIpC9VuW3h8RbEnCxVFFrfQHwtiyPF0uqyopXr5m3QhP0EfvXF/sSWHels6c5x0
+ Jzr3yo7cqDJw3eGB0Xu7R9+fVJ3WrYvnPzJ7GdKUdRKHFAO1vMxJGOr2jIlXJ/mAGulG
+ Aw8V0equIzjQp3XwVeb7XcedpLlD7MYQOapGHqJYSotEudwVmtcSwa5vVhB+JYgCg+tI
+ H0iN5O7Uaw6oRsnS/w28uIlxPHbQEaq3W8f/xJBbsgQkt4dWMwx4NL/Wh/Zl6rA/khtS
+ ybRBx4+afNQzO3Fi7q2q6c/Bx8+J0PRwvIEicjSVxH+1gaoexcDEum3FZBQZQFMmCoDK
+ XAGA==
+X-Gm-Message-State: AOJu0YweyVyjOD6r1zhG5+DhjqEywfkKKDjgAar5wWD8JsTB+/Syz6OM
+ TVg8XqQhhzk+A1YYj2in41+1IdiGpOWImHSL1BD1AZjykf8mueMDqOBf6OrLY64=
+X-Gm-Gg: ASbGncsq5lQpwlGQndudg5WyqtIL2xiKEGgjcToAe2lIT7xs9rgoR/YhigOTGXZwJIf
+ 5cbElOyXzFQeDgz8wjKXHyc5/xntxIecZrhDdIotHOcqoWfCv20xoN4FMv6MxYjtQpy0uiIuey3
+ J61nxI2W1gaLyt56p3rlsiHDOPWtuRm33Py+NZ1svT77b6nSRhu/l96RfEer25Lju0zxLwv9seV
+ YAj4xX8g2k8sQKG02KQex59gEG+GulyDr/1+2+fILW506uZyGy+p1ftcLk4duvU7avzbYm78KhJ
+ iLcO8DDqHxvOnj7hffGQp3WKOSUSHcLzDn4=
+X-Google-Smtp-Source: AGHT+IF6VOgnSMcGs4pnmJSzjR1Oy8+cIswBWwncOfBWKd0Uc3lbtwcMJjNwN86JWeAmfMe/LIf7Og==
+X-Received: by 2002:a05:600c:b8c:b0:434:a04d:1670 with SMTP id
+ 5b1f17b1804b1-438dc34ba8fmr20668985e9.0.1738142850369; 
+ Wed, 29 Jan 2025 01:27:30 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438dcc23bf7sm15869045e9.9.2025.01.29.01.27.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jan 2025 01:27:29 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Michael <michaelsunn101@gmail.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, Heiko Schocher
+ <hs@denx.de>, Kyungmin Park <kyungmin.park@samsung.com>
+Subject: Re: [PATCH v4] usb: gadget: g_dnl: Fix NULLPTR dereference when
+ serial# is unset
+In-Reply-To: <CAH40Y2gE1+EJcDgdny_Ed85pycF-0GaFATCXxRHNww9L2DLeFw@mail.gmail.com>
+References: <20250128030945.1219589-1-michaelsunn101@gmail.com>
+ <87o6zrqns9.fsf@baylibre.com>
+ <CAH40Y2gE1+EJcDgdny_Ed85pycF-0GaFATCXxRHNww9L2DLeFw@mail.gmail.com>
+Date: Wed, 29 Jan 2025 10:27:29 +0100
+Message-ID: <87ikpyq8am.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,150 +100,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Tue, 28 Jan 2025 16:15:59 -0600
-> From: Tom Rini <trini@konsulko.com>
+Hi Michael,
 
-Hi Tom,
+On mar., janv. 28, 2025 at 23:31, Michael <michaelsunn101@gmail.com> wrote:
 
-> On Tue, Jan 28, 2025 at 05:46:02PM +0100, Michal Suchánek wrote:
-> > Hello,
-> > 
-> > On Wed, Dec 21, 2022 at 06:44:12PM -0500, Tom Rini wrote:
-> > > On Thu, Dec 22, 2022 at 12:20:01AM +0100, Mark Kettenis wrote:
-> > > > > Date: Wed, 21 Dec 2022 18:09:10 -0500
-> > > > > From: Tom Rini <trini@konsulko.com>
-> > > > > 
-> > > > > On Wed, Dec 21, 2022 at 11:42:56PM +0100, Mark Kettenis wrote:
-> > > > > > > Date: Wed, 21 Dec 2022 16:56:37 -0500
-> > > > > > > From: Tom Rini <trini@konsulko.com>
-> > > > > > > 
-> > > > > > > On Sat, Dec 17, 2022 at 11:14:41PM +0100, Mark Kettenis wrote:
-> > > > > > > > > From: Eugen Hristev <eugen.hristev@microchip.com>
-> > > > > > > > > Date: Thu, 15 Dec 2022 13:58:25 +0200
-> > > > > > > > > 
-> > > > > > > > > Newer DTC require that the DTB start address is aligned at 8 bytes.
-> > > > > > > > > In the u-boot.bin case, the u-boot-nodtb.bin is concatenated with the
-> > > > > > > > > DTB, but there is no alignment/padding to the next 8byte aligned address.
-> > > > > > > > > This causes the board to fail booting, because the FDT will claim
-> > > > > > > > > that the DTB inside u-boot.bin is not a valid DTB, it will fail with
-> > > > > > > > > -FDT_ERR_ALIGNMENT.
-> > > > > > > > > To solve this, have the u-boot binary `_end` aligned with 8 bytes.
-> > > > > > > > > The objcopy in the Makefile will create the u-boot-nodtb.bin and it has to
-> > > > > > > > > be truncated to 8 bytes to correspond to the u-boot.map file which will
-> > > > > > > > > have the `_end` aligned to 8 bytes.
-> > > > > > > > > The lds files which use devicetrees have been changed to align the `_end`
-> > > > > > > > > tag with 8 bytes.
-> > > > > > > > > 
-> > > > > > > > > This patch is also a prerequisite to have the possibility to update the
-> > > > > > > > > dtc inside u-boot to newer versions (1.6.1+)
-> > > > > > > > > 
-> > > > > > > > > Signed-off-by: Eugen Hristev <eugen.hristev@microchip.com>
-> > > > > > > > > ---
-> > > > > > > > > Hi,
-> > > > > > > > > 
-> > > > > > > > > I could not test all affected boards, it's an impossible task.
-> > > > > > > > > I tried this on at91 boards which I have, and ran the CI on denx.
-> > > > > > > > > I cannot guarantee that no other boards are affected, so this patch is a bit
-> > > > > > > > > of an RFC.
-> > > > > > > > > If the u-boot-nodtb.bin does not have the size equal with the corresponding
-> > > > > > > > > one in u-boot.map, the binary_size_check will fail at build time with
-> > > > > > > > > something like this:
-> > > > > > > > > 
-> > > > > > > > > u-boot.map shows a binary size of 502684
-> > > > > > > > > but u-boot-nodtb.bin shows 502688
-> > > > > > > > > 
-> > > > > > > > > Thanks,
-> > > > > > > > > Eugen
-> > > > > > > > > 
-> > > > > > > > >  Makefile                                    | 2 ++
-> > > > > > > > >  arch/arm/cpu/armv8/u-boot.lds               | 4 ++--
-> > > > > > > > >  arch/arm/cpu/u-boot-spl.lds                 | 1 +
-> > > > > > > > >  arch/arm/cpu/u-boot.lds                     | 1 +
-> > > > > > > > >  arch/arm/lib/elf_arm_efi.lds                | 5 +++++
-> > > > > > > > >  arch/arm/mach-at91/arm926ejs/u-boot-spl.lds | 2 +-
-> > > > > > > > >  arch/arm/mach-at91/armv7/u-boot-spl.lds     | 2 +-
-> > > > > > > > >  arch/arm/mach-zynq/u-boot-spl.lds           | 2 +-
-> > > > > > > > >  arch/mips/cpu/u-boot.lds                    | 2 +-
-> > > > > > > > >  arch/sandbox/cpu/u-boot.lds                 | 6 ++++++
-> > > > > > > > >  arch/sh/cpu/u-boot.lds                      | 2 ++
-> > > > > > > > >  board/ti/am335x/u-boot.lds                  | 1 +
-> > > > > > > > >  tools/binman/test/u_boot_binman_embed.lds   | 2 +-
-> > > > > > > > >  13 files changed, 25 insertions(+), 7 deletions(-)
-> > > > > > > > > 
-> > > > > > > > > diff --git a/Makefile b/Makefile
-> > > > > > > > > index 9d84f96481..b4d387bcce 100644
-> > > > > > > > > --- a/Makefile
-> > > > > > > > > +++ b/Makefile
-> > > > > > > > > @@ -1317,6 +1317,8 @@ endif
-> > > > > > > > >  
-> > > > > > > > >  u-boot-nodtb.bin: u-boot FORCE
-> > > > > > > > >  	$(call if_changed,objcopy_uboot)
-> > > > > > > > > +# Make sure the size is 8 byte-aligned.
-> > > > > > > > > +	@truncate -s %8 $@
-> > > > > > > > 
-> > > > > > > > $ truncate
-> > > > > > > > ksh: truncate: not found
-> > > > > > > > 
-> > > > > > > > In other words: truncate(1) isn't a standard UNIX utility and not
-> > > > > > > > present on OpenBSD for example.  It isn't part of POSIX and therefore
-> > > > > > > > its usage is unportable.
-> > > > > > > > 
-> > > > > > > > Please find a different solution.
-> > > > > > > 
-> > > > > > > Ah yes. Can this perhaps be done with dd? A bit of looking around
-> > > > > > > suggests that this might be a portable way to truncate a file to say 512
-> > > > > > > bytes:
-> > > > > > > dd if=/dev/urandom of=testfile bs=1 count=500
-> > > > > > > dd if=/dev/null of=testfile bs=1 count=512
-> > > > > > > 
-> > > > > > > And then hexdump or whatever to see that the last 12 bytes are zero. Can
-> > > > > > > you please test this on OpenBSD?  We'll need some shell work to get
-> > > > > > > current byte size and make it 8-byte aligned, but that should be
-> > > > > > > portable at least.  Thanks!
-> > > > > > 
-> > > > > > Hi Tom,
-> > > > > > 
-> > > > > > That results on a file with zero bytes on OpenBSD... but also on
-> > > > > > Linux.  Did you intend to write something different?  I can't
-> > > > > > immediately come up with a way to do this with dd(1).
-> > > > > 
-> > > > > Ah, I typod that, sorry!  I meant (and just re-checked):
-> > > > > dd if=/dev/urandom of=testfile bs=1 count=500
-> > > > > dd if=/dev/null of=testfile bs=1 seek=512
-> > > > > 
-> > > > > Which here does:
-> > > > > $ dd if=/dev/urandom of=testfile bs=1 count=500
-> > > > > 500+0 records in
-> > > > > 500+0 records out
-> > > > > 500 bytes copied, 0.00641125 s, 78.0 kB/s
-> > > > > $ dd if=/dev/null of=testfile bs=1 seek=512
-> > > > > 0+0 records in
-> > > > > 0+0 records out
-> > > > > 0 bytes copied, 0.000358246 s, 0.0 kB/s
-> > > > > $ ls -l testfile
-> > > > > -rw-rw-r-- 1 trini trini 512 Dec 21 18:07 testfile
-> > > > > $ hexdump testfile | tail -n2
-> > > > > 00001f0 8cdd 300e 0000 0000 0000 0000 0000 0000
-> > > > > 0000200
-> > > > 
-> > > > That works here as well.
-> > > 
-> > > Great, thanks!
-> > 
-> > dd also has also has the conv=sync option, at least on Linux:
-> > 
-> > dd if=/dev/urandom bs=1 count=20 of=testfile
-> > 
-> > dd if=testfile bs=8 conv=sync of=testfile_pad
-> 
-> I spun up a test FreeBSD instance and this also worked as expected. Mark
-> can you confirm OpenBSD also works as expected here? It would be good to
-> fix this long running problem. Thanks!
+> Are there any other action items I should take care of?
 
-yes, that seems to work
+TLDR: no.
 
-$ ls -l testfile testfile_pad
--rw-r--r--  1 kettenis  kettenis  20 Jan 29 09:45 testfile
--rw-r--r--  1 kettenis  kettenis  24 Jan 29 09:45 testfile_pad
+Details below:
+Not at the moment. Usually we give the community some time to review.
+This time depends on the custodian(maintainer) responsible for taking in th=
+e patch.
 
-and the file gets padded with zeroes (NUL characters).
+Since I'm responsible for fastboot, I usually give between 1 and 2 weeks
+before I apply the changes to my tree: https://source.denx.de/u-boot/custod=
+ians/u-boot-dfu
+
+When the change is applied, CI will test your patch. If something fails,
+I might reach out to you again to help troubleshooting.
+
+If it passes, I will later on send a pull request to Tom with this patch
+included.
+Once Tom accepts the pull request, this change will be merged into
+master.
+
+More details on the process here:
+https://docs.u-boot.org/en/latest/develop/process.html#work-flow-of-a-custo=
+dian
+
+Hope that clarifies things a bit, and thank you for contributing!
+Mattijs
+
+>
+>
+> On Tue, Jan 28, 2025 at 3:40=E2=80=AFAM Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
+>>
+>> Hi Michael,
+>>
+>> Thank you for the patch.
+>>
+>> On lun., janv. 27, 2025 at 21:09, Michael Ferolito <michaelsunn101@gmail=
+.com> wrote:
+>>
+>> > The current behaviour of this function will dereference a null pointer
+>> > if the serial# environment variable is unset. This was discovered on a
+>> > board where U-Boot did not have access to the first 256MB of ram,
+>> > resulting in a board crash.
+>> > In the event that U-Boot has full access to memory, it will still read
+>> > from address 0, which is probably not optimal.
+>> > This simple check is enough to fix it
+>> >
+>> > Signed-off-by: Michael Ferolito <michaelsunn101@gmail.com>
+>> > Cc: Marek Vasut <marex@denx.de>
+>> > Cc: Heiko Schocher <hs@denx.de>
+>> > Cc: Kyungmin Park <kyungmin.park@samsung.com>
+>>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>
+>> > ---
+>> >  drivers/usb/gadget/g_dnl.c | 3 ++-
+>> >  1 file changed, 2 insertions(+), 1 deletion(-)
+>> >
+>> > diff --git a/drivers/usb/gadget/g_dnl.c b/drivers/usb/gadget/g_dnl.c
+>> > index 631969b340..f2540eb6de 100644
+>> > --- a/drivers/usb/gadget/g_dnl.c
+>> > +++ b/drivers/usb/gadget/g_dnl.c
+>> > @@ -207,7 +207,8 @@ void g_dnl_clear_detach(void)
+>> >  static int on_serialno(const char *name, const char *value, enum env_=
+op op,
+>> >               int flags)
+>> >  {
+>> > -     g_dnl_set_serialnumber((char *)value);
+>> > +     if (value)
+>> > +             g_dnl_set_serialnumber((char *)value);
+>> >       return 0;
+>> >  }
+>> >  U_BOOT_ENV_CALLBACK(serialno, on_serialno);
+>> > --
+>> > 2.48.1
