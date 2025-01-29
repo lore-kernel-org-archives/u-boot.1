@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C614FC0218F
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 22:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08A35C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 22:01:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2178480C5A;
-	Wed, 29 Jan 2025 23:00:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7AEDC80AE4;
+	Wed, 29 Jan 2025 23:01:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dUGg9RQS";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="cjFVLF7x";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wrr9mX66";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 022C280A46; Wed, 29 Jan 2025 23:00:43 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3CE6380BAE; Wed, 29 Jan 2025 23:01:35 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 604D780C65
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:00:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A53BD805E2
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:01:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Yjx120Qnpz9t1y;
- Wed, 29 Jan 2025 23:00:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1738188038;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3mzIlh3W2BAZWzBbqtyZwBkArSn5iU0ZrTR9h3J6yEs=;
- b=dUGg9RQSiYD5bzp2cbwz0ueKOMSOXFLkHxpgsp8f6LAeRiUoKAe0jTYg3fhi8IlQ5y4oxi
- BKkJKNs9/NXh25s5iFp5Ppd9/K9QZcw3jYrBcQ7clxmsMPwixYVrkw03Ps0rclgCowLB05
- QQ1WAnNXhF480iS5vMr0oplg+rWSIzXvVjEcsmi3D5+l2EyN+38yULihYkIIAbNcxXbq6X
- VLMMkirYdMfOFaPBHhHrOooJLUGPszUYPoCYE2Un7eu291+EjI5MRVPTFtYKo7i0tuySHz
- O08lnY2BC73QBIJzEgaDPM5yj4did952qeUNOr28KiEbUFbtplrTvwnUgyoeWA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1738188035;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3mzIlh3W2BAZWzBbqtyZwBkArSn5iU0ZrTR9h3J6yEs=;
- b=cjFVLF7xRzgv/TVDsdZg0MxvMhu6H21IMUp6yGa2rDA1AHZsA4UAlfGxYsVo8DWyxQ/S8S
- Qtx/Bt/ZDMiLGr/7/q8cMVlg8F7CEkYvu9zMcs/p7AxgrgDyeXDIf7nujQowfOSjs7rnaQ
- 7sVyNb5Ikw7Xp3rHh7YGAUiVxYxM8Bvb3Erfhj/xaxziszS+OaX1JWGi+FEB6W6D0J1/UH
- gtcRLG+gOnaUWYH93U6lUqWHToHQ8DFU3c+5YN7tbKLBZ4C8ToBrPNvyR6TUP6vFGFCnTK
- ga2PGPdz6H4HVbDaCrA2bAtZNxSMQ0RwVlJbJE9V0Ec2+IDHZZTeOfaFRufM7w==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 3/3] arm64: renesas: Add TFA BL31 handoff support
-Date: Wed, 29 Jan 2025 22:59:20 +0100
-Message-ID: <20250129220010.264635-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250129220010.264635-1-marek.vasut+renesas@mailbox.org>
-References: <20250129220010.264635-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6d8a3e99e32so1614836d6.2
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 14:01:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738188091; x=1738792891; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+Dqqd+c5qkV/p7thJorvThmEivVfgBv45h8qfoijG/A=;
+ b=Wrr9mX66SLuCfQQW0X2cujpedyIbJhriT5utFOVtNPX0vksLnUew0lZ5y2H0kc4n2R
+ eXjs35E4j307YMKw+r0yGjfK6SIOodekb9vtwwqCh45ndajy/LyoHv+AKrpM+9GSoLUK
+ CfYOoOCniorG25yjWnEztHqdhcOoEfj9LbYCI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738188091; x=1738792891;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+Dqqd+c5qkV/p7thJorvThmEivVfgBv45h8qfoijG/A=;
+ b=bFSpXk+xxklhCNHOBd/oYLQkAw/RXA0y/HvSgEnOVnUOwnzBGSSXUfyDIOC217HlWK
+ w6qNLZIfgm4EhJfnOBfxyCPvfe3N9/ljCaR0z68Brn08HkCv9AbdQZP6QWfLENXNRRnW
+ 53FXje6mg/POZupbcmpK5ZwqrdCtu9ENwpOW1NLwQbvWJ6jz3qmibPxhSmTaSeUlz2Sj
+ 0kedWZB7jnyxJGuGR7KzLe6kLrO4TzHtKUf9qgwoKn+HGw4v1c9wio+E3p8nnYhHEjYa
+ pYwF29tWw2ZxfLDxU//qNSVP1EqAEfTOry1lnQf+SNuCt2sqo6nqo6SDpbV2o5O87u8k
+ q1jg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEtl8MQL6LtfAtBmwq82CzK8Xc/3LMAUBqGswkDE7UCDek7U0LMMwPO1J9K7ayxhKpPWSV7Yk=@lists.denx.de
+X-Gm-Message-State: AOJu0YytSvG/Y/H+ebCI1hPlSxVyQO+lbsEQj3F7KdCOWKygmwHiYIfZ
+ GD8hDG9lHFDTZgMT8IYZTtYwITPM5h2HtNEXkIQ6IvuE1VFYIA5KnDqCxbkqySM=
+X-Gm-Gg: ASbGncvf0Zq6bOqk3b0bhzrQC84PG9iUIkiUKlSWOg0tW3OEINPbQ2qcfw9959AW3lv
+ zncUZ0OElE6sNVo/VVQ+/7x2P+yKN30zMuE2/pgrfNurE7MOvdrw6CGXGanQ+KqZlvze0CGWFtn
+ 9XRTH/zXfDNL1etqXPwFI2OgwrxBTgIepoJcvrQUCjkk+Z/JM8Ihsnd9DFEIXaSWuDrJLdlmbDs
+ TG8EAI9FXo+cAM4xu2SGnpoC+wwK4Wd2KJgXb4XD+D1X5djHup2a6GWgzX4lEVN8VGfYHxhOqj1
+ EcqGc1ctZh2z22M=
+X-Google-Smtp-Source: AGHT+IHqpMk+mQ8WMC5yZZSIgJ24mGtSxWYDyVIxBgy4YePT5kWAM5KFJEJrAdnB7rq/WT7bScCZSg==
+X-Received: by 2002:a05:6214:2a84:b0:6e1:700e:488a with SMTP id
+ 6a1803df08f44-6e243bf41c8mr66309096d6.22.1738188091255; 
+ Wed, 29 Jan 2025 14:01:31 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e2057a890fsm59096516d6.88.2025.01.29.14.01.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jan 2025 14:01:30 -0800 (PST)
+Date: Wed, 29 Jan 2025 16:01:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Subject: Re: dtc: "syntax error" linked to &{label/subnode} syntax
+Message-ID: <20250129220127.GW1233568@bill-the-cat>
+References: <8b798c6e-60a3-4ef3-8ce6-a747e072807a@foss.st.com>
+ <CAFLszTj3O64xvA9buAfMf2RRRjwF5SjoOje+_1pWCT3QgV4Akg@mail.gmail.com>
+ <62ed68c3-a029-4bf9-8918-39d5aa5d8b6b@foss.st.com>
+ <95ab524e-c532-4eb5-a65f-a1d1c1b190a2@foss.st.com>
+ <20250115144428.GZ3476@bill-the-cat>
+ <329ceffc-c5b6-4f3e-81dd-03b1d4b7b9a7@foss.st.com>
+ <20250128140456.GJ1233568@bill-the-cat>
+ <20250128150426.GP1233568@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ef1d949cc89578fa0ee
-X-MBO-RS-META: beedunfmq4mr86d6oia5mb1qu39wezjo
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XyX0GY3GQNBE3zbw"
+Content-Disposition: inline
+In-Reply-To: <20250128150426.GP1233568@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,229 +104,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement custom U_BOOT_FIT_LOADABLE_HANDLER and armv8_switch_to_el2_prep()
-handling in case the TFA was loaded. The loadables handler sets up custom
-handoff structure used by Renesas TFA fork in fixed location in DRAM and
-indicates the TFA has been loaded.
 
-The custom armv8_switch_to_el2_prep() handling tests whether the TFA BL31
-was previously loaded and the custom handoff structure was set up, and if
-so, jumps to TFA BL31 which switches from EL3 to EL2 and then returns to
-U-Boot just past bl in armv8_switch_to_el2() to finish starting the Linux
-kernel.
+--XyX0GY3GQNBE3zbw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The jump to Linux through TFA works in such a way that the custom
-armv8_switch_to_el2_prep() handler configures the custom handoff structure
-such that the target jump address of the TFA BL31 on exit is set to the
-armv8_switch_to_el2() + 4, which is just past the bl, and just before the
-U-Boot code which implements the Linux kernel boot from either EL. The
-registers passed through the TFA BL31 are all the registers passed into
-armv8_switch_to_el2_prep() to assure maximum compatibility with all the
-boot modes. The armv8_switch_to_el2_prep() handler jumps to the TFA BL31,
-which does its setup, drops EL from EL3 to EL2 and finally jumps to the
-armv8_switch_to_el2() + 4 entry point, which then allows U-Boot to boot
-the Linux kernel the usual way.
+On Tue, Jan 28, 2025 at 09:04:26AM -0600, Tom Rini wrote:
+> On Tue, Jan 28, 2025 at 08:04:56AM -0600, Tom Rini wrote:
+> > On Tue, Jan 28, 2025 at 08:47:37AM +0100, Patrice CHOTARD wrote:
+> > >=20
+> > >=20
+> > > On 1/15/25 15:44, Tom Rini wrote:
+> > > > On Wed, Jan 15, 2025 at 03:39:20PM +0100, Patrice CHOTARD wrote:
+> > > >>
+> > > >>
+> > > >> On 1/15/25 15:24, Patrice CHOTARD wrote:
+> > > >>>
+> > > >>>
+> > > >>> On 1/15/25 14:19, Simon Glass wrote:
+> > > >>>> Hi Patrice,
+> > > >>>>
+> > > >>>> On Wed, 15 Jan 2025 at 03:19, Patrice CHOTARD
+> > > >>>> <patrice.chotard@foss.st.com> wrote:
+> > > >>>>>
+> > > >>>>> Hi
+> > > >>>>>
+> > > >>>>> I am currently converting STM32MP platforms to OF_UPSTREAM.
+> > > >>>>> As we use same binary for several boards, flags CONFIG_OF_UPSTR=
+EAM_BUILD_VENDOR=3Dy
+> > > >>>>> and CONFIG_OF_UPSTREAM_VENDOR=3D"st" are set.
+> > > >>>>>
+> > > >>>>> So all dts/upstream/src/arm/st/* dts files are compiled.
+> > > >>>>>
+> > > >>>>> I am facing an issue with dts/upstream/src/arm/st/stm32mp151a-p=
+rtt1* and
+> > > >>>>> dts/upstream/src/arm/st/stm32mp15*-mec*.* files.
+> > > >>>>>
+> > > >>>>> To be more precise, these files are using a syntax which follow=
+s this
+> > > >>>>> format &{label/subnode} to override some nodes.
+> > > >>>>>
+> > > >>>>> This leads to DTC error:
+> > > >>>>>
+> > > >>>>>  AR      drivers/usb/gadget/built-in.o
+> > > >>>>>   LD      u-boot
+> > > >>>>>   OBJCOPY u-boot.srec
+> > > >>>>>   OBJCOPY u-boot-nodtb.bin
+> > > >>>>>   SYM     u-boot.sym
+> > > >>>>>   DTC     dts/upstream/src/arm/st/stm32mp157c-dhcom-picoitx.dtb
+> > > >>>>>   DTC     dts/upstream/src/arm/st/stm32h750i-art-pi.dtb
+> > > >>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-microgea-stm32mp1=
+-microdev2.0-of7.dtb
+> > > >>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-iot-box.dtb
+> > > >>>>>   DTC     dts/upstream/src/arm/st/stm32746g-eval.dtb
+> > > >>>>>   DTC     dts/upstream/src/arm/st/stm32mp151c-mecio1r0.dtb
+> > > >>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-dhcor-avenger96.d=
+tb
+> > > >>>>>   DTC     dts/upstream/src/arm/st/ste-nomadik-s8815.dtb
+> > > >>>>> Error: ../dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi:338=
+=2E1-2 syntax error
+> > > >>>>> FATAL ERROR: Unable to parse input tree
+> > > >>>>>
+> > > >>>>>
+> > > >>>>> At line 338 in dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dts=
+i we got :
+> > > >>>>>
+> > > >>>>> &{qspi_bk1_pins_a/pins} {
+> > > >>>>>         pinmux =3D <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO=
+0 */
+> > > >>>>>                  <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 =
+*/
+> > > >>>>>                  <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
+> > > >>>>>                  <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
+> > > >>>>>         /delete-property/ bias-disable;
+> > > >>>>>         bias-pull-up;
+> > > >>>>> };
+> > > >>>>>
+> > > >>>>> If i update it as following , the DTC compilation is OK :
+> > > >>>>>
+> > > >>>>> &qspi_bk1_pins_a {
+> > > >>>>>         pins {
+> > > >>>>>                 pinmux =3D <STM32_PINMUX('F', 8, AF10)>, /* QSP=
+I_BK1_IO0 */
+> > > >>>>>                          <STM32_PINMUX('F', 9, AF10)>, /* QSPI_=
+BK1_IO1 */
+> > > >>>>>                          <STM32_PINMUX('F', 7, AF9)>, /* QSPI_B=
+K1_IO2 */
+> > > >>>>>                          <STM32_PINMUX('F', 6, AF9)>; /* QSPI_B=
+K1_IO3 */
+> > > >>>>>                 /delete-property/ bias-disable;
+> > > >>>>>                 bias-pull-up;
+> > > >>>>>         };
+> > > >>>>> };
+> > > >>>>>
+> > > >>>>> On kernel side, the DTC compilation is ok, but not on U-Boot si=
+de. I am not able to understand the difference.
+> > > >>>>>
+> > > >>>>
+> > > >>>> Could it be that the kernel dtc is newer?
+> > > >>>
+> > > >>> I have tested with dtc Version: DTC 1.7.0-gbcd02b52 which is the =
+same dtc version than kernel tag next-20250114
+> > > >>
+> > > >> I mean, it's ok with newer version of dtc : DTC 1.7.0-gbcd02b52.
+> > > >=20
+> > > > Ah, so, sigh, we need to update DTC. I stopped my last upgrade there
+> > > > because other changes it made grew the binary size for everyone and
+> > > > didn't get back to it. I guess another attempt is in order.
+> > > >=20
+> > >=20
+> > > Hi Tom
+> > >=20
+> > > Do you know when you will be able to provide a DTC update in master o=
+r next branch ?
+> >=20
+> > Unfortunately trying to update resync-dtc-v1.6.0-31-gcbca977ea121-v5 to
+> > be on top of current (the first step to moving to 1.7.0 or 1.7.1)
+> > produced some test failures that don't exist when using the host dtc.
+> > Can you confirm if dtc 1.7.0 is new enough for this syntax? We might
+> > just need to change to building pylibfdt and not dtc as well (as having
+> > pylibfdt come via system python or pipx is differently tricky it seems).
+>=20
+> The pipeline is at
+> https://source.denx.de/u-boot/u-boot/-/pipelines/24243 and that's just
+> the v5 branch currently under WIP/ rebased to then-current master.
 
-In order to build suitable kernel fitImage, build TFA first, temporarily
-from downstream repository:
-remote: https://github.com/renesas-rcar/arm-trusted-firmware.git
-branch: rcar_gen4_v2.7_v4x
+To push this as far as I can at least, there's now also
+WIP/resync-dtc-v1.7.1-v1 which brings us to dtc-1.7.1 (good!) but also
+some silent failure to boot on a least one of the TI K3 platforms I
+have, and some other failures in CI too.
 
-```
-$ git clean -fqdx
-$ MBEDTLS_DIR=/path/to/mbedtls/ make -j$(nproc) bl31 \
-	PLAT=rcar_gen4 ARCH=aarch64 LSI=V4H SPD=none \
-	CTX_INCLUDE_AARCH32_REGS=0 MBEDTLS_COMMON_MK=1 \
-	PTP_NONSECURE_ACCESS=1 LOG_LEVEL=20 DEBUG=0 \
-	ENABLE_ASSERTIONS=0 E=0
-```
+--=20
+Tom
 
-Build Linux kernel Image and device tree from current mainline Linux
-kernel repository, obtain 'Image' and 'r8a779g0-white-hawk.dtb' .
+--XyX0GY3GQNBE3zbw
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Bundle the files together using provided fit-image.its fitImage description:
-```
-$ mkimage -f fit-image.its fitImage
-```
+-----BEGIN PGP SIGNATURE-----
 
-To start the kernel fiImage generated in previous step, load fitImage
-to DRAM and use the 'bootm' command to start it:
-=> load 0x58000000 ... fitImage && bootm 0x58000000
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeapTMACgkQFHw5/5Y0
+tyxQhgv7BkH0YmuWqZSX5qwx9ogD1eAQ2wmqdK4TlZYyQqppMvkNw9AcwRwsSY7F
+ooPwAyhneyyTh0Buf0n/MTEIq998l3KkORBxnTB4gIKASbMtf+PjGwUrAHyxHLpo
+AeS4puBRogA48976ett4x7Ptp9F2cpdJC8DDpwhV9DPaG/azJligpfkKAWG5hNrf
+dtWfGOlW0YTlK3CtqfqtNpFTgVJEw1EVLNWL2SbyocIcb1BvyJzJ14vEbqpUvWLC
+idmpA7PBWfwKoQzDCc+UkTutu044RngBe8VYx7hMEO+DI/zJERmObkb+X0hQE3Cc
+w005Bo6Si3neO/uYB0MNZhxwa8w+F0MZHhNX/mMHfgI8PFVgd+Hb2EVIPgEBcuiM
+OH5nKnXKtY1hqyWaBE6+wP1UCUoxY+NWeyXOwIDsBhPcMgL0/ajjrRaLyBtuf5i+
+ZpCUxVKq9DZo3pBpXyAL8rMkvNl/S0uRn7j1U378dQddHUNIySJAaOdivxsp/6QI
+VxIBBcN6
+=4Z9p
+-----END PGP SIGNATURE-----
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Julien Masson <jmasson@baylibre.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Maxim Moskalets <maximmosk4@gmail.com>
-Cc: Michael Walle <mwalle@kernel.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
-Cc: Peter Hoyes <Peter.Hoyes@arm.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Raymond Mao <raymond.mao@linaro.org>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V2: Only start the BL31 if running in EL3
----
- board/renesas/common/gen4-common.c | 126 +++++++++++++++++++++++++++++
- 1 file changed, 126 insertions(+)
-
-diff --git a/board/renesas/common/gen4-common.c b/board/renesas/common/gen4-common.c
-index 52a0639073b..f7d129be4c8 100644
---- a/board/renesas/common/gen4-common.c
-+++ b/board/renesas/common/gen4-common.c
-@@ -7,11 +7,13 @@
- 
- #include <asm/arch/renesas.h>
- #include <asm/arch/sys_proto.h>
-+#include <asm/armv8/mmu.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/mach-types.h>
- #include <asm/processor.h>
- #include <asm/system.h>
-+#include <image.h>
- #include <linux/errno.h>
- 
- #define RST_BASE	0xE6160000 /* Domain0 */
-@@ -88,3 +90,127 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- {
- 	return 0;
- }
-+
-+/* R-Car Gen4 TFA BL31 handoff structure and handling. */
-+struct param_header {
-+	u8			type;
-+	u8			version;
-+	u16			size;
-+	u32			attr;
-+};
-+
-+struct tfa_image_info {
-+	struct param_header	h;
-+	uintptr_t		image_base;
-+	u32			image_size;
-+	u32			image_max_size;
-+};
-+
-+struct aapcs64_params {
-+	u64			arg0;
-+	u64			arg1;
-+	u64			arg2;
-+	u64			arg3;
-+	u64			arg4;
-+	u64			arg5;
-+	u64			arg6;
-+	u64			arg7;
-+};
-+
-+struct entry_point_info {
-+	struct param_header	h;
-+	uintptr_t		pc;
-+	u32			spsr;
-+	struct aapcs64_params	args;
-+};
-+
-+struct bl2_to_bl31_params_mem {
-+	struct tfa_image_info	bl32_image_info;
-+	struct tfa_image_info	bl33_image_info;
-+	struct entry_point_info	bl33_ep_info;
-+	struct entry_point_info	bl32_ep_info;
-+};
-+
-+/* Default jump address, return to U-Boot */
-+#define BL33_BASE	0x44100000
-+/* Custom parameters address passed to TFA by ICUMXA loader */
-+#define PARAMS_BASE	0x46422200
-+
-+/* Usually such a structure is produced by ICUMXA and passed in at 0x46422200 */
-+static const struct bl2_to_bl31_params_mem blinfo_template = {
-+	.bl33_ep_info.h.type = 1,	/* PARAM_EP */
-+	.bl33_ep_info.h.version = 2,	/* Version 2 */
-+	.bl33_ep_info.h.size = sizeof(struct entry_point_info),
-+	.bl33_ep_info.h.attr = 0x81,	/* Executable | Non-Secure */
-+	.bl33_ep_info.spsr = 0x2c9,	/* Mode=EL2, SP=ELX, Exceptions=OFF */
-+	.bl33_ep_info.pc = BL33_BASE,
-+
-+	.bl33_image_info.h.type = 1,	/* PARAM_EP */
-+	.bl33_image_info.h.version = 2,	/* Version 2 */
-+	.bl33_image_info.h.size = sizeof(struct image_info),
-+	.bl33_image_info.h.attr = 0,
-+	.bl33_image_info.image_base = BL33_BASE,
-+};
-+
-+static bool tfa_bl31_image_loaded;
-+static ulong tfa_bl31_image_addr;
-+
-+static void tfa_bl31_image_process(ulong image, size_t size)
-+{
-+	/* Custom parameters address passed to TFA by ICUMXA loader */
-+	struct bl2_to_bl31_params_mem *blinfo = (struct bl2_to_bl31_params_mem *)PARAMS_BASE;
-+
-+	/* Not in EL3, do nothing. */
-+	if (current_el() != 3)
-+		return;
-+
-+	/* Clear a page and copy template */
-+	memset((void *)PARAMS_BASE, 0, PAGE_SIZE);
-+	memcpy(blinfo, &blinfo_template, sizeof(*blinfo));
-+	tfa_bl31_image_addr = image;
-+	tfa_bl31_image_loaded = true;
-+}
-+
-+U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_TFA_BL31, tfa_bl31_image_process);
-+
-+void armv8_switch_to_el2_prep(u64 args, u64 mach_nr, u64 fdt_addr,
-+			      u64 arg4, u64 entry_point, u64 es_flag)
-+{
-+	typedef void __noreturn (*image_entry_noargs_t)(void);
-+	image_entry_noargs_t image_entry =
-+		(image_entry_noargs_t)(void *)tfa_bl31_image_addr;
-+	struct bl2_to_bl31_params_mem *blinfo =
-+		(struct bl2_to_bl31_params_mem *)PARAMS_BASE;
-+
-+	/* Not in EL3, do nothing. */
-+	if (current_el() != 3)
-+		return;
-+
-+	/*
-+	 * Destination address in arch/arm/cpu/armv8/transition.S
-+	 * right past the first bl in armv8_switch_to_el2() to let
-+	 * the rest of U-Boot pre-Linux code run. The code does run
-+	 * without stack pointer!
-+	 */
-+	const u64 ep = ((u64)(uintptr_t)&armv8_switch_to_el2) + 4;
-+
-+	/* If TFA BL31 was not part of the fitImage, do regular boot. */
-+	if (!tfa_bl31_image_loaded)
-+		return;
-+
-+	/*
-+	 * Set up kernel entry point and parameters:
-+	 * x0 is FDT address, x1..x3 must be 0
-+	 */
-+	blinfo->bl33_ep_info.pc = ep;
-+	blinfo->bl33_ep_info.args.arg0 = args;
-+	blinfo->bl33_ep_info.args.arg1 = mach_nr;
-+	blinfo->bl33_ep_info.args.arg2 = fdt_addr;
-+	blinfo->bl33_ep_info.args.arg3 = arg4;
-+	blinfo->bl33_ep_info.args.arg4 = entry_point;
-+	blinfo->bl33_ep_info.args.arg5 = es_flag;
-+	blinfo->bl33_image_info.image_base = ep;
-+
-+	/* Jump to TFA BL31 */
-+	image_entry();
-+}
--- 
-2.45.2
-
+--XyX0GY3GQNBE3zbw--
