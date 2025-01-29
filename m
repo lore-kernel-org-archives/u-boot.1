@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D2A2C0218F
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 10:22:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECFB6C0218F
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 10:22:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC2C781276;
-	Wed, 29 Jan 2025 11:22:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2AC2E81DD3;
+	Wed, 29 Jan 2025 11:22:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="oa7S8PQE";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="X8T69xT7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 530E781F32; Wed, 29 Jan 2025 11:22:14 +0100 (CET)
+ id 055CF81CC5; Wed, 29 Jan 2025 11:22:15 +0100 (CET)
 Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
  [IPv6:2001:4b98:dc4:8::222])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 841C780FA6
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 11:22:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C95A807E1
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 11:22:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 844BF43188;
- Wed, 29 Jan 2025 10:22:08 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 4AE2D43152;
+ Wed, 29 Jan 2025 10:22:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1738146129;
+ t=1738146130;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hVD5sHnIpAI9ZC+Mu2/Pl1CJxa/RtGELqDFn9Ad+1og=;
- b=oa7S8PQEg6pwxUfL2uurTSCGG35iX6j1xyWI6PMnxh5pv3N7H28PjEzSg0xpvMvmuhPe1S
- iF8OUJsBYhwS8T7QWmeKIu82gSSE4LMQy76+L3zuhGo339M1N9BmFmXZKyJI8WdaPhOSDZ
- oNJbFSE/DlfRtMh6j7YILEyPrzOs93sgx/PsVLFPyp2aayXi1tyxKWO37S3YfLhTI2/L8l
- SX5ZI+sO7hVkQHCSXvjB8ewEKizAd+5rNSDmZoutdVa5dOsbnZRyTvpNy6sz4njFjKToXb
- YrbhM4OWH2iCni99SX/Hm/Hta+mkLmEkdacJVE/Xbg0L+tIuNPEqAZpdCO5KJw==
+ bh=CO3s4b4+EMdgrbO5U0rGfv4tRRunrIXEJ+s6J9U4NbU=;
+ b=X8T69xT7lEsxq8um69/fiY9JqFx9xI6lqFxnURIvE5urD7wjxQ55Usqju4zYXICaPLwpYd
+ HFTR1AVr9riHoz7P+Mz6aN5YMQnDL7sFdNd2uu0TQBrScwTLGabiDFK2q5fZLHmf4WCOVo
+ 8l42L/ZmCed191Q74lWmzqHP+b9zEMkcgIBJRFhS4J2LYsmDE4AfhE9kNjA8F3EkOZAAAi
+ nNIedOoBT5QLeE8WiBiWHcCP9bSHphwY0QDUAI4NUdZsy1jiNe1jbHN9S818Er0b5+xd4e
+ AN7nJGZ8Tk6L8h3E5yxCZ6njoRg46FGx4YF6Px4Bt906yPmO/0eHXx8a0KMTyA==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Wed, 29 Jan 2025 11:21:57 +0100
-Subject: [PATCH v4 03/12] sandbox: Add a fake DSI controller and link it to
- the panel
+Date: Wed, 29 Jan 2025 11:21:58 +0100
+Subject: [PATCH v4 04/12] test: dm: test-fdt: Add checks for
+ uclass_get_device_by_endpoint()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250129-ge-mainline-display-support-v4-3-a43b3657ed7c@bootlin.com>
+Message-Id: <20250129-ge-mainline-display-support-v4-4-a43b3657ed7c@bootlin.com>
 References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
 In-Reply-To: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -83,59 +83,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use a graph endpoint representation for that in order to test a new core
-DM helper going through these properties.
+This is a new DM core helper. There is now a graph endpoint
+representation in the sandbox test DTS, so we can just use it to verify
+the helper proper behavior.
 
-Display pipelines typically include graph endpoints, but the helper is
-generic and would work with any device type.
-
+Suggested-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- arch/sandbox/dts/test.dts | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ configs/sandbox64_defconfig        |  1 +
+ configs/sandbox_flattree_defconfig |  1 +
+ test/dm/test-fdt.c                 | 20 +++++++++++++++++++-
+ 3 files changed, 21 insertions(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 36cfbf213e4cfe17d9ca98d6e40f7caf95631254..f7d4d9824454207f2d4650739e43a36e4936ef9e 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -295,6 +295,23 @@
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 7960b2ef42e7ceee2a3646888ae159cdde9b59e0..359c12b88c904c995ca63bf3c17324c8eb02257a 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -256,6 +256,7 @@ CONFIG_CONSOLE_TRUETYPE=y
+ CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
+ CONFIG_I2C_EDID=y
+ CONFIG_VIDEO_SANDBOX_SDL=y
++CONFIG_VIDEO_DSI_HOST_SANDBOX=y
+ CONFIG_OSD=y
+ CONFIG_SANDBOX_OSD=y
+ CONFIG_BMP_16BPP=y
+diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
+index 563093dd8a426f98cdcfa342655bebb82dbefe86..f08dfef9056c4a2c86650f43298b3f506fae8d4c 100644
+--- a/configs/sandbox_flattree_defconfig
++++ b/configs/sandbox_flattree_defconfig
+@@ -220,6 +220,7 @@ CONFIG_CONSOLE_TRUETYPE=y
+ CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
+ CONFIG_I2C_EDID=y
+ CONFIG_VIDEO_SANDBOX_SDL=y
++CONFIG_VIDEO_DSI_HOST_SANDBOX=y
+ CONFIG_OSD=y
+ CONFIG_SANDBOX_OSD=y
+ CONFIG_BMP_16BPP=y
+diff --git a/test/dm/test-fdt.c b/test/dm/test-fdt.c
+index af8cd617108ac2421f7275948be000a7cbaebda0..e3c8c07066a00d55b2319e8f028b8ce9906efe28 100644
+--- a/test/dm/test-fdt.c
++++ b/test/dm/test-fdt.c
+@@ -792,7 +792,7 @@ DM_TEST(dm_test_fdt_disable_enable_by_path, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ /* Test a few uclass phandle functions */
+ static int dm_test_fdt_phandle(struct unit_test_state *uts)
+ {
+-	struct udevice *back, *dev, *dev2;
++	struct udevice *back, *dispc, *panel, *dev, *dev2;
  
- 	dsi_host: dsi_host {
- 		compatible = "sandbox,dsi-host";
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			port@0 {
-+				reg = <0>;
-+				unused_ep: endpoint {
-+				};
-+			};
-+
-+			port@1 {
-+				reg = <1>;
-+				dispc_out1: endpoint {
-+					remote-endpoint = <&panel_to_dispc>;
-+				};
-+			};
-+		};
- 	};
+ 	ut_assertok(uclass_find_first_device(UCLASS_PANEL_BACKLIGHT, &back));
+ 	ut_assertnonnull(back);
+@@ -807,6 +807,24 @@ static int dm_test_fdt_phandle(struct unit_test_state *uts)
+ 						 "power-supply", &dev2));
+ 	ut_asserteq_ptr(dev, dev2);
  
- 	a-test {
-@@ -1359,6 +1376,12 @@
- 	panel {
- 		compatible = "simple-panel";
- 		backlight = <&backlight 0 100>;
++	/* Test uclass_get_device_by_endpoint() */
++	ut_assertok(uclass_find_device_by_name(UCLASS_DSI_HOST, "dsi_host", &dispc));
++	ut_assertnonnull(dispc);
++	ut_asserteq(0, device_active(dispc));
++	ut_assertok(uclass_find_device_by_name(UCLASS_PANEL, "panel", &panel));
++	ut_assertnonnull(panel);
++	ut_asserteq(0, device_active(panel));
 +
-+		port {
-+			panel_to_dispc: endpoint {
-+				remote-endpoint = <&dispc_out1>;
-+			};
-+		};
- 	};
- 
- 	scsi {
++	ut_asserteq(-ENODEV, uclass_get_device_by_endpoint(UCLASS_PANEL_BACKLIGHT, dispc, 1, &dev));
++	ut_asserteq(-EINVAL, uclass_get_device_by_endpoint(UCLASS_PANEL, dispc, 0, &dev));
++	ut_assertok(uclass_get_device_by_endpoint(UCLASS_PANEL, dispc, 1, &dev));
++	ut_asserteq_ptr(panel, dev);
++
++	ut_asserteq(-ENODEV, uclass_get_device_by_endpoint(UCLASS_PANEL_BACKLIGHT, panel, 0, &dev2));
++	ut_asserteq(-EINVAL, uclass_get_device_by_endpoint(UCLASS_DSI_HOST, panel, 1, &dev2));
++	ut_assertok(uclass_get_device_by_endpoint(UCLASS_DSI_HOST, panel, 0, &dev2));
++	ut_asserteq_ptr(dispc, dev2);
++
+ 	return 0;
+ }
+ DM_TEST(dm_test_fdt_phandle, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 
 -- 
 2.47.0
