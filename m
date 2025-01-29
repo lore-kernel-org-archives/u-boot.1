@@ -4,65 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2048DC0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 05:39:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86AC8C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 05:42:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75C6880EB5;
-	Wed, 29 Jan 2025 06:39:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E15480EB5;
+	Wed, 29 Jan 2025 06:42:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738129167;
-	bh=QB13J0ybSrRQ9FzWjsidLnk9y47RSgkxFBsdRTfCsFQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=Get01YOnWoSc1MIrwcyq/nK6/U04HIuT0YX4n1wvR91EKl5NGMpGpIcGSMJIbVVJq
-	 LcIUcaLRd53KKDXIPHWBbFm2G/Y1jdUQMf+P9mkmNiMWa/BkcB/V8OdhL6Q0egSCdL
-	 KaZBkaYo9kmjC2bZNSjW0eAaLbovJw91W6iN/vRgeHH0LOgtbr0uNTFH1XHPRrVx+I
-	 gVX4HIktVETe3nO5b8ZAUcilKn9LxE2eeDM+L9Cob9tSJXwZnwVAXA6oxlGSIxsgvi
-	 pRIvT45LFiYY9gelUlWamC3y/pIh0PTq+yx4RidOIo/TCTvfDSYmnBzdTWJ0DFUZNQ
-	 Vij1Epyq31IGQ==
+	s=phobos-20191101; t=1738129340;
+	bh=sxqyuzrNJaawmEbSVlZ9Aw9kdxkrBId24eK+xgSAw6s=;
+	h=Date:To:From:Subject:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=TymVMRF/yOZ6pSnH6Pe2htmp8/aZTmpgCFHQd3Oej6puusZjr3pM3nias26ViENq4
+	 cEzFcoCUx//tkdZNeD/3lLSVUFeBYW+oJiKi5xmyvjRcpKrMTNY/aZ0u62pO2MN7r5
+	 azBk7IzimnBS+2+dKVRHh4OIKlFE33r7fZVzLNWvQkrCXwfg+HETXV9DDwhb3NWS7L
+	 mp4gUbRVdAE7Kl0QrZTMnb3Uw4X3NJqJrS1kzP/bnYX4znz9Am95KCTZebZX6fJUi4
+	 SoZ8pw7AQGhceYoMgD2c3EpLRmlAhwvLZKW8SpznaFROqbAZnDa0FmB63rZcbTnjHn
+	 8/FRD/ikXbY1w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B80A280F10; Wed, 29 Jan 2025 06:39:25 +0100 (CET)
+ id 3F9BC80EEF; Wed, 29 Jan 2025 06:42:19 +0100 (CET)
 Received: from mx.denx.de (mx.denx.de
  [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9901080885
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 06:39:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0474B80885
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 06:42:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="VV6Vwjm3"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="LgM4bAVy"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8EED910382D08; Wed, 29 Jan 2025 06:39:08 +0100 (CET)
+ with ESMTPSA id 5A05C10382D08; Wed, 29 Jan 2025 06:42:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738129162; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ t=1738129335; h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QB13J0ybSrRQ9FzWjsidLnk9y47RSgkxFBsdRTfCsFQ=;
- b=VV6Vwjm3bZWY/13EOvPJ5CxTIjkBBrd0OlBYBELaVvFm7pJux1sSQWRrPfSJ7il09UURxP
- UoSyrYcMQX4Ia/u06XOrZrcER9/APoCyVPP+AJxKYT24FAStpufQ7k2bB7oCNCIRgN4Vt+
- n8q+YB20BmxmBzqU/oWud3UtYMMXhx7R83c8cVITRYR+GMG5t+5ChJkiJa34wZc3Ald6HU
- yYd3Xm85A73xQb8UYDjUT0EA99U6sxdc99PA2hCweGv6GFawNk/dXcref+GzyyJ5lKsuEC
- jfHHHAREWXvitnz/z7FhT0ViGFhP/zndP4/yFLSMRbYXrZCyvlaFOQsQOpNJsg==
-Message-ID: <837c4fc1-4e13-afac-46b0-99717f4d1211@denx.de>
-Date: Wed, 29 Jan 2025 06:38:56 +0100
+ content-type:content-type: content-transfer-encoding:content-transfer-encoding;
+ bh=sxqyuzrNJaawmEbSVlZ9Aw9kdxkrBId24eK+xgSAw6s=;
+ b=LgM4bAVyX2fxw7IMwDshIivk10lETqHSsucFDvYiZSLtSp3XEzN9GQ4w7Qvz1+Gdz/ZfIJ
+ denUAPpIIoAQ2Tj57f2scyvWx+9QcxlLL6ksRI/rR6sJUvDpGUvesgQjf7FxERKk9YGTC2
+ BczFtTypq1kKsWQL8IRqyfhQBaN06jD7e1E5IZyuQQv0TKKRL9zRBA7dpQsvLvBCzbn1Tk
+ d2TT1qsPyPT3j7iSa1idnrsXRMxOfQ2H2lVDgGJ47Gn+3BKJr4kMBQ6i7VQ19T8xJFdh9D
+ gFbQ0TZEeOoYFOLBnMYgruX4aanYCpDK89h/IctjOZPFxUJHUjRCUs8YxPz4Zg==
+Message-ID: <4cc734a9-3e96-fb51-20a9-e82245227a20@denx.de>
+Date: Wed, 29 Jan 2025 06:42:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH] fs: ubifs: Remove unnecessary assignment
 Content-Language: en-US
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
-Cc: Tom Rini <trini@konsulko.com>
-References: <f3ee698c9d5b43bb3b7e2a3cffa1b1b3151c59b9.1737724676.git.michal.simek@amd.com>
+To: Tom Rini <trini@konsulko.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <f3ee698c9d5b43bb3b7e2a3cffa1b1b3151c59b9.1737724676.git.michal.simek@amd.com>
+Subject: Please pull u-boot-ubi master
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -83,22 +79,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Michal,
+Hello Tom,
 
-On 24.01.25 14:17, Michal Simek wrote:
-> Variable self assignment has been found by clang. But Linux kernel already
-> fixed this problem by commit 2a068daf5742 ("ubifs: Remove unnecessary
-> assignment") and commit ae4c8081eb77 ("ubifs: remove unnecessary
-> assignment").
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> 
->   fs/ubifs/recovery.c | 1 -
->   fs/ubifs/scan.c     | 1 -
->   2 files changed, 2 deletions(-)
+please pull from u-boot-ubi one ubi fix from Michal for v2025.01-rc2
 
-Applied to u-boot-ubi master
+The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c047:
+
+   Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-ubi.git tags/ubifixes-for-2025.01-rc2
+
+for you to fetch changes up to 14e02d6c6180f85114cc0a90469e010a5d68b2ee:
+
+   fs: ubifs: Remove unnecessary assignment (2025-01-28 06:44:18 +0100)
+
+----------------------------------------------------------------
+ubi changes for v2025.01-rc2
+
+- ubifs: Remove unnecessary assignment
+   from Michal Simek
+
+----------------------------------------------------------------
+Michal Simek (1):
+       fs: ubifs: Remove unnecessary assignment
+
+  fs/ubifs/recovery.c | 1 -
+  fs/ubifs/scan.c     | 1 -
+  2 files changed, 2 deletions(-)
+
+Azure build is fine:
+
+https://dev.azure.com/hs0298/hs/_build/results?buildId=169&view=results
 
 Thanks!
 
