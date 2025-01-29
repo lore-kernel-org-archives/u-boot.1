@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F177C02192
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 16:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E6E3C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 16:34:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC07A80AE4;
-	Wed, 29 Jan 2025 17:28:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C28E780820;
+	Wed, 29 Jan 2025 17:34:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mcVQXuQ2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eH/LXTDV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26F32807E5; Wed, 29 Jan 2025 17:28:22 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 40A4580AE4; Wed, 29 Jan 2025 17:34:08 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 205FC8082A
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 17:28:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A05E807E5
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 17:34:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-46fcbb96ba9so17699731cf.0
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 08:28:19 -0800 (PST)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6df83fd01cbso28869006d6.2
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 08:34:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738168098; x=1738772898; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1738168445; x=1738773245; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SvkOIQlYyZ0LahJQcCer7ST/2cKbLzdDni+6h7kklAw=;
- b=mcVQXuQ2wL3BdVEXCpHJK8JyiFHb/nsF/MizQz28Twc/7MzlD8IIj28/XObnSDWmMQ
- QgxKMCI2AYY9OByQNV+rJikYMSeksGB0NgtdAiotssjiX7yuUYOxpXw5CcpGoVIO6LNn
- /i45nEc4bQz/8/hUCp1/Fr8/8+7Z0EyAWqxrE=
+ bh=EeZpLAshrN9E59bVMLUkdRcwol4P0gNENP1CXRjW5do=;
+ b=eH/LXTDVyilEBG+9txntTpKI03dBYN/YhJIrL2qlrhNxztVChn/m5gcO6dxapW9frL
+ k7hiAQzuotjOowDxk43ESakl/hJ9TN5I6i4hTzA/QqJzu4Z7BVZ7p+JThBJ8IEniK8pj
+ 7ivmAHIBooUv/KFDMLVcZupKu1SKyNu7nRNGQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738168098; x=1738772898;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1738168445; x=1738773245;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SvkOIQlYyZ0LahJQcCer7ST/2cKbLzdDni+6h7kklAw=;
- b=Zoo4JgBWqbPma9+M50GibMFCFOwYlKHexHCGAie2hmE0rt6NA6S7klg8vAzBdl6gBY
- BPdOY4fBMjZcv4VM6KTP2gZ49NlV77uG9iATHEKKihQIrUpu+wlxNE9s7QOiVHEsTuXb
- PyauBzsgzhE55eiS/eKtXOraHRfGlBA9YgqoJnm6cxNVCFF2YjdYIUXFoedfBbvBcdNR
- ts+RQUkcB23ymUcfvkSiJxUhcIv+N4dEDzZMirQKL1FxvZfbyQrQU0NEMVdaaW89J6YK
- itqsKfHAn4wK09aCF8ZbAMMqnipZjSRSzGo5Niw513VeovgDZA5iXTwaWfKN1px5IuCa
- h5iw==
-X-Gm-Message-State: AOJu0YylFHBHs0+TC5qQ4h9AhDWUxuVBJkLcx4tT3OQOt0M4OrgoaY+W
- 5ayLYIw0dLsgB6oBka0ag89+gXJ+GxDYZwJfjDG7JuDinXL+frjEAoXnPDKqbi1KKcTYozuO52C
- h
-X-Gm-Gg: ASbGncszlsAeWzsGpzptgMJEAS0QMtGG4QJbxAbhGR6WXNOmwHSZG0isunAwXbrSMhU
- yHAk0RewkO5JUgH4yKuHSXj5/xd0Fl/oqnUMaqgVrHcJAS1T5AVXLu00x+Ky1s1A/waW24vzmFJ
- lXokJL8VV/zsrtBsO6uSsp80/LDjGgudDdHzAIC490n/pnOSSQ+dcojWDGpdSqAoQ7e2g/RKuhN
- rGhu9J4QbpTxWInPWo76FBRhxNJglZdQS9gr5OcSMRElKDAijKDjG81BrW7L1aWw6YQWYbGw17+
- mCUXPeqinPOePh/a7x0oaGQt4y09
-X-Google-Smtp-Source: AGHT+IFpbT1BWtffD0qMEdzKI5XOmZIRLB8DEVpX9DQ33acyufoq2T2+2p/TCnCZfX3DhlJu8a2Tyg==
-X-Received: by 2002:a05:622a:6a82:b0:46f:d6c3:2dde with SMTP id
- d75a77b69052e-46fd6c3300bmr21094731cf.46.1738168097923; 
- Wed, 29 Jan 2025 08:28:17 -0800 (PST)
-Received: from bill-the-cat.. ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e6687efdcsm64414821cf.23.2025.01.29.08.28.16
+ bh=EeZpLAshrN9E59bVMLUkdRcwol4P0gNENP1CXRjW5do=;
+ b=cfzIQrJr1CAbf29SnFmfIM1bzi1rME+GxiBJrlmfmnrEQf+SI7Wbr9wC1DkVDeRNuk
+ AA24+NVMCS6YluW/M/61iGvMCWWXgy39L4uwyn/ofe7tOz1YuTGAJ4hveT1WF62cZIKb
+ J6EeA79MXq2advm77L4L0ONTNm68lo3c2GNNGzBNh/Noe6t4t4jrAKKqJqBk+yKAzsdR
+ 9MhkKp3UgbrqmFn1GTjee+VgOsNbxtMQpEwznp+eEfLLL3HwHwD+ToG8wscSFIGNYP5F
+ TPluO9P73Bd+EI+M2joylWh3uOljl7htPpJo8St0QYSHRGHo03ku/Xp+F5ih3CH8rLE1
+ 5Inw==
+X-Gm-Message-State: AOJu0Yz1IGA8kdwygI1rqVpgwe+1g++HcFbNK2+tWrZ5WJGwY7xTozJ8
+ pUuBETBjJxs7t3G6OsVZ1UtZhquNCkY8elTj+RzPT/c/H00zg+RXTnyKyfrgX1c17uWgh9u09sK
+ 3
+X-Gm-Gg: ASbGncsu5K5MMyYGagD1rz9VyTCFNHGZ1GMw42j3F02jy6pOC8QdRYSQv4XEhKy/lDH
+ 0nVrdomzWL3dS55CQjuadanjsTqfhfodbD06pNkH2Nf9pxzIgbJ0h48ELobhqAAqSbNk6kFZvcs
+ u/yoqKvg94I6gxtow/1AVu9OpMnZnn/PnZR5AgumHU3BhyaT23sMsO0OCJhKYlepGAwypqcpw1f
+ 14ZHqLUzHKVKnb43Y/0Cv/eUWAwgNm9iDha4af3aDaZjPp+0JHGBVyl3lv16VjCIvfbBwLEVf0a
+ jFKONoZbKZmXAQ==
+X-Google-Smtp-Source: AGHT+IHYV/Nlye2zCF1lwsz6JAe5/xzbE1tXnZoGNLv7RjZvu9gGAzBD5PqYviI0UwS2j8ZSSC/NkQ==
+X-Received: by 2002:a05:6214:d65:b0:6d4:2646:108a with SMTP id
+ 6a1803df08f44-6e243bb8c1fmr48150606d6.12.1738168444930; 
+ Wed, 29 Jan 2025 08:34:04 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e2058c2b76sm56636996d6.107.2025.01.29.08.34.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jan 2025 08:28:17 -0800 (PST)
+ Wed, 29 Jan 2025 08:34:04 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH 2/2] buildman: Add pyelftools to requirements.txt
-Date: Wed, 29 Jan 2025 10:28:14 -0600
-Message-ID: <20250129162814.2140325-2-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250129162814.2140325-1-trini@konsulko.com>
-References: <20250129162814.2140325-1-trini@konsulko.com>
+To: Heiko Schocher <hs@denx.de>
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>
+In-Reply-To: <4cc734a9-3e96-fb51-20a9-e82245227a20@denx.de>
+References: <4cc734a9-3e96-fb51-20a9-e82245227a20@denx.de>
+Subject: Re: Please pull u-boot-ubi master
+Message-Id: <173816844381.2140900.13015364387330698592.b4-ty@konsulko.com>
+Date: Wed, 29 Jan 2025 10:34:03 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,27 +94,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are a number of cases in binman which require having pyelftools
-installed but it was not listed in requirements.txt. Add it there.
+On Wed, 29 Jan 2025 06:42:33 +0100, Heiko Schocher wrote:
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Simon Glass <sjg@chromium.org>
----
- tools/buildman/requirements.txt | 1 +
- 1 file changed, 1 insertion(+)
+> please pull from u-boot-ubi one ubi fix from Michal for v2025.01-rc2
+> 
+> The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c047:
+> 
+>    Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
-index 052d0ed5c6f7..85ec8e36f14c 100644
---- a/tools/buildman/requirements.txt
-+++ b/tools/buildman/requirements.txt
-@@ -1,5 +1,6 @@
- coverage==6.2
- jsonschema==4.17.3
- pycryptodome==3.20
-+pyelftools==0.31
- pyyaml==6.0
- yamllint==1.26.3
+Merged into u-boot/master, thanks!
+
 -- 
-2.43.0
+Tom
+
 
