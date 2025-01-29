@@ -4,166 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CB15C0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 17:36:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 693E6C0218F
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 17:38:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF3C080646;
-	Wed, 29 Jan 2025 18:36:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 7C7DB80646;
+	Wed, 29 Jan 2025 18:38:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="CS1B6I4E";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bR0mFzt4";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Uu6p5pnv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 565A7806C9; Wed, 29 Jan 2025 18:36:06 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
+ id 1508D8083C; Wed, 29 Jan 2025 18:38:45 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 500E8805DA
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 18:36:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id C4B7C805DA
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 18:38:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qeGn2rGVDWqU36ebS6EzJtlo8YENQXSjFN8CmWvxo2eW8FJWaD5sC4fMokt6ZeLT2tachl+AvO3Kdr8md/ATeJOpdYgVU+FYFxPGVl/VorMq6+aENqNDL4UPX7S/ZvFbT4b8widoIaXzpI+JIqoEQV3Ol6Wdah+C3aFHipqGLDddeCAMN+X+tjztyWiIB1AkdWLkvs79A9xqjxT7priNBJiyjN/5iZkTCaOlRbLSBt3DddB2+3IaM47Udr6Imhtzj4XX1zZeVXbDkSvgodk6dVFnstQR3Nj+FhwOeaTDejHEsFTJs0dhlyYTsp/1EfoOwnlQFCLZ0SyjarfBGUSwNw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mC7OV3olbt27bfjFauGw23yKSFD0xj8Q1a2htno3clI=;
- b=DH2CIxC2s3Qzpf+sGgOkvjSnIE8R2qgjFa3uZ/lMBCXBg0p8iY+tFPV3h7vg6+RuT99saDmSj/NOTvIA0LN3eqrGwn75ZWn27jcVjvgC9BGfCPZuGJ83c6tq9WNVn+9x38xhp1E5RcwZxbkOGDPjQADJ96hT3lMw/eR6hOmFhCoD/4vTO3KtqQnXMOiyJhtEud631Jw1M+M7tkjU1H78uaFVdlbo1YlwGcPsCta4E8ils2sj9pOnWJDp2SUdOTolnaLuhLIfFw2XO8ssiEeTQRqGDBsVIUwPqvTkOZb4bwCOPhjfFUeYkc2zpHo5IOd58UOYMwN6HqU9PDU3vQXcGA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mC7OV3olbt27bfjFauGw23yKSFD0xj8Q1a2htno3clI=;
- b=CS1B6I4EnyrGpAw5WCtVQdgv7mNTZLpZfalJQUBRgRzAMKcuqFhSBDNkS+6qwxolWHe+m3SbT8L5uMMJChA3xkm45bnfPVCBtg1/8dhSRXDAwwd/6B2g6oF23h0yGOa1WDbwy0R7EwvZe3QsYA4z+4nrXSVNifjGUyuimoQ1RDk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM9PR04MB8762.eurprd04.prod.outlook.com (2603:10a6:20b:409::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.18; Wed, 29 Jan
- 2025 17:36:00 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8377.021; Wed, 29 Jan 2025
- 17:36:00 +0000
-Message-ID: <19c83083-4887-4a95-bff9-77ec56f47558@cherry.de>
-Date: Wed, 29 Jan 2025 18:35:59 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/9] ARM: renesas: Simplify board Makefiles
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250129170514.82118-1-marek.vasut+renesas@mailbox.org>
- <20250129170514.82118-3-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250129170514.82118-3-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0029.eurprd01.prod.exchangelabs.com
- (2603:10a6:802::42) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YjqBp31qMz9shs;
+ Wed, 29 Jan 2025 18:38:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1738172322;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eM+nY4n9QzHpUaQmWKeHR0dJY/XtkViARaupOTuMErM=;
+ b=bR0mFzt4kjlEGZgAD8f9W7uF8RHBS/Kv5TZaZGpHfyrCf9hpJ/lrzTf4PX8SsPJD06CRx9
+ P1gH2hka9o9yjOsucNRG5N0f8sKhk10pk2wfMZIgjMkmd77xzsIikanow52yz4TWylxL4E
+ bF+6wfGtTUm/iagTVVsTvY+8cXquFSyIzd2qJUOTeDUn+aGuGl/E97swssTDnLGeVhsc4C
+ SXK3IToowJ4gfbEoAW5ZqTieGWKhlcozCh16vITk/SNUUtMPTKpyh2dJgkkB3YlX4Nj/fY
+ wH3DxxTXhVjEzyNZZEvor6WIcu8ybvHaD6R41P9glHtxa+CJ86h9Fu5e5tFYog==
+Message-ID: <3523e011-b0f1-43bb-bc39-baa8fd2e51d7@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1738172320;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eM+nY4n9QzHpUaQmWKeHR0dJY/XtkViARaupOTuMErM=;
+ b=Uu6p5pnvQQybTQEEYKGzBRt6+Fa4YFVdoRmdhnOINzGaM5EoUoTsSxrooOzuuER7/4PAtK
+ U+3iaSo5dCsP9yDqBZGrA2GrpXrCa4wl4tfXXMiUbeHuv1415bOC8pa32h9TRWLZTiCqAc
+ gCP678gYzC/cgmdt/LdnREUQEQevh2u1LLCtN61JG5mUK6PfKWdS7b2wHVUCKAipAOJ3s/
+ v/D+gyR6izNnWOLgL58oupwdvyzhBjehKWyMl02ls1mvjKuWUE82h6VzfgJ2ixKdROrVdA
+ FWa0UMf6dyRtn9MqBz2rKanJTJ6fhlaNo1FdS8B9mGmEcHrp1JqPkrLR7Ub4Dg==
+Date: Wed, 29 Jan 2025 18:38:35 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM9PR04MB8762:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95c5b6f2-8819-4e2c-62ff-08dd408b659b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|1800799024|376014|366016|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?a251U25KOXV4dVhqU0hmN3d3TlpyTnlmRlQrcmY4UTN6eVhsaGowSEIwR0FM?=
- =?utf-8?B?bUNrQjk1eUp5M2NxVlpTcHZBa3ZjczZndVBKSG1DTmpMMDNONEhzemlKckRV?=
- =?utf-8?B?MHM4L3lDSExzQjZrM3lWMGdwZ0U1c3RaenJuaXlrdmUxWmlCTG9HYThudG9v?=
- =?utf-8?B?RnZibWtPU0RHQnUwbGFlbXdqV21kWmVwRHdhSG1raU1taUxwNlVaV1JzRkVt?=
- =?utf-8?B?SkZlM3dDUzFoTHU1aFFQcFRjYk1McjJSNTZJRDRUc3lYcVpIellDK3RiQUZZ?=
- =?utf-8?B?b1BQK1E1ekRSN3ZsQzNiOHJHUk53L2E3UWVLRUpGSS9XR2JYc0tYQW9xSnc3?=
- =?utf-8?B?aWx1QlU5TmFkYU10UG51MUd6bnlyMSt4MlUxSEdrSWxDTWoxaVpJdU1OODl2?=
- =?utf-8?B?Y21NTktUOFZzVUVZam1CaUNURlc5K1dHN0FyOC85OEZyL3dzMTU4WWVGQmRB?=
- =?utf-8?B?T0t0M0RqV3Q3VnQ5ZEVCSW9Ob3NPeTNtU0JjRVl1SWJLdlNweWRUU1l4ZGpi?=
- =?utf-8?B?NWNVN2FYZzQyU3RRN2Evay85SER6SlJhcU91VkE0dkJmZXgrNjVpSXR2YlU5?=
- =?utf-8?B?aHhBQTIvVlVFL2YxakZjbm4veHRqQWhkS09oWHEvRWFSdEhBeTk0WjVhNkt6?=
- =?utf-8?B?TSs5bWdPaTBtVTNQUS9PaEdtN3hxNnRHbG03dXZyb2NtbEpaWW1NZUg3M0hJ?=
- =?utf-8?B?OGJyNWQvN0FtcTlIVDNjMXZzcmNjVHNLalBKREJ2ZGxTdGZQdE90TFFCNUpI?=
- =?utf-8?B?MUVodEZoVjdvYk4vRmVkaUluZUJQZ2h2VUd2d3ZVNmtGc2NpckJXTCtmQW9u?=
- =?utf-8?B?QllGWTJwS1lycWU5clhIWThrNklRWkpYMEJMak91WWpvdWFrV1ZocGNsNzh3?=
- =?utf-8?B?R2gzZTVjb1Y1NFQ3WXVIY0ZXdnBzb3RxNGlrYWltYVZGTFVSRENFS2JqWE4z?=
- =?utf-8?B?Y1hvZTdVak9aM2FsQnljSWNnQzVYZUhzTTlpNnBWYk9CdFFXNzkrMDZpL2Y2?=
- =?utf-8?B?WlkyS0c1NDNUcFNKVXRmcmxLV1lBQU9Uay94RWdIRkYxNHdLQy8xVGlkNlBS?=
- =?utf-8?B?UEJTcElnSEU3YlF3Z1cyN1c4MWYxSllGaHlMUXo3YXVwUkxCR2pNZXRZVFl2?=
- =?utf-8?B?L3ZhTkN5dXpjd1JPTVZ5Tkc1Y0RBVXNBUTdPNVhxVUp6b2R1L1JpbmE0R3FK?=
- =?utf-8?B?MHhnMm5hdDQvZnh3S2ozRXVtaFUyNW00eHd5U2FFb3R2N3VENVRVb0lTSEE3?=
- =?utf-8?B?ODdja1I1ejJFY3NsRE9jY1VjRXVleW1GVEl4S216VUdTcVQ5ZG1ocWRNQ1RG?=
- =?utf-8?B?ZjlZdlcvdEZvMTI0TzVVTjIycXRjdmpjZUhPakorazk1by9FSk5kczhXWnhk?=
- =?utf-8?B?QmtZMHROQlIwbkxmZFgzRm41MVVLRDNGZityOG55S3JXTjE5TUVIYk1JdUYw?=
- =?utf-8?B?dEY4ZUxyTDI3Z2VoT08xTlRNMmV1SGRLaGcrajZLazRtMCsrbDhOV0Jlelkv?=
- =?utf-8?B?R1lPVU01ZkZSOTRMZWlZMHVWR25hNHhhbHljSG1vODV0TTNQeUxxbkRsd1Iv?=
- =?utf-8?B?ajNtMEswbUl5YW1hS1FUY2Y0Y3lIdlI2bm1pUkdYWVdUZk5CY21DdW5DaEdu?=
- =?utf-8?B?Slo1RTIwNjl6N0dwaEEyWEF6WXBWcis1cnh3ZHpLTEVXVmxhK2tqYWVWeUdl?=
- =?utf-8?B?WkFUaU1vQjhoVmdXaHoyYTh5dTYzU0JCdGhiQ3ZnK01WNjFtY1JRdTdPUmxE?=
- =?utf-8?B?cDdhWnhoUXJiazZDRWNTYUxiOFBFVkJCZjVHeGFyZEFGcjlETFBvWXZwRS85?=
- =?utf-8?B?Rys3SUxMYng4a3FhUjdvWVNITHlJTU43NGM5bkNSUXVwcFptclhOR2ZWWkxn?=
- =?utf-8?Q?upv7aY3Gk7to/?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(1800799024)(376014)(366016)(7053199007); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VC9tb1hzV24vMzRKeHBVSUw2QUpmT3hXbTlQaVJBclFVV2dNbVZRTGVWMnFR?=
- =?utf-8?B?aFUrdU9ENmNPa2NxeXVnenN5dHRHV1UxMXpudlVBTzVycFdIeUhReG9SMWZq?=
- =?utf-8?B?MUE0bWFDMzIxUXptUGpYUnVoY2dFMDVaZ2lhS2lLaWR6SDc0THd4MHUxU3dy?=
- =?utf-8?B?YXhEYzV3Tks0Q01oSzdZQ29qb3p0Uzdna1U5NVZlcXpIMlp6Qyt3dHdHbVR2?=
- =?utf-8?B?czF0UUVlVjhuRUoweGV3WXYvdTRXVzBXSDJDYlFBNDRSdDVrWWdVZFUzTXk0?=
- =?utf-8?B?MnVXeXkwQ0pYL0I0WXgzY3FhbGJIUkhMb2VqRy9xTWR6bUo3TDBBVExhMGNY?=
- =?utf-8?B?ang5SHZtbm1BSWtUV3BMa0dnOFY2RHMxV1RHaE0xUjRITUxsN3hCSlVBb2Nl?=
- =?utf-8?B?QS9tRWszckZmY0Vnc3BZRUxUdlRhbG90VWRnME4yME95QVlTSCtqOUQzeHJB?=
- =?utf-8?B?M2ZacFdUUXFldFN1d2Q5T0MvWURsTjJRNDFhRS9HNUowaCtScUlhaXBFckJV?=
- =?utf-8?B?bEE4NFdBQldvZ1cvTzR4cDI4SmFQSnl4dTNrV0xkcit5UmlJMUdwOTZ0OC80?=
- =?utf-8?B?d0ZDbmtkYWswSDhtaFRrV24vczgvVUlxZDI3ZUYyY2E0b0VYTjVQSjh3cDFr?=
- =?utf-8?B?YU9wYld6b1pPUE9GNzNTS3RkY3BxOCtzWGN2bzlHY0pobllhREUzcmZMSGxy?=
- =?utf-8?B?eUpxUGVieC9uTUhoUHJzWFRUSmZWTHhYUTY3UnhxYUlwd1ZsVGV6aUROMlRu?=
- =?utf-8?B?MXR4MWF3OFZMWTRrdFpHTFBhMGVqYTlmK0ppRWFhTnVrRExqdnZJd1ZSWWMv?=
- =?utf-8?B?Q0xSMVgzZ3lybVZMNTM5ZEh4R05zaEdnL2FkY2JOY3dGRVFteE9NZW5QVzNV?=
- =?utf-8?B?WXNFM1I4WjFpeTYrUm5PY1VtSGpySGhlTC9hR21GWEU1dEJUQVZqWlI1U0VV?=
- =?utf-8?B?TVBWNXJXdWV6d1k1MXdFTTNvcnR1dkFpS2VmL1gwZExCVkN5TDdteHRyRWMv?=
- =?utf-8?B?M202Y0paYk5UeWlnTVdTQjF5ZWdrNUU0dTdYNkxadCtQOFRiRVZITjU2ZVNQ?=
- =?utf-8?B?TVNVVFRTMDdVZVdiRURKRVA1Z2VPYXdyenkxNjhSTmpGdjhmRGd2dGsrVDFs?=
- =?utf-8?B?dVp2ZGF6RkNjcGRZdEFyOWZEa0ExWUpWZFM1cHVsSmFOdUVJN2pMdHo1YW5a?=
- =?utf-8?B?V25zMm1oazVLS0xNSXNJM25xRGdRcG13T2NSbzAzelN0ZnBQM3d6WW1GYTkx?=
- =?utf-8?B?d3ZMdXJySTEzSGNlT1ZNZ1pmbEhaSkEvcDN1Qlk2UFpBZzF6RTdyTm13SDgv?=
- =?utf-8?B?aGcwWk1HVHZ4SmdKNFd6OERYYWtBTnNRVXlNNGdoUjhxcWJRY2ExaFNHTmRs?=
- =?utf-8?B?TlB4ZGFBcUNlcXVZMlh1WityanhBSE1BdUtMYm8wV2FhdXdsSTR6VmJzT3R6?=
- =?utf-8?B?T1NxNjJDYWdzWjNqT2MwM1hhM3gydmNjZWhlRU5YbXNhd2sxRG9SaExDRTZs?=
- =?utf-8?B?L0VBWEh3TUpSc2o3REtDeTZzYUt6a2RBNVF3YkpZeENCTUtCYXVJUmNhM3h4?=
- =?utf-8?B?VzNCRzEvTFZ4L2ZEeXNiVTBTV2VlVVpUM0FGekV5dnB0a0lybVlla3hLYjYz?=
- =?utf-8?B?cmNnVVpFNWhsenFrVzFzWnBzbGgwUFVQcEFoVVdmenhtYklKQ0xnUWNVZXZ2?=
- =?utf-8?B?SEQ2U2dYelZqYlQwNUg2cGVPUlFzOGxWVkZzRUt1QzZSdTdOMFJJUG1DVzVh?=
- =?utf-8?B?TFhCcjcvdnlHbHBqN1V1UGVPTFA5SSs0UkJnOHBnMEt0TmlQRHRoc1dMTWY5?=
- =?utf-8?B?dkdBSk1pSlhYQzZIaFZLaU5tdUxwc2laRGgya0Rzb1pFYUgrZUh3RFNoRWxw?=
- =?utf-8?B?RCtWQXZaV2c3QWRmK2tiZFlLY216TjdLeXJFR1dLeXF6ZU5seWl2Ym0yL05K?=
- =?utf-8?B?aW5jMm5mUmpodkpDWG1DS0RFRit5a3Fpa0dRMlNCQnJWa2tuK093TGtxbWZN?=
- =?utf-8?B?RllUcENINmVlSU1JM3RkZU9QU2Fmb0JKbEs1NnpJMjFBSGZucDlUNnk2WW0w?=
- =?utf-8?B?Z2hJaVVnbEdEc2dVVkdhRXl4QlVESzhpc2FTS2JrbE1Ba05jZ1BFNFdBSVFO?=
- =?utf-8?B?Q21GOHdOdDNKQlNaZjZjUWZGTmtZWEV5NkYyY01TZitYZ3RrallJYklCeGxw?=
- =?utf-8?Q?g8DtuUPG4jAe4mbwvA8maGg=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95c5b6f2-8819-4e2c-62ff-08dd408b659b
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2025 17:36:00.6888 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aDls90RjCL/l8BYMNJe0Z3IXwc3ZGBmwrZEc5Y3U1iwd+tFKxfctQpn5+/qWeO1S+GvQwB6S2p9Mon68MgmzfhW6ZEmmZqliIEt8w5gMw8Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8762
+Subject: Re: [PATCH 2/3] image: Add support for starting TFA BL31 as fitImage
+ loadables
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
+ <20250112223755.179959-2-marek.vasut+renesas@mailbox.org>
+ <4097bdb7-8c8e-42af-8538-41338d49b328@cherry.de>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <4097bdb7-8c8e-42af-8538-41338d49b328@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: y4bxp9fggges8rag1846d78c1xirccus
+X-MBO-RS-ID: eb7af7fe0bfbad59b35
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,30 +103,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On 1/29/25 6:10 PM, Quentin Schulz wrote:
+> Hi Marek,
 
-On 1/29/25 6:04 PM, Marek Vasut wrote:
-> Introduce board/renesas/common/Makefile and remove the multiple
-> duplicate copies of obj := ../common/*.o from board Makefiles.
-> Let the build system include the common Makefile using the
-> HAVE_VENDOR_COMMON_LIB and build the common objects that are
-> shared by all the boards that way. No functional change intended.
-> 
-> Some of the remaining board files which include board specific
-> settings have been updated to use obj-y += to avoid rewriting
-> the board obj-y target and avoid dropping object files from the
-> build.
-> 
-> The board/renesas/common/Makefile is now also used when building
-> RZG2L targets which also set CONFIG_RCAR_64 symbol and 32bit R-Car
-> Gen2 targets, however, this common code is specific to 64bit R-Car
-> only. Inhibit the build of this common code for RZG2L using extra
-> ifndef CONFIG_RZG2L and do not include any code for R-Car Gen2 so
-> far.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Hi,
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> On 1/12/25 11:36 PM, Marek Vasut wrote:
+>> Add support for starting TFA from U-Boot running in EL3 as part of
+>> fitImage boot, so the user can start U-Boot in the highest privilege
+>> level on the platform, bundle TFA, Linux, DT into a single fitImage
+>> and boot such a bundle as a whole.
+>>
+>> There are two main benefits of this approach. First is the ability
+>> to run U-Boot in EL3, where it has unrestricted access to the entire
+>> system and can act as a useful debug tool, as it was always intended
+>> to be used. Second is the ability to easily and safely update of any
+>> component in the fitImage, be it TFA, Linux or DT.
+>>
+>> The boot process is similar to regular Linux with DT fitImage boot
+>> process, except the TFA has to be bundled into the fitImage. For the
+>> bundling instructions, see below. The TFA is started as a 'loadables'
+>> with custom U_BOOT_FIT_LOADABLE_HANDLER and armv8_switch_to_el2_prep()
+>> handling implemented in board code, and performing the handoff and
+>> boot in case the TFA was loaded.
+>>
+>> The loadables handler is optional and meant to set up any sort of
+>> handoff structures used by the TFA BL31 or perform any other setup
+>> that is needed by the blob. The custom armv8_switch_to_el2_prep()
+>> has to implement the jump to TFA BL31 with return to U-Boot just
+>> before booting the Linux kernel.
+>>
+>> Example fitImage image and configuration section:
+>>
+>> /dts-v1/;
+>>
+>> / {
+>>      description = "Linux kernel with FDT blob and TFA BL31";
+>>
+>>      images {
+>>          kernel-1 { ... };
+>>          fdt-1 { ... };
+>>          atf-1 {                  /* This is the TFA BL31 image */
+>>              description = "TFA BL31";
+>>              data = /incbin/("../build/plat/release/bl31.bin");
+>>              type = "tfa-bl31";
+> 
+> This would need to be added to the ITS spec, c.f. https:// 
+> fitspec.osfw.foundation/
 
-Thanks!
-Quentin
+Where does one do that ?
+
+>>              arch = "arm64";
+>>              os = "arm-trusted-firmware";
+>>              compression = "none";
+>>              load = <0x46400000>;
+>>              entry = <0x46400000>;
+>>          };
+>>      };
+>>
+>>      configurations {
+>>          default = "conf-1";
+>>          conf-1 {
+>>              description = "Boot Linux";
+>>              kernel = "kernel-1";
+>>              fdt = "fdt-1";
+>>              loadables = "atf-1"; /* This is the TFA BL31 loadable */
+> 
+> We have some special stuff around TF-A (and TEE for that matter IIRC) on 
+> Rockchip. The ELF is split into multiple binaries to load at different 
+> addresses:
+
+[...]
+
+>    Loadables:    u-boot
+>                  atf-2
+>                  atf-3
+> 
+> I assume this would be supported as well and we would "just" need some 
+> sort of SoC-specific implementation of what was added in patch 1 of this 
+> series?
+
+Yes, I think so.
+
+> Is this what you're recommending? We would then identify which 
+> part of the binary it is based on the hardcoded load address instead of 
+> reading the load address from the ITS. Or should we think of a way of 
+> identifying them directly inside the ITS with some property for example?
+
+Maybe try and prototype this loading of TFA for Rockchip and see how 
+well it fits first (if at all), and then we can decide on the 
+integration later?
+
+> Otherwise a global remark on that feature is I believe it may increase 
+> exposure to exploits. This means U-Boot will happily run anything 
+> provided in EL3. E.g. imagine I provide a script in the ITS which U-Boot 
+> loads and executes before loading the kernel, fdt and loadables. Let's 
+> imagine this is sideloading (we even have some wget support now in U- 
+> Boot so not too far fetched) some app to keep running in EL3 after the 
+> kernel has booted. Or modify registers only accessible from EL3. Now you 
+> better be even more careful about what you're booting from your 
+> linux.itb. Is this a correct interpretation of the situation?
+You have freedom to do whatever you want with no restrictions, for 
+example shoot yourself in the leg by not authenticating random scripts 
+up front and running whatever unknown stuff, sure. That is not a bad thing.
+
+Running U-Boot in EL2 on top of non-free blobs is not any better, rather 
+the opposite I think.
