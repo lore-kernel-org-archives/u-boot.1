@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 746A8C0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 17:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09E8C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 17:33:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE3618081E;
-	Wed, 29 Jan 2025 18:10:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 10A6E8083C;
+	Wed, 29 Jan 2025 18:33:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="WQ4/yCBG";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="aX7Aei1t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB74780A37; Wed, 29 Jan 2025 18:10:28 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
+ id 50800809A4; Wed, 29 Jan 2025 18:33:02 +0100 (CET)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40E9180077
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 18:10:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05A4F80646
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 18:33:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JXuQBIMOCB7kFBTv1RFz6T/jRqIbBYwm2MYgNIv5AXJhTRaw/n8Y/QfhrcSYwG2NvMJP8lDqHctJALHGvbl0ttCZClMdDYjAt9/tMQDxSbK8u/Qv1adfiLKYY3LkjcK4xCBs6NxJ0KH1eTbuB+Xfq8ibdZ4Ey1PqclQs2V/6bkcF5y8rGzDKqiSj/pFpjN9q43UYio17Vnv0fc2SNgcmVn1zDuQUoA09lSzbYynadHjuV86BqoXuxaMiWZXX5aaBqePEC6Nmg4R2YcU/uTM8LLH0D5etsOU9yOqAd/YEIPLChjuDAKa1+GMShnFCNGl8UJMVidV/y44HVY/hvHGS9w==
+ b=w6zo6o3gHARjm/y7WTtDkyIiX+C/xfrbCi7eFadnEEUCbf3qFIPbor/SiRehVT/BI4SgGIHAbQN6xvFUZhEFCbnUnY7wEsMJeIBNllGmdg63kk4zrSojQCk5yz4rh/5ceKYxD6kCN7djlBYaSOEWBLne0SLir6b/Cnfo/zVuqvGHHOtURAJF0opQCYJpuZ94LkOS8BnIy3UHfwRTsQjcRrbm6gRCcRS/8JIyfoK/2LiiEqmyosD3qjZrM/NusA28zpcimRO7JJs7x1b5mjTxZdXxMTb+wH9RgGVT7pTYojV8rG1cuiT8T3ACL5OM3a2iCd+8Vz4aV5ZxEUiF0H4THg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=i2hrbp9s37tRGWs9HknXSJOInlE+pISYUxxhSw/DgrA=;
- b=k3oVCX1AlTC5cvDQ8fl6Ayimjnn9mT7kpb/0hNJQ0OwJjJXu/4TJd07K+w0C3MAjVWmFwZJhwaYP/190+dCpdBB+wCMk3Hyo1LBY0qucR/w80XP14A7duUZ1cwc1nZXjaBAL9EV4pQUvXNIs9jUO3Eo0tu4UO6ios8TH5b3s0NB/kgVOH3vmUgEbv6HJAHX50CkEfPZ6BMjeZpkQSB3NaCPnfTfRcAenZll67apBOScLNNBgP7Z/W9C8xPystojPxFsHiM94VZnXj1kyYl5m3Oj0OaMPvukpkfn66kWqFFQNP4cAyr1Osj/KNosCad864mPs/XjvkLXAxxfxrrZXHg==
+ bh=HItInTNj2sWMJqn+06VH1VPXNjTSZonjXC1GKVX/HAo=;
+ b=Tcb2dmF4KXvWGTeDFlxrvKBOpZa/5zWPJVmPDQ96jdrYDixFgzxeEcIZBv2rtLarAKetjYKu8a8IOwy9BcoIqSdUq/5HR86uTp2DNCs5C3VncfVHhhEYf/RdTRsckb0OzRLxmASTbOAE/ff4xwRz1bZv72JoXj6ZGPL9aWItKcDNdaXT0DurazqoCLANH4s2ev02T51bMllUGpQ0qbPtfy8UKfgdgI9qdyLPSlRC4UWKYWFSEZUqcngyZQxnCTiP26wgfBLWRGcyE1dfW4iSqY8HnwyhgtnkQ/n6xlv1jR6fGdwkGe6wDM7zHmk2UZPUA2fbREm5Vyl3bwtpoqkrbA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i2hrbp9s37tRGWs9HknXSJOInlE+pISYUxxhSw/DgrA=;
- b=WQ4/yCBGTBQ6XDMxDSku073J2PhkJ+ZSIpH0+wdY8riJxMlXpZ9bwLtFZxUsgRXUACV9zyFvU0ky6CF8XUYJv7P093bhm9DvN3gixYSSHTHbcBEMM/Dp7q07sENqxZOr9N1QJTAvZzjmbRNP3W502z56wIualMgjd7wD/F2cnfE=
+ bh=HItInTNj2sWMJqn+06VH1VPXNjTSZonjXC1GKVX/HAo=;
+ b=aX7Aei1tSTksETN144qCsbKDZDNXP5zvCmqpx1X+WFeR5DmR7HJq0PxtE/3Y4rxjH+QsnSKXjBZlPy9I+QH18jKea1/o9iTgf6cRiI+tI28gCJyKfuV6H++8HHRUuKCh3PX8EP5+UQwiArlKgk3xEOSaDRlvEpP5Zdix9FZdDOQ=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS1PR04MB9501.eurprd04.prod.outlook.com (2603:10a6:20b:4d2::5)
+ by AM0PR04MB6963.eurprd04.prod.outlook.com (2603:10a6:208:18b::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.18; Wed, 29 Jan
- 2025 17:10:24 +0000
+ 2025 17:32:58 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8377.021; Wed, 29 Jan 2025
- 17:10:23 +0000
-Message-ID: <4097bdb7-8c8e-42af-8538-41338d49b328@cherry.de>
-Date: Wed, 29 Jan 2025 18:10:22 +0100
+ 17:32:58 +0000
+Message-ID: <b941f46f-6f1b-409c-9bc1-a72962e56f45@cherry.de>
+Date: Wed, 29 Jan 2025 18:32:55 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] image: Add support for starting TFA BL31 as fitImage
- loadables
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 3/3] arm64: renesas: Add TFA BL31 handoff support
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Andre Przywara <andre.przywara@arm.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
@@ -73,105 +73,109 @@ Cc: Andre Przywara <andre.przywara@arm.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250112223755.179959-1-marek.vasut+renesas@mailbox.org>
- <20250112223755.179959-2-marek.vasut+renesas@mailbox.org>
+ <20250112223755.179959-3-marek.vasut+renesas@mailbox.org>
+ <8409fd39-3816-4686-9b9c-56785209ed37@cherry.de>
+ <b7b755d2-1156-4463-9764-086d9e6ef080@mailbox.org>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250112223755.179959-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <b7b755d2-1156-4463-9764-086d9e6ef080@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0202CA0012.eurprd02.prod.outlook.com
- (2603:10a6:803:14::25) To AS8PR04MB8897.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: VI1PR10CA0102.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:803:28::31) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS1PR04MB9501:EE_
-X-MS-Office365-Filtering-Correlation-Id: 279ee45e-6b4a-4e8d-1415-08dd4087d199
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM0PR04MB6963:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1641119b-be11-4461-10ef-08dd408af8c6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|10070799003|7416014|366016; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?V0dXd1Q1WHo5T0ZIRFlqR0VwOUREazhnV1dHVzgvbWRMZXRucnNLVktLSHE0?=
- =?utf-8?B?NFV4NlVBM1BLQUdxUTBUN1lXdU9SSmtCRHhYbUtQd1k2V2dRYjZVK1E2VnhT?=
- =?utf-8?B?SWw2QnN4R0MyMUNnSzRPQVA0ZnhSQlNXUUcwZXppWGhzL2ZLVkpNd0MzZkds?=
- =?utf-8?B?VDRUdVZaMGYwcXArUE1XV1pzSGY3RnJ4TTl1SkdUbzM5a3NkVDF4aXl5Q3Nn?=
- =?utf-8?B?eExqVXRGd2ppUXUrTWZHNjFldGpHOUM1Rk1iK3FLdVY1MVBDaExuaE9mclZv?=
- =?utf-8?B?VC8vbk5mNWVzUXRuYVg5dnpQWWowbTFFcVQ1a3luVGgrS2hwcGRSbUw4ejdw?=
- =?utf-8?B?REpoNWxPTHRDUjNaczVSSHBPc2lzeDlPQS8xQzJ1U0FjZjJBckFCTUFnSTdw?=
- =?utf-8?B?ZDZJbi9mUFQzMTZOb1hCUHdNVHdsMkZ3dE01b2pGdGVmU0tsblhQRmc5QThD?=
- =?utf-8?B?a08wRUZ2NHNMQ3YxNnJaTUdMMUlaV3owcHY0VFd2L1lqaTVpQmRsbDZOUm12?=
- =?utf-8?B?a24yZG9kMU54OTZzOWVqcEdNNFREMnU3NGZzSHNtRnhRZUVITnVMRTBEcnY1?=
- =?utf-8?B?NzJ0K3FjUUNya2ZXc0xlT3FCZ2tFeE9xWjJuMGFqSVVud2tEZGdRREV2ei9x?=
- =?utf-8?B?dGp1UmhOS3FqWmc2SkZyNFFyQmtWUGJuNmxtdGk4T1JrYlVEdU1raXIvcUdo?=
- =?utf-8?B?RWN3R21HRnBCN0FmM3JEcDc0bUwwT3FNckZHTjB6RUUxc2syalJEWG9kZU1X?=
- =?utf-8?B?T2RLV2ZnbWxzWTJxTkEvMlZyRWJPSmlNU2REdU1SMXpXSTVBOVYvYk96Smw2?=
- =?utf-8?B?ckVOdEdMRnQrSmRyL1RzS2FEMURQZTExcFk5dC9ySnlVUVJjWW5lemx0SDNU?=
- =?utf-8?B?SDhnS29jZmVxUlRTa3BUUDkzT1NCNUh3NGRMSzlRblJ5cnBCMW1vZVdja0Zu?=
- =?utf-8?B?b1NIdjk1SmF3K1BxQnBhNHJhNTJjNm91dHFqRDVqcnpXTjNTTllkbmZCOXpE?=
- =?utf-8?B?aFZzV2k1T2llWUc3bEJnV0JGU2l0TFd5WHRtYjFNWmU0WVYwcTNwYnZQaXJz?=
- =?utf-8?B?UEV6OHQwZG0wTUtlbGtvN29CZ1QrelZLdGdHdGloY2IrZVRjTHNBV0ZKWXJD?=
- =?utf-8?B?aE4rY2tEM0JobXJjOXV3RTBFYldMU1FvM3dNakpaYWhnQkJDaTk3Y3pHYUVV?=
- =?utf-8?B?ZVRML3AzTDNZWDluRnlYS2I5dWJvNythREIzNFlaMUJoK0N6TWl0ZE1mU1hQ?=
- =?utf-8?B?RGMyOTRiSmd5eDhwSjRBL25OYUI3eUozZnBpeXlYL3pKWHBMT1hIQVkyR0M2?=
- =?utf-8?B?eGRjUFpwbGZ3WlhkKyswemx2aklJeHFnYmN1NXRZeG5HSUF6ODlQOEhuTEM0?=
- =?utf-8?B?a0J2bC94UVpmNUlkckRRU3BybzFrcmF2WUlyOTY1ek9tSGl2U2QvVkUzZTZp?=
- =?utf-8?B?OGJmTkhuVVdVOU9SbmVGL0djbyszWnlGQlVIaHozR3VrVmMvL0lpdmVzVk91?=
- =?utf-8?B?OStKbklVSWl5Vjk3WGpjZW9Jd1ZIK1dZL3lJamROS1dCZXBsSVEwYWV4cXl4?=
- =?utf-8?B?ZnVYcFVnOEJOUWhLdTVJblhObnFFR0FCZk4zbWtLaUNuZFhTbzBvWVRZUmdJ?=
- =?utf-8?B?NkZvdGsyK3Y5YWtJV3EvWkxnQmZ4ckZtM1d5NkhwZVJIMGdrak9kNjZlUU9s?=
- =?utf-8?B?RWlTZXJBbmw4eHhlM29IVEFoS0E5YTMzdkxRbnovZ0thVlJBcTNac0Q1YzNC?=
- =?utf-8?Q?ksIVxc/y+2IkGE0z/3us9mm6N7lcKOTBjVWlICP?=
+ ARA:13230040|1800799024|10070799003|376014|7416014|366016; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QW5HK3FId0pabTNZdzVRL2RLeG4yL3NuSlRlU0hjVkF6ckovNjFHOHJSb2lq?=
+ =?utf-8?B?d3htVHJZa29xR1N6a2NYYUFCZy8vV3kreTFUNlRVWWVHei93UDdpSTNIQ0Uw?=
+ =?utf-8?B?cVE4UWNxZE5sQ0JlSTFGeFRpVFRrV1lyVnVLWmxTaVhUcEV2cU5LTkdZSllY?=
+ =?utf-8?B?SzRKaW0xaUptVENFQS9zNlo2Vlo0NGcveDdtSERZR1dRRUV3SktYU1gwWnFN?=
+ =?utf-8?B?T3ZLM3gyekRHa25EWFd6aHVmUjRxalJYM2R3Y0pYaUNyUEJPSkd6cnA1WXRX?=
+ =?utf-8?B?cE1GOXZIWUNwRnBvZ3B1U0wzZEJwR2dpWFFZczhtWWxVQnF0TC90NmVIMFNr?=
+ =?utf-8?B?c2Q5MFhvWTlKMm5Pdk9kWi8zVGdpa2hrM3MzMWVCeXlRVUszSUtLRTJzWTNT?=
+ =?utf-8?B?UHJYalJhNm1BazZHcERraklHckpldkFWSlg4d3A5QUlQOW1EVWVCMExhM3FO?=
+ =?utf-8?B?eVdZeFd4NVg4WjF3bDVpYnlIbHl5NnRueGxoQnA2NFFYNXV1bDlYR0lUaCtK?=
+ =?utf-8?B?OEMrRlhmM2kvMXVhcE1zTUJzdVBwaVJ5WDZOQnB6NGdYVkVzUHIwb3RBNXZm?=
+ =?utf-8?B?Y095em9TWlF3MTQreGptR0l4NFQ3eHJlT3pFQnFlMi9qUDA5enRkU1lzWlJJ?=
+ =?utf-8?B?bFFhMG9EL3o5L01va01HS0xROXhOUXVXQjJTUnhKVWx2STdHSVg1dk1WbVlT?=
+ =?utf-8?B?WnY5eDVHQkppY2pNU1prTkxiTGQrZEZhTmkzWVJtTkpPcDN1VGhxazFRYXF2?=
+ =?utf-8?B?NWk4Y3dHVFVJUHZnbmVTamRDZ1ByQXlIdmtCcStOb3Y3NE10UDYwbHdaczN3?=
+ =?utf-8?B?MGFQWDViMzMybk9mTHRkWFdLM0IwUUhVZUJkazZMMUpMUDlBZElzVFR0L2Yr?=
+ =?utf-8?B?R3gwM21TQStHNTZhL29QaXQvT1hzaFJiSkJESUUwZmFHWDJCUER5UXdjSkZS?=
+ =?utf-8?B?YUh0YlB5OTBNRSszc0U0U2kvRjk0Y2ZzaEVJS2EwZ3hzQ0lkMXl5RjlPQ2N3?=
+ =?utf-8?B?b1R5TEFkNnZGazB2YkFnTXNGTGd4ZnlHOHE3UEV3SHc1eWFDdmZ3WGJRa09y?=
+ =?utf-8?B?bngzQ0RWZjVnVnozbGFvRHJ2ODBycVZKdGRGQmYrRks3OFFScWQyN2FZUFRF?=
+ =?utf-8?B?SHlLRHZCcnlDM08rbi9VMURQTjFubS9HSXlSZ0NuUVI1a0tHamNQSUJKeGN0?=
+ =?utf-8?B?S0RwQm1UWWZRNDNSajZMZ2RQdXhlMnNzSHJ4bkdTVThpaE9ab0grRG1TUHhL?=
+ =?utf-8?B?ckIwdWZjeUVOYytEUDlYbXRuRlo5QWJHRVhTQWxwVEVTZytyNXBNWjAzLzVk?=
+ =?utf-8?B?dHlJdEF1eTlTeW9MMGVRQ1dBZ0NPa2dZbGFFeStxMWhVZ0t0cUYyQ04xS3Zh?=
+ =?utf-8?B?RUlkd2M5Q3dNaGxUTTJxbVRzcmgvdTJpNXlWbTZHd3ZzOEY2NXVGTVgwM1d0?=
+ =?utf-8?B?dlc2WDdFZ0JPSzkyN1lPSlFLSmE1OHpPclRzaENVM0dmNXpIbjZBV0tvbldx?=
+ =?utf-8?B?SVBYRW8yL1VhMnl4dU1keW1sQmdBYm5hYVBKTnQ3TG5iVFM3cENMaExXVWJi?=
+ =?utf-8?B?SC95bHVrZnhVd3RPUWFHWldqVFZTRTA4anJ2MnhJZFBrNHk0S21GTEhoK002?=
+ =?utf-8?B?QlMwd1g2UTNKYVZkTWU3YTBCQ2hhdlFlUTBxRTRjM0kwejBBcHNLbjhMYzJZ?=
+ =?utf-8?B?bmMvNUdKcEpwenhXYlN3K3hLRDJWYmN4d0s1KytJckI3K2hJdExHWTk4d0NI?=
+ =?utf-8?B?Mm90OFhYS0kvOFN4THNRU0pIUnU2Qmw2Ykh3Y09JZ2Q3dVIyamdlOWcwUHRV?=
+ =?utf-8?B?aUloYTVxVTcxTUNxaWtxbi9HdWF0RkV0Tk5ybUdJZ2w1T3V5SVlPQk15SVg0?=
+ =?utf-8?Q?a1TAO8QbJTEt7?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(10070799003)(7416014)(366016); DIR:OUT;
+ SFS:(13230040)(1800799024)(10070799003)(376014)(7416014)(366016); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aVVvaCtqQTZyNXNKbnI4TVV1cWFJaG9FamY5ODUrZDk5QzZKNytsTks2K3p2?=
- =?utf-8?B?Tk5qZFFJeitEUVN4dnlsQTZrSWo2ZDNZS3ZZTGJEVEhRU0pLSlIraDRIZ0hW?=
- =?utf-8?B?MGp2aWRsdnBRdXFzVkFvTkwzOTVoNmdHd2kwTXpuZVhpNzR2VFVjL29ibG9m?=
- =?utf-8?B?RkJVNVBtT3Q3QWxWekY3bXlRWXA4eXRHUG9kVzN5Rlhxc09HZm1uUkRMUnY0?=
- =?utf-8?B?OVBmSzBsay8xWmMySkVtaWFiK2VOLzNzRXpyUDV6Zkw4b0tyYVVRbGluUlV2?=
- =?utf-8?B?bE5Zc09lNHY2dmV0WVB3Nzl0YXFTY250QmpPR2hCd2NQN0lodFBoZGdRdkE0?=
- =?utf-8?B?TnVHRnZUeU4zb2xGY1JxYndaWHV6UWVNL1ptOXdFWFVLZGROK3AwUElJNFNl?=
- =?utf-8?B?bUFHTVpqSXA2VkEyRGZ1WmVsaXpHSjJvVXVtb3dENm1GMDFIemR1VVJ1SnJs?=
- =?utf-8?B?V3IzZXUyVTRaNTA3eThxeldVWlZCQW5FQkk4djR3UVVGNFlhdFZVbEtpQjFB?=
- =?utf-8?B?S0c1RGtnbzhUODRkSHdqTXlQZE1UNGcyTHFtS3FUbWlzVnphbUY4K2JJUzZ6?=
- =?utf-8?B?SkVMMXJmYTlyY0puLzBSckdyOTlzTXhMWUhBV0pGTUk0WEt0WHd6RHYwYThN?=
- =?utf-8?B?TC91QVRwMGFleUxDRk9QcUZvb21hUEZTbldpNGhjek1Malc0QnlzUlY4TEF0?=
- =?utf-8?B?ZEZFRWplNHJLL0tjdmM2UHZVNldZVXRtWlJ4UU5ObEVXU1ErUFMyUm0xSnRC?=
- =?utf-8?B?VUtJTS9lUDdoYmx4YU1kb3Vac0hqQk92ei9zZnM1QmNvTWlpU2pJOFBWc3A4?=
- =?utf-8?B?RldzZlZSMXdIK3ZNTVM2SzNLMFZkVjhhdFNJYkRlaklzOWg3YnpNZ3AxVTdH?=
- =?utf-8?B?MS9UTG9yajVFOTVvbFBVRmVGWW02b0NZa0JLMFVvR2N2RTVYTVpiek1CTjdN?=
- =?utf-8?B?MDVBRTQxdXA3OFh2R2JVbUxqR0hDYzZ3Wkpxbk1FM29VZ3ZyYXJXWUJUa1cv?=
- =?utf-8?B?VGpSR0MxbFhkaEkzK3ZqSVJNODdDTUdMVmVLdWo5RzF5M3FHTkd3aDZjWkkr?=
- =?utf-8?B?M2NuVWUzSTNhQlgrSU1iZ1hxVGkvM2RsNXo1bENWRkpCcDM2ZnZsZjFGWVBJ?=
- =?utf-8?B?emQ2eWVVWm9lNTFlbDF0TWdpUGV4cU16TVBXcFlla1Z1UmFYM2E0d0EvTHhs?=
- =?utf-8?B?VGdtQitQdENGWU9nNnhCTFd3RzlzRUIzWWhaOUpkQS8xUXpzUUVHNDd0V0px?=
- =?utf-8?B?dUlwRjhPcnM0UlU5RGFpTVN6UTRzdWNKbElDYVpaYWcwUFQyVmthUDlkOTlQ?=
- =?utf-8?B?emROM3A4ZFBsL3crcW1jY0tiTVNtZVdNejRoUHgweGlFTCtGOElHMlF4RzFO?=
- =?utf-8?B?STB5Z0Q4MnZNWHAvdWVyVG5YVXpQeWk3czhCOWhMM1JOWEFjdFNpd0RhWjNj?=
- =?utf-8?B?K2ROaDhFVk1QOUM2VUNlUWMrODFEL0V0ckZKWG04eEJYL3JiUHZ2cjNYWndN?=
- =?utf-8?B?M1lHdkxGM2lOd1FOU1BST3ZRUEVHRWM4Ukp6em9RVUs1SEhUbmwxTXlMVjI0?=
- =?utf-8?B?YmxmVzBMczV1U2U0T3NnUS9KM0JXZzNuOEFXVGo2L1lvMHZxYzVaSjI1S2dZ?=
- =?utf-8?B?SXFIa3pMaTF3Z2cxOFJhSjgyKzJCZkhFV0djanM3dk45Y2U2RXdENldJdXNK?=
- =?utf-8?B?eHVVYkUyQ1dKMEdzb3hTcFZDMzlGTXBiSkNvRzBuZHcrYWcrQkkwdi9MdmZK?=
- =?utf-8?B?aTdBUFV1cXJWTExnNDZWMVN0NWhyYkZFeE9QRzU1dm1qMFZmNGV0N3Qyd2dz?=
- =?utf-8?B?cFhhZ1BoS0cxRVdEemdRTis1MjRIcXJ6eWFHZTRZaEVpUE83UzN2OThZZUVh?=
- =?utf-8?B?NDBoSkNNWkZ0aTRBK3FvMFp4SVFUYjhwOUZZOEIyOUFkaGZKRUdqUlEwU0h6?=
- =?utf-8?B?enRPRXhJbkFxbjJoUmFoRGtHUnJ5djJBWWZSM0IwVlpBdFp1MU81ekNrMUZs?=
- =?utf-8?B?S2pDd0IwTzB5ZGp4MzVRcE90NzF5MUg4eEdibUpqT1psY2doeW9scmN1bWk2?=
- =?utf-8?B?cWdxUUYrdVhidEdhMXl5eG9mQ2tvZURtemVmZWkxbWRBNjZvVmhpUXVtdS9D?=
- =?utf-8?B?NTdPUzd3V3R2N3BEN0owUHk0VDRTMHFxQzlCQkVuQWdUTTM4dFUyS3loSWx3?=
- =?utf-8?Q?f7W8pKGGagwbHjieLCJvkwk=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M2RFWFJXU1pFYS9SQlYvVjdjSzhXZlNveHIxWkhrNEc1QmtXQ2NTNHUvSUxl?=
+ =?utf-8?B?cXo3SUV0Ti9PNTBoVkpYMlhuNDhQbk80YmdCRXhNNWZFKzYyQXlhZzZ1ZHVz?=
+ =?utf-8?B?VGR5OFpBdGtZSERqaXZnaE1DcFlsazB6ckQ2cjZhdW5rajNJaWJpWVlPc1BK?=
+ =?utf-8?B?d01GQzByYzZUU1hCZnM5SkROVkJzWE4xSXMybFh1TmJzd0Y5UzlTSm8xOTRM?=
+ =?utf-8?B?M1JjVVd5ZTYxL1FwYVFJcHcxSVpOdEdmQklYNGZGRi9RTURwQVRxYzgvYWtC?=
+ =?utf-8?B?RTkyb1lwQlJiV2hvNXMyT3RDckRxeE5WbUk1b1hjQkR1Zytjb2ZQeDBXdkxx?=
+ =?utf-8?B?TCtnR3BFcmpvWmo2aDJVaTUzQkpzVEVJUUcvL0VnWmszb0N1aFhqekZTT0Iy?=
+ =?utf-8?B?LzlkMFBDcUY5TmQ4MGIrYXBVRWFMQTRvOWlraG53V04xYWVDWlJSbU9aK3BQ?=
+ =?utf-8?B?M1ZBRjJHeGRqNmJpYTYyaFQwSjdGNUdxcVlUYmVXb0owMzYzaGtMR1dQNzNy?=
+ =?utf-8?B?djJkTTEzdWgycGZaZzVQVnlzT1Y1U1FCazhyeE9UMlgzQnF5aE9zbE9CMXNh?=
+ =?utf-8?B?T0V0a3M2MTF5Yi9JbWM0NmxJZTc5KzF5Uk55V2FtYUowUmNsTDFKaW1zRStO?=
+ =?utf-8?B?Rzc3a3I0VTZvbUJneWxQK2JJWEtKV3AxSHgzdmR6SFpnZjdpTGJQelRsZGFP?=
+ =?utf-8?B?bElKNkkveFlpUk5VWExla3hQLzB5QnFOOGlsbW5yMERhY2VVQnJZdmtXMjV5?=
+ =?utf-8?B?K3JGQ3hHV2RFNGFvWm13Sms2Tkp2ZW5rUWdlVGMvTFlVc2lHQmJSdnRBUEVy?=
+ =?utf-8?B?b1EvcTJPTjFLRStpQ3h1Y1RYYnhRWWZOcGEyWS9KTWlkWlBLRGZId1psTFNj?=
+ =?utf-8?B?NUc0TG5VU1FjYUY1U1dHRU90ZEdLVnM1N3RGYmVIUmlMUk1qZHk3cFQ1TmRN?=
+ =?utf-8?B?L3NnaWw3Y3BUMEd3dXYwS0hDRFNVcjRkZ1ZaQ0pDdG82dnpycHg1YmQvT2g0?=
+ =?utf-8?B?eWRBeTlCRXR6aHkwM1NlbGVUN3dscXozSXorNmFjUVFjVXJUYWkzbVZIeXpr?=
+ =?utf-8?B?Zmc1NjlDb29leFdUdUYrUS9Hc0hIYjFoUkJSUGl4KzRIa1F1a0pWVTBGN3I4?=
+ =?utf-8?B?dndUbFV0d0lGRk1zT242c3haSUVWNGpNK1Azdlo1TEVqTlcycWJjbFp2VCtP?=
+ =?utf-8?B?Y0ppMklVNzViczNhTEtzdVhDVHdNMUN1c09oZzd4cm1Sd0dxV01TdHBsL1Qy?=
+ =?utf-8?B?UEhvM3Y0UEQ2S2x3d1ZxaXZZaEtQN0hMekxDUEJ1eHRYMyt4RGduRW03VGQ5?=
+ =?utf-8?B?Zmd4MnNOdGJGclJNZ2xtUk5ucnlpc2VVMjRXNlBvR25rSFBYdUUxa1haQ1pB?=
+ =?utf-8?B?M2lPMjNJay96bjNXZXlISnprQXVUQjBLN3FiV01kdmhPWjVqTEFWWmdQdFk5?=
+ =?utf-8?B?ZmhHcGZaWFJnZDd2bDNINEYydWkrRzZlTktlV1ZFeXlYWFdHQ3J1emVvTGZx?=
+ =?utf-8?B?cS83dHNtT2FNb2pVYzVMai9iUFJPZmUyNGpITWZGQzBjcjJzZUQrbTFDQmsr?=
+ =?utf-8?B?NG4wME8ycXBraDBuU2h1MkJackdsem5OL3Z3SDQvVGpMbGxoaHF6dWRkTVNJ?=
+ =?utf-8?B?TlprR1RyQlgwVFkyK1pEcE9LMUVRaFp3OE82dVU3Rm16VTVlYURJdUk0bE42?=
+ =?utf-8?B?VGVMcmJaSGtORWZKdUpRcjhoSlZDbE0yOCt4K0VDWjBpVTB3SzM4NUpTZlp6?=
+ =?utf-8?B?Z2RxbFc0RTJqMVlCRWVSdHhTM3ZQSDZiMHFtalYwa2FUN3o3OW9rdGhFbERW?=
+ =?utf-8?B?c3Y5eU5hOWN2b2Y3Rk1XYXZEZUdTWHB2cXlEcjFPcDZxdHpBNDlVeGlQQzJC?=
+ =?utf-8?B?azBaZnNKeUhiSUl4ZERxVThETFRBQkZUTHJlaGZxVE92ZWQrYlVQT1ZHcjZT?=
+ =?utf-8?B?bkpOamg1aUFXZmpRNXp0WGt1TERQYk9nQmtnNVJBQUJvWnhuaW1JQ1JvQVor?=
+ =?utf-8?B?anlhK2pyN3dTRUc2ZUg1NHlmaUhOdEF3MGtPUHFkREh2K3UvMGhmVDFpUXpt?=
+ =?utf-8?B?c3N4RkJaRjJVWWd4NnF0eExmUkpYQU1ibHVJK2NGMGhFczdoK1R6eG11VUVr?=
+ =?utf-8?B?UVZxR29TZzMzNTlQb0NqVmFjSXJFTkdSQjQzbTVhWjY3ZlRHc1lzenpXanF5?=
+ =?utf-8?Q?aIcTtBO7uwVcggj24loVm80=3D?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 279ee45e-6b4a-4e8d-1415-08dd4087d199
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1641119b-be11-4461-10ef-08dd408af8c6
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2025 17:10:23.8984 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2025 17:32:58.1150 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4ASrPgsXDGgDTUGHQD9hbZri5kxw3tPtzhQwfaZQTB+fbMrdC5YyuyOc2V+kYbNvrOh9At3cdJvw0wZoOYbiIIIUVE9sjbFf7KdQxKv4MJA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9501
+X-MS-Exchange-CrossTenant-UserPrincipalName: +2iFvE3XI7P0DBZMLRRxhqmRBTY0p9U7V4APZceit3NuOKfjgdkG/6+tCzHhkHY99ZXE20axHJiI7YYr5FTbjNFYnpNME1tC/qGUfbVPeg0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6963
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -188,271 +192,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
-
-On 1/12/25 11:36 PM, Marek Vasut wrote:
-> Add support for starting TFA from U-Boot running in EL3 as part of
-> fitImage boot, so the user can start U-Boot in the highest privilege
-> level on the platform, bundle TFA, Linux, DT into a single fitImage
-> and boot such a bundle as a whole.
+On 1/29/25 6:00 PM, Marek Vasut wrote:
+> On 1/29/25 5:02 PM, Quentin Schulz wrote:
+>>> +void armv8_switch_to_el2_prep(u64 args, u64 mach_nr, u64 fdt_addr,
+>>> +                  u64 arg4, u64 entry_point, u64 es_flag)
+>>> +{
+>>> +    typedef void __noreturn (*image_entry_noargs_t)(void);
+>>> +    image_entry_noargs_t image_entry =
+>>> +        (image_entry_noargs_t)(void *)tfa_bl31_image_addr;
+>>> +    struct bl2_to_bl31_params_mem *blinfo =
+>>> +        (struct bl2_to_bl31_params_mem *)PARAMS_BASE;
+>>> +
+>>> +    /*
+>>> +     * Destination address in arch/arm/cpu/armv8/transition.S
+>>> +     * right past the first bl in armv8_switch_to_el2() to let
+>>> +     * the rest of U-Boot pre-Linux code run. The code does run
+>>> +     * without stack pointer!
+>>> +     */
+>>> +    const u64 ep = ((u64)(uintptr_t)&armv8_switch_to_el2) + 4;
+>>> +
+>>> +    /* If TFA BL31 was not part of the fitImage, do regular boot. */
+>>> +    if (!tfa_bl31_image_loaded)
+>>> +        return;
+>>> +
+>>> +    /*
+>>> +     * Set up kernel entry point and parameters:
+>>> +     * x0 is FDT address, x1..x3 must be 0
+>>> +     */
+>>> +    blinfo->bl33_ep_info.pc = ep;
+>>> +    blinfo->bl33_ep_info.args.arg0 = args;
+>>> +    blinfo->bl33_ep_info.args.arg1 = mach_nr;
+>>> +    blinfo->bl33_ep_info.args.arg2 = fdt_addr;
+>>> +    blinfo->bl33_ep_info.args.arg3 = arg4;
+>>> +    blinfo->bl33_ep_info.args.arg4 = entry_point;
+>>> +    blinfo->bl33_ep_info.args.arg5 = es_flag;
+>>> +    blinfo->bl33_image_info.image_base = ep;
+>>> +
+>>> +    /* Jump to TFA BL31 */
+>>> +    image_entry();
+>>> +}
+>>
+>> Shouldn't we have a weak implementation that SoC vendor can override 
+>> if they feel like it?
 > 
-> There are two main benefits of this approach. First is the ability
-> to run U-Boot in EL3, where it has unrestricted access to the entire
-> system and can act as a useful debug tool, as it was always intended
-> to be used. Second is the ability to easily and safely update of any
-> component in the fitImage, be it TFA, Linux or DT.
+> We do have one. Please do have a look at 1/3 in this series:
 > 
-> The boot process is similar to regular Linux with DT fitImage boot
-> process, except the TFA has to be bundled into the fitImage. For the
-> bundling instructions, see below. The TFA is started as a 'loadables'
-> with custom U_BOOT_FIT_LOADABLE_HANDLER and armv8_switch_to_el2_prep()
-> handling implemented in board code, and performing the handoff and
-> boot in case the TFA was loaded.
+> WEAK(armv8_switch_to_el2_prep)
 > 
-> The loadables handler is optional and meant to set up any sort of
-> handoff structures used by the TFA BL31 or perform any other setup
-> that is needed by the blob. The custom armv8_switch_to_el2_prep()
-> has to implement the jump to TFA BL31 with return to U-Boot just
-> before booting the Linux kernel.
+
+Well yes, and it's completely empty :)
+
+>> To me this feels like it could be much quicker adopted if we had some 
+>> default people could try out for their boards.
+>>
+>> We already have a generic spl_invoke_atf() so why not the same for 
+>> this mechanism? As far as I could tell, we get the load address of TEE 
+>> and U- Boot proper (bl32 and bl33) and pass it the FDT (or nothing if 
+>> SPL_ATF_NO_PLATFORM_PARAM symbol set).
 > 
-> Example fitImage image and configuration section:
+> Looking at spl_invoke_atf(), it _almost_ looks like something I could 
+> use, but from what I see there and here, the handoff structure layout is 
+> slightly different, it seems to be board specific.
 > 
-> /dts-v1/;
-> 
-> / {
->      description = "Linux kernel with FDT blob and TFA BL31";
-> 
->      images {
->          kernel-1 { ... };
->          fdt-1 { ... };
->          atf-1 {                  /* This is the TFA BL31 image */
->              description = "TFA BL31";
->              data = /incbin/("../build/plat/release/bl31.bin");
->              type = "tfa-bl31";
 
-This would need to be added to the ITS spec, c.f. 
-https://fitspec.osfw.foundation/
+I believe it's common to any board with SPL_ATF symbol enabled.
 
->              arch = "arm64";
->              os = "arm-trusted-firmware";
->              compression = "none";
->              load = <0x46400000>;
->              entry = <0x46400000>;
->          };
->      };
-> 
->      configurations {
->          default = "conf-1";
->          conf-1 {
->              description = "Boot Linux";
->              kernel = "kernel-1";
->              fdt = "fdt-1";
->              loadables = "atf-1"; /* This is the TFA BL31 loadable */
+That would be...
 
-We have some special stuff around TF-A (and TEE for that matter IIRC) on 
-Rockchip. The ELF is split into multiple binaries to load at different 
-addresses:
+$ git grep CONFIG_SPL_ATF= configs | cut -f1 -d ':' | sort
+configs/anbernic-rgxx3-rk3566_defconfig
+configs/bpi-r2-pro-rk3568_defconfig
+configs/cm3588-nas-rk3588_defconfig
+configs/coolpi-4b-rk3588s_defconfig
+configs/coolpi-cm5-evb-rk3588_defconfig
+configs/coolpi-cm5-genbook-rk3588_defconfig
+configs/evb-px30_defconfig
+configs/evb-px5_defconfig
+configs/evb-rk3328_defconfig
+configs/evb-rk3568_defconfig
+configs/evb-rk3588_defconfig
+configs/firefly-px30_defconfig
+configs/generic-rk3568_defconfig
+configs/generic-rk3588_defconfig
+configs/jaguar-rk3588_defconfig
+configs/khadas-edge2-rk3588s_defconfig
+configs/lubancat-2-rk3568_defconfig
+configs/nanopc-t6-rk3588_defconfig
+configs/nanopi-r2c-plus-rk3328_defconfig
+configs/nanopi-r2c-rk3328_defconfig
+configs/nanopi-r2s-plus-rk3328_defconfig
+configs/nanopi-r2s-rk3328_defconfig
+configs/nanopi-r3s-rk3566_defconfig
+configs/nanopi-r5c-rk3568_defconfig
+configs/nanopi-r5s-rk3568_defconfig
+configs/nanopi-r6c-rk3588s_defconfig
+configs/nanopi-r6s-rk3588s_defconfig
+configs/neu6a-io-rk3588_defconfig
+configs/neu6b-io-rk3588_defconfig
+configs/nova-rk3588s_defconfig
+configs/odroid-go2_defconfig
+configs/odroid-m1-rk3568_defconfig
+configs/odroid-m1s-rk3566_defconfig
+configs/odroid-m2-rk3588s_defconfig
+configs/orangepi-3b-rk3566_defconfig
+configs/orangepi-5-plus-rk3588_defconfig
+configs/orangepi-5-rk3588s_defconfig
+configs/orangepi-r1-plus-lts-rk3328_defconfig
+configs/orangepi-r1-plus-rk3328_defconfig
+configs/pinetab2-rk3566_defconfig
+configs/powkiddy-x55-rk3566_defconfig
+configs/px30-core-ctouch2-of10-px30_defconfig
+configs/px30-core-ctouch2-px30_defconfig
+configs/px30-core-edimm2.2-px30_defconfig
+configs/qnap-ts433-rk3568_defconfig
+configs/quartz64-a-rk3566_defconfig
+configs/quartz64-b-rk3566_defconfig
+configs/quartzpro64-rk3588_defconfig
+configs/radxa-cm3-io-rk3566_defconfig
+configs/radxa-e25-rk3568_defconfig
+configs/radxa-zero-3-rk3566_defconfig
+configs/ringneck-px30_defconfig
+configs/roc-cc-rk3328_defconfig
+configs/rock-3a-rk3568_defconfig
+configs/rock-3b-rk3568_defconfig
+configs/rock-3c-rk3566_defconfig
+configs/rock5a-rk3588s_defconfig
+configs/rock5b-rk3588_defconfig
+configs/rock-5c-rk3588s_defconfig
+configs/rock-5-itx-rk3588_defconfig
+configs/rock64-rk3328_defconfig
+configs/rock-pi-e-rk3328_defconfig
+configs/rock-pi-e-v3-rk3328_defconfig
+configs/sige7-rk3588_defconfig
+configs/socfpga_agilex5_defconfig
+configs/socfpga_agilex_atf_defconfig
+configs/socfpga_agilex_vab_defconfig
+configs/socfpga_n5x_atf_defconfig
+configs/socfpga_n5x_vab_defconfig
+configs/socfpga_stratix10_atf_defconfig
+configs/soquartz-blade-rk3566_defconfig
+configs/soquartz-cm4-rk3566_defconfig
+configs/soquartz-model-a-rk3566_defconfig
+configs/tiger-rk3588_defconfig
+configs/toybrick-rk3588_defconfig
+configs/turing-rk1-rk3588_defconfig
+configs/xilinx_zynqmp_kria_defconfig
+configs/xilinx_zynqmp_virt_defconfig
 
-rk3399:
-  Image 1 (atf-1)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 16:24:16 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    143438 Bytes = 140.08 KiB = 0.14 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0x00040000
-   Hash algo:    sha256
-   Hash value: 
-44285ea3a629cceee42a5fbfe838b6193e7c9a2f6643b0496dae617e2f7e2e8a
-  Image 2 (atf-2)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 16:24:16 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    8024 Bytes = 7.84 KiB = 0.01 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff3b0000
-   Hash algo:    sha256
-   Hash value: 
-7da49d2642204ded0a8eff093ae5c0e7300cfb18427d7a3e2f4e4cb227e4c2e9
-  Image 3 (atf-3)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 16:24:16 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    4096 Bytes = 4.00 KiB = 0.00 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff8c0000
-   Hash algo:    sha256
-   Hash value: 
-52c626d345ceeab61d8ede858a191834843f234cb4c2d2145546fd824e09c815
-  Image 4 (atf-4)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 16:24:16 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    4096 Bytes = 4.00 KiB = 0.00 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff8c1000
-   Hash algo:    sha256
-   Hash value: 
-50a7da66c26f838220d3befe84dd070988d238fa8abb34d1342815dae1083ec6
-  Image 5 (atf-5)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 16:24:16 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    0 Bytes = 0.00 KiB = 0.00 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff8c2000
-   Hash algo:    sha256
-   Hash value: 
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-  Image 6 (fdt-1)
-   Description:  fdt-rockchip/rk3399-puma-haikou
-   Created:      Wed Jan 29 16:24:16 2025
-   Type:         Flat Device Tree
-   Compression:  uncompressed
-   Data Size:    93264 Bytes = 91.08 KiB = 0.09 MiB
-   Architecture: Unknown Architecture
-   Hash algo:    sha256
-   Hash value: 
-9bcaaba8ea986042273421510acb76d5043bde550e463e80c2ee306239864f4c
-  Default Configuration: 'config-1'
-  Configuration 0 (config-1)
-   Description:  rockchip/rk3399-puma-haikou.dtb
-   Kernel:       unavailable
-   Firmware:     atf-1
-   FDT:          fdt-1
-   Loadables:    u-boot
-                 atf-2
-                 atf-3
-                 atf-4
-                 atf-5
+Essentially Rockchip boards + some socfpga and Xilinx ZynqMP boards.
 
-px30:
-Image 1 (atf-1)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 17:06:59 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    102526 Bytes = 100.12 KiB = 0.10 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0x00040000
-   Hash algo:    sha256
-   Hash value: 
-d3eb0776f5e1628eaaa38355992bc8a4cc8b12de565ebd6098897269e70345b3
-  Image 2 (atf-2)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 17:06:59 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    112 Bytes = 0.11 KiB = 0.00 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff020000
-   Hash algo:    sha256
-   Hash value: 
-19968b2d18472c485c02be72c609c2e9cc5dc4ea7993b86f462a788d109977d6
-  Image 3 (fdt-1)
-   Description:  fdt-rockchip/px30-ringneck-haikou
-   Created:      Wed Jan 29 17:06:59 2025
-   Type:         Flat Device Tree
-   Compression:  uncompressed
-   Data Size:    50032 Bytes = 48.86 KiB = 0.05 MiB
-   Architecture: Unknown Architecture
-   Hash algo:    sha256
-   Hash value: 
-f8416b75b2c0a16fd4599f47a4b24d763eb1e2dc0fdaac597510f5b907575c4d
-  Default Configuration: 'config-1'
-  Configuration 0 (config-1)
-   Description:  rockchip/px30-ringneck-haikou.dtb
-   Kernel:       unavailable
-   Firmware:     atf-1
-   FDT:          fdt-1
-   Loadables:    u-boot
-                 atf-2
-
-rk3588:
-  Image 1 (atf-1)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 17:08:54 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    204860 Bytes = 200.06 KiB = 0.20 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0x00040000
-   Hash algo:    sha256
-   Hash value: 
-7612223b82b911a56f044a2be63befd1e0d47f9579c50e5b59ca62f12361912d
-  Image 2 (atf-2)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 17:08:54 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    24576 Bytes = 24.00 KiB = 0.02 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0x000f0000
-   Hash algo:    sha256
-   Hash value: 
-b2af21b50499777f862cc9d8d6ca9707248694b739badbe875e3b6834ae77e0d
-  Image 3 (atf-3)
-   Description:  ARM Trusted Firmware
-   Created:      Wed Jan 29 17:08:54 2025
-   Type:         Firmware
-   Compression:  uncompressed
-   Data Size:    36864 Bytes = 36.00 KiB = 0.04 MiB
-   Architecture: AArch64
-   OS:           ARM Trusted Firmware
-   Load Address: 0xff100000
-   Hash algo:    sha256
-   Hash value: 
-70505bb764db81a665c8bba4953d804ed9eab580d5428888a4436121eff11c50
-  Image 4 (fdt-1)
-   Description:  fdt-rockchip/rk3588-tiger-haikou
-   Created:      Wed Jan 29 17:08:54 2025
-   Type:         Flat Device Tree
-   Compression:  uncompressed
-   Data Size:    115080 Bytes = 112.38 KiB = 0.11 MiB
-   Architecture: Unknown Architecture
-   Hash algo:    sha256
-   Hash value: 
-c78f6f09dacfaf504d95d8f7d65ab8e0150b9014f033c5aaca85e45448fe177d
-  Default Configuration: 'config-1'
-  Configuration 0 (config-1)
-   Description:  rockchip/rk3588-tiger-haikou.dtb
-   Kernel:       unavailable
-   Firmware:     atf-1
-   FDT:          fdt-1
-   Loadables:    u-boot
-                 atf-2
-                 atf-3
-
-I assume this would be supported as well and we would "just" need some 
-sort of SoC-specific implementation of what was added in patch 1 of this 
-series? Is this what you're recommending? We would then identify which 
-part of the binary it is based on the hardcoded load address instead of 
-reading the load address from the ITS. Or should we think of a way of 
-identifying them directly inside the ITS with some property for example?
-
-Otherwise a global remark on that feature is I believe it may increase 
-exposure to exploits. This means U-Boot will happily run anything 
-provided in EL3. E.g. imagine I provide a script in the ITS which U-Boot 
-loads and executes before loading the kernel, fdt and loadables. Let's 
-imagine this is sideloading (we even have some wget support now in 
-U-Boot so not too far fetched) some app to keep running in EL3 after the 
-kernel has booted. Or modify registers only accessible from EL3. Now you 
-better be even more careful about what you're booting from your 
-linux.itb. Is this a correct interpretation of the situation?
+... which I guess confirms what you've been saying, I don't feel like 
+it's generic enough to warrant making it the default, weak, implementation.
 
 Cheers,
 Quentin
