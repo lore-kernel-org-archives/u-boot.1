@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B31EAC0218D
-	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 12:42:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10171C0218D
+	for <u-boot@archiver.kernel.org>; Wed, 29 Jan 2025 12:42:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D666881875;
-	Wed, 29 Jan 2025 13:42:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 25DE081DFA;
+	Wed, 29 Jan 2025 13:42:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5797881727; Wed, 29 Jan 2025 13:42:33 +0100 (CET)
-Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
- [83.166.143.170])
+ id 0AB748197D; Wed, 29 Jan 2025 13:42:34 +0100 (CET)
+Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::bc0a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFDED8081A
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 13:42:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 047A48092B
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 13:42:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Yjhd242TGz3mJ;
- Wed, 29 Jan 2025 13:42:30 +0100 (CET)
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Yjhd3427pz2tc;
+ Wed, 29 Jan 2025 13:42:31 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Yjhd116MfzT3B; Wed, 29 Jan 2025 13:42:29 +0100 (CET)
+ id 4Yjhd250brzT5d; Wed, 29 Jan 2025 13:42:30 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH 00/14] pinctrl: rockchip: fix editing const struct +
- constify rockchip_pin_ctrl
-Date: Wed, 29 Jan 2025 13:42:19 +0100
-Message-Id: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
+Date: Wed, 29 Jan 2025 13:42:20 +0100
+Subject: [PATCH 01/14] pinctrl: rockchip: remove unused base_pin bank
+ member
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACsimmcC/x3MMQqAMAxA0atIZgNtVVCvIg4SowalLamIIN7d4
- viG/x9IrMIJ+uIB5UuSBJ9hywJom/zKKHM2OOMaY12HGminTSJG8XTqgRR8OnGprauM7aamrSH
- HUXmR+x8P4/t+LOqmNmgAAAA=
-X-Change-ID: 20250129-rockchip-pinctrl-const-f4123019a584
+Message-Id: <20250129-rockchip-pinctrl-const-v1-1-450ccdadfa7e@cherry.de>
+References: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
+In-Reply-To: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
@@ -65,70 +63,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While testing some WIP work done by Ilias Apalodimas on guaranteeing
-read-only memory areas truly are handled as read-only[1], my RK3588
-Tiger couldn't reach U-Boot CLI anymore because of the pinctrl driver
-modifying a const struct rockchip_pin_ctrl, triggering a CPU abort.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Instead of going the lazy way and unconstify it, let's fix the actual
-issue in play.
-
-The member modified in the const is only ever used for setting a member
-from another struct (not const that one). However this other member is
-never read! Therefore we can simply afford to remove it which means the
-sole reader of the member in the const is now gone, thus making it
-possible to remove the member from the const struct as well.
-
-This also means we should be able to constify the private data of the
-controller device for all Rockchip devices, instead of having those only
-for RK356x, RK3588 and RV1126. With the constify done on top of Ilias
-branch[1], my PX30 Ringneck, RK3399 Puma and RK3588 Tiger all reach
-U-Boot CLI. No further test (like booting into Linux userspace) was
-done.
-
-[1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/tree/fix_memory_permissions
+Each bank has a base_pin member that is only set in the core and never
+used, so it can be removed.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Quentin Schulz (14):
-      pinctrl: rockchip: remove unused base_pin bank member
-      pinctrl: rockchip: remove unused nr_pins controller member
-      pinctrl: rockchip: constify rockchip_pin_ctrl for PX30
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3036
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3066
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3128
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3188
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3228
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3288
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3308
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3328
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3368
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3399
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RV1108
+ drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 1 -
+ drivers/pinctrl/rockchip/pinctrl-rockchip.h      | 2 --
+ 2 files changed, 3 deletions(-)
 
- drivers/pinctrl/rockchip/pinctrl-px30.c          | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3036.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3066.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3128.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3188.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk322x.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3288.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3308.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3328.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3368.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3399.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3568.c        | 1 -
- drivers/pinctrl/rockchip/pinctrl-rk3588.c        | 1 -
- drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 2 --
- drivers/pinctrl/rockchip/pinctrl-rockchip.h      | 3 ---
- drivers/pinctrl/rockchip/pinctrl-rv1108.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rv1126.c        | 1 -
- 17 files changed, 12 insertions(+), 20 deletions(-)
----
-base-commit: a2b489b170f8382f746202c36616eaf2bc38fe86
-change-id: 20250129-rockchip-pinctrl-const-f4123019a584
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+index d449d07d32e74d1dec1978b1405bec94887908a2..7369fe12b961290742f6ba24fb32b768531f56f9 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+@@ -543,7 +543,6 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
+ 		int bank_pins = 0;
+ 
+ 		bank->priv = priv;
+-		bank->pin_base = ctrl->nr_pins;
+ 		ctrl->nr_pins += bank->nr_pins;
+ 
+ 		/* calculate iomux and drv offsets */
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip.h b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+index df7bc684d29fae4ec650d1e14fe88b35b03244ac..ebd008eede24af32c123634a57f50c0294e76842 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rockchip.h
++++ b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+@@ -262,7 +262,6 @@ struct rockchip_drv {
+ 
+ /**
+  * @priv: common pinctrl private basedata
+- * @pin_base: first pin number
+  * @nr_pins: number of pins in this bank
+  * @name: name of the bank
+  * @bank_num: number of the bank, to account for holes
+@@ -274,7 +273,6 @@ struct rockchip_drv {
+  */
+ struct rockchip_pin_bank {
+ 	struct rockchip_pinctrl_priv	*priv;
+-	u32				pin_base;
+ 	u8				nr_pins;
+ 	char				*name;
+ 	u8				bank_num;
 
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.48.1
 
