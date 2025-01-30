@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC82C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 23:02:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D87DC0218D
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 23:02:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D7E680EF6;
-	Fri, 31 Jan 2025 00:02:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5903980F1C;
+	Fri, 31 Jan 2025 00:02:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="atsWmQSE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xdvt33uZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8B7680F1A; Fri, 31 Jan 2025 00:02:26 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id C7B34805D7; Fri, 31 Jan 2025 00:02:27 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2A09805D7
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 00:02:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A32AB80F0E
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 00:02:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3f1c94936c5so662097b6e.1
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 15:02:24 -0800 (PST)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-71e2764aa46so878123a34.2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 15:02:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738278143; x=1738882943; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738278144; x=1738882944; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X1AezTEfUj++wb9EsLnlnGVNAwI7UoU4ZEUR2smrb4k=;
- b=atsWmQSE5c961y6XwZVNjuMWn7GBa1VvSXvJCI6Q9oGT7xbzs9iJGvnlRGvictPzCd
- 77Dwt7aDs54QglnTMB74VZePM8b0hBdbhsmDuyhBGD8BwLbTghO7fjf5DMtN0NuyYgTN
- aA474Y6OPiVNTG3ctinh4BWWWWTemJ8t5Pr5M=
+ bh=tX8PF5s38z0WMLNURrT58rcQ62DNfOI08+r+RqPFQLc=;
+ b=Xdvt33uZ1F8dGvUyZLbUMwh0SV3wGY1A9wCLnpRUrMZEWkKGmEF4/l0+RlzHXWk8Mc
+ YT8vxycAkuOeO0svwAtdar8gJG2iVQqzTAS5gTer57hH3hQG6uaMKH/KB2jwZfw3GBq+
+ kFzw0PHpR9crbldU6EynCIFatc64ARpJAAvdg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738278143; x=1738882943;
+ d=1e100.net; s=20230601; t=1738278144; x=1738882944;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X1AezTEfUj++wb9EsLnlnGVNAwI7UoU4ZEUR2smrb4k=;
- b=OvryxbkmVYkfB84TCzuCb5wjf0ZM8+TUr9Rq/LDAlr1wqSGcsAgWFdvei/CPJsVIgE
- vhljXpAnHXUn+UEKKJcOoOZLtN6tiPp44NkpF4OFJ2MWm69Zn9rw79khFgqEqXw9zjNJ
- uC6U8pNcqgT6cy4oWxrG56iNY1bmLPc6RbbO8kKdjoEtn/WFwdd+bSVGrvEzsLFxszRi
- LoBjzqRDVi36E7FH6m4t1bEfFNOmv7waEYkaLE4Ceu7oFkQ08rrtYlgO93JWlP3qSPey
- 4+tkNYa4j68HeqpmrjISHAlBvc5hqSHp5IG20EmuZv8lG3QdDhJp3dcfrChzFKbfSpzy
- rgpQ==
-X-Gm-Message-State: AOJu0YyFmcbk3Rrm966jtpw9AjfEoan79uju0OEUIag8HyKUhii7giQ+
- 8qitBOdY2L/jR0OBPzEzGm1D5cG90SR+tgbFx2YX09aiZLIMls5XrPl4llilb2k=
-X-Gm-Gg: ASbGncvOdrjHRjZBUteGUaMxywK/f3KGWLuun9nn60K04NFamYWO2TQfVnnhJz6svnj
- KLuNE5/eUrKC0kBE1LQ5toBF6DM/mUQe/Shs9afz8Sab9KAe2icdMQDELANSUEqvb3XL1nnSoeq
- UeVDfmDGLHd1VLeLP2ASG8DPr+OXbJi0TWfbUA4rYAdu8KNFQj4xbfFhVkK64sJY2l8Aiddo553
- BfEaSFl/R6HjeJqadaeMs1LIIbBvDsMRgVEWUIlb4s5jwQbfaSdZV+Jg2kFWLEA2x99Gijm/Jcp
- EVB6eNrWCp+yxw==
-X-Google-Smtp-Source: AGHT+IEj4Sz2a9PSThErLXjnAi1UsC0UvMD+buoKbOO0hW6JTfmSbjQtZT41NBhqpgziLjBKbksBMg==
-X-Received: by 2002:a05:6808:1913:b0:3eb:5547:b9b with SMTP id
- 5614622812f47-3f33c460ab5mr1280582b6e.16.1738278143405; 
- Thu, 30 Jan 2025 15:02:23 -0800 (PST)
+ bh=tX8PF5s38z0WMLNURrT58rcQ62DNfOI08+r+RqPFQLc=;
+ b=xROvX72Wsqoczucr8T046w4KMX5DTho8+WmeKWpFvj7kvIUl6vewme4F0PiKESStlN
+ QVadTzbMVUvk4F7SwiIKxW/FmfaVyBFCD50PoKJSKYdRqreddTfAq89RO+1GsCxQSxfS
+ hdNMbt6PK8L827XeZg5yePbPzLE9TfONV1XohlRaVuTmboeltUpQClaLsz5syEJxxThl
+ aJ/4NldfgX5S4cm1bZM+8x8/TXp+/b/nOPUBY93LkfbZsH/awdwpIozWS6MFxpbWoqmi
+ zittKrwAyTqGrbJ7cTpnh8jU/m8F0ta9Ir0WJh0xqdB6k65Rsc0iwJN/LYM1drNpPWnN
+ biVg==
+X-Gm-Message-State: AOJu0YyATIQlR3Ux5oJlraGCWgkW2v6gtf1bTDC0AJ+6765GsQZdNkSb
+ LsYnceoDVh2avVIYssesC/4WxvDV/eht7Ek2B+gK8eFPiCLTIQ/ozbgDA70kKMqUhZjCew+6WAp
+ z
+X-Gm-Gg: ASbGncsyz3dXjy4KLpIyW7WC1Xb3e3G8e2KZSbhsju39ZOvzoi1/pMvimcsXgKrN7OR
+ EurwAYwjftm3kQlpymte/0XgyTTkroJfQaX78AgikoyQ/+4KISDxh/OFwjFPyP7HDxh/K2iuale
+ QlljSu1grfB5pQ+6HBRUN3pkv5uxPOWssPDbKLldvgWcZze2o9tOUQZ/CuQqFwq93e/eyAfTdGt
+ rkH8xfNp09VAgvnq98V2NGuY2MWRhXyl274B3086+cXbtsDTBiPz3efWarFatYdxTcN/8a1fDVj
+ rR/tPHKLy7grNA==
+X-Google-Smtp-Source: AGHT+IGfvomVgCSIR3S80sw/pyeuEi2F4i3gTlyjkG5GdfaEvM7yeFOc/xyZLR77EegD2HebEz4Azw==
+X-Received: by 2002:a05:6830:4703:b0:71d:fa78:a5ee with SMTP id
+ 46e09a7af769-726567613c8mr5964402a34.11.1738278144402; 
+ Thu, 30 Jan 2025 15:02:24 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-726617cda0fsm564725a34.25.2025.01.30.15.02.21
+ 46e09a7af769-726617cda0fsm564725a34.25.2025.01.30.15.02.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 15:02:22 -0800 (PST)
+ Thu, 30 Jan 2025 15:02:23 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-In-Reply-To: <20250127145256.1133143-1-sjg@chromium.org>
-References: <20250127145256.1133143-1-sjg@chromium.org>
-Subject: Re: [PATCH v3] test/py: Add a report show test durations
-Message-Id: <173827814169.2499127.6050019195760524065.b4-ty@konsulko.com>
-Date: Thu, 30 Jan 2025 17:02:21 -0600
+To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+In-Reply-To: <cover.1737621362.git.weijie.gao@mediatek.com>
+References: <cover.1737621362.git.weijie.gao@mediatek.com>
+Subject: Re: [PATCH 0/5] Add support for MediaTek MT7987 SoC
+Message-Id: <173827814353.2499127.1843985702962899289.b4-ty@konsulko.com>
+Date: Thu, 30 Jan 2025 17:02:23 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,15 +94,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 Jan 2025 07:52:54 -0700, Simon Glass wrote:
+On Thu, 23 Jan 2025 16:54:42 +0800, Weijie Gao wrote:
 
-> Execution time varies widely with the existing tests. Provides a way to
-> produce a summary of the time taken for each test, along with a
-> histogram.
+> This patch series add support for MediaTek MT7987 SoC with its reference
+> boards and related drivers.
 > 
-> This is enabled with the --timing flag.
-> 
-> Enable it for sandbox in CI.
+> This patch series add basic boot support on eMMC/SD/SPI-NOR/SPI-NAND for these
+> boards. The clock, pinctrl drivers and the SoC initializaton code are also
+> included.
 > 
 > [...]
 
