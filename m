@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B571FC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 13:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C030C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 14:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD63A820DE;
-	Thu, 30 Jan 2025 14:49:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9EA5E80EC1;
+	Thu, 30 Jan 2025 15:07:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="t00J5iK+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LeR0fhYh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A67B820E3; Thu, 30 Jan 2025 14:49:50 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id F21A980EE5; Thu, 30 Jan 2025 15:07:31 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D17581F69
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:49:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9794880E9A
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 15:07:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4361f664af5so9533175e9.1
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 05:49:47 -0800 (PST)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-438a39e659cso5991935e9.2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 06:07:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738244987; x=1738849787;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=6snSkPbQN9OxUmYqBIC6l7YvB8N7kF3zyy/BwcOTSwI=;
- b=t00J5iK+ee5mOODRgkuwHNCPiZj+VF9EF5DBklXn2g6RTdoL98JJ7v03cY0PraxHK9
- LUeq4wEt1JzulR21ygyr6rKFt6wVfIr9I54tRvhEwuXv4hURcRCdNjG5jthhQqG31Uac
- PRimy4r6THBIWCtW7Zsx9w07CoRNjgFRnwY4YxPT0PSZv3EzzW7H6OkFSsdiM57UyqSQ
- 7sSV1fnPUcLURFfCaeqpEWRxfSKgY48PBKNttGLekN6AOhcfaIuvS9ocHvS3KFWwa09M
- hJsJsdGYfG+E+2H6Oov4BMRJG1XzSzbAC06NtkhfJYWh+kEajsnN5seqzfRsLjWvfJsj
- /kZg==
+ d=linaro.org; s=google; t=1738246049; x=1738850849; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=rpAkSrY21J1Ghjso3YWqK7zbBjyYYUoNHB8MRCPWOD0=;
+ b=LeR0fhYhgv6DrKml9apUdl2NvyUgXeFw5VV3+O3RR/L/nzL+uLXSdVObXZFK6nq3n0
+ +KuDFDTQjOxolwJBds4sce2hHMV6vkLfh9yn3ydZ5P+YA46RtkHUI+8gQtMbrxBYEGPg
+ KFDdTJ74kM5xw0qRjvctkvYcQsSJ5wzbxEhfRejwGjtxr9AMJW/T1OYX5DLqjfIX3Kki
+ pKfFQw8hxogrqkCDnQGAfdScsAU0S80oRK9NTAKyNlJZAufqdNGBfMZwi/lAbJDNAE6G
+ QpFjfiAi2zHQ9kG6gvJLfB/b190T2GeUczO2QA5tFtoRNOcGBFkDrePI0zcOyCKJnq5m
+ tQ7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738244987; x=1738849787;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6snSkPbQN9OxUmYqBIC6l7YvB8N7kF3zyy/BwcOTSwI=;
- b=pmU60Co5q+aqkJmRF2dp32QMGxMGoA1qlc4lDl/yILhjk4aXOJHagY+BH0tZRoaD13
- c5UuKLeUwqtfNx2V/asQJ3ipviPhjPXyTWyAnl8yldBfrjQcqbkV9GSSUiLeSFjGVizR
- oPxGz7B63duWXuvKTZyf+cw0DS4fQnY5Ppx1j10NZPtTJibtGaOszBhVHmnoBQ2Enjp6
- xjNyoNX+D4q7juTG08niIDhVCY0qbWUZczlGUwysdeHMcdaL5q/dJ7WS6uvF6QJOBRFY
- MJlR/AaCf5SbCnU6598MD6mz3ofxjEsSvS7ZyIOtCHCPp7FlPwCSj4L1zJ+nQ2eADJSc
- 4NwQ==
-X-Gm-Message-State: AOJu0Yyk9y/agOlETnGri8SfI0ZHP44YnC2EZYp9oACGfGaGc0VWdotq
- w7GysMrkwYoatv3RF/8S6teyOBcRjxVnwxPeQjYhINcMBiwFIuFyZ0zzgOCO1hY=
-X-Gm-Gg: ASbGnctFCRbxvICB3dCDB4SfrL2Z61rghXVzeTtv2a3O6nLelWQPpmVE75iFdmHxZNQ
- UVjqdTdT+PvZGRd7yqsDfTpmiccKH5mh6rGIRQL69BlA3idV8XTqRLxXtE5NM95szAxIZjPIEXb
- v5DHYEfmjHEVM3mbAoQPHJzadNbWZS3GQ9MoesfijDPxo+nYKIsnIkgUlSvYB6XtnYnNXAi/+/s
- 2voovB6elXRFqMEvxYygz+j+Z/uNSZaLZM8HyMpi2FZFj/lsEVZfV5E7nTbrDFlBJiDuoSRuQBO
- U7N91i3W7i7Q8x5CP1Y=
-X-Google-Smtp-Source: AGHT+IGExgAi2Q9i/D4RypBFyzUzgZIxLyq02jps9dwG7MjKpJDO7sExy3Rj8UT6z9gS3oYYib6pJw==
-X-Received: by 2002:a05:600c:46c9:b0:436:faeb:2a18 with SMTP id
- 5b1f17b1804b1-438dc3bb657mr62309795e9.6.1738244986931; 
- Thu, 30 Jan 2025 05:49:46 -0800 (PST)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438e245f4d1sm23788375e9.39.2025.01.30.05.49.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 05:49:46 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Federico Fuga via B4 Relay <devnull+fuga.studiofuga.com@kernel.org>, Tom
- Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Federico Fuga <fuga@studiofuga.com>
-Subject: Re: [PATCH] Fix fastboot handling of partitions when no slots are
- supported
-In-Reply-To: <20250128-fastboot_slot_fix-v1-1-1a4688936662@studiofuga.com>
-References: <20250128-fastboot_slot_fix-v1-1-1a4688936662@studiofuga.com>
-Date: Thu, 30 Jan 2025 14:49:43 +0100
-Message-ID: <87r04kfm2w.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1738246049; x=1738850849;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=rpAkSrY21J1Ghjso3YWqK7zbBjyYYUoNHB8MRCPWOD0=;
+ b=W9QMf6fi2aaXUHO0a+1Tuj+KOXDEzD/Zr0dAigTauDYZGHB/C23A4TIdi+8LKiXNA0
+ aqn0pP6grgsNP32ugiCm8zwxmiP2zyA2J7UIax7W090/hkz8XIXKqOQIeKz+beKKFhzI
+ JVNl4BicTP0YeBAjAunZkZPc/70Q7qailjR+s6zvXP7ZMY9tbIpy52jjBT5ofdM4/EFX
+ smNIdGHWG50iKrD85BSJ7Hn9CyNisqIT1g7sfVu0up4O61/XzRTdxhN2PdKPyjZ91bkZ
+ hp56fDpwhm1SnlbolOEbixj0A5iWxjgnCAQ6DHdIFgVs46EywoNnwAONP+jsKTQOffup
+ WY5g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYIHFLdt7yVBz7xWX4WrhoJiMEQz/Q0Jo2mzDms6qN1kmO9/lce2gzne7Ym9Q1B/p5x31CqPc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx20x9Bfr96Je023Gz+8jrk2reLeGFAZrWI4CuPL5lZJAXqpHfL
+ G+sIkJ3Thv74NNgNSmnrJ3863UkPQAyvxCDq+u3mw5t1iLYUhDTLfHfAw+Lq/zI=
+X-Gm-Gg: ASbGncu1iuS6xgkDk0xIwI2Bp12kKZ1/mFzrsV2Uc59G1eru4IvaxeGv07TDpm4zwE3
+ 44Pm8wPOrRo4cLBv6Kg/FkCwF4i6NuazxXr/DYG+JKiRdq1NbIYd/HQYGgKT/AhuH3aVMrPmumm
+ mwmvoRcLn94QITwdbmuxyxye5kEenU/vxHdN46hNz2v8XtbCuzQKR4K/AxaOBngNAZAg95yuj0z
+ OgD6OAnnWNrYoPzHdqcmfBLr09qOe8rIMgDW9PQi2fkDX+AeX18cXlnhhZQHbbu8scoOKpdWGQL
+ Bq1dwrEzBPTYVeIQGHqsLvs=
+X-Google-Smtp-Source: AGHT+IETNelhbix9i1a50Y2HfcNcp40tu1vgdv0VCs7RRFBgz8w9o88a15XrJ8vd96lAD1HzImdNJg==
+X-Received: by 2002:a05:600c:1d1e:b0:436:a3a3:a70c with SMTP id
+ 5b1f17b1804b1-438dc4214c3mr50052755e9.28.1738246048998; 
+ Thu, 30 Jan 2025 06:07:28 -0800 (PST)
+Received: from [192.168.0.24] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438e244f0d2sm25036315e9.30.2025.01.30.06.07.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Jan 2025 06:07:28 -0800 (PST)
+Message-ID: <d6746615-550b-4290-ae17-42728ae68f1c@linaro.org>
+Date: Thu, 30 Jan 2025 16:07:27 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/7] [U-Boot] spi: atmel-quadspi: Refresh and add classic
+ mode support
+To: Alexander Dahl <ada@thorsis.com>, Jagan Teki <jagan@amarulasolutions.com>
+Cc: Tom Rini <trini@konsulko.com>, =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?=
+ <csokas.bence@prolan.hu>, u-boot@lists.denx.de,
+ Yoshitaka Ikeda <ikeda@nskint.co.jp>
+References: <20250123121215.21001-1-ada@thorsis.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20250123121215.21001-1-ada@thorsis.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,139 +103,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Federico,
 
-Thank you for the patch.
 
-On mar., janv. 28, 2025 at 12:18, Federico Fuga via B4 Relay <devnull+fuga.studiofuga.com@kernel.org> wrote:
+On 1/23/25 14:12, Alexander Dahl wrote:
+> Hello everyone,
+> 
+> this patch series is for U-Boot, although Linux might be affected.
+> 
+> The quadspi controller on microchip (former atmel) sama5d2, sam9x60 and
+> other soc variants of the at91 family is usually used in hardware
+> accelerated spi-mem mode.  It also supports a classic mode for
+> interfacing all kinds of SPI peripherals like ADCs, IO expanders,
+> displays, you name it.  However the drivers in Linux and U-Boot did not
+> support that mode, yet.
+> 
+> While spi-mem subsystem interface is comparable between Linux and
+> U-Boot, SPI subsystem interface is rather different in Linux and U-Boot.
+> So there's no previously written Linux support just ported here.  I
+> tried that, but the simple implementation for U-Boot's .xfer() used here
+> does not work for Linux' .transfer_one() because of the OVRES flag set
+> all the time.  I guess a more sophisticated approach has to be taken in
+> Linux with interrupts, completions and/or dma?
+> 
+> According to commit 24c8ff4684c5 ("spi: Add Atmel QuadSPI driver")
+> message, the initial U-Boot variant of this driver was ported from Linux
+> v5.1-rc5 back then.  I hope it's okay to squash the fixes added to Linux
+> after that into patch 2 and 3 of this series?
+> 
+> Patch 4 and 5 come from my efforts to hack this feature into the Linux
+> driver.  (Not sure if those should be added to the Linux driver
+> anyways, even if nobody ever implements transfer_one() over there?)
+> 
+> Patch 5 is the actual work, very much inspired by the current U-Boot
+> driver atmel_spi for the generic SPI controllers on at91 family.
+> 
+> Patch 1 is copied from my other spi series for U-Boot, just added it
+> here for better build results.
+> 
+> Patch 6 is optional, because not portable towards Linux.
+> 
+> Tested on top of v2024.10, because v2025.01 won't build as debug
+> for sam9x60 as described in another thread.  But there are almost no
+> changes related to at91 socs, boards, and drivers in the last months
+> here, so it should be comparable.
+> 
+> Greets
+> Alex
+> 
+> (Cc-ing the contributors of the Linux fixes here.)
+> Cc: Tudor Ambarus <tudor.ambarus@microchip.com>
+> Cc: Yoshitaka Ikeda <ikeda@nskint.co.jp>
+> Cc: Csókás Bence <csokas.bence@prolan.hu>
+> 
+> Alexander Dahl (7):
+>   spi: atmel-quadspi: Depend on SPI_MEM
+>   spi: atmel-quadspi: Port collected fixes from Linux v5.10 and v5.15
+>   spi: atmel-quadspi: Avoid overwriting MR register settings
+>   spi: atmel-quadspi: Remove default mode setting at probe time
+>   spi: atmel-quadspi: Allow setting SMM to classic SPI mode
+>   spi: atmel-quadspi: Add support for classic SPI mode
+>   spi: atmel-quadspi: Improve probe debugging
+> 
+>  drivers/spi/Kconfig         |   2 +-
+>  drivers/spi/atmel-quadspi.c | 294 ++++++++++++++++++++++++++++--------
+>  2 files changed, 228 insertions(+), 68 deletions(-)
+> 
+> 
+> base-commit: 2eed5a1ff36217372e19f7513bd07077fc76718a
 
-> From: Federico Fuga <fuga@studiofuga.com>
->
-> The fastboot module has a bug that prevents some command to work
-> properly on devices that haven't an Android-like partition scheme, that
-> is, just one spl and one kernel partition, instead of the redundant
-> scheme with _a and _b slots.
->
-> This is the schema of our NAND storage (board is based on an AllWinner
-> A33 sunxi chip):
->
-> => mtdparts
->
-> device nand0 <1c03000.nand>, # parts = 4
->  #: name         size            net size        offset          mask_flags
->  0: spl          0x00020000      0x00020000      0x00000000      0
->  1: uboot        0x00100000      0x00100000      0x00020000      0
->  2: kernel_a     0x00400000      0x00400000      0x00120000      0
->  3: ubi          0x07ae0000      0x079e0000 (!)  0x00520000      0
->
-> active partition: nand0,0 - (spl) 0x00020000 @ 0x00000000
->
-> This happens when we try to erase the spl partition using fastboot:
->
-> $ fastboot erase spl
-> Erasing 'spl_a'               FAILED (remote: 'invalid NAND device')
-> fastboot: error: Command failed
->
-> The error occurs because getvars fails to handle the error returned by
-> nand layer when a partition cannot be found.
->
-> Indeed, getvar_get_part_info returns what is returned by
-> fastboot_nand_get_part_info (0 on success, 1 on failure) but it should
-> return -ENODEV or -EINVAL instead. Since the cause of failure is not
-> returned by the nand function, I decided to return -EINVAL to make it
-> simple.
->
-> Signed-off-by: Federico Fuga <fuga@studiofuga.com>
+Hello Alex,
 
-I could apply this version, finally :)
+I had a quick look over your patches, but it would require to get a
+review from SPI maintainers to apply these.
 
-b4 got a bit confused since it has been send as a v1 but using the
-following command worked for me:
+Eugen
 
-$ b4 shazam -s -l --check 20250128-fastboot_slot_fix-v1-1-1a4688936662@studiofuga.com -v1
-
-Now for the patch itself:
-
-Please use 'fastboot:' prefix as a commit title.
-Use '$ git log --oneline -- drivers/fastboot/' to see what other commits
-where using as a title.
-
-Some more comments below. Please make sure to answer this email to
-acknowledge/reject review feedback.
-Also, when sending a v2, please make sure to include a changelog.
-
-If you need help setting things up properly, let me know. I'm also
-reachable on IRC https://libera.chat/, channel #u-boot, my nickame is mkorpershoek.
-
-> ---
->  drivers/fastboot/fb_getvar.c | 5 ++++-
->  drivers/fastboot/fb_nand.c   | 2 +-
->  2 files changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-> index 9c2ce65a4e5bce0da6b18aa1b2818f7db556c528..816ed8a6213b5c1f0948a813c6f6a865a4b47ba8 100644
-> --- a/drivers/fastboot/fb_getvar.c
-> +++ b/drivers/fastboot/fb_getvar.c
-> @@ -121,8 +121,11 @@ static int getvar_get_part_info(const char *part_name, char *response,
->  			*size = disk_part.size * disk_part.blksz;
->  	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND)) {
->  		r = fastboot_nand_get_part_info(part_name, &part_info, response);
-> -		if (r >= 0 && size)
-> +		if (r == 0 && size) {
->  			*size = part_info->size;
-
-Maybe the patch is simpler this way, but I think that it would be better
-if fastboot_mmc_get_part_info() and fastboot_nand_get_part_info() would
-behave the same. The naming is pretty close already, and having
-different behaviours/return codes seems confusing to me.
-
-Is there a strong reason for not modifying fb_nand_lookup() so that it
-will return a negative error code?
-
-This way, we can keep the same logic in getvar_get_part_info()
-
-> +		} else {
-> +			r = -EINVAL;
-> +		}
->  	} else {
->  		fastboot_fail("this storage is not supported in bootloader", response);
->  		r = -ENODEV;
-> diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
-> index afc64fd5280717ae4041ed70268ccc01cfbb0496..9e2f7c01895785a4409eb67ea48abd02a6a6da26 100644
-> --- a/drivers/fastboot/fb_nand.c
-> +++ b/drivers/fastboot/fb_nand.c
-> @@ -151,7 +151,7 @@ static lbaint_t fb_nand_sparse_reserve(struct sparse_storage *info,
->   *
->   * @part_name: Named device to lookup
->   * @part_info: Pointer to returned part_info pointer
-> - * @response: Pointer to fastboot response buffer
-> + * @response: 0 on success, 1 otherwise
-
-Why has this been modified? @response is still a pointer to fastboot
-response buffer.
-
-If we wish to document the return code, use the Return: syntax:
-
-For example, here it would be:
-
-/**
- * fastboot_nand_get_part_info() - Lookup NAND partion by name
- *
- * @part_name: Named device to lookup
- * @part_info: Pointer to returned part_info pointer
- * @response: Pointer to fastboot response buffer
- *
- * Return: 0 on success, 1 otherwise
- */
-
->   */
->  int fastboot_nand_get_part_info(const char *part_name,
->  				struct part_info **part_info, char *response)
->
-> ---
-> base-commit: a517796cfa5d8f4ca2f0c11c78c24a08a102c047
-> change-id: 20250128-fastboot_slot_fix-69251576d9bb
->
-> Best regards,
-> -- 
-> Federico Fuga <fuga@studiofuga.com>
