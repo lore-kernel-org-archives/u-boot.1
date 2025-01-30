@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 829C0C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 17:08:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 436A0C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 18:40:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E882582139;
-	Thu, 30 Jan 2025 18:08:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 91A9A80EBA;
+	Thu, 30 Jan 2025 19:40:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nzwuI3D/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uPSXQwoB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54BB88213D; Thu, 30 Jan 2025 18:08:50 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 0B6A080EBD; Thu, 30 Jan 2025 19:40:14 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 273BB82114
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 18:08:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EF7F80EB2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 19:40:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3eb972dd8e5so548414b6e.2
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 09:08:48 -0800 (PST)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43625c4a50dso8580125e9.0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 10:40:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738256927; x=1738861727; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aR3ZR7LEk4Rs/lnaZiIZ1mEjJoEUcRshYatxGhWqpHc=;
- b=nzwuI3D/BAmM96KZlXiMaU4K+9QKrfAoqlILKICSolvQFYZ/pCTiUjkYL/dBkK8d5u
- 9zKgALMaEfQ7NPyStlEv/pHjDNbGTFgcO43qSBLFgZCwdgqkOgXdXZY879ONsqvU3HYd
- bhATnQQp58z/IRuTlZmg63KesLKTiBZlbgwrw=
+ d=linaro.org; s=google; t=1738262411; x=1738867211; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9YOAPh/RLnG4K2/cDs+mr51/PJYhdUQlpd39dbw7byM=;
+ b=uPSXQwoB5a1VvMsFb8nUmabKouLrAi1ZEKSaf1tI9eTeH1f/uIBFBzbYR9myIbsEc1
+ 6LwsVAm1V3dZaqYrkWhdVd6BgSDGQxAZq1wzj+jG/2QTIUZGdBUSxAvJlxdVMIha48EO
+ ufxKuBR4DVCK0J8hJs/QUINWs+UrRMljWRxx1mxdPnz+yiyCAMizRnbL7bO0bD8stWOm
+ cSAfAJnq7kTZLKZLCLUjO+0H+xIUTIJvNho99gKUjBE6hsdsQWlpTo/r98Ra0RnoBKUC
+ pOBVKEdT12aTzLw4FOV7PnQiiakL772lTIQ8Si5+VbASgbpT6VvsroDJoFqdgVecbeNC
+ WWfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738256927; x=1738861727;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aR3ZR7LEk4Rs/lnaZiIZ1mEjJoEUcRshYatxGhWqpHc=;
- b=jR2Znbans4kYjdIA1imbwxWe0VxktEgh7C4ihVWoWN8Wdtf1AC62ab6FbsTLblpcjJ
- JCTc8s8rwUthYfHx5lpqhGGnYlOEZ6nLqxUjVolDCHWSeDwF2HYqCMZADUIWrO/l2dvY
- 0lDlSQPEJOFaRte7sjBOWkFF9atBfssQMEKmIIfNonho8XfzgTGBa46Fhd7CAo5mUe7R
- Nvq8jADQRFdxRFJaZQX0FD9zDAHmhg37GMvecQNETOMHkPlr5GuGE/kELpKQK/dbhhmu
- 1AK9x9IBkiSKxOjm7loZrUMm0MYNl7rrCeUsZK6xtTpQ43w9zdOM3U8zV/aOYG9hD+QR
- aOnQ==
-X-Gm-Message-State: AOJu0YzflTwxiMQd9z+6xAzcTOQ4rFtrXbFRaw0Tsz23VPnAxEoU4o17
- x9QSsVD57DZ0EOtVBCxtjyOF2mEz4BKaOwW4zw+8W6bqFlYVlVilvILm3HmSQik=
-X-Gm-Gg: ASbGncvyE/eP0/Xcmr2BZf2mZRHhnNgdcwI63kDlqncJcO/XLSqbshmerM66Nmecpf+
- mJTvG5rr67FIzFTWCM3ygL+RuaH6C2+V8Er1hA9SpQz1LL6aS/pKvA7CKdkL9Pm8nhlOTOkB7n0
- 5+VC24PD/l8uyFd1mDS8BS1Bh4vaNPMR2OkPDg3+ntZyUtP1XSnv0k/k0dxYVUHv+Shs2Thk/D3
- QYB/MJJH+boS0JWmBMQ8bCO7MyK3fUMpB+Ci5YI31vrCmy+p+XQZdnqA7R/98uBEEE2ewSB/WxO
- tvfYr+lkjm9Tjn8=
-X-Google-Smtp-Source: AGHT+IE1lMC3fJTAbMKAxeWbqWXZVU2v1UmJ8ETGeuZxAsMD0gBKZ0UUuqZBhAjaE7NbBxOgEp9/Fw==
-X-Received: by 2002:a05:6808:3319:b0:3ec:d34f:4c73 with SMTP id
- 5614622812f47-3f323b40804mr5513980b6e.27.1738256926932; 
- Thu, 30 Jan 2025 09:08:46 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
+ d=1e100.net; s=20230601; t=1738262411; x=1738867211;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9YOAPh/RLnG4K2/cDs+mr51/PJYhdUQlpd39dbw7byM=;
+ b=rIH3zEikU8NE+K9JLGi2ODY52oHzRLkgPtcN/xnIw//SNaqtq9jYzmCPQVO05Nbjtl
+ 6wRWgMqKOLAMAX95qYHfOPJ56YWtyYZtRcWAcqlHlFX4mxlQ+kRf2Y5L4PmtpZG+GC4q
+ BF+UsAdaRGnMvgxYvgMnDZ6baPVayVce+0xRPlYV80mNCrsQYRPFqna/m/9mSpKDRKjn
+ 4+ILT1VtWZ/i48J5DhFiVjFpQfLurNHDV+hTZz0dZOt1Dp6hGWIc77SD1IxaummevAv2
+ jh7aVqoNcWEs1HPOrBE3tPcQky8rxhlkYJFHBREpK6bEpgsr26sRv6+vaNWMT3FN0d+b
+ lNNw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVD7AAVIc3hEvAiUCrGpxXXkYSAufcGNoN97TwXOiUHtpHgLrz+6cIpXAFOZzzMhfY3GYvHtfM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7efp63pmZ3Pw/v+7Ie73BjDjCf8bEEVLHdPu0z/UNJqVIYcYt
+ u+7SMrFO4neaJpnjSqX3t2SQo8VejW+0O1PlyNpt8vqLP7CGuKWichDeDz+WGXE=
+X-Gm-Gg: ASbGncszdI++WzGZGOotM/yx0nvHf6/5jVo+1XenukUjbZjfukoPDaSnZI0uT7aZTnU
+ QasDUW4EfqUOz8VUcwWFWx47+x9QGcddWA9qyCwb3hogxp9Vknx+3LjATeAFhMDTTSF1eYOHE6A
+ mtC81WN36Xb3qnELJydZ7xRAVLrMQlHN2Dmj1mvJ5lllMgMvL2ROZCWS1n0Gnavq9QIu/pD6AAc
+ SP2+V7GFXsOGOnq1T6iQygVqjRC6k5NMHcsTirPRFWJ3K/5N6uIVy4t+a05Tz9xX1E5Mk6TUqkH
+ ivRAgxpHCIDh5gUr31MiBJHokA==
+X-Google-Smtp-Source: AGHT+IEQcnpWQ3KGxCzDNTHohwDAfoiH4uI11TWjVyquEDtRFDeXp1TwuwJ/kl6mGreQTGMWqf2F+w==
+X-Received: by 2002:a05:600c:1c8c:b0:434:9936:c823 with SMTP id
+ 5b1f17b1804b1-438e561cbebmr21417525e9.18.1738262410961; 
+ Thu, 30 Jan 2025 10:40:10 -0800 (PST)
+Received: from [10.10.66.197] ([86.126.137.147])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f333523e75sm330874b6e.5.2025.01.30.09.08.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 09:08:46 -0800 (PST)
-Date: Thu, 30 Jan 2025 11:08:43 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Gary Bisson <bisson.gary@gmail.com>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH 15/19] vbe: Support providing a linker script
-Message-ID: <20250130170843.GK1233568@bill-the-cat>
-References: <20250126184333.4058848-1-sjg@chromium.org>
- <20250126184333.4058848-16-sjg@chromium.org>
+ 5b1f17b1804b1-438dcc263f0sm66918295e9.9.2025.01.30.10.40.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Jan 2025 10:40:10 -0800 (PST)
+Message-ID: <b0dcfeb2-ad47-4018-8788-8ae8dd8a7eef@linaro.org>
+Date: Thu, 30 Jan 2025 20:40:09 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="o2haNE9s5sLVvaeO"
-Content-Disposition: inline
-In-Reply-To: <20250126184333.4058848-16-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/7] ARM: dts: at91: sam9x60: Define pinctrl node with
+ its label
+To: Manikandan Muralidharan <manikandan.m@microchip.com>,
+ pbrobinson@gmail.com, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+References: <20250130035157.226995-1-manikandan.m@microchip.com>
+ <20250130035157.226995-3-manikandan.m@microchip.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20250130035157.226995-3-manikandan.m@microchip.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,51 +104,186 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---o2haNE9s5sLVvaeO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 26, 2025 at 11:43:25AM -0700, Simon Glass wrote:
+On 1/30/25 05:51, Manikandan Muralidharan wrote:
+> From: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+> 
+> Define the pinctrl nodes with its label to align with the Linux DT.
+> Without this change the pinmux nodes are grouped under an additional
+> 'pinctrl' child node which is not identified by the pinctrl driver
+> when the GPIO banks are made as child nodes of pinctrl node.
 
-> Allow a linker script to be provided for VPL as it is for other U-Boot
-> phases.
-[snip]
-> +config VPL_LDSCRIPT
-> +	string "Linker script for the VPL stage"
-> +	default "arch/arm/cpu/armv8/u-boot-spl.lds" if ARM64
-> +	default "arch/\$(ARCH)/cpu/u-boot-spl.lds"
-> +	help
-> +	  The TPL stage will usually require a different linker-script
-> +	  (as it runs from a different memory region) than the regular
-> +	  U-Boot stage.  Set this to the path of the linker-script to
-> +	  be used for TPL.
+This DT commit breaks the boards, and you are fixing the driver after ?
+
+Does changing the driver mean that this old DT stops working ? Or it
+still works?
+
+Eugen
+> 
+> Signed-off-by: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+> ---
+>  arch/arm/dts/sam9x60ek.dts | 142 +++++++++++++++++++------------------
+>  1 file changed, 73 insertions(+), 69 deletions(-)
+> 
+> diff --git a/arch/arm/dts/sam9x60ek.dts b/arch/arm/dts/sam9x60ek.dts
+> index 74016f5e288..3bf45c14e42 100644
+> --- a/arch/arm/dts/sam9x60ek.dts
+> +++ b/arch/arm/dts/sam9x60ek.dts
+> @@ -78,75 +78,6 @@
+>  					};
+>  				};
+>  			};
+> -
+> -			pinctrl {
+> -				nand {
+> -					pinctrl_nand_oe_we: nand-oe-we-0 {
+> -						atmel,pins =
+> -							<AT91_PIOD 0 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 1 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
+> -					};
+> -
+> -					pinctrl_nand_rb: nand-rb-0 {
+> -						atmel,pins =
+> -							<AT91_PIOD 5 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+> -					};
+> -
+> -					pinctrl_nand_cs: nand-cs-0 {
+> -						atmel,pins =
+> -							<AT91_PIOD 4 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+> -					};
+> -				};
+> -
+> -				ebi {
+> -					pinctrl_ebi_data_0_7: ebi-data-lsb-0 {
+> -						atmel,pins =
+> -							<AT91_PIOD 6 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 7 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 8 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 9 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 10 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 11 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 12 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 13 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
+> -					};
+> -
+> -					pinctrl_ebi_addr_nand: ebi-addr-0 {
+> -						atmel,pins =
+> -							<AT91_PIOD 2 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> -							 AT91_PIOD 3 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
+> -					};
+> -				};
+> -
+> -				pinctrl_qspi: qspi {
+> -					atmel,pins =
+> -						<AT91_PIOB 19 AT91_PERIPH_A AT91_PINCTRL_NONE
+> -						 AT91_PIOB 20 AT91_PERIPH_A AT91_PINCTRL_NONE
+> -						 AT91_PIOB 21 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
+> -						 AT91_PIOB 22 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
+> -						 AT91_PIOB 23 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
+> -						 AT91_PIOB 24 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
+> -				};
+> -
+> -				pinctrl_flx0: flx0_default {
+> -					atmel,pins =
+> -						<AT91_PIOA 0 AT91_PERIPH_A AT91_PINCTRL_NONE
+> -						 AT91_PIOA 1 AT91_PERIPH_A AT91_PINCTRL_NONE>;
+> -				};
+> -
+> -				pinctrl_onewire_tm_default: onewire_tm_default {
+> -					atmel,pins =
+> -						<AT91_PIOD 14 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+> -				};
+> -
+> -				usb1 {
+> -					pinctrl_usb_default: usb_default {
+> -						atmel,pins = <AT91_PIOD 15 AT91_PERIPH_GPIO AT91_PINCTRL_NONE
+> -								AT91_PIOD 16 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
+> -					};
+> -				};
+> -
+> -			};
+>  		};
+>  	};
+>  };
+> @@ -221,6 +152,79 @@
+>  	status = "okay";
+>  };
+>  
+> +&pinctrl {
+> +	/* shared pinctrl settings */
+> +	qspi {
+> +		pinctrl_qspi: qspi {
+> +			atmel,pins =
+> +				<AT91_PIOB 19 AT91_PERIPH_A AT91_PINCTRL_NONE
+> +				 AT91_PIOB 20 AT91_PERIPH_A AT91_PINCTRL_NONE
+> +				 AT91_PIOB 21 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
+> +				 AT91_PIOB 22 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
+> +				 AT91_PIOB 23 AT91_PERIPH_A AT91_PINCTRL_PULL_UP
+> +				 AT91_PIOB 24 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
+> +		};
+> +	};
 > +
-> +	  May be left empty to trigger the Makefile infrastructure to
-> +	  fall back to the linker-script used for the SPL stage.
+> +	nand {
+> +		pinctrl_nand_oe_we: nand-oe-we-0 {
+> +			atmel,pins =
+> +				<AT91_PIOD 0 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 1 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
+> +		};
+> +
+> +		pinctrl_nand_rb: nand-rb-0 {
+> +			atmel,pins =
+> +				<AT91_PIOD 5 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+> +		};
+> +
+> +		pinctrl_nand_cs: nand-cs-0 {
+> +			atmel,pins =
+> +				<AT91_PIOD 4 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+> +		};
+> +	};
+> +
+> +	ebi {
+> +		pinctrl_ebi_data_0_7: ebi-data-lsb-0 {
+> +			atmel,pins =
+> +				<AT91_PIOD 6 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 7 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 8 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 9 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 10 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 11 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 12 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 13 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
+> +		};
+> +
+> +		pinctrl_ebi_addr_nand: ebi-addr-0 {
+> +			atmel,pins =
+> +				<AT91_PIOD 2 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)
+> +				 AT91_PIOD 3 AT91_PERIPH_A (AT91_PINCTRL_NONE | AT91_PINCTRL_SLEWRATE_DIS)>;
+> +		};
+> +	};
+> +
+> +	flexcom {
+> +		pinctrl_flx0: flx0_default {
+> +			atmel,pins =
+> +				<AT91_PIOA 0 AT91_PERIPH_A AT91_PINCTRL_NONE
+> +				 AT91_PIOA 1 AT91_PERIPH_A AT91_PINCTRL_NONE>;
+> +		};
+> +	};
+> +
+> +	pinctrl_onewire_tm_default: onewire_tm_default {
+> +		atmel,pins =
+> +			<AT91_PIOD 14 AT91_PERIPH_GPIO AT91_PINCTRL_PULL_UP>;
+> +	};
+> +
+> +	usb1 {
+> +		pinctrl_usb_default: usb_default {
+> +			atmel,pins = <AT91_PIOD 15 AT91_PERIPH_GPIO AT91_PINCTRL_NONE
+> +				      AT91_PIOD 16 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
+> +		};
+> +	};
+> +};
+> +
+>  &usb1 {
+>  	num-ports = <3>;
+>  	atmel,vbus-gpio = <0
 
-
-This should say VPL not TPL in the help, yes?
-
---=20
-Tom
-
---o2haNE9s5sLVvaeO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmebshsACgkQFHw5/5Y0
-tyyKywv9EMT67XgWP0ezaUbMV8XQwVlSJXj47hh1iHWe0St2J5lD/IVnRpy0qB2b
-0+YMAC4pvccwbUVR76e53F8Dbg00D2250rzkIWUrhrcV5ZXuoUMpIi3gMKssS6nC
-9OaxjCXCIoF9/TL4qrdJElIyseUnsKwdphaAFGuLbdNLg+tBYrJJFs7Oly63lV86
-DKGSgN6xQA1TSi8NSRQCrZPYdXOxrZ6myD/9y5V6rTTqCVFG6JtnDZpHq+IvRdev
-duEAzUEyhRDVRsl1zxGWPoMCPKOBI2hT/l7NQ66xk8Wi4TaqQfzs+bo5fXoRxbzk
-RAJZPNO/lJ5KsyLibK6s3H0y8PbT1kc8PQ6N++zVKEtCC6TCnNh08+ZefUHe1Kzn
-1W1PfHKErOvkH+poaxBczIt8OcooCCA4JOS0y2xEiBiokVwRfohhyRAtcEzfPrXg
-VRggAfMQkZ8s4uLtNmEscK/Q8Cdmf216iF3lPCL2+gmifAx6EexF0rTUTTw9fAVz
-1cogoZiy
-=Eda9
------END PGP SIGNATURE-----
-
---o2haNE9s5sLVvaeO--
