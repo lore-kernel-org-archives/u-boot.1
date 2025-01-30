@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC011C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 23:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FE39C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 23:18:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FFCA80F44;
-	Fri, 31 Jan 2025 00:14:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CB989800D0;
+	Fri, 31 Jan 2025 00:18:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="XTIRxKPj";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="I5c9Ss1m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E413280F47; Fri, 31 Jan 2025 00:14:05 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ id 76C26805FF; Fri, 31 Jan 2025 00:18:55 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7969080F42
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 00:14:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C52F2800B3
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 00:18:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,37 +28,37 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1738278841;
- bh=jT/9Hmk3GViw62tvjWkgPhF+Ln6Ul4EwMi+MLs9LmUE=;
- b=XTIRxKPjaFZ0TDGqSNB5QEsie5OLTXfcRK0GaKdu/JbSKPqY1tdtnbVdWsmMAS819IG+dnNed
- GNLRVNQzU8HvI22p9BF1EkoTBYwxckgyp+GgG/0TlIsqSVxbmcd8Pk31KOKWEoRw4Zzs8xg6/le
- ZHCPdZggW+y9n6hE9j0wTY9fxNCeSSHQNEI6twnwmYN/p8fnvsMYnyQFzGVI/ocYZhcOKiv01f0
- gwjk2bNFPOV0uFPTiTYeuSvevOPmDT9sDDRjx6Iah23516rolbh1h9xUpNDOGCVdTkLShGOLZit
- jMIUjjkttM5L2SHN9pdut61xjbatJ4t7uqcGbIJQ8vLA==
-X-Forward-Email-ID: 679c07ad2d70e7e0588403ff
+ s=fe-e1b5cab7be; t=1738279130;
+ bh=xoYqJpAUfWy3AkelAzlAIQyqiTkTcDSi3l4eues+zRo=;
+ b=I5c9Ss1mGTcZ21YFzCLcLig3JW/bBHZYXm32XSVDayug/3WAABPdP077+dJRsVuk2ECPkhR7e
+ 4n+rEcQZs04n7NtRtLIzIftRAMIjFB0f6Flm73inHK8FGIbWkDNvUWBbypQWmQ/pEBZJV8w/Y0v
+ t5Urp5ZZJqjjwrfORaFjGe5/MzibczOcjTT+12UGB8YVBnqHAl7x+/qjjlNiF1OoXaV4TM/2nvb
+ 7bSKnbYz0gm6hIpoEQYMBR8DcUaPSTxSgRa553mCcnRO3P684PdoXqghfVTZ0tw6hK26IF4u+Oc
+ stBqdkKvOrnweW0J1cw2lMc2k1HkGO6QC68GZtQrHU1g==
+X-Forward-Email-ID: 679c08cf2d70e7e05884055c
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
+ 149.28.215.223
 X-Forward-Email-Version: 0.4.40
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <66cdbe3c-4318-4cbd-8430-c3f341b48ee4@kwiboo.se>
-Date: Fri, 31 Jan 2025 00:13:42 +0100
+Message-ID: <f1f00c34-fd85-4163-9cdb-e0dff845e83e@kwiboo.se>
+Date: Fri, 31 Jan 2025 00:18:32 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 15/20] ram: rockchip: Add rk3576 ddr driver support
+Subject: Re: [PATCH 13/20] clk: rockchip: Add rk3576 clk support
 To: Heiko Stuebner <heiko@sntech.de>
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
  lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
  joe.hershberger@ni.com, rfried.dev@gmail.com, quentin.schulz@cherry.de,
  detlev.casanova@collabora.com, u-boot@lists.denx.de,
- sebastian.reichel@collabora.com
+ sebastian.reichel@collabora.com, Elaine Zhang <zhangqing@rock-chips.com>
 References: <20241121142731.1202209-1-heiko@sntech.de>
- <20241121142731.1202209-16-heiko@sntech.de>
+ <20241121142731.1202209-14-heiko@sntech.de>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20241121142731.1202209-16-heiko@sntech.de>
+In-Reply-To: <20241121142731.1202209-14-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -80,117 +80,204 @@ X-Virus-Status: Clean
 Hi Heiko,
 
 On 2024-11-21 15:27, Heiko Stuebner wrote:
-> Add ddr driver for rk3576 to get the ram capacity.
+> From: Elaine Zhang <zhangqing@rock-chips.com>
 > 
+> Add clock driver support for Rockchip RK3576 SoC.
+> 
+> Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
+> [adapted to mainline u-boot]
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 > ---
->  drivers/ram/rockchip/Makefile       |  1 +
->  drivers/ram/rockchip/sdram_rk3576.c | 65 +++++++++++++++++++++++++++++
->  2 files changed, 66 insertions(+)
->  create mode 100644 drivers/ram/rockchip/sdram_rk3576.c
+>  .../include/asm/arch-rockchip/cru_rk3576.h    |  486 ++++
+>  drivers/clk/rockchip/Makefile                 |    1 +
+>  drivers/clk/rockchip/clk_rk3576.c             | 2517 +++++++++++++++++
+>  3 files changed, 3004 insertions(+)
+>  create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3576.h
+>  create mode 100644 drivers/clk/rockchip/clk_rk3576.c
 > 
-> diff --git a/drivers/ram/rockchip/Makefile b/drivers/ram/rockchip/Makefile
-> index 36dc0500dab..442fe73deb6 100644
-> --- a/drivers/ram/rockchip/Makefile
-> +++ b/drivers/ram/rockchip/Makefile
-> @@ -14,6 +14,7 @@ obj-$(CONFIG_ROCKCHIP_RK3308) = sdram_rk3308.o
->  obj-$(CONFIG_ROCKCHIP_RK3328) = sdram_rk3328.o sdram_pctl_px30.o sdram_phy_px30.o
->  obj-$(CONFIG_ROCKCHIP_RK3399) += sdram_rk3399.o
->  obj-$(CONFIG_ROCKCHIP_RK3568) += sdram_rk3568.o
-> +obj-$(CONFIG_ROCKCHIP_RK3576) += sdram_rk3576.o
->  obj-$(CONFIG_ROCKCHIP_RK3588) += sdram_rk3588.o
->  obj-$(CONFIG_ROCKCHIP_RV1126) += sdram_rv1126.o sdram_pctl_px30.o
->  obj-$(CONFIG_ROCKCHIP_SDRAM_COMMON) += sdram_common.o
-> diff --git a/drivers/ram/rockchip/sdram_rk3576.c b/drivers/ram/rockchip/sdram_rk3576.c
+> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3576.h b/arch/arm/include/asm/arch-rockchip/cru_rk3576.h
 > new file mode 100644
-> index 00000000000..fa4187a5860
+> index 00000000000..893d92ff5f7
 > --- /dev/null
-> +++ b/drivers/ram/rockchip/sdram_rk3576.c
-> @@ -0,0 +1,65 @@
-> +// SPDX-License-Identifier: GPL-2.0+
+> +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3576.h
+> @@ -0,0 +1,486 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
 > +/*
-> + * (C) Copyright 2024 Rockchip Electronics Co., Ltd.
+> + * Copyright (c) 2020 Rockchip Electronics Co. Ltd.
+> + * Author: Elaine Zhang <zhangqing@rock-chips.com>
 > + */
 > +
-> +#include <config.h>
-> +#include <dm.h>
-> +#include <ram.h>
-> +#include <syscon.h>
-> +#include <asm/arch-rockchip/clock.h>
-> +#include <asm/arch-rockchip/grf_rk3576.h>
-> +#include <asm/arch-rockchip/sdram.h>
+> +#ifndef _ASM_ARCH_CRU_RK3576_H
+> +#define _ASM_ARCH_CRU_RK3576_H
 > +
-> +struct dram_info {
-> +	struct ram_info info;
-> +	struct rk3576_pmu1grf *pmugrf;
+> +#define MHz		1000000
+> +#define KHz		1000
+> +#define OSC_HZ		(24 * MHz)
+> +
+> +#define CPU_PVTPLL_HZ	(1008 * MHz)
+> +#define LPLL_HZ		(816 * MHz)
+> +#define GPLL_HZ		(1188 * MHz)
+> +#define CPLL_HZ		(1000 * MHz)
+> +#define PPLL_HZ		(1100 * MHz)
+> +#define GMAC0_PTP_REFCLK_IN	(24 * MHz)
+> +#define GMAC1_PTP_REFCLK_IN	(24 * MHz)
+> +
+> +/* RK3576 pll id */
+> +enum rk3576_pll_id {
+> +	BPLL,
+> +	LPLL,
+> +	DPLL,
+> +	CPLL,
+> +	GPLL,
+> +	VPLL,
+> +	AUPLL,
+> +	SPLL,
+> +	PPLL,
+> +	PLL_COUNT,
 > +};
 > +
-> +static int rk3576_dmc_probe(struct udevice *dev)
+> +struct rk3576_clk_info {
+> +	unsigned long id;
+> +	char *name;
+> +	bool is_cru;
+> +};
+
+rk3576_clk_info is not used for anything and can be dropped.
+
+> +
+> +struct rk3576_clk_priv {
+> +	struct rk3576_cru *cru;
+> +	struct rk3576_grf *grf;
+
+This grf member is not used for anything in the clk driver and can be
+dropped.
+
+> +	ulong ppll_hz;
+> +	ulong gpll_hz;
+> +	ulong cpll_hz;
+> +	ulong vpll_hz;
+> +	ulong aupll_hz;
+> +	ulong spll_hz;
+> +	ulong lpll_hz;
+> +	ulong bpll_hz;
+> +	ulong armclk_hz;
+> +	ulong armclk_enter_hz;
+> +	ulong armclk_init_hz;
+> +	bool sync_kernel;
+> +	bool set_armclk_rate;
+> +};
+> +
+
+[snip]
+
+> diff --git a/drivers/clk/rockchip/Makefile b/drivers/clk/rockchip/Makefile
+> index 9e379cc2e3b..855bf318de7 100644
+> --- a/drivers/clk/rockchip/Makefile
+> +++ b/drivers/clk/rockchip/Makefile
+> @@ -16,6 +16,7 @@ obj-$(CONFIG_ROCKCHIP_RK3328) += clk_rk3328.o
+>  obj-$(CONFIG_ROCKCHIP_RK3368) += clk_rk3368.o
+>  obj-$(CONFIG_ROCKCHIP_RK3399) += clk_rk3399.o
+>  obj-$(CONFIG_ROCKCHIP_RK3568) += clk_rk3568.o
+> +obj-$(CONFIG_ROCKCHIP_RK3576) += clk_rk3576.o
+>  obj-$(CONFIG_ROCKCHIP_RK3588) += clk_rk3588.o
+>  obj-$(CONFIG_ROCKCHIP_RV1108) += clk_rv1108.o
+>  obj-$(CONFIG_ROCKCHIP_RV1126) += clk_rv1126.o
+> diff --git a/drivers/clk/rockchip/clk_rk3576.c b/drivers/clk/rockchip/clk_rk3576.c
+> new file mode 100644
+> index 00000000000..c11dd594a72
+> --- /dev/null
+> +++ b/drivers/clk/rockchip/clk_rk3576.c
+> @@ -0,0 +1,2517 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) 2021 Fuzhou Rockchip Electronics Co., Ltd
+> + * Author: Elaine Zhang <zhangqing@rock-chips.com>
+> + */
+> +
+
+[snip]
+
+> +
+> +static int rk3576_clk_probe(struct udevice *dev)
 > +{
-> +	struct dram_info *priv = dev_get_priv(dev);
+> +	struct rk3576_clk_priv *priv = dev_get_priv(dev);
+> +	int ret;
 > +
-> +	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+> +	priv->sync_kernel = false;
 > +
-> +	/*
-> +	 * On a 16GB board the DDR ATAG reports:
-> +	 * start 0x40000000, size 0x400000000
-> +	 * While the size value from the pmugrf below reports
-> +	 * pmugrf->osreg2: 0x400000000
-> +	 * pmugrf->osreg4:  0x10000000
-> +	 * So it seems only osreg2 is responsible for the ram size.
-> +	 */
-> +	priv->info.base = CFG_SYS_SDRAM_BASE;
-> +	priv->info.size =
-> +		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg[2]);
+> +#ifdef CONFIG_SPL_BUILD
+> +	/* relase presetn_bigcore_biu/cru/grf */
+> +	writel(0x1c001c00, 0x26010010);
+> +	/* set spll to normal mode */
+> +	writel(BITS_WITH_WMASK(2, 0x7U, 6),
+> +	       RK3576_SCRU_BASE + RK3576_PLL_CON(137));
+> +	writel(BITS_WITH_WMASK(1, 0x3U, 0),
+> +	       RK3576_SCRU_BASE + RK3576_MODE_CON0);
+> +	/* fix ppll\aupll\cpll */
+> +	writel(BITS_WITH_WMASK(2, 0x7U, 6),
+> +	       RK3576_CRU_BASE + RK3576_PMU_PLL_CON(129));
+> +	writel(BITS_WITH_WMASK(2, 0x7U, 6),
+> +	       RK3576_CRU_BASE + RK3576_PLL_CON(97));
+> +	writel(BITS_WITH_WMASK(2, 0x7U, 6),
+> +	       RK3576_CRU_BASE + RK3576_PLL_CON(105));
+> +	writel(BITS_WITH_WMASK(1, 0x3U, 6),
+> +	       RK3576_CRU_BASE + RK3576_MODE_CON0);
+> +	writel(BITS_WITH_WMASK(1, 0x3U, 8),
+> +	       RK3576_CRU_BASE + RK3576_MODE_CON0);
+> +	/* init cci */
+> +	writel(0xffff0000, RK3576_CRU_BASE + RK3576_CCI_CLKSEL_CON(4));
+> +	rockchip_pll_set_rate(&rk3576_pll_clks[BPLL], priv->cru,
+> +			      BPLL, LPLL_HZ);
+> +	if (!priv->armclk_enter_hz) {
+> +		ret = rockchip_pll_set_rate(&rk3576_pll_clks[LPLL], priv->cru,
+> +					    LPLL, LPLL_HZ);
+> +		priv->armclk_enter_hz =
+> +			rockchip_pll_get_rate(&rk3576_pll_clks[LPLL],
+> +					      priv->cru, LPLL);
+> +		priv->armclk_init_hz = priv->armclk_enter_hz;
+> +		rk_clrsetreg(&priv->cru->litclksel_con[0], CLK_LITCORE_DIV_MASK,
+> +			     0 << CLK_LITCORE_DIV_SHIFT);
+> +	}
+> +	/* init cci */
+> +	writel(0xffff20cb, RK3576_CRU_BASE + RK3576_CCI_CLKSEL_CON(4));
 > +
-> +	return 0;
-> +}
+> +	/* Change bigcore rm from 4 to 3 */
+> +	writel(0x001c000c, RK3576_BIGCORE_GRF_BASE + 0x3c);
+> +	writel(0x001c000c, RK3576_BIGCORE_GRF_BASE + 0x44);
+> +	writel(0x00020002, RK3576_BIGCORE_GRF_BASE + 0x38);
+> +	udelay(1);
+> +	writel(0x00020000, RK3576_BIGCORE_GRF_BASE + 0x38);
+> +	/* Change litcore rm from 4 to 3 */
+> +	writel(0x001c000c, RK3576_LITCORE_GRF_BASE + 0x3c);
+> +	writel(0x001c000c, RK3576_LITCORE_GRF_BASE + 0x44);
+> +	writel(0x00020002, RK3576_LITCORE_GRF_BASE + 0x38);
+> +	udelay(1);
+> +	writel(0x00020000, RK3576_LITCORE_GRF_BASE + 0x38);
+> +	/* Change cci rm form 4 to 3 */
+> +	writel(0x001c000c, RK3576_CCI_GRF_BASE + 0x54);
+> +#endif
 > +
-> +static int rk3576_dmc_get_info(struct udevice *dev, struct ram_info *info)
-> +{
-> +	struct dram_info *priv = dev_get_priv(dev);
-> +
-> +	*info = priv->info;
-> +
-> +	return 0;
-> +}
+> +	priv->grf = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+> +	if (IS_ERR(priv->grf))
+> +		return PTR_ERR(priv->grf);
 
-Both the probe and above get_info can be simplified into something like:
-
-#define PMU1GRF_BASE			0x26026000
-#define OS_REG2_REG			0x208
-
-static int rk3576_dmc_get_info(struct udevice *dev, struct ram_info *info)
-{
-	info->base = CFG_SYS_SDRAM_BASE;
-	info->size = rockchip_sdram_size(PMU1GRF_BASE + OS_REG2_REG);
-
-	return 0;
-}
-
-With above the grf_rk3576.h could also be dropped/removed.
-
-> +
-> +static struct ram_ops rk3576_dmc_ops = {
-> +	.get_info = rk3576_dmc_get_info,
-> +};
-> +
-> +static const struct udevice_id rk3576_dmc_ids[] = {
-> +	{ .compatible = "rockchip,rk3576-dmc" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(dmc_rk3576) = {
-> +	.name = "rockchip_rk3576_dmc",
-> +	.id = UCLASS_RAM,
-> +	.of_match = rk3576_dmc_ids,
-> +	.ops = &rk3576_dmc_ops,
-> +	.probe = rk3576_dmc_probe,
-> +	.priv_auto = sizeof(struct dram_info),
-
-With the probe function removed we can also remove the priv data.
-
-> +};
+This driver is not using grf, so this can be dropped and should also
+save a few ms of boot time.
 
 Regards,
 Jonas
+
+> +
+> +	rk3576_clk_init(priv);
+> +
+> +	/* Process 'assigned-{clocks/clock-parents/clock-rates}' properties */
+> +	ret = clk_set_defaults(dev, 1);
+> +	if (ret)
+> +		debug("%s clk_set_defaults failed %d\n", __func__, ret);
+> +	else
+> +		priv->sync_kernel = true;
+> +
+> +	return 0;
+> +}
+
+[snip]
