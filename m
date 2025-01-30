@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C05EC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 17:04:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E1FC0218F
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 17:04:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A41DF80EC1;
-	Thu, 30 Jan 2025 18:04:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 04BC18212B;
+	Thu, 30 Jan 2025 18:04:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Mova4ZFn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MO+3aN5w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C3C682128; Thu, 30 Jan 2025 18:04:13 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 7499682132; Thu, 30 Jan 2025 18:04:50 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0263B807A8
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 18:04:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C1E38212B
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 18:04:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3eb8db8ae9aso441859b6e.1
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 09:04:10 -0800 (PST)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-71deb3745easo221490a34.3
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 09:04:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738256650; x=1738861450; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738256687; x=1738861487; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RofXr7bsc1Ub88it2FH576I0qFSrMzuf2YY4dRgYriA=;
- b=Mova4ZFna/EKLiyWRd5C1aLZByT+BpsVfjHnD7j974b+HORvohlb1sTEl5AjGPEdk+
- i2Fskg2plVpVKZa6N8l+1Qlsfj3Lfts6FOc5v0t0JJwQiQ6Hu5VMpnE3Su+WktgG9I5f
- QDqhisweIJpHl/TEpDjm0ix2DVBqcmeLLUOys=
+ bh=7ZNx/lsrirFBYOgOBGdMH0uRNXwk9rvQP+VjFfpn7AU=;
+ b=MO+3aN5w4Lo6NV//+ViJOkhOmfMjbKOCb/AJJqHey0uN8R1WCo2jHGUxugVipUrDe0
+ WqvFsMnc5FpHHIdfxMGuglAi9zZLh2+22kTKQ+B2JW3iBZYI9Zqb4xSo86hA5TxXbTW6
+ yquzaBu2yjwVWUTIbq7yyHbpA5vbKPsOZ658E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738256650; x=1738861450;
+ d=1e100.net; s=20230601; t=1738256687; x=1738861487;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RofXr7bsc1Ub88it2FH576I0qFSrMzuf2YY4dRgYriA=;
- b=aBXsZngUBxFHYUx424zO0oB9HU7yewQRoiQN1e57BJbroIUuh9YfkZXtBnzaYGg5qg
- cLFLJpmO6Lg3gLu66DHW4m/3rQKM0IR2LGN8gc6y/wphZeovwWpmFPsO7sR1X/H1+lKP
- 7mjLlMIX3MdZPF//uaK5H7gkU3Wh3ZkamyoQZP6YuQnPaS+l5snuKbgh9yd/xjgBoWew
- Bgpdx5POIBnb7DDL0RNV+0cIJRu0fRL/1OQDI94x9I1fu+JlydGj/2Rn6zw7QSXI0gLe
- 4/qqxABEPZBpqbvugiMkeVSPEFAQEG2o1khdSMD/HDhMoKtWwZlDkiGAvglXczLEXXsd
- 9Kvw==
-X-Gm-Message-State: AOJu0YyfJ1fa4EBvf8xwsDhBURok+fS38/wH1glekRPlXy+wVPx5tHkd
- dX1UWheXzFO8mZUVQp1FhleE+VL3aPjI358VrGwW/Y/0d3bz0+b3c7ReYZwLHviHXVrsuBVXDzr
- s
-X-Gm-Gg: ASbGncvUr6Zonfk8DVcRxpuUflB3NMwvA7xMpIkeVfhyhn1DbNR/RJnYFSQY4T2LXGt
- GXn/pdOj/jZNxsteSSZ7ulvDcUpkjSEInVF6eY4Delfz+8SRvWqAh7SISDezqikS8rlqtnshBp8
- hdpj43202fs4TSVRSW43bg5GtQQa5hBgvXQ1ogupZNXb7vBTQfckjCf30hH/Pl0VStXawndTmbs
- r+pSXff8FqsgNLpg+aSGnfg2ZUGJOPaEcEGZ2sdHRZYmkD2p/0f7qtBpK325NW29tqYQYbXgUIA
- MMsRltWsco3QOaA=
-X-Google-Smtp-Source: AGHT+IEDH9S96N3AfQgPMPEGacEzwy5334tOy9BsOMz4reTsrn8LrRhyIFmx2ZJtb6ep8BA62U0a8A==
-X-Received: by 2002:a05:6808:1493:b0:3eb:63c9:fe87 with SMTP id
- 5614622812f47-3f323a470a1mr5235352b6e.16.1738256649671; 
- Thu, 30 Jan 2025 09:04:09 -0800 (PST)
+ bh=7ZNx/lsrirFBYOgOBGdMH0uRNXwk9rvQP+VjFfpn7AU=;
+ b=GGr44TrbH5p6gGQEOPI/2CgToq8d5/tcP1qDzlSVYKcxEizPzPueznU+ZMK+CtBwhv
+ p3YxKWwi9hNpaF0ayb1yQ9APQrvH0lizxwHrwe9+g4qx8EEkDtfyV5PRTJixJSKeDdmx
+ RrIaNNMc6G5zDMgOkSh+DQM/LrkmA1G1oUt+LbJRmj95Nl9c+/Uh9oaBG65qFyVK2Mcz
+ MJ6kUsPDdwauXL29HWJmgaPtEX6+m2aYWMKz4T9+EgvZ5+r6l8d8SXTXptxS0OCPswnx
+ elH1G3lgIe8QEAIkXzIpxwNo5v9OffB7G3yXTw0KAnrbw6pEaLqsVHtWdEbtZ8deP2Zj
+ YlMQ==
+X-Gm-Message-State: AOJu0YxtBOxfdn9Vpw+HFR/sGBUiMy6umfTWrbpN4apgP/X54SCxqgVm
+ 0wOc1t9+KHOeDg5V7L9Rwo6i3TQM9xthXFP9cwxW9hAJHy9xFAndk1z2Jfk4uAs=
+X-Gm-Gg: ASbGnct4PRRlez60sQl5dgPjyfenxYJwTMfovKMZjEbJA3Zprd6MUrEMgAJyX67N6ng
+ Qbg5BupYDDBujteIRc4wWsm9h8zi1zK9MhT2J0mKnq3wZASTTM+fDFKVxKTLgWEEcHTD+H6A+aE
+ nEIORs1GBXKSMTwcL7JzAUk220nJKBkOxmxmxBQdHMZYafP+MDBBlkN1LWz5OpeFZieQ/fG1Uie
+ Jtah2SnLI5kPVqzSxlhtlrGn/xT0JubD4NNJBsIUeNNpcpfKFi+1GJmenNoIlGQKJKObCUdcrP+
+ KYV+M/gNONRwcYI=
+X-Google-Smtp-Source: AGHT+IEnKMVxoehxSHGy7w2FG77VHIlyeqdpgfU3w4pMuZ3Ky2xsF8qPYeHKaOIG9lJuTRlR4SST3Q==
+X-Received: by 2002:a05:6830:6683:b0:71e:4ce2:4342 with SMTP id
+ 46e09a7af769-726568d91camr4616316a34.19.1738256686958; 
+ Thu, 30 Jan 2025 09:04:46 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f33368b80asm327072b6e.46.2025.01.30.09.04.07
+ 46e09a7af769-726617eb274sm395650a34.33.2025.01.30.09.04.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 09:04:08 -0800 (PST)
-Date: Thu, 30 Jan 2025 11:04:06 -0600
+ Thu, 30 Jan 2025 09:04:46 -0800 (PST)
+Date: Thu, 30 Jan 2025 11:04:43 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ferenc Fejes <fejes@inf.elte.hu>
-Cc: u-boot@lists.denx.de
-Subject: Re: u-boot in restricted environment: networking over serial
-Message-ID: <20250130170406.GF1233568@bill-the-cat>
-References: <4fcb9244e87d5bb4a53075775247cecde2f9e3fa.camel@inf.elte.hu>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Minkyu Kang <mk7.kang@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: Re: [PATCH 03/19] mmc: Allow controlling DM_MMC for VPL builds
+Message-ID: <20250130170443.GG1233568@bill-the-cat>
+References: <20250126184333.4058848-1-sjg@chromium.org>
+ <20250126184333.4058848-4-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8nDSc8F49DbRZZ9N"
+ protocol="application/pgp-signature"; boundary="uKozWq8dNkw/RTr1"
 Content-Disposition: inline
-In-Reply-To: <4fcb9244e87d5bb4a53075775247cecde2f9e3fa.camel@inf.elte.hu>
+In-Reply-To: <20250126184333.4058848-4-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,65 +101,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8nDSc8F49DbRZZ9N
+--uKozWq8dNkw/RTr1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 30, 2025 at 02:55:53PM +0100, Ferenc Fejes wrote:
+On Sun, Jan 26, 2025 at 11:43:13AM -0700, Simon Glass wrote:
 
-> Hi,
+> VPL may want to use driver model for MMC even if TPL does not. Update
+> the rule in this driver to support that.
 >=20
-> Is it possible to use the serial port for u-boot networking? For example,=
- given
-> a restricted environment where the FIT image is available with ethernet f=
-irmware
-> and drivers, so it is not possible to boot it with DHCP boot since there =
-is no
-> networking. Or simply the ethernet NIC has no u-boot driver at all. For s=
-uch
-> cases, I assume ymodem is recommended to download and boot the FIT image.
->=20
-> However, experimenting with different images and debugging, it would be m=
-ore
-> convenient if serial could be used as both data and console channel. Is t=
-his
-> possible?
->=20
-> A simple example:
-> 1. ppp on the host machine, with IP forward, NAT, etc.
-> 2. u-boot establish a ppp connection over serial to the host
-> 3. u-boot starts a netconsole session to the host
-> 4. user can use netconsole and wget to download images
->=20
-> I was thinking of PPP, but that's probably not supported by u-boot. Anyth=
-ing
-> similar with RNDIS and USB CDC ACM?
->=20
-> Thanks in advance for any hint!
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Typically we use x/y/zmodem for sending data over the serial port in
-U-Boot as no, we do not have networking support via serial port. Thanks.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---8nDSc8F49DbRZZ9N
+--uKozWq8dNkw/RTr1
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmebsQYACgkQFHw5/5Y0
-tyy6iAwAoTa7zT+HGpusS8NRIk4oJoHIZB8FfAGhZgE5Z/bbnxlSbPoSDmAB2WPO
-XfXizzyQonuPAMZcol1ZRb73M92klf/iepvsdlybxokQfqc/S0hrhsgU8xxuL3Zt
-ZezLtd1lv8Hc/HRel18eQ9hz97NX/NstysCvtn8SvF+Gim9HtfahfTeab7YZSu8S
-B5TodxcHEkicD1LwSysKrleCawgS3nj5KwRnuszMTHnDd38Ugd427c781AsxDj2q
-rhzbDFrYJimrHUppwWnx7a1Zxki8tJ974bVNzPyTfl8IyHPH5PSN7vN6Q0PuHypH
-GYyhkEkmNNmxMNGi5Vprvsy68T2NIuF0cun5vzpELdGSlJJNS/iLVXAXZ4ikSM2J
-F4GO07Fle7h6JVgwQg4Vh6bFYIPKh1Hpg/gzrwyO8xth1gZD0HWDzgHioAQqJPZw
-7tI3m8na+CIiD69wd3DYXKXkjotnc39TJLdLl0ef7reFaKYHvux1quDeUNemN0PR
-JALQ3+pC
-=CTGv
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmebsSsACgkQFHw5/5Y0
+tyzVswv+IllHTzRsfQM56A/wTxNKS5ep6G7lzwEYKnNhYzl+GdxSRmOepoyRxMwX
+x5ENWSj7kePAPc1zjZv9LqExSW9e56XExGbfrguZRDS7I+jtTAmKt85S4f9sBmEB
+wxWcTcT94D+sKtHihYBFACp7c37zyF+TE1gshk5dOLZNgSvkOh/YYh4AAemR9RVS
+fla1L36hmeov0yNhF4RGgwRm7a9P+rXH4CpSdotA/BzV4crnAJ8kbfM9LR+KHw4w
+GoFhMEV8HcDNlikuJWHIAsWxWFgCnCpLm1u3d71RS6FCPFGp3DBMCneiJiYwQTw4
+V+aKmUSYx7u+KrYCOSYiG4w2gio1O4R3jVrqT8YLp2gUoKGo8Cu952aPCEV3FsIP
+fHLDAHAxWwrSjBT9YUPFlJ7kILQTBa2tN34LexiephsuO5TplSv+pT8+Qyanh+oJ
+Bss9ex9scubeoDIqsrDkg3YCnVFRoR8ppuQLhrTLYcb1TQIdF6KkXRFj+pR9+RgP
+Yy7r1pXT
+=e0x4
 -----END PGP SIGNATURE-----
 
---8nDSc8F49DbRZZ9N--
+--uKozWq8dNkw/RTr1--
