@@ -4,94 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CACBC02190
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:35:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1EC9C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:37:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0537D801A0;
-	Thu, 30 Jan 2025 11:35:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C6CE820A1;
+	Thu, 30 Jan 2025 11:37:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yoxUlIrV";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1738233454;
+	bh=GE1CdFbtgzFBAAOfMKDHq/SJelFIbGMm9Ql2DYuORvA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=z/J54+xvllEYowKdmgLzd2Zme//xJtwCmw5eO4lENwlOYAmmZ5/uKN7Sj2xSc9sZC
+	 tO7orvKNYCJl9Kai6dR3ypUgL9nGY3PdoEkpGPhi3m8UR23MsrVyJMXoclFGd62pAC
+	 U3j7/SpXvqzS92XYdBwEqpTZW584c02+nHbRF7APWA6OGqP1h1vsyd3SYH9IAfHMD4
+	 fJZ310K6erKaqqwrNWWkMZdDcvVO/xe8p5xQdecN/w8zdF6BJDqpFPgEG5NvJuyIsl
+	 daZDb5iLV5E1OiSMyhsyGVr6OECsEluyQuj81mX5TWQOF1mxBO7G7V5YjfjG5V8qGN
+	 lkvtV8MxJc9Xw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97C8C807C0; Thu, 30 Jan 2025 11:35:55 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2AB6F820A2; Thu, 30 Jan 2025 11:37:33 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E0E480137
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:35:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 347BA801A0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:37:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-e460717039fso983006276.0
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:35:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738233352; x=1738838152; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z+M/ZNbRv/+ZgaN2DKPiC4IWNLwDxHacY1oxv5IBPF0=;
- b=yoxUlIrVTaOeChwPt8ljtFlBxYasfC3+PMcIx2atk1VT7+dAOdJKOKHy/CHxu8CHHA
- M+h3f12yT2sSrM2ng5mn9sNqMnY/jkhwPgXO0rb6kokUv5Iqg6Mqlr5LBFSqtvzzOjKA
- TqwUu8UlyIi1cwrfzaptTqkZHZuHL4c9RLhsFFl+v2DuS6M6L6v/9CDkc/wf91spUyFd
- pNW3PvXckmZjUAFi/GozD4TNoq43GpQs3JBzhb/u5RkZxFfb975dN5Tvy2b20HvT6RuS
- KqtSiSwA7wb5R7mtpvLchtNfCQGt+PPsPXnCaYWQSn4oO91+XIy3K/nWe3pIG1e6Mtvp
- SUcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738233352; x=1738838152;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z+M/ZNbRv/+ZgaN2DKPiC4IWNLwDxHacY1oxv5IBPF0=;
- b=cz7UD7oRBfQMcI2TGYkAyX4XoxeRHpFPHKfeW9fv71TBpa8fz0cqUtA5DavGEc14az
- e8+oqqwUKjisolulx+JjL4Cl6KJvFbbEGDwjWi4n5WZ0pl2ohZCIRtWEKuRUYBr3y+xI
- J46I9w0mm0T1+3m2rFED2cUk79risVXU1IA+ggPWL7Y7IaQSz3BivL1m/MwhY76VoSpW
- Nh+8NrtcEHTZ8bEKxZS9I7Tn6Kvr+pabE5jzGGNN0WC2aqEekNwwwZ0n4tmWAq32bGXg
- YV/XoB3fi42ZODLeCgbFLxFrh3kNuaMMfEK/r8FUABM0hMr3fZQcireXyZRmhl28hezI
- loKw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVekYWb/y+0rGUbDSklBZMhEFkyLrb7jCDY+fN2goMi8cOtxX2EmkGV3UsiaMcpi2Z2GN+8Ic8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsRVuIug2oOYgKGfT9UlngOCo0ZTT8UTAoTAjqhTHppg4Z9Xru
- 6M+iZF3Y+NkfvQVQaUvMn/d7RtTADuXxADSbXSUl1OsugBlh1CuFAjcYv11VUrn/IESdWtjS8gV
- sTdAwBeW2UfCFICVp+mLKiTcCY+nPTfUZMymjlQ==
-X-Gm-Gg: ASbGncuv42JF/jjCf8VhBaP4avqCP3YuLvYmTgb89vRUYN2Rvw6p4806hExm2iLJ4DJ
- bRP64S6oyGLGu3IGOVQ0lsDnKAcMbToN/KcwrPSis0lIxuSOjQGXhX/rdSP39bGA8gvITdUGC
-X-Google-Smtp-Source: AGHT+IEegDwaMNQSMVJcTOrTGRHecbAHgTjgjUQCvNw6YWso5C0ZvPkn9CQ1PiXBVr/UwUuU4/t4HCjYwY2ih+00Ln4=
-X-Received: by 2002:a05:6902:1582:b0:e54:bc9f:a7fe with SMTP id
- 3f1490d57ef6-e58a4ac68afmr5693747276.20.1738233351814; Thu, 30 Jan 2025
- 02:35:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="KD9akzhN"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 4BDED10382D0A; Thu, 30 Jan 2025 11:37:29 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1738233450;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GE1CdFbtgzFBAAOfMKDHq/SJelFIbGMm9Ql2DYuORvA=;
+ b=KD9akzhN1S3hUZUKGWbQQ/Mw9jUwPIHWDZak2FaKn/tmGTHzwFihTbGihUm9p50UkNkj0O
+ PTVG9fCEN2F46uS4s4Zk2v0YqApvfq2wjxhb77baTo5XAf0FJc0YDiCnR6yXn6gG58Qy+x
+ f1tU3TjBOwTTOrLRw4gEwDsiI29RAanVJ0kdCbb5oXW+s3lDgzcUcrHsPKmhjCx6RqhuXf
+ 4GZqazKXmpf2Rfjcr3grfzUYyWzNMxzSKGH40b/QNnw+qbYiqZfRiuTKsuPP7F1tSrMet6
+ Ut3b0vsMuPvF0k26ie2IHS7hALlONIZsdQCQJGwpdbJvQk2xzTcJp33s6lMvEw==
+Message-ID: <0cd7e315-b15a-4e0f-848e-75da3f80887a@denx.de>
+Date: Thu, 30 Jan 2025 11:36:32 +0100
 MIME-Version: 1.0
-References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <20250130072100.27297-2-ilias.apalodimas@linaro.org>
- <bc481af0-64f1-47f4-af19-1aba64c2ae6c@gmx.de>
-In-Reply-To: <bc481af0-64f1-47f4-af19-1aba64c2ae6c@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 30 Jan 2025 12:35:16 +0200
-X-Gm-Features: AWEUYZmqJ9Eo90_UJA-rspWaXOTXBmhpb1s49SiXYGcmaH83uGr_Iu5lxKdN9p4
-Message-ID: <CAC_iWjKSFq-hhwzoxw9XMXj92fpmy1uz_J-kdqvYx0Ju6HcUMg@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/4] meminfo: add memory details for armv8
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, 
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Michal Simek <michal.simek@amd.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, 
- maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] bootcount: zynqmp: Extend ZynqMP specific bootcount
+ support
+To: hs@denx.de, u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
+ Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+References: <20250130013726.337914-1-marex@denx.de>
+ <4f7e2e18-57bb-f7e2-1202-663240668ef1@denx.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <4f7e2e18-57bb-f7e2-1202-663240668ef1@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,146 +83,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI Heinrich
+On 1/30/25 6:24 AM, Heiko Schocher wrote:
+> Hello Marek,
+> 
+> On 30.01.25 02:37, Marek Vasut wrote:
+>> The PGGS area contains four registers, each of which can hold up to
+>> 32bit of data. Extend the boot counter to support storing boot count
+>> in either of the four registers with arbitrary mask to avoid limiting
+>> the boot counter only to the PGGS register 2 LSByte.
+>>
+>> Drop U_BOOT_DRVINFO() as that would instantiate the boot counter even
+>> if there is no DT node associated with it, that is undesired behavior.
+>>
+>> The boot counter configuration is implemented using three new DT 
+>> properties:
+>> reg - PGGS register address, fallback to PGGS 2 at 0xffd80058
+>> u-boot,bootcount-reg-mask - Register mask, applied on PGGS register
+>> u-boot,bootcount-mask - Boot counter mask, applied on boot counter
+>> u-boot,bootcount-magic - Boot counter magic, applied on boot counter
+>>
+>> Example configuration of 16bit boot counter with 0xb0010000 magic in 
+>> PGGS0:
+>>
+>> &amba {
+>>     bootcount@0xffd80050 {
+>>         compatible = "u-boot,bootcount-zynqmp";
+>>         reg = <0 0xffd80050 0 0x4>;
+>>         u-boot,bootcount-magic = <0xb0010000>;
+>>         u-boot,bootcount-mask = <0xffff>;
+>>         u-boot,bootcount-reg-mask = <0xffffffff>;
+>>     };
+>> };
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Heiko Schocher <hs@denx.de>
+>> Cc: Michal Simek <michal.simek@amd.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>>   drivers/bootcount/bootcount_zynqmp.c | 79 +++++++++++++++++++++++++---
+>>   1 file changed, 71 insertions(+), 8 deletions(-)
+> 
+> Nitpick: Should there not be a change in a file where the new properties
+> and the compatible entry is documented?
 
-On Thu, 30 Jan 2025 at 12:01, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 1/30/25 07:20, Ilias Apalodimas wrote:
-> > Upcoming patches are mapping memory with RO, RW^X etc permsissions.
-> > Fix the meminfo command to display them properly
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >   arch/arm/cpu/armv8/cache_v8.c    | 18 +++++++++++++++++-
-> >   arch/arm/include/asm/armv8/mmu.h |  2 ++
-> >   cmd/meminfo.c                    |  5 +++++
-> >   3 files changed, 24 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> > index 5d6953ffedd1..a4ca56c8ed42 100644
-> > --- a/arch/arm/cpu/armv8/cache_v8.c
-> > +++ b/arch/arm/cpu/armv8/cache_v8.c
-> > @@ -421,7 +421,7 @@ static int count_ranges(void)
-> >       return count;
-> >   }
-> >
-> > -#define ALL_ATTRS (3 << 8 | PMD_ATTRINDX_MASK)
-> > +#define ALL_ATTRS (3 << 8 | PMD_ATTRMASK)
-> >   #define PTE_IS_TABLE(pte, level) (pte_type(&(pte)) == PTE_TYPE_TABLE && (level) < 3)
-> >
-> >   enum walker_state {
-> > @@ -568,6 +568,17 @@ static void pretty_print_table_attrs(u64 pte)
-> >   static void pretty_print_block_attrs(u64 pte)
-> >   {
-> >       u64 attrs = pte & PMD_ATTRINDX_MASK;
-> > +     u64 perm_attrs = pte & PMD_ATTRMASK;
->
-> The variable perm_attrs is not needed. You could use pte directly.
->
-> > +
-> > +     if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK_UXN) &&
-> > +         perm_attrs & PTE_BLOCK_RO)
-> > +             printf("%-5s", " | RO");
-> > +     else if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK_UXN))
-> > +             printf("%-5s", " | RW");
-> > +     else if (perm_attrs & PTE_BLOCK_RO)
-> > +             printf("%-5s", " | RX");
-> > +     else
-> > +             printf("%-5s", " | RWX");
->
-> The string has 6 characters. "%-5s" does not match!
+Do we have one ? I don't see one with git grep, but I can write one.
 
-Ah thanks! That's the misalignment i was chasing
-
-> As the string length is known using a length identifier is superfluous.
->
-> It would be helpful to add descriptions to the flags in
-> arch/arm/include/asm/armv8/mmu.h.
->
-> https://documentation-service.arm.com/static/5efa1d23dbdee951c1ccdec5
-> describes:
->
-> "The Unprivileged Execute Never (UXN) and Privileged Execute Never (PXN)
-> attributes can be set separately. This is used to prevent, for example,
-> application code running with kernel privilege, or attempts to execute
-> kernel code while in an unprivileged state."
->
-> Shouldn't we show the values of UXN and PXN separately?
-
-I had that on my initial patches. But then I decided it's too Arm
-specific to print it.
-I was hoping more archs would fix that so I preferred RO, RW, RX since
-it's arch agnosticI don't mind re-adding it.
-
-Thanks for taking a look!
-
-Cheers
-/Ilias
->
-> E.g:
->
-> printf("%s%s%s\",
->         pte & PTE_BLOCK_RO  ? " | RO " : "",
->         pte & PTE_BLOCK_PXN ? " | PXN" : "",
->         pte & PTE_BLOCK_UXN ? " | UXN" : "");
->
-> Best regards
->
-> Heinrich
->
-> >
-> >       switch (attrs) {
-> >       case PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE):
-> > @@ -1112,3 +1123,8 @@ void __weak enable_caches(void)
-> >       icache_enable();
-> >       dcache_enable();
-> >   }
-> > +
-> > +void arch_dump_mem_attrs(void)
-> > +{
-> > +     dump_pagetable(gd->arch.tlb_addr, get_tcr(NULL, NULL));
-> > +}
-> > diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-> > index 0ab681c893d3..6af8cd111a44 100644
-> > --- a/arch/arm/include/asm/armv8/mmu.h
-> > +++ b/arch/arm/include/asm/armv8/mmu.h
-> > @@ -66,6 +66,7 @@
-> >   #define PTE_BLOCK_NG                (1 << 11)
-> >   #define PTE_BLOCK_PXN               (UL(1) << 53)
-> >   #define PTE_BLOCK_UXN               (UL(1) << 54)
-> > +#define PTE_BLOCK_RO            (UL(1) << 7)
-> >
-> >   /*
-> >    * AttrIndx[2:0]
-> > @@ -75,6 +76,7 @@
-> >   #define PMD_ATTRMASK                (PTE_BLOCK_PXN          | \
-> >                                PTE_BLOCK_UXN          | \
-> >                                PMD_ATTRINDX_MASK      | \
-> > +                              PTE_BLOCK_RO           | \
-> >                                PTE_TYPE_VALID)
-> >
-> >   /*
-> > diff --git a/cmd/meminfo.c b/cmd/meminfo.c
-> > index 5e83d61c2dd3..3915e2bbb268 100644
-> > --- a/cmd/meminfo.c
-> > +++ b/cmd/meminfo.c
-> > @@ -15,6 +15,10 @@
-> >
-> >   DECLARE_GLOBAL_DATA_PTR;
-> >
-> > +void __weak arch_dump_mem_attrs(void)
-> > +{
-> > +}
-> > +
-> >   static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
-> >   {
-> >       ulong end = base + size;
-> > @@ -54,6 +58,7 @@ static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
-> >
-> >       puts("DRAM:  ");
-> >       print_size(gd->ram_size, "\n");
-> > +     arch_dump_mem_attrs();
-> >
-> >       if (!IS_ENABLED(CONFIG_CMD_MEMINFO_MAP))
-> >               return 0;
->
+That said, I would very much like to get feedback from the CERN person, 
+to make sure this change does not break their setup.
