@@ -4,89 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76F69C02193
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 05:39:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D101FC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 07:10:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECA2481F0D;
-	Thu, 30 Jan 2025 06:39:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id DCADE80AE4;
+	Thu, 30 Jan 2025 08:10:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="kXCgm0id";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NvvZIHhD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD30982006; Thu, 30 Jan 2025 06:39:00 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88F1880ADF
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 06:38:58 +0100 (CET)
+ id D4F7180B9B; Thu, 30 Jan 2025 08:10:47 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C75F80AE2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:10:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50TFact8028317;
- Thu, 30 Jan 2025 05:38:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- LpAWLJF9c9qWs4XRr5LljqdqN3w8++aiVMzwZder7HQ=; b=kXCgm0idKttf/JJN
- icIeOFe+lXjozeirR5pOUfv2rGF5ocy7EeFtVng7V29YumHkCjvXGKkKQu6UNKq8
- ZcEWLVbs5KxInNSj4/Ieh/wdwbgElHCTbU6S6C5db7Sz2bH7RLu2Nv86sPFCtFZj
- NTns+J78FqzqC8Ret12pQMtiDSNFh4niLU3lY8FzI2Z/iCplZyEpuK54IDG4a3ix
- /EBq9IlzIeAOD9esuJERBQnoTgqNLJsK7Nk8a8dDcIovJbWCAtiYDwZTg7kB4e47
- Hw8hU76DIzfNV021poaxqteRpwRW54ihFLUokH0XbiLirnvxtXNSRpOQPkZ7sSBh
- LoQCCg==
-Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44fq4ghm3u-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Jan 2025 05:38:44 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 50U5ci8A028863
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Jan 2025 05:38:44 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 29 Jan 2025 21:38:38 -0800
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
- <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
- <seanga2@gmail.com>, <peng.fan@nxp.com>, <jh80.chung@samsung.com>,
- <quic_varada@quicinc.com>, <ilias.apalodimas@linaro.org>,
- <sjg@chromium.org>, <Volodymyr_Babchuk@epam.com>, <lehmanju@devpi.de>,
- <pbrobinson@gmail.com>, <marek.vasut+renesas@mailbox.org>,
- <robert.marko@sartura.hr>, <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
-Subject: [PATCH v2 6/6] configs: add ipq9574_mmc_defconfig
-Date: Thu, 30 Jan 2025 11:07:51 +0530
-Message-ID: <20250130053751.3148614-7-quic_varada@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250130053751.3148614-1-quic_varada@quicinc.com>
-References: <20250130053751.3148614-1-quic_varada@quicinc.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50U7Ahb52307299
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 30 Jan 2025 01:10:43 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738221043;
+ bh=FZvhy9P0HIyTpGwaIW9YYCU4jhlblIuEmGoakIhOZdg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=NvvZIHhD23inTICwa5RLwVvSoVGLZo3jQlMDhoWV/qG42q9t7Hd2juLLReYAyV82J
+ 8DHQjs6zuwxoOT7ZpG7UFRgMHthHeWUYJrtjWWZPAkiyz+/3875vK61Q1LFXZem3cy
+ D/EMwGkXIPeLxAUtmAMSfPNEiYJVCGccFll24a54=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50U7AhdO113836;
+ Thu, 30 Jan 2025 01:10:43 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
+ Jan 2025 01:10:42 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 30 Jan 2025 01:10:42 -0600
+Received: from [10.249.140.248] ([10.249.140.248])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50U7Adsj087983;
+ Thu, 30 Jan 2025 01:10:40 -0600
+Message-ID: <8da11e58-0220-4ece-9c37-a98fcb86bd28@ti.com>
+Date: Thu, 30 Jan 2025 12:40:38 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/8] ram: k3-ddrss: Add support for a partial inline ECC
+ region
+To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <bb@ti.com>,
+ <w.egorov@phytec.de>, <s-k6@ti.com>, <marek.vasut+renesas@mailbox.org>
+CC: <u-boot@lists.denx.de>
+References: <20250127142217.1757300-1-n-francis@ti.com>
+ <20250127142217.1757300-5-n-francis@ti.com>
+ <56685ea7-23da-49d5-88ec-2ee4c2bffc04@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <56685ea7-23da-49d5-88ec-2ee4c2bffc04@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-ORIG-GUID: 2Twyi1lPGBQKjCFsFsC3wdi--pu3J6gm
-X-Proofpoint-GUID: 2Twyi1lPGBQKjCFsFsC3wdi--pu3J6gm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-30_02,2025-01-29_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0
- priorityscore=1501 mlxscore=0 adultscore=0 lowpriorityscore=0
- clxscore=1011 bulkscore=0 impostorscore=0 suspectscore=0 spamscore=0
- malwarescore=0 mlxlogscore=999 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2411120000 definitions=main-2501300041
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,132 +83,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a defconfig for the Qualcomm IPQ9574 SoC based RDPs.
-Presently supports eMMC.
+On 28-Jan-25 11:23 AM, Kumar, Udit wrote:
+> 
+> On 1/27/2025 7:52 PM, Neha Malcom Francis wrote:
+>> Instead of defaulting to choosing the entire DDR region when enabling
+>> inline ECC, allow picking of a range within the DDR space using DT to
+>> enable.
+>>
+>> It expects such a node within the memory node, in the absence of which
+>> we resort to enabling inline ECC for the entire DDR region:
+>>
+>> inline_ecc: protected@9e780000 {
+>>          device_type = "ecc";
+>>          reg = <0x9e780000 0x0080000>;
+>>          bootph-all;
+>> };
+> 
+> is this possible to have ECC on different part of memory ?
+> 
+> i mean, protect 0x9e780000 + 0x0080000
+> 
+> and then 0xa000_0000 + 0x0080000
+> 
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   drivers/ram/k3-ddrss/k3-ddrss.c | 52 +++++++++++++++++++++++++++++++--
+>>   1 file changed, 49 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c 
+>> b/drivers/ram/k3-ddrss/k3-ddrss.c
+>> index ab46098adbf..ea2578cda58 100644
+>> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
+>> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+>> @@ -149,6 +149,7 @@ struct k3_ddrss_desc {
+>>       lpddr4_obj *driverdt;
+>>       lpddr4_config config;
+>>       lpddr4_privatedata pd;
+>> +    struct k3_ddrss_ecc_region ecc_range;
+>>       struct k3_ddrss_ecc_region ecc_regions[K3_DDRSS_MAX_ECC_REGIONS];
+>>       u64 ecc_reserved_space;
+>>       u64 ddr_bank_base[CONFIG_NR_DRAM_BANKS];
+>> @@ -711,6 +712,30 @@ static void 
+>> k3_ddrss_ddr_bank_base_size_calc(struct k3_ddrss_desc *ddrss)
+>>           ddrss->ddr_ram_size += ddrss->ddr_bank_size[bank];
+>>   }
+>> +static void k3_ddrss_ddr_inline_ecc_base_size_calc(struct 
+>> k3_ddrss_ecc_region *range)
+>> +{
+>> +    fdt_addr_t base;
+>> +    fdt_size_t size;
+>> +    ofnode node1;
+>> +
+>> +    node1 = ofnode_null();
+>> +
+>> +    do {
+>> +        node1 = ofnode_by_prop_value(node1, "device_type", "ecc", 4);
+>> +    } while (!ofnode_is_enabled(node1));
+>> +
+>> +    base = ofnode_get_addr_size(node1, "reg", &size);
+>> +
+>> +    if (base == FDT_ADDR_T_NONE) {
+>> +        debug("%s: Failed to get ECC node reg and size\n", __func__);
+>> +        range->start = 0;
+>> +        range->range = 0;
+>> +    } else {
+>> +        range->start = base;
+>> +        range->range = size;
+>> +    }
+>> +}
+>> +
+>>   static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct 
+>> k3_ddrss_desc *ddrss)
+>>   {
+>>       fdtdec_setup_mem_size_base_lowest();
+>> @@ -759,8 +784,11 @@ static void k3_ddrss_lpddr4_ecc_init(struct 
+>> k3_ddrss_desc *ddrss)
+>>   static int k3_ddrss_probe(struct udevice *dev)
+>>   {
+>> +    u64 end;
+>>       int ret;
+>>       struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
+>> +    __maybe_unused struct k3_ddrss_data *ddrss_data = (struct 
+>> k3_ddrss_data *)dev_get_driver_data(dev);
+>> +    __maybe_unused struct k3_ddrss_ecc_region *range = 
+>> &ddrss->ecc_range;
+>>       debug("%s(dev=%p)\n", __func__, dev);
+>> @@ -802,9 +830,27 @@ static int k3_ddrss_probe(struct udevice *dev)
+>>           k3_ddrss_lpddr4_ecc_calc_reserved_mem(ddrss);
+>> -        /* Always configure one region that covers full DDR space */
+>> -        ddrss->ecc_regions[0].start = ddrss->ddr_bank_base[0] - 
+>> ddrss->ddr_bank_base[0];
+>> -        ddrss->ecc_regions[0].range = ddrss->ddr_ram_size - 
+>> ddrss->ecc_reserved_space;
+>> +        k3_ddrss_ddr_inline_ecc_base_size_calc(range);
+>> +        if (!range->range) {
+>> +            /* Configure entire DDR space by default */
+>> +            debug("%s: Defaulting to protecting entire DDR space 
+>> using inline ECC\n",
+>> +                  __func__);
+>> +            ddrss->ecc_range.start = ddrss->ddr_bank_base[0];
+>> +            ddrss->ecc_range.range = ddrss->ddr_ram_size - 
+>> ddrss->ecc_reserved_space;
+>> +        } else {
+>> +            ddrss->ecc_range.start = range->start;
+>> +            ddrss->ecc_range.range = range->range;
+>> +        }
+> Do you really need ecc_range variable ? if not please thing of using 
+> ddrss->ecc_regions[0]
 
-Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
----
- configs/ipq9574_mmc_defconfig | 111 ++++++++++++++++++++++++++++++++++
- 1 file changed, 111 insertions(+)
- create mode 100644 configs/ipq9574_mmc_defconfig
+Using it as ddrss->ecc_regions[0] led to excess character count in the line.
 
-diff --git a/configs/ipq9574_mmc_defconfig b/configs/ipq9574_mmc_defconfig
-new file mode 100644
-index 0000000000..62201d7948
---- /dev/null
-+++ b/configs/ipq9574_mmc_defconfig
-@@ -0,0 +1,111 @@
-+#include "qcom_defconfig"
-+
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0x78b1000
-+CONFIG_DEBUG_UART_MSM=y
-+CONFIG_DEBUG_UART_CLOCK=1843200
-+# Address where U-Boot will be loaded
-+CONFIG_TEXT_BASE=0x4A240000
-+CONFIG_REMAKE_ELF=y
-+CONFIG_SYS_LOAD_ADDR=0x50000000
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9574-rdp433"
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_BOOTDELAY=2
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_SYS_CBSIZE=1024
-+CONFIG_SYS_PBSIZE=1024
-+CONFIG_OF_LIVE=y
-+CONFIG_MSM_GPIO=y
-+CONFIG_CLK_QCOM_IPQ9574=y
-+CONFIG_PINCTRL_QCOM_IPQ9574=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_DM_EVENT=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
-+CONFIG_PARTITIONS=y
-+CONFIG_PARTITION_UUIDS=y
-+CONFIG_MTD=y
-+CONFIG_MTD_PARTS=y
-+
-+#
-+# Turning off many options so that u-boot size is less
-+# than 756KB.
-+#
-+# CONFIG_BOOTP_PXE is not set
-+# CONFIG_BUTTON_KEYBOARD is not set
-+# CONFIG_CLK_QCOM_APQ8016 is not set
-+# CONFIG_CLK_QCOM_APQ8096 is not set
-+# CONFIG_CLK_QCOM_QCM2290 is not set
-+# CONFIG_CLK_QCOM_QCS404 is not set
-+# CONFIG_CLK_QCOM_SC7280 is not set
-+# CONFIG_CLK_QCOM_SDM845 is not set
-+# CONFIG_CLK_QCOM_SM6115 is not set
-+# CONFIG_CLK_QCOM_SM8150 is not set
-+# CONFIG_CLK_QCOM_SM8250 is not set
-+# CONFIG_CLK_QCOM_SM8550 is not set
-+# CONFIG_CLK_QCOM_SM8650 is not set
-+# CONFIG_CMD_BOOTP is not set
-+# CONFIG_CMD_GPIO is not set
-+# CONFIG_CMD_I2C is not set
-+# CONFIG_CMD_MII is not set
-+# CONFIG_CMD_NET is not set
-+# CONFIG_CMD_PING is not set
-+# CONFIG_CMD_PINMUX is not set
-+# CONFIG_CMD_PXE is not set
-+# CONFIG_CMD_RNG is not set
-+# CONFIG_CMD_TFTPBOOT is not set
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_DM_ETH is not set
-+# CONFIG_DM_I2C is not set
-+# CONFIG_DM_KEYBOARD is not set
-+# CONFIG_DM_MDIO is not set
-+# CONFIG_DM_PMIC is not set
-+# CONFIG_DM_REGULATOR_COMMON is not set
-+# CONFIG_DM_REGULATOR_FIXED is not set
-+# CONFIG_DM_REGULATOR is not set
-+# CONFIG_DM_REGULATOR_QCOM_RPMH is not set
-+# CONFIG_DM_USB is not set
-+# CONFIG_ETH is not set
-+# CONFIG_FS_EXT4 is not set
-+# CONFIG_FS_FAT is not set
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+# CONFIG_IOMMU is not set
-+# CONFIG_LEGACY_CRYPTO_BASIC is not set
-+# CONFIG_LEGACY_CRYPTO_CERT is not set
-+# CONFIG_LEGACY_CRYPTO is not set
-+# CONFIG_LIB_RAND is not set
-+# CONFIG_MD5_LEGACY is not set
-+# CONFIG_MISC is not set
-+# CONFIG_MMC_HS200_SUPPORT is not set
-+# CONFIG_NETDEVICES is not set
-+# CONFIG_NVMEM is not set
-+# CONFIG_PHY_GIGE is not set
-+# CONFIG_PHYLIB is not set
-+# CONFIG_PINCTRL_QCOM_APQ8016 is not set
-+# CONFIG_PINCTRL_QCOM_APQ8096 is not set
-+# CONFIG_PINCTRL_QCOM_IPQ4019 is not set
-+# CONFIG_PINCTRL_QCOM_QCM2290 is not set
-+# CONFIG_PINCTRL_QCOM_QCS404 is not set
-+# CONFIG_PINCTRL_QCOM_SDM845 is not set
-+# CONFIG_PINCTRL_QCOM_SM6115 is not set
-+# CONFIG_PINCTRL_QCOM_SM8150 is not set
-+# CONFIG_PINCTRL_QCOM_SM8250 is not set
-+# CONFIG_PINCTRL_QCOM_SM8550 is not set
-+# CONFIG_PINCTRL_QCOM_SM8650 is not set
-+# CONFIG_PMIC_CHILDREN is not set
-+# CONFIG_PMIC_QCOM is not set
-+# CONFIG_POWER_DOMAIN is not set
-+# CONFIG_PXE_UTILS is not set
-+# CONFIG_QCOM_HYP_SMMU is not set
-+# CONFIG_REGEX is not set
-+# CONFIG_RGMII is not set
-+# CONFIG_SHA1_LEGACY is not set
-+# CONFIG_SHA256_LEGACY is not set
-+# CONFIG_UFS is not set
-+# CONFIG_USB is not set
-+# CONFIG_VIDEO is not set
+>> +
+>> +        end = ddrss->ecc_range.start + ddrss->ecc_range.range;
+>> +
+>> +        if (end > (ddrss->ddr_ram_size - ddrss->ecc_reserved_space))
+>> +            ddrss->ecc_regions[0].range = ddrss->ddr_ram_size - 
+>> ddrss->ecc_reserved_space;
+>> +        else
+>> +            ddrss->ecc_regions[0].range = ddrss->ecc_range.range;
+>> +
+>> +        ddrss->ecc_regions[0].start = ddrss->ecc_range.start - 
+>> ddrss->ddr_bank_base[0];
+>> +
+>>           k3_ddrss_lpddr4_ecc_init(ddrss);
+>>       }
+
 -- 
-2.34.1
-
+Thanking You
+Neha Malcom Francis
