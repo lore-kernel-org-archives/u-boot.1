@@ -4,94 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F7CDC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:23:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C365C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:24:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94C7382012;
-	Thu, 30 Jan 2025 11:23:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EED178206E;
+	Thu, 30 Jan 2025 11:24:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xZjCLroO";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="aSbHrp4c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F0F582054; Thu, 30 Jan 2025 11:23:36 +0100 (CET)
-Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
- [IPv6:2a00:1450:4864:20::341])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 085EA82012; Thu, 30 Jan 2025 11:24:51 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C829780C85
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:23:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2463882074
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:24:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x341.google.com with SMTP id
- 5b1f17b1804b1-436326dcb1cso3958935e9.0
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:23:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738232613; x=1738837413; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fludrvrTSG1EzA+p+JM3aPGvQUri8APPhle1cCn3DGI=;
- b=xZjCLroOL2wMjXl5NAw1BVAHTWPIIRiuBS1yC3kVSk0im64KrFE1YV1amZkczmnwdj
- 1SyN/P0pMPY7eAXFdWPmJs0gbpJYDrDZEr9cicAAJRp9rW9o2dr6FA1Ncr6CiEtRk1GU
- YeDTLmjH1WvI7Z0oFsHiOQ3Ms8HoBr2dCDfgXigTgHLpR12FSP3r8UIREJ80HD3xWXul
- AHLSMm7fELXJHOKh83OHNF8BGeQ4BLjPi4EQwhdea4FSvM98fkHpn1StMVh9lF7J4rI5
- krm3nIR8j2xOqg3YS+oplhBwEiEgzfuCVjxj8dhRaAbzLzgHVviKtduzdBnWwURKQmQu
- VwrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738232613; x=1738837413;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fludrvrTSG1EzA+p+JM3aPGvQUri8APPhle1cCn3DGI=;
- b=L5pwVbcyceLo3gJsYkoI/vwhAx6JsSNrBJmx7y/Hi+71VR7JI+vnFHWwy6fPdfTUxz
- eXO0FRBgc8MntASYADSla584NC5WWy02FL5vwfHxxv7HSnwYo1VtsNnhQk29rnw4/lf/
- UanIwlM7xG8BMaaFeSAR3A0Jkxt8ZX3GvaV/CKkCKw2HIyo+jKif9/t9IqTft9Fupxgg
- nZS1tRvWtkKemhki8zjuw6dXRSemswLJ5SrvjrkaNYcFcAHU7eF2FVsLUn5ZiNlwiN6+
- cmVNZKSwIoaKB68P4UmWoqTHR40k/Mi2GTdqajwAiiJZGFCjcU/7t9YSyUrmMcLYjzDf
- PX3w==
-X-Gm-Message-State: AOJu0Yz9E97PdMAmBdMTlffPlLZ1qT33VXSDh2TbzEheLPlNsw24qhGy
- feuuvPWvk9gWG2AkxjQyxQz3DCak9gBYJKXtV/DBbRM61ZCdNgVxK5nyjRIEbb8=
-X-Gm-Gg: ASbGncuIgvT7gdFvFyM35+8Kdu86lDkGuQA9uqaYwrRW4y4g+B7Q73ERPlNV8kMX/xB
- fzsPyWhEC7J3lzprClsilUQMTz3fRGcl6k2bQrw9aP2XCmCjGFkvVZbNQFMc2XwrRV4rIUmonEX
- tZn0znTqiSbL1ur1G/0vozQqan8vXR9G1N2LbUw1RYAabHSLSP5o+dA9ssFWggKENhMGKgnv3uN
- aaQU9OAw0iegc3wIm081l0GNcFhxG7tfadp6pLA68eRbzZ9fLmCbgJB1f5BcbWVhqlP84qwghxA
- H+O6h/Y4VPxIaAxeFlJW01M8/qjwgBXVceXl3IHkv9vasB3R0+Petk5JABU/9j1xDuZbCvQ=
-X-Google-Smtp-Source: AGHT+IHQPeLKG6xjciYFCGttv3aX9IifW/CD4PbFZKJp76XqQJrTRBL7JLg00ZAXHzalLicFOpntKw==
-X-Received: by 2002:a5d:50c2:0:b0:38b:d7d2:12f2 with SMTP id
- ffacd0b85a97d-38c520bf925mr4087021f8f.54.1738232613104; 
- Thu, 30 Jan 2025 02:23:33 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:14f6:2931:46df:28c5?
- ([2a01:e0a:3cb:7bb0:14f6:2931:46df:28c5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c102f7dsm1563611f8f.30.2025.01.30.02.23.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 02:23:32 -0800 (PST)
-Message-ID: <d7c1658a-fae9-4237-b3cc-307a291972ff@linaro.org>
-Date: Thu, 30 Jan 2025 11:23:32 +0100
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1738232685; x=1738837485; i=xypron.glpk@gmx.de;
+ bh=rx8xBBy2iwpm9BYLh93Tggy4cSMRVsX/MnNkB4/uvo8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=aSbHrp4cNFREteS4eRQO/BMC+YSZkKRTstbyN3qOmvKdddlW3UrAl1eHG1B607A+
+ 2NGDRkCPUcqTaUmMNBTyN3tITnrUFZtQsJFT72zA5Z1fCimJx0XOHMKTsSWcYp+SV
+ YPy619L7qv5b10ffbQOhdlbqx1wLpzePD+XbAJYUpNeISMYkE4fkxIgB4za8euLl7
+ WmXjrjd3/eJoaYs+i8MyfDNwW3YFYV9bbfbaRl1v/3VayL3v3CIb+TZFsquNhvMIU
+ lnlfvhaEdeF+m0mG8JFYiZ/jG/X1Fx/XSz04rAiGl52kYS5Zno9t7+eWY4Wi2hJOF
+ raIrnzmBIw/O6/5ggA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLzBp-1tuhSf3hJJ-00IhKg; Thu, 30
+ Jan 2025 11:24:45 +0100
+Message-ID: <22898270-b5b6-4bcb-9c4a-f3d62dbf5c86@gmx.de>
+Date: Thu, 30 Jan 2025 11:24:43 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: LwIP and multiple network interfaces
-To: E Shattow <e@freeshell.de>, Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
- <20250102224724.GS3476@bill-the-cat>
- <aa6d5dce-473c-447f-91b9-fe802f0f520d@freeshell.de>
- <20250103014049.GT3476@bill-the-cat>
- <14a9901e-00fd-4a5e-aeb1-ffbe715f8965@freeshell.de>
- <7c20233b-d61a-4114-bbb3-6866bdd5bbf5@linaro.org>
- <69678189-22b5-4372-83a4-0e4637975355@freeshell.de>
- <e3b4fe98-fce5-45e0-970d-d0398e23838d@freeshell.de>
- <8de045d6-bd41-4115-8bba-5632622c724b@linaro.org>
- <94d614d2-40fa-4c5f-82dc-680a6b359a07@freeshell.de>
+Subject: Re: [RFC PATCH 4/4] arm64: Change mapping for data/rodata/text
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?Q?Pierre-Cl=C3=A9ment_Tosi?= <ptosi@google.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com
+References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
+ <20250130072100.27297-5-ilias.apalodimas@linaro.org>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <94d614d2-40fa-4c5f-82dc-680a6b359a07@freeshell.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250130072100.27297-5-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:ijo2sqd8HBlspacTOTiS/6T+VHBAxYMW0HcgR24TBxCTkRHT0ms
+ wigEjexP9vbyvHNdheB2rOgOh+3u9g40E5yJc8LF2Ipf+KtsahynOJYGsM1PZyuFHUMlGXO
+ IpA2WhzFRma0TY1VdjY2B/oFLOcqqrmdOZH2eIMMcAgdbCXyyi+rKVRHoIYQZAJwcQvzP/Y
+ PUBQmwQXntXrydDIDC7VA==
+UI-OutboundReport: notjunk:1;M01:P0:foLjoS5qnYo=;F1KSey/REmd/Kj1Vg5Vhuxw1VQC
+ aA7v4ux76ndgAfsHxl49bkQNxIiTIyRmHvNhKnSDjI5vwj1giQblDx8TV7na2Rnd5hNQTuIid
+ 0V6+scd5Un0OE2Y48/rQAbFyy6LgX7mMIWocZEfUP7EHwB9AKRTJa3lHa+odbgElOnQJqAu2c
+ KfKJrCMA1JIPMR1rgJ6CVDz0yLoM6zy0S4dSy6iiFhOnhxDcbnBwJIBN24JtKgBklky67C51F
+ 19yKtjJYm8Oq9eAKSXkHYT/StSqJp8RlDpRE3/tls+ep6SDrrNflIg+oonkRAT3rWr0F/8xS1
+ OmznG7wul0eyUXXCG6PGV1g5jZtoBjdcSP+uoZoDcCpdD3wIvPDzZUjpLgQjivaV6d5CRkYIS
+ 4CY9t3+4YGsRf324T4+4Kq6KonnXXh+V2Ta53JanZ8NFcJm25Br2zpRaulxF+BmdbCbxyxgSP
+ vafxEImKND01Aeaa5rWQAAfOhja0HMvkEIxhc35JAExODsZ7DFvMGnkl5c09ZFEMzeGH0D9CX
+ xkGq8dQDgMS9z4MMOR/RNFzgsa3QuaYjFBy4Oz0Fjq6vXrG+H9gRJoRN6CrdbKilU5/cYEebK
+ s2fAI/M9rM+cmXs+MuBPw2gvEO1zxHG51AQK31rSt2d8rrzWjlr2dEjwh06y5HUoymkY8MoSC
+ tktIOeoZ9ErTI1NTKSxgev+MUqTRXlgOxsrmMAiOTr8DD5z4aTPuwUtY2axBoKp5onLhu0bd6
+ 1h3fxSmmYMoFCXIcV2bGJAQEVh7IZKyLgjwiD3kbDW0hYQZOou9NdVeGL8m8kexpTzGjxh0LM
+ v81DhCMqkx8YqPmj8Nac+4e0stDHqKG4Yk/euSTF5/5+xomP/j4TKj3tESMryDg2memkY4sni
+ NpJEj9SgFDkJOW2Zrx90XQyI0K9GKAetv1+VwTx3pcbBzmdMl67VWg4X1mKlXvbODBju4U69U
+ HTsbIM5OZ3E0V2oriDwwx+fPf0pvOCL3a6RxW3lnD/4ZUEfACiNgRwuogmeXaBc9HszYHUJp2
+ 3OMBITFeVaC8wnUsYb1qZkpPdno5qY0X9JwSIhv64bVbNudTl5AZ8tofrnw3ELjIaI2XOfQbe
+ OeVFGe6SRABJ+0nukeWnnDddu3SsjWuylEUuMjDhTCL/eebsZuX8txoftTxIac95elIKgNO6O
+ qho4ti4YYHbZeivZUGW2o0198htSDOlpPrljGH8svxA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,402 +110,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On 1/30/25 07:20, Ilias Apalodimas wrote:
+> Now that we have everything in place switch the page permissions for
+> .rodata, .text and .data just after we relocate everything in top of the
+> RAM.
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   common/board_r.c | 7 +++++++
+>   1 file changed, 7 insertions(+)
+>
+> diff --git a/common/board_r.c b/common/board_r.c
+> index 179259b00de8..38944f600fd6 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -170,6 +170,13 @@ static int initr_reloc_global_data(void)
+>   	efi_save_gd();
+>
+>   	efi_runtime_relocate(gd->relocaddr, NULL);
+> +
+> +#if (IS_ENABLED(CONFIG_ARM64))
 
-On 1/6/25 20:09, E Shattow wrote:
-> 
-> 
-> On 1/6/25 07:43, Jerome Forissier wrote:
->>
->>
->> On 1/4/25 04:05, E Shattow wrote:
->>> On 1/3/25 09:58, E Shattow wrote:
->>>>
->>>>
->>>> On 1/3/25 02:03, Jerome Forissier wrote:
->>>>>
->>>>>
->>>>> On 1/3/25 02:52, E Shattow wrote:
->>>>>>
->>>>>>
->>>>>> On 1/2/25 17:40, Tom Rini wrote:
->>>>>>> On Thu, Jan 02, 2025 at 05:34:57PM -0800, E Shattow wrote:
->>>>>>>
->>>>>>>> Tom sorry about sending this reply twice, struggle here is with Thunderbird
->>>>>>>> mail UI sometimes hiding "Reply All" and it missed the mail list first time
->>>>>>>> around.
->>>>>>>
->>>>>>> No problem.
->>>>>>>
->>>>>>>> On 1/2/25 14:47, Tom Rini wrote:
->>>>>>>>> On Thu, Jan 02, 2025 at 02:26:06PM -0800, E Shattow wrote:
->>>>>>>>>> Problem: 'dhcp' must be ran twice when the network cable is plugged into a
->>>>>>>>>> port other than the first network port.
->>>>>>>>>>
->>>>>>>>>> Network cable plugged into bottom (first) Ethernet port:
->>>>>>>>>> 1. Power on
->>>>>>>>>> 2. StarFive # dhcp
->>>>>>>>>>
->>>>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete....... done
->>>>>>>>>> DHCP client bound to address 192.168.2.51 (3678 ms)
->>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>> Network cable plugged into top (second) Ethernet port:
->>>>>>>>>> 1. Power on
->>>>>>>>>> 2. StarFive # dhcp
->>>>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
->>>>>>>>>> TIMEOUT !
->>>>>>>>>> phy_startup() failed: -110
->>>>>>>>>> FAILED: -110
->>>>>>>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
->>>>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
->>>>>>>>>> TIMEOUT !
->>>>>>>>>> phy_startup() failed: -110
->>>>>>>>>> FAILED: -110
->>>>>>>>>> Could not start ethernet@16030000
->>>>>>>>>> 3. StarFive # dhcp
->>>>>>>>>> DHCP client bound to address 192.168.2.77 (31 ms)
->>>>>>>>>
->>>>>>>>> What happens when you set ethact to 1 first?
->>>>>>>>>
->>>>>>>>
->>>>>>>>
->>>>>>>> '1' literal does not seem to do something so I guess it is meant the id of
->>>>>>>> the first ethernet interface:
->>>>>>>
->>>>>>> Yes, I misspoke sorry.
->>>>>>>
->>>>>>>>    From power-on:
->>>>>>>>
->>>>>>>> ...
->>>>>>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
->>>>>>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
->>>>>>>> In:    serial@10000000
->>>>>>>> Out:   serial@10000000
->>>>>>>> Err:   serial@10000000
->>>>>>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
->>>>>>>> starting USB...
->>>>>>>> No USB controllers found
->>>>>>>> Working FDT set to ff700a10
->>>>>>>> StarFive # env print ethact
->>>>>>>> ## Error: "ethact" not defined
->>>>>>>> StarFive # env set ethact 1
->>>>>>>> StarFive # dhcp
->>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
->>>>>>>> TIMEOUT !
->>>>>>>> phy_startup() failed: -110
->>>>>>>> FAILED: -110
->>>>>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
->>>>>>>> EQOS_DMA_MODE_SWR stuck
->>>>>>>> FAILED: -110
->>>>>>>> Could not start ethernet@16030000
->>>>>>>>
->>>>>>>> Again, from power-on:
->>>>>>>>
->>>>>>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
->>>>>>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
->>>>>>>> In:    serial@10000000
->>>>>>>> Out:   serial@10000000
->>>>>>>> Err:   serial@10000000
->>>>>>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
->>>>>>>> starting USB...
->>>>>>>> No USB controllers found
->>>>>>>> Working FDT set to ff700a10
->>>>>>>> StarFive # env print ethact
->>>>>>>> ## Error: "ethact" not defined
->>>>>>>> StarFive # env set ethact ethernet@16040000
->>>>>>>> StarFive # dhcp
->>>>>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
->>>>>>>> DHCP client bound to address 192.168.2.77 (149 ms)
->>>>>>>
->>>>>>> So then yes, the second interface works when ethact is set to use that
->>>>>>> directly. This is the same behavior as the legacy stack I believe.
->>>>>>>
->>>>>>
->>>>>> Legacy stack does actually rotate and complete successfully when ethact environment variable does not exist and (eventually) configure the second interface though. Here with LwIP the procedure fails.
->>>>>>
->>>>>> Notice that here it starts with ethernet@16030000, then rotates to ethernet@16040000 unsuccessfully, and back again to ethernet@16030000 before (again) failing and giving up. There is a network cable plugged into 'ethernet@16040000' port and if we try the command again the environment variable ethact retained 'ethact=ethernet@16040000' from the failed procedure so you're right it works as it should... except that it totally failed to do what was expected the first time.
->>>>>
->>>>> That's unexpected indeed.
->>>>>
->>>>>> Is this exposing a problem with this board network driver and behavior or is it something with LwIP ?
->>>>> Hard to tell at this point. One thing I know for sure is that lwIP expects
->>>>> eth_set_current() (called from do_dhcp()) to actually pick a valid
->>>>> interface if there is one. So it should definitely select ethernet@16040000
->>>>> in your scenario. Adding debug prints to eth_set_current(),
->>>>> eth_current_changed() etc. should help.
->>>>>
->>>>> Thanks,
->>>>
->>>> StarFive # dhcp
->>>> !!! eth_set_current(): entered function
->>>> !!! eth_set_current(): conditional 1
->>>> !!! eth_set_current(): conditional 2
->>>> !!! eth_set_current(): conditional 5
->>>> !!! eth_current_changed(): entered function
->>>> !!! eth_current_changed(): conditional 2
->>>> !!! eth_current_changed(): conditional 3
->>>> !!! eth_current_changed(): leaving function
->>>> !!! eth_set_current(): leaving function
->>>> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
->>>> phy_startup() failed: -110
->>>> FAILED: -110
->>>> !!! eth_current_changed(): entered function
->>>> !!! eth_current_changed(): conditional 2
->>>> !!! eth_current_changed(): conditional 3
->>>> !!! eth_current_changed(): leaving function
->>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
->>>> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
->>>> phy_startup() failed: -110
->>>> FAILED: -110
->>>> Could not start ethernet@16030000
->>>> StarFive #
->>>>
->>>> For reference the modified functions:
->>>>
->>>> void eth_current_changed(void)
->>>> {
->>>>           char *act = env_get("ethact");
->>>>           char *ethrotate;
->>>>
->>>> printf("!!! eth_current_changed(): entered function\n");
->>>>           /*
->>>>            * The call to eth_get_dev() below has a side effect of rotating
->>>>            * ethernet device if uc_priv->current == NULL. This is not what
->>>>            * we want when 'ethrotate' variable is 'no'.
->>>>            */
->>>>           ethrotate = env_get("ethrotate");
->>>>           if ((ethrotate != NULL) && (strcmp(ethrotate, "no") == 0))
->>>>           {
->>>> printf("!!! eth_current_changed(): conditional 1\n");
->>>>                   return;
->>>>           }
->>>>
->>>>           /* update current ethernet name */
->>>>           if (eth_get_dev()) {
->>>> printf("!!! eth_current_changed(): conditional 2\n");
->>>>                   if (act == NULL || strcmp(act, eth_get_name()) != 0)
->>>>                   {
->>>> printf("!!! eth_current_changed(): conditional 3\n");
->>>>                           env_set("ethact", eth_get_name());
->>>>                   }
->>>>           }
->>>>           /*
->>>>            * remove the variable completely if there is no active
->>>>            * interface
->>>>            */
->>>>           else if (act != NULL)
->>>>           {
->>>> printf("!!! eth_current_changed(): conditional 4\n");
->>>>                   env_set("ethact", NULL);
->>>>           }
->>>> printf("!!! eth_current_changed(): leaving function\n");
->>>> }
->>>>
->>>> void eth_set_current(void)
->>>> {
->>>>           static char *act;
->>>>           static int  env_changed_id;
->>>>           int     env_id;
->>>>
->>>> printf("!!! eth_set_current(): entered function\n");
->>>>           env_id = env_get_id();
->>>>           if ((act == NULL) || (env_changed_id != env_id)) {
->>>> printf("!!! eth_set_current(): conditional 1\n");
->>>>                   act = env_get("ethact");
->>>>                   env_changed_id = env_id;
->>>>           }
->>>>
->>>>           if (act == NULL) {
->>>> printf("!!! eth_set_current(): conditional 2\n");
->>>>                   char *ethprime = env_get("ethprime");
->>>>                   void *dev = NULL;
->>>>
->>>>                   if (ethprime)
->>>>                   {
->>>> printf("!!! eth_set_current(): conditional 3\n");
->>>>                           dev = eth_get_dev_by_name(ethprime);
->>>>                   }
->>>>                   if (dev)
->>>>                   {
->>>> printf("!!! eth_set_current(): conditional 4\n");
->>>>                           eth_set_dev(dev);
->>>>                   }
->>>>                   else
->>>>                   {
->>>> printf("!!! eth_set_current(): conditional 5\n");
->>>>                           eth_set_dev(NULL);
->>>>                   }
->>>>           } else {
->>>> printf("!!! eth_set_current(): conditional 6\n");
->>>>                   eth_set_dev(eth_get_dev_by_name(act));
->>>>           }
->>>>
->>>>           eth_current_changed();
->>>> printf("!!! eth_set_current(): leaving function\n");
->>>> }
->>>>
->>>> Hopefully this is enough to make sense of it? Let me know, thanks!
->>>>
->>>> -E
->>>
->>> Postscript I've narrowed it down a bit to net/lwip/net-lwip.c:new_netif() where returning from eth_init() the eth_get_dev() is the second interface (with network cable plugged in) but variable reference udev is still the first interface (with no network cable) when the call to lwip_init() is made. So lwip_init() tries and fails on the first interface even though we already know from eth_init() which interface is valid and ready.
->>>
->>> So that is what is happening but I don't know what you would want to do to fix this?
->>
->> Perhaps eth_init() has to be called before eth_set_current()/
->> eth_get_dev()? Can you please try the following patch:
->>
->> ---8<-------8<-------8<-------8<-------8<-------8<-------8<----
->> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
->> index b863047f598..a6fb3824af1 100644
->> --- a/net/lwip/net-lwip.c
->> +++ b/net/lwip/net-lwip.c
->> @@ -127,18 +127,10 @@ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
->>       return 0;
->>   }
->>   -static struct netif *new_netif(struct udevice *udev, bool with_ip)
->> +static void net_lwip_init(void)
->>   {
->> -    unsigned char enetaddr[ARP_HLEN];
->> -    char hwstr[MAC_ADDR_STRLEN];
->> -    ip4_addr_t ip, mask, gw;
->> -    struct netif *netif;
->> -    int ret = 0;
->>       static bool first_call = true;
->>   -    if (!udev)
->> -        return NULL;
->> -
->>       if (first_call) {
->>           eth_init_rings();
->>           /* Pick a valid active device, if any */
->> @@ -146,6 +138,18 @@ static struct netif *new_netif(struct udevice *udev, bool with_ip)
->>           lwip_init();
->>           first_call = false;
->>       }
->> +}
->> +
->> +static struct netif *new_netif(struct udevice *udev, bool with_ip)
->> +{
->> +    unsigned char enetaddr[ARP_HLEN];
->> +    char hwstr[MAC_ADDR_STRLEN];
->> +    ip4_addr_t ip, mask, gw;
->> +    struct netif *netif;
->> +    int ret = 0;
->> +
->> +    if (!udev)
->> +        return NULL;
->>         if (eth_start_udev(udev) < 0) {
->>           log_err("Could not start %s\n", udev->name);
->> @@ -198,11 +202,15 @@ static struct netif *new_netif(struct udevice *udev, bool with_ip)
->>     struct netif *net_lwip_new_netif(struct udevice *udev)
->>   {
->> +    net_lwip_init();
->> +
->>       return new_netif(udev, true);
->>   }
->>     struct netif *net_lwip_new_netif_noip(struct udevice *udev)
->>   {
->> +    net_lwip_init();
->> +
->>       return new_netif(udev, false);
->>   }
->> ---8<-------8<-------8<-------8<-------8<-------8<-------8<----
->>
->> Thanks,
-> 
-> Testing with commands:
-> 
-> env set test_url http://ipv4.download.thinkbroadband.com/5MB.zip
-> echo "TEST dhcp"
-> dhcp
-> echo "TEST wget"
-> wget ${test_url}
-> echo "TEST dhcp"
-> dhcp
-> echo "TEST wget"
-> wget ${test_url}
-> 
-> env set test_url http://ipv4.download.thinkbroadband.com/5MB.zip;echo "TEST dhcp";dhcp;echo "TEST wget";wget ${test_url};echo "TEST dhcp";dhcp;echo "TEST wget";wget ${test_url}
-> 
-> # Without patch, board power-on for network cable in ethernet@16030000:
-> TEST dhcp
-> ethernet@16030000 Waiting for PHY auto negotiation to complete...... done
-> DHCP client bound to address 192.168.2.51 (568 ms)
-> TEST wget
-> ##################################################
-> 5242880 bytes transferred in 2632 ms (1.9 MiB/s)
-> Bytes transferred = 5242880 (500000 hex)
-> TEST dhcp
-> DHCP client bound to address 192.168.2.51 (255 ms)
-> TEST wget
-> ##################################################
-> 5242880 bytes transferred in 10763 ms (475.6 KiB/s)
-> Bytes transferred = 5242880 (500000 hex)
-> 
-> 
-> # With patch, board power-on for network cable in ethernet@16030000:
-> TEST dhcp
-> ethernet@16030000 Waiting for PHY auto negotiation to complete...... done
-> DHCP client bound to address 192.168.2.51 (620 ms)
-> TEST wget
-> ##################################################
-> 5242880 bytes transferred in 1580 ms (3.2 MiB/s)
-> Bytes transferred = 5242880 (500000 hex)
-> TEST dhcp
-> DHCP client bound to address 192.168.2.51 (42 ms)
-> TEST wget
-> ##################################################
-> 5242880 bytes transferred in 1580 ms (3.2 MiB/s)
-> Bytes transferred = 5242880 (500000 hex)
-> 
-> 
-> # Without patch, board power-on for network cable in ethernet@16040000:
-> TEST dhcp
-> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
-> phy_startup() failed: -110
-> FAILED: -110
-> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
-> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
-> phy_startup() failed: -110
-> FAILED: -110
-> Could not start ethernet@16030000
-> TEST wget
-> TEST dhcp
-> DHCP client bound to address 192.168.2.77 (33 ms)
-> TEST wget
-> ##################################################
-> 5242880 bytes transferred in 1490 ms (3.4 MiB/s)
-> Bytes transferred = 5242880 (500000 hex)
-> 
-> 
-> # With patch, board power-on for network cable in ethernet@16040000:
-> TEST dhcp
-> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
-> phy_startup() failed: -110
-> FAILED: -110
-> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
-> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
-> phy_startup() failed: -110
-> FAILED: -110
-> Could not start ethernet@16030000
-> TEST wget
-> TEST dhcp
-> DHCP client bound to address 192.168.2.77 (24 ms)
-> TEST wget
-> ##################################################
-> 5242880 bytes transferred in 1938 ms (2.6 MiB/s)
-> Bytes transferred = 5242880 (500000 hex)
-> 
-> 
-> This appears no change in outcome with patch applied?
+'#if' should be replaced by 'if (CONFIG_IS_ENABLED())'.
 
-Please check [1] and let me know if it works for you.
+Shall we make mmu_set_attrs() a weak function which each architecture
+can override?
 
-[1] https://lists.denx.de/pipermail/u-boot/2025-January/578982.html
+> +	mmu_set_attrs((u64)(__start_rodata), (u64)(__end_rodata - __start_roda=
+ta), 1);
+> +	mmu_set_attrs((u64)(__start_data), (u64)(__end_data - __start_data), 3=
+);
+> +	mmu_set_attrs((u64)(__text_start), (u64)(__text_end - __text_start), 2=
+);
 
-Thanks,
--- 
-Jerome
-> 
-> -E
+Please, replace 1, 2, 3 by constants both here and in mmu_set_attrs, e.g.
+
+1 -> MMU_ATTR_RO
+2 -> MMU_ATTR_RX
+3 -> MMU_ATTR_RW
+
+Best regards
+
+Heinrich
+
+> +#endif
+> +
+>   #endif
+>
+>   	return 0;
+
