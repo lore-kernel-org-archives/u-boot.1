@@ -4,87 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A56C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 15:29:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49DACC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 16:04:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1D3E80C77;
-	Thu, 30 Jan 2025 16:29:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D3E0680E90;
+	Thu, 30 Jan 2025 17:03:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SGBrWjqK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j6cWFv01";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14D8E80C77; Thu, 30 Jan 2025 16:29:02 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id A8BC880EB1; Thu, 30 Jan 2025 17:03:58 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C54B80B9B
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 16:28:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE3A080E90
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 17:03:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3eba559611aso286901b6e.0
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 07:28:59 -0800 (PST)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-29f7b5fbc9aso295629fac.3
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:03:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738250938; x=1738855738; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738253034; x=1738857834; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/TxB0WpuafcfmrOqkGYzDx8cdbcbdUBip0QpA3AlwY4=;
- b=SGBrWjqKCrGw49E5Wz6TxqsyMeifOMa8LhXXT6eGyK8nQxSG2PYAyipFtRHhjp8mL/
- esQD1iX3JGmt64fdtn8Hlj5Hv3Y2KvbZjJ19o4ituhs0Lgmmh/qHCkIxdcyd3x97K8qf
- rSf6y9C1sKuD7b4ZjhxKe5S2vIALr2t2vsUKA=
+ bh=Dz9v5ByXYNvF2yV9mm/LFIjg++/+F7eHNDbT1hhqQXI=;
+ b=j6cWFv01lVdnSy5CCySPGiDxjFo3nqYQbMk9oIeyluevpMuolN9XIMzaEXDShcHWrP
+ xoYO5B6mfNKHL7x9/7yjIf01sMoiOiglNFL+bY/btEljbP0VHNRq0ksz3Jd/wu3KntFz
+ jdFLuOwHXZiul+JlkVZPS/EwAHR13FRsBPe00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738250938; x=1738855738;
+ d=1e100.net; s=20230601; t=1738253034; x=1738857834;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/TxB0WpuafcfmrOqkGYzDx8cdbcbdUBip0QpA3AlwY4=;
- b=MfCM8N3KxYKUD+Jboxe+rqLjdVJQORemLWx06g0SuA3AdWR6OXdZ4FkuGBvtuePluZ
- a0SR8F3yEO0c2xZ0t4M48+T/0Dj1bOBK2w9nTfmHNAu3b0h/+aD3lyaKvggbwOnUU6Ot
- 2UcO5iCj5yvXmDVx3I4gbrnc2G1zytm2zB5Tg8LqVczq/lkylcluV7Jawgj1hk3w4x30
- VuN6Nvdql9MMhR59OSYqGv89frjpy/Oz8KAW7rpW18/eX+DjJj7/keK2HEDF2j3EUu59
- hn2QSPbCs0OzFoc5K5sJ8ZKQNduQIcp9H4NlEp8ZfnRTpql5OgvfkA+NeZSuZcK03vzr
- ff0w==
+ bh=Dz9v5ByXYNvF2yV9mm/LFIjg++/+F7eHNDbT1hhqQXI=;
+ b=er9OWcGtR9lYYRnxaRpIcfKcwW4jlYM/Je5z0RotAku4Z5z+PeLgeHyosyS4JuyE0k
+ FHa7X2jL2nVB/kKqrwRzrJcn1NpSW3bSFgKni+1MjPxrsIBGSSgCKdZJ0TFq3fclwJGT
+ rjY9d/E5Uml3sq7RaC+oLfieB7pmja04OHztlh57uRPRLhzCJX/WdojKG9BRK1mPejRA
+ qY408919MXqPnplwit5PetZvRfbqc7gsQo7GfIQHCpK1DGDiWttYajDnCW9PuHJNgsSe
+ 3D6PaBRaQAt9f+qVWN6yQeyanwUdjA92thp75FWSeJGEuwS5vqMKbnQS17NsY/9Zmtrx
+ z5xg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVflZtLDFvLt+ThGpxVCkg7LFmyWiTifZnxQovV5DvaE3Y68NOsYiIy5eH5UHeceMTWnR45yMA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwDisWV3urGL0EWSMrysOuPMsUvZVVhMHz2LiH20agKhneKPBVS
- FCbxUmXZxkMzNKxCzN2no3LDEC1biSL4Tobll43c1G1uovfiCOBF2kWLl79/5aM=
-X-Gm-Gg: ASbGncuSZfj392so45YEmxTwUKEXLaJagqkOKOm3iK1ziGwU0z4JLFPzuyodaulhC8c
- BTqgwwGYO5K25mz3fWoUWETOTz79ZnXKNOA+NHNIvo7D4Iv9FMKCtMMc5tFH7b3d56vhwVJI8JI
- qS5D6tWRoGisxY4lItbQ+2xLjKg2iLzNE9UnJtIxBdaPwcwDyNQexHGbb6ExOkKfb5OqD4YJ8ne
- 6yRcT6Aq2m2hQFKJY9zaG5nZN0PBVyqULQS9lrDZXYrQHtwImxV+HNzGvWtU/6VwkfrQvD8/WRh
- 5fFeznJBQIPiW6Q=
-X-Google-Smtp-Source: AGHT+IETwh/b90bEWPMHyG+WLlTwxfLjWtty0D0o1s45u6ipSJuG7beqo1Jd0R6GDLRIPtpptNgosA==
-X-Received: by 2002:a05:6808:1246:b0:3e7:5b06:ff61 with SMTP id
- 5614622812f47-3f323a98980mr4995753b6e.21.1738250937985; 
- Thu, 30 Jan 2025 07:28:57 -0800 (PST)
+ AJvYcCXDjC9/t6O8jD3hBIdn4dFtR7Pavf9jBM3K6RQiSuL9bhVoGybMVp7c88nSbAC/LCGa0qTyPfw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZDRUe4RJ0e1mh44+2tgPDMwsjJZgKSKpGR0BApJt81AC6/qT/
+ 5xiqt6ClnuPxw+GNTetuHzNm4yTcn9kDg79P7P22gM7RR75ccSShRIvMaUJjWrA=
+X-Gm-Gg: ASbGncvn4amL/+ts4lEhz95Y2MvImm/wskced6BuwEsY0ejcqgia9NGvIKDcySpgvVd
+ NRQ/T9kFdd/g12jHHZw+Vrq8cTvbISSocAOdF92dveMu1GLtyLNTNtaqPwX6FPE2mA9a0K2GN7M
+ +7+CaqI+fvZtJ59wSft/AgrdXf/YEl68oOoaWPp9u4jMCsYU0Kh+EtLbXOe5M0Lo7WaEPF7EmEx
+ EaoFPZF73+DzSsWB2BHr1lAxwXUub61yXwtnxK6ZTzLX+DVjAAToEZcS3XHl0pY463lu6Xoy6UL
+ Hq2C7kus711NmQI=
+X-Google-Smtp-Source: AGHT+IHBr0+2tsfacCIrgm5BYEoO3+8MDf5jETW4eF3ECe2eyaltHgDKTkzjiBOtZ9PPYl0jvZ63Uw==
+X-Received: by 2002:a05:6871:a0ca:b0:29e:3484:ae1d with SMTP id
+ 586e51a60fabf-2b32f270745mr5004992fac.26.1738253034508; 
+ Thu, 30 Jan 2025 08:03:54 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f3335700cdsm294475b6e.30.2025.01.30.07.28.56
+ 586e51a60fabf-2b356650aa1sm463845fac.47.2025.01.30.08.03.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 07:28:56 -0800 (PST)
-Date: Thu, 30 Jan 2025 09:28:54 -0600
+ Thu, 30 Jan 2025 08:03:53 -0800 (PST)
+Date: Thu, 30 Jan 2025 10:03:50 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Alexander Dahl <ada@thorsis.com>, Jagan Teki <jagan@amarulasolutions.com>,
- =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
- u-boot@lists.denx.de, Yoshitaka Ikeda <ikeda@nskint.co.jp>
-Subject: Re: [PATCH 0/7] [U-Boot] spi: atmel-quadspi: Refresh and add classic
- mode support
-Message-ID: <20250130152854.GA1233568@bill-the-cat>
-References: <20250123121215.21001-1-ada@thorsis.com>
- <d6746615-550b-4290-ae17-42728ae68f1c@linaro.org>
- <20250130144946.GX1233568@bill-the-cat>
- <800240f1-44e8-432b-a772-5a14e7746451@linaro.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ =?iso-8859-1?Q?Pierre-Cl=E9ment?= Tosi <ptosi@google.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, maz@kernel.org, CFSworks@gmail.com
+Subject: Re: [RFC PATCH 1/4] meminfo: add memory details for armv8
+Message-ID: <20250130160350.GB1233568@bill-the-cat>
+References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
+ <20250130072100.27297-2-ilias.apalodimas@linaro.org>
+ <bc481af0-64f1-47f4-af19-1aba64c2ae6c@gmx.de>
+ <CAC_iWjKSFq-hhwzoxw9XMXj92fpmy1uz_J-kdqvYx0Ju6HcUMg@mail.gmail.com>
+ <2fbcb4c8-52d4-48a3-a2bf-f7cd8fb20a30@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7RaVT80kHf0L6oGo"
+ protocol="application/pgp-signature"; boundary="npP35zkSZbDqPVeD"
 Content-Disposition: inline
-In-Reply-To: <800240f1-44e8-432b-a772-5a14e7746451@linaro.org>
+In-Reply-To: <2fbcb4c8-52d4-48a3-a2bf-f7cd8fb20a30@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,126 +117,122 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7RaVT80kHf0L6oGo
-Content-Type: text/plain; charset=iso-8859-1
+--npP35zkSZbDqPVeD
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 30, 2025 at 04:53:14PM +0200, Eugen Hristev wrote:
->=20
->=20
-> On 1/30/25 16:49, Tom Rini wrote:
-> > On Thu, Jan 30, 2025 at 04:07:27PM +0200, Eugen Hristev wrote:
-> >>
-> >>
-> >> On 1/23/25 14:12, Alexander Dahl wrote:
-> >>> Hello everyone,
-> >>>
-> >>> this patch series is for U-Boot, although Linux might be affected.
-> >>>
-> >>> The quadspi controller on microchip (former atmel) sama5d2, sam9x60 a=
-nd
-> >>> other soc variants of the at91 family is usually used in hardware
-> >>> accelerated spi-mem mode.  It also supports a classic mode for
-> >>> interfacing all kinds of SPI peripherals like ADCs, IO expanders,
-> >>> displays, you name it.  However the drivers in Linux and U-Boot did n=
-ot
-> >>> support that mode, yet.
-> >>>
-> >>> While spi-mem subsystem interface is comparable between Linux and
-> >>> U-Boot, SPI subsystem interface is rather different in Linux and U-Bo=
-ot.
-> >>> So there's no previously written Linux support just ported here.  I
-> >>> tried that, but the simple implementation for U-Boot's .xfer() used h=
-ere
-> >>> does not work for Linux' .transfer_one() because of the OVRES flag set
-> >>> all the time.  I guess a more sophisticated approach has to be taken =
-in
-> >>> Linux with interrupts, completions and/or dma?
-> >>>
-> >>> According to commit 24c8ff4684c5 ("spi: Add Atmel QuadSPI driver")
-> >>> message, the initial U-Boot variant of this driver was ported from Li=
-nux
-> >>> v5.1-rc5 back then.  I hope it's okay to squash the fixes added to Li=
-nux
-> >>> after that into patch 2 and 3 of this series?
-> >>>
-> >>> Patch 4 and 5 come from my efforts to hack this feature into the Linux
-> >>> driver.  (Not sure if those should be added to the Linux driver
-> >>> anyways, even if nobody ever implements transfer_one() over there?)
-> >>>
-> >>> Patch 5 is the actual work, very much inspired by the current U-Boot
-> >>> driver atmel_spi for the generic SPI controllers on at91 family.
-> >>>
-> >>> Patch 1 is copied from my other spi series for U-Boot, just added it
-> >>> here for better build results.
-> >>>
-> >>> Patch 6 is optional, because not portable towards Linux.
-> >>>
-> >>> Tested on top of v2024.10, because v2025.01 won't build as debug
-> >>> for sam9x60 as described in another thread.  But there are almost no
-> >>> changes related to at91 socs, boards, and drivers in the last months
-> >>> here, so it should be comparable.
-> >>>
-> >>> Greets
-> >>> Alex
-> >>>
-> >>> (Cc-ing the contributors of the Linux fixes here.)
-> >>> Cc: Tudor Ambarus <tudor.ambarus@microchip.com>
-> >>> Cc: Yoshitaka Ikeda <ikeda@nskint.co.jp>
-> >>> Cc: Cs=F3k=E1s Bence <csokas.bence@prolan.hu>
-> >>>
-> >>> Alexander Dahl (7):
-> >>>   spi: atmel-quadspi: Depend on SPI_MEM
-> >>>   spi: atmel-quadspi: Port collected fixes from Linux v5.10 and v5.15
-> >>>   spi: atmel-quadspi: Avoid overwriting MR register settings
-> >>>   spi: atmel-quadspi: Remove default mode setting at probe time
-> >>>   spi: atmel-quadspi: Allow setting SMM to classic SPI mode
-> >>>   spi: atmel-quadspi: Add support for classic SPI mode
-> >>>   spi: atmel-quadspi: Improve probe debugging
-> >>>
-> >>>  drivers/spi/Kconfig         |   2 +-
-> >>>  drivers/spi/atmel-quadspi.c | 294 ++++++++++++++++++++++++++++------=
---
-> >>>  2 files changed, 228 insertions(+), 68 deletions(-)
-> >>>
-> >>>
-> >>> base-commit: 2eed5a1ff36217372e19f7513bd07077fc76718a
-> >>
-> >> Hello Alex,
-> >>
-> >> I had a quick look over your patches, but it would require to get a
-> >> review from SPI maintainers to apply these.
+On Thu, Jan 30, 2025 at 02:36:40PM +0100, Heinrich Schuchardt wrote:
+> On 1/30/25 10:35, Ilias Apalodimas wrote:
+> > HI Heinrich
 > >=20
-> > Our SPI maintainer is currently not very responsive. Would you be OK
-> > taking this via the atmel tree since it's an atmel platform driver and
-> > not core changes? Thanks!
+> > On Thu, 30 Jan 2025 at 12:01, Heinrich Schuchardt <xypron.glpk@gmx.de> =
+wrote:
+> > >=20
+> > > On 1/30/25 07:20, Ilias Apalodimas wrote:
+> > > > Upcoming patches are mapping memory with RO, RW^X etc permsissions.
+> > > > Fix the meminfo command to display them properly
+> > > >=20
+> > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > ---
+> > > >    arch/arm/cpu/armv8/cache_v8.c    | 18 +++++++++++++++++-
+> > > >    arch/arm/include/asm/armv8/mmu.h |  2 ++
+> > > >    cmd/meminfo.c                    |  5 +++++
+> > > >    3 files changed, 24 insertions(+), 1 deletion(-)
+> > > >=20
+> > > > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cac=
+he_v8.c
+> > > > index 5d6953ffedd1..a4ca56c8ed42 100644
+> > > > --- a/arch/arm/cpu/armv8/cache_v8.c
+> > > > +++ b/arch/arm/cpu/armv8/cache_v8.c
+> > > > @@ -421,7 +421,7 @@ static int count_ranges(void)
+> > > >        return count;
+> > > >    }
+> > > >=20
+> > > > -#define ALL_ATTRS (3 << 8 | PMD_ATTRINDX_MASK)
+> > > > +#define ALL_ATTRS (3 << 8 | PMD_ATTRMASK)
+> > > >    #define PTE_IS_TABLE(pte, level) (pte_type(&(pte)) =3D=3D PTE_TY=
+PE_TABLE && (level) < 3)
+> > > >=20
+> > > >    enum walker_state {
+> > > > @@ -568,6 +568,17 @@ static void pretty_print_table_attrs(u64 pte)
+> > > >    static void pretty_print_block_attrs(u64 pte)
+> > > >    {
+> > > >        u64 attrs =3D pte & PMD_ATTRINDX_MASK;
+> > > > +     u64 perm_attrs =3D pte & PMD_ATTRMASK;
+> > >=20
+> > > The variable perm_attrs is not needed. You could use pte directly.
+> > >=20
+> > > > +
+> > > > +     if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK_U=
+XN) &&
+> > > > +         perm_attrs & PTE_BLOCK_RO)
+> > > > +             printf("%-5s", " | RO");
+> > > > +     else if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BL=
+OCK_UXN))
+> > > > +             printf("%-5s", " | RW");
+> > > > +     else if (perm_attrs & PTE_BLOCK_RO)
+> > > > +             printf("%-5s", " | RX");
+> > > > +     else
+> > > > +             printf("%-5s", " | RWX");
+> > >=20
+> > > The string has 6 characters. "%-5s" does not match!
 > >=20
+> > Ah thanks! That's the misalignment i was chasing
+> >=20
+> > > As the string length is known using a length identifier is superfluou=
+s.
+> > >=20
+> > > It would be helpful to add descriptions to the flags in
+> > > arch/arm/include/asm/armv8/mmu.h.
+> > >=20
+> > > https://documentation-service.arm.com/static/5efa1d23dbdee951c1ccdec5
+> > > describes:
+> > >=20
+> > > "The Unprivileged Execute Never (UXN) and Privileged Execute Never (P=
+XN)
+> > > attributes can be set separately. This is used to prevent, for exampl=
+e,
+> > > application code running with kernel privilege, or attempts to execute
+> > > kernel code while in an unprivileged state."
+> > >=20
+> > > Shouldn't we show the values of UXN and PXN separately?
+> >=20
+> > I had that on my initial patches. But then I decided it's too Arm
+> > specific to print it.
+> > I was hoping more archs would fix that so I preferred RO, RW, RX since
+> > it's arch agnosticI don't mind re-adding it.
 >=20
-> Yes, that is fine. However the review would be to the best of my ability
-> only.
+> This code in arch/arm/cpu/armv8/cache_v8.c is architecture specific.
+>=20
+> RISC-V has flags R, W, X, U where U controls access by user mode.
+>=20
+> When printing the flags I guess we should use an architecture specific
+> notation.
 
-That's fine, thanks!
+=2E.. and update doc/usage/cmd/meminfo.rst to note that it's printing
+arch-specific flags here, perhaps with an arm64 subsection explaining
+any shorthand and links to appropriate documentation ?
 
 --=20
 Tom
 
---7RaVT80kHf0L6oGo
+--npP35zkSZbDqPVeD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmebmrMACgkQFHw5/5Y0
-tywFugwAiCpZMXnRwb8zJsYbvz9w68SceCDyPTU4zFG/LSvlwfgelcl9CbtDkZ/Y
-Uben5TPJMmw1ogQeCZNrUaS/BInmhWy5KBTgokrai9osr9N99LT1frI0jFcdygXV
-xHbFxhC8qx/4GMidjsAuZZHB/Z2oJKR7W0v0utbvF4q7ZtD0T2FvTRinOBNAOauw
-IRnXfDUvFNfFQ/SZmqm2m45yOqByAP8tmgUAb7QmxzLs8iqZDgm6Zb0XihaRQZzz
-gI7Uf8bDeUkC3LnkoafmXKqeGdhS+Cz1OF/jp4/cx92rYsYwRGHzKdo00xSq/bz/
-fc4fy8WViXipF8pGXCAvKPPa0rzkho6WEv2OiQUQRTS5SUwblzPN0vW5Vf0X1UpI
-/lE8PXAZRYQUzviQp2JF9JsE+okb5Ebw8fV4orBKFrr2SFGMJrfrI0dOoaZr5Zf1
-lvrXa2sW7vUVQWvJEDSgioA7V7v4Y+uyD0kqlkQqzamj47cQgXy1Ld6JHKdcnzrv
-2Z5DCqCO
-=3p+C
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmebot8ACgkQFHw5/5Y0
+tywIZwv/fUIaF+YsgOHUPY6ZstRQz2e/6wIuxGvfHudj3Vn4TdBVxu5k0wDMGxYl
+h9KPpPzBWI3RVwNC6ON9Rgrj9rGSWmjnvP7Lxy2dGHc0Oqi1OSiGIfyw46K9Io0e
+qasMPbH96d97pFgMmNkfrDLb+nYhRik43e4CJ8TPYVabmUz6D8Tn31SuV8Xz3A1V
+DYga/EkNNGLop7PoBQ6sXBXbMjJZYNhJiS7QYhwFtkX1YwILWaesbCww15SgQbLw
+OlFefu4t614M6IVbf4nWkHK4R62jcncYJROaFy+kXeoQ00z2Jo1tFrjPfJ6qQPGa
+Dvmgn+1f+tn6SbmnIkh3ReBSVdWxOhaqsaLBzjLKjQcZe9w9TRyJibIH2UrMgvDx
+ucV9E0h/pp6cTsOMHsawtf4kG3ynfCpcUKbpDmTSTqjNlcXuqdjyd2RqPMHatqi5
+1hUKy4ty7yEnkRNUnF50dDMeH/7KQ1qTKNqLf6yZiZPTbz6mTrvtSzSY1Swjtceg
+7cSeBwMk
+=s7io
 -----END PGP SIGNATURE-----
 
---7RaVT80kHf0L6oGo--
+--npP35zkSZbDqPVeD--
