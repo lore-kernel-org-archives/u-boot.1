@@ -4,77 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BB5CC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 13:33:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 259DAC02190
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 13:37:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9714281F69;
-	Thu, 30 Jan 2025 14:33:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AFD3820B0;
+	Thu, 30 Jan 2025 14:37:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="fu7QS61F";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F161820A0; Thu, 30 Jan 2025 14:33:41 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CC6680E9A
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:33:39 +0100 (CET)
+ id BE340820DE; Thu, 30 Jan 2025 14:37:06 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 96A2B81F69
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:37:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4125fc93c8=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50UCf2dQ030596;
- Thu, 30 Jan 2025 14:33:35 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- LTLa3gKtERaysexY+qCs8X/ql5Zo+cQRC8C5/6RV56Q=; b=fu7QS61FCrjCIvNM
- g9bNJ2/8uxJyWS3OKnvZSb1dgEYQCWhAusXtmvWyVm4rsP9TCji2WgJ1gksCOo+s
- 6484/jgRzwMsIsl12Dqd9jaJ6sB4m4gcRXULkIqKWJ4DYHK5iVOOK8F5D4YA6Mgl
- +iBWleJjiO2DRfJzVuud00f8uVyah+tOXewU0shykVcbSgd+yCykpUY94cyWYLXg
- W1jEsXrkX9aL8gJvWSLvp8XfA3EqPLrihDXO88IVbbLufobzLof1OEpvt2Wj+Xkc
- Wmk1/1iAyLPDiNu6eCPYWBQT3lD/SHKFLoj0QJgN32p6CJNSQWRqIzHBIGX8epCr
- +tKK1w==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44g8ne8mbs-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Jan 2025 14:33:35 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1D1BC40071;
- Thu, 30 Jan 2025 14:30:29 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CE1E83CE608;
- Thu, 30 Jan 2025 14:28:03 +0100 (CET)
-Received: from [10.48.87.126] (10.48.87.126) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 30 Jan
- 2025 14:28:03 +0100
-Message-ID: <8a22f018-4fe7-4a10-871d-f1c768d591f7@foss.st.com>
-Date: Thu, 30 Jan 2025 14:28:02 +0100
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 76024497;
+ Thu, 30 Jan 2025 05:37:29 -0800 (PST)
+Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.100.21])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C780D3F63F;
+ Thu, 30 Jan 2025 05:37:02 -0800 (PST)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+	Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] env: fat: Avoid writing to read-only location
+Date: Thu, 30 Jan 2025 13:36:46 +0000
+Message-Id: <20250130133646.2177194-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] serial: stm32: restrict _debug_uart_init() usage
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Peter Robinson <pbrobinson@gmail.com>, Simon
- Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini
- <trini@konsulko.com>
-References: <20250130115754.398989-1-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20250130115754.398989-1-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.126]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-30_06,2025-01-30_01,2024-11-22_01
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,73 +53,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The env_fat_get_dev_part() function mostly returns a fixed string, set
+via some Kconfig variable. However when the first character is a colon,
+that means that the boot device number is determined at runtime, and
+patched in. This requires altering the string.
+
+So far this was done via some ugly and actually illegal direct write to
+the .rodata string storage. We got away with this because U-Boot maps
+everything as read/write/execute so far.
+
+A proposed patch set actually enforces read-only (and no-execute)
+permissions in the page tables, so this routine now causes an exception:
+=======================
+Loading Environment from FAT... "Synchronous Abort" handler, esr 0x9600004f, far 0xfffb7d4c
+elr: 000000004a054228 lr : 000000004a05421c (reloc)
+elr: 00000000fff7c228 lr : 00000000fff7c21c
+.....
+=======================
+
+Rewrite the routine to do away with the dodgy string manipulation,
+instead allocate the string in the r/w .data section, where we can
+safely manipulate it.
+
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+---
 Hi,
 
-On 1/30/25 12:57, Patrice Chotard wrote:
-> Since commit 948da7773e34 ("arm: Add new config option ARCH_VERY_EARLY_INIT")
-> debug_uart_init() is called respectively in crt0.S and crt0_64.S.
-> That means that _debug_uart_init() is called for all STM32MP platforms
-> even for those which doesn't support SPL_BUILD.
->
-> So restrict _debug_uart_init() execution for platforms which can have
-> SPL_BUILD enabled (STM32MP1 platform only).
->
-> It's more needed to call debug_uart_init() in stm32mp1/cpu.c.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->
->   arch/arm/mach-stm32mp/stm32mp1/cpu.c |  2 --
->   drivers/serial/serial_stm32.c        | 18 ++++++++++++------
->   2 files changed, 12 insertions(+), 8 deletions(-)
->
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> index cb1b84c9af9..bc410128479 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> @@ -138,8 +138,6 @@ int mach_cpu_init(void)
->   	if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL) &&
->   	    (boot_mode & TAMP_BOOT_DEVICE_MASK) == BOOT_SERIAL_UART)
->   		gd->flags |= GD_FLG_SILENT | GD_FLG_DISABLE_CONSOLE;
-> -	else if (IS_ENABLED(CONFIG_DEBUG_UART) && IS_ENABLED(CONFIG_XPL_BUILD))
-> -		debug_uart_init();
->   
->   	return 0;
->   }
-> diff --git a/drivers/serial/serial_stm32.c b/drivers/serial/serial_stm32.c
-> index 1ee58142b3f..1675a9cb9d1 100644
-> --- a/drivers/serial/serial_stm32.c
-> +++ b/drivers/serial/serial_stm32.c
-> @@ -299,13 +299,19 @@ static inline struct stm32_uart_info *_debug_uart_info(void)
->   
->   static inline void _debug_uart_init(void)
->   {
-> -	void __iomem *base = (void __iomem *)CONFIG_VAL(DEBUG_UART_BASE);
-> -	struct stm32_uart_info *uart_info = _debug_uart_info();
-> +	void __maybe_unused __iomem *base = (void __iomem *)CONFIG_VAL(DEBUG_UART_BASE);
-> +	struct stm32_uart_info *uart_info __maybe_unused = _debug_uart_info();
->   
-> -	_stm32_serial_init(base, uart_info);
-> -	_stm32_serial_setbrg(base, uart_info,
-> -			     CONFIG_DEBUG_UART_CLOCK,
-> -			     CONFIG_BAUDRATE);
-> +	/*
-> +	 * debug_uart_init() is only usable when SPL_BUILD is enabled
-> +	 * (STM32MP1 case only)
-> +	 */
-> +	if (IS_ENABLED(CONFIG_DEBUG_UART) && IS_ENABLED(CONFIG_SPL_BUILD)) {
-> +		_stm32_serial_init(base, uart_info);
-> +		_stm32_serial_setbrg(base, uart_info,
-> +				     CONFIG_DEBUG_UART_CLOCK,
-> +				     CONFIG_BAUDRATE);
-> +	}
->   }
->   
->   static inline void _debug_uart_putc(int c)
+found when naively testing Ilias' series on some Allwinner board.
+I am sure there are better ways to implement this (probably as many as
+there are developers), but this works for me.
+This does away with the optimisation of doing the manipulation only
+once, but I am not sure that's really worthwhile?
 
+Cheers,
+Andre
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+ env/fat.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
 
-Thanks
-Patrick
+diff --git a/env/fat.c b/env/fat.c
+index b04b1d9c315..1ad301eaaff 100644
+--- a/env/fat.c
++++ b/env/fat.c
+@@ -41,14 +41,12 @@ __weak const char *env_fat_get_intf(void)
+ __weak char *env_fat_get_dev_part(void)
+ {
+ #ifdef CONFIG_MMC
+-	static char *part_str;
+-
+-	if (!part_str) {
+-		part_str = CONFIG_ENV_FAT_DEVICE_AND_PART;
+-		if (!strcmp(CONFIG_ENV_FAT_INTERFACE, "mmc") && part_str[0] == ':') {
+-			part_str = "0" CONFIG_ENV_FAT_DEVICE_AND_PART;
+-			part_str[0] += mmc_get_env_dev();
+-		}
++	/* reserve one more char for the manipulation below */
++	static char part_str[] = CONFIG_ENV_FAT_DEVICE_AND_PART "\0";
++
++	if (!strcmp(CONFIG_ENV_FAT_INTERFACE, "mmc") && part_str[0] == ':') {
++		part_str[0] = '0' + mmc_get_env_dev();
++		strcpy(&part_str[1], CONFIG_ENV_FAT_DEVICE_AND_PART);
+ 	}
+ 
+ 	return part_str;
+-- 
+2.25.1
 
