@@ -4,80 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F201C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 16:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44A22C0218F
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 16:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B96A9820F6;
-	Thu, 30 Jan 2025 17:06:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 176D982106;
+	Thu, 30 Jan 2025 17:06:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=inf.elte.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HGwXOCkM";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1594E80EC1; Thu, 30 Jan 2025 14:42:31 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 4068080207; Thu, 30 Jan 2025 14:56:02 +0100 (CET)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+ [209.85.128.53])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 357E080E9A
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:42:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3787D80087
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:55:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=inf.elte.hu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aa684b6d9c7so147125066b.2
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 05:42:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738244548; x=1738849348; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2LyufiWgUdUqA3J7uo1BpwqxdmFoSLczzZ+IgXJ6C6U=;
- b=HGwXOCkM1skFxe7mgPA81pu1WMP7zE06SBegmRGY7SSggalCUmJrrQesJTHNSM2Hxr
- PIp54Y8daiN1v9qH82ZedQOZBgf+VSMiqPJNyjA0TalVC66dcIBVHNzydriqKISXq4PW
- RUsIWBO1nV3h5W/fYMM8/sRUd060pOt2gZtvHvWovFZaT+a+e+WxuZ/6jRCNn7Zd/r9g
- 4O07io8q+i01HGV9l6SJOl4PxfHMaP+Yv1pa4QbkvwJEzPNPUtTJUibyY7NgNboQRr9S
- GBz6djTd9Nw6UC6RMe0zF+yjPrI4Yly2/sw570yn6eQ0R7WwvIV1FGYKPQA7l3jLwg30
- QyXw==
+ spf=pass smtp.mailfrom=primalgamer@gmail.com
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-43690d4605dso5867945e9.0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 05:55:59 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738244548; x=1738849348;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2LyufiWgUdUqA3J7uo1BpwqxdmFoSLczzZ+IgXJ6C6U=;
- b=XY4lrDT5ha5UEqDC1xWFNxYMJlE33oO4YESu53+E4L1pT8lnedsQk1XzBscqKZZWi+
- DW3IaA+DIshTmgH3IIHMLn+Kj9MbUhKYdl0xcU555lPjcuDsLhaeb2xdfGeq3735p4HK
- KWCL1D1axU7SGonu0NO4OYV0bedePjgYjWszWOtrggZSCEwRPEnWgxjaCK8OeXl4bYtT
- hTmzIjzV9Y6QP8rtV10t8WMh4q/LI67MV05OfOABW50qOqw5X0Ta+23Wa812O9SUXdL5
- pOGC14UGEwu5s3jrgfQHREtUh5SPuk+AgaS68waRZUtgg/kp6+7WFkMaUQrq6IKBokHV
- y9dw==
-X-Gm-Message-State: AOJu0YzE0IrtKqOzMlWePe18cH7TNu0hzM9YXDORg1ZNa64/dnX2xK2T
- J46oubVdTNZ1+eWi/PU/1vA3WIxP4tW2dugTxOWvlv7IID9k+WwKo2oY+/+Tduo=
-X-Gm-Gg: ASbGnctFVYPiffkn4siR7dbCQt5qmZPchWfFAp0B3/2P8t/5grhuQoQLp3aCEqIQM6S
- dgncGkpcLgbmpXW2+nAr6eKHierK+Xt3xm1m7VPFFBkWDANdDPshmFVSAQ9cTtqO6FCABCglNK+
- myJB48FXBU9Swgp4YbKuNemmKgHRl2EMfgXfOWsO3p34g+HVTNqRxPKvWGvt5/Tauj+ICKkelPM
- sXCTegKQunZ+iquxFdD7J6KFhX+1SZ8unM+olNRSk0lBMSu7/0JH+NSy3Hrrv9j25v3DXa7Lp45
- dJE9ycIuELVmdunXpajGfQMY249xjOIapfttKZeTmudJoq5TjhjGhctVT1oVarLsNrNPIKdkAw=
- =
-X-Google-Smtp-Source: AGHT+IGEo/gljnij2BCfHJ0QeIjU2iXzCZkT6whITGXyFxPojplETwy+UjXcy//Kgp0xL6+9eIYxkQ==
-X-Received: by 2002:a17:907:72c4:b0:aa6:79fa:b480 with SMTP id
- a640c23a62f3a-ab6cfcb3b87mr728665466b.10.1738244546676; 
- Thu, 30 Jan 2025 05:42:26 -0800 (PST)
-Received: from astra-student.rasu.local (109-252-118-237.nat.spd-mgts.ru.
- [109.252.118.237]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e4f4ab84sm121281766b.62.2025.01.30.05.42.25
+ d=1e100.net; s=20230601; t=1738245358; x=1738850158;
+ h=mime-version:user-agent:content-transfer-encoding:date:to:from
+ :subject:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CuU3qYFfEqe5bmb8XL19AG5TUjSP3vlTgrxkfIjaqS4=;
+ b=RemORcQ2kpKzN6tL5R7A1kfUQBFNsxIQ3qiIDYhsuYPSz8+nBl7AOcr+81o6CQglBT
+ lC+bCC8UQexHB0PrwcZGFnWWt93tER24cFsRdJNtxqszGGdUbg4w1UsJCl+kVJe7UCtN
+ ZjsbFjkteB7bT+ZJX3JOQLMxC6nf+6l7lt/IPlhh94oSBl4yN5iaKoAhsBFvSVJTHLrK
+ ChXyuBB6buvJd2CAnJgVukseP4RNv2B6JVpfnJd6vbi0maShLcjf+MXKucJ8z/HKbr/Y
+ z/g1FEOfxnObiTL//x3dOa+5sn7gkLq/lc0+nxwsOz3nqRDukJbcPWbBM78vQjvpEiAN
+ koow==
+X-Gm-Message-State: AOJu0YzHZxuv5Qio3KH3Ao4bzgPimtHH2Yj3/Ign7i2lSdD7A9MpQj2Q
+ 3E99frxPZdHRGefUId6QH6g3MgyATA7xfwsGAhvrj4SJduvhSHXcvpSj0g2u0ew=
+X-Gm-Gg: ASbGnctttKG0qynZGWaMWi3fanUmmiaHPWCocAXeQjnMNbhDd3gMHctvfvCIqSGdm/r
+ rAQ1y6mqTEutlpOHtQ9Upvr1jLGg4EeH0dbEgE37ufxZNwckRG2LqUpLD1b69Q69WPieeeXKNx3
+ 8K1PvxrbFOyjLfFuK41lUPLxb8/oaCk7qi7ZCwSlMGn1BqwujU+On0Jcqlr3w4nqe+ifulSUaM6
+ 86jXUwkP32KmzBmYylHIBfBRMKO12tbi+aGibIEQ6cZ0jQh1nQIYfqOuyJUyz9FJCsTTB3aK82s
+ 2GEZfE/NuhiVhfS7UkeXuImCtRL8+cMcomo=
+X-Google-Smtp-Source: AGHT+IH+GiVka/h9IKgPb5riSSEL1OLFMmH7kBomB/+OOQQwhjUlH11giru0eglqdcKP3WFxYsAaMQ==
+X-Received: by 2002:a05:600c:1e1b:b0:434:f5c0:328d with SMTP id
+ 5b1f17b1804b1-438dc40ffcfmr62106295e9.23.1738245355980; 
+ Thu, 30 Jan 2025 05:55:55 -0800 (PST)
+Received: from [127.0.0.1] (login04.caesar.elte.hu. [157.181.151.133])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438dcc26b15sm59792595e9.11.2025.01.30.05.55.54
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 05:42:26 -0800 (PST)
-From: Anton Moryakov <ant.v.moryakov@gmail.com>
+ Thu, 30 Jan 2025 05:55:54 -0800 (PST)
+Message-ID: <4fcb9244e87d5bb4a53075775247cecde2f9e3fa.camel@inf.elte.hu>
+Subject: u-boot in restricted environment: networking over serial
+From: Ferenc Fejes <fejes@inf.elte.hu>
 To: u-boot@lists.denx.de
-Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH] tools: fix NULL_AFTER_DEREF in image-host.c
-Date: Thu, 30 Jan 2025 16:42:43 +0300
-Message-Id: <20250130134258.271298-1-ant.v.moryakov@gmail.com>
-X-Mailer: git-send-email 2.30.2
+Date: Thu, 30 Jan 2025 14:55:53 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.55.1-1+b1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 30 Jan 2025 17:06:58 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,51 +81,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Report of the static analyzer:
-1. NULL_AFTER_DEREF Pointer 'str', which is dereferenced at image-host.c:688 by calling function 'strdup', is compared to a NULL value at image-host.c:691.
-2. NULL_AFTER_DEREF Pointer 'list', which is dereferenced at image-host.c:689, is compared to a NULL value at image-host.c:691.
+Hi,
 
-Corrections explained:
-1. Checking for NULL before using pointers: The if (!list || !str) check is now performed before calling strdup and realloc, which prevents null pointer dereferences.
-2. Checking the result of strdup: strdup can return NULL if memory allocation fails. This also needs to be checked.
-3. Checking the result of realloc: If realloc returns NULL, then memory has not been allocated and dup must be freed to avoid memory leaks.
+Is it possible to use the serial port for u-boot networking? For example, g=
+iven
+a restricted environment where the FIT image is available with ethernet fir=
+mware
+and drivers, so it is not possible to boot it with DHCP boot since there is=
+ no
+networking. Or simply the ethernet NIC has no u-boot driver at all. For suc=
+h
+cases, I assume ymodem is recommended to download and boot the FIT image.
 
-Triggers found by static analyzer Svace.
+However, experimenting with different images and debugging, it would be mor=
+e
+convenient if serial could be used as both data and console channel. Is thi=
+s
+possible?
 
-Signed-off-by: Anton Moryakov <ant.v.moryakov at gmail.com>
+A simple example:
+1. ppp on the host machine, with IP forward, NAT, etc.
+2. u-boot establish a ppp connection over serial to the host
+3. u-boot starts a netconsole session to the host
+4. user can use netconsole and wget to download images
 
----
- tools/image-host.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+I was thinking of PPP, but that's probably not supported by u-boot. Anythin=
+g
+similar with RNDIS and USB CDC ACM?
 
-diff --git a/tools/image-host.c b/tools/image-host.c
-index 84095d760c..821c8db616 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -716,11 +716,21 @@ static int strlist_add(struct strlist *list, const char *str)
- {
- 	char *dup;
- 
-+	if (!list || !str)
-+		return -1;
-+
- 	dup = strdup(str);
-+	if(!dup)
-+		return -1;
-+
- 	list->strings = realloc(list->strings,
- 				(list->count + 1) * sizeof(char *));
--	if (!list || !str)
--		return -1;
-+	if (!list->strings)
-+    {
-+        free(dup);  
-+        return -1;
-+    }
-+	
- 	list->strings[list->count++] = dup;
- 
- 	return 0;
--- 
-2.30.2
+Thanks in advance for any hint!
 
+Best,
+Ferenc
