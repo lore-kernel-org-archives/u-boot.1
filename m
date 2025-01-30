@@ -4,69 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D101FC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 07:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058D5C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 07:21:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCADE80AE4;
-	Thu, 30 Jan 2025 08:10:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 636FC80AE4;
+	Thu, 30 Jan 2025 08:21:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NvvZIHhD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HThcO6jf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4F7180B9B; Thu, 30 Jan 2025 08:10:47 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C75F80AE2
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:10:45 +0100 (CET)
+ id DB49080B9B; Thu, 30 Jan 2025 08:21:09 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7389A80AE2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:21:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50U7Ahb52307299
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 30 Jan 2025 01:10:43 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738221043;
- bh=FZvhy9P0HIyTpGwaIW9YYCU4jhlblIuEmGoakIhOZdg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=NvvZIHhD23inTICwa5RLwVvSoVGLZo3jQlMDhoWV/qG42q9t7Hd2juLLReYAyV82J
- 8DHQjs6zuwxoOT7ZpG7UFRgMHthHeWUYJrtjWWZPAkiyz+/3875vK61Q1LFXZem3cy
- D/EMwGkXIPeLxAUtmAMSfPNEiYJVCGccFll24a54=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50U7AhdO113836;
- Thu, 30 Jan 2025 01:10:43 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
- Jan 2025 01:10:42 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 30 Jan 2025 01:10:42 -0600
-Received: from [10.249.140.248] ([10.249.140.248])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50U7Adsj087983;
- Thu, 30 Jan 2025 01:10:40 -0600
-Message-ID: <8da11e58-0220-4ece-9c37-a98fcb86bd28@ti.com>
-Date: Thu, 30 Jan 2025 12:40:38 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-436345cc17bso2843235e9.0
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:21:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738221667; x=1738826467; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qeTa6ht1b5XKOwPg0RS3CcanbnYaz/SxN6h9tTKwY0Q=;
+ b=HThcO6jfyHD5FGEHjHTnx22kSm7L+7F5I0Uhu0OwmoUUkag0uM0i1koGEbbTPoCxHM
+ Xdwpsvz2koIDCJzwy74oCGtXFFdFlLylMtrgrSiSQrJWuAzwujEiJtw+M4Xa8S0SjAUc
+ c8DT9Z9t4jjBXOEaKci1jeDgPZG7wqF+hn8AhkVNjTcxVuN7fppsKHm0Yr3ApdvxmAbW
+ y3xvz2eMe/o1QzyT1qYQss+EPJ01pFMPHEptCAWLhE21H2u6DUfBXirnZfd4gnXWMISb
+ ulg3GAurI/1WaYuTnM2jFvRXA8qbTjTMcbMJtwkeN7EN3pVwWkx4j5I1cSEOnGLTGyh/
+ r6Vg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738221667; x=1738826467;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qeTa6ht1b5XKOwPg0RS3CcanbnYaz/SxN6h9tTKwY0Q=;
+ b=O/OA56svApntTptPq1lN/opxZsFVDXQ8gnzY6Uzbd4wC3Tqr9AICCw/GJ0BY/61hcm
+ SNCgKOudV9AInKqS3YsHR81qvkSAedVsd0xqGI3qtmKLbf6e+Wxc+HvmG1jPjLaGyPXd
+ zCL5ocrK+9751O5IKgSe4jd0oX1j7BHwM/fQV7mJTMohYkvi0fwLcZxzvzTImGDxwhoU
+ ZKybEa81TFb+9cEeFOWZAMPAIAhbrNaK9cEpxvVT4k+Of11Z35ct7jzVpUT+i2CXlI61
+ icgEq0n4HkzrCIrvf2fup7JnXijR4u5ghcCFGKUQ2X88B3Pd2LeP56BK3Cu4P1zXI63P
+ gXeA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVOm45B4jyXKZuoiwLGz55OC3b98E8YcgtBehNBqpyqQaHJ/wHpE0y/DiA/eoGUlQ+aXXJAjuk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+akUtGJEBVr9VmXYngFJthw0zU267jYpFBDDXbq5OEST5KASy
+ dGkk7jJTuhZtLFFdXEtqVsgw8v2DCBm/JcezbCz/OvFGsbvc23YQhl7KGMvAVJk=
+X-Gm-Gg: ASbGnctefcV1ZFQZruE8yJzWC6oCID94DEh45dNAMktV7vc9ivIIW7SOBW5ufBYudbC
+ Vd77RIIqsXptfVSs7d1a+RejjEhsP3X5vZL4WwgNQWUcngp52fahhOH+GJ+GsaRe7afrqb0oYWP
+ S4ljht13oPNFcO7WlODh7yf40Kk/74P/+6Xi7RFjOVCoHGpWaYPlrRAgW5aoS5KHQ8/vUFiABgr
+ VbxtdltBBTmYqzqvYZMQtMDiyC0zzYEz3MahGgpDVJqog1LULVXOwVZVzGG5nR+YFQ9trKak65b
+ Ml1cLoaF6lXT/im5O3RP4wAQRReAEDweHUxtAIqqlO/wSu2kDQ==
+X-Google-Smtp-Source: AGHT+IF6zYXqVOPNFgcbSvj2X8qe5RIZ3piL3MxoQTCY8RE1912pTCza2kjplxdbdPkPKi43xyPsaA==
+X-Received: by 2002:a05:600c:3c86:b0:434:a529:3b87 with SMTP id
+ 5b1f17b1804b1-438dc3c2413mr59817515e9.10.1738221666774; 
+ Wed, 29 Jan 2025 23:21:06 -0800 (PST)
+Received: from hades.. (ppp176092181030.access.hol.gr. [176.92.181.30])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438dcc6df2asm48076345e9.29.2025.01.29.23.21.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jan 2025 23:21:06 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: maz@kernel.org,
+	trini@konsulko.com,
+	CFSworks@gmail.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Subject: [RFC PATCH 0/4] Fix page permission on arm64 architectures
+Date: Thu, 30 Jan 2025 09:20:25 +0200
+Message-ID: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/8] ram: k3-ddrss: Add support for a partial inline ECC
- region
-To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <bb@ti.com>,
- <w.egorov@phytec.de>, <s-k6@ti.com>, <marek.vasut+renesas@mailbox.org>
-CC: <u-boot@lists.denx.de>
-References: <20250127142217.1757300-1-n-francis@ti.com>
- <20250127142217.1757300-5-n-francis@ti.com>
- <56685ea7-23da-49d5-88ec-2ee4c2bffc04@ti.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <56685ea7-23da-49d5-88ec-2ee4c2bffc04@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,132 +112,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28-Jan-25 11:23 AM, Kumar, Udit wrote:
-> 
-> On 1/27/2025 7:52 PM, Neha Malcom Francis wrote:
->> Instead of defaulting to choosing the entire DDR region when enabling
->> inline ECC, allow picking of a range within the DDR space using DT to
->> enable.
->>
->> It expects such a node within the memory node, in the absence of which
->> we resort to enabling inline ECC for the entire DDR region:
->>
->> inline_ecc: protected@9e780000 {
->>          device_type = "ecc";
->>          reg = <0x9e780000 0x0080000>;
->>          bootph-all;
->> };
-> 
-> is this possible to have ECC on different part of memory ?
-> 
-> i mean, protect 0x9e780000 + 0x0080000
-> 
-> and then 0xa000_0000 + 0x0080000
-> 
->>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   drivers/ram/k3-ddrss/k3-ddrss.c | 52 +++++++++++++++++++++++++++++++--
->>   1 file changed, 49 insertions(+), 3 deletions(-)
->>
->> diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c 
->> b/drivers/ram/k3-ddrss/k3-ddrss.c
->> index ab46098adbf..ea2578cda58 100644
->> --- a/drivers/ram/k3-ddrss/k3-ddrss.c
->> +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
->> @@ -149,6 +149,7 @@ struct k3_ddrss_desc {
->>       lpddr4_obj *driverdt;
->>       lpddr4_config config;
->>       lpddr4_privatedata pd;
->> +    struct k3_ddrss_ecc_region ecc_range;
->>       struct k3_ddrss_ecc_region ecc_regions[K3_DDRSS_MAX_ECC_REGIONS];
->>       u64 ecc_reserved_space;
->>       u64 ddr_bank_base[CONFIG_NR_DRAM_BANKS];
->> @@ -711,6 +712,30 @@ static void 
->> k3_ddrss_ddr_bank_base_size_calc(struct k3_ddrss_desc *ddrss)
->>           ddrss->ddr_ram_size += ddrss->ddr_bank_size[bank];
->>   }
->> +static void k3_ddrss_ddr_inline_ecc_base_size_calc(struct 
->> k3_ddrss_ecc_region *range)
->> +{
->> +    fdt_addr_t base;
->> +    fdt_size_t size;
->> +    ofnode node1;
->> +
->> +    node1 = ofnode_null();
->> +
->> +    do {
->> +        node1 = ofnode_by_prop_value(node1, "device_type", "ecc", 4);
->> +    } while (!ofnode_is_enabled(node1));
->> +
->> +    base = ofnode_get_addr_size(node1, "reg", &size);
->> +
->> +    if (base == FDT_ADDR_T_NONE) {
->> +        debug("%s: Failed to get ECC node reg and size\n", __func__);
->> +        range->start = 0;
->> +        range->range = 0;
->> +    } else {
->> +        range->start = base;
->> +        range->range = size;
->> +    }
->> +}
->> +
->>   static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct 
->> k3_ddrss_desc *ddrss)
->>   {
->>       fdtdec_setup_mem_size_base_lowest();
->> @@ -759,8 +784,11 @@ static void k3_ddrss_lpddr4_ecc_init(struct 
->> k3_ddrss_desc *ddrss)
->>   static int k3_ddrss_probe(struct udevice *dev)
->>   {
->> +    u64 end;
->>       int ret;
->>       struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
->> +    __maybe_unused struct k3_ddrss_data *ddrss_data = (struct 
->> k3_ddrss_data *)dev_get_driver_data(dev);
->> +    __maybe_unused struct k3_ddrss_ecc_region *range = 
->> &ddrss->ecc_range;
->>       debug("%s(dev=%p)\n", __func__, dev);
->> @@ -802,9 +830,27 @@ static int k3_ddrss_probe(struct udevice *dev)
->>           k3_ddrss_lpddr4_ecc_calc_reserved_mem(ddrss);
->> -        /* Always configure one region that covers full DDR space */
->> -        ddrss->ecc_regions[0].start = ddrss->ddr_bank_base[0] - 
->> ddrss->ddr_bank_base[0];
->> -        ddrss->ecc_regions[0].range = ddrss->ddr_ram_size - 
->> ddrss->ecc_reserved_space;
->> +        k3_ddrss_ddr_inline_ecc_base_size_calc(range);
->> +        if (!range->range) {
->> +            /* Configure entire DDR space by default */
->> +            debug("%s: Defaulting to protecting entire DDR space 
->> using inline ECC\n",
->> +                  __func__);
->> +            ddrss->ecc_range.start = ddrss->ddr_bank_base[0];
->> +            ddrss->ecc_range.range = ddrss->ddr_ram_size - 
->> ddrss->ecc_reserved_space;
->> +        } else {
->> +            ddrss->ecc_range.start = range->start;
->> +            ddrss->ecc_range.range = range->range;
->> +        }
-> Do you really need ecc_range variable ? if not please thing of using 
-> ddrss->ecc_regions[0]
+U-Boot maps all pages as RWX. Sadly it's not not 1990 anymore and we are
+better off mapping binaries with proper permissions.
 
-Using it as ddrss->ecc_regions[0] led to excess character count in the line.
+This is an attempt to map the U-Boot binary properly, but leave the
+area we load binaries unaffected and RWX.
 
->> +
->> +        end = ddrss->ecc_range.start + ddrss->ecc_range.range;
->> +
->> +        if (end > (ddrss->ddr_ram_size - ddrss->ecc_reserved_space))
->> +            ddrss->ecc_regions[0].range = ddrss->ddr_ram_size - 
->> ddrss->ecc_reserved_space;
->> +        else
->> +            ddrss->ecc_regions[0].range = ddrss->ecc_range.range;
->> +
->> +        ddrss->ecc_regions[0].start = ddrss->ecc_range.start - 
->> ddrss->ddr_bank_base[0];
->> +
->>           k3_ddrss_lpddr4_ecc_init(ddrss);
->>       }
+patch #1 adds printing capabilities for page permissions in meminfo
+patch #2 prepares our linker scripts, aligns sections in page boundaries etc
+patch #3 is adding a function to change page tables
+patch #4 sets the permissions for .rodata, .text and .data
 
--- 
-Thanking You
-Neha Malcom Francis
+There's a few problems problem in this RFC ...
+- U-Boot has no MMU APIs in place. As a result I just wired up the function
+  changing the page permissions in board_r.c but only for arm64. In the long
+  term we should add an API that other archs can use if they wish/can
+- meminfo doesn't align all results properly (Caleb?)
+- I am not setting the permissions of EFI runtime services section on purpose.
+  Since the OS is allowed to call SetVirtualAddressMap, we need to reset the
+  pages to RWX just before ExitBootServices, so the OS can relocate that code.
+  In arm64 this isn't a huge problem, because we explicitly disable SVAM if
+  if VA_BITS > 39, but other OSes/archs will have a problem.
+
+# TODO:
+- Long term. Add an MMU API and use that instead of exporting arch specific
+  functions
+- Add an enum in mmu_set_attrs() instead of 1,2,3 arguments
+- Set the permissions of EFI runtime services anbd reset them before EBS()
+- Fix alignment when printing pages & information
+- Add a Kconfig option so the feature can be turned off.
+  The reason is that QEMU CI and some boards, fail because they are trying to
+  write RO pages. This usually happens due to variables being wrongly defined as
+  const, but with the updated page permissions this leads to a crash [0] [1].
+  In both cases the reported ESR is 0x9600004f which translates to
+  "Abort caused by writing to memory" "Permission fault, level 3.". On top of
+  that not setting pages as RO (and only setting .data and .text sections) works
+  fine. So until we find and fix the bugs above we can't turn this on
+  unconditionally.
+
+# Open questions
+- Is initr_reloc_global_data() the right place to change permissions? Or is there
+  a better/safer place to do that?
+
+# How to test patches
+- Aplly them an enable
+  CONFIG_CMD_MEMINFO=y
+  CONFIG_CMD_MEMINFO_MAP=y
+  'meminfo' should print something along the lines of
+=> meminfo
+DRAM:  8 GiB
+Walking pagetable at 000000023ffe0000, va_bits: 40. Using 4 levels
+[0x23ffe1000]                     |  Table |               |
+  [0x23ffe2000]                   |  Table |               |
+    [0x000000000 - 0x008000000]   |  Block | RWX | Normal        | Inner-shareable
+    [0x008000000 - 0x040000000]   |  Block | RW | Device-nGnRnE | Non-shareable
+  [0x040000000 - 0x200000000]     |  Block | RWX | Normal        | Inner-shareable
+  [0x23ffea000]                   |  Table |               |
+    [0x200000000 - 0x23f600000]   |  Block | RWX | Normal        | Inner-shareable
+    [0x23ffeb000]                 |  Table |               |
+      [0x23f600000 - 0x23f68b000] |  Pages | RWX | Normal        | Inner-shareable
+      [0x23f68b000 - 0x23f74e000] |  Pages | RX | Normal        | Inner-shareable
+      [0x23f74e000 - 0x23f793000] |  Pages | RO | Normal        | Inner-shareable
+      [0x23f793000 - 0x23f794000] |  Pages | RWX | Normal        | Inner-shareable
+      [0x23f794000 - 0x23f79d000] |  Pages | RW | Normal        | Inner-shareable
+      [0x23f79d000 - 0x23f800000] |  Pages | RWX | Normal        | Inner-shareable
+    [0x23f800000 - 0x240000000]   |  Block | RWX | Normal        | Inner-shareable
+  [0x240000000 - 0x4000000000]     |  Block | RWX | Normal        | Inner-shareable
+  [0x23ffe3000]                   |  Table |               |
+    [0x4010000000 - 0x4020000000]   |  Block | RW | Device-nGnRnE | Non-shareable
+[0x23ffe4000]                     |  Table |               |
+  [0x8000000000 - 0x10000000000]     |  Block | RW | Device-nGnRnE | Non-shareable
+
+[0] https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
+[1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/jobs/1008714
+
+Ilias Apalodimas (4):
+  meminfo: add memory details for armv8
+  arm: Prepare linker scripts for memory permissions
+  arm64: mmu_change_region_attr() add an option not to break PTEs
+  arm64: Change mapping for data/rodata/text
+
+ Makefile                                | 15 +++++----
+ arch/arm/cpu/armv8/cache_v8.c           | 45 +++++++++++++++++++++++--
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 +++---
+ arch/arm/cpu/armv8/u-boot.lds           | 32 +++++++++++-------
+ arch/arm/include/asm/armv8/mmu.h        |  2 ++
+ arch/arm/include/asm/system.h           |  3 +-
+ arch/arm/mach-snapdragon/board.c        |  2 +-
+ cmd/meminfo.c                           |  5 +++
+ common/board_r.c                        |  7 ++++
+ include/asm-generic/sections.h          |  2 ++
+ lib/efi_loader/efi_runtime.c            |  2 ++
+ 11 files changed, 97 insertions(+), 28 deletions(-)
+
+--
+2.43.0
+
