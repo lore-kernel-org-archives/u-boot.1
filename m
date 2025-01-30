@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C581C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:29:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F04C02190
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:31:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E55282012;
-	Thu, 30 Jan 2025 11:29:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 147BF81F69;
+	Thu, 30 Jan 2025 11:31:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PNDCZANg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NRbzjQXX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 884138206E; Thu, 30 Jan 2025 11:29:43 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 14E1B82012; Thu, 30 Jan 2025 11:31:01 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5352B81F69
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:29:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C59DB80C85
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:30:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e39779a268bso867032276.1
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:29:41 -0800 (PST)
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e580d6211c8so1183806276.1
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:30:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738232980; x=1738837780; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738233057; x=1738837857; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W4A0pGaz3gfsZ+lSY7AQhWXlQPFNJzhuV76egPB+34I=;
- b=PNDCZANgqWa89Buz9smhEOYwVW44R7+reOgzRgzDe1Vu1by0GBmvLXB5kKC0l4B7Ws
- Ff6o25KQpR1Lep5fzwN/Ly0lc7vhkG5+wilIx8gu3BfS1flLK6jEYBA+opVm6m4KNb+m
- Ztz+Qu2Gq98LQehMRUNf68zvgfKgKsPgppgzr+15oGgKimopdWv5pfbdFJE5XXNkGGE7
- w6p4Hzt4PH15y4zGh23GA9QleDUK0V71akle01VIrt2GmqAeD8rSGxGGGL5qNMOc5Jg4
- V3EmZsr0IQHDyJsi34M0ZmMqxDBNmQQ7IBFtvwBBNMuFUoBCPF1Kc8wziMrH1GPFj7ha
- GS9Q==
+ bh=zFfx6bzwH6AmTgbCnIGSAVe5dqt0tW6ZupvyXBkhIcY=;
+ b=NRbzjQXXtJ6oc8xqHYxynWtV5rtOacSNFdVDvEBDMRiVT80GVu+YyYWMpoVMq1rb2Z
+ sHD9ItUchfFOKbZ83AUMa9KdGmdaqSpnEzNoUio8EDIh5/xNm7lbbw5s7vjBk4TgOaNe
+ hThX1aGFpa9ZtErz7OlYWz/zDF+h1vZzWd+Me3Ujv62cdVpVF11ThfiTCSGB+1qsWH9d
+ WDECeo7AOWGpuE2rPQTM96G/inx2ASIazBOZyJhQgAg2TowQqH8zM/NdAYYaOREKOlKs
+ DNrXHMUk0PT8H1nE2hOWCdSmWU4E6ZX8bPRJzbcsCdCz1z0xIFkzvn7QIiiX6ddS1QTR
+ mWOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738232980; x=1738837780;
+ d=1e100.net; s=20230601; t=1738233057; x=1738837857;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=W4A0pGaz3gfsZ+lSY7AQhWXlQPFNJzhuV76egPB+34I=;
- b=HyVa0h2GbPn9u8vfyluWKQoFDmoVUbs7Rj1EHbPChae+56J1oMDgUE5ZNymbzOuxux
- uZ3GaV3PmdJ3HFyWZw3Bf3yQR9bXZrjh3pvPClrymdtOTEa0okmZukv7SvRpO8HD2qT7
- 50Ea/JQ7Mzyw3Ypay0urKMXiRUsuKjJkru4fPV4Nr0bZVIxxQ0pCCN+yqx8r7gwR5+Ry
- HChp7AZ+JDEwFmYB+2ZApjQQJ4yMIzmJpUyHA+zWMRsUeR1SxQqDCY+iODJVuV3H1gwy
- WlA2eYMUZDmzKwz/N54ug5sirHsDRFFfmcrIjQvzHffwr/u1r5O9oS+KHUREjZFA0nWD
- Pxxw==
+ bh=zFfx6bzwH6AmTgbCnIGSAVe5dqt0tW6ZupvyXBkhIcY=;
+ b=d9oUp5dllJjjnWkf6MRQQJFSOw5szbXWgea1uvxVimSRmHuFcbVutuMSMkJcx7+LPp
+ QSG5ZoaYBjMjiEz1Z1qiqF9Bn0geyAQKu6Oevay3xLk1x+Tk+UWztnK01ULVvnQgKxWT
+ l/U01Git9+stp3M1RgqFqKrR7VsrB7Y7SS93vFJ3PnGwV3cW2u2/hdQVSQvbPC8zE+g5
+ 3Amxsxt/+0Nqzx8Q+4Tkkei1mV1SgqQvpxlGV9sVhSDHb2mCIGvMLj4w+Jr35T6X030y
+ mL3r4A0KD+EEWxMQrwHmKTbbe1+hTux7IPO4ebNGucM5Sg01kG1JZwMKWrtCGa2N4l98
+ F3ow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUO4zdjlbVbsEtsuMiThnOV8Bq+ikfSlV0+jomQBaOkbemP7ds0PIEPsJnxjsIBuEGVMm5lgtE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1dH3WXUPFtAv5N8+MeUYbmHB15GcBMzbdCO2d3yh3Vx8ahiwk
- p3s9DAImoYWGLsP33W0QFgrnTs5oLXuz986dL0RQOMWfbuEvCNWUAhxjGsTrh5r/G4ASS+ymgMx
- mHgWEA1j6q3zCq67rNKeIwsJoWEwshPSl9IInxA==
-X-Gm-Gg: ASbGncvWZdBU26Y3nKh6qYB66e0Vkeut2Xdaromskxx3Arj7kk8NTUl9ip2KaLmBC9N
- ZMDwIzIHRPp793DN7+zPxkMb6987ujTMhzmfTJSvLhTsvj3jlb2MtMdWENjdvNKvO1KW0g0og
-X-Google-Smtp-Source: AGHT+IE6Rp78ukxqXhOcZCuCX2gMBmGZvYeOt8YtxbDsT53McBrJI56KPSokn7wE68NdVR37eFBEY837v7QaJVOXdkw=
-X-Received: by 2002:a05:6902:dc9:b0:e58:a25c:2785 with SMTP id
- 3f1490d57ef6-e5ac89546ecmr2035634276.22.1738232980209; Thu, 30 Jan 2025
- 02:29:40 -0800 (PST)
+ AJvYcCUofP+EiZ8PdEiNgZyElmjEfj9yFEkG5ouUrOHpFlsDc3t4Thc4sHndYcLCqee9qQyi16wxeqE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwmiFxlI1sfoRllzV1AsXEfz0dasO05bdpHIGfh9x6H18PU/6ze
+ ve3NA1EICJxaLoCZ8oV8h7E3QmRRobicGfSrc+OBTcT4W5yWqBdu4evzpo/ekUflw54NmFsMD2a
+ ttLx+4KK3pn1Bg2qo2Ki3tLq7ArtvuvAk0GETbA==
+X-Gm-Gg: ASbGncvwQPw8Sl4rpFKcfuGe4invwYGlaSUMqEjVJ8bzA7STKFju32SpdPupIEALPxu
+ qSlFGRQlOGsZUYz43gN79v3eR8xBswdwW0+VpfQ9DWEPvTi1ezsVS5vkVzcXqPDa02cYtG+vG
+X-Google-Smtp-Source: AGHT+IF+m8EuPTMIxF78p4ato7nTetmUryfJvHQPOVyZ8kKiJPT1Zta1mqAclkQ033OESdCy1qAwoM5f8vX3tgju9aM=
+X-Received: by 2002:a05:6902:e82:b0:e56:7cf6:7b49 with SMTP id
+ 3f1490d57ef6-e58a4bd7ecbmr4742921276.38.1738233056956; Thu, 30 Jan 2025
+ 02:30:56 -0800 (PST)
 MIME-Version: 1.0
 References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <20250130072100.27297-5-ilias.apalodimas@linaro.org>
- <22898270-b5b6-4bcb-9c4a-f3d62dbf5c86@gmx.de>
-In-Reply-To: <22898270-b5b6-4bcb-9c4a-f3d62dbf5c86@gmx.de>
+ <20250130072100.27297-3-ilias.apalodimas@linaro.org>
+ <1c795dd4-9074-434a-afb5-4bf4b35a04b3@gmx.de>
+In-Reply-To: <1c795dd4-9074-434a-afb5-4bf4b35a04b3@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 30 Jan 2025 12:29:04 +0200
-X-Gm-Features: AWEUYZlbklP1RET8P7xSi7IMPONK70N9Yty1F4Ubd1lpCJ9H5Xv19ogvx0HY-SM
-Message-ID: <CAC_iWjLc1KEeBze3CL9E7pd=--6KifGCprZ6r+uDGEoSTTPmMw@mail.gmail.com>
-Subject: Re: [RFC PATCH 4/4] arm64: Change mapping for data/rodata/text
+Date: Thu, 30 Jan 2025 12:30:21 +0200
+X-Gm-Features: AWEUYZnglnFCXSTY5efOZSddQKeAQMjX-49qIu8hAibSSS34QHGOLZUy_vfNfNw
+Message-ID: <CAC_iWj+M+eBJ3mr5UNzXRd5EBiXXfdzjz+S-Y47nBf3qR8-+Uw@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/4] arm: Prepare linker scripts for memory permissions
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
- Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Michal Simek <michal.simek@amd.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
+ =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, 
+ Andre Przywara <andre.przywara@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Sam Day <me@samcday.com>, Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io, 
  maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com
 Content-Type: text/plain; charset="UTF-8"
@@ -108,64 +108,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Heinrich
 
-On Thu, 30 Jan 2025 at 12:24, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 30 Jan 2025 at 12:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 1/30/25 07:20, Ilias Apalodimas wrote:
-> > Now that we have everything in place switch the page permissions for
-> > .rodata, .text and .data just after we relocate everything in top of the
-> > RAM.
+> > Upcoming patches are switching the memory mappings to RW, RO, RW^X page
+>
+> RWX, RO, RW?
+
+RW, RX, RO :)
+
+>
+> > permissions after the U-Boot binary and its data are relocated. Add
+> > annotations in the linker scripts to and mark text, data, rodata etc
+> > sections and align them to a page boundary
 > >
 > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > > ---
-> >   common/board_r.c | 7 +++++++
-> >   1 file changed, 7 insertions(+)
+> >   Makefile                       | 15 +++++++++------
+> >   arch/arm/cpu/armv8/u-boot.lds  | 32 +++++++++++++++++++-------------
+> >   include/asm-generic/sections.h |  2 ++
+> >   lib/efi_loader/efi_runtime.c   |  2 ++
+> >   4 files changed, 32 insertions(+), 19 deletions(-)
 > >
-> > diff --git a/common/board_r.c b/common/board_r.c
-> > index 179259b00de8..38944f600fd6 100644
-> > --- a/common/board_r.c
-> > +++ b/common/board_r.c
-> > @@ -170,6 +170,13 @@ static int initr_reloc_global_data(void)
-> >       efi_save_gd();
+> > diff --git a/Makefile b/Makefile
+> > index 33bb86343c5b..8d7c062ec830 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -2176,13 +2176,16 @@ System.map:   u-boot
+> >   # ARM relocations should all be R_ARM_RELATIVE (32-bit) or
+> >   # R_AARCH64_RELATIVE (64-bit).
+> >   checkarmreloc: u-boot
+> > -     @RELOC="`$(CROSS_COMPILE)readelf -r -W $< | cut -d ' ' -f 4 | \
+> > +     @RELOCS="`$(CROSS_COMPILE)readelf -r -W $< | cut -d ' ' -f 4 | \
+> >               grep R_A | sort -u`"; \
+> > -     if test "$$RELOC" != "R_ARM_RELATIVE" -a \
+> > -              "$$RELOC" != "R_AARCH64_RELATIVE"; then \
+> > -             echo "$< contains unexpected relocations: $$RELOC"; \
+> > -             false; \
+> > -     fi
+> > +     for reloc in $$RELOCS; do \
+> > +             if [ "$$reloc" != "R_ARM_RELATIVE" -a \
+> > +                  "$$reloc" != "R_AARCH64_RELATIVE" -a \
+> > +             "$$reloc" != "R_AARCH64_NONE" ]; then \
+> > +                     echo "$< contains unexpected relocations: $$reloc"; \
+> > +                     false; \
+> > +             fi; \
+> > +     done
+>
+> This seems to be an unrelated change that should go into a separate patch.
+
+It's not, R_AARCH64_NONE relocation are emitted now due to the section
+alignments.
+
+>
 > >
-> >       efi_runtime_relocate(gd->relocaddr, NULL);
-> > +
-> > +#if (IS_ENABLED(CONFIG_ARM64))
+> >   tools/version.h: include/version.h
+> >       $(Q)mkdir -p $(dir $@)
+> > diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+> > index 857f44412e07..18e168e27135 100644
+> > --- a/arch/arm/cpu/armv8/u-boot.lds
+> > +++ b/arch/arm/cpu/armv8/u-boot.lds
+> > @@ -22,7 +22,7 @@ SECTIONS
+> >
+> >       . = ALIGN(8);
+> >       __image_copy_start = ADDR(.text);
+> > -     .text :
+> > +     .text ALIGN(4096):
+> >       {
+> >               CPUDIR/start.o (.text*)
+> >       }
+> > @@ -36,9 +36,12 @@ SECTIONS
+> >                   __efi_runtime_stop = .;
+> >       }
+> >
+> > -     .text_rest :
+> > +     .text_rest ALIGN(4096) :
+> >       {
+> > +             __text_start = .;
+> >               *(.text*)
+> > +             . = ALIGN(4096);
+> > +             __text_end = .;
+> >       }
+> >
+> >   #ifdef CONFIG_ARMV8_PSCI
+> > @@ -98,27 +101,30 @@ SECTIONS
+> >       }
+> >   #endif
+> >
+> > -     . = ALIGN(8);
+> > -     .rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
+> > +     .rodata ALIGN(4096): {
+> > +         __start_rodata = .;
+> > +         *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
+> > +         . = ALIGN(4096);
+> > +         __end_rodata = .;
+> > +     }
+> >
+> > -     . = ALIGN(8);
+> > -     .data : {
+> > +     .data ALIGN(4096) : {
+> > +         __start_data = .;
+> >               *(.data*)
+> > +         . = ALIGN(4096);
+> > +         __end_data = .;
+> >       }
+> >
+> > -     . = ALIGN(8);
+> > -
+> > -     . = .;
+> > -
+> >       . = ALIGN(8);
+> >       __u_boot_list : {
+> >               KEEP(*(SORT(__u_boot_list*)));
+> >       }
+> >
+> > -     .efi_runtime_rel : {
+> > +     .efi_runtime_rel ALIGN(4096) : {
+> >                   __efi_runtime_rel_start = .;
+> >               *(.rel*.efi_runtime)
+> >               *(.rel*.efi_runtime.*)
+> > +             . = ALIGN(4096);
+> >                   __efi_runtime_rel_stop = .;
+> >       }
+> >
+> > @@ -136,10 +142,10 @@ SECTIONS
+> >       /*
+> >        * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
+> >        */
+> > -     .bss ALIGN(8) : {
+> > +     .bss ALIGN(4096) : {
+> >               __bss_start = .;
+> >               *(.bss*)
+> > -             . = ALIGN(8);
+> > +             . = ALIGN(4096);
+> >               __bss_end = .;
+> >       }
+> >
+> > diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
+> > index b6bca53db10d..5626df796f33 100644
+> > --- a/include/asm-generic/sections.h
+> > +++ b/include/asm-generic/sections.h
+> > @@ -23,6 +23,7 @@ extern char __kprobes_text_start[], __kprobes_text_end[];
+> >   extern char __entry_text_start[], __entry_text_end[];
+> >   extern char __initdata_begin[], __initdata_end[];
+> >   extern char __start_rodata[], __end_rodata[];
+> > +extern char __start_data[], __end_data[];
+> >   extern char __efi_helloworld_begin[];
+> >   extern char __efi_helloworld_end[];
+> >   extern char __efi_var_file_begin[];
+> > @@ -63,6 +64,7 @@ static inline int arch_is_kernel_data(unsigned long addr)
+> >
+> >   /* Start of U-Boot text region */
+> >   extern char __text_start[];
+> > +extern char __text_end[];
+> >
+> >   /* This marks the text region which must be relocated */
+> >   extern char __image_copy_start[], __image_copy_end[];
+> > diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+> > index 35eb6a777665..c10a79301a92 100644
+> > --- a/lib/efi_loader/efi_runtime.c
+> > +++ b/lib/efi_loader/efi_runtime.c
+> > @@ -742,6 +742,8 @@ void efi_runtime_relocate(ulong offset, struct efi_mem_desc *map)
+> >                     rel->info, *p, rel->offset);
+> >
+> >               switch (rel->info & R_MASK) {
+> > +             case 0:
+> > +                     break;
 >
-> '#if' should be replaced by 'if (CONFIG_IS_ENABLED())'.
->
-> Shall we make mmu_set_attrs() a weak function which each architecture
-> can override?
+> This seems to be an unrelated patch that should be in a separate patch.
 
-In order to do the IS_ENABLED as you asked, we need to define a weak
-function, otherwise the linker will complain.
-I can add a generic mmu_set_attrs() in the next version. The right way
-to do this in the future is to have a proper MMU API.
+Same as above
 
->
-> > +     mmu_set_attrs((u64)(__start_rodata), (u64)(__end_rodata - __start_rodata), 1);
-> > +     mmu_set_attrs((u64)(__start_data), (u64)(__end_data - __start_data), 3);
-> > +     mmu_set_attrs((u64)(__text_start), (u64)(__text_end - __text_start), 2);
->
-> Please, replace 1, 2, 3 by constants both here and in mmu_set_attrs, e.g.
->
-> 1 -> MMU_ATTR_RO
-> 2 -> MMU_ATTR_RX
-> 3 -> MMU_ATTR_RW
-
-Yea I am explaining the same thing in the cover letter
-
-Thanks
+Cheers
 /Ilias
 >
 > Best regards
 >
 > Heinrich
 >
-> > +#endif
-> > +
-> >   #endif
-> >
-> >       return 0;
+> >               case R_RELATIVE:
+> >   #ifdef IS_RELA
+> >               newaddr = rel->addend + offset - CONFIG_TEXT_BASE;
 >
