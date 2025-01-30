@@ -4,69 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CCD2C0218D
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 00:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6957BC0218D
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 01:21:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8BE680A09;
-	Thu, 30 Jan 2025 01:19:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E95880AE4;
+	Thu, 30 Jan 2025 02:21:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IvYotW6E";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Jf5e99qZ";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="KxHv7bek";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A39780A46; Thu, 30 Jan 2025 01:19:37 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8864080B9B; Thu, 30 Jan 2025 02:21:23 +0100 (CET)
+Received: from out162-62-57-87.mail.qq.com (out162-62-57-87.mail.qq.com
+ [162.62.57.87])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDEED809D4
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 01:19:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F81E809D0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:21:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Yk05L50tmz9t8K;
- Thu, 30 Jan 2025 01:19:34 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1738196374;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=7KQi+OiEmVHrIw1C95l3STZ32Sm7Tima+o7Bb2TBpZU=;
- b=IvYotW6EC+kwiTwAIXLmi2hhXhA0xgKdvboe9z8AQcJ34Yiunp61vfeVJXAMUt5Vl28W7Z
- AS0kDjqHcTUpAVIQuWGvJODrq6qlrAgaZ6evPmTMcMgt2APDkG3Qjukc4NemaHOz+Dr+uW
- uHVSTgfeqp82yKRz95Uuep8kzyUE1nnoSpN5RE3kbsq/j+wH9xShpRC6O1LgJQAshTYcAE
- ptwEeilAmvfrBe7wvGjuZRGhqSRYPryBDSgMTgIvZqFuh21Q31pq32/QuW5sFtMmSuoNHk
- L6e/ImdFgNK93k1NtIRDwOMc7jpz0SukqWz7vM8Y9CKEjIpsDrQKxqg490fUJQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1738196372;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=7KQi+OiEmVHrIw1C95l3STZ32Sm7Tima+o7Bb2TBpZU=;
- b=Jf5e99qZohIleYjlU/L4fAW19jLzbraZKtUnYd/mvLjBL8vvMZ+tv56l1w9r7lA2jt1F7c
- 4eS8kK/0IEsMUV0d7unXv0qb+ysVDr4ZLNWmh26iSBDaGpEdcTUoHqLX2xXRhj6Lf0+Wpe
- mf5Sc+wXFNP8897n89PqJB8by/HCKpIgODNfvkUovCOlkWhpgkOEk4EWSP6z9T9/kNgKyi
- K04IhKk6ngLxSGpiQGZU6qz0j/IwEd0jrv7SQR3x9hMrmaLzF8vUgNXDq1o99FOrbl6Iq9
- vBKdDKG47g+nWR5LsZUTYcK8fZYKuZ7AOm/2HlUD1i/wSGaZvpp6xGIB4k7Pxg==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master
-Date: Thu, 30 Jan 2025 01:18:42 +0100
-Message-ID: <20250130001920.335898-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=1425075683@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1738200065; bh=za9k61x3IkUiXI5iqMQOG1ZxCUDOqOoZFOx+PMiqveg=;
+ h=From:To:Cc:Subject:Date;
+ b=KxHv7bekj0Qbi865tTg7CAN8JVRze0SlPhDZlAt5UXr+R5XFSvvJD6PwnHowbxgqL
+ Tp14uuSemrOCW9XDYQL9WhJygex/mmYaaw/Yayv7Vq4IlzTcrL7zHasbYixNehqgnv
+ MYUtuDlR9DURsYuJalgLay4lmc85igcm+hcR4Bok=
+Received: from ubuntu.localdomain ([112.51.40.31])
+ by newxmesmtplogicsvrsza36-0.qq.com (NewEsmtp) with SMTP
+ id 54395C80; Thu, 30 Jan 2025 09:21:03 +0800
+X-QQ-mid: xmsmtpt1738200063twikr2dfu
+Message-ID: <tencent_E08F4B0FE7E0151B543039103D26CCA4B306@qq.com>
+X-QQ-XMAILINFO: N7h1OCCDntujxLh3e2ZfRj7jnfzwjGcEY4gFS06JReilzec89IwwatU6GdXv9U
+ /UdJUGJCbtgPwB60YQvq59O6gip9tpy3AOs+39L/GBSm7iwfzEv9TLDMLVMBDMqqXqnRf3YH1Fdr
+ gc3ZLwpGvPDw3F3EyxUx/J9XPJTa6sNBECNxJDcln1I8OagJ8BL+TU74DDzr/Li39Cmk7uZ1D0Cv
+ 27Q4vfA/1pO5yzh5I/ec2ShI9ASICr1/zOQjNY//P3MbJdjWdDt6iJcPQyfb3eJucKIzvFN3SGk3
+ NSaMN9FHnowwQz5sPPY4F09l1VwKEwoWpVJrbZriSEehE5bWBMRILV71riIE1cCQawK30hdYKU1r
+ iJtKanNt83VbYtUKh3fe2u15v+QQzvBx64P5b1FEXHLWXPl4AuzukFWzfYGR7gfOcXSJZnGJ1tXM
+ hfrVx1Ibn5iVyM5yAZUwbw+1jLg2WPtvSYd4FoBtV3iZSC99FFufLkmQDEf2Kn9W7dJdvWwHh7h5
+ DaMA0+z1rN83en6RD+rEpnIIyHjFUUcNjL/0hwaEnmEpn66iKWrMyqQK6UxgBO4njEDyQs4BgjHw
+ RKETSY9B0d4v3amwBO6TQR847hW4CyDIbxge8bjx5azeSzsdRci+pn02dIe2k3pT7WOd+48pivtu
+ B/053cNUzOsxG9B/SqI8TcBsUBVEpO4fhcpsbn9AP+1SdYEQAb0ZJTMAT86ZE8ivI17TFzWyXrg4
+ 6tHDw9L05rNiXpJZTPTYoYxwYjc7nASR2F58lYXRcRjUEMefWZU/gKjagmANMU5qgsSxoY190NeR
+ Xzgs+1DNo4FJRk9zSns9OhcHEgZ232yQwpjDv9DJVGpVrH6jnMmDZoL4sOS5CyjwRuHaE0zE6Jbr
+ 8GbOGXH6trILPV5Ay8fvDxFbWvKINFpj+BfFqxO7JvK/8v3KP2UxWMQ+vneNHXA5rWiDar18vol5
+ 61XJDI9b4hIvK/coNwiLv8dUPsjshNzM5FoGtvuM6HYBYfXazSTQ==
+X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
+From: 1425075683@qq.com
+To: Liya Huang <1425075683@qq.com>
+Cc: Heiko Schocher <hs@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: [PATCH v1] arm: Other boards should not show this option in menuconfig
+Date: Thu, 30 Jan 2025 09:21:00 +0800
+X-OQ-MSGID: <20250130012101.315807-1-1425075683@qq.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 74588caf8ac86e33a77
-X-MBO-RS-META: 81erzcwnbec3zh3pwc84dofdbgo4n1po
-X-Rspamd-Queue-Id: 4Yk05L50tmz9t8K
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,90 +78,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 021baf7b08cceb58bb850859dba1614424e16a83:
+From: Liya Huang <1425075683@qq.com>
 
-  Merge tag 'tpm-master-28012025' of https://source.denx.de/u-boot/custodians/u-boot-tpm (2025-01-29 08:12:21 -0600)
+When I was using STM32 board,
+this option appeared in menuconfig and caused me trouble.
+I observed that the root cause was that
+the option was not included in the endif,
+but when I tried to fix it,
+an error occurred.
+I didn't find a solution.
+Only deponds can be used for hiding
 
-are available in the Git repository at:
+Signed-off-by: Liya Huang <1425075683@qq.com>
+---
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+Changes in v1:
+- Replace depends on ARCH_IMX8 with depends on TARGET_CAPRICORN as suggested
 
-for you to fetch changes up to e0df073bc0df843e0a3c5f9990defcbf2207c8b9:
+ board/siemens/common/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-  arm64: renesas: Deduplicate R-Car Gen3 and Gen4 SPL (2025-01-29 22:52:35 +0100)
+diff --git a/board/siemens/common/Kconfig b/board/siemens/common/Kconfig
+index 4ae12b1c973..3808257cd07 100644
+--- a/board/siemens/common/Kconfig
++++ b/board/siemens/common/Kconfig
+@@ -3,4 +3,5 @@ config FACTORYSET
+ 
+ config DDR_SI_TEST
+ 	bool "DDR signal integrity test implementations"
++	depends on TARGET_CAPRICORN
+ 	default y
+-- 
+2.25.1
 
-----------------------------------------------------------------
-Marek Vasut (12):
-      net: miiphybb: configs: Drop CONFIG_BITBANGMII_MULTI
-      net: ravb: Staticize bb_miiphy functions
-      net: miiphybb: Fix short name length
-      ARM: renesas: Rename board/renesas/rcar-common to board/renesas/common
-      ARM: renesas: Drop R8A779A0 V3U Falcon SPL Makefile entry
-      ARM: renesas: Simplify board Makefiles
-      ARM: renesas: Rename common/common.c to common/rcar64-common.c
-      arm64: renesas: Drop unused code and clean up headers on R-Car D3 Draak
-      arm64: renesas: Drop unused code and clean up headers on Salvator-X boards
-      arm64: renesas: Drop unused code and clean up headers on ULCB boards
-      arm64: renesas: Deduplicate board_early_init_f()
-      arm64: renesas: Deduplicate R-Car Gen3 and Gen4 SPL
-
- board/beacon/beacon-rzg2m/Makefile                 |  2 +-
- board/hoperun/hihope-rzg2/Makefile                 |  2 +-
- board/renesas/common/Makefile                      | 49 ++++++++++++
- .../renesas/{rcar-common => common}/gen3-common.c  |  5 +-
- board/renesas/common/gen3-spl.c                    | 38 +++++++++
- .../renesas/{rcar-common => common}/gen4-common.c  |  2 +-
- board/renesas/{rcar-common => common}/gen4-spl.c   | 17 -----
- .../common.c => common/rcar64-common.c}            |  9 ++-
- .../gen3-spl.c => common/rcar64-spl.c}             | 39 +---------
- board/renesas/{rcar-common => common}/v3-common.c  |  0
- board/renesas/condor/Makefile                      | 13 ----
- board/renesas/draak/Makefile                       |  6 +-
- board/renesas/draak/draak.c                        | 33 +-------
- board/renesas/eagle/Makefile                       | 13 ----
- board/renesas/ebisu/Makefile                       | 13 ----
- board/renesas/falcon/Makefile                      | 13 ----
- board/renesas/grayhawk/Makefile                    |  9 ---
- board/renesas/salvator-x/Makefile                  |  6 +-
- board/renesas/salvator-x/salvator-x.c              | 39 +---------
- board/renesas/spider/Makefile                      |  9 ---
- board/renesas/ulcb/Makefile                        |  6 +-
- board/renesas/ulcb/ulcb.c                          | 31 +-------
- board/renesas/v3hsk/Makefile                       |  5 +-
- board/renesas/v3msk/Makefile                       |  5 +-
- board/renesas/whitehawk/Makefile                   | 13 ----
- board/silinux/ek874/Makefile                       |  4 +-
- configs/alt_defconfig                              |  1 -
- configs/controlcenterdc_defconfig                  |  1 -
- configs/gose_defconfig                             |  1 -
- configs/grpeach_defconfig                          |  1 -
- configs/koelsch_defconfig                          |  1 -
- configs/lager_defconfig                            |  1 -
- configs/porter_defconfig                           |  1 -
- configs/r8a779a0_falcon_defconfig                  |  1 -
- configs/r8a779g0_whitehawk_defconfig               |  1 -
- configs/r8a779h0_grayhawk_defconfig                |  1 -
- configs/renesas_rcar3.config                       |  1 -
- configs/silk_defconfig                             |  1 -
- configs/stout_defconfig                            |  1 -
- doc/README.bitbangMII                              | 25 +-----
- drivers/net/phy/Kconfig                            |  4 -
- drivers/net/phy/miiphybb.c                         | 89 ----------------------
- drivers/net/ravb.c                                 | 14 ++--
- include/miiphy.h                                   |  4 +-
- 44 files changed, 125 insertions(+), 405 deletions(-)
- create mode 100644 board/renesas/common/Makefile
- rename board/renesas/{rcar-common => common}/gen3-common.c (98%)
- create mode 100644 board/renesas/common/gen3-spl.c
- rename board/renesas/{rcar-common => common}/gen4-common.c (97%)
- rename board/renesas/{rcar-common => common}/gen4-spl.c (78%)
- rename board/renesas/{rcar-common/common.c => common/rcar64-common.c} (94%)
- rename board/renesas/{rcar-common/gen3-spl.c => common/rcar64-spl.c} (51%)
- rename board/renesas/{rcar-common => common}/v3-common.c (100%)
- delete mode 100644 board/renesas/condor/Makefile
- delete mode 100644 board/renesas/eagle/Makefile
- delete mode 100644 board/renesas/ebisu/Makefile
- delete mode 100644 board/renesas/falcon/Makefile
- delete mode 100644 board/renesas/grayhawk/Makefile
- delete mode 100644 board/renesas/spider/Makefile
- delete mode 100644 board/renesas/whitehawk/Makefile
