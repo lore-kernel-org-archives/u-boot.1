@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3385C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 14:49:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4591CC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 14:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C97580EE5;
-	Thu, 30 Jan 2025 15:49:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7157820E3;
+	Thu, 30 Jan 2025 15:50:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LMXh4ZmJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qzJjt3wr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6867F80EC1; Thu, 30 Jan 2025 15:49:53 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 70106820E3; Thu, 30 Jan 2025 15:50:35 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B170B820FE
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 15:49:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A26CE82102
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 15:50:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-71e3005916aso243116a34.2
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 06:49:50 -0800 (PST)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3eba583fbe8so240220b6e.3
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 06:50:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738248589; x=1738853389; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738248631; x=1738853431; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4VBc7DQCyJtiQ1NI6VXST9lQEPZ9reuVOysrkeOc+eo=;
- b=LMXh4ZmJ7ArNyjA4dGwoK20xeioHDolyZ2M+kXanSxaXHSB1t9bj7TBLfhUDvudI/g
- 8WcjwPVV0IKQgaJE12ia7/InxBUWsD9vaLPtr1BEFjwybZsDjNGWASEi7N4EkP7Ywpni
- Jrfeu4IOI6oxyDXGOQ+VAAA3NBOIU6LjXIp0c=
+ bh=28AYLWlfA+6drg7nBcg35Ok/SPN+lW7vnxMP1rs9S7M=;
+ b=qzJjt3wrFLAC0mcdq6bFX3SUmVPgR4/aL1ITFrrgn6OYQKntqTeDL9xBflDadoEJfN
+ h9/NpLZDbxeq0BduGarpWXkGQUxwXEDIdHmIm7hxKuZLznE/4NjxmgEAuvJWXtld0pOk
+ 4gpDxh0JUPHLBzlh5gcFGh0Twte8UO6vfR7yU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738248589; x=1738853389;
+ d=1e100.net; s=20230601; t=1738248631; x=1738853431;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4VBc7DQCyJtiQ1NI6VXST9lQEPZ9reuVOysrkeOc+eo=;
- b=m/PEloHmgjp8Bu8XO3PBrxi92Og8D3IFfI88dRLNK+MTi5QRbEUyohHbC1k6M9n6EJ
- j55B5aeiecpQd+zDkPgUuXhCvtPCJ+xOdci5zw01gsP3XeoJ1qsUY6ct5F1cFtHXkjRM
- d8wuFcMl9sdn9uP6ZSeCCsWNaSon3Irluk8tGxjw1xIp0HLqrYO64i1A//rtgMYkb2Bn
- 13jQTPuUnHUsT8EqCw87FWUwkd1aMUK0X2sonh1dYjg939N4PLtOZRklzmfWZ83pF2g3
- TXOsy3tVP+0T9GwyKCx258FNHvn4xmqutBopxUEVJS8w95j/jU1W2KNfU/BzUq0q7QEW
- 0W2g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXc1wukNKCzkygD0bRYb+IcbD4j87NCyIrXKX3QzhSBmsi1H8Kkcf0+1MeDOoZSLiikhuy1G/k=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMxntb8vGcMiRr7vKBS9g2CCGs3k5LqLybUvvS07lTWd4PE5kS
- oGPAxdmqNJrDf9Cz3mVpCI2m1qTAernzE/6rSNwI/CHpS20evu5iRLOgWbMXnA6xRDDX9yw1xVQ
- l
-X-Gm-Gg: ASbGncsNFR1B6/LvyLsaRmWIsA2f5OEz9EmQM1MD8hcvpyQKsIdVKNHi0HQzgv7ens0
- YLLWp3Oo4ALi6s3GEbm91cyboFsWrF3bzuDGtByV9MdLVrYkBJy2eVaDurYprn9XOTOml8O+WXn
- GJQoKkQa82QcUwOo+4FpxxvZkHw2w1I6kNmqEIPkb+P/MRb+75XMhj3yv5zi8C/sITkjTMOKxSv
- TF1eHCyZ/Ct2nfW9kLeGjJkHuig9CrNeKksFlJWGMg4aKL6vEQjZkjVac0BDojoc1k08/ACGVs7
- BFpw2Mz5aam2dlo=
-X-Google-Smtp-Source: AGHT+IGwRkTjvqgr3xReSbVGZ+JYGPsffqN7KoU6kqTTMQjcNls2PT+GNlUpHehtdTOljx9XILyXxQ==
-X-Received: by 2002:a05:6871:220b:b0:29e:5c94:5afd with SMTP id
- 586e51a60fabf-2b32ef5ff1cmr4067221fac.1.1738248589350; 
- Thu, 30 Jan 2025 06:49:49 -0800 (PST)
+ bh=28AYLWlfA+6drg7nBcg35Ok/SPN+lW7vnxMP1rs9S7M=;
+ b=QfnVTS5HdWgIP9rKr5aOWBliB+G691PpX5ayVGfgA2FjBtSjYRHYUTyOuFt+7o6vJj
+ TqEkA6kEp7ZF9Rt8S3OpjXVDKA+E1MS8D4JwP71LORmcDCaUPPd3mTAiM0edr8X2uvMA
+ daEuIwoiRboZHwwLOB6YvTjHij8q+6KFqvpWqll1xdXQjJQ+UZEHQEsfNDp4PK15S96f
+ H6bjt5v8YYxo9pIoZKQ+tNZwuOjdhuGUQjy2JS70TgygIa4VwnELJgzkLsciS5X96bje
+ 3W/LjPZfly09JiIioPtXDEfYsTgAE4+VkYtRmH9Kgko6b+vooozQfMMDdAm6snx/h54v
+ vNZg==
+X-Gm-Message-State: AOJu0Yx52U+lhv/nHU7YTRot2PVqvLdhBsXyk6OxjSDVDO2fr7Z1QtjX
+ DcoiY12eLL5BB+IjfsoGZtzdk7qByNdpCllZH6Wk/D6UTiAaRI5/Be4tMrfySMs=
+X-Gm-Gg: ASbGncvojWt5co/Tyeu/Li8UHstLq+xtD80O4OG2Wp8QvdKgJr5b/78SpGXUIPosZyE
+ 70H9VpgL1MFfZtjkv50jQRSHUcj7Wc29GlzHCKXMcRpHiTD7npT4WEPBeJx0ZR0UuxgoT1y7tRV
+ UqTZPlnsgxadDoPWquDcD14kevlHiPPKiMvM0Zw3UYnrYChelNP1iCitHeBzdaxnyP5qzJEAOx7
+ WrUMx6nq/7jfQ88r5qmGHK5s7pNBx1M5Pn466EyT7BsW5BhlB21KwaNxbzH2z6aoxLFTzWEsH/Z
+ ZmLyoXh22KG0E1Q=
+X-Google-Smtp-Source: AGHT+IFszCnjt52kbULdM3w36hs6htWUZb7oe/pvfJ8Age8A78Y4dRby5GezoTKx7tH+uHdOXTS/OA==
+X-Received: by 2002:a05:6808:22a0:b0:3eb:575e:3eaf with SMTP id
+ 5614622812f47-3f323a7780cmr5264438b6e.19.1738248629852; 
+ Thu, 30 Jan 2025 06:50:29 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2b3565b8120sm434595fac.34.2025.01.30.06.49.47
+ 5614622812f47-3f333523be4sm275210b6e.4.2025.01.30.06.50.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Jan 2025 06:49:48 -0800 (PST)
-Date: Thu, 30 Jan 2025 08:49:46 -0600
+ Thu, 30 Jan 2025 06:50:28 -0800 (PST)
+Date: Thu, 30 Jan 2025 08:50:26 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Alexander Dahl <ada@thorsis.com>, Jagan Teki <jagan@amarulasolutions.com>,
- =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
- u-boot@lists.denx.de, Yoshitaka Ikeda <ikeda@nskint.co.jp>
-Subject: Re: [PATCH 0/7] [U-Boot] spi: atmel-quadspi: Refresh and add classic
- mode support
-Message-ID: <20250130144946.GX1233568@bill-the-cat>
-References: <20250123121215.21001-1-ada@thorsis.com>
- <d6746615-550b-4290-ae17-42728ae68f1c@linaro.org>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ E Shattow <e@freeshell.de>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] net: lwip: move eth_init() out of new_netif()
+Message-ID: <20250130145026.GY1233568@bill-the-cat>
+References: <20250130082226.1572302-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6l+aoOuANIS1Ziur"
+ protocol="application/pgp-signature"; boundary="0L+woLc8NV6d9pYL"
 Content-Disposition: inline
-In-Reply-To: <d6746615-550b-4290-ae17-42728ae68f1c@linaro.org>
+In-Reply-To: <20250130082226.1572302-1-jerome.forissier@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,108 +98,198 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---6l+aoOuANIS1Ziur
-Content-Type: text/plain; charset=iso-8859-1
+--0L+woLc8NV6d9pYL
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 30, 2025 at 04:07:27PM +0200, Eugen Hristev wrote:
+On Thu, Jan 30, 2025 at 09:22:20AM +0100, Jerome Forissier wrote:
+> Move the initialization of the ethernet devices out of the new_netif()
+> function. Indeed, new_netif() accepts a struct device argument, which
+> is expected to be valid and active. The activation and selection of
+> this device are achieved by eth_init() (on first time the network
+> stack is used) and eth_set_current(). This is what takes care of the
+> ethrotate and ethact environment variables. Therefore, move these calls
+> to a new function: net_lwip_set_current(), and use it whenever a
+> net-lwip command is run.
 >=20
+> This patch hopefully fixes the incorrect net-lwip behavior observed on
+> boards with multiple ethernet interfaces [1].
 >=20
-> On 1/23/25 14:12, Alexander Dahl wrote:
-> > Hello everyone,
-> >=20
-> > this patch series is for U-Boot, although Linux might be affected.
-> >=20
-> > The quadspi controller on microchip (former atmel) sama5d2, sam9x60 and
-> > other soc variants of the at91 family is usually used in hardware
-> > accelerated spi-mem mode.  It also supports a classic mode for
-> > interfacing all kinds of SPI peripherals like ADCs, IO expanders,
-> > displays, you name it.  However the drivers in Linux and U-Boot did not
-> > support that mode, yet.
-> >=20
-> > While spi-mem subsystem interface is comparable between Linux and
-> > U-Boot, SPI subsystem interface is rather different in Linux and U-Boot.
-> > So there's no previously written Linux support just ported here.  I
-> > tried that, but the simple implementation for U-Boot's .xfer() used here
-> > does not work for Linux' .transfer_one() because of the OVRES flag set
-> > all the time.  I guess a more sophisticated approach has to be taken in
-> > Linux with interrupts, completions and/or dma?
-> >=20
-> > According to commit 24c8ff4684c5 ("spi: Add Atmel QuadSPI driver")
-> > message, the initial U-Boot variant of this driver was ported from Linux
-> > v5.1-rc5 back then.  I hope it's okay to squash the fixes added to Linux
-> > after that into patch 2 and 3 of this series?
-> >=20
-> > Patch 4 and 5 come from my efforts to hack this feature into the Linux
-> > driver.  (Not sure if those should be added to the Linux driver
-> > anyways, even if nobody ever implements transfer_one() over there?)
-> >=20
-> > Patch 5 is the actual work, very much inspired by the current U-Boot
-> > driver atmel_spi for the generic SPI controllers on at91 family.
-> >=20
-> > Patch 1 is copied from my other spi series for U-Boot, just added it
-> > here for better build results.
-> >=20
-> > Patch 6 is optional, because not portable towards Linux.
-> >=20
-> > Tested on top of v2024.10, because v2025.01 won't build as debug
-> > for sam9x60 as described in another thread.  But there are almost no
-> > changes related to at91 socs, boards, and drivers in the last months
-> > here, so it should be comparable.
-> >=20
-> > Greets
-> > Alex
-> >=20
-> > (Cc-ing the contributors of the Linux fixes here.)
-> > Cc: Tudor Ambarus <tudor.ambarus@microchip.com>
-> > Cc: Yoshitaka Ikeda <ikeda@nskint.co.jp>
-> > Cc: Cs=F3k=E1s Bence <csokas.bence@prolan.hu>
-> >=20
-> > Alexander Dahl (7):
-> >   spi: atmel-quadspi: Depend on SPI_MEM
-> >   spi: atmel-quadspi: Port collected fixes from Linux v5.10 and v5.15
-> >   spi: atmel-quadspi: Avoid overwriting MR register settings
-> >   spi: atmel-quadspi: Remove default mode setting at probe time
-> >   spi: atmel-quadspi: Allow setting SMM to classic SPI mode
-> >   spi: atmel-quadspi: Add support for classic SPI mode
-> >   spi: atmel-quadspi: Improve probe debugging
-> >=20
-> >  drivers/spi/Kconfig         |   2 +-
-> >  drivers/spi/atmel-quadspi.c | 294 ++++++++++++++++++++++++++++--------
-> >  2 files changed, 228 insertions(+), 68 deletions(-)
-> >=20
-> >=20
-> > base-commit: 2eed5a1ff36217372e19f7513bd07077fc76718a
+> Tested on an i.MX8MPlus EVK equipped wih two ethernet ports. The dhcp
+> command succeeds whether the cable is plugged into the first or second
+> port.
 >=20
-> Hello Alex,
+> [1] https://lists.denx.de/pipermail/u-boot/2025-January/576326.html
 >=20
-> I had a quick look over your patches, but it would require to get a
-> review from SPI maintainers to apply these.
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> CC: E Shattow <e@freeshell.de>
 
-Our SPI maintainer is currently not very responsive. Would you be OK
-taking this via the atmel tree since it's an atmel platform driver and
-not core changes? Thanks!
+Reported-by: E Shattow <e@freeshell.de>
+
+> ---
+>  include/net-lwip.h  |  1 +
+>  net/lwip/dhcp.c     |  2 +-
+>  net/lwip/dns.c      |  2 +-
+>  net/lwip/net-lwip.c | 23 ++++++++++++++---------
+>  net/lwip/ping.c     |  2 +-
+>  net/lwip/tftp.c     |  2 +-
+>  net/lwip/wget.c     |  2 +-
+>  7 files changed, 20 insertions(+), 14 deletions(-)
+>=20
+> diff --git a/include/net-lwip.h b/include/net-lwip.h
+> index 4d7f9387d1d..64e5c720560 100644
+> --- a/include/net-lwip.h
+> +++ b/include/net-lwip.h
+> @@ -10,6 +10,7 @@ enum proto_t {
+>  	TFTPGET
+>  };
+> =20
+> +void net_lwip_set_current(void);
+>  struct netif *net_lwip_new_netif(struct udevice *udev);
+>  struct netif *net_lwip_new_netif_noip(struct udevice *udev);
+>  void net_lwip_remove_netif(struct netif *netif);
+> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+> index e7d9147455c..3b7e4700c6e 100644
+> --- a/net/lwip/dhcp.c
+> +++ b/net/lwip/dhcp.c
+> @@ -115,7 +115,7 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc=
+, char *const argv[])
+>  	int ret;
+>  	struct udevice *dev;
+> =20
+> -	eth_set_current();
+> +	net_lwip_set_current();
+> =20
+>  	dev =3D eth_get_dev();
+>  	if (!dev) {
+> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+> index 1de63c9998b..149bdb784dc 100644
+> --- a/net/lwip/dns.c
+> +++ b/net/lwip/dns.c
+> @@ -121,7 +121,7 @@ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc,=
+ char *const argv[])
+>  	if (argc =3D=3D 3)
+>  		var =3D argv[2];
+> =20
+> -	eth_set_current();
+> +	net_lwip_set_current();
+> =20
+>  	return dns_loop(eth_get_dev(), name, var);
+>  }
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> index b863047f598..cab1dd7d483 100644
+> --- a/net/lwip/net-lwip.c
+> +++ b/net/lwip/net-lwip.c
+> @@ -127,6 +127,20 @@ static int get_udev_ipv4_info(struct udevice *dev, i=
+p4_addr_t *ip,
+>  	return 0;
+>  }
+> =20
+> +/* Initialize the lwIP stack and the ethernet devices and set current de=
+vice  */
+> +void net_lwip_set_current(void)
+> +{
+> +	static bool init_done;
+> +
+> +	if (!init_done) {
+> +		eth_init_rings();
+> +		eth_init();
+> +		lwip_init();
+> +		init_done =3D true;
+> +	}
+> +	eth_set_current();
+> +}
+> +
+>  static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>  {
+>  	unsigned char enetaddr[ARP_HLEN];
+> @@ -134,19 +148,10 @@ static struct netif *new_netif(struct udevice *udev=
+, bool with_ip)
+>  	ip4_addr_t ip, mask, gw;
+>  	struct netif *netif;
+>  	int ret =3D 0;
+> -	static bool first_call =3D true;
+> =20
+>  	if (!udev)
+>  		return NULL;
+> =20
+> -	if (first_call) {
+> -		eth_init_rings();
+> -		/* Pick a valid active device, if any */
+> -		eth_init();
+> -		lwip_init();
+> -		first_call =3D false;
+> -	}
+> -
+>  	if (eth_start_udev(udev) < 0) {
+>  		log_err("Could not start %s\n", udev->name);
+>  		return NULL;
+> diff --git a/net/lwip/ping.c b/net/lwip/ping.c
+> index aa617530749..200a702bbb5 100644
+> --- a/net/lwip/ping.c
+> +++ b/net/lwip/ping.c
+> @@ -168,7 +168,7 @@ int do_ping(struct cmd_tbl *cmdtp, int flag, int argc=
+, char *const argv[])
+>  	if (!ipaddr_aton(argv[1], &addr))
+>  		return CMD_RET_USAGE;
+> =20
+> -	eth_set_current();
+> +	net_lwip_set_current();
+> =20
+>  	if (ping_loop(eth_get_dev(), &addr) < 0)
+>  		return CMD_RET_FAILURE;
+> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+> index fc4aff5f2ba..123d66b5dba 100644
+> --- a/net/lwip/tftp.c
+> +++ b/net/lwip/tftp.c
+> @@ -280,7 +280,7 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int arg=
+c, char *const argv[])
+>  		goto out;
+>  	}
+> =20
+> -	eth_set_current();
+> +	net_lwip_set_current();
+> =20
+>  	if (tftp_loop(eth_get_dev(), laddr, fname, srvip, port) < 0)
+>  		ret =3D CMD_RET_FAILURE;
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> index b76f6c0f1d9..9aec75f9bed 100644
+> --- a/net/lwip/wget.c
+> +++ b/net/lwip/wget.c
+> @@ -354,7 +354,7 @@ static int wget_loop(struct udevice *udev, ulong dst_=
+addr, char *uri)
+> =20
+>  int wget_do_request(ulong dst_addr, char *uri)
+>  {
+> -	eth_set_current();
+> +	net_lwip_set_current();
+> =20
+>  	if (!wget_info)
+>  		wget_info =3D &default_wget_info;
+> --=20
+> 2.43.0
+>=20
 
 --=20
 Tom
 
---6l+aoOuANIS1Ziur
+--0L+woLc8NV6d9pYL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmebkYMACgkQFHw5/5Y0
-tyxJdAv/ZjYaXhvDCDqAxVp+i/iV4m/izhKo8LOZ+OdIc0LgFM4sUlFHzDeqNds7
-l7vunkiAF0ksSIq8yzaVcnpT80zp2Jz728lgfEU9Yq6EjQ5M67VzdRoibwPmA2Vi
-NlDu+eO5uZPUDpLewt+YnRlNlAuhOrxbRwZoS6cp+4awkJi7XNhcB+P0KmHiFN7C
-0pLCMrORL85jFkJPeNErsu1lCPC8pATKo9NOX2nU2g/7GMMlX9a2s/QunrjTnf6F
-R8uMItllEC2TW/gSJIgP9sJ+XOB8K1FGyXFvkjsTvPwIxJIHXbf7HO4Lm+ESAzCD
-zXlILIic9X7aMbtYZ+07/xHmMgHvhIkKuxbKQB1pi8IDuZBfWZiHezDa/zClScOv
-yALt8+iUMRNzAKShsBXantV4mdd6OZwMpj6FGyxOKc3fQSPWzhO1x0pygU3gVw1J
-Rz2uMgsEKc84sRkMUYVml46dgyoUQ8uqE8lj9FJbFb/77MZoJy/yLVNlmxk0a+h3
-HDRkISTk
-=OWLX
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmebkbIACgkQFHw5/5Y0
+tywNcAwAjnsOivuKRgCVhZ+XNFc6FUIOnHr9se7NqlSLLUPiAflSVn+xnjdyiJ29
+l3G5koYVmwa0WT8WK3qezMRWwhHibcxKxZ6tddOSVltYBaeIvZhKWm/iFSpHDjDR
+rPuiE8rOiCKdWGU10iFkmjKbgJ3LNiXLfZ4qn8cYqTrASrCMV3gd55UMJYKUvIA/
+G89Pq1lKw8iSIzTSJpOqYdhXeNv8gLkRthJBvmW1NrseDBPu+jJjPhwR6nAQzsoV
+nAseFzw+2WF052K8bcUX7SPmnJ+5WcWFXwI1cc4IWfsUdJbf72JB4Mk8+IXLnI6M
+ffAB82zeQZULwzHyFGOJgXtJrWFrCltOeNB/TmWl1OAaDkTxj2MsqkGYn5dFK7KP
+p2tSAp10HiWvHLBLjqjJ7nB2covNBt0lNzoO0aBEJeY4gWaqY8lVElIymqQVurZn
+wsJohnHalAIIs+KdNdjnW4Sm9meKjhNMja6SxrJ6BzLS9Bllyb2MLqaiuxa9n+mj
+/5EmWMSH
+=yLbr
 -----END PGP SIGNATURE-----
 
---6l+aoOuANIS1Ziur--
+--0L+woLc8NV6d9pYL--
