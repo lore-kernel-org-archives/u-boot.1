@@ -4,71 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6166C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 19:55:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F07C0218D
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 19:55:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9B3780EBA;
-	Thu, 30 Jan 2025 20:55:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C8EA680F03;
+	Thu, 30 Jan 2025 20:55:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M2nXcJFE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hnJJGI+h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D4E080EBD; Thu, 30 Jan 2025 20:55:06 +0100 (CET)
+ id 02FA980EED; Thu, 30 Jan 2025 20:55:16 +0100 (CET)
 Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
  [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 746FD80EB6
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 20:55:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1A15820FE
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 20:55:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aaeec07b705so205491866b.2
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:55:04 -0800 (PST)
+ a640c23a62f3a-ab6f636d821so60885666b.1
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:55:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738266904; x=1738871704; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738266911; x=1738871711; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vqTxzZGYodODcK3d4abckVf4ae5n6LlBnVNCAn7R210=;
- b=M2nXcJFESDBsvc3JROEzDI2uqjZiG+aO1akBCbOC4u/GjwBcp5bPQDJ6wVkhlWyDQK
- 95maPqrymKgrxkcg9sYlCKFK0x4NsgW3kbChzx/QmmEsuuHi5dwHpX2ZIXjtSuPT68qM
- 0tQJ3nVioQ1Uw8nQCvtN+3FzeeqImCFaQdnWM=
+ bh=WcRpCJ8DzRMhcHk+sJjnnAeJC3ljehJNx0QbXjYfqHA=;
+ b=hnJJGI+hDrmOfKSIFPYpbd8USLR65uaXABD88+L+nGwe1Vr3J+bcIO2v+ZPL4btA/+
+ sE+sYC2tAn64vNVOtUw69re1Axu+dmxI3kjwM9LuDAOAPf1FLja/sec5PRkqZ6xjlEtN
+ GAHtKGtg/nHzkQxXlHUrDhTO5F2bmHx2jpit0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738266904; x=1738871704;
+ d=1e100.net; s=20230601; t=1738266911; x=1738871711;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vqTxzZGYodODcK3d4abckVf4ae5n6LlBnVNCAn7R210=;
- b=l9QVrZZXHEL4GrlqDK1TokZAnER6pBQTzzuZk2KRTPYfNXUPlS2ICyEoylD8/ZcRKR
- k5U7tWz5BsC4yORESTukEAvjgo3uPnskgs00pp9tf5Iu8P1agL4weJZ9SwB3ehxFsrab
- 0bNmyIwSPGDR9S1kELjVKgDM+jqCslg2zH++VBE2UPTjGREpT2aHWmprDbO7d1tbERrt
- FSEZ+4Foo7SgokTni3XDh7dsqcEJ71e89dz00f/TPXaLaN2ffkGHPGzPYSH+CH/Aab7v
- wU0YX30aofImWlPZ75XViJbx07z1nN/Jk9Qh9JKu5KJYwv1wPG0+F3IhJPRvqEWPyu7g
- zcrA==
-X-Gm-Message-State: AOJu0Yzu4vx7Po6ugHLyl2nqGuacLfwVecHQU9BMSit0PND53ki/U/PY
- /uLroXjTO/rzBGnCCgPJ7iuKtAIT07i6dmNj6Ie70gYHn1vXvR7uCckJDAfqA+l5zrXTBOcRcx4
- F9BCds/ashHYRARPNvis19DmN4mtwkH+GDynn
-X-Gm-Gg: ASbGncufrTFMrIEvqGG39RMP6WYmFLhF2XaLScYSeXN2wvx5kH5mPN6P3cOIFprCfyt
- QeFEHXd57KM6leRq3ZyzwLse3eAaSGde7qox1FWL1d+B8s2eftoRlbfRuDo/ndMffm4ASUTeCCA
+ bh=WcRpCJ8DzRMhcHk+sJjnnAeJC3ljehJNx0QbXjYfqHA=;
+ b=VT0QmWG20BOoSCqSZXG5WVcfJul9datg258Wm1rduX2IOcaoL9jHIajM0ZaRJZkZOf
+ lfdXBhNGHY48bDdqq0v18lxUlo7TEl1/e/NJz8j4zvq5RobnZ+YWrvlKeo9zrWB/ComH
+ 9kQTqH+uI/AroKmlH0BxDw2k0+wJfoaSpGrakZSa5ZW2wQqmik39miNeYtR0DYucxBlg
+ tgDd2fInESkDwLwgqOr1SgyaKPXqiPfePBDZqU2CDulZLv9l7Iqw+Glf9P8aChwXjeNz
+ kF8ktI5HALzDS30CBr44XDe+A2SMEsTqVYbL9Vk2o47a/RfVS/Hl2oM6Xjcyw9tAWz4h
+ qa6Q==
+X-Gm-Message-State: AOJu0Yyzcc2QP3BnT1ehA5k1Y5LSx6Cs1VoyC8LNJVl2/f0kr5Jwa87c
+ PPnoUPD0zcwa4jM5sqzR6Zsmqa29gybBgsEps9ZR+HaApMeIvB51Gm5YkJCPQ+Sv/eMGXGckIz9
+ 9u9mdfbUZKYGu40IhB2UEG/5f7ssfG2T8V9Qc0KEqifmuhlY=
+X-Gm-Gg: ASbGnctRklE4FgaOtMU3OlGlC4dcJD9C69j5hEyWjcY+0zrGFsM6vYCOXMQiWXb9r8J
+ ZiDUSXNrVjRZphnjt54RxbA3W3lVK8jmGsqfPlY5t9+NEzPllWHIvdQZJ9fQv+1EC3PO9kdemjg
  ==
-X-Google-Smtp-Source: AGHT+IELIFEo1nkkJ61xXGHdLekw2/8olzCgHosWeAXO0WVBD5yRp3HILa8RoyLrIzjm9yxsGwfBHDXzRQ13NvxANsA=
-X-Received: by 2002:a17:906:794e:b0:ab2:faed:f180 with SMTP id
- a640c23a62f3a-ab6cfd0a46emr929165566b.33.1738266903600; Thu, 30 Jan 2025
- 11:55:03 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG1TFWchqjejciXzqnB7C0UhNZpk3yS7C7k97+0swq35sfZmmf6wQfu+MXOQ6/u7AhL9wqqKda0sX6hgs/I3m8=
+X-Received: by 2002:a17:906:dc8b:b0:ab2:b72e:cf44 with SMTP id
+ a640c23a62f3a-ab6cfc8730fmr889645766b.2.1738266910720; Thu, 30 Jan 2025
+ 11:55:10 -0800 (PST)
 MIME-Version: 1.0
-References: <92438c16-1b8b-4e90-a44c-285140f59f0f@gmx.de>
- <e3ed313a-847d-4307-8c58-f40e8fcee86f@gmx.de>
-In-Reply-To: <e3ed313a-847d-4307-8c58-f40e8fcee86f@gmx.de>
+References: <20241220003447.2913443-1-sjg@chromium.org>
+In-Reply-To: <20241220003447.2913443-1-sjg@chromium.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 30 Jan 2025 12:54:52 -0700
-X-Gm-Features: AWEUYZmMfImEvQSJWh28Sqry0OKNLPUvoPZBvtDqn6t3IsOOnn7bPxU79EWHqLE
-Message-ID: <CAFLszTiqw1J+0tQT1rDzX8ENGATm46t4MQytCyr7QJL18xG0ug@mail.gmail.com>
-Subject: Re: make tests skips the DM tests
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 30 Jan 2025 12:54:58 -0700
+X-Gm-Features: AWEUYZlafKbesyC66jya54NnyS-t1TAwUyTH-sMlzDxU3_pB5R22RAegKlblsBE
+Message-ID: <CAFLszThUo1u58Vwy77UEQZG79f7-BB2ysB5-oq-DHbP4c_ciRQ@mail.gmail.com>
+Subject: Re: [PATCH v4 0/5] rpi: Tidy up booting
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Stephen Warren <swarren@wwwdotorg.org>, Stephen Warren <swarren@nvidia.com>,
+ Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Francois Berder <fberder@outlook.fr>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,55 +97,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi,
 
-On Thu, 30 Jan 2025 at 01:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 19 Dec 2024 at 17:34, Simon Glass <sjg@chromium.org> wrote:
 >
-> On 1/30/25 08:08, Heinrich Schuchardt wrote:
-> > Hello Simon,
-> >
-> > when running 'make tests' locally I get:
-> >
-> > test/py/tests/test_dm.py .
-> >
-> > ==============================================================================
-> > short test summary info
-> > ===============================================================================
-> > SKIPPED [2] test/py/conftest.py:625: .config feature "sandbox" enabled
-> > SKIPPED [1] test/py/tests/test_bootstage.py:39: No bootstage environment
-> > file is defined
-> > SKIPPED [1] test/py/tests/test_cat/test_cat.py:8: Setup failed
-> > SKIPPED [1] test/py/tests/test_dfu.py:114: got empty parameter set
-> > ['env__usb_dev_port'], function test_dfu at /test/py/tests/test_dfu.py:113
-> > !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! _pytest.outcomes.Exit: Lab failure:
-> > Timeout executing 'dm drivers
-> > ': Marking connection bad - no other tests will run
-> > !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-> >
-> >
-> > Shouldn't the required boardenv_* files be generated by running 'make
-> > tests'?
-> >
-> > Best regards
-> >
-> > Heinrich
+> This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
+> ramdisk, by expanding the available space.
 >
-> When installing all packages mentioned in tools/docker/Dockerfile the DM
-> tests are executed.
-
-What about test/py/requirements.txt ?
-
-Really we should document the packages needed. The doc/build/gcc.rst
-file is supposed to do that, where it says 'Depending on the build
-targets further packages maybe needed'. So perhaps we could add things
-there, and even split out the things needed for tests?
-
+> It also tidies up some strange behaviour with the provided FDT, where a
+> separate pointer is maintained to it, even though U-Boot has copied it
+> and placed it in its own space. This avoids strange bugs where it
+> accidentally gets overwritten when loading a file into memory.
 >
-> What is missing is an error message which package or tool is needed when
-> the boardenv_* files cannot be generated.
+> The patch to expand the devicetree was dropped, meaning that people
+> should be careful to unset fdt_addr in the environment.
+>
+> In version 2, it incorporates some changes to fdt_addr, etc. suggested
+> by Tom, as well as adding myself as a maintainer.
+>
+> Changes in v4:
+> - Expand the comment on set_fdt_addr()
+> - Update the commit message to talk in terms of my testing
+>
+> Changes in v3:
+> - Add to the existing comment block
+> - Update the comment block with the new values, including compression
+>
+> Changes in v2:
+> - Add new patch to make myself an rpi maintainer
+> - Add new patch to set bootm_size
+> - Add new patch to drop fdt_high and initrd_high
+> - Drop patch to allow expanding the devicetree during relocation
+>
+> Simon Glass (5):
+>   rpi: Add myself to the list of maintainers
+>   rpi: Set bootm_size to 512MB
+>   rpi: Drop fdt_high and initrd_high
+>   rpi: Update environment to support booti and large initrd
+>   rpi: Use the U-Boot control FDT for fdt_addr
+>
+>  MAINTAINERS                   |  1 +
+>  board/raspberrypi/rpi/rpi.c   | 20 +++++++++----------
+>  board/raspberrypi/rpi/rpi.env | 37 +++++++++++++++++++----------------
+>  3 files changed, 31 insertions(+), 27 deletions(-)
+>
+> --
+> 2.34.1
+>
 
-Also we don't run 'make test' or 'make ptest' in CI and I know from
-Tom that he doesn't use it either.
+We have hit rc1 now. Is there any interest in applying this series?
 
 Regards,
 Simon
