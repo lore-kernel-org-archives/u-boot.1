@@ -4,97 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012B6C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 13:37:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DEA9C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 13:39:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F52B820F2;
-	Thu, 30 Jan 2025 14:37:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3C8BD820B0;
+	Thu, 30 Jan 2025 14:39:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DChh67p/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qr3ijE+s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24819820E8; Thu, 30 Jan 2025 14:37:17 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 49751820E8; Thu, 30 Jan 2025 14:39:23 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 184D382106
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:37:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1361181F69
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:39:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1738244205; x=1738849005; i=xypron.glpk@gmx.de;
- bh=AsKDoKMbNiBz9j46YHZ/3Y35Saj9+M5e+Deq8QjWDDo=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=DChh67p/0xOJABkwg08Oi1dpdimWVpzcIV1z8lxnimFFKUQw4vw9D0DJVaLPL6K0
- K+JAsOzEli1sR/WhvrmtUvL86VG51u6f1pXDo/WG165MdIY19IZQ2TGrVZ47sZXLA
- x9av1V/dl6XCBnYQuTjtY98+IAV38HVgVQsZcEk/XG1djTmhiOzwa0rElBRbJp9kZ
- YLjJnV9+Lf9fz8vrJQO/az+0CAV3zkZq2ZhvJPQ9DGuceDmovPpjGtqHOtyVpwMYp
- Cs6eeCvJba3F6aNfRCyLDgghDAG2DbDc1qdw6xFjSS8jquTBrGuLLIShy7W5hpyeJ
- DhciswuU5HjJq9dOqQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.104] ([46.114.109.104]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M5QF5-1teKCW1qY1-00FH1c; Thu, 30
- Jan 2025 14:36:45 +0100
-Message-ID: <2fbcb4c8-52d4-48a3-a2bf-f7cd8fb20a30@gmx.de>
-Date: Thu, 30 Jan 2025 14:36:40 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/4] meminfo: add memory details for armv8
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-436281c8a38so5716945e9.3
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 05:39:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738244360; x=1738849160; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=AMTMjSyf7ALHAxEtycWRV1z5jMeGTiytluWdibXWYwc=;
+ b=qr3ijE+slFJgc366iWttN6WccBe/QBiPxcril5ERebRgnl8jdKENEGTDT7w/Thk5//
+ 1SLnWS5CLh3oOnIiZv+2E0YQ8ZsjMZf0rjVeAvCdOxBEQHYREXPljdVBmX/fxCyr1vS+
+ CnC51qKKCRp70qdK0r/4+s4tmUMDQNBnsSfR2gDpFL6uyHVvjvNhILi6aVRYL9jNFXq5
+ qsdwOPnc+iDjdH/DA0FW5u2goAE/yu2gx0yKFvS0BXA+gKfmfpncHMLdthDnDVu4lLgg
+ yAvGzA++ml/KlD6qigJsOsYnIRcz8tL7tilwPkRxX8F50zg6nBiXnCYhR2Yu0rcNZEvM
+ yNtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738244360; x=1738849160;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AMTMjSyf7ALHAxEtycWRV1z5jMeGTiytluWdibXWYwc=;
+ b=Des+U6VmzSprm+dITXq6rDJ82TIJQ5b7rn9JPgW8ydmYvJ9/12DZY5YrdBzddXpVBl
+ lgGXEmPdzpyAmi0NzUd572c5Tb0K7C+R/uv40/kyLqHpF9b1kbF7QzF6X4688wKyNDDF
+ zgK/Y2Z91NKYhiiWJFQvAcfS63KjnYd+0HtgYF+88KFQgNkFYJrjJeC950Jbff/wCa9u
+ sTm/pMZ2Lb99xt3I++m+/VUKV3GunoffK6jFuvicB7zfc9mfWmms49mFuljSVSlLlhY7
+ 2ff778wSF6D3aMznhn9YF8tFAq8fN6dxPtPl5Cu9YDHfDI8S1+kdqczI74IdJ5XKZbSl
+ xJBw==
+X-Gm-Message-State: AOJu0YzxZmCDrMKx2yhwIScNm3RJPSWHRM8io2uWpjTlR0yWqqT7rmqq
+ DKHk52B3vvbLPh57eSC4Lh0hIXTl2YYwpyHPlYm+y0qDc2TYTTYMZNvGizsOAhc=
+X-Gm-Gg: ASbGncuSi5scCrYyr2saTVeQWc2d8D+3Xlq+y1G3be4wbJbdab40Hid6q9AkL+6F92t
+ bGyetexCHut02f6iCV/Kqgz9N+8RRw3hsrNgd+6jO4c+ruBEGhf369IJeLMFwn+zy6ojkFJLEcS
+ aHLrGS2zv4lDluom3qLMNM3WVSWLIXxWoirxEck0cwg36fUe2FmsR/EDihox97Cgj+BQo5ncCru
+ pQy8ggPI0V52SgaMika9cPvfWumje4hLDNzFDjWRsPcdz60GPAK2NZQsYHQn8EEmnmp0yrDbt3T
+ m6Gnc3N0Udf4tq9v/B8Bs/tZbItAUOr/4HWQuwzUFEf2HQ==
+X-Google-Smtp-Source: AGHT+IFZC71B9512IvPlxcBbLsfVAHPlfJl1kUH56r2j25C17yiThTcmlrbgYZWzx46woI4zUz+v0w==
+X-Received: by 2002:a05:600c:468e:b0:434:e8cf:6390 with SMTP id
+ 5b1f17b1804b1-438dc3a3e9amr62931025e9.6.1738244360383; 
+ Thu, 30 Jan 2025 05:39:20 -0800 (PST)
+Received: from hera (ppp176092181030.access.hol.gr. [176.92.181.30])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438dcc80e61sm60281895e9.34.2025.01.30.05.39.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jan 2025 05:39:19 -0800 (PST)
+Date: Thu, 30 Jan 2025 15:39:17 +0200
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, =?UTF-8?Q?Pierre-Cl=C3=A9ment_Tosi?=
- <ptosi@google.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Christian Marangi
- <ansuelsmth@gmail.com>, u-boot@lists.denx.de, u-boot-qcom@groups.io,
- maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com
-References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <20250130072100.27297-2-ilias.apalodimas@linaro.org>
- <bc481af0-64f1-47f4-af19-1aba64c2ae6c@gmx.de>
- <CAC_iWjKSFq-hhwzoxw9XMXj92fpmy1uz_J-kdqvYx0Ju6HcUMg@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjKSFq-hhwzoxw9XMXj92fpmy1uz_J-kdqvYx0Ju6HcUMg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:RMGtcJ3FjDdOkDC2t7MlFoKVp229MXacXPaBJHUT356Q0mOAXwK
- CikegvoqvRr84DsHfcywpIKkeKP5+nLHnEK5numHTr8LzCgDaY215HGTCYnf8qhvoeuKKV2
- RUpG3WrH9Lh8ZJXauFSs5vPLe0IiWsbellHn36uia3Ju+r0Ge0ZGUOwJ7CaU47ZVVC+iNne
- y2f6/oO7FgNaNbVGugDCQ==
-UI-OutboundReport: notjunk:1;M01:P0:vqXfPzCHc8w=;MKYH6imgIaQprUTDNFDCtCN5t6o
- phGC2nFHGuKzipYPN/vs7RO7EWsoBVbz/rz9ijAsubO9+yuKG1oZEsUince4LYDmL8VDotdRx
- jLusGLB5Los0MjM69T/lT2poiZoUWZjNId/Orrhv0cyMHPyoAsW/l3SAwPxMyT2aXyMX85L5t
- d9NK0ooAGZJ1K0KRVc5f8/jy2NKXAWzG2KVigdgCVnnzL8syfIHBnBFwbqM58gUvdyusdzzmk
- 8c0DyIshRf+SG9TwtIz4ZwvEMRNJxyvIsKtboNCkbGMsj+c9ry7X/Wru8akQVVxon54/XLWaH
- XXY6WyxSEsLT1Dtpi04qPfrPovKdtU4VVyp0URaD7f6uadjbq0wxZMzzTRc2rG56oVDiadg3t
- SzWwlFOp1jFizjdaqKhz1e8IpyrJ9Zp4eEPYt4pGO2OWn4qY4PkpHR5kqL8HrtaIkHK8mpSQo
- xkjnLL86l7BxuwKH7Jnhdq2vg9IKGKfnhSaFpClah1nF4Ax9poyB3EUDQikft5hPFEQtmU6mi
- 38KDfaHW6XB0kfo9Ov2CpGv6dbB7jEnWQPrppJyykLdzr3TDvb1GUfqKphNzNved+O2dbbf1y
- vmh2wmXriuE5ypFK0c1eM/f4KpT0aO6P0jt3lOy9w5820BG2AsAZRGsld2zqtJ/ztcdAnwsP3
- hgS9oJRVTmLiStMBHm0sWYFmnOIiuP/egNZl9GP0oMlTa9164UAC0tfmeckVXAnYr/VPjhTna
- eV0JS17GACkeCJiHXshwo9jo6rxtcv1Pm+5ty4MZWQw6o4oRq+TC2HB9Zv5b4pBmD9qyPyxlz
- LltrXwKpV9SHBHSy/LJwwiYsAG9+S1T+lJibnpqc9y0Pjg/TxDtdnzjnqNeLJm5au+fwOr67c
- ryt6EjnL0VaSpskl17V9ASoRJ0VzeB4TO2IalB89SprqtlIZCI0awLTmajeYofrT699Lw7qVb
- MKK5gaKaItwzh0AU1L6B0fmZBD8B8Fq4NeSVAbucRPdf9gQA2VVFNdI1E+Ya4Mm69wIaCwqR/
- UBjRSI7lEYnmy+RqTilIFksZsuuEoobHQqq6bvPfcbR80TaV7aBsZ9/5nfbTwKweZrkNKFz0x
- HVOkAsIDA07krdZeyGx8mH6ia9xx9hxfwbix2GfKIfzcQ7+sDV1Rca/KC5aLQC1Dke9R9u5Ya
- gDHt6A4jhJ8rJxdHtC/vkkONcfV+PhMVUs+ZHRlQHgCH31eYQjwIV8L8mrzoaUkQ=
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Srinivas Goud <srinivas.goud@amd.com>,
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
+ Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH] xilinx: Enable MBEDTLS/LWIP/WGET and WGET_HTTPS
+Message-ID: <Z5uBBfKtYhRK-qfl@hera>
+References: <cb05adaf0758c2c4f1361f8665169897493638e7.1738164681.git.michal.simek@amd.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cb05adaf0758c2c4f1361f8665169897493638e7.1738164681.git.michal.simek@amd.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,169 +102,311 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/30/25 10:35, Ilias Apalodimas wrote:
-> HI Heinrich
+On Wed, Jan 29, 2025 at 04:31:25PM +0100, Michal Simek wrote:
+> Enable lwip and https on our platforms to be able to use it in a boot.
 >
-> On Thu, 30 Jan 2025 at 12:01, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
-rote:
->>
->> On 1/30/25 07:20, Ilias Apalodimas wrote:
->>> Upcoming patches are mapping memory with RO, RW^X etc permsissions.
->>> Fix the meminfo command to display them properly
->>>
->>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>> ---
->>>    arch/arm/cpu/armv8/cache_v8.c    | 18 +++++++++++++++++-
->>>    arch/arm/include/asm/armv8/mmu.h |  2 ++
->>>    cmd/meminfo.c                    |  5 +++++
->>>    3 files changed, 24 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_=
-v8.c
->>> index 5d6953ffedd1..a4ca56c8ed42 100644
->>> --- a/arch/arm/cpu/armv8/cache_v8.c
->>> +++ b/arch/arm/cpu/armv8/cache_v8.c
->>> @@ -421,7 +421,7 @@ static int count_ranges(void)
->>>        return count;
->>>    }
->>>
->>> -#define ALL_ATTRS (3 << 8 | PMD_ATTRINDX_MASK)
->>> +#define ALL_ATTRS (3 << 8 | PMD_ATTRMASK)
->>>    #define PTE_IS_TABLE(pte, level) (pte_type(&(pte)) =3D=3D PTE_TYPE_=
-TABLE && (level) < 3)
->>>
->>>    enum walker_state {
->>> @@ -568,6 +568,17 @@ static void pretty_print_table_attrs(u64 pte)
->>>    static void pretty_print_block_attrs(u64 pte)
->>>    {
->>>        u64 attrs =3D pte & PMD_ATTRINDX_MASK;
->>> +     u64 perm_attrs =3D pte & PMD_ATTRMASK;
->>
->> The variable perm_attrs is not needed. You could use pte directly.
->>
->>> +
->>> +     if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK_UXN)=
- &&
->>> +         perm_attrs & PTE_BLOCK_RO)
->>> +             printf("%-5s", " | RO");
->>> +     else if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK=
-_UXN))
->>> +             printf("%-5s", " | RW");
->>> +     else if (perm_attrs & PTE_BLOCK_RO)
->>> +             printf("%-5s", " | RX");
->>> +     else
->>> +             printf("%-5s", " | RWX");
->>
->> The string has 6 characters. "%-5s" does not match!
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
 >
-> Ah thanks! That's the misalignment i was chasing
+>  configs/amd_versal2_virt_defconfig       | 11 ++++-------
+>  configs/microblaze-generic_defconfig     |  8 ++++----
+>  configs/xilinx_versal_net_virt_defconfig | 10 +++-------
+>  configs/xilinx_versal_virt_defconfig     | 10 +++-------
+>  configs/xilinx_zynq_virt_defconfig       |  7 ++-----
+>  configs/xilinx_zynqmp_kria_defconfig     | 15 +++------------
+>  configs/xilinx_zynqmp_virt_defconfig     | 17 +++--------------
+>  7 files changed, 22 insertions(+), 56 deletions(-)
 >
->> As the string length is known using a length identifier is superfluous.
->>
->> It would be helpful to add descriptions to the flags in
->> arch/arm/include/asm/armv8/mmu.h.
->>
->> https://documentation-service.arm.com/static/5efa1d23dbdee951c1ccdec5
->> describes:
->>
->> "The Unprivileged Execute Never (UXN) and Privileged Execute Never (PXN=
-)
->> attributes can be set separately. This is used to prevent, for example,
->> application code running with kernel privilege, or attempts to execute
->> kernel code while in an unprivileged state."
->>
->> Shouldn't we show the values of UXN and PXN separately?
+> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+> index 57a6a06df7cd..8bee002777a5 100644
+> --- a/configs/amd_versal2_virt_defconfig
+> +++ b/configs/amd_versal2_virt_defconfig
+> @@ -17,6 +17,7 @@ CONFIG_DEBUG_UART=y
+>  CONFIG_SYS_MEMTEST_START=0x00000000
+>  CONFIG_SYS_MEMTEST_END=0x00001000
+>  CONFIG_REMAKE_ELF=y
+> +CONFIG_EFI_HTTP_BOOT=y
+>  CONFIG_FIT=y
+>  CONFIG_FIT_VERBOSE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+> @@ -47,10 +48,7 @@ CONFIG_CMD_SF_TEST=y
+>  CONFIG_CMD_SPI=y
+>  CONFIG_CMD_UFS=y
+>  CONFIG_CMD_USB=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>  CONFIG_CMD_CACHE=y
+>  CONFIG_CMD_EFIDEBUG=y
+>  CONFIG_CMD_TIME=y
+> @@ -70,9 +68,7 @@ CONFIG_DTB_RESELECT=y
+>  CONFIG_MULTI_DTB_FIT=y
+>  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_IP_DEFRAG=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>  CONFIG_NET_RANDOM_ETHADDR=y
+>  CONFIG_TFTP_BLOCKSIZE=4096
+>  CONFIG_SIMPLE_PM_BUS=y
+> @@ -155,6 +151,7 @@ CONFIG_UFS_AMD_VERSAL2=y
+>  CONFIG_VIRTIO_MMIO=y
+>  CONFIG_VIRTIO_NET=y
+>  CONFIG_VIRTIO_BLK=y
+> +CONFIG_MBEDTLS_LIB=y
+>  CONFIG_TPM=y
+>  # CONFIG_OPTEE_LIB is not set
+>  CONFIG_TOOLS_MKFWUMDATA=y
+> diff --git a/configs/microblaze-generic_defconfig b/configs/microblaze-generic_defconfig
+> index 87756cb26df5..6075c6a2beed 100644
+> --- a/configs/microblaze-generic_defconfig
+> +++ b/configs/microblaze-generic_defconfig
+> @@ -46,16 +46,15 @@ CONFIG_CMD_MEMINFO=y
+>  CONFIG_CMD_MEMINFO_MAP=y
+>  CONFIG_CMD_GPIO=y
+>  CONFIG_CMD_SAVES=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> +CONFIG_CMD_WGET=y
+> +CONFIG_WGET_HTTPS=y
+>  CONFIG_CMD_CACHE=y
+>  CONFIG_SPL_OF_CONTROL=y
+>  CONFIG_OF_EMBED=y
+>  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>  CONFIG_USE_HOSTNAME=y
+>  CONFIG_HOSTNAME="microblaze-generic"
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>  CONFIG_NET_RANDOM_ETHADDR=y
+>  CONFIG_SPL_DM=y
+>  CONFIG_XILINX_GPIO=y
+> @@ -99,3 +98,4 @@ CONFIG_SYSRESET_GPIO=y
+>  CONFIG_SYSRESET_MICROBLAZE=y
+>  CONFIG_WDT=y
+>  CONFIG_XILINX_TB_WATCHDOG=y
+> +CONFIG_MBEDTLS_LIB=y
+> diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
+> index 081ad424a9aa..5ef5fd44fd37 100644
+> --- a/configs/xilinx_versal_net_virt_defconfig
+> +++ b/configs/xilinx_versal_net_virt_defconfig
+> @@ -46,10 +46,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+>  CONFIG_CMD_MTD=y
+>  CONFIG_CMD_SF_TEST=y
+>  CONFIG_CMD_USB=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>  CONFIG_CMD_CACHE=y
+>  CONFIG_CMD_EFIDEBUG=y
+>  CONFIG_CMD_TIME=y
+> @@ -71,9 +68,7 @@ CONFIG_ENV_IS_IN_FAT=y
+>  CONFIG_ENV_IS_IN_SPI_FLASH=y
+>  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_IP_DEFRAG=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>  CONFIG_NET_RANDOM_ETHADDR=y
+>  CONFIG_TFTP_BLOCKSIZE=4096
+>  CONFIG_SIMPLE_PM_BUS=y
+> @@ -155,4 +150,5 @@ CONFIG_USB_FUNCTION_THOR=y
+>  CONFIG_VIRTIO_MMIO=y
+>  CONFIG_VIRTIO_NET=y
+>  CONFIG_VIRTIO_BLK=y
+> +CONFIG_MBEDTLS_LIB=y
+>  CONFIG_TPM=y
+> diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
+> index 70e73ac7ad45..f228eef7c959 100644
+> --- a/configs/xilinx_versal_virt_defconfig
+> +++ b/configs/xilinx_versal_virt_defconfig
+> @@ -52,10 +52,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+>  CONFIG_CMD_MTD=y
+>  CONFIG_CMD_SF_TEST=y
+>  CONFIG_CMD_USB=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>  CONFIG_CMD_CACHE=y
+>  CONFIG_CMD_EFIDEBUG=y
+>  CONFIG_CMD_TIME=y
+> @@ -75,9 +72,7 @@ CONFIG_ENV_IS_IN_FAT=y
+>  CONFIG_ENV_IS_IN_SPI_FLASH=y
+>  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_IP_DEFRAG=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>  CONFIG_NET_RANDOM_ETHADDR=y
+>  CONFIG_TFTP_BLOCKSIZE=4096
+>  CONFIG_SIMPLE_PM_BUS=y
+> @@ -170,5 +165,6 @@ CONFIG_USB_FUNCTION_THOR=y
+>  CONFIG_VIRTIO_MMIO=y
+>  CONFIG_VIRTIO_NET=y
+>  CONFIG_VIRTIO_BLK=y
+> +CONFIG_MBEDTLS_LIB=y
+>  CONFIG_TPM=y
+>  CONFIG_TOOLS_MKFWUMDATA=y
+> diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
+> index c2422c5b4dcf..fdf8bb361294 100644
+> --- a/configs/xilinx_zynq_virt_defconfig
+> +++ b/configs/xilinx_zynq_virt_defconfig
+> @@ -73,9 +73,6 @@ CONFIG_CMD_MTD=y
+>  CONFIG_CMD_NAND_LOCK_UNLOCK=y
+>  CONFIG_CMD_SF_TEST=y
+>  CONFIG_CMD_USB=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+>  CONFIG_CMD_CACHE=y
+>  CONFIG_CMD_EFIDEBUG=y
+>  CONFIG_CMD_TIME=y
+> @@ -94,8 +91,7 @@ CONFIG_ENV_IS_IN_NAND=y
+>  CONFIG_ENV_IS_IN_SPI_FLASH=y
+>  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>  CONFIG_NET_RANDOM_ETHADDR=y
+>  CONFIG_SPL_DM_SEQ_ALIAS=y
+>  CONFIG_SIMPLE_PM_BUS=y
+> @@ -160,4 +156,5 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x0300
+>  CONFIG_CI_UDC=y
+>  CONFIG_USB_GADGET_DOWNLOAD=y
+>  CONFIG_SYS_TIMER_COUNTS_DOWN=y
+> +CONFIG_MBEDTLS_LIB=y
+>  CONFIG_SPL_GZIP=y
+> diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+> index 2258b59e3edd..1e8ec90ff533 100644
+> --- a/configs/xilinx_zynqmp_kria_defconfig
+> +++ b/configs/xilinx_zynqmp_kria_defconfig
+> @@ -84,11 +84,7 @@ CONFIG_CMD_SDRAM=y
+>  CONFIG_CMD_SF_TEST=y
+>  CONFIG_CMD_SPI=y
+>  CONFIG_CMD_USB=y
+> -CONFIG_CMD_USB_MASS_STORAGE=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>  CONFIG_CMD_BMP=y
+>  CONFIG_CMD_CACHE=y
+>  CONFIG_CMD_EFIDEBUG=y
+> @@ -120,8 +116,7 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+>  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>  CONFIG_ENV_FAT_DEVICE_AND_PART=":auto"
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>  CONFIG_NET_RANDOM_ETHADDR=y
+>  CONFIG_SPL_DM_SEQ_ALIAS=y
+>  CONFIG_SIMPLE_PM_BUS=y
+> @@ -131,7 +126,6 @@ CONFIG_SATA_CEVA=y
+>  CONFIG_BUTTON=y
+>  CONFIG_BUTTON_GPIO=y
+>  CONFIG_CLK_ZYNQMP=y
+> -CONFIG_DFU_TFTP=y
+>  CONFIG_DFU_TIMEOUT=y
+>  CONFIG_DFU_MMC=y
+>  CONFIG_DFU_MTD=y
+> @@ -140,10 +134,6 @@ CONFIG_DFU_SF=y
+>  CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1800000
+>  CONFIG_DMA=y
+>  CONFIG_XILINX_DPDMA=y
+> -CONFIG_USB_FUNCTION_FASTBOOT=y
+> -CONFIG_FASTBOOT_FLASH=y
+> -CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>  CONFIG_ARM_FFA_TRANSPORT=y
+>  CONFIG_FPGA_XILINX=y
+>  CONFIG_FPGA_ZYNQMPPL=y
+> @@ -231,6 +221,7 @@ CONFIG_VIRTIO_BLK=y
+>  # CONFIG_BINMAN_FDT is not set
+>  CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-som.dtb"
+>  CONFIG_PANIC_HANG=y
+> +CONFIG_MBEDTLS_LIB=y
+>  CONFIG_TPM=y
+>  CONFIG_SPL_GZIP=y
+>  CONFIG_TOOLS_MKFWUMDATA=y
+> diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+> index c0721b65fd48..036268c79f77 100644
+> --- a/configs/xilinx_zynqmp_virt_defconfig
+> +++ b/configs/xilinx_zynqmp_virt_defconfig
+> @@ -59,8 +59,6 @@ CONFIG_SPL_ATF=y
+>  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>  CONFIG_CMD_SMBIOS=y
+>  CONFIG_CMD_BOOTMENU=y
+> -CONFIG_CMD_THOR_DOWNLOAD=y
+> -CONFIG_THOR_RESET_OFF=y
+>  CONFIG_CMD_GREPENV=y
+>  CONFIG_CMD_NVEDIT_EFI=y
+>  CONFIG_CMD_MEMINFO=y
+> @@ -86,11 +84,7 @@ CONFIG_CMD_SDRAM=y
+>  CONFIG_CMD_SF_TEST=y
+>  CONFIG_CMD_SPI=y
+>  CONFIG_CMD_USB=y
+> -CONFIG_CMD_USB_MASS_STORAGE=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>  CONFIG_CMD_BMP=y
+>  CONFIG_CMD_CACHE=y
+>  CONFIG_CMD_EFIDEBUG=y
+> @@ -121,8 +115,7 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+>  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>  CONFIG_ENV_FAT_DEVICE_AND_PART=":auto"
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>  CONFIG_NET_RANDOM_ETHADDR=y
+>  CONFIG_SPL_DM_SEQ_ALIAS=y
+>  CONFIG_SIMPLE_PM_BUS=y
+> @@ -132,7 +125,6 @@ CONFIG_SATA_CEVA=y
+>  CONFIG_BUTTON=y
+>  CONFIG_BUTTON_GPIO=y
+>  CONFIG_CLK_ZYNQMP=y
+> -CONFIG_DFU_TFTP=y
+>  CONFIG_DFU_TIMEOUT=y
+>  CONFIG_DFU_MMC=y
+>  CONFIG_DFU_MTD=y
+> @@ -140,10 +132,6 @@ CONFIG_DFU_NAND=y
+>  CONFIG_DFU_RAM=y
+>  CONFIG_DFU_SF=y
+>  CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1800000
+> -CONFIG_USB_FUNCTION_FASTBOOT=y
+> -CONFIG_FASTBOOT_FLASH=y
+> -CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>  CONFIG_ARM_FFA_TRANSPORT=y
+>  CONFIG_FPGA_XILINX=y
+>  CONFIG_FPGA_ZYNQMPPL=y
+> @@ -247,6 +235,7 @@ CONFIG_VIRTIO_BLK=y
+>  # CONFIG_BINMAN_FDT is not set
+>  CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman.dtb"
+>  CONFIG_PANIC_HANG=y
+> +CONFIG_MBEDTLS_LIB=y
+>  CONFIG_TPM=y
+>  CONFIG_SPL_GZIP=y
+>  CONFIG_TOOLS_MKFWUMDATA=y
+> --
+> 2.43.0
 >
-> I had that on my initial patches. But then I decided it's too Arm
-> specific to print it.
-> I was hoping more archs would fix that so I preferred RO, RW, RX since
-> it's arch agnosticI don't mind re-adding it.
 
-This code in arch/arm/cpu/armv8/cache_v8.c is architecture specific.
-
-RISC-V has flags R, W, X, U where U controls access by user mode.
-
-When printing the flags I guess we should use an architecture specific
-notation.
-
-Best regards
-
-Heinrich
-
->
-> Thanks for taking a look!
->
-> Cheers
-> /Ilias
->>
->> E.g:
->>
->> printf("%s%s%s\",
->>          pte & PTE_BLOCK_RO  ? " | RO " : "",
->>          pte & PTE_BLOCK_PXN ? " | PXN" : "",
->>          pte & PTE_BLOCK_UXN ? " | UXN" : "");
->>
->> Best regards
->>
->> Heinrich
->>
->>>
->>>        switch (attrs) {
->>>        case PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE):
->>> @@ -1112,3 +1123,8 @@ void __weak enable_caches(void)
->>>        icache_enable();
->>>        dcache_enable();
->>>    }
->>> +
->>> +void arch_dump_mem_attrs(void)
->>> +{
->>> +     dump_pagetable(gd->arch.tlb_addr, get_tcr(NULL, NULL));
->>> +}
->>> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/a=
-rmv8/mmu.h
->>> index 0ab681c893d3..6af8cd111a44 100644
->>> --- a/arch/arm/include/asm/armv8/mmu.h
->>> +++ b/arch/arm/include/asm/armv8/mmu.h
->>> @@ -66,6 +66,7 @@
->>>    #define PTE_BLOCK_NG                (1 << 11)
->>>    #define PTE_BLOCK_PXN               (UL(1) << 53)
->>>    #define PTE_BLOCK_UXN               (UL(1) << 54)
->>> +#define PTE_BLOCK_RO            (UL(1) << 7)
->>>
->>>    /*
->>>     * AttrIndx[2:0]
->>> @@ -75,6 +76,7 @@
->>>    #define PMD_ATTRMASK                (PTE_BLOCK_PXN          | \
->>>                                 PTE_BLOCK_UXN          | \
->>>                                 PMD_ATTRINDX_MASK      | \
->>> +                              PTE_BLOCK_RO           | \
->>>                                 PTE_TYPE_VALID)
->>>
->>>    /*
->>> diff --git a/cmd/meminfo.c b/cmd/meminfo.c
->>> index 5e83d61c2dd3..3915e2bbb268 100644
->>> --- a/cmd/meminfo.c
->>> +++ b/cmd/meminfo.c
->>> @@ -15,6 +15,10 @@
->>>
->>>    DECLARE_GLOBAL_DATA_PTR;
->>>
->>> +void __weak arch_dump_mem_attrs(void)
->>> +{
->>> +}
->>> +
->>>    static void print_region(const char *name, ulong base, ulong size, =
-ulong *uptop)
->>>    {
->>>        ulong end =3D base + size;
->>> @@ -54,6 +58,7 @@ static int do_meminfo(struct cmd_tbl *cmdtp, int fla=
-g, int argc,
->>>
->>>        puts("DRAM:  ");
->>>        print_size(gd->ram_size, "\n");
->>> +     arch_dump_mem_attrs();
->>>
->>>        if (!IS_ENABLED(CONFIG_CMD_MEMINFO_MAP))
->>>                return 0;
->>
+Thanks this helps!
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
