@@ -4,105 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C53AC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 09:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 685F5C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 09:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAE2A80C85;
-	Thu, 30 Jan 2025 10:32:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 96EA781FEE;
+	Thu, 30 Jan 2025 10:48:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UQMR1Xuy";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="deo5CIQl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBD1282012; Thu, 30 Jan 2025 10:32:06 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0014481FEE; Thu, 30 Jan 2025 10:48:24 +0100 (CET)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20717.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::717])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B62AE80AE4
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 10:32:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2B6B80AE4
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 10:48:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4361815b96cso3471845e9.1
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 01:32:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738229521; x=1738834321; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=d4FrABP7bi3ukq3J5lGGWzS4xKLMw0mn8C9Vgb63fw4=;
- b=UQMR1XuyCrkGNU9fR8KWeBOruFz69qjAvZz3ipExC71BxQ6eAglhnLUYmcD4UIjrKD
- tWxe5d7WKinzzHXAiNMHsJENl7glkEsR1zy9ZIbRE9jsvwEMaCOkaB1xnB2X/3EjP+LG
- tEbdFs+fZCZ5D9g6U8BJyYcKEbwe70sraIviNpgdQRpqvq3mn0dWlGFXlJSS0hgFpLfW
- m/DE+m7d056ifYNQrNaP4FH9/EqBjRmXoMnrFWxHew+4LGdyFirCan4yiKQxdyXm8W5w
- xitKTubzpSPDXvCn0+u8r+fEmVbUfcctG8diLnapw40Jf8qxNe+sfWtBx/YtakSAQXkn
- 1Hmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738229521; x=1738834321;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=d4FrABP7bi3ukq3J5lGGWzS4xKLMw0mn8C9Vgb63fw4=;
- b=T1KzIs+VIWtunyjKSpDQD2d7Xo7ZdX8S9Y6akl/qdJVwaCEOx0pfGyPmxTtL0xt5OF
- TQFqdazROISDg+em84HMRKm5NHjxdBm4sn02IGfx827hNvE1W9IeAmcRp5oqKc/u1szu
- nE1/jaK5moqSwHQ0XNYhxcA8Fo2pYMZ3HK4EFCCbDdijXAT75JS9lxi501c4y8b1C9k0
- eW/GGXVqUviHEKevHjWyYu/uismjiejAeizG7VY9rx+Z/wEJbI/bcDegtJ6bBP181bVC
- FRCBhIkpeDi/9AKrX2tMPV4dJ1+vEQrWrnnGCMK+Kjepq9LMkKfIeqWS/6nYR6geIMPW
- IFVA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU/C+4AlZSBZ6OKzj0aPjgQwOxtblWiozDCW6mGFP9WxMBqScpG1qvznSr65DudDnJPLuB3uso=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/XPVIUH78macg+SJmHGeaeWjv4Z0ZYw3znBNxPPlLN8Nr7xqe
- aMZ8oIXGWnob9d8iEV8DfUeVDGrnOUZlWXm48EhFt2AzCrzvLfATgT3q9KcTvL0=
-X-Gm-Gg: ASbGncvYJpXVKhZv/k63QDEfUyh0Cp7C5U1BNXOvGiPuqVsRZbtdi94wU/DKEDDgcuZ
- jQlmRj1la9xTPZ5q6ZkPxwZc+WN1t8sL/XZvYU/Ntxdi2aU0CYwoSql/fC3+tYHrOEMh+3ryw0h
- LKqklvIf108a07y8/VCrK3K5Dv7fdKxKoVOqKrD7QEQJ0VSSDG/9atfhdyFpN+FIOB2budWPihT
- D0iL9a0tYQ6/15E10IUHRp950IIfC1J+nfsbi8B+lnHALTq7/t9l8t1Y7Dc/dmOrOP1f96RAzj6
- xQ39OkHF3khT6Nr9pT2YmX4jNT9m5YTFJqpILQ8kFVnOiTHFDiQ4GY2kJxz1KwxTj3HFQsA=
-X-Google-Smtp-Source: AGHT+IH3ROFLWnSbYlyvAkRFOlR3WZv322OPUmDyvmTr5iJYH15bOfHdjerwUdQQIJkgwecO626GyA==
-X-Received: by 2002:a7b:c3cd:0:b0:438:e231:d342 with SMTP id
- 5b1f17b1804b1-438e231d503mr11744665e9.1.1738229521064; 
- Thu, 30 Jan 2025 01:32:01 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:14f6:2931:46df:28c5?
- ([2a01:e0a:3cb:7bb0:14f6:2931:46df:28c5])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438e244f403sm16377915e9.25.2025.01.30.01.32.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 01:32:00 -0800 (PST)
-Message-ID: <491620d4-5d92-4e16-951c-73765df8bd21@linaro.org>
-Date: Thu, 30 Jan 2025 10:31:59 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 3/4] arm64: mmu_change_region_attr() add an option not
- to break PTEs
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, =?UTF-8?Q?Pierre-Cl=C3=A9ment_Tosi?=
- <ptosi@google.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Michal Simek
- <michal.simek@amd.com>, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <20250130072100.27297-4-ilias.apalodimas@linaro.org>
- <2d16982b-1f7e-4fca-817c-d929ec3f598a@linaro.org>
- <CAC_iWjLfc1PLARLAB1sTvi3QRwGY0ZpmNurDWPqNfRa8oajqaQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=M.Schwan@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WyXRac9504iIcsoe8CxCINvMW/NUAt7am2JeAKY38VJjONJTmOb0WlLmAm8MzlLvV/mjxr4fmlbhPwllgyz1XJ+sxJJEE8JHgNKBsYHNJYyDoiUpirjF+cuozm0RgNHQdPw0XnRImvVojwnp/Uwl+bmmKEj29Cdv4xedr2Cmhg3pVrupBILpqDqtaxNhv5+rXerI+jMzLaCQ0cz8G0K3upayZG956jvVIbn4bXrdvxIMugVUL3B66D/+rZ1qAVRKyAO9JUjSrhuJ3fl7iZKjzeYZeQWPdHMWZ2VS0fL/tyq9PJbkZxhBEJEtSQSIWmAgXefjJoDXKdP5ecdn6EX6Xg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sdk5mJu5cG7Vv/UoscgkY4iTYXW2Fe0vJeL74q2dwTM=;
+ b=drGg5BRTlH3FMMyQTuO7SwHT2Z/CIABh7kUMyvdb5abEK0R8iOLvtol+H/vsYWGjyqEPW+GWihU2D7JIR3SYoDSc+UkFouNJYsWRxFvYwfWRpxrPS9eAZ2JB5NnICZWdiRHGETlrAqvtWoaRqegglM6BfedOfEeWuspumypZosq1T6Fl0Qilt11i69crWrMNJtGVQejeSwPZ/NlEpEEfFpa9uubbyl6B4whxFdZs41QcwAjDmPY2ocyWmCNumxC7jO/MpDGiqvdNAXEbMiAO+m0vIK7TOIpZLyomyqHA5I2ZhO66og/KjgEEE+arEi7TRI3B/1FYSKxr72EjmvF//A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sdk5mJu5cG7Vv/UoscgkY4iTYXW2Fe0vJeL74q2dwTM=;
+ b=deo5CIQlxtgFxYmslEpgR/ehyatzcgf5ACAfVivgalAvp0J6M9W/KQduMA6HnOMpRNcUpc8DsMqrQumYEyMoQL+w+lKg+t5TGomzJon/9HswHkUvQa3lV/+tBQ+zmcksAoGrn4i4enhiU3vDdlV/Y/t3L1Nur6z/mRKIR9tzLF5C4zUcrfEnBFunl/6ZxipKvCHVElsbe0xE9iX1bcOWCkIeAJEUIH7jsuyZ8qs6cFKXNW5M0YLmu2DvtO3tYjN2h3pPLBkYEKH65Pwz5z+LdSIc6TJyqZYSp04nEHtZAcC3++6VQ48ppyHdRwqHcuLZV2TevtULrtHZmKreRMfxmQ==
+Received: from VI2P195MB2489.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:22f::12)
+ by PAVP195MB2233.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:2fe::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8377.22; Thu, 30 Jan
+ 2025 09:48:20 +0000
+Received: from VI2P195MB2489.EURP195.PROD.OUTLOOK.COM
+ ([fe80::83ab:361:2a81:b582]) by VI2P195MB2489.EURP195.PROD.OUTLOOK.COM
+ ([fe80::83ab:361:2a81:b582%4]) with mapi id 15.20.8377.021; Thu, 30 Jan 2025
+ 09:48:20 +0000
+From: Martin Schwan <M.Schwan@phytec.de>
+To: "trini@konsulko.com" <trini@konsulko.com>
+CC: "sjg@chromium.org" <sjg@chromium.org>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+Subject: Re: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
+Thread-Topic: [PATCH 1/2] bootstd: Add implementation for bootmeth rauc
+Thread-Index: AQHbcmdXnoRY7L0agECSufq6P54vmbMvE18A
+Date: Thu, 30 Jan 2025 09:48:19 +0000
+Message-ID: <da13999132b06d7891ffc85edfc3147e64cbaa93.camel@phytec.de>
+References: <20250129-wip-bootmeth-rauc-v1-0-6308e732f314@phytec.de>
+ <20250129-wip-bootmeth-rauc-v1-1-6308e732f314@phytec.de>
+ <20250129160323.GV1233568@bill-the-cat>
+In-Reply-To: <20250129160323.GV1233568@bill-the-cat>
+Accept-Language: en-US
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjLfc1PLARLAB1sTvi3QRwGY0ZpmNurDWPqNfRa8oajqaQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VI2P195MB2489:EE_|PAVP195MB2233:EE_
+x-ms-office365-filtering-correlation-id: f1473ebf-f3cd-4637-12cf-08dd41133a85
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|376014|10070799003|366016|38070700018; 
+x-microsoft-antispam-message-info: =?utf-8?B?cXMvd1lsTDlDQk9oQ0tTQkdNTmJNdUs3RkRmMG9SWTc2TTluTkVVRUtETG0z?=
+ =?utf-8?B?S2REQXE1dHVMU0tyV3pUNlcva0FobW95Y1hXdzFzTS91Q3RmVGdoZ3hMRjhM?=
+ =?utf-8?B?a1ZpTDB1S2dYR2o1a3N1bVVXVHBCeldNeU5ocmJ3TURJaEdFZllPRHh4UzZy?=
+ =?utf-8?B?WXBUcTdsQStDeml1Wm95WEtYV0ZWb0Vzb3dhcStaVC9jMVg0SzdjcmtGcjVC?=
+ =?utf-8?B?T1R0M1ptWXJDcDEyRkc1bTA5SXhTdHB4a0tua0tTOUVNbitockkxaHpiR1R0?=
+ =?utf-8?B?ck80L09QZnZvTDk5c25ZWDVlTEVvYmJkYkh4UzFKdER1Q3BSMWVGdW52L1M4?=
+ =?utf-8?B?NUpqYldvSjZwWmFCeU0vOEF1RkZDRHFKeXo0SCtJaVJRS1ZuVFUzZlFPTmVT?=
+ =?utf-8?B?ZzROOHMwYkQweS9OaFc5Qi95elllZmFZbnYyazFBSXU5RlVVbC9WUVJaa21r?=
+ =?utf-8?B?OUk1VG5TRFA2S1lOMlBoanJsQ2N5ZWR1OGFNQ0QxVW1sb0NzU0hrZEY5MW5M?=
+ =?utf-8?B?WUQrU1JnMTFVL0pEQUgzY2gzRmFUTnFJYVIxQ0NjeWdrNmViQklYQ0hCdkRR?=
+ =?utf-8?B?QkZnWXpoTkpyK0cvdFdCQVgxUTN0SWRDMFl0M3VuTG0zaHhrNERYbk00dXpU?=
+ =?utf-8?B?Z0FxK3VWd0hrQlJNaDdoM3BDc0pvdnhWWXhsTmJZVTBaSnNNbTNKRWZ5b2hu?=
+ =?utf-8?B?LytudXV0RU5zTlZRcW1mbVlYQUxFWjBpSDdtVWFlRHQvMkQzWFhaRTk5OWh5?=
+ =?utf-8?B?VVNaQVNBZ1pvN1IrUjFGRE1zWUFqMS9yKzl6TFQwWlFreGluM0lRZldoK1Nw?=
+ =?utf-8?B?MDErUzZRbDRuV2xqVmE0aXhyK0RneUw0M3ZJUEkvMmRMUWk2ZkN5TjBhTnd2?=
+ =?utf-8?B?M2tEZmNPUjFjQjhvWUhuZkNiWEtJWG41eHE1SWdnTEdJbzhuKzk4eGgwRnRO?=
+ =?utf-8?B?ZHNqU0htRjhkcERDdG1hb0VLQWRmVmhBaGZaSHNQdCtROXZQRG9QQVhXM0Y4?=
+ =?utf-8?B?MFZqdjZjV0ZkcWNVVWdiUU1wU2FubDk0emE5akdjN1JZODNLd0RKVlhOQWx2?=
+ =?utf-8?B?NFdnbW9UTGgxSEJQeGZhbm9DSnd4SGUvVzNUaTE5TjlWMnpnaG1mNk43N2hT?=
+ =?utf-8?B?VnMxNmxEei9JZWtTK29XQlhaM1dJdFdPNS9rYUV2SG8vVk1pZUdGdnRsb3k1?=
+ =?utf-8?B?VDZldHVHV2paS2IzbXFmQXV4N2EwZmYveWVIekRKTkZsT1NmejdpakpyQlZl?=
+ =?utf-8?B?VGJhTWZlUzdXaHdDZ056c2ZGUnFGUnhaQmtiS2lCSHNXbXVYWVJFTGdBZ1Fa?=
+ =?utf-8?B?czk3K0J1MFpiSG92b0FiSW1sNFpEdDR4YjIzaTU1QjNqYnpuQ3R5UjlCWTlm?=
+ =?utf-8?B?S0RMbVFPdmtnVjQxQWl6QWhPbG9wMFZqVXY3NVJ4NnowTDRJd3lXS1MrMmNi?=
+ =?utf-8?B?TUJyWG9nUVhTWWpxSE9zYkI1cGswMitPeTNaY0J4V2l6K0k5Tzd4bkhYdWxt?=
+ =?utf-8?B?bVhxajNkbWdaN2JxYzFFSUhKRjg5a0hjci9OMWJUb2NlWUFsWHo2TEc3cWta?=
+ =?utf-8?B?VWNVTytkamNjRE5iOVBGRGF3SDVzcWtlN3JOTGcvcjRDTEN6Ymw5YldlVVFo?=
+ =?utf-8?B?cnhycEp4c0pKZXZ5bnVwNTdDR0ZBdkx5TitYQ0hWbU10Z2hNR09nUXhUT0Jy?=
+ =?utf-8?B?UXgrL0FoZmZra3MvWlhXNU90RVI2cUh0bUpjOFFWR2ZNa1dFNkxzT084WFJ0?=
+ =?utf-8?B?L0JLVG8zU0NwT2thQmh1UVhybU5Ta2tkSGNhVVlZcHltVTVOY01TZHVIVW9W?=
+ =?utf-8?B?RHliU0p1RCtLZDNDRnB2VGxmU2ZmRlRNelE5STdNNkVKVXRJMlBXUGM3V0Rr?=
+ =?utf-8?Q?rIUY/LXF/Y8qM?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI2P195MB2489.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(10070799003)(366016)(38070700018); DIR:OUT;
+ SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?YnRuc3pUMzNZYkZXdWtNTkdyZjI4OEh5ZENzeXZqUTQwUkpTSUJRd2xIbzdj?=
+ =?utf-8?B?Y2JkcUhaMnRYWWhOUEVFaEtSQkhrSUs2azVzRkljdmRkbzlzcXJrZ2VJakxx?=
+ =?utf-8?B?c1k5SmVtdVBqNXNoUnN2L1Y1RHdTeFZ2dXU0NTNETno2TlAyT0dCaVNyWVc3?=
+ =?utf-8?B?T2I3MVJnWXM0K2RsQmJ5TzZKVTdRYlN2ckZDVlVBbUl1Nm9JRnl1L1d4Q2lw?=
+ =?utf-8?B?clFYcVl6eWtuQWllY1VNZDBWYVV6NW5lam04U2JqS2dMNW05R0N2WkdjUnZD?=
+ =?utf-8?B?YzNDQkRvektLZ3NmeTBIMlM4Ti9IYkl6Skp4aFVNUTlVWXorNExodzhRbjJW?=
+ =?utf-8?B?bEZvejV3TG03eUpkSExLZzdsVitnb1RhcjhMeVdPa2w2SzBPeUpOa01ZTVVy?=
+ =?utf-8?B?bE1CS1gvNWdPY3ZvL1NmVWE1UDlHaEs3SFU4ZFN4YU9zTWNVRXVIL3RCYmRY?=
+ =?utf-8?B?MllPRy9hNXA5ZlE2bjk4ZkRSODhnbTMvQ1orVTM3bXlKTEowOGxYMmVyN2dC?=
+ =?utf-8?B?S3huYlJxeUdyaThiSkhwdFhCU0hFVHlUbGRpWWV1dHdXbVVrR0JXaHRlRmJV?=
+ =?utf-8?B?VHEvNXJkOXR3MUp2NFBlWk1YQktCUUlQWkJYVWZiN3VWUGc3MjkwZmhxd01U?=
+ =?utf-8?B?aGxsWEtJMERIRGhjZm9iL1h3VGN6aGE0Z3cvQjdKaGkvWWRQeVE2blhyaFFi?=
+ =?utf-8?B?WkR2U0E2b3ZjUVRCZUFUMnV3bVY5NnpNWkxwMnpvM1JZZFAvcURaM2M1QXpB?=
+ =?utf-8?B?b0FZanA3dmFvVS9qMFJmMDZLRGpyeTlxYkJQekJCRDY4SFlWNHRxR0lTcXJN?=
+ =?utf-8?B?MnlMZVlXdm56TzMzaDdmZGxCMk5RQTErbzlXY3FKOXdEb09yeWVLeExHWTJP?=
+ =?utf-8?B?b0xxVXRBYUp2dmYzQ1MxL2tETlg4ZEpLcmpzNWYvNEFCcWxjM2tXbXlMeHhN?=
+ =?utf-8?B?c09YWHc2SnF2QUtHOUQyQnVqb3FpZ2hWVVVoOGRkY3ZmSzVIV1p5ZjMwNWVT?=
+ =?utf-8?B?L0JPZVRvUFd4Ti91SVBhbmhmNlNXNzNRK2dCOVUrTkhkdGtYKytzM0w4SVF4?=
+ =?utf-8?B?UmFvV0lKWWR4UElQZnQ1RkNibWc0WVdIVUp4cmkxNGt4b0cxcTlCRXFuVWJJ?=
+ =?utf-8?B?TzNIRzYzRktsUTRyenMxbFlDVUI5OCtZczVpazdMRlFneE5FUVNhTTlmdjRs?=
+ =?utf-8?B?VkpaOHBhYnpUeEQrejZSTU50VmMxc3FlK2dVS2NwMVd4cUlOYWNFenFodjQz?=
+ =?utf-8?B?ZFRCSW5WK2pqMDRXeXNHdWU1bUFMSGdDUElLRHJlZGVoMm5DbWZrMVAwRnlQ?=
+ =?utf-8?B?MWI1ZWVYN29PODhmWnU4VGs2TmFpdE44KzBUaThjMjBvR1ROYVFQZ3lmb0FW?=
+ =?utf-8?B?YmgrcmN3dmluV1NBQlRWM0xNdjVNS1kvSG92KzJaWlFnaGJaOUg3ZTVmUWg1?=
+ =?utf-8?B?Q0haMzNZMUpkNzFFVEc4bEZDdXE3emIreVI2N1pQNm1QbzdMT3BXOGo3dkE3?=
+ =?utf-8?B?d2pCRFQwNU1hd093VkkzSUN2L1FVRGZyTWw4YnlqMHA1cW0xMHBFdjh5enY5?=
+ =?utf-8?B?TmhpWFpZQS82N1hTdDhRbnpqMGw0YVBYY1E3MUVnMTY4dk1DcXBLd1gyVURk?=
+ =?utf-8?B?RXRSREIrd3JDemVaN3FSN2NkZE9VZkZWSEw0R2puWHVaSFU2eVZGNmUzQXRi?=
+ =?utf-8?B?cG9wSHZTQVV4bzRrUGJ0ZzNsZkpkREhkZGgyMGZQUWZGWG0wK3pTY0tNREc2?=
+ =?utf-8?B?cUU4TUZaeHdNYjM0OUMvOGF6eEd3UkVRRUhabGtnSkxNbEhma2dKZ0JsTzhS?=
+ =?utf-8?B?dFdHd083QjdYWUk4NEJLNnBKejR4VFFybC9OUVdWVXdmVDhySURVZjlkdGNn?=
+ =?utf-8?B?Y01OT1NrTHBRdkNFcnhZUWpoYWM0RTY2QThNV0VLSDFHaml3QW1WTlBKaU8r?=
+ =?utf-8?B?cFFQcEFqbGsyMUt6UkNMenI2b2crN0svdFlVb1JubU5GZjhIU240OHFpVWZz?=
+ =?utf-8?B?RjVHNXE4bk04ZUoxU2cxREZiemNGK2FmR3o2cmRLc0ZEaHBZbEJkZ0RyOTVj?=
+ =?utf-8?B?eXE4UGtvaUxGeHZMR3RITUw1cDFRL0dhUGRrcFdqcFZ1MjRRM05SdGNiaTR6?=
+ =?utf-8?B?dTk1L1hSNWUyVDMrbE1PejI2NFZ6RHNTM3d1cFU4ZjVKR29JRjRIVUErRXBi?=
+ =?utf-8?Q?JR8PJkmMqzgvzRMm/r1RLeiMiFLfbkc3pIr26+ftutFz?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <FF566E93157093429513FD5C5FAE6191@EURP195.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VI2P195MB2489.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: f1473ebf-f3cd-4637-12cf-08dd41133a85
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Jan 2025 09:48:19.6531 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: QUlZk+Z5tpvtIbX/gR9aj7BHTZ9ELy/KUSyzPn6IGhjBg1TmHQPAIRrZN/QqIZNk2YYMazjHj+oguiGPBU8P6g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVP195MB2233
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,179 +180,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 1/30/25 10:20, Ilias Apalodimas wrote:
-> Hi Jerome,
-> 
-> On Thu, 30 Jan 2025 at 11:11, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> Hi Ilias,
->>
->> On 1/30/25 08:20, Ilias Apalodimas wrote:
->>> The ARM ARM on section 8.17.1 describes the cases where
->>> break-before-make is required when changing live page tables.
->>> Since we can use this function to tweak block and page permssions,
->>> where BBM is not required add an extra argument to the function.
->>>
->>> While at it add a function we can use to change the attributes of normal
->>> memory without breaking the pages tables first
->>>
->>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>> ---
->>>  arch/arm/cpu/armv8/cache_v8.c           | 27 ++++++++++++++++++++++++-
->>>  arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 ++++-----
->>>  arch/arm/include/asm/system.h           |  3 ++-
->>>  arch/arm/mach-snapdragon/board.c        |  2 +-
->>>  4 files changed, 34 insertions(+), 8 deletions(-)
->>>
->>> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
->>> index a4ca56c8ed42..60d0870013e8 100644
->>> --- a/arch/arm/cpu/armv8/cache_v8.c
->>> +++ b/arch/arm/cpu/armv8/cache_v8.c
->>> @@ -968,11 +968,14 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
->>>   * The procecess is break-before-make. The target region will be marked as
->>>   * invalid during the process of changing.
->>>   */
->>> -void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
->>> +void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs, bool bbm)
->>>  {
->>>       int level;
->>>       u64 r, size, start;
->>>
->>> +     if (!bbm)
->>> +             goto skip_bbm;
->>> +
->>>       start = addr;
->>>       size = siz;
->>>       /*
->>> @@ -997,6 +1000,7 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
->>>                          gd->arch.tlb_addr + gd->arch.tlb_size);
->>>       __asm_invalidate_tlb_all();
->>>
->>> +skip_bbm:
->>>       /*
->>>        * Loop through the address range until we find a page granule that fits
->>>        * our alignment constraints, then set it to the new cache attributes
->>> @@ -1020,6 +1024,27 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
->>>       __asm_invalidate_tlb_all();
->>>  }
->>>
->>> +void mmu_set_attrs(phys_addr_t addr, size_t size, int type)
->>
->> type should be an enum
-> 
-> yea, I mentioned that in the cover letter.
-
-...which for some reason I did not get :-/ I found it on the ML
-archive.
-
-Thanks,
--- 
-Jerome
-
-> 
-> Thanks!
-> /Ilias
->>
->>> +{
->>> +     u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE | PTE_TYPE_VALID;
->>> +
->>> +     switch (type) {
->>> +     case 1:
->>> +     /* RO */
->>> +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_RO;
->>> +             break;
->>> +     case 2:
->>> +             /* RX */
->>> +             attrs |= PTE_BLOCK_RO;
->>> +             break;
->>> +     case 3:
->>> +             /* RW */
->>> +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN;
->>> +     }
->>> +
->>> +     mmu_change_region_attr(addr, size, attrs, false);
->>> +}
->>> +
->>>  #else        /* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
->>>
->>>  /*
->>> diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
->>> index d2d3e346a36f..caf1dab05936 100644
->>> --- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
->>> +++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
->>> @@ -1573,7 +1573,7 @@ void update_early_mmu_table(void)
->>>                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
->>>                                       PTE_BLOCK_OUTER_SHARE           |
->>>                                       PTE_BLOCK_NS                    |
->>> -                                     PTE_TYPE_VALID);
->>> +                                     PTE_TYPE_VALID, true);
->>>       } else {
->>>               mmu_change_region_attr(
->>>                                       CFG_SYS_SDRAM_BASE,
->>> @@ -1581,7 +1581,7 @@ void update_early_mmu_table(void)
->>>                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
->>>                                       PTE_BLOCK_OUTER_SHARE           |
->>>                                       PTE_BLOCK_NS                    |
->>> -                                     PTE_TYPE_VALID);
->>> +                                     PTE_TYPE_VALID, true);
->>>  #ifdef CONFIG_SYS_DDR_BLOCK3_BASE
->>>  #ifndef CONFIG_SYS_DDR_BLOCK2_SIZE
->>>  #error "Missing CONFIG_SYS_DDR_BLOCK2_SIZE"
->>> @@ -1594,7 +1594,7 @@ void update_early_mmu_table(void)
->>>                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
->>>                                       PTE_BLOCK_OUTER_SHARE           |
->>>                                       PTE_BLOCK_NS                    |
->>> -                                     PTE_TYPE_VALID);
->>> +                                     PTE_TYPE_VALID, true);
->>>                       mmu_change_region_attr(
->>>                                       CONFIG_SYS_DDR_BLOCK3_BASE,
->>>                                       gd->ram_size -
->>> @@ -1603,7 +1603,7 @@ void update_early_mmu_table(void)
->>>                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
->>>                                       PTE_BLOCK_OUTER_SHARE           |
->>>                                       PTE_BLOCK_NS                    |
->>> -                                     PTE_TYPE_VALID);
->>> +                                     PTE_TYPE_VALID, true);
->>>               } else
->>>  #endif
->>>               {
->>> @@ -1614,7 +1614,7 @@ void update_early_mmu_table(void)
->>>                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
->>>                                       PTE_BLOCK_OUTER_SHARE           |
->>>                                       PTE_BLOCK_NS                    |
->>> -                                     PTE_TYPE_VALID);
->>> +                                     PTE_TYPE_VALID, true);
->>>               }
->>>       }
->>>  }
->>> diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
->>> index dbf9ab43e280..0a8ca19e45e9 100644
->>> --- a/arch/arm/include/asm/system.h
->>> +++ b/arch/arm/include/asm/system.h
->>> @@ -287,8 +287,9 @@ void flush_l3_cache(void);
->>>   * @emerg: Also map the region in the emergency table
->>>   */
->>>  void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
->>> -void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs);
->>> +void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs, bool bbm);
->>>
->>> +void mmu_set_attrs(phys_addr_t addr, size_t size, int type);
->>>  /*
->>>   * smc_call() - issue a secure monitor call
->>>   *
->>> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
->>> index 2ef936aab757..13f4e8e640ef 100644
->>> --- a/arch/arm/mach-snapdragon/board.c
->>> +++ b/arch/arm/mach-snapdragon/board.c
->>> @@ -577,7 +577,7 @@ static void carve_out_reserved_memory(void)
->>>               if (i == count || start + size < res[i].start - SZ_2M) {
->>>                       debug("  0x%016llx - 0x%016llx: reserved\n",
->>>                             start, start + size);
->>> -                     mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
->>> +                     mmu_change_region_attr(start, size, PTE_TYPE_FAULT, true);
->>>                       /* If this is the final region then quit here before we index
->>>                        * out of bounds...
->>>                        */
+LS0tLS1CRUdJTiBQR1AgU0lHTkVEIE1FU1NBR0UtLS0tLQ0KSGFzaDogU0hBMjU2DQoNCk9uIFdl
+ZCwgMjAyNS0wMS0yOSBhdCAxMDowMyAtMDYwMCwgVG9tIFJpbmkgd3JvdGU6DQo+IE9uIFdlZCwg
+SmFuIDI5LCAyMDI1IGF0IDAzOjI1OjI1UE0gKzAxMDAsIE1hcnRpbiBTY2h3YW4gd3JvdGU6DQo+
+ID4gQWRkIGEgYm9vdG1ldGggZHJpdmVyIHdoaWNoIHN1cHBvcnRzIGJvb3RpbmcgQS9CIHN5c3Rl
+bSB3aXRoIFJBVUMNCj4gPiBhcw0KPiA+IHRoZWlyIHVwZGF0ZSBjbGllbnQuDQo+ID4gDQo+ID4g
+U2lnbmVkLW9mZi1ieTogTWFydGluIFNjaHdhbiA8bS5zY2h3YW5AcGh5dGVjLmRlPg0KPiA+IC0t
+LQ0KPiA+IMKgYm9vdC9LY29uZmlnwqDCoMKgwqDCoMKgwqDCoCB8wqAgMTEgKysNCj4gPiDCoGJv
+b3QvTWFrZWZpbGXCoMKgwqDCoMKgwqDCoCB8wqDCoCAxICsNCj4gPiDCoGJvb3QvYm9vdG1ldGhf
+cmF1Yy5jIHwgNDA4DQo+ID4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrDQo+ID4gwqAzIGZpbGVzIGNoYW5nZWQsIDQyMCBpbnNlcnRpb25zKCspDQo+
+IA0KPiBJJ20gY3VyaW91cywgd2hhdCB3b3VsZCBiZSByZXF1aXJlZCB0byBoYXZlIHRoaXMgd29y
+ayBmb3IgYW55IGJsb2NrDQo+IGRldmljZSwgcmF0aGVyIHRoYW4ganVzdCAibW1jIiA/IEp1c3Qg
+YSBsYWNrIG9mIHRpbWUgLyB0ZXN0aW5nIC8gdGhpcw0KPiBpcw0KPiB2MSBhbmQgdGhhdCdzIGEg
+ZnV0dXJlIGlkZWE/IE9yIGlzIHRoZXJlIHNvbWV0aGluZyBtb3JlIGZ1bmRhbWVudGFsDQo+IHJl
+cXVpcmVkIHdpdGhpbiBib290c3RkL2Jvb3RtZXRocyA/IFRoYW5rcyENCj4gDQoNCkJlc2lkZXMg
+TU1DLCBSQVVDIHN1cHBvcnRzIHVwZGF0aW5nIFNTRHMgYW5kIHJhdyBOQU5EIGZsYXNoIFsxXS4N
+Cg0KSSBndWVzcyB0aGVyZSBzaG91bGQgYmUgdmVyeSBsaXR0bGUgdG8gbm8gYWRqdXN0bWVudHMg
+bmVjZXNzYXJ5IHRvDQpzdXBwb3J0IFNTRHMgKHByb2JhYmx5IG9ubHkgYWRqdXN0IGNoZWNrcyku
+DQoNCkZvciByYXcgTkFORCBmbGFzaCBhbmQgdXNpbmcgVUJJIHZvbHVtZXMsIHRoaXMgd291bGQg
+cmVxdWlyZSBzb21lDQphZGRpdGlvbmFsIGNvZGUgY2FsbGluZyB0aGUgY29ycmVjdCByZWFkIG9w
+ZXJhdGlvbnMsIGJ1dCBpcyBkZWZpbml0ZWx5DQpwb3NzaWJsZS4gSSBkaWQgbm90IGltcGxlbWVu
+dCBpdCB5ZXQgYmVjYXVzZSBvZiBsYWNrIG9mIHRpbWUgYW5kDQp2ZXJpZmljYXRpb24sIGFzIHlv
+dSBjb3JyZWN0bHkgZ3Vlc3NlZC4NCg0KTmV0d29yayBkZXZpY2VzIGFyZSBub3Qgc3VwcG9ydGVk
+IGZvciBvYnZpb3VzIHJlYXNvbnMuDQoNClJlZ2FyZHMsDQpNYXJ0aW4NCg0KWzFdOg0KaHR0cHM6
+Ly9yYXVjLnJlYWR0aGVkb2NzLmlvL2VuL2xhdGVzdC9pbnRlZ3JhdGlvbi5odG1sI3BhcnRpdGlv
+bmluZy15b3VyLWRldmljZQ0KLS0tLS1CRUdJTiBQR1AgU0lHTkFUVVJFLS0tLS0NCg0KaVFGSEJB
+RUJDQUF4RmlFRXZSVlZDMU41R29VV2s5SXJEUUl1d1FLZUQ0SUZBbWViU3VJVEhHMHVjMk5vZDJG
+dQ0KUUhCb2VYUmxZeTVrWlFBS0NSQU5BaTdCQXA0UGdvaXVCLzBRWVByS3JwbysxZXYrUHVLRHd0
+MjgxMXpyMG5QOQ0KMEhVbXo0TnY1NkNKajhRYzlTNE5MMnl5WXJIZ0ZBUTB4UGN1WWVtMjBORVpa
+WWNjdEt6WDVwWXJ0dTR2WU9CbQ0KV1Vzb2oxKzNUVkliUStjMmkvNE51S0JQQWdzYWQxd1pjUVkw
+NGNUcnRBWHpCV3pOeEk1NmtHUDBQZkxZVjRscw0KL08veEYwUWFtbmpYUVJ0SFVydjRrUU9ucWkr
+UkJ2UUl4RDdJQ1ovN29pTmZWNHZLN2hVOFZ1N1Rub09TWktDRw0KcU5yNXpuWFpnVDhheExTZGtF
+OVZqWDJJd3BUbStpaHVEZTk0L0JyTGc0RS81NHlCQmNmS3dQZVlzekZ5RG9YVg0KbzhITmQxZXlU
+MTM3QjllM0VISzJQQzJoVmhjNUMvMVY2UktHMFNSSTFiVFRyZFlObFNMMHJmY2kNCj1nUGlzDQot
+LS0tLUVORCBQR1AgU0lHTkFUVVJFLS0tLS0NCg==
