@@ -4,81 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FBAFC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 20:04:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC761C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 21:20:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 113A980EBA;
-	Thu, 30 Jan 2025 21:04:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D506D809A4;
+	Thu, 30 Jan 2025 22:20:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LcXCAwwD";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Vehp//xT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4972B820FE; Thu, 30 Jan 2025 21:04:52 +0100 (CET)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 17644809D0; Thu, 30 Jan 2025 22:20:21 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 329C780EB6
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 21:04:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFEF680243
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 22:20:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-30615661f98so13802061fa.2
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 12:04:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738267489; x=1738872289; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9yVsrqbGBpibU6C7LZVlr37Irj2dWqEkxoB4ovwQMGQ=;
- b=LcXCAwwDnkWF2XkRpUKM+gzMfhN5jlu3IIaXoGuEFWSrCKJcQo7QBsmgXcJRhM0KlU
- 4OvM7DEifzZp2u/DM+84RWuttt+M2qN/6lsj4ffbFxnk/8R0Inaic50zalJQc0EgUg/T
- 3KllssT4N8vcbZWdGFNwDgozvpzenXLVecoeUHu8XQrMmPp5aEQUwMHpyKf0usUGvSDD
- qyxOcfmpNInVuSnU6kmZommHpt+UNQ6DKuzZJswV7OfUdIMEt2T5fDvvEvOGdt05wdxW
- 09Uj1QWDKbyp05SwfkHCIpoklt+585kHUDslXQqfZgclMYkl4GxsBT/d5S9GA1rD9Lii
- d6TA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738267489; x=1738872289;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9yVsrqbGBpibU6C7LZVlr37Irj2dWqEkxoB4ovwQMGQ=;
- b=E4J54AIvWEwfThkDih9Lji+AgxBWSN4/eyty7bPNLNFmt7eNWAl28gFGKp8lHuo+bD
- DdKFZWtBNrmR/GD3t+BScKF/qOU+ajautrRHRCxG4A0/xBfzl5rzgB5H1c92vGrNavx/
- 1GpIaNSmxw1PNaT015rOTxFe8wUntqQwoaL5y/VVfNF6CYltqmfWIo4hWl0bpjEYj9RB
- 78En11A9e7xcYOSKKmS6Nfs+1FitD7pf6CRqZ1fPpd/Av94iAPnhVtDJvTWwdEPhqCeK
- a9dw0PsUpUNFyBFu6LDVITUmNFTal7MBqvjXmlMOUYeqbucDOigYfnPQqQbnAPJC97E2
- 5qQw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWFhgP/NCeRWckNepEd7Uduv8vaE5KrcFzxHmtMh9yP7cUzYev4JlfTTH+eHPFF/NffCFfUkCc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzbVbvW2aR11ubVPgDPfW8KLTWaYNPQcNhzmNrxpM+AxHcoUN6
- umngemWQz3n9pcy+PIPuflQvcB3HiDrYYsNkf1teiv9+9Y/ksgHB5iF11Cc3F3WXFS4w1XBTzVj
- RLRNDtfgSnB7AZc/3+aj4l5ZSxQs=
-X-Gm-Gg: ASbGncsV3OHYF4fYQLAXkOAjr4c7LvpQRBTCrPZIu/o72AFo6BUUO1B6oJguJg+OPcA
- ua6TreXkcgncdtUQt8SivLshuI+vcrcDO6+t8mHPRZ0ihPPYxzipW00uLV7QyrWZ010NheX7dO9
- v9VylizgbZUHXHdAxUcV4AKdtMZcJq
-X-Google-Smtp-Source: AGHT+IGA9Dco6opVv7fwO43vt91PTT/+2h2URGDSWM9AVo6jijIyRcz07RBu+Ui+eKAf9JMifEtWBhnliimTJWoc45w=
-X-Received: by 2002:a2e:9fc2:0:b0:300:324e:3504 with SMTP id
- 38308e7fff4ca-3079695145bmr39877871fa.27.1738267489002; Thu, 30 Jan 2025
- 12:04:49 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=2de8=UX=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1738272016;
+ bh=+cZkS7KDSvmFwFuYw0uS2UzB8Z/DkuzvzZEOSAVS1Cw=;
+ b=Vehp//xT6Z1c87pc6DrOvaUCFLDV0dA8epFO3Qr2IKWKX7gWruDqlYvCYvSW+OzD3L5IuYlFP
+ FI0WPXWXXiZiidXojFZOrchf7wo87/nVFH8XtekQE68+WMq+ex0GdpsRje2Xwj7DTZ9sTHxDwU3
+ VAK4Nmw1U44Ha9lStbjeUYu17gjPgl6dpSRLFZlPch1EO+oH+KHvc/dbxGMkqoORqOXhuPp0aX1
+ L6thEUCMf7QkmQ4vZmfPCnaeeJFeSR7ZsYG7ALs1+6xWBzXHOIpl2+tDU0w7Erm1VOV4cWfQMkk
+ EOUQnKGbIN1JhZ508fKiYLgMSQ2fhRKMRQmJpfDESfpg==
+X-Forward-Email-ID: 679bed062d70e7e05883e8f6
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <02557bff-3a8e-48ce-8bcd-e9a0cf81f51b@kwiboo.se>
+Date: Thu, 30 Jan 2025 22:20:00 +0100
 MIME-Version: 1.0
-References: <tencent_E08F4B0FE7E0151B543039103D26CCA4B306@qq.com>
-In-Reply-To: <tencent_E08F4B0FE7E0151B543039103D26CCA4B306@qq.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 30 Jan 2025 17:04:37 -0300
-X-Gm-Features: AWEUYZlzEsnk-mFiPn3K91eE-RraeAwYSnEi33hKHs1HhmIE6btfTxo_uM_EkoM
-Message-ID: <CAOMZO5CCuGx4gwq-WqYxgcU-kCz7t9Bi9OPhjG0nWhwWrD=UbQ@mail.gmail.com>
-Subject: Re: [PATCH v1] arm: Other boards should not show this option in
- menuconfig
-To: 1425075683@qq.com
-Cc: Heiko Schocher <hs@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/14] pinctrl: rockchip: fix editing const struct +
+ constify rockchip_pin_ctrl
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Quentin Schulz <foss+uboot@0leil.net>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jagan Teki <jagan@edgeble.ai>,
+ u-boot@lists.denx.de
+References: <20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de>
+ <0ca2ce57-8efe-4de2-8f83-71623867e51f@kwiboo.se>
+ <70588c5a-fca5-4600-a229-f30b8d97ac6b@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <70588c5a-fca5-4600-a229-f30b8d97ac6b@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,33 +80,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Liya,
+Hi Quentin,
 
-On Wed, Jan 29, 2025 at 10:30=E2=80=AFPM <1425075683@qq.com> wrote:
->
-> From: Liya Huang <1425075683@qq.com>
->
-> When I was using STM32 board,
-> this option appeared in menuconfig and caused me trouble.
-> I observed that the root cause was that
-> the option was not included in the endif,
-> but when I tried to fix it,
-> an error occurred.
-> I didn't find a solution.
-> Only deponds can be used for hiding
+On 2025-01-30 15:16, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 1/29/25 3:20 PM, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 2025-01-29 13:42, Quentin Schulz wrote:
+>>> While testing some WIP work done by Ilias Apalodimas on guaranteeing
+>>> read-only memory areas truly are handled as read-only[1], my RK3588
+>>> Tiger couldn't reach U-Boot CLI anymore because of the pinctrl driver
+>>> modifying a const struct rockchip_pin_ctrl, triggering a CPU abort.
+>>>
+>>> Instead of going the lazy way and unconstify it, let's fix the actual
+>>> issue in play.
+>>>
+>>> The member modified in the const is only ever used for setting a member
+>>> from another struct (not const that one). However this other member is
+>>> never read! Therefore we can simply afford to remove it which means the
+>>> sole reader of the member in the const is now gone, thus making it
+>>> possible to remove the member from the const struct as well.
+>>>
+>>> This also means we should be able to constify the private data of the
+>>> controller device for all Rockchip devices, instead of having those only
+>>> for RK356x, RK3588 and RV1126. With the constify done on top of Ilias
+>>> branch[1], my PX30 Ringneck, RK3399 Puma and RK3588 Tiger all reach
+>>> U-Boot CLI. No further test (like booting into Linux userspace) was
+>>> done.
+>>>
+>>> [1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/tree/fix_memory_permissions
+>>>
+>>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>>> ---
+>>> Quentin Schulz (14):
+>>>        pinctrl: rockchip: remove unused base_pin bank member
+>>>        pinctrl: rockchip: remove unused nr_pins controller member
+>>
+>> pin_base and nr_pins is used after my "rockchip: pinctrl: Add support
+>> for pinmux status cmd" series [1].
+>>
+>> The pin_base should probably be moved to udevice priv data or similar.
+>> nr_pins can probably also be moved to udevice priv data or constify in
+>> driver data.
+>>
+>> Do you want me to re-work/re-store these fields in a different way once
+>> I finally send a v3 of that series?
+>>
+> 
+> What I can suggest is to remove the setting of ctrl->nr_pins as I 
+> believe we shouldn't be modifying it and we don't need to store it, even 
+> in your patch series as we discussed on IRC, and keep pin_base from the 
+> bank.
+> 
+> What I can offer instead is to use a local variable to replace the one 
+> from the controller struct.
+> 
+> """
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c 
+> b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> index d449d07d32e..14aba6f370b 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+> @@ -531,20 +531,22 @@ static struct rockchip_pin_ctrl 
+> *rockchip_pinctrl_get_soc_data(struct udevice *d
+>   	struct rockchip_pin_ctrl *ctrl =
+>   			(struct rockchip_pin_ctrl *)dev_get_driver_data(dev);
+>   	struct rockchip_pin_bank *bank;
+> -	int grf_offs, pmu_offs, drv_grf_offs, drv_pmu_offs, i, j;
+> +	int grf_offs, pmu_offs, drv_grf_offs, drv_pmu_offs, ctrl_nr_pins, i, j;
+> 
+>   	grf_offs = ctrl->grf_mux_offset;
+>   	pmu_offs = ctrl->pmu_mux_offset;
+>   	drv_pmu_offs = ctrl->pmu_drv_offset;
+>   	drv_grf_offs = ctrl->grf_drv_offset;
+>   	bank = ctrl->pin_banks;
+> +	ctrl_nr_pins = 0;
+> +
+> 
+>   	for (i = 0; i < ctrl->nr_banks; ++i, ++bank) {
+>   		int bank_pins = 0;
+> 
+>   		bank->priv = priv;
+> -		bank->pin_base = ctrl->nr_pins;
+> -		ctrl->nr_pins += bank->nr_pins;
+> +		bank->pin_base = ctrl_nr_pins;
+> +		ctrl_nr_pins += bank->nr_pins;
+> 
+>   		/* calculate iomux and drv offsets */
+>   		for (j = 0; j < 4; j++) {
+> """
+> 
+> Something like that to replace patches 1 and 2. This should allow you to 
+> keep working on your other patch series without me making it too much 
+> more difficult for you to rebase?
 
-The change looks good, but the Subject and commit log could be improved.
+Thanks for taking a look, and I agree this should help when I pick up
+and re-spin my series.
 
-In the Subject line, you can put:
+> 
+> We need this patch series in before 
+> https://lore.kernel.org/u-boot/20250130072100.27297-1-ilias.apalodimas@linaro.org/T/#t 
+> gets is otherwise we don't be able to boot anymore on RK356x, RK3588 and 
+> RV1126. I don't think there's going to be much bikeshedding or 
+> controversy about my series here (in v2 if you agree with the above 
+> diff), the pinctrl series from last August seems like it could be 
+> opening many can of worms so better not rebase this series on top of 
+> that series. Do you agree with that?
 
-siemens: common: Make DDR_SI_TEST depend on TARGET_CAPRICORN
+I fully agree, better to get this in first, I will try to re-spin my
+series on top of this sometime later once this has landed.
 
-In the commit log:
+Regards,
+Jonas
 
-The DDR_SI_TEST config option is only relevant to the i.MX8 Capricorn
-board.
+> 
+> Cheers,
+> Quentin
 
-Make DDR_SI_TEST depend on DDR_SI_TEST so that it does not show up
-on other targets.
-
-Could you send a v2 with these changes?
