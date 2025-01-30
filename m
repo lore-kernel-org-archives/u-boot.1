@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B29B8C0218D
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 22:33:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC82C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 23:02:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 474D68215A;
-	Thu, 30 Jan 2025 23:33:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D7E680EF6;
+	Fri, 31 Jan 2025 00:02:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w4g5j2Ye";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="atsWmQSE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35E7880F0E; Thu, 30 Jan 2025 23:33:04 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46F2580EEB
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 23:32:59 +0100 (CET)
+ id D8B7680F1A; Fri, 31 Jan 2025 00:02:26 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A2A09805D7
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 00:02:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50UMWvmC2372488
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 30 Jan 2025 16:32:57 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738276377;
- bh=Q4C0zl+m72IBO2+C2Q8i2cLHHZNH34/AovuAqBLDWmM=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=w4g5j2YeaqSVp2YSYJiUcTeViOyPQxqPBVAUPT+LEgRWRBN3izZpQPWiX9gU671as
- 1c9SIpOKzuSm8cTYD/NZLH692tW3Tn89c8tnn0t2nPg2shzdIszc0VnS9QtE6V0TC/
- R6EhqvEHvCZpIrXwhegVOSGbRKqN0L0qSkGyDXwk=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50UMWvHn112632;
- Thu, 30 Jan 2025 16:32:57 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
- Jan 2025 16:32:56 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 30 Jan 2025 16:32:56 -0600
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50UMWuHj029547;
- Thu, 30 Jan 2025 16:32:56 -0600
-From: Judith Mendez <jm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, Daniel Schultz
- <d.schultz@phytec.de>, Judith Mendez <jm@ti.com>
-Subject: [PATCH v3 1/4] remoteproc: k3-m4: Introduce K3 remote proc driver for
- M4 subsystem
-Date: Thu, 30 Jan 2025 16:32:53 -0600
-Message-ID: <20250130223256.1944522-2-jm@ti.com>
-X-Mailer: git-send-email 2.48.0
-In-Reply-To: <20250130223256.1944522-1-jm@ti.com>
-References: <20250130223256.1944522-1-jm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3f1c94936c5so662097b6e.1
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 15:02:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738278143; x=1738882943; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=X1AezTEfUj++wb9EsLnlnGVNAwI7UoU4ZEUR2smrb4k=;
+ b=atsWmQSE5c961y6XwZVNjuMWn7GBa1VvSXvJCI6Q9oGT7xbzs9iJGvnlRGvictPzCd
+ 77Dwt7aDs54QglnTMB74VZePM8b0hBdbhsmDuyhBGD8BwLbTghO7fjf5DMtN0NuyYgTN
+ aA474Y6OPiVNTG3ctinh4BWWWWTemJ8t5Pr5M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738278143; x=1738882943;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=X1AezTEfUj++wb9EsLnlnGVNAwI7UoU4ZEUR2smrb4k=;
+ b=OvryxbkmVYkfB84TCzuCb5wjf0ZM8+TUr9Rq/LDAlr1wqSGcsAgWFdvei/CPJsVIgE
+ vhljXpAnHXUn+UEKKJcOoOZLtN6tiPp44NkpF4OFJ2MWm69Zn9rw79khFgqEqXw9zjNJ
+ uC6U8pNcqgT6cy4oWxrG56iNY1bmLPc6RbbO8kKdjoEtn/WFwdd+bSVGrvEzsLFxszRi
+ LoBjzqRDVi36E7FH6m4t1bEfFNOmv7waEYkaLE4Ceu7oFkQ08rrtYlgO93JWlP3qSPey
+ 4+tkNYa4j68HeqpmrjISHAlBvc5hqSHp5IG20EmuZv8lG3QdDhJp3dcfrChzFKbfSpzy
+ rgpQ==
+X-Gm-Message-State: AOJu0YyFmcbk3Rrm966jtpw9AjfEoan79uju0OEUIag8HyKUhii7giQ+
+ 8qitBOdY2L/jR0OBPzEzGm1D5cG90SR+tgbFx2YX09aiZLIMls5XrPl4llilb2k=
+X-Gm-Gg: ASbGncvOdrjHRjZBUteGUaMxywK/f3KGWLuun9nn60K04NFamYWO2TQfVnnhJz6svnj
+ KLuNE5/eUrKC0kBE1LQ5toBF6DM/mUQe/Shs9afz8Sab9KAe2icdMQDELANSUEqvb3XL1nnSoeq
+ UeVDfmDGLHd1VLeLP2ASG8DPr+OXbJi0TWfbUA4rYAdu8KNFQj4xbfFhVkK64sJY2l8Aiddo553
+ BfEaSFl/R6HjeJqadaeMs1LIIbBvDsMRgVEWUIlb4s5jwQbfaSdZV+Jg2kFWLEA2x99Gijm/Jcp
+ EVB6eNrWCp+yxw==
+X-Google-Smtp-Source: AGHT+IEj4Sz2a9PSThErLXjnAi1UsC0UvMD+buoKbOO0hW6JTfmSbjQtZT41NBhqpgziLjBKbksBMg==
+X-Received: by 2002:a05:6808:1913:b0:3eb:5547:b9b with SMTP id
+ 5614622812f47-3f33c460ab5mr1280582b6e.16.1738278143405; 
+ Thu, 30 Jan 2025 15:02:23 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-726617cda0fsm564725a34.25.2025.01.30.15.02.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jan 2025 15:02:22 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
+In-Reply-To: <20250127145256.1133143-1-sjg@chromium.org>
+References: <20250127145256.1133143-1-sjg@chromium.org>
+Subject: Re: [PATCH v3] test/py: Add a report show test durations
+Message-Id: <173827814169.2499127.6050019195760524065.b4-ty@konsulko.com>
+Date: Thu, 30 Jan 2025 17:02:21 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,441 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hari Nagalla <hnagalla@ti.com>
+On Mon, 27 Jan 2025 07:52:54 -0700, Simon Glass wrote:
 
-Some K3 devices like AM64, AM62 devices have a M4 processor in MCU
-voltage domain.
+> Execution time varies widely with the existing tests. Provides a way to
+> produce a summary of the time taken for each test, along with a
+> histogram.
+> 
+> This is enabled with the --timing flag.
+> 
+> Enable it for sandbox in CI.
+> 
+> [...]
 
-Add a remote proc driver to support this subsystem to be able to load
-and boot the M4 core.
+Applied to u-boot/master, thanks!
 
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-[Judith: Fixed comments, cleanup driver by removing uses_lreset
- which is always enabled for M4 remoteproc, fixed warnings]
-Signed-off-by: Judith Mendez <jm@ti.com>
-Tested-by: Daniel Schultz <d.schultz@phytec.de>
----
-Changes since v2:
-- Cleanup unused labels
-- Remove optional init and reset functions which do not do anything
-- In stop, call unprepare() instead of ti_sci_proc_power_domain_off()
-  Since it is already a wrapper for ti_sci_proc_power_domain_off
----
- drivers/remoteproc/Kconfig          |  10 +
- drivers/remoteproc/Makefile         |   1 +
- drivers/remoteproc/ti_k3_m4_rproc.c | 370 ++++++++++++++++++++++++++++
- 3 files changed, 381 insertions(+)
- create mode 100644 drivers/remoteproc/ti_k3_m4_rproc.c
-
-diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-index 2790b168b19..8a5d88917d6 100644
---- a/drivers/remoteproc/Kconfig
-+++ b/drivers/remoteproc/Kconfig
-@@ -70,6 +70,16 @@ config REMOTEPROC_TI_K3_DSP
- 	  on various TI K3 family of SoCs through the remote processor
- 	  framework.
- 
-+config REMOTEPROC_TI_K3_M4F
-+	bool "TI K3 M4F remoteproc support"
-+	select REMOTEPROC
-+	depends on ARCH_K3
-+	depends on TI_SCI_PROTOCOL
-+	help
-+	  Say y here to support TI's M4F remote processor subsystems
-+	  on various TI K3 family of SoCs through the remote processor
-+	  framework.
-+
- config REMOTEPROC_TI_K3_R5F
- 	bool "TI K3 R5F remoteproc support"
- 	select REMOTEPROC
-diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
-index 3a092b7660e..f81e5009c5e 100644
---- a/drivers/remoteproc/Makefile
-+++ b/drivers/remoteproc/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_REMOTEPROC_SANDBOX) += sandbox_testproc.o
- obj-$(CONFIG_REMOTEPROC_STM32_COPRO) += stm32_copro.o
- obj-$(CONFIG_REMOTEPROC_TI_K3_ARM64) += ti_k3_arm64_rproc.o
- obj-$(CONFIG_REMOTEPROC_TI_K3_DSP) += ti_k3_dsp_rproc.o
-+obj-$(CONFIG_REMOTEPROC_TI_K3_M4F) += ti_k3_m4_rproc.o
- obj-$(CONFIG_REMOTEPROC_TI_K3_R5F) += ti_k3_r5f_rproc.o
- obj-$(CONFIG_REMOTEPROC_TI_POWER) += ti_power_proc.o
- obj-$(CONFIG_REMOTEPROC_TI_PRU) += pru_rproc.o
-diff --git a/drivers/remoteproc/ti_k3_m4_rproc.c b/drivers/remoteproc/ti_k3_m4_rproc.c
-new file mode 100644
-index 00000000000..a210f76a031
---- /dev/null
-+++ b/drivers/remoteproc/ti_k3_m4_rproc.c
-@@ -0,0 +1,370 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Texas Instruments' K3 M4 Remoteproc driver
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - http://www.ti.com/
-+ *	Hari Nagalla <hnagalla@ti.com>
-+ */
-+
-+#include <dm.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <remoteproc.h>
-+#include <errno.h>
-+#include <clk.h>
-+#include <reset.h>
-+#include <asm/io.h>
-+#include <power-domain.h>
-+#include <dm/device_compat.h>
-+#include <linux/err.h>
-+#include <linux/sizes.h>
-+#include <linux/soc/ti/ti_sci_protocol.h>
-+#include "ti_sci_proc.h"
-+
-+/**
-+ * struct k3_m4_mem - internal memory structure
-+ * @cpu_addr: MPU virtual address of the memory region
-+ * @bus_addr: Bus address used to access the memory region
-+ * @dev_addr: Device address from remoteproc view
-+ * @size: Size of the memory region
-+ */
-+struct k3_m4_mem {
-+	void __iomem *cpu_addr;
-+	phys_addr_t bus_addr;
-+	phys_addr_t dev_addr;
-+	size_t size;
-+};
-+
-+/**
-+ * struct k3_m4_mem_data - memory definitions for m4 remote core
-+ * @name: name for this memory entry
-+ * @dev_addr: device address for the memory entry
-+ */
-+struct k3_m4_mem_data {
-+	const char *name;
-+	const u32 dev_addr;
-+};
-+
-+/**
-+ * struct k3_m4_boot_data - internal data structure used for boot
-+ * @boot_align_addr: Boot vector address alignment granularity
-+ */
-+struct k3_m4_boot_data {
-+	u32 boot_align_addr;
-+};
-+
-+/**
-+ * struct k3_m4_privdata - Structure representing Remote processor data.
-+ * @m4_rst:		m4 rproc reset control data
-+ * @tsp:		Pointer to TISCI proc contrl handle
-+ * @data:		Pointer to DSP specific boot data structure
-+ * @mem:		Array of available memories
-+ * @num_mem:		Number of available memories
-+ */
-+struct k3_m4_privdata {
-+	struct reset_ctl m4_rst;
-+	struct ti_sci_proc tsp;
-+	struct k3_m4_boot_data *data;
-+	struct k3_m4_mem *mem;
-+	int num_mems;
-+};
-+
-+/*
-+ * The M4 cores have a local reset that affects only the CPU, and a
-+ * generic module reset that powers on the device and allows the M4 internal
-+ * memories to be accessed while the local reset is asserted. This function is
-+ * used to release the global reset on M4F to allow loading into the M4F
-+ * internal RAMs. This helper function is invoked in k3_m4_load() before any
-+ * actual firmware loading happens and is undone only in k3_m4_stop(). The local
-+ * reset cannot be released on M4 cores until after the firmware images are loaded.
-+ */
-+static int k3_m4_prepare(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = ti_sci_proc_power_domain_on(&m4->tsp);
-+	if (ret)
-+		dev_err(dev, "cannot enable internal RAM loading, ret = %d\n",
-+			ret);
-+
-+	return ret;
-+}
-+
-+/*
-+ * This function is the counterpart to k3_m4_prepare() and is used to assert
-+ * the global reset on M4 cores. This completes the second step of powering
-+ * down the M4 cores. The cores themselves are halted through the local reset
-+ * in first step. This function is invoked in k3_m4_stop() after the local
-+ * reset is asserted.
-+ */
-+static int k3_m4_unprepare(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+
-+	return ti_sci_proc_power_domain_off(&m4->tsp);
-+}
-+
-+/**
-+ * k3_m4_load() - Load up the Remote processor image
-+ * @dev:	rproc device pointer
-+ * @addr:	Address at which image is available
-+ * @size:	size of the image
-+ *
-+ * Return: 0 if all goes good, else appropriate error message.
-+ */
-+static int k3_m4_load(struct udevice *dev, ulong addr, ulong size)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	void *image_addr = (void *)addr;
-+	int ret;
-+
-+	ret = ti_sci_proc_request(&m4->tsp);
-+	if (ret)
-+		return ret;
-+
-+	ret = k3_m4_prepare(dev);
-+	if (ret) {
-+		dev_err(dev, "Prepare failed for core %d\n",
-+			m4->tsp.proc_id);
-+		goto proc_release;
-+	}
-+
-+	ti_secure_image_post_process(&image_addr, &size);
-+
-+	ret = rproc_elf_load_image(dev, addr, size);
-+	if (ret < 0) {
-+		dev_err(dev, "Loading elf failed %d\n", ret);
-+		goto unprepare;
-+	}
-+
-+unprepare:
-+	if (ret)
-+		k3_m4_unprepare(dev);
-+proc_release:
-+	ti_sci_proc_release(&m4->tsp);
-+	return ret;
-+}
-+
-+/**
-+ * k3_m4_start() - Start the remote processor
-+ * @dev:	rproc device pointer
-+ *
-+ * Return: 0 if all went ok, else return appropriate error
-+ */
-+static int k3_m4_start(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = ti_sci_proc_request(&m4->tsp);
-+	if (ret)
-+		return ret;
-+
-+	ret = reset_deassert(&m4->m4_rst);
-+
-+	ti_sci_proc_release(&m4->tsp);
-+
-+	return ret;
-+}
-+
-+static int k3_m4_stop(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+
-+	ti_sci_proc_request(&m4->tsp);
-+	reset_assert(&m4->m4_rst);
-+	k3_m4_unprepare(dev);
-+	ti_sci_proc_release(&m4->tsp);
-+
-+	return 0;
-+}
-+
-+static void *k3_m4_da_to_va(struct udevice *dev, ulong da, ulong len)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	phys_addr_t bus_addr, dev_addr;
-+	void __iomem *va = NULL;
-+	size_t size;
-+	u32 offset;
-+	int i;
-+
-+	if (len <= 0)
-+		return NULL;
-+
-+	for (i = 0; i < m4->num_mems; i++) {
-+		bus_addr = m4->mem[i].bus_addr;
-+		dev_addr = m4->mem[i].dev_addr;
-+		size = m4->mem[i].size;
-+
-+		if (da >= dev_addr && ((da + len) <= (dev_addr + size))) {
-+			offset = da - dev_addr;
-+			va = m4->mem[i].cpu_addr + offset;
-+			return (__force void *)va;
-+		}
-+
-+		if (da >= bus_addr && (da + len) <= (bus_addr + size)) {
-+			offset = da - bus_addr;
-+			va = m4->mem[i].cpu_addr + offset;
-+			return (__force void *)va;
-+		}
-+	}
-+
-+	/* Assume it is DDR region and return da */
-+	return map_physmem(da, len, MAP_NOCACHE);
-+}
-+
-+static const struct dm_rproc_ops k3_m4_ops = {
-+	.load = k3_m4_load,
-+	.start = k3_m4_start,
-+	.stop = k3_m4_stop,
-+	.device_to_virt = k3_m4_da_to_va,
-+};
-+
-+static int ti_sci_proc_of_to_priv(struct udevice *dev, struct ti_sci_proc *tsp)
-+{
-+	u32 ids[2];
-+	int ret;
-+
-+	tsp->sci = ti_sci_get_by_phandle(dev, "ti,sci");
-+	if (IS_ERR(tsp->sci)) {
-+		dev_err(dev, "ti_sci get failed: %ld\n", PTR_ERR(tsp->sci));
-+		return PTR_ERR(tsp->sci);
-+	}
-+
-+	ret = dev_read_u32_array(dev, "ti,sci-proc-ids", ids, 2);
-+	if (ret) {
-+		dev_err(dev, "Proc IDs not populated %d\n", ret);
-+		return ret;
-+	}
-+
-+	tsp->ops = &tsp->sci->ops.proc_ops;
-+	tsp->proc_id = ids[0];
-+	tsp->host_id = ids[1];
-+	tsp->dev_id = dev_read_u32_default(dev, "ti,sci-dev-id",
-+					   TI_SCI_RESOURCE_NULL);
-+	if (tsp->dev_id == TI_SCI_RESOURCE_NULL) {
-+		dev_err(dev, "Device ID not populated %d\n", ret);
-+		return -ENODEV;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct k3_m4_mem_data am6_m4_mems[] = {
-+	{ .name = "iram", .dev_addr = 0x0 },
-+	{ .name = "dram", .dev_addr = 0x30000 },
-+};
-+
-+static int k3_m4_of_get_memories(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+	int i;
-+
-+	m4->num_mems = ARRAY_SIZE(am6_m4_mems);
-+	m4->mem = calloc(m4->num_mems, sizeof(*m4->mem));
-+	if (!m4->mem)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < m4->num_mems; i++) {
-+		m4->mem[i].bus_addr = dev_read_addr_size_name(dev,
-+							      am6_m4_mems[i].name,
-+					  (fdt_addr_t *)&m4->mem[i].size);
-+		if (m4->mem[i].bus_addr == FDT_ADDR_T_NONE) {
-+			dev_err(dev, "%s bus address not found\n",
-+				am6_m4_mems[i].name);
-+			return -EINVAL;
-+		}
-+		m4->mem[i].cpu_addr = map_physmem(m4->mem[i].bus_addr,
-+						  m4->mem[i].size,
-+						  MAP_NOCACHE);
-+		m4->mem[i].dev_addr = am6_m4_mems[i].dev_addr;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * k3_of_to_priv() - generate private data from device tree
-+ * @dev:	corresponding k3 m4 processor device
-+ * @m4:		pointer to driver specific private data
-+ *
-+ * Return: 0 if all goes good, else appropriate error message.
-+ */
-+static int k3_m4_of_to_priv(struct udevice *dev, struct k3_m4_privdata *m4)
-+{
-+	int ret;
-+
-+	ret = reset_get_by_index(dev, 0, &m4->m4_rst);
-+	if (ret) {
-+		dev_err(dev, "reset_get() failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = ti_sci_proc_of_to_priv(dev, &m4->tsp);
-+	if (ret)
-+		return ret;
-+
-+	ret =  k3_m4_of_get_memories(dev);
-+	if (ret)
-+		return ret;
-+
-+	m4->data = (struct k3_m4_boot_data *)dev_get_driver_data(dev);
-+
-+	return 0;
-+}
-+
-+/**
-+ * k3_m4_probe() - Basic probe
-+ * @dev:	corresponding k3 remote processor device
-+ *
-+ * Return: 0 if all goes good, else appropriate error message.
-+ */
-+static int k3_m4_probe(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4;
-+	int ret;
-+
-+	m4 = dev_get_priv(dev);
-+	ret = k3_m4_of_to_priv(dev, m4);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * The M4 local resets are deasserted by default on Power-On-Reset.
-+	 * Assert the local resets to ensure the M4s don't execute bogus code
-+	 * in .load() callback when the module reset is released to support
-+	 * internal memory loading. This is needed for M4 cores.
-+	 */
-+	reset_assert(&m4->m4_rst);
-+
-+	return 0;
-+}
-+
-+static int k3_m4_remove(struct udevice *dev)
-+{
-+	struct k3_m4_privdata *m4 = dev_get_priv(dev);
-+
-+	free(m4->mem);
-+
-+	return 0;
-+}
-+
-+static const struct k3_m4_boot_data m4_data = {
-+	.boot_align_addr = SZ_1K,
-+};
-+
-+static const struct udevice_id k3_m4_ids[] = {
-+	{ .compatible = "ti,am64-m4fss", .data = (ulong)&m4_data, },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(k3_m4) = {
-+	.name = "k3_m4",
-+	.of_match = k3_m4_ids,
-+	.id = UCLASS_REMOTEPROC,
-+	.ops = &k3_m4_ops,
-+	.probe = k3_m4_probe,
-+	.remove = k3_m4_remove,
-+	.priv_auto = sizeof(struct k3_m4_privdata),
-+};
 -- 
-2.48.0
+Tom
+
 
