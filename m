@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D15DAC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 08:32:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D5C6C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 08:36:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 237DD80B9B;
-	Thu, 30 Jan 2025 09:32:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C1EE380B9B;
+	Thu, 30 Jan 2025 09:36:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jKA0SDoU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zTGVNRw4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E49280C85; Thu, 30 Jan 2025 09:32:31 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 708F680AE4
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 09:32:29 +0100 (CET)
+ id DD2D281F69; Thu, 30 Jan 2025 09:36:18 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B61580AE4
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 09:36:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1738225949; x=1738830749; i=xypron.glpk@gmx.de;
- bh=6bJBw5lqD1Jc4j93Ag1xl3pv4QPwjugBkV32vw/Ne7Y=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:From:To:
- Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- cc:content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=jKA0SDoULuwtL89dDBtV2XuQLRj3ngmuqhb7Th/NoDCbES3wHkFqfN0YKdtb4oT+
- 4dpZAyCmpWdQlEjfPNbycqMPUMvt4ML/0HOrui6f0VrXRyKubcxYXxtCeW8HCuL+0
- G339M8oKEABd+HcdPnJhGKzdSIlSb1ssF9ewTfxn+VhtnZupUF169VP+naenZfiKi
- smnLREXsP7d2iBgVaZQ3SOwEzhsg4ktV3zBdiigm3ZTX7vlklKq8+oQsFHhGHuAxp
- i/2Ty24SoeuH3DukJ4GxHnaOW5c0kvfJZT7GKKONT5nwOjhZ4U3qzJzqvCYPQA0/T
- IunRvcBBxWbrejhdsQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mo6ux-1t5fr53tb1-00cJNA; Thu, 30
- Jan 2025 09:32:28 +0100
-Message-ID: <e3ed313a-847d-4307-8c58-f40e8fcee86f@gmx.de>
-Date: Thu, 30 Jan 2025 08:32:28 +0000
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-vm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50U8aCdK2270208
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 30 Jan 2025 02:36:12 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738226172;
+ bh=tmdarEHi/XsiVk+eKwwEDAhlv6KyqskjM1Ahgt/+87Q=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=zTGVNRw4QrNzkmM98p7iYmmfN8BoboRJTYjp8tXcX4QfW7wAkXkAlK1O9J2RA7fsm
+ rAwARFya1AlGXKKiPEeqfT1E654kOtZT8u9LQUUIX25nE6ml1w3i/YJrZU+tyNyegj
+ g74sCfqlCwoGXPIw7H6RWVFd0IFGiVg8z/OtL5eo=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50U8aCQm028376;
+ Thu, 30 Jan 2025 02:36:12 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
+ Jan 2025 02:36:11 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 30 Jan 2025 02:36:11 -0600
+Received: from [10.24.69.179] ([10.24.69.179])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50U8a8vS067203;
+ Thu, 30 Jan 2025 02:36:09 -0600
+Message-ID: <147c0bcc-e025-461d-88d8-59a39832ff90@ti.com>
+Date: Thu, 30 Jan 2025 14:06:07 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: make tests skips the DM tests
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <92438c16-1b8b-4e90-a44c-285140f59f0f@gmx.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [EXTERNAL] Re: Proposal for a New Command to U-Boot Fuse
+ Programming
 Content-Language: en-US
-In-Reply-To: <92438c16-1b8b-4e90-a44c-285140f59f0f@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:/Rt7Odg+pRTTcoUYELN2/vhaKSamw2q3+0tR74FGMXGnXqh5cv8
- Da2UXqFPY6Sl+aJ90855c+BdxuV2DoqJkIFbXZ54eA31hiPt3PtgRQah6XAUrBKeoZGuJkW
- AeGf2j2xz8oosNHa2aRUMzVORkgmLFfLkzCoWdXJCGoEUA5dh7qTTBdDyXYYtZap5f3N2oi
- Dk0mjqODzRuclUN9fc+8g==
-UI-OutboundReport: notjunk:1;M01:P0:+8g28vmaM14=;9itUxcrxVKVfAYexm6eyEMGtINd
- CDR2ynl6sfobk2gQMDcHXJahdUXngq9dqnysHnBQZrgMdsnHhArqkefQFbbbOTeJkA30Fi3X4
- ATkLJfIBZPLaCOc0URd+3dCFtQ09oP+/auS5kfrLcAS1KFcOxDDBbMRw/J8bf5fUWLLL9QdAo
- Y/oUzTZ738y/ahVBUcXJLP+bbWH9mR/lRcWMrEYg373YwmWXJWI6Tu9JMlnCvELE1Cyk0vo+o
- wnIl+1j+zurRBDjDo+8J3Hccz2FaS6Fb12J/HKq4JdSxrn8YRnzlDe37RKsykWF4/3mP/DVPR
- vL/1VKZs/B8fEmzQPlHCCNa4kpwC/zjQb1S0nHQS9XxZQC0fgzQK8mdnzN64EcjgXrKj7tQuY
- fjfqgtQ7oJer80wb65I4rCqSRuoAawFlO6qT9V0xkK14Oc8GN/pa5G+74uukTMgoJHk1RzBsD
- k0Ou7t7Noh0E4xqHVW7PljiBuo+r4GsPdaUqWD34nDk7aqh6IfMIlOVDE+nLp5iBB9XvhOQIF
- DuwGCn+MrhuIWgiw3AnrO1NlZ+Z4CnrBjYuHBXzq6r/PsMNai1viUE/C4F2fuzqMxZjJb6eEu
- 0BNOlHYstygT6eB/jlbIYdBNGkTYWzVqYXh9I1sd3GGrBE2fRaSR1J04+ZvMT98huS+XwQ3DN
- yGShuLwzW1hrdDLQSjo/vKN1F4ypjOSTTYcAuC5OiGuDuaVFRL5WYvIyJjDObfJ4yr2JjiQ4h
- BKprKd7PVHufYPaBNU2hJjfodILkb9TB7THocXU0D8TwSpyG+Yd7u+/6xUubnT7+7HYDZeZrX
- g62C1Acw7VH/yHSRQTQIQhmP8lnQa8FNI6bH5oLn0FYV2Tt9xV+H/foE8Qe2SwdnrqUNYTEYI
- QacvCsPmW5jG0SqbBSd339jVjj0ftMABFH2MYbD4C7PO8b/+L2DR9snrrOZVtzuHhek2EuG9E
- nlhxMoEVItoRaz2GgBcC3W3eiJEkbewdbRec7VCRVk+MR+iy3KLp8T/9ipEis1QFjI1uTibx4
- hlSQFmmDNCusIE4QXh1ZCo0JLLmmpmMBBAflzTQwCQZ4VCBzfx+F0LEPGa3lJTgCI2sIpT/cH
- oMS8ABUSWPpOY/sE2FpOpCEZYd4P8t2YfiqPH5hX10t0WPAlTxwEDytMEg5w62hwltxOcpPCs
- 02jrVkPuCq+1TAoYONWjrV1X7DuSqsFBLifDqb8XF5Q==
+To: Tom Rini <trini@konsulko.com>
+CC: <sjg@chromium.org>, <angus@akkea.ca>, <u-boot@lists.denx.de>,
+ <vigneshr@ti.com>, <kamlesh@ti.com>, <d-gole@ti.com>,
+ <k-malarvizhi@ti.com>, <a-parmar1@ti.com>, <khasim@ti.com>
+References: <1c2153bc-485f-a0f4-ac0d-fdc29065e235@ti.com>
+ <20250106222314.GF3476@bill-the-cat>
+ <5e166f95-681a-8a96-0d8c-033c36d47d5a@ti.com>
+ <20250122172209.GN3476@bill-the-cat>
+ <9cf9590b-e9ba-6d46-dd4d-80a71765e062@ti.com>
+ <20250124192956.GV60249@bill-the-cat>
+ <7be0605f-b986-ca34-4b83-7338329afac4@ti.com>
+ <20250128222232.GS1233568@bill-the-cat>
+From: Harsha Vardhan V M <h-vm@ti.com>
+In-Reply-To: <20250128222232.GS1233568@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,48 +90,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/30/25 08:08, Heinrich Schuchardt wrote:
-> Hello Simon,
->
-> when running 'make tests' locally I get:
->
-> test/py/tests/test_dm.py .
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-> short test summary info
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-> SKIPPED [2] test/py/conftest.py:625: .config feature "sandbox" enabled
-> SKIPPED [1] test/py/tests/test_bootstage.py:39: No bootstage environment
-> file is defined
-> SKIPPED [1] test/py/tests/test_cat/test_cat.py:8: Setup failed
-> SKIPPED [1] test/py/tests/test_dfu.py:114: got empty parameter set
-> ['env__usb_dev_port'], function test_dfu at /test/py/tests/test_dfu.py:1=
-13
-> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! _pytest.outcomes.Exit: Lab failure:
-> Timeout executing 'dm drivers
-> ': Marking connection bad - no other tests will run
-> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
->
->
-> Shouldn't the required boardenv_* files be generated by running 'make
-> tests'?
->
-> Best regards
->
-> Heinrich
 
-When installing all packages mentioned in tools/docker/Dockerfile the DM
-tests are executed.
 
-What is missing is an error message which package or tool is needed when
-the boardenv_* files cannot be generated.
+On 29/01/25 03:52, Tom Rini wrote:
+> On Mon, Jan 27, 2025 at 04:22:36PM +0530, Harsha Vardhan V M wrote:
+>>
+>>
+>> On 25/01/25 00:59, Tom Rini wrote:
+>>> On Fri, Jan 24, 2025 at 02:31:15PM +0530, Harsha Vardhan V M wrote:
+>>>>
+>>>>
+>>>> On 22/01/25 22:52, Tom Rini wrote:
+>>>>> On Fri, Jan 10, 2025 at 11:12:47AM +0530, Harsha Vardhan V M wrote:
+>>>>>>
+>>>>>>
+>>>>>> On 07/01/25 03:53, Tom Rini wrote:
+>>>>>>> On Mon, Jan 06, 2025 at 12:06:25PM +0530, Harsha Vardhan V M wrote:
+>>>>>>>
+>>>>>>>> I would like to propose a new command for U-Boot's fuse programming
+>>>>>>>> functionality to address the challenges posed by the current implementation.
+>>>>>>>> While the existing fuse prog command works well for programming individual
+>>>>>>>> fuse values, it becomes cumbersome especially when dealing with large-scale
+>>>>>>>> programming requirements.
+>>>>>>>>
+>>>>>>>> Current Command: fuse prog [-y] <bank> <word> <hexval> [<hexval>...]
+>>>>>>>>
+>>>>>>>> This command programs one or more fuse words starting from a specific <bank>
+>>>>>>>> and <word> with the hex values given as input.
+>>>>>>>>
+>>>>>>>> While functional, it lacks the efficiency and robustness needed for
+>>>>>>>> programming a significant number of fuses or handling structured fuse
+>>>>>>>> configuration data. Repeatedly specifying values for each fuse bank and word
+>>>>>>>> is not only time-consuming but also prone to errors during manual input or
+>>>>>>>> scripting. This approach does not leverage the ability to process
+>>>>>>>> pre-structured data in memory. For users with complex programming needs, the
+>>>>>>>> current method becomes an obstacle rather than a tool.
+>>>>>>>>
+>>>>>>>> Proposed Command: fuse writebuff
+>>>>>>>
+>>>>>>> It would be good to provide some documentation links to the fuses that
+>>>>>>> you're wanting to deal with. What we have now works on a number of
+>>>>>>> diverse SoCs, even if for some cases it might be best to write a
+>>>>>>> script that's run rather than copy/paste things live. Any sort of new
+>>>>>>> mechanism needs to get feedback from users at other semiconductor
+>>>>>>> vendors to make sure it's generic enough for everyones needs. Thanks.
+>>>>>>>
+>>>>>>
+>>>>>> Hi Tom and Simon,
+>>>>>>
+>>>>>> The buffer is not a text file. It is a structure in memory. The buffer is
+>>>>>> structured to contain all necessary information for the fuse programming
+>>>>>> process. This can include metadata, fuse programming data etc. The exact
+>>>>>> structure of the buffer can determined by the command_id, which provides
+>>>>>> flexibility for supporting different use cases. The memory buffer is
+>>>>>> typically prepared in user-space code or a script and loaded in memory
+>>>>>> before invoking the fuse writebuff command. It is not stored as a text file
+>>>>>> or any other file format, as the command operates directly on memory
+>>>>>> addresses.
+>>>>>>
+>>>>>> Example of a buffer:
+>>>>>>
+>>>>>> struct fuse_buffer {
+>>>>>>        struct fuse_mpkh smpkh;
+>>>>>>        struct fuse_msv msv;
+>>>>>>        struct fuse_key_cnt key_cnt;
+>>>>>>        u8 buffer_hash[64];
+>>>>>> };
+>>>>>>
+>>>>>> This fuse_buffer struct will be loaded in memory containing all the
+>>>>>> necessary information for fuse programming.
+>>>>>>
+>>>>>> struct fuse_mpkh {
+>>>>>>        u8 mpkh[64]; // public key hash
+>>>>>>        u8 bch[8];
+>>>>>>        u32 attributes; // read-protect, write-protect, override, active flag
+>>>>>>        u32 reserved[2];
+>>>>>> };
+>>>>>> struct fuse_msv {
+>>>>>>        u32 msv_with_bch; //model specific value
+>>>>>>        u32 attributes;
+>>>>>>        u32 reserved[2];
+>>>>>> };
+>>>>>> struct fuse_key_cnt {
+>>>>>>        u32 key_cnt; //key count
+>>>>>>        u32 attributes;
+>>>>>>        u32 reserved[2];
+>>>>>> };
+>>>>>>
+>>>>>> -> eFUSE layout is abstract and isn't public as its programming and layout
+>>>>>> itself is security sensitive (it has authentication and decryption keys
+>>>>>> etc). So, fuse prog doesn't work as there is no "banks/offset" here.
+>>>>>> -> Platform Security Core running Secure SW exposes APIs through which these
+>>>>>> Keys and its attributes can be programmed. Whole content maybe encrypted for
+>>>>>> enhanced security on unsecure factory floor.
+>>>>>> -> There is a definite order in which these fields needs to be programmed.
+>>>>>>
+>>>>>> Its possible to break the struct into 32bit values and send them across but
+>>>>>> we would end up with ~30 odd fuse prog cmds which is inefficient and error
+>>>>>> prone.
+>>>>>> It would be hard on secure core to also ensure correctness of operations
+>>>>>> against all sorts of silly errors (such of accidentally skipping a word or
+>>>>>> mess up ordering) which can render Silicon unusable.
+>>>>>>
+>>>>>> So passing a opaque pointer with a command_id to Secure core is all that
+>>>>>> fuse cmd needs to do which is what writebuff supports.
+>>>>>>
+>>>>>> This can be extended to any vendor; It's just an opaque pointer handoff. I
+>>>>>> see at least one other vendor do it in custom way:
+>>>>>> arch/arm/mach-imx/cmd_dek.c which could benefit from this new cmd fuse
+>>>>>> writebuff.
+>>>>>>
+>>>>>> Here’s how the fuse writebuff command works in a typical flow:
+>>>>>> 1. Buffer Preparation: Vendors or developers create a complete buffer (e.g.,
+>>>>>> key.bin) containing all fuse programming data using vendor-specific scripts
+>>>>>> or tools and copied to SD card.
+>>>>>> 2. The buffer is loaded into memory using commands like:
+>>>>>> fatload mmc 1 0x80000000 key.bin
+>>>>>> 3. The fuse writebuff command passes the memory address (0x80000000) and
+>>>>>> command_id to the secure core:
+>>>>>> fuse writebuff <command_id> 0x80000000
+>>>>>> 4. The secure core receives the memory address as a pointer and validates,
+>>>>>> interprets it based on the command_id and then programs the fuses.
+>>>>>
+>>>>> To summarize what we talked about on a call, I would like to see either:
+>>>>> 1) Work with arch/arm/mach-imx/cmd_dek.c and use that as the base of
+>>>>> some new generic command that deals with SoC-specific fuse
+>>>>> configurations that are handled via security processor.
+>>>> Hi Tom,
+>>>>
+>>>> 1) I have looked at arch/arm/mach-imx/cmd_dek.c. The underlying
+>>>> implementation data structure is very specific to the vendor and how iMX
+>>>> devices are configured. The other vendors would also differ in their
+>>>> structures and SoC-specific fuse configurations, so I don't see a way to use
+>>>> this cmd_dek.c as the base and then abstract, create a new command out of
+>>>> it.
+>>>>
+>>>>> OR
+>>>>> 2) Create a new command (that should be in cmd/ti/) for handling the K3
+>>>>> fuses, if we cannot make something abstract enough to handle this
+>>>>> concept on multiple vendors while having any sort of useful code re-use.
+>>>>
+>>>> 2) In this case, I would like to add the fuse writebuff command for TI’s K3
+>>>> architecture in cmd/ti/k3_fuse.c. And the command will look like
+>>>>
+>>>> fuse writebuff <command_id> <addr>
+>>>>
+>>>> However, I would still like to place the fuse writebuff command in
+>>>> cmd/fuse.c as a generic interface because the parameters command_id and an
+>>>> opaque pointer handoff provides a mechanism for the secure core to interpret
+>>>> buffers differently based on vendor or use case.
+>>>
+>>> This I guess is my confusion. If we can't abstract cmd_dek.c and the
+>>> underlying i.MX specific parts to be supported in "fuse writebuff ..."
+>>> what is the non-K3 (or better still, non-TI) abstraction for what you're
+>>> proposing?
+>>>
+>> Hi Tom,
+>> There are two types of fuse programming flows;
+>> a) Where the fuse layout is known to U-Boot -> fuse cmd options support this
+>> flow today
+>> b) Where fuse cmd is abstracted from U-Boot -> needs a co-processor to proxy
+>> the programming
+>>
+>> For b) the fuse layout is virtualized via a "vendor-specific" structure
+>> which is generated offline (typically with GUI tools) and then loaded to
+>> memory from a file on SD card . This pointer would then be relayed to Co
+>> processor as a IPC call...
+>>
+>> So, whats common b/w cmd_dek.c and TI's fuse cmd -> loading opaque struct to
+>> memory and then passing it to Secure co-processor along with one or more
+>> command identifiers which will serve as hint for such secure co-processor.
+>> "fuse writebuff" tries to abstract essentially this: take a cmd_id and file
+>> pointer from fuse cmd and pass to it Vendor specific backend. I know its not
+>> a lot but frontend tools used to flash the devices can still make the most
+>> of it with simple vendor neutral abstractions than needing to know custom
+>> command for each vendor.
+>>
+>> What cannot be abstracted is:
+>> a) struct of the file,
+>> b) common definition of command Id
+>> c) IPC mechanisms
+>>
+>> Unfortunately all the above 3 are tightly coupled to co-processor on the
+>> other end which most likely is immutable for most SoCs...
+> 
+> So what I'm missing is why we can't have "fusebuf" as the top level
+> command, or "fuse writebuf <vendor> <address>" and then yes, leave the
+> vendor specific parts to each vendor to implement?
+> 
 
-Best regards
+Hi Tom,
 
-Heinrich
+The "fuse writebuff <vendor> <address>" option sounds good to me. I'd 
+like to understand how you are envisioning the <vendor> parameter to be 
+used in this context and how the backend should handle it. Would 
+appreciate your thoughts on this.
+
+Thanks,
+Harsha
