@@ -4,71 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 985DCC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 22:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABEAAC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 22:33:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE00D80EF6;
-	Thu, 30 Jan 2025 23:24:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 1252380EBD;
+	Thu, 30 Jan 2025 23:33:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="m7dEBn0Z";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w/K0GjZl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D174980F18; Thu, 30 Jan 2025 23:24:24 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4245180EEB
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 23:24:22 +0100 (CET)
+ id 91C3E81DB4; Thu, 30 Jan 2025 23:33:01 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 456A4807F1
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 23:32:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2de8=UX=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1738275861;
- bh=W9u5ayWxXBVH+Llon9SKy/zIcSqknnNkZXHF/ZYEGjg=;
- b=m7dEBn0ZwsFWO/uLnN1rBA3HNon788w+v6Rh8fnGvuYxfWM44Z8BflP6DgfPLaY2TSO6bLrXt
- 5xM4ElRfrwMnof0ePN7lGbMbMpbsEYqHPci31hJ/gc/kxmsIcPxTRg2i2nHjKNtpGHqAlLCAkxg
- cpVWurVFWF3jjHKeVgQkWyjd/qbxM11QGb1rIpbK1/bYX7/gNr3HJ1Od0Cq53epHiMFcCnRKANF
- VzMbdfCaTue6bP2QBh36lpvG9P9y6Vr+G9PJlbU4JkZRJsBv3fYG+vWV43lZ4Sc1p5JP33qb9J9
- 1ABWkBsiUaIrnnwyfUhP5PWEqQxnGcnJWP4DGtaXQiLg==
-X-Forward-Email-ID: 679bfc072d70e7e05883faa1
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <067ba03e-b5cf-42cd-a15f-aa001d436af0@kwiboo.se>
-Date: Thu, 30 Jan 2025 23:23:59 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 50UMWvw41600189
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 30 Jan 2025 16:32:57 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738276377;
+ bh=XFLM4urHxee6M3rnPKD13aeEWeKGCpHqRh5KTi9y8bs=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=w/K0GjZl5eNOxz8/kMrQYBE2Pty9ojz7VagWKhJLuEH9VPN1z15xcyzA2qiU3ejUj
+ IvSvjhNch6YEioxiAV+eNfx5Tm38hcaTCijHyljDVD9kTPMIn5q17YDfkU7vIwUcT9
+ tMv4FrltBmq7QfxtGIpJ+Pq0axAmcIbo4qqDcOio=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 50UMWvE4042547
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 30 Jan 2025 16:32:57 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
+ Jan 2025 16:32:57 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 30 Jan 2025 16:32:57 -0600
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 50UMWuHk029547;
+ Thu, 30 Jan 2025 16:32:56 -0600
+From: Judith Mendez <jm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Vignesh Raghavendra <vigneshr@ti.com>, Hari Nagalla <hnagalla@ti.com>,
+ Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, Daniel Schultz
+ <d.schultz@phytec.de>, Judith Mendez <jm@ti.com>
+Subject: [PATCH v3 2/4] remoteproc: k3-r5: Add support for R5F cores on AM64x
+ SoCs
+Date: Thu, 30 Jan 2025 16:32:54 -0600
+Message-ID: <20250130223256.1944522-3-jm@ti.com>
+X-Mailer: git-send-email 2.48.0
+In-Reply-To: <20250130223256.1944522-1-jm@ti.com>
+References: <20250130223256.1944522-1-jm@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/20] rockchip: sdram: honor CFG_SYS_SDRAM_BASE when
- defining ram regions
-To: Heiko Stuebner <heiko@sntech.de>
-Cc: "sjg@chromium.org" <sjg@chromium.org>,
- "philipp.tomsich@vrull.eu" <philipp.tomsich@vrull.eu>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>,
- "lukma@denx.de" <lukma@denx.de>, "seanga2@gmail.com" <seanga2@gmail.com>,
- "peng.fan@nxp.com" <peng.fan@nxp.com>,
- "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
- "detlev.casanova@collabora.com" <detlev.casanova@collabora.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "sebastian.reichel@collabora.com" <sebastian.reichel@collabora.com>
-References: <20241121142731.1202209-1-heiko@sntech.de>
- <20241121142731.1202209-9-heiko@sntech.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20241121142731.1202209-9-heiko@sntech.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,69 +82,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+From: Hari Nagalla <hnagalla@ti.com>
 
-On 2024-11-21 15:27, Heiko Stuebner wrote:
-> Currently the sdram code for arm64 expects CFG_SYS_SDRAM_BASE to be 0.
-> The ram being in front and the device-area behind it.
-> 
-> The upcoming RK3576 uses a different layout, with the device area
-> in front the ram, which then also extends past the 4G mark.
-> 
-> Adapt both the generic zone definitions as well as the ATAG parser
-> to be usable on devices where CFG_SYS_SDRAM_BASE is not 0.
-> 
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> ---
->  arch/arm/mach-rockchip/sdram.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-> index 1fb01e1c4b1..4e2af55d6e1 100644
-> --- a/arch/arm/mach-rockchip/sdram.c
-> +++ b/arch/arm/mach-rockchip/sdram.c
-> @@ -181,9 +181,9 @@ static int rockchip_dram_init_banksize(void)
->  		 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
->  		 * have it, so force this space as reserved.
->  		 */
-> -		if (start_addr < SZ_2M) {
-> -			size -= SZ_2M - start_addr;
-> -			start_addr = SZ_2M;
-> +		if (start_addr < SZ_2M + CFG_SYS_SDRAM_BASE) {
-> +			size -= SZ_2M - (start_addr - CFG_SYS_SDRAM_BASE);
-> +			start_addr = SZ_2M + CFG_SYS_SDRAM_BASE;
+AM64x SoCs have two R5F clusters in the main power domain.
+Extend support for R5F remote proc driver on AM64x with compatible
+strings.
 
-For consistency these should be changed to CFG_SYS_SDRAM_BASE + SZ_2M.
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+Reviewed-by: Daniel Schultz <d.schultz@phytec.de>
+---
+Changes since v2:
+- No change
+---
+ drivers/remoteproc/ti_k3_r5f_rproc.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
->  		}
->  
->  		/*
-> @@ -228,7 +228,7 @@ static int rockchip_dram_init_banksize(void)
->  					return -EINVAL;
->  				}
->  
-> -				size -= rsrv_end - start_addr;
-> +				size -= rsrv_end - (start_addr - CFG_SYS_SDRAM_BASE);
->  				start_addr = rsrv_end;
->  				break;
->  			}
-> @@ -302,7 +302,7 @@ int dram_init_banksize(void)
->  	      ret);
->  
->  	/* Reserve 0x200000 for ATF bl31 */
-> -	gd->bd->bi_dram[0].start = 0x200000;
-> +	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE + 0x200000;
-
-This can be changed to SZ_2M instead of 0x200000 and 2M in the comment.
-
->  	gd->bd->bi_dram[0].size = top - gd->bd->bi_dram[0].start;
->  
->  	/* Add usable memory beyond the blob of space for peripheral near 4GB */
-
-Beside above nitpicks this is
-
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-
-Regards,
-Jonas
+diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
+index d78b3fa1bbd..57268e7f8ff 100644
+--- a/drivers/remoteproc/ti_k3_r5f_rproc.c
++++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
+@@ -886,6 +886,7 @@ static const struct udevice_id k3_r5f_rproc_ids[] = {
+ 	{ .compatible = "ti,j7200-r5f", .data = (ulong)&j7200_j721s2_data, },
+ 	{ .compatible = "ti,j721s2-r5f", .data = (ulong)&j7200_j721s2_data, },
+ 	{ .compatible = "ti,am62-r5f", .data = (ulong)&am62_data, },
++	{ .compatible = "ti,am64-r5f", .data = (ulong)&j7200_j721s2_data, },
+ 	{}
+ };
+ 
+@@ -930,6 +931,7 @@ static const struct udevice_id k3_r5fss_ids[] = {
+ 	{ .compatible = "ti,j7200-r5fss"},
+ 	{ .compatible = "ti,j721s2-r5fss"},
+ 	{ .compatible = "ti,am62-r5fss"},
++	{ .compatible = "ti,am64-r5fss"},
+ 	{}
+ };
+ 
+-- 
+2.48.0
 
