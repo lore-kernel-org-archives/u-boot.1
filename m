@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058D5C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 07:21:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3268FC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 07:21:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 636FC80AE4;
-	Thu, 30 Jan 2025 08:21:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B693E80C85;
+	Thu, 30 Jan 2025 08:21:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HThcO6jf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Aox0LJWF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB49080B9B; Thu, 30 Jan 2025 08:21:09 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id EB05C80C99; Thu, 30 Jan 2025 08:21:18 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7389A80AE2
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:21:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 175AC81250
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:21:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-436345cc17bso2843235e9.0
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:21:07 -0800 (PST)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43618283d48so2774955e9.1
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:21:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738221667; x=1738826467; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qeTa6ht1b5XKOwPg0RS3CcanbnYaz/SxN6h9tTKwY0Q=;
- b=HThcO6jfyHD5FGEHjHTnx22kSm7L+7F5I0Uhu0OwmoUUkag0uM0i1koGEbbTPoCxHM
- Xdwpsvz2koIDCJzwy74oCGtXFFdFlLylMtrgrSiSQrJWuAzwujEiJtw+M4Xa8S0SjAUc
- c8DT9Z9t4jjBXOEaKci1jeDgPZG7wqF+hn8AhkVNjTcxVuN7fppsKHm0Yr3ApdvxmAbW
- y3xvz2eMe/o1QzyT1qYQss+EPJ01pFMPHEptCAWLhE21H2u6DUfBXirnZfd4gnXWMISb
- ulg3GAurI/1WaYuTnM2jFvRXA8qbTjTMcbMJtwkeN7EN3pVwWkx4j5I1cSEOnGLTGyh/
- r6Vg==
+ d=linaro.org; s=google; t=1738221674; x=1738826474; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XoSFznlnmdzy6VCmKJQIDoPp+0ELTpXnMyRTMOebkMg=;
+ b=Aox0LJWFKUMw7AF3nSC0p7/En7JDGv+OGAxuyNsGS+GszwwSbEokpLxFxNkqatwmcw
+ ll2yCBAv9Gry6IJ7P+QmVwntyLu014XGN1JdYBenfZh5bsOSLoy2kbtzphzpfRLjZvcf
+ IX7F5T48U/72yiCRYFYIpnxnpg0QHfl27IOIKxLLup0GMq6MkhpKRI3teOwjAEkRWydb
+ f/l+8DMw8bxbZZy8YLw/ljoMwU1fqk4omBAIQWzKCK7ALYO5a0BD+qOkCAW5Kemj+kk6
+ 0ll9MoUtPpSk05JVisCW6oPbnYSr05bdd5LjSwXnP7ruzGlFV78lTJqeC7nkCi1F0p5M
+ hlhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738221667; x=1738826467;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qeTa6ht1b5XKOwPg0RS3CcanbnYaz/SxN6h9tTKwY0Q=;
- b=O/OA56svApntTptPq1lN/opxZsFVDXQ8gnzY6Uzbd4wC3Tqr9AICCw/GJ0BY/61hcm
- SNCgKOudV9AInKqS3YsHR81qvkSAedVsd0xqGI3qtmKLbf6e+Wxc+HvmG1jPjLaGyPXd
- zCL5ocrK+9751O5IKgSe4jd0oX1j7BHwM/fQV7mJTMohYkvi0fwLcZxzvzTImGDxwhoU
- ZKybEa81TFb+9cEeFOWZAMPAIAhbrNaK9cEpxvVT4k+Of11Z35ct7jzVpUT+i2CXlI61
- icgEq0n4HkzrCIrvf2fup7JnXijR4u5ghcCFGKUQ2X88B3Pd2LeP56BK3Cu4P1zXI63P
- gXeA==
+ d=1e100.net; s=20230601; t=1738221674; x=1738826474;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XoSFznlnmdzy6VCmKJQIDoPp+0ELTpXnMyRTMOebkMg=;
+ b=LlZtB9opNoHqS665ENN1sGhWA8tEb7+VW55NxKsdFENIgviWPqM54I+7BCSx4W87al
+ WJmrDo1WQdI+npoRag09nzYfBXaRHR8AypDQoLJEAAYyrEsi1opjDlynxQSZHos1fwgW
+ pSO66Q9KYuc0cTVSLmm2OaUOu3JsUltf0VReLW29UdHECNcsx4H/OllH7O/lYiNaFMEZ
+ +NPsQJ62xiw8grC57mtdEuOaII0eIJyZLdtQTF46qfV4+8vjORg5WmtUUxjc/xCE8Day
+ mWyD9z3ZMODOFUahcEX0njsqPmOPo+Wz5gYshM8NrG9JThSmOj1Jpy+fY7UDSli/u2b6
+ c5rg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOm45B4jyXKZuoiwLGz55OC3b98E8YcgtBehNBqpyqQaHJ/wHpE0y/DiA/eoGUlQ+aXXJAjuk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+akUtGJEBVr9VmXYngFJthw0zU267jYpFBDDXbq5OEST5KASy
- dGkk7jJTuhZtLFFdXEtqVsgw8v2DCBm/JcezbCz/OvFGsbvc23YQhl7KGMvAVJk=
-X-Gm-Gg: ASbGnctefcV1ZFQZruE8yJzWC6oCID94DEh45dNAMktV7vc9ivIIW7SOBW5ufBYudbC
- Vd77RIIqsXptfVSs7d1a+RejjEhsP3X5vZL4WwgNQWUcngp52fahhOH+GJ+GsaRe7afrqb0oYWP
- S4ljht13oPNFcO7WlODh7yf40Kk/74P/+6Xi7RFjOVCoHGpWaYPlrRAgW5aoS5KHQ8/vUFiABgr
- VbxtdltBBTmYqzqvYZMQtMDiyC0zzYEz3MahGgpDVJqog1LULVXOwVZVzGG5nR+YFQ9trKak65b
- Ml1cLoaF6lXT/im5O3RP4wAQRReAEDweHUxtAIqqlO/wSu2kDQ==
-X-Google-Smtp-Source: AGHT+IF6zYXqVOPNFgcbSvj2X8qe5RIZ3piL3MxoQTCY8RE1912pTCza2kjplxdbdPkPKi43xyPsaA==
-X-Received: by 2002:a05:600c:3c86:b0:434:a529:3b87 with SMTP id
- 5b1f17b1804b1-438dc3c2413mr59817515e9.10.1738221666774; 
- Wed, 29 Jan 2025 23:21:06 -0800 (PST)
+ AJvYcCVHHBS5WeRIBYqzP6kyoTkVPboRYQHAGXzozn4JB08okBltoyipRV1X8mqvLL+AkvV/50WAOxA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQN80k8eF/dQ0zzNXSNus89qB2JZ2bdu8T2q+VT7pr5TTfMhfC
+ YhNvz6N6NMhPqbwM2xwPpw0RjXyMZnxaoVYWhwc+1rDKfh0a4BAUNq/SjwNws9M=
+X-Gm-Gg: ASbGncvUjV0JaK3oM0wCl+dDU981NZeJWSdyBhbASL8qjg6YD2iZhgudX8Pt5aVg4U9
+ NJrGsiED76b/xIBxgES0QnX6Qss62ZCMi3K57Dyeht4Qj4hUBEUOyDnhSAskPdbvSXEVQQhxgyO
+ Ur1O/B1unUPK3bzoBDpE/dnRodYldgwuT7r/Jq9urtRVdIdFKzXCDMc0nDu5TSQ+32rWFV30ZQi
+ GR8Sjbyc2Bsmb+iKIvKrnjurM1q13PSQ3aA0lTmPe3wH1ap0NViNEr04a5z2ajFqpVzLvtxyWeh
+ va5LMmPE+Te9JsWlyIbqMcxDCJXiPCZpJxSJzSdbRHDkf3WFIw==
+X-Google-Smtp-Source: AGHT+IHxK1lyZdKGyyDEVe+krRXK7f74E4aJPZnxPxOGVyYRHc6a3j1Roc2NACAiKuQlK+BkgutvZw==
+X-Received: by 2002:a05:600c:3ca0:b0:436:1aa6:b8ee with SMTP id
+ 5b1f17b1804b1-438dc3aa574mr55978945e9.2.1738221674515; 
+ Wed, 29 Jan 2025 23:21:14 -0800 (PST)
 Received: from hades.. (ppp176092181030.access.hol.gr. [176.92.181.30])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438dcc6df2asm48076345e9.29.2025.01.29.23.21.04
+ 5b1f17b1804b1-438dcc6df2asm48076345e9.29.2025.01.29.23.21.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jan 2025 23:21:06 -0800 (PST)
+ Wed, 29 Jan 2025 23:21:14 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: maz@kernel.org,
 	trini@konsulko.com,
@@ -80,20 +81,24 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
  =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
  Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
-Subject: [RFC PATCH 0/4] Fix page permission on arm64 architectures
-Date: Thu, 30 Jan 2025 09:20:25 +0200
-Message-ID: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
+Subject: [RFC PATCH 1/4] meminfo: add memory details for armv8
+Date: Thu, 30 Jan 2025 09:20:26 +0200
+Message-ID: <20250130072100.27297-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
+References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -112,99 +117,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot maps all pages as RWX. Sadly it's not not 1990 anymore and we are
-better off mapping binaries with proper permissions.
+Upcoming patches are mapping memory with RO, RW^X etc permsissions.
+Fix the meminfo command to display them properly
 
-This is an attempt to map the U-Boot binary properly, but leave the
-area we load binaries unaffected and RWX.
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ arch/arm/cpu/armv8/cache_v8.c    | 18 +++++++++++++++++-
+ arch/arm/include/asm/armv8/mmu.h |  2 ++
+ cmd/meminfo.c                    |  5 +++++
+ 3 files changed, 24 insertions(+), 1 deletion(-)
 
-patch #1 adds printing capabilities for page permissions in meminfo
-patch #2 prepares our linker scripts, aligns sections in page boundaries etc
-patch #3 is adding a function to change page tables
-patch #4 sets the permissions for .rodata, .text and .data
-
-There's a few problems problem in this RFC ...
-- U-Boot has no MMU APIs in place. As a result I just wired up the function
-  changing the page permissions in board_r.c but only for arm64. In the long
-  term we should add an API that other archs can use if they wish/can
-- meminfo doesn't align all results properly (Caleb?)
-- I am not setting the permissions of EFI runtime services section on purpose.
-  Since the OS is allowed to call SetVirtualAddressMap, we need to reset the
-  pages to RWX just before ExitBootServices, so the OS can relocate that code.
-  In arm64 this isn't a huge problem, because we explicitly disable SVAM if
-  if VA_BITS > 39, but other OSes/archs will have a problem.
-
-# TODO:
-- Long term. Add an MMU API and use that instead of exporting arch specific
-  functions
-- Add an enum in mmu_set_attrs() instead of 1,2,3 arguments
-- Set the permissions of EFI runtime services anbd reset them before EBS()
-- Fix alignment when printing pages & information
-- Add a Kconfig option so the feature can be turned off.
-  The reason is that QEMU CI and some boards, fail because they are trying to
-  write RO pages. This usually happens due to variables being wrongly defined as
-  const, but with the updated page permissions this leads to a crash [0] [1].
-  In both cases the reported ESR is 0x9600004f which translates to
-  "Abort caused by writing to memory" "Permission fault, level 3.". On top of
-  that not setting pages as RO (and only setting .data and .text sections) works
-  fine. So until we find and fix the bugs above we can't turn this on
-  unconditionally.
-
-# Open questions
-- Is initr_reloc_global_data() the right place to change permissions? Or is there
-  a better/safer place to do that?
-
-# How to test patches
-- Aplly them an enable
-  CONFIG_CMD_MEMINFO=y
-  CONFIG_CMD_MEMINFO_MAP=y
-  'meminfo' should print something along the lines of
-=> meminfo
-DRAM:  8 GiB
-Walking pagetable at 000000023ffe0000, va_bits: 40. Using 4 levels
-[0x23ffe1000]                     |  Table |               |
-  [0x23ffe2000]                   |  Table |               |
-    [0x000000000 - 0x008000000]   |  Block | RWX | Normal        | Inner-shareable
-    [0x008000000 - 0x040000000]   |  Block | RW | Device-nGnRnE | Non-shareable
-  [0x040000000 - 0x200000000]     |  Block | RWX | Normal        | Inner-shareable
-  [0x23ffea000]                   |  Table |               |
-    [0x200000000 - 0x23f600000]   |  Block | RWX | Normal        | Inner-shareable
-    [0x23ffeb000]                 |  Table |               |
-      [0x23f600000 - 0x23f68b000] |  Pages | RWX | Normal        | Inner-shareable
-      [0x23f68b000 - 0x23f74e000] |  Pages | RX | Normal        | Inner-shareable
-      [0x23f74e000 - 0x23f793000] |  Pages | RO | Normal        | Inner-shareable
-      [0x23f793000 - 0x23f794000] |  Pages | RWX | Normal        | Inner-shareable
-      [0x23f794000 - 0x23f79d000] |  Pages | RW | Normal        | Inner-shareable
-      [0x23f79d000 - 0x23f800000] |  Pages | RWX | Normal        | Inner-shareable
-    [0x23f800000 - 0x240000000]   |  Block | RWX | Normal        | Inner-shareable
-  [0x240000000 - 0x4000000000]     |  Block | RWX | Normal        | Inner-shareable
-  [0x23ffe3000]                   |  Table |               |
-    [0x4010000000 - 0x4020000000]   |  Block | RW | Device-nGnRnE | Non-shareable
-[0x23ffe4000]                     |  Table |               |
-  [0x8000000000 - 0x10000000000]     |  Block | RW | Device-nGnRnE | Non-shareable
-
-[0] https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
-[1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/jobs/1008714
-
-Ilias Apalodimas (4):
-  meminfo: add memory details for armv8
-  arm: Prepare linker scripts for memory permissions
-  arm64: mmu_change_region_attr() add an option not to break PTEs
-  arm64: Change mapping for data/rodata/text
-
- Makefile                                | 15 +++++----
- arch/arm/cpu/armv8/cache_v8.c           | 45 +++++++++++++++++++++++--
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 +++---
- arch/arm/cpu/armv8/u-boot.lds           | 32 +++++++++++-------
- arch/arm/include/asm/armv8/mmu.h        |  2 ++
- arch/arm/include/asm/system.h           |  3 +-
- arch/arm/mach-snapdragon/board.c        |  2 +-
- cmd/meminfo.c                           |  5 +++
- common/board_r.c                        |  7 ++++
- include/asm-generic/sections.h          |  2 ++
- lib/efi_loader/efi_runtime.c            |  2 ++
- 11 files changed, 97 insertions(+), 28 deletions(-)
-
---
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 5d6953ffedd1..a4ca56c8ed42 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -421,7 +421,7 @@ static int count_ranges(void)
+ 	return count;
+ }
+ 
+-#define ALL_ATTRS (3 << 8 | PMD_ATTRINDX_MASK)
++#define ALL_ATTRS (3 << 8 | PMD_ATTRMASK)
+ #define PTE_IS_TABLE(pte, level) (pte_type(&(pte)) == PTE_TYPE_TABLE && (level) < 3)
+ 
+ enum walker_state {
+@@ -568,6 +568,17 @@ static void pretty_print_table_attrs(u64 pte)
+ static void pretty_print_block_attrs(u64 pte)
+ {
+ 	u64 attrs = pte & PMD_ATTRINDX_MASK;
++	u64 perm_attrs = pte & PMD_ATTRMASK;
++
++	if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK_UXN) &&
++	    perm_attrs & PTE_BLOCK_RO)
++		printf("%-5s", " | RO");
++	else if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK_UXN))
++		printf("%-5s", " | RW");
++	else if (perm_attrs & PTE_BLOCK_RO)
++		printf("%-5s", " | RX");
++	else
++		printf("%-5s", " | RWX");
+ 
+ 	switch (attrs) {
+ 	case PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE):
+@@ -1112,3 +1123,8 @@ void __weak enable_caches(void)
+ 	icache_enable();
+ 	dcache_enable();
+ }
++
++void arch_dump_mem_attrs(void)
++{
++	dump_pagetable(gd->arch.tlb_addr, get_tcr(NULL, NULL));
++}
+diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
+index 0ab681c893d3..6af8cd111a44 100644
+--- a/arch/arm/include/asm/armv8/mmu.h
++++ b/arch/arm/include/asm/armv8/mmu.h
+@@ -66,6 +66,7 @@
+ #define PTE_BLOCK_NG		(1 << 11)
+ #define PTE_BLOCK_PXN		(UL(1) << 53)
+ #define PTE_BLOCK_UXN		(UL(1) << 54)
++#define PTE_BLOCK_RO            (UL(1) << 7)
+ 
+ /*
+  * AttrIndx[2:0]
+@@ -75,6 +76,7 @@
+ #define PMD_ATTRMASK		(PTE_BLOCK_PXN		| \
+ 				 PTE_BLOCK_UXN		| \
+ 				 PMD_ATTRINDX_MASK	| \
++				 PTE_BLOCK_RO		| \
+ 				 PTE_TYPE_VALID)
+ 
+ /*
+diff --git a/cmd/meminfo.c b/cmd/meminfo.c
+index 5e83d61c2dd3..3915e2bbb268 100644
+--- a/cmd/meminfo.c
++++ b/cmd/meminfo.c
+@@ -15,6 +15,10 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++void __weak arch_dump_mem_attrs(void)
++{
++}
++
+ static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
+ {
+ 	ulong end = base + size;
+@@ -54,6 +58,7 @@ static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	puts("DRAM:  ");
+ 	print_size(gd->ram_size, "\n");
++	arch_dump_mem_attrs();
+ 
+ 	if (!IS_ENABLED(CONFIG_CMD_MEMINFO_MAP))
+ 		return 0;
+-- 
 2.43.0
 
