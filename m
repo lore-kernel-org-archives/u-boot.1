@@ -4,92 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29026C0218F
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 14:53:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3647C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 15:09:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F06482102;
-	Thu, 30 Jan 2025 15:53:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1B02A80E90;
+	Thu, 30 Jan 2025 16:09:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZdJpF8MK";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="QHgzzBoI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C6E482104; Thu, 30 Jan 2025 15:53:18 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4891F81F69; Thu, 30 Jan 2025 16:09:53 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 050F6820F6
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 15:53:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 02ADF80C77
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 16:09:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ab69bba49e2so148447166b.2
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 06:53:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738248795; x=1738853595; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Nq6SV6baubZD7yvtAn1rD3kc/4DBPB6ieyBSlZiicds=;
- b=ZdJpF8MKmcpRyz7tmm2YW7yjS1kZH0HYRatr6ChLUML0eQkGL0kcyuiMHOlSZO6h9C
- n8BX9dPQoHgJ/Lrc1LV0y4y+BLSI4yJeN72qs1QGbKcmis0L7/35s+f7dSRNSg7VlFC+
- ibR650i61q+G6oOa0IbOni0c6pbz9F6Pfi3oitH+N6E0w3ffU13A2rbgaky1QJb9c5BX
- sbUBMcKqU9kk6/Gtf6cqTqnGo3DYYoL3o8srYjXGldUdl9XltL27m0NGmFv5s0iTaju5
- wd7ZSI9KY0eC/7t2M9OE55F5dJobdbAmeQ+J6nwbOvHETwAtWC7e0H4gC+l2pR3pPNUJ
- SJBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738248795; x=1738853595;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Nq6SV6baubZD7yvtAn1rD3kc/4DBPB6ieyBSlZiicds=;
- b=qN0hSrZXdR4FUswRNNDGInLT2HLS3dhyq5gnsHA3qtgXeu2xvsYnlgwHM0X9tmsKAv
- dEq3td4EZ4zEc+xF3qauNndYZBa0gu0PMQexseaG0GVZ+nwiV6R4uSgEEwp2zEXLFH7b
- 0rsw1Di+R8t4r7GUp4wjjugqGORbMAyAAiAsjFQyM7Jmam7m8/N4gbro1MbCoS492j1v
- ZTN70vID1M9BLHdAbyxxYSkbebgeqh52YL6Gd2nVFZ4//T6qIlg/gJmvgQ6hSovgnp4u
- 5ILaAKMh7dgKJYdDppwsSWjO+b3bfAVrD5X8eVfAo75yTlEHESyydMdFsMnCmxWfy6vD
- ND5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVZw8m4gyJ6tJ9SukXFHjZVr4m40NvvK3KPZ1RGiVx3xlUCoisCQC4y4YtXRyCKTdf0d/2ddPc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzcHFvaE3paW+JS0QvrtdEjCE50FTF/i5WJSd81nY/o7p+Mag9B
- Wt2qIX/StXe7t4jVnbFhEi5CucG1MQdLCHNHNmdvdFX+EK1tb1jfen2SsGkjowI=
-X-Gm-Gg: ASbGncvcGZ6sV6SFM3MkaDrj6oncRSsKcJpNoKsvy8kOurYtHxn7fURM/0q5uSIcnQc
- lmafopNDHQkca1Vsrjd78UDM87S3x+EYd7IPQmiZzCdQEGN71e57+wd6brQozYfPptbo4Ak3lJ4
- PVxmJuadDPWQvaQnMWORJ4Lt29iR+iGVN8ELrkFZiNwcNiE2Jw0gvC0zAcTwH6EAdMZmg9rSS+b
- mgIgQw5epCYt5sBO30xmRSYT4iEeJ3DjHmV23nf4D468zcJywu+HsPx7ac1wcaOJT2QMlGRXCJ7
- TBYl2rfo9YrWXS3vpWs3ohE=
-X-Google-Smtp-Source: AGHT+IFh35ZHRVT1X0ripELsjIUKiIJPzU14tQePjBLctQdQnUhdesFr0HpgbIfdWi6UQJAVj1I2Ww==
-X-Received: by 2002:a05:6402:1d4e:b0:5db:f423:19cf with SMTP id
- 4fb4d7f45d1cf-5dc5efbf1b3mr16140476a12.9.1738248795333; 
- Thu, 30 Jan 2025 06:53:15 -0800 (PST)
-Received: from [192.168.0.24] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e47a7beesm132058066b.24.2025.01.30.06.53.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Jan 2025 06:53:14 -0800 (PST)
-Message-ID: <800240f1-44e8-432b-a772-5a14e7746451@linaro.org>
-Date: Thu, 30 Jan 2025 16:53:14 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4125720023=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50UEVFji003140;
+ Thu, 30 Jan 2025 16:08:45 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ Cl4JOdi+6Xk02DLMIzj92dJt8sHdWZquU43/JPOn2L8=; b=QHgzzBoIms09J8QE
+ Ax86Ykt2XK9G/s517kMtpLZFujsvfY6UC/Z7bbH7t7v4ykR4+iXQpE0ArllzlzZH
+ 8DWquu+5gtj23IltlHyQJfSKiUBjmoemAyVbY5oJn5nhYeH4CMgFr1myved4Whym
+ XDv8vi6amIqMNmeV3b+dLeyt0ir/WpPaYfHGJC6SRvPgsSXkWAfFYvkxGT8J17c4
+ qwRT1iZa/uxnXvXbbmQPfeJr7qYlE4EfgzDE7E5ECzYzbq+X33EFcJcMVv8Bj71h
+ FeZZm7aBpj4lrp3Te3Gk3cPynGGNrWMACHoSPMcISpOe+rkxoOPn+vLQLi89DyIh
+ +aeNEQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44fttebpm5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 30 Jan 2025 16:08:45 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B1D9440044;
+ Thu, 30 Jan 2025 16:07:15 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D62C93D3668;
+ Thu, 30 Jan 2025 16:05:56 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Thu, 30 Jan
+ 2025 16:05:56 +0100
+Message-ID: <70f577b7-c573-4fb3-8ba2-397b6b4b071f@foss.st.com>
+Date: Thu, 30 Jan 2025 16:05:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] [U-Boot] spi: atmel-quadspi: Refresh and add classic
- mode support
-To: Tom Rini <trini@konsulko.com>
-Cc: Alexander Dahl <ada@thorsis.com>, Jagan Teki
- <jagan@amarulasolutions.com>, =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?=
- <csokas.bence@prolan.hu>, u-boot@lists.denx.de,
- Yoshitaka Ikeda <ikeda@nskint.co.jp>
-References: <20250123121215.21001-1-ada@thorsis.com>
- <d6746615-550b-4290-ae17-42728ae68f1c@linaro.org>
- <20250130144946.GX1233568@bill-the-cat>
+Subject: Re: [PATCH v4 4/9] usb: dwc3-generic: Add STih407 support
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut
+ <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, Caleb
+ Connolly <caleb.connolly@linaro.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, Sjoerd Simons
+ <sjoerd@collabora.com>, Tom Rini <trini@konsulko.com>
+References: <20250123144718.1139824-1-patrice.chotard@foss.st.com>
+ <20250123144718.1139824-5-patrice.chotard@foss.st.com>
+ <250b3ccb-e0fb-4d82-8378-b1e4a798e544@foss.st.com>
 Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250130144946.GX1233568@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <250b3ccb-e0fb-4d82-8378-b1e4a798e544@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-30_06,2025-01-30_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,85 +99,248 @@ X-Virus-Status: Clean
 
 
 
-On 1/30/25 16:49, Tom Rini wrote:
-> On Thu, Jan 30, 2025 at 04:07:27PM +0200, Eugen Hristev wrote:
->>
->>
->> On 1/23/25 14:12, Alexander Dahl wrote:
->>> Hello everyone,
->>>
->>> this patch series is for U-Boot, although Linux might be affected.
->>>
->>> The quadspi controller on microchip (former atmel) sama5d2, sam9x60 and
->>> other soc variants of the at91 family is usually used in hardware
->>> accelerated spi-mem mode.  It also supports a classic mode for
->>> interfacing all kinds of SPI peripherals like ADCs, IO expanders,
->>> displays, you name it.  However the drivers in Linux and U-Boot did not
->>> support that mode, yet.
->>>
->>> While spi-mem subsystem interface is comparable between Linux and
->>> U-Boot, SPI subsystem interface is rather different in Linux and U-Boot.
->>> So there's no previously written Linux support just ported here.  I
->>> tried that, but the simple implementation for U-Boot's .xfer() used here
->>> does not work for Linux' .transfer_one() because of the OVRES flag set
->>> all the time.  I guess a more sophisticated approach has to be taken in
->>> Linux with interrupts, completions and/or dma?
->>>
->>> According to commit 24c8ff4684c5 ("spi: Add Atmel QuadSPI driver")
->>> message, the initial U-Boot variant of this driver was ported from Linux
->>> v5.1-rc5 back then.  I hope it's okay to squash the fixes added to Linux
->>> after that into patch 2 and 3 of this series?
->>>
->>> Patch 4 and 5 come from my efforts to hack this feature into the Linux
->>> driver.  (Not sure if those should be added to the Linux driver
->>> anyways, even if nobody ever implements transfer_one() over there?)
->>>
->>> Patch 5 is the actual work, very much inspired by the current U-Boot
->>> driver atmel_spi for the generic SPI controllers on at91 family.
->>>
->>> Patch 1 is copied from my other spi series for U-Boot, just added it
->>> here for better build results.
->>>
->>> Patch 6 is optional, because not portable towards Linux.
->>>
->>> Tested on top of v2024.10, because v2025.01 won't build as debug
->>> for sam9x60 as described in another thread.  But there are almost no
->>> changes related to at91 socs, boards, and drivers in the last months
->>> here, so it should be comparable.
->>>
->>> Greets
->>> Alex
->>>
->>> (Cc-ing the contributors of the Linux fixes here.)
->>> Cc: Tudor Ambarus <tudor.ambarus@microchip.com>
->>> Cc: Yoshitaka Ikeda <ikeda@nskint.co.jp>
->>> Cc: Csókás Bence <csokas.bence@prolan.hu>
->>>
->>> Alexander Dahl (7):
->>>   spi: atmel-quadspi: Depend on SPI_MEM
->>>   spi: atmel-quadspi: Port collected fixes from Linux v5.10 and v5.15
->>>   spi: atmel-quadspi: Avoid overwriting MR register settings
->>>   spi: atmel-quadspi: Remove default mode setting at probe time
->>>   spi: atmel-quadspi: Allow setting SMM to classic SPI mode
->>>   spi: atmel-quadspi: Add support for classic SPI mode
->>>   spi: atmel-quadspi: Improve probe debugging
->>>
->>>  drivers/spi/Kconfig         |   2 +-
->>>  drivers/spi/atmel-quadspi.c | 294 ++++++++++++++++++++++++++++--------
->>>  2 files changed, 228 insertions(+), 68 deletions(-)
->>>
->>>
->>> base-commit: 2eed5a1ff36217372e19f7513bd07077fc76718a
->>
->> Hello Alex,
->>
->> I had a quick look over your patches, but it would require to get a
->> review from SPI maintainers to apply these.
+On 1/30/25 14:18, Patrick DELAUNAY wrote:
+> Hi,
 > 
-> Our SPI maintainer is currently not very responsive. Would you be OK
-> taking this via the atmel tree since it's an atmel platform driver and
-> not core changes? Thanks!
+> few minor remarks
 > 
+> On 1/23/25 15:47, Patrice Chotard wrote:
+>> Add STi glue logic to manage the DWC3 HC on STiH407
+>> SoC family. It configures the internal glue logic and
+>> syscfg registers.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Marek Vasut <marex@denx.de>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>
+>> ---
+>>
+>> Changes in v4:
+>>    - Update Kconfig description
+>>
+>> Changes in v3:
+>>    - Replace debug() by dev_err()
+>>    - check return value of syscon_regmap_lookup_by_phandle()
+>>
+>> Changes in v2:
+>>    - add dwc3-sti.c DWC3 wrapper as done for dwc3-am62.c
+>>
+>>   MAINTAINERS                         |   1 +
+>>   drivers/usb/dwc3/Kconfig            |   8 ++
+>>   drivers/usb/dwc3/Makefile           |   1 +
+>>   drivers/usb/dwc3/dwc3-generic-sti.c | 132 ++++++++++++++++++++++++++++
+>>   4 files changed, 142 insertions(+)
+>>   create mode 100644 drivers/usb/dwc3/dwc3-generic-sti.c
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 8c6c0c2a4bc..5d7e251e601 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -656,6 +656,7 @@ F:    drivers/mmc/sti_sdhci.c
+>>   F:    drivers/reset/sti-reset.c
+>>   F:    drivers/serial/serial_sti_asc.c
+>>   F:    drivers/sysreset/sysreset_sti.c
+>> +F:    drivers/usb/host/dwc3-sti.c
+>>   F:    drivers/timer/arm_global_timer.c
+>>   F:    drivers/usb/host/dwc3-sti-glue.c
+> 
+> Minor=>  can you group the file in the same directory / respect alphabetic order
+> 
+> drivers/usb/host/dwc3-sti.c
+> drivers/usb/host/dwc3-sti-glue.c
 
-Yes, that is fine. However the review would be to the best of my ability
-only.
+OK
+
+> 
+> 
+>>   F:    include/dwc3-sti-glue.h
+>> diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
+>> index 0100723a68b..682a6910655 100644
+>> --- a/drivers/usb/dwc3/Kconfig
+>> +++ b/drivers/usb/dwc3/Kconfig
+>> @@ -87,6 +87,14 @@ config USB_DWC3_LAYERSCAPE
+>>         Host and Peripheral operation modes are supported. OTG is not
+>>         supported.
+>>   +config USB_DWC3_STI
+>> +    bool "STi USB wrapper"
+>> +    depends on DM_USB && USB_DWC3_GENERIC && SYSCON
+>> +    help
+>> +      Enables support for the on-chip xHCI controller on STMicroelectronics
+>> +      STiH407 family SoCs. This is a driver for the dwc3 to provide the
+>> +      glue logic to configure the controller.
+>> +
+>>   menu "PHY Subsystem"
+>>     config USB_DWC3_PHY_OMAP
+>> diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
+>> index a085c9d4628..985206eafe4 100644
+>> --- a/drivers/usb/dwc3/Makefile
+>> +++ b/drivers/usb/dwc3/Makefile
+>> @@ -15,3 +15,4 @@ obj-$(CONFIG_USB_DWC3_UNIPHIER)        += dwc3-uniphier.o
+>>   obj-$(CONFIG_USB_DWC3_LAYERSCAPE)    += dwc3-layerscape.o
+>>   obj-$(CONFIG_USB_DWC3_PHY_OMAP)        += ti_usb_phy.o
+>>   obj-$(CONFIG_USB_DWC3_PHY_SAMSUNG)    += samsung_usb_phy.o
+>> +obj-$(CONFIG_USB_DWC3_STI)        += dwc3-generic-sti.o
+>> diff --git a/drivers/usb/dwc3/dwc3-generic-sti.c b/drivers/usb/dwc3/dwc3-generic-sti.c
+>> new file mode 100644
+>> index 00000000000..2ff640cede4
+>> --- /dev/null
+>> +++ b/drivers/usb/dwc3/dwc3-generic-sti.c
+>> @@ -0,0 +1,132 @@
+>> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+>> +/*
+>> + * STi specific glue layer for DWC3
+>> + *
+>> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
+>> + */
+> 
+> 
+> missing the define for log filtering feature with log comand:
+> 
+> 
+> #define LOG_CATEGORY UCLASS_...
+
+OK will add #define LOG_CATEGORY UCLASS_NOP
+
+> 
+> 
+> with the UCLASS used in drvier (see next commane)
+> 
+>> +
+>> +#include <reset.h>
+>> +#include <regmap.h>
+>> +#include <syscon.h>
+>> +#include <asm/io.h>
+>> +#include <dm/device.h>
+>> +#include <dm/device_compat.h>
+>> +#include <dm/read.h>
+>> +#include <linux/usb/otg.h>
+>> +#include "dwc3-generic.h"
+>> +
+>> +/* glue registers */
+>> +#define CLKRST_CTRL        0x00
+>> +#define AUX_CLK_EN        BIT(0)
+>> +#define SW_PIPEW_RESET_N    BIT(4)
+>> +#define EXT_CFG_RESET_N        BIT(8)
+>> +
+>> +#define XHCI_REVISION        BIT(12)
+>> +
+>> +#define USB2_VBUS_MNGMNT_SEL1    0x2C
+>> +#define USB2_VBUS_UTMIOTG    0x1
+>> +
+>> +#define SEL_OVERRIDE_VBUSVALID(n)    ((n) << 0)
+>> +#define SEL_OVERRIDE_POWERPRESENT(n)    ((n) << 4)
+>> +#define SEL_OVERRIDE_BVALID(n)        ((n) << 8)
+>> +
+>> +/* Static DRD configuration */
+>> +#define USB3_CONTROL_MASK        0xf77
+>> +
+>> +#define USB3_DEVICE_NOT_HOST        BIT(0)
+>> +#define USB3_FORCE_VBUSVALID        BIT(1)
+>> +#define USB3_DELAY_VBUSVALID        BIT(2)
+>> +#define USB3_SEL_FORCE_OPMODE        BIT(4)
+>> +#define USB3_FORCE_OPMODE(n)        ((n) << 5)
+>> +#define USB3_SEL_FORCE_DPPULLDOWN2    BIT(8)
+>> +#define USB3_FORCE_DPPULLDOWN2        BIT(9)
+>> +#define USB3_SEL_FORCE_DMPULLDOWN2    BIT(10)
+>> +#define USB3_FORCE_DMPULLDOWN2        BIT(11)
+>> +
+>> +static void dwc3_stih407_glue_configure(struct udevice *dev, int index,
+>> +                    enum usb_dr_mode mode)
+>> +{
+>> +    struct dwc3_glue_data *glue = dev_get_plat(dev);
+>> +    struct regmap *regmap;
+>> +    ulong syscfg_base;
+>> +    ulong syscfg_offset;
+>> +    ulong glue_base;
+>> +    int ret;
+>> +
+>> +    /* deassert both powerdown and softreset */
+>> +    ret = reset_deassert_bulk(&glue->resets);
+>> +    if (ret) {
+>> +        dev_err(dev, "reset_deassert_bulk error: %d\n", ret);
+>> +        return;
+>> +    }
+>> +
+>> +    regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscfg");
+>> +    if (IS_ERR(regmap)) {
+>> +        dev_err(dev, "unable to get st,syscfg, dev %s\n", dev->name);
+>> +        return;
+>> +    }
+>> +
+>> +    syscfg_base = regmap->ranges[0].start;
+>> +    glue_base = dev_read_addr_index(dev, 0);
+>> +    syscfg_offset = dev_read_addr_index(dev, 1);
+>> +
+>> +    clrbits_le32(syscfg_base + syscfg_offset, USB3_CONTROL_MASK);
+>> +
+>> +    /* glue drd init */
+>> +    switch (mode) {
+>> +    case USB_DR_MODE_PERIPHERAL:
+>> +        clrbits_le32(syscfg_base + syscfg_offset,
+>> +                 USB3_DELAY_VBUSVALID | USB3_SEL_FORCE_OPMODE |
+>> +                 USB3_FORCE_OPMODE(0x3) | USB3_SEL_FORCE_DPPULLDOWN2 |
+>> +                 USB3_FORCE_DPPULLDOWN2 | USB3_SEL_FORCE_DMPULLDOWN2 |
+>> +                 USB3_FORCE_DMPULLDOWN2);
+>> +
+>> +        setbits_le32(syscfg_base + syscfg_offset,
+>> +                 USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID);
+>> +        break;
+>> +
+>> +    case USB_DR_MODE_HOST:
+>> +        clrbits_le32(syscfg_base + syscfg_offset,
+>> +                 USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID |
+>> +                 USB3_SEL_FORCE_OPMODE | USB3_FORCE_OPMODE(0x3) |
+>> +                 USB3_SEL_FORCE_DPPULLDOWN2 | USB3_FORCE_DPPULLDOWN2 |
+>> +                 USB3_SEL_FORCE_DMPULLDOWN2 | USB3_FORCE_DMPULLDOWN2);
+>> +
+>> +        setbits_le32(syscfg_base + syscfg_offset, USB3_DELAY_VBUSVALID);
+>> +        break;
+>> +
+>> +    default:
+>> +        dev_err(dev, "Unsupported mode of operation %d\n", mode);
+>> +        return;
+>> +    }
+>> +
+>> +    /* glue init */
+>> +    setbits_le32(glue_base + CLKRST_CTRL, AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION);
+>> +    clrbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
+>> +
+>> +    /* configure mux for vbus, powerpresent and bvalid signals */
+>> +    setbits_le32(glue_base + USB2_VBUS_MNGMNT_SEL1,
+>> +             SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
+>> +             SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
+>> +             SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG));
+>> +    setbits_le32(glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
+>> +};
+>> +
+>> +struct dwc3_glue_ops stih407_ops = {
+>> +    .glue_configure = dwc3_stih407_glue_configure,
+>> +};
+>> +
+>> +static const struct udevice_id dwc3_sti_match[] = {
+>> +    { .compatible = "st,stih407-dwc3", .data = (ulong)&stih407_ops},
+>> +    { /* sentinel */ }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(dwc3_sti_wrapper) = {
+>> +    .name = "dwc3-sti",
+>> +    .id = UCLASS_SIMPLE_BUS,
+> 
+> really UCLASS_SIMPLE_BUS ?
+> 
+> can you use UCLASS_NOP instead
+
+yes
+
+> 
+> 
+>> +    .of_match = dwc3_sti_match,
+>> +    .bind = dwc3_glue_bind,
+>> +    .probe = dwc3_glue_probe,
+>> +    .remove = dwc3_glue_remove,
+>> +    .plat_auto = sizeof(struct dwc3_glue_data),
+>> +};
+> 
+> 
+> Patrick
+> 
