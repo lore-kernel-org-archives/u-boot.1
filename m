@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0126C02190
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:32:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CACBC02190
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:35:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 726D281F69;
-	Thu, 30 Jan 2025 11:32:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0537D801A0;
+	Thu, 30 Jan 2025 11:35:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k+YPOSa8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yoxUlIrV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 641D582099; Thu, 30 Jan 2025 11:32:17 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 97C8C807C0; Thu, 30 Jan 2025 11:35:55 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 143C180C85
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:32:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E0E480137
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:35:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e549dd7201cso1179579276.0
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:32:15 -0800 (PST)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-e460717039fso983006276.0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:35:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738233134; x=1738837934; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738233352; x=1738838152; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QOAuh5fR4Oz9Xh6rB8VKo+ZJXIMN4TYOAUeOsRZMqes=;
- b=k+YPOSa8uANVNLJ11hsiMqhbabeIgL/ZQGUVKROqth3bnr5pEV67jRAk5XumXFhh/y
- /Fk1htyZF8kGHTqGGSyiJJKw8FuIXGFZ026VLV3EjICJo3fIznslyyygXUwq+p5uny7a
- /Akh4Y2u7AoEveHoGbfZqXLHiyocHTZ/7C7oZSHjNS818QhfZx3bjKoffe067f/cZdg6
- gSSLPjDUzVtVr6JiMYioHhJu4HmaHJKdtrAahNIu3n2oRWUfb0HWoXoyMHqtDORriwTx
- tsaxIxIA7eKjJLwFKiaDlzWXwLhr7vFDg5GwGQUyEFfWFKXK6iiycZBtCFzzY95pjj88
- NdMw==
+ bh=Z+M/ZNbRv/+ZgaN2DKPiC4IWNLwDxHacY1oxv5IBPF0=;
+ b=yoxUlIrVTaOeChwPt8ljtFlBxYasfC3+PMcIx2atk1VT7+dAOdJKOKHy/CHxu8CHHA
+ M+h3f12yT2sSrM2ng5mn9sNqMnY/jkhwPgXO0rb6kokUv5Iqg6Mqlr5LBFSqtvzzOjKA
+ TqwUu8UlyIi1cwrfzaptTqkZHZuHL4c9RLhsFFl+v2DuS6M6L6v/9CDkc/wf91spUyFd
+ pNW3PvXckmZjUAFi/GozD4TNoq43GpQs3JBzhb/u5RkZxFfb975dN5Tvy2b20HvT6RuS
+ KqtSiSwA7wb5R7mtpvLchtNfCQGt+PPsPXnCaYWQSn4oO91+XIy3K/nWe3pIG1e6Mtvp
+ SUcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738233134; x=1738837934;
+ d=1e100.net; s=20230601; t=1738233352; x=1738838152;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QOAuh5fR4Oz9Xh6rB8VKo+ZJXIMN4TYOAUeOsRZMqes=;
- b=U3SQh9LO2P31ICK66OPlZFeKKz7u4c64j+w5vVh44zHOk5P3mO7bNT21IiCWpOTkCv
- /N1mQCZuTW5rlTyJiJoFY+8C5oRazqhB2h3jjGyTdnPPc1tzfTs2u6w+B3E1xt/KgCq2
- Muf6WNiymPrl6KPfZ/xeGvLpAWW1EUxoIoaLkr36HfuIig4+GpLJJn91T5EFql5mrFTM
- IiF1rfbZvDDuAc96AjMz5DjO32HCedH+iqf8kvESE56rf0SbO8kAsIHu94tMwq3QDYt9
- rT29VU39QBX6pbsphYdGPVW1R7tR7JBO0K2U6Z/LZ/ayE7CorOCLCGqqmXw8V1WEJdn8
- v08Q==
+ bh=Z+M/ZNbRv/+ZgaN2DKPiC4IWNLwDxHacY1oxv5IBPF0=;
+ b=cz7UD7oRBfQMcI2TGYkAyX4XoxeRHpFPHKfeW9fv71TBpa8fz0cqUtA5DavGEc14az
+ e8+oqqwUKjisolulx+JjL4Cl6KJvFbbEGDwjWi4n5WZ0pl2ohZCIRtWEKuRUYBr3y+xI
+ J46I9w0mm0T1+3m2rFED2cUk79risVXU1IA+ggPWL7Y7IaQSz3BivL1m/MwhY76VoSpW
+ Nh+8NrtcEHTZ8bEKxZS9I7Tn6Kvr+pabE5jzGGNN0WC2aqEekNwwwZ0n4tmWAq32bGXg
+ YV/XoB3fi42ZODLeCgbFLxFrh3kNuaMMfEK/r8FUABM0hMr3fZQcireXyZRmhl28hezI
+ loKw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhG8fDiVw4VAIdwiyab2F7Yh+wigY9loil+sRL+rW6aKk2WmoarwAlpIByYduLEp2MPUpDC1Y=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxzyf+bzFU/oTGWUZnvgvnUfLzlkMYUU+u33S/1noQtG+GOl8Aa
- Y8M/DuKnwkc1Dy8JaxzpkpipT8qlcNhoyOY9qjuAagmfPO34B0oTxWIIRCGp3SHcYJFTEkEhVTI
- 4NgmZWMSKoKM0K/7Jpn+zj1VTFjNgspIowBGMNw==
-X-Gm-Gg: ASbGncvOqViZOc0FzYlsBmydOrJ1xDy9i3EPbz2tlGMgmFhSqwYW9nWomhRaUw+PNb3
- 7LE8D3vLh8hDC9hKVOcTOvY21/2hAIUln5ZdRgN9UXE+k0SyHYdDchBgxtW9MeowtYtXVpk+s
-X-Google-Smtp-Source: AGHT+IFtNPN6bw7aPMXkV0VGqQ8yiTfGf9ddBw3Gt0C9P/cXDatMgOrInmd+o3REbaHU/a3U96FgIro+dcb0+DBMbNA=
-X-Received: by 2002:a05:6902:1248:b0:e57:f9a6:18eb with SMTP id
- 3f1490d57ef6-e58a4aa8364mr4895094276.4.1738233133786; Thu, 30 Jan 2025
- 02:32:13 -0800 (PST)
+ AJvYcCVekYWb/y+0rGUbDSklBZMhEFkyLrb7jCDY+fN2goMi8cOtxX2EmkGV3UsiaMcpi2Z2GN+8Ic8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxsRVuIug2oOYgKGfT9UlngOCo0ZTT8UTAoTAjqhTHppg4Z9Xru
+ 6M+iZF3Y+NkfvQVQaUvMn/d7RtTADuXxADSbXSUl1OsugBlh1CuFAjcYv11VUrn/IESdWtjS8gV
+ sTdAwBeW2UfCFICVp+mLKiTcCY+nPTfUZMymjlQ==
+X-Gm-Gg: ASbGncuv42JF/jjCf8VhBaP4avqCP3YuLvYmTgb89vRUYN2Rvw6p4806hExm2iLJ4DJ
+ bRP64S6oyGLGu3IGOVQ0lsDnKAcMbToN/KcwrPSis0lIxuSOjQGXhX/rdSP39bGA8gvITdUGC
+X-Google-Smtp-Source: AGHT+IEegDwaMNQSMVJcTOrTGRHecbAHgTjgjUQCvNw6YWso5C0ZvPkn9CQ1PiXBVr/UwUuU4/t4HCjYwY2ih+00Ln4=
+X-Received: by 2002:a05:6902:1582:b0:e54:bc9f:a7fe with SMTP id
+ 3f1490d57ef6-e58a4ac68afmr5693747276.20.1738233351814; Thu, 30 Jan 2025
+ 02:35:51 -0800 (PST)
 MIME-Version: 1.0
 References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <20250130072100.27297-4-ilias.apalodimas@linaro.org>
- <60b99e2f-a354-4449-bdd2-abba07615321@gmx.de>
-In-Reply-To: <60b99e2f-a354-4449-bdd2-abba07615321@gmx.de>
+ <20250130072100.27297-2-ilias.apalodimas@linaro.org>
+ <bc481af0-64f1-47f4-af19-1aba64c2ae6c@gmx.de>
+In-Reply-To: <bc481af0-64f1-47f4-af19-1aba64c2ae6c@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 30 Jan 2025 12:31:37 +0200
-X-Gm-Features: AWEUYZneqAvPvJoeoYE07SrCZ8I50ccKVT6Zf7p-_j9JFsqlsqSFoLnlxyjT83g
-Message-ID: <CAC_iWjKEptv2wdJ7JB=6tF_Ar-_2qAvh-78wze7GwgdkA54pXQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 3/4] arm64: mmu_change_region_attr() add an option not
- to break PTEs
+Date: Thu, 30 Jan 2025 12:35:16 +0200
+X-Gm-Features: AWEUYZmqJ9Eo90_UJA-rspWaXOTXBmhpb1s49SiXYGcmaH83uGr_Iu5lxKdN9p4
+Message-ID: <CAC_iWjKSFq-hhwzoxw9XMXj92fpmy1uz_J-kdqvYx0Ju6HcUMg@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/4] meminfo: add memory details for armv8
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -86,11 +85,12 @@ Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
  Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
  Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Michal Simek <michal.simek@amd.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io, maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, 
+ maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,181 +108,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 30 Jan 2025 at 12:13, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+HI Heinrich
+
+On Thu, 30 Jan 2025 at 12:01, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 1/30/25 07:20, Ilias Apalodimas wrote:
-> > The ARM ARM on section 8.17.1 describes the cases where
-> > break-before-make is required when changing live page tables.
-> > Since we can use this function to tweak block and page permssions,
-> > where BBM is not required add an extra argument to the function.
-> >
-> > While at it add a function we can use to change the attributes of normal
-> > memory without breaking the pages tables first
+> > Upcoming patches are mapping memory with RO, RW^X etc permsissions.
+> > Fix the meminfo command to display them properly
 > >
 > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > > ---
-> >   arch/arm/cpu/armv8/cache_v8.c           | 27 ++++++++++++++++++++++++-
-> >   arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 ++++-----
-> >   arch/arm/include/asm/system.h           |  3 ++-
-> >   arch/arm/mach-snapdragon/board.c        |  2 +-
-> >   4 files changed, 34 insertions(+), 8 deletions(-)
+> >   arch/arm/cpu/armv8/cache_v8.c    | 18 +++++++++++++++++-
+> >   arch/arm/include/asm/armv8/mmu.h |  2 ++
+> >   cmd/meminfo.c                    |  5 +++++
+> >   3 files changed, 24 insertions(+), 1 deletion(-)
 > >
 > > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> > index a4ca56c8ed42..60d0870013e8 100644
+> > index 5d6953ffedd1..a4ca56c8ed42 100644
 > > --- a/arch/arm/cpu/armv8/cache_v8.c
 > > +++ b/arch/arm/cpu/armv8/cache_v8.c
-> > @@ -968,11 +968,14 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
-> >    * The procecess is break-before-make. The target region will be marked as
-> >    * invalid during the process of changing.
-> >    */
-> > -void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
-> > +void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs, bool bbm)
->
-> The function description should be moved to the include or be completed
-> here.
->
-
-That's a preexisting function, but I can move it around on the next iteration
-
+> > @@ -421,7 +421,7 @@ static int count_ranges(void)
+> >       return count;
+> >   }
+> >
+> > -#define ALL_ATTRS (3 << 8 | PMD_ATTRINDX_MASK)
+> > +#define ALL_ATTRS (3 << 8 | PMD_ATTRMASK)
+> >   #define PTE_IS_TABLE(pte, level) (pte_type(&(pte)) == PTE_TYPE_TABLE && (level) < 3)
+> >
+> >   enum walker_state {
+> > @@ -568,6 +568,17 @@ static void pretty_print_table_attrs(u64 pte)
+> >   static void pretty_print_block_attrs(u64 pte)
 > >   {
-> >       int level;
-> >       u64 r, size, start;
-> >
-> > +     if (!bbm)
-> > +             goto skip_bbm;
+> >       u64 attrs = pte & PMD_ATTRINDX_MASK;
+> > +     u64 perm_attrs = pte & PMD_ATTRMASK;
+>
+> The variable perm_attrs is not needed. You could use pte directly.
+>
 > > +
-> >       start = addr;
-> >       size = siz;
-> >       /*
-> > @@ -997,6 +1000,7 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
-> >                          gd->arch.tlb_addr + gd->arch.tlb_size);
-> >       __asm_invalidate_tlb_all();
-> >
-> > +skip_bbm:
-> >       /*
-> >        * Loop through the address range until we find a page granule that fits
-> >        * our alignment constraints, then set it to the new cache attributes
-> > @@ -1020,6 +1024,27 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
-> >       __asm_invalidate_tlb_all();
-> >   }
-> >
-> > +void mmu_set_attrs(phys_addr_t addr, size_t size, int type)
+> > +     if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK_UXN) &&
+> > +         perm_attrs & PTE_BLOCK_RO)
+> > +             printf("%-5s", " | RO");
+> > +     else if ((perm_attrs & PTE_BLOCK_PXN) && (perm_attrs & PTE_BLOCK_UXN))
+> > +             printf("%-5s", " | RW");
+> > +     else if (perm_attrs & PTE_BLOCK_RO)
+> > +             printf("%-5s", " | RX");
+> > +     else
+> > +             printf("%-5s", " | RWX");
 >
-> Please, add a function description.
->
-> The function should either be static or added to an include file.
+> The string has 6 characters. "%-5s" does not match!
 
-Yea I will
+Ah thanks! That's the misalignment i was chasing
 
+> As the string length is known using a length identifier is superfluous.
 >
-> > +{
-> > +     u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE | PTE_TYPE_VALID;
-> > +
-> > +     switch (type) {
-> > +     case 1:
-> > +     /* RO */
-> > +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_RO;
-> > +             break;
-> > +     case 2:
-> > +             /* RX */
-> > +             attrs |= PTE_BLOCK_RO;
-> > +             break;
-> > +     case 3:
-> > +             /* RW */
-> > +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN;
-> > +     }
-> > +
-> > +     mmu_change_region_attr(addr, size, attrs, false);
-> > +}
-> > +
-> >   #else       /* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
-> >
-> >   /*
-> > diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-> > index d2d3e346a36f..caf1dab05936 100644
-> > --- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-> > +++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-> > @@ -1573,7 +1573,7 @@ void update_early_mmu_table(void)
-> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
-> >                                       PTE_BLOCK_OUTER_SHARE           |
-> >                                       PTE_BLOCK_NS                    |
-> > -                                     PTE_TYPE_VALID);
-> > +                                     PTE_TYPE_VALID, true);
-> >       } else {
-> >               mmu_change_region_attr(
-> >                                       CFG_SYS_SDRAM_BASE,
-> > @@ -1581,7 +1581,7 @@ void update_early_mmu_table(void)
-> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
-> >                                       PTE_BLOCK_OUTER_SHARE           |
-> >                                       PTE_BLOCK_NS                    |
-> > -                                     PTE_TYPE_VALID);
-> > +                                     PTE_TYPE_VALID, true);
-> >   #ifdef CONFIG_SYS_DDR_BLOCK3_BASE
-> >   #ifndef CONFIG_SYS_DDR_BLOCK2_SIZE
-> >   #error "Missing CONFIG_SYS_DDR_BLOCK2_SIZE"
-> > @@ -1594,7 +1594,7 @@ void update_early_mmu_table(void)
-> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
-> >                                       PTE_BLOCK_OUTER_SHARE           |
-> >                                       PTE_BLOCK_NS                    |
-> > -                                     PTE_TYPE_VALID);
-> > +                                     PTE_TYPE_VALID, true);
-> >                       mmu_change_region_attr(
-> >                                       CONFIG_SYS_DDR_BLOCK3_BASE,
-> >                                       gd->ram_size -
-> > @@ -1603,7 +1603,7 @@ void update_early_mmu_table(void)
-> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
-> >                                       PTE_BLOCK_OUTER_SHARE           |
-> >                                       PTE_BLOCK_NS                    |
-> > -                                     PTE_TYPE_VALID);
-> > +                                     PTE_TYPE_VALID, true);
-> >               } else
-> >   #endif
-> >               {
-> > @@ -1614,7 +1614,7 @@ void update_early_mmu_table(void)
-> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
-> >                                       PTE_BLOCK_OUTER_SHARE           |
-> >                                       PTE_BLOCK_NS                    |
-> > -                                     PTE_TYPE_VALID);
-> > +                                     PTE_TYPE_VALID, true);
-> >               }
-> >       }
-> >   }
-> > diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-> > index dbf9ab43e280..0a8ca19e45e9 100644
-> > --- a/arch/arm/include/asm/system.h
-> > +++ b/arch/arm/include/asm/system.h
-> > @@ -287,8 +287,9 @@ void flush_l3_cache(void);
-> >    * @emerg: Also map the region in the emergency table
-> >    */
-> >   void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
-> > -void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs);
-> > +void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs, bool bbm);
+> It would be helpful to add descriptions to the flags in
+> arch/arm/include/asm/armv8/mmu.h.
 >
-> Please, add a function description.
+> https://documentation-service.arm.com/static/5efa1d23dbdee951c1ccdec5
+> describes:
+>
+> "The Unprivileged Execute Never (UXN) and Privileged Execute Never (PXN)
+> attributes can be set separately. This is used to prevent, for example,
+> application code running with kernel privilege, or attempts to execute
+> kernel code while in an unprivileged state."
+>
+> Shouldn't we show the values of UXN and PXN separately?
 
-Thanks
+I had that on my initial patches. But then I decided it's too Arm
+specific to print it.
+I was hoping more archs would fix that so I preferred RO, RW, RX since
+it's arch agnosticI don't mind re-adding it.
+
+Thanks for taking a look!
+
+Cheers
 /Ilias
+>
+> E.g:
+>
+> printf("%s%s%s\",
+>         pte & PTE_BLOCK_RO  ? " | RO " : "",
+>         pte & PTE_BLOCK_PXN ? " | PXN" : "",
+>         pte & PTE_BLOCK_UXN ? " | UXN" : "");
 >
 > Best regards
 >
 > Heinrich
 >
 > >
-> > +void mmu_set_attrs(phys_addr_t addr, size_t size, int type);
+> >       switch (attrs) {
+> >       case PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE):
+> > @@ -1112,3 +1123,8 @@ void __weak enable_caches(void)
+> >       icache_enable();
+> >       dcache_enable();
+> >   }
+> > +
+> > +void arch_dump_mem_attrs(void)
+> > +{
+> > +     dump_pagetable(gd->arch.tlb_addr, get_tcr(NULL, NULL));
+> > +}
+> > diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
+> > index 0ab681c893d3..6af8cd111a44 100644
+> > --- a/arch/arm/include/asm/armv8/mmu.h
+> > +++ b/arch/arm/include/asm/armv8/mmu.h
+> > @@ -66,6 +66,7 @@
+> >   #define PTE_BLOCK_NG                (1 << 11)
+> >   #define PTE_BLOCK_PXN               (UL(1) << 53)
+> >   #define PTE_BLOCK_UXN               (UL(1) << 54)
+> > +#define PTE_BLOCK_RO            (UL(1) << 7)
+> >
 > >   /*
-> >    * smc_call() - issue a secure monitor call
-> >    *
-> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> > index 2ef936aab757..13f4e8e640ef 100644
-> > --- a/arch/arm/mach-snapdragon/board.c
-> > +++ b/arch/arm/mach-snapdragon/board.c
-> > @@ -577,7 +577,7 @@ static void carve_out_reserved_memory(void)
-> >               if (i == count || start + size < res[i].start - SZ_2M) {
-> >                       debug("  0x%016llx - 0x%016llx: reserved\n",
-> >                             start, start + size);
-> > -                     mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
-> > +                     mmu_change_region_attr(start, size, PTE_TYPE_FAULT, true);
-> >                       /* If this is the final region then quit here before we index
-> >                        * out of bounds...
-> >                        */
+> >    * AttrIndx[2:0]
+> > @@ -75,6 +76,7 @@
+> >   #define PMD_ATTRMASK                (PTE_BLOCK_PXN          | \
+> >                                PTE_BLOCK_UXN          | \
+> >                                PMD_ATTRINDX_MASK      | \
+> > +                              PTE_BLOCK_RO           | \
+> >                                PTE_TYPE_VALID)
+> >
+> >   /*
+> > diff --git a/cmd/meminfo.c b/cmd/meminfo.c
+> > index 5e83d61c2dd3..3915e2bbb268 100644
+> > --- a/cmd/meminfo.c
+> > +++ b/cmd/meminfo.c
+> > @@ -15,6 +15,10 @@
+> >
+> >   DECLARE_GLOBAL_DATA_PTR;
+> >
+> > +void __weak arch_dump_mem_attrs(void)
+> > +{
+> > +}
+> > +
+> >   static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
+> >   {
+> >       ulong end = base + size;
+> > @@ -54,6 +58,7 @@ static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
+> >
+> >       puts("DRAM:  ");
+> >       print_size(gd->ram_size, "\n");
+> > +     arch_dump_mem_attrs();
+> >
+> >       if (!IS_ENABLED(CONFIG_CMD_MEMINFO_MAP))
+> >               return 0;
 >
