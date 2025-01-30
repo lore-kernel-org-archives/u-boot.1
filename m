@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10BCAC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 23:26:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A16BC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 23:31:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AF7E80C96;
-	Fri, 31 Jan 2025 00:26:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6657880763;
+	Fri, 31 Jan 2025 00:31:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OKdCkl+b";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ykOVcCQo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C91A180F0E; Fri, 31 Jan 2025 00:26:16 +0100 (CET)
+ id 7008B8078B; Fri, 31 Jan 2025 00:31:04 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D608880C85
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 00:26:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84651805DA
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 00:31:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,14 +28,14 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1738279572;
- bh=5cj1D6Bv9u0DoCfbOYiKb1RAJoGj6j2lY6sEIEx56Wk=;
- b=OKdCkl+bxeU58WAPtiNczkiZ6L12/QnLDdSrYmfjpr8Gtf7CpUayJn8SyUhngqaMsbm66CDdy
- IU6lTnAFNo+rojGsCq1qkN+DHMoxmR+4O7WWGpx2YbU3/7PrUM0G9ioG9jx4LHrjkZjBIUhdecY
- 3BNDgD1HM2xeCwn5yvwcCwvihRDzouER3zHwZSAlt7GCP+B30VO0PG8AKDop7NLB7ugyiyruKb4
- MgDe+FyzJYK1U/fZWzs9CUkteWAv8oBxZcQs8FKlJn51UFvg4OiJT8i+4atB/g0ABU8aiqzPRT+
- 635shxTmexKCwpwc5XUcoFsaHThlvxBa2S1CplIIPX5g==
-X-Forward-Email-ID: 679c0a862d70e7e05884070d
+ s=fe-e1b5cab7be; t=1738279859;
+ bh=Rl8+eWW9t76P4wE1zSgBPkUruJ45sEKrbs0JnAp5MBs=;
+ b=ykOVcCQorPMd9ZiQqEke3gKAe4QSSd3h4QA1KWGGAo97ImI/4SsevRniXIybKTZuWobs8hZyv
+ CkRLxE8MXwLXmNSmsK2lEQGaGgj6r6FioXztpbwI/l+DYFjSe8+FhiKyymz7kERiEn6+VVfZ+DP
+ PAv9ysLp+n78HmCcNwY/VuwEpItY85YPMst6thYZ4C2jKb667T6VvMNiGxnBeainaF/YD50zUaM
+ o8jXmF9IHNX1kTgoiVibxoQza3rbTmDqzQx1tjXA+NwBkPivuGawIsrgJMiFMcm1whYeVcDtyTp
+ qJBvpFJ25HPNJCGMTqYR36m6DKN9QFjbadCXu4Y05WnQ==
+X-Forward-Email-ID: 679c0ba72d70e7e0588407cb
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 0.4.40
@@ -43,11 +43,11 @@ X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <025cabb1-026d-4adc-a0bf-1f8d53a39221@kwiboo.se>
-Date: Fri, 31 Jan 2025 00:25:51 +0100
+Message-ID: <44fec4b4-c823-47b3-a962-b524e3917423@kwiboo.se>
+Date: Fri, 31 Jan 2025 00:30:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/20] mmc: rockchip_sdhci: Add support for RK3576
+Subject: Re: [PATCH 19/20] net: dwc_eth_qos_rockchip: Add support for RK3576
 To: Heiko Stuebner <heiko@sntech.de>
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
  lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
@@ -55,10 +55,10 @@ Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
  detlev.casanova@collabora.com, u-boot@lists.denx.de,
  sebastian.reichel@collabora.com
 References: <20241121142731.1202209-1-heiko@sntech.de>
- <20241121142731.1202209-18-heiko@sntech.de>
+ <20241121142731.1202209-20-heiko@sntech.de>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20241121142731.1202209-18-heiko@sntech.de>
+In-Reply-To: <20241121142731.1202209-20-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -80,57 +80,25 @@ X-Virus-Status: Clean
 Hi Heiko,
 
 On 2024-11-21 15:27, Heiko Stuebner wrote:
-> Add support for RK3576 to the rockchip sdhci driver.
-> 
-> It's pretty similar to its cousins found in the RK3568 and RK3588 and the
-> specific hs400-tx-tap number was taken from the vendor-u-boot.
+> Add rk_gmac_ops and other special handling that is needed for GMAC to
+> work on RK3576.
 > 
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 > ---
->  drivers/mmc/rockchip_sdhci.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
-> 
-> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-> index da630b9d97a..9571e7d66c9 100644
-> --- a/drivers/mmc/rockchip_sdhci.c
-> +++ b/drivers/mmc/rockchip_sdhci.c
-> @@ -656,6 +656,14 @@ static const struct sdhci_data rk3568_data = {
->  	.hs400_txclk_tapnum = 0x8,
->  };
->  
-> +static const struct sdhci_data rk3576_data = {
-> +	.set_ios_post = rk3568_sdhci_set_ios_post,
-> +	.set_clock = rk3568_sdhci_set_clock,
-> +	.config_dll = rk3568_sdhci_config_dll,
-> +	.hs200_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
-> +	.hs400_txclk_tapnum = 0x7,
+>  drivers/net/dwc_eth_qos.c          |   4 +
+>  drivers/net/dwc_eth_qos_rockchip.c | 141 ++++++++++++++++++++++++++++-
+>  2 files changed, 144 insertions(+), 1 deletion(-)
 
-Please add following to fix HS200+ mode together with [1] and [2].
+[snip]
 
-  .hs400_cmdout_tapnum = 0x7,
-  .hs400_strbin_tapnum = 0x5,
-  .ddr50_strbin_delay_num = 0xa,
+The code added in this patch does not seem to match the code added in
+mainline Linux kernel.
 
-[1] https://patchwork.ozlabs.org/patch/2038152/
-[2] https://patchwork.ozlabs.org/patch/2038155/
+Feel free to squash "fixup: net: dwc_eth_qos_rockchip: Add support for
+RK3576" at [1] to adjust this to closer match the Linux kernel driver,
+similar to remaining supported SoCs in this driver.
+
+[1] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3576-2025.04-wip/
 
 Regards,
 Jonas
-
-> +};
-> +
->  static const struct sdhci_data rk3588_data = {
->  	.set_ios_post = rk3568_sdhci_set_ios_post,
->  	.set_clock = rk3568_sdhci_set_clock,
-> @@ -673,6 +681,10 @@ static const struct udevice_id sdhci_ids[] = {
->  		.compatible = "rockchip,rk3568-dwcmshc",
->  		.data = (ulong)&rk3568_data,
->  	},
-> +	{
-> +		.compatible = "rockchip,rk3576-dwcmshc",
-> +		.data = (ulong)&rk3576_data,
-> +	},
->  	{
->  		.compatible = "rockchip,rk3588-dwcmshc",
->  		.data = (ulong)&rk3588_data,
-
