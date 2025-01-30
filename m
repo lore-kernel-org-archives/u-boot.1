@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D968FC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 07:21:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B716C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 07:21:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B77480D1C;
-	Thu, 30 Jan 2025 08:21:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BF6EA8203B;
+	Thu, 30 Jan 2025 08:21:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QHvjhpLn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DyYAkigw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B201981F0D; Thu, 30 Jan 2025 08:21:35 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 431958201E; Thu, 30 Jan 2025 08:21:41 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D15DA81F95
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:21:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 69AA681F0D
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:21:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43622267b2eso4333175e9.0
- for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:21:31 -0800 (PST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43635796b48so2290205e9.0
+ for <u-boot@lists.denx.de>; Wed, 29 Jan 2025 23:21:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738221691; x=1738826491; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738221699; x=1738826499; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KICAciBS1Dm1QdXLPe+9RsuF2+IGx+Q6jXy+Aj1RYr8=;
- b=QHvjhpLnhKoq6SJm2SPnTiFrT8yLxlTa4yGmrhPp6bARGoo/Nx3tR3mAXa7MdKeSUC
- h2reDI4qGryEFxt31r5gRI2ER7fztT1tD7RtiHNte6emieQUMrxalFAB3NTLkfASobW5
- UE8jdi+mXTTW1K01C3YdT2HCOYsJmEzoQpxbZtF5jT5YPf7iM6D4rtpmI6k3vvT+oSRa
- fFZ5k+ub8+lT4H25G9qJHndtjfyzWvClrWmufY7xNHMjOqOiyAtPyityWhjQd97uzhM9
- o9w244h7Uk09lKq6Sby/4dB9vhmPNjjwbHBZ6WTcHsaqvOwK8AsJKPowroFVjVo5YQvv
- ASAQ==
+ bh=TYut4AQRW/HlcPcpg6ffEWgueoLjAyxY6Wo9r/v5isE=;
+ b=DyYAkigw4+zoT3dLcSVJQt4hGNiWwu7fQCT2wr58VyCDGeRVHNyDlh8u9FAUW84ZFB
+ XLLW/pvisqU2jM/zbVrxzGYJhv+bTyPWctxthDAgQ9l/j5OcHFpS3s99l14oOSbIodFS
+ C3zW5JdhFzRYruUBI0G4p0+IDJq7ot24Ley15natdy9LOS/yY+0YtT5yRuaQU2D/vrQQ
+ vm15Y3zDAOZsK7KWFeAA/ch7/D4tV1mHSe7OUg9AKygBaABBKTTWL/ckw6YgTG4RCVwO
+ W4ccu7DpD8HqTZKkGGT33xj232PEFXmDCFH7vGU+0HKY5aERjGlT9DLIGTRutcfIxORM
+ 0yzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738221691; x=1738826491;
+ d=1e100.net; s=20230601; t=1738221699; x=1738826499;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KICAciBS1Dm1QdXLPe+9RsuF2+IGx+Q6jXy+Aj1RYr8=;
- b=AJwguwadwYOGElmJbr0o6nnHkl7tc7Q3ZXi17nfNW7v019SzEcPNZyUdmphYeKuiE9
- pGlto5+bY2kbX5IkwlotF4t7Yc7ESGjDyGTlHVwa7qlWYRj9R8HUEMtsKAZ4SgVbdHH7
- xagMJUoeiluKCIABuTKH4n+nlQ1y/1AUU6owxhTf+PVCIz/580oOIUwi2euYATjndodi
- 7g9omy34P/3h7kXKCpw+84DddwlOG9cixVi8C7TGi73lw8a+9SEgCyq+j6ZoTN8dIYOt
- CCVNI7Q7JIr4hJBURRthQ3NFDIF03ZhcJ3L2rGPB1CEThhcz4gmYo47clxLmt54U1MhK
- RFRw==
+ bh=TYut4AQRW/HlcPcpg6ffEWgueoLjAyxY6Wo9r/v5isE=;
+ b=lNQza3Gs3A60i9roTkrhXi2LVqAaG5Sb7wJdkVdq7sH7NjdYGPBsupQzKNLLqujUdD
+ 9AAN8qP2ymlOsiQYIENV6gtxSrvnGbz5Og3c2ioRcmDUdGc3sqh8ruP0Adc2SP/2dW2Z
+ 04JMMIcqIkyYb40fNP+wSokVTDKcMKPqyVhMpo+MU8i97Bt+5OZPBVUA4ocepXDA1Prk
+ kspbXQXoWBW+eHHDcXpQ+PaPM9ZJDREs8PlsNQZU5eKKuxU6Ul8wsBDzuKS067H64TFB
+ Ouj/LZAMO9FDYt3DDANnEGoqmbY9Msdwfy4yXh7SLuOmcC1ydqfI7Ei2hgKIfVXz6vCr
+ 1McQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUu/nUvGRpye9CBcqBi9XiD9ShxHps4JVD/iQqEJnBFMSTuY6gcbtOovXjSrOLFcjwZYI8YjgU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz4xHbDKhHtKxFTUt7fitgq4cqJO/FMUMAG6Er/dTEvzIrv9mb0
- WRjValhekB1JpYuoo0nt45X9semXOjvJ6LjOmdB/p6OtTd794SXEeR7Yu7Vr/30=
-X-Gm-Gg: ASbGncu8CVELCZ1COmBhUglKHlUiCVVc+LmMqYkueec0SGcsygBkS2bg1EcyW9kY/2g
- 6QCBoqyKKOCd6MbHTcbuvU6KcrSZtWjvZuk4y6D/oFm0MmBb2xzkLwfBG5Hp6uWaj53N01b1gUc
- oTWEiY8srldWKf8a13tbAIlMPXJSNe6s9UCYmzs3lDDDA7fcLZusUuOrxmp/24yrkR77blvpcuQ
- VM9cI6SVovKnS3EpuV1NYujE5tgownH7IHbg82TBrjmV4Wj2yikN0GLvBqkkQXkcNvyWMbsdPIB
- hCpK3y+NWUTamw8pG6zJEpxXLme9XmzZqwNDIrrZkO6WKFNXsw==
-X-Google-Smtp-Source: AGHT+IGkmrQfKLpskhAbZdr19pl/n83nkMDfmWchUPEZt3cR7QOwqHzEyT6GZLduwbMFM0tCxQO4CQ==
-X-Received: by 2002:a05:600c:5489:b0:434:a0bf:98ea with SMTP id
- 5b1f17b1804b1-438dc3becffmr45456075e9.9.1738221691179; 
- Wed, 29 Jan 2025 23:21:31 -0800 (PST)
+ AJvYcCXwSCXENWbNgXrkHYEqcmQ7fT5AVOw6tm/su0TWD2q357glzT+E1GmjxfGiy4Kl2xbHgrSMTlw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1XyZCDAiSre5/P8e5AgbQsZOwECE5mfeacaKfX1Saml9LyjIQ
+ TSnDb6j/ZpeNGthdacWI3SXaGyfFNX3XirVhwj+TJpTFFpUfrfkDvSqlVf/Mba8=
+X-Gm-Gg: ASbGncucaSFX9YhBPd+U/SUj7wAvMPCcT86ypU0WG20XHvYF2wnMltm/1/ewrd/D+n3
+ /i/0zUtNrPKMznQn6y4yf0LCBtIyn4Dm+PF6ANA7Ar2gcq6MfRvFgX3CEBXK1ybPVVEFdh4tpEs
+ zoB5gxvgm1s5kpOLUXVlKmu7dmF9wrVDwnGm8ldZcZbba/SfzFdTQnkjRWQsRxHh/gq8VWdPVnU
+ /fUZ5q93soa6uGAjCJPOoGkECUZFd0ByFMUtxRSKZvKU4C0vt2JCS6Olzvd/7Ej5gL8FwqAaT3C
+ rB9+dFZdP50dPTU0or3PEbQPlKVjNGRsC/Avl3zohTVaQmCkIA==
+X-Google-Smtp-Source: AGHT+IGxzrXItzn+CZ6bNrTd5m2jb8vfgGD5tBMmuCABg11UHAh5wsASLfUcMoi95RXbqdKMm6u18Q==
+X-Received: by 2002:a05:600c:1f8c:b0:434:ffb2:f9cf with SMTP id
+ 5b1f17b1804b1-438e1708a35mr15653435e9.14.1738221698884; 
+ Wed, 29 Jan 2025 23:21:38 -0800 (PST)
 Received: from hades.. (ppp176092181030.access.hol.gr. [176.92.181.30])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438dcc6df2asm48076345e9.29.2025.01.29.23.21.28
+ 5b1f17b1804b1-438dcc6df2asm48076345e9.29.2025.01.29.23.21.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Jan 2025 23:21:30 -0800 (PST)
+ Wed, 29 Jan 2025 23:21:38 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: maz@kernel.org,
 	trini@konsulko.com,
@@ -81,22 +81,21 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>,
  =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
  Sam Protsenko <semen.protsenko@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
  Michal Simek <michal.simek@amd.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
-Subject: [RFC PATCH 3/4] arm64: mmu_change_region_attr() add an option not to
- break PTEs
-Date: Thu, 30 Jan 2025 09:20:28 +0200
-Message-ID: <20250130072100.27297-4-ilias.apalodimas@linaro.org>
+Subject: [RFC PATCH 4/4] arm64: Change mapping for data/rodata/text
+Date: Thu, 30 Jan 2025 09:20:29 +0200
+Message-ID: <20250130072100.27297-5-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
 References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
@@ -118,155 +117,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ARM ARM on section 8.17.1 describes the cases where
-break-before-make is required when changing live page tables.
-Since we can use this function to tweak block and page permssions,
-where BBM is not required add an extra argument to the function.
-
-While at it add a function we can use to change the attributes of normal
-memory without breaking the pages tables first
+Now that we have everything in place switch the page permissions for
+.rodata, .text and .data just after we relocate everything in top of the
+RAM.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/cpu/armv8/cache_v8.c           | 27 ++++++++++++++++++++++++-
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 ++++-----
- arch/arm/include/asm/system.h           |  3 ++-
- arch/arm/mach-snapdragon/board.c        |  2 +-
- 4 files changed, 34 insertions(+), 8 deletions(-)
+ common/board_r.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index a4ca56c8ed42..60d0870013e8 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -968,11 +968,14 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
-  * The procecess is break-before-make. The target region will be marked as
-  * invalid during the process of changing.
-  */
--void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
-+void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs, bool bbm)
- {
- 	int level;
- 	u64 r, size, start;
+diff --git a/common/board_r.c b/common/board_r.c
+index 179259b00de8..38944f600fd6 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -170,6 +170,13 @@ static int initr_reloc_global_data(void)
+ 	efi_save_gd();
  
-+	if (!bbm)
-+		goto skip_bbm;
+ 	efi_runtime_relocate(gd->relocaddr, NULL);
 +
- 	start = addr;
- 	size = siz;
- 	/*
-@@ -997,6 +1000,7 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
- 			   gd->arch.tlb_addr + gd->arch.tlb_size);
- 	__asm_invalidate_tlb_all();
- 
-+skip_bbm:
- 	/*
- 	 * Loop through the address range until we find a page granule that fits
- 	 * our alignment constraints, then set it to the new cache attributes
-@@ -1020,6 +1024,27 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
- 	__asm_invalidate_tlb_all();
- }
- 
-+void mmu_set_attrs(phys_addr_t addr, size_t size, int type)
-+{
-+	u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE | PTE_TYPE_VALID;
++#if (IS_ENABLED(CONFIG_ARM64))
++	mmu_set_attrs((u64)(__start_rodata), (u64)(__end_rodata - __start_rodata), 1);
++	mmu_set_attrs((u64)(__start_data), (u64)(__end_data - __start_data), 3);
++	mmu_set_attrs((u64)(__text_start), (u64)(__text_end - __text_start), 2);
++#endif
 +
-+	switch (type) {
-+	case 1:
-+	/* RO */
-+		attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_RO;
-+		break;
-+	case 2:
-+		/* RX */
-+		attrs |= PTE_BLOCK_RO;
-+		break;
-+	case 3:
-+		/* RW */
-+		attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN;
-+	}
-+
-+	mmu_change_region_attr(addr, size, attrs, false);
-+}
-+
- #else	/* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
- 
- /*
-diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-index d2d3e346a36f..caf1dab05936 100644
---- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-+++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-@@ -1573,7 +1573,7 @@ void update_early_mmu_table(void)
- 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
- 					PTE_BLOCK_OUTER_SHARE		|
- 					PTE_BLOCK_NS			|
--					PTE_TYPE_VALID);
-+					PTE_TYPE_VALID, true);
- 	} else {
- 		mmu_change_region_attr(
- 					CFG_SYS_SDRAM_BASE,
-@@ -1581,7 +1581,7 @@ void update_early_mmu_table(void)
- 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
- 					PTE_BLOCK_OUTER_SHARE		|
- 					PTE_BLOCK_NS			|
--					PTE_TYPE_VALID);
-+					PTE_TYPE_VALID, true);
- #ifdef CONFIG_SYS_DDR_BLOCK3_BASE
- #ifndef CONFIG_SYS_DDR_BLOCK2_SIZE
- #error "Missing CONFIG_SYS_DDR_BLOCK2_SIZE"
-@@ -1594,7 +1594,7 @@ void update_early_mmu_table(void)
- 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
- 					PTE_BLOCK_OUTER_SHARE		|
- 					PTE_BLOCK_NS			|
--					PTE_TYPE_VALID);
-+					PTE_TYPE_VALID, true);
- 			mmu_change_region_attr(
- 					CONFIG_SYS_DDR_BLOCK3_BASE,
- 					gd->ram_size -
-@@ -1603,7 +1603,7 @@ void update_early_mmu_table(void)
- 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
- 					PTE_BLOCK_OUTER_SHARE		|
- 					PTE_BLOCK_NS			|
--					PTE_TYPE_VALID);
-+					PTE_TYPE_VALID, true);
- 		} else
  #endif
- 		{
-@@ -1614,7 +1614,7 @@ void update_early_mmu_table(void)
- 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
- 					PTE_BLOCK_OUTER_SHARE		|
- 					PTE_BLOCK_NS			|
--					PTE_TYPE_VALID);
-+					PTE_TYPE_VALID, true);
- 		}
- 	}
- }
-diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-index dbf9ab43e280..0a8ca19e45e9 100644
---- a/arch/arm/include/asm/system.h
-+++ b/arch/arm/include/asm/system.h
-@@ -287,8 +287,9 @@ void flush_l3_cache(void);
-  * @emerg: Also map the region in the emergency table
-  */
- void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
--void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs);
-+void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs, bool bbm);
  
-+void mmu_set_attrs(phys_addr_t addr, size_t size, int type);
- /*
-  * smc_call() - issue a secure monitor call
-  *
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 2ef936aab757..13f4e8e640ef 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -577,7 +577,7 @@ static void carve_out_reserved_memory(void)
- 		if (i == count || start + size < res[i].start - SZ_2M) {
- 			debug("  0x%016llx - 0x%016llx: reserved\n",
- 			      start, start + size);
--			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
-+			mmu_change_region_attr(start, size, PTE_TYPE_FAULT, true);
- 			/* If this is the final region then quit here before we index
- 			 * out of bounds...
- 			 */
+ 	return 0;
 -- 
 2.43.0
 
