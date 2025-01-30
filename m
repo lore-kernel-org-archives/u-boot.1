@@ -4,96 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD872C02190
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:13:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F7CDC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:23:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4155B82012;
-	Thu, 30 Jan 2025 11:13:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 94C7382012;
+	Thu, 30 Jan 2025 11:23:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QuL9t+Dg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xZjCLroO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEA6780C85; Thu, 30 Jan 2025 11:13:15 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7F0F582054; Thu, 30 Jan 2025 11:23:36 +0100 (CET)
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [IPv6:2a00:1450:4864:20::341])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7B8C82076
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:13:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C829780C85
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:23:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1738231983; x=1738836783; i=xypron.glpk@gmx.de;
- bh=eBW2PzPVHoTvZBXtAVWbELfccH6JeK3RDtoXQm9Lzp8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=QuL9t+Dgs0+qDMLM5XXPbRrNE2CqaNVJpAioX7gXF8GbamvIsn4imlTOEUdYrhRJ
- fZ79k1/diHA/H1LGSnC1B2aLdmd/u9Vhs7DMRBfs2zqsZ3CDS1O02VzbW8R1Q39Wp
- XswQoA+hVhIi6p2jL+TUzXsWI0dbkd15jqiP9VdPJOp5G+qeQyM8z+JGftFBVjCHQ
- 1XY9pr45sltSJgDPnfaNThrx/hZKU31XH9yD9IQzPTxMhiKrcbizE5ABDJmBwOhUU
- vqEFzYy4OqwoBpDzDxTG/cqbK5Eauw8uhKrJwkkxoAy2jAja0QgPj8FF/KHO+EioX
- 2FOu5lFyIfV2tth/jw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MmlXK-1tDlxR1gfO-00iz9T; Thu, 30
- Jan 2025 11:13:03 +0100
-Message-ID: <60b99e2f-a354-4449-bdd2-abba07615321@gmx.de>
-Date: Thu, 30 Jan 2025 11:12:59 +0100
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x341.google.com with SMTP id
+ 5b1f17b1804b1-436326dcb1cso3958935e9.0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:23:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738232613; x=1738837413; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fludrvrTSG1EzA+p+JM3aPGvQUri8APPhle1cCn3DGI=;
+ b=xZjCLroOL2wMjXl5NAw1BVAHTWPIIRiuBS1yC3kVSk0im64KrFE1YV1amZkczmnwdj
+ 1SyN/P0pMPY7eAXFdWPmJs0gbpJYDrDZEr9cicAAJRp9rW9o2dr6FA1Ncr6CiEtRk1GU
+ YeDTLmjH1WvI7Z0oFsHiOQ3Ms8HoBr2dCDfgXigTgHLpR12FSP3r8UIREJ80HD3xWXul
+ AHLSMm7fELXJHOKh83OHNF8BGeQ4BLjPi4EQwhdea4FSvM98fkHpn1StMVh9lF7J4rI5
+ krm3nIR8j2xOqg3YS+oplhBwEiEgzfuCVjxj8dhRaAbzLzgHVviKtduzdBnWwURKQmQu
+ VwrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738232613; x=1738837413;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fludrvrTSG1EzA+p+JM3aPGvQUri8APPhle1cCn3DGI=;
+ b=L5pwVbcyceLo3gJsYkoI/vwhAx6JsSNrBJmx7y/Hi+71VR7JI+vnFHWwy6fPdfTUxz
+ eXO0FRBgc8MntASYADSla584NC5WWy02FL5vwfHxxv7HSnwYo1VtsNnhQk29rnw4/lf/
+ UanIwlM7xG8BMaaFeSAR3A0Jkxt8ZX3GvaV/CKkCKw2HIyo+jKif9/t9IqTft9Fupxgg
+ nZS1tRvWtkKemhki8zjuw6dXRSemswLJ5SrvjrkaNYcFcAHU7eF2FVsLUn5ZiNlwiN6+
+ cmVNZKSwIoaKB68P4UmWoqTHR40k/Mi2GTdqajwAiiJZGFCjcU/7t9YSyUrmMcLYjzDf
+ PX3w==
+X-Gm-Message-State: AOJu0Yz9E97PdMAmBdMTlffPlLZ1qT33VXSDh2TbzEheLPlNsw24qhGy
+ feuuvPWvk9gWG2AkxjQyxQz3DCak9gBYJKXtV/DBbRM61ZCdNgVxK5nyjRIEbb8=
+X-Gm-Gg: ASbGncuIgvT7gdFvFyM35+8Kdu86lDkGuQA9uqaYwrRW4y4g+B7Q73ERPlNV8kMX/xB
+ fzsPyWhEC7J3lzprClsilUQMTz3fRGcl6k2bQrw9aP2XCmCjGFkvVZbNQFMc2XwrRV4rIUmonEX
+ tZn0znTqiSbL1ur1G/0vozQqan8vXR9G1N2LbUw1RYAabHSLSP5o+dA9ssFWggKENhMGKgnv3uN
+ aaQU9OAw0iegc3wIm081l0GNcFhxG7tfadp6pLA68eRbzZ9fLmCbgJB1f5BcbWVhqlP84qwghxA
+ H+O6h/Y4VPxIaAxeFlJW01M8/qjwgBXVceXl3IHkv9vasB3R0+Petk5JABU/9j1xDuZbCvQ=
+X-Google-Smtp-Source: AGHT+IHQPeLKG6xjciYFCGttv3aX9IifW/CD4PbFZKJp76XqQJrTRBL7JLg00ZAXHzalLicFOpntKw==
+X-Received: by 2002:a5d:50c2:0:b0:38b:d7d2:12f2 with SMTP id
+ ffacd0b85a97d-38c520bf925mr4087021f8f.54.1738232613104; 
+ Thu, 30 Jan 2025 02:23:33 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:14f6:2931:46df:28c5?
+ ([2a01:e0a:3cb:7bb0:14f6:2931:46df:28c5])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38c5c102f7dsm1563611f8f.30.2025.01.30.02.23.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Jan 2025 02:23:32 -0800 (PST)
+Message-ID: <d7c1658a-fae9-4237-b3cc-307a291972ff@linaro.org>
+Date: Thu, 30 Jan 2025 11:23:32 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 3/4] arm64: mmu_change_region_attr() add an option not
- to break PTEs
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, =?UTF-8?Q?Pierre-Cl=C3=A9ment_Tosi?=
- <ptosi@google.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Michal Simek
- <michal.simek@amd.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io, maz@kernel.org,
- trini@konsulko.com, CFSworks@gmail.com
-References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <20250130072100.27297-4-ilias.apalodimas@linaro.org>
+Subject: Re: LwIP and multiple network interfaces
+To: E Shattow <e@freeshell.de>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <de7bf6b3-fd45-4c8f-a492-bd41db2aa904@freeshell.de>
+ <20250102224724.GS3476@bill-the-cat>
+ <aa6d5dce-473c-447f-91b9-fe802f0f520d@freeshell.de>
+ <20250103014049.GT3476@bill-the-cat>
+ <14a9901e-00fd-4a5e-aeb1-ffbe715f8965@freeshell.de>
+ <7c20233b-d61a-4114-bbb3-6866bdd5bbf5@linaro.org>
+ <69678189-22b5-4372-83a4-0e4637975355@freeshell.de>
+ <e3b4fe98-fce5-45e0-970d-d0398e23838d@freeshell.de>
+ <8de045d6-bd41-4115-8bba-5632622c724b@linaro.org>
+ <94d614d2-40fa-4c5f-82dc-680a6b359a07@freeshell.de>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250130072100.27297-4-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:YccUF44PiYMnz3+pkJamXluz7N7+PP1H740+56uVNMeWQkQb8R9
- Ztu6DdHGh6qTvqffWqP7sNVK+5YNyFH57ng1mn756iYu9RDX8LZWnADj/JhnyTRhVqikO8W
- 2NT61Zdra+ryhB2A33Q+E/5kSr16hNnJRh4OUnkRGSdJGhzNogVBN82HppKrF79IOpFJgKQ
- oBDBf7R7MKVMHtg1GyYVA==
-UI-OutboundReport: notjunk:1;M01:P0:ZxjUxCX3nHY=;sWYTDFPQFCLjFSW5/yTQ9oRgVIf
- MCRZPqUv1cbB4Dv8gUBAsvFw1xHC9vOft0gbW0H77AEZdcJkkYCEK826SLsrYGK5E4NsLEH16
- G+yzl2ZXiFZyM+CllqlaSICYxcKKCCQT/oNyoRpU0GrrATOOQmwxBRQOLyPhpUcimChC4PcHI
- qOKELkC9dMe6YLraVQ7UUcNv4EEAHpZEX35PBr+SbRa9h4YiQSENhEkLAhZkfWGXIFw0afiZw
- gGdyfloI+LqTkP4JMd+WpGFCMTAMik/FzhTXOl3+GedD21gU5bTWCZbyJZD0ZuT+HPGtXPJO9
- e7Ih/Qi9sTgc2JsNaRqkcgBGpbXXaI4XqibcfrjpW5pxNXMgLnfi6Cs1Wa59rdJs9tpHP61pe
- kUeIhKFP2tJQc+c3z1Ol6Fzlz8+j/0IjN8NJyXSPPLGPkjezpERgG7OSO/7IyRB7z9+BUkwnV
- MckJExbRv/gFPkqvwOmP09JsW/kne2fsos64go/pprjTNlU19da9Dw/LehcQrfONbLrDX+syo
- T2dBYcwbdMNaAJH9br3j2VO7HBHdVectj4CDgvMPTZFfQhqaK45QDHiNs6zUnyZB64W98pqwC
- t7vNMwNv2h7T5k77+zFyoGhE+iR0gMk9JoGN3WqVrarqHnskqBUuwiQV7nVWtZ0QwqQj1nYjI
- IlXT27UCoNV9nVmGTfCfb4KzOneEXCHJL5tG4lfZBXeL6wnutQlKcYulXUvdhmNF4ybI58PGJ
- /xCKglQk9kCuF9/2unDy1MzZe0mEUKP40RvmWEm9uSFokjSUCJwzL5aX4Ewt7h6GeAS0MA3xI
- RUn78bhdVcY2Y7vu1MMLH6Da1y6yK+9JOSxvCieHZT1hgT5YWpajdWthRZ5y9QXnploNmFvyx
- sZSAZzSvIAOpYkZnzaJDvxjX3cNi3vs5ANBgVWeNiafoBXr/Qj3Fn4CFY3jm/AxG0VeFMLL3A
- OAWcifafCaaPoMkjaIXPleghSPG1q6riVInx590kRtPy1oP8Ln4zYEc3oqyUM+OS0PsndoyKb
- JNbApGpaFjz5jvVCGxcPnqdVwfiJ7A9sQQubrAO7THVPOTg+hk95hm1q4/GtyZKO0dsizMC/X
- 7OEL9jVSKEjfsC94hnvRmHc3FLWybX/9LeOx32Q62BD1XvasveUXzgdqFS/OHbAJSsA4m5g7x
- YqzJZ/P5etjFZJAnPcGIAGWbCX2Fu5CvGMqUU8o2zFQ==
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <94d614d2-40fa-4c5f-82dc-680a6b359a07@freeshell.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,182 +108,402 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/30/25 07:20, Ilias Apalodimas wrote:
-> The ARM ARM on section 8.17.1 describes the cases where
-> break-before-make is required when changing live page tables.
-> Since we can use this function to tweak block and page permssions,
-> where BBM is not required add an extra argument to the function.
->
-> While at it add a function we can use to change the attributes of normal
-> memory without breaking the pages tables first
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->   arch/arm/cpu/armv8/cache_v8.c           | 27 ++++++++++++++++++++++++-
->   arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 ++++-----
->   arch/arm/include/asm/system.h           |  3 ++-
->   arch/arm/mach-snapdragon/board.c        |  2 +-
->   4 files changed, 34 insertions(+), 8 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8=
-.c
-> index a4ca56c8ed42..60d0870013e8 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -968,11 +968,14 @@ void mmu_set_region_dcache_behaviour(phys_addr_t s=
-tart, size_t size,
->    * The procecess is break-before-make. The target region will be marke=
-d as
->    * invalid during the process of changing.
->    */
-> -void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
-> +void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs, bo=
-ol bbm)
+Hi,
 
-The function description should be moved to the include or be completed
-here.
+On 1/6/25 20:09, E Shattow wrote:
+> 
+> 
+> On 1/6/25 07:43, Jerome Forissier wrote:
+>>
+>>
+>> On 1/4/25 04:05, E Shattow wrote:
+>>> On 1/3/25 09:58, E Shattow wrote:
+>>>>
+>>>>
+>>>> On 1/3/25 02:03, Jerome Forissier wrote:
+>>>>>
+>>>>>
+>>>>> On 1/3/25 02:52, E Shattow wrote:
+>>>>>>
+>>>>>>
+>>>>>> On 1/2/25 17:40, Tom Rini wrote:
+>>>>>>> On Thu, Jan 02, 2025 at 05:34:57PM -0800, E Shattow wrote:
+>>>>>>>
+>>>>>>>> Tom sorry about sending this reply twice, struggle here is with Thunderbird
+>>>>>>>> mail UI sometimes hiding "Reply All" and it missed the mail list first time
+>>>>>>>> around.
+>>>>>>>
+>>>>>>> No problem.
+>>>>>>>
+>>>>>>>> On 1/2/25 14:47, Tom Rini wrote:
+>>>>>>>>> On Thu, Jan 02, 2025 at 02:26:06PM -0800, E Shattow wrote:
+>>>>>>>>>> Problem: 'dhcp' must be ran twice when the network cable is plugged into a
+>>>>>>>>>> port other than the first network port.
+>>>>>>>>>>
+>>>>>>>>>> Network cable plugged into bottom (first) Ethernet port:
+>>>>>>>>>> 1. Power on
+>>>>>>>>>> 2. StarFive # dhcp
+>>>>>>>>>>
+>>>>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete....... done
+>>>>>>>>>> DHCP client bound to address 192.168.2.51 (3678 ms)
+>>>>>>>>>>
+>>>>>>>>>>
+>>>>>>>>>> Network cable plugged into top (second) Ethernet port:
+>>>>>>>>>> 1. Power on
+>>>>>>>>>> 2. StarFive # dhcp
+>>>>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>>>>>>>>>> TIMEOUT !
+>>>>>>>>>> phy_startup() failed: -110
+>>>>>>>>>> FAILED: -110
+>>>>>>>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>>>>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>>>>>>>>>> TIMEOUT !
+>>>>>>>>>> phy_startup() failed: -110
+>>>>>>>>>> FAILED: -110
+>>>>>>>>>> Could not start ethernet@16030000
+>>>>>>>>>> 3. StarFive # dhcp
+>>>>>>>>>> DHCP client bound to address 192.168.2.77 (31 ms)
+>>>>>>>>>
+>>>>>>>>> What happens when you set ethact to 1 first?
+>>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>> '1' literal does not seem to do something so I guess it is meant the id of
+>>>>>>>> the first ethernet interface:
+>>>>>>>
+>>>>>>> Yes, I misspoke sorry.
+>>>>>>>
+>>>>>>>>    From power-on:
+>>>>>>>>
+>>>>>>>> ...
+>>>>>>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+>>>>>>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+>>>>>>>> In:    serial@10000000
+>>>>>>>> Out:   serial@10000000
+>>>>>>>> Err:   serial@10000000
+>>>>>>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+>>>>>>>> starting USB...
+>>>>>>>> No USB controllers found
+>>>>>>>> Working FDT set to ff700a10
+>>>>>>>> StarFive # env print ethact
+>>>>>>>> ## Error: "ethact" not defined
+>>>>>>>> StarFive # env set ethact 1
+>>>>>>>> StarFive # dhcp
+>>>>>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete.........
+>>>>>>>> TIMEOUT !
+>>>>>>>> phy_startup() failed: -110
+>>>>>>>> FAILED: -110
+>>>>>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>>>>>>>> EQOS_DMA_MODE_SWR stuck
+>>>>>>>> FAILED: -110
+>>>>>>>> Could not start ethernet@16030000
+>>>>>>>>
+>>>>>>>> Again, from power-on:
+>>>>>>>>
+>>>>>>>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+>>>>>>>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+>>>>>>>> In:    serial@10000000
+>>>>>>>> Out:   serial@10000000
+>>>>>>>> Err:   serial@10000000
+>>>>>>>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+>>>>>>>> starting USB...
+>>>>>>>> No USB controllers found
+>>>>>>>> Working FDT set to ff700a10
+>>>>>>>> StarFive # env print ethact
+>>>>>>>> ## Error: "ethact" not defined
+>>>>>>>> StarFive # env set ethact ethernet@16040000
+>>>>>>>> StarFive # dhcp
+>>>>>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>>>>>>>> DHCP client bound to address 192.168.2.77 (149 ms)
+>>>>>>>
+>>>>>>> So then yes, the second interface works when ethact is set to use that
+>>>>>>> directly. This is the same behavior as the legacy stack I believe.
+>>>>>>>
+>>>>>>
+>>>>>> Legacy stack does actually rotate and complete successfully when ethact environment variable does not exist and (eventually) configure the second interface though. Here with LwIP the procedure fails.
+>>>>>>
+>>>>>> Notice that here it starts with ethernet@16030000, then rotates to ethernet@16040000 unsuccessfully, and back again to ethernet@16030000 before (again) failing and giving up. There is a network cable plugged into 'ethernet@16040000' port and if we try the command again the environment variable ethact retained 'ethact=ethernet@16040000' from the failed procedure so you're right it works as it should... except that it totally failed to do what was expected the first time.
+>>>>>
+>>>>> That's unexpected indeed.
+>>>>>
+>>>>>> Is this exposing a problem with this board network driver and behavior or is it something with LwIP ?
+>>>>> Hard to tell at this point. One thing I know for sure is that lwIP expects
+>>>>> eth_set_current() (called from do_dhcp()) to actually pick a valid
+>>>>> interface if there is one. So it should definitely select ethernet@16040000
+>>>>> in your scenario. Adding debug prints to eth_set_current(),
+>>>>> eth_current_changed() etc. should help.
+>>>>>
+>>>>> Thanks,
+>>>>
+>>>> StarFive # dhcp
+>>>> !!! eth_set_current(): entered function
+>>>> !!! eth_set_current(): conditional 1
+>>>> !!! eth_set_current(): conditional 2
+>>>> !!! eth_set_current(): conditional 5
+>>>> !!! eth_current_changed(): entered function
+>>>> !!! eth_current_changed(): conditional 2
+>>>> !!! eth_current_changed(): conditional 3
+>>>> !!! eth_current_changed(): leaving function
+>>>> !!! eth_set_current(): leaving function
+>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
+>>>> phy_startup() failed: -110
+>>>> FAILED: -110
+>>>> !!! eth_current_changed(): entered function
+>>>> !!! eth_current_changed(): conditional 2
+>>>> !!! eth_current_changed(): conditional 3
+>>>> !!! eth_current_changed(): leaving function
+>>>> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+>>>> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
+>>>> phy_startup() failed: -110
+>>>> FAILED: -110
+>>>> Could not start ethernet@16030000
+>>>> StarFive #
+>>>>
+>>>> For reference the modified functions:
+>>>>
+>>>> void eth_current_changed(void)
+>>>> {
+>>>>           char *act = env_get("ethact");
+>>>>           char *ethrotate;
+>>>>
+>>>> printf("!!! eth_current_changed(): entered function\n");
+>>>>           /*
+>>>>            * The call to eth_get_dev() below has a side effect of rotating
+>>>>            * ethernet device if uc_priv->current == NULL. This is not what
+>>>>            * we want when 'ethrotate' variable is 'no'.
+>>>>            */
+>>>>           ethrotate = env_get("ethrotate");
+>>>>           if ((ethrotate != NULL) && (strcmp(ethrotate, "no") == 0))
+>>>>           {
+>>>> printf("!!! eth_current_changed(): conditional 1\n");
+>>>>                   return;
+>>>>           }
+>>>>
+>>>>           /* update current ethernet name */
+>>>>           if (eth_get_dev()) {
+>>>> printf("!!! eth_current_changed(): conditional 2\n");
+>>>>                   if (act == NULL || strcmp(act, eth_get_name()) != 0)
+>>>>                   {
+>>>> printf("!!! eth_current_changed(): conditional 3\n");
+>>>>                           env_set("ethact", eth_get_name());
+>>>>                   }
+>>>>           }
+>>>>           /*
+>>>>            * remove the variable completely if there is no active
+>>>>            * interface
+>>>>            */
+>>>>           else if (act != NULL)
+>>>>           {
+>>>> printf("!!! eth_current_changed(): conditional 4\n");
+>>>>                   env_set("ethact", NULL);
+>>>>           }
+>>>> printf("!!! eth_current_changed(): leaving function\n");
+>>>> }
+>>>>
+>>>> void eth_set_current(void)
+>>>> {
+>>>>           static char *act;
+>>>>           static int  env_changed_id;
+>>>>           int     env_id;
+>>>>
+>>>> printf("!!! eth_set_current(): entered function\n");
+>>>>           env_id = env_get_id();
+>>>>           if ((act == NULL) || (env_changed_id != env_id)) {
+>>>> printf("!!! eth_set_current(): conditional 1\n");
+>>>>                   act = env_get("ethact");
+>>>>                   env_changed_id = env_id;
+>>>>           }
+>>>>
+>>>>           if (act == NULL) {
+>>>> printf("!!! eth_set_current(): conditional 2\n");
+>>>>                   char *ethprime = env_get("ethprime");
+>>>>                   void *dev = NULL;
+>>>>
+>>>>                   if (ethprime)
+>>>>                   {
+>>>> printf("!!! eth_set_current(): conditional 3\n");
+>>>>                           dev = eth_get_dev_by_name(ethprime);
+>>>>                   }
+>>>>                   if (dev)
+>>>>                   {
+>>>> printf("!!! eth_set_current(): conditional 4\n");
+>>>>                           eth_set_dev(dev);
+>>>>                   }
+>>>>                   else
+>>>>                   {
+>>>> printf("!!! eth_set_current(): conditional 5\n");
+>>>>                           eth_set_dev(NULL);
+>>>>                   }
+>>>>           } else {
+>>>> printf("!!! eth_set_current(): conditional 6\n");
+>>>>                   eth_set_dev(eth_get_dev_by_name(act));
+>>>>           }
+>>>>
+>>>>           eth_current_changed();
+>>>> printf("!!! eth_set_current(): leaving function\n");
+>>>> }
+>>>>
+>>>> Hopefully this is enough to make sense of it? Let me know, thanks!
+>>>>
+>>>> -E
+>>>
+>>> Postscript I've narrowed it down a bit to net/lwip/net-lwip.c:new_netif() where returning from eth_init() the eth_get_dev() is the second interface (with network cable plugged in) but variable reference udev is still the first interface (with no network cable) when the call to lwip_init() is made. So lwip_init() tries and fails on the first interface even though we already know from eth_init() which interface is valid and ready.
+>>>
+>>> So that is what is happening but I don't know what you would want to do to fix this?
+>>
+>> Perhaps eth_init() has to be called before eth_set_current()/
+>> eth_get_dev()? Can you please try the following patch:
+>>
+>> ---8<-------8<-------8<-------8<-------8<-------8<-------8<----
+>> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+>> index b863047f598..a6fb3824af1 100644
+>> --- a/net/lwip/net-lwip.c
+>> +++ b/net/lwip/net-lwip.c
+>> @@ -127,18 +127,10 @@ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+>>       return 0;
+>>   }
+>>   -static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>> +static void net_lwip_init(void)
+>>   {
+>> -    unsigned char enetaddr[ARP_HLEN];
+>> -    char hwstr[MAC_ADDR_STRLEN];
+>> -    ip4_addr_t ip, mask, gw;
+>> -    struct netif *netif;
+>> -    int ret = 0;
+>>       static bool first_call = true;
+>>   -    if (!udev)
+>> -        return NULL;
+>> -
+>>       if (first_call) {
+>>           eth_init_rings();
+>>           /* Pick a valid active device, if any */
+>> @@ -146,6 +138,18 @@ static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>>           lwip_init();
+>>           first_call = false;
+>>       }
+>> +}
+>> +
+>> +static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>> +{
+>> +    unsigned char enetaddr[ARP_HLEN];
+>> +    char hwstr[MAC_ADDR_STRLEN];
+>> +    ip4_addr_t ip, mask, gw;
+>> +    struct netif *netif;
+>> +    int ret = 0;
+>> +
+>> +    if (!udev)
+>> +        return NULL;
+>>         if (eth_start_udev(udev) < 0) {
+>>           log_err("Could not start %s\n", udev->name);
+>> @@ -198,11 +202,15 @@ static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>>     struct netif *net_lwip_new_netif(struct udevice *udev)
+>>   {
+>> +    net_lwip_init();
+>> +
+>>       return new_netif(udev, true);
+>>   }
+>>     struct netif *net_lwip_new_netif_noip(struct udevice *udev)
+>>   {
+>> +    net_lwip_init();
+>> +
+>>       return new_netif(udev, false);
+>>   }
+>> ---8<-------8<-------8<-------8<-------8<-------8<-------8<----
+>>
+>> Thanks,
+> 
+> Testing with commands:
+> 
+> env set test_url http://ipv4.download.thinkbroadband.com/5MB.zip
+> echo "TEST dhcp"
+> dhcp
+> echo "TEST wget"
+> wget ${test_url}
+> echo "TEST dhcp"
+> dhcp
+> echo "TEST wget"
+> wget ${test_url}
+> 
+> env set test_url http://ipv4.download.thinkbroadband.com/5MB.zip;echo "TEST dhcp";dhcp;echo "TEST wget";wget ${test_url};echo "TEST dhcp";dhcp;echo "TEST wget";wget ${test_url}
+> 
+> # Without patch, board power-on for network cable in ethernet@16030000:
+> TEST dhcp
+> ethernet@16030000 Waiting for PHY auto negotiation to complete...... done
+> DHCP client bound to address 192.168.2.51 (568 ms)
+> TEST wget
+> ##################################################
+> 5242880 bytes transferred in 2632 ms (1.9 MiB/s)
+> Bytes transferred = 5242880 (500000 hex)
+> TEST dhcp
+> DHCP client bound to address 192.168.2.51 (255 ms)
+> TEST wget
+> ##################################################
+> 5242880 bytes transferred in 10763 ms (475.6 KiB/s)
+> Bytes transferred = 5242880 (500000 hex)
+> 
+> 
+> # With patch, board power-on for network cable in ethernet@16030000:
+> TEST dhcp
+> ethernet@16030000 Waiting for PHY auto negotiation to complete...... done
+> DHCP client bound to address 192.168.2.51 (620 ms)
+> TEST wget
+> ##################################################
+> 5242880 bytes transferred in 1580 ms (3.2 MiB/s)
+> Bytes transferred = 5242880 (500000 hex)
+> TEST dhcp
+> DHCP client bound to address 192.168.2.51 (42 ms)
+> TEST wget
+> ##################################################
+> 5242880 bytes transferred in 1580 ms (3.2 MiB/s)
+> Bytes transferred = 5242880 (500000 hex)
+> 
+> 
+> # Without patch, board power-on for network cable in ethernet@16040000:
+> TEST dhcp
+> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
+> phy_startup() failed: -110
+> FAILED: -110
+> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
+> phy_startup() failed: -110
+> FAILED: -110
+> Could not start ethernet@16030000
+> TEST wget
+> TEST dhcp
+> DHCP client bound to address 192.168.2.77 (33 ms)
+> TEST wget
+> ##################################################
+> 5242880 bytes transferred in 1490 ms (3.4 MiB/s)
+> Bytes transferred = 5242880 (500000 hex)
+> 
+> 
+> # With patch, board power-on for network cable in ethernet@16040000:
+> TEST dhcp
+> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
+> phy_startup() failed: -110
+> FAILED: -110
+> ethernet@16040000 Waiting for PHY auto negotiation to complete...... done
+> ethernet@16030000 Waiting for PHY auto negotiation to complete......... TIMEOUT !
+> phy_startup() failed: -110
+> FAILED: -110
+> Could not start ethernet@16030000
+> TEST wget
+> TEST dhcp
+> DHCP client bound to address 192.168.2.77 (24 ms)
+> TEST wget
+> ##################################################
+> 5242880 bytes transferred in 1938 ms (2.6 MiB/s)
+> Bytes transferred = 5242880 (500000 hex)
+> 
+> 
+> This appears no change in outcome with patch applied?
 
->   {
->   	int level;
->   	u64 r, size, start;
->
-> +	if (!bbm)
-> +		goto skip_bbm;
-> +
->   	start =3D addr;
->   	size =3D siz;
->   	/*
-> @@ -997,6 +1000,7 @@ void mmu_change_region_attr(phys_addr_t addr, size_=
-t siz, u64 attrs)
->   			   gd->arch.tlb_addr + gd->arch.tlb_size);
->   	__asm_invalidate_tlb_all();
->
-> +skip_bbm:
->   	/*
->   	 * Loop through the address range until we find a page granule that f=
-its
->   	 * our alignment constraints, then set it to the new cache attributes
-> @@ -1020,6 +1024,27 @@ void mmu_change_region_attr(phys_addr_t addr, siz=
-e_t siz, u64 attrs)
->   	__asm_invalidate_tlb_all();
->   }
->
-> +void mmu_set_attrs(phys_addr_t addr, size_t size, int type)
+Please check [1] and let me know if it works for you.
 
-Please, add a function description.
+[1] https://lists.denx.de/pipermail/u-boot/2025-January/578982.html
 
-The function should either be static or added to an include file.
-
-> +{
-> +	u64 attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE | P=
-TE_TYPE_VALID;
-> +
-> +	switch (type) {
-> +	case 1:
-> +	/* RO */
-> +		attrs |=3D PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_RO;
-> +		break;
-> +	case 2:
-> +		/* RX */
-> +		attrs |=3D PTE_BLOCK_RO;
-> +		break;
-> +	case 3:
-> +		/* RW */
-> +		attrs |=3D PTE_BLOCK_PXN | PTE_BLOCK_UXN;
-> +	}
-> +
-> +	mmu_change_region_attr(addr, size, attrs, false);
-> +}
-> +
->   #else	/* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
->
->   /*
-> diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv=
-8/fsl-layerscape/cpu.c
-> index d2d3e346a36f..caf1dab05936 100644
-> --- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-> +++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-> @@ -1573,7 +1573,7 @@ void update_early_mmu_table(void)
->   					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
->   					PTE_BLOCK_OUTER_SHARE		|
->   					PTE_BLOCK_NS			|
-> -					PTE_TYPE_VALID);
-> +					PTE_TYPE_VALID, true);
->   	} else {
->   		mmu_change_region_attr(
->   					CFG_SYS_SDRAM_BASE,
-> @@ -1581,7 +1581,7 @@ void update_early_mmu_table(void)
->   					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
->   					PTE_BLOCK_OUTER_SHARE		|
->   					PTE_BLOCK_NS			|
-> -					PTE_TYPE_VALID);
-> +					PTE_TYPE_VALID, true);
->   #ifdef CONFIG_SYS_DDR_BLOCK3_BASE
->   #ifndef CONFIG_SYS_DDR_BLOCK2_SIZE
->   #error "Missing CONFIG_SYS_DDR_BLOCK2_SIZE"
-> @@ -1594,7 +1594,7 @@ void update_early_mmu_table(void)
->   					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
->   					PTE_BLOCK_OUTER_SHARE		|
->   					PTE_BLOCK_NS			|
-> -					PTE_TYPE_VALID);
-> +					PTE_TYPE_VALID, true);
->   			mmu_change_region_attr(
->   					CONFIG_SYS_DDR_BLOCK3_BASE,
->   					gd->ram_size -
-> @@ -1603,7 +1603,7 @@ void update_early_mmu_table(void)
->   					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
->   					PTE_BLOCK_OUTER_SHARE		|
->   					PTE_BLOCK_NS			|
-> -					PTE_TYPE_VALID);
-> +					PTE_TYPE_VALID, true);
->   		} else
->   #endif
->   		{
-> @@ -1614,7 +1614,7 @@ void update_early_mmu_table(void)
->   					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
->   					PTE_BLOCK_OUTER_SHARE		|
->   					PTE_BLOCK_NS			|
-> -					PTE_TYPE_VALID);
-> +					PTE_TYPE_VALID, true);
->   		}
->   	}
->   }
-> diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system=
-.h
-> index dbf9ab43e280..0a8ca19e45e9 100644
-> --- a/arch/arm/include/asm/system.h
-> +++ b/arch/arm/include/asm/system.h
-> @@ -287,8 +287,9 @@ void flush_l3_cache(void);
->    * @emerg: Also map the region in the emergency table
->    */
->   void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
-> -void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs);
-> +void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs, =
-bool bbm);
-
-Please, add a function description.
-
-Best regards
-
-Heinrich
-
->
-> +void mmu_set_attrs(phys_addr_t addr, size_t size, int type);
->   /*
->    * smc_call() - issue a secure monitor call
->    *
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon=
-/board.c
-> index 2ef936aab757..13f4e8e640ef 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -577,7 +577,7 @@ static void carve_out_reserved_memory(void)
->   		if (i =3D=3D count || start + size < res[i].start - SZ_2M) {
->   			debug("  0x%016llx - 0x%016llx: reserved\n",
->   			      start, start + size);
-> -			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
-> +			mmu_change_region_attr(start, size, PTE_TYPE_FAULT, true);
->   			/* If this is the final region then quit here before we index
->   			 * out of bounds...
->   			 */
-
+Thanks,
+-- 
+Jerome
+> 
+> -E
