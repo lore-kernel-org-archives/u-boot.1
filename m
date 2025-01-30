@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC4BDC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 03:53:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39C6CC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 03:53:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 354B081F6D;
+	by phobos.denx.de (Postfix) with ESMTP id 8134C81F95;
 	Thu, 30 Jan 2025 04:52:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="IcJfGDyu";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="dA28mtYh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C16780AE4; Thu, 30 Jan 2025 04:52:36 +0100 (CET)
+ id D254E80AE4; Thu, 30 Jan 2025 04:52:36 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF15780B9B
+ by phobos.denx.de (Postfix) with ESMTPS id 0E92380F58
  for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 04:52:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
@@ -31,16 +31,16 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  t=1738209154; x=1769745154;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=drf7n/tV3Dq/VCPrPdPLcU8MZIYc/WAJdojJgGMwchk=;
- b=IcJfGDyug6Zrxc3c5TBdR+8pSYXTR+rNP+JJ0l98NvGvQC3EIMUVH2lb
- crqB6CDWI9muFnYdFOb0S5kWbVv34tQxRi5v+GeKpLK3+EIrsFRUAKluo
- /lqKDEqegJpQ0go3vtSceSZcrRZeXAkluZ/OzDXYZ98NslQCOD55F/qa6
- iPuQHQ769DYMFus4/pz03xzGyk6aBy/ICGuYXLkVTnOtZBz4E7PTLQ0Db
- U+4u3djHhFhVjcRJ8TGYW+AbK5L5fkUxcuhq9KIMzJMyyCsSaP50y72go
- mDj7KET1J1M/S2/MUDT1p7frrWGMvCz7uvqAuV5iE0CVlzwplhyiZlzFc g==;
+ bh=vFmCu4VpB8bKY0bUBAgmO4iW0W6Lnvjc/F3oe8mDWIc=;
+ b=dA28mtYhVbDl4c27XANvFFXU+jrWVJGUzNO7JLtSApFGlO+seiJFltir
+ 2sjGizmIyNVPnS6LQH0s3wWVrsQOrZuo2VwQLd0zIeAWPKEvZyezy4KMz
+ +P9XvhYdGLXaUF5ACrwwdvYaiL/JkHDILcs7WHVZ06SYqPc/XoMWO+rvP
+ 7xOPxTWKnlCfd/+k2mjrZ0BSpu8RijtC6JPbeDxlP29W16Jvxn0sa47du
+ ocaA5t/QSMzCSUzkKKIEVPUbxmI66Ef9KIcC6xYiZPqbstgvoiGMRP43p
+ 9koPuVgGkckGfCUfBtJ6U1nlhNePpRhEm0qDweWVjSRl48hdsuzhrS5b6 g==;
 X-CSE-ConnectionGUID: 6UfhbO/CQrK5c8RpTJRJjg==
-X-CSE-MsgGUID: esdhFeqbQeWP3iENj1Y+UQ==
-X-IronPort-AV: E=Sophos;i="6.13,244,1732604400"; d="scan'208";a="204597336"
+X-CSE-MsgGUID: XeZbSVyfROuujEHEeqiR5w==
+X-IronPort-AV: E=Sophos;i="6.13,244,1732604400"; d="scan'208";a="204597338"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
@@ -48,17 +48,18 @@ Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
 Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
  chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Wed, 29 Jan 2025 20:52:23 -0700
+ 15.1.2507.35; Wed, 29 Jan 2025 20:52:26 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Wed, 29 Jan 2025 20:52:21 -0700
+ 15.1.2507.35 via Frontend Transport; Wed, 29 Jan 2025 20:52:24 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, <pbrobinson@gmail.com>,
  <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 CC: <manikandan.m@microchip.com>
-Subject: [PATCH v2 5/7] pinctrl: at91: Bind GPIO driver to the pinctrl DT node
-Date: Thu, 30 Jan 2025 09:21:55 +0530
-Message-ID: <20250130035157.226995-6-manikandan.m@microchip.com>
+Subject: [PATCH v2 6/7] pinctrl: at91: Add support to align with Linux
+ Devicetree
+Date: Thu, 30 Jan 2025 09:21:56 +0530
+Message-ID: <20250130035157.226995-7-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250130035157.226995-1-manikandan.m@microchip.com>
 References: <20250130035157.226995-1-manikandan.m@microchip.com>
@@ -81,63 +82,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In Linux DT,the pinctrl node acts as parent nodes with all other
-gpio banks as child nodes and a single driver in Linux handles both
-pinctrl settings and gpio requests.Current U-Boot DT maintains both
-pinctrl and gpio nodes as separate nodes and offers two different class
-of U-Boot drivers: UCLASS_PINCTRL which handles pin functions and
-UCLASS_GPIO which handles gpio requests. In order to align the DT
-of U-Boot with the DT of Linux, a hook is been added in the pinctrl
-driver to bind the gpio driver with the pinctrl driver so that
-when adding gpio nodes as subnodes to pinctrl node (as per the Linux ABI),
-the corresponding APIs will be redirected and handled by valid
-drivers attached to the pinctrl driver.
+U-Boot pinctrl driver expects a reg property explicitly unlike linux.
+To align the DT of U-boot with the Linux, reg property is also arrvied
+from child GPIO bank nodes when configured under the pinctrl node.
 
 Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- drivers/pinctrl/pinctrl-at91.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ drivers/pinctrl/pinctrl-at91.c | 25 +++++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/pinctrl/pinctrl-at91.c b/drivers/pinctrl/pinctrl-at91.c
-index 5038cb535e3..2b871143fc0 100644
+index 2b871143fc0..64f960478fc 100644
 --- a/drivers/pinctrl/pinctrl-at91.c
 +++ b/drivers/pinctrl/pinctrl-at91.c
-@@ -9,6 +9,8 @@
- #include <dm.h>
- #include <log.h>
- #include <asm/global_data.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
- #include <dm/pinctrl.h>
- #include <asm/hardware.h>
- #include <linux/bitops.h>
-@@ -492,6 +494,18 @@ const struct pinctrl_ops at91_pinctrl_ops  = {
- 	.set_state = at91_pinctrl_set_state,
- };
- 
-+static int at91_pinctrl_bind(struct udevice *dev)
-+{
-+	ofnode gpio_node;
-+	struct udevice *gpio;
-+
-+	ofnode_for_each_subnode(gpio_node, dev_ofnode(dev)) {
-+		lists_bind_fdt(dev, gpio_node, &gpio, NULL, false);
-+	}
-+
-+	return 0;
-+}
-+
- static int at91_pinctrl_probe(struct udevice *dev)
+@@ -510,17 +510,30 @@ static int at91_pinctrl_probe(struct udevice *dev)
  {
  	struct at91_pinctrl_priv *priv = dev_get_priv(dev);
-@@ -524,6 +538,7 @@ U_BOOT_DRIVER(atmel_sama5d3_pinctrl) = {
- 	.id = UCLASS_PINCTRL,
- 	.of_match = at91_pinctrl_match,
- 	.probe = at91_pinctrl_probe,
-+	.bind = at91_pinctrl_bind,
- 	.priv_auto	= sizeof(struct at91_pinctrl_priv),
- 	.ops = &at91_pinctrl_ops,
- };
+ 	fdt_addr_t addr_base;
++	struct udevice *gpio_node;
+ 	int index;
+ 
+-	for (index = 0; index < MAX_GPIO_BANKS; index++) {
+-		addr_base = devfdt_get_addr_index(dev, index);
+-		if (addr_base == FDT_ADDR_T_NONE)
+-			break;
++	if (list_empty(&dev->child_head)) {
++		for (index = 0; index < MAX_GPIO_BANKS; index++) {
++			addr_base = devfdt_get_addr_index(dev, index);
++			if (addr_base == FDT_ADDR_T_NONE)
++				break;
+ 
+-		priv->reg_base[index] = (struct at91_port *)addr_base;
++			priv->reg_base[index] = (struct at91_port *)addr_base;
++		}
++	} else {
++		index = 0;
++		list_for_each_entry(gpio_node, &dev->child_head, sibling_node) {
++			addr_base = dev_read_addr(gpio_node);
++			if (addr_base == FDT_ADDR_T_NONE)
++				break;
++
++			priv->reg_base[index] = (struct at91_port *)addr_base;
++			index++;
++		}
+ 	}
+ 
+-	priv->nbanks = index;
++	priv->nbanks = index < MAX_GPIO_BANKS ? index : MAX_GPIO_BANKS;
+ 
+ 	return 0;
+ }
 -- 
 2.25.1
 
