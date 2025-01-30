@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09752C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 13:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B571FC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 13:49:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 836A680EE5;
-	Thu, 30 Jan 2025 14:49:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=eurek.it
+	by phobos.denx.de (Postfix) with ESMTP id DD63A820DE;
+	Thu, 30 Jan 2025 14:49:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=eurek.it header.i=@eurek.it header.b="Y8unBNQZ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="t00J5iK+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C17EA80EF7; Thu, 30 Jan 2025 14:49:46 +0100 (CET)
-Received: from submit-3.e-mind.com (submit-3.e-mind.com [188.94.192.54])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0A67B820E3; Thu, 30 Jan 2025 14:49:50 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C1DD80EC1
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:49:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D17581F69
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:49:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=eurek.it
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gianlucarenzi@eurek.it
-Received: from localhost (unknown [127.0.0.1])
- by submit-3.e-mind.com (Postfix) with ESMTP id 9C36F973B34
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 13:49:43 +0000 (UTC)
-Received: from submit-3.e-mind.com ([127.0.0.1])
- by localhost (submit-3.e-mind.com [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CHTjIjSG3Pqs for <u-boot@lists.denx.de>;
- Thu, 30 Jan 2025 14:49:43 +0100 (CET)
-Received: from zmcloud-proxy2-z10.e-mind.com (unknown [192.168.102.63])
- by submit-3.e-mind.com (Postfix) with ESMTPS id 425219727DF
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:49:43 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by zmcloud-proxy2-z10.e-mind.com (Postfix) with ESMTP id 2FEA1180571
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:49:43 +0100 (CET)
-Received: from zmcloud-proxy2-z10.e-mind.com ([127.0.0.1])
- by localhost (zmcloud-proxy2-z10.e-mind.com [127.0.0.1]) (amavis, port 10032)
- with ESMTP id 38aanYVoAHu6 for <u-boot@lists.denx.de>;
- Thu, 30 Jan 2025 14:49:43 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by zmcloud-proxy2-z10.e-mind.com (Postfix) with ESMTP id 24A50180575
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:49:43 +0100 (CET)
-DKIM-Filter: OpenDKIM Filter v2.10.3 zmcloud-proxy2-z10.e-mind.com 24A50180575
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=eurek.it;
- s=3736ECE4-C506-11EE-A607-5B3F78E208B8; t=1738244983;
- bh=CeT0mPuMCnUzZzHXubvwrG8HfGorFO2X7GwLvkrrmbA=;
- h=Message-ID:Date:MIME-Version:To:From;
- b=Y8unBNQZVs0pyo9aeEI86WpQJt+5s5VSMLlC8+/hhGl9lZWgZrfMOZbEya7z0RSZi
- Uh/qcMQM9ZNkJu2PsazEqUYtbKuvE4Ue2h8nQfRFJQTxv2JqBMSJHZrAeYfRSRycoW
- CeRChJDAGpCs58S77ThuGN7a8pvY0yKe+/wrl+06vkkZwkVdarCIKvk2g3Mdj86KOG
- vCrfKbpf7C7290keqi8S4JqFP3meRRA4R2wqxe+lqJI1Wfi0P4NzkKHb9+dKzna6hb
- jypBBhNxpoIGOjBUpnNgT5MTHQoshBel1j+6eAOg/2C+F6zSHQZvztSOvsgReSjDYu
- rpIOhjJ58/Qfg==
-Received: from zmcloud-proxy2-z10.e-mind.com ([127.0.0.1])
- by localhost (zmcloud-proxy2-z10.e-mind.com [127.0.0.1]) (amavis, port 10026)
- with ESMTP id iCCq1u-v_Rfl for <u-boot@lists.denx.de>;
- Thu, 30 Jan 2025 14:49:43 +0100 (CET)
-Received: from [192.168.143.6] (ip-185-53-252-165.airgrid.it [185.53.252.165])
- by zmcloud-proxy2-z10.e-mind.com (Postfix) with ESMTPSA id
- 1227D180571
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 14:49:43 +0100 (CET)
-Message-ID: <1e4fd3a2-7625-4e99-a0e6-57cd8597a8b1@eurek.it>
-Date: Thu, 30 Jan 2025 14:49:42 +0100
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4361f664af5so9533175e9.1
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 05:49:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738244987; x=1738849787;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6snSkPbQN9OxUmYqBIC6l7YvB8N7kF3zyy/BwcOTSwI=;
+ b=t00J5iK+ee5mOODRgkuwHNCPiZj+VF9EF5DBklXn2g6RTdoL98JJ7v03cY0PraxHK9
+ LUeq4wEt1JzulR21ygyr6rKFt6wVfIr9I54tRvhEwuXv4hURcRCdNjG5jthhQqG31Uac
+ PRimy4r6THBIWCtW7Zsx9w07CoRNjgFRnwY4YxPT0PSZv3EzzW7H6OkFSsdiM57UyqSQ
+ 7sSV1fnPUcLURFfCaeqpEWRxfSKgY48PBKNttGLekN6AOhcfaIuvS9ocHvS3KFWwa09M
+ hJsJsdGYfG+E+2H6Oov4BMRJG1XzSzbAC06NtkhfJYWh+kEajsnN5seqzfRsLjWvfJsj
+ /kZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738244987; x=1738849787;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6snSkPbQN9OxUmYqBIC6l7YvB8N7kF3zyy/BwcOTSwI=;
+ b=pmU60Co5q+aqkJmRF2dp32QMGxMGoA1qlc4lDl/yILhjk4aXOJHagY+BH0tZRoaD13
+ c5UuKLeUwqtfNx2V/asQJ3ipviPhjPXyTWyAnl8yldBfrjQcqbkV9GSSUiLeSFjGVizR
+ oPxGz7B63duWXuvKTZyf+cw0DS4fQnY5Ppx1j10NZPtTJibtGaOszBhVHmnoBQ2Enjp6
+ xjNyoNX+D4q7juTG08niIDhVCY0qbWUZczlGUwysdeHMcdaL5q/dJ7WS6uvF6QJOBRFY
+ MJlR/AaCf5SbCnU6598MD6mz3ofxjEsSvS7ZyIOtCHCPp7FlPwCSj4L1zJ+nQ2eADJSc
+ 4NwQ==
+X-Gm-Message-State: AOJu0Yyk9y/agOlETnGri8SfI0ZHP44YnC2EZYp9oACGfGaGc0VWdotq
+ w7GysMrkwYoatv3RF/8S6teyOBcRjxVnwxPeQjYhINcMBiwFIuFyZ0zzgOCO1hY=
+X-Gm-Gg: ASbGnctFCRbxvICB3dCDB4SfrL2Z61rghXVzeTtv2a3O6nLelWQPpmVE75iFdmHxZNQ
+ UVjqdTdT+PvZGRd7yqsDfTpmiccKH5mh6rGIRQL69BlA3idV8XTqRLxXtE5NM95szAxIZjPIEXb
+ v5DHYEfmjHEVM3mbAoQPHJzadNbWZS3GQ9MoesfijDPxo+nYKIsnIkgUlSvYB6XtnYnNXAi/+/s
+ 2voovB6elXRFqMEvxYygz+j+Z/uNSZaLZM8HyMpi2FZFj/lsEVZfV5E7nTbrDFlBJiDuoSRuQBO
+ U7N91i3W7i7Q8x5CP1Y=
+X-Google-Smtp-Source: AGHT+IGExgAi2Q9i/D4RypBFyzUzgZIxLyq02jps9dwG7MjKpJDO7sExy3Rj8UT6z9gS3oYYib6pJw==
+X-Received: by 2002:a05:600c:46c9:b0:436:faeb:2a18 with SMTP id
+ 5b1f17b1804b1-438dc3bb657mr62309795e9.6.1738244986931; 
+ Thu, 30 Jan 2025 05:49:46 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438e245f4d1sm23788375e9.39.2025.01.30.05.49.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jan 2025 05:49:46 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Federico Fuga via B4 Relay <devnull+fuga.studiofuga.com@kernel.org>, Tom
+ Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Federico Fuga <fuga@studiofuga.com>
+Subject: Re: [PATCH] Fix fastboot handling of partitions when no slots are
+ supported
+In-Reply-To: <20250128-fastboot_slot_fix-v1-1-1a4688936662@studiofuga.com>
+References: <20250128-fastboot_slot_fix-v1-1-1a4688936662@studiofuga.com>
+Date: Thu, 30 Jan 2025 14:49:43 +0100
+Message-ID: <87r04kfm2w.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] serial: stm32: restrict _debug_uart_init() usage
-Content-Language: en-US
-To: u-boot@lists.denx.de
-References: <20250130115754.398989-1-patrice.chotard@foss.st.com>
- <8a22f018-4fe7-4a10-871d-f1c768d591f7@foss.st.com>
-From: Gianluca Renzi <gianlucarenzi@eurek.it>
-Organization: Eurek S.R.L.
-In-Reply-To: <8a22f018-4fe7-4a10-871d-f1c768d591f7@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,138 +95,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is awesome!
+Hi Federico,
 
-It should be great if the same approach should be done in OPTEE and TF-A=20
-too. All that stuff is using the device-tree mechanism, but the LOW=20
-LEVEL CONFIGURATION (early_init and other functions) is not linear and=20
-all register base and pin configuration must be done at Makefile=20
-variables level.
+Thank you for the patch.
 
-If I recall correctly, using a different UART instead of the EVK one,=20
-can cause some code to hang and configure the wrong PLL registers to=20
-continue booting and printing something on the correct UART device.
+On mar., janv. 28, 2025 at 12:18, Federico Fuga via B4 Relay <devnull+fuga.studiofuga.com@kernel.org> wrote:
 
-On 1/30/25 14:28, Patrick DELAUNAY wrote:
-> Hi,
+> From: Federico Fuga <fuga@studiofuga.com>
 >
-> On 1/30/25 12:57, Patrice Chotard wrote:
->> Since commit 948da7773e34 ("arm: Add new config option=20
->> ARCH_VERY_EARLY_INIT")
->> debug_uart_init() is called respectively in crt0.S and crt0_64.S.
->> That means that _debug_uart_init() is called for all STM32MP platforms
->> even for those which doesn't support SPL_BUILD.
->>
->> So restrict _debug_uart_init() execution for platforms which can have
->> SPL_BUILD enabled (STM32MP1 platform only).
->>
->> It's more needed to call debug_uart_init() in stm32mp1/cpu.c.
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> ---
->>
->> =C2=A0 arch/arm/mach-stm32mp/stm32mp1/cpu.c |=C2=A0 2 --
->> =C2=A0 drivers/serial/serial_stm32.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 | 18 ++++++++++++------
->> =C2=A0 2 files changed, 12 insertions(+), 8 deletions(-)
->>
->> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c=20
->> b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->> index cb1b84c9af9..bc410128479 100644
->> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->> @@ -138,8 +138,6 @@ int mach_cpu_init(void)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_CMD_STM32PROG_SER=
-IAL) &&
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (boot_mode & TA=
-MP_BOOT_DEVICE_MASK) =3D=3D BOOT_SERIAL_UART)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gd->flags |=3D =
-GD_FLG_SILENT | GD_FLG_DISABLE_CONSOLE;
->> -=C2=A0=C2=A0=C2=A0 else if (IS_ENABLED(CONFIG_DEBUG_UART) &&=20
->> IS_ENABLED(CONFIG_XPL_BUILD))
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 debug_uart_init();
->> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 0;
->> =C2=A0 }
->> diff --git a/drivers/serial/serial_stm32.c=20
->> b/drivers/serial/serial_stm32.c
->> index 1ee58142b3f..1675a9cb9d1 100644
->> --- a/drivers/serial/serial_stm32.c
->> +++ b/drivers/serial/serial_stm32.c
->> @@ -299,13 +299,19 @@ static inline struct stm32_uart_info=20
->> *_debug_uart_info(void)
->> =C2=A0 =C2=A0 static inline void _debug_uart_init(void)
->> =C2=A0 {
->> -=C2=A0=C2=A0=C2=A0 void __iomem *base =3D (void __iomem *)CONFIG_VAL(=
-DEBUG_UART_BASE);
->> -=C2=A0=C2=A0=C2=A0 struct stm32_uart_info *uart_info =3D _debug_uart_=
-info();
->> +=C2=A0=C2=A0=C2=A0 void __maybe_unused __iomem *base =3D (void __iome=
-m=20
->> *)CONFIG_VAL(DEBUG_UART_BASE);
->> +=C2=A0=C2=A0=C2=A0 struct stm32_uart_info *uart_info __maybe_unused =3D=
-=20
->> _debug_uart_info();
->> =C2=A0 -=C2=A0=C2=A0=C2=A0 _stm32_serial_init(base, uart_info);
->> -=C2=A0=C2=A0=C2=A0 _stm32_serial_setbrg(base, uart_info,
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 CONFIG_DEBUG_UART_CLOCK,
->> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 CONFIG_BAUDRATE);
->> +=C2=A0=C2=A0=C2=A0 /*
->> +=C2=A0=C2=A0=C2=A0=C2=A0 * debug_uart_init() is only usable when SPL_=
-BUILD is enabled
->> +=C2=A0=C2=A0=C2=A0=C2=A0 * (STM32MP1 case only)
->> +=C2=A0=C2=A0=C2=A0=C2=A0 */
->> +=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_DEBUG_UART) &&=20
->> IS_ENABLED(CONFIG_SPL_BUILD)) {
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 _stm32_serial_init(base, u=
-art_info);
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 _stm32_serial_setbrg(base,=
- uart_info,
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CONFIG_DEBUG_UART_CLO=
-CK,
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CONFIG_BAUDRATE);
->> +=C2=A0=C2=A0=C2=A0 }
->> =C2=A0 }
->> =C2=A0 =C2=A0 static inline void _debug_uart_putc(int c)
+> The fastboot module has a bug that prevents some command to work
+> properly on devices that haven't an Android-like partition scheme, that
+> is, just one spl and one kernel partition, instead of the redundant
+> scheme with _a and _b slots.
 >
+> This is the schema of our NAND storage (board is based on an AllWinner
+> A33 sunxi chip):
 >
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> => mtdparts
 >
-> Thanks
-> Patrick
+> device nand0 <1c03000.nand>, # parts = 4
+>  #: name         size            net size        offset          mask_flags
+>  0: spl          0x00020000      0x00020000      0x00000000      0
+>  1: uboot        0x00100000      0x00100000      0x00020000      0
+>  2: kernel_a     0x00400000      0x00400000      0x00120000      0
+>  3: ubi          0x07ae0000      0x079e0000 (!)  0x00520000      0
 >
+> active partition: nand0,0 - (spl) 0x00020000 @ 0x00000000
+>
+> This happens when we try to erase the spl partition using fastboot:
+>
+> $ fastboot erase spl
+> Erasing 'spl_a'               FAILED (remote: 'invalid NAND device')
+> fastboot: error: Command failed
+>
+> The error occurs because getvars fails to handle the error returned by
+> nand layer when a partition cannot be found.
+>
+> Indeed, getvar_get_part_info returns what is returned by
+> fastboot_nand_get_part_info (0 on success, 1 on failure) but it should
+> return -ENODEV or -EINVAL instead. Since the cause of failure is not
+> returned by the nand function, I decided to return -EINVAL to make it
+> simple.
+>
+> Signed-off-by: Federico Fuga <fuga@studiofuga.com>
 
---=20
-Eurek s.r.l.                          |
-Electronic Engineering                | http://www.eurek.it
-via Celletta 8/B, 40026 Imola, Italy  | Phone: +39-(0)542-609120
-p.iva 00690621206 - c.f. 04020030377  | Fax:   +39-(0)542-609212
+I could apply this version, finally :)
 
-Invito alla riservatezza:
-La  presente richiesta di  quotazione tramite posta elettronica contiene
-informazioni personali e riservate. E' vietato divulgarne il contenuto a
-persone diverse  dal destinatario.  Si prega i riceventi non autorizzati
-di  mantenere  il  riserbo,  di informare  tempestivamente  il  mittente
-dell'errore di trasmissione e di eliminare quanto per  errore pervenuto,
-ivi  compresi  eventuali  allegati.  La  diffusione,  distribuzione  e/o
-copiatura  delle  informazioni  trasmesse da parte di qualsiasi soggetto
-diverso  dal  destinatario  e' proibita, sia ai sensi dell'art. 616 c.p.
-che  ai  sensi  del  D.Lgs.196/2003  e adeguamento del nuovo Regolamento
-Europeo nr. 679/2016
+b4 got a bit confused since it has been send as a v1 but using the
+following command worked for me:
 
-Invitation to privacy:
-This  request  for  an  e-mail  quote  includes   personal  and  private
-information. Making its content known to anyone other than the recipient
-is forbidden.  Unauthorized  recipients are kindly requested to maintain
-secrecy,  promptly  inform  the sender of the wrong reception and delete
-what   has   been  accidentally  received,  including  any  attachments.
-Spreading,  distributing  and  /  or copying the provided information by
-anyone  other  than  the  addressee  is  forbidden,  according  both  to
-art. 616 C.P.  and  to  D.Lgs.196  /  2003  and adaptation of the new EU
-Regulation n. 679/2016
+$ b4 shazam -s -l --check 20250128-fastboot_slot_fix-v1-1-1a4688936662@studiofuga.com -v1
 
- =20
+Now for the patch itself:
 
+Please use 'fastboot:' prefix as a commit title.
+Use '$ git log --oneline -- drivers/fastboot/' to see what other commits
+where using as a title.
+
+Some more comments below. Please make sure to answer this email to
+acknowledge/reject review feedback.
+Also, when sending a v2, please make sure to include a changelog.
+
+If you need help setting things up properly, let me know. I'm also
+reachable on IRC https://libera.chat/, channel #u-boot, my nickame is mkorpershoek.
+
+> ---
+>  drivers/fastboot/fb_getvar.c | 5 ++++-
+>  drivers/fastboot/fb_nand.c   | 2 +-
+>  2 files changed, 5 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+> index 9c2ce65a4e5bce0da6b18aa1b2818f7db556c528..816ed8a6213b5c1f0948a813c6f6a865a4b47ba8 100644
+> --- a/drivers/fastboot/fb_getvar.c
+> +++ b/drivers/fastboot/fb_getvar.c
+> @@ -121,8 +121,11 @@ static int getvar_get_part_info(const char *part_name, char *response,
+>  			*size = disk_part.size * disk_part.blksz;
+>  	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND)) {
+>  		r = fastboot_nand_get_part_info(part_name, &part_info, response);
+> -		if (r >= 0 && size)
+> +		if (r == 0 && size) {
+>  			*size = part_info->size;
+
+Maybe the patch is simpler this way, but I think that it would be better
+if fastboot_mmc_get_part_info() and fastboot_nand_get_part_info() would
+behave the same. The naming is pretty close already, and having
+different behaviours/return codes seems confusing to me.
+
+Is there a strong reason for not modifying fb_nand_lookup() so that it
+will return a negative error code?
+
+This way, we can keep the same logic in getvar_get_part_info()
+
+> +		} else {
+> +			r = -EINVAL;
+> +		}
+>  	} else {
+>  		fastboot_fail("this storage is not supported in bootloader", response);
+>  		r = -ENODEV;
+> diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
+> index afc64fd5280717ae4041ed70268ccc01cfbb0496..9e2f7c01895785a4409eb67ea48abd02a6a6da26 100644
+> --- a/drivers/fastboot/fb_nand.c
+> +++ b/drivers/fastboot/fb_nand.c
+> @@ -151,7 +151,7 @@ static lbaint_t fb_nand_sparse_reserve(struct sparse_storage *info,
+>   *
+>   * @part_name: Named device to lookup
+>   * @part_info: Pointer to returned part_info pointer
+> - * @response: Pointer to fastboot response buffer
+> + * @response: 0 on success, 1 otherwise
+
+Why has this been modified? @response is still a pointer to fastboot
+response buffer.
+
+If we wish to document the return code, use the Return: syntax:
+
+For example, here it would be:
+
+/**
+ * fastboot_nand_get_part_info() - Lookup NAND partion by name
+ *
+ * @part_name: Named device to lookup
+ * @part_info: Pointer to returned part_info pointer
+ * @response: Pointer to fastboot response buffer
+ *
+ * Return: 0 on success, 1 otherwise
+ */
+
+>   */
+>  int fastboot_nand_get_part_info(const char *part_name,
+>  				struct part_info **part_info, char *response)
+>
+> ---
+> base-commit: a517796cfa5d8f4ca2f0c11c78c24a08a102c047
+> change-id: 20250128-fastboot_slot_fix-69251576d9bb
+>
+> Best regards,
+> -- 
+> Federico Fuga <fuga@studiofuga.com>
