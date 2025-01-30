@@ -4,62 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B81C0218D
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 01:37:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB457C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 03:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0FBF80AE4;
-	Thu, 30 Jan 2025 02:37:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D97F380EEF;
+	Thu, 30 Jan 2025 04:52:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738201071;
-	bh=WtqqqXu5Oy0sdiga7qxum7h85FXIvXZk5jTE8bEMdDM=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=cnIT6PmE8QKqhNCyngmVArAn6U9mGfOSwN9PG+bbPkWIf5UO2RPN0ID+BLpOG194f
-	 9daVM3LjnstuJvxajMEeHAPiLPUxcPzx/tq/DV+4Q3Z573yozWMkVhnuEyBNZwATVL
-	 pjSgbV9iJsZdH49rMMZTOW63qLfW0ek2fIQYnqXYez090zL3NatG6PLbE8hqYvUY4s
-	 yVpOzCg9EYAj3chh1JBQSC3fg+IR+MlQsenirYbHD+vvNsZJjBjKIg5okfUsXBRIKE
-	 4QOn6W86miF4zXJJT9DJ+XrRxaH/CJMapsBr49BLzR7/ry7RTrgf5SroW6k3xIErnq
-	 WF/xLYyY026Fg==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="Wh1Fyi49";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 318D1809D0; Thu, 30 Jan 2025 02:37:50 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id EFD0680C99; Thu, 30 Jan 2025 04:52:32 +0100 (CET)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16DEE80B9B
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:37:48 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="JDMJTxbO"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 060E610382D08; Thu, 30 Jan 2025 02:37:45 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738201066;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WtqqqXu5Oy0sdiga7qxum7h85FXIvXZk5jTE8bEMdDM=;
- b=JDMJTxbOAcvvCxwoSo2UXT9lSSHppWTmQXjxTZ3xOABgHbcMoJOodKmjT0hZBYhZPNyScu
- Ptv/WZY8AoeGY7W752pFae8aRpTKgTVrGBb8FBvIy5SluowJAFzWtO2lrvnnOzm6DrxSWk
- PzDeBMoUBUjG+ihQj9AiD9IKaVS/+VwV0nIVl8/VWn5KOewWlZH2P+RNberruv0RWLPQQn
- iaHQYRgcrprZ4IZDesMnKfm+qXmkuu2n0RuVc/6eC8/VEcnxlKB4uE0kYP7WlJTh3cHoAn
- GdJXqQ9v4VBBQbSNXlAJxnZxYQfxcprRmoGl0jP4RsLWRrOZ0d5jVIQxbNLEzg==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Heiko Schocher <hs@denx.de>,
- Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
- Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-Subject: [PATCH] bootcount: zynqmp: Extend ZynqMP specific bootcount support
-Date: Thu, 30 Jan 2025 02:37:19 +0100
-Message-ID: <20250130013726.337914-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ by phobos.denx.de (Postfix) with ESMTPS id 7A65F80AE2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 04:52:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=118a1aa8f=Manikandan.M@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1738209150; x=1769745150;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=nZ53Ki+OSdHGfwNGNxiD5oVtf+t2QvCOO0/Tzy5Y/VA=;
+ b=Wh1Fyi49cGtZ67Gm1KQl7H6Hq10PpJc1/H+rcXI1h9K8zd3ZVfk1V/Lv
+ +R/hNxVEbiqszVPBxbxg20OFujDJnao0r4cCwV3RbhcL2jTt5nKnujPev
+ imuCLF8YKPVFEXFhWCB+sjFfSe/z971MwA1es/9Qb6lxhz8D97tQa6ApW
+ RlSNrr82nIH/3iWw7T6tobE/MfaAOCUYcaqNpUjED5q5Y+N02Bs6s4Vlg
+ YXhT+D/qg/8//qsm77UHnqN38P73ZS2w6ZpjOrzW6UNaukSHuJ2EPCukv
+ Ivr87Z2qc2B0Gfh13aCRD3vWACKTeXA8lI/6hVtTfMmGMXAJWE0J8/btQ w==;
+X-CSE-ConnectionGUID: 6UfhbO/CQrK5c8RpTJRJjg==
+X-CSE-MsgGUID: BxqaLHByReS9b6dHFN77GQ==
+X-IronPort-AV: E=Sophos;i="6.13,244,1732604400"; d="scan'208";a="204597331"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 29 Jan 2025 20:52:28 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Wed, 29 Jan 2025 20:52:07 -0700
+Received: from che-lt-i67131.microchip.com (10.10.85.11) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Wed, 29 Jan 2025 20:52:05 -0700
+From: Manikandan Muralidharan <manikandan.m@microchip.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>, <pbrobinson@gmail.com>,
+ <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH v2 0/7] Align pio3 pinctrl node with Linux
+Date: Thu, 30 Jan 2025 09:21:50 +0530
+Message-ID: <20250130035157.226995-1-manikandan.m@microchip.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,163 +79,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The PGGS area contains four registers, each of which can hold up to
-32bit of data. Extend the boot counter to support storing boot count
-in either of the four registers with arbitrary mask to avoid limiting
-the boot counter only to the PGGS register 2 LSByte.
+The series adds support in the pinctrl driver and additional
+changes in the at91 DT to align the pio3 based pinctrl nodes
+in the u-boot DT with that of Linux
 
-Drop U_BOOT_DRVINFO() as that would instantiate the boot counter even
-if there is no DT node associated with it, that is undesired behavior.
+Changes in v2:
+- 1/7 - Align the properties of AIC node with that of Linux
+- 2/7 - cosmetic fix
+      - Align and arrange the pinmux child node as per Mainline Linux
+- 4/7 - Modify the pinctrl node compatible property
 
-The boot counter configuration is implemented using three new DT properties:
-reg - PGGS register address, fallback to PGGS 2 at 0xffd80058
-u-boot,bootcount-reg-mask - Register mask, applied on PGGS register
-u-boot,bootcount-mask - Boot counter mask, applied on boot counter
-u-boot,bootcount-magic - Boot counter magic, applied on boot counter
+Balamanikandan Gunasundar (1):
+  ARM: dts: at91: sam9x60: Define pinctrl node with its label
 
-Example configuration of 16bit boot counter with 0xb0010000 magic in PGGS0:
+Manikandan Muralidharan (6):
+  ARM: dts: at91: sam9x60: Add AIC node
+  ARM: dts: at91: sam9x60: Move pinmux node to board DTS
+  ARM: dts: at91: sam9x60: Add missing pinctrl node properties
+  pinctrl: at91: Bind GPIO driver to the pinctrl DT node
+  pinctrl: at91: Add support to align with Linux Devicetree
+  ARM: dts: at91: Align pinctrl node with Linux Devicetree
 
-&amba {
-	bootcount@0xffd80050 {
-		compatible = "u-boot,bootcount-zynqmp";
-		reg = <0 0xffd80050 0 0x4>;
-		u-boot,bootcount-magic = <0xb0010000>;
-		u-boot,bootcount-mask = <0xffff>;
-		u-boot,bootcount-reg-mask = <0xffffffff>;
-	};
-};
+ arch/arm/dts/at91-sam9x60_curiosity.dts |  71 ++++++++
+ arch/arm/dts/at91sam9260.dtsi           |  76 ++++-----
+ arch/arm/dts/at91sam9261.dtsi           |  77 ++++-----
+ arch/arm/dts/at91sam9263.dtsi           | 117 ++++++-------
+ arch/arm/dts/at91sam9g45.dtsi           | 106 ++++++------
+ arch/arm/dts/at91sam9n12.dtsi           |  93 +++++------
+ arch/arm/dts/at91sam9rl.dtsi            |  93 +++++------
+ arch/arm/dts/at91sam9x5.dtsi            |  90 +++++-----
+ arch/arm/dts/sam9x60.dtsi               | 151 +++++++----------
+ arch/arm/dts/sam9x60ek.dts              | 213 ++++++++++++++++--------
+ arch/arm/dts/sama5d3.dtsi               | 116 ++++++-------
+ arch/arm/dts/sama5d4.dtsi               | 118 +++++++------
+ drivers/pinctrl/pinctrl-at91.c          |  40 ++++-
+ 13 files changed, 726 insertions(+), 635 deletions(-)
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Heiko Schocher <hs@denx.de>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Vasileios Amoiridis <vasileios.amoiridis@cern.ch>
-Cc: u-boot@lists.denx.de
----
- drivers/bootcount/bootcount_zynqmp.c | 79 +++++++++++++++++++++++++---
- 1 file changed, 71 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/bootcount/bootcount_zynqmp.c b/drivers/bootcount/bootcount_zynqmp.c
-index bc0984e2d26..6613b80caec 100644
---- a/drivers/bootcount/bootcount_zynqmp.c
-+++ b/drivers/bootcount/bootcount_zynqmp.c
-@@ -3,16 +3,32 @@
- 
- #include <bootcount.h>
- #include <dm.h>
-+#include <dm/device_compat.h>
- #include <stdio.h>
- #include <zynqmp_firmware.h>
- #include <asm/arch/hardware.h>
- #include <dm/platdata.h>
- 
-+struct bootcount_zynqmp_priv {
-+	void __iomem	*reg;		/* PGGS register to use for boot counter */
-+	u32		regmask;	/* Mask over the valid register bits */
-+	u32		mask;		/* Mask over the valid boot counter bits */
-+	u32		magic;		/* Magic to place in the rest of the register */
-+};
-+
- static int bootcount_zynqmp_set(struct udevice *dev, const u32 val)
- {
-+	struct bootcount_zynqmp_priv *priv = dev_get_priv(dev);
-+	u32 rwval = val;
- 	int ret;
- 
--	ret = zynqmp_mmio_write((ulong)&pmu_base->pers_gen_storage2, 0xFF, val);
-+	/* Apply magic to detect whether the boot counter is valid. */
-+	rwval &= priv->mask;	/* Clear all non-bootcounter bits */
-+	rwval |= priv->magic;	/* Apply magic value */
-+
-+	rwval &= priv->regmask;	/* Apply register mask */
-+
-+	ret = zynqmp_mmio_write((ulong)priv->reg, priv->regmask, rwval);
- 	if (ret)
- 		pr_info("%s write fail\n", __func__);
- 
-@@ -21,27 +37,74 @@ static int bootcount_zynqmp_set(struct udevice *dev, const u32 val)
- 
- static int bootcount_zynqmp_get(struct udevice *dev, u32 *val)
- {
-+	struct bootcount_zynqmp_priv *priv = dev_get_priv(dev);
- 	int ret;
- 
- 	*val = 0;
--	ret = zynqmp_mmio_read((ulong)&pmu_base->pers_gen_storage2, val);
--	if (ret)
-+	ret = zynqmp_mmio_read((ulong)priv->reg, val);
-+	if (ret) {
- 		pr_info("%s read fail\n", __func__);
-+		return ret;
-+	}
- 
--	return ret;
--}
-+	/* Clear out unrelated register content. */
-+	*val &= priv->regmask;
- 
--U_BOOT_DRVINFO(bootcount_zynqmp) = {
--	.name = "bootcount_zynqmp",
--};
-+	/* Check whether magic is valid, if not, boot counter value is 0. */
-+	if ((*val & ~priv->mask) != priv->magic)
-+		*val = 0;
-+
-+	/* Remove magic from boot counter value. */
-+	*val &= priv->mask;
-+
-+	return 0;
-+}
- 
- static const struct bootcount_ops bootcount_zynqmp_ops = {
- 	.get = bootcount_zynqmp_get,
- 	.set = bootcount_zynqmp_set,
- };
- 
-+static int bootcount_zynqmp_probe(struct udevice *dev)
-+{
-+	struct bootcount_zynqmp_priv *priv = dev_get_priv(dev);
-+
-+	/*
-+	 * ZynqMP PGGS register to use for boot counter,
-+	 * default to PGGS2 to maintain backward compatibility.
-+	 */
-+	priv->reg = dev_read_addr_ptr(dev);
-+	if (!priv->reg)
-+		priv->reg = &pmu_base->pers_gen_storage2;
-+
-+	/*
-+	 * Boot counter mask and register mask, default to 0x000000ff
-+	 * to maintain backward compatibility.
-+	 */
-+	priv->mask = dev_read_u32_default(dev, "u-boot,bootcount-mask", 0xff);
-+	priv->regmask = dev_read_u32_default(dev, "u-boot,bootcount-reg-mask",
-+					     priv->mask);
-+
-+	/*
-+	 * Boot counter magic, default to 0x00000000
-+	 * to maintain backward compatibility.
-+	 */
-+	priv->magic = dev_read_u32_default(dev, "u-boot,bootcount-magic", 0);
-+	priv->magic &= ~priv->mask;
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id bootcount_zynqmp_ids[] = {
-+	{ .compatible = "u-boot,bootcount-zynqmp" },
-+	{ }
-+};
-+
- U_BOOT_DRIVER(bootcount_zynqmp) = {
- 	.name = "bootcount_zynqmp",
- 	.id = UCLASS_BOOTCOUNT,
- 	.ops = &bootcount_zynqmp_ops,
-+	.probe = bootcount_zynqmp_probe,
-+	.of_match = bootcount_zynqmp_ids,
-+	.priv_auto = sizeof(struct bootcount_zynqmp_priv),
- };
 -- 
-2.45.2
+2.25.1
 
