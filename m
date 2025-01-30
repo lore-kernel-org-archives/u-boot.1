@@ -4,63 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08634C0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 21:41:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D0D3C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 21:49:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60C0F80107;
-	Thu, 30 Jan 2025 22:41:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 4D71A80842;
+	Thu, 30 Jan 2025 22:49:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="lPsPTpyX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a5zdHBkL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A56780EBD; Thu, 30 Jan 2025 22:41:15 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A893F80EFB; Thu, 30 Jan 2025 22:49:54 +0100 (CET)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 797C38004F
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 22:41:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 69C3580834
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 22:49:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2de8=UX=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1738273270;
- bh=x3yXDqXOtjSCUX/+g1FE/smyAjuez+XGhXczb6JeJGw=;
- b=lPsPTpyXdfzgVRxpPjJsNz0lo0X35vyj3hTzpJ8q2njKNdS7b2RQWnfoSCV+vZRp0F9SGcn+Q
- NNH+jlBJaLxyOcyVfzGrSaZly09ML8vBN4VAJwQEmFce56gIp9TLiZtsOlzp3CfrUuBB9uYwbD5
- q3l/Yu0TOqe/rgzjJd1EOpfUqZZRDxsl+zLk29adDQXPDZU+x101Thg6Jy1leyLg9bgoXIDTG5p
- 5NioIG+z85A4JpdKUTZC7RhzuznegS1Eey2WZcPHlyWbId6/wLfkojWKT/hgiOWrbwXLorlXYIT
- OfIzS5/xFUE2OO2JabUO4Wu5iMwlhDbu3keBHs7cfjtQ==
-X-Forward-Email-ID: 679bf1f22d70e7e05883ed39
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <f52283be-6119-4682-a41d-efff377365ab@kwiboo.se>
-Date: Thu, 30 Jan 2025 22:41:00 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2efded08c79so1811390a91.0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 13:49:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738273789; x=1738878589; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uqZ4WtbZK76wS5QLyigViFcM5HpNMt6YWWDNSe+guLc=;
+ b=a5zdHBkLLEbKQ6HIReV0oDGEz7fLLQ7HDMbaDcAI8MmlOtTL2UyLoBvaBcsIeptJlU
+ Xm3RlZa4Go4Rf+d96WyzerFZ/wv+1A2nobEmUgafFdgMZiwPakxUeXT6yJmb+7oIOJsX
+ gq5PWb5/vvxbQrNzx0ql5No7kqNWpQRIPtJfb8W8X+3VvxD4wuTgZwnWX5SniBZ7oxOo
+ exvIVGBXgu49cuqrQxMG0znF/WU0nrNQJ/ZL1ORQZwkEsIbIQq9Xcg/NQ1KaJgQVGTgj
+ pZBgEAxFWoYl9JVfEsNXOHwuUXu7F8pO/EYwjzRDaOllLyobdaVu3FcwpxB20bz4jQwO
+ /pJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738273789; x=1738878589;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uqZ4WtbZK76wS5QLyigViFcM5HpNMt6YWWDNSe+guLc=;
+ b=ZoJMrLj4TelWOJy+Pf7pAGXntKNPbWnpAcW8uCf0csdegMsXWisaiWEbdiuRzSHoAv
+ E2m5mN0Am7iNAiiZQxPK7mvz+s81S1jPLASGx/Q3pih6zGVxs24h+iVt0iG0iVZJ4/VT
+ LN/CYzfjlp3MyKLcstqYrXIsFgmHIVKrUqLgPyZ/BXtfL88JEibnDVkF9aXG/CgU82Ls
+ DILepan2E7yUM+eFseq8PQg4+jUpD1TM03OQ95UuNCI7Cyg/luN6RAFyWC/u1C8QLfgQ
+ 3bWQYyxlzHZvIs0PFAORZC/liLTTKw3/pKYJ8csAanNUOlafchypkKD/zYfSB0ppq97v
+ +LEw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVOSk5OjJxlIvbGAVggFU0eWMNMS/hZZC1NU85vy8os7ZqY4Foli6DuTdLAG5XwokOoPfLgoUE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw98OgOlSftXTMSM4OQEeJIiP6LAoXwMGNKEecpUO1smCK5trI1
+ LIwdALX9uC8eMI0jaZAPDxU+qbt48KrFM9+M3PEWtEvlvRsXdY8k9HJmqQFqafSI57PXh3aUaFj
+ b/nklYzn6OX9RYA2lDanp0NMinEkTVmgLMu84oQ==
+X-Gm-Gg: ASbGnctTLeJwZoxDXZMahRhGwmpNjLkgWLVRDnDsk9Cwtj9PatUNi5crsOYx1g1d7jC
+ GtxscX1nWuVIAn9UfV/9+xfSv1Y7e5cg9roiCViPynW421S+Gqibi19ZHXyZU0Zen4R6ibd/5mN
+ Y0KP3kI44U1Oqy6GPWpTXcAJlkY+NhGQ==
+X-Google-Smtp-Source: AGHT+IElGNlauBs+VPQxb/LnL3UBAkqJErkQ8HUcV80/twIizQlhszcmvl54jYXMRvDouDKm13DETkWaqJLgNHKGhNM=
+X-Received: by 2002:a17:90b:2d47:b0:2ea:356f:51b4 with SMTP id
+ 98e67ed59e1d1-2f83abdf3b3mr12959687a91.13.1738273788858; Thu, 30 Jan 2025
+ 13:49:48 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] rockchip: Improve ARMv7 support for
- ROCKCHIP_COMMON_STACK_ADDR
-To: Alex Bee <knaerzche@gmail.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20250126234838.561065-1-jonas@kwiboo.se>
- <20250126234838.561065-3-jonas@kwiboo.se>
- <4e6629cf-9685-4b91-800e-82a9df30d5e3@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <4e6629cf-9685-4b91-800e-82a9df30d5e3@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250126184333.4058848-1-sjg@chromium.org>
+ <20250126184333.4058848-2-sjg@chromium.org>
+ <CAEfUkUJPVLGCoThrP3ZcLwY283FYm2CcU52XDEmguKj0mKSc3Q@mail.gmail.com>
+ <20250130195540.GL1233568@bill-the-cat>
+In-Reply-To: <20250130195540.GL1233568@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 30 Jan 2025 16:49:36 -0500
+X-Gm-Features: AWEUYZl2NmZjUHwu5bROxHUZoRsP1743gc0EA1kmEfai84Ahn6ivOV_F0l0Lttc
+Message-ID: <CAEfUkU+E9qkHo_dhEFffYj_uhrk0OFezQEchNU=yDuE2beMEXw@mail.gmail.com>
+Subject: Re: [PATCH 01/19] mbedtls: Add SHA symbols for VPL
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,119 +95,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alex,
+Hi Tom,
 
-On 2025-01-27 19:59, Alex Bee wrote:
-> Hi Jonas,
-> 
-> thanks for working on this.  Please see one comment below.
-> 
-> Am 27.01.25 um 00:48 schrieb Jonas Karlman:
->> A few Rockchip ARMv7 SoCs use 0x60000000 as DRAM base address instead of
->> the more common 0x0 DRAM base address used on AArch64 SoCs.
->>
->> Add default options that should work for these ARMv7 SoCs. Same offsets
->> as before are used, just below 64 MiB. Hex values have also been padded
->> to improve alignment.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>   arch/arm/mach-rockchip/Kconfig | 35 +++++++++++++++++++++++-----------
->>   1 file changed, 24 insertions(+), 11 deletions(-)
->>
->> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
->> index 5aa9e0f1af3b..da20d3233fe3 100644
->> --- a/arch/arm/mach-rockchip/Kconfig
->> +++ b/arch/arm/mach-rockchip/Kconfig
->> @@ -637,40 +637,53 @@ source "arch/arm/mach-rockchip/rv1126/Kconfig"
->>   if ROCKCHIP_COMMON_STACK_ADDR && SPL_SHARES_INIT_SP_ADDR
->>   
->>   config CUSTOM_SYS_INIT_SP_ADDR
->> -	default 0x3f00000
->> +	default 0x63f00000 if SPL_TEXT_BASE = 0x60000000
->> +	default 0x03f00000 if SPL_TEXT_BASE = 0x00000000
->>   
->>   config SYS_MALLOC_F_LEN
->> -	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
->> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
->> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->>   
->>   config SPL_SYS_MALLOC_F_LEN
->> -	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
->> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
->> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->>   
->>   config TPL_SYS_MALLOC_F_LEN
->> -	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
->> +	default 0x0800 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
->> +	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->>   
->>   config TEXT_BASE
->> -	default 0x00200000 if ARM64
->> +	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
->> +	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
->>   
->>   config SPL_TEXT_BASE
->> -	default 0x0 if ARM64
->> +	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
->> +			      ROCKCHIP_RK3128 || ROCKCHIP_RK3188 || \
-> 
-> I'm not sure if adding RK3036 and RK3188 is correct at this point. Both use
-> SPL (without TPL) currently for DRAM initialization and thus need their
-> CFG_IRAM_BASE as SPL_TEXT_BASE.
+On Thu, 30 Jan 2025 at 14:55, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Jan 27, 2025 at 10:23:12AM -0500, Raymond Mao wrote:
+> > Hi Simon,
+> >
+> >
+> > On Sun, 26 Jan 2025 at 13:43, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Add some symbols for supporting SHA1 etc. for VPL.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > >  lib/mbedtls/Kconfig | 40 ++++++++++++++++++++++++++++++++++++++++
+> > >  1 file changed, 40 insertions(+)
+> > >
+> > > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> > > index 78167ffa252..81274786106 100644
+> > > --- a/lib/mbedtls/Kconfig
+> > > +++ b/lib/mbedtls/Kconfig
+> > > @@ -112,6 +112,46 @@ config SPL_MD5_LEGACY
+> > >
+> > >  endif # SPL
+> > >
+> > > +if VPL
+> > > +
+> > > +config VPL_SHA1_LEGACY
+> > > +       bool "Enable SHA1 support in VPL with legacy crypto library"
+> > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA1
+> > > +       help
+> > > +         This option enables support of hashing using SHA1 algorithm
+> > > +         with legacy crypto library.
+> > > +
+> > > +config VPL_SHA256_LEGACY
+> > > +       bool "Enable SHA256 support in VPL with legacy crypto library"
+> > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA256
+> > > +       help
+> > > +         This option enables support of hashing using SHA256 algorithm
+> > > +         with legacy crypto library.
+> > > +
+> > > +config VPL_SHA512_LEGACY
+> > > +       bool "Enable SHA512 support in VPL with legacy crypto library"
+> > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA512
+> > > +       help
+> > > +         This option enables support of hashing using SHA512 algorithm
+> > > +         with legacy crypto library.
+> > > +
+> > > +config VPL_SHA384_LEGACY
+> > > +       bool "Enable SHA384 support in VPL with legacy crypto library"
+> > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA384
+> > > +       select VPL_SHA512_LEGACY
+> > > +       help
+> > > +         This option enables support of hashing using SHA384 algorithm
+> > > +         with legacy crypto library.
+> > > +
+> > > +config VPL_MD5_LEGACY
+> > > +       bool "Enable MD5 support in VPL with legacy crypto library"
+> > > +       depends on LEGACY_CRYPTO_BASIC && VPL_MD5
+> > > +       help
+> > > +         This option enables support of hashing using MD5 algorithm
+> > > +         with legacy crypto library.
+> > > +
+> > > +endif # VPL
+> > > +
+> >
+> > Do you mind rebasing this patch on top of my series below?
+> > https://lore.kernel.org/u-boot/20250127151657.648255-1-raymond.mao@linaro.org/
+> >
+> > My one has refactored the entire mbedtls kconfig submenu, makefile and
+> > default config file to adapt with XPL, so that users can have
+> > independent config options in both U-Boot proper and XPLs.
+>
+> Actually, can you work on top of this one please Raymond? I tried yours
+> out now and it results in ~4KiB growth so something isn't right there,
+> but Simon's is fine atm. Thanks!
+>
+The reason is that I set MbedTLS crypto as default when MBEDTLS_LIB is
+selected, which sounds more logically reasonable.
+If users enable MBEDTLS_LIB_CRYPTO_ALT at the same time with
+MBEDTLS_LIB, which means using U-Boot legacy crypto as MbedTLS
+alternatives, the growth should be gone.
 
-I think it should be safe to add these default values here, any value
-defined in board defconfig or soc Kconfig will take precedence.
-
-The RK3036 and RK3188 boards use SPL back-to-brom to load U-Boot proper,
-if someone wants to move these board to use similar TPL+SPL+FIT this
-will prepare for such occasion.
-
-Having them included here also prevents a possible issue in case someone
-in the future where to add a select/imply ROCKCHIP_COMMON_STACK_ADDR for
-these SoCs, else they may fallback to wrongly use 0x0.
-
-Do you want me to drop them in a v2?
+Do you want me to select MBEDTLS_LIB_CRYPTO_ALT for qemu or should we
+leave this for the user to determine?
 
 Regards,
-Jonas
+Raymond
 
-> 
-> Regards,
-> 
-> Alex
-> 
->> +			      ROCKCHIP_RK322X || ROCKCHIP_RV1108
->> +	default 0x00000000
->>   
->>   config SPL_HAS_BSS_LINKER_SECTION
->>   	default y if ARM64
->>   
->>   config SPL_BSS_START_ADDR
->> -	default 0x3f80000
->> +	default 0x63f80000 if SPL_TEXT_BASE = 0x60000000
->> +	default 0x03f80000 if SPL_TEXT_BASE = 0x00000000
->>   
->>   config SPL_BSS_MAX_SIZE
->> -	default 0x8000 if SPL_BSS_START_ADDR = 0x3f80000
->> +	default 0x8000 if SPL_BSS_START_ADDR = 0x63f80000
->> +	default 0x8000 if SPL_BSS_START_ADDR = 0x03f80000
->>   
->>   config SPL_STACK_R
->> -	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
->> +	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
->> +	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->>   
->>   config SPL_STACK_R_ADDR
->> -	default 0x3e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
->> +	default 0x63e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
->> +	default 0x03e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
->>   
->>   config SPL_STACK_R_MALLOC_SIMPLE_LEN
->> -	default 0x200000 if SPL_STACK_R_ADDR = 0x3e00000
->> +	default 0x200000 if SPL_STACK_R_ADDR = 0x63e00000
->> +	default 0x200000 if SPL_STACK_R_ADDR = 0x03e00000
->>   
->>   endif
->>   endif
 
+
+> --
+> Tom
