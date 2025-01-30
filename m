@@ -4,82 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D99BC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 21:52:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 397ECC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 21:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE102801DE;
-	Thu, 30 Jan 2025 22:52:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 992F080B9B;
+	Thu, 30 Jan 2025 22:58:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dI+Jpbdd";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="1a1h9RIe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29ADD80842; Thu, 30 Jan 2025 22:52:12 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 24E9180EEB; Thu, 30 Jan 2025 22:58:22 +0100 (CET)
+Received: from smtp-out.freemail.hu (fmfe34.freemail.hu [46.107.16.239])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91A99800CF
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 22:52:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4C0680AE2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 22:58:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2f43d17b0e3so2292633a91.0
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 13:52:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738273928; x=1738878728; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Yg2yXeewnWUoskr8089dUi7UHt7f7mxzY+U3NbXgguI=;
- b=dI+JpbddvIZrZb+ObrgdmzSYU7iifIZujZiWs1xQQdcJ/IeOgvf2oS+A4YlMU++k/v
- 6mh64Pzl4QFl5hNoKh2e1JGUMjvWl9R9IdozABYpthlo35bb474W/c8+iMTp5iRuPbuQ
- Gon0TD0sGlWnB/hZAFExiQPJTVL6D3Yi8bq740S+h1ir8j2AUatvM+IyZnuNiCuMZ4Om
- RGjfp0yimINfeKPprXvt1UanDKFZRK9sWPwTXHS2TSgtbLCG1SMmzXGQ73XuPcAKMJoe
- BR/trWZ9Rc3IqFQVK5a6gHGAHvtiZi/bz0b3wAYPHKVaNCTux2CFzYgKydJhLNt4qsHz
- 8DAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738273928; x=1738878728;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Yg2yXeewnWUoskr8089dUi7UHt7f7mxzY+U3NbXgguI=;
- b=F5eQgmRop2rPPCmuHEGpW8iPHWAW3W38wtfNEb/x6XofwPtLnYN3z7BiJEASUuyH6M
- LE0YoyrTO7xCAVNro19UUdNl6VAIBn1g7rSNS57s94kaFxWCwJFTJM4eUupPlRYWexKQ
- PydvGDfBDvEwcX1Ot+4b+cqu02grCXP3WGP4vStKUqr7ffY3FZIL89DKCCjXmxifP3AI
- FmjKIFhPh1DG5dJq/Fh9PKAzcvPVUhX2qfzs3IvieRxMYwvzmR20dDHeyXQ3UeZp4h55
- LT19M4TIeA94OiDpFId/LYGRNafkpn1+XFOC0GaKYnC5EmJnp72h+des/qjtircAZVxX
- VRrg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVv8kBM3nZcg8P6vXiQ9iHw5DMlMHYQNAbVkluJCE9vGzhijpxQgmlcYQsVrVFXkb16ZT4QIcs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxF6MggxSvaR+HpMaSIpnmRl1dNVxrnhZpmXsJVgRiM0IoW9vC0
- bVUd/udoBVoQLGfgifQaufRJekGsYGIo0UIGt4C0ma/+WQI3R1JrGz9XwI8QmnGUnw/e8T//khk
- PZCPT59DYg/r7DtvhaLWaODXH4LJPY6ZrbFAJBw==
-X-Gm-Gg: ASbGnct5eozjbSoWrGJn4PhXjJ5ywAUdBLd+FaRhZzUkye2XGZYepefWeNZom2jN1aO
- MODUDH+o+dvM/dhHk72EP/ApsznrkXAKCApBju6bhhBQiDzEGgVvrfGlDkljqey5KGyVQ+vf01G
- Nfqhtw3eGhQWTMq40YVTGcfClC/Ph3vA==
-X-Google-Smtp-Source: AGHT+IFAbzf+g8ifBq/5VqXlam17EvAL01Tp3j3tSwF6ApxLa5J86pEvROWfz1QeJPlUjQtK2Rh/YK5K/5hSwkJ6dCY=
-X-Received: by 2002:a17:90b:258c:b0:2ee:f687:6acb with SMTP id
- 98e67ed59e1d1-2f83abd9998mr13190396a91.13.1738273928064; Thu, 30 Jan 2025
- 13:52:08 -0800 (PST)
+ spf=pass smtp.mailfrom=egyszeregy@freemail.hu
+Received: from localhost.localdomain (catv-178-48-208-49.catv.fixed.one.hu
+ [178.48.208.49])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.freemail.hu (Postfix) with ESMTPSA id 4YkXvt0MZXz1Bm;
+ Thu, 30 Jan 2025 22:58:18 +0100 (CET)
+From: egyszeregy@freemail.hu
+To: u-boot@lists.denx.de
+Cc: michal.simek@amd.com, love.kumar@amd.com,
+ =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
+Subject: [PATCH] zynqmp: Dynamic setting mmcdev and mmcroot
+Date: Thu, 30 Jan 2025 22:57:06 +0100
+Message-ID: <20250130215706.291-1-egyszeregy@freemail.hu>
+X-Mailer: git-send-email 2.47.1.windows.2
 MIME-Version: 1.0
-References: <20250126184333.4058848-1-sjg@chromium.org>
- <20250126184333.4058848-2-sjg@chromium.org>
- <CAEfUkUJPVLGCoThrP3ZcLwY283FYm2CcU52XDEmguKj0mKSc3Q@mail.gmail.com>
- <20250130195540.GL1233568@bill-the-cat>
- <CAFLszThfiurKbA50EamJBALs0ho+APYkuNs9JyGnm4Ei0cffWA@mail.gmail.com>
-In-Reply-To: <CAFLszThfiurKbA50EamJBALs0ho+APYkuNs9JyGnm4Ei0cffWA@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 30 Jan 2025 16:51:55 -0500
-X-Gm-Features: AWEUYZlNaxSLtLeDqj6UfGGXpwp66IfIRhbtzh2j_-IUyjWxsIDEsHfHdgGluYY
-Message-ID: <CAEfUkUL3m-ZxcZC+7_BJOLy=2KY71dNknZkiFRc_HPLwXw7d=w@mail.gmail.com>
-Subject: Re: [PATCH 01/19] mbedtls: Add SHA symbols for VPL
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1738274298; 
+ s=20181004; d=freemail.hu;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ l=2585; bh=JemaHWl22vuoVyJpA4jshnCb9KHAUNiQj0GFxcnMjPQ=;
+ b=1a1h9RIeEBKBG1MNZ7swlcR6xnNSRTxVhepW4PJWcLI7NEk64oKqds/knwLawfkU
+ 6aDviKvN7q3jiBiJMGuDr6Hb9eCDu8d4ZR3kxishpegg2Nuell0yWgDncvjZTxKezbC
+ bsILq1bRd7hrZ1A3uNOc45vUO4aCOaHRBHiE6a1nYsCESLo1VAP8vuwgLXyhPUDowbs
+ hIAeuZzVs/VZV51joGzlNh+WZwThjHE95rj3xVAZ4bfv8FIklMbY7TXP8IbxHm5KXHH
+ 5OJoSGB+OcTt6lXgpriWo5rkCu8BCVt/+clPGv0YJZ0CVusOZZMTz8M+kvNnH1VeRsB
+ uTvR7BA9dQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,96 +69,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+From: Benjamin Szőke <egyszeregy@freemail.hu>
 
-On Thu, 30 Jan 2025 at 14:59, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Tom,
->
-> On Thu, 30 Jan 2025 at 12:55, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Jan 27, 2025 at 10:23:12AM -0500, Raymond Mao wrote:
-> > > Hi Simon,
-> > >
-> > >
-> > > On Sun, 26 Jan 2025 at 13:43, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Add some symbols for supporting SHA1 etc. for VPL.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > >  lib/mbedtls/Kconfig | 40 ++++++++++++++++++++++++++++++++++++++++
-> > > >  1 file changed, 40 insertions(+)
-> > > >
-> > > > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> > > > index 78167ffa252..81274786106 100644
-> > > > --- a/lib/mbedtls/Kconfig
-> > > > +++ b/lib/mbedtls/Kconfig
-> > > > @@ -112,6 +112,46 @@ config SPL_MD5_LEGACY
-> > > >
-> > > >  endif # SPL
-> > > >
-> > > > +if VPL
-> > > > +
-> > > > +config VPL_SHA1_LEGACY
-> > > > +       bool "Enable SHA1 support in VPL with legacy crypto library"
-> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA1
-> > > > +       help
-> > > > +         This option enables support of hashing using SHA1 algorithm
-> > > > +         with legacy crypto library.
-> > > > +
-> > > > +config VPL_SHA256_LEGACY
-> > > > +       bool "Enable SHA256 support in VPL with legacy crypto library"
-> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA256
-> > > > +       help
-> > > > +         This option enables support of hashing using SHA256 algorithm
-> > > > +         with legacy crypto library.
-> > > > +
-> > > > +config VPL_SHA512_LEGACY
-> > > > +       bool "Enable SHA512 support in VPL with legacy crypto library"
-> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA512
-> > > > +       help
-> > > > +         This option enables support of hashing using SHA512 algorithm
-> > > > +         with legacy crypto library.
-> > > > +
-> > > > +config VPL_SHA384_LEGACY
-> > > > +       bool "Enable SHA384 support in VPL with legacy crypto library"
-> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA384
-> > > > +       select VPL_SHA512_LEGACY
-> > > > +       help
-> > > > +         This option enables support of hashing using SHA384 algorithm
-> > > > +         with legacy crypto library.
-> > > > +
-> > > > +config VPL_MD5_LEGACY
-> > > > +       bool "Enable MD5 support in VPL with legacy crypto library"
-> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_MD5
-> > > > +       help
-> > > > +         This option enables support of hashing using MD5 algorithm
-> > > > +         with legacy crypto library.
-> > > > +
-> > > > +endif # VPL
-> > > > +
-> > >
-> > > Do you mind rebasing this patch on top of my series below?
-> > > https://lore.kernel.org/u-boot/20250127151657.648255-1-raymond.mao@linaro.org/
-> > >
-> > > My one has refactored the entire mbedtls kconfig submenu, makefile and
-> > > default config file to adapt with XPL, so that users can have
-> > > independent config options in both U-Boot proper and XPLs.
-> >
-> > Actually, can you work on top of this one please Raymond? I tried yours
-> > out now and it results in ~4KiB growth so something isn't right there,
-> > but Simon's is fine atm. Thanks!
->
-> Sorry I didn't reply in time....I'm happy with either.
->
+Dynamic setting mmcdev and mmcroot.
+Then when boot linux, we can have correct "root=/dev/mmcblk[x]p2"
 
-If you are ready to merge, no worries, please go ahead and I can
-rebase on yours.
+ref: board/freescale/common/mmc.c
+https://github.com/u-boot/u-boot/blob/master/board/freescale/common/mmc.c
 
-Raymond
+Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
+---
+ board/xilinx/zynqmp/zynqmp.c    | 18 ++++++++++++++++++
+ include/configs/xilinx_zynqmp.h |  1 +
+ 2 files changed, 19 insertions(+)
 
+diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
+index 8cdd9d8600..d450b53982 100644
+--- a/board/xilinx/zynqmp/zynqmp.c
++++ b/board/xilinx/zynqmp/zynqmp.c
+@@ -401,10 +401,14 @@ static int boot_targets_setup(void)
+ 	struct udevice *dev;
+ 	int bootseq = -1;
+ 	int bootseq_len = 0;
++	int mmc_dev_no = -1;
+ 	int env_targets_len = 0;
+ 	const char *mode = NULL;
+ 	char *new_targets;
+ 	char *env_targets;
++	char *autodetect_str = env_get("mmcautodetect");
++	char cmd[32];
++	char mmcblk[32];
+ 
+ 	bootmode = zynqmp_get_bootmode();
+ 
+@@ -438,6 +442,7 @@ static int boot_targets_setup(void)
+ 		debug("mmc0 device found at %p, seq %d\n", dev, dev_seq(dev));
+ 
+ 		mode = "mmc";
++		mmc_dev_no = 0;
+ 		bootseq = dev_seq(dev);
+ 		env_set("modeboot", "emmcboot");
+ 		break;
+@@ -453,6 +458,7 @@ static int boot_targets_setup(void)
+ 		debug("mmc0 device found at %p, seq %d\n", dev, dev_seq(dev));
+ 
+ 		mode = "mmc";
++		mmc_dev_no = 0;
+ 		bootseq = dev_seq(dev);
+ 		env_set("modeboot", "sdboot");
+ 		break;
+@@ -471,6 +477,7 @@ static int boot_targets_setup(void)
+ 		debug("mmc1 device found at %p, seq %d\n", dev, dev_seq(dev));
+ 
+ 		mode = "mmc";
++		mmc_dev_no = 1;
+ 		bootseq = dev_seq(dev);
+ 		env_set("modeboot", "sdboot");
+ 		break;
+@@ -513,6 +520,17 @@ static int boot_targets_setup(void)
+ 
+ 		env_set("boot_targets", new_targets);
+ 		free(new_targets);
++
++		if ((autodetect_str && !strcmp(autodetect_str, "yes")) && (mmc_dev_no >= 0)) {
++			env_set_ulong("mmcdev", (unsigned long)mmc_dev_no);
++
++			/* Set mmcblk env */
++			sprintf(mmcblk, "/dev/mmcblk%dp2 rootwait rw", mmc_dev_no);
++			env_set("mmcroot", mmcblk);
++
++			sprintf(cmd, "mmc dev %d", mmc_dev_no);
++			run_command(cmd, 0);
++		}
+ 	}
+ 
+ 	return 0;
+diff --git a/include/configs/xilinx_zynqmp.h b/include/configs/xilinx_zynqmp.h
+index bb0db7c5ca..1113101717 100644
+--- a/include/configs/xilinx_zynqmp.h
++++ b/include/configs/xilinx_zynqmp.h
+@@ -180,6 +180,7 @@
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	ENV_MEM_LAYOUT_SETTINGS \
+ 	BOOTENV
++	"mmcautodetect=yes\0"
+ #endif
+ 
+ /* SPL can't handle all huge variables - define just DFU */
+-- 
+2.47.1.windows.2
 
-> Regards,
-> SImon
