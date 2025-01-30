@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F07C0218D
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 19:55:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCFAC0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 19:55:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8EA680F03;
-	Thu, 30 Jan 2025 20:55:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 397D580EED;
+	Thu, 30 Jan 2025 20:55:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hnJJGI+h";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ga+TnOpI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02FA980EED; Thu, 30 Jan 2025 20:55:16 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 6297180F06; Thu, 30 Jan 2025 20:55:47 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1A15820FE
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 20:55:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B948080EB6
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 20:55:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ab6f636d821so60885666b.1
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:55:11 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-71ded02b779so683428a34.2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:55:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738266911; x=1738871711; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WcRpCJ8DzRMhcHk+sJjnnAeJC3ljehJNx0QbXjYfqHA=;
- b=hnJJGI+hDrmOfKSIFPYpbd8USLR65uaXABD88+L+nGwe1Vr3J+bcIO2v+ZPL4btA/+
- sE+sYC2tAn64vNVOtUw69re1Axu+dmxI3kjwM9LuDAOAPf1FLja/sec5PRkqZ6xjlEtN
- GAHtKGtg/nHzkQxXlHUrDhTO5F2bmHx2jpit0=
+ d=konsulko.com; s=google; t=1738266943; x=1738871743; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=85Xb/cCO2ppaf/n2uH1loUxviMkCKwfXm9tgKxkgLLA=;
+ b=Ga+TnOpIu26QDAttQNKJRm74QezxtD2dK6QlZeChXNUTVG2tdpNIv/aifvGYpd1YIa
+ I13MpvSsLupiY4FEljkpZJ5oV2udVkOrnM3IXYMXGNbsiOSllMshP3Os958sxwt7XXGC
+ 8253aZHaqzOB4TiiEPbH7VM7CUenBVBJMKwA0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738266911; x=1738871711;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WcRpCJ8DzRMhcHk+sJjnnAeJC3ljehJNx0QbXjYfqHA=;
- b=VT0QmWG20BOoSCqSZXG5WVcfJul9datg258Wm1rduX2IOcaoL9jHIajM0ZaRJZkZOf
- lfdXBhNGHY48bDdqq0v18lxUlo7TEl1/e/NJz8j4zvq5RobnZ+YWrvlKeo9zrWB/ComH
- 9kQTqH+uI/AroKmlH0BxDw2k0+wJfoaSpGrakZSa5ZW2wQqmik39miNeYtR0DYucxBlg
- tgDd2fInESkDwLwgqOr1SgyaKPXqiPfePBDZqU2CDulZLv9l7Iqw+Glf9P8aChwXjeNz
- kF8ktI5HALzDS30CBr44XDe+A2SMEsTqVYbL9Vk2o47a/RfVS/Hl2oM6Xjcyw9tAWz4h
- qa6Q==
-X-Gm-Message-State: AOJu0Yyzcc2QP3BnT1ehA5k1Y5LSx6Cs1VoyC8LNJVl2/f0kr5Jwa87c
- PPnoUPD0zcwa4jM5sqzR6Zsmqa29gybBgsEps9ZR+HaApMeIvB51Gm5YkJCPQ+Sv/eMGXGckIz9
- 9u9mdfbUZKYGu40IhB2UEG/5f7ssfG2T8V9Qc0KEqifmuhlY=
-X-Gm-Gg: ASbGnctRklE4FgaOtMU3OlGlC4dcJD9C69j5hEyWjcY+0zrGFsM6vYCOXMQiWXb9r8J
- ZiDUSXNrVjRZphnjt54RxbA3W3lVK8jmGsqfPlY5t9+NEzPllWHIvdQZJ9fQv+1EC3PO9kdemjg
- ==
-X-Google-Smtp-Source: AGHT+IG1TFWchqjejciXzqnB7C0UhNZpk3yS7C7k97+0swq35sfZmmf6wQfu+MXOQ6/u7AhL9wqqKda0sX6hgs/I3m8=
-X-Received: by 2002:a17:906:dc8b:b0:ab2:b72e:cf44 with SMTP id
- a640c23a62f3a-ab6cfc8730fmr889645766b.2.1738266910720; Thu, 30 Jan 2025
- 11:55:10 -0800 (PST)
+ d=1e100.net; s=20230601; t=1738266943; x=1738871743;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=85Xb/cCO2ppaf/n2uH1loUxviMkCKwfXm9tgKxkgLLA=;
+ b=SSFCpMRk7GEs1dEQWOtDMfQ5mBJv52YNysBRM3X+2MJn177oTJGo82LxGQYiVB7VUQ
+ RPkaGUhvWOARpPZtWwEBGfhdwK/uK5S9LzOOOkv12LvOq9ul8A2bnL3PJh2Rf03NtdJ/
+ gKscYaGfQWuiwP5MEWGlRG6mTdv5tey64dsnAk7UUxLgqQQTKAsDPsPxXP2CaD25aohh
+ a/SZg4bhMGnETjtVjndDSp9RYPRM17M+Avn3Q78J3NALF83hscGjquMB4jgbXGgBafpG
+ 8+4CkoFD4EAoDLLzd7UpBeowsPOYGdOdbAZetB2BDT8tizdmwHdx/GMk/y4zIhF+7ySG
+ He+g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUd8KZ1SemDmXyPh0ysLlnWxYCWZuFl1Vr/rpPCaSlcYz2V0LKMQVNMwy5BlDQa4VKug5K1MFs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiSjkrB7km19gJG+WdZZ3UP3xyuK/lj878yXAKx0i48Npn/zoK
+ WEIdX9RK6Wywwnr6zUgRw0zNFWV2WMVMpvU2PuqhiuY8xn3NNKaxbi+IaP9iYIc=
+X-Gm-Gg: ASbGnctsF3uwAW0UZD4TU7NFvLTMP08zMz0bPWaAoM+N6qPpicNIk2LXIyPuohIY7bd
+ wKLEjHn8xdYK/op7R3aqhmdR1aDXQ6hS0f8Gufg1zTT45OUbSllGcL0+aGQbEVxNEMK97jirhdC
+ NL7+V/+rn5ZeVuYfVyRfmIQmlLRju1fyBrmuOsS4gvmo5y4DtXQiOiXJVRsI93ODFOHPQgS5SSW
+ rn42pHmII5Ilq1pWapMgxQnR15deU8KmHhpbC39rY3zs2dvuHegmARvEwXlSgjh5LBMJlJTNxuc
+ UOueyosbXkTBtMQ=
+X-Google-Smtp-Source: AGHT+IEsGZJuHw7fpQoOvF29NEY/s/WDHKmzqQSEdwDt3KBIEnQa90JnWWcBIV6DNY2enBXrj3cInQ==
+X-Received: by 2002:a05:6830:3114:b0:71e:ab4:6247 with SMTP id
+ 46e09a7af769-72656777f33mr5234446a34.13.1738266943469; 
+ Thu, 30 Jan 2025 11:55:43 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-726616eaf39sm479530a34.0.2025.01.30.11.55.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jan 2025 11:55:42 -0800 (PST)
+Date: Thu, 30 Jan 2025 13:55:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Re: [PATCH 01/19] mbedtls: Add SHA symbols for VPL
+Message-ID: <20250130195540.GL1233568@bill-the-cat>
+References: <20250126184333.4058848-1-sjg@chromium.org>
+ <20250126184333.4058848-2-sjg@chromium.org>
+ <CAEfUkUJPVLGCoThrP3ZcLwY283FYm2CcU52XDEmguKj0mKSc3Q@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241220003447.2913443-1-sjg@chromium.org>
-In-Reply-To: <20241220003447.2913443-1-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 30 Jan 2025 12:54:58 -0700
-X-Gm-Features: AWEUYZlafKbesyC66jya54NnyS-t1TAwUyTH-sMlzDxU3_pB5R22RAegKlblsBE
-Message-ID: <CAFLszThUo1u58Vwy77UEQZG79f7-BB2ysB5-oq-DHbP4c_ciRQ@mail.gmail.com>
-Subject: Re: [PATCH v4 0/5] rpi: Tidy up booting
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Stephen Warren <swarren@wwwdotorg.org>, Stephen Warren <swarren@nvidia.com>,
- Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Francois Berder <fberder@outlook.fr>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "Ivan T. Ivanov" <iivanov@suse.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Robert Marko <robert.marko@sartura.hr>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CBzSgkeCYGQdvu2g"
+Content-Disposition: inline
+In-Reply-To: <CAEfUkUJPVLGCoThrP3ZcLwY283FYm2CcU52XDEmguKj0mKSc3Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,55 +99,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Thu, 19 Dec 2024 at 17:34, Simon Glass <sjg@chromium.org> wrote:
->
-> This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
-> ramdisk, by expanding the available space.
->
-> It also tidies up some strange behaviour with the provided FDT, where a
-> separate pointer is maintained to it, even though U-Boot has copied it
-> and placed it in its own space. This avoids strange bugs where it
-> accidentally gets overwritten when loading a file into memory.
->
-> The patch to expand the devicetree was dropped, meaning that people
-> should be careful to unset fdt_addr in the environment.
->
-> In version 2, it incorporates some changes to fdt_addr, etc. suggested
-> by Tom, as well as adding myself as a maintainer.
->
-> Changes in v4:
-> - Expand the comment on set_fdt_addr()
-> - Update the commit message to talk in terms of my testing
->
-> Changes in v3:
-> - Add to the existing comment block
-> - Update the comment block with the new values, including compression
->
-> Changes in v2:
-> - Add new patch to make myself an rpi maintainer
-> - Add new patch to set bootm_size
-> - Add new patch to drop fdt_high and initrd_high
-> - Drop patch to allow expanding the devicetree during relocation
->
-> Simon Glass (5):
->   rpi: Add myself to the list of maintainers
->   rpi: Set bootm_size to 512MB
->   rpi: Drop fdt_high and initrd_high
->   rpi: Update environment to support booti and large initrd
->   rpi: Use the U-Boot control FDT for fdt_addr
->
->  MAINTAINERS                   |  1 +
->  board/raspberrypi/rpi/rpi.c   | 20 +++++++++----------
->  board/raspberrypi/rpi/rpi.env | 37 +++++++++++++++++++----------------
->  3 files changed, 31 insertions(+), 27 deletions(-)
->
-> --
-> 2.34.1
->
+--CBzSgkeCYGQdvu2g
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We have hit rc1 now. Is there any interest in applying this series?
+On Mon, Jan 27, 2025 at 10:23:12AM -0500, Raymond Mao wrote:
+> Hi Simon,
+>=20
+>=20
+> On Sun, 26 Jan 2025 at 13:43, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Add some symbols for supporting SHA1 etc. for VPL.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  lib/mbedtls/Kconfig | 40 ++++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 40 insertions(+)
+> >
+> > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> > index 78167ffa252..81274786106 100644
+> > --- a/lib/mbedtls/Kconfig
+> > +++ b/lib/mbedtls/Kconfig
+> > @@ -112,6 +112,46 @@ config SPL_MD5_LEGACY
+> >
+> >  endif # SPL
+> >
+> > +if VPL
+> > +
+> > +config VPL_SHA1_LEGACY
+> > +       bool "Enable SHA1 support in VPL with legacy crypto library"
+> > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA1
+> > +       help
+> > +         This option enables support of hashing using SHA1 algorithm
+> > +         with legacy crypto library.
+> > +
+> > +config VPL_SHA256_LEGACY
+> > +       bool "Enable SHA256 support in VPL with legacy crypto library"
+> > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA256
+> > +       help
+> > +         This option enables support of hashing using SHA256 algorithm
+> > +         with legacy crypto library.
+> > +
+> > +config VPL_SHA512_LEGACY
+> > +       bool "Enable SHA512 support in VPL with legacy crypto library"
+> > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA512
+> > +       help
+> > +         This option enables support of hashing using SHA512 algorithm
+> > +         with legacy crypto library.
+> > +
+> > +config VPL_SHA384_LEGACY
+> > +       bool "Enable SHA384 support in VPL with legacy crypto library"
+> > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA384
+> > +       select VPL_SHA512_LEGACY
+> > +       help
+> > +         This option enables support of hashing using SHA384 algorithm
+> > +         with legacy crypto library.
+> > +
+> > +config VPL_MD5_LEGACY
+> > +       bool "Enable MD5 support in VPL with legacy crypto library"
+> > +       depends on LEGACY_CRYPTO_BASIC && VPL_MD5
+> > +       help
+> > +         This option enables support of hashing using MD5 algorithm
+> > +         with legacy crypto library.
+> > +
+> > +endif # VPL
+> > +
+>=20
+> Do you mind rebasing this patch on top of my series below?
+> https://lore.kernel.org/u-boot/20250127151657.648255-1-raymond.mao@linaro=
+=2Eorg/
+>=20
+> My one has refactored the entire mbedtls kconfig submenu, makefile and
+> default config file to adapt with XPL, so that users can have
+> independent config options in both U-Boot proper and XPLs.
 
-Regards,
-Simon
+Actually, can you work on top of this one please Raymond? I tried yours
+out now and it results in ~4KiB growth so something isn't right there,
+but Simon's is fine atm. Thanks!
+
+--=20
+Tom
+
+--CBzSgkeCYGQdvu2g
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeb2TQACgkQFHw5/5Y0
+tyy5PAv+Ic2Zc77tA7Tuhk9aSc/EIljfBT1ZazgDpjMeuEX0Mnnd59oB2OmTYngt
+ZGSi82LNcIPl31Lk0O0VSfg/nZA5S10JPUWHYeqF317jBoKBDS9enjRRN1z1m6Sr
+UOXX2o2w5b7M/PWWHUiIj0A7XSoP0J4W/2LhSLNlaBaVEdrtlODj3q2z/NLVW0V+
+Xe4Y2+8aTgibWDU39VGvD6gf7IsYc8OgJXsP4oCI3p0nNbNo8H7yXhc3dz4kCATK
+uPXChhknJ9Bsi2A4KqQQCQ7Ay/g2dIEH46Rcy4ajd6nCVprz8Cht6Q2KJ6X66naB
+pMPDAh1JMp96dyNsRfFIMkS4nfdS4fPMO9YmbM/lkfvOUg0+TYN/tCymhm4x6DOh
+TBvPkkjoytzCHm9CA6I1nm6689Vo7ikpmcaWTloFeTCeoXKtb1/laidKFUDLUuiI
+mdDEwiVNEoTzWApHqNZ3FMhYowAtscnFkiSbctiGmWgqc6B5coPUMI46pwPoaVOx
+NDBwUQnO
+=O+6c
+-----END PGP SIGNATURE-----
+
+--CBzSgkeCYGQdvu2g--
