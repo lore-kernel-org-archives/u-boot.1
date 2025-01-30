@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EEACC0218F
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 16:46:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00825C0218A
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 16:48:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF3B98212A;
-	Thu, 30 Jan 2025 17:46:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 70068820F6;
+	Thu, 30 Jan 2025 17:48:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Tces3eNf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q8h9JnaM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E76782115; Thu, 30 Jan 2025 17:46:17 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 585D6820FE; Thu, 30 Jan 2025 17:48:06 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A69E88213E
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 17:46:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0FC080EBD
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 17:48:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4125720023=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50UEUwW3000914;
- Thu, 30 Jan 2025 17:45:55 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- KtdMQMxNpSWxcCA6Gl/jlEPAke2uLq2+EnnnLUuhFDY=; b=Tces3eNfs9ePLnU4
- RLmYk2lR7r3ydOVOqZHlKBSfhersBXmYypFYuCeja6nuz+gxdlPaZV+UF7Bg+9p8
- 363WZivREhADpVFmicvl0lNwDhtyujO8Mk44bX3mTuWrD8PYXE7VaE9284DYnmvO
- 9bXhsPG9c/eKgYv60aMClkVW9kTGxYQZeUyecvHaEVTIsIO01RlAeFI3KLAdjZeK
- QxyKGEVJ9WbyHrN965RaMeLCj6D1YZvtRB1KjS7IuG/s2EPLVrQSjCThb9urAhb4
- w5+qS6AXeKvI3dhwjXceNi/qrrZ7mEpJQTV27MEGHO6UpTGSz/5ZB53+rRKuj7VA
- yrujDg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44g8ne9hjf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Jan 2025 17:45:54 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 72B8240046;
- Thu, 30 Jan 2025 17:44:15 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 934D83EBFD5;
- Thu, 30 Jan 2025 17:35:51 +0100 (CET)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Thu, 30 Jan
- 2025 17:35:51 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Caleb Connolly
- <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mathieu Othacehe <othacehe@gnu.org>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Paul Barker
- <paul.barker.ct@bp.renesas.com>, Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 3/9] usb: dwc3: Remove dwc3 glue driver support for STi
-Date: Thu, 30 Jan 2025 17:35:41 +0100
-Message-ID: <20250130163547.512990-4-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250130163547.512990-1-patrice.chotard@foss.st.com>
-References: <20250130163547.512990-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-71e15717a2dso522052a34.3
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 08:48:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738255682; x=1738860482; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IrRAxRDmTiQ3Nw64EIBC3u3rdAldRys9M++yB8XqbZY=;
+ b=q8h9JnaM2G2MsSah9J1FHTdv66MNBTyV+ZCk8+/s0S/3H6PuCNRs5J0xEchgPf3E+g
+ /xlaXqavRDoJxv5pL5Sdv+aMqicYj20nx3z+e90YqyxPMvWSM4k6WRplaoh8OnAZqc5L
+ KgZLDNa1GSiEavu5JxaOD9AyDre4jkZMJ8orQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738255682; x=1738860482;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IrRAxRDmTiQ3Nw64EIBC3u3rdAldRys9M++yB8XqbZY=;
+ b=wNs+rrxUC4tb9t3Zedf46kXp7yREZwPJ9tCG+UudHPqXaefszbVOSp3wgba3bBEsiK
+ O+APSWOrb3FfRgO90uNZmhokgetbPHVWH2JtwMlZUUKbLlBGzaiIslMsb9qzH0VeAuv8
+ 21XCmZbh6qjR/Lz3Nrr291jDJWYya4Eiq0DDlBJWa9NZiCkmV0hhRP7/4nOUAAWVPCGX
+ tDyxpjXTgVNEjs2ITFPaIlS5/kCoNWh6KbFODq3K/BUf20BdkRL+rYSjeaD4RcRnOi4/
+ P9atgaSOZsyKQo0N5XAPvigJ7LfpahgHMH95qSHH2rfGEXRo69T2ik5oKwEYUebu0vQd
+ gDTg==
+X-Gm-Message-State: AOJu0Yw12zqqKpqdXACJVWyC1b7ZvLss+4i1k3MgxAbz5YIZzZhDJM/2
+ 8xCeY0vQq45xWL/8SF8Qgpfvd9ZyG/uEG1eARtHl3ZO8yJq2BKIVYo6nIJTQQln1Jahl5d288sJ
+ 0
+X-Gm-Gg: ASbGncsLJj9axpeUzWTQ6vxOWz8IoqcjFVcTxinqn8pGNoqUhZRsHUf/YdTcpP9qy2m
+ RiZfsMQz09susRjAhqda0+A3GeTi+gaMttgG+7WHs+5VfkfwRm8Vz/NtQff3vle8UesnbidKf/3
+ hJPGcrzCe0k8LAesD515bMBQKDAIEZlyk4C2YZJKON2qYgBQhJJO+CFbLkb0Tm31TcjT/FxGOtp
+ wqj0PnvhISKhutFieIEBQMVPkcWZNoi3/QJAEu6mPnPUpB9CgkO87bpg6lYGp2pSW7S0jQx9c44
+ gCDzgOZKj9HCksA=
+X-Google-Smtp-Source: AGHT+IFeDtY88qTxKVGU0xiAY0mQcV9gHuC+3pD/cTm6gj54BaZvMWXoCba4H28ByqNwMNkUieQH0g==
+X-Received: by 2002:a05:6830:6886:b0:718:6cc:b5a2 with SMTP id
+ 46e09a7af769-726568dca06mr5291683a34.20.1738255682590; 
+ Thu, 30 Jan 2025 08:48:02 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-726618b9f72sm383589a34.50.2025.01.30.08.48.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jan 2025 08:48:01 -0800 (PST)
+Date: Thu, 30 Jan 2025 10:47:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: =?utf-8?B?VG9tw6HFoQ==?= Peterka <tomas.peterka@dronetag.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ =?utf-8?B?VG9tw6HFoSBCZW5lxaE=?= <tomas@dronetag.com>
+Subject: Re: [PATCH] Add Kconfig option for altbootcmd when using
+ CONFIG_BOOTCOUNT_LIMIT
+Message-ID: <20250130164758.GC1233568@bill-the-cat>
+References: <DB8P192MB0743F697B33A404BBC96460383E92@DB8P192MB0743.EURP192.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-30_08,2025-01-30_01,2024-11-22_01
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="w7u7K7u3F3na7lW3"
+Content-Disposition: inline
+In-Reply-To: <DB8P192MB0743F697B33A404BBC96460383E92@DB8P192MB0743.EURP192.PROD.OUTLOOK.COM>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,396 +97,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-STi will migrate to dwc3-generic driver, dwc3-sti-glue driver
-can be removed.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Marek Vasut <marex@denx.de>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+--w7u7K7u3F3na7lW3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
----
+On Thu, Jan 30, 2025 at 03:44:11PM +0000, Tom=C3=A1=C5=A1 Peterka wrote:
 
-Changes in v5:
-  - move this patch from 6/9 to 3/9 position to avoid to have
-    2 drivers with identical compatible string simultaneously.
-  - update commit description accordingly
+> Hello u-boot maintainers,
+>=20
+> I would like to merge a simple patch for user-friendliness when configuri=
+ng u-boot with Yocto. The problem is missing option for altbootcmd when usi=
+ng the feature CONFIG_BOOTCOUNT_LIMIT.  Simply adding the option CONFIG_BOO=
+TCOUNT_ALTBOOTCMD into Kconfig shouldn't be a problem when there is already=
+ CONFIG_BOOTCOMMAND? Users then can use CONFIG_BOOTCOUNT_ALTBOOTCMD instead=
+ of misusing CFG_EXTRA_ENV_SETTINGS (and friends) that are usually used by =
+configs of specific boards.
 
-Changes in v3:
-  - add RB Mattijs Korpershoek
+Thanks for posting this. In general, yes, this the right approach.
 
- MAINTAINERS                      |   2 -
- board/st/stih410-b2260/board.c   |   1 -
- drivers/usb/host/Kconfig         |   9 --
- drivers/usb/host/Makefile        |   1 -
- drivers/usb/host/dwc3-sti-glue.c | 253 -------------------------------
- include/dwc3-sti-glue.h          |  41 -----
- 6 files changed, 307 deletions(-)
- delete mode 100644 drivers/usb/host/dwc3-sti-glue.c
- delete mode 100644 include/dwc3-sti-glue.h
+>=20
+> Many thanks for considering this,
+> Tomas
+>=20
+>=20
+> From 9f5d1863e99c3a33893381cc924f25797b4b6f8a Wed Jan 29 19:06:55 2025 -0=
+600
+> From: Tomas Peterka <tomas.peterka@dronetag.com>
+> Date: Tue, 30 Jan 2025 09:00:00 +0100
+> Subject: [PATCH] Add altbootcmd to Kconfig
+> Upstream-Status: Pending
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8c6c0c2a4bc..0e93f88c2aa 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -657,8 +657,6 @@ F:	drivers/reset/sti-reset.c
- F:	drivers/serial/serial_sti_asc.c
- F:	drivers/sysreset/sysreset_sti.c
- F:	drivers/timer/arm_global_timer.c
--F:	drivers/usb/host/dwc3-sti-glue.c
--F:	include/dwc3-sti-glue.h
- F:	include/dt-bindings/clock/stih407-clks.h
- F:	include/dt-bindings/clock/stih410-clks.h
- F:	include/dt-bindings/reset/stih407-resets.h
-diff --git a/board/st/stih410-b2260/board.c b/board/st/stih410-b2260/board.c
-index a912712c9dd..3a495eb5089 100644
---- a/board/st/stih410-b2260/board.c
-+++ b/board/st/stih410-b2260/board.c
-@@ -9,7 +9,6 @@
- #include <asm/cache.h>
- #include <asm/global_data.h>
- #include <linux/usb/otg.h>
--#include <dwc3-sti-glue.h>
- #include <dwc3-uboot.h>
- #include <usb.h>
- 
-diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-index 24786a2bc91..cd1c03f10d7 100644
---- a/drivers/usb/host/Kconfig
-+++ b/drivers/usb/host/Kconfig
-@@ -110,15 +110,6 @@ config USB_XHCI_RCAR
- 	  Choose this option to add support for USB 3.0 driver on Renesas
- 	  R-Car Gen3 SoCs.
- 
--config USB_XHCI_STI
--	bool "Support for STMicroelectronics STiH407 family on-chip xHCI USB controller"
--	depends on ARCH_STI
--	default y
--	help
--	  Enables support for the on-chip xHCI controller on STMicroelectronics
--	  STiH407 family SoCs. This is a driver for the dwc3 to provide the glue logic
--	  to configure the controller.
--
- config USB_XHCI_DRA7XX_INDEX
- 	int "DRA7XX xHCI USB index"
- 	range 0 1
-diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
-index 301bb9fdee1..902d68d0378 100644
---- a/drivers/usb/host/Makefile
-+++ b/drivers/usb/host/Makefile
-@@ -54,7 +54,6 @@ obj-$(CONFIG_USB_XHCI_GENERIC) += xhci-generic.o
- obj-$(CONFIG_USB_XHCI_OMAP) += xhci-omap.o
- obj-$(CONFIG_USB_XHCI_PCI) += xhci-pci.o
- obj-$(CONFIG_USB_XHCI_RCAR) += xhci-rcar.o
--obj-$(CONFIG_USB_XHCI_STI) += dwc3-sti-glue.o
- obj-$(CONFIG_USB_XHCI_OCTEON) += dwc3-octeon-glue.o
- 
- # designware
-diff --git a/drivers/usb/host/dwc3-sti-glue.c b/drivers/usb/host/dwc3-sti-glue.c
-deleted file mode 100644
-index 3e6834e38e3..00000000000
---- a/drivers/usb/host/dwc3-sti-glue.c
-+++ /dev/null
-@@ -1,253 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * STiH407 family DWC3 specific Glue layer
-- *
-- * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-- */
--
--#include <log.h>
--#include <asm/global_data.h>
--#include <asm/io.h>
--#include <dm.h>
--#include <errno.h>
--#include <dm/lists.h>
--#include <regmap.h>
--#include <reset-uclass.h>
--#include <syscon.h>
--#include <usb.h>
--#include <linux/printk.h>
--
--#include <linux/usb/dwc3.h>
--#include <linux/usb/otg.h>
--#include <dwc3-sti-glue.h>
--
--DECLARE_GLOBAL_DATA_PTR;
--
--/*
-- * struct sti_dwc3_glue_plat - dwc3 STi glue driver private structure
-- * @syscfg_base:	addr for the glue syscfg
-- * @glue_base:		addr for the glue registers
-- * @syscfg_offset:	usb syscfg control offset
-- * @powerdown_ctl:	rest controller for powerdown signal
-- * @softreset_ctl:	reset controller for softreset signal
-- * @mode:		drd static host/device config
-- */
--struct sti_dwc3_glue_plat {
--	phys_addr_t syscfg_base;
--	phys_addr_t glue_base;
--	phys_addr_t syscfg_offset;
--	struct reset_ctl powerdown_ctl;
--	struct reset_ctl softreset_ctl;
--	enum usb_dr_mode mode;
--};
--
--static int sti_dwc3_glue_drd_init(struct sti_dwc3_glue_plat *plat)
--{
--	unsigned long val;
--
--	val = readl(plat->syscfg_base + plat->syscfg_offset);
--
--	val &= USB3_CONTROL_MASK;
--
--	switch (plat->mode) {
--	case USB_DR_MODE_PERIPHERAL:
--		val &= ~(USB3_DELAY_VBUSVALID
--			| USB3_SEL_FORCE_OPMODE | USB3_FORCE_OPMODE(0x3)
--			| USB3_SEL_FORCE_DPPULLDOWN2 | USB3_FORCE_DPPULLDOWN2
--			| USB3_SEL_FORCE_DMPULLDOWN2 | USB3_FORCE_DMPULLDOWN2);
--
--		val |= USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID;
--		break;
--
--	case USB_DR_MODE_HOST:
--		val &= ~(USB3_DEVICE_NOT_HOST | USB3_FORCE_VBUSVALID
--			| USB3_SEL_FORCE_OPMODE	| USB3_FORCE_OPMODE(0x3)
--			| USB3_SEL_FORCE_DPPULLDOWN2 | USB3_FORCE_DPPULLDOWN2
--			| USB3_SEL_FORCE_DMPULLDOWN2 | USB3_FORCE_DMPULLDOWN2);
--
--		val |= USB3_DELAY_VBUSVALID;
--		break;
--
--	default:
--		pr_err("Unsupported mode of operation %d\n", plat->mode);
--		return -EINVAL;
--	}
--	writel(val, plat->syscfg_base + plat->syscfg_offset);
--
--	return 0;
--}
--
--static void sti_dwc3_glue_init(struct sti_dwc3_glue_plat *plat)
--{
--	unsigned long reg;
--
--	reg = readl(plat->glue_base + CLKRST_CTRL);
--
--	reg |= AUX_CLK_EN | EXT_CFG_RESET_N | XHCI_REVISION;
--	reg &= ~SW_PIPEW_RESET_N;
--
--	writel(reg, plat->glue_base + CLKRST_CTRL);
--
--	/* configure mux for vbus, powerpresent and bvalid signals */
--	reg = readl(plat->glue_base + USB2_VBUS_MNGMNT_SEL1);
--
--	reg |= SEL_OVERRIDE_VBUSVALID(USB2_VBUS_UTMIOTG) |
--	       SEL_OVERRIDE_POWERPRESENT(USB2_VBUS_UTMIOTG) |
--	       SEL_OVERRIDE_BVALID(USB2_VBUS_UTMIOTG);
--
--	writel(reg, plat->glue_base + USB2_VBUS_MNGMNT_SEL1);
--
--	setbits_le32(plat->glue_base + CLKRST_CTRL, SW_PIPEW_RESET_N);
--}
--
--static int sti_dwc3_glue_of_to_plat(struct udevice *dev)
--{
--	struct sti_dwc3_glue_plat *plat = dev_get_plat(dev);
--	struct udevice *syscon;
--	struct regmap *regmap;
--	int ret;
--	u32 reg[4];
--
--	ret = ofnode_read_u32_array(dev_ofnode(dev), "reg", reg,
--				    ARRAY_SIZE(reg));
--	if (ret) {
--		pr_err("unable to find st,stih407-dwc3 reg property(%d)\n", ret);
--		return ret;
--	}
--
--	plat->glue_base = reg[0];
--	plat->syscfg_offset = reg[2];
--
--	/* get corresponding syscon phandle */
--	ret = uclass_get_device_by_phandle(UCLASS_SYSCON, dev, "st,syscfg",
--					   &syscon);
--	if (ret) {
--		pr_err("unable to find syscon device (%d)\n", ret);
--		return ret;
--	}
--
--	/* get syscfg-reg base address */
--	regmap = syscon_get_regmap(syscon);
--	if (!regmap) {
--		pr_err("unable to find regmap\n");
--		return -ENODEV;
--	}
--	plat->syscfg_base = regmap->ranges[0].start;
--
--	/* get powerdown reset */
--	ret = reset_get_by_name(dev, "powerdown", &plat->powerdown_ctl);
--	if (ret) {
--		pr_err("can't get powerdown reset for %s (%d)", dev->name, ret);
--		return ret;
--	}
--
--	/* get softreset reset */
--	ret = reset_get_by_name(dev, "softreset", &plat->softreset_ctl);
--	if (ret)
--		pr_err("can't get soft reset for %s (%d)", dev->name, ret);
--
--	return ret;
--};
--
--static int sti_dwc3_glue_bind(struct udevice *dev)
--{
--	struct sti_dwc3_glue_plat *plat = dev_get_plat(dev);
--	ofnode node, dwc3_node;
--
--	/* Find snps,dwc3 node from subnode */
--	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
--		if (ofnode_device_is_compatible(node, "snps,dwc3"))
--			dwc3_node = node;
--	}
--
--	if (!ofnode_valid(dwc3_node)) {
--		pr_err("Can't find dwc3 subnode for %s\n", dev->name);
--		return -ENODEV;
--	}
--
--	/* retrieve the DWC3 dual role mode */
--	plat->mode = usb_get_dr_mode(dwc3_node);
--	if (plat->mode == USB_DR_MODE_UNKNOWN)
--		/* by default set dual role mode to HOST */
--		plat->mode = USB_DR_MODE_HOST;
--
--	return dm_scan_fdt_dev(dev);
--}
--
--static int sti_dwc3_glue_probe(struct udevice *dev)
--{
--	struct sti_dwc3_glue_plat *plat = dev_get_plat(dev);
--	int ret;
--
--	/* deassert both powerdown and softreset */
--	ret = reset_deassert(&plat->powerdown_ctl);
--	if (ret < 0) {
--		pr_err("DWC3 powerdown reset deassert failed: %d", ret);
--		return ret;
--	}
--
--	ret = reset_deassert(&plat->softreset_ctl);
--	if (ret < 0) {
--		pr_err("DWC3 soft reset deassert failed: %d", ret);
--		goto softreset_err;
--	}
--
--	ret = sti_dwc3_glue_drd_init(plat);
--	if (ret)
--		goto init_err;
--
--	sti_dwc3_glue_init(plat);
--
--	return 0;
--
--init_err:
--	ret = reset_assert(&plat->softreset_ctl);
--	if (ret < 0) {
--		pr_err("DWC3 soft reset deassert failed: %d", ret);
--		return ret;
--	}
--
--softreset_err:
--	ret = reset_assert(&plat->powerdown_ctl);
--	if (ret < 0)
--		pr_err("DWC3 powerdown reset deassert failed: %d", ret);
--
--	return ret;
--}
--
--static int sti_dwc3_glue_remove(struct udevice *dev)
--{
--	struct sti_dwc3_glue_plat *plat = dev_get_plat(dev);
--	int ret;
--
--	/* assert both powerdown and softreset */
--	ret = reset_assert(&plat->powerdown_ctl);
--	if (ret < 0) {
--		pr_err("DWC3 powerdown reset deassert failed: %d", ret);
--		return ret;
--	}
--
--	ret = reset_assert(&plat->softreset_ctl);
--	if (ret < 0)
--		pr_err("DWC3 soft reset deassert failed: %d", ret);
--
--	return ret;
--}
--
--static const struct udevice_id sti_dwc3_glue_ids[] = {
--	{ .compatible = "st,stih407-dwc3" },
--	{ }
--};
--
--U_BOOT_DRIVER(dwc3_sti_glue) = {
--	.name = "dwc3_sti_glue",
--	.id = UCLASS_NOP,
--	.of_match = sti_dwc3_glue_ids,
--	.of_to_plat = sti_dwc3_glue_of_to_plat,
--	.probe = sti_dwc3_glue_probe,
--	.remove = sti_dwc3_glue_remove,
--	.bind = sti_dwc3_glue_bind,
--	.plat_auto	= sizeof(struct sti_dwc3_glue_plat),
--	.flags = DM_FLAG_ALLOC_PRIV_DMA,
--};
-diff --git a/include/dwc3-sti-glue.h b/include/dwc3-sti-glue.h
-deleted file mode 100644
-index 546ffbaf7b4..00000000000
---- a/include/dwc3-sti-glue.h
-+++ /dev/null
-@@ -1,41 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-- */
--
--#ifndef __DWC3_STI_UBOOT_H_
--#define __DWC3_STI_UBOOT_H_
--
--/* glue registers */
--#include <linux/bitops.h>
--#define CLKRST_CTRL		0x00
--#define AUX_CLK_EN		BIT(0)
--#define SW_PIPEW_RESET_N	BIT(4)
--#define EXT_CFG_RESET_N		BIT(8)
--
--#define XHCI_REVISION		BIT(12)
--
--#define USB2_VBUS_MNGMNT_SEL1	0x2C
--#define USB2_VBUS_UTMIOTG	0x1
--
--#define SEL_OVERRIDE_VBUSVALID(n)	((n) << 0)
--#define SEL_OVERRIDE_POWERPRESENT(n)	((n) << 4)
--#define SEL_OVERRIDE_BVALID(n)		((n) << 8)
--
--/* Static DRD configuration */
--#define USB3_CONTROL_MASK		0xf77
--
--#define USB3_DEVICE_NOT_HOST		BIT(0)
--#define USB3_FORCE_VBUSVALID		BIT(1)
--#define USB3_DELAY_VBUSVALID		BIT(2)
--#define USB3_SEL_FORCE_OPMODE		BIT(4)
--#define USB3_FORCE_OPMODE(n)		((n) << 5)
--#define USB3_SEL_FORCE_DPPULLDOWN2	BIT(8)
--#define USB3_FORCE_DPPULLDOWN2		BIT(9)
--#define USB3_SEL_FORCE_DMPULLDOWN2	BIT(10)
--#define USB3_FORCE_DMPULLDOWN2		BIT(11)
--
--int sti_dwc3_init(enum usb_dr_mode mode);
--
--#endif /* __DWC3_STI_UBOOT_H_ */
--- 
-2.25.1
+Here is where you need to explain the purpose of the commit. Ideally
+this is what you should git send-email as well, as that might help with
+the next problem.
 
+> ---
+> diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
+> index 0080d2a165..982ddc9826 100644
+> --- a/drivers/bootcount/Kconfig
+> +++ b/drivers/bootcount/Kconfig
+> @@ -183,6 +183,12 @@ config BOOTCOUNT_BOOTLIMIT
+> counter being cleared.
+> If set to 0, do not set a boot limit in the environment.
+>=20
+> +config BOOTCOUNT_ALTBOOTCMD
+> + string "Alternative boot command when BOOTLIMIT is reached"
+> + default "env set bootfile altboot.scr; bootflow scan -lb"
+> + help
+> + Set the alternative boot command once BOOTLIMIT is reached
+> +
+
+I suspect due to how this was sent, there's whitespace problems.
+
+Also, we shouldn't specify a default here, as that ends up being
+per-platform. Migrating that in turn might be a bit tricky since you
+need to take it from a few different places depending on the board. It
+probably involves doing some loops of building u-boot-initial-env for
+all the platforms that enable BOOTCOUNT. If this sounds a bit too much,
+I can v2 things with that if you like.
+
+--=20
+Tom
+
+--w7u7K7u3F3na7lW3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmebrTsACgkQFHw5/5Y0
+tywRjwwAsfeVa2UFlIIDPbI3fpaXTA8WWrTZnetOaw81KBwkbhkpWbGI0aP+1LdN
+RF27xWTJTwRFNK23vBz7ZmlLS0uRCfgh6SIeR4jz2BPGrBkFZkfgzatvyOkOQc9O
+sWP8BIZRRRNVEixArjCrsdU6YMDL+9SmnkFSqLKJwCLzfiAkuvD6kvXyCaOHMZ78
+mej+ET7ec/nSy9zL4EJFcjtpTOzfE5OJdYG2+iDGKpc6hMkvGZZJWmXyi8G+ZwDa
+d1SyJ/ibxWnxPL4IN0AZkfnII3A2tYOsJJ31kt8SGWB9ufv5wiWVsVGtepjo+jxk
+SN79DVX9a4SU2TTkR3uwIaD6E3t+50RYQ41kAhTnFdS21MW4Xjf93ZdOgrdVnu/N
+1h27/cJSaMNmZ5vRlrEpyDLUYgk/5mbXnZ5GP7RreXSO2VZM2UoCvMw/eYN7MT04
+CHRBMqM4PP1xZhCv/9tEZsMH6PIp3S1OUvKGdKslctie4Xiz5kEJSziH0bfmyiTo
+FAdv9nw3
+=rhaY
+-----END PGP SIGNATURE-----
+
+--w7u7K7u3F3na7lW3--
