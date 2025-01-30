@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F04C02190
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0126C02190
+	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 10:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 147BF81F69;
-	Thu, 30 Jan 2025 11:31:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 726D281F69;
+	Thu, 30 Jan 2025 11:32:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NRbzjQXX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k+YPOSa8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14E1B82012; Thu, 30 Jan 2025 11:31:01 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 641D582099; Thu, 30 Jan 2025 11:32:17 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C59DB80C85
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:30:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 143C180C85
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 11:32:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e580d6211c8so1183806276.1
- for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:30:58 -0800 (PST)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e549dd7201cso1179579276.0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 02:32:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738233057; x=1738837857; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738233134; x=1738837934; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zFfx6bzwH6AmTgbCnIGSAVe5dqt0tW6ZupvyXBkhIcY=;
- b=NRbzjQXXtJ6oc8xqHYxynWtV5rtOacSNFdVDvEBDMRiVT80GVu+YyYWMpoVMq1rb2Z
- sHD9ItUchfFOKbZ83AUMa9KdGmdaqSpnEzNoUio8EDIh5/xNm7lbbw5s7vjBk4TgOaNe
- hThX1aGFpa9ZtErz7OlYWz/zDF+h1vZzWd+Me3Ujv62cdVpVF11ThfiTCSGB+1qsWH9d
- WDECeo7AOWGpuE2rPQTM96G/inx2ASIazBOZyJhQgAg2TowQqH8zM/NdAYYaOREKOlKs
- DNrXHMUk0PT8H1nE2hOWCdSmWU4E6ZX8bPRJzbcsCdCz1z0xIFkzvn7QIiiX6ddS1QTR
- mWOA==
+ bh=QOAuh5fR4Oz9Xh6rB8VKo+ZJXIMN4TYOAUeOsRZMqes=;
+ b=k+YPOSa8uANVNLJ11hsiMqhbabeIgL/ZQGUVKROqth3bnr5pEV67jRAk5XumXFhh/y
+ /Fk1htyZF8kGHTqGGSyiJJKw8FuIXGFZ026VLV3EjICJo3fIznslyyygXUwq+p5uny7a
+ /Akh4Y2u7AoEveHoGbfZqXLHiyocHTZ/7C7oZSHjNS818QhfZx3bjKoffe067f/cZdg6
+ gSSLPjDUzVtVr6JiMYioHhJu4HmaHJKdtrAahNIu3n2oRWUfb0HWoXoyMHqtDORriwTx
+ tsaxIxIA7eKjJLwFKiaDlzWXwLhr7vFDg5GwGQUyEFfWFKXK6iiycZBtCFzzY95pjj88
+ NdMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738233057; x=1738837857;
+ d=1e100.net; s=20230601; t=1738233134; x=1738837934;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zFfx6bzwH6AmTgbCnIGSAVe5dqt0tW6ZupvyXBkhIcY=;
- b=d9oUp5dllJjjnWkf6MRQQJFSOw5szbXWgea1uvxVimSRmHuFcbVutuMSMkJcx7+LPp
- QSG5ZoaYBjMjiEz1Z1qiqF9Bn0geyAQKu6Oevay3xLk1x+Tk+UWztnK01ULVvnQgKxWT
- l/U01Git9+stp3M1RgqFqKrR7VsrB7Y7SS93vFJ3PnGwV3cW2u2/hdQVSQvbPC8zE+g5
- 3Amxsxt/+0Nqzx8Q+4Tkkei1mV1SgqQvpxlGV9sVhSDHb2mCIGvMLj4w+Jr35T6X030y
- mL3r4A0KD+EEWxMQrwHmKTbbe1+hTux7IPO4ebNGucM5Sg01kG1JZwMKWrtCGa2N4l98
- F3ow==
+ bh=QOAuh5fR4Oz9Xh6rB8VKo+ZJXIMN4TYOAUeOsRZMqes=;
+ b=U3SQh9LO2P31ICK66OPlZFeKKz7u4c64j+w5vVh44zHOk5P3mO7bNT21IiCWpOTkCv
+ /N1mQCZuTW5rlTyJiJoFY+8C5oRazqhB2h3jjGyTdnPPc1tzfTs2u6w+B3E1xt/KgCq2
+ Muf6WNiymPrl6KPfZ/xeGvLpAWW1EUxoIoaLkr36HfuIig4+GpLJJn91T5EFql5mrFTM
+ IiF1rfbZvDDuAc96AjMz5DjO32HCedH+iqf8kvESE56rf0SbO8kAsIHu94tMwq3QDYt9
+ rT29VU39QBX6pbsphYdGPVW1R7tR7JBO0K2U6Z/LZ/ayE7CorOCLCGqqmXw8V1WEJdn8
+ v08Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUofP+EiZ8PdEiNgZyElmjEfj9yFEkG5ouUrOHpFlsDc3t4Thc4sHndYcLCqee9qQyi16wxeqE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmiFxlI1sfoRllzV1AsXEfz0dasO05bdpHIGfh9x6H18PU/6ze
- ve3NA1EICJxaLoCZ8oV8h7E3QmRRobicGfSrc+OBTcT4W5yWqBdu4evzpo/ekUflw54NmFsMD2a
- ttLx+4KK3pn1Bg2qo2Ki3tLq7ArtvuvAk0GETbA==
-X-Gm-Gg: ASbGncvwQPw8Sl4rpFKcfuGe4invwYGlaSUMqEjVJ8bzA7STKFju32SpdPupIEALPxu
- qSlFGRQlOGsZUYz43gN79v3eR8xBswdwW0+VpfQ9DWEPvTi1ezsVS5vkVzcXqPDa02cYtG+vG
-X-Google-Smtp-Source: AGHT+IF+m8EuPTMIxF78p4ato7nTetmUryfJvHQPOVyZ8kKiJPT1Zta1mqAclkQ033OESdCy1qAwoM5f8vX3tgju9aM=
-X-Received: by 2002:a05:6902:e82:b0:e56:7cf6:7b49 with SMTP id
- 3f1490d57ef6-e58a4bd7ecbmr4742921276.38.1738233056956; Thu, 30 Jan 2025
- 02:30:56 -0800 (PST)
+ AJvYcCWhG8fDiVw4VAIdwiyab2F7Yh+wigY9loil+sRL+rW6aKk2WmoarwAlpIByYduLEp2MPUpDC1Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxzyf+bzFU/oTGWUZnvgvnUfLzlkMYUU+u33S/1noQtG+GOl8Aa
+ Y8M/DuKnwkc1Dy8JaxzpkpipT8qlcNhoyOY9qjuAagmfPO34B0oTxWIIRCGp3SHcYJFTEkEhVTI
+ 4NgmZWMSKoKM0K/7Jpn+zj1VTFjNgspIowBGMNw==
+X-Gm-Gg: ASbGncvOqViZOc0FzYlsBmydOrJ1xDy9i3EPbz2tlGMgmFhSqwYW9nWomhRaUw+PNb3
+ 7LE8D3vLh8hDC9hKVOcTOvY21/2hAIUln5ZdRgN9UXE+k0SyHYdDchBgxtW9MeowtYtXVpk+s
+X-Google-Smtp-Source: AGHT+IFtNPN6bw7aPMXkV0VGqQ8yiTfGf9ddBw3Gt0C9P/cXDatMgOrInmd+o3REbaHU/a3U96FgIro+dcb0+DBMbNA=
+X-Received: by 2002:a05:6902:1248:b0:e57:f9a6:18eb with SMTP id
+ 3f1490d57ef6-e58a4aa8364mr4895094276.4.1738233133786; Thu, 30 Jan 2025
+ 02:32:13 -0800 (PST)
 MIME-Version: 1.0
 References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <20250130072100.27297-3-ilias.apalodimas@linaro.org>
- <1c795dd4-9074-434a-afb5-4bf4b35a04b3@gmx.de>
-In-Reply-To: <1c795dd4-9074-434a-afb5-4bf4b35a04b3@gmx.de>
+ <20250130072100.27297-4-ilias.apalodimas@linaro.org>
+ <60b99e2f-a354-4449-bdd2-abba07615321@gmx.de>
+In-Reply-To: <60b99e2f-a354-4449-bdd2-abba07615321@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 30 Jan 2025 12:30:21 +0200
-X-Gm-Features: AWEUYZnglnFCXSTY5efOZSddQKeAQMjX-49qIu8hAibSSS34QHGOLZUy_vfNfNw
-Message-ID: <CAC_iWj+M+eBJ3mr5UNzXRd5EBiXXfdzjz+S-Y47nBf3qR8-+Uw@mail.gmail.com>
-Subject: Re: [RFC PATCH 2/4] arm: Prepare linker scripts for memory permissions
+Date: Thu, 30 Jan 2025 12:31:37 +0200
+X-Gm-Features: AWEUYZneqAvPvJoeoYE07SrCZ8I50ccKVT6Zf7p-_j9JFsqlsqSFoLnlxyjT83g
+Message-ID: <CAC_iWjKEptv2wdJ7JB=6tF_Ar-_2qAvh-78wze7GwgdkA54pXQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 3/4] arm64: mmu_change_region_attr() add an option not
+ to break PTEs
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
  =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Peter Hoyes <Peter.Hoyes@arm.com>, 
- Andre Przywara <andre.przywara@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Sam Day <me@samcday.com>, Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
  Michal Simek <michal.simek@amd.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, 
- maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io, maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,187 +108,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
-
-On Thu, 30 Jan 2025 at 12:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 30 Jan 2025 at 12:13, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 1/30/25 07:20, Ilias Apalodimas wrote:
-> > Upcoming patches are switching the memory mappings to RW, RO, RW^X page
->
-> RWX, RO, RW?
-
-RW, RX, RO :)
-
->
-> > permissions after the U-Boot binary and its data are relocated. Add
-> > annotations in the linker scripts to and mark text, data, rodata etc
-> > sections and align them to a page boundary
+> > The ARM ARM on section 8.17.1 describes the cases where
+> > break-before-make is required when changing live page tables.
+> > Since we can use this function to tweak block and page permssions,
+> > where BBM is not required add an extra argument to the function.
+> >
+> > While at it add a function we can use to change the attributes of normal
+> > memory without breaking the pages tables first
 > >
 > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > > ---
-> >   Makefile                       | 15 +++++++++------
-> >   arch/arm/cpu/armv8/u-boot.lds  | 32 +++++++++++++++++++-------------
-> >   include/asm-generic/sections.h |  2 ++
-> >   lib/efi_loader/efi_runtime.c   |  2 ++
-> >   4 files changed, 32 insertions(+), 19 deletions(-)
+> >   arch/arm/cpu/armv8/cache_v8.c           | 27 ++++++++++++++++++++++++-
+> >   arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 ++++-----
+> >   arch/arm/include/asm/system.h           |  3 ++-
+> >   arch/arm/mach-snapdragon/board.c        |  2 +-
+> >   4 files changed, 34 insertions(+), 8 deletions(-)
 > >
-> > diff --git a/Makefile b/Makefile
-> > index 33bb86343c5b..8d7c062ec830 100644
-> > --- a/Makefile
-> > +++ b/Makefile
-> > @@ -2176,13 +2176,16 @@ System.map:   u-boot
-> >   # ARM relocations should all be R_ARM_RELATIVE (32-bit) or
-> >   # R_AARCH64_RELATIVE (64-bit).
-> >   checkarmreloc: u-boot
-> > -     @RELOC="`$(CROSS_COMPILE)readelf -r -W $< | cut -d ' ' -f 4 | \
-> > +     @RELOCS="`$(CROSS_COMPILE)readelf -r -W $< | cut -d ' ' -f 4 | \
-> >               grep R_A | sort -u`"; \
-> > -     if test "$$RELOC" != "R_ARM_RELATIVE" -a \
-> > -              "$$RELOC" != "R_AARCH64_RELATIVE"; then \
-> > -             echo "$< contains unexpected relocations: $$RELOC"; \
-> > -             false; \
-> > -     fi
-> > +     for reloc in $$RELOCS; do \
-> > +             if [ "$$reloc" != "R_ARM_RELATIVE" -a \
-> > +                  "$$reloc" != "R_AARCH64_RELATIVE" -a \
-> > +             "$$reloc" != "R_AARCH64_NONE" ]; then \
-> > +                     echo "$< contains unexpected relocations: $$reloc"; \
-> > +                     false; \
-> > +             fi; \
-> > +     done
+> > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> > index a4ca56c8ed42..60d0870013e8 100644
+> > --- a/arch/arm/cpu/armv8/cache_v8.c
+> > +++ b/arch/arm/cpu/armv8/cache_v8.c
+> > @@ -968,11 +968,14 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
+> >    * The procecess is break-before-make. The target region will be marked as
+> >    * invalid during the process of changing.
+> >    */
+> > -void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
+> > +void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs, bool bbm)
 >
-> This seems to be an unrelated change that should go into a separate patch.
-
-It's not, R_AARCH64_NONE relocation are emitted now due to the section
-alignments.
-
+> The function description should be moved to the include or be completed
+> here.
 >
+
+That's a preexisting function, but I can move it around on the next iteration
+
+> >   {
+> >       int level;
+> >       u64 r, size, start;
 > >
-> >   tools/version.h: include/version.h
-> >       $(Q)mkdir -p $(dir $@)
-> > diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-> > index 857f44412e07..18e168e27135 100644
-> > --- a/arch/arm/cpu/armv8/u-boot.lds
-> > +++ b/arch/arm/cpu/armv8/u-boot.lds
-> > @@ -22,7 +22,7 @@ SECTIONS
-> >
-> >       . = ALIGN(8);
-> >       __image_copy_start = ADDR(.text);
-> > -     .text :
-> > +     .text ALIGN(4096):
-> >       {
-> >               CPUDIR/start.o (.text*)
-> >       }
-> > @@ -36,9 +36,12 @@ SECTIONS
-> >                   __efi_runtime_stop = .;
-> >       }
-> >
-> > -     .text_rest :
-> > +     .text_rest ALIGN(4096) :
-> >       {
-> > +             __text_start = .;
-> >               *(.text*)
-> > +             . = ALIGN(4096);
-> > +             __text_end = .;
-> >       }
-> >
-> >   #ifdef CONFIG_ARMV8_PSCI
-> > @@ -98,27 +101,30 @@ SECTIONS
-> >       }
-> >   #endif
-> >
-> > -     . = ALIGN(8);
-> > -     .rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
-> > +     .rodata ALIGN(4096): {
-> > +         __start_rodata = .;
-> > +         *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-> > +         . = ALIGN(4096);
-> > +         __end_rodata = .;
-> > +     }
-> >
-> > -     . = ALIGN(8);
-> > -     .data : {
-> > +     .data ALIGN(4096) : {
-> > +         __start_data = .;
-> >               *(.data*)
-> > +         . = ALIGN(4096);
-> > +         __end_data = .;
-> >       }
-> >
-> > -     . = ALIGN(8);
-> > -
-> > -     . = .;
-> > -
-> >       . = ALIGN(8);
-> >       __u_boot_list : {
-> >               KEEP(*(SORT(__u_boot_list*)));
-> >       }
-> >
-> > -     .efi_runtime_rel : {
-> > +     .efi_runtime_rel ALIGN(4096) : {
-> >                   __efi_runtime_rel_start = .;
-> >               *(.rel*.efi_runtime)
-> >               *(.rel*.efi_runtime.*)
-> > +             . = ALIGN(4096);
-> >                   __efi_runtime_rel_stop = .;
-> >       }
-> >
-> > @@ -136,10 +142,10 @@ SECTIONS
+> > +     if (!bbm)
+> > +             goto skip_bbm;
+> > +
+> >       start = addr;
+> >       size = siz;
 > >       /*
-> >        * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
-> >        */
-> > -     .bss ALIGN(8) : {
-> > +     .bss ALIGN(4096) : {
-> >               __bss_start = .;
-> >               *(.bss*)
-> > -             . = ALIGN(8);
-> > +             . = ALIGN(4096);
-> >               __bss_end = .;
-> >       }
+> > @@ -997,6 +1000,7 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
+> >                          gd->arch.tlb_addr + gd->arch.tlb_size);
+> >       __asm_invalidate_tlb_all();
 > >
-> > diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
-> > index b6bca53db10d..5626df796f33 100644
-> > --- a/include/asm-generic/sections.h
-> > +++ b/include/asm-generic/sections.h
-> > @@ -23,6 +23,7 @@ extern char __kprobes_text_start[], __kprobes_text_end[];
-> >   extern char __entry_text_start[], __entry_text_end[];
-> >   extern char __initdata_begin[], __initdata_end[];
-> >   extern char __start_rodata[], __end_rodata[];
-> > +extern char __start_data[], __end_data[];
-> >   extern char __efi_helloworld_begin[];
-> >   extern char __efi_helloworld_end[];
-> >   extern char __efi_var_file_begin[];
-> > @@ -63,6 +64,7 @@ static inline int arch_is_kernel_data(unsigned long addr)
+> > +skip_bbm:
+> >       /*
+> >        * Loop through the address range until we find a page granule that fits
+> >        * our alignment constraints, then set it to the new cache attributes
+> > @@ -1020,6 +1024,27 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
+> >       __asm_invalidate_tlb_all();
+> >   }
 > >
-> >   /* Start of U-Boot text region */
-> >   extern char __text_start[];
-> > +extern char __text_end[];
-> >
-> >   /* This marks the text region which must be relocated */
-> >   extern char __image_copy_start[], __image_copy_end[];
-> > diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-> > index 35eb6a777665..c10a79301a92 100644
-> > --- a/lib/efi_loader/efi_runtime.c
-> > +++ b/lib/efi_loader/efi_runtime.c
-> > @@ -742,6 +742,8 @@ void efi_runtime_relocate(ulong offset, struct efi_mem_desc *map)
-> >                     rel->info, *p, rel->offset);
-> >
-> >               switch (rel->info & R_MASK) {
-> > +             case 0:
-> > +                     break;
+> > +void mmu_set_attrs(phys_addr_t addr, size_t size, int type)
 >
-> This seems to be an unrelated patch that should be in a separate patch.
+> Please, add a function description.
+>
+> The function should either be static or added to an include file.
 
-Same as above
+Yea I will
 
-Cheers
+>
+> > +{
+> > +     u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE | PTE_TYPE_VALID;
+> > +
+> > +     switch (type) {
+> > +     case 1:
+> > +     /* RO */
+> > +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_RO;
+> > +             break;
+> > +     case 2:
+> > +             /* RX */
+> > +             attrs |= PTE_BLOCK_RO;
+> > +             break;
+> > +     case 3:
+> > +             /* RW */
+> > +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN;
+> > +     }
+> > +
+> > +     mmu_change_region_attr(addr, size, attrs, false);
+> > +}
+> > +
+> >   #else       /* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
+> >
+> >   /*
+> > diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+> > index d2d3e346a36f..caf1dab05936 100644
+> > --- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+> > +++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+> > @@ -1573,7 +1573,7 @@ void update_early_mmu_table(void)
+> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
+> >                                       PTE_BLOCK_OUTER_SHARE           |
+> >                                       PTE_BLOCK_NS                    |
+> > -                                     PTE_TYPE_VALID);
+> > +                                     PTE_TYPE_VALID, true);
+> >       } else {
+> >               mmu_change_region_attr(
+> >                                       CFG_SYS_SDRAM_BASE,
+> > @@ -1581,7 +1581,7 @@ void update_early_mmu_table(void)
+> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
+> >                                       PTE_BLOCK_OUTER_SHARE           |
+> >                                       PTE_BLOCK_NS                    |
+> > -                                     PTE_TYPE_VALID);
+> > +                                     PTE_TYPE_VALID, true);
+> >   #ifdef CONFIG_SYS_DDR_BLOCK3_BASE
+> >   #ifndef CONFIG_SYS_DDR_BLOCK2_SIZE
+> >   #error "Missing CONFIG_SYS_DDR_BLOCK2_SIZE"
+> > @@ -1594,7 +1594,7 @@ void update_early_mmu_table(void)
+> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
+> >                                       PTE_BLOCK_OUTER_SHARE           |
+> >                                       PTE_BLOCK_NS                    |
+> > -                                     PTE_TYPE_VALID);
+> > +                                     PTE_TYPE_VALID, true);
+> >                       mmu_change_region_attr(
+> >                                       CONFIG_SYS_DDR_BLOCK3_BASE,
+> >                                       gd->ram_size -
+> > @@ -1603,7 +1603,7 @@ void update_early_mmu_table(void)
+> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
+> >                                       PTE_BLOCK_OUTER_SHARE           |
+> >                                       PTE_BLOCK_NS                    |
+> > -                                     PTE_TYPE_VALID);
+> > +                                     PTE_TYPE_VALID, true);
+> >               } else
+> >   #endif
+> >               {
+> > @@ -1614,7 +1614,7 @@ void update_early_mmu_table(void)
+> >                                       PTE_BLOCK_MEMTYPE(MT_NORMAL)    |
+> >                                       PTE_BLOCK_OUTER_SHARE           |
+> >                                       PTE_BLOCK_NS                    |
+> > -                                     PTE_TYPE_VALID);
+> > +                                     PTE_TYPE_VALID, true);
+> >               }
+> >       }
+> >   }
+> > diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+> > index dbf9ab43e280..0a8ca19e45e9 100644
+> > --- a/arch/arm/include/asm/system.h
+> > +++ b/arch/arm/include/asm/system.h
+> > @@ -287,8 +287,9 @@ void flush_l3_cache(void);
+> >    * @emerg: Also map the region in the emergency table
+> >    */
+> >   void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
+> > -void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs);
+> > +void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs, bool bbm);
+>
+> Please, add a function description.
+
+Thanks
 /Ilias
 >
 > Best regards
 >
 > Heinrich
 >
-> >               case R_RELATIVE:
-> >   #ifdef IS_RELA
-> >               newaddr = rel->addend + offset - CONFIG_TEXT_BASE;
+> >
+> > +void mmu_set_attrs(phys_addr_t addr, size_t size, int type);
+> >   /*
+> >    * smc_call() - issue a secure monitor call
+> >    *
+> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> > index 2ef936aab757..13f4e8e640ef 100644
+> > --- a/arch/arm/mach-snapdragon/board.c
+> > +++ b/arch/arm/mach-snapdragon/board.c
+> > @@ -577,7 +577,7 @@ static void carve_out_reserved_memory(void)
+> >               if (i == count || start + size < res[i].start - SZ_2M) {
+> >                       debug("  0x%016llx - 0x%016llx: reserved\n",
+> >                             start, start + size);
+> > -                     mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
+> > +                     mmu_change_region_attr(start, size, PTE_TYPE_FAULT, true);
+> >                       /* If this is the final region then quit here before we index
+> >                        * out of bounds...
+> >                        */
 >
