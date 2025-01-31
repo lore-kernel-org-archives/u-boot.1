@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5194CC0218F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:07:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95031C02192
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:07:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D7CF80FF9;
+	by phobos.denx.de (Postfix) with ESMTP id BCA70827A6;
 	Fri, 31 Jan 2025 23:07:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cXLJ8Obn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L3n+k+VX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 906E580FC9; Fri, 31 Jan 2025 23:07:03 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 09B0A80FC9; Fri, 31 Jan 2025 23:07:05 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7868880FA0
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:07:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E216180F95
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:07:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6d900c27af7so19920746d6.2
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:07:01 -0800 (PST)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6dcd4f1aaccso32245676d6.2
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:07:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738361220; x=1738966020; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738361222; x=1738966022; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cQNKGOZICDM4bZQ51EvPJ4KP1FPkvzw9noYoH4Au+HM=;
- b=cXLJ8ObnnQj7fJr72DH27MWCBMDQqxe4+e56WXSoiXTa3yfA5aFdNArCGmCrUBoagh
- U0ovkclspyXrYtwVcwT4TJr1BJtDzaBYylQ/sZ66DPMvkOGt2pcSCMYxRLtwYhtcaruC
- CuUIPBmar3wbctwR7KgCLuGZQdpznIYlgZBYo=
+ bh=rPs6HojH6FQ6mGpakgNmswK9Q4IGnnankJepyrVJvlY=;
+ b=L3n+k+VXGvmKsH8Tg7na8EdO8AnQzANvPpY2pfNQxgUQTbVJOX+1QFxkkhIJXoAKDQ
+ qKsSt6FJVvzloVLHZcE4YEKWAGjFqbFn+NPkmImgngoiUVrwEBZJ19ylwGZGLkh0iPev
+ zXH5VJri8qT3Rw+gWH83VFyTD8dJ07fo40pSQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738361220; x=1738966020;
+ d=1e100.net; s=20230601; t=1738361222; x=1738966022;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cQNKGOZICDM4bZQ51EvPJ4KP1FPkvzw9noYoH4Au+HM=;
- b=iHRfrnclKqneRXFawM5FgiiRn+atTnuFqmJvEmxgj+OGjOUW3RMckKLQPwB+I4MVpp
- 3Rhz0e7N3WTPHdlRPpeN5ss0PvPRHTLJ6kJqamQN22Kyfs5EdMzVJiK6Q3+LO+p2UzH+
- B0JpyheLftC7Q8SnapZrjXdefoc57dD8EXCNPgNPeHeJOpoP8Rm2cS+ApzQqOa6J2srf
- tZ7A2SI7QaLf5Men/5HQWskwUjZYRJq6aojSGIE/WkKFE7BiNG5vDtaiKGz2CKGX0icx
- 1i4/la6qX3fk+UpfWaBzcZdblB8XQzl73M0nyowh+t7FOnHFpXYET+WKPgXiNYWK9Ref
- i+TQ==
-X-Gm-Message-State: AOJu0Yy/vWzy1FEn8nh9ADekv3FmtTKqzE4Y/xc7OZmZuEnTyvP0UTH2
- iVvw0MPSJV5OfDfqoAPqTdMnbV0mVu8gDmAcrXQ0D5yzy+Wb6ub5+y8DNtyEKBXzW0hsYXISx+L
- 4
-X-Gm-Gg: ASbGnctY28coGZxUzKafFyu11aph0u2qW9/n+aYe13omwz6eNosCMfyWHV2teqyWNAh
- n72JSyBwGt1RKPBqNSaJjb6tTOVFaPM/fPpkH5ntoIYXUJmdXHNN+8Ze4+xktDqJOAKEJoDDsaA
- HcPcKZD00BGKk6UA+fJC52So2HC6UXVh3RG8kevIrMhcWbPRAI2BoysmnM/qp8Ck7Lk45VuVX9H
- OhZdNrPn/ia9B1w4iIXKP7c6zCw0n/SndWOEsy8PEXvy9RgvLqhlGD7fc6dtIQdBkjdguErQcAQ
- 2SVcwxIHrDw5EA==
-X-Google-Smtp-Source: AGHT+IEfC+ist2UGWWqC630UORCtatIwbF70H/iR4mk14RwL1pJfGQ9zLZ3KJZmKKCsWhDt0CFuvxQ==
-X-Received: by 2002:a05:6214:f63:b0:6e1:9126:4d15 with SMTP id
- 6a1803df08f44-6e243bbc135mr159880856d6.11.1738361220430; 
- Fri, 31 Jan 2025 14:07:00 -0800 (PST)
+ bh=rPs6HojH6FQ6mGpakgNmswK9Q4IGnnankJepyrVJvlY=;
+ b=C9AHAuko4pwlS96ewYrvvWLCuCLDtNjpXNmotE7RgoKXrxg8xhN2AFwCm01y0GNebF
+ HObkWsUk8cH21kIuz89H2KH/bdijPSedindXh4iB9piv1byuMSozys6xldKMZr0ua1o5
+ c8ysS0AHrfnKkY1Mvql4cSP8iVZjQAyQbMfjr/esFfGq6Tq+OBBD7L99gmQzWdK0q9PN
+ 2a9AiIAWX1zierBUnUj1AiFK0BjhCEzsBeb49ydTgHWB7R007P9qwFMUJxHr/IH7EV50
+ JFMlAdNIzFiDtEhWWnCEtvSiY5lh8MfJa8yCtiqQB/bYJI8xQG2LzreJ1rWd+qhoLMpN
+ SLfg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKkVTUqDg6nyydMpDwpAHSiWEVbmDlLOYSDWEXmF0X4nH8Bh4O+yaeXDpmECYtP1YtAQ27Xd4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyOfEBSQ1Xlzh9dsC296tWqNKRWKOQsdVheOPJiqAjStCQuKwpL
+ vFkrWZ7mR8VHF0oC1SkXe8xJ9fQ+RxlKaPjXeR5OpG3ts/MLf/B9C08gifuiua8=
+X-Gm-Gg: ASbGncseRbhbdmaLa1GDvZlyTKEMrWpI7gaVggVbArrcvw2qAIF9UkFg7w4kbbJkJwG
+ hGqaLWHyoHQzDJw5G1ieuKpH1CfP9lglo+k6+zZzaUCJLQmZyx9BV4cp1eVE8ljSivvx/Kd1pLx
+ 9QpqyO9xEZMcLJ7ffKb+MvuezQvH58BQjfnvEHx8mNWMw3B4P0e5B9CWrlFTPVqTodkBm733qi8
+ q4pCAmI26MznxNOhP4FgsmW56MGfuvXHC+jRaR+xX3pbRS8ajULAhpYTsuft5qGSAZP6lx6/vvJ
+ YbHcJPnTvKhumg==
+X-Google-Smtp-Source: AGHT+IFKtVA0/6YKsY3iI9EFbrvlUYrLa9R/hSU/1OiDSsOZinjnzF6t3AUb+jScVNE9Fe1GSRrjOg==
+X-Received: by 2002:a05:6214:2348:b0:6d8:9ef6:5b10 with SMTP id
+ 6a1803df08f44-6e243bfb0d4mr225903276d6.23.1738361221845; 
+ Fri, 31 Jan 2025 14:07:01 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e254819a57sm22141986d6.45.2025.01.31.14.06.58
+ 6a1803df08f44-6e254819a57sm22141986d6.45.2025.01.31.14.07.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jan 2025 14:06:59 -0800 (PST)
+ Fri, 31 Jan 2025 14:07:01 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Sjoerd Simons <sjoerd@collabora.com>
-In-Reply-To: <20250115020729.230536-1-trini@konsulko.com>
-References: <20250115020729.230536-1-trini@konsulko.com>
-Subject: Re: [PATCH] configs/am62x_r5_usbdfu.config: More completely
- disable MMC
-Message-Id: <173836121844.3060818.13379091338936368256.b4-ty@konsulko.com>
-Date: Fri, 31 Jan 2025 16:06:58 -0600
+To: w.egorov@phytec.de, u-boot@lists.denx.de, 
+ Daniel Schultz <d.schultz@phytec.de>
+Cc: d-gole@ti.com, upstream@lists.phytec.de, y.moog@phytec.de
+In-Reply-To: <20250123144350.846527-1-d.schultz@phytec.de>
+References: <20250123144350.846527-1-d.schultz@phytec.de>
+Subject: Re: [PATCH v3 1/2] board: phytec: common: Add product information
+ to FTD
+Message-Id: <173836122056.3060818.15562099504818433404.b4-ty@konsulko.com>
+Date: Fri, 31 Jan 2025 16:07:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,12 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 14 Jan 2025 20:07:29 -0600, Tom Rini wrote:
+On Thu, 23 Jan 2025 06:43:49 -0800, Daniel Schultz wrote:
 
-> As this fragment turns off MMC in both SPL and full U-Boot, we can turn
-> the whole symbol off rather than just the MMC driver.
+> ft_board_setup inside the board code allows to alter
+> device-tree during the boot process.
 > 
+> Introduce a new function for the PHYTEC SOM detection
+> to read the product name and part number from the EEPROM
+> content and include both into the device-tree as
+> * phytec,som-part-number
+> * phytec,som-product-name
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
