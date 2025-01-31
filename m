@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7823C0218F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 17:26:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C55EC0218F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 17:26:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FE1B82163;
-	Fri, 31 Jan 2025 18:26:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7181682836;
+	Fri, 31 Jan 2025 18:26:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hj/QaZN5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ejt7Z+jw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5D0682786; Fri, 31 Jan 2025 18:26:27 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id F09F682163; Fri, 31 Jan 2025 18:26:28 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DDAE82163
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 18:26:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86A48826C2
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 18:26:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7bcf33f698dso213391085a.2
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 09:26:25 -0800 (PST)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7c0155af484so90730685a.0
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 09:26:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738344384; x=1738949184; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738344385; x=1738949185; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Jh8TBeKpP47Y/FEe5Z3hlsbgkLpt0lfp46SuBzXJSeE=;
- b=Hj/QaZN55UaQdNYqjlJZKJOHBo4xMkfNsnWUfKwGPKBLbZA7pik/pv+LQK/IyfosZe
- hdhALjZmzClGTrTcLciR08x6XtfVaGT73IIWYizpIsiopElmryUYOxGcz9Rx2HhjhzB7
- B6sh7hE3UJL0MYTWhGvm72Rz9VkXD3KUWXaL0=
+ bh=dMQoXgbe3efjG7ScyxWYvOy4VcaEKYcq6utRtt1Rrw0=;
+ b=Ejt7Z+jwLbzZDM3qo/dNXGjGlR0bzhO0ksPGZpfzpGlFhI+eqs6uW4DVvq+GK3GRE4
+ 7F3tbNOIpzOcfo7cIUs0p0Qf2nWRjCGgTyPxri/SKGkKTZtUmLg8WGZWWntDyFQD8est
+ nXpfH/F8OyG2oIjwa0SpsOUpNElNdNAGGbi7Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738344384; x=1738949184;
+ d=1e100.net; s=20230601; t=1738344385; x=1738949185;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Jh8TBeKpP47Y/FEe5Z3hlsbgkLpt0lfp46SuBzXJSeE=;
- b=R3NBWAUAVz5UTmfrWGSKJIlq5l5T+631YxJxMEJSEvtkf0F2mlLuL9XlnUHrdtu9XW
- 5MT5n/HNcfmqAGXfT/5YahMfy+qVv55qdSBe0AFfLcdFi+/Pa59QrQ4A0u+R7xTril9Y
- IsQyfGT70Kenf6SAp8xLY18M29r1DARzLd0l1LpFPwOZn4c0UH+R/d8ywqozkdageBL/
- 673d+vZfosD/UDHKmtn3ny/axTggW0gnHeZRhjKoe0WfXq1JtHt5HoM6XAqxoXdQVQrg
- EbM4V+Xi7ZvHCGr2snK2F4hPAi4JbSbhMOU9+wtGg+WAyBM+rpt7RuMgmP1DXunlgYsa
- UlIQ==
-X-Gm-Message-State: AOJu0Yzpf8ujsEEFcmYNvfwgDAZCHqSsxbcxXo2vC+6k13qEfgBqwHmp
- wWSrAP/b4M+tk58xxYen+HSHWCFfn3OGjVu6BwcTyrGXJXSVD7Xcdx++fHF1IUZTEzVzxDL6dCU
- z
-X-Gm-Gg: ASbGncsPSnz8XjXnrXlRaHhWpsM8hCskQ1VE0FIgpA9tCJ6tDBaz12nYNSlS3MpdOCh
- j3A9Kkq7nDu+PQrlhkQfRVli8nMDxZDAPyk5Ze/x4p63IxW/R5L3QeyV0iUbwNRjGt2BRG2/B7w
- YLKrYbvdYNHCmiflgtbA3GVcj0wT/WCg1a+D1dJaOY8eVYCDcOHxCRQLdZwD1AELUBt4o4M8QKY
- A9qyHHOjNme6lXUJTkCOHoF+KHObPgS3XgvFcJI1ci3J9Whju66sUyZoIMgYEs2a7YyutF6eGQD
- G3vB1xYNWXSODw==
-X-Google-Smtp-Source: AGHT+IF2hIljRekQYQ5qpifmHCt37YgYP1XRjrqa1dvvr6Vg53v/fLuNoJNMMua5a75yYvgvymlfnA==
-X-Received: by 2002:a05:620a:2a03:b0:7bc:dec0:2bed with SMTP id
- af79cd13be357-7bffcccaa49mr1870487685a.7.1738344384402; 
- Fri, 31 Jan 2025 09:26:24 -0800 (PST)
+ bh=dMQoXgbe3efjG7ScyxWYvOy4VcaEKYcq6utRtt1Rrw0=;
+ b=N1Lg3atT6xeTUXYzsRWRf4Xxjpk6tZcB+NHvuyC0bzAdCvK8RJB+iHJ4TURGYOddfl
+ UoHuvqO2zTeRKQr/aSMO1cNse+a40l33J4Ltn1yBf8YAxp2p7ynGZkKRq8fI0wbhRN6Z
+ 0J3GaUDpiPCZEos/BwNzJd4JMqVx7JtLbaSC7sc10ioksL7yc02F5risOpi2sy59T3ou
+ jzbea1NJDqwgiAduLrNSJhnKzesiH/hcSbpz3IIGhYELP6qpLKyjPzR24GUqKHtAO757
+ /8Wg7AwF+frvT85HbeYSBKhXpGdPFdHDMabllFPjKHyXO7yKeVyfvO+3fUN27R/sn/Lq
+ xLHA==
+X-Gm-Message-State: AOJu0YwmiRHp36v48yubPTRyS9id0pyZBiJJZPxKSOulEPNHap2HsvFC
+ ut2d5CGFo3RkZxGoTdk3OlsIqn0rIBjOGzpmED4DiG9sar/7KOEjGbbAaJ9/gmarWZnf/Z+Nrid
+ l
+X-Gm-Gg: ASbGncvVIQx28zyLq40vi1g85sd+dHFDt72oxGV5p2NU7w+KvxKY6eO1I2eITe/fszf
+ sZkbkZbXPQQWFB4I9ZcDry25vFFv4ermA09QYxL4GyGbcVrKLFIcyrYxVh7pZJ5HLogxZoM7tvg
+ 5OFD9NBfyZ1NpVSsOoz5bNFlpWmm7xdYJyHX3AnP43mzkSZDBpuv01p08aVrJehacfnkCPiCB1z
+ P35vHl43K3JBqS1ezdbiRrun1ANClLDscgR6+FmEBG5L8xOepf33kWXhWTRtkFMT2wSx/DfJ1H6
+ oF6y7viOCMxSIg==
+X-Google-Smtp-Source: AGHT+IEs8XUwJz3nHAyQcu7/lyiOGvlJc0BGkRAA/2vZNPTZQmKvZWIKrAMTYXPyxcMUlEjjJzKRUw==
+X-Received: by 2002:a05:620a:d95:b0:7b6:dc74:82b1 with SMTP id
+ af79cd13be357-7bffccc9f6emr1990928685a.7.1738344385436; 
+ Fri, 31 Jan 2025 09:26:25 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c00a8d9757sm213391585a.63.2025.01.31.09.26.23
+ af79cd13be357-7c00a8d9757sm213391585a.63.2025.01.31.09.26.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jan 2025 09:26:23 -0800 (PST)
+ Fri, 31 Jan 2025 09:26:25 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
-Cc: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>
-In-Reply-To: <20241229205402.157529-1-marex@denx.de>
-References: <20241229205402.157529-1-marex@denx.de>
-Subject: Re: [PATCH] net: phy: Add RGMII RX/TX delay handling to DP83822
- PHY
-Message-Id: <173834438339.3013010.7107786049013460271.b4-ty@konsulko.com>
-Date: Fri, 31 Jan 2025 11:26:23 -0600
+To: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <a8e492b4-b2fc-4432-8ce9-669a8a70d1ed@foss.st.com>
+References: <a8e492b4-b2fc-4432-8ce9-669a8a70d1ed@foss.st.com>
+Subject: Re: [PULL] Pull request for u-boot master / v2025.04 =
+ u-boot-stm32-20250131
+Message-Id: <173834438459.3013010.7389437348209085278.b4-ty@konsulko.com>
+Date: Fri, 31 Jan 2025 11:26:24 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,21 +96,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 29 Dec 2024 21:53:26 +0100, Marek Vasut wrote:
+On Fri, 31 Jan 2025 11:57:04 +0100, Patrice CHOTARD wrote:
 
-> The TI DP83822 does have support for configurable RGMII RX/TX clock
-> shift, add support for parsing DT properties which describe the RX/TX
-> clock shift configuration and configuration of the matching bits in
-> RCSR register.
+> Please pull the STM32 related patches for u-boot/master, v2025.04 = u-boot-stm32-20250131
 > 
-> The shift is only configurable on DP83822, the other PHYs supported
-> by this PHY driver, namely DP83825/DP83826 variants, do not implement
-> this functionality and the RCSR bits used to configure the clock shift
-> are missing from those PHYs.
+> CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/24410
+> 
+> The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c047:
+> 
+>   Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
 -- 
 Tom
