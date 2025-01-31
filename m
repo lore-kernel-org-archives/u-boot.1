@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD4FC0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 10:31:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB86C0218D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 10:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA90682163;
-	Fri, 31 Jan 2025 11:31:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A34E8249D;
+	Fri, 31 Jan 2025 11:31:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C81788219C; Fri, 31 Jan 2025 11:31:46 +0100 (CET)
+ id 0ABC78219C; Fri, 31 Jan 2025 11:31:47 +0100 (CET)
 Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
- [84.16.66.170])
+ [IPv6:2001:1600:4:17::42aa])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AFF182131
+ by phobos.denx.de (Postfix) with ESMTPS id EACA68213E
  for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 11:31:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,23 +25,19 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YksdC71XVzpd8;
- Fri, 31 Jan 2025 11:31:43 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YksdD3hRvzpLT;
+ Fri, 31 Jan 2025 11:31:44 +0100 (CET)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4YksdB56qpz6g2; Fri, 31 Jan 2025 11:31:42 +0100 (CET)
+ id 4YksdC6wJkz7k6; Fri, 31 Jan 2025 11:31:43 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH v2 00/13] pinctrl: rockchip: fix editing const struct +
- constify rockchip_pin_ctrl
-Date: Fri, 31 Jan 2025 11:31:28 +0100
-Message-Id: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
+Date: Fri, 31 Jan 2025 11:31:29 +0100
+Subject: [PATCH v2 01/13] pinctrl: rockchip: fix bank's pin_base computing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIGmnGcC/4WNQQrCMBBFryKzdiSJLVpX3kO6CJOpGZSkTEqxl
- N7d2Au4fA/++ysUVuECt8MKyrMUyamCOx6Aok9PRgmVwRnXGus61EwvijLiKIkmfSPlVCYcGuv
- Oxna+vTZQx6PyIJ89/OgrRylT1mX/me3P/k3OFg02rSEKPgz+wneKrLqcAkO/bdsX1RVwvrwAA
- AA=
-X-Change-ID: 20250129-rockchip-pinctrl-const-f4123019a584
+Message-Id: <20250131-rockchip-pinctrl-const-v2-1-59bf93968ce7@cherry.de>
+References: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
+In-Reply-To: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
@@ -66,72 +62,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While testing some WIP work done by Ilias Apalodimas on guaranteeing
-read-only memory areas truly are handled as read-only[1], my RK3588
-Tiger couldn't reach U-Boot CLI anymore because of the pinctrl driver
-modifying a const struct rockchip_pin_ctrl, triggering a CPU abort.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Instead of going the lazy way and unconstify it, let's fix the actual
-issue in play.
+The logic in the core reads the nr_pins of the controller and uses it as
+the index of the first pin in the bank (pin_base) it currently parses.
+It then increments the number of pins in the controller before going to
+the next bank.
 
-This also means we should be able to constify the private data of the
-controller device for all Rockchip devices, instead of having those only
-for RK356x, RK3588 and RV1126. With the constify done on top of Ilias
-patch series[1], my PX30 Ringneck, RK3399 Puma and RK3588 Tiger all
-reach U-Boot CLI. No further testing (like booting into Linux userspace)
-was done.
+This works "fine" for controllers where nr_pins isn't defined in their
+rockchip_pin_ctrl struct as it defaults to 0. However, when it is
+already set, it'll make the index pin of each bank offset by the number
+in nr_pins declared in the struct at initialization, and it'll keep
+growing while adding banks, which means the total number of pins in the
+controller will be misrepresented.
 
-[1] https://lore.kernel.org/u-boot/20250130072100.27297-1-ilias.apalodimas@linaro.org/
+Additionally, U-Boot proper may probe this driver twice (pre-reloc and
+true proper) and not reset nr_pins of the controller in-between meaning
+the second probe will have an offset of the actual correct nr_pins.
+
+Instead, let's just store locally the number of pins in the controller
+and make sure it's reset between probes.
+
+Finally, this stops modifying a const struct which will soon be
+triggering a CPU abort at runtime.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Changes in v2:
-- remove removal of bank's pin_base because Jonas said he'll need it for
-  a new version of https://lore.kernel.org/u-boot/20240802225705.2640999-1-jonas@kwiboo.se/
-- fix pin_base computing by init'ing the controller nr_pins to 0,
-- make controller nr_pins local to the probe function instead of keeping
-  it in rockchip_pin_ctrl struct,
-- Link to v1: https://lore.kernel.org/r/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de
-
----
-Quentin Schulz (13):
-      pinctrl: rockchip: fix bank's pin_base computing
-      pinctrl: rockchip: constify rockchip_pin_ctrl for PX30
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3036
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3066
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3128
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3188
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3228
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3288
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3308
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3328
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3368
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3399
-      pinctrl: rockchip: constify rockchip_pin_ctrl for RV1108
-
- drivers/pinctrl/rockchip/pinctrl-px30.c          | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3036.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3066.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3128.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3188.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk322x.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3288.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3308.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3328.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3368.c        | 2 +-
- drivers/pinctrl/rockchip/pinctrl-rk3399.c        | 2 +-
  drivers/pinctrl/rockchip/pinctrl-rk3568.c        | 1 -
  drivers/pinctrl/rockchip/pinctrl-rk3588.c        | 1 -
  drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 5 +++--
  drivers/pinctrl/rockchip/pinctrl-rockchip.h      | 1 -
- drivers/pinctrl/rockchip/pinctrl-rv1108.c        | 2 +-
  drivers/pinctrl/rockchip/pinctrl-rv1126.c        | 1 -
- 17 files changed, 15 insertions(+), 18 deletions(-)
----
-base-commit: 021baf7b08cceb58bb850859dba1614424e16a83
-change-id: 20250129-rockchip-pinctrl-const-f4123019a584
+ 5 files changed, 3 insertions(+), 6 deletions(-)
 
-Best regards,
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3568.c b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+index 5deedc648a41950461b6a468e4852fa0a5384207..c8a91b8bb6e925e0f2e7d6cd09f8a06a58be60dd 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rk3568.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+@@ -345,7 +345,6 @@ static struct rockchip_pin_bank rk3568_pin_banks[] = {
+ static const struct rockchip_pin_ctrl rk3568_pin_ctrl = {
+ 	.pin_banks		= rk3568_pin_banks,
+ 	.nr_banks		= ARRAY_SIZE(rk3568_pin_banks),
+-	.nr_pins		= 160,
+ 	.grf_mux_offset		= 0x0,
+ 	.pmu_mux_offset		= 0x0,
+ 	.iomux_routes		= rk3568_mux_route_data,
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3588.c b/drivers/pinctrl/rockchip/pinctrl-rk3588.c
+index 98ababc7c90700c4b27359fc3625519f20437306..fd8e617b9108c7314b8fdd4bbe1dfae71f1b6449 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rk3588.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rk3588.c
+@@ -324,7 +324,6 @@ static struct rockchip_pin_bank rk3588_pin_banks[] = {
+ static const struct rockchip_pin_ctrl rk3588_pin_ctrl = {
+ 	.pin_banks		= rk3588_pin_banks,
+ 	.nr_banks		= ARRAY_SIZE(rk3588_pin_banks),
+-	.nr_pins		= 160,
+ 	.set_mux		= rk3588_set_mux,
+ 	.set_pull		= rk3588_set_pull,
+ 	.set_drive		= rk3588_set_drive,
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+index d449d07d32e74d1dec1978b1405bec94887908a2..4de67aba1c3453673891482babf2f009fa053a97 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+@@ -532,6 +532,7 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
+ 			(struct rockchip_pin_ctrl *)dev_get_driver_data(dev);
+ 	struct rockchip_pin_bank *bank;
+ 	int grf_offs, pmu_offs, drv_grf_offs, drv_pmu_offs, i, j;
++	u32 ctrl_nr_pins = 0;
+ 
+ 	grf_offs = ctrl->grf_mux_offset;
+ 	pmu_offs = ctrl->pmu_mux_offset;
+@@ -543,8 +544,8 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
+ 		int bank_pins = 0;
+ 
+ 		bank->priv = priv;
+-		bank->pin_base = ctrl->nr_pins;
+-		ctrl->nr_pins += bank->nr_pins;
++		bank->pin_base = ctrl_nr_pins;
++		ctrl_nr_pins += bank->nr_pins;
+ 
+ 		/* calculate iomux and drv offsets */
+ 		for (j = 0; j < 4; j++) {
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip.h b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+index df7bc684d29fae4ec650d1e14fe88b35b03244ac..65c7488f8e399b36fda685b281db778cb55ba695 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rockchip.h
++++ b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+@@ -500,7 +500,6 @@ struct rockchip_mux_route_data {
+ struct rockchip_pin_ctrl {
+ 	struct rockchip_pin_bank	*pin_banks;
+ 	u32				nr_banks;
+-	u32				nr_pins;
+ 	int				grf_mux_offset;
+ 	int				pmu_mux_offset;
+ 	int				grf_drv_offset;
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1126.c b/drivers/pinctrl/rockchip/pinctrl-rv1126.c
+index efa2408b204b421ad1c5a36b039d8c07c5b7237e..3878a5420dcc98f591e4eefadd78a2fe98b61c7e 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rv1126.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rv1126.c
+@@ -381,7 +381,6 @@ static struct rockchip_pin_bank rv1126_pin_banks[] = {
+ static const struct rockchip_pin_ctrl rv1126_pin_ctrl = {
+ 	.pin_banks		= rv1126_pin_banks,
+ 	.nr_banks		= ARRAY_SIZE(rv1126_pin_banks),
+-	.nr_pins		= 130,
+ 	.grf_mux_offset		= 0x10004, /* mux offset from GPIO0_D0 */
+ 	.pmu_mux_offset		= 0x0,
+ 	.iomux_routes		= rv1126_mux_route_data,
+
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.48.1
 
