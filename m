@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDF72C0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 06:51:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 284ACC0218D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 06:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CCD6807E4;
-	Fri, 31 Jan 2025 07:51:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C6C2E80F64;
+	Fri, 31 Jan 2025 07:51:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="AoK26PMj";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="lMIzxsNS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A014B807EE; Fri, 31 Jan 2025 07:51:21 +0100 (CET)
+ id E35BE80F77; Fri, 31 Jan 2025 07:51:36 +0100 (CET)
 Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48431801FD
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 07:51:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83AC3801FD
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 07:51:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: c2bf94f0df9f11efbd192953cf12861f-20250131
+X-UUID: cbd212b6df9f11efbd192953cf12861f-20250131
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:To:From:Subject:Message-ID;
- bh=PAMPQdcQ/CjqFylI5qfzyUoaSmDjIyRUsatsQOC5qfo=; 
- b=AoK26PMjlAWe3wlGrCX/dKEgmMCh519hbkebHNuFil/QZCJ2o3cSyslNEcGLQub2yEVoblaBNvkGaJ7hk7Nsyg/kSZLQ4PduoBk1lOMBVJdUrBYr44rSL18H5dAV4YLH0hU2dhPaUzo32Qv9MolNVDnwt1HsLOE8dDeFiSfuHTU=;
+ bh=vLF3XOaHiJP531t1vK93N0ESigkHCcW+AOSmq2RlFTk=; 
+ b=lMIzxsNSS3yZma4HgoMrJMLHTcV3y36v1DOWe4YKhH+k/s+BJvn1CMaZGpKryQH9sC1+XSa+p5fhtcjaaC8/2La8G2RdIDGGk6YE1pLmDwvy3Khsuc6A9aPqxm/CJisaX5bw22e3ksZtfUCordS7tM9Lc/VtAoRzXkWJAiGgs3U=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.46, REQID:978d098d-2b8f-4074-85fd-eca52ec2c233, IP:0,
+X-CID-O-INFO: VERSION:1.1.46, REQID:60f4f1e5-322b-470e-8970-adc6b1dd043e, IP:0,
  U
  RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
  release,TS:0
-X-CID-META: VersionHash:60aa074, CLOUDID:eb5cf5fe-c190-4cfe-938d-595d7f10e0dc,
+X-CID-META: VersionHash:60aa074, CLOUDID:e71ce17e-427a-4311-9df4-bfaeeacd8532,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102,TC:nil,Content:0|50,
  EDM:-3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OS
@@ -44,20 +44,20 @@ X-CID-META: VersionHash:60aa074, CLOUDID:eb5cf5fe-c190-4cfe-938d-595d7f10e0dc,
 X-CID-BVR: 0,NGT
 X-CID-BAS: 0,NGT,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: c2bf94f0df9f11efbd192953cf12861f-20250131
-Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
+X-UUID: cbd212b6df9f11efbd192953cf12861f-20250131
+Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
  mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1061529069; Fri, 31 Jan 2025 14:51:13 +0800
+ with ESMTP id 1442143147; Fri, 31 Jan 2025 14:51:28 +0800
 Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- MTKMBS09N1.mediatek.inc (172.21.101.35) with Microsoft SMTP Server
+ MTKMBS14N2.mediatek.inc (172.21.101.76) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Fri, 31 Jan 2025 14:51:11 +0800
+ 15.2.1258.28; Fri, 31 Jan 2025 14:51:27 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.28 via Frontend Transport; Fri, 31 Jan 2025 14:51:11 +0800
-Message-ID: <6b09c421f0618c2f3bf517671c70580c690ab240.camel@mediatek.com>
-Subject: Re: [PATCH 7/8] arm: dts: mediatek: add USB nodes for MT7981
+ 15.2.1258.28 via Frontend Transport; Fri, 31 Jan 2025 14:51:26 +0800
+Message-ID: <1fd55de162f88d9ed991692c9bd725fed2287b7c.camel@mediatek.com>
+Subject: Re: [PATCH 8/8] arm: dts: mediatek: add PCIe node for MT7981
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -65,10 +65,10 @@ To: Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
  <sam.shih@mediatek.com>, SkyLake.Huang <skylake.huang@mediatek.com>, John
  Crispin <john@phrozen.org>, Dong Huang <dong.huang@mediatek.com>,
  <u-boot@lists.denx.de>
-Date: Fri, 31 Jan 2025 14:51:10 +0800
-In-Reply-To: <20250127134046.26345-8-ansuelsmth@gmail.com>
+Date: Fri, 31 Jan 2025 14:51:26 +0800
+In-Reply-To: <20250127134046.26345-9-ansuelsmth@gmail.com>
 References: <20250127134046.26345-1-ansuelsmth@gmail.com>
- <20250127134046.26345-8-ansuelsmth@gmail.com>
+ <20250127134046.26345-9-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
@@ -95,83 +95,63 @@ On Mon, 2025-01-27 at 14:40 +0100, Christian Marangi wrote:
 > you have verified the sender or the content.
 > 
 > 
-> From: John Crispin <john@phrozen.org>
+> Add PCIe node for MT7981 with all the required properties to make
+> PCIe
+> work.
 > 
-> Add USB PHY nodes for MT7981. These are needed for USB support and
-> also
-> for PCIe support as the u3 PHY can also be used for PHY.
-> 
-> Signed-off-by: John Crispin <john@phrozen.org>
 > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 > ---
->  arch/arm/dts/mt7981.dtsi | 48
-> ++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 48 insertions(+)
+>  arch/arm/dts/mt7981.dtsi | 35 +++++++++++++++++++++++++++++++++++
+>  1 file changed, 35 insertions(+)
 > 
 > diff --git a/arch/arm/dts/mt7981.dtsi b/arch/arm/dts/mt7981.dtsi
-> index b2c4cd7b54a..2360c6bbdca 100644
+> index 2360c6bbdca..5b4cadc22f7 100644
 > --- a/arch/arm/dts/mt7981.dtsi
 > +++ b/arch/arm/dts/mt7981.dtsi
-> @@ -6,6 +6,7 @@
-> 
->  #include <dt-bindings/interrupt-controller/irq.h>
->  #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +#include <dt-bindings/phy/phy.h>
->  #include <dt-bindings/clock/mt7981-clk.h>
->  #include <dt-bindings/reset/mt7629-reset.h>
->  #include <dt-bindings/pinctrl/mt65xx.h>
-> @@ -315,4 +316,51 @@
->                 status = "disabled";
+> @@ -339,6 +339,41 @@
+>                 status = "okay";
 >         };
 > 
-> +       xhci: xhci@11200000 {
-> +               compatible = "mediatek,mt7981-xhci",
-> +                            "mediatek,mtk-xhci";
-> +               reg = <0x11200000 0x2e00>,
-> +                     <0x11203e00 0x0100>;
-> +               reg-names = "mac", "ippc";
-> +               interrupts = <GIC_SPI 173 IRQ_TYPE_LEVEL_HIGH>;
-> +               phys = <&u2port0 PHY_TYPE_USB2>,
-> +                      <&u3port0 PHY_TYPE_USB3>;
-> +               clocks = <&infracfg CLK_INFRA_IUSB_SYS_CK>,
-> +                        <&infracfg CLK_INFRA_IUSB_CK>,
-> +                        <&infracfg CLK_INFRA_IUSB_133_CK>,
-> +                        <&infracfg CLK_INFRA_IUSB_66M_CK>,
-> +                        <&topckgen CLK_TOP_U2U3_XHCI_SEL>;
-> +               clock-names = "sys_ck",
-> +                             "ref_ck",
-> +                             "mcu_ck",
-> +                             "dma_ck",
-> +                             "xhci_ck";
-> +               mediatek,u3p-dis-msk = <0x1>;
-> +               status = "okay";
-> +       };
+> +       pcie: pcie@11280000 {
+> +               compatible = "mediatek,mt8192-pcie";
+> +               device_type = "pci";
+> +               reg = <0x11280000 0x4000>;
+> +               reg-names = "pcie-mac";
+> +               #address-cells = <3>;
+> +               #size-cells = <2>;
+> +               interrupts = <GIC_SPI 168 IRQ_TYPE_LEVEL_HIGH>;
+> +               clocks = <&infracfg CLK_INFRA_IPCIE_CK>,
+> +                               <&infracfg CLK_INFRA_IPCIE_PIPE_CK>,
+> +                               <&infracfg CLK_INFRA_IPCIER_CK>,
+> +                               <&infracfg CLK_INFRA_IPCIEB_CK>;
+> +               clock-names = "pl_250m", "tl_26m", "peri_26m",
+> "top_133m";
+> +               phys = <&u3port0 PHY_TYPE_PCIE>;
+> +               phy-names = "pcie-phy";
+> +               bus-range = <0x00 0xff>;
+> +               ranges = <0x82000000 0 0x20000000 0x20000000 0
+> 0x10000000>;
 > +
-> +       usbtphy: usb-phy@11e10000 {
-> +               compatible = "mediatek,mt7981",
-> +                            "mediatek,generic-tphy-v2";
-> +               #address-cells = <1>;
-> +               #size-cells = <1>;
-> +               status = "okay";
+> +               #interrupt-cells = <1>;
 > +
-> +               u2port0: usb-phy@11e10000 {
-> +                       reg = <0x11e10000 0x700>;
-> +                       clocks = <&topckgen CLK_TOP_USB_FRMCNT_SEL>;
-> +                       clock-names = "ref";
-> +                       #phy-cells = <1>;
-> +                       status = "okay";
-> +               };
+> +               interrupt-map-mask = <0 0 0 7>;
+> +               interrupt-map = <0 0 0 1 &pcie_intc 0>,
+> +                       <0 0 0 2 &pcie_intc 1>,
+> +                       <0 0 0 3 &pcie_intc 2>,
+> +                       <0 0 0 4 &pcie_intc 3>;
 > +
-> +               u3port0: usb-phy@11e10700 {
-> +                       reg = <0x11e10700 0x900>;
-> +                       clocks = <&topckgen CLK_TOP_USB3_PHY_SEL>;
-> +                       clock-names = "ref";
-> +                       #phy-cells = <1>;
-> +                       mediatek,syscon-type = <&topmisc 0x218 0>;
-> +                       status = "okay";
+> +               status = "disabled";
+> +
+> +               pcie_intc: interrupt-controller {
+> +                       interrupt-controller;
+> +                       #interrupt-cells = <1>;
+> +                       #address-cells = <0>;
 > +               };
 > +       };
->  };
+> +
+>         usbtphy: usb-phy@11e10000 {
+>                 compatible = "mediatek,mt7981",
+>                              "mediatek,generic-tphy-v2";
 > --
 > 2.47.1
 > 
