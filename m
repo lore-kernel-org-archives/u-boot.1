@@ -4,87 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7FA0C0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 11:30:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F38DBC0218F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 12:49:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36C1782163;
-	Fri, 31 Jan 2025 12:30:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1030B8215E;
+	Fri, 31 Jan 2025 13:49:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H3gobXdE";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="Z9RFklzY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFBF782166; Fri, 31 Jan 2025 12:30:02 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A84F88215E; Fri, 31 Jan 2025 13:49:47 +0100 (CET)
+Received: from mail-10625.protonmail.ch (mail-10625.protonmail.ch
+ [79.135.106.25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AADB682161
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 12:30:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50B4882119
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 13:49:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-30616d71bb0so18901491fa.3
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 03:30:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738323000; x=1738927800; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=U3UKEPoQkI4fm5mfZBs9P9kjqm2kRkfFuVrGOLSW45o=;
- b=H3gobXdEiPVRn/X+aKDbS4/15/AaYrqLQF9p1mIOwWlNIyyPpBigfX0Q3bDJ8ccdFP
- KRVX4Pmqrd1IgmfTuKwjyvETUu4fhPqHppXHQkt7txwCU08k6YIPgiqF/CjTUWV4b7os
- TbearhnamsGLj2Ys+LX5bdGUX8gPI1QV6qS45F8QL2Y871PulaHUnWKK/5v7rQzFI4iM
- h8f+WmSiq8gAc4jK5LfeezTpW3Oik/UuSQ0ef8V7AXA8v9jdKaVqmgkVjB4rBYD8OQRJ
- Ck/N1YBT4FNLMOj/3w/uPtH5s7HyOnjtocqTAwYm8hgPTXZZmwux4XEn84XinJH0f1e5
- 7rDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738323000; x=1738927800;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=U3UKEPoQkI4fm5mfZBs9P9kjqm2kRkfFuVrGOLSW45o=;
- b=hKaMoFnraDtkgD9i4HpPzJtIGdbG6lI63sV6tEaDAu8LLpNoJz1WH1uslSAl3t8Sah
- hvspWLBQfz0VTNviSuwttP5zQMRMIa9aa8lrN4HRtadp08XCQwS7d4IhT5piruTXDpkn
- 3x/GdEy46ASVb4fKaz9tkQSN1Y1xWc0Pgd7P+i659WOf1eAKY+SMn6XmoQMnVu6AtwnM
- ePtJmh2jIH2aw9RBUSYXC7e3PqYMgMv+Hwsbs5z3Kd8utsouKNF1fFWDPslqtYMD56dl
- gUkcE7qQTYbAI+QgKP177jlqviVfDP+9dm8UXjuPGbMVLrZY7XRXVNHGLV9pojy5Ptiw
- zxuA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3a42AqTqeDc+DbePIBiFrtP2Sz7/DKcp4NnUwDJHM0ZlEeqiKG+/xFW50ArasHFlVygwbO4M=@lists.denx.de
-X-Gm-Message-State: AOJu0YxcBugxwC1y7BigK4Zki3gp4CiLoFJRwBWbZw285Zw9qQN1Te3X
- 2j/9W4ydh2lV3zS+RVU0UU74kLFGaf/AQCqkRGdhCgSLGzHsm6bLYaMLLMXU5DHbaWh4BwkGJwX
- VMocTC3WTP2vGe1WdKjZxmmQ6+l8=
-X-Gm-Gg: ASbGncuEYctSPfu40IY5uQQYbzsup2gqdva7/WdH0bx/+e01/j9D5yrNnPlTQ45VB9h
- CBOOq4Lr8e7qw2J6vDGOzk99jyEq2PXnrsjTtUwVl2gvcZ52KoSaFCBcPzRXgM+55CgCHX4Kazd
- tPvF86FwX6ygiKkJdLMd2N3MQYhWb4
-X-Google-Smtp-Source: AGHT+IGsEkDnzESa7Bs8WX/jQlnDyTfnJKgWsXCMMUmGz8Y0/Gu0KabnHPRoUxRDA9R5t71HG3KmH7nxBhr6Avqhs8o=
-X-Received: by 2002:a05:651c:2124:b0:2ff:d3c6:9cf4 with SMTP id
- 38308e7fff4ca-3079681b016mr33366361fa.1.1738322999520; Fri, 31 Jan 2025
- 03:29:59 -0800 (PST)
-MIME-Version: 1.0
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1738327784; x=1738586984;
+ bh=aPIJH7bNuth4LEusCoG4oWYEMJOaIkCdIsibfuhoWbA=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
+ b=Z9RFklzY5uMTrHqnAHYqqcyKtFJmX2fbBCLrIydAAnxP9mUgE2sJuCw752NndtihU
+ L3ovtRQaPxj0RjLm4go81Pi9+BS6fgQo0/7NvJZRnX8tIWNWREfG3VetJdhEkcUW7u
+ z3YWOHzcc6ydBe2CHWYUF44CqF2bX/ENfAPba5u/O6PYu/5UCj2wXs3kSH5m2OBVNv
+ 1dHJ2d5tGNktvqJirchAl55BJpW5RJJOaU+2yZCiKjTSqG3JZQ15+zMXTV+Y28aXBq
+ h0kxSGs+uATkQ5H97l28SG8I35h2m9QZRUYpLngA+gs8N6WZ5ldkMN/Ty1zMp8Ldwr
+ BGoWSpwamv8Ww==
+Date: Fri, 31 Jan 2025 12:49:40 +0000
+To: Fabio Estevam <festevam@gmail.com>
+From: Sam Day <me@samcday.com>
+Cc: neil.armstrong@linaro.org, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Robert Marko <robert.marko@sartura.hr>, Luka Perkov <luka.perkov@sartura.hr>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 2/4] rng: msm: don't enable PRNG if it's already enabled
+Message-ID: <NjPJRn1ysduE-G625vvanUTRDEpCoaR2-XYkpPxMmorhMUTdXS5tUGUD3tQucGPl1GZphHNIjzbudzxyObI52n4HxZ_0rc-cfoASQv5614A=@samcday.com>
+In-Reply-To: <CAOMZO5B0aKxmM52962AGeHthQurBnqM8Ob3es=xvM0=P-KoXgg@mail.gmail.com>
 References: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
  <20250127-msm-rng-fixes-v1-2-00f5d2284314@samcday.com>
  <67dc34b7-1d5b-4fb4-89de-5fb4085d98bf@linaro.org>
  <Nc7eb6ne1yjnHZwTHdp5SqnqYu3uZEkqx1Qtuuk-Fs54ipo0bfhxzbAM2WksLzDQfdztW1txZLlWxbdvy7kGvYoj3IaOYNXq1tefJQb6qPk=@samcday.com>
-In-Reply-To: <Nc7eb6ne1yjnHZwTHdp5SqnqYu3uZEkqx1Qtuuk-Fs54ipo0bfhxzbAM2WksLzDQfdztW1txZLlWxbdvy7kGvYoj3IaOYNXq1tefJQb6qPk=@samcday.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 31 Jan 2025 08:29:48 -0300
-X-Gm-Features: AWEUYZlIw7YMUUaBGAsFjOjGA4IqIHkRNv5ITjzeLbHdF_1O88TIPaJEF4Qw3-k
-Message-ID: <CAOMZO5B0aKxmM52962AGeHthQurBnqM8Ob3es=xvM0=P-KoXgg@mail.gmail.com>
-Subject: Re: [PATCH 2/4] rng: msm: don't enable PRNG if it's already enabled
-To: Sam Day <me@samcday.com>
-Cc: neil.armstrong@linaro.org, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Robert Marko <robert.marko@sartura.hr>, Luka Perkov <luka.perkov@sartura.hr>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <CAOMZO5B0aKxmM52962AGeHthQurBnqM8Ob3es=xvM0=P-KoXgg@mail.gmail.com>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 2c973f181457f34b4fc324cc68208c90575cde98
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,9 +76,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 31, 2025 at 8:10=E2=80=AFAM Sam Day <me@samcday.com> wrote:
+Hello Fabio,
 
-> I'd love to take credit, but actually it was Stephan Gerhold who spotted
-> this when we were debugging the issue together :)
+On Friday, 31 January 2025 at 12:29, Fabio Estevam <festevam@gmail.com> wro=
+te:
+>=20
+> On Fri, Jan 31, 2025 at 8:10=E2=80=AFAM Sam Day me@samcday.com wrote:
+>=20
+> > I'd love to take credit, but actually it was Stephan Gerhold who spotte=
+d
+> > this when we were debugging the issue together :)
+>=20
+>=20
+> Maybe you could add a Suggested-by tag.
 
-Maybe you could add a Suggested-by tag.
+Thanks for the suggestion, I've applied that locally (but will hold off
+on sending a v2 until I get more feedback on this series).
+
+Perhaps I should also add a "Suggested-by-suggested-by:" to attribute my
+learning of this tag to you? :)
+
+Regards,
+-Sam
+
