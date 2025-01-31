@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 888E3C02192
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:07:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5194CC0218F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:07:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01F6E80FB5;
-	Fri, 31 Jan 2025 23:07:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D7CF80FF9;
+	Fri, 31 Jan 2025 23:07:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B7GvWVFD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cXLJ8Obn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ED8F80FA4; Fri, 31 Jan 2025 23:07:01 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 906E580FC9; Fri, 31 Jan 2025 23:07:03 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58219807D9
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:06:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7868880FA0
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:07:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6d8f75b31bfso19124126d6.3
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:06:59 -0800 (PST)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6d900c27af7so19920746d6.2
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:07:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738361218; x=1738966018; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738361220; x=1738966020; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wJ2cYK7O2Zdij2obqktnhJ9rIFvCa9aBD7IV8hNDoeY=;
- b=B7GvWVFDSK1Z+n1gguLxHEkzFVB6lrIB9cQnqV5mAmFYJH+2uJXkosOhSirrhPO4+O
- iBV02nJuCCrk5suoCujMHdBJQppfF6Hcs0EOi/C0fpaaTrqVieIg5Ph/7Su89WULr/7E
- qTNIyUYl5wCn3ytLGo4CtqQmBsAjK6kUc/e6A=
+ bh=cQNKGOZICDM4bZQ51EvPJ4KP1FPkvzw9noYoH4Au+HM=;
+ b=cXLJ8ObnnQj7fJr72DH27MWCBMDQqxe4+e56WXSoiXTa3yfA5aFdNArCGmCrUBoagh
+ U0ovkclspyXrYtwVcwT4TJr1BJtDzaBYylQ/sZ66DPMvkOGt2pcSCMYxRLtwYhtcaruC
+ CuUIPBmar3wbctwR7KgCLuGZQdpznIYlgZBYo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738361218; x=1738966018;
+ d=1e100.net; s=20230601; t=1738361220; x=1738966020;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wJ2cYK7O2Zdij2obqktnhJ9rIFvCa9aBD7IV8hNDoeY=;
- b=TABe1ktHRVLjw2dK2yzPFvg95HPX4FyhuI9klsMgQ6H+6aQ6iPa/N3ZyspOrKensPz
- v/YmW9qAj/3mkfvUXSPkG2LimKn/STpXwBeftmfIbBeCXyMffmeEDZdC1cMakJI6ZorI
- 67L36t2zUDDHxED9mH45oGyOgJdllYTYqN5bKgZYXF441WCNyYYe0rauBbeTxcMD32dN
- OQzQrofJuXL3wD3OFsPtF0JFsPDbROB6sdWTdz8lY5LbwHCxjg6fZ14ZWSKnltnRlbf8
- vIfcfAFB1TtRc1cwnCXNmX3A/b6Z0cJ9rAUgQQCOZ/CVSmh6HYBTLpdSPibDOV65v4M2
- gLeA==
-X-Gm-Message-State: AOJu0YzJo2lH9a+coVBGnLrbNmWsV+ec1O0tPcdLJmh0Ca350tD20KTt
- PWDytq7N/PsD5KJvAlxx/FSu1dMBXKTk5uHWJ9ACoYzzzxs6PKkW+Nho0vUSI07R4u2PDaTqqbs
- h
-X-Gm-Gg: ASbGncuCUQEvwxmavgQZB3WXLytlwXBNbtCf1w0eW5cMm/WDIF4MYKQQMs5BM5qFAy3
- v+eGgauGZcZoReCgl3rQ10Bh7zyoyW22Wh4cCcUzSDOPxVWKoFaAjIa4sy3epqHG2j71nCJVOXi
- nxTiZh2FcTZXpURgzYbTS/sRlgAOe1XSI5g++RNWIXXRJ6pwGsISzOR8j7QaNhC067AjeFvALw2
- zhUvWaXWnvenzJAPQLGoiesDrXK7Q/T+K9FQ8DtaMw7MhNtbtBj1audZaFuy226jDG+1RSSLIFJ
- c0VZUajQUo6rGw==
-X-Google-Smtp-Source: AGHT+IEWVLVFa7dc5Bxa2zYm7MWo0/FTRI9QAhmwrvHodUjwMgI6LPk+m1vNRpZmXXq/D8q79pVKWA==
-X-Received: by 2002:a05:6214:20cf:b0:6d4:2806:1765 with SMTP id
- 6a1803df08f44-6e243c63ca0mr209489836d6.34.1738361218283; 
- Fri, 31 Jan 2025 14:06:58 -0800 (PST)
+ bh=cQNKGOZICDM4bZQ51EvPJ4KP1FPkvzw9noYoH4Au+HM=;
+ b=iHRfrnclKqneRXFawM5FgiiRn+atTnuFqmJvEmxgj+OGjOUW3RMckKLQPwB+I4MVpp
+ 3Rhz0e7N3WTPHdlRPpeN5ss0PvPRHTLJ6kJqamQN22Kyfs5EdMzVJiK6Q3+LO+p2UzH+
+ B0JpyheLftC7Q8SnapZrjXdefoc57dD8EXCNPgNPeHeJOpoP8Rm2cS+ApzQqOa6J2srf
+ tZ7A2SI7QaLf5Men/5HQWskwUjZYRJq6aojSGIE/WkKFE7BiNG5vDtaiKGz2CKGX0icx
+ 1i4/la6qX3fk+UpfWaBzcZdblB8XQzl73M0nyowh+t7FOnHFpXYET+WKPgXiNYWK9Ref
+ i+TQ==
+X-Gm-Message-State: AOJu0Yy/vWzy1FEn8nh9ADekv3FmtTKqzE4Y/xc7OZmZuEnTyvP0UTH2
+ iVvw0MPSJV5OfDfqoAPqTdMnbV0mVu8gDmAcrXQ0D5yzy+Wb6ub5+y8DNtyEKBXzW0hsYXISx+L
+ 4
+X-Gm-Gg: ASbGnctY28coGZxUzKafFyu11aph0u2qW9/n+aYe13omwz6eNosCMfyWHV2teqyWNAh
+ n72JSyBwGt1RKPBqNSaJjb6tTOVFaPM/fPpkH5ntoIYXUJmdXHNN+8Ze4+xktDqJOAKEJoDDsaA
+ HcPcKZD00BGKk6UA+fJC52So2HC6UXVh3RG8kevIrMhcWbPRAI2BoysmnM/qp8Ck7Lk45VuVX9H
+ OhZdNrPn/ia9B1w4iIXKP7c6zCw0n/SndWOEsy8PEXvy9RgvLqhlGD7fc6dtIQdBkjdguErQcAQ
+ 2SVcwxIHrDw5EA==
+X-Google-Smtp-Source: AGHT+IEfC+ist2UGWWqC630UORCtatIwbF70H/iR4mk14RwL1pJfGQ9zLZ3KJZmKKCsWhDt0CFuvxQ==
+X-Received: by 2002:a05:6214:f63:b0:6e1:9126:4d15 with SMTP id
+ 6a1803df08f44-6e243bbc135mr159880856d6.11.1738361220430; 
+ Fri, 31 Jan 2025 14:07:00 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e254819a57sm22141986d6.45.2025.01.31.14.06.56
+ 6a1803df08f44-6e254819a57sm22141986d6.45.2025.01.31.14.06.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jan 2025 14:06:57 -0800 (PST)
+ Fri, 31 Jan 2025 14:06:59 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: francesco.dolcini@toradex.com, stefan.eichenberger@toradex.com, 
- emanuele.ghidoli@toradex.com, joao.goncalves@toradex.com, 
- vitor.soares@toradex.com, igor.opaniuk@foundries.io, 
- max.krummenacher@toradex.com, Stefan Eichenberger <eichest@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250124151443.576075-1-eichest@gmail.com>
-References: <20250124151443.576075-1-eichest@gmail.com>
-Subject: Re: [PATCH v1] toradex: tdx-cfg-block: fix switch to user
- partition
-Message-Id: <173836121633.3060818.16664719405162668000.b4-ty@konsulko.com>
-Date: Fri, 31 Jan 2025 16:06:56 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Sjoerd Simons <sjoerd@collabora.com>
+In-Reply-To: <20250115020729.230536-1-trini@konsulko.com>
+References: <20250115020729.230536-1-trini@konsulko.com>
+Subject: Re: [PATCH] configs/am62x_r5_usbdfu.config: More completely
+ disable MMC
+Message-Id: <173836121844.3060818.13379091338936368256.b4-ty@konsulko.com>
+Date: Fri, 31 Jan 2025 16:06:58 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,18 +95,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 24 Jan 2025 16:14:30 +0100, Stefan Eichenberger wrote:
+On Tue, 14 Jan 2025 20:07:29 -0600, Tom Rini wrote:
 
-> The Toradex configuration block is stored in the first boot partition of
-> the eMMC. After reading the configuration block, U-Boot switches back to
-> the user partition. Currently, this operation always targets mmc device
-> 0, even when the configuration block is stored on mmc device 2.
+> As this fragment turns off MMC in both SPL and full U-Boot, we can turn
+> the whole symbol off rather than just the MMC driver.
 > 
-> This patch addresses the issue by switching the mmc device set in
-> CONFIG_TDX_CFG_BLOCK_DEV to the user partition, rather than using the
-> hardcoded device 0.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
