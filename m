@@ -4,78 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BD7DC0218F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 14:13:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 045D3C0218F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 14:13:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45DED82119;
-	Fri, 31 Jan 2025 15:13:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D0CB8826AA;
+	Fri, 31 Jan 2025 15:13:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SgNjdywe";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="FQ8Ccwm+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E29D8213E; Fri, 31 Jan 2025 11:04:53 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 89EC58213E; Fri, 31 Jan 2025 11:09:10 +0100 (CET)
+Received: from mxd-2-a0c.seznam.cz (mxd-2-a0c.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a0c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9759980F70
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 11:04:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47D2E80F70
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 11:09:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5439e331cceso2045699e87.1
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 02:04:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738317891; x=1738922691; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dRex07OEWIPZnUyZsm6OPwzbjYcK8WABYtuZhS0qjkw=;
- b=SgNjdywes+iwM0YOFTPwDwSEEKD5gb+z3eHv2/W32oyGtHiQ/zKkggWu6tYzScPz3P
- shFTZBnCfwnpCuM+Hlp3yhZVF2vsf3nIrjsWfKGyuYN+xwQYBF7SGab3wpIW0zTWlvX8
- sxstiBVdfIZ7xmMcDm5ciN3rN7T2nfEF/WBYhljcNVXvbmJLRpgZFmvuBVvtzJVYc36X
- ZsVs39GgbOjFQmg2ENC7zCzpif1BbNOiDprWk+lrYpWoSXyTxvwkEh0IjrPAbS6E5tsU
- GGqZOIdePIQRqZPktpBFIJ+raxNOXmIr7881rUBLSuY+yKuPy6XE6zlOPEglDslatzaU
- Luiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738317891; x=1738922691;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dRex07OEWIPZnUyZsm6OPwzbjYcK8WABYtuZhS0qjkw=;
- b=AeLKIzG6KrVFHPDpFYWFvsGl62Qz5huvhAQ8ISqP1s2KjmDKZc3mzqiOxxEx6qDs9w
- YbIYlSaqvXWI8ZeVLGiw4khgWlgjVTOaAX6M3E7q6EWFqXRRE1QcxEZc/NXD+ziTSqI3
- cBT+qJZNenjKGwtuj93Nl0rbGC8+qU/SVD379HB6qlobYJ9Vix3Bl5uUfv6coxCqfMQA
- uOXjK6MxlUfIQ9pPX4a7nn5EJBhco0j0tBANvjk1wWCU/EUsJiVbVwvtUCoTxCJS8rAl
- w0b4/fVB9N/bNSYUvp0Kl+7EglLpJ1a61cZao978oj3+dOAGuS73MNb0J59sRzhvac6e
- ycQQ==
-X-Gm-Message-State: AOJu0YwM1r7qQMTuWCbAikRsKn5z6o3wRl9EpHZ6OsYzV0TrHSqg6LIm
- Z8Tth2IGHfyvjVZNMUcWXAou9RY7BlStGgvIIuz+SYVScLn8q3+awJM44w==
-X-Gm-Gg: ASbGncvw3zErnLdb/kmZ8LEXpHCuvErS7eTrYlRNjUICqnzJzJIbmM/dJBGG0jxn71U
- d7PwNZmHJP60TI2RkGSmey+lTTuffytSRKKRWneO+T8SSAoC4zhhUCmy/IgS0xq7/CZGguV5S+k
- KqmbHmzdUqgzgSG1jxGCHsqmRUfgyNmkuK13TRRmNTOVd8pPP5Y1WM88QEk+zFPKOVvAumnaxLH
- B1I9VW5FEM5lD2CkGBVSr7rcBykG26ZMtzqCHwDn071CKofDSUEzCg6y4lskdFiFPGdxoAuWyVt
- kUqPAZx+115JA+3jLySVGFQ=
-X-Google-Smtp-Source: AGHT+IEKamJoh9wDJYtIZcLxMBrKCJJ3ytVOwR2FZCP0bxT6nBs2weIkDUUkvXqFxDTbQ11Dn4W39g==
-X-Received: by 2002:a05:6512:402a:b0:543:e406:6367 with SMTP id
- 2adb3069b0e04-543e4bdef29mr3561309e87.4.1738317890455; 
- Fri, 31 Jan 2025 02:04:50 -0800 (PST)
-Received: from dev.rasu.local ([212.22.67.162])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-543ebeb0633sm424250e87.141.2025.01.31.02.04.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jan 2025 02:04:49 -0800 (PST)
-From: Maks Mishin <maks.mishinfz@gmail.com>
-X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
+ spf=pass smtp.mailfrom=atheiste@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-5745ddfd69-ntdxp
+ (smtpc-mxd-5745ddfd69-ntdxp [2a02:598:64:8a00::1000:a0c])
+ id 69ab4db5da3a78af691af992; Fri, 31 Jan 2025 11:09:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz;
+ s=szn20221014; t=1738318146;
+ bh=D+txAMV5BnWWK8QjjzsDF4MEFZglebTzGmD8KUuh8T4=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:
+ Content-Transfer-Encoding;
+ b=FQ8Ccwm+r/BPIYTIEQCBY6A3Gyxf6MJBxOy67D78hDIYFen/9iNK1CEs5+zL1PXkr
+ WAm8wy7kqkssSn55Pez67TRZ42HWNWbvhCOSwkMrfPREJK93oXP42y3mbLAStasCsp
+ GQiXTnh/B0WG29a74HLpFAUQPDEL76HWivXd3b5lxYwCqS8GgcZd6uPY8vadhUwUuR
+ 94e5ktYeGIQimTV4NYsReSWvOWq0I90KNMdOCH69Xqdrld8exiW1c0TeCIAkbantKa
+ zSPTaT0i8dPbb+110uOAPizRb/ak0yd6A2Qqms1hIWDSj4xAT1yMps57eTTZSNQ+rB
+ 1dnh2o1ZBRYYA==
+Received: from triton.localdomain (236.157.230.94.awnet.cz [94.230.157.236])
+ by smtpd-relay-6c6fb99fbb-fn9wm (szn-email-smtpd/2.0.27) with ESMTPA
+ id 0b6e54fd-6f91-47fa-9a17-34de3b1c316c;
+ Fri, 31 Jan 2025 11:09:03 +0100
+From: Tomas Peterka <atheiste@seznam.cz>
 To: u-boot@lists.denx.de
-Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-Subject: [PATCH] tools: imximage: Fix potential memory leak
-Date: Fri, 31 Jan 2025 13:04:46 +0300
-Message-Id: <20250131100446.1668349-1-maks.mishinFZ@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Tomas Peterka <atheiste@seznam.cz>,
+	tomas@dronetag.cz
+Subject: [PATCH] feat: Add CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfig
+Date: Fri, 31 Jan 2025 11:08:44 +0100
+Message-ID: <20250131100845.31380-1-atheiste@seznam.cz>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250130164758.GC1233568@bill-the-cat>
+References: <20250130164758.GC1233568@bill-the-cat>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 31 Jan 2025 15:13:17 +0100
@@ -95,26 +73,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dynamic memory, referenced by 'line', is allocated at imximage.c:761 
-by calling function 'getline' and lost at imximage.c:793.
-
-Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
+Add CONFIG_BOOTCOUNT_ALTBOOTCMD so the developer is able to add
+custom altbootcmd via Kconfig when they enable BOOTCOUNT.
 ---
- tools/imximage.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/bootcount/Kconfig | 3 +++
+ include/env_default.h     | 3 +++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/tools/imximage.c b/tools/imximage.c
-index 467d9f27d2..55231caf8f 100644
---- a/tools/imximage.c
-+++ b/tools/imximage.c
-@@ -783,6 +783,7 @@ static uint32_t parse_cfg_file(struct imx_header *imxhdr, char *name)
- 	}
+diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
+index 0080d2a165..99b6c7534f 100644
+--- a/drivers/bootcount/Kconfig
++++ b/drivers/bootcount/Kconfig
+@@ -183,6 +183,9 @@ config BOOTCOUNT_BOOTLIMIT
+ 	  counter being cleared.
+ 	  If set to 0, do not set a boot limit in the environment.
  
- 	(*set_dcd_rst)(imxhdr, dcd_len, name, lineno);
-+	free(line);
- 	fclose(fd);
- 
- 	/* Exit if there is no BOOT_FROM field specifying the flash_offset */
++config BOOTCOUNT_ALTBOOTCMD
++	string "Alternative boot command when BOOTLIMIT is reached"
++
+ config SYS_BOOTCOUNT_SINGLEWORD
+ 	bool "Use single word to pack boot count and magic value"
+ 	depends on BOOTCOUNT_GENERIC
+diff --git a/include/env_default.h b/include/env_default.h
+index aa3dd40f3f..60c39f9853 100644
+--- a/include/env_default.h
++++ b/include/env_default.h
+@@ -115,6 +115,9 @@ const char default_environment[] = {
+ #if defined(CONFIG_BOOTCOUNT_BOOTLIMIT) && (CONFIG_BOOTCOUNT_BOOTLIMIT > 0)
+ 	"bootlimit="	__stringify(CONFIG_BOOTCOUNT_BOOTLIMIT)"\0"
+ #endif
++#ifdef CONFIG_BOOTCOUNT_ALTBOOTCMD
++	"altbootcmd="	CONFIG_BOOTCOUNT_ALTBOOTCMD            "\0"
++#endif
+ #ifdef CONFIG_MTDIDS_DEFAULT
+ 	 "mtdids="	CONFIG_MTDIDS_DEFAULT		"\0"
+ #endif
 -- 
-2.34.1
+2.47.1
 
