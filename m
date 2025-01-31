@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28051C0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 07:49:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46E76C0218F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 07:59:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90C6080EBD;
-	Fri, 31 Jan 2025 08:49:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7CA9980EBD;
+	Fri, 31 Jan 2025 08:59:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="GZd3DViW";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tpGtvP39";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EBF280F0E; Fri, 31 Jan 2025 08:49:52 +0100 (CET)
+ id 2A30F80F67; Fri, 31 Jan 2025 08:59:47 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AEB180EB6
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 08:49:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EA9F80EB6
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 08:59:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=41261629dd=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50V7kDHO012967;
- Fri, 31 Jan 2025 08:49:44 +0100
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50V7pCul006643;
+ Fri, 31 Jan 2025 08:59:44 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- ckBSP0sGujBJEtn7F+ix03KpeXNKzbQQpbAf9rCmVhw=; b=GZd3DViW7G2kBHfK
- m3aYEnJw2SP64HdQc93kTa3VyXhEB9iFXwEW7paVmT0fiUZgtedSQCGmPHWfSK1C
- 2iiCoaqy/jCrZ3+KmtTlALSWjMMUWkAX1xRhwDTFYjDvTY360NZY9SvdaTOohHDE
- rcgOfViP8NqHRZMtu7MuSVe6txQ8h4WzMnDSwnt7QiaHcjXtOnHdrjf+HgLnfTmH
- mIGAAXZaQRFo7xJtWgpNhlv7W2dPeR0ETofrLRCV0b+2j3JWSnBq/za/NZSkVd2a
- jTj4avOeGTihbU6Fqx3pydwivVTm15cro8WDHOeGcb+kZfa/6v8kfWRCMXB+ixrf
- RFZFDw==
+ p3D3uZm14Bxs32shxz6j/vJai7XG+wd0011jwgidSTA=; b=tpGtvP39fGe4FDGH
+ JxXB59LTEn5MuJ124G1IHbDti51yApWDOe45Yk25WM+dZNdHx5L5onV7Vyp5Aqlt
+ ckUo8c0m3o+kzw7NJYcv8h3m8u62wb3I9MR0H9K5zv9hdBrsuuCFGpKzBuOqGsnw
+ UcIkxe0/yUrE/U3FM44qOaoEeXsbQj05p8aQxB2OdQ6jt9y01s47AQbMyj+b+AmX
+ Jl4mxk7Xkb7+P5JVDoVLB6R9Z7YWT4WrtsK0+nYifa9bzxOcILbeGj/hXSzqDmwH
+ i6idLBaemO8zB1LlIED2vPtDIuYeX8HPSKuYl8YZSwOAnvwosgoYDXrVdxQVQpKk
+ toDXoQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44gf7dsrmt-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44gf7ghss9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 31 Jan 2025 08:49:44 +0100 (CET)
+ Fri, 31 Jan 2025 08:59:44 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 7866140050;
- Fri, 31 Jan 2025 08:48:50 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A4E7E40054;
+ Fri, 31 Jan 2025 08:58:44 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E052427692F;
- Fri, 31 Jan 2025 08:46:22 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 434B427EEDB;
+ Fri, 31 Jan 2025 08:56:43 +0100 (CET)
 Received: from [10.252.27.7] (10.252.27.7) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 31 Jan
- 2025 08:46:22 +0100
-Message-ID: <0375be8a-7a88-4a37-b1f0-2fbe20270311@foss.st.com>
-Date: Fri, 31 Jan 2025 08:46:21 +0100
+ 2025 08:56:42 +0100
+Message-ID: <36fb582a-2c6d-4102-bd80-e1850f23021e@foss.st.com>
+Date: Fri, 31 Jan 2025 08:56:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [Uboot-stm32] [PATCH] stm32: remove dt-binding headers that are
- available upstream
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1 2/6] arm: stm32mp: stm32prog: fix warning when
+ CONFIG_SYS_64BIT_LBA is enable
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
- <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-References: <20241127172239.1.I7b5a4d95ba28bd08aa07ab3e8112988a5ec7e8e5@changeid>
- <9976c295-05b4-48a7-8c90-887909bcbec9@foss.st.com>
+ <trini@konsulko.com>
+References: <20241129122711.411917-1-patrice.chotard@foss.st.com>
+ <20241129122711.411917-3-patrice.chotard@foss.st.com>
+ <1cccf0a2-e317-4b00-9624-d2d25c8b4ae4@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <9976c295-05b4-48a7-8c90-887909bcbec9@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <1cccf0a2-e317-4b00-9624-d2d25c8b4ae4@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.252.27.7]
 X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -94,123 +94,53 @@ X-Virus-Status: Clean
 
 
 
-On 12/16/24 11:08, Patrice CHOTARD wrote:
+On 1/8/25 19:48, Patrick DELAUNAY wrote:
+> Hi,
 > 
-> 
-> On 11/27/24 17:23, Patrick Delaunay wrote:
->> Some dt-binding headers mask the upstream ones which can lead to build
->> failures, or worse: super weird bugs, if they get out of sync.
+> On 11/29/24 13:27, Patrice Chotard wrote:
+>> If CONFIG_SYS_64BIT_LBA flag is enable, following warning is triggered:
 >>
->> Remove these headers so our devicetree and binding headers will both be
->> in sync with upstream.
+>> ../arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c: In function 'init_device':
+>> ../arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c:793:27: warning: format
+>> '%ld' expects argument of type 'long int', but argument 8 has type
+>> 'lbaint_t' {aka 'long long unsigned int'} [-Wformat=]
+>>    793 |                 log_debug("MMC %d: lba=%ld blksz=%ld\n", dev->dev_id,
+>>        |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>> ../include/log.h:157:21: note: in definition of macro 'pr_fmt'
+>>    157 | #define pr_fmt(fmt) fmt
+>>        |                     ^~~
+>> ../include/log.h:182:33: note: in expansion of macro 'log'
+>>    182 | #define log_debug(_fmt...)      log(LOG_CATEGORY, LOGL_DEBUG, ##_fmt)
+>>        |                                 ^~~
+>> ../arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c:793:17: note: in expansion
+>> of macro 'log_debug'
+>>    793 |                 log_debug("MMC %d: lba=%ld blksz=%ld\n", dev->dev_id,
+>>        |                 ^~~~~~~~~
+>> ../arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c:793:42: note: format string
+>> is defined here
+>>    793 |                 log_debug("MMC %d: lba=%ld blksz=%ld\n", dev->dev_id,
+>>        |                                        ~~^
+>>        |                                          |
+>>        |                                          long int
+>>        |                                        %lld
 >>
->> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cast block_dev->lba to u64 and set the length specifier to %lld which
+>> is ok with or without CONFIG_SYS_64BIT_LBA flag.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>  drivers/clk/stm32/clk-stm32h7.c               |   3 +
->>  include/dt-bindings/clock/stm32fx-clock.h     |  63 ----
->>  include/dt-bindings/clock/stm32h7-clks.h      | 167 -----------
->>  include/dt-bindings/clock/stm32mp1-clks.h     | 274 ------------------
->>  include/dt-bindings/clock/stm32mp13-clks.h    | 229 ---------------
->>  include/dt-bindings/mfd/stm32f4-rcc.h         | 108 -------
->>  include/dt-bindings/mfd/stm32f7-rcc.h         | 115 --------
->>  include/dt-bindings/mfd/stm32h7-rcc.h         | 138 ---------
->>  include/dt-bindings/pinctrl/stm32-pinfunc.h   |  45 ---
->>  .../regulator/st,stm32mp13-regulator.h        |  42 ---
->>  include/dt-bindings/reset/stm32mp1-resets.h   | 123 --------
->>  include/dt-bindings/reset/stm32mp13-resets.h  | 100 -------
->>  12 files changed, 3 insertions(+), 1404 deletions(-)
->>  delete mode 100644 include/dt-bindings/clock/stm32fx-clock.h
->>  delete mode 100644 include/dt-bindings/clock/stm32h7-clks.h
->>  delete mode 100644 include/dt-bindings/clock/stm32mp1-clks.h
->>  delete mode 100644 include/dt-bindings/clock/stm32mp13-clks.h
->>  delete mode 100644 include/dt-bindings/mfd/stm32f4-rcc.h
->>  delete mode 100644 include/dt-bindings/mfd/stm32f7-rcc.h
->>  delete mode 100644 include/dt-bindings/mfd/stm32h7-rcc.h
->>  delete mode 100644 include/dt-bindings/pinctrl/stm32-pinfunc.h
->>  delete mode 100644 include/dt-bindings/regulator/st,stm32mp13-regulator.h
->>  delete mode 100644 include/dt-bindings/reset/stm32mp1-resets.h
->>  delete mode 100644 include/dt-bindings/reset/stm32mp13-resets.h
+>>   arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
 >>
->> diff --git a/drivers/clk/stm32/clk-stm32h7.c b/drivers/clk/stm32/clk-stm32h7.c
->> index a554eda504de..6acf2ff0a8fb 100644
->> --- a/drivers/clk/stm32/clk-stm32h7.c
->> +++ b/drivers/clk/stm32/clk-stm32h7.c
->> @@ -18,6 +18,9 @@
->>  
->>  #include <dt-bindings/clock/stm32h7-clks.h>
->>  
->> +/* must be equal to last peripheral clock index */
->> +#define LAST_PERIF_BANK SYSCFG_CK
->> +
->>  /* RCC CR specific definitions */
->>  #define RCC_CR_HSION			BIT(0)
->>  #define RCC_CR_HSIRDY			BIT(2)
->> diff --git a/include/dt-bindings/clock/stm32fx-clock.h b/include/dt-bindings/clock/stm32fx-clock.h
->> deleted file mode 100644
->> index e5dad050d518..000000000000
->> --- a/include/dt-bindings/clock/stm32fx-clock.h
->> +++ /dev/null
->> @@ -1,63 +0,0 @@
->> -/* SPDX-License-Identifier: GPL-2.0-only */
->> -/*
->> - * stm32fx-clock.h
->> - *
->> - * Copyright (C) 2016 STMicroelectronics
->> - * Author: Gabriel Fernandez for STMicroelectronics.
->> - */
->> -
->> -/*
->> - * List of clocks which are not derived from system clock (SYSCLOCK)
->> - *
->> - * The index of these clocks is the secondary index of DT bindings
-
-[...]
-
->> -#define GPIOA_R		14080
->> -#define GPIOB_R		14081
->> -#define GPIOC_R		14082
->> -#define GPIOD_R		14083
->> -#define GPIOE_R		14084
->> -#define GPIOF_R		14085
->> -#define GPIOG_R		14086
->> -#define GPIOH_R		14087
->> -#define GPIOI_R		14088
->> -#define TSC_R		14095
->> -#define PKA_R		14146
->> -#define SAES_R		14147
->> -#define CRYP1_R		14148
->> -#define HASH1_R		14149
->> -#define RNG1_R		14150
->> -#define AXIMC_R		14160
->> -#define MDMA_R		14208
->> -#define MCE_R		14209
->> -#define ETH1MAC_R	14218
->> -#define FMC_R		14220
->> -#define QSPI_R		14222
->> -#define SDMMC1_R	14224
->> -#define SDMMC2_R	14225
->> -#define CRC1_R		14228
->> -#define USBH_R		14232
->> -#define ETH2MAC_R	14238
->> -
->> -/* SCMI reset domain identifiers */
->> -#define RST_SCMI_LTDC		0
->> -#define RST_SCMI_MDMA		1
->> -
->> -#endif /* _DT_BINDINGS_STM32MP13_RESET_H_ */
 > 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> 
+> Thanks
+> Patrick
+> 
 Applied to u-boot-stm32/master
 
 Thanks
 Patrice
-
-> 
-> Thanks
-> PAtrice
-> _______________________________________________
-> Uboot-stm32 mailing list
-> Uboot-stm32@st-md-mailman.stormreply.com
-> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
