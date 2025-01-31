@@ -4,62 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F38DBC0218F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 12:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 982F0C0218F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 13:40:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1030B8215E;
-	Fri, 31 Jan 2025 13:49:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 9998D80EB2;
+	Fri, 31 Jan 2025 14:40:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="Z9RFklzY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Szqx/HdS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A84F88215E; Fri, 31 Jan 2025 13:49:47 +0100 (CET)
-Received: from mail-10625.protonmail.ch (mail-10625.protonmail.ch
- [79.135.106.25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 70AA480F0E; Fri, 31 Jan 2025 14:40:28 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50B4882119
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 13:49:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A71980107
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:40:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1738327784; x=1738586984;
- bh=aPIJH7bNuth4LEusCoG4oWYEMJOaIkCdIsibfuhoWbA=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector:List-Unsubscribe:List-Unsubscribe-Post;
- b=Z9RFklzY5uMTrHqnAHYqqcyKtFJmX2fbBCLrIydAAnxP9mUgE2sJuCw752NndtihU
- L3ovtRQaPxj0RjLm4go81Pi9+BS6fgQo0/7NvJZRnX8tIWNWREfG3VetJdhEkcUW7u
- z3YWOHzcc6ydBe2CHWYUF44CqF2bX/ENfAPba5u/O6PYu/5UCj2wXs3kSH5m2OBVNv
- 1dHJ2d5tGNktvqJirchAl55BJpW5RJJOaU+2yZCiKjTSqG3JZQ15+zMXTV+Y28aXBq
- h0kxSGs+uATkQ5H97l28SG8I35h2m9QZRUYpLngA+gs8N6WZ5ldkMN/Ty1zMp8Ldwr
- BGoWSpwamv8Ww==
-Date: Fri, 31 Jan 2025 12:49:40 +0000
-To: Fabio Estevam <festevam@gmail.com>
-From: Sam Day <me@samcday.com>
-Cc: neil.armstrong@linaro.org, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- Robert Marko <robert.marko@sartura.hr>, Luka Perkov <luka.perkov@sartura.hr>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 2/4] rng: msm: don't enable PRNG if it's already enabled
-Message-ID: <NjPJRn1ysduE-G625vvanUTRDEpCoaR2-XYkpPxMmorhMUTdXS5tUGUD3tQucGPl1GZphHNIjzbudzxyObI52n4HxZ_0rc-cfoASQv5614A=@samcday.com>
-In-Reply-To: <CAOMZO5B0aKxmM52962AGeHthQurBnqM8Ob3es=xvM0=P-KoXgg@mail.gmail.com>
-References: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
- <20250127-msm-rng-fixes-v1-2-00f5d2284314@samcday.com>
- <67dc34b7-1d5b-4fb4-89de-5fb4085d98bf@linaro.org>
- <Nc7eb6ne1yjnHZwTHdp5SqnqYu3uZEkqx1Qtuuk-Fs54ipo0bfhxzbAM2WksLzDQfdztW1txZLlWxbdvy7kGvYoj3IaOYNXq1tefJQb6qPk=@samcday.com>
- <CAOMZO5B0aKxmM52962AGeHthQurBnqM8Ob3es=xvM0=P-KoXgg@mail.gmail.com>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 2c973f181457f34b4fc324cc68208c90575cde98
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e58a90c6059so3926607276.1
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 05:40:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738330825; x=1738935625; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=OL6Qc/spcveV6tPczh0rA7v9cbHyqTGRFysTW+SIu2A=;
+ b=Szqx/HdSZT40X0v+1T2TMSDmuESXaOBZM2GJt0J4UeinyB0iooTb63IBgp6cVrQk4R
+ xKMfd1YB36SFhZ77BCAbsmmacl3QeyQBX2cDpG+HkF2ubhqnz3tNFyPcul3cpaSbKed0
+ uzFabP8m/3ty9VMWGaZqFjFCZZ0UNfz5DSJfmdYjcFnrvhbb6Sc5bSLrHCk9m30GvJOi
+ Z0iqMJgjVP1Ea3JNSBe2O2/zT1KGghLy0Dfk22YA3c5aceyL9d0ibiovpoGOchpGV3BI
+ adMKRfGvrrvVgAv+PGygvXAKbbHkRFa4z7QovLfZqmwbLLyaaS1PFQ4hShwI0c4aUJvo
+ TLqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738330825; x=1738935625;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OL6Qc/spcveV6tPczh0rA7v9cbHyqTGRFysTW+SIu2A=;
+ b=aN8fjNRuWzXXksO7YjqRlOVHS1mwHBTGSFPLbMXeivFyhA38pkXxYLXKxsX3Bsetg0
+ TrrjV2mZsv87LvlcLWs1oR3VwdotbHSg+jcCE9mJKZ88B+Rm+U8ERcK03NfZJhTKfEML
+ ZuZAnhY6xPsRG5bEG5BdumuyIxLOl+PPy6SZ63wUaHrSCdJ73b6K2NJaGB2Iu7rkZZWo
+ eniEEOgjcqVjWm39ZJa3pl9e/PAuFbkClzToB8cE0wgN3wVHRZgxGlL4NebT5eul17r+
+ 0yCa6aognvOKD2+xxO1ybVgJSH2YJsSKj7tv6irmhdziczkN0gtCgGT5s1rmRGtopnLV
+ POoA==
+X-Gm-Message-State: AOJu0YyiIdMZ73C00x19Ve+kRC08qxVQcyLIFGg4Smkwnc2RARTUUyjL
+ 7cfS5XXAFgnX2foaaT0/yw5wYNGMkqSeHApKTenVJRYfj7zcTpMCnskUnXx0InneiHjflmcVznu
+ lJTgpPL/1s4rCFPqpIZDf5CICpNzEEz76wshFGA==
+X-Gm-Gg: ASbGncuyMALoTXCtIOMuPxQzMSH7TtOULm9Nq5tCqwZKD4Cbqt51tZ3kB8VeNz0h5Rh
+ 3+yzo4Yi5F12qervI1TIFTlEtKd/aM62a0UDRpu7KN64pEKbP1NwKiftyJa9b6SJH2bZ+bYZG
+X-Google-Smtp-Source: AGHT+IHSi+sFBhV1gPPcN+Q2VQzwdNm5TUA5I/X5cmIPsPWP18QOnFGuq6i5OW125WJuH6ft855JGzaruJoheggmI3g=
+X-Received: by 2002:a05:6902:2384:b0:e3c:a021:4898 with SMTP id
+ 3f1490d57ef6-e5ac8913c2amr6437684276.13.1738330824919; Fri, 31 Jan 2025
+ 05:40:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <20250127151657.648255-1-raymond.mao@linaro.org>
+In-Reply-To: <20250127151657.648255-1-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 31 Jan 2025 15:39:49 +0200
+X-Gm-Features: AWEUYZnLHYkqPaeCS_VVx8YWgCYqJp7kjnTWBIZ5h0mDmeLG3RxBhC3UFJ5f5YM
+Message-ID: <CAC_iWjLCMYCCCOAZ2V0XcNQVvSrk0NZjoOwxN+9n9PvbsAiheA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] mbedtls: fix incorrect kconfig dependencies on mbedtls
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Peter Robinson <pbrobinson@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,26 +95,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio,
+Hi Raymond
 
-On Friday, 31 January 2025 at 12:29, Fabio Estevam <festevam@gmail.com> wro=
-te:
->=20
-> On Fri, Jan 31, 2025 at 8:10=E2=80=AFAM Sam Day me@samcday.com wrote:
->=20
-> > I'd love to take credit, but actually it was Stephan Gerhold who spotte=
-d
-> > this when we were debugging the issue together :)
->=20
->=20
-> Maybe you could add a Suggested-by tag.
+On Mon, 27 Jan 2025 at 17:17, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Currently building with WGET_HTTPS,NET_LWIP and MBEDTLS_LIB failed
+> due to a few incorrect kconfig dependencies.
+> Fix these and clarify what is the purpose of MBEDTLS_LIB_CRYPTO_ALT.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  cmd/Kconfig         | 1 -
+>  lib/mbedtls/Kconfig | 8 +++++---
+>  2 files changed, 5 insertions(+), 4 deletions(-)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 1a0985ca479..071601b5ac2 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2161,7 +2161,6 @@ config WGET_HTTPS
+>          select ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+>          select X509_CERTIFICATE_PARSER
+>          select PKCS7_MESSAGE_PARSER
+> -       select MBEDTLS_LIB_CRYPTO
+>         select MBEDTLS_LIB_TLS
+>         select RSA_VERIFY_WITH_PKEY
+>         select X509_CERTIFICATE_PARSER
+> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> index aa82336ef14..17ed2bc71de 100644
+> --- a/lib/mbedtls/Kconfig
+> +++ b/lib/mbedtls/Kconfig
+> @@ -116,6 +116,7 @@ endif # LEGACY_CRYPTO_BASIC
+>
+>  config LEGACY_CRYPTO_CERT
+>         bool "legacy certificate libraries"
+> +       depends on LEGACY_CRYPTO
+>         select ASN1_DECODER_LEGACY if ASN1_DECODER
+>         select ASYMMETRIC_PUBLIC_KEY_LEGACY if \
+>                 ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> @@ -210,12 +211,13 @@ endif # LEGACY_CRYPTO
+>  if MBEDTLS_LIB
+>
+>  config MBEDTLS_LIB_CRYPTO_ALT
+> -       bool "MbedTLS crypto alternatives"
+> +       bool "Use legacy crypto libraries as MbedTLS alternatives"
+>         depends on MBEDTLS_LIB && !MBEDTLS_LIB_CRYPTO
+>         select LEGACY_CRYPTO_BASIC
+>         default y if MBEDTLS_LIB && !MBEDTLS_LIB_CRYPTO
+>         help
+> -         Enable MbedTLS crypto alternatives.
+> +         Enable MbedTLS crypto alternatives and replace it with legacy crypto
+> +         libraries.
 
-Thanks for the suggestion, I've applied that locally (but will hold off
-on sending a v2 until I get more feedback on this series).
+This isn't too clear for someone that hasn't been involved with mbedTLS.
+Isn't that enabling U-Boot's hashing algorithms instead of the mbedTLS ones?
 
-Perhaps I should also add a "Suggested-by-suggested-by:" to attribute my
-learning of this tag to you? :)
-
-Regards,
--Sam
-
+Thanks
+/Ilias
+>           Mutually incompatible with MBEDTLS_LIB_CRYPTO.
+>
+>  config MBEDTLS_LIB_CRYPTO
+> @@ -451,7 +453,7 @@ config MBEDTLS_LIB_TLS
+>         depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+>         depends on ASN1_DECODER_MBEDTLS
+>         depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+> -       depends on MBEDTLS_LIB_CRYPTO
+> +       depends on MBEDTLS_LIB
+>         help
+>           Enable MbedTLS TLS library. Required for HTTPs support
+>           in wget
+> --
+> 2.25.1
+>
