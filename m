@@ -4,64 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE6DAC0218A
-	for <u-boot@archiver.kernel.org>; Thu, 30 Jan 2025 23:40:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB760C0218A
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 00:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27BF98083E;
-	Fri, 31 Jan 2025 00:40:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 1772080C96;
+	Fri, 31 Jan 2025 01:09:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tZAowvwN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TaYo1Da4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 455E180C85; Fri, 31 Jan 2025 00:40:10 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2E12180EB6; Fri, 31 Jan 2025 01:09:28 +0100 (CET)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 969B9807EE
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 00:40:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 763B9809D0
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 01:09:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2de8=UX=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1738280405;
- bh=1DQ/83GDwaiNtolnugjP04d2GPvMYrmqfGEQsKS1bl4=;
- b=tZAowvwNGmm6b+rwFyKrU3ZxsbIzQ2XrnYzekaHYdFc5j7cCsFCvjDzDzF29mj07zKhpu/bej
- uTreKAq6QHfJBG0K0aKU5H+8tjqtDQHks42tDvHsRWBrFlnG86dQoKbATMumrF2SL1TqfhrfceH
- 3Yu8WlGZJE1BqBuY29NFdoHk2xEKF7I3wqju+SbIHYzXWeDTyLMYNZ1jS8wSgQnmLEY+uLjJz2A
- uaZsXBr0vtQYuEd3pelkiIs80/UZcn2Qn9LW6/HAtxgQiYsI2ZRgSpWHPHCqsSGJEg1BEm7ew6I
- ltvx12LHlHnTGrLIZoirPnKkNu0EZ1X4ADJLN0sMZ6Ew==
-X-Forward-Email-ID: 679c0dc82d70e7e058840a02
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <47e26ad8-32c0-43bd-8c61-3913e7e899db@kwiboo.se>
-Date: Fri, 31 Jan 2025 00:39:46 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-5f88a93dceeso472002eaf.2
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 16:09:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738282164; x=1738886964; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6u5VpI0X0lBm5km5Jmixg4Ldk8/xSC6TUk2I2p7b3fE=;
+ b=TaYo1Da4yZy/5aS/Oyj9/IjJeFJ7NgtJbj/zoNoOrkvHQ/i6SyFCyh0id4WuV4ZVY5
+ IzV8mUkRNmfTe1pTz+9GXwyeyskmTUShpqMEPonlhOB2NORAN/qRXipU9BiikwY4hyIW
+ opMyEikBbaok3/zesOzenyruEW7/pd48vsd8U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738282164; x=1738886964;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6u5VpI0X0lBm5km5Jmixg4Ldk8/xSC6TUk2I2p7b3fE=;
+ b=TBV5uVoUI7upXLepaNfO4kV5X/cOu1bey22oa8a2fuzma5HXRjqqV5gSAbddWwhZlr
+ WIae324dgCQXC/UO8PeBLTWoXpErEJI1tN01tzX+d1mV9Y1aQpXBAOcf5CmohgOrkDQj
+ PHtEMd2Jt4rAo/F8mxqEKRfKdAdKdexXl6LUFE0n84C0m/yb9QBrlx67RLD0xQ0VYoyP
+ AZYaSxVZrC9VJEmHBY0fY9vEDNNa/BRw3+ySlKZOuYpESKHzRS7LorUEbifVyO2HzPfC
+ cjtJwQwCHSu6PwKCLaXnsNLu6bdPVbfSZUzizcXbAapkPRtzylvMzJdqGpE4spICcUUk
+ T/Mg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUmyabJ/FANH8mag7eX0uG4FbBE2iqzR+D3Nppa0Ptir3WBVHQJenMTsRhp1eu396DCXbuNb+k=@lists.denx.de
+X-Gm-Message-State: AOJu0YycygpUd4AboP63Txj0xqEYH+4er2ncQtJblfliX/mCe0CCH54g
+ 0xVGbnfQgPz2DwdDgIjmzhU28cEc5sz1yhnZlKnG7oMhUjXuj7SgaeSiJ3lYeso=
+X-Gm-Gg: ASbGncuGHaIUjpNISJ7nuzaxGFZ8ywz0OT/9YSXiMs8eBcX987YuvNAwe9kWPkjPwtJ
+ bdjhjCOOWgPABx6m2TGOog9RUGgQGhmnOEgdDDnU/iubFh77QgHEKT6TTjyMpzOUmOgsHajwGYn
+ Km5z+3W4ADJQy0Zf1+hdaIIeb0uLirySO3u/8u1JZL/CtvRoxhZT4qO78+5/oQYo8FZJu3x8TxM
+ 4IuMSf7TcKScXTPPmPg7skUNOoPgHpuvTe9Ovu3TS6NXWSrmGZGzxIKwE3lfiihrk01xT42cUx/
+ /r8A8uHuti49ZJY=
+X-Google-Smtp-Source: AGHT+IHSxlISNsHCtrgH40ZMKI2To8cB6MxvxjKMGfiqGfVw+PXEh31LOEqYl3n8+k0WU7/aFoaRiw==
+X-Received: by 2002:a05:6870:548b:b0:29e:f61:3b62 with SMTP id
+ 586e51a60fabf-2b32ef75268mr5510998fac.7.1738282164121; 
+ Thu, 30 Jan 2025 16:09:24 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3f33355d4dasm522769b6e.27.2025.01.30.16.09.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jan 2025 16:09:23 -0800 (PST)
+Date: Thu, 30 Jan 2025 18:09:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Re: [PATCH 01/19] mbedtls: Add SHA symbols for VPL
+Message-ID: <20250131000920.GM1233568@bill-the-cat>
+References: <20250126184333.4058848-1-sjg@chromium.org>
+ <20250126184333.4058848-2-sjg@chromium.org>
+ <CAEfUkUJPVLGCoThrP3ZcLwY283FYm2CcU52XDEmguKj0mKSc3Q@mail.gmail.com>
+ <20250130195540.GL1233568@bill-the-cat>
+ <CAEfUkU+E9qkHo_dhEFffYj_uhrk0OFezQEchNU=yDuE2beMEXw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 20/20] rockchip: rk3576: Add support for ROC-RK3576-PC
- board
-To: Heiko Stuebner <heiko@sntech.de>
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- joe.hershberger@ni.com, rfried.dev@gmail.com, quentin.schulz@cherry.de,
- detlev.casanova@collabora.com, u-boot@lists.denx.de,
- sebastian.reichel@collabora.com
-References: <20241121142731.1202209-1-heiko@sntech.de>
- <20241121142731.1202209-21-heiko@sntech.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20241121142731.1202209-21-heiko@sntech.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vsfgX1gQ32kNmzSi"
+Content-Disposition: inline
+In-Reply-To: <CAEfUkU+E9qkHo_dhEFffYj_uhrk0OFezQEchNU=yDuE2beMEXw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,256 +101,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
 
-On 2024-11-21 15:27, Heiko Stuebner wrote:
-> The ROC-RK3576-PC is a SBC made by Firefly, designed around the RK3576
-> SoC. This adds the needed board infrastructure and config for it.
-> 
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-> ---
->  arch/arm/dts/rk3576-roc-pc-u-boot.dtsi  | 12 ++++
->  arch/arm/mach-rockchip/rk3576/Kconfig   |  9 +++
->  board/firefly/roc-pc-rk3576/Kconfig     | 12 ++++
->  board/firefly/roc-pc-rk3576/MAINTAINERS |  7 +++
->  configs/roc-pc-rk3576_defconfig         | 77 +++++++++++++++++++++++++
->  doc/board/rockchip/rockchip.rst         |  3 +
->  include/configs/roc-pc-rk3576.h         | 15 +++++
->  7 files changed, 135 insertions(+)
->  create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
->  create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
->  create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
->  create mode 100644 configs/roc-pc-rk3576_defconfig
->  create mode 100644 include/configs/roc-pc-rk3576.h
-> 
-> diff --git a/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..0cfc7b5dcd6
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
-> @@ -0,0 +1,12 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2023 Joshua Riek <jjriek@verizon.net>
-> + *
-> + */
-> +
-> +#include "rk3576-u-boot.dtsi"
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
+--vsfgX1gQ32kNmzSi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-mmc-hs200-1_8v is already implied by mmc-hs400-1_8v in dts/upstream and
-can be dropped.
+On Thu, Jan 30, 2025 at 04:49:36PM -0500, Raymond Mao wrote:
+> Hi Tom,
+>=20
+> On Thu, 30 Jan 2025 at 14:55, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Jan 27, 2025 at 10:23:12AM -0500, Raymond Mao wrote:
+> > > Hi Simon,
+> > >
+> > >
+> > > On Sun, 26 Jan 2025 at 13:43, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Add some symbols for supporting SHA1 etc. for VPL.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > >  lib/mbedtls/Kconfig | 40 ++++++++++++++++++++++++++++++++++++++++
+> > > >  1 file changed, 40 insertions(+)
+> > > >
+> > > > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> > > > index 78167ffa252..81274786106 100644
+> > > > --- a/lib/mbedtls/Kconfig
+> > > > +++ b/lib/mbedtls/Kconfig
+> > > > @@ -112,6 +112,46 @@ config SPL_MD5_LEGACY
+> > > >
+> > > >  endif # SPL
+> > > >
+> > > > +if VPL
+> > > > +
+> > > > +config VPL_SHA1_LEGACY
+> > > > +       bool "Enable SHA1 support in VPL with legacy crypto library"
+> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA1
+> > > > +       help
+> > > > +         This option enables support of hashing using SHA1 algorit=
+hm
+> > > > +         with legacy crypto library.
+> > > > +
+> > > > +config VPL_SHA256_LEGACY
+> > > > +       bool "Enable SHA256 support in VPL with legacy crypto libra=
+ry"
+> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA256
+> > > > +       help
+> > > > +         This option enables support of hashing using SHA256 algor=
+ithm
+> > > > +         with legacy crypto library.
+> > > > +
+> > > > +config VPL_SHA512_LEGACY
+> > > > +       bool "Enable SHA512 support in VPL with legacy crypto libra=
+ry"
+> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA512
+> > > > +       help
+> > > > +         This option enables support of hashing using SHA512 algor=
+ithm
+> > > > +         with legacy crypto library.
+> > > > +
+> > > > +config VPL_SHA384_LEGACY
+> > > > +       bool "Enable SHA384 support in VPL with legacy crypto libra=
+ry"
+> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_SHA384
+> > > > +       select VPL_SHA512_LEGACY
+> > > > +       help
+> > > > +         This option enables support of hashing using SHA384 algor=
+ithm
+> > > > +         with legacy crypto library.
+> > > > +
+> > > > +config VPL_MD5_LEGACY
+> > > > +       bool "Enable MD5 support in VPL with legacy crypto library"
+> > > > +       depends on LEGACY_CRYPTO_BASIC && VPL_MD5
+> > > > +       help
+> > > > +         This option enables support of hashing using MD5 algorithm
+> > > > +         with legacy crypto library.
+> > > > +
+> > > > +endif # VPL
+> > > > +
+> > >
+> > > Do you mind rebasing this patch on top of my series below?
+> > > https://lore.kernel.org/u-boot/20250127151657.648255-1-raymond.mao@li=
+naro.org/
+> > >
+> > > My one has refactored the entire mbedtls kconfig submenu, makefile and
+> > > default config file to adapt with XPL, so that users can have
+> > > independent config options in both U-Boot proper and XPLs.
+> >
+> > Actually, can you work on top of this one please Raymond? I tried yours
+> > out now and it results in ~4KiB growth so something isn't right there,
+> > but Simon's is fine atm. Thanks!
+> >
+> The reason is that I set MbedTLS crypto as default when MBEDTLS_LIB is
+> selected, which sounds more logically reasonable.
+> If users enable MBEDTLS_LIB_CRYPTO_ALT at the same time with
+> MBEDTLS_LIB, which means using U-Boot legacy crypto as MbedTLS
+> alternatives, the growth should be gone.
+>=20
+> Do you want me to select MBEDTLS_LIB_CRYPTO_ALT for qemu or should we
+> leave this for the user to determine?
 
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3576/Kconfig b/arch/arm/mach-rockchip/rk3576/Kconfig
-> index 2e46b2b90d2..4c2328e5699 100644
-> --- a/arch/arm/mach-rockchip/rk3576/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3576/Kconfig
-> @@ -1,5 +1,12 @@
->  if ROCKCHIP_RK3576
->  
-> +config TARGET_ROC_PC_RK3576
-> +	bool "ROC_PC_RK3576"
+No, I guess you're right, that's fine. Still better to do this on top of
+Simon's series however please, thanks.
 
-Should probably match the model prop, "Firefly ROC-RK3576-PC".
+--=20
+Tom
 
-> +	select BOARD_LATE_INIT
+--vsfgX1gQ32kNmzSi
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This is already selected by the SoC Kconfig symbol and can be dropped.
+-----BEGIN PGP SIGNATURE-----
 
-> +	help
-> +	  ROC-RK3576-PC is a single board computer from Firefly
-> +	  using the Rockchp RK3576.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmecFKwACgkQFHw5/5Y0
+tyw1hQwAtfVi5O2jUS9ffxLQHWUlAoSbxe0DfQMRu+UGRh+YIrJ7yPFmVlZ/AwGa
+JoKPSan57i56a7AU5Gs2MKxR4abZbGL5FRyOmMPNUaXS+jTpzgJCb0vrxMxFnCXc
+mgmf3jpXoAYIbcRm/npEEzf1KBE5dozdgGw1DJMykWxsnexM8Ru4SjvqxO8bZa5E
+kydYpDuOGk8oVONiU2mKnbSrw6Gi61Z6UTbG+BKA05nG2giKxmsTOEJUm4enE5fb
++1AlocaKwLkTOqRD/d1u6ceZhUEsxVngSfVkvGSqCc+91aq1GHeVNKOfoKGMf507
+LCBFSPs6KCQrLA/USO9LA0VgLcxYdAn4PLWHRmcaOZJMp9gnkTwO1w8jF016ixNZ
+g0mwPhnOqd6d53dHioVOWTGbLWAIjYafBrKmVThrrV+T3CMxL5YylBtQF8EXdTxZ
+LYFgQjmmog7RgzXYDXD7D0C7VxGtZM0eNym8NhgYz8FptN/a7GsQ9qbR0zFoavYd
+D5B1MSbs
+=2/oh
+-----END PGP SIGNATURE-----
 
-s/Rockchp/Rockchip/
-
-> +
->  config ROCKCHIP_BOOT_MODE_REG
->  	default 0x26024040
->  
-> @@ -45,4 +52,6 @@ config SPL_STACK_R_ADDR
->  config SPL_STACK_R_MALLOC_SIMPLE_LEN
->  	default 0x200000
->  
-> +source board/firefly/roc-pc-rk3576/Kconfig
-> +
->  endif
-> diff --git a/board/firefly/roc-pc-rk3576/Kconfig b/board/firefly/roc-pc-rk3576/Kconfig
-> new file mode 100644
-> index 00000000000..2fc0f913c37
-> --- /dev/null
-> +++ b/board/firefly/roc-pc-rk3576/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_ROC_PC_RK3576
-> +
-> +config SYS_BOARD
-> +	default "roc-pc-rk3576"
-> +
-> +config SYS_VENDOR
-> +	default "firefly"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "roc-pc-rk3576"
-> +
-> +endif
-> diff --git a/board/firefly/roc-pc-rk3576/MAINTAINERS b/board/firefly/roc-pc-rk3576/MAINTAINERS
-> new file mode 100644
-> index 00000000000..aa8897c16fc
-> --- /dev/null
-> +++ b/board/firefly/roc-pc-rk3576/MAINTAINERS
-> @@ -0,0 +1,7 @@
-> +ROC-RK3576-PC
-> +M:	Heiko Stuebner <heiko@sntech.de>
-> +S:	Maintained
-> +F:	board/firefly/roc-pc-rk3576
-> +F:	include/configs/roc-pc-rk3576.h
-> +F:	configs/roc-pc-rk3576_defconfig
-> +F:	arch/arm/dts/rk3576-roc-pc*
-> diff --git a/configs/roc-pc-rk3576_defconfig b/configs/roc-pc-rk3576_defconfig
-> new file mode 100644
-> index 00000000000..25e4fa1e8f6
-> --- /dev/null
-> +++ b/configs/roc-pc-rk3576_defconfig
-> @@ -0,0 +1,77 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-
-This non-cached memory option is only needed for the pcie rtl ethernet
-driver and can possible be dropped.
-
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-roc-pc"
-> +CONFIG_ROCKCHIP_RK3576=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_ROC_PC_RK3576=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-
-Should probably be in the 0x40000000+ range.
-
-> +CONFIG_DEBUG_UART_BASE=0x2AD40000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-roc-pc.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-
-This is not really needed, only add multiple Model: lines on the console.
-
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-
-The PCI and USB commands it possible not yet needed as there is no USB
-or PCIe support yet.
-
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-
-This board seem to use Motorcomm phy and should instead use
-CONFIG_PHY_MOTORCOMM=y.
-
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-
-USB is not yet supported and these could be dropped.
-
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 6b544e957b2..5b01d536c05 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -125,6 +125,9 @@ List of mainline supported Rockchip boards:
->       - Radxa ROCK 3A (rock-3a-rk3568)
->       - Radxa ROCK 3B (rock-3b-rk3568)
->  
-> +* rk3576
-> +     - Firefly ROC-RK3576-PC (roc-pc-rk3576)
-> +
->  * rk3588
->       - ArmSoM Sige7 (sige7-rk3588)
->       - Rockchip EVB (evb-rk3588)
-> diff --git a/include/configs/roc-pc-rk3576.h b/include/configs/roc-pc-rk3576.h
-> new file mode 100644
-> index 00000000000..ac98d516478
-> --- /dev/null
-> +++ b/include/configs/roc-pc-rk3576.h
-> @@ -0,0 +1,15 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
-> + */
-> +
-> +#ifndef __ROC_PC_RK3576_H
-> +#define __ROC_PC_RK3576_H
-> +
-> +#include <configs/rk3576_common.h>
-
-This include should be moved below ROCKCHIP_DEVICE_SETTINGS.
-
-Regards,
-Jonas
-
-> +
-> +#define ROCKCHIP_DEVICE_SETTINGS \
-> +		"stdout=serial,vidconsole\0" \
-> +		"stderr=serial,vidconsole\0"
-> +
-> +#endif
+--vsfgX1gQ32kNmzSi--
