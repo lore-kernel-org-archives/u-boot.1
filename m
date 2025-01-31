@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25CF8C0218F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 07:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE48C0218D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 08:00:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC18A80F70;
-	Fri, 31 Jan 2025 08:59:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28EBF80F95;
+	Fri, 31 Jan 2025 08:59:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="1VsGQpOa";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="T1kU3bjO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70FE980EB6; Fri, 31 Jan 2025 08:59:47 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 3163080F88; Fri, 31 Jan 2025 08:59:49 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7012E80F0E
+ by phobos.denx.de (Postfix) with ESMTPS id F1AB280F5F
  for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 08:59:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=41261629dd=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50V7ox6b029612;
- Fri, 31 Jan 2025 08:59:44 +0100
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50V7pCuk006643;
+ Fri, 31 Jan 2025 08:59:43 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- WBkgGQDCM5OuxuBnDLjVSPkKFFSrAW8lPe56tvYwIOM=; b=1VsGQpOaegDIWGSI
- TF/ZgLWfkwfddbnkSwbirrJ9dVfT9EYSeE709uuY8pjV6Gy1nqPcUT9uwMdTkMwk
- gteWLYNV3nJPgcHWYHPmVpVhxYG5dHSUo0FgmgmzmWiSAAAKtsucEfTBEe0vz5qq
- AMeIYY3IB+5nDcLh7WF7XGfowBsBUeYl59cpy+WVoFgzv9Ii3U2dpHrI5BCi7Top
- m3OpsMEBO44vxwOgdjJ9egUKCxcIuKJbyE/t8DRKD2xKlMUYs6cnbSewGD5YcZmR
- 22dLbqU0KiqW5hZGMxQt0nFxzYJQ5dYrNk9Dzuh4MAkfy0GPdDoT3c0fXxFeuszr
- 6x6URA==
+ jmHqe/u/fURXqvPgUarxrI6iVLGQh5qQO1RK31RQ/gs=; b=T1kU3bjOaRCcTa7t
+ pWh7pmYEocGtewKsG3Rs882hLstOSMi1DtyQ53VyF/1A3B5HeTExZaJNYCU46rP5
+ kcpYHZZqWDnQfRy0h5bmB/J2xbXI3cwqRWgPLb0F3aZ6s72alNPdcgdTHsexhtVb
+ 06GjnIS6h9YJEuEtJdB4O6F+D0bewnZW5qMSPE4JIuZvv5nJeF3HEYh2vLvOQ9zt
+ mlX2xzSy5gBE8JjkGLdykx+vfms5cuJdAK9GA6f1gy2WQj0Xw+VmTqLkaJQpfBNc
+ AxPf+6LOSdvELMoCFPSy0bI5uiUhbn/wqgQqx5wC9bcxAhEUtKXu6n5OA3SPGIxt
+ TrmaKQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44gf7e1r13-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44gf7ghss6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 31 Jan 2025 08:59:44 +0100 (CET)
+ Fri, 31 Jan 2025 08:59:43 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A2ABD4005A;
- Fri, 31 Jan 2025 08:58:51 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 17F6A40053;
+ Fri, 31 Jan 2025 08:58:44 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0DC192A8750;
- Fri, 31 Jan 2025 08:56:53 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BADC4272A13;
+ Fri, 31 Jan 2025 08:56:31 +0100 (CET)
 Received: from [10.252.27.7] (10.252.27.7) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 31 Jan
- 2025 08:56:52 +0100
-Message-ID: <7c4266ba-2ea4-44f8-bb52-d1d763d3def6@foss.st.com>
-Date: Fri, 31 Jan 2025 08:56:51 +0100
+ 2025 08:56:31 +0100
+Message-ID: <9ca8b081-81d6-4f4f-b525-8b0cfb2e8502@foss.st.com>
+Date: Fri, 31 Jan 2025 08:56:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/6] arm: stm32mp: stm32prog: update multiplier is
- part-size is above SZ_1G
+Subject: Re: [PATCH v1 1/6] fastboot: Fix warning when CONFIG_SYS_64BIT_LBA is
+ enable
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
- <trini@konsulko.com>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>
 References: <20241129122711.411917-1-patrice.chotard@foss.st.com>
- <20241129122711.411917-4-patrice.chotard@foss.st.com>
- <aede5c04-b1bd-42da-93e4-8c2cc7a5a9a1@foss.st.com>
+ <20241129122711.411917-2-patrice.chotard@foss.st.com>
+ <ae469951-f6f2-4be8-99d5-38db13ed85bc@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <aede5c04-b1bd-42da-93e4-8c2cc7a5a9a1@foss.st.com>
+In-Reply-To: <ae469951-f6f2-4be8-99d5-38db13ed85bc@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.252.27.7]
@@ -94,34 +94,47 @@ X-Virus-Status: Clean
 
 
 
-On 1/8/25 19:49, Patrick DELAUNAY wrote:
-> Hi
+On 1/8/25 19:48, Patrick DELAUNAY wrote:
+> Hi,
 > 
 > On 11/29/24 13:27, Patrice Chotard wrote:
->> Set multiplier to 'G' if part->size if above SZ_1G.
+>> If CONFIG_SYS_64BIT_LBA is enable, following compilation warning is
+>> triggered:
+>>
+>>   CC      drivers/fastboot/fb_mmc.o
+>> ../drivers/fastboot/fb_mmc.c: In function 'fb_mmc_erase_mmc_hwpart':
+>> ../drivers/fastboot/fb_mmc.c:215:35: warning: format '%lu' expects
+>> argument of type 'long unsigned int', but argument 2 has type
+>> 'long long unsigned int' [-Wformat=]
+>>    215 |         printf("........ erased %lu bytes from mmc hwpart[%u]\n",
+>>        |                                 ~~^
+>>        |                                   |
+>>        |                                   long unsigned int
+>>        |                                 %llu
+>>    216 |                dev_desc->lba * dev_desc->blksz, dev_desc->hwpart);
+>>        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>>        |                              |
+>>        |                              long long unsigned int
+>> ../drivers/fastboot/fb_mmc.c: In function 'fb_mmc_boot_ops':
+>> ../drivers/fastboot/fb_mmc.c:261:42: warning: format '%lu' expects
+>> argument of type 'long unsigned int', but argument 2 has type
+>> 'long long unsigned int' [-Wformat=]
+>>    261 |                 printf("........ wrote %lu bytes to EMMC_BOOT%d\n",
+>>        |                                        ~~^
+>>        |                                          |
+>>        |                                          long unsigned int
+>>        |                                        %llu
+>>    262 |                        blkcnt * blksz, hwpart);
+>>        |                        ~~~~~~~~~~~~~~
+>>        |                               |
+>>        |                               long long unsigned int
 >>
 >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>   arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 5 ++++-
->>   1 file changed, 4 insertions(+), 1 deletion(-)
+>>   drivers/fastboot/fb_mmc.c | 8 ++++----
+>>   1 file changed, 4 insertions(+), 4 deletions(-)
 >>
->> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
->> index f0e019e8da1..353aecc09de 100644
->> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
->> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
->> @@ -1229,7 +1229,10 @@ static int stm32prog_alt_add(struct stm32prog_data *data,
->>       char multiplier,  type;
->>         /* max 3 digit for sector size */
->> -    if (part->size > SZ_1M) {
->> +    if (part->size > SZ_1G) {
->> +        size = (u32)(part->size / SZ_1G);
->> +        multiplier = 'G';
->> +    } else if (part->size > SZ_1M) {
->>           size = (u32)(part->size / SZ_1M);
->>           multiplier = 'M';
->>       } else if (part->size > SZ_1K) {
-> 
 > 
 > 
 > Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
