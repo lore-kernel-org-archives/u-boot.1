@@ -4,49 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A292FC0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 10:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA46C0218D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 11:01:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 113E7828D0;
-	Fri, 31 Jan 2025 11:32:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 00DE382166;
+	Fri, 31 Jan 2025 12:01:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ILy5nin0";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A9C182898; Fri, 31 Jan 2025 11:31:54 +0100 (CET)
-Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::42ae])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0A60282169; Fri, 31 Jan 2025 12:01:52 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C6818215E
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 11:31:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F199E82163
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 12:01:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YksdM6QKszhwh;
- Fri, 31 Jan 2025 11:31:51 +0100 (CET)
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4YksdM2wSHz8Q0; Fri, 31 Jan 2025 11:31:51 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 31 Jan 2025 11:31:41 +0100
-Subject: [PATCH v2 13/13] pinctrl: rockchip: constify rockchip_pin_ctrl for
- RV1108
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=41261629dd=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50VAKwH0020145;
+ Fri, 31 Jan 2025 12:01:48 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=o1uE1wYcacvV3annMphIbq
+ y6EcxiYVBtXFMvD/qZD8g=; b=ILy5nin0Yuf17fNrCBQlUoYj3a6yX3iBYmnam5
+ MuV7pouczW5RXckzvyA5GHCnjfCjOBqg6iURn8GBhKBYBN2YbK2RWfC3QXQ7k9ye
+ Qbwctfd9ztdy/UZgDnG9WPh+xweP5dEPGoShxb61qv4c6u8fXuO2vTCW9xQJ8RiI
+ SWpc0L8tiIX5d57rckRYoWk38QwDUoTmIgYVQe3dhkiTHily/+0f45fCqYuARYdA
+ D80EDyAv2gNtxmgZriUEKXq2aYgVAMrJfRSNpahtBMSiiiD72cm/c+xmWmIAv5j4
+ CKsD1RNWzUXRpicAss1Mm49rXIs2f2u47PQT1OpMi6GjC+3A==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44gf7dtkr1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 31 Jan 2025 12:01:47 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id AF72F4007E;
+ Fri, 31 Jan 2025 12:00:30 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0F1A62D97E8;
+ Fri, 31 Jan 2025 11:57:06 +0100 (CET)
+Received: from [10.252.27.7] (10.252.27.7) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 31 Jan
+ 2025 11:57:05 +0100
+Message-ID: <a8e492b4-b2fc-4432-8ce9-669a8a70d1ed@foss.st.com>
+Date: Fri, 31 Jan 2025 11:57:04 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: [PULL] Pull request for u-boot master / v2025.04 =
+ u-boot-stm32-20250131
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250131-rockchip-pinctrl-const-v2-13-59bf93968ce7@cherry.de>
-References: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
-In-Reply-To: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
-To: Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@edgeble.ai>, 
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+X-Originating-IP: [10.252.27.7]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-01-31_04,2025-01-31_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,30 +87,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi Tom
 
-There's no need to modify private data from the controller, so let's
-make that struct const.
+Please pull the STM32 related patches for u-boot/master, v2025.04 = u-boot-stm32-20250131
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- drivers/pinctrl/rockchip/pinctrl-rv1108.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/24410
 
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1108.c b/drivers/pinctrl/rockchip/pinctrl-rv1108.c
-index 3eff5f59598c0d9ea9393a1b5e1a82efa8449eb6..780da1e946ea6361fb4c3cad0299296051cee77a 100644
---- a/drivers/pinctrl/rockchip/pinctrl-rv1108.c
-+++ b/drivers/pinctrl/rockchip/pinctrl-rv1108.c
-@@ -263,7 +263,7 @@ static struct rockchip_pin_bank rv1108_pin_banks[] = {
- 	PIN_BANK_IOMUX_FLAGS(3, 32, "gpio3", 0, 0, 0, 0),
- };
- 
--static struct rockchip_pin_ctrl rv1108_pin_ctrl = {
-+static const struct rockchip_pin_ctrl rv1108_pin_ctrl = {
- 	.pin_banks		= rv1108_pin_banks,
- 	.nr_banks		= ARRAY_SIZE(rv1108_pin_banks),
- 	.grf_mux_offset		= 0x10,
+The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c047:
 
--- 
-2.48.1
+  Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
 
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20250131
+
+for you to fetch changes up to 84bbb8f59a89b24daebc9eff532df6160f049faf:
+
+  ARM: dts: stm32: Update ck_flexgen_08 frequency. (2025-01-31 10:13:10 +0100)
+
+----------------------------------------------------------------
+STM32 MPU:
+- Remove dt-bindings headers available in dts/upstream
+- Fixes for stm32prog
+- Enable CONFIG_SYS_64BIT_LBA for STM32MP15/13/25 defconfigs
+- Add upport of ck_usbo_48m in pre-reloc stage for STM32MP13
+- Clean env_get_location() for STM32MP1
+- Fix board_get_usable_ram_top() to fix infinite loop in cache
+  management for STM32MP2.
+- Fix ck_flexgen_08 frequency for STM32MP2
+
+STM32 MCU:
+- Tune CYCLIC_MAX_CPU_TIME_US to avoid cyclic warning for STM32F469-Disco
+- Tune CYCLIC_MAX_CPU_TIME_US to avoid cyclic warning for STM32F769-Disco
+
+----------------------------------------------------------------
+Patrice Chotard (11):
+      fastboot: Fix warning when CONFIG_SYS_64BIT_LBA is enable
+      arm: stm32mp: stm32prog: fix warning when CONFIG_SYS_64BIT_LBA is enable
+      arm: stm32mp: stm32prog: update multiplier is part-size is above SZ_1G
+      configs: stm32mp13: enable CONFIG_SYS_64BIT_LBA
+      configs: stm32mp15: enable CONFIG_SYS_64BIT_LBA
+      configs: stm32mp25: enable CONFIG_SYS_64BIT_LBA
+      board: st: stm32mp1: Clean env_get_location()
+      configs: stm32f769-disco: Set CYCLIC_MAX_CPU_TIME_US to 8000 for stm32f769-disco
+      configs: stm32f469-disco: Set CYCLIC_MAX_CPU_TIME_US to 50000 for stm32f469-disco
+      stm32mp: Fix board_get_usable_ram_top()
+      ARM: dts: stm32: Update ck_flexgen_08 frequency.
+
+Patrick Delaunay (2):
+      stm32: remove dt-binding headers that are available upstream
+      ARM: dts: stm32mp13: Add support of ck_usbo_48m in pre-reloc stage
+
+ arch/arm/dts/stm32mp13-u-boot.dtsi                     |   5 +++
+ arch/arm/dts/stm32mp251.dtsi                           |   2 +-
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c        |   9 ++++--
+ arch/arm/mach-stm32mp/dram_init.c                      |   2 +-
+ board/st/stm32mp1/stm32mp1.c                           |   2 --
+ configs/stm32f469-discovery_defconfig                  |   1 +
+ configs/stm32f769-disco_defconfig                      |   1 +
+ configs/stm32f769-disco_spl_defconfig                  |   1 +
+ configs/stm32mp13_defconfig                            |   1 +
+ configs/stm32mp15_basic_defconfig                      |   1 +
+ configs/stm32mp15_defconfig                            |   1 +
+ configs/stm32mp15_trusted_defconfig                    |   1 +
+ configs/stm32mp25_defconfig                            |   1 +
+ drivers/clk/stm32/clk-stm32h7.c                        |   3 ++
+ drivers/fastboot/fb_mmc.c                              |   8 ++---
+ include/dt-bindings/clock/stm32fx-clock.h              |  63 ------------------------------------
+ include/dt-bindings/clock/stm32h7-clks.h               | 167 ----------------------------------------------------------------------------------------------
+ include/dt-bindings/clock/stm32mp1-clks.h              | 274 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+ include/dt-bindings/clock/stm32mp13-clks.h             | 229 --------------------------------------------------------------------------------------------------------------------------------
+ include/dt-bindings/mfd/stm32f4-rcc.h                  | 108 -------------------------------------------------------------
+ include/dt-bindings/mfd/stm32f7-rcc.h                  | 115 -----------------------------------------------------------------
+ include/dt-bindings/mfd/stm32h7-rcc.h                  | 138 ------------------------------------------------------------------------------
+ include/dt-bindings/pinctrl/stm32-pinfunc.h            |  45 --------------------------
+ include/dt-bindings/regulator/st,stm32mp13-regulator.h |  42 ------------------------
+ include/dt-bindings/reset/stm32mp1-resets.h            | 123 ---------------------------------------------------------------------
+ include/dt-bindings/reset/stm32mp13-resets.h           | 100 --------------------------------------------------------
+ 26 files changed, 28 insertions(+), 1415 deletions(-)
+ delete mode 100644 include/dt-bindings/clock/stm32fx-clock.h
+ delete mode 100644 include/dt-bindings/clock/stm32h7-clks.h
+ delete mode 100644 include/dt-bindings/clock/stm32mp1-clks.h
+ delete mode 100644 include/dt-bindings/clock/stm32mp13-clks.h
+ delete mode 100644 include/dt-bindings/mfd/stm32f4-rcc.h
+ delete mode 100644 include/dt-bindings/mfd/stm32f7-rcc.h
+ delete mode 100644 include/dt-bindings/mfd/stm32h7-rcc.h
+ delete mode 100644 include/dt-bindings/pinctrl/stm32-pinfunc.h
+ delete mode 100644 include/dt-bindings/regulator/st,stm32mp13-regulator.h
+ delete mode 100644 include/dt-bindings/reset/stm32mp1-resets.h
+ delete mode 100644 include/dt-bindings/reset/stm32mp13-resets.h
