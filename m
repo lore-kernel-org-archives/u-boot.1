@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB4C9C02192
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:07:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EFD5C02192
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:07:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B32A5828AB;
-	Fri, 31 Jan 2025 23:07:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 17E7E82893;
+	Fri, 31 Jan 2025 23:07:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Af8QGkFK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VAQl3mdA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E83B680FA0; Fri, 31 Jan 2025 23:07:10 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 2EFF3828E1; Fri, 31 Jan 2025 23:07:13 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5DB480F95
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:07:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D88580F95
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:07:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6e1a41935c3so32472426d6.3
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:07:08 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7b6ed9ed5b9so403844385a.2
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:07:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738361227; x=1738966027; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738361230; x=1738966030; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tLMe4IXlsD9CsUMcpo0bdSCLquxFqjoVuo2i+2a4+co=;
- b=Af8QGkFKn85uXSi+qD0XPdQIHyN2hRYbDqaMIm4Xy/PK74eMs+U5cO52st5IPDpw76
- KOeQEKwXatC+Sx9k+wW6514qUyWFQlCeQEFGkP0+Xf2/u9EFxIYQ+ykgEqp8bpwwVLeW
- KC27v3hzowzyYdSCr9mxcw+ENEbsurCw408Ak=
+ bh=vaYCQ60/+ksVLbRbcRq0miP91XqB5MVv5SkeoxLPe50=;
+ b=VAQl3mdAx0+Uu5HlVytRFml4kFvus0uG/7wt++3jExOSJ1UjVCHDkOXEX+vFgw3AXK
+ RlXyn8lK335rH9OQ5M8RHUC5deGeoAYRAQ5tCyhRust7shEJpN5opnCkm8zczpWzjIH4
+ eRwnLPbNx1bugQSE94CPvXuN5CWMO7UTJ+sDo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738361227; x=1738966027;
+ d=1e100.net; s=20230601; t=1738361230; x=1738966030;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tLMe4IXlsD9CsUMcpo0bdSCLquxFqjoVuo2i+2a4+co=;
- b=W/cYm4ZFcN9/L9dsOx2HcMXsvr1+4wFA66huLrEBtEX1xVR7+4Nieo2RJjplM+iFWT
- yf9jX4o6hYe7rGf0hrtfjJ5py/3T1d5ALrFw583B7sFjH0D3EKadQsMBN6CBM9D/UZ7S
- l4wur64XFFu1TwRAiKldgofGQrUpulIQfoIgSO2yQTMkk9+4jAxbAlY5mzt6GK4HHy6/
- RZ2dvOlnlrozcmqnzdW7RN3OkHcVSisrZLchiR48eVyAclzQ/J6vqjJREeyabOD615kS
- LUKiKpbrzvA+h9fNqUd/gI0gWUqHWscQp2irKk1ydd52awWTyc8goTWGwe7hNE89z7cO
- Nutg==
-X-Gm-Message-State: AOJu0YzDxrt2i2MWAn2lalJ4YHf2KFN90WgyjI78HGI3xbhR8gJEO37J
- N+c+CRS8Phy4Z5uEcM6M05zHLgBf9IojyRvs2Cfl2FnXt6ML0a6Gjp/cxdyF4yY=
-X-Gm-Gg: ASbGncud1k0JTyLV8Ww6rocdccAVszxMYM+5Rq4/AfDf3/BD4c8+P52K7z8DkW/+A7X
- /HjH7Hwbnl7M14pkr4apwvZx7Lgsvr6LXW6pixkLQb6q3+Q5nOCR2ON9Xm5++kilcVSr6RaQOgm
- xl+ok25zcosLND72Zj2WBFZtaZDbNh2mCybEBTvgs7j2npRl09bGWl+V0Y/w1a3TLSKG0lYUBDN
- u2BEE09KrSVzvp/3HdkRG1FvpSCflp8Fi5F12boyOMfPd6E8J2sliyrcnEgrnHeHVSztJQmZ/iB
- LYhw6pyUMNZz2Q==
-X-Google-Smtp-Source: AGHT+IFNnomUbOH2eVEnGtYT81/PzhApMBOiadk8xpcMPITadUx37XEI2eZvX+9i4EZnEFbS58PrwA==
-X-Received: by 2002:a05:6214:1c4c:b0:6d4:22d4:f5b0 with SMTP id
- 6a1803df08f44-6e243c678b8mr195669706d6.33.1738361227403; 
- Fri, 31 Jan 2025 14:07:07 -0800 (PST)
+ bh=vaYCQ60/+ksVLbRbcRq0miP91XqB5MVv5SkeoxLPe50=;
+ b=q6BgblLwshPZ9EtvRJlK9sFzXxwDhiW/NCnf+H1r4U1Q9cXUiU/EItrDXEd9cawVtn
+ YudIeo/V2pr4pwTfvxIFsw56fMTJvIhFXQ0KCyC1Q2GteC6WzGTzDF3hCPZyWakKecJU
+ Ud+I3xsXYd2NKb/s/70dAodNsRJ+yoz3lxz4auwFe/7rIiIQTza4Aj8FrXo8DABPrN7o
+ jqgeKHYgKOU60JXGXse13iCqkN/hDrxfgjblPbf5t+WqfrRgg4N4qb7mpytmUAx1D5oT
+ jZBWr1zV9evdV2pQz2u9CzHOdVIsgTn6tYmIHwd25od3tMqvGpNrm9uy9CIIsfGR8hyD
+ HEeg==
+X-Gm-Message-State: AOJu0YxrJOfZEPEOLyUq4gZ62XgBUA8UBkTG/Kihl6rDO3g4WifNm0Qq
+ vduguVGblMhghhA7Y8EHMnT2gsuSYIhvfWqny47dxZ864GXOgOQSDEkI82pLwz4=
+X-Gm-Gg: ASbGnctYGhLzB9g4dZQSiPyK0At1CzklOO71S3gyj1I3fbuSrDyoQy/7oplhWjTWEVx
+ wgfh4qzs516+BAMDLu/EqryeE2AwQpsH4y117LCMCPJXtSUqnCP0vNs8TkTbk8JEO+xRfMwUNru
+ 939ObxGdY0+Kca/jVNNrnenZH86nCK5VQgKJl05vhMQZ3hlz9TPCKyfFuX9oxMAdnylIs3A1nRb
+ ynzLXt+ePyRTSlbfcw1nz7nrwheEzWrQ+nmirAGvIDwxYsQvlpXbp17yyHvvKxXBre+i5J7oz1N
+ yvM+2GGGcIPnlQ==
+X-Google-Smtp-Source: AGHT+IEQILNJx3rJitYY4UUwi/1bgF5/ABMvNbHceAkovtWZsJ4FHspMsjdEL3siovZgRl++WZ/LSg==
+X-Received: by 2002:a05:620a:8395:b0:7b6:6e59:2864 with SMTP id
+ af79cd13be357-7bffcd726edmr1948426985a.43.1738361229992; 
+ Fri, 31 Jan 2025 14:07:09 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e254819a57sm22141986d6.45.2025.01.31.14.07.05
+ 6a1803df08f44-6e254819a57sm22141986d6.45.2025.01.31.14.07.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jan 2025 14:07:06 -0800 (PST)
+ Fri, 31 Jan 2025 14:07:09 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>
-In-Reply-To: <20250124080428.195597-1-weijie.gao@mediatek.com>
-References: <20250124080428.195597-1-weijie.gao@mediatek.com>
-Subject: Re: [PATCH] net: mediatek: fix coding style of AN8855 switch
- driver
-Message-Id: <173836122543.3060818.15958960839389461879.b4-ty@konsulko.com>
-Date: Fri, 31 Jan 2025 16:07:05 -0600
+To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
+Cc: Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>, Simon Glass <sjg@chromium.org>
+In-Reply-To: <7f37ddd44ceb2c3309a814329b92e48b557568dd.1738164269.git.michal.simek@amd.com>
+References: <7f37ddd44ceb2c3309a814329b92e48b557568dd.1738164269.git.michal.simek@amd.com>
+Subject: Re: [PATCH] cmd: Fix Kconfig coding style
+Message-Id: <173836122756.3060818.71726896798800444.b4-ty@konsulko.com>
+Date: Fri, 31 Jan 2025 16:07:07 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,16 +98,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 24 Jan 2025 16:04:28 +0800, Weijie Gao wrote:
+On Wed, 29 Jan 2025 16:24:32 +0100, Michal Simek wrote:
 
-> This patch fixed the following coding style suggested by checkpatch.pl:
-> 1. Use tab instead of space
-> 2. Use BIT() instead of <<
-> 3. Use mdelay for long time delay
-> 4. Remove useless parenthesises
+> Some entries are not using tabs for indentation and also help should use
+> two spaces indentation.
 > 
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
