@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10FD7C0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 09:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26CC1C0218D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 09:42:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6982D8213D;
-	Fri, 31 Jan 2025 10:42:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B9CD08215B;
+	Fri, 31 Jan 2025 10:42:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bcKquKaH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jroo3ex+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30F248213E; Fri, 31 Jan 2025 10:42:12 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 248158215E; Fri, 31 Jan 2025 10:42:42 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11AEE80F70
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 10:42:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2821180F70
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 10:42:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-438a3216fc2so17369775e9.1
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 01:42:10 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-436202dd730so12428555e9.2
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 01:42:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738316529; x=1738921329; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738316559; x=1738921359; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=yERAbW46KHS71luTIMLlU08C4D4hh3Cmuq+XBHvQ3HU=;
- b=bcKquKaHUiyfu0tP4mBksZunTr3cX2jaClbAF1EJaXHOgSvb96hUvwZUk0k9f+pGf8
- 9jxuBiQVDWvCYV3+wL/2gNPtPJfBXeJs2iEDHELA1NgWA/1UdoAX1xyLp422UHh1bbgu
- BdGfLArQqeWOoFvSsHvPZVFLptbTLoa+MIScJZCRZKEvpkIzjy6qa6snOqA+h67tzq7n
- ch4Tcmtzv3CBkDErFylOe/PdDq9NMkNYKpaGai9anQk+NS0jWyCNrl3ix8gGR/alSD08
- wV2ZU+qyes0VcgVsiOljiw3xwzIpLmhVjEUswxJbvo/kffw8W74ffeWEP8hZHIFiWEwh
- Rqaw==
+ :reply-to; bh=xEhDxTVtfduYkZ7yAyLzRBilltpSEon4C60KaQ42yEY=;
+ b=jroo3ex+nT0y0Ibe0FPKeTbKv4GbB3iINQa30w0Jn07qEuzs9fd1Z8RWPbc602b5Er
+ H2ouwo46t/Wx4tBeAdyfYveU99OIc8IC774dDqFL/+M0ZNblzEhiWe50LXj/v+tFyAOc
+ brdl/wNjL3BbMDsUZdahp9wTv74KTZmOJFC3/xHvOsMGueG29jQFXYHEWGNZHvmsbcQP
+ QQKbbOsF3xMFa175g+ExN2g3lylT2yynpFTi4BL1Z/sNKuSO+eCWOgG3IKXlNcgtpg0y
+ fhZ7THuj0UnSAReU4w1lufzPp1bjGBaueIQ+OVSP5+UoaGn1aAxoomF39vlFbGj64ioI
+ 12VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738316529; x=1738921329;
+ d=1e100.net; s=20230601; t=1738316559; x=1738921359;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=yERAbW46KHS71luTIMLlU08C4D4hh3Cmuq+XBHvQ3HU=;
- b=h/ZsKsPr9OeHuVULC+71EQ3KmWId0WtKhC76QDWrDAN2cQgdQr2j/Sgs4N2INOUGHR
- yvJg0Z13KE2ZZ47fPU9gEmCHZlN2fbWFtUYvk6XELJ8lg3szP+WJ2QBsuzNXN5f+2NfJ
- r4eHIkdMMbhpo/yPhSZQNeJOMKHLnzazENDksaMB/7L6c2mPzkQtNww/o8IWbkUUpcxc
- cwgoatYcYvSkildZveom+GnrM0MVqdCLJGDD7ym536SWMm5LejzyPA1PAmbbwa52eOx1
- rz/vkXRu6ZZTiHCMHMqVAy/A6AnEUFnkipGEJWMfX8jk4VbWzTP3ffSMOd1UcfiDuCQo
- Krkw==
+ bh=xEhDxTVtfduYkZ7yAyLzRBilltpSEon4C60KaQ42yEY=;
+ b=El96kTBdBTPDSAYEcqGElXx790hAUFQ4YJSh467lz1Et6FBYNQD1yPHDF1hQ1poMBD
+ a/mNaDyrqSfkuvBCBzgXmJ76CdZ1TAV7O8bSUxFEMFoymR7NUox7IzpU68RS5xExdKmm
+ OtiOyQLXvjgS5j2krCPkrzGtxD8q6a7szDsuFtgj3G97SxyO1K6QipzqI1rbc4EXRp23
+ BOGG0kHpOviDY634imfL4UaeYeozCpuE2DPvytdBXj7xfFUvOyjqb7Ca2slHhIWkqZpx
+ KD+ckXgnU8T53wUzhqdgf6NAUyusf58v+NFIfKTObIOZt5GcFeq28VkC9J+Y2T7IQeat
+ nc9w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQIA3mWkMy6X0RCjOfdX8yTlYM5APZFhG3vEgTTcsZB1ejzNGJJvh4QGTPm3uOEDrN52dpoA8=@lists.denx.de
-X-Gm-Message-State: AOJu0YywNIITnpcBtVzKXQYWrVdKtJBB0hlj4ZDbe1/3zHVvyRDnu5LM
- 1zIa6HqvGDj+ksTqR9fMhVy4vbjeTB2Gf8GLVUrHpKlP0ozZ5wza/5BZfFLApW0=
-X-Gm-Gg: ASbGncveL2GbBgH0SNIry4rynKPiTAES9OI+P4I8IH3r6VrXQ8yMAshMBDlq4UQfUmT
- WnI0+aum3/1AGqW2vtzgF/5AXj3dbeaIS9JEBqLjayUy5QzisdEtWSJ7TUoC4w/e/REVFOka9S2
- k+pfRQ99iSl2r9utzF+KxbdQZxAVyEHGN7s9jToaxJvcbeS0mRRXHew/3NlZatqt3ITGxZbe2B5
- 2uuQTeZoJ2fSnb3ZZ3nJcUFpEgFBJOps99t36OHnBn4Z41Qn2HlJBupJBdJhpgMp1rDkeDu2lij
- OgyciTzK+1cWSTLFprhzEd/dQNe0C21bSabXq2JhsLs2eRMBpIM1cv24i0BWGrCCJzDD
-X-Google-Smtp-Source: AGHT+IHZjeXzQNGiVgC9Cwb/AdN/LuW9XHz0Q3tBpNRLiY/s4EFPR/6IxOwtg3ycP6gcpgCYFIMaxw==
-X-Received: by 2002:a05:600c:46cb:b0:438:a20b:6a2a with SMTP id
- 5b1f17b1804b1-438dc3c8676mr103243505e9.14.1738316529415; 
- Fri, 31 Jan 2025 01:42:09 -0800 (PST)
+ AJvYcCVmpW2rdISSb77uMbSNEicT5Ngi85sobN7HU1jbFZq52RwDpPY/rG9M9QXOjCXCIiA6taNvR5o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwKu8zDZgDHQkHu5ly8sF/3oRTrytk+KI20jBYTZ+7E56zP3M8I
+ F93SUYOL0MFAzW3l6OVGsIhApm6aJkWuqP/P7G2F6rS7fXp2arxmPIvmswfoW3U=
+X-Gm-Gg: ASbGncuCaRkXFv8wEbhCrc43tbu3Q3pOL7THl3KOs54f18QQ3ZlxKmwNEPQBYL3bes9
+ Z2V3HmSdKF5E02S7Gi0Pzk9iJk77JsTonV141q/9ca9bbK4hFN/8gcu40kNT/0SeB1U70RnZ5m5
+ EhhUmf5ZaBXQ26TrXDvX3IuSL+Z/sQwLBR7K0c/hHttE4sFfzX2J4Y46utk8A8KKe4Zsn/CS0aC
+ xvIR0Xhdqj4pe3ZC460oWWt9OdONZhRiZ3GCxqrydpbWEhlhwVT05FtLuypdqUyfpQ++wWifNKm
+ L5g1l+N1kPOY6dVMjZaOm8ZeIJxrlaSoGxQ2AaCVlp20v7IRS6DMI2doiXUl2k/vjPgm
+X-Google-Smtp-Source: AGHT+IFGy/WiAJlbBgnXkZlFlT8LosbCwj9QxWmmELkNxZLop4TUDprepujSmCjPiFLlxdFd+tOL1w==
+X-Received: by 2002:a05:600c:4e52:b0:434:9dfe:20e6 with SMTP id
+ 5b1f17b1804b1-438dc3fc2b0mr91235635e9.23.1738316559621; 
+ Fri, 31 Jan 2025 01:42:39 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:384d:e7be:1f71:9414?
  ([2a01:e0a:982:cbb0:384d:e7be:1f71:9414])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c1b61f1sm4256012f8f.68.2025.01.31.01.42.08
+ 5b1f17b1804b1-438e23e6181sm49017845e9.18.2025.01.31.01.42.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jan 2025 01:42:08 -0800 (PST)
-Message-ID: <67dc34b7-1d5b-4fb4-89de-5fb4085d98bf@linaro.org>
-Date: Fri, 31 Jan 2025 10:42:07 +0100
+ Fri, 31 Jan 2025 01:42:39 -0800 (PST)
+Message-ID: <c1bb5132-cac8-4d7a-9f3a-2d5b30ce646c@linaro.org>
+Date: Fri, 31 Jan 2025 10:42:38 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 2/4] rng: msm: don't enable PRNG if it's already enabled
+Subject: Re: [PATCH 1/4] clk/qcom: apq8016: add PRNG_AHB_CLK
 To: Sam Day <me@samcday.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Caleb Connolly
  <caleb.connolly@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
@@ -87,7 +87,7 @@ To: Sam Day <me@samcday.com>, Lukasz Majewski <lukma@denx.de>,
  <sughosh.ganu@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 References: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
- <20250127-msm-rng-fixes-v1-2-00f5d2284314@samcday.com>
+ <20250127-msm-rng-fixes-v1-1-00f5d2284314@samcday.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -114,7 +114,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250127-msm-rng-fixes-v1-2-00f5d2284314@samcday.com>
+In-Reply-To: <20250127-msm-rng-fixes-v1-1-00f5d2284314@samcday.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -134,37 +134,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27/01/2025 08:49, Sam Day wrote:
-> msm_rng_enable is supposed to skip writing to LFSR_CFG + CONFIG
-> registers in the PRNG_ block if PRNG_CONFIG_HW_ENABLE is already set.
-> The logic to test for this was inverted.
+On 27/01/2025 08:48, Sam Day wrote:
+> This clock needs to be enabled for the msm-rng driver to work on
+> MSM8916, otherwise accessing the PRNG register block causes a data
+> abort.
 > 
-> Without this fix, the driver was causing SError aborts on my MSM8916
-> device. Stephan Gerhold suggested this was probably because TZ has
-> marked this as a protected register, since it would also be using it for
-> RNG.
-> 
-> Fixes: 033ec636fcb ("rng: Add Qualcomm MSM PRNG driver")
 > Signed-off-by: Sam Day <me@samcday.com>
 > ---
->   drivers/rng/msm_rng.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/clk/qcom/clock-apq8016.c | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
 > 
-> diff --git a/drivers/rng/msm_rng.c b/drivers/rng/msm_rng.c
-> index f790d3b60f99bfc04ecd9acdd21405a8c38c257a..01505509103f28f7c91dd47edb83c23359163c82 100644
-> --- a/drivers/rng/msm_rng.c
-> +++ b/drivers/rng/msm_rng.c
-> @@ -76,7 +76,7 @@ static int msm_rng_enable(struct msm_rng_priv *priv, int enable)
->   	if (enable) {
->   		/* Enable PRNG only if it is not already enabled */
->   		val = readl_relaxed(priv->base + PRNG_CONFIG);
-> -		if (val & PRNG_CONFIG_HW_ENABLE) {
-> +		if (!(val & PRNG_CONFIG_HW_ENABLE)) {
->   			val = readl_relaxed(priv->base + PRNG_LFSR_CFG);
->   			val &= ~PRNG_LFSR_CFG_MASK;
->   			val |= PRNG_LFSR_CFG_CLOCKS;
+> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+> index b5def55dbc2ac671130624dec56592288a0ceb3d..ff5e7ca6f02148427240b80fb08efdd356934cd5 100644
+> --- a/drivers/clk/qcom/clock-apq8016.c
+> +++ b/drivers/clk/qcom/clock-apq8016.c
+> @@ -54,8 +54,9 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
+>   };
+>   
+>   static const struct gate_clk apq8016_clks[] = {
+> -	GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, 0x00000001),
+> -	GATE_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, 0x00000001),
+> +	GATE_CLK(GCC_PRNG_AHB_CLK,	0x45004, BIT(8)),
+> +	GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, BIT(0)),
+> +	GATE_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, BIT(0)),
+>   };
+>   
+>   /* SDHCI */
 > 
 
-Good catch !
+This should be 2 patches, but it's still fine for me...
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
