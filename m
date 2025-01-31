@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03CA3C0218F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:05:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 888E3C02192
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8632A80FC2;
-	Fri, 31 Jan 2025 23:05:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 01F6E80FB5;
+	Fri, 31 Jan 2025 23:07:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s/FcXgOY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B7GvWVFD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6D0480FB5; Fri, 31 Jan 2025 23:05:22 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 7ED8F80FA4; Fri, 31 Jan 2025 23:07:01 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D67180FD5
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:05:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58219807D9
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:06:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6d89a727a19so34309916d6.0
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:05:20 -0800 (PST)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6d8f75b31bfso19124126d6.3
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:06:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738361119; x=1738965919; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=MjdaY+pd44UGg9L2JSrD/5rG3+/rW2XlDTslWGel6H0=;
- b=s/FcXgOY7NGYAxB4mjvxnNS2PMFPXdZVYDvx0q5M6Xp5CFVBshG/3vgR/TPhoi4dqT
- L7VxfdnMp3Q/enQIoDtPVRV7b+ppD2IajF3hvxgk5VH9ssLF+/s1x0pr4O8a0buPgcpx
- U8S51p1SCfaBkdDZnubnNesJQbAs4nuGxgVkU=
+ d=konsulko.com; s=google; t=1738361218; x=1738966018; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wJ2cYK7O2Zdij2obqktnhJ9rIFvCa9aBD7IV8hNDoeY=;
+ b=B7GvWVFDSK1Z+n1gguLxHEkzFVB6lrIB9cQnqV5mAmFYJH+2uJXkosOhSirrhPO4+O
+ iBV02nJuCCrk5suoCujMHdBJQppfF6Hcs0EOi/C0fpaaTrqVieIg5Ph/7Su89WULr/7E
+ qTNIyUYl5wCn3ytLGo4CtqQmBsAjK6kUc/e6A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738361119; x=1738965919;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MjdaY+pd44UGg9L2JSrD/5rG3+/rW2XlDTslWGel6H0=;
- b=pGTCqpDJUzguM4xrkO9evhU4Ie92ohZzbthnPVKJRKwE3F8Fwg6tN/cHZAjXoc22A/
- zmwFnmU+Lcs7PqlCdWtlnn7QcVqwTcStGHtZ31DH0eaIzjleFWvq1c56Y4Pu70MYJ8zS
- sdkM8ZMEKTutig4mD7m/1p96i6r+4ipJoXz00Q5lJ5K0WGztMGf33gXkIjUIg4t8NcTn
- xpTme4syz/Mz0sxlihtNSDREzdbDk/ehaiQj8d8qtd3rCENvqIv6p98SbrlSc/iYunPo
- uJpY7eo20PnnJ7pPVD/PTHLGxLt+sawMoYhtD5Ck9WtGMUjVob8PTPhumHapIYSsBoH5
- qjYQ==
-X-Gm-Message-State: AOJu0Yy9JnwEayuEokpXw6qItl+bZlcwl/FIvJndpNthaz5qZzOK1vjX
- l+2AxTwqTB1k/2ZQ2hGkR7mA9nnjZLlyX9reBlpw0XeRAprnnVJKmD67nzOkOE8I5wg5O+51M8C
- 5
-X-Gm-Gg: ASbGncutLWvZ8JQLRWnW+pXjlTQrPh4sYMAzbaNXOxc8gjXRxObZtgu5fx7dMmy9F+G
- sf6hnvdAjTAQyfeF5ydRGafK8HrYMLxoHGGYfvkg10EcvIyv9cQZF2fOZX4RhZKb9rgGiXwW7Y4
- m0Z6U1TRGL28K2vlUVV0p9eIYsIKJwdrf2lGPZ9wr09W0+xaRcMsOFqb3LRu21IhKeEJPApvti5
- dWYIJs9YRXk4B2AYOGWcmLa7KNBL3HwSRcGgMvfUyK1Yr1x6Jn0gVX/6Y2KpLMyzRqdXy/PzGQ6
- hvYK+Jv+QhAyVprssA==
-X-Google-Smtp-Source: AGHT+IHEAhgCylaS75Pxti6FlnL5fNZt93HsbPrxsPzHHnM4sKhGudw6shAk2d7tqNAb83EzZaOepg==
-X-Received: by 2002:a05:6214:4005:b0:6d4:ac4:c1cd with SMTP id
- 6a1803df08f44-6e251b45231mr150593236d6.8.1738361118568; 
- Fri, 31 Jan 2025 14:05:18 -0800 (PST)
-Received: from bill-the-cat.. ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e254941306sm22156326d6.107.2025.01.31.14.05.17
- for <u-boot@lists.denx.de>
+ d=1e100.net; s=20230601; t=1738361218; x=1738966018;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wJ2cYK7O2Zdij2obqktnhJ9rIFvCa9aBD7IV8hNDoeY=;
+ b=TABe1ktHRVLjw2dK2yzPFvg95HPX4FyhuI9klsMgQ6H+6aQ6iPa/N3ZyspOrKensPz
+ v/YmW9qAj/3mkfvUXSPkG2LimKn/STpXwBeftmfIbBeCXyMffmeEDZdC1cMakJI6ZorI
+ 67L36t2zUDDHxED9mH45oGyOgJdllYTYqN5bKgZYXF441WCNyYYe0rauBbeTxcMD32dN
+ OQzQrofJuXL3wD3OFsPtF0JFsPDbROB6sdWTdz8lY5LbwHCxjg6fZ14ZWSKnltnRlbf8
+ vIfcfAFB1TtRc1cwnCXNmX3A/b6Z0cJ9rAUgQQCOZ/CVSmh6HYBTLpdSPibDOV65v4M2
+ gLeA==
+X-Gm-Message-State: AOJu0YzJo2lH9a+coVBGnLrbNmWsV+ec1O0tPcdLJmh0Ca350tD20KTt
+ PWDytq7N/PsD5KJvAlxx/FSu1dMBXKTk5uHWJ9ACoYzzzxs6PKkW+Nho0vUSI07R4u2PDaTqqbs
+ h
+X-Gm-Gg: ASbGncuCUQEvwxmavgQZB3WXLytlwXBNbtCf1w0eW5cMm/WDIF4MYKQQMs5BM5qFAy3
+ v+eGgauGZcZoReCgl3rQ10Bh7zyoyW22Wh4cCcUzSDOPxVWKoFaAjIa4sy3epqHG2j71nCJVOXi
+ nxTiZh2FcTZXpURgzYbTS/sRlgAOe1XSI5g++RNWIXXRJ6pwGsISzOR8j7QaNhC067AjeFvALw2
+ zhUvWaXWnvenzJAPQLGoiesDrXK7Q/T+K9FQ8DtaMw7MhNtbtBj1audZaFuy226jDG+1RSSLIFJ
+ c0VZUajQUo6rGw==
+X-Google-Smtp-Source: AGHT+IEWVLVFa7dc5Bxa2zYm7MWo0/FTRI9QAhmwrvHodUjwMgI6LPk+m1vNRpZmXXq/D8q79pVKWA==
+X-Received: by 2002:a05:6214:20cf:b0:6d4:2806:1765 with SMTP id
+ 6a1803df08f44-6e243c63ca0mr209489836d6.34.1738361218283; 
+ Fri, 31 Jan 2025 14:06:58 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e254819a57sm22141986d6.45.2025.01.31.14.06.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jan 2025 14:05:18 -0800 (PST)
+ Fri, 31 Jan 2025 14:06:57 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] CI: sifive_unleashed: Rename "spi-nor_qemu" variant to
- "spi_nor_qemu"
-Date: Fri, 31 Jan 2025 16:05:15 -0600
-Message-ID: <20250131220515.3060059-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: francesco.dolcini@toradex.com, stefan.eichenberger@toradex.com, 
+ emanuele.ghidoli@toradex.com, joao.goncalves@toradex.com, 
+ vitor.soares@toradex.com, igor.opaniuk@foundries.io, 
+ max.krummenacher@toradex.com, Stefan Eichenberger <eichest@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250124151443.576075-1-eichest@gmail.com>
+References: <20250124151443.576075-1-eichest@gmail.com>
+Subject: Re: [PATCH v1] toradex: tdx-cfg-block: fix switch to user
+ partition
+Message-Id: <173836121633.3060818.16664719405162668000.b4-ty@konsulko.com>
+Date: Fri, 31 Jan 2025 16:06:56 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,41 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Given how files are searched and parsed, we need to use the
-"spi_nor_qemu" variant name not "spi-nor_qemu".
+On Fri, 24 Jan 2025 16:14:30 +0100, Stefan Eichenberger wrote:
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- .azure-pipelines.yml | 2 +-
- .gitlab-ci.yml       | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+> The Toradex configuration block is stored in the first boot partition of
+> the eMMC. After reading the configuration block, U-Boot switches back to
+> the user partition. Currently, this operation always targets mmc device
+> 0, even when the configuration block is stored on mmc device 2.
+> 
+> This patch addresses the issue by switching the mmc device set in
+> CONFIG_TDX_CFG_BLOCK_DEV to the user partition, rather than using the
+> hardcoded device 0.
+> 
+> [...]
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index db471e67107c..444f6988758f 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -500,7 +500,7 @@ stages:
-           TEST_PY_TEST_SPEC: "not sleep"
-         sifive_unleashed_spi-nor:
-           TEST_PY_BD: "sifive_unleashed"
--          TEST_PY_ID: "--id spi-nor_qemu"
-+          TEST_PY_ID: "--id spi_nor_qemu"
-           TEST_PY_TEST_SPEC: "not sleep"
-         xilinx_zynq_virt:
-           TEST_PY_BD: "xilinx_zynq_virt"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index a93703fdcea2..4f5a9b8336f5 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -478,7 +478,7 @@ sifive_unleashed_spi-nor test.py:
-   variables:
-     TEST_PY_BD: "sifive_unleashed"
-     TEST_PY_TEST_SPEC: "not sleep"
--    TEST_PY_ID: "--id spi-nor_qemu"
-+    TEST_PY_ID: "--id spi_nor_qemu"
-   <<: *buildman_and_testpy_dfn
- 
- xilinx_zynq_virt test.py:
+Applied to u-boot/master, thanks!
+
 -- 
-2.43.0
+Tom
+
 
