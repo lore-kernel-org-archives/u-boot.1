@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65233C0218F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:52:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13E0AC02194
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 22:55:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF35280FA4;
-	Fri, 31 Jan 2025 23:52:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 647B980FA4;
+	Fri, 31 Jan 2025 23:55:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Fhzx48aK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ODUsCnrY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2894F80FA8; Fri, 31 Jan 2025 23:52:33 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id EA98380FB6; Fri, 31 Jan 2025 23:55:26 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E78C380E90
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:52:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C7A8880E90
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 23:55:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7bcf32a6582so226002785a.1
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:52:30 -0800 (PST)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6d89a727a19so34644996d6.0
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 14:55:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738363950; x=1738968750; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738364123; x=1738968923; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JSAe1z0gpjdxymO1pOpECtxiNdplc1rhOHNmuq8HsCI=;
- b=Fhzx48aK1hdWlzfDbFcblfoRZNw/8V2mR7AkLdxSD1MuiYKDL8q1B6jrqegGCI9Is0
- 3e6rxInPT59WBBbI1afH68j7iiM5mgWaPsjgiw3NT42kXADzdJWgKnaSO0GBCKtZhbSI
- DoJbIzEg349VwcMh0TmTYu73+sbvEVtXHuZWY=
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1UR9nEnfYU7Ntcx0txK/F+wshSxMeTFYBGD6MItIiCk=;
+ b=ODUsCnrYugOtcr8tygwmQPB6Fnv3ls9Qai3aD/GLLt7xP3RYUNlI0fMcmXfUa9reuV
+ 6h1Z60F0ByRRuP0oABXIplNpNdfj3yOZaakDJNJqGPWmT3FKAmxjgR/yJKPiAKerhx1Q
+ WSrAQK4vT9he7oJ3qnPAzd/m7V5XYHdiv/Wro=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738363950; x=1738968750;
+ d=1e100.net; s=20230601; t=1738364123; x=1738968923;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JSAe1z0gpjdxymO1pOpECtxiNdplc1rhOHNmuq8HsCI=;
- b=Tfh8WoS7/iQ1AyofGeksfDeTAGj5pCGd0DJcewZwHT3f59TP54QGkSuwxQ7MMNilow
- Pe7gTBgUqT8NSUI5mFjk2lVtDJFqysQlgAxZNYluU4VOu7CWMdjUH3ux4J7zfarqM/FZ
- Mg2NcK8I2sQrCMbVBPQcaewl+j0/iNUbJMo7zsGpcQDQDzMlB0sm+onFD630Gi527AQ9
- lbScHSpzqhzALxUbLR2PZXydwRTE+chnDiYjmXAZ4JyN1g1WOo67lKy1I4+OmLEXEUn9
- a+YImYMV0GNOKy8os1j4viAt607N6moMdx65rQjR29MLxslUED0iLozmri2WBrEk6wRO
- ektw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUvcT+qfSHaySNKrkSv6QCgXJ2JGarORp22IWwVp3My06JLeo3Nu7GHhoTfzh+tWJkRJ61LrK8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzzOUfTQp7ax5Uw/1QcjLXNs/cR/tPHFuc0A0qOLLjT8II0cwXm
- 8tXsKMf725cCTagC9QoMEQozhwQT8i1yWs5wswpZQlYZMp3NF4DopZj3rsOgQTA=
-X-Gm-Gg: ASbGncs1FRmsS8oqW7rSBtfYzdfCsVZDrLDbf5FMmD1RrYS4l1pTPXlDg0g+3wV8fib
- 0sXVetIclxsdNTvp428o5MbTPwpqX54RbGPIPe07BXwaNtXsCZ+GikM3somis7QcWDBDoSxNCy1
- haYMsWGmCRqh8FwSGtzX0752TG3LgxoC3hV+taMLTTwcsLZmkYQt6kkWweTAlC5ALkpgVYM/KAN
- 9rnYOeVOLL4pTdV5Pn5Q77IvmuOdoGJ9cvcWnjdet5l7+6MdVpJl86+mqT22HY7yBj7N7NWLz4Y
- h/pOqUqlWAgQHAo=
-X-Google-Smtp-Source: AGHT+IEIYWaekI6cMuHEdShypjLR8cOArgjjaweiBfjpFYl96ymGEkuxpmae6k5TTP2ZVfDnSR7Elg==
-X-Received: by 2002:a05:620a:454b:b0:7b6:da2d:73e5 with SMTP id
- af79cd13be357-7bffcd13040mr2101681985a.27.1738363949730; 
- Fri, 31 Jan 2025 14:52:29 -0800 (PST)
+ bh=1UR9nEnfYU7Ntcx0txK/F+wshSxMeTFYBGD6MItIiCk=;
+ b=MaZHij0HhNcEFgzjqEQwqnkdn5uDM3PWyPK/xroYCj21xLqyPvrefcB+1Exwe52UIR
+ 0d95gPHhr51XxP0JNDtDK3e3V4zIu2sQ3jdXoFLtpRLawvOHzRo3TpgHl4hmcvJ+ifNI
+ /dZbpME3e5D/B482RbuhdJHEE6OKk0fgM4/BFUnZeF/rn0KsTNsDs9FB+IUfJmiwRCWP
+ mdb09pahjWEFYuZdc3oQbmV3Z9aNPdHGBxCqHKhs07fMTgYBrRlf85mfrWUxOha2a7q5
+ 0pdSH6JM4prIAvuv5AikrmyZ/Pe91pWohcqdm0ZYC3O8VjC/cD9kz/tcojfA4R4d7MTX
+ Mluw==
+X-Gm-Message-State: AOJu0YwwREFEFBO9vMWabNaqhTS30oz9OxT8mhhjsYmMrOv8ZGFvSDT5
+ lZVMpk1bf50f9fI+NAfcRQbpzKWOIlJDK05uhbICUGQI1hPt7YxQnC3Oa5Ldgqx+ZmilvjhDv8W
+ /
+X-Gm-Gg: ASbGncuqgW/I1CjYB5oDnXJniHD7FmnhLXiNA3Zf0RrfDYcKjYTYr2JEF7H0T26m7Nv
+ ATxhmKTLY4qEOf3+ThpQXqTJE/xjECbOXu1DmDguMD1rYX+mDMP9NaZCw/pGl/Te9cBoydqJ4ua
+ m9vUY+TmmMpy3x3h/Ml4d7JoaIMgm3C7rpyFkRKa1mVtOMj7TmQpgorU1mS7DbihK91xHketBBV
+ LOOdmcZXG3p1VZH8lmPuF4mMKwuymimikmHavGn34Yb51lcte/gk/GxPbzXzu/YkVIoWBU86FQ8
+ odr1vOPhFFl0eYU=
+X-Google-Smtp-Source: AGHT+IGTSD8o3oVogNX1JXs1cst7CKTLfwOP18GH5+ORErbsN/M2goQVe1jOnGrrW/G45np/tBaOkg==
+X-Received: by 2002:a05:6214:1ccd:b0:6d8:99cf:d2d0 with SMTP id
+ 6a1803df08f44-6e251b75997mr117064516d6.19.1738364123682; 
+ Fri, 31 Jan 2025 14:55:23 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c00a90cf9csm236992085a.106.2025.01.31.14.52.28
+ 6a1803df08f44-6e2548188b4sm22464526d6.46.2025.01.31.14.55.22
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jan 2025 14:52:28 -0800 (PST)
-Date: Fri, 31 Jan 2025 16:52:26 -0600
+ Fri, 31 Jan 2025 14:55:23 -0800 (PST)
+Date: Fri, 31 Jan 2025 16:55:20 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: make tests skips the DM tests
-Message-ID: <20250131225226.GS1233568@bill-the-cat>
-References: <92438c16-1b8b-4e90-a44c-285140f59f0f@gmx.de>
- <e3ed313a-847d-4307-8c58-f40e8fcee86f@gmx.de>
- <CAFLszTiqw1J+0tQT1rDzX8ENGATm46t4MQytCyr7QJL18xG0ug@mail.gmail.com>
+To: u-boot@lists.denx.de
+Subject: Re: [PATCH] sifive_unleashed: Rename "spi-nor_qemu" variant to
+ "spi_nor_qemu"
+Message-ID: <20250131225520.GT1233568@bill-the-cat>
+References: <20250131220420.3059801-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UUiUqISWZ+Am2K8+"
+ protocol="application/pgp-signature"; boundary="YsAuv5sO0QQPQT6x"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiqw1J+0tQT1rDzX8ENGATm46t4MQytCyr7QJL18xG0ug@mail.gmail.com>
+In-Reply-To: <20250131220420.3059801-1-trini@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,93 +97,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---UUiUqISWZ+Am2K8+
+--YsAuv5sO0QQPQT6x
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 30, 2025 at 12:54:52PM -0700, Simon Glass wrote:
-> Hi Heinrich,
->=20
-> On Thu, 30 Jan 2025 at 01:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
-ote:
-> >
-> > On 1/30/25 08:08, Heinrich Schuchardt wrote:
-> > > Hello Simon,
-> > >
-> > > when running 'make tests' locally I get:
-> > >
-> > > test/py/tests/test_dm.py .
-> > >
-> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> > > short test summary info
-> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-> > > SKIPPED [2] test/py/conftest.py:625: .config feature "sandbox" enabled
-> > > SKIPPED [1] test/py/tests/test_bootstage.py:39: No bootstage environm=
-ent
-> > > file is defined
-> > > SKIPPED [1] test/py/tests/test_cat/test_cat.py:8: Setup failed
-> > > SKIPPED [1] test/py/tests/test_dfu.py:114: got empty parameter set
-> > > ['env__usb_dev_port'], function test_dfu at /test/py/tests/test_dfu.p=
-y:113
-> > > !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! _pytest.outcomes.Exit: Lab failure:
-> > > Timeout executing 'dm drivers
-> > > ': Marking connection bad - no other tests will run
-> > > !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-> > >
-> > >
-> > > Shouldn't the required boardenv_* files be generated by running 'make
-> > > tests'?
-> > >
-> > > Best regards
-> > >
-> > > Heinrich
-> >
-> > When installing all packages mentioned in tools/docker/Dockerfile the DM
-> > tests are executed.
->=20
-> What about test/py/requirements.txt ?
->=20
-> Really we should document the packages needed. The doc/build/gcc.rst
-> file is supposed to do that, where it says 'Depending on the build
-> targets further packages maybe needed'. So perhaps we could add things
-> there, and even split out the things needed for tests?
+On Fri, Jan 31, 2025 at 04:04:20PM -0600, Tom Rini wrote:
 
-Having been kicking things around a little locally, we really need to
-add tools/buildman/requirements.txt and update
-tools/buildman/requirements.txt and test/py/requirements.txt, and then
-tell people they're expected to use a virtual environment like normal
-best practices. Otherwise things just start failing to build left and
-right due to missing this-or-that python module.
+> Given how files are searched and parsed,
+> py/travis-ci/u_boot_boardenv_sifive_unleashed_spi-nor_qemu.py was not
+> being used due to the dash in the name. Use an underbar for consistency.
+>=20
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  ..._unleashed_spi-nor_qemu =3D> conf.sifive_unleashed_spi_nor_qemu} | 0
+>  ...r_qemu.py =3D> u_boot_boardenv_sifive_unleashed_spi_nor_qemu.py} | 0
+>  2 files changed, 0 insertions(+), 0 deletions(-)
 
-I started that a little bit today even before getting side-tracked on
-the SPI pytest.
+Note that the issue is that in test/py/conftest.py we have a specific
+replace - with _ in the boardenv file, so there's a handful of others
+that need this change as well.
+
+I also don't quite understand why we do the rename, but since it's been
+there since day 1, we should fix the bad examples to not break the
+working deployments people have.
 
 --=20
 Tom
 
---UUiUqISWZ+Am2K8+
+--YsAuv5sO0QQPQT6x
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmedVCIACgkQFHw5/5Y0
-tyxWBgv/b2S2zIYDQIeZK5DP0F1lzw8JqowqELMn/FUyDu0hgstxdJf/CxS9VcEb
-uXQ0NIH4bFCW83nVm0+7MrNEWkX161neqVrQTqRxJHrCG0pTr+f+szT0PeMNSHB9
-C2BjvvdTz3u/PQAJA2n5brCg8JBwyJzJyZ9cVyt90vkzF2ubh+a3tEz2kP1rYTLo
-TSulEfmMScT5SEeUY9UV9lWXfwm9rQ4oO4QrL6ac7tarClaBw32Ej2xfW+mYctJ5
-BmOeiRtW5MkRd9uHJ/GkJqOi4Y+mkyWOKnnBcE4LDc4/AvZ4RruO1aLdpEFZiUYa
-eWa7TJZ6W+fPz64DzQUHXmg+m2wMecL0TTBIm1cFDjU65GpzRz2gD+/gu3NOpIXy
-xXNItwm/fkbs/lv1zcdxsygnjrdVsr9hVnq9z19LOzCIensF4mo7GZRqPDfpp0kh
-H5No7KwRDqX5rMaThJNd/6Vos8WOqvNA4yzsizD6T+c4ohiCSFnztvZC3RR5ZF1C
-WzZaPVSu
-=DDWq
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmedVNgACgkQFHw5/5Y0
+tyyCBwv9HKom252qZtG1cUkytX0PbfkJeF5LDRGi7DCRBDPoy4U0VvUHYDn8dAH5
+qEvW0Ogs9tENSxOLgSJOIn8yXEU1HtjU8kmIBkeCkyQD1pzAVamJJXWAwGqDx42y
+RfZUTyM1Nx5BD+xEp8dIjrZeNnGigwsTUW6tI7rOU/BkLJxAxStVyqYfqTpnycG3
+TliU4mzr3GrX1COdX5JTk30NVjnfelFQlBEWD3ZoccIHAR0wsJJ+M6ScDyxgRVfz
+0NUMCpwuvT5U0b2OL6TrskYM+xUqdMTKaM8FrzQSpspLxkzkIktanaKmmpYhn4ua
+fH6QyQqiqpWc5xPL83cOwVF/SKWpFTUDlZp1b80qc1sWPLtYD7gSoJCV2P/kJpkF
+DKTCK7k9/+eR6lxQ1mgcOQ/NhBZrbNkHgEz/yUyKk5IRZ81lY/4fpArrebRGA+l2
+4ktkcz2YQqGR8ltMZMi4qt2MxLIuIMWvlj8hkuf7vLjHdem5s46xm/835vSiFa9L
+PHqnmbs7
+=VmAm
 -----END PGP SIGNATURE-----
 
---UUiUqISWZ+Am2K8+--
+--YsAuv5sO0QQPQT6x--
