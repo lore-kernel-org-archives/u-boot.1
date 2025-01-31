@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB86C0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 10:31:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACFEAC0218F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 10:32:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A34E8249D;
-	Fri, 31 Jan 2025 11:31:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F9EB8272A;
+	Fri, 31 Jan 2025 11:31:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0ABC78219C; Fri, 31 Jan 2025 11:31:47 +0100 (CET)
-Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::42aa])
+ id C9C9682604; Fri, 31 Jan 2025 11:31:48 +0100 (CET)
+Received: from smtp-1908.mail.infomaniak.ch (smtp-1908.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::1908])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EACA68213E
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 11:31:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7284682161
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 11:31:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YksdD3hRvzpLT;
- Fri, 31 Jan 2025 11:31:44 +0100 (CET)
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246c])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YksdF0j2MzpLV;
+ Fri, 31 Jan 2025 11:31:45 +0100 (CET)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4YksdC6wJkz7k6; Fri, 31 Jan 2025 11:31:43 +0100 (CET)
+ id 4YksdD3YkWz8hr; Fri, 31 Jan 2025 11:31:44 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 31 Jan 2025 11:31:29 +0100
-Subject: [PATCH v2 01/13] pinctrl: rockchip: fix bank's pin_base computing
+Date: Fri, 31 Jan 2025 11:31:30 +0100
+Subject: [PATCH v2 02/13] pinctrl: rockchip: constify rockchip_pin_ctrl for
+ PX30
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250131-rockchip-pinctrl-const-v2-1-59bf93968ce7@cherry.de>
+Message-Id: <20250131-rockchip-pinctrl-const-v2-2-59bf93968ce7@cherry.de>
 References: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
 In-Reply-To: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
@@ -64,108 +65,27 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-The logic in the core reads the nr_pins of the controller and uses it as
-the index of the first pin in the bank (pin_base) it currently parses.
-It then increments the number of pins in the controller before going to
-the next bank.
-
-This works "fine" for controllers where nr_pins isn't defined in their
-rockchip_pin_ctrl struct as it defaults to 0. However, when it is
-already set, it'll make the index pin of each bank offset by the number
-in nr_pins declared in the struct at initialization, and it'll keep
-growing while adding banks, which means the total number of pins in the
-controller will be misrepresented.
-
-Additionally, U-Boot proper may probe this driver twice (pre-reloc and
-true proper) and not reset nr_pins of the controller in-between meaning
-the second probe will have an offset of the actual correct nr_pins.
-
-Instead, let's just store locally the number of pins in the controller
-and make sure it's reset between probes.
-
-Finally, this stops modifying a const struct which will soon be
-triggering a CPU abort at runtime.
+There's no need to modify private data from the controller, so let's
+make that struct const.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- drivers/pinctrl/rockchip/pinctrl-rk3568.c        | 1 -
- drivers/pinctrl/rockchip/pinctrl-rk3588.c        | 1 -
- drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 5 +++--
- drivers/pinctrl/rockchip/pinctrl-rockchip.h      | 1 -
- drivers/pinctrl/rockchip/pinctrl-rv1126.c        | 1 -
- 5 files changed, 3 insertions(+), 6 deletions(-)
+ drivers/pinctrl/rockchip/pinctrl-px30.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3568.c b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
-index 5deedc648a41950461b6a468e4852fa0a5384207..c8a91b8bb6e925e0f2e7d6cd09f8a06a58be60dd 100644
---- a/drivers/pinctrl/rockchip/pinctrl-rk3568.c
-+++ b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
-@@ -345,7 +345,6 @@ static struct rockchip_pin_bank rk3568_pin_banks[] = {
- static const struct rockchip_pin_ctrl rk3568_pin_ctrl = {
- 	.pin_banks		= rk3568_pin_banks,
- 	.nr_banks		= ARRAY_SIZE(rk3568_pin_banks),
--	.nr_pins		= 160,
+diff --git a/drivers/pinctrl/rockchip/pinctrl-px30.c b/drivers/pinctrl/rockchip/pinctrl-px30.c
+index cc7885bae40802eccfc2cad377727da9ee899139..4595d8a4a23fbf1299ab382fb92eca32527ae637 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-px30.c
++++ b/drivers/pinctrl/rockchip/pinctrl-px30.c
+@@ -324,7 +324,7 @@ static struct rockchip_pin_bank px30_pin_banks[] = {
+ 			    ),
+ };
+ 
+-static struct rockchip_pin_ctrl px30_pin_ctrl = {
++static const struct rockchip_pin_ctrl px30_pin_ctrl = {
+ 	.pin_banks		= px30_pin_banks,
+ 	.nr_banks		= ARRAY_SIZE(px30_pin_banks),
  	.grf_mux_offset		= 0x0,
- 	.pmu_mux_offset		= 0x0,
- 	.iomux_routes		= rk3568_mux_route_data,
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3588.c b/drivers/pinctrl/rockchip/pinctrl-rk3588.c
-index 98ababc7c90700c4b27359fc3625519f20437306..fd8e617b9108c7314b8fdd4bbe1dfae71f1b6449 100644
---- a/drivers/pinctrl/rockchip/pinctrl-rk3588.c
-+++ b/drivers/pinctrl/rockchip/pinctrl-rk3588.c
-@@ -324,7 +324,6 @@ static struct rockchip_pin_bank rk3588_pin_banks[] = {
- static const struct rockchip_pin_ctrl rk3588_pin_ctrl = {
- 	.pin_banks		= rk3588_pin_banks,
- 	.nr_banks		= ARRAY_SIZE(rk3588_pin_banks),
--	.nr_pins		= 160,
- 	.set_mux		= rk3588_set_mux,
- 	.set_pull		= rk3588_set_pull,
- 	.set_drive		= rk3588_set_drive,
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-index d449d07d32e74d1dec1978b1405bec94887908a2..4de67aba1c3453673891482babf2f009fa053a97 100644
---- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-+++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-@@ -532,6 +532,7 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
- 			(struct rockchip_pin_ctrl *)dev_get_driver_data(dev);
- 	struct rockchip_pin_bank *bank;
- 	int grf_offs, pmu_offs, drv_grf_offs, drv_pmu_offs, i, j;
-+	u32 ctrl_nr_pins = 0;
- 
- 	grf_offs = ctrl->grf_mux_offset;
- 	pmu_offs = ctrl->pmu_mux_offset;
-@@ -543,8 +544,8 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
- 		int bank_pins = 0;
- 
- 		bank->priv = priv;
--		bank->pin_base = ctrl->nr_pins;
--		ctrl->nr_pins += bank->nr_pins;
-+		bank->pin_base = ctrl_nr_pins;
-+		ctrl_nr_pins += bank->nr_pins;
- 
- 		/* calculate iomux and drv offsets */
- 		for (j = 0; j < 4; j++) {
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip.h b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
-index df7bc684d29fae4ec650d1e14fe88b35b03244ac..65c7488f8e399b36fda685b281db778cb55ba695 100644
---- a/drivers/pinctrl/rockchip/pinctrl-rockchip.h
-+++ b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
-@@ -500,7 +500,6 @@ struct rockchip_mux_route_data {
- struct rockchip_pin_ctrl {
- 	struct rockchip_pin_bank	*pin_banks;
- 	u32				nr_banks;
--	u32				nr_pins;
- 	int				grf_mux_offset;
- 	int				pmu_mux_offset;
- 	int				grf_drv_offset;
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1126.c b/drivers/pinctrl/rockchip/pinctrl-rv1126.c
-index efa2408b204b421ad1c5a36b039d8c07c5b7237e..3878a5420dcc98f591e4eefadd78a2fe98b61c7e 100644
---- a/drivers/pinctrl/rockchip/pinctrl-rv1126.c
-+++ b/drivers/pinctrl/rockchip/pinctrl-rv1126.c
-@@ -381,7 +381,6 @@ static struct rockchip_pin_bank rv1126_pin_banks[] = {
- static const struct rockchip_pin_ctrl rv1126_pin_ctrl = {
- 	.pin_banks		= rv1126_pin_banks,
- 	.nr_banks		= ARRAY_SIZE(rv1126_pin_banks),
--	.nr_pins		= 130,
- 	.grf_mux_offset		= 0x10004, /* mux offset from GPIO0_D0 */
- 	.pmu_mux_offset		= 0x0,
- 	.iomux_routes		= rv1126_mux_route_data,
 
 -- 
 2.48.1
