@@ -4,118 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26CC1C0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 09:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BBE4C0218D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 09:47:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9CD08215B;
-	Fri, 31 Jan 2025 10:42:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 84CCC82139;
+	Fri, 31 Jan 2025 10:47:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jroo3ex+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IJZZx2Sl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 248158215E; Fri, 31 Jan 2025 10:42:42 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 3C6848213D; Fri, 31 Jan 2025 10:47:02 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2821180F70
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 10:42:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2661880F70
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 10:47:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-436202dd730so12428555e9.2
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 01:42:40 -0800 (PST)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3d0205bd5so2616246a12.3
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 01:47:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738316559; x=1738921359; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=xEhDxTVtfduYkZ7yAyLzRBilltpSEon4C60KaQ42yEY=;
- b=jroo3ex+nT0y0Ibe0FPKeTbKv4GbB3iINQa30w0Jn07qEuzs9fd1Z8RWPbc602b5Er
- H2ouwo46t/Wx4tBeAdyfYveU99OIc8IC774dDqFL/+M0ZNblzEhiWe50LXj/v+tFyAOc
- brdl/wNjL3BbMDsUZdahp9wTv74KTZmOJFC3/xHvOsMGueG29jQFXYHEWGNZHvmsbcQP
- QQKbbOsF3xMFa175g+ExN2g3lylT2yynpFTi4BL1Z/sNKuSO+eCWOgG3IKXlNcgtpg0y
- fhZ7THuj0UnSAReU4w1lufzPp1bjGBaueIQ+OVSP5+UoaGn1aAxoomF39vlFbGj64ioI
- 12VQ==
+ d=linaro.org; s=google; t=1738316819; x=1738921619; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ucFfMNgqRDLg6/uPoqIk2s37n+lE+snFypeGlN5XDEg=;
+ b=IJZZx2SlBksZnyKn6QQv7Iu0896bV2h7195lwIUymgEC3CEUcbOgeTbQiY9uYZ0/CZ
+ kB3jvKqm3iJJ5LjCmjzqg1JWTW1t7RIh12U1l/CuoIEDFT2HRcwsgnzUxsKe3N0Su1S3
+ x6eO5v4uV9YHFH4JkXWHUur1PPg3iLPN+e5uT8KJlnsKnbBF/gx26I04K2n7r8RjEy2b
+ Gzjvu4a36GQB/NLB63EdRkGYpUiDBd8C2yNAIdGkZVTwI6KmfVWYuKGe2JqAOJuJdIIp
+ fiTEQ8iL+LyJKy3ZLmi+KgoCOW6uNO0k+ovnhBzx5YXO49lS8NNwyRsG15OP5eUb1OXD
+ jj3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738316559; x=1738921359;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=xEhDxTVtfduYkZ7yAyLzRBilltpSEon4C60KaQ42yEY=;
- b=El96kTBdBTPDSAYEcqGElXx790hAUFQ4YJSh467lz1Et6FBYNQD1yPHDF1hQ1poMBD
- a/mNaDyrqSfkuvBCBzgXmJ76CdZ1TAV7O8bSUxFEMFoymR7NUox7IzpU68RS5xExdKmm
- OtiOyQLXvjgS5j2krCPkrzGtxD8q6a7szDsuFtgj3G97SxyO1K6QipzqI1rbc4EXRp23
- BOGG0kHpOviDY634imfL4UaeYeozCpuE2DPvytdBXj7xfFUvOyjqb7Ca2slHhIWkqZpx
- KD+ckXgnU8T53wUzhqdgf6NAUyusf58v+NFIfKTObIOZt5GcFeq28VkC9J+Y2T7IQeat
- nc9w==
+ d=1e100.net; s=20230601; t=1738316819; x=1738921619;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ucFfMNgqRDLg6/uPoqIk2s37n+lE+snFypeGlN5XDEg=;
+ b=o4yk0Zt5/jKr0WULiKQXlKVbNsHe+3P/rSYlB7Wv9DUdYSuvQqZY+mHNF+7pUdbP6A
+ a4F9n1fkTsaF3ffeO0rrzv22/IUbRd05dVkpMbMl78iYbqUFL1XQsxoBFImVyswovUge
+ +Ad0PgU9GK5y+hXx6dQx4UFoGpB7XaL/qiGNDbQDpg8gE153SkJKVCMBDsqe9Pbhlvnd
+ BiIiIuJwUKd4ENxdc5m9spf0VlQYu0My5nNR0XXLBHr+6Djm8xj/xcQW8EG/dul4/H5/
+ aVTEIyh2UHu/6fkVHm0tSALrHwXUrxXg+hldcXDHV6I7Mh8oF7CDIvM9Yx+VPGgJ94kg
+ mU3A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmpW2rdISSb77uMbSNEicT5Ngi85sobN7HU1jbFZq52RwDpPY/rG9M9QXOjCXCIiA6taNvR5o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKu8zDZgDHQkHu5ly8sF/3oRTrytk+KI20jBYTZ+7E56zP3M8I
- F93SUYOL0MFAzW3l6OVGsIhApm6aJkWuqP/P7G2F6rS7fXp2arxmPIvmswfoW3U=
-X-Gm-Gg: ASbGncuCaRkXFv8wEbhCrc43tbu3Q3pOL7THl3KOs54f18QQ3ZlxKmwNEPQBYL3bes9
- Z2V3HmSdKF5E02S7Gi0Pzk9iJk77JsTonV141q/9ca9bbK4hFN/8gcu40kNT/0SeB1U70RnZ5m5
- EhhUmf5ZaBXQ26TrXDvX3IuSL+Z/sQwLBR7K0c/hHttE4sFfzX2J4Y46utk8A8KKe4Zsn/CS0aC
- xvIR0Xhdqj4pe3ZC460oWWt9OdONZhRiZ3GCxqrydpbWEhlhwVT05FtLuypdqUyfpQ++wWifNKm
- L5g1l+N1kPOY6dVMjZaOm8ZeIJxrlaSoGxQ2AaCVlp20v7IRS6DMI2doiXUl2k/vjPgm
-X-Google-Smtp-Source: AGHT+IFGy/WiAJlbBgnXkZlFlT8LosbCwj9QxWmmELkNxZLop4TUDprepujSmCjPiFLlxdFd+tOL1w==
-X-Received: by 2002:a05:600c:4e52:b0:434:9dfe:20e6 with SMTP id
- 5b1f17b1804b1-438dc3fc2b0mr91235635e9.23.1738316559621; 
- Fri, 31 Jan 2025 01:42:39 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:384d:e7be:1f71:9414?
- ([2a01:e0a:982:cbb0:384d:e7be:1f71:9414])
+ AJvYcCXyK9Xa+qh0fLOOVYDZ82h8WZVeF2NV63XIq2vw1SRgD0SAFk0hzh1GEsIDzp/Owa36EkUmwus=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNCc1dq05isAWHiI/qalW+fIUDj9UcTyBclfBU1BA/p62hfbdW
+ HY27Ghc0fANPjoDKlfYedPbiUdv2sFsMVS6OtnpLYK1Rvon6RJPmsJ2RJ0/cjb0=
+X-Gm-Gg: ASbGncsruUYoUkgP0RD+IoRapLeEEY6cF8GgCI+lXhiJOV9xDm0MXLOFvNeuyeOGzrL
+ GfZSZ1Oq0kd/SbDOiy72YERdESezdq9U+DIT4vM5INTTjU3x2gej1KB5rWYPu6Un1VWUrknm8P4
+ jjc+pzlZaWL5EMIoT0REdIT7o6iFP9YNqcuu9UQhuG5kg81IYg3Aqit/iaLBpa6vLWccVW16YDk
+ ATX824vaECy/9KJO/hXTyrnP3/HDHI6xwh6UN20LH/OrUerPLrhjqipK9658rtsTtOQROQwNjAQ
+ zao/WBonONr9LvAgZhxK+ps=
+X-Google-Smtp-Source: AGHT+IEh7MyrAhIom6hq1nVTzoyJDeGhRkE6qtcWPtmrsRA9TDMBK0k1dcjcJC515qkx9cYobieEXQ==
+X-Received: by 2002:a05:6402:3514:b0:5dc:f48:f01e with SMTP id
+ 4fb4d7f45d1cf-5dc5f01e783mr10264343a12.30.1738316819420; 
+ Fri, 31 Jan 2025 01:46:59 -0800 (PST)
+Received: from [192.168.0.24] ([82.76.24.202])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438e23e6181sm49017845e9.18.2025.01.31.01.42.38
+ 4fb4d7f45d1cf-5dc723d0043sm2530799a12.12.2025.01.31.01.46.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jan 2025 01:42:39 -0800 (PST)
-Message-ID: <c1bb5132-cac8-4d7a-9f3a-2d5b30ce646c@linaro.org>
-Date: Fri, 31 Jan 2025 10:42:38 +0100
+ Fri, 31 Jan 2025 01:46:59 -0800 (PST)
+Message-ID: <7eca2634-a29f-4440-84e1-bd3eb9f38a02@linaro.org>
+Date: Fri, 31 Jan 2025 11:46:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 1/4] clk/qcom: apq8016: add PRNG_AHB_CLK
-To: Sam Day <me@samcday.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, Robert Marko <robert.marko@sartura.hr>,
- Luka Perkov <luka.perkov@sartura.hr>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250127-msm-rng-fixes-v1-0-00f5d2284314@samcday.com>
- <20250127-msm-rng-fixes-v1-1-00f5d2284314@samcday.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250127-msm-rng-fixes-v1-1-00f5d2284314@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH v2 5/7] pinctrl: at91: Bind GPIO driver to the pinctrl DT
+ node
+To: Manikandan Muralidharan <manikandan.m@microchip.com>,
+ pbrobinson@gmail.com, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20250130035157.226995-1-manikandan.m@microchip.com>
+ <20250130035157.226995-6-manikandan.m@microchip.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20250130035157.226995-6-manikandan.m@microchip.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -128,40 +97,73 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27/01/2025 08:48, Sam Day wrote:
-> This clock needs to be enabled for the msm-rng driver to work on
-> MSM8916, otherwise accessing the PRNG register block causes a data
-> abort.
+
+
+On 1/30/25 05:51, Manikandan Muralidharan wrote:
+> In Linux DT,the pinctrl node acts as parent nodes with all other
+> gpio banks as child nodes and a single driver in Linux handles both
+> pinctrl settings and gpio requests.Current U-Boot DT maintains both
+> pinctrl and gpio nodes as separate nodes and offers two different class
+> of U-Boot drivers: UCLASS_PINCTRL which handles pin functions and
+> UCLASS_GPIO which handles gpio requests. In order to align the DT
+> of U-Boot with the DT of Linux, a hook is been added in the pinctrl
+> driver to bind the gpio driver with the pinctrl driver so that
+> when adding gpio nodes as subnodes to pinctrl node (as per the Linux ABI),
+> the corresponding APIs will be redirected and handled by valid
+> drivers attached to the pinctrl driver.
 > 
-> Signed-off-by: Sam Day <me@samcday.com>
+> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 > ---
->   drivers/clk/qcom/clock-apq8016.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+>  drivers/pinctrl/pinctrl-at91.c | 15 +++++++++++++++
+>  1 file changed, 15 insertions(+)
 > 
-> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-> index b5def55dbc2ac671130624dec56592288a0ceb3d..ff5e7ca6f02148427240b80fb08efdd356934cd5 100644
-> --- a/drivers/clk/qcom/clock-apq8016.c
-> +++ b/drivers/clk/qcom/clock-apq8016.c
-> @@ -54,8 +54,9 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
->   };
->   
->   static const struct gate_clk apq8016_clks[] = {
-> -	GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, 0x00000001),
-> -	GATE_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, 0x00000001),
-> +	GATE_CLK(GCC_PRNG_AHB_CLK,	0x45004, BIT(8)),
-> +	GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, BIT(0)),
-> +	GATE_CLK(GCC_USB_HS_SYSTEM_CLK,	0x41004, BIT(0)),
->   };
->   
->   /* SDHCI */
-> 
+> diff --git a/drivers/pinctrl/pinctrl-at91.c b/drivers/pinctrl/pinctrl-at91.c
+> index 5038cb535e3..2b871143fc0 100644
+> --- a/drivers/pinctrl/pinctrl-at91.c
+> +++ b/drivers/pinctrl/pinctrl-at91.c
+> @@ -9,6 +9,8 @@
+>  #include <dm.h>
+>  #include <log.h>
+>  #include <asm/global_data.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/lists.h>
+>  #include <dm/pinctrl.h>
+>  #include <asm/hardware.h>
+>  #include <linux/bitops.h>
+> @@ -492,6 +494,18 @@ const struct pinctrl_ops at91_pinctrl_ops  = {
+>  	.set_state = at91_pinctrl_set_state,
+>  };
+>  
+> +static int at91_pinctrl_bind(struct udevice *dev)
+> +{
 
-This should be 2 patches, but it's still fine for me...
+Can you add a small comment to explain why this bind is required and its
+purpose please ?
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> +	ofnode gpio_node;
+> +	struct udevice *gpio;
+> +
+> +	ofnode_for_each_subnode(gpio_node, dev_ofnode(dev)) {
+> +		lists_bind_fdt(dev, gpio_node, &gpio, NULL, false);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  static int at91_pinctrl_probe(struct udevice *dev)
+>  {
+>  	struct at91_pinctrl_priv *priv = dev_get_priv(dev);
+> @@ -524,6 +538,7 @@ U_BOOT_DRIVER(atmel_sama5d3_pinctrl) = {
+>  	.id = UCLASS_PINCTRL,
+>  	.of_match = at91_pinctrl_match,
+>  	.probe = at91_pinctrl_probe,
+> +	.bind = at91_pinctrl_bind,
+>  	.priv_auto	= sizeof(struct at91_pinctrl_priv),
+>  	.ops = &at91_pinctrl_ops,
+>  };
+
