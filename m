@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C55EC0218F
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 17:26:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99AF9C0218F
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 20:00:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7181682836;
-	Fri, 31 Jan 2025 18:26:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 888CB80EBD;
+	Fri, 31 Jan 2025 21:00:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ejt7Z+jw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UhiYMJ03";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F09F682163; Fri, 31 Jan 2025 18:26:28 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id BBB6780F0E; Fri, 31 Jan 2025 21:00:14 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86A48826C2
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 18:26:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 517D880834
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 21:00:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7c0155af484so90730685a.0
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 09:26:26 -0800 (PST)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6d88cb85987so19108646d6.1
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 12:00:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738344385; x=1738949185; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dMQoXgbe3efjG7ScyxWYvOy4VcaEKYcq6utRtt1Rrw0=;
- b=Ejt7Z+jwLbzZDM3qo/dNXGjGlR0bzhO0ksPGZpfzpGlFhI+eqs6uW4DVvq+GK3GRE4
- 7F3tbNOIpzOcfo7cIUs0p0Qf2nWRjCGgTyPxri/SKGkKTZtUmLg8WGZWWntDyFQD8est
- nXpfH/F8OyG2oIjwa0SpsOUpNElNdNAGGbi7Y=
+ d=konsulko.com; s=google; t=1738353611; x=1738958411; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=AIIZqSIZT/tpQHgNL5X0jlCdCMk6V81Es/21RWZyeug=;
+ b=UhiYMJ03XzkifD8IOAL2/qHurCAgkR7vbNmlwidiYB8HY5df72g6X3suPIpGKwdMdj
+ F53kCCLQa2cJG4K1cYizAavc8a1nSqnU72YR5Az5ggp/IbLBYR1NQEo41yjgwOw4zEO5
+ h/lh1w2vaD1C+Uqz1aJi2JKdcUkRnkB15GJY0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738344385; x=1738949185;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dMQoXgbe3efjG7ScyxWYvOy4VcaEKYcq6utRtt1Rrw0=;
- b=N1Lg3atT6xeTUXYzsRWRf4Xxjpk6tZcB+NHvuyC0bzAdCvK8RJB+iHJ4TURGYOddfl
- UoHuvqO2zTeRKQr/aSMO1cNse+a40l33J4Ltn1yBf8YAxp2p7ynGZkKRq8fI0wbhRN6Z
- 0J3GaUDpiPCZEos/BwNzJd4JMqVx7JtLbaSC7sc10ioksL7yc02F5risOpi2sy59T3ou
- jzbea1NJDqwgiAduLrNSJhnKzesiH/hcSbpz3IIGhYELP6qpLKyjPzR24GUqKHtAO757
- /8Wg7AwF+frvT85HbeYSBKhXpGdPFdHDMabllFPjKHyXO7yKeVyfvO+3fUN27R/sn/Lq
- xLHA==
-X-Gm-Message-State: AOJu0YwmiRHp36v48yubPTRyS9id0pyZBiJJZPxKSOulEPNHap2HsvFC
- ut2d5CGFo3RkZxGoTdk3OlsIqn0rIBjOGzpmED4DiG9sar/7KOEjGbbAaJ9/gmarWZnf/Z+Nrid
- l
-X-Gm-Gg: ASbGncvVIQx28zyLq40vi1g85sd+dHFDt72oxGV5p2NU7w+KvxKY6eO1I2eITe/fszf
- sZkbkZbXPQQWFB4I9ZcDry25vFFv4ermA09QYxL4GyGbcVrKLFIcyrYxVh7pZJ5HLogxZoM7tvg
- 5OFD9NBfyZ1NpVSsOoz5bNFlpWmm7xdYJyHX3AnP43mzkSZDBpuv01p08aVrJehacfnkCPiCB1z
- P35vHl43K3JBqS1ezdbiRrun1ANClLDscgR6+FmEBG5L8xOepf33kWXhWTRtkFMT2wSx/DfJ1H6
- oF6y7viOCMxSIg==
-X-Google-Smtp-Source: AGHT+IEs8XUwJz3nHAyQcu7/lyiOGvlJc0BGkRAA/2vZNPTZQmKvZWIKrAMTYXPyxcMUlEjjJzKRUw==
-X-Received: by 2002:a05:620a:d95:b0:7b6:dc74:82b1 with SMTP id
- af79cd13be357-7bffccc9f6emr1990928685a.7.1738344385436; 
- Fri, 31 Jan 2025 09:26:25 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c00a8d9757sm213391585a.63.2025.01.31.09.26.24
+ d=1e100.net; s=20230601; t=1738353611; x=1738958411;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=AIIZqSIZT/tpQHgNL5X0jlCdCMk6V81Es/21RWZyeug=;
+ b=JYsyS1qCJ7zuRcVMtlNa6QIBFYBOeuq8HJFQS9AuEB2cgc/CXOjc1/w1YUhQ3x9ufc
+ 2i/7pyaO3ZztOV/6raHJDzFpxVVO6GsQgjnwc0fJFOmgRBl2M9WWbjeqY2MMGi2YL/qW
+ 6/Cu93kO6Tpjqejj9zmMt0p7qKg+j9X0fIpJo5/79TT/kFSEN70g1Xr7qYbxDREayAnW
+ Jn3+EYX2J193ZeX85+ieea6ASRVFFaGUgedxzrm6Ck5coZtaQUllAeS7LwZwQ8iusoGW
+ SiX+Tm3J27PHJestn+Eg6G6FK/0CGvo1TwLGl/ZkH007RGbGWvqNu6/Hm1+zEtKMli51
+ IriQ==
+X-Gm-Message-State: AOJu0YxdRquoqXaDbbEP7lNti5f8zcYHCoIqHrO16saAO8IWHY8qdRAj
+ gvIuAgqpxgquZ7HML8/e0PVvmV10AgG2y1RcQAWTWIaljJPEK/FXSN8sAWsmIJKNZdmglcv4PsH
+ H
+X-Gm-Gg: ASbGncsljkJYUaADR3JJ065b93UgSvp1g4WtzSJ8hfzfrR2YdDVIc857knrqTVe3bCK
+ lJ9r7tQLXFBbm+n1zwKtq/TWNSd+yJ73DmG6Kw/EDxzpFWkqiHh1ZEkDgH918Vbbgmo47UA/mSz
+ QqisTqlVvh/0OxbyRZOgTSINodho4zMw9z2kQm+JX1glXwh3eGz14G7fEffm6sienPesuidndZn
+ 5r/iINk4FMnO3B/70Ist8SZUFrRWL7+8qq1HjJ51PWo6im+UDTWIyEcMqeTSxhTjvuZUBAH0qd/
+ qZwmj8ckl5zkNWo=
+X-Google-Smtp-Source: AGHT+IGnSUSlgIjO16GFiTQqr1sM7FmfzhUser3vUKW52KqD2NYlzCPOETwwaiUzYiDORSyYs2WVDQ==
+X-Received: by 2002:a05:6214:5785:b0:6d8:e7c9:ffa0 with SMTP id
+ 6a1803df08f44-6e25b0a36ccmr85269256d6.19.1738353611182; 
+ Fri, 31 Jan 2025 12:00:11 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e25494166csm21122826d6.104.2025.01.31.12.00.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 31 Jan 2025 09:26:25 -0800 (PST)
+ Fri, 31 Jan 2025 12:00:10 -0800 (PST)
+Date: Fri, 31 Jan 2025 14:00:07 -0600
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <a8e492b4-b2fc-4432-8ce9-669a8a70d1ed@foss.st.com>
-References: <a8e492b4-b2fc-4432-8ce9-669a8a70d1ed@foss.st.com>
-Subject: Re: [PULL] Pull request for u-boot master / v2025.04 =
- u-boot-stm32-20250131
-Message-Id: <173834438459.3013010.7389437348209085278.b4-ty@konsulko.com>
-Date: Fri, 31 Jan 2025 11:26:24 -0600
+To: u-boot@lists.denx.de, Love Kumar <love.kumar@amd.com>
+Subject: Enabling test/py/tests/test_spi.py more?
+Message-ID: <20250131200007.GR1233568@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="MdcdmO/iCkpuZ9Kn"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 31 Jan 2025 11:57:04 +0100, Patrice CHOTARD wrote:
 
-> Please pull the STM32 related patches for u-boot/master, v2025.04 = u-boot-stm32-20250131
-> 
-> CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/24410
-> 
-> The following changes since commit a517796cfa5d8f4ca2f0c11c78c24a08a102c047:
-> 
->   Prepare v2025.04-rc1 (2025-01-27 16:38:46 -0600)
-> 
-> [...]
+--MdcdmO/iCkpuZ9Kn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Merged into u-boot/master, thanks!
+Hey,
 
--- 
+Can you please confirm that this test currently functions on your
+platforms? And then can we please enable it in
+https://source.denx.de/u-boot/u-boot-test-hooks as both a functional
+example, and testing of the SPI framework?
+
+I'm asking in part because I've attempted to enable it on two TI K3
+platforms (am62x_evm_a53 and am64x_evm_a53) and the write twice test
+fails there and while I can repeat the failure on the command line, I
+can't make the same concept fail at the CLI (including 0xff'ing out
+memory before reading back to the same location). I've also tried
+enabling it for sifive_unleashed via QEMU but that in turn seems to fail
+differently, and possibly because we're destroying all of the SPI
+contents and need to expand the test to include a region to ignore? I'm
+not entirely sure, I'm still debugging that one.
+
+Thanks!
+
+--=20
 Tom
 
+--MdcdmO/iCkpuZ9Kn
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmedK8AACgkQFHw5/5Y0
+tywgSgv/b+9rs42iniGLPvW8ZybFtwhgSuOhNI0sDZ0vfBBKQR+oL+nRsE3UZfan
+iFuuhxy41Rqp8HZLcDW8VKZ/hio+DEHAjNbRsWVUAD1DHsj/Vvfdz0EBCXbtVMem
+w6PcB89h1L5i27IcnCjYFw689nJwcqle6BePRFDF/Rwlzk/RvKYwasBAcaVC1gqS
+ap2Qhr85zXz5gMcaS+bLUlLGN/VBkHjw6rePqlySN8md7r2VYuLNtxVqP/D/NBpy
+SHKmVR/HIAp8hR6Vo6wyILTn2sULuxBqyL9V9BivfCqfCVXt2vSatMP7y05GbO7u
+4Ba1kr0WR2JKEgnRaEuYCPSbdQr4vItCZjHCuzRpwDC4Q3LvTyqNU/g3uUoEMBc/
+rVRLMff0CcCPQMvHy5WtHZfdLpl3qehhIPOdoCXQEXdxZaP4nUWOMaydv1AGQER7
+K4ZiS0AuoPJ63VfXeP+JX/XZSjOnClucnVAegeIKdSIxuzY/HrVSP1jhBKZ5P3lu
+v7z2/+mY
+=L0W5
+-----END PGP SIGNATURE-----
+
+--MdcdmO/iCkpuZ9Kn--
