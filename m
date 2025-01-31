@@ -4,88 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BBE4C0218D
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 09:47:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD4FC0218D
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 10:31:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84CCC82139;
-	Fri, 31 Jan 2025 10:47:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DA90682163;
+	Fri, 31 Jan 2025 11:31:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IJZZx2Sl";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C6848213D; Fri, 31 Jan 2025 10:47:02 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C81788219C; Fri, 31 Jan 2025 11:31:46 +0100 (CET)
+Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
+ [84.16.66.170])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2661880F70
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 10:47:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AFF182131
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 11:31:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d3d0205bd5so2616246a12.3
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 01:47:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738316819; x=1738921619; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ucFfMNgqRDLg6/uPoqIk2s37n+lE+snFypeGlN5XDEg=;
- b=IJZZx2SlBksZnyKn6QQv7Iu0896bV2h7195lwIUymgEC3CEUcbOgeTbQiY9uYZ0/CZ
- kB3jvKqm3iJJ5LjCmjzqg1JWTW1t7RIh12U1l/CuoIEDFT2HRcwsgnzUxsKe3N0Su1S3
- x6eO5v4uV9YHFH4JkXWHUur1PPg3iLPN+e5uT8KJlnsKnbBF/gx26I04K2n7r8RjEy2b
- Gzjvu4a36GQB/NLB63EdRkGYpUiDBd8C2yNAIdGkZVTwI6KmfVWYuKGe2JqAOJuJdIIp
- fiTEQ8iL+LyJKy3ZLmi+KgoCOW6uNO0k+ovnhBzx5YXO49lS8NNwyRsG15OP5eUb1OXD
- jj3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738316819; x=1738921619;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ucFfMNgqRDLg6/uPoqIk2s37n+lE+snFypeGlN5XDEg=;
- b=o4yk0Zt5/jKr0WULiKQXlKVbNsHe+3P/rSYlB7Wv9DUdYSuvQqZY+mHNF+7pUdbP6A
- a4F9n1fkTsaF3ffeO0rrzv22/IUbRd05dVkpMbMl78iYbqUFL1XQsxoBFImVyswovUge
- +Ad0PgU9GK5y+hXx6dQx4UFoGpB7XaL/qiGNDbQDpg8gE153SkJKVCMBDsqe9Pbhlvnd
- BiIiIuJwUKd4ENxdc5m9spf0VlQYu0My5nNR0XXLBHr+6Djm8xj/xcQW8EG/dul4/H5/
- aVTEIyh2UHu/6fkVHm0tSALrHwXUrxXg+hldcXDHV6I7Mh8oF7CDIvM9Yx+VPGgJ94kg
- mU3A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXyK9Xa+qh0fLOOVYDZ82h8WZVeF2NV63XIq2vw1SRgD0SAFk0hzh1GEsIDzp/Owa36EkUmwus=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNCc1dq05isAWHiI/qalW+fIUDj9UcTyBclfBU1BA/p62hfbdW
- HY27Ghc0fANPjoDKlfYedPbiUdv2sFsMVS6OtnpLYK1Rvon6RJPmsJ2RJ0/cjb0=
-X-Gm-Gg: ASbGncsruUYoUkgP0RD+IoRapLeEEY6cF8GgCI+lXhiJOV9xDm0MXLOFvNeuyeOGzrL
- GfZSZ1Oq0kd/SbDOiy72YERdESezdq9U+DIT4vM5INTTjU3x2gej1KB5rWYPu6Un1VWUrknm8P4
- jjc+pzlZaWL5EMIoT0REdIT7o6iFP9YNqcuu9UQhuG5kg81IYg3Aqit/iaLBpa6vLWccVW16YDk
- ATX824vaECy/9KJO/hXTyrnP3/HDHI6xwh6UN20LH/OrUerPLrhjqipK9658rtsTtOQROQwNjAQ
- zao/WBonONr9LvAgZhxK+ps=
-X-Google-Smtp-Source: AGHT+IEh7MyrAhIom6hq1nVTzoyJDeGhRkE6qtcWPtmrsRA9TDMBK0k1dcjcJC515qkx9cYobieEXQ==
-X-Received: by 2002:a05:6402:3514:b0:5dc:f48:f01e with SMTP id
- 4fb4d7f45d1cf-5dc5f01e783mr10264343a12.30.1738316819420; 
- Fri, 31 Jan 2025 01:46:59 -0800 (PST)
-Received: from [192.168.0.24] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dc723d0043sm2530799a12.12.2025.01.31.01.46.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Jan 2025 01:46:59 -0800 (PST)
-Message-ID: <7eca2634-a29f-4440-84e1-bd3eb9f38a02@linaro.org>
-Date: Fri, 31 Jan 2025 11:46:58 +0200
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
+ [10.4.36.108])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YksdC71XVzpd8;
+ Fri, 31 Jan 2025 11:31:43 +0100 (CET)
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4YksdB56qpz6g2; Fri, 31 Jan 2025 11:31:42 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH v2 00/13] pinctrl: rockchip: fix editing const struct +
+ constify rockchip_pin_ctrl
+Date: Fri, 31 Jan 2025 11:31:28 +0100
+Message-Id: <20250131-rockchip-pinctrl-const-v2-0-59bf93968ce7@cherry.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/7] pinctrl: at91: Bind GPIO driver to the pinctrl DT
- node
-To: Manikandan Muralidharan <manikandan.m@microchip.com>,
- pbrobinson@gmail.com, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20250130035157.226995-1-manikandan.m@microchip.com>
- <20250130035157.226995-6-manikandan.m@microchip.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250130035157.226995-6-manikandan.m@microchip.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIGmnGcC/4WNQQrCMBBFryKzdiSJLVpX3kO6CJOpGZSkTEqxl
+ N7d2Au4fA/++ysUVuECt8MKyrMUyamCOx6Aok9PRgmVwRnXGus61EwvijLiKIkmfSPlVCYcGuv
+ Oxna+vTZQx6PyIJ89/OgrRylT1mX/me3P/k3OFg02rSEKPgz+wneKrLqcAkO/bdsX1RVwvrwAA
+ AA=
+X-Change-ID: 20250129-rockchip-pinctrl-const-f4123019a584
+To: Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@edgeble.ai>, 
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,68 +66,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+While testing some WIP work done by Ilias Apalodimas on guaranteeing
+read-only memory areas truly are handled as read-only[1], my RK3588
+Tiger couldn't reach U-Boot CLI anymore because of the pinctrl driver
+modifying a const struct rockchip_pin_ctrl, triggering a CPU abort.
 
+Instead of going the lazy way and unconstify it, let's fix the actual
+issue in play.
 
-On 1/30/25 05:51, Manikandan Muralidharan wrote:
-> In Linux DT,the pinctrl node acts as parent nodes with all other
-> gpio banks as child nodes and a single driver in Linux handles both
-> pinctrl settings and gpio requests.Current U-Boot DT maintains both
-> pinctrl and gpio nodes as separate nodes and offers two different class
-> of U-Boot drivers: UCLASS_PINCTRL which handles pin functions and
-> UCLASS_GPIO which handles gpio requests. In order to align the DT
-> of U-Boot with the DT of Linux, a hook is been added in the pinctrl
-> driver to bind the gpio driver with the pinctrl driver so that
-> when adding gpio nodes as subnodes to pinctrl node (as per the Linux ABI),
-> the corresponding APIs will be redirected and handled by valid
-> drivers attached to the pinctrl driver.
-> 
-> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
-> ---
->  drivers/pinctrl/pinctrl-at91.c | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
-> 
-> diff --git a/drivers/pinctrl/pinctrl-at91.c b/drivers/pinctrl/pinctrl-at91.c
-> index 5038cb535e3..2b871143fc0 100644
-> --- a/drivers/pinctrl/pinctrl-at91.c
-> +++ b/drivers/pinctrl/pinctrl-at91.c
-> @@ -9,6 +9,8 @@
->  #include <dm.h>
->  #include <log.h>
->  #include <asm/global_data.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
->  #include <dm/pinctrl.h>
->  #include <asm/hardware.h>
->  #include <linux/bitops.h>
-> @@ -492,6 +494,18 @@ const struct pinctrl_ops at91_pinctrl_ops  = {
->  	.set_state = at91_pinctrl_set_state,
->  };
->  
-> +static int at91_pinctrl_bind(struct udevice *dev)
-> +{
+This also means we should be able to constify the private data of the
+controller device for all Rockchip devices, instead of having those only
+for RK356x, RK3588 and RV1126. With the constify done on top of Ilias
+patch series[1], my PX30 Ringneck, RK3399 Puma and RK3588 Tiger all
+reach U-Boot CLI. No further testing (like booting into Linux userspace)
+was done.
 
-Can you add a small comment to explain why this bind is required and its
-purpose please ?
+[1] https://lore.kernel.org/u-boot/20250130072100.27297-1-ilias.apalodimas@linaro.org/
 
-> +	ofnode gpio_node;
-> +	struct udevice *gpio;
-> +
-> +	ofnode_for_each_subnode(gpio_node, dev_ofnode(dev)) {
-> +		lists_bind_fdt(dev, gpio_node, &gpio, NULL, false);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  static int at91_pinctrl_probe(struct udevice *dev)
->  {
->  	struct at91_pinctrl_priv *priv = dev_get_priv(dev);
-> @@ -524,6 +538,7 @@ U_BOOT_DRIVER(atmel_sama5d3_pinctrl) = {
->  	.id = UCLASS_PINCTRL,
->  	.of_match = at91_pinctrl_match,
->  	.probe = at91_pinctrl_probe,
-> +	.bind = at91_pinctrl_bind,
->  	.priv_auto	= sizeof(struct at91_pinctrl_priv),
->  	.ops = &at91_pinctrl_ops,
->  };
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Changes in v2:
+- remove removal of bank's pin_base because Jonas said he'll need it for
+  a new version of https://lore.kernel.org/u-boot/20240802225705.2640999-1-jonas@kwiboo.se/
+- fix pin_base computing by init'ing the controller nr_pins to 0,
+- make controller nr_pins local to the probe function instead of keeping
+  it in rockchip_pin_ctrl struct,
+- Link to v1: https://lore.kernel.org/r/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de
+
+---
+Quentin Schulz (13):
+      pinctrl: rockchip: fix bank's pin_base computing
+      pinctrl: rockchip: constify rockchip_pin_ctrl for PX30
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3036
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3066
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3128
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3188
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3228
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3288
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3308
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3328
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3368
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RK3399
+      pinctrl: rockchip: constify rockchip_pin_ctrl for RV1108
+
+ drivers/pinctrl/rockchip/pinctrl-px30.c          | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3036.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3066.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3128.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3188.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk322x.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3288.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3308.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3328.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3368.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3399.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3568.c        | 1 -
+ drivers/pinctrl/rockchip/pinctrl-rk3588.c        | 1 -
+ drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 5 +++--
+ drivers/pinctrl/rockchip/pinctrl-rockchip.h      | 1 -
+ drivers/pinctrl/rockchip/pinctrl-rv1108.c        | 2 +-
+ drivers/pinctrl/rockchip/pinctrl-rv1126.c        | 1 -
+ 17 files changed, 15 insertions(+), 18 deletions(-)
+---
+base-commit: 021baf7b08cceb58bb850859dba1614424e16a83
+change-id: 20250129-rockchip-pinctrl-const-f4123019a584
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
 
