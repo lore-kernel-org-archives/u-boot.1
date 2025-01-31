@@ -4,65 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72DC1C0218A
-	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 00:53:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9672C0218A
+	for <u-boot@archiver.kernel.org>; Fri, 31 Jan 2025 00:58:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A69380F47;
-	Fri, 31 Jan 2025 01:53:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 605E480F47;
+	Fri, 31 Jan 2025 01:58:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="ByQWwQCG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NeJfi4Cc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EE4280F4C; Fri, 31 Jan 2025 01:53:13 +0100 (CET)
-Received: from out162-62-57-49.mail.qq.com (out162-62-57-49.mail.qq.com
- [162.62.57.49])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 07E6080F50; Fri, 31 Jan 2025 01:58:38 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9830480F44
- for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 01:53:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3F0480F44
+ for <u-boot@lists.denx.de>; Fri, 31 Jan 2025 01:58:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1738284770; bh=Gd5cOPgL9BLwQ+qoEe35Uqz2SD/bxIOD2jQRZVcAlVg=;
- h=From:To:Cc:Subject:Date;
- b=ByQWwQCGSxyythSMC5U1bpkkA27hHFIv/qcQwGgjuQa150ehsnL1YFRcFnDE7GPDQ
- 3OF2TjbGQHch2jlntlM8xLroM+1YD/itSwLF3PKfe/Qrr/FHMGHvD4rCGSIGVZsRgh
- Gcx7PSd0m9kw7yC+SbQz7S//6iWKXC7UF3OJ2BK4=
-Received: from ubuntu.localdomain ([112.51.40.31])
- by newxmesmtplogicsvrsza36-0.qq.com (NewEsmtp) with SMTP
- id D30024F4; Fri, 31 Jan 2025 08:52:48 +0800
-X-QQ-mid: xmsmtpt1738284768ta1mgfkfu
-Message-ID: <tencent_42B13D5D83646C05C108407F980293053E08@qq.com>
-X-QQ-XMAILINFO: NJ7NCr21PgMkCu3gh09nnSTKZKuhSuqYDsVv1UIoZH2R0zwrErRk2hLC0MIvl4
- h8fLRVAnBwhX01xcnDrXEoSTy5DTWt0LO1sM+jMINS+HmJm7+LAZ1btp/xdquQ+S/u5yF5F1jhJd
- +PQ/AUEoEPhB841jkzVMt6sLBW57KXRLWEjWDY0d5H5053wWmdhknKeo39u+nx4nWbzFW8QZqogV
- 2Y7d0MHqDzqXyADzpJhZDg1OBe+F6kBRtmZ6TJMPGqEV8SmmEmz6Gr2GbW5N+OnH8lq7AJaR4L8h
- +PXhRhGlm/sUxt6RKQthx81exvCN0qRsPgncie9ZedCJ0rv78Du0pXpUcd7+7NRKFxqpJbxg/kTQ
- Tkw9gV+TrVbUbmNst3FO6npL4+qvqIG5gTwlkZJpqh649C13Fpz0ALG5VQUCHrGDWmO/lHx7DqI0
- Bgzw9wf6otjsziIAAGSdBRYiZ4N3R5cSJlG3Xm9Jb5pszz5ryrQNvybAKyvfJWplKwC/OQHdq28r
- YdHiXRHqXqZvOxCJXQRut0vfvmFecSDCXUkR9Xscw5njdrXOpdGuzcFjePAS+QrIwm2YVoLLi4Te
- 6wGL3vnLgpk80+EoFP0lXETh8g+fKMImFgNn/rFuNuEiQrFBEay9sGoxO7zBLT5j5HUWTjZAxl+Y
- ydv+DK9ciL0i4TwW5Url7gNAwz0A/kUTbSe6RbRqyloI+00hby25ZAM1kn9Nt/2GtsxbyV4VGMHu
- 2KGLvw7nJh5MXNCQJCq/YKdepL3DH+Hr+CE4hrHAtUn/uGIAqqR4q9641sGJXdZIkebZXblLsRJA
- wjNE4JG7oclzbmpU0gmXZShevLaTf2RwtOtmiuw0fYf8P5mHsh6P0RggsxdjDw3k+Su/Y135M5HB
- Qtpb3FBdgKKfH1uLx1FvdMapYcX0gZnhd+rq8fgcp9LMARIBJCU0TRpdZ+x/lbKdyLKhLhFLE4x2
- /yXG5ertcxnANmqE51Jyx0LxMde4iatMOUhNy8gxE0i0izrul0CtfLGsbmapgv
-X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
-From: 1425075683@qq.com
-To: Liya Huang <1425075683@qq.com>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-543d8badc30so1506015e87.0
+ for <u-boot@lists.denx.de>; Thu, 30 Jan 2025 16:58:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1738285115; x=1738889915; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l1yJNq9Mq+F0ti0h/U9pnbjDe29eEOYPCJqh0TOu5jo=;
+ b=NeJfi4CcCKcxGOZ5Ykv4L+zivQHI8K2DltH/fba0udn18sV2o17RdJ7mYB0Vr82P2D
+ ohNiKnzNek65fgrV4BK90Ij3R4P3TjU7BO6CEa3ln/ONp7NNJf3PcCjlX2CoGLZ/SDOo
+ OJoAN7TU2VJslUjIXt8zh0zgk86m5FH7HCCdSP9LY5hJDzOH6o9jY0pvEa0wkRCKIHEl
+ ZXxylEW1kGqD+DscGYZEDfyUzrjtpBb48VrPgADsABjWGd674nzG2n1u8ZqZTN6h57jF
+ Cng11ltOykC15/o0k/ezFm8EnoyhABJAW63yxPuf6yM1g6VF2kdyq1i/Ap3O+5iUBXuN
+ Lx7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738285115; x=1738889915;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=l1yJNq9Mq+F0ti0h/U9pnbjDe29eEOYPCJqh0TOu5jo=;
+ b=borca5XOdS+f9RWKouS5gLpsQTD3sd43ZlR8oMaESdRte+hvc4d9ycZBQ3Q3ejYxBC
+ 5TXyDN7GqEyifUCQnBiK/uVd5QV4RCPE+Ox7KR40mZR+MhJcyeL0Qs9wtnd/svRo/i+i
+ g7zsKYSPUrl0lhFCjCUYBT+kR56DDF8oU8MPBgdgBBqCBSRnZI7NnSd6PKrlh1ynkDAH
+ Gv29EKiRLYdO64qntaa4pXEd76uUxIImcUUyFtzg1hyxVsZ1y3aY5zphT51w/mAFxMaI
+ wNP0AaRqv+Jw9QsqBlti0lmprvG2sJBJhyqQUEGApFU0v569UXCSKdgjhcRbbtg+mxgf
+ m7/Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUPVbycR8vPzKVhAS0Ha9yS2McGNbz/u3HJjGyI/KwbYou7U3usvsyAfUra13v4cimcVimXX9Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YwELGoeqd1YYPD2HkmJc+KwE9yUhgOZC3iXdGw+q1N49TdhY6Of
+ kWH71blRJGW3FfzgGOfL4EtgLujzm4vW8AJ6S1CtyMEImefRm/ojGX4ZfNWNTADCYJ1gKu1pW9u
+ QsvPE42evRpj5YCdy/6pKktJliBs=
+X-Gm-Gg: ASbGncui1SHUXy4OIOK7azGQHJEPvPT/+1lEhvE/LED+RLZ/R46MNogvzgFya+SIGZD
+ ba2F/qPTyXwRNi6lbWyP1TryOYes0MZc18hiWstiyJmLHvWuoSR9VVpfIQDxtkLJRUKKid4Nfoc
+ 7ZBm3gWk5VhNo0BuONhB6ujYtzMrGS
+X-Google-Smtp-Source: AGHT+IFZX4cI3eRQ30Zyf6I1JvCCvNaxhRh4tv8AjMdIhmV5/DjhnlQbP4BdySKi50FgEKmIi87vabiwwTJfFWUNupE=
+X-Received: by 2002:a05:6512:138a:b0:540:75d3:95a4 with SMTP id
+ 2adb3069b0e04-543e4be9422mr3236386e87.17.1738285114950; Thu, 30 Jan 2025
+ 16:58:34 -0800 (PST)
+MIME-Version: 1.0
+References: <tencent_42B13D5D83646C05C108407F980293053E08@qq.com>
+In-Reply-To: <tencent_42B13D5D83646C05C108407F980293053E08@qq.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 30 Jan 2025 21:58:23 -0300
+X-Gm-Features: AWEUYZnwOC48Ts0xEcl5PVEaTlfVejNnx4835Jp0C9llR9n6m_-F-A9dcgIwE4g
+Message-ID: <CAOMZO5DQCyLa7bpxUkJy7Tk0tqp1dnXLApxD1X15jUG715yiiA@mail.gmail.com>
+Subject: Re: [PATCH v2] siemens: common: Make DDR_SI_TEST depend on
+ TARGET_CAPRICORN
+To: 1425075683@qq.com
 Cc: Heiko Schocher <hs@denx.de>, Enrico Leto <enrico.leto@siemens.com>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH v2] siemens: common: Make DDR_SI_TEST depend on
- TARGET_CAPRICORN
-Date: Fri, 31 Jan 2025 08:52:43 +0800
-X-OQ-MSGID: <20250131005243.337173-1-1425075683@qq.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,33 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Liya Huang <1425075683@qq.com>
+On Thu, Jan 30, 2025 at 9:53=E2=80=AFPM <1425075683@qq.com> wrote:
+>
+> From: Liya Huang <1425075683@qq.com>
+>
+> The DDR_SI_TEST config option is only relevant to the i.MX8 Capricorn
+> board.
+> Make DDR_SI_TEST depend on DDR_SI_TEST so that it does not show up
+> on other targets.
+>
+> Signed-off-by: Liya Huang <1425075683@qq.com>
 
-The DDR_SI_TEST config option is only relevant to the i.MX8 Capricorn
-board.
-Make DDR_SI_TEST depend on DDR_SI_TEST so that it does not show up
-on other targets.
-
-Signed-off-by: Liya Huang <1425075683@qq.com>
----
-
-Changes in v2:
-- Replace depends on ARCH_IMX8 with depends on TARGET_CAPRICORN as suggested
-- Modify commit log
-
- board/siemens/common/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/board/siemens/common/Kconfig b/board/siemens/common/Kconfig
-index 4ae12b1c973..3808257cd07 100644
---- a/board/siemens/common/Kconfig
-+++ b/board/siemens/common/Kconfig
-@@ -3,4 +3,5 @@ config FACTORYSET
- 
- config DDR_SI_TEST
- 	bool "DDR signal integrity test implementations"
-+	depends on TARGET_CAPRICORN
- 	default y
--- 
-2.25.1
-
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
