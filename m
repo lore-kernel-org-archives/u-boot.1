@@ -4,62 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B52A8C0218F
-	for <u-boot@archiver.kernel.org>; Sat,  1 Feb 2025 06:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 291B7C0218A
+	for <u-boot@archiver.kernel.org>; Sat,  1 Feb 2025 09:18:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3E5F80FD6;
-	Sat,  1 Feb 2025 07:22:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4101580F86;
+	Sat,  1 Feb 2025 10:18:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="npsMMeuu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pbtQU7RH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3138080C77; Sat,  1 Feb 2025 07:22:35 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41ACE807C0
- for <u-boot@lists.denx.de>; Sat,  1 Feb 2025 07:22:33 +0100 (CET)
+ id EF12D80F80; Sat,  1 Feb 2025 10:18:19 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4997A80F86
+ for <u-boot@lists.denx.de>; Sat,  1 Feb 2025 10:18:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-111-068.46.114.pool.telefonica.de
- [46.114.111.68])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 331643FD8E; 
- Sat,  1 Feb 2025 06:22:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1738390949;
- bh=SwK4UDxZ2Ve2HFQrzhzlU3dbJcp1ELNMGs7aXwkbhmo=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=npsMMeuut6H5GI3ZFxpse0/4kJAbetpuLsKBLBhyumYPXAe8umWxAsZUNQRBigOCh
- wKjugnDFetqmnzPXeVKfFhYd4+Tg+0Fqq4EIQR6EuS699ZE7v9K+w1trjIlySGDiDG
- Zlp59HRoqn5lo1uKDmgzahEJBRc+bDegPgV4UzGaFAfvxibzGU5wOQvAsrlKxKfT1U
- TUUaL3Eg90xf7rrl7h9LDTEPGhTJieulUnJe65/e65D9M3DtViSzFETW0tNjfiMa7Q
- uUuumWtxNSuWwwwu7o595JY868Bkm/oJK5c2xiuLqXj+HA6WSroJH8uyF2+BR3wGXn
- kWmZl2oUgVGCQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 4/4] net: use strnstr() for lwip_strnstr()
-Date: Sat,  1 Feb 2025 07:22:14 +0100
-Message-ID: <20250201062214.56747-5-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250201062214.56747-1-heinrich.schuchardt@canonical.com>
-References: <20250201062214.56747-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5119IEko1855754
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sat, 1 Feb 2025 03:18:14 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738401494;
+ bh=nrrQUI7I2RG13vTWJNWdFOuFbzh6HsD+nzvFRL7Z6Hk=;
+ h=From:To:CC:Subject:Date;
+ b=pbtQU7RH4PA8SrzUoUyekiaHwS8cZYWrW8PlikqaTTGu7+DuC0i2nDD2ZjI/8/ypo
+ CCWkdz+8WmpD1MY7fq7OiDwfH84S0uS1hXKXHrKixXgM2YpRBjWnBRnJrqvbRa55wC
+ EOBeHc7de+sVIgT1+CFQn60vni0W2nymw37YCzQ8=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5119IEV0012058
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 1 Feb 2025 03:18:14 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 1
+ Feb 2025 03:18:14 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sat, 1 Feb 2025 03:18:14 -0600
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.104])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5119IAgC096497; 
+ Sat, 1 Feb 2025 03:18:10 -0600
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <a-limaye@ti.com>, <n-francis@ti.com>, <s-k6@ti.com>,
+ <a-dutta@ti.com>, <vaishnav.a@ti.com>, <j-humphreys@ti.com>,
+ <p-mantena@ti.com>, <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH v2 0/2] FIX: Re-enable MUX_MMIO on J721E/J7200
+Date: Sat, 1 Feb 2025 14:47:58 +0530
+Message-ID: <20250201091809.1894892-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,31 +80,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Using strstr() instead of strnstr() creates a security concern.
+Hello,
 
-Fixes: 1c41a7afaa15 ("net: lwip: build lwIP")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
----
-v2:
-	no change
----
- lib/lwip/u-boot/arch/cc.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This series re-enables MUX_MMIO at U-Boot proper on J721E and J7200
+SoCs. The commits which introduced support for Hyperflash boot on both
+of these SoCs disabled MUX_MMIO functionality at U-Boot proper, thereby
+introducing a regression.
 
-diff --git a/lib/lwip/u-boot/arch/cc.h b/lib/lwip/u-boot/arch/cc.h
-index de138846358..6104c296f6f 100644
---- a/lib/lwip/u-boot/arch/cc.h
-+++ b/lib/lwip/u-boot/arch/cc.h
-@@ -34,7 +34,7 @@
- 	       x, __LINE__, __FILE__); } while (0)
- 
- #define atoi(str) (int)dectoul(str, NULL)
--#define lwip_strnstr(a, b, c)  strstr(a, b)
-+#define lwip_strnstr(a, b, c)  strnstr(a, b, c)
- 
- #define LWIP_ERR_T int
- #define LWIP_CONST_CAST(target_type, val) ((target_type)((uintptr_t)val))
+Series is based on commit
+2b1c8d3b2d cmd: Fix Kconfig coding style
+of the master branch of U-Boot.
+
+v1 of this series was a single patch which was posted to fix the issue
+on J7200. The issue was detected when PCIe functionality on J7200 was
+tested and found to be broken.
+v1:
+https://patchwork.ozlabs.org/project/uboot/patch/20250127162509.965644-1-s-vadapalli@ti.com/
+Changes since v1:
+- Added patch to fix issue on J721E as well.
+
+Regards,
+Siddharth.
+
+Siddharth Vadapalli (2):
+  configs: j721e_evm_a72_defconfig: Re-enable MUX_MMIO at U-Boot proper
+  configs: j7200_evm_a72_defconfig: Re-enable MUX_MMIO at U-Boot proper
+
+ configs/j7200_evm_a72_defconfig | 1 +
+ configs/j721e_evm_a72_defconfig | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
 -- 
-2.47.1
+2.43.0
 
