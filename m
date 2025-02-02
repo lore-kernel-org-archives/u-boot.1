@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F51FC0218F
-	for <u-boot@archiver.kernel.org>; Sun,  2 Feb 2025 15:00:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A63FC02190
+	for <u-boot@archiver.kernel.org>; Sun,  2 Feb 2025 17:16:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A932F80079;
-	Sun,  2 Feb 2025 16:00:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 515448006D;
+	Sun,  2 Feb 2025 18:16:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YfRrz3P+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fjbobysK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C50A780085; Sun,  2 Feb 2025 16:00:31 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 65F3280077; Sun,  2 Feb 2025 18:05:25 +0100 (CET)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F131C80077
- for <u-boot@lists.denx.de>; Sun,  2 Feb 2025 16:00:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6773E8003E
+ for <u-boot@lists.denx.de>; Sun,  2 Feb 2025 18:05:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2161eb95317so59399015ad.1
- for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 07:00:28 -0800 (PST)
+ spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-30227c56b11so38335321fa.3
+ for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 09:05:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738508427; x=1739113227; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fZ3x6SVADi5UXIPzpX1XrpxNA8eytUYmc77OF/omLzE=;
- b=YfRrz3P+uAKBkOjSOqZLsoPAna/QtsK2xRsKakTuMKuc+/P1POY2F/BR1BwSsPVSAf
- DDeS/m3dYebX5ckIF3d3Ps7soA4inxrtpWiN8qNLqHKwbqLRaBMhfh/MOA90tZjgAs9l
- GDU0PQU+4tymp++TdVVwDmw4Eu24BQCBwymZ0=
+ d=gmail.com; s=20230601; t=1738515922; x=1739120722; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TVerUSZo8j5HNfEtK2PBsKz7KK1pKmeVt++CDJFLmHo=;
+ b=fjbobysKvplBMXxQZd9z+8wE18umNhoFNGSE+EbO3oB3zP7tmQrflID5gUFHmJFQsL
+ sjH6x1QKgTGE/NfCm9cVoV9uXzVWD4e1/ps0nJs3Do00rhtKJdWKbhaRqVqdqaoXdkft
+ QCGQ3bSwGp+PM/Z3CUeSrBdDcxu1GRUftk0an/7IwVZvRyoyYyNzOJICJvGU9gzWf0iQ
+ w9ba56mkBe7x6+/K+lOGobF6E829W32fpyia0QKQerxng/EKECmdr5efGzUG9ck0F82s
+ kAIxHdKx7ervnpoNDoQtx8DwAAkuylp0OvBih5s9B4FJGbdK9ci5UKK3GoS8ZnR4BRS2
+ 9Nwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738508427; x=1739113227;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fZ3x6SVADi5UXIPzpX1XrpxNA8eytUYmc77OF/omLzE=;
- b=TTJxQvYB1M7XRT2aVtbI3yOxS2p+AUBOORcU9wOVOAB9+8U7gDRVEqTLuCZvCwOHE9
- MsQF+UYE1COlJei59LG2RPrDPSsE4tKJfX7JqGQO7PZtnHRevjiCEWXm5rjhLEn9QMig
- eNN3oVSP5pi/8Xi43gxBdueRmhjNfzK5NlcmPii3G5XEQiGWbmsOlHdgTfcSebpUmOMl
- RWJizz2/RbxtTYuI6hGruOOJYDjlEhzMVqnT9HqKUvCtcCnYQ32zqDC1JeSh8QPgUZN5
- tYVn1YCIRjE87nrsKcfQ7T4TNJiFkuWScc1zDURHOXE0dxSd6JHEo8IU620DVi/o/9pY
- zZ9A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU/qFULY22QnsNTubMcvPWduSj2vlLza6o8qWEgUkxfSOMl/QzxDAnPUB2dJWBlaqf7d7tPdPY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/8k9UjMmvBwvpuArH7jgqBGT6pmNV/AVAK7bAWWynrS3J3Z2r
- HtsxXkUxwGKHDACFvFVBFGjNRGVlRWwx8ztfjdMS5zvOlD/ZjXIW5z+YX7E7sy4=
-X-Gm-Gg: ASbGnct3R/aWH1ZH41j0btvRo/QhB2jut3ghfjOewtUpEapbGXycoUKjGTihs83cIu6
- 8/SPhJASM45W2JgH2efrC1W3cyPOIQ/3l9YbruYYYnCaLwAXU08TwFcXIsotiyE+UA0V619Q9+5
- GEAYVY5AYf5nbHmlEOw4+mTCKhAquOtBdrMnFkP4hpXpkUTnpY3z1wQLM+JeAx1YC8owBGgwL/9
- +AOxbQ/hUbBy2RQEm9PQ0LyaaauR74WBwWrHoTLJ2VIx/Ylylvv5Puh9lzvEhzkwyza247XwniC
- tytty7oqWh2Y2e8=
-X-Google-Smtp-Source: AGHT+IHdJfdb3SFxU49OXQieIntdFS+QfwUrHALOULtvEmUqEtc1TFp/i3kjrnjx7i6rKaPk4O7T5g==
-X-Received: by 2002:a17:903:2281:b0:21b:d2b6:ca7f with SMTP id
- d9443c01a7336-21dd7deefa0mr308652085ad.32.1738508426935; 
- Sun, 02 Feb 2025 07:00:26 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
+ d=1e100.net; s=20230601; t=1738515922; x=1739120722;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TVerUSZo8j5HNfEtK2PBsKz7KK1pKmeVt++CDJFLmHo=;
+ b=i6kZ7I4TSv2vSdLE0Se88P0SSO7UUPqIPcxe4DA0hMm6QYOPDM/ZmfTCJwqHYv21/C
+ HdJkn5lMza84yfvSrq17+VWryhRzQXWTrhp2wB1mjguBLp5qlgu6oga1uYV7xWN48szW
+ +fp0BOP9IKcgVc07rkJPpSaKXTNeRF3dghQE/SrJqSArlGTy/f+j0Y0PYsIsWp3HWHzw
+ pHUu5lvAwud75k8S+PoY734HqRhZ2d2nePZrgbbLW0U1p0uYQWHrFRLfuzYpRdCvVp0N
+ ie4YJaEWKMaOjXPGPUv22hQrhW7wlkShZ0h1TFBmzFTplBPfVMyI5NPLpvhKYJlorm/J
+ fh7Q==
+X-Gm-Message-State: AOJu0Yy3IcCA6Le5l6m/Uw1yWxGMCKW9rjTmGzNO/9Yms4iGjQhYq/Vp
+ r92FeTnKHgSYqQSpBG5HYy+7w2LmNSd96StjftSM7C46R2lNpXMF/NTlTQ==
+X-Gm-Gg: ASbGncsMtpiHtdDYukHQDbNSPZurE1oJWSPHkpcH0HEdws4v6uZNVR1XIc6qto187bK
+ HClkZSTEe7RcDlAhUXu1R/rxjbZrzZA6EkIZQoD8cuWYnIrb9+I9u/I4fZcAoioo0lb6LMysV2t
+ yEQcws5sP9YHWrSPxRuew0L2JQyDeMXzJNov78lnmDuEInp6PtXvrV+TYjTVg3Zncj8ualuCvL4
+ 6KzlGSLQau4WQsWk4PRl4fS0l0VtMt9RyvxoQiVj518fbobqpMBuSKIIWfLr2GEN/v9pW2qdpG6
+ je5/FqXzSEr60jaowKFfhf4=
+X-Google-Smtp-Source: AGHT+IFbbWv7GlPpv6lr9NStnI9ZDnst/2H4IdmW6CjdH3vdWJfcr1C2vQc9PPUNTwAuOfF9Cnu7DQ==
+X-Received: by 2002:a05:6512:239e:b0:543:e4ac:1df3 with SMTP id
+ 2adb3069b0e04-543e4be3f59mr6207854e87.16.1738515921870; 
+ Sun, 02 Feb 2025 09:05:21 -0800 (PST)
+Received: from dev.rasu.local ([212.22.67.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21de331f0d6sm58947025ad.219.2025.02.02.07.00.24
+ 2adb3069b0e04-543ebeb7d46sm1030228e87.190.2025.02.02.09.05.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Feb 2025 07:00:26 -0800 (PST)
-Date: Sun, 2 Feb 2025 09:00:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Massimiliano Minella <massimiliano.minella@se.com>,
- Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/1] cmd/setexpr: support concatenation of direct
- strings
-Message-ID: <20250202150022.GV1233568@bill-the-cat>
-References: <20250105104614.7916-1-heinrich.schuchardt@canonical.com>
- <20250120205232.GE3476@bill-the-cat>
- <81b96e0f-0721-4488-b379-b09bb0f436a8@canonical.com>
+ Sun, 02 Feb 2025 09:05:20 -0800 (PST)
+From: Maks Mishin <maks.mishinfz@gmail.com>
+X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Maks Mishin <maks.mishinFZ@gmail.com>
+Subject: [PATCH] tools: imx8image: Fix potential memory leak
+Date: Sun,  2 Feb 2025 20:05:17 +0300
+Message-Id: <20250202170517.2064667-1-maks.mishinFZ@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="be/km23/DKyPs3uS"
-Content-Disposition: inline
-In-Reply-To: <81b96e0f-0721-4488-b379-b09bb0f436a8@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 02 Feb 2025 18:16:01 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,68 +95,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Dynamic memory, referenced by 'line', is allocated at imx8image.c:270
+by calling function 'getline' and lost at imx8image.c:294.
 
---be/km23/DKyPs3uS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
+---
+ tools/imx8image.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Sun, Feb 02, 2025 at 01:01:00PM +0100, Heinrich Schuchardt wrote:
-> On 1/20/25 21:52, Tom Rini wrote:
-> > On Sun, Jan 05, 2025 at 11:46:14AM +0100, Heinrich Schuchardt wrote:
-> >=20
-> > > The setexpr.s command allows to concatenate two strings.
-> > >=20
-> > > According to the description in doc/usage/cmd/setexpr.rst the paramet=
-ers
-> > > value1 and value2 can be either direct values or pointers to a
-> > > memory location holding the values.
-> > >=20
-> > > Unfortunately `setexpr.s <value1> + <value2>` fails if any of the val=
-ues
-> > > is a direct value. $? is set to false.
-> > >=20
-> > > * Add support for direct values in setexpr.s.
-> > > * Correct the unit test for "setexpr.s fred 0".
-> > > * Add a new unit test for "setexpr.s fred '1' + '3'" giving '13'.
-> > >=20
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >=20
-> > This causes ut_setexpr_setexpr_test_str to fail.
-> >=20
->=20
-> Hello Tom,
->=20
-> I am not able to reproduce this problem in Gitlab.
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24424
->=20
-> Please, provide a link to the failure.
+diff --git a/tools/imx8image.c b/tools/imx8image.c
+index 15510d3e71..0135b19095 100644
+--- a/tools/imx8image.c
++++ b/tools/imx8image.c
+@@ -290,6 +290,7 @@ static uint32_t parse_cfg_file(image_t *param_stack, char *name)
+ 		}
+ 	}
+ 
++	free(line);
+ 	fclose(fd);
+ 	return 0;
+ }
+-- 
+2.34.1
 
-The three failures in:
-https://source.denx.de/u-boot/u-boot/-/jobs/999497
-were from that test. Do we have some problem lurking perhaps similar to
-what Marek fixed in commit 082b41df8abd ("test/cmd/wget.c: Fix loadaddr
-rewrite") ?
-
---=20
-Tom
-
---be/km23/DKyPs3uS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmefiIYACgkQFHw5/5Y0
-tyxDEgv/XwaSfOIl121BEpDeMGmuX1M6l+4jRzPaGfqSFvTU0mfnqXmlrfPS7mj7
-vOks3GarbEYrchDEqUL3bwz9KecxW0HqFDXIyRyQZcwYsPLL3/nJKBD0YPSH/S3W
-NuxAR7cNtLQttOMlcFnFh6ZzbijgQQE3zwEkGH23chUv7x+5vLEYojtpb06GdEhF
-nR5J9jCYrUI9gAFbBcOo5EkL6qPgqSfRDRpX2GVeIIFiatr1J4ogf5Y6maviFUjf
-gK56fNSsxcDYaBYCGHaSOa3yP3rJMZTwKawkqqAs2JIoQEp8Q51I2EMu9bI1Dixt
-nXVkKOBE0xd2Sp3+739bAgD40Z2Bz/uzx/QyTAaUlPb4N8w41wGOEs+PJBD2jjVk
-kvC9kUXrar0d7PdL1KW/PYUKCcgR6F+rrBHbaK2lE9+02EyTNeNl0CzgfrSdGIDK
-UowGYvDpcECdzzUh5E58rilQBmImImr87jLJub3E5HBAOLTM85aI76n/wObi79d0
-MFaB1wqO
-=ukIA
------END PGP SIGNATURE-----
-
---be/km23/DKyPs3uS--
