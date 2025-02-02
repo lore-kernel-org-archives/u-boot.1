@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A63FC02190
-	for <u-boot@archiver.kernel.org>; Sun,  2 Feb 2025 17:16:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D81C3C02190
+	for <u-boot@archiver.kernel.org>; Sun,  2 Feb 2025 17:16:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 515448006D;
+	by phobos.denx.de (Postfix) with ESMTP id 915B8800CF;
 	Sun,  2 Feb 2025 18:16:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fjbobysK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F8RPLULd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65F3280077; Sun,  2 Feb 2025 18:05:25 +0100 (CET)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id EFE0A8003E; Sun,  2 Feb 2025 18:05:51 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6773E8003E
- for <u-boot@lists.denx.de>; Sun,  2 Feb 2025 18:05:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3B258003E
+ for <u-boot@lists.denx.de>; Sun,  2 Feb 2025 18:05:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-30227c56b11so38335321fa.3
- for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 09:05:23 -0800 (PST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-53f22fd6832so4020096e87.1
+ for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 09:05:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738515922; x=1739120722; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1738515949; x=1739120749; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TVerUSZo8j5HNfEtK2PBsKz7KK1pKmeVt++CDJFLmHo=;
- b=fjbobysKvplBMXxQZd9z+8wE18umNhoFNGSE+EbO3oB3zP7tmQrflID5gUFHmJFQsL
- sjH6x1QKgTGE/NfCm9cVoV9uXzVWD4e1/ps0nJs3Do00rhtKJdWKbhaRqVqdqaoXdkft
- QCGQ3bSwGp+PM/Z3CUeSrBdDcxu1GRUftk0an/7IwVZvRyoyYyNzOJICJvGU9gzWf0iQ
- w9ba56mkBe7x6+/K+lOGobF6E829W32fpyia0QKQerxng/EKECmdr5efGzUG9ck0F82s
- kAIxHdKx7ervnpoNDoQtx8DwAAkuylp0OvBih5s9B4FJGbdK9ci5UKK3GoS8ZnR4BRS2
- 9Nwg==
+ bh=VZpLxSRWTa9fzZkltjnp72HX/h1eCfcq2bZvndVlc6E=;
+ b=F8RPLULdaWV8uX9n+ckW/GeIlYTarqtbmB6pduugJm6Trd+dkKy3UA0uwm+Vff2kLl
+ 2mOZzwt78cq7jmHu9QWgK+27swpCtfGng8Ps3JB9bTYXj5B0fXXIvx5iXIQMoDeDYH6S
+ xassUp/QvEwM7SEFSipJZf64kX5qU48mICkh0lvweVfL4B/YmzuON3uIkOyR3U3Xm9KO
+ AlW13DHOZ3swDAXJ4UqX4W4NmQ8ZHNELCl1uHPbEitN+Q90/TNJKG672/kDdWDiaIwX6
+ Ol74SPPUilfC8PxwIAKd64LeMkl7Tq7vYnbxksUJg3jSLq/6/ftMjMYLI5BZw3IcOchv
+ UuaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738515922; x=1739120722;
+ d=1e100.net; s=20230601; t=1738515949; x=1739120749;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TVerUSZo8j5HNfEtK2PBsKz7KK1pKmeVt++CDJFLmHo=;
- b=i6kZ7I4TSv2vSdLE0Se88P0SSO7UUPqIPcxe4DA0hMm6QYOPDM/ZmfTCJwqHYv21/C
- HdJkn5lMza84yfvSrq17+VWryhRzQXWTrhp2wB1mjguBLp5qlgu6oga1uYV7xWN48szW
- +fp0BOP9IKcgVc07rkJPpSaKXTNeRF3dghQE/SrJqSArlGTy/f+j0Y0PYsIsWp3HWHzw
- pHUu5lvAwud75k8S+PoY734HqRhZ2d2nePZrgbbLW0U1p0uYQWHrFRLfuzYpRdCvVp0N
- ie4YJaEWKMaOjXPGPUv22hQrhW7wlkShZ0h1TFBmzFTplBPfVMyI5NPLpvhKYJlorm/J
- fh7Q==
-X-Gm-Message-State: AOJu0Yy3IcCA6Le5l6m/Uw1yWxGMCKW9rjTmGzNO/9Yms4iGjQhYq/Vp
- r92FeTnKHgSYqQSpBG5HYy+7w2LmNSd96StjftSM7C46R2lNpXMF/NTlTQ==
-X-Gm-Gg: ASbGncsMtpiHtdDYukHQDbNSPZurE1oJWSPHkpcH0HEdws4v6uZNVR1XIc6qto187bK
- HClkZSTEe7RcDlAhUXu1R/rxjbZrzZA6EkIZQoD8cuWYnIrb9+I9u/I4fZcAoioo0lb6LMysV2t
- yEQcws5sP9YHWrSPxRuew0L2JQyDeMXzJNov78lnmDuEInp6PtXvrV+TYjTVg3Zncj8ualuCvL4
- 6KzlGSLQau4WQsWk4PRl4fS0l0VtMt9RyvxoQiVj518fbobqpMBuSKIIWfLr2GEN/v9pW2qdpG6
- je5/FqXzSEr60jaowKFfhf4=
-X-Google-Smtp-Source: AGHT+IFbbWv7GlPpv6lr9NStnI9ZDnst/2H4IdmW6CjdH3vdWJfcr1C2vQc9PPUNTwAuOfF9Cnu7DQ==
-X-Received: by 2002:a05:6512:239e:b0:543:e4ac:1df3 with SMTP id
- 2adb3069b0e04-543e4be3f59mr6207854e87.16.1738515921870; 
- Sun, 02 Feb 2025 09:05:21 -0800 (PST)
+ bh=VZpLxSRWTa9fzZkltjnp72HX/h1eCfcq2bZvndVlc6E=;
+ b=XHI0kCqbJS+GxJEezEO7BaISWJCJgZkBlv53JyrF/1BZLOnTpEeKRlol3heAmK/cbm
+ 8IciZhknfuF1lxXHm+lpT/sldfnH/c2RHTdHJDFrP66dQe4NQI8QaN0yNwxStXb1Gm7o
+ usxVHRANuuyB9Mh9gGDB13R9NoNEbp05Ujp+uWO3DmdtXRW1km76vJfRiL63g26cdBjF
+ stWp3MD7GcqMEHfqfXVLC0NQbsudy+iAXWeODX5+GgWju9IyUgcnbTpnDtCtQSf6coJE
+ 1MkZgR7s6j3QGj1euQUKMrVpHMSYfKrULV5pgA9M28y1U5AtEN6tZKQ8jAnRNwL2/FmG
+ +Yjw==
+X-Gm-Message-State: AOJu0YwZwxHrR70P1/vkwl9FG9t7d///cGlEo44MEoc4mcj8MDk+73yu
+ /ab3uOJdZ6DZdCrAlWplg1mVAFI1LjpEx1ZBJr3S6gRPj4WCDAhQW9Czpg==
+X-Gm-Gg: ASbGncvR9P26XhrEROWF4fchZCRoqLOWJK9pq5pE4F/IK6TstcgCEn88df60GqaLjw/
+ +tJ9S6Fuu0DCSo4GKcLWaD2+L9cu8NKe2XLpqHH1/XeqvHgwf2fpUSkjq/bSU7k1T1J1u8nmZq8
+ XVb42NJcGInZXZ1+opgfR66qcHxptzCZv7/4wNcc7v6g1RkxmTapRx1XGZ6tB0PLtcBr/f3Kd7l
+ 51eyO2VxFUa4JhaCbGw+tZTv6PaMEQvboM82olrg3DV+fyTWletd1jLXPPaBHWPJegNcjsuiTZR
+ GYHDEggsbP5H73B2rC4YpYw=
+X-Google-Smtp-Source: AGHT+IHjHVwlWWrBjCA9dqq7ulqW7wxT2p6NW7GQ/L8DOs2JYLBEm7iLMm5pfVHL3loyOjaZPEHKeg==
+X-Received: by 2002:a19:f807:0:b0:543:e4a3:7c41 with SMTP id
+ 2adb3069b0e04-543e4c02e19mr4206754e87.29.1738515948698; 
+ Sun, 02 Feb 2025 09:05:48 -0800 (PST)
 Received: from dev.rasu.local ([212.22.67.162])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-543ebeb7d46sm1030228e87.190.2025.02.02.09.05.19
+ 2adb3069b0e04-543ebeb7a64sm1017154e87.165.2025.02.02.09.05.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Feb 2025 09:05:20 -0800 (PST)
+ Sun, 02 Feb 2025 09:05:47 -0800 (PST)
 From: Maks Mishin <maks.mishinfz@gmail.com>
 X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-Subject: [PATCH] tools: imx8image: Fix potential memory leak
-Date: Sun,  2 Feb 2025 20:05:17 +0300
-Message-Id: <20250202170517.2064667-1-maks.mishinFZ@gmail.com>
+Subject: [PATCH] tools: ublimage: Fix memory leak in parse_cfg_file()
+Date: Sun,  2 Feb 2025 20:05:42 +0300
+Message-Id: <20250202170542.2065434-1-maks.mishinFZ@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -95,26 +95,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dynamic memory, referenced by 'line', is allocated at imx8image.c:270
-by calling function 'getline' and lost at imx8image.c:294.
+Dynamic memory, referenced by 'line', is allocated at ublimage.c:159 
+by calling function 'getline' and lost at ublimage.c:184.
 
 Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
 ---
- tools/imx8image.c | 1 +
+ tools/ublimage.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/tools/imx8image.c b/tools/imx8image.c
-index 15510d3e71..0135b19095 100644
---- a/tools/imx8image.c
-+++ b/tools/imx8image.c
-@@ -290,6 +290,7 @@ static uint32_t parse_cfg_file(image_t *param_stack, char *name)
+diff --git a/tools/ublimage.c b/tools/ublimage.c
+index 8f9b58c798..a1bd807bfa 100644
+--- a/tools/ublimage.c
++++ b/tools/ublimage.c
+@@ -178,6 +178,7 @@ static uint32_t parse_cfg_file(struct ubl_header *ublhdr, char *name)
+ 					lineno, fld, &dcd_len);
  		}
  	}
- 
 +	free(line);
  	fclose(fd);
- 	return 0;
- }
+ 
+ 	return dcd_len;
 -- 
 2.34.1
 
