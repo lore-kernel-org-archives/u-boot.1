@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE58FC0218F
-	for <u-boot@archiver.kernel.org>; Sun,  2 Feb 2025 17:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8490DC0218F
+	for <u-boot@archiver.kernel.org>; Sun,  2 Feb 2025 20:32:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D48A480107;
-	Sun,  2 Feb 2025 18:16:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 69C4280085;
+	Sun,  2 Feb 2025 21:32:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VjmU5aI4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zp7fOUNt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16D3C80077; Sun,  2 Feb 2025 18:10:46 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 80992800B3; Sun,  2 Feb 2025 18:59:46 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E5288004F
- for <u-boot@lists.denx.de>; Sun,  2 Feb 2025 18:10:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8880F80077
+ for <u-boot@lists.denx.de>; Sun,  2 Feb 2025 18:59:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5401bd6ccadso3732884e87.2
- for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 09:10:44 -0800 (PST)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-30761be8fcfso37395611fa.0
+ for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 09:59:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738516243; x=1739121043; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1738519183; x=1739123983; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=z0FxjTIrBHB2Rb0Q3gl2E0AVHgPzUpasoh43Q+/Ljbw=;
- b=VjmU5aI4yyN0xpM4YBJBp9s6PvQzWpjJfphNpgV8P012WDbjQyfrKRzZ/rvG7fgaJK
- IIRxWczUR4dD2oQCh0hNcXBkLkmlCLs/XcziBMSgTF6LSbLMy1ut6YSMryTPRpiNaIw9
- HevwGuAKW8Y0fCKuzmpLgYxWARaAscZfkFNZG3SE9tCrZd9MFuoS2qHR/mFpfJHDK2KW
- e2gdVj1c+QO4Nr/mJvadbO9bf01Du/6oqwCYrVl8ftHZOxzQGXdQ2cePlBCdlME+vwjz
- 7YSxPvxlWZJh9n7JXN9x2Iz2W7zwOn2KTILUOfh9aWYZIqkHv2t2KIMqlBV2/JS4nbXL
- fnow==
+ bh=hA5TTR4eD8GGhF2BcOsxRrA+OM3++L4Dz/qFNSOETjw=;
+ b=Zp7fOUNtQyoT/mLYt3adJsT4LvRThAiVMDHgmCUs868RWRUNr3uDbneG+OYrzXq08C
+ Fz8VehSdMdlNB6PkWGsNFiYU9vpdUeE3z85NwQV215Wwc1KCzBvW42XLIXp1AJTdznaQ
+ enfq0eUtZoi7/xA33GxuUQvYsU3qimkuGvJQAJmimkeAYRGtB4cOagPH4RSFYgaqMQ5g
+ 7r4X597zF7a7dCp1c+dGXJrpf0GdLNHNQDOSKbbXi5yCzmHp6IbewZ59Y78NB+mvMu1z
+ 9sPOP4vVZyImEyuM9XR/XXzMcJt1uGldoYIaAEUWVNOuhYAJ4CPeAOrx1DR0jd9vPQHC
+ wrpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738516243; x=1739121043;
+ d=1e100.net; s=20230601; t=1738519183; x=1739123983;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=z0FxjTIrBHB2Rb0Q3gl2E0AVHgPzUpasoh43Q+/Ljbw=;
- b=hR6yIAVeuHlu86oUXfzJLaQ8w0o5mv7papUmMPrwis7BRojcphkR08FkQ+wZJUkVrp
- lXLIfgqDM0mMbipnS5R3ffYZjeRZrRoc4ahfZH3pNxSIbbo4T0GJkbHK45LX7sKom4Pu
- P84PsCmSbfr/VcHoY261F5NVbkpuZZzuG/+QoMwzQQewlTCXJYx+HvdvfaHLr8GTNgmn
- JCH34HkILFBHrwAafO21L79ek2l+Mse2mxNtBH6OslEpyfXSM99R7mMCVQyyXkNvkBQc
- L5A/Xw0gQviE4X75iMOSIcRRMsuPisErkQqlwaWB9+TB1y/OIvVRq6t078zAxRwxQHpD
- Ivtg==
-X-Gm-Message-State: AOJu0YyJJdjnGD1y5/gf8xM/FotmLWjOhW3B7CYQDtcqxdffBrerWWs/
- AT18+X+bCnyWmieMA19XUhmjhsSxI1x6nRX+zhxbyOKX7OxcA4cw4D+CNA==
-X-Gm-Gg: ASbGncut/6rETiTJLcDgMf6kjJQv/Ng5rWbdTaY73WhTu5IQR0+RbtiKZbSjU8peLZ6
- 6ruWzxQ5na5PQAy6tqH1NkhEVJzIbonQzGjBgex2s0fcsEHupTNk/b9KJsyYYwCxMWX8c/LwND3
- mlUU8GQknCEhKHoyQX18I+TaVJj+1RsGrQTVL+CX4kn3T8rXJ+7QIrxTsPQFQPZHCA1gpbTGoxx
- tgah5Aq5EFFzsCgHHi5oBIjBGxjVyVN8OtbtmQzF5p8dBP54of915eQz0ZDyUpIvzeaM/t//iTc
- KnqtE/XBewF1nJQserArOfk=
-X-Google-Smtp-Source: AGHT+IECAoDp9bIAdEpGa6I7bkIoXUL29/EE/lNUV+FBwFoQrGmmTWArnyekdfWEPaSYF3aO1kMSSA==
-X-Received: by 2002:ac2:4318:0:b0:542:214c:533 with SMTP id
- 2adb3069b0e04-543e4c03255mr5163986e87.30.1738516242749; 
- Sun, 02 Feb 2025 09:10:42 -0800 (PST)
+ bh=hA5TTR4eD8GGhF2BcOsxRrA+OM3++L4Dz/qFNSOETjw=;
+ b=kckKBTWPezBMpHNwYe85s7rPUhishqPcsIxjQ4GMyrsnoKILoVIa0mrRt+12NesbKO
+ ateo6fg0DDB6Qe59e/SPd3EeWgKhI/lOCr4sb9hnJcJruhIDvA0oTKLG3vebxRsut+yd
+ //DQeRDLvO+fM6Rv/b6FVSodb43HIeK15OjcEBdvpVDcsYEISyMtlJpyG1I3quh0L1DI
+ jKzXdK7pFYQH364nQbJebLpNzig9PtfNilnpdwV3nsD+GokQldAToLAXkQOkk7nx/94J
+ 0m4z5uylV6N+KHaHXzP6JV63r3VSJ0ycvTicRQzcVRr3aEB2HRuQZ1bUce2ueyBbNISA
+ ut/Q==
+X-Gm-Message-State: AOJu0YyHcqwDwkipLyR3LqXtdE0NaY4s/B6+9kRnmVtAdccgCvy4Ruu8
+ SGJa4pSXbJtFNkLEK8ryvbohUf1J0FzZawINx6fYIbAS8co9Ll9ULzmFew==
+X-Gm-Gg: ASbGncsLHUpRhtdCo6mdpe8dXVjcZkWs56Atl0LT73Y9hY4hdL+hhxM8N2B81sqw442
+ imToWBee6lBiKYUxrMrV7YRCy0ckctXFHnVJFgVwhB6GLAd54mC2WtVCxuWwy26OlHNks4EZsXT
+ b+7iBnI0gMlSjz9uCsu7Z7DUkU60dPjB64aD33vUd+LE2dM1M2Om3Xijlb+Sfc03MFrunmIPXHj
+ 1ksO30XjWcwi8YSPgvMqhGdTYlmN9XG56O3miyN+qAIoRipZvKj73A1P/0tbHu9mD+QPiYxEd1f
+ AeIRT94PboAdIs78vfUdYkg=
+X-Google-Smtp-Source: AGHT+IHtLeFd2VFJjhzzgr5amabQvaX1We1UrPfvtO21jUpxxI3Aldhov3pgknDVo7LWYI6EkfKnUg==
+X-Received: by 2002:a05:651c:b0e:b0:300:7f87:a6a with SMTP id
+ 38308e7fff4ca-307968b86f0mr67728181fa.7.1738519183343; 
+ Sun, 02 Feb 2025 09:59:43 -0800 (PST)
 Received: from dev.rasu.local ([212.22.67.162])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-307a3427f0bsm12292301fa.95.2025.02.02.09.10.41
+ 38308e7fff4ca-307a3086e52sm12363871fa.24.2025.02.02.09.59.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Feb 2025 09:10:41 -0800 (PST)
+ Sun, 02 Feb 2025 09:59:42 -0800 (PST)
 From: Maks Mishin <maks.mishinfz@gmail.com>
 X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-Subject: [PATCH] tools: imx8mimage: Fix potential memory leak
-Date: Sun,  2 Feb 2025 20:10:39 +0300
-Message-Id: <20250202171039.2073407-1-maks.mishinFZ@gmail.com>
+Subject: [PATCH] efi_loader: Fix potential deref-after-null
+Date: Sun,  2 Feb 2025 20:59:40 +0300
+Message-Id: <20250202175940.2150031-1-maks.mishinFZ@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 02 Feb 2025 18:16:01 +0100
+X-Mailman-Approved-At: Sun, 02 Feb 2025 21:32:10 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,26 +95,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dynamic memory, referenced by 'line', is allocated at imx8mimage.c:187 
-by calling function 'getline' and lost at imx8mimage.c:210.
+After having been compared to a NULL value at efi_disk.c:426, 
+pointer 'part_info' is dereferenced at efi_disk.c:534.
 
 Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
 ---
- tools/imx8mimage.c | 1 +
- 1 file changed, 1 insertion(+)
+ lib/efi_loader/efi_disk.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/tools/imx8mimage.c b/tools/imx8mimage.c
-index d60d293e64..0f24ba75c0 100644
---- a/tools/imx8mimage.c
-+++ b/tools/imx8mimage.c
-@@ -206,6 +206,7 @@ static uint32_t parse_cfg_file(char *name)
+diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+index 1f3de0a233..83e8eb6fe4 100644
+--- a/lib/efi_loader/efi_disk.c
++++ b/lib/efi_loader/efi_disk.c
+@@ -531,13 +531,15 @@ static efi_status_t efi_disk_add_dev(
+ 
+ 	/* Store first EFI system partition */
+ 	if (part && efi_system_partition.uclass_id == UCLASS_INVALID) {
+-		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
+-			efi_system_partition.uclass_id = desc->uclass_id;
+-			efi_system_partition.devnum = desc->devnum;
+-			efi_system_partition.part = part;
+-			EFI_PRINT("EFI system partition: %s %x:%x\n",
+-				  blk_get_uclass_name(desc->uclass_id),
+-				  desc->devnum, part);
++		if (part_info) {
++			if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
++				efi_system_partition.uclass_id = desc->uclass_id;
++				efi_system_partition.devnum = desc->devnum;
++				efi_system_partition.part = part;
++				EFI_PRINT("EFI system partition: %s %x:%x\n",
++					blk_get_uclass_name(desc->uclass_id),
++					desc->devnum, part);
++			}
  		}
  	}
- 
-+	free(line);
- 	fclose(fd);
- 	return 0;
- }
+ 	return EFI_SUCCESS;
 -- 
 2.34.1
 
